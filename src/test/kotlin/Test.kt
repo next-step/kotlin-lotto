@@ -14,4 +14,10 @@ class Test {
         assertThatThrownBy { Calculator.getNumbers(null) }.isInstanceOf(IllegalArgumentException::class.java)
         assertThatThrownBy { Calculator.getNumbers("") }.isInstanceOf(IllegalArgumentException::class.java)
     }
+
+    @Test
+    fun `커스텀 구분자 유무 확인`() {
+        assertThat(Calculator.hasCustomSplitter("//x\n")).isEqualTo(true)
+        assertThat(Calculator.hasCustomSplitter("/")).isEqualTo(false)
+    }
 }
