@@ -7,7 +7,7 @@ object Calculator {
     }
 
     fun getNumbers(numbersInput: String?): String? {
-        require(!numbersInput.isNullOrBlank()) { NullPointerException("숫자를 입력해주세요.") }
+        require(!numbersInput.isNullOrBlank()) { "숫자를 입력해주세요." }
         return numbersInput
     }
 }
