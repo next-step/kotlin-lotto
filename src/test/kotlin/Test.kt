@@ -20,4 +20,9 @@ class Test {
         assertThat(Calculator.hasCustomSplitter("//x\n")).isEqualTo(true)
         assertThat(Calculator.hasCustomSplitter("/")).isEqualTo(false)
     }
+
+    @Test
+    fun `커스텀 구분자 얻기`() {
+        assertThat(Calculator.getCustomSplitter("//x\n")).isEqualTo('x')
+    }
 }
