@@ -1,59 +1,83 @@
 package Calculator
 
-import java.lang.IndexOutOfBoundsException
-import java.lang.StringBuilder
+const val FIRST_PREFIX =
+    """//"""
 
-const val FIRST_PREFIX = "//"
-const val SECOND_PREFIX = "\n"
+const val SECOND_PREFIX =
+    """\n"""
+
 const val CUSTOM_SPLITTER_LOCATION = 2
+const val CUSTOM_SPLITTER_LAST_LOCATION = 5
 
-object Calculator {
+class Calculator(private val numbersInput: String?) {
 
     private val defaultSplitters = listOf(",", ":")
+    var isCustomSplitter: Boolean = false
 
-    fun calculate(numbers: List<Int>): Int {
+    fun execute(): Int {
+        getNumbers(numbersInput)
+        hasCustomSplitter()
+        hasOnlyValidString()
+        checkEndString()
+        val numbers = parsing()
+        return calculate(numbers)
+    }
+
+    private fun calculate(numbers: List<Int>): Int {
         return numbers.sum()
     }
 
-    fun getNumbers(numbersInput: String?): String? {
-        require(!numbersInput.isNullOrBlank()) { "숫자를 입력해주세요." }
+    private fun getNumbers(numbersInput: String?): String? {
+        require(!numbersInput.isNullOrBlank()) { throw KotlinNullPointerException("숫자를 입력해주세요.") }
         return numbersInput
     }
 
-    fun hasCustomSplitter(numbersInput: String): Boolean {
-        return try {
-            numbersInput.startsWith(FIRST_PREFIX)
+    private fun hasCustomSplitter() {
+        try {
+            isCustomSplitter = numbersInput!!.startsWith(FIRST_PREFIX)
                 .and(numbersInput.substring(CUSTOM_SPLITTER_LOCATION + 1).startsWith(SECOND_PREFIX))
         } catch (e: IndexOutOfBoundsException) {
-            false
+            throw CalculatorException("입력값을 확인해 주세요.")
         }
     }
 
-    @Throws(IndexOutOfBoundsException::class)
-    fun getSplitters(numbersInput: String, hasCustomSplitter: Boolean): List<String> {
-        if (hasCustomSplitter) {
-            return listOf(numbersInput[CUSTOM_SPLITTER_LOCATION].toString())
+    private fun getSplitters(): List<String> {
+        if (isCustomSplitter) {
+            return listOf(numbersInput!![CUSTOM_SPLITTER_LOCATION].toString())
         }
         return defaultSplitters
     }
 
-    fun hasOnlyValidString(numbersInput: String, splitters: List<String>): Boolean {
+    private fun hasOnlyValidString() {
         val pattern = StringBuilder("[0-9")
-        splitters.forEach { pattern.append("|" + it) }
+        getSplitters().forEach { pattern.append("|$it") }
         pattern.append("]*")
+        val numberInput = numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
 
-        return numbersInput.replace(FIRST_PREFIX, SECOND_PREFIX).matches(Regex(pattern.toString()))
-    }
-
-    fun checkEndString(numbersInput: String): Boolean {
-        return numbersInput.last().toString().matches(Regex("[0-9]"))
-    }
-
-    fun parsing(numbersInput: String): List<Int> {
-        if (defaultSplitters.size == 2) {
-            return numbersInput.replace(defaultSplitters[1], defaultSplitters[0]).split(defaultSplitters[0])
-                .map { it.toInt() }
+        if (!numberInput.matches(Regex(pattern.toString()))) {
+            throw CalculatorException("숫자와 구분자만 입력해야합니다.")
         }
-        return numbersInput.split(defaultSplitters[0]).map { it.toInt() }
+    }
+
+    private fun checkEndString() {
+        var numbersInput = this.numbersInput
+
+        if (isCustomSplitter) {
+            numbersInput = this.numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
+        }
+        if (!numbersInput!!.last().toString().matches(Regex("[0-9]"))) {
+            throw CalculatorException("구분자는 숫자 사이에만 존재합니다.")
+        }
+        if (!numbersInput.first().toString().matches(Regex("[0-9]"))) {
+            throw CalculatorException("구분자는 숫자 사이에만 존재합니다.")
+        }
+    }
+
+    private fun parsing(): List<Int> {
+        if (isCustomSplitter) {
+            return numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(getSplitters()[0]).map { it.toInt() }
+        }
+        return numbersInput!!.replace(getSplitters()[1], getSplitters()[0]).split(getSplitters()[0])
+            .map { it.toInt() }
     }
 }
