@@ -28,4 +28,9 @@ class CalculatorTest {
     fun `쉼표가 포함된 문자열 입력`() {
         assertThat(calculator.calculate("1,2,3")).isEqualTo(6)
     }
+
+    @Test
+    fun `쉼표와 콜론이 포함된 문자열 입력`() {
+        assertThat(calculator.calculate("1,2:3")).isEqualTo(6)
+    }
 }
