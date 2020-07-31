@@ -15,7 +15,7 @@ class Calculator {
             .reduce { acc, number -> acc + number }
     }
 
-    private fun setupNumberGroup(expr: String): MutableList<String> {
+    private fun setupNumberGroup(expr: String): List<String> {
         val numberGroup = mutableListOf<String>()
         customTokenizerRegex.find(expr)?.let {
             val customTokenizer = it.groupValues[TOKENIZER_INDEX]
