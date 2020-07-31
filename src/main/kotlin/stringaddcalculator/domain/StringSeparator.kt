@@ -1,4 +1,4 @@
-package stringaddcalculator
+package stringaddcalculator.domain
 
 object StringSeparator {
     private const val BASIC_DELIMITER_COMMA = ","

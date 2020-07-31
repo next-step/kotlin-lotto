@@ -4,7 +4,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import stringaddcalculator.domain.StringSeparator
 
 class StringSeparatorTest {
 
@@ -41,5 +43,12 @@ class StringSeparatorTest {
         assertThatThrownBy { StringSeparator.separate(invalidString) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("$invalidString 는 유효하지 않은 문자열입니다.")
+    }
+
+    @NullAndEmptySource
+    @ParameterizedTest
+    fun `빈 문자열 또는 null 입력시 빈 리스트 반환`(inputString: String?) {
+        // then
+        assertThat(StringSeparator.separate(inputString)).isEmpty()
     }
 }
