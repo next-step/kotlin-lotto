@@ -3,7 +3,6 @@ package calculator
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
-import kotlin.RuntimeException
 
 class StringAddCalculatorTest {
     @Test
@@ -34,59 +33,57 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    fun input_null_or_blank() {
-        val calculator = StringAddCalculator("")
-        val calculator2 = StringAddCalculator(null)
+    fun split_custom() {
+        val calculator = StringAddCalculator("//;\n1;2;3")
 
         val result = calculator.plus()
-        val result2 = calculator2.plus()
 
-        assertThat(result).isEqualTo(0)
-        assertThat(result2).isEqualTo(0)
+        assertThat(result).isEqualTo(6)
     }
 
     @Test
-    fun input_not_number() {
-        assertThatThrownBy {
-            StringAddCalculator("a")
-        }.isInstanceOf(RuntimeException::class.java).hasMessageContaining("숫자가 아닌 값은 계산할수없습니다.")
-    }
+    fun split_mix_custom() {
+        val calculator = StringAddCalculator("//;\n1;2,3:4")
 
-    @Test
-    fun input_minus() {
-        assertThatThrownBy {
-            StringAddCalculator("-2:4")
-        }.isInstanceOf(RuntimeException::class.java).hasMessageContaining("음수가 입력되었습니다.")
+        val result = calculator.plus()
+
+        assertThat(result).isEqualTo(10)
     }
 
     @Test
     fun one_number() {
-        val calculator = StringAddCalculator("3")
+        val calculator = StringAddCalculator("1")
 
         val result = calculator.plus()
 
-        assertThat(result).isEqualTo(3)
+        assertThat(result).isEqualTo(1)
     }
 
     @Test
-    fun study_indexOf() {
-        val string = "//;\n1;2;3"
+    fun number_is_blank_or_null() {
+        val calculator1 = StringAddCalculator("")
+        val calculator2 = StringAddCalculator(null)
 
-        val position = string.indexOf("//")
-        val position2 = string.indexOf("\n")
+        val result1 = calculator1.plus()
+        val result2 = calculator2.plus()
 
-        assertThat(position).isEqualTo(0)
-        assertThat(position2).isEqualTo(3)
+        assertThat(result1).isEqualTo(0)
+        assertThat(result2).isEqualTo(0)
     }
 
     @Test
-    fun find_custom() {
-        val string = "//;\n 1;2;3"
-        val position = string.indexOf("//")
-        val position2 = string.indexOf("\n")
+    fun not_number() {
+        assertThatThrownBy {
+            StringAddCalculator("a")
+        }.isInstanceOf(RuntimeException::class.java).hasMessageContaining("숫자 이외의 값이 있습니다.")
 
-        val custom = string.substring(position + 2, position2)
+    }
 
-        assertThat(custom).isEqualTo(";")
+    @Test
+    fun check_minus() {
+        assertThatThrownBy {
+            StringAddCalculator("-10")
+        }.isInstanceOf(RuntimeException::class.java).hasMessageContaining("음수값은 계산 할수없습니다.")
+
     }
 }
