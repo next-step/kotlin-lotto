@@ -5,6 +5,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class CalculatorTest {
 
@@ -40,9 +42,10 @@ class CalculatorTest {
         assertThat(calculator.calculate("//;\n1;2;3")).isEqualTo(6)
     }
 
-    @Test
-    fun `음수 입력`() {
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "1,-2,3"])
+    fun `음수 입력`(input: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { calculator.calculate("-1") }
+            .isThrownBy { calculator.calculate(input) }
     }
 }
