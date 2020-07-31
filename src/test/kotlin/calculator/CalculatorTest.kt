@@ -2,6 +2,7 @@ package calculator
 
 import Calculator
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -37,5 +38,11 @@ class CalculatorTest {
     @Test
     fun `커스텀 구분자가 사용된 문자열 입력`() {
         assertThat(calculator.calculate("//;\n1;2;3")).isEqualTo(6)
+    }
+
+    @Test
+    fun `음수 입력`() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.calculate("-1") }
     }
 }
