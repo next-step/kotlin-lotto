@@ -11,13 +11,17 @@ class Calculator {
             numberGroup.addAll(it.groupValues[TOKENIZER_APPLIED_EXPR_INDEX].split(customTokenizer))
         } ?: numberGroup.addAll(expr.split(",", ":"))
 
-        if (numberGroup.size == 1) return numberGroup[0].toInt()
+        if (numberGroup.size == 1) {
+            return numberGroup[0].toInt().also(::checkNegative)
+        }
 
         return numberGroup
-            .map { it.toInt() }
-            .reduce { acc, number ->
-                acc + number
-            }
+            .map { it.toInt().also(::checkNegative) }
+            .reduce { acc, number -> acc + number }
+    }
+
+    private fun checkNegative(number: Int) {
+        if (number < 0) throw RuntimeException("음수가 존재합니다.")
     }
 
     companion object {
