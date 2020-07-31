@@ -18,4 +18,9 @@ class CalculatorTest {
     fun `빈 문자열 입력`() {
         assertThat(calculator.calculate("")).isEqualTo(0)
     }
+
+    @Test
+    fun `하나의 숫자 입력`() {
+        assertThat(calculator.calculate("3")).isEqualTo(3)
+    }
 }
