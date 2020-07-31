@@ -23,4 +23,9 @@ class CalculatorTest {
     fun `하나의 숫자 입력`() {
         assertThat(calculator.calculate("3")).isEqualTo(3)
     }
+
+    @Test
+    fun `쉼표가 포함된 문자열 입력`() {
+        assertThat(calculator.calculate("1,2,3")).isEqualTo(6)
+    }
 }
