@@ -38,4 +38,10 @@ class StringAddCalculatorTest {
         assertThat(calculator.add(text)).isSameAs(text.toInt())
     }
 
+    @DisplayName("쉼표(,) 또는 콜론(:)을 구분자로 사용해 모든 숫자의 합을 반환한다")
+    @ParameterizedTest
+    @ValueSource(strings = ["3,7:10"])
+    fun `default delimiter`(text: String) {
+        assertThat(calculator.add(text)).isSameAs(20)
+    }
 }

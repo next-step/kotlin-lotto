@@ -7,7 +7,9 @@ class StringAddCalculator {
 
         text?.let {
             checkNegative(it)
+
             if (justOneNumber(it)) return it.toInt()
+            return defaultSum(it)
         }
 
         return 0
@@ -24,7 +26,15 @@ class StringAddCalculator {
         return true
     }
 
+    private fun defaultSum(text: String): Int {
+        val tokens = text.split(DELIMITER_COMMA, DELIMITER_COLON)
+
+        return tokens.sumBy { it.toInt() }
+    }
+
     companion object {
+        private const val DELIMITER_COMMA = ","
+        private const val DELIMITER_COLON = ":"
         private const val NOT_ALLOW_NEGATIVE = "음수 입력 불가"
     }
 }
