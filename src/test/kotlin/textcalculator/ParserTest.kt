@@ -29,7 +29,7 @@ class ParserTest {
         val parser = Parser()
         assertThat(parser.spliter).contains(":", ",").hasSize(2)
 
-        parser.checkIfCustomPrefix("//$text\n1:1:1")
+        parser.checkIfCustomPrefix("//$text\\n1:1:1")
 
         assertThat(parser.spliter).contains(":", ",", text).hasSize(3)
     }
@@ -38,7 +38,7 @@ class ParserTest {
     @ValueSource(strings = ["1:1:1", "1;2:3", "1212asd"])
     fun `checkIfCustomPrefix() 프리픽스 제거하고 나머지 문자열을 반환`(text: String) {
         assertThat(
-            Parser().checkIfCustomPrefix("//;\n$text")
+            Parser().checkIfCustomPrefix("//;\\n$text")
         ).isEqualTo(text)
     }
 
@@ -51,7 +51,7 @@ class ParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1:1:1", "1;2:3", "//\n1212asd"])
+    @ValueSource(strings = ["1:1:1", "1;2:3", "//\\n1212asd"])
     fun `checkIfCustomPrefix() 해당되는 문자열 없으면 구분자 추가 없음`(text: String) {
         val parser = Parser()
         parser.checkIfCustomPrefix(text)
@@ -92,7 +92,7 @@ class ParserTest {
     @Test
     fun `parse() 프리픽스 있는 정상 케이스일 때 정수 리스트 반환`() {
         assertThat(
-            Parser().parse("//;\n1:0,2:3;44")
+            Parser().parse("//;\\n1:0,2:3;44")
         ).isEqualTo(
             listOf(1, 0, 2, 3, 44)
         )

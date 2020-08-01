@@ -17,7 +17,7 @@ class TextCalculatorTest {
 
     @Test
     fun `execute() 커스텀 구분자 있는 정상 케이스일 때 합 출력`() {
-        val io = MockUpIOManager("//;\n1,2;3,4:5;10")
+        val io = MockUpIOManager("//;\\n1,2;3,4:5;10")
         TextCalculator(io, Parser(), Calculator()).execute()
 
         assertThat(io.toString()).isEqualTo("25")
@@ -36,7 +36,7 @@ class TextCalculatorTest {
     fun `calculate() 커스텀 구분자 있는 정상 케이스일 때 합계 계산`() {
         assertThat(
             TextCalculator(MockUpIOManager(""), Parser(), Calculator())
-                .calculate("//;\n1,2;3,4:5;10")
+                .calculate("//;\\n1,2;3,4:5;10")
         ).isEqualTo(25)
     }
 

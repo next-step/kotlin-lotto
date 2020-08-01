@@ -51,7 +51,7 @@ class Parser {
         private const val REGEX_OPEN = "["
         private const val REGEX_CLOSE = "]"
         private const val EMPTY = ""
-        private const val REGEX_STRING_CUSTOM_PREFIX = "^(\\/\\/)(.)(\\n)(.*)"
+        private const val REGEX_STRING_CUSTOM_PREFIX = "^(\\/\\/)(.)(\\\\n)(.*)"
         private const val REGEX_STRING_ONLY_NUMBERS = "[0-9]*"
     }
 }
