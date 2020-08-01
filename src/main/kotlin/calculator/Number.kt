@@ -7,7 +7,6 @@ class Number(private val text: String?) {
     init {
         numbers = if (hasCustomDelimiter(text)) customNumbers()
         else defaultNumbers()
-        // checkNegative(numbers)
     }
 
     private fun hasCustomDelimiter(text: String?): Boolean {
