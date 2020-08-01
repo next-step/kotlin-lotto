@@ -42,11 +42,9 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\\\\n1;2;3"])
+    @ValueSource(strings = ["//;\\n1;2,3"])
     fun `커스텀 구분자를 지정할 수 있다`(text: String) {
-        println(text)
-        assertThat(calculator.add(text)).isEqualTo(6)
         // "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)
-        TODO("Not yet implemented")
+        assertThat(calculator.add(text)).isEqualTo(6)
     }
 }
