@@ -21,9 +21,9 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1,2"])
+    @ValueSource(strings = ["3,5"])
     fun `쉼표로 구분된 문자열을 더한 값을 리턴한다`(text: String) {
-        assertThat(calculator.add(text)).isEqualTo(3)
+        assertThat(calculator.add(text)).isEqualTo(8)
     }
 
     @ParameterizedTest
