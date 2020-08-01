@@ -50,7 +50,7 @@ class Number(private val text: String) {
         private const val DELIMITER_COMMA = ","
         private const val DELIMITER_COLON = ":"
         private const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
-        private const val EXCLUDE_NUMBER_PATTERN = "[^0-9]*"
+        private const val EXCLUDE_NUMBER_PATTERN = "[^0-9]+"
         private const val NOT_ALLOW_LETTER_OR_NEGATIVE = "숫자 이외의 값 또는 음수 입력 불가"
 
         private val customPatten: Pattern = Pattern.compile(CUSTOM_PATTERN)
