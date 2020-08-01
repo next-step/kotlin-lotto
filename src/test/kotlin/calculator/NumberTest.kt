@@ -1,30 +1,21 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 
 class NumberTest {
 
     @ParameterizedTest
     @CsvSource(
         value = [
-            "'//;\n1;2;3' > true",
-            "'1,2,3' > false"
-        ],
-        delimiterString = ">"
-    )
-    fun `커스텀 구분자 포함 여부 판단`(string: String, expected: Boolean) {
-        assertThat(hasCustomDelimeter(string)).isEqualTo(expected)
-    }
-
-    @ParameterizedTest
-    @CsvSource(
-        value = [
             "'//;\n1;2;3' > ;",
-            "'//*\n12*13*14' > *"
+            "'//*\n12*13*14' > *",
+            "'//#\n12#13#14' > #"
         ],
         delimiterString = ">"
     )
@@ -41,12 +32,16 @@ class NumberTest {
     @ParameterizedTest
     @CsvSource(
         "1, true",
-        "A, false",
-        "0, true",
-        "-1, false"
+        "0, true"
     )
-    fun `파싱된 문자가 자연수인지 확인`(string: String, expected: Boolean) {
+    fun `파싱된 문자가 자연수인 경우`(string: String, expected: Boolean) {
         assertThat(Number(string).isNatural()).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["A", "-1"])
+    fun `파싱된 문자가 자연수가 아닌 경우`(string: String) {
+        assertThatIllegalArgumentException().isThrownBy { Number(string).isNatural() }
     }
 
     companion object {
@@ -54,7 +49,8 @@ class NumberTest {
         fun generateParsingTestData(): List<Arguments> {
             return listOf(
                 Arguments.of("1;2;3", ";", listOf("1", "2", "3")),
-                Arguments.of("12*13*14", "*", listOf("12", "13", "14"))
+                Arguments.of("12*13*14", "*", listOf("12", "13", "14")),
+                Arguments.of("1,2:3", ",|:", listOf("1", "2", "3"))
             )
         }
     }

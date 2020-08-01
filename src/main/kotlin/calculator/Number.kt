@@ -1,32 +1,41 @@
 package calculator
 
-fun parse(string: String, delimiter: String) = string.split(delimiter)
+fun validate(string: String?): String {
+    if (string.isNullOrBlank()) {
+        return "0"
+    }
+    return string
+}
 
-fun customDelimeter(string: String): String? {
-    val matchResult = Regex("//(.*)\n").find(string)
+fun parse(string: String, customDelimiter: String): List<String> {
+
+    if (customDelimiter == Number.SIMPLE_DELIMITER) {
+        return string.split(Number.SIMPLE_DELIMITER_REGEX)
+    }
+    return string.split(customDelimiter)
+}
+
+fun customDelimeter(string: String): String {
+    val matchResult = Number.DELIMITER_REGEX.find(string)
     if (matchResult != null && matchResult.groupValues[1].isNotBlank()) {
         return matchResult.groupValues[1]
     }
-    return null
-}
-
-fun hasCustomDelimeter(string: String): Boolean {
-    if (customDelimeter(string).isNullOrBlank()) {
-        return false
-    }
-    return true
+    return Number.SIMPLE_DELIMITER
 }
 
 class Number(val number: String) {
 
     companion object {
+        const val SIMPLE_DELIMITER = ",|:"
+        val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
         val NUMERIC_REGEX = Regex("[0-9]")
+        val DELIMITER_REGEX = Regex("//(.)\n(.*)")
     }
 
     fun isNatural(): Boolean {
         if (NUMERIC_REGEX.matches(number)) {
             return true
         }
-        return false
+        throw IllegalArgumentException("숫자가 아닙니다")
     }
 }
