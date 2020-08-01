@@ -35,11 +35,11 @@ class LottoTest {
 
     @Test
     fun `5천원 당첨`() {
-        val buyer = Buyer()
+        val buyer = Buyer().apply { markLotto(listOf(1, 2, 3, 7, 8, 9)) }
         val store = Store(buyer)
 
-        val winner = store.winLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
-        assertThat(winner.contains(Prize.NO_THREE)).isTrue()
+        assertThat(winnerHistory.contains(Prize.NO_FOUR)).isTrue()
     }
 }
