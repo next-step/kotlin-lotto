@@ -14,19 +14,15 @@ class Number(private val text: String) {
     }
 
     private fun hasCustomDelimiter(text: String): Boolean {
-        Regex(CUSTOM_PATTERN).find(text) ?: return false
-        return true
+        return Regex(CUSTOM_PATTERN).find(text) != null
     }
 
     private fun customNumbers(): List<Int> {
-        val result = Regex(CUSTOM_PATTERN).find(text)
-        var tokens = listOf<String>()
+        val result = Regex(CUSTOM_PATTERN).find(text) ?: return emptyList()
 
-        result?.let {
-            val customDelimiter = result.groupValues[1]
-            tokens = result.groupValues[2].split(customDelimiter)
-            checkIllegalInput(tokens)
-        }
+        val customDelimiter = result.groupValues[1]
+        val tokens = result.groupValues[2].split(customDelimiter)
+        checkIllegalInput(tokens)
 
         return tokens.map { it.toInt() }
     }
