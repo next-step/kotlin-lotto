@@ -1,47 +1,39 @@
 package calculator
 
 class StringAddCalculator(text: String?) {
-    private var numList = listOf(0)
+    private var numbers = listOf(Number("0"))
     private var result: MatchResult? = null
 
     init {
-        if (text.isNullOrBlank()) {
-            numList = listOf(0)
-        } else {
+        if (!text.isNullOrBlank()) {
             result = Regex("//(.)\n(.*)").find(text)
             makeNumList(text)
-            checkMinus()
         }
     }
 
-    fun plus(): Int {
-        return numList.sum()
+    fun sum(): Int {
+        return numbers.map { it.number }.sum()
     }
 
     private fun makeNumList(text: String) {
         result?.let {
             val custom = it.groupValues[1]
-            numList = toIntList(it.groupValues[2].split(",", ":", custom).map { it.trim() })
+            numbers = toNumberList(splitDelimiter(it.groupValues[2], custom))
         } ?: {
-            numList = toIntList(text.split(",", ":").map { it.trim() })
-        } ()
+            numbers = toNumberList(splitDelimiter(text))
+        }()
     }
 
-    private fun toIntList(list: List<String>): List<Int> {
-        try {
-            return list.map { it.toInt() }
-        } catch (e: Exception) {
-            throw RuntimeException("숫자 이외의 값이 있습니다.")
-        }
+    private fun splitDelimiter(string: String, custom: String = ","): List<String> {
+        return string.split(COMMA, COLON, custom).map { it.trim() }
     }
 
-    private fun checkMinus() {
-        numList.forEach { isMinus(it) }
+    private fun toNumberList(list: List<String>): List<Number> {
+        return list.map { Number(it) }
     }
 
-    private fun isMinus(int: Int) {
-        if (int < 0) {
-            throw RuntimeException("음수값은 계산 할수없습니다.")
-        }
+    companion object {
+        const val COMMA: String = ","
+        const val COLON: String = ":"
     }
 }
