@@ -10,4 +10,8 @@ class LottoTest {
         val lotto = Lotto()
         assertThat(lotto.numbers.size).isEqualTo(6)
     }
+
+    @Test
+    fun `로또 구매`() {
+    }
 }
