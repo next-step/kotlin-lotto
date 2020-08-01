@@ -1,4 +1,5 @@
 package calculator
 
-class Calculator() {
+class Calculator {
+    fun sum(numbers: List<Int>) = numbers.sum()
 }
