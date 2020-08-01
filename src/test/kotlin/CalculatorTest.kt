@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
-class Test {
+class CalculatorTest {
     @Test
     fun `모든 숫자값을 합`() {
         val calculator = Calculator("1,2:3")
