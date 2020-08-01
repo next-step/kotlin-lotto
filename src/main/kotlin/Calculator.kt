@@ -13,14 +13,11 @@ class Calculator {
             .reduce { acc, number -> acc + number }
     }
 
-    private fun setupNumberGroup(expr: String): List<String> {
-        val numberGroup = mutableListOf<String>()
+    private fun setupNumberGroup(expr: String): List<String> =
         customTokenizerRegex.find(expr)?.let {
-            val customTokenizer = it.groupValues[TOKENIZER_INDEX]
-            numberGroup.addAll(it.groupValues[TOKENIZER_APPLIED_EXPR_INDEX].split(customTokenizer))
-        } ?: numberGroup.addAll(expr.split(",", ":"))
-        return numberGroup
-    }
+            val (customTokenizer, tokenizerAppliedExpr) = it.destructured
+            tokenizerAppliedExpr.split(customTokenizer)
+        } ?: expr.split(",", ":")
 
     private fun checkNegative(number: Int) {
         if (number < 0) throw RuntimeException("음수가 존재합니다.")
@@ -28,7 +25,5 @@ class Calculator {
 
     companion object {
         private val customTokenizerRegex = Regex("//(.)\n(.*)")
-        private const val TOKENIZER_INDEX = 1
-        private const val TOKENIZER_APPLIED_EXPR_INDEX = 2
     }
 }
