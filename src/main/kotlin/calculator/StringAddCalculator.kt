@@ -8,7 +8,7 @@ class StringAddCalculator {
         val text = text!!
         if (containsOnlyDigit(text)) return text.toInt()
 
-        val numbers = Number(text).numbers
+        val numbers = InputParser(text).numbersParsed
         return numbers.sum()
     }
 
