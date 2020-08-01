@@ -1,9 +1,9 @@
 package calculator
 
-const val FIRST_PREFIX =
+private const val FIRST_PREFIX =
     """//"""
 
-const val SECOND_PREFIX =
+private const val SECOND_PREFIX =
     """\n"""
 
 const val CUSTOM_SPLITTER_LOCATION = 2
