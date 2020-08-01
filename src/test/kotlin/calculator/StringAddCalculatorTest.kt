@@ -28,7 +28,7 @@ class StringAddCalculatorTest {
     @Test
     fun `negative`() {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { calculator.add("-1") }.withMessage("음수 입력 불가 (커스텀 구분자로도 '-' 입력 불가)")
+            .isThrownBy { calculator.add("-1") }.withMessage("숫자 이외의 값 또는 음수 입력 불가")
     }
 
     @DisplayName("입력값이 숫자 하나일 때 숫자 그대로 반환한다.")
@@ -56,6 +56,6 @@ class StringAddCalculatorTest {
     @Test
     fun `illegal letter`() {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { calculator.add("aa,1,2") }.withMessage("정해진 자리 외 문자 입력 불가")
+            .isThrownBy { calculator.add("aa,1,2") }.withMessage("숫자 이외의 값 또는 음수 입력 불가")
     }
 }
