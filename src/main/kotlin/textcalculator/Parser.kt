@@ -13,7 +13,7 @@ class Parser {
         ) { it }
     )
 
-    val regexCustomPrefix = REGEX_FOR_CUSTOM_PREFIX
+    val regexCustomPrefix = REGEX_STRING_CUSTOM_PREFIX
 
     fun split(text: String): List<String> {
         return text.split(regexDelimiters)
@@ -31,12 +31,20 @@ class Parser {
         return matches?.group(4) ?: text
     }
 
+    fun List<String>.toInts(): List<Int> {
+        return map {
+            require(it.matches(Regex(REGEX_STRING_ONLY_NUMBERS)))
+            it.toInt()
+        }
+    }
+
     companion object {
         private const val COMMA = ","
         private const val COLON = ":"
         private const val REGEX_OPEN = "["
         private const val REGEX_CLOSE = "]"
         private const val EMPTY = ""
-        private const val REGEX_FOR_CUSTOM_PREFIX = "^(\\/\\/)(.)(\\n)(.*)"
+        private const val REGEX_STRING_CUSTOM_PREFIX = "^(\\/\\/)(.)(\\n)(.*)"
+        private const val REGEX_STRING_ONLY_NUMBERS = "[0-9]*"
     }
 }

@@ -1,6 +1,7 @@
 package textcalculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -56,5 +57,26 @@ class ParserTest {
         parser.checkIfCustomPrefix(text)
 
         assertThat(parser.spliter).contains(":", ",").hasSize(2)
+    }
+
+    @Test
+    fun `toInts() String 리스트를 Int 리스트로 변환`() {
+        Parser().apply {
+            assertThat(
+                listOf("1", "12", "123", "12345").toInts()
+            ).isEqualTo(
+                listOf(1, 12, 123, 12345)
+            )
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "_", "aa", "1.0", "a11"])
+    fun `toInts() 음수나 다른 문자열이 섞여 있으면 RuntimeException`(text: String) {
+        Parser().apply {
+            assertThatThrownBy {
+                listOf(text).toInts()
+            }.isInstanceOf(RuntimeException::class.java)
+        }
     }
 }
