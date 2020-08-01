@@ -19,7 +19,7 @@ class LottoTest {
     fun `로또 구매`() {
         val buyer = Buyer()
 
-        buyer.buy(14_000)
+        buyer.buyAll(14_000)
 
         assertThat(buyer.purchasedLottos.size).isEqualTo(14)
     }
@@ -29,7 +29,7 @@ class LottoTest {
         val buyer = Buyer()
 
         assertThatIllegalArgumentException().isThrownBy {
-            buyer.buy(900)
+            buyer.buyAll(900)
         }
     }
 
