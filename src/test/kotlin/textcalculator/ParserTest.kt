@@ -12,4 +12,11 @@ class ParserTest {
             listOf("1", "1", "2", "33")
         )
     }
+
+    @Test
+    fun `spliter의 초기 값은 콜론과 콤마`() {
+        assertThat(
+            Parser().spliter
+        ).contains(":", ",")
+    }
 }
