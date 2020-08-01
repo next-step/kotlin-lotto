@@ -26,4 +26,14 @@ class StoreTest {
 
         Assertions.assertThat(winnerHistory.contains(Prize.THIRD)).isTrue()
     }
+
+    @Test
+    fun `150만원 당첨`() {
+        val buyer = Buyer().apply { markLotto(listOf(1, 2, 3, 4, 5, 9)) }
+        val store = Store(buyer)
+
+        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
+
+        Assertions.assertThat(winnerHistory.contains(Prize.SECOND)).isTrue()
+    }
 }
