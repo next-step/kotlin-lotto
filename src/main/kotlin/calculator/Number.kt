@@ -1,12 +1,16 @@
 package calculator
 
 class Number(private val text: String) {
-    var numbers = listOf(0)
+    var numbers: List<Int>
         private set
 
     init {
-        numbers = if (hasCustomDelimiter(text)) customNumbers()
-        else defaultNumbers()
+        numbers =
+            if (hasCustomDelimiter(text)) {
+                customNumbers()
+            } else {
+                defaultNumbers()
+            }
     }
 
     private fun hasCustomDelimiter(text: String): Boolean {
@@ -36,7 +40,9 @@ class Number(private val text: String) {
 
     private fun checkIllegalInput(tokens: List<String>) {
         tokens.forEach {
-            if (Regex(EXCEPT_NUMBER_PATTERN).find(it) != null || 0 > it.toInt()) throw RuntimeException(NOT_ALLOW_LETTER_OR_NEGATIVE)
+            if (Regex(EXCEPT_NUMBER_PATTERN).find(it) != null || 0 > it.toInt()) throw RuntimeException(
+                NOT_ALLOW_LETTER_OR_NEGATIVE
+            )
         }
     }
 
