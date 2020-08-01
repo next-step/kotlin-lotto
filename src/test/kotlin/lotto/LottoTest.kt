@@ -20,4 +20,8 @@ class LottoTest {
 
         assertThat(buyer.purchasedLottos.size).isEqualTo(14)
     }
+
+    @Test
+    fun `로또 구매 금액이 부족한 경우`() {
+    }
 }
