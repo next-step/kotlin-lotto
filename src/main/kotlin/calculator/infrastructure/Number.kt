@@ -7,16 +7,20 @@ fun validate(string: String?): String {
     return string
 }
 
+fun matchResult(string: String): MatchResult? {
+    return Number.DELIMITER_REGEX.find(string)
+}
+
 fun parse(string: String, customDelimiter: String): List<String> {
 
     if (customDelimiter == Number.SIMPLE_DELIMITER) {
         return string.split(Number.SIMPLE_DELIMITER_REGEX)
     }
-    return string.split(customDelimiter)
+    return matchResult(string)!!.groupValues[2].split(customDelimiter)
 }
 
 fun customDelimeter(string: String): String {
-    val matchResult = Number.DELIMITER_REGEX.find(string)
+    val matchResult = matchResult(string)
     if (matchResult != null && matchResult.groupValues[1].isNotBlank()) {
         return matchResult.groupValues[1]
     }
