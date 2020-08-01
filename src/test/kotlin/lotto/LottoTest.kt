@@ -40,6 +40,6 @@ class LottoTest {
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
-        assertThat(winnerHistory.contains(Prize.NO_FOUR)).isTrue()
+        assertThat(winnerHistory.contains(Prize.FORTH)).isTrue()
     }
 }
