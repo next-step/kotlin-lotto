@@ -21,12 +21,13 @@ class NumberTest {
         assertThat(hasCustomDelimeter(string)).isEqualTo(expected)
     }
 
-    @Test
     @ParameterizedTest
     @CsvSource(
-        "//;\\n1;2;3 > ;",
-        "//*\\n12*13*14 > *",
-        delimiter = '>'
+        value = [
+            "'//;\n1;2;3' > ;",
+            "'//*\n12*13*14' > *"
+        ],
+        delimiterString = ">"
     )
     fun `커스텀 구분자 구하기`(string: String, expected: String) {
         assertThat(customDelimeter(string)).isEqualTo(expected)
