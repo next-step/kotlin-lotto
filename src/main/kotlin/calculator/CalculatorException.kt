@@ -1,3 +1,5 @@
 package calculator
 
-class CalculatorException(message: String) : Exception()
+import java.lang.IllegalArgumentException
+
+class CalculatorException(message: String) : IllegalArgumentException()
