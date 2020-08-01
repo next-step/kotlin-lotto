@@ -1,7 +1,5 @@
 class Calculator {
 
-    private val customTokenizerRegex = Regex("//(.)\n(.*)")
-
     fun calculate(expr: String): Int {
         if (expr.isEmpty()) return 0
 
@@ -29,6 +27,7 @@ class Calculator {
     }
 
     companion object {
+        private val customTokenizerRegex = Regex("//(.)\n(.*)")
         private const val TOKENIZER_INDEX = 1
         private const val TOKENIZER_APPLIED_EXPR_INDEX = 2
     }
