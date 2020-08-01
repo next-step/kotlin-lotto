@@ -54,6 +54,13 @@ class StringAddCalculatorTest {
     @Test
     fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy({ calculator.add("-1") })
+            .isThrownBy { calculator.add("-1") }
+    }
+
+    @DisplayName(value = "문자열 계산기에 숫자 이외의 값을 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @Test
+    fun character() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.add("a") }
     }
 }
