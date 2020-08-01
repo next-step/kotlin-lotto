@@ -30,4 +30,8 @@ class LottoTest {
             buyer.buy(900)
         }
     }
+
+    @Test
+    fun `5천원 당첨`() {
+    }
 }
