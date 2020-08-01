@@ -1,4 +1,4 @@
-import Calculator.Calculator
+import calculator.Calculator
 
 fun main() {
     try {
