@@ -15,8 +15,6 @@ class StringAddCalculator {
         return 0
     }
 
-    private fun isBlank(text: String?): Boolean = text.isNullOrBlank()
-
     private fun checkNegative(text: String) {
         if (text.contains('-')) throw RuntimeException(NOT_ALLOW_NEGATIVE)
     }
@@ -29,11 +27,6 @@ class StringAddCalculator {
     private fun sum(text: String): Int {
         if (hasCustomDelimiter(text)) return customSum(text)
         return defaultSum(text)
-    }
-
-    private fun hasCustomDelimiter(text: String): Boolean {
-        Regex(CUSTOM_PATTERN).find(text) ?: return false
-        return true
     }
 
     private fun customSum(text: String): Int {
@@ -55,15 +48,9 @@ class StringAddCalculator {
         return tokens.sumBy { it.toInt() }
     }
 
-    private fun checkIllegalLetter(tokens: List<String>) {
-        tokens.forEach { if (it[0].isLetter()) throw RuntimeException(NOT_ALLOW_LETTER) }
-    }
-
     companion object {
         private const val DELIMITER_COMMA = ","
         private const val DELIMITER_COLON = ":"
-        private const val CUSTOM_PATTERN = "//(.)\n(.*)"
-        private const val NOT_ALLOW_NEGATIVE = "음수 입력 불가"
-        private const val NOT_ALLOW_LETTER = "커스텀 구분자 외 문자 입력 불가"
+        private const val NOT_ALLOW_NEGATIVE = "음수 입력 불가 (커스텀 구분자로도 '-' 입력 불가)"
     }
 }
