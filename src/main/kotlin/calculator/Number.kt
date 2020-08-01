@@ -1,6 +1,6 @@
 package calculator
 
-class Number(private val text: String?) {
+class Number(private val text: String) {
     var numbers = listOf(0)
         private set
 
@@ -9,13 +9,13 @@ class Number(private val text: String?) {
         else defaultNumbers()
     }
 
-    private fun hasCustomDelimiter(text: String?): Boolean {
-        Regex(CUSTOM_PATTERN).find(text!!) ?: return false
+    private fun hasCustomDelimiter(text: String): Boolean {
+        Regex(CUSTOM_PATTERN).find(text) ?: return false
         return true
     }
 
     private fun customNumbers(): List<Int> {
-        val result = Regex(CUSTOM_PATTERN).find(text!!)
+        val result = Regex(CUSTOM_PATTERN).find(text)
         var tokens = listOf<String>()
 
         result?.let {
@@ -28,7 +28,7 @@ class Number(private val text: String?) {
     }
 
     private fun defaultNumbers(): List<Int> {
-        val tokens = text!!.split(DELIMITER_COMMA, DELIMITER_COLON)
+        val tokens = text.split(DELIMITER_COMMA, DELIMITER_COLON)
         checkIllegalInput(tokens)
 
         return tokens.map { it.toInt() }
