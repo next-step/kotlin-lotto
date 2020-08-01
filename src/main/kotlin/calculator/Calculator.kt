@@ -1,5 +1,7 @@
 package calculator
 
+import java.lang.IllegalArgumentException
+
 private const val FIRST_PREFIX =
     """//"""
 
@@ -28,7 +30,7 @@ class Calculator(private val numbersInput: String?) {
     }
 
     private fun getNumbers(numbersInput: String?): String? {
-        require(!numbersInput.isNullOrBlank()) { throw KotlinNullPointerException("숫자를 입력해주세요.") }
+        require(!numbersInput.isNullOrBlank()) { throw IllegalArgumentException("숫자를 입력해주세요.") }
         return numbersInput
     }
 
