@@ -33,4 +33,14 @@ class CalculatorTest {
 
         assertThat(value).containsAll(listOf(";", ",", ":"))
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\\n1;4;3", "1;4,3"])
+    fun `숫자 목록 조회`(content: String) {
+        val calculator = Calculator()
+
+        val value = calculator.splitToDelimiters(content, listOf(";", ","))
+
+        assertThat(value).containsAll(listOf(1, 4, 3))
+    }
 }
