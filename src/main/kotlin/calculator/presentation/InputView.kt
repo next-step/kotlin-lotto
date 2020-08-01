@@ -1,4 +1,4 @@
-package calculator
+package calculator.presentation
 
 class InputView {
     fun inputString(): String? {

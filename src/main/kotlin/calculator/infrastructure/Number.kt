@@ -1,4 +1,4 @@
-package calculator
+package calculator.infrastructure
 
 fun validate(string: String?): String {
     if (string.isNullOrBlank()) {
