@@ -11,7 +11,7 @@ const val CUSTOM_SPLITTER_LAST_LOCATION = 5
 
 class Calculator(private val numbersInput: String?) {
 
-    private val defaultSplitters = listOf(",", ":")
+    private val DEFAULT_SPLITTERS = listOf(",", ":")
     var isCustomSplitter: Boolean = false
 
     fun execute(): Int {
@@ -45,7 +45,7 @@ class Calculator(private val numbersInput: String?) {
         if (isCustomSplitter) {
             return listOf(numbersInput!![CUSTOM_SPLITTER_LOCATION].toString())
         }
-        return defaultSplitters
+        return DEFAULT_SPLITTERS
     }
 
     private fun hasOnlyValidString() {
