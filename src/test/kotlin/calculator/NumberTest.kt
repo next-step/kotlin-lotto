@@ -1,8 +1,10 @@
 package calculator
 
+import calculator.infrastructure.Calculator
 import calculator.infrastructure.Number
 import calculator.infrastructure.customDelimeter
 import calculator.infrastructure.parse
+import calculator.infrastructure.validate
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,6 +14,18 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class NumberTest {
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3"])
+    fun `전체 메소드 테스트`(text: String) {
+        val validatedString = validate(text)
+        val customDelimiter = customDelimeter(validatedString)
+        val list = parse(validatedString, customDelimiter)
+        val numbers = list.filter { Number(it).isNatural() }.map { it.toInt() }
+        val sum = Calculator().sum(numbers)
+
+        assertThat(sum).isEqualTo(6)
+    }
 
     @ParameterizedTest
     @CsvSource(
