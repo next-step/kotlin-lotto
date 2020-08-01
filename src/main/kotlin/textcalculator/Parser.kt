@@ -1,5 +1,7 @@
 package textcalculator
 
+import java.util.regex.Pattern
+
 class Parser {
     private val _spliter = arrayListOf(COMMA, COLON)
     val spliter: List<String> get() = _spliter
@@ -11,8 +13,19 @@ class Parser {
         ) { it }
     )
 
+    val regexCustomPrefix = "^(\\/\\/)(.)(\\n).*"
+
     fun split(text: String): List<String> {
         return text.split(regexDelimiters)
+    }
+
+    fun checkIfCustomPrefix(text: String) {
+        Pattern.compile(regexCustomPrefix).matcher(text)
+            .takeIf { it.matches() }
+            ?.group(2)
+            ?.let { custom ->
+                _spliter.add(custom)
+            }
     }
 
     companion object {
