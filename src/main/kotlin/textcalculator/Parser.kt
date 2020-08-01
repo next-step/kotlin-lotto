@@ -5,18 +5,19 @@ import java.util.regex.Pattern
 class Parser {
     private val _spliter = arrayListOf(COMMA, COLON)
     val spliter: List<String> get() = _spliter
-    val regexDelimiters = Regex(
-        spliter.joinToString(
-            prefix = REGEX_OPEN,
-            postfix = REGEX_CLOSE,
-            separator = EMPTY
-        ) { it }
-    )
+    val regexDelimiters
+        get() = Regex(
+            spliter.joinToString(
+                prefix = REGEX_OPEN,
+                postfix = REGEX_CLOSE,
+                separator = EMPTY
+            ) { it }
+        )
 
     val regexCustomPrefix = REGEX_STRING_CUSTOM_PREFIX
 
-    fun split(text: String): List<String> {
-        return text.split(regexDelimiters)
+    fun String.split(): List<String> {
+        return split(regexDelimiters)
     }
 
     fun checkIfCustomPrefix(text: String): String {
@@ -36,6 +37,12 @@ class Parser {
             require(it.matches(Regex(REGEX_STRING_ONLY_NUMBERS)))
             it.toInt()
         }
+    }
+
+    fun parse(text: String): List<Int> {
+        return checkIfCustomPrefix(text)
+            .split()
+            .toInts()
     }
 
     companion object {

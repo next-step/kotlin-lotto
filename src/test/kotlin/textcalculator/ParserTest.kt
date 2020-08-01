@@ -9,11 +9,11 @@ import org.junit.jupiter.params.provider.ValueSource
 class ParserTest {
     @Test
     fun `split() 문자열을 구분자로 쪼갠다`() {
-        assertThat(
-            Parser().split("1:1:2,33")
-        ).isEqualTo(
-            listOf("1", "1", "2", "33")
-        )
+        Parser().apply {
+            assertThat("1:1:2,33".split()).isEqualTo(
+                listOf("1", "1", "2", "33")
+            )
+        }
     }
 
     @Test
@@ -78,5 +78,31 @@ class ParserTest {
                 listOf(text).toInts()
             }.isInstanceOf(RuntimeException::class.java)
         }
+    }
+
+    @Test
+    fun `parse() 정상 케이스일 때 정수 리스트 반환`() {
+        assertThat(
+            Parser().parse("1:0,2:3,44")
+        ).isEqualTo(
+            listOf(1, 0, 2, 3, 44)
+        )
+    }
+
+    @Test
+    fun `parse() 프리픽스 있는 정상 케이스일 때 정수 리스트 반환`() {
+        assertThat(
+            Parser().parse("//;\n1:0,2:3;44")
+        ).isEqualTo(
+            listOf(1, 0, 2, 3, 44)
+        )
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "_", "aa", "1.0", "a11"])
+    fun `parse() 음수 또는 잘못된 문자열 있으면 RuntimeException`(text: String) {
+        assertThatThrownBy {
+            Parser().parse("1:0,2:3,$text")
+        }.isInstanceOf(RuntimeException::class.java)
     }
 }
