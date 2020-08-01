@@ -8,9 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource
 class StringAddCalculatorTest {
     private val calculator = StringAddCalculator()
 
-    @Test
-    fun `빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다`() {
-        TODO("Not yet implemented")
+    @ParameterizedTest
+    @ValueSource(strings = [""])
+    fun `빈 문자열을 입력할 경우 0을 반환해야 한다`(text: String) {
+        assertThat(calculator.add(text)).isEqualTo(0)
     }
 
     @Test
