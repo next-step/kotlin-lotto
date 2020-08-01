@@ -5,15 +5,23 @@ class StringAddCalculator {
     fun add(text: String?): Int {
         if (isBlank(text)) return 0
 
-        checkNegative(text!!)
+        text?.let {
+            checkNegative(it)
+            if (justOneNumber(it)) return it.toInt()
+        }
 
-        return -1
+        return 0
     }
 
     private fun isBlank(text: String?): Boolean = text.isNullOrBlank()
 
     private fun checkNegative(text: String) {
         if (text.contains('-')) throw RuntimeException(NOT_ALLOW_NEGATIVE)
+    }
+
+    private fun justOneNumber(text: String): Boolean {
+        text.forEach { if (!it.isDigit()) return false }
+        return true
     }
 
     companion object {

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
     private lateinit var calculator: StringAddCalculator
@@ -29,4 +30,12 @@ class StringAddCalculatorTest {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.add("-1") }.withMessage("음수 입력 불가")
     }
+
+    @DisplayName("입력값이 숫자 하나일 때 숫자 그대로 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["7"])
+    fun `just one number`(text: String) {
+        assertThat(calculator.add(text)).isSameAs(text.toInt())
+    }
+
 }
