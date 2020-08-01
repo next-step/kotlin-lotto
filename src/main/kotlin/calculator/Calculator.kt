@@ -8,8 +8,16 @@ private const val FIRST_PREFIX =
 private const val SECOND_PREFIX =
     """\n"""
 
-const val CUSTOM_SPLITTER_LOCATION = 2
-const val CUSTOM_SPLITTER_LAST_LOCATION = 5
+private const val CUSTOM_SPLITTER_LOCATION = 2
+private const val CUSTOM_SPLITTER_LAST_LOCATION = 5
+// try {
+//        println("계산하기 위한 문자열을 입력해주세요.")
+//        val calculator = Calculator(readLine()!!)
+//        val result = calculator.execute()
+//        println("총합은 $result 입니다.")
+//    } catch (e: Exception) {
+//        println(e.message)
+//    }
 
 class Calculator(private val numbersInput: String?) {
 
@@ -39,7 +47,7 @@ class Calculator(private val numbersInput: String?) {
             isCustomSplitter = numbersInput!!.startsWith(FIRST_PREFIX)
                 .and(numbersInput.substring(CUSTOM_SPLITTER_LOCATION + 1).startsWith(SECOND_PREFIX))
         } catch (e: IndexOutOfBoundsException) {
-            throw CalculatorException("입력값을 확인해 주세요.")
+            throw CalculatorException("입력값을 확인하세요.")
         }
     }
 
@@ -57,7 +65,7 @@ class Calculator(private val numbersInput: String?) {
         val numberInput = numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
 
         if (!numberInput.matches(Regex(pattern.toString()))) {
-            throw CalculatorException("숫자와 구분자만 입력해야합니다.")
+            throw CalculatorException("입력값을 확인하세요.")
         }
     }
 
@@ -68,10 +76,10 @@ class Calculator(private val numbersInput: String?) {
             numbersInput = this.numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
         }
         if (!numbersInput!!.last().toString().matches(Regex("[0-9]"))) {
-            throw CalculatorException("구분자는 숫자 사이에만 존재합니다.")
+            throw CalculatorException("입력값을 확인하세요.")
         }
         if (!numbersInput.first().toString().matches(Regex("[0-9]"))) {
-            throw CalculatorException("구분자는 숫자 사이에만 존재합니다.")
+            throw CalculatorException("입력값을 확인하세요.")
         }
     }
 
