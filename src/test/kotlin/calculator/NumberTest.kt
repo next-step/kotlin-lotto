@@ -1,7 +1,6 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
@@ -33,14 +32,12 @@ class NumberTest {
         assertThat(customDelimeter(string)).isEqualTo(expected)
     }
 
-    @Test
     @ParameterizedTest
     @MethodSource("generateParsingTestData")
-    fun `구분자를 기준으로 문자열 파싱`(string: String, expected: List<String>) {
-        assertThat(parse(string)).isIn(expected)
+    fun `구분자를 기준으로 문자열 파싱`(string: String, delimiter: String, expected: List<String>) {
+        assertThat(parse(string, delimiter)).isEqualTo(expected)
     }
 
-    @Test
     @ParameterizedTest
     @CsvSource(
         "1, true",
@@ -55,8 +52,8 @@ class NumberTest {
         @JvmStatic
         fun generateParsingTestData(): List<Arguments> {
             return listOf(
-                Arguments.of("//;\\n1;2;3", listOf("1", "2", "3")),
-                Arguments.of("//*\\n12*13*14", listOf("12", "13", "14"))
+                Arguments.of("1;2;3", ";", listOf("1", "2", "3")),
+                Arguments.of("12*13*14", "*", listOf("12", "13", "14"))
             )
         }
     }

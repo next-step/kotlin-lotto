@@ -1,3 +1,7 @@
+package calculator
+
+fun parse(string: String, delimiter: String) = string.split(delimiter)
+
 fun customDelimeter(string: String): String? {
     val matchResult = Regex("//(.*)\n").find(string)
     if (matchResult != null && matchResult.groupValues[1].isNotBlank()) {
