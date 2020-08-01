@@ -15,6 +15,6 @@ class NumberTest {
     @DisplayName("커스텀 구분자(//와 \n 사이의 문자열)를 사용하여 숫자 리스트를 반환한다")
     @Test
     fun `custom delimiter`() {
-        assertThat(Number("//;\n1;2;3").numbers).isEqualTo(listOf(1, 2, 3))
+        assertThat(Number("//;\\n1;2;3").numbers).isEqualTo(listOf(1, 2, 3))
     }
 }
