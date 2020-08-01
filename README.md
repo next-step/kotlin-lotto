@@ -27,9 +27,12 @@
     - Facade로서 입력을 받아서 결과를 출력하는 클래스. 모든 기능에 대해 각각 의존성을 주입받는다.
     - execute() : 입력을 받고, 파싱 한 다음, 전체를 더하고, 결과를 출력한다.
 - Parser
+    - 문자열을 쪼개는 핵심적인 기능 parse()를 수행한다. 내부적으로는 여러 함수로 나누어 처리.
     - spliter : 구분자 목록
-    - checkIfCustomPrefix() : //*\n으로 시작한다면 구분자에 추가한다.
     - parse() : 문자열을 List<Int>로 바꾼다. 바꿀 수 없으면 exception 발생
+    - checkIfCustomPrefix() : //*\n으로 시작한다면 구분자에 추가한다.
+    - split() : 문자열을 나누어 List<String>로 쪼갠다.
+    - toInts() : List<String>을 List<Int>로 전부 바꾼다. 바꿀 수 없으면 exception 발생
 - Calculator
     - sum() : List<Int>를 전부 합한다.
 - IOManager
