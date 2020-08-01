@@ -8,7 +8,7 @@ class StringAddCalculator {
         if (text.length == 1) return text.toInt()
         val texts = text.split(",", ":").map {
             val number = it.toInt()
-            if (number < 0) throw RuntimeException("sdf")
+            if (number < 0) throw RuntimeException("can not use nagative number $number")
             number
         }
         return texts.reduce { total, number -> total + number }

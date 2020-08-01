@@ -38,12 +38,14 @@ class StringAddCalculatorTest {
     fun `음수를 전달할 경우 RuntimeException 예외가 발생해야 한다`() {
         assertThatThrownBy { calculator.add("1,-2:3") }
             .isInstanceOf(RuntimeException::class.java)
+            .hasMessage("can not use nagative number -2")
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["//;\\\\n1;2;3"])
     fun `커스텀 구분자를 지정할 수 있다`(text: String) {
         println(text)
+        assertThat(calculator.add(text)).isEqualTo(6)
         // "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)
         TODO("Not yet implemented")
     }
