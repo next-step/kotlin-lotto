@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.Buyer
 import lotto.model.Lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -13,5 +14,10 @@ class LottoTest {
 
     @Test
     fun `로또 구매`() {
+        val buyer = Buyer()
+
+        buyer.buy(14_000)
+
+        assertThat(buyer.purchasedLottos.size).isEqualTo(14)
     }
 }
