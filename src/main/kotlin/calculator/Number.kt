@@ -7,6 +7,7 @@ class Number(private val text: String?) {
     init {
         numbers = if (hasCustomDelimiter(text)) customNumbers()
         else defaultNumbers()
+        // checkNegative(numbers)
     }
 
     private fun hasCustomDelimiter(text: String?): Boolean {
@@ -21,8 +22,7 @@ class Number(private val text: String?) {
         result?.let {
             val customDelimiter = result.groupValues[1]
             tokens = result.groupValues[2].split(customDelimiter)
-            checkNegative(tokens)
-            checkIllegalLetter(tokens)
+            checkIllegalInput(tokens)
         }
 
         return tokens.map { it.toInt() }
@@ -30,30 +30,22 @@ class Number(private val text: String?) {
 
     private fun defaultNumbers(): List<Int> {
         val tokens = text!!.split(DELIMITER_COMMA, DELIMITER_COLON)
-        checkNegative(tokens)
-        checkIllegalLetter(tokens)
+        checkIllegalInput(tokens)
 
         return tokens.map { it.toInt() }
     }
 
-    private fun checkNegative(tokens: List<String>) {
+    private fun checkIllegalInput(tokens: List<String>) {
         tokens.forEach {
-            if (0 > it.toInt()) throw RuntimeException(NOT_ALLOW_NEGATIVE)
-        }
-    }
-
-    private fun checkIllegalLetter(tokens: List<String>) {
-        tokens.forEach {
-            if (Regex(EXCEPT_NUMBER_PATTERN).find(it) != null) throw RuntimeException(NOT_ALLOW_LETTER)
+            if (Regex(EXCEPT_NUMBER_PATTERN).find(it) != null || 0 > it.toInt()) throw RuntimeException(NOT_ALLOW_LETTER_OR_NEGATIVE)
         }
     }
 
     companion object {
         const val DELIMITER_COMMA = ","
         const val DELIMITER_COLON = ":"
-        const val CUSTOM_PATTERN = "//*\\\\n(.*)"
+        const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
         const val EXCEPT_NUMBER_PATTERN = "[^0-9]+"
-        const val NOT_ALLOW_LETTER = "구분자 자리 외 다른 문자 입력 불가"
-        const val NOT_ALLOW_NEGATIVE = "음수 입력 불가"
+        const val NOT_ALLOW_LETTER_OR_NEGATIVE = "숫자 이외의 값 또는 음수 입력 불가"
     }
 }
