@@ -16,3 +16,17 @@ fun hasCustomDelimeter(string: String): Boolean {
     }
     return true
 }
+
+class Number(val number: String) {
+
+    companion object {
+        val NUMERIC_REGEX = Regex("[0-9]")
+    }
+
+    fun isNatural(): Boolean {
+        if (NUMERIC_REGEX.matches(number)) {
+            return true
+        }
+        return false
+    }
+}

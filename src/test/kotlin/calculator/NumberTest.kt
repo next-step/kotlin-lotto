@@ -42,9 +42,10 @@ class NumberTest {
     @CsvSource(
         "1, true",
         "A, false",
-        "0, true"
+        "0, true",
+        "-1, false"
     )
-    fun `파싱된 문자가 자연수인지 확인`(string: String, expected: String) {
+    fun `파싱된 문자가 자연수인지 확인`(string: String, expected: Boolean) {
         assertThat(Number(string).isNatural()).isEqualTo(expected)
     }
 
