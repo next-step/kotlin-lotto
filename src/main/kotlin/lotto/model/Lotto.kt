@@ -16,6 +16,7 @@ class Lotto {
     }
 
     companion object {
+        const val PRICE = 1_000
         private const val NUMBER_COUNT = 6
         private val NUMBER_GENERATION_RANGE = 1..99
     }
