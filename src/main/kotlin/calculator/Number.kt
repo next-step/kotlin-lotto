@@ -1,5 +1,7 @@
 package calculator
 
+import java.util.regex.Pattern
+
 class Number(private val text: String) {
     var numbers: List<Int>
         private set
@@ -14,11 +16,11 @@ class Number(private val text: String) {
     }
 
     private fun hasCustomDelimiter(text: String): Boolean {
-        return Regex(CUSTOM_PATTERN).find(text) != null
+        return customPatten.matcher(text).find()
     }
 
     private fun customNumbers(): List<Int> {
-        val result = Regex(CUSTOM_PATTERN).find(text) ?: return emptyList()
+        val result = CUSTOM_PATTERN.toRegex().find(text) ?: return emptyList()
 
         val customDelimiter = result.groupValues[1]
         val tokens = result.groupValues[2].split(customDelimiter)
@@ -36,8 +38,8 @@ class Number(private val text: String) {
 
     private fun checkIllegalInput(tokens: List<String>) {
         tokens.forEach {
-            if (Regex(EXCEPT_NUMBER_PATTERN).find(it) != null
-                || 0 > it.toInt()
+            if (excludeNumberPattern.matcher(it).find() ||
+                0 > it.toInt()
             ) {
                 throw RuntimeException(NOT_ALLOW_LETTER_OR_NEGATIVE)
             }
@@ -48,7 +50,10 @@ class Number(private val text: String) {
         const val DELIMITER_COMMA = ","
         const val DELIMITER_COLON = ":"
         const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
-        const val EXCEPT_NUMBER_PATTERN = "[^0-9]+"
+        const val EXCLUDE_NUMBER_PATTERN = "[^0-9]+"
         const val NOT_ALLOW_LETTER_OR_NEGATIVE = "숫자 이외의 값 또는 음수 입력 불가"
+
+        private val customPatten: Pattern = Pattern.compile(CUSTOM_PATTERN)
+        private val excludeNumberPattern: Pattern = Pattern.compile(EXCLUDE_NUMBER_PATTERN)
     }
 }
