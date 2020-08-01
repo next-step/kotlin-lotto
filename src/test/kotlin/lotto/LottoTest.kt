@@ -3,6 +3,7 @@ package lotto
 import lotto.model.Buyer
 import lotto.model.Lotto
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 
 class LottoTest {
@@ -23,5 +24,10 @@ class LottoTest {
 
     @Test
     fun `로또 구매 금액이 부족한 경우`() {
+        val buyer = Buyer()
+
+        assertThatIllegalArgumentException().isThrownBy {
+            buyer.buy(900)
+        }
     }
 }
