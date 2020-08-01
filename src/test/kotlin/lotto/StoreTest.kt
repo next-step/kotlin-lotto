@@ -4,13 +4,23 @@ import lotto.model.Buyer
 import lotto.model.Prize
 import lotto.model.Store
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class StoreTest {
+
+    private lateinit var buyer: Buyer
+    private lateinit var store: Store
+
+    @BeforeEach
+    fun setup() {
+        buyer = Buyer()
+        store = Store(buyer)
+    }
+
     @Test
     fun `5천원 당첨`() {
-        val buyer = Buyer().apply { markLotto(listOf(1, 2, 3, 7, 8, 9)) }
-        val store = Store(buyer)
+        buyer.markLotto(listOf(1, 2, 3, 7, 8, 9))
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
@@ -19,8 +29,7 @@ class StoreTest {
 
     @Test
     fun `5만원 당첨`() {
-        val buyer = Buyer().apply { markLotto(listOf(1, 2, 3, 4, 8, 9)) }
-        val store = Store(buyer)
+        buyer.markLotto(listOf(1, 2, 3, 4, 8, 9))
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
@@ -29,8 +38,7 @@ class StoreTest {
 
     @Test
     fun `150만원 당첨`() {
-        val buyer = Buyer().apply { markLotto(listOf(1, 2, 3, 4, 5, 9)) }
-        val store = Store(buyer)
+        buyer.markLotto(listOf(1, 2, 3, 4, 5, 9))
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
@@ -39,8 +47,7 @@ class StoreTest {
 
     @Test
     fun `20억 당첨`() {
-        val buyer = Buyer().apply { markLotto(listOf(1, 2, 3, 4, 5, 6)) }
-        val store = Store(buyer)
+        buyer.markLotto(listOf(1, 2, 3, 4, 5, 6))
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
