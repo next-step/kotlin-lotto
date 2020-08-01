@@ -6,15 +6,11 @@ class StringAddCalculator {
         if (text.isNullOrBlank()) return 0
 
         val text = text!!
-        if (justOneNumber(text)) return text.toInt()
+        if (containsOnlyDigit(text)) return text.toInt()
 
         val numbers = Number(text).numbers
-
         return numbers.sum()
     }
 
-    private fun justOneNumber(text: String): Boolean {
-        text.forEach { if (!it.isDigit()) return false }
-        return true
-    }
+    private fun containsOnlyDigit(text: String): Boolean = text.all { it.isDigit() }
 }
