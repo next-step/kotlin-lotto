@@ -42,13 +42,21 @@ class StringAddCalculator {
         val customDelimiter = result.groupValues[1]
         val tokens = result.groupValues[2].split(customDelimiter)
 
+        checkIllegalLetter(tokens)
+
         return tokens.sumBy { it.toInt() }
     }
 
     private fun defaultSum(text: String): Int {
         val tokens = text.split(DELIMITER_COMMA, DELIMITER_COLON)
 
+        checkIllegalLetter(tokens)
+
         return tokens.sumBy { it.toInt() }
+    }
+
+    private fun checkIllegalLetter(tokens: List<String>) {
+        tokens.forEach { if (it[0].isLetter()) throw RuntimeException(NOT_ALLOW_LETTER) }
     }
 
     companion object {
@@ -56,5 +64,6 @@ class StringAddCalculator {
         private const val DELIMITER_COLON = ":"
         private const val CUSTOM_PATTERN = "//(.)\n(.*)"
         private const val NOT_ALLOW_NEGATIVE = "음수 입력 불가"
+        private const val NOT_ALLOW_LETTER = "커스텀 구분자 외 문자 입력 불가"
     }
 }

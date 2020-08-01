@@ -51,4 +51,11 @@ class StringAddCalculatorTest {
     fun `custom delimiter`(text: String) {
         assertThat(calculator.add(text)).isSameAs(6)
     }
+
+    @DisplayName("구분자가 아닌 문자가 사용되었을 때 RuntimeException을 발생시킨다.")
+    @Test
+    fun `illegal letter`() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.add("aa,1,2") }.withMessage("커스텀 구분자 외 문자 입력 불가")
+    }
 }
