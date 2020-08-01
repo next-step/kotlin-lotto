@@ -1,3 +1,5 @@
+package calculator
+
 class Calculator {
 
     fun calculate(expr: String): Int {
