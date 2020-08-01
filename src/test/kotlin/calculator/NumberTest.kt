@@ -9,12 +9,13 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class NumberTest {
 
-    @Test
     @ParameterizedTest
     @CsvSource(
-        "//;\\n1;2;3 > true",
-        "1,2,3 > false ",
-        delimiter = '>'
+        value = [
+            "'//;\n1;2;3' > true",
+            "'1,2,3' > false"
+        ],
+        delimiterString = ">"
     )
     fun `커스텀 구분자 포함 여부 판단`(string: String, expected: Boolean) {
         assertThat(hasCustomDelimeter(string)).isEqualTo(expected)
