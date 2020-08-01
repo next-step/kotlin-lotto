@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
-    private val calculator = StringAddCalculator()
+    private val calculator = StringAddCalculator
 
     @ParameterizedTest
     @EmptySource
