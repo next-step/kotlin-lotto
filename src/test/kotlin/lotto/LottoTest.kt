@@ -1,6 +1,7 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
 class LottoTest {
@@ -18,9 +19,22 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 당첨여부 확인`() {
+    fun `일치 숫자 확인`() {
         val prizeNumbers = listOf(1, 7, 13, 24, 40, 41)
         val lottoNumbers = listOf(1, 7, 13, 14, 15, 16)
-        assertThat(Lotto.checkResult(lottoNumbers, prizeNumbers)).isEqualTo(3)
+        assertThat(Lotto.getMatchCount(lottoNumbers, prizeNumbers)).isEqualTo(3)
+    }
+
+    @Test
+    fun `당첨금액 확인`() {
+        assertThat(Lotto.getPrizeAmount(3)).isEqualTo(5000)
+    }
+
+    @Test
+    fun `당첨금액 예외사항`() {
+        assertThatThrownBy { Lotto.getPrizeAmount(-1) }
+            .isInstanceOf(IndexOutOfBoundsException::class.java)
+        assertThatThrownBy { Lotto.getPrizeAmount(7) }
+            .isInstanceOf(IndexOutOfBoundsException::class.java)
     }
 }
