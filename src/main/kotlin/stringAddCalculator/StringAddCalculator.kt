@@ -4,6 +4,7 @@ object StringAddCalculator {
     private const val CUSTOM_DELIMITER =
         """//(.)\\n(.*)"""
     private const val ZERO = 0
+    private const val NEGATIVE_NUMBER_THROW_MESSAGE = "can not use nagative number"
     private val delimiters = mutableListOf(",", ":")
 
     fun add(text: String): Int {
@@ -32,7 +33,7 @@ object StringAddCalculator {
     private fun toIntList(values: List<String>): List<Int> {
         return values.map { value ->
             val number = value.toInt()
-            if (isNegativeNumber(number)) throw RuntimeException("can not use nagative number $number")
+            if (isNegativeNumber(number)) throw RuntimeException("$NEGATIVE_NUMBER_THROW_MESSAGE $number")
             number
         }
     }
