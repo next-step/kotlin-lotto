@@ -44,4 +44,11 @@ class StringAddCalculatorTest {
     fun `default delimiter`(text: String) {
         assertThat(calculator.add(text)).isSameAs(20)
     }
+
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있게 한다. (단, -는 사용 불가)")
+    @ParameterizedTest
+    @ValueSource(strings = ["//?\n1?2?3"])
+    fun `custom delimiter`(text: String) {
+        assertThat(calculator.add(text)).isSameAs(6)
+    }
 }

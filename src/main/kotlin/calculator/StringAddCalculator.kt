@@ -9,7 +9,7 @@ class StringAddCalculator {
             checkNegative(it)
 
             if (justOneNumber(it)) return it.toInt()
-            return defaultSum(it)
+            return sum(it)
         }
 
         return 0
@@ -26,6 +26,25 @@ class StringAddCalculator {
         return true
     }
 
+    private fun sum(text: String): Int {
+        if (hasCustomDelimiter(text)) return customSum(text)
+        return defaultSum(text)
+    }
+
+    private fun hasCustomDelimiter(text: String): Boolean {
+        Regex(CUSTOM_PATTERN).find(text) ?: return false
+        return true
+    }
+
+    private fun customSum(text: String): Int {
+        val result = Regex(CUSTOM_PATTERN).find(text)!!
+
+        val customDelimiter = result.groupValues[1]
+        val tokens = result.groupValues[2].split(customDelimiter)
+
+        return tokens.sumBy { it.toInt() }
+    }
+
     private fun defaultSum(text: String): Int {
         val tokens = text.split(DELIMITER_COMMA, DELIMITER_COLON)
 
@@ -35,6 +54,7 @@ class StringAddCalculator {
     companion object {
         private const val DELIMITER_COMMA = ","
         private const val DELIMITER_COLON = ":"
+        private const val CUSTOM_PATTERN = "//(.)\n(.*)"
         private const val NOT_ALLOW_NEGATIVE = "음수 입력 불가"
     }
 }
