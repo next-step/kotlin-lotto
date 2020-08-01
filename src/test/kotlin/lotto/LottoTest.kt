@@ -8,6 +8,6 @@ class LottoTest {
     @Test
     fun `로또 형식 체크`() {
         val lotto = Lotto()
-        assertThat(lotto.generate().size).isEqualTo(6)
+        assertThat(lotto.numbers.size).isEqualTo(6)
     }
 }
