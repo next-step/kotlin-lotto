@@ -31,18 +31,18 @@ class InputParser(private val text: String) {
 
     private fun defaultNumbers(): List<Int> {
         val tokens = text.split(DELIMITER_COMMA, DELIMITER_COLON)
+        // tokens.forEach { print(it+" ${tokens} ")}
         checkIllegalInput(tokens)
 
         return tokens.map { it.toInt() }
     }
 
     private fun checkIllegalInput(tokens: List<String>) {
-        tokens.forEach {
-            if (excludeNumberPattern.matcher(it).find() ||
-                0 > it.toInt()
-            ) {
-                throw RuntimeException(NOT_ALLOW_LETTER_OR_NEGATIVE)
-            }
+        if (tokens.any {
+                it.toIntOrNull() == null ||
+                it.toInt() < 0
+            }) {
+            throw RuntimeException(NOT_ALLOW_LETTER_OR_NEGATIVE)
         }
     }
 
@@ -50,10 +50,8 @@ class InputParser(private val text: String) {
         private const val DELIMITER_COMMA = ","
         private const val DELIMITER_COLON = ":"
         private const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
-        private const val EXCLUDE_NUMBER_PATTERN = "[^0-9]+"
         private const val NOT_ALLOW_LETTER_OR_NEGATIVE = "숫자 이외의 값 또는 음수 입력 불가"
 
         private val customPatten: Pattern = Pattern.compile(CUSTOM_PATTERN)
-        private val excludeNumberPattern: Pattern = Pattern.compile(EXCLUDE_NUMBER_PATTERN)
     }
 }
