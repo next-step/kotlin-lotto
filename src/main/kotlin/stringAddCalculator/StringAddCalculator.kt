@@ -6,6 +6,7 @@ object StringAddCalculator {
     private const val ZERO = 0
     private const val NEGATIVE_NUMBER_THROW_MESSAGE = "can not use nagative number"
     private val delimiters = mutableListOf(",", ":")
+    private val regex = Regex(CUSTOM_DELIMITER)
 
     fun add(text: String): Int {
         if (text.isBlank()) return ZERO
@@ -16,16 +17,13 @@ object StringAddCalculator {
     }
 
     private fun getTargetText(text: String): String {
-        return Regex(CUSTOM_DELIMITER).find(text)?.let {
+        return regex.find(text)?.let {
             delimiters.add(it.groupValues[1])
             it.groupValues[2]
         } ?: text
     }
 
-    private fun getNumbers(
-        targetText: String,
-        delimiters: MutableList<String>
-    ): List<Int> {
+    private fun getNumbers(targetText: String, delimiters: MutableList<String>): List<Int> {
         val strList = targetText.split(*delimiters.toTypedArray())
         return toIntList(strList)
     }
