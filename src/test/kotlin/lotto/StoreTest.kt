@@ -53,4 +53,8 @@ class StoreTest {
 
         Assertions.assertThat(winnerHistory.contains(Prize.FIRST)).isTrue()
     }
+
+    @Test
+    fun `수익률 조회`() {
+    }
 }
