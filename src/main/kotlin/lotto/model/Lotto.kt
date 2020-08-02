@@ -1,3 +1,9 @@
 package lotto.model
 
-data class Lotto(val numbers: List<Int>)
+data class Lotto(var numbers: MutableList<Int>) {
+    fun add(number: Int) {
+        if (numbers.none { it == number }) {
+            numbers.add(number)
+        }
+    }
+}
