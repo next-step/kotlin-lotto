@@ -17,8 +17,8 @@ class LottoMaker {
     }
 
     companion object {
-        private const val LOTTO_NUMBER_RANGE = 45
-        private const val LOTTO_NUMBER_TOTAL_COUNT = 6
+        const val LOTTO_NUMBER_RANGE = 45
+        const val LOTTO_NUMBER_TOTAL_COUNT = 6
         private const val TO_POSITIVE_NUMBER = 1
     }
 }

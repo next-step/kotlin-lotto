@@ -10,4 +10,6 @@ fun main() {
 
     ResultView.printLottoCount(lottos)
     ResultView.printLottos(lottos)
+
+    val winnerLotto = InputView.getWinnerLotto()
 }
