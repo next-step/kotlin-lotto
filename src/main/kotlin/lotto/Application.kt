@@ -19,5 +19,8 @@ object Application {
         val winningNumbers = InputView.lastWinningNumbers()
 
         lottos.isInWinningNumber(winningNumbers)
+
+        ResultView.showWinningResult(lottos)
+        ResultView.showWinningRank()
     }
 }

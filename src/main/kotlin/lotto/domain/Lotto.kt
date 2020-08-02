@@ -13,6 +13,8 @@ class Lotto() {
         winningCount = numbers.filter {
             winningNumber.contains(it)
         }.count()
+
+        Statistics.countRank(winningCount)
     }
 
     companion object {
