@@ -1,5 +1,5 @@
 package calculator.presentation
 
-class ResultView {
+object ResultView {
     fun show(sum: Int) = print(sum)
 }

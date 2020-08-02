@@ -1,6 +1,6 @@
 package calculator.presentation
 
-class InputView {
+object InputView {
     fun inputString(): String? {
         return readLine()
     }
