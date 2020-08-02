@@ -1,11 +1,11 @@
 package lotto.domain
 
 class Lotto(private val money: Int, candidateNumbers: List<String>) {
-    val list = makeList(money, candidateNumbers)
+    val amount = money / 1000
+    val list = makeList(candidateNumbers)
 
-    private fun makeList(money: Int, candidateNumbers: List<String>): List<SixNumbers> {
+    private fun makeList(candidateNumbers: List<String>): List<SixNumbers> {
         val list = mutableListOf<SixNumbers>()
-        val amount = money / 1000
         for (time in 1..amount) {
             val shuffleNumbers = candidateNumbers.shuffled()
             list.add(SixNumbers(shuffleNumbers))
