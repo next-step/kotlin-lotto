@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class CalculatorTest {
     private lateinit var calculator: Calculator
@@ -11,6 +13,13 @@ class CalculatorTest {
     @BeforeEach
     fun setUp() {
         calculator = Calculator()
+    }
+
+    @DisplayName(value = "','나 ':' 구분자가 포함된 알맞은 값을 입력했을 때 숫자의 합을 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3", "1:2,3", "1:2:3"])
+    fun `when correct value is input then return correct result`(input: String) {
+        assertThat(calculator.add(input)).isEqualTo(6)
     }
 
     @DisplayName(value = "공백이 입력되면 0을 반환한다.")
