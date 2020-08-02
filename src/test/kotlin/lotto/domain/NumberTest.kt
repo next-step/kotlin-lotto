@@ -31,4 +31,11 @@ class NumberTest {
             Number(null)
         }.isInstanceOf(NumberFormatException::class.java).hasMessageContaining("공백값과 null값은 가질수 없습니다.")
     }
+
+    @Test
+    fun can_not_has_string() {
+        assertThatThrownBy {
+            Number("test")
+        }.isInstanceOf(NumberFormatException::class.java).hasMessageContaining("숫자 이외의 값은 가질수 없습니다.")
+    }
 }
