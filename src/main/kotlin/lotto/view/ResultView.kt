@@ -21,7 +21,10 @@ object ResultView {
         println("---------")
 
         Win.values().filter { hasPrize(it.prize) }.forEach { win ->
-            val resultSentence = "${win.matchNumber}개 일치(${win.prize}원)- ${result.filter { it.win == win }.size}개"
+            val infoMsg = if (win.matchBonusNumber == HAS_BONUS_NUMBER) ", 보너스 볼 일치" else ""
+
+            val resultSentence =
+                "${win.matchNumber}개 일치${infoMsg}(${win.prize}원)- ${result.filter { it.win == win }.size}개"
 
             println(resultSentence)
         }
