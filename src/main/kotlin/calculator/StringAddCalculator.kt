@@ -31,8 +31,3 @@ class StringAddCalculator {
         private val pattern = "^//(.)\n(.*)$".toRegex()
     }
 }
-
-data class Token(
-    private val delimiter: String,
-    private val expression: String
-)
