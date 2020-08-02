@@ -4,12 +4,12 @@ class Number(string: String) {
     private val number = string.toInt()
 
     init {
-        checkMinus()
+        checkMinusAndZero()
     }
 
-    private fun checkMinus() {
-        if (number < 0) {
-            throw RuntimeException("음수 값은 입력하면 안됩니다.")
+    private fun checkMinusAndZero() {
+        if (number <= 0) {
+            throw RuntimeException("0보다 작은값은 입력하면 안됩니다.")
         }
     }
 }
