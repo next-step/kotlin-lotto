@@ -29,17 +29,17 @@ fun customDelimeter(string: String): String {
 
 class Number(val number: String) {
 
-    companion object {
-        const val SIMPLE_DELIMITER = ",|:"
-        val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
-        val NUMERIC_REGEX = Regex("[0-9]")
-        val DELIMITER_REGEX = Regex("//(.)\n(.*)")
-    }
-
     fun isNatural(): Boolean {
         if (NUMERIC_REGEX.matches(number)) {
             return true
         }
         throw IllegalArgumentException("숫자가 아닙니다")
+    }
+
+    companion object {
+        const val SIMPLE_DELIMITER = ",|:"
+        val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
+        val NUMERIC_REGEX = Regex("[0-9]")
+        val DELIMITER_REGEX = Regex("//(.)\n(.*)")
     }
 }
