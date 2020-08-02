@@ -3,7 +3,11 @@ package lotto
 class LottoShop(
     private val lottoTicketGenerator: LottoTicketGenerateStrategy
 ) {
-    private val luckyLottoTicket = lottoTicketGenerator.createAutoTicket()
+    private lateinit var luckyLottoTicket: LottoTicket
+
+    fun setLuckyLottoNumbers(numbers: List<Int>) {
+        luckyLottoTicket = lottoTicketGenerator.createManualTicket(numbers)
+    }
 
     fun getAutoTickets(money: Int): List<LottoTicket> {
         return IntRange(1, getTicketCount(money))

@@ -14,4 +14,8 @@ class LottoTicketGenerator : LottoTicketGenerateStrategy {
             .subList(0, LottoTicket.LOTTO_NUMBER_COUNT)
             .let { LottoTicket(it) }
     }
+
+    override fun createManualTicket(numbers: List<Int>): LottoTicket {
+        return LottoTicket(numbers.map { LottoNumber(it) })
+    }
 }

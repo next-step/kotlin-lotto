@@ -8,7 +8,7 @@ class EarnRatioTest {
     @Test
     fun `수익률을 제대로 계산하는지 확인`() {
         // given
-        val useMoney = 14000L
+        val useMoney = 14000
         val results = listOf(LottoResult.FOURTH)
 
         val expectedRatio = 5000.toDouble() / 14000

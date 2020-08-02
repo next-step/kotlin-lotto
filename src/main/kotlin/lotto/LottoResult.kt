@@ -2,7 +2,7 @@ package lotto
 
 enum class LottoResult(
     val prize: Long,
-    private val matchCount: Int
+    val matchCount: Int
 ) {
     FIRST(2_000_000_000L, 6),
     SECOND(1_500_000L, 5),
