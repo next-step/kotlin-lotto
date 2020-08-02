@@ -1,14 +1,17 @@
 package calculator
 
+import java.util.regex.Pattern
+
 private const val COMMA = ","
 private const val COLON = ":"
 private const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
 private const val NOT_ALLOW_LETTER_OR_NEGATIVE = "숫자 이외의 값 또는 음수 입력 불가"
+private val customRegex : Regex = CUSTOM_PATTERN.toRegex()
 
 object InputParser {
 
     fun parse(baseText: String): List<Int> {
-        val result = CUSTOM_PATTERN.toRegex().find(baseText)
+        val result = customRegex.find(baseText)
         var text = baseText
         var customDelimiter = COMMA
 
@@ -29,9 +32,9 @@ object InputParser {
 
     private fun checkIllegalToken(tokens: List<String>) {
         if (tokens.any {
-                it.toIntOrNull() == null ||
-                    it.toInt() < 0
-            }
+            it.toIntOrNull() == null ||
+                it.toInt() < 0
+        }
         ) {
             throw RuntimeException(NOT_ALLOW_LETTER_OR_NEGATIVE)
         }
