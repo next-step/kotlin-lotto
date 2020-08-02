@@ -2,7 +2,7 @@ package lotto.view
 
 object InputView {
 
-    val NUMERIC_REGEX = Regex("[0-9]")
+    val NUMERIC_REGEX = Regex("[0-9]*")
 
     fun purchasePrice(): Int {
 

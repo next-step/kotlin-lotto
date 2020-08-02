@@ -15,6 +15,6 @@ class BuyerTest {
         ]
     )
     fun `구매 금액에 따른 로또 갯수 확인`(price: Int, expected: Int) {
-        assertThat(Buyer(price).perchaseCount).isEqualTo(expected)
+        assertThat(Buyer(price).purchaseCount).isEqualTo(expected)
     }
 }
