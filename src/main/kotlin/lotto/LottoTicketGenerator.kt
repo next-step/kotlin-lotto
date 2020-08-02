@@ -1,6 +1,6 @@
 package lotto
 
-class LottoTicketGenerator : RandomLottoTicketGenerator {
+class LottoTicketGenerator : LottoTicketGenerateStrategy {
 
     private val lottoNumbers = createAllLottoNumbers()
 
@@ -9,7 +9,7 @@ class LottoTicketGenerator : RandomLottoTicketGenerator {
             .map { LottoNumber(it) }
     }
 
-    override fun createRandomTicket(): LottoTicket {
+    override fun createAutoTicket(): LottoTicket {
         return lottoNumbers.shuffled()
             .subList(0, LottoTicket.LOTTO_NUMBER_COUNT)
             .let { LottoTicket(it) }

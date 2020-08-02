@@ -3,7 +3,7 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class RandomLottoTicketGeneratorTest {
+class LottoTicketGenerateStrategyTest {
 
     @Test
     fun `원하는 로또 번호를 가지는 티켓을 발급하는지 확인`() {
@@ -17,14 +17,14 @@ class RandomLottoTicketGeneratorTest {
             LottoNumber(6)
         )
         val expectedLottoTicket = LottoTicket(lottoNumbers)
-        val randomLottoTicketGenerator = object : RandomLottoTicketGenerator {
-            override fun createRandomTicket(): LottoTicket {
+        val randomLottoTicketGenerator = object : LottoTicketGenerateStrategy {
+            override fun createAutoTicket(): LottoTicket {
                 return expectedLottoTicket
             }
         }
 
         // then
-        assertThat(randomLottoTicketGenerator.createRandomTicket())
+        assertThat(randomLottoTicketGenerator.createAutoTicket())
             .isEqualTo(expectedLottoTicket)
     }
 }
