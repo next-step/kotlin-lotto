@@ -18,7 +18,7 @@ class StringCalculatorTest {
 
     @DisplayName(value = "1개의 숫자 입력할 경우, 그대로 반환")
     @ParameterizedTest
-    @ValueSource(strings = ["3", "4", "5"])
+    @ValueSource(strings = ["3"])
     fun inputOnlyOneString(text: String) {
         assertThat(StringCalculator.sumString(listOf(text))).isSameAs(text.toInt())
     }
@@ -33,7 +33,7 @@ class StringCalculatorTest {
     @DisplayName(value = "음수 및 숫자가 아닌 경우, RuntimeException")
     @ParameterizedTest
     @ValueSource(strings = ["-2", "d"])
-    fun negative(text: String) {
+    fun inputNegativeAndNonInteger(text: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy {
                 StringCalculator.sumString(listOf(text))
