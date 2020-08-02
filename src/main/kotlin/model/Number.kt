@@ -1,6 +1,8 @@
 package model
 
 class Number(val number: Int) {
+    constructor(numberString: String) : this(numberString.toInt())
+
     init {
         if (!NUMBER_REGEX.matches(number.toString())) {
             throw IllegalArgumentException("only input number")

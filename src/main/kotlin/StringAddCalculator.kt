@@ -1,3 +1,5 @@
+import model.Number
+
 class StringAddCalculator {
     fun add(text: String?): Int {
         if (text.isNullOrEmpty()) {
@@ -7,25 +9,21 @@ class StringAddCalculator {
         var numberList = when {
             isBasicRegex(text) -> { basicCase(text) }
             isCustomRegex(text) -> { customCase(text) }
-            else -> { return model.Number(text.toInt()).number }
+            else -> { return Number(text).number }
         }
         return Calculator.sum(numberList)
-    }
-
-    private fun convertToNumber(text: String): Int {
-        return text.toInt()
     }
 
     private fun customCase(text: String): List<model.Number> {
         val list = text.split(CUSTOM_DELIMITER)
         val delimiter = getDelimiter(list)
         val contents = getCustomDelimiterContentsList(list, delimiter)
-        return contents.map { model.Number(convertToNumber(it)) }
+        return contents.map { Number(it) }
     }
 
     private fun basicCase(text: String): List<model.Number> {
         val list = text.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
-        return list.map { model.Number(convertToNumber(it)) }
+        return list.map { Number(it) }
     }
 
     private fun getCustomDelimiterContentsList(

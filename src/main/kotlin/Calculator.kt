@@ -1,3 +1,5 @@
+import model.Number
+
 object Calculator {
-    fun sum(list: List<model.Number>) = list.sumBy { it.number }
+    fun sum(list: List<Number>) = list.sumBy { it.number }
 }
