@@ -43,6 +43,7 @@ class NumberTest {
     @ParameterizedTest
     @MethodSource("generateParsingTestData")
     fun `구분자를 기준으로 문자열 파싱`(string: String, delimiter: String, expected: List<String>) {
+        val parse = parse(string, delimiter)
         assertThat(parse(string, delimiter)).isEqualTo(expected)
     }
 
@@ -65,8 +66,8 @@ class NumberTest {
         @JvmStatic
         fun generateParsingTestData(): List<Arguments> {
             return listOf(
-                Arguments.of("1;2;3", ";", listOf("1", "2", "3")),
-                Arguments.of("12*13*14", "*", listOf("12", "13", "14")),
+                Arguments.of("//;\n1;2;3", ";", listOf("1", "2", "3")),
+                Arguments.of("//*\n12*13*14", "*", listOf("12", "13", "14")),
                 Arguments.of("1,2:3", ",|:", listOf("1", "2", "3"))
             )
         }
