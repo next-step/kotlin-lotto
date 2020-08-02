@@ -1,5 +1,10 @@
 package calculator.infrastructure
 
+const val SIMPLE_DELIMITER = ",|:"
+val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
+val NUMERIC_REGEX = Regex("[0-9]")
+val DELIMITER_REGEX = Regex("//(.)\n(.*)")
+
 fun validate(string: String?): String {
     if (string.isNullOrBlank()) {
         return "0"
@@ -8,13 +13,13 @@ fun validate(string: String?): String {
 }
 
 fun matchResult(string: String): MatchResult? {
-    return Number.DELIMITER_REGEX.find(string)
+    return DELIMITER_REGEX.find(string)
 }
 
 fun parse(string: String, customDelimiter: String): List<String> {
 
-    if (customDelimiter == Number.SIMPLE_DELIMITER) {
-        return string.split(Number.SIMPLE_DELIMITER_REGEX)
+    if (customDelimiter == SIMPLE_DELIMITER) {
+        return string.split(SIMPLE_DELIMITER_REGEX)
     }
     return matchResult(string)!!.groupValues[2].split(customDelimiter)
 }
@@ -24,7 +29,7 @@ fun customDelimeter(string: String): String {
     if (matchResult != null && matchResult.groupValues[1].isNotBlank()) {
         return matchResult.groupValues[1]
     }
-    return Number.SIMPLE_DELIMITER
+    return SIMPLE_DELIMITER
 }
 
 class Number(val number: String) {
@@ -34,12 +39,5 @@ class Number(val number: String) {
             return true
         }
         throw IllegalArgumentException("숫자가 아닙니다")
-    }
-
-    companion object {
-        const val SIMPLE_DELIMITER = ",|:"
-        val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
-        val NUMERIC_REGEX = Regex("[0-9]")
-        val DELIMITER_REGEX = Regex("//(.)\n(.*)")
     }
 }
