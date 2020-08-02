@@ -1,6 +1,7 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -39,5 +40,14 @@ class CalculatorTest {
     @Test
     fun `when number is entered as a string then return the number`() {
         assertThat(calculator.add("3")).isEqualTo(3)
+    }
+
+    @DisplayName(value = "음수를 입력하면 exception이 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "1:-2:3", "//;\n-1;2;3"])
+    fun `when number is negative then throw runtime exception`(value: String) {
+        assertThatThrownBy { calculator.add(value) }
+            .isInstanceOf(RuntimeException::class.java)
+            .hasMessage("음수는 입력할 수 없습니다.")
     }
 }

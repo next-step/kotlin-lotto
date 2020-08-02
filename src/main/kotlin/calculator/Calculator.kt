@@ -21,7 +21,15 @@ class Calculator {
             false -> value.split(COLON_DELIMITER, COMMA_DELIMITER).map(String::toInt)
         }
 
+        validateNegative(numberList)
+
         return numberList.sum()
+    }
+
+    private fun validateNegative(numberList: List<Int>) {
+        if (numberList.any { it < 0 }) {
+            throw RuntimeException("음수는 입력할 수 없습니다.")
+        }
     }
 
     private fun getNumbersByCustomDelimiter(value: String): List<Int> {
