@@ -16,6 +16,6 @@ object Application {
         val lottos = Lottos.of(purchaseCount)
         ResultView.showPurchasedLottos(lottos.lottos)
 
-
+        val winningNumbers = InputView.lastWinningNumbers()
     }
 }
