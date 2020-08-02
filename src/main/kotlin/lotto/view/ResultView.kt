@@ -20,4 +20,8 @@ object ResultView {
         println("${Prize.SECOND.matchCount}개 일치 (${Prize.SECOND.price}원) - ${groupedPrizeByMatchCount[Prize.SECOND.matchCount]?.size ?: 0}개")
         println("${Prize.FIRST.matchCount}개 일치 (${Prize.FIRST.price}원) - ${groupedPrizeByMatchCount[Prize.FIRST.matchCount]?.size ?: 0}개")
     }
+
+    fun printRateOfReturn(rateOfReturn: Double) {
+        println("총 수익률은 ${rateOfReturn}입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    }
 }
