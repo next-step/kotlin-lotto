@@ -16,14 +16,18 @@ class Calculator {
             value.matches(INTEGER_REGEX) -> return value.toInt()
         }
 
-        val numberList: List<Int> = when (findCustomDelimiter(value)) {
-            true -> getNumbersByCustomDelimiter(value)
-            false -> value.split(COLON_DELIMITER, COMMA_DELIMITER).map(String::toInt)
-        }
+        val numberList: List<Int> = getNumbers(value)
 
         validateNegative(numberList)
 
         return numberList.sum()
+    }
+
+    private fun getNumbers(value: String): List<Int> {
+        return when (findCustomDelimiter(value)) {
+            true -> getNumbersByCustomDelimiter(value)
+            false -> value.split(COLON_DELIMITER, COMMA_DELIMITER).map(String::toInt)
+        }
     }
 
     private fun validateNegative(numberList: List<Int>) {
