@@ -1,7 +1,7 @@
 package lotto.domain
 
-class Number(string: String?) {
-    private val number = changeInt(string)
+data class Number(val string: String?) {
+    val number = changeInt(string)
 
     init {
         checkRange()

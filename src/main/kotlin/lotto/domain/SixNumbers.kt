@@ -1,7 +1,7 @@
 package lotto.domain
 
 class SixNumbers(candidateNumbers: List<String>) {
-    val list = makeList(candidateNumbers)
+    val list = sortList(makeList(candidateNumbers))
 
     private fun makeList(candidateNumbers: List<String>): List<Number> {
         val list = mutableListOf<Number>()
@@ -9,5 +9,9 @@ class SixNumbers(candidateNumbers: List<String>) {
             list.add(Number(candidateNumbers[position]))
         }
         return list
+    }
+
+    private fun sortList(list: List<Number>): List<Number> {
+        return list.sortedBy { it.number }
     }
 }

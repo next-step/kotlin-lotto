@@ -22,4 +22,14 @@ class SixNumbersTest {
 
         assertThat(result).isEqualTo(6)
     }
+
+    @Test
+    fun sort_low_to_high() {
+        val list = listOf("3", "2", "20", "10", "17", "40")
+        val testList = listOf(Number("2"), Number("3"), Number("10"), Number("17"), Number("20"), Number("40"))
+
+        val sixNumbers = SixNumbers(list)
+
+        assertThat(sixNumbers.list).isEqualTo(testList)
+    }
 }
