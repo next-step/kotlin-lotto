@@ -18,7 +18,7 @@ object Application {
 
     private fun tryAdd(): Int = try {
         calculator.add(InputView.readExpression())
-    } catch (e: Exception) {
+    } catch (e: RuntimeException) {
         ResultView.printErr()
         -1
     }
