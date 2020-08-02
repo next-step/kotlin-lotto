@@ -28,7 +28,7 @@ internal class ExpressionTest {
         assertThat(Expression(text).isValid()).isFalse()
     }
 
-    @DisplayName(value = "커스텀 구분자와 식에 포함된 구분자가 일치하지 않을 경우 false 반환")
+    @DisplayName(value = "커스텀 구분자가 유효하지 않을 경우 false 반환")
     @ParameterizedTest
     @ValueSource(strings = ["//;;\n1;2;3;4"])
     fun invalidDelimiter(text: String) {
