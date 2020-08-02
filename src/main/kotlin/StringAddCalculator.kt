@@ -1,8 +1,6 @@
 import java.lang.RuntimeException
 
 class StringAddCalculator {
-    private val calculator = Calculator()
-
     fun add(text: String?): Int {
         if (text.isNullOrEmpty()) {
             return 0
@@ -28,12 +26,12 @@ class StringAddCalculator {
         val list = text.split(CUSTOM_DELIMITTER)
         val delimiter = getDelimiter(list)
         val contents = getCustomDelimiterContentsList(list, delimiter)
-        return calculator.sum(contents)
+        return Calculator.sum(contents)
     }
 
     private fun basicCase(text: String): Int {
         val list = text.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
-        return calculator.sum(list)
+        return Calculator.sum(list)
     }
 
     private fun isPositiveNumber(text: String) = NUMBER_REGEX.matches(text) && text.toInt() > 0
