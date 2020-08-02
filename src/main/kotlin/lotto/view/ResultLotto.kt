@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class WinLotto(private val index: Int, private val money: Int, var count: Int = 0) {
+enum class ResultLotto(private val index: Int, private val money: Int, var count: Int = 0) {
     ZERO(0, 0),
     ONE(1, 0),
     TWO(2, 0),
@@ -11,10 +11,10 @@ enum class WinLotto(private val index: Int, private val money: Int, var count: I
 
     companion object {
         fun plusCount(index: Int) {
-            WinLotto.values()[index].count++
+            values()[index].count++
         }
 
-        fun resultList() = WinLotto.values().filter { it.index >= 1 }.toList()
+        fun resultList() = values().filter { it.index >= 0 }.toList()
     }
 
     override fun toString(): String {
