@@ -25,7 +25,7 @@ class StringAddCalculator {
     }
 
     private fun customCase(text: String): Int {
-        val list = text.split(CUSTOM_DELIMITTER)
+        val list = text.split(CUSTOM_DELIMITER)
         val delimiter = getDelimiter(list)
         val contents = getCustomDelimiterContentsList(list, delimiter)
         val numberList = contents.map { model.Number(convertToNumber(it)) }
@@ -47,13 +47,13 @@ class StringAddCalculator {
 
     private fun getDelimiter(list: List<String>) = list.first().replace("//", "")
     private fun isBasicRegex(text: String) = text.contains(BASIC_DELIMITER_COMMA) || text.contains(BASIC_DELIMITER_COLON)
-    private fun isCustomRegex(text: String) = CUSTOM_DELIMITTER_REGEX.matches(text)
+    private fun isCustomRegex(text: String) = CUSTOM_DELIMITER_REGEX.matches(text)
 
     companion object {
         const val BASIC_DELIMITER_COMMA = ","
         const val BASIC_DELIMITER_COLON = ":"
-        const val CUSTOM_DELIMITTER = "\n"
-        val CUSTOM_DELIMITTER_REGEX = Regex(pattern = "//.\n.*")
+        const val CUSTOM_DELIMITER = "\n"
+        val CUSTOM_DELIMITER_REGEX = Regex(pattern = "//.\n.*")
         val NUMBER_REGEX = Regex(pattern = "^-?[0-9]\\d*(\\.\\d+)?\$")
     }
 }
