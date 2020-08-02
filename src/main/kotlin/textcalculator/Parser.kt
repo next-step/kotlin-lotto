@@ -14,14 +14,12 @@ class Parser {
             ) { it }
         )
 
-    val regexCustomPrefix = REGEX_STRING_CUSTOM_PREFIX
-
     fun String.split(): List<String> {
         return split(regexDelimiters)
     }
 
     fun checkIfCustomPrefix(text: String): String {
-        val matches = Pattern.compile(regexCustomPrefix).matcher(text)
+        val matches = Pattern.compile(REGEX_STRING_CUSTOM_PREFIX).matcher(text)
             .takeIf { it.matches() }
 
         matches?.group(2)
