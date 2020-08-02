@@ -1,10 +1,10 @@
 package lotto
 
 import lotto.model.Buyer
-import lotto.model.Lotto
 import lotto.model.Prize
 import lotto.model.Store
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -57,5 +57,10 @@ class StoreTest {
 
     @Test
     fun `수익률 조회`() {
+        buyer.markLotto(listOf(1, 2, 3, 7, 8, 9))
+
+        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
+
+        assertThat(store.getRateOfReturn(14_000, winnerHistory)).isEqualTo(0.35)
     }
 }
