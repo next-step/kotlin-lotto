@@ -2,11 +2,14 @@ private const val DELIMITER_PATTERN = "//(.)\\\\n"
 private const val DELIMITER_SUFFIX = "(.*)"
 private const val DELIMITER_CHARACTER_POSITION = 2
 class Calculator {
-
-    fun existDelimiter(content: String): Boolean {
-        val regex = Regex(pattern = DELIMITER_PATTERN)
-        return regex.containsMatchIn(content)
+    companion object {
+        @JvmField
+        val DEFAULT_DELIMITERS = listOf(":", ",")
+        val DEFAULT_EMPTY_LIST = listOf(0)
     }
+
+    fun existDelimiter(content: String): Boolean = Regex(pattern = DELIMITER_PATTERN).containsMatchIn(content)
+    fun addNumbers(numbers: List<Int>): Int = numbers.sum()
 
     fun getDelimiters(content: String): List<String> {
         val regex = Regex(pattern = DELIMITER_PATTERN)
@@ -19,19 +22,30 @@ class Calculator {
         return DEFAULT_DELIMITERS + find.value[DELIMITER_CHARACTER_POSITION].toString()
     }
 
-    fun splitToDelimiters(content: String, delimiters: List<String>): List<Int> {
-        if (!existDelimiter(content)) {
+    fun splitNumbersToDelimiters(content: String, delimiters: List<String>): List<Int> {
+        if (content.isNullOrEmpty()) {
+            return DEFAULT_EMPTY_LIST
+        }
+
+        if (existDelimiter(content).not()) {
             return content.split(*delimiters.toTypedArray()).map { it.toInt() }
         }
 
         val regex = Regex(pattern = DELIMITER_PATTERN + DELIMITER_SUFFIX)
-        val subContent = regex.matchEntire(content)!!
+        val delimiterRemainContent = regex.matchEntire(content)!!
 
-        return subContent.groupValues.last().split(*delimiters.toTypedArray()).map { it.toInt() }
+        return delimiterRemainContent.groupValues.last().split(*delimiters.toTypedArray()).map { it.toInt() }
     }
+}
 
-    companion object {
-        @JvmField
-        val DEFAULT_DELIMITERS = listOf(":", ",")
-    }
+fun main() {
+    // 입력
+    val inputStr = readLine()!!
+
+    val calculator = Calculator()
+
+    val delimiters = calculator.getDelimiters(inputStr)
+    val numbers = calculator.splitNumbersToDelimiters(inputStr, delimiters)
+    val sum = calculator.addNumbers(numbers)
+    println("sum:$sum")
 }
