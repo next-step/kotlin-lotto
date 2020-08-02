@@ -1,16 +1,15 @@
 package calculator
 
-class InputParser(private val text: String) {
-    var numbersParsed: List<Int>
-        private set
+private const val COMMA = ","
+private const val COLON = ":"
+private const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
+private const val NOT_ALLOW_LETTER_OR_NEGATIVE = "숫자 이외의 값 또는 음수 입력 불가"
 
-    init {
-        numbersParsed = numbersFrom(text)
-    }
+object InputParser {
 
-    private fun numbersFrom(text: String): List<Int> {
-        val result = CUSTOM_PATTERN.toRegex().find(text)
-        var text = text
+    fun parse(baseText: String): List<Int> {
+        val result = CUSTOM_PATTERN.toRegex().find(baseText)
+        var text = baseText
         var customDelimiter = COMMA
 
         result?.let {
@@ -30,18 +29,11 @@ class InputParser(private val text: String) {
 
     private fun checkIllegalToken(tokens: List<String>) {
         if (tokens.any {
-            it.toIntOrNull() == null ||
-                it.toInt() < 0
-        }
+                it.toIntOrNull() == null ||
+                    it.toInt() < 0
+            }
         ) {
             throw RuntimeException(NOT_ALLOW_LETTER_OR_NEGATIVE)
         }
-    }
-
-    companion object {
-        private const val COMMA = ","
-        private const val COLON = ":"
-        private const val CUSTOM_PATTERN = "//(.)\\\\n(.*)"
-        private const val NOT_ALLOW_LETTER_OR_NEGATIVE = "숫자 이외의 값 또는 음수 입력 불가"
     }
 }

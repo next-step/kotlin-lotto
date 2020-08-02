@@ -6,7 +6,7 @@ object StringAddCalculator {
         if (text.isNullOrBlank()) return 0
 
         text?.let {
-            val numbers = InputParser(text).numbersParsed
+            val numbers = InputParser.parse(text)
             return numbers.sum()
         }
         return 0
