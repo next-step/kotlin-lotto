@@ -18,8 +18,7 @@ class InputParser(private val text: String) {
             text = result.groupValues[2]
         }
 
-        val numbers = splitFrom(text, customDelimiter)
-        return numbers
+        return splitFrom(text, customDelimiter)
     }
 
     private fun splitFrom(text: String, custom: String): List<Int> {
