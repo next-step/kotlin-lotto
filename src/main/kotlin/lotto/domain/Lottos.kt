@@ -8,6 +8,12 @@ class Lottos() {
         this.lottos = lottos
     }
 
+    fun isInWinningNumber(winningNumbers: List<Int>) {
+        lottos.map {
+            it.countWinningNumber(winningNumbers)
+        }
+    }
+
     companion object {
         fun of(purchaseCount: Int): Lottos {
 

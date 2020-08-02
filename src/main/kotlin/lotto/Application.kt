@@ -17,5 +17,7 @@ object Application {
         ResultView.showPurchasedLottos(lottos.lottos)
 
         val winningNumbers = InputView.lastWinningNumbers()
+
+        lottos.isInWinningNumber(winningNumbers)
     }
 }

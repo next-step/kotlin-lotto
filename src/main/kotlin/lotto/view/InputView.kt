@@ -12,7 +12,7 @@ object InputView {
         return price
     }
 
-    fun lastWinningNumbers(): List<String> {
+    fun lastWinningNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val text = readLine()
         var winningNumbers = validateWinningNumber(text)
@@ -22,7 +22,7 @@ object InputView {
             winningNumbers = validateWinningNumber(readLine())
         }
 
-        return winningNumbers
+        return winningNumbers.map { it.toInt() }
     }
 
     fun validateWinningNumber(numbers: String?): List<String>? {
