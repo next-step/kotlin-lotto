@@ -11,7 +11,7 @@ import calculator.presentation.ResultView
 object Application {
     @JvmStatic
     fun main(args: Array<String>) {
-        val inputString = InputView().inputString()
+        val inputString = InputView.inputString()
 
         val validatedString = validate(inputString)
         val customDelimiter = customDelimeter(validatedString)
@@ -19,6 +19,6 @@ object Application {
         val numbers = list.filter { Number(it).isNatural() }.map { it.toInt() }
         val sum = Calculator().sum(numbers)
 
-        ResultView().show(sum)
+        ResultView.show(sum)
     }
 }
