@@ -13,25 +13,26 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @EmptySource
     fun `빈 문자열을 입력할 경우 0을 반환해야 한다`(text: String) {
-        assertThat(calculator.add(text)).isZero()
+        val actual = calculator.add(text).getNumber()
+        assertThat(actual).isZero()
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["5"])
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String) {
-        assertThat(calculator.add(text)).isEqualTo(text.toInt())
+        assertThat(calculator.add(text).getNumber()).isEqualTo(text.toInt())
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["3,5"])
     fun `쉼표로 구분된 문자열을 더한 값을 리턴한다`(text: String) {
-        assertThat(calculator.add(text)).isEqualTo(8)
+        assertThat(calculator.add(text).getNumber()).isEqualTo(8)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["1,2:3"])
     fun `구분자를 컴마 이외에 콜론을 사용할 수 있다`(text: String) {
-        assertThat(calculator.add(text)).isEqualTo(6)
+        assertThat(calculator.add(text).getNumber()).isEqualTo(6)
     }
 
     @Test
@@ -45,6 +46,6 @@ class StringAddCalculatorTest {
     @ValueSource(strings = ["//;\\n1;2,3"])
     fun `커스텀 구분자를 지정할 수 있다`(text: String) {
         // "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)
-        assertThat(calculator.add(text)).isEqualTo(6)
+        assertThat(calculator.add(text).getNumber()).isEqualTo(6)
     }
 }

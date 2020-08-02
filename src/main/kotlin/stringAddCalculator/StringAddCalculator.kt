@@ -3,15 +3,14 @@ package stringAddCalculator
 object StringAddCalculator {
     private const val CUSTOM_DELIMITER =
         """//(.)\\n(.*)"""
-    private const val ZERO = 0
-    private const val NEGATIVE_NUMBER_THROW_MESSAGE = "can not use nagative number"
+    const val ZERO = 0
     private val delimiters = mutableListOf(",", ":")
     private val regex = Regex(CUSTOM_DELIMITER)
 
-    fun add(text: String): Int {
-        if (text.isBlank()) return ZERO
-        if (text.length == 1) return text.toInt()
-        var targetText = getTargetText(text)
+    fun add(text: String): Number {
+        if (text.isBlank()) return Number(ZERO)
+        if (text.length == 1) return Number(text.toInt())
+        val targetText = getTargetText(text)
         val numbers = getNumbers(targetText)
         return getTotal(numbers)
     }
@@ -23,20 +22,16 @@ object StringAddCalculator {
         } ?: text
     }
 
-    private fun getNumbers(targetText: String): List<Int> {
+    private fun getNumbers(targetText: String): List<Number> {
         val strList = targetText.split(*delimiters.toTypedArray())
         return toIntList(strList)
     }
 
-    private fun toIntList(values: List<String>): List<Int> {
+    private fun toIntList(values: List<String>): List<Number> {
         return values.map { value ->
-            val number = value.toInt()
-            if (isNegativeNumber(number)) throw RuntimeException("$NEGATIVE_NUMBER_THROW_MESSAGE $number")
-            number
+            Number(value.toInt())
         }
     }
 
-    private fun isNegativeNumber(number: Int) = number < ZERO
-
-    private fun getTotal(texts: List<Int>) = texts.reduce { total, number -> total + number }
+    private fun getTotal(texts: List<Number>) = texts.reduce { total, number -> total.plus(number) }
 }
