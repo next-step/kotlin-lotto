@@ -4,7 +4,7 @@ class Number(string: String?) {
     private val number = changeInt(string)
 
     init {
-        checkMinusAndZero()
+        checkRange()
     }
 
     private fun changeInt(string: String?): Int {
@@ -23,9 +23,9 @@ class Number(string: String?) {
         }
     }
 
-    private fun checkMinusAndZero() {
-        if (number <= 0) {
-            throw NumberFormatException("0보다 작은값은 가질수 없습니다.")
+    private fun checkRange() {
+        if (number < 1 || number > 45) {
+            throw NumberFormatException("1~45의 값만 가질수 있습니다.")
         }
     }
 }
