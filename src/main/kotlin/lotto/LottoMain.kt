@@ -9,4 +9,5 @@ fun main() {
     val lottos = Buyer().buyLotto(money)
 
     ResultView.printLottoCount(lottos)
+    ResultView.printLottos(lottos)
 }
