@@ -2,32 +2,20 @@ package calculator
 
 class StringAddCalculator {
 
-    fun add(expression: String?): Int {
-        if (expression.isNullOrBlank()) {
-            return 0
+    @Throws(RuntimeException::class)
+    fun add(input: String?): Int {
+        if (input.isNullOrBlank()) {
+            return DEFAULT_RESULT
         }
 
-        if (expression.contains("-")) {
-            throw RuntimeException()
+        val expression = Expression(input)
+        return when {
+            expression.isValid() -> expression.extractTokens().map { it.toIntOrNull() ?: 0 }.sum()
+            else -> throw RuntimeException()
         }
-
-        val parsedExpression = parseExpression(expression)
-        return extractTokens(expression, parsedExpression).map { it.toIntOrNull() ?: 0 }.sum()
     }
 
-    private fun extractTokens(origin: String, parsedExpression: List<String>) =
-        if (parsedExpression.isEmpty()) {
-            origin.split(*DELIMITER)
-        } else {
-            val customDelimiter = parsedExpression.first()[2]
-            parsedExpression.last().split(customDelimiter)
-        }
-
-    private fun parseExpression(expression: String): List<String> =
-        pattern.find(expression)?.groupValues ?: emptyList()
-
     companion object {
-        private val DELIMITER = arrayOf(",", ":")
-        private val pattern = "^//(.)\n(.*)$".toRegex()
+        private const val DEFAULT_RESULT = 0
     }
 }

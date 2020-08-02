@@ -13,4 +13,18 @@ internal class ExpressionTest {
     fun extractTokens(text: String) {
         assertThat(Expression(text).extractTokens()).contains("1", "2", "5", "6")
     }
+
+    @DisplayName(value = "양의 정수와 ,로 구성된 식이면 true 를 반환한다")
+    @ParameterizedTest
+    @ValueSource(strings = ["1, 2, 5, 6"])
+    fun isValid(text: String) {
+        assertThat(Expression(text).isValid()).isTrue()
+    }
+
+    @DisplayName(value = "음수가 포함된 식이면 false 를 반환한다")
+    @ParameterizedTest
+    @ValueSource(strings = ["1, 2, 5, -6"])
+    fun isInvalid(text: String) {
+        assertThat(Expression(text).isValid()).isFalse()
+    }
 }
