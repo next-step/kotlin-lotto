@@ -3,7 +3,6 @@ package lotto
 import lotto.model.Buyer
 import lotto.model.Prize
 import lotto.model.Store
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -25,7 +24,7 @@ class StoreTest {
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
-        Assertions.assertThat(winnerHistory.contains(Prize.FOURTH)).isTrue()
+        assertThat(winnerHistory.contains(Prize.FOURTH)).isTrue()
     }
 
     @Test
@@ -34,7 +33,7 @@ class StoreTest {
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
-        Assertions.assertThat(winnerHistory.contains(Prize.THIRD)).isTrue()
+        assertThat(winnerHistory.contains(Prize.THIRD)).isTrue()
     }
 
     @Test
@@ -43,7 +42,7 @@ class StoreTest {
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
-        Assertions.assertThat(winnerHistory.contains(Prize.SECOND)).isTrue()
+        assertThat(winnerHistory.contains(Prize.SECOND)).isTrue()
     }
 
     @Test
@@ -52,7 +51,7 @@ class StoreTest {
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
-        Assertions.assertThat(winnerHistory.contains(Prize.FIRST)).isTrue()
+        assertThat(winnerHistory.contains(Prize.FIRST)).isTrue()
     }
 
     @Test
