@@ -22,7 +22,7 @@ class StoreTest {
     fun `5천원 당첨`() {
         buyer.markLotto(listOf(1, 2, 3, 7, 8, 9))
 
-        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
+        val winnerHistory = store.drawLottoNumber(listOf(1, 2, 3, 4, 5, 6))
 
         assertThat(winnerHistory.contains(Prize.FOURTH)).isTrue()
     }
@@ -31,7 +31,7 @@ class StoreTest {
     fun `5만원 당첨`() {
         buyer.markLotto(listOf(1, 2, 3, 4, 8, 9))
 
-        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
+        val winnerHistory = store.drawLottoNumber(listOf(1, 2, 3, 4, 5, 6))
 
         assertThat(winnerHistory.contains(Prize.THIRD)).isTrue()
     }
@@ -40,7 +40,7 @@ class StoreTest {
     fun `150만원 당첨`() {
         buyer.markLotto(listOf(1, 2, 3, 4, 5, 9))
 
-        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
+        val winnerHistory = store.drawLottoNumber(listOf(1, 2, 3, 4, 5, 6))
 
         assertThat(winnerHistory.contains(Prize.SECOND)).isTrue()
     }
@@ -49,7 +49,7 @@ class StoreTest {
     fun `20억 당첨`() {
         buyer.markLotto(listOf(1, 2, 3, 4, 5, 6))
 
-        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
+        val winnerHistory = store.drawLottoNumber(listOf(1, 2, 3, 4, 5, 6))
 
         assertThat(winnerHistory.contains(Prize.FIRST)).isTrue()
     }
@@ -58,7 +58,7 @@ class StoreTest {
     fun `수익률 조회`() {
         buyer.markLotto(listOf(1, 2, 3, 7, 8, 9))
 
-        val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
+        val winnerHistory = store.drawLottoNumber(listOf(1, 2, 3, 4, 5, 6))
 
         assertThat(store.getRateOfReturn(14_000, winnerHistory)).isEqualTo(0.35)
     }
