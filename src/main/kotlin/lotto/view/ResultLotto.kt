@@ -9,6 +9,10 @@ enum class ResultLotto(private val index: Int, private val money: Int, private v
     FIVE(5, 1500000),
     SIX(6, 2000000000);
 
+    override fun toString(): String {
+        return "${index}개 일치 (${money}원)- ${count}개\n"
+    }
+
     companion object {
         fun getFromIndex(index: Int) = values()[index]
 
@@ -19,9 +23,7 @@ enum class ResultLotto(private val index: Int, private val money: Int, private v
         fun getCount(index: Int) = getFromIndex(index).count
 
         fun resultList() = values().filter { it.index >= 0 }.toList()
-    }
 
-    override fun toString(): String {
-        return "${index}개 일치 (${money}원)- ${count}개\n"
+        fun totalIncome() = values().fold(0) { total, lotto -> total + (lotto.money * lotto.count) }
     }
 }
