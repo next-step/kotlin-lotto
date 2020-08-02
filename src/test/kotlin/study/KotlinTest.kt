@@ -1,6 +1,6 @@
 package study
 
-import lotto.domain.WinLotto
+import lotto.view.ResultLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -16,7 +16,7 @@ class KotlinTest {
 
     @Test
     fun setEnumTest() {
-        WinLotto.plusCount(0)
-        assertThat(WinLotto.ZERO.count).isEqualTo(1)
+        ResultLotto.plusCount(0)
+        assertThat(ResultLotto.getCount(0)).isEqualTo(1)
     }
 }
