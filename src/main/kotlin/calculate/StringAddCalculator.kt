@@ -8,5 +8,5 @@ fun add(input: String?): Int {
     val delimiterSetter = DelimiterSetter(input)
     val numbers = Splitter(delimiterSetter).numbers
 
-    return Adder(numbers).result
+    return numbers.sumBy { it.value }
 }

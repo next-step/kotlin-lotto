@@ -11,7 +11,10 @@ class DelimiterSetter(inputs: String) {
     }
 
     private fun getDelimiter(matchResult: MatchResult?): List<String> {
-        if (matchResult == null) return listOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
+        if (matchResult == null) return listOf(
+            DEFAULT_DELIMITER_COMMA,
+            DEFAULT_DELIMITER_COLON
+        )
 
         return listOf(matchResult.groupValues[1])
     }
