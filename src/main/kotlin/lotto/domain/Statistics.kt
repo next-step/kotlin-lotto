@@ -1,5 +1,7 @@
 package lotto.domain
 
+import kotlin.math.round
+
 object Statistics {
 
     var count_3 = 0
@@ -14,5 +16,13 @@ object Statistics {
             5 -> count_5++
             6 -> count_6++
         }
+    }
+
+    fun winningAmount(): Int {
+        return (count_3 * 5000) + (count_4 * 50000) + (count_5 * 1500000) + (count_6 * 2000000000)
+    }
+
+    fun calculateRatio(purchaseCount: Int): Double {
+        return round(winningAmount().toDouble() * 10 / (purchaseCount * 1000)) / 10
     }
 }

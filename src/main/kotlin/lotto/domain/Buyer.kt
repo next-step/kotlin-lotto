@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Buyer(val price: Int) {
+class Buyer(price: Int = 0) {
 
     val purchaseCount: Int
 

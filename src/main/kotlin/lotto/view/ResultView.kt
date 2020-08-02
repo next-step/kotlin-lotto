@@ -29,4 +29,8 @@ object ResultView {
         println("5개 일치 (1500000원)- ${Statistics.count_5}개")
         println("6개 일치 (2000000000원)- ${Statistics.count_6}개")
     }
+
+    fun showRatio(calculateRatio: Double) {
+        println("총 수익률은 ${calculateRatio}입니다.")
+    }
 }
