@@ -20,7 +20,7 @@ class Lotto() {
             return Lotto(
                 IntRange(1, 45)
                     .shuffled()
-                    .take(5)
+                    .take(6)
                     .sorted()
             )
         }

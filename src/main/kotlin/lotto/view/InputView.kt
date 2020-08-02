@@ -39,7 +39,7 @@ object InputView {
             }
         }
 
-        if (numbers.size != 5) {
+        if (numbers.size != 6) {
             println("잘못된 당첨 번호 입니다.")
             return null
         }
