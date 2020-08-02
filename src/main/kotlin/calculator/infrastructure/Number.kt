@@ -24,7 +24,7 @@ fun parse(string: String, customDelimiter: String): List<String> {
     return matchResult(string)!!.groupValues[2].split(customDelimiter)
 }
 
-fun customDelimeter(string: String): String {
+fun findCustomDelimiter(string: String): String {
     val matchResult = matchResult(string)
     if (matchResult != null && matchResult.groupValues[1].isNotBlank()) {
         return matchResult.groupValues[1]

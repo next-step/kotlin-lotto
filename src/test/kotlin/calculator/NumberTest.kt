@@ -2,7 +2,7 @@ package calculator
 
 import calculator.infrastructure.Calculator
 import calculator.infrastructure.Number
-import calculator.infrastructure.customDelimeter
+import calculator.infrastructure.findCustomDelimiter
 import calculator.infrastructure.parse
 import calculator.infrastructure.validate
 import org.assertj.core.api.Assertions.assertThat
@@ -19,7 +19,7 @@ class NumberTest {
     @ValueSource(strings = ["//;\n1;2;3"])
     fun `전체 메소드 테스트`(text: String) {
         val validatedString = validate(text)
-        val customDelimiter = customDelimeter(validatedString)
+        val customDelimiter = findCustomDelimiter(validatedString)
         val list = parse(validatedString, customDelimiter)
         val numbers = list.filter { Number(it).isNatural() }.map { it.toInt() }
         val sum = Calculator().sum(numbers)
@@ -37,7 +37,7 @@ class NumberTest {
         delimiterString = ">"
     )
     fun `커스텀 구분자 구하기`(string: String, expected: String) {
-        assertThat(customDelimeter(string)).isEqualTo(expected)
+        assertThat(findCustomDelimiter(string)).isEqualTo(expected)
     }
 
     @ParameterizedTest
