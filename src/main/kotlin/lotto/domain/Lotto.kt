@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto(money: Int, candidateNumbers: List<String>) {
+class Lotto(private val money: Int, candidateNumbers: List<String>) {
     val list = makeList(money, candidateNumbers)
 
     private fun makeList(money: Int, candidateNumbers: List<String>): List<SixNumbers> {
@@ -13,7 +13,18 @@ class Lotto(money: Int, candidateNumbers: List<String>) {
         return list
     }
 
-    fun checkCorrect(corrects: SixNumbers) {
+    fun result(corrects: SixNumbers): List<Double> {
+        checkCorrect(corrects)
+        val threeMatch = list.filter { it.correctNumber == 3 }.size.toDouble()
+        val fourMatch = list.filter { it.correctNumber == 4 }.size.toDouble()
+        val fiveMatch = list.filter { it.correctNumber == 5 }.size.toDouble()
+        val sixMatch = list.filter { it.correctNumber == 6 }.size.toDouble()
+        val rateOfReturn =
+            (threeMatch * THREE_MONEY + fourMatch * FOUR_MONEY + fiveMatch * FIVE_MONEY + sixMatch * SIX_MONEY) / money.toDouble()
+        return listOf(threeMatch, fourMatch, fiveMatch, sixMatch, rateOfReturn)
+    }
+
+    private fun checkCorrect(corrects: SixNumbers) {
         list.forEach { giveCorrectNumber(corrects, it) }
     }
 
@@ -25,5 +36,12 @@ class Lotto(money: Int, candidateNumbers: List<String>) {
         if (sixNumbers.list.contains(number)) {
             sixNumbers.addCorrectNumber()
         }
+    }
+
+    companion object {
+        private const val THREE_MONEY = 5000
+        private const val FOUR_MONEY = 50000
+        private const val FIVE_MONEY = 1500000
+        private const val SIX_MONEY = 2000000000
     }
 }

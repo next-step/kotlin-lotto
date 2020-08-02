@@ -31,10 +31,21 @@ class LottoTest {
         val correctList = SixNumbers(listOf("3", "5", "21", "39", "40", "41"))
         val lotto = Lotto(money, list)
 
-        lotto.checkCorrect(correctList)
+        lotto.result(correctList)
 
-        for (sixNumbers in lotto.list) {
-            assertThat(sixNumbers.correctNumber).isEqualTo(3)
-        }
+        assertThat(lotto.list[0].correctNumber).isEqualTo(3)
+    }
+
+    @Test
+    fun how_much_get_money() {
+        val money = 1000
+        val list = listOf("10", "3", "21", "14", "39", "1")
+        val correctList = SixNumbers(listOf("3", "5", "21", "39", "40", "41"))
+        val lotto = Lotto(money, list)
+        val testList = listOf(1.0, 0.0, 0.0, 0.0, 5.0)
+
+        val result = lotto.result(correctList)
+
+        assertThat(result).isEqualTo(testList)
     }
 }
