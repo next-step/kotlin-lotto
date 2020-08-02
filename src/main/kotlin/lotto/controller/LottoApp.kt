@@ -14,6 +14,7 @@ fun main() {
     val lastWeekLottoNumber = InputView.requestLastWeekLottoNumber()
     val lottoResults = store.drawLottoNumber(lastWeekLottoNumber)
     ResultView.printWinnerStatistics(lottoResults)
+
     val rateOfReturn = store.getRateOfReturn(price, lottoResults)
     ResultView.printRateOfReturn(rateOfReturn)
 }
