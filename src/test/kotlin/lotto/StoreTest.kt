@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.model.Buyer
+import lotto.model.Lotto
 import lotto.model.Prize
 import lotto.model.Store
 import org.assertj.core.api.Assertions
@@ -24,7 +25,7 @@ class StoreTest {
 
         val winnerHistory = store.confirmLottoWining(listOf(1, 2, 3, 4, 5, 6))
 
-        Assertions.assertThat(winnerHistory.contains(Prize.FORTH)).isTrue()
+        Assertions.assertThat(winnerHistory.contains(Prize.FOURTH)).isTrue()
     }
 
     @Test
