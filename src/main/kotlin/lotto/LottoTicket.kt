@@ -23,7 +23,22 @@ class LottoTicket(lottoNumbers: List<LottoNumber>) {
         return this.numbers.contains(lottoNumber)
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LottoTicket
+
+        if (numbers != other.numbers) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return numbers.hashCode()
+    }
+
     companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
+        const val LOTTO_NUMBER_COUNT = 6
     }
 }
