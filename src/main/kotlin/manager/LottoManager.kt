@@ -1,0 +1,3 @@
+package manager
+
+class LottoManager
