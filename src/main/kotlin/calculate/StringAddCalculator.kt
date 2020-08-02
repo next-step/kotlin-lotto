@@ -1,16 +1,12 @@
 package calculate
 
-class StringAddCalculator {
-    fun add(input: String?): Int {
-        if (input.isNullOrBlank()) return NULL_OR_BLANK_RETURN
+private const val NULL_OR_BLANK_RETURN = 0
 
-        val delimiterSetter = DelimiterSetter(input)
-        val numbers = Splitter(delimiterSetter).numbers
+fun add(input: String?): Int {
+    if (input.isNullOrBlank()) return NULL_OR_BLANK_RETURN
 
-        return Adder(numbers).result
-    }
+    val delimiterSetter = DelimiterSetter(input)
+    val numbers = Splitter(delimiterSetter).numbers
 
-    companion object {
-        private const val NULL_OR_BLANK_RETURN = 0
-    }
+    return Adder(numbers).result
 }
