@@ -8,7 +8,7 @@ object StringAddCalculator {
     private val delimiters = mutableListOf(",", ":")
 
     fun add(text: String): Int {
-        if (text.isBlank()) return 0
+        if (text.isBlank()) return ZERO
         if (text.length == 1) return text.toInt()
         var targetText = getTargetText(text)
         val numbers = getNumbers(targetText, delimiters)
