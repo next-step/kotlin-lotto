@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto.view
 
-enum class ResultLotto(private val index: Int, private val money: Int, var count: Int = 0) {
+enum class ResultLotto(private val index: Int, private val money: Int, private var count: Int = 0) {
     ZERO(0, 0),
     ONE(1, 0),
     TWO(2, 0),
@@ -10,9 +10,13 @@ enum class ResultLotto(private val index: Int, private val money: Int, var count
     SIX(6, 2000000000);
 
     companion object {
+        fun getFromIndex(index: Int) = values()[index]
+
         fun plusCount(index: Int) {
-            values()[index].count++
+            getFromIndex(index).count++
         }
+
+        fun getCount(index: Int) = getFromIndex(index).count
 
         fun resultList() = values().filter { it.index >= 0 }.toList()
     }
