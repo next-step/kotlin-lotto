@@ -4,41 +4,29 @@ class StringAddCalculator {
             return 0
         }
 
-        return when {
-            isBasicRegex(text) -> {
-                basicCase(text)
-            }
-            isCustomRegex(text) -> {
-                customCase(text)
-            }
-            isPositiveNumber(text) -> {
-                convertToNumber(text)
-            }
-            else -> {
-                throw RuntimeException()
-            }
+        var numberList = when {
+            isBasicRegex(text) -> { basicCase(text) }
+            isCustomRegex(text) -> { customCase(text) }
+            else -> { return model.Number(text.toInt()).number }
         }
+        return Calculator.sum(numberList)
     }
 
     private fun convertToNumber(text: String): Int {
         return text.toInt()
     }
 
-    private fun customCase(text: String): Int {
+    private fun customCase(text: String): List<model.Number> {
         val list = text.split(CUSTOM_DELIMITER)
         val delimiter = getDelimiter(list)
         val contents = getCustomDelimiterContentsList(list, delimiter)
-        val numberList = contents.map { model.Number(convertToNumber(it)) }
-        return Calculator.sum(numberList)
+        return contents.map { model.Number(convertToNumber(it)) }
     }
 
-    private fun basicCase(text: String): Int {
+    private fun basicCase(text: String): List<model.Number> {
         val list = text.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
-        val numberList = list.map { model.Number(convertToNumber(it)) }
-        return Calculator.sum(numberList)
+        return list.map { model.Number(convertToNumber(it)) }
     }
-
-    private fun isPositiveNumber(text: String) = NUMBER_REGEX.matches(text) && convertToNumber(text) > 0
 
     private fun getCustomDelimiterContentsList(
         list: List<String>,
@@ -54,6 +42,5 @@ class StringAddCalculator {
         const val BASIC_DELIMITER_COLON = ":"
         const val CUSTOM_DELIMITER = "\n"
         val CUSTOM_DELIMITER_REGEX = Regex(pattern = "//.\n.*")
-        val NUMBER_REGEX = Regex(pattern = "^-?[0-9]\\d*(\\.\\d+)?\$")
     }
 }
