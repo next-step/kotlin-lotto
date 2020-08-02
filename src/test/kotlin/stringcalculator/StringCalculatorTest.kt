@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import stringcalculator.model.StringCalculator
 
 class StringCalculatorTest {
 
@@ -27,6 +28,13 @@ class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["0"])
     fun inputOnlyZeroString(text: String) {
+        assertThat(StringCalculator.sumString(listOf(text))).isSameAs(0)
+    }
+
+    @DisplayName(value = "아무것도 입력이 안됬을 경우, 0 리턴 ")
+    @ParameterizedTest
+    @ValueSource(strings = [""])
+    fun inputEmptyValueString(text: String) {
         assertThat(StringCalculator.sumString(listOf(text))).isSameAs(0)
     }
 

@@ -1,4 +1,4 @@
-package stringcalculator
+package stringcalculator.model
 
 object StringConverter {
     private const val CUSTOM_FORMAT = "//(.)\n(.*)"

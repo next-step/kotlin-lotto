@@ -5,6 +5,7 @@
 1. InputView, StringConverter, StringCalculator 구조
 2. StringCalculator
     - 숫자 합 구하기
+    - "" 입력시, 0 리턴
     - 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw
 3. StringConverter
     - String 에서 숫자 분리
