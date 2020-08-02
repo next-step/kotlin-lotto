@@ -12,6 +12,6 @@ fun main() {
         }
     }
 
-    TextCalculator(ioManager, Parser(), Calculator())
+    TextCalculator(ioManager, Parser())
         .execute()
 }
