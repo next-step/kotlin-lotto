@@ -12,7 +12,7 @@ object StringAddCalculator {
         if (text.isBlank()) return ZERO
         if (text.length == 1) return text.toInt()
         var targetText = getTargetText(text)
-        val numbers = getNumbers(targetText, delimiters)
+        val numbers = getNumbers(targetText)
         return getTotal(numbers)
     }
 
@@ -23,7 +23,7 @@ object StringAddCalculator {
         } ?: text
     }
 
-    private fun getNumbers(targetText: String, delimiters: MutableList<String>): List<Int> {
+    private fun getNumbers(targetText: String): List<Int> {
         val strList = targetText.split(*delimiters.toTypedArray())
         return toIntList(strList)
     }
