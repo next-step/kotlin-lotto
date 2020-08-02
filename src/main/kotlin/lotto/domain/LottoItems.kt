@@ -1,17 +1,18 @@
 package lotto.domain
 
+import lotto.domain.value.LottoNumber
+import lotto.view.ResultLotto
+
 class LottoItems(count: Int) {
     private val lottos: List<Lotto> = List(count) { Lotto() }
 
     fun getLottoItems() = lottos
 
-    override fun toString() = "LottoItems(items=${lottos.joinToString()})"
-
-    fun getWinLottos(winningNumbers: List<LottoNumber>): List<WinLotto> {
+    fun getWinLottos(winningNumbers: List<LottoNumber>): List<ResultLotto> {
         lottos.forEach {
             val a = it.getWinCount(winningNumbers)
-            WinLotto.plusCount(a)
+            ResultLotto.plusCount(a)
         }
-        return WinLotto.resultList()
+        return ResultLotto.resultList()
     }
 }
