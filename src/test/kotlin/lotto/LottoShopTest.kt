@@ -12,7 +12,7 @@ class LottoShopTest {
         val lottoShop = LottoShop(LottoTicketGenerator())
 
         // then
-        assertThat(lottoShop.getAutoTickets(ticketCount)).hasSize(ticketCount)
+        assertThat(lottoShop.getAutoTickets(10_000)).hasSize(ticketCount)
     }
 
     @Test
@@ -36,7 +36,7 @@ class LottoShopTest {
             listOf(LottoResult.FIRST, LottoResult.FIRST, LottoResult.FIRST, LottoResult.FIRST, LottoResult.FIRST)
 
         // when
-        val lottoTickets = lottoShop.getAutoTickets(5)
+        val lottoTickets = lottoShop.getAutoTickets(5_000)
         val lottoResults = lottoShop.getLottoResultsOf(lottoTickets)
 
         // then
