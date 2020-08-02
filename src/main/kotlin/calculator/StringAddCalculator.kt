@@ -1,6 +1,6 @@
 package calculator
 
-class StringAddCalculator {
+object StringAddCalculator {
 
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) return 0

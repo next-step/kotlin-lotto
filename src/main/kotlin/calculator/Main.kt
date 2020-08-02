@@ -17,9 +17,7 @@ fun main() {
             text = readLine()
         }
 
-        val calculator = StringAddCalculator()
-
-        result = calculator.add(text)
+        result = StringAddCalculator.add(text)
         if (result == 0) ALERT_EMPTY_INPUT.also(::print)
     }
     result.also(::println)
