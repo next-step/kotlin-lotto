@@ -1,3 +1,3 @@
 object Calculator {
-    fun sum(list: List<String>) = list.sumBy { it.toInt() }
+    fun sum(list: List<model.Number>) = list.sumBy { it.number }
 }

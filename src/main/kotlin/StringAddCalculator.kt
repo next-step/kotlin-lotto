@@ -1,5 +1,3 @@
-import java.lang.RuntimeException
-
 class StringAddCalculator {
     fun add(text: String?): Int {
         if (text.isNullOrEmpty()) {
@@ -14,7 +12,7 @@ class StringAddCalculator {
                 customCase(text)
             }
             isPositiveNumber(text) -> {
-                text.toInt()
+                convertToNumber(text)
             }
             else -> {
                 throw RuntimeException()
@@ -22,19 +20,25 @@ class StringAddCalculator {
         }
     }
 
+    private fun convertToNumber(text: String): Int {
+        return text.toInt()
+    }
+
     private fun customCase(text: String): Int {
         val list = text.split(CUSTOM_DELIMITTER)
         val delimiter = getDelimiter(list)
         val contents = getCustomDelimiterContentsList(list, delimiter)
-        return Calculator.sum(contents)
+        val numberList = contents.map { model.Number(convertToNumber(it)) }
+        return Calculator.sum(numberList)
     }
 
     private fun basicCase(text: String): Int {
         val list = text.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
-        return Calculator.sum(list)
+        val numberList = list.map { model.Number(convertToNumber(it)) }
+        return Calculator.sum(numberList)
     }
 
-    private fun isPositiveNumber(text: String) = NUMBER_REGEX.matches(text) && text.toInt() > 0
+    private fun isPositiveNumber(text: String) = NUMBER_REGEX.matches(text) && convertToNumber(text) > 0
 
     private fun getCustomDelimiterContentsList(
         list: List<String>,
