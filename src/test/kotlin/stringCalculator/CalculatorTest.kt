@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class CalculatorTest {
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\\n1", "//!\\n"])
+    @ValueSource(strings = ["//;\\n1", "//!\\n", "//-\\n1-4:3"])
     fun `구분자 찾기(구분자 존재)`(content: String) {
         val calculator = Calculator()
 
@@ -39,7 +39,7 @@ class CalculatorTest {
     fun `숫자 목록 조회`(content: String) {
         val calculator = Calculator()
 
-        val value = calculator.splitToDelimiters(content, listOf(";", ","))
+        val value = calculator.splitNumbersToDelimiters(content, listOf(";", ","))
 
         assertThat(value).containsAll(listOf(1, 4, 3))
     }
