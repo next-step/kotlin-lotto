@@ -11,7 +11,12 @@ data class Lotto(var numbers: MutableList<Int>) {
         }
     }
 
-    fun setMatchNumberCount(winner: Lotto) {
+    fun checkWinningResult(winner: Lotto) {
+        checkMatchNumber(winner)
+        checkPrize()
+    }
+
+    private fun checkMatchNumber(winner: Lotto) {
         winner.numbers.forEach {
             if (numbers.contains(it)) {
                 matchNumberCount++
@@ -19,7 +24,7 @@ data class Lotto(var numbers: MutableList<Int>) {
         }
     }
 
-    fun setPrize() {
+    private fun checkPrize() {
         val win = Win.values().filter { it.matchNumber == matchNumberCount }
 
         prize = if (win.isEmpty()) 0 else win[0].prize

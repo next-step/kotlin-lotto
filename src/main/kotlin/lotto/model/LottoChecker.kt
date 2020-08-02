@@ -16,8 +16,7 @@ class LottoChecker(winner: Lotto, myLottos: List<Lotto>) {
 
     private fun checkEachLotto(winner: Lotto, lottos: List<Lotto>): List<Lotto> {
         lottos.forEach {
-            it.setMatchNumberCount(winner)
-            it.setPrize()
+            it.checkWinningResult(winner)
         }
         return lottos
     }
