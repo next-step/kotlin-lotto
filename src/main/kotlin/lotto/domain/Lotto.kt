@@ -12,4 +12,18 @@ class Lotto(money: Int, candidateNumbers: List<String>) {
         }
         return list
     }
+
+    fun checkCorrect(corrects: SixNumbers) {
+        list.forEach { giveCorrectNumber(corrects, it) }
+    }
+
+    private fun giveCorrectNumber(corrects: SixNumbers, sixNumbers: SixNumbers) {
+        corrects.list.forEach { addSixNumbersCorrectNumber(sixNumbers, it) }
+    }
+
+    private fun addSixNumbersCorrectNumber(sixNumbers: SixNumbers, number: Number) {
+        if (sixNumbers.list.contains(number)) {
+            sixNumbers.addCorrectNumber()
+        }
+    }
 }

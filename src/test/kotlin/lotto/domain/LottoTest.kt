@@ -23,4 +23,18 @@ class LottoTest {
 
         assertThat(result).isEqualTo(10)
     }
+
+    @Test
+    fun how_many_correct_number() {
+        val money = 1000
+        val list = listOf("10", "3", "21", "14", "39", "1")
+        val correctList = SixNumbers(listOf("3", "5", "21", "39", "40", "41"))
+        val lotto = Lotto(money, list)
+
+        lotto.checkCorrect(correctList)
+
+        for (sixNumbers in lotto.list) {
+            assertThat(sixNumbers.correctNumber).isEqualTo(3)
+        }
+    }
 }
