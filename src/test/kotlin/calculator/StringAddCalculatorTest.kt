@@ -15,12 +15,12 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     fun `empty or null`(text: String?) {
-        assertThat(add(text)).isZero()
+        assertThat(add(text)).isEqualTo(0)
     }
 
     @DisplayName("입력값 중 음수가 있을 경우 RuntimeException을 발생시킨다.")
     @Test
-    fun `negative`() {
+    fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { add("-1") }.withMessage("숫자 이외의 값 또는 음수 입력 불가")
     }
@@ -39,9 +39,9 @@ class StringAddCalculatorTest {
         assertThat(add(text)).isSameAs(20)
     }
 
-    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있게 한다.")
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수도 있다.")
     @ParameterizedTest
-    @ValueSource(strings = ["//?\\n1?2?3"])
+    @ValueSource(strings = ["//?\\n1?2:3"])
     fun `custom delimiter`(text: String) {
         assertThat(add(text)).isSameAs(6)
     }

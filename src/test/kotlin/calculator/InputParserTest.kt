@@ -23,7 +23,7 @@ class InputParserTest {
 
     @DisplayName("입력값 중 음수가 있을 경우 RuntimeException을 발생시킨다")
     @Test
-    fun `negative`() {
+    fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { parse("1,-20") }
             .withMessage("숫자 이외의 값 또는 음수 입력 불가")
