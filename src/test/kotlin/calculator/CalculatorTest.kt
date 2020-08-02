@@ -22,6 +22,13 @@ class CalculatorTest {
         assertThat(calculator.add(input)).isEqualTo(6)
     }
 
+    @DisplayName(value = "커스텀한 구분자가 포함된 알맞은 값을 입력했을 때 숫자의 합을 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3"])
+    fun `when correct custom value is input then return correct result`(input: String) {
+        assertThat(calculator.add(input)).isEqualTo(6)
+    }
+
     @DisplayName(value = "공백이 입력되면 0을 반환한다.")
     @Test
     fun `when input value is blank then return 0`() {
