@@ -41,4 +41,14 @@ class NumbersTest {
             val lottoNumber = LottoNumber(1, 2, 35, 4, 6, 2)
         }
     }
+
+    @Test
+    fun `리스트의 동일 숫자 개수 계산`() {
+        val bases = LottoNumber(1, 2, 3, 4, 5, 6)
+        val compares = LottoNumber(4, 5, 6, 7, 8, 9)
+
+        val count = bases.equalsCount(compares)
+
+        assertThat(count).isEqualTo(3)
+    }
 }

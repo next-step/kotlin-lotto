@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Test
 class LottoMachineTest {
 
     @Test
-    fun `리스트의 동일 숫자 개수 계산`() {
-        val bases = LottoNumber(1, 2, 3, 4, 5, 6)
-        val compares = LottoNumber(4, 5, 6, 7, 8, 9)
+    fun `수익 계산`() {
+        val lottoNumber = LottoNumber(1, 2, 3, 4, 5, 6)
+        val prizeNumber = LottoNumber(3, 4, 5, 6, 7, 8)
 
         val machine = LottoMachine()
-        val count = machine.equalsCount(bases, compares)
+        val prizeStat = machine.calculateStat(listOf(lottoNumber), prizeNumber)
+        val profit = machine.calculateProfit(prizeStat)
 
-        assertThat(count).isEqualTo(3)
+        assertThat(profit).isEqualTo(5000)
     }
 }
