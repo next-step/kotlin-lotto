@@ -2,6 +2,7 @@ package manager
 
 import model.DiceRandomMaker
 import model.Lotto
+import model.LottoPrize
 import kotlin.properties.Delegates
 
 class LottoManager {
@@ -10,11 +11,29 @@ class LottoManager {
     val lottoList: List<Lotto>
         get() = lottoListMutable.toList()
 
+    val prizeStatList: List<Pair<LottoPrize, Int>>
+        get() {
+            val list = mutableListOf<Pair<LottoPrize, Int>>()
+            for (lottoPrize in LottoPrize.values()) {
+                prizeList.firstOrNull() { it.first == lottoPrize.grade }?.let { pair ->
+                    list.add(Pair(lottoPrize, pair.second))
+                }
+            }
+            return list.toList()
+        }
+    var purchaseAmount by Delegates.notNull<Int>()
+
+    val earningRate: Double
+        get() {
+            val earningRate = (prizeStatList.sumBy { it.first.prizeMoney * it.second }.toDouble() / purchaseAmount)
+            return String.format("%.2f", earningRate).toDouble()
+        }
+
     private val lottoListMutable = mutableListOf<Lotto>()
 
     lateinit var prize: List<Int>
 
-    val prizeList: List<Pair<Int, Int>>
+    private val prizeList: List<Pair<Int, Int>>
         get() {
             val prizeMap = mutableMapOf<Int, Int>()
             for (lotto in lottoList) {
@@ -24,8 +43,9 @@ class LottoManager {
             return prizeMap.toSortedMap().toList()
         }
 
-    fun buy(value: Int) {
-        lottoCount = value / LOTTO_PRICE
+    fun buy(purchaseAmount: Int) {
+        this.purchaseAmount = purchaseAmount
+        lottoCount = purchaseAmount / LOTTO_PRICE
         if (lottoCount == 0) {
             throw IllegalArgumentException("please input minimum over $LOTTO_PRICE")
         }
