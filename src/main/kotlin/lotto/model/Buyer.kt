@@ -1,7 +1,5 @@
 package lotto.model
 
-private const val LOTTO_PRICE = 1000
-
 fun buyLotto(money: Int): List<Lotto> {
     require(money > LOTTO_PRICE) { "돈이 부족합니다." }
 

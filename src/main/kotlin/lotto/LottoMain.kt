@@ -14,7 +14,7 @@ fun main() {
     ResultView.printLottos(lottos)
 
     val winnerNumbers = InputView.getWinnerLotto()
-    val winnerLotto = Lotto(winnerNumbers.toMutableList())
+    val winnerLotto = Lotto(winnerNumbers.toList())
     val checker = LottoChecker(winnerLotto, lottos)
 
     ResultView.printMatchResult(checker.getLottos())

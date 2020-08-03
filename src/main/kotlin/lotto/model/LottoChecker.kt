@@ -8,15 +8,15 @@ class LottoChecker(winner: Lotto, myLottos: List<Lotto>) {
     }
 
     fun getEarningRate(): Double {
-        val totalPrize = lottos.sumBy { it.prize }.toDouble()
-        val paidMoney = lottos.size * 1000.toDouble()
+        val totalPrize = lottos.sumBy { it.checkPrize() }.toDouble()
+        val paidMoney = lottos.size * LOTTO_PRICE.toDouble()
 
         return totalPrize / paidMoney
     }
 
     private fun checkEachLotto(winner: Lotto, lottos: List<Lotto>): List<Lotto> {
         lottos.forEach {
-            it.checkWinningResult(winner)
+            it.checkWin(winner)
         }
         return lottos
     }
