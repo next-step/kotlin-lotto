@@ -2,7 +2,7 @@ package lotto.domain
 
 const val FIRST_PRICE = 2000000000
 const val SECOND_PRICE = 1500000
-const val THIRD_PRICE = 500000
+const val THIRD_PRICE = 50000
 const val FOURTH_PRICE = 5000
 
 class LottoTicket(private val totalNumber: Int) {
@@ -15,6 +15,10 @@ class LottoTicket(private val totalNumber: Int) {
         val fourth = getFourth(result)
         val price = (first * FIRST_PRICE) + (second * SECOND_PRICE) + (third * THIRD_PRICE) + (fourth * FOURTH_PRICE)
         return ResultData(first, second, third, fourth, price)
+    }
+
+    fun getLines(): List<LottoSingleLine> {
+        return lottoLines
     }
 
     private fun createLottoTicket(totalNumber: Int): List<LottoSingleLine> {
