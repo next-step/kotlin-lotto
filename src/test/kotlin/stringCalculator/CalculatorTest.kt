@@ -1,6 +1,5 @@
 package stringCalculator
 
-import Calculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -41,6 +40,6 @@ class CalculatorTest {
 
         val value = calculator.splitNumbersToDelimiters(content, listOf(";", ","))
 
-        assertThat(value).containsAll(listOf(1, 4, 3))
+        assertThat(value).containsAll(listOf(Number(1), Number(4), Number(3)))
     }
 }
