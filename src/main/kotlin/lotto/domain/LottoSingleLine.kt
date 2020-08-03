@@ -8,7 +8,7 @@ class LottoSingleLine {
     fun result(result: List<Int>): Int {
         var count = 0
         result.forEach {
-            if (lottoNumbers.contains(result)) count++
+            if (lottoNumbers.contains(it)) count++
         }
         return count
     }
