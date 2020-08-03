@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoTicket(private val totalNumber: Int) {
-    val lottoLines = createLottoTicket(totalNumber)
+    private val lottoLines = createLottoTicket(totalNumber)
 
     private fun createLottoTicket(totalNumber: Int): List<LottoSingleLine> {
         val list = mutableListOf<LottoSingleLine>()
