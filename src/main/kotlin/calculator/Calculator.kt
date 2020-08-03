@@ -1,6 +1,7 @@
 package calculator
 
 import java.lang.IllegalArgumentException
+import java.util.regex.Pattern
 
 private const val FIRST_PREFIX =
     """//"""
@@ -19,7 +20,7 @@ private const val CUSTOM_SPLITTER_LAST_LOCATION = 5
 //        println(e.message)
 //    }
 
-class Calculator(private val numbersInput: String?) {
+class Calculator(private val numbersInput: String) {
 
     private val DEFAULT_SPLITTERS = listOf(",", ":")
     private var isCustomSplitter: Boolean = false
@@ -44,7 +45,7 @@ class Calculator(private val numbersInput: String?) {
 
     private fun hasCustomSplitter() {
         try {
-            isCustomSplitter = numbersInput!!.startsWith(FIRST_PREFIX)
+            isCustomSplitter = numbersInput.startsWith(FIRST_PREFIX)
                 .and(numbersInput.substring(CUSTOM_SPLITTER_LOCATION + 1).startsWith(SECOND_PREFIX))
         } catch (e: IndexOutOfBoundsException) {
             throw CalculatorException("입력값을 확인하세요.")
@@ -53,7 +54,7 @@ class Calculator(private val numbersInput: String?) {
 
     private fun getSplitters(): List<String> {
         if (isCustomSplitter) {
-            return listOf(numbersInput!![CUSTOM_SPLITTER_LOCATION].toString())
+            return listOf(numbersInput[CUSTOM_SPLITTER_LOCATION].toString())
         }
         return DEFAULT_SPLITTERS
     }
@@ -62,9 +63,8 @@ class Calculator(private val numbersInput: String?) {
         val pattern = StringBuilder("[0-9")
         getSplitters().forEach { pattern.append("|$it") }
         pattern.append("]*")
-        val numberInput = numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
-
-        if (!numberInput.matches(Regex(pattern.toString()))) {
+        val numberInput = numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
+        if (!Pattern.compile(pattern.toString()).matcher(numberInput).matches()) {
             throw CalculatorException("입력값을 확인하세요.")
         }
     }
@@ -73,9 +73,9 @@ class Calculator(private val numbersInput: String?) {
         var numbersInput = this.numbersInput
 
         if (isCustomSplitter) {
-            numbersInput = this.numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
+            numbersInput = this.numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
         }
-        if (!numbersInput!!.last().toString().matches(Regex("[0-9]"))) {
+        if (!numbersInput.last().toString().matches(Regex("[0-9]"))) {
             throw CalculatorException("입력값을 확인하세요.")
         }
         if (!numbersInput.first().toString().matches(Regex("[0-9]"))) {
@@ -84,10 +84,11 @@ class Calculator(private val numbersInput: String?) {
     }
 
     private fun parsing(): List<Int> {
+        val splitter = getSplitters()[0]
         if (isCustomSplitter) {
-            return numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(getSplitters()[0]).map { it.toInt() }
+            return numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(splitter).map { it.toInt() }
         }
-        return numbersInput!!.replace(getSplitters()[1], getSplitters()[0]).split(getSplitters()[0])
+        return numbersInput.replace(getSplitters()[1], splitter).split(splitter)
             .map { it.toInt() }
     }
 }

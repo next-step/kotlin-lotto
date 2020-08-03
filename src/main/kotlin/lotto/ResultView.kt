@@ -15,6 +15,9 @@ object ResultView {
             print(PRIZE_AMOUNT[count])
             println("원) -$_prize 개")
         }
-        println("총 수익률은 $profitRate 입니다.")
+        print("총 수익률은 $profitRate 입니다.")
+        if (profitRate < 1) {
+            print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        }
     }
 }
