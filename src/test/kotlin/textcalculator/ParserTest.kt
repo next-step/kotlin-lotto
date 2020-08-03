@@ -8,6 +8,12 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class ParserTest {
     @Test
+    internal fun foo() {
+        Regex("^(\\/\\/)(.)(\\\\n)(.*)")
+            .find("1;2;3")
+    }
+
+    @Test
     fun `split() 문자열을 구분자로 쪼갠다`() {
         Parser().apply {
             assertThat("1:1:2,33".split()).isEqualTo(
@@ -25,38 +31,48 @@ class ParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = [";", "_", "-", "a", "$"])
-    fun `checkIfCustomPrefix() 프리픽스로 커스텀 구분자 있으면 spliter에 추가`(text: String) {
+    fun `addCustomDelimiter() 프리픽스로 커스텀 구분자 있으면 spliter에 추가`(text: String) {
         val parser = Parser()
         assertThat(parser.spliter).contains(":", ",").hasSize(2)
 
-        parser.checkIfCustomPrefix("//$text\\n1:1:1")
+        parser.addCustomDelimiter("$text")
 
         assertThat(parser.spliter).contains(":", ",", text).hasSize(3)
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = ["1:1:1", "1;2:3", "1212asd"])
-    fun `checkIfCustomPrefix() 프리픽스 제거하고 나머지 문자열을 반환`(text: String) {
-        assertThat(
-            Parser().checkIfCustomPrefix("//;\\n$text")
-        ).isEqualTo(text)
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["1:1:1", "1;2:3", "1212asd"])
-    fun `checkIfCustomPrefix() 해당되는 문자열 없으면 문자열 원본을 반환`(text: String) {
-        assertThat(
-            Parser().checkIfCustomPrefix(text)
-        ).isEqualTo(text)
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["1:1:1", "1;2:3", "//\\n1212asd"])
-    fun `checkIfCustomPrefix() 해당되는 문자열 없으면 구분자 추가 없음`(text: String) {
+    @Test
+    fun `addCustomDelimiter() 공백은 spliter에 추가되지 않음`() {
         val parser = Parser()
-        parser.checkIfCustomPrefix(text)
+        assertThat(parser.spliter).contains(":", ",").hasSize(2)
+
+        parser.addCustomDelimiter("")
 
         assertThat(parser.spliter).contains(":", ",").hasSize(2)
+    }
+
+    @Test
+    fun `getCustomDelimiter() 프리픽스가 있으면 추출`() {
+        Parser().apply {
+            val result = divideByRegex("//;\\n1:1:1")
+            assertThat(result.getCustomDelimiter()).isEqualTo(";")
+        }
+    }
+
+    @Test
+    fun `getCustomDelimiter() 프리픽스가 없으면 공백`() {
+        Parser().apply {
+            val result = divideByRegex("1:1:1")
+            assertThat(result.getCustomDelimiter()).isEqualTo("")
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\\n1:1:1", "1:1:1"])
+    fun `getMainText() 프리픽스가 있든 없든 메인텍스트 추출`(text: String) {
+        Parser().apply {
+            val result = divideByRegex(text)
+            assertThat(result.getMainText()).isEqualTo("1:1:1")
+        }
     }
 
     @Test
@@ -78,6 +94,24 @@ class ParserTest {
                 listOf(text).toInts()
             }.isInstanceOf(RuntimeException::class.java)
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1:1:1", "1,2:3", "1,2,1,2"])
+    fun `parse() 커스텀 프리픽스 없으면 구분자 추가 없음`(text: String) {
+        val parser = Parser()
+        parser.parse(text)
+
+        assertThat(parser.spliter).contains(":", ",").hasSize(2)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = [";", "_", "-", ".", "~"])
+    fun `parse() 커스텀 프리픽스 있으면 구분자 추가`(text: String) {
+        val parser = Parser()
+        parser.parse("//$text\\n1${text}2${text}3${text}4")
+
+        assertThat(parser.spliter).contains(":", ",", text).hasSize(3)
     }
 
     @Test
@@ -104,5 +138,33 @@ class ParserTest {
         assertThatThrownBy {
             Parser().parse("1:0,2:3,$text")
         }.isInstanceOf(RuntimeException::class.java)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = [";", "_", "-", ".", "~"])
+    fun `divideByRegex() 커스텀 인자가 있다면 Group3으로 반환`(text: String) {
+        assertThat(Parser().divideByRegex("//$text\\n").groupValues[3])
+            .isEqualTo(text)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1:1", "1,1,1", "-", "", "1;1;1"])
+    fun `divideByRegex() 커스텀 인자가 없다면 Group3 공백`(text: String) {
+        assertThat(Parser().divideByRegex("$text").groupValues[3])
+            .isEqualTo("")
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = [";", "_", "-", ".", "~"])
+    fun `divideByRegex() 커스텀 인자가 있어도 Group5로 나머지 메인 문자열만 반환`(text: String) {
+        assertThat(Parser().divideByRegex("//$text\\n1:2:3,4").groupValues[5])
+            .isEqualTo("1:2:3,4")
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1:1", "1,1,1", "1;1;1"])
+    fun `divideByRegex() 커스텀 인자가 없으면 Group5로 똑같은 문자열 반환`(text: String) {
+        assertThat(Parser().divideByRegex("$text").groupValues[5])
+            .isEqualTo(text)
     }
 }

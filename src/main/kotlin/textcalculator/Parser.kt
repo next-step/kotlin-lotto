@@ -1,7 +1,5 @@
 package textcalculator
 
-import java.util.regex.Pattern
-
 class Parser {
     private val _spliter = arrayListOf(COMMA, COLON)
     val spliter: List<String> get() = _spliter
@@ -18,16 +16,10 @@ class Parser {
         return split(regexDelimiters)
     }
 
-    fun checkIfCustomPrefix(text: String): String {
-        val matches = Pattern.compile(REGEX_STRING_CUSTOM_PREFIX).matcher(text)
-            .takeIf { it.matches() }
-
-        matches?.group(2)
-            ?.also { custom ->
-                _spliter.add(custom)
-            }
-
-        return matches?.group(4) ?: text
+    fun addCustomDelimiter(delimiter: String) {
+        if (delimiter.isNotBlank()) {
+            _spliter.add(delimiter)
+        }
     }
 
     fun List<String>.toInts(): List<Int> {
@@ -38,9 +30,24 @@ class Parser {
     }
 
     fun parse(text: String): List<Int> {
-        return checkIfCustomPrefix(text)
-            .split()
-            .toInts()
+        return divideByRegex(text).let {
+            addCustomDelimiter(it.getCustomDelimiter())
+            it.getMainText()
+                .split()
+                .toInts()
+        }
+    }
+
+    fun divideByRegex(text: String): MatchResult {
+        return Regex(REGEX_STRING_BY_GROUP).find(text) ?: throw RuntimeException(ERROR_WRONG_FORMAT)
+    }
+
+    fun MatchResult.getCustomDelimiter(): String {
+        return groupValues[GROUP_CUSTOM_SPLITER]
+    }
+
+    fun MatchResult.getMainText(): String {
+        return groupValues[GROUP_MAIN_TEXT]
     }
 
     companion object {
@@ -49,7 +56,10 @@ class Parser {
         private const val REGEX_OPEN = "["
         private const val REGEX_CLOSE = "]"
         private const val EMPTY = ""
-        private const val REGEX_STRING_CUSTOM_PREFIX = "^(\\/\\/)(.)(\\\\n)(.*)"
+        private const val REGEX_STRING_BY_GROUP = "^((\\/\\/)(.)(\\\\n))*(.*)"
         private const val REGEX_STRING_ONLY_NUMBERS = "[0-9]*"
+        private const val GROUP_CUSTOM_SPLITER = 3
+        private const val GROUP_MAIN_TEXT = 5
+        private const val ERROR_WRONG_FORMAT = "형식이 잘못 되었습니다."
     }
 }
