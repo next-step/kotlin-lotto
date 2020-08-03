@@ -6,6 +6,6 @@ class LottoSingleLine {
     val lottoNumbers = createLine()
 
     private fun createLine(): List<Int> {
-        return LOTTO_NUMBER_LIST.shuffled().take(6)
+        return LOTTO_NUMBER_LIST.shuffled().take(6).sorted()
     }
 }
