@@ -4,8 +4,10 @@ import lotto.ResultView
 
 fun main() {
     try {
-        val count = InputView.getCount()
-        val lotto = LottoGame(count)
+        val amount = InputView.getAmount()
+        val lotto = LottoGame(amount)
+
+        ResultView.showLottoCount(lotto.count)
 
         while (!lotto.isEnd()) {
             val lottoNumber = lotto.createLotto()
@@ -13,7 +15,7 @@ fun main() {
         }
 
         val prizedNumbers = InputView.getPrizedNumbers()
-        val prizedLotto = lotto.checkPrize(prizedNumbers)
+        val prizedLotto = lotto.execute(prizedNumbers)
 
         ResultView.showPrizeStatics(prizedLotto, lotto.profitRate)
     } catch (e: Exception) {
