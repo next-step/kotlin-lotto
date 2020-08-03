@@ -4,6 +4,8 @@ const val MAX_NUMBER = 45
 const val MIN_NUMBER = 1
 
 class LottoNumber(vararg _numbers: Int) {
+    constructor(_numbers: List<Int>) : this(*_numbers.toIntArray())
+
     var numbers: List<Int>
         private set
 
