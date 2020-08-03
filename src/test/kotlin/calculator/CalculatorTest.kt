@@ -30,9 +30,10 @@ class CalculatorTest {
         }.isInstanceOf(CalculatorException::class.java)
     }
 
-    @Test
-    fun `문자열 끝이 숫자인`() {
-        val calculator = Calculator("1,2,3,")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,", ",1,2,3"])
+    fun `문자열 끝이 숫자인`(numberInput: String) {
+        val calculator = Calculator(numberInput)
         assertThatThrownBy {
             calculator.execute()
         }.isInstanceOf(CalculatorException::class.java)

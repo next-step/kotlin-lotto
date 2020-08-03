@@ -29,7 +29,6 @@ class Calculator(private val numbersInput: String) {
         getNumbers(numbersInput)
         hasCustomSplitter()
         hasOnlyValidString()
-        checkEndString()
         val numbers = parsing()
         return calculate(numbers)
     }
@@ -60,25 +59,11 @@ class Calculator(private val numbersInput: String) {
     }
 
     private fun hasOnlyValidString() {
-        val pattern = StringBuilder("[0-9")
+        val pattern = StringBuilder("^[0-9][0-9")
         getSplitters().forEach { pattern.append("|$it") }
-        pattern.append("]*")
+        pattern.append("]*[0-9]$")
         val numberInput = numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
         if (!Pattern.compile(pattern.toString()).matcher(numberInput).matches()) {
-            throw CalculatorException("입력값을 확인하세요.")
-        }
-    }
-
-    private fun checkEndString() {
-        var numbersInput = this.numbersInput
-
-        if (isCustomSplitter) {
-            numbersInput = this.numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
-        }
-        if (!numbersInput.last().toString().matches(Regex("[0-9]"))) {
-            throw CalculatorException("입력값을 확인하세요.")
-        }
-        if (!numbersInput.first().toString().matches(Regex("[0-9]"))) {
             throw CalculatorException("입력값을 확인하세요.")
         }
     }
