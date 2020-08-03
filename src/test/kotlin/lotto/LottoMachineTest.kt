@@ -10,8 +10,8 @@ class LottoMachineTest {
 
         val machine = LottoMachine()
 
-        val prizeStat = mapOf(Pair(4, 1))
-        val profit = machine.calculateProfit(prizeStat)
+        val prizeStat = PrizeMoneyWrapper(PrizeMoney.THREE, 1)
+        val profit = machine.calculateProfit(listOf(prizeStat))
 
         assertThat(profit).isEqualTo(5000)
     }
@@ -25,7 +25,9 @@ class LottoMachineTest {
         val machine = LottoMachine()
         val prizeStat = machine.calculateStat(listOf(lottoNumber1, lottoNumber2), prizeNumber)
 
-        assertThat(prizeStat).containsEntry(6, 1)
-        assertThat(prizeStat).containsEntry(4, 1)
+        assertThat(prizeStat).contains(
+            PrizeMoneyWrapper(PrizeMoney.FOUR, 1),
+            PrizeMoneyWrapper(PrizeMoney.SIX, 1)
+        )
     }
 }

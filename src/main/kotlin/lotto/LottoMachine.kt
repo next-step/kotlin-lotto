@@ -4,17 +4,14 @@ class LottoMachine {
 
     fun getRandoms(): List<Int> = LOTTO_NUMBERS.shuffled().subList(0, 5)
 
-    fun calculateStat(lottoNumbers: List<LottoNumber>, prizeNumber: LottoNumber): Map<Int, Int> {
+    fun calculateStat(lottoNumbers: List<LottoNumber>, prizeNumber: LottoNumber): List<PrizeMoneyWrapper> {
         return lottoNumbers.groupingBy {
             it.equalsCount(prizeNumber)
-        }
-            .eachCount()
+        }.eachCount().map { PrizeMoneyWrapper(PrizeMoney.generate(it.key), it.value) }
     }
 
-    fun calculateProfit(rankAndCount: Map<Int, Int>): Int {
-        return rankAndCount.map {
-            PrizeMoney.generate(it.key).getProfit(it.value)
-        }.sum()
+    fun calculateProfit(prizeMoneyWrappers: List<PrizeMoneyWrapper>): Int {
+        return prizeMoneyWrappers.sumBy { it.prizeMoney.getProfit(it.prizeCount) }
     }
 
     companion object {

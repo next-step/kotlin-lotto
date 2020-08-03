@@ -1,6 +1,7 @@
 package lotto
 
 enum class PrizeMoney(private val equalsCount: Int) {
+
     SIX(6) {
         private val prizeMoney = 2000000000
         override fun getPrizeMoney(): Int = prizeMoney
@@ -9,11 +10,11 @@ enum class PrizeMoney(private val equalsCount: Int) {
         private val prizeMoney = 1500000
         override fun getPrizeMoney(): Int = prizeMoney
     },
-    FOUR(5) {
+    FOUR(4) {
         private val prizeMoney = 50000
         override fun getPrizeMoney(): Int = prizeMoney
     },
-    THREE(4) {
+    THREE(3) {
         private val prizeMoney = 5000
         override fun getPrizeMoney(): Int = prizeMoney
     },
