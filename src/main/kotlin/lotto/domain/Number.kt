@@ -24,8 +24,13 @@ data class Number(val string: String?) {
     }
 
     private fun checkRange() {
-        if (number < 1 || number > 45) {
+        if (number < MINIMUM || number > MAXIMUM) {
             throw NumberFormatException("1~45의 값만 가질수 있습니다.")
         }
+    }
+
+    companion object {
+        private const val MINIMUM = 1
+        private const val MAXIMUM = 45
     }
 }

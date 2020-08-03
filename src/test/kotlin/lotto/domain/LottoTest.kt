@@ -15,37 +15,31 @@ class LottoTest {
     }
 
     @Test
-    fun how_much_buy_lotto() {
-        val money = 10000
-        val lotto = Lotto(money, candidateNumbers)
+    fun has_six_Number() {
+        val lotto = Lotto(candidateNumbers.shuffled())
 
-        val result = lotto.list.size
+        val result = lotto.numbers.size
 
-        assertThat(result).isEqualTo(10)
+        assertThat(result).isEqualTo(6)
     }
 
     @Test
-    fun how_many_correct_number() {
-        val money = 1000
-        val list = listOf("10", "3", "21", "14", "39", "1")
-        val correctList = SixNumbers(listOf("3", "5", "21", "39", "40", "41"))
-        val lotto = Lotto(money, list)
+    fun sort_low_to_high() {
+        val list = listOf("3", "2", "20", "10", "17", "40")
+        val testList = listOf(Number("2"), Number("3"), Number("10"), Number("17"), Number("20"), Number("40"))
 
-        lotto.result(correctList)
+        val lotto = Lotto(list)
 
-        assertThat(lotto.list[0].correctNumber).isEqualTo(3)
+        assertThat(lotto.numbers).isEqualTo(testList)
     }
 
     @Test
-    fun how_much_get_money() {
-        val money = 1000
-        val list = listOf("10", "3", "21", "14", "39", "1")
-        val correctList = SixNumbers(listOf("3", "5", "21", "39", "40", "41"))
-        val lotto = Lotto(money, list)
-        val testList = listOf(1.0, 0.0, 0.0, 0.0, 5.0)
+    fun check_correct_number() {
+        val list = listOf("3", "2", "20", "10", "17", "40")
+        val lotto = Lotto(list)
 
-        val result = lotto.result(correctList)
+        lotto.checkCorrect(Number("3"))
 
-        assertThat(result).isEqualTo(testList)
+        assertThat(lotto.correctNumber).isEqualTo(1)
     }
 }
