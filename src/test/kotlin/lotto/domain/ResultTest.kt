@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
-import lotto.Result.Companion.findResult
+import lotto.domain.Result.Companion.findResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

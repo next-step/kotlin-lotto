@@ -1,5 +1,6 @@
-package lotto
+package lotto.domain
 
+import lotto.LOTTO_PRICE
 import lotto.LottoUtils.provideNumbers
 
 class LottoShop(payment: Int) {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Result(val condition: Int, val prizeIndex: Int = 0) {
     FOURTH(Result.FOURTH_CONDITION, 0),
@@ -20,5 +20,3 @@ enum class Result(val condition: Int, val prizeIndex: Int = 0) {
         }
     }
 }
-
-

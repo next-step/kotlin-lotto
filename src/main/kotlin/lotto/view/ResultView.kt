@@ -1,4 +1,8 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoShop
+import lotto.domain.Lottos
+import lotto.domain.Results
 
 object ResultView {
 
@@ -13,6 +17,5 @@ object ResultView {
     fun showResults(results: Results) {
         println("\n당첨 통계\n---------")
         println(results)
-
     }
 }

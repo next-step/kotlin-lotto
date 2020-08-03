@@ -1,8 +1,12 @@
 package lotto
 
-import lotto.ResultView.showAmountsSold
-import lotto.ResultView.showLottoDetails
-import lotto.ResultView.showResults
+import lotto.domain.LottoShop
+import lotto.domain.Lottos
+import lotto.domain.Results
+import lotto.view.ResultView.showAmountsSold
+import lotto.view.ResultView.showLottoDetails
+import lotto.view.ResultView.showResults
+import lotto.view.InputView
 
 fun main() {
 

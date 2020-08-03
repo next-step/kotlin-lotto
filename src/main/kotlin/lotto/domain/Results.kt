@@ -1,4 +1,6 @@
-package lotto
+package lotto.domain
+
+import lotto.LOTTO_PRICE
 
 class Results(results: List<Result>) {
     var matchAmounts = mutableListOf(0, 0, 0, 0)
@@ -52,7 +54,12 @@ class Results(results: List<Result>) {
         private const val FIRST_PRIZE = 2000000000
 
         private val conditions = listOf(3, 4, 5, 6)
-        private val prize = listOf(FOURTH_PRIZE, THIRD_PRIZE, SECOND_PRIZE, FIRST_PRIZE)
+        private val prize = listOf(
+            FOURTH_PRIZE,
+            THIRD_PRIZE,
+            SECOND_PRIZE,
+            FIRST_PRIZE
+        )
 
         var totalPayment: Int = LOTTO_PRICE
     }

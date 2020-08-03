@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import lotto.LottoUtils.luckyNumbers
 
@@ -12,7 +12,8 @@ data class Lotto(
         return match
     }
 
-    fun findResult(): Result = Result.findResult(hasLuckyNumber(luckyNumbers))
+    fun findResult(): Result =
+        Result.findResult(hasLuckyNumber(luckyNumbers))
 
     override fun toString(): String {
         return "$numbers"
