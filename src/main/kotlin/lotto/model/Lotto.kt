@@ -6,13 +6,9 @@ data class Lotto(val numbers: List<Int>) {
     lateinit var win: Win
 
     fun checkWin(winner: Lotto) {
-        var matchNumberCount = 0
-        winner.numbers.forEach {
-            if (numbers.contains(it)) {
-                matchNumberCount++
-            }
-        }
-        win = getPrize(matchNumberCount)
+        val matchNumbers = numbers.filter { it in winner.numbers }.map { it }
+
+        win = getPrize(matchNumbers.size)
     }
 
     fun checkPrize(): Int {
