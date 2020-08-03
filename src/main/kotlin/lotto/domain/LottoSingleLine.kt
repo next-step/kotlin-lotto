@@ -4,13 +4,13 @@ private val LOTTO_NUMBER_LIST = (1..45).toList()
 
 class LottoSingleLine {
     private val lottoNumbers = createLine()
-    private var matchCount = 0
-        get() = matchCount
 
-    fun matchResult(result: List<Int>) {
+    fun matching(result: List<Int>): Int {
+        var count = 0
         result.forEach {
-            if (lottoNumbers.contains(it)) matchCount++
+            if (lottoNumbers.contains(it)) count++
         }
+        return count
     }
 
     private fun createLine(): List<Int> {
