@@ -1,4 +1,5 @@
 package lotto
+
 const val LOTTO_PRINT_PREFIX = "["
 const val LOTTO_PRINT_POSTFIX = "]"
 
@@ -15,5 +16,9 @@ class ResultView {
         prizeMoneyWrappers.forEach {
             println("${it.prizeMoney.name}개 일치 (${it.prizeMoney.getPrizeMoney()}원) - ${it.prizeCount}개")
         }
+    }
+
+    fun printProfit(totalPrizeMoney: Int, buyMoney: Int) {
+        println("총 수익률은 ${totalPrizeMoney / buyMoney} 입니다.")
     }
 }
