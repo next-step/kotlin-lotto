@@ -21,8 +21,8 @@ class ResultsTest {
     }
 
     @Test
-    fun `match amounts` () {
-        assertThat(totalResults.matchAmounts).isEqualTo(listOf(1,1,1,1))
+    fun `match amounts`() {
+        assertThat(totalResults.matchAmounts).isEqualTo(listOf(1, 1, 1, 1))
     }
 
     @Test
