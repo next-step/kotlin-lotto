@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.LottoResult
-import lotto.LottoTicket
+import lotto.domain.LottoResult
+import lotto.domain.LottoTicket
 
 fun printLottoTickets(tickets: List<LottoTicket>) {
     println("${tickets.size}개를 구매했습니다.")

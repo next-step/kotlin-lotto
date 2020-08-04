@@ -1,5 +1,8 @@
-package lotto
+package lotto.domain
 
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
+import lotto.domain.LottoTicketGenerateStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

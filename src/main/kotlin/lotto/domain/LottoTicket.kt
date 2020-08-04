@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoTicket(
     private val lottoNumbers: List<LottoNumber>
@@ -6,6 +6,8 @@ class LottoTicket(
     init {
         validateLottoNumbers(lottoNumbers)
     }
+
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.of(it) })
 
     private fun validateLottoNumbers(lottoNumbers: List<LottoNumber>) {
         require(lottoNumbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 반드시 6개 입니다." }
