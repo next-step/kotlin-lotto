@@ -44,13 +44,24 @@ fun inputResultError(): List<Int> {
     }
 }
 
-fun inputBonusNumber(): Int {
+fun inputBonusNumber(numberList: List<Int>): Int {
     println("보너스 볼을 입력해 주세요.")
-    return readLine()?.toIntOrNull() ?: inputBonusNumberError()
+    val bonusNumber = readLine()?.toIntOrNull() ?: inputBonusNumberError()
+    return if (numberList.contains(bonusNumber)) {
+        inputBonusNumberError()
+    } else {
+        return bonusNumber
+    }
 }
 
 fun inputBonusNumberError(): Int {
-    println("보너스 볼을 입력해 주세요.")
+    println(
+        """
+        보너스 볼을 입력해 주세요.
+        한 자리의 숫자만 입력해주세요
+        그 숫자는 당첨번호와 중복될 수 없습니다.
+        """.trimIndent()
+    )
     return readLine()?.toIntOrNull() ?: exitProcess(0)
 }
 
