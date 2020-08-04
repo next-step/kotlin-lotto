@@ -1,25 +1,27 @@
 package lotto.view
 
 import lotto.domain.value.LottoNumber
+import lotto.domain.value.Money
 
 object InputView {
-    private const val INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요."
-    private const val INPUT_NOT_INTEGER_ERROR_MESSAGE = "숫자만 넣어 주세요"
-    private const val INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
-    private const val INPUT_NOT_VALID_ERROR_MESSAGE = "콤마(,)로 연결된 6자리 숫자를 입력하세요."
-    private const val PRICE_PER_UNIT = 1000
+    private const val INPUT_MONEY = "구입금액을 입력해 주세요."
+    private const val INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
 
-    fun inputMoney(): Int {
-        println(INPUT_MONEY_MESSAGE)
-        return readLine()?.toInt() ?: throw IllegalArgumentException(INPUT_NOT_INTEGER_ERROR_MESSAGE)
+    private const val ERROR_NOT_INTEGER = "숫자만 넣어 주세요"
+    private const val ERROR_INVALID = "콤마(,)로 연결된 6자리 숫자를 입력하세요."
+
+    fun inputMoney(): Money {
+        println(INPUT_MONEY)
+        val won = readLine()?.toBigInteger() ?: throw IllegalArgumentException(ERROR_NOT_INTEGER)
+        return Money(won)
     }
 
     fun inputWinningNumber(): List<LottoNumber> {
-        println(INPUT_WINNING_NUMBER_MESSAGE)
+        println(INPUT_WINNING_NUMBER)
         return readLine()?.split(",")?.map {
             LottoNumber(it.toInt())
-        } ?: throw IllegalArgumentException(INPUT_NOT_VALID_ERROR_MESSAGE)
+        } ?: throw IllegalArgumentException(ERROR_INVALID)
     }
 
-    fun getBuyCount(inputMoney: Int) = inputMoney / PRICE_PER_UNIT
+    // fun getBuyCount(inputMoney: Money) = inputMoney.won() / PRICE_PER_UNIT
 }
