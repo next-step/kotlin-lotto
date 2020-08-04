@@ -1,3 +1,5 @@
+package calculator
+
 import java.lang.RuntimeException
 
 val delimiters = mutableListOf(",", ":")
