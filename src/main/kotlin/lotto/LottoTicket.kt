@@ -1,11 +1,10 @@
 package lotto
 
-class LottoTicket(lottoNumbers: List<LottoNumber>) {
-    private val numbers: Set<LottoNumber>
-
+class LottoTicket(
+    private val lottoNumbers: List<LottoNumber>
+) {
     init {
         validateLottoNumbers(lottoNumbers)
-        numbers = lottoNumbers.toSet()
     }
 
     private fun validateLottoNumbers(lottoNumbers: List<LottoNumber>) {
@@ -14,13 +13,13 @@ class LottoTicket(lottoNumbers: List<LottoNumber>) {
     }
 
     fun compare(lottoTicket: LottoTicket): LottoResult {
-        return this.numbers
+        return this.lottoNumbers
             .count { lottoTicket.has(it) }
             .let { LottoResult.findByMatch(it) }
     }
 
     private fun has(lottoNumber: LottoNumber): Boolean {
-        return this.numbers.contains(lottoNumber)
+        return this.lottoNumbers.contains(lottoNumber)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -29,17 +28,17 @@ class LottoTicket(lottoNumbers: List<LottoNumber>) {
 
         other as LottoTicket
 
-        if (numbers != other.numbers) return false
+        if (lottoNumbers != other.lottoNumbers) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return numbers.hashCode()
+        return lottoNumbers.hashCode()
     }
 
     override fun toString(): String {
-        return numbers.toString()
+        return lottoNumbers.toString()
     }
 
     companion object {
