@@ -5,7 +5,10 @@ class Buyer(price: Int = 0) {
     val purchaseCount: Int
 
     init {
-        val lottoPrice = 1000
-        purchaseCount = price / lottoPrice
+        purchaseCount = price / LOTTO_PRICE
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
     }
 }
