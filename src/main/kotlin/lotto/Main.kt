@@ -14,7 +14,7 @@ fun main() {
     val lottoLines = LottoLines(money / LINE_PRICE)
     printLottoTicket(lottoLines.getLines())
     val result = inputResult()
-    val bonusNumber = inputBonusNumber()
+    val bonusNumber = inputBonusNumber(result)
     lottoLines.checkResult(result, bonusNumber)
     printResult(lottoLines.getLines())
 }
