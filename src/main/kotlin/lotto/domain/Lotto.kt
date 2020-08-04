@@ -1,11 +1,7 @@
 package lotto.domain
 
-class Lotto {
-    val numbers = (MIN..MAX).shuffled().take(COUNT)
+data class Lotto(private val generator: LottoGenerator = AutoLottoGenerator) {
+    val numbers = generator.execute()
 
-    companion object {
-        private const val COUNT = 6
-        private const val MIN = 1
-        private const val MAX = 45
-    }
+    override fun toString() = "[${numbers.joinToString()}]"
 }
