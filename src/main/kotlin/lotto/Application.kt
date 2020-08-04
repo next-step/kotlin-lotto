@@ -12,17 +12,13 @@ object Application {
         val price = InputView.purchasePrice()
 
         val purchaseCount = Buyer(price).purchaseCount
-        ResultView.showPurchaseCount(purchaseCount)
-
         val lottos = Lottos.of(purchaseCount)
-        ResultView.showPurchasedLottos(lottos.lottos)
+        ResultView.showPurchasedLottos(purchaseCount, lottos.lottos)
 
         val winningNumbers = InputView.lastWinningNumbers()
-
         lottos.isInWinningNumber(winningNumbers)
 
         ResultView.showWinningResult(lottos)
-        ResultView.showWinningRank()
 
         val calculateRatio = Statistics.calculateRatio(purchaseCount)
         ResultView.showRatio(calculateRatio)
