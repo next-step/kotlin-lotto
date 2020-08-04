@@ -16,7 +16,7 @@ class Buyer {
     }
 
     fun markLotto(markingNumber: List<Int>) {
-        _purchasedLottos.add(Lotto().apply { generate(markingNumber) })
+        _purchasedLottos.add(Lotto(markingNumber))
     }
 
     private fun generateAutoLottoNumber(): List<Int> {

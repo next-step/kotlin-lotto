@@ -1,15 +1,11 @@
 package lotto.model
 
-class Lotto {
+class Lotto(val numbers: List<Int>) {
 
-    private val _numbers = mutableListOf<Int>()
-    val numbers: List<Int> get() = _numbers
-
-    fun generate(numbers: List<Int>) {
-        require(numbers.size == 6) {
+    init {
+        require(numbers.size == NUMBER_COUNT) {
             "6개의 숫자를 선택해주세요."
         }
-        _numbers.addAll(numbers)
     }
 
     companion object {
