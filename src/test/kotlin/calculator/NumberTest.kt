@@ -2,7 +2,6 @@ package calculator
 
 import calculator.domain.Calculator
 import calculator.domain.Number
-import calculator.domain.findCustomDelimiter
 import calculator.domain.parse
 import calculator.domain.validate
 import org.assertj.core.api.Assertions.assertThat
@@ -19,8 +18,7 @@ class NumberTest {
     @ValueSource(strings = ["//;\n1;2;3"])
     fun `전체 메소드 테스트`(text: String) {
         val validatedText = validate(text)
-        val customDelimiter = findCustomDelimiter(validatedText)
-        val list = parse(validatedText, customDelimiter)
+        val list = parse(validatedText)
         val numbers = list.map { Number(it).isNature() }
         val sum = Calculator().sum(numbers)
 
@@ -28,23 +26,10 @@ class NumberTest {
     }
 
     @ParameterizedTest
-    @CsvSource(
-        value = [
-            "'//;\n1;2;3' > ;",
-            "'//*\n12*13*14' > *",
-            "'//#\n12#13#14' > #"
-        ],
-        delimiterString = ">"
-    )
-    fun `커스텀 구분자 구하기`(text: String, expected: String) {
-        assertThat(findCustomDelimiter(text)).isEqualTo(expected)
-    }
-
-    @ParameterizedTest
     @MethodSource("generateParsingTestData")
     fun `구분자를 기준으로 문자열 파싱`(text: String, delimiter: String, expected: List<String>) {
-        val parse = parse(text, delimiter)
-        assertThat(parse(text, delimiter)).isEqualTo(expected)
+        val parse = parse(text)
+        assertThat(parse(text)).isEqualTo(expected)
     }
 
     @ParameterizedTest
