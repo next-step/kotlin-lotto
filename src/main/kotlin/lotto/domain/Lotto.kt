@@ -5,14 +5,13 @@ typealias Numbers = Set<Int>
 class Lotto {
 
     val numbers: Numbers
-    var winningCount = 0
 
     constructor(numbers: Set<Int>) {
         this.numbers = numbers
     }
 
     fun countWinningNumber(winningNumber: Numbers) {
-        winningCount = numbers.filter {
+        val winningCount = numbers.filter {
             winningNumber.contains(it)
         }.count()
 
