@@ -22,6 +22,4 @@ object InputView {
             LottoNumber(it.toInt())
         } ?: throw IllegalArgumentException(ERROR_INVALID)
     }
-
-    // fun getBuyCount(inputMoney: Money) = inputMoney.won() / PRICE_PER_UNIT
 }
