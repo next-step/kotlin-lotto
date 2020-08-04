@@ -2,10 +2,10 @@ package lotto.domain
 
 class Lotto {
 
-    val numbers: List<Int>
+    val numbers: Set<Int>
     var winningCount = 0
 
-    constructor(numbers: List<Int>) {
+    constructor(numbers: Set<Int>) {
         this.numbers = numbers
     }
 
@@ -24,6 +24,7 @@ class Lotto {
                     .shuffled()
                     .take(6)
                     .sorted()
+                    .toSet()
             )
         }
     }
