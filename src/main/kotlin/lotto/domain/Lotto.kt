@@ -1,11 +1,11 @@
 package lotto.domain
 
-class Lotto() {
+class Lotto {
 
-    var numbers = listOf<Int>()
+    val numbers: List<Int>
     var winningCount = 0
 
-    constructor(numbers: List<Int>) : this() {
+    constructor(numbers: List<Int>) {
         this.numbers = numbers
     }
 
