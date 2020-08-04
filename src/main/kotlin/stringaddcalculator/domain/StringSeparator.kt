@@ -4,13 +4,12 @@ object StringSeparator {
     private const val BASIC_DELIMITER_COMMA = ","
     private const val BASIC_DELIMITER_COLON = ":"
     private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
-    private val BASIC_STRING_REGEX = Regex("\\d(.\\d)*")
+    private val BASIC_STRING_REGEX = Regex("\\d+(.\\d+)*")
 
     fun separate(inputString: String?): List<String> {
         if (inputString.isNullOrBlank()) return emptyList()
         if (inputString.hasCustomDelimiter()) return separateWithCustomDelimiter(inputString)
-        validateInputString(inputString)
-        return inputString.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
+        return separate(inputString)
     }
 
     private fun String.hasCustomDelimiter(): Boolean {
@@ -19,8 +18,13 @@ object StringSeparator {
 
     private fun separateWithCustomDelimiter(inputString: String): List<String> {
         val (customDelimiter, stringToSeparate) = findMatchResultsOf(inputString)
-        validateInputString(stringToSeparate)
-        return stringToSeparate.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON, customDelimiter)
+        return separate(stringToSeparate, customDelimiter)
+    }
+
+    private fun separate(string: String, customDelimiter: String? = null): List<String> {
+        validateInputString(string)
+        return if (customDelimiter == null) string.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON)
+        else string.split(BASIC_DELIMITER_COMMA, BASIC_DELIMITER_COLON, customDelimiter)
     }
 
     private fun findMatchResultsOf(inputString: String): MatchResult.Destructured {
@@ -29,8 +33,6 @@ object StringSeparator {
     }
 
     private fun validateInputString(inputString: String) {
-        if (!BASIC_STRING_REGEX.matches(inputString)) {
-            throw IllegalArgumentException("$inputString 는 유효하지 않은 문자열입니다.")
-        }
+        require(BASIC_STRING_REGEX.matches(inputString)) { "$inputString 는 유효하지 않은 문자열입니다." }
     }
 }
