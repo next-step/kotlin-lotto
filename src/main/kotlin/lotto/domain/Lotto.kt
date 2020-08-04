@@ -28,9 +28,7 @@ class Lotto(private val strategy: Strategy) {
 
     private fun getSixNumber(numbers: List<LottoNumber>) = numbers.subList(0, 6)
 
-    private fun shuffle(numbers: List<LottoNumber>): List<LottoNumber> {
-        return strategy.shuffle(numbers)
-    }
+    private fun shuffle(numbers: List<LottoNumber>) = strategy.shuffle(numbers)
 
     private fun getAllNumbers() = List(45) { i -> LottoNumber(i + 1) }
 
