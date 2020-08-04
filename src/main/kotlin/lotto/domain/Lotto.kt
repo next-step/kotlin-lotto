@@ -1,17 +1,38 @@
 package lotto.domain
 
 import lotto.domain.value.LottoNumber
+import lotto.strategy.Strategy
+import lotto.view.ResultLotto
 
-class Lotto {
-    private val numbers = List(45) { i -> LottoNumber(i + 1) }.shuffled().subList(0, 6).sortedBy { it.getNumber() }
+class Lotto(private val strategy: Strategy) {
+    private val lotto = getNumbers()
 
-    override fun toString() = "$numbers\n"
+    fun getLotto() = lotto
 
-    fun getWinCount(winningNumbers: List<LottoNumber>): Int {
+    fun getWinCount(winningNumbers: List<LottoNumber>): ResultLotto {
         var count = 0
         winningNumbers.forEach {
-            if (numbers.contains(it)) count++
+            if (lotto.contains(it)) count++
         }
-        return count
+        return ResultLotto(count)
     }
+
+    private fun getNumbers(): List<LottoNumber> {
+        val allNumber = getAllNumbers()
+        val shuffledNumber = shuffle(allNumber)
+        val sixNumber = getSixNumber(shuffledNumber)
+        return order(sixNumber)
+    }
+
+    private fun order(numbers: List<LottoNumber>) = numbers.sortedBy { it.getNumber() }
+
+    private fun getSixNumber(numbers: List<LottoNumber>) = numbers.subList(0, 6)
+
+    private fun shuffle(numbers: List<LottoNumber>): List<LottoNumber> {
+        return strategy.shuffle(numbers)
+    }
+
+    private fun getAllNumbers() = List(45) { i -> LottoNumber(i + 1) }
+
+    override fun toString() = "$lotto\n"
 }
