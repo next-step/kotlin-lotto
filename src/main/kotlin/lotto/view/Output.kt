@@ -20,6 +20,6 @@ fun printResult(resultData: ResultData, money: Int) {
             5개 일치 (1500000원)- ${resultData.second}개
             6개 일치 (2000000000원)- ${resultData.first}개
             총 수익률은 ${resultData.price / money}입니다.(기준이 1)
-        """
+        """.trimIndent()
     )
 }

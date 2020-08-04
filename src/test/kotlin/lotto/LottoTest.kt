@@ -15,14 +15,6 @@ class LottoTest {
         assertThat(lottoSingleLine.getNumbers().fold(true, { t1, t2 -> t1 && t2 is Int })).isEqualTo(true)
     }
 
-    @ParameterizedTest
-    @CsvSource(
-        "10000,10",
-        "20000,20",
-        "30000,30",
-        "40000,40"
-    )
-
     @Test
     fun `1등 당첨 테스트`() {
         val lottoSingleLine = LottoSingleLine()
@@ -47,6 +39,13 @@ class LottoTest {
         assertThat(lottoSingleLine.matching(result)).isEqualTo(5)
     }
 
+    @ParameterizedTest
+    @CsvSource(
+        "10000,10",
+        "20000,20",
+        "30000,30",
+        "40000,40"
+    )
     fun `로또 티켓(여러줄) 생성 테스트`(inputMoney: Int, gameCount: Int) {
         val totalNumber = inputMoney / LINE_PRICE
         val lottoTicket = LottoLines(totalNumber)
