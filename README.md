@@ -22,9 +22,9 @@
     
 ##Lotto
 
-1. Winner Enum , lotto , LottoNumberGenerater , lottoManager ,MoneyManager , inputView, resultView
-2. Winner 
-    - 당첨금 Prize Enum
+1. Winners , Pirze , lotto , LottoNumberGenerater , lottoManager ,MoneyManager , inputView, resultView
+2. Winners , Pirze
+    - 당첨금 PrizeMoney Enum
     - 당첨금 환산  
 3. lotto
     - Numbers
