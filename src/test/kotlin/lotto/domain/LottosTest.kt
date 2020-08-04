@@ -1,6 +1,7 @@
 package lotto.domain
 
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottosTest {
@@ -17,8 +18,9 @@ class LottosTest {
         )
     }
 
+    @DisplayName("toString()을 하면, 모든 로또의 번호를 반환한다")
     @Test
-    fun `print toString`() {
+    fun `print toString()`() {
         print(lottos.toString())
     }
 }
