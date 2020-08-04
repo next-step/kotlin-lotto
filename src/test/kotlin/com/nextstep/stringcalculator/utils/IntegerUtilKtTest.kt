@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test
 
 internal class IntegerUtilKtTest {
     @Test
-    fun `자연수가 맞다면 true`() {
-        assertThat(1.isNatural()).isTrue()
+    fun `음수라면 true`() {
+        assertThat((-1).isNegative()).isTrue()
     }
 
     @Test
-    fun `자연수가 아니라면 false`() {
-        assertThat((-1).isNatural()).isFalse()
+    fun `음수가 아니라면 false`() {
+        assertThat(1.isNegative()).isFalse()
     }
 }

@@ -1,5 +1,5 @@
 package com.nextstep.stringcalculator.utils
 
-fun Int.isNatural(): Boolean {
-    return this > 0
+fun Int.isNegative(): Boolean {
+    return this < 0
 }
