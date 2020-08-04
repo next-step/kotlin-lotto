@@ -2,6 +2,9 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class LottoMachineTest {
 
@@ -16,18 +19,28 @@ class LottoMachineTest {
         assertThat(profit).isEqualTo(5000)
     }
 
-    @Test
-    fun `등수 목록 계산`() {
-        val lottoNumber1 = LottoNumber(1, 2, 3, 4, 5, 6)
-        val lottoNumber2 = LottoNumber(3, 4, 5, 6, 7, 8)
-        val prizeNumber = LottoNumber(3, 4, 5, 6, 7, 8)
+    @ParameterizedTest
+    @MethodSource("calculateStatNumbers")
+    fun `등수 목록 계산`(prizeNumber: List<Int>, buyNumbers: List<Int>) {
+        val prizeNumber = LottoNumber(prizeNumber)
+        val buyNumber = LottoNumber(buyNumbers)
 
         val machine = LottoMachine()
-        val prizeStat = machine.calculateStat(listOf(lottoNumber1, lottoNumber2), prizeNumber)
+        val prizeStat = machine.calculateStat(listOf(buyNumber), prizeNumber)
 
         assertThat(prizeStat).contains(
-            PrizeMoneyWrapper(PrizeMoney.FOUR, 1),
-            PrizeMoneyWrapper(PrizeMoney.SIX, 1)
+            PrizeMoneyWrapper(PrizeMoney.FIVE, 1)
+        )
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun calculateStatNumbers() = listOf<Arguments>(
+            Arguments.of(
+                listOf(1, 12, 43, 23, 39, 37),
+                listOf(1, 12, 43, 23, 39, 42)
+            )
         )
     }
 }
