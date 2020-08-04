@@ -16,6 +16,6 @@ class Lotto(val numbers: List<Int>) {
     companion object {
         const val PRICE = 1_000
         const val NUMBER_COUNT = 6
-        val NUMBER_GENERATION_RANGE = 1..99
+        val NUMBER_GENERATION_RANGE = 1..45
     }
 }
