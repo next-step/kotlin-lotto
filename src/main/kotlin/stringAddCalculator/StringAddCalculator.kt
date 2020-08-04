@@ -1,6 +1,6 @@
 package stringAddCalculator
 
-class StringAddCalculator {
+object StringAddCalculator {
     private val delimiters = mutableListOf(",", ":")
     private val regex = Regex(CUSTOM_DELIMITER)
 
