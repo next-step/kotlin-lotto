@@ -6,11 +6,8 @@ import lotto.domain.Statistics
 
 object ResultView {
 
-    fun showPurchaseCount(purchaseCount: Int) {
+    fun showPurchasedLottos(purchaseCount: Int, lottos: List<Lotto>) {
         println("$purchaseCount 개를 구입하였습니다.")
-    }
-
-    fun showPurchasedLottos(lottos: List<Lotto>) {
         lottos.map { println(it.numbers) }
     }
 
@@ -19,9 +16,7 @@ object ResultView {
         lottos.lottos.map { lotto ->
             lotto.winningCount == 3
         }
-    }
 
-    fun showWinningRank() {
         println("당첨 통계")
         println("---------")
         println("3개 일치 (5000원)- ${Statistics.count_3}개")
