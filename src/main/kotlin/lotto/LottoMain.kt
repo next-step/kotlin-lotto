@@ -1,9 +1,10 @@
 package lotto
 
-import lotto.domain.LottoShop
+import lotto.LottoUtils.provideNumbers
+import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.Results
-import lotto.view.ResultView.showSalesVolume
+import lotto.view.ResultView.showPurchaseAmounts
 import lotto.view.ResultView.showLottosDetail
 import lotto.view.ResultView.showResults
 import lotto.view.InputView
@@ -11,11 +12,11 @@ import lotto.view.InputView
 fun main() {
 
     val payment = InputView.readPayment()
+    val amounts = payment / LOTTO_PRICE
 
-    val lottoShop = LottoShop(payment)
-    val lottos = Lottos(lottoShop.makeLottos())
+    val lottos = Lottos((1..amounts).map { Lotto(provideNumbers()) })
 
-    showSalesVolume(lottoShop)
+    showPurchaseAmounts(amounts)
     showLottosDetail(lottos)
 
     val luckyNumbers = InputView.readLuckyNumbers()

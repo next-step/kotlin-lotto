@@ -1,13 +1,12 @@
 package lotto.view
 
-import lotto.domain.LottoShop
 import lotto.domain.Lottos
 import lotto.domain.Results
 
 object ResultView {
 
-    fun showSalesVolume(lottoShop: LottoShop) {
-        println(lottoShop)
+    fun showPurchaseAmounts(amounts: Int) {
+        println("${amounts}개를 구매했습니다.")
     }
 
     fun showLottosDetail(lottos: Lottos) {
