@@ -3,16 +3,14 @@ package lotto.domain
 import lotto.LottoUtils.luckyNumbers
 
 data class Lotto(
-    private var numbers: List<Int>,
-    private var matchSuccess: Int = 0
+    private val numbers: List<Int>
 ) {
 
-    fun hasLuckyNumber(luckyNumbers: List<Int>): Int {
-        luckyNumbers.forEach { if (numbers.contains(it)) matchSuccess++ }
-        return matchSuccess
+    fun hasLuckyNumbers(luckyNumbers: List<Int>): Int {
+        return luckyNumbers.filter { numbers.contains(it) }.size
     }
 
-    fun getResult(): Result = Result.getResult(hasLuckyNumber(luckyNumbers))
+    fun getResult(): Result = Result.getResult(hasLuckyNumbers(luckyNumbers))
 
     override fun toString(): String {
         return "$numbers"

@@ -17,7 +17,7 @@ class LottoTest {
     @Test
     fun `has lucky numbers`() {
         assertThat(
-            lotto.hasLuckyNumber(
+            lotto.hasLuckyNumbers(
                 luckyNumbers = listOf(1, 2, 3, 10, 20, 30)
             )
         ).isEqualTo(3)
