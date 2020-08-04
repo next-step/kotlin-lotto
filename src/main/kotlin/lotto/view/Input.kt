@@ -1,6 +1,6 @@
 package lotto.view
 
-import java.lang.IllegalArgumentException
+import kotlin.system.exitProcess
 
 fun inputMoney(): Int {
     println("구입금액을 입력해 주세요.")
@@ -15,7 +15,7 @@ fun inputMoneyError(): Int {
         Ex) 15000,20000,25000
         """.trimIndent()
     )
-    return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("잘못된 입력")
+    return readLine()?.toIntOrNull() ?: exitProcess(0)
 }
 
 fun inputResult(): List<Int> {
@@ -38,7 +38,7 @@ fun inputResultError(): List<Int> {
     val result = readLine() ?: ""
 
     return if (resultInvalid(result)) {
-        throw IllegalArgumentException("잘못된 입력")
+        exitProcess(0)
     } else {
         result.split(",").map { it.toInt() }
     }
