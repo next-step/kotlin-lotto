@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 class Numbers(private val _list: List<Int> = listOf()) {
     val list

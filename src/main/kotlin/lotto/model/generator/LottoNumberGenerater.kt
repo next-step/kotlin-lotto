@@ -1,6 +1,6 @@
-package lotto.generator
+package lotto.model.generator
 
-import lotto.Numbers
+import lotto.model.Numbers
 
 interface LottoNumberGenerater {
     fun generate(): Numbers

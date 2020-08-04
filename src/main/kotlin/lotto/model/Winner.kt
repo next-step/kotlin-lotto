@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 object Winner {
     enum class Prize(val matchingCount: Int, val prizeMoney: Int) {
