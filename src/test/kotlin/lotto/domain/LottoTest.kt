@@ -16,11 +16,11 @@ class LottoTest {
     @DisplayName("로또의 번호와 당첨번호가 일치하는지 파악하여, 로또의 매칭성공 개수를 반환한다")
     @Test
     fun `has lucky numbers`() {
-        assertThat(
-            lotto.hasLuckyNumbers(
-                luckyNumbers = listOf(1, 2, 3, 10, 20, 30)
-            )
-        ).isEqualTo(3)
+        // when
+        val matchSuccess = lotto.hasLuckyNumbers(luckyNumbers = listOf(1, 2, 3, 10, 20, 30))
+
+        // then
+        assertThat(matchSuccess).isEqualTo(3)
     }
 
     @DisplayName("toString()을 하면, 로또가 가지고 있는 번호를 반환한다")

@@ -8,8 +8,12 @@ class LottoShopTest {
 
     @DisplayName("구입금액을 입력하면 로또 구입개수를 알 수 있다")
     @Test
-    fun `purchase amount`() {
-        assertThat(LottoShop(5000).makeLottos().size).isEqualTo(5)
+    fun `purchase amounts`() {
+        // when
+        val purchaseAmounts = LottoShop(5000).makeLottos().size
+
+        // then
+        assertThat(purchaseAmounts).isEqualTo(5)
     }
 
     @DisplayName("toString()을 하면, 로또 구입개수 정보를 반환한다")
