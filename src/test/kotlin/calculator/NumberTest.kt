@@ -1,9 +1,7 @@
 package calculator
 
-import calculator.domain.Calculator
 import calculator.domain.Number
 import calculator.domain.parse
-import calculator.domain.validate
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.params.ParameterizedTest
@@ -13,17 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class NumberTest {
-
-    @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
-    fun `전체 메소드 테스트`(text: String) {
-        val validatedText = validate(text)
-        val list = parse(validatedText)
-        val numbers = list.map { Number(it).isNature() }
-        val sum = Calculator().sum(numbers)
-
-        assertThat(sum).isEqualTo(6)
-    }
 
     @ParameterizedTest
     @MethodSource("generateParsingTestData")
