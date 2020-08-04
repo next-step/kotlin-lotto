@@ -4,8 +4,8 @@ import kotlin.math.floor
 
 class Store(private val buyer: Buyer) {
 
-    fun drawLottoNumber(lastWeekLottoNumbers: List<Int>): List<Prize> =
-        buyer.purchasedLottos.map { it.convertPrize(lastWeekLottoNumbers) }
+    fun drawLottoNumber(lastWeekLotto: Lotto): List<Prize> =
+        buyer.purchasedLottos.map { it.convertPrize(lastWeekLotto) }
 
     fun getRateOfReturn(price: Int, prizes: List<Prize>): Double {
         val totalPrize = prizes

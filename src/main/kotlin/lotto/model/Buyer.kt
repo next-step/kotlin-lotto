@@ -11,19 +11,19 @@ class Buyer {
         }
 
         repeat(price / Lotto.PRICE) {
-            markLotto(generateAutoLottoNumber())
+            markLotto(generateAutoLotto())
         }
     }
 
-    fun markLotto(markingNumber: List<Int>) {
-        _purchasedLottos.add(Lotto(markingNumber))
+    fun markLotto(markedLotto: Lotto) {
+        _purchasedLottos.add(markedLotto)
     }
 
-    private fun generateAutoLottoNumber(): List<Int> {
+    private fun generateAutoLotto(): Lotto {
         val autoNumbers = mutableListOf<Int>()
         repeat(Lotto.NUMBER_COUNT) {
             autoNumbers.add(Lotto.NUMBER_GENERATION_RANGE.random())
         }
-        return autoNumbers
+        return Lotto(autoNumbers)
     }
 }
