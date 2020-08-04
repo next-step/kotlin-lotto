@@ -42,7 +42,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("generateWinningTestData")
     fun `구입한 로또가 당첨번호와 몇개나 일치하는지 확인`(lotto: Lotto, expected: Int) {
-        val winningNumber = listOf(2, 3, 22, 40, 43, 45)
+        val winningNumber = setOf(2, 3, 22, 40, 43, 45)
 
         lotto.countWinningNumber(winningNumber)
         assertEquals(lotto.winningCount, expected)
