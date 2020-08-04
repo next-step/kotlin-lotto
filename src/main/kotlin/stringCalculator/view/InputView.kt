@@ -8,10 +8,7 @@ object InputView {
     }
 
     fun checkUserInput(input: String?): String {
-        if (input.isNullOrBlank()) {
-            print(input)
-            return "0"
-        }
+        if (input.isNullOrBlank()) return "0"
         return input
     }
 }
