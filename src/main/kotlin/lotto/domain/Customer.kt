@@ -17,7 +17,7 @@ class Customer(private val money: Money, private val strategy: Strategy) {
 
     fun winLottoCount(winningNumbers: List<LottoNumber>): List<WinLotto> {
         lottos.forEach {
-            it.getWinCount(winningNumbers)
+            it.winCount(winningNumbers)
         }
         return WinLotto.resultList()
     }

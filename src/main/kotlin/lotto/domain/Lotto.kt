@@ -1,20 +1,22 @@
 package lotto.domain
 
 import lotto.domain.value.LottoNumber
+import lotto.domain.value.WinLotto.Companion.plusCount
 import lotto.strategy.Strategy
-import lotto.view.ResultLotto
 
-class Lotto(private val strategy: Strategy) {
+data class Lotto(private val strategy: Strategy) {
     private val lotto = getNumbers()
 
     fun getLotto() = lotto
 
-    fun getWinCount(winningNumbers: List<LottoNumber>): ResultLotto {
+    fun winCount(winningNumbers: List<LottoNumber>) {
         var count = 0
         winningNumbers.forEach {
-            if (lotto.contains(it)) count++
+            if (lotto.contains(it)) {
+                count++
+            }
         }
-        return ResultLotto(count)
+        plusCount(count)
     }
 
     private fun getNumbers(): List<LottoNumber> {
