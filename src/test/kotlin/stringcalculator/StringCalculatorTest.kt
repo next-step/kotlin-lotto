@@ -19,22 +19,15 @@ class StringCalculatorTest {
 
     @DisplayName(value = "1개의 숫자 입력할 경우, 그대로 반환")
     @ParameterizedTest
-    @ValueSource(strings = ["3"])
+    @ValueSource(strings = ["3", "0"])
     fun inputOnlyOneString(text: String) {
         assertThat(StringCalculator.sumString(listOf(text))).isSameAs(text.toInt())
     }
 
-    @DisplayName(value = "0이 입력된 경우, 0 리턴 ")
-    @ParameterizedTest
-    @ValueSource(strings = ["0"])
-    fun inputOnlyZeroString(text: String) {
-        assertThat(StringCalculator.sumString(listOf(text))).isSameAs(0)
-    }
-
     @DisplayName(value = "아무것도 입력이 안됬을 경우, 0 리턴 ")
-    @ParameterizedTest
-    @ValueSource(strings = [""])
-    fun inputEmptyValueString(text: String) {
+    @Test
+    fun inputEmptyValueString() {
+        val text = ""
         assertThat(StringCalculator.sumString(listOf(text))).isSameAs(0)
     }
 

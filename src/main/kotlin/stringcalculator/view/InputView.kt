@@ -1,9 +1,6 @@
 package stringcalculator.view
 
 class InputView(val input: () -> String? = { readLine() }) {
-    companion object {
-        private const val INPUT = "문자열을 입력하세요"
-    }
 
     private fun showQuestion(question: String): String {
         println(question)
@@ -11,4 +8,8 @@ class InputView(val input: () -> String? = { readLine() }) {
     }
 
     fun getInput() = showQuestion(INPUT)
+
+    companion object {
+        private const val INPUT = "문자열을 입력하세요"
+    }
 }
