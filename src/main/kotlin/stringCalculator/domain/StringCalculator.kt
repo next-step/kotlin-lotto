@@ -26,7 +26,6 @@ object StringCalculator {
     }
 
     private fun getAnotherAddResult(userInputTemplate: String): Int {
-
         val isCustomRegex = Regex(CUSTOM_REGEX).matches(userInputTemplate)
         val resultStrategy = getParsingType(isCustomRegex)
         resultStrategy.parsingNumber(userInputTemplate)

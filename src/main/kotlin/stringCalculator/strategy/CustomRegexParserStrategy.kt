@@ -7,7 +7,6 @@ class CustomRegexParserStrategy : ParserStrategy {
     override var numberTokens: List<Int> = listOf()
 
     override fun parsingNumber(inputValue: String): List<Int> {
-
         val result = Regex(StringCalculator.CUSTOM_REGEX).find(inputValue) ?: throw NullPointerException("null")
 
         try {

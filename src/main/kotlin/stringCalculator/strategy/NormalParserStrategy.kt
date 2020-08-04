@@ -6,9 +6,8 @@ class NormalParserStrategy : ParserStrategy {
     override var numberTokens: List<Int> = listOf()
 
     override fun parsingNumber(inputValue: String): List<Int> {
-
         try {
-            numberTokens = inputValue.split(DELIMITER_TYPE_COMMA, DELIMITER_TYPE_SEMICOLON)
+            numberTokens = inputValue.split(DELIMITER_TYPE_COMMA, DELIMITER_TYPE_COLON)
                 .filter { !it.isNullOrBlank() }
                 .map { it.toInt() }
         } catch (e: NumberFormatException) {
@@ -19,6 +18,6 @@ class NormalParserStrategy : ParserStrategy {
 
     companion object {
         const val DELIMITER_TYPE_COMMA = ","
-        const val DELIMITER_TYPE_SEMICOLON = ";"
+        const val DELIMITER_TYPE_COLON = ":"
     }
 }
