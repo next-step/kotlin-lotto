@@ -4,14 +4,8 @@ import kotlin.math.floor
 
 class Store(private val buyer: Buyer) {
 
-    fun drawLottoNumber(lottoNumbers: List<Int>): List<Prize> {
-        val results = mutableListOf<Prize>()
-        for (lotto in buyer.purchasedLottos) {
-            val matchCount = lotto.numbers.count { lottoNumbers.contains(it) }
-            results.add(Prize.findByMatchCount(matchCount))
-        }
-        return results
-    }
+    fun drawLottoNumber(lastWeekLottoNumbers: List<Int>): List<Prize> =
+        buyer.purchasedLottos.map { it.convertPrize(lastWeekLottoNumbers) }
 
     fun getRateOfReturn(price: Int, prizes: List<Prize>): Double {
         val totalPrize = prizes

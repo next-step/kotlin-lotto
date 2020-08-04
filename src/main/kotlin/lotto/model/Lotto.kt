@@ -8,6 +8,11 @@ class Lotto(val numbers: List<Int>) {
         }
     }
 
+    fun convertPrize(targetNumbers: List<Int>): Prize {
+        val matchCount = numbers.count { targetNumbers.contains(it) }
+        return Prize.findByMatchCount(matchCount)
+    }
+
     companion object {
         const val PRICE = 1_000
         const val NUMBER_COUNT = 6
