@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.domain.Numbers
+
 object InputView {
 
     val NUMERIC_REGEX = Regex("[0-9]*")
@@ -12,7 +14,7 @@ object InputView {
         return price
     }
 
-    fun lastWinningNumbers(): List<Int> {
+    fun lastWinningNumbers(): Numbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val text = readLine()
         var winningNumbers = validateWinningNumber(text)
@@ -22,10 +24,10 @@ object InputView {
             winningNumbers = validateWinningNumber(readLine())
         }
 
-        return winningNumbers.map { it.toInt() }
+        return winningNumbers.map { it.toInt() }.toSet()
     }
 
-    fun validateWinningNumber(numbers: String?): List<String>? {
+    fun validateWinningNumber(numbers: String?): Set<String>? {
         if (numbers.isNullOrBlank()) {
             println("잘못된 당첨 번호 입니다.")
             return null
@@ -64,4 +66,5 @@ object InputView {
         .split(",")
         .filter { it.isNotBlank() }
         .map { it.trim() }
+        .toSet()
 }
