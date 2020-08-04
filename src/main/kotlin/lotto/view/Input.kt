@@ -44,6 +44,16 @@ fun inputResultError(): List<Int> {
     }
 }
 
+fun inputBonusNumber(): Int {
+    println("보너스 볼을 입력해 주세요.")
+    return readLine()?.toIntOrNull() ?: inputBonusNumberError()
+}
+
+fun inputBonusNumberError(): Int {
+    println("보너스 볼을 입력해 주세요.")
+    return readLine()?.toIntOrNull() ?: exitProcess(0)
+}
+
 fun resultInvalid(readLine: String): Boolean {
     return (readLine.isEmpty() || !readLine.contains(",") || readLine.split(",").size != 6)
 }
