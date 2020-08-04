@@ -9,10 +9,7 @@ class StringAddCalculator {
         }
 
         val expression = Expression(input)
-        return when {
-            expression.isValid() -> expression.extractTokens().map { it.toIntOrNull() ?: 0 }.sum()
-            else -> throw RuntimeException()
-        }
+        return expression.extractTokens().sumBy { it.value }
     }
 
     companion object {
