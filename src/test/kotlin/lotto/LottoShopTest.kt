@@ -31,7 +31,12 @@ class LottoShopTest {
             override fun createAutoTicket(): LottoTicket {
                 return lottoTicket
             }
+
+            override fun createManualTicket(numbers: List<Int>): LottoTicket {
+                return LottoTicket(lottoNumbers)
+            }
         })
+        lottoShop.setLuckyLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
         val expectedLottoResults =
             listOf(LottoResult.FIRST, LottoResult.FIRST, LottoResult.FIRST, LottoResult.FIRST, LottoResult.FIRST)
 

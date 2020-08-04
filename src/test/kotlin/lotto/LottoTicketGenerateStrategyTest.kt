@@ -21,6 +21,10 @@ class LottoTicketGenerateStrategyTest {
             override fun createAutoTicket(): LottoTicket {
                 return expectedLottoTicket
             }
+
+            override fun createManualTicket(numbers: List<Int>): LottoTicket {
+                return LottoTicket(lottoNumbers)
+            }
         }
 
         // then
