@@ -16,8 +16,8 @@ class LottoTest {
     fun whenCreateLottoIsMatching6() {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
-        Assertions.assertThat(lotto.checkNumbers(input.toNumbers()).getPrizeMoney())
-            .isEqualTo(Prize.PrizeMoney.ONE.prizeMoney)
+        Assertions.assertThat(lotto.checkNumbers(input.toNumbers()).prizeMoney)
+            .isEqualTo(Prize.ONE.prizeMoney)
     }
 
     @DisplayName(value = "같은 숫자 0개일 경우, 상금은 0원이여야한다.")
@@ -26,7 +26,7 @@ class LottoTest {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
         val winningNumbers = "11,22,33,44,55,66"
-        Assertions.assertThat(lotto.checkNumbers(winningNumbers.toNumbers()).getPrizeMoney())
-            .isEqualTo(Prize.PrizeMoney.ZERO.prizeMoney)
+        Assertions.assertThat(lotto.checkNumbers(winningNumbers.toNumbers()).prizeMoney)
+            .isEqualTo(Prize.ZERO.prizeMoney)
     }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class LottoNumberGeneratorTest {
 
-    @DisplayName(value = "Auto Generate로 생성할 경우, Size는 Lotto.NUMBER_COUNT와 같아야한다.  ")
+    @DisplayName(value = "Auto Generate로 생성할 경우, Size는 Lotto.NUMBER_COUNT와 같아야한다. ")
     @Test
     fun randomNumberGeneratorCountTest() {
         val numberGenerater = RandomNumberGenerater

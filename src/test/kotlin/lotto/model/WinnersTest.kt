@@ -12,24 +12,24 @@ class WinnersTest {
     @Test
     fun checkPrizeMoneyCase6() {
         val list = mutableListOf<Prize>().apply {
-            add(Prize.newInstance(Prize.PrizeMoney.ONE.matchingCount))
-            add(Prize.newInstance(Prize.PrizeMoney.ONE.matchingCount))
-            add(Prize.newInstance(Prize.PrizeMoney.ONE.matchingCount))
-            add(Prize.newInstance(Prize.PrizeMoney.TWO.matchingCount))
-            add(Prize.newInstance(Prize.PrizeMoney.THREE.matchingCount))
-            add(Prize.newInstance(Prize.PrizeMoney.FOUR.matchingCount))
-            add(Prize.newInstance(Prize.PrizeMoney.ZERO.matchingCount))
+            add(Prize.getPrize(Prize.ONE.matchingCount))
+            add(Prize.getPrize(Prize.ONE.matchingCount))
+            add(Prize.getPrize(Prize.ONE.matchingCount))
+            add(Prize.getPrize(Prize.TWO.matchingCount))
+            add(Prize.getPrize(Prize.THREE.matchingCount))
+            add(Prize.getPrize(Prize.FOUR.matchingCount))
+            add(Prize.getPrize(Prize.ZERO.matchingCount))
         }
         val winners = Winners(list)
-        Assertions.assertThat(winners.getWinnerType(Prize.PrizeMoney.ONE).size).isSameAs(3)
+        Assertions.assertThat(winners.getPrizeCount(Prize.ONE)).isSameAs(3)
     }
 
     @DisplayName(value = "하나도 당첨되지 않았을 경우, 전체 수익률을 0 ")
     @Test
     fun checkWinnersTotalYieldZero() {
         val list = mutableListOf<Prize>().apply {
-            add(Prize.newInstance(Prize.PrizeMoney.ZERO.matchingCount))
-            add(Prize.newInstance(Prize.PrizeMoney.ZERO.matchingCount))
+            add(Prize.getPrize(Prize.ZERO.matchingCount))
+            add(Prize.getPrize(Prize.ZERO.matchingCount))
         }
         val winners = Winners(list)
         Assertions.assertThat(winners.getTotalYield()).isEqualTo(0.0)
@@ -40,7 +40,7 @@ class WinnersTest {
     @ValueSource(ints = [3, 4, 5, 6])
     fun checkWinnersTotalYield(input: Int) {
         val list = mutableListOf<Prize>().apply {
-            add(Prize.newInstance(input))
+            add(Prize.getPrize(input))
         }
         val winners = Winners(list)
         Assertions.assertThat(winners.getTotalYield()).isGreaterThan(1.0)

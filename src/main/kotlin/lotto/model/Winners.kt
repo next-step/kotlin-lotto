@@ -1,11 +1,14 @@
 package lotto.model
 
 class Winners(
-    private var list: List<Prize>
+    list: List<Prize>
 ) {
     val lottoBuyCount: Int = list.size
+    private val winLotto: Map<Prize, Int> = list.groupingBy { it }.eachCount()
 
-    fun getWinnerType(type: Prize.PrizeMoney) = list.filter { it.isType(type) }
+    fun getPrizeCount(prize: Prize) = winLotto.getOrDefault(prize, Prize.ZERO.prizeMoney)
 
-    fun getTotalYield() = list.sumBy(Prize::getPrizeMoney).toDouble() / (lottoBuyCount * Lotto.PRICE).toDouble()
+    fun getTotalYield() = getTotalPrizeMoney() / (lottoBuyCount * Lotto.PRICE).toDouble()
+
+    private fun getTotalPrizeMoney() = Prize.values().sumBy { it.prizeMoney * getPrizeCount(it) }
 }

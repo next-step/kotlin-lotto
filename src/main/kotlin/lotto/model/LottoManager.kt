@@ -1,13 +1,13 @@
 package lotto.model
 
 class LottoManager(money: Int) {
-    private val _lottos: MutableList<Lotto> = mutableListOf()
+    private val _lottos: List<Lotto>
     val lottos: List<Lotto>
         get() = _lottos
 
     init {
-        (1..purchaseCount(money)).forEach { _ ->
-            _lottos.add(makeLotto())
+        _lottos = (1..purchaseCount(money)).map { _ ->
+            makeLotto()
         }
     }
 

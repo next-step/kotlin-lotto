@@ -12,7 +12,7 @@ data class Lotto(
         return numbers.list.toString()
     }
 
-    fun checkNumbers(winningNumbers: Numbers) = Prize.newInstance(numbers.getMatchingCounts(winningNumbers))
+    fun checkNumbers(winningNumbers: Numbers) = Prize.getPrize(numbers.getMatchingCounts(winningNumbers))
 
     companion object {
         const val MIN_NUMBER = 1
