@@ -6,13 +6,14 @@ private const val LOTTO_PICK_COUNT = 6
 
 class LottoSingleLine {
     private val lottoNumbers = createLine()
+    private lateinit var lottoResult: LottoResult
 
-    fun getNumbers(): List<Int> {
-        return lottoNumbers
-    }
+    fun getNumbers(): List<Int> = lottoNumbers
 
-    fun matching(result: List<Int>): Int {
-        return result.filter { lottoNumbers.contains(it) }.size
+    fun getResult(): LottoResult = lottoResult
+
+    fun checkPlace(result: List<Int>) {
+        lottoResult = getPlace(result.filter { lottoNumbers.contains(it) }.size)
     }
 
     private fun createLine(): List<Int> {

@@ -19,7 +19,7 @@ class LottoTest {
     fun `1등 당첨 테스트`() {
         val lottoSingleLine = LottoSingleLine()
         val result = lottoSingleLine.getNumbers()
-        assertThat(lottoSingleLine.matching(result)).isEqualTo(6)
+        assertThat(lottoSingleLine.checkPlace(result)).isEqualTo(6)
     }
 
     @Test
@@ -27,7 +27,7 @@ class LottoTest {
         val lottoSingleLine = LottoSingleLine()
         val result = lottoSingleLine.getNumbers().toMutableList()
         result[result.lastIndex] = 0
-        assertThat(lottoSingleLine.matching(result)).isEqualTo(5)
+        assertThat(lottoSingleLine.checkPlace(result)).isEqualTo(5)
     }
 
     @Test
@@ -36,7 +36,7 @@ class LottoTest {
         val result = lottoSingleLine.getNumbers().toMutableList()
         result[result.lastIndex - 1] = 0
         result[result.lastIndex] = 0
-        assertThat(lottoSingleLine.matching(result)).isEqualTo(5)
+        assertThat(lottoSingleLine.checkPlace(result)).isEqualTo(5)
     }
 
     @ParameterizedTest
