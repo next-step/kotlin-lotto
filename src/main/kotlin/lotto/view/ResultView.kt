@@ -12,11 +12,6 @@ object ResultView {
     }
 
     fun showWinningResult(lottos: Lottos) {
-
-        lottos.lottos.map { lotto ->
-            lotto.winningCount == 3
-        }
-
         println("당첨 통계")
         println("---------")
         println("3개 일치 (5000원)- ${Statistics.count_3}개")
