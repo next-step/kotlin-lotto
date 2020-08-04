@@ -25,7 +25,7 @@ object ResultView {
     }
 
     fun printTotalRate(totalRate: BigDecimal) {
-        println("총 수익률은 ${totalRate}입니다.")
+        println("총 수익률은 ${totalRate.toDouble()}입니다.")
     }
 
     private fun printJoinToString(lottos: List<Any>) {

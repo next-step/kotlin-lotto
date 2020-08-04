@@ -1,11 +1,11 @@
 import lotto.domain.Customer
-import lotto.strategy.TestStrategy
+import lotto.strategy.ShuffleStrategy
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
     val inputMoney = InputView.inputMoney()
-    val customer = Customer(inputMoney, TestStrategy())
+    val customer = Customer(inputMoney, ShuffleStrategy())
     ResultView.printBuyCount(customer)
 
     val lottos = customer.buyLotto()
