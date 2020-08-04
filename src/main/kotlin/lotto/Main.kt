@@ -7,14 +7,14 @@ fun main() {
     val inputMoney = InputView.inputMoney()
     val buyCount = InputView.getBuyCount(inputMoney)
 
-    ResultView.printBuyCount(buyCount)
-
     val lottoItems = LottoItems(buyCount)
     val lottos = lottoItems.getLottoItems()
 
-    val winningNumbers = InputView.inputWinningNumber()
+    ResultView.printBuyCount(buyCount, lottos)
 
-    ResultView.printResult(lottos, lottoItems, winningNumbers)
-    val totalRate: Double = ResultLotto.totalIncome() / inputMoney.toDouble()
-    println("총 수익률은 ${totalRate}입니다.")
+    val winningNumbers = InputView.inputWinningNumber()
+    val result = lottoItems.getWinLottos(winningNumbers)
+
+    ResultView.printResult(result)
+    ResultView.printTotalRate(ResultLotto.totalRate(inputMoney))
 }

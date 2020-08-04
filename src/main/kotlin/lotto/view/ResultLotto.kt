@@ -25,5 +25,7 @@ enum class ResultLotto(private val index: Int, private val money: Int, private v
         fun resultList() = values().filter { it.index >= 0 }.toList()
 
         fun totalIncome() = values().fold(0) { total, lotto -> total + (lotto.money * lotto.count) }
+
+        fun totalRate(inputMoney: Int) = totalIncome() / inputMoney.toDouble()
     }
 }
