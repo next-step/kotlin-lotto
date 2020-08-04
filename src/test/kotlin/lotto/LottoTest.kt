@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.LottoSingleLine
-import lotto.domain.LottoTicket
+import lotto.domain.LottoLines
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -49,7 +49,7 @@ class LottoTest {
 
     fun `로또 티켓(여러줄) 생성 테스트`(inputMoney: Int, gameCount: Int) {
         val totalNumber = inputMoney / LINE_PRICE
-        val lottoTicket = LottoTicket(totalNumber)
+        val lottoTicket = LottoLines(totalNumber)
         assertThat(lottoTicket.getLines().size).isEqualTo(gameCount)
     }
 }

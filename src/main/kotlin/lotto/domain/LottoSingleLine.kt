@@ -1,6 +1,8 @@
 package lotto.domain
 
-private val LOTTO_NUMBER_LIST = (1..45).toList()
+private val LOTTO_NUMBER_RANGE = 1..45
+private val LOTTO_NUMBERS = LOTTO_NUMBER_RANGE.toList()
+private const val LOTTO_PICK_COUNT = 6
 
 class LottoSingleLine {
     private val lottoNumbers = createLine()
@@ -10,14 +12,10 @@ class LottoSingleLine {
     }
 
     fun matching(result: List<Int>): Int {
-        var count = 0
-        result.forEach {
-            if (lottoNumbers.contains(it)) count++
-        }
-        return count
+        return result.filter { lottoNumbers.contains(it) }.size
     }
 
     private fun createLine(): List<Int> {
-        return LOTTO_NUMBER_LIST.shuffled().take(6).sorted()
+        return LOTTO_NUMBERS.shuffled().take(LOTTO_PICK_COUNT).sorted()
     }
 }

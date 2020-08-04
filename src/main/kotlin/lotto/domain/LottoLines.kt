@@ -1,11 +1,11 @@
 package lotto.domain
 
-const val FIRST_PRICE = 2000000000
-const val SECOND_PRICE = 1500000
-const val THIRD_PRICE = 50000
-const val FOURTH_PRICE = 5000
+const val FIRST_PRICE = 2_000_000_000
+const val SECOND_PRICE = 1_500_000
+const val THIRD_PRICE = 50_000
+const val FOURTH_PRICE = 5_000
 
-class LottoTicket(private val totalNumber: Int) {
+class LottoLines(private val totalNumber: Int) {
     private val lottoLines = createLottoTicket(totalNumber)
 
     fun checkResult(result: List<Int>): ResultData {
@@ -22,11 +22,7 @@ class LottoTicket(private val totalNumber: Int) {
     }
 
     private fun createLottoTicket(totalNumber: Int): List<LottoSingleLine> {
-        val list = mutableListOf<LottoSingleLine>()
-        for (count in 1..totalNumber) {
-            list.add(LottoSingleLine())
-        }
-        return list
+        return (1..totalNumber).toList().map { LottoSingleLine() }
     }
 
     private fun getFirst(result: List<Int>): Int {
