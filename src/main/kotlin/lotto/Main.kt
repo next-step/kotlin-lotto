@@ -1,20 +1,21 @@
-import lotto.domain.LottoItems
+import lotto.domain.Customer
+import lotto.strategy.TestStrategy
 import lotto.view.InputView
-import lotto.view.ResultLotto
 import lotto.view.ResultView
 
 fun main() {
     val inputMoney = InputView.inputMoney()
-    val buyCount = InputView.getBuyCount(inputMoney)
+    val customer = Customer(inputMoney, TestStrategy())
+    ResultView.printBuyCount(customer)
 
-    val lottoItems = LottoItems(buyCount)
-    val lottos = lottoItems.getLottoItems()
-
-    ResultView.printBuyCount(buyCount, lottos)
+    val lottos = customer.buyLotto()
+    ResultView.printLottos(lottos)
 
     val winningNumbers = InputView.inputWinningNumber()
-    val result = lottoItems.getWinLottos(winningNumbers)
+    val resultList = customer.winLottoCount(winningNumbers)
 
-    ResultView.printResult(result)
-    ResultView.printTotalRate(ResultLotto.totalRate(inputMoney))
+    ResultView.printResult(resultList)
+
+    val totalRate = customer.getTotalRate()
+    ResultView.printTotalRate(totalRate)
 }
