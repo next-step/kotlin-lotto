@@ -24,9 +24,10 @@ fun startApp() {
     val lottos = makeLottos(amount)
     ResultView.viewLottos(amount, lottos)
     val correctNumbers = InputView.inputCorrectNumbers()
-    checkCorrectLotto(correctNumbers, lottos, rank)
+    val bonusNumber = InputView.inputBonusNumber()
+    checkCorrectLotto(correctNumbers, lottos, rank, bonusNumber)
     val result = Result(rank.ranks)
-    ResultView.viewResult(result.getRanks(), result.getRateOfReturn(money))
+    ResultView.viewResult(rank.ranks, result.getRateOfReturn(money))
 }
 
 fun makeCandidateNumbers(): List<String> {
@@ -45,9 +46,9 @@ fun makeLottos(amount: Int): List<Lotto> {
     return list.map { Lotto(CANDIDATE_NUMBERS.shuffled()) }
 }
 
-fun checkCorrectLotto(correctNumbers: List<Number>, lottos: List<Lotto>, rank: Rank) {
+fun checkCorrectLotto(correctNumbers: List<Number>, lottos: List<Lotto>, rank: Rank, bonusNumber: Number) {
     lottos.forEach {
-        val ranking = it.getRank(correctNumbers)
+        val ranking = it.getRank(correctNumbers, bonusNumber)
         rank.joinRank(ranking)
     }
 }

@@ -12,4 +12,9 @@ object InputView {
         println("지난 주 당첨 번호를 입력해주세요")
         return readLine()!!.split(",").map { Number(it.trim()) }
     }
+
+    fun inputBonusNumber(): Number {
+        println("보너스 볼을 입력해 주세요.")
+        return Number(readLine())
+    }
 }

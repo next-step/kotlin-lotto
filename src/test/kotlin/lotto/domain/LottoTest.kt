@@ -35,12 +35,27 @@ class LottoTest {
 
     @Test
     fun get_rank() {
-        val list = listOf("3", "2", "20", "10", "17", "40")
-        val testList = listOf(Number("2"), Number("5"), Number("20"), Number("45"), Number("4"), Number("40"))
-        val lotto = Lotto(list)
+        val first = Lotto(listOf("1", "2", "3", "4", "5", "6"))
+        val second = Lotto(listOf("1", "2", "3", "4", "5", "7"))
+        val third = Lotto(listOf("1", "2", "3", "4", "5", "8"))
+        val fourth = Lotto(listOf("1", "2", "3", "4", "8", "9"))
+        val fifth = Lotto(listOf("1", "2", "3", "8", "9", "10"))
+        val no = Lotto(listOf("1", "2", "8", "9", "10", "11"))
+        val correct = Lotto(listOf("1", "2", "3", "4", "5", "6"))
+        val bonusBall = Number("7")
 
-        val rank = lotto.getRank(testList)
+        val firstRank = first.getRank(correct.numbers, bonusBall)
+        val secondRank = second.getRank(correct.numbers, bonusBall)
+        val thirdRank = third.getRank(correct.numbers, bonusBall)
+        val fourthRank = fourth.getRank(correct.numbers, bonusBall)
+        val fifthRank = fifth.getRank(correct.numbers, bonusBall)
+        val noRank = no.getRank(correct.numbers, bonusBall)
 
-        assertThat(rank).isEqualTo(3)
+        assertThat(firstRank).isEqualTo("1등")
+        assertThat(secondRank).isEqualTo("2등")
+        assertThat(thirdRank).isEqualTo("3등")
+        assertThat(fourthRank).isEqualTo("4등")
+        assertThat(fifthRank).isEqualTo("5등")
+        assertThat(noRank).isEqualTo("No Rank")
     }
 }

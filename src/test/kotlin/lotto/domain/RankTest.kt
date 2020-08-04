@@ -8,18 +8,18 @@ class RankTest {
     fun check_in_rank() {
         val rank = Rank()
 
-        rank.joinRank(3)
-        rank.joinRank(3)
+        rank.joinRank("5등")
+        rank.joinRank("5등")
 
-        assertThat(rank.ranks[3]).isEqualTo(2)
+        assertThat(rank.ranks["5등"]).isEqualTo(2)
     }
 
     @Test
     fun is_not_rank() {
         val rank = Rank()
 
-        rank.joinRank(2)
+        rank.joinRank("No Rank")
 
-        assertThat(rank.ranks[3]).isEqualTo(0)
+        assertThat(rank.ranks["5등"]).isEqualTo(0)
     }
 }
