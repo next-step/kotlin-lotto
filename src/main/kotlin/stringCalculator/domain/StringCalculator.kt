@@ -7,8 +7,8 @@ import java.lang.IllegalArgumentException
 
 object StringCalculator {
 
-    const val CUSTOM_REGEX =
-        """//(.)\\n(.*)"""
+    val customRegexPattern = Regex("//(.)\\\\n(.*)")
+
     private const val NUMBER_TOKEN_MIN = 0
 
     fun doSplit(userInputTemplate: String): Int {
@@ -26,7 +26,7 @@ object StringCalculator {
     }
 
     private fun getAnotherAddResult(userInputTemplate: String): Int {
-        val isCustomRegex = Regex(CUSTOM_REGEX).matches(userInputTemplate)
+        val isCustomRegex = customRegexPattern.matches(userInputTemplate)
         val resultStrategy = getParsingType(isCustomRegex)
         resultStrategy.parsingNumber(userInputTemplate)
         val resultNumberTokens = resultStrategy.numberTokens
