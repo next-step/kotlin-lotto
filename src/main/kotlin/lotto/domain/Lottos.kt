@@ -8,7 +8,7 @@ class Lottos() {
         this.lottos = lottos
     }
 
-    fun isInWinningNumber(winningNumbers: Numbers) {
+    fun matchWinningCount(winningNumbers: Numbers) {
         lottos.map {
             it.countWinningNumber(winningNumbers)
         }
