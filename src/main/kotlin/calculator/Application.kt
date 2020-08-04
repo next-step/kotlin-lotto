@@ -11,11 +11,11 @@ import calculator.presentation.ResultView
 object Application {
     @JvmStatic
     fun main(args: Array<String>) {
-        val inputString = InputView.inputString()
+        val text = InputView.inputString()
 
-        val validatedString = validate(inputString)
-        val customDelimiter = findCustomDelimiter(validatedString)
-        val list = parse(validatedString, customDelimiter)
+        val validatedText = validate(text)
+        val customDelimiter = findCustomDelimiter(validatedText)
+        val list = parse(validatedText, customDelimiter)
         val numbers = list.filter { Number(it).isNatural() }.map { it.toInt() }
         val sum = Calculator().sum(numbers)
 
