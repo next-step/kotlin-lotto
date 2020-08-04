@@ -52,8 +52,8 @@ class LottoTest {
         @JvmStatic
         fun generateWinningTestData(): List<Arguments> {
             return listOf(
-                Arguments.of(Lotto(listOf(3, 10, 15, 22, 41, 44)), 2),
-                Arguments.of(Lotto(listOf(1, 2, 12, 22, 40, 45)), 4)
+                Arguments.of(Lotto(setOf(3, 10, 15, 22, 41, 44)), 2),
+                Arguments.of(Lotto(setOf(1, 2, 12, 22, 40, 45)), 4)
             )
         }
     }
