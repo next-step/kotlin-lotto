@@ -3,6 +3,8 @@ package lotto.view
 import lotto.model.Lotto
 import lotto.model.Win
 
+private const val HAS_BONUS_NUMBER = 1
+
 object ResultView {
     fun printLottoCount(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
@@ -18,10 +20,14 @@ object ResultView {
         println("당첨 통계")
         println("---------")
 
-        Win.values().filter { it.prize > 0 }.forEach { win ->
-            println("${win.matchNumber}개 일치 - ${result.filter { it.win.matchNumber == win.matchNumber }.size}개")
+        Win.values().filter { hasPrize(it.prize) }.forEach { win ->
+            val resultSentence = "${win.matchNumber}개 일치(${win.prize}원)- ${result.filter { it.win == win }.size}개"
+
+            println(resultSentence)
         }
     }
+
+    private fun hasPrize(prize: Int): Boolean = prize > 0
 
     fun printEarningRate(result: Double) {
         println("총 수익률은 ${result}입니다.")

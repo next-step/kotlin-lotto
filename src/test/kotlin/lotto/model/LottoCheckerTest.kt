@@ -10,8 +10,8 @@ class LottoCheckerTest {
 
     @BeforeEach
     fun beforeTest() {
-        val winnerLotto = Lotto(mutableListOf(1, 2, 3, 4, 5, 6))
-        val myLotto = Lotto(mutableListOf(1, 2, 6, 7, 10, 13))
+        val winnerLotto = WinnerLotto(Lotto(mutableListOf(1, 2, 3, 4, 6, 7)), 10)
+        val myLotto = Lotto(mutableListOf(1, 2, 3, 4, 6, 10))
 
         checker = LottoChecker(winnerLotto, listOf(myLotto))
     }
@@ -20,15 +20,16 @@ class LottoCheckerTest {
     @Test
     fun checkLottoResult() {
         assertThat(checker.getLottos()).allSatisfy {
-            assertThat(it.win.matchNumber).isEqualTo(3)
-            assertThat(it.checkPrize()).isEqualTo(Win.FOURTH.prize)
+            assertThat(it.win.matchNumber).isEqualTo(5)
+            assertThat(it.win.matchBonusNumber).isEqualTo(1)
+            assertThat(it.checkPrize()).isEqualTo(Win.SECOND.prize)
         }
     }
 
     @Test
     fun `enum test`() {
-        assertThat(Win.values().size).isEqualTo(4)
-        assertThat(Win.THIRD.matchNumber).isEqualTo(4)
-        assertThat(Win.FOURTH.prize).isEqualTo(5000)
+        assertThat(Win.values().size).isEqualTo(6)
+        assertThat(Win.THIRD.matchNumber).isEqualTo(5)
+        assertThat(Win.FOURTH.prize).isEqualTo(50_000)
     }
 }

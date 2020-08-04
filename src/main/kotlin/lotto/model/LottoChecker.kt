@@ -1,6 +1,6 @@
 package lotto.model
 
-class LottoChecker(winner: Lotto, myLottos: List<Lotto>) {
+class LottoChecker(winner: WinnerLotto, myLottos: List<Lotto>) {
     private val lottos: List<Lotto> = checkEachLotto(winner, myLottos)
 
     fun getLottos(): List<Lotto> {
@@ -14,7 +14,7 @@ class LottoChecker(winner: Lotto, myLottos: List<Lotto>) {
         return totalPrize / paidMoney
     }
 
-    private fun checkEachLotto(winner: Lotto, lottos: List<Lotto>): List<Lotto> {
+    private fun checkEachLotto(winner: WinnerLotto, lottos: List<Lotto>): List<Lotto> {
         lottos.forEach {
             it.checkWin(winner)
         }

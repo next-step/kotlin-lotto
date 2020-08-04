@@ -16,7 +16,7 @@ class LottoTest {
     @DisplayName(value = "보유한 로또와 당첨로또를 비교하여 일치하는 숫자의 개수를 반환한다.")
     @Test
     fun validLottoCheck() {
-        lotto.checkWin(Lotto(listOf(1, 2, 3, 4, 5, 7)))
+        lotto.checkWin(WinnerLotto(Lotto(listOf(1, 2, 3, 4, 5, 10)), 6))
 
         assertThat(lotto.win).isEqualTo(Win.SECOND)
         assertThat(lotto.checkPrize()).isEqualTo(Win.SECOND.prize)
