@@ -6,7 +6,7 @@ data class Expression(private val expression: String) {
     fun extractTokens(): List<String> = if (hasCustomDelimiter()) {
         parsedExpression[2].split(parsedExpression[1])
     } else {
-        expression.split(*delimiters)
+        expression.split(*DELIMITERS)
     }.map { it.trim() }
 
     fun isValid() = extractTokens().all {
@@ -16,11 +16,11 @@ data class Expression(private val expression: String) {
 
     private fun hasCustomDelimiter() = parsedExpression.size == CUSTOM_DELIMITER_TOKEN_SIZE
 
-    private fun parse() = pattern.find(expression)?.groupValues ?: emptyList()
+    private fun parse() = PATTERN.find(expression)?.groupValues ?: emptyList()
 
     companion object {
         private const val CUSTOM_DELIMITER_TOKEN_SIZE = 3
-        private val delimiters = arrayOf(",", ":")
-        private val pattern = "//(.)\n(.*)".toRegex()
+        private val DELIMITERS = arrayOf(",", ":")
+        private val PATTERN = "//(.)\n(.*)".toRegex()
     }
 }
