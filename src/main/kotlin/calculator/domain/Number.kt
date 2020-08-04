@@ -12,20 +12,20 @@ fun validate(string: String?): String {
     return string
 }
 
-fun matchResult(string: String): MatchResult? {
-    return DELIMITER_REGEX.find(string)
+fun matchResult(text: String): MatchResult? {
+    return DELIMITER_REGEX.find(text)
 }
 
-fun parse(string: String, customDelimiter: String): List<String> {
+fun parse(text: String, customDelimiter: String): List<String> {
 
     if (customDelimiter == SIMPLE_DELIMITER) {
-        return string.split(SIMPLE_DELIMITER_REGEX)
+        return text.split(SIMPLE_DELIMITER_REGEX)
     }
-    return matchResult(string)!!.groupValues[2].split(customDelimiter)
+    return matchResult(text)!!.groupValues[2].split(customDelimiter)
 }
 
-fun findCustomDelimiter(string: String): String {
-    val matchResult = matchResult(string)
+fun findCustomDelimiter(text: String): String {
+    val matchResult = matchResult(text)
     if (matchResult != null && matchResult.groupValues[1].isNotBlank()) {
         return matchResult.groupValues[1]
     }

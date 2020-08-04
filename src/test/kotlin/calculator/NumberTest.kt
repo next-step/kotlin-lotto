@@ -18,9 +18,9 @@ class NumberTest {
     @ParameterizedTest
     @ValueSource(strings = ["//;\n1;2;3"])
     fun `전체 메소드 테스트`(text: String) {
-        val validatedString = validate(text)
-        val customDelimiter = findCustomDelimiter(validatedString)
-        val list = parse(validatedString, customDelimiter)
+        val validatedText = validate(text)
+        val customDelimiter = findCustomDelimiter(validatedText)
+        val list = parse(validatedText, customDelimiter)
         val numbers = list.filter { Number(it).isNatural() }.map { it.toInt() }
         val sum = Calculator().sum(numbers)
 
@@ -36,15 +36,15 @@ class NumberTest {
         ],
         delimiterString = ">"
     )
-    fun `커스텀 구분자 구하기`(string: String, expected: String) {
-        assertThat(findCustomDelimiter(string)).isEqualTo(expected)
+    fun `커스텀 구분자 구하기`(text: String, expected: String) {
+        assertThat(findCustomDelimiter(text)).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @MethodSource("generateParsingTestData")
-    fun `구분자를 기준으로 문자열 파싱`(string: String, delimiter: String, expected: List<String>) {
-        val parse = parse(string, delimiter)
-        assertThat(parse(string, delimiter)).isEqualTo(expected)
+    fun `구분자를 기준으로 문자열 파싱`(text: String, delimiter: String, expected: List<String>) {
+        val parse = parse(text, delimiter)
+        assertThat(parse(text, delimiter)).isEqualTo(expected)
     }
 
     @ParameterizedTest
@@ -52,14 +52,14 @@ class NumberTest {
         "1, true",
         "0, true"
     )
-    fun `파싱된 문자가 자연수인 경우`(string: String, expected: Boolean) {
-        assertThat(Number(string).isNatural()).isEqualTo(expected)
+    fun `파싱된 문자가 자연수인 경우`(text: String, expected: Boolean) {
+        assertThat(Number(text).isNatural()).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["A", "-1"])
-    fun `파싱된 문자가 자연수가 아닌 경우`(string: String) {
-        assertThatIllegalArgumentException().isThrownBy { Number(string).isNatural() }
+    fun `파싱된 문자가 자연수가 아닌 경우`(text: String) {
+        assertThatIllegalArgumentException().isThrownBy { Number(text).isNatural() }
     }
 
     companion object {
