@@ -6,11 +6,11 @@ import lotto.domain.Results
 
 object ResultView {
 
-    fun showAmountsSold(lottoShop: LottoShop) {
+    fun showSalesVolume(lottoShop: LottoShop) {
         println(lottoShop)
     }
 
-    fun showLottoDetails(lottos: Lottos) {
+    fun showLottosDetail(lottos: Lottos) {
         println(lottos)
     }
 

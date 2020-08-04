@@ -4,16 +4,15 @@ import lotto.LottoUtils.luckyNumbers
 
 data class Lotto(
     private var numbers: List<Int>,
-    private var match: Int = 0
+    private var matchSuccess: Int = 0
 ) {
 
     fun hasLuckyNumber(luckyNumbers: List<Int>): Int {
-        luckyNumbers.forEach { if (numbers.contains(it)) match++ }
-        return match
+        luckyNumbers.forEach { if (numbers.contains(it)) matchSuccess++ }
+        return matchSuccess
     }
 
-    fun findResult(): Result =
-        Result.findResult(hasLuckyNumber(luckyNumbers))
+    fun getResult(): Result = Result.getResult(hasLuckyNumber(luckyNumbers))
 
     override fun toString(): String {
         return "$numbers"

@@ -1,26 +1,26 @@
 package lotto.domain
 
-import lotto.domain.Result.Companion.findResult
+import lotto.domain.Result.Companion.getResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ResultTest {
 
     @Test
-    fun `find result`() {
-        assertThat(findResult(match = 3)).isEqualTo(Result.FOURTH)
-        assertThat(findResult(match = 4)).isEqualTo(Result.THIRD)
-        assertThat(findResult(match = 5)).isEqualTo(Result.SECOND)
-        assertThat(findResult(match = 6)).isEqualTo(Result.FIRST)
-        assertThat(findResult(match = 0)).isEqualTo(Result.ELSE)
+    fun `get result`() {
+        assertThat(getResult(success = 3)).isEqualTo(Result.FOURTH)
+        assertThat(getResult(success = 4)).isEqualTo(Result.THIRD)
+        assertThat(getResult(success = 5)).isEqualTo(Result.SECOND)
+        assertThat(getResult(success = 6)).isEqualTo(Result.FIRST)
+        assertThat(getResult(success = 0)).isEqualTo(Result.ELSE)
     }
 
     @Test
-    fun `prize index`() {
-        assertThat(findResult(match = 3).prizeIndex).isEqualTo(0)
-        assertThat(findResult(match = 4).prizeIndex).isEqualTo(1)
-        assertThat(findResult(match = 5).prizeIndex).isEqualTo(2)
-        assertThat(findResult(match = 6).prizeIndex).isEqualTo(3)
-        assertThat(findResult(match = 0).prizeIndex).isEqualTo(4)
+    fun `matches index`() {
+        assertThat(getResult(success = 3).MatchResultsIndex).isEqualTo(0)
+        assertThat(getResult(success = 4).MatchResultsIndex).isEqualTo(1)
+        assertThat(getResult(success = 5).MatchResultsIndex).isEqualTo(2)
+        assertThat(getResult(success = 6).MatchResultsIndex).isEqualTo(3)
+        assertThat(getResult(success = 0).MatchResultsIndex).isEqualTo(4)
     }
 }

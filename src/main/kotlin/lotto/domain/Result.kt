@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Result(val condition: Int, val prizeIndex: Int = 0) {
+enum class Result(val condition: Int, val MatchResultsIndex: Int = 0) {
     FOURTH(Result.FOURTH_CONDITION, 0),
     THIRD(Result.THIRD_CONDITION, 1),
     SECOND(Result.SECOND_CONDITION, 2),
@@ -14,8 +14,8 @@ enum class Result(val condition: Int, val prizeIndex: Int = 0) {
         const val FIRST_CONDITION = 6
         const val ELSE_CONDITION = 0
 
-        fun findResult(match: Int): Result {
-            return values().firstOrNull { it.condition == match }
+        fun getResult(matchSuccess: Int): Result {
+            return values().firstOrNull { it.condition == matchSuccess }
                 ?: ELSE
         }
     }

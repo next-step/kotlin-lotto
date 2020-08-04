@@ -2,8 +2,8 @@ package lotto.domain
 
 class Lottos(private val lottos: List<Lotto>) {
 
-    fun findResults(): Results {
-        return Results(lottos.map { it.findResult() })
+    fun getResults(): Results {
+        return Results(lottos.map { it.getResult() })
     }
 
     override fun toString(): String {

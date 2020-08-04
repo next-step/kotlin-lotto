@@ -3,8 +3,8 @@ package lotto
 import lotto.domain.LottoShop
 import lotto.domain.Lottos
 import lotto.domain.Results
-import lotto.view.ResultView.showAmountsSold
-import lotto.view.ResultView.showLottoDetails
+import lotto.view.ResultView.showSalesVolume
+import lotto.view.ResultView.showLottosDetail
 import lotto.view.ResultView.showResults
 import lotto.view.InputView
 
@@ -15,12 +15,12 @@ fun main() {
     val lottoShop = LottoShop(payment)
     val lottos = Lottos(lottoShop.makeLottos())
 
-    showAmountsSold(lottoShop)
-    showLottoDetails(lottos)
+    showSalesVolume(lottoShop)
+    showLottosDetail(lottos)
 
     val luckyNumbers = InputView.readLuckyNumbers()
     LottoUtils.luckyNumbers = luckyNumbers
 
-    Results.totalPayment = payment
-    showResults(lottos.findResults())
+    Results.payment = payment
+    showResults(lottos.getResults())
 }
