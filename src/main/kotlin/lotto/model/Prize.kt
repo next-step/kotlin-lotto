@@ -23,15 +23,11 @@ class Prize(
         }
     }
 
-    fun getPrizeMoney(): Int {
-        return prize.prizeMoney
-    }
+    fun getPrizeMoney() = prize.prizeMoney
 
     fun isType(type: PrizeMoney) = prize == type
 
-    override fun toString(): String {
-        return "${prize.matchingCount} // ${prize.prizeMoney}"
-    }
+    override fun toString() = "(${prize.matchingCount}, ${prize.prizeMoney})"
 
     companion object {
         fun newInstance(matchingCount: Int) = Prize(matchingCount)

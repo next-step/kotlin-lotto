@@ -1,6 +1,5 @@
-package lotto
+package lotto.model.generator
 
-import lotto.model.generator.RandomNumberGenerater
 import lotto.model.Lotto
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
