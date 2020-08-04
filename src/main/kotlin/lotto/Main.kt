@@ -10,8 +10,9 @@ const val LINE_PRICE = 1000
 
 fun main() {
     val money = inputMoney()
-    val lottoTicket = LottoLines(money / LINE_PRICE)
-    printLottoTicket(lottoTicket.getLines())
+    val lottoLines = LottoLines(money / LINE_PRICE)
+    printLottoTicket(lottoLines.getLines())
     val result = inputResult()
-    printResult(lottoTicket.getLines())
+    lottoLines.checkResult(result)
+    printResult(lottoLines.getLines())
 }
