@@ -1,7 +1,6 @@
 package stringaddcalculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -34,15 +33,6 @@ class StringSeparatorTest {
 
         // then
         assertThat(separatedToken).isEqualTo(expectedTokens)
-    }
-
-    @ValueSource(strings = ["/;\n1;2;3", "//;\\1;2;3", "asdfef"])
-    @ParameterizedTest
-    fun `유효하지 않은 문자열 입력시 Exception`(invalidString: String) {
-        // then
-        assertThatThrownBy { StringSeparator.separate(invalidString) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("$invalidString 는 유효하지 않은 문자열입니다.")
     }
 
     @NullAndEmptySource
