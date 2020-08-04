@@ -15,6 +15,8 @@ data class Money(private val won: Int) {
 
     operator fun div(count: Double) = won.div(count)
 
+    operator fun div(count: Int) = won.div(count)
+
     override fun toString() = "${won}원"
 
     fun toDouble() = won.toDouble()

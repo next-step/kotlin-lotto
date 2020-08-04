@@ -47,4 +47,10 @@ class MoneyTest {
         val actual = Money(300) / 30.0
         assertThat(actual).isEqualTo(10.0)
     }
+
+    @Test
+    fun `money 객체에 int를 나눌 수 있으며 그 결과는 Int타입 이다`() {
+        val actual = Money(300) / 30
+        assertThat(actual).isEqualTo(10)
+    }
 }
