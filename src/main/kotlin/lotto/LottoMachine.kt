@@ -2,16 +2,21 @@ package lotto
 
 class LottoMachine {
 
-    fun getRandoms(): List<Int> = LOTTO_NUMBERS.shuffled().subList(0, 6)
+    private fun getRandoms(): List<Int> = LOTTO_NUMBERS.shuffled().subList(0, 6)
 
     fun calculateStat(lottoNumbers: List<LottoNumber>, prizeNumber: LottoNumber): List<PrizeMoneyWrapper> {
-        return lottoNumbers.groupingBy {
-            it.equalsCount(prizeNumber)
-        }.eachCount().map { PrizeMoneyWrapper(PrizeMoney.generate(it.key), it.value) }
+        return lottoNumbers
+            .groupingBy {
+                it.equalsCount(prizeNumber)
+            }.eachCount().filter { it.key > 3 }.map { PrizeMoneyWrapper(PrizeMoney.generate(it.key), it.value) }
     }
 
     fun calculateProfit(prizeMoneyWrappers: List<PrizeMoneyWrapper>): Int {
-        return prizeMoneyWrappers.sumBy { it.prizeMoney.getProfit(it.prizeCount) }
+        return prizeMoneyWrappers.sumBy { it.calculatePrizeMoney() }
+    }
+
+    fun calculateRateOfProfit(totalPrizeMoney: Int, buyMoney: Int): Double {
+        return totalPrizeMoney.toDouble() / buyMoney.toDouble()
     }
 
     fun createLottoNumbers(buyMoney: Int): List<LottoNumber> {
@@ -40,5 +45,7 @@ fun main() {
 
     resultView.printNumbers(lottoNumbers)
     resultView.printPrizeStat(prizeMoneyWrappers)
-    resultView.printProfit(machime.calculateProfit(prizeMoneyWrappers), buyMoney)
+    val totalPrizeMoney = machime.calculateProfit(prizeMoneyWrappers)
+    val rateProfit = machime.calculateRateOfProfit(totalPrizeMoney, buyMoney)
+    resultView.printProfit(rateProfit)
 }

@@ -14,11 +14,11 @@ class ResultView {
     fun printPrizeStat(prizeMoneyWrappers: List<PrizeMoneyWrapper>) {
         println("당첨 통계")
         prizeMoneyWrappers.forEach {
-            println("${it.prizeMoney.name}개 일치 (${it.prizeMoney.getPrizeMoney()}원) - ${it.prizeCount}개")
+            println("${it.prizeMoney.getEqualsCount()}개 일치 (${it.prizeMoney.getPrizeMoney()}원) - ${it.prizeCount}개")
         }
     }
 
-    fun printProfit(totalPrizeMoney: Int, buyMoney: Int) {
-        println("총 수익률은 ${totalPrizeMoney / buyMoney} 입니다.")
+    fun printProfit(rateProfit: Double) {
+        println(String.format("총 수익률은 %.2f 입니다.", rateProfit))
     }
 }

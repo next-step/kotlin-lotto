@@ -24,7 +24,7 @@ enum class PrizeMoney(private val equalsCount: Int) {
     };
 
     abstract fun getPrizeMoney(): Int
-    fun getProfit(prizeCount: Int): Int = getPrizeMoney() * prizeCount
+    fun getEqualsCount(): Int = equalsCount
 
     companion object {
         fun generate(equalsCount: Int): PrizeMoney {

@@ -6,6 +6,10 @@ class PrizeMoneyWrapper(prizeMoney: PrizeMoney, prizeCount: Int) {
     var prizeCount: Int = prizeCount
         private set
 
+    fun calculatePrizeMoney(): Int {
+        return prizeMoney.getPrizeMoney() * prizeCount
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
