@@ -16,20 +16,22 @@ fun matchResult(text: String): MatchResult? {
     return DELIMITER_REGEX.find(text)
 }
 
-fun parse(text: String, customDelimiter: String): List<String> {
-
-    if (customDelimiter == SIMPLE_DELIMITER) {
-        return text.split(SIMPLE_DELIMITER_REGEX)
-    }
-    return matchResult(text)!!.groupValues[2].split(customDelimiter)
-}
-
-fun findCustomDelimiter(text: String): String {
-    val matchResult = matchResult(text)
-    if (matchResult != null && matchResult.groupValues[1].isNotBlank()) {
+fun getDelimiter(matchResult: MatchResult?): String {
+    if (matchResult != null) {
         return matchResult.groupValues[1]
     }
     return SIMPLE_DELIMITER
+}
+
+fun parse(text: String): List<String> {
+    val matchResult = matchResult(text)
+    val delimiter = getDelimiter(matchResult)
+
+    if (delimiter == SIMPLE_DELIMITER) {
+        return text.split(SIMPLE_DELIMITER_REGEX)
+    }
+
+    return matchResult!!.groupValues[2].split(delimiter)
 }
 
 class Number(private val number: String) {

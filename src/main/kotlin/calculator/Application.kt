@@ -2,7 +2,6 @@ package calculator
 
 import calculator.domain.Calculator
 import calculator.domain.Number
-import calculator.domain.findCustomDelimiter
 import calculator.domain.parse
 import calculator.domain.validate
 import calculator.presentation.InputView
@@ -14,8 +13,7 @@ object Application {
         val text = InputView.inputString()
 
         val validatedText = validate(text)
-        val customDelimiter = findCustomDelimiter(validatedText)
-        val list = parse(validatedText, customDelimiter)
+        val list = parse(validatedText)
         val numbers = list.map { Number(it).isNature() }
         val sum = Calculator().sum(numbers)
 
