@@ -32,7 +32,7 @@ class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1;2;5", "1,2,5"])
+    @ValueSource(strings = ["1:2:5", "1,2,5"])
     fun `normal parameter`(inputText: String) {
         val result = NormalParserStrategy().parsingNumber(inputText)
         assertThat(result).isEqualTo(listOf(1, 2, 5))

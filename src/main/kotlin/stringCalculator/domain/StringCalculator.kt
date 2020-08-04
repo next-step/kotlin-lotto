@@ -1,8 +1,7 @@
 package stringCalculator.domain
 
-import stringCalculator.strategy.CustomRegexParserStrategy
-import stringCalculator.strategy.NormalParserStrategy
 import stringCalculator.strategy.ParserStrategy
+import stringCalculator.strategy.ParserStrategy.Companion.getParserStrategy
 import java.lang.IllegalArgumentException
 
 object StringCalculator {
@@ -38,6 +37,6 @@ object StringCalculator {
     }
 
     private fun getParsingType(result: Boolean): ParserStrategy {
-        return if (result) CustomRegexParserStrategy() else NormalParserStrategy()
+        return getParserStrategy(result)
     }
 }
