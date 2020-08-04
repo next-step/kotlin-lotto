@@ -1,8 +1,9 @@
 package lotto
 
-import lotto.domain.Result
 import lotto.domain.Lotto
 import lotto.domain.Number
+import lotto.domain.Rank
+import lotto.domain.Result
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -17,14 +18,15 @@ fun main() {
 }
 
 fun startApp() {
+    val rank = Rank()
     val money = InputView.inputMoney()
     val amount = money / 1000
     val lottos = makeLottos(amount)
     ResultView.viewLottos(amount, lottos)
     val correctNumbers = InputView.inputCorrectNumbers()
-    checkCorrectLotto(correctNumbers, lottos)
-    val result = Result(lottos)
-    ResultView.viewResult(result.getAllMatchResult(), result.getRateOfReturn(money))
+    checkCorrectLotto(correctNumbers, lottos, rank)
+    val result = Result(rank.ranks)
+    ResultView.viewResult(result.getRanks(), result.getRateOfReturn(money))
 }
 
 fun makeCandidateNumbers(): List<String> {
@@ -43,8 +45,9 @@ fun makeLottos(amount: Int): List<Lotto> {
     return list.map { Lotto(CANDIDATE_NUMBERS.shuffled()) }
 }
 
-fun checkCorrectLotto(correctNumbers: List<Number>, lottos: List<Lotto>) {
-    for (correctNumber in correctNumbers) {
-        lottos.forEach { it.checkCorrect(correctNumber) }
+fun checkCorrectLotto(correctNumbers: List<Number>, lottos: List<Lotto>, rank: Rank) {
+    lottos.forEach {
+        val ranking = it.getRank(correctNumbers)
+        rank.joinRank(ranking)
     }
 }

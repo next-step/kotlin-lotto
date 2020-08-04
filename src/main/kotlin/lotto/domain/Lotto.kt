@@ -1,20 +1,13 @@
 package lotto.domain
 
-class Lotto(candidateNumbers: List<String>, correctNumber: Int = 0) {
+class Lotto(candidateNumbers: List<String>) {
     val numbers = sortList(makeList(candidateNumbers))
-    var correctNumber = correctNumber
-        private set
 
-    private fun sortList(list: List<Number>): List<Number> {
-        return list.sortedBy { it.number }
-    }
+    private fun sortList(list: List<Number>): List<Number> = list.sortedBy { it.number }
 
     private fun makeList(candidateNumbers: List<String>): List<Number> = candidateNumbers.take(6).map { Number(it) }
 
+    fun getRank(numbers: List<Number>): Int = numbers.filter { isCorrect(it) }.size
 
-    fun checkCorrect(number: Number) {
-        if (numbers.contains(number)) {
-            correctNumber += 1
-        }
-    }
+    private fun isCorrect(number: Number): Boolean = numbers.contains(number)
 }

@@ -34,12 +34,13 @@ class LottoTest {
     }
 
     @Test
-    fun check_correct_number() {
+    fun get_rank() {
         val list = listOf("3", "2", "20", "10", "17", "40")
+        val testList = listOf(Number("2"), Number("5"), Number("20"), Number("45"), Number("4"), Number("40"))
         val lotto = Lotto(list)
 
-        lotto.checkCorrect(Number("3"))
+        val rank = lotto.getRank(testList)
 
-        assertThat(lotto.correctNumber).isEqualTo(1)
+        assertThat(rank).isEqualTo(3)
     }
 }
