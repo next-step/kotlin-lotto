@@ -16,7 +16,7 @@ object Application {
         val validatedText = validate(text)
         val customDelimiter = findCustomDelimiter(validatedText)
         val list = parse(validatedText, customDelimiter)
-        val numbers = list.filter { Number(it).isNatural() }.map { it.toInt() }
+        val numbers = list.map { Number(it).isNature() }
         val sum = Calculator().sum(numbers)
 
         ResultView.show(sum)

@@ -21,7 +21,7 @@ class NumberTest {
         val validatedText = validate(text)
         val customDelimiter = findCustomDelimiter(validatedText)
         val list = parse(validatedText, customDelimiter)
-        val numbers = list.filter { Number(it).isNatural() }.map { it.toInt() }
+        val numbers = list.map { Number(it).isNature() }
         val sum = Calculator().sum(numbers)
 
         assertThat(sum).isEqualTo(6)
@@ -49,17 +49,17 @@ class NumberTest {
 
     @ParameterizedTest
     @CsvSource(
-        "1, true",
-        "0, true"
+        "1, 1",
+        "0, 0"
     )
-    fun `파싱된 문자가 자연수인 경우`(text: String, expected: Boolean) {
-        assertThat(Number(text).isNatural()).isEqualTo(expected)
+    fun `파싱된 문자가 자연수인 경우`(text: String, expected: Int) {
+        assertThat(Number(text).isNature()).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["A", "-1"])
     fun `파싱된 문자가 자연수가 아닌 경우`(text: String) {
-        assertThatIllegalArgumentException().isThrownBy { Number(text).isNatural() }
+        assertThatIllegalArgumentException().isThrownBy { Number(text).isNature() }
     }
 
     companion object {
