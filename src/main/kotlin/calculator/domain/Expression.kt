@@ -1,4 +1,4 @@
-package calculator
+package calculator.domain
 
 data class Expression(private val expression: String) {
     private val parsedExpression = parse()
