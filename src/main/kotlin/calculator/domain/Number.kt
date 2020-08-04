@@ -32,11 +32,11 @@ fun findCustomDelimiter(text: String): String {
     return SIMPLE_DELIMITER
 }
 
-class Number(val number: String) {
+class Number(private val number: String) {
 
-    fun isNatural(): Boolean {
+    fun isNature(): Int {
         if (NUMERIC_REGEX.matches(number)) {
-            return true
+            return number.toInt()
         }
         throw IllegalArgumentException("숫자가 아닙니다")
     }
