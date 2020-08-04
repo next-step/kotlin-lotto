@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Result(val condition: Int, val MatchResultsIndex: Int = 0) {
+enum class Result(val condition: Int, val winningResultsIndex: Int = 0) {
     FOURTH(Result.FOURTH_CONDITION, 0),
     THIRD(Result.THIRD_CONDITION, 1),
     SECOND(Result.SECOND_CONDITION, 2),

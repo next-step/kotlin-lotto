@@ -21,10 +21,10 @@ class ResultsTest {
         )
     }
 
-    @DisplayName("각 결과마다 어떻게 당첨이 됐는지 확인하고, 이에 대한 정보를 리스트에 저장하여 반환한다")
+    @DisplayName("모든 결과의 당첨 정보를 파악하고, 리스트에 당첨 결과 정보를 저장하여 반환한다")
     @Test
-    fun `match results`() {
-        assertThat(totalResults.matchResults).isEqualTo(listOf(1, 1, 1, 1))
+    fun `winning results`() {
+        assertThat(totalResults.winningResults).isEqualTo(listOf(1, 1, 1, 1))
     }
 
     @DisplayName("toString()을 하면, 당첨 통계 정보(당첨 조건, 당첨금, 총수익률)를 반환한다")

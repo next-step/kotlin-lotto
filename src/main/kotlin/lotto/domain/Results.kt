@@ -3,18 +3,18 @@ package lotto.domain
 import lotto.LOTTO_PRICE
 
 class Results(results: List<Result>) {
-    var matchResults= mutableListOf(0, 0, 0, 0)
+    var winningResults = mutableListOf(0, 0, 0, 0)
         private set
 
     init {
         results.filterNot { it == Result.ELSE }
-            .forEach { matchResults[it.MatchResultsIndex]++ }
+            .forEach { winningResults[it.winningResultsIndex]++ }
     }
 
     private fun totalProfitRatio(): Double {
         var income = 0.0
-        for (x in matchResults.indices) {
-            income += prizes[x] * matchResults[x]
+        for (x in winningResults.indices) {
+            income += prizes[x] * winningResults[x]
         }
         return convertToDouble(income)
     }
@@ -32,8 +32,8 @@ class Results(results: List<Result>) {
     }
 
     private fun appendResultsDetail(totalResults: StringBuilder) {
-        for (x in matchResults.indices) {
-            totalResults.append("${conditions[x]}개 일치 (${prizes[x]}원)- ${matchResults[x]}개\n")
+        for (x in winningResults.indices) {
+            totalResults.append("${conditions[x]}개 일치 (${prizes[x]}원)- ${winningResults[x]}개\n")
         }
     }
 
