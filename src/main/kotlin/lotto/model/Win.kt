@@ -11,11 +11,10 @@ enum class Win(val matchNumber: Int, val matchBonus: Boolean = false, val prize:
     fun hasPrize(): Boolean = prize.hasMoney()
 }
 
-fun getPrize(matchNumber: Int, matchBonus: Boolean): Win {
-    if (matchNumber == 3 && !matchBonus) return Win.FIFTH
-    if (matchNumber == 4 && !matchBonus) return Win.FOURTH
-    if (matchNumber == 5 && !matchBonus) return Win.THIRD
-    if (matchNumber == 5 && matchBonus) return Win.SECOND
-    if (matchNumber == 6 && !matchBonus) return Win.FIRST
-    return Win.NONE
+fun getPrize(number: Int, bonus: Boolean): Win {
+    val win = Win.values().filter { it.matchNumber == number && it.matchBonus == bonus }
+
+    if (win.isEmpty()) return Win.NONE
+
+    return win[0]
 }
