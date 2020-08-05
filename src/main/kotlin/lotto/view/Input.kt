@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.LOTTO_NUMBERS_COUNT
+import lotto.domain.ManualLotto
 import kotlin.system.exitProcess
 
 fun inputMoney(): Int {
@@ -34,9 +36,9 @@ fun inputManualCountError(): Int {
     return readLine()?.toIntOrNull() ?: exitProcess(0)
 }
 
-fun inputManualNumbers(count: Int): List<List<Int>> {
+fun inputManualNumbers(count: Int): ManualLotto {
     println("수동으로 구매할 번호를 입력해 주세요.")
-    val list = mutableListOf<List<Int>>()
+    val list = ManualLotto()
     var errorCount = 0
     do {
         if (errorCount > 1) exitProcess(0)
@@ -48,7 +50,7 @@ fun inputManualNumbers(count: Int): List<List<Int>> {
             println("Ex) 1,2,3,4,5,6 처럼 입력해주세요")
             errorCount++
         }
-    } while (list.size < count)
+    } while (list.getAll().size < count)
     return list
 }
 
@@ -99,5 +101,5 @@ fun inputBonusNumberError(): Int {
 }
 
 fun resultInvalid(readLine: String): Boolean {
-    return !(readLine.isEmpty() || !readLine.contains(",") || readLine.split(",").size != 6)
+    return !(readLine.isEmpty() || !readLine.contains(",") || readLine.split(",").size != LOTTO_NUMBERS_COUNT)
 }

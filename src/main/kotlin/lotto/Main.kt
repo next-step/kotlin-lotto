@@ -10,6 +10,7 @@ import lotto.view.printLottoTicket
 import lotto.view.printResult
 
 const val LINE_PRICE = 1000
+const val LOTTO_NUMBERS_COUNT = 6
 
 fun main() {
     val money = inputMoney()

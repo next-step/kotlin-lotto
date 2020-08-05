@@ -10,7 +10,7 @@ class LottoSingleLineTest {
     @Test
     fun `로또 한줄 생성 테스트`() {
         val lottoSingleLine = LottoSingleLine()
-        assertThat(lottoSingleLine.lottoNumbers.size).isEqualTo(6)
+        assertThat(lottoSingleLine.lottoNumbers.size).isEqualTo(LOTTO_NUMBERS_COUNT)
         assertThat(lottoSingleLine.lottoNumbers.fold(true, { t1, t2 -> t1 && t2 is Int })).isEqualTo(true)
     }
 
