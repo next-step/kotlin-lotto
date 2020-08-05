@@ -7,4 +7,12 @@ class Lotto(val prize: Prize) {
     fun addCount() {
         count++
     }
+
+    fun getCountOfMatch(): Int {
+        return prize.countOfMatch
+    }
+
+    fun getPrizeMoney(): Int {
+        return prize.prizeMoney
+    }
 }

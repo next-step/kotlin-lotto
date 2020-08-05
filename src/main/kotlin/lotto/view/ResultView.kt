@@ -13,8 +13,8 @@ object ResultView {
             "당첨 통계\n" + "---------"
         )
         prizes.forEach { it ->
-            print("${it.prize.countOfMatch} 개 일치 (")
-            print(it.prize.prizeMoney)
+            print("${it.getCountOfMatch()} 개 일치 (")
+            print(it.getCountOfMatch())
             println("원) -${it.count} 개")
         }
         print("총 수익률은 $profitRate 입니다.")
