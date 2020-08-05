@@ -41,7 +41,7 @@ class NumbersTest {
         Assertions.assertThat(numbers.getMatchingCounts(winnerNumbers)).isSameAs(input)
     }
 
-    @DisplayName(value = "Numbers생성시, InteagerList의 사이즈가 Lotto.NUMBER_COUNT와 같아야한다. ,Exception")
+    @DisplayName(value = "Numbers생성시, InteagerList의 사이즈가 Lotto.NUMBER_COUNT와 같아야한다, Exception")
     @Test
     fun inputNegativeAndNonInteger() {
         Assertions.assertThatExceptionOfType(RuntimeException::class.java)
@@ -50,11 +50,15 @@ class NumbersTest {
             }
     }
 
-    @DisplayName(value = "보너스 볼은, 당첨번호와 중복되거나, 로또 숫자 범위를 넘어가서는 안된다.")
+    @DisplayName(value = "보너스 볼은, 당첨번호와 중복되거나, 로또 숫자 범위를 넘어가서는 안된다, Exception")
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 0, 55])
     fun isValidateBonusNumberTest(input: Int) {
         val winnerNumber = "1,2,3,4,5,6".toNumbers()
-        Assertions.assertThat(winnerNumber.isValidateBonusNumber(input)).isFalse()
+
+        Assertions.assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy {
+                winnerNumber.isValidateBonusNumber(input)
+            }
     }
 }

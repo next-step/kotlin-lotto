@@ -14,7 +14,9 @@ class Numbers(private val _list: List<Int>) {
         require(_list.size == Lotto.NUMBER_COUNT) { "Lotto's NUMBER_COUNT 와 다릅니다." }
     }
 
-    fun isValidateBonusNumber(bonusNumber: Int) = Lotto.isLottoNumberRange(bonusNumber) && isMatch(bonusNumber).not()
+    fun isValidateBonusNumber(bonusNumber: Int) {
+        require(Lotto.isLottoNumberRange(bonusNumber) && isMatch(bonusNumber).not()) { "잘못된 보너스 Number입니다." }
+    }
 
     fun getMatchingCounts(compareNumbers: Numbers) = _list.sumBy { compareNumbers.matchCount(it) }
 
