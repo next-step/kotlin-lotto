@@ -44,10 +44,10 @@ fun inputResultError(): List<Int> {
     }
 }
 
-fun inputBonusNumber(numberList: List<Int>): Int {
+fun inputBonusNumber(numbers: List<Int>): Int {
     println("보너스 볼을 입력해 주세요.")
     val bonusNumber = readLine()?.toIntOrNull() ?: inputBonusNumberError()
-    return if (numberList.contains(bonusNumber)) {
+    return if (numbers.contains(bonusNumber)) {
         inputBonusNumberError()
     } else {
         return bonusNumber

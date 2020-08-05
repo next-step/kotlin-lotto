@@ -12,20 +12,18 @@ fun printLottoTicket(list: List<LottoSingleLine>) {
 
 fun printResult(lines: List<LottoSingleLine>) {
     println("당첨통계")
-    val list = LottoResult.values().filter { it.price > 0 }
-    list.forEach {
-        println(resultString(it, lines))
-    }
+    LottoResult.values()
+        .filter { it.price > 0 }
+        .forEach {
+            println(resultString(it, lines))
+        }
 }
 
 fun resultString(result: LottoResult, lines: List<LottoSingleLine>): String {
-    return when (result.isBonus) {
-        true -> {
-            "${result.matchCount}개 일치, Bonus 일치 (${result.price}) - ${getMatchSize(result.matchCount, lines)}개"
-        }
-        false -> {
-            "${result.matchCount}개 일치 (${result.price}) - ${getMatchSize(result.matchCount, lines)}개"
-        }
+    return if (result.isBonus) {
+        "${result.matchCount}개 일치, Bonus 일치 (${result.price}) - ${getMatchSize(result.matchCount, lines)}개"
+    } else {
+        "${result.matchCount}개 일치 (${result.price}) - ${getMatchSize(result.matchCount, lines)}개"
     }
 }
 
