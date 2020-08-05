@@ -11,7 +11,7 @@ enum class WinLotto(private val index: Int, val money: Money, private var count:
     FIVE(5, Money(1_500_000.toBigInteger())),
     SIX(6, Money(2_000_000_000.toBigInteger()));
 
-    fun getCount() = count
+    fun plusCount() = count++
 
     override fun toString(): String {
         return "${index}$INDEX_SUFFIX ($money)- ${count}$COUNT_SUFFIX\n"
@@ -25,14 +25,14 @@ enum class WinLotto(private val index: Int, val money: Money, private var count:
 
         operator fun invoke(index: Int) = values()[index]
 
-        fun plusCount(index: Int) {
-            invoke(index).count++
-        }
-
-        fun getCount(index: Int) = invoke(index).count
-
         fun resultList() = values().filter { it.index >= THREE }.toList()
 
         fun totalIncome() = values().fold(Money(ZERO)) { total, lotto -> total + (lotto.money * lotto.count) }
+
+        fun resetCount() {
+            values().forEach {
+                it.count = 0
+            }
+        }
     }
 }
