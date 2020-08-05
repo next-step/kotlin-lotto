@@ -2,8 +2,8 @@ package manager
 
 import model.DiceRandomMaker
 import model.Lotto
-import model.LottoPrize
 import model.PrizeEarn
+import service.CalculateService
 import service.LottoService
 import service.MatchService
 import kotlin.properties.Delegates
@@ -11,32 +11,19 @@ import kotlin.properties.Delegates
 class LottoManager() {
     private val lottoService = LottoService()
     private lateinit var matchService: MatchService
+    private lateinit var calculateService: CalculateService
 
     val lottoList: List<Lotto>
-        get() = lottoService.lottoList.toList()
+        get() = lottoService.lottoList
 
     val lottoCount: Int
         get() = lottoList.size
 
     val prizeStatList: List<PrizeEarn>
-        get() {
-            val list = mutableListOf<PrizeEarn>()
-            for (lottoPrize in LottoPrize.values()) {
-                prizeList.firstOrNull { it.first == lottoPrize.grade }?.let { pair ->
-                    list.add(PrizeEarn(lottoPrize, pair.second))
-                }
-            }
-            return list.toList()
-        }
+        get() = calculateService.prizeStatList
 
     val earningRate: Double
-        get() {
-            val earningRate = (prizeStatList.sumBy { it.totalPrizeMoney }.toDouble() / purchaseAmount)
-            return String.format("%.2f", earningRate).toDouble()
-        }
-
-    private val prizeList: List<Pair<Int, Int>>
-        get() = matchService.prizeList
+        get() = String.format("%.2f", calculateService.getEarningRate(purchaseAmount)).toDouble()
 
     private var purchaseAmount by Delegates.notNull<Int>()
 
@@ -51,6 +38,7 @@ class LottoManager() {
 
     fun setPrize(prize: List<Int>) {
         matchService = MatchService(prize, lottoList)
+        calculateService = CalculateService(matchService.prizeList)
     }
 
     private fun checkLottoPrice(lottoCount: Int) {
