@@ -1,8 +1,8 @@
 package lotto.domain
 
+import lotto.domain.value.HitLotto
 import lotto.domain.value.LottoNumber
 import lotto.domain.value.Money
-import lotto.domain.value.WinLotto
 import lotto.strategy.Strategy
 import java.math.BigDecimal
 
@@ -13,13 +13,22 @@ class Customer(private val money: Money, private val strategy: Strategy) {
 
     private val lottos = lottomarket.buyLotto(count)
 
+    private val winLotto = HitLotto
+
     fun buyLotto() = lottos
 
-    fun winLottoCount(winningNumbers: List<LottoNumber>): List<WinLotto> {
-        lottos.forEach {
-            it.winCount(winningNumbers)
+    fun hitLottos(winningNumbers: List<LottoNumber>): List<HitLotto> {
+        return lottos.map {
+            it.hitLotto(winningNumbers)
         }
-        return WinLotto.resultList()
+    }
+
+    fun countLottos(hitLottos: List<HitLotto>): List<HitLotto> {
+        winLotto.resetCount()
+        hitLottos.forEach {
+            it.plusCount()
+        }
+        return HitLotto.resultList()
     }
 
     fun getTotalRate(): BigDecimal {
@@ -27,7 +36,7 @@ class Customer(private val money: Money, private val strategy: Strategy) {
     }
 
     private fun getTotalMoney(): Money {
-        return WinLotto.totalIncome()
+        return HitLotto.totalIncome()
     }
 
     companion object {

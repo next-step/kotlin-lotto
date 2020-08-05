@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.value.HitLotto
 import lotto.domain.value.LottoNumber
 import lotto.domain.value.Money
 import lotto.strategy.TestStrategy
@@ -7,8 +8,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 internal class CustomerTest {
-    val testStrategy = TestStrategy()
-    val customer = Customer(Money(14500.toBigInteger()), testStrategy)
+    private val winningNumbers = List(6) { i -> LottoNumber(i + 1) }
+    private val testStrategy = TestStrategy()
+    private val customer = Customer(Money(14500.toBigInteger()), testStrategy)
 
     @Test
     fun getCount() {
@@ -18,28 +20,32 @@ internal class CustomerTest {
     @Test
     fun buyLotto() {
         val actual = customer.buyLotto()
-        // 테스트를 위해 Lotto를 data class로 변경했는데
-        // 번호가 같다고 같은 로또라고 할 수는 없다고 생각됩니다.
-        // 이럴 경우 어떤식으로 처리해야 할까요?
         val expect = List(14) { Lotto(testStrategy) }
         assertThat(actual).isEqualTo(expect)
     }
 
     @Test
-    fun winLottoCount() {
-        val winningNumbers = List(6) { i -> LottoNumber(i + 1) }
-        val actual = customer.winLottoCount(winningNumbers)
-        assertThat(actual.any { it.getCount() > 0 }).isTrue()
+    fun hitLottos() {
+        val actual = customer.hitLottos(winningNumbers)
+        val expect = List(14) { HitLotto }
+
+        assertThat(actual.size).isEqualTo(14)
+        assertThat(actual).contains(HitLotto.SIX)
+    }
+
+    @Test
+    fun countLottos() {
+        val hitLottos = customer.hitLottos(winningNumbers)
+        val resultList = customer.countLottos(hitLottos)
+        assertThat(resultList.last()).isEqualTo(HitLotto.SIX)
     }
 
     @Test
     fun getTotalRate() {
-        // TODO customer2가 만들어졌을 때 enum이 초기화가 안됨... count를 빼자
-        val customer2 = Customer(Money(15500.toBigInteger()), testStrategy)
-        val winningNumbers = List(6) { i -> LottoNumber(i + 1) }
-        customer2.winLottoCount(winningNumbers)
-        assertThat(customer2.getTotalRate()).isEqualTo(
-            2_000_000_000.toBigDecimal().multiply(15.toBigDecimal()) / 15500.toBigDecimal()
-        )
+        val hitLottos = customer.hitLottos(winningNumbers)
+        customer.countLottos(hitLottos)
+        val actual = customer.getTotalRate()
+        val expect = HitLotto.SIX.money * 14 / 14500.toBigDecimal()
+        assertThat(actual).isEqualTo(expect)
     }
 }
