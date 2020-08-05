@@ -6,14 +6,10 @@ import lotto.domain.generator.AutoLottoGenerator
 
 class Seller {
 
-    fun processOrder(input: Int): PaymentResult {
-        val payment = Payment(input)
-        val lottoes: List<Lotto> = List(calculateLottoCount(payment)) {
-            Lotto(
-                getGenerator()
-            )
-        }
-        return PaymentResult(lottoes, calculateChange(payment))
+    fun processOrder(money: Int): PaymentResult {
+        val payment = Payment(money)
+        val lottoes: List<Lotto> = List(calculateLottoCount(payment)) { Lotto(getGenerator()) }
+        return PaymentResult(money, lottoes, calculateChange(payment))
     }
 
     fun isAcceptable(money: String): Boolean {
@@ -30,6 +26,6 @@ class Seller {
     private fun calculateChange(payment: Payment) = payment.money % LOTTO_PRICE
 
     companion object {
-        private const val LOTTO_PRICE = 1000
+        const val LOTTO_PRICE = 1000
     }
 }

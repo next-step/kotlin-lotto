@@ -3,6 +3,7 @@ package lotto.domain.selling
 import lotto.domain.Lotto
 
 data class PaymentResult(
+    val money: Int,
     val lottoes: List<Lotto>,
     val change: Int
 ) {
