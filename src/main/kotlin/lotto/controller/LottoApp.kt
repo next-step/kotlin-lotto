@@ -8,7 +8,7 @@ import lotto.view.ResultView
 
 fun main() {
     val price = InputView.requestPrice()
-    val buyer = Buyer().apply { buyLotto(price) }
+    val buyer = Buyer(price).apply { buyLotto() }
     val store = Store(buyer)
     ResultView.printPurchasedLottoNumbers(buyer.purchasedLottos)
 

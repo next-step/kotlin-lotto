@@ -15,7 +15,7 @@ class StoreTest {
 
     @BeforeEach
     fun setup() {
-        buyer = Buyer().apply {
+        buyer = Buyer(2_000).apply {
             markLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)))
             markLotto(Lotto(setOf(1, 2, 3, 4, 5, 45)))
         }
