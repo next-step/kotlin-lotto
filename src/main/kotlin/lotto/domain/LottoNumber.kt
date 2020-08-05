@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoNumber private constructor(
-    private val value: Int
+    val value: Int
 ) {
 
     override fun toString(): String {

@@ -7,9 +7,16 @@ class LottoTickets(
         return LottoTickets(this.tickets + other.tickets)
     }
 
-    fun compare(luckyTicket: LottoTicket): Map<LottoResult, Int> {
-        return this.tickets.map { it.compare(luckyTicket) }
+    fun compare(luckyTicket: LottoTicket, bonusNumber: LottoNumber): LottoResults {
+        return this.tickets.map { it.compare(luckyTicket, bonusNumber) }
             .groupingBy { it }
             .eachCount()
+            .let { LottoResults(it) }
+    }
+
+    fun size() = tickets.size
+
+    override fun toString(): String {
+        return tickets.joinToString("\n")
     }
 }

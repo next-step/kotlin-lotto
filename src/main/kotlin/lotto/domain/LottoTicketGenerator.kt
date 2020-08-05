@@ -12,6 +12,7 @@ class LottoTicketGenerator : LottoTicketGenerateStrategy {
     override fun createAutoTicket(): LottoTicket {
         return lottoNumbers.shuffled()
             .subList(0, LottoTicket.LOTTO_NUMBER_COUNT)
+            .sortedBy { it.value }
             .let { LottoTicket(it) }
     }
 

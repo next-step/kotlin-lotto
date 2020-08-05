@@ -14,13 +14,14 @@ class LottoTicket(
         require(lottoNumbers.distinct().size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복될 수 없습니다." }
     }
 
-    fun compare(lottoTicket: LottoTicket): LottoResult {
+    fun compare(lottoTicket: LottoTicket, bonusNumber: LottoNumber): LottoResult {
+        val isBonusMatched = this.has(bonusNumber)
         return this.lottoNumbers
             .count { lottoTicket.has(it) }
-            .let { LottoResult.findByMatch(it) }
+            .let { LottoResult.findByMatch(it, isBonusMatched) }
     }
 
-    private fun has(lottoNumber: LottoNumber): Boolean {
+    fun has(lottoNumber: LottoNumber): Boolean {
         return this.lottoNumbers.contains(lottoNumber)
     }
 
