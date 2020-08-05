@@ -10,7 +10,7 @@ data class Lotto(private val strategy: Strategy) {
     fun getLotto() = lotto
 
     fun winCount(winningNumbers: List<LottoNumber>) {
-        var count = 0
+        var count = ZERO
         winningNumbers.forEach {
             if (lotto.contains(it)) {
                 count++
@@ -28,11 +28,18 @@ data class Lotto(private val strategy: Strategy) {
 
     private fun order(numbers: List<LottoNumber>) = numbers.sortedBy { it.getNumber() }
 
-    private fun getSixNumber(numbers: List<LottoNumber>) = numbers.subList(0, 6)
+    private fun getSixNumber(numbers: List<LottoNumber>) = numbers.subList(SUBLIST_START, SUBLIST_END)
 
     private fun shuffle(numbers: List<LottoNumber>) = strategy.shuffle(numbers)
 
-    private fun getAllNumbers() = List(45) { i -> LottoNumber(i + 1) }
+    private fun getAllNumbers() = List(MAX_NUBER) { i -> LottoNumber(i + 1) }
 
     override fun toString() = "$lotto\n"
+
+    companion object {
+        private const val ZERO = 0
+        private const val SUBLIST_START = 0
+        private const val SUBLIST_END = 6
+        private const val MAX_NUBER = 45
+    }
 }
