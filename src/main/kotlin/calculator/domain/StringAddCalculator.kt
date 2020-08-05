@@ -8,8 +8,7 @@ class StringAddCalculator {
             return DEFAULT_RESULT
         }
 
-        val expression = Expression(input)
-        return expression.extractTokens().sumBy { it.value }
+        return Expression(input).extractTokens().sumBy { it.value }
     }
 
     companion object {
