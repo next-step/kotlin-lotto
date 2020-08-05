@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
     val inputPrize = { readLine()!! }
     inputView.inputLastWeekPrize(inputPrize)
     val prize = inputView.prize
-    lottoManager.prize = prize.map { it.toInt() }
+    lottoManager.setPrize(prize.map { it.toInt() })
 
     ResultView.showPrizeList(lottoManager.prizeStatList)
     ResultView.showEarningRate(lottoManager.earningRate)

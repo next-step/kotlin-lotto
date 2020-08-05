@@ -4,11 +4,19 @@ import model.DiceRandomMaker
 import model.Lotto
 import model.LottoPrize
 import model.PrizeEarn
+import service.LottoService
+import service.MatchService
 import kotlin.properties.Delegates
 
 class LottoManager() {
+    private val lottoService = LottoService()
+    private lateinit var matchService: MatchService
+
     val lottoList: List<Lotto>
-        get() = lottoListMutable.toList()
+        get() = lottoService.lottoList.toList()
+
+    val lottoCount: Int
+        get() = lottoList.size
 
     val prizeStatList: List<PrizeEarn>
         get() {
@@ -27,48 +35,25 @@ class LottoManager() {
             return String.format("%.2f", earningRate).toDouble()
         }
 
-    var lottoCount by Delegates.notNull<Int>()
-        private set
-
-    lateinit var prize: List<Int>
-
-    private val lottoListMutable = mutableListOf<Lotto>()
-
     private val prizeList: List<Pair<Int, Int>>
-        get() {
-            return prizeMap().toSortedMap().toList()
-        }
+        get() = matchService.prizeList
 
     private var purchaseAmount by Delegates.notNull<Int>()
 
     fun buy(purchaseAmount: Int) {
         this.purchaseAmount = purchaseAmount
-        lottoCount = purchaseAmount / LOTTO_PRICE
-        checkLottoPrice()
+        val lottoCount = purchaseAmount / LOTTO_PRICE
+        checkLottoPrice(lottoCount)
         repeat(lottoCount) {
-            addLotto()
+            lottoService.create(DiceRandomMaker())
         }
     }
 
-    private fun prizeMap(): MutableMap<Int, Int> {
-        val prizeMap = mutableMapOf<Int, Int>()
-        for (lotto in lottoList) {
-            addMap(lotto, prizeMap)
-        }
-        return prizeMap
+    fun setPrize(prize: List<Int>) {
+        matchService = MatchService(prize, lottoList)
     }
 
-    private fun addMap(lotto: Lotto, prizeMap: MutableMap<Int, Int>) {
-        val count = lotto.lottoNumber.count { prize.contains(it) }
-        prizeMap[count] = (prizeMap[count] ?: 0) + 1
-    }
-
-    private fun addLotto() {
-        val diceRandom = DiceRandomMaker()
-        lottoListMutable.add(Lotto(diceRandom))
-    }
-
-    private fun checkLottoPrice() {
+    private fun checkLottoPrice(lottoCount: Int) {
         if (lottoCount == 0) {
             throw IllegalArgumentException("please input minimum over $LOTTO_PRICE")
         }

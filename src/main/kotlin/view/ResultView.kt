@@ -1,7 +1,7 @@
 package view
 
 import model.Lotto
-import model.LottoPrize
+import model.PrizeEarn
 
 object ResultView {
     fun showLottoList(list: List<Lotto>) {
@@ -11,13 +11,13 @@ object ResultView {
         println()
     }
 
-    fun showPrizeList(prizeStatList: List<Pair<LottoPrize, Int>>) {
+    fun showPrizeList(prizeStatList: List<PrizeEarn>) {
         println(
             "당첨 통계\n" +
                 "---------"
         )
-        for (pair in prizeStatList) {
-            println("${pair.first.grade}개 일치 (${pair.first.prizeMoney}원)- ${pair.second}개")
+        for (prizeEarn in prizeStatList) {
+            println("${prizeEarn.grade}개 일치 (${prizeEarn.prizeMoney}원)- ${prizeEarn.count}개")
         }
     }
 
