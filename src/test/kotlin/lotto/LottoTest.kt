@@ -8,10 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
 
-    // checkAmountValidation
+    @DisplayName("구매 금액 확인")
     @ParameterizedTest
     @ValueSource(strings = ["", "200", "-30"])
-    fun `구매금액 확인`(amount: String) {
+    fun checkAmountValidation(amount: String) {
         assertThatThrownBy { LottoGame(amount) }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
