@@ -10,8 +10,8 @@ enum class Prize(val countOfMatch: Int, private val rank: Int, val prizeMoney: I
     MATCH_ALL(6, 1, 2000000000);
 
     companion object {
-        fun findByMatchCount(countOfMatch: Int): Prize? {
-            return values().find { it.countOfMatch == countOfMatch }
+        fun getPrizeMoney(countOfMatch: Int): Int {
+            return values().find { it.countOfMatch == countOfMatch }?.prizeMoney ?: 0
         }
     }
 }

@@ -46,7 +46,7 @@ class LottoGame(gameMoney: String) {
     private fun checkMatch(lottoNumbers: List<Number>) {
         var count = 0
         lottoNumbers.forEach { if (prizeNumbers.contains(it)) count++ }
-        val prizeMoney = Prize.findByMatchCount(count)!!.prizeMoney
+        val prizeMoney = Prize.getPrizeMoney(count)
         if (prizeMoney > 0) {
             val selectedLotto = prizes.find { it.getCountOfMatch() == count }
             selectedLotto!!.addCount()
