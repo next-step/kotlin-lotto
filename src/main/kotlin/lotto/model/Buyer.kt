@@ -20,8 +20,8 @@ class Buyer {
     }
 
     private fun generateAutoLotto(): Lotto {
-        val autoNumbers = mutableListOf<Int>()
-        repeat(Lotto.NUMBER_COUNT) {
+        val autoNumbers = mutableSetOf<Int>()
+        while (autoNumbers.size < Lotto.NUMBER_COUNT) {
             autoNumbers.add(Lotto.NUMBER_GENERATION_RANGE.random())
         }
         return Lotto(autoNumbers)
