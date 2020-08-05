@@ -68,7 +68,7 @@ class StoreTest {
     fun `수익률 조회`() {
         val winnerHistory = store.drawLottoNumber(Lotto(setOf(1, 2, 3, 14, 15, 16)))
 
-        assertThat(store.getRateOfReturn(14_000, winnerHistory)).isEqualTo(0.35)
+        assertThat(store.getRateOfReturn(14_000, winnerHistory)).isEqualTo(0.71)
     }
 
     @Test
