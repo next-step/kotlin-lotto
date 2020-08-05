@@ -1,6 +1,12 @@
 package textcalculator
 
-interface IOManager {
-    fun input(): String?
-    fun output(message: String)
+class IOManager {
+    fun input(): String? {
+        val temp = readLine() ?: ""
+        return temp
+    }
+
+    fun output(message: String) {
+        println(message)
+    }
 }
