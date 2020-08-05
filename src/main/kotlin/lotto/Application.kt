@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.generator.ManualLottoGenerator
+import lotto.domain.selling.LottoExchanger
 import lotto.domain.selling.Seller
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -15,9 +16,9 @@ object Application {
         val result = seller.processOrder(money)
         ResultView.printPaymentResult(result)
 
-        // 결과 출력
         val numbers = InputView.readWinningNumbers { ManualLottoGenerator.isAcceptable(it) }
         val winningNumbers = Lotto(ManualLottoGenerator(numbers))
-        println(winningNumbers.numbers.joinToString())
+        val exchangeResult = LottoExchanger.exchange(result.lottoes, winningNumbers)
+        ResultView.printExchangeResult(exchangeResult)
     }
 }
