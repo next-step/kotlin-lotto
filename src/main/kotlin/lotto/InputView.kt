@@ -3,12 +3,12 @@ package lotto
 const val LOTTO_SPLIT_PATTERN = ","
 const val LOTTO_BASE_PRICE = 1000
 class InputView {
-    fun buyMoney(): Int {
+    fun buyMoney(): Money {
         println("구입금액을 입력해 주세요.")
-        val buyMoney = readLine()!!.toInt()
+        val buyMoney = Money(readLine()!!.toInt())
 
-        require(buyMoney % LOTTO_BASE_PRICE == 0) { "구입 금액은 1천원 단위로 가능합니다." }
-        println("${buyMoney / LOTTO_BASE_PRICE}개를 구매했습니다.")
+        require(buyMoney.devideRemain(LOTTO_BASE_PRICE) == 0) { "구입 금액은 1천원 단위로 가능합니다." }
+        println("${buyMoney.divide(LOTTO_BASE_PRICE)}개를 구매했습니다.")
 
         return buyMoney
     }
