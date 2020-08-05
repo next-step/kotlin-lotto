@@ -4,6 +4,7 @@ class LottoMaker {
     fun make(): Lotto {
         val numbers =
             List(LOTTO_NUMBER_RANGE) { i -> i + TO_POSITIVE_NUMBER }.shuffled().subList(0, LOTTO_NUMBER_TOTAL_COUNT)
+                .sorted()
         return Lotto(numbers)
     }
 

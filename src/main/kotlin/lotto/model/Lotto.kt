@@ -1,7 +1,5 @@
 package lotto.model
 
-const val LOTTO_PRICE = 1_000
-
 data class Lotto(val numbers: List<Int>) {
     lateinit var win: Win
 
@@ -12,7 +10,7 @@ data class Lotto(val numbers: List<Int>) {
         win = getPrize(matchNumbers.size, matchBonusNumber.isNotEmpty())
     }
 
-    fun checkPrize(): Int {
+    fun checkPrize(): Money {
         return win.prize
     }
 }

@@ -21,7 +21,7 @@ class LottoCheckerTest {
     fun checkLottoResult() {
         assertThat(checker.getLottos()).allSatisfy {
             assertThat(it.win.matchNumber).isEqualTo(5)
-            assertThat(it.win.matchBonusNumber).isEqualTo(1)
+            assertThat(it.win.matchBonus).isEqualTo(true)
             assertThat(it.checkPrize()).isEqualTo(Win.SECOND.prize)
         }
     }
@@ -30,6 +30,6 @@ class LottoCheckerTest {
     fun `enum test`() {
         assertThat(Win.values().size).isEqualTo(6)
         assertThat(Win.THIRD.matchNumber).isEqualTo(5)
-        assertThat(Win.FOURTH.prize).isEqualTo(50_000)
+        assertThat(Win.FOURTH.prize.money).isEqualTo(50_000)
     }
 }

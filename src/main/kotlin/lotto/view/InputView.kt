@@ -2,14 +2,15 @@ package lotto.view
 
 import lotto.model.Lotto
 import lotto.model.LottoMaker.Companion.LOTTO_NUMBER_TOTAL_COUNT
+import lotto.model.Money
 
 const val WINNER_NUMBER_DELIMITER = ","
 
 object InputView {
-    fun getAmountOfMoney(): Int {
+    fun getAmountOfMoney(): Money {
         println("구입금액을 입력해 주세요.")
 
-        return readLine()!!.toInt()
+        return Money(readLine()!!.toInt())
     }
 
     fun getWinnerLotto(): Lotto {
