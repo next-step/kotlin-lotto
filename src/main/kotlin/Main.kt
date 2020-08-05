@@ -1,6 +1,6 @@
-import lotto.InputView
-import lotto.LottoGame
-import lotto.ResultView
+import lotto.view.InputView
+import lotto.domain.LottoGame
+import lotto.view.ResultView
 
 fun main() {
     try {

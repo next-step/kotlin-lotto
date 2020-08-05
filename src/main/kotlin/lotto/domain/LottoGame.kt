@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import java.lang.IllegalArgumentException
 import java.lang.NumberFormatException
@@ -39,7 +39,9 @@ class LottoGame(amount: String) {
     }
 
     fun createLotto(): List<Int> {
-        val lotto = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS).sorted()
+        val lotto = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0,
+            COUNT_OF_NUMBERS
+        ).sorted()
         lottoNumbers.add(lotto)
         return lotto
     }
