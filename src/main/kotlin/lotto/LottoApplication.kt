@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.EarnRatio
-import lotto.domain.LottoShop
+import lotto.domain.LottoTicketDispenser
 import lotto.domain.LottoTicketGenerator
 import lotto.domain.LuckyLottoNumbers
 import lotto.view.getBonusNumber
@@ -12,9 +12,9 @@ import lotto.view.printLottoResults
 import lotto.view.printLottoTickets
 
 fun main() {
-    val lottoShop = LottoShop(LottoTicketGenerator())
+    val lottoTicketDispenser = LottoTicketDispenser(LottoTicketGenerator())
     val inputMoney = getMoneyForTickets()
-    val lottoTickets = lottoShop.getAutoTickets(inputMoney)
+    val lottoTickets = lottoTicketDispenser.getAutoTickets(inputMoney)
     printLottoTickets(lottoTickets)
 
     val luckyNumbers = getLuckyNumbers()

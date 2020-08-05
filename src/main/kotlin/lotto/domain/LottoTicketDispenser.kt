@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoShop(
+class LottoTicketDispenser(
     private val lottoTicketGenerator: LottoTicketGenerateStrategy
 ) {
     fun getAutoTickets(money: Int): LottoTickets {

@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTicket(
+data class LottoTicket(
     private val lottoNumbers: List<LottoNumber>
 ) {
     init {
@@ -23,21 +23,6 @@ class LottoTicket(
 
     fun has(lottoNumber: LottoNumber): Boolean {
         return this.lottoNumbers.contains(lottoNumber)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as LottoTicket
-
-        if (lottoNumbers != other.lottoNumbers) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return lottoNumbers.hashCode()
     }
 
     override fun toString(): String {
