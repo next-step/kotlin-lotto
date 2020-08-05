@@ -26,3 +26,20 @@
  
 ###TODO 객체(로또)
 1. 6개의 숫자를 가지는 객체 
+
+
+### 1차 피드백 반영 필요 사항 
+1. 상태값을 가지지 않는 경우 굳이 class로 구현이 아닌 object나 class 밖 함수로 구현
+ - InputView / ResultView 변경 
+1. 원시타입으로 사용중인 데이터를 포장하여 사용 
+ - Input / Result / Machine 에서 사용중인 금액에 대한 원시값 수정
+1. 함수 이름 변경
+ - 클래스와 함수 이름이 연결되어 해당 함수의 의도를 알 수 있게 변경
+1. LottoMachine 기능 분리
+ - 로또 생성 , 수익 계산 등 "단일 책임 원칙"에 맞도록 수정 해야함
+1. LottoNumber 의 번호들으르 List가 아닌 Set으로 변경
+ - 변경 시 장점 확인
+1. ETC  
+ - Enum 의 구조 변경
+ - PrizeMoneyWrapper 삭제 해보기
+  
