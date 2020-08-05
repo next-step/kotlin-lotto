@@ -1,5 +1,7 @@
 package calculator
 
+import java.util.regex.Pattern
+
 const val FIRST_PREFIX =
     """//"""
 
@@ -28,7 +30,7 @@ class Calculator(private val numbersInput: String) {
     }
 
     private fun getNumbersForCalculator(numbersInput: String?): String? {
-        require(!numbersInput.isNullOrBlank()) { throw KotlinNullPointerException("숫자를 입력해주세요.") }
+        require(!numbersInput.isNullOrBlank()) { throw CalculatorException("숫자를 입력해주세요.") }
         return numbersInput
     }
 
@@ -49,13 +51,12 @@ class Calculator(private val numbersInput: String) {
     }
 
     private fun hasOnlyValidString() {
-        val pattern = StringBuilder("[0-9")
+        val pattern = StringBuilder("^[0-9][0-9")
         splitters.forEach { pattern.append("|$it") }
-        pattern.append("]*")
+        pattern.append("]*[0-9]$")
         val numberInput = numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
-
-        if (!numberInput.matches(Regex(pattern.toString()))) {
-            throw CalculatorException("숫자와 구분자만 입력해야합니다.")
+        if (!Pattern.compile(pattern.toString()).matcher(numberInput).matches()) {
+            throw CalculatorException("입력값을 확인하세요.")
         }
     }
 
