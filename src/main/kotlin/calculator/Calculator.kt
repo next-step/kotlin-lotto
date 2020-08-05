@@ -11,11 +11,12 @@ private val DEFAULT_SPLITTER = listOf(",", ":")
 const val CUSTOM_SPLITTER_LAST_LOCATION = 5
 
 class Calculator(private val numbersInput: String) {
-    var isCustomSplitter: Boolean = false
-
+    private var isCustomSplitter: Boolean = false
+    private var splitters: List<String> = emptyList()
     fun execute(): Int {
         getNumbersForCalculator(numbersInput)
         hasCustomSplitter()
+        setSplitters()
         hasOnlyValidString()
         checkEndString()
         val numbers = parsing()
@@ -33,23 +34,23 @@ class Calculator(private val numbersInput: String) {
 
     private fun hasCustomSplitter() {
         try {
-            isCustomSplitter = numbersInput!!.startsWith(FIRST_PREFIX)
+            isCustomSplitter = numbersInput.startsWith(FIRST_PREFIX)
                 .and(numbersInput.substring(CUSTOM_SPLITTER_LOCATION + 1).startsWith(SECOND_PREFIX))
         } catch (e: IndexOutOfBoundsException) {
             throw CalculatorException("입력값을 확인해 주세요.")
         }
     }
 
-    private fun getSplitters(): List<String> {
+    private fun setSplitters() {
         if (isCustomSplitter) {
-            return listOf(numbersInput[CUSTOM_SPLITTER_LOCATION].toString())
+            splitters = listOf(numbersInput[CUSTOM_SPLITTER_LOCATION].toString())
         }
-        return DEFAULT_SPLITTER
+        splitters = DEFAULT_SPLITTER
     }
 
     private fun hasOnlyValidString() {
         val pattern = StringBuilder("[0-9")
-        getSplitters().forEach { pattern.append("|$it") }
+        splitters.forEach { pattern.append("|$it") }
         pattern.append("]*")
         val numberInput = numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
 
@@ -73,11 +74,10 @@ class Calculator(private val numbersInput: String) {
     }
 
     private fun parsing(): List<Number> {
-        val splitter = getSplitters()
         if (isCustomSplitter) {
-            return numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(splitter[0]).map { it.toInt() }
+            return numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(splitters[0]).map { it.toInt() }
         }
-        return numbersInput.replace(splitter[1], splitter[0]).split(splitter[0])
+        return numbersInput.replace(splitters[1], splitters[0]).split(splitters[0])
             .map { it.toInt() }
     }
 }
