@@ -1,9 +1,11 @@
 package lotto.domain
 
+import lotto.LottoUtils.luckyNumbers
+
 class Lottos(private val lottos: List<Lotto>) {
 
-    fun getResults(): Results {
-        return Results(lottos.map { it.getResult() })
+    fun matchCounts(): List<Int> {
+        return lottos.map { it.getMatchCount(luckyNumbers) }
     }
 
     override fun toString(): String {

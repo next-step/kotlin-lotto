@@ -1,7 +1,8 @@
 package lotto.view
 
 import lotto.domain.Lottos
-import lotto.domain.Results
+import lotto.domain.PrizeMoney
+import java.math.BigDecimal
 
 object ResultView {
 
@@ -13,8 +14,21 @@ object ResultView {
         println(lottos)
     }
 
-    fun showResults(results: Results) {
+    fun showResults(result: Map<PrizeMoney, Int>) {
         println("\n당첨 통계\n---------")
-        println(results)
+        printResult(result)
+    }
+
+    fun showProfitRatio(ratio: BigDecimal) {
+        print("총 수익률은 ${ratio}입니다.(기준이 1이기 때문에 결과적으로 ")
+
+        if (BigDecimal.ONE > ratio) println("손해라는 의미임)")
+        else println("이득이라는 의미임)")
+    }
+
+    private fun printResult(result: Map<PrizeMoney, Int>) {
+        result.forEach { (key, value) ->
+            println("${key.condition}개 일치 (${key.money}원)- ${value}개")
+        }
     }
 }

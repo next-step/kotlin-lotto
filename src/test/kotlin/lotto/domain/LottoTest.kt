@@ -17,7 +17,7 @@ class LottoTest {
     @Test
     fun `has lucky numbers`() {
         // when
-        val matchSuccess = lotto.hasLuckyNumbers(luckyNumbers = listOf(1, 2, 3, 10, 20, 30))
+        val matchSuccess = lotto.getMatchCount(luckyNumbers = listOf(1, 2, 3, 10, 20, 30))
 
         // then
         assertThat(matchSuccess).isEqualTo(3)
