@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.domain.Customer
 import lotto.domain.Lotto
-import lotto.domain.value.WinLotto
+import lotto.domain.value.HitLotto
 import java.math.BigDecimal
 
 object ResultView {
@@ -17,11 +17,11 @@ object ResultView {
     }
 
     fun printResult(
-        win: List<WinLotto>
+        hit: List<HitLotto>
     ) {
         println("당첨 통계")
         println("---------")
-        printJoinToString(win)
+        printJoinToString(hit)
     }
 
     fun printTotalRate(totalRate: BigDecimal) {

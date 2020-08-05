@@ -12,7 +12,8 @@ fun main() {
     ResultView.printLottos(lottos)
 
     val winningNumbers = InputView.inputWinningNumber()
-    val resultList = customer.winLottoCount(winningNumbers)
+    val hitLottos = customer.hitLottos(winningNumbers)
+    val resultList = customer.countLottos(hitLottos)
 
     ResultView.printResult(resultList)
 
