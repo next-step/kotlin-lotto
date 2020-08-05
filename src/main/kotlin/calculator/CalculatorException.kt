@@ -1,3 +1,3 @@
-package step1
+package calculator
 
 class CalculatorException(message: String) : IllegalArgumentException(message)
