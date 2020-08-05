@@ -12,7 +12,6 @@ private const val PRIZE_COUNT = 3
 private const val MIN_NUMBER = 1
 const val PRICE_OF_LOTTO = 1000
 private const val NUMBER_RANGE = "(4[0-5]|[1-3][0-9]|[1-9])"
-val PRIZE_MONEY = listOf(0, 0, 0, 5000, 50000, 1500000, 2000000000)
 
 class LottoGame(gameMoney: String) {
     private val lottoNumbers: MutableList<List<Number>> = mutableListOf()
@@ -27,9 +26,8 @@ class LottoGame(gameMoney: String) {
 
     init {
         checkGameMoneyValidation(gameMoney)
-        PRIZE_MONEY.filter { it > 0 }.forEach {
-            prizes[PRIZE_MONEY.indexOf(it)] = Lotto(it)
-        }
+        PrizeMoney.values().filter { it.prizeMoney > 0 }
+            .forEach { prizes[it.countOfMatch] = Lotto(it.prizeMoney) }
     }
 
     fun execute(prizeNumberString: String): Map<Int, Lotto> {
@@ -50,7 +48,7 @@ class LottoGame(gameMoney: String) {
         lottoNumbers.forEach { if (prizeNumbers.contains(it)) count++ }
         if (count >= PRIZE_COUNT) {
             prizes[count]!!.addCount()
-            prizeMoney += PRIZE_MONEY[count]
+            prizeMoney += PrizeMoney.findByMatchCount(count)!!.prizeMoney
         }
         if (count > 0) {
             profitRate =
