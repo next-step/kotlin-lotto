@@ -4,7 +4,7 @@ import lotto.domain.Lotto
 
 object ResultView {
 
-    fun showLottoNumber(lottoNumbers: MutableList<List<Int>>) {
+    fun showLottoNumber(lottoNumbers: MutableList<List<Number>>) {
         lottoNumbers.forEach { println(it) }
     }
 

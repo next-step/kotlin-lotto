@@ -15,7 +15,7 @@ private const val NUMBER_RANGE = "(4[0-5]|[1-3][0-9]|[1-9])"
 val PRIZE_MONEY = listOf(0, 0, 0, 5000, 50000, 1500000, 2000000000)
 
 class LottoGame(gameMoney: String) {
-    private val lottoNumbers: MutableList<List<Int>> = mutableListOf()
+    private val lottoNumbers: MutableList<List<Number>> = mutableListOf()
     private var prizes: MutableMap<Int, Lotto> = mutableMapOf()
     private var prizeMoney: Int = 0
     var count: Int = 0
@@ -23,7 +23,7 @@ class LottoGame(gameMoney: String) {
     var profitRate: Double = 0.0
         private set
 
-    private var prizeNumbers: List<Int> = listOf()
+    private var prizeNumbers: List<Number> = listOf()
 
     init {
         checkGameMoneyValidation(gameMoney)
@@ -38,14 +38,14 @@ class LottoGame(gameMoney: String) {
         return prizes as HashMap
     }
 
-    fun createLotto(): MutableList<List<Int>> {
+    fun createLotto(): MutableList<List<Number>> {
         repeat(count) {
             lottoNumbers.add((MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS).sorted())
         }
         return lottoNumbers
     }
 
-    private fun checkMatch(lottoNumbers: List<Int>): Int {
+    private fun checkMatch(lottoNumbers: List<Number>): Int {
         var count = 0
         lottoNumbers.forEach { if (prizeNumbers.contains(it)) count++ }
         if (count >= PRIZE_COUNT) {
@@ -70,7 +70,7 @@ class LottoGame(gameMoney: String) {
     }
 
     @Throws(IllegalArgumentException::class)
-    private fun checkPrizeNumbersValidation(prizeNumberString: String): List<Int> {
+    private fun checkPrizeNumbersValidation(prizeNumberString: String): List<Number> {
         val numberPattern = StringBuilder()
         for (i in 2..COUNT_OF_NUMBERS)
             numberPattern.append(NUMBER_RANGE).append(",")

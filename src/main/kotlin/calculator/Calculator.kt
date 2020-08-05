@@ -23,8 +23,8 @@ class Calculator(private val numbersInput: String?) {
         return calculate(numbers)
     }
 
-    private fun calculate(numbers: List<Int>): Int {
-        return numbers.sum()
+    private fun calculate(numbers: List<Number>): Int {
+        return numbers.sumBy { it.toInt() }
     }
 
     private fun getNumbers(numbersInput: String?): String? {
@@ -73,7 +73,7 @@ class Calculator(private val numbersInput: String?) {
         }
     }
 
-    private fun parsing(): List<Int> {
+    private fun parsing(): List<Number> {
         if (isCustomSplitter) {
             return numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(getSplitters()[0]).map { it.toInt() }
         }
