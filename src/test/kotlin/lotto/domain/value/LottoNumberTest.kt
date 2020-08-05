@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
-internal class LottoNumberTest {
+class LottoNumberTest {
     @Test
     fun zeroTest() {
         assertThatThrownBy { (LottoNumber(0)) }
@@ -24,5 +24,20 @@ internal class LottoNumberTest {
         for (i in 1..45) {
             assertThat(LottoNumber(i)).isEqualTo(LottoNumber(i))
         }
+    }
+
+    @Test
+    fun getNumber() {
+        val testNumber = 16
+        val lottoNumber = LottoNumber(testNumber)
+        val actual = lottoNumber.getNumber()
+        assertThat(actual).isEqualTo(testNumber)
+    }
+
+    @Test
+    fun toStringTest() {
+        val testNumber = 16
+        val actual = LottoNumber(testNumber).toString()
+        assertThat(actual).isEqualTo(testNumber.toString())
     }
 }
