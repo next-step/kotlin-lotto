@@ -6,8 +6,7 @@ object DelimiterFinder {
 
     fun find(string: String): List<String> {
         if (string.hasCustomDelimiter()) {
-            println(findCustomDelimiter(string))
-            return BASIC_DELIMITERS.plus(findCustomDelimiter(string))
+            return BASIC_DELIMITERS + findCustomDelimiter(string)
         }
         return BASIC_DELIMITERS
     }

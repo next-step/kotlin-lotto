@@ -6,7 +6,7 @@ class LottoTicketGenerator : LottoTicketGenerateStrategy {
 
     private fun createAllLottoNumbers(): List<LottoNumber> {
         return (LottoNumber.MIN_LOTTO_NUMBER..LottoNumber.MAX_LOTTO_NUMBER)
-            .map { LottoNumber(it) }
+            .map { LottoNumber.of(it) }
     }
 
     override fun createAutoTicket(): LottoTicket {
@@ -16,6 +16,6 @@ class LottoTicketGenerator : LottoTicketGenerateStrategy {
     }
 
     override fun createManualTicket(numbers: List<Int>): LottoTicket {
-        return LottoTicket(numbers.map { LottoNumber(it) })
+        return LottoTicket(numbers.map { LottoNumber.of(it) })
     }
 }
