@@ -4,10 +4,10 @@ class LottoMachine {
 
     private fun getRandoms(): List<Int> = LOTTO_NUMBERS.shuffled().subList(0, 6)
 
-    fun calculateStat(lottoNumbers: List<LottoNumber>, prizeNumber: LottoNumber): List<PrizeMoneyWrapper> {
-        return lottoNumbers
+    fun calculateStat(lottoes: List<Lotto>, prizeLotto: Lotto): List<PrizeMoneyWrapper> {
+        return lottoes
             .groupingBy {
-                it.equalsCount(prizeNumber)
+                it.equalsCount(prizeLotto)
             }.eachCount().filter { it.key > 3 }.map { PrizeMoneyWrapper(PrizeMoney.generate(it.key), it.value) }
     }
 
@@ -19,10 +19,10 @@ class LottoMachine {
         return totalPrizeMoney.toDouble() / buyMoney.toDouble()
     }
 
-    fun createLottoNumbers(buyMoney: Int): List<LottoNumber> {
-        var lottoNumbers = mutableListOf<LottoNumber>()
+    fun createLottoNumbers(buyMoney: Int): List<Lotto> {
+        var lottoNumbers = mutableListOf<Lotto>()
         repeat(buyMoney / LOTTO_BASE_PRICE) {
-            lottoNumbers.add(LottoNumber(getRandoms()))
+            lottoNumbers.add(Lotto(getRandoms()))
         }
         return lottoNumbers
     }
@@ -33,19 +33,4 @@ class LottoMachine {
 }
 
 fun main() {
-    val machime = LottoMachine()
-
-    val inpuView = InputView()
-    val buyMoney = inpuView.buyMoney()
-    var lottoNumbers = machime.createLottoNumbers(buyMoney)
-    val prevPrizNumber = LottoNumber(inpuView.prevPrizeLotto())
-    val prizeMoneyWrappers = machime.calculateStat(lottoNumbers, prevPrizNumber)
-
-    val resultView = ResultView()
-
-    resultView.printNumbers(lottoNumbers)
-    resultView.printPrizeStat(prizeMoneyWrappers)
-    val totalPrizeMoney = machime.calculateProfit(prizeMoneyWrappers)
-    val rateProfit = machime.calculateRateOfProfit(totalPrizeMoney, buyMoney)
-    resultView.printProfit(rateProfit)
 }
