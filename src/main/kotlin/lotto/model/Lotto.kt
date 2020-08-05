@@ -8,9 +8,9 @@ class Lotto(val numbers: Set<Int>) {
         }
     }
 
-    fun convertPrize(winnerNumbers: Lotto): Prize {
+    fun convertPrize(winnerNumbers: Lotto, matchedBonusBall: Boolean): Prize {
         val matchCount = numbers.count { winnerNumbers.numbers.contains(it) }
-        return Prize.findByMatchCount(matchCount)
+        return Prize.findByMatchCount(matchCount, matchedBonusBall)
     }
 
     companion object {
