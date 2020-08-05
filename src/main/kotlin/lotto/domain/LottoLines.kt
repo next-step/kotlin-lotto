@@ -14,7 +14,7 @@ class LottoLines(private val totalNumber: Int, private val manualNumberList: Lis
     private fun createLottoTicket(totalNumber: Int, numbersList: List<List<Int>>): List<LottoSingleLine> {
         val lines = mutableListOf<LottoSingleLine>()
         lines.addAll(numbersList.map { LottoSingleLine(it) })
-        lines.addAll((1..totalNumber).toList().map { LottoSingleLine() })
+        lines.addAll((1..(totalNumber - numbersList.size)).toList().map { LottoSingleLine() })
         return lines
     }
 }
