@@ -1,36 +1,29 @@
 package lotto
 
+const val MIN_PRIZE_COUNT = 3
+
 class LottoMachine {
 
-    private fun getRandoms(): List<Int> = LOTTO_NUMBERS.shuffled().subList(0, 6)
+    private fun generateRandomLottoNumbers(): List<Int> = LOTTO_NUMBERS.shuffled().subList(0, 6)
 
-    fun calculateStat(lottoes: List<Lotto>, prizeLotto: Lotto): List<PrizeMoneyWrapper> {
+    fun calculateStat(lottoes: List<Lotto>, prizeLotto: Lotto): List<Pair<PrizeMoney, Int>> {
         return lottoes
             .groupingBy {
                 it.equalsCount(prizeLotto)
-            }.eachCount().filter { it.key > 3 }.map { PrizeMoneyWrapper(PrizeMoney.generate(it.key), it.value) }
+            }.eachCount().filter { it.key >= MIN_PRIZE_COUNT }.map { Pair(PrizeMoney.generate(it.key), it.value) }
     }
 
-    fun calculateProfit(prizeMoneyWrappers: List<PrizeMoneyWrapper>): Int {
-        return prizeMoneyWrappers.sumBy { it.calculatePrizeMoney() }
-    }
+    fun createLotto(lottoNumbers: List<Int>): Lotto = Lotto(lottoNumbers)
 
-    fun calculateRateOfProfit(totalPrizeMoney: Int, buyMoney: Int): Double {
-        return totalPrizeMoney.toDouble() / buyMoney.toDouble()
-    }
-
-    fun createLottoNumbers(buyMoney: Int): List<Lotto> {
-        var lottoNumbers = mutableListOf<Lotto>()
-        repeat(buyMoney / LOTTO_BASE_PRICE) {
-            lottoNumbers.add(Lotto(getRandoms()))
+    fun createLottoes(lottoCount: Int): List<Lotto> {
+        var lottoes = mutableListOf<Lotto>()
+        repeat(lottoCount) {
+            lottoes.add(Lotto(generateRandomLottoNumbers()))
         }
-        return lottoNumbers
+        return lottoes
     }
 
     companion object {
-        val LOTTO_NUMBERS = (1..45).toList()
+        val LOTTO_NUMBERS = (MIN_NUMBER..MAX_NUMBER).toList()
     }
-}
-
-fun main() {
 }

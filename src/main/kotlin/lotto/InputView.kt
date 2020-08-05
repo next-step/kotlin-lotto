@@ -7,7 +7,7 @@ object InputView {
         println("구입금액을 입력해 주세요.")
         val buyMoney = Money(readLine()!!.toInt())
 
-        require(buyMoney.devideRemain(LOTTO_BASE_PRICE) == 0) { "구입 금액은 1천원 단위로 가능합니다." }
+        require(buyMoney.divideRemain(LOTTO_BASE_PRICE) == 0) { "구입 금액은 1천원 단위로 가능합니다." }
         println("${buyMoney.divide(LOTTO_BASE_PRICE)}개를 구매했습니다.")
 
         return buyMoney

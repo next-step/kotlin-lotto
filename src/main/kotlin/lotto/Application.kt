@@ -7,15 +7,18 @@ object Application {
         val machine = LottoMachine()
         val buyMoney = InputView.buyMoney()
 
-        var lottoes = machine.createLottoNumbers(buyMoney.divide(LOTTO_BASE_PRICE))
+        var lottoes = machine.createLottoes(buyMoney.divide(LOTTO_BASE_PRICE))
         ResultView.printNumbers(lottoes)
 
-        val prizeLotto = Lotto(InputView.prevPrizeLotto())
+        val prizeLottoNumbers = InputView.prevPrizeLotto()
+        val prizeLotto = machine.createLotto(prizeLottoNumbers)
         val prizeMoneyWrappers = machine.calculateStat(lottoes, prizeLotto)
         ResultView.printPrizeStat(prizeMoneyWrappers)
 
-        val totalPrizeMoney = machine.calculateProfit(prizeMoneyWrappers)
-        val rateProfit = machine.calculateRateOfProfit(totalPrizeMoney, buyMoney.divide(LOTTO_BASE_PRICE))
+        val profitCalculator = ProfitCalculator()
+
+        val totalPrizeMoney = profitCalculator.calculateProfit(prizeMoneyWrappers)
+        val rateProfit = totalPrizeMoney.rate(buyMoney.money)
         ResultView.printProfit(rateProfit)
     }
 }

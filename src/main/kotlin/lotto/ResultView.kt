@@ -4,17 +4,19 @@ const val LOTTO_PRINT_PREFIX = "["
 const val LOTTO_PRINT_POSTFIX = "]"
 
 object ResultView {
-    fun printNumbers(lottos: List<Lotto>) {
-        lottos.forEach {
-            val numbers = it.numbers.joinToString(prefix = LOTTO_PRINT_PREFIX, postfix = LOTTO_PRINT_POSTFIX, separator = LOTTO_SPLIT_PATTERN)
+    fun printNumbers(lottoes: List<Lotto>) {
+        lottoes.forEach {
+            val numbers = it.numbers
+                .sorted()
+                .joinToString(prefix = LOTTO_PRINT_PREFIX, postfix = LOTTO_PRINT_POSTFIX, separator = LOTTO_SPLIT_PATTERN)
             println(numbers)
         }
     }
 
-    fun printPrizeStat(prizeMoneyWrappers: List<PrizeMoneyWrapper>) {
+    fun printPrizeStat(prizeMoneyWrappers: List<Pair<PrizeMoney, Int>>) {
         println("당첨 통계")
         prizeMoneyWrappers.forEach {
-            println("${it.prizeMoney.getEqualsCount()}개 일치 (${it.prizeMoney.getPrizeMoney()}원) - ${it.prizeCount}개")
+            println("${it.first.equalsCount}개 일치 (${it.first.money}원) - ${it.second}개")
         }
     }
 

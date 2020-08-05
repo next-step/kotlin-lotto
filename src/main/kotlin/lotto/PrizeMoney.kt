@@ -1,14 +1,18 @@
 package lotto
 
-enum class PrizeMoney(private val equalsCount: Int, private val money: Int) {
+enum class PrizeMoney(_equalsCount: Int, _money: Int) {
 
     SIX(6, 2000000000),
     FIVE(5, 1500000),
     FOUR(4, 50000),
     THREE(3, 5000);
 
-    fun getPrizeMoney(): Int = money
-    fun getEqualsCount(): Int = equalsCount
+    var equalsCount: Int = _equalsCount
+        private set
+    var money: Int = _money
+        private set
+
+    fun countToPrizeMoney(prizeCount: Int): Int = prizeCount * money
 
     companion object {
         fun generate(equalsCount: Int): PrizeMoney {
