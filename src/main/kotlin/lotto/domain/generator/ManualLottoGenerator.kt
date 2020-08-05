@@ -1,19 +1,26 @@
-package lotto.domain
+package lotto.domain.generator
 
-import lotto.domain.LottoGenerator.Companion.COUNT
-import lotto.domain.LottoGenerator.Companion.MAX
-import lotto.domain.LottoGenerator.Companion.MIN
+import lotto.domain.generator.LottoGenerator.Companion.COUNT
+import lotto.domain.generator.LottoGenerator.Companion.MAX
+import lotto.domain.generator.LottoGenerator.Companion.MIN
 
 class ManualLottoGenerator(private val numbers: String) : LottoGenerator {
 
-    override fun execute() = parseNumbers(numbers).map { it.trim().toInt() }
+    override fun execute() = parseNumbers(
+        numbers
+    ).map { it.trim().toInt() }
 
     companion object {
         private const val NUMBER_DELIMITER = ","
 
         fun isAcceptable(numbers: String): Boolean {
-            val parsedNumbers = parseNumbers(numbers)
-            return parsedNumbers.all { isValidNumber(it) } && isValidSize(parsedNumbers)
+            val parsedNumbers =
+                parseNumbers(numbers)
+            return parsedNumbers.all {
+                isValidNumber(
+                    it
+                )
+            } && isValidSize(parsedNumbers)
         }
 
         private fun parseNumbers(numbers: String) = numbers.split(NUMBER_DELIMITER)

@@ -1,10 +1,18 @@
-package lotto.domain
+package lotto.domain.selling
+
+import lotto.domain.Lotto
+import lotto.domain.LottoType
+import lotto.domain.generator.AutoLottoGenerator
 
 class Seller {
 
     fun processOrder(input: Int): PaymentResult {
         val payment = Payment(input)
-        val lottoes: List<Lotto> = List(calculateLottoCount(payment)) { Lotto(getGenerator()) }
+        val lottoes: List<Lotto> = List(calculateLottoCount(payment)) {
+            Lotto(
+                getGenerator()
+            )
+        }
         return PaymentResult(lottoes, calculateChange(payment))
     }
 

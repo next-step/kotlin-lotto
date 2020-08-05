@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.domain.selling
+
+import lotto.domain.Lotto
 
 data class PaymentResult(
     val lottoes: List<Lotto>,

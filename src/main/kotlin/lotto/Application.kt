@@ -1,8 +1,8 @@
 package lotto
 
 import lotto.domain.Lotto
-import lotto.domain.ManualLottoGenerator
-import lotto.domain.Seller
+import lotto.domain.generator.ManualLottoGenerator
+import lotto.domain.selling.Seller
 import lotto.view.InputView
 import lotto.view.ResultView
 

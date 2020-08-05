@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.selling
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
