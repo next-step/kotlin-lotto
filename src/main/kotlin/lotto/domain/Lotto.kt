@@ -1,7 +1,7 @@
 package lotto.domain
 
 import lotto.domain.value.LottoNumber
-import lotto.domain.value.WinLotto.Companion.plusCount
+import lotto.domain.value.HitLotto
 import lotto.strategy.Strategy
 
 data class Lotto(private val strategy: Strategy) {
@@ -9,14 +9,12 @@ data class Lotto(private val strategy: Strategy) {
 
     fun getLotto() = lotto
 
-    fun winCount(winningNumbers: List<LottoNumber>) {
+    fun hitLotto(winningNumbers: List<LottoNumber>): HitLotto {
         var count = ZERO
         winningNumbers.forEach {
-            if (lotto.contains(it)) {
-                count++
-            }
+            if (lotto.contains(it)) count++
         }
-        plusCount(count)
+        return HitLotto(count)
     }
 
     private fun getNumbers(): List<LottoNumber> {
