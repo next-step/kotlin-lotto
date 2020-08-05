@@ -13,6 +13,8 @@ fun main() {
     ResultView.printPurchasedLottoNumbers(buyer.purchasedLottos)
 
     val lastWeekLottoNumber = InputView.requestLastWeekLottoNumber()
+    val bonusBall = InputView.requestBonusBall()
+
     val lottoResults = store.drawLottoNumber(Lotto(lastWeekLottoNumber))
     ResultView.printWinnerStatistics(lottoResults)
 
