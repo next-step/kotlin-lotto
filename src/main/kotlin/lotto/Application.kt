@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.Lotto
+import lotto.domain.ManualLottoGenerator
 import lotto.domain.Seller
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -14,5 +16,8 @@ object Application {
         ResultView.printPaymentResult(result)
 
         // 결과 출력
+        val numbers = InputView.readWinningNumbers { ManualLottoGenerator.isAcceptable(it) }
+        val winningNumbers = Lotto(ManualLottoGenerator(numbers))
+        println(winningNumbers.numbers.joinToString())
     }
 }
