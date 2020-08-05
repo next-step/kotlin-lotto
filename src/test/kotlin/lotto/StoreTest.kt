@@ -41,6 +41,10 @@ class StoreTest {
     }
 
     @Test
+    fun `3천만원 당첨`() {
+    }
+
+    @Test
     fun `20억 당첨`() {
         val winnerHistory = store.drawLottoNumber(Lotto(setOf(1, 2, 3, 4, 5, 6)))
 
