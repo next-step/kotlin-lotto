@@ -6,7 +6,7 @@ import lotto.domain.LottoResult
 fun printLottoTicket(list: List<LottoSingleLine>) {
     println("${list.size}개를 구입했습니다.")
     list.forEach {
-        println("${it.getNumbers()}")
+        println("${it.lottoNumbers}")
     }
 }
 
