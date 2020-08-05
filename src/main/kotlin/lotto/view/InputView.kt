@@ -15,4 +15,9 @@ object InputView {
         }
         return lastWeekLottoNumber
     }
+
+    fun requestBonusBall(): Int {
+        println("보너스 볼을 입력해주세요.")
+        return readLine()?.toInt() ?: 0
+    }
 }
