@@ -38,13 +38,12 @@ class LottoGame(gameMoney: String) {
         return prizes as HashMap
     }
 
-    fun createLotto(): List<Int> {
-        val lotto = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS).sorted()
-        lottoNumbers.add(lotto)
-        return lotto
+    fun createLotto(): MutableList<List<Int>> {
+        repeat(count) {
+            lottoNumbers.add((MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS).sorted())
+        }
+        return lottoNumbers
     }
-
-    fun isEnd(): Boolean = count == lottoNumbers.size
 
     private fun checkMatch(lottoNumbers: List<Int>): Int {
         var count = 0

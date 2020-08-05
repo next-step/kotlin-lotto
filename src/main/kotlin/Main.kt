@@ -9,10 +9,8 @@ fun main() {
 
         ResultView.showLottoCount(lotto.count)
 
-        while (!lotto.isEnd()) {
-            val lottoNumber = lotto.createLotto()
-            ResultView.showLottoNumber(lottoNumber)
-        }
+        val lottoNumber = lotto.createLotto()
+        ResultView.showLottoNumber(lottoNumber)
 
         val prizedNumbers = InputView.getPrizedNumbers()
         val prizedLotto = lotto.execute(prizedNumbers)

@@ -4,8 +4,8 @@ import lotto.domain.Lotto
 
 object ResultView {
 
-    fun showLottoNumber(lottoNumber: List<Int>) {
-        println(lottoNumber)
+    fun showLottoNumber(lottoNumbers: MutableList<List<Int>>) {
+        lottoNumbers.forEach { println(it) }
     }
 
     fun showPrizeStatics(prizes: Map<Int, Lotto>, profitRate: Double) {

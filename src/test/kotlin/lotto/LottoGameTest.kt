@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.COUNT_OF_NUMBERS
 import lotto.domain.LottoGame
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -33,14 +32,6 @@ class LottoGameTest {
         val lotto = LottoGame("3000")
         assertThat(lotto.execute("1,2,3,4,5,6"))
             .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
-    }
-
-    // createLotto
-    @Test
-    fun `숫자 6개 뽑기`() {
-        val lotto = LottoGame("2000")
-        assertThat(lotto.createLotto().size)
-            .isEqualTo(COUNT_OF_NUMBERS)
     }
 
     // checkMatch
