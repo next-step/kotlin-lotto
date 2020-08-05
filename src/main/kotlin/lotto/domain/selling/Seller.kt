@@ -2,8 +2,6 @@ package lotto.domain.selling
 
 import lotto.domain.Lotto
 import lotto.domain.LottoType
-import lotto.domain.generator.AutoLottoGenerator
-import lotto.domain.generator.ManualLottoGenerator
 
 class Seller {
 
@@ -16,15 +14,7 @@ class Seller {
     }
 
     private fun issueLottoes(payment: Payment, numbers: String = "") =
-        List(calculateLottoCount(payment)) { Lotto(getGenerator(payment.lottoType, numbers)) }
-
-    private fun getGenerator(
-        type: LottoType = LottoType.AUTO,
-        numbers: String = ""
-    ) = when (type) {
-        LottoType.MANUAL -> ManualLottoGenerator(numbers)
-        else -> AutoLottoGenerator
-    }
+        List(calculateLottoCount(payment)) { Lotto(LottoType.generatorOf(payment.lottoType, numbers)) }
 
     private fun calculateLottoCount(payment: Payment) = payment.money / LOTTO_PRICE
 
