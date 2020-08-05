@@ -1,5 +1,6 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
@@ -51,5 +52,13 @@ class NumberTest {
         for (number in 1..45) {
             Number(number.toString())
         }
+    }
+
+    @Test
+    fun trim_test() {
+        val number = Number("1")
+        val number2 = Number(" 1 ")
+
+        assertThat(number).isEqualTo(number2)
     }
 }

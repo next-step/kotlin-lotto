@@ -1,61 +1,45 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
 class LottoTest {
-    private val candidateNumbers = makeCandidateNumbers()
+    @Test
+    fun sort_small_to_big() {
+        val numbers = listOf("6", "5", "4", "3", "2", "1")
+        val testNumbers = setOf(Number("1"), Number("2"), Number("3"), Number("4"), Number("5"), Number("6"))
 
-    private fun makeCandidateNumbers(): List<String> {
-        val list = mutableListOf<String>()
-        for (number in 1..45) {
-            list.add(number.toString())
-        }
-        return list
+        val lotto = Lotto(numbers)
+
+        assertThat(lotto.numbers).isEqualTo(testNumbers)
     }
 
     @Test
-    fun has_six_Number() {
-        val lotto = Lotto(candidateNumbers.shuffled())
-
-        val result = lotto.numbers.size
-
-        assertThat(result).isEqualTo(6)
+    fun can_not_get_same_number() {
+        val numbers = listOf("1", "2", "3", "4", "5", "5")
+        assertThatThrownBy {
+            Lotto(numbers)
+        }.isInstanceOf(IllegalArgumentException::class.java).hasMessageContaining("같은 번호를 가질수 없습니다.")
     }
 
     @Test
-    fun sort_low_to_high() {
-        val list = listOf("3", "2", "20", "10", "17", "40")
-        val testList = listOf(Number("2"), Number("3"), Number("10"), Number("17"), Number("20"), Number("40"))
-
-        val lotto = Lotto(list)
-
-        assertThat(lotto.numbers).isEqualTo(testList)
+    fun can_get_six_number() {
+        val numbers = listOf("1", "2", "3", "4", "5", "6", "7")
+        assertThatThrownBy {
+            Lotto(numbers)
+        }.isInstanceOf(IllegalArgumentException::class.java).hasMessageContaining("6개의 번호만 가질수 있습니다.")
     }
 
     @Test
-    fun get_rank() {
-        val first = Lotto(listOf("1", "2", "3", "4", "5", "6"))
-        val second = Lotto(listOf("1", "2", "3", "4", "5", "7"))
-        val third = Lotto(listOf("1", "2", "3", "4", "5", "8"))
-        val fourth = Lotto(listOf("1", "2", "3", "4", "8", "9"))
-        val fifth = Lotto(listOf("1", "2", "3", "8", "9", "10"))
-        val no = Lotto(listOf("1", "2", "8", "9", "10", "11"))
-        val correct = Lotto(listOf("1", "2", "3", "4", "5", "6"))
-        val bonusBall = Number("7")
+    fun get_count_match() {
+        val numbers = listOf("1", "2", "3", "4", "5", "6")
+        val correctNumbers = listOf("1", "2", "7", "3", "8", "9")
+        val lotto = Lotto(numbers)
+        val correctLotto = Lotto(correctNumbers)
 
-        val firstRank = first.getRank(correct.numbers, bonusBall)
-        val secondRank = second.getRank(correct.numbers, bonusBall)
-        val thirdRank = third.getRank(correct.numbers, bonusBall)
-        val fourthRank = fourth.getRank(correct.numbers, bonusBall)
-        val fifthRank = fifth.getRank(correct.numbers, bonusBall)
-        val noRank = no.getRank(correct.numbers, bonusBall)
+        val countMatch = lotto.getCountMatch(correctLotto.numbers)
 
-        assertThat(firstRank).isEqualTo("1등")
-        assertThat(secondRank).isEqualTo("2등")
-        assertThat(thirdRank).isEqualTo("3등")
-        assertThat(fourthRank).isEqualTo("4등")
-        assertThat(fifthRank).isEqualTo("5등")
-        assertThat(noRank).isEqualTo("No Rank")
+        assertThat(countMatch).isEqualTo(3)
     }
 }

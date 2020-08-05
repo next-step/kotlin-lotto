@@ -1,21 +1,24 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.PrizeMoney
+import lotto.domain.Rank
+import lotto.domain.Result
 
 object ResultView {
-    fun viewLottos(amount: Int, lottoList: List<Lotto>) {
-        println("${amount}개를 구매했습니다")
+
+    fun resultLotto(lottoList: List<Lotto>) {
         lottoList.forEach { lotto -> println(lotto.numbers.map { it.number }) }
     }
 
-    fun viewResult(ranks: Map<String, Int>, rateOfReturn: Double) {
+    fun resultRank(result: Result, rank: Rank) {
         println("당첨 통계")
         println("---------")
-        println("3개 일치 (5000원)- ${ranks["5등"]}개")
-        println("4개 일치 (50000원)- ${ranks["4등"]}개")
-        println("5개 일치 (1500000원)- ${ranks["3등"]}개")
-        println("5개 일치, 보너스 볼 일치(30000000원)- ${ranks["2등"]}개")
-        println("6개 일치 (2000000000원)- ${ranks["1등"]}개")
-        println("총 수익률은 ${rateOfReturn}입니다.")
+        println("3개 일치 (${PrizeMoney.FIFTH.money}원)- ${rank.ranks[PrizeMoney.FIFTH]}개")
+        println("4개 일치 (${PrizeMoney.FOURTH.money}원)- ${rank.ranks[PrizeMoney.FOURTH]}개")
+        println("5개 일치 (${PrizeMoney.THIRD.money}원)- ${rank.ranks[PrizeMoney.THIRD]}개")
+        println("5개 일치, 보너스 볼 일치 (${PrizeMoney.SECOND.money}원)- ${rank.ranks[PrizeMoney.SECOND]}개")
+        println("6개 일치 (${PrizeMoney.FIRST.money}원)- ${rank.ranks[PrizeMoney.FIRST]}개")
+        println("총 수익률은 ${result.getRateOfReturn()}입니다.")
     }
 }

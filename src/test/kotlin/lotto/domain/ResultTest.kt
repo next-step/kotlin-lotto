@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Test
 
 class ResultTest {
     @Test
-    fun how_can_get_money() {
+    fun get_rate_of_return() {
         val money = 1_000
-        val ranks = mutableMapOf("5등" to 1, "4등" to 0, "3등" to 0, "2등" to 0, "1등" to 0)
-        val result = Result(ranks)
+        val rank = Rank()
+        rank.addRank(3)
+        val result = Result(money, rank.ranks)
 
-        val rateOfReturn = result.getRateOfReturn(money)
+        val rateOfReturn = result.getRateOfReturn()
 
         assertThat(rateOfReturn).isEqualTo(5.0)
     }
