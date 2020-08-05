@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto(val prizedAmount: Int) {
+class Lotto(val prize: Prize) {
     var count: Int = 0
         private set
 

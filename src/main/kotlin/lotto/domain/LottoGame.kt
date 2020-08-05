@@ -8,15 +8,14 @@ import java.util.regex.Pattern
 
 const val COUNT_OF_NUMBERS = 6
 private const val MAX_NUMBER = 45
-private const val PRIZE_COUNT = 3
 private const val MIN_NUMBER = 1
 const val PRICE_OF_LOTTO = 1000
 private const val NUMBER_RANGE = "(4[0-5]|[1-3][0-9]|[1-9])"
 
 class LottoGame(gameMoney: String) {
     private val lottoNumbers: MutableList<List<Number>> = mutableListOf()
-    private var prizes: MutableMap<Int, Lotto> = mutableMapOf()
-    private var prizeMoney: Int = 0
+    private var prizes: MutableList<Lotto> = mutableListOf()
+    private var totalPrizeMoney: Int = 0
     var count: Int = 0
         private set
     var profitRate: Double = 0.0
@@ -26,14 +25,15 @@ class LottoGame(gameMoney: String) {
 
     init {
         checkGameMoneyValidation(gameMoney)
-        PrizeMoney.values().filter { it.prizeMoney > 0 }
-            .forEach { prizes[it.countOfMatch] = Lotto(it.prizeMoney) }
+        Prize.values().filter { it.prizeMoney > 0 }
+            .forEach { prizes.add(Lotto(it)) }
     }
 
-    fun execute(prizeNumberString: String): Map<Int, Lotto> {
+    fun execute(prizeNumberString: String): List<Lotto> {
         prizeNumbers = checkPrizeNumbersValidation(prizeNumberString)
         lottoNumbers.forEach { checkMatch(it) }
-        return prizes as HashMap
+        calculateProfitRate()
+        return prizes
     }
 
     fun createLotto(): MutableList<List<Number>> {
@@ -43,20 +43,21 @@ class LottoGame(gameMoney: String) {
         return lottoNumbers
     }
 
-    private fun checkMatch(lottoNumbers: List<Number>): Int {
+    private fun checkMatch(lottoNumbers: List<Number>) {
         var count = 0
         lottoNumbers.forEach { if (prizeNumbers.contains(it)) count++ }
-        if (count >= PRIZE_COUNT) {
-            prizes[count]!!.addCount()
-            prizeMoney += PrizeMoney.findByMatchCount(count)!!.prizeMoney
+        val prizeMoney = Prize.findByMatchCount(count)!!.prizeMoney
+        if (prizeMoney > 0) {
+            val selectedLotto = prizes.find { it.prize.countOfMatch == count }
+            selectedLotto!!.addCount()
+            totalPrizeMoney += selectedLotto.prize.prizeMoney
         }
-        if (count > 0) {
-            profitRate =
-                prizeMoney.toBigDecimal()
-                    .divide((count * PRICE_OF_LOTTO).toBigDecimal(), 2, BigDecimal.ROUND_HALF_EVEN)
-                    .stripTrailingZeros().toDouble()
-        }
-        return count
+    }
+
+    private fun calculateProfitRate() {
+        profitRate = totalPrizeMoney.toBigDecimal()
+            .divide((count * PRICE_OF_LOTTO).toBigDecimal(), 2, BigDecimal.ROUND_HALF_EVEN)
+            .stripTrailingZeros().toDouble()
     }
 
     @Throws(NumberFormatException::class)

@@ -8,14 +8,14 @@ object ResultView {
         lottoNumbers.forEach { println(it) }
     }
 
-    fun showPrizeStatics(prizes: Map<Int, Lotto>, profitRate: Double) {
+    fun showPrizeStatics(prizes: List<Lotto>, profitRate: Double) {
         println(
             "당첨 통계\n" + "---------"
         )
-        prizes.forEach { (count, prize) ->
-            print("$count 개 일치 (")
-            print(prize.prizedAmount)
-            println("원) -${prize.count} 개")
+        prizes.forEach { it ->
+            print("${it.prize.countOfMatch} 개 일치 (")
+            print(it.prize.prizeMoney)
+            println("원) -${it.count} 개")
         }
         print("총 수익률은 $profitRate 입니다.")
         if (profitRate < 1) {
