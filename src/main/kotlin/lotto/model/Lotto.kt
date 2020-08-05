@@ -12,7 +12,8 @@ data class Lotto(
         return numbers.list.toString()
     }
 
-    fun checkNumbers(winningNumbers: Numbers) = Prize.getPrize(numbers.getMatchingCounts(winningNumbers))
+    fun checkNumbers(winningNumbers: Numbers, bonusNumber: Int) =
+        Prize.getPrize(numbers.getMatchingCounts(winningNumbers), numbers.isMatch(bonusNumber))
 
     companion object {
         const val MIN_NUMBER = 1
@@ -21,5 +22,7 @@ data class Lotto(
         const val PRICE = 1_000
 
         fun newAutoInstance(generator: LottoNumberGenerater = RandomNumberGenerater) = Lotto(generator)
+
+        fun isLottoNumberRange(number: Int) = number in MIN_NUMBER..MAX_NUMBER
     }
 }

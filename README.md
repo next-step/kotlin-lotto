@@ -48,8 +48,8 @@
 ##Lotto 2. BonusBall 
 
 1. Enum에 보너스볼 2등 추가
-2. matching Check시, 보너스볼 추
-3. Input BonusBall 추가가
+2. matching Check시, 보너스볼 추가
+3. Input BonusBall 추가
 4. 테스트 작성 
     - 로또 2등 테스트
     - 보너스볼 체크 테스트

@@ -36,6 +36,7 @@ class PrizeTest {
         Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.TWO.prizeMoney)
         Assertions.assertThat(prize).isEqualTo(Prize.TWO)
     }
+
     @DisplayName(value = "matchingCount= 5, BonusBall matching이 되었을 경우, 상금은 2등 보너스 상금과 같아야한다.")
     @Test
     fun checkPrizeMoneyCase5AndBonus() {
@@ -45,7 +46,6 @@ class PrizeTest {
         Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.TWO_BONUS.prizeMoney)
         Assertions.assertThat(prize).isEqualTo(Prize.TWO_BONUS)
     }
-
 
     @DisplayName(value = "matchingCount가 [3,4,5]일 경우, 상금은 4등 상금보다 크거나 같아야 한다,")
     @ParameterizedTest

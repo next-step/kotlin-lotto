@@ -11,8 +11,8 @@ class LottoManager(money: Int) {
         }
     }
 
-    fun checkNumbers(winningNumbers: Numbers): Winners {
-        val winners = lottos.map { it.checkNumbers(winningNumbers) }
+    fun checkNumbers(winningNumbers: Numbers, bonusNumber: Int): Winners {
+        val winners = lottos.map { it.checkNumbers(winningNumbers, bonusNumber) }
         return Winners(winners)
     }
 
