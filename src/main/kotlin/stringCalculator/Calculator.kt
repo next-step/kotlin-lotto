@@ -1,15 +1,11 @@
+package stringCalculator
+
 private const val DELIMITER_PATTERN = "//(.)\\\\n"
 private const val DELIMITER_SUFFIX = "(.*)"
 private const val DELIMITER_CHARACTER_POSITION = 2
 class Calculator {
-    companion object {
-        @JvmField
-        val DEFAULT_DELIMITERS = listOf(":", ",")
-        val DEFAULT_EMPTY_LIST = listOf(0)
-    }
 
     fun existDelimiter(content: String): Boolean = Regex(pattern = DELIMITER_PATTERN).containsMatchIn(content)
-    fun addNumbers(numbers: List<Int>): Int = numbers.sum()
 
     fun getDelimiters(content: String): List<String> {
         val regex = Regex(pattern = DELIMITER_PATTERN)
@@ -22,19 +18,24 @@ class Calculator {
         return DEFAULT_DELIMITERS + find.value[DELIMITER_CHARACTER_POSITION].toString()
     }
 
-    fun splitNumbersToDelimiters(content: String, delimiters: List<String>): List<Int> {
+    fun splitNumbersToDelimiters(content: String, delimiters: List<String>): List<Number> {
         if (content.isNullOrEmpty()) {
-            return DEFAULT_EMPTY_LIST
+            return listOf(Number())
         }
 
         if (existDelimiter(content).not()) {
-            return content.split(*delimiters.toTypedArray()).map { it.toInt() }
+            return content.split(*delimiters.toTypedArray()).map { Number(it) }
         }
 
         val regex = Regex(pattern = DELIMITER_PATTERN + DELIMITER_SUFFIX)
         val delimiterRemainContent = regex.matchEntire(content)!!
 
-        return delimiterRemainContent.groupValues.last().split(*delimiters.toTypedArray()).map { it.toInt() }
+        return delimiterRemainContent.groupValues.last().split(*delimiters.toTypedArray()).map { Number(it) }
+    }
+
+    companion object {
+        @JvmField
+        val DEFAULT_DELIMITERS = listOf(":", ",")
     }
 }
 
@@ -46,6 +47,6 @@ fun main() {
 
     val delimiters = calculator.getDelimiters(inputStr)
     val numbers = calculator.splitNumbersToDelimiters(inputStr, delimiters)
-    val sum = calculator.addNumbers(numbers)
+    val sum = numbers.sumBy { it.number }
     println("sum:$sum")
 }
