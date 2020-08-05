@@ -12,10 +12,10 @@ object ResultView {
         println(
             "당첨 통계\n" + "---------"
         )
-        prizes.forEach { (count, _prize) ->
+        prizes.forEach { (count, prize) ->
             print("$count 개 일치 (")
-            print(_prize.prizedAmount)
-            println("원) -${_prize.count} 개")
+            print(prize.prizedAmount)
+            println("원) -${prize.count} 개")
         }
         print("총 수익률은 $profitRate 입니다.")
         if (profitRate < 1) {
