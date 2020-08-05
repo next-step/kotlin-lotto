@@ -9,8 +9,10 @@ import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class CalculatorTest {
+
+    @DisplayName("모든 숫자값을 합")
     @Test
-    fun `모든 숫자값을 합`() {
+    fun `calculate`() {
         val calculator = Calculator("1,2:3")
         assertThat(calculator.execute()).isEqualTo(6)
     }
@@ -18,32 +20,25 @@ class CalculatorTest {
     @DisplayName("입력값 empty 체크")
     @ParameterizedTest
     @EmptySource
-    fun `checkForEmpty`(input: String) {
-        val calculator = Calculator(input)
+    fun `checkForEmpty`(numberInput: String) {
+        val calculator = Calculator(numberInput)
         assertThatThrownBy { calculator.execute() }.isInstanceOf(CalculatorException::class.java)
     }
 
+    @DisplayName("사용자가 입력한 문자열이 규칙에 맞지 않을경우")
     @ParameterizedTest
-    @ValueSource(strings = ["a", "&"])
-    fun `숫자, 구분자 이외의 값이 입력되었는지 확인`(numberInput: String) {
+    @ValueSource(strings = ["a", "&", "1,2,3,", ",1,2,3"])
+    fun `hasOnlyValidString`(numberInput: String) {
         val calculator = Calculator(numberInput)
         assertThatThrownBy {
             calculator.execute()
         }.isInstanceOf(CalculatorException::class.java)
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = ["1,2,3,", ",1,2,3"])
-    fun `문자열 끝이 숫자인`(numberInput: String) {
-        val calculator = Calculator(numberInput)
-        assertThatThrownBy {
-            calculator.execute()
-        }.isInstanceOf(CalculatorException::class.java)
-    }
-
+    @DisplayName("사용자가 입력한 문자열로 파싱")
     @Test
-    fun `파싱`() {
-        val calculator = Calculator("""//;\n1;2;3""")
+    fun `execute`() {
+        val calculator = Calculator("//;\n1;2;3")
         assertThat(calculator.execute()).isEqualTo(6)
     }
 }
