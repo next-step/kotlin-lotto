@@ -8,11 +8,7 @@ import service.LottoService
 import service.MatchService
 import kotlin.properties.Delegates
 
-class LottoManager() {
-    private val lottoService = LottoService()
-    private lateinit var matchService: MatchService
-    private lateinit var calculateService: CalculateService
-
+class LottoManager {
     val lottoList: List<Lotto>
         get() = lottoService.lottoList
 
@@ -25,7 +21,10 @@ class LottoManager() {
     val earningRate: Double
         get() = String.format("%.2f", calculateService.getEarningRate(purchaseAmount)).toDouble()
 
+    private val lottoService = LottoService()
     private var purchaseAmount by Delegates.notNull<Int>()
+    private lateinit var matchService: MatchService
+    private lateinit var calculateService: CalculateService
 
     fun buy(purchaseAmount: Int) {
         this.purchaseAmount = purchaseAmount
