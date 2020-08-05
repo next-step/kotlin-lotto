@@ -20,11 +20,11 @@ internal class ExpressionTest {
         )
     }
 
-    @DisplayName(value = "음수는 0으로 변경")
+    @DisplayName(value = "음수를 전달하는 경우 RuntimeException 예외를 발생")
     @ParameterizedTest
     @ValueSource(strings = ["1,2,5,-6"])
     fun validExpression(text: String) {
-        assertThat(Expression(text).extractTokens().last().value).isEqualTo(0)
+        assertThatExceptionOfType(RuntimeException::class.java).isThrownBy { Expression(text).extractTokens() }
     }
 
     @DisplayName(value = "유효하지 않은 문자가 있을 경우 RuntimeException 발생")
