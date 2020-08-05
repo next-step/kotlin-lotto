@@ -42,7 +42,7 @@ class Calculator(private val numbersInput: String) {
 
     private fun getSplitters(): List<String> {
         if (isCustomSplitter) {
-            return listOf(numbersInput!![CUSTOM_SPLITTER_LOCATION].toString())
+            return listOf(numbersInput[CUSTOM_SPLITTER_LOCATION].toString())
         }
         return DEFAULT_SPLITTER
     }
@@ -51,7 +51,7 @@ class Calculator(private val numbersInput: String) {
         val pattern = StringBuilder("[0-9")
         getSplitters().forEach { pattern.append("|$it") }
         pattern.append("]*")
-        val numberInput = numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
+        val numberInput = numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
 
         if (!numberInput.matches(Regex(pattern.toString()))) {
             throw CalculatorException("숫자와 구분자만 입력해야합니다.")
@@ -62,9 +62,9 @@ class Calculator(private val numbersInput: String) {
         var numbersInput = this.numbersInput
 
         if (isCustomSplitter) {
-            numbersInput = this.numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION)
+            numbersInput = this.numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION)
         }
-        if (!numbersInput!!.last().toString().matches(Regex("[0-9]"))) {
+        if (!numbersInput.last().toString().matches(Regex("[0-9]"))) {
             throw CalculatorException("구분자는 숫자 사이에만 존재합니다.")
         }
         if (!numbersInput.first().toString().matches(Regex("[0-9]"))) {
@@ -73,10 +73,11 @@ class Calculator(private val numbersInput: String) {
     }
 
     private fun parsing(): List<Number> {
+        val splitter = getSplitters()
         if (isCustomSplitter) {
-            return numbersInput!!.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(getSplitters()[0]).map { it.toInt() }
+            return numbersInput.substring(CUSTOM_SPLITTER_LAST_LOCATION).split(splitter[0]).map { it.toInt() }
         }
-        return numbersInput!!.replace(getSplitters()[1], getSplitters()[0]).split(getSplitters()[0])
+        return numbersInput.replace(splitter[1], splitter[0]).split(splitter[0])
             .map { it.toInt() }
     }
 }
