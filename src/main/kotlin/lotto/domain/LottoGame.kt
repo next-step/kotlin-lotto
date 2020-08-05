@@ -12,12 +12,12 @@ private const val PRIZE_COUNT = 3
 private const val MIN_NUMBER = 1
 const val PRICE_OF_LOTTO = 1000
 private const val NUMBER_RANGE = "(4[0-5]|[1-3][0-9]|[1-9])"
-val PRIZE_AMOUNT = listOf(0, 0, 0, 5000, 50000, 1500000, 2000000000)
+val PRIZE_MONEY = listOf(0, 0, 0, 5000, 50000, 1500000, 2000000000)
 
-class LottoGame(amount: String) {
+class LottoGame(gameMoney: String) {
     private val lottoNumbers: MutableList<List<Int>> = mutableListOf()
     private var prizes: MutableMap<Int, Lotto> = mutableMapOf()
-    private var prizeAmount: Int = 0
+    private var prizeMoney: Int = 0
     var count: Int = 0
         private set
     var profitRate: Double = 0.0
@@ -26,9 +26,9 @@ class LottoGame(amount: String) {
     private var prizeNumbers: List<Int> = listOf()
 
     init {
-        checkAmountValidation(amount)
-        PRIZE_AMOUNT.filter { it > 0 }.forEach {
-            prizes[PRIZE_AMOUNT.indexOf(it)] = Lotto(it)
+        checkGameMoneyValidation(gameMoney)
+        PRIZE_MONEY.filter { it > 0 }.forEach {
+            prizes[PRIZE_MONEY.indexOf(it)] = Lotto(it)
         }
     }
 
@@ -39,9 +39,7 @@ class LottoGame(amount: String) {
     }
 
     fun createLotto(): List<Int> {
-        val lotto = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0,
-            COUNT_OF_NUMBERS
-        ).sorted()
+        val lotto = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS).sorted()
         lottoNumbers.add(lotto)
         return lotto
     }
@@ -53,11 +51,11 @@ class LottoGame(amount: String) {
         lottoNumbers.forEach { if (prizeNumbers.contains(it)) count++ }
         if (count >= PRIZE_COUNT) {
             prizes[count]!!.addCount()
-            prizeAmount += PRIZE_AMOUNT[count]
+            prizeMoney += PRIZE_MONEY[count]
         }
         if (count > 0) {
             profitRate =
-                prizeAmount.toBigDecimal()
+                prizeMoney.toBigDecimal()
                     .divide((count * PRICE_OF_LOTTO).toBigDecimal(), 2, BigDecimal.ROUND_HALF_EVEN)
                     .stripTrailingZeros().toDouble()
         }
@@ -65,9 +63,9 @@ class LottoGame(amount: String) {
     }
 
     @Throws(NumberFormatException::class)
-    private fun checkAmountValidation(amount: String) {
-        count = amount.toInt() / PRICE_OF_LOTTO
-        require(amount.toInt() >= PRICE_OF_LOTTO) {
+    private fun checkGameMoneyValidation(gameMoney: String) {
+        count = gameMoney.toInt() / PRICE_OF_LOTTO
+        require(gameMoney.toInt() >= PRICE_OF_LOTTO) {
             throw IllegalArgumentException("$PRICE_OF_LOTTO 보다 큰 숫자를 입력해주세요.")
         }
     }

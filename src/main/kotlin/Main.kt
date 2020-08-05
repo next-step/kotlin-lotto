@@ -4,8 +4,8 @@ import lotto.view.ResultView
 
 fun main() {
     try {
-        val amount = InputView.getAmount()
-        val lotto = LottoGame(amount)
+        val gameMoney = InputView.getGameMoney()
+        val lotto = LottoGame(gameMoney)
 
         ResultView.showLottoCount(lotto.count)
 
