@@ -49,7 +49,7 @@ class StoreTest {
 
     @Test
     fun `3천만원 당첨`() {
-        val winnerHistory = store.drawLottoNumber(Lotto(setOf(1, 2, 3, 4, 5, 16)), true)
+        val winnerHistory = store.drawLottoNumber(Lotto(setOf(1, 2, 3, 4, 5, 16)), 6)
 
         assertThat(winnerHistory.contains(Prize.BETWEEN_FIRST_AND_SECOND)).isTrue()
     }
