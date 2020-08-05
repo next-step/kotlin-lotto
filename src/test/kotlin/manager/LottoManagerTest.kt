@@ -19,4 +19,12 @@ class LottoManagerTest {
         lottoManager.buy(LottoManager.LOTTO_PRICE)
         assertThat(lottoManager.lottoCount).isEqualTo(1)
     }
+
+    @Test
+    @DisplayName("지난주 당첨 번호를 입력한다")
+    fun `inputPrizeList`() {
+        lottoManager.buy(1_000)
+        lottoManager.setPrize(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(lottoManager.prizeStatList).isNotNull
+    }
 }
