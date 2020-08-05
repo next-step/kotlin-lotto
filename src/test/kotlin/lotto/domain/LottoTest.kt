@@ -1,14 +1,17 @@
 package lotto.domain
 
+import lotto.domain.generator.ManualLottoGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 internal class LottoTest {
 
-    @DisplayName(value = "숫자 6자리의 로또를 발급한다")
+    @DisplayName(value = "번호가 일치하는 개수를 반환한다.")
     @Test
-    fun generateLotto() {
-        assertThat(Lotto().numbers).hasSize(6).allSatisfy { it in 1..45 }
+    fun checkWinning() {
+        val winningLotto = Lotto(ManualLottoGenerator("1, 2, 3, 4, 5, 6"))
+        val myLotto = Lotto(ManualLottoGenerator("1, 2, 3, 7, 8, 9"))
+        assertThat(winningLotto.getMatchCount(myLotto)).isEqualTo(3)
     }
 }
