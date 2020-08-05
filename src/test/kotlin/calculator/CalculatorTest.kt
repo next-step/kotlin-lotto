@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class CalculatorTest {
@@ -15,7 +15,7 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @NullAndEmptySource
+    @EmptySource
     fun `입력값 null 및 empty 체크`() {
         val calculator = Calculator("")
         assertThatThrownBy { calculator.execute() }.isInstanceOf(KotlinNullPointerException::class.java)

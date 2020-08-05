@@ -10,7 +10,7 @@ const val CUSTOM_SPLITTER_LOCATION = 2
 private val DEFAULT_SPLITTER = listOf(",", ":")
 const val CUSTOM_SPLITTER_LAST_LOCATION = 5
 
-class Calculator(private val numbersInput: String?) {
+class Calculator(private val numbersInput: String) {
     var isCustomSplitter: Boolean = false
 
     fun execute(): Int {
