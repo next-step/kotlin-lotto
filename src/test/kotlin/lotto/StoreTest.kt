@@ -15,7 +15,10 @@ class StoreTest {
 
     @BeforeEach
     fun setup() {
-        buyer = Buyer().apply { markLotto(Lotto(setOf(1, 2, 3, 4, 5, 6))) }
+        buyer = Buyer().apply {
+            markLotto(Lotto(setOf(1, 2, 3, 4, 5, 6)))
+            markLotto(Lotto(setOf(1, 2, 3, 4, 5, 45)))
+        }
         store = Store(buyer)
     }
 
@@ -66,5 +69,12 @@ class StoreTest {
         val winnerHistory = store.drawLottoNumber(Lotto(setOf(1, 2, 3, 14, 15, 16)))
 
         assertThat(store.getRateOfReturn(14_000, winnerHistory)).isEqualTo(0.35)
+    }
+
+    @Test
+    fun `150만원과 3천만원 둘다 당첨될 경우`() {
+        val winnerHistory = store.drawLottoNumber(Lotto(setOf(1, 2, 3, 4, 5, 16)), 45)
+
+        assertThat(winnerHistory.contains(Prize.SECOND) && winnerHistory.contains(Prize.BETWEEN_FIRST_AND_SECOND)).isTrue()
     }
 }
