@@ -5,17 +5,18 @@ import view.ResultView
 fun main(args: Array<String>) {
     val inputView = InputView()
     val inputMoeny = { readLine()!! }
-    val money = inputView.inputMoneyForBuyLotto(inputMoeny)
+    inputView.inputMoneyForBuyLotto(inputMoeny)
+    val money = inputView.money
     val lottoManager = LottoManager()
     lottoManager.buy(money)
     inputView.showBuyLottoCount(lottoManager.lottoCount)
 
-    val resultView = ResultView()
-    resultView.showLottoList(lottoManager.lottoList)
+    ResultView.showLottoList(lottoManager.lottoList)
     val inputPrize = { readLine()!! }
-    val prize = inputView.inputLastWeekPrize(inputPrize)
+    inputView.inputLastWeekPrize(inputPrize)
+    val prize = inputView.prize
     lottoManager.prize = prize.map { it.toInt() }
 
-    resultView.showPrizeList(lottoManager.prizeStatList)
-    resultView.showEarningRate(lottoManager.earningRate)
+    ResultView.showPrizeList(lottoManager.prizeStatList)
+    ResultView.showEarningRate(lottoManager.earningRate)
 }

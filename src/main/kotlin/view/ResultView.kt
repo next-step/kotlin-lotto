@@ -3,7 +3,7 @@ package view
 import model.Lotto
 import model.LottoPrize
 
-class ResultView {
+object ResultView {
     fun showLottoList(list: List<Lotto>) {
         for (lotto in list) {
             println(lotto.lottoNumber)
