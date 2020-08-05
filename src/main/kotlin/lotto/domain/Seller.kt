@@ -8,6 +8,11 @@ class Seller {
         return PaymentResult(lottoes, calculateChange(payment))
     }
 
+    fun isAcceptable(money: String): Boolean {
+        val input = money.toIntOrNull()
+        return input != null && input >= 0
+    }
+
     private fun getGenerator(type: LottoType = LottoType.AUTO) = when (type) {
         else -> AutoLottoGenerator
     }
