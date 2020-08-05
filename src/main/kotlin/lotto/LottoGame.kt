@@ -32,7 +32,7 @@ class LottoGame(amount: String) {
         }
     }
 
-    fun execute(prizeNumberString: String): HashMap<Int, Lotto> {
+    fun execute(prizeNumberString: String): Map<Int, Lotto> {
         prizeNumbers = checkPrizeNumbersValidation(prizeNumberString)
         lottoNumbers.forEach { checkMatch(it) }
         return prizes as HashMap

@@ -6,7 +6,7 @@ object ResultView {
         println(lottoNumber)
     }
 
-    fun showPrizeStatics(prizes: HashMap<Int, Lotto>, profitRate: Double) {
+    fun showPrizeStatics(prizes: Map<Int, Lotto>, profitRate: Double) {
         println(
             "당첨 통계\n" + "---------"
         )
