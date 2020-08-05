@@ -1,5 +1,6 @@
 package lotto.domain.value
 
+import java.math.BigDecimal
 import java.math.BigInteger
 
 data class Money(private val won: BigInteger) {
@@ -9,13 +10,13 @@ data class Money(private val won: BigInteger) {
 
     operator fun plus(money: Money) = Money(won.plus(money.won))
 
-    operator fun minus(money: Money) = Money(won.minus(money.won))
-
     operator fun times(count: Int) = Money(won * count.toBigInteger())
 
     operator fun div(count: Double) = won.toBigDecimal().div(count.toBigDecimal())
 
     operator fun div(count: Int) = won.div(count.toBigInteger())
+
+    operator fun div(count: BigDecimal) = won.toBigDecimal().div(count)
 
     override fun toString() = "${won}원"
 
