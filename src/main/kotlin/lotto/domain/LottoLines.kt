@@ -3,8 +3,8 @@ package lotto.domain
 class LottoLines(private val totalNumber: Int) {
     private val lottoLines = createLottoTicket(totalNumber)
 
-    fun checkResult(result: List<Int>) {
-        lottoLines.forEach { it.checkPlace(result) }
+    fun checkResult(result: List<Int>, bonusNumber: Int) {
+        lottoLines.forEach { it.checkPlace(result, bonusNumber) }
     }
 
     fun getLines(): List<LottoSingleLine> {

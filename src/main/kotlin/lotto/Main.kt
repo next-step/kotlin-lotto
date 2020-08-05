@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoLines
+import lotto.view.inputBonusNumber
 import lotto.view.inputMoney
 import lotto.view.inputResult
 import lotto.view.printLottoTicket
@@ -13,6 +14,7 @@ fun main() {
     val lottoLines = LottoLines(money / LINE_PRICE)
     printLottoTicket(lottoLines.getLines())
     val result = inputResult()
-    lottoLines.checkResult(result)
+    val bonusNumber = inputBonusNumber(result)
+    lottoLines.checkResult(result, bonusNumber)
     printResult(lottoLines.getLines())
 }

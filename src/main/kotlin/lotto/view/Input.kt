@@ -1,6 +1,6 @@
 package lotto.view
 
-import java.lang.IllegalArgumentException
+import kotlin.system.exitProcess
 
 fun inputMoney(): Int {
     println("구입금액을 입력해 주세요.")
@@ -15,7 +15,7 @@ fun inputMoneyError(): Int {
         Ex) 15000,20000,25000
         """.trimIndent()
     )
-    return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("잘못된 입력")
+    return readLine()?.toIntOrNull() ?: exitProcess(0)
 }
 
 fun inputResult(): List<Int> {
@@ -38,10 +38,31 @@ fun inputResultError(): List<Int> {
     val result = readLine() ?: ""
 
     return if (resultInvalid(result)) {
-        throw IllegalArgumentException("잘못된 입력")
+        exitProcess(0)
     } else {
         result.split(",").map { it.toInt() }
     }
+}
+
+fun inputBonusNumber(numberList: List<Int>): Int {
+    println("보너스 볼을 입력해 주세요.")
+    val bonusNumber = readLine()?.toIntOrNull() ?: inputBonusNumberError()
+    return if (numberList.contains(bonusNumber)) {
+        inputBonusNumberError()
+    } else {
+        return bonusNumber
+    }
+}
+
+fun inputBonusNumberError(): Int {
+    println(
+        """
+        보너스 볼을 입력해 주세요.
+        한 자리의 숫자만 입력해주세요
+        그 숫자는 당첨번호와 중복될 수 없습니다.
+        """.trimIndent()
+    )
+    return readLine()?.toIntOrNull() ?: exitProcess(0)
 }
 
 fun resultInvalid(readLine: String): Boolean {

@@ -1,10 +1,12 @@
 package lotto
 
+import lotto.domain.LottoResult
 import lotto.domain.LottoSingleLine
+import lotto.domain.getPlace
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class LottoSIngleLineTest {
+class LottoSingleLineTest {
     @Test
     fun `로또 한줄 생성 테스트`() {
         val lottoSingleLine = LottoSingleLine()
@@ -16,17 +18,31 @@ class LottoSIngleLineTest {
     fun `1등 당첨 테스트`() {
         val lottoSingleLine = LottoSingleLine()
         val result = lottoSingleLine.getNumbers()
-        lottoSingleLine.checkPlace(result)
-        assertThat(lottoSingleLine.getResult().matchCount).isEqualTo(6)
+        lottoSingleLine.checkPlace(result, -1)
+        assertThat(getPlace(lottoSingleLine.getResult().matchCount, false).price).isEqualTo(LottoResult.FIRST.price)
     }
 
     @Test
-    fun `2등 당첨 테스트`() {
+    fun `2등 당첨 테스트-BONUS TRUE`() {
         val lottoSingleLine = LottoSingleLine()
         val result = lottoSingleLine.getNumbers().toMutableList()
         result[result.lastIndex] = 0
-        lottoSingleLine.checkPlace(result)
-        assertThat(lottoSingleLine.getResult().matchCount).isEqualTo(5)
+        lottoSingleLine.checkPlace(result, 0)
+        assertThat(
+            getPlace(
+                lottoSingleLine.getResult().matchCount,
+                true
+            ).price
+        ).isEqualTo(LottoResult.SECOND_BONUS.price)
+    }
+
+    @Test
+    fun `2등 당첨 테스트-BONUS FALSE`() {
+        val lottoSingleLine = LottoSingleLine()
+        val result = lottoSingleLine.getNumbers().toMutableList()
+        result[result.lastIndex] = 0
+        lottoSingleLine.checkPlace(result, -1)
+        assertThat(getPlace(lottoSingleLine.getResult().matchCount, false).price).isEqualTo(LottoResult.SECOND.price)
     }
 
     @Test
@@ -35,8 +51,8 @@ class LottoSIngleLineTest {
         val result = lottoSingleLine.getNumbers().toMutableList()
         result[result.lastIndex - 1] = 0
         result[result.lastIndex] = 0
-        lottoSingleLine.checkPlace(result)
-        assertThat(lottoSingleLine.getResult().matchCount).isEqualTo(4)
+        lottoSingleLine.checkPlace(result, -1)
+        assertThat(getPlace(lottoSingleLine.getResult().matchCount, false).price).isEqualTo(LottoResult.THIRD.price)
     }
 
     @Test
@@ -46,8 +62,8 @@ class LottoSIngleLineTest {
         result[result.lastIndex - 2] = 0
         result[result.lastIndex - 1] = 0
         result[result.lastIndex] = 0
-        lottoSingleLine.checkPlace(result)
-        assertThat(lottoSingleLine.getResult().matchCount).isEqualTo(3)
+        lottoSingleLine.checkPlace(result, -1)
+        assertThat(getPlace(lottoSingleLine.getResult().matchCount, false).price).isEqualTo(LottoResult.FOURTH.price)
     }
 
     @Test
@@ -58,8 +74,8 @@ class LottoSIngleLineTest {
         result[result.lastIndex - 2] = 0
         result[result.lastIndex - 1] = 0
         result[result.lastIndex] = 0
-        lottoSingleLine.checkPlace(result)
-        assertThat(lottoSingleLine.getResult().matchCount).isEqualTo(2)
+        lottoSingleLine.checkPlace(result, -1)
+        assertThat(getPlace(lottoSingleLine.getResult().matchCount, false).price).isEqualTo(LottoResult.FIFTH.price)
     }
 
     @Test
@@ -71,8 +87,8 @@ class LottoSIngleLineTest {
         result[result.lastIndex - 2] = 0
         result[result.lastIndex - 1] = 0
         result[result.lastIndex] = 0
-        lottoSingleLine.checkPlace(result)
-        assertThat(lottoSingleLine.getResult().matchCount).isEqualTo(1)
+        lottoSingleLine.checkPlace(result, -1)
+        assertThat(getPlace(lottoSingleLine.getResult().matchCount, false).price).isEqualTo(LottoResult.SIX.price)
     }
 
     @Test
@@ -85,7 +101,7 @@ class LottoSIngleLineTest {
         result[result.lastIndex - 2] = 0
         result[result.lastIndex - 1] = 0
         result[result.lastIndex] = 0
-        lottoSingleLine.checkPlace(result)
-        assertThat(lottoSingleLine.getResult().matchCount).isEqualTo(0)
+        lottoSingleLine.checkPlace(result, -1)
+        assertThat(getPlace(lottoSingleLine.getResult().matchCount, false).price).isEqualTo(LottoResult.NONE.price)
     }
 }

@@ -12,8 +12,8 @@ class LottoSingleLine {
 
     fun getResult(): LottoResult = lottoResult
 
-    fun checkPlace(result: List<Int>) {
-        lottoResult = getPlace(result.filter { lottoNumbers.contains(it) }.size)
+    fun checkPlace(result: List<Int>, bonusNumber: Int) {
+        lottoResult = getPlace(result.filter { lottoNumbers.contains(it) }.size, lottoNumbers.contains(bonusNumber))
     }
 
     private fun createLine(): List<Int> {
