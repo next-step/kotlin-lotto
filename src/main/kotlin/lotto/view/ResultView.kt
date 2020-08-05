@@ -18,6 +18,7 @@ object ResultView {
         println("${Prize.FOURTH.matchCount}개 일치 (${Prize.FOURTH.price}원) - ${groupedPrizeByMatchCount[Prize.FOURTH.matchCount]?.size ?: 0}개")
         println("${Prize.THIRD.matchCount}개 일치 (${Prize.THIRD.price}원) - ${groupedPrizeByMatchCount[Prize.THIRD.matchCount]?.size ?: 0}개")
         println("${Prize.SECOND.matchCount}개 일치 (${Prize.SECOND.price}원) - ${groupedPrizeByMatchCount[Prize.SECOND.matchCount]?.size ?: 0}개")
+        println("${Prize.BETWEEN_FIRST_AND_SECOND.matchCount}개 일치, 보너스볼 일치 (${Prize.BETWEEN_FIRST_AND_SECOND.price}원) - ${groupedPrizeByMatchCount[Prize.BETWEEN_FIRST_AND_SECOND.matchCount]?.size ?: 0}개")
         println("${Prize.FIRST.matchCount}개 일치 (${Prize.FIRST.price}원) - ${groupedPrizeByMatchCount[Prize.FIRST.matchCount]?.size ?: 0}개")
     }
 
