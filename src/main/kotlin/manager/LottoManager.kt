@@ -3,18 +3,19 @@ package manager
 import model.DiceRandomMaker
 import model.Lotto
 import model.LottoPrize
+import model.PrizeEarn
 import kotlin.properties.Delegates
 
 class LottoManager() {
     val lottoList: List<Lotto>
         get() = lottoListMutable.toList()
 
-    val prizeStatList: List<Pair<LottoPrize, Int>>
+    val prizeStatList: List<PrizeEarn>
         get() {
-            val list = mutableListOf<Pair<LottoPrize, Int>>()
+            val list = mutableListOf<PrizeEarn>()
             for (lottoPrize in LottoPrize.values()) {
                 prizeList.firstOrNull { it.first == lottoPrize.grade }?.let { pair ->
-                    list.add(Pair(lottoPrize, pair.second))
+                    list.add(PrizeEarn(lottoPrize, pair.second))
                 }
             }
             return list.toList()
@@ -22,7 +23,7 @@ class LottoManager() {
 
     val earningRate: Double
         get() {
-            val earningRate = (prizeStatList.sumBy { it.first.prizeMoney * it.second }.toDouble() / purchaseAmount)
+            val earningRate = (prizeStatList.sumBy { it.totalPrizeMoney }.toDouble() / purchaseAmount)
             return String.format("%.2f", earningRate).toDouble()
         }
 
