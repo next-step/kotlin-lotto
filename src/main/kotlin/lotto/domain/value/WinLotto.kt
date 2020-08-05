@@ -14,12 +14,14 @@ enum class WinLotto(private val index: Int, val money: Money, private var count:
     fun getCount() = count
 
     override fun toString(): String {
-        return "${index}개 일치 ($money)- ${count}개\n"
+        return "${index}$INDEX_SUFFIX ($money)- ${count}$COUNT_SUFFIX\n"
     }
 
     companion object {
-        private const val ZERO = 0L
+        private val ZERO = BigInteger.ZERO
         private const val THREE = 3
+        private const val INDEX_SUFFIX = "개 일치"
+        private const val COUNT_SUFFIX = "개"
 
         operator fun invoke(index: Int) = values()[index]
 
@@ -31,6 +33,6 @@ enum class WinLotto(private val index: Int, val money: Money, private var count:
 
         fun resultList() = values().filter { it.index >= THREE }.toList()
 
-        fun totalIncome() = values().fold(Money(BigInteger.ZERO)) { total, lotto -> total + (lotto.money * lotto.count) }
+        fun totalIncome() = values().fold(Money(ZERO)) { total, lotto -> total + (lotto.money * lotto.count) }
     }
 }
