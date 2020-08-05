@@ -17,11 +17,7 @@ class Lottos() {
     companion object {
         fun of(purchaseCount: Int): Lottos {
 
-            var list = mutableListOf<Lotto>()
-
-            repeat(purchaseCount) {
-                list.add(Lotto.of())
-            }
+            val list = (1..purchaseCount).map { Lotto.of() }
 
             return Lottos(list)
         }
