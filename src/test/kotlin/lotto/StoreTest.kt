@@ -21,6 +21,9 @@ class StoreTest {
 
     @Test
     fun 꽝() {
+        val winnerHistory = store.drawLottoNumber(Lotto(setOf(7, 8, 9, 10, 11, 12)))
+
+        assertThat(winnerHistory.contains(Prize.NOTHING)).isTrue()
     }
 
     @Test
