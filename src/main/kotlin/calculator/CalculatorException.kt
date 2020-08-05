@@ -1,3 +1,3 @@
 package calculator
 
-class CalculatorException(message: String) : Exception()
+class CalculatorException(message: String) : IllegalArgumentException()
