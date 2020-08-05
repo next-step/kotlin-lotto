@@ -3,9 +3,9 @@ package lotto
 const val LOTTO_PRINT_PREFIX = "["
 const val LOTTO_PRINT_POSTFIX = "]"
 
-class ResultView {
-    fun printNumbers(lottoNumbers: List<LottoNumber>) {
-        lottoNumbers.forEach {
+object ResultView {
+    fun printNumbers(lottos: List<Lotto>) {
+        lottos.forEach {
             val numbers = it.numbers.joinToString(prefix = LOTTO_PRINT_PREFIX, postfix = LOTTO_PRINT_POSTFIX, separator = LOTTO_SPLIT_PATTERN)
             println(numbers)
         }

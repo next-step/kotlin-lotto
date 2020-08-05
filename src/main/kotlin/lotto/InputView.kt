@@ -2,7 +2,7 @@ package lotto
 
 const val LOTTO_SPLIT_PATTERN = ","
 const val LOTTO_BASE_PRICE = 1000
-class InputView {
+object InputView {
     fun buyMoney(): Money {
         println("구입금액을 입력해 주세요.")
         val buyMoney = Money(readLine()!!.toInt())
