@@ -9,11 +9,11 @@ enum class Prize(val matchCount: Int, val price: Int) {
     NOTHING(0, 0);
 
     companion object {
-        fun findByMatchCount(matchCount: Int, matchedBonusNumber: Boolean): Prize {
+        fun findByMatchCount(matchCount: Int, isMatchedBonusNumber: Boolean): Prize {
             val prize = values().filter { it.matchCount == matchCount }
 
             return when (prize.size) {
-                2 -> if (matchedBonusNumber) prize.first() else prize.last()
+                2 -> if (isMatchedBonusNumber) prize.first() else prize.last()
                 1 -> prize.first()
                 else -> NOTHING
             }

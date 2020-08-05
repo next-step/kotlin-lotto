@@ -8,9 +8,21 @@ class Lotto(val numbers: Set<Int>) {
         }
     }
 
-    fun convertPrize(winnerNumbers: Lotto, matchedBonusBall: Boolean): Prize {
+    fun convertPrize(winnerNumbers: Lotto, bonusBall: Int): Prize {
         val matchCount = numbers.count { winnerNumbers.numbers.contains(it) }
-        return Prize.findByMatchCount(matchCount, matchedBonusBall)
+
+        if (matchCount != Prize.SECOND.matchCount) {
+            return Prize.findByMatchCount(matchCount = matchCount, isMatchedBonusNumber = false)
+        }
+
+        val remainingNumber = numbers.toMutableSet().apply {
+            winnerNumbers.numbers.forEach { remove(it) }
+        }
+        return if (remainingNumber.first() == bonusBall) {
+            Prize.findByMatchCount(matchCount = matchCount, isMatchedBonusNumber = true)
+        } else {
+            Prize.findByMatchCount(matchCount = matchCount, isMatchedBonusNumber = false)
+        }
     }
 
     companion object {
