@@ -10,7 +10,7 @@ class LottoChecker(winner: WinnerLotto, myLottos: List<Lotto>) {
     }
 
     fun getEarningRate(): Double {
-        return calculateRate(lottos.map { it.win.prize })
+        return calculateRate(lottos.map { it.win })
     }
 
     private fun checkEachLotto(winner: WinnerLotto, lottos: List<Lotto>): List<Lotto> {

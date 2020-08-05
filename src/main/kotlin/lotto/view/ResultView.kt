@@ -9,8 +9,8 @@ object ResultView {
     }
 
     fun printLottos(lottos: List<Lotto>) {
-        lottos.forEach {
-            println("${it.numbers}")
+        lottos.forEach { it ->
+            println("${it.lottoNumbers.map { it.number }}")
         }
     }
 

@@ -10,8 +10,11 @@ class LottoCheckerTest {
 
     @BeforeEach
     fun beforeTest() {
-        val winnerLotto = WinnerLotto(Lotto(mutableListOf(1, 2, 3, 4, 6, 7)), 10)
-        val myLotto = Lotto(mutableListOf(1, 2, 3, 4, 6, 10))
+        val winnerLotto = WinnerLotto(
+            Lotto(listOf(LottoNo("1"), LottoNo("2"), LottoNo("3"), LottoNo("4"), LottoNo("6"), LottoNo("7"))),
+            LottoNo("10")
+        )
+        val myLotto = Lotto(listOf(LottoNo("1"), LottoNo("2"), LottoNo("3"), LottoNo("4"), LottoNo("6"), LottoNo("10")))
 
         checker = LottoChecker(winnerLotto, listOf(myLotto))
     }

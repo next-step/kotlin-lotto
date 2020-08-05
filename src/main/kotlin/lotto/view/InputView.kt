@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.model.Lotto
-import lotto.model.LottoMaker.Companion.LOTTO_NUMBER_TOTAL_COUNT
+import lotto.model.LottoNo
 import lotto.model.Money
 
 const val WINNER_NUMBER_DELIMITER = ","
@@ -18,14 +18,12 @@ object InputView {
 
         val winner = readLine().toString().split(WINNER_NUMBER_DELIMITER)
 
-        require(winner.size == LOTTO_NUMBER_TOTAL_COUNT) { "당첨 번호는 ${LOTTO_NUMBER_TOTAL_COUNT}개 입니다." }
-
-        return Lotto(winner.map { it.toInt() })
+        return Lotto(winner.map { LottoNo(it) })
     }
 
-    fun getBonusNumber(): Int {
+    fun getBonusNumber(): LottoNo {
         println("보너스 볼을 입력해 주세요.")
 
-        return readLine()!!.toInt()
+        return LottoNo(readLine()!!)
     }
 }

@@ -14,9 +14,9 @@ data class Money(val money: Int) {
     fun hasMoney(): Boolean = money > 0
 
     companion object {
-        fun calculateRate(wins: List<Money>): Double {
-
-            val totalPrize = wins.sumBy { it.money }.toDouble()
+        fun calculateRate(wins: List<Win>): Double {
+            val money = wins.map { it.prize }
+            val totalPrize = money.sumBy { it.money }.toDouble()
             val paidMoney = wins.size * LOTTO_PRICE.toDouble()
 
             return totalPrize / paidMoney
