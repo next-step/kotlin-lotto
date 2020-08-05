@@ -1,4 +1,4 @@
-package Calculator
+package calculator
 
 const val FIRST_PREFIX =
     """//"""
@@ -15,7 +15,7 @@ class Calculator(private val numbersInput: String?) {
     var isCustomSplitter: Boolean = false
 
     fun execute(): Int {
-        getNumbers(numbersInput)
+        getNumbersForCalculator(numbersInput)
         hasCustomSplitter()
         hasOnlyValidString()
         checkEndString()
@@ -27,7 +27,7 @@ class Calculator(private val numbersInput: String?) {
         return numbers.sumBy { it.toInt() }
     }
 
-    private fun getNumbers(numbersInput: String?): String? {
+    private fun getNumbersForCalculator(numbersInput: String?): String? {
         require(!numbersInput.isNullOrBlank()) { throw KotlinNullPointerException("숫자를 입력해주세요.") }
         return numbersInput
     }
