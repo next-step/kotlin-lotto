@@ -22,8 +22,4 @@ data class Money(private val won: BigInteger) {
     fun toDouble(): Double {
         return won.toDouble()
     }
-
-    companion object {
-        private const val ZERO = 0
-    }
 }
