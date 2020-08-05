@@ -9,11 +9,11 @@ enum class Win(val matchNumber: Int, val matchBonusNumber: Int, val prize: Int) 
     FIRST(6, 0, 2_000_000_000);
 }
 
-fun getPrize(matchNumber: Int, matchBonusNumber: Int): Win {
-    if (matchNumber == 3 && matchBonusNumber == 0) return Win.FIFTH
-    if (matchNumber == 4 && matchBonusNumber == 0) return Win.FOURTH
-    if (matchNumber == 5 && matchBonusNumber == 0) return Win.THIRD
-    if (matchNumber == 5 && matchBonusNumber == 1) return Win.SECOND
-    if (matchNumber == 6 && matchBonusNumber == 0) return Win.FIRST
+fun getPrize(matchNumber: Int, matchBonus: Boolean): Win {
+    if (matchNumber == 3 && !matchBonus) return Win.FIFTH
+    if (matchNumber == 4 && !matchBonus) return Win.FOURTH
+    if (matchNumber == 5 && !matchBonus) return Win.THIRD
+    if (matchNumber == 5 && matchBonus) return Win.SECOND
+    if (matchNumber == 6 && !matchBonus) return Win.FIRST
     return Win.NONE
 }

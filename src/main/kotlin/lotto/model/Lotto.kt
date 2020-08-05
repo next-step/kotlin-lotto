@@ -9,7 +9,7 @@ data class Lotto(val numbers: List<Int>) {
         val matchNumbers = numbers.filter { it in winner.numbers.numbers }.map { it }
         val matchBonusNumber = numbers.filter { it == winner.bonusNumber }.map { it }
 
-        win = getPrize(matchNumbers.size, matchBonusNumber.size)
+        win = getPrize(matchNumbers.size, matchBonusNumber.isNotEmpty())
     }
 
     fun checkPrize(): Int {
