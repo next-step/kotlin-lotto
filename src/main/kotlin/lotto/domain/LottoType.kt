@@ -1,5 +1,5 @@
 package lotto.domain
 
 enum class LottoType {
-    AUTO
+    AUTO, MANUAL
 }
