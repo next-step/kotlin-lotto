@@ -7,11 +7,10 @@ const val SECOND_PREFIX =
     """\n"""
 
 const val CUSTOM_SPLITTER_LOCATION = 2
+private val DEFAULT_SPLITTER = listOf(",", ":")
 const val CUSTOM_SPLITTER_LAST_LOCATION = 5
 
 class Calculator(private val numbersInput: String?) {
-
-    private val defaultSplitters = listOf(",", ":")
     var isCustomSplitter: Boolean = false
 
     fun execute(): Int {
@@ -45,7 +44,7 @@ class Calculator(private val numbersInput: String?) {
         if (isCustomSplitter) {
             return listOf(numbersInput!![CUSTOM_SPLITTER_LOCATION].toString())
         }
-        return defaultSplitters
+        return DEFAULT_SPLITTER
     }
 
     private fun hasOnlyValidString() {
