@@ -5,8 +5,8 @@ private val LOTTO_NUMBERS = LOTTO_NUMBER_RANGE.toList()
 private const val LOTTO_PICK_COUNT = 6
 
 class LottoSingleLine(numbers: List<Int> = emptyList()) {
-    val auto = numbers.isEmpty()
-    var lottoNumbers = if (auto) createLine() else numbers
+    val manual = numbers.isNotEmpty()
+    var lottoNumbers = if (manual) numbers else createLine()
     private lateinit var lottoResult: LottoResult
 
     fun getResult(): LottoResult = lottoResult

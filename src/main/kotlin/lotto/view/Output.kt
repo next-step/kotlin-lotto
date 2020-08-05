@@ -4,7 +4,7 @@ import lotto.domain.LottoSingleLine
 import lotto.domain.LottoResult
 
 fun printLottoTicket(list: List<LottoSingleLine>) {
-    println("수동 ${list.filter { !it.auto }.size}개, 자동 ${list.filter { it.auto }.size}개를 구입했습니다.")
+    println("수동 ${list.filter { it.manual }.size}개, 자동 ${list.filter { !it.manual }.size}개를 구입했습니다.")
     list.forEach {
         println("${it.lottoNumbers}")
     }
