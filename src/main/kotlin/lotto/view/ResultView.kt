@@ -4,6 +4,8 @@ import lotto.domain.Lottos
 import lotto.domain.PrizeMoney
 import java.math.BigDecimal
 
+const val NEED_MORE_PAYMENT = "1000원 이상의 금액이 필요합니다. 다시 시도해주세요."
+
 object ResultView {
 
     fun showPurchaseAmounts(amounts: Int) {
@@ -30,5 +32,9 @@ object ResultView {
         result.forEach { (key, value) ->
             println("${key.condition}개 일치 (${key.money}원)- ${value}개")
         }
+    }
+
+    fun showTryAgain() {
+        println(NEED_MORE_PAYMENT)
     }
 }

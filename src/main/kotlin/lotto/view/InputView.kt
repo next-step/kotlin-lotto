@@ -1,17 +1,21 @@
 package lotto.view
 
+private const val NO_PAYMENT = 0
+private const val ENTER_PAYMENT_FOR_LOTTO = "구입금액을 입력해주세요."
+private const val ENTER_LAST_LUCKY_NUMBERS = "지난 주 당첨 번호를 입력해주세요."
+
 object InputView {
     fun readPayment(): Int {
-        println("구입금액을 입력해주세요.")
-        val payment = readLine()
-        require(!payment.isNullOrBlank()) { "구입금액 입력값이 비어있습니다." }
-        return payment.toInt()
+        println(ENTER_PAYMENT_FOR_LOTTO)
+        return readLine()?.toIntOrNull() ?: NO_PAYMENT
     }
 
     fun readLuckyNumbers(): List<Int> {
-        println("\n지난 주 당첨 번호를 입력해주세요.")
-        val luckyNumbers = readLine()
-        require(!luckyNumbers.isNullOrBlank()) { "지난 주 당첨 번호 입력값이 비어있습니다." }
-        return luckyNumbers.split(",").map { it.toInt() }
+        println("\n${ENTER_LAST_LUCKY_NUMBERS}")
+        var numbers = readLine()
+        while (numbers.isNullOrBlank()) {
+            numbers = readLine()
+        }
+        return numbers.split(",").map { it.toInt() }
     }
 }

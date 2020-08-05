@@ -9,6 +9,7 @@ import lotto.view.ResultView.showLottosDetail
 import lotto.view.ResultView.showResults
 import lotto.view.InputView
 import lotto.view.ResultView.showProfitRatio
+import lotto.view.ResultView.showTryAgain
 
 fun main() {
 
@@ -20,8 +21,12 @@ fun main() {
     showPurchaseAmounts(amounts)
     showLottosDetail(lottos)
 
-    LottoUtils.luckyNumbers = InputView.readLuckyNumbers()
+    if (LOTTO_PRICE > payment) {
+        showTryAgain()
+        return
+    }
 
+    LottoUtils.luckyNumbers = InputView.readLuckyNumbers()
     val result = Result(lottos)
 
     showResults(result.getResult())
