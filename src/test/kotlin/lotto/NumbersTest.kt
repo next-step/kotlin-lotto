@@ -11,7 +11,7 @@ class NumbersTest {
     @ParameterizedTest
     @MethodSource("successNumbers")
     fun `1~45사이 6개의 숫자 객체 생성(성공)`(successNumbers: List<Int>) {
-        val lottoNumber = LottoNumber(successNumbers)
+        val lottoNumber = Lotto(successNumbers)
         assertThat(lottoNumber.numbers).contains(*successNumbers.toTypedArray())
     }
 
@@ -19,15 +19,15 @@ class NumbersTest {
     @MethodSource("failNumbers")
     fun `예외 케이스 `(failNumbers: List<Int>) {
         assertThrows<IllegalArgumentException> {
-            val lottoNumber = LottoNumber(failNumbers)
+            val lottoNumber = Lotto(failNumbers)
         }
     }
 
     @ParameterizedTest
     @MethodSource("compareNumbers")
     fun `리스트의 동일 숫자 개수 계산`(baseNumbers: List<Int>, compareNumbers: List<Int>) {
-        val bases = LottoNumber(baseNumbers)
-        val compares = LottoNumber(compareNumbers)
+        val bases = Lotto(baseNumbers)
+        val compares = Lotto(compareNumbers)
 
         val count = bases.equalsCount(compares)
 
