@@ -18,7 +18,7 @@ data class Lotto(val lottoNumbers: List<LottoNo>) {
         val matchNumbers = winner.contains(lottoNumbers)
         val matchBonus = winner.containsBonus(lottoNumbers)
 
-        win = getPrize(matchNumbers, matchBonus)
+        win = winner.getPrize(matchNumbers, matchBonus)
     }
 
     fun checkPrize(): Money {

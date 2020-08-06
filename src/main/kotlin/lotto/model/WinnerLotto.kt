@@ -12,4 +12,12 @@ data class WinnerLotto(val lotto: Lotto, val bonusNumber: LottoNo) {
     fun containsBonus(checkNumbers: List<LottoNo>): Boolean {
         return checkNumbers.filter { it == this.bonusNumber }.map { it }.isNotEmpty()
     }
+
+    fun getPrize(number: Int, bonus: Boolean): Win {
+        val win = Win.values().filter { it.matchNumber == number && it.matchBonus == bonus }
+
+        if (win.isEmpty()) return Win.NONE
+
+        return win[0]
+    }
 }
