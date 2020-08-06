@@ -2,7 +2,7 @@ package lotto.model
 
 import lotto.model.LottoMaker.Companion.LOTTO_NUMBER_TOTAL_COUNT
 
-data class Lotto(val lottoNumbers: List<LottoNo>) {
+data class Lotto constructor(val lottoNumbers: List<LottoNo>) {
     lateinit var win: Win
 
     init {
