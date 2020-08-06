@@ -27,6 +27,31 @@ object InputView {
         return winningNumbers.map { it.toInt() }.toSet()
     }
 
+    fun bonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val text = readLine()
+        var bonusNumber = validateBonusNumber(text)
+
+        while (bonusNumber == 0) {
+            println("다시 입력해주세요")
+            bonusNumber = validate(readLine())
+        }
+
+        return bonusNumber
+    }
+
+    private fun validateBonusNumber(text: String?): Int {
+        if (text.isNullOrBlank()) {
+            println("잘못된 보너스 번호 입력하셨습니다.")
+            return 0
+        }
+        if (NUMERIC_REGEX.matches(text) && text.toInt() != 0) {
+            return text.toInt()
+        }
+
+        return 0
+    }
+
     fun validateWinningNumber(numbers: String?): Set<String>? {
         if (numbers.isNullOrBlank()) {
             println("잘못된 당첨 번호 입니다.")
