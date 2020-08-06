@@ -15,7 +15,12 @@ class Lotto {
             winningNumber.contains(it)
         }.count()
 
-        Statistics.countRank(winningCount)
+        when (winningCount) {
+            PrizeGenerator.THREE_MATCH.matched -> PrizeGenerator.THREE_MATCH.countRank()
+            PrizeGenerator.FOUR_MATCH.matched -> PrizeGenerator.FOUR_MATCH.countRank()
+            PrizeGenerator.FIVE_MATCH.matched -> PrizeGenerator.FIVE_MATCH.countRank()
+            PrizeGenerator.SIX_MATCH.matched -> PrizeGenerator.SIX_MATCH.countRank()
+        }
     }
 
     companion object {

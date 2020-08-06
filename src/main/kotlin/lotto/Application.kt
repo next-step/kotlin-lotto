@@ -1,8 +1,8 @@
 package lotto
 
 import lotto.domain.Buyer
+import lotto.domain.LottoStatistics
 import lotto.domain.Lottos
-import lotto.domain.Statistics
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -20,7 +20,7 @@ object Application {
 
         ResultView.showWinningResult(lottos)
 
-        val calculateRatio = Statistics.calculateRatio(purchaseCount)
+        val calculateRatio = LottoStatistics.calculateRatio(purchaseCount)
         ResultView.showRatio(calculateRatio)
     }
 }
