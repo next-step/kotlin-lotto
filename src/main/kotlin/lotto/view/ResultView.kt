@@ -9,7 +9,7 @@ object ResultView {
 
     fun showPurchasedLottos(purchaseCount: Int, lottos: List<Lotto>) {
         println("$purchaseCount 개를 구입하였습니다.")
-        lottos.map { println(it.numbers) }
+        lottos.forEach { println(it.numbers) }
     }
 
     fun showWinningResult(lottos: Lottos) {
