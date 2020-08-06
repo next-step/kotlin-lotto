@@ -12,14 +12,14 @@ class LottoCheckerTest {
     fun beforeTest() {
         val winnerLotto = WinnerLotto(
             Lotto(
-                listOf(
+                setOf(
                     LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(6), LottoNo.from(7)
                 )
             ),
             LottoNo.from(10)
         )
         val myLotto = Lotto(
-            listOf(
+            setOf(
                 LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(6), LottoNo.from(10)
             )
         )

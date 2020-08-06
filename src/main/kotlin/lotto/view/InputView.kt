@@ -18,7 +18,7 @@ object InputView {
 
         val winner = readLine().toString().split(WINNER_NUMBER_DELIMITER)
 
-        return Lotto(winner.map { LottoNo.from(it.toInt()) })
+        return Lotto(winner.map { LottoNo.from(it.toInt()) }.toSet())
     }
 
     fun getBonusNumber(): LottoNo {

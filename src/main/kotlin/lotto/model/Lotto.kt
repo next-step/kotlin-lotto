@@ -2,16 +2,11 @@ package lotto.model
 
 import lotto.model.LottoMaker.Companion.LOTTO_NUMBER_TOTAL_COUNT
 
-data class Lotto constructor(val lottoNumbers: List<LottoNo>) {
+data class Lotto constructor(val lottoNumbers: Set<LottoNo>) {
     lateinit var win: Win
 
     init {
         require(lottoNumbers.size == LOTTO_NUMBER_TOTAL_COUNT) { "당첨 번호는 ${LOTTO_NUMBER_TOTAL_COUNT}개 입니다." }
-        require(isNotRepeated(lottoNumbers)) { "로또에는 중복된 숫자가 없어야 합니다." }
-    }
-
-    private fun isNotRepeated(lottoNumbers: List<LottoNo>): Boolean {
-        return lottoNumbers.distinct().size == LOTTO_NUMBER_TOTAL_COUNT
     }
 
     fun checkWin(winner: WinnerLotto) {

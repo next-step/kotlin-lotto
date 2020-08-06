@@ -10,7 +10,7 @@ class WinnerLottoTest {
     fun validLottoCheck() {
         assertThatThrownBy {
             WinnerLotto(
-                Lotto(listOf(LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(5), LottoNo.from(10))), LottoNo.from(1)
+                Lotto(setOf(LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(5), LottoNo.from(10))), LottoNo.from(1)
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
