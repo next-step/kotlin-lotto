@@ -1,17 +1,24 @@
 package lotto.domain
 
 data class LottoTicket(
-    private val lottoNumbers: List<LottoNumber>
+    private val lottoNumbers: Set<LottoNumber>
 ) {
     init {
-        validateLottoNumbers(lottoNumbers)
+        validateDuplicatedNumbers(lottoNumbers)
+    }
+
+    constructor(lottoNumbers: List<LottoNumber>) : this(lottoNumbers.toSet()) {
+        validateNumbersSize(lottoNumbers.size)
     }
 
     constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.of(it) })
 
-    private fun validateLottoNumbers(lottoNumbers: List<LottoNumber>) {
-        require(lottoNumbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 반드시 6개 입니다." }
-        require(lottoNumbers.distinct().size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복될 수 없습니다." }
+    private fun validateDuplicatedNumbers(lottoNumbers: Set<LottoNumber>) {
+        require(lottoNumbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복될 수 없습니다." }
+    }
+
+    private fun validateNumbersSize(size: Int) {
+        require(size == LOTTO_NUMBER_COUNT) { "로또 번호는 반드시 6개 입니다." }
     }
 
     fun compare(lottoTicket: LottoTicket, bonusNumber: LottoNumber): LottoResult {
