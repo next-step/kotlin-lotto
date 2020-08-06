@@ -6,13 +6,13 @@ class LottoTicket constructor(
     private val lottoNumbers: Set<LottoNumber>
 
     init {
-        validateDuplicatedNumbers(lottoNumbers)
+        validateLottoNumbers(lottoNumbers)
         this.lottoNumbers = lottoNumbers.toSet()
     }
 
     constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.of(it) })
 
-    private fun validateDuplicatedNumbers(lottoNumbers: List<LottoNumber>) {
+    private fun validateLottoNumbers(lottoNumbers: List<LottoNumber>) {
         require(lottoNumbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 반드시 6개 입니다." }
         require(lottoNumbers.toSet().size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복될 수 없습니다." }
     }
