@@ -21,11 +21,6 @@ class Buyer(private val price: Int) {
         _purchasedLottos.add(markedLotto)
     }
 
-    private fun generateAutoLotto(): Lotto {
-        val autoNumbers = mutableSetOf<Int>()
-        while (autoNumbers.size < Lotto.NUMBER_COUNT) {
-            autoNumbers.add(Lotto.NUMBER_GENERATION_RANGE.random())
-        }
-        return Lotto(autoNumbers)
-    }
+    private fun generateAutoLotto(): Lotto =
+        Lotto(Lotto.NUMBER_GENERATION_RANGE.shuffled().subList(0, 6).toSortedSet())
 }
