@@ -12,8 +12,4 @@ data class LottoNo(val number: String) {
             throw RuntimeException("로또는 숫자로만 이루어질 수 있습니다.")
         }
     }
-
-    fun isIn(lotto: List<LottoNo>): Boolean {
-        return lotto.contains(this)
-    }
 }

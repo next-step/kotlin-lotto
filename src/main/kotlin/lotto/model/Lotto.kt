@@ -24,4 +24,8 @@ data class Lotto(val lottoNumbers: List<LottoNo>) {
     fun checkPrize(): Money {
         return win.prize
     }
+
+    fun isIn(bonusNumber: LottoNo): Boolean {
+        return lottoNumbers.contains(bonusNumber)
+    }
 }

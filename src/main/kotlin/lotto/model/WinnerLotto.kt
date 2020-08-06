@@ -2,7 +2,7 @@ package lotto.model
 
 data class WinnerLotto(val lotto: Lotto, val bonusNumber: LottoNo) {
     init {
-        require(!bonusNumber.isIn(lotto.lottoNumbers)) { "보너스 숫자는 로또의 숫자와 중복될 수 없습니다." }
+        require(!lotto.isIn(bonusNumber)) { "보너스 숫자는 로또의 숫자와 중복될 수 없습니다." }
     }
 
     fun contains(checkNumbers: List<LottoNo>): Int {
