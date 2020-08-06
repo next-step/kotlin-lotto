@@ -7,10 +7,6 @@ class ManualLotto {
         numbersList.add(list)
     }
 
-    fun addAll(list: List<List<Int>>) {
-        numbersList.addAll(list)
-    }
-
     fun getAll(): List<List<Int>> {
         return numbersList
     }
