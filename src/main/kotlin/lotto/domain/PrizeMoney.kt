@@ -10,5 +10,10 @@ enum class PrizeMoney(val money: Int, private val countMatch: Int) {
 
     fun totalMoney(number: Int): Int = money * number
 
-    fun isIt(countMatch: Int): Boolean = this.countMatch == countMatch
+    fun isIt(countMatch: Int, isBonus: Boolean): Boolean {
+        if (this == SECOND && countMatch == 5 && !isBonus) {
+            return false
+        }
+        return this.countMatch == countMatch
+    }
 }

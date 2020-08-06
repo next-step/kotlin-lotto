@@ -17,8 +17,7 @@ fun startApp() {
     val lottoGame = LottoGame(money)
     ResultView.resultLotto(lottoGame.lottoList)
     val correctLotto = InputView.inputCorrectLotto()
-    val bonusBall = InputView.inputBonusBall(correctLotto)
-    val rank = lottoGame.getRank(correctLotto, bonusBall)
-    val result = lottoGame.getResult(rank)
-    ResultView.resultRank(result, rank)
+    val winningLotto = InputView.inputBonusBall(correctLotto)
+    val rank = lottoGame.getRank(winningLotto)
+    ResultView.resultRank(money.getRateOfReturn(rank), rank)
 }

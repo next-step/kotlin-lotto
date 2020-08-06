@@ -1,38 +1,28 @@
 package lotto.domain
 
-class LottoGame(private val money: Int) {
+class LottoGame(money: Money) {
     private val totalNumbers = make45Numbers()
-    val lottoList = makeLotto(money)
+    val lottoList = makeLotto(money.money)
 
-    private fun make45Numbers(): List<String> {
-        val numbers = mutableListOf<Int>()
-        for (number in START_NUMBER..LAST_NUMBER) {
-            numbers.add(number)
-        }
-        return numbers.map { it.toString() }
-    }
+    private fun make45Numbers(): List<String> = Array(LAST_NUMBER) { it + 1 }.map { it.toString() }
 
     private fun makeLotto(money: Int): List<Lotto> {
-        val amount = money / 1_000
-        val lotto = mutableListOf<Lotto>()
-        for (number in START_NUMBER..amount) {
-            lotto.add(Lotto(makeRandomNumbers()))
-        }
-        return lotto
+        val amount = money / ONE_LOTTO_PRICE
+        return Array(amount) { Lotto(makeRandomNumbers()) }.toList()
     }
 
     private fun makeRandomNumbers(): List<String> = totalNumbers.shuffled().take(6)
 
-    fun getRank(correctLotto: Lotto, bonusBall: BonusBall): Rank {
+    fun getRank(winningLotto: WinningLotto): Rank {
         val rank = Rank()
-        lottoList.forEach { rank.addRank(it.getCountMatch(correctLotto.numbers), it.isCorrect(bonusBall.number)) }
+        lottoList.forEach {
+            rank.addRank(winningLotto.match(it))
+        }
         return rank
     }
 
-    fun getResult(rank: Rank): Result = Result(money, rank.ranks)
-
     companion object {
-        const val START_NUMBER = 1
         const val LAST_NUMBER = 45
+        const val ONE_LOTTO_PRICE = 1_000
     }
 }

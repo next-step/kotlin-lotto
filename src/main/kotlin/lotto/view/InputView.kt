@@ -1,14 +1,15 @@
 package lotto.view
 
-import lotto.domain.BonusBall
+import lotto.domain.WinningLotto
 import lotto.domain.Lotto
+import lotto.domain.Money
 import lotto.domain.Number
 
 object InputView {
 
-    fun inputMoney(): Int {
+    fun inputMoney(): Money {
         println("금액을 입력해주세요")
-        return readLine()!!.toInt()
+        return Money(readLine())
     }
 
     fun inputCorrectLotto(): Lotto {
@@ -16,8 +17,8 @@ object InputView {
         return Lotto(readLine()!!.split(","))
     }
 
-    fun inputBonusBall(correctLotto: Lotto): BonusBall {
+    fun inputBonusBall(correctLotto: Lotto): WinningLotto {
         println("보너스 볼을 입력해 주세요.")
-        return BonusBall(correctLotto, Number(readLine()))
+        return WinningLotto(correctLotto, Number(readLine()))
     }
 }
