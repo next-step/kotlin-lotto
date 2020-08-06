@@ -9,14 +9,14 @@ object InputView {
         return readLine()?.toInt() ?: 0
     }
 
-    fun requestLastWeekLottoNumber(): Set<Int> {
+    fun requestWinningLottoNumber(): Set<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val lastWeekLottoNumber =
+        val winningLottoNumber =
             readLine()?.split(",")?.map { it.toIntOrNull() ?: 0 }?.toSet() ?: emptySet()
-        require(lastWeekLottoNumber.size == Lotto.NUMBER_COUNT) {
+        require(winningLottoNumber.size == Lotto.NUMBER_COUNT) {
             "로또 번호는 6개까지 입력 가능합니다."
         }
-        return lastWeekLottoNumber
+        return winningLottoNumber
     }
 
     fun requestBonusBall(): Int {
