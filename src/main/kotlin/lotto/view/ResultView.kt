@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.Lotto
+import lotto.model.LottoNo
 import lotto.model.Win
 
 object ResultView {
@@ -10,7 +11,7 @@ object ResultView {
 
     fun printLottos(lottos: List<Lotto>) {
         lottos.forEach { it ->
-            println("${it.lottoNumbers.map { it.number }}")
+            println("${it.lottoNumbers.map { LottoNo.to(it) } }")
         }
     }
 

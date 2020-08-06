@@ -8,8 +8,8 @@ class LottoNoTest {
     @DisplayName(value = "로또가 될 수 없는 숫자 확인")
     @Test
     fun lottoInvalidNumber() {
-        assertThatThrownBy { (LottoNo("k")) }.isInstanceOf(RuntimeException::class.java)
-        assertThatThrownBy { (LottoNo("0")) }.isInstanceOf(RuntimeException::class.java)
-        assertThatThrownBy { (LottoNo("46")) }.isInstanceOf(RuntimeException::class.java)
+        assertThatThrownBy { (LottoNo.from("k".toInt())) }.isInstanceOf(RuntimeException::class.java)
+        assertThatThrownBy { (LottoNo.from(0)) }.isInstanceOf(RuntimeException::class.java)
+        assertThatThrownBy { (LottoNo.from(46)) }.isInstanceOf(RuntimeException::class.java)
     }
 }

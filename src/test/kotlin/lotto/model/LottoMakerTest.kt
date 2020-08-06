@@ -22,8 +22,8 @@ class LottoMakerTest {
 
         assertThat(lotto.lottoNumbers.distinct().size).isSameAs(LOTTO_NUMBER_TOTAL_COUNT)
         assertThat(lotto.lottoNumbers).allSatisfy {
-            assertThat(it.number.toInt()).isGreaterThan(0)
-            assertThat(it.number.toInt()).isLessThanOrEqualTo(LOTTO_NUMBER_END)
+            assertThat(LottoNo.to(it)).isGreaterThan(0)
+            assertThat(LottoNo.to(it)).isLessThanOrEqualTo(LOTTO_NUMBER_END)
         }
     }
 }

@@ -6,7 +6,7 @@ class LottoMaker {
             List(LOTTO_NUMBER_END) { i -> i + LOTTO_NUMBER_START }
                 .shuffled().subList(0, LOTTO_NUMBER_TOTAL_COUNT)
                 .sorted()
-        return Lotto(numbers.map { LottoNo(it.toString()) })
+        return Lotto(numbers.map { LottoNo.from(it) })
     }
 
     companion object {

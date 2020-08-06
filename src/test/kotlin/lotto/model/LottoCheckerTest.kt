@@ -11,10 +11,18 @@ class LottoCheckerTest {
     @BeforeEach
     fun beforeTest() {
         val winnerLotto = WinnerLotto(
-            Lotto(listOf(LottoNo("1"), LottoNo("2"), LottoNo("3"), LottoNo("4"), LottoNo("6"), LottoNo("7"))),
-            LottoNo("10")
+            Lotto(
+                listOf(
+                    LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(6), LottoNo.from(7)
+                )
+            ),
+            LottoNo.from(10)
         )
-        val myLotto = Lotto(listOf(LottoNo("1"), LottoNo("2"), LottoNo("3"), LottoNo("4"), LottoNo("6"), LottoNo("10")))
+        val myLotto = Lotto(
+            listOf(
+                LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(6), LottoNo.from(10)
+            )
+        )
 
         checker = LottoChecker(winnerLotto, listOf(myLotto))
     }
