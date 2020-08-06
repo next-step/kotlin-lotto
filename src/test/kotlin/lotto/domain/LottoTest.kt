@@ -23,4 +23,9 @@ class LottoTest {
     fun `입력한 당첨번호가 데이터 포멧이 이상할 때 null을 반환하는지 확인`(numbers: String) {
         assertThat(InputView.validateWinningNumber(numbers)).isNull()
     }
+
+    @Test
+    fun `생성한 로또 번호는 중복이 될 수 없다`() {
+        assertThat(Lotto.of().numbers.distinct().size).isEqualTo(6)
+    }
 }
