@@ -12,14 +12,12 @@ class Lotto(val numbers: Set<Int>) {
         val matchCount = numbers.count { winnerNumbers.numbers.contains(it) }
 
         return when {
-            matchCount != Prize.SECOND.matchCount -> Prize.findByMatchCount(
-                matchCount = matchCount,
-                isMatchedBonusNumber = false
-            )
-            numbers.filterNot { winnerNumbers.numbers.contains(it) }.first() == bonusBall -> Prize.findByMatchCount(
-                matchCount = matchCount,
-                isMatchedBonusNumber = true
-            )
+            matchCount != Prize.SECOND.matchCount -> {
+                Prize.findByMatchCount(matchCount = matchCount, isMatchedBonusNumber = false)
+            }
+            numbers.filterNot { winnerNumbers.numbers.contains(it) }.first() == bonusBall -> {
+                Prize.findByMatchCount(matchCount = matchCount, isMatchedBonusNumber = true)
+            }
             else -> Prize.findByMatchCount(matchCount = matchCount, isMatchedBonusNumber = false)
         }
     }
