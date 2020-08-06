@@ -10,6 +10,6 @@ data class WinnerLotto(val lotto: Lotto, val bonusNumber: LottoNo) {
     }
 
     fun containsBonus(checkNumbers: List<LottoNo>): Boolean {
-        return checkNumbers.filter { it.number == this.bonusNumber.number }.map { it }.isNotEmpty()
+        return checkNumbers.filter { it == this.bonusNumber }.map { it }.isNotEmpty()
     }
 }
