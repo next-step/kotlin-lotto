@@ -16,6 +16,6 @@ enum class PrizeGenerator(val matched: Int, val prize: Int) {
 
     companion object {
         fun winningPrize() =
-            (THREE_MATCH.count * THREE_MATCH.prize) + (FOUR_MATCH.count * FOUR_MATCH.prize) + (FIVE_MATCH.count * FIVE_MATCH.prize) + (SIX_MATCH.count * SIX_MATCH.prize)
+            (THREE_MATCH.count * THREE_MATCH.prize) + (FOUR_MATCH.count * FOUR_MATCH.prize) + (FIVE_MATCH.count * FIVE_MATCH.prize) + (BONUS_MATCH.count * BONUS_MATCH.prize) + (SIX_MATCH.count * SIX_MATCH.prize)
     }
 }

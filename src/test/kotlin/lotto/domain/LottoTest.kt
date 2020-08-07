@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.view.InputView
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -9,6 +10,14 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
+    @BeforeEach
+    fun before() {
+        PrizeGenerator.THREE_MATCH.count = 0
+        PrizeGenerator.FOUR_MATCH.count = 0
+        PrizeGenerator.FIVE_MATCH.count = 0
+        PrizeGenerator.BONUS_MATCH.count = 0
+        PrizeGenerator.SIX_MATCH.count = 0
+    }
 
     @Test
     fun `생성한 로또 번호가 1-45 범위 안에 있는지 확인`() {
