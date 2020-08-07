@@ -39,4 +39,13 @@ class MoneyTest {
             Money("a")
         }.isInstanceOf(IllegalArgumentException::class.java).hasMessageContaining("숫자만 입력해주세요")
     }
+
+    @Test
+    fun get_amount() {
+        val money = Money("3000")
+
+        val amount = money.getAmount()
+
+        assertThat(amount).isEqualTo(3)
+    }
 }

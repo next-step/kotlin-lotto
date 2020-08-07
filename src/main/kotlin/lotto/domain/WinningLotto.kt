@@ -2,7 +2,7 @@ package lotto.domain
 
 class WinningLotto(correctLotto: Lotto, number: Number) {
     val lotto = correctLotto
-    val bonusBall = checkNumber(correctLotto, number)
+    private val bonusBall = checkNumber(correctLotto, number)
 
     private fun checkNumber(correctLotto: Lotto, number: Number): Number {
         if (correctLotto.isCorrect(number)) {
@@ -14,6 +14,6 @@ class WinningLotto(correctLotto: Lotto, number: Number) {
     fun match(userLotto: Lotto): PrizeMoney {
         val countMatch = userLotto.getCountMatch(lotto.numbers)
         val isBonus = userLotto.isCorrect(bonusBall)
-        return PrizeMoney.values().find { it.isIt(countMatch, isBonus) } ?: return PrizeMoney.MISS
+        return getRank(countMatch, isBonus)
     }
 }

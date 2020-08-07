@@ -1,14 +1,14 @@
 package lotto.domain
 
-class LottoGame(money: Money) {
+class LottoGame(private val money: Money) {
     private val totalNumbers = make45Numbers()
-    val lottoList = makeLotto(money.money)
+    val lottoList = makeLotto()
 
-    private fun make45Numbers(): List<String> = Array(LAST_NUMBER) { it + 1 }.map { it.toString() }
+    private fun make45Numbers(): List<String> = (FIRST_NUMBER..LAST_NUMBER).map { it.toString() }
 
-    private fun makeLotto(money: Int): List<Lotto> {
-        val amount = money / ONE_LOTTO_PRICE
-        return Array(amount) { Lotto(makeRandomNumbers()) }.toList()
+    private fun makeLotto(): List<Lotto> {
+        val amount = money.getAmount()
+        return (FIRST_NUMBER..amount).map { Lotto(makeRandomNumbers()) }
     }
 
     private fun makeRandomNumbers(): List<String> = totalNumbers.shuffled().take(6)
@@ -22,7 +22,7 @@ class LottoGame(money: Money) {
     }
 
     companion object {
+        const val FIRST_NUMBER = 1
         const val LAST_NUMBER = 45
-        const val ONE_LOTTO_PRICE = 1_000
     }
 }

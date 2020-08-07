@@ -17,3 +17,5 @@ enum class PrizeMoney(val money: Int, private val countMatch: Int) {
         return this.countMatch == countMatch
     }
 }
+
+fun getRank(countMatch: Int, isBonus: Boolean): PrizeMoney = PrizeMoney.values().find { it.isIt(countMatch, isBonus) } ?:  PrizeMoney.MISS

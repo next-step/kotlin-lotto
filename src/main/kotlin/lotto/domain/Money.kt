@@ -23,11 +23,11 @@ class Money(string: String?) {
         }
     }
 
-    private fun checkUnit(int: Int): Int {
-        if (int < 1000) {
+    private fun checkUnit(money: Int): Int {
+        if (money < ONE_LOTTO_PRICE) {
             throw IllegalArgumentException("돈은 1000원 이상 입력해주세요")
         }
-        return int - int % 1000
+        return money - money % ONE_LOTTO_PRICE
     }
 
     fun getRateOfReturn(rank: Rank): Double {
@@ -37,5 +37,11 @@ class Money(string: String?) {
             totalPrizeMoney += it.totalMoney(rank.ranks.getValue(it))
         }
         return totalPrizeMoney / money.toDouble()
+    }
+
+    fun getAmount(): Int = money / ONE_LOTTO_PRICE
+
+    companion object {
+        const val ONE_LOTTO_PRICE = 1_000
     }
 }
