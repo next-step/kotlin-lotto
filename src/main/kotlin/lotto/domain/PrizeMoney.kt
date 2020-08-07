@@ -1,10 +1,21 @@
 package lotto.domain
 
-enum class PrizeMoney(val money: Int, val ranking: String) {
-    THREE_MONEY(5000, "4등"),
-    FOUR_MONEY(50000, "3등"),
-    FIVE_MONEY(1500000, "2등"),
-    SIX_MONEY(2000000000, "1등");
+enum class PrizeMoney(val money: Int, private val countMatch: Int) {
+    FIRST(2_000_000_000, 6),
+    SECOND(300_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3),
+    MISS(0, 0);
 
     fun totalMoney(number: Int): Int = money * number
+
+    fun isIt(countMatch: Int, isBonus: Boolean): Boolean {
+        if (this == SECOND && countMatch == 5 && !isBonus) {
+            return false
+        }
+        return this.countMatch == countMatch
+    }
 }
+
+fun getRank(countMatch: Int, isBonus: Boolean): PrizeMoney = PrizeMoney.values().find { it.isIt(countMatch, isBonus) } ?:  PrizeMoney.MISS

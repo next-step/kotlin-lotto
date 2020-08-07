@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class Number(val string: String?) {
+data class Number(private var string: String?) {
     val number = changeInt(string)
 
     init {
@@ -9,6 +9,7 @@ data class Number(val string: String?) {
 
     private fun changeInt(string: String?): Int {
         if (!string.isNullOrBlank()) {
+            this.string = string.trim()
             return checkInt(string)
         } else {
             throw NumberFormatException("공백값과 null값은 가질수 없습니다.")
@@ -17,7 +18,7 @@ data class Number(val string: String?) {
 
     private fun checkInt(string: String): Int {
         try {
-            return string.toInt()
+            return string.trim().toInt()
         } catch (e: NumberFormatException) {
             throw NumberFormatException("숫자 이외의 값은 가질수 없습니다.")
         }
