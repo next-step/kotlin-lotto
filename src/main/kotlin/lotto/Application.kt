@@ -17,7 +17,7 @@ object Application {
 
         val winningNumbers = InputView.lastWinningNumbers()
         val bonusNumber = InputView.bonusNumber()
-        lottos.matchWinningCount(winningNumbers)
+        lottos.matchWinningCount(winningNumbers, bonusNumber)
 
         ResultView.showWinningResult(lottos)
 

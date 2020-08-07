@@ -8,9 +8,9 @@ class Lottos() {
         this.lottos = lottos
     }
 
-    fun matchWinningCount(winningNumbers: Numbers) {
+    fun matchWinningCount(winningNumbers: Numbers, bonusNumber: Int) {
         lottos.map {
-            it.countWinningNumber(winningNumbers)
+            it.countWinningNumber(winningNumbers, bonusNumber)
         }
     }
 
