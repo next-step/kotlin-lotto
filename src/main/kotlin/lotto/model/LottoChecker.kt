@@ -1,6 +1,8 @@
 package lotto.model
 
-class LottoChecker(winner: Lotto, myLottos: List<Lotto>) {
+import lotto.model.Money.Companion.calculateRate
+
+class LottoChecker(winner: WinnerLotto, myLottos: List<Lotto>) {
     private val lottos: List<Lotto> = checkEachLotto(winner, myLottos)
 
     fun getLottos(): List<Lotto> {
@@ -8,13 +10,10 @@ class LottoChecker(winner: Lotto, myLottos: List<Lotto>) {
     }
 
     fun getEarningRate(): Double {
-        val totalPrize = lottos.sumBy { it.checkPrize() }.toDouble()
-        val paidMoney = lottos.size * LOTTO_PRICE.toDouble()
-
-        return totalPrize / paidMoney
+        return calculateRate(lottos.map { it.win })
     }
 
-    private fun checkEachLotto(winner: Lotto, lottos: List<Lotto>): List<Lotto> {
+    private fun checkEachLotto(winner: WinnerLotto, lottos: List<Lotto>): List<Lotto> {
         lottos.forEach {
             it.checkWin(winner)
         }

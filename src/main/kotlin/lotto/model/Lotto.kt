@@ -1,17 +1,26 @@
 package lotto.model
 
-const val LOTTO_PRICE = 1_000
+import lotto.model.LottoMaker.Companion.LOTTO_NUMBER_TOTAL_COUNT
 
-data class Lotto(val numbers: List<Int>) {
+data class Lotto constructor(val lottoNumbers: Set<LottoNo>) {
     lateinit var win: Win
 
-    fun checkWin(winner: Lotto) {
-        val matchNumbers = numbers.filter { it in winner.numbers }.map { it }
-
-        win = getPrize(matchNumbers.size)
+    init {
+        require(lottoNumbers.size == LOTTO_NUMBER_TOTAL_COUNT) { "당첨 번호는 ${LOTTO_NUMBER_TOTAL_COUNT}개 입니다." }
     }
 
-    fun checkPrize(): Int {
+    fun checkWin(winner: WinnerLotto) {
+        val matchNumbers = winner.contains(lottoNumbers)
+        val matchBonus = winner.containsBonus(lottoNumbers)
+
+        win = winner.getPrize(matchNumbers, matchBonus)
+    }
+
+    fun checkPrize(): Money {
         return win.prize
+    }
+
+    fun isIn(bonusNumber: LottoNo): Boolean {
+        return lottoNumbers.contains(bonusNumber)
     }
 }

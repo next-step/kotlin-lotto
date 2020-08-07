@@ -1,7 +1,7 @@
 package lotto
 
-import lotto.model.Lotto
 import lotto.model.LottoChecker
+import lotto.model.WinnerLotto
 import lotto.model.buyLotto
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -13,8 +13,10 @@ fun main() {
     ResultView.printLottoCount(lottos)
     ResultView.printLottos(lottos)
 
-    val winnerNumbers = InputView.getWinnerLotto()
-    val winnerLotto = Lotto(winnerNumbers.toList())
+    val winnerLottoWithoutBonus = InputView.getWinnerLotto()
+    val bonus = InputView.getBonusNumber()
+
+    val winnerLotto = WinnerLotto(winnerLottoWithoutBonus, bonus)
     val checker = LottoChecker(winnerLotto, lottos)
 
     ResultView.printMatchResult(checker.getLottos())
