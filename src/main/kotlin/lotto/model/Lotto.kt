@@ -1,6 +1,6 @@
 package lotto.model
 
-class Lotto(val numbers: List<Int>) {
+class Lotto(val numbers: Set<Int>) {
 
     init {
         require(numbers.size == NUMBER_COUNT) {
@@ -8,9 +8,10 @@ class Lotto(val numbers: List<Int>) {
         }
     }
 
-    fun convertPrize(winnerNumbers: Lotto): Prize {
+    fun convertPrize(winnerNumbers: Lotto, bonusBall: Int): Prize {
         val matchCount = numbers.count { winnerNumbers.numbers.contains(it) }
-        return Prize.findByMatchCount(matchCount)
+
+        return Prize.findByMatchCount(matchCount = matchCount, isMatchedBonusNumber = numbers.contains(bonusBall))
     }
 
     companion object {

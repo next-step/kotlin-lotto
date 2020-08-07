@@ -8,12 +8,13 @@ import lotto.view.ResultView
 
 fun main() {
     val price = InputView.requestPrice()
-    val buyer = Buyer().apply { buyLotto(price) }
+    val buyer = Buyer(price).apply { buyLotto() }
     val store = Store(buyer)
     ResultView.printPurchasedLottoNumbers(buyer.purchasedLottos)
 
-    val lastWeekLottoNumber = InputView.requestLastWeekLottoNumber()
-    val lottoResults = store.drawLottoNumber(Lotto(lastWeekLottoNumber))
+    val (lastWeekLottoNumber, bonusBall) = InputView.requestWinningLottoNumber() to InputView.requestBonusBall()
+
+    val lottoResults = store.drawLottoNumber(Lotto(lastWeekLottoNumber), bonusBall)
     ResultView.printWinnerStatistics(lottoResults)
 
     val rateOfReturn = store.getRateOfReturn(price, lottoResults)

@@ -1,15 +1,17 @@
 package lotto.model
 
-class Buyer {
+class Buyer(private val price: Int) {
 
     private val _purchasedLottos = mutableListOf<Lotto>()
     val purchasedLottos: List<Lotto> get() = _purchasedLottos
 
-    fun buyLotto(price: Int) {
+    init {
         require(price >= Lotto.PRICE) {
             "로또 구매 금액이 부족합니다."
         }
+    }
 
+    fun buyLotto() {
         repeat(price / Lotto.PRICE) {
             markLotto(generateAutoLotto())
         }
@@ -19,11 +21,6 @@ class Buyer {
         _purchasedLottos.add(markedLotto)
     }
 
-    private fun generateAutoLotto(): Lotto {
-        val autoNumbers = mutableListOf<Int>()
-        repeat(Lotto.NUMBER_COUNT) {
-            autoNumbers.add(Lotto.NUMBER_GENERATION_RANGE.random())
-        }
-        return Lotto(autoNumbers)
-    }
+    private fun generateAutoLotto(): Lotto =
+        Lotto(Lotto.NUMBER_GENERATION_RANGE.shuffled().subList(0, 6).toSortedSet())
 }
