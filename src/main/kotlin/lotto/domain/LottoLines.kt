@@ -1,7 +1,7 @@
 package lotto.domain
 
-class LottoLines(private val totalNumber: Int, private val manualNumberList: ManualLotto) {
-    private val lottoLines = createLottoTicket(totalNumber, manualNumberList)
+class LottoLines(totalNumber: Int, numbersList: List<LottoSingleLine>) {
+    private val lottoLines = createLottoTicket(totalNumber, numbersList)
 
     fun checkResult(result: List<Int>, bonusNumber: Int) {
         lottoLines.forEach { it.checkPlace(result, bonusNumber) }
@@ -11,10 +11,9 @@ class LottoLines(private val totalNumber: Int, private val manualNumberList: Man
         return lottoLines
     }
 
-    private fun createLottoTicket(totalNumber: Int, numbersList: ManualLotto): List<LottoSingleLine> {
+    private fun createLottoTicket(totalNumber: Int, numbersList: List<LottoSingleLine>): List<LottoSingleLine> {
         val lines = mutableListOf<LottoSingleLine>()
-        val numbersList = numbersList.getAll()
-        lines.addAll(numbersList.map { LottoSingleLine(it) })
+        lines.addAll(numbersList)
         lines.addAll((1..(totalNumber - numbersList.size)).toList().map { LottoSingleLine() })
         return lines
     }
