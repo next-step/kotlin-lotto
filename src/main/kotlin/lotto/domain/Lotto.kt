@@ -19,7 +19,7 @@ class Lotto {
             PrizeGenerator.THREE_MATCH.matched -> PrizeGenerator.THREE_MATCH.countRank()
             PrizeGenerator.FOUR_MATCH.matched -> PrizeGenerator.FOUR_MATCH.countRank()
             PrizeGenerator.FIVE_MATCH.matched -> {
-                if (winningCount == PrizeGenerator.FIVE_MATCH.matched && numbers.contains(bonusNumber)) {
+                if (isMatchedBonusNumber(winningCount, bonusNumber)) {
                     PrizeGenerator.BONUS_MATCH.countRank()
                 } else {
                     PrizeGenerator.FIVE_MATCH.countRank()
@@ -27,6 +27,10 @@ class Lotto {
             }
             PrizeGenerator.SIX_MATCH.matched -> PrizeGenerator.SIX_MATCH.countRank()
         }
+    }
+
+    private fun isMatchedBonusNumber(winningCount: Int, bonusNumber: Int): Boolean {
+        return (winningCount == PrizeGenerator.FIVE_MATCH.matched) && (numbers.contains(bonusNumber))
     }
 
     companion object {
