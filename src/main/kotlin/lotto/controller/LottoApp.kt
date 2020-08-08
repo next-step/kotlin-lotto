@@ -1,7 +1,6 @@
 package lotto.controller
 
 import lotto.model.Buyer
-import lotto.model.Lotto
 import lotto.model.Store
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -12,10 +11,10 @@ fun main() {
     val store = Store(buyer)
     ResultView.printPurchasedLottoNumbers(buyer.purchasedLottos)
 
-    val (lastWeekLottoNumber, bonusBall) =
+    val (winningLotto, bonusBall) =
         InputView.requestLottoNumberByType(InputView.LottoNumberType.WINNING) to InputView.requestByMode(InputView.Mode.BONUS_BALL)
 
-    val lottoResults = store.drawLottoNumber(Lotto(lastWeekLottoNumber), bonusBall)
+    val lottoResults = store.drawLottoNumber(winningLotto, bonusBall)
     ResultView.printWinnerStatistics(lottoResults)
 
     val rateOfReturn = store.getRateOfReturn(price, lottoResults)

@@ -16,14 +16,11 @@ object InputView {
         return readLine()?.toInt() ?: 0
     }
 
-    fun requestLottoNumberByType(type: LottoNumberType): Set<Int> {
+    fun requestLottoNumberByType(type: LottoNumberType): Lotto {
         println(type.message)
         val lottoNumber =
             readLine()?.split(",")?.map { it.toIntOrNull() ?: 0 }?.toSet() ?: emptySet()
-        require(lottoNumber.size == Lotto.NUMBER_COUNT) {
-            "로또 번호는 6개까지 입력 가능합니다."
-        }
-        return lottoNumber
+        return Lotto(lottoNumber)
     }
 
     enum class Mode(val message: String) {
