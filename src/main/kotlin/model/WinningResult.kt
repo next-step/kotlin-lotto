@@ -9,4 +9,8 @@ class WinningResult {
         }
         return lottoStatMap.map { LottoStat(it.key, it.value) }.toList()
     }
+
+    fun sum(list: List<LottoStat>): Int {
+        return list.sumBy { it.prizeMoney }
+    }
 }

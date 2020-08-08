@@ -1,9 +1,4 @@
-import model.Lotto
-import model.LottoNumber
-import model.Rank
-import model.WinningLotto
-import model.WinningResult
-
+import model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -89,8 +84,8 @@ class LottoGameTest {
         }
 
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }, 7)
-        val winingResult = WinningResult()
-        val winningStatList = winingResult.of(list, winningLotto)
+        val winningResult = WinningResult()
+        val winningStatList = winningResult.of(list, winningLotto)
         println(winningStatList)
         assertThat(winningStatList).isNotEmpty
     }
@@ -98,6 +93,17 @@ class LottoGameTest {
     @Test
     @DisplayName("당첨 금액을 합산할 수 있다")
     fun `sumPrizeMoney`() {
+        var list = mutableListOf<Lotto>()
+        repeat(10) {
+            val lottoNumberList = IntRange(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER).shuffled().take(Lotto.SIZE).map { LottoNumber.from(it) }
+            val lotto = Lotto(lottoNumberList)
+            list.add(lotto)
+        }
+
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }, 7)
+        val winningResult = WinningResult()
+        val winningStatList = winningResult.of(list, winningLotto)
+        assertThat(winningResult.sum(winningStatList)).isGreaterThanOrEqualTo(0)
     }
 
     @Test
