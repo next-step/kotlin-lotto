@@ -1,3 +1,5 @@
+import model.LottoNumber
+import model.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -21,6 +23,9 @@ class LottoGameTest {
     @Test
     @DisplayName("로또 당첨 번호를 입력 받을 수 있다")
     fun `inputWinningLotto`() {
+        val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        val winningLotto = WinningLotto(lottoNumber, 7)
+        assertThat(winningLotto).isNotNull
     }
 
     @Test

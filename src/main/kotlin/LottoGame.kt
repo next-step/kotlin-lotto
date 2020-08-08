@@ -1,16 +1,18 @@
+import model.Lotto
+import model.LottoNumber
+
 class LottoGame {
     fun buy(money: Int): List<Lotto> {
         val list = mutableListOf<Lotto>()
 
         repeat(money / LOTTO_PRICE) {
-            val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+            val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+            val lotto = Lotto(lottoNumber)
             list.add(lotto)
         }
 
         return list.toList()
     }
-
-    class Lotto(val list: List<Int> = listOf(1, 2, 3, 4, 5, 6))
 
     companion object {
 
