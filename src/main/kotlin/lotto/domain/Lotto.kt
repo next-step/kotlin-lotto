@@ -8,7 +8,7 @@ class Lotto(private val lottoNumbers: List<LottoNumber>) {
     }
 
     fun countOfMatch(winningNumbers: WinningLotto): Int {
-        return lottoNumbers.filter { winningNumbers.contains(it) }.size
+        return lottoNumbers.count { winningNumbers.contains(it) }
     }
 
     fun contains(value: LottoNumber): Boolean {
