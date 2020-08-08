@@ -11,6 +11,12 @@ fun main() {
     val store = Store(buyer)
     ResultView.printPurchasedLottoNumbers(buyer.purchasedLottos)
 
+    val manuallyBuyLottos = InputView.requestByMode(InputView.Mode.MANUALLY_BUY_NUMBER).let {
+        if (it > 0) {
+            InputView.requestLottoNumberByType(type = InputView.LottoNumberType.MANUAL, repeatCount = it)
+        }
+    }
+
     val (winningLotto, bonusBall) =
         InputView.requestLottoNumberByType(InputView.LottoNumberType.WINNING).first() to
             InputView.requestByMode(InputView.Mode.BONUS_BALL)
