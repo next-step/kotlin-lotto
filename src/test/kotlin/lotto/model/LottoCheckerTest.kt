@@ -11,26 +11,17 @@ class LottoCheckerTest {
     @BeforeEach
     fun beforeTest() {
         val winnerLotto = WinnerLotto(
-            Lotto(
-                setOf(
-                    LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(6), LottoNo.from(7)
-                )
-            ),
-            LottoNo.from(10)
+            Lotto.make("1,2,3,4,6,7"), LottoNo.from(10)
         )
-        val myLotto = Lotto(
-            setOf(
-                LottoNo.from(1), LottoNo.from(2), LottoNo.from(3), LottoNo.from(4), LottoNo.from(6), LottoNo.from(10)
-            )
-        )
+        val myLotto = Lotto.make("1,2,3,4,6,10")
 
-        checker = LottoChecker(winnerLotto, listOf(myLotto))
+        checker = LottoChecker(winnerLotto, LottoPaper(listOf(myLotto)))
     }
 
     @DisplayName(value = "일치하는 숫자의 개수와 로또의 상금을 확인한다.")
     @Test
     fun checkLottoResult() {
-        assertThat(checker.getLottos()).allSatisfy {
+        assertThat(checker.getLottos().lottoInPaper).allSatisfy {
             assertThat(it.win.matchNumber).isEqualTo(5)
             assertThat(it.win.matchBonus).isEqualTo(true)
             assertThat(it.checkPrize()).isEqualTo(Win.SECOND.prize)
