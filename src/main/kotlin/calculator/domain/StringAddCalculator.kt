@@ -1,4 +1,4 @@
-package calculator
+package calculator.domain
 
 class StringAddCalculator {
 
@@ -8,11 +8,7 @@ class StringAddCalculator {
             return DEFAULT_RESULT
         }
 
-        val expression = Expression(input)
-        return when {
-            expression.isValid() -> expression.extractTokens().map { it.toIntOrNull() ?: 0 }.sum()
-            else -> throw RuntimeException()
-        }
+        return Expression(input).extractTokens().sumBy { it.value }
     }
 
     companion object {
