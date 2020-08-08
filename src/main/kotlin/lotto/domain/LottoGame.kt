@@ -1,17 +1,14 @@
 package lotto.domain
 
-class LottoGame(private val money: Money) {
-    private val totalNumbers = make45Numbers()
+class LottoGame(private val amount: Amount, private val manualLottoList: List<Lotto> = listOf()) {
     val lottoList = makeLotto()
 
-    private fun make45Numbers(): List<String> = (FIRST_NUMBER..LAST_NUMBER).map { it.toString() }
-
     private fun makeLotto(): List<Lotto> {
-        val amount = money.getAmount()
-        return (FIRST_NUMBER..amount).map { Lotto(makeRandomNumbers()) }
+        val totalLotto = listOf(manualLottoList, (FIRST_NUMBER..amount.auto).map { Lotto(makeRandomNumbers()) })
+        return totalLotto.flatten()
     }
 
-    private fun makeRandomNumbers(): List<String> = totalNumbers.shuffled().take(6)
+    private fun makeRandomNumbers(): Set<Int> = (FIRST_NUMBER..LAST_NUMBER).shuffled().take(6).toSet()
 
     fun getRank(winningLotto: WinningLotto): Rank {
         val rank = Rank()

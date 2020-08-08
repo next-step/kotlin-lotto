@@ -1,12 +1,14 @@
 package lotto.view
 
+import lotto.domain.Amount
 import lotto.domain.Lotto
 import lotto.domain.PrizeMoney
 import lotto.domain.Rank
 
 object ResultView {
 
-    fun resultLotto(lottoList: List<Lotto>) {
+    fun resultLotto(lottoList: List<Lotto>, amount: Amount) {
+        println("수동으로 ${amount.manual}장, 자동으로 ${amount.auto}개를 구매하셨습니다.")
         lottoList.forEach { lotto -> println(lotto.numbers.map { it.number }) }
     }
 
