@@ -1,6 +1,13 @@
 package model
 
-class WinningLotto(override val number: List<LottoNumber>, val bonusNumber: Int) : BasicLotto {
+import kotlin.properties.Delegates
+
+class WinningLotto(override val number: List<LottoNumber>) : BasicLotto {
+    var bonusNumber by Delegates.notNull<Int>()
+
+    constructor(number: List<LottoNumber>, bonusNumber: Int) : this(number) {
+        this.bonusNumber = bonusNumber
+    }
     fun match(value: Lotto): Pair<Int, Boolean> {
         return number.count { value.number.contains(it) } to value.number.contains(LottoNumber.from(bonusNumber))
     }
