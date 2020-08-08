@@ -16,16 +16,14 @@ fun main() {
     val payment = Payment(InputView.readPayment())
     ResultView.showQuantityPurchased(payment.affordableQuantity())
 
-    val lottos = Lottos(LottoShop(payment).sellTickets())
-    ResultView.showLottosDetail(lottos)
+    val lottoGame = LottoGame(payment)
+    ResultView.showLottosDetail(lottoGame.lottos)
 
     val winningNumbers = InputView.getWinningNumber(InputView.readNumbers())
     val bonus = LottoNumber(InputView.readBonusNumber())
     val winningLotto = WinningLotto(winningNumbers, bonus)
 
-    val lottoGame = LottoGame(lottos, winningLotto)
-
-    val ranks = lottoGame.startMatch()
+    val ranks = lottoGame.startMatch(winningLotto)
     val result = WinningResult.resultOfRanks(ranks)
     ResultView.showResult(result)
 
