@@ -11,9 +11,7 @@ enum class Rank(val matchCount: Int, val prizeMoney: Int) {
     companion object {
         fun of(matchCount: Int, matchBonus: Boolean): Rank {
             var rank = values().firstOrNull { it.matchCount == matchCount } ?: ELSE
-            if (rank == SECOND &&
-                !matchBonus
-            ) {
+            if (rank == SECOND && !matchBonus) {
                 rank = THIRD
             }
             return rank
