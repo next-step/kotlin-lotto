@@ -1,13 +1,17 @@
 package lotto
 
-data class Lotto(private val numbers: Set<LottoNumber>) {
+data class Lotto private constructor(private val numbers: Set<LottoNumber>) {
     init {
         require(numbers.size == LOTTO_NUMBER_SIZE) { "로또의 숫자는 $LOTTO_NUMBER_SIZE 개 여야 합니다. " }
     }
 
-    fun contains(number: Int): Boolean {
-        return numbers.contains(LottoNumber.of(number))
+    fun match(other: Lotto): Int {
+        return numbers.filter { other.contains(it) }.count()
     }
+
+    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
+
+    fun contains(number: Int): Boolean = contains(LottoNumber.of(number))
 
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6

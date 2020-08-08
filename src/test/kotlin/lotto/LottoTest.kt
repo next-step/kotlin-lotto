@@ -20,6 +20,13 @@ class LottoTest {
     }
 
     @Test
+    internal fun matchCount() {
+        val lotto1 = of(1, 2, 3, 4, 5, 6)
+        val lotto2 = of(1, 2, 3, 4, 5, 7)
+        assertThat(lotto1.match(lotto2)).isEqualTo(5)
+    }
+
+    @Test
     internal fun contains() {
         val lotto = of(1, 2, 3, 4, 5, 6)
         assertThat(lotto.contains(1)).isTrue()
