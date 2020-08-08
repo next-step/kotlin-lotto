@@ -1,14 +1,16 @@
 package lotto.domain
 
-import lotto.LottoUtils.luckyNumbers
-
 class Lottos(private val lottos: List<Lotto>) {
 
-    fun matchCounts(): List<Int> {
-        return lottos.map { it.getMatchCount(luckyNumbers) }
+    fun match(winningLotto: WinningLotto): List<Rank> {
+        return lottos.map {
+            val matchCount = it.countOfMatch(winningLotto)
+            val matchBonus = it.contains(winningLotto.bonusNumber)
+            Rank.of(matchCount, matchBonus)
+        }
     }
 
     override fun toString(): String {
-        return lottos.joinToString("\r\n")
+        return lottos.joinToString("\n")
     }
 }

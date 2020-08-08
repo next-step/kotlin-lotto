@@ -1,34 +1,37 @@
 package lotto
 
-import lotto.LottoUtils.provideNumbers
-import lotto.domain.Lotto
-import lotto.domain.Lottos
-import lotto.domain.Result
-import lotto.view.ResultView.showPurchaseAmounts
+import lotto.domain.LottoGame
+import lotto.domain.LottoNumber
+import lotto.domain.Payment
+import lotto.domain.Profit
+import lotto.domain.WinningLotto
+import lotto.domain.WinningResult
+import lotto.view.ResultView.showQuantityPurchased
 import lotto.view.ResultView.showLottosDetail
-import lotto.view.ResultView.showResults
-import lotto.view.InputView
+import lotto.view.ResultView.showResult
+import lotto.view.InputView.getWinningNumber
+import lotto.view.InputView.readBonusNumber
+import lotto.view.InputView.readPayment
+import lotto.view.InputView.readNumbers
 import lotto.view.ResultView.showProfitRatio
-import lotto.view.ResultView.showTryAgain
 
 fun main() {
 
-    val payment = InputView.readPayment()
-    val amounts = payment / LOTTO_PRICE
+    val payment = Payment(readPayment())
+    showQuantityPurchased(payment.affordableQuantity())
 
-    val lottos = Lottos((1..amounts).map { Lotto(provideNumbers()) })
+    val lottoGame = LottoGame(payment)
+    showLottosDetail(lottoGame.lottos)
 
-    showPurchaseAmounts(amounts)
-    showLottosDetail(lottos)
+    val winningNumbers = getWinningNumber(readNumbers())
+    val bonus = LottoNumber(readBonusNumber())
+    lottoGame.winningLotto = WinningLotto(winningNumbers, bonus)
 
-    if (LOTTO_PRICE > payment) {
-        showTryAgain()
-        return
-    }
+    val ranks = lottoGame.startMatch()
+    val result = WinningResult.resultOfRanks(ranks)
+    showResult(result)
 
-    LottoUtils.luckyNumbers = InputView.readLuckyNumbers()
-    val result = Result(lottos)
-
-    showResults(result.getResult())
-    showProfitRatio(result.getProfitRatio(payment))
+    val totalEarnings = Profit(WinningResult.sumOfPrizeMoney())
+    val ratio = totalEarnings.calculateProfitRatio(payment)
+    showProfitRatio(ratio)
 }
