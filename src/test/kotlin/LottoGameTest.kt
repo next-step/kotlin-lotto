@@ -11,8 +11,10 @@ import org.junit.jupiter.api.Test
 class LottoGameTest {
 
     @Test
-    @DisplayName("로또 숫자가 6개 생성된다")
+    @DisplayName("로또 숫자가 Lotto.Size 개 생성된다")
     fun `createLottoNumber`() {
+        val lotto = Lotto.make()
+        assertThat(lotto.number.size).isEqualTo(Lotto.SIZE)
     }
 
     @Test
