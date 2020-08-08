@@ -4,7 +4,6 @@ import lotto.domain.LottoGame
 import lotto.domain.LottoNumber
 import lotto.domain.Payment
 import lotto.domain.Profit
-import lotto.domain.WinningLotto
 import lotto.domain.WinningResult
 import lotto.view.InputView
 import lotto.view.ResultView
