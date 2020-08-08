@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.Lotto.Companion.LOTTO_NUMBERS_SIZE
+import lotto.domain.LottoNumber.Companion.DEFAULT_RANGE
 
 class LottoShop(private val payment: Payment) {
     private val quantity = payment.affordableQuantity()
@@ -11,7 +12,6 @@ class LottoShop(private val payment: Payment) {
 
     companion object LottoMachine {
         const val LOTTO_PRICE = 1_000
-        private val DEFAULT_RANGE = 1..45
 
         private fun provideTicket(): Lotto {
             return Lotto(makeAutoNumbers())
