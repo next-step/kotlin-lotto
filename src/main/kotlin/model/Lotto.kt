@@ -1,3 +1,3 @@
 package model
 
-class Lotto(override val lotto: List<LottoNumber>) : BasicLotto
+class Lotto(override val number: List<LottoNumber>) : BasicLotto

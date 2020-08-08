@@ -1,5 +1,5 @@
 package model
 
 interface BasicLotto {
-    val lotto: List<LottoNumber>
+    val number: List<LottoNumber>
 }

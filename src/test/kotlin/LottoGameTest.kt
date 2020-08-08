@@ -1,3 +1,4 @@
+import model.Lotto
 import model.LottoNumber
 import model.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
@@ -31,6 +32,10 @@ class LottoGameTest {
     @Test
     @DisplayName("로또와 당첨 번호 사이의 matchCount를 알 수 있다")
     fun `getMatchCount`() {
+        val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        val winningLotto = WinningLotto(lottoNumber, 7)
+        val lotto = Lotto(listOf(4, 5, 6, 7, 8, 9).map { LottoNumber(it) })
+        assertThat(winningLotto.matchCount(lotto)).isEqualTo(3)
     }
 
     @Test
