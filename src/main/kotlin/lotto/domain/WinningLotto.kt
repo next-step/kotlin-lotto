@@ -14,6 +14,6 @@ class WinningLotto(correctLotto: Lotto, number: Number) {
     fun match(userLotto: Lotto): PrizeMoney {
         val countMatch = userLotto.getCountMatch(lotto.numbers)
         val isBonus = userLotto.isCorrect(bonusBall)
-        return getRank(countMatch, isBonus)
+        return PrizeMoney.getRank(countMatch, isBonus)
     }
 }

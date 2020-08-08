@@ -10,12 +10,14 @@ enum class PrizeMoney(val money: Int, private val countMatch: Int) {
 
     fun totalMoney(number: Int): Int = money * number
 
-    fun isIt(countMatch: Int, isBonus: Boolean): Boolean {
+    private fun isIt(countMatch: Int, isBonus: Boolean): Boolean {
         if (this == SECOND && countMatch == 5 && !isBonus) {
             return false
         }
         return this.countMatch == countMatch
     }
-}
 
-fun getRank(countMatch: Int, isBonus: Boolean): PrizeMoney = PrizeMoney.values().find { it.isIt(countMatch, isBonus) } ?:  PrizeMoney.MISS
+    companion object {
+        fun getRank(countMatch: Int, isBonus: Boolean): PrizeMoney = values().find { it.isIt(countMatch, isBonus) } ?:  MISS
+    }
+}
