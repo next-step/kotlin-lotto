@@ -1,37 +1,37 @@
 package lotto.domain
 
-import lotto.LottoUtils.bonusNumber
-import lotto.LottoUtils.luckyNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottosTest {
-    private val lottoNumbers1 = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
-    private val lottoNumbers2 = LottoNumbers(listOf(1, 2, 3, 20, 30, 40))
-
+    private lateinit var lotto: Lotto
+    private lateinit var winningLotto: WinningLotto
     private lateinit var lottos: Lottos
-    private val shouldBeResult = listOf(
-        Pair(6, false),
-        Pair(3, true)
-    )
 
     @BeforeEach
     fun `set up`() {
-        luckyNumbers = LuckyNumbers(listOf(1, 2, 3, 4, 5, 6))
-        bonusNumber = BonusNumber(20)
-        lottos = Lottos(
+        lotto = Lotto(
             listOf(
-                Lotto(lottoNumbers1),
-                Lotto(lottoNumbers2)
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6)
             )
         )
+        winningLotto = WinningLotto(lotto, LottoNumber(45))
+        lottos = Lottos(listOf(lotto))
     }
 
-    @DisplayName("toString()을 하면, 모든 로또의 번호를 반환한다")
+    @DisplayName("당첨번호와의 일치 개수, 보너스 번호와의 일치 여부를 계산하여, 각 로또의 등수를 리스트로 반환하는 기능이 있다")
     @Test
-    fun `matched results`() {
-        assertThat(lottos.matchResults(luckyNumbers, bonusNumber)).isEqualTo(shouldBeResult)
+    fun `rank matched`() {
+        // when
+        val ranks = lottos.match(winningLotto)
+
+        assertThat(ranks[0]).isEqualTo(Rank.FIRST)
     }
 }

@@ -4,9 +4,11 @@ import lotto.domain.Lottos
 import lotto.domain.Rank
 import java.math.BigDecimal
 
+const val TEXT_TRY_AGAIN = "\n다시 시작 버튼을 눌러주세요.\n구입금액은 1000원 이상이어야 합니다."
+
 object ResultView {
 
-    fun showPurchasedQuantity(amount: Int) {
+    fun showQuantityPurchased(amount: Int) {
         println("${amount}개를 구매했습니다.")
     }
 
@@ -14,7 +16,7 @@ object ResultView {
         println(lottos)
     }
 
-    fun showResults(result: Map<Rank, Int>) {
+    fun showResult(result: Map<Rank, Int>) {
         println("\n당첨 통계\n---------")
         printResult(result)
     }
@@ -32,9 +34,9 @@ object ResultView {
     private fun printResult(result: Map<Rank, Int>) {
         result.forEach { (key, value) ->
             if (key != Rank.SECOND) {
-                println("${key.condition}개 일치 (${key.prizeMoney}원)- ${value}개")
+                println("${key.matchCount}개 일치 (${key.prizeMoney}원)- ${value}개")
             } else {
-                println("${key.condition}개 일치, 보너스 볼 일치(${key.prizeMoney}원)- ${value}개")
+                println("${key.matchCount}개 일치, 보너스 볼 일치(${key.prizeMoney}원)- ${value}개")
             }
         }
     }

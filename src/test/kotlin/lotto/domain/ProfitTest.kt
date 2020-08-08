@@ -12,6 +12,6 @@ class ProfitTest {
     @DisplayName("당첨금이 구입금액의 절반일 때, 수익률을 0.50로 반환한다")
     @Test
     fun `profit ratio`() {
-        Assertions.assertThat(profit.getProfitRatio(payment)).isEqualTo(BigDecimal(0.50).setScale(2))
+        Assertions.assertThat(profit.calculateProfitRatio(payment)).isEqualTo(BigDecimal(0.50).setScale(2))
     }
 }

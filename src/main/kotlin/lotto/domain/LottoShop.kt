@@ -1,13 +1,25 @@
 package lotto.domain
 
-import lotto.LOTTO_PRICE
-import lotto.LottoUtils.provideNumbers
+import lotto.domain.Lotto.Companion.LOTTO_NUMBERS_SIZE
 
-object LottoShop {
-    fun sellLottos(payment: Payment): List<Lotto> {
-        val amount = quantitySold(payment)
-        return (1..amount).map { Lotto(provideNumbers()) }
+class LottoShop(private val payment: Payment) {
+    private val quantity = payment.affordableQuantity()
+
+    fun sellTickets(): List<Lotto> {
+        return (1..quantity).map { provideTicket() }
     }
 
-    fun quantitySold(payment: Payment): Int = payment.money / LOTTO_PRICE
+    companion object LottoMachine {
+        const val LOTTO_PRICE = 1_000
+        private val DEFAULT_RANGE = 1..45
+
+        private fun provideTicket(): Lotto {
+            return Lotto(makeAutoNumbers())
+        }
+
+        private fun makeAutoNumbers(): List<LottoNumber> {
+            val numbers = DEFAULT_RANGE.shuffled().take(LOTTO_NUMBERS_SIZE).sorted()
+            return numbers.map { LottoNumber.of(it) }
+        }
+    }
 }

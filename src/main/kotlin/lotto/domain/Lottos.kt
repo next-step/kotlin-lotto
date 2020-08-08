@@ -2,14 +2,15 @@ package lotto.domain
 
 class Lottos(private val lottos: List<Lotto>) {
 
-    fun matchResults(luckyNumbers: LuckyNumbers, bonusNumber: BonusNumber): List<Pair<Int, Boolean>> {
-        return lottos.map { lotto ->
-            lotto.sumOfMatchUp(luckyNumbers) to
-                lotto.hasBonusNumber(bonusNumber)
+    fun match(winningLotto: WinningLotto): List<Rank> {
+        return lottos.map {
+            val matchCount = it.countOfMatch(winningLotto)
+            val matchBonus = it.contains(winningLotto.bonusNumber)
+            Rank.of(matchCount, matchBonus)
         }
     }
 
     override fun toString(): String {
-        return lottos.joinToString("\r\n")
+        return lottos.joinToString("\n")
     }
 }
