@@ -1,12 +1,16 @@
 package lotto.domain
 
-data class Lotto(val numbers: List<Int>) {
+data class Lotto(private val lottoNumbers: LottoNumbers) {
 
-    fun getMatchCount(luckyNumbers: List<Int>): Int {
-        return luckyNumbers.filter { numbers.contains(it) }.size
+    fun sumOfMatchUp(luckyNumbers: LuckyNumbers): Int {
+        return luckyNumbers.getMatchedCount(lottoNumbers)
+    }
+
+    fun hasBonusNumber(bonusNumber: BonusNumber): Boolean {
+        return lottoNumbers.isMatchedUp(bonusNumber.bonusNumber)
     }
 
     override fun toString(): String {
-        return "$numbers"
+        return "$lottoNumbers"
     }
 }
