@@ -6,32 +6,26 @@ import lotto.domain.Payment
 import lotto.domain.Profit
 import lotto.domain.WinningLotto
 import lotto.domain.WinningResult
-import lotto.view.ResultView.showQuantityPurchased
-import lotto.view.ResultView.showLottosDetail
-import lotto.view.ResultView.showResult
-import lotto.view.InputView.getWinningNumber
-import lotto.view.InputView.readBonusNumber
-import lotto.view.InputView.readPayment
-import lotto.view.InputView.readNumbers
-import lotto.view.ResultView.showProfitRatio
+import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
 
-    val payment = Payment(readPayment())
-    showQuantityPurchased(payment.affordableQuantity())
+    val payment = Payment(InputView.readPayment())
+    ResultView.showQuantityPurchased(payment.affordableQuantity())
 
     val lottoGame = LottoGame(payment)
-    showLottosDetail(lottoGame.lottos)
+    ResultView.showLottosDetail(lottoGame.lottos)
 
-    val winningNumbers = getWinningNumber(readNumbers())
-    val bonus = LottoNumber(readBonusNumber())
+    val winningNumbers = InputView.getWinningNumber(InputView.readNumbers())
+    val bonus = LottoNumber(InputView.readBonusNumber())
     lottoGame.winningLotto = WinningLotto(winningNumbers, bonus)
 
     val ranks = lottoGame.startMatch()
     val result = WinningResult.resultOfRanks(ranks)
-    showResult(result)
+    ResultView.showResult(result)
 
     val totalEarnings = Profit(WinningResult.sumOfPrizeMoney())
     val ratio = totalEarnings.calculateProfitRatio(payment)
-    showProfitRatio(ratio)
+    ResultView.showProfitRatio(ratio)
 }
