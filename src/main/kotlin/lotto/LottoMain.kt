@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.model.LottoChecker
+import lotto.model.LottoPaper
 import lotto.model.WinnerLotto
 import lotto.model.getAutoLotto
 import lotto.view.InputView
@@ -12,7 +13,7 @@ fun main() {
 
     val manualLottos = InputView.getManualLotto(manualLottoCount)
     val autoLottos = getAutoLotto(money.spend(manualLottoCount))
-    val lottoPaper = manualLottos.add(autoLottos)
+    val lottoPaper = LottoPaper(manualLottos.lottoInPaper).add(autoLottos.lottoInPaper)
 
     ResultView.printLottoCount(manualLottos, autoLottos)
     ResultView.printLottos(lottoPaper)

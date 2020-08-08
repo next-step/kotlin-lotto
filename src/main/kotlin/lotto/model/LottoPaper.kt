@@ -13,8 +13,8 @@ data class LottoPaper(private val lottos: List<Lotto>) {
         return lottoInPaper.size
     }
 
-    fun add(newLottos: LottoPaper): LottoPaper {
-        this.lottoInPaper.addAll(newLottos.lottos)
+    fun add(addedLottos: List<Lotto>): LottoPaper {
+        this.lottoInPaper.addAll(addedLottos)
         return this
     }
 
