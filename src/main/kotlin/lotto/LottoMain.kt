@@ -2,8 +2,6 @@ package lotto
 
 import lotto.domain.LottoGame
 import lotto.domain.LottoNumber
-import lotto.domain.LottoShop
-import lotto.domain.Lottos
 import lotto.domain.Payment
 import lotto.domain.Profit
 import lotto.domain.WinningLotto
@@ -21,9 +19,8 @@ fun main() {
 
     val winningNumbers = InputView.getWinningNumber(InputView.readNumbers())
     val bonus = LottoNumber(InputView.readBonusNumber())
-    val winningLotto = WinningLotto(winningNumbers, bonus)
 
-    val ranks = lottoGame.startMatch(winningLotto)
+    val ranks = lottoGame.startMatch(winningNumbers, bonus)
     val result = WinningResult.resultOfRanks(ranks)
     ResultView.showResult(result)
 

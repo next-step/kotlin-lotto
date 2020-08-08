@@ -5,7 +5,8 @@ class LottoGame(private val payment: Payment) {
     val lottos: Lottos
         get() = _lottos
 
-    fun startMatch(winningLotto: WinningLotto): List<Rank> {
+    fun startMatch(winningNumbers: Lotto, bonusNumber : LottoNumber): List<Rank> {
+        val winningLotto = WinningLotto(winningNumbers, bonusNumber)
         return lottos.match(winningLotto)
     }
 }
