@@ -15,7 +15,7 @@ class Number {
         this.value = number
     }
 
-    fun plus(number: Number): Number {
+    operator fun plus(number: Number): Number {
         return Number(number.value + this.value)
     }
 
@@ -36,5 +36,9 @@ class Number {
 
     override fun hashCode(): Int {
         return value
+    }
+
+    companion object {
+        val ZERO = Number(0)
     }
 }
