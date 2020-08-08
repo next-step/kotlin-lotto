@@ -1,11 +1,9 @@
 package stringcalculatortest
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -54,15 +52,15 @@ class StringAddCalculatorTest {
     fun customDelimiter(text: String) {
         assertThat(calculator.add(text)).isSameAs(6)
     }
-    /*
+/*
     // 음수 테스트는 결국 실현 못했습니다.
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @Test
     fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy(() -> calculator.add("-1"));
+            .isThrownBy(() -> calculator.add("-1"))
     }
 
 
-     */
+ */
 }
