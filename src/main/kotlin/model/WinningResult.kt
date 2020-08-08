@@ -13,4 +13,8 @@ class WinningResult {
     fun sum(list: List<LottoStat>): Int {
         return list.sumBy { it.prizeMoney }
     }
+
+    fun earningRate(list: List<LottoStat>, money: Int): Double {
+        return (sum(list) / money).toDouble()
+    }
 }

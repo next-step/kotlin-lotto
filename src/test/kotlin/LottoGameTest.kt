@@ -76,13 +76,7 @@ class LottoGameTest {
     @Test
     @DisplayName("로또 숫자와 당첨 번호를 가지고 (같은 숫자의 수, 발생횟수, 당첨금액) 목록 생성된다")
     fun `getPrizeList`() {
-        var list = mutableListOf<Lotto>()
-        repeat(10) {
-            val lottoNumberList = IntRange(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER).shuffled().take(Lotto.SIZE).map { LottoNumber.from(it) }
-            val lotto = Lotto(lottoNumberList)
-            list.add(lotto)
-        }
-
+        var list = lottoList()
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }, 7)
         val winningResult = WinningResult()
         val winningStatList = winningResult.of(list, winningLotto)
@@ -93,13 +87,7 @@ class LottoGameTest {
     @Test
     @DisplayName("당첨 금액을 합산할 수 있다")
     fun `sumPrizeMoney`() {
-        var list = mutableListOf<Lotto>()
-        repeat(10) {
-            val lottoNumberList = IntRange(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER).shuffled().take(Lotto.SIZE).map { LottoNumber.from(it) }
-            val lotto = Lotto(lottoNumberList)
-            list.add(lotto)
-        }
-
+        var list = lottoList()
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }, 7)
         val winningResult = WinningResult()
         val winningStatList = winningResult.of(list, winningLotto)
@@ -109,5 +97,20 @@ class LottoGameTest {
     @Test
     @DisplayName("수익률을 계산 할 수 있다")
     fun `getEarningRate`() {
+        var list = lottoList()
+        val winningLotto = WinningLotto(list[0].number, 7)
+        val winningResult = WinningResult()
+        val winningStatList = winningResult.of(list, winningLotto)
+        val result = winningResult.earningRate(winningStatList, 14000)
+        assertThat(result).isGreaterThanOrEqualTo(0.0)
+    }
+
+    private fun lottoList(): List<Lotto> {
+        var list = mutableListOf<Lotto>()
+        repeat(10) {
+            val lotto = Lotto.make()
+            list.add(lotto)
+        }
+        return list.toList()
     }
 }
