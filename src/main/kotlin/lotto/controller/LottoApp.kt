@@ -12,7 +12,8 @@ fun main() {
     ResultView.printPurchasedLottoNumbers(buyer.purchasedLottos)
 
     val (winningLotto, bonusBall) =
-        InputView.requestLottoNumberByType(InputView.LottoNumberType.WINNING) to InputView.requestByMode(InputView.Mode.BONUS_BALL)
+        InputView.requestLottoNumberByType(InputView.LottoNumberType.WINNING).first() to
+            InputView.requestByMode(InputView.Mode.BONUS_BALL)
 
     val lottoResults = store.drawLottoNumber(winningLotto, bonusBall)
     ResultView.printWinnerStatistics(lottoResults)

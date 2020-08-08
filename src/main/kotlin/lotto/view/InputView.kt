@@ -16,11 +16,14 @@ object InputView {
         return readLine()?.toInt() ?: 0
     }
 
-    fun requestLottoNumberByType(type: LottoNumberType): Lotto {
+    fun requestLottoNumberByType(type: LottoNumberType, repeatCount: Int = 1): List<Lotto> {
         println(type.message)
-        val lottoNumber =
-            readLine()?.split(",")?.map { it.toIntOrNull() ?: 0 }?.toSet() ?: emptySet()
-        return Lotto(lottoNumber)
+        return mutableListOf<Lotto>().apply {
+            repeat(repeatCount) {
+                val lottoNumber = readLine()?.split(",")?.map { it.toIntOrNull() ?: 0 }?.toSet() ?: emptySet()
+                this.add(Lotto(lottoNumber))
+            }
+        }
     }
 
     enum class Mode(val message: String) {
