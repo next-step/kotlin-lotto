@@ -6,7 +6,7 @@ class LottoGame {
         val list = mutableListOf<Lotto>()
 
         repeat(money / LOTTO_PRICE) {
-            val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+            val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }
             val lotto = Lotto(lottoNumber)
             list.add(lotto)
         }

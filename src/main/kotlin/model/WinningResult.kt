@@ -1,0 +1,12 @@
+package model
+
+class WinningResult {
+    fun of(lottoList: List<Lotto>, winningLotto: WinningLotto): List<LottoStat> {
+        val lottoStatMap = mutableMapOf<Rank, Int>()
+        lottoList.forEach {
+            val rank = winningLotto.rank(it)
+            lottoStatMap[rank] = (lottoStatMap[rank] ?: 0) + 1
+        }
+        return lottoStatMap.map { LottoStat(it.key, it.value) }.toList()
+    }
+}
