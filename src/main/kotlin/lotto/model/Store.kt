@@ -2,11 +2,10 @@ package lotto.model
 
 import kotlin.math.floor
 
-class Store(private val buyer: Buyer) {
+object Store {
 
-    fun drawLottoNumber(winningLotto: Lotto, bonusBall: Int): List<Prize> =
-        listOf(buyer.manualLotto, buyer.autoLotto).flatten()
-            .map { it.convertPrize(winningLotto, bonusBall) }
+    fun drawLottoNumber(buyerLotto: List<Lotto>, winningLotto: Lotto, bonusBall: Int): List<Prize> =
+        buyerLotto.map { it.convertPrize(winningLotto, bonusBall) }
 
     fun getRateOfReturn(price: Int, prizes: List<Prize>): Double {
         val totalPrize = prizes
