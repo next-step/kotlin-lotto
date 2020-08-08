@@ -20,7 +20,7 @@ fun main() {
         buyLotto()
     }
     val store = Store(buyer)
-    ResultView.printPurchasedLottoNumbers(buyer.lotto)
+    ResultView.printPurchasedLottoNumbers(buyer.manualLotto, buyer.autoLotto)
 
     val (winningLotto, bonusBall) =
         InputView.requestLottoNumberByType(InputView.LottoNumberType.WINNING).first() to

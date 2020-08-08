@@ -5,9 +5,10 @@ import lotto.model.Prize
 
 object ResultView {
 
-    fun printPurchasedLottoNumbers(purchasedLotto: List<Lotto>) {
-        println("${purchasedLotto.size}개를 구매했습니다.")
-        purchasedLotto.map { println(it.numbers) }
+    fun printPurchasedLottoNumbers(manualLotto: List<Lotto>, autoLotto: List<Lotto>) {
+        println("수동으로 ${manualLotto.size}장, 자동으로 ${autoLotto.size}장을 구매했습니다.")
+        manualLotto.map { println(it.numbers) }
+        autoLotto.map { println(it.numbers) }
         println()
     }
 
