@@ -15,6 +15,7 @@ data class Lotto private constructor(private val numbers: Set<LottoNumber>) {
 
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6
+        private const val LOTTO_DELIMITER = ","
 
         fun of(vararg numbers: Int): Lotto {
             val lottoNumbers = numbers.map { LottoNumber.of(it) }.toSet()
@@ -22,7 +23,7 @@ data class Lotto private constructor(private val numbers: Set<LottoNumber>) {
         }
 
         fun ofComma(value: String): Lotto {
-            val numbers = value.split(",").map { it.trim().toInt() }
+            val numbers = value.split(LOTTO_DELIMITER).map { it.trim().toInt() }
             return Lotto(numbers.map { LottoNumber.of(it) }.toSet())
         }
     }
