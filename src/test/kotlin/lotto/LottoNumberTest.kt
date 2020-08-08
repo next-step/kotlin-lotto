@@ -19,6 +19,10 @@ class LottoNumberTest {
             LottoNumber("+")
         }
     }
+
+    @Test
+    fun `로또 생성 범위에 속하지 않은 값을 입력한 경우`() {
+    }
 }
 
 class LottoNumber(val number: Int) {
