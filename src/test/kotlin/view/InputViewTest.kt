@@ -1,12 +1,26 @@
 package view
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class InputViewTest {
     @Test
     @DisplayName("구입금액을 입력 받는다")
     fun `inputMoney`() {
+        val inputView = InputView()
+        val money = inputView.getMoney { "14000" }
+        assertThat(money).isNotNull
+    }
+
+    @Test
+    @DisplayName("구입금액이 숫자가 아니면 exception 을 반환한다")
+    fun `inputMoneyNotValid`() {
+        val inputView = InputView()
+        assertThrows<IllegalArgumentException> {
+            inputView.getMoney { "abcd" }
+        }
     }
 
     @Test
