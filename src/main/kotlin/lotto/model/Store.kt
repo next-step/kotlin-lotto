@@ -5,7 +5,8 @@ import kotlin.math.floor
 class Store(private val buyer: Buyer) {
 
     fun drawLottoNumber(winningLotto: Lotto, bonusBall: Int): List<Prize> =
-        buyer.lotto.map { it.convertPrize(winningLotto, bonusBall) }
+        listOf(buyer.manualLotto, buyer.autoLotto).flatten()
+            .map { it.convertPrize(winningLotto, bonusBall) }
 
     fun getRateOfReturn(price: Int, prizes: List<Prize>): Double {
         val totalPrize = prizes

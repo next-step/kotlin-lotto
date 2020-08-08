@@ -8,9 +8,6 @@ class Buyer(private val price: Int) {
     private val _manualLotto = mutableListOf<Lotto>()
     val manualLotto: List<Lotto> get() = _manualLotto
 
-    private val _lotto = mutableListOf<Lotto>()
-    val lotto: List<Lotto> get() = _lotto
-
     init {
         require(price >= Lotto.PRICE) {
             "로또 구매 금액이 부족합니다."
@@ -25,12 +22,10 @@ class Buyer(private val price: Int) {
 
     fun markLotto(markedLotto: Lotto) {
         _autoLotto.add(markedLotto)
-        _lotto.add(markedLotto)
     }
 
     fun setupManualLotto(manualLotto: List<Lotto>) {
         _manualLotto.addAll(manualLotto)
-        _lotto.addAll(_manualLotto)
     }
 
     private fun generateAutoLotto(): Lotto =
