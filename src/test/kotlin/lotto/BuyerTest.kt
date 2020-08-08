@@ -9,7 +9,7 @@ class BuyerTest {
     fun `로또 구매`() {
         val buyer = Buyer(14_000).apply { buyLotto() }
 
-        Assertions.assertThat(buyer.purchasedLottos.size).isEqualTo(14)
+        Assertions.assertThat(buyer.lotto.size).isEqualTo(14)
     }
 
     @Test
