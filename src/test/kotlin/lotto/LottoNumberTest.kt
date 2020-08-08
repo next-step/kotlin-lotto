@@ -1,6 +1,7 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 
 class LottoNumberTest {
@@ -14,10 +15,24 @@ class LottoNumberTest {
 
     @Test
     fun `숫자 타입이 아닌 임의의 값을 전달하는 경우`() {
+        assertThatIllegalArgumentException().isThrownBy {
+            LottoNumber("+")
+        }
     }
 }
 
 class LottoNumber(val number: Int) {
 
-    constructor(stringOfNumber: String) : this(stringOfNumber.toInt())
+    constructor(stringOfNumber: String) : this(convertTo(stringOfNumber))
+
+    companion object {
+        private val IS_NUMBER_REGEX = "(^[0-9]*\$)".toRegex()
+
+        fun convertTo(stringOfNumber: String): Int {
+            require(stringOfNumber.matches(IS_NUMBER_REGEX)) {
+                "숫자 이외의 값이 입력되었습니다."
+            }
+            return stringOfNumber.toInt()
+        }
+    }
 }
