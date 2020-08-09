@@ -34,7 +34,7 @@ internal class LottoTicketExchangerTest {
     @Test
     fun exchangeFourthLotto() {
         val paymentResult = PaymentResult(2300, listOf(fourthLotto, secondLotto), 300)
-        assertThat(LottoPrizeExchanger.exchange(paymentResult, winningLotto)).isEqualTo(
+        assertThat(LottoExchanger.exchange(paymentResult, winningLotto)).isEqualTo(
             ExchangeResult(paymentResult, hashMapOf(Rank.SECOND to 1, Rank.FOURTH to 1))
         )
     }

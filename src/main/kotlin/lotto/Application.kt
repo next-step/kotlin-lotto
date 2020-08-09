@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLottoTicket
 import lotto.domain.generator.ManualLottoGenerator
-import lotto.domain.selling.LottoPrizeExchanger
+import lotto.domain.selling.LottoExchanger
 import lotto.domain.selling.Payment
 import lotto.domain.selling.PaymentResult
 import lotto.domain.selling.Seller
@@ -28,7 +28,7 @@ object Application {
             winningLottoTicket = processWinningLotto(lottoTicket)
         } while (winningLottoTicket == null)
 
-        val exchangeResult = LottoPrizeExchanger.exchange(paymentResult, winningLottoTicket)
+        val exchangeResult = LottoExchanger.exchange(paymentResult, winningLottoTicket)
         ResultView.printExchangeResult(exchangeResult)
     }
 

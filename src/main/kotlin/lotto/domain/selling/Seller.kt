@@ -13,7 +13,6 @@ class Seller {
         return input != null && input >= LOTTO_PRICE
     }
 
-    @Throws(IllegalArgumentException::class)
     private fun issueLottoTickets(payment: Payment, numbers: String = ""): List<LottoTicket> {
         val count = calculateLottoCount(payment)
         val generator = LottoType.generatorOf(payment.lottoType, numbers)

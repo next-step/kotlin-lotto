@@ -2,7 +2,7 @@ package lotto.domain.selling
 
 import lotto.domain.WinningLottoTicket
 
-object LottoPrizeExchanger {
+object LottoExchanger {
 
     fun exchange(paymentResult: PaymentResult, winningLottoTicket: WinningLottoTicket): ExchangeResult {
         val exchangeDetails = paymentResult.lottoTickets.groupingBy {
