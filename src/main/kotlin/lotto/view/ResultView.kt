@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.model.Lotto
+import lotto.model.lotto.Lotto
 import lotto.model.Prize
 import lotto.model.Winners
 

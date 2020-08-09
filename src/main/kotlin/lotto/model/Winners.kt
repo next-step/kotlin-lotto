@@ -1,5 +1,7 @@
 package lotto.model
 
+import lotto.model.lotto.Lotto
+
 class Winners(
     list: List<Prize>
 ) {

@@ -1,6 +1,6 @@
 package lotto.model
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -13,8 +13,8 @@ class PrizeTest {
     fun checkPrizeMoneyCase6() {
         val input = 6
         val prize = Prize.getPrize(input)
-        Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.ONE.prizeMoney)
-        Assertions.assertThat(prize).isEqualTo(Prize.ONE)
+        assertThat(prize.prizeMoney).isEqualTo(Prize.ONE.prizeMoney)
+        assertThat(prize).isEqualTo(Prize.ONE)
     }
 
     @DisplayName(value = "matchingCount= 2를 제외한 숫자는, BonusBall matching과는 영향이 없어야한다.")
@@ -23,8 +23,8 @@ class PrizeTest {
     fun checkPrizeMoneyCasesAndBonusBallMatching(input: Int) {
         val bonusBall = true
         val prize = Prize.getPrize(input, bonusBall)
-        Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.getPrize(input).prizeMoney)
-        Assertions.assertThat(prize).isEqualTo(Prize.getPrize(input))
+        assertThat(prize.prizeMoney).isEqualTo(Prize.getPrize(input).prizeMoney)
+        assertThat(prize).isEqualTo(Prize.getPrize(input))
     }
 
     @DisplayName(value = "matchingCount= 5, BonusBall matching이 안되었을 경우, 상금은 2등 보너스 상금과 같아야한다.")
@@ -33,8 +33,8 @@ class PrizeTest {
         val input = 5
         val bonusBall = false
         val prize = Prize.getPrize(input, bonusBall)
-        Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.TWO.prizeMoney)
-        Assertions.assertThat(prize).isEqualTo(Prize.TWO)
+        assertThat(prize.prizeMoney).isEqualTo(Prize.TWO.prizeMoney)
+        assertThat(prize).isEqualTo(Prize.TWO)
     }
 
     @DisplayName(value = "matchingCount= 5, BonusBall matching이 되었을 경우, 상금은 2등 보너스 상금과 같아야한다.")
@@ -43,8 +43,8 @@ class PrizeTest {
         val input = 5
         val bonusBall = true
         val prize = Prize.getPrize(input, bonusBall)
-        Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.TWO_BONUS.prizeMoney)
-        Assertions.assertThat(prize).isEqualTo(Prize.TWO_BONUS)
+        assertThat(prize.prizeMoney).isEqualTo(Prize.TWO_BONUS.prizeMoney)
+        assertThat(prize).isEqualTo(Prize.TWO_BONUS)
     }
 
     @DisplayName(value = "matchingCount가 [3,4,5]일 경우, 상금은 4등 상금보다 크거나 같아야 한다,")
@@ -52,8 +52,8 @@ class PrizeTest {
     @ValueSource(ints = [3, 4, 5])
     fun checkPrizeMoneyCase345(input: Int) {
         val prize = Prize.getPrize(input)
-        Assertions.assertThat(prize.prizeMoney).isGreaterThan(0)
-        Assertions.assertThat(prize.prizeMoney).isGreaterThanOrEqualTo(Prize.FOUR.prizeMoney)
+        assertThat(prize.prizeMoney).isGreaterThan(0)
+        assertThat(prize.prizeMoney).isGreaterThanOrEqualTo(Prize.FOUR.prizeMoney)
     }
 
     @DisplayName(value = "matchingCount가 2이하 또는 음수일 경우, 상금은 0원 ")
@@ -61,8 +61,8 @@ class PrizeTest {
     @ValueSource(ints = [2, 1, 0, -1])
     fun checkPrizeMoney(input: Int) {
         val prize = Prize.getPrize(input)
-        Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.ZERO.prizeMoney)
-        Assertions.assertThat(prize).isEqualTo(Prize.ZERO)
+        assertThat(prize.prizeMoney).isEqualTo(Prize.ZERO.prizeMoney)
+        assertThat(prize).isEqualTo(Prize.ZERO)
     }
 
     @DisplayName(value = "matchingCount가 2이하 또는 음수일때는, 보너스 볼이 같아도, 상금은 0원 ")
@@ -71,7 +71,7 @@ class PrizeTest {
     fun checkPrizeMoneyZeroBonusBall(input: Int) {
         val bonusBall = true
         val prize = Prize.getPrize(input, bonusBall)
-        Assertions.assertThat(prize.prizeMoney).isEqualTo(Prize.ZERO.prizeMoney)
-        Assertions.assertThat(prize).isEqualTo(Prize.ZERO)
+        assertThat(prize.prizeMoney).isEqualTo(Prize.ZERO.prizeMoney)
+        assertThat(prize).isEqualTo(Prize.ZERO)
     }
 }

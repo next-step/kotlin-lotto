@@ -1,5 +1,9 @@
 package lotto.model
 
+import lotto.model.lotto.Lotto
+import lotto.model.lotto.LottoNumber
+import lotto.model.lotto.Numbers
+
 class LottoManager(money: Int) {
     private val _lottos: List<Lotto>
     val lottos: List<Lotto>
@@ -11,7 +15,7 @@ class LottoManager(money: Int) {
         }
     }
 
-    fun checkNumbers(winningNumbers: Numbers, bonusNumber: Int): Winners {
+    fun checkNumbers(winningNumbers: Numbers, bonusNumber: LottoNumber): Winners {
         val winners = lottos.map { it.checkNumbers(winningNumbers, bonusNumber) }
         return Winners(winners)
     }
