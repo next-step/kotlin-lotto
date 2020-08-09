@@ -2,8 +2,11 @@ package lotto.model
 
 class Buyer(private val price: Int) {
 
-    private val _purchasedLottos = mutableListOf<Lotto>()
-    val purchasedLottos: List<Lotto> get() = _purchasedLottos
+    private val _autoLotto = mutableListOf<Lotto>()
+    val autoLotto: List<Lotto> get() = _autoLotto
+
+    private val _manualLotto = mutableListOf<Lotto>()
+    val manualLotto: List<Lotto> get() = _manualLotto
 
     init {
         require(price >= Lotto.PRICE) {
@@ -12,15 +15,16 @@ class Buyer(private val price: Int) {
     }
 
     fun buyLotto() {
-        repeat(price / Lotto.PRICE) {
-            markLotto(generateAutoLotto())
+        repeat((price / Lotto.PRICE) - manualLotto.size) {
+            markLotto(Lotto.makeAuto())
         }
     }
 
     fun markLotto(markedLotto: Lotto) {
-        _purchasedLottos.add(markedLotto)
+        _autoLotto.add(markedLotto)
     }
 
-    private fun generateAutoLotto(): Lotto =
-        Lotto(Lotto.NUMBER_GENERATION_RANGE.shuffled().subList(0, 6).toSortedSet())
+    fun setupManualLotto(manualLotto: List<Lotto>) {
+        _manualLotto.addAll(manualLotto)
+    }
 }
