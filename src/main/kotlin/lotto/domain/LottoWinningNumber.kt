@@ -13,4 +13,8 @@ class LottoWinningNumber {
         }
         luckyLottoTicket = LottoTicket(numbers.map { LottoNumber(it) })
     }
+
+    fun getLottoResultsOf(lottoTickets: List<LottoTicket>): List<Rank> {
+        return lottoTickets.map { it.getMatchValueCount(luckyLottoTicket) }
+    }
 }

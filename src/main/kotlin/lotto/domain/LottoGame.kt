@@ -20,4 +20,12 @@ class LottoGame {
     }
 
     private fun getTicketCount(money: Int) = money / LOTTO_TICKET_PRICE
+
+    fun calculate(useMoney: Int, lottoResults: List<Rank>): Double {
+        return lottoResults.totalPrizeMoney() / useMoney.toDouble()
+    }
+
+    private fun List<Rank>.totalPrizeMoney(): Int {
+        return this.map { it.prizeMoney }.sum()
+    }
 }

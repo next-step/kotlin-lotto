@@ -24,6 +24,10 @@ class LottoTicket(var lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.map { it.number }.sorted()
     }
 
+    fun getMatchValueCount(winningLotto: LottoTicket): Rank {
+        return getLottoNumber().count { winningLotto.getLottoNumber().contains(it) }.let { Rank.of(it) }
+    }
+
     companion object {
         const val LOTTO_NUMBER_COUNT_PER_TICKET = 6
     }

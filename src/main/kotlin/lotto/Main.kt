@@ -19,4 +19,7 @@ fun main() {
     LottoWinningNumber.createLuckyTicket(inputLuckyNumber)
 
     // 로또 결과 및 분석
+    val results = LottoWinningNumber.getLottoResultsOf(lottoUserTickets)
+    OutputView.printLottoResults(results)
+    OutputView.printProfitRatio(lottoGame.calculate(inputMoney, results))
 }
