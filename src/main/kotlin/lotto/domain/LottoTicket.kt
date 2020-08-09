@@ -1,12 +1,18 @@
 package lotto.domain
 
-import lotto.domain.generator.AutoLottoGenerator
-import lotto.domain.generator.LottoGenerator
+data class LottoTicket(private val numbers: Set<LottoNumber>) {
 
-data class LottoTicket(private val generator: LottoGenerator = AutoLottoGenerator) {
-    private val numbers = generator.execute().sorted()
+    init {
+        require(hasValidCount(numbers)) { "$NUMBER_COUNT 개의 중복되지 않은 번호가 필요합니다." }
+    }
 
     override fun toString() = "[${numbers.joinToString()}]"
 
     fun getMatchCount(other: LottoTicket) = numbers.count { other.numbers.contains(it) }
+
+    companion object {
+        const val NUMBER_COUNT = 6
+
+        private fun hasValidCount(numbers: Set<LottoNumber>) = numbers.size == NUMBER_COUNT
+    }
 }
