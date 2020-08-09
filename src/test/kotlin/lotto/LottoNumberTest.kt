@@ -27,4 +27,11 @@ class LottoNumberTest {
             LottoNumber("46")
         }
     }
+
+    @Test
+    fun `범위 내의 번호를 전달하는 경우`() {
+        assertThatIllegalArgumentException().isThrownBy {
+            LottoNumber(1_000)
+        }
+    }
 }
