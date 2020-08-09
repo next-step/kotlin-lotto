@@ -18,7 +18,7 @@ fun printLottoResults(lottoResults: LottoResults) {
 
 private fun printLottoResult(result: LottoResult, size: Int) {
     if (result == LottoResult.LOSE) return
-    if (result == LottoResult.SECOND_BONUS) {
+    if (result == LottoResult.SECOND) {
         println("${result.matchCount}개 일치, 보너스 볼 일치(${result.prize}원)- ${size}개")
         return
     }

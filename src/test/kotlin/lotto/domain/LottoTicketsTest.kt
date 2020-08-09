@@ -22,7 +22,7 @@ internal class LottoTicketsTest {
         )
 
         // when
-        val actualLottoResults = lottoTickets.compare(luckyTicket, bonusNumber)
+        val actualLottoResults = lottoTickets.getLottoResultsWith(luckyTicket, bonusNumber)
 
         // then
         assertAll(

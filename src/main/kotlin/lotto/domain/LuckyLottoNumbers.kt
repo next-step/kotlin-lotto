@@ -14,6 +14,6 @@ class LuckyLottoNumbers(
     )
 
     fun compare(lottoTickets: LottoTickets): LottoResults {
-        return lottoTickets.compare(luckyTicket, bonusNumber)
+        return lottoTickets.getLottoResultsWith(luckyTicket, bonusNumber)
     }
 }

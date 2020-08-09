@@ -31,7 +31,7 @@ class LottoTicketTest {
         val lottoTicket2 = LottoTicket(1, 2, 3, 4, 5, 6)
 
         // when
-        val compareResult = lottoTicket1.compare(lottoTicket2, LottoNumber.of(7))
+        val compareResult = lottoTicket1.getLottoResultWith(lottoTicket2, LottoNumber.of(7))
 
         // then
         assertThat(compareResult).isEqualTo(LottoResult.FIRST)

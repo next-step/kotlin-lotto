@@ -7,8 +7,8 @@ class LottoTickets(
         return LottoTickets(this.tickets + other.tickets)
     }
 
-    fun compare(luckyTicket: LottoTicket, bonusNumber: LottoNumber): LottoResults {
-        return this.tickets.map { it.compare(luckyTicket, bonusNumber) }
+    fun getLottoResultsWith(luckyTicket: LottoTicket, bonusNumber: LottoNumber): LottoResults {
+        return this.tickets.map { it.getLottoResultWith(luckyTicket, bonusNumber) }
             .groupingBy { it }
             .eachCount()
             .let { LottoResults(it) }

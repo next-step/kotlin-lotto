@@ -24,12 +24,12 @@ class LottoResultsTest {
         // given
         val lottoResults = LottoResults(
             mapOf(
-                LottoResult.THIRD to 1,
-                LottoResult.FOURTH to 2,
+                LottoResult.FOURTH to 1,
+                LottoResult.FIFTH to 2,
                 LottoResult.LOSE to 5
             )
         )
-        val totalPrize = LottoMoney(LottoResult.THIRD.prize + LottoResult.FOURTH.prize * 2)
+        val totalPrize = LottoMoney(LottoResult.FOURTH.prize + LottoResult.FIFTH.prize * 2)
 
         // then
         assertThat(lottoResults.getTotalPrize()).isEqualTo(totalPrize)
