@@ -19,7 +19,7 @@ internal class ExchangeResultTest {
         )
         val exchangeResult = ExchangeResult(
             PaymentResult(1230, listOf(lottoTicket), 0),
-            hashMapOf(Prize.FOURTH to 1)
+            hashMapOf(Rank.FIFTH to 1)
         )
         assertThat(exchangeResult.rateOfReturn.toDouble()).isEqualTo(4.06)
     }
