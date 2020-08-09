@@ -9,7 +9,7 @@ object InputView {
     const val REQUEST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     const val REQUEST_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요."
 
-    fun requestByMode(mode: Mode): Int {
+    fun requestInputByMode(mode: Mode): Int {
         println(mode.message)
         return readLine()?.toInt() ?: 0
     }

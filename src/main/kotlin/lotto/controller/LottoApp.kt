@@ -8,7 +8,7 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val price = InputView.requestByMode(InputView.Mode.PRICE)
+    val price = InputView.requestInputByMode(InputView.Mode.PRICE)
     val buyer = Buyer(price).apply {
         setupManualLotto(getManualLotto())
         buyLotto()
@@ -21,7 +21,7 @@ fun main() {
 private fun showLottoResult(buyer: Buyer, price: Int) {
     val (winningLotto, bonusBall) =
         InputView.requestLottoNumberByType(InputView.LottoNumberType.WINNING).first() to
-            InputView.requestByMode(InputView.Mode.BONUS_BALL)
+            InputView.requestInputByMode(InputView.Mode.BONUS_BALL)
 
     val lottoResults =
         Store.drawLottoNumber(
@@ -36,7 +36,7 @@ private fun showLottoResult(buyer: Buyer, price: Int) {
 }
 
 private fun getManualLotto(): List<Lotto> {
-    InputView.requestByMode(InputView.Mode.MANUALLY_BUY_NUMBER).let { buyCount ->
+    InputView.requestInputByMode(InputView.Mode.MANUALLY_BUY_NUMBER).let { buyCount ->
         return if (buyCount > 0) {
             InputView.requestLottoNumberByType(
                 type = InputView.LottoNumberType.MANUAL,
