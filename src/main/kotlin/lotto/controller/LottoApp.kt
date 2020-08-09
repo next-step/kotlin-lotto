@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.Buyer
 import lotto.model.Lotto
+import lotto.model.LottoNumber
 import lotto.model.Store
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -25,8 +26,8 @@ private fun showLottoResult(buyer: Buyer, price: Int) {
     val lottoResults =
         Store.drawLottoNumber(
             buyerLotto = listOf(buyer.autoLotto, buyer.manualLotto).flatten(),
-            winningLotto = winningLotto,
-            bonusBall = bonusBall
+            winningLotto = Lotto.of(winningLotto),
+            bonusBall = LottoNumber(bonusBall)
         )
     ResultView.printWinnerStatistics(lottoResults)
 
@@ -35,9 +36,12 @@ private fun showLottoResult(buyer: Buyer, price: Int) {
 }
 
 private fun getManualLotto(): List<Lotto> {
-    InputView.requestByMode(InputView.Mode.MANUALLY_BUY_NUMBER).let {
-        return if (it > 0) {
-            InputView.requestLottoNumberByType(type = InputView.LottoNumberType.MANUAL, repeatCount = it)
+    InputView.requestByMode(InputView.Mode.MANUALLY_BUY_NUMBER).let { buyCount ->
+        return if (buyCount > 0) {
+            InputView.requestLottoNumberByType(
+                type = InputView.LottoNumberType.MANUAL,
+                repeatCount = buyCount
+            ).map { Lotto.of(it) }
         } else {
             emptyList()
         }
