@@ -4,7 +4,7 @@ import kotlin.math.floor
 
 object Store {
 
-    fun drawLottoNumber(buyerLotto: List<Lotto>, winningLotto: Lotto, bonusBall: Int): List<Prize> =
+    fun drawLottoNumber(buyerLotto: List<Lotto>, winningLotto: Lotto, bonusBall: LottoNumber): List<Prize> =
         buyerLotto.map { it.convertPrize(winningLotto, bonusBall) }
 
     fun getRateOfReturn(price: Int, prizes: List<Prize>): Double {
