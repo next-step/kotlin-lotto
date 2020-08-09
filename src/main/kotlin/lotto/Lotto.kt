@@ -1,7 +1,5 @@
 package lotto
 
-import kotlin.random.Random
-
 class Lotto {
     fun buytickets(pay: Int): Int {
         return pay / TICKETPRICE
@@ -10,27 +8,21 @@ class Lotto {
     companion object {
 
         const val TICKETPRICE = 1000
-        const val LOTTONUMBER = 6
     }
 
-    fun tickets(totaltickets: Int): Int {
-        var samplenumbers: MutableList<Int> = mutableListOf<Int>()
-        var sampletickets = mutableListOf(mutableListOf<Any>())
+    fun tickets(totaltickets: Int): MutableList<MutableList<Any>> {
+
+        val sampletickets = mutableListOf(mutableListOf<Any>())
         for (x in 0 until totaltickets) {
-            for (i in 0 until LOTTONUMBER) {
-                samplenumbers.add(Random.nextInt(1, 45))
-            }
-            sampletickets.add(samplenumbers.toMutableList())
-            samplenumbers.clear()
+            sampletickets.add((1..45).shuffled().take(6).sorted().toMutableList())
         }
         sampletickets.removeAt(0)
-        return sampletickets.size
+        return sampletickets
     }
 
-    fun match(userLotto: Lotto, winningLotto: WinningLotto): Int {
-        val matchCount = match(userLotto, winningLotto)
-
-        return rank(matchCount)
+    fun match(userLotto: Array<Int>, winningLotto: Array<Int>): Int {
+        val matchCount = userLotto.filter { number -> winningLotto.contains(number) }
+        return rank(matchCount.size)
     }
 
     private fun rank(matchCount: Int): Int {
@@ -44,5 +36,12 @@ class Lotto {
             return 6 - matchCount + 2
         }
         return 0
+    }
+}
+
+fun main() {
+    val lottoTickets = Lotto().tickets(14)
+    for (ticket in lottoTickets) {
+        println(ticket)
     }
 }

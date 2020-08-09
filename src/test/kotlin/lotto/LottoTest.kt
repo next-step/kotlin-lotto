@@ -13,13 +13,22 @@ class LottoTest {
 
     @Test
     @DisplayName("Ticket")
-    fun ticketstest() {
+    fun ticketsTest() {
         assertThat(Lotto().buytickets(14000)).isEqualTo(14)
     }
 
     @Test
     @DisplayName("ticket size check")
-    fun ticketsizecheck() {
-        assertThat(Lotto().tickets(14)).isEqualTo(14)
+    fun ticketSizeCheck() {
+        assertThat(Lotto().tickets(14).size).isEqualTo(14)
+    }
+
+    @Test
+    @DisplayName("check match")
+
+    fun testMatch() {
+        val userLotto = arrayOf(1, 2, 3, 4)
+        val winningLotto = arrayOf(1, 2, 3, 4)
+        assertThat(Lotto().match(userLotto, winningLotto)).isEqualTo(4)
     }
 }
