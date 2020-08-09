@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottoShopTest {
-    private val payment = Payment(5000)
-
     @DisplayName("주어진 금액만큼 구입한 로또 개수를 반환한다")
     @Test
     fun `purchase amount`() {
