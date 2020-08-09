@@ -4,13 +4,18 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.selling.ExchangeResult
 import lotto.domain.selling.PaymentResult
-import java.math.BigDecimal
+import lotto.domain.selling.Rank
 
 object ResultView {
     private const val PAYMENT_RESULT = "%s\n거스름돈: %d"
+
     private const val WINNING_STATISTICS_TITLE = "당첨 통계"
-    private const val WINNING_EXCHANGE_RESULT = "%d개 일치 (%d원) - %d개"
+    private const val WINNING_EXCHANGE_RESULT = "%d장 - %d개 일치 (%d원)"
+    private const val WINNING_EXCHANGE_RESULT_BONUS = "%d장 - %d개 일치, 보너스 볼 일치 (%d원)"
+    private const val WINNING_EXCHANGE_RESULT_MISS = "%d장 - 꽝 ㅠㅠ"
     private const val WINNING_STATISTICS = "총 수익률은 %.2f 입니다."
+
+    private const val INVALID_BONUS_NUMBER = "당첨 번호와 중복되지 않는 유효한 정수를 입력해주세요."
     private val INVALID_LOTTO_NUMBERS = "${LottoNumber.NUMBER_RANGE} 사이의 번호 " +
         "${LottoTicket.NUMBER_COUNT}개를 중복없이 입력해주세요."
 
@@ -18,15 +23,26 @@ object ResultView {
         println(INVALID_LOTTO_NUMBERS)
     }
 
+    fun printInvalidBonusNumber() {
+        println(INVALID_BONUS_NUMBER)
+    }
+
     fun printPaymentResult(result: PaymentResult) {
         println(PAYMENT_RESULT.format(result.lottoTickets.joinToString("\n"), result.change))
     }
 
-    fun printExchangeResult(exchangeResult: ExchangeResult, rateOfReturn: BigDecimal) {
+    fun printExchangeResult(exchangeResult: ExchangeResult) {
         println("$WINNING_STATISTICS_TITLE\n---------")
         for (detail in exchangeResult.details) {
-            println(WINNING_EXCHANGE_RESULT.format(detail.key.matchCount, detail.key.prizeMoney, detail.value))
+            val rank = detail.key
+            println(getResultFormat(rank).format(detail.value, rank.matchCount, rank.prizeMoney))
         }
-        println(WINNING_STATISTICS.format(rateOfReturn))
+        println(WINNING_STATISTICS.format(exchangeResult.rateOfReturn))
+    }
+
+    private fun getResultFormat(rank: Rank) = when (rank) {
+        Rank.MISS -> WINNING_EXCHANGE_RESULT_MISS
+        Rank.SECOND -> WINNING_EXCHANGE_RESULT_BONUS
+        else -> WINNING_EXCHANGE_RESULT
     }
 }

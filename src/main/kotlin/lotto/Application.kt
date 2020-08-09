@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.domain.WinningLottoTicket
 import lotto.domain.generator.ManualLottoGenerator
 import lotto.domain.selling.LottoPrizeExchanger
@@ -16,14 +17,19 @@ object Application {
     @JvmStatic
     fun main(args: Array<String>) {
         val paymentResult = inputUserPayment()
-        var winningLotto: WinningLottoTicket? = null
+        var lottoTicket: LottoTicket?
+        var winningLottoTicket: WinningLottoTicket?
 
-        while (winningLotto == null) {
-            winningLotto = inputWinningLotto()
-        }
+        do {
+            lottoTicket = inputWinningNumbers()
+        } while (lottoTicket == null)
 
-        val exchangeResult = LottoPrizeExchanger.exchange(paymentResult, winningLotto)
-        ResultView.printExchangeResult(exchangeResult, exchangeResult.rateOfReturn)
+        do {
+            winningLottoTicket = processWinningLotto(lottoTicket)
+        } while (winningLottoTicket == null)
+
+        val exchangeResult = LottoPrizeExchanger.exchange(paymentResult, winningLottoTicket)
+        ResultView.printExchangeResult(exchangeResult)
     }
 
     private fun inputUserPayment(): PaymentResult {
@@ -33,12 +39,18 @@ object Application {
         return result
     }
 
-    private fun inputWinningLotto(): WinningLottoTicket? = try {
-        val lottoTicket = ManualLottoGenerator(InputView.readWinningNumbers()).execute()
+    private fun inputWinningNumbers() = try {
+        ManualLottoGenerator(InputView.readWinningNumbers()).execute()
+    } catch (e: IllegalArgumentException) {
+        ResultView.printInvalidLottoNumbers()
+        null
+    }
+
+    private fun processWinningLotto(lottoTicket: LottoTicket): WinningLottoTicket? = try {
         val bonus = LottoNumber(InputView.readBonusNumber())
         WinningLottoTicket(lottoTicket, bonus)
     } catch (e: IllegalArgumentException) {
-        ResultView.printInvalidLottoNumbers()
+        ResultView.printInvalidBonusNumber()
         null
     }
 }
