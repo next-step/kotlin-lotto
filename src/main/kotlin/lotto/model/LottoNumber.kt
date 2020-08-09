@@ -1,8 +1,12 @@
 package lotto.model
 
-class LottoNumber(val number: Int) {
+class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
     constructor(stringOfNumber: String) : this(convertTo(stringOfNumber))
+
+    override fun toString(): String = "$number"
+
+    override fun compareTo(other: LottoNumber): Int = this.number - other.number
 
     companion object {
         private val IS_NUMBER_REGEX = "(^[0-9]*\$)".toRegex()
