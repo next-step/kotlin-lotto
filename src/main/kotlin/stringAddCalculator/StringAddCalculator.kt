@@ -1,9 +1,6 @@
 package stringAddCalculator
 
-object StringAddCalculator {
-    private const val CUSTOM_DELIMITER =
-        """//(.)\\n(.*)"""
-    const val ZERO = 0
+class StringAddCalculator {
     private val delimiters = mutableListOf(",", ":")
     private val regex = Regex(CUSTOM_DELIMITER)
 
@@ -34,4 +31,10 @@ object StringAddCalculator {
     }
 
     private fun getTotal(texts: List<Number>) = texts.reduce { total, number -> total.plus(number) }
+
+    companion object {
+        const val ZERO = 0
+        private const val CUSTOM_DELIMITER =
+            """//(.)\\n(.*)"""
+    }
 }
