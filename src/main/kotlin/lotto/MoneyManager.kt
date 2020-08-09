@@ -26,8 +26,7 @@ class MoneyManager(
     }
 
     private fun checkNumbers() {
-        val (winnerNumber, bonusBall) = input.getNumbers()
-        val winners = lottoManager.checkNumbers(winnerNumber, bonusBall)
+        val winners = lottoManager.checkNumbers(input.getWinnerNumbers())
         resultView.showWinners(winners)
     }
 }

@@ -2,6 +2,7 @@ package lotto
 
 import lotto.model.lotto.Lotto
 import lotto.model.LottoManager
+import lotto.model.lotto.WinnerNumbers
 import lotto.model.lotto.toLottoNumber
 import lotto.model.lotto.toNumbers
 import org.assertj.core.api.Assertions
@@ -15,7 +16,8 @@ class LottoManagerTest {
     @ParameterizedTest
     @ValueSource(ints = [0, 100, 1000, 10000, 20000])
     fun lottoManagerCheckNumberSize(input: Int) {
-        val lottos = LottoManager(input).checkNumbers("1,2,3,4,5,6".toNumbers(), 7.toLottoNumber())
+        val winner = WinnerNumbers("1,2,3,4,5,6".toNumbers(), 7.toLottoNumber())
+        val lottos = LottoManager(input).checkNumbers(winner)
         Assertions.assertThat(lottos.lottoBuyCount).isSameAs(input / Lotto.PRICE)
     }
 }

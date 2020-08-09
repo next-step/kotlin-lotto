@@ -1,7 +1,6 @@
 package lotto.view
 
-import lotto.model.lotto.LottoNumber
-import lotto.model.lotto.Numbers
+import lotto.model.lotto.WinnerNumbers
 import lotto.model.lotto.toLottoNumber
 import lotto.model.lotto.toNumbers
 
@@ -15,13 +14,11 @@ class InputView(
 
     fun getBuyPrice() = showQuestion(INPUT_PRICE).toIntOrNull() ?: 0
 
-    fun getNumbers(): Pair<Numbers, LottoNumber> = try {
-        val numbers = getWinningNumbers().toNumbers()
-        val bonus = getBonusBall().toLottoNumber()
-        Pair(numbers, bonus)
+    fun getWinnerNumbers(): WinnerNumbers = try {
+        WinnerNumbers(getWinningNumbers().toNumbers(), getBonusBall().toLottoNumber())
     } catch (e: Exception) {
         println("잘못입력하셨습니다. 다시입력해주세요.")
-        getNumbers()
+        getWinnerNumbers()
     }
 
     private fun getWinningNumbers() = showQuestion(INPUT_WINNING_NUMBERS)

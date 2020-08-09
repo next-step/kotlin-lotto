@@ -19,7 +19,8 @@ class LottoTest {
     fun whenCreateLottoIsMatching6() {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
-        assertThat(lotto.checkNumbers(input.toNumbers(), 4.toLottoNumber()).prizeMoney)
+        val winner = WinnerNumbers(input.toNumbers(), 4.toLottoNumber())
+        assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.ONE.prizeMoney)
     }
 
@@ -29,7 +30,8 @@ class LottoTest {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
         val winningNumbers = "1,2,3,4,5,44"
-        assertThat(lotto.checkNumbers(winningNumbers.toNumbers(), 6.toLottoNumber()).prizeMoney)
+        val winner = WinnerNumbers(winningNumbers.toNumbers(), 6.toLottoNumber())
+        assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.TWO_BONUS.prizeMoney)
     }
 
@@ -39,7 +41,8 @@ class LottoTest {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
         val winningNumbers = "11,22,33,43,44,45"
-        assertThat(lotto.checkNumbers(winningNumbers.toNumbers(), 44.toLottoNumber()).prizeMoney)
+        val winner = WinnerNumbers(winningNumbers.toNumbers(), 44.toLottoNumber())
+        assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.ZERO.prizeMoney)
     }
 
