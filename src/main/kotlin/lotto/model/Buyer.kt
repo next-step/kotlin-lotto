@@ -16,7 +16,7 @@ class Buyer(private val price: Int) {
 
     fun buyLotto() {
         repeat((price / Lotto.PRICE) - manualLotto.size) {
-            markLotto(generateAutoLotto())
+            markLotto(Lotto.makeAuto())
         }
     }
 
@@ -27,7 +27,4 @@ class Buyer(private val price: Int) {
     fun setupManualLotto(manualLotto: List<Lotto>) {
         _manualLotto.addAll(manualLotto)
     }
-
-    private fun generateAutoLotto(): Lotto =
-        Lotto(Lotto.NUMBER_GENERATION_RANGE.shuffled().subList(0, 6).toSortedSet())
 }
