@@ -1,7 +1,7 @@
 package lotto
 
 class Lotto {
-    fun buytickets(pay: Int): Int {
+    fun buyTickets(pay: Int): Int {
         return pay / TICKETPRICE
     }
 
@@ -10,14 +10,14 @@ class Lotto {
         const val TICKETPRICE = 1000
     }
 
-    fun tickets(totaltickets: Int): MutableList<MutableList<Any>> {
+    fun tickets(totalTickets: Int): MutableList<MutableList<Any>> {
 
-        val sampletickets = mutableListOf(mutableListOf<Any>())
-        for (x in 0 until totaltickets) {
-            sampletickets.add((1..45).shuffled().take(6).sorted().toMutableList())
+        val sampleTickets = mutableListOf(mutableListOf<Any>())
+        for (x in 0 until totalTickets) {
+            sampleTickets.add((1..45).shuffled().take(6).sorted().toMutableList())
         }
-        sampletickets.removeAt(0)
-        return sampletickets
+        sampleTickets.removeAt(0)
+        return sampleTickets
     }
 
     fun match(userLotto: Array<Int>, winningLotto: Array<Int>): Int {

@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test
 class LottoTest {
     @Test
     @DisplayName("test input money")
-    fun inputtest() {
+    fun inputTest() {
         assertThat(InputNumber().buy(14000)).isEqualTo(14000)
     }
 
     @Test
     @DisplayName("Ticket")
     fun ticketsTest() {
-        assertThat(Lotto().buytickets(14000)).isEqualTo(14)
+        assertThat(Lotto().buyTickets(14000)).isEqualTo(14)
     }
 
     @Test
