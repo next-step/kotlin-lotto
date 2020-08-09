@@ -8,8 +8,22 @@ object LottoProgram {
         return amountOfMoney / UNIT
     }
 
-    private fun matchLotto(userLotto: Lotto, winningLotto: Lotto): Int {
-        return userLotto.lotto.filter { winningLotto.lotto.contains(it) }.count()
+    fun getWinningNumbers(winningNumbers: String): WinningNumbers {
+        val numbers = winningNumbers.replace(" ", "")
+            .split(",")
+            .map { it.toInt() }
+        validateDuplicatedNumber(numbers)
+        return WinningNumbers(numbers)
+    }
+
+    private fun validateDuplicatedNumber(numbers: List<Int>) {
+        if (numbers.distinct().size != numbers.size) {
+            throw IllegalArgumentException("중복된 숫자는 입력할 수 없습니다.")
+        }
+    }
+
+    private fun matchLotto(userLotto: Lotto, winningLotto: List<Int>): Int {
+        return userLotto.lotto.filter { winningLotto.contains(it) }.count()
     }
 
     private fun validateMoneyUnit(amountOfMoney: Int) {
