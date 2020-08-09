@@ -1,7 +1,7 @@
 package lotto.domain
 
-class LottoGame(payment: Payment) {
-    private val _lottos = Lottos(LottoShop(payment).sellTickets())
+class LottoGame(lottoShop: LottoShop) {
+    private val _lottos = Lottos(lottoShop.sellTickets())
     val lottos: Lottos
         get() = _lottos
 

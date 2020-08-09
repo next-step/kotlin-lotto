@@ -31,14 +31,26 @@ object InputView {
         return number.toInt()
     }
 
-    fun showTitleToGetManualNumbers() = println("\n$ENTER_MANUAL_NUMBERS")
+    fun getManualLottos(manualOrder: Int): List<Lotto> {
+        var order = manualOrder
+        val manualLottos = mutableListOf<Lotto>()
+        println("\n$ENTER_MANUAL_NUMBERS")
 
-    fun getManualNumbers(): List<Int> {
+        while (order > 0) {
+            val lottoNumbers = readManualNumbers()
+            manualLottos.add(Lotto(lottoNumbers))
+            order--
+        }
+        return manualLottos.toList()
+    }
+
+    private fun readManualNumbers(): List<LottoNumber> {
         var numbers = readLine()
         while (numbers.isNullOrBlank()) {
             numbers = readLine()
         }
-        return numbers.split(LOTTO_NUMBERS_DEMILITER).map { it.toInt() }
+        val lottoNumbers = numbers.split(LOTTO_NUMBERS_DEMILITER).map { it.toInt() }
+        return lottoNumbers.map { LottoNumber(it) }
     }
 
     fun readWinningNumbers(): List<Int> {
@@ -50,13 +62,13 @@ object InputView {
         return numbers.split(LOTTO_NUMBERS_DEMILITER).map { it.toInt() }
     }
 
-    fun getWinningNumber(numbers: List<Int>): Lotto {
+    fun getWinningNumbers(numbers: List<Int>): Lotto {
         val lottoNumbers = numbers.map { LottoNumber.of(it) }
         return Lotto(lottoNumbers)
     }
 
     fun readBonusNumber(): Int {
-        println("$ENTER_BONUS_NUMBER")
+        println(ENTER_BONUS_NUMBER)
         var number = readLine()
         while (number.isNullOrBlank()) {
             number = readLine()
