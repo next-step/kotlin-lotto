@@ -21,11 +21,12 @@ class LottoGame {
 
     private fun getTicketCount(money: Int) = money / LOTTO_TICKET_PRICE
 
-    fun calculate(useMoney: Int, lottoResults: List<Rank>): Double {
-        return lottoResults.totalPrizeMoney() / useMoney.toDouble()
+    fun calculate(usedMoney: Int, lottoResults: List<Rank>): Double {
+        val totalMoney = totalPrizeMoney(lottoResults)
+        return (totalMoney / usedMoney) * 100.0
     }
 
-    private fun List<Rank>.totalPrizeMoney(): Int {
-        return this.map { it.prizeMoney }.sum()
+    private fun totalPrizeMoney(lottoResults: List<Rank>): Int {
+        return lottoResults.map { it.prizeMoney }.sum()
     }
 }
