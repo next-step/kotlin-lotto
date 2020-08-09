@@ -8,11 +8,13 @@ class Lotto(vararg numbers: Int) {
     }.toSet()
 
     init {
-        require(lottoNumbers.size == VALID_LOTTO_NUMBER) { INVALID_LOTTO_NUMBER_MESSAGE }
+        require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_SIZE_MESSAGE }
+        require(lottoNumbers.size == VALID_LOTTO_NUMBER) { DUPLICATE_MESSAGE }
     }
 
     companion object {
         private const val VALID_LOTTO_NUMBER = 6
-        private const val INVALID_LOTTO_NUMBER_MESSAGE = "로또는 중복되지 않은 6개의 숫자로 생성할 수 있습니다."
+        const val INVALID_SIZE_MESSAGE = "로또는 6개의 숫자로 생성할 수 있습니다."
+        const val DUPLICATE_MESSAGE = "로또는 중복되지 않은 숫자로만 생성할 수 있습니다."
     }
 }
