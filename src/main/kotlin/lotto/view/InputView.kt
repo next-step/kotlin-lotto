@@ -16,11 +16,7 @@ object InputView {
 
     fun requestLottoNumberByType(type: LottoNumberType, repeatCount: Int = 1): List<String> {
         println(type.message)
-        return mutableListOf<String>().apply {
-            repeat(repeatCount) {
-                add(readLine() ?: "")
-            }
-        }
+        return (0 until repeatCount).map { readLine() ?: "" }
     }
 
     enum class Mode(val message: String) {
