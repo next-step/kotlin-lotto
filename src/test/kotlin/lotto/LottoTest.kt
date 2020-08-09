@@ -30,5 +30,4 @@ internal class LottoTest {
         val expect = List(6) { i -> LottoNumber(i + 1) }.toSet()
         assertThat(lotto.lottoNumbers).isEqualTo(expect)
     }
-
 }
