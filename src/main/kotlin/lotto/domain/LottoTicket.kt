@@ -8,7 +8,9 @@ data class LottoTicket(val numbers: Set<LottoNumber>) {
 
     override fun toString() = "[${numbers.joinToString { it.value.toString() }}]"
 
-    fun getMatchCount(other: LottoTicket) = numbers.count { other.numbers.contains(it) }
+    fun getMatchCount(other: WinningLottoTicket) = numbers.count { other.lottoTicket.hasNumber(it) }
+
+    fun hasNumber(number: LottoNumber) = numbers.contains(number)
 
     companion object {
         const val NUMBER_COUNT = 6

@@ -10,11 +10,6 @@ data class ManualLottoGenerator(private val input: String) : LottoGenerator {
     companion object {
         private const val NUMBER_DELIMITER = ","
 
-        private fun parseNumbers(numbers: String) = numbers.split(NUMBER_DELIMITER).map {
-            LottoNumber(parseNumber(it))
-        }
-
-        private fun parseNumber(number: String): Int =
-            number.trim().toIntOrNull() ?: throw IllegalArgumentException("$NUMBER_DELIMITER 기호와 정수만 입력 가능합니다.")
+        private fun parseNumbers(numbers: String) = numbers.split(NUMBER_DELIMITER).map { LottoNumber(it.trim()) }
     }
 }

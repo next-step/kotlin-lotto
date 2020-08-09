@@ -6,6 +6,8 @@ data class LottoNumber(val value: Int) : Comparable<LottoNumber> {
         require(value in NUMBER_RANGE) { "로또 번호는 $NUMBER_RANGE 범위 내의 숫자여야 합니다." }
     }
 
+    constructor(value: String) : this(value.toIntOrNull() ?: throw IllegalArgumentException("유효한 문자가 아닙니다."))
+
     override fun compareTo(other: LottoNumber): Int = value.compareTo(other.value)
 
     companion object {
