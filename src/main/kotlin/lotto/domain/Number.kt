@@ -1,37 +1,28 @@
 package lotto.domain
 
-data class Number(private var string: String?) {
-    val number = changeInt(string)
+class Number private constructor(val number: Int) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
-    init {
-        checkRange()
+        other as Number
+
+        if (number != other.number) return false
+
+        return true
     }
 
-    private fun changeInt(string: String?): Int {
-        if (!string.isNullOrBlank()) {
-            this.string = string.trim()
-            return checkInt(string)
-        } else {
-            throw NumberFormatException("공백값과 null값은 가질수 없습니다.")
-        }
-    }
-
-    private fun checkInt(string: String): Int {
-        try {
-            return string.trim().toInt()
-        } catch (e: NumberFormatException) {
-            throw NumberFormatException("숫자 이외의 값은 가질수 없습니다.")
-        }
-    }
-
-    private fun checkRange() {
-        if (number < MINIMUM || number > MAXIMUM) {
-            throw NumberFormatException("1~45의 값만 가질수 있습니다.")
-        }
+    override fun hashCode(): Int {
+        return number
     }
 
     companion object {
         private const val MINIMUM = 1
         private const val MAXIMUM = 45
+        private val numbers = (MINIMUM..MAXIMUM).map { it to Number(it) }.toMap()
+
+        fun getNumber(number: Int): Number {
+            return numbers[number] ?: throw IllegalArgumentException("${number}는 로또 번호안에 있지 않습니다.")
+        }
     }
 }
