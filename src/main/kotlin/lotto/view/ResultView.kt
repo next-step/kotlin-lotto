@@ -4,12 +4,9 @@ import lotto.domain.Lottos
 import lotto.domain.Rank
 import java.math.BigDecimal
 
-const val TEXT_TRY_AGAIN = "\n다시 시작 버튼을 눌러주세요.\n구입금액은 1000원 이상이어야 합니다."
-
 object ResultView {
-
-    fun showQuantityPurchased(amount: Int) {
-        println("${amount}개를 구매했습니다.")
+    fun showOrderDetail(manualOrder: Int, totalQuantity: Int) {
+        println("\n수동으로 ${manualOrder}장, 자동으로 ${totalQuantity - manualOrder}장을 구매했습니다.")
     }
 
     fun showLottosDetail(lottos: Lottos) {
