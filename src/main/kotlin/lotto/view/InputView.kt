@@ -7,7 +7,7 @@ object InputView {
 
     fun readMoney(isValid: (value: String) -> Boolean) = readValue(isValid, INPUT_MONEY)
 
-    fun readWinningNumbers(isValid: (value: String) -> Boolean) = readValue(isValid, INPUT_WINNING_NUMBERS)
+    fun readWinningNumbers() = readValue({ true }, INPUT_WINNING_NUMBERS)
 
     private fun readValue(
         isValid: (value: String) -> Boolean,
