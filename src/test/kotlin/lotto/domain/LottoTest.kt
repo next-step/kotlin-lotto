@@ -6,16 +6,6 @@ import org.junit.jupiter.api.Test
 
 class LottoTest {
     @Test
-    fun sort_small_to_big() {
-        val numbers = setOf(6,5,4,3,2,1)
-        val testNumbers = setOf(Number(1), Number(2), Number(3), Number(4), Number(5), Number(6))
-
-        val lotto = Lotto(numbers)
-
-        assertThat(lotto.numbers).isEqualTo(testNumbers)
-    }
-
-    @Test
     fun can_not_get_same_number() {
         val numbers = setOf(1, 2, 3, 4, 5, 5)
         assertThatThrownBy {

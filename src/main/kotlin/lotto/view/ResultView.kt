@@ -9,7 +9,7 @@ object ResultView {
 
     fun resultLotto(lottoList: List<Lotto>, amount: Amount) {
         println("수동으로 ${amount.manual}장, 자동으로 ${amount.auto}개를 구매하셨습니다.")
-        lottoList.forEach { lotto -> println(lotto.numbers.map { it.number }) }
+        lottoList.forEach { lotto -> println(lotto.numbers.map { it.number }.sortedBy { it }) }
     }
 
     fun resultRank(rateOfReturn: Double , rank: Rank) {

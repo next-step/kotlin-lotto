@@ -9,7 +9,7 @@ class NumberTest {
     fun can_has_1_to_45() {
         assertThatThrownBy {
             Number.getNumber(46)
-        }.isInstanceOf(NumberFormatException::class.java).hasMessageContaining("46는 로또 번호에 포함되지 않습니다.")
+        }.isInstanceOf(IllegalArgumentException::class.java).hasMessageContaining("46는 로또 번호안에 있지 않습니다.")
     }
 
     @Test

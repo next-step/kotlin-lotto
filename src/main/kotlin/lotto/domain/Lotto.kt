@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lotto(numbers: Set<Int>) {
-    val numbers = sortIt(changeNumber(numbers))
+    val numbers = changeNumber(numbers)
 
     init {
         checkSixNumbers(numbers)
@@ -13,9 +13,7 @@ class Lotto(numbers: Set<Int>) {
         }
     }
 
-    private fun changeNumber(numbers: Set<Int>): List<Number> = numbers.map { Number.getNumber(it) }
-
-    private fun sortIt(numbers: List<Number>): Set<Number> = numbers.sortedBy { it.number }.toSet()
+    private fun changeNumber(numbers: Set<Int>): Set<Number> = numbers.map { Number.getNumber(it) }.toSet()
 
     fun getCountMatch(correctNumbers: Set<Number>): Int = correctNumbers.filter { isCorrect(it) }.size
 

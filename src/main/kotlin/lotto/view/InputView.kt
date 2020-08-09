@@ -47,9 +47,9 @@ object InputView {
         return string
     }
 
-    private fun changeInt(string: String): Int {
+    private fun changeInt(inputValue: String): Int {
         try {
-            return string.trim().toInt()
+            return inputValue.trim().toInt()
         } catch (e: Exception) {
             throw IllegalArgumentException("숫자 이외의 값은 입력할수없습니다.")
         }

@@ -8,7 +8,7 @@ class LottoGame(private val amount: Amount, private val manualLottoList: List<Lo
         return totalLotto.flatten()
     }
 
-    private fun makeRandomNumbers(): Set<Int> = (FIRST_NUMBER..LAST_NUMBER).shuffled().take(6).toSet()
+    private fun makeRandomNumbers(): Set<Int> = (FIRST_NUMBER..LAST_NUMBER).shuffled().take(Lotto.LOTTO_HAS_NUMBERS).toSet()
 
     fun getRank(winningLotto: WinningLotto): Rank {
         val rank = Rank()
