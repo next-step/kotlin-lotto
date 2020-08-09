@@ -12,16 +12,16 @@ class NumbersTest {
     @DisplayName(value = "Numbers,winnerNumbers 6개의 같은 숫자일 경우, MatchingCounts = 6")
     @Test
     fun checkNumbersMatchingCountCase6() {
-        val winnerNumbers = Numbers(listOf(1, 2, 3, 4, 5, 6).toLottoNumbers().shuffled())
-        val numbers = Numbers(listOf(1, 2, 3, 4, 5, 6).toLottoNumbers().shuffled())
+        val winnerNumbers = Numbers(listOf(1, 2, 3, 4, 5, 6).shuffled().toLottoNumbers())
+        val numbers = Numbers(listOf(1, 2, 3, 4, 5, 6).shuffled().toLottoNumbers())
         assertThat(numbers.getMatchingCounts(winnerNumbers)).isSameAs(6)
     }
 
     @DisplayName(value = "Numbers,winnerNumbers 0개의 같은 숫자일 경우, MatchingCounts = 0")
     @Test
     fun checkNumbersMatchingCountCase0() {
-        val winnerNumbers = Numbers(listOf(1, 2, 3, 4, 5, 6).toLottoNumbers().shuffled())
-        val numbers = Numbers(listOf(11, 12, 13, 14, 15, 16).toLottoNumbers().shuffled())
+        val winnerNumbers = Numbers(listOf(1, 2, 3, 4, 5, 6).shuffled().toLottoNumbers())
+        val numbers = Numbers(listOf(11, 12, 13, 14, 15, 16).shuffled().toLottoNumbers())
         assertThat(numbers.getMatchingCounts(winnerNumbers)).isSameAs(0)
     }
 
@@ -37,7 +37,7 @@ class NumbersTest {
             addAll(original.take(input).toLottoNumbers())
             addAll(listOf(11, 12, 13, 14, 15, 16).shuffled().take(Lotto.NUMBER_COUNT - input).toLottoNumbers())
         }
-        val numbers = Numbers(matchingNumbers)
+        val numbers = Numbers(matchingNumbers.toSet())
 
         assertThat(numbers.getMatchingCounts(winnerNumbers)).isSameAs(input)
     }

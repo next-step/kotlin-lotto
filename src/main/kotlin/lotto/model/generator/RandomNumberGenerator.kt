@@ -6,7 +6,7 @@ import lotto.model.lotto.toLottoNumber
 
 object RandomNumberGenerator : LottoNumberGenerator {
     override fun generate() =
-        Numbers(getRandomNumber().map(Int::toLottoNumber))
+        Numbers(getRandomNumber().map(Int::toLottoNumber).toSet())
 
     private fun getRandomNumber() =
         (Lotto.MIN_NUMBER..Lotto.MAX_NUMBER).shuffled().take(Lotto.NUMBER_COUNT)

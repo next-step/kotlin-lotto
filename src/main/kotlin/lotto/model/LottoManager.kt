@@ -2,14 +2,16 @@ package lotto.model
 
 import lotto.model.lotto.Lotto
 import lotto.model.lotto.WinnerNumbers
+import lotto.model.prize.Money
+import lotto.model.prize.Winners
 
-class LottoManager(money: Int) {
+class LottoManager(money: Money) {
     private val _lottos: List<Lotto>
     val lottos: List<Lotto>
         get() = _lottos
 
     init {
-        _lottos = (1..purchaseCount(money)).map { _ ->
+        _lottos = (1..money.canBuyLottoCount()).map { _ ->
             makeLotto()
         }
     }
@@ -18,9 +20,6 @@ class LottoManager(money: Int) {
         val winners = lottos.map { it.checkNumbers(winningNumbers) }
         return Winners(winners)
     }
-
-    private fun purchaseCount(money: Int) =
-        if (money < 0) 0 else (money / Lotto.PRICE)
 
     private fun makeLotto() = Lotto.newAutoInstance()
 }

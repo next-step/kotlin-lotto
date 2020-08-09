@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.prize.Prize
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -52,8 +53,8 @@ class PrizeTest {
     @ValueSource(ints = [3, 4, 5])
     fun checkPrizeMoneyCase345(input: Int) {
         val prize = Prize.getPrize(input)
-        assertThat(prize.prizeMoney).isGreaterThan(0)
-        assertThat(prize.prizeMoney).isGreaterThanOrEqualTo(Prize.FOUR.prizeMoney)
+        assertThat(prize.prizeMoney.value).isGreaterThan(0)
+        assertThat(prize.prizeMoney.value).isGreaterThanOrEqualTo(Prize.FOUR.prizeMoney.value)
     }
 
     @DisplayName(value = "matchingCount가 2이하 또는 음수일 경우, 상금은 0원 ")

@@ -1,6 +1,6 @@
 package lotto.model.lotto
 
-import lotto.model.Prize
+import lotto.model.prize.Prize
 import lotto.model.generator.LottoNumberGenerator
 import lotto.model.generator.RandomNumberGenerator
 

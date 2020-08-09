@@ -14,4 +14,4 @@ fun String.toLottoNumber() = LottoNumber(this.toInt())
 
 fun Int.toLottoNumber() = LottoNumber(this)
 
-fun List<Int>.toLottoNumbers() = this.map(Int::toLottoNumber)
+fun List<Int>.toLottoNumbers() = this.map(Int::toLottoNumber).toSet()

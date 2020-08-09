@@ -5,7 +5,8 @@ import lotto.model.LottoManager
 import lotto.model.lotto.WinnerNumbers
 import lotto.model.lotto.toLottoNumber
 import lotto.model.lotto.toNumbers
-import org.assertj.core.api.Assertions
+import lotto.model.prize.Money
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -17,7 +18,7 @@ class LottoManagerTest {
     @ValueSource(ints = [0, 100, 1000, 10000, 20000])
     fun lottoManagerCheckNumberSize(input: Int) {
         val winner = WinnerNumbers("1,2,3,4,5,6".toNumbers(), 7.toLottoNumber())
-        val lottos = LottoManager(input).checkNumbers(winner)
-        Assertions.assertThat(lottos.lottoBuyCount).isSameAs(input / Lotto.PRICE)
+        val lottos = LottoManager(Money(input)).checkNumbers(winner)
+        assertThat(lottos.lottoBuyCount).isSameAs(input / Lotto.PRICE)
     }
 }
