@@ -16,7 +16,7 @@ class LottoTicketGenerator : LottoTicketGenerateStrategy {
             .let { LottoTicket(it) }
     }
 
-    override fun createManualTicket(numbers: List<Int>): LottoTicket {
-        return LottoTicket(numbers.map { LottoNumber.of(it) })
+    override fun createManualTicket(numbers: IntArray): LottoTicket {
+        return LottoTicket(*numbers)
     }
 }

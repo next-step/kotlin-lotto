@@ -2,8 +2,8 @@ package stringaddcalculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import stringaddcalculator.domain.StringAddCalculator
 import stringaddcalculator.domain.Number
+import stringaddcalculator.domain.StringAddCalculator
 
 class StringAddCalculatorTest {
 

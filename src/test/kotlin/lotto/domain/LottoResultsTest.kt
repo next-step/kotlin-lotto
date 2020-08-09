@@ -29,7 +29,7 @@ class LottoResultsTest {
                 LottoResult.LOSE to 5
             )
         )
-        val totalPrize = LottoResult.THIRD.prize + LottoResult.FOURTH.prize * 2
+        val totalPrize = LottoMoney(LottoResult.THIRD.prize + LottoResult.FOURTH.prize * 2)
 
         // then
         assertThat(lottoResults.getTotalPrize()).isEqualTo(totalPrize)

@@ -5,8 +5,8 @@ import lotto.domain.LottoResults
 import lotto.domain.LottoTickets
 import java.math.BigDecimal
 
-fun printLottoTickets(tickets: LottoTickets) {
-    println("${tickets.size()}개를 구매했습니다.")
+fun printLottoTickets(manualTicketCount: Int, tickets: LottoTickets) {
+    println("수동으로 ${manualTicketCount}장, 자동으로 ${tickets.size() - manualTicketCount}개를 구매했습니다.")
     println(tickets)
 }
 

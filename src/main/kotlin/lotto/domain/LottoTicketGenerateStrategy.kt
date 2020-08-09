@@ -4,5 +4,5 @@ interface LottoTicketGenerateStrategy {
 
     fun createAutoTicket(): LottoTicket
 
-    fun createManualTicket(numbers: List<Int>): LottoTicket
+    fun createManualTicket(numbers: IntArray): LottoTicket
 }

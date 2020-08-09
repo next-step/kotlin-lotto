@@ -41,7 +41,10 @@ internal class LuckyLottoNumbersTest {
         // then
         assertAll(
             { assertThat(lottoResults.countOf(LottoResult.FIRST)).isEqualTo(4) },
-            { assertThat(lottoResults.getTotalPrize()).isEqualTo(LottoResult.FIRST.prize * 4) }
+            {
+                assertThat(lottoResults.getTotalPrize())
+                    .isEqualTo(LottoMoney(LottoResult.FIRST.prize * 4))
+            }
         )
     }
 }

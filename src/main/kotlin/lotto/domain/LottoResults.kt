@@ -7,8 +7,8 @@ class LottoResults(
         return values[lottoResult] ?: 0
     }
 
-    fun getTotalPrize(): Long {
-        return values.map { calculatePrizeOf(it) }.sum()
+    fun getTotalPrize(): LottoMoney {
+        return LottoMoney(values.map { calculatePrizeOf(it) }.sum())
     }
 
     private fun calculatePrizeOf(element: Map.Entry<LottoResult, Int>): Long {
