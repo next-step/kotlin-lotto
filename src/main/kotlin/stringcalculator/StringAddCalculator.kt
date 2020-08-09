@@ -11,12 +11,11 @@ class StringAddCalculator {
     private fun splitText(text: String): Int {
         val tokens = text.split(",", ":")
         val result = Regex("//(.)\n(.*)").find(text)
-        result?.let {
+        return result?.let {
             val customDelimiter = it.groupValues[1]
             val regxToken = it.groupValues[2].split(customDelimiter)
-            return resultSum(regxToken) ?: -1
-        }
-        return resultSum(tokens) ?: -1
+            resultSum(regxToken)
+        } ?: resultSum(tokens)
     }
 
     private fun negativeCheck(number: String): String {
@@ -29,8 +28,8 @@ class StringAddCalculator {
         else negativeCheck(text)
     }
 
-    private fun resultSum(inputnumbers: List<String>): Int {
-        inputnumbers.forEach { inputnumber -> checkInt(inputnumber) }
-        return inputnumbers.map { it.toInt() }.sum()
+    private fun resultSum(inputNumbers: List<String>): Int {
+        inputNumbers.forEach { inputNumber -> checkInt(inputNumber) }
+        return inputNumbers.map { it.toInt() }.sum()
     }
 }
