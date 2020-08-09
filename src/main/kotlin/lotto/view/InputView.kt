@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.model.Lotto
-
 object InputView {
 
     const val REQUEST_PRICE = "구입 금액을 입력해주세요."
@@ -16,12 +14,11 @@ object InputView {
         return readLine()?.toInt() ?: 0
     }
 
-    fun requestLottoNumberByType(type: LottoNumberType, repeatCount: Int = 1): List<Lotto> {
+    fun requestLottoNumberByType(type: LottoNumberType, repeatCount: Int = 1): List<String> {
         println(type.message)
-        return mutableListOf<Lotto>().apply {
+        return mutableListOf<String>().apply {
             repeat(repeatCount) {
-                val lottoNumber = readLine()?.split(",")?.map { it.toIntOrNull() ?: 0 }?.toSet() ?: emptySet()
-                this.add(Lotto(lottoNumber))
+                add(readLine() ?: "")
             }
         }
     }
