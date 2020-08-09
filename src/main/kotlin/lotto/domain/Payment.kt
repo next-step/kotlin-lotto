@@ -10,7 +10,7 @@ class Payment(money: Int) {
     init {
         _money = validateAmount(_money)
     }
-    fun affordableQuantity() = _money / LOTTO_PRICE
+    fun availableQuantity() = _money / LOTTO_PRICE
 
     private fun validateAmount(payment: Int): Int {
         if (LOTTO_PRICE > payment) return NOT_ENOUGH_MONEY
