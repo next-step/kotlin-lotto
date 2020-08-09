@@ -2,9 +2,14 @@ package lotto
 
 object LottoProgram {
     private const val UNIT = 1000
+
     fun getAmountOfLotto(amountOfMoney: Int): Int {
         validateMoneyUnit(amountOfMoney)
         return amountOfMoney / UNIT
+    }
+
+    private fun matchLotto(userLotto: Lotto, winningLotto: Lotto): Int {
+        return userLotto.lotto.filter { winningLotto.lotto.contains(it) }.count()
     }
 
     private fun validateMoneyUnit(amountOfMoney: Int) {
