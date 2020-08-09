@@ -25,6 +25,14 @@ internal class LottoTest {
     }
 
     @Test
+    fun `7개 숫자를 넣었지만 하나가 중복인경우?`() {
+        // TODO 이 경우 Exception이 뜨도록 수정한다
+        val lotto = Lotto(1, 2, 3, 4, 5, 6, 6)
+        val expect = List(6) { i -> LottoNumber(i + 1) }.toSet()
+        assertThat(lotto.lottoNumbers).isEqualTo(expect)
+    }
+
+    @Test
     fun `중복되지 않은 6개의 숫자로 Lotto를 만들 수 있다`() {
         val lotto = Lotto(1, 2, 3, 4, 5, 6)
         val expect = List(6) { i -> LottoNumber(i + 1) }.toSet()
