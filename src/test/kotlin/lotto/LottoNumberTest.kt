@@ -3,10 +3,7 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 import stringAddCalculator.LottoNumber
-import java.lang.IllegalArgumentException
 
 internal class LottoNumberTest {
 
@@ -26,7 +23,7 @@ internal class LottoNumberTest {
 
     @Test
     fun `1 ~ 45사이의 숫자는 LottoNumber로 사용할 수 있다`() {
-        for(i in 1..45){
+        for (i in 1..45) {
             assertThat(LottoNumber(i)).isEqualTo(LottoNumber(i))
         }
     }
