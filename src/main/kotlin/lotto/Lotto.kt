@@ -17,4 +17,16 @@ class Lotto(vararg numbers: Int) {
         const val INVALID_SIZE_MESSAGE = "로또는 6개의 숫자로 생성할 수 있습니다."
         const val DUPLICATE_MESSAGE = "로또는 중복되지 않은 숫자로만 생성할 수 있습니다."
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as Lotto
+        if (lottoNumbers != other.lottoNumbers) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return lottoNumbers.hashCode()
+    }
 }
