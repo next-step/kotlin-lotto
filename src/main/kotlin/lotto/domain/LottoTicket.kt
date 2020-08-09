@@ -1,6 +1,8 @@
 package lotto.domain
 
-data class LottoTicket(private val numbers: Set<LottoNumber>) {
+import java.util.SortedSet
+
+data class LottoTicket(private val numbers: SortedSet<LottoNumber>) {
 
     init {
         require(hasValidCount(numbers)) { "$NUMBER_COUNT 개의 중복되지 않은 번호가 필요합니다." }
