@@ -1,12 +1,12 @@
 package lotto.domain.selling
 
-import lotto.domain.Lotto
+import lotto.domain.LottoTicket
 
 data class PaymentResult(
     val money: Int,
-    val lottoes: List<Lotto>,
+    val lottoTickets: List<LottoTicket>,
     val change: Int
 ) {
 
-    override fun toString(): String = "${lottoes.joinToString("\n")}\n거스름돈 : $change"
+    override fun toString(): String = "${lottoTickets.joinToString("\n")}\n거스름돈 : $change"
 }

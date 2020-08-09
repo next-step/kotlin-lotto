@@ -1,6 +1,6 @@
 package lotto
 
-import lotto.domain.Lotto
+import lotto.domain.LottoTicket
 import lotto.domain.generator.ManualLottoGenerator
 import lotto.domain.selling.LottoExchanger
 import lotto.domain.selling.Payment
@@ -18,8 +18,8 @@ object Application {
         ResultView.printPaymentResult(result)
 
         val numbers = InputView.readWinningNumbers { ManualLottoGenerator.isAcceptable(it) }
-        val winningNumbers = Lotto(ManualLottoGenerator(numbers))
-        val exchangeResult = LottoExchanger.exchange(result.lottoes, winningNumbers)
-        ResultView.printExchangeResult(exchangeResult)
+        val winningNumbers = LottoTicket(ManualLottoGenerator(numbers))
+        val exchangeResult = LottoExchanger.exchange(result.lottoTickets, winningNumbers)
+        ResultView.printExchangeResult(exchangeResult, exchangeResult.calculateRateOfReturn())
     }
 }

@@ -1,11 +1,11 @@
 package lotto.domain.selling
 
-import lotto.domain.Lotto
+import lotto.domain.LottoTicket
 
 object LottoExchanger {
 
-    fun exchange(lottoes: List<Lotto>, winningLotto: Lotto): ExchangeResult {
-        val exchangeDetails = lottoes.groupingBy { it.getMatchCount(winningLotto) }.eachCount()
+    fun exchange(lottoTickets: List<LottoTicket>, winningLottoTicket: LottoTicket): ExchangeResult {
+        val exchangeDetails = lottoTickets.groupingBy { it.getMatchCount(winningLottoTicket) }.eachCount()
         return ExchangeResult(exchangeDetails)
     }
 }

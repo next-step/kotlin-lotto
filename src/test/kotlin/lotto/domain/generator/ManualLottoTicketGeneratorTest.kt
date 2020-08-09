@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-internal class ManualLottoGeneratorTest {
+internal class ManualLottoTicketGeneratorTest {
 
     @DisplayName("수동으로 로또를 생성한다")
     @Test
