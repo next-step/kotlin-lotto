@@ -1,12 +1,10 @@
 package stringCalculator.domain
 
-import stringCalculator.strategy.ParserStrategy
 import stringCalculator.strategy.ParserStrategy.Companion.getParserStrategy
 import stringCalculator.view.showMessage
 
 object StringCalculator {
 
-    val customRegexPattern = Regex("//(.)\\\\n(.*)")
     const val DEFAULT_VALUE = 0
     private const val NUMBER_TOKEN_MIN = 0
 
@@ -22,8 +20,7 @@ object StringCalculator {
     }
 
     private fun getAnotherAddResult(userInputTemplate: String): Int {
-        val isCustomRegex = customRegexPattern.matches(userInputTemplate)
-        val resultStrategy = getParsingType(isCustomRegex)
+        val resultStrategy = getParserStrategy(userInputTemplate)
         val resultNumberTokens = resultStrategy.parsingNumber(userInputTemplate)
 
         resultNumberTokens.forEach {
@@ -40,9 +37,5 @@ object StringCalculator {
         } catch (e: RuntimeException) {
             showMessage("음수를 입력할 수 없습니다.", e)
         }
-    }
-
-    private fun getParsingType(result: Boolean): ParserStrategy {
-        return getParserStrategy(result)
     }
 }
