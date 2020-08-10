@@ -16,7 +16,7 @@ class WinningLottoTest {
 
     @BeforeEach
     fun `set up`() {
-        winningNumbers = Lotto(listOf(1,2,3,4,5,6).map { LottoNumber(it) })
+        winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         invalidBonusNumber = LottoNumber(1)
         validBonusNumber = LottoNumber(7)
     }

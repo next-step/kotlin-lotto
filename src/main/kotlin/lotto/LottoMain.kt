@@ -18,12 +18,12 @@ fun main() {
     ResultView.showOrderDetail(payment.availableQuantity(), manualOrder)
 
     val userLottos = LottoShop.sellTickets(payment, manualLottos)
-    val lottoGame = LottoGame(userLottos)
     ResultView.showLottosDetail(userLottos)
 
     val winningNumbers = InputView.getWinningNumbers(InputView.readWinningNumbers())
     val bonus = LottoNumber.of(InputView.readBonusNumber())
 
+    val lottoGame = LottoGame(userLottos)
     val ranks = lottoGame.startMatch(winningNumbers, bonus)
     val result = WinningResult.resultOfRanks(ranks)
     ResultView.showResult(result)

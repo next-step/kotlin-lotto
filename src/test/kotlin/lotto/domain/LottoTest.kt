@@ -20,9 +20,9 @@ class LottoTest {
     @BeforeEach
     fun `set up`() {
         numbersWithLessSize = listOf(LottoNumber(1))
-        numbersWithDuplication = listOf(1,1,2,3,4,5).map { LottoNumber.of(it) }
-        validNumbers = listOf(1,2,3,4,5,6).map { LottoNumber.of(it) }
-        winningNumbers = Lotto(listOf(1,2,3,10,20,30).map { LottoNumber.of(it) })
+        numbersWithDuplication = listOf(1, 1, 2, 3, 4, 5).map { LottoNumber.of(it) }
+        validNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }
+        winningNumbers = Lotto(listOf(1, 2, 3, 10, 20, 30).map { LottoNumber.of(it) })
 
         lotto = Lotto(validNumbers)
         winningLotto = WinningLotto(winningNumbers, LottoNumber(45))
