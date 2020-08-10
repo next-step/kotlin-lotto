@@ -11,7 +11,7 @@ class LottoManager(money: Money) {
         get() = _lottos
 
     init {
-        _lottos = (1..money.canBuyLottoCount()).map { _ ->
+        _lottos = (1..money.availableLottoCount()).map { _ ->
             makeLotto()
         }
     }

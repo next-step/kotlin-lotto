@@ -7,7 +7,7 @@ class Money(val value: Int) {
         validation(value)
     }
 
-    fun canBuyLottoCount() = value / Lotto.PRICE
+    fun availableLottoCount() = value / Lotto.PRICE
 
     operator fun times(integerData: Int): Money {
         validation(integerData)

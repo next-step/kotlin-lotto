@@ -41,6 +41,6 @@ class MoneyTest {
     @ValueSource(ints = [0, 1_000, 3_500, 500_000, 1_000_000])
     fun checkBuyLottoCount(input: Int) {
         val money = Money(input)
-        assertThat(money.canBuyLottoCount()).isEqualTo(input / Lotto.PRICE)
+        assertThat(money.availableLottoCount()).isEqualTo(input / Lotto.PRICE)
     }
 }
