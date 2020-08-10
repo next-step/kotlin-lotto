@@ -2,42 +2,32 @@ package calculator
 
 import java.util.regex.Pattern
 
-const val CUSTOM_SPLITTER_LOCATION = 2
-private const val CUSTOM_SPLITTER = "//(.)\\n(.*)"
+private const val CUSTOM_SPLITTER_LOCATION = 2
+private val CUSTOM_SPLITTER = "//(.)\\n(.*)".toRegex()
 private val DEFAULT_SPLITTER = listOf(",", ":")
-const val CUSTOM_SPLITTER_LAST_LOCATION = 4
+private const val CUSTOM_SPLITTER_LAST_LOCATION = 4
 
 class Calculator(private val numbersInput: String) {
     private var isCustomSplitter: Boolean = false
     private var splitters: List<String> = DEFAULT_SPLITTER
     fun execute(): Int {
-        getNumbersForCalculator(numbersInput)
-        hasCustomSplitter()
+        validateNumberInput(numbersInput)
         setSplitters()
         hasOnlyValidString()
-        val numbers = parsing()
-        return calculate(numbers)
+        return calculate(parsing())
     }
 
     private fun calculate(numbers: List<Number>): Int {
         return numbers.sumBy { it.toInt() }
     }
 
-    private fun getNumbersForCalculator(numbersInput: String): String {
-        require(!numbersInput.isBlank()) { throw CalculatorException("숫자를 입력해주세요.") }
+    private fun validateNumberInput(numbersInput: String): String {
+        require(numbersInput.isNotEmpty()) { "숫자를 입력해주세요." }
         return numbersInput
     }
 
-    private fun hasCustomSplitter() {
-        try {
-            isCustomSplitter = Pattern.compile(CUSTOM_SPLITTER).matcher(numbersInput).matches()
-        } catch (e: CalculatorException) {
-            throw CalculatorException("입력값을 확인해 주세요.")
-        }
-    }
-
     private fun setSplitters() {
-        if (isCustomSplitter) {
+        if (CUSTOM_SPLITTER.matches(numbersInput)) {
             splitters = listOf(numbersInput[CUSTOM_SPLITTER_LOCATION].toString())
         }
     }
@@ -59,7 +49,7 @@ class Calculator(private val numbersInput: String) {
                     splitters[1],
                     splitters[0]
                 )
-            numbersInput.split(splitters[0]).map { it.toInt() }
+            numbersInput.split(splitters[0], splitters[1]).map { it.toInt() }
         } catch (e: CalculatorException) {
             throw CalculatorException("입력값을 확인하세요.")
         }

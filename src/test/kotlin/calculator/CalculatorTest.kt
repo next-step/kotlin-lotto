@@ -12,7 +12,7 @@ class CalculatorTest {
 
     @DisplayName("모든 숫자값을 합")
     @Test
-    fun `calculate`() {
+    fun checkCalculate() {
         val calculator = Calculator("1,2:3")
         assertThat(calculator.execute()).isEqualTo(6)
     }
@@ -20,15 +20,15 @@ class CalculatorTest {
     @DisplayName("입력값 empty 체크")
     @ParameterizedTest
     @EmptySource
-    fun `checkForEmpty`(numberInput: String) {
+    fun validateNumberInput(numberInput: String) {
         val calculator = Calculator(numberInput)
         assertThatThrownBy { calculator.execute() }.isInstanceOf(CalculatorException::class.java)
     }
 
-    @DisplayName("사용자가 입력한 문자열이 규칙에 맞지 않을경우")
+    @DisplayName("입력값이 규칙에 맞지 않을 경우 체크")
     @ParameterizedTest
     @ValueSource(strings = ["a", "&", "1,2,3,", ",1,2,3"])
-    fun `hasOnlyValidString`(numberInput: String) {
+    fun validateNumberInputError(numberInput: String) {
         val calculator = Calculator(numberInput)
         assertThatThrownBy {
             calculator.execute()
