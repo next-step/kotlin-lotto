@@ -13,32 +13,32 @@ class LottoGameTest {
     @DisplayName("구매 금액 확인")
     @ParameterizedTest
     @ValueSource(strings = ["", "200", "-30"])
-    fun checkAmountValidation(amount: String) {
+    fun validateGameMoney(amount: String) {
         assertThatThrownBy { LottoGame(amount) }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
-    // checkAmountValidation
+    @DisplayName("당첨번호 입력값 확인")
     @ParameterizedTest
-    @ValueSource(strings = ["1,2,3,4,5,", "r", "1.2.3.4.5.6", "1,1,1,1,1,1"])
-    fun `당첨번호 입력값 확인`(prizeNumberString: String) {
-        val lotto = LottoGame("3000")
-        assertThatThrownBy { lotto.execute(prizeNumberString) }
+    @ValueSource(strings = ["1,2,3,4,5,", "r", "1.2.3.4.5.6", "1,1,1,1,1,1", "$"])
+    fun validatePrizeLotto(prizeNumberString: String) {
+        val lottoGame = LottoGame("3000")
+        assertThatThrownBy { lottoGame.execute(prizeNumberString) }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
 
-    // checkPrizeNumbersValidation
+    @DisplayName("생성된 로또 개수 확인")
     @Test
-    fun `당첨번호 확인`() {
-        val lotto = LottoGame("3000")
-        assertThat(lotto.execute("1,2,3,4,5,6"))
-            .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+    fun createLottos() {
+        val lottoGame = LottoGame("2000")
+        lottoGame.execute("1,2,3,4,5,6")
+        assertThat(lottoGame.lottos.size).isEqualTo(2)
     }
 
-    // checkMatch
+    @DisplayName("로또 당첨개수 확인")
     @Test
-    fun `당첨여부 확인`() {
-        val lotto = LottoGame("2000")
-        lotto.execute("1,2,3,4,5,6")
-        assertThat(lotto.profitRate).isGreaterThanOrEqualTo(0.0)
+    fun checkMatch() {
+        val lottoGame = LottoGame("2000")
+        lottoGame.execute("1,2,3,4,5,6")
+        assertThat(lottoGame.lottos.size).isEqualTo(2)
     }
 }

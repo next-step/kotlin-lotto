@@ -1,21 +1,13 @@
-import lotto.view.InputView
 import lotto.domain.LottoGame
+import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
     try {
-        val gameMoney = InputView.getGameMoney()
-        val lotto = LottoGame(gameMoney)
-
-        ResultView.showLottoCount(lotto.count)
-
-        val lottoNumber = lotto.createLotto()
-        ResultView.showLottoNumber(lottoNumber)
-
-        val prizedNumbers = InputView.getPrizedNumbers()
-        val prizedLotto = lotto.execute(prizedNumbers)
-
-        ResultView.showPrizeStatics(prizedLotto, lotto.profitRate)
+        val lottoGame = LottoGame(InputView.getGameMoney())
+        ResultView.showLottos(lottoGame.lottos)
+        lottoGame.execute(InputView.getPrizedNumbers())
+        ResultView.showPrizeStatics(lottoGame.lottoPrizeStatics)
     } catch (e: Exception) {
         println(e.message)
     }

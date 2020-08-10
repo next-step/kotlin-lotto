@@ -1,18 +1,30 @@
 package lotto.domain
 
-class Lotto(private val prize: Prize) {
-    var count: Int = 0
+private const val COUNT_OF_NUMBERS = 6
+
+class Lotto() {
+    var numbers: Set<LottoNumber> = emptySet()
+    var countOfMatch: Int = 0
         private set
 
-    fun addCount() {
-        count++
+    init {
+        numbers = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS)
+            .sorted().map { LottoNumber(it) }.toSet()
     }
 
-    fun getCountOfMatch(): Int {
-        return prize.countOfMatch
+    constructor(prizeNumberString: String) : this() {
+        numbers = prizeNumberString.split(",").asSequence().sorted().map { LottoNumber(it.toInt()) }.toSet()
+        if (numbers.size != COUNT_OF_NUMBERS) {
+            throw IllegalArgumentException("중복되지 않는 6개의 숫자를 입력해주세요")
+        }
     }
 
-    fun getPrizeMoney(): Int {
-        return prize.prizeMoney
+    fun checkPrize(lotto: Lotto): Prize {
+        countOfMatch = numbers.count { lotto.numbers.contains(it) }
+        return Prize.getPrize(countOfMatch)
+    }
+
+    override fun toString(): String {
+        return numbers.toString()
     }
 }

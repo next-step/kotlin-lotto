@@ -1,29 +1,33 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoPrizeStatics
+import lotto.domain.Prize
 
 object ResultView {
 
-    fun showLottoNumber(lottoNumbers: MutableList<List<Number>>) {
-        lottoNumbers.forEach { println(it) }
+    fun showLottos(lottos: List<Lotto>) {
+        println("${lottos.size} 개를 구매했습니다.")
+        lottos.forEach { println(it.toString()) }
     }
 
-    fun showPrizeStatics(prizes: List<Lotto>, profitRate: Double) {
-        println(
-            "당첨 통계\n" + "---------"
+    fun showPrizeStatics(prizeStatics: LottoPrizeStatics) {
+        val showPrizeStaticsString = StringBuilder(
+            """당첨 통계---------
+            |
+            |
+        """.trimMargin()
         )
-        prizes.forEach { it ->
-            print("${it.getCountOfMatch()} 개 일치 (")
-            print(it.getCountOfMatch())
-            println("원) -${it.count} 개")
+        Prize.values().filter { it.prizeMoney > 0 }.forEach {
+            showPrizeStaticsString.append("${it.countOfMatch} 개 일치 ( ${it.count} 개 일치 ( ${it.prizeMoney}")
+                .append(
+                    """원) -${it.count} 개
+                |
+            """.trimMargin()
+                )
         }
-        print("총 수익률은 $profitRate 입니다.")
-        if (profitRate < 1) {
-            print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
-        }
-    }
-
-    fun showLottoCount(count: Int) {
-        println("$count 개를 구매했습니다.")
+        showPrizeStaticsString.append("총 수익률은 ${prizeStatics.profitRate} 입니다.")
+        if (prizeStatics.profitRate < 1) showPrizeStaticsString.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        println(showPrizeStaticsString)
     }
 }
