@@ -78,8 +78,7 @@ class LottoGameTest {
     fun `getPrizeList`() {
         var list = lottoList()
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }, 7)
-        val winningResult = WinningResult()
-        val winningStatList = winningResult.of(list, winningLotto)
+        val winningStatList = WinningResult.of(list, winningLotto)
         println(winningStatList)
         assertThat(winningStatList).isNotEmpty
     }
@@ -89,9 +88,8 @@ class LottoGameTest {
     fun `sumPrizeMoney`() {
         var list = lottoList()
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }, 7)
-        val winningResult = WinningResult()
-        val winningStatList = winningResult.of(list, winningLotto)
-        assertThat(winningResult.sum(winningStatList)).isGreaterThanOrEqualTo(0)
+        val winningStatList = WinningResult.of(list, winningLotto)
+        assertThat(WinningResult.sum(winningStatList)).isGreaterThanOrEqualTo(0)
     }
 
     @Test
@@ -99,9 +97,8 @@ class LottoGameTest {
     fun `getEarningRate`() {
         var list = lottoList()
         val winningLotto = WinningLotto(list[0].number, 7)
-        val winningResult = WinningResult()
-        val winningStatList = winningResult.of(list, winningLotto)
-        val result = winningResult.earningRate(winningStatList, 14000)
+        val winningStatList = WinningResult.of(list, winningLotto)
+        val result = WinningResult.earningRate(winningStatList, Money(14000))
         assertThat(result).isGreaterThanOrEqualTo(0.0)
     }
 
