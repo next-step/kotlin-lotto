@@ -13,6 +13,15 @@ object InputView {
         return money.toIntOrNull() ?: 0
     }
 
+    fun getInputBonusNumber(): Int {
+        println("보너스번호를 입력해주세요.")
+        var numbers = readLine()
+        while (numbers.isNullOrBlank()) {
+            numbers = readLine()
+        }
+        return numbers.toIntOrNull() ?: 0
+    }
+
     fun getInputLuckyNumber(): List<Int> {
         println("지난 주 당첨번호를 입력해주세요.")
         var numbers = readLine()

@@ -23,6 +23,14 @@ class LottoTicket(val lottoNumbers: List<LottoNumber>) {
         return getLottoNumber().count { winningLotto.getLottoNumber().contains(it) }.let { Rank.of(it) }
     }
 
+//    fun getMatchValueCount(winningLotto: LottoTicket): Int {
+//        return getLottoNumber().count { winningLotto.getLottoNumber().contains(it) }
+//    }
+
+//    fun isExsitBonusBall(bonusBall: LottoNumber): Boolean{
+//        return getLottoNumber().contains(bonusBall)
+//    }
+
     companion object {
         const val LOTTO_NUMBER_COUNT_PER_TICKET = 6
     }
