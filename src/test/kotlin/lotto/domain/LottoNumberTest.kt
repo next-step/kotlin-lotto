@@ -1,30 +1,32 @@
-package lotto
+package lotto.domain
 
+import lotto.domain.LottoNumber.Companion.INVALID_MESSAGE
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
-import stringAddCalculator.LottoNumber
 
 internal class LottoNumberTest {
 
     @Test
     fun `0 이하의 숫자는 LottoNumber로 사용할 수 없다`() {
-        assertThatThrownBy { LottoNumber(0) }
+        val number = 0
+        assertThatThrownBy { LottoNumber.of(number) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또는 1~45사이의 숫자만 생성가능합니다.")
+            .hasMessage("$number$INVALID_MESSAGE")
     }
 
     @Test
     fun `46 이상의 숫자는 LottoNumber로 사용할 수 없다`() {
-        assertThatThrownBy { LottoNumber(46) }
+        val number = 46
+        assertThatThrownBy { LottoNumber.of(number) }
             .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("로또는 1~45사이의 숫자만 생성가능합니다.")
+            .hasMessage("$number$INVALID_MESSAGE")
     }
 
     @Test
     fun `1 ~ 45사이의 숫자는 LottoNumber로 사용할 수 있다`() {
         for (i in 1..45) {
-            assertThat(LottoNumber(i)).isEqualTo(LottoNumber(i))
+            assertThat(LottoNumber.of(i)).isEqualTo(LottoNumber.of("$i"))
         }
     }
 
