@@ -25,6 +25,7 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
         }
 
         fun of(numbers: List<Int>): Lotto {
+            require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
             val lottoNumbers = numbers.map { LottoNumber.of(it) }.sortedBy { it.number }.toSet()
             return Lotto(lottoNumbers)
         }
