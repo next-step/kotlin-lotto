@@ -45,15 +45,23 @@ object InputView {
         }
     }
 
-    fun inputManualNumber(menualCount: Int): List<Lotto> {
+    fun inputManualNumber(count: Int): List<Lotto> {
         // 콤마로 이어진 값이 아닌 경우
         // 값이 6개가 아닌 경우
         // 중복된 값이 있는 경우
         // 1 ~ 45 사이의 값이 아닌 경우
         println(INPUT_MANUAL_NUMBER)
-        val value = readLine() ?: throw IllegalArgumentException(INVALID_WINNING_NUMBER)
-        // return getWinningNumber(value)
-        return listOf(Lotto.of(1, 2, 3, 4, 5, 6))
+        val lottos = mutableListOf<Lotto>()
+        for (i in 1..count) {
+            try {
+                val value = readLine()!!
+                lottos.add(Lotto.ofComma(value))
+            } catch (e: Throwable) {
+                println(e.message)
+                inputManualNumber(count)
+            }
+        }
+        return lottos
     }
 
     fun inputWinningNumber(): Lotto {
