@@ -32,7 +32,7 @@ object InputView {
         inputMoney()
     }
 
-    fun inputMenualNumberCount(money: Money): Int {
+    fun inputManualNumberCount(money: Money): Int {
         println(INPUT_MANUAL_COUNT)
         return try {
             val value = readLine()!!.toInt()
@@ -41,11 +41,11 @@ object InputView {
             value
         } catch (e: Throwable) {
             println(e.message)
-            inputMenualNumberCount(money)
+            inputManualNumberCount(money)
         }
     }
 
-    fun inputMenualNumber(menualCount: Int): List<Lotto> {
+    fun inputManualNumber(menualCount: Int): List<Lotto> {
         // 콤마로 이어진 값이 아닌 경우
         // 값이 6개가 아닌 경우
         // 중복된 값이 있는 경우
