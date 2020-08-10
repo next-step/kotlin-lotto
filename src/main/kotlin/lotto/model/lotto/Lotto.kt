@@ -22,12 +22,13 @@ data class Lotto(
     companion object {
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
+        val LOTTO_RANGE = MIN_NUMBER..MAX_NUMBER
         const val NUMBER_COUNT = 6
         const val PRICE = 1_000
 
         fun newAutoInstance(generator: LottoNumberGenerator = RandomNumberGenerator) =
             Lotto(generator)
 
-        fun isLottoNumberRange(number: LottoNumber) = number.number in MIN_NUMBER..MAX_NUMBER
+        fun isLottoNumberRange(number: LottoNumber) = number.number in LOTTO_RANGE
     }
 }
