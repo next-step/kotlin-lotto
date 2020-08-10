@@ -8,7 +8,7 @@ class Winners(
 
     fun getPrizeCount(prize: Prize): Int = winLotto.getOrDefault(prize, Prize.ZERO.prizeMoney.value)
 
-    fun getTotalYield() = getTotalPrizeMoney() / (lottoBuyCount * Money.LOTTO_PRICE).toDouble()
+    fun getTotalYield() = getTotalPrizeMoney() / Money.purchaseAmount(lottoBuyCount).toDouble()
 
-    private fun getTotalPrizeMoney() = Prize.values().sumBy { (it.prizeMoney * getPrizeCount(it)).value }
+    private fun getTotalPrizeMoney() = Prize.values().sumBy { it.calculateMoney(getPrizeCount(it)).value }
 }

@@ -18,5 +18,6 @@ class Money(val value: Int) {
 
     companion object {
         const val LOTTO_PRICE = 1_000
+        fun purchaseAmount(lottoCount: Int) = lottoCount * LOTTO_PRICE
     }
 }

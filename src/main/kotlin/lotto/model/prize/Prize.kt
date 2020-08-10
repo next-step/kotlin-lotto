@@ -8,14 +8,17 @@ enum class Prize(val matchingCount: Int, val prizeMoney: Money, private val need
     FOUR(3, Money(5_000), false),
     ZERO(0, Money(0), false);
 
+    fun calculateMoney(prizeCount: Int) = prizeMoney * prizeCount
+
     fun isPrize(matchingCount: Int, isBonusMatch: Boolean) =
         matchingCount == this.matchingCount && isBonusMatch(isBonusMatch)
 
-    private fun isBonusMatch(isBonusMatch: Boolean) = if (this.needBonusMatch) {
-        isBonusMatch == this.needBonusMatch
-    } else {
-        true
-    }
+    private fun isBonusMatch(isBonusMatch: Boolean) =
+        if (this.needBonusMatch) {
+            isBonusMatch == this.needBonusMatch
+        } else {
+            true
+        }
 
     companion object {
         fun getPrize(matchingCount: Int, isBonusMatch: Boolean = false) =

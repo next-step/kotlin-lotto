@@ -2,7 +2,6 @@ package lotto.model.lotto
 
 import lotto.model.generator.LottoNumberGenerator
 import lotto.model.generator.RandomNumberGenerator
-import lotto.model.prize.Prize
 
 data class Lotto(
     private val generator: LottoNumberGenerator = RandomNumberGenerator
@@ -13,11 +12,7 @@ data class Lotto(
         return numbers.list.toString()
     }
 
-    fun checkNumbers(winningNumbers: WinnerNumbers) =
-        Prize.getPrize(
-            numbers.getMatchingCounts(winningNumbers.getNumbers()),
-            numbers.isMatch(winningNumbers.getBonusBall())
-        )
+    fun checkNumbers(winningNumbers: WinnerNumbers) = winningNumbers.match(numbers)
 
     companion object {
         const val MIN_NUMBER = 1

@@ -8,11 +8,11 @@ class Numbers(private val _list: Set<LottoNumber>) {
     val list
         get() = _list
 
-    val size = _list.size
+    val size = list.size
 
-    fun getMatchingCounts(compareNumbers: Numbers) = _list.sumBy { compareNumbers.matchCount(it) }
+    fun isMatch(number: LottoNumber) = list.contains(number)
 
-    fun isMatch(number: LottoNumber) = _list.contains(number)
+    fun getMatchingCounts(compareNumbers: Numbers) = list.sumBy { compareNumbers.matchCount(it) }
 
     private fun matchCount(number: LottoNumber) = if (isMatch(number)) 1 else 0
 

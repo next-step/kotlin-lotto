@@ -6,15 +6,9 @@ import lotto.model.prize.Money
 import lotto.model.prize.Winners
 
 class LottoManager(money: Money) {
-    private val _lottos: List<Lotto>
+    private val _lottos: List<Lotto> = (1..money.availableLottoCount()).map { makeLotto() }
     val lottos: List<Lotto>
         get() = _lottos
-
-    init {
-        _lottos = (1..money.availableLottoCount()).map { _ ->
-            makeLotto()
-        }
-    }
 
     fun checkNumbers(winningNumbers: WinnerNumbers): Winners {
         val winners = lottos.map { it.checkNumbers(winningNumbers) }

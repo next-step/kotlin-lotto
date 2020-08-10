@@ -17,7 +17,7 @@ class LottoTest {
     fun whenCreateLottoIsMatching6() {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
-        val winner = WinnerNumbers(input.toNumbers(), LottoNumber.from(4))
+        val winner = WinnerNumbers(input.toNumbers(), LottoNumber.from(7))
         assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.ONE.prizeMoney)
     }
