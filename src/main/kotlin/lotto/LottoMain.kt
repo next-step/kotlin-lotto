@@ -15,11 +15,11 @@ fun main() {
     val manualOrder = InputView.readManualOrder(payment.availableQuantity())
 
     val manualLottos = InputView.getManualLottos(manualOrder)
-    val lottoShop = LottoShop(payment, manualLottos)
-    ResultView.showOrderDetail(manualOrder, payment.availableQuantity())
+    ResultView.showOrderDetail(payment.availableQuantity(), manualOrder)
 
-    val lottoGame = LottoGame(lottoShop)
-    ResultView.showLottosDetail(lottoGame.lottos)
+    val userLottos = LottoShop.sellTickets(payment, manualLottos)
+    val lottoGame = LottoGame(userLottos)
+    ResultView.showLottosDetail(userLottos)
 
     val winningNumbers = InputView.getWinningNumbers(InputView.readWinningNumbers())
     val bonus = LottoNumber.of(InputView.readBonusNumber())

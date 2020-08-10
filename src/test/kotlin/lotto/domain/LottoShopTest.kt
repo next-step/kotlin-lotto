@@ -21,7 +21,7 @@ class LottoShopTest {
         val manualLottos = listOf(Lotto(manualLottoNumbers))
 
         // when
-        val totalAmount = LottoShop(payment, manualLottos).sellTickets().size
+        val totalAmount = LottoShop.sellTickets(payment, manualLottos).size()
 
         // then
         assertThat(totalAmount).isEqualTo(5)
