@@ -3,9 +3,9 @@ package calculator
 import java.util.regex.Pattern
 
 private const val CUSTOM_SPLITTER_LOCATION = 2
+private const val CUSTOM_SPLITTER_LAST_LOCATION = 4
 private val CUSTOM_SPLITTER = "//(.)\\n(.*)".toRegex()
 private val DEFAULT_SPLITTER = listOf(",", ":")
-private const val CUSTOM_SPLITTER_LAST_LOCATION = 4
 
 class Calculator(private var numberInput: String) {
     private var isCustomSplitter: Boolean = false

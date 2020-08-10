@@ -14,9 +14,7 @@ class Lotto() {
 
     constructor(prizeNumberString: String) : this() {
         numbers = prizeNumberString.split(",").asSequence().sorted().map { LottoNumber(it.toInt()) }.toSet()
-        if (numbers.size != COUNT_OF_NUMBERS) {
-            throw IllegalArgumentException("중복되지 않는 6개의 숫자를 입력해주세요")
-        }
+        require(numbers.size == COUNT_OF_NUMBERS) { "중복되지 않는 6개의 숫자를 입력해주세요" }
     }
 
     fun checkPrize(lotto: Lotto): Prize {

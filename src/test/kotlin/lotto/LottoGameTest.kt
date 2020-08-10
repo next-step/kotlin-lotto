@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoGame
+import lotto.domain.LottoPrizeStatics
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
@@ -36,9 +38,10 @@ class LottoGameTest {
 
     @DisplayName("로또 당첨개수 확인")
     @Test
-    fun checkMatch() {
-        val lottoGame = LottoGame("2000")
-        lottoGame.execute("1,2,3,4,5,6")
-        assertThat(lottoGame.lottos.size).isEqualTo(2)
+    fun checkMatches() {
+        val lottoPrizeStatics = LottoPrizeStatics()
+        lottoPrizeStatics.checkMatches(Lotto("1,2,3,4,5,6"), listOf(Lotto("1,2,3,10,11,12")))
+        assertThat(lottoPrizeStatics.profitRate)
+            .isEqualTo(5.0)
     }
 }
