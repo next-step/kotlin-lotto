@@ -10,13 +10,13 @@ fun main() {
     val money = InputView.inputMoney()
 
     // 수동으로 구매할 로또 수를 입력받는다
-    val menualCount = InputView.inputManualNumberCount(money)
+    val manualCount = InputView.inputManualNumberCount(money)
 
-    // menualCount만큼 수동으로 구매할 번호들을 입력받는다
-    val lottos = InputView.inputManualNumber(menualCount)
+    // manualCount만큼 수동으로 구매할 번호들을 입력받는다
+    val manualLottos = InputView.inputManualNumber(manualCount)
 
-    // 로또티켓을 오토로 구매한다
-    val lottoTicket = LottoTicket(money)
+    // 수동과 자동을 합쳐 하나의 로또 티켓을 만든다.
+    val lottoTicket = LottoTicket(money, manualLottos)
 
     // 구매 갯수와 로또 티켓 번호들을 출력한다
     ResultView.printLottos(lottoTicket)
