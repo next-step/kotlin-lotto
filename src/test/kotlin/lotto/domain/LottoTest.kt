@@ -20,32 +20,10 @@ class LottoTest {
     @BeforeEach
     fun `set up`() {
         numbersWithLessSize = listOf(LottoNumber(1))
-        numbersWithDuplication = listOf(
-            LottoNumber(1),
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5)
-        )
-        validNumbers = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6)
-        )
-        winningNumbers = Lotto(
-            listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(10),
-                LottoNumber(20),
-                LottoNumber(30)
-            )
-        )
+        numbersWithDuplication = listOf(1,1,2,3,4,5).map { LottoNumber.of(it) }
+        validNumbers = listOf(1,2,3,4,5,6).map { LottoNumber.of(it) }
+        winningNumbers = Lotto(listOf(1,2,3,10,20,30).map { LottoNumber.of(it) })
+
         lotto = Lotto(validNumbers)
         winningLotto = WinningLotto(winningNumbers, LottoNumber(45))
     }
@@ -59,7 +37,7 @@ class LottoTest {
 
             // then
         }.isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("Invalid Lotto Numbers Size : 1 should be 6")
+            .hasMessageContaining("Expected size is 6, but was 1")
     }
 
     @DisplayName("숫자가 중복되는지 확인한다")
@@ -71,7 +49,7 @@ class LottoTest {
 
             // then
         }.isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("Lotto Numbers Duplication : 1 occurred")
+            .hasMessageContaining("1 duplicate has occurred")
     }
 
     @DisplayName("당첨번호와 일치하는 숫자 개수를 반환한다")

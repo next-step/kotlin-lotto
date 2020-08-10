@@ -11,8 +11,8 @@ class LottoNumberTest {
 
     @Test
     fun `same object`() {
-        val number1 = LottoNumber(1)
-        val number2 = LottoNumber(1)
+        val number1 = LottoNumber.of(1)
+        val number2 = LottoNumber.of(1)
         assertThat(number1).isEqualTo(number2)
     }
 

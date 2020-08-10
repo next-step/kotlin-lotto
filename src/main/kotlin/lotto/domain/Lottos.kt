@@ -1,6 +1,8 @@
 package lotto.domain
 
-class Lottos(private val lottos: List<Lotto>) {
+class Lottos(private val _lottos: List<Lotto>) {
+    val lottos: List<Lotto>
+        get() = _lottos
 
     fun match(winningLotto: WinningLotto): List<Rank> {
         return lottos.map {
@@ -9,6 +11,8 @@ class Lottos(private val lottos: List<Lotto>) {
             Rank.of(matchCount, matchBonus)
         }
     }
+
+    fun size() = _lottos.size
 
     override fun toString(): String {
         return lottos.joinToString("\n")

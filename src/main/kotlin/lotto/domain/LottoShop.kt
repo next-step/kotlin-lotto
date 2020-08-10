@@ -24,6 +24,3 @@ object LottoShop {
         return numbers.map { LottoNumber.of(it) }
     }
 }
-
-
-
