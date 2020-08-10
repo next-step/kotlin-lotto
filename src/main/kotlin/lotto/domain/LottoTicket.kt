@@ -1,22 +1,17 @@
 package lotto.domain
 
-class LottoTicket(var lottoNumbers: List<LottoNumber>) {
+class LottoTicket(val lottoNumbers: List<LottoNumber>) {
 
     init {
-        createLottoNumbers(lottoNumbers)
-    }
-
-    private fun createLottoNumbers(lottoNumbers: List<LottoNumber>) {
         validateLottoNumbers(lottoNumbers)
-        this.lottoNumbers = lottoNumbers
     }
 
     private fun validateLottoNumbers(lottoNumbers: List<LottoNumber>) {
         if (lottoNumbers.size != LOTTO_NUMBER_COUNT_PER_TICKET) {
-            throw IllegalArgumentException("로또 번호는 6자리여야합니다.")
+            throw IllegalArgumentException("6개의 번호가 필요합니다.")
         }
         if (lottoNumbers.size != getLottoNumber().distinct().size) {
-            throw IllegalArgumentException("로또 번호는 중복불가능합니다")
+            throw IllegalArgumentException("로또 번호는 중복될 수 없습니다.")
         }
     }
 

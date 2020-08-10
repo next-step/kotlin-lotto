@@ -11,8 +11,6 @@ class LottoWinningNumberTest {
 
     @Test
     fun `내가 구매한 로또와 당첨번호의 비교`() {
-        val LottoWinningNumber = LottoWinningNumber()
-
         val lotto = LottoTicket(
             listOf(
                 LottoNumber(1),
@@ -24,10 +22,10 @@ class LottoWinningNumberTest {
             )
         )
         val winningNumbers = listOf(1, 2, 3, 4, 7, 8)
-        LottoWinningNumber.createLuckyTicket(winningNumbers)
+        val lottoWinningNumber = LottoWinningNumber(winningNumbers)
 
         // 로또 결과 및 분석
-        val results = LottoWinningNumber.getLottoResultsOf(listOf(lotto))
+        val results = lottoWinningNumber.getLottoResultsOf(listOf(lotto))
 
         // 당첨결과 4등 -> 하나이므로 1
         Assertions.assertThat(results.size).isEqualTo(1)
@@ -35,8 +33,6 @@ class LottoWinningNumberTest {
 
     @Test
     fun `1등`() {
-        val LottoWinningNumber = LottoWinningNumber()
-
         val lotto = LottoTicket(
             listOf(
                 LottoNumber(1),
@@ -48,18 +44,16 @@ class LottoWinningNumberTest {
             )
         )
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        LottoWinningNumber.createLuckyTicket(winningNumbers)
+        val lottoWinningNumber = LottoWinningNumber(winningNumbers)
 
         // 로또 결과 및 분석
-        val results = LottoWinningNumber.getLottoResultsOf(listOf(lotto))
+        val results = lottoWinningNumber.getLottoResultsOf(listOf(lotto))
 
         Assertions.assertThat(results).isEqualTo(listOf(Rank.FIRST))
     }
 
     @Test
     fun `2등`() {
-        val LottoWinningNumber = LottoWinningNumber()
-
         val lotto = LottoTicket(
             listOf(
                 LottoNumber(1),
@@ -71,17 +65,16 @@ class LottoWinningNumberTest {
             )
         )
         val winningNumbers = listOf(1, 2, 3, 4, 5, 8)
-        LottoWinningNumber.createLuckyTicket(winningNumbers)
+        val lottoWinningNumber = LottoWinningNumber(winningNumbers)
 
         // 로또 결과 및 분석
-        val results = LottoWinningNumber.getLottoResultsOf(listOf(lotto))
+        val results = lottoWinningNumber.getLottoResultsOf(listOf(lotto))
 
         Assertions.assertThat(results).isEqualTo(listOf(Rank.SECOND))
     }
 
     @Test
     fun `3등`() {
-        val LottoWinningNumber = LottoWinningNumber()
 
         val lotto = LottoTicket(
             listOf(
@@ -94,18 +87,16 @@ class LottoWinningNumberTest {
             )
         )
         val winningNumbers = listOf(1, 2, 3, 4, 7, 8)
-        LottoWinningNumber.createLuckyTicket(winningNumbers)
+        val lottoWinningNumber = LottoWinningNumber(winningNumbers)
 
         // 로또 결과 및 분석
-        val results = LottoWinningNumber.getLottoResultsOf(listOf(lotto))
+        val results = lottoWinningNumber.getLottoResultsOf(listOf(lotto))
 
         Assertions.assertThat(results).isEqualTo(listOf(Rank.THIRD))
     }
 
     @Test
     fun `4등`() {
-        val LottoWinningNumber = LottoWinningNumber()
-
         val lotto = LottoTicket(
             listOf(
                 LottoNumber(1),
@@ -117,10 +108,10 @@ class LottoWinningNumberTest {
             )
         )
         val winningNumbers = listOf(1, 2, 3, 8, 9, 12)
-        LottoWinningNumber.createLuckyTicket(winningNumbers)
+        val lottoWinningNumber = LottoWinningNumber(winningNumbers)
 
         // 로또 결과 및 분석
-        val results = LottoWinningNumber.getLottoResultsOf(listOf(lotto))
+        val results = lottoWinningNumber.getLottoResultsOf(listOf(lotto))
 
         Assertions.assertThat(results).isEqualTo(listOf(Rank.FOURTH))
     }

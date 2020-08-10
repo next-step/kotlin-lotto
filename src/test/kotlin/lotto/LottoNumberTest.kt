@@ -15,7 +15,6 @@ class LottoNumberTest {
             .withMessage("$number 는 로또 번호(1~45)가 아닙니다.")
     }
 
-    // Todo - 두 객체가 일치하지 않으므로 equals만들기
     @ParameterizedTest
     @ValueSource(ints = [1, 3, 12])
     fun `1~ 45 이외의 로또번호 확인`(number: Int) {
