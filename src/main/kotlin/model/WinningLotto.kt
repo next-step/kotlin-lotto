@@ -8,6 +8,9 @@ class WinningLotto(override val number: List<LottoNumber>) : BasicLotto {
     constructor(number: List<LottoNumber>, bonusNumber: Int) : this(number) {
         this.bonusNumber = bonusNumber
     }
+
+    constructor(lotto: Lotto) : this(lotto.number)
+
     fun match(value: Lotto): Pair<Int, Boolean> {
         return number.count { value.number.contains(it) } to value.number.contains(LottoNumber.from(bonusNumber))
     }

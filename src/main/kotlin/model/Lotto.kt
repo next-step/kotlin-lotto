@@ -14,4 +14,8 @@ class Lotto(override val number: List<LottoNumber>) : BasicLotto {
             return Lotto(lottoNumberList)
         }
     }
+
+    override fun toString(): String {
+        return number.map { it.value }.joinToString(prefix = "[", postfix = "]")
+    }
 }

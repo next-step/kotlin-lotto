@@ -4,20 +4,28 @@ import model.Lotto
 import model.LottoNumber
 import model.Money
 
-class InputView {
-    fun getMoney(input: () -> String?): Money {
+object InputView {
+    fun getMoney(): Money {
         println("구매금액을 입력해 주세요.")
-        return Money(input())
+        return Money(readLine())
     }
 
-    fun getPrizeLotto(input: () -> String?): Lotto {
+    fun getPrizeLotto(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val inputString = input()
+        val inputString = readLine()
         checkNotNull(inputString)
         require(PRIZE_REGEX.matches(inputString)) { "not accepted prize regex" }
         val inputPrizeNumbers = removeWhiteSpace(inputString)
 
         return Lotto(makeLottoNumber(inputPrizeNumbers))
+    }
+
+    fun getBonusBall(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val inputString = readLine()
+        checkNotNull(inputString)
+        require(inputString.isNotBlank()) { "not accept blank" }
+        return inputString.toInt()
     }
 
     private fun makeLottoNumber(inputPrizeNumbers: String) =
@@ -31,8 +39,6 @@ class InputView {
         }
     }
 
-    companion object {
-        val PRIZE_REGEX = Regex(pattern = "^[0-9,\\s]+\$")
-        const val DELIMITER = ","
-    }
+    val PRIZE_REGEX = Regex(pattern = "^[0-9,\\s]+\$")
+    const val DELIMITER = ","
 }

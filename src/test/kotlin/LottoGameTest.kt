@@ -17,7 +17,7 @@ class LottoGameTest {
     fun `createLottoList`() {
         val inputMoney = 14_000
         val lottoGame = LottoGame()
-        val list = lottoGame.buy(inputMoney)
+        val list = lottoGame.buy(Money(inputMoney))
         assertThat(list.size).isEqualTo(inputMoney / LottoGame.LOTTO_PRICE)
     }
 

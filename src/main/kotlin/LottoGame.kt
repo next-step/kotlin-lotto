@@ -1,10 +1,11 @@
 import model.Lotto
+import model.Money
 
 class LottoGame {
-    fun buy(money: Int): List<Lotto> {
+    fun buy(money: Money): List<Lotto> {
         val list = mutableListOf<Lotto>()
 
-        repeat(money / LOTTO_PRICE) {
+        repeat(money.value / LOTTO_PRICE) {
             val lotto = Lotto.make()
             list.add(lotto)
         }
@@ -13,7 +14,6 @@ class LottoGame {
     }
 
     companion object {
-
         const val LOTTO_PRICE = 1_000
     }
 }
