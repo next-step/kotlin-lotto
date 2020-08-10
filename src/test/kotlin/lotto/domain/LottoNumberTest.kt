@@ -16,8 +16,19 @@ class LottoNumberTest {
         assertThat(number1).isEqualTo(number2)
     }
 
+    @Test
+    fun `invalid input type`() {
+        Assertions.assertThatThrownBy {
+            // when
+            LottoNumber.of(null)
+
+            // then
+        }.isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Non-numeric value")
+    }
+
     @ParameterizedTest
-    @ValueSource(ints = [0, 46])
+    @ValueSource(ints = [0, 46, -1])
     fun `out of bounds`(value: Int) {
         Assertions.assertThatThrownBy {
             // when
@@ -25,6 +36,6 @@ class LottoNumberTest {
 
             // then
         }.isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("Out of bounds : $value should be in 1 to 45")
+            .hasMessageContaining("LottoNumber($value) should be between 1 and 45")
     }
 }
