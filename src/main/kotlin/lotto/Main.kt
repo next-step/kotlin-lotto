@@ -6,8 +6,14 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    // 사용자로부터 금액을 입력받는다.
+    // 사용자로부터 금액을 입력받는다
     val money = InputView.inputMoney()
+
+    // 수동으로 구매할 로또 수를 입력받는다
+    val menualCount = InputView.inputMenualNumberCount(money)
+
+    // menualCount만큼 수동으로 구매할 번호들을 입력받는다
+    val lottos = InputView.inputMenualNumber(menualCount)
 
     // 로또티켓을 오토로 구매한다
     val lottoTicket = LottoTicket(money)
