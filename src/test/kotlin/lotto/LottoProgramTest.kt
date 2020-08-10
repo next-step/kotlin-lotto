@@ -24,4 +24,19 @@ class LottoProgramTest {
             .isInstanceOf(UnitException::class.java)
             .hasMessage("1000원 단위만 입력할 수 있습니다.")
     }
+
+    @DisplayName("당첨 번호를 리스트에 담는다.")
+    @Test
+    fun `when input winning numbers than list size is six`() {
+        val results = LottoProgram.getWinningNumbers("1,2,3,4,5,6")
+        assertThat(results.winningNumbers.size).isEqualTo(6)
+    }
+
+    @DisplayName("당첨 번호에 중복이 있으면 IllegalArgumentException을 던진다.")
+    @Test
+    fun `when input duplicated number than throw IllegalArgumentException`() {
+        assertThatThrownBy { LottoProgram.getWinningNumbers("1,1,2,3,4,5") }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage("중복된 숫자는 입력할 수 없습니다.")
+    }
 }
