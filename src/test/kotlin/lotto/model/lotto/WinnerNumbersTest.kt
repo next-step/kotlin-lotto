@@ -13,7 +13,7 @@ class WinnerNumbersTest {
     fun checkDuplicationBonusBall(input: Int) {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy {
-                WinnerNumbers("1,2,3,4,5,6".toNumbers(), LottoNumber(input))
+                WinnerNumbers("1,2,3,4,5,6".toNumbers(), LottoNumber.from(input))
             }
     }
 }

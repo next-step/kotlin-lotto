@@ -1,12 +1,10 @@
 package lotto.model.lotto
 
-import lotto.model.prize.Prize
 import lotto.model.generator.LottoNumberGenerator
+import lotto.model.prize.Prize
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
 
@@ -19,7 +17,7 @@ class LottoTest {
     fun whenCreateLottoIsMatching6() {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
-        val winner = WinnerNumbers(input.toNumbers(), 4.toLottoNumber())
+        val winner = WinnerNumbers(input.toNumbers(), LottoNumber.from(4))
         assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.ONE.prizeMoney)
     }
@@ -30,7 +28,7 @@ class LottoTest {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
         val winningNumbers = "1,2,3,4,5,44"
-        val winner = WinnerNumbers(winningNumbers.toNumbers(), 6.toLottoNumber())
+        val winner = WinnerNumbers(winningNumbers.toNumbers(), LottoNumber.from(6))
         assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.TWO_BONUS.prizeMoney)
     }
@@ -41,20 +39,8 @@ class LottoTest {
         val input = "1,2,3,4,5,6"
         val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
         val winningNumbers = "11,22,33,43,44,45"
-        val winner = WinnerNumbers(winningNumbers.toNumbers(), 44.toLottoNumber())
+        val winner = WinnerNumbers(winningNumbers.toNumbers(), LottoNumber.from(40))
         assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.ZERO.prizeMoney)
-    }
-
-    @DisplayName(value = "일반 number에서, 로또의 범위의 숫자가 맞아야된다.")
-    @ParameterizedTest
-    @ValueSource(ints = [45, 23, 14, 5, 1])
-    fun checkLottoNumberOK(inputNum: Int) {
-        val input = inputNum.toLottoNumber()
-        assertThat(Lotto.isLottoNumberRange(input)).isTrue()
-        val noLottoRangeOver = (inputNum + Lotto.MAX_NUMBER).toLottoNumber()
-        assertThat(Lotto.isLottoNumberRange(noLottoRangeOver)).isFalse()
-        val noLottoRangeLess = (inputNum - Lotto.MAX_NUMBER).toLottoNumber()
-        assertThat(Lotto.isLottoNumberRange(noLottoRangeLess)).isFalse()
     }
 }

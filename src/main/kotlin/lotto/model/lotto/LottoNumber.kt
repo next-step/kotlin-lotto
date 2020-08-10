@@ -1,17 +1,11 @@
 package lotto.model.lotto
 
-data class LottoNumber(val number: Int) {
-    init {
-        validation()
-    }
-
-    private fun validation() {
-        require(Lotto.isLottoNumberRange(this)) { "잘못된 숫자입니다." }
+class LottoNumber private constructor(private val number: Int) {
+    companion object {
+        val lottoNumbers = Lotto.LOTTO_RANGE.associateWith(::LottoNumber)
+        fun from(number: Int) = lottoNumbers.get(number) ?: throw IllegalArgumentException()
+        fun from(number: String) = from(number.toInt())
     }
 }
 
-fun String.toLottoNumber() = LottoNumber(this.toInt())
-
-fun Int.toLottoNumber() = LottoNumber(this)
-
-fun List<Int>.toLottoNumbers() = this.map(Int::toLottoNumber).toSet()
+fun List<Int>.toLottoNumbers() = this.map { LottoNumber.from(it) }.toSet()

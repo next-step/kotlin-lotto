@@ -1,8 +1,8 @@
 package lotto.model.lotto
 
-import lotto.model.prize.Prize
 import lotto.model.generator.LottoNumberGenerator
 import lotto.model.generator.RandomNumberGenerator
+import lotto.model.prize.Prize
 
 data class Lotto(
     private val generator: LottoNumberGenerator = RandomNumberGenerator
@@ -24,11 +24,8 @@ data class Lotto(
         const val MAX_NUMBER = 45
         val LOTTO_RANGE = MIN_NUMBER..MAX_NUMBER
         const val NUMBER_COUNT = 6
-        const val PRICE = 1_000
 
         fun newAutoInstance(generator: LottoNumberGenerator = RandomNumberGenerator) =
             Lotto(generator)
-
-        fun isLottoNumberRange(number: LottoNumber) = number.number in LOTTO_RANGE
     }
 }

@@ -11,7 +11,7 @@ class LottoNumberTest {
     fun checkDuplicationBonusBall() {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy {
-                LottoNumber(46)
+                LottoNumber.from(46)
             }
     }
 }

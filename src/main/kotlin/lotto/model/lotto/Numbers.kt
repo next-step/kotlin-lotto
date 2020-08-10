@@ -21,4 +21,4 @@ class Numbers(private val _list: Set<LottoNumber>) {
     }
 }
 
-internal fun String.toNumbers() = Numbers(this.split(",").map(String::toLottoNumber).toSet())
+internal fun String.toNumbers() = Numbers(this.split(",").map { LottoNumber.from(it) }.toSet())

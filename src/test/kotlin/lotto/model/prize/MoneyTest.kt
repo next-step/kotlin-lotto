@@ -1,8 +1,7 @@
 package lotto.model.prize
 
-import lotto.model.lotto.Lotto
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -41,6 +40,6 @@ class MoneyTest {
     @ValueSource(ints = [0, 1_000, 3_500, 500_000, 1_000_000])
     fun checkBuyLottoCount(input: Int) {
         val money = Money(input)
-        assertThat(money.availableLottoCount()).isEqualTo(input / Lotto.PRICE)
+        assertThat(money.availableLottoCount()).isEqualTo(input / Money.LOTTO_PRICE)
     }
 }
