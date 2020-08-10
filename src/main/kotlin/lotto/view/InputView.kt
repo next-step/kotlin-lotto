@@ -1,16 +1,16 @@
 package lotto.view
 
+import lotto.domain.LOTTO_PRICE
 import lotto.domain.LottoNumber
 import lotto.domain.Lotto
 
 private const val ENTER_MONEY_FOR_LOTTO = "구입금액을 입력해주세요."
-private const val RE_ENTER_ENOUGH_MONEY = "1000원 이상이 필요합니다."
+private const val RE_ENTER_ENOUGH_MONEY = "1000원 이상을 입력해주세요."
 private const val ENTER_MANUAL_ORDER = "수동으로 구매할 로또 개수를 입력해주세요."
 private const val ENTER_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해주세요."
 private const val ENTER_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해주세요."
 private const val ENTER_BONUS_NUMBER = "보너스 볼을 입력해 주세요."
 private const val LOTTO_NUMBERS_DEMILITER = ","
-private const val LOTTO_PRICE = 1_000
 private const val ZERO_VALUE = 0
 
 object InputView {
@@ -33,7 +33,7 @@ object InputView {
             println("총 구입개수는 ${availableQuantity}개입니다. 이보다 작거나 같은 수를 입력해주세요")
             number = readLine()?.toIntOrNull()
         }
-        require(number >= ZERO_VALUE) { "Manual order(${number}) should be positive or zero" }
+        require(number >= ZERO_VALUE) { "Manual order($number) should be positive or zero" }
         return number
     }
 
@@ -43,7 +43,7 @@ object InputView {
             numbers = readLine()
         }
         val lottoNumbers = numbers.split(LOTTO_NUMBERS_DEMILITER).map { it.toIntOrNull() }
-        return lottoNumbers.map { LottoNumber.of(it) }
+        return lottoNumbers.map { LottoNumber.of(it) }.toList()
     }
 
     fun getManualLottos(manualOrder: Int): List<Lotto> {
@@ -52,7 +52,7 @@ object InputView {
         }
 
         val manualNumbers = (1..manualOrder).map { readManualNumbers() }
-        return manualNumbers.map { Lotto(it) }
+        return manualNumbers.map { Lotto(it) }.toList()
     }
 
     fun readWinningNumbers(): List<Int?> {
@@ -61,7 +61,7 @@ object InputView {
         while (numbers.isNullOrBlank()) {
             numbers = readLine()
         }
-        return numbers.split(LOTTO_NUMBERS_DEMILITER).map { it.toIntOrNull() }
+        return numbers.split(LOTTO_NUMBERS_DEMILITER).map { it.toIntOrNull() }.toList()
     }
 
     fun getWinningNumbers(numbers: List<Int?>): Lotto {

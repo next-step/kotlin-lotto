@@ -5,7 +5,7 @@ import lotto.domain.Rank
 import java.math.BigDecimal
 
 object ResultView {
-    fun showOrderDetail(manualOrder: Int, totalQuantity: Int) {
+    fun showOrderDetail(totalQuantity: Int, manualOrder: Int) {
         println("\n수동으로 ${manualOrder}장, 자동으로 ${totalQuantity - manualOrder}장을 구매했습니다.")
     }
 
