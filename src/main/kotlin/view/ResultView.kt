@@ -14,8 +14,8 @@ object ResultView {
     }
 
     fun printLottoStat(list: List<LottoStat>) {
-        list.filter { it.getGrade() > Rank.MISS.grade }
-            .forEach { print("${it.getGrade()}개 일치 (${it.getSumPrizeMoney()}) - ${it.count} 개\n") }
+        list.filter { it.overGrade(Rank.MISS.grade) }
+            .forEach { print("${it.grade()}개 일치 (${it.sumPrizeMoney()}) - ${it.count} 개\n") }
         println()
     }
 

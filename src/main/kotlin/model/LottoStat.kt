@@ -2,11 +2,15 @@ package model
 
 data class LottoStat(val rank: Rank, val count: Int) {
 
-    fun getGrade(): Int {
+    fun grade(): Int {
         return rank.grade
     }
 
-    fun getSumPrizeMoney(): Int {
+    fun overGrade(grade: Int): Boolean {
+        return rank.grade > grade
+    }
+
+    fun sumPrizeMoney(): Int {
         return rank.sumPrizeMoney(count)
     }
 }

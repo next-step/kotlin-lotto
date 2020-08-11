@@ -11,7 +11,7 @@ object WinningResult {
     }
 
     fun sum(list: List<LottoStat>): Int {
-        return list.sumBy { it.getSumPrizeMoney() }
+        return list.sumBy { it.sumPrizeMoney() }
     }
 
     fun earningRate(list: List<LottoStat>, money: Money): Double {
