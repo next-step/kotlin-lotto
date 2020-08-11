@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-internal class LottoTicketExchangerTest {
+internal class PaymentResultTest {
     private val fourthLotto = LottoTicket(
         setOf(
             LottoNumber(1), LottoNumber(2), LottoNumber(3),
