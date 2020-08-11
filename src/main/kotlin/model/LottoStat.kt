@@ -6,7 +6,7 @@ data class LottoStat(val rank: Rank, val count: Int) {
         return rank.grade
     }
 
-    fun overGrade(grade: Int): Boolean {
+    fun isOverGrade(grade: Int): Boolean {
         return rank.grade > grade
     }
 

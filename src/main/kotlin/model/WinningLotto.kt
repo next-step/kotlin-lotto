@@ -11,12 +11,9 @@ class WinningLotto(override val number: Set<LottoNumber>) : BasicLotto {
 
     constructor(lotto: Lotto, bonusNumber: Int) : this(lotto.number, bonusNumber)
 
-    fun match(lotto: Lotto): Pair<Int, Boolean> {
-        return number.count { lotto.isIn(it) } to lotto.isIn(LottoNumber.from(bonusNumber))
-    }
-
-    fun rank(value: Lotto): Rank {
-        val matchResult = match(value)
-        return Rank.valueOf(matchResult.first, matchResult.second)
+    fun rank(lotto: Lotto): Rank {
+        val matchCount = number.count { lotto.isIn(it) }
+        val matchBonus = lotto.isIn(LottoNumber.from(bonusNumber))
+        return Rank.valueOf(matchCount, matchBonus)
     }
 }
