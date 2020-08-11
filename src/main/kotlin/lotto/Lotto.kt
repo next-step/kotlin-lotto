@@ -3,8 +3,8 @@ package lotto
 class Lotto {
     private val lotto = getRandomNumbers()
 
-    fun matchLotto(winningLotto: List<Int>): Int {
-        return lotto.filter { winningLotto.contains(it) }.count()
+    fun matchLotto(winningLotto: WinningNumbers): Int {
+        return lotto.filter { winningLotto.isContained(it) }.count()
     }
 
     private fun getRandomNumbers(): List<Int> {
