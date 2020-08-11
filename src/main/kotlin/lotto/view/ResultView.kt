@@ -42,7 +42,7 @@ object ResultView {
 
     private fun getResultFormat(rank: Rank) = when (rank) {
         Rank.MISS -> WINNING_EXCHANGE_RESULT_MISS
-        Rank.SECOND -> WINNING_EXCHANGE_RESULT_BONUS
+        Rank.SECOND_HAS_BONUS -> WINNING_EXCHANGE_RESULT_BONUS
         else -> WINNING_EXCHANGE_RESULT
     }
 }
