@@ -1,10 +1,10 @@
 package lotto
 
+import lotto.InputView.DELIMITER
 import kotlin.math.roundToInt
 
 object LottoProgram {
     private const val UNIT = 1000
-    private const val COMMA = ","
     private const val MIN_MATCH_COUNT = 3
     private const val DECIMAL_STANDARD = 100.0
 
@@ -15,7 +15,7 @@ object LottoProgram {
 
     fun getWinningNumbers(winningNumbers: String): WinningNumbers {
         val numbers = winningNumbers.replace(" ", "")
-            .split(COMMA)
+            .split(DELIMITER)
             .map { it.toInt() }
         validateDuplicatedNumber(numbers)
         return WinningNumbers(numbers)

@@ -1,7 +1,7 @@
 package lotto
 
 object InputView {
-    private const val COMMA = ","
+    const val DELIMITER = ","
     fun inputAmountOfMoney(): Int {
         println("구입금액을 입력해 주세요.")
         return readLine()!!.toInt()
@@ -16,7 +16,7 @@ object InputView {
     }
 
     private fun validateDelimiter(winningNumbers: String) {
-        if (!winningNumbers.contains(COMMA)) {
+        if (!winningNumbers.contains(DELIMITER)) {
             throw IllegalArgumentException(",는 반드시 입력하세요.")
         }
     }
