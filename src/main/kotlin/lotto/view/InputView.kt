@@ -6,11 +6,11 @@ object InputView {
     private const val INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요."
     private const val ERR_INVALID_INPUT = "유효한 입력이 아닙니다. 다시 입력해주세요."
 
-    fun readMoney(isValid: (value: String) -> Boolean) = readValue(titleMsg = INPUT_MONEY, isValid = isValid)
+    fun readMoney(isValid: (value: String) -> Boolean) = readValue(titleMsg = INPUT_MONEY) { isValid(it) }
 
     fun readWinningNumbers() = readValue(INPUT_WINNING_NUMBERS)
 
-    fun readBonusNumber() = readValue(INPUT_BONUS_NUMBER)
+    fun readBonusNumber(isValid: (value: String) -> Boolean) = readValue(INPUT_BONUS_NUMBER) { isValid(it) }
 
     private fun readValue(
         titleMsg: String,

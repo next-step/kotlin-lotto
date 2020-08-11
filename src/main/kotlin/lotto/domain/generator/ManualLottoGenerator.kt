@@ -10,6 +10,7 @@ data class ManualLottoGenerator(private val input: String) : LottoGenerator {
     companion object {
         private const val NUMBER_DELIMITER = ","
 
-        private fun parseNumbers(numbers: String) = numbers.split(NUMBER_DELIMITER).map { LottoNumber(it.trim()) }
+        private fun parseNumbers(numbers: String) =
+            numbers.split(NUMBER_DELIMITER).map { LottoNumber(it.trim().toInt()) }
     }
 }

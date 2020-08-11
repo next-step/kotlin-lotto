@@ -47,8 +47,8 @@ object Application {
     }
 
     private fun processWinningLotto(lottoTicket: LottoTicket): WinningLottoTicket? = try {
-        val bonus = LottoNumber(InputView.readBonusNumber())
-        WinningLottoTicket(lottoTicket, bonus)
+        val number = InputView.readBonusNumber { it.toIntOrNull() != null }.toInt()
+        WinningLottoTicket(lottoTicket, LottoNumber(number))
     } catch (e: IllegalArgumentException) {
         ResultView.printInvalidBonusNumber()
         null
