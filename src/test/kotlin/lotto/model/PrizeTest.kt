@@ -34,6 +34,7 @@ class PrizeTest {
         val input = 5
         val bonusBall = false
         val prize = Prize.getPrize(input, bonusBall)
+        println(prize)
         assertThat(prize.prizeMoney).isEqualTo(Prize.TWO.prizeMoney)
         assertThat(prize).isEqualTo(Prize.TWO)
     }
