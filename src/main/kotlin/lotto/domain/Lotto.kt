@@ -1,6 +1,13 @@
 package lotto.domain
 
 class Lotto private constructor(private val numbers: Set<LottoNumber>) {
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.number }.toSet()) {
+        require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
+    }
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.number }.toSet()) {
+        require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
+    }
+
     init {
         require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
     }
@@ -16,19 +23,8 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
     companion object {
         private const val VALID_LOTTO_NUMBER = 6
         private const val LOTTO_DELIMITER = ","
+
         const val INVALID_MESSAGE = "로또는 중복되지 않은 ${VALID_LOTTO_NUMBER}개의 숫자로 생성할 수 있습니다."
-
-        fun of(vararg numbers: Int): Lotto {
-            require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
-            val lottoNumbers = numbers.map { LottoNumber.of(it) }.sortedBy { it.number }.toSet()
-            return Lotto(lottoNumbers)
-        }
-
-        fun of(numbers: List<Int>): Lotto {
-            require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
-            val lottoNumbers = numbers.map { LottoNumber.of(it) }.sortedBy { it.number }.toSet()
-            return Lotto(lottoNumbers)
-        }
 
         fun ofComma(value: String): Lotto {
             val numbers = value.split(LOTTO_DELIMITER).map { it.trim().toInt() }
