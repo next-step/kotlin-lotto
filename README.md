@@ -20,7 +20,7 @@
         - \n,// 가 추가된 String Test
     -InputView 입력 테스트
     
-##Lotto
+##Lotto 1. Auto
 
 1. Winners , Pirze , lotto , LottoNumberGenerater , lottoManager ,MoneyManager , inputView, resultView
 2. Winners , Pirze
@@ -44,3 +44,13 @@
 요구사항 
 - 로또 1개는 1000원
 - 입력된 금액으로 로또 구입 
+
+##Lotto 2. BonusBall 
+
+1. Enum에 보너스볼 2등 추가
+2. matching Check시, 보너스볼 추가
+3. Input BonusBall 추가
+4. 테스트 작성 
+    - 로또 2등 테스트
+    - 보너스볼 체크 테스트
+    - 2등이 추가된 prize 테스트

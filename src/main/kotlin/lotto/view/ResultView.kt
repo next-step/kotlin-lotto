@@ -1,8 +1,8 @@
 package lotto.view
 
-import lotto.model.Lotto
-import lotto.model.Prize
-import lotto.model.Winners
+import lotto.model.lotto.Lotto
+import lotto.model.prize.Prize
+import lotto.model.prize.Winners
 
 object ResultView {
     fun showLottos(list: List<Lotto>) {

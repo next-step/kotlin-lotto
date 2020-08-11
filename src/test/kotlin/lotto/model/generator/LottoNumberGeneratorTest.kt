@@ -1,7 +1,7 @@
 package lotto.model.generator
 
-import lotto.model.Lotto
-import org.assertj.core.api.Assertions
+import lotto.model.lotto.Lotto
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -10,15 +10,15 @@ class LottoNumberGeneratorTest {
     @DisplayName(value = "Auto Generate로 생성할 경우, Size는 Lotto.NUMBER_COUNT와 같아야한다. ")
     @Test
     fun randomNumberGeneratorCountTest() {
-        val numberGenerater = RandomNumberGenerater
-        Assertions.assertThat(numberGenerater.generate().size).isSameAs(Lotto.NUMBER_COUNT)
+        val numberGenerator = RandomNumberGenerator
+        assertThat(numberGenerator.generate().size).isSameAs(Lotto.NUMBER_COUNT)
     }
 
     @DisplayName(value = "Auto Generate로 생성할 경우, Number의 최대값과 최소값은 Lotto의 값을 따라야한다. ")
     @Test
     fun randomNumberGeneratorMinMaxTest() {
-        val numberGenerater = RandomNumberGenerater
-        Assertions.assertThat(numberGenerater.generate().list.max()).isLessThan(Lotto.MAX_NUMBER)
-        Assertions.assertThat(numberGenerater.generate().list.min()).isGreaterThan(Lotto.MIN_NUMBER)
+        val numberGenerator = RandomNumberGenerator
+        assertThat(numberGenerator.generate().list.first().number).isLessThan(Lotto.MAX_NUMBER)
+        assertThat(numberGenerator.generate().list.first().number).isGreaterThan(Lotto.MIN_NUMBER)
     }
 }

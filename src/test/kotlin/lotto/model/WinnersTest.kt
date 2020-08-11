@@ -1,6 +1,8 @@
 package lotto.model
 
-import org.assertj.core.api.Assertions
+import lotto.model.prize.Prize
+import lotto.model.prize.Winners
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -21,7 +23,7 @@ class WinnersTest {
             add(Prize.getPrize(Prize.ZERO.matchingCount))
         }
         val winners = Winners(list)
-        Assertions.assertThat(winners.getPrizeCount(Prize.ONE)).isSameAs(3)
+        assertThat(winners.getPrizeCount(Prize.ONE)).isSameAs(3)
     }
 
     @DisplayName(value = "하나도 당첨되지 않았을 경우, 전체 수익률을 0 ")
@@ -32,7 +34,7 @@ class WinnersTest {
             add(Prize.getPrize(Prize.ZERO.matchingCount))
         }
         val winners = Winners(list)
-        Assertions.assertThat(winners.getTotalYield()).isEqualTo(0.0)
+        assertThat(winners.getTotalYield()).isEqualTo(0.0)
     }
 
     @DisplayName(value = "하나 이상 당첨되었을 경우, 전체 수익률을 1.0보다 커야한다. ")
@@ -43,6 +45,6 @@ class WinnersTest {
             add(Prize.getPrize(input))
         }
         val winners = Winners(list)
-        Assertions.assertThat(winners.getTotalYield()).isGreaterThan(1.0)
+        assertThat(winners.getTotalYield()).isGreaterThan(1.0)
     }
 }
