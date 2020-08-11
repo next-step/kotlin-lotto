@@ -13,9 +13,13 @@ enum class Rank(val matches: Int, val prize: Int) {
     FOURTH_PRIZE(3, FOURTH_REWARD),
     NONE(0, NONE_REWARD);
 
+    fun sumPrize(count: Int): Int {
+        return prize * count
+    }
+
     companion object {
         fun of(count: Int): Rank {
-            return Rank.values().find { it.matches == count } ?: NONE
+            return values().find { it.matches == count } ?: NONE
         }
     }
 }

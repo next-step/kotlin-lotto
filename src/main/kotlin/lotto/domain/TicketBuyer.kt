@@ -6,6 +6,6 @@ class TicketBuyer {
     }
 
     companion object {
-        private const val TICKET_COST = 1000
+        const val TICKET_COST = 1000
     }
 }
