@@ -1,15 +1,16 @@
 package model
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
     @Test
-    @DisplayName("1 ~ 50 사이의 6개 중복되지 않는 숫자가 반환된다")
-    fun `createLottoNumber`() {
-        val diceRandom = DiceRandomMaker()
-        val result = Lotto(diceRandom)
-        assertThat(result.lottoNumber.size).isEqualTo(Lotto.MAKE_NUMBER_COUNT)
+    @DisplayName("같은 숫자가 로또에 있으면 exception 을 반환한다")
+    fun `InvalidLotto`() {
+        assertThrows<IllegalArgumentException> {
+            val list: Set<LottoNumber> = setOf(1, 1, 2, 3, 4, 5).map { LottoNumber.from(it) }.toSet()
+            Lotto(list)
+        }
     }
 }

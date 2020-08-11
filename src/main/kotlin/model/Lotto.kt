@@ -1,13 +1,25 @@
 package model
 
-class Lotto(diceRandom: DiceRandom) {
-    val lottoNumber = diceRandom.diceList.sorted()
+class Lotto(override val number: Set<LottoNumber>) : BasicLotto {
+    init {
+        require(number.size == 6) { "not accept lotto" }
+    }
 
-    fun matchCount(prize: List<Int>): Int {
-        return lottoNumber.count { prize.contains(it) }
+    fun isIn(value: LottoNumber): Boolean {
+        return number.contains(value)
     }
 
     companion object {
-        const val MAKE_NUMBER_COUNT = 6
+        const val SIZE = 6
+        private val allLottoNumberList = IntRange(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
+
+        fun make(): Lotto {
+            val lottoNumberList = allLottoNumberList.shuffled().take(SIZE).map { LottoNumber.from(it) }.toSet()
+            return Lotto(lottoNumberList)
+        }
+    }
+
+    override fun toString(): String {
+        return number.map { it.value }.joinToString(prefix = "[", postfix = "]")
     }
 }

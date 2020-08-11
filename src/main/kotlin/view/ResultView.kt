@@ -1,27 +1,25 @@
 package view
 
 import model.Lotto
-import model.PrizeEarn
+import model.LottoStat
+import model.Rank
 
 object ResultView {
-    fun showLottoList(list: List<Lotto>) {
-        for (lotto in list) {
-            println(lotto.lottoNumber)
+    fun printLottoList(list: List<Lotto>) {
+        list.forEach {
+            print(it)
+            println()
         }
         println()
     }
 
-    fun showPrizeList(prizeStatList: List<PrizeEarn>) {
-        println(
-            "당첨 통계\n" +
-                "---------"
-        )
-        for (prizeEarn in prizeStatList) {
-            println("${prizeEarn.grade}개 일치 (${prizeEarn.prizeMoney}원)- ${prizeEarn.count}개")
-        }
+    fun printLottoStat(list: List<LottoStat>) {
+        list.filter { it.isOverGrade(Rank.MISS.grade) }
+            .forEach { print("${it.grade()}개 일치 (${it.sumPrizeMoney()}) - ${it.count} 개\n") }
+        println()
     }
 
-    fun showEarningRate(value: Double) {
-        println("총 수익률은 ${value}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    fun printEarningRate(earningRate: Double) {
+        println("총 수익률은 " + String.format("%.2f", earningRate) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 }
