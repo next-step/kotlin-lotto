@@ -10,7 +10,7 @@ enum class LottoType {
 
         fun generatorOf(type: LottoType = AUTO, numbers: String = "") = when (type) {
             MANUAL -> ManualLottoGenerator(numbers)
-            else -> AutoLottoGenerator
+            AUTO -> AutoLottoGenerator
         }
     }
 }

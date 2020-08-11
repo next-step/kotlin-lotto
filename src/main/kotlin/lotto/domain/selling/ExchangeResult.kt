@@ -1,16 +1,15 @@
 package lotto.domain.selling
 
-data class ExchangeResult(val details: Map<Int, Int>) {
-    private val totalPrizeMoney = details.toSortedMap().entries.sumBy { findPrizeMoney(it.key) }
+import java.math.BigDecimal
+import java.math.RoundingMode
 
-    fun calculateRateOfReturn(): Float {
-        val origin = details.entries.sumBy { it.value } * Seller.LOTTO_PRICE
-        return totalPrizeMoney.toFloat() / origin
-    }
+data class ExchangeResult(val paymentResult: PaymentResult, val details: Map<Rank, Int>) {
+    private val totalPrizeMoney = details.keys.sumBy { it.prizeMoney }
+
+    val rateOfReturn: BigDecimal =
+        BigDecimal(totalPrizeMoney).divide(BigDecimal(paymentResult.money), EXCHANGE_SCALE, RoundingMode.DOWN)
 
     companion object {
-        private val PRIZE_MONEY = hashMapOf(3 to 5000, 4 to 50000, 5 to 1_500_000, 6 to 2_000_000_000)
-
-        fun findPrizeMoney(matchCount: Int) = PRIZE_MONEY[matchCount] ?: 0
+        private const val EXCHANGE_SCALE = 2
     }
 }
