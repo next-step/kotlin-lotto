@@ -1,9 +1,12 @@
 package model
 
 data class LottoStat(val rank: Rank, val count: Int) {
-    val prizeMoney
-        get() = rank.prizeMoney * count
 
-    val grade
-        get() = rank.grade
+    fun getGrade(): Int {
+        return rank.grade
+    }
+
+    fun getSumPrizeMoney(): Int {
+        return rank.sumPrizeMoney(count)
+    }
 }

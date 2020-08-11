@@ -8,6 +8,10 @@ enum class Rank(val grade: Int, val prizeMoney: Int) {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
+    fun sumPrizeMoney(count: Int): Int {
+        return prizeMoney * count
+    }
+
     companion object {
         fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
             return values().find { getRank(countOfMatch, matchBonus, it) } ?: MISS

@@ -29,7 +29,7 @@ object InputView {
     }
 
     private fun makeLottoNumber(inputPrizeNumbers: String) =
-        inputPrizeNumbers.split(DELIMITER).map { LottoNumber.from(it.toInt()) }
+        inputPrizeNumbers.split(DELIMITER).map { LottoNumber.from(it.toInt()) }.toSet()
 
     private fun removeWhiteSpace(inputString: String): String {
         return if (inputString.contains(" ")) {

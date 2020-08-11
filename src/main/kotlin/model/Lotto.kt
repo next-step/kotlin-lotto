@@ -1,16 +1,20 @@
 package model
 
-class Lotto(override val number: List<LottoNumber>) : BasicLotto {
+class Lotto(override val number: Set<LottoNumber>) : BasicLotto {
     init {
-        val checkDuplicateNumber = number.groupingBy { it }.eachCount().values.filter { it > 1 }
-        require(checkDuplicateNumber.isEmpty()) { "not accept lotto" }
+        require(number.size == 6) { "not accept lotto" }
+    }
+
+    fun isIn(value: LottoNumber): Boolean {
+        return number.contains(value)
     }
 
     companion object {
         const val SIZE = 6
+        private val allLottoNumberList = IntRange(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
 
         fun make(): Lotto {
-            val lottoNumberList = IntRange(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER).shuffled().take(SIZE).map { LottoNumber.from(it) }
+            val lottoNumberList = allLottoNumberList.shuffled().take(SIZE).map { LottoNumber.from(it) }.toSet()
             return Lotto(lottoNumberList)
         }
     }

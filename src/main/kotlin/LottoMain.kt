@@ -14,9 +14,8 @@ fun main() {
 
     var prize = InputView.getPrizeLotto()
 
-    val winningLotto = WinningLotto(prize)
     val bonusBall = InputView.getBonusBall()
-    winningLotto.bonusNumber = bonusBall
+    val winningLotto = WinningLotto(prize, bonusBall)
 
     val lottoStatList = WinningResult.of(lottoList, winningLotto)
     ResultView.printLottoStat(lottoStatList)

@@ -2,17 +2,17 @@ package model
 
 import kotlin.properties.Delegates
 
-class WinningLotto(override val number: List<LottoNumber>) : BasicLotto {
+class WinningLotto(override val number: Set<LottoNumber>) : BasicLotto {
     var bonusNumber by Delegates.notNull<Int>()
 
-    constructor(number: List<LottoNumber>, bonusNumber: Int) : this(number) {
+    constructor(number: Set<LottoNumber>, bonusNumber: Int) : this(number) {
         this.bonusNumber = bonusNumber
     }
 
-    constructor(lotto: Lotto) : this(lotto.number)
+    constructor(lotto: Lotto, bonusNumber: Int) : this(lotto.number, bonusNumber)
 
-    fun match(value: Lotto): Pair<Int, Boolean> {
-        return number.count { value.number.contains(it) } to value.number.contains(LottoNumber.from(bonusNumber))
+    fun match(lotto: Lotto): Pair<Int, Boolean> {
+        return number.count { lotto.isIn(it) } to lotto.isIn(LottoNumber.from(bonusNumber))
     }
 
     fun rank(value: Lotto): Rank {

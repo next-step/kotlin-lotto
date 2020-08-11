@@ -10,5 +10,9 @@ class LottoNumber private constructor(val value: Int) {
         fun from(value: Int): LottoNumber {
             return NUMBERS.getOrElse(value) { throw IllegalArgumentException() }
         }
+
+        fun from(value: String): LottoNumber {
+            return NUMBERS.getOrElse(value.toInt()) { throw IllegalArgumentException() }
+        }
     }
 }

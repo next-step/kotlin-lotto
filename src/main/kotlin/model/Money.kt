@@ -10,7 +10,12 @@ data class Money(private var _value: Int) {
         this._value = value.toInt()
     }
 
+    fun getLottoCount(): Int {
+        return value / LOTTO_PRICE
+    }
+
     companion object {
+        const val LOTTO_PRICE = 1_000
         val NUMBER_REGEX = Regex(pattern = "^?[0-9]\\d*(\\.\\d+)?\$")
     }
 }
