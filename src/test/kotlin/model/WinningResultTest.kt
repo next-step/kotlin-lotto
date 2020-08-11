@@ -18,15 +18,6 @@ class WinningResultTest {
     }
 
     @Test
-    @DisplayName("당첨 금액을 합산할 수 있다")
-    fun `sumPrizeMoney`() {
-        var list = lottoList()
-        val winningLotto = WinningLotto(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }.toSet(), 7)
-        val winningResult = WinningResult(list, winningLotto, Money(1000))
-        assertThat(winningResult.sum()).isGreaterThanOrEqualTo(0)
-    }
-
-    @Test
     @DisplayName("수익률을 계산 할 수 있다")
     fun `getEarningRate`() {
         var list = lottoList()
