@@ -11,9 +11,13 @@ class TicketBuilder {
         }
 
         private fun create(): Ticket {
-            return Ticket(NUMBERS.shuffled().take(6))
+            return Ticket(randomNumbers())
         }
 
-        private val NUMBERS = (1 until 45).toList()
+        private fun randomNumbers(): List<Int> {
+            return NUMBERS.shuffled().take(Ticket.TICKET_NUMBER_SIZE)
+        }
+
+        private val NUMBERS = (Ticket.TICKET_NUMBER_MIN until Ticket.TICKET_NUMBER_MAX).toList()
     }
 }
