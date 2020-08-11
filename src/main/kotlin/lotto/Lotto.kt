@@ -1,7 +1,11 @@
 package lotto
 
 class Lotto {
-    val lotto = getRandomNumbers()
+    private val lotto = getRandomNumbers()
+
+    fun matchLotto(winningLotto: List<Int>): Int {
+        return lotto.filter { winningLotto.contains(it) }.count()
+    }
 
     private fun getRandomNumbers(): List<Int> {
         return (MIN_NUMBER..MAX_NUMBER).map { it }.shuffled().subList(FIRST_INDEX, LAST_INDEX).sorted()
