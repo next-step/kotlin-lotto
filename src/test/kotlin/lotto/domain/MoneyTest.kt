@@ -16,9 +16,9 @@ internal class MoneyTest {
     }
 
     @Test
-    fun `toString()은 원을 붙여 출력한다`() {
+    fun `toString()은 콤마와 원을 붙여 출력한다`() {
         val actual = Money(1000.toBigInteger()).toString()
-        assertThat(actual).isEqualTo("1000원")
+        assertThat(actual).isEqualTo("1,000원")
     }
 
     @Test
