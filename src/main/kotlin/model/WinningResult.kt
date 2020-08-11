@@ -1,7 +1,7 @@
 package model
 
-object WinningResult {
-    fun of(lottoList: List<Lotto>, winningLotto: WinningLotto): List<LottoStat> {
+class WinningResult(private val lottoList: List<Lotto>, private val winningLotto: WinningLotto, private val money: Money) {
+    fun stat(): List<LottoStat> {
         val lottoStatMap = mutableMapOf<Rank, Int>()
         lottoList.forEach {
             val rank = winningLotto.rank(it)
@@ -10,11 +10,11 @@ object WinningResult {
         return lottoStatMap.map { LottoStat(it.key, it.value) }.toList()
     }
 
-    fun sum(list: List<LottoStat>): Int {
-        return list.sumBy { it.sumPrizeMoney() }
+    fun sum(): Int {
+        return stat().sumBy { it.sumPrizeMoney() }
     }
 
-    fun earningRate(list: List<LottoStat>, money: Money): Double {
-        return (sum(list) / money.value).toDouble()
+    fun earningRate(): Double {
+        return (sum() / money.value).toDouble()
     }
 }

@@ -1,6 +1,5 @@
 
 import model.WinningLotto
-import model.WinningResult
 import view.InputView
 import view.ResultView
 
@@ -17,9 +16,8 @@ fun main() {
     val bonusBall = InputView.getBonusBall()
     val winningLotto = WinningLotto(prize, bonusBall)
 
-    val lottoStatList = WinningResult.of(lottoList, winningLotto)
-    ResultView.printLottoStat(lottoStatList)
+    val winningResult = lottoGame.match(winningLotto)
 
-    val earningRate = WinningResult.earningRate(lottoStatList, money)
-    ResultView.printEarningRate(earningRate)
+    ResultView.printLottoStat(winningResult.stat())
+    ResultView.printEarningRate(winningResult.earningRate())
 }
