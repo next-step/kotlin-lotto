@@ -18,12 +18,12 @@ object Application {
     fun main(args: Array<String>) {
         val paymentResult = inputUserPayment()
         var lottoTicket: LottoTicket?
-        var winningLottoTicket: WinningLottoTicket?
 
         do {
             lottoTicket = inputWinningNumbers()
         } while (lottoTicket == null)
 
+        var winningLottoTicket: WinningLottoTicket?
         do {
             winningLottoTicket = processWinningLotto(lottoTicket)
         } while (winningLottoTicket == null)
