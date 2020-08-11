@@ -26,24 +26,6 @@ class LottoAnalyticsTest {
         }
     }
 
-    @Test
-    fun `totalProfitRate() 총 로또 비용대비 수익률 계산`() {
-        val analytics = LottoAnalytics()
-        val results = analytics.matchTickets(
-            listOf(
-                Ticket(1, 2, 3, 4, 5, 6),
-                Ticket(1, 2, 3, 4, 5, 16),
-                Ticket(1, 2, 3, 4, 15, 16),
-                Ticket(1, 2, 3, 14, 15, 16),
-                Ticket(11, 12, 13, 14, 15, 16)
-            ),
-            WINNER_TICKET
-        )
-        assertThat(
-            analytics.totalProfitRate(results)
-        ).isEqualTo(400311.0f)
-    }
-
     companion object {
         private val WINNER_TICKET = Ticket(1, 2, 3, 4, 5, 6)
     }

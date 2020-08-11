@@ -8,8 +8,4 @@ class LottoAnalytics {
             }
         }
     }
-
-    fun totalProfitRate(results: LottoResult): Float {
-        return results.collectAllPrizes().toFloat() / (results.cost).toFloat()
-    }
 }

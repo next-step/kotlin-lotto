@@ -1,14 +1,16 @@
 package lotto.domain
 
 class Ticket(i1: Int, i2: Int, i3: Int, i4: Int, i5: Int, i6: Int) {
-    private val set = setOf(i1, i2, i3, i4, i5, i6)
+    constructor(numbers: List<Int>) : this(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5])
+
+    val numbers = setOf(i1, i2, i3, i4, i5, i6)
 
     init {
-        require(set.all { it in 1 until 45 })
-        require(set.size == 6)
+        require(numbers.all { it in 1 until 45 })
+        require(numbers.size == 6)
     }
 
     fun countMatches(ticket: Ticket): Int {
-        return set.count { ticket.set.contains(it) }
+        return numbers.count { ticket.numbers.contains(it) }
     }
 }

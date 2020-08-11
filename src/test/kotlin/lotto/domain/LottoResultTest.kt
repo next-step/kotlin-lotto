@@ -32,4 +32,17 @@ class LottoResultTest {
 
         assertThat(result.collectAllPrizes()).isEqualTo(2001555000)
     }
+
+    @Test
+    fun `totalProfitRate() 총 로또 비용대비 수익률 계산`() {
+        val result = LottoResult().also {
+            it[Rank.FIRST_PRIZE]++
+            it[Rank.SECOND_PRIZE]++
+            it[Rank.THIRD_PRIZE]++
+            it[Rank.FOURTH_PRIZE]++
+            it[Rank.NONE]++
+        }
+
+        assertThat(result.totalProfitRate()).isEqualTo(400311.0f)
+    }
 }
