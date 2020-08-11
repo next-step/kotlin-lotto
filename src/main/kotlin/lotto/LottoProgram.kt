@@ -37,9 +37,7 @@ object LottoProgram {
     }
 
     private fun matchLotto(userLotto: Lotto, winningLotto: List<Int>): Int {
-        val count = userLotto.lotto.filter { winningLotto.contains(it) }.count()
-        if (count < MIN_MATCH_COUNT) return 0
-        return count
+        return userLotto.lotto.filter { winningLotto.contains(it) }.count()
     }
 
     private fun validateMoneyUnit(amountOfMoney: Int) {

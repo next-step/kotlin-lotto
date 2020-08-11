@@ -8,7 +8,10 @@ enum class Rank(val count: Int, val prize: Int) {
     FOURTH(3, 5000);
 
     companion object {
+        private const val MIN_MATCH_COUNT = 3
+
         fun of(matchCount: Int): Rank {
+            if (matchCount < MIN_MATCH_COUNT) return NONE
             return Rank.values().filter { it.count == matchCount }[0]
         }
     }
