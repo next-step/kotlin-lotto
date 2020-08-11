@@ -1,6 +1,6 @@
 package calculator.domain
 
-const val SIMPLE_DELIMITER = ",|:"
+private const val SIMPLE_DELIMITER = ",|:"
 val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
 val NUMERIC_REGEX = Regex("[0-9]")
 val DELIMITER_REGEX = Regex("//(.)\n(.*)")
