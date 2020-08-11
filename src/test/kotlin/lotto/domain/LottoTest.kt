@@ -44,11 +44,10 @@ class LottoTest {
     @MethodSource("generateSecondsTestData")
     fun `로또 번호, 당첨 번호와 보너스 번호가 주어질 때 2등 당첨인 경우, 2등 로또 카운트는 1이다`(
         lotto: Set<Int>,
-        winningNumber: Set<Int>,
-        bonusNumber: Int,
+        winningLotto: WinningLotto,
         expected: Int
     ) {
-        Lotto(lotto).countWinningNumber(winningNumber, bonusNumber)
+        Lotto(lotto).countWinningNumber(winningLotto)
 
         assertThat(PrizeGenerator.BONUS_MATCH.count).isEqualTo(expected)
     }
@@ -57,7 +56,7 @@ class LottoTest {
         @JvmStatic
         fun generateSecondsTestData(): List<Arguments> {
             return listOf(
-                Arguments.of(setOf(1, 2, 3, 4, 5, 6), setOf(1, 2, 3, 4, 5, 7), 6, 1)
+                Arguments.of(setOf(1, 2, 3, 4, 5, 6), WinningLotto(setOf(1, 2, 3, 4, 5, 7), 6), 1)
             )
         }
     }

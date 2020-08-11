@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.domain.Numbers
+import lotto.domain.WinningLotto
 
 object InputView {
 
@@ -14,7 +14,7 @@ object InputView {
         return price
     }
 
-    fun lastWinningNumbers(): Numbers {
+    fun lastWinningLotto(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val text = readLine()
         var winningNumbers = validateWinningNumber(text)
@@ -24,20 +24,16 @@ object InputView {
             winningNumbers = validateWinningNumber(readLine())
         }
 
-        return winningNumbers.map { it.toInt() }.toSet()
-    }
-
-    fun bonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        val text = readLine()
-        var bonusNumber = validateBonusNumber(text)
+        val text2 = readLine()
+        var bonusNumber = validateBonusNumber(text2)
 
         while (bonusNumber == 0) {
             println("다시 입력해주세요")
             bonusNumber = validate(readLine())
         }
 
-        return bonusNumber
+        return WinningLotto(winningNumbers.map { it.toInt() }.toSet(), bonusNumber)
     }
 
     private fun validateBonusNumber(text: String?): Int {

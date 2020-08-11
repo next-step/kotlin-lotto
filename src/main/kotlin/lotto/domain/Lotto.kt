@@ -10,16 +10,16 @@ class Lotto {
         this.numbers = numbers
     }
 
-    fun countWinningNumber(winningNumber: Numbers, bonusNumber: Int) {
+    fun countWinningNumber(winningLotto: WinningLotto) {
         val winningCount = numbers.filter {
-            winningNumber.contains(it)
+            winningLotto.winningNumbers.contains(it)
         }.count()
 
         when (winningCount) {
             PrizeGenerator.THREE_MATCH.matched -> PrizeGenerator.THREE_MATCH.countRank()
             PrizeGenerator.FOUR_MATCH.matched -> PrizeGenerator.FOUR_MATCH.countRank()
             PrizeGenerator.FIVE_MATCH.matched -> {
-                if (isMatchedBonusNumber(winningCount, bonusNumber)) {
+                if (isMatchedBonusNumber(winningCount, winningLotto.bonusNumber)) {
                     PrizeGenerator.BONUS_MATCH.countRank()
                 } else {
                     PrizeGenerator.FIVE_MATCH.countRank()

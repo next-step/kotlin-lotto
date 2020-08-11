@@ -15,9 +15,8 @@ object Application {
         val lottos = Lottos.of(purchaseCount)
         ResultView.showPurchasedLottos(purchaseCount, lottos.lottos)
 
-        val winningNumbers = InputView.lastWinningNumbers()
-        val bonusNumber = InputView.bonusNumber()
-        lottos.matchWinningCount(winningNumbers, bonusNumber)
+        val winningLotto = InputView.lastWinningLotto()
+        lottos.matchWinningCount(winningLotto)
 
         ResultView.showWinningResult(lottos)
 
