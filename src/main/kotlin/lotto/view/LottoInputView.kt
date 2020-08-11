@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.domain.Ticket
 
-class LottoStartView {
+class LottoInputView {
     fun inputTicketCost(): Int {
         println("구입금액을 입력해 주세요.")
         return readLine()!!.toInt()

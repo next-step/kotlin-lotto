@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.TicketBuyer.Companion.TICKET_COST
 
 class LottoResult {
-    val cost: Int get() = resultMap.values.sum() * TICKET_COST
+    private val cost: Int get() = resultMap.values.sum() * TICKET_COST
 
     private val resultMap = hashMapOf<Rank, Int>()
 

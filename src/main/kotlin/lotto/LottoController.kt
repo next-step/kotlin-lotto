@@ -4,17 +4,17 @@ import lotto.domain.LottoAnalytics
 import lotto.domain.LottoResult
 import lotto.domain.TicketBuyer
 import lotto.view.LottoResultView
-import lotto.view.LottoStartView
+import lotto.view.LottoInputView
 
 class LottoController {
-    fun start(startView: LottoStartView, analytics: LottoAnalytics): LottoResult {
-        val cost = startView.inputTicketCost()
+    fun start(inputView: LottoInputView, analytics: LottoAnalytics): LottoResult {
+        val cost = inputView.inputTicketCost()
         val count = TicketBuyer.howMuchTickets(cost)
         val tickets = TicketBuilder.sellTickets(count)
 
-        startView.printTickets(tickets)
+        inputView.printTickets(tickets)
 
-        val winner = startView.inputWinnerTicket()
+        val winner = inputView.inputWinnerTicket()
         return analytics.matchTickets(tickets, winner)
     }
 
