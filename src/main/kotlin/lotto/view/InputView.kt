@@ -12,12 +12,9 @@ fun getManualTicketCount(): Int {
 
 fun getManualLottoNumbersList(count: Int): List<IntArray> {
     println("수동으로 구매할 번호를 입력해 주세요.")
-    val manualNumbersList = mutableListOf<IntArray>()
-    repeat(count) {
-        val manualNumbers = readLine()!!.split(",").map { it.toInt() }.toIntArray()
-        manualNumbersList.add(manualNumbers)
+    return (1..count).map {
+        readLine()!!.split(",").map { it.toInt() }.toIntArray()
     }
-    return manualNumbersList
 }
 
 fun getLuckyNumbers(): IntArray {

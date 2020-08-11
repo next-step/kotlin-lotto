@@ -13,7 +13,16 @@ class LuckyLottoNumbers(
         LottoNumber.of(bonusNumber)
     )
 
-    fun compare(lottoTickets: LottoTickets): LottoResults {
-        return lottoTickets.getLottoResultsWith(luckyTicket, bonusNumber)
+    fun getLottoResultsWith(lottoTickets: LottoTickets): LottoResults {
+        return lottoTickets.tickets.map { getLottoResultOf(it) }
+            .groupingBy { it }
+            .eachCount()
+            .let { LottoResults(it) }
+    }
+
+    private fun getLottoResultOf(lottoTicket: LottoTicket): LottoResult {
+        val matchCount = lottoTicket.getMatchCountWith(luckyTicket)
+        val hasBonus = lottoTicket.has(bonusNumber)
+        return LottoResult.findByMatch(matchCount, hasBonus)
     }
 }

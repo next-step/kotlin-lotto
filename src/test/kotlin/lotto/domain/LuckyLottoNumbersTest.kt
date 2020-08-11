@@ -36,7 +36,7 @@ internal class LuckyLottoNumbersTest {
         )
 
         // when
-        val lottoResults = luckyLottoNumbers.compare(lottoTickets)
+        val lottoResults = luckyLottoNumbers.getLottoResultsWith(lottoTickets)
 
         // then
         assertAll(
