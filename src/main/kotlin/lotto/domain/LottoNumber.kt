@@ -21,7 +21,7 @@ class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> 
 
     companion object {
         val NUMBER_RANGE = 1..45
-        private val cache = HashMap(NUMBER_RANGE.associateWith { LottoNumber(it) })
+        private val cache: Map<Int, LottoNumber> = HashMap(NUMBER_RANGE.associateWith { LottoNumber(it) })
 
         fun take(count: Int): List<LottoNumber> {
             require(count in 0..NUMBER_RANGE.last) { "count는 ${NUMBER_RANGE.last} 이하의 숫자여야 합니다." }
