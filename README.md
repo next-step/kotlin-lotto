@@ -64,15 +64,16 @@
     - 로또 등수에 해당하며 맞춘 갯수에 따라 보상을 갖는다 
 - LottoResult
     - Rank를 감싸고 있는 1급 객체
+    - 로또에 따른 수익률을 계산한다.
 - LottoAnalytics
     - 당첨 티켓을 가지고 구매한 티켓 목록을 각각 비교하여 LottResult를 반환한다.
-    - 로또에 따른 수익률과 통계를 계산한다. 
 - TicketBuilder 
     - 구매 요청을 받으면 1 ~ 45 사이의 숫자 6개를 골라서 로또 티켓을 생성 한다.
     - 내부적으로 랜덤을 사용하므로 Main 또는 View 로직에서 생성한다.   
- - LottoView
-    - 사용자로부터 금액과 당첨 가격을 입력 받는다.
-    - LottoAnalytics로 부터 결과를 받아서 당첨 통계를 출력한다.
-- LottoBuyer(controller)
+- LottoInputView
+    - 사용자로부터 금액과 가격, 그리고 당첨 로또번호를 입력 받는다.
+- LottoResultView
+    - 결과와 통계를 출력한다.
+- LottoControlle
     - 금액을 받으면 구매할 수 있는 최대 장수의 티켓을 TicketBuilder로 부터 구매한다.
     - 최종적으로 수익률을 계산한다.
