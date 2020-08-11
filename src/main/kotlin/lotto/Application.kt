@@ -7,7 +7,7 @@ fun main() {
         val lottos = Lottos(amountOfLotto)
         OutputView.showUserLottos(lottos.lottos)
         val numbers = InputView.inputWinningNumbers()
-        val winningNumbers = LottoProgram.getWinningNumbers(numbers)
+        val winningNumbers = WinningNumbers.getInstance(numbers)
         val result = LottoProgram.matchLottos(lottos, winningNumbers)
         val rateOfReturn = LottoProgram.calculateRateOfReturn(result, amountOfMoney)
         OutputView.showResults(result, rateOfReturn)
