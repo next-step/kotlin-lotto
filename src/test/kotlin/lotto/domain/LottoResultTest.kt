@@ -8,10 +8,10 @@ class LottoResultTest {
 
     @CsvSource(
         "6,FIRST,false",
-        "5,SECOND_BONUS,true",
-        "5,SECOND,false",
-        "4,THIRD,false",
-        "3,FOURTH,false",
+        "5,SECOND,true",
+        "5,THIRD,false",
+        "4,FOURTH,false",
+        "3,FIFTH,false",
         "2,LOSE,false",
         "1,LOSE,false",
         "0,LOSE,false"

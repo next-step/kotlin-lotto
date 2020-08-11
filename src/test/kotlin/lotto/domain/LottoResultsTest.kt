@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class LottoResultsTest {
 
-    @CsvSource("FIRST,1", "SECOND_BONUS,2", "SECOND,3", "THIRD,4", "FOURTH,5")
+    @CsvSource("FIRST,1", "SECOND,2", "THIRD,3", "FOURTH,4", "FIFTH,5")
     @ParameterizedTest
     fun `해당 로또 결과의 개수르 잘 가져오는지 확인`(lottoResult: LottoResult, count: Int) {
         // given

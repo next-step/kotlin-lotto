@@ -19,10 +19,18 @@ fun printLottoResults(lottoResults: LottoResults) {
 private fun printLottoResult(result: LottoResult, size: Int) {
     if (result == LottoResult.LOSE) return
     if (result == LottoResult.SECOND) {
-        println("${result.matchCount}개 일치, 보너스 볼 일치(${result.prize}원)- ${size}개")
+        println("5개 일치, 보너스 볼 일치(${result.prize}원)- ${size}개")
         return
     }
-    println("${result.matchCount}개 일치, (${result.prize}원)- ${size}개")
+    println("${getMatchCount(result)}개 일치, (${result.prize}원)- ${size}개")
+}
+
+private fun getMatchCount(result: LottoResult) = when (result) {
+    LottoResult.FIRST -> 6
+    LottoResult.SECOND, LottoResult.THIRD -> 5
+    LottoResult.FOURTH -> 4
+    LottoResult.FIFTH -> 3
+    else -> 0
 }
 
 fun printEarnRatio(ratio: BigDecimal) {
