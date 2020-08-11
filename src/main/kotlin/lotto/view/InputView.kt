@@ -12,6 +12,7 @@ object InputView {
     private const val ERROR_INVALID_STRING = "틀린 형식입니다."
     private const val REQUIRE_MORE_THAN_THOUSAND = "1000원 이상의 숫자를 넣어주세요."
     private const val LOTTO_PRICE = 1000
+    private const val DELIMITER = ","
 
     fun inputMoney(): Money {
         // 숫자가 아닌 값을 입력한경우
@@ -45,7 +46,7 @@ object InputView {
         // 중복된 값이 있는 경우
         // 1 ~ 45 사이의 값이 아닌 경우
         return try {
-            Lotto.ofComma(value)
+            Lotto(value.split(DELIMITER).map { it.toInt() })
         } catch (e: Throwable) {
             println("$ERROR_INVALID_STRING ${e.message}")
             inputWinningNumber()
