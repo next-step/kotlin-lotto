@@ -18,7 +18,7 @@ internal class LottoTicketTest {
             )
         )
 
-        val winningLotto = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+        val winningLotto = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(7))
         val lottoResult = lottos.match(winningLotto)
 
         assertThat(lottoResult.countByRank(Rank.FIRST)).isEqualTo(1)

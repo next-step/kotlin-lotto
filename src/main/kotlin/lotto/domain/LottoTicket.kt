@@ -1,13 +1,13 @@
 package lotto.domain
 
-import lotto.domain.LottoNumber.Companion.MAX_NUMBER
-import lotto.domain.LottoNumber.Companion.MIN_NUMBER
+import lotto.domain.LottoNumber.Companion.MINIMUM_NUMBER
+import lotto.domain.LottoNumber.Companion.MAXIMUM_NUMBER
 
 class LottoTicket constructor(val lottos: List<Lotto>) {
     constructor(count: Int) : this(
         List(count) {
             Lotto(
-                (MIN_NUMBER..MAX_NUMBER).shuffled().take(TAKE_NUMBER).sorted()
+                (MINIMUM_NUMBER..MAXIMUM_NUMBER).shuffled().take(TAKE_NUMBER).sorted()
             )
         }
     )
