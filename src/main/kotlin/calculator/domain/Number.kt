@@ -2,7 +2,7 @@ package calculator.domain
 
 private const val SIMPLE_DELIMITER = ",|:"
 val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
-val NUMERIC_REGEX = Regex("[0-9]")
+val NUMERIC_REGEX = Regex("[0-9]+")
 val DELIMITER_REGEX = Regex("//(.)\n(.*)")
 
 fun validate(string: String?): String {
@@ -34,12 +34,13 @@ fun parse(text: String): List<String> {
     return matchResult!!.groupValues[2].split(delimiter)
 }
 
-class Number(private val number: String) {
-
-    fun isNature(): Int {
-        if (NUMERIC_REGEX.matches(number)) {
-            return number.toInt()
-        }
-        throw IllegalArgumentException("숫자가 아닙니다")
+fun toIntOrNull(number: String): Int? {
+    if (NUMERIC_REGEX.matches(number)) {
+        return number.toInt()
     }
+    return null
+}
+
+class Number(val number: Int) {
+    constructor(number: String) : this(toIntOrNull(number) ?: throw IllegalArgumentException("숫자가 아닙니다"))
 }

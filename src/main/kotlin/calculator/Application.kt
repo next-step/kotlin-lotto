@@ -14,7 +14,7 @@ object Application {
 
         val validatedText = validate(text)
         val list = parse(validatedText)
-        val numbers = list.map { Number(it).isNature() }
+        val numbers = list.map { Number(it) }
         val sum = Calculator().sum(numbers)
 
         ResultView.show(sum)

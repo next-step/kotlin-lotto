@@ -25,13 +25,13 @@ class NumberTest {
         "0, 0"
     )
     fun `파싱된 문자가 자연수인 경우`(text: String, expected: Int) {
-        assertThat(Number(text).isNature()).isEqualTo(expected)
+        assertThat(Number(text).number).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["A", "-1"])
     fun `파싱된 문자가 자연수가 아닌 경우`(text: String) {
-        assertThatIllegalArgumentException().isThrownBy { Number(text).isNature() }
+        assertThatIllegalArgumentException().isThrownBy { Number(text) }
     }
 
     companion object {
