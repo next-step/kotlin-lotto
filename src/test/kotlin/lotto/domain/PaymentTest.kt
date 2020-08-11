@@ -16,7 +16,7 @@ class PaymentTest {
     @DisplayName("들어온 금액에서 구입 가능한 로또 개수를 반환한다")
     @Test
     fun `sold quantity`() {
-        assertThat(Payment(900).affordableQuantity()).isEqualTo(0)
-        assertThat(Payment(1000).affordableQuantity()).isEqualTo(1)
+        assertThat(Payment(900).availableQuantity()).isEqualTo(0)
+        assertThat(Payment(1000).availableQuantity()).isEqualTo(1)
     }
 }

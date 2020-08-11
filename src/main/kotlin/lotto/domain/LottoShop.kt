@@ -1,25 +1,26 @@
 package lotto.domain
 
 import lotto.domain.Lotto.Companion.LOTTO_NUMBERS_SIZE
+import lotto.domain.LottoNumber.Companion.DEFAULT_RANGE
 
-class LottoShop(private val payment: Payment) {
-    private val quantity = payment.affordableQuantity()
+const val LOTTO_PRICE = 1_000
 
-    fun sellTickets(): List<Lotto> {
-        return (1..quantity).map { provideTicket() }
+object LottoShop {
+
+    fun sellTickets(payment: Payment, manualLottos: List<Lotto> = emptyList()): Lottos {
+        val totalQuantity = payment.availableQuantity()
+        val countOfAutoOrder = totalQuantity - manualLottos.size
+
+        val autoLottos = makeAutoLottos(countOfAutoOrder)
+        return Lottos(manualLottos + autoLottos)
     }
 
-    companion object LottoMachine {
-        const val LOTTO_PRICE = 1_000
-        private val DEFAULT_RANGE = 1..45
+    private fun makeAutoLottos(autoOrder: Int): List<Lotto> {
+        return (1..autoOrder).map { Lotto(makeAutoNumbers()) }
+    }
 
-        private fun provideTicket(): Lotto {
-            return Lotto(makeAutoNumbers())
-        }
-
-        private fun makeAutoNumbers(): List<LottoNumber> {
-            val numbers = DEFAULT_RANGE.shuffled().take(LOTTO_NUMBERS_SIZE).sorted()
-            return numbers.map { LottoNumber.of(it) }
-        }
+    private fun makeAutoNumbers(): List<LottoNumber> {
+        val numbers = DEFAULT_RANGE.shuffled().take(LOTTO_NUMBERS_SIZE).sorted()
+        return numbers.map { LottoNumber.of(it) }
     }
 }

@@ -9,12 +9,12 @@ object WinningResult {
         Rank.FIRST to 0
     )
     private val winningResult: Map<Rank, Int>
-        get() = mWinningResult
+        get() = mWinningResult.toMap()
 
     fun resultOfRanks(ranks: List<Rank>): Map<Rank, Int> {
         ranks.filterNot { it == Rank.ELSE }
             .forEach { addRankToResult(it) }
-        return winningResult
+        return winningResult.toMap()
     }
 
     private fun addRankToResult(it: Rank) {

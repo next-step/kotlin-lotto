@@ -1,12 +1,9 @@
 package lotto.domain
 
-class LottoGame(payment: Payment) {
-    private val _lottos = Lottos(LottoShop(payment).sellTickets())
-    val lottos: Lottos
-        get() = _lottos
-    lateinit var winningLotto: WinningLotto
+class LottoGame(private val lottos: Lottos) {
 
-    fun startMatch(): List<Rank> {
+    fun startMatch(winningNumbers: Lotto, bonusNumber: LottoNumber): List<Rank> {
+        val winningLotto = WinningLotto(winningNumbers, bonusNumber)
         return lottos.match(winningLotto)
     }
 }
