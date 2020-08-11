@@ -22,14 +22,8 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
 
     companion object {
         private const val VALID_LOTTO_NUMBER = 6
-        private const val LOTTO_DELIMITER = ","
 
         const val INVALID_MESSAGE = "로또는 중복되지 않은 ${VALID_LOTTO_NUMBER}개의 숫자로 생성할 수 있습니다."
-
-        fun ofComma(value: String): Lotto {
-            val numbers = value.split(LOTTO_DELIMITER).map { it.trim().toInt() }
-            return Lotto(numbers.map { LottoNumber.of(it) }.toSet())
-        }
     }
 
     override fun equals(other: Any?): Boolean {

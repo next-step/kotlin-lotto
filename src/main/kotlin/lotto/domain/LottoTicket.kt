@@ -6,7 +6,7 @@ import lotto.domain.LottoNumber.Companion.MIN_NUMBER
 class LottoTicket constructor(val lottos: List<Lotto>) {
     constructor(count: Int) : this(
         List(count) {
-            Lotto.of(
+            Lotto(
                 (MIN_NUMBER..MAX_NUMBER).shuffled().take(TAKE_NUMBER).sorted()
             )
         }
