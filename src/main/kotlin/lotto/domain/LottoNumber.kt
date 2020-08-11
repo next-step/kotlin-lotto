@@ -19,18 +19,14 @@ class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> 
         return value
     }
 
+    override fun toString() = value.toString()
+
     companion object {
         val NUMBER_RANGE = 1..45
-        private val cache: Map<Int, LottoNumber> = HashMap(NUMBER_RANGE.associateWith { LottoNumber(it) })
+        private val CACHE: Map<Int, LottoNumber> = HashMap(NUMBER_RANGE.associateWith { LottoNumber(it) })
 
-        fun take(count: Int): List<LottoNumber> {
-            require(count in 0..NUMBER_RANGE.last) { "count는 ${NUMBER_RANGE.last} 이하의 숫자여야 합니다." }
-            return cache.map { it.value }.shuffled().take(count)
-        }
-
-        operator fun invoke(number: Int): LottoNumber {
-            require(number in NUMBER_RANGE) { "로또 번호는 $NUMBER_RANGE 범위 내의 숫자여야 합니다." }
-            return cache[number]!!
+        operator fun invoke(number: Int) = CACHE.getOrElse(number) {
+            throw IllegalArgumentException("로또 번호는 $NUMBER_RANGE 범위 내의 숫자여야 합니다.")
         }
     }
 }

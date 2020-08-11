@@ -10,7 +10,7 @@ data class LottoTicket(val numbers: Set<LottoNumber>) {
 
     fun hasNumber(number: LottoNumber) = numbers.contains(number)
 
-    override fun toString() = "[${numbers.joinToString { it.value.toString() }}]"
+    override fun toString() = "[${numbers.joinToString()}]"
 
     companion object {
         const val NUMBER_COUNT = 6

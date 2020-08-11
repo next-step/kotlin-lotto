@@ -5,5 +5,10 @@ import lotto.domain.LottoTicket
 
 object AutoLottoGenerator : LottoGenerator {
 
-    override fun execute() = LottoTicket(LottoNumber.take(LottoTicket.NUMBER_COUNT).toSortedSet())
+    override fun execute() = LottoTicket(
+        LottoNumber.NUMBER_RANGE.shuffled()
+            .take(LottoTicket.NUMBER_COUNT)
+            .map { LottoNumber(it) }
+            .toSortedSet()
+    )
 }

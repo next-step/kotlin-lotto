@@ -9,11 +9,11 @@ enum class Rank(val matchCount: Int, val prizeMoney: Int) {
     MISS(0, 0);
 
     companion object {
-        private val ranks: Map<Int, Rank> = HashMap(values().associateBy { it.matchCount })
+        private val RANKS: Map<Int, Rank> = HashMap(values().associateBy { it.matchCount })
 
         operator fun invoke(matchCount: Int, bonus: Boolean): Rank = when {
             isSecond(matchCount, bonus) -> SECOND_HAS_BONUS
-            else -> ranks[matchCount] ?: MISS
+            else -> RANKS[matchCount] ?: MISS
         }
 
         private fun isSecond(matchCount: Int, bonus: Boolean) = (matchCount == SECOND_HAS_BONUS.matchCount) && bonus
