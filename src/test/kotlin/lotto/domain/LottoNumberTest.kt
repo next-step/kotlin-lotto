@@ -26,13 +26,13 @@ internal class LottoNumberTest {
     @Test
     fun `1 ~ 45사이의 숫자는 LottoNumber로 사용할 수 있다`() {
         for (i in 1..45) {
-            assertThat(LottoNumber.of(i)).isEqualTo(LottoNumber.of("$i"))
+            assertThat(LottoNumber.of(i)).isEqualTo(LottoNumber.of(i))
         }
     }
 
     @Test
     fun testToString() {
-        val actual = LottoNumber(1)
+        val actual = LottoNumber.of(1)
         assertThat(actual.toString()).isEqualTo("1")
     }
 }

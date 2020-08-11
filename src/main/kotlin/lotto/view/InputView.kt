@@ -60,7 +60,7 @@ object InputView {
     }
 
     private fun getBonusNumber() = try {
-        LottoNumber(readLine()!!.toInt())
+        LottoNumber.of(readLine()!!.toInt())
     } catch (e: Throwable) {
         println("$ERROR_INVALID_STRING ${e.message}")
         inputBonusNumber()
