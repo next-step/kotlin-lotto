@@ -4,10 +4,17 @@ class Lotto {
     val lotto = getRandomNumbers()
 
     private fun getRandomNumbers(): List<Int> {
-        return (1..45).map { it }.shuffled().subList(0, 6).sorted()
+        return (MIN_NUMBER..MAX_NUMBER).map { it }.shuffled().subList(FIRST_INDEX, LAST_INDEX).sorted()
     }
 
     override fun toString(): String {
         return "$lotto"
+    }
+
+    companion object {
+        const val MIN_NUMBER = 1
+        const val MAX_NUMBER = 45
+        const val FIRST_INDEX = 0
+        const val LAST_INDEX = 6
     }
 }
