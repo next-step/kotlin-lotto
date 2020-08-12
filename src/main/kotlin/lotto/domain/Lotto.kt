@@ -15,22 +15,12 @@ class Lotto {
             winningLotto.winningNumbers.contains(it)
         }.count()
 
-        when (winningCount) {
-            PrizeGenerator.THREE_MATCH.matched -> PrizeGenerator.THREE_MATCH.countRank()
-            PrizeGenerator.FOUR_MATCH.matched -> PrizeGenerator.FOUR_MATCH.countRank()
-            PrizeGenerator.FIVE_MATCH.matched -> {
-                if (isMatchedBonusNumber(winningCount, winningLotto.bonusNumber)) {
-                    PrizeGenerator.BONUS_MATCH.countRank()
-                } else {
-                    PrizeGenerator.FIVE_MATCH.countRank()
-                }
-            }
-            PrizeGenerator.SIX_MATCH.matched -> PrizeGenerator.SIX_MATCH.countRank()
-        }
+        val byMatch = PrizeGenerator.findByMatch(winningCount, isMatchedBonusNumber(winningLotto.bonusNumber))
+        byMatch.countRank()
     }
 
-    private fun isMatchedBonusNumber(winningCount: Int, bonusNumber: Int): Boolean {
-        return (winningCount == PrizeGenerator.FIVE_MATCH.matched) && (numbers.contains(bonusNumber))
+    private fun isMatchedBonusNumber(bonusNumber: Int): Boolean {
+        return numbers.contains(bonusNumber)
     }
 
     companion object {
