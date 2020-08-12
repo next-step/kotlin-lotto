@@ -11,12 +11,7 @@ internal class WinningLottoTicketTest {
 
     @BeforeEach
     fun setUp() {
-        lottoTicket = LottoTicket(
-            setOf(
-                LottoNumber(1), LottoNumber(2), LottoNumber(3),
-                LottoNumber(4), LottoNumber(5), LottoNumber(6)
-            )
-        )
+        lottoTicket = LottoTicket(1, 2, 3, 4, 5, 6)
     }
 
     @DisplayName(value = "보너스 번호가 중복되면 예외 발생")
@@ -31,12 +26,7 @@ internal class WinningLottoTicketTest {
     @Test
     fun hasBonus() {
         val winningLottoTicket = WinningLottoTicket(lottoTicket, LottoNumber(10))
-        val userLottoTicket = LottoTicket(
-            setOf(
-                LottoNumber(1), LottoNumber(2), LottoNumber(3),
-                LottoNumber(4), LottoNumber(5), LottoNumber(10)
-            )
-        )
+        val userLottoTicket = LottoTicket(1, 2, 3, 4, 5, 10)
         assertThat(winningLottoTicket.matchBonus(userLottoTicket)).isTrue()
     }
 }

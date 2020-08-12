@@ -10,7 +10,7 @@ internal class LottoTicketTest {
     @Test
     fun checkWinning() {
         Assertions.assertThatThrownBy {
-            LottoTicket(setOf(LottoNumber(10), LottoNumber(20)))
+            LottoTicket(10, 20)
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
 }

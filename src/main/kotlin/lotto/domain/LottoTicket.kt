@@ -6,6 +6,8 @@ data class LottoTicket(val numbers: Set<LottoNumber>) {
         require(hasValidCount(numbers)) { "$NUMBER_COUNT 개의 중복되지 않은 번호가 필요합니다." }
     }
 
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) }.toSortedSet())
+
     fun getMatchCount(other: WinningLottoTicket) = numbers.count { other.lottoTicket.hasNumber(it) }
 
     fun hasNumber(number: LottoNumber) = numbers.contains(number)
