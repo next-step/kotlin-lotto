@@ -8,7 +8,7 @@ class LottoPrizeStatics {
         private set
 
     fun checkMatches(prizeLotto: Lotto, lottos: List<Lotto>) {
-        val prized = lottos.filter { it.checkPrize(prizeLotto).prizeMoney > 0 }
+        val prized = lottos.filter { it.getPrize(prizeLotto).prizeMoney > 0 }
         val totalPrizeMoney = prized.sumBy { Prize.getPrizeMoney(it.countOfMatch) }
         prized.forEach { Prize.getPrize(it.countOfMatch).addCount() }
         calculateProfitRate(lottos.size, totalPrizeMoney)
