@@ -3,11 +3,13 @@ package lotto.domain
 class LottoTicketDispenser(
     private val lottoTicketGenerator: LottoTicketGenerateStrategy
 ) {
-    fun getAutoTickets(money: Int): LottoTickets {
-        return IntRange(1, getTicketCount(money))
+    fun getAutoTickets(money: LottoMoney): LottoTickets {
+        return IntRange(1, money.ticketCountCanBuy)
             .map { lottoTicketGenerator.createAutoTicket() }
             .let { LottoTickets(it) }
     }
 
-    private fun getTicketCount(money: Int) = money / LottoTicket.PRICE
+    fun getManualTickets(numbersList: List<IntArray>): LottoTickets {
+        return LottoTickets(numbersList.map { lottoTicketGenerator.createManualTicket(it) })
+    }
 }

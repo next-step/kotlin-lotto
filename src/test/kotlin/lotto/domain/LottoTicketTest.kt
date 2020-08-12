@@ -31,10 +31,10 @@ class LottoTicketTest {
         val lottoTicket2 = LottoTicket(1, 2, 3, 4, 5, 6)
 
         // when
-        val compareResult = lottoTicket1.compare(lottoTicket2, LottoNumber.of(7))
+        val compareResult = lottoTicket1.getMatchCountWith(lottoTicket2)
 
         // then
-        assertThat(compareResult).isEqualTo(LottoResult.FIRST)
+        assertThat(compareResult).isEqualTo(6)
     }
 
     @CsvSource("1,true", "3,true", "7,false", "9,false")

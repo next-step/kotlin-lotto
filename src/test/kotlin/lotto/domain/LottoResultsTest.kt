@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class LottoResultsTest {
 
-    @CsvSource("FIRST,1", "SECOND_BONUS,2", "SECOND,3", "THIRD,4", "FOURTH,5")
+    @CsvSource("FIRST,1", "SECOND,2", "THIRD,3", "FOURTH,4", "FIFTH,5")
     @ParameterizedTest
     fun `해당 로또 결과의 개수르 잘 가져오는지 확인`(lottoResult: LottoResult, count: Int) {
         // given
@@ -24,12 +24,12 @@ class LottoResultsTest {
         // given
         val lottoResults = LottoResults(
             mapOf(
-                LottoResult.THIRD to 1,
-                LottoResult.FOURTH to 2,
+                LottoResult.FOURTH to 1,
+                LottoResult.FIFTH to 2,
                 LottoResult.LOSE to 5
             )
         )
-        val totalPrize = LottoResult.THIRD.prize + LottoResult.FOURTH.prize * 2
+        val totalPrize = LottoMoney(LottoResult.FOURTH.prize + LottoResult.FIFTH.prize * 2)
 
         // then
         assertThat(lottoResults.getTotalPrize()).isEqualTo(totalPrize)
