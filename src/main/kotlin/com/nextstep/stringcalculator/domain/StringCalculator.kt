@@ -3,35 +3,13 @@ package com.nextstep.stringcalculator.domain
 import com.nextstep.stringcalculator.utils.isNegative
 import com.nextstep.stringcalculator.utils.split
 
-class StringCalculator(userInput: String) {
-    val numbers: List<Int>
-    val delimeters: List<String>
+class StringCalculator private constructor(val numbers: List<Int>) {
 
     init {
-        val splits = splitCustomDelimeterWithNumbers(userInput)
-        if (splits != null) {
-            this.delimeters = listOf(splits.groupValues[1])
-            this.numbers = splitNumbers(splits.groupValues[2])
-        } else {
-            this.delimeters = DEFAULT_DELIMETERS
-            this.numbers = splitNumbers(userInput)
-        }
-
-        validationNumbers(this.numbers)
+        validateNumbers(this.numbers)
     }
 
-    private fun splitNumbers(numbers: String): List<Int> {
-        if (numbers.isNullOrEmpty()) {
-            return listOf(0)
-        }
-        return numbers.split(delimeters).map { it.toInt() }
-    }
-
-    private fun splitCustomDelimeterWithNumbers(userInput: String): MatchResult? {
-        return Regex(SPLIT_WITH_DELIMETER_REGEX).find(userInput)
-    }
-
-    private fun validationNumbers(numbers: List<Int>) {
+    private fun validateNumbers(numbers: List<Int>) {
         require(!numbers.any { it.isNegative() }) { "음수가 존재합니다." }
     }
 
@@ -40,7 +18,29 @@ class StringCalculator(userInput: String) {
     }
 
     companion object {
-        private const val SPLIT_WITH_DELIMETER_REGEX = "//(.)\\\\n(.*)"
+        fun createCalculator(userInput: String): StringCalculator {
+            val splits = splitCustomDelimeterWithNumbers(userInput)
+            if (splits != null) {
+                val (delimeter, numbers) = splits.destructured
+                val delimeters = listOf(delimeter)
+                return StringCalculator(splitNumbers(numbers, delimeters))
+            } else {
+                return StringCalculator(splitNumbers(userInput, DEFAULT_DELIMETERS))
+            }
+        }
+
+        private fun splitNumbers(numbers: String, delimeters: List<String>): List<Int> {
+            if (numbers.isEmpty()) {
+                return listOf(0)
+            }
+            return numbers.split(delimeters).map { it.toInt() }
+        }
+
+        private fun splitCustomDelimeterWithNumbers(userInput: String): MatchResult? {
+            return SPLIT_WITH_DELIMETER_REGEX.find(userInput)
+        }
+
+        private val SPLIT_WITH_DELIMETER_REGEX = Regex("//(.)\\\\n(.*)")
         private val DEFAULT_DELIMETERS = listOf(",", ";")
     }
 }

@@ -6,6 +6,6 @@ import com.nextstep.stringcalculator.view.OutputView
 
 fun main() {
     val userInput = InputView.input()
-    val calculator = StringCalculator(userInput ?: "")
+    val calculator = StringCalculator.createCalculator(userInput)
     OutputView.showResult(calculator.calculate())
 }
