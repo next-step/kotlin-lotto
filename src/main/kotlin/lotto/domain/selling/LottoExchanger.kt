@@ -9,6 +9,6 @@ object LottoExchanger {
             Rank(it.getMatchCount(winningLottoTicket), winningLottoTicket.matchBonus(it))
         }.eachCount().toSortedMap()
 
-        return ExchangeResult(paymentResult, exchangeDetails)
+        return ExchangeResult(paymentResult.money, exchangeDetails)
     }
 }

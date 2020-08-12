@@ -2,16 +2,22 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 internal class WinningLottoTicketTest {
-    private val lottoTicket = LottoTicket(
-        setOf(
-            LottoNumber(1), LottoNumber(2), LottoNumber(3),
-            LottoNumber(4), LottoNumber(5), LottoNumber(6)
+    private lateinit var lottoTicket: LottoTicket
+
+    @BeforeEach
+    fun setUp() {
+        lottoTicket = LottoTicket(
+            setOf(
+                LottoNumber(1), LottoNumber(2), LottoNumber(3),
+                LottoNumber(4), LottoNumber(5), LottoNumber(6)
+            )
         )
-    )
+    }
 
     @DisplayName(value = "보너스 번호가 중복되면 예외 발생")
     @Test

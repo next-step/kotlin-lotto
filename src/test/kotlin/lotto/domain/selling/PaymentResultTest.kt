@@ -35,7 +35,7 @@ internal class PaymentResultTest {
     fun exchangeFourthLotto() {
         val paymentResult = PaymentResult(2300, listOf(fourthLotto, secondLotto), 300)
         assertThat(LottoExchanger.exchange(paymentResult, winningLotto)).isEqualTo(
-            ExchangeResult(paymentResult, hashMapOf(Rank.SECOND_HAS_BONUS to 1, Rank.FOURTH to 1))
+            ExchangeResult(2300, hashMapOf(Rank.SECOND_HAS_BONUS to 1, Rank.FOURTH to 1))
         )
     }
 }
