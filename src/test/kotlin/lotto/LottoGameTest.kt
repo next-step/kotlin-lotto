@@ -1,8 +1,10 @@
 package lotto
 
+import lotto.domain.COUNT_OF_NUMBERS
 import lotto.domain.Lotto
-import lotto.domain.LottoGame
 import lotto.domain.LottoPrizeStatics
+import lotto.domain.LottoGame
+import lotto.domain.LottoGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
@@ -43,5 +45,12 @@ class LottoGameTest {
         lottoPrizeStatics.checkMatches(Lotto("1,2,3,4,5,6"), listOf(Lotto("1,2,3,10,11,12")))
         assertThat(lottoPrizeStatics.profitRate)
             .isEqualTo(5.0)
+    }
+
+    @DisplayName("LottoGeneratorTest")
+    @Test
+    fun checkLottoGenerator() {
+        assertThat(LottoGenerator.createLotto().numbers.size)
+            .isEqualTo(COUNT_OF_NUMBERS)
     }
 }
