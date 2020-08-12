@@ -16,7 +16,7 @@ class LottoGame(gameMoney: String) {
     fun execute(prizeNumberString: String, _bonusNumber: String) {
         val prizeLotto = getPrizeLotto(prizeNumberString)
         val bonusNumber = LottoNumber(_bonusNumber.toInt())
-        require(!prizeLotto.isContain(bonusNumber))
+        require(!prizeLotto.isContainBonusNumber(bonusNumber))
         checkMatch(prizeLotto, bonusNumber)
     }
 

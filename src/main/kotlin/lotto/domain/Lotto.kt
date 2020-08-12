@@ -25,7 +25,7 @@ class Lotto(private val numbers: Set<LottoNumber>) {
         return Prize.getPrize(countOfMatch)
     }
 
-    fun isContain(bonusNumber: LottoNumber) = numbers.contains(bonusNumber)
+    fun isContainBonusNumber(bonusNumber: LottoNumber) = numbers.contains(bonusNumber)
 
     override fun toString(): String {
         return numbers.toString()
