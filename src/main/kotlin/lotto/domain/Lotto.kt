@@ -1,6 +1,7 @@
 package lotto.domain
 
 private const val COUNT_OF_NUMBERS = 6
+private val LOTTO_NUMBERS = (MIN_NUMBER..MAX_NUMBER)
 
 class Lotto() {
     var numbers: Set<LottoNumber> = emptySet()
@@ -8,7 +9,7 @@ class Lotto() {
         private set
 
     init {
-        numbers = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS)
+        numbers = LOTTO_NUMBERS.shuffled().subList(0, COUNT_OF_NUMBERS)
             .sorted().map { LottoNumber(it) }.toSet()
     }
 
