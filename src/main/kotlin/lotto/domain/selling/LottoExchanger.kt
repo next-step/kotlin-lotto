@@ -4,9 +4,12 @@ import lotto.domain.WinningLottoTicket
 
 object LottoExchanger {
 
-    fun exchange(paymentResult: PaymentResult, winningLottoTicket: WinningLottoTicket): ExchangeResult {
+    fun exchange(
+        paymentResult: PaymentResult,
+        winningLottoTicket: WinningLottoTicket
+    ): ExchangeResult {
         val exchangeDetails = paymentResult.lottoTickets.groupingBy {
-            Rank(it.getMatchCount(winningLottoTicket), winningLottoTicket.matchBonus(it))
+            Rank(winningLottoTicket.matchCount(it), winningLottoTicket.matchBonus(it))
         }.eachCount().toSortedMap()
 
         return ExchangeResult(paymentResult.money, exchangeDetails)

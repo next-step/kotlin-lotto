@@ -8,8 +8,6 @@ data class LottoTicket(val numbers: Set<LottoNumber>) {
 
     constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) }.toSortedSet())
 
-    fun getMatchCount(other: WinningLottoTicket) = numbers.count { other.lottoTicket.hasNumber(it) }
-
     fun hasNumber(number: LottoNumber) = numbers.contains(number)
 
     override fun toString() = "[${numbers.joinToString()}]"
