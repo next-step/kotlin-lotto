@@ -1,9 +1,9 @@
 package textcalculator
 
 class Parser {
-    private val _spliter = arrayListOf(COMMA, COLON)
+    private val _spliter = mutableListOf(COMMA, COLON)
     val spliter: List<String> get() = _spliter
-    val regexDelimiters
+    private val regexDelimiters
         get() = Regex(
             spliter.joinToString(
                 prefix = REGEX_OPEN,
