@@ -8,7 +8,7 @@ class LottoTest {
     @Test
     @DisplayName("test input money")
     fun inputTest() {
-        assertThat(InputNumber().buy(14000)).isEqualTo(14000)
+        assertThat(InputNumber.buy()).isEqualTo(14000)
     }
 
     @Test
@@ -24,11 +24,17 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("check match")
+    @DisplayName("count lottonumber match")
+    fun `count`() {
+        val winningNumber = listOf(1, 2, 3, 14, 15, 16)
+        val userNumber = listOf(1, 2, 3, 4, 5, 6)
+        assertThat(Lotto().match(userNumber, winningNumber)).isEqualTo(3)
+    }
 
-    fun testMatch() {
-        val userLotto = arrayOf(1, 2, 3, 4)
-        val winningLotto = arrayOf(1, 2, 3, 4)
-        assertThat(Lotto().match(userLotto, winningLotto)).isEqualTo(4)
+    @Test
+    @DisplayName("Prize")
+    fun `prize`() {
+        assertThat(Lotto().result(5)).isEqualTo(Rank.FIVEMATCH)
     }
 }
+
