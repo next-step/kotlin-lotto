@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.domain.TicketBuyer.Companion.TICKET_COST
+import lotto.TicketBuilder.Companion.TICKET_COST
 
 class LottoResult {
     private val cost: Int get() = resultMap.values.sum() * TICKET_COST

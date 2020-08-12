@@ -2,15 +2,13 @@ package lotto
 
 import lotto.domain.LottoAnalytics
 import lotto.domain.LottoResult
-import lotto.domain.TicketBuyer
-import lotto.view.LottoResultView
 import lotto.view.LottoInputView
+import lotto.view.LottoResultView
 
 class LottoController {
     fun start(inputView: LottoInputView): LottoResult {
         val cost = inputView.inputTicketCost()
-        val count = TicketBuyer.howMuchTickets(cost)
-        val tickets = TicketBuilder.sellTickets(count)
+        val tickets = TicketBuilder.sellTickets(cost)
 
         inputView.printTickets(tickets)
 
