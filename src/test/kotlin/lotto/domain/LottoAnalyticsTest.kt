@@ -7,7 +7,7 @@ class LottoAnalyticsTest {
     @Test
     fun `matchTickets() 티켓의 결과를 Rank 목록으로 반환`() {
         assertThat(
-            LottoAnalytics().matchTickets(
+            LottoAnalytics.matchTickets(
                 listOf(
                     Ticket(setOf(1, 2, 3, 4, 5, 6)),
                     Ticket(setOf(1, 2, 3, 4, 5, 16)),

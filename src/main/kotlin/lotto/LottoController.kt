@@ -7,7 +7,7 @@ import lotto.view.LottoResultView
 import lotto.view.LottoInputView
 
 class LottoController {
-    fun start(inputView: LottoInputView, analytics: LottoAnalytics): LottoResult {
+    fun start(inputView: LottoInputView): LottoResult {
         val cost = inputView.inputTicketCost()
         val count = TicketBuyer.howMuchTickets(cost)
         val tickets = TicketBuilder.sellTickets(count)
@@ -15,7 +15,7 @@ class LottoController {
         inputView.printTickets(tickets)
 
         val winningTicket = inputView.inputwinningTicket()
-        return analytics.matchTickets(tickets, winningTicket)
+        return LottoAnalytics.matchTickets(tickets, winningTicket)
     }
 
     fun finish(resultView: LottoResultView, result: LottoResult) {
