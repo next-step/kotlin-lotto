@@ -14,7 +14,9 @@ class Lotto {
 
     fun tickets(totalTickets: Int): List<List<Int>> {
         val sampleTickets = mutableListOf<List<Int>>()
-        sampleTickets.add(autoLotto())
+        repeat(totalTickets) {
+            sampleTickets.add(autoLotto())
+        }
         return sampleTickets
     }
 
@@ -25,24 +27,9 @@ class Lotto {
     fun match(userLotto: List<Int>, winningLotto: List<Int>): Int {
         return userLotto.count { number -> winningLotto.contains(number) }
     }
-    fun result(count:Int): Rank {
+
+    fun result(count: Int): Rank {
         return Rank.findMatchCount(count)
-    }
-}
-class Store(private val buyed: Lotto) {
-
-    fun drawLottoNumber(lastWeekLotto: Lotto): List<Int> =
-        buyed.tickets(14).map {ticket -> buyed.match(userLotto = ticket,winningLotto = InputNumber.winningNumberInput()) }
-
-    fun getRateOfReturn(price: Int, prizes: List<Rank>): Double {
-        val totalPrize = prizes
-            .map { it.reward }
-            .reduce { acc, money ->
-                acc + money
-            }
-            .toDouble()
-
-        return floor(totalPrize / price * 100.0) / 100.0
     }
 }
 
@@ -61,10 +48,9 @@ enum class Rank(val matchCount: Int, val reward: Int) {
 }
 
 fun main() {
-    val lottoTickets = Lotto().tickets(14)
-    for (ticket in lottoTickets) {
-        println(ticket)
-    }
+    val Money = InputNumber.buy()
+    val buyTicket = Lotto().buyTickets(Money)
+    val lottoTickets = Lotto().tickets(buyTicket)
+    ResultView.printBuyedLottoTicket(lottoTickets)
+    InputNumber.winningNumberInput()
 }
-
-

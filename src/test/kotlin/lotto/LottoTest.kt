@@ -25,7 +25,7 @@ class LottoTest {
 
     @Test
     @DisplayName("count lottonumber match")
-    fun `count`() {
+    fun count() {
         val winningNumber = listOf(1, 2, 3, 14, 15, 16)
         val userNumber = listOf(1, 2, 3, 4, 5, 6)
         assertThat(Lotto().match(userNumber, winningNumber)).isEqualTo(3)
@@ -33,8 +33,7 @@ class LottoTest {
 
     @Test
     @DisplayName("Prize")
-    fun `prize`() {
+    fun prize() {
         assertThat(Lotto().result(5)).isEqualTo(Rank.FIVEMATCH)
     }
 }
-
