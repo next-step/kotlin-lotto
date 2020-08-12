@@ -4,28 +4,30 @@ const val PRICE_OF_LOTTO = 1000
 private val PLAYER_REGULAR_EXPRESSION = "^(\\d{1,2},)+\\d{1,2}$".toRegex()
 
 class LottoGame(gameMoney: String) {
-    var lottos: List<Lotto> = listOf()
+    var lottoList: List<Lotto> = listOf()
         private set
     val lottoPrizeStatics = LottoPrizeStatics()
 
     init {
         val count = getCountOfGame(gameMoney)
-        createLottos(count)
+        createLottoList(count)
     }
 
-    fun execute(prizeNumberString: String) {
+    fun execute(prizeNumberString: String, _bonusNumber: String) {
         val prizeLotto = getPrizeLotto(prizeNumberString)
-        checkMatch(prizeLotto)
+        val bonusNumber = LottoNumber(_bonusNumber.toInt())
+        require(!prizeLotto.isContain(bonusNumber))
+        checkMatch(prizeLotto, bonusNumber)
     }
 
-    private fun createLottos(count: Int) {
-        val generatedLottos = mutableListOf<Lotto>()
-        repeat(count) { generatedLottos.add(LottoGenerator.createLotto()) }
-        lottos = generatedLottos
+    private fun createLottoList(count: Int) {
+        val generateLottoList = mutableListOf<Lotto>()
+        repeat(count) { generateLottoList.add(LottoGenerator.createLotto()) }
+        lottoList = generateLottoList
     }
 
-    private fun checkMatch(prizeLotto: Lotto) {
-        lottoPrizeStatics.checkMatches(prizeLotto, lottos)
+    private fun checkMatch(prizeLotto: Lotto, bonusNumber: LottoNumber) {
+        lottoPrizeStatics.checkMatches(prizeLotto, bonusNumber, lottoList)
     }
 
     @Throws(NumberFormatException::class)
