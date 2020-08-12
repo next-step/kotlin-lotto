@@ -16,9 +16,16 @@ class LottoPrizeStatics {
     fun checkMatches(prizeLotto: Lotto, bonusNumber: LottoNumber, lottoList: List<Lotto>) {
         val prizedLottoList = lottoList.asSequence()
             .filter { it.getPrize(prizeLotto).prizeMoney > 0 }
-        val totalPrizeMoney = prizedLottoList
+        var totalPrizeMoney = prizedLottoList
+            .filterNot { it.getPrize(prizeLotto).countOfMatch == Prize.MATCH_FIVE.countOfMatch }
             .sumBy {
                 val prize = it.getPrize(prizeLotto)
+                prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
+                prize.prizeMoney
+            }
+        totalPrizeMoney += prizedLottoList.filter { it.getPrize(prizeLotto).countOfMatch == Prize.MATCH_FIVE.countOfMatch }
+            .sumBy {
+                val prize = if (it.isContainBonusNumber(bonusNumber)) Prize.MATCH_FIVE_WITH_BONUS else Prize.MATCH_FIVE
                 prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
                 prize.prizeMoney
             }
