@@ -1,10 +1,9 @@
 package lotto
 
-import lotto.domain.COUNT_OF_NUMBERS
 import lotto.domain.Lotto
-import lotto.domain.LottoPrizeStatics
 import lotto.domain.LottoGame
-import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
+import lotto.domain.LottoPrizeStatics
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
@@ -47,10 +46,11 @@ class LottoGameTest {
             .isEqualTo(5.0)
     }
 
-    @DisplayName("LottoGeneratorTest")
-    @Test
-    fun checkLottoGenerator() {
-        assertThat(LottoGenerator.createLotto().numbers.size)
-            .isEqualTo(COUNT_OF_NUMBERS)
+    @DisplayName("로또 숫자 유효성 검사")
+    @ParameterizedTest
+    @ValueSource(ints = [-3, 0, 99])
+    fun validateLottoNumber(number: Int) {
+        assertThatThrownBy { LottoNumber(number) }
+            .isInstanceOf(IllegalArgumentException::class.java)
     }
 }
