@@ -2,7 +2,6 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizeStatics
-import lotto.domain.Prize
 
 object ResultView {
 
@@ -18,10 +17,11 @@ object ResultView {
             |
         """.trimMargin()
         )
-        Prize.values().filter { it.prizeMoney > 0 }.forEach {
-            showPrizeStaticsString.append("${it.countOfMatch} 개 일치 ( ${it.count} 개 일치 ( ${it.prizeMoney}")
+        prizeStatics.prizedLotto.forEach {
+            val prize = it.key
+            showPrizeStaticsString.append("${prize.countOfMatch}개 일치(${prize.prizeMoney}")
                 .append(
-                    """원) -${it.count} 개
+                    """원) -${it.value} 개
                 |
             """.trimMargin()
                 )
