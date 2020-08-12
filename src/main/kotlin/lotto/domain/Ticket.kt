@@ -1,8 +1,6 @@
 package lotto.domain
 
-class Ticket(_numbers: List<Int>) {
-    val numbers = _numbers.toSet()
-
+class Ticket(val numbers: Set<Int>) {
     init {
         require(numberIsInRange(TICKET_NUMBER_MIN, TICKET_NUMBER_MAX))
         require(isSize(TICKET_NUMBER_SIZE))
@@ -23,6 +21,6 @@ class Ticket(_numbers: List<Int>) {
     companion object {
         const val TICKET_NUMBER_SIZE = 6
         const val TICKET_NUMBER_MIN = 1
-        const val TICKET_NUMBER_MAX = 1
+        const val TICKET_NUMBER_MAX = 45
     }
 }

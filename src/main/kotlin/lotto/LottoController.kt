@@ -14,8 +14,8 @@ class LottoController {
 
         inputView.printTickets(tickets)
 
-        val winner = inputView.inputWinnerTicket()
-        return analytics.matchTickets(tickets, winner)
+        val winningTicket = inputView.inputwinningTicket()
+        return analytics.matchTickets(tickets, winningTicket)
     }
 
     fun finish(resultView: LottoResultView, result: LottoResult) {

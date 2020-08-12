@@ -20,8 +20,8 @@ class LottoInputView {
         return numbers.sorted().joinToString(prefix = "[", postfix = "]", separator = ", ") { "$it" }
     }
 
-    fun inputWinnerTicket(): Ticket {
+    fun inputwinningTicket(): Ticket {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return Ticket(readLine()!!.split(",").map { it.trim().toInt() })
+        return Ticket(readLine()!!.split(",").map { it.trim().toInt() }.toSet())
     }
 }

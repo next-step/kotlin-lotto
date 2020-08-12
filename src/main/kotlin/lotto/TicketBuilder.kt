@@ -14,8 +14,8 @@ class TicketBuilder {
             return Ticket(randomNumbers())
         }
 
-        private fun randomNumbers(): List<Int> {
-            return NUMBERS.shuffled().take(Ticket.TICKET_NUMBER_SIZE)
+        private fun randomNumbers(): Set<Int> {
+            return NUMBERS.shuffled().take(Ticket.TICKET_NUMBER_SIZE).toSet()
         }
 
         private val NUMBERS = (Ticket.TICKET_NUMBER_MIN until Ticket.TICKET_NUMBER_MAX).toList()

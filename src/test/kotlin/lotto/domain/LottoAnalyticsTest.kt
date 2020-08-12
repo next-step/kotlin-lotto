@@ -9,13 +9,13 @@ class LottoAnalyticsTest {
         assertThat(
             LottoAnalytics().matchTickets(
                 listOf(
-                    Ticket(1, 2, 3, 4, 5, 6),
-                    Ticket(1, 2, 3, 4, 5, 16),
-                    Ticket(1, 2, 3, 4, 15, 16),
-                    Ticket(1, 2, 3, 14, 15, 16),
-                    Ticket(11, 12, 13, 14, 15, 16)
+                    Ticket(setOf(1, 2, 3, 4, 5, 6)),
+                    Ticket(setOf(1, 2, 3, 4, 5, 16)),
+                    Ticket(setOf(1, 2, 3, 4, 15, 16)),
+                    Ticket(setOf(1, 2, 3, 14, 15, 16)),
+                    Ticket(setOf(11, 12, 13, 14, 15, 16))
                 ),
-                WINNER_TICKET
+                WINNING_TICKET
             )
         ).satisfies {
             assertThat(it[Rank.FIRST_PRIZE]).isEqualTo(1)
@@ -27,6 +27,6 @@ class LottoAnalyticsTest {
     }
 
     companion object {
-        private val WINNER_TICKET = Ticket(1, 2, 3, 4, 5, 6)
+        private val WINNING_TICKET = Ticket(setOf(1, 2, 3, 4, 5, 6))
     }
 }

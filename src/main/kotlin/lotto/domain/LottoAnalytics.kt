@@ -1,19 +1,19 @@
 package lotto.domain
 
 class LottoAnalytics {
-    fun matchTickets(tickets: List<Ticket>, winner: Ticket): LottoResult {
+    fun matchTickets(tickets: List<Ticket>, winningTicket: Ticket): LottoResult {
         return LottoResult().also { result ->
             tickets.forEach {
-                result.countRank(it, winner)
+                result.countRank(it, winningTicket)
             }
         }
     }
 
-    private fun Ticket.toRank(winner: Ticket): Rank {
-        return Rank.of(winner.countMatches(this))
+    private fun Ticket.toRank(winningTicket: Ticket): Rank {
+        return Rank.of(winningTicket.countMatches(this))
     }
 
-    private fun LottoResult.countRank(ticket: Ticket, winner: Ticket) {
-        this[ticket.toRank(winner)]++
+    private fun LottoResult.countRank(ticket: Ticket, winningTicket: Ticket) {
+        this[ticket.toRank(winningTicket)]++
     }
 }
