@@ -10,14 +10,7 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Money, val matchBonus: 
 
     fun prizeByCount(count: Int): Money = winningMoney * count
 
-    override fun toString(): String {
-        return if (matchBonus) "${countOfMatch}$COUNT_SUFFIX$BONUS_SUFFIX($winningMoney)"
-        else "${countOfMatch}$COUNT_SUFFIX ($winningMoney)"
-    }
-
     companion object {
-        private const val COUNT_SUFFIX = "개 일치"
-        private const val BONUS_SUFFIX = ", 보너스 볼 일치"
         fun rank(countOfMatch: Int, matchBonus: Boolean = false): Rank {
             return values().find { it.countOfMatch == countOfMatch && it.matchBonus == matchBonus } ?: MISS
         }
