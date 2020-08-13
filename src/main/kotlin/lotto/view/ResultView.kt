@@ -22,4 +22,8 @@ object ResultView {
         if (prizeStatics.profitRate < 1) showPrizeStaticsString.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
         println(showPrizeStaticsString)
     }
+
+    fun print(message: String?) {
+        println(message)
+    }
 }
