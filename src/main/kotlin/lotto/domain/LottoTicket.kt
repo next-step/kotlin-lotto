@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.LottoNumber.Companion.MINIMUM_NUMBER
 import lotto.domain.LottoNumber.Companion.MAXIMUM_NUMBER
 
-class LottoTicket constructor(val lottos: List<Lotto>) {
+class LottoTicket(val lottos: List<Lotto>) {
     constructor(count: Int) : this(
         List(count) {
             Lotto(
