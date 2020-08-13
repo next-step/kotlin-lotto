@@ -1,5 +1,7 @@
 package lotto.domain
 
+var map = mutableMapOf<PrizeGenerator, Int>()
+
 class Lottos() {
 
     var lottos = listOf<Lotto>()
@@ -11,6 +13,8 @@ class Lottos() {
     fun matchWinningCount(winningLotto: WinningLotto) {
         lottos.map {
             it.countWinningNumber(winningLotto)
+        }.forEach {
+            map[it] = (map[it] ?: 0) + 1
         }
     }
 

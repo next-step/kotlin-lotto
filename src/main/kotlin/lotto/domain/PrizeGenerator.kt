@@ -9,12 +9,6 @@ enum class PrizeGenerator(val matchCount: Int, val prize: Int) {
     SIX_MATCH(6, 2_000_000_000),
     ZERO_MATCH(0, 0);
 
-    var count: Int = 0
-
-    fun countRank() {
-        this.count++
-    }
-
     companion object {
 
         fun findByMatch(matchCount: Int, isBonusNumberMatched: Boolean): PrizeGenerator {
@@ -25,7 +19,6 @@ enum class PrizeGenerator(val matchCount: Int, val prize: Int) {
             return values().find { it.matchCount == matchCount } ?: ZERO_MATCH
         }
 
-        fun winningPrize() =
-            (THREE_MATCH.count * THREE_MATCH.prize) + (FOUR_MATCH.count * FOUR_MATCH.prize) + (FIVE_MATCH.count * FIVE_MATCH.prize) + (BONUS_MATCH.count * BONUS_MATCH.prize) + (SIX_MATCH.count * SIX_MATCH.prize)
+        fun winningPrize() = values().sumBy { it.prize * (map[it] ?: 0) }
     }
 }
