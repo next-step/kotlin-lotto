@@ -8,12 +8,12 @@ class LottoResult(private val result: Map<Rank, Int>) {
         return result.getOrDefault(rank, DEFAULT_VALUE)
     }
 
-    fun calculateTotalPrize(): Money {
-        return result.keys.map { it.prizeByCount(result.getValue(it)) }.reduce { total, money -> total + money }
-    }
-
     fun calculateTotalRate(money: Money): BigDecimal {
         return calculateTotalPrize().toBigDecimal().divide(money.toBigDecimal(), SCALE_VALUE, RoundingMode.HALF_EVEN)
+    }
+
+    private fun calculateTotalPrize(): Money {
+        return result.keys.map { it.prizeByCount(result.getValue(it)) }.reduce { total, money -> total + money }
     }
 
     companion object {
