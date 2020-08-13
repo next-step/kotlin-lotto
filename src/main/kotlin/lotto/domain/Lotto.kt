@@ -4,8 +4,6 @@ const val COUNT_OF_NUMBERS = 6
 private val LOTTO_NUMBERS = (MIN_NUMBER..MAX_NUMBER)
 
 class Lotto(private val numbers: Set<LottoNumber>) {
-    var countOfMatch: Int = 0
-        private set
 
     init {
         require(numbers.size == COUNT_OF_NUMBERS) { "중복되지 않는 6개의 숫자를 입력해주세요" }
@@ -21,8 +19,7 @@ class Lotto(private val numbers: Set<LottoNumber>) {
     )
 
     fun getPrize(lotto: Lotto): Prize {
-        countOfMatch = numbers.count { lotto.numbers.contains(it) }
-        return Prize.getPrize(countOfMatch)
+        return Prize.getPrize(numbers.count { lotto.numbers.contains(it) })
     }
 
     fun isContainBonusNumber(bonusNumber: LottoNumber) = numbers.contains(bonusNumber)
