@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.BonusNumber
 import lotto.domain.Ticket
 
 class LottoInputView {
@@ -23,5 +24,10 @@ class LottoInputView {
     fun inputwinningTicket(): Ticket {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return Ticket(readLine()!!.split(",").map { it.trim().toInt() }.toSet())
+    }
+
+    fun inputBonuseNumber(): BonusNumber {
+        println("보너스 볼을 입력해 주세요.")
+        return BonusNumber(readLine()!!.toInt())
     }
 }

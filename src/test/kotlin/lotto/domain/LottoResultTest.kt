@@ -27,10 +27,11 @@ class LottoResultTest {
             it[Rank.SECOND_PRIZE]++
             it[Rank.THIRD_PRIZE]++
             it[Rank.FOURTH_PRIZE]++
-            it[Rank.NONE] = 4
+            it[Rank.FIFTH_PRIZE]++
+            it[Rank.NONE] = 5
         }
 
-        assertThat(result.collectAllPrizes()).isEqualTo(2001555000)
+        assertThat(result.collectAllPrizes()).isEqualTo(2031555000)
     }
 
     @Test
@@ -40,9 +41,10 @@ class LottoResultTest {
             it[Rank.SECOND_PRIZE]++
             it[Rank.THIRD_PRIZE]++
             it[Rank.FOURTH_PRIZE]++
-            it[Rank.NONE]++
+            it[Rank.FIFTH_PRIZE]++
+            it[Rank.NONE] = 5
         }
 
-        assertThat(result.totalProfitRate()).isEqualTo(400311.0f)
+        assertThat(result.totalProfitRate()).isEqualTo(203155.5f)
     }
 }

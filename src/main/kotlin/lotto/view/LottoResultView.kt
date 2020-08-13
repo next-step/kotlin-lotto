@@ -7,8 +7,8 @@ class LottoResultView {
     fun printResult(result: LottoResult) {
         println("\n당첨 통계\n---------")
         val rate = result.totalProfitRate()
-        println("${profitRateString(rate)} ${resultString(rate)}")
         printAllRanks(result)
+        println("${profitRateString(rate)} ${resultString(rate)}")
     }
 
     private fun profitRateString(rate: Float): String {
@@ -24,14 +24,15 @@ class LottoResultView {
     }
 
     private fun printAllRanks(result: LottoResult) {
+        printRank(result, Rank.FIFTH_PRIZE)
         printRank(result, Rank.FOURTH_PRIZE)
         printRank(result, Rank.THIRD_PRIZE)
-        printRank(result, Rank.SECOND_PRIZE)
+        printRank(result, Rank.SECOND_PRIZE, true)
         printRank(result, Rank.FIRST_PRIZE)
     }
 
-    private fun printRank(result: LottoResult, rank: Rank) {
-        println("${rank.matches}개 일치 (${rank.prize}원) - ${result[rank]}개")
+    private fun printRank(result: LottoResult, rank: Rank, isBonus: Boolean = false) {
+        println("${rank.matches}개 일치${if (isBonus) ", 보너스 볼 일치" else " "}(${rank.prize}원) - ${result[rank]}개")
     }
 
     companion object {

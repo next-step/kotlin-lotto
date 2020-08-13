@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoAnalytics {
     companion object {
-        fun matchTickets(tickets: List<Ticket>, winningTicket: Ticket): LottoResult {
+        fun matchTickets(tickets: List<Ticket>, winningTicket: WinningTicket): LottoResult {
             return LottoResult().also { result ->
                 tickets.forEach {
                     result.countRank(it, winningTicket)
@@ -10,11 +10,14 @@ class LottoAnalytics {
             }
         }
 
-        private fun Ticket.toRank(winningTicket: Ticket): Rank {
-            return Rank.of(winningTicket.countMatches(this))
+        private fun Ticket.toRank(winningTicket: WinningTicket): Rank {
+            return Rank.of(
+                winningTicket.ticket.countMatches(this),
+                winningTicket.bonusNumber.match(this)
+            )
         }
 
-        private fun LottoResult.countRank(ticket: Ticket, winningTicket: Ticket) {
+        private fun LottoResult.countRank(ticket: Ticket, winningTicket: WinningTicket) {
             this[ticket.toRank(winningTicket)]++
         }
     }

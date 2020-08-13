@@ -23,15 +23,19 @@ class LottoAnalyticsTest {
     }
 
     companion object {
-        private val WINNING_TICKET = Ticket(setOf(1, 2, 3, 4, 5, 6))
+        private val WINNING_TICKET = WinningTicket(
+            Ticket(setOf(1, 2, 3, 4, 5, 6)),
+            BonusNumber(7)
+        )
 
         @JvmStatic
         private fun provideTicketsMatches(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of(Ticket(setOf(1, 2, 3, 4, 5, 6)), Rank.FIRST_PRIZE),
-                Arguments.of(Ticket(setOf(1, 2, 3, 4, 5, 16)), Rank.SECOND_PRIZE),
-                Arguments.of(Ticket(setOf(1, 2, 3, 4, 15, 16)), Rank.THIRD_PRIZE),
-                Arguments.of(Ticket(setOf(1, 2, 3, 14, 15, 16)), Rank.FOURTH_PRIZE),
+                Arguments.of(Ticket(setOf(1, 2, 3, 4, 5, 7)), Rank.SECOND_PRIZE),
+                Arguments.of(Ticket(setOf(1, 2, 3, 4, 5, 16)), Rank.THIRD_PRIZE),
+                Arguments.of(Ticket(setOf(1, 2, 3, 4, 15, 16)), Rank.FOURTH_PRIZE),
+                Arguments.of(Ticket(setOf(1, 2, 3, 14, 15, 16)), Rank.FIFTH_PRIZE),
                 Arguments.of(Ticket(setOf(11, 12, 13, 14, 15, 16)), Rank.NONE)
             )
         }
