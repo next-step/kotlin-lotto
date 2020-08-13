@@ -55,4 +55,13 @@ class LottoTest {
         assertThat(lotto.getPrize(prizeLotto))
             .isEqualTo(Prize.MATCH_ALL)
     }
+
+    @DisplayName("해당 로또에 보너스 번호 포함 여부")
+    @Test
+    fun checkBonusNumber() {
+        val lotto = Lotto("1,2,3,4,5,6")
+        val bonusNumber = LottoNumber(1)
+        assertThat(lotto.isContainBonusNumber(bonusNumber))
+            .isEqualTo(true)
+    }
 }
