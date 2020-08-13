@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 internal class LottoResultTest {
     @Test
-    internal fun calculateTotalPrize() {
+    fun calculateTotalRate() {
         val lottoResult = LottoResult(
             mapOf(
                 Rank.FIRST to 0,
@@ -17,7 +17,7 @@ internal class LottoResultTest {
             )
         )
 
-        val totalPrize = lottoResult.calculateTotalPrize()
-        assertThat(totalPrize).isEqualTo(Money(3_300_000))
+        val totalPrize = lottoResult.calculateTotalRate(Money(33_000))
+        assertThat(totalPrize).isEqualTo(Money(100).toBigDecimal())
     }
 }
