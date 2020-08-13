@@ -5,10 +5,10 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
         require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
     }
 
-    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.getNumber() }.toSet()) {
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.number }.toSet()) {
         require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
     }
-    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.getNumber() }.toSet()) {
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.number }.toSet()) {
         require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
     }
 
