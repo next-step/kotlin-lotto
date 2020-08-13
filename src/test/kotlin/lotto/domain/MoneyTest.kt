@@ -1,10 +1,13 @@
-package lotto.domain.value
+package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
+import java.math.BigInteger
 
-class MoneyTest {
+internal class MoneyTest {
+
     @Test
     fun `음수가 들어올 경우 IllegalArgumentException이 발생해야한다`() {
         assertThatThrownBy { Money(-1.toBigInteger()) }
@@ -13,9 +16,9 @@ class MoneyTest {
     }
 
     @Test
-    fun `toString()은 원을 붙여 출력한다`() {
+    fun `toString()은 콤마와 원을 붙여 출력한다`() {
         val actual = Money(1000.toBigInteger()).toString()
-        assertThat(actual).isEqualTo("1000원")
+        assertThat(actual).isEqualTo("1,000원")
     }
 
     @Test
@@ -42,8 +45,10 @@ class MoneyTest {
 
     @Test
     fun `money 객체에 bigDecimal을 나눌 수 있으며 그 결과는 BigDecimal타입 이다`() {
-        val actual = Money(300.toBigInteger()) / 30.0.toBigDecimal()
+        val actual = Money(300.toBigInteger()) / BigDecimal(30.0)
         assertThat(actual).isEqualTo(10.toBigDecimal())
+        val actual2 = Money(BigInteger("5000")) / BigDecimal("10000")
+        assertThat(actual2).isEqualTo(BigDecimal(0.5))
     }
 
     @Test
@@ -53,8 +58,8 @@ class MoneyTest {
     }
 
     @Test
-    fun `money 객체를 double로 형변환 할 수 있다`() {
-        val actual = Money(300.toBigInteger()).toDouble()
-        assertThat(actual as? Double).isNotNull()
+    fun `money 객체를 bigDecimal로 형변환 할 수 있다`() {
+        val actual = Money(300.toBigInteger()).toBigDecimal()
+        assertThat(actual as? BigDecimal).isNotNull()
     }
 }

@@ -1,43 +1,43 @@
 package lotto.domain
 
-import lotto.domain.value.LottoNumber
-import lotto.domain.value.HitLotto
-import lotto.strategy.Strategy
-
-data class Lotto(private val strategy: Strategy) {
-    private val lotto = getNumbers()
-
-    fun getLotto() = lotto
-
-    fun hitLotto(winningNumbers: List<LottoNumber>): HitLotto {
-        var count = ZERO
-        winningNumbers.forEach {
-            if (lotto.contains(it)) count++
-        }
-        return HitLotto(count)
+class Lotto private constructor(private val numbers: Set<LottoNumber>) {
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.getNumber() }.toSet()) {
+        require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
+    }
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.of(it) }.sortedBy { it.getNumber() }.toSet()) {
+        require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
     }
 
-    private fun getNumbers(): List<LottoNumber> {
-        val allNumber = getAllNumbers()
-        val shuffledNumber = shuffle(allNumber)
-        val sixNumber = getSixNumber(shuffledNumber)
-        return order(sixNumber)
+    init {
+        require(numbers.size == VALID_LOTTO_NUMBER) { INVALID_MESSAGE }
     }
 
-    private fun order(numbers: List<LottoNumber>) = numbers.sortedBy { it.getNumber() }
+    fun match(other: Lotto): Int {
+        return numbers.filter { other.contains(it) }.count()
+    }
 
-    private fun getSixNumber(numbers: List<LottoNumber>) = numbers.subList(SUBLIST_START, SUBLIST_END)
+    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
 
-    private fun shuffle(numbers: List<LottoNumber>) = strategy.shuffle(numbers)
-
-    private fun getAllNumbers() = List(MAX_NUBER) { i -> LottoNumber(i + 1) }
-
-    override fun toString() = "$lotto\n"
+    fun contains(number: Int): Boolean = contains(LottoNumber.of(number))
 
     companion object {
-        private const val ZERO = 0
-        private const val SUBLIST_START = 0
-        private const val SUBLIST_END = 6
-        private const val MAX_NUBER = 45
+        private const val VALID_LOTTO_NUMBER = 6
+        const val INVALID_MESSAGE = "로또는 중복되지 않은 ${VALID_LOTTO_NUMBER}개의 숫자로 생성할 수 있습니다."
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as Lotto
+        if (numbers != other.numbers) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return numbers.hashCode()
+    }
+
+    override fun toString(): String {
+        return "$numbers\n"
     }
 }

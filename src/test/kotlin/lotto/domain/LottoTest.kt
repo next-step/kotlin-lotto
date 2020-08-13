@@ -1,31 +1,44 @@
 package lotto.domain
 
-import lotto.domain.value.HitLotto
-import lotto.domain.value.LottoNumber
-import lotto.strategy.TestStrategy
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
 internal class LottoTest {
-    private val lotto = Lotto(TestStrategy())
 
     @Test
-    fun `로또는 여섯 개의 숫자를 가진다`() {
-        val lottoNumber = lotto.getLotto()
-        val expect = List(6) { i -> LottoNumber(i + 1) }
-        assertThat(lottoNumber).isEqualTo(expect)
+    fun `중복된 숫자로 Lotto를 만들 수 없다`() {
+        assertThatThrownBy { Lotto(1, 2, 3, 4, 5, 5) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage(Lotto.INVALID_MESSAGE)
     }
 
     @Test
-    fun `몇개의 당첨 번호가 맞아 몇등을 했는지 알 수 있다`() {
-        val winningNumber = List(6) { i -> LottoNumber(i + 1) }
-        val actual = lotto.hitLotto(winningNumber)
-        assertThat(actual).isEqualTo(HitLotto.SIX)
+    fun `6개의 숫자가 아니라면 Lotto를 만들 수 없다`() {
+        assertThatThrownBy { Lotto(1, 2, 3, 4, 5) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage(Lotto.INVALID_MESSAGE)
+        assertThatThrownBy { Lotto(1, 2, 3, 4, 5, 6, 7) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage(Lotto.INVALID_MESSAGE)
     }
 
     @Test
-    fun `ToStringTest`() {
-        val actual = lotto.toString()
-        assertThat(actual).isEqualTo("[1, 2, 3, 4, 5, 6]\n")
+    fun `7개 숫자를 넣었지만 하나가 중복인경우 `() {
+        assertThatThrownBy { Lotto(1, 2, 3, 4, 5, 6, 6) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage(Lotto.INVALID_MESSAGE)
+    }
+
+    @Test
+    fun `중복되지 않은 6개의 숫자로 Lotto를 만들 수 있다`() {
+        val lotto = Lotto(1, 2, 3, 4, 5, 6)
+        assertThat(lotto).isEqualTo(Lotto(1, 2, 3, 4, 5, 6))
+    }
+
+    @Test
+    fun testToString() {
+        val lotto = Lotto(1, 2, 3, 4, 5, 6)
+        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n")
     }
 }
