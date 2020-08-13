@@ -49,14 +49,6 @@ class LottoGameTest {
             .isEqualTo(5.0)
     }
 
-    @DisplayName("로또 숫자 유효성 검사")
-    @ParameterizedTest
-    @ValueSource(ints = [-3, 0, 99])
-    fun validateLottoNumber(number: Int) {
-        assertThatThrownBy { LottoNumber(number) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-    }
-
     @DisplayName("보너스 숫자 유효성 검사")
     @ParameterizedTest
     @ValueSource(strings = ["-3", "0", "99"])

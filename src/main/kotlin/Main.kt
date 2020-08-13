@@ -9,6 +9,6 @@ fun main() {
         lottoGame.execute(InputView.getPrizedNumbers(), InputView.getBonusNumber())
         ResultView.showPrizeStatics(lottoGame.lottoPrizeStatics)
     } catch (e: Exception) {
-        println(e.message)
+        ResultView.print(e.message)
     }
 }
