@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.Prize
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
@@ -44,5 +45,14 @@ class LottoTest {
     @Test
     fun validateLottoEmpty() {
         assertThat(Lotto()).isNotInstanceOf(Exception::class.java)
+    }
+
+    @DisplayName("발생한 로또와 당첨번호가 일치하는 경우 받는 Prize")
+    @Test
+    fun checkGetPrize() {
+        val lotto = Lotto("1,2,3,4,5,6")
+        val prizeLotto = Lotto("1,2,3,4,5,6")
+        assertThat(lotto.getPrize(prizeLotto))
+            .isEqualTo(Prize.MATCH_ALL)
     }
 }

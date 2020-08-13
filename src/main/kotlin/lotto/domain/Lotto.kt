@@ -18,8 +18,8 @@ class Lotto(private val numbers: Set<LottoNumber>) {
         prizeNumberString.split(",").asSequence().sorted().map { LottoNumber(it.toInt()) }.toSet()
     )
 
-    fun getPrize(lotto: Lotto): Prize {
-        return Prize.getPrize(numbers.count { lotto.numbers.contains(it) })
+    fun getPrize(prizeLotto: Lotto): Prize {
+        return Prize.getPrize(numbers.count { prizeLotto.numbers.contains(it) })
     }
 
     fun isContainBonusNumber(bonusNumber: LottoNumber) = numbers.contains(bonusNumber)
