@@ -10,7 +10,7 @@ internal class MoneyTest {
 
     @Test
     fun `음수가 들어올 경우 IllegalArgumentException이 발생해야한다`() {
-        assertThatThrownBy { Money(-1.toBigInteger()) }
+        assertThatThrownBy { Money((-1).toBigInteger()) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("음수는 Money로 사용될 수 없습니다.")
     }
@@ -60,6 +60,6 @@ internal class MoneyTest {
     @Test
     fun `money 객체를 bigDecimal로 형변환 할 수 있다`() {
         val actual = Money(300.toBigInteger()).toBigDecimal()
-        assertThat(actual as? BigDecimal).isNotNull()
+        assertThat(actual as? BigDecimal).isInstanceOf(BigDecimal::class.java)
     }
 }
