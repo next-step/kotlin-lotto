@@ -17,21 +17,23 @@ private fun checkLotto(
     winningLotto: WinningLotto,
     money: Money
 ) {
-    val lottoResult = lottoTicket.match(winningLotto) // Model
-    ResultView.printResult(lottoResult) // View
-    val totalRate = lottoResult.calculateTotalRate(money) // Model
-    ResultView.printTotalRate(totalRate) // View
+    val lottoResult = lottoTicket.match(winningLotto)
+    ResultView.printResult(lottoResult)
+    val totalRate = lottoResult.calculateTotalRate(money)
+    ResultView.printTotalRate(totalRate)
 }
 
 private fun buyLottoTicket(): Pair<Money, LottoTicket> {
-    val money = InputView.inputMoney() // view
-    val lottoTicket = LottoTicket(money) // model
-    ResultView.printLottos(lottoTicket) // view
+    val money = InputView.inputMoney()
+    val manualCount = InputView.inputManualNumberCount(money)
+    val manualLottos = InputView.inputManualNumber(manualCount)
+    val lottoTicket = LottoTicket(money, manualLottos)
+    ResultView.printLottos(lottoTicket)
     return money to lottoTicket
 }
 
 private fun getLastWeekWinningLottoNumber(): WinningLotto {
-    val winningNumber = InputView.inputWinningNumber() // View
-    val bonusNumber = InputView.inputBonusNumber() // View
-    return WinningLotto(winningNumber, bonusNumber) // model
+    val winningNumber = InputView.inputWinningNumber()
+    val bonusNumber = InputView.inputBonusNumber()
+    return WinningLotto(winningNumber, bonusNumber)
 }
