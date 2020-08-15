@@ -6,20 +6,8 @@ import view.ResultView
 fun main() {
 
     var money = InputView.getMoney()
-    if (money == null) {
-        ResultView.printWrongValue()
-        return
-    }
     val manual = InputView.getManualLottoCount()
-    if (manual == null) {
-        ResultView.printWrongValue()
-        return
-    }
     val manualLottoList = InputView.getManualLottoNumber(manual)
-    if (manualLottoList == null) {
-        ResultView.printWrongValue()
-        return
-    }
     val lottoGame = LottoGame()
 
     val lottoList = lottoGame.buy(money, manual, manualLottoList)
@@ -28,10 +16,6 @@ fun main() {
     ResultView.printLottoList(lottoList)
 
     var prize = InputView.getPrizeLotto()
-    if (prize == null) {
-        ResultView.printWrongValue()
-        return
-    }
 
     val bonusBall = InputView.getBonusBall()
     val winningLotto = WinningLotto(prize, LottoNumber.from(bonusBall))
