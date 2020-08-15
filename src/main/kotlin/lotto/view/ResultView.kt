@@ -13,7 +13,7 @@ object ResultView {
     fun showWinners(winners: Winners) {
         println("당첨통계")
         Prize.values().forEach {
-            println("${it.matchingCount}개 일치 (${it.prizeMoney}) - ${winners.getPrizeCount(it)}")
+            println("${it.matchingCount}개 일치 (${it.prizeMoney.value}) - ${winners.getPrizeCount(it)}")
         }
         println("총 수익률 : ${winners.getTotalYield()}")
     }
