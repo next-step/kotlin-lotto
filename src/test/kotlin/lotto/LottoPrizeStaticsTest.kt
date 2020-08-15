@@ -22,7 +22,7 @@ class LottoPrizeStaticsTest {
     fun checkCalculateProfitRate() {
         val lottoPrizeStatics = LottoPrizeStatics()
         val prizeLotto = Lotto("1,2,3,4,5,6")
-        val bonusNumber = LottoNumber(7)
+        val bonusNumber = LottoNumber.newInstance(7)
         val lottoList = listOf(
             Lotto("11,12,13,14,15,16"),
             Lotto("21,12,13,14,15,16")

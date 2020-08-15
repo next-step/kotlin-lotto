@@ -22,12 +22,12 @@ class LottoTest {
         assertThat(
             Lotto(
                 setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6)
+                    LottoNumber.newInstance(1),
+                    LottoNumber.newInstance(2),
+                    LottoNumber.newInstance(3),
+                    LottoNumber.newInstance(4),
+                    LottoNumber.newInstance(5),
+                    LottoNumber.newInstance(6)
                 )
             )
         ).isNotInstanceOf(Exception::class.java)
@@ -52,7 +52,7 @@ class LottoTest {
     @Test
     fun checkBonusNumber() {
         val lotto = Lotto("1,2,3,4,5,6")
-        val bonusNumber = LottoNumber(1)
+        val bonusNumber = LottoNumber.newInstance(1)
         assertThat(lotto.isContainBonusNumber(bonusNumber))
             .isEqualTo(true)
     }
