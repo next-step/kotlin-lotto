@@ -1,6 +1,6 @@
 package lotto.domain.selling
 
-import lotto.domain.LottoTicket
+import lotto.domain.lotto.LottoTicket
 
 data class PaymentResult(
     val money: Int,

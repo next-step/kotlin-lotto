@@ -1,12 +1,18 @@
-package lotto.domain
+package lotto.domain.lotto
 
-data class LottoTicket(val numbers: Set<LottoNumber>) {
+data class LottoTicket(
+    val lottoType: LottoType,
+    val numbers: Set<LottoNumber>
+) {
 
     init {
         require(hasValidCount(numbers)) { "$NUMBER_COUNT 개의 중복되지 않은 번호가 필요합니다." }
     }
 
-    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) }.toSortedSet())
+    constructor(lottoType: LottoType, vararg numbers: Int) : this(
+        lottoType,
+        numbers.map { LottoNumber(it) }.toSortedSet()
+    )
 
     fun hasNumber(number: LottoNumber) = numbers.contains(number)
 

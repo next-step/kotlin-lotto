@@ -1,9 +1,9 @@
 package lotto
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
-import lotto.domain.WinningLottoTicket
 import lotto.domain.generator.ManualLottoGenerator
+import lotto.domain.lotto.LottoNumber
+import lotto.domain.lotto.LottoTicket
+import lotto.domain.lotto.WinningLottoTicket
 import lotto.domain.selling.LottoExchanger
 import lotto.domain.selling.Payment
 import lotto.domain.selling.PaymentResult

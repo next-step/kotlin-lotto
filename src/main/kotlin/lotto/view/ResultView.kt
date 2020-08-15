@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
+import lotto.domain.lotto.LottoNumber
+import lotto.domain.lotto.LottoTicket
 import lotto.domain.selling.ExchangeResult
 import lotto.domain.selling.PaymentResult
 import lotto.domain.selling.Rank

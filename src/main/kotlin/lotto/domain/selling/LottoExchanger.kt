@@ -1,6 +1,6 @@
 package lotto.domain.selling
 
-import lotto.domain.WinningLottoTicket
+import lotto.domain.lotto.WinningLottoTicket
 
 object LottoExchanger {
 

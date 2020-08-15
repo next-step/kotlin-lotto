@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.lotto
 
 class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> {
 

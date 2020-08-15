@@ -1,6 +1,6 @@
 package lotto.domain.generator
 
-import lotto.domain.LottoNumber
+import lotto.domain.lotto.LottoNumber
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -12,8 +12,12 @@ internal class ManualLottoTicketGeneratorTest {
     @Test
     fun execute() {
         assertThat(ManualLottoGenerator("1, 2, 3, 4, 5, 6").execute().numbers).containsAnyOf(
-            LottoNumber(1), LottoNumber(2), LottoNumber(3),
-            LottoNumber(4), LottoNumber(5), LottoNumber(6)
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6)
         )
     }
 

@@ -1,7 +1,7 @@
 package lotto.domain.selling
 
-import lotto.domain.LottoTicket
-import lotto.domain.LottoType
+import lotto.domain.lotto.LottoTicket
+import lotto.domain.lotto.LottoType
 
 class Seller {
 

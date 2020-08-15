@@ -1,6 +1,6 @@
 package lotto.domain.generator
 
-import lotto.domain.LottoTicket
+import lotto.domain.lotto.LottoTicket
 
 interface LottoGenerator {
 

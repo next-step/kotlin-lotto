@@ -1,11 +1,13 @@
 package lotto.domain.generator
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
+import lotto.domain.lotto.LottoNumber
+import lotto.domain.lotto.LottoTicket
+import lotto.domain.lotto.LottoType
 
 object AutoLottoGenerator : LottoGenerator {
 
     override fun execute() = LottoTicket(
+        LottoType.AUTO,
         LottoNumber.NUMBER_RANGE.shuffled()
             .take(LottoTicket.NUMBER_COUNT)
             .map { LottoNumber(it) }

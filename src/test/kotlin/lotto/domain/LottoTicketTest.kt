@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.lotto.LottoTicket
+import lotto.domain.lotto.LottoType
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -10,7 +12,7 @@ internal class LottoTicketTest {
     @Test
     fun checkWinning() {
         Assertions.assertThatThrownBy {
-            LottoTicket(10, 20)
+            LottoTicket(LottoType.MANUAL, 10, 20)
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
 }
