@@ -3,7 +3,7 @@ package lotto.domain
 const val COUNT_OF_NUMBERS = 6
 private val LOTTO_NUMBERS = (MIN_NUMBER..MAX_NUMBER)
 
-class Lotto(private val numbers: Set<LottoNumber?>) {
+class Lotto(private val numbers: Set<LottoNumber>) {
 
     init {
         require(numbers.size == COUNT_OF_NUMBERS) { "중복되지 않는 6개의 숫자를 입력해주세요" }

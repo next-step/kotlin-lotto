@@ -27,9 +27,11 @@ data class LottoNumber(private val number: Int = 0) {
     companion object {
         private var lottoNumbers = emptyMap<Int, LottoNumber>()
 
-        fun newInstance(number: Int): LottoNumber? {
+        fun newInstance(number: Int): LottoNumber {
             if (lottoNumbers.isEmpty()) lottoNumbers = createLottoNumbers()
-            return lottoNumbers[number]
+            val lottoNumber = lottoNumbers[number]
+            require(lottoNumber != null) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자를 입력해 주세요." }
+            return lottoNumber
         }
 
         private fun createLottoNumbers(): Map<Int, LottoNumber> {
