@@ -43,9 +43,8 @@ object InputView {
 
     fun getPrizeLotto(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val inputString = readLine()
         return try {
-            createLottoFromInput(inputString)
+            getManualLottoNumber(LottoManual(1)).first()
         } catch (ex: java.lang.IllegalArgumentException) {
             ResultView.printWrongValue()
             exitProcess(0)
