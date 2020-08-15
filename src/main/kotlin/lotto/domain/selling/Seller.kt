@@ -8,10 +8,7 @@ class Seller {
     fun processPayment(payment: Payment, numbers: String = "") =
         PaymentResult(payment.money, issueLottoTickets(payment, numbers), calculateChange(payment))
 
-    fun isAcceptable(money: String): Boolean {
-        val input = money.toIntOrNull()
-        return input != null && input >= LOTTO_PRICE
-    }
+    fun isAcceptable(money: Int): Boolean = money >= LOTTO_PRICE
 
     private fun issueLottoTickets(payment: Payment, numbers: String = ""): List<LottoTicket> {
         val count = calculateLottoCount(payment)

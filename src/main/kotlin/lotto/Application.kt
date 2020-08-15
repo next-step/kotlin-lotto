@@ -33,7 +33,7 @@ object Application {
     }
 
     private fun inputUserPayment(): PaymentResult {
-        val payment = Payment(InputView.readMoney { seller.isAcceptable(it) }.toInt())
+        val payment = Payment(InputView.readMoney { seller.isAcceptable(it) })
         val result = seller.processPayment(payment)
         ResultView.printPaymentResult(result)
         return result
@@ -47,7 +47,7 @@ object Application {
     }
 
     private fun processWinningLotto(lottoTicket: LottoTicket): WinningLottoTicket? = try {
-        val number = InputView.readBonusNumber { it.toIntOrNull() != null }.toInt()
+        val number = InputView.readBonusNumber()
         WinningLottoTicket(lottoTicket, LottoNumber(number))
     } catch (e: IllegalArgumentException) {
         ResultView.printInvalidBonusNumber()

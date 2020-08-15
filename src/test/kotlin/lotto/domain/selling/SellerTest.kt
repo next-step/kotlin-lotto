@@ -19,8 +19,8 @@ internal class SellerTest {
 
     @DisplayName("받을 수 있는 금액인지 확인한다")
     @ParameterizedTest
-    @ValueSource(strings = ["12000", "13330"])
-    fun isAcceptable(money: String) {
+    @ValueSource(ints = [12000, 13330])
+    fun isAcceptable(money: Int) {
         assertThat(seller.isAcceptable(money)).isTrue()
     }
 }
