@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.LottoNumber
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -13,15 +12,15 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [-3, 0, 99])
     fun validateLottoNumber(number: Int) {
-        Assertions.assertThatThrownBy { LottoNumber(number) }
-            .isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(LottoNumber.newInstance(number))
+            .isNull()
     }
 
     @DisplayName("로또 숫자가 같다")
     @Test
     fun checkEqualLottoNumber() {
-        val lottoNumber = LottoNumber(1)
-        val anotherLottoNumber = LottoNumber(1)
+        val lottoNumber = LottoNumber.newInstance(1)
+        val anotherLottoNumber = LottoNumber.newInstance(1)
         assertThat(lottoNumber)
             .isEqualTo(anotherLottoNumber)
     }

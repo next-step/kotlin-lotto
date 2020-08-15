@@ -13,7 +13,7 @@ class LottoPrizeStatics {
     )
         private set
 
-    fun checkMatches(prizeLotto: Lotto, bonusNumber: LottoNumber, lottoList: List<Lotto>) {
+    fun checkMatches(prizeLotto: Lotto, bonusNumber: LottoNumber?, lottoList: List<Lotto>) {
         val prizedLottoList = lottoList.asSequence()
             .filter { it.getPrize(prizeLotto).prizeMoney > 0 }
         var totalPrizeMoney = prizedLottoList

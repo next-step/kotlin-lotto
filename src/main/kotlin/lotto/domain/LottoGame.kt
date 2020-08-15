@@ -15,7 +15,7 @@ class LottoGame(gameMoney: String) {
 
     fun execute(prizeNumberString: String, _bonusNumber: String) {
         val prizeLotto = getPrizeLotto(prizeNumberString)
-        val bonusNumber = LottoNumber(_bonusNumber.toInt())
+        val bonusNumber: LottoNumber? = LottoNumber.newInstance(_bonusNumber.toInt())
         require(!prizeLotto.isContainBonusNumber(bonusNumber))
         checkMatch(prizeLotto, bonusNumber)
     }
@@ -26,7 +26,7 @@ class LottoGame(gameMoney: String) {
         lottoList = generateLottoList
     }
 
-    private fun checkMatch(prizeLotto: Lotto, bonusNumber: LottoNumber) {
+    private fun checkMatch(prizeLotto: Lotto, bonusNumber: LottoNumber?) {
         lottoPrizeStatics.checkMatches(prizeLotto, bonusNumber, lottoList)
     }
 
