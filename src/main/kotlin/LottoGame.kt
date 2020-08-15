@@ -4,18 +4,18 @@ import model.WinningLotto
 import model.WinningResult
 
 class LottoGame {
-    private var _list: MutableList<Lotto> = mutableListOf()
-    private lateinit var _money: Money
+    private var list: MutableList<Lotto> = mutableListOf()
+    private lateinit var money: Money
 
     fun buy(money: Money): List<Lotto> {
-        _money = money
+        this.money = money
 
-        repeat(money.getLottoCount()) { _list.add(Lotto.make()) }
+        repeat(money.getLottoCount()) { list.add(Lotto.make()) }
 
-        return _list.toList()
+        return list.toList()
     }
 
     fun match(winningLotto: WinningLotto): WinningResult {
-        return WinningResult(_list, winningLotto, _money)
+        return WinningResult(list, winningLotto, money)
     }
 }

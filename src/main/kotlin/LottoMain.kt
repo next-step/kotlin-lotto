@@ -1,4 +1,5 @@
 
+import model.LottoNumber
 import model.WinningLotto
 import view.InputView
 import view.ResultView
@@ -14,7 +15,7 @@ fun main() {
     var prize = InputView.getPrizeLotto()
 
     val bonusBall = InputView.getBonusBall()
-    val winningLotto = WinningLotto(prize, bonusBall)
+    val winningLotto = WinningLotto(prize, LottoNumber.from(bonusBall))
 
     val winningResult = lottoGame.match(winningLotto)
 

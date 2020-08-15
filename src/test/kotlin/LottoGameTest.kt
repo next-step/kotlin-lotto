@@ -70,6 +70,6 @@ class LottoGameTest {
     fun `inputBonusLottoNumber`() {
         val lottoNumber = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }.toSet()
         val winningLotto = WinningLotto(lottoNumber, 7)
-        assertThat(winningLotto.bonusNumber).isEqualTo(7)
+        assertThat(winningLotto.bonusNumber.value).isEqualTo(7)
     }
 }
