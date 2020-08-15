@@ -20,12 +20,11 @@ class LottoTest {
     fun validLottoCheck() {
         val lotto = Lotto.make("1,2,3,4,5,6")
 
-        lotto.checkWin(
+        val win = lotto.checkWin(
             WinnerLotto(
                 Lotto.make("1,2,3,4,5,10"), LottoNo.from(6)
             )
         )
-        assertThat(lotto.win).isEqualTo(Win.SECOND)
-        assertThat(lotto.checkPrize()).isEqualTo(Win.SECOND.prize)
+        assertThat(win).isEqualTo(Win.SECOND)
     }
 }

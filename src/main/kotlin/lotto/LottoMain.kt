@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.model.LottoChecker
 import lotto.model.LottoPaper
 import lotto.model.WinnerLotto
 import lotto.model.getAutoLotto
@@ -22,8 +21,9 @@ fun main() {
     val bonus = InputView.getBonusNumber()
 
     val winnerLotto = WinnerLotto(winnerLottoWithoutBonus, bonus)
-    val checker = LottoChecker(winnerLotto, lottoPaper)
 
-    ResultView.printMatchResult(checker.getLottos())
-    ResultView.printEarningRate(checker.getEarningRate())
+    lottoPaper.checkLottoWin(winnerLotto)
+
+    ResultView.printMatchResult(lottoPaper)
+    ResultView.printEarningRate(lottoPaper.calculate())
 }

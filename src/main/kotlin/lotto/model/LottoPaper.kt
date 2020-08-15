@@ -4,6 +4,7 @@ import lotto.model.Money.Companion.calculateRate
 
 data class LottoPaper(private val lottos: List<Lotto>) {
     val lottoInPaper = mutableListOf<Lotto>()
+    val wins = mutableListOf<Win>()
 
     init {
         this.lottoInPaper.addAll(lottos)
@@ -19,10 +20,10 @@ data class LottoPaper(private val lottos: List<Lotto>) {
     }
 
     fun checkLottoWin(winner: WinnerLotto) {
-        lottoInPaper.forEach { it.checkWin(winner) }
+        lottoInPaper.forEach { wins.add(it.checkWin(winner)) }
     }
 
     fun calculate(): Double {
-        return calculateRate(lottoInPaper.map { it.win })
+        return calculateRate(wins.map { it })
     }
 }

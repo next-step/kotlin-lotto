@@ -15,7 +15,7 @@ object ResultView {
         }
     }
 
-    fun printMatchResult(result: LottoPaper) {
+    fun printMatchResult(paper: LottoPaper) {
         println("당첨 통계")
         println("---------")
 
@@ -26,7 +26,7 @@ object ResultView {
                 resultSentence += ", 보너스 볼 일치"
             }
 
-            resultSentence += "(${win.prize.money}원)- ${result.lottoInPaper.filter { it.win == win }.size}개"
+            resultSentence += "(${win.prize.money}원)- ${paper.wins.filter { it == win }.size}개"
 
             println(resultSentence)
         }
