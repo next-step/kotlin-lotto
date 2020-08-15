@@ -1,28 +1,28 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.PrizeGenerator
+import lotto.domain.LottoNumber
+import lotto.domain.PrizeResult
+import lotto.domain.result
 import java.math.BigDecimal
 
 object ResultView {
-
-    fun showPurchasedLottos(purchaseCount: Int, lottos: List<Lotto>) {
+    fun showPurchasedLottos(purchaseCount: Int, tickets: List<Set<LottoNumber>>) {
         println("$purchaseCount 개를 구입하였습니다.")
-        lottos.forEach { println(it.numbers) }
+        tickets.forEach { println(it) }
     }
 
-    fun showWinningResult(map: MutableMap<PrizeGenerator, Int>) {
+    fun showWinningResult() {
         println("당첨 통계")
         println("---------")
 
-        PrizeGenerator.values()
-            .filter { it != PrizeGenerator.ZERO_MATCH }
+        PrizeResult.values()
+            .filter { it != PrizeResult.ZERO_MATCH }
             .forEach {
-                println("${it.name}개 일치 (${it.prize}원) - ${map[it] ?: 0}개")
+                println("${it.name}개 일치 (${it.prize}원) - ${result[it] ?: 0}개")
             }
     }
 
-    fun showRatio(calculateRatio: BigDecimal) {
-        println("총 수익률은 ${calculateRatio}입니다.")
+    fun showRatio(ratio: BigDecimal) {
+        println("총 수익률은 ${ratio}입니다")
     }
 }

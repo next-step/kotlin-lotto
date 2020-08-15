@@ -5,7 +5,7 @@ import java.math.RoundingMode
 
 object LottoStatistics {
     fun calculateRatio(purchaseCount: Int): BigDecimal {
-        return PrizeGenerator.winningPrize().toBigDecimal()
-            .divide((purchaseCount * LOTTO_PRICE).toBigDecimal(), 2, RoundingMode.HALF_EVEN)
+        return PrizeResult.winningPrize().toBigDecimal()
+            .divide((purchaseCount * LottoTicket.PRICE).toBigDecimal(), 2, RoundingMode.HALF_EVEN)
     }
 }
