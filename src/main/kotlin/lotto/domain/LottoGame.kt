@@ -2,6 +2,7 @@ package lotto.domain
 
 const val PRICE_OF_LOTTO = 1000
 private val PLAYER_REGULAR_EXPRESSION = "^(\\d{1,2},)+\\d{1,2}$".toRegex()
+private val BONUS_NUMBER_REGULAR_EXPRESSION = "(\\d{1,2})".toRegex()
 
 class LottoGame(gameMoney: String) {
     var lottoList: List<Lotto> = listOf()
@@ -15,8 +16,8 @@ class LottoGame(gameMoney: String) {
 
     fun execute(prizeNumberString: String, _bonusNumber: String) {
         val prizeLotto = getPrizeLotto(prizeNumberString)
-        val bonusNumber: LottoNumber? = LottoNumber.newInstance(_bonusNumber.toInt())
-        require(!prizeLotto.isContainBonusNumber(bonusNumber))
+        val bonusNumber: LottoNumber = getBonusNumber(_bonusNumber)
+        require(!prizeLotto.isContainBonusNumber(bonusNumber)) { "당첨번호에 포함되지 않는 보너스 볼을 입력해주세요." }
         checkMatch(prizeLotto, bonusNumber)
     }
 
@@ -38,7 +39,12 @@ class LottoGame(gameMoney: String) {
     }
 
     private fun getPrizeLotto(prizeNumberString: String): Lotto {
-        require(PLAYER_REGULAR_EXPRESSION.matches(prizeNumberString)) { "1~45 사이의 숫자와 `,`로 만 값을 입력해 주세요." }
+        require(PLAYER_REGULAR_EXPRESSION.matches(prizeNumberString)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자  $COUNT_OF_NUMBERS 개와`,`로 만 값을 입력해 주세요." }
         return Lotto(prizeNumberString)
+    }
+
+    private fun getBonusNumber(bonusNumberString: String): LottoNumber {
+        require(BONUS_NUMBER_REGULAR_EXPRESSION.matches(bonusNumberString)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자만 입력해 주세요." }
+        return LottoNumber.newInstance(bonusNumberString.toInt())
     }
 }

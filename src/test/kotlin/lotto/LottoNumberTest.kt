@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoNumber
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,8 +13,9 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [-3, 0, 99])
     fun validateLottoNumber(number: Int) {
-        assertThat(LottoNumber.newInstance(number))
-            .isNull()
+        assertThatThrownBy {
+            LottoNumber.newInstance(number)
+        }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @DisplayName("로또 숫자가 같다")
