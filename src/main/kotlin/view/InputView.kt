@@ -18,14 +18,20 @@ object InputView {
         return LottoManual(inputString)
     }
 
+    fun getManualLottoNumber(manual: LottoManual): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val list: MutableList<Lotto> = mutableListOf()
+        repeat(manual.value) {
+            val inputString = readLine()
+            list.add(createLottoFromInput(inputString, true))
+        }
+        return list.toList()
+    }
+
     fun getPrizeLotto(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val inputString = readLine()
-        checkNotNull(inputString)
-        require(PRIZE_REGEX.matches(inputString)) { "not accepted prize regex" }
-        val inputPrizeNumbers = removeWhiteSpace(inputString)
-
-        return Lotto(makeLottoNumber(inputPrizeNumbers))
+        return createLottoFromInput(inputString)
     }
 
     fun getBonusBall(): Int {
@@ -34,6 +40,14 @@ object InputView {
         checkNotNull(inputString)
         require(inputString.isNotBlank()) { "not accept blank" }
         return inputString.toInt()
+    }
+
+    private fun createLottoFromInput(inputString: String?, isManual: Boolean = false): Lotto {
+        checkNotNull(inputString)
+        require(LOTT_REGEX.matches(inputString)) { "not accepted lotto regex" }
+        val inputLottoNumbers = removeWhiteSpace(inputString)
+
+        return Lotto(makeLottoNumber(inputLottoNumbers), isManual)
     }
 
     private fun makeLottoNumber(inputPrizeNumbers: String) =
@@ -47,6 +61,6 @@ object InputView {
         }
     }
 
-    val PRIZE_REGEX = Regex(pattern = "^[0-9,\\s]+\$")
+    val LOTT_REGEX = Regex(pattern = "^[0-9,\\s]+\$")
     const val DELIMITER = ","
 }

@@ -7,10 +7,12 @@ import view.ResultView
 fun main() {
     var money = InputView.getMoney()
     val manual = InputView.getManualLottoCount()
+    val manualLottoList = InputView.getManualLottoNumber(manual)
     val lottoGame = LottoGame()
 
-    val lottoList = lottoGame.buy(money, manual)
+    val lottoList = lottoGame.buy(money, manual, manualLottoList)
 
+    ResultView.printLottoInfo(manual.value, lottoGame.autoMakeCount())
     ResultView.printLottoList(lottoList)
 
     var prize = InputView.getPrizeLotto()

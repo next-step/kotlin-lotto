@@ -5,13 +5,18 @@ class LottoGame {
     private lateinit var money: Money
     private lateinit var manual: LottoManual
 
-    fun buy(money: Money, manual: LottoManual): List<Lotto> {
+    fun buy(money: Money, manual: LottoManual, manualLottoList: List<Lotto> = emptyList()): List<Lotto> {
         this.money = money
         this.manual = manual
 
-        repeat(money.getAutoCreateCount(manual)) { list.add(Lotto.make()) }
+        list.addAll(manualLottoList)
+        repeat(autoMakeCount()) { list.add(Lotto.make()) }
 
         return list.toList()
+    }
+
+    fun autoMakeCount(): Int {
+        return money.getAutoCreateCount(manual)
     }
 
     fun match(winningLotto: WinningLotto): WinningResult {

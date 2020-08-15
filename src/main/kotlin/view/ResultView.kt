@@ -5,6 +5,9 @@ import model.LottoStat
 import model.Rank
 
 object ResultView {
+    fun printLottoInfo(manual: Int, auto: Int) {
+        println("수동으로 ${manual}장, 자동으로 ${auto}개를 구매했습니다.")
+    }
     fun printLottoList(list: List<Lotto>) {
         list.forEach {
             print(it)

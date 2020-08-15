@@ -1,6 +1,6 @@
 package model
 
-class Lotto(override val number: Set<LottoNumber>) : BasicLotto {
+class Lotto(override val number: Set<LottoNumber>, val isManual: Boolean = false) : BasicLotto {
     init {
         require(number.size == 6) { "not accept lotto" }
     }
