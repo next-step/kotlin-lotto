@@ -1,16 +1,15 @@
-import model.Lotto
-import model.Money
-import model.WinningLotto
-import model.WinningResult
+import model.*
 
 class LottoGame {
     private var list: MutableList<Lotto> = mutableListOf()
     private lateinit var money: Money
+    private lateinit var manual: LottoManual
 
-    fun buy(money: Money): List<Lotto> {
+    fun buy(money: Money, manual: LottoManual): List<Lotto> {
         this.money = money
+        this.manual = manual
 
-        repeat(money.getLottoCount()) { list.add(Lotto.make()) }
+        repeat(money.getAutoCreateCount(manual)) { list.add(Lotto.make()) }
 
         return list.toList()
     }

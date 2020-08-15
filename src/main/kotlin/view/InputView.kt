@@ -1,6 +1,7 @@
 package view
 
 import model.Lotto
+import model.LottoManual
 import model.LottoNumber
 import model.Money
 
@@ -8,6 +9,13 @@ object InputView {
     fun getMoney(): Money {
         println("구매금액을 입력해 주세요.")
         return Money(readLine())
+    }
+
+    fun getManualLottoCount(): LottoManual {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val inputString = readLine()
+        checkNotNull(inputString)
+        return LottoManual(inputString)
     }
 
     fun getPrizeLotto(): Lotto {
