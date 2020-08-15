@@ -3,7 +3,7 @@ package model
 data class Money(private var _value: Int) {
     val value: Int get() = _value
 
-    constructor(value: String?) : this(value!!.toInt()) {
+    constructor(value: String) : this(value.toInt()) {
         if (!NUMBER_REGEX.matches(value)) {
             throw IllegalArgumentException("not acceptd not number value")
         }
