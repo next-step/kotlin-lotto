@@ -60,6 +60,6 @@ internal class MoneyTest {
     @Test
     fun `money 객체를 bigDecimal로 형변환 할 수 있다`() {
         val actual = Money(300.toBigInteger()).toBigDecimal()
-        assertThat(actual as? BigDecimal).isInstanceOf(BigDecimal::class.java)
+        assertThat(actual).isInstanceOf(BigDecimal::class.java)
     }
 }

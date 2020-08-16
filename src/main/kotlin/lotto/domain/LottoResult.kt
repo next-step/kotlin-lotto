@@ -13,7 +13,7 @@ class LottoResult(private val result: Map<Rank, Int>) {
     }
 
     private fun calculateTotalPrize(): Money {
-        return result.keys.map { it.prizeByCount(result.getValue(it)) }.reduce { total, money -> total + money }
+        return result.map { it.key.prizeByCount(it.value) }.reduce(Money::plus)
     }
 
     companion object {
