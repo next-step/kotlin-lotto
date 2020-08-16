@@ -31,6 +31,17 @@ object InputView {
         }
     }
 
+    tailrec fun inputBonusBall(): Int {
+        println("보너스 볼을 입력해주세요.")
+        val bonusBall = readLine()?.toIntOrNull()
+        return if (bonusBall != null && bonusBall >= 1 && bonusBall <= 45) {
+            bonusBall
+        } else {
+            println("보너스 볼은 한자리 숫자이거나 1 ~ 45 사이의 숫자만 가능합니다. 다시 입력해주세요.")
+            inputBonusBall()
+        }
+    }
+
     private fun inputNumbers(): String? {
         var numbers = readLine()
         if (numbers != null && !WINNING_NUMBER_REGEX.matches(numbers)) {
