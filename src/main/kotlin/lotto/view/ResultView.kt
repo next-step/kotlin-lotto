@@ -15,7 +15,7 @@ object ResultView {
     private const val TOTAL_RATE_PREFIX = "총 수익률은 "
     private const val TOTAL_RATE_SUFFIX = "입니다."
     private const val ACCORDANCE_SUFFIX = "개 일치"
-    private const val BONUS_PREFIX = ", 보너스 볼 일치"
+    private const val BONUS_MESSAGE = ", 보너스 볼 일치"
 
     fun printLottos(lottoTicket: LottoTicket) {
         println("${lottoTicket.lottos.size}$BUY_COUNT_SUFFIX")
@@ -36,7 +36,7 @@ object ResultView {
         val countMatch = String.format("%s$ACCORDANCE_SUFFIX", rank.countOfMatch)
         val winningMoney = String.format("(%s)", rank.winningMoney)
         val countRank = String.format("%s$COUNT_SUFFIX", result.countByRank(rank))
-        val bonus = if (rank.matchBonus) BONUS_PREFIX else ""
+        val bonus = if (rank.matchBonus) BONUS_MESSAGE else ""
         println("$countMatch$bonus$winningMoney$SEPARATOR$countRank")
     }
 
