@@ -4,9 +4,9 @@ import lotto.domain.lotto.LottoNumber
 import lotto.domain.lotto.LottoTicket
 import lotto.domain.lotto.LottoType
 
-object AutoLottoGenerator : LottoGenerator {
+object AutoLottoGenerator {
 
-    override fun execute() = LottoTicket(
+    fun execute() = LottoTicket(
         LottoType.AUTO,
         LottoNumber.NUMBER_RANGE.shuffled()
             .take(LottoTicket.NUMBER_COUNT)

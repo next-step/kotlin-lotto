@@ -18,9 +18,9 @@ internal class PaymentResultTest {
 
     @BeforeEach
     fun setUp() {
-        fourthLotto = LottoTicket(LottoType.AUTO, 1, 2, 3, 4, 5, 10)
-        secondLotto = LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 13)
-        winningLotto = WinningLottoTicket(LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 12), 13)
+        fourthLotto = LottoTicket(LottoType.AUTO, 1, 2, 3, 4, 5, 10)!!
+        secondLotto = LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 13)!!
+        winningLotto = WinningLottoTicket(LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 12)!!, 13)
         paymentResult = PaymentResult(2300, 300, listOf(fourthLotto, secondLotto))
     }
 

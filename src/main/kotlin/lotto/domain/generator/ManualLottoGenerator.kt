@@ -4,17 +4,14 @@ import lotto.domain.lotto.LottoNumber
 import lotto.domain.lotto.LottoTicket
 import lotto.domain.lotto.LottoType
 
-data class ManualLottoGenerator(private val input: String) : LottoGenerator {
+object ManualLottoGenerator {
+    private const val NUMBER_DELIMITER = ","
 
-    override fun execute() = LottoTicket(
+    fun execute(input: String) = LottoTicket(
         LottoType.MANUAL,
         parseNumbers(input).toSortedSet()
     )
 
-    companion object {
-        private const val NUMBER_DELIMITER = ","
-
-        private fun parseNumbers(numbers: String) =
-            numbers.split(NUMBER_DELIMITER).map { LottoNumber(it.trim().toInt()) }
-    }
+    private fun parseNumbers(numbers: String) =
+        numbers.split(NUMBER_DELIMITER).map { LottoNumber(it.trim().toInt()) }
 }

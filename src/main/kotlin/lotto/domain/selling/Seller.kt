@@ -1,22 +1,21 @@
 package lotto.domain.selling
 
+import lotto.domain.generator.AutoLottoGenerator
 import lotto.domain.lotto.LottoTicket
-import lotto.domain.lotto.LottoType
 
 class Seller {
 
-    fun processPayment(payment: Payment, numbers: String = "") =
-        PaymentResult(payment.money, issueLottoTickets(payment, numbers), calculateChange(payment))
+    fun processPayment(payment: Payment) =
+        PaymentResult(payment.money, calculateChange(payment), issueLottoTickets(payment))
 
     fun isAcceptable(money: Int): Boolean = money >= LOTTO_PRICE
 
-    private fun issueLottoTickets(payment: Payment, numbers: String = ""): List<LottoTicket> {
+    private fun issueLottoTickets(payment: Payment): List<LottoTicket> {
         val count = calculateLottoCount(payment)
-        val generator = LottoType.generatorOf(payment.lottoType, numbers)
-        return List(count) { generator.execute() }
+        return payment.manualLottoTickets + List(count) { AutoLottoGenerator.execute() }.filterNotNull()
     }
 
-    private fun calculateLottoCount(payment: Payment) = payment.money / LOTTO_PRICE
+    private fun calculateLottoCount(payment: Payment) = payment.money / LOTTO_PRICE - payment.manualCount
 
     private fun calculateChange(payment: Payment) = payment.money % LOTTO_PRICE
 

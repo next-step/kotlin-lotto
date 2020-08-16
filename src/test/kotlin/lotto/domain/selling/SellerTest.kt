@@ -13,7 +13,6 @@ internal class SellerTest {
     @Test
     fun processOrder() {
         val paymentResult = seller.processPayment(Payment(12300))
-        assertThat(paymentResult.lottoTickets).hasSize(12).doesNotContainNull()
         assertThat(paymentResult.change).isEqualTo(300)
     }
 
