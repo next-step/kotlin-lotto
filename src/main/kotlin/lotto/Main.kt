@@ -18,9 +18,7 @@ private fun checkLotto(
     money: Money
 ) {
     val lottoResult = lottoTicket.match(winningLotto)
-    ResultView.printResult(lottoResult)
-    val totalRate = lottoResult.calculateTotalRate(money)
-    ResultView.printTotalRate(totalRate)
+    ResultView.printResult(lottoResult, money)
 }
 
 private fun buyLottoTicket(): Pair<Money, LottoTicket> {

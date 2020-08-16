@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
+import lotto.domain.Money
 import lotto.domain.Rank
 import java.math.BigDecimal
 
@@ -21,12 +22,14 @@ object ResultView {
         printJoinToString(lottoTicket.lottos)
     }
 
-    fun printResult(result: LottoResult) {
+    fun printResult(result: LottoResult, money: Money) {
         println(WINNING_STATISTICS)
         println(WINNING_SEPARATOR)
         Rank.asList().forEach {
             printRankResult(it, result)
         }
+        val totalRate = result.calculateTotalRate(money)
+        printTotalRate(totalRate)
     }
 
     private fun printRankResult(rank: Rank, result: LottoResult) {
@@ -36,7 +39,7 @@ object ResultView {
         )
     }
 
-    fun printTotalRate(totalRate: BigDecimal) {
+    private fun printTotalRate(totalRate: BigDecimal) {
         println("$TOTAL_RATE_PREFIX${totalRate}$TOTAL_RATE_SUFFIX")
     }
 
