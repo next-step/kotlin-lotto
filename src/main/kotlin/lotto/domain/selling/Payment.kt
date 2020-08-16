@@ -9,7 +9,7 @@ data class Payment(
 ) {
 
     init {
-        require(manualCount * Seller.LOTTO_PRICE <= money) { "처음 지불한 금액 이상의 로또를 발급받을 수 없습니다" }
+        require(isValidManualCount(manualCount, money)) { "처음 지불한 금액보다 많이 구매할 수 없습니다." }
     }
 
     companion object {
