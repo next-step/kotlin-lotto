@@ -16,7 +16,8 @@ object InputView {
     fun readManualCount(isValid: (value: Int) -> Boolean) =
         readNumber(INPUT_MANUAL_COUNT, ERR_INVALID_MANUAL_COUNT) { isValid(it.toInt()) }.toInt()
 
-    fun readManualNumbers(remainCount: Int) = readValue(INPUT_MANUAL_NUMBERS + remainCount)
+    fun readManualNumbers(remainCount: Int, isValid: (value: String) -> Boolean) =
+        readValue(INPUT_MANUAL_NUMBERS + remainCount) { isValid(it) }
 
     fun readWinningNumbers() = readValue(INPUT_WINNING_NUMBERS)
 

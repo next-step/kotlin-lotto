@@ -5,6 +5,8 @@ class LottoTicket private constructor(
     val numbers: Set<LottoNumber>
 ) {
 
+    fun hasNumber(number: Int) = numbers.contains(LottoNumber(number))
+
     fun hasNumber(number: LottoNumber) = numbers.contains(number)
 
     override fun toString() = "[${numbers.joinToString()}]"
@@ -22,6 +24,6 @@ class LottoTicket private constructor(
         }
 
         operator fun invoke(lottoType: LottoType, vararg numbers: Int) =
-            invoke(lottoType, numbers.map { LottoNumber(it) }.toSet())
+            invoke(lottoType, numbers.map { LottoNumber(it) }.filterNotNull().toSet())
     }
 }

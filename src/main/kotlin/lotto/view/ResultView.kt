@@ -18,19 +18,15 @@ object ResultView {
 
     private const val INVALID_BONUS_NUMBER = "당첨 번호와 중복되지 않는 유효한 정수를 입력해주세요."
     private const val INVALID_MANUAL_COUNT = "처음 지불한 금액 이상의 로또를 발급받을 수 없습니다."
-    private val INVALID_LOTTO_NUMBERS = "${LottoNumber.NUMBER_RANGE} 사이의 번호 " +
+    private val ERR_INVALID_LOTTO_NUMBERS = "${LottoNumber.NUMBER_RANGE} 사이의 번호 " +
         "${LottoTicket.NUMBER_COUNT}개를 중복없이 입력해주세요."
 
     fun printInvalidLottoNumbers() {
-        println(INVALID_LOTTO_NUMBERS)
+        println(ERR_INVALID_LOTTO_NUMBERS)
     }
 
     fun printInvalidBonusNumber() {
         println(INVALID_BONUS_NUMBER)
-    }
-
-    fun printInvalidManualCount() {
-        println(INVALID_MANUAL_COUNT)
     }
 
     fun printPaymentResult(result: PaymentResult) {

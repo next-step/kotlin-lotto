@@ -25,8 +25,6 @@ class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> 
         val NUMBER_RANGE = 1..45
         private val CACHE: Map<Int, LottoNumber> = HashMap(NUMBER_RANGE.associateWith { LottoNumber(it) })
 
-        operator fun invoke(number: Int) = CACHE.getOrElse(number) {
-            throw IllegalArgumentException("로또 번호는 $NUMBER_RANGE 범위 내의 숫자여야 합니다.")
-        }
+        operator fun invoke(number: Int) = CACHE[number]
     }
 }

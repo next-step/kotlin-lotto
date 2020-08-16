@@ -7,11 +7,10 @@ import lotto.domain.lotto.LottoType
 object ManualLottoGenerator {
     private const val NUMBER_DELIMITER = ","
 
-    fun execute(input: String) = LottoTicket(
-        LottoType.MANUAL,
-        parseNumbers(input).toSortedSet()
-    )
+    fun execute(input: String) = LottoTicket(LottoType.MANUAL, parseNumbers(input).toSortedSet())
 
     private fun parseNumbers(numbers: String) =
-        numbers.split(NUMBER_DELIMITER).map { LottoNumber(it.trim().toInt()) }
+        numbers.split(NUMBER_DELIMITER)
+            .filter { it.isNotBlank() }
+            .mapNotNull { LottoNumber(it.trim().toInt()) }
 }
