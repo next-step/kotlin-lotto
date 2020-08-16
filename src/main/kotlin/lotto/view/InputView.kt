@@ -18,71 +18,81 @@ object InputView {
     private const val DELIMITER = ","
 
     fun inputMoney(): Money {
-        println(INPUT_MONEY)
-        return getMoney()
-    }
-
-    private fun getMoney() = try {
-        val money = readLine()!!.toInt()
-        require(money >= LOTTO_PRICE) { REQUIRE_MORE_THAN_THOUSAND }
-        Money(money)
-    } catch (e: Throwable) {
-        println("$ERROR_INVALID_STRING ${e.message}")
-        inputMoney()
+        var money: Money? = null
+        while (money == null) {
+            println(INPUT_MONEY)
+            money = try {
+                val value = readLine()!!.toInt()
+                require(value >= LOTTO_PRICE) { REQUIRE_MORE_THAN_THOUSAND }
+                Money(value)
+            } catch (e: Throwable) {
+                println("$ERROR_INVALID_STRING ${e.message}")
+                null
+            }
+        }
+        return money
     }
 
     fun inputManualNumberCount(money: Money): Int {
-        println(INPUT_MANUAL_COUNT)
-        return try {
-            val value = readLine()!!.toInt()
-            val maxNumber = (money / 1000).toInt()
-            require(value <= maxNumber) { "$maxNumber$MAX_NUMBER_SUFFIX" }
-            value
-        } catch (e: Throwable) {
-            println(e.message)
-            inputManualNumberCount(money)
+        var count: Int? = null
+        while (count == null) {
+            println(INPUT_MANUAL_COUNT)
+            count = try {
+                val value = readLine()!!.toInt()
+                val maxNumber = (money / 1000).toInt()
+                require(value <= maxNumber) { "$maxNumber$MAX_NUMBER_SUFFIX" }
+                value
+            } catch (e: Throwable) {
+                println(e.message)
+                null
+            }
         }
+        return count
     }
 
     fun inputManualNumber(count: Int): List<Lotto> {
-        println(INPUT_MANUAL_NUMBER)
         val lottos = mutableListOf<Lotto>()
-        for (i in 1..count) {
-            try {
-                val value = readLine()!!
-                lottos.add(Lotto(value.split(DELIMITER).map { it.toInt() }))
-            } catch (e: Throwable) {
-                println(e.message)
-                inputManualNumber(count)
+        while (lottos.size != count) {
+            println(INPUT_MANUAL_NUMBER)
+            for (i in 1..count) {
+                try {
+                    val value = readLine()!!
+                    val lotto = Lotto(value.split(DELIMITER).map { it.toInt() })
+                    lottos.add(lotto)
+                } catch (e: Throwable) {
+                    println(e.message)
+                }
             }
         }
         return lottos
     }
 
     fun inputWinningNumber(): Lotto {
-        println(INPUT_WINNING_NUMBER)
-        val value = readLine() ?: throw IllegalArgumentException(INVALID_WINNING_NUMBER)
-        return getWinningNumber(value)
-    }
-
-    private fun getWinningNumber(value: String): Lotto {
-        return try {
-            Lotto(value.split(DELIMITER).map { it.toInt() })
-        } catch (e: Throwable) {
-            println("$ERROR_INVALID_STRING ${e.message}")
-            inputWinningNumber()
+        var lotto: Lotto? = null
+        while (lotto == null) {
+            println(INPUT_WINNING_NUMBER)
+            lotto = try {
+                val value = readLine() ?: throw IllegalArgumentException(INVALID_WINNING_NUMBER)
+                Lotto(value.split(DELIMITER).map { it.toInt() })
+            } catch (e: Throwable) {
+                println("$ERROR_INVALID_STRING ${e.message}")
+                null
+            }
         }
+        return lotto
     }
 
     fun inputBonusNumber(): LottoNumber {
-        println(INPUT_BONUS_NUMBER)
-        return getBonusNumber()
-    }
-
-    private fun getBonusNumber() = try {
-        LottoNumber.of(readLine()!!.toInt())
-    } catch (e: Throwable) {
-        println("$ERROR_INVALID_STRING ${e.message}")
-        inputBonusNumber()
+        var lottoNumber: LottoNumber? = null
+        while (lottoNumber == null) {
+            println(INPUT_BONUS_NUMBER)
+            lottoNumber = try {
+                LottoNumber.of(readLine()!!.toInt())
+            } catch (e: Throwable) {
+                println("$ERROR_INVALID_STRING ${e.message}")
+                null
+            }
+        }
+        return lottoNumber
     }
 }
