@@ -37,7 +37,7 @@ object ResultView {
         val winningMoney = String.format("(%s)", rank.winningMoney)
         val countRank = String.format("%s$COUNT_SUFFIX", result.countByRank(rank))
         val bonus = if (rank.matchBonus) BONUS_PREFIX else ""
-        println("$countMatch$bonus$BONUS_PREFIX$winningMoney$SEPARATOR$countRank")
+        println("$countMatch$bonus$winningMoney$SEPARATOR$countRank")
     }
 
     private fun printTotalRate(totalRate: BigDecimal) {
