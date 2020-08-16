@@ -7,6 +7,10 @@ class Lotto {
         return lotto.filter { winningLotto.isContained(it) }.count()
     }
 
+    fun matchBonusBall(bonusBall: Int): Boolean {
+        return lotto.contains(bonusBall)
+    }
+
     private fun getRandomNumbers(): List<Int> {
         return (MIN_NUMBER..MAX_NUMBER).map { it }.shuffled().subList(FIRST_INDEX, LAST_INDEX).sorted()
     }
