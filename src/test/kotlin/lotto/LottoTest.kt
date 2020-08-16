@@ -9,11 +9,11 @@ class LottoTest {
 
     @Test
     fun `로또 매칭 카운트 테스트`() {
-        assertThat(lotto.match(winningLotto)).isEqualTo(6)
+        assertThat(lotto.matchCount(winningLotto)).isEqualTo(6)
     }
 
     @Test
     fun `보너스 매칭 테스트`() {
-        assertThat(lotto.bonusMatch(LottoNumber.from(2))).isEqualTo(true)
+        assertThat(lotto.matchBonus(LottoNumber.from(2))).isEqualTo(true)
     }
 }
