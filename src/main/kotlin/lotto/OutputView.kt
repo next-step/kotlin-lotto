@@ -14,7 +14,11 @@ object OutputView {
         println("---------")
         Rank.values().sortedDescending().filter { it.count != 0 }.forEach {
             val value = it
-            println("${value.count}개 일치 (${value.prize}원) - ${result.filter { it == value }.count()}개")
+            when (it) {
+                Rank.SECOND ->
+                    println("${value.count}개 일치, 보너스 볼 일치(${value.prize}원) - ${result.filter { it == value }.count()}개")
+                else -> println("${value.count}개 일치 (${value.prize}원) - ${result.filter { it == value }.count()}개")
+            }
         }
         println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
