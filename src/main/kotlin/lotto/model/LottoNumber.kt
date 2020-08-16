@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 class LottoNumber private constructor(private val value: Int) {
     companion object {
@@ -9,5 +9,9 @@ class LottoNumber private constructor(private val value: Int) {
         fun from(value: Int): LottoNumber {
             return return NUMBERS[value] ?: throw IllegalArgumentException()
         }
+    }
+
+    override fun toString(): String {
+        return "$value"
     }
 }

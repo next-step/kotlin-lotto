@@ -1,6 +1,6 @@
-package lotto
+package lotto.model
 
-enum class Rank(private val match: Int, private val price: Int) {
+enum class Rank(val match: Int, val price: Int) {
     FIRST(6, 2000000000),
     SECOND(5, 30000000),
     THIRD(5, 1500000),

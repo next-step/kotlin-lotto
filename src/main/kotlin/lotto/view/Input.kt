@@ -1,8 +1,8 @@
 package lotto.view
 
-import lotto.Lotto
-import lotto.LottoNumber
-import lotto.LottoTicket
+import lotto.model.Lotto
+import lotto.model.LottoNumber
+import lotto.model.LottoTicket
 import kotlin.system.exitProcess
 
 object Input {
@@ -22,12 +22,35 @@ object Input {
         repeat(count) {
             val result = readLine() ?: ""
             if (resultInvalid(result)) {
-                list.plus(listOf(Lotto(result.split(",").map { LottoNumber.from(it.toInt()) })))
+                list.plus(listOf(
+                    Lotto(
+                        result.split(",").map { LottoNumber.from(it.toInt()) })
+                ))
             } else {
                 exitProcess(-1)
             }
         }
         return list
+    }
+
+    fun inputWinningLotto(): Lotto {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        val result = readLine() ?: ""
+        return if (resultInvalid(result)) {
+            Lotto(result.split(",").map { LottoNumber.from(it.toInt()) })
+        } else {
+            exitProcess(-1)
+        }
+    }
+
+    fun inputBonusNumber(lotto: Lotto): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readLine()?.toIntOrNull() ?: exitProcess(-1)
+        return if (lotto.matchBonus(LottoNumber.from(bonusNumber))) {
+            exitProcess(-1)
+        } else {
+            return LottoNumber.from(bonusNumber)
+        }
     }
 
     private fun resultInvalid(readLine: String): Boolean {
