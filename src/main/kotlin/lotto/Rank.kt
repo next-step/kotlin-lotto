@@ -1,6 +1,5 @@
 package lotto
 
-
 enum class Rank(val matchCount: Int, val reward: Int) {
 
     ALLMATCH(6, 2_000_000_000),
@@ -12,6 +11,7 @@ enum class Rank(val matchCount: Int, val reward: Int) {
     fun resultLottoPrize(count: Int): Rank {
         return Rank.findMatchCount(count)
     }
+
     companion object {
         fun findMatchCount(matchCount: Int): Rank {
             return enumValues<Rank>().firstOrNull() { it.matchCount == matchCount } ?: NONE

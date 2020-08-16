@@ -18,16 +18,16 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("count lottonumber match")
-    fun count() {
-        val winningNumber = listOf(1, 2, 3, 14, 15, 16)
-        val userNumber = listOf(1, 2, 3, 4, 5, 6)
-    }
-
-    @Test
     @DisplayName("Check to change Prize")
     fun prize() {
         assertThat(Rank.findMatchCount(5)).isEqualTo(Rank.FIVEMATCH)
     }
+/*
+    @Test
+    @DisplayName("당첨 확인")
+    private var  ticket =  Ticket()
+    fun fiveThousandDollar(){
+        assertThat()
+    }
+*/
 }
-

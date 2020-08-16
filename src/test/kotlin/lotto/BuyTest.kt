@@ -10,6 +10,6 @@ class BuyTest {
     fun ticketSizeCheck() {
         val sampleTicket = Ticket()
         sampleTicket.tickets(14)
-        assertThat(sampleTicket.purchasedLottootto.size).isEqualTo(14)
+        assertThat(sampleTicket.purchasedLotto.size).isEqualTo(14)
     }
 }
