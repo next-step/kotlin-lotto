@@ -11,17 +11,20 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 
 internal class PaymentResultTest {
-    private lateinit var fourthLotto: LottoTicket
-    private lateinit var secondLotto: LottoTicket
     private lateinit var winningLotto: WinningLottoTicket
     private lateinit var paymentResult: PaymentResult
 
     @BeforeEach
     fun setUp() {
-        fourthLotto = LottoTicket(LottoType.AUTO, 1, 2, 3, 4, 5, 10)!!
-        secondLotto = LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 13)!!
-        winningLotto = WinningLottoTicket(LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 12)!!, 13)
-        paymentResult = PaymentResult(2300, 300, listOf(fourthLotto, secondLotto))
+        winningLotto = WinningLottoTicket(LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 12)!!, 13)!!
+        paymentResult = PaymentResult(
+            2300,
+            300,
+            listOf(
+                LottoTicket(LottoType.AUTO, 1, 2, 3, 4, 5, 10)!!,
+                LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 13)!!
+            )
+        )
     }
 
     @DisplayName("당첨된 로또를 상금으로 교환한다")
@@ -36,6 +39,6 @@ internal class PaymentResultTest {
     @ParameterizedTest
     @EnumSource(LottoType::class)
     fun findLottoTickets(lottoType: LottoType) {
-        assertThat(paymentResult.findLottoTickets(lottoType)).allSatisfy { it.lottoType == lottoType }
+        assertThat(paymentResult.findLottoTickets(lottoType)).allMatch { it.lottoType == lottoType }
     }
 }
