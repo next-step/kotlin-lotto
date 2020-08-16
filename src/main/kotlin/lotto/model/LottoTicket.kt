@@ -8,8 +8,7 @@ class LottoTicket(lottoTicket: List<Lotto>) {
 
     fun createRandomLotto() {
         lottoTicket.add(
-            Lotto(
-                LOTTO_NUMBERS.shuffled().take(6).sorted().map { LottoNumber.from(it) })
+            Lotto(LOTTO_NUMBERS.shuffled().take(6).sorted().map { LottoNumber.from(it) })
         )
     }
 
@@ -17,8 +16,8 @@ class LottoTicket(lottoTicket: List<Lotto>) {
         return GameResults(lottoTicket.map { it.rank(winningLotto, bonus) })
     }
 
-    operator fun plus(lottoTicket: List<Lotto>) {
-        this.lottoTicket.addAll(lottoTicket)
+    operator fun plus(lottoTicket: LottoTicket) {
+        this.lottoTicket.addAll(lottoTicket.lottoTicket)
     }
 
     override fun toString(): String {

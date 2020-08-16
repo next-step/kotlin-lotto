@@ -22,10 +22,7 @@ object Input {
         repeat(count) {
             val result = readLine() ?: ""
             if (resultInvalid(result)) {
-                list.plus(listOf(
-                    Lotto(
-                        result.split(",").map { LottoNumber.from(it.toInt()) })
-                ))
+                list.plus(LottoTicket(listOf(Lotto(result.split(",").map { LottoNumber.from(it.toInt()) }))))
             } else {
                 exitProcess(-1)
             }
