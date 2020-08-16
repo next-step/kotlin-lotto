@@ -16,7 +16,7 @@ fun main() {
     val inputLuckyNumber = InputView.getInputLuckyNumber()
     // 보너스볼 입력
     val bonusBall = InputView.getInputBonusNumber()
-    val lottoWinningNumber = LottoWinningNumber(inputLuckyNumber)
+    val lottoWinningNumber = LottoWinningNumber(inputLuckyNumber, bonusBall)
 
 
     // 로또 결과 및 분석

@@ -13,14 +13,15 @@ object LottoGame {
     }
 
     private fun makeAutoNumbers(): LottoTicket {
-        return LOTTO_NUMBER.shuffled().take(LOTTO_NUMBER_COUNT_PER_TICKET).let { LottoTicket(it) }
+        return LOTTO_NUMBER.shuffled().take(LOTTO_NUMBER_COUNT_PER_TICKET).sortedBy { it.number }.let { LottoTicket(it) }
     }
 
     private fun getTicketCount(money: Int) = money / LOTTO_TICKET_PRICE
 
-    fun calculate(usedMoney: Int, lottoResults: List<Rank>): Double {
+    fun calculate(inputMoney: Int, lottoResults: List<Rank>): Double {
         val totalMoney = totalPrizeMoney(lottoResults)
-        return (totalMoney / usedMoney) * 100.0
+        val usedMoney = (inputMoney/ LOTTO_TICKET_PRICE) * LOTTO_TICKET_PRICE
+        return (totalMoney.toDouble() / usedMoney)
     }
 
     private fun totalPrizeMoney(lottoResults: List<Rank>): Int {
