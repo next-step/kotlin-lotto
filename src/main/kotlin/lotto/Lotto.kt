@@ -8,4 +8,8 @@ class Lotto(lottoNumbers: List<LottoNumber>) {
             lottoNumbers.contains(it)
         }.size
     }
+
+    fun bonusMatch(bonus: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonus)
+    }
 }
