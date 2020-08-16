@@ -1,7 +1,6 @@
 package lotto.domain
 
 import java.math.BigDecimal
-import java.math.RoundingMode
 
 class LottoResult(private val result: Map<Rank, Int>) {
     fun countByRank(rank: Rank): Int {
@@ -9,7 +8,7 @@ class LottoResult(private val result: Map<Rank, Int>) {
     }
 
     fun calculateTotalRate(money: Money): BigDecimal {
-        return calculateTotalPrize().toBigDecimal().divide(money.toBigDecimal(), SCALE_VALUE, RoundingMode.HALF_EVEN)
+        return calculateTotalPrize().div(money)
     }
 
     private fun calculateTotalPrize(): Money {
@@ -18,6 +17,5 @@ class LottoResult(private val result: Map<Rank, Int>) {
 
     companion object {
         private const val DEFAULT_VALUE = 0
-        private const val SCALE_VALUE = 0
     }
 }
