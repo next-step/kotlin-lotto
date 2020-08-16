@@ -21,12 +21,12 @@ class LottoInputView {
         return numbers.sorted().joinToString(prefix = "[", postfix = "]", separator = ", ") { "$it" }
     }
 
-    fun inputwinningTicket(): Ticket {
+    fun inputWinningTicket(): Ticket {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return Ticket(readLine()!!.split(",").map { it.trim().toInt() }.toSet())
     }
 
-    fun inputBonuseNumber(): BonusNumber {
+    fun inputBonusNumber(): BonusNumber {
         println("보너스 볼을 입력해 주세요.")
         return BonusNumber(readLine()!!.toInt())
     }

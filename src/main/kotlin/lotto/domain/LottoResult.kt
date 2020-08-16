@@ -2,17 +2,13 @@ package lotto.domain
 
 import lotto.TicketBuilder.Companion.TICKET_COST
 
-class LottoResult {
-    private val cost: Int get() = resultMap.values.sum() * TICKET_COST
+class LottoResult(tickets: List<Ticket>, winningTicket: WinningTicket) {
+    private val resultMap: Map<Rank, Int> = tickets.groupingBy { it.toRank(winningTicket) }.eachCount()
 
-    private val resultMap = hashMapOf<Rank, Int>()
+    private val cost: Int get() = resultMap.values.sum() * TICKET_COST
 
     operator fun get(rank: Rank): Int {
         return resultMap[rank] ?: 0
-    }
-
-    operator fun set(rank: Rank, value: Int) {
-        resultMap[rank] = value
     }
 
     fun collectAllPrizes(): Int {
