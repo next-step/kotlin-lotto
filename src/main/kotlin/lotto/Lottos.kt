@@ -5,11 +5,12 @@ class Lottos(private val amountOfLotto: Int) {
 
     fun getLottos() = lottos
 
-    fun matchLottos(winningLotto: WinningNumbers): List<Rank> {
+    fun matchLottos(winningLotto: WinningNumbers, bonusBall: Int): List<Rank> {
         val results = mutableListOf<Rank>()
         lottos.forEach {
             val count = it.matchLotto(winningLotto)
-            results.add(Rank.of(count))
+            val bonusBallResult = it.matchBonusBall(bonusBall)
+            results.add(Rank.of(count, bonusBallResult))
         }
         return results.toList()
     }

@@ -8,7 +8,7 @@ fun main() {
     val numbers = InputView.inputWinningNumbers()
     val bonusBall = InputView.inputBonusBall()
     val winningNumbers = WinningNumbers.getInstance(numbers)
-    val matchingRanks = lottos.matchLottos(winningNumbers)
+    val matchingRanks = lottos.matchLottos(winningNumbers, bonusBall)
     val rateOfReturn = LottoProgram.calculateRateOfReturn(matchingRanks, amountOfMoney)
     OutputView.showResults(matchingRanks, rateOfReturn)
 }
