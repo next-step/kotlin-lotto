@@ -1,8 +1,5 @@
-package lotto.domain
+package lotto.domain.lotto
 
-import lotto.domain.lotto.LottoTicket
-import lotto.domain.lotto.LottoType
-import lotto.domain.lotto.WinningLottoTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
