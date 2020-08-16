@@ -1,7 +1,7 @@
 package lotto
 
-import lotto.domain.LottoAnalytics
 import lotto.domain.LottoResult
+import lotto.domain.WinningTicket
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
@@ -12,8 +12,8 @@ class LottoController {
 
         inputView.printTickets(tickets)
 
-        val winningTicket = inputView.inputwinningTicket()
-        return LottoAnalytics.matchTickets(tickets, winningTicket)
+        val winningTicket = WinningTicket(inputView.inputWinningTicket(), inputView.inputBonusNumber())
+        return LottoResult(tickets, winningTicket)
     }
 
     fun finish(resultView: LottoResultView, result: LottoResult) {

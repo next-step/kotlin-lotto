@@ -14,6 +14,13 @@ class Ticket(val numbers: Set<Int>) {
         return numbers.count { ticket.numbers.contains(it) }
     }
 
+    fun toRank(winningTicket: WinningTicket): Rank {
+        return Rank.of(
+            winningTicket.ticket.countMatches(this),
+            winningTicket.bonusNumber.match(this)
+        )
+    }
+
     companion object {
         const val TICKET_NUMBER_SIZE = 6
         const val TICKET_NUMBER_MIN = 1

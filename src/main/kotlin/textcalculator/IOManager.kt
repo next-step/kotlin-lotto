@@ -2,8 +2,7 @@ package textcalculator
 
 class IOManager {
     fun input(): String? {
-        val temp = readLine() ?: ""
-        return temp
+        return readLine() ?: ""
     }
 
     fun output(message: String) {
