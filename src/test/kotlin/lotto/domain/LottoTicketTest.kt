@@ -24,7 +24,7 @@ class LottoTicketTest {
     fun `로또 티켓과 당첨번호가 주어질 때 일치 갯수를 알 수 있다`() {
         val lottoNumbers = setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.get(it) }.toSet()
         val winningNumbers = setOf(1, 2, 3, 4, 5, 7).map { LottoNumber.get(it) }.toSet()
-        val matchCount = LottoTicket(lottoNumbers).matchCount(winningNumbers)
+        val matchCount = LottoTicket(lottoNumbers).matchCount(LottoTicket(winningNumbers))
 
         assertThat(matchCount).isEqualTo(5)
     }
@@ -33,7 +33,7 @@ class LottoTicketTest {
     @MethodSource("generateMatchingTestData")
     fun `구입한 로또 번호와 당첨 번호, 보너스 번호가 주어지면 매칭 결과를 알려준다`(
         lottoTicket: LottoTicket,
-        winningNumbers: Set<LottoNumber>,
+        winningNumbers: LottoTicket,
         bonusNumber: LottoNumber,
         PrizeResult: PrizeResult
     ) {
@@ -49,13 +49,13 @@ class LottoTicketTest {
             return listOf(
                 Arguments.of(
                     LottoTicket(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.get(it) }.toSet()),
-                    setOf(1, 2, 3, 8, 9, 10).map { LottoNumber.get(it) }.toSet(),
+                    LottoTicket(setOf(1, 2, 3, 8, 9, 10).map { LottoNumber.get(it) }.toSet()),
                     LottoNumber.get(44),
                     PrizeResult.THREE_MATCH
                 ),
                 Arguments.of(
                     LottoTicket(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.get(it) }.toSet()),
-                    setOf(1, 2, 3, 4, 5, 7).map { LottoNumber.get(it) }.toSet(),
+                    LottoTicket(setOf(1, 2, 3, 4, 5, 7).map { LottoNumber.get(it) }.toSet()),
                     LottoNumber.get(6),
                     PrizeResult.BONUS_MATCH
                 )

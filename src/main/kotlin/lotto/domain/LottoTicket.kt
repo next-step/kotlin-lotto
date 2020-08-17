@@ -8,7 +8,7 @@ class LottoTicket(val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.joinToString(",")
     }
 
-    fun matchCount(winningNumbers: Set<LottoNumber>): Int {
+    fun matchCount(winningNumbers: LottoTicket): Int {
         return lottoNumbers.count {
             winningNumbers.contains(it)
         }

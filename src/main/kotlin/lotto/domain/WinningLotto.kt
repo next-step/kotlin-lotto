@@ -1,3 +1,3 @@
 package lotto.domain
 
-data class WinningLotto(val winningNumbers: Set<LottoNumber>, val bonusNumber: LottoNumber)
+data class WinningLotto(val winningNumbers: LottoTicket, val bonusNumber: LottoNumber)
