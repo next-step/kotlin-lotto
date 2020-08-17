@@ -1,9 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
-import lotto.domain.WinningLotto
-
 object InputView {
 
     fun purchasePrice(): Int {
@@ -14,22 +10,14 @@ object InputView {
         return price!!.toInt()
     }
 
-    fun lastWinningLotto(): WinningLotto {
+    fun askWinningNumbers(): String {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val text = readLine()
+        return readLine() ?: throw IllegalArgumentException()
+    }
 
+    fun askBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        val bonusNumber = readLine()
-
-        return WinningLotto(
-            LottoTicket(splitNumbers(text!!).map { LottoNumber.get(it.toInt()) }.toSet()),
-            LottoNumber.get(bonusNumber!!.toInt())
-        )
+        val bonusNumber = readLine() ?: throw IllegalArgumentException()
+        return bonusNumber.toInt()
     }
 }
-
-fun splitNumbers(numbers: String) = numbers
-    .split(",")
-    .filter { it.isNotBlank() }
-    .map { it.trim() }
-    .toSet()

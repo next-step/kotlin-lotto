@@ -4,6 +4,8 @@ class LottoTicket(val lottoNumbers: Set<LottoNumber>) {
 
     constructor() : this(LottoNumber.generateNumbers())
 
+    constructor(list: List<String>) : this(list.map { LottoNumber.get(it.toInt()) }.toSet())
+
     override fun toString(): String {
         return lottoNumbers.joinToString(",")
     }
