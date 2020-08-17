@@ -3,7 +3,6 @@ package lotto
 import lotto.domain.Buyer
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTicket
-import lotto.domain.MatchingMachine
 import lotto.domain.result
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -18,7 +17,9 @@ object Application {
         ResultView.showPurchasedLottos(purchasedCount, lottoTickets)
 
         val winningLotto = InputView.lastWinningLotto()
-        lottoTickets.map { MatchingMachine.match(it.getLottoNumbers(), winningLotto) }.forEach {
+        lottoTickets.map {
+            it.match(winningLotto)
+        }.forEach {
             result[it] = (result[it] ?: 0) + 1
         }
 
