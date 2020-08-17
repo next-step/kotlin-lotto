@@ -16,7 +16,7 @@ object ResultView {
         println("---------")
 
         PrizeResult.values()
-            .filter { it != PrizeResult.ZERO_MATCH }
+            .filter { it != PrizeResult.MISS }
             .forEach {
                 println("${it.name}개 일치 (${it.prize}원) - ${result[it] ?: 0}개")
             }

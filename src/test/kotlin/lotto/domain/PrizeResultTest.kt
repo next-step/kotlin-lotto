@@ -10,31 +10,31 @@ class PrizeResultTest {
 
     @Test
     fun `로또 번호 3개가 일치하면 5_000원이다`() {
-        val prize = PrizeResult.THREE_MATCH.prize
+        val prize = PrizeResult.FIFTH.prize
         assertThat(prize).isEqualTo(5000)
     }
 
     @Test
     fun `로또 번호 4개가 일치하면 50_000원이다`() {
-        val prize = PrizeResult.FOUR_MATCH.prize
+        val prize = PrizeResult.FORTH.prize
         assertThat(prize).isEqualTo(50_000)
     }
 
     @Test
     fun `로또 번호 5개가 일치하면 1_500_000원이다`() {
-        val prize = PrizeResult.FIVE_MATCH.prize
+        val prize = PrizeResult.THIRD.prize
         assertThat(prize).isEqualTo(1_500_000)
     }
 
     @Test
     fun `로또 번호 6개가 일치하면 2_000_000_000이다`() {
-        val prize = PrizeResult.SIX_MATCH.prize
+        val prize = PrizeResult.FIRST.prize
         assertThat(prize).isEqualTo(2_000_000_000)
     }
 
     @Test
     fun `로또 번호 5개와 보너스번호가 일치하면 30_000_000이다`() {
-        val prize = PrizeResult.BONUS_MATCH.prize
+        val prize = PrizeResult.SECOND_WITH_BONUS.prize
         assertThat(prize).isEqualTo(30_000_000)
     }
 
@@ -50,8 +50,8 @@ class PrizeResultTest {
 
     @Test
     fun `사용자가 당첨된 결과가 3개, 5개 일치 일 때 총 당첨금은 1_505_000 이다`() {
-        result[PrizeResult.FIVE_MATCH] = 1
-        result[PrizeResult.THREE_MATCH] = 1
+        result[PrizeResult.THIRD] = 1
+        result[PrizeResult.FIFTH] = 1
         assertThat(PrizeResult.winningPrize()).isEqualTo(1_505_000)
     }
 
@@ -59,8 +59,8 @@ class PrizeResultTest {
         @JvmStatic
         fun generateTestData(): List<Arguments> {
             return listOf(
-                Arguments.of(5, true, PrizeResult.BONUS_MATCH),
-                Arguments.of(5, false, PrizeResult.FIVE_MATCH)
+                Arguments.of(5, true, PrizeResult.SECOND_WITH_BONUS),
+                Arguments.of(5, false, PrizeResult.THIRD)
             )
         }
     }

@@ -51,13 +51,13 @@ class LottoTicketTest {
                     LottoTicket(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.get(it) }.toSet()),
                     LottoTicket(setOf(1, 2, 3, 8, 9, 10).map { LottoNumber.get(it) }.toSet()),
                     LottoNumber.get(44),
-                    PrizeResult.THREE_MATCH
+                    PrizeResult.FIFTH
                 ),
                 Arguments.of(
                     LottoTicket(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.get(it) }.toSet()),
                     LottoTicket(setOf(1, 2, 3, 4, 5, 7).map { LottoNumber.get(it) }.toSet()),
                     LottoNumber.get(6),
-                    PrizeResult.BONUS_MATCH
+                    PrizeResult.SECOND_WITH_BONUS
                 )
             )
         }

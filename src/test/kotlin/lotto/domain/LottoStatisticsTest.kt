@@ -13,8 +13,8 @@ class LottoStatisticsTest {
         ]
     )
     fun `당첨 결과와 로또 구매 개수가 주어지면 통계를 구한다`(purchasedCount: Int, threeMatched: Int, fiveMatched: Int, expected: String) {
-        result[PrizeResult.THREE_MATCH] = threeMatched
-        result[PrizeResult.FIVE_MATCH] = fiveMatched
+        result[PrizeResult.FIFTH] = threeMatched
+        result[PrizeResult.THIRD] = fiveMatched
 
         val ratio = LottoStatistics.calculateRatio(purchasedCount)
         assertThat(ratio).isEqualTo(expected.toBigDecimal())
