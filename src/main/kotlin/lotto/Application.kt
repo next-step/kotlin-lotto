@@ -5,7 +5,6 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
-import lotto.domain.result
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -23,15 +22,13 @@ object Application {
 
         val winningLotto = WinningLotto(LottoTicket(askWinningNumbers.split(",")), LottoNumber.get(askBonusNumber))
 
-        lottoTickets.map {
+        val resultPrizeList = lottoTickets.map {
             it.match(winningLotto)
-        }.forEach {
-            result[it] = (result[it] ?: 0) + 1
         }
+        val lottoStatistics = LottoStatistics(resultPrizeList)
+        val ratio = lottoStatistics.calculateRatio(purchasedCount)
 
-        ResultView.showWinningResult()
-
-        val ratio = LottoStatistics.calculateRatio(purchasedCount)
+        ResultView.showWinningResult(lottoStatistics)
         ResultView.showRatio(ratio)
     }
 }

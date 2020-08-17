@@ -1,8 +1,8 @@
 package lotto.view
 
+import lotto.domain.LottoStatistics
 import lotto.domain.LottoTicket
 import lotto.domain.PrizeResult
-import lotto.domain.result
 import java.math.BigDecimal
 
 object ResultView {
@@ -11,14 +11,17 @@ object ResultView {
         tickets.forEach { println(it) }
     }
 
-    fun showWinningResult() {
+    fun showWinningResult(resultPrizeList: LottoStatistics) {
         println("당첨 통계")
         println("---------")
 
         PrizeResult.values()
             .filter { it != PrizeResult.MISS }
             .forEach {
-                println("${it.name}개 일치 (${it.prize}원) - ${result[it] ?: 0}개")
+                println(
+                    "${it.matchCount}개 일치" + "${if (it.hasBonus) ", 보너스 볼 일치" else ""} (${it.prize}원) - ${resultPrizeList.result[it]
+                        ?: 0}개"
+                )
             }
     }
 

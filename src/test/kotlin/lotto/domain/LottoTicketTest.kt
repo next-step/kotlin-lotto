@@ -57,7 +57,7 @@ class LottoTicketTest {
                     LottoTicket(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.get(it) }.toSet()),
                     LottoTicket(setOf(1, 2, 3, 4, 5, 7).map { LottoNumber.get(it) }.toSet()),
                     LottoNumber.get(6),
-                    PrizeResult.SECOND_WITH_BONUS
+                    PrizeResult.SECOND
                 )
             )
         }
