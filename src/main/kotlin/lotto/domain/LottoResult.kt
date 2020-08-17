@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.TicketBuilder.Companion.TICKET_COST
+import lotto.domain.TicketBuilder.Companion.TICKET_COST
 
 class LottoResult(tickets: List<Ticket>, winningTicket: WinningTicket) {
     private val resultMap: Map<Rank, Int> = tickets.groupingBy { it.toRank(winningTicket) }.eachCount()
