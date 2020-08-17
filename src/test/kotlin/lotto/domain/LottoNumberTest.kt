@@ -16,4 +16,12 @@ class LottoNumberTest {
         val lottoNumbers: Set<LottoNumber> = LottoNumber.generateNumbers()
         assertThat(lottoNumbers.size).isEqualTo(6)
     }
+
+    @Test
+    fun `generateNumbers()로 생성된 로또 번호는 다른 인스턴스여야 한다`() {
+        val lottoNumbers01 = LottoNumber.generateNumbers()
+        val lottoNumbers02 = LottoNumber.generateNumbers()
+
+        assertThat(lottoNumbers01).isNotEqualTo(lottoNumbers02)
+    }
 }
