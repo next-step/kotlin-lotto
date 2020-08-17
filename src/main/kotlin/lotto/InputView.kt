@@ -9,7 +9,7 @@ object InputView {
         println("구입금액을 입력해 주세요.")
         val amountOfMoney = readLine()?.toIntOrNull()
         return if (amountOfMoney !== null && amountOfMoney % UNIT == 0 && amountOfMoney != 0) {
-            amountOfMoney.toInt()
+            amountOfMoney
         } else {
             println("금액은 천원 단위만 입력할 수 있습니다. 다시 입력해주세요.")
             inputAmountOfMoney()
