@@ -7,7 +7,7 @@ object OutputView {
 
     fun printLottoTickets(tickets: List<LottoTicket>) {
         println("${tickets.size}개를 구매했습니다.")
-        tickets.forEach { println(it.lottoNumbers.map { it -> it.number }) }
+        tickets.forEach { tickets -> println(tickets.lottoNumbers.map { numbers -> numbers.number }) }
     }
 
     fun printLottoResults(results: List<Rank>) {
@@ -18,10 +18,11 @@ object OutputView {
 
     private fun printLottoResult(result: Rank, size: Int) {
         if (result == Rank.ELSE) return
-        println("${result.matchCount}개 일치 (${result.prizeMoney}) - ${size}개")
+        println("${result.matchCount}개 일치" + if(result.bonusBall){",보너스볼 일치"} else{""} + "(${result.prizeMoney}원)- ${size}개")
     }
 
     fun printProfitRatio(ratio: Double) {
-        println("총 수익률은 %.2f 입니다".format(ratio))
+        print("총 수익률은 %.2f입니다. ".format(ratio))
+        if(ratio < 1) println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 }

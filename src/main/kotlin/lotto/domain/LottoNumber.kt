@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumber(val number: Int) {
+data class LottoNumber(val number: Int) {
 
     private val lottoNumber = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER)
 
@@ -9,7 +9,7 @@ class LottoNumber(val number: Int) {
     }
 
     private fun validateNumberRange(number: Int) {
-        if (!lottoNumber.contains(number)) { throw IllegalArgumentException("$number 는 로또 번호(1~45)가 아닙니다.") }
+        if (!lottoNumber.contains(number)) throw IllegalArgumentException("$number 는 로또 번호(1~45)가 아닙니다.")
     }
 
     companion object {

@@ -9,10 +9,10 @@ class RankTest {
 
     @Test
     fun `수익률`() {
-        val money = 10000
+        val inputMoney = 10000
         val results = listOf(Rank.FOURTH)
-        val expectedRatio = Rank.FOURTH.prizeMoney.toDouble() / money
-        val result: Double = LottoGame().calculate(money, results)
+        val expectedRatio = Rank.FOURTH.prizeMoney.toDouble() / inputMoney
+        val result: Double = LottoGame.calculate(inputMoney, results)
         assertThat(result).isEqualTo(expectedRatio)
     }
 }
