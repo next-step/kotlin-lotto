@@ -1,9 +1,7 @@
 package lotto
 
 class Lottos(private val amountOfLotto: Int) {
-    private val lottos = (0 until amountOfLotto).map { Lotto() }
-
-    fun getLottos() = lottos
+    val lottos = (0 until amountOfLotto).map { Lotto() }
 
     fun matchLottos(winningLotto: WinningNumbers, bonusBall: Int): List<Rank> {
         val results = mutableListOf<Rank>()
