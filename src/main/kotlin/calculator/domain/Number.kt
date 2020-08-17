@@ -1,9 +1,9 @@
 package calculator.domain
 
 private const val SIMPLE_DELIMITER = ",|:"
-val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
-val NUMERIC_REGEX = Regex("[0-9]+")
-val DELIMITER_REGEX = Regex("//(.)\n(.*)")
+private val SIMPLE_DELIMITER_REGEX = Regex(SIMPLE_DELIMITER)
+private val NUMERIC_REGEX = Regex("[0-9]+")
+private val DELIMITER_REGEX = Regex("//(.)\n(.*)")
 
 fun validate(string: String?): String {
     if (string.isNullOrBlank()) {
