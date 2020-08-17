@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.LottoResult
-import lotto.domain.Ticket
 import lotto.domain.TicketBuilder
 import lotto.domain.WinningTicket
 import lotto.view.LottoInputView
@@ -26,13 +25,5 @@ class LottoController {
 
     fun finish(resultView: LottoResultView, result: LottoResult) {
         resultView.printResult(result)
-    }
-
-    companion object {
-        private fun randomNumbers(): Set<Int> {
-            return NUMBERS.shuffled().take(Ticket.TICKET_NUMBER_SIZE).toSet()
-        }
-
-        private val NUMBERS = (Ticket.TICKET_NUMBER_MIN until Ticket.TICKET_NUMBER_MAX).toList()
     }
 }

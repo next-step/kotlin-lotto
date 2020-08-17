@@ -12,16 +12,6 @@ class TicketBuilder {
             return texts.map { create(it) }
         }
 
-        private fun create(it: String) = Ticket(toIntSet(it))
-
-        private fun toIntSet(it: String) = it.split(",").map { it.trim().toInt() }.toSet()
-
-        private fun createTickets(count: Int): List<Ticket> {
-            return (0 until count).map {
-                create()
-            }
-        }
-
         fun howMuchTickets(money: Int): Int {
             return money / TICKET_COST
         }
@@ -29,6 +19,10 @@ class TicketBuilder {
         private fun create(): Ticket {
             return Ticket(randomNumbers())
         }
+
+        private fun create(it: String) = Ticket(toIntSet(it))
+
+        private fun toIntSet(it: String) = it.split(",").map { it.trim().toInt() }.toSet()
 
         private fun randomNumbers(): Set<Int> {
             return NUMBERS.shuffled().take(Ticket.TICKET_NUMBER_SIZE).toSet()
