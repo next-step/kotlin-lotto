@@ -51,6 +51,6 @@ object InputView {
     }
 
     private fun isNotDuplicated(numbers: List<Int>): Boolean {
-        return numbers.distinct().size == numbers.size
+        return numbers.distinct() == numbers
     }
 }
