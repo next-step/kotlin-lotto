@@ -1,21 +1,21 @@
 package lotto.view
 
-import lotto.model.Lotto
 import lotto.model.LottoNo
+import lotto.model.LottoPaper
 import lotto.model.Win
 
 object ResultView {
-    fun printLottoCount(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
+    fun printLottoCount(manualLottos: LottoPaper, autoLottos: LottoPaper) {
+        println("수동으로 ${manualLottos.getLottoCount()}장, 자동으로 ${autoLottos.getLottoCount()}장을 구매했습니다.")
     }
 
-    fun printLottos(lottos: List<Lotto>) {
-        lottos.forEach { it ->
-            println("${it.lottoNumbers.map { LottoNo.to(it) } }")
+    fun printLottos(paper: LottoPaper) {
+        paper.lottoInPaper.forEach { it ->
+            println("${it.lottoNumbers.map { LottoNo.to(it) }}")
         }
     }
 
-    fun printMatchResult(result: List<Lotto>) {
+    fun printMatchResult(paper: LottoPaper) {
         println("당첨 통계")
         println("---------")
 
@@ -26,7 +26,7 @@ object ResultView {
                 resultSentence += ", 보너스 볼 일치"
             }
 
-            resultSentence += "(${win.prize.money}원)- ${result.filter { it.win == win }.size}개"
+            resultSentence += "(${win.prize.money}원)- ${paper.wins.filter { it == win }.size}개"
 
             println(resultSentence)
         }
