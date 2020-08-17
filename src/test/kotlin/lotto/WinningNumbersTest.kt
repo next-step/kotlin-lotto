@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
 class WinningNumbersTest {
-    private val winningNumbers = WinningNumbers.getInstance(
+    private val winningNumbers = WinningNumbers.newInstance(
         listOf(1, 2, 3, 4, 5, 6)
     )
 
