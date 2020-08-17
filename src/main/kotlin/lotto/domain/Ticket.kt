@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Ticket(val numbers: Set<Int>) {
+data class Ticket(val numbers: Set<Int>) {
     init {
         require(isNumberInRange(TICKET_NUMBER_MIN, TICKET_NUMBER_MAX))
         require(numbers.size == TICKET_NUMBER_SIZE) { "로또의 개수는 6개 입니다." }
