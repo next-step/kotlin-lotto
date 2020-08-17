@@ -1,12 +1,12 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.domain.PrizeResult
 import lotto.domain.result
 import java.math.BigDecimal
 
 object ResultView {
-    fun showPurchasedLottos(purchaseCount: Int, tickets: List<Set<LottoNumber>>) {
+    fun showPurchasedLottos(purchaseCount: Int, tickets: List<LottoTicket>) {
         println("$purchaseCount 개를 구입하였습니다.")
         tickets.forEach { println(it) }
     }

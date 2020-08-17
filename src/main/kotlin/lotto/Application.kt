@@ -13,12 +13,12 @@ object Application {
     fun main(args: Array<String>) {
         val price = InputView.purchasePrice()
         val purchasedCount = Buyer(price).purchasedCount
-        val lottoTickets = (1..purchasedCount).map { LottoTicket().getLottoNumbers() }
+        val lottoTickets = (1..purchasedCount).map { LottoTicket() }
 
         ResultView.showPurchasedLottos(purchasedCount, lottoTickets)
 
         val winningLotto = InputView.lastWinningLotto()
-        lottoTickets.map { MatchingMachine.match(it, winningLotto) }.forEach {
+        lottoTickets.map { MatchingMachine.match(it.getLottoNumbers(), winningLotto) }.forEach {
             result[it] = (result[it] ?: 0) + 1
         }
 
