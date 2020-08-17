@@ -7,7 +7,7 @@ data class Ticket(val numbers: Set<Int>) {
     }
 
     private fun isNumberInRange(min: Int, max: Int): Boolean {
-        return numbers.all { it in min until max }
+        return numbers.all { it in min..max }
     }
 
     fun countMatches(ticket: Ticket): Int {

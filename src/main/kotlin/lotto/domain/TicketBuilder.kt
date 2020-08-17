@@ -1,12 +1,20 @@
-package lotto
-
-import lotto.domain.Ticket
+package lotto.domain
 
 class TicketBuilder {
     companion object {
-        fun sellTickets(money: Int): List<Ticket> {
-            return createTickets(howMuchTickets(money))
+        fun sellTickets(count: Int): List<Ticket> {
+            return (0 until count).map {
+                create()
+            }
         }
+
+        fun sellTicketsManually(texts: List<String>): List<Ticket> {
+            return texts.map { create(it) }
+        }
+
+        private fun create(it: String) = Ticket(toIntSet(it))
+
+        private fun toIntSet(it: String) = it.split(",").map { it.trim().toInt() }.toSet()
 
         private fun createTickets(count: Int): List<Ticket> {
             return (0 until count).map {
@@ -14,7 +22,7 @@ class TicketBuilder {
             }
         }
 
-        private fun howMuchTickets(money: Int): Int {
+        fun howMuchTickets(money: Int): Int {
             return money / TICKET_COST
         }
 
