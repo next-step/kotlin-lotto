@@ -1,17 +1,14 @@
 package lotto
 
 fun main() {
-    try {
-        val amountOfMoney = InputView.inputAmountOfMoney()
-        val amountOfLotto = LottoProgram.getAmountOfLotto(amountOfMoney)
-        val lottos = Lottos(amountOfLotto)
-        OutputView.showUserLottos(lottos.lottos)
-        val numbers = InputView.inputWinningNumbers()
-        val winningNumbers = LottoProgram.getWinningNumbers(numbers)
-        val result = LottoProgram.matchLottos(lottos, winningNumbers)
-        val rateOfReturn = LottoProgram.calculateRateOfReturn(result, amountOfMoney)
-        OutputView.showResults(result, rateOfReturn)
-    } catch (e: NumberFormatException) {
-        throw NullPointerException("숫자만 입력 가능합니다.")
-    }
+    val amountOfMoney = InputView.inputAmountOfMoney()
+    val amountOfLotto = LottoProgram.getAmountOfLotto(amountOfMoney)
+    val lottos = Lottos(amountOfLotto)
+    OutputView.showUserLottos(lottos.getLottos())
+    val numbers = InputView.inputWinningNumbers()
+    val bonusBall = InputView.inputBonusBall()
+    val winningNumbers = WinningNumbers.getInstance(numbers)
+    val matchingRanks = lottos.matchLottos(winningNumbers, bonusBall)
+    val rateOfReturn = LottoProgram.calculateRateOfReturn(matchingRanks, amountOfMoney)
+    OutputView.showResults(matchingRanks, rateOfReturn)
 }
