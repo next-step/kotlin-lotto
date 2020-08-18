@@ -16,6 +16,7 @@ object InputView {
     private const val REQUIRE_MORE_THAN_THOUSAND = "1000원 이상의 숫자를 넣어주세요."
     private const val LOTTO_PRICE = 1000
     private const val DELIMITER = ","
+    private const val ZERO = 0
 
     tailrec fun inputMoney(): Money {
         println(INPUT_MONEY)
@@ -44,11 +45,16 @@ object InputView {
             ?: inputManualNumberCount(money)
     }
 
-    tailrec fun inputManualNumber(count: Int): List<Lotto> {
-        println(INPUT_MANUAL_NUMBER)
+    tailrec fun getLotto(): Lotto {
         return readLine()
-            ?.toListLottoOrNull(count)
-            ?: inputManualNumber(count)
+            ?.toLottoOrNull()
+            ?: getLotto()
+    }
+
+    fun inputManualNumber(count: Int): List<Lotto> {
+        if (count == ZERO) return emptyList()
+        println(INPUT_MANUAL_NUMBER)
+        return (1..count).map { getLotto() }
     }
 
     private fun String.toListLottoOrNull(count: Int): List<Lotto>? {
