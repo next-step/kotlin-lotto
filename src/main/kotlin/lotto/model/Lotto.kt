@@ -1,7 +1,6 @@
 package lotto.model
 
-class Lotto(lottoNumbers: List<LottoNumber>) {
-    private val lottoNumbers: List<LottoNumber> = lottoNumbers
+class Lotto(private val lottoNumbers: List<LottoNumber>) {
 
     fun rank(winningLotto: Lotto, bonus: LottoNumber): Rank {
         return Rank.of(matchCount(winningLotto), matchBonus(bonus))

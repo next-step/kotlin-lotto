@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.LottoTicket
 import lotto.view.Input.inputBonusNumber
 import lotto.view.Input.inputManualCount
 import lotto.view.Input.inputManualNumbers
@@ -14,9 +15,7 @@ fun main() {
     val totalCount = inputMoney() / LOTTO_PRICE
     val manualCount = inputManualCount()
     val lottoTicket = inputManualNumbers(manualCount)
-    repeat(totalCount - manualCount) {
-        lottoTicket.createRandomLotto()
-    }
+    lottoTicket.plus(LottoTicket.createRandomLotto(totalCount - manualCount))
     printLottoTicket(manualCount, totalCount - manualCount, lottoTicket)
     val winningLotto = inputWinningLotto()
     val bonusNumber = inputBonusNumber(winningLotto)

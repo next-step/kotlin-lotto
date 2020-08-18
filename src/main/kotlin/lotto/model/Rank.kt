@@ -10,19 +10,13 @@ enum class Rank(val match: Int, val price: Int) {
 
     companion object {
         fun of(matchCount: Int, isBonus: Boolean): Rank {
-            if (matchCount == 6) {
-                return FIRST
+            return when (matchCount) {
+                6 -> FIRST
+                5 -> if (isBonus) SECOND else THIRD
+                4 -> FOURTH
+                3 -> FIFTH
+                else -> ELSE
             }
-            if (matchCount == 5 && isBonus) {
-                return SECOND
-            }
-            if (matchCount == 5) {
-                return THIRD
-            }
-            if (matchCount > 2) {
-                return values().first { it.match == matchCount }
-            }
-            return ELSE
         }
     }
 }
