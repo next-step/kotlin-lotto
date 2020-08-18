@@ -15,7 +15,7 @@ fun main() {
     val totalCount = inputMoney() / LOTTO_PRICE
     val manualCount = inputManualCount()
     val lottoTicket = inputManualNumbers(manualCount)
-    lottoTicket.plus(LottoTicket.createRandomLotto(totalCount - manualCount))
+    lottoTicket.addTicket(LottoTicket.createRandomLotto(totalCount - manualCount))
     printLottoTicket(manualCount, totalCount - manualCount, lottoTicket)
     val winningLotto = inputWinningLotto()
     val bonusNumber = inputBonusNumber(winningLotto)

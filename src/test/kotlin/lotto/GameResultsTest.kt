@@ -25,7 +25,7 @@ class GameResultsTest {
     @Test
     fun `1등 한명 2등 한명인 경우 테스트`() {
         val lottoTicket = LottoTicket(listOf(lotto1))
-        lottoTicket.plus(LottoTicket(listOf(Lotto(listOf(1, 2, 3, 4, 5, 7).map { LottoNumber.from(it) }))))
+        lottoTicket.addTicket(LottoTicket(listOf(Lotto(listOf(1, 2, 3, 4, 5, 7).map { LottoNumber.from(it) }))))
         assertThat(lottoTicket.gameResult(winningLotto, LottoNumber.from(7)).of(Rank.FIRST)).isEqualTo(1)
         assertThat(lottoTicket.gameResult(winningLotto, LottoNumber.from(7)).of(Rank.SECOND)).isEqualTo(1)
         assertThat(lottoTicket.gameResult(winningLotto, LottoNumber.from(7)).of(Rank.THIRD)).isEqualTo(0)

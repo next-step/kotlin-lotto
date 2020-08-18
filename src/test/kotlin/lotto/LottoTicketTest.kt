@@ -15,7 +15,7 @@ class LottoTicketTest {
     @Test
     fun `로또 추가 테스트`() {
         assertThat(lottoTicket.gameResult(winningLotto, LottoNumber.from(7)).of(Rank.FIRST)).isEqualTo(0)
-        lottoTicket.plus(LottoTicket(listOf(winningLotto)))
+        lottoTicket.addTicket(LottoTicket(listOf(winningLotto)))
         assertThat(lottoTicket.gameResult(winningLotto, LottoNumber.from(7)).of(Rank.FIRST)).isEqualTo(1)
     }
 }
