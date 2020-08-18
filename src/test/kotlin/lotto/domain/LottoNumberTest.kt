@@ -13,14 +13,14 @@ class LottoNumberTest {
 
     @Test
     fun `로또는 6자리 숫자다`() {
-        val lottoNumbers: Set<LottoNumber> = LottoNumber.generateNumbers()
+        val lottoNumbers: Set<LottoNumber> = generateNumbers()
         assertThat(lottoNumbers.size).isEqualTo(6)
     }
 
     @Test
     fun `generateNumbers()로 생성된 로또 번호는 다른 인스턴스여야 한다`() {
-        val lottoNumbers01 = LottoNumber.generateNumbers()
-        val lottoNumbers02 = LottoNumber.generateNumbers()
+        val lottoNumbers01 = generateNumbers()
+        val lottoNumbers02 = generateNumbers()
 
         assertThat(lottoNumbers01).isNotEqualTo(lottoNumbers02)
     }
