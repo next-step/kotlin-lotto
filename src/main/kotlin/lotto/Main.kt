@@ -1,23 +1,23 @@
 package lotto
 
-import lotto.domain.LottoLines
-import lotto.view.inputBonusNumber
-import lotto.view.inputManualCount
-import lotto.view.inputManualNumbers
-import lotto.view.inputMoney
-import lotto.view.inputResult
-import lotto.view.printLottoTicket
-import lotto.view.printResult
+import lotto.model.LottoTicket
+import lotto.view.Input.inputBonusNumber
+import lotto.view.Input.inputManualCount
+import lotto.view.Input.inputManualNumbers
+import lotto.view.Input.inputMoney
+import lotto.view.Input.inputWinningLotto
+import lotto.view.Output.printLottoTicket
+import lotto.view.Output.printResult
 
-const val LINE_PRICE = 1000
+const val LOTTO_PRICE = 1000
 
 fun main() {
-    val money = inputMoney()
+    val totalCount = inputMoney() / LOTTO_PRICE
     val manualCount = inputManualCount()
-    val lottoLines = LottoLines(money / LINE_PRICE, inputManualNumbers(manualCount))
-    printLottoTicket(lottoLines.getLines())
-    val result = inputResult()
-    val bonusNumber = inputBonusNumber(result)
-    lottoLines.checkResult(result, bonusNumber)
-    printResult(lottoLines.getLines())
+    val lottoTicket = inputManualNumbers(manualCount)
+    lottoTicket.addTicket(LottoTicket.createRandomLotto(totalCount - manualCount))
+    printLottoTicket(manualCount, totalCount - manualCount, lottoTicket)
+    val winningLotto = inputWinningLotto()
+    val bonusNumber = inputBonusNumber(winningLotto)
+    printResult(lottoTicket.gameResult(winningLotto, bonusNumber))
 }

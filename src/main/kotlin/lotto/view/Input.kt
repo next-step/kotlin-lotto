@@ -1,103 +1,56 @@
 package lotto.view
 
+import lotto.model.Lotto
+import lotto.model.LottoNumber
+import lotto.model.LottoTicket
 import kotlin.system.exitProcess
 
-fun inputMoney(): Int {
-    println("구입금액을 입력해 주세요.")
-    return readLine()?.toIntOrNull() ?: inputMoneyError()
-}
+object Input {
+    fun inputMoney(): Int {
+        println("구입금액을 입력해 주세요.")
+        return readLine()?.toIntOrNull() ?: exitProcess(-1)
+    }
 
-fun inputMoneyError(): Int {
-    println(
-        """
-        구입금액을 입력해 주세요. 
-        숫자만 입력해주세요
-        Ex) 15000,20000,25000
-        """.trimIndent()
-    )
-    return readLine()?.toIntOrNull() ?: exitProcess(0)
-}
+    fun inputManualCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readLine()?.toIntOrNull() ?: exitProcess(-1)
+    }
 
-fun inputManualCount(): Int {
-    println("수동으로 구매할 로또 수를 입력해 주세요.")
-    return readLine()?.toIntOrNull() ?: inputManualCountError()
-}
-
-fun inputManualCountError(): Int {
-    println(
-        """
-        수동으로 구매할 로또 수를 입력해 주세요.
-        숫자만 입력해주세요
-        Ex) 1 / 2 / 3
-        """.trimIndent()
-    )
-    return readLine()?.toIntOrNull() ?: exitProcess(0)
-}
-
-fun inputManualNumbers(count: Int): List<List<Int>> {
-    println("수동으로 구매할 번호를 입력해 주세요.")
-    val list = mutableListOf<List<Int>>()
-    var errorCount = 0
-    do {
-        if (errorCount > 1) exitProcess(0)
-
-        val result = readLine() ?: ""
-        if (resultInvalid(result)) {
-            list.add(result.split(",").map { it.toInt() })
-        } else {
-            println("Ex) 1,2,3,4,5,6 처럼 입력해주세요")
-            errorCount++
+    fun inputManualNumbers(count: Int): LottoTicket {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val list = LottoTicket(emptyList())
+        repeat(count) {
+            val result = readLine() ?: ""
+            if (resultInvalid(result)) {
+                list.addLotto(Lotto(result.split(",").map { LottoNumber.from(it.toInt()) }))
+            } else {
+                exitProcess(-1)
+            }
         }
-    } while (list.size < count)
-    return list
-}
-
-fun inputResult(): List<Int> {
-    println("지난 주 당첨 번호를 입력해 주세요.")
-    val result = readLine() ?: ""
-    return if (resultInvalid(result)) {
-        result.split(",").map { it.toInt() }
-    } else {
-        inputResultError()
+        return list
     }
-}
 
-fun inputResultError(): List<Int> {
-    println(
-        """
-        지난 주 당첨 번호를 입력해 주세요.
-        Ex) 1,2,3,4,5,6 / 2,5,7,9,10
-        """.trimIndent()
-    )
-    val result = readLine() ?: ""
-    return if (resultInvalid(result)) {
-        result.split(",").map { it.toInt() }
-    } else {
-        exitProcess(0)
+    fun inputWinningLotto(): Lotto {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        val result = readLine() ?: ""
+        return if (resultInvalid(result)) {
+            Lotto(result.split(",").map { LottoNumber.from(it.toInt()) })
+        } else {
+            exitProcess(-1)
+        }
     }
-}
 
-fun inputBonusNumber(numbers: List<Int>): Int {
-    println("보너스 볼을 입력해 주세요.")
-    val bonusNumber = readLine()?.toIntOrNull() ?: inputBonusNumberError()
-    return if (numbers.contains(bonusNumber)) {
-        inputBonusNumberError()
-    } else {
-        return bonusNumber
+    fun inputBonusNumber(lotto: Lotto): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readLine()?.toIntOrNull() ?: exitProcess(-1)
+        return if (lotto.matchBonus(LottoNumber.from(bonusNumber))) {
+            exitProcess(-1)
+        } else {
+            return LottoNumber.from(bonusNumber)
+        }
     }
-}
 
-fun inputBonusNumberError(): Int {
-    println(
-        """
-        보너스 볼을 입력해 주세요.
-        한 자리의 숫자만 입력해주세요
-        그 숫자는 당첨번호와 중복될 수 없습니다.
-        """.trimIndent()
-    )
-    return readLine()?.toIntOrNull() ?: exitProcess(0)
-}
-
-fun resultInvalid(readLine: String): Boolean {
-    return !(readLine.isEmpty() || !readLine.contains(",") || readLine.split(",").size != 6)
+    private fun resultInvalid(readLine: String): Boolean {
+        return !(readLine.isEmpty() || !readLine.contains(",") || readLine.split(",").size != 6)
+    }
 }
