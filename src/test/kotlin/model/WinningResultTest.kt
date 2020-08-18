@@ -10,7 +10,8 @@ class WinningResultTest {
     @DisplayName("로또 숫자와 당첨 번호를 가지고 (같은 숫자의 수, 발생횟수, 당첨금액) 목록 생성된다")
     fun `getPrizeList`() {
         var list = lottoList()
-        val winningLotto = WinningLotto(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }.toSet(), 7)
+        var lotto = Lotto(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) }.toSet())
+        val winningLotto = WinningLotto(lotto, 7)
         val winningResult = WinningResult(list, winningLotto, Money(1000))
         val winningStatList = winningResult.stat()
         println(winningStatList)

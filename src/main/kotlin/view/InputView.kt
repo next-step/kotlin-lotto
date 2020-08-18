@@ -1,23 +1,54 @@
 package view
 
 import model.Lotto
+import model.LottoManual
 import model.LottoNumber
 import model.Money
+import kotlin.system.exitProcess
 
 object InputView {
     fun getMoney(): Money {
         println("구매금액을 입력해 주세요.")
-        return Money(readLine())
+        val inputString = checkNotNull(readLine())
+        return try {
+            Money(inputString)
+        } catch (ex: IllegalArgumentException) {
+            ResultView.printWrongValue()
+            exitProcess(0)
+        }
+    }
+
+    fun getManualLottoCount(): LottoManual {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val inputString = readLine()
+        checkNotNull(inputString)
+        return try {
+            LottoManual(inputString)
+        } catch (ex: IllegalArgumentException) {
+            ResultView.printWrongValue()
+            exitProcess(0)
+        }
+    }
+
+    fun getManualLottoNumber(manual: LottoManual): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val list: MutableList<Lotto> = mutableListOf()
+        repeat(manual.value) {
+            val inputString = readLine()
+            val lotto = createLottoFromInput(inputString, true) ?: exitProcess(0)
+            list.add(lotto)
+        }
+        return list.toList()
     }
 
     fun getPrizeLotto(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val inputString = readLine()
-        checkNotNull(inputString)
-        require(PRIZE_REGEX.matches(inputString)) { "not accepted prize regex" }
-        val inputPrizeNumbers = removeWhiteSpace(inputString)
-
-        return Lotto(makeLottoNumber(inputPrizeNumbers))
+        return try {
+            getManualLottoNumber(LottoManual(1)).first()
+        } catch (ex: java.lang.IllegalArgumentException) {
+            ResultView.printWrongValue()
+            exitProcess(0)
+        }
     }
 
     fun getBonusBall(): Int {
@@ -26,6 +57,18 @@ object InputView {
         checkNotNull(inputString)
         require(inputString.isNotBlank()) { "not accept blank" }
         return inputString.toInt()
+    }
+
+    private fun createLottoFromInput(inputString: String?, isManual: Boolean = false): Lotto {
+        checkNotNull(inputString)
+        return try {
+            require(LOTT_REGEX.matches(inputString)) { "not accepted lotto regex" }
+            val inputLottoNumbers = removeWhiteSpace(inputString)
+            Lotto(makeLottoNumber(inputLottoNumbers), isManual)
+        } catch (ex: IllegalArgumentException) {
+            ResultView.printWrongValue()
+            exitProcess(0)
+        }
     }
 
     private fun makeLottoNumber(inputPrizeNumbers: String) =
@@ -39,6 +82,6 @@ object InputView {
         }
     }
 
-    val PRIZE_REGEX = Regex(pattern = "^[0-9,\\s]+\$")
+    val LOTT_REGEX = Regex(pattern = "^[0-9,\\s]+\$")
     const val DELIMITER = ","
 }

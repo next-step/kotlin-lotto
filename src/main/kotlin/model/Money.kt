@@ -3,7 +3,7 @@ package model
 data class Money(private var _value: Int) {
     val value: Int get() = _value
 
-    constructor(value: String?) : this(value!!.toInt()) {
+    constructor(value: String) : this(value.toInt()) {
         if (!NUMBER_REGEX.matches(value)) {
             throw IllegalArgumentException("not acceptd not number value")
         }
@@ -12,6 +12,10 @@ data class Money(private var _value: Int) {
 
     fun getLottoCount(): Int {
         return value / LOTTO_PRICE
+    }
+
+    fun getAutoCreateCount(manual: LottoManual): Int {
+        return getLottoCount() - manual.value
     }
 
     companion object {
