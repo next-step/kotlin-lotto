@@ -17,7 +17,8 @@ class LottoGameTest {
     fun `createLottoList`() {
         val inputMoney = 14_000
         val lottoGame = LottoGame()
-        val list = lottoGame.buy(Money(inputMoney), LottoManual(0))
+        val lottosGeneratorAuto = LottosGeneratorAuto()
+        val list = lottoGame.buy(Money(inputMoney), lottosGeneratorAuto)
         assertThat(list.size).isEqualTo(inputMoney / Money.LOTTO_PRICE)
     }
 
@@ -26,7 +27,10 @@ class LottoGameTest {
     fun `autoMakeCount`() {
         val inputMoney = 14_000
         val lottoGame = LottoGame()
-        lottoGame.buy(Money(inputMoney), LottoManual(10))
-        assertThat(lottoGame.autoMakeCount()).isEqualTo(4)
+        val manual = LottoManual(3)
+        val listManual = mutableListOf<Lotto>()
+        val lottosGeneratorManual = LottosGeneratorManual(manual, listManual)
+        lottoGame.buy(Money(inputMoney), lottosGeneratorManual)
+        assertThat(lottosGeneratorManual.lottoAutoCount(Money(inputMoney))).isEqualTo(11)
     }
 }
