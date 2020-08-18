@@ -2,6 +2,11 @@ package com.nextstep.lotto.domain
 
 data class Lottos private constructor(val lottos: List<Lotto>) {
 
+    fun findMatchResult(winningLotto: WinningLotto): Map<Int, Int> {
+        return lottos.map { winningLotto.findNumberOfMatch(it) }
+            .groupingBy { it }.eachCount()
+    }
+
     companion object {
         const val LOTTO_PRICE = 1000
 
