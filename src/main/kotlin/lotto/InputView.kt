@@ -16,6 +16,26 @@ object InputView {
         }
     }
 
+    fun inputManualNumbers(manualNumberCount: Int): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (0 until manualNumberCount).map {
+            Lotto(inputManualNumber())
+        }
+    }
+
+    private fun inputManualNumber(): List<Int> {
+        val numbers = inputNumbers()
+        val manualNumbers = numbers?.replace(" ", "")
+            ?.split(DELIMITER)
+            ?.map { it.toInt() }
+        return if (!manualNumbers.isNullOrEmpty() && isNotDuplicated(manualNumbers)) {
+            manualNumbers
+        } else {
+            println("로또 번호 1,2,3,4,5,6 형태입니다. 다시 입력해주세요.")
+            inputManualNumber()
+        }
+    }
+
     tailrec fun inputAmountOfMoney(): Int {
         println("구입금액을 입력해 주세요.")
         val amountOfMoney = readLine()?.toIntOrNull()
@@ -37,7 +57,7 @@ object InputView {
         return if (!winningNumbers.isNullOrEmpty() && isNotDuplicated(winningNumbers)) {
             winningNumbers
         } else {
-            println("당첨번호는 1,2,3,4,5,6 형태입니다. 다시 입력해주세요.")
+            println("번호는 1,2,3,4,5,6 형태입니다. 다시 입력해주세요.")
             inputWinningNumbers()
         }
     }
