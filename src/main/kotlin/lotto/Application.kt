@@ -3,8 +3,10 @@ package lotto
 fun main() {
     val amountOfMoney = InputView.inputAmountOfMoney()
     val amountOfLotto = LottoProgram.getAmountOfLotto(amountOfMoney)
-    val lottos = Lottos(amountOfLotto)
-    OutputView.showUserLottos(lottos.lottos)
+    val manualCount = InputView.inputManualLottoCount(amountOfLotto)
+    val manualLottos = InputView.inputManualNumbers(manualCount).map { it }
+    val lottos = Lottos(amountOfLotto, manualLottos)
+    OutputView.showUserLottos(lottos.lottos, manualCount)
     val numbers = InputView.inputWinningNumbers()
     val bonusBall = InputView.inputBonusBall()
     val winningNumbers = WinningNumbers.newInstance(numbers)

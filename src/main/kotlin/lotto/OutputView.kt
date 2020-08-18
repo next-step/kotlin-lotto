@@ -1,8 +1,9 @@
 package lotto
 
 object OutputView {
-    fun showUserLottos(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
+    fun showUserLottos(lottos: List<Lotto>, amountOfManual: Int) {
+        val autoLottoCount = lottos.size - amountOfManual
+        println("수동으로 ${amountOfManual}장, 자동으로 ${autoLottoCount}개를 구매했습니다.")
         lottos.forEach {
             println(it)
         }
