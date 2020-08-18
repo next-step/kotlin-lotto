@@ -23,7 +23,7 @@ object InputView {
             ?.split(DELIMITER)
             ?.map { it.toInt() }
 
-        return if (winningNumbers != null && isNotDuplicated(winningNumbers)) {
+        return if (!winningNumbers.isNullOrEmpty() && isNotDuplicated(winningNumbers)) {
             winningNumbers
         } else {
             println("당첨번호는 1,2,3,4,5,6 형태입니다. 다시 입력해주세요.")
