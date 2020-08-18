@@ -2,6 +2,7 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 internal class LottoResultTest {
     @Test
@@ -18,6 +19,6 @@ internal class LottoResultTest {
         )
 
         val totalPrize = lottoResult.calculateTotalRate(Money(33_000))
-        assertThat(totalPrize).isEqualTo(Money(100).toBigDecimal())
+        assertThat(totalPrize).isEqualTo(BigDecimal("100.00"))
     }
 }
