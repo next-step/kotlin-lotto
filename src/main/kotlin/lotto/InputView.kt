@@ -28,7 +28,8 @@ object InputView {
         val manualNumbers = numbers?.replace(" ", "")
             ?.split(DELIMITER)
             ?.map { it.toInt() }
-        return if (!manualNumbers.isNullOrEmpty() && isNotDuplicated(manualNumbers)) {
+            ?: emptyList()
+        return if (isNotDuplicated(manualNumbers)) {
             manualNumbers
         } else {
             println("로또 번호 1,2,3,4,5,6 형태입니다. 다시 입력해주세요.")
@@ -53,8 +54,9 @@ object InputView {
         val winningNumbers = numbers?.replace(" ", "")
             ?.split(DELIMITER)
             ?.map { it.toInt() }
+            ?: emptyList()
 
-        return if (!winningNumbers.isNullOrEmpty() && isNotDuplicated(winningNumbers)) {
+        return if (isNotDuplicated(winningNumbers)) {
             winningNumbers
         } else {
             println("번호는 1,2,3,4,5,6 형태입니다. 다시 입력해주세요.")
