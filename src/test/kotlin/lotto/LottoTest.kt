@@ -5,22 +5,35 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottoTest {
+    val winningNumber = listOf(1, 2, 3, 14, 15, 16)
+    val userNumber = listOf(1, 2, 3, 4, 5, 6)
+
     @Test
     @DisplayName("test input money")
     fun inputTest() {
-        assertThat(InputNumber.buy()).isEqualTo(14000)
+        assertThat(InputNumber.buy()).isEqualTo(14)
+    }
+
+    @Test
+    fun `generateTest`(){
+        assertThat(Lotto().generateTest(setOf(1,2,3,4,5,6))).isEqualTo(true)
     }
 
     @Test
     @DisplayName("Ticket")
     fun ticketsTest() {
-        assertThat(Ticket().buyTickets(14000)).isEqualTo(14)
+        assertThat(Lottos(14)).isEqualTo(14)
     }
 
     @Test
     @DisplayName("Check to change Prize")
     fun prize() {
-        assertThat(Rank.findMatchCount(5)).isEqualTo(Rank.FIVEMATCH)
+        assertThat(Rank.findMatchCount(5)).isEqualTo(Rank)
+    }
+
+    @Test
+    fun `rewardCheck`(){
+        assertThat(Lotto().getPrizeTest(userNumber,winningNumber)).isEqualTo(Rank.THREE_MATCH)
     }
 /*
     @Test

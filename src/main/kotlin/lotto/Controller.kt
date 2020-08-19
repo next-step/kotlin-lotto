@@ -1,10 +1,12 @@
 package lotto
 
 fun main() {
-    val price = InputNumber.buy()
-    val buyTicket = Ticket().buyTickets(price)
-    val lotto = Ticket().apply { tickets(buyTicket) }
-    ResultView.printBuyedLottoTicket(lotto.purchasedLotto)
+    val ticket = InputNumber.buy()
+    val lottos = Lottos(ticket)
+    ResultView.printBuyedLottoTicket(lottos.purchasedLotto)
 
     val winNumber = InputNumber.winningNumberInput()
+    val result = lottos.purchasedLotto.map { it.getPrize(winNumber) }
+    ResultView.printWinnerStatistics(result)
+    ResultView.printIncome(Result().getStatistics(ticket, result))
 }

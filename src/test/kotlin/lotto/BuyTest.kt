@@ -8,8 +8,7 @@ class BuyTest {
     @Test
     @DisplayName("ticket size check")
     fun ticketSizeCheck() {
-        val sampleTicket = Ticket()
-        sampleTicket.tickets(14)
+        val sampleTicket = Lottos(14)
         assertThat(sampleTicket.purchasedLotto.size).isEqualTo(14)
     }
 }

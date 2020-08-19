@@ -12,20 +12,24 @@ object ResultView {
         println("----------")
         val splitPrize = prizeRecord.groupBy { it.matchCount }
         println(
-            "${Rank.THREEMATCH.matchCount} 개 일치 (${Rank.THREEMATCH.reward}) - " +
-                "${splitPrize[Rank.THREEMATCH.matchCount]?.size ?: 0}개"
+            "${Rank.THREE_MATCH.matchCount} 개 일치 (${Rank.THREE_MATCH.reward}) - " +
+                "${splitPrize[Rank.THREE_MATCH.matchCount]?.size ?: 0}개"
         )
         println(
-            "${Rank.FOURMATCH.matchCount} 개 일치 (${Rank.FOURMATCH.reward}) - " +
-                "${splitPrize[Rank.FOURMATCH.matchCount]?.size ?: 0}개"
+            "${Rank.FOUR_MATCH.matchCount} 개 일치 (${Rank.FOUR_MATCH.reward}) - " +
+                "${splitPrize[Rank.FOUR_MATCH.matchCount]?.size ?: 0}개"
         )
         println(
-            "${Rank.FIVEMATCH.matchCount} 개 일치 (${Rank.FIVEMATCH.reward}) - " +
-                "${splitPrize[Rank.FIVEMATCH.matchCount]?.size ?: 0}개"
+            "${Rank.FIVE_MATCH.matchCount} 개 일치 (${Rank.FIVE_MATCH.reward}) - " +
+                "${splitPrize[Rank.FIVE_MATCH.matchCount]?.size ?: 0}개"
         )
         println(
-            "${Rank.ALLMATCH.matchCount} 개 일치 (${Rank.ALLMATCH.reward}) - " +
-                "${splitPrize[Rank.ALLMATCH.matchCount]?.size ?: 0}개"
+            "${Rank.ALL_MATCH.matchCount} 개 일치 (${Rank.ALL_MATCH.reward}) - " +
+                "${splitPrize[Rank.ALL_MATCH.matchCount]?.size ?: 0}개"
         )
+    }
+
+    fun printIncome(Income: Double) {
+        println("총 수익률은 ${Income}입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 }

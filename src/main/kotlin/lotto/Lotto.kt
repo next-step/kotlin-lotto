@@ -1,7 +1,5 @@
 package lotto
 
-import kotlin.math.floor
-
 class Lotto {
     private val _numbers = mutableListOf<Int>()
     val numbers: List<Int> get() = _numbers
@@ -10,25 +8,24 @@ class Lotto {
         return (NUMBER_MINIMUM..NUMBER_MAXIMUM).shuffled().take(LOTTO_NUMBER).toSortedSet()
     }
 
+    fun generateTest(numbers: Set<Int>): Boolean {
+        require(numbers.size == 6) {
+        }
+        return true
+    }
+
     fun generate(numbers: Set<Int>) {
         require(numbers.size == 6) {
-
         }
         _numbers.addAll(numbers)
     }
 
-    fun getPrize(userNumber: List<Int>, winningNumber: List<Int>): List<Rank> {
-        val counts = Ticket().purchasedLotto.map { lotto ->
-            lotto.numbers.count { _number -> winningNumber.contains(_number) }
-        }
-        return counts.map { count -> Rank.findMatchCount(count) }
+    fun getPrizeTest(userNumber: List<Int>, winningNumber: List<Int>): Rank {
+        return Rank.findMatchCount(userNumber.count { number -> winningNumber.contains(number) })
     }
 
-    fun getStatistics(price: Int, ranks: List<Rank>): Double {
-        val total = ranks.asSequence()
-            .map { it.reward }
-            .reduce { acc, money -> acc + money }.toDouble()
-        return floor(total / price * 100.0) / 100.0
+    fun getPrize(winningNumber: List<Int>): Rank {
+        return Rank.findMatchCount(this._numbers.count { number -> winningNumber.contains(number) })
     }
 
     companion object {
@@ -36,9 +33,4 @@ class Lotto {
         const val NUMBER_MINIMUM = 1
         const val NUMBER_MAXIMUM = 45
     }
-}
-
-fun main() {
-    val result = Lotto().apply { generate(autoLotto()) }
-    print(result.numbers)
 }
