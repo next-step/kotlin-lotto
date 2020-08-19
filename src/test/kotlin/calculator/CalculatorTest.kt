@@ -1,6 +1,7 @@
 package calculator
 
-import calculator.infrastructure.Calculator
+import calculator.domain.Calculator
+import calculator.domain.Number
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -10,7 +11,7 @@ class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource("generateSumTestData")
-    fun `파싱된 문자열의 합계`(numbers: List<Int>, expected: Int) {
+    fun `파싱된 문자열의 합계`(numbers: List<Number>, expected: Int) {
         assertThat(Calculator().sum(numbers)).isEqualTo(expected)
     }
 
@@ -18,8 +19,8 @@ class CalculatorTest {
         @JvmStatic
         fun generateSumTestData(): List<Arguments> {
             return listOf(
-                Arguments.of(listOf(1, 2, 3), 6),
-                Arguments.of(listOf(11, 21, 31), 63)
+                Arguments.of(listOf(Number("1"), Number("2"), Number("3")), 6),
+                Arguments.of(listOf(Number("11"), Number("21"), Number("31")), 63)
             )
         }
     }

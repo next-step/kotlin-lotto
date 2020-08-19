@@ -1,36 +1,31 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.Lottos
-import lotto.domain.Statistics
+import lotto.domain.LottoStatistics
+import lotto.domain.LottoTicket
+import lotto.domain.PrizeResult
+import java.math.BigDecimal
 
 object ResultView {
-
-    fun showPurchaseCount(purchaseCount: Int) {
+    fun showPurchasedLottos(purchaseCount: Int, tickets: List<LottoTicket>) {
         println("$purchaseCount 개를 구입하였습니다.")
+        tickets.forEach { println(it) }
     }
 
-    fun showPurchasedLottos(lottos: List<Lotto>) {
-        lottos.map { println(it.numbers) }
-    }
-
-    fun showWinningResult(lottos: Lottos) {
-
-        lottos.lottos.map { lotto ->
-            lotto.winningCount == 3
-        }
-    }
-
-    fun showWinningRank() {
+    fun showWinningResult(resultPrizeList: LottoStatistics) {
         println("당첨 통계")
         println("---------")
-        println("3개 일치 (5000원)- ${Statistics.count_3}개")
-        println("4개 일치 (50000원)- ${Statistics.count_4}개")
-        println("5개 일치 (1500000원)- ${Statistics.count_5}개")
-        println("6개 일치 (2000000000원)- ${Statistics.count_6}개")
+
+        PrizeResult.values()
+            .filter { it != PrizeResult.MISS }
+            .forEach {
+                println(
+                    "${it.matchCount}개 일치" + "${if (it.hasBonus) ", 보너스 볼 일치" else ""} (${it.prize}원) - ${resultPrizeList.result[it]
+                        ?: 0}개"
+                )
+            }
     }
 
-    fun showRatio(calculateRatio: Double) {
-        println("총 수익률은 ${calculateRatio}입니다.")
+    fun showRatio(ratio: BigDecimal) {
+        println("총 수익률은 ${ratio}입니다")
     }
 }

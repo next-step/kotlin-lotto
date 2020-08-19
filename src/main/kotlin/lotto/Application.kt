@@ -1,8 +1,11 @@
 package lotto
 
 import lotto.domain.Buyer
-import lotto.domain.Lottos
-import lotto.domain.Statistics
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
+import lotto.domain.LottoStatistics
+import lotto.domain.LottoTicket
+import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -10,21 +13,25 @@ object Application {
     @JvmStatic
     fun main(args: Array<String>) {
         val price = InputView.purchasePrice()
+        val purchasedCount = Buyer(price).purchasedCount
+        val lottoTickets = (1..purchasedCount)
+            .map { LottoGenerator.generateNumbers() }
+            .map { LottoTicket(it) }
 
-        val purchaseCount = Buyer(price).purchaseCount
-        ResultView.showPurchaseCount(purchaseCount)
+        ResultView.showPurchasedLottos(purchasedCount, lottoTickets)
 
-        val lottos = Lottos.of(purchaseCount)
-        ResultView.showPurchasedLottos(lottos.lottos)
+        val askWinningNumbers = InputView.askWinningNumbers()
+        val askBonusNumber = InputView.askBonusNumber()
 
-        val winningNumbers = InputView.lastWinningNumbers()
+        val winningLotto = WinningLotto(LottoTicket(askWinningNumbers.split(",")), LottoNumber.get(askBonusNumber))
 
-        lottos.isInWinningNumber(winningNumbers)
+        val resultPrizeList = lottoTickets.map {
+            it.match(winningLotto)
+        }
+        val lottoStatistics = LottoStatistics(resultPrizeList)
+        val ratio = lottoStatistics.calculateRatio(purchasedCount)
 
-        ResultView.showWinningResult(lottos)
-        ResultView.showWinningRank()
-
-        val calculateRatio = Statistics.calculateRatio(purchaseCount)
-        ResultView.showRatio(calculateRatio)
+        ResultView.showWinningResult(lottoStatistics)
+        ResultView.showRatio(ratio)
     }
 }

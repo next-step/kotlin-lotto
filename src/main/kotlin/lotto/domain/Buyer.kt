@@ -1,11 +1,6 @@
 package lotto.domain
 
-class Buyer(price: Int = 0) {
+class Buyer(pay: Int) {
 
-    val purchaseCount: Int
-
-    init {
-        val lottoPrice = 1000
-        purchaseCount = price / lottoPrice
-    }
+    val purchasedCount = pay / LottoTicket.PRICE
 }
