@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Buyer
+import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTicket
@@ -13,7 +14,9 @@ object Application {
     fun main(args: Array<String>) {
         val price = InputView.purchasePrice()
         val purchasedCount = Buyer(price).purchasedCount
-        val lottoTickets = (1..purchasedCount).map { LottoTicket() }
+        val lottoTickets = (1..purchasedCount)
+            .map { LottoGenerator.generateNumbers() }
+            .map { LottoTicket(it) }
 
         ResultView.showPurchasedLottos(purchasedCount, lottoTickets)
 

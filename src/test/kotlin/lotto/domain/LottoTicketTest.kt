@@ -16,7 +16,8 @@ class LottoTicketTest {
 
     @Test
     fun `로또 1장은 로또 번호 6개로 이루어져 있다`() {
-        val numbers = LottoTicket().lottoNumbers
+        val lotto = LottoGenerator.generateNumbers()
+        val numbers = LottoTicket(lotto).lottoNumbers
         assertThat(numbers.size).isEqualTo(6)
     }
 
