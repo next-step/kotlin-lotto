@@ -4,12 +4,10 @@ class Lottos(private val amountOfLotto: Int, private val manualLottos: List<Lott
     val lottos = getLottos(amountOfLotto, manualLottos)
 
     fun getLottos(amountOfLotto: Int, manualLottos: List<Lotto>): List<Lotto> {
-        val lottos = manualLottos.toMutableList()
         val automaticLottoCount = amountOfLotto - manualLottos.size
-        for (number in 0 until automaticLottoCount) {
-            lottos.add(Lotto(LottoProgram.getRandomNumbers()))
-        }
-        return lottos.toList()
+        val autoLottos = (1..automaticLottoCount)
+            .map { Lotto(LottoProgram.getRandomNumbers()) }
+        return manualLottos + autoLottos
     }
 
     fun matchLottos(winningLotto: WinningNumbers, bonusBall: Int): List<Rank> {
