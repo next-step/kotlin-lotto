@@ -15,8 +15,8 @@ class LottoTest {
     }
 
     @Test
-    fun `generateTest`(){
-        assertThat(Lotto().generateTest(setOf(1,2,3,4,5,6))).isEqualTo(true)
+    fun `generateTest`() {
+        assertThat(Lotto().generateTest(setOf(1, 2, 3, 4, 5, 6))).isEqualTo(true)
     }
 
     @Test
@@ -32,15 +32,8 @@ class LottoTest {
     }
 
     @Test
-    fun `rewardCheck`(){
-        assertThat(Lotto().getPrizeTest(userNumber,winningNumber)).isEqualTo(Rank.THREE_MATCH)
+    fun `rewardCheck`() {
+        assertThat(Lotto().getPrizeTest(userNumber, winningNumber)).isEqualTo(Rank.THREE_MATCH)
     }
-/*
-    @Test
-    @DisplayName("당첨 확인")
-    private var  ticket =  Ticket()
-    fun fiveThousandDollar(){
-        assertThat()
-    }
-*/
+
 }
