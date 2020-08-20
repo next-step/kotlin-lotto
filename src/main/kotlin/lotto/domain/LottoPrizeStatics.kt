@@ -25,7 +25,7 @@ class LottoPrizeStatics {
         val bonusNumber = winningLotto.bonusNumber
         return prizedLottoList.filter { it.getPrize(prizeLotto).countOfMatch == Prize.THIRD.countOfMatch }
             .sumBy {
-                val prize = if (it.isContainNumber(bonusNumber)) Prize.SECOND else Prize.THIRD
+                val prize = it.getPrize(prizeLotto, it.isContainNumber(bonusNumber))
                 prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
                 prize.prizeMoney
             }

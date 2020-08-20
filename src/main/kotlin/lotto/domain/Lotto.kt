@@ -19,9 +19,9 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
         prizeNumberString.split(",").asSequence().sorted().map { LottoNumber.from(it.toInt()) }.toSet()
     )
 
-    fun getPrize(prizeLotto: Lotto): Prize {
+    fun getPrize(prizeLotto: Lotto, isContainBonusNumber: Boolean = false): Prize {
         val countMatchNumber = getCountOfMatchNumber(prizeLotto)
-        return Prize.getPrize(countMatchNumber)
+        return Prize.getPrize(countMatchNumber, isContainBonusNumber)
     }
 
     private fun getCountOfMatchNumber(prizeLotto: Lotto): Int {

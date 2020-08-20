@@ -9,8 +9,8 @@ enum class Prize(val countOfMatch: Int, val prizeMoney: Int, val withBonus: Bool
     MISS(0, 0);
 
     companion object {
-        fun getPrize(countOfMatch: Int): Prize {
-            return values().find { it.countOfMatch == countOfMatch } ?: MISS
+        fun getPrize(countOfMatch: Int, isContainBonusNumber: Boolean = false): Prize {
+            return values().find { it.countOfMatch == countOfMatch && it.withBonus == isContainBonusNumber } ?: MISS
         }
     }
 }
