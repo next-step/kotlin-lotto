@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.WinningLotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoPrizeStatics
 import lotto.domain.Prize
@@ -21,13 +22,14 @@ class LottoPrizeStaticsTest {
     @Test
     fun checkCalculateProfitRate() {
         val lottoPrizeStatics = LottoPrizeStatics()
-        val prizeLotto = Lotto("1,2,3,4,5,6")
-        val bonusNumber = LottoNumber.newInstance(7)
+        val prizeLotto = Lotto.from("1,2,3,4,5,6")
+        val bonusNumber = LottoNumber.from(7)
         val lottoList = listOf(
-            Lotto("11,12,13,14,15,16"),
-            Lotto("21,12,13,14,15,16")
+            Lotto.from("11,12,13,14,15,16"),
+            Lotto.from("21,12,13,14,15,16")
         )
-        lottoPrizeStatics.checkMatches(prizeLotto, bonusNumber, lottoList)
+        val winningLotto = WinningLotto(prizeLotto, bonusNumber)
+        lottoPrizeStatics.calculateResult(winningLotto, lottoList)
         val profitRate = lottoPrizeStatics.profitRate
 
         assertThat(profitRate).isEqualTo(0.0)

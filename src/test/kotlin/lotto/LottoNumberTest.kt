@@ -14,15 +14,15 @@ class LottoNumberTest {
     @ValueSource(ints = [-3, 0, 99])
     fun validateLottoNumber(number: Int) {
         assertThatThrownBy {
-            LottoNumber.newInstance(number)
+            LottoNumber.from(number)
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @DisplayName("로또 숫자가 같다")
     @Test
-    fun checkEqualLottoNumber() {
-        val lottoNumber = LottoNumber.newInstance(1)
-        val anotherLottoNumber = LottoNumber.newInstance(1)
+    fun checkSameLottoNumber() {
+        val lottoNumber = LottoNumber.from(1)
+        val anotherLottoNumber = LottoNumber.from(1)
         assertThat(lottoNumber)
             .isSameAs(anotherLottoNumber)
     }

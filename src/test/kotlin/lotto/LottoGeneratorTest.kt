@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -11,6 +10,7 @@ class LottoGeneratorTest {
     @DisplayName("로또 생성 반환값 테스트 ")
     @Test
     fun validateLottoGenerator() {
-        assertThat(LottoGenerator.createLotto()).isInstanceOf(Lotto::class.java)
+        assertThat(LottoGenerator.createAutoLottoList("2000"))
+            .isInstanceOf(List::class.java)
     }
 }

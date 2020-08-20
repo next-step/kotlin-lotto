@@ -12,4 +12,11 @@ class PrizeTest {
         assertThat(Prize.getPrize(4))
             .isEqualTo(Prize.FOURTH)
     }
+
+    @DisplayName("2등 확인하기")
+    @Test
+    fun checkSecondPrize() {
+        assertThat(Prize.getPrize(6))
+            .isEqualTo(Prize.FIRST)
+    }
 }
