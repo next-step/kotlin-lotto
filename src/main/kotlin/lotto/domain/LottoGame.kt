@@ -14,9 +14,9 @@ class LottoGame(gameMoney: String) {
         createLottoList(count)
     }
 
-    fun execute(prizeNumberString: String, _bonusNumber: String) {
+    fun execute(prizeNumberString: String, bonusNumberString: String) {
         val prizeLotto = getPrizeLotto(prizeNumberString)
-        val bonusNumber: LottoNumber = getBonusNumber(_bonusNumber)
+        val bonusNumber: LottoNumber = getBonusNumber(bonusNumberString)
         require(!prizeLotto.isContainBonusNumber(bonusNumber)) { "당첨번호에 포함되지 않는 보너스 볼을 입력해주세요." }
         checkMatch(prizeLotto, bonusNumber)
     }

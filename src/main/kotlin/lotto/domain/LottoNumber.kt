@@ -25,21 +25,12 @@ class LottoNumber private constructor(private val number: Int = 0) {
     }
 
     companion object {
-        private var lottoNumbers = emptyMap<Int, LottoNumber>()
-
-        fun newInstance(number: Int): LottoNumber {
-            if (lottoNumbers.isEmpty()) lottoNumbers = createLottoNumbers()
-            val lottoNumber = lottoNumbers[number]
-            require(lottoNumber != null) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자를 입력해 주세요." }
-            return lottoNumber
+        private val lottoNumbers: Map<Int, LottoNumber> by lazy {
+            (MIN_NUMBER..MAX_NUMBER).associateWith { LottoNumber(it) }
         }
 
-        private fun createLottoNumbers(): Map<Int, LottoNumber> {
-            val lottoNumbers = mutableMapOf<Int, LottoNumber>()
-            for (i in MIN_NUMBER..MAX_NUMBER) {
-                lottoNumbers[i] = LottoNumber(i)
-            }
-            return lottoNumbers
+        fun newInstance(number: Int): LottoNumber {
+            return lottoNumbers[number] ?: throw IllegalArgumentException("$MIN_NUMBER~$MAX_NUMBER 사이의 숫자를 입력해 주세요.")
         }
     }
 }
