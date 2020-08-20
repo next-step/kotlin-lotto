@@ -24,6 +24,6 @@ class LottoNumberTest {
         val lottoNumber = LottoNumber.newInstance(1)
         val anotherLottoNumber = LottoNumber.newInstance(1)
         assertThat(lottoNumber)
-            .isEqualTo(anotherLottoNumber)
+            .isSameAs(anotherLottoNumber)
     }
 }

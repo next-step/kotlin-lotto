@@ -3,7 +3,7 @@ package lotto.domain
 const val MIN_NUMBER = 1
 const val MAX_NUMBER = 45
 
-data class LottoNumber(private val number: Int = 0) {
+class LottoNumber private constructor(private val number: Int = 0) {
 
     override fun toString(): String {
         return number.toString()

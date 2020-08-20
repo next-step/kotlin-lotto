@@ -10,6 +10,6 @@ class PrizeTest {
     @Test
     fun validatePrize() {
         assertThat(Prize.getPrize(4))
-            .isEqualTo(Prize.MATCH_FOUR)
+            .isEqualTo(Prize.FOURTH)
     }
 }

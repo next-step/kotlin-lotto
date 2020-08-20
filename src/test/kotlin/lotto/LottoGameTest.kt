@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoGame
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -22,22 +21,7 @@ class LottoGameTest {
     @Test
     fun createLottoList() {
         val lottoGame = LottoGame("2000")
-        lottoGame.execute("1,2,3,4,5,6", "7")
         assertThat(lottoGame.lottoList.size).isEqualTo(2)
-    }
-
-    @DisplayName("Lotto 테스트, 갯수 확인")
-    @Test
-    fun validateLottoCount() {
-        assertThatThrownBy { Lotto("1,2,3,4") }
-            .isInstanceOf(IllegalArgumentException::class.java)
-    }
-
-    @DisplayName("Lotto 테스트, 중복 및 갯수 확인")
-    @Test
-    fun validateLottoCountAndDuplication() {
-        assertThatThrownBy { Lotto("1,2,3,4,5,5") }
-            .isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @DisplayName("당첨번호 입력값 확인")

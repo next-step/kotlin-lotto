@@ -8,8 +8,8 @@ class LottoPrizeStatics {
         private set
 
     var prizedLotto = mutableMapOf(
-        Prize.MATCH_THREE to 0, Prize.MATCH_FOUR to 0,
-        Prize.MATCH_FIVE to 0, Prize.MATCH_FIVE_WITH_BONUS to 0, Prize.MATCH_ALL to 0
+        Prize.FIFTH to 0, Prize.FOURTH to 0,
+        Prize.THIRD to 0, Prize.SECOND to 0, Prize.FIRST to 0
     )
         private set
 
@@ -17,15 +17,15 @@ class LottoPrizeStatics {
         val prizedLottoList = lottoList.asSequence()
             .filter { it.getPrize(prizeLotto).prizeMoney > 0 }
         var totalPrizeMoney = prizedLottoList
-            .filterNot { it.getPrize(prizeLotto).countOfMatch == Prize.MATCH_FIVE.countOfMatch }
+            .filterNot { it.getPrize(prizeLotto).countOfMatch == Prize.THIRD.countOfMatch }
             .sumBy {
                 val prize = it.getPrize(prizeLotto)
                 prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
                 prize.prizeMoney
             }
-        totalPrizeMoney += prizedLottoList.filter { it.getPrize(prizeLotto).countOfMatch == Prize.MATCH_FIVE.countOfMatch }
+        totalPrizeMoney += prizedLottoList.filter { it.getPrize(prizeLotto).countOfMatch == Prize.THIRD.countOfMatch }
             .sumBy {
-                val prize = if (it.isContainBonusNumber(bonusNumber)) Prize.MATCH_FIVE_WITH_BONUS else Prize.MATCH_FIVE
+                val prize = if (it.isContainBonusNumber(bonusNumber)) Prize.SECOND else Prize.THIRD
                 prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
                 prize.prizeMoney
             }
