@@ -8,15 +8,14 @@ class Lotto {
         return (NUMBER_MINIMUM..NUMBER_MAXIMUM).shuffled().take(LOTTO_NUMBER).toSortedSet()
     }
 
-    fun generateTest(numbers: Set<Int>): Boolean {
+    fun validateSize(numbers: Set<Int>) {
         require(numbers.size == 6) {
+            "로또 숫자는 6개 입니다."
         }
-        return true
     }
 
     fun generate(numbers: Set<Int>) {
-        require(numbers.size == 6) {
-        }
+        validateSize(numbers)
         _numbers.addAll(numbers)
     }
 
@@ -29,6 +28,7 @@ class Lotto {
     }
 
     companion object {
+
         const val LOTTO_NUMBER = 6
         const val NUMBER_MINIMUM = 1
         const val NUMBER_MAXIMUM = 45

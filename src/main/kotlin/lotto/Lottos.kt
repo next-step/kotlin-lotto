@@ -7,4 +7,8 @@ class Lottos(val buyLottoTicket: Int) {
             Lotto()
                 .apply { generate(autoLotto()) }
         }
+
+    fun getLottoResults(winNumber: List<Int>): List<Rank> {
+        return this.purchasedLotto.map { it.getPrize(winNumber) }
+    }
 }
