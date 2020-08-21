@@ -10,4 +10,12 @@ class LottoProgramTest {
     fun `when input amountOfMoney then return amountOfLotto`() {
         assertThat(LottoProgram.getAmountOfLotto(3000)).isEqualTo(3)
     }
+
+    @DisplayName("로또의 수익률을 계산한다.")
+    @Test
+    fun calculateRateOfReturn() {
+        val ranks = listOf(Rank.FIFTH)
+        val amountOfMoney = 14000
+        assertThat(LottoProgram.calculateRateOfReturn(ranks, amountOfMoney)).isEqualTo(0.36)
+    }
 }
