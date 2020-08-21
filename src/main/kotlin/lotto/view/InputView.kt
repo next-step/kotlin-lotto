@@ -78,7 +78,7 @@ object InputView {
 
     private fun String.toLottoOrNull(): Lotto? {
         return try {
-            Lotto(this.split(DELIMITER).map { it.toInt() })
+            Lotto(this.split(DELIMITER).map { it.trim().toInt() })
         } catch (e: IllegalArgumentException) {
             println("$INVALID_WINNING_NUMBER ${e.message}")
             null
