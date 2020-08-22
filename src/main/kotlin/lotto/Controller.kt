@@ -6,7 +6,8 @@ fun main() {
     ResultView.printBuyedLottoTicket(lottos.purchasedLotto)
 
     val winNumber = InputNumber.winningNumberInput()
-    val result = lottos.getLottoResults(winNumber)
+    val bonusNumber = InputNumber.bonusNumber()
+    val result = lottos.getLottoResultsWithBonus(winNumber, bonusNumber)
     ResultView.printWinnerStatistics(result)
     ResultView.printIncome(Result().getStatistics(ticket, result))
 }

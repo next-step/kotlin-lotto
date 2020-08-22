@@ -24,6 +24,10 @@ object ResultView {
                 "${splitPrize[Rank.FIVE_MATCH.matchCount]?.size ?: 0}개"
         )
         println(
+            "${Rank.FIVE_BONUS_MATCH.matchCount} 개 일치, 보너스 볼 일치 (${Rank.FIVE_BONUS_MATCH.reward}) - " +
+                "${splitPrize[Rank.FIVE_BONUS_MATCH.matchCount]?.size ?: 0}개"
+        )
+        println(
             "${Rank.ALL_MATCH.matchCount} 개 일치 (${Rank.ALL_MATCH.reward}) - " +
                 "${splitPrize[Rank.ALL_MATCH.matchCount]?.size ?: 0}개"
         )

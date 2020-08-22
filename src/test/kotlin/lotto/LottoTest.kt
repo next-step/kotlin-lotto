@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class LottoTest {
     val winningNumber = listOf(1, 2, 3, 14, 15, 16)
-    val userNumber = listOf(1, 2, 3, 4, 5, 6)
+    val winningNumberBonus = listOf(1, 2, 3, 4, 5, 17)
 
     @Test
     fun testExpectedExceptionWithSuperType() {
@@ -23,7 +23,7 @@ class LottoTest {
     }
 
     @Test
-    fun `rewardCheck`() {
-        assertThat(Lotto().getPrizeTest(userNumber, winningNumber)).isEqualTo(Rank.THREE_MATCH)
+    fun `bonusCheck`() {
+        assertThat(Lotto().getPrizeWithBonus(winningNumberBonus, 7)).isEqualTo(Rank.FIVE_BONUS_MATCH)
     }
 }

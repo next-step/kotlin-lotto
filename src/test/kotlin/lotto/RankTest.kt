@@ -1,13 +1,13 @@
 package lotto
 
-import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.DisplayName
+import org.assertj.core.api.Assertions.*
+
 import org.junit.jupiter.api.Test
 
 class RankTest {
+
     @Test
-    @DisplayName("Check to change Prize")
-    fun prize() {
-        Assertions.assertThat(Rank.findMatchCount(5)).isEqualTo(Rank.FIVE_MATCH)
+    fun prizeBonus(){
+        assertThat(Rank.valueOf(5,true)).isEqualTo(Rank.FIVE_BONUS_MATCH)
     }
 }
