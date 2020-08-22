@@ -4,10 +4,12 @@ object LottoGame {
 
     private const val LOTTO_NUMBER_COUNT_PER_TICKET = 6
     private const val LOTTO_TICKET_PRICE = 1000
+    private const val RETRY_ENOUGH_MONEY = "최소 1000원 이상의 금액을 입력해야합니다."
     private val LOTTO_NUMBER = (LottoNumber.LOTTO_MIN_NUMBER..LottoNumber.LOTTO_MAX_NUMBER).map { LottoNumber(it) }
 
+
     fun createLottoTicket(price: Int, manualLotto: List<LottoTicket>): LottoTickets {
-        if (price < LOTTO_TICKET_PRICE) throw IllegalArgumentException("최소 1000원 이상의 금액을 입력해야합니다.")
+        if (price < LOTTO_TICKET_PRICE) throw IllegalArgumentException(RETRY_ENOUGH_MONEY)
 
         val totalCountTicket = getTicketCount(price)
         val automaticLottoCount = totalCountTicket - manualLotto.size
