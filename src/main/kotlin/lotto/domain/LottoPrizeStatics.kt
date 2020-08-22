@@ -7,11 +7,39 @@ class LottoPrizeStatics {
     var profitRate = 0.0
         private set
 
-    fun checkMatches(prizeLotto: Lotto, lottos: List<Lotto>) {
-        val prized = lottos.filter { it.checkPrize(prizeLotto).prizeMoney > 0 }
-        val totalPrizeMoney = prized.sumBy { Prize.getPrizeMoney(it.countOfMatch) }
-        prized.forEach { Prize.getPrize(it.countOfMatch).addCount() }
-        calculateProfitRate(lottos.size, totalPrizeMoney)
+    val prizedLotto: MutableMap<Prize, Int> =
+        mutableMapOf(Prize.FIFTH to 0, Prize.FOURTH to 0, Prize.THIRD to 0, Prize.SECOND to 0, Prize.FIRST to 0)
+
+    fun calculateResult(winningLotto: WinningLotto, lottoList: List<Lotto>) {
+        val prizeLotto = winningLotto.prizeLotto
+        val prizedLottoList = lottoList.filter { it.getPrize(prizeLotto).prizeMoney > 0 }
+        val totalPrizeMoney = calculateTotalPrizeMoney(prizedLottoList, winningLotto)
+        calculateProfitRate(lottoList.size, totalPrizeMoney)
+    }
+
+    private fun calculateTotalPrizeMoney(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int =
+        calculatePrizeMoneyMatchFive(prizedLottoList, winningLotto) + calculatePrizeMoneyExceptMatchFive(prizedLottoList, winningLotto)
+
+    private fun calculatePrizeMoneyMatchFive(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
+        val prizeLotto = winningLotto.prizeLotto
+        val bonusNumber = winningLotto.bonusNumber
+        return prizedLottoList.filter { it.getPrize(prizeLotto).countOfMatch == Prize.THIRD.countOfMatch }
+            .sumBy {
+                val prize = it.getPrize(prizeLotto, it.isContainNumber(bonusNumber))
+                prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
+                prize.prizeMoney
+            }
+    }
+
+    private fun calculatePrizeMoneyExceptMatchFive(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
+        val prizeLotto = winningLotto.prizeLotto
+        return prizedLottoList
+            .filterNot { it.getPrize(prizeLotto).countOfMatch == Prize.THIRD.countOfMatch }
+            .sumBy {
+                val prize = it.getPrize(prizeLotto)
+                prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
+                prize.prizeMoney
+            }
     }
 
     private fun calculateProfitRate(count: Int, totalPrizeMoney: Int) {

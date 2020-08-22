@@ -1,28 +1,48 @@
 package lotto.domain
 
-private const val COUNT_OF_NUMBERS = 6
+const val COUNT_OF_NUMBERS = 6
+private val LOTTO_NUMBERS = (MIN_NUMBER..MAX_NUMBER)
+private val PLAYER_REGULAR_EXPRESSION = "^(\\d{1,2},)+\\d{1,2}$".toRegex()
 
-class Lotto() {
-    var numbers: Set<LottoNumber> = emptySet()
-    var countOfMatch: Int = 0
-        private set
+class Lotto private constructor(private val numbers: Set<LottoNumber>) {
 
     init {
-        numbers = (MIN_NUMBER..MAX_NUMBER).shuffled().subList(0, COUNT_OF_NUMBERS)
-            .sorted().map { LottoNumber(it) }.toSet()
-    }
-
-    constructor(prizeNumberString: String) : this() {
-        numbers = prizeNumberString.split(",").asSequence().sorted().map { LottoNumber(it.toInt()) }.toSet()
         require(numbers.size == COUNT_OF_NUMBERS) { "중복되지 않는 6개의 숫자를 입력해주세요" }
     }
 
-    fun checkPrize(lotto: Lotto): Prize {
-        countOfMatch = numbers.count { lotto.numbers.contains(it) }
-        return Prize.getPrize(countOfMatch)
+    private constructor() : this(
+        LOTTO_NUMBERS.shuffled().subList(0, COUNT_OF_NUMBERS)
+            .sorted().map { LottoNumber.from(it) }.toSet()
+    )
+
+    private constructor(prizeNumberString: String) : this(
+        prizeNumberString.split(",").asSequence().sorted().map { LottoNumber.from(it.toInt()) }.toSet()
+    )
+
+    fun getPrize(prizeLotto: Lotto, isContainBonusNumber: Boolean = false): Prize {
+        val countMatchNumber = getCountOfMatchNumber(prizeLotto)
+        return Prize.getPrize(countMatchNumber, isContainBonusNumber)
     }
+
+    private fun getCountOfMatchNumber(prizeLotto: Lotto): Int {
+        return numbers.count { prizeLotto.isContainNumber(it) }
+    }
+
+    fun isContainNumber(number: LottoNumber) = numbers.contains(number)
 
     override fun toString(): String {
         return numbers.toString()
+    }
+
+    companion object {
+        fun from(prizeNumberString: String = ""): Lotto {
+            if (prizeNumberString.isEmpty()) return Lotto()
+            checkValidation(prizeNumberString)
+            return Lotto(prizeNumberString)
+        }
+
+        private fun checkValidation(prizeNumberString: String) {
+            require(PLAYER_REGULAR_EXPRESSION.matches(prizeNumberString)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자  $COUNT_OF_NUMBERS 개와`,`로 만 값을 입력해 주세요." }
+        }
     }
 }
