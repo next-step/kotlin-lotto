@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.Rank
 
@@ -19,7 +18,10 @@ object OutputView {
 
     private fun printLottoResult(result: Rank, size: Int) {
         if (result == Rank.ELSE) return
-        println("${result.matchCount}개 일치" + if(result.bonusBall){",보너스볼 일치"} else{""} + "(${result.prizeMoney}원)- ${size}개")
+        var hasBonusBall: String = ""
+        if (result.bonusBall) hasBonusBall = ",보너스볼 일치"
+
+        println("${result.matchCount}개 일치" + hasBonusBall + "(${result.prizeMoney}원)- ${size}개")
     }
 
     fun printProfitRatio(ratio: Double) {

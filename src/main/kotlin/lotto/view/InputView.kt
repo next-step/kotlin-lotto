@@ -12,28 +12,22 @@ object InputView {
     private const val INPUT_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요."
     private const val INPUT_LUCKY_NUMBER = "지난 주 당첨번호를 입력해주세요."
 
-
-    fun getUserInputMoney(): Int {
+    tailrec fun getUserInputMoney(): Int {
         println(INPUT_MONEY_FOR_BUYING)
-        var money = readLine()
-        while (money.isNullOrBlank()) {
-            money = readLine()
-        }
-        return money.toIntOrNull() ?: 0
+        var money = readLine()?.toIntOrNull()
+        return money ?: getUserInputMoney()
     }
+
     tailrec fun getInputBonusNumber(): Int {
         println(INPUT_BONUS_NUMBER)
         val number = readLine()?.toIntOrNull()
         return number ?: getInputBonusNumber()
     }
 
-    fun getManualLottoCount(): Int {
+    tailrec fun getManualLottoCount(): Int {
         println(INPUT_MANUAL_BONUS_NUMBER)
-        var numbers = readLine()
-        while (numbers.isNullOrBlank()) {
-            numbers = readLine()
-        }
-        return numbers.toIntOrNull() ?: 0
+        var numbers = readLine()?.toIntOrNull()
+        return numbers ?: getManualLottoCount()
     }
 
     fun getInputManualLottoNumber(manualNumberCount: Int): List<LottoTicket> {
@@ -49,7 +43,6 @@ object InputView {
             numbers = readLine()
         }
         return numbers.split(NUMBER_DELIMETER).map { LottoNumber(it.toInt()) }
-
     }
 
     fun getInputLuckyNumber(): List<Int> {
