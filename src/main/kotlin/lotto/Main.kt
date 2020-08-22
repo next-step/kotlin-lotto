@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoGame
+import lotto.domain.LottoTickets
 import lotto.domain.LottoWinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -9,7 +10,14 @@ fun main() {
 
     // 로또 구매금액 입력
     val inputMoney = InputView.getUserInputMoney()
-    val lottoUserTickets = LottoGame.makeTickets(inputMoney)
+
+    // 수동 구매수량 입력
+    val inputManualLottoCount = InputView.getManualLottoCount()
+    // 수동 번호 입력
+    val inputManualLottoNum = InputView.getInputManualLottoNumber(inputManualLottoCount)
+
+    // 로또 게임실행
+    val lottoUserTickets = LottoGame.createLottoTicket(inputMoney, inputManualLottoNum)
     OutputView.printLottoTickets(lottoUserTickets)
 
     // 로또 당첨번호 입력

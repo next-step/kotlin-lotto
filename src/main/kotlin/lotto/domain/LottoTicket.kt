@@ -1,5 +1,7 @@
 package lotto.domain
 
+import java.util.*
+
 class LottoTicket(val lottoNumbers: List<LottoNumber>) {
 
     init {
@@ -23,11 +25,16 @@ class LottoTicket(val lottoNumbers: List<LottoNumber>) {
         return getLottoNumber().count { winningLotto.getLottoNumber().contains(it) }
     }
 
-    fun isExsitBonusBall(bonusBall: LottoNumber): Boolean{
+    fun isExistBonusBall(bonusBall: LottoNumber): Boolean{
         return getLottoNumber().contains(bonusBall.number)
     }
 
     companion object {
         const val LOTTO_NUMBER_COUNT_PER_TICKET = 6
+
+        fun from(lottoNumbers: List<LottoNumber>): LottoTicket {
+            return LottoTicket(lottoNumbers)
+        }
+
     }
 }

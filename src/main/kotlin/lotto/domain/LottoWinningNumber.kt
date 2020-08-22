@@ -3,7 +3,7 @@ package lotto.domain
 class LottoWinningNumber(numbers: List<Int>, bonusBall: Int) {
 
     val luckyLottoTicket: LottoTicket
-    private val bonusBallNumber: LottoNumber
+    val bonusBallNumber: LottoNumber
 
     init {
         if (numbers.size != LottoTicket.LOTTO_NUMBER_COUNT_PER_TICKET) {
@@ -16,12 +16,12 @@ class LottoWinningNumber(numbers: List<Int>, bonusBall: Int) {
         bonusBallNumber = LottoNumber(bonusBall)
     }
 
-    fun getLottoResultsOf(lottoTickets: List<LottoTicket>): List<Rank> {
+    fun getLottoResultsOf(inputUserTicket: LottoTickets): List<Rank> {
         var rankList = mutableListOf<Rank>()
 
-        lottoTickets.forEach {
+        inputUserTicket.lottoTickets.forEach {
             var matchCount = it.getMatchValueCount(luckyLottoTicket)
-            var isBonusBall = it.isExsitBonusBall(bonusBallNumber)
+            val isBonusBall = it.isExistBonusBall(bonusBallNumber)
             val rank: Rank = Rank.of(matchCount, isBonusBall)
             rankList.add(rank)
         }

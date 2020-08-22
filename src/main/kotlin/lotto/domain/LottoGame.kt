@@ -6,17 +6,31 @@ object LottoGame {
     private const val LOTTO_TICKET_PRICE = 1000
     private val LOTTO_NUMBER = (LottoNumber.LOTTO_MIN_NUMBER..LottoNumber.LOTTO_MAX_NUMBER).map { LottoNumber(it) }
 
-    fun makeTickets(price: Int): List<LottoTicket> {
+    fun createLottoTicket(price: Int, manualLottoCount: List<LottoNumber>): LottoTickets{
         if (price < LOTTO_TICKET_PRICE) throw IllegalArgumentException("최소 1000원 이상의 금액을 입력해야합니다.")
-        val countTicket = getTicketCount(price)
-        return IntRange(1, countTicket).map { makeAutoNumbers() }
+
+        val manualLottos = (1..manualLottoCount.size).map { makeNumbers(manualLottoCount) }
+
+        val totalCountTicket = getTicketCount(price)
+        val automaticLottoCount = totalCountTicket - manualLottos.size
+
+        val autoLottos = (1..automaticLottoCount).map { makeNumbers() }
+
+        return LottoTickets.from(manualLottos + autoLottos)
     }
 
-    private fun makeAutoNumbers(): LottoTicket {
-        return LOTTO_NUMBER.shuffled().take(LOTTO_NUMBER_COUNT_PER_TICKET).sortedBy { it.number }.let { LottoTicket(it) }
+    // 자동
+    fun makeNumbers(): LottoTicket {
+        val autoLottoNumber: List<LottoNumber> = LOTTO_NUMBER.shuffled().take(LOTTO_NUMBER_COUNT_PER_TICKET)
+        return LottoTicket.from(autoLottoNumber)
     }
 
-    private fun getTicketCount(money: Int) = money / LOTTO_TICKET_PRICE
+    // 수동
+   fun makeNumbers(lottoTicket: List<LottoNumber>): LottoTicket {
+        return LottoTicket.from(lottoTicket)
+    }
+
+    fun getTicketCount(money: Int) = money / LOTTO_TICKET_PRICE
 
     fun calculate(inputMoney: Int, lottoResults: List<Rank>): Double {
         val totalMoney = totalPrizeMoney(lottoResults)

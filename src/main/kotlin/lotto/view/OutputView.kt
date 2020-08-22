@@ -1,13 +1,14 @@
 package lotto.view
 
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import lotto.domain.Rank
 
 object OutputView {
 
-    fun printLottoTickets(tickets: List<LottoTicket>) {
-        println("${tickets.size}개를 구매했습니다.")
-        tickets.forEach { tickets -> println(tickets.lottoNumbers.map { numbers -> numbers.number }) }
+    fun printLottoTickets(tickets: LottoTickets) {
+        println("${tickets.lottoTickets.size}개를 구매했습니다.")
+        tickets.lottoTickets.forEach { ticket -> println(ticket.lottoNumbers.map { numbers -> numbers.number }) }
     }
 
     fun printLottoResults(results: List<Rank>) {
