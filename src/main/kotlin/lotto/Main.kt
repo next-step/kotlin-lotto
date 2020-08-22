@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.LottoGame
-import lotto.domain.LottoTickets
 import lotto.domain.LottoWinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -26,9 +25,8 @@ fun main() {
     val bonusBall = InputView.getInputBonusNumber()
     val lottoWinningNumber = LottoWinningNumber(inputLuckyNumber, bonusBall)
 
-
     // 로또 결과 및 분석
-    val results = lottoWinningNumber.getLottoResultsOf(lottoUserTickets) //Rank 리스트
+    val results = lottoWinningNumber.getLottoResultsOf(lottoUserTickets)
     OutputView.printLottoResults(results)
     OutputView.printProfitRatio(LottoGame.calculate(inputMoney, results))
 }

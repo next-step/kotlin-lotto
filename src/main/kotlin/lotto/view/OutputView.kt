@@ -26,6 +26,6 @@ object OutputView {
 
     fun printProfitRatio(ratio: Double) {
         print("총 수익률은 %.2f입니다. ".format(ratio))
-        if(ratio < 1) println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        if (ratio < 1) println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 }

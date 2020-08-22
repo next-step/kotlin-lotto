@@ -33,11 +33,11 @@ object InputView {
     fun getInputManualLottoNumber(manualNumberCount: Int): List<LottoTicket> {
         println(INPUT_MANUAL_LOTTO_NUMBER)
 
-        val manualNumbers = (1..manualNumberCount).map { inputManualNumber3()}
+        val manualNumbers = (1..manualNumberCount).map { inputManualNumber3() }
         return manualNumbers.map { LottoTicket(it) }.toList()
     }
 
-    private fun inputManualNumber3(): List<LottoNumber>{
+    private fun inputManualNumber3(): List<LottoNumber> {
         var numbers = readLine()
         while (numbers.isNullOrBlank()) {
             numbers = readLine()

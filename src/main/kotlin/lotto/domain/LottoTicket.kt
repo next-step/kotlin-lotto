@@ -23,7 +23,7 @@ class LottoTicket(val lottoNumbers: List<LottoNumber>) {
         return getLottoNumber().count { winningLotto.getLottoNumber().contains(it) }
     }
 
-    fun isExistBonusBall(bonusBall: LottoNumber): Boolean{
+    fun isExistBonusBall(bonusBall: LottoNumber): Boolean {
         return getLottoNumber().contains(bonusBall.number)
     }
 
@@ -35,6 +35,5 @@ class LottoTicket(val lottoNumbers: List<LottoNumber>) {
         fun from(lottoNumbers: List<LottoNumber>): LottoTicket {
             return LottoTicket(lottoNumbers)
         }
-
     }
 }
