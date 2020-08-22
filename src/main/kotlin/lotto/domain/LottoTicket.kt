@@ -1,7 +1,5 @@
 package lotto.domain
 
-import java.util.*
-
 class LottoTicket(val lottoNumbers: List<LottoNumber>) {
 
     init {

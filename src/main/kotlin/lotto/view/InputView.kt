@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 
 object InputView {
 
@@ -29,17 +30,20 @@ object InputView {
         return numbers.toIntOrNull() ?: 0
     }
 
-    fun getInputManualLottoNumber(manualNumberCount: Int): List<LottoNumber> {
+    fun getInputManualLottoNumber(manualNumberCount: Int): List<LottoTicket> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return (0..manualNumberCount).map { inputManualNumber().forEach { it }.run { LottoNumber(it) } }
+
+        val manualNumbers = (1..manualNumberCount).map { inputManualNumber3()}
+        return manualNumbers.map { LottoTicket(it) }.toList()
     }
 
-    private fun inputManualNumber(): List<Int>{
+    private fun inputManualNumber3(): List<LottoNumber>{
         var numbers = readLine()
         while (numbers.isNullOrBlank()) {
             numbers = readLine()
         }
-        return numbers.split(NUMBER_DELIMETER).map { it.toInt() }
+        return numbers.split(NUMBER_DELIMETER).map { LottoNumber(it.toInt()) }
+
     }
 
     fun getInputLuckyNumber(): List<Int> {

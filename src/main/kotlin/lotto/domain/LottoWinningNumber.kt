@@ -2,8 +2,8 @@ package lotto.domain
 
 class LottoWinningNumber(numbers: List<Int>, bonusBall: Int) {
 
-    val luckyLottoTicket: LottoTicket
-    val bonusBallNumber: LottoNumber
+    private val luckyLottoTicket: LottoTicket
+    private val bonusBallNumber: LottoNumber
 
     init {
         if (numbers.size != LottoTicket.LOTTO_NUMBER_COUNT_PER_TICKET) {
