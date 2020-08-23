@@ -1,9 +1,10 @@
 package lotto.model.lotto
 
+import lotto.model.generator.LottoNumberGenerator
 import lotto.model.generator.RandomNumberGenerator
 
 class Lotto private constructor(
-    private val generator: RandomNumberGenerator = RandomNumberGenerator,
+    private val generator: LottoNumberGenerator,
     private val numbers: Numbers = generator.generate()
 ) {
     override fun toString(): String {
@@ -18,7 +19,7 @@ class Lotto private constructor(
         val LOTTO_RANGE = MIN_NUMBER..MAX_NUMBER
         const val NUMBER_COUNT = 6
 
-        fun newAutoInstance() = Lotto(generator = RandomNumberGenerator)
-        fun newManualInstance(numbers: Numbers) = Lotto(numbers = numbers)
+        fun newInstance(lottoNumberGenerator: LottoNumberGenerator = RandomNumberGenerator) =
+            Lotto(generator = lottoNumberGenerator)
     }
 }

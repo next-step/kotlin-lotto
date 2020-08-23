@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.generator.ManualNumberGenerator
 import lotto.model.lotto.Lotto
 import lotto.model.lotto.Numbers
 import lotto.model.lotto.WinnerNumbers
@@ -30,6 +31,7 @@ class LottoManager(
         return Winners(winners)
     }
 
-    private fun makeAutoLotto() = Lotto.newAutoInstance()
-    private fun makeManualLotto(numbers: Numbers) = Lotto.newManualInstance(numbers)
+    private fun makeAutoLotto() = Lotto.newInstance()
+    private fun makeManualLotto(numbers: Numbers) =
+        Lotto.newInstance(ManualNumberGenerator(numbers))
 }
