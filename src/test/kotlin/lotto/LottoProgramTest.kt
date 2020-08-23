@@ -33,7 +33,7 @@ class LottoProgramTest {
     @DisplayName("보너스 볼이 1과 45 사이에 있으면 true, 아니면 false를 반환한다.")
     @Test
     fun validateBonusBallRange() {
-        val func = LottoProgram.validateBonusBallRange()
+        val func = LottoProgram.isInRange()
         assertAll(
             { assertThat(func(20)).isTrue() },
             { assertThat(func(50)).isFalse() }
@@ -58,6 +58,17 @@ class LottoProgramTest {
         assertAll(
             { assertThat(func(listOf(1, 2, 3, 4, 5, 6))).isTrue() },
             { assertThat(func(listOf(1, 1, 2, 3, 4, 5))).isFalse() }
+        )
+    }
+
+    @DisplayName("숫자 목록이 1 ~ 45 사이면 true, 아니면 false를 반환한다.")
+    @Test
+    fun isNumberInRange() {
+        val func = LottoProgram.isNumbersInRange()
+        val result = func(listOf(1, 45, 2, 3, 4, 17))
+        assertAll(
+            { assertThat(func(listOf(1, 45, 2, 3, 4, 17))).isTrue() },
+            { assertThat(func(listOf(46, 1, 2, 3, 55, 4))).isFalse() }
         )
     }
 }

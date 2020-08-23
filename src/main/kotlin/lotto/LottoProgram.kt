@@ -30,9 +30,15 @@ object LottoProgram {
         }
     }
 
-    fun validateBonusBallRange(): (Int) -> Boolean {
-        return { bonusBall ->
-            bonusBall in 1..45
+    fun isInRange(): (Int) -> Boolean {
+        return { ball ->
+            ball in 1..45
+        }
+    }
+
+    fun isNumbersInRange(): (List<Int>) -> Boolean {
+        return { number ->
+            number.filter { it in 1..45 }.size == number.size
         }
     }
 
