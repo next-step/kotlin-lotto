@@ -1,6 +1,6 @@
 package lotto.model.lotto
 
-import lotto.model.generator.LottoNumberGenerator
+import lotto.model.generator.ManualNumberGenerator
 import lotto.model.prize.Prize
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -8,15 +8,11 @@ import org.junit.jupiter.api.Test
 
 class LottoTest {
 
-    class FakeNumberGenerator(private val numbers: String) : LottoNumberGenerator {
-        override fun generate() = numbers.toNumbers()
-    }
-
     @DisplayName(value = "같은 숫자 6개일 경우, 상금은 1등이여야한다.")
     @Test
     fun whenCreateLottoIsMatching6() {
         val input = "1,2,3,4,5,6"
-        val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
+        val lotto = Lotto.newInstance(ManualNumberGenerator(input.toNumbers()))
         val winner = WinnerNumbers(input.toNumbers(), LottoNumber.from(7))
         assertThat(lotto.checkNumbers(winner).prizeMoney)
             .isEqualTo(Prize.ONE.prizeMoney)
@@ -26,7 +22,7 @@ class LottoTest {
     @Test
     fun whenCreateLottoIsMatching5AndBonus() {
         val input = "1,2,3,4,5,6"
-        val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
+        val lotto = Lotto.newInstance(ManualNumberGenerator(input.toNumbers()))
         val winningNumbers = "1,2,3,4,5,44"
         val winner = WinnerNumbers(winningNumbers.toNumbers(), LottoNumber.from(6))
         assertThat(lotto.checkNumbers(winner).prizeMoney)
@@ -37,7 +33,7 @@ class LottoTest {
     @Test
     fun whenCreateLottoIsMatching0() {
         val input = "1,2,3,4,5,6"
-        val lotto = Lotto.newAutoInstance(FakeNumberGenerator(input))
+        val lotto = Lotto.newInstance(ManualNumberGenerator(input.toNumbers()))
         val winningNumbers = "11,22,33,43,44,45"
         val winner = WinnerNumbers(winningNumbers.toNumbers(), LottoNumber.from(40))
         assertThat(lotto.checkNumbers(winner).prizeMoney)

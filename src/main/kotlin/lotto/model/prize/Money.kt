@@ -1,11 +1,19 @@
 package lotto.model.prize
 
-class Money(val value: Int) {
+class Money(private var _value: Int) {
+    val value: Int
+        get() = _value
+
     init {
         validation(value)
     }
 
     fun availableLottoCount() = value / LOTTO_PRICE
+
+    fun buyLottos(lottoCount: Int) {
+        require(availableLottoCount() >= lottoCount) { "구매 가능한 금액을 벗어났습니다." }
+        _value -= lottoCount * LOTTO_PRICE
+    }
 
     operator fun times(integerData: Int): Money {
         validation(integerData)
