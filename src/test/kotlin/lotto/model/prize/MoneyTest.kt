@@ -35,11 +35,32 @@ class MoneyTest {
             }
     }
 
-    @DisplayName(value = "*(times) Test")
+    @DisplayName(value = "금액에 따른 구매가능한 로또의 수")
     @ParameterizedTest
     @ValueSource(ints = [0, 1_000, 3_500, 500_000, 1_000_000])
-    fun checkBuyLottoCount(input: Int) {
+    fun checkAvailableLottoCountt(input: Int) {
         val money = Money(input)
         assertThat(money.availableLottoCount()).isEqualTo(input / Money.LOTTO_PRICE)
+    }
+
+    @DisplayName(value = "로또를 구매한 만큼 ,금액은 줄어든다.")
+    @ParameterizedTest
+    @ValueSource(ints = [1, 2, 3, 4])
+    fun checkBuyLotto(input: Int) {
+        val price = 5_000
+        val money = Money(price)
+        money.buyLotto(input)
+        assertThat(money.value).isEqualTo(price - (Money.LOTTO_PRICE * input))
+    }
+
+    @DisplayName(value = "구매 가능한 로또 갯수보다, 많은 로또를 구매할 경우 ,RuntimeException")
+    @Test
+    fun checkBuyLotto() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy {
+                Money(1000).run {
+                    buyLotto(10)
+                }
+            }
     }
 }

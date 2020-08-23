@@ -1,19 +1,35 @@
 package lotto.model
 
 import lotto.model.lotto.Lotto
+import lotto.model.lotto.Numbers
 import lotto.model.lotto.WinnerNumbers
 import lotto.model.prize.Money
 import lotto.model.prize.Winners
 
-class LottoManager(money: Money) {
-    private val _lottos: List<Lotto> = (1..money.availableLottoCount()).map { makeLotto() }
+class LottoManager(
+    private val money: Money,
+    manualNumbersList: List<Numbers> = emptyList()
+) {
+    init {
+        money.buyLotto(manualNumbersList.size)
+    }
+
+    private val _lottos: MutableList<Lotto> by lazy {
+        mutableListOf<Lotto>().apply {
+            addAll(manualNumbersList.map { makeManualLotto(it) })
+            addAll(generateAutoLottos(money.availableLottoCount()))
+        }
+    }
     val lottos: List<Lotto>
         get() = _lottos
+
+    private fun generateAutoLottos(autoCount: Int) = (1..autoCount).map { makeAutoLotto() }
 
     fun checkNumbers(winningNumbers: WinnerNumbers): Winners {
         val winners = lottos.map { it.checkNumbers(winningNumbers) }
         return Winners(winners)
     }
 
-    private fun makeLotto() = Lotto.newAutoInstance()
+    private fun makeAutoLotto() = Lotto.newAutoInstance()
+    private fun makeManualLotto(numbers: Numbers) = Lotto.newManualInstance(numbers)
 }

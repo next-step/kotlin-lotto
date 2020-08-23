@@ -22,7 +22,8 @@ class MoneyManager(
     }
 
     private fun buyLotto(money: Money) {
-        lottoManager = LottoManager(money)
+        val manualLottoCount = input.getManualNumberLottoCount(money.availableLottoCount())
+        lottoManager = LottoManager(money, input.getManualNumbers(manualLottoCount))
         resultView.showLottos(lottoManager.lottos)
     }
 
