@@ -14,6 +14,11 @@ object InputNumber {
         }
     }
 
+    fun buyHandLotto():Int{
+        println("수동으로 구매할 번호를 입력하세요")
+        return readLine()!!.toInt()
+    }
+
     fun winningNumberInput(): List<Int> {
         println("지난주 당첨번호를 입력해 주세요.")
         val winningLottoNumber = readLine()!!.split(",").map { it.toInt() }
