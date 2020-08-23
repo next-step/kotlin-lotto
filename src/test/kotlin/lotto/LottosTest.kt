@@ -12,5 +12,4 @@ class LottosTest {
         val sampleTicket = Lottos(14)
         assertThat(sampleTicket.purchasedLotto.size).isEqualTo(14)
     }
-
 }

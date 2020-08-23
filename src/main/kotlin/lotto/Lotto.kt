@@ -25,7 +25,7 @@ class Lotto {
         // val counts = this._sampleTest.count { number -> winningNumber.contains(number) }
 
         val bonusCheck = this.numbers.contains(bonusNumber)
-        //val bonusCount = this._sampleTest.contains(bonusNumber)
+        // val bonusCount = this._sampleTest.contains(bonusNumber)
 
         return Rank.valueOf(counts, bonusCheck)
     }
