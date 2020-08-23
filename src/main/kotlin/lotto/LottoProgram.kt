@@ -23,4 +23,28 @@ object LottoProgram {
     fun getRandomNumbers(): List<Int> {
         return NUMBER_RANGE.shuffled().take(LOTTO_COUNT).sorted()
     }
+
+    fun validateAmountOfManualLotto(): (Int, Int) -> Boolean {
+        return { manualNumberCount, amountOfLottos ->
+            manualNumberCount <= amountOfLottos
+        }
+    }
+
+    fun validateBonusBallRange(): (Int) -> Boolean {
+        return { bonusBall ->
+            bonusBall in 1..45
+        }
+    }
+
+    fun validateMoneyUnit(): (Int) -> Boolean {
+        return { amountOfMoney ->
+            amountOfMoney % UNIT == 0 && amountOfMoney != 0
+        }
+    }
+
+    fun isNotDuplicated(): (List<Int>) -> Boolean {
+        return { numbers ->
+            numbers.distinct() == numbers
+        }
+    }
 }
