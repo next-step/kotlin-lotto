@@ -49,7 +49,7 @@ class MoneyTest {
     fun checkBuyLotto(input: Int) {
         val price = 5_000
         val money = Money(price)
-        money.buyLotto(input)
+        money.buyLottos(input)
         assertThat(money.value).isEqualTo(price - (Money.LOTTO_PRICE * input))
     }
 
@@ -59,7 +59,7 @@ class MoneyTest {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy {
                 Money(1000).run {
-                    buyLotto(10)
+                    buyLottos(10)
                 }
             }
     }

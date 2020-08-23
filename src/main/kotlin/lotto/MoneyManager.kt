@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.model.LottoManager
+import lotto.model.lotto.Tickets
 import lotto.model.prize.Money
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -23,7 +24,8 @@ class MoneyManager(
 
     private fun buyLotto(money: Money) {
         val manualLottoCount = input.getManualNumberLottoCount(money.availableLottoCount())
-        lottoManager = LottoManager(money, input.getManualNumbers(manualLottoCount))
+        val tickets = Tickets(input.getManualNumbers(manualLottoCount))
+        lottoManager = LottoManager(money, tickets)
         resultView.showLottos(lottoManager.lottos)
     }
 

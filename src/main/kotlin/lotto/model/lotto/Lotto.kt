@@ -21,5 +21,8 @@ class Lotto private constructor(
 
         fun newInstance(lottoNumberGenerator: LottoNumberGenerator = RandomNumberGenerator) =
             Lotto(generator = lottoNumberGenerator)
+
+        fun newAutoInstances(autoCount: Int) =
+            (1..autoCount).map { newInstance() }
     }
 }

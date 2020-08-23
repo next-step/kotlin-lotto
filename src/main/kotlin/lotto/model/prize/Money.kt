@@ -10,7 +10,7 @@ class Money(private var _value: Int) {
 
     fun availableLottoCount() = value / LOTTO_PRICE
 
-    fun buyLotto(lottoCount: Int) {
+    fun buyLottos(lottoCount: Int) {
         require(availableLottoCount() >= lottoCount) { "구매 가능한 금액을 벗어났습니다." }
         _value -= lottoCount * LOTTO_PRICE
     }
