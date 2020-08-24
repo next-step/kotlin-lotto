@@ -1,23 +1,31 @@
 package lotto.domain
 
-enum class Rank(val countOfMatch: Int, val winningMoney: Money, val matchBonus: Boolean = false) {
-    MISS(0, Money(0)),
-    FIFTH(3, Money(5_000)),
-    FOURTH(4, Money(50_000)),
-    THIRD(5, Money(1_500_000)),
-    SECOND(5, Money(30_000_000), true),
-    FIRST(6, Money(2_000_000_000));
+enum class Rank(
+    val winningMoney: Money,
+    val rankStrategy: (countOfMatch: Int, matchBonus: Boolean) -> Boolean
+) {
+    MISS(Money(0), { _, _ -> false }),
+    FIFTH(Money(5_000), { matchCount, _ -> matchCount == 3 }),
+    FOURTH(Money(50_000), { matchCount, _ -> matchCount == 4 }),
+    THIRD(Money(1_500_000), { matchCount, isBonusMatched -> matchCount == 5 && !isBonusMatched }),
+    SECOND(Money(30_000_000), { matchCount, isBonusMatched -> matchCount == 5 && isBonusMatched }),
+    FIRST(Money(2_000_000_000), { countOfMatch, _ -> countOfMatch == 6 });
 
     fun prizeByCount(count: Int): Money = winningMoney * count
 
     companion object {
         fun rank(countOfMatch: Int, matchBonus: Boolean = false): Rank {
-            if (countOfMatch == SECOND.countOfMatch) {
-                return values().find { it.countOfMatch == countOfMatch && it.matchBonus == matchBonus } ?: MISS
-            }
-            return values().find { it.countOfMatch == countOfMatch } ?: MISS
+            return values().find { it.rankStrategy(countOfMatch, matchBonus) } ?: MISS
         }
 
         fun asList() = values().filter { it != MISS }
+
+        fun getMatchCount(rank: Rank) = when (rank) {
+            FIRST -> 6
+            SECOND, THIRD -> 5
+            FOURTH -> 4
+            FIFTH -> 3
+            else -> 0
+        }
     }
 }

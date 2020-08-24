@@ -26,17 +26,18 @@ object ResultView {
         println(WINNING_STATISTICS)
         println(WINNING_SEPARATOR)
         Rank.asList().forEach {
-            printRankResult(it, result)
+            printRankResult(result.countByRank(it), it)
         }
         val totalRate = result.calculateTotalRate(money)
         printTotalRate(totalRate)
     }
 
-    private fun printRankResult(rank: Rank, result: LottoResult) {
-        val countMatch = ACCORDANCE_SUFFIX.format(rank.countOfMatch)
+    private fun printRankResult(count: Int, rank: Rank) {
+        if (rank == Rank.MISS) return
+        val countMatch = ACCORDANCE_SUFFIX.format(Rank.getMatchCount(rank))
         val winningMoney = "(%s)".format(rank.winningMoney)
-        val countRank = COUNT_SUFFIX.format(result.countByRank(rank))
-        val bonus = if (rank.matchBonus) BONUS_MESSAGE else ""
+        val countRank = COUNT_SUFFIX.format(count)
+        val bonus = if (rank == Rank.SECOND) BONUS_MESSAGE else ""
         println("$countMatch$bonus$winningMoney$SEPARATOR$countRank")
     }
 
