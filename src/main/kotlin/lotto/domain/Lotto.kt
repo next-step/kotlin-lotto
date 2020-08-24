@@ -14,8 +14,8 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
         LOTTO_NUMBERS.shuffled().subList(0, COUNT_OF_NUMBERS)
     )
 
-    private constructor(prizeNumber: String) : this(
-        prizeNumber.split(",").map { it.toInt() }
+    private constructor(numbers: String) : this(
+        numbers.split(",").map { it.toInt() }
     )
 
     private constructor(numbers: List<Int>) : this(
@@ -33,14 +33,14 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
     }
 
     companion object {
-        fun from(prizeNumber: String = ""): Lotto {
-            if (prizeNumber.isEmpty()) return Lotto()
-            checkValidation(prizeNumber)
-            return Lotto(prizeNumber)
+        fun from(numbers: String = ""): Lotto {
+            if (numbers.isEmpty()) return Lotto()
+            checkValidation(numbers)
+            return Lotto(numbers)
         }
 
-        private fun checkValidation(prizeNumber: String) {
-            require(PLAYER_REGULAR_EXPRESSION.matches(prizeNumber)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자  $COUNT_OF_NUMBERS 개와`,`로 만 값을 입력해 주세요." }
+        private fun checkValidation(numbers: String) {
+            require(PLAYER_REGULAR_EXPRESSION.matches(numbers)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자  $COUNT_OF_NUMBERS 개와`,`로 만 값을 입력해 주세요." }
         }
     }
 }
