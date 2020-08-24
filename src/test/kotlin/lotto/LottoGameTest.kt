@@ -27,9 +27,9 @@ class LottoGameTest {
     @DisplayName("당첨번호 입력값 확인")
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4,5,", "r", "1.2.3.4.5.6", "1,1,1,1,1,1", "$"])
-    fun validatePrizeLotto(prizeNumberString: String) {
+    fun validatePrizeLotto(prizeNumber: String) {
         val lottoGame = LottoGame("3000")
-        assertThatThrownBy { lottoGame.execute(prizeNumberString, "7") }
+        assertThatThrownBy { lottoGame.execute(prizeNumber, "7") }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
 

@@ -5,12 +5,12 @@ const val PRICE_OF_LOTTO = 1000
 class LottoGame(val lottoList: List<Lotto>) {
     val lottoPrizeStatics = LottoPrizeStatics()
 
-    constructor(gameMoneyString: String) : this(
-        LottoGenerator.createAutoLottoList(gameMoneyString)
+    constructor(gameMoney: String) : this(
+        LottoGenerator.createAutoLottoList(gameMoney)
     )
 
-    fun execute(prizeNumberString: String, bonusNumberString: String) {
-        val winningLotto = WinningLotto(prizeNumberString, bonusNumberString)
+    fun execute(prizeNumber: String, bonusNumber: String) {
+        val winningLotto = WinningLotto(prizeNumber, bonusNumber)
         checkMatch(winningLotto)
     }
 

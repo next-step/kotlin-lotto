@@ -11,16 +11,16 @@ object ResultView {
     }
 
     fun showPrizeStatics(prizeStatics: LottoPrizeStatics) {
-        val showPrizeStaticsString = StringBuilder("당첨 통계---------\n\n")
+        val showPrizeStaticsSentence = StringBuilder("당첨 통계---------\n\n")
         prizeStatics.prizedLotto.forEach {
             val prize = it.key
-            showPrizeStaticsString.append("${prize.countOfMatch}개 일치")
+            showPrizeStaticsSentence.append("${prize.countOfMatch}개 일치")
                 .append(if (prize.withBonus) ", 보너스 볼 1개 일치" else "")
                 .append("(${prize.prizeMoney}원) -${it.value} 개\n")
         }
-        showPrizeStaticsString.append("\n총 수익률은 ${prizeStatics.profitRate} 입니다.")
-        if (prizeStatics.profitRate < 1) showPrizeStaticsString.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
-        println(showPrizeStaticsString)
+        showPrizeStaticsSentence.append("\n총 수익률은 ${prizeStatics.profitRate} 입니다.")
+        if (prizeStatics.profitRate < 1) showPrizeStaticsSentence.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        println(showPrizeStaticsSentence)
     }
 
     fun print(message: String?) {

@@ -15,8 +15,8 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
             .sorted().map { LottoNumber.from(it) }.toSet()
     )
 
-    private constructor(prizeNumberString: String) : this(
-        prizeNumberString.split(",").asSequence().sorted().map { LottoNumber.from(it.toInt()) }.toSet()
+    private constructor(prizeNumber: String) : this(
+        prizeNumber.split(",").asSequence().sorted().map { LottoNumber.from(it.toInt()) }.toSet()
     )
 
     fun getPrize(prizeLotto: Lotto, isContainBonusNumber: Boolean = false): Prize {
@@ -35,14 +35,14 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
     }
 
     companion object {
-        fun from(prizeNumberString: String = ""): Lotto {
-            if (prizeNumberString.isEmpty()) return Lotto()
-            checkValidation(prizeNumberString)
-            return Lotto(prizeNumberString)
+        fun from(prizeNumber: String = ""): Lotto {
+            if (prizeNumber.isEmpty()) return Lotto()
+            checkValidation(prizeNumber)
+            return Lotto(prizeNumber)
         }
 
-        private fun checkValidation(prizeNumberString: String) {
-            require(PLAYER_REGULAR_EXPRESSION.matches(prizeNumberString)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자  $COUNT_OF_NUMBERS 개와`,`로 만 값을 입력해 주세요." }
+        private fun checkValidation(prizeNumber: String) {
+            require(PLAYER_REGULAR_EXPRESSION.matches(prizeNumber)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자  $COUNT_OF_NUMBERS 개와`,`로 만 값을 입력해 주세요." }
         }
     }
 }

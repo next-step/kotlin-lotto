@@ -1,9 +1,9 @@
 package lotto.domain
 
 class WinningLotto(val prizeLotto: Lotto, val bonusNumber: LottoNumber) {
-    constructor(prizeLottoString: String, bonusNumberString: String) : this(
-        Lotto.from(prizeLottoString),
-        LottoNumber.from(bonusNumberString)
+    constructor(prizeLotto: String, bonusNumber: String) : this(
+        Lotto.from(prizeLotto),
+        LottoNumber.from(bonusNumber)
     )
 
     init {

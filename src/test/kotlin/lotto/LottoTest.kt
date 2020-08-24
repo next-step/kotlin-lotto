@@ -12,7 +12,7 @@ class LottoTest {
 
     @DisplayName("Lotto 생성자 확인, input String ")
     @Test
-    fun validateLottoString() {
+    fun validateLottoInput() {
         assertThat(Lotto.from("1,2,3,4,5,6"))
             .isNotInstanceOf(Exception::class.java)
     }
