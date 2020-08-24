@@ -5,10 +5,10 @@ enum class Rank(
     val rankStrategy: (countOfMatch: Int, matchBonus: Boolean) -> Boolean
 ) {
     MISS(Money(0), { _, _ -> false }),
-    FIFTH(Money(5_000), { matchCount, _ -> matchCount == 3 }),
-    FOURTH(Money(50_000), { matchCount, _ -> matchCount == 4 }),
-    THIRD(Money(1_500_000), { matchCount, isBonusMatched -> matchCount == 5 && !isBonusMatched }),
-    SECOND(Money(30_000_000), { matchCount, isBonusMatched -> matchCount == 5 && isBonusMatched }),
+    FIFTH(Money(5_000), { countOfMatch, _ -> countOfMatch == 3 }),
+    FOURTH(Money(50_000), { countOfMatch, _ -> countOfMatch == 4 }),
+    THIRD(Money(1_500_000), { countOfMatch, matchBonus -> countOfMatch == 5 && !matchBonus }),
+    SECOND(Money(30_000_000), { countOfMatch, matchBonus -> countOfMatch == 5 && matchBonus }),
     FIRST(Money(2_000_000_000), { countOfMatch, _ -> countOfMatch == 6 });
 
     fun prizeByCount(count: Int): Money = winningMoney * count
