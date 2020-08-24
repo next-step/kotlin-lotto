@@ -5,10 +5,7 @@ private val GAME_MONEY_REGULAR_EXPRESSION = "(\\d*)".toRegex()
 object LottoGenerator {
     fun createAutoLottoList(gameMoney: String): List<Lotto> {
         checkValidation(gameMoney)
-        val count = getCountOfGame(gameMoney)
-        val generateLottoList = mutableListOf<Lotto>()
-        repeat(count) { generateLottoList.add(Lotto.from()) }
-        return generateLottoList.toList()
+        return (1..getCountOfGame(gameMoney)).map { Lotto.from() }
     }
 
     private fun getCountOfGame(gameMoney: String): Int = gameMoney.toInt() / PRICE_OF_LOTTO
