@@ -10,6 +10,6 @@ class LottoGeneratorTest {
     @Test
     fun validateLottoGenerator() {
         assertThat(LottoGenerator.createAutoLottoList("2000"))
-            .isInstanceOf(List::class.java)
+            .hasSize(2)
     }
 }
