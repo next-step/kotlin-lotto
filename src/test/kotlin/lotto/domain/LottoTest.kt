@@ -14,15 +14,6 @@ class LottoTest {
             .isNotInstanceOf(Exception::class.java)
     }
 
-    @DisplayName("발생한 로또와 당첨번호가 일치하는 경우 받는 Prize")
-    @Test
-    fun checkGetPrize() {
-        val lotto = Lotto.from("1,2,3,4,5,6")
-        val prizeLotto = Lotto.from("1,2,3,4,5,6")
-        assertThat(lotto.getPrize(prizeLotto))
-            .isEqualTo(Prize.FIRST)
-    }
-
     @DisplayName("해당 로또에 보너스 번호 포함 여부")
     @Test
     fun checkBonusNumber() {

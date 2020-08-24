@@ -12,7 +12,7 @@ class LottoPrizeStatics {
 
     fun calculateResult(winningLotto: WinningLotto, lottoList: List<Lotto>) {
         val prizeLotto = winningLotto.prizeLotto
-        val prizedLottoList = lottoList.filter { it.getPrize(prizeLotto).prizeMoney > 0 }
+        val prizedLottoList = lottoList.filter { it.getCountOfMatchNumber(prizeLotto) > 0 }
         val totalPrizeMoney = calculateTotalPrizeMoney(prizedLottoList, winningLotto)
         calculateProfitRate(lottoList.size, totalPrizeMoney)
     }
@@ -23,9 +23,9 @@ class LottoPrizeStatics {
     private fun calculatePrizeMoneyMatchFive(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
         val prizeLotto = winningLotto.prizeLotto
         val bonusNumber = winningLotto.bonusNumber
-        return prizedLottoList.filter { it.getPrize(prizeLotto).countOfMatch == Prize.THIRD.countOfMatch }
+        return prizedLottoList.filter { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
             .sumBy {
-                val prize = it.getPrize(prizeLotto, it.isContainNumber(bonusNumber))
+                val prize = Prize.getPrize(it.getCountOfMatchNumber(prizeLotto), it.isContainNumber(bonusNumber))
                 prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
                 prize.prizeMoney
             }
@@ -34,9 +34,9 @@ class LottoPrizeStatics {
     private fun calculatePrizeMoneyExceptMatchFive(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
         val prizeLotto = winningLotto.prizeLotto
         return prizedLottoList
-            .filterNot { it.getPrize(prizeLotto).countOfMatch == Prize.THIRD.countOfMatch }
+            .filterNot { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
             .sumBy {
-                val prize = it.getPrize(prizeLotto)
+                val prize = Prize.getPrize(it.getCountOfMatchNumber(prizeLotto))
                 prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
                 prize.prizeMoney
             }
