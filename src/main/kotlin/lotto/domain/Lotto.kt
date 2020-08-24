@@ -12,11 +12,14 @@ class Lotto private constructor(private val numbers: Set<LottoNumber>) {
 
     private constructor() : this(
         LOTTO_NUMBERS.shuffled().subList(0, COUNT_OF_NUMBERS)
-            .sorted().map { LottoNumber.from(it) }.toSet()
     )
 
     private constructor(prizeNumber: String) : this(
-        prizeNumber.split(",").asSequence().sorted().map { LottoNumber.from(it.toInt()) }.toSet()
+        prizeNumber.split(",").map { it.toInt() }
+    )
+
+    private constructor(numbers: List<Int>) : this(
+        numbers.sorted().map { LottoNumber.from(it) }.toSet()
     )
 
     fun getCountOfMatchNumber(prizeLotto: Lotto): Int {
