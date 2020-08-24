@@ -6,7 +6,7 @@ class WinningNumbers(private val winningNumbers: List<Int>) {
     }
 
     companion object {
-        fun getInstance(winningNumbers: List<Int>): WinningNumbers {
+        fun newInstance(winningNumbers: List<Int>): WinningNumbers {
             return WinningNumbers(winningNumbers)
         }
     }

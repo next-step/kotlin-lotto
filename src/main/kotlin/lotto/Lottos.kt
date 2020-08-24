@@ -1,17 +1,24 @@
 package lotto
 
-class Lottos(private val amountOfLotto: Int) {
-    private val lottos = (0 until amountOfLotto).map { Lotto() }
-
-    fun getLottos() = lottos
-
+class Lottos(val lottos: List<Lotto>) {
     fun matchLottos(winningLotto: WinningNumbers, bonusBall: Int): List<Rank> {
-        val results = mutableListOf<Rank>()
-        lottos.forEach {
+        return lottos.map {
             val count = it.matchLotto(winningLotto)
             val bonusBallResult = it.matchBonusBall(bonusBall)
-            results.add(Rank.of(count, bonusBallResult))
+            Rank.of(count, bonusBallResult)
         }
-        return results.toList()
+    }
+
+    companion object {
+        fun newInstance(amountOfLotto: Int, manualLottos: List<Lotto>): Lottos {
+            return Lottos(getLottos(amountOfLotto, manualLottos))
+        }
+
+        private fun getLottos(amountOfLotto: Int, manualLottos: List<Lotto>): List<Lotto> {
+            val automaticLottoCount = amountOfLotto - manualLottos.size
+            val autoLottos = (1..automaticLottoCount)
+                .map { Lotto(LottoProgram.getRandomNumbers()) }
+            return manualLottos + autoLottos
+        }
     }
 }
