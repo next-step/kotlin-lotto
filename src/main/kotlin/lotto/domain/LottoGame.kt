@@ -17,4 +17,5 @@ class LottoGame(val lottoList: List<Lotto>) {
     private fun checkMatch(winningLotto: WinningLotto) {
         lottoPrizeStatics.calculateResult(winningLotto, lottoList)
     }
+
 }

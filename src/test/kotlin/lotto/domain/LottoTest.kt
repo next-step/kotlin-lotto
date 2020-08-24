@@ -11,7 +11,14 @@ class LottoTest {
     @Test
     fun validateLottoInput() {
         assertThat(Lotto.from("1,2,3,4,5,6"))
-            .isNotInstanceOf(Exception::class.java)
+            .isInstanceOf(ManualLotto::class.java)
+    }
+
+    @DisplayName("Lotto 생성자 확인, 자동생성 ")
+    @Test
+    fun validateLottoInputEmpty() {
+        assertThat(Lotto.from())
+            .isInstanceOf(AutoLotto::class.java)
     }
 
     @DisplayName("해당 로또에 보너스 번호 포함 여부")
