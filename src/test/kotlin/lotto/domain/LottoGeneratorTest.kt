@@ -9,7 +9,9 @@ class LottoGeneratorTest {
     @DisplayName("로또 생성 반환값 테스트 ")
     @Test
     fun validateLottoGenerator() {
-        assertThat(LottoGenerator.createAutoLottoList("2000"))
+        val lottoGameMoney = LottoGameMoney.from("2000")!!
+
+        assertThat(LottoGenerator.createAutoLottoList(lottoGameMoney.getCountOfGame()))
             .hasSize(2)
     }
 }

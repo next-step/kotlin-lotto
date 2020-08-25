@@ -1,13 +1,7 @@
 package lotto.domain
 
-const val PRICE_OF_LOTTO = 1000
-
 class LottoGame(val lottoList: List<Lotto>) {
     val lottoPrizeStatics = LottoPrizeStatics()
-
-    constructor(gameMoney: String) : this(
-        LottoGenerator.createAutoLottoList(gameMoney)
-    )
 
     fun execute(prizeNumbers: String, bonusNumberInput: String): LottoGameResult {
         val prizeLotto = Lotto.from(prizeNumbers) ?: return LottoGameResult.InvalidPrizeLotto
@@ -24,8 +18,9 @@ class LottoGame(val lottoList: List<Lotto>) {
     }
 
     companion object {
-
-        fun of(gameMoney: String, manualLottos: List<Lotto>): LottoGame =
-            LottoGame(manualLottos.plus(LottoGenerator.createAutoLottoList(gameMoney)))
+        fun of(gameMoney: LottoGameMoney, manualLottos: List<Lotto> = listOf()): LottoGame {
+            val autoLottoCount = gameMoney.getCountOfGame() - manualLottos.size
+            return LottoGame(manualLottos.plus(LottoGenerator.createAutoLottoList(autoLottoCount)))
+        }
     }
 }
