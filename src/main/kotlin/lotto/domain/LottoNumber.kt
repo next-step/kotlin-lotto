@@ -1,7 +1,6 @@
 package lotto.domain
 
-class LottoNumber private constructor(private val number: Int) {
-    fun getNumber() = number
+class LottoNumber private constructor(val number: Int) {
 
     companion object {
         const val INVALID_MESSAGE = "은/는 로또 번호가 아닙니다. 1 ~ 45사이의 값을 넣어주세요."
@@ -10,7 +9,7 @@ class LottoNumber private constructor(private val number: Int) {
         private val NUMBERS: Map<Int, LottoNumber> = (MINIMUM_NUMBER..MAXIMUM_NUMBER).associateWith(::LottoNumber)
 
         fun of(value: Int): LottoNumber {
-            return NUMBERS.getOrElse(value) { throw IllegalArgumentException("$value$INVALID_MESSAGE") }
+            return NUMBERS[value] ?: throw IllegalArgumentException("$value$INVALID_MESSAGE")
         }
     }
 

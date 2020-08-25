@@ -31,6 +31,12 @@ internal class LottoNumberTest {
     }
 
     @Test
+    fun `LottoNumber의 프로퍼티 값이 같으면 같은 객체다`() {
+        val actual = LottoNumber.of(45)
+        assertThat(actual).isSameAs(LottoNumber.of(45))
+    }
+
+    @Test
     fun testToString() {
         val actual = LottoNumber.of(1)
         assertThat(actual.toString()).isEqualTo("1")

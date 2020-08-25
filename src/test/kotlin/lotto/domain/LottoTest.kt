@@ -14,18 +14,18 @@ internal class LottoTest {
     }
 
     @Test
-    fun `6개의 숫자가 아니라면 Lotto를 만들 수 없다`() {
-        assertThatThrownBy { Lotto(1, 2, 3, 4, 5) }
-            .isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage(Lotto.INVALID_MESSAGE)
-        assertThatThrownBy { Lotto(1, 2, 3, 4, 5, 6, 7) }
+    fun `7개 숫자를 넣었지만 하나가 중복인경우 Lotto를 만들 수 없다`() {
+        assertThatThrownBy { Lotto(1, 2, 3, 4, 5, 6, 6) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage(Lotto.INVALID_MESSAGE)
     }
 
     @Test
-    fun `7개 숫자를 넣었지만 하나가 중복인경우 `() {
-        assertThatThrownBy { Lotto(1, 2, 3, 4, 5, 6, 6) }
+    fun `6개의 숫자가 아니라면 Lotto를 만들 수 없다`() {
+        assertThatThrownBy { Lotto(1, 2, 3, 4, 5) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage(Lotto.INVALID_MESSAGE)
+        assertThatThrownBy { Lotto(1, 2, 3, 4, 5, 6, 7) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage(Lotto.INVALID_MESSAGE)
     }
