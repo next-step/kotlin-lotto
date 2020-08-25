@@ -1,5 +1,7 @@
 import lotto.domain.Lotto
 import lotto.domain.LottoGame
+import lotto.domain.LottoGameResult
+import lotto.domain.exhaustive
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -16,11 +18,19 @@ fun main() {
 
     ResultView.showLottoList(lottoGame.lottoList)
 
-    var prizeLotto: Lotto? = null
-    while (prizeLotto == null) {
-        prizeLotto = Lotto.from(InputView.getPrizedNumbers())
-    }
+    showGameResult(lottoGame)
+}
 
-    lottoGame.execute(prizeLotto, InputView.getBonusNumber())
-    ResultView.showPrizeStatics(lottoGame.lottoPrizeStatics)
+fun showGameResult(lottoGame: LottoGame) {
+    val result = lottoGame.execute(InputView.getPrizedNumbers(), InputView.getBonusNumber())
+    when (result) {
+        is LottoGameResult.Success -> {
+            ResultView.showPrizeStatics(lottoGame.lottoPrizeStatics)
+            return
+        }
+        is LottoGameResult.InvalidBonusNumber,
+        is LottoGameResult.IsContainBonusNumber,
+        is LottoGameResult.InvalidPrizeLotto -> ResultView.showErrorMessage(result)
+    }.exhaustive
+    showGameResult(lottoGame)
 }

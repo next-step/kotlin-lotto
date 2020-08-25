@@ -27,8 +27,7 @@ class LottoGameTest {
     @Test
     fun validateBonusNumberNotIncludedPrizeNumber() {
         val lottoGame = LottoGame("2000")
-        val prizeLotto = Lotto.from("1,2,3,4,5,6")
-        assertThatThrownBy { lottoGame.execute(prizeLotto!!, "6") }
-            .isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(lottoGame.execute("1,2,3,4,5,6", "6"))
+            .isInstanceOfAny(LottoGameResult.IsContainBonusNumber::class.java)
     }
 }

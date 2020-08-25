@@ -2,7 +2,7 @@ package lotto.domain
 
 const val MIN_NUMBER = 1
 const val MAX_NUMBER = 45
-private val LOTTO_NUMBER_REGULAR_EXPRESSION = "(\\d{1,2})".toRegex()
+val LOTTO_NUMBER_REGULAR_EXPRESSION = "(\\d{1,2})".toRegex()
 
 open class LottoNumber private constructor(private val number: Int = 0) {
 

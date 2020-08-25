@@ -9,9 +9,14 @@ class LottoGame(val lottoList: List<Lotto>) {
         LottoGenerator.createAutoLottoList(gameMoney)
     )
 
-    fun execute(prizeLotto: Lotto, bonusNumber: String) {
+    fun execute(prizeNumbers: String, bonusNumberInput: String): LottoGameResult {
+        val prizeLotto = Lotto.from(prizeNumbers) ?: return LottoGameResult.InvalidPrizeLotto
+        if (!LOTTO_NUMBER_REGULAR_EXPRESSION.matches(bonusNumberInput)) return LottoGameResult.InvalidBonusNumber
+        val bonusNumber: LottoNumber = LottoNumber.from(bonusNumberInput)
+        if (prizeLotto.isContainNumber(bonusNumber)) return LottoGameResult.IsContainBonusNumber
         val winningLotto = WinningLotto(prizeLotto, bonusNumber)
         checkMatch(winningLotto)
+        return LottoGameResult.Success(prizeNumbers, bonusNumber)
     }
 
     private fun checkMatch(winningLotto: WinningLotto) {
