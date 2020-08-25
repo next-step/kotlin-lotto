@@ -12,7 +12,7 @@ object ResultView {
 
     fun showPrizeStatics(prizeStatics: LottoPrizeStatics) {
         val showPrizeStaticsSentence = StringBuilder("당첨 통계---------\n\n")
-        prizeStatics.prizedLotto.forEach {
+        prizeStatics.prizedLottoList.forEach {
             val prize = it.key
             showPrizeStaticsSentence.append("${prize.countOfMatch}개 일치")
                 .append(if (prize.withBonus) ", 보너스 볼 1개 일치" else "")

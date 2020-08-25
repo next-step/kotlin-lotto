@@ -4,7 +4,7 @@ import lotto.view.ResultView
 
 fun main() {
     val lottoGameMoney = getLottoGameMoney()
-    val manualLottoCount = InputView.getManualLottoCount().toInt()
+    val manualLottoCount = getManualLottoCount(lottoGameMoney)
     val lottoGame = LottoGame.of(lottoGameMoney, getManualLottoList(manualLottoCount))
 
     ResultView.showLottoList(lottoGame.lottoList)
@@ -12,16 +12,27 @@ fun main() {
     showGameResult(lottoGame)
 }
 
-fun getLottoGameMoney(): LottoGameMoney {
-    val gameMoney: LottoGameMoney? = LottoGameMoney.from(InputView.getGameMoney())
-    ResultView.showErrorMessage(gameMoney)
-    if (gameMoney == null) getLottoGameMoney()
-    return gameMoney!!
+fun getManualLottoCount(lottoGameMoney: LottoGameMoney): ManualLottoCount {
+    val manualLottoCount: ManualLottoCount? = ManualLottoCount.from(InputView.getManualLottoCount(), lottoGameMoney)
+    while (manualLottoCount == null) {
+        ResultView.showErrorMessage(manualLottoCount)
+        getManualLottoCount(lottoGameMoney)
+    }
+    return manualLottoCount
 }
 
-fun getManualLottoList(manualLottoCount: Int): List<Lotto> {
+fun getLottoGameMoney(): LottoGameMoney {
+    val gameMoney: LottoGameMoney? = LottoGameMoney.from(InputView.getGameMoney())
+    while (gameMoney == null) {
+        ResultView.showErrorMessage(gameMoney)
+        getLottoGameMoney()
+    }
+    return gameMoney
+}
+
+fun getManualLottoList(manualLottoCount: ManualLottoCount): List<Lotto> {
     val manualLottoList: MutableList<Lotto> = mutableListOf()
-    while (manualLottoCount != manualLottoList.size) {
+    while (manualLottoCount.count != manualLottoList.size) {
         val lotto = Lotto.from(InputView.getManualLottoNumbers())
         if (lotto != null) manualLottoList.add(lotto)
     }
@@ -32,7 +43,7 @@ fun showGameResult(lottoGame: LottoGame) {
     val result = lottoGame.execute(InputView.getPrizedNumbers(), InputView.getBonusNumber())
     when (result) {
         is LottoGameResult.Success -> {
-            ResultView.showPrizeStatics(lottoGame.lottoPrizeStatics)
+            ResultView.showPrizeStatics(result.lottoPrizeStatics)
             return
         }
         is LottoGameResult.InvalidBonusNumber,

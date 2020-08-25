@@ -9,9 +9,9 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoGameMoneyTest {
 
-    @DisplayName("로또 구매 금액 입력값 확인하기, 에")
+    @DisplayName("로또 구매 금액 입력값 확인하기, 에러")
     @ParameterizedTest
-    @ValueSource(strings = ["-1000", "500"])
+    @ValueSource(strings = ["-1000", "500", "ss", "%"])
     fun validateLottoGameMoneyInput(gameMoney: String) {
         assertThat(LottoGameMoney.from(gameMoney))
             .isNull()

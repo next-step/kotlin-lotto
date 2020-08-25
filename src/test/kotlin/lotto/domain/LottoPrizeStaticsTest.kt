@@ -9,14 +9,18 @@ class LottoPrizeStaticsTest {
     @DisplayName("로또 상금 통계 리스트 유효성 체크")
     @Test
     fun validatePrizedLotto() {
-        assertThat(LottoPrizeStatics().prizedLotto.size)
+        val prizeLotto = Lotto.from("1,2,3,4,5,6")!!
+        val bonusNumber = LottoNumber.from("7")
+        val winningLotto = WinningLotto(prizeLotto, bonusNumber)
+        val lottoList = LottoGenerator.createAutoLottoList(3)
+        LottoPrizeStatics(winningLotto, lottoList)
+        assertThat(LottoPrizeStatics(winningLotto, lottoList).prizedLottoList.size)
             .isEqualTo(Prize.values().size - 1)
     }
 
     @DisplayName("수익률 체크")
     @Test
     fun checkCalculateProfitRate() {
-        val lottoPrizeStatics = LottoPrizeStatics()
         val prizeLotto = Lotto.from("1,2,3,4,5,6")!!
         val bonusNumber = LottoNumber.from(7)
 
@@ -24,7 +28,7 @@ class LottoPrizeStaticsTest {
         val lotto2 = Lotto.from("21,12,13,14,15,16")!!
         val lottoList = listOf(lotto1, lotto2)
         val winningLotto = WinningLotto(prizeLotto, bonusNumber)
-        lottoPrizeStatics.calculateResult(winningLotto, lottoList)
+        val lottoPrizeStatics = LottoPrizeStatics(winningLotto, lottoList)
         val profitRate = lottoPrizeStatics.profitRate
 
         assertThat(profitRate).isEqualTo(0.0)

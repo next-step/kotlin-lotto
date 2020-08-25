@@ -1,7 +1,6 @@
 package lotto.domain
 
 class LottoGame(val lottoList: List<Lotto>) {
-    val lottoPrizeStatics = LottoPrizeStatics()
 
     fun execute(prizeNumbers: String, bonusNumberInput: String): LottoGameResult {
         val prizeLotto = Lotto.from(prizeNumbers) ?: return LottoGameResult.InvalidPrizeLotto
@@ -9,13 +8,10 @@ class LottoGame(val lottoList: List<Lotto>) {
         val bonusNumber: LottoNumber = LottoNumber.from(bonusNumberInput)
         if (prizeLotto.isContainNumber(bonusNumber)) return LottoGameResult.IsContainBonusNumber
         val winningLotto = WinningLotto(prizeLotto, bonusNumber)
-        checkMatch(winningLotto)
-        return LottoGameResult.Success(prizeNumbers, bonusNumber)
+        val prizeStatics = LottoPrizeStatics(winningLotto, lottoList)
+        return LottoGameResult.Success(prizeNumbers, bonusNumber, prizeStatics)
     }
 
-    private fun checkMatch(winningLotto: WinningLotto) {
-        lottoPrizeStatics.calculateResult(winningLotto, lottoList)
-    }
 
     companion object {
         fun of(gameMoney: LottoGameMoney, manualLottos: List<Lotto> = listOf()): LottoGame {
