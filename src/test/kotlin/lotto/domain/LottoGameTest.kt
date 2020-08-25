@@ -23,20 +23,12 @@ class LottoGameTest {
         assertThat(lottoGame.lottoList.size).isEqualTo(2)
     }
 
-    @DisplayName("당첨번호 입력값 확인")
-    @ParameterizedTest
-    @ValueSource(strings = ["1,2,3,4,5,", "r", "1.2.3.4.5.6", "1,1,1,1,1,1", "$"])
-    fun validatePrizeLotto(prizeNumber: String) {
-        val lottoGame = LottoGame("3000")
-        assertThatThrownBy { lottoGame.execute(prizeNumber, "7") }
-            .isInstanceOf(IllegalArgumentException::class.java)
-    }
-
     @DisplayName("보너스 숫자는 당첨번호에 포함되지 않아야함")
     @Test
     fun validateBonusNumberNotIncludedPrizeNumber() {
         val lottoGame = LottoGame("2000")
-        assertThatThrownBy { lottoGame.execute("1,2,3,4,5,6", "6") }
+        val prizeLotto = Lotto.from("1,2,3,4,5,6")
+        assertThatThrownBy { lottoGame.execute(prizeLotto!!, "6") }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
 }

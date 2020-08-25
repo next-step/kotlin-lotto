@@ -12,7 +12,6 @@ object LottoGenerator {
 
     private fun checkValidation(gameMoney: String) {
         require(GAME_MONEY_REGULAR_EXPRESSION.matches(gameMoney)) { "$PRICE_OF_LOTTO 보다 큰 숫자를 입력해주세요." }
-        require(gameMoney.toInt() > PRICE_OF_LOTTO) { "$PRICE_OF_LOTTO 보다 큰 숫자를 입력해주세요." }
+        require(gameMoney.toInt() >= PRICE_OF_LOTTO) { "$PRICE_OF_LOTTO 보다 큰 숫자를 입력해주세요." }
     }
-
 }

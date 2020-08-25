@@ -17,12 +17,12 @@ class LottoPrizeStaticsTest {
     @Test
     fun checkCalculateProfitRate() {
         val lottoPrizeStatics = LottoPrizeStatics()
-        val prizeLotto = Lotto.from("1,2,3,4,5,6")
+        val prizeLotto = Lotto.from("1,2,3,4,5,6")!!
         val bonusNumber = LottoNumber.from(7)
-        val lottoList = listOf(
-            Lotto.from("11,12,13,14,15,16"),
-            Lotto.from("21,12,13,14,15,16")
-        )
+
+        val lotto1 = Lotto.from("11,12,13,14,15,16")!!
+        val lotto2 = Lotto.from("21,12,13,14,15,16")!!
+        val lottoList = listOf(lotto1, lotto2)
         val winningLotto = WinningLotto(prizeLotto, bonusNumber)
         lottoPrizeStatics.calculateResult(winningLotto, lottoList)
         val profitRate = lottoPrizeStatics.profitRate

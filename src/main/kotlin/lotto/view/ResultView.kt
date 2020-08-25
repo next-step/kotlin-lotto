@@ -2,11 +2,13 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizeStatics
+import lotto.domain.ManualLotto
 
 object ResultView {
 
     fun showLottoList(lottos: List<Lotto>) {
-        println("${lottos.size} 개를 구매했습니다.")
+        val manualLottoCount = lottos.filterIsInstance<ManualLotto>().count()
+        println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottos.size - manualLottoCount}을 구매했습니다.")
         lottos.forEach { println(it.toString()) }
     }
 
@@ -21,9 +23,5 @@ object ResultView {
         showPrizeStaticsSentence.append("\n총 수익률은 ${prizeStatics.profitRate} 입니다.")
         if (prizeStatics.profitRate < 1) showPrizeStaticsSentence.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
         println(showPrizeStaticsSentence)
-    }
-
-    fun print(message: String?) {
-        println(message)
     }
 }

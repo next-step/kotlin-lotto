@@ -13,7 +13,7 @@ class WinningLottoTest {
         val prizeLotto = Lotto.from("1,2,3,4,5,6")
         val bonusNumber = LottoNumber.from("5")
 
-        assertThatThrownBy { WinningLotto(prizeLotto, bonusNumber) }
+        assertThatThrownBy { WinningLotto(prizeLotto!!, bonusNumber) }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
 
@@ -23,7 +23,7 @@ class WinningLottoTest {
         val prizeLotto = Lotto.from("1,2,3,4,5,6")
         val bonusNumber = LottoNumber.from("7")
 
-        assertThat(WinningLotto(prizeLotto, bonusNumber))
+        assertThat(WinningLotto(prizeLotto!!, bonusNumber))
             .isNotInstanceOfAny(Exception::class.java)
     }
 }

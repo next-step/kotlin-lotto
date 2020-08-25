@@ -1,7 +1,6 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -11,7 +10,7 @@ class LottoTest {
     @Test
     fun validateLottoInput() {
         assertThat(Lotto.from("1,2,3,4,5,6"))
-            .isInstanceOf(ManualLotto::class.java)
+            .isNotNull
     }
 
     @DisplayName("Lotto 생성자 확인, 자동생성 ")
@@ -26,21 +25,21 @@ class LottoTest {
     fun checkBonusNumber() {
         val lotto = Lotto.from("1,2,3,4,5,6")
         val bonusNumber = LottoNumber.from(1)
-        assertThat(lotto.isContainNumber(bonusNumber))
+        assertThat(lotto!!.isContainNumber(bonusNumber))
             .isEqualTo(true)
     }
 
     @DisplayName("Lotto 테스트, 갯수 확인")
     @Test
     fun validateLottoCount() {
-        assertThatThrownBy { Lotto.from("1,2,3,4") }
-            .isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(Lotto.from("1,2,3,4"))
+            .isNull()
     }
 
     @DisplayName("Lotto 테스트, 중복 및 갯수 확인")
     @Test
     fun validateLottoCountAndDuplication() {
-        assertThatThrownBy { Lotto.from("1,2,3,4,5,5") }
-            .isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(Lotto.from("1,2,3,4,5,5"))
+            .isNull()
     }
 }

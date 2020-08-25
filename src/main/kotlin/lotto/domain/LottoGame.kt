@@ -9,8 +9,8 @@ class LottoGame(val lottoList: List<Lotto>) {
         LottoGenerator.createAutoLottoList(gameMoney)
     )
 
-    fun execute(prizeNumber: String, bonusNumber: String) {
-        val winningLotto = WinningLotto(prizeNumber, bonusNumber)
+    fun execute(prizeLotto: Lotto, bonusNumber: String) {
+        val winningLotto = WinningLotto(prizeLotto, bonusNumber)
         checkMatch(winningLotto)
     }
 
@@ -18,4 +18,9 @@ class LottoGame(val lottoList: List<Lotto>) {
         lottoPrizeStatics.calculateResult(winningLotto, lottoList)
     }
 
+    companion object {
+
+        fun of(gameMoney: String, manualLottos: List<Lotto>): LottoGame =
+            LottoGame(manualLottos.plus(LottoGenerator.createAutoLottoList(gameMoney)))
+    }
 }

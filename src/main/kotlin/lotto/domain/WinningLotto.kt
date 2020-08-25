@@ -5,8 +5,8 @@ class WinningLotto(val prizeLotto: Lotto, val bonusNumber: LottoNumber) {
         checkValidation()
     }
 
-    constructor(prizeLotto: String, bonusNumber: String) : this(
-        Lotto.from(prizeLotto),
+    constructor(prizeLotto: Lotto, bonusNumber: String) : this(
+        prizeLotto,
         LottoNumber.from(bonusNumber)
     )
 

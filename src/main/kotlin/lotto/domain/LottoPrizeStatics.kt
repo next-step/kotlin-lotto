@@ -33,8 +33,7 @@ class LottoPrizeStatics {
 
     private fun calculatePrizeMoneyExceptMatchFive(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
         val prizeLotto = winningLotto.prizeLotto
-        return prizedLottoList
-            .filterNot { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
+        return prizedLottoList.filter { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
             .sumBy {
                 val prize = Prize.getPrize(it.getCountOfMatchNumber(prizeLotto))
                 prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
