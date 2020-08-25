@@ -25,9 +25,7 @@ class ManualLottoCountTest {
             { assertThat(ManualLottoCount.from("1", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
             { assertThat(ManualLottoCount.from("2", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
             { assertThat(ManualLottoCount.from("3", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
-            { assertThat(ManualLottoCount.from("4", gameMoney)).isNull()}
+            { assertThat(ManualLottoCount.from("4", gameMoney)).isNull() }
         )
-
     }
-
 }

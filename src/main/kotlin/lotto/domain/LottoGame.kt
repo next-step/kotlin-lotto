@@ -12,7 +12,6 @@ class LottoGame(val lottoList: List<Lotto>) {
         return LottoGameResult.Success(prizeNumbers, bonusNumber, prizeStatics)
     }
 
-
     companion object {
         fun of(gameMoney: LottoGameMoney, manualLottos: List<Lotto> = listOf()): LottoGame {
             val autoLottoCount = gameMoney.getCountOfGame() - manualLottos.size

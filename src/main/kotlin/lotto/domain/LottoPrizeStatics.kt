@@ -48,7 +48,7 @@ class LottoPrizeStatics(winningLotto: WinningLotto, lottoList: List<Lotto>) {
     }
 
     private fun calculateProfitRate(count: Int, totalPrizeMoney: Int) {
-        if(count == 0) return
+        if (count == 0) return
         profitRate = totalPrizeMoney.toBigDecimal()
             .divide((count * PRICE_OF_LOTTO).toBigDecimal(), 2, BigDecimal.ROUND_HALF_EVEN)
             .stripTrailingZeros().toDouble()

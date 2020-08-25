@@ -1,6 +1,12 @@
 package lotto.view
 
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoPrizeStatics
+import lotto.domain.COUNT_OF_NUMBERS
+import lotto.domain.LottoGameResult
+import lotto.domain.ManualLotto
+import lotto.domain.MAX_NUMBER
+import lotto.domain.MIN_NUMBER
 
 object ResultView {
 

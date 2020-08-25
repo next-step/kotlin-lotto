@@ -1,4 +1,8 @@
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoGame
+import lotto.domain.LottoGameMoney
+import lotto.domain.LottoGameResult
+import lotto.domain.ManualLottoCount
 import lotto.view.InputView
 import lotto.view.ResultView
 
