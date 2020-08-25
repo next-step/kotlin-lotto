@@ -1,12 +1,6 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.LottoPrizeStatics
-import lotto.domain.COUNT_OF_NUMBERS
-import lotto.domain.LottoGameResult
-import lotto.domain.ManualLotto
-import lotto.domain.MAX_NUMBER
-import lotto.domain.MIN_NUMBER
+import lotto.domain.*
 
 object ResultView {
 
@@ -29,9 +23,10 @@ object ResultView {
         println(showPrizeStaticsSentence)
     }
 
-    fun showErrorMessage(result: Any?) {
-        if (result == null) println("입력값을 확인해주세요.")
-        when (result) {
+    fun showErrorMessage(message: Any?) {
+        if (message == null) println("입력값을 확인해주세요.")
+        if (message is String) println(message)
+        when (message) {
             is LottoGameResult.InvalidBonusNumber -> println("$MIN_NUMBER~$MAX_NUMBER 사이의 숫자를 입력해 주세요.")
             is LottoGameResult.InvalidPrizeLotto -> println("$MIN_NUMBER~$MAX_NUMBER 사이의 숫자 ${COUNT_OF_NUMBERS}개 를 ',' 와 함께 입력해주세요.")
             is LottoGameResult.IsContainBonusNumber -> println("당첨번호에 포함되지 않는 보너스 볼을 입력해주세요.")

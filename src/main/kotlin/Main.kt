@@ -7,13 +7,17 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val lottoGameMoney = getLottoGameMoney()
-    val manualLottoCount = getManualLottoCount(lottoGameMoney)
-    val lottoGame = LottoGame.of(lottoGameMoney, getManualLottoList(manualLottoCount))
+    try {
+        val lottoGameMoney = getLottoGameMoney()
+        val manualLottoCount = getManualLottoCount(lottoGameMoney)
+        val lottoGame = LottoGame.of(lottoGameMoney, getManualLottoList(manualLottoCount))
 
-    ResultView.showLottoList(lottoGame.lottoList)
+        ResultView.showLottoList(lottoGame.lottoList)
 
-    showGameResult(lottoGame)
+        showGameResult(lottoGame)
+    } catch (e: Exception) {
+        ResultView.showErrorMessage(e.message)
+    }
 }
 
 fun getManualLottoCount(lottoGameMoney: LottoGameMoney): ManualLottoCount {
