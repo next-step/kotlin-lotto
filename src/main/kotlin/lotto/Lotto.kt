@@ -21,7 +21,6 @@ class Lotto(private val number: Set<Int>) {
 
         val bonusCheck = this.numbers.contains(bonusNumber)
 
-
         return Rank.valueOf(counts, bonusCheck)
     }
 
