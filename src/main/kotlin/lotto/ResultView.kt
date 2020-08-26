@@ -10,26 +10,26 @@ object ResultView {
     fun printWinnerStatistics(prizeRecord: List<Rank>) {
         println("당첨 통계")
         println("----------")
-        val splitPrize = prizeRecord.groupBy { it.matchCount }
+        val splitPrize = prizeRecord.groupingBy { it }.eachCount()
         println(
             "${Rank.THREE_MATCH.matchCount} 개 일치 (${Rank.THREE_MATCH.reward}) - " +
-                "${splitPrize[Rank.THREE_MATCH.matchCount]?.size ?: 0}개"
+                "${splitPrize[Rank.THREE_MATCH] ?: 0}개"
         )
         println(
             "${Rank.FOUR_MATCH.matchCount} 개 일치 (${Rank.FOUR_MATCH.reward}) - " +
-                "${splitPrize[Rank.FOUR_MATCH.matchCount]?.size ?: 0}개"
+                "${splitPrize[Rank.FOUR_MATCH] ?: 0}개"
         )
         println(
             "${Rank.FIVE_MATCH.matchCount} 개 일치 (${Rank.FIVE_MATCH.reward}) - " +
-                "${splitPrize[Rank.FIVE_MATCH.matchCount]?.size ?: 0}개"
+                "${splitPrize[Rank.FIVE_MATCH] ?: 0}개"
         )
         println(
             "${Rank.FIVE_BONUS_MATCH.matchCount} 개 일치, 보너스 볼 일치 (${Rank.FIVE_BONUS_MATCH.reward}) - " +
-                "${splitPrize[Rank.FIVE_BONUS_MATCH.matchCount]?.size ?: 0}개"
+                "${splitPrize[Rank.FIVE_BONUS_MATCH] ?: 0}개"
         )
         println(
             "${Rank.ALL_MATCH.matchCount} 개 일치 (${Rank.ALL_MATCH.reward}) - " +
-                "${splitPrize[Rank.ALL_MATCH.matchCount]?.size ?: 0}개"
+                "${splitPrize[Rank.ALL_MATCH] ?: 0}개"
         )
     }
 

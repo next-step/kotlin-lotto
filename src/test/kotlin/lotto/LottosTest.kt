@@ -9,7 +9,7 @@ class LottosTest {
     @Test
     @DisplayName("ticket size check")
     fun ticketSizeCheck() {
-        val sampleTicket = Lottos(14)
-        assertThat(sampleTicket.purchasedLotto.size).isEqualTo(14)
+        val sampleTicket = Lottos()
+        assertThat(sampleTicket.purchasedLotto.size).isEqualTo(0)
     }
 }

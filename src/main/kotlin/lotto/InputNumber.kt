@@ -14,9 +14,12 @@ object InputNumber {
         }
     }
 
-    fun buyHandLotto():Int{
-        println("수동으로 구매할 번호를 입력하세요")
-        return readLine()!!.toInt()
+    fun buyLottos(enableLotto: Lottos, tickets: Int) {
+        println("수동으로 구매할 로또 수 를 입력하세요")
+        val handtickets = readLine()!!.toInt()
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        repeat(handtickets) { enableLotto.addPurchasedLottoHand(readLine()!!.split(",").map { it.toInt() }.toSet()) }
+        repeat(tickets - handtickets) { enableLotto.addPurchasedLottoAuto() }
     }
 
     fun winningNumberInput(): List<Int> {
