@@ -1,39 +1,29 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottoTest {
     val winningNumber = listOf(1, 2, 3, 14, 15, 16)
-    val userNumber = listOf(1, 2, 3, 4, 5, 6)
+    val winningNumberBonus = listOf(1, 2, 3, 4, 5, 17)
 
     @Test
-    @DisplayName("test input money")
-    fun inputTest() {
-        assertThat(InputNumber.buy()).isEqualTo(14)
-    }
-
-    @Test
-    fun `generateTest`() {
-        assertThat(Lotto().generateTest(setOf(1, 2, 3, 4, 5, 6))).isEqualTo(true)
+    fun testExpectedExceptionWithSuperType() {
+        Assertions.assertThrows(
+            IllegalArgumentException::class.java
+        ) { Lotto().validateSize(setOf(1, 2, 3, 4, 5, 6, 7)) }
     }
 
     @Test
     @DisplayName("Ticket")
     fun ticketsTest() {
-        assertThat(Lottos(14)).isEqualTo(14)
+        assertThat(Lottos(14).purchasedLotto.size).isEqualTo(14)
     }
 
     @Test
-    @DisplayName("Check to change Prize")
-    fun prize() {
-        assertThat(Rank.findMatchCount(5)).isEqualTo(Rank)
+    fun `bonusCheck`() {
+        assertThat(Lotto().getPrizeWithBonus(winningNumberBonus, 7)).isEqualTo(Rank.FIVE_BONUS_MATCH)
     }
-
-    @Test
-    fun `rewardCheck`() {
-        assertThat(Lotto().getPrizeTest(userNumber, winningNumber)).isEqualTo(Rank.THREE_MATCH)
-    }
-
 }
