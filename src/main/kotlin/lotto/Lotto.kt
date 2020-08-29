@@ -2,6 +2,7 @@ package lotto
 
 class Lotto(private val number: Set<Int>) {
     private val _numbers = mutableListOf<Int>()
+    private val _sampleTest: List<Int> = listOf(1, 2, 3, 4, 5, 7)
     val numbers: List<Int> get() = _numbers
 
     init {
@@ -10,12 +11,7 @@ class Lotto(private val number: Set<Int>) {
         }
         _numbers.addAll(number)
     }
-
-    fun generate() {
-
-        _numbers.addAll(number)
-    }
-
+  
     fun getPrizeWithBonus(winningNumber: List<Int>, bonusNumber: Int): Rank {
         val counts = this._numbers.count { number -> winningNumber.contains(number) }
 
