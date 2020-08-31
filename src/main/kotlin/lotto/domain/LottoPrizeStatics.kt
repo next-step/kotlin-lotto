@@ -6,7 +6,7 @@ class LottoPrizeStatics(winningLotto: WinningLotto, lottoList: List<Lotto>) {
     init {
         val prizeLotto = winningLotto.prizeLotto
         val prizedLottoList = lottoList.filter { it.getCountOfMatchNumber(prizeLotto) >= Prize.FIFTH.countOfMatch }
-        val totalPrizeMoney = calculateTotalPrizeMoney(prizedLottoList, winningLotto)
+        val totalPrizeMoney = calculatePrizeMoney(prizedLottoList, winningLotto)
         calculateProfitRate(lottoList.size, totalPrizeMoney)
     }
 
@@ -18,27 +18,8 @@ class LottoPrizeStatics(winningLotto: WinningLotto, lottoList: List<Lotto>) {
 
     val prizedLottoList = prizedLotto.toMap()
 
-    private fun calculateTotalPrizeMoney(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int =
-        calculatePrizeMoneyMatchFive(
-            prizedLottoList,
-            winningLotto
-        ) + calculatePrizeMoneyExceptMatchFive(prizedLottoList, winningLotto)
-
-    private fun calculatePrizeMoneyMatchFive(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
-        val prizeLotto = winningLotto.prizeLotto
-        val bonusNumber = winningLotto.bonusNumber
-        return prizedLottoList.filter { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
-            .sumBy {
-                val prize = Prize.getPrize(it.getCountOfMatchNumber(prizeLotto), it.isContainNumber(bonusNumber))
-                prizedLotto[prize] = prizedLotto[prize]!! + 1
-                prize.prizeMoney
-            }
-    }
-
-    private fun calculatePrizeMoneyExceptMatchFive(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
-        val prizeLotto = winningLotto.prizeLotto
+    private fun calculatePrizeMoney(prizedLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
         return prizedLottoList
-            .filterNot { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
             .sumBy {
                 val prize = winningLotto.getPrizeMoney(it)
                 prizedLotto[prize] = prizedLotto[prize]!! + 1

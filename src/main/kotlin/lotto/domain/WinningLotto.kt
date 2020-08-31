@@ -1,8 +1,12 @@
 package lotto.domain
 
 data class WinningLotto(val prizeLotto: Lotto, val bonusNumber: LottoNumber) {
-    fun getPrizeMoney(lotto: Lotto): Prize =
-        Prize.getPrize(lotto.getCountOfMatchNumber(prizeLotto))
+
+    fun getPrizeMoney(lotto: Lotto): Prize {
+        val count = lotto.getCountOfMatchNumber(prizeLotto)
+        val isContainBonusNumber = (count == Prize.THIRD.countOfMatch && lotto.isContainNumber(bonusNumber))
+        return Prize.getPrize(lotto.getCountOfMatchNumber(prizeLotto), isContainBonusNumber)
+    }
 
     companion object {
         fun from(prizeNumbers: String, bonusNumberInput: String): WinningLottoResult {
@@ -14,3 +18,4 @@ data class WinningLotto(val prizeLotto: Lotto, val bonusNumber: LottoNumber) {
         }
     }
 }
+
