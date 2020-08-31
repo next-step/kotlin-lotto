@@ -30,7 +30,7 @@ class LottoPrizeStatics(winningLotto: WinningLotto, lottoList: List<Lotto>) {
         return prizedLottoList.filter { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
             .sumBy {
                 val prize = Prize.getPrize(it.getCountOfMatchNumber(prizeLotto), it.isContainNumber(bonusNumber))
-                prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
+                prizedLotto[prize] = prizedLotto[prize]!! + 1
                 prize.prizeMoney
             }
     }
@@ -42,7 +42,7 @@ class LottoPrizeStatics(winningLotto: WinningLotto, lottoList: List<Lotto>) {
             .sumBy {
                 val prize = Prize.getPrize(it.getCountOfMatchNumber(prizeLotto))
                 println(prize)
-                prizedLotto[prize] = prizedLotto[prize]!!.plus(1)
+                prizedLotto[prize] = prizedLotto[prize]!! + 1
                 prize.prizeMoney
             }
     }

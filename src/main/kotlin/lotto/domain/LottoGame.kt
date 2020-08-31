@@ -15,7 +15,7 @@ class LottoGame(val lottoList: List<Lotto>) {
     companion object {
         fun of(gameMoney: LottoGameMoney, manualLottos: List<Lotto> = listOf()): LottoGame {
             val autoLottoCount = gameMoney.getCountOfGame() - manualLottos.size
-            return LottoGame(manualLottos.plus(LottoGenerator.createAutoLottoList(autoLottoCount)))
+            return LottoGame(manualLottos + LottoGenerator.createAutoLottoList(autoLottoCount))
         }
     }
 }
