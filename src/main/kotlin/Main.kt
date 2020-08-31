@@ -2,7 +2,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoGame
 import lotto.domain.LottoGameMoney
 import lotto.domain.LottoGameResult
-import lotto.domain.ManualLottoCount
+import lotto.domain.NumberOfManualLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -20,13 +20,13 @@ fun main() {
     }
 }
 
-fun getManualLottoCount(lottoGameMoney: LottoGameMoney): ManualLottoCount {
-    val manualLottoCount: ManualLottoCount? = ManualLottoCount.of(InputView.getManualLottoCount(), lottoGameMoney)
-    while (manualLottoCount == null) {
-        ResultView.showErrorMessage(manualLottoCount)
+fun getManualLottoCount(lottoGameMoney: LottoGameMoney): NumberOfManualLotto {
+    val numberOfManualLotto: NumberOfManualLotto? = NumberOfManualLotto.of(InputView.getManualLottoCount(), lottoGameMoney)
+    while (numberOfManualLotto == null) {
+        ResultView.showErrorMessage(numberOfManualLotto)
         getManualLottoCount(lottoGameMoney)
     }
-    return manualLottoCount
+    return numberOfManualLotto
 }
 
 fun getLottoGameMoney(): LottoGameMoney {
@@ -38,9 +38,9 @@ fun getLottoGameMoney(): LottoGameMoney {
     return gameMoney
 }
 
-fun getManualLottoList(manualLottoCount: ManualLottoCount): List<Lotto> {
+fun getManualLottoList(numberOfManualLotto: NumberOfManualLotto): List<Lotto> {
     val manualLottoList: MutableList<Lotto> = mutableListOf()
-    while (manualLottoCount.count != manualLottoList.size) {
+    while (numberOfManualLotto.count != manualLottoList.size) {
         val lotto = Lotto.from(InputView.getManualLottoNumbers())
         if (lotto != null) manualLottoList.add(lotto)
     }

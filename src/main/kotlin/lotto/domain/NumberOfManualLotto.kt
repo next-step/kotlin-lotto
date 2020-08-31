@@ -2,13 +2,13 @@ package lotto.domain
 
 private val LOTTO_COUNT_REGULAR_EXPRESSION = "(\\d*)".toRegex()
 
-data class ManualLottoCount(val count: Int) {
+data class NumberOfManualLotto(val count: Int) {
     companion object {
-        fun of(manualLotto: String, gameMoney: LottoGameMoney): ManualLottoCount? {
+        fun of(manualLotto: String, gameMoney: LottoGameMoney): NumberOfManualLotto? {
             if (!LOTTO_COUNT_REGULAR_EXPRESSION.matches(manualLotto)) return null
             val count = manualLotto.toInt()
             if (gameMoney.getCountOfGame() < count) return null
-            return ManualLottoCount(count)
+            return NumberOfManualLotto(count)
         }
     }
 }

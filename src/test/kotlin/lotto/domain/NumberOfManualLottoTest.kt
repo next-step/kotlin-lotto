@@ -7,13 +7,13 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class ManualLottoCountTest {
+class NumberOfManualLottoTest {
     @DisplayName("수동으로 구매할 로또 갯수, 에러")
     @ParameterizedTest
     @ValueSource(strings = ["-1000", "500", "ss", "%"])
     fun validateManualLottoCountInput(manualLottoCount: String) {
         val gameMoney = LottoGameMoney.from("1000")!!
-        assertThat(ManualLottoCount.of(manualLottoCount, gameMoney))
+        assertThat(NumberOfManualLotto.of(manualLottoCount, gameMoney))
             .isNull()
     }
 
@@ -22,10 +22,10 @@ class ManualLottoCountTest {
     fun validateManualLottoCountInput() {
         val gameMoney = LottoGameMoney.from("3000")!!
         assertAll(
-            { assertThat(ManualLottoCount.of("1", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
-            { assertThat(ManualLottoCount.of("2", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
-            { assertThat(ManualLottoCount.of("3", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
-            { assertThat(ManualLottoCount.of("4", gameMoney)).isNull() }
+            { assertThat(NumberOfManualLotto.of("1", gameMoney)).isInstanceOfAny(NumberOfManualLotto::class.java) },
+            { assertThat(NumberOfManualLotto.of("2", gameMoney)).isInstanceOfAny(NumberOfManualLotto::class.java) },
+            { assertThat(NumberOfManualLotto.of("3", gameMoney)).isInstanceOfAny(NumberOfManualLotto::class.java) },
+            { assertThat(NumberOfManualLotto.of("4", gameMoney)).isNull() }
         )
     }
 }
