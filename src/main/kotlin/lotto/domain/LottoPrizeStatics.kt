@@ -41,7 +41,6 @@ class LottoPrizeStatics(winningLotto: WinningLotto, lottoList: List<Lotto>) {
             .filterNot { it.getCountOfMatchNumber(prizeLotto) == Prize.THIRD.countOfMatch }
             .sumBy {
                 val prize = Prize.getPrize(it.getCountOfMatchNumber(prizeLotto))
-                println(prize)
                 prizedLotto[prize] = prizedLotto[prize]!! + 1
                 prize.prizeMoney
             }
