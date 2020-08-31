@@ -2,9 +2,8 @@ package lotto.domain
 
 sealed class LottoGameResult {
     data class Success(
-        val prizeNumber: String,
-        val bonusNumber: LottoNumber,
-        val lottoPrizeStatics: LottoPrizeStatics
+        val winningLotto: WinningLotto,
+        val prizeStatics: LottoPrizeStatics
     ) : LottoGameResult()
 
     object InvalidBonusNumber : LottoGameResult()

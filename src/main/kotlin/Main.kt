@@ -46,7 +46,7 @@ tailrec fun showGameResult(lottoGame: LottoGame) {
     val result = lottoGame.execute(InputView.getPrizedNumbers(), InputView.getBonusNumber())
     when (result) {
         is LottoGameResult.Success -> {
-            ResultView.showPrizeStatics(result.lottoPrizeStatics)
+            ResultView.showPrizeStatics(result.prizeStatics)
             return
         }
         is LottoGameResult.InvalidBonusNumber,
