@@ -21,21 +21,16 @@ fun main() {
 }
 
 fun getManualLottoCount(lottoGameMoney: LottoGameMoney): NumberOfManualLotto {
-    val numberOfManualLotto: NumberOfManualLotto? = NumberOfManualLotto.of(InputView.getManualLottoCount(), lottoGameMoney)
-    while (numberOfManualLotto == null) {
-        ResultView.showErrorMessage(numberOfManualLotto)
-        getManualLottoCount(lottoGameMoney)
-    }
-    return numberOfManualLotto
+    val numberOfManualLotto: NumberOfManualLotto? =
+        NumberOfManualLotto.of(InputView.getManualLottoCount(), lottoGameMoney)
+    if (numberOfManualLotto != null) return numberOfManualLotto
+    return getManualLottoCount(lottoGameMoney)
 }
 
-fun getLottoGameMoney(): LottoGameMoney {
+tailrec fun getLottoGameMoney(): LottoGameMoney {
     val gameMoney: LottoGameMoney? = LottoGameMoney.from(InputView.getGameMoney())
-    while (gameMoney == null) {
-        ResultView.showErrorMessage(gameMoney)
-        getLottoGameMoney()
-    }
-    return gameMoney
+    if (gameMoney != null) return gameMoney
+    return getLottoGameMoney()
 }
 
 fun getManualLottoList(numberOfManualLotto: NumberOfManualLotto): List<Lotto> {
@@ -47,7 +42,7 @@ fun getManualLottoList(numberOfManualLotto: NumberOfManualLotto): List<Lotto> {
     return manualLottoList
 }
 
-fun showGameResult(lottoGame: LottoGame) {
+tailrec fun showGameResult(lottoGame: LottoGame) {
     val result = lottoGame.execute(InputView.getPrizedNumbers(), InputView.getBonusNumber())
     when (result) {
         is LottoGameResult.Success -> {
