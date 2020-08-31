@@ -13,9 +13,10 @@ class LottoPrizeStaticsTest {
         val bonusNumber = LottoNumber.from("7")
         val winningLotto = WinningLotto(prizeLotto, bonusNumber)
         val lottoList = LottoGenerator.createAutoLottoList(3)
-        LottoPrizeStatics(winningLotto, lottoList)
-        assertThat(LottoPrizeStatics(winningLotto, lottoList).prizedLottoList.size)
-            .isEqualTo(Prize.values().size - 1)
+
+        val prizedLottoCount = LottoPrizeStatics(winningLotto, lottoList).prizedLottoList.values.sum()
+
+        assertThat(prizedLottoCount).isLessThanOrEqualTo(lottoList.size)
     }
 
     @DisplayName("수익률 체크")

@@ -14,7 +14,7 @@ class LottoPrizeStatics(winningLotto: WinningLotto, lottoList: List<Lotto>) {
         private set
 
     private val prizedLotto: MutableMap<Prize, Int> =
-        mutableMapOf(Prize.FIFTH to 0, Prize.FOURTH to 0, Prize.THIRD to 0, Prize.SECOND to 0, Prize.FIRST to 0)
+        mutableMapOf(Prize.MISS to 0, Prize.FIFTH to 0, Prize.FOURTH to 0, Prize.THIRD to 0, Prize.SECOND to 0, Prize.FIRST to 0)
 
     val prizedLottoList = prizedLotto.toMap()
 
