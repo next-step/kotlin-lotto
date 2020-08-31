@@ -21,7 +21,7 @@ fun main() {
 }
 
 fun getManualLottoCount(lottoGameMoney: LottoGameMoney): ManualLottoCount {
-    val manualLottoCount: ManualLottoCount? = ManualLottoCount.from(InputView.getManualLottoCount(), lottoGameMoney)
+    val manualLottoCount: ManualLottoCount? = ManualLottoCount.of(InputView.getManualLottoCount(), lottoGameMoney)
     while (manualLottoCount == null) {
         ResultView.showErrorMessage(manualLottoCount)
         getManualLottoCount(lottoGameMoney)

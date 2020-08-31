@@ -13,7 +13,7 @@ class ManualLottoCountTest {
     @ValueSource(strings = ["-1000", "500", "ss", "%"])
     fun validateManualLottoCountInput(manualLottoCount: String) {
         val gameMoney = LottoGameMoney.from("1000")!!
-        assertThat(ManualLottoCount.from(manualLottoCount, gameMoney))
+        assertThat(ManualLottoCount.of(manualLottoCount, gameMoney))
             .isNull()
     }
 
@@ -22,10 +22,10 @@ class ManualLottoCountTest {
     fun validateManualLottoCountInput() {
         val gameMoney = LottoGameMoney.from("3000")!!
         assertAll(
-            { assertThat(ManualLottoCount.from("1", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
-            { assertThat(ManualLottoCount.from("2", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
-            { assertThat(ManualLottoCount.from("3", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
-            { assertThat(ManualLottoCount.from("4", gameMoney)).isNull() }
+            { assertThat(ManualLottoCount.of("1", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
+            { assertThat(ManualLottoCount.of("2", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
+            { assertThat(ManualLottoCount.of("3", gameMoney)).isInstanceOfAny(ManualLottoCount::class.java) },
+            { assertThat(ManualLottoCount.of("4", gameMoney)).isNull() }
         )
     }
 }
