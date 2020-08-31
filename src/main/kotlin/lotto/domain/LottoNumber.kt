@@ -34,7 +34,6 @@ open class LottoNumber private constructor(private val number: Int = 0) {
             return lottoNumbers[number] ?: throw IllegalArgumentException("$MIN_NUMBER~$MAX_NUMBER 사이의 숫자를 입력해 주세요.")
         }
 
-        @Throws(NumberFormatException::class)
         fun from(number: String): LottoNumber {
             return from(
                 number.toIntOrNull() ?: throw IllegalArgumentException("$MIN_NUMBER~$MAX_NUMBER 사이의 숫자만 입력해 주세요.")
