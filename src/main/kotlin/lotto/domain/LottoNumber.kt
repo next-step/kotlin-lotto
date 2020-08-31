@@ -36,12 +36,9 @@ open class LottoNumber private constructor(private val number: Int = 0) {
 
         @Throws(NumberFormatException::class)
         fun from(number: String): LottoNumber {
-            checkValidation(number)
-            return from(number.toInt())
-        }
-
-        private fun checkValidation(numberString: String) {
-            require(LOTTO_NUMBER_REGULAR_EXPRESSION.matches(numberString)) { "$MIN_NUMBER~$MAX_NUMBER 사이의 숫자만 입력해 주세요." }
+            return from(
+                number.toIntOrNull() ?: throw IllegalArgumentException("$MIN_NUMBER~$MAX_NUMBER 사이의 숫자만 입력해 주세요.")
+            )
         }
     }
 }
