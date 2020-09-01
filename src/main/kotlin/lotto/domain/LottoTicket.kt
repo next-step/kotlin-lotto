@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTicket(val lottoNumbers: List<LottoNumber>) {
+class LottoTicket private constructor(val lottoNumbers: List<LottoNumber>) {
 
     init {
         validateLottoNumbers(lottoNumbers)

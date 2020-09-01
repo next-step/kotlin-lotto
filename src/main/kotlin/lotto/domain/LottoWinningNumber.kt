@@ -12,7 +12,7 @@ class LottoWinningNumber(numbers: List<Int>, bonusBall: Int) {
         if (numbers.size != numbers.distinct().size) {
             throw IllegalArgumentException(NOT_ALLOW_DISTINCT_NUM)
         }
-        luckyLottoTicket = LottoTicket(numbers.map { LottoNumber(it) })
+        luckyLottoTicket = LottoTicket.from(numbers.map { LottoNumber(it) })
         bonusBallNumber = LottoNumber(bonusBall)
     }
 
