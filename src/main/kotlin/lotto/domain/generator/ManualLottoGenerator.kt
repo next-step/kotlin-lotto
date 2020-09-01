@@ -9,8 +9,11 @@ object ManualLottoGenerator {
 
     fun execute(input: String) = LottoTicket.of(LottoType.MANUAL, parseNumbers(input).toSortedSet())
 
-    private fun parseNumbers(numbers: String) =
+    private fun parseNumbers(numbers: String) = try {
         numbers.split(NUMBER_DELIMITER)
             .filter { it.isNotBlank() }
             .map { LottoNumber.of(it.trim().toInt()) }
+    } catch (e: IllegalArgumentException) {
+        listOf<LottoNumber>()
+    }
 }

@@ -1,7 +1,6 @@
 package lotto.domain.generator
 
 import lotto.domain.lotto.LottoNumber
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -21,11 +20,9 @@ internal class ManualLottoTicketGeneratorTest {
         )
     }
 
-    @DisplayName("유효하지 않은 문자 포함시 예외를 발생시킨다")
+    @DisplayName("유효하지 않은 문자 포함시 로또 생성에 실패한다")
     @Test
     fun numberInRange() {
-        Assertions.assertThatThrownBy {
-            ManualLottoGenerator.execute("1, 2, 3, 4, A, 6")
-        }.isInstanceOf(IllegalArgumentException::class.java)
+        assertThat(ManualLottoGenerator.execute("1, 2, 3, 4, A, 6")).isNull()
     }
 }
