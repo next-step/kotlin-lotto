@@ -5,7 +5,7 @@ class LottoTicket private constructor(
     val numbers: Set<LottoNumber>
 ) {
 
-    fun hasNumber(number: Int) = numbers.contains(LottoNumber(number))
+    fun hasNumber(number: Int) = numbers.contains(LottoNumber.of(number))
 
     fun hasNumber(number: LottoNumber) = numbers.contains(number)
 
@@ -24,6 +24,6 @@ class LottoTicket private constructor(
         }
 
         operator fun invoke(lottoType: LottoType, vararg numbers: Int) =
-            invoke(lottoType, numbers.map { LottoNumber(it) }.filterNotNull().toSet())
+            invoke(lottoType, numbers.map { LottoNumber.of(it) }.filterNotNull().toSet())
     }
 }

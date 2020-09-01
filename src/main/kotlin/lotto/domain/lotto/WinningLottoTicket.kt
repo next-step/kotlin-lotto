@@ -21,7 +21,7 @@ class WinningLottoTicket private constructor(
         }
 
         operator fun invoke(lottoTicket: LottoTicket, bonus: Int): WinningLottoTicket? {
-            val lottoNumber = LottoNumber(bonus) ?: return null
+            val lottoNumber = LottoNumber.of(bonus) ?: return null
             return invoke(lottoTicket, lottoNumber)
         }
     }

@@ -10,7 +10,7 @@ object AutoLottoGenerator {
         LottoType.AUTO,
         LottoNumber.NUMBER_RANGE.shuffled()
             .take(LottoTicket.NUMBER_COUNT)
-            .mapNotNull { LottoNumber(it) }
+            .map { LottoNumber.of(it) }
             .toSortedSet()
     )
 }

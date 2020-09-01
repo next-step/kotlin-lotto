@@ -23,8 +23,8 @@ class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> 
 
     companion object {
         val NUMBER_RANGE = 1..45
-        private val CACHE: Map<Int, LottoNumber> = HashMap(NUMBER_RANGE.associateWith { LottoNumber(it) })
+        private val CACHE: Map<Int, LottoNumber> = NUMBER_RANGE.associateWith { LottoNumber(it) }
 
-        operator fun invoke(number: Int) = CACHE[number]
+        fun of(number: Int): LottoNumber = CACHE[number] ?: throw IllegalArgumentException()
     }
 }

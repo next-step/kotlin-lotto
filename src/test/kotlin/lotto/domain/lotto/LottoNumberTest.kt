@@ -11,6 +11,6 @@ internal class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [-1, 46])
     fun lottoNumberNotInRange(number: Int) {
-        assertThat(LottoNumber(number)).isNull()
+        assertThat(LottoNumber.of(number)).isNull()
     }
 }

@@ -26,9 +26,7 @@ object Application {
     }
 
     private fun inputManualNumbers(manualCount: Int, index: Int) =
-        InputView.readManualNumbers(manualCount - index) {
-            ManualLottoGenerator.execute(it) != null
-        }
+        InputView.readManualNumbers(manualCount - index) { ManualLottoGenerator.execute(it) != null }
 
     private fun processUserPayment(payment: Payment): PaymentResult {
         val result = seller.processPayment(payment)

@@ -12,12 +12,12 @@ internal class ManualLottoTicketGeneratorTest {
     @Test
     fun execute() {
         assertThat(ManualLottoGenerator.execute("1, 2, 3, 4, 5, 6")?.numbers).containsAnyOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6)
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)
         )
     }
 

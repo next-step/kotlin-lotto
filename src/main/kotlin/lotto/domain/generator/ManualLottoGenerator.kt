@@ -12,5 +12,5 @@ object ManualLottoGenerator {
     private fun parseNumbers(numbers: String) =
         numbers.split(NUMBER_DELIMITER)
             .filter { it.isNotBlank() }
-            .mapNotNull { LottoNumber(it.trim().toInt()) }
+            .map { LottoNumber.of(it.trim().toInt()) }
 }
