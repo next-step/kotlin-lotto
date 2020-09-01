@@ -13,7 +13,7 @@ class LottoWinningNumberTest {
     @Test
     fun `내가 구매한 로또와 당첨번호의 비교 - 1등`() {
         val lotto = listOf<LottoTicket>(
-            LottoTicket(
+            LottoTicket.from(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -36,7 +36,7 @@ class LottoWinningNumberTest {
     @Test
     fun `내가 구매한 로또와 당첨번호의 비교 - 2등`() {
         val lotto = listOf<LottoTicket>(
-            LottoTicket(
+            LottoTicket.from(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -59,7 +59,7 @@ class LottoWinningNumberTest {
     @Test
     fun `내가 구매한 로또와 당첨번호의 비교 - 3등`() {
         val lotto = listOf<LottoTicket>(
-            LottoTicket(
+            LottoTicket.from(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),

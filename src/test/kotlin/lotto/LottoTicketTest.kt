@@ -11,7 +11,7 @@ class LottoTicketTest {
     fun `로또에 6개의 번호가 없을 경우`() {
         Assertions.assertThatIllegalArgumentException()
             .isThrownBy {
-                LottoTicket(
+                LottoTicket.from(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2)
@@ -25,7 +25,7 @@ class LottoTicketTest {
     fun `로또에 중복된 번호가 있을 경우`() {
         Assertions.assertThatIllegalArgumentException()
             .isThrownBy {
-                LottoTicket(
+                LottoTicket.from(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),

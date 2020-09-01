@@ -11,7 +11,7 @@ class LottoGameTest {
     @Test
     fun `금액에 맞는 로또티켓이 잘 만들어지는지 확인`() {
         val lottoTickets = listOf<LottoTicket>(
-            LottoTicket(
+            LottoTicket.from(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
