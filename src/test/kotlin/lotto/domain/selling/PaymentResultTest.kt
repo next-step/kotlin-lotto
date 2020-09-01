@@ -31,7 +31,7 @@ internal class PaymentResultTest {
     @Test
     fun exchangeFourthLotto() {
         assertThat(paymentResult.exchange(winningLotto)).isEqualTo(
-            ExchangeResult(2300, hashMapOf(Rank.SECOND_HAS_BONUS to 1, Rank.FOURTH to 1))
+            ExchangeResult(2300, hashMapOf(Rank.SECOND to 1, Rank.FOURTH to 1))
         )
     }
 
