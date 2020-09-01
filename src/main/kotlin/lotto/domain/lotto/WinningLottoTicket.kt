@@ -13,16 +13,16 @@ class WinningLottoTicket private constructor(
 
     companion object {
 
-        operator fun invoke(lottoTicket: LottoTicket, bonus: LottoNumber): WinningLottoTicket? {
+        fun of(lottoTicket: LottoTicket, bonus: LottoNumber): WinningLottoTicket? {
             if (lottoTicket.hasNumber(bonus)) {
                 return null
             }
             return WinningLottoTicket(lottoTicket, bonus)
         }
 
-        operator fun invoke(lottoTicket: LottoTicket, bonus: Int): WinningLottoTicket? {
+        fun of(lottoTicket: LottoTicket, bonus: Int): WinningLottoTicket? {
             val lottoNumber = LottoNumber.of(bonus) ?: return null
-            return invoke(lottoTicket, lottoNumber)
+            return of(lottoTicket, lottoNumber)
         }
     }
 }

@@ -6,7 +6,7 @@ import lotto.domain.lotto.LottoType
 
 object AutoLottoGenerator {
 
-    fun execute() = LottoTicket(
+    fun execute() = LottoTicket.of(
         LottoType.AUTO,
         LottoNumber.NUMBER_RANGE.shuffled()
             .take(LottoTicket.NUMBER_COUNT)

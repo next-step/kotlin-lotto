@@ -41,10 +41,10 @@ object Application {
             lottoTicket = ManualLottoGenerator.execute(InputView.readWinningNumbers())
         }
 
-        var winningLottoTicket = WinningLottoTicket(lottoTicket, InputView.readBonusNumber())
+        var winningLottoTicket = WinningLottoTicket.of(lottoTicket, InputView.readBonusNumber())
         while (winningLottoTicket == null) {
             ResultView.printInvalidBonusNumber()
-            winningLottoTicket = WinningLottoTicket(lottoTicket, InputView.readBonusNumber())
+            winningLottoTicket = WinningLottoTicket.of(lottoTicket, InputView.readBonusNumber())
         }
 
         return winningLottoTicket

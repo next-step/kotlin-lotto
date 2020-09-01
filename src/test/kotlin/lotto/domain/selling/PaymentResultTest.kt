@@ -16,13 +16,13 @@ internal class PaymentResultTest {
 
     @BeforeEach
     fun setUp() {
-        winningLotto = WinningLottoTicket(LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 12)!!, 13)!!
+        winningLotto = WinningLottoTicket.of(LottoTicket.of(LottoType.MANUAL, 1, 2, 3, 10, 11, 12)!!, 13)!!
         paymentResult = PaymentResult(
             2300,
             300,
             listOf(
-                LottoTicket(LottoType.AUTO, 1, 2, 3, 4, 5, 10)!!,
-                LottoTicket(LottoType.MANUAL, 1, 2, 3, 10, 11, 13)!!
+                LottoTicket.of(LottoType.AUTO, 1, 2, 3, 4, 5, 10)!!,
+                LottoTicket.of(LottoType.MANUAL, 1, 2, 3, 10, 11, 13)!!
             )
         )
     }

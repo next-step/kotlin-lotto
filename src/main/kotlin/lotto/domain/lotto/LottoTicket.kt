@@ -16,14 +16,13 @@ class LottoTicket private constructor(
 
         private fun hasValidCount(numbers: Set<LottoNumber>) = numbers.size == NUMBER_COUNT
 
-        operator fun invoke(lottoType: LottoType, numbers: Set<LottoNumber>): LottoTicket? {
+        fun of(lottoType: LottoType, numbers: Set<LottoNumber>): LottoTicket? {
             if (hasValidCount(numbers)) {
                 return LottoTicket(lottoType, numbers.toSortedSet())
             }
             return null
         }
 
-        operator fun invoke(lottoType: LottoType, vararg numbers: Int) =
-            invoke(lottoType, numbers.map { LottoNumber.of(it) }.filterNotNull().toSet())
+        fun of(lottoType: LottoType, vararg numbers: Int) = of(lottoType, numbers.map { LottoNumber.of(it) }.toSet())
     }
 }

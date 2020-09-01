@@ -10,20 +10,20 @@ internal class WinningLottoTicketTest {
 
     @BeforeEach
     fun setUp() {
-        lottoTicket = LottoTicket(LottoType.MANUAL, 1, 2, 3, 4, 5, 6)!!
+        lottoTicket = LottoTicket.of(LottoType.MANUAL, 1, 2, 3, 4, 5, 6)!!
     }
 
     @DisplayName(value = "보너스 번호가 중복되면 예외 발생")
     @Test
     fun duplicateBonus() {
-        assertThat(WinningLottoTicket(lottoTicket, 4)).isNull()
+        assertThat(WinningLottoTicket.of(lottoTicket, 4)).isNull()
     }
 
     @DisplayName(value = "보너스 번호가 포함 여부 확인")
     @Test
     fun hasBonus() {
-        val winningLottoTicket = WinningLottoTicket(lottoTicket, 10)
-        val userLottoTicket = LottoTicket(LottoType.MANUAL, 1, 2, 3, 4, 5, 10)!!
+        val winningLottoTicket = WinningLottoTicket.of(lottoTicket, 10)
+        val userLottoTicket = LottoTicket.of(LottoType.MANUAL, 1, 2, 3, 4, 5, 10)!!
         assertThat(winningLottoTicket?.matchBonus(userLottoTicket)).isTrue()
     }
 }
