@@ -20,9 +20,10 @@ class WinningLottoTicket private constructor(
             return WinningLottoTicket(lottoTicket, bonus)
         }
 
-        fun of(lottoTicket: LottoTicket, bonus: Int): WinningLottoTicket? {
-            val lottoNumber = LottoNumber.of(bonus) ?: return null
-            return of(lottoTicket, lottoNumber)
+        fun of(lottoTicket: LottoTicket, bonus: Int): WinningLottoTicket? = try {
+            of(lottoTicket, LottoNumber.of(bonus))
+        } catch (e: IllegalArgumentException) {
+            null
         }
     }
 }

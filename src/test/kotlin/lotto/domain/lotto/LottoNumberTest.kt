@@ -1,6 +1,6 @@
 package lotto.domain.lotto
 
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -11,6 +11,6 @@ internal class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [-1, 46])
     fun lottoNumberNotInRange(number: Int) {
-        assertThat(LottoNumber.of(number)).isNull()
+        assertThatIllegalArgumentException().isThrownBy { LottoNumber.of(number) }
     }
 }
