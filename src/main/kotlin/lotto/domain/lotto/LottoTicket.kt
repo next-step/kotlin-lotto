@@ -5,9 +5,9 @@ class LottoTicket private constructor(
     val numbers: Set<LottoNumber>
 ) {
 
-    fun hasNumber(number: Int) = numbers.contains(LottoNumber.of(number))
-
     fun hasNumber(number: LottoNumber) = numbers.contains(number)
+
+    fun matchCount(lottoTicket: LottoTicket) = this.numbers.count { lottoTicket.hasNumber(it) }
 
     override fun toString() = "[${numbers.joinToString()}]"
 

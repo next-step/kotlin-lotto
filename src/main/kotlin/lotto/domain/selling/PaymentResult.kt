@@ -14,7 +14,7 @@ data class PaymentResult(
 
     fun exchange(winningLottoTicket: WinningLottoTicket): ExchangeResult {
         val exchangeDetails = lottoTickets.groupingBy {
-            Rank(winningLottoTicket.matchCount(it), winningLottoTicket.matchBonus(it))
+            Rank(it.matchCount(winningLottoTicket.lottoTicket), winningLottoTicket.matchBonus(it))
         }.eachCount().toSortedMap()
 
         return ExchangeResult(money, exchangeDetails)

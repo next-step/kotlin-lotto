@@ -5,8 +5,6 @@ class WinningLottoTicket private constructor(
     private val bonus: LottoNumber
 ) {
 
-    fun matchCount(userLottoTicket: LottoTicket) = lottoTicket.numbers.count { userLottoTicket.hasNumber(it) }
-
     fun matchBonus(userLottoTicket: LottoTicket) = userLottoTicket.hasNumber(bonus)
 
     override fun toString(): String = "${super.toString()}, ${bonus.value}"
