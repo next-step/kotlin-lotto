@@ -3,7 +3,7 @@ package lotto
 object ResultView {
     fun printBuyedLottoTicket(purchased: List<Lotto>) {
         println("${purchased.size}개를 구매했습니다.")
-        purchased.forEach { (println(it.numbers)) }
+        purchased.forEach { (println(it.lottoNumber)) }
         print(" ")
     }
 

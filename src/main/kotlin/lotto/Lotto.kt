@@ -1,23 +1,17 @@
 package lotto
 
-class Lotto(private val number: Set<Int>) {
-    private val _numbers = mutableListOf<Int>()
-    val numbers: List<Int> get() = _numbers
+class Lotto(private val numbers: Set<Int>) {
+
+    val lottoNumber get() = numbers
 
     init {
-        require(number.size == 6) {
+        require(numbers.size == 6) {
             "로또 숫자는 6개 입니다."
         }
-        _numbers.addAll(number)
-    }
-
-    fun generate() {
-
-        _numbers.addAll(number)
     }
 
     fun getPrizeWithBonus(winningNumber: List<Int>, bonusNumber: Int): Rank {
-        val counts = this._numbers.count { number -> winningNumber.contains(number) }
+        val counts = this.numbers.count { number -> winningNumber.contains(number) }
 
         val bonusCheck = this.numbers.contains(bonusNumber)
 
