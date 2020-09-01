@@ -17,15 +17,8 @@ class LottoWinningNumber(numbers: List<Int>, bonusBall: Int) {
     }
 
     fun getLottoResultsOf(inputUserTicket: LottoTickets): List<Rank> {
-        var rankList = mutableListOf<Rank>()
 
-        inputUserTicket.lottoTickets.forEach {
-            var matchCount = it.getMatchValueCount(luckyLottoTicket)
-            val isBonusBall = it.isExistBonusBall(bonusBallNumber)
-            val rank: Rank = Rank.of(matchCount, isBonusBall)
-            rankList.add(rank)
-        }
-        return rankList
+        return LottoTickets.getWinningTicket(inputUserTicket, luckyLottoTicket, bonusBallNumber)
     }
 
     companion object {
