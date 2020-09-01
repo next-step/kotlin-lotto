@@ -13,13 +13,12 @@ object LottoGame {
         val totalCountTicket = getTicketCount(price)
         val automaticLottoCount = totalCountTicket - manualLotto.size
 
-        val autoLotto = (1..automaticLottoCount).map { makeNumbers() }
+        val autoLotto = (1..automaticLottoCount).map { makeAutoNumbers() }
 
         return LottoTickets.from(manualLotto + autoLotto)
     }
 
-    // 자동
-    fun makeNumbers(): LottoTicket {
+    private fun makeAutoNumbers(): LottoTicket {
         val autoLottoNumber: List<LottoNumber> = LOTTO_NUMBER.shuffled().take(LOTTO_NUMBER_COUNT_PER_TICKET)
         return LottoTicket.from(autoLottoNumber)
     }
