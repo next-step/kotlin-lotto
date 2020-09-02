@@ -19,7 +19,6 @@ class LottoPrizeStaticsTest {
         assertThat(lottoListCount).isLessThanOrEqualTo(lottoList.size)
     }
 
-
     @DisplayName("당첨 로또 갯수 확인")
     @Test
     fun validatePrizedLottoList() {
@@ -36,7 +35,6 @@ class LottoPrizeStaticsTest {
 
         assertThat(prizedLottoCount).isEqualTo(2)
     }
-
 
     @DisplayName("2등 당첨 로또 갯수 확인")
     @Test
