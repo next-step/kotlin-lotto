@@ -21,7 +21,7 @@ class LottoGameTest {
         val lottoGameMoney = LottoGameMoney.from("2000")
         val lottoGame = LottoGame.of(lottoGameMoney!!)
 
-        assertThat(lottoGame.execute("1,2,3,4,5,6", "6"))
+        assertThat(lottoGame.execute(Pair("1,2,3,4,5,6", "6")))
             .isInstanceOfAny(LottoGameResult.IsContainBonusNumber::class.java)
     }
 }

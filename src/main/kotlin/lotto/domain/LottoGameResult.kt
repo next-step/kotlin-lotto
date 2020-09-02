@@ -2,7 +2,7 @@ package lotto.domain
 
 sealed class LottoGameResult {
     data class Success(
-        val winningLotto: WinningLotto,
+        val lottoList: List<Lotto>,
         val prizeStatics: LottoPrizeStatics
     ) : LottoGameResult()
 

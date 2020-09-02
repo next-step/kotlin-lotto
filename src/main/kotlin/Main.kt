@@ -12,8 +12,6 @@ fun main() {
         val manualLottoCount = getManualLottoCount(lottoGameMoney)
         val lottoGame = LottoGame.of(lottoGameMoney, getManualLottoList(manualLottoCount))
 
-        ResultView.showLottoList(lottoGame.lottoList)
-
         showGameResult(lottoGame)
     } catch (e: Exception) {
         ResultView.showErrorMessage(e.message)
@@ -43,10 +41,10 @@ fun getManualLottoList(numberOfManualLotto: NumberOfManualLotto): List<Lotto> {
 }
 
 tailrec fun showGameResult(lottoGame: LottoGame) {
-    val result = lottoGame.execute(InputView.getPrizedNumbers(), InputView.getBonusNumber())
+    val result = lottoGame.execute(InputView.getWinningLotto())
     when (result) {
         is LottoGameResult.Success -> {
-            ResultView.showPrizeStatics(result.prizeStatics)
+            ResultView.showResult(result)
             return
         }
         is LottoGameResult.InvalidBonusNumber,

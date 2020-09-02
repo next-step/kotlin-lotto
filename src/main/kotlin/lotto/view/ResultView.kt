@@ -10,13 +10,18 @@ import lotto.domain.LottoGameResult
 
 object ResultView {
 
-    fun showLottoList(lottos: List<Lotto>) {
-        val manualLottoCount = lottos.filterIsInstance<ManualLotto>().count()
-        println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottos.size - manualLottoCount}장을 구매했습니다.")
-        lottos.forEach { println(it.toString()) }
+    fun showResult(result: LottoGameResult.Success) {
+        showLottoList(result.lottoList)
+        showPrizeStatic(result.prizeStatics)
     }
 
-    fun showPrizeStatics(prizeStatics: LottoPrizeStatics) {
+    private fun showLottoList(lottoList: List<Lotto>) {
+        val manualLottoCount = lottoList.filterIsInstance<ManualLotto>().count()
+        println("\n수동으로 ${manualLottoCount}장, 자동으로 ${lottoList.size - manualLottoCount}장을 구매했습니다.")
+        lottoList.forEach { println(it.toString()) }
+    }
+
+    private fun showPrizeStatic(prizeStatics: LottoPrizeStatics) {
         val showPrizeStaticsSentence = StringBuilder("당첨 통계---------\n\n")
         prizeStatics.prizedLottoList.forEach {
             val prize = it.key

@@ -16,13 +16,11 @@ object InputView {
         return readLine()!!
     }
 
-    fun getPrizedNumbers(): String {
+    fun getWinningLotto(): Pair<String, String> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        return readLine()!!
-    }
-
-    fun getBonusNumber(): String {
+        val prizeNumbers = readLine()!!
         println("\n보너스 볼을 입력해 주세요.")
-        return readLine()!!
+        val bonusNumber = readLine()!!
+        return Pair(prizeNumbers, bonusNumber)
     }
 }
