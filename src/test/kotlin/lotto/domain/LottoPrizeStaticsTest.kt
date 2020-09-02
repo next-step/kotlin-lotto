@@ -14,9 +14,45 @@ class LottoPrizeStaticsTest {
         val winningLotto = WinningLotto(prizeLotto, bonusNumber)
         val lottoList = LottoGenerator.createAutoLottoList(3)
 
-        val prizedLottoCount = LottoPrizeStatics(winningLotto, lottoList).prizedLottoList.values.sum()
+        val lottoListCount = LottoPrizeStatics(winningLotto, lottoList).prizeLottoMap.values.sum()
 
-        assertThat(prizedLottoCount).isLessThanOrEqualTo(lottoList.size)
+        assertThat(lottoListCount).isLessThanOrEqualTo(lottoList.size)
+    }
+
+
+    @DisplayName("당첨 로또 갯수 확인")
+    @Test
+    fun validatePrizedLottoList() {
+        val prizeLotto = Lotto.from("1,2,3,4,5,6")!!
+        val bonusNumber = LottoNumber.from("7")
+        val winningLotto = WinningLotto(prizeLotto, bonusNumber)
+        val lottoList = listOf(
+            Lotto.from("1,2,3,4,5,6")!!,
+            Lotto.from("1,2,3,4,5,6")!!,
+            Lotto.from("1,2,3,4,5,7")!!
+        )
+
+        val prizedLottoCount = LottoPrizeStatics(winningLotto, lottoList).prizeLottoMap.filter { it.key == Prize.FIRST }.values.sum()
+
+        assertThat(prizedLottoCount).isEqualTo(2)
+    }
+
+
+    @DisplayName("2등 당첨 로또 갯수 확인")
+    @Test
+    fun validatePrizedLottoSecondCount() {
+        val prizeLotto = Lotto.from("1,2,3,4,5,6")!!
+        val bonusNumber = LottoNumber.from("7")
+        val winningLotto = WinningLotto(prizeLotto, bonusNumber)
+        val lottoList = listOf(
+            Lotto.from("7,2,3,4,5,6")!!,
+            Lotto.from("1,7,3,4,5,6")!!,
+            Lotto.from("1,2,7,4,5,6")!!
+        )
+
+        val secondPrizeLottoCount = LottoPrizeStatics(winningLotto, lottoList).prizeLottoMap.filter { it.key == Prize.SECOND }.values.sum()
+
+        assertThat(secondPrizeLottoCount).isEqualTo(3)
     }
 
     @DisplayName("수익률 체크")
