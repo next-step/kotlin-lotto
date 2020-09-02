@@ -1,16 +1,20 @@
 package lotto.domain
 
-class WinningLotto(val prizeLotto: Lotto, val bonusNumber: LottoNumber) {
-    constructor(prizeLottoString: String, bonusNumberString: String) : this(
-        Lotto.from(prizeLottoString),
-        LottoNumber.from(bonusNumberString)
-    )
+data class WinningLotto(val prizeLotto: Lotto, val bonusNumber: LottoNumber) {
 
-    init {
-        checkValidation()
+    fun getPrizeMoney(lotto: Lotto): Prize {
+        val count = lotto.getCountOfMatchNumber(prizeLotto)
+        val isContainBonusNumber = (count == Prize.THIRD.countOfMatch && lotto.isContainNumber(bonusNumber))
+        return Prize.getPrize(lotto.getCountOfMatchNumber(prizeLotto), isContainBonusNumber)
     }
 
-    private fun checkValidation() {
-        require(!prizeLotto.isContainNumber(bonusNumber)) { "당첨번호에 포함되지 않는 보너스 볼을 입력해주세요." }
+    companion object {
+        fun from(prizeNumbers: String, bonusNumberInput: String): WinningLottoResult {
+            val prizeLotto = Lotto.from(prizeNumbers) ?: return WinningLottoResult.InvalidPrizeLotto
+            if (!LOTTO_NUMBER_REGULAR_EXPRESSION.matches(bonusNumberInput)) return WinningLottoResult.InvalidBonusNumber
+            val bonusNumber: LottoNumber = LottoNumber.from(bonusNumberInput)
+            if (prizeLotto.isContainNumber(bonusNumber)) return WinningLottoResult.IsContainBonusNumber
+            return WinningLottoResult.Success(prizeLotto, bonusNumber)
+        }
     }
 }

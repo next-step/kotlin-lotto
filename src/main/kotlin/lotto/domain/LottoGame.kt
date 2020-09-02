@@ -1,20 +1,24 @@
 package lotto.domain
 
-const val PRICE_OF_LOTTO = 1000
-
 class LottoGame(val lottoList: List<Lotto>) {
-    val lottoPrizeStatics = LottoPrizeStatics()
 
-    constructor(gameMoneyString: String) : this(
-        LottoGenerator.createAutoLottoList(gameMoneyString)
-    )
-
-    fun execute(prizeNumberString: String, bonusNumberString: String) {
-        val winningLotto = WinningLotto(prizeNumberString, bonusNumberString)
-        checkMatch(winningLotto)
+    fun execute(winningLottoInput: Pair<String, String>): LottoGameResult {
+        return when (val result = WinningLotto.from(winningLottoInput.first, winningLottoInput.second)) {
+            is WinningLottoResult.InvalidBonusNumber -> LottoGameResult.InvalidBonusNumber
+            is WinningLottoResult.InvalidPrizeLotto -> LottoGameResult.InvalidPrizeLotto
+            is WinningLottoResult.IsContainBonusNumber -> LottoGameResult.IsContainBonusNumber
+            is WinningLottoResult.Success -> {
+                val winningLotto = WinningLotto(result.prizeLotto, result.bonusNumber)
+                val prizeStatics = LottoPrizeStatics(winningLotto, lottoList)
+                LottoGameResult.Success(lottoList, prizeStatics)
+            }
+        }
     }
 
-    private fun checkMatch(winningLotto: WinningLotto) {
-        lottoPrizeStatics.calculateResult(winningLotto, lottoList)
+    companion object {
+        fun of(gameMoney: LottoGameMoney, manualLottos: List<Lotto> = listOf()): LottoGame {
+            val autoLottoCount = gameMoney.getCountOfGame() - manualLottos.size
+            return LottoGame(manualLottos + LottoGenerator.createAutoLottoList(autoLottoCount))
+        }
     }
 }
