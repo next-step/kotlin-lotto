@@ -1,8 +1,4 @@
-import lotto.domain.Lotto
-import lotto.domain.LottoGame
-import lotto.domain.LottoGameMoney
-import lotto.domain.LottoGameResult
-import lotto.domain.NumberOfManualLotto
+import lotto.domain.*
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -33,10 +29,11 @@ tailrec fun getLottoGameMoney(): LottoGameMoney {
 
 fun getManualLottoList(numberOfManualLotto: NumberOfManualLotto): List<Lotto> {
     val manualLottoList: MutableList<Lotto> = mutableListOf()
-    while (numberOfManualLotto.count != manualLottoList.size) {
-        val lotto = Lotto.from(InputView.getManualLottoNumbers())
+    InputView.getManualLottoNumbers(numberOfManualLotto.count).forEach {
+        val lotto = Lotto.from(it)
         if (lotto != null) manualLottoList.add(lotto)
     }
+    if (numberOfManualLotto.count != manualLottoList.size) getManualLottoList(numberOfManualLotto - manualLottoList.size)
     return manualLottoList
 }
 

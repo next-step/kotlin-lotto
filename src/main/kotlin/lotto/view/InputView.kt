@@ -11,9 +11,14 @@ object InputView {
         return readLine()!!
     }
 
-    fun getManualLottoNumbers(): String {
+    fun getManualLottoNumbers(count: Int): List<String> {
+        val manualLottoList = mutableListOf<String>()
+        repeat(count) {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+            manualLottoList.add(readLine()!!)
+        }
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return readLine()!!
+        return manualLottoList
     }
 
     fun getWinningLotto(): Pair<String, String> {
