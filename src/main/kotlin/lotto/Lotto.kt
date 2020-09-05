@@ -1,31 +1,32 @@
 package lotto
 
-class Lotto {
+<<<<<<< HEAD
+class Lotto(private val numbers: Set<Int>) {
+
+    val lottoNumber get() = numbers
+=======
+class Lotto(private val number: Set<Int>) {
     private val _numbers = mutableListOf<Int>()
     private val _sampleTest: List<Int> = listOf(1, 2, 3, 4, 5, 7)
     val numbers: List<Int> get() = _numbers
+>>>>>>> fc70a137d48ae697cf8d06fd1356b09f994d7715
 
-    fun autoLotto(): Set<Int> {
-        return (NUMBER_MINIMUM..NUMBER_MAXIMUM).shuffled().take(LOTTO_NUMBER).toSortedSet()
-    }
-
-    fun validateSize(numbers: Set<Int>) {
+    init {
         require(numbers.size == 6) {
             "로또 숫자는 6개 입니다."
         }
+<<<<<<< HEAD
     }
 
-    fun generate(numbers: Set<Int>) {
-        validateSize(numbers)
-        _numbers.addAll(numbers)
+=======
+        _numbers.addAll(number)
     }
-
+  
+>>>>>>> fc70a137d48ae697cf8d06fd1356b09f994d7715
     fun getPrizeWithBonus(winningNumber: List<Int>, bonusNumber: Int): Rank {
-        val counts = this._numbers.count { number -> winningNumber.contains(number) }
-        // val counts = this._sampleTest.count { number -> winningNumber.contains(number) }
+        val counts = this.numbers.count { number -> winningNumber.contains(number) }
 
         val bonusCheck = this.numbers.contains(bonusNumber)
-        // val bonusCount = this._sampleTest.contains(bonusNumber)
 
         return Rank.valueOf(counts, bonusCheck)
     }
