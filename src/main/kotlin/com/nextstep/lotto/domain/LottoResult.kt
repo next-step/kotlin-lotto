@@ -1,10 +1,10 @@
 package com.nextstep.lotto.domain
 
-class LottoResult(lottos: List<Lotto>, winningLotto: WinningLotto) {
+class LottoResult(lottos: List<UserLotto>, winningLotto: WinningLotto) {
     private val results: Map<Int, Int> = findMatchResult(lottos, winningLotto)
     private val price: Int = lottos.size * 1000
 
-    private fun findMatchResult(lottos: List<Lotto>, winningLotto: WinningLotto): Map<Int, Int> {
+    private fun findMatchResult(lottos: List<UserLotto>, winningLotto: WinningLotto): Map<Int, Int> {
         return lottos.map { winningLotto.findNumberOfMatch(it) }
             .groupingBy { it }.eachCount()
     }
