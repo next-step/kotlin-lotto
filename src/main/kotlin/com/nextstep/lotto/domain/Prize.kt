@@ -1,6 +1,6 @@
 package com.nextstep.lotto.domain
 
-enum class Prize(private val prize: Int, private val matchCount: Int) {
+enum class Prize(val prize: Int, private val matchCount: Int) {
     NONE(0, 0),
     THREE(5000, 3),
     FOUR(50000, 4),
@@ -8,10 +8,8 @@ enum class Prize(private val prize: Int, private val matchCount: Int) {
     SIX(2000000000, 6);
 
     companion object {
-        fun findPrize(numberOfMatch: Int): Int {
-            val prize = values().find { it.matchCount == numberOfMatch } ?: NONE
-
-            return prize.prize
+        fun findPrize(numberOfMatch: Int): Prize {
+            return values().find { it.matchCount == numberOfMatch } ?: NONE
         }
     }
 }
