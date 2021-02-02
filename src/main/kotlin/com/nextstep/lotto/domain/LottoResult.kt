@@ -1,8 +1,13 @@
 package com.nextstep.lotto.domain
 
-class LottoResult(lottos: Lottos, winningLotto: WinningLotto) {
-    private val results: Map<Int, Int> = lottos.findMatchResult(winningLotto)
-    private val price: Int = lottos.lottos.size * 1000
+class LottoResult(lottos: List<Lotto>, winningLotto: WinningLotto) {
+    private val results: Map<Int, Int> = findMatchResult(lottos, winningLotto)
+    private val price: Int = lottos.size * 1000
+
+    private fun findMatchResult(lottos: List<Lotto>, winningLotto: WinningLotto): Map<Int, Int> {
+        return lottos.map { winningLotto.findNumberOfMatch(it) }
+            .groupingBy { it }.eachCount()
+    }
 
     fun findNumberOfLottoByMatchCount(matchCount: Int): Int {
         return results[matchCount] ?: 0
