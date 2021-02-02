@@ -3,7 +3,8 @@ package com.nextstep.lotto.view
 object LottoInputView {
     fun inputPrice(): Int {
         println("구입금액을 입력해 주세요.")
-        val price = readLine() ?: throw IllegalArgumentException("문자열에 null이 들어가서는 안됩니다.")
+        val price = readLine()
+        require(!price.isNullOrBlank()) { throw IllegalArgumentException("문자열에 null이나 빈 값이 들어가서는 안됩니다.") }
 
         return price.toInt()
     }
