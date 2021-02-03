@@ -9,7 +9,7 @@ internal class LottoTest {
         val lottoNumbers: List<LottoNumber> = (1..5).map { LottoNumber(it) }
 
         assertThrows<IllegalArgumentException> {
-            UserLotto(lottoNumbers)
+            Lotto(lottoNumbers)
         }
     }
 }

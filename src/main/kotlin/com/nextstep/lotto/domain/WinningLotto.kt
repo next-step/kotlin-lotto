@@ -1,13 +1,8 @@
 package com.nextstep.lotto.domain
 
-class WinningLotto(lottoNumbers: List<LottoNumber>) : Lotto(lottoNumbers) {
-    fun findNumberOfMatch(lotto: UserLotto): Int {
-        return lotto.lottoNumbers.count { lottoNumbers.contains(it) }
-    }
+data class WinningLotto(val winningLotto: Lotto) {
 
-    companion object {
-        fun generate(lottoNumbers: List<Int>): WinningLotto {
-            return WinningLotto(lottoNumbers.map { LottoNumbers.valueOf(it) })
-        }
+    fun findNumberOfMatch(lotto: Lotto): Int {
+        return lotto.lottoNumbers.count { winningLotto.lottoNumbers.contains(it) }
     }
 }

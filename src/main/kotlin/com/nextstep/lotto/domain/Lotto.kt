@@ -1,6 +1,6 @@
 package com.nextstep.lotto.domain
 
-open class Lotto(val lottoNumbers: List<LottoNumber>) {
+class Lotto(val lottoNumbers: List<LottoNumber>) {
     init {
         validate(lottoNumbers)
     }

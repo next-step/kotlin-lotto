@@ -18,10 +18,18 @@ internal class LottoFactoryTest {
 
         assertThat(lottos.size).isEqualTo(10)
     }
+
     @Test
     fun `수동 로또를 생성한다`() {
         val lotto = LottoFactory.drawManualLotto(listOf(1, 2, 3, 4, 5, 6))
 
         assertThat(lotto.lottoNumbers.filter { it.isMatched(1) }).isNotEmpty
+    }
+
+    @Test
+    fun `당첨 로또를 생성한다`() {
+        val winningLotto = LottoFactory.drawWinningLotto(listOf(1, 2, 3, 4, 5, 6))
+
+        assertThat(winningLotto.winningLotto.lottoNumbers.filter { it.isMatched(1) }).isNotEmpty
     }
 }

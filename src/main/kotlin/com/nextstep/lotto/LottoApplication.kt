@@ -12,7 +12,7 @@ fun main() {
     LottoOutputView.showBuyResult(lottos)
 
     val winningNumbers = LottoInputView.inputWinningNumbers()
-    val winningLotto = WinningLotto.generate(winningNumbers)
+    val winningLotto = WinningLotto(LottoFactory.drawManualLotto(winningNumbers))
 
     val lottoResult = LottoResult(lottos, winningLotto)
 
