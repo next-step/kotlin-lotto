@@ -1,6 +1,6 @@
 package com.nextstep.lotto.domain
 
-import com.nextstep.lotto.domain.LottoFactory.LOTTO_PRICE
+import com.nextstep.lotto.domain.LottoShop.LOTTO_PRICE
 
 class LottoResult(lottos: Lottos, winningLotto: WinningLotto) {
     private val results: Map<Prize, Int> = findMatchResult(lottos.lottos, winningLotto)

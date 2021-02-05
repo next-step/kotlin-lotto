@@ -1,6 +1,6 @@
 package com.nextstep.lotto
 
-import com.nextstep.lotto.domain.LottoFactory
+import com.nextstep.lotto.domain.LottoShop
 import com.nextstep.lotto.domain.LottoResult
 import com.nextstep.lotto.domain.Lottos
 import com.nextstep.lotto.domain.Money
@@ -22,16 +22,16 @@ fun main() {
 
 private fun drawLottos(money: Money): Lottos {
     val numberOfManualLotto = LottoInputView.inputNumberOfManualLotto()
-    LottoFactory.checkBuy(money, numberOfManualLotto)
+    LottoShop.checkBuy(money, numberOfManualLotto)
     val manualLottoNumbers = LottoInputView.inputManualLottoNumbers(numberOfManualLotto)
-    val manualLottos = LottoFactory.buyManualLotto(money, manualLottoNumbers)
-    val autoLottos = LottoFactory.buyAutoLotto(money)
+    val manualLottos = LottoShop.buyManualLotto(money, manualLottoNumbers)
+    val autoLottos = LottoShop.buyAutoLotto(money)
     return Lottos(manualLottos, autoLottos)
 }
 
 private fun drawWinningLotto(): WinningLotto {
     val winningNumbers = LottoInputView.inputWinningNumbers()
     val bonusNumber = LottoInputView.inputBonusNumber()
-    val winningLotto = LottoFactory.drawWinningLotto(winningNumbers, bonusNumber)
+    val winningLotto = LottoShop.drawWinningLotto(winningNumbers, bonusNumber)
     return winningLotto
 }

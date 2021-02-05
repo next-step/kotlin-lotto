@@ -1,6 +1,6 @@
 package com.nextstep.lotto.domain
 
-object LottoFactory {
+object LottoShop {
     const val LOTTO_PRICE = 1000
     fun buyManualLotto(money: Money, manualLottoNumbers: List<List<Int>>): List<Lotto> {
         val numberOfManualLotto = manualLottoNumbers.size
