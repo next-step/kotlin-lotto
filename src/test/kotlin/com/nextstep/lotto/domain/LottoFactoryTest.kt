@@ -28,8 +28,9 @@ internal class LottoFactoryTest {
 
     @Test
     fun `당첨 로또를 생성한다`() {
-        val winningLotto = LottoFactory.drawWinningLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = LottoFactory.drawWinningLotto(listOf(1, 2, 3, 4, 5, 6), 10)
 
         assertThat(winningLotto.winningLotto.lottoNumbers.filter { it.isMatched(1) }).isNotEmpty
+        assertThat(winningLotto.bonusNumber).isEqualTo(10)
     }
 }

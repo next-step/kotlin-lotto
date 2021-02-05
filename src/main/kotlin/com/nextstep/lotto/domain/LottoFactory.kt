@@ -23,7 +23,7 @@ object LottoFactory {
         return Lotto(lottoNumbers.map { LottoNumbers.valueOf(it) })
     }
 
-    fun drawWinningLotto(lottoNumbers: List<Int>): WinningLotto {
-        return WinningLotto(drawManualLotto(lottoNumbers))
+    fun drawWinningLotto(lottoNumbers: List<Int>, bonusNumber: Int): WinningLotto {
+        return WinningLotto(drawManualLotto(lottoNumbers), LottoNumbers.valueOf(bonusNumber))
     }
 }

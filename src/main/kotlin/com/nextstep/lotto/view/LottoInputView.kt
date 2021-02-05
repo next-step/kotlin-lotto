@@ -15,4 +15,8 @@ object LottoInputView {
 
         return winningLottoNumbers.split(",").map { it.toInt() }
     }
+
+    fun inputBonusNumber(): Int {
+        return 1
+    }
 }
