@@ -8,7 +8,11 @@ import com.nextstep.lotto.view.LottoOutputView
 
 fun main() {
     val money = Money(LottoInputView.inputPrice())
-    val lottos = LottoFactory.buyLotto(money)
+    val numberOfManualLotto = LottoInputView.inputNumberOfManualLotto()
+    LottoFactory.checkBuy(money, numberOfManualLotto)
+    val manualLottoNumbers = LottoInputView.inputManualLottoNumbers(numberOfManualLotto)
+    LottoFactory.buyManualLotto(money, manualLottoNumbers)
+    val lottos = LottoFactory.buyAutoLotto(money)
     LottoOutputView.showBuyResult(lottos)
 
     val winningNumbers = LottoInputView.inputWinningNumbers()

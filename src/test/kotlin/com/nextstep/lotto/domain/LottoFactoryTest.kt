@@ -2,12 +2,13 @@ package com.nextstep.lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class LottoFactoryTest {
 
     @Test
-    fun `금액에 맞게 로또를 구매한다`() {
-        val lottos = LottoFactory.buyLotto(10000)
+    fun `금액에 맞게 자동 로또를 구매한다`() {
+        val lottos = LottoFactory.buyAutoLotto(Money(10000))
 
         assertThat(lottos.size).isEqualTo(10)
     }
@@ -25,5 +26,12 @@ internal class LottoFactoryTest {
 
         assertThat(winningLotto.winningLotto.lottoNumbers.filter { it.isMatched(1) }).isNotEmpty
         assertThat(winningLotto.bonusNumber).isEqualTo(LottoNumbers.valueOf(10))
+    }
+
+    @Test
+    fun `돈이 부족하다면 에러`() {
+        assertThrows<IllegalArgumentException> {
+            LottoFactory.checkBuy(Money(1000), 2)
+        }
     }
 }
