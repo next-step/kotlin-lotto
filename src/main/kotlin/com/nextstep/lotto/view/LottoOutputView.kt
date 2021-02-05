@@ -1,13 +1,13 @@
 package com.nextstep.lotto.view
 
-import com.nextstep.lotto.domain.Lotto
 import com.nextstep.lotto.domain.LottoResult
+import com.nextstep.lotto.domain.Lottos
 import com.nextstep.lotto.domain.Prize
 
 object LottoOutputView {
-    fun showBuyResult(lottos: List<Lotto>) {
-        println("${lottos.size}개 구매했습니다.")
-        for (lotto in lottos) {
+    fun showBuyResult(lottos: Lottos) {
+        println("수동으로 ${lottos.numberOfManual}장, 자동으로 ${lottos.getNumberOfAuto()}개를 구매했습니다.")
+        for (lotto in lottos.lottos) {
             println("[${lotto.lottoNumbers.map { it.number }.joinToString(", ")}]")
         }
     }

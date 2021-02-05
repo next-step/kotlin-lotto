@@ -1,7 +1,7 @@
 package com.nextstep.lotto.domain
 
 object LottoFactory {
-    private const val LOTTO_PRICE = 1000
+    const val LOTTO_PRICE = 1000
     fun buyManualLotto(money: Money, manualLottoNumbers: List<List<Int>>): List<Lotto> {
         val numberOfManualLotto = manualLottoNumbers.size
         money.pay(numberOfManualLotto * LOTTO_PRICE)
