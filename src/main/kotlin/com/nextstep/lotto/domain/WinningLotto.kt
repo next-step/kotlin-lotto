@@ -7,7 +7,10 @@ data class WinningLotto(val winningLotto: Lotto, val bonusNumber: LottoNumber) {
         }
     }
 
-    fun findNumberOfMatch(lotto: Lotto): Int {
-        return lotto.lottoNumbers.count { winningLotto.lottoNumbers.contains(it) }
+    fun getMatchResult(lotto: Lotto): MatchResult {
+        val numberOfMatch = lotto.lottoNumbers.count { winningLotto.lottoNumbers.contains(it) }
+        val matchBonus = lotto.lottoNumbers.any { bonusNumber == it }
+
+        return MatchResult(numberOfMatch, matchBonus)
     }
 }

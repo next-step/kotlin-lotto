@@ -31,6 +31,6 @@ internal class LottoFactoryTest {
         val winningLotto = LottoFactory.drawWinningLotto(listOf(1, 2, 3, 4, 5, 6), 10)
 
         assertThat(winningLotto.winningLotto.lottoNumbers.filter { it.isMatched(1) }).isNotEmpty
-        assertThat(winningLotto.bonusNumber).isEqualTo(10)
+        assertThat(winningLotto.bonusNumber).isEqualTo(LottoNumbers.valueOf(10))
     }
 }
