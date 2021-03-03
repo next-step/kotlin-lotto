@@ -32,6 +32,8 @@ class ExpressionTest {
 
         fun delimiters() = delimiters
 
+        fun syntax() = expression
+
         companion object {
             const val CUSTOM_DELIMITER_PREFIX = "//"
             const val CUSTOM_DELIMITER_SUFFIX = "\n"
