@@ -9,16 +9,6 @@ class ExpressionTest {
     }
 
     @Test
-    fun `구분자를 빌드한다`() {
-        assertThat(Expression("2,3").delimiters).isEqualTo(listOf(":", ","))
-    }
-
-    @Test
-    fun `커스텀 구분자를 빌드한다`() {
-        assertThat(Expression("//;\n1;2;3").delimiters).isEqualTo(listOf(";"))
-    }
-
-    @Test
     fun `구문을 빌드한다`() {
         assertAll(
             { assertThat(Expression("1,2").syntax()).isEqualTo("1,2") },
@@ -27,22 +17,32 @@ class ExpressionTest {
         )
     }
 
-    inline class Expression(private val expression: String) {
-        val delimiters: List<String>
-            get() = expression.substringBetween(
-                CUSTOM_DELIMITER_SUFFIX,
-                CUSTOM_DELIMITER_PREFIX,
-                orElse = DEFAULT_DELIMITERS
-            ).map { it.toString() }
+    @Test
+    fun `구문의 구분자는 항상 동일하다`() {
+        assertAll(
+            { assertThat(Expression("1,2").delimiter).isEqualTo(",") },
+            { assertThat(Expression("1:2").delimiter).isEqualTo(",") },
+            { assertThat(Expression("//;\n1;2;3").delimiter).isEqualTo(",") }
+        )
+    }
+
+    data class Expression(private val expression: String) {
+        val delimiter: String = DEFAULT_DELIMITER
 
         fun syntax() = expression.substringAfter(CUSTOM_DELIMITER_SUFFIX)
-            .replaceAll(delimiters, DEFAULT_DELIMITER)
+            .replaceAll(delimiters(), DEFAULT_DELIMITER)
+
+        private fun delimiters(): List<String> = expression.substringBetween(
+            CUSTOM_DELIMITER_SUFFIX,
+            CUSTOM_DELIMITER_PREFIX,
+            orElse = DEFAULT_DELIMITERS
+        ).map { it.toString() }
 
         companion object {
-            const val CUSTOM_DELIMITER_PREFIX = "//"
-            const val CUSTOM_DELIMITER_SUFFIX = "\n"
-            const val DEFAULT_DELIMITERS = ":,"
-            const val DEFAULT_DELIMITER = ","
+            private const val CUSTOM_DELIMITER_PREFIX = "//"
+            private const val CUSTOM_DELIMITER_SUFFIX = "\n"
+            private const val DEFAULT_DELIMITERS = ":,"
+            private const val DEFAULT_DELIMITER = ","
         }
 
         private fun String.substringBetween(
