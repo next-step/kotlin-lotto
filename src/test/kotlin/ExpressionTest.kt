@@ -22,6 +22,7 @@ class ExpressionTest {
     fun `구문을 빌드한다`() {
         assertAll(
             { assertThat(Expression("1,2").syntax()).isEqualTo("1,2") },
+            { assertThat(Expression("1:2").syntax()).isEqualTo("1,2") },
             { assertThat(Expression("//;\n1;2;3").syntax()).isEqualTo("1,2,3") }
         )
     }
@@ -35,12 +36,13 @@ class ExpressionTest {
             ).map { it.toString() }
 
         fun syntax() = expression.substringAfter(CUSTOM_DELIMITER_SUFFIX)
-            .replace(delimiters.joinToString(""), ",")
+            .replaceAll(delimiters, DEFAULT_DELIMITER)
 
         companion object {
             const val CUSTOM_DELIMITER_PREFIX = "//"
             const val CUSTOM_DELIMITER_SUFFIX = "\n"
             const val DEFAULT_DELIMITERS = ":,"
+            const val DEFAULT_DELIMITER = ","
         }
 
         private fun String.substringBetween(
@@ -49,6 +51,14 @@ class ExpressionTest {
             orElse: String = this
         ): String {
             return substringBefore(open).substringAfter(close, orElse)
+        }
+
+        private fun String.replaceAll(search: List<String>, replacement: String): String {
+            var result = this
+            for (delimiter in search) {
+                result = result.replace(delimiter, replacement)
+            }
+            return result
         }
     }
 }
