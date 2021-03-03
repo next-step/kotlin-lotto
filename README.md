@@ -11,7 +11,7 @@ Expression("1,2").syntax() // "1,2"
 
 2. 표현식으로부터 글자 리스트 표현한다
 ```kotlin
-Letters(Expression("1,2")) // ["1", "2"]
+Splitted(Expression("1,2")) // ["1", "2"]
 ```
 
 3. 숫자 리스트를 빌드한다
