@@ -1,5 +1,6 @@
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class ExpressionTest {
     @Test
@@ -19,7 +20,10 @@ class ExpressionTest {
 
     @Test
     fun `구문을 빌드한다`() {
-        assertThat(Expression("1,2").syntax()).isEqualTo("1,2")
+        assertAll(
+            { assertThat(Expression("1,2").syntax()).isEqualTo("1,2") },
+            { assertThat(Expression("//;\n1;2;3").syntax()).isEqualTo("1,2,3") }
+        )
     }
 
     inline class Expression(private val expression: String) {
