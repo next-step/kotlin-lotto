@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     java
     kotlin("jvm") version "1.3.72"
@@ -34,4 +36,8 @@ tasks {
         verbose.set(true)
         disabledRules.addAll("import-ordering")
     }
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    freeCompilerArgs = listOf("-Xinline-classes")
 }
