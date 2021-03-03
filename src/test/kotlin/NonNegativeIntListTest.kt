@@ -7,9 +7,13 @@ class NonNegativeIntListTest {
         assertThat(NonNegativeIntList.of(listOf("1", "2"))).containsExactlyInAnyOrder(1, 2)
     }
 
-    class NonNegativeIntList(nonNegativeIntList: List<Int>) : List<Int> by nonNegativeIntList {
+    data class NonNegativeIntList(private val nonNegativeIntList: List<Int>) : List<Int> by nonNegativeIntList {
         companion object {
-            fun of(numericStringList: List<String>) = NonNegativeIntList(listOf(1, 2))
+            fun of(numericStringList: List<String>): NonNegativeIntList {
+                return numericStringList.map {
+                    it.toInt()
+                }.let { NonNegativeIntList(it) }
+            }
         }
     }
 }
