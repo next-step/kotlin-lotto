@@ -36,7 +36,8 @@ class ExpressionTest {
 
         fun delimiters() = delimiters
 
-        fun syntax() = expression
+        fun syntax() = expression.substringAfter(CUSTOM_DELIMITER_SUFFIX)
+            .replace(delimiters().joinToString(","), ",")
 
         companion object {
             const val CUSTOM_DELIMITER_PREFIX = "//"
