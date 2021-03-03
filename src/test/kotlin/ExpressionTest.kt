@@ -10,12 +10,12 @@ class ExpressionTest {
 
     @Test
     fun `구분자를 빌드한다`() {
-        assertThat(Expression("2,3").delimiters()).isEqualTo(listOf(":", ","))
+        assertThat(Expression("2,3").delimiters).isEqualTo(listOf(":", ","))
     }
 
     @Test
     fun `커스텀 구분자를 빌드한다`() {
-        assertThat(Expression("//;\n1;2;3").delimiters()).isEqualTo(listOf(";"))
+        assertThat(Expression("//;\n1;2;3").delimiters).isEqualTo(listOf(";"))
     }
 
     @Test
@@ -27,22 +27,28 @@ class ExpressionTest {
     }
 
     inline class Expression(private val expression: String) {
-        private val delimiters: List<String>
-            get() {
-                return expression.substringBefore(CUSTOM_DELIMITER_SUFFIX)
-                    .substringAfter(CUSTOM_DELIMITER_PREFIX, DEFAULT_DELIMITER)
-                    .map { it.toString() }
-            }
-
-        fun delimiters() = delimiters
+        val delimiters: List<String>
+            get() = expression.substringBetween(
+                CUSTOM_DELIMITER_SUFFIX,
+                CUSTOM_DELIMITER_PREFIX,
+                orElse = DEFAULT_DELIMITERS
+            ).map { it.toString() }
 
         fun syntax() = expression.substringAfter(CUSTOM_DELIMITER_SUFFIX)
-            .replace(delimiters().joinToString(","), ",")
+            .replace(delimiters.joinToString(""), ",")
 
         companion object {
             const val CUSTOM_DELIMITER_PREFIX = "//"
             const val CUSTOM_DELIMITER_SUFFIX = "\n"
-            const val DEFAULT_DELIMITER = ":,"
+            const val DEFAULT_DELIMITERS = ":,"
+        }
+
+        private fun String.substringBetween(
+            open: String,
+            close: String,
+            orElse: String = this
+        ): String {
+            return substringBefore(open).substringAfter(close, orElse)
         }
     }
 }
