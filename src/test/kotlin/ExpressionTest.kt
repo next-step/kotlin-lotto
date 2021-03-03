@@ -12,5 +12,7 @@ class ExpressionTest {
         assertThat(Expression("2,3").delimiters()).isEqualTo(listOf(",", ";"))
     }
 
-    inline class Expression(private val expression: String)
+    inline class Expression(private val expression: String) {
+        fun delimiters() = listOf(",", ";")
+    }
 }
