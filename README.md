@@ -16,7 +16,7 @@ Splitted(Expression("1,2")) // ["1", "2"]
 
 3. 숫자 리스트를 빌드한다
 ```kotlin
-PositiveIntList(["1", "2"]) // [1, 2]
+NonNegativeIntList(["1", "2"]) // [1, 2]
 ```
 
 4. 숫자 리스트를 모두 더한다
