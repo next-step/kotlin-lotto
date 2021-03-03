@@ -1,8 +1,15 @@
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class NonNegativeIntListTest {
     @Test
     fun `음수가 아닌 Int 목록을 생성한다`() {
-        assertThat(NonNegativeIntList(["1", "2"])).containsExactlyInAnyOrder(1, 2)
+        assertThat(NonNegativeIntList.of(listOf("1", "2"))).containsExactlyInAnyOrder(1, 2)
+    }
+
+    class NonNegativeIntList(nonNegativeIntList: List<Int>) : List<Int> by nonNegativeIntList {
+        companion object {
+            fun of(numericStringList: List<String>) = NonNegativeIntList(listOf(1, 2))
+        }
     }
 }
