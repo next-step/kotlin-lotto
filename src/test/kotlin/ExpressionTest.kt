@@ -20,10 +20,17 @@ class ExpressionTest {
     inline class Expression(private val expression: String) {
         private val delimiters: List<String>
             get() {
-                return expression.substringBefore("\n")
-                    .substringAfter("//", ":,")
+                return expression.substringBefore(CUSTOM_DELIMITER_SUFFIX)
+                    .substringAfter(CUSTOM_DELIMITER_PREFIX, DEFAULT_DELIMITER)
                     .map { it.toString() }
             }
+
         fun delimiters() = delimiters
+
+        companion object {
+            const val CUSTOM_DELIMITER_PREFIX = "//"
+            const val CUSTOM_DELIMITER_SUFFIX = "\n"
+            const val DEFAULT_DELIMITER = ":,"
+        }
     }
 }
