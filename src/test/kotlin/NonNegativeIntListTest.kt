@@ -14,6 +14,11 @@ class NonNegativeIntListTest {
         assertThrows<RuntimeException> { NonNegativeIntList.of(listOf("1", "-2")) }
     }
 
+    @Test
+    fun `숫자가 아니면 예외가 발생한다`() {
+        assertThrows<RuntimeException> { NonNegativeIntList.of(listOf("1", "a")) }
+    }
+
     data class NonNegativeIntList(private val nonNegativeIntList: List<Int>) : List<Int> by nonNegativeIntList {
         init {
             require(nonNegativeIntList.find { it < 0 } == null)
