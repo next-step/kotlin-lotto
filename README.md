@@ -4,7 +4,7 @@
 ### 구현대상
 1. 표현식에서 구문과 구분자를 build 할 수 있다
 ```kotlin
-Expression("1,2").delimiters() // [",", ";"]
+Expression("1,2").delimiters() // [",", ":"]
 Expression("//;\n1;2;3").delimiters() // [";"]
 Expression("1,2").syntax() // "1,2"
 ```

@@ -9,10 +9,10 @@ class ExpressionTest {
 
     @Test
     fun `구분자를 빌드한다`() {
-        assertThat(Expression("2,3").delimiters()).isEqualTo(listOf(",", ";"))
+        assertThat(Expression("2,3").delimiters()).isEqualTo(listOf(",", ":"))
     }
 
     inline class Expression(private val expression: String) {
-        fun delimiters() = listOf(",", ";")
+        fun delimiters() = listOf(",", ":")
     }
 }
