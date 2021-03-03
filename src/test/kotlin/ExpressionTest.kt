@@ -17,6 +17,11 @@ class ExpressionTest {
         assertThat(Expression("//;\n1;2;3").delimiters()).isEqualTo(listOf(";"))
     }
 
+    @Test
+    fun `구문을 빌드한다`() {
+        assertThat(Expression("1,2").syntax()).isEqualTo("1,2")
+    }
+
     inline class Expression(private val expression: String) {
         private val delimiters: List<String>
             get() {
