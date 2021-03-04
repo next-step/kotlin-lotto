@@ -66,6 +66,6 @@ object InputUtils {
     }
 
     fun getSum(numbers: List<Int>): Int {
-        TODO("Not yet implemented")
+        return numbers.sum()
     }
 }
