@@ -1,7 +1,9 @@
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class InputUtilsTest {
 
@@ -47,5 +49,16 @@ internal class InputUtilsTest {
 
         // then
         assertThat(actual).contains(1, 2, 22, 4)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [-1, -222, -52])
+    internal fun convertToNumberWhenNegativeNumber(negativeInput: Int) {
+        // given
+        val splitInput = listOf(negativeInput.toString(), "2", "11", "554")
+
+        // when, then
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { InputUtils.convertToNumber(splitInput) }
     }
 }
