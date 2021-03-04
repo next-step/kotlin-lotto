@@ -9,7 +9,7 @@ internal class InputUtilsTest {
     @CsvSource(value = ["1,2,3,45,6:5", "22;28,2:3", "26;2;33:3"], delimiter = ':')
     fun splitByDefault(input: String, size: Int) {
         // when
-        val actual = InputUtils.splitByDefault(input)
+        val actual = InputUtils.split(input)
 
         // then
         assertThat(actual.size).isEqualTo(size)
@@ -21,9 +21,20 @@ internal class InputUtilsTest {
         val input = ""
 
         // when
-        val actual = InputUtils.splitByDefault(input)
+        val actual = InputUtils.split(input)
 
         // then
         assertThat(actual).isEqualTo("0")
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["//;\\n1;2;3:3", "//-\\n12-2-3:3"])
+    fun splitByCustom(input: String, size: Int) {
+        // when
+        val actual = InputUtils.split(input)
+
+        // then
+        assertThat(actual.size).isEqualTo(size)
+
     }
 }

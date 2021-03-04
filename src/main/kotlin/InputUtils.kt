@@ -3,7 +3,7 @@ private const val DELIMITER_2 = ";"
 private const val ZERO = "0"
 
 object InputUtils {
-    fun splitByDefault(input: String): List<String> {
+    fun split(input: String): List<String> {
         if (input.isBlank()) {
             return listOf(ZERO)
         }
