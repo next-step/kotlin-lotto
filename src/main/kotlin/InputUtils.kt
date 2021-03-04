@@ -1,3 +1,4 @@
+import java.lang.NumberFormatException
 import java.lang.RuntimeException
 
 private const val DELIMITER_1 = ","
@@ -42,13 +43,16 @@ object InputUtils {
     }
 
     fun convertToNumber(splitInput: List<String>): List<Int> {
-        val parsedValues = splitInput.map(Integer::parseInt)
+        try {
+            val parsedValues = splitInput.map(Integer::parseInt)
 
-        if (hasNegative(parsedValues)) {
-            throw RuntimeException("음수는 허용되지 않습니다.")
+            if (hasNegative(parsedValues)) {
+                throw RuntimeException("음수는 허용되지 않습니다.")
+            }
+            return parsedValues
+        } catch (e: NumberFormatException) {
+            throw RuntimeException("숫자만 허용됩니다.")
         }
-
-        return parsedValues
     }
 
     private fun hasNegative(parsedValue: List<Int>): Boolean {
