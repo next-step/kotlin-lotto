@@ -24,7 +24,7 @@ internal class InputUtilsTest {
         val actual = InputUtils.split(input)
 
         // then
-        assertThat(actual).isEqualTo("0")
+        assertThat(actual).isEqualTo(listOf("0"))
     }
 
     @ParameterizedTest
