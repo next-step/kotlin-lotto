@@ -29,6 +29,10 @@ object InputUtils {
         }
     }
 
+    fun getSum(numbers: List<Int>): Int {
+        return numbers.sum()
+    }
+
     private fun splitByDefault(input: String): List<String> {
         return input.split(DELIMITER_1)
             .flatMap { it.split(DELIMITER_2) }
@@ -63,9 +67,5 @@ object InputUtils {
 
     private fun hasNegative(parsedValue: List<Int>): Boolean {
         return parsedValue.any { it < ZERO }
-    }
-
-    fun getSum(numbers: List<Int>): Int {
-        return numbers.sum()
     }
 }
