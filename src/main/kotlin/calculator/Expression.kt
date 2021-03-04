@@ -3,14 +3,16 @@ package calculator
 data class Expression(private val expression: String) {
     val delimiter: String = DEFAULT_DELIMITER
 
-    fun syntax() = expression.substringAfter(CUSTOM_DELIMITER_SUFFIX)
-        .replaceAll(delimiters(), DEFAULT_DELIMITER)
+    val syntax: String
+        get() = expression.substringAfter(CUSTOM_DELIMITER_SUFFIX)
+            .replaceAll(delimiters, DEFAULT_DELIMITER)
 
-    private fun delimiters(): List<String> = expression.substringBetween(
-        CUSTOM_DELIMITER_SUFFIX,
-        CUSTOM_DELIMITER_PREFIX,
-        orElse = DEFAULT_DELIMITERS
-    ).map { it.toString() }
+    private val delimiters: List<String>
+        get() = expression.substringBetween(
+            CUSTOM_DELIMITER_SUFFIX,
+            CUSTOM_DELIMITER_PREFIX,
+            orElse = DEFAULT_DELIMITERS
+        ).map { it.toString() }
 
     companion object {
         private const val CUSTOM_DELIMITER_PREFIX = "//"

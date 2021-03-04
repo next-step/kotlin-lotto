@@ -13,9 +13,9 @@ class ExpressionTest {
     @Test
     fun `구문을 빌드한다`() {
         assertAll(
-            { assertThat(Expression("1,2").syntax()).isEqualTo("1,2") },
-            { assertThat(Expression("1:2").syntax()).isEqualTo("1,2") },
-            { assertThat(Expression("//;\n1;2;3").syntax()).isEqualTo("1,2,3") }
+            { assertThat(Expression("1,2").syntax).isEqualTo("1,2") },
+            { assertThat(Expression("1:2").syntax).isEqualTo("1,2") },
+            { assertThat(Expression("//;\n1;2;3").syntax).isEqualTo("1,2,3") }
         )
     }
 
