@@ -6,6 +6,10 @@ class StringAddCalculator {
         if (text.isNullOrBlank()) {
             return 0
         }
+
+        if (1 == text.length) {
+            return text.toInt()
+        }
         throw RuntimeException()
     }
 }
