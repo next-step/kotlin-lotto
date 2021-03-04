@@ -1,4 +1,5 @@
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -12,5 +13,17 @@ internal class InputUtilsTest {
 
         // then
         assertThat(actual.size).isEqualTo(size)
+    }
+
+    @Test
+    fun splitByDefaultWhenEmptyString() {
+        // given
+        val input = ""
+
+        // when
+        val actual = InputUtils.splitByDefault(input)
+
+        // then
+        assertThat(actual).isEqualTo("0")
     }
 }
