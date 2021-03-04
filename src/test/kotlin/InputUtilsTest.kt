@@ -28,13 +28,12 @@ internal class InputUtilsTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = ["//;\\n1;2;3:3", "//-\\n12-2-3:3"])
+    @CsvSource(value = ["//;\\n1;2;3:3", "//-\\n12-2-3:3"], delimiter = ':')
     fun splitByCustom(input: String, size: Int) {
         // when
         val actual = InputUtils.split(input)
 
         // then
         assertThat(actual.size).isEqualTo(size)
-
     }
 }
