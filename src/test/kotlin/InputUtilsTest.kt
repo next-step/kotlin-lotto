@@ -72,4 +72,17 @@ internal class InputUtilsTest {
         assertThatExceptionOfType(java.lang.RuntimeException::class.java)
             .isThrownBy { InputUtils.convertToNumber(splitInput) }
     }
+
+    @ParameterizedTest
+    @CsvSource(value = ["2:152", "55:205", "0:150"], delimiter = ':')
+    fun getSum(number: Int, expectedSum: Int) {
+        // given
+        val numbers = listOf(1, 2, 2, 45, 100, number)
+
+        // when
+        val actual = InputUtils.getSum(numbers)
+
+        // then
+        assertThat(actual).isEqualTo(expectedSum)
+    }
 }

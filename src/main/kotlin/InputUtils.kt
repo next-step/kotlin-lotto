@@ -64,4 +64,8 @@ object InputUtils {
     private fun hasNegative(parsedValue: List<Int>): Boolean {
         return parsedValue.any { it < ZERO }
     }
+
+    fun getSum(numbers: List<Int>): Int {
+        TODO("Not yet implemented")
+    }
 }
