@@ -9,5 +9,7 @@ class StringTest {
     fun test() {
         assertThat("1,2".contains(",")).isTrue()
         assertThat("1,2".replace(",".toRegex(),"")).isEqualTo("12")
+        assertThat("1:2".replace(":".toRegex(),"")).isEqualTo("12")
+        assertThat("1,2:".replace("[,:]".toRegex(),"")).isEqualTo("12")
     }
 }

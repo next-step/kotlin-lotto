@@ -12,6 +12,6 @@ class StringAddCalculator {
     }
 
     companion object {
-        private val DELIMITER = "[,]".toRegex()
+        private val DELIMITER = "[,:]".toRegex()
     }
 }
