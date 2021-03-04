@@ -1,7 +1,9 @@
-import ExpressionTest.Expression
-import NonNegativeIntListTest.NonNegativeIntList
-import SplittedTest.Splitted
-import SumTest.Sum
+package calculator
+
+import calculator.ExpressionTest.Expression
+import calculator.NonNegativeIntListTest.NonNegativeIntList
+import calculator.SplittedTest.Splitted
+import calculator.SumTest.Sum
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll

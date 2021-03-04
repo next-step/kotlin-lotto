@@ -1,4 +1,6 @@
-import ExpressionTest.Expression
+package calculator
+
+import calculator.ExpressionTest.Expression
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
