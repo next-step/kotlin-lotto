@@ -11,6 +11,6 @@ internal class InputUtilsTest {
         val actual = InputUtils.splitByDefault(input)
 
         // then
-        assertThat(actual).isEqualTo(size)
+        assertThat(actual.size).isEqualTo(size)
     }
 }
