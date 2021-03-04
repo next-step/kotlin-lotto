@@ -40,6 +40,6 @@ object InputUtils {
     }
 
     fun convertToNumber(splitInput: List<String>): List<Int> {
-        TODO("Not yet implemented")
+        return splitInput.map(Integer::parseInt)
     }
 }
