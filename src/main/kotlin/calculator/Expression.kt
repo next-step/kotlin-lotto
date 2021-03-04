@@ -22,11 +22,11 @@ data class Expression(private val expression: String) {
     }
 
     private fun String.substringBetween(
-        open: String,
-        close: String,
+        from: String,
+        to: String,
         orElse: String = this
     ): String {
-        return substringBefore(open).substringAfter(close, orElse)
+        return substringBefore(from).substringAfter(to, orElse)
     }
 
     private fun String.replaceAll(search: List<String>, replacement: String): String {
