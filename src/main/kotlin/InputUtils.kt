@@ -38,4 +38,8 @@ object InputUtils {
     private fun doesHaveSuffixForCustom(input: String): Boolean {
         return input.substring(ZERO_INDEX_WITHOUT_PREFIX).startsWith(SUFFIX_CUSTOM)
     }
+
+    fun convertToNumber(splitInput: List<String>): List<Int> {
+        TODO("Not yet implemented")
+    }
 }

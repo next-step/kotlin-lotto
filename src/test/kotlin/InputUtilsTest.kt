@@ -36,4 +36,16 @@ internal class InputUtilsTest {
         // then
         assertThat(actual.size).isEqualTo(size)
     }
+
+    @Test
+    fun convertToNumber() {
+        // given
+        val splitInput = listOf("1", "2", "22", "4")
+
+        // when
+        val actual: List<Int> = InputUtils.convertToNumber(splitInput)
+
+        // then
+        assertThat(actual).contains(1, 2, 22, 4)
+    }
 }
