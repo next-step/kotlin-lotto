@@ -53,12 +53,23 @@ internal class InputUtilsTest {
 
     @ParameterizedTest
     @ValueSource(ints = [-1, -222, -52])
-    internal fun convertToNumberWhenNegativeNumber(negativeInput: Int) {
+    fun convertToNumberWhenNegativeNumber(negativeInput: Int) {
         // given
         val splitInput = listOf(negativeInput.toString(), "2", "11", "554")
 
         // when, then
         assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { InputUtils.convertToNumber(splitInput) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["*", "d", "ㄹ", "/", "("])
+    fun convertToNumberWhenNotInteger(invalidInput: String) {
+        // given
+        val splitInput = listOf(invalidInput, "2", "13", "555", "77")
+
+        // when, then
+        assertThatExceptionOfType(java.lang.RuntimeException::class.java)
             .isThrownBy { InputUtils.convertToNumber(splitInput) }
     }
 }
