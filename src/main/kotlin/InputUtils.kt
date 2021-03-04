@@ -1,3 +1,5 @@
+import java.lang.RuntimeException
+
 private const val DELIMITER_1 = ","
 private const val DELIMITER_2 = ";"
 private const val ZERO = "0"
@@ -40,6 +42,16 @@ object InputUtils {
     }
 
     fun convertToNumber(splitInput: List<String>): List<Int> {
-        return splitInput.map(Integer::parseInt)
+        val parsedValues = splitInput.map(Integer::parseInt)
+
+        if (hasNegative(parsedValues)) {
+            throw RuntimeException("음수는 허용되지 않습니다.")
+        }
+
+        return parsedValues
+    }
+
+    private fun hasNegative(parsedValue: List<Int>): Boolean {
+        return parsedValue.any { it < 0 }
     }
 }
