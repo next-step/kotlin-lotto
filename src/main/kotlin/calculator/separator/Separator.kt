@@ -6,12 +6,12 @@ enum class Separator(
     CUSTOM(CustomSeparator()),
     DEFAULT(DefaultSeparator());
 
-    private fun canSeparate(expression: String) = policy.canSeparate(expression)
+    private fun canSeparate(expression: String?) = policy.canSeparate(expression)
 
-    private fun separate(expression: String) = policy.separate(expression)
+    private fun separate(expression: String?) = policy.separate(expression)
 
     companion object {
-        fun separate(expression: String): List<String> {
+        fun separate(expression: String?): List<String> {
             return values()
                 .find { it.canSeparate(expression) }
                 ?.separate(expression)
