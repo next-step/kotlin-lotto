@@ -7,9 +7,11 @@ class StringAddCalculator {
             return 0
         }
 
-        if (1 == text.length) {
-            return text.toInt()
-        }
-        throw RuntimeException()
+        val numbers = text.split(DELIMITER).map { it.toInt() }
+        return numbers.sum()
+    }
+
+    companion object {
+        private val DELIMITER = "[,]".toRegex()
     }
 }
