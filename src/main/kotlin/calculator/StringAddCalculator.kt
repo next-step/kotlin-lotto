@@ -17,9 +17,7 @@ class StringAddCalculator {
 
         val numbers = removedCustomPatternText.split(regex).map { it.toInt() }
 
-        if (numbers.any { i -> i < 0 }) {
-            throw RuntimeException()
-        }
+        checkNegative(numbers)
         return numbers.sum()
     }
 
@@ -28,6 +26,12 @@ class StringAddCalculator {
             .map {
                 it.let { it.groupValues[1] }
             }.toList()
+    }
+
+    private fun checkNegative(numbers: List<Int>) {
+        if (numbers.any { it < 0 }) {
+            throw RuntimeException()
+        }
     }
 
     companion object {
