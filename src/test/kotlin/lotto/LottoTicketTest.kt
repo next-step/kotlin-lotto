@@ -3,12 +3,11 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
 
 class LottoTicketTest {
     @Test
     fun `돈으로 티캣을 생성한다`() {
-        assertThat(LottoTicket(Money(14_000)).count()).isEqualTo(14)
+        assertThat(LottoTicket(Money(14_000)).count).isEqualTo(14)
     }
 
     @Test
@@ -21,8 +20,12 @@ class LottoTicketTest {
         assertThat(Quotient(Money(1_500), 1_000).int).isEqualTo(1)
     }
 
-    class LottoTicket(private val money: Money) {
-        fun count(): Int = Quotient(money, 1000).int
+    class LottoTicket(val count: Int) {
+        constructor(money: Money) : this(Quotient(money, TICKET_AMOUNT).int)
+
+        companion object {
+            val TICKET_AMOUNT = Money(1_000)
+        }
     }
 
     data class Money(val amount: Int)
@@ -36,5 +39,6 @@ class LottoTicketTest {
         }
 
         constructor(dividend: Money, divisor: Int) : this(dividend.amount, divisor)
+        constructor(dividend: Money, divisor: Money) : this(dividend.amount, divisor.amount)
     }
 }
