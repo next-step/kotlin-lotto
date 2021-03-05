@@ -16,6 +16,10 @@ class StringAddCalculator {
             .toRegex()
 
         val numbers = removedCustomPatternText.split(regex).map { it.toInt() }
+
+        if (numbers.any { i -> i < 0 }) {
+            throw RuntimeException()
+        }
         return numbers.sum()
     }
 
