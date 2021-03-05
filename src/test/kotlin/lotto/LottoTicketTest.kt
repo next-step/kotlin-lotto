@@ -16,6 +16,11 @@ class LottoTicketTest {
         assertThrows<IllegalArgumentException> { Quotient(Money(1_000), 0) }
     }
 
+    @Test
+    fun `나머지를 제외한 몫만 제공한다`() {
+        assertThat(Quotient(Money(1_500), 1_000).int).isEqualTo(1)
+    }
+
     class LottoTicket(private val money: Money) {
         fun count(): Int = Quotient(money, 1000).int
     }
