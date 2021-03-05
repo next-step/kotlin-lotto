@@ -7,11 +7,28 @@ class StringAddCalculator {
             return 0
         }
 
-        val numbers = text.split(DELIMITER).map { it.toInt() }
+        val customDelimiterPatterns = findCustomDelimiters(text).map { "[$it]" }
+
+        val removedCustomPatternText = text.replace(CUSTOM_DELIMITER_PATTERN.toRegex(), EMPTY)
+
+        val regex = DEFAULT_DELIMITER_PATTERNS.plus(customDelimiterPatterns)
+            .joinToString(separator = "|")
+            .toRegex()
+
+        val numbers = removedCustomPatternText.split(regex).map { it.toInt() }
         return numbers.sum()
     }
 
+    private fun findCustomDelimiters(text: String): List<String> {
+        return Regex(CUSTOM_DELIMITER_PATTERN).findAll(text)
+            .map {
+                it.let { it.groupValues[1] }
+            }.toList()
+    }
+
     companion object {
-        private val DELIMITER = "[,:]".toRegex()
+        private val DEFAULT_DELIMITER_PATTERNS = listOf("[,]", "[:]")
+        private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n"
+        private const val EMPTY = "";
     }
 }
