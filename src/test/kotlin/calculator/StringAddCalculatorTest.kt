@@ -58,4 +58,11 @@ class StringAddCalculatorTest {
     fun negative() {
         assertThrows<RuntimeException> { calculator.add("-1") }
     }
+
+    @DisplayName("여러 조건")
+    @ParameterizedTest
+    @ValueSource(strings = ["//#\n//&\n1#2&3,10:11"])
+    fun multipleConditions(text: String) {
+        assertThat(calculator.add(text)).isEqualTo(27)
+    }
 }

@@ -20,4 +20,11 @@ class StringTest {
             }.toList()
         assertThat(customDelimiters).containsAll(listOf(";", "^"))
     }
+
+    @Test
+    fun test2() {
+        val list = listOf<Int>()
+        assertThat(list).isEmpty()
+        assertThat(list.sum()).isEqualTo(0)
+    }
 }
