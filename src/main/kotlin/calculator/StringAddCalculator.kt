@@ -7,18 +7,21 @@ class StringAddCalculator {
             return 0
         }
 
+        val numbers = parseNumbers(text)
+        checkNegative(numbers)
+
+        return numbers.sum()
+    }
+
+    private fun parseNumbers(text: String): List<Int> {
         val customDelimiterPatterns = findCustomDelimiters(text).map { "[$it]" }
-
-        val removedCustomPatternText = text.replace(CUSTOM_DELIMITER_PATTERN.toRegex(), EMPTY)
-
         val regex = DEFAULT_DELIMITER_PATTERNS.plus(customDelimiterPatterns)
             .joinToString(separator = "|")
             .toRegex()
 
-        val numbers = removedCustomPatternText.split(regex).map { it.toInt() }
+        val removedCustomPatternText = text.replace(CUSTOM_DELIMITER_PATTERN.toRegex(), EMPTY)
 
-        checkNegative(numbers)
-        return numbers.sum()
+        return removedCustomPatternText.split(regex).map { it.toInt() }
     }
 
     private fun findCustomDelimiters(text: String): List<String> {
