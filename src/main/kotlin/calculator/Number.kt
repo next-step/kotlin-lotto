@@ -2,7 +2,9 @@ package calculator
 
 class Number(private val value: Int) {
 
-    constructor(value: String): this(value.toInt())
+    constructor(value: String) : this(
+        value.toIntOrNull() ?: throw IllegalArgumentException("허용하지 않는 문자열입니다. value: $value")
+    )
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
