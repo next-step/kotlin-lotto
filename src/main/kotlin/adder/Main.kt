@@ -14,6 +14,5 @@ fun main() {
     }
 
     val sum = Numbers(input).getSum()
-
     ResultView.printSum(sum)
 }
