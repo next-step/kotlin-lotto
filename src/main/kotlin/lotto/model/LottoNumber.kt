@@ -11,4 +11,8 @@ data class LottoNumber(val number: Int) {
         private const val MIN = 1
         private const val MAX = 45
     }
+
+    override fun toString(): String {
+        return "$number"
+    }
 }

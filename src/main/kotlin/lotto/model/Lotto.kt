@@ -1,6 +1,6 @@
 package lotto.model
 
-data class Lotto(private val lottoNumbers: List<LottoNumber>) {
+data class Lotto(val lottoNumbers: List<LottoNumber>) {
     init {
         require(isUniqueSixNumbers(lottoNumbers)) { "로또 번호는 서로 다른 6개의 숫자여야만 합니다." }
     }
@@ -11,6 +11,10 @@ data class Lotto(private val lottoNumbers: List<LottoNumber>) {
 
     fun getWinningCount(winningNumbers: List<Int>): Int {
         return lottoNumbers.filter { winningNumbers.contains(it.number) }.count()
+    }
+
+    override fun toString(): String {
+        return lottoNumbers.map { it.number }.joinToString { ", " }
     }
 
     companion object {
