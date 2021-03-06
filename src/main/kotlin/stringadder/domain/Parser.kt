@@ -1,7 +1,10 @@
 package stringadder.domain
 
-class Parser {
-    fun getOperands(input: String): List<Int> {
-        return input.split(",", ":").map { token -> token.toInt() }
+class Parser(input: String) {
+    private val expression: String = input
+    private val delimiters: Delimiters = Delimiters(input)
+
+    fun getOperands(): List<Int> {
+        return expression.split(*delimiters.list.toTypedArray()).map { token -> token.toInt() }
     }
 }

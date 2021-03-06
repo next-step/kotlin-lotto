@@ -7,6 +7,6 @@ import view.console.ConsoleOutput
 class StringAdderController(private val consoleInput: ConsoleInput, private val consoleOutput: ConsoleOutput) {
     fun run() {
         consoleOutput.printStringAdderInputMessage()
-        val operands = Parser().getOperands(consoleInput.read())
+        val operands = Parser(consoleInput.read()).getOperands()
     }
 }
