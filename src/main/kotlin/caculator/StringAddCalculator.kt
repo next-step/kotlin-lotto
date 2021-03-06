@@ -6,6 +6,11 @@ internal class StringAddCalculator {
             return 0
         }
 
-        return Integer.parseInt(positiveNumbers)
+        val numbers = positiveNumbers.split(SPLITTER)
+        return numbers.map(String::toInt).sum()
+    }
+
+    companion object {
+        const val SPLITTER = ","
     }
 }
