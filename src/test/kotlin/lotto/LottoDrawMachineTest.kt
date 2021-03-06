@@ -23,6 +23,10 @@ class LottoDrawMachineTest {
     class LottoDrawMachine(pool: Set<Int>) {
         val size: Int = pool.size
 
+        init {
+            require(size == 45)
+        }
+
         constructor(range: IntRange) : this(range.toSet())
     }
 }
