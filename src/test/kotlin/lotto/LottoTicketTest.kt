@@ -12,33 +12,26 @@ class LottoTicketTest {
 
     @Test
     fun `0으로 나눌 수 없다`() {
-        assertThrows<IllegalArgumentException> { Quotient(Money(1_000), 0) }
+        assertThrows<IllegalArgumentException> { Money(1_000) / Money(0) }
     }
 
     @Test
     fun `나머지를 제외한 몫만 제공한다`() {
-        assertThat(Quotient(Money(1_500), 1_000).int).isEqualTo(1)
+        assertThat(Money(1_500) / Money(1_000)).isEqualTo(1)
     }
 
     class LottoTicket(val count: Int) {
-        constructor(money: Money) : this(Quotient(money, TICKET_AMOUNT).int)
+        constructor(money: Money) : this(money / TICKET_AMOUNT)
 
         companion object {
             val TICKET_AMOUNT = Money(1_000)
         }
     }
 
-    data class Money(val amount: Int)
-
-    class Quotient(private val dividend: Int, private val divisor: Int) {
-        val int: Int
-            get() = dividend / divisor
-
-        init {
-            require(divisor != 0)
+    data class Money(val amount: Int) {
+        operator fun div(divisor: Money): Int {
+            require(divisor.amount != 0)
+            return amount / divisor.amount
         }
-
-        constructor(dividend: Money, divisor: Int) : this(dividend.amount, divisor)
-        constructor(dividend: Money, divisor: Money) : this(dividend.amount, divisor.amount)
     }
 }
