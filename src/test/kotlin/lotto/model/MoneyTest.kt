@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 import lotto.model.Money
 import org.assertj.core.api.Assertions.assertThat
