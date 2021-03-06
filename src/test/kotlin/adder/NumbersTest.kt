@@ -1,5 +1,7 @@
 package adder
 
+import adder.model.Number
+import adder.model.Numbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
