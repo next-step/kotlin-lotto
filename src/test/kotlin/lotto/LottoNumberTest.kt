@@ -1,11 +1,9 @@
 package lotto
 
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import java.lang.IllegalArgumentException
 
 internal class LottoNumberTest {
     @ParameterizedTest
@@ -20,5 +18,12 @@ internal class LottoNumberTest {
     fun `1보다 작거나 45보다 큰 수는 로또 번호가 될 수 없다`(num: Int) {
         // when, then
         assertThrows<IllegalArgumentException> { LottoNumber(num) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "2", "35", "45"])
+    fun `로또 번호를 문자열 인자로 주면 LottoNumber 객체가 생성된다`(number: String) {
+        // when, then
+        assertDoesNotThrow { LottoNumber(number) }
     }
 }
