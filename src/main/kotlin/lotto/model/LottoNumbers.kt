@@ -1,9 +1,11 @@
 package lotto.model
 
-class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
+data class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
     init {
         require(isUniqueSixNumbers(lottoNumbers)) {"로또 번호는 서로 다른 6개의 숫자여야만 합니다."}
     }
+
+    constructor(numbers: Collection<Int>): this(numbers.map(::LottoNumber))
 
     companion object {
         private const val LOTTO_SIZE = 6
