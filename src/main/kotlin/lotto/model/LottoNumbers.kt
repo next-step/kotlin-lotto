@@ -1,4 +1,4 @@
 package lotto.model
 
-class LottoNumbers {
+class LottoNumbers(val lottoNumbers: List<LottoNumber>) {
 }
