@@ -17,7 +17,7 @@ class Operand(number: String) {
     }
 
     private fun validatePositive(number: Int) {
-        require(number >= MIN_NUMBER) { "0 이상의 숫자만 입력할 수 있습니다." }
+        require(number >= MIN_NUMBER) { "$MIN_NUMBER 이상의 숫자만 입력할 수 있습니다." }
     }
 
     override fun equals(other: Any?): Boolean {

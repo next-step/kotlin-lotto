@@ -27,7 +27,7 @@ class Parser(private val input: String) {
         input.startsWith(DELIMITER_PREFIX) && input.startsWith(DELIMITER_SUFFIX, SUFFIX_START_INDEX)
 
     private fun initOperands(): Operands {
-        val expression = input.substring(5)
+        val expression = input.substring(EXPRESSION_START_INDEX)
         return Operands(expression.split(*delimiters.toTypedArray()).map { token -> Operand(token) })
     }
 
@@ -37,5 +37,6 @@ class Parser(private val input: String) {
         private const val DELIMITER_SUFFIX = "\\n"
         private const val SUFFIX_START_INDEX = 3
         private const val DELIMITER_INDEX = 2
+        private const val EXPRESSION_START_INDEX = 5
     }
 }
