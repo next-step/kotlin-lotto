@@ -1,5 +1,6 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class LottoDrawMachineTest {
@@ -9,11 +10,13 @@ class LottoDrawMachineTest {
     }
 
     @Test
-    fun `번호는 45개여야 한다`() {
+    fun `번호는 45개이다`() {
         assertThat(LottoDrawMachine(1..45).size).isEqualTo(45)
     }
 
     class LottoDrawMachine(pool: Set<Int>) {
+        val size: Int = pool.size
+
         constructor(range: IntRange) : this(range.toSet())
     }
 }
