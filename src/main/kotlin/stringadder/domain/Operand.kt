@@ -1,11 +1,11 @@
 package stringadder.domain
 
-class OperandNumber(number: String) {
-    private var operandNumber: Int
+class Operand(number: String) {
+    var operand: Int
 
     init {
         validateNumber(number)
-        operandNumber = number.toInt()
+        operand = number.toInt()
     }
 
     private fun validateNumber(number: String) {
@@ -18,6 +18,21 @@ class OperandNumber(number: String) {
 
     private fun validatePositive(number: Int) {
         require(number >= MIN_NUMBER) { "0 이상의 숫자만 입력할 수 있습니다." }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Operand
+
+        if (operand != other.operand) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return operand
     }
 
     companion object {
