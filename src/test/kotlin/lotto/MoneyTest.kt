@@ -3,7 +3,8 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class MoneyTest {
     @Test
@@ -27,10 +28,11 @@ internal class MoneyTest {
         assertThrows<IllegalArgumentException> { Money(input) }
     }
 
-    @Test
-    fun `금액 안에서 살 수 있는 최대 로또 갯수를 반환한다`() {
+    @ParameterizedTest
+    @ValueSource(strings = ["14000", "14333", "14001", "14999"])
+    fun `금액 안에서 살 수 있는 최대 로또 갯수를 반환한다`(budget: String) {
         // given
-        val money: Money = Money("14000")
+        val money = Money(budget)
 
         // when
         val count: Int = money.getAvailableLottoCount()
