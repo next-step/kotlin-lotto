@@ -7,14 +7,14 @@ import adder.view.ResultView
 fun main() {
     InputView.printQuestion()
     var input = readLine()
+    println(input)
 
-    while (input == null) {
+    while (input?.isBlank()!!) {
         InputView.printQuestion()
         input = readLine()
     }
 
-    val splitInput = InputUtils.split(input)
-    val numbers = Numbers(splitInput)
+    val numbers = Numbers(input)
     val sum = numbers.getSum()
 
     ResultView.printSum(sum)

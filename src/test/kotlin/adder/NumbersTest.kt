@@ -52,7 +52,7 @@ class NumbersTest {
     @Test
     fun createWithCustomDelimiter() {
         // given
-        val input = "//-\n1-2-3-45-6"
+        val input = "//-\\n1-2-3-45-6"
 
         // when
         val numbers = Numbers(input)

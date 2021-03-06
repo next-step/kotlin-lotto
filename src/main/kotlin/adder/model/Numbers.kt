@@ -10,7 +10,7 @@ data class Numbers(val nums: List<Number>) {
     }
 
     companion object {
-        private const val REGEX_FOR_DELIMITER = "//(.)\n(.*)"
+        private const val REGEX_FOR_DELIMITER = "//(.)\\\\n(.*)"
         private const val DELIMITER_1 = ","
         private const val DELIMITER_2 = ";"
         private const val INDEX_OF_CUSTOM_DELIMITER = 1
@@ -31,7 +31,7 @@ data class Numbers(val nums: List<Number>) {
         }
 
         private fun splitByDefault(input: String): List<String> {
-            return input.split(DELIMITER_1, DELIMITER_2)
+            return input.split(DELIMITER_1, DELIMITER_2).map { it.trim() }
         }
 
         private fun findCustomDelimiter(input: String): String? {
