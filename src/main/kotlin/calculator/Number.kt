@@ -2,7 +2,7 @@ package calculator
 
 class Number(private val value: Int) {
 
-    constructor(value: String): this(0)
+    constructor(value: String): this(value.toInt())
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
