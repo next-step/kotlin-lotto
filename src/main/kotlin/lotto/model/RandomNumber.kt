@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 object RandomNumber {
     fun getLottoNum(): Int {
