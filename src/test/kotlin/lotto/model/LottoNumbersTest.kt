@@ -75,4 +75,16 @@ internal class LottoNumbersTest {
         // when, then
         assertThrows<IllegalArgumentException> { LottoNumbers(lottoNumbers) }
     }
+
+    @Test
+    fun `당첨번호를 인자로 주면, 몇 개가 당첨번호와 일치하는지 반환한다`() {
+        // given
+        val myLotto = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+
+        // when
+        val count = myLotto.getWinningCount(listOf(1, 2, 3, 4, 5, 7))
+
+        // then
+        assertThat(count).isEqualTo(5)
+    }
 }
