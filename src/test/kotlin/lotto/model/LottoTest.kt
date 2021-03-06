@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoTest {
     @Test
@@ -88,11 +90,9 @@ internal class LottoTest {
         assertThat(count).isEqualTo(5)
     }
 
-    @Test
-    fun `콤마로 구분한 숫자 6개 문자열을 인자로 주면, 하나의 Lotto 객체가 생성된다`() {
-        // given
-        val winningNumberString = "1, 2, 3, 4, 5, 6"
-
+    @ParameterizedTest
+    @ValueSource(strings = ["1, 2, 3, 4, 5, 6", "1,2,3,4,5,6"])
+    fun `콤마로 구분한 숫자 6개 문자열을 인자로 주면, 하나의 Lotto 객체가 생성된다`(winningNumberString: String) {
         // when
         val lotto = Lotto(winningNumberString)
 
