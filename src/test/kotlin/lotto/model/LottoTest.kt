@@ -87,4 +87,16 @@ internal class LottoTest {
         // then
         assertThat(count).isEqualTo(5)
     }
+
+    @Test
+    fun `콤마로 구분한 숫자 6개 문자열을 인자로 주면, 하나의 Lotto 객체가 생성된다`() {
+        // given
+        val winningNumberString = "1, 2, 3, 4, 5, 6"
+
+        // when
+        val lotto = Lotto(winningNumberString)
+
+        // then
+        assertThat(lotto).isEqualTo(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+    }
 }

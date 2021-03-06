@@ -6,6 +6,7 @@ data class Lotto(private val lottoNumbers: List<LottoNumber>) {
     }
 
     constructor(numbers: Collection<Int>): this(numbers.map(::LottoNumber))
+    constructor(stringNumbers: String): this()
 
     fun getWinningCount(winningNumbers: List<Int>): Int {
         return lottoNumbers.filter { winningNumbers.contains(it.number) }.count()
