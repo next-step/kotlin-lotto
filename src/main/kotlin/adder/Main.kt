@@ -14,8 +14,7 @@ fun main() {
         input = readLine()
     }
 
-    val numbers = Numbers(input)
-    val sum = numbers.getSum()
+    val sum = Numbers(input).getSum()
 
     ResultView.printSum(sum)
 }
