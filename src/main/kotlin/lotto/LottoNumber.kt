@@ -1,4 +1,4 @@
 package lotto
 
-class LottoNumber {
+class LottoNumber(val number: Int) {
 }
