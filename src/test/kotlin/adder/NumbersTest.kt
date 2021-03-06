@@ -1,7 +1,6 @@
 package adder
 
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class NumbersTest {
@@ -14,12 +13,15 @@ class NumbersTest {
         val numbers = Numbers(input)
 
         // then
-        assertThat(numbers).isEqualTo(listOf(
-                Numbers(listOf(
+        assertThat(numbers).isEqualTo(
+            Numbers(
+                listOf(
                     Number(2),
                     Number(0),
                     Number(23),
                     Number(1234)
-        ))))
+                )
+            )
+        )
     }
 }
