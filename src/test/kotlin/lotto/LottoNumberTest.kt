@@ -1,8 +1,10 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoNumberTest {
@@ -21,9 +23,12 @@ internal class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1", "2", "35", "45"])
-    fun `로또 번호를 문자열 인자로 주면 LottoNumber 객체가 생성된다`(number: String) {
-        // when, then
-        assertDoesNotThrow { LottoNumber(number) }
+    @CsvSource(value = ["1:1", "2:2", "35:35", "45:45"], delimiter = ':')
+    fun `로또 번호를 문자열 인자로 주면 LottoNumber 객체가 생성된다`(stringNumber: String, number: Int) {
+        // when
+        val lottoNumber = LottoNumber(stringNumber)
+
+        // then
+        assertThat(lottoNumber).isEqualTo(LottoNumber(number))
     }
 }
