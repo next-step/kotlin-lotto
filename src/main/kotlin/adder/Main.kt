@@ -7,7 +7,6 @@ import adder.view.ResultView
 fun main() {
     InputView.printQuestion()
     var input = readLine()
-    println(input)
 
     while (input?.isBlank()!!) {
         InputView.printQuestion()
