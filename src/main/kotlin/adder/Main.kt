@@ -1,3 +1,5 @@
+package adder
+
 fun main() {
     InputView.printQuestion()
     var input = readLine()

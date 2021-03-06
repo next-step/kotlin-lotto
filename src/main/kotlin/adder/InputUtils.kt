@@ -1,3 +1,5 @@
+package adder
+
 private const val DELIMITER_1 = ","
 private const val DELIMITER_2 = ";"
 private const val ZERO_STRING = "0"
@@ -34,8 +36,7 @@ object InputUtils {
     }
 
     private fun splitByDefault(input: String): List<String> {
-        return input.split(DELIMITER_1)
-            .flatMap { it.split(DELIMITER_2) }
+        return input.split(DELIMITER_1, DELIMITER_2)
     }
 
     private fun splitByCustom(input: String): List<String> {
