@@ -1,5 +1,7 @@
 package adder
 
+import adder.model.Numbers
+
 fun main() {
     InputView.printQuestion()
     var input = readLine()
@@ -8,8 +10,8 @@ fun main() {
     }
 
     val splitInput = InputUtils.split(input)
-    val parsedInput = InputUtils.convertToNumber(splitInput)
-    val sum = InputUtils.getSum(parsedInput)
+    val numbers = Numbers(splitInput)
+    val sum = numbers.getSum()
 
     ResultView.printSum(sum)
 }
