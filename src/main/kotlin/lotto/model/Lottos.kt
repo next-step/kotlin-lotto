@@ -4,7 +4,10 @@ class Lottos(val lottos: List<Lotto>) {
     constructor(count: Int) : this(createLottos(count))
 
     fun check(winningNumbers: List<Int>, checkCount: Int): Int {
-
+        return lottos
+            .map { it.getWinningCount(winningNumbers) }
+            .filter { it == checkCount }
+            .count()
     }
 
     companion object {
