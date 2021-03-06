@@ -1,5 +1,6 @@
 package lotto.model
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -19,6 +20,29 @@ internal class LottoNumbersTest {
 
         // when, then
         assertDoesNotThrow { LottoNumbers(lottoNumbers) }
+    }
+
+    @Test
+    fun `서로 다른 숫자 6개를 인자로 주면 LottoNumbers를 만든다`() {
+        // given
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+
+        // when
+        val lottoNumbers = LottoNumbers(numbers)
+
+        // then
+        assertThat(lottoNumbers).isEqualTo(
+            LottoNumbers(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            )
+        )
     }
 
     @Test
