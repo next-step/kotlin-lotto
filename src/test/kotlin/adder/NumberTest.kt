@@ -28,7 +28,7 @@ class NumberTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["f", "%", "ㄹ", "+"])
-    internal fun createWhenNotInteger(input: String) {
+    fun createWhenNotInteger(input: String) {
         // when
         assertThrows<IllegalArgumentException> { Number(input) }
     }
