@@ -25,7 +25,7 @@ class LottoDrawMachineTest {
         assertThat(LottoDrawMachine(1..45).balls().size).isEqualTo(6)
     }
 
-    class LottoDrawMachine(pool: Set<Int>) {
+    class LottoDrawMachine(private val pool: Set<Int>) {
         val size: Int = pool.size
 
         init {
@@ -33,5 +33,9 @@ class LottoDrawMachineTest {
         }
 
         constructor(range: IntRange) : this(range.toSet())
+
+        fun balls(): Set<Int> = pool.shuffled()
+            .subList(0, 6)
+            .toSet()
     }
 }
