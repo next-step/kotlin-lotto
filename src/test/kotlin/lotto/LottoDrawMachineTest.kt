@@ -29,13 +29,18 @@ class LottoDrawMachineTest {
         val size: Int = pool.size
 
         init {
-            require(size == 45)
+            require(size == POOL_SIZE)
         }
 
         constructor(range: IntRange) : this(range.toSet())
 
         fun balls(): Set<Int> = pool.shuffled()
-            .subList(0, 6)
+            .take(BALL_COUNT)
             .toSet()
+
+        companion object {
+            const val POOL_SIZE: Int = 45
+            const val BALL_COUNT: Int = 6
+        }
     }
 }
