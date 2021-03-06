@@ -2,6 +2,8 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.IllegalArgumentException
 
 internal class MoneyTest {
     @Test
@@ -14,5 +16,14 @@ internal class MoneyTest {
 
         // then
         assertThat(money).isEqualTo(Money(14000))
+    }
+
+    @Test
+    fun `음수를 문자열 인자로 받으면 Money 객체를 생성할 수 없다`() {
+        // given
+        val input = "-13000"
+
+        // when
+        assertThrows<IllegalArgumentException> { Money(input) }
     }
 }
