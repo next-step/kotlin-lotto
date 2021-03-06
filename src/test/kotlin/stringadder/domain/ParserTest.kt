@@ -12,7 +12,7 @@ internal class ParserTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3", "1:2:3"])
     fun initWithoutCustomDelimiter(input: String) {
-        val expected = Operands(listOf(Operand("1"), Operand("2"), Operand("3")))
+        val expected = createOperands("1", "2", "3")
 
         val actual = Parser(input).operands
 
@@ -23,7 +23,7 @@ internal class ParserTest {
     @ParameterizedTest
     @ValueSource(strings = ["//a\\n1a2a3", "//a\\n1,2,3", "//a\\n1:2:3"])
     fun initWithCustomDelimiter(input: String) {
-        val expected = Operands(listOf(Operand("1"), Operand("2"), Operand("3")))
+        val expected = createOperands("1", "2", "3")
 
         val actual = Parser(input).operands
 

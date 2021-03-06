@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 internal class OperandTest {
 
-    @DisplayName("인자로 양수가 들어온 경우 객체 생성")
+    @DisplayName("인자로 0 이상의 숫자가 들어온 경우 객체 생성")
     @Test
     fun validate() {
         assertThat(Operand("1")).isNotNull
