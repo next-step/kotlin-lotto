@@ -21,8 +21,8 @@ class LottoDrawMachineTest {
     }
 
     @Test
-    fun `6자리 번호를 생성한다`() {
-        assertThat(LottoDrawMachine(1..45).balls().size).isEqualTo(6)
+    fun `로또 번호를 생성한다`() {
+        LottoDrawMachine(1..45).lottoNumber()
     }
 
     class LottoDrawMachine(private val pool: Set<Int>) {
@@ -34,13 +34,28 @@ class LottoDrawMachineTest {
 
         constructor(range: IntRange) : this(range.toSet())
 
-        fun balls(): Set<Int> = pool.shuffled()
-            .take(BALL_COUNT)
+        fun lottoNumber(): LottoNumber = pool.shuffled()
             .toSet()
+            .let { LottoNumber.from(it) }
 
         companion object {
             const val POOL_SIZE: Int = 45
+        }
+    }
+
+    data class LottoNumber(private val numbers: Set<Int>) {
+        val size: Int = numbers.size
+
+        init {
+            require(numbers.size == BALL_COUNT)
+        }
+
+        companion object {
             const val BALL_COUNT: Int = 6
+
+            fun from(source: Set<Int>): LottoNumber {
+                return LottoNumber(source.take(BALL_COUNT).toSet())
+            }
         }
     }
 }
