@@ -2,7 +2,7 @@ package caculator
 
 internal class TokenParser {
 
-    fun parseToken(input: String): List<Int> {
+    fun parseToken(input: String): Numbers {
         var regex = DEFAULT_PATTERN
         var numbers = input
         val matchResult: MatchResult? = CUSTOM_PATTERN.matchEntire(input)
@@ -14,8 +14,8 @@ internal class TokenParser {
         return parseNumbers(regex = regex, numbers = numbers)
     }
 
-    private fun parseNumbers(numbers: String, regex: Regex): List<Int> {
-        return numbers.split(regex).map(String::toInt)
+    private fun parseNumbers(numbers: String, regex: Regex): Numbers {
+        return Numbers(numbers.split(regex).map { Number(it) })
     }
 
     companion object {
