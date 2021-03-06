@@ -37,6 +37,6 @@ class NumbersTest {
         val sum = numbers.getSum()
 
         // then
-        assertThat(sum).isEqualTo(200)
+        assertThat(sum).isEqualTo(175)
     }
 }
