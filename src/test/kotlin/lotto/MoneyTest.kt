@@ -26,4 +26,16 @@ internal class MoneyTest {
         // when
         assertThrows<IllegalArgumentException> { Money(input) }
     }
+
+    @Test
+    fun `금액 안에서 살 수 있는 최대 로또 갯수를 반환한다`() {
+        // given
+        val money: Money = Money("14000")
+
+        // when
+        val count: Int = money.getAvailableLottoCount()
+
+        // then
+        assertThat(count).isEqualTo(14)
+    }
 }
