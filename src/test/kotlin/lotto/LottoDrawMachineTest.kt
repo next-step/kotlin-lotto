@@ -20,6 +20,11 @@ class LottoDrawMachineTest {
         assertThrows<IllegalArgumentException> { LottoDrawMachine((1..44).toSet() + setOf(1)) }
     }
 
+    @Test
+    fun `6자리 번호를 생성한다`() {
+        assertThat(LottoDrawMachine(1..45).balls().size).isEqualTo(6)
+    }
+
     class LottoDrawMachine(pool: Set<Int>) {
         val size: Int = pool.size
 
