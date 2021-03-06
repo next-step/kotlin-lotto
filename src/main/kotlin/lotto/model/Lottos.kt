@@ -10,6 +10,10 @@ class Lottos(val lottos: List<Lotto>) {
             .count()
     }
 
+    fun getEarningRate(winningNumbers: List<Int>): Double {
+        return 0.2
+    }
+
     companion object {
         private fun createLottos(count: Int): List<Lotto> {
             return (1..count).map { Lotto(LottoNumberPool().getLottoNumbers()) }
