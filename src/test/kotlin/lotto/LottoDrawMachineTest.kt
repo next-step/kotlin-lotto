@@ -63,16 +63,16 @@ class LottoDrawMachineTest {
         val size: Int = numbers.size
 
         init {
-            require(numbers.toSet().size == BALL_COUNT)
+            require(numbers.toSet().size == NUMBER_COUNT)
         }
 
         constructor(range: IntRange) : this(range.toList())
 
         companion object {
-            const val BALL_COUNT: Int = 6
+            const val NUMBER_COUNT: Int = 6
 
             fun from(source: Set<Int>): LottoNumber {
-                return LottoNumber(source.take(BALL_COUNT))
+                return LottoNumber(source.take(NUMBER_COUNT))
             }
         }
     }
