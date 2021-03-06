@@ -1,4 +1,4 @@
-package adder
+package adder.view
 
 object ResultView {
     fun printSum(sum: Int) {
