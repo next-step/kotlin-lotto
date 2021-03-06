@@ -18,7 +18,7 @@ class Lottos(val lottos: List<Lotto>) {
 
     private fun getTotalPrizeMoney(winningNumbers: List<Int>): Double {
         return Coincidence.values()
-            .map { check(winningNumbers, it.coincidenceCount) * it.prizeMoney}
+            .map { check(winningNumbers, it.coincidenceCount) * it.prizeMoney }
             .sum()
             .toDouble()
     }
