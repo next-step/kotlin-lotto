@@ -26,4 +26,17 @@ class NumbersTest {
             )
         )
     }
+
+    @Test
+    fun getSum() {
+        // given
+        val input = listOf("2", "23", "50", "0", "100")
+        val numbers = Numbers(input)
+
+        // when
+        val sum = numbers.getSum()
+
+        // then
+        assertThat(sum).isEqualTo(200)
+    }
 }
