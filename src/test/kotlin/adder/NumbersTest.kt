@@ -50,6 +50,28 @@ class NumbersTest {
     }
 
     @Test
+    fun createWithCustomDelimiter() {
+        // given
+        val input = "//-\\n1-2-3-45-6"
+
+        // when
+        val numbers = Numbers(input)
+
+        // then
+        assertThat(numbers).isEqualTo(
+            Numbers(
+                listOf(
+                    Number(1),
+                    Number(2),
+                    Number(3),
+                    Number(45),
+                    Number(6)
+                )
+            )
+        )
+    }
+
+    @Test
     fun getSum() {
         // given
         val input = listOf("2", "23", "50", "0", "100")
