@@ -1,5 +1,5 @@
 package lotto
 
-class Money {
-
+data class Money(val value: Int) {
+    constructor(input: String) : this(input.toInt())
 }
