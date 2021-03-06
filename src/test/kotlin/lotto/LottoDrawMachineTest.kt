@@ -8,6 +8,11 @@ class LottoDrawMachineTest {
         LottoDrawMachine(1..45)
     }
 
+    @Test
+    fun `번호는 45개여야 한다`() {
+        assertThat(LottoDrawMachine(1..45).size).isEqualTo(45)
+    }
+
     class LottoDrawMachine(pool: Set<Int>) {
         constructor(range: IntRange) : this(range.toSet())
     }
