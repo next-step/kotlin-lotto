@@ -3,7 +3,6 @@ package lotto.model
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
 
 internal class LottoNumbersTest {
     @Test
@@ -30,6 +29,22 @@ internal class LottoNumbersTest {
             LottoNumber(2),
             LottoNumber(3),
             LottoNumber(4),
+            LottoNumber(5)
+        )
+
+        // when, then
+        assertThrows<IllegalArgumentException> { LottoNumbers(lottoNumbers) }
+    }
+
+    @Test
+    fun `같은 LottoNumbers에 속하는 6개의 로또 번호는 모두 달라야 한다`() {
+        // given
+        val lottoNumbers = listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
             LottoNumber(5)
         )
 
