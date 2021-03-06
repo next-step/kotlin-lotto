@@ -8,7 +8,7 @@ data class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
     constructor(numbers: Collection<Int>): this(numbers.map(::LottoNumber))
 
     fun getWinningCount(winningNumbers: List<Int>): Int {
-        TODO("Not yet implemented")
+        return lottoNumbers.filter { winningNumbers.contains(it.number) }.count()
     }
 
     companion object {
