@@ -2,6 +2,7 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 
 class LottoDrawMachineTest {
@@ -25,6 +26,21 @@ class LottoDrawMachineTest {
         LottoDrawMachine(1..45).lottoNumber()
     }
 
+    @Test
+    fun `로또 번호는 6개 이다`() {
+        assertAll(
+            {
+                LottoNumber((1..6))
+            },
+            {
+                assertThrows<IllegalArgumentException> { LottoNumber((1..5)) }
+            },
+            {
+                assertThrows<IllegalArgumentException> { LottoNumber((1..7)) }
+            }
+        )
+    }
+
     class LottoDrawMachine(private val pool: Set<Int>) {
         val size: Int = pool.size
 
@@ -43,18 +59,20 @@ class LottoDrawMachineTest {
         }
     }
 
-    data class LottoNumber(private val numbers: Set<Int>) {
+    data class LottoNumber(private val numbers: List<Int>) {
         val size: Int = numbers.size
 
         init {
-            require(numbers.size == BALL_COUNT)
+            require(numbers.toSet().size == BALL_COUNT)
         }
+
+        constructor(range: IntRange) : this(range.toList())
 
         companion object {
             const val BALL_COUNT: Int = 6
 
             fun from(source: Set<Int>): LottoNumber {
-                return LottoNumber(source.take(BALL_COUNT).toSet())
+                return LottoNumber(source.take(BALL_COUNT))
             }
         }
     }
