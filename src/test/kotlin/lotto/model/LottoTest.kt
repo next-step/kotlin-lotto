@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-internal class LottoNumbersTest {
+internal class LottoTest {
     @Test
     fun `LottoNumbers는 LottoNumber 객체 6개로 만들어진다`() {
         // given
@@ -19,7 +19,7 @@ internal class LottoNumbersTest {
         )
 
         // when, then
-        assertDoesNotThrow { LottoNumbers(lottoNumbers) }
+        assertDoesNotThrow { Lotto(lottoNumbers) }
     }
 
     @Test
@@ -28,11 +28,11 @@ internal class LottoNumbersTest {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
 
         // when
-        val lottoNumbers = LottoNumbers(numbers)
+        val lottoNumbers = Lotto(numbers)
 
         // then
         assertThat(lottoNumbers).isEqualTo(
-            LottoNumbers(
+            Lotto(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -57,7 +57,7 @@ internal class LottoNumbersTest {
         )
 
         // when, then
-        assertThrows<IllegalArgumentException> { LottoNumbers(lottoNumbers) }
+        assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
     }
 
     @Test
@@ -73,13 +73,13 @@ internal class LottoNumbersTest {
         )
 
         // when, then
-        assertThrows<IllegalArgumentException> { LottoNumbers(lottoNumbers) }
+        assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
     }
 
     @Test
     fun `당첨번호를 인자로 주면, 몇 개가 당첨번호와 일치하는지 반환한다`() {
         // given
-        val myLotto = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val myLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         // when
         val count = myLotto.getWinningCount(listOf(1, 2, 3, 4, 5, 7))
