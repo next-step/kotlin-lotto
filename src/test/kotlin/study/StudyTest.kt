@@ -31,7 +31,7 @@ class StudyTest {
 
     @Test
     fun `string with`() {
-        assertThat("asdfaaaa".startsWith("addf")).isTrue()
+        assertThat("asdfaaaa".startsWith("asdf")).isTrue()
     }
 
     @Test
