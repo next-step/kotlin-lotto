@@ -12,9 +12,9 @@ internal class LottoTicketTest {
         assertThat(isSorted(lottoTicket.numbers)).isTrue()
     }
 
-    private fun isSorted(numbers: List<Int>): Boolean {
+    private fun isSorted(numbers: LottoNumbers): Boolean {
         for (i in 0 until numbers.lastIndex) {
-            if (numbers[i] > numbers[i + 1]) {
+            if (numbers[i].number > numbers[i + 1].number) {
                 return false
             }
         }

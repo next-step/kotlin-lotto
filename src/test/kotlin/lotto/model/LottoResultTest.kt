@@ -1,6 +1,9 @@
 package lotto.model
 
-import lotto.model.LottoPlace.*
+import lotto.model.LottoPlace.FIRST
+import lotto.model.LottoPlace.SECOND
+import lotto.model.LottoPlace.THIRD
+import lotto.model.LottoPlace.FOURTH
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -25,22 +28,22 @@ internal class LottoResultTest {
             return listOf(
                 Arguments {
                     arrayOf(
-                        LottoResult(mapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0), Money(10_000)),
-                        LottoResult(mapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0), Money(10_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0)), Money(10_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0)), Money(10_000)),
                         true
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(mapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0), Money(10_000)),
-                        LottoResult(mapOf(FIRST to 1, SECOND to 1, THIRD to 0, FOURTH to 0), Money(10_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0)), Money(10_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 1, SECOND to 1, THIRD to 0, FOURTH to 0)), Money(10_000)),
                         false
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(mapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0), Money(10_000)),
-                        LottoResult(mapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0), Money(23_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0)), Money(10_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0)), Money(23_000)),
                         false
                     )
                 }
@@ -52,19 +55,19 @@ internal class LottoResultTest {
             return listOf(
                 Arguments {
                     arrayOf(
-                        LottoResult(mapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1), Money(5_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1)), Money(5_000)),
                         1.0
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(mapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0), Money(5_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0)), Money(5_000)),
                         0.0
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(mapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1), Money(14_000)),
+                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1)), Money(14_000)),
                         0.35
                     )
                 }

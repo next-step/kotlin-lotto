@@ -1,21 +1,15 @@
 package lotto.model
 
-import lotto.model.LottoPlace.*
+class LottoChecker(private val winningNumbers: WinningNumbers) {
+    fun check(tickets: LottoTickets, sumCostOfTickets: Money): LottoResult {
+        val winningCounter = WinningCounter()
 
-class LottoChecker(private val winningNumbers: List<Int>) {
-    fun check(tickets: LottoTickets, sumCostOfTickets: Money) : LottoResult {
-        val winningCountMap = mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0)
+        tickets.forEach {
+            val matchCount = it.countMatch(winningNumbers)
 
-        tickets.forEach { ticket ->
-            val matchCount = winningNumbers.count {
-                ticket.numbers.contains(it)
-            }
-
-            LottoPlace.match(matchCount)?.let {
-                winningCountMap.put(it, winningCountMap.getValue(it) + 1)
-            }
+            winningCounter.record(matchCount)
         }
 
-        return LottoResult(winningCountMap, sumCostOfTickets)
+        return LottoResult(winningCounter, sumCostOfTickets)
     }
 }

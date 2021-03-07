@@ -2,12 +2,10 @@ package lotto.model
 
 import kotlin.math.floor
 
-data class LottoResult(private val winningCountMap: Map<LottoPlace, Int>, val sumCostOfTickets: Money) {
+data class LottoResult(private val winningCounter: WinningCounter, val sumCostOfTickets: Money) {
     val benefitRate: Double
         get() {
-            val totalWinnings = winningCountMap.entries.fold(Money.zero()) {
-                accu, (lottoPlace, winningCount) -> accu.add(lottoPlace.winnings.times(winningCount))
-            }
+            val totalWinnings = winningCounter.winningsSum
 
             val benefitRate = totalWinnings.dividedBy(sumCostOfTickets)
             return ceilToSecond(benefitRate)
