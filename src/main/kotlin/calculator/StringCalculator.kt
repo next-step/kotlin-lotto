@@ -21,7 +21,7 @@ object StringCalculator {
 
         var adjustedInput = input
         if (hasCustomDelimeter(input)) {
-            adjustedInput = adjustCustomExpression(input)
+            adjustedInput = adjustInputWithCustomExpression(input)
         }
 
         val nums = splitNum(adjustedInput)
@@ -38,7 +38,7 @@ object StringCalculator {
         return true
     }
 
-    private fun adjustCustomExpression(input: String): String {
+    private fun adjustInputWithCustomExpression(input: String): String {
         val expressionDeletedInput = removeCustomDelimeterExpression(input)
         val customDelimeter = getCustomDelimeter(input)
         return replaceCustomDelimeterToBaseDelimeter(expressionDeletedInput, customDelimeter)
