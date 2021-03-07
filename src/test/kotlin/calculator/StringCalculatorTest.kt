@@ -18,4 +18,11 @@ class StringCalculatorTest {
         val result = StringCalculator.calculate(input)
         Assertions.assertThat(result).isEqualTo(output)
     }
+
+    @ParameterizedTest
+    @CsvSource(value = ["1:2=3", "2:3=5"], delimiter = '=')
+    fun `콜론으로 구분된 문자열을 입력받는다`(input: String, output: Int) {
+        val result = StringCalculator.calculate(input)
+        Assertions.assertThat(result).isEqualTo(output)
+    }
 }
