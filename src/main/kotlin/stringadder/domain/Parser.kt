@@ -11,8 +11,10 @@ class Parser(private val input: String) {
 
     private fun initWithoutCustomDelimiter() {
         if (!hasCustomDelimiter()) {
-            operands = Operands(input.split(*delimiters.toTypedArray())
-                .map { token -> Operand(token) })
+            operands = Operands(
+                input.split(*delimiters.toTypedArray())
+                    .map { token -> Operand(token) }
+            )
         }
     }
 
