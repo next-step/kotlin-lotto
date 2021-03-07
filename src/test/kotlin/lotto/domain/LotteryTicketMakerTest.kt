@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.maker.DefaultLotteryTicketMaker
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -7,7 +8,9 @@ class LotteryTicketMakerTest {
 
     @Test
     fun `로또 넘버를 생성한다`() {
-        val lotteryTicket: LotteryTicket = LotteryTicketMaker.createLotteryTicket()
+        val lotteryTicketMaker = DefaultLotteryTicketMaker()
+        val lotteryTicket: LotteryTicket = lotteryTicketMaker.createLotteryTicket()
+
         assertThat(lotteryTicket.numbers).hasSize(6)
         assertThat(lotteryTicket.numbers).isSubsetOf(1..45)
 
@@ -23,6 +26,5 @@ class LotteryTicketMakerTest {
             assertThat(number).isGreaterThan(preNum)
             preNum = number
         }
-
     }
 }
