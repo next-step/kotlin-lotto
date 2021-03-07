@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal class LottoPaper(private val values: List<Lotto>) {
     fun result(money: Money, winLotto: Lotto): LottoStatistics {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Rank(private val matchCount: Int, val winningMoney: Long) {
 
@@ -12,7 +12,7 @@ enum class Rank(private val matchCount: Int, val winningMoney: Long) {
     companion object {
         fun find(matchCount: Int): Rank {
             return values().firstOrNull { it.matchCount == matchCount }
-                ?: Rank.MISS
+                ?: MISS
         }
     }
 }

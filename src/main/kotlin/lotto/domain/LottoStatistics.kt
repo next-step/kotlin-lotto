@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal data class LottoStatistics(
     val buyMoney: Money,

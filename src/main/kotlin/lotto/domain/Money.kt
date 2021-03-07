@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal class Money(val value: Int) {
 

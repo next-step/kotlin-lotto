@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal data class LottoNums(private val nums: List<LottoNum>) {
 

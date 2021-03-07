@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal class RandomLottoNumsGenerator : LottoNumsGenerator {
     override fun generate(): LottoNums {

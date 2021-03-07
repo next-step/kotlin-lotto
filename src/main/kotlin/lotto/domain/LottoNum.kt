@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal data class LottoNum(private val num: Int) {
     init {

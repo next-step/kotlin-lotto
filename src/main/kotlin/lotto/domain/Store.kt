@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal class Store(
     private val lottoPrice: Money = DEFAULT_MONEY,

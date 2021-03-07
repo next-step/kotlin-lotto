@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 internal data class Lotto(private val lottoNums: LottoNums) {
     constructor(vararg nums: Int) : this(LottoNums(*nums))
