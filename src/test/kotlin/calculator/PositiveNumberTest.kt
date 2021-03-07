@@ -52,4 +52,15 @@ internal class PositiveNumberTest {
 
         assertThat(result.message).isEqualTo(expectedMessage)
     }
+
+    @Test
+    fun `덧셈이 가능하다`() {
+        val firstOperand = PositiveNumber(1)
+        val secondOperand = PositiveNumber(2)
+        val expected = PositiveNumber(3)
+
+        val result: PositiveNumber = firstOperand.plus(secondOperand)
+
+        assertThat(result).isEqualTo(expected)
+    }
 }

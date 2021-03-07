@@ -10,6 +10,10 @@ class PositiveNumber(private val value: Int) {
         value.toIntOrNull() ?: throw IllegalArgumentException("허용하지 않는 문자열입니다. value: $value")
     )
 
+    fun plus(that: PositiveNumber): PositiveNumber {
+        return PositiveNumber(0)
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
