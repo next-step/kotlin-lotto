@@ -13,7 +13,7 @@ class StringCalculator {
     }
 
     private fun splitInput(input: String): List<String> {
-        val matchResult = Regex(CUSTOM_DELIMITER_FIND_REGEX).find(input)
+        val matchResult = CUSTOM_DELIMITER_FIND_REGEX.find(input)
 
         return if (matchResult != null) {
             splitByCustomDelimiter(matchResult)
@@ -30,11 +30,13 @@ class StringCalculator {
     }
 
     private fun splitByDefaultDelimiter(input: String) =
-        input.split(Regex(DEFAULT_DELIMITER_REGEX))
+        input.split(DEFAULT_DELIMITER_REGEX)
 
     private fun validate(splitInputs: List<String>) {
-        splitInputs.forEach {
-            require(it.toIntOrNull() != null && it.toInt() >= 0) { "문자열 계산기에는 0, 양수만 인자로 올 수 있습니다!" }
+        splitInputs.map {
+            it.toIntOrNull()
+        }.forEach {
+            require(it != null && it >= 0) { "문자열 계산기에는 0, 양수만 인자로 올 수 있습니다!" }
         }
     }
 
@@ -42,7 +44,7 @@ class StringCalculator {
         splitInputs.fold(0, { accu, curr -> accu + curr.toInt() })
 
     companion object {
-        const val CUSTOM_DELIMITER_FIND_REGEX = "//(.)\\\\n(.*)"
-        const val DEFAULT_DELIMITER_REGEX = "[,:]"
+        private val CUSTOM_DELIMITER_FIND_REGEX = Regex("//(.)\\\\n(.*)")
+        private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
     }
 }
