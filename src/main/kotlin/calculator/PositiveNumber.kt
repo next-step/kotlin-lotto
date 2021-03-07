@@ -1,6 +1,6 @@
 package calculator
 
-class Number(private val value: Int) {
+class PositiveNumber(private val value: Int) {
 
     init {
         require(value > 0) { "양수만 허용합니다. value: $value" }
@@ -14,7 +14,7 @@ class Number(private val value: Int) {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Number
+        other as PositiveNumber
 
         if (value != other.value) return false
 
