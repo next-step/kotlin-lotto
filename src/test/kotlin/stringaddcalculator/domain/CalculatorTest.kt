@@ -1,9 +1,7 @@
 package stringaddcalculator.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -47,13 +45,11 @@ internal class CalculatorTest {
         assertThat(calculator.add(text)).isSameAs(6)
     }
 
-
     @ParameterizedTest
     @ValueSource(strings = ["//;\n1;2;3"])
     fun `커스텀 구분자로 숫자를 구분하면 구분자로 분리한 숫자 리스트를 반환한다`(text: String) {
         calculator.parseExpression(text)?.let {
             assertThat(it.size).isEqualTo(3)
         }
-
     }
 }
