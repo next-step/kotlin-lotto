@@ -11,7 +11,7 @@ class PositiveNumber(private val value: Int) {
     )
 
     fun plus(that: PositiveNumber): PositiveNumber {
-        return PositiveNumber(0)
+        return PositiveNumber(this.value + that.value)
     }
 
     override fun equals(other: Any?): Boolean {
