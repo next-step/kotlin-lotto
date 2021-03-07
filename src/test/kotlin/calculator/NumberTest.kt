@@ -3,6 +3,8 @@ package calculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class NumberTest {
 
@@ -28,6 +30,24 @@ internal class NumberTest {
     fun `숫자가 아닌 문자열로 Number를 생성하는 경우 예외를 반환한다`() {
         val input: String = "z"
         val expectedMessage: String = "허용하지 않는 문자열입니다. value: $input"
+        val result: IllegalArgumentException = assertThrows { Number(input) }
+
+        assertThat(result.message).isEqualTo(expectedMessage)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [-100, -1, 0])
+    fun `음수나 0인 숫자로 Number를 생성하는 경우 예외를 반환한다`(input: Int) {
+        val expectedMessage: String = "양수만 허용합니다. value: $input"
+        val result: IllegalArgumentException = assertThrows { Number(input) }
+
+        assertThat(result.message).isEqualTo(expectedMessage)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-100", "-1", "0"])
+    fun `음수나 0인 문자열로 Number를 생성하는 경우 예외를 반환한다`(input: String) {
+        val expectedMessage: String = "양수만 허용합니다. value: $input"
         val result: IllegalArgumentException = assertThrows { Number(input) }
 
         assertThat(result.message).isEqualTo(expectedMessage)
