@@ -1,10 +1,10 @@
 package lotto
 
-class RandomLottoGenerator {
+class RandomLottoGenerator: LottoGenerator {
 
     private val lottoNumberPool: List<LottoNumber> = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).map { LottoNumber(it) }
 
-    fun generate(): Lotto {
+    override fun generate(): Lotto {
         return lottoNumberPool.shuffled().subList(0, LOTTO_NUMBER_COUNT).let { Lotto(it) }
     }
 
