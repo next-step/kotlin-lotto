@@ -25,4 +25,14 @@ class LottoTest {
 
         assertThat(result.message).isEqualTo(expectedMessage)
     }
+
+    @Test
+    fun `로또 생성 시 중복된 로또번호가 있는 경우 예외를 반환한다`() {
+        val lottoNumbers = listOf(1, 1, 2, 3, 4, 5).map { LottoNumber(it) }
+        val expectedMessage = "중복된 로또번호가 있습니다."
+
+        val result = assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
+
+        assertThat(result.message).isEqualTo(expectedMessage)
+    }
 }
