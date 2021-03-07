@@ -69,4 +69,25 @@ class StringCalculatorTest {
         val result = StringCalculator.calculate(input)
         assertThat(result).isEqualTo(0)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "0"])
+    fun `숫자 하나를 입력한 경우, 해당 숫자 리턴`(input: String) {
+        val result = StringCalculator.calculate(input)
+        assertThat(result).isEqualTo(input.toInt())
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//2\n1232324"])
+    fun `구분자가 숫자로 나오는 경우`(input: String) {
+        val result = StringCalculator.calculate(input)
+        assertThat(result).isEqualTo(11)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//2\n1222324"])
+    fun `숫자로 나온 구분자가 숫자로 사용되는 경우`(input: String) {
+        assertThatThrownBy { StringCalculator.calculate(input) }
+            .isInstanceOf(RuntimeException::class.java)
+    }
 }

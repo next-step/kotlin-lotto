@@ -21,6 +21,7 @@ object StringCalculator {
         if (hasCustomDelimeter(input)) {
             adjustedInput = adjustCustomExpression(input)
         }
+
         val nums = splitNum(adjustedInput)
         return nums.sum()
     }
@@ -36,10 +37,19 @@ object StringCalculator {
     }
 
     private fun adjustCustomExpression(input: String): String {
-        val customDelimeter = input.substring(CUSTOM_DELIMETER_INDEX, CUSTOM_DELIMETER_INDEX + 1)
-        val expressionDeletedInput = Regex("""//(.)\n""").replace(input, "")
-        return expressionDeletedInput.replace(customDelimeter, BASE_DELIMETER)
+        val customDelimeter = getCustomDelimeter(input)
+        val expressionDeletedInput = removeCustomDelimeterExpression(input)
+        return replaceCustomDelimeterToBaseDelimeter(expressionDeletedInput, customDelimeter)
     }
+
+    private fun getCustomDelimeter(input: String): String =
+        input.substring(CUSTOM_DELIMETER_INDEX, CUSTOM_DELIMETER_INDEX + 1)
+
+    private fun removeCustomDelimeterExpression(input: String): String =
+        Regex("""//(.)\n""").replace(input, "")
+
+    private fun replaceCustomDelimeterToBaseDelimeter(input: String, customDelimeter: String): String =
+        input.replace(customDelimeter, BASE_DELIMETER)
 
     private fun splitNum(input: String): List<Int> {
         return input.split(BASE_DELIMETER_COMMA, BASE_DELIMETER_COLON).map {
