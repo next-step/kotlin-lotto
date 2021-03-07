@@ -11,7 +11,6 @@ class OperandCollection(private val numbers: List<Operand>) {
     }
 
     fun plusAllNumbers(): Operand {
-        return numbers
-            .fold(Operand(INITIAL_NUMBER)) { a, b -> a + b }
+        return numbers.fold(Operand(INITIAL_NUMBER)) { a, b -> a + b }
     }
 }
