@@ -11,6 +11,12 @@ internal data class LottoNums(private val nums: List<LottoNum>) {
         }
     }
 
+    constructor(vararg nums: Int) : this(nums = nums.asList().map { LottoNum(it) })
+
+    internal fun matchNums(lottoNums: LottoNums): List<LottoNum> {
+        return lottoNums.nums.filter(this.nums::contains)
+    }
+
     companion object {
         private const val NUM_SIZE = 6
     }
