@@ -3,7 +3,6 @@ package calculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
 
 internal class StringAddCalculatorIntegrationTest {
 
@@ -34,8 +33,7 @@ internal class StringAddCalculatorIntegrationTest {
         val input = "1,2,-3"
         val expectedMessage = "양수만 허용합니다. value: -3"
 
-        val result = assertThrows<IllegalArgumentException> { underTest.calculate(input) }
-        
+        val result = assertThrows<RuntimeException> { underTest.calculate(input) }
         assertThat(result.message).isEqualTo(expectedMessage)
     }
 }
