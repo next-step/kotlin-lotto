@@ -1,7 +1,7 @@
 # kotlin-lotto
 
 
-- [ ] 로또 생성  
+- [X] 로또 생성  
   - [ ] validation: 번호 개수는 6개 인가 ?  
   - [ ] validation: 1~45 사이의 값인가 ?  
 
