@@ -1,13 +1,11 @@
 package lotto.model
 
-class LottoTicket {
-    val numbers: List<Int> = autoCreate()
-
-    private fun autoCreate() =
-        List(NUMBERS_MAXIMUM) { i -> i + 1 }.shuffled().subList(0, NUMBERS_SIZE).sorted()
-
+data class LottoTicket(val numbers: List<Int> = autoCreate()) {
     companion object {
-        const val NUMBERS_MAXIMUM = 45
-        const val NUMBERS_SIZE = 6
+        private const val NUMBERS_MAXIMUM = 45
+        private const val NUMBERS_SIZE = 6
+
+        private fun autoCreate() =
+            List(NUMBERS_MAXIMUM) { i -> i + 1 }.shuffled().subList(0, NUMBERS_SIZE).sorted()
     }
 }

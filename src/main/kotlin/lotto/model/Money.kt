@@ -1,8 +1,16 @@
 package lotto.model
 
-class Money(private val amount: Int) {
-    fun dividedBy(price: Money): Int {
-        return amount / price.amount
+data class Money(private val amount: Int) {
+    fun dividedBy(price: Money): Double {
+        return amount.toDouble() / price.amount.toDouble()
+    }
+
+    fun times(other: Int): Money {
+        return Money(amount * other)
+    }
+
+    fun add(other: Money): Money {
+        return Money(amount + other.amount)
     }
 
     companion object {

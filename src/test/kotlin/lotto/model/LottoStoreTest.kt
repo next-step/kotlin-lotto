@@ -22,6 +22,7 @@ internal class LottoStoreTest {
             return listOf(
                 Arguments { arrayOf(Money(1000), 1) },
                 Arguments { arrayOf(Money(3000), 3) },
+                Arguments { arrayOf(Money(2500), 2) },
                 Arguments { arrayOf(Money.zero(), 0) }
             )
         }
