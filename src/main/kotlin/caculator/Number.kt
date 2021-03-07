@@ -1,6 +1,6 @@
 package caculator
 
-internal class Number(val value: Int) {
+internal data class Number(val value: Int) {
     init {
         validate()
     }
@@ -26,12 +26,13 @@ internal class Number(val value: Int) {
     }
 
     private fun validate() {
-        require(this.value >= 0) {
+        require(this.value >= MIN_VALUE) {
             "number must be positive"
         }
     }
 
     companion object {
         val ZERO = Number(0)
+        private const val MIN_VALUE: Int = 0
     }
 }
