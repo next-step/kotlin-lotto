@@ -1,6 +1,6 @@
 package calculator
 
-class PositiveNumber(private val value: Int) {
+class PositiveNumber(val value: Int) {
 
     init {
         require(value > 0) { "양수만 허용합니다. value: $value" }
