@@ -11,7 +11,7 @@ class Calculator {
         }
     }
 
-    fun parseExpression(text: String): List<String>? {
+    private fun parseExpression(text: String): List<String>? {
         return Regex("//(.)\n(.*)").find(text)?.let {
             it.groupValues[2].split(it.groupValues[1])
         }
