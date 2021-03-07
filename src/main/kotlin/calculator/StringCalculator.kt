@@ -11,10 +11,9 @@ object StringCalculator {
     private const val WRONG_INPUT_EXCEPTION_MESSGAE = "잘못된 입력값이 있습니다."
     private val CUSTOM_DELIMETER_EXPRESSION_RANGE = 0..5
 
-
     fun calculate(input: String?): Int {
 
-        if(input.isNullOrBlank()) {
+        if (input.isNullOrBlank()) {
             return DEFAULT_VALUE_OF_NULL_OR_EMPTY
         }
 
