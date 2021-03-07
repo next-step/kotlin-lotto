@@ -40,6 +40,6 @@ class StudyTest {
     @Test
     fun `substring`() {
         val str = "abcd"
-        assertThat(str.substring(0, 1)).isEqualTo("a")
+        assertThat(str.substring(0..0)).isEqualTo("a")
     }
 }

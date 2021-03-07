@@ -4,32 +4,37 @@ object StringCalculator {
 
     private const val BASE_DELIMETER_COMMA = ","
     private const val BASE_DELIMETER_COLON = ":"
+    private const val CUSTOM_DELIMETER_INDEX = 2
+    private const val MIN_LENGTH_WITH_CUSTOM_EXPRESSION = 6
+    private val CUSTOM_DELIMETER_EXPRESSION_RANGE = 0..5
 
     fun calculate(input: String): Int {
 
-        val delimeter = getDelimeterIfExist(input)
-        val adjustedInput = removeCustomDelimeterExpressionIfExist(input)
-        val nums = splitNum(adjustedInput, delimeter)
+        var adjustedInput = input
+        if (hasCustomDelimeter(input)) {
+            adjustedInput = adjustCustomExpression(input)
+        }
+        val nums = splitNum(adjustedInput)
         return nums.sum()
     }
 
-    private fun removeCustomDelimeterExpressionIfExist(input: String): String {
-        return Regex("""//(.)\n""").replace(input, "")
+    private fun hasCustomDelimeter(input: String): Boolean {
+
+        if (input.length < MIN_LENGTH_WITH_CUSTOM_EXPRESSION) return false
+
+        val startString = input.substring(CUSTOM_DELIMETER_EXPRESSION_RANGE)
+        Regex("""//(.)\n""").find(startString) ?: return false
+
+        return true
     }
 
-    private fun getDelimeterIfExist(input: String): String? {
-
-        if (input.length < 6) return null
-
-        val startString = input.substring(0, 6)
-        Regex("""//(.)\n""").find(startString) ?: return null
-        return input.substring(2, 3)
+    private fun adjustCustomExpression(input: String): String {
+        val customDelimeter = input.substring(CUSTOM_DELIMETER_INDEX, CUSTOM_DELIMETER_INDEX + 1)
+        val expressionDeletedInput = Regex("""//(.)\n""").replace(input, "")
+        return expressionDeletedInput.replace(customDelimeter, BASE_DELIMETER_COMMA)
     }
 
-    private fun splitNum(input: String, customDelimeter: String?): List<Int> {
-        if (customDelimeter == null) {
-            return input.split(BASE_DELIMETER_COMMA, BASE_DELIMETER_COLON).map { it.toInt() }
-        }
-        return input.split(BASE_DELIMETER_COMMA, BASE_DELIMETER_COLON, customDelimeter).map { it.toInt() }
+    private fun splitNum(input: String): List<Int> {
+        return input.split(BASE_DELIMETER_COMMA, BASE_DELIMETER_COLON).map { it.toInt() }
     }
 }
