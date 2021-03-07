@@ -13,7 +13,7 @@ internal data class LottoNums(private val nums: List<LottoNum>) {
 
     constructor(vararg nums: Int) : this(nums = nums.asList().map { LottoNum(it) })
 
-    internal fun matchNums(lottoNums: LottoNums): List<LottoNum> {
+    internal fun findMatchNums(lottoNums: LottoNums): List<LottoNum> {
         return lottoNums.nums.filter(this.nums::contains)
     }
 

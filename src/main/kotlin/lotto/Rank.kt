@@ -1,6 +1,6 @@
 package lotto
 
-enum class Rank(private val matchCount: Int, private val price: Long) {
+enum class Rank(private val matchCount: Int, val winningMoney: Long) {
 
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
