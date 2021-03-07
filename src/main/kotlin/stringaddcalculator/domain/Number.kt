@@ -1,15 +1,13 @@
 package stringaddcalculator.domain
 
-import java.lang.NumberFormatException
-
 data class Number(val text: String) {
     val number: Int = convertInt()
 
     init {
-        isNegative()
+        validateNegative()
     }
 
-    fun convertInt(): Int {
+    private fun convertInt(): Int {
         try {
             return text.toInt()
         } catch (ex: NumberFormatException) {
@@ -17,9 +15,7 @@ data class Number(val text: String) {
         }
     }
 
-    fun isNegative() {
+    private fun validateNegative() {
         if (number < 0) throw RuntimeException("$number is Negative")
     }
-
-
 }
