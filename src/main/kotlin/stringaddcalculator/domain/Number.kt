@@ -11,7 +11,7 @@ data class Number(val text: String) {
         try {
             return text.toInt()
         } catch (ex: NumberFormatException) {
-            throw RuntimeException("$text is Not Number")
+            throw IllegalStateException("$text is Not Number")
         }
     }
 
