@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoMachine(private val lottoPrice: Int, private val lottoGenerator: LottoGenerator) {
 
