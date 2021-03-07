@@ -8,9 +8,9 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoNumberTest {
 
-    @Test
-    fun `로또번호 생성`() {
-        val value = 1
+    @ParameterizedTest(name = "로또번호는 {0} 이/가 될 수 있다")
+    @ValueSource(ints = [1, 11, 45])
+    fun `1~45 로또번호를 생성할 수 있다`(value: Int) {
         val result = LottoNumber(value)
         assertThat(result).isNotNull
     }
