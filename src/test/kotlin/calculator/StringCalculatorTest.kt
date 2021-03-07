@@ -6,8 +6,10 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 
@@ -46,5 +48,26 @@ class StringCalculatorTest {
     fun `커스텀 구분자와 기본 구분자로 구분된 문자열을 입력받는다`(input: String) {
         val result = StringCalculator.calculate(input)
         assertThat(result).isEqualTo(10)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1:-1", "-1,1", "-1"])
+    fun `음수를 입력받은 경우 예외를 throw`(input: String) {
+        assertThatThrownBy { StringCalculator.calculate(input) }
+            .isInstanceOf(RuntimeException::class.java)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1;a", "a,1", "a"])
+    fun `숫자가 아닌 값을 입력받은 경우 예외를 throw`(input: String) {
+        assertThatThrownBy { StringCalculator.calculate(input) }
+            .isInstanceOf(RuntimeException::class.java)
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `null 또는 빈 값을 입력받은 경우 0을 리턴`(input: String?) {
+        val result = StringCalculator.calculate(input)
+        assertThat(result).isEqualTo(0)
     }
 }

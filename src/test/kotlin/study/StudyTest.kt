@@ -2,9 +2,6 @@ package study
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.ValueSource
 
 class StudyTest {
     @Test
@@ -41,5 +38,16 @@ class StudyTest {
     fun `substring`() {
         val str = "abcd"
         assertThat(str.substring(0..0)).isEqualTo("a")
+    }
+
+    @Test
+    fun `toInt of value less than 0`() {
+        assertThat("-1".toInt()).isEqualTo(-1)
+    }
+
+    @Test
+    fun `toInt of value less than 0 with split`() {
+        val nums = "-1,-1".split(",").map { it.toInt() }
+        assertThat(nums).contains(-1, -1)
     }
 }

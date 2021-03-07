@@ -2,13 +2,21 @@ package calculator
 
 object StringCalculator {
 
+    private const val BASE_DELIMETER = ","
     private const val BASE_DELIMETER_COMMA = ","
     private const val BASE_DELIMETER_COLON = ":"
+    private const val DEFAULT_VALUE_OF_NULL_OR_EMPTY = 0
     private const val CUSTOM_DELIMETER_INDEX = 2
-    private const val MIN_LENGTH_WITH_CUSTOM_EXPRESSION = 6
+    private const val CUSTOM_EXPRESSION_LENGTH = 6
+    private const val WRONG_INPUT_EXCEPTION_MESSGAE = "잘못된 입력값이 있습니다."
     private val CUSTOM_DELIMETER_EXPRESSION_RANGE = 0..5
 
-    fun calculate(input: String): Int {
+
+    fun calculate(input: String?): Int {
+
+        if(input.isNullOrBlank()) {
+            return DEFAULT_VALUE_OF_NULL_OR_EMPTY
+        }
 
         var adjustedInput = input
         if (hasCustomDelimeter(input)) {
@@ -20,7 +28,7 @@ object StringCalculator {
 
     private fun hasCustomDelimeter(input: String): Boolean {
 
-        if (input.length < MIN_LENGTH_WITH_CUSTOM_EXPRESSION) return false
+        if (input.length < CUSTOM_EXPRESSION_LENGTH) return false
 
         val startString = input.substring(CUSTOM_DELIMETER_EXPRESSION_RANGE)
         Regex("""//(.)\n""").find(startString) ?: return false
@@ -31,10 +39,22 @@ object StringCalculator {
     private fun adjustCustomExpression(input: String): String {
         val customDelimeter = input.substring(CUSTOM_DELIMETER_INDEX, CUSTOM_DELIMETER_INDEX + 1)
         val expressionDeletedInput = Regex("""//(.)\n""").replace(input, "")
-        return expressionDeletedInput.replace(customDelimeter, BASE_DELIMETER_COMMA)
+        return expressionDeletedInput.replace(customDelimeter, BASE_DELIMETER)
     }
 
     private fun splitNum(input: String): List<Int> {
-        return input.split(BASE_DELIMETER_COMMA, BASE_DELIMETER_COLON).map { it.toInt() }
+        return input.split(BASE_DELIMETER_COMMA, BASE_DELIMETER_COLON).map {
+            validateNum(it)
+            it.toInt()
+        }
+    }
+
+    private fun validateNum(numberOfString: String) {
+
+        val num = numberOfString.toIntOrNull() ?: throw RuntimeException(WRONG_INPUT_EXCEPTION_MESSGAE)
+
+        if (num < 0) {
+            throw RuntimeException(WRONG_INPUT_EXCEPTION_MESSGAE)
+        }
     }
 }
