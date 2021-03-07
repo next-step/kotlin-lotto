@@ -1,0 +1,17 @@
+package lotto
+
+internal data class LottoNums(private val nums: List<LottoNum>) {
+
+    init {
+        require(this.nums.size == NUM_SIZE) {
+            "the number of nums must be $NUM_SIZE"
+        }
+        require(this.nums.distinct().size == NUM_SIZE) {
+            "all of nums must be unique"
+        }
+    }
+
+    companion object {
+        private const val NUM_SIZE = 6
+    }
+}
