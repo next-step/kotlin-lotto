@@ -13,7 +13,7 @@ internal class StringAddCalculatorIntegrationTest {
         val input = "1,2,3"
         val expected = 6
 
-        val result = underTest.calculate(input)
+        val result = underTest.run(input)
 
         assertThat(result).isEqualTo(expected)
     }
@@ -23,7 +23,7 @@ internal class StringAddCalculatorIntegrationTest {
         val input = "//;\n1;2;3"
         val expected = 6
 
-        val result = underTest.calculate(input)
+        val result = underTest.run(input)
 
         assertThat(result).isEqualTo(expected)
     }
@@ -33,7 +33,8 @@ internal class StringAddCalculatorIntegrationTest {
         val input = "1,2,-3"
         val expectedMessage = "양수만 허용합니다. value: -3"
 
-        val result = assertThrows<RuntimeException> { underTest.calculate(input) }
+        val result = assertThrows<RuntimeException> { underTest.run(input) }
+
         assertThat(result.message).isEqualTo(expectedMessage)
     }
 }
