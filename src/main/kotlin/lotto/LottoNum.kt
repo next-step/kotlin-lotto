@@ -8,8 +8,8 @@ internal data class LottoNum(private val num: Int) {
     }
 
     companion object {
-        private const val MIN_NUM = 1
-        private const val MAX_NUM = 45
+        const val MIN_NUM = 1
+        const val MAX_NUM = 45
         private val NUMS = (MIN_NUM..MAX_NUM)
     }
 }

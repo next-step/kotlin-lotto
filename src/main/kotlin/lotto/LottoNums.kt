@@ -18,6 +18,6 @@ internal data class LottoNums(private val nums: List<LottoNum>) {
     }
 
     companion object {
-        private const val NUM_SIZE = 6
+        const val NUM_SIZE = 6
     }
 }
