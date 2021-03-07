@@ -5,5 +5,5 @@ import view.console.ConsoleInput
 import view.console.ConsoleOutput
 
 fun main() {
-    StringAdderController(ConsoleInput(), ConsoleOutput()).run()
+    StringAdderController.getInstance(ConsoleInput(), ConsoleOutput()).run()
 }

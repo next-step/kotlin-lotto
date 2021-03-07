@@ -1,5 +1,7 @@
 package view.console
 
-class ConsoleInput {
-    fun read() = readLine()!!
+import view.InputView
+
+class ConsoleInput : InputView {
+    override fun read() = readLine()!!
 }
