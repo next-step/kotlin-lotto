@@ -12,8 +12,8 @@ class StringAdderController private constructor(
 ) {
     fun run() {
         outputView.printStringAdderInputMessage()
-        val result = Parser(inputView.read()).operands.sum()
-        outputView.printStringAdderResultMessage(result)
+        val expression = Parser.parse(inputView.read())
+        outputView.printStringAdderResultMessage(expression.result())
     }
 
     companion object {
