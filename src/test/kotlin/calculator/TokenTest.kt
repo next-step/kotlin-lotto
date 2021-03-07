@@ -100,7 +100,7 @@ internal class TokenTest {
         fun generateOnlyDelimiterData(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of(",:", listOf("", "", "")),
-                Arguments.of("//+\na+d+b", listOf("a", "", "b")),
+                Arguments.of("//+\na++b", listOf("a", "", "b")),
                 Arguments.of("//-\n--", listOf("", "", ""))
             )
         }
