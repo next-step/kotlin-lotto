@@ -1,9 +1,9 @@
 package stringadder.domain
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -46,7 +46,6 @@ internal class ParserTest {
     @ParameterizedTest
     @ValueSource(strings = ["/;\\n", "//;\n"])
     fun init_exception(input: String) {
-        Assertions.assertThatThrownBy { Parser(input) }
-            .isInstanceOf(RuntimeException::class.java)
+        assertThrows<IllegalArgumentException> { Parser(input) }
     }
 }

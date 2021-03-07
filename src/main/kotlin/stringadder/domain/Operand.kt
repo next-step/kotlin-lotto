@@ -1,18 +1,19 @@
 package stringadder.domain
 
-data class Operand(private val number: String) {
-    var operand: Int
+data class Operand(private val token: String) {
+    val operand: Int
 
     init {
+        val number = token.toInt()
         validateNumber(number)
-        operand = number.toInt()
+        operand = number
     }
 
-    private fun validateNumber(number: String) {
+    private fun validateNumber(number: Int) {
         try {
-            validatePositive(number.toInt())
+            validatePositive(number)
         } catch (e: NumberFormatException) {
-            throw RuntimeException("숫자만 입력할 수 있습니다.")
+            throw IllegalArgumentException("숫자만 입력할 수 있습니다.")
         }
     }
 
