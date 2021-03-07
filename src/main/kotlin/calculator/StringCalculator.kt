@@ -7,7 +7,9 @@ object StringCalculator {
     private const val BASE_DELIMETER_COLON = ":"
     private const val DEFAULT_VALUE_OF_NULL_OR_EMPTY = 0
     private const val CUSTOM_DELIMETER_INDEX = 2
-    private const val CUSTOM_EXPRESSION_LENGTH = 6
+    private const val CUSTOM_DELIMETER_EXPRESSION_LENGTH = 6
+    private const val CUSTOM_DELIMETER_EXPRESSION_REGEX = """//(.)\n"""
+    private const val CUSTOM_EXPRESSION_ = 6
     private const val WRONG_INPUT_EXCEPTION_MESSGAE = "잘못된 입력값이 있습니다."
     private val CUSTOM_DELIMETER_EXPRESSION_RANGE = 0..5
 
@@ -28,17 +30,17 @@ object StringCalculator {
 
     private fun hasCustomDelimeter(input: String): Boolean {
 
-        if (input.length < CUSTOM_EXPRESSION_LENGTH) return false
+        if (input.length < CUSTOM_DELIMETER_EXPRESSION_LENGTH) return false
 
         val startString = input.substring(CUSTOM_DELIMETER_EXPRESSION_RANGE)
-        Regex("""//(.)\n""").find(startString) ?: return false
+        Regex(CUSTOM_DELIMETER_EXPRESSION_REGEX).find(startString) ?: return false
 
         return true
     }
 
     private fun adjustCustomExpression(input: String): String {
-        val customDelimeter = getCustomDelimeter(input)
         val expressionDeletedInput = removeCustomDelimeterExpression(input)
+        val customDelimeter = getCustomDelimeter(input)
         return replaceCustomDelimeterToBaseDelimeter(expressionDeletedInput, customDelimeter)
     }
 
@@ -46,7 +48,7 @@ object StringCalculator {
         input.substring(CUSTOM_DELIMETER_INDEX, CUSTOM_DELIMETER_INDEX + 1)
 
     private fun removeCustomDelimeterExpression(input: String): String =
-        Regex("""//(.)\n""").replace(input, "")
+        Regex(CUSTOM_DELIMETER_EXPRESSION_REGEX).replace(input, "")
 
     private fun replaceCustomDelimeterToBaseDelimeter(input: String, customDelimeter: String): String =
         input.replace(customDelimeter, BASE_DELIMETER)
