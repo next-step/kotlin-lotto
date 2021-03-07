@@ -2,15 +2,15 @@ package caculator
 
 internal class TokenParser {
 
-    internal fun parseToken(input: String): Numbers {
+    internal fun parseToken(input: String): NaturalNumbers {
         val matchResult: MatchResult? = CUSTOM_PATTERN.matchEntire(input)
         val regex = matchResult?.groups?.get(CUSTOM_PATTERN_GROUP_SPLITTER_INDEX)?.value?.toRegex() ?: DEFAULT_PATTERN
         val numbers = matchResult?.groups?.get(CUSTOM_PATTERN_GROUP_NUMBERS_INDEX)?.value ?: input
         return parseNumbers(regex = regex, numbers = numbers)
     }
 
-    private fun parseNumbers(numbers: String, regex: Regex): Numbers {
-        return Numbers(numbers.split(regex).filter(String::isNotEmpty).map { Number(it) })
+    private fun parseNumbers(numbers: String, regex: Regex): NaturalNumbers {
+        return NaturalNumbers(numbers.split(regex).filter(String::isNotBlank).map { NaturalNumber(it) })
     }
 
     companion object {

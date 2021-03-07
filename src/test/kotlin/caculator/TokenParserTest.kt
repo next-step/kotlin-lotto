@@ -14,8 +14,8 @@ internal class TokenParserTest {
         @JvmStatic
         fun customParserSource(): Stream<Arguments> {
             return Stream.of(
-                Arguments.arguments("//ab\n1ab2ab3", Numbers(listOf(Number(1), Number(2), Number(3)))),
-                Arguments.arguments("//1\n111111", Numbers(listOf()))
+                Arguments.arguments("//ab\n1ab2ab3", NaturalNumbers(listOf(NaturalNumber(1), NaturalNumber(2), NaturalNumber(3)))),
+                Arguments.arguments("//1\n111111", NaturalNumbers(listOf()))
             )
         }
     }
@@ -26,12 +26,12 @@ internal class TokenParserTest {
         val tokenParser = TokenParser()
         val result = tokenParser.parseToken("1,2:3")
 
-        assertThat(result).isEqualTo(Numbers(listOf(Number(1), Number(2), Number(3))))
+        assertThat(result).isEqualTo(NaturalNumbers(listOf(NaturalNumber(1), NaturalNumber(2), NaturalNumber(3))))
     }
 
     @MethodSource("customParserSource")
     @ParameterizedTest
-    fun customParser(input: String, expect: Numbers) {
+    fun customParser(input: String, expect: NaturalNumbers) {
         val tokenParser = TokenParser()
         val result = tokenParser.parseToken(input)
 
