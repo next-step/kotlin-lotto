@@ -37,4 +37,14 @@ internal class StringAddCalculatorIntegrationTest {
 
         assertThat(result.message).isEqualTo(expectedMessage)
     }
+    
+    @Test
+    fun `빈문자열을 입력하는 경우 0을 반환한다`() {
+        val input = ""
+        val expected = 0
+
+        val result = underTest.run(input)
+
+        assertThat(result).isEqualTo(expected)
+    }
 }
