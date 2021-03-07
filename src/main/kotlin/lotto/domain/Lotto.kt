@@ -1,6 +1,6 @@
 package lotto.domain
 
-internal data class Lotto(private val lottoNums: LottoNums) {
+internal data class Lotto(val lottoNums: LottoNums) {
     constructor(vararg nums: Int) : this(LottoNums(*nums))
 
     internal fun findMatchedNums(source: Lotto): List<LottoNum> {

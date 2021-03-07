@@ -1,8 +1,8 @@
 package lotto.domain
 
-internal data class LottoNum(private val num: Int) {
+internal data class LottoNum(val value: Int) {
     init {
-        require(NUMS.contains(num)) {
+        require(NUMS.contains(value)) {
             "lotto nums are from $MIN_NUM to $MAX_NUM"
         }
     }

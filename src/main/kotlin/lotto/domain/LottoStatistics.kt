@@ -1,7 +1,7 @@
 package lotto.domain
 
 internal data class LottoStatistics(
-    val buyMoney: Money,
+    private val buyMoney: Money,
     val rankCounts: Map<Rank, Int>
 ) {
 

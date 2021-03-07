@@ -1,6 +1,6 @@
 package lotto.domain
 
-internal class Money(val value: Int) {
+internal data class Money(val value: Int) {
 
     init {
         require(value >= MIN_VALUE)

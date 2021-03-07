@@ -1,6 +1,6 @@
 package lotto.domain
 
-internal data class LottoNums(private val nums: List<LottoNum>) {
+internal data class LottoNums(val nums: List<LottoNum>) {
 
     init {
         require(this.nums.size == NUM_SIZE) {
