@@ -1,8 +1,8 @@
 package stringaddcalculator.domain
 
 class Calculator {
-    fun add(text: String?): Int {
-        if (text.isNullOrEmpty()) return 0
+    fun add(text: String): Int {
+        if (text.isEmpty()) return 0
 
         return parseExpression(text)?.sumBy(String::toInt) ?: run {
             text.split(",", ":")
