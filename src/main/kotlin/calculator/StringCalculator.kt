@@ -39,9 +39,9 @@ object StringCalculator {
     }
 
     private fun adjustInputWithCustomExpression(input: String): String {
-        val expressionDeletedInput = removeCustomDelimeterExpression(input)
+        val adjustedInput = removeCustomDelimeterExpression(input)
         val customDelimeter = getCustomDelimeter(input)
-        return replaceCustomDelimeterToBaseDelimeter(expressionDeletedInput, customDelimeter)
+        return replaceCustomDelimeterToBaseDelimeter(adjustedInput, customDelimeter)
     }
 
     private fun getCustomDelimeter(input: String): String =
