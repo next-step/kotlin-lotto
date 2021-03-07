@@ -47,10 +47,13 @@ internal class CalculatorTest {
         assertThat(calculator.add(text)).isSameAs(6)
     }
 
-    @Test
-    fun `문자열 계산기에 음수를 전달하는 경우`() {
-        assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
-            calculator.add("-1")
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3"])
+    fun `커스텀 구분자로 숫자를 구분하면 구분자로 분리한 숫자 리스트를 반환한다`(text: String) {
+        calculator.parseExpression(text)?.let {
+            assertThat(it.size).isEqualTo(3)
         }
+
     }
 }
