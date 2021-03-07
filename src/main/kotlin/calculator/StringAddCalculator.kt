@@ -11,6 +11,10 @@ class StringAddCalculator {
     }
 
     private fun calculate(input: String): Int {
+        if (input.isEmpty()) {
+            return 0
+        }
+
         val token = Token(input)
         return token.values
             .map { PositiveNumber(it) }
