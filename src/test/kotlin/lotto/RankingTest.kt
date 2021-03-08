@@ -10,6 +10,10 @@ class RankingTest {
         assertThat(
             Ranking(LottoNumber(1, 2, 3, 4, 5, 6), LottoNumber(1, 2, 3, 4, 5, 6)).rank
         ).isEqualTo(Ranking.Rank.FIRST)
+
+        assertThat(
+            Ranking(LottoNumber(1, 2, 3, 4, 5, 7), LottoNumber(1, 2, 3, 4, 5, 6)).rank
+        ).isEqualTo(Ranking.Rank.SECOND)
     }
 
     class Ranking(match: Match) {
