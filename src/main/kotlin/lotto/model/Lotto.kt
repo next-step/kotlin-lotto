@@ -11,7 +11,7 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
 
     constructor(numbers: Collection<Int>) : this(numbers.map(::LottoNumber).toSet())
 
-    constructor(stringNumbers: String) : this(splitByComma(stringNumbers))
+    constructor(stringNumbers: String) : this(Delimiter(stringNumbers).split().map { it.toInt() })
 
     fun getWinningCount(winningNumbers: Lotto): Int {
         return lottoNums.count { winningNumbers.lottoNums.contains(it) }
@@ -32,12 +32,6 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
         private fun isUniqueSixNumbers(lottoNumbers: Set<LottoNumber>): Boolean {
             val size = lottoNumbers.size
             return (size == LOTTO_SIZE)
-        }
-
-        private fun splitByComma(stringNumbers: String): List<Int> {
-            return stringNumbers
-                .split(COMMA)
-                .map { it.trim().toInt() }
         }
     }
 }
