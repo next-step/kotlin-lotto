@@ -9,5 +9,6 @@ data class Lotto(val elements: Set<LottoNumber>) {
 
     companion object {
         private const val TICKET_SIZE = 6
+        val PRICE = Money(1000)
     }
 }

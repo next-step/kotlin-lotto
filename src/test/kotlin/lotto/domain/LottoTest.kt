@@ -1,5 +1,6 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -32,6 +33,11 @@ internal class LottoTest {
         assertThrows<IllegalArgumentException> {
             Lotto(setOf(number1, number2, number3, number4, number5, number6, number7))
         }
+    }
+
+    @Test
+    fun `로또 한장의 가격은 1000원이다`() {
+        assertThat(Lotto.PRICE).isEqualTo(Money(1000))
     }
 }
 
