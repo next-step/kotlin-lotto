@@ -2,18 +2,26 @@ package lotto
 
 import lotto.LottoDrawMachineTest.LottoNumber
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class RankingTest {
-    @Test
-    fun `두 번호그룹을 비교하여 일치수를 알 수 있다`() {
+    @ParameterizedTest(name = "1,2,3,4,5,6 과 {0} 의 랭킹은 {1} 이다")
+    @CsvSource(
+        value = [
+            "1,2,3,4,5,6:FIRST",
+            "1,2,3,4,5,10:SECOND",
+            "1,2,3,4,10,11:THIRD",
+            "1,2,3,10,11,12:FOURTH"
+        ],
+        delimiter = ':'
+    )
+    fun `두 번호그룹을 비교하여 일치수를 알 수 있다`(pick: String, rank: Ranking.Rank) {
+        val winningNumber = LottoNumber(1, 2, 3, 4, 5, 6)
+        val pickNumbers: List<Int> = pick.split(",").map { it.toInt() }
         assertThat(
-            Ranking(LottoNumber(1, 2, 3, 4, 5, 6), LottoNumber(1, 2, 3, 4, 5, 6)).rank
-        ).isEqualTo(Ranking.Rank.FIRST)
-
-        assertThat(
-            Ranking(LottoNumber(1, 2, 3, 4, 5, 7), LottoNumber(1, 2, 3, 4, 5, 6)).rank
-        ).isEqualTo(Ranking.Rank.SECOND)
+            Ranking(winningNumber, LottoNumber(pickNumbers)).rank
+        ).isEqualTo(rank)
     }
 
     class Ranking(match: Match) {
@@ -23,7 +31,9 @@ class RankingTest {
 
         enum class Rank(private val matchCount: Int) {
             FIRST(6),
-            SECOND(5);
+            SECOND(5),
+            THIRD(4),
+            FOURTH(3);
 
             private fun same(count: Int): Boolean = matchCount == count
 
