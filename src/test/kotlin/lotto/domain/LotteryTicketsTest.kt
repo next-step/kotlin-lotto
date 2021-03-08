@@ -22,7 +22,7 @@ class LotteryTicketsTest {
         val lotteryTickets = LotteryTickets(14, TestLotteryTicketMaker())
         val winningStatics = lotteryTickets.createWinningStatics(winningNumbers)
 
-        Assertions.assertThat(winningStatics.matchNumberCounts).containsOnly(entry(LotteryMatchType.Three, 14))
+        Assertions.assertThat(winningStatics.ticketCounts).containsOnly(entry(LotteryMatchType.Three, 14))
     }
 
     @Test
@@ -32,6 +32,6 @@ class LotteryTicketsTest {
         val lotteryTickets = LotteryTickets(5, TestLotteryTicketMaker())
         val winningStatics = lotteryTickets.createWinningStatics(winningNumbers)
 
-        Assertions.assertThat(winningStatics.matchNumberCounts).containsOnly(entry(LotteryMatchType.NonProfit, 5))
+        Assertions.assertThat(winningStatics.ticketCounts).containsOnly(entry(LotteryMatchType.NonProfit, 5))
     }
 }
