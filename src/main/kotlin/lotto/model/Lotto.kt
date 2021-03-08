@@ -24,6 +24,10 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
             .joinToString(COMMA_WITH_BLANK)
     }
 
+    fun hasNumber(lottoNumber: LottoNumber): Boolean {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         private const val LOTTO_SIZE = 6
         private const val COMMA = ","

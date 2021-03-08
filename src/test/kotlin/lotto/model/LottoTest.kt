@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoTest {
@@ -98,5 +99,18 @@ internal class LottoTest {
 
         // then
         assertThat(lotto).isEqualTo(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["1:true", "2:true", "6:true", "7:false"], delimiter = ':')
+    fun `LottoNumber 하나를 인자로 주면, Lotto에 포함된 숫자인지 아닌지 반환한다`(num: String, expectedHasNumber: Boolean) {
+        // given
+        val lotto = Lotto("1,2,3,4,5,6")
+
+        // when
+        val hasNumber: Boolean = lotto.hasNumber(LottoNumber(num))
+
+        // then
+        assertThat(hasNumber).isEqualTo(expectedHasNumber)
     }
 }
