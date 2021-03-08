@@ -35,40 +35,4 @@ class LottoDrawMachineTest {
             }
         )
     }
-
-    class LottoDrawMachine(private val pool: Set<Int>) {
-        val size: Int = pool.size
-
-        init {
-            require(size == POOL_SIZE)
-        }
-
-        constructor(range: IntRange) : this(range.toSet())
-
-        fun lottoNumber(): LottoNumber = pool.shuffled()
-            .toSet()
-            .let { LottoNumber.from(it) }
-
-        companion object {
-            const val POOL_SIZE: Int = 45
-        }
-    }
-
-    data class LottoNumber(private val numbers: List<Int>) : List<Int> by numbers {
-        init {
-            require(numbers.toSet().size == NUMBER_COUNT)
-        }
-
-        constructor(range: IntRange) : this(range.toList())
-
-        constructor(vararg numbers: Int) : this(numbers.toList())
-
-        companion object {
-            const val NUMBER_COUNT: Int = 6
-
-            fun from(source: Set<Int>): LottoNumber {
-                return LottoNumber(source.take(NUMBER_COUNT))
-            }
-        }
-    }
 }

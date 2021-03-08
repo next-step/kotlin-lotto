@@ -1,9 +1,7 @@
 package lotto
 
-import lotto.LottoDrawMachineTest.LottoNumber
-import lotto.RankingTest.Ranking.Rank
-import lotto.RankingTest.Ranking.Rank.FIRST
-import lotto.RankingTest.Ranking.Rank.MISS
+import lotto.Ranking.Rank.FIRST
+import lotto.Ranking.Rank.MISS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -20,9 +18,5 @@ class LottoGameTest {
 
         assertThat(LottoGame(pickLottoNumbers, winningNumber).result)
             .containsExactlyInAnyOrder(FIRST, FIRST, MISS)
-    }
-
-    class LottoGame(pickLottoNumbers: List<LottoNumber>, winningNumber: LottoNumber) {
-        val result: List<Rank> = pickLottoNumbers.map { RankingTest.Ranking(it, winningNumber).rank }
     }
 }

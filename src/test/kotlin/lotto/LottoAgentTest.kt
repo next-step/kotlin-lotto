@@ -1,9 +1,5 @@
 package lotto
 
-import lotto.LottoDrawMachineTest.LottoDrawMachine
-import lotto.LottoDrawMachineTest.LottoNumber
-import lotto.LottoTicketTest.LottoTicket
-import lotto.LottoTicketTest.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
