@@ -21,7 +21,7 @@ class StringReadStrategyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3;4", "//!\n1!2!3!4", "//#\n1#2#3#4"])
+    @ValueSource(strings = ["//;\\n1;2;3;4", "//!\\n1!2!3!4", "//#\\n1#2#3#4"])
     fun `커스텀 구분자로 문자열을 읽을때(전략사용)`(string: String) {
         assertThat(customReadStrategy.readString(string)).isEqualTo(listOf("1", "2", "3", "4"))
     }
@@ -38,9 +38,9 @@ class StringReadStrategyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3;4", "//!\n1!2!3!4", "//#\n1#2#3#4"])
+    @ValueSource(strings = ["//;\\n1;2;3;4", "//!\\n1!2!3!4", "//#\\n1#2#3#4"])
     fun `커스텀 구분자로 문자열을 읽을때`(string: String) {
-        val regexResult = Regex("//(.)\n(.*)").find(string)
+        val regexResult = Regex("//(.)\\\\n(.*)").find(string)
         var separator = ""
         var pureString = ""
         regexResult?.let {

@@ -11,12 +11,12 @@ class CustomReadStrategy() : StringReadStrategy {
     }
 
     private fun getCustomSeparator(string: String): String? {
-        val regexResult = Regex("//(.)\n(.*)").find(string)
+        val regexResult = Regex("//(.)\\\\n(.*)").find(string)
         return regexResult?.let { it.groupValues[1] }
     }
 
     private fun getStringWithOutCustomSeparator(string: String): String {
-        val regexResult = Regex("//(.)\n(.*)").find(string)
+        val regexResult = Regex("//(.)\\\\n(.*)").find(string)
         return regexResult!!.groupValues[2]
     }
 }

@@ -5,6 +5,6 @@ class InputView {
         var string = readLine()
         if (string.isNullOrBlank()) string = "0"
 
-        return string.translateEscapes()
+        return string
     }
 }
