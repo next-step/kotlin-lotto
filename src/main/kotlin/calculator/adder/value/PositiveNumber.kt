@@ -16,4 +16,3 @@ class PositiveNumber(_value: String?) {
         this
     }
 }
-

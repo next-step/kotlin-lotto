@@ -8,4 +8,3 @@ class PositiveAdder : Adder {
             .sumBy { it.value }
     }
 }
-
