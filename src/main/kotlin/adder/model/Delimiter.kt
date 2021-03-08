@@ -26,7 +26,8 @@ class Delimiter(private val input: String) {
     }
 
     companion object {
-        private const val REGEX_FOR_DELIMITER = """//(.)\\n(.*)"""
+        private const val REGEX_FOR_DELIMITER =
+            """//(.)\\n(.*)"""
         private const val DELIMITER_1 = ","
         private const val DELIMITER_2 = ";"
         private const val INDEX_OF_CUSTOM_DELIMITER = 1
