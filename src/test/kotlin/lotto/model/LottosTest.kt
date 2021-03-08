@@ -78,11 +78,11 @@ internal class LottosTest {
         val bonusNumber = LottoNumber(7)
 
         // when
-        val countForSix = lottos.getResult(Coincidence.SIX, winningLotto, bonusNumber)
-        val countForFiveWithBonus = lottos.getResult(Coincidence.FIVE_WITH_BONUS, winningLotto, bonusNumber)
-        val countForFive = lottos.getResult(Coincidence.FIVE, winningLotto, bonusNumber)
-        val countForFour = lottos.getResult(Coincidence.FOUR, winningLotto, bonusNumber)
-        val countForThree = lottos.getResult(Coincidence.THREE, winningLotto, bonusNumber)
+        val countForSix = lottos.getCoincidenceCount(Coincidence.SIX, winningLotto, bonusNumber)
+        val countForFiveWithBonus = lottos.getCoincidenceCount(Coincidence.FIVE_WITH_BONUS, winningLotto, bonusNumber)
+        val countForFive = lottos.getCoincidenceCount(Coincidence.FIVE, winningLotto, bonusNumber)
+        val countForFour = lottos.getCoincidenceCount(Coincidence.FOUR, winningLotto, bonusNumber)
+        val countForThree = lottos.getCoincidenceCount(Coincidence.THREE, winningLotto, bonusNumber)
 
         // then
         assertThat(countForSix).isEqualTo(1)

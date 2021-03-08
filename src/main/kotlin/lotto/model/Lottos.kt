@@ -34,8 +34,8 @@ class Lottos(private val lottos: List<Lotto>) {
             .toBigDecimal()
     }
 
-    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber) {
-        TODO("Not yet implemented")
+    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber): Int {
+        return myLottos.count { coincidence == it.getResult(winningLotto, bonusNumber) }
     }
 
     companion object {
