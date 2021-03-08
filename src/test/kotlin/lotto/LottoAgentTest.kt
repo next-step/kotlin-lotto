@@ -12,7 +12,7 @@ class LottoAgentTest {
     fun `구매수량만큼 로또번호를 생성한다`() {
         val exchange: Exchange<LottoNumber> = LottoAgent(LottoDrawMachine((1..45))).exchange
         exchange.pay(Money(14_000))
-        assertThat(exchange.product()).isNotNull
+        assertThat(exchange.product().size).isEqualTo(14)
     }
 
     class LottoAgent(val exchange: Exchange<LottoNumber>) {
