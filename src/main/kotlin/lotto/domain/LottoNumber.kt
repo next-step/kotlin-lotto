@@ -1,8 +1,9 @@
 package lotto.domain
 
-data class LottoNumber(val value: Int) {
+data class LottoNumber private constructor(val value: Int) {
+
     init {
-        require(value in LOTTO_NUMBER_RANGE) {
+        require(value in RANGE) {
             String.format(
                 "로또 넘버의 범위는 %s ~ %s 입니다. 입력 값: %s",
                 MINIMUM_VALUE,
@@ -13,8 +14,14 @@ data class LottoNumber(val value: Int) {
     }
 
     companion object {
+
         private const val MINIMUM_VALUE = 1
         private const val MAXIMUM_VALUE = 45
-        val LOTTO_NUMBER_RANGE = (MINIMUM_VALUE..MAXIMUM_VALUE)
+        private val RANGE = (MINIMUM_VALUE..MAXIMUM_VALUE)
+        private val NUMBERS = RANGE.map { LottoNumber(it) }
+
+        fun of(value: Int): LottoNumber {
+            return NUMBERS[value - 1]
+        }
     }
 }
