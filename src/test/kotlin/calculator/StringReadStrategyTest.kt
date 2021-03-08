@@ -1,5 +1,7 @@
 package calculator
 
+import calculator.domain.CustomReadStrategy
+import calculator.domain.StandardReadStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
