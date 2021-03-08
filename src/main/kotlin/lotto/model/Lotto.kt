@@ -17,19 +17,24 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
         return lottoNums.count { winningNumbers.lottoNums.contains(it) }
     }
 
+    fun hasNumber(bonusNumber: String): Boolean {
+        return lottoNums.contains(LottoNumber(bonusNumber))
+    }
+
+    fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
+        return lottoNums.contains(bonusNumber)
+    }
+
+    fun getResult(winningLotto: Lotto, bonusNumber: LottoNumber): Coincidence? {
+        return Coincidence.values()
+            .find { it.coincidenceCount == getWinningCount(winningLotto) && it.hasBonusNum.equals(hasBonusNumber(bonusNumber)) }
+    }
+
     override fun toString(): String {
         return lottoNumbers
             .sortedBy { it.number }
             .map { it.number }
             .joinToString(COMMA_WITH_BLANK)
-    }
-
-    fun hasNumber(bonusNumber: String): Boolean {
-        return lottoNums.contains(LottoNumber(bonusNumber))
-    }
-
-    fun getResult(winningLotto: Lotto, bonusNumber: LottoNumber): Coincidence {
-        TODO("Not yet implemented")
     }
 
     companion object {

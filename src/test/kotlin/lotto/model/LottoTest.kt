@@ -119,10 +119,10 @@ internal class LottoTest {
         // given
         val myLotto = Lotto("1,2,3,4,5,6")
         val winningLotto = Lotto("1,2,3,4,5,7")
-        val bonusNumber = LottoNumber("7")
+        val bonusNumber = LottoNumber("6")
 
         // when
-        val result: Coincidence = myLotto.getResult(winningLotto, bonusNumber)
+        val result: Coincidence? = myLotto.getResult(winningLotto, bonusNumber)
 
         // then
         assertThat(result).isEqualTo(Coincidence.FIVE_WITH_BONUS)
