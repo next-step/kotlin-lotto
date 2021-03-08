@@ -21,11 +21,7 @@ class LottoTicketTest {
     }
 
     class LottoTicket(val count: Int) {
-        constructor(money: Money) : this(money / TICKET_AMOUNT)
-
-        companion object {
-            val TICKET_AMOUNT = Money(1_000)
-        }
+        constructor(money: Money) : this(money / TicketAmount().money)
     }
 
     data class Money(val amount: Int) {
@@ -33,5 +29,12 @@ class LottoTicketTest {
             require(divisor.amount != 0)
             return amount / divisor.amount
         }
+
+        operator fun times(other: Int): Int = amount * other
+    }
+
+    class TicketAmount(count: Int = 1) {
+        val money: Money = Money(1_000 * count)
+        val amount: Int = money.amount
     }
 }
