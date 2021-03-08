@@ -1,11 +1,9 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.internal.bytebuddy.asm.Advice
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 class CalculatorTest {
@@ -25,9 +23,9 @@ class CalculatorTest {
         @JvmStatic
         private fun provideNumbers(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf("1","2","3","4"), 10),
-                Arguments.of(listOf("3","5","2","1"), 11),
-                Arguments.of(listOf("1","6","3","4"), 14)
+                Arguments.of(listOf("1", "2", "3", "4"), 10),
+                Arguments.of(listOf("3", "5", "2", "1"), 11),
+                Arguments.of(listOf("1", "6", "3", "4"), 14)
             )
         }
     }

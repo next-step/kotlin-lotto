@@ -1,8 +1,5 @@
 package calculator.domain
 
-import java.lang.NumberFormatException
-import java.lang.RuntimeException
-
 class Calculator {
 
     fun calculate(numbers: List<String>): Int {
@@ -19,12 +16,12 @@ class Calculator {
     private fun checkValidateNumber(string: String) {
         try {
             string.toInt()
-        }catch (e: NumberFormatException) {
+        } catch (e: NumberFormatException) {
             throw RuntimeException("$string 은 올바른 숫자가 아닙니다.")
         }
     }
 
     private fun checkNegativeNumber(string: String) {
-        if(string.toInt() < 0) throw RuntimeException("음수는 계산식에 포함될 수 없습니다.")
+        if (string.toInt() < 0) throw RuntimeException("음수는 계산식에 포함될 수 없습니다.")
     }
 }
