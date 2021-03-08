@@ -1,7 +1,7 @@
 package stringadder.domain
 
 class Expression(delimiters: Delimiters, expression: String) {
-    private val operands: Operands = Operands(expression.split(*delimiters.list.toTypedArray()).map { Operand(it) })
+    private val operands: Operands = Operands(delimiters.delimit(expression))
 
     fun result() = operands.sum()
 }
