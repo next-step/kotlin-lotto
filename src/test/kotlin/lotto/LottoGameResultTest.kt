@@ -25,5 +25,6 @@ class LottoGameResultTest {
 
     class LottoGameResult(ranks: List<Rank>) {
         val entries: Map<Rank, Int> = ranks.groupingBy { it }.eachCount()
+        val income: Long = entries.map { (rank, count) -> rank.prize(count) }.sum()
     }
 }
