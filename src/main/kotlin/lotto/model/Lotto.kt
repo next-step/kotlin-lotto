@@ -24,8 +24,8 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
             .joinToString(COMMA_WITH_BLANK)
     }
 
-    fun hasNumber(lottoNumber: LottoNumber): Boolean {
-        return lottoNums.contains(lottoNumber)
+    fun hasNumber(bonusNumber: String): Boolean {
+        return lottoNums.contains(LottoNumber(bonusNumber))
     }
 
     companion object {

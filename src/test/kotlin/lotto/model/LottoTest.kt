@@ -108,7 +108,7 @@ internal class LottoTest {
         val lotto = Lotto("1,2,3,4,5,6")
 
         // when
-        val hasNumber: Boolean = lotto.hasNumber(LottoNumber(num))
+        val hasNumber: Boolean = lotto.hasNumber(num)
 
         // then
         assertThat(hasNumber).isEqualTo(expectedHasNumber)
