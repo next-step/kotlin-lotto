@@ -1,14 +1,10 @@
 package stringaddcalculator.util
 
-class Splitter(private val delimiter: String? = null) {
-    companion object {
-        const val DEFAULT_DELIMITER1 = ","
-        const val DEFAULT_DELIMITER2 = ":"
-    }
+class Splitter(private val delimiter: String? = null) : AbstractSplitter {
 
-    fun split(input: String): List<String> {
+    override fun split(input: String): List<String> {
         if (delimiter.isNullOrBlank()) {
-            return input.split(DEFAULT_DELIMITER1, DEFAULT_DELIMITER2)
+            return DefaultSplitter.split(input)
         }
         return input.split(delimiter)
     }
