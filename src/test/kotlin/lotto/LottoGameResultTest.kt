@@ -23,6 +23,12 @@ class LottoGameResultTest {
             .isEqualTo(4_000_000_000)
     }
 
+    @Test
+    fun `구입금액 대비 당첨금액으로 수익률을 구한다`() {
+        assertThat(LottoGameResult(MISS * 13 + FIRST).profit)
+            .isEqualTo()
+    }
+
     class LottoGameResult(ranks: List<Rank>) {
         val entries: Map<Rank, Int> = ranks.groupingBy { it }.eachCount()
         val income: Long = entries.map { (rank, count) -> rank.prize(count) }.sum()
