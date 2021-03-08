@@ -39,5 +39,12 @@ internal class LottoTest {
     fun `로또 한장의 가격은 1000원이다`() {
         assertThat(Lotto.PRICE).isEqualTo(Money(1000))
     }
-}
 
+    @Test
+    fun `로또 맞는 갯수`() {
+        val lotto1 = Lotto(setOf(number1, number2, number3, number4, number5, number6))
+        val lotto2 = Lotto(setOf(number1, number2, number3, number4, number5, number6))
+
+        assertThat(lotto1.matchCount(lotto2)).isEqualTo(6)
+    }
+}
