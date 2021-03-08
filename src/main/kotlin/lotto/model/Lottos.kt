@@ -1,5 +1,8 @@
 package lotto.model
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 class Lottos(private val lottos: List<Lotto>) {
     var myLottos: List<Lotto>
         private set
@@ -17,22 +20,23 @@ class Lottos(private val lottos: List<Lotto>) {
             .count()
     }
 
-    fun getEarningRate(winningLotto: Lotto): Double {
+    fun getEarningRate(winningLotto: Lotto): BigDecimal {
         val totalPrizeMoney = getTotalPrizeMoney(winningLotto)
-        val budgetMoney = myLottos.size * COST_PER_ONE_LOTTO
+        val budgetMoney = (myLottos.size * COST_PER_ONE_LOTTO).toBigDecimal()
 
-        return totalPrizeMoney.div(budgetMoney)
+        return totalPrizeMoney.divide(budgetMoney, TWO_DECIMAL_PLACES, RoundingMode.FLOOR)
     }
 
-    private fun getTotalPrizeMoney(winningLotto: Lotto): Double {
+    private fun getTotalPrizeMoney(winningLotto: Lotto): BigDecimal {
         return Coincidence.values()
             .map { check(winningLotto, it.coincidenceCount) * it.prizeMoney }
             .sum()
-            .toDouble()
+            .toBigDecimal()
     }
 
     companion object {
         private const val COST_PER_ONE_LOTTO: Double = 1000.toDouble()
+        private const val TWO_DECIMAL_PLACES = 2
 
         private fun createLottos(lottoNumPool: LottoNumberPool, count: Int): List<Lotto> {
             return (1..count).map { lottoNumPool.getOneLotto() }
