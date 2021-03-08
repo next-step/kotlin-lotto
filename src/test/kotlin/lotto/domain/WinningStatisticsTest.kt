@@ -22,4 +22,17 @@ class WinningStatisticsTest {
         winningStatistics.addTicketCountOf(LotteryMatchType.Four)
         assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Four)).isEqualTo(2)
     }
+
+    @Test
+    fun `calculateTotalWinningPrice`() {
+        val winningStatistics = WinningStatistics()
+        winningStatistics.addTicketCountOf(LotteryMatchType.Four)
+        winningStatistics.addTicketCountOf(LotteryMatchType.Five)
+        winningStatistics.addTicketCountOf(LotteryMatchType.NonProfit)
+
+        assertThat(winningStatistics.calculateTotalWinningPrice()).isEqualTo(1_550_000)
+
+        winningStatistics.addTicketCountOf(LotteryMatchType.Three)
+        assertThat(winningStatistics.calculateTotalWinningPrice()).isEqualTo(1_555_000)
+    }
 }

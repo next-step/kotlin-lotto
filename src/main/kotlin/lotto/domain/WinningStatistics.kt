@@ -13,4 +13,15 @@ class WinningStatistics {
         val preCount = getTicketCountOf(matchType)
         ticketCounts[matchType] = preCount + 1
     }
+
+    fun calculateTotalWinningPrice(): Int {
+        var winningPrice = 0
+        for (entry in ticketCounts) {
+            val lotteryMatchType = entry.key
+            val ticketCount = entry.value
+
+            winningPrice += lotteryMatchType.winningPrice * ticketCount
+        }
+        return winningPrice
+    }
 }
