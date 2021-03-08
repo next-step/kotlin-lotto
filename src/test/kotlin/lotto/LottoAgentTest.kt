@@ -10,24 +10,4 @@ class LottoAgentTest {
         exchange.pay(Money(14_000))
         assertThat(exchange.product().size).isEqualTo(14)
     }
-
-    class LottoAgent(val exchange: Exchange<LottoNumber>) {
-        constructor(lottoExchange: LottoDrawMachine) : this(Exchange.Lotto(lottoExchange))
-    }
-
-    interface Exchange<Product> {
-        fun pay(money: Money)
-
-        fun product(): List<Product>
-
-        class Lotto(private val lottoDrawMachine: LottoDrawMachine) : Exchange<LottoNumber> {
-            private lateinit var lottoTicket: LottoTicket
-            override fun pay(money: Money) {
-                lottoTicket = LottoTicket(money)
-            }
-
-            override fun product(): List<LottoNumber> = (0 until lottoTicket.count)
-                .map { lottoDrawMachine.lottoNumber() }
-        }
-    }
 }
