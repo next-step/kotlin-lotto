@@ -6,7 +6,7 @@ import lotto.model.Lottos
 
 object ResultView {
     fun printMyLottos(lottos: Lottos) {
-        lottos.myLottos.forEach { println(it.lottoNums.toString()) }
+        lottos.myLottos.forEach { println(it.toString()) }
         println()
     }
 
