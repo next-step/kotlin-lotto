@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.Lotto
+import lotto.model.LottoNumber
 import lotto.model.Money
 
 object InputView {
@@ -16,6 +17,18 @@ object InputView {
         return Money(budget)
     }
 
+    fun askBonusNumber(winningLotto: Lotto): LottoNumber {
+        printBonusBallQuestion()
+        var bonusNumber = readLine()
+
+        while (bonusNumber.isNullOrBlank() || winningLotto.hasNumber(bonusNumber)) {
+            printBonusBallQuestion()
+            bonusNumber = readLine()
+        }
+
+        return LottoNumber(bonusNumber)
+    }
+
     fun askWinningLotto(): Lotto {
         printWinningNumberQuestion()
         var winningNumbers = readLine()
@@ -26,6 +39,10 @@ object InputView {
         }
 
         return Lotto(winningNumbers)
+    }
+
+    fun printBonusBallQuestion() {
+        println("보너스 볼을 입력해 주세요.")
     }
 
     fun printBudgetQuestion() {

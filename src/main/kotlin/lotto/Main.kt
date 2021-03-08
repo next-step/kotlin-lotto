@@ -6,13 +6,15 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val budget = InputView.askBudgetQuestion()
-    val lottoCount = budget.getBuyableLottoCount()
+    val lottoCount = InputView.askBudgetQuestion().getBuyableLottoCount()
     ResultView.printLottoCount(lottoCount)
 
     val myLottos = Lottos(LottoNumberPool, lottoCount)
     ResultView.printMyLottos(myLottos)
 
     val winningLotto = InputView.askWinningLotto()
-    ResultView.printResult(myLottos, winningLotto)
+    val bonusLottoNumber = InputView.askBonusNumber(winningLotto)
+
+    ResultView.printResult(myLottos, winningLotto, bonusLottoNumber)
+
 }
