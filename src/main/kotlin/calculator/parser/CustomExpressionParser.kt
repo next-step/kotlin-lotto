@@ -11,7 +11,6 @@ class CustomExpressionParser : ExpressionParser {
         } ?: listOf()
     }
 
-
     companion object {
         private val PATTERN = Regex("//(.)\\\\n(.*)")
     }

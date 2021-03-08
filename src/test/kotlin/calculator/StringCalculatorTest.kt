@@ -25,8 +25,8 @@ internal class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1","2","3"])
-    fun  `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String) {
+    @ValueSource(strings = ["1", "2", "3"])
+    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String) {
         assertThat(calculator.add(text)).isEqualTo(PositiveNumber.ofString(text))
     }
 
@@ -37,9 +37,10 @@ internal class StringCalculatorTest {
             "1:2,3|6",
             "1,3|4",
             "1:2|3"
-        ], delimiter = '|'
+        ],
+        delimiter = '|'
     )
-    fun  `기본 구분자로 덧셈`(expression: String,result:String) {
+    fun `기본 구분자로 덧셈`(expression: String, result: String) {
         assertThat(calculator.add(expression)).isEqualTo(PositiveNumber.ofString(result))
     }
 
@@ -49,9 +50,8 @@ internal class StringCalculatorTest {
         assertThat(calculator.add("""//?\n1?2?3""")).isEqualTo(PositiveNumber(6))
     }
 
-
     @Test
     fun `문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다`() {
-        assertThrows<RuntimeException> {  calculator.add("-1")}
+        assertThrows<RuntimeException> { calculator.add("-1") }
     }
 }

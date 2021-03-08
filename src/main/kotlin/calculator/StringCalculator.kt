@@ -13,11 +13,10 @@ class StringCalculator(private val parserGroup: List<ExpressionParser> = listOf(
         val parser = this.parserGroup.find { it.support(expression) } ?: DEFAULT_TOKEN_PARSER
         return parser.parse(expression)
             .map { PositiveNumber.ofString(it) }
-            .reduce { left, right -> left.sum(right) }
+            .reduce { left, right -> left + right }
     }
 
-    companion object{
+    companion object {
         private val DEFAULT_TOKEN_PARSER = TokenExpressionParser(":", ",")
     }
-
 }
