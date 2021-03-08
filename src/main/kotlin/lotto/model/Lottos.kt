@@ -1,18 +1,18 @@
 package lotto.model
 
-class Lottos(val lottos: List<Lotto>) {
+class Lottos(val allLottos: List<Lotto>) {
     constructor(count: Int) : this(createLottos(count))
 
     fun check(winningNumbers: List<Int>, checkCount: Int): Int {
-        return lottos
-            .map { it.getWinningCount(winningNumbers) }
+        return allLottos
+            .map { it.getWinningCount(Lotto(winningNumbers)) }
             .filter { it == checkCount }
             .count()
     }
 
     fun getEarningRate(winningNumbers: List<Int>): Double {
         val totalPrizeMoney = getTotalPrizeMoney(winningNumbers)
-        val budgetMoney = lottos.size * COST_PER_ONE_LOTTO
+        val budgetMoney = allLottos.size * COST_PER_ONE_LOTTO
         return totalPrizeMoney.div(budgetMoney)
     }
 

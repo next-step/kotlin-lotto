@@ -13,8 +13,8 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
 
     constructor(stringNumbers: String) : this(splitByComma(stringNumbers))
 
-    fun getWinningCount(winningNumbers: List<Int>): Int {
-        return lottoNums.count { winningNumbers.contains(it.number) }
+    fun getWinningCount(winningNumbers: Lotto): Int {
+        return lottoNums.count { winningNumbers.lottoNums.contains(it) }
     }
 
     override fun toString(): String {

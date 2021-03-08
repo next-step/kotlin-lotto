@@ -84,7 +84,7 @@ internal class LottoTest {
         val myLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val count = myLotto.getWinningCount(listOf(1, 2, 3, 4, 5, 7))
+        val count = myLotto.getWinningCount(Lotto(listOf(1, 2, 3, 4, 5, 7)))
 
         // then
         assertThat(count).isEqualTo(5)
