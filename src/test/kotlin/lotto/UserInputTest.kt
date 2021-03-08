@@ -2,6 +2,7 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.io.InputStreamReader
 import java.io.StringReader
 import java.util.Scanner
 
@@ -19,7 +20,10 @@ class UserInputTest {
     interface UserInput<T> {
         fun answer(): T
 
-        class Int(private val question: String, readable: Readable) : UserInput<kotlin.Int> {
+        class Int(
+            private val question: String,
+            readable: Readable = InputStreamReader(System.`in`)
+        ) : UserInput<kotlin.Int> {
             private val scanner: Scanner = Scanner(readable)
 
             constructor(question: String, answer: String) : this(question, StringReader(answer))
@@ -30,7 +34,10 @@ class UserInputTest {
             }
         }
 
-        class IntList(private val question: String, readable: Readable) : UserInput<List<kotlin.Int>> {
+        class IntList(
+            private val question: String,
+            readable: Readable = InputStreamReader(System.`in`)
+        ) : UserInput<List<kotlin.Int>> {
             private val scanner: Scanner = Scanner(readable)
 
             constructor(question: String, answer: String) : this(question, StringReader(answer))
