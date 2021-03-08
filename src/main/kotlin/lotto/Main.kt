@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.model.Lotto
+import lotto.model.LottoNumberPool
 import lotto.model.Lottos
 import lotto.model.Money
 import lotto.view.InstructionView
@@ -9,10 +10,13 @@ import lotto.view.ResultView
 fun main() {
     val money = getMoney()
 
+
+
+
     val lottoCount = money.getAvailableLottoCount()
     ResultView.printLottoCount(lottoCount)
 
-    val myLottos = Lottos(lottoCount)
+    val myLottos = Lottos(LottoNumberPool, lottoCount)
     ResultView.printMyLottos(myLottos)
 
     val winningLotto = getWinningNumbers()

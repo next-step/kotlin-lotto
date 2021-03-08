@@ -12,10 +12,10 @@ internal class LottosTest {
         val lottoCount = 5
 
         // when
-        val myLottos = Lottos(lottoCount)
+        val myLottos = Lottos(LottoNumberPool, lottoCount)
 
         // then
-        assertThat(myLottos.allLottos.size).isEqualTo(5)
+        assertThat(myLottos.myLottos.size).isEqualTo(5)
     }
 
     @ParameterizedTest
