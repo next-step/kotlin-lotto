@@ -1,6 +1,7 @@
 package adder.model
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -13,5 +14,17 @@ internal class DelimiterTest {
 
         // then
         assertThat(hasCustomDelimiter).isEqualTo(hasCustom)
+    }
+
+    @Test
+    fun splitByCustomDelimiter() {
+        // given
+        val input = "//-\\n1-2-3-45-6"
+
+        // when
+        val dividedInput: List<String> = Delimiter(input).split()
+
+        // then
+        assertThat(dividedInput).isEqualTo(listOf("1", "2", "3", "45", "6"))
     }
 }
