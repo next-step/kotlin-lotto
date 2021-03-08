@@ -28,6 +28,10 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
         return lottoNums.contains(LottoNumber(bonusNumber))
     }
 
+    fun getResult(winningLotto: Lotto, bonusNumber: LottoNumber): Coincidence {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         private const val LOTTO_SIZE = 6
         private const val COMMA = ","

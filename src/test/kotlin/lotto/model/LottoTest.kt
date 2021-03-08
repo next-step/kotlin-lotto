@@ -113,4 +113,18 @@ internal class LottoTest {
         // then
         assertThat(hasNumber).isEqualTo(expectedHasNumber)
     }
+
+    @Test
+    fun `Lotto(당첨로또)와 LottoNumber(보너스번호)를 주면 결과(Coincidence)를 반환한다`() {
+        // given
+        val myLotto = Lotto("1,2,3,4,5,6")
+        val winningLotto = Lotto("1,2,3,4,5,7")
+        val bonusNumber = LottoNumber("7")
+
+        // when
+        val result: Coincidence = myLotto.getResult(winningLotto, bonusNumber)
+
+        // then
+        assertThat(result).isEqualTo(Coincidence.FIVE_WITH_BONUS)
+    }
 }
