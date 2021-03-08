@@ -22,7 +22,8 @@ class RankingTest {
         constructor(theNumber: LottoNumber, other: LottoNumber) : this(Match(theNumber, other))
 
         enum class Rank(private val matchCount: Int) {
-            FIRST(6);
+            FIRST(6),
+            SECOND(5);
 
             private fun same(count: Int): Boolean = matchCount == count
 
