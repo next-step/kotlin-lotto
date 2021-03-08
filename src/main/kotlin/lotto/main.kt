@@ -5,18 +5,18 @@ fun main() {
         .answer()
         .let { Money(it) }
 
-    val lottoNumbers = LottoAgent(LottoDrawMachine((0..45)))
+    val lottoNumbers = LottoAgent(LottoDrawMachine((1..45)))
         .exchange
         .let {
             it.pay(expense)
             it.product()
         }
 
-    // PickNumberPrinter(lottoNumbers).print()
+    PickNumberPrinter(lottoNumbers).print()
 
     val winningNumber = WinningNumber.Console("지난 주 당첨 번호를 입력해 주세요.").lottoNumber
 
     val result = LottoGame(lottoNumbers, winningNumber).result
 
-    // ResultPrinter(result).print()
+    ResultPrinter(result).print()
 }

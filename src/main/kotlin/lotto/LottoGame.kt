@@ -7,9 +7,10 @@ class LottoGame(pickLottoNumbers: List<LottoNumber>, winningNumber: LottoNumber)
         Result(pickLottoNumbers.map { Ranking(it, winningNumber).rank })
 
     class Result(private val ranks: List<Ranking.Rank>) : List<Ranking.Rank> by ranks {
-        val entries: Map<Ranking.Rank, Int> = ranks.groupingBy { it }.eachCount()
-        val income: Long = entries.map { (rank, count) -> rank.prize(count) }.sum()
-        val profit: Double = (income / TicketAmount(entries.values.sum()) * 100).truncate
+        fun entries(): Map<Ranking.Rank, Int> = ranks.groupingBy { it }
+            .eachCount()
+        fun income(): Long = entries().map { (rank, count) -> rank.prize(count) }.sum()
+        fun profit(): Double = (income() / TicketAmount(entries().values.sum()) * 100).truncate
 
         private operator fun Long.div(ticketAmount: TicketAmount): Double = this / ticketAmount.amount.toDouble()
         private val Double.truncate: Double
