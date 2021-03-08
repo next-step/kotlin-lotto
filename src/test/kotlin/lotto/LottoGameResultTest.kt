@@ -17,6 +17,12 @@ class LottoGameResultTest {
             )
     }
 
+    @Test
+    fun `등급별 당첨액 x 일치수갯수의 총합을 구한다`() {
+        assertThat(LottoGameResult(listOf(FIRST, FIRST, MISS)).income)
+            .isEqualTo(4_000_000_000)
+    }
+
     class LottoGameResult(ranks: List<Rank>) {
         val entries: Map<Rank, Int> = ranks.groupingBy { it }.eachCount()
     }
