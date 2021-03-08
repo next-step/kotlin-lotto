@@ -2,7 +2,7 @@ package lotto.model
 
 import kotlin.math.floor
 
-data class LottoResult(private val winningCounter: WinningCounter, val sumCostOfTickets: Money) {
+data class LottoResult(val winningCounter: WinningCounter, val sumCostOfTickets: Money) {
     val benefitRate: Double
         get() {
             val totalWinnings = winningCounter.winningsSum

@@ -1,6 +1,10 @@
 package lotto.model
 
 data class LottoTicket(val numbers: LottoNumbers = autoCreate()) {
+    override fun toString(): String {
+        return numbers.joinToString(separator = ", ", prefix = "[", postfix = "]")
+    }
+
     fun countMatch(winningNumbers: WinningNumbers): Int {
         return winningNumbers.count {
             numbers.contains(it)
