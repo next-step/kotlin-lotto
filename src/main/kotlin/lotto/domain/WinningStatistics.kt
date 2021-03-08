@@ -1,7 +1,6 @@
 package lotto.domain
 
-class WinningStatistics {
-    private val matchNumberCounts: MutableMap<Int, Int> = mutableMapOf()
+class WinningStatistics { val matchNumberCounts: MutableMap<Int, Int> = mutableMapOf()
 
     fun getMatchNumberCount(matchNumber: Int): Int {
         return matchNumberCounts[matchNumber] ?: 0
@@ -11,6 +10,4 @@ class WinningStatistics {
         val preCount = getMatchNumberCount(matchNumber)
         matchNumberCounts[matchNumber] = preCount + 1
     }
-
-
 }
