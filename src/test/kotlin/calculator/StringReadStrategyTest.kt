@@ -9,6 +9,21 @@ import java.util.stream.Stream
 
 class StringReadStrategyTest {
 
+    private val customReadStrategy = CustomReadStrategy()
+    private val standardReadStrategy = StandardReadStrategy()
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4", "1,2,3:4", "1:2:3:4"])
+    fun `기본 구분자로 문자열을 읽을때(전략사용)`(string: String) {
+        assertThat(standardReadStrategy.readString(string)).isEqualTo(listOf("1", "2", "3", "4"))
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3;4", "//!\n1!2!3!4", "//#\n1#2#3#4"])
+    fun `커스텀 구분자로 문자열을 읽을때(전략사용)`(string: String) {
+        assertThat(customReadStrategy.readString(string)).isEqualTo(listOf("1", "2", "3", "4"))
+    }
+
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4", "1,2,3:4", "1:2:3:4"])
     fun `기본 구분자로 문자열을 읽을때`(string: String) {
