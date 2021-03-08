@@ -18,7 +18,7 @@ internal class LottoTest {
             LottoNumber(4),
             LottoNumber(5),
             LottoNumber(6)
-        )
+        ).toSet()
 
         // when, then
         assertDoesNotThrow { Lotto(lottoNumbers) }
@@ -42,7 +42,7 @@ internal class LottoTest {
                     LottoNumber(4),
                     LottoNumber(5),
                     LottoNumber(6)
-                )
+                ).toSet()
             )
         )
     }
@@ -56,7 +56,7 @@ internal class LottoTest {
             LottoNumber(3),
             LottoNumber(4),
             LottoNumber(5)
-        )
+        ).toSet()
 
         // when, then
         assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
@@ -72,7 +72,7 @@ internal class LottoTest {
             LottoNumber(4),
             LottoNumber(5),
             LottoNumber(5)
-        )
+        ).toSet()
 
         // when, then
         assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }

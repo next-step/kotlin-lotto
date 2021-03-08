@@ -12,7 +12,7 @@ class Lottos(val lottos: List<Lotto>) {
 
     fun getEarningRate(winningNumbers: List<Int>): Double {
         val totalPrizeMoney = getTotalPrizeMoney(winningNumbers)
-        val budgetMoney = lottos.size.times(COST_PER_ONE_LOTTO)
+        val budgetMoney = lottos.size * COST_PER_ONE_LOTTO
         return totalPrizeMoney.div(budgetMoney)
     }
 
