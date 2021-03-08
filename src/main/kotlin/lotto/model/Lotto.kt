@@ -18,7 +18,10 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
     }
 
     override fun toString(): String {
-        return lottoNumbers.map { it.number }.joinToString(COMMA_WITH_BLANK)
+        return lottoNumbers
+            .sortedBy { it.number }
+            .map { it.number }
+            .joinToString(COMMA_WITH_BLANK)
     }
 
     companion object {

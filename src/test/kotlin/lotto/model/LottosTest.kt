@@ -33,7 +33,7 @@ internal class LottosTest {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
         // when
-        val count = lottos.check(winningNumbers, checkCount)
+        val count = lottos.check(Lotto(winningNumbers), checkCount)
 
         // then
         assertThat(count).isEqualTo(1)
@@ -55,7 +55,7 @@ internal class LottosTest {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
         // when
-        val earningRate = lottos.getEarningRate(winningNumbers)
+        val earningRate = lottos.getEarningRate(Lotto(winningNumbers))
 
         // then
         assertThat(earningRate).isEqualTo(5000.toDouble() / 6000.toDouble())

@@ -35,7 +35,7 @@ internal class MoneyTest {
         val money = Money(budget)
 
         // when
-        val count: Int = money.getAvailableLottoCount()
+        val count: Int = money.getBuyableLottoCount()
 
         // then
         assertThat(count).isEqualTo(14)

@@ -7,7 +7,7 @@ data class Money(val value: Int) {
 
     constructor(input: String) : this(input.toInt())
 
-    fun getAvailableLottoCount(): Int {
+    fun getBuyableLottoCount(): Int {
         return value / ONE_LOTTO_PRICE
     }
 

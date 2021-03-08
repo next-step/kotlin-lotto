@@ -14,15 +14,25 @@ object ResultView {
         println("${lottoCount}개를 구매했습니다.")
     }
 
+    fun printResult(myLottos: Lottos, winningLotto: Lotto) {
+        printStatisticsInstruction()
+        printResultStatistics(myLottos, winningLotto)
+        printEarningRate(myLottos, winningLotto)
+    }
+
     fun printResultStatistics(myLottos: Lottos, winningLotto: Lotto) {
         Coincidence.values().forEach {
-            val count = myLottos.check(winningLotto.lottoNums.map { it.number }, it.coincidenceCount)
-            println("${it.coincidenceCount}개 일치 (${it.prizeMoney}원) - ${count}개 ")
+            println("${it.coincidenceCount}개 일치 (${it.prizeMoney}원) - ${it.getMatchCount(myLottos, winningLotto)}개 ")
         }
     }
 
     fun printEarningRate(myLottos: Lottos, winningLotto: Lotto) {
-        val earningRate = myLottos.getEarningRate(winningLotto.lottoNums.map { it.number })
+        val earningRate = myLottos.getEarningRate(winningLotto)
         println("총 수익률은 $earningRate")
+    }
+
+    private fun printStatisticsInstruction() {
+        println("당첨 통계")
+        println("==============")
     }
 }
