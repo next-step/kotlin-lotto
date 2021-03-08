@@ -10,9 +10,10 @@ class RankingTest {
     @CsvSource(
         value = [
             "1,2,3,4,5,6:FIRST",
-            "1,2,3,4,5,10:SECOND",
-            "1,2,3,4,10,11:THIRD",
-            "1,2,3,10,11,12:FOURTH"
+            "1,2,3,4,5,45:SECOND",
+            "1,2,3,4,44,45:THIRD",
+            "1,2,3,43,44,45:FOURTH",
+            "1,2,42,43,44,45:MISS"
         ],
         delimiter = ':'
     )
@@ -33,12 +34,13 @@ class RankingTest {
             FIRST(6),
             SECOND(5),
             THIRD(4),
-            FOURTH(3);
+            FOURTH(3),
+            MISS(0);
 
             private fun same(count: Int): Boolean = matchCount == count
 
             companion object {
-                fun of(count: Int): Rank = values().first { it.same(count) }
+                fun of(count: Int): Rank = values().firstOrNull { it.same(count) } ?: MISS
             }
         }
     }
