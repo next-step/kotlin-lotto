@@ -27,4 +27,16 @@ internal class DelimiterTest {
         // then
         assertThat(dividedInput).isEqualTo(listOf("1", "2", "3", "45", "6"))
     }
+
+    @Test
+    fun splitByDefaultDelimiter() {
+        // given
+        val input = "1,2,3,45,6"
+
+        // when
+        val dividedInput: List<String> = Delimiter(input).split()
+
+        // then
+        assertThat(dividedInput).isEqualTo(listOf("1", "2", "3", "45", "6"))
+    }
 }
