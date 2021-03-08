@@ -17,7 +17,7 @@ data class LottoNumber private constructor(val value: Int) {
 
         private const val MINIMUM_VALUE = 1
         private const val MAXIMUM_VALUE = 45
-        private val RANGE = (MINIMUM_VALUE..MAXIMUM_VALUE)
+        val RANGE = (MINIMUM_VALUE..MAXIMUM_VALUE)
         private val NUMBERS = RANGE.map { LottoNumber(it) }
 
         fun of(value: Int): LottoNumber {

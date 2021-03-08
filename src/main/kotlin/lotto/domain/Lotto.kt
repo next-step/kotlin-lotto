@@ -4,7 +4,7 @@ package lotto.domain
 data class Lotto(val elements: Set<LottoNumber>) {
 
     init {
-        require(elements.size == TICKET_SIZE)
+        require(elements.size == SIZE)
     }
 
     fun matchCount(lotto: Lotto): Int {
@@ -14,7 +14,7 @@ data class Lotto(val elements: Set<LottoNumber>) {
     private fun contains(number: LottoNumber) = elements.contains(number)
 
     companion object {
-        private const val TICKET_SIZE = 6
+        const val SIZE = 6
         val PRICE = Money(1000)
     }
 }
