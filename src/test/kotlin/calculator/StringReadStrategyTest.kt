@@ -23,6 +23,11 @@ class StringReadStrategyTest {
     fun `커스텀 구분자로 문자열을 읽을때(전략사용)`(string: String) {
         assertThat(customReadStrategy.readString(string)).isEqualTo(listOf("1", "2", "3", "4"))
     }
+    @ParameterizedTest
+    @ValueSource(strings = ["1"])
+    fun `기본 구분자로 한개 문자열만 읽을때`(string: String) {
+        assertThat(standardReadStrategy.readString(string)).isEqualTo(listOf("1"))
+    }
 
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4", "1,2,3:4", "1:2:3:4"])
