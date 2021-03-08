@@ -34,6 +34,10 @@ class Lottos(private val lottos: List<Lotto>) {
             .toBigDecimal()
     }
 
+    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber) {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         private const val COST_PER_ONE_LOTTO: Double = 1000.toDouble()
         private const val TWO_DECIMAL_PLACES = 2

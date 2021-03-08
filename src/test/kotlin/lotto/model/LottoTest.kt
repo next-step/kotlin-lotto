@@ -103,12 +103,12 @@ internal class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = ["1:true", "2:true", "6:true", "7:false"], delimiter = ':')
-    fun `LottoNumber 하나를 인자로 주면, Lotto에 포함된 숫자인지 아닌지 반환한다`(num: String, expectedHasNumber: Boolean) {
+    fun `LottoNumber 하나를 인자로 주면, Lotto에 포함된 숫자인지 아닌지 반환한다`(num: Int, expectedHasNumber: Boolean) {
         // given
         val lotto = Lotto("1,2,3,4,5,6")
 
         // when
-        val hasNumber: Boolean = lotto.hasNumber(num)
+        val hasNumber: Boolean = lotto.hasBonusNumber(LottoNumber(num))
 
         // then
         assertThat(hasNumber).isEqualTo(expectedHasNumber)
