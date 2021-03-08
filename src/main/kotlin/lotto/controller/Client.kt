@@ -15,8 +15,8 @@ fun main() {
 
     val winningNumbers = InputView.readWinningNumbers("지난 주 당첨 번호를 입력해 주세요.")
 
-    val checker = LottoChecker(winningNumbers)
-    val result = checker.check(tickets, moneyAmount)
+    val lottoChecker = LottoChecker(winningNumbers)
+    val result = lottoChecker.check(tickets, moneyAmount)
 
     OutputView.printResult(result)
 }
