@@ -1,13 +1,16 @@
 package lotto.domain
 
-class WinningStatistics { val matchNumberCounts: MutableMap<Int, Int> = mutableMapOf()
+import lotto.enums.LotteryMatchType
 
-    fun getMatchNumberCount(matchNumber: Int): Int {
-        return matchNumberCounts[matchNumber] ?: 0
+class WinningStatistics {
+    val matchNumberCounts: MutableMap<LotteryMatchType, Int> = mutableMapOf()
+
+    fun getTicketCountOf(matchType: LotteryMatchType): Int {
+        return matchNumberCounts[matchType] ?: 0
     }
 
-    fun addMatchNumberCount(matchNumber: Int) {
-        val preCount = getMatchNumberCount(matchNumber)
-        matchNumberCounts[matchNumber] = preCount + 1
+    fun addTicketCountOf(matchType: LotteryMatchType) {
+        val preCount = getTicketCountOf(matchType)
+        matchNumberCounts[matchType] = preCount + 1
     }
 }

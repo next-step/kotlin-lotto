@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto.domain.maker
 
-import lotto.domain.maker.LotteryTicketMaker
+import lotto.domain.LotteryTicket
 
 class TestLotteryTicketMaker : LotteryTicketMaker {
     override fun createLotteryTicket(): LotteryTicket {

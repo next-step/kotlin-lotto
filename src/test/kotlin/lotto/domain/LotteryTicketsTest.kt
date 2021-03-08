@@ -1,6 +1,8 @@
 package lotto.domain
 
 import lotto.data.WinningNumbers
+import lotto.domain.maker.TestLotteryTicketMaker
+import lotto.enums.LotteryMatchType
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.entry
 import org.junit.jupiter.api.Test
@@ -20,7 +22,7 @@ class LotteryTicketsTest {
         val lotteryTickets = LotteryTickets(14, TestLotteryTicketMaker())
         val winningStatics = lotteryTickets.createWinningStatics(winningNumbers)
 
-        Assertions.assertThat(winningStatics.matchNumberCounts).containsOnly(entry(3, 14))
+        Assertions.assertThat(winningStatics.matchNumberCounts).containsOnly(entry(LotteryMatchType.Three, 14))
     }
 
     @Test
@@ -30,6 +32,6 @@ class LotteryTicketsTest {
         val lotteryTickets = LotteryTickets(5, TestLotteryTicketMaker())
         val winningStatics = lotteryTickets.createWinningStatics(winningNumbers)
 
-        Assertions.assertThat(winningStatics.matchNumberCounts).containsOnly(entry(2, 5))
+        Assertions.assertThat(winningStatics.matchNumberCounts).containsOnly(entry(LotteryMatchType.NonProfit, 5))
     }
 }

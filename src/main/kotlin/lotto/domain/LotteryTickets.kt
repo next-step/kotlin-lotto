@@ -3,6 +3,7 @@ package lotto.domain
 import lotto.data.WinningNumbers
 import lotto.domain.maker.DefaultLotteryTicketMaker
 import lotto.domain.maker.LotteryTicketMaker
+import lotto.enums.LotteryMatchType
 
 class LotteryTickets(ticketNum: Int, private val lotteryTicketMaker: LotteryTicketMaker = DefaultLotteryTicketMaker()) {
 
@@ -18,8 +19,9 @@ class LotteryTickets(ticketNum: Int, private val lotteryTicketMaker: LotteryTick
     fun createWinningStatics(winningNumbers: WinningNumbers): WinningStatistics {
         val winningStatistics = WinningStatistics()
         lotteryTickets.forEach {
-            val matchNumber = it.findMatchNumber(winningNumbers)
-            winningStatistics.addMatchNumberCount(matchNumber)
+            val matchCount = it.findMatchCount(winningNumbers)
+            val lotteryMatchType = LotteryMatchType.findByMatchCount(matchCount)
+            winningStatistics.addTicketCountOf(lotteryMatchType)
         }
         return winningStatistics
     }

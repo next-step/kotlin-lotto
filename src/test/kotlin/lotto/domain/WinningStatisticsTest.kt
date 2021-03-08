@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.enums.LotteryMatchType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -9,16 +10,16 @@ class WinningStatisticsTest {
     fun `getMatchCount1 if nothing is inserted`() {
         val winningStatistics = WinningStatistics()
 
-        assertThat(winningStatistics.getMatchNumberCount(3)).isEqualTo(0)
+        assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Three)).isEqualTo(0)
     }
 
     @Test
     fun `addMatchCount and get test`() {
         val winningStatistics = WinningStatistics()
-        winningStatistics.addMatchNumberCount(4)
-        assertThat(winningStatistics.getMatchNumberCount(4)).isEqualTo(1)
+        winningStatistics.addTicketCountOf(LotteryMatchType.Four)
+        assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Four)).isEqualTo(1)
 
-        winningStatistics.addMatchNumberCount(4)
-        assertThat(winningStatistics.getMatchNumberCount(4)).isEqualTo(2)
+        winningStatistics.addTicketCountOf(LotteryMatchType.Four)
+        assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Four)).isEqualTo(2)
     }
 }
