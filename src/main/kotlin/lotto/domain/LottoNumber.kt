@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoNumber private constructor(val value: Int) {
+data class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> {
 
     init {
         require(value in RANGE) {
@@ -11,6 +11,10 @@ data class LottoNumber private constructor(val value: Int) {
                 value
             )
         }
+    }
+
+    override fun compareTo(other: LottoNumber): Int {
+        return value.compareTo(other.value)
     }
 
     companion object {
