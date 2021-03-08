@@ -14,7 +14,5 @@ fun main() {
 
     val winningLotto = InputView.askWinningLotto()
     val bonusLottoNumber = InputView.askBonusNumber(winningLotto)
-
     ResultView.printResult(myLottos, winningLotto, bonusLottoNumber)
-
 }

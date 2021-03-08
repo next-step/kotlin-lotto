@@ -5,7 +5,6 @@ class Delimiter(val sixNumberString: String) {
         return splitByComma(sixNumberString)
     }
 
-
     private fun splitByComma(stringNumbers: String): List<String> {
         return stringNumbers
             .split(COMMA)
