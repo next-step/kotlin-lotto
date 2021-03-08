@@ -1,18 +1,17 @@
 package adder.model
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 internal class DelimiterTest {
-    @Test
-    fun hasCustom() {
-        // given
-        val input: String = "//-\\n1-2-3-45-6"
-
+    @ParameterizedTest
+    @CsvSource(value = ["//-\\n1-2-3-45-6:true", "1,2,3,45,6:false"], delimiter = ':')
+    fun hasCustom(input: String, hasCustom: Boolean) {
         // when
         val hasCustomDelimiter = Delimiter(input).hasCustom()
 
         // then
-        assertThat(hasCustomDelimiter).isTrue()
+        assertThat(hasCustomDelimiter).isEqualTo(hasCustom)
     }
 }
