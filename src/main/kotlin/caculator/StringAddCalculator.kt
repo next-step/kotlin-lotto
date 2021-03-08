@@ -6,7 +6,8 @@ internal class StringAddCalculator(private val tokenParser: TokenParser) {
         if (input.isNullOrEmpty()) {
             return EMPTY_VALUE
         }
-        return tokenParser.parseToken(input).sum()
+        val numbers = tokenParser.parseToken(input)
+        return numbers.sum()
     }
 
     companion object {
