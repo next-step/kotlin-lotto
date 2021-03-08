@@ -25,7 +25,7 @@ data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
     }
 
     fun hasNumber(lottoNumber: LottoNumber): Boolean {
-        TODO("Not yet implemented")
+        return lottoNums.contains(lottoNumber)
     }
 
     companion object {
