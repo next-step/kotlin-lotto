@@ -27,6 +27,6 @@ object StatisticsView {
 
     fun printProfitRatio(ratio: BigDecimal) {
         val infoMessage = if (ratio.compareTo(BigDecimal(PROFIT_RATIO_BASE)) == -1) "($LOSS_MESSAGE)" else ""
-        println("총 수익률은 ${ratio.toString()}입니다.$infoMessage")
+        println("총 수익률은 ${ratio}입니다.$infoMessage")
     }
 }

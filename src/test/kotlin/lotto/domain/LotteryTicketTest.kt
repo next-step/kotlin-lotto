@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.data.WinningNumbers
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -39,6 +38,4 @@ internal class LotteryTicketTest {
 
         assertThat(lotteryTicket.findMatchCount(winningNumbers)).isEqualTo(0)
     }
-
-
 }

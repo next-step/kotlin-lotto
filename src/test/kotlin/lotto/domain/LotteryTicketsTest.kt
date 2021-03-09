@@ -4,7 +4,6 @@ import lotto.data.LotteryTicketNumber
 import lotto.data.WinningNumbers
 import lotto.domain.maker.TestLotteryTicketMaker
 import lotto.enums.LotteryMatchType
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.entry
 import org.junit.jupiter.api.Test
