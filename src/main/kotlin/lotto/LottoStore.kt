@@ -2,24 +2,24 @@ package lotto
 
 class LottoStore {
 
-    fun purchaseAuto(money: Int): Lottos {
+    fun purchaseAuto(money: Int): Lottoes {
         val quantity = money / LOTTO_COST
-        val lottos = arrayListOf<Lotto>()
+        val lottoes = arrayListOf<Lotto>()
         repeat(quantity) {
-            lottos.add(Lotto.generateAuto())
+            lottoes.add(Lotto.generateAuto())
         }
 
-        return Lottos(lottos)
+        return Lottoes(lottoes)
     }
 
-    fun purchaseManual(money: Int, numbers: List<Int>): Lottos {
+    fun purchaseManual(money: Int, numbers: List<Int>): Lottoes {
         val quantity = money / LOTTO_COST
-        val lottos = arrayListOf<Lotto>()
+        val lottoes = arrayListOf<Lotto>()
         repeat(quantity) {
-            lottos.add(Lotto.generateManual(numbers))
+            lottoes.add(Lotto.generateManual(numbers))
         }
 
-        return Lottos(lottos)
+        return Lottoes(lottoes)
     }
 
     companion object {
