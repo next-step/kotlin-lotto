@@ -32,4 +32,11 @@ class CalculatorTest {
             Calculator.add("-1")
         }
     }
+
+    @Test
+    fun `쉼표와 콜론을 구분자로 전달한 경우 합을 반환한다`() {
+        val result = Calculator.add("//,:\n1,3:5")
+
+        assertThat(result).isEqualTo(9)
+    }
 }
