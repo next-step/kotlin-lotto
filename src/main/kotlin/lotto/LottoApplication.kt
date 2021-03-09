@@ -19,6 +19,8 @@ class LottoApplication(private val userInterface: Console) {
         val amount = userInterface.inputPurchaseAmount()
         val lottos = lottoMachine.sellLottos(amount)
         userInterface.outputPurchasedMessage(lottos.toLottoNumbersDto())
+
+        userInterface.inputLastWeekWinningLottoNumbers()
     }
 
     companion object {
