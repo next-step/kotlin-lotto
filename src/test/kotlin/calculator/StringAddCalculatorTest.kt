@@ -1,7 +1,6 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,7 +14,7 @@ class StringAddCalculatorTest {
 
     @BeforeEach
     fun setUp() {
-        calculator = StringAddCalculator()
+        calculator = StringAddCalculator
     }
 
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")

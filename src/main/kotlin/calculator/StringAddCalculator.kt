@@ -1,6 +1,11 @@
 package calculator
 
-class StringAddCalculator {
+
+private val DEFAULT_DELIMITER_PATTERNS = listOf("[,]", "[:]")
+private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n"
+private const val EMPTY = "";
+
+object StringAddCalculator {
 
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
@@ -35,11 +40,5 @@ class StringAddCalculator {
         if (numbers.any { it < 0 }) {
             throw RuntimeException()
         }
-    }
-
-    companion object {
-        private val DEFAULT_DELIMITER_PATTERNS = listOf("[,]", "[:]")
-        private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n"
-        private const val EMPTY = "";
     }
 }
