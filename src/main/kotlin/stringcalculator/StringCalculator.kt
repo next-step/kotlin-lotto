@@ -21,7 +21,7 @@ class StringCalculator {
             splitByDefaultDelimiter(input)
         }
     }
-
+  
     private fun splitByCustomDelimiter(matchResult: MatchResult): Numbers {
         val customDelimiter = matchResult.groupValues[1]
         val splitTarget = matchResult.groupValues[2]
