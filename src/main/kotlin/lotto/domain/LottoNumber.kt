@@ -13,6 +13,21 @@ class LottoNumber(
         }
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LottoNumber
+
+        if (number != other.number) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return number
+    }
+
     object LottoCache {
         private val cache = Array(MAX_NUMBER) { LottoNumber(it + MIN_NUMBER) }
 
