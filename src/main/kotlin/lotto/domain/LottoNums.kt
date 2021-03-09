@@ -17,6 +17,10 @@ internal data class LottoNums(val nums: List<LottoNum>) {
         return lottoNums.nums.filter(this.nums::contains)
     }
 
+    internal fun contain(lottoNum: LottoNum): Boolean {
+        return this.nums.contains(lottoNum)
+    }
+
     companion object {
         const val NUM_SIZE = 6
     }

@@ -6,4 +6,8 @@ internal data class Lotto(val lottoNums: LottoNums) {
     internal fun findMatchedNums(source: Lotto): List<LottoNum> {
         return source.lottoNums.findMatchNums(this.lottoNums)
     }
+
+    internal fun contain(lottoNum: LottoNum): Boolean {
+        return this.lottoNums.contain(lottoNum)
+    }
 }

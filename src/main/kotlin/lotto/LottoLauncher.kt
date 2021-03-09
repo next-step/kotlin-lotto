@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNum
 import lotto.domain.LottoPaper
 import lotto.domain.Money
 import lotto.domain.Store
@@ -17,8 +18,8 @@ fun main() {
 
     outputView.renderLottoPaper(lottoPaper)
 
-    val winNums: List<Int> = inputView.requestWinNums()
-    val winLotto = Lotto(winNums)
+    val winLotto = Lotto(inputView.requestWinNums())
+    val bonusNum = LottoNum.of(inputView.requestBonusNum())
 
-    outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto))
+    outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto, bonusNum))
 }
