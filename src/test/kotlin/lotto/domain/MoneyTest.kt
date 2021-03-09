@@ -1,21 +1,42 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import kotlin.IllegalArgumentException
 
 internal class MoneyTest {
 
-    @ParameterizedTest(name = "{0}일 경우")
-    @ValueSource(ints = [0, -1])
-    fun `money는 0보다 작을 수 없다`(value: Int) {
-        assertThrows<IllegalArgumentException> { Money(value) }
+    @Test
+    fun `money는 1000원 단위만 존재한다`() {
+        assertDoesNotThrow { Money(1000) }
     }
 
     @Test
-    fun `정상 생성 테스트`() {
-        assertDoesNotThrow { Money(1) }
+    fun `money는 1000원 단위만 존재한다 예외`() {
+        assertThrows<IllegalArgumentException> { Money(1001) }
+    }
+
+    @Test
+    fun `money는 음수가 될 수 없다`() {
+        assertThrows<IllegalArgumentException> { Money(-1) }
+    }
+
+    @Test
+    fun `0원은 존재 한다`() {
+        assertDoesNotThrow { Money(0) }
+    }
+
+    @Test
+    fun `나누기 테스트`() {
+        assertThat(Money(10000) / Money(1000)).isEqualTo(10)
+    }
+
+    @Test
+    fun `0원 으로 나누는 경우`() {
+        assertThrows<IllegalArgumentException> { Money(10000) / Money(0) }
     }
 }
