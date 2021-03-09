@@ -11,14 +11,14 @@ private val inputView = InputView()
 private val outputView = OutputView()
 
 fun main() {
-    val price = Money(inputView.queryPrice())
+    val price = Money(inputView.requestPrice())
     val store = Store()
     val lottoPaper: LottoPaper = store.sell(price)
 
     outputView.renderLottoPaper(lottoPaper)
 
-    val winNums: List<Int> = inputView.queryWinNums()
-    val winLotto = Lotto(*winNums.toIntArray())
+    val winNums: List<Int> = inputView.requestWinNums()
+    val winLotto = Lotto(winNums)
 
     outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto))
 }

@@ -10,11 +10,11 @@ internal class LottoNumsTest {
         assertThrows<IllegalArgumentException>("the number of nums must be 6") {
             LottoNums(
                 listOf(
-                    LottoNum(1),
-                    LottoNum(2),
-                    LottoNum(3),
-                    LottoNum(4),
-                    LottoNum(5)
+                    LottoNum.of(1),
+                    LottoNum.of(2),
+                    LottoNum.of(3),
+                    LottoNum.of(4),
+                    LottoNum.of(5)
                 )
             )
         }
@@ -25,12 +25,12 @@ internal class LottoNumsTest {
         assertThrows<IllegalArgumentException>("all of nums must be unique") {
             LottoNums(
                 listOf(
-                    LottoNum(1),
-                    LottoNum(1),
-                    LottoNum(1),
-                    LottoNum(1),
-                    LottoNum(1),
-                    LottoNum(1)
+                    LottoNum.of(1),
+                    LottoNum.of(1),
+                    LottoNum.of(1),
+                    LottoNum.of(1),
+                    LottoNum.of(1),
+                    LottoNum.of(1)
                 )
             )
         }

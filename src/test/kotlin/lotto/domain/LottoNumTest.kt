@@ -8,9 +8,9 @@ internal class LottoNumTest {
 
     @Test
     fun `번호는 1부터 45이다`() {
-        assertDoesNotThrow { LottoNum(1) }
-        assertDoesNotThrow { LottoNum(45) }
-        assertThrows<IllegalArgumentException> { LottoNum(0) }
-        assertThrows<IllegalArgumentException> { LottoNum(46) }
+        assertDoesNotThrow { LottoNum.of(1) }
+        assertDoesNotThrow { LottoNum.of(45) }
+        assertThrows<IllegalArgumentException> { LottoNum.of(0) }
+        assertThrows<IllegalArgumentException> { LottoNum.of(46) }
     }
 }
