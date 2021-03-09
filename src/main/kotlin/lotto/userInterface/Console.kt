@@ -1,5 +1,6 @@
 package lotto.userInterface
 
+import lotto.domain.LottoPrize
 import lotto.dto.LottoNumbersDto
 
 class Console : UserInterface {
@@ -19,6 +20,12 @@ class Console : UserInterface {
     override fun outputPurchasedMessage(dto: LottoNumbersDto) {
         println("${dto.count}개를 구매했습니다.")
         dto.lottos.forEach { println(it) }
+    }
+
+    override fun outputWinningStatistics(lottoPrizes: List<LottoPrize>) {
+        println("당첨 통계")
+        println("---------")
+        lottoPrizes.forEach { println(it) }
     }
 
     companion object {

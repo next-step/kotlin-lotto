@@ -25,7 +25,8 @@ class LottoApplication(private val userInterface: Console) {
         val winningLottoNumbers = userInterface.inputLastWeekWinningLottoNumbers()
         val winningLotto = WinningLotto(winningLottoNumbers.map { LottoNumber(it) })
 
-        lottoMachine.result(lottos, winningLotto)
+        val result = lottoMachine.result(lottos, winningLotto)
+        userInterface.outputWinningStatistics(result)
     }
 
     companion object {
