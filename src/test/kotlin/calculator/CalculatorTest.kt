@@ -1,9 +1,12 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import java.lang.IllegalArgumentException
 
 class CalculatorTest {
 
@@ -21,5 +24,12 @@ class CalculatorTest {
         val sum = Calculator.add(input)
 
         assertThat(sum).isSameAs(input.toInt())
+    }
+
+    @Test
+    fun `입력한 값 중에 음수가 있는 경우 예외처리한다`() {
+        assertThrows<IllegalArgumentException> {
+            Calculator.add("-1")
+        }
     }
 }
