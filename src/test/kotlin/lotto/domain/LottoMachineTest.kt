@@ -38,7 +38,6 @@ class LottoMachineTest {
         assertThat(result.size).isEqualTo(expected)
     }
 
-
     @ParameterizedTest
     @CsvSource(
         "1000, 1001",
@@ -50,7 +49,6 @@ class LottoMachineTest {
         val result = assertThrows<java.lang.IllegalArgumentException> { lottoMachine.sellLottos(money = money) }
         assertThat(result.message).isEqualTo(expectedMessage)
     }
-
 
     @ParameterizedTest
     @CsvSource(

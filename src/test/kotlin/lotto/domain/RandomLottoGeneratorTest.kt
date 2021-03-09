@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.domain.RandomLottoGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -18,7 +17,7 @@ internal class RandomLottoGeneratorTest {
         val randomLottoGenerator = RandomLottoGenerator()
         randomLottoGenerator.generate()
         randomLottoGenerator.generate()
-        
+
         // TODO: 랜덤한 로또라는 걸 어떻게 검증할 수 있지 ?
     }
 }
