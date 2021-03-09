@@ -1,7 +1,5 @@
 package lotto
 
-import kotlin.random.Random
-
 class Lotto private constructor(private var numbers: List<Int>) {
 
     fun getLottoNumbers(): List<Int> {
