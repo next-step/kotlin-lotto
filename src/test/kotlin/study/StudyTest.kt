@@ -50,4 +50,10 @@ class StudyTest {
         val nums = "-1,-1".split(",").map { it.toInt() }
         assertThat(nums).contains(-1, -1)
     }
+
+    @Test
+    fun `split with space`() {
+        val list = "1, 2, 3, 4, 5".split(", ").map { it.toInt() }
+        assertThat(list).contains(1, 2, 3, 4, 5)
+    }
 }

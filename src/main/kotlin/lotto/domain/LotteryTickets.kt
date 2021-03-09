@@ -1,16 +1,21 @@
 package lotto.domain
 
+import lotto.constant.LOTTERY_TICKET_PRICE
+import lotto.data.LotteryTicketNumber
 import lotto.data.WinningNumbers
 import lotto.domain.maker.DefaultLotteryTicketMaker
 import lotto.domain.maker.LotteryTicketMaker
 import lotto.enums.LotteryMatchType
 
-class LotteryTickets(ticketNum: Int, private val lotteryTicketMaker: LotteryTicketMaker = DefaultLotteryTicketMaker()) {
+class LotteryTickets(
+    inputPrice: Int,
+    lotteryTicketMaker: LotteryTicketMaker = DefaultLotteryTicketMaker()
+) {
 
     val lotteryTickets = mutableListOf<LotteryTicket>()
 
     init {
-        repeat(ticketNum) {
+        repeat(inputPrice / LOTTERY_TICKET_PRICE) {
             val lotteryTicket = lotteryTicketMaker.createLotteryTicket()
             lotteryTickets.add(lotteryTicket)
         }
@@ -24,5 +29,9 @@ class LotteryTickets(ticketNum: Int, private val lotteryTicketMaker: LotteryTick
             winningStatistics.addTicketCountOf(lotteryMatchType)
         }
         return winningStatistics
+    }
+
+    fun makeLotteryTicketNumberList(): List<LotteryTicketNumber> {
+        return lotteryTickets.map { LotteryTicketNumber.from(it) }
     }
 }

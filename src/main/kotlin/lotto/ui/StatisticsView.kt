@@ -1,4 +1,32 @@
 package lotto.ui
 
-class StatisticsView {
+import lotto.domain.WinningStatistics
+import lotto.enums.LotteryMatchType
+import java.math.BigDecimal
+
+object StatisticsView {
+
+    const val PROFIT_RATIO_BASE = 1
+    const val LOSS_MESSAGE = "기준이 1이기 때문에 결과적으로 손해라는 의미임"
+
+    fun printLotteryStatistics(statistics: WinningStatistics) {
+        println("당첨 통계")
+        println("---------")
+
+        LotteryMatchType.values().forEach {
+            printMatchCountResult(it, statistics.getTicketCountOf(it))
+        }
+    }
+
+    private fun printMatchCountResult(matchType: LotteryMatchType, ticketCount: Int) {
+        if (matchType == LotteryMatchType.NonProfit) {
+            return
+        }
+        println("${matchType.description} (${matchType.winningPrice}원)- ${ticketCount}개")
+    }
+
+    fun printProfitRatio(ratio: BigDecimal) {
+        val infoMessage = if (ratio.compareTo(BigDecimal(PROFIT_RATIO_BASE)) == -1) "($LOSS_MESSAGE)" else ""
+        println("총 수익률은 ${ratio.toString()}입니다.$infoMessage")
+    }
 }
