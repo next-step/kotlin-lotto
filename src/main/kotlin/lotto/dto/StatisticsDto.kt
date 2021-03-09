@@ -11,7 +11,11 @@ data class StatisticsDto(val prizeRankCount: Map<LottoPrize, Int>, val profitRat
                 .groupingBy { it }
                 .eachCount()
 
-            val allRewards = result.map { it.reward }.sum()
+            val allRewards = result
+                .map { it.reward }
+                .map { it.toLong() }
+                .sum()
+
             val profitRate = allRewards.toDouble() / amount
 
             return StatisticsDto(prizeRankCount, profitRate)
