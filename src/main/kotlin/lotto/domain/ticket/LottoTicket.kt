@@ -20,5 +20,13 @@ class LottoTicket(
 
     companion object {
         const val TICKET_SIZE = 6
+
+        fun create() = LottoNumber.getLottoNumbers()
+            .shuffled()
+            .take(TICKET_SIZE)
+            .toTicket()
+
+
+        private fun Iterable<LottoNumber>.toTicket() = LottoTicket(this.toSet())
     }
 }

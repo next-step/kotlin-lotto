@@ -28,8 +28,8 @@ class LottoNumber(
         return number
     }
 
-    object LottoCache {
-        private val cache = Array(MAX_NUMBER) { LottoNumber(it + MIN_NUMBER) }
+    private object LottoCache {
+        val cache = Array(MAX_NUMBER) { LottoNumber(it + MIN_NUMBER) }
 
         fun get(number: Int): LottoNumber {
             return cache[number - 1]
@@ -47,5 +47,7 @@ class LottoNumber(
                 LottoNumber(number)
             }
         }
+
+        fun getLottoNumbers() = LottoCache.cache.toList()
     }
 }
