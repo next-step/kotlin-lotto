@@ -14,25 +14,12 @@ class Lotto private constructor(private var numbers: List<Int>) {
         private const val MAX_LOTTO_NUMBER = 45
 
         fun generateAuto(): Lotto {
-            val numbers: ArrayList<Int> = arrayListOf()
-            var currentDigits = 0
-            while (currentDigits < MAX_DIGITS) {
-                val randomNumber = Random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                if (!checkDuplicateNumber(numbers, randomNumber)) {
-                    numbers.add(randomNumber)
-                    currentDigits++
-                }
-            }
-            numbers.sort()
-            return Lotto(numbers)
+            val numbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled().slice(0..5)
+            return Lotto(numbers.sorted())
         }
 
         fun generateManual(numbers: List<Int>): Lotto {
             return Lotto(numbers.sorted())
-        }
-
-        private fun checkDuplicateNumber(numbers: List<Int>, randomNumber: Int): Boolean {
-            return numbers.contains(randomNumber)
         }
     }
 }
