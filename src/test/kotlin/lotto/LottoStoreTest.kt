@@ -13,6 +13,6 @@ class LottoStoreTest {
     @ValueSource(ints = [1000, 10000, 14000])
     fun `금액넣었을때 금액에 맞는 로또가 생성되는지 확인`(money: Int) {
         val lottos = lottoStore.purchaseAuto(money)
-        assertThat(lottos.size).isEqualTo(money / LOTTO_COST)
+        assertThat(lottos.toList().size).isEqualTo(money / LOTTO_COST)
     }
 }
