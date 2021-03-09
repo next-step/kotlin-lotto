@@ -59,7 +59,7 @@ internal class PositiveNumberTest {
         val secondOperand = PositiveNumber(2)
         val expected = PositiveNumber(3)
 
-        val result: PositiveNumber = firstOperand.plus(secondOperand)
+        val result: PositiveNumber = firstOperand + secondOperand
 
         assertThat(result).isEqualTo(expected)
     }

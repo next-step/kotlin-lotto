@@ -18,7 +18,7 @@ class StringAddCalculator {
         val token = Token(input)
         return token.values
             .map { PositiveNumber(it) }
-            .reduce { acc, positiveNumber -> acc.plus(positiveNumber) }
+            .reduce { x, y -> x + y }
             .value
     }
 }
