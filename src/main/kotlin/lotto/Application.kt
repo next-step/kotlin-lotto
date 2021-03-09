@@ -1,17 +1,15 @@
 package lotto
 
 import lotto.domain.*
-import lotto.view.inputMoney
-import lotto.view.inputWinningLottoNumbers
-import lotto.view.printLottos
-import lotto.view.printResult
+import lotto.view.*
 
 fun main() {
     val purchase = Money(inputMoney())
-    val count = (purchase / Lotto.PRICE)
+    val count = (purchase / Lotto.PRICE).toInt()
 
-    val lottos = Lottos((0 until count)
-        .map { RandomLottoGenerator.generate() })
+    val lottos = Lottos(
+        (0 until count).map { RandomLottoGenerator.generate() }
+    )
 
     printLottos(lottos)
 
@@ -22,4 +20,7 @@ fun main() {
 
     val result = lottos.match(winningLotto)
     printResult(result)
+
+    val yield = result.calculateYield(purchase)
+    printYield(`yield`)
 }
