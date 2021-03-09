@@ -1,7 +1,7 @@
-package calculator
+package calculator.domain
 
-import calculator.domain.Calculator
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -11,7 +11,12 @@ import java.util.stream.Stream
 
 class CalculatorTest {
 
-    private val calculator = Calculator()
+    private lateinit var calculator: Calculator
+
+    @BeforeEach
+    fun init() {
+        calculator = Calculator()
+    }
 
     @Test
     fun `숫자들을 합할때`() {
@@ -24,25 +29,14 @@ class CalculatorTest {
     fun `숫자들중 음수가 포함되어 있을때`() {
         val numbers = listOf("1", "2", "3", "-4")
 
-        assertThrows<RuntimeException>("음수는 계산식에 포함될 수 없습니다.") { calculator.calculate(numbers) }
+        assertThrows<RuntimeException> { calculator.calculate(numbers) }
     }
 
     @Test
     fun `숫자들중 문자가 포함되어 있을때`() {
         val numbers = listOf("1", "2", "3", "a")
 
-        assertThrows<RuntimeException>("문자는 계산식에 포함될 수 없습니다.") { calculator.calculate(numbers) }
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideNumbers")
-    fun `숫자들의 리스트가 들어와서 모두 합해줄 때`(numbers: List<String>, result: Int) {
-        var sum = 0
-        for (number in numbers) {
-            sum += number.toInt()
-        }
-
-        assertThat(sum).isEqualTo(result)
+        assertThrows<RuntimeException> { calculator.calculate(numbers) }
     }
 
     companion object {
