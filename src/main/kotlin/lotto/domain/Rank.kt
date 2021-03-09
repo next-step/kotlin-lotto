@@ -9,7 +9,6 @@ enum class Rank(val matchCount: Int, val prizeMoney: Money) {
     MISS(0, Money.ZERO);
 
     companion object {
-
         fun of(matchCount: Int) = values().find { it.matchCount == matchCount } ?: MISS
     }
 }

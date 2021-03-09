@@ -18,7 +18,6 @@ data class LottoNumber private constructor(val value: Int) : Comparable<LottoNum
     }
 
     companion object {
-
         private const val MINIMUM_VALUE = 1
         private const val MAXIMUM_VALUE = 45
         val RANGE = (MINIMUM_VALUE..MAXIMUM_VALUE)
