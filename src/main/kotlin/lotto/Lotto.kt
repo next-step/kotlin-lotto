@@ -27,8 +27,8 @@ class Lotto private constructor(private var numbers: List<Int>) {
             return Lotto(numbers)
         }
 
-        fun generateManual(number: List<Int>): Lotto {
-            return Lotto(number.sorted())
+        fun generateManual(numbers: List<Int>): Lotto {
+            return Lotto(numbers.sorted())
         }
 
         private fun checkDuplicateNumber(numbers: List<Int>, randomNumber: Int): Boolean {
