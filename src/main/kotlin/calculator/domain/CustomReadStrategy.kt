@@ -1,6 +1,5 @@
 package calculator.domain
 
-
 class CustomReadStrategy() : StringReadStrategy {
     override fun readString(string: String): List<String> {
         val separator = getCustomSeparator(string)

@@ -18,5 +18,3 @@ fun main() {
 
     outputView.printCaculateResult(result)
 }
-
-
