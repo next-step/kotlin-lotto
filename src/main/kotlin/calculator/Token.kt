@@ -15,7 +15,8 @@ class Token(input: String) {
     }
 
     companion object {
-        private val REGEX: Regex = """//(.)\n(.*)""".toRegex()
+        private val REGEX: Regex =
+            """//(.)\n(.*)""".toRegex()
         private const val DEFAULT_DELIMITER_COMMA = ","
         private const val DEFAULT_DELIMITER_COLON = ":"
     }
