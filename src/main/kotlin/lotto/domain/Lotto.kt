@@ -1,6 +1,5 @@
 package lotto.domain
 
-
 data class Lotto(val elements: Set<LottoNumber>) {
 
     init {

@@ -1,9 +1,8 @@
 package calculator
 
-
 private val DEFAULT_DELIMITER_PATTERNS = listOf("[,]", "[:]")
 private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n"
-private const val EMPTY = "";
+private const val EMPTY = ""
 
 object StringAddCalculator {
 

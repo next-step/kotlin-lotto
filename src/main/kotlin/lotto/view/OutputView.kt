@@ -1,6 +1,10 @@
 package lotto.view
 
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.Lottos
+import lotto.domain.Rank
+import lotto.domain.Yield
+import lotto.domain.Result
 
 fun printLottos(lottos: Lottos) {
     println(String.format("%d개를 구매했습니다.", lottos.elements.size))
