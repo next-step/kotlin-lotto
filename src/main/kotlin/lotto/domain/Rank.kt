@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Rank(val matchCount: Int, prizeMoney: Money) {
+enum class Rank(val matchCount: Int, val prizeMoney: Money) {
 
     FIRST(6, Money(2_000_000_000)),
     THIRD(5, Money(1_500_000)),
