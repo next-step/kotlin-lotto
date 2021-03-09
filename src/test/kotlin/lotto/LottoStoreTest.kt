@@ -1,6 +1,7 @@
 package lotto
 
-import lotto.LottoStore.Companion.LOTTO_COST
+import lotto.domain.LottoStore
+import lotto.domain.LottoStore.Companion.LOTTO_COST
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource

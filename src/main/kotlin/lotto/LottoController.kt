@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.LottoResult
+import lotto.domain.LottoStore
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
