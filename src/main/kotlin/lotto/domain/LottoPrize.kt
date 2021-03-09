@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class LottoPrize(private val count: Int, val reward: Int) {
+enum class LottoPrize(val count: Int, val reward: Int) {
 
     FIRST_PRIZE(6, 2_000_000_000),
     THIRD_PRIZE(5, 1_500_000),

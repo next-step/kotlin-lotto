@@ -4,6 +4,7 @@ import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
+import lotto.dto.StatisticsDto
 import lotto.dto.toLottoNumbersDto
 import lotto.userInterface.Console
 
@@ -26,7 +27,7 @@ class LottoApplication(private val userInterface: Console) {
         val winningLotto = WinningLotto(winningLottoNumbers.map { LottoNumber(it) })
 
         val result = lottoMachine.result(lottos, winningLotto)
-        userInterface.outputWinningStatistics(result)
+        userInterface.outputWinningStatistics(StatisticsDto.of(result, amount))
     }
 
     companion object {

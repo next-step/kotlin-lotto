@@ -1,7 +1,7 @@
 package lotto.userInterface
 
-import lotto.domain.LottoPrize
 import lotto.dto.LottoNumbersDto
+import lotto.dto.StatisticsDto
 
 class Console : UserInterface {
     override fun inputPurchaseAmount(): Int {
@@ -22,10 +22,13 @@ class Console : UserInterface {
         dto.lottos.forEach { println(it) }
     }
 
-    override fun outputWinningStatistics(lottoPrizes: List<LottoPrize>) {
+    override fun outputWinningStatistics(dto: StatisticsDto) {
         println("당첨 통계")
         println("---------")
-        lottoPrizes.forEach { println(it) }
+
+        dto.prizeRankCount.forEach { println("${it.key.count}개 일치 (${it.key.reward}원)- ${it.value}개") }
+
+        println("총 수익률은 ${dto.profitRate}입니다.")
     }
 
     companion object {
