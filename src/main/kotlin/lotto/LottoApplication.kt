@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.LottoMachine
+import lotto.domain.RandomLottoGenerator
 import lotto.userInterface.Console
 
 fun main() {
@@ -10,7 +12,14 @@ fun main() {
 
 class LottoApplication(private val userInterface: Console) {
 
+    private val lottoMachine = LottoMachine(LOTTO_PRICE, RandomLottoGenerator())
+
     fun run() {
         val amount = userInterface.inputPurchaseAmount()
+        lottoMachine.sellLottos(amount)
+    }
+
+    companion object {
+        private const val LOTTO_PRICE = 1000
     }
 }
