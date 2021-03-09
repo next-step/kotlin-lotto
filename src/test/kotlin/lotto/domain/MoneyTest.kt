@@ -32,7 +32,7 @@ internal class MoneyTest {
 
     @Test
     fun `나누기 테스트`() {
-        assertThat(Money(10000) / Money(1000)).isEqualTo(10)
+        assertThat(Money(10000) / Money(1000)).isEqualTo(10.0)
     }
 
     @Test
