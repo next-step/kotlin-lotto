@@ -6,6 +6,22 @@ import kotlin.random.Random
 class LottoTest {
 
     @Test
+    fun `로또 1개 자동으로 만들기`() {
+        val lotto = Lotto.generateAuto()
+        lotto.getLottoNumbers().forEach {
+            print("$it ")
+        }
+    }
+
+    @Test
+    fun `로또 1개 수동으로 만들기`() {
+        val lotto = Lotto.generateManual(listOf(1, 2, 3, 4, 5, 6))
+        lotto.getLottoNumbers().forEach {
+            print("$it ")
+        }
+    }
+
+    @Test
     fun `무작위 숫자 6개 만들기`() {
         val lotto = arrayListOf<Int>()
         repeat(6) {
