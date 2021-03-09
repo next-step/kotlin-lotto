@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 internal class LottosTest {
     @Test
@@ -58,7 +60,7 @@ internal class LottosTest {
         val earningRate = lottos.getEarningRate(Lotto(winningNumbers))
 
         // then
-        assertThat(earningRate).isEqualTo(5000.toDouble() / 6000.toDouble())
+        assertThat(earningRate).isEqualTo(5000.toBigDecimal().divide(6000.toBigDecimal(), 2, RoundingMode.FLOOR));
     }
 
     @Test
