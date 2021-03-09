@@ -24,4 +24,8 @@ class LottoNumber(val value: Int) {
     override fun hashCode(): Int {
         return value
     }
+
+    override fun toString(): String {
+        return "LottoNumber(value=$value)"
+    }
 }

@@ -11,6 +11,11 @@ class WinningLotto(private val winningLottoNumbers: List<LottoNumber>) {
         return lottoNumbers.distinct().size == VALID_WINNING_LOTTO_NUMBER_COUNT
     }
 
+    fun matchCount(lotto: Lotto): Int {
+        val lottoNumbers = lotto.lottoNumbers
+        return winningLottoNumbers.intersect(lottoNumbers).size
+    }
+
     companion object {
         private const val VALID_WINNING_LOTTO_NUMBER_COUNT = 6
     }
