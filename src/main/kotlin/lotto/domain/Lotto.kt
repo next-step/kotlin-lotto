@@ -7,11 +7,9 @@ data class Lotto(val elements: Set<LottoNumber>) {
         require(elements.size == SIZE)
     }
 
-    fun matchCount(lotto: Lotto): Int {
-        return elements.filter { lottoNumber -> lotto.contains(lottoNumber) }.count()
+    fun matchCount(other: Lotto): Int {
+        return elements.filter { it in other.elements }.count()
     }
-
-    private fun contains(number: LottoNumber) = elements.contains(number)
 
     companion object {
         const val SIZE = 6
