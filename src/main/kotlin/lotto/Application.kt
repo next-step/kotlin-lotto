@@ -5,11 +5,9 @@ import lotto.view.*
 
 fun main() {
     val purchase = Money(inputMoney())
-    val count = (purchase / Lotto.PRICE).toInt()
+    val count = Count(purchase / Lotto.PRICE)
 
-    val lottos = Lottos(
-        (0 until count).map { RandomLottoGenerator.generate() }
-    )
+    val lottos = Lottos(count.map { RandomLottoGenerator.generate() })
 
     printLottos(lottos)
 
