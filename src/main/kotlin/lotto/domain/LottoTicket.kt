@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto private constructor(private val numbers: List<Int>) {
+class LottoTicket private constructor(private val numbers: List<Int>) {
 
     fun getLottoNumbers(): List<Int> {
         return numbers.toList()
@@ -10,13 +10,13 @@ class Lotto private constructor(private val numbers: List<Int>) {
         private const val MIN_LOTTO_NUMBER = 1
         private const val MAX_LOTTO_NUMBER = 45
 
-        fun generateAuto(): Lotto {
+        fun generateAuto(): LottoTicket {
             val numbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled().slice(0..5)
-            return Lotto(numbers.sorted())
+            return LottoTicket(numbers.sorted())
         }
 
-        fun generateManual(numbers: List<Int>): Lotto {
-            return Lotto(numbers.sorted())
+        fun generateManual(numbers: List<Int>): LottoTicket {
+            return LottoTicket(numbers.sorted())
         }
     }
 }

@@ -1,14 +1,14 @@
 package lotto
 
-import lotto.domain.Lotto
+import lotto.domain.LottoTicket
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
 
-class LottoTest {
+class LottoTicketTest {
 
     @Test
     fun `로또 1개 자동으로 만들기`() {
-        val lotto = Lotto.generateAuto()
+        val lotto = LottoTicket.generateAuto()
         lotto.getLottoNumbers().forEach {
             print("$it ")
         }
@@ -16,7 +16,7 @@ class LottoTest {
 
     @Test
     fun `로또 1개 수동으로 만들기`() {
-        val lotto = Lotto.generateManual(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = LottoTicket.generateManual(listOf(1, 2, 3, 4, 5, 6))
         lotto.getLottoNumbers().forEach {
             print("$it ")
         }
