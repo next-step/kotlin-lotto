@@ -32,13 +32,6 @@ class LottoResultTest {
     fun `로또 번호들의 등수 확인`() {
         val ranks = lottoResult.getMyLottoesRank(lottos, winningLotto)
 
-        assertThat(ranks).isEqualTo(listOf(Rank.THIRD, Rank.SECOND, Rank.FIRST, Rank.MISS))
-    }
-
-    @Test
-    fun `보너스 번호 맞았는지 확인`() {
-        val bonusNumber = LottoNumber(5)
-        val lotto = LottoTicket.generateManual(listOf(1, 2, 3, 4, 5, 6))
-        println(lotto.value.contains(bonusNumber))
+        assertThat(ranks.keys.toList()).isEqualTo(listOf(Rank.THIRD, Rank.SECOND, Rank.FIRST, Rank.MISS))
     }
 }
