@@ -29,4 +29,13 @@ object StatisticsView {
         val infoMessage = if (ratio.compareTo(BigDecimal(PROFIT_RATIO_BASE)) == -1) "($LOSS_MESSAGE)" else ""
         println("총 수익률은 ${ratio}입니다.$infoMessage")
     }
+
+    private val LotteryMatchType.description: String
+        get() = when (this) {
+            LotteryMatchType.NonProfit -> "2개 이하"
+            LotteryMatchType.Three -> "3개 일치"
+            LotteryMatchType.Four -> "4개 일치"
+            LotteryMatchType.Five -> "5개 일치"
+            LotteryMatchType.Six -> "6개 일치"
+        }
 }
