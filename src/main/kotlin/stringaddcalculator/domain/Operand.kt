@@ -9,6 +9,6 @@ data class Operand(val number: Int) {
 
     companion object {
         fun of(stringNumber: String) =
-            Operand(stringNumber.toIntOrNull() ?: throw IllegalArgumentException("올바르지 않은 피연산자 타입입니다"))
+            Operand(stringNumber.toIntOrNull() ?: throw IllegalArgumentException("$stringNumber : 올바르지 않은 피연산자 타입입니다"))
     }
 }

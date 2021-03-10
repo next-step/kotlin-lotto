@@ -1,10 +1,9 @@
 package stringaddcalculator.util
 
-class ExpressionParser {
+object ExpressionParser {
 
-    companion object {
-        const val CUSTOM_PARSE_PATTERN = "//(.)\n(.*)"
-    }
+    private const val CUSTOM_PARSE_PATTERN = "//(.)\n(.*)"
+    private val regexPattern = Regex(CUSTOM_PARSE_PATTERN)
 
     fun parse(calculationInput: String): List<String> {
         val parseInput = findPattern(calculationInput) ?: return Splitter().split(calculationInput)
@@ -12,10 +11,9 @@ class ExpressionParser {
     }
 
     private fun findPattern(input: String): ParserResult? {
-        val result = Regex(CUSTOM_PARSE_PATTERN).find(input)
+        val result = regexPattern.find(input)
         result?.let {
-            val customDelimiter = it.groupValues[1]
-            val tokens = it.groupValues[2]
+            val (customDelimiter, tokens) = it.destructured
             return ParserResult(customDelimiter, tokens)
         }
         return null
