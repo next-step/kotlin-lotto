@@ -13,6 +13,6 @@ class Calculator {
     }
 
     private fun convertStringToNumber(numbers: List<String>): List<Number> {
-        return numbers.map (::Number)
+        return numbers.map(::Number)
     }
 }

@@ -1,6 +1,6 @@
 package calculator.domain
 
-class Number (val value: Int){
+class Number(val value: Int) {
     constructor(stringNumber: String) : this(stringNumber.toInt()) {
         checkValidateNumber(stringNumber)
         checkNegativeNumber(stringNumber)
