@@ -9,9 +9,9 @@ class LottoDrawMachine(private val pool: Set<Int>) {
 
     constructor(range: IntRange) : this(range.toSet())
 
-    fun lottoNumber(): LottoNumber = pool.shuffled()
+    fun lottoNumber(): LottoNumbers = pool.shuffled()
         .toSet()
-        .let { LottoNumber.from(it) }
+        .let { LottoNumbers.from(it) }
 
     companion object {
         const val POOL_SIZE: Int = 45

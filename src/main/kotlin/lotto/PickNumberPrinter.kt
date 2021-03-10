@@ -1,6 +1,6 @@
 package lotto
 
-class PickNumberPrinter(private val lottoNumbers: List<LottoNumber>) {
+class PickNumberPrinter(private val lottoNumbers: List<LottoNumbers>) {
     fun print() {
         lottoNumbers.map { it.joinToString(prefix = "[", postfix = "]") }
             .forEach { println(it) }

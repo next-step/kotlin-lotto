@@ -1,6 +1,6 @@
 package lotto
 
-data class LottoNumber(private val numbers: List<Int>) : List<Int> by numbers {
+data class LottoNumbers(private val numbers: List<Int>) : List<Int> by numbers {
     init {
         require(numbers.toSet().size == NUMBER_COUNT)
     }
@@ -12,8 +12,8 @@ data class LottoNumber(private val numbers: List<Int>) : List<Int> by numbers {
     companion object {
         const val NUMBER_COUNT: Int = 6
 
-        fun from(source: Set<Int>): LottoNumber {
-            return LottoNumber(source.take(NUMBER_COUNT))
+        fun from(source: Set<Int>): LottoNumbers {
+            return LottoNumbers(source.take(NUMBER_COUNT))
         }
     }
 }

@@ -25,13 +25,13 @@ class LottoDrawMachineTest {
     fun `로또 번호는 6개 이다`() {
         assertAll(
             {
-                LottoNumber((1..6))
+                LottoNumbers((1..6))
             },
             {
-                assertThrows<IllegalArgumentException> { LottoNumber((1..5)) }
+                assertThrows<IllegalArgumentException> { LottoNumbers((1..5)) }
             },
             {
-                assertThrows<IllegalArgumentException> { LottoNumber((1..7)) }
+                assertThrows<IllegalArgumentException> { LottoNumbers((1..7)) }
             }
         )
     }

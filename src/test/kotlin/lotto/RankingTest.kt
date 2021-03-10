@@ -17,10 +17,10 @@ class RankingTest {
         delimiter = ':'
     )
     fun `두 번호그룹을 비교하여 일치수를 알 수 있다`(pick: String, rank: Ranking.Rank) {
-        val winningNumber = LottoNumber(1, 2, 3, 4, 5, 6)
+        val winningNumber = LottoNumbers(1, 2, 3, 4, 5, 6)
         val pickNumbers: List<Int> = pick.split(",").map { it.toInt() }
         assertThat(
-            Ranking(winningNumber, LottoNumber(pickNumbers)).rank
+            Ranking(winningNumber, LottoNumbers(pickNumbers)).rank
         ).isEqualTo(rank)
     }
 }

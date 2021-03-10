@@ -3,7 +3,7 @@ package lotto
 class Ranking(match: Match) {
     val rank: Rank = Rank.of(match.count)
 
-    constructor(theNumber: LottoNumber, other: LottoNumber) : this(Match(theNumber, other))
+    constructor(theNumbers: LottoNumbers, other: LottoNumbers) : this(Match(theNumbers, other))
 
     enum class Rank(val matchCount: Int = 0, val amount: Long = 0) {
         FOURTH(3, 5_000L),

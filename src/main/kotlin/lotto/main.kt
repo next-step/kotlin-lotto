@@ -14,7 +14,7 @@ fun main() {
 
     PickNumberPrinter(lottoNumbers).print()
 
-    val winningNumber = WinningNumber.Console("지난 주 당첨 번호를 입력해 주세요.").lottoNumber
+    val winningNumber = WinningNumber.Console("지난 주 당첨 번호를 입력해 주세요.").lottoNumbers
 
     val result = LottoGame(lottoNumbers, winningNumber).result
 
