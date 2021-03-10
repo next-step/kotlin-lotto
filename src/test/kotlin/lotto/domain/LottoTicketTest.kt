@@ -1,7 +1,6 @@
 package lotto.domain
 
 import org.junit.jupiter.api.Test
-import kotlin.random.Random
 
 class LottoTicketTest {
 

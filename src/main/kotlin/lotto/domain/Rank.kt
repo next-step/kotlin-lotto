@@ -16,4 +16,3 @@ enum class Rank(val countOfMatch: Int, val prizeMoney: Int, val bonusMatch: Bool
         }
     }
 }
-
