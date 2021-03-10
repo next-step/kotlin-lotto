@@ -2,10 +2,9 @@ package lotto.view
 
 import lotto.model.Lotto
 import lotto.model.LottoNumber
-import lotto.model.Money
 
 object InputView {
-    fun askBudgetQuestion(): Money {
+    fun askBudgetQuestion(): String {
         printBudgetQuestion()
         var budget = readLine()
 
@@ -14,10 +13,10 @@ object InputView {
             budget = readLine()
         }
 
-        return Money(budget)
+        return budget
     }
 
-    fun askBonusNumber(winningLotto: Lotto): LottoNumber {
+    fun askBonusNumber(winningLotto: Lotto): String {
         printBonusBallQuestion()
         var bonusNumber = readLine()
 
@@ -26,10 +25,10 @@ object InputView {
             bonusNumber = readLine()
         }
 
-        return LottoNumber(bonusNumber)
+        return bonusNumber
     }
 
-    fun askWinningLotto(): Lotto {
+    fun askWinningLottoNumbers(): String {
         printWinningNumberQuestion()
         var winningNumbers = readLine()
 
@@ -38,7 +37,7 @@ object InputView {
             winningNumbers = readLine()
         }
 
-        return Lotto(winningNumbers)
+        return winningNumbers
     }
 
     fun printBonusBallQuestion() {
