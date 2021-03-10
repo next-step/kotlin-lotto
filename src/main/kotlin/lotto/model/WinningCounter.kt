@@ -16,8 +16,12 @@ data class WinningCounter(val counter: MutableMap<LottoPlace, Int> = mutableMapO
     }
 
     fun record(matchCount: Int) {
-        LottoPlace.match(matchCount)?.let {
-            counter.put(it, counter.getValue(it) + 1)
-        }
+        val place = LottoPlace.match(matchCount)
+
+        increment(place)
+    }
+
+    private fun increment(place: LottoPlace) {
+        counter[place] = counter.getValue(place) + 1
     }
 }
