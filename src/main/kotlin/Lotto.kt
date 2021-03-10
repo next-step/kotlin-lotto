@@ -5,17 +5,35 @@ fun main() {
     val lottoCnt = lotto.buy(price)
     val lottoCards = lotto.extractNumber(lottoCnt)
     printLottoCards(lottoCards)
+
+    val beforeWeekLottoCard = lotto.validateLottoCard(inputLottoNumber())
 }
 
 class Lotto {
+    fun validateLottoCard(lottoNumber: String?): LottoCard {
+        require(!lottoNumber.isNullOrBlank()) { "로또 번호를 반드시 입력해야 합니다." }
+
+        val strNumbers = lottoNumber.trim().split(",")
+        require(strNumbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개입니다." }
+
+        val numbers = strNumbers.map { parseInt(it) }
+        require(numbers.none { it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
+
+        return LottoCard(numbers)
+    }
+
     fun validatePrice(strPrice: String?): Int {
         require(!strPrice.isNullOrBlank()) { "구입금액을 반드시 입력해야합니다." }
 
-        try {
-            val price = strPrice.toInt()
-            require(price > 1000) { "구입 금액은 1000원보다 커야합니다." }
+        val price = parseInt(strPrice)
+        require(price > 1000) { "구입 금액은 1000원보다 커야합니다." }
 
-            return price
+        return price
+    }
+
+    private fun parseInt(strNumber: String): Int {
+        try {
+            return strNumber.toInt()
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException("자연수로 변환하는데 실패했습니다.")
         }
