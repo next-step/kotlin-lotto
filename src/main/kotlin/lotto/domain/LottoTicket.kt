@@ -14,5 +14,10 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
 
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
+
+        fun of(numbers: List<Int>): LottoTicket {
+            val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
+            return LottoTicket(lottoNumbers)
+        }
     }
 }
