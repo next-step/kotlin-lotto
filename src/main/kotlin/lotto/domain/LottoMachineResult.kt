@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.math.getProfit
+import lotto.math.roundTo
+import lotto.supportdata.PurchaseInfo
 import lotto.supportdata.WinNumber
 
 class LottoMachineResult(
@@ -11,5 +14,13 @@ class LottoMachineResult(
 
     fun getLottoRankCount(lottoRank: LottoRank): Int {
         return lottoTicketResults.filter { it.lottoRank == lottoRank }.count()
+    }
+
+    fun calculateProfit(purchaseInfo: PurchaseInfo): Double {
+        val purchaseMoney: Int = purchaseInfo.money
+        val winningMoney: Int = lottoTicketResults
+            .map { it.lottoRank.price }
+            .sum()
+        return getProfit(purchaseMoney, winningMoney).roundTo(2)
     }
 }

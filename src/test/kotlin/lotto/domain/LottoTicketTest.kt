@@ -42,8 +42,8 @@ internal class LottoTicketTest {
     @Test
     @DisplayName("티켓에 입력된 숫자 중 범위에 벗어난 값이 있으면 에러가 발생한다")
     fun invalidLottoNumber() {
-        val lottoTicket = LottoTicket.of(listOf(1, 2, 3, 4, 5, 0))
-        assertThat(lottoTicket).isNotNull
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy { LottoTicket.of(listOf(1, 2, 3, 4, 5, 0)) }
     }
 
     @Test
