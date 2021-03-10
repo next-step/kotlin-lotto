@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.data.WinningNumbers
+import lotto.data.LottoNumbers
 import lotto.domain.maker.DefaultLotteryTicketMaker
 import lotto.domain.maker.LotteryTicketMaker
 import lotto.enums.LotteryMatchType
@@ -19,7 +19,7 @@ class Buyer {
         return tickets
     }
 
-    fun createWinningStatics(winningNumbers: WinningNumbers): WinningStatistics {
+    fun createWinningStatics(winningNumbers: LottoNumbers): WinningStatistics {
         val winningStatistics = WinningStatistics()
         tickets.map { it.findMatchCount(winningNumbers) }
             .forEach { winningStatistics.addTicketOf(LotteryMatchType.findByMatchCount(it)) }

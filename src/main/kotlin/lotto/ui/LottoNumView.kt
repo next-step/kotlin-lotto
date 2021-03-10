@@ -5,7 +5,7 @@ import lotto.domain.LotteryTicket
 object LottoNumView {
     fun printLottoNumbers(lotteryTickets: List<LotteryTicket>) {
         lotteryTickets.forEach {
-            println(it.lottoNumbers)
+            println(it.lottoNumbers.lottoNumbers)
         }
     }
 }

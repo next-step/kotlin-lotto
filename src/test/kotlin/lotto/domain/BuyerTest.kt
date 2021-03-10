@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.data.WinningNumbers
+import lotto.data.LottoNumbers
 import lotto.domain.maker.TestLotteryTicketMaker
 import lotto.enums.LotteryMatchType
 import org.assertj.core.api.Assertions.assertThat
@@ -9,12 +9,11 @@ import org.junit.jupiter.api.Test
 class BuyerTest {
 
     @Test
-    fun `로또를 구매한다`() {
+    fun `로또를 구매한 경우, 티켓 개수를 확인한다`() {
         val buyer = Buyer()
         val tickets = buyer.buyLotteryTickets(2000, TestLotteryTicketMaker())
 
         assertThat(tickets).hasSize(2)
-        assertThat(tickets[0].lottoNumbers).containsOnly(1, 2, 3, 4, 5, 6)
     }
 
     @Test
@@ -22,7 +21,7 @@ class BuyerTest {
         val buyer = Buyer()
         buyer.buyLotteryTickets(2000, TestLotteryTicketMaker())
 
-        val winningNumbers = WinningNumbers(listOf(3, 4, 5, 6, 7, 8))
+        val winningNumbers = LottoNumbers(listOf(3, 4, 5, 6, 7, 8))
         val winningStatistics = buyer.createWinningStatics(winningNumbers)
 
         assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Four)).isEqualTo(2)
@@ -33,7 +32,7 @@ class BuyerTest {
         val buyer = Buyer()
         buyer.buyLotteryTickets(4000, TestLotteryTicketMaker())
 
-        val winningNumbers = WinningNumbers(listOf(4, 5, 6, 7, 8, 9))
+        val winningNumbers = LottoNumbers(listOf(4, 5, 6, 7, 8, 9))
         val winningStatistics = buyer.createWinningStatics(winningNumbers)
 
         assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Three)).isEqualTo(4)

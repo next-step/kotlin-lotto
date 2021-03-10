@@ -1,5 +1,6 @@
 package lotto.domain.maker
 
+import lotto.data.LottoNumbers
 import lotto.domain.LotteryTicket
 
 class DefaultLotteryTicketMaker : LotteryTicketMaker {
@@ -8,6 +9,6 @@ class DefaultLotteryTicketMaker : LotteryTicketMaker {
         val numbers = (LotteryTicketMaker.LOTTERY_MIN_NUMBER..LotteryTicketMaker.LOTTERY_MAX_NUMBER).shuffled()
             .take(LotteryTicketMaker.LOTTERY_NUMBER_SIZE)
             .sorted()
-        return LotteryTicket(numbers)
+        return LotteryTicket(LottoNumbers(numbers))
     }
 }

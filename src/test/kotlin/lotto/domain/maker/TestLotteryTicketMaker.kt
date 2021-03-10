@@ -1,9 +1,11 @@
 package lotto.domain.maker
 
+import lotto.data.LottoNumbers
 import lotto.domain.LotteryTicket
 
 class TestLotteryTicketMaker : LotteryTicketMaker {
     override fun createLotteryTicket(): LotteryTicket {
-        return LotteryTicket(listOf(1, 2, 3, 4, 5, 6))
+        val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        return LotteryTicket(lottoNumbers)
     }
 }

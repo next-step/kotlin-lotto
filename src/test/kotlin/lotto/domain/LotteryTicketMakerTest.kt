@@ -11,18 +11,19 @@ class LotteryTicketMakerTest {
         val lotteryTicketMaker = DefaultLotteryTicketMaker()
         val lotteryTicket: LotteryTicket = lotteryTicketMaker.createLotteryTicket()
 
-        assertThat(lotteryTicket.lottoNumbers).hasSize(6)
-        assertThat(lotteryTicket.lottoNumbers).isSubsetOf(1..45)
+        val numbers = lotteryTicket.lottoNumbers.lottoNumbers
+        assertThat(numbers).hasSize(6)
+        assertThat(numbers).isSubsetOf(1..45)
 
         // 겹치는 숫자가 없다.
-        for (number in lotteryTicket.lottoNumbers) {
-            val sameNumberCount = lotteryTicket.lottoNumbers.filter { it == number }.count()
+        for (number in numbers) {
+            val sameNumberCount = numbers.filter { it == number }.count()
             assertThat(sameNumberCount).isEqualTo(1)
         }
 
         // 정렬되어 있다.
         var preNum = 0
-        for (number in lotteryTicket.lottoNumbers) {
+        for (number in numbers) {
             assertThat(number).isGreaterThan(preNum)
             preNum = number
         }
