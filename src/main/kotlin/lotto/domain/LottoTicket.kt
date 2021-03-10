@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoTicket(lottoNumbers: List<LottoNumber>) {
-    val value: List<LottoNumber> = lottoNumbers
+    val value: List<LottoNumber> = lottoNumbers.sortedBy { it.value }
 
     fun getCountOfMatch(winningNumbers: List<LottoNumber>): Int {
         return value.count { lottoNumber ->
