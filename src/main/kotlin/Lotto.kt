@@ -4,6 +4,7 @@ fun main() {
     val price = lotto.validatePrice(inputPrice())
     val lottoCnt = lotto.buy(price)
     val lottoCards = lotto.extractNumber(lottoCnt)
+    printLottoCards(lottoCards)
 }
 
 class Lotto {
