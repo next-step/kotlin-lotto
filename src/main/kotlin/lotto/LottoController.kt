@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoResult
 import lotto.domain.LottoStore
+import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
@@ -18,7 +19,7 @@ fun main() {
     val prizeNumbers = inputView.inputPrizeNumber()
     val bonusNumber = inputView.inputBonusNumber()
 
-    val ranks = lottoResult.getMyLottoesRank(lottoes, prizeNumbers, bonusNumber)
+    val ranks = lottoResult.getMyLottoesRank(lottoes, WinningLotto(prizeNumbers, bonusNumber))
     outputView.printLottoesResult(ranks)
     val prizeMoney = ranks.sumBy { rank ->
         rank.prizeMoney
