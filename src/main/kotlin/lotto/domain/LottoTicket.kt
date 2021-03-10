@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTicket private constructor(private val lottoNumbers: Set<LottoNumber>) {
+class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
 
     init {
         validSizeNumbers()
@@ -14,10 +14,5 @@ class LottoTicket private constructor(private val lottoNumbers: Set<LottoNumber>
 
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
-
-        fun of(numbers: Set<Int>): LottoTicket {
-            val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
-            return LottoTicket(lottoNumbers)
-        }
     }
 }
