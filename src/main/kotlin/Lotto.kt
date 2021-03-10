@@ -7,9 +7,27 @@ fun main() {
     printLottoCards(lottoCards)
 
     val beforeWeekLottoCard = lotto.validateLottoCard(inputLottoNumber())
+    val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard)
+    val yieldRate = lotto.getYieldRate(statistic, price)
+    printResult(statistic, yieldRate)
 }
 
 class Lotto {
+    fun getYieldRate(statistic: List<Winning>, price: Int): Double {
+        return statistic.map { it.price }.sum().toDouble() / price
+    }
+
+    fun getStatistic(lottoCards: List<LottoCard>, beforeWeekLottoCard: LottoCard): List<Winning> {
+        return lottoCards.mapNotNull {
+            val count = getMatchCount(it, beforeWeekLottoCard)
+            Winning.matchWinning(count)
+        }
+    }
+
+    private fun getMatchCount(lottoCard: LottoCard, winningLottoCard: LottoCard): Int {
+        return lottoCard.number.filter { winningLottoCard.number.contains(it) }.size
+    }
+
     fun validateLottoCard(lottoNumber: String?): LottoCard {
         require(!lottoNumber.isNullOrBlank()) { "로또 번호를 반드시 입력해야 합니다." }
 
