@@ -6,6 +6,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 class LottoTest {
@@ -64,6 +65,45 @@ class LottoTest {
 
         assertThat(lottoCards.size, `is`(cnt))
         assertThat(lottoCards.filter { it.number.size == LOTTO_NUMBER_CNT }.size, `is`(cnt))
+    }
+
+    @Test
+    fun `저번주 로또번호를 입력하지 않거나 빈 값을 넣으면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(null)
+        }
+
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard("")
+        }
+
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard("    ")
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5", "1, 2, 3, 4, 5, 6, 7"])
+    fun `로또 번호를 6개 입력하지 않으면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(numbers)
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1,2,-3,74,95,100", "1, 2, 3, 4, 5, 66"])
+    fun `입력된 숫자가 로또 번호 범위에 포함되지 않으면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(numbers)
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["a,b,c,d,e,f", "1, 2, 3, 4, 5, error"])
+    fun `숫자가 아닌 값이 문자가 등록되면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(numbers)
+        }
     }
 
     @ParameterizedTest
