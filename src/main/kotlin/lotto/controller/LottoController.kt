@@ -15,7 +15,7 @@ object LottoController {
         val lotteryTickets = buyer.buyLotteryTickets(inputPrice)
 
         CashInputView.printTicketNumber(lotteryTickets.size)
-        LottoNumView.printLottoNumbers(lotteryTickets)
+        LottoNumView.printTickets(lotteryTickets)
 
         val winningNumbers = WinningInputView.askWinningNumbers()
         val lotteryStatistics = buyer.createWinningStatics(winningNumbers)

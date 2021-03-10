@@ -1,11 +1,16 @@
 package lotto.ui
 
+import lotto.data.LottoNumbers
 import lotto.domain.LotteryTicket
 
 object LottoNumView {
-    fun printLottoNumbers(lotteryTickets: List<LotteryTicket>) {
+    fun printTickets(lotteryTickets: List<LotteryTicket>) {
         lotteryTickets.forEach {
-            println(it.lottoNumbers.lottoNumbers)
+            printLottoNumbers(it.lottoNumbers)
         }
+    }
+
+    private fun printLottoNumbers(lottoNumbers: LottoNumbers) {
+        println(lottoNumbers.lottoNumbers.map { it.lottoNumber })
     }
 }

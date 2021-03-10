@@ -23,10 +23,10 @@ class LotteryTicketMakerTest {
         }
 
         // 정렬되어 있다.
-//        var preNum = 0
-//        for (number in lottoNumberList) {
-//            assertThat(number).isGreaterThan(preNum)
-//            preNum = number
-//        }
+        var preNum = 0
+        for (lottoNumber in lottoNumberList) {
+            assertThat(lottoNumber.lottoNumber).isGreaterThan(preNum)
+            preNum = lottoNumber.lottoNumber
+        }
     }
 }
