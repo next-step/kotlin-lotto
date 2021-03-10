@@ -1,3 +1,4 @@
+import Lotto.Companion.LOTTO_NUMBER_CNT
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Test
@@ -54,6 +55,15 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             lotto.validatePrice("500")
         }
+    }
+
+    @Test
+    fun `6개의 로또 번호가 있는 카드를 원하는 갯수만큼 추출한다`() {
+        val cnt = 15
+        val lottoCards = lotto.extractNumber(cnt)
+
+        assertThat(lottoCards.size, `is`(cnt))
+        assertThat(lottoCards.filter { it.number.size == LOTTO_NUMBER_CNT }.size, `is`(cnt))
     }
 
     @ParameterizedTest
