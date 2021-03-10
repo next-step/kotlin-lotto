@@ -3,25 +3,18 @@ package calculator.domain
 class Calculator {
 
     fun calculate(numbers: List<String>): Int {
+        val numbers = convertStringToNumber(numbers)
         var sum = 0
         for (number in numbers) {
-            checkValidateNumber(number)
-            checkNegativeNumber(number)
-            sum += number.toInt()
+            sum += number.value
         }
 
         return sum
     }
 
-    private fun checkValidateNumber(string: String) {
-        try {
-            string.toInt()
-        } catch (e: NumberFormatException) {
-            throw RuntimeException("$string 은 올바른 숫자가 아닙니다.")
+    fun convertStringToNumber(numbers: List<String>): List<Number> {
+        return numbers.map { stringNumber ->
+            Number(stringNumber)
         }
-    }
-
-    private fun checkNegativeNumber(string: String) {
-        if (string.toInt() < 0) throw RuntimeException("음수는 계산식에 포함될 수 없습니다.")
     }
 }

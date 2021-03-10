@@ -1,30 +1,20 @@
 package calculator
 
 import calculator.domain.Calculator
-import calculator.domain.CustomReadStrategy
-import calculator.domain.StandardReadStrategy
-import calculator.interfaces.StringReadStrategy
+import calculator.domain.ReadStrategySelector
 import calculator.ui.InputView
+import calculator.ui.OutputView
 
 fun main() {
     val inputView = InputView()
+    val outputView = OutputView()
     val calculator = Calculator()
-    val inputString = inputView.inputString()
-    val stringReadStrategy = selectStringReadStrategy(inputString)
+    val readStrategySelector = ReadStrategySelector()
 
+    val inputString = inputView.inputString()
+    val stringReadStrategy = readStrategySelector.selectStringReadStrategy(inputString)
     val numbers = stringReadStrategy.readString(inputString)
     val result = calculator.calculate(numbers)
 
-    println(result)
-}
-
-fun selectStringReadStrategy(string: String): StringReadStrategy {
-    return when {
-        string.startsWith("//") -> {
-            CustomReadStrategy()
-        }
-        else -> {
-            StandardReadStrategy()
-        }
-    }
+    outputView.printCaculateResult(result)
 }
