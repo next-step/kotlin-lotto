@@ -1,7 +1,6 @@
 package lotto.controller
 
-import lotto.data.LotteryTicketNumbers
-import lotto.domain.LotteryTickets
+import lotto.domain.Buyer
 import lotto.domain.ProfitCalculator
 import lotto.ui.CashInputView
 import lotto.ui.LottoNumView
@@ -10,15 +9,16 @@ import lotto.ui.WinningInputView
 
 object LottoController {
     fun run() {
+        val buyer = Buyer()
+
         val inputPrice = CashInputView.askPurchasePrice()
-        CashInputView.printTicketNumber(inputPrice)
+        val lotteryTickets = buyer.buyLotteryTickets(inputPrice)
 
-        val lotteryTickets = LotteryTickets(inputPrice)
+        CashInputView.printTicketNumber(lotteryTickets.size)
+        LottoNumView.printLottoNumbers(lotteryTickets)
 
-        LottoNumView.printLottoNumbers(LotteryTicketNumbers.from(lotteryTickets))
         val winningNumbers = WinningInputView.askWinningNumbers()
-
-        val lotteryStatistics = lotteryTickets.createWinningStatics(winningNumbers)
+        val lotteryStatistics = buyer.createWinningStatics(winningNumbers)
         val profitRatio = ProfitCalculator.calculateRatio(inputPrice, lotteryStatistics)
 
         StatisticsView.printLotteryStatistics(lotteryStatistics)

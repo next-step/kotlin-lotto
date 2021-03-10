@@ -14,7 +14,7 @@ class ProfitCalculatorTest {
         val calculateRatioZero = ProfitCalculator.calculateRatio(14000, winningStatistics)
         Assertions.assertThat(calculateRatioZero).isEqualTo(BigDecimal("0.00"))
 
-        winningStatistics.addTicketCountOf(LotteryMatchType.Three)
+        winningStatistics.addTicketOf(LotteryMatchType.Three)
 
         val calculateRatioAfterAdd = ProfitCalculator.calculateRatio(14000, winningStatistics)
         Assertions.assertThat(calculateRatioAfterAdd).isEqualTo(BigDecimal("0.35"))

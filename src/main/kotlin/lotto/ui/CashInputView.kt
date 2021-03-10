@@ -1,6 +1,5 @@
 package lotto.ui
-
-import lotto.constant.LOTTERY_TICKET_PRICE
+import lotto.domain.maker.LotteryTicketMaker
 import java.lang.IllegalArgumentException
 
 object CashInputView {
@@ -11,8 +10,7 @@ object CashInputView {
         return purchasePrice?.toIntOrNull() ?: throw IllegalArgumentException("잘못된 입력값이 들어왔습니다.($purchasePrice)")
     }
 
-    fun printTicketNumber(inputPrice: Int) {
-        val ticketNumber = inputPrice / LOTTERY_TICKET_PRICE
+    fun printTicketNumber(ticketNumber: Int) {
         println("${ticketNumber}개를 구매했습니다.")
     }
 }

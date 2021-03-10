@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.data.WinningNumbers
+import lotto.domain.maker.DefaultLotteryTicketMaker
 import lotto.domain.maker.LotteryTicketMaker
 import lotto.enums.LotteryMatchType
 
@@ -8,7 +9,10 @@ class Buyer {
 
     private val tickets: MutableList<LotteryTicket> = mutableListOf()
 
-    fun buyLotteryTickets(payedPrice: Int, lotteryTicketMaker: LotteryTicketMaker): List<LotteryTicket> {
+    fun buyLotteryTickets(
+        payedPrice: Int,
+        lotteryTicketMaker: LotteryTicketMaker = DefaultLotteryTicketMaker()
+    ): List<LotteryTicket> {
         repeat(payedPrice / lotteryTicketMaker.lotteryTicketPrice) {
             tickets.add(lotteryTicketMaker.createLotteryTicket())
         }
