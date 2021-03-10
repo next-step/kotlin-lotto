@@ -12,11 +12,11 @@ fun main() {
             it.product()
         }
 
-    PickNumberPrinter(lottoNumbers).print()
+    Output.PickNumber(lottoNumbers).write()
 
     val winningNumber = WinningNumber.Console("지난 주 당첨 번호를 입력해 주세요.").lottoNumbers
 
     val result = LottoGame(lottoNumbers, winningNumber).result
 
-    ResultPrinter(result).print()
+    Output.LottoResult(result).write()
 }
