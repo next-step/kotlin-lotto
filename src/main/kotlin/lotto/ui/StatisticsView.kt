@@ -6,8 +6,8 @@ import java.math.BigDecimal
 
 object StatisticsView {
 
-    const val PROFIT_RATIO_BASE = 1
-    const val LOSS_MESSAGE = "기준이 1이기 때문에 결과적으로 손해라는 의미임"
+    private const val PROFIT_RATIO_BASE = 1
+    private const val LOSS_MESSAGE = "기준이 1이기 때문에 결과적으로 손해라는 의미임"
 
     fun printLotteryStatistics(statistics: WinningStatistics) {
         println("당첨 통계")
