@@ -32,7 +32,7 @@ class StringCalculator {
         Numbers.from(input.split(DEFAULT_DELIMITER_REGEX))
 
     companion object {
-        private val CUSTOM_DELIMITER_FIND_REGEX = Regex("//(.)\\\\n(.*)")
+        private val CUSTOM_DELIMITER_FIND_REGEX = Regex("""//(.)\\n(.*)""")
         private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
     }
 }
