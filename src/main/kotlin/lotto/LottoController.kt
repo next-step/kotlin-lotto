@@ -14,8 +14,7 @@ fun main() {
     val money = inputView.inputMoney()
     val lottoes = lottoStore.purchaseAuto(money)
 
-    outputView.printPurchasedQuantity(lottoes.toList().size)
-    outputView.printPurchasedLottos(lottoes)
+    outputView.printPurchasedLottoes(lottoes)
     val prizeNumbers = inputView.inputPrizeNumber()
     val bonusNumber = inputView.inputBonusNumber()
 

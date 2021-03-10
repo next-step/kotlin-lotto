@@ -4,12 +4,10 @@ import lotto.domain.Lottoes
 import lotto.domain.Rank
 
 class OutputView {
-    fun printPurchasedQuantity(number: Int) {
-        println("${number}개를 구매했습니다.")
-    }
 
-    fun printPurchasedLottos(lottos: Lottoes) {
-        for (lotto in lottos.toList()) {
+    fun printPurchasedLottoes(lottoes: Lottoes) {
+        println("${lottoes.toList().size}개를 구매했습니다.")
+        for (lotto in lottoes.toList()) {
             println(lotto.getLottoNumbers())
         }
     }
