@@ -29,4 +29,26 @@ internal class CoincidenceTest {
         // then
         assertThat(matchResult).isEqualTo(Coincidence.MISS)
     }
+
+    @Test
+    fun `나의 Lottos를 주면, Coincidence 상태와 match되는 Lotto 갯수 반환`() {
+        val myLotto1 = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        val myLotto2 = Lotto(listOf(1, 2, 3, 14, 15, 17))
+        val myLottos = Lottos(listOf(myLotto1, myLotto2))
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
+
+        // when
+        val firstCount = Coincidence.FIRST.getMatchedCount(myLottos)
+        val secondCount = Coincidence.SECOND.getMatchedCount(myLottos)
+        val thirdCount = Coincidence.THIRD.getMatchedCount(myLottos)
+        val fourthCount = Coincidence.FOURTH.getMatchedCount(myLottos)
+        val fifthCount = Coincidence.FIFTH.getMatchedCount(myLottos)
+
+        // then
+        assertThat(firstCount).isEqualTo(0)
+        assertThat(secondCount).isEqualTo(1)
+        assertThat(thirdCount).isEqualTo(0)
+        assertThat(fourthCount).isEqualTo(0)
+        assertThat(fifthCount).isEqualTo(1)
+    }
 }
