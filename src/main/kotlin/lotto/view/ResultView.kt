@@ -1,9 +1,6 @@
 package lotto.view
 
-import lotto.model.Coincidence
-import lotto.model.Lotto
-import lotto.model.LottoNumber
-import lotto.model.Lottos
+import lotto.model.*
 
 object ResultView {
     fun printMyLottos(lottos: Lottos) {
@@ -15,23 +12,23 @@ object ResultView {
         println("${lottoCount}개를 구매했습니다.")
     }
 
-    fun printResult(myLottos: Lottos, winningLotto: Lotto, bonusLottoNumber: LottoNumber) {
+    fun printResult(myLottos: Lottos, winningLotto: WinningLotto) {
         printStatisticsInstruction()
-        printResultStatistics(myLottos, winningLotto, bonusLottoNumber)
+        printResultStatistics(myLottos, winningLotto)
         printEarningRate(myLottos, winningLotto)
     }
 
-    fun printResultStatistics(myLottos: Lottos, winningLotto: Lotto, bonusLottoNumber: LottoNumber) {
+    fun printResultStatistics(myLottos: Lottos, winningLotto: WinningLotto) {
         Coincidence.values().forEach {
             print("${it.coincidenceCount}개 일치")
             if (it.hasBonusNum) print(" 보너스 볼 일치")
             print("(${it.prizeMoney}원)")
-            println("- ${myLottos.getCoincidenceCount(it, winningLotto, bonusLottoNumber)}개 ")
+            println("- ${it.getMatchedCount(myLottos, winningLotto)}개 ")
         }
     }
 
-    fun printEarningRate(myLottos: Lottos, winningLotto: Lotto) {
-        val earningRate = myLottos.getEarningRate(winningLotto)
+    fun printEarningRate(myLottos: Lottos, winningLotto: WinningLotto) {
+        val earningRate = myLottos.getEarningRate(winningLotto.winningLotto)
         println("총 수익률은 $earningRate")
     }
 

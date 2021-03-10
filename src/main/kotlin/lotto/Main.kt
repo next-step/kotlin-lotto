@@ -2,6 +2,7 @@ package lotto
 
 import lotto.model.LottoNumberPool
 import lotto.model.Lottos
+import lotto.model.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -12,7 +13,8 @@ fun main() {
     val myLottos = Lottos(LottoNumberPool, lottoCount)
     ResultView.printMyLottos(myLottos)
 
-    val winningLotto = InputView.askWinningLotto()
-    val bonusLottoNumber = InputView.askBonusNumber(winningLotto)
-    ResultView.printResult(myLottos, winningLotto, bonusLottoNumber)
+    val winningLottoNumbers = InputView.askWinningLotto()
+    val bonusLottoNumber = InputView.askBonusNumber(winningLottoNumbers)
+    val winningLotto = WinningLotto(winningLottoNumbers, bonusLottoNumber)
+    ResultView.printResult(myLottos, winningLotto)
 }
