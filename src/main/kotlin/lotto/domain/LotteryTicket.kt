@@ -2,8 +2,8 @@ package lotto.domain
 
 import lotto.data.WinningNumbers
 
-class LotteryTicket(private val numbers: List<Int>) {
+class LotteryTicket(val lottoNumbers: List<Int>) {
     fun findMatchCount(winningNumbers: WinningNumbers): Int {
-        return numbers.count { winningNumbers.contains(it) }
+        return lottoNumbers.count { winningNumbers.contains(it) }
     }
 }
