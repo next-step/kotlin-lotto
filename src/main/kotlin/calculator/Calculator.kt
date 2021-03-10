@@ -11,7 +11,7 @@ object Calculator {
             return MINIMUM_OPERAND_VALUE
         }
 
-        val result = Regex(FIND_DELIMITER_AND_OPERAND_PATTERN).find(input)?: return addWhenNotExistCustomDelimiter(input)
+        val result = Regex(FIND_DELIMITER_AND_OPERAND_PATTERN).find(input) ?: return addWhenNotExistCustomDelimiter(input)
 
         result.let {
             val delimiter = it.groupValues[DELIMITER_INDEX]
@@ -33,7 +33,7 @@ object Calculator {
     }
 
     private fun String.toIntOnlyPositive(): Int {
-        val toInt = this.toIntOrNull()?: throw throw IllegalArgumentException("잘못된 값입니다.")
+        val toInt = this.toIntOrNull() ?: throw throw IllegalArgumentException("잘못된 값입니다.")
 
         require(toInt >= MINIMUM_OPERAND_VALUE) { "음수는 입력할 수 없습니다" }
 
