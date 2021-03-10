@@ -3,7 +3,7 @@ package lotto.domain.ticket
 import lotto.domain.LottoNumber
 
 class LottoTicket(
-    val numbers: Set<LottoNumber>
+    private val numbers: Set<LottoNumber>
 ) {
 
     init {

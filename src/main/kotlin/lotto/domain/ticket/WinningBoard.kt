@@ -11,6 +11,10 @@ enum class WinningBoard(
     SIX(6, 2_000_000_000),
     ;
 
+    fun times(amount:Int): Long {
+        return reward.times(amount)
+    }
+
     companion object {
         fun findBy(matchCount: Int) = values().find { it.matchCount == matchCount }
             ?: NONE
