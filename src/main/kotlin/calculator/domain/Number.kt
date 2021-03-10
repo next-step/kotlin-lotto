@@ -1,13 +1,9 @@
 package calculator.domain
 
-class Number (string: String){
-    var value: Int = 0
-        private set
-
-    init {
-        checkValidateNumber(string)
-        checkNegativeNumber(string)
-        value = string.toInt()
+class Number (val value: Int){
+    constructor(stringNumber: String) : this(stringNumber.toInt()) {
+        checkValidateNumber(stringNumber)
+        checkNegativeNumber(stringNumber)
     }
 
     private fun checkValidateNumber(stringNumber: String) {
