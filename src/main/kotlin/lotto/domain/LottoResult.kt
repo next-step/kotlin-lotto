@@ -11,26 +11,12 @@ class LottoResult {
     }
 
     private fun convertCountToRank(countOfMatch: Int, bonusMatches: Boolean): Rank {
-        return when {
-            countOfMatch == 6 -> {
-                Rank.FIRST
-            }
-            countOfMatch == 5 && bonusMatches -> {
-                Rank.SECOND
-            }
-            countOfMatch == 5 -> {
-                Rank.THIRD
-            }
-            countOfMatch == 4 -> {
-                Rank.FOURTH
-            }
-            countOfMatch == 3 -> {
-                Rank.FIFTH
-            }
-            else -> {
-                Rank.MISS
-            }
-        }
+        if (countOfMatch == 6) return Rank.FIRST
+        if (countOfMatch == 5 && bonusMatches) return Rank.SECOND
+        if (countOfMatch == 5) return Rank.THIRD
+        if (countOfMatch == 4) return Rank.FOURTH
+        if (countOfMatch == 3) return Rank.FIFTH
+        return Rank.MISS
     }
 
     private fun isBonusNumberMatch(lottoTicket: LottoTicket, bonusNumber: LottoNumber): Boolean {
