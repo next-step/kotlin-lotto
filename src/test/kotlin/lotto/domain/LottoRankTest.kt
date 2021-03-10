@@ -1,0 +1,21 @@
+package lotto.domain
+
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+import org.junit.jupiter.api.DisplayName
+
+internal class LottoRankTest {
+
+    @Test
+    @DisplayName("로또 숫자가 맞은 개수를 입력하면 Rank를 리턴한다")
+    fun findRank() {
+        assertThat(LottoRank.findRank(0)).isEqualTo(LottoRank.OUT)
+        assertThat(LottoRank.findRank(1)).isEqualTo(LottoRank.OUT)
+        assertThat(LottoRank.findRank(2)).isEqualTo(LottoRank.OUT)
+        assertThat(LottoRank.findRank(3)).isEqualTo(LottoRank.FOURTH)
+        assertThat(LottoRank.findRank(4)).isEqualTo(LottoRank.THIRD)
+        assertThat(LottoRank.findRank(5)).isEqualTo(LottoRank.SECOND)
+        assertThat(LottoRank.findRank(6)).isEqualTo(LottoRank.FIRST)
+    }
+}

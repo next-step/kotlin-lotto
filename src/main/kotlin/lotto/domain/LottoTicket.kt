@@ -12,6 +12,12 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
         }
     }
 
+    fun getCollectCount(winLottoTicket: LottoTicket): Int {
+        return winLottoTicket.lottoNumbers
+            .map { this.lottoNumbers.contains(it) }
+            .count { it }
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
 
