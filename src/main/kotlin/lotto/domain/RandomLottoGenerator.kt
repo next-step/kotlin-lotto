@@ -6,7 +6,7 @@ object RandomLottoGenerator {
         return Lotto(
             LottoNumber.RANGE.toList()
                 .shuffled()
-                .subList(0, Lotto.SIZE)
+                .take(Lotto.SIZE)
                 .map { LottoNumber.of(it) }
                 .toSortedSet()
         )
