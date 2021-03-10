@@ -1,5 +1,5 @@
 package lotto.domain
 
 internal interface LottoNumsGenerator {
-    fun generate(): Lotto
+    fun generate(): List<LottoNum>
 }

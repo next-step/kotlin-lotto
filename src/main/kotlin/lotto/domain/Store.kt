@@ -7,8 +7,8 @@ internal class Store(
 
     internal fun sell(money: Money, selfLottos: List<Lotto> = listOf()): LottoPaper {
         val autoLottoCount = (money / lottoPrice).value - selfLottos.size
-        val lottos = (1..autoLottoCount).map { lottoNumsGenerator.generate() }
-        return LottoPaper(selfLottos.plus(lottos))
+        val autoLottos = (1..autoLottoCount).map { Lotto(lottoNumsGenerator.generate(), true) }
+        return LottoPaper(selfLottos.plus(autoLottos))
     }
 
     companion object {
