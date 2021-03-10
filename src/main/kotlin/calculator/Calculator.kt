@@ -1,20 +1,22 @@
 package calculator
 
 object Calculator {
-    private const val EMPTY = ""
+    private const val FIND_DELIMITER_AND_OPERAND_PATTERN = "//(.)\n(.*)"
+    private const val DELIMITER_INDEX = 1
+    private const val OPERANDS_INDEX = 2
 
     fun add(input: String): Int {
         if (input.isBlank()) {
             return 0
         }
 
-        val result = Regex("//(.)\n(.*)").find(input)?: return addWhenNotExistCustomDelimiter(input)
+        val result = Regex(FIND_DELIMITER_AND_OPERAND_PATTERN).find(input)?: return addWhenNotExistCustomDelimiter(input)
 
         result.let {
-            val delimiter = it.groupValues[1]
-            val tokens = it.groupValues[2]
+            val delimiter = it.groupValues[DELIMITER_INDEX]
+            val operands = it.groupValues[OPERANDS_INDEX]
 
-            return tokens.replace(delimiter, EMPTY).map { token -> token.toInt() }.sum()
+            return operands.splitExceptBlank(delimiter).map { operand -> operand.toIntOnlyPositive() }.sum()
         }
     }
 
@@ -25,12 +27,14 @@ object Calculator {
             .sum()
     }
 
+    private fun String.splitExceptBlank(delimiter: String): List<String> {
+        return this.split(delimiter).filter { it.isNotBlank() }
+    }
+
     private fun String.toIntOnlyPositive(): Int {
         val toInt = this.toIntOrNull()?: throw throw IllegalArgumentException("잘못된 값입니다.")
 
-        if (toInt < 0) {
-            throw IllegalArgumentException("음수는 입력할 수 없습니다")
-        }
+        require(toInt >= 0) { "음수는 입력할 수 없습니다" }
 
         return toInt
     }
