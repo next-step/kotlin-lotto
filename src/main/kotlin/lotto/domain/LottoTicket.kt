@@ -3,6 +3,12 @@ package lotto.domain
 class LottoTicket(lottoNumbers: List<LottoNumber>) {
     val value: List<LottoNumber> = lottoNumbers
 
+    fun getCountOfMatch(winningNumbers: List<LottoNumber>): Int {
+        return value.count { lottoNumber ->
+            winningNumbers.contains(lottoNumber)
+        }
+    }
+
     companion object {
         private const val MIN_LOTTO_NUMBER = 1
         private const val MAX_LOTTO_NUMBER = 45

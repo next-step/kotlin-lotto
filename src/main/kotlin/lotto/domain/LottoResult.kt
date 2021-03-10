@@ -4,15 +4,9 @@ class LottoResult {
 
     fun getMyLottoesRank(lottoes: Lottoes, winningLotto: WinningLotto): Map<Rank, List<LottoTicket>> {
         return lottoes.toList().groupBy { lottoTicket ->
-            val countOfMatch = getCountOfMatch(lottoTicket, winningLotto.winningNumbers)
+            val countOfMatch = lottoTicket.getCountOfMatch(winningLotto.winningNumbers)
             val bonusMatches = isBonusNumberMatch(lottoTicket, winningLotto.bonusNumber)
             convertCountToRank(countOfMatch, bonusMatches)
-        }
-    }
-
-    private fun getCountOfMatch(lottoTicket: LottoTicket, prizeNumbers: List<LottoNumber>): Int {
-        return lottoTicket.value.count { lottoNumber ->
-            prizeNumbers.contains(lottoNumber)
         }
     }
 
