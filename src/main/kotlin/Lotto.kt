@@ -1,6 +1,8 @@
 
 fun main() {
-    val strPrice = inputPrice()
+    val lotto = Lotto()
+    val price = lotto.validatePrice(inputPrice())
+    val lottoCnt = lotto.buy(price)
 
 }
 
