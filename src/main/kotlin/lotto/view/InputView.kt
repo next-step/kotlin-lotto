@@ -21,7 +21,7 @@ object InputView {
         printBonusBallQuestion()
         var bonusNumber = readLine()
 
-        while (bonusNumber.isNullOrBlank() || winningLotto.hasBonusNumber(LottoNumber(bonusNumber))) {
+        while (bonusNumber.isNullOrBlank() || winningLotto.hasNumber(LottoNumber(bonusNumber))) {
             printBonusBallQuestion()
             bonusNumber = readLine()
         }

@@ -10,6 +10,6 @@ internal class LottoNumberPoolTest {
         val oneLotto: Lotto = LottoNumberPool.getOneLotto()
 
         // then
-        assertThat(oneLotto.lottoNums.size).isEqualTo(6)
+        assertThat(oneLotto.lottoNumbers.size).isEqualTo(6)
     }
 }

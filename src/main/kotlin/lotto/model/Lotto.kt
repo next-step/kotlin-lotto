@@ -1,35 +1,31 @@
 package lotto.model
 
-data class Lotto(private val lottoNumbers: Set<LottoNumber>) {
-    var lottoNums: Set<LottoNumber>
-        private set
-
+data class Lotto(val lottoNumbers: Set<LottoNumber>) {
     init {
         require(isUniqueSixNumbers(lottoNumbers)) { "로또 번호는 서로 다른 6개의 숫자여야만 합니다." }
-        lottoNums = lottoNumbers
     }
 
     constructor(numbers: Collection<Int>) : this(numbers.map(::LottoNumber).toSet())
 
-    constructor(stringNumbers: String) : this(Delimiter(stringNumbers).split().map { it.toInt() })
+    constructor(inputBeforeSplit: String) : this(Delimiter(inputBeforeSplit).split().map { it.toInt() })
 
-    fun getWinningCount(winningNumbers: Lotto): Int {
-        return lottoNums.count { winningNumbers.lottoNums.contains(it) }
+    fun getMatchCount(winningNumbers: Lotto): Int {
+        return lottoNumbers.count { winningNumbers.hasNumber(it) }
     }
 
-    fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
-        return lottoNums.contains(bonusNumber)
+    fun hasNumber(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(lottoNumber)
     }
 
     fun getResult(winningLotto: Lotto, bonusNumber: LottoNumber): Coincidence? {
         return Coincidence.values()
-            .find { it.coincidenceCount == getWinningCount(winningLotto) && it.hasBonusNum == hasBonusNumber(bonusNumber) }
+            .find { it.coincidenceCount == getMatchCount(winningLotto) && it.hasBonusNum == hasNumber(bonusNumber) }
     }
 
     override fun toString(): String {
         return lottoNumbers
-            .sortedBy { it.number }
             .map { it.number }
+            .sorted()
             .joinToString(COMMA_WITH_BLANK)
     }
 

@@ -3,26 +3,19 @@ package lotto.model
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class Lottos(private val lottos: List<Lotto>) {
-    var myLottos: List<Lotto>
-        private set
-
-    init {
-        myLottos = lottos
-    }
-
+class Lottos(val lottos: List<Lotto>) {
     constructor(lottoNumPool: LottoNumberPool, count: Int) : this(createLottos(lottoNumPool, count))
 
     fun check(winningLotto: Lotto, checkCount: Int): Int {
-        return myLottos
-            .map { it.getWinningCount(winningLotto) }
+        return lottos
+            .map { it.getMatchCount(winningLotto) }
             .filter { it == checkCount }
             .count()
     }
 
     fun getEarningRate(winningLotto: Lotto): BigDecimal {
         val totalPrizeMoney = getTotalPrizeMoney(winningLotto)
-        val budgetMoney = (myLottos.size * COST_PER_ONE_LOTTO).toBigDecimal()
+        val budgetMoney = (lottos.size * COST_PER_ONE_LOTTO).toBigDecimal()
 
         return totalPrizeMoney.divide(budgetMoney, TWO_DECIMAL_PLACES, RoundingMode.FLOOR)
     }
@@ -35,7 +28,7 @@ class Lottos(private val lottos: List<Lotto>) {
     }
 
     fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber): Int {
-        return myLottos.count { coincidence == it.getResult(winningLotto, bonusNumber) }
+        return lottos.count { coincidence == it.getResult(winningLotto, bonusNumber) }
     }
 
     companion object {

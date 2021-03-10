@@ -16,7 +16,7 @@ internal class LottosTest {
         val myLottos = Lottos(LottoNumberPool, lottoCount)
 
         // then
-        assertThat(myLottos.myLottos.size).isEqualTo(5)
+        assertThat(myLottos.lottos.size).isEqualTo(5)
     }
 
     @ParameterizedTest
@@ -79,11 +79,11 @@ internal class LottosTest {
         val bonusNumber = LottoNumber(7)
 
         // when
-        val countForSix = lottos.getCoincidenceCount(Coincidence.SIX, winningLotto, bonusNumber)
-        val countForFiveWithBonus = lottos.getCoincidenceCount(Coincidence.FIVE_WITH_BONUS, winningLotto, bonusNumber)
-        val countForFive = lottos.getCoincidenceCount(Coincidence.FIVE, winningLotto, bonusNumber)
-        val countForFour = lottos.getCoincidenceCount(Coincidence.FOUR, winningLotto, bonusNumber)
-        val countForThree = lottos.getCoincidenceCount(Coincidence.THREE, winningLotto, bonusNumber)
+        val countForSix = lottos.getCoincidenceCount(Coincidence.FIRST, winningLotto, bonusNumber)
+        val countForFiveWithBonus = lottos.getCoincidenceCount(Coincidence.SECOND, winningLotto, bonusNumber)
+        val countForFive = lottos.getCoincidenceCount(Coincidence.THIRD, winningLotto, bonusNumber)
+        val countForFour = lottos.getCoincidenceCount(Coincidence.FOURTH, winningLotto, bonusNumber)
+        val countForThree = lottos.getCoincidenceCount(Coincidence.FIFTH, winningLotto, bonusNumber)
 
         // then
         assertThat(countForSix).isEqualTo(1)

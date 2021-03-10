@@ -85,7 +85,7 @@ internal class LottoTest {
         val myLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val count = myLotto.getWinningCount(Lotto(listOf(1, 2, 3, 4, 5, 7)))
+        val count = myLotto.getMatchCount(Lotto(listOf(1, 2, 3, 4, 5, 7)))
 
         // then
         assertThat(count).isEqualTo(5)
@@ -108,7 +108,7 @@ internal class LottoTest {
         val lotto = Lotto("1,2,3,4,5,6")
 
         // when
-        val hasNumber: Boolean = lotto.hasBonusNumber(LottoNumber(num))
+        val hasNumber: Boolean = lotto.hasNumber(LottoNumber(num))
 
         // then
         assertThat(hasNumber).isEqualTo(expectedHasNumber)
@@ -125,6 +125,6 @@ internal class LottoTest {
         val result: Coincidence? = myLotto.getResult(winningLotto, bonusNumber)
 
         // then
-        assertThat(result).isEqualTo(Coincidence.FIVE_WITH_BONUS)
+        assertThat(result).isEqualTo(Coincidence.SECOND)
     }
 }
