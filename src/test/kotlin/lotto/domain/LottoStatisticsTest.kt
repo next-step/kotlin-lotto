@@ -14,7 +14,7 @@ internal class LottoStatisticsTest {
         val lottoPaper = LottoPaper(listOf(fourthLotto, missLotto))
 
         // when
-        val lottoStatistics: LottoStatistics = lottoPaper.doStatistics(Money(10_000), winLotto, LottoNum.of(20))
+        val lottoStatistics: LottoStatistics = lottoPaper.doStatistics(Money(10_000), winLotto, LottoNum.from(20))
 
         // then
         assertThat(lottoStatistics.earningsRate).isEqualTo(0.5)

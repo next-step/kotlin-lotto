@@ -7,7 +7,7 @@ internal class Store(
 
     internal fun sell(money: Money): LottoPaper {
         val numberOfLotto = money / lottoPrice
-        val lottos = (1..numberOfLotto.value).map { Lotto(lottoNumsGenerator.generate()) }
+        val lottos = (1..numberOfLotto.value).map { lottoNumsGenerator.generate() }
         return LottoPaper(lottos)
     }
 

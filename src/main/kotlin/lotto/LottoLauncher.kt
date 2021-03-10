@@ -18,8 +18,8 @@ fun main() {
 
     outputView.renderLottoPaper(lottoPaper)
 
-    val winLotto = Lotto(inputView.requestWinNums())
-    val bonusNum = LottoNum.of(inputView.requestBonusNum())
+    val winLotto = Lotto.newInstance(inputView.requestWinNums())
+    val bonusNum = LottoNum.from(inputView.requestBonusNum())
 
     outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto, bonusNum))
 }
