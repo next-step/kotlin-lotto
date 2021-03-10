@@ -18,8 +18,7 @@ data class Lotto(val lottoNumbers: Set<LottoNumber>) {
     }
 
     fun getResult(winningLotto: Lotto, bonusNumber: LottoNumber): Coincidence? {
-        return Coincidence.values()
-            .find { it.coincidenceCount == getMatchCount(winningLotto) && it.hasBonusNum == hasNumber(bonusNumber) }
+        return Coincidence.match(this, WinningLotto(winningLotto, bonusNumber))
     }
 
     override fun toString(): String {

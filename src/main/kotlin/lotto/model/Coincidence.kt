@@ -12,14 +12,13 @@ enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBo
 
     companion object {
         fun match(myLotto: Lotto, winningLotto: WinningLotto): Coincidence {
-            return findMatched(myLotto, winningLotto) ?: MISS
+            return findMatchedResult(myLotto, winningLotto) ?: MISS
         }
 
-        private fun findMatched(myLotto: Lotto, winningLotto: WinningLotto): Coincidence? {
+        private fun findMatchedResult(myLotto: Lotto, winningLotto: WinningLotto): Coincidence? {
             return values()
                 .filter { it.coincidenceCount == myLotto.getMatchCount(winningLotto.winningLotto) }
                 .firstOrNull { it.hasBonusNum == myLotto.hasNumber(winningLotto.bonusNumber) }
-
         }
     }
 }
