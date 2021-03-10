@@ -1,6 +1,9 @@
 class Calculator {
 
     fun calculate(formula: String): Int {
+        if (formula.isBlank()) {
+            return 0
+        }
         val numbers = formulaParser(formula)
 
         return numbers.sum()

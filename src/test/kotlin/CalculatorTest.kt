@@ -5,10 +5,17 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 class CalculatorTest {
     private val calculator = Calculator()
+
+    @Test
+    fun `빈 문자열이 넘어올 경우 계산값은 0이 나와야 한다`() {
+        val num = calculator.calculate("")
+        assertThat(num, `is`(0))
+    }
 
     @ParameterizedTest
     @MethodSource("defaultDelimiterDataset")
