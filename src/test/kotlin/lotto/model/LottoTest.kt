@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoTest {
@@ -18,7 +19,7 @@ internal class LottoTest {
             LottoNumber(4),
             LottoNumber(5),
             LottoNumber(6)
-        )
+        ).toSet()
 
         // when, then
         assertDoesNotThrow { Lotto(lottoNumbers) }
@@ -42,7 +43,7 @@ internal class LottoTest {
                     LottoNumber(4),
                     LottoNumber(5),
                     LottoNumber(6)
-                )
+                ).toSet()
             )
         )
     }
@@ -56,7 +57,7 @@ internal class LottoTest {
             LottoNumber(3),
             LottoNumber(4),
             LottoNumber(5)
-        )
+        ).toSet()
 
         // when, then
         assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
@@ -72,7 +73,7 @@ internal class LottoTest {
             LottoNumber(4),
             LottoNumber(5),
             LottoNumber(5)
-        )
+        ).toSet()
 
         // when, then
         assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
@@ -84,7 +85,7 @@ internal class LottoTest {
         val myLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val count = myLotto.getWinningCount(listOf(1, 2, 3, 4, 5, 7))
+        val count = myLotto.getWinningCount(Lotto(listOf(1, 2, 3, 4, 5, 7)))
 
         // then
         assertThat(count).isEqualTo(5)
@@ -98,5 +99,32 @@ internal class LottoTest {
 
         // then
         assertThat(lotto).isEqualTo(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["1:true", "2:true", "6:true", "7:false"], delimiter = ':')
+    fun `LottoNumber 하나를 인자로 주면, Lotto에 포함된 숫자인지 아닌지 반환한다`(num: Int, expectedHasNumber: Boolean) {
+        // given
+        val lotto = Lotto("1,2,3,4,5,6")
+
+        // when
+        val hasNumber: Boolean = lotto.hasBonusNumber(LottoNumber(num))
+
+        // then
+        assertThat(hasNumber).isEqualTo(expectedHasNumber)
+    }
+
+    @Test
+    fun `Lotto(당첨로또)와 LottoNumber(보너스번호)를 주면 결과(Coincidence)를 반환한다`() {
+        // given
+        val myLotto = Lotto("1,2,3,4,5,6")
+        val winningLotto = Lotto("1,2,3,4,5,7")
+        val bonusNumber = LottoNumber("6")
+
+        // when
+        val result: Coincidence? = myLotto.getResult(winningLotto, bonusNumber)
+
+        // then
+        assertThat(result).isEqualTo(Coincidence.FIVE_WITH_BONUS)
     }
 }

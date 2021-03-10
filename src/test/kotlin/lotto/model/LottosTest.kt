@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import java.math.RoundingMode
 
 internal class LottosTest {
     @Test
@@ -12,10 +13,10 @@ internal class LottosTest {
         val lottoCount = 5
 
         // when
-        val myLottos = Lottos(lottoCount)
+        val myLottos = Lottos(LottoNumberPool, lottoCount)
 
         // then
-        assertThat(myLottos.lottos.size).isEqualTo(5)
+        assertThat(myLottos.myLottos.size).isEqualTo(5)
     }
 
     @ParameterizedTest
@@ -33,7 +34,7 @@ internal class LottosTest {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
         // when
-        val count = lottos.check(winningNumbers, checkCount)
+        val count = lottos.check(Lotto(winningNumbers), checkCount)
 
         // then
         assertThat(count).isEqualTo(1)
@@ -55,9 +56,40 @@ internal class LottosTest {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
         // when
-        val earningRate = lottos.getEarningRate(winningNumbers)
+        val earningRate = lottos.getEarningRate(Lotto(winningNumbers))
 
         // then
-        assertThat(earningRate).isEqualTo(5000.toDouble() / 6000.toDouble())
+        assertThat(earningRate).isEqualTo(5000.toBigDecimal().divide(6000.toBigDecimal(), 2, RoundingMode.FLOOR))
+    }
+
+    @Test
+    fun `Coincidence를 인자로 주면, Lottos에서 해당 결과와 같은 결과를 가지는 로또 갯수를 반환한다`() {
+        // given
+        val lottos = Lottos(
+            listOf(
+                Lotto(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto(listOf(1, 2, 3, 4, 5, 7)),
+                Lotto(listOf(1, 2, 3, 4, 8, 9)),
+                Lotto(listOf(1, 2, 3, 4, 10, 11)),
+                Lotto(listOf(1, 2, 3, 33, 35, 36)),
+                Lotto(listOf(1, 2, 3, 43, 44, 45))
+            )
+        )
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = LottoNumber(7)
+
+        // when
+        val countForSix = lottos.getCoincidenceCount(Coincidence.SIX, winningLotto, bonusNumber)
+        val countForFiveWithBonus = lottos.getCoincidenceCount(Coincidence.FIVE_WITH_BONUS, winningLotto, bonusNumber)
+        val countForFive = lottos.getCoincidenceCount(Coincidence.FIVE, winningLotto, bonusNumber)
+        val countForFour = lottos.getCoincidenceCount(Coincidence.FOUR, winningLotto, bonusNumber)
+        val countForThree = lottos.getCoincidenceCount(Coincidence.THREE, winningLotto, bonusNumber)
+
+        // then
+        assertThat(countForSix).isEqualTo(1)
+        assertThat(countForFiveWithBonus).isEqualTo(1)
+        assertThat(countForFive).isEqualTo(0)
+        assertThat(countForFour).isEqualTo(2)
+        assertThat(countForThree).isEqualTo(2)
     }
 }

@@ -5,14 +5,7 @@ import adder.view.InputView
 import adder.view.ResultView
 
 fun main() {
-    InputView.printQuestion()
-    var input = readLine()
-
-    while (input?.isBlank()!!) {
-        InputView.printQuestion()
-        input = readLine()
-    }
-
-    val sum = Numbers(input).getSum()
+    val answer = InputView.askQuestion()
+    val sum = Numbers(answer).getSum()
     ResultView.printSum(sum)
 }

@@ -1,33 +1,49 @@
 package lotto.model
 
-class Lottos(val lottos: List<Lotto>) {
-    constructor(count: Int) : this(createLottos(count))
+import java.math.BigDecimal
+import java.math.RoundingMode
 
-    fun check(winningNumbers: List<Int>, checkCount: Int): Int {
-        return lottos
-            .map { it.getWinningCount(winningNumbers) }
+class Lottos(private val lottos: List<Lotto>) {
+    var myLottos: List<Lotto>
+        private set
+
+    init {
+        myLottos = lottos
+    }
+
+    constructor(lottoNumPool: LottoNumberPool, count: Int) : this(createLottos(lottoNumPool, count))
+
+    fun check(winningLotto: Lotto, checkCount: Int): Int {
+        return myLottos
+            .map { it.getWinningCount(winningLotto) }
             .filter { it == checkCount }
             .count()
     }
 
-    fun getEarningRate(winningNumbers: List<Int>): Double {
-        val totalPrizeMoney = getTotalPrizeMoney(winningNumbers)
-        val budgetMoney = lottos.size.times(COST_PER_ONE_LOTTO)
-        return totalPrizeMoney.div(budgetMoney)
+    fun getEarningRate(winningLotto: Lotto): BigDecimal {
+        val totalPrizeMoney = getTotalPrizeMoney(winningLotto)
+        val budgetMoney = (myLottos.size * COST_PER_ONE_LOTTO).toBigDecimal()
+
+        return totalPrizeMoney.divide(budgetMoney, TWO_DECIMAL_PLACES, RoundingMode.FLOOR)
     }
 
-    private fun getTotalPrizeMoney(winningNumbers: List<Int>): Double {
+    private fun getTotalPrizeMoney(winningLotto: Lotto): BigDecimal {
         return Coincidence.values()
-            .map { check(winningNumbers, it.coincidenceCount) * it.prizeMoney }
+            .map { check(winningLotto, it.coincidenceCount) * it.prizeMoney }
             .sum()
-            .toDouble()
+            .toBigDecimal()
+    }
+
+    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber): Int {
+        return myLottos.count { coincidence == it.getResult(winningLotto, bonusNumber) }
     }
 
     companion object {
         private const val COST_PER_ONE_LOTTO: Double = 1000.toDouble()
+        private const val TWO_DECIMAL_PLACES = 2
 
-        private fun createLottos(count: Int): List<Lotto> {
-            return (1..count).map { Lotto(LottoNumberPool().getLottoNumbers()) }
+        private fun createLottos(lottoNumPool: LottoNumberPool, count: Int): List<Lotto> {
+            return (1..count).map { lottoNumPool.getOneLotto() }
         }
     }
 }
