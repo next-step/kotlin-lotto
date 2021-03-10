@@ -10,8 +10,8 @@ enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBo
 
     constructor(prizeMoney: Int)
 
-    fun getMatchedCount(lottos: Lottos): Int {
-        return 0
+    fun getMatchedCount(lottos: Lottos, winningLotto: WinningLotto): Int {
+        return lottos.getCoincidenceCount(this, winningLotto.winningLotto, winningLotto.bonusNumber)
     }
 
     companion object {

@@ -38,11 +38,11 @@ internal class CoincidenceTest {
         val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
 
         // when
-        val firstCount = Coincidence.FIRST.getMatchedCount(myLottos)
-        val secondCount = Coincidence.SECOND.getMatchedCount(myLottos)
-        val thirdCount = Coincidence.THIRD.getMatchedCount(myLottos)
-        val fourthCount = Coincidence.FOURTH.getMatchedCount(myLottos)
-        val fifthCount = Coincidence.FIFTH.getMatchedCount(myLottos)
+        val firstCount = Coincidence.FIRST.getMatchedCount(myLottos, winningLotto)
+        val secondCount = Coincidence.SECOND.getMatchedCount(myLottos, winningLotto)
+        val thirdCount = Coincidence.THIRD.getMatchedCount(myLottos, winningLotto)
+        val fourthCount = Coincidence.FOURTH.getMatchedCount(myLottos, winningLotto)
+        val fifthCount = Coincidence.FIFTH.getMatchedCount(myLottos, winningLotto)
 
         // then
         assertThat(firstCount).isEqualTo(0)
