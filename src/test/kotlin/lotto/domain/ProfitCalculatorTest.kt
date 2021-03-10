@@ -8,7 +8,7 @@ import java.math.BigDecimal
 class ProfitCalculatorTest {
 
     @Test
-    fun `calculate profit ratio`() {
+    fun `수익률을 계산한다`() {
         val winningStatistics = WinningStatistics()
 
         val calculateRatioZero = ProfitCalculator.calculateRatio(14000, winningStatistics)
