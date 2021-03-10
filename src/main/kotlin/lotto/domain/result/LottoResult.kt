@@ -1,9 +1,10 @@
 package lotto.domain.result
 
 import lotto.domain.ticket.WinningBoard
+import lotto.domain.value.Price
 
 class LottoResult {
-    private val result = mutableMapOf<WinningBoard, Int>()
+    val result = mutableMapOf<WinningBoard, Int>()
 
     init {
         WinningBoard.values()
@@ -16,6 +17,10 @@ class LottoResult {
 
     fun get(winningBoard: WinningBoard): Int {
         return result[winningBoard]!!
+    }
+
+    fun calculateProfit(price: Price): Double {
+        return Price(calculateTotalReward()).calculateRate(price)
     }
 
     fun calculateTotalReward(): Long {

@@ -3,7 +3,7 @@ package lotto.domain.ticket
 import lotto.domain.result.LottoResult
 
 class LottoTickets(
-    private val tickets: List<LottoTicket>
+    val tickets: List<LottoTicket>
 ) {
     fun compare(winningTicket: WinningLottoTicket): LottoResult {
         val result = LottoResult()
