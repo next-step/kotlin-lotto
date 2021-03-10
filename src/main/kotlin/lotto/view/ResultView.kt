@@ -1,6 +1,8 @@
 package lotto.view
 
-import lotto.model.*
+import lotto.model.Coincidence
+import lotto.model.Lottos
+import lotto.model.WinningLotto
 
 object ResultView {
     fun printMyLottos(lottos: Lottos) {
