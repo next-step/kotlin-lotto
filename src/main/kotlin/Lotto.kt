@@ -17,4 +17,12 @@ class Lotto {
             throw IllegalArgumentException("자연수로 변환하는데 실패했습니다.")
         }
     }
+
+    fun buy(price: Int): Int {
+        return price / LOTTO_PRICE
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
+    }
 }

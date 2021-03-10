@@ -2,6 +2,10 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 class LottoTest {
     private val lotto = Lotto()
@@ -52,4 +56,20 @@ class LottoTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("buyLotto")
+    fun `금액에 맞는 로또를 구매한다`(price: Int, resultCnt: Int) {
+        assertThat(lotto.buy(price), `is`(resultCnt))
+    }
+
+    companion object {
+        @JvmStatic
+        fun buyLotto(): Stream<Arguments> {
+            return Stream.of(
+                    Arguments.of(15000, 15),
+                    Arguments.of(7200, 7),
+                    Arguments.of(22222, 22)
+            )
+        }
+    }
 }
