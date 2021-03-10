@@ -1,6 +1,6 @@
 package calculator.domain
 
-class Number(string: String) {
+class Number (string: String){
     var value: Int = 0
         private set
 

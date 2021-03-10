@@ -12,9 +12,7 @@ class Calculator {
         return sum
     }
 
-    fun convertStringToNumber(numbers: List<String>): List<Number> {
-        return numbers.map { stringNumber ->
-            Number(stringNumber)
-        }
+    private fun convertStringToNumber(numbers: List<String>): List<Number> {
+        return numbers.map (::Number)
     }
 }
