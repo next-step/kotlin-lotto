@@ -9,8 +9,8 @@ data class Lotto(val lottoNumbers: Set<LottoNumber>) {
 
     constructor(inputBeforeSplit: String) : this(Delimiter(inputBeforeSplit).split().map { it.toInt() })
 
-    fun getMatchCount(winningNumbers: Lotto): Int {
-        return lottoNumbers.count { winningNumbers.hasNumber(it) }
+    fun getMatchCount(winningLotto: Lotto): Int {
+        return lottoNumbers.count { winningLotto.hasNumber(it) }
     }
 
     fun hasNumber(lottoNumber: LottoNumber): Boolean {
