@@ -1,6 +1,6 @@
 package lotto.domain
 
-internal data class Lotto(val lottoNums: List<LottoNum>) {
+internal data class Lotto(val lottoNums: List<LottoNum>, val auto: Boolean = true) {
 
     init {
         require(this.lottoNums.size == NUM_SIZE) {
@@ -22,8 +22,12 @@ internal data class Lotto(val lottoNums: List<LottoNum>) {
     companion object {
         const val NUM_SIZE = 6
 
-        fun newInstance(nums: List<Int>): Lotto {
-            return Lotto(nums.map { LottoNum.from(it) })
+        fun createAutoLotto(nums: List<Int>): Lotto {
+            return Lotto(nums.map { LottoNum.from(it) }, true)
+        }
+
+        fun createSelfLotto(nums: List<Int>): Lotto {
+            return Lotto(nums.map { LottoNum.from(it) }, false)
         }
     }
 }

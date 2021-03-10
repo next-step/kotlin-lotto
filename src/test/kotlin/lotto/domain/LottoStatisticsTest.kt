@@ -8,9 +8,9 @@ internal class LottoStatisticsTest {
     @Test
     fun `로또의 당첨 통계를 구한다`() {
         // given
-        val winLotto = Lotto.newInstance(listOf(1, 2, 3, 4, 5, 6))
-        val fourthLotto = Lotto.newInstance(listOf(1, 2, 3, 7, 8, 9))
-        val missLotto = Lotto.newInstance(listOf(7, 8, 9, 10, 11, 12))
+        val winLotto = Lotto.createAutoLotto(listOf(1, 2, 3, 4, 5, 6))
+        val fourthLotto = Lotto.createAutoLotto(listOf(1, 2, 3, 7, 8, 9))
+        val missLotto = Lotto.createAutoLotto(listOf(7, 8, 9, 10, 11, 12))
         val lottoPaper = LottoPaper(listOf(fourthLotto, missLotto))
 
         // when

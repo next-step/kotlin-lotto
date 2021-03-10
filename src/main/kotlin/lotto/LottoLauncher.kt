@@ -13,12 +13,13 @@ private val outputView = OutputView()
 
 fun main() {
     val price = Money(inputView.requestPrice())
-    val store = Store()
-    val lottoPaper: LottoPaper = store.sell(price)
+    val selfLottNums = inputView.requestSelfLottNums().map { Lotto.createSelfLotto(it) }
+
+    val lottoPaper: LottoPaper = Store().sell(price, selfLottNums)
 
     outputView.renderLottoPaper(lottoPaper)
 
-    val winLotto = Lotto.newInstance(inputView.requestWinNums())
+    val winLotto = Lotto.createAutoLotto(inputView.requestWinNums())
     val bonusNum = LottoNum.from(inputView.requestBonusNum())
 
     outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto, bonusNum))

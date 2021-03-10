@@ -3,6 +3,6 @@ package lotto.domain
 internal class StaticLottoNumsGenerator(private val nums: List<Int>) : LottoNumsGenerator {
 
     override fun generate(): Lotto {
-        return Lotto.newInstance(nums)
+        return Lotto.createAutoLotto(nums)
     }
 }
