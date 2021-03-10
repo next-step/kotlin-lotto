@@ -4,14 +4,14 @@ import lotto.model.LottoNumber.Companion.NUMBERS_MAXIMUM
 import lotto.model.LottoNumbers.Companion.NUMBERS_SIZE
 
 data class LottoTicket(val numbers: LottoNumbers = autoCreate()) {
-    override fun toString(): String {
-        return numbers.joinToString(separator = ", ", prefix = "[", postfix = "]")
-    }
-
     fun countMatch(winningNumbers: WinningNumbers): Int {
         return winningNumbers.count {
             numbers.contains(it)
         }
+    }
+
+    override fun toString(): String {
+        return numbers.joinToString(separator = ", ", prefix = "[", postfix = "]")
     }
 
     companion object {

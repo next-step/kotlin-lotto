@@ -8,7 +8,7 @@ data class LottoResult(val winningCounter: WinningCounter, val sumCostOfTickets:
         get() {
             val totalWinnings = winningCounter.winningsSum
 
-            val benefitRate = totalWinnings.dividedBy(sumCostOfTickets)
+            val benefitRate = totalWinnings / sumCostOfTickets
             return ceilToSecond(benefitRate)
         }
 
