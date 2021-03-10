@@ -3,7 +3,9 @@ package lotto.domain
 internal data class Money(val value: Int) {
 
     init {
-        require(value >= MIN_VALUE)
+        require(value >= MIN_VALUE) {
+            "the value is more than $MIN_VALUE"
+        }
     }
 
     internal operator fun plus(money: Money): Money {

@@ -11,10 +11,14 @@ internal data class LottoNums(val nums: List<LottoNum>) {
         }
     }
 
-    constructor(vararg nums: Int) : this(nums = nums.asList().map { LottoNum(it) })
+    constructor(vararg nums: Int) : this(nums = nums.asList().map { LottoNum.of(it) })
 
     internal fun findMatchNums(lottoNums: LottoNums): List<LottoNum> {
         return lottoNums.nums.filter(this.nums::contains)
+    }
+
+    internal fun contain(lottoNum: LottoNum): Boolean {
+        return this.nums.contains(lottoNum)
     }
 
     companion object {

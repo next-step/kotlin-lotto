@@ -9,7 +9,7 @@ internal class StoreTest {
     fun `금액에 맞게 로또를 발급해준다`() {
         // given
         val nums = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto(*nums.toIntArray())
+        val lotto = Lotto(nums)
         val expect = LottoPaper(listOf(lotto, lotto))
 
         // when
