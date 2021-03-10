@@ -2,10 +2,10 @@ package lotto.domain
 
 class LottoResult {
 
-    fun getMyLottoesRank(lottoes: Lottoes, winningLotto: WinningLotto): List<Rank> {
-        return lottoes.toList().map { lotto ->
-            val countOfMatch = getCountOfMatch(lotto, winningLotto.winningNumbers)
-            val bonusMatches = isBonusNumberMatch(lotto, winningLotto.bonusNumber)
+    fun getMyLottoesRank(lottoes: Lottoes, winningLotto: WinningLotto): Map<Rank, List<LottoTicket>> {
+        return lottoes.toList().groupBy { lottoTicket ->
+            val countOfMatch = getCountOfMatch(lottoTicket, winningLotto.winningNumbers)
+            val bonusMatches = isBonusNumberMatch(lottoTicket, winningLotto.bonusNumber)
             convertCountToRank(countOfMatch, bonusMatches)
         }
     }

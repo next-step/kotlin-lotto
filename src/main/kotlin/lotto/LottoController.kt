@@ -20,10 +20,5 @@ fun main() {
     val bonusNumber = inputView.inputBonusNumber()
 
     val ranks = lottoResult.getMyLottoesRank(lottoes, WinningLotto(prizeNumbers, bonusNumber))
-    outputView.printLottoesResult(ranks)
-    val prizeMoney = ranks.sumBy { rank ->
-        rank.prizeMoney
-    }
-
-    outputView.printRateOfReturn(money, prizeMoney)
+    outputView.printLottoesResult(money, ranks)
 }

@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.LottoTicket
 import lotto.domain.Lottoes
 import lotto.domain.Rank
 
@@ -12,17 +13,24 @@ class OutputView {
         }
     }
 
-    fun printLottoesResult(ranks: List<Rank>) {
+    fun printLottoesResult(money: Int, ranks: Map<Rank, List<LottoTicket>>) {
         println("\n당첨 통계")
         println("------------")
-        println("3개 일치 (5000원) - ${ranks.count { rank -> rank == Rank.FIFTH }}개")
-        println("4개 일치 (50,000원) - ${ranks.count { rank -> rank == Rank.FOURTH }}개")
-        println("5개 일치 (1,500,000원) - ${ranks.count { rank -> rank == Rank.THIRD }}개")
-        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${ranks.count { rank -> rank == Rank.SECOND }}개")
-        println("6개 일치 (2,000,000,000원) - ${ranks.count { rank -> rank == Rank.FIRST }}개")
+        println("3개 일치 (5000원) - ${ranks[Rank.FIFTH]?.size ?: 0}개")
+        println("4개 일치 (50,000원) - ${ranks[Rank.FOURTH]?.size ?: 0}개")
+        println("5개 일치 (1,500,000원) - ${ranks[Rank.THIRD]?.size ?: 0}개")
+        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${ranks[Rank.SECOND]?.size ?: 0}개")
+        println("6개 일치 (2,000,000,000원) - ${ranks[Rank.FIRST]?.size ?: 0}개")
+
+        printRateOfReturn(money, ranks)
     }
 
-    fun printRateOfReturn(money: Int, prizeMoney: Int) {
+    private fun printRateOfReturn(money: Int, ranks: Map<Rank, List<LottoTicket>>) {
+        var prizeMoney = 0
+        ranks.keys.forEach {
+            prizeMoney += it.prizeMoney * (ranks[it]?.size ?: 0)
+        }
+
         println("총 수익률은 ${String.format("%.2f", prizeMoney.toFloat() / money.toFloat())}입니다.")
     }
 }
