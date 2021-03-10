@@ -7,32 +7,24 @@ import org.junit.jupiter.api.Test
 class WinningStatisticsTest {
 
     @Test
-    fun `getMatchCount1 if nothing is inserted`() {
+    fun `아무 통계값도 들어오지 않은 경우, getTicketCountOf는 항상 0을 리턴한다`() {
         val winningStatistics = WinningStatistics()
 
         assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Three)).isEqualTo(0)
+        assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Four)).isEqualTo(0)
+        assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Five)).isEqualTo(0)
+        assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Six)).isEqualTo(0)
+        assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.NonProfit)).isEqualTo(0)
     }
 
     @Test
-    fun `addMatchCount and get test`() {
+    fun `4개 맞은 티켓을 추가한 경우, getTicketCountOf는 추가한 숫자 만큼 리턴한다`() {
         val winningStatistics = WinningStatistics()
-        winningStatistics.addTicketCountOf(LotteryMatchType.Four)
+        winningStatistics.addTicketOf(LotteryMatchType.Four)
         assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Four)).isEqualTo(1)
 
-        winningStatistics.addTicketCountOf(LotteryMatchType.Four)
+        winningStatistics.addTicketOf(LotteryMatchType.Four)
         assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Four)).isEqualTo(2)
     }
 
-    @Test
-    fun `calculateTotalWinningPrice`() {
-        val winningStatistics = WinningStatistics()
-        winningStatistics.addTicketCountOf(LotteryMatchType.Four)
-        winningStatistics.addTicketCountOf(LotteryMatchType.Five)
-        winningStatistics.addTicketCountOf(LotteryMatchType.NonProfit)
-
-        assertThat(winningStatistics.calculateTotalWinningPrice()).isEqualTo(1_550_000)
-
-        winningStatistics.addTicketCountOf(LotteryMatchType.Three)
-        assertThat(winningStatistics.calculateTotalWinningPrice()).isEqualTo(1_555_000)
-    }
 }
