@@ -1,9 +1,9 @@
 package lotto
 
-interface Exchange<Product> {
+interface Exchange<ProductT> {
     fun pay(money: Money)
 
-    fun product(): List<Product>
+    fun product(): List<ProductT>
 
     class Lotto(private val lottoDrawMachine: LottoDrawMachine) : Exchange<LottoNumber> {
         private lateinit var lottoTicket: LottoTicket
