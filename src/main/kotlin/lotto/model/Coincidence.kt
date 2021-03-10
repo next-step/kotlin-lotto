@@ -1,14 +1,24 @@
 package lotto.model
 
 enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBonusNum: Boolean) {
-    FIFTH(3, 5_000, false),
-    FOURTH(4, 50_000, false),
-    THIRD(5, 1_500_000, false),
+    FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
-    FIRST(6, 2_000_000_000, false);
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    MISS(prizeMoney = 0);
+
+    constructor(prizeMoney: Int)
 
     companion object {
         fun match(myLotto: Lotto, winningLotto: WinningLotto): Coincidence {
+            return findMatched(myLotto, winningLotto) ?: MISS
+        }
+
+        private fun findMatched(myLotto: Lotto, winningLotto: WinningLotto): Coincidence? {
+            return values()
+                .filter { it.coincidenceCount == myLotto.getMatchCount(winningLotto.winningLotto) }
+                .firstOrNull { it.hasBonusNum == myLotto.hasNumber(winningLotto.bonusNumber) }
 
         }
     }
