@@ -1,5 +1,5 @@
 package lotto
 
 class LottoAgent(val exchange: Exchange<LottoNumbers>) {
-    constructor(lottoExchange: LottoDrawMachine) : this(Exchange.Lotto(lottoExchange))
+    constructor(lottoDrawMachine: LottoDrawMachine) : this(Exchange.Lotto(lottoDrawMachine))
 }
