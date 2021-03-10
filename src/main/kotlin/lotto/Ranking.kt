@@ -12,7 +12,8 @@ class Ranking(match: Match) {
         FIRST(6, 2_000_000_000L),
         MISS;
 
-        fun prize(count: Int): Long = amount * count
+        fun prize(count: Int): Money = Money(amount * count)
+
         private fun same(count: Int): Boolean = matchCount == count
 
         companion object {
