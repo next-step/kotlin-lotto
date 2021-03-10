@@ -6,4 +6,10 @@ enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBo
     THIRD(5, 1_500_000, false),
     SECOND(5, 30_000_000, true),
     FIRST(6, 2_000_000_000, false);
+
+    companion object {
+        fun match(myLotto: Lotto, winningLotto: WinningLotto): Coincidence {
+
+        }
+    }
 }
