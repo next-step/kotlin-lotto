@@ -3,7 +3,7 @@ fun main() {
     val lotto = Lotto()
     val price = lotto.validatePrice(inputPrice())
     val lottoCnt = lotto.buy(price)
-
+    val lottoCards = lotto.extractNumber(lottoCnt)
 }
 
 class Lotto {
@@ -24,7 +24,17 @@ class Lotto {
         return price / LOTTO_PRICE
     }
 
+    fun extractNumber(cnt: Int): List<LottoCard> {
+        return (1..cnt).map {
+            LottoCard(LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT))
+        }
+    }
+
     companion object {
         const val LOTTO_PRICE = 1000
+        const val LOTTO_NUMBER_CNT = 6
+        private const val LOTTO_START_NUMBER = 1
+        private const val LOTTO_LAST_NUMBER = 45
+        val LOTTO_NUMBERS = (LOTTO_START_NUMBER..LOTTO_LAST_NUMBER).toList()
     }
 }
