@@ -10,10 +10,10 @@ class LottoResult {
         }
     }
 
-    private fun getCountOfMatch(lottoTicket: LottoTicket, prizeNumbers: List<Int>): Int {
-        return lottoTicket.getLottoNumbers().filter { number ->
-            prizeNumbers.contains(number)
-        }.size
+    private fun getCountOfMatch(lottoTicket: LottoTicket, prizeNumbers: List<LottoNumber>): Int {
+        return lottoTicket.value.count { lottoNumber ->
+            prizeNumbers.contains(lottoNumber)
+        }
     }
 
     private fun convertCountToRank(countOfMatch: Int, bonusMatches: Boolean): Rank {
@@ -39,7 +39,7 @@ class LottoResult {
         }
     }
 
-    private fun isBonusNumberMatch(lottoTicket: LottoTicket, bonusNumber: Int): Boolean {
-        return lottoTicket.getLottoNumbers().contains(bonusNumber)
+    private fun isBonusNumberMatch(lottoTicket: LottoTicket, bonusNumber: LottoNumber): Boolean {
+        return lottoTicket.value.contains(bonusNumber)
     }
 }

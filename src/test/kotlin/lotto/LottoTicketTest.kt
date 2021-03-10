@@ -9,16 +9,16 @@ class LottoTicketTest {
     @Test
     fun `로또 1개 자동으로 만들기`() {
         val lotto = LottoTicket.generateAuto()
-        lotto.getLottoNumbers().forEach {
-            print("$it ")
+        lotto.value.forEach {
+            print("${it.value} ")
         }
     }
 
     @Test
     fun `로또 1개 수동으로 만들기`() {
         val lotto = LottoTicket.generateManual(listOf(1, 2, 3, 4, 5, 6))
-        lotto.getLottoNumbers().forEach {
-            print("$it ")
+        lotto.value.forEach {
+            print("${it.value} ")
         }
     }
 

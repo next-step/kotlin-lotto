@@ -8,7 +8,7 @@ class OutputView {
     fun printPurchasedLottoes(lottoes: Lottoes) {
         println("${lottoes.toList().size}개를 구매했습니다.")
         for (lotto in lottoes.toList()) {
-            println(lotto.getLottoNumbers())
+            println(lotto.value.toString())
         }
     }
 
