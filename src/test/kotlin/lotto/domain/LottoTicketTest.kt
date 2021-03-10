@@ -1,6 +1,5 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.LottoTicket
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
 
