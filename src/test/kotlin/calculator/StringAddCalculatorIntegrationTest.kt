@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 internal class StringAddCalculatorIntegrationTest {
 
     private val underTest = StringAddCalculator()
-    
+
     @Test
     fun `계산기`() {
         val input = "1,2,3"
@@ -17,7 +17,7 @@ internal class StringAddCalculatorIntegrationTest {
 
         assertThat(result).isEqualTo(expected)
     }
-    
+
     @Test
     fun `커스텀 계산기`() {
         val input = "//;\n1;2;3"
@@ -37,7 +37,7 @@ internal class StringAddCalculatorIntegrationTest {
 
         assertThat(result.message).isEqualTo(expectedMessage)
     }
-    
+
     @Test
     fun `빈문자열을 입력하는 경우 0을 반환한다`() {
         val input = ""

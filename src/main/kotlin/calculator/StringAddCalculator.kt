@@ -3,11 +3,7 @@ package calculator
 class StringAddCalculator {
 
     fun run(input: String): Int {
-        try {
-            return calculate(input)
-        } catch (e: RuntimeException) {
-            throw RuntimeException(e.message, e)
-        }
+        return calculate(input)
     }
 
     private fun calculate(input: String): Int {
@@ -18,7 +14,7 @@ class StringAddCalculator {
         val token = Token(input)
         return token.values
             .map { PositiveNumber(it) }
-            .reduce { acc, positiveNumber -> acc.plus(positiveNumber) }
+            .reduce { x, y -> x + y }
             .value
     }
 }
