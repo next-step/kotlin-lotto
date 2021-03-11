@@ -20,6 +20,10 @@ class Lottos(val lottos: List<Lotto>) {
         return totalPrizeMoney.divide(budgetMoney, TWO_DECIMAL_PLACES, RoundingMode.FLOOR)
     }
 
+    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber): Int {
+        return lottos.count { coincidence == it.getResult(winningLotto, bonusNumber) }
+    }
+
     private fun getTotalPrizeMoney(winningLotto: Lotto): BigDecimal {
         return Coincidence.values()
             .map { check(winningLotto, it.coincidenceCount) * it.prizeMoney }
@@ -27,8 +31,10 @@ class Lottos(val lottos: List<Lotto>) {
             .toBigDecimal()
     }
 
-    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber): Int {
-        return lottos.count { coincidence == it.getResult(winningLotto, bonusNumber) }
+    override fun toString(): String {
+        return lottos
+            .map { it.lottoNumbers }
+            .joinToString { "," }
     }
 
     companion object {
