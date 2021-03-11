@@ -1,6 +1,6 @@
 package lotto.model
 
-import java.util.*
+import java.util.TreeSet
 
 class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) : Set<LottoNumber> by lottoNumbers {
     init {
