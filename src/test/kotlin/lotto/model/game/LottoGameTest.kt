@@ -21,4 +21,20 @@ internal class LottoGameTest {
         // then
         assertThat(lottoCount).isEqualTo(15)
     }
+
+    @Test
+    fun `구매할 갯수를 인자로 주면, 해당 갯수만큼 로또가 반환된다`() {
+        // given
+        val inputReader = InputReader()
+        val lottoMachine = LottoMachine()
+        val lottoGame = LottoGame(lottoMachine, inputReader)
+        val money = Money(15000)
+        val lottoCount = lottoGame.ready(money)
+
+        // when
+        val myLottos = lottoGame.buy(lottoCount)
+
+        // then
+        assertThat(myLottos.lottos).hasSize(15)
+    }
 }
