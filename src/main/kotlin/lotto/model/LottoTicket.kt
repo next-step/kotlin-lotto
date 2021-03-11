@@ -16,15 +16,14 @@ data class LottoTicket(val numbers: LottoNumbers = autoCreate()) {
 
     companion object {
         private fun autoCreate() =
-            LottoNumbers.from(
+            LottoNumbers(
                 List(NUMBERS_MAXIMUM) { i -> i + 1 }
                     .shuffled()
                     .subList(0, NUMBERS_SIZE)
-                    .sorted()
             )
 
         fun from(numbers: List<Int>): LottoTicket {
-            return LottoTicket(LottoNumbers.from(numbers))
+            return LottoTicket(LottoNumbers(numbers))
         }
     }
 }
