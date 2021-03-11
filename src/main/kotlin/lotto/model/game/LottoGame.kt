@@ -15,6 +15,10 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
         return totalCount
     }
 
+    fun selectByManual(manualCount: Int): Lottos {
+        TODO("Not yet implemented")
+    }
+
     fun buy(lottoCount: Int): Lottos {
         require(totalCount >= lottoCount) { "예산으로 구매가 불가능한 갯수입니다." }
         return lottoMachine.buy(lottoCount)

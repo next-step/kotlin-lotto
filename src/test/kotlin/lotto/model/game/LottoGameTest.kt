@@ -3,6 +3,7 @@ package lotto.model.game
 import lotto.model.input.InputReader
 import lotto.model.input.Money
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -70,5 +71,20 @@ internal class LottoGameTest {
         // when, then
         assertThat(totalCount).isLessThan(lottoCount)
         assertThrows<IllegalArgumentException> { lottoGame.buy(lottoCount) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [16, 17, 18, 20])
+    fun `수동으로 구매할 갯수는 총 구매 가능 갯수보다 크면, 예외가 반환된다`(manualCount: Int) {
+        // given
+        val inputReader = InputReader()
+        val lottoMachine = LottoMachine()
+        val lottoGame = LottoGame(lottoMachine, inputReader)
+        val money = Money(15000)
+        val totalCount = lottoGame.ready(money)
+
+        // when, then
+        assertThat(totalCount).isLessThan(manualCount)
+        assertThrows<IllegalArgumentException> { lottoGame.selectByManual(manualCount) }
     }
 }
