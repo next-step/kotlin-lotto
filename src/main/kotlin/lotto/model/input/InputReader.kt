@@ -14,6 +14,16 @@ class InputReader {
         return Money(budget)
     }
 
+    fun readManualCount(): Int {
+        var count = readLine()
+
+        while (count.isNullOrBlank()) {
+            count = readLine()
+        }
+
+        return count.toInt()
+    }
+
     fun readLottoNumbers(): Lotto {
         var winningNumbers = readLine()
 

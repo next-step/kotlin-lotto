@@ -3,7 +3,6 @@ package lotto.model.game
 import lotto.model.input.InputReader
 import lotto.model.input.Money
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows

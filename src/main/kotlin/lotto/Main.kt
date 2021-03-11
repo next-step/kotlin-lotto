@@ -17,7 +17,14 @@ fun main() {
 
     val lottoCount = lottoGame.ready(budget)
     ResultView.printLottoCount(lottoCount)
-    ResultView.printMyLottos(lottoGame.buy(lottoCount))
+
+    InputView.printManualCountQuestion()
+    val manualCount = inputReader.readManualCount()
+
+    InputView.printManualNumberQuestion()
+    lottoGame.selectByManual(manualCount)
+    ResultView.printMyLottos(lottoGame.buy(lottoCount - manualCount))
+
     ResultView.printResult(lottoGame.getResult())
     ResultView.printEarningRate(lottoGame.getEarningRate())
 }

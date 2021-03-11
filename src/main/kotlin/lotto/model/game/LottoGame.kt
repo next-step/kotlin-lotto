@@ -16,7 +16,7 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
     }
 
     fun selectByManual(manualCount: Int): Lottos {
-        require(manualCount <= totalCount) {"예산으로 구매가 불가능한 갯수입니다."}
+        require(manualCount <= totalCount) { "예산으로 구매가 불가능한 갯수입니다." }
 
         val lottoByManual = (1..manualCount)
             .map { inputReader.readLottoNumbers() }
