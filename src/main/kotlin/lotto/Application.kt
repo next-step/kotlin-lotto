@@ -6,6 +6,8 @@ import lotto.domain.LottoNumber
 import lotto.domain.Lottos
 import lotto.domain.Money
 import lotto.domain.RandomLottoGenerator
+import lotto.domain.WinningLotto
+import lotto.view.inputBonusNumber
 import lotto.view.inputMoney
 import lotto.view.inputWinningLottoNumbers
 import lotto.view.printLottos
@@ -23,7 +25,10 @@ fun main() {
     val winningNumbers = inputWinningLottoNumbers()
         .map { LottoNumber.of(it) }
         .toSet()
-    val winningLotto = Lotto(winningNumbers)
+
+    val bonusNumber = inputBonusNumber()
+
+    val winningLotto = WinningLotto(Lotto(winningNumbers), LottoNumber.of(bonusNumber))
 
     val result = lottos.match(winningLotto)
     printResult(result)
