@@ -31,7 +31,7 @@ class StudyTest {
 
     @Test
     fun `string with`() {
-        assertThat("asdfaaaa".startsWith("addf")).isTrue()
+        assertThat("asdfaaaa".startsWith("asdf")).isTrue()
     }
 
     @Test
@@ -49,5 +49,11 @@ class StudyTest {
     fun `toInt of value less than 0 with split`() {
         val nums = "-1,-1".split(",").map { it.toInt() }
         assertThat(nums).contains(-1, -1)
+    }
+
+    @Test
+    fun `split with space`() {
+        val list = "1, 2, 3, 4, 5".split(", ").map { it.toInt() }
+        assertThat(list).contains(1, 2, 3, 4, 5)
     }
 }
