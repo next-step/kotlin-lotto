@@ -1,11 +1,11 @@
 package lotto.domain
 
-enum class LottoRank(val matchCount: Int) {
-    FIRST(6),
-    SECOND(5),
-    THIRD(4),
-    FOURTH(3),
-    FAIL(0);
+enum class LottoRank(val matchCount: Int, val winningPrice: Int) {
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000),
+    FAIL(0, 0);
 
     companion object {
         fun matchRank(matchCount: Int): LottoRank {
