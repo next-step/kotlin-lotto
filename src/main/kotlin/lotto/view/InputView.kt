@@ -10,7 +10,8 @@ object InputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return readLine()
             ?.split(",")
-            ?.map(String::toInt)
-            ?: emptyList()
+            ?.map {
+                it.toIntOrNull() ?: throw IllegalArgumentException("$it 는 숫자가 아닙니다")
+            } ?: throw IllegalStateException("잘못된 당첨 번호를 입력했습니다.")
     }
 }
