@@ -12,5 +12,12 @@ class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) : Set<LottoNumber
 
     companion object {
         const val NUMBERS_SIZE = 6
+
+        fun autoCreate() =
+            LottoNumbers(
+                List(LottoNumber.NUMBERS_MAXIMUM) { i -> i + 1 }
+                    .shuffled()
+                    .subList(0, NUMBERS_SIZE)
+            )
     }
 }
