@@ -14,10 +14,9 @@ internal class LottoMachineTest {
         val money = Money(budget)
 
         // when
-        lottoMachine.insertMoney(money)
+        val lottoCount = lottoMachine.insertMoney(money)
 
         // then
-        val lottoCount = lottoMachine.getAvailableCount()
         assertThat(lottoCount).isEqualTo(14)
     }
 

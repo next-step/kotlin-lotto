@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.model.LottoMachine
 import lotto.model.Lottos
 import lotto.model.Result
 import java.math.BigDecimal
@@ -11,8 +10,8 @@ object ResultView {
         println()
     }
 
-    fun printLottoCount(lottoMachine: LottoMachine) {
-        println("${lottoMachine.getAvailableCount()}개를 구매했습니다.")
+    fun printLottoCount(lottoCount: Int) {
+        println("${lottoCount}개를 구매했습니다.")
     }
 
     fun printResult(results: List<Result>) {

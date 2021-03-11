@@ -8,16 +8,13 @@ class LottoMachine(private var money: Money) {
 
     constructor() : this(money = Money(0))
 
-    fun insertMoney(budget: Money) {
+    fun insertMoney(budget: Money): Int {
         money = budget
-    }
-
-    fun getAvailableCount(): Int {
         return money.getBuyableLottoCount()
     }
 
     fun buy(): Lottos {
-        lottos = Lottos(LOTTO_NUMBER_POOL, getAvailableCount())
+        lottos = Lottos(LOTTO_NUMBER_POOL, money.getBuyableLottoCount())
         return lottos
     }
 

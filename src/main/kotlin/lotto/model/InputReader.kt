@@ -1,8 +1,4 @@
-package lotto.view
-
-import lotto.model.Lotto
-import lotto.model.LottoNumber
-import lotto.model.Money
+package lotto.model
 
 class InputReader {
     fun readBudget(): Money {
