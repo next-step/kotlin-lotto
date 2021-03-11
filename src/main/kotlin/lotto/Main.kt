@@ -12,17 +12,17 @@ import lotto.view.ResultView
 
 fun main() {
     val lottoMachine = LottoMachine()
+    val lottoPool = LottoNumberPool
 
     val budget: Money = InputView.askBudgetQuestion()
     lottoMachine.insertMoney(budget)
     ResultView.printLottoCount(lottoMachine)
 
-    val myLottos = Lottos(LottoNumberPool, lottoMachine.getAvailableCount())
+    val myLottos = lottoMachine.buy(lottoPool)
     ResultView.printMyLottos(myLottos)
 
-    val winningNumbers = InputView.askWinningLottoNumbers()
-    val winningLottoNumbers = Lotto(winningNumbers)
-    val bonusLottoNumber = InputView.askBonusNumber(winningLottoNumbers)
-    val winningLotto = WinningLotto(winningLottoNumbers, LottoNumber(bonusLottoNumber))
+    val winningNumbers: Lotto = InputView.askWinningLottoNumbers()
+    val bonusNumber: LottoNumber = InputView.askBonusNumber(winningNumbers)
+    val winningLotto = WinningLotto(winningNumbers, bonusNumber)
     ResultView.printResult(myLottos, winningLotto)
 }

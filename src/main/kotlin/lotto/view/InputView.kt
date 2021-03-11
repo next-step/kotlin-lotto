@@ -17,7 +17,7 @@ object InputView {
         return Money(budget)
     }
 
-    fun askBonusNumber(winningLotto: Lotto): String {
+    fun askBonusNumber(winningLotto: Lotto): LottoNumber {
         printBonusBallQuestion()
         var bonusNumber = readLine()
 
@@ -26,10 +26,10 @@ object InputView {
             bonusNumber = readLine()
         }
 
-        return bonusNumber
+        return LottoNumber(bonusNumber)
     }
 
-    fun askWinningLottoNumbers(): String {
+    fun askWinningLottoNumbers(): Lotto {
         printWinningNumberQuestion()
         var winningNumbers = readLine()
 
@@ -38,7 +38,7 @@ object InputView {
             winningNumbers = readLine()
         }
 
-        return winningNumbers
+        return Lotto(winningNumbers)
     }
 
     fun printBonusBallQuestion() {
