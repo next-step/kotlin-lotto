@@ -11,8 +11,8 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
         return lottoMachine.insertMoney(money)
     }
 
-    fun buy(): Lottos {
-        return lottoMachine.buy()
+    fun buy(lottoCount: Int): Lottos {
+        return lottoMachine.buy(lottoCount)
     }
 
     fun getResult(): List<Result> {

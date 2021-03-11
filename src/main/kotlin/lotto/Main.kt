@@ -15,8 +15,9 @@ fun main() {
     InputView.printBudgetQuestion()
     val budget: Money = inputReader.readBudget()
 
-    ResultView.printLottoCount(lottoGame.ready(budget))
-    ResultView.printMyLottos(lottoGame.buy())
+    val lottoCount = lottoGame.ready(budget)
+    ResultView.printLottoCount(lottoCount)
+    ResultView.printMyLottos(lottoGame.buy(lottoCount))
     ResultView.printResult(lottoGame.getResult())
     ResultView.printEarningRate(lottoGame.getEarningRate())
 }

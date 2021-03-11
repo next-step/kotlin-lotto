@@ -16,8 +16,8 @@ class LottoMachine(private var money: Money) {
         return money.getBuyableLottoCount()
     }
 
-    fun buy(): Lottos {
-        lottos = Lottos(LOTTO_NUMBER_POOL, money.getBuyableLottoCount())
+    fun buy(lottoCount: Int): Lottos {
+        lottos = Lottos(LOTTO_NUMBER_POOL, lottoCount)
         return lottos
     }
 
