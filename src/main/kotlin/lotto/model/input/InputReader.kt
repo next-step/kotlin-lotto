@@ -14,7 +14,7 @@ class InputReader {
         return Money(budget)
     }
 
-    fun readWinningLottoNumbers(): Lotto {
+    fun readLottoNumbers(): Lotto {
         var winningNumbers = readLine()
 
         while (winningNumbers.isNullOrBlank()) {
