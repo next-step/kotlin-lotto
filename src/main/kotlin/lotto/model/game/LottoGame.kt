@@ -3,7 +3,6 @@ package lotto.model.game
 import lotto.model.input.InputReader
 import lotto.model.input.Money
 import lotto.model.result.Result
-import lotto.view.InputView
 import java.math.BigDecimal
 
 class LottoGame(private val lottoMachine: LottoMachine, private val inputReader: InputReader) {
@@ -18,10 +17,13 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
     fun selectByManual(manualCount: Int): Lottos {
         require(manualCount <= totalCount) { "예산으로 구매가 불가능한 갯수입니다." }
 
-        val lottoByManual = (1..manualCount)
+        val lottos = (1..manualCount)
             .map { inputReader.readLottoNumbers() }
 
-        return Lottos(lottoByManual)
+        val lottoByManual = Lottos(lottos)
+        lottoMachine.buyByManual(lottoByManual)
+
+        return lottoByManual
     }
 
     fun buy(lottoCount: Int): Lottos {
@@ -29,8 +31,7 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
         return lottoMachine.buy(lottoCount)
     }
 
-    fun getResult(): List<Result> {
-        val winningLotto = selectWinningLotto()
+    fun getResult(winningLotto: WinningLotto): List<Result> {
         return lottoMachine.getResult(winningLotto)
     }
 
@@ -38,12 +39,11 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
         return lottoMachine.getEarningRate()
     }
 
-    private fun selectWinningLotto(): WinningLotto {
-        InputView.printWinningNumberQuestion()
-        val winningNumbers: Lotto = inputReader.readLottoNumbers()
+    fun selectWinningLotto(): Lotto {
+        return inputReader.readLottoNumbers()
+    }
 
-        InputView.printBonusBallQuestion()
-        val bonusNumber: LottoNumber = inputReader.readBonusNumber(winningNumbers)
-        return WinningLotto(winningNumbers, bonusNumber)
+    fun selectBonusBall(winningNumbers: Lotto): LottoNumber {
+        return inputReader.readBonusNumber(winningNumbers)
     }
 }
