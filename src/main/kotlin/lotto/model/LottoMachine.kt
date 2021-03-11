@@ -11,7 +11,7 @@ class LottoMachine(private var money: Money) {
         return money.getBuyableLottoCount()
     }
 
-    fun buy(): Lottos {
-        TODO("Not yet implemented")
+    fun buy(lottoNumberPool: LottoNumberPool): Lottos {
+        return Lottos(lottoNumberPool, getAvailableCount())
     }
 }
