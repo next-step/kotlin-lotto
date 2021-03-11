@@ -1,6 +1,5 @@
 package lotto.domain.maker
 
-import lotto.data.LottoNumber
 import lotto.data.LottoNumbers
 import lotto.domain.LotteryTicket
 

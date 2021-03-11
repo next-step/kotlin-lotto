@@ -29,5 +29,4 @@ class WinningStatisticsTest {
         winningStatistics.addTicketOf(LotteryMatchType.Five)
         assertThat(winningStatistics.getTicketCountOf(LotteryMatchType.Five)).isEqualTo(1)
     }
-
 }

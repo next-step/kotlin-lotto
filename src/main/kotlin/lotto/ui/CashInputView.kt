@@ -1,6 +1,4 @@
 package lotto.ui
-import lotto.domain.maker.LotteryTicketMaker
-import java.lang.IllegalArgumentException
 
 object CashInputView {
 
