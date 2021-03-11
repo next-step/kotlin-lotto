@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.Count
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.Lottos
@@ -16,9 +15,9 @@ import lotto.view.printStatistics
 
 fun main() {
     val purchase = Money(inputMoney())
-    val count = Count(purchase / Lotto.PRICE)
+    val count = (purchase / Lotto.PRICE).toInt()
 
-    val lottos = Lottos(count.map { RandomLottoGenerator.generate() })
+    val lottos = Lottos((1..count).map { RandomLottoGenerator.generate() })
 
     printLottos(lottos)
 
