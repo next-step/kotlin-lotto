@@ -1,6 +1,8 @@
 package lotto.model
 
 class LottoMachine(private var money: Money) {
+    private lateinit var lottos: Lottos
+
     constructor() : this(money = Money(0))
 
     fun insertMoney(budget: Money) {
@@ -12,10 +14,13 @@ class LottoMachine(private var money: Money) {
     }
 
     fun buy(lottoNumberPool: LottoNumberPool): Lottos {
-        return Lottos(lottoNumberPool, getAvailableCount())
+        lottos = Lottos(lottoNumberPool, getAvailableCount())
+        return lottos
     }
 
-    fun getResult(): Map<Coincidence, Int> {
-        TODO("Not yet implemented")
+    fun getResult(winningLotto: WinningLotto): List<Result> {
+        return Coincidence.values()
+            .filterNot { it.equals(Coincidence.MISS) }
+            .map { Result(it, it.getMatchedCount(lottos, winningLotto)) }
     }
 }

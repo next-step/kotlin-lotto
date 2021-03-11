@@ -41,12 +41,21 @@ internal class LottoMachineTest {
         // given
         val money = Money(15000)
         val lottoMachine = getTestLottoMachine(money)
+        val winningLotto = getTestWinningLotto()
 
         // when
-        val result = lottoMachine.getResult()
+        val result = lottoMachine.getResult(winningLotto)
 
         // then
         assertThat(result.size).isEqualTo(5)
+    }
+
+    private fun getTestWinningLotto(): WinningLotto {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val winningLotto = Lotto(winningNumbers)
+        val bonusNumber = LottoNumber(7)
+
+        return WinningLotto(winningLotto, bonusNumber)
     }
 
     private fun getTestLottoMachine(money: Money): LottoMachine {
