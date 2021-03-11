@@ -2,9 +2,10 @@ package lotto.view
 
 import lotto.model.Lotto
 import lotto.model.LottoNumber
+import lotto.model.Money
 
 object InputView {
-    fun askBudgetQuestion(): String {
+    fun askBudgetQuestion(): Money {
         printBudgetQuestion()
         var budget = readLine()
 
@@ -13,7 +14,7 @@ object InputView {
             budget = readLine()
         }
 
-        return budget
+        return Money(budget)
     }
 
     fun askBonusNumber(winningLotto: Lotto): String {

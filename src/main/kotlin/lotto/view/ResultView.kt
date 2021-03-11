@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.Coincidence
+import lotto.model.LottoMachine
 import lotto.model.Lottos
 import lotto.model.WinningLotto
 
@@ -10,8 +11,8 @@ object ResultView {
         println()
     }
 
-    fun printLottoCount(lottoCount: Int) {
-        println("${lottoCount}개를 구매했습니다.")
+    fun printLottoCount(lottoMachine: LottoMachine) {
+        println("${lottoMachine.getAvailableCount()}개를 구매했습니다.")
     }
 
     fun printResult(myLottos: Lottos, winningLotto: WinningLotto) {
