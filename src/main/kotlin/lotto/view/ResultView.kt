@@ -1,9 +1,9 @@
 package lotto.view
 
-import lotto.model.Coincidence
 import lotto.model.LottoMachine
 import lotto.model.Lottos
-import lotto.model.WinningLotto
+import lotto.model.Result
+import java.math.BigDecimal
 
 object ResultView {
     fun printMyLottos(lottos: Lottos) {
@@ -15,23 +15,24 @@ object ResultView {
         println("${lottoMachine.getAvailableCount()}개를 구매했습니다.")
     }
 
-    fun printResult(myLottos: Lottos, winningLotto: WinningLotto) {
+    fun printResult(results: List<Result>) {
         printStatisticsInstruction()
-        printResultStatistics(myLottos, winningLotto)
-        printEarningRate(myLottos, winningLotto)
+        printResultStatistics(results)
     }
 
-    fun printResultStatistics(myLottos: Lottos, winningLotto: WinningLotto) {
-        Coincidence.values().forEach {
-            print("${it.coincidenceCount}개 일치")
-            if (it.hasBonusNum) print(" 보너스 볼 일치")
-            print("(${it.prizeMoney}원)")
-            println("- ${it.getMatchedCount(myLottos, winningLotto)}개 ")
+    fun printResultStatistics(results: List<Result>) {
+        results.forEach {
+            val coincidence = it.coincidence
+            val matchCount = it.matchCount
+
+            print("${coincidence.coincidenceCount}개 일치")
+            if (coincidence.hasBonusNum) print(" 보너스 볼 일치")
+            print("(${coincidence.prizeMoney}원)")
+            println("- ${matchCount}개")
         }
     }
 
-    fun printEarningRate(myLottos: Lottos, winningLotto: WinningLotto) {
-        val earningRate = myLottos.getEarningRate(winningLotto.winningLotto)
+    fun printEarningRate(earningRate: BigDecimal) {
         println("총 수익률은 $earningRate")
     }
 

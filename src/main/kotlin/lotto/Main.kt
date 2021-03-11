@@ -7,8 +7,10 @@ import lotto.model.Lotto
 import lotto.model.Money
 import lotto.model.WinningLotto
 import lotto.model.LottoNumber
+import lotto.model.Result
 import lotto.view.InputView
 import lotto.view.ResultView
+import java.math.BigDecimal
 
 fun main() {
     val lottoMachine = LottoMachine()
@@ -23,6 +25,8 @@ fun main() {
 
     val winningNumbers: Lotto = InputView.askWinningLottoNumbers()
     val bonusNumber: LottoNumber = InputView.askBonusNumber(winningNumbers)
-    val winningLotto = WinningLotto(winningNumbers, bonusNumber)
-    ResultView.printResult(myLottos, winningLotto)
+    val result: List<Result> = lottoMachine.getResult(WinningLotto(winningNumbers, bonusNumber))
+    val earningRate: BigDecimal = lottoMachine.getEarningRate()
+    ResultView.printResult(result)
+    ResultView.printEarningRate(earningRate)
 }

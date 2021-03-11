@@ -1,4 +1,3 @@
 package lotto.model
 
-class Result(val coincidence: Coincidence, val matchCount: Int) {
-}
+class Result(val coincidence: Coincidence, val matchCount: Int)
