@@ -7,10 +7,8 @@ import lotto.view.InputView
 import java.math.BigDecimal
 
 class LottoGame(private val lottoMachine: LottoMachine, private val inputReader: InputReader) {
-    fun ready(): Int {
-        InputView.printBudgetQuestion()
-        val budget: Money = inputReader.readBudget()
-        return lottoMachine.insertMoney(budget)
+    fun ready(money: Money): Int {
+        return lottoMachine.insertMoney(money)
     }
 
     fun buy(): Lottos {
@@ -28,7 +26,7 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
 
     private fun selectWinningLotto(): WinningLotto {
         InputView.printWinningNumberQuestion()
-        val winningNumbers: Lotto = inputReader.readWinningLottoNumbers()
+        val winningNumbers: Lotto = inputReader.readLottoNumbers()
 
         InputView.printBonusBallQuestion()
         val bonusNumber: LottoNumber = inputReader.readBonusNumber(winningNumbers)
