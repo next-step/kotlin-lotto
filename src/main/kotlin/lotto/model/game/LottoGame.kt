@@ -7,11 +7,16 @@ import lotto.view.InputView
 import java.math.BigDecimal
 
 class LottoGame(private val lottoMachine: LottoMachine, private val inputReader: InputReader) {
+    var totalCount: Int = 0
+        private set
+
     fun ready(money: Money): Int {
-        return lottoMachine.insertMoney(money)
+        totalCount = lottoMachine.insertMoney(money)
+        return totalCount
     }
 
     fun buy(lottoCount: Int): Lottos {
+        require(totalCount >= lottoCount) { "예산으로 구매가 불가능한 갯수입니다." }
         return lottoMachine.buy(lottoCount)
     }
 
