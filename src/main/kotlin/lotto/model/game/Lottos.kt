@@ -1,5 +1,6 @@
-package lotto.model
+package lotto.model.game
 
+import lotto.model.result.Coincidence
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -42,7 +43,7 @@ class Lottos(val lottos: List<Lotto>) {
         private const val TWO_DECIMAL_PLACES = 2
 
         private fun createLottos(lottoNumPool: LottoNumberPool, count: Int): List<Lotto> {
-            return (1..count).map { lottoNumPool.getOneLotto() }
+            return (1..count).map { LottoNumberPool.getOneLotto() }
         }
     }
 }

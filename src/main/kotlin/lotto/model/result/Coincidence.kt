@@ -1,4 +1,8 @@
-package lotto.model
+package lotto.model.result
+
+import lotto.model.game.WinningLotto
+import lotto.model.game.Lotto
+import lotto.model.game.Lottos
 
 enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBonusNum: Boolean) {
     FIRST(6, 2_000_000_000, false),

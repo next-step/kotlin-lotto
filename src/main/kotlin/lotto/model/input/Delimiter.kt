@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.model.input
 
 class Delimiter(private val inputBeforeSplit: String) {
     fun split(): List<String> {

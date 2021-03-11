@@ -1,4 +1,7 @@
-package lotto.model
+package lotto.model.game
+
+import lotto.model.result.Coincidence
+import lotto.model.input.Delimiter
 
 data class Lotto(val lottoNumbers: Set<LottoNumber>) {
     init {

@@ -1,8 +1,8 @@
 package lotto
 
-import lotto.model.InputReader
-import lotto.model.LottoGame
-import lotto.model.LottoMachine
+import lotto.model.input.InputReader
+import lotto.model.game.LottoGame
+import lotto.model.game.LottoMachine
 import lotto.view.ResultView
 
 fun main() {

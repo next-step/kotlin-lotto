@@ -1,5 +1,8 @@
-package lotto.model
+package lotto.model.game
 
+import lotto.model.result.Coincidence
+import lotto.model.input.Money
+import lotto.model.result.Result
 import java.math.BigDecimal
 
 class LottoMachine(private var money: Money) {

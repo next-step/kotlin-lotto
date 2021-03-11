@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.model.input
 
 data class Money(val value: Int) {
     init {

@@ -1,5 +1,8 @@
-package lotto.model
+package lotto.model.game
 
+import lotto.model.input.InputReader
+import lotto.model.input.Money
+import lotto.model.result.Result
 import lotto.view.InputView
 import java.math.BigDecimal
 

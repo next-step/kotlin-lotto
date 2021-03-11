@@ -1,5 +1,10 @@
 package lotto.model
 
+import lotto.model.game.Lotto
+import lotto.model.game.LottoNumber
+import lotto.model.game.LottoNumberPool
+import lotto.model.game.Lottos
+import lotto.model.result.Coincidence
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest

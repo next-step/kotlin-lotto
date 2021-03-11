@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.model.game
 
 object LottoNumberPool {
     private const val MIN = 1

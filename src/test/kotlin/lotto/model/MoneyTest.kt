@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.input.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

@@ -1,5 +1,11 @@
 package lotto.model
 
+import lotto.model.game.Lotto
+import lotto.model.game.LottoNumber
+import lotto.model.game.Lottos
+import lotto.model.game.LottoMachine
+import lotto.model.game.WinningLotto
+import lotto.model.input.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
