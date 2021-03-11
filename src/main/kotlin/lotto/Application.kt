@@ -12,7 +12,7 @@ import lotto.view.inputMoney
 import lotto.view.inputWinningLottoNumbers
 import lotto.view.printLottos
 import lotto.view.printResult
-import lotto.view.printYield
+import lotto.view.printStatistics
 
 fun main() {
     val purchase = Money(inputMoney())
@@ -34,5 +34,5 @@ fun main() {
     printResult(result)
 
     val statistics = result.calculateStatistics(purchase)
-    printYield(statistics)
+    printStatistics(statistics)
 }
