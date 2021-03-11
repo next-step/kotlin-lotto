@@ -1,11 +1,13 @@
 package lotto.model
 
-class LottoMachine {
-    fun insertMoney(money: Money) {
-        TODO("Not yet implemented")
+class LottoMachine(private var money: Money) {
+    constructor() : this(money = Money(0))
+
+    fun insertMoney(budget: Money) {
+        money = budget
     }
 
-    fun getAvailableCount() {
-        TODO("Not yet implemented")
+    fun getAvailableCount(): Int {
+        return money.getBuyableLottoCount()
     }
 }
