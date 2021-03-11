@@ -5,4 +5,5 @@ import stringcalculator.view.ResultView
 
 fun main() {
     val tokens = InputView.input()
+    ResultView.doResult(tokens)
 }
