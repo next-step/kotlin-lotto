@@ -18,13 +18,11 @@ fun main() {
     val count = (purchase / Lotto.PRICE).toInt()
 
     val lottos = Lottos((1..count).map { RandomLottoGenerator.generate() })
-
     printLottos(lottos)
 
     val winningNumbers = inputWinningLottoNumbers()
         .map { LottoNumber.of(it) }
         .toSet()
-
     val bonusNumber = inputBonusNumber()
 
     val winningLotto = WinningLotto(Lotto(winningNumbers), LottoNumber.of(bonusNumber))
