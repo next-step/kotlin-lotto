@@ -27,10 +27,9 @@ internal class LottoMachineTest {
         val lottoMachine = LottoMachine()
         val money = Money(15000)
         lottoMachine.insertMoney(money)
-        val lottoNumberPool = LottoNumberPool
 
         // when
-        val myLottos: Lottos = lottoMachine.buy(lottoNumberPool)
+        val myLottos: Lottos = lottoMachine.buy()
 
         // then
         assertThat(myLottos.lottos.size).isEqualTo(15)
@@ -61,9 +60,7 @@ internal class LottoMachineTest {
     private fun getTestLottoMachine(money: Money): LottoMachine {
         val lottoMachine = LottoMachine()
         lottoMachine.insertMoney(money)
-
-        val lottoNumberPool = LottoNumberPool
-        lottoMachine.buy(lottoNumberPool)
+        lottoMachine.buy()
 
         return lottoMachine
     }

@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.model.LottoMachine
-import lotto.model.LottoNumberPool
 import lotto.model.Lottos
 import lotto.model.Lotto
 import lotto.model.Money
@@ -14,13 +13,12 @@ import java.math.BigDecimal
 
 fun main() {
     val lottoMachine = LottoMachine()
-    val lottoPool = LottoNumberPool
 
     val budget: Money = InputView.askBudgetQuestion()
     lottoMachine.insertMoney(budget)
     ResultView.printLottoCount(lottoMachine)
 
-    val myLottos: Lottos = lottoMachine.buy(lottoPool)
+    val myLottos: Lottos = lottoMachine.buy()
     ResultView.printMyLottos(myLottos)
 
     val winningNumbers: Lotto = InputView.askWinningLottoNumbers()

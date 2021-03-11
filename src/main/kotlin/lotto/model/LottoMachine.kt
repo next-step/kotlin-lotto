@@ -16,8 +16,8 @@ class LottoMachine(private var money: Money) {
         return money.getBuyableLottoCount()
     }
 
-    fun buy(lottoNumberPool: LottoNumberPool): Lottos {
-        lottos = Lottos(lottoNumberPool, getAvailableCount())
+    fun buy(): Lottos {
+        lottos = Lottos(LOTTO_NUMBER_POOL, getAvailableCount())
         return lottos
     }
 
@@ -31,5 +31,9 @@ class LottoMachine(private var money: Money) {
 
     fun getEarningRate(): BigDecimal {
         return lottos.getEarningRate(winningLotto.winningLotto)
+    }
+
+    companion object {
+        private val LOTTO_NUMBER_POOL = LottoNumberPool
     }
 }
