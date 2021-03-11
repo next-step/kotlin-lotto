@@ -1,18 +1,16 @@
 package domain
 
-import java.util.stream.IntStream
 import kotlin.random.Random
-import kotlin.streams.toList
 
-class RandomNumber {
+class RandomNumbers: Numbers {
 
-    fun makeRandoms(size: Int): List<Int> {
-        return IntStream.range(START_INDEX, size)
-            .map { makeRandom() }
-            .toList()
+    override fun makeNumbers(size: Int): HashSet<Int> {
+        return (START_INDEX..size)
+            .map { makeNumber() }
+            .toHashSet()
     }
 
-    private fun makeRandom(): Int {
+    private fun makeNumber(): Int {
         return Random.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER)
     }
 
