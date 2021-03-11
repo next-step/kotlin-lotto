@@ -47,4 +47,16 @@ internal class LottoTest {
 
         assertThat(lotto1.matchCount(lotto2)).isEqualTo(6)
     }
+
+    @Test
+    fun `로또에 같은 로또 넘버가 있는지`() {
+        val lotto = Lotto(setOf(number1, number2, number3, number4, number5, number6))
+        assertThat(lotto.contains(number1)).isTrue()
+    }
+
+    @Test
+    fun `로또에 같은 로또 넘버가 없는지`() {
+        val lotto = Lotto(setOf(number1, number2, number3, number4, number5, number6))
+        assertThat(lotto.contains(number7)).isFalse()
+    }
 }

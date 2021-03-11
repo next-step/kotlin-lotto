@@ -10,6 +10,8 @@ data class Lotto(val elements: Set<LottoNumber>) {
         return elements.count { it in other.elements }
     }
 
+    fun contains(bonusNumber: LottoNumber) = bonusNumber in elements
+
     companion object {
         const val SIZE = 6
         val PRICE = Money(1000)
