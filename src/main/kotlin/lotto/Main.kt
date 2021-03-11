@@ -1,7 +1,12 @@
 package lotto
 
-import lotto.model.*
+import lotto.model.Lotto
+import lotto.model.LottoNumberPool
+import lotto.model.Lottos
+import lotto.model.Money
+import lotto.model.WinningLotto
 import lotto.view.InputView
+import lotto.model.LottoNumber
 import lotto.view.ResultView
 
 fun main() {
