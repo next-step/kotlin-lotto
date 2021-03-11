@@ -1,4 +1,4 @@
-package lotto
+package domain
 
 class Lottery(val numbers: List<Int>, val price: Int = DEFAULT_LOTTO_PRICE) {
 

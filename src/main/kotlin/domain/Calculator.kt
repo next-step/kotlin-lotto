@@ -1,4 +1,4 @@
-package calculator
+package domain
 
 object Calculator {
     private const val FIND_DELIMITER_AND_OPERAND_PATTERN = "//(.)\n(.*)"
@@ -14,7 +14,9 @@ object Calculator {
             return MINIMUM_OPERAND_VALUE
         }
 
-        val result = FIND_DELIMITER_AND_OPERAND_PATTERN_REGEX.find(input) ?: return addWhenNotExistCustomDelimiter(input)
+        val result = FIND_DELIMITER_AND_OPERAND_PATTERN_REGEX.find(input) ?: return addWhenNotExistCustomDelimiter(
+            input
+        )
 
         result.let {
             val delimiter = it.groupValues[DELIMITER_INDEX]
