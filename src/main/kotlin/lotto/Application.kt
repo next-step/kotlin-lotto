@@ -33,6 +33,6 @@ fun main() {
     val result = lottos.match(winningLotto)
     printResult(result)
 
-    val yield = result.calculateYield(purchase)
-    printYield(`yield`)
+    val statistics = result.calculateStatistics(purchase)
+    printYield(statistics)
 }

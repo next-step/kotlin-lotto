@@ -3,8 +3,8 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.Rank
-import lotto.domain.Yield
 import lotto.domain.Result
+import lotto.domain.Statistics
 
 fun printLottos(lottos: Lottos) {
     println(String.format("%d개를 구매했습니다.", lottos.elements.size))
@@ -27,6 +27,6 @@ fun printResult(result: Result) {
     }
 }
 
-fun printYield(yield: Yield) {
-    println(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", `yield`.value))
+fun printYield(statistics: Statistics) {
+    println(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", statistics.value))
 }
