@@ -53,10 +53,10 @@ private fun calculateWinningLotto(lotto: List<Lotto>): LottoGame {
 
 private fun showResult(lottoGame: LottoGame) {
     ResultView.showWinningStatistics()
-    ResultView.show4th(lottoGame.getRankCount(LottoRank.FOURTH))
-    ResultView.show3rd(lottoGame.getRankCount(LottoRank.THIRD))
-    ResultView.show2nd(lottoGame.getRankCount(LottoRank.SECOND))
-    ResultView.show1st(lottoGame.getRankCount(LottoRank.FIRST))
+
+    for (i in 0 until LottoRank.values().size - 1) {
+        ResultView.showRankCount(lottoGame.getRankCount(LottoRank.values()[i]), LottoRank.values()[i])
+    }
 }
 
 private fun showProfit(lottoGame: LottoGame, budget: Int) {
