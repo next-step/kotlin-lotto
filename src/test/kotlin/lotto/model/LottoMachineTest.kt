@@ -2,8 +2,9 @@ package lotto.model
 
 import lotto.model.game.Lotto
 import lotto.model.game.LottoNumber
-import lotto.model.game.Lottos
 import lotto.model.game.LottoMachine
+import lotto.model.game.LottoNumberPool
+import lotto.model.game.Lottos
 import lotto.model.game.WinningLotto
 import lotto.model.input.Money
 import org.assertj.core.api.Assertions.assertThat
@@ -32,6 +33,7 @@ internal class LottoMachineTest {
         val lottoMachine = LottoMachine()
         val money = Money(15000)
         val lottoCount = lottoMachine.insertMoney(money)
+        lottoMachine.buyByManual(Lottos(LottoNumberPool, 0))
 
         // when
         val myLottos: Lottos = lottoMachine.buy(lottoCount)
@@ -46,6 +48,7 @@ internal class LottoMachineTest {
         val money = Money(15000)
         val lottoMachine = getTestLottoMachine(money)
         val winningLotto = getTestWinningLotto()
+        lottoMachine.buyByManual(Lottos(LottoNumberPool, 0))
 
         // when
         val result = lottoMachine.getResult(winningLotto)
@@ -65,6 +68,7 @@ internal class LottoMachineTest {
     private fun getTestLottoMachine(money: Money): LottoMachine {
         val lottoMachine = LottoMachine()
         val lottoCount = lottoMachine.insertMoney(money)
+        lottoMachine.buyByManual(Lottos(LottoNumberPool, 0))
         lottoMachine.buy(lottoCount)
 
         return lottoMachine

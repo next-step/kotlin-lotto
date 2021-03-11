@@ -22,9 +22,7 @@ class LottoMachine(private var money: Money) {
 
     fun buy(lottoCount: Int): Lottos {
         val lottoByAuto = Lottos(LOTTO_NUMBER_POOL, lottoCount)
-
         val newLottos: List<Lotto> = this.lottos.lottos
-
         val list = newLottos.toMutableList()
         lottoByAuto.lottos.forEach { list.add(it) }
         lottos = Lottos(list)

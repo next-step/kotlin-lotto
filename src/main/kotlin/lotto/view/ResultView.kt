@@ -12,6 +12,7 @@ object ResultView {
 
     fun printLottoCount(lottoCount: Int) {
         println("${lottoCount}개를 구매했습니다.")
+        println()
     }
 
     fun printResult(results: List<Result>) {
@@ -19,7 +20,11 @@ object ResultView {
         printResultStatistics(results)
     }
 
-    fun printResultStatistics(results: List<Result>) {
+    fun printEarningRate(earningRate: BigDecimal) {
+        println("총 수익률은 $earningRate")
+    }
+
+    private fun printResultStatistics(results: List<Result>) {
         results.forEach {
             val coincidence = it.coincidence
             val matchCount = it.matchCount
@@ -29,10 +34,7 @@ object ResultView {
             print("(${coincidence.prizeMoney}원)")
             println("- ${matchCount}개")
         }
-    }
-
-    fun printEarningRate(earningRate: BigDecimal) {
-        println("총 수익률은 $earningRate")
+        println()
     }
 
     private fun printStatisticsInstruction() {

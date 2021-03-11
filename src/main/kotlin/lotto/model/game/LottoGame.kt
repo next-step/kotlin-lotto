@@ -1,7 +1,6 @@
 package lotto.model.game
 
 import lotto.model.input.InputReader
-import lotto.model.input.Money
 import lotto.model.result.Result
 import java.math.BigDecimal
 
@@ -9,26 +8,23 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
     var totalCount: Int = 0
         private set
 
-    fun ready(money: Money): Int {
-        totalCount = lottoMachine.insertMoney(money)
+    fun ready(): Int {
+        totalCount = lottoMachine.insertMoney(inputReader.readBudget())
         return totalCount
     }
 
     fun selectByManual(manualCount: Int): Lottos {
         require(manualCount <= totalCount) { "예산으로 구매가 불가능한 갯수입니다." }
 
-        val lottos = (1..manualCount)
-            .map { inputReader.readLottoNumbers() }
-
-        val lottoByManual = Lottos(lottos)
+        val lottoByManual = Lottos(getLottoNumbersByManual(manualCount))
         lottoMachine.buyByManual(lottoByManual)
 
         return lottoByManual
     }
 
-    fun buy(lottoCount: Int): Lottos {
-        require(totalCount >= lottoCount) { "예산으로 구매가 불가능한 갯수입니다." }
-        return lottoMachine.buy(lottoCount)
+    fun buyByAuto(manualCount: Int): Lottos {
+        require(totalCount >= manualCount) { "예산으로 구매가 불가능한 갯수입니다." }
+        return lottoMachine.buy(totalCount - manualCount)
     }
 
     fun getResult(winningLotto: WinningLotto): List<Result> {
@@ -45,5 +41,14 @@ class LottoGame(private val lottoMachine: LottoMachine, private val inputReader:
 
     fun selectBonusBall(winningNumbers: Lotto): LottoNumber {
         return inputReader.readBonusNumber(winningNumbers)
+    }
+
+    private fun getLottoNumbersByManual(manualCount: Int): List<Lotto> {
+        return (ONE..manualCount)
+            .map { inputReader.readLottoNumbers() }
+    }
+
+    companion object {
+        private const val ONE = 1
     }
 }
