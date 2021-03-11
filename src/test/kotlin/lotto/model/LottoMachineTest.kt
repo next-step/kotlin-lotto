@@ -35,4 +35,27 @@ internal class LottoMachineTest {
         // then
         assertThat(myLottos.lottos.size).isEqualTo(15)
     }
+
+    @Test
+    fun `WinningLotto를 인자로 주면, 로또 결과를 반환한다`() {
+        // given
+        val money = Money(15000)
+        val lottoMachine = getTestLottoMachine(money)
+
+        // when
+        val result = lottoMachine.getResult()
+
+        // then
+        assertThat(result.size).isEqualTo(5)
+    }
+
+    private fun getTestLottoMachine(money: Money): LottoMachine {
+        val lottoMachine = LottoMachine()
+        lottoMachine.insertMoney(money)
+
+        val lottoNumberPool = LottoNumberPool
+        lottoMachine.buy(lottoNumberPool)
+
+        return lottoMachine
+    }
 }

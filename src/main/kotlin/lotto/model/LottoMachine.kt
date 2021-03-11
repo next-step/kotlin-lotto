@@ -14,4 +14,8 @@ class LottoMachine(private var money: Money) {
     fun buy(lottoNumberPool: LottoNumberPool): Lottos {
         return Lottos(lottoNumberPool, getAvailableCount())
     }
+
+    fun getResult(): Map<Coincidence, Int> {
+        TODO("Not yet implemented")
+    }
 }

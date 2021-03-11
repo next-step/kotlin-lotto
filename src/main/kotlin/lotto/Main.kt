@@ -18,7 +18,7 @@ fun main() {
     lottoMachine.insertMoney(budget)
     ResultView.printLottoCount(lottoMachine)
 
-    val myLottos = lottoMachine.buy(lottoPool)
+    val myLottos: Lottos = lottoMachine.buy(lottoPool)
     ResultView.printMyLottos(myLottos)
 
     val winningNumbers: Lotto = InputView.askWinningLottoNumbers()
