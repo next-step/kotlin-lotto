@@ -51,12 +51,12 @@ internal class LottoTest {
     @Test
     fun `로또에 같은 로또 넘버가 있는지`() {
         val lotto = Lotto(setOf(number1, number2, number3, number4, number5, number6))
-        assertThat(lotto.contains(number1)).isTrue()
+        assertThat(number1 in lotto).isTrue()
     }
 
     @Test
     fun `로또에 같은 로또 넘버가 없는지`() {
         val lotto = Lotto(setOf(number1, number2, number3, number4, number5, number6))
-        assertThat(lotto.contains(number7)).isFalse()
+        assertThat(number7 in lotto).isFalse()
     }
 }
