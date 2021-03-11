@@ -8,33 +8,36 @@ import org.junit.jupiter.params.provider.NullAndEmptySource
 
 internal class StringAddCalculatorTest {
     @ParameterizedTest
-    @CsvSource(value = [
-        "1:2,3|6",
-        """//?\n1?2|3"""
-    ], delimiter = '|')
+    @CsvSource(
+        value = [
+            "1:2,3|6",
+            """//?\n1?2|3"""
+        ],
+        delimiter = '|'
+    )
     fun `입력한 식을 더한다`(expression: String, expect: Int) {
-        //given
+        // given
         val adder = PositiveAdder()
         val calculator = StringAddCalculator(adder)
 
-        //when
+        // when
         val calculate = calculator.calculate(expression)
 
-        //then
+        // then
         assertThat(calculate).isEqualTo(expect)
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     fun `빈문자열과 null은 0을 반환한다`(expression: String?) {
-        //given
+        // given
         val adder = PositiveAdder()
         val calculator = StringAddCalculator(adder)
 
-        //when
+        // when
         val calculate = calculator.calculate(expression)
 
-        //then
+        // then
         assertThat(calculate).isEqualTo(0)
     }
 }

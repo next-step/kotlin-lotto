@@ -12,7 +12,7 @@ class CustomSeparator : SeparatorPolicy {
     }?.let {
         val customDelimiter = it.groupValues[1]
         it.groupValues[2].splitToList(customDelimiter)
-    }?: emptyList()
+    } ?: emptyList()
 
     private fun String.splitToList(delimiter: String) = split(delimiter).toList()
 
