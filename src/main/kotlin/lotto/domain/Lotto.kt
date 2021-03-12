@@ -7,8 +7,10 @@ data class Lotto(val elements: Set<LottoNumber>) {
     }
 
     fun matchCount(other: Lotto): Int {
-        return elements.filter { it in other.elements }.count()
+        return elements.count { it in other.elements }
     }
+
+    operator fun contains(bonusNumber: LottoNumber) = bonusNumber in elements
 
     companion object {
         const val SIZE = 6

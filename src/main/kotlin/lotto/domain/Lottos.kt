@@ -2,10 +2,9 @@ package lotto.domain
 
 data class Lottos(val elements: List<Lotto>) {
 
-    fun match(winningLotto: Lotto): Result {
+    fun match(winningLotto: WinningLotto): Result {
         return Result(
-            elements.map { winningLotto.matchCount(it) }
-                .map { Rank.of(it) }
+            elements.map { winningLotto.match(it) }
                 .groupingBy { it }
                 .eachCount()
         )
