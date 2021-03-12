@@ -2,9 +2,9 @@ package lotto
 
 import kotlin.math.truncate
 
-class LottoGame(pickLottoNumbers: List<LottoNumbers>, winningNumbers: LottoNumbers) {
+class LottoGame(winningNumbers: WinningNumbers, pickLottoNumbers: List<LottoNumbers>) {
     val result: Result =
-        Result(pickLottoNumbers.map { Ranking(WinningNumbers(winningNumbers, 0), it).rank() })
+        Result(pickLottoNumbers.map { Ranking(winningNumbers, it).rank() })
 
     class Result(private val ranks: List<Ranking.Rank>) : List<Ranking.Rank> by ranks {
         fun entries(): Map<Ranking.Rank, Int> = ranks.groupingBy { it }
