@@ -3,7 +3,6 @@ package lotto.domain
 import lotto.data.WinningNumbers
 import lotto.domain.maker.DefaultLotteryTicketMaker
 import lotto.domain.maker.LotteryTicketMaker
-import lotto.enums.LotteryMatchType
 
 class Buyer {
 

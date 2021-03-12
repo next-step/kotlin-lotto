@@ -1,7 +1,5 @@
 package lotto.ui
 
-import lotto.data.LottoNumber
-import lotto.data.LottoNumbers
 import lotto.data.WinningNumbers
 
 object WinningInputView {
