@@ -4,7 +4,7 @@ import kotlin.math.truncate
 
 class LottoGame(pickLottoNumbers: List<LottoNumbers>, winningNumbers: LottoNumbers) {
     val result: Result =
-        Result(pickLottoNumbers.map { Ranking(it, winningNumbers).rank })
+        Result(pickLottoNumbers.map { Ranking(WinningNumbers(winningNumbers, 0), it).rank() })
 
     class Result(private val ranks: List<Ranking.Rank>) : List<Ranking.Rank> by ranks {
         fun entries(): Map<Ranking.Rank, Int> = ranks.groupingBy { it }

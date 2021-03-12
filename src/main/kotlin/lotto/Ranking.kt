@@ -1,23 +1,35 @@
 package lotto
 
-class Ranking(match: Match) {
-    val rank: Rank = Rank.of(match.count)
+class Ranking(private val winningNumbers: WinningNumbers, private val lottoNumbers: LottoNumbers) {
+    fun rank(): Rank {
+        val match = winningNumbers.match(lottoNumbers)
+        if (Rank.FIRST.same(match)) {
+            return Rank.FIRST
+        }
 
-    constructor(theNumbers: LottoNumbers, other: LottoNumbers) : this(Match(theNumbers, other))
+        if (Rank.SECOND.same(match) &&
+            winningNumbers.matchBonus(lottoNumbers)
+        ) {
+            return Rank.SECOND
+        }
 
-    enum class Rank(val matchCount: Int = 0, val amount: Long = 0) {
-        FOURTH(3, 5_000L),
-        THIRD(4, 50_000L),
-        SECOND(5, 1_500_000L),
-        FIRST(6, 2_000_000_000L),
+        return Rank.of(match)
+    }
+
+    enum class Rank(val match: Match = Match(), val amount: Long = 0) {
+        FIFTH(Match(3), 5_000L),
+        FOURTH(Match(4), 50_000L),
+        THIRD(Match(5), 1_500_000L),
+        SECOND(Match(5), 30_000_000L),
+        FIRST(Match(6), 2_000_000_000L),
         MISS;
 
         fun prize(count: Int): Money = Money(amount * count)
 
-        private fun same(count: Int): Boolean = matchCount == count
+        fun same(match: Match): Boolean = match == this.match
 
         companion object {
-            fun of(count: Int): Rank = values().firstOrNull { it.same(count) } ?: MISS
+            fun of(match: Match): Rank = values().firstOrNull { it.same(match) } ?: MISS
         }
     }
 }

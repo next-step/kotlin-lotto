@@ -1,5 +1,5 @@
 package lotto
 
-class Match(left: List<Int>, right: List<Int>) {
-    val count: Int = left.intersect(right).size
+data class Match(val count: Int = 0) {
+    constructor(left: List<Int>, right: List<Int>) : this(left.intersect(right).size)
 }
