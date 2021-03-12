@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
+import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
+
 class LottoTicket(lottoNumbers: List<LottoNumber>) {
     val value: List<LottoNumber> = lottoNumbers.sortedBy { it.value }
 
@@ -20,15 +23,13 @@ class LottoTicket(lottoNumbers: List<LottoNumber>) {
     }
 
     companion object {
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
 
         fun generateAuto(): LottoTicket {
             val numbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled().slice(0..5)
 
             return LottoTicket(
                 numbers.map { number ->
-                    LottoNumber(number)
+                    LottoNumber.from(number)
                 }
             )
         }
@@ -36,7 +37,7 @@ class LottoTicket(lottoNumbers: List<LottoNumber>) {
         fun generateManual(numbers: List<Int>): LottoTicket {
             return LottoTicket(
                 numbers.map { number ->
-                    LottoNumber(number)
+                    LottoNumber.from(number)
                 }
             )
         }

@@ -9,16 +9,13 @@ class InputView {
         return readLine()!!.toInt()
     }
 
-    fun inputPrizeNumber(): List<LottoNumber> {
+    fun inputPrizeNumber(): List<String> {
         println("\n지난 주 당첨 번호를 입력해 주세요")
         return readLine()!!.split(", ")
-            .map {
-                LottoNumber(it.toInt())
-            }
     }
 
-    fun inputBonusNumber(): LottoNumber {
+    fun inputBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        return LottoNumber(readLine()!!.toInt())
+        return readLine()!!.toInt()
     }
 }
