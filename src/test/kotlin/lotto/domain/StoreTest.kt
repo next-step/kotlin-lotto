@@ -9,7 +9,7 @@ internal class StoreTest {
     fun `금액에 맞게 로또를 발급해준다`() {
         // given
         val nums = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto.createAutoLotto(nums)
+        val lotto = Lotto.createLotto(nums)
         val expect = LottoPaper(listOf(lotto, lotto))
 
         // when
@@ -23,14 +23,14 @@ internal class StoreTest {
     fun `금액에 맞게 수동 로또와 자동 로또를 함께 구매 할 수 있다`() {
         // given
         val autoNums = listOf(1, 2, 3, 4, 5, 6)
-        val autoLotto = Lotto.createAutoLotto(autoNums)
-        val selfLotto = Lotto.createSelfLotto(listOf(7, 8, 9, 4, 10, 11))
+        val autoLotto = Lotto.createLotto(autoNums)
+        val selfLottoNums = listOf(7, 8, 9, 4, 10, 11)
 
         val store = Store(lottoNumsGenerator = StaticLottoNumsGenerator(autoNums))
-        val expect = LottoPaper(listOf(selfLotto, autoLotto, autoLotto))
+        val expect = LottoPaper(listOf(Lotto.createLotto(selfLottoNums), autoLotto, autoLotto))
 
         // when
-        val result: LottoPaper = store.sell(Money(3000), listOf(selfLotto))
+        val result: LottoPaper = store.sell(Money(3000), listOf(selfLottoNums))
 
         // then
         assertThat(result).isEqualTo(expect)

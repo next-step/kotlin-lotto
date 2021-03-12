@@ -5,9 +5,10 @@ internal class Store(
     private val lottoNumsGenerator: LottoNumsGenerator = RandomLottoNumsGenerator()
 ) {
 
-    internal fun sell(money: Money, selfLottos: List<Lotto> = listOf()): LottoPaper {
-        val autoLottoCount = (money / lottoPrice).value - selfLottos.size
-        val autoLottos = (1..autoLottoCount).map { Lotto(lottoNumsGenerator.generate(), true) }
+    internal fun sell(money: Money, selfLottosNums: List<List<Int>> = listOf()): LottoPaper {
+        val selfLottos = selfLottosNums.map { Lotto.createLotto(it) }
+        val autoLottoCount = (money / lottoPrice).value - selfLottosNums.size
+        val autoLottos = (1..autoLottoCount).map { Lotto(lottoNumsGenerator.generate()) }
         return LottoPaper(selfLottos.plus(autoLottos))
     }
 

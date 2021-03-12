@@ -7,8 +7,9 @@ import lotto.domain.Rank
 
 internal class OutputView {
 
-    internal fun renderLottoPaper(lottoPaper: LottoPaper) {
-        println("\n수동으로 ${lottoPaper.selfLottoCount}장, 자동으로 ${lottoPaper.autoLottoCount}개를 구매했습니다.")
+    internal fun renderLottoPaper(selfLottoCount: Int, lottoPaper: LottoPaper) {
+        val autoLottoCount = lottoPaper.lottos.size - selfLottoCount
+        println("\n수동으로 ${selfLottoCount}장, 자동으로 ${autoLottoCount}개를 구매했습니다.")
         lottoPaper.lottos.forEach(this::renderLotto)
         println()
     }
