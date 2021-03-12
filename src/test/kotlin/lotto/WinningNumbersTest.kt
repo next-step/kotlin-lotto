@@ -10,4 +10,6 @@ class WinningNumbersTest {
             WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), bonusNumber = 7)
         }
     }
+
+    class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNumber: Int)
 }
