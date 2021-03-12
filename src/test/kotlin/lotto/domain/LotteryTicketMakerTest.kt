@@ -12,9 +12,9 @@ class LotteryTicketMakerTest {
         val lotteryTicketMaker = DefaultLotteryTicketMaker()
         val lotteryTicket: LotteryTicket = lotteryTicketMaker.createLotteryTicket()
 
-        val lottoNumberList = lotteryTicket.lottoNumbers.lottoNumbers
+        val lottoNumberList: List<LottoNumber> = lotteryTicket.lottoNumbers.lottoNumbers
         assertThat(lottoNumberList).hasSize(6)
-        assertThat(lottoNumberList).isSubsetOf((1..45).map { LottoNumber(it) })
+        assertThat(lottoNumberList).isSubsetOf((1..45).map { LottoNumber.from(it) })
 
         // 겹치는 숫자가 없다.
         for (number in lottoNumberList) {

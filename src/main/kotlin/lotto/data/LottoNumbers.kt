@@ -5,7 +5,7 @@ import lotto.enums.LotteryMatchType
 class LottoNumbers(
     numbers: List<Int>
 ) {
-    val lottoNumbers = numbers.map { LottoNumber(it) }
+    val lottoNumbers: List<LottoNumber> = numbers.map { LottoNumber.from(it) }
 
     init {
         require(lottoNumbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호의 개수는 6개여야 합니다." }

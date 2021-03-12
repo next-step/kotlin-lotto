@@ -5,5 +5,5 @@ class WinningNumbers(
     bonusNumber: Int
 ) {
     val lottoNumbers: LottoNumbers = LottoNumbers(lottoNumbers)
-    val bonusNumber: LottoNumber = LottoNumber(bonusNumber)
+    val bonusNumber: LottoNumber = LottoNumber.from(bonusNumber)
 }
