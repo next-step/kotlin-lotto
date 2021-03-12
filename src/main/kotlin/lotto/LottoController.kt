@@ -19,6 +19,6 @@ fun main() {
     val prizeNumbers = inputView.inputPrizeNumber()
     val bonusNumber = inputView.inputBonusNumber()
 
-    val ranks = lottoResult.getMyLottoesRank(lottoes, WinningLotto(prizeNumbers, bonusNumber))
+    val ranks = lottoResult.getMyLottoesRanks(lottoes, WinningLotto(prizeNumbers, bonusNumber))
     outputView.printLottoesResult(money, ranks)
 }

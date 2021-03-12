@@ -3,10 +3,20 @@ package lotto.domain
 class LottoTicket(lottoNumbers: List<LottoNumber>) {
     val value: List<LottoNumber> = lottoNumbers.sortedBy { it.value }
 
-    fun getCountOfMatch(winningNumbers: List<LottoNumber>): Int {
+    fun getTicketRank(winningLotto: WinningLotto): Rank {
+        val countOfMatch = getCountOfMatch(winningLotto.winningNumbers)
+        val bonusMatches = isBonusNumberMatch(winningLotto.bonusNumber)
+        return Rank.valueOf(countOfMatch, bonusMatches)
+    }
+
+    private fun getCountOfMatch(winningNumbers: List<LottoNumber>): Int {
         return value.count { lottoNumber ->
             winningNumbers.contains(lottoNumber)
         }
+    }
+
+    private fun isBonusNumberMatch(bonusNumber: LottoNumber): Boolean {
+        return value.contains(bonusNumber)
     }
 
     companion object {
