@@ -4,6 +4,7 @@ import lotto.model.LottoPlace.FIRST
 import lotto.model.LottoPlace.SECOND
 import lotto.model.LottoPlace.THIRD
 import lotto.model.LottoPlace.FOURTH
+import lotto.model.LottoPlace.FIFTH
 import lotto.model.LottoPlace.MISS
 
 data class WinningCounter(
@@ -11,7 +12,8 @@ data class WinningCounter(
         FIRST to 0,
         SECOND to 0,
         THIRD to 0,
-        FOURTH to 0
+        FOURTH to 0,
+        FIFTH to 0
     )
 ) : Map<LottoPlace, Int> by counter {
     val winningsSum: Money
@@ -24,8 +26,8 @@ data class WinningCounter(
             accu + lottoPlace.winnings * winningCount
         }
 
-    fun record(matchCount: Int) {
-        val place = LottoPlace.match(matchCount)
+    fun record(matchCount: Int, bonusCount: Int) {
+        val place = LottoPlace.match(matchCount, bonusCount)
 
         increment(place)
     }

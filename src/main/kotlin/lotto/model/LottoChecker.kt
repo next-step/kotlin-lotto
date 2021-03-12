@@ -1,15 +1,16 @@
 package lotto.model
 
-class LottoChecker(private val winningNumbers: WinningNumbers) {
-    fun check(tickets: LottoTickets, sumCostOfTickets: Money): LottoResult {
+class LottoChecker(private val winningNumbers: WinningNumbers, private val bonusNumbers: BonusNumbers) {
+    fun check(tickets: LottoTickets): WinningCounter {
         val winningCounter = WinningCounter()
 
         tickets.forEach {
-            val matchCount = it.countMatch(winningNumbers)
+            val winningCount = it.countMatch(winningNumbers)
+            val bonusCount = it.countMatch(bonusNumbers)
 
-            winningCounter.record(matchCount)
+            winningCounter.record(winningCount, bonusCount)
         }
 
-        return LottoResult(winningCounter, sumCostOfTickets)
+        return winningCounter
     }
 }
