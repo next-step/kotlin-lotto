@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoDrawMachine(private val pool: Set<Int>) {
     val size: Int = pool.size

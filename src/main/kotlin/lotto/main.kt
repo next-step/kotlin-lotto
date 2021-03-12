@@ -1,5 +1,14 @@
 package lotto
 
+import lotto.domain.LottoAgent
+import lotto.domain.LottoDrawMachine
+import lotto.domain.LottoGame
+import lotto.domain.LottoNumbers
+import lotto.domain.Money
+import lotto.view.Output
+import lotto.domain.WinningNumbers
+import lotto.view.UserInput
+
 fun main() {
     val expense = UserInput.Int("구입금액을 입력해 주세요.")
         .answer()

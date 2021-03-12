@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Ranking(private val winningNumbers: WinningNumbers, private val lottoNumbers: LottoNumbers) {
     fun rank(): Rank {

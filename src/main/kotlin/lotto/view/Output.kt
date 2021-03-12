@@ -1,5 +1,8 @@
-package lotto
+package lotto.view
 
+import lotto.domain.LottoGame
+import lotto.domain.LottoNumbers
+import lotto.domain.Ranking
 import java.io.PrintWriter
 
 interface Output {

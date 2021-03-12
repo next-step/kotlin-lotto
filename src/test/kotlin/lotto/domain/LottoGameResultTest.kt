@@ -1,8 +1,8 @@
-package lotto
+package lotto.domain
 
-import lotto.Ranking.Rank
-import lotto.Ranking.Rank.FIRST
-import lotto.Ranking.Rank.MISS
+import lotto.domain.Ranking.Rank
+import lotto.domain.Ranking.Rank.FIRST
+import lotto.domain.Ranking.Rank.MISS
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.entry
 import org.junit.jupiter.api.Test
