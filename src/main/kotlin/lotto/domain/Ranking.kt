@@ -3,10 +3,6 @@ package lotto.domain
 class Ranking(private val winningNumbers: WinningNumbers, private val lottoNumbers: LottoNumbers) {
     fun rank(): Rank {
         val match = winningNumbers.match(lottoNumbers)
-        if (Rank.FIRST.same(match)) {
-            return Rank.FIRST
-        }
-
         if (Rank.SECOND.same(match) &&
             winningNumbers.matchBonus(lottoNumbers)
         ) {
