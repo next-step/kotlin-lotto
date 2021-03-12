@@ -2,7 +2,6 @@ package lotto
 
 import lotto.Ranking.Rank
 import lotto.Ranking.Rank.FIRST
-import lotto.Ranking.Rank.FOURTH
 import lotto.Ranking.Rank.MISS
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.entry
@@ -26,7 +25,7 @@ class LottoGameResultTest {
 
     @Test
     fun `구입금액 대비 당첨금액으로 수익률을 구한다`() {
-        assertThat(LottoGame.Result(MISS * 13 + FOURTH).profit())
+        assertThat(LottoGame.Result(MISS * 13 + Rank.FIFTH).profit())
             .isEqualTo(0.35)
     }
 
