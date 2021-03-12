@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoResult
 import lotto.domain.LottoStore
+import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
@@ -14,16 +15,10 @@ fun main() {
     val money = inputView.inputMoney()
     val lottoes = lottoStore.purchaseAuto(money)
 
-    outputView.printPurchasedQuantity(lottoes.toList().size)
-    outputView.printPurchasedLottos(lottoes)
+    outputView.printPurchasedLottoes(lottoes)
     val prizeNumbers = inputView.inputPrizeNumber()
     val bonusNumber = inputView.inputBonusNumber()
 
-    val ranks = lottoResult.getMyLottoesRank(lottoes, prizeNumbers, bonusNumber)
-    outputView.printLottoesResult(ranks)
-    val prizeMoney = ranks.sumBy { rank ->
-        rank.prizeMoney
-    }
-
-    outputView.printRateOfReturn(money, prizeMoney)
+    val ranks = lottoResult.getMyLottoesRank(lottoes, WinningLotto(prizeNumbers, bonusNumber))
+    outputView.printLottoesResult(money, ranks)
 }

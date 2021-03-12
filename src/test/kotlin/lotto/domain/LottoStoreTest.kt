@@ -1,6 +1,5 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.LottoStore
 import lotto.domain.LottoStore.Companion.LOTTO_COST
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest

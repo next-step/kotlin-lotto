@@ -4,20 +4,14 @@ class LottoStore {
 
     fun purchaseAuto(money: Int): Lottoes {
         val quantity = money / LOTTO_COST
-        val lottoes = arrayListOf<Lotto>()
-        repeat(quantity) {
-            lottoes.add(Lotto.generateAuto())
-        }
+        val lottoes = (1..quantity).map { LottoTicket.generateAuto() }
 
         return Lottoes(lottoes)
     }
 
     fun purchaseManual(money: Int, numbers: List<Int>): Lottoes {
         val quantity = money / LOTTO_COST
-        val lottoes = arrayListOf<Lotto>()
-        repeat(quantity) {
-            lottoes.add(Lotto.generateManual(numbers))
-        }
+        val lottoes = (1..quantity).map { LottoTicket.generateManual(numbers) }
 
         return Lottoes(lottoes)
     }
