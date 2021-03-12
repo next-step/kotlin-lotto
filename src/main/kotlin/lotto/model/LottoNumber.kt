@@ -2,7 +2,7 @@ package lotto.model
 
 data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
     init {
-        require(number in 1..45) { "로또 번호는 1애서 45 사이의 자연수입니다!" }
+        require(number in NUMBERS_MINIMUM..NUMBERS_MAXIMUM) { "로또 번호는 $NUMBERS_MINIMUM 애서 $NUMBERS_MAXIMUM 사이의 자연수입니다!" }
     }
 
     override fun toString(): String {
@@ -11,6 +11,7 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
     companion object {
         const val NUMBERS_MAXIMUM = 45
+        const val NUMBERS_MINIMUM = 1
     }
 
     override fun compareTo(other: LottoNumber): Int {

@@ -8,7 +8,7 @@ import lotto.model.LottoPlace.FIFTH
 import lotto.model.LottoPlace.MISS
 
 data class WinningCounter(
-    val counter: MutableMap<LottoPlace, Int> = mutableMapOf(
+    private val counter: MutableMap<LottoPlace, Int> = mutableMapOf(
         FIRST to 0,
         SECOND to 0,
         THIRD to 0,
@@ -21,12 +21,21 @@ data class WinningCounter(
             return counter.entries.fold(Money.zero, sumWinningsTimesCount())
         }
 
+    constructor(tickets: LottoTickets, winningNumbers: WinningNumbers, bonusNumbers: BonusNumbers) : this() {
+        tickets.forEach {
+            val winningCount = it.countMatch(winningNumbers)
+            val bonusCount = it.countMatch(bonusNumbers)
+
+            record(winningCount, bonusCount)
+        }
+    }
+
     private fun sumWinningsTimesCount() =
         { accu: Money, (lottoPlace, winningCount): MutableMap.MutableEntry<LottoPlace, Int> ->
             accu + lottoPlace.winnings * winningCount
         }
 
-    fun record(matchCount: Int, bonusCount: Int) {
+    private fun record(matchCount: Int, bonusCount: Int) {
         val place = LottoPlace.match(matchCount, bonusCount)
 
         increment(place)
