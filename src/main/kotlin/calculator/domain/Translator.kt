@@ -1,5 +1,6 @@
 package calculator.domain
 
+import calculator.vo.DEFAULT_TOKEN_VALUE
 import calculator.vo.Token
 import calculator.vo.Tokens
 
@@ -25,7 +26,12 @@ object Translator {
         return result
     }
 
-    private fun translateToToken(result: List<String>) = result.asSequence().map { it.toToken() }.toList()
+    private fun translateToToken(result: List<String>): List<Token> {
+        return result.asSequence().map {
+            if (it.isBlank()) DEFAULT_TOKEN_VALUE
+            it.toToken()
+        }.toList()
+    }
 
     private fun translateWithDefault(input: String) = input.split(DEFAULT_DELIMITER_1, DEFAULT_DELIMITER_2)
 
@@ -33,8 +39,8 @@ object Translator {
         val regexForCustomDelim = Regex("//(.)\n(.*)").find(input)
 
         regexForCustomDelim?.let {
-            val (customDelimiter, parsedInput) = it.destructured
-            return parsedInput.split(customDelimiter)
+            val customDelimiter = it.groupValues[1]
+            return it.groupValues[2].split(customDelimiter)
         }
 
         return emptyList()
