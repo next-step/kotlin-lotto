@@ -1,46 +1,26 @@
 package calculator.domain
 
-import calculator.vo.Token
 import calculator.vo.Tokens
 
-const val DEFAULT_DELIMITER_1 = ','
-const val DEFAULT_DELIMITER_2 = ':'
+const val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"
+private val DEFAULT_DELIMITERS = listOf(",", ":")
 
-object Translator {
-    fun run(input: String?): Tokens {
-        if (input.isNullOrBlank()) {
-            return Tokens(listOf(Token()))
-        }
-        val result = translateToList(input)
-        val tokens = translateToToken(result)
-        return Tokens(tokens)
+class Translator {
+    fun translate(input: String): Tokens {
+        val parsedInput = translateWithCustom(input) ?: translateWithDefault(input)
+        return Tokens.of(parsedInput)
     }
 
-    private fun translateToList(input: String): List<String> {
-        var result = translateWithCustom(input)
+    private fun translateWithDefault(input: String) = input.split(*DEFAULT_DELIMITERS.toTypedArray())
 
-        if (result.isEmpty()) {
-            result = translateWithDefault(input)
-        }
-        return result
-    }
-
-    private fun translateToToken(result: List<String>) = result.asSequence().map { it.toToken() }.toList()
-
-    private fun translateWithDefault(input: String) = input.split(DEFAULT_DELIMITER_1, DEFAULT_DELIMITER_2)
-
-    private fun translateWithCustom(input: String): List<String> {
-        val regexForCustomDelim = Regex("//(.)\n(.*)").find(input)
+    private fun translateWithCustom(input: String): List<String>? {
+        val regexForCustomDelim = Regex(CUSTOM_DELIMITER_PATTERN).find(input)
 
         regexForCustomDelim?.let {
             val (customDelimiter, parsedInput) = it.destructured
             return parsedInput.split(customDelimiter)
         }
 
-        return emptyList()
+        return null
     }
-}
-
-fun String.toToken(): Token {
-    return Token(Checker.parseInteger(this))
 }

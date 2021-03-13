@@ -1,9 +1,9 @@
 package calculator.domain
 
-import calculator.vo.Tokens
-
 object Calculator {
-    fun run(tokens: Tokens): Int {
+    fun run(input: String?): Int {
+        if (input.isNullOrBlank()) return 0
+        val tokens = Translator().translate(input)
         return tokens.sum()
     }
 }
