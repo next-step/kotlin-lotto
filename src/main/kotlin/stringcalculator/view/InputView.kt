@@ -5,7 +5,7 @@ object InputView {
 
     fun input(): String {
         val inputValue = readLine() ?: throw IllegalArgumentException("")
-        if(inputValue.isNullOrBlank()) return ZERO_VALUE
+        if (inputValue.isNullOrBlank()) return ZERO_VALUE
         return inputValue
     }
 }
