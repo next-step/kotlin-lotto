@@ -19,14 +19,21 @@ enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBo
     }
 
     companion object {
+        private const val TWO = 2
+
         fun match(myLotto: Lotto, winningLotto: WinningLotto): Coincidence {
             return findMatchedResult(myLotto, winningLotto) ?: MISS
         }
 
         private fun findMatchedResult(myLotto: Lotto, winningLotto: WinningLotto): Coincidence? {
-            return values()
+            val matchedResult = values()
                 .filter { it.coincidenceCount == myLotto.getMatchCount(winningLotto.winningLotto) }
-                .firstOrNull { it.hasBonusNum == myLotto.hasNumber(winningLotto.bonusNumber) }
+
+            if (matchedResult.size == TWO) {
+                return matchedResult.firstOrNull { it.hasBonusNum == myLotto.hasNumber(winningLotto.bonusNumber) }
+            }
+
+            return matchedResult.firstOrNull()
         }
     }
 }
