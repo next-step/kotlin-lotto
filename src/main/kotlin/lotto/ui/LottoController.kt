@@ -13,6 +13,7 @@ class LottoController private constructor(
     fun run() {
         outputView.printPurchaseAmountMessage()
         val tickets = LottoStore().purchase(inputView.read())
+        outputView.printLottoTickets(tickets)
     }
 
     companion object {
