@@ -1,6 +1,6 @@
 package lotto.model.game
 
-import lotto.model.input.InputReader
+import lotto.view.InputReader
 import lotto.model.result.Result
 import java.math.BigDecimal
 

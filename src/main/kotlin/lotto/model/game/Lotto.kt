@@ -20,7 +20,7 @@ data class Lotto(val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.contains(lottoNumber)
     }
 
-    fun getResult(winningLotto: Lotto, bonusNumber: LottoNumber): Coincidence? {
+    fun getResult(winningLotto: Lotto, bonusNumber: LottoNumber): Coincidence {
         return Coincidence.match(this, WinningLotto(winningLotto, bonusNumber))
     }
 

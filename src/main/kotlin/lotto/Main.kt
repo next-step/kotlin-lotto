@@ -1,9 +1,9 @@
 package lotto
 
 import lotto.model.game.LottoGame
-import lotto.model.game.LottoGameController
+import lotto.controller.LottoGameController
 import lotto.model.game.LottoMachine
-import lotto.model.input.InputReader
+import lotto.view.InputReader
 
 fun main() {
     val lottoMachine = LottoMachine()

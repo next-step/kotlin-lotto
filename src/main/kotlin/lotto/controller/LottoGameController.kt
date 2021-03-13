@@ -1,6 +1,10 @@
-package lotto.model.game
+package lotto.controller
 
-import lotto.model.input.InputReader
+import lotto.model.game.Lotto
+import lotto.model.game.LottoGame
+import lotto.model.game.LottoNumber
+import lotto.model.game.WinningLotto
+import lotto.view.InputReader
 import lotto.view.InputView
 import lotto.view.ResultView
 
