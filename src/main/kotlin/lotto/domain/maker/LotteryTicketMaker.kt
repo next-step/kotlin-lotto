@@ -9,8 +9,8 @@ interface LotteryTicketMaker {
 
     fun createAutoLotteryTicket(): LotteryTicket
 
-    fun createManualLotteryTicket(numbers: List<Int>): LotteryTicket {
-        return LotteryTicket(LottoNumbers(numbers))
+    fun createManualLotteryTicket(lottoNumbers: LottoNumbers): LotteryTicket {
+        return LotteryTicket(lottoNumbers)
     }
 
     companion object {

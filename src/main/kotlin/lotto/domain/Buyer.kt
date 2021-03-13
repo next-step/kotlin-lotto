@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.data.BuyingData
 import lotto.data.WinningNumbers
 import lotto.domain.maker.DefaultLotteryTicketMaker
 import lotto.domain.maker.LotteryTicketMaker
@@ -9,10 +10,16 @@ class Buyer {
     private val tickets: MutableList<LotteryTicket> = mutableListOf()
 
     fun buyLotteryTickets(
-        payedPrice: Int,
+        buyingData: BuyingData,
         lotteryTicketMaker: LotteryTicketMaker = DefaultLotteryTicketMaker()
     ): List<LotteryTicket> {
-        repeat(payedPrice / lotteryTicketMaker.lotteryTicketPrice) {
+        var ticketCount = buyingData.inputPrice / lotteryTicketMaker.lotteryTicketPrice
+
+        for (lottoNumbers in buyingData.manualNumbersList) {
+            tickets.add(lotteryTicketMaker.createManualLotteryTicket(lottoNumbers))
+        }
+
+        repeat(ticketCount - buyingData.manualTicketCount) {
             tickets.add(lotteryTicketMaker.createAutoLotteryTicket())
         }
         return tickets

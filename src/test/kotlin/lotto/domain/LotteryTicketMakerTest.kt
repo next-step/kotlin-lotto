@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.data.LottoNumber
+import lotto.data.LottoNumbers
 import lotto.domain.maker.DefaultLotteryTicketMaker
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -33,7 +34,8 @@ class LotteryTicketMakerTest {
     @Test
     fun `수동 넘버를 생성한다`() {
         val lotteryTicketMaker = DefaultLotteryTicketMaker()
-        val lotteryTicket: LotteryTicket = lotteryTicketMaker.createManualLotteryTicket(listOf(11, 12, 13, 14, 15, 16))
+        val lottoNumbers = LottoNumbers(listOf(11, 12, 13, 14, 15, 16))
+        val lotteryTicket: LotteryTicket = lotteryTicketMaker.createManualLotteryTicket(lottoNumbers)
 
         val numbers = lotteryTicket.lottoNumbers.lottoNumbers
         assertThat(numbers).containsExactly(

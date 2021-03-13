@@ -12,14 +12,11 @@ object WinningInputView {
 
     private fun askWinningSixNumber(): List<Int> {
         val numbersString = readLine() ?: throw IllegalArgumentException("입력 값이 존재하지 않습니다.")
-        return splitWinningNumbers(numbersString)
+        return InputUtils.splitWinningNumbers(numbersString)
     }
 
     private fun askWinningBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
         return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("잘못된 입력값입니다.")
     }
-
-    private fun splitWinningNumbers(numbersString: String): List<Int> =
-        numbersString.split(",").map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("잘못된 입력값이 있습니다. ($it)") }
 }
