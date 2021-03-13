@@ -34,7 +34,7 @@ class LottoMachine(private var money: Money = Money(0)) {
 
         return Coincidence.values()
             .filterNot { it == Coincidence.MISS }
-            .map { it to Result(lottoTicket.getMatchedCount(it)) }
+            .map { it to Result(lottoTicket.getMatchedLottoCount(it)) }
             .toMap()
     }
 
