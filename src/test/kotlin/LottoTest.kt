@@ -61,7 +61,7 @@ class LottoTest {
     @Test
     fun `6개의 로또 번호가 있는 카드를 원하는 갯수만큼 추출한다`() {
         val cnt = 15
-        val lottoCards = lotto.extractNumber(cnt)
+        val lottoCards = lotto.extractNumber(cnt).cards
 
         assertThat(lottoCards.size, `is`(cnt))
         assertThat(lottoCards.filter { it.number.size == LOTTO_NUMBER_CNT }.size, `is`(cnt))
@@ -120,9 +120,11 @@ class LottoTest {
 
     @Test
     fun `정상적으로 당첨 통계 로직을 수행한다`() {
-        val lottoCards = listOf(
-            LottoCard(listOf(1, 2, 3, 4, 5, 6)), LottoCard(listOf(11, 12, 13, 14, 15, 16)),
-            LottoCard(listOf(1, 2, 3, 14, 15, 16))
+        val lottoCards = LottoCards(
+            listOf(
+                LottoCard(listOf(1, 2, 3, 4, 5, 6)), LottoCard(listOf(11, 12, 13, 14, 15, 16)),
+                LottoCard(listOf(1, 2, 3, 14, 15, 16))
+            )
         )
         val beforeWeekLottoCard = LottoCard(listOf(1, 2, 3, 4, 5, 6))
         val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard)

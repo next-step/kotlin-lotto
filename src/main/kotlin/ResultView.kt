@@ -1,5 +1,5 @@
-fun printLottoCards(lottoCards: List<LottoCard>) {
-    lottoCards.forEach { println(it) }
+fun printLottoCards(lottoCards: LottoCards) {
+    lottoCards.cards.forEach { println(it) }
 }
 
 fun printResult(statistic: List<Winning>, yieldRate: Double) {

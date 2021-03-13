@@ -17,8 +17,8 @@ class Lotto {
         return statistic.map { it.price }.sum().toDouble() / price
     }
 
-    fun getStatistic(lottoCards: List<LottoCard>, beforeWeekLottoCard: LottoCard): List<Winning> {
-        return lottoCards.mapNotNull {
+    fun getStatistic(lottoCards: LottoCards, beforeWeekLottoCard: LottoCard): List<Winning> {
+        return lottoCards.cards.mapNotNull {
             val count = getMatchCount(it, beforeWeekLottoCard)
             Winning.matchWinning(count)
         }
@@ -61,10 +61,12 @@ class Lotto {
         return price / LOTTO_PRICE
     }
 
-    fun extractNumber(cnt: Int): List<LottoCard> {
-        return (1..cnt).map {
-            LottoCard(LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT))
-        }
+    fun extractNumber(cnt: Int): LottoCards {
+        return LottoCards(
+            (1..cnt).map {
+                LottoCard(LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT))
+            }
+        )
     }
 
     companion object {
