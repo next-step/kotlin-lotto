@@ -5,10 +5,10 @@ import lotto.domain.result.LottoResult
 class LottoTickets(
     val tickets: List<LottoTicket>
 ) {
-    fun compare(winningTicket: WinningLottoTicket): LottoResult {
+    fun compare(winningLotto: WinningLotto): LottoResult {
         val result = LottoResult()
         tickets.forEach {
-            val winningBoard = winningTicket.compare(it)
+            val winningBoard = winningLotto.compare(it)
             result.add(winningBoard)
         }
         return result

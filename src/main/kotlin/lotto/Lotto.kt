@@ -1,8 +1,11 @@
 package lotto
 
+import lotto.domain.LottoNumber
 import lotto.domain.ticket.LottoTickets
+import lotto.domain.ticket.WinningLotto
 import lotto.domain.ticket.WinningLottoTicket
 import lotto.domain.vender.LottoTicketVendor
+import lotto.view.inputBonusNumber
 import lotto.view.inputPrice
 import lotto.view.inputWinningNumbers
 import lotto.view.showLottoTickets
@@ -17,7 +20,8 @@ class Lotto {
         showLottoTickets(tickets.tickets)
 
         val winningTicket = WinningLottoTicket(inputWinningNumbers().toNumbers())
-        val lottoResult = tickets.compare(winningTicket)
+        val bonusNumber = LottoNumber.of(inputBonusNumber())
+        val lottoResult = tickets.compare(WinningLotto(winningTicket, bonusNumber))
 
         showResultStatic(lottoResult, price)
     }

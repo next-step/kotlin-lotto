@@ -11,13 +11,16 @@ class WinningLottoTicket(
         }
     }
 
-    fun compare(ticket: LottoTicket): WinningBoard {
+    fun compare(ticket: LottoTicket, bonusNumber: LottoNumber): WinningBoard {
         val matchNumbers = mutableListOf<LottoNumber>()
         numbers.forEach {
             ticket.fillMatchNumber(matchNumbers, it)
         }
         return WinningBoard.findBy(matchNumbers.size)
+            .upgrade(ticket.hasNumber(bonusNumber))
     }
+
+    fun hasNot(bonusNumber: LottoNumber) = !numbers.contains(bonusNumber)
 
     companion object {
         const val WINNING_NUMBER_SIZE = 6

@@ -8,7 +8,7 @@ data class LottoNumber(
     }
 
     private fun validate() {
-        require(number in MIN_NUMBER..MAX_NUMBER){
+        require(number in MIN_NUMBER..MAX_NUMBER) {
             "로또 번호는 ${MIN_NUMBER}보다 크고 ${MAX_NUMBER}보다 작아야 합니다. number:$number"
         }
     }

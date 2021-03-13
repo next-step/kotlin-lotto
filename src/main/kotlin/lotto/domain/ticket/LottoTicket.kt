@@ -18,6 +18,8 @@ class LottoTicket(
         }
     }
 
+    fun hasNumber(lottoNumber: LottoNumber) = numbers.contains(lottoNumber)
+
     companion object {
         const val TICKET_SIZE = 6
 
@@ -25,7 +27,6 @@ class LottoTicket(
             .shuffled()
             .take(TICKET_SIZE)
             .toTicket()
-
 
         private fun Iterable<LottoNumber>.toTicket() = LottoTicket(this.toSet())
     }

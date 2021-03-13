@@ -15,19 +15,19 @@ internal class LottoResultTest {
     @ParameterizedTest
     @ValueSource(strings = ["NONE", "THREE", "FOUR", "FIVE", "SIX"])
     fun `결과의 초기값은 모두 0이다`(winningBoard: WinningBoard) {
-        //given
+        // given
         val result = LottoResult()
 
-        //when
+        // when
         val amount = result.get(winningBoard)
 
-        //then
+        // then
         assertThat(amount).isEqualTo(0)
     }
 
     @Test
     fun `로또 결과의 총 상금을 반환한다`() {
-        //given
+        // given
         val result = LottoResult()
         result.add(NONE)
         result.add(THREE)
@@ -37,10 +37,10 @@ internal class LottoResultTest {
 
         val expectReward = NONE.reward + THREE.reward + FOUR.reward + FIVE.reward + SIX.reward
 
-        //when
+        // when
         val resultReward = result.calculateTotalReward()
 
-        //then
+        // then
         assertThat(resultReward).isEqualTo(expectReward)
     }
 }
