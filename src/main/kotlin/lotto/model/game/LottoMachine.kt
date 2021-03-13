@@ -28,12 +28,13 @@ class LottoMachine(private var money: Money = Money(0)) {
         return lottos
     }
 
-    fun getResult(winningLotto: WinningLotto): List<Result> {
+    fun getResult(winningLotto: WinningLotto): Map<Coincidence, Result> {
         this.winningLotto = winningLotto
 
         return Coincidence.values()
             .filterNot { it == Coincidence.MISS }
-            .map { Result(it, it.getMatchedCount(lottos, winningLotto)) }
+            .map { it to Result(it.getMatchedCount(lottos, winningLotto)) }
+            .toMap()
     }
 
     fun getEarningRate(): BigDecimal {

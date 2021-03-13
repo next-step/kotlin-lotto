@@ -1,5 +1,6 @@
 package lotto.model.game
 
+import lotto.model.result.Coincidence
 import lotto.view.InputReader
 import lotto.model.result.Result
 import java.math.BigDecimal
@@ -27,7 +28,7 @@ class LottoGame(private val lottoMachine: LottoMachine, val inputReader: InputRe
         return lottoMachine.buy(totalCount - manualCount)
     }
 
-    fun getResult(winningLotto: WinningLotto): List<Result> {
+    fun getResult(winningLotto: WinningLotto): Map<Coincidence, Result> {
         return lottoMachine.getResult(winningLotto)
     }
 
