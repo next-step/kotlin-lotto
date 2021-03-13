@@ -120,9 +120,11 @@ class LottoTest {
 
     @Test
     fun `정상적으로 당첨 통계 로직을 수행한다`() {
-        val lottoCards = listOf(LottoCard(listOf(1,2,3,4,5,6)), LottoCard(listOf(11,12,13,14,15,16)),
-                LottoCard(listOf(1,2,3,14,15,16)))
-        val beforeWeekLottoCard = LottoCard(listOf(1,2,3,4,5,6))
+        val lottoCards = listOf(
+            LottoCard(listOf(1, 2, 3, 4, 5, 6)), LottoCard(listOf(11, 12, 13, 14, 15, 16)),
+            LottoCard(listOf(1, 2, 3, 14, 15, 16))
+        )
+        val beforeWeekLottoCard = LottoCard(listOf(1, 2, 3, 4, 5, 6))
         val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard)
 
         assertThat(statistic.filter { it == Winning.FIRST }.size, `is`(1))
@@ -134,9 +136,9 @@ class LottoTest {
         @JvmStatic
         fun buyLotto(): Stream<Arguments> {
             return Stream.of(
-                    Arguments.of(15000, 15),
-                    Arguments.of(7200, 7),
-                    Arguments.of(22222, 22)
+                Arguments.of(15000, 15),
+                Arguments.of(7200, 7),
+                Arguments.of(22222, 22)
             )
         }
     }
