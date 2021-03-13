@@ -14,9 +14,9 @@ object StringTokenizer {
         customDelimiter?.let {
             val (customDelimiter, matchedNumbersString) = it.destructured
 
-            return Tokens(matchedNumbersString.split(customDelimiter))
+            return Tokens.from(matchedNumbersString.split(customDelimiter))
         }
 
-        return Tokens(numbersString.split(*DEFAULT_DELIMITERS))
+        return Tokens.from(numbersString.split(*DEFAULT_DELIMITERS))
     }
 }
