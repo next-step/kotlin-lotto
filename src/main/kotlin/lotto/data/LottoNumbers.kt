@@ -24,17 +24,17 @@ class LottoNumbers(
 
     private fun hasDuplicatedNumber(): Boolean {
         lottoNumbers.forEach { lottoNumber ->
-            if (isDuplicated(lottoNumber)) return false
+            if (isDuplicated(lottoNumber)) return true
         }
-        return true
+        return false
     }
 
     private fun isDuplicated(lottoNumber: LottoNumber): Boolean {
         val sameNumberCount = lottoNumbers.filter { it == lottoNumber }.count()
-        if (sameNumberCount != 1) {
-            return false
+        if (sameNumberCount > 1) {
+            return true
         }
-        return true
+        return false
     }
 
     companion object {
