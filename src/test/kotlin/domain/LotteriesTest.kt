@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertAll
 class LotteriesTest {
     @Test
     fun `로또들들 생성한다`() {
-        val createdLotteries = Lotteries.createLotteries(5)
+        val createdLotteries = Lotteries.of(5)
 
         val lotteries = createdLotteries.lotteries
 
