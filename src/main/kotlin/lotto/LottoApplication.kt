@@ -7,6 +7,7 @@ import lotto.domain.WinningLotto
 import lotto.dto.StatisticsDto
 import lotto.dto.toLottoNumbersDto
 import lotto.userInterface.Console
+import lotto.userInterface.UserInterface
 
 fun main() {
     val console = Console()
@@ -14,7 +15,7 @@ fun main() {
     app.run()
 }
 
-class LottoApplication(private val userInterface: Console) {
+class LottoApplication(private val userInterface: UserInterface) {
 
     private val lottoMachine = LottoMachine(LOTTO_PRICE, RandomLottoGenerator())
 
