@@ -26,15 +26,18 @@ object ResultView {
 
     private fun printResultStatistics(results: List<Result>) {
         results.forEach {
-            val coincidence = it.coincidence
-            val matchCount = it.matchCount
-
-            print("${coincidence.coincidenceCount}개 일치")
-            if (coincidence.hasBonusNum) print(" 보너스 볼 일치")
-            print("(${coincidence.prizeMoney}원)")
-            println("- ${matchCount}개")
+            println(String.format(getTemplateForResult(it)))
         }
         println()
+    }
+
+    private fun getTemplateForResult(result: Result): String {
+        val coincidence = result.coincidence
+        val matchCount = result.matchCount
+
+        return "${coincidence.coincidenceCount}개 일치 " +
+            "${if (coincidence.hasBonusNum) ", 보너스 볼 일치" else ""} " +
+            "(${coincidence.prizeMoney}원) - ${matchCount}개"
     }
 
     private fun printStatisticsInstruction() {
