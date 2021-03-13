@@ -5,7 +5,7 @@ fun printLottoCards(lottoCards: LottoCards) {
 fun printResult(statistic: List<Winning>, yieldRate: Double) {
     println("당첨 통계")
     println("---------")
-    Winning.values().forEach {
+    Winning.values().filter { it != Winning.NONE }.forEach {
         val count = statistic.count { it2 -> it == it2 }
         println("${it.match}개 일치 (${it.price}원)- ${count}개")
     }

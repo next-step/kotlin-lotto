@@ -17,7 +17,7 @@ class Lotto {
     }
 
     fun getStatistic(lottoCards: LottoCards, beforeWeekLottoCard: LottoCard): List<Winning> {
-        return lottoCards.cards.mapNotNull {
+        return lottoCards.cards.map {
             val count = it.getMatchCount(beforeWeekLottoCard)
             Winning.matchWinning(count)
         }

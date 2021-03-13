@@ -79,7 +79,7 @@ class LottoTest {
         ReflectionUtil.setField(lottoCards, "cards", lottoCardsData)
 
         val beforeWeekLottoCard = LottoCard("1, 2, 3, 4, 5, 6")
-        val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard)
+        val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard).filter { it != Winning.NONE }
 
         assertThat(statistic.filter { it == Winning.FIRST }.size, `is`(1))
         assertThat(statistic.filter { it == Winning.FOURTH }.size, `is`(1))
