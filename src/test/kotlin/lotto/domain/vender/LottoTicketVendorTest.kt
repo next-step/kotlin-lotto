@@ -1,5 +1,6 @@
 package lotto.domain.vender
 
+import lotto.domain.value.Price
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -13,7 +14,7 @@ internal class LottoTicketVendorTest {
         val vendor = LottoTicketVendor()
 
         //when
-        val tickets = vendor.buyAutomaticTicket(price)
+        val tickets = vendor.buyAutomaticTicket(Price(price))
 
         //then
         assertThat(tickets).hasSize(expect)

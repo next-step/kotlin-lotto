@@ -7,11 +7,9 @@ class LottoTicketVendor : TicketVendor {
     override fun buyAutomaticTicket(price: Price): List<LottoTicket> {
         val amount = price / TICKET_PRICE
 
-        val tickets = mutableListOf<LottoTicket>()
-        repeat(amount.toInt()) {
-            tickets.add(LottoTicket.create())
+        return (0 until amount).map {
+            LottoTicket.create()
         }
-        return tickets
     }
 
     companion object {

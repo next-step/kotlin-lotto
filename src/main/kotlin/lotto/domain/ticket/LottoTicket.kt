@@ -7,8 +7,8 @@ class LottoTicket(
 ) {
 
     init {
-        if (numbers.size != TICKET_SIZE) {
-            throw IllegalArgumentException("로또 티켓은 중복되지 않은 ${TICKET_SIZE}개의 숫자로 이루어져야 합니다. LottoTicket: $numbers")
+        require(numbers.size == TICKET_SIZE) {
+            "로또 티켓은 중복되지 않은 ${TICKET_SIZE}개의 숫자로 이루어져야 합니다. LottoTicket: $numbers"
         }
     }
 

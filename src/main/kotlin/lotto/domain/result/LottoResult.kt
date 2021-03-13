@@ -6,17 +6,12 @@ import lotto.domain.value.Price
 class LottoResult {
     val result = mutableMapOf<WinningBoard, Int>()
 
-    init {
-        WinningBoard.values()
-            .forEach { result[it] = 0 }
-    }
-
     fun add(winningBoard: WinningBoard) {
-        result[winningBoard] = result[winningBoard]!!.plus(1)
+        result[winningBoard] = result[winningBoard]?.plus(1) ?: 1
     }
 
     fun get(winningBoard: WinningBoard): Int {
-        return result[winningBoard]!!
+        return result[winningBoard] ?: 0
     }
 
     fun calculateProfit(price: Price): Double {

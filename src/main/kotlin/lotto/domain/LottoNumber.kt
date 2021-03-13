@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumber(
+data class LottoNumber(
     val number: Int
 ) {
     init {
@@ -8,24 +8,9 @@ class LottoNumber(
     }
 
     private fun validate() {
-        if (MIN_NUMBER > number || number > MAX_NUMBER) {
-            throw IllegalArgumentException("로또 번호는 ${MIN_NUMBER}보다 크고 ${MAX_NUMBER}보다 작아야 합니다. number:$number")
+        require(number in MIN_NUMBER..MAX_NUMBER){
+            "로또 번호는 ${MIN_NUMBER}보다 크고 ${MAX_NUMBER}보다 작아야 합니다. number:$number"
         }
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as LottoNumber
-
-        if (number != other.number) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return number
     }
 
     private object LottoCache {
