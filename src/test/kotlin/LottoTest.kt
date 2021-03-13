@@ -59,7 +59,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("buyLotto")
     fun `금액에 맞는 로또를 구매한다`(price: Int, resultCnt: Int) {
-        assertThat(lotto.buy(price), `is`(resultCnt))
+        assertThat(lotto.canBuyCount(price), `is`(resultCnt))
     }
 
     @Test

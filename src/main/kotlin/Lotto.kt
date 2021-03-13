@@ -1,7 +1,7 @@
 fun main() {
     val lotto = Lotto()
     val price = lotto.validatePrice(inputPrice())
-    val lottoCnt = lotto.buy(price)
+    val lottoCnt = lotto.canBuyCount(price)
     val lottoCards = LottoCards(lottoCnt)
     printLottoCards(lottoCards)
 
@@ -40,7 +40,7 @@ class Lotto {
         }
     }
 
-    fun buy(price: Int): Int {
+    fun canBuyCount(price: Int): Int {
         return price / LOTTO_PRICE
     }
 
