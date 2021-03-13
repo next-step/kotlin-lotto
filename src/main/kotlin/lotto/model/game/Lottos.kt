@@ -7,13 +7,6 @@ import java.math.RoundingMode
 class Lottos(val lottos: List<Lotto>) {
     constructor(count: Int) : this(createLottos(count))
 
-    fun check(winningLotto: Lotto, checkCount: Int): Int {
-        return lottos
-            .map { it.getMatchCount(winningLotto) }
-            .filter { it == checkCount }
-            .count()
-    }
-
     fun getEarningRate(winningLotto: Lotto): BigDecimal {
         val totalPrizeMoney = getTotalPrizeMoney(winningLotto)
         val budgetMoney = (lottos.size * COST_PER_ONE_LOTTO).toBigDecimal()
@@ -30,6 +23,13 @@ class Lottos(val lottos: List<Lotto>) {
             .map { check(winningLotto, it.coincidenceCount) * it.prizeMoney }
             .sum()
             .toBigDecimal()
+    }
+
+    private fun check(winningLotto: Lotto, checkCount: Int): Int {
+        return lottos
+            .map { it.getMatchCount(winningLotto) }
+            .filter { it == checkCount }
+            .count()
     }
 
     override fun toString(): String {
