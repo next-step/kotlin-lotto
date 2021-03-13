@@ -32,8 +32,7 @@ class LottoGameController(private val lottoGame: LottoGame) {
 
         InputView.printBonusBallQuestion()
         val bonusNumber: LottoNumber = lottoGame.selectBonusBall(winningLottoNumbers)
-        val winningLotto = WinningLotto(winningLottoNumbers, bonusNumber)
-        val gameResult = lottoGame.getResult(winningLotto)
+        val gameResult = lottoGame.getResult(WinningLotto(winningLottoNumbers, bonusNumber))
 
         ResultView.printResult(gameResult)
     }
