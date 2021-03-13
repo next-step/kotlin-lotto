@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test
 
 class LottoTicketTest {
 
+    private val lottoNumbers = (1..45).map { number -> LottoNumber.from(number) }
+
     @Test
     fun `로또 1개 자동으로 만들기`() {
         val lotto = LottoTicket.generateAuto()
-        lotto.value.forEach {
-            print("${it.toString()} ")
-        }
+        assertThat(lottoNumbers).containsAll(lotto.value)
     }
 
     @Test
