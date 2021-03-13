@@ -1,6 +1,5 @@
-package vo
+package calculator.vo
 
-import calculator.vo.Token
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

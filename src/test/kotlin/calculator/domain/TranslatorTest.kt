@@ -1,4 +1,4 @@
-package calculator
+package calculator.domain
 
 import calculator.domain.Translator
 import calculator.vo.Token
