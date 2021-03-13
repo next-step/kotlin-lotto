@@ -1,12 +1,11 @@
-
 fun main() {
     val lotto = Lotto()
     val price = lotto.validatePrice(inputPrice())
     val lottoCnt = lotto.buy(price)
-    val lottoCards = lotto.extractNumber(lottoCnt)
+    val lottoCards = LottoCards(lottoCnt)
     printLottoCards(lottoCards)
 
-    val beforeWeekLottoCard = lotto.validateLottoCard(inputLottoNumber())
+    val beforeWeekLottoCard = LottoCard(inputLottoNumber())
     val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard)
     val yieldRate = lotto.getYieldRate(statistic, price)
     printResult(statistic, yieldRate)
@@ -19,25 +18,9 @@ class Lotto {
 
     fun getStatistic(lottoCards: LottoCards, beforeWeekLottoCard: LottoCard): List<Winning> {
         return lottoCards.cards.mapNotNull {
-            val count = getMatchCount(it, beforeWeekLottoCard)
+            val count = it.getMatchCount(beforeWeekLottoCard)
             Winning.matchWinning(count)
         }
-    }
-
-    private fun getMatchCount(lottoCard: LottoCard, winningLottoCard: LottoCard): Int {
-        return lottoCard.number.filter { winningLottoCard.number.contains(it) }.size
-    }
-
-    fun validateLottoCard(lottoNumber: String?): LottoCard {
-        require(!lottoNumber.isNullOrBlank()) { "로또 번호를 반드시 입력해야 합니다." }
-
-        val strNumbers = lottoNumber.trim().split(",")
-        require(strNumbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개입니다." }
-
-        val numbers = strNumbers.map { parseInt(it) }
-        require(numbers.none { it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
-
-        return LottoCard(numbers)
     }
 
     fun validatePrice(strPrice: String?): Int {
@@ -61,19 +44,7 @@ class Lotto {
         return price / LOTTO_PRICE
     }
 
-    fun extractNumber(cnt: Int): LottoCards {
-        return LottoCards(
-            (1..cnt).map {
-                LottoCard(LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT))
-            }
-        )
-    }
-
     companion object {
-        const val LOTTO_PRICE = 1000
-        const val LOTTO_NUMBER_CNT = 6
-        private const val LOTTO_START_NUMBER = 1
-        private const val LOTTO_LAST_NUMBER = 45
-        val LOTTO_NUMBERS = (LOTTO_START_NUMBER..LOTTO_LAST_NUMBER).toList()
+        private const val LOTTO_PRICE = 1000
     }
 }
