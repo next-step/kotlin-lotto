@@ -5,11 +5,9 @@ import lotto.model.input.Money
 import lotto.model.result.Result
 import java.math.BigDecimal
 
-class LottoMachine(private var money: Money) {
+class LottoMachine(private var money: Money = Money(0)) {
     private lateinit var lottos: Lottos
     private lateinit var winningLotto: WinningLotto
-
-    constructor() : this(money = Money(0))
 
     fun insertMoney(budget: Money): Int {
         money = budget
@@ -21,7 +19,7 @@ class LottoMachine(private var money: Money) {
     }
 
     fun buy(lottoCount: Int): Lottos {
-        val lottoByAuto = Lottos(LOTTO_NUMBER_POOL, lottoCount)
+        val lottoByAuto = Lottos(lottoCount)
         val newLottos: List<Lotto> = this.lottos.lottos
         val list = newLottos.toMutableList()
         lottoByAuto.lottos.forEach { list.add(it) }
@@ -40,9 +38,5 @@ class LottoMachine(private var money: Money) {
 
     fun getEarningRate(): BigDecimal {
         return lottos.getEarningRate(winningLotto.winningLotto)
-    }
-
-    companion object {
-        private val LOTTO_NUMBER_POOL = LottoNumberPool
     }
 }

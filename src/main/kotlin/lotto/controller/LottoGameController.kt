@@ -4,7 +4,6 @@ import lotto.model.game.Lotto
 import lotto.model.game.LottoGame
 import lotto.model.game.LottoNumber
 import lotto.model.game.WinningLotto
-import lotto.view.InputReader
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -16,9 +15,9 @@ class LottoGameController(private val lottoGame: LottoGame) {
         ResultView.printLottoCount(lottoCount)
     }
 
-    fun buy(inputReader: InputReader) {
+    fun buy() {
         InputView.printManualCountQuestion()
-        val manualCount = inputReader.readManualCount()
+        val manualCount = lottoGame.inputReader.readManualCount()
 
         InputView.printManualNumberQuestion()
         lottoGame.selectByManual(manualCount)

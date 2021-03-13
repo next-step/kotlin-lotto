@@ -12,7 +12,7 @@ fun main() {
     val lottoGameController = LottoGameController(lottoGame)
 
     lottoGameController.ready()
-    lottoGameController.buy(inputReader)
+    lottoGameController.buy()
     lottoGameController.match()
     lottoGameController.getEarningRate()
 }

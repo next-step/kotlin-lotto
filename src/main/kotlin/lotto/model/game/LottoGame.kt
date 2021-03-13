@@ -4,7 +4,7 @@ import lotto.view.InputReader
 import lotto.model.result.Result
 import java.math.BigDecimal
 
-class LottoGame(private val lottoMachine: LottoMachine, private val inputReader: InputReader) {
+class LottoGame(private val lottoMachine: LottoMachine, val inputReader: InputReader) {
     var totalCount: Int = 0
         private set
 

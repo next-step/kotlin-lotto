@@ -2,7 +2,6 @@ package lotto.model
 
 import lotto.model.game.Lotto
 import lotto.model.game.LottoNumber
-import lotto.model.game.LottoNumberPool
 import lotto.model.game.Lottos
 import lotto.model.game.WinningLotto
 import lotto.model.result.Coincidence
@@ -22,7 +21,7 @@ internal class LottosTest {
         val lottoCount = 5
 
         // when
-        val myLottos = Lottos(LottoNumberPool, lottoCount)
+        val myLottos = Lottos(lottoCount)
 
         // then
         assertThat(myLottos.lottos.size).isEqualTo(5)

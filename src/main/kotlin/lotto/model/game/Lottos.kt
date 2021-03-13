@@ -5,7 +5,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class Lottos(val lottos: List<Lotto>) {
-    constructor(lottoNumPool: LottoNumberPool, count: Int) : this(createLottos(lottoNumPool, count))
+    constructor(count: Int) : this(createLottos(count))
 
     fun check(winningLotto: Lotto, checkCount: Int): Int {
         return lottos
@@ -42,8 +42,8 @@ class Lottos(val lottos: List<Lotto>) {
         private const val COST_PER_ONE_LOTTO: Double = 1000.toDouble()
         private const val TWO_DECIMAL_PLACES = 2
 
-        private fun createLottos(lottoNumPool: LottoNumberPool, count: Int): List<Lotto> {
-            return (1..count).map { lottoNumPool.getOneLotto() }
+        private fun createLottos(count: Int): List<Lotto> {
+            return (1..count).map { LottoNumberPool.getOneLotto() }
         }
     }
 }
