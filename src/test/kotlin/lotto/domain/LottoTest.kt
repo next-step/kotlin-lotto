@@ -8,8 +8,8 @@ internal class LottoTest {
 
     @Test
     fun `로또의 당첨된 번호를 구한다`() {
-        val lotto = Lotto.createLotto(listOf(1, 2, 3, 4, 5, 6))
-        val result = lotto.findMatchNums(Lotto.createLotto(listOf(9, 8, 7, 3, 2, 1)))
+        val lotto = createLotto(listOf(1, 2, 3, 4, 5, 6))
+        val result = lotto.findMatchNums(createLotto(listOf(9, 8, 7, 3, 2, 1)))
         val expect = listOf(LottoNum.from(3), LottoNum.from(2), LottoNum.from(1))
         assertThat(result).containsExactlyInAnyOrderElementsOf(expect)
     }

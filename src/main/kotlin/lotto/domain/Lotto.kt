@@ -21,9 +21,5 @@ internal data class Lotto(val lottoNums: List<LottoNum>) {
 
     companion object {
         const val NUM_SIZE = 6
-
-        fun createLotto(nums: List<Int>): Lotto {
-            return Lotto(nums.map { LottoNum.from(it) })
-        }
     }
 }

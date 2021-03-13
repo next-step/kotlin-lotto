@@ -14,13 +14,13 @@ private val outputView = OutputView()
 
 fun main() {
     val price = Money(inputView.requestPrice())
-    val selfLottosNums = inputView.requestSelfLottosNums()
+    val selfLottoNumsList = inputView.requestSelfLottosNums().map { LottoNum.listFrom(it) }
 
-    val lottoPaper: LottoPaper = Store().sell(price, selfLottosNums)
+    val lottoPaper: LottoPaper = Store().sell(price, selfLottoNumsList)
 
-    outputView.renderLottoPaper(selfLottosNums.size, lottoPaper)
+    outputView.renderLottoPaper(selfLottoNumsList.size, lottoPaper)
 
-    val winLotto = WinLotto(Lotto.createLotto(inputView.requestWinNums()), LottoNum.from(inputView.requestBonusNum()))
+    val winLotto = WinLotto(Lotto(inputView.requestWinNums().map { LottoNum.from(it) }), LottoNum.from(inputView.requestBonusNum()))
 
     outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto))
 }

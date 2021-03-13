@@ -16,5 +16,9 @@ internal data class LottoNum(val value: Int) {
         fun from(num: Int): LottoNum {
             return CACHE[num] ?: LottoNum(num)
         }
+
+        fun listFrom(nums: List<Int>): List<LottoNum> {
+            return nums.map { from(it) }
+        }
     }
 }
