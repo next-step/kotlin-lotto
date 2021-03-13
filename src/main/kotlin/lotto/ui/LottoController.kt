@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.LottoStore
 import view.InputView
 import view.OutputView
 import view.console.ConsoleInput
@@ -11,6 +12,7 @@ class LottoController private constructor(
 ) {
     fun run() {
         outputView.printPurchaseAmountMessage()
+        val tickets = LottoStore().purchase(inputView.read())
     }
 
     companion object {
