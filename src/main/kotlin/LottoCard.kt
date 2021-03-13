@@ -15,18 +15,10 @@ class LottoCard {
         val strNumbers = numberLine.replace(WHITESPACE_REGEX, EMPTY_STRING).split(",")
         require(strNumbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개입니다." }
 
-        val numbers = strNumbers.map { parseInt(it) }
+        val numbers = strNumbers.map { it.parseInt() }
         require(numbers.none { it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
 
         return numbers
-    }
-
-    private fun parseInt(strNumber: String): Int {
-        try {
-            return strNumber.toInt()
-        } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("자연수로 변환하는데 실패했습니다.")
-        }
     }
 
     fun getMatchCount(winningLottoCard: LottoCard): Int {
