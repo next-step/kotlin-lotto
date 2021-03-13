@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTicket private constructor(val numbers: Set<Int> = HashSet()) {
+class LottoTicket private constructor(val numbers: Set<Int>) {
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
         private const val MIN_LOTTO_NUMBER = 1
