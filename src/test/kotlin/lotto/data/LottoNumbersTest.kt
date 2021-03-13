@@ -30,4 +30,10 @@ class LottoNumbersTest {
         assertThatThrownBy { LottoNumbers(listOf(1, 2, 3, 4, 5)) }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
+
+    @Test
+    fun `로또 번호가 중복되는 숫자가 있다`() {
+        assertThatThrownBy { LottoNumbers(listOf(1, 2, 2, 4, 5)) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+    }
 }
