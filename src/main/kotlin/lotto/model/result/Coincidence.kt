@@ -1,8 +1,5 @@
 package lotto.model.result
 
-import lotto.model.game.WinningLotto
-import lotto.model.game.Lotto
-
 enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBonusNum: Boolean) {
     FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
@@ -16,16 +13,16 @@ enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBo
     companion object {
         private const val TWO = 2
 
-        fun match(myLotto: Lotto, winningLotto: WinningLotto): Coincidence {
-            return findMatchedResult(myLotto, winningLotto) ?: MISS
+        fun match(matchedCountForOneLotto: Int, hasBonusNum: Boolean): Coincidence {
+            return findMatchedResult(matchedCountForOneLotto, hasBonusNum) ?: MISS
         }
 
-        private fun findMatchedResult(myLotto: Lotto, winningLotto: WinningLotto): Coincidence? {
+        private fun findMatchedResult(matchedCountForOneLotto: Int, hasBonusNum: Boolean): Coincidence? {
             val matchedResult = values()
-                .filter { it.coincidenceCount == myLotto.getMatchCount(winningLotto.winningLotto) }
+                .filter { it.coincidenceCount == matchedCountForOneLotto }
 
             if (matchedResult.size == TWO) {
-                return matchedResult.firstOrNull { it.hasBonusNum == myLotto.hasNumber(winningLotto.bonusNumber) }
+                return matchedResult.firstOrNull { it.hasBonusNum == hasBonusNum }
             }
 
             return matchedResult.firstOrNull()
