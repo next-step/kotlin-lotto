@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class TicketAmount(count: Int = 1) {
     val money: Money = Money(1_000 * count)

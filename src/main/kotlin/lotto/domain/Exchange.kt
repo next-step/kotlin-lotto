@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 interface Exchange<ProductT> {
     fun pay(money: Money)

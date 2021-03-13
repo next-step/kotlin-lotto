@@ -1,7 +1,7 @@
-package lotto
+package lotto.domain
 
-import lotto.Ranking.Rank.FIRST
-import lotto.Ranking.Rank.MISS
+import lotto.domain.Ranking.Rank.FIRST
+import lotto.domain.Ranking.Rank.MISS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -14,9 +14,9 @@ class LottoGameTest {
             LottoNumbers(11, 12, 13, 14, 15, 16)
         )
 
-        val winningNumbers: LottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+        val winningNumbers: WinningNumbers = WinningNumbers(LottoNumbers(1, 2, 3, 4, 5, 6), 7)
 
-        assertThat(LottoGame(pickLottoNumbers, winningNumbers).result)
+        assertThat(LottoGame(winningNumbers, pickLottoNumbers).result)
             .containsExactlyInAnyOrder(FIRST, FIRST, MISS)
     }
 }

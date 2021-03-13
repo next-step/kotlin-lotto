@@ -1,5 +1,14 @@
 package lotto
 
+import lotto.domain.LottoAgent
+import lotto.domain.LottoDrawMachine
+import lotto.domain.LottoGame
+import lotto.domain.LottoNumbers
+import lotto.domain.Money
+import lotto.view.Output
+import lotto.domain.WinningNumbers
+import lotto.view.UserInput
+
 fun main() {
     val expense = UserInput.Int("구입금액을 입력해 주세요.")
         .answer()
@@ -14,9 +23,16 @@ fun main() {
 
     Output.PickNumber(lottoNumbers).write()
 
-    val winningNumber = WinningNumber.Console("지난 주 당첨 번호를 입력해 주세요.").lottoNumbers
-
-    val result = LottoGame(lottoNumbers, winningNumber).result
+    val result = LottoGame(winningNumbers(), lottoNumbers).result
 
     Output.LottoResult(result).write()
+}
+
+private fun winningNumbers(): WinningNumbers {
+    val winningNumber = UserInput.IntList("지난 주 당첨 번호를 입력해 주세요.").answer()
+        .let {
+            LottoNumbers(it)
+        }
+    val bonusNumber = UserInput.Int("보너스 볼을 입력해 주세요.").answer()
+    return WinningNumbers(winningNumber, bonusNumber)
 }
