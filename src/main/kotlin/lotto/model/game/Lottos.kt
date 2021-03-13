@@ -21,8 +21,8 @@ class Lottos(val lottos: List<Lotto>) {
         return totalPrizeMoney.divide(budgetMoney, TWO_DECIMAL_PLACES, RoundingMode.FLOOR)
     }
 
-    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: Lotto, bonusNumber: LottoNumber): Int {
-        return lottos.count { coincidence == it.getResult(winningLotto, bonusNumber) }
+    fun getCoincidenceCount(coincidence: Coincidence, winningLotto: WinningLotto): Int {
+        return lottos.count { coincidence == it.getResult(winningLotto) }
     }
 
     private fun getTotalPrizeMoney(winningLotto: Lotto): BigDecimal {
@@ -43,7 +43,7 @@ class Lottos(val lottos: List<Lotto>) {
         private const val TWO_DECIMAL_PLACES = 2
 
         private fun createLottos(lottoNumPool: LottoNumberPool, count: Int): List<Lotto> {
-            return (1..count).map { LottoNumberPool.getOneLotto() }
+            return (1..count).map { lottoNumPool.getOneLotto() }
         }
     }
 }
