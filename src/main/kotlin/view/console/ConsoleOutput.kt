@@ -10,4 +10,8 @@ class ConsoleOutput : OutputView {
     override fun printStringAdderResultMessage(result: Int) {
         println("결과는 ${result}입니다.")
     }
+
+    override fun printPurchaseAmountMessage() {
+        println("구입금액을 입력해 주세요.")
+    }
 }
