@@ -32,9 +32,9 @@ class LottoNumbers(
     private fun isDuplicated(lottoNumber: LottoNumber): Boolean {
         val sameNumberCount = lottoNumbers.filter { it == lottoNumber }.count()
         if (sameNumberCount != 1) {
-            return true
+            return false
         }
-        return false
+        return true
     }
 
     companion object {

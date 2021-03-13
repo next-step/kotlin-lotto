@@ -13,7 +13,7 @@ class Buyer {
         lotteryTicketMaker: LotteryTicketMaker = DefaultLotteryTicketMaker()
     ): List<LotteryTicket> {
         repeat(payedPrice / lotteryTicketMaker.lotteryTicketPrice) {
-            tickets.add(lotteryTicketMaker.createLotteryTicket())
+            tickets.add(lotteryTicketMaker.createAutoLotteryTicket())
         }
         return tickets
     }
