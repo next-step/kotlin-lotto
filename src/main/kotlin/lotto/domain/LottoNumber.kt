@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumber private constructor(val value: Int) {
+class LottoNumber private constructor(private val value: Int) {
 
     override fun toString(): String {
         return value.toString()

@@ -16,21 +16,21 @@ class LottoResultTest {
         )
     )
     private val winningNumbers = listOf<LottoNumber>(
-        LottoNumber(3),
-        LottoNumber(5),
-        LottoNumber(6),
-        LottoNumber(7),
-        LottoNumber(8),
-        LottoNumber(9)
+        LottoNumber.from(3),
+        LottoNumber.from(5),
+        LottoNumber.from(6),
+        LottoNumber.from(7),
+        LottoNumber.from(8),
+        LottoNumber.from(9)
     )
 
-    private val bonusNumber = LottoNumber(11)
+    private val bonusNumber = LottoNumber.from(11)
     private val winningLotto = WinningLotto(winningNumbers, bonusNumber)
 
     @Test
     fun `로또 번호들의 등수 확인`() {
-        val ranks = lottoResult.getMyLottoesRank(lottos, winningLotto)
-
-        assertThat(ranks.keys.toList()).isEqualTo(listOf(Rank.THIRD, Rank.SECOND, Rank.FIRST, Rank.MISS))
+        val lottoRanks = lottoResult.getMyLottoesRanks(lottos, winningLotto)
+        val ranks = lottoRanks.getRanks().keys
+        assertThat(ranks.toList()).isEqualTo(listOf(Rank.THIRD, Rank.SECOND, Rank.FIRST, Rank.MISS))
     }
 }

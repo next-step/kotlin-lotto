@@ -3,8 +3,7 @@ package lotto.domain
 import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
 import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 
-class LottoTicket(lottoNumbers: List<LottoNumber>) {
-    val value: List<LottoNumber> = lottoNumbers.sortedBy { it.value }
+class LottoTicket(val value: List<LottoNumber>) {
 
     fun getTicketRank(winningLotto: WinningLotto): Rank {
         val countOfMatch = getCountOfMatch(winningLotto.winningNumbers)
@@ -12,9 +11,9 @@ class LottoTicket(lottoNumbers: List<LottoNumber>) {
         return Rank.valueOf(countOfMatch, bonusMatches)
     }
 
-    private fun getCountOfMatch(winningNumbers: List<LottoNumber>): Int {
+    private fun getCountOfMatch(lottoNumbers: List<LottoNumber>): Int {
         return value.count { lottoNumber ->
-            winningNumbers.contains(lottoNumber)
+            lottoNumbers.contains(lottoNumber)
         }
     }
 
@@ -23,9 +22,13 @@ class LottoTicket(lottoNumbers: List<LottoNumber>) {
     }
 
     companion object {
+        private val LENGTH_OF_LOTTO = 6
 
         fun generateAuto(): LottoTicket {
-            val numbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled().slice(0..5)
+            val numbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+                .shuffled()
+                .take(LENGTH_OF_LOTTO)
+                .sorted()
 
             return LottoTicket(
                 numbers.map { number ->
