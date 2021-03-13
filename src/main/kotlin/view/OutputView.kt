@@ -1,6 +1,6 @@
 package view
 
-import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 
 interface OutputView {
     fun printStringAdderInputMessage()
@@ -9,5 +9,5 @@ interface OutputView {
 
     fun printPurchaseAmountMessage()
 
-    fun printLottoTickets(tickets: List<LottoTicket>)
+    fun printLottoTickets(tickets: LottoTickets)
 }

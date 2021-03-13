@@ -1,9 +1,9 @@
 package lotto.domain
 
 class LottoStore {
-    fun purchase(amount: String): List<LottoTicket> {
+    fun purchase(amount: String): LottoTickets {
         val count = amount.toInt() / LOTTO_PRICE
-        return mutableListOf<LottoTicket>().also { tickets -> repeat(count) { tickets.add(LottoTicket.create()) } }
+        return LottoTickets.create(count)
     }
 
     companion object {

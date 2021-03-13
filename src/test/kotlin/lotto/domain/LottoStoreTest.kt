@@ -9,6 +9,6 @@ internal class LottoStoreTest {
     @Test
     fun purchase() {
         val lottoTickets = LottoStore().purchase("2000")
-        assertThat(lottoTickets.size).isEqualTo(2)
+        assertThat(lottoTickets.tickets.size).isEqualTo(2)
     }
 }

@@ -1,6 +1,7 @@
 package view.console
 
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import view.OutputView
 
 class ConsoleOutput : OutputView {
@@ -16,9 +17,9 @@ class ConsoleOutput : OutputView {
         println("구입금액을 입력해 주세요.")
     }
 
-    override fun printLottoTickets(tickets: List<LottoTicket>) {
-        println("${tickets.size}개를 구매했습니다.")
-        tickets.forEach { printLottoTicket(it) }
+    override fun printLottoTickets(tickets: LottoTickets) {
+        println("${tickets.tickets.size}개를 구매했습니다.")
+        tickets.tickets.forEach { printLottoTicket(it) }
     }
 
     private fun printLottoTicket(ticket: LottoTicket) {
