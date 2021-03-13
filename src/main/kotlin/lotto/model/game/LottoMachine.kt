@@ -5,12 +5,11 @@ import lotto.model.input.Money
 import lotto.model.result.Result
 import java.math.BigDecimal
 
-class LottoMachine(private var money: Money = Money(0)) {
+class LottoMachine {
     private lateinit var lottos: Lottos
     private lateinit var winningLotto: WinningLotto
 
-    fun insertMoney(budget: Money): Int {
-        money = budget
+    fun insertMoney(money: Money): Int {
         return money.getBuyableLottoCount()
     }
 
