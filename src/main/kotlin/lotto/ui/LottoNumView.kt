@@ -12,7 +12,7 @@ object LottoNumView {
     }
 
     private fun printLottoNumbers(lottoNumbers: LottoNumbers) {
-        println(lottoNumbers.lottoNumbers.map { it.lottoNumber })
+        println(lottoNumbers.lottoNumbers.map { it.value })
     }
 
     fun printTicketNumber(buyingData: BuyingData) {
