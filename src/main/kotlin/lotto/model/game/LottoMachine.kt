@@ -30,10 +30,11 @@ class LottoMachine(private var money: Money = Money(0)) {
 
     fun getResult(winningLotto: WinningLotto): Map<Coincidence, Result> {
         this.winningLotto = winningLotto
+        val lottoTicket = LottoTicket(lottos, winningLotto)
 
         return Coincidence.values()
             .filterNot { it == Coincidence.MISS }
-            .map { it to Result(it.getMatchedCount(lottos, winningLotto)) }
+            .map { it to Result(lottoTicket.getMatchedCount(it)) }
             .toMap()
     }
 

@@ -2,7 +2,6 @@ package lotto.model.result
 
 import lotto.model.game.WinningLotto
 import lotto.model.game.Lotto
-import lotto.model.game.Lottos
 
 enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBonusNum: Boolean) {
     FIRST(6, 2_000_000_000, false),
@@ -13,10 +12,6 @@ enum class Coincidence(val coincidenceCount: Int, val prizeMoney: Int, val hasBo
     MISS(prizeMoney = 0);
 
     constructor(prizeMoney: Int)
-
-    fun getMatchedCount(lottos: Lottos, winningLotto: WinningLotto): Int {
-        return lottos.getCoincidenceCount(this, winningLotto)
-    }
 
     companion object {
         private const val TWO = 2
