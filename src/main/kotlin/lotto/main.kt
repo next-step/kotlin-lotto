@@ -14,6 +14,8 @@ fun main() {
         .answer()
         .let { Money(it) }
 
+    val manualPickCount = UserInput.Int("수동으로 구매할 로또 수를 입력해 주세요.").answer()
+
     val lottoNumbers = LottoAgent(LottoDrawMachine((1..45)))
         .exchange
         .let {
