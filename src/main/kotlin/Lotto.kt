@@ -11,7 +11,7 @@ fun main() {
 
     val numbers = lotto.validateLottoCard(inputLottoNumber())
     val beforeWeekLottoCard = LottoCard(numbers)
-    val bonusNumber = 0
+    val bonusNumber = lotto.validateBonusNumber(inputBonusNumber())
     val statistic = lottoCards.getStatistic(beforeWeekLottoCard, bonusNumber)
     val yieldRate = lotto.getYieldRate(statistic, price)
     printResult(statistic, yieldRate)
@@ -20,6 +20,12 @@ fun main() {
 class Lotto {
     fun getYieldRate(statistic: Map<Winning, Int>, price: Int): Double {
         return statistic.map { it.key.price * it.value }.sum().toDouble() / price
+    }
+
+    fun validateBonusNumber(numberLine: String?): Int {
+        require(!numberLine.isNullOrBlank()) { "보너스 번호를 반드시 입력해야 합니다." }
+
+        return numberLine.parseInt()
     }
 
     fun validateLottoCard(numberLine: String?): List<Int> {
