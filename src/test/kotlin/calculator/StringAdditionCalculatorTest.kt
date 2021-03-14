@@ -1,18 +1,15 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullAndEmptySource
 
 internal class StringAdditionCalculatorTest {
     private val calculator = StringAdditionCalculator()
 
-    @Test
-    fun `빈 문자열이 주어질 경우, 0을 반환`() {
-        assertThat(calculator.calculate("")).isEqualTo(0)
-    }
-
-    @Test
-    fun `null이 주어질 경우, 0을 반환`() {
-        assertThat(calculator.calculate(null)).isEqualTo(0)
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `빈 문자열이나 null이 주어질 경우, 0을 반환`(expression: String?) {
+        assertThat(calculator.calculate(expression)).isEqualTo(0)
     }
 }
