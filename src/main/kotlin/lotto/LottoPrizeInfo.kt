@@ -1,3 +1,3 @@
 package lotto
 
-class LottoPrizeInfo(val lottoPrizeDataList: List<LottoPrizeData>)
+class LottoPrizeInfo(val lottoPay: Int, val lottoPrizeDataList: List<LottoPrizeData>)

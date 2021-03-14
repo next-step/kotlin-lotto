@@ -5,10 +5,8 @@ import lotto.view.OutputView
 
 fun main() {
 
-    val lottoPay = 1000
-    val inputView = InputView()
-    val outputView = OutputView()
     val lottoPrizeInfo = LottoPrizeInfo(
+        1000,
         listOf(
             LottoPrizeData(3, 5000),
             LottoPrizeData(4, 50000),
@@ -17,10 +15,10 @@ fun main() {
         )
     )
 
-    val lottoMachine = LottoMachine(lottoPay, lottoPrizeInfo)
-    val lottoDataList = lottoMachine.issue(inputView.inputPayment())
-    outputView.showPurchases(lottoDataList)
+    val lottoMachine = LottoMachine(lottoPrizeInfo.lottoPay, lottoPrizeInfo)
+    val lottoDataList = lottoMachine.issue(InputView.inputPayment())
+    OutputView.showPurchases(lottoDataList)
 
-    val winnerLottoData: WinnerLottoData = lottoMachine.getWinnerLottoData(inputView.inputWinnerNumbers(), lottoDataList)
-    outputView.showResult(winnerLottoData)
+    val winnerLottoData: WinnerLottoData = lottoMachine.getWinnerLottoData(InputView.inputWinnerNumbers(), lottoDataList)
+    OutputView.showResult(winnerLottoData)
 }

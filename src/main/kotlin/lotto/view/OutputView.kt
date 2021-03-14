@@ -3,7 +3,7 @@ package lotto.view
 import lotto.LottoData
 import lotto.WinnerLottoData
 
-class OutputView {
+object OutputView {
 
     fun showPurchases(lottoDataList: List<LottoData>) {
         val purchaseCount = lottoDataList.size

@@ -1,11 +1,13 @@
 package lotto
 
-class LottoMachine(private val lottoPay: Int, val lottoPrizeInfo: LottoPrizeInfo) {
+class LottoMachine(private val lottoPay: Int, private val lottoPrizeInfo: LottoPrizeInfo) {
 
-    private val startNumber: Int = 1
-    private val endNumber: Int = 45
-    private val maxCount: Int = 6
-    private var paymentAmount: Int = 0
+    companion object {
+        private const val startNumber: Int = 1
+        private const val endNumber: Int = 45
+        private const val maxCount: Int = 6
+        private var paymentAmount: Int = 0
+    }
 
     fun issue(amount: Int): List<LottoData> {
         paymentAmount = amount
