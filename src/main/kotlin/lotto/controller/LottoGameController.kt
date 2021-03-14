@@ -3,7 +3,7 @@ package lotto.controller
 import lotto.model.game.LottoNumber
 import lotto.model.game.WinningLotto
 import lotto.model.game.Lotto
-import lotto.model.game.LottoGame
+import lotto.service.LottoGame
 import lotto.model.game.Lottos
 import lotto.model.result.Coincidence
 import lotto.model.result.Result

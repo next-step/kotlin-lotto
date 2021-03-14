@@ -1,5 +1,9 @@
-package lotto.model.game
+package lotto.service
 
+import lotto.model.game.Lotto
+import lotto.model.game.LottoTicket
+import lotto.model.game.Lottos
+import lotto.model.game.WinningLotto
 import lotto.model.input.Money
 import lotto.model.result.Coincidence
 import lotto.model.result.Result

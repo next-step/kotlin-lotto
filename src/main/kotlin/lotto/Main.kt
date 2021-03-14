@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.controller.LottoGameController
-import lotto.model.game.LottoGame
+import lotto.service.LottoGame
 import lotto.view.ResultView
 
 fun main() {
