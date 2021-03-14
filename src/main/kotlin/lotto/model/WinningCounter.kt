@@ -21,10 +21,10 @@ data class WinningCounter(
             return counter.entries.fold(Money.zero, sumWinningsTimesCount())
         }
 
-    constructor(tickets: LottoTickets, winningNumbers: WinningNumbers, bonusNumbers: BonusNumbers) : this() {
+    constructor(tickets: LottoTickets, winningLotto: WinningLotto) : this() {
         tickets.forEach {
-            val winningCount = it.countMatch(winningNumbers)
-            val bonusCount = it.countMatch(bonusNumbers)
+            val winningCount = it.countMatch(winningLotto.winningNumbers)
+            val bonusCount = it.countMatch(winningLotto.bonusNumbers)
 
             record(winningCount, bonusCount)
         }
