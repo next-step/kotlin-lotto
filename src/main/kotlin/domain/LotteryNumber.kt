@@ -7,9 +7,8 @@ class LotteryNumber private constructor(private val number: Int) {
         private val NUMBERS: Map<Int, LotteryNumber>
                 = (MIN_RANDOM_NUMBER..MAX_RANDOM_NUMBER).associateWith { LotteryNumber(it) }
 
-        fun from(number: Numbers): LotteryNumber {
-            val randomNumber = number.makeNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER)
-            return NUMBERS[randomNumber] ?: throw IllegalArgumentException("잘못된 로또 번호입니다.")
+        fun from(number: Int): LotteryNumber {
+            return NUMBERS[number] ?: throw IllegalArgumentException("잘못된 로또 번호입니다.")
         }
     }
 
