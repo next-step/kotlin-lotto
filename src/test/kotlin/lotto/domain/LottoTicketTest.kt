@@ -47,6 +47,13 @@ internal class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("toString() 출력 확인")
+    fun printLottoNumber() {
+        val lottoTicket = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]")
+    }
+
+    @Test
     @DisplayName("갖고잇는 두 로또 티켓을 비교하여 겹치는 숫자의 개수를 반환한다.")
     fun winLottoTicketCount() {
         val winLottoTicket = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6))

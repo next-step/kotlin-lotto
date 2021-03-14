@@ -11,6 +11,10 @@ data class LottoNumber(private val number: Int) {
         return number in 1..45
     }
 
+    override fun toString(): String {
+        return "$number"
+    }
+
     companion object {
         val baseLottoNumbers: List<LottoNumber> = List(45) { LottoNumber(it + 1) }
     }

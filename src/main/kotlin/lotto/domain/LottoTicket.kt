@@ -18,6 +18,10 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
             .count { it }
     }
 
+    override fun toString(): String {
+        return lottoNumbers.joinToString(", ", "[", "]")
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
 
