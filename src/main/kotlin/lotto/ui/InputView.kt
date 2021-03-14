@@ -25,7 +25,7 @@ class InputView {
 
     fun inputPrizeNumber(): List<String> {
         println("\n지난 주 당첨 번호를 입력해 주세요")
-        return readLine()!!.split(", ") ?: throw IllegalArgumentException("당첨번호는 공백일 수 없습니다.")
+        return readLine()?.split(", ") ?: throw IllegalArgumentException("당첨번호는 공백일 수 없습니다.")
     }
 
     fun inputBonusNumber(): Int {

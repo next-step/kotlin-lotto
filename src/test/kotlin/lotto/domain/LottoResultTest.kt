@@ -25,7 +25,7 @@ class LottoResultTest {
     )
 
     private val bonusNumber = LottoNumber.from(11)
-    private val winningLotto = WinningLotto(winningNumbers, bonusNumber)
+    private val winningLotto = WinningLotto(LottoTicket(winningNumbers), bonusNumber)
 
     @Test
     fun `로또 번호들의 등수 확인`() {

@@ -17,7 +17,6 @@ fun main() {
     val lottoStore = LottoStore()
     val lottoResult = LottoResult()
     var purchasedManualLottoes: Lottoes = Lottoes(emptyList())
-    var purchasedAutoLottoes: Lottoes? = Lottoes(emptyList())
 
     val money = Money(inputView.inputMoney())
 
@@ -31,7 +30,7 @@ fun main() {
         purchasedManualLottoes = lottoStore.purchaseManual(money, numberOfManual, manualNumbers)
     }
 
-    purchasedAutoLottoes = lottoStore.purchaseAuto(money)
+    val purchasedAutoLottoes = lottoStore.purchaseAuto(money)
     outputView.printPurchasedLottoes(purchasedManualLottoes, purchasedAutoLottoes)
 
     val universalLottoes = Lottoes(purchasedManualLottoes.toList() + purchasedAutoLottoes.toList())
