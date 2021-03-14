@@ -1,7 +1,9 @@
 package caculator.ui
 
+import jdk.internal.joptsimple.internal.Strings
+
 class InputView(private val inputStrategy: InputStrategy) {
-    val value = tryEnterInput()
+    val value = Input(tryEnterInput())
 
     constructor(inputStrategy: InputStrategy, question: String) : this(inputStrategy) {
         println(question)
@@ -9,6 +11,6 @@ class InputView(private val inputStrategy: InputStrategy) {
 
     private fun tryEnterInput(): String {
         return inputStrategy.enter()
-            ?: throw IllegalArgumentException("입력값이 비어 있습니다")
+            ?: Strings.EMPTY
     }
 }

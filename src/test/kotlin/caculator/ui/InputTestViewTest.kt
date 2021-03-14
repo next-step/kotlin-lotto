@@ -1,19 +1,20 @@
 package caculator.ui
 
-import org.assertj.core.api.Assertions
+import jdk.internal.joptsimple.internal.Strings
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullSource
 
-internal class InputViewTest {
+internal class InputTestViewTest {
     @ParameterizedTest
     @NullSource
-    fun `null 입력시 예외 발생`(input: String?) {
-        Assertions.assertThatThrownBy {
+    fun `null 입력시 공백 반환`(input: String?) {
+        assertThat(
             InputView(object : InputStrategy {
                 override fun enter(): String? {
                     return input
                 }
-            })
-        }.isInstanceOf(IllegalArgumentException::class.java)
+            }).value
+        ).isEqualTo(Strings.EMPTY)
     }
 }
