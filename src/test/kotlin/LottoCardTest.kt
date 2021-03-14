@@ -31,10 +31,10 @@ class LottoCardTest {
         lottoCards.cards = lottoCardsData
 
         val beforeWeekLottoCard = LottoCard(listOf(1, 2, 3, 4, 5, 6))
-        val statistic = lottoCards.getStatistic(beforeWeekLottoCard).filter { it != Winning.NONE }
+        val statistic = lottoCards.getStatistic(beforeWeekLottoCard)
 
-        assertThat(statistic.filter { it == Winning.FIRST }.size, Matchers.`is`(1))
-        assertThat(statistic.filter { it == Winning.FOURTH }.size, Matchers.`is`(1))
+        assertThat(statistic.filter { it.key == Winning.FIRST }.size, Matchers.`is`(1))
+        assertThat(statistic.filter { it.key == Winning.FOURTH }.size, Matchers.`is`(1))
         assertThat(statistic.size, Matchers.`is`(2))
     }
 }

@@ -17,8 +17,8 @@ fun main() {
 }
 
 class Lotto {
-    fun getYieldRate(statistic: List<Winning>, price: Int): Double {
-        return statistic.map { it.price }.sum().toDouble() / price
+    fun getYieldRate(statistic: Map<Winning, Int>, price: Int): Double {
+        return statistic.map { it.key.price * it.value }.sum().toDouble() / price
     }
 
     fun validateLottoCard(numberLine: String?): List<Int> {

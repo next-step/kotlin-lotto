@@ -29,7 +29,8 @@ class LottoCard {
 class LottoCards(cnt: Int) {
     var cards: List<LottoCard> = (1..cnt).map { LottoCard() }
 
-    fun getStatistic(beforeWeekLottoCard: LottoCard): List<Winning> {
+    fun getStatistic(beforeWeekLottoCard: LottoCard): Map<Winning, Int> {
         return cards.map { it.getWinning(beforeWeekLottoCard) }
+            .filter { it != Winning.NONE }.groupingBy { it }.eachCount()
     }
 }

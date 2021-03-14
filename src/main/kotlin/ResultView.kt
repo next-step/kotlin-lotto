@@ -2,12 +2,11 @@ fun printLottoCards(lottoCards: LottoCards) {
     lottoCards.cards.forEach { println(it) }
 }
 
-fun printResult(statistic: List<Winning>, yieldRate: Double) {
+fun printResult(statistic: Map<Winning, Int>, yieldRate: Double) {
     println("당첨 통계")
     println("---------")
-    Winning.values().filter { it != Winning.NONE }.forEach {
-        val count = statistic.count { it2 -> it == it2 }
-        println("${it.match}개 일치 (${it.price}원)- ${count}개")
+    Winning.values().forEach {
+        println("${it.match}개 일치 (${it.price}원)- ${statistic.getOrDefault(it, 0)}개")
     }
     println("총 수익률은 ${yieldRate}입니다.")
 }
