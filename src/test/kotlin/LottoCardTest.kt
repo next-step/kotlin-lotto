@@ -19,4 +19,22 @@ class LottoCardTest {
             `is`(cnt)
         )
     }
+
+    @Test
+    fun `정상적으로 당첨 통계 로직을 수행한다`() {
+        val lottoCards = LottoCards(0)
+        val lottoCardsData = listOf(
+            LottoCard(listOf(1, 2, 3, 4, 5, 6)), LottoCard(listOf(11, 12, 13, 14, 15, 16)),
+            LottoCard(listOf(1, 2, 3, 14, 15, 16))
+        )
+
+        lottoCards.cards = lottoCardsData
+
+        val beforeWeekLottoCard = LottoCard(listOf(1, 2, 3, 4, 5, 6))
+        val statistic = lottoCards.getStatistic(beforeWeekLottoCard).filter { it != Winning.NONE }
+
+        assertThat(statistic.filter { it == Winning.FIRST }.size, Matchers.`is`(1))
+        assertThat(statistic.filter { it == Winning.FOURTH }.size, Matchers.`is`(1))
+        assertThat(statistic.size, Matchers.`is`(2))
+    }
 }

@@ -11,7 +11,7 @@ fun main() {
 
     val numbers = lotto.validateLottoCard(inputLottoNumber())
     val beforeWeekLottoCard = LottoCard(numbers)
-    val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard)
+    val statistic = lottoCards.getStatistic(beforeWeekLottoCard)
     val yieldRate = lotto.getYieldRate(statistic, price)
     printResult(statistic, yieldRate)
 }
@@ -19,13 +19,6 @@ fun main() {
 class Lotto {
     fun getYieldRate(statistic: List<Winning>, price: Int): Double {
         return statistic.map { it.price }.sum().toDouble() / price
-    }
-
-    fun getStatistic(lottoCards: LottoCards, beforeWeekLottoCard: LottoCard): List<Winning> {
-        return lottoCards.cards.map {
-            val count = it.getMatchCount(beforeWeekLottoCard)
-            Winning.matchWinning(count)
-        }
     }
 
     fun validateLottoCard(numberLine: String?): List<Int> {
