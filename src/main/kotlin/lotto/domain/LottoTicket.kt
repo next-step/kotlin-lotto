@@ -5,8 +5,16 @@ import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 
 class LottoTicket(val value: List<LottoNumber>) {
 
+    init {
+        checkValidateLottoTicket()
+    }
+
+    private fun checkValidateLottoTicket() {
+        if(value.size != LENGTH_OF_LOTTO) throw RuntimeException("로또의 숫자는 6개가 존재해야 합니다.")
+    }
+
     fun getTicketRank(winningLotto: WinningLotto): Rank {
-        val countOfMatch = getCountOfMatch(winningLotto.winningNumbers)
+        val countOfMatch = getCountOfMatch(winningLotto.winningNumbers.value)
         val bonusMatches = isBonusNumberMatch(winningLotto.bonusNumber)
         return Rank.valueOf(countOfMatch, bonusMatches)
     }

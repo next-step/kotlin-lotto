@@ -32,7 +32,7 @@ class OutputView {
     }
 
     private fun printRateOfReturn(money: Money, ranks: LottoesRank) {
-        money.earnMoney(ranks.getWinningMoney())
-        println("총 수익률은 ${money.calculateRateOfReturn()}입니다.")
+        val winningMoney = ranks.getWinningMoney()
+        println("총 수익률은 ${money.calculateRateOfReturn(winningMoney)}입니다.")
     }
 }
