@@ -10,7 +10,7 @@ class LottoTicket(val value: List<LottoNumber>) {
     }
 
     private fun checkValidateLottoTicket() {
-        if(value.size != LENGTH_OF_LOTTO) throw RuntimeException("로또의 숫자는 6개가 존재해야 합니다.")
+        if (value.size != LENGTH_OF_LOTTO) throw RuntimeException("로또의 숫자는 6개가 존재해야 합니다.")
     }
 
     fun getTicketRank(winningLotto: WinningLotto): Rank {

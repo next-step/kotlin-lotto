@@ -36,9 +36,11 @@ fun main() {
 
     val universalLottoes = Lottoes(purchasedManualLottoes.toList() + purchasedAutoLottoes.toList())
 
-    val winningNumbers = LottoTicket(inputView.inputPrizeNumber().map {
-        LottoNumber.from(it.toInt())
-    })
+    val winningNumbers = LottoTicket(
+        inputView.inputPrizeNumber().map {
+            LottoNumber.from(it.toInt())
+        }
+    )
     val bonusNumber = LottoNumber.from(inputView.inputBonusNumber())
 
     val ranks = lottoResult.getMyLottoesRanks(universalLottoes, WinningLotto(winningNumbers, bonusNumber))

@@ -14,7 +14,6 @@ class LottoStoreTest {
     @BeforeEach
     fun init() {
         lottoStore = LottoStore()
-
     }
 
     @ParameterizedTest
