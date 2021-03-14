@@ -1,5 +1,9 @@
 package lotto.model
 
+import lotto.model.game.Lotto
+import lotto.model.game.LottoNumber
+import lotto.model.game.WinningLotto
+import lotto.model.result.Coincidence
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
@@ -85,7 +89,7 @@ internal class LottoTest {
         val myLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val count = myLotto.getWinningCount(Lotto(listOf(1, 2, 3, 4, 5, 7)))
+        val count = myLotto.getMatchCount(Lotto(listOf(1, 2, 3, 4, 5, 7)))
 
         // then
         assertThat(count).isEqualTo(5)
@@ -108,7 +112,7 @@ internal class LottoTest {
         val lotto = Lotto("1,2,3,4,5,6")
 
         // when
-        val hasNumber: Boolean = lotto.hasBonusNumber(LottoNumber(num))
+        val hasNumber: Boolean = lotto.hasNumber(LottoNumber(num))
 
         // then
         assertThat(hasNumber).isEqualTo(expectedHasNumber)
@@ -118,13 +122,12 @@ internal class LottoTest {
     fun `Lotto(당첨로또)와 LottoNumber(보너스번호)를 주면 결과(Coincidence)를 반환한다`() {
         // given
         val myLotto = Lotto("1,2,3,4,5,6")
-        val winningLotto = Lotto("1,2,3,4,5,7")
-        val bonusNumber = LottoNumber("6")
+        val winningLotto = WinningLotto(Lotto("1,2,3,4,5,7"), LottoNumber("6"))
 
         // when
-        val result: Coincidence? = myLotto.getResult(winningLotto, bonusNumber)
+        val result: Coincidence? = myLotto.getResult(winningLotto)
 
         // then
-        assertThat(result).isEqualTo(Coincidence.FIVE_WITH_BONUS)
+        assertThat(result).isEqualTo(Coincidence.SECOND)
     }
 }

@@ -1,8 +1,8 @@
-package lotto.model
+package lotto.model.input
 
-class Delimiter(val sixNumberString: String) {
+class Delimiter(private val inputBeforeSplit: String) {
     fun split(): List<String> {
-        return splitByComma(sixNumberString)
+        return splitByComma(inputBeforeSplit)
     }
 
     private fun splitByComma(stringNumbers: String): List<String> {

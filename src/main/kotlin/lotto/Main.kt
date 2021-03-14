@@ -1,18 +1,23 @@
 package lotto
 
-import lotto.model.LottoNumberPool
-import lotto.model.Lottos
-import lotto.view.InputView
+import lotto.controller.LottoGameController
+import lotto.service.LottoGame
 import lotto.view.ResultView
 
 fun main() {
-    val lottoCount = InputView.askBudgetQuestion().getBuyableLottoCount()
-    ResultView.printLottoCount(lottoCount)
+    val lottoGame = LottoGame()
+    val lottoGameController = LottoGameController(lottoGame)
 
-    val myLottos = Lottos(LottoNumberPool, lottoCount)
-    ResultView.printMyLottos(myLottos)
+    val totalLottoCount = lottoGameController.ready()
+    ResultView.printLottoCount(totalLottoCount)
 
-    val winningLotto = InputView.askWinningLotto()
-    val bonusLottoNumber = InputView.askBonusNumber(winningLotto)
-    ResultView.printResult(myLottos, winningLotto, bonusLottoNumber)
+    val totalLottos = lottoGameController.buy(totalLottoCount)
+    ResultView.printMyLottos(totalLottos)
+
+    val winningLotto = lottoGameController.getWinningLotto()
+    val gameResult = lottoGameController.match(totalLottos, winningLotto)
+    ResultView.printResult(gameResult)
+
+    val earningRate = lottoGameController.getEarningRate(totalLottos, winningLotto)
+    ResultView.printEarningRate(earningRate)
 }

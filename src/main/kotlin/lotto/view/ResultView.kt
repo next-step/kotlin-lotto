@@ -1,38 +1,43 @@
 package lotto.view
 
-import lotto.model.Coincidence
-import lotto.model.Lotto
-import lotto.model.LottoNumber
-import lotto.model.Lottos
+import lotto.model.game.Lottos
+import lotto.model.result.Coincidence
+import lotto.model.result.Result
+import java.math.BigDecimal
 
 object ResultView {
     fun printMyLottos(lottos: Lottos) {
-        lottos.myLottos.forEach { println(it.toString()) }
+        lottos.lottos.forEach { println(it.toString()) }
         println()
     }
 
     fun printLottoCount(lottoCount: Int) {
         println("${lottoCount}개를 구매했습니다.")
+        println()
     }
 
-    fun printResult(myLottos: Lottos, winningLotto: Lotto, bonusLottoNumber: LottoNumber) {
+    fun printResult(results: Map<Coincidence, Result>) {
         printStatisticsInstruction()
-        printResultStatistics(myLottos, winningLotto, bonusLottoNumber)
-        printEarningRate(myLottos, winningLotto)
+        printResultStatistics(results)
     }
 
-    fun printResultStatistics(myLottos: Lottos, winningLotto: Lotto, bonusLottoNumber: LottoNumber) {
-        Coincidence.values().forEach {
-            print("${it.coincidenceCount}개 일치")
-            if (it.hasBonusNum) print(" 보너스 볼 일치")
-            print("(${it.prizeMoney}원)")
-            println("- ${myLottos.getCoincidenceCount(it, winningLotto, bonusLottoNumber)}개 ")
-        }
-    }
-
-    fun printEarningRate(myLottos: Lottos, winningLotto: Lotto) {
-        val earningRate = myLottos.getEarningRate(winningLotto)
+    fun printEarningRate(earningRate: BigDecimal) {
         println("총 수익률은 $earningRate")
+    }
+
+    private fun printResultStatistics(results: Map<Coincidence, Result>) {
+        results.forEach { printResult(it.key, it.value) }
+        println()
+    }
+
+    private fun printResult(coincidence: Coincidence, result: Result) {
+        println(String.format(getTemplateForResult(coincidence, result)))
+    }
+
+    private fun getTemplateForResult(coincidence: Coincidence, result: Result): String {
+        return "${coincidence.coincidenceCount}개 일치 " +
+            "${if (coincidence.hasBonusNum) ", 보너스 볼 일치" else ""} " +
+            "(${coincidence.prizeMoney}원) - ${result.matchCount}개"
     }
 
     private fun printStatisticsInstruction() {

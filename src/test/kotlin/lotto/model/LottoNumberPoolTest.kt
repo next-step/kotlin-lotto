@@ -1,5 +1,7 @@
 package lotto.model
 
+import lotto.model.game.Lotto
+import lotto.model.game.LottoNumberPool
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,6 +12,6 @@ internal class LottoNumberPoolTest {
         val oneLotto: Lotto = LottoNumberPool.getOneLotto()
 
         // then
-        assertThat(oneLotto.lottoNums.size).isEqualTo(6)
+        assertThat(oneLotto.lottoNumbers.size).isEqualTo(6)
     }
 }

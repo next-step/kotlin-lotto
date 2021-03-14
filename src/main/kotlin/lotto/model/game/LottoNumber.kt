@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.model.game
 
 data class LottoNumber(val number: Int) {
     init {

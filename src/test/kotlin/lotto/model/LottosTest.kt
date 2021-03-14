@@ -1,10 +1,17 @@
 package lotto.model
 
+import lotto.model.game.Lotto
+import lotto.model.game.LottoNumber
+import lotto.model.game.Lottos
+import lotto.model.game.WinningLotto
+import lotto.model.result.Coincidence
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import java.math.RoundingMode
+import java.util.stream.Stream
 
 internal class LottosTest {
     @Test
@@ -13,31 +20,10 @@ internal class LottosTest {
         val lottoCount = 5
 
         // when
-        val myLottos = Lottos(LottoNumberPool, lottoCount)
+        val myLottos = Lottos(lottoCount)
 
         // then
-        assertThat(myLottos.myLottos.size).isEqualTo(5)
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = [3, 4, 5, 6])
-    fun `당첨번호와 일치카운트를 인자로 주면, 해당 당첨번호와 일치카운트만큼 일치하는 로또 갯수를 반환한다`(checkCount: Int) {
-        // given
-        val lottos = Lottos(
-            listOf(
-                Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto(listOf(1, 2, 3, 4, 5, 7)),
-                Lotto(listOf(1, 2, 3, 4, 8, 9)),
-                Lotto(listOf(1, 2, 3, 10, 11, 12))
-            )
-        )
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-
-        // when
-        val count = lottos.check(Lotto(winningNumbers), checkCount)
-
-        // then
-        assertThat(count).isEqualTo(1)
+        assertThat(myLottos.lottos.size).isEqualTo(5)
     }
 
     @Test
@@ -62,8 +48,9 @@ internal class LottosTest {
         assertThat(earningRate).isEqualTo(5000.toBigDecimal().divide(6000.toBigDecimal(), 2, RoundingMode.FLOOR))
     }
 
-    @Test
-    fun `Coincidence를 인자로 주면, Lottos에서 해당 결과와 같은 결과를 가지는 로또 갯수를 반환한다`() {
+    @ParameterizedTest
+    @MethodSource("provideParameters")
+    fun `Coincidence를 인자로 주면, 해당하는 로또 갯수를 반환한다`(coincidence: Coincidence, expectedCount: Int) {
         // given
         val lottos = Lottos(
             listOf(
@@ -75,21 +62,25 @@ internal class LottosTest {
                 Lotto(listOf(1, 2, 3, 43, 44, 45))
             )
         )
-        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val bonusNumber = LottoNumber(7)
+        val winningLotto = WinningLotto(Lotto("1, 2, 3, 4, 5, 6"), LottoNumber(7))
 
         // when
-        val countForSix = lottos.getCoincidenceCount(Coincidence.SIX, winningLotto, bonusNumber)
-        val countForFiveWithBonus = lottos.getCoincidenceCount(Coincidence.FIVE_WITH_BONUS, winningLotto, bonusNumber)
-        val countForFive = lottos.getCoincidenceCount(Coincidence.FIVE, winningLotto, bonusNumber)
-        val countForFour = lottos.getCoincidenceCount(Coincidence.FOUR, winningLotto, bonusNumber)
-        val countForThree = lottos.getCoincidenceCount(Coincidence.THREE, winningLotto, bonusNumber)
+        val count = lottos.getCoincidenceCount(coincidence, winningLotto)
 
         // then
-        assertThat(countForSix).isEqualTo(1)
-        assertThat(countForFiveWithBonus).isEqualTo(1)
-        assertThat(countForFive).isEqualTo(0)
-        assertThat(countForFour).isEqualTo(2)
-        assertThat(countForThree).isEqualTo(2)
+        assertThat(count).isEqualTo(expectedCount)
+    }
+
+    companion object {
+        @JvmStatic
+        private fun provideParameters(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.arguments(Coincidence.FIRST, 1),
+                Arguments.arguments(Coincidence.SECOND, 1),
+                Arguments.arguments(Coincidence.THIRD, 0),
+                Arguments.arguments(Coincidence.FOURTH, 2),
+                Arguments.arguments(Coincidence.FIFTH, 2)
+            )
+        }
     }
 }
