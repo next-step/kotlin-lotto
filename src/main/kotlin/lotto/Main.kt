@@ -1,18 +1,23 @@
 package lotto
 
-import lotto.model.game.LottoGame
 import lotto.controller.LottoGameController
-import lotto.model.game.LottoMachine
-import lotto.view.InputReader
+import lotto.model.game.LottoGame
+import lotto.view.ResultView
 
 fun main() {
-    val lottoMachine = LottoMachine()
-    val inputReader = InputReader()
-    val lottoGame = LottoGame(lottoMachine, inputReader)
-    val lottoGameController = LottoGameController(lottoGame)
+    val lottoMachine = LottoGame()
+    val lottoGameController = LottoGameController(lottoMachine)
 
-    lottoGameController.ready()
-    lottoGameController.buy()
-    lottoGameController.match()
-    lottoGameController.getEarningRate()
+    val totalLottoCount = lottoGameController.ready()
+    ResultView.printLottoCount(totalLottoCount)
+
+    val totalLottos = lottoGameController.buy(totalLottoCount)
+    ResultView.printMyLottos(totalLottos)
+
+    val winningLotto = lottoGameController.getWinningLotto()
+    val gameResult = lottoGameController.match(totalLottos, winningLotto)
+    ResultView.printResult(gameResult)
+
+    val earningRate = lottoGameController.getEarningRate(totalLottos, winningLotto)
+    ResultView.printEarningRate(earningRate)
 }

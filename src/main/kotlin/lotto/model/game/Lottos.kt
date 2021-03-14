@@ -18,6 +18,13 @@ class Lottos(val lottos: List<Lotto>) {
         return lottos.count { coincidence == it.getResult(winningLotto) }
     }
 
+    fun add(other: Lottos): Lottos {
+        val newLottos = lottos.toMutableList()
+        other.lottos.forEach { newLottos.add(it) }
+
+        return Lottos(newLottos)
+    }
+
     private fun getTotalPrizeMoney(winningLotto: Lotto): BigDecimal {
         return Coincidence.values()
             .map { check(winningLotto, it.coincidenceCount) * it.prizeMoney }
