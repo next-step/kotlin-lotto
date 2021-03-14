@@ -1,6 +1,5 @@
 package calculator
 
-
 class StringAddCalculator {
     @Throws(RuntimeException::class)
     fun add(text: String??): Int {
@@ -11,12 +10,11 @@ class StringAddCalculator {
         val splitter = splitterAndExpression.first
         val expression = splitterAndExpression.second
 
-        val numbers = expression.split(Regex(splitter))
-        validateNumber(numbers)
+        val numbers = expression.split(Regex(splitter)).toTypedArray()
 
-        return numbers.map {
-            it.toInt()
-        }.sum()
+        val stringNumberCollection = StringNumberCollection(numbers)
+
+        return stringNumberCollection.sum()
     }
 
     private fun getSplitterAndExpression(text: String): Pair<String, String> {
@@ -25,14 +23,7 @@ class StringAddCalculator {
         return Pair(regax.groupValues[1], regax.groupValues[2])
     }
 
-    private fun validateNumber(list: List<String>) {
-        list.forEach {
-            if (it.toInt() < MINIMUM_NUMBER) throw RuntimeException()
-        }
-    }
-
     companion object {
-        private const val MINIMUM_NUMBER = 0
-        private const val DEFAULT_SPLITTER = ",|:";
+        private const val DEFAULT_SPLITTER = ",|:"
     }
 }
