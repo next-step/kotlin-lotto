@@ -10,7 +10,5 @@ class LotteryStore {
         val numberOfLottery = Reception.receiveNumberOfLottery()
 
         val lotteries = Lotteries.of(numberOfLottery)
-
-        ResultView.printLotteries(lotteries)
     }
 }
