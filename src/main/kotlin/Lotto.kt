@@ -11,7 +11,8 @@ fun main() {
 
     val numbers = lotto.validateLottoCard(inputLottoNumber())
     val beforeWeekLottoCard = LottoCard(numbers)
-    val statistic = lottoCards.getStatistic(beforeWeekLottoCard)
+    val bonusNumber = 0
+    val statistic = lottoCards.getStatistic(beforeWeekLottoCard, bonusNumber)
     val yieldRate = lotto.getYieldRate(statistic, price)
     printResult(statistic, yieldRate)
 }

@@ -67,7 +67,7 @@ class LottoTest {
     fun `수익률을 정상적으로 계산한다`() {
         val map = mapOf(Winning.SECOND to 2, Winning.THIRD to 1)
         val yieldRate = lotto.getYieldRate(map, 50000)
-        assertThat(yieldRate, `is`(61.0))
+        assertThat(yieldRate, `is`(1230.0))
     }
 
     @Test

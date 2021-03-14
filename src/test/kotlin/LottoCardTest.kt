@@ -25,16 +25,20 @@ class LottoCardTest {
         val lottoCards = LottoCards(0)
         val lottoCardsData = listOf(
             LottoCard(listOf(1, 2, 3, 4, 5, 6)), LottoCard(listOf(11, 12, 13, 14, 15, 16)),
-            LottoCard(listOf(1, 2, 3, 14, 15, 16))
+            LottoCard(listOf(1, 2, 3, 14, 15, 16)), LottoCard(listOf(1, 2, 3, 4, 5, 7)),
+            LottoCard(listOf(1, 2, 3, 4, 5, 9))
         )
 
         lottoCards.cards = lottoCardsData
 
         val beforeWeekLottoCard = LottoCard(listOf(1, 2, 3, 4, 5, 6))
-        val statistic = lottoCards.getStatistic(beforeWeekLottoCard)
+        val bonusNumber = 7
+        val statistic = lottoCards.getStatistic(beforeWeekLottoCard, bonusNumber)
 
         assertThat(statistic.filter { it.key == Winning.FIRST }.size, Matchers.`is`(1))
-        assertThat(statistic.filter { it.key == Winning.FOURTH }.size, Matchers.`is`(1))
-        assertThat(statistic.size, Matchers.`is`(2))
+        assertThat(statistic.filter { it.key == Winning.SECOND }.size, Matchers.`is`(1))
+        assertThat(statistic.filter { it.key == Winning.THIRD }.size, Matchers.`is`(1))
+        assertThat(statistic.filter { it.key == Winning.FIFTH }.size, Matchers.`is`(1))
+        assertThat(statistic.size, Matchers.`is`(4))
     }
 }

@@ -9,9 +9,9 @@ class LottoCard {
         this.numbers = numbers
     }
 
-    fun getWinning(winningLottoCard: LottoCard): Winning {
+    fun getWinning(winningLottoCard: LottoCard, bonusNumber: Int): Winning {
         val count = numbers.filter { winningLottoCard.numbers.contains(it) }.size
-        return Winning.matchWinning(count)
+        return Winning.matchWinning(count, numbers.contains(bonusNumber))
     }
 
     override fun toString(): String {
@@ -29,8 +29,8 @@ class LottoCard {
 class LottoCards(cnt: Int) {
     var cards: List<LottoCard> = (1..cnt).map { LottoCard() }
 
-    fun getStatistic(beforeWeekLottoCard: LottoCard): Map<Winning, Int> {
-        return cards.map { it.getWinning(beforeWeekLottoCard) }
+    fun getStatistic(beforeWeekLottoCard: LottoCard, bonusNumber: Int): Map<Winning, Int> {
+        return cards.map { it.getWinning(beforeWeekLottoCard, bonusNumber) }
             .filter { it != Winning.NONE }.groupingBy { it }.eachCount()
     }
 }
