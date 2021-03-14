@@ -1,7 +1,7 @@
 package lotto.domain
 
 interface Exchange<ProductT> {
-    fun pay(money: Money, manualPick: List<LottoNumbers> = emptyList())
+    fun pay(money: Money, manualPick: List<LottoNumbers>)
 
     fun product(): List<ProductT>
 
