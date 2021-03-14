@@ -9,9 +9,12 @@ class LottoStore {
         return Lottoes(lottoes)
     }
 
-    fun purchaseManual(money: Int, numbers: List<Int>): Lottoes {
+    fun purchaseManual(money: Int, numbersOfTickets: List<List<Int>>): Lottoes {
         val quantity = money / LOTTO_COST
-        val lottoes = (1..quantity).map { LottoTicket.generateManual(numbers) }
+        val lottoes = arrayListOf<LottoTicket>()
+        for (numbers in numbersOfTickets) {
+            lottoes.add(LottoTicket.generateManual(numbers))
+        }
 
         return Lottoes(lottoes)
     }
