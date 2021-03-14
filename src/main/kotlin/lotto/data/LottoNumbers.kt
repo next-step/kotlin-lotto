@@ -23,21 +23,15 @@ class LottoNumbers(
     }
 
     private fun hasDuplicatedNumber(): Boolean {
-        lottoNumbers.forEach { lottoNumber ->
-            if (isDuplicated(lottoNumber)) return false
-        }
-        return true
+        return lottoNumbers.find(::isDuplicated) != null
     }
 
     private fun isDuplicated(lottoNumber: LottoNumber): Boolean {
-        val sameNumberCount = lottoNumbers.filter { it == lottoNumber }.count()
-        if (sameNumberCount != 1) {
-            return true
-        }
-        return false
+        return lottoNumbers.count { it == lottoNumber } != COUNT_OF_UNIQUE_NUMBER
     }
 
     companion object {
         private const val LOTTO_NUMBERS_SIZE = 6
+        private const val COUNT_OF_UNIQUE_NUMBER = 1
     }
 }
