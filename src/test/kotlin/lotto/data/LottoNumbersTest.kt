@@ -20,19 +20,19 @@ class LottoNumbersTest {
     }
 
     @Test
-    fun `로또 번호의 개수인 6개보다 많이 가지고 있다`() {
+    fun `로또 번호의 개수인 6개보다 많이 가지고 있으면 안된다`() {
         assertThatThrownBy { LottoNumbers(listOf(1, 2, 3, 4, 5, 6, 7)) }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @Test
-    fun `로또 번호의 개수인 6개보다 적게 가지고 있다`() {
+    fun `로또 번호의 개수인 6개보다 적게 가지고 있으면 안된다`() {
         assertThatThrownBy { LottoNumbers(listOf(1, 2, 3, 4, 5)) }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @Test
-    fun `로또 번호가 중복되는 숫자가 있다`() {
+    fun `로또 번호가 중복되는 숫자가 있으면 안된다`() {
         assertThatThrownBy { LottoNumbers(listOf(1, 2, 2, 4, 5)) }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
