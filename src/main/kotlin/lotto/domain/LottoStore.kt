@@ -2,15 +2,16 @@ package lotto.domain
 
 class LottoStore {
 
-    fun purchaseAuto(money: Int): Lottoes {
-        val quantity = money / LOTTO_COST
+    fun purchaseAuto(money: Money): Lottoes {
+        val quantity = money.currentMoney / LOTTO_COST
+        money.spendAllMoney()
         val lottoes = (1..quantity).map { LottoTicket.generateAuto() }
 
         return Lottoes(lottoes)
     }
 
-    fun purchaseManual(money: Int, numbersOfTickets: List<List<Int>>): Lottoes {
-        val quantity = money / LOTTO_COST
+    fun purchaseManual(money: Money, numberOfManuals: Int, numbersOfTickets: List<List<Int>>): Lottoes {
+        money.spendMoney(LOTTO_COST * numberOfManuals)
         val lottoes = arrayListOf<LottoTicket>()
         for (numbers in numbersOfTickets) {
             lottoes.add(LottoTicket.generateManual(numbers))

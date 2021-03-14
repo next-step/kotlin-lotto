@@ -2,6 +2,7 @@ package lotto.ui
 
 import lotto.domain.Lottoes
 import lotto.domain.LottoesRank
+import lotto.domain.Money
 import lotto.domain.Rank
 
 class OutputView {
@@ -17,7 +18,7 @@ class OutputView {
         }
     }
 
-    fun printLottoesResult(money: Int, ranks: LottoesRank) {
+    fun printLottoesResult(money: Money, ranks: LottoesRank) {
         val rankMap = ranks.getRanks()
         println("\n당첨 통계")
         println("------------")
@@ -30,8 +31,8 @@ class OutputView {
         printRateOfReturn(money, ranks)
     }
 
-    private fun printRateOfReturn(money: Int, ranks: LottoesRank) {
-        val prizeMoney = ranks.getWinningMoney()
-        println("총 수익률은 ${String.format("%.2f", prizeMoney.toFloat() / money.toFloat())}입니다.")
+    private fun printRateOfReturn(money: Money, ranks: LottoesRank) {
+        money.earnMoney(ranks.getWinningMoney())
+        println("총 수익률은 ${money.calculateRateOfReturn()}입니다.")
     }
 }
