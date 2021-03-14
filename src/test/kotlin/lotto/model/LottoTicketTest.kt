@@ -8,6 +8,6 @@ internal class LottoTicketTest {
     fun `LottoTicket 은 생성될때 6자리의 번호가 자동 으로 생성된다`() {
         val lottoTicket = LottoTicket()
 
-        assertThat(lottoTicket.numbers.size).isEqualTo(6)
+        assertThat(lottoTicket.candidateNumbers.size).isEqualTo(6)
     }
 }

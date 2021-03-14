@@ -3,12 +3,12 @@ package lotto.model
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-data class LottoResult(val winningCounter: WinningCounter, val sumCostOfTickets: Money) {
+data class LottoResult(val winningCounter: WinningCounter, val ticketPriceSum: Money) {
     val benefitRate: Double
         get() {
-            val totalWinnings = winningCounter.winningsSum
+            val totalPrice = winningCounter.priceSum
 
-            val benefitRate = totalWinnings / sumCostOfTickets
+            val benefitRate = totalPrice / ticketPriceSum
             return ceilToSecond(benefitRate)
         }
 

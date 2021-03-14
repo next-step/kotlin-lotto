@@ -1,9 +1,9 @@
 package lotto.model
 
-class LottoStore(private val price: Money = Money.thousand) {
-    fun buy(money: Money): LottoTickets {
-        val ticketCount = (money / price).toInt()
+class LottoStore {
+    fun buy(moneyAmount: Money): LottoTickets {
+        val affordableTicketsCount = (moneyAmount / LottoTicket.PRICE).toInt()
 
-        return LottoTickets.issue(ticketCount)
+        return LottoTickets((1..affordableTicketsCount).map { LottoTicket() })
     }
 }
