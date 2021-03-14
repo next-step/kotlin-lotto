@@ -11,7 +11,7 @@ class LottoesRank(
 
     fun getWinningMoney(): Long {
         return value.map { rank ->
-            rank.key.prizeMoney * rank.value.size
-        }.sum().toLong()
+            rank.key.prizeMoney.toLong() * rank.value.size
+        }.sum()
     }
 }
