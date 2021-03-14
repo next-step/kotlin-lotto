@@ -12,6 +12,7 @@ data class StringNumber(val number: String) {
     override fun toString(): String {
         return number
     }
+
     companion object {
         private const val MINIMUM_NUMBER = 0
     }
