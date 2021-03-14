@@ -49,10 +49,17 @@ interface UserInput<T> {
         private val intListInput: IntList
     ) : UserInput<List<List<kotlin.Int>>> {
 
-        constructor(question: String, groupSize: kotlin.Int, answer: String) : this(
-            groupSize,
-            IntList(question, StringReader(answer))
-        )
+        constructor(
+            question: String,
+            groupSize: kotlin.Int,
+            readable: Readable = InputStreamReader(System.`in`)
+        ) : this(groupSize, IntList(question, readable))
+
+        constructor(
+            question: String,
+            groupSize: kotlin.Int,
+            answer: String
+        ) : this(question, groupSize, StringReader(answer))
 
         override fun answer(): List<List<kotlin.Int>> {
             return (0 until groupSize).map {

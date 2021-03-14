@@ -16,6 +16,10 @@ fun main() {
 
     val manualPickCount = UserInput.Int("수동으로 구매할 로또 수를 입력해 주세요.").answer()
 
+    val manualPickNumbers = UserInput.IntListGroup("수동으로 구매할 번호를 입력해 주세요.", manualPickCount)
+        .answer()
+        .map { LottoNumbers(it) }
+
     val lottoNumbers = LottoAgent(LottoDrawMachine((1..45)))
         .exchange
         .let {
