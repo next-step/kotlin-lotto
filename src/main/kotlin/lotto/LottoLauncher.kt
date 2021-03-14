@@ -5,6 +5,7 @@ import lotto.domain.LottoNum
 import lotto.domain.LottoPaper
 import lotto.domain.Money
 import lotto.domain.Store
+import lotto.domain.WinLotto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -13,13 +14,13 @@ private val outputView = OutputView()
 
 fun main() {
     val price = Money(inputView.requestPrice())
-    val store = Store()
-    val lottoPaper: LottoPaper = store.sell(price)
+    val selfLottoNumsList = inputView.requestSelfLottosNums().map { LottoNum.listFrom(it) }
 
-    outputView.renderLottoPaper(lottoPaper)
+    val lottoPaper: LottoPaper = Store().sell(price, selfLottoNumsList)
 
-    val winLotto = Lotto(inputView.requestWinNums())
-    val bonusNum = LottoNum.of(inputView.requestBonusNum())
+    outputView.renderLottoPaper(selfLottoNumsList.size, lottoPaper)
 
-    outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto, bonusNum))
+    val winLotto = WinLotto(Lotto(inputView.requestWinNums().map { LottoNum.from(it) }), LottoNum.from(inputView.requestBonusNum()))
+
+    outputView.renderStatistics(lottoPaper.doStatistics(price, winLotto))
 }

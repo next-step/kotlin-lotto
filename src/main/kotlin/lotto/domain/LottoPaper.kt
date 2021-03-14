@@ -1,20 +1,12 @@
 package lotto.domain
 
 internal data class LottoPaper(val lottos: List<Lotto>) {
-
-    fun doStatistics(money: Money, winLotto: Lotto, bonusNum: LottoNum): LottoStatistics {
-        val rankCounts: HashMap<Rank, Int> = hashMapOf()
-        this.lottos.forEach {
-            val matchedNums = it.findMatchedNums(winLotto)
-            val rank = Rank.find(matchedNums.size, it.contain(bonusNum))
-            val count = rankCounts.getOrDefault(rank, EMPTY_COUNT)
-            rankCounts[rank] = count + 1
+    fun doStatistics(money: Money, winLotto: WinLotto): LottoStatistics {
+        val ranks = this.lottos.map {
+            val matchedNums = winLotto.findMatchNums(it)
+            Rank.find(matchedNums.size, winLotto.matchBonusNum(it))
         }
 
-        return LottoStatistics(money, rankCounts)
-    }
-
-    companion object {
-        private const val EMPTY_COUNT = 0
+        return LottoStatistics(money, ranks)
     }
 }
