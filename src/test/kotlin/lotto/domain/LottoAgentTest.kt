@@ -1,10 +1,5 @@
 package lotto.domain
 
-import lotto.domain.Exchange
-import lotto.domain.LottoAgent
-import lotto.domain.LottoDrawMachine
-import lotto.domain.LottoNumbers
-import lotto.domain.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

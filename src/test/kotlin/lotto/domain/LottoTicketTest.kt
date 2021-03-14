@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoTicket
-import lotto.domain.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
