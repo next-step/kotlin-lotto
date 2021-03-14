@@ -25,6 +25,8 @@ enum class WinningPlace(val price: Money, val count: Int, val bonusExist: Boolea
             return candidates.first()
         }
 
-        private fun isSecondOrThird(candidates: List<WinningPlace>) = candidates.size == 2
+        private fun isSecondOrThird(candidates: List<WinningPlace>): Boolean {
+            return candidates.containsAll(listOf(SECOND, THIRD))
+        }
     }
 }
