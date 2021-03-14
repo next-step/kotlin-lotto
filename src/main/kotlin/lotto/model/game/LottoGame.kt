@@ -17,15 +17,6 @@ class LottoGame {
         return lottoByManual.add(lottoByAuto)
     }
 
-    private fun getLottosByManualNumbers(lottos: List<List<Int>>): Lottos {
-        val manualLottos = lottos.map { Lotto(it) }
-        return Lottos(manualLottos)
-    }
-
-    private fun getLottosByAutoCount(autoCount: Int): Lottos {
-        return Lottos(autoCount)
-    }
-
     fun getResult(lottos: Lottos, winningLotto: WinningLotto): Map<Coincidence, Result> {
         val lottoTicket = LottoTicket(lottos, winningLotto)
 
@@ -33,5 +24,14 @@ class LottoGame {
             .filterNot { it == Coincidence.MISS }
             .map { it to Result(lottoTicket.getMatchedLottoCount(it)) }
             .toMap()
+    }
+
+    private fun getLottosByManualNumbers(lottos: List<List<Int>>): Lottos {
+        val manualLottos = lottos.map { Lotto(it) }
+        return Lottos(manualLottos)
+    }
+
+    private fun getLottosByAutoCount(autoCount: Int): Lottos {
+        return Lottos(autoCount)
     }
 }
