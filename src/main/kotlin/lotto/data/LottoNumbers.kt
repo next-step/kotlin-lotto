@@ -1,7 +1,5 @@
 package lotto.data
 
-import lotto.enums.LotteryMatchType
-
 class LottoNumbers(
     numbers: List<Int>
 ) {
