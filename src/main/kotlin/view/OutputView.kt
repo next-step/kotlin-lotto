@@ -1,6 +1,7 @@
 package view
 
 import lotto.domain.LottoTickets
+import lotto.domain.result.LottoResult
 
 interface OutputView {
     fun printStringAdderInputMessage()
@@ -12,4 +13,6 @@ interface OutputView {
     fun printLottoTickets(tickets: LottoTickets)
 
     fun printInputWinningNumbersMessage()
+
+    fun printLottoResult(result: LottoResult)
 }
