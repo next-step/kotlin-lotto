@@ -8,7 +8,6 @@ object Calculator {
     private const val OPERANDS_INDEX = 2
     private const val MINIMUM_OPERAND_VALUE = 0
 
-
     fun add(input: String): Int {
         if (input.isBlank()) {
             return MINIMUM_OPERAND_VALUE

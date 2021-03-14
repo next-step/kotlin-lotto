@@ -10,7 +10,7 @@ class RandomNumbersTest {
     fun `6개의 랜덤 값을 생성한다`() {
         val randomNumber = RandomNumbers()
 
-        val randoms = randomNumber.makeNumbers(1, 45, 6)
+        val randoms = randomNumber.makeNumbers(0, 45, 6)
 
         assertAll(
             { assertThat(randoms.size).isEqualTo(6) },
