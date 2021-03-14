@@ -25,7 +25,7 @@ class ConsoleOutput : OutputView {
     }
 
     private fun printLottoTicket(ticket: LottoTicket) {
-        println("[${ticket.numbers.joinToString(", ")}]")
+        println("[${ticket.numbers.map { it.number }.joinToString(", ")}]")
     }
 
     override fun printInputWinningNumbersMessage() {
@@ -37,11 +37,16 @@ class ConsoleOutput : OutputView {
             .append("당첨 통계\n")
             .append("---------\n")
         appendLottoDetail(result, builder)
+        appendEarning(result, builder)
         println(builder)
     }
 
     private fun appendLottoDetail(result: LottoResult, builder: StringBuilder) {
         LottoRank.values().reversed().drop(1)
             .forEach { builder.append("${it.matchCount}개 일치 (${it.prize}원) - ${result.result[it]}개\n") }
+    }
+
+    private fun appendEarning(result: LottoResult, builder: StringBuilder) {
+        builder.append("총 수익률은 ${result.earning}입니다. (1이 기준)")
     }
 }
