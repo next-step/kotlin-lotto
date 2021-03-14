@@ -5,8 +5,8 @@ import lotto.model.game.LottoGame
 import lotto.view.ResultView
 
 fun main() {
-    val lottoMachine = LottoGame()
-    val lottoGameController = LottoGameController(lottoMachine)
+    val lottoGame = LottoGame()
+    val lottoGameController = LottoGameController(lottoGame)
 
     val totalLottoCount = lottoGameController.ready()
     ResultView.printLottoCount(totalLottoCount)
