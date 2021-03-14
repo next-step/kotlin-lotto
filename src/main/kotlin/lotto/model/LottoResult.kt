@@ -12,6 +12,7 @@ data class LottoResult(val winningCounter: WinningCounter, val ticketPriceSum: M
             return ceilToSecond(benefitRate)
         }
 
-    private fun ceilToSecond(double: Double) =
-        BigDecimal(double).setScale(2, RoundingMode.DOWN).toDouble()
+    private fun ceilToSecond(double: Double): Double {
+        return BigDecimal(double).setScale(2, RoundingMode.DOWN).toDouble()
+    }
 }

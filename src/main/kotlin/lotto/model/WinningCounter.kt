@@ -31,7 +31,7 @@ data class WinningCounter(
     }
 
     private fun sumWinningsTimesCount() =
-        { accu: Money, (winningPlace, winningCount): MutableMap.MutableEntry<WinningPlace, Int> ->
+        { accu: Money, (winningPlace: WinningPlace, winningCount: Int): MutableMap.MutableEntry<WinningPlace, Int> ->
             accu + winningPlace.price * winningCount
         }
 
