@@ -14,6 +14,6 @@ internal class InputTestViewTest {
                     return input
                 }
             }).value
-        ).isEqualTo("")
+        ).isEqualTo(Input(""))
     }
 }
