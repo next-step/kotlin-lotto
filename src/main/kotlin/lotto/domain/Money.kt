@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Money(initMoney: Int) {
-    var spentMoney: Long = 0
+    var spentMoney: Long = 0L
         private set
     var currentMoney: Long = initMoney.toLong()
         private set

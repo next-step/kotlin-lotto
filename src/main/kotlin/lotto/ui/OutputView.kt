@@ -8,7 +8,7 @@ import lotto.domain.Rank
 class OutputView {
 
     fun printPurchasedLottoes(manuals: Lottoes, autoes: Lottoes) {
-        println("수동으로 ${manuals.toList().size}장, ${autoes.toList().size}개를 구매했습니다.")
+        println("수동으로 ${manuals.toList().size}장, 자동으로 ${autoes.toList().size}개를 구매했습니다.")
         for (manualLotto in manuals.toList()) {
             println(manualLotto.value.toString())
         }
