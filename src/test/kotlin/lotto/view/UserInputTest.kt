@@ -19,8 +19,8 @@ class UserInputTest {
         assertThat(UserInput.IntListGroup("질문", 3, "1,2,3,4\n5,6,7,8\n9,10,11,12").answer()).isEqualTo(
             listOf(
                 listOf(1, 2, 3, 4),
-                listOf(4, 5, 6, 7),
-                listOf(8, 9, 10, 11)
+                listOf(5, 6, 7, 8),
+                listOf(9, 10, 11, 12)
             )
         )
     }

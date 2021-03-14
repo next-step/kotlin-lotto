@@ -8,32 +8,56 @@ interface UserInput<T> {
     fun answer(): T
 
     class Int(
-        private val question: String,
+        question: String,
         readable: Readable = InputStreamReader(System.`in`)
     ) : UserInput<kotlin.Int> {
         private val scanner: Scanner = Scanner(readable)
 
+        init {
+            println(question)
+        }
+
         constructor(question: String, answer: String) : this(question, StringReader(answer))
 
         override fun answer(): kotlin.Int {
-            println(question)
             return scanner.nextInt()
         }
     }
 
     class IntList(
-        private val question: String,
+        question: String,
         readable: Readable = InputStreamReader(System.`in`)
     ) : UserInput<List<kotlin.Int>> {
         private val scanner: Scanner = Scanner(readable)
 
+        init {
+            println(question)
+        }
+
         constructor(question: String, answer: String) : this(question, StringReader(answer))
 
         override fun answer(): List<kotlin.Int> {
-            println(question)
+
             return scanner.nextLine()
                 .split(",")
                 .map { it.toInt() }
+        }
+    }
+
+    class IntListGroup(
+        private val groupSize: kotlin.Int,
+        private val intListInput: IntList
+    ) : UserInput<List<List<kotlin.Int>>> {
+
+        constructor(question: String, groupSize: kotlin.Int, answer: String) : this(
+            groupSize,
+            IntList(question, StringReader(answer))
+        )
+
+        override fun answer(): List<List<kotlin.Int>> {
+            return (0 until groupSize).map {
+                intListInput.answer()
+            }
         }
     }
 }
