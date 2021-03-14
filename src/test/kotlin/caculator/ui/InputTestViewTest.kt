@@ -1,6 +1,5 @@
 package caculator.ui
 
-import jdk.internal.joptsimple.internal.Strings
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullSource
@@ -15,6 +14,6 @@ internal class InputTestViewTest {
                     return input
                 }
             }).value
-        ).isEqualTo(Strings.EMPTY)
+        ).isEqualTo("")
     }
 }

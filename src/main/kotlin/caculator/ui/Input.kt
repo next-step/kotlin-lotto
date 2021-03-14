@@ -4,7 +4,14 @@ class Input(inputString: String) {
     val numbers: List<Int>
 
     init {
-        numbers = inputString.split(Regex(DEFAULT_TOKENS.joinToString(separator = "|")))
+        val result = Regex("//(.)\n(.*)").find(inputString)
+        numbers = result?.let {
+            splitInputString(it.groupValues[2], Regex(it.groupValues[1]))
+        } ?: splitInputString(inputString, Regex(DEFAULT_DELIMITERS.joinToString(separator = "|")))
+    }
+
+    private fun splitInputString(inputString: String, regex: Regex): List<Int> {
+        return inputString.split(regex)
             .map {
                 parseInt(it)
             }
@@ -23,6 +30,6 @@ class Input(inputString: String) {
     }
 
     companion object {
-        val DEFAULT_TOKENS = listOf(",", ":")
+        val DEFAULT_DELIMITERS = listOf(",", ":")
     }
 }

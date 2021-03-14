@@ -1,7 +1,5 @@
 package caculator.ui
 
-import jdk.internal.joptsimple.internal.Strings
-
 class InputView(private val inputStrategy: InputStrategy) {
     val value = Input(tryEnterInput())
 
@@ -11,6 +9,6 @@ class InputView(private val inputStrategy: InputStrategy) {
 
     private fun tryEnterInput(): String {
         return inputStrategy.enter()
-            ?: Strings.EMPTY
+            ?: ""
     }
 }
