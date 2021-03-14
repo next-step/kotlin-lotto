@@ -11,7 +11,12 @@ class WinningLotto(private val winningLottoNumbers: List<LottoNumber>) {
         return lottoNumbers.distinct().size == VALID_WINNING_LOTTO_NUMBER_COUNT
     }
 
-    fun matchCount(lotto: Lotto): Int {
+    fun calculateLottoPrize(lotto: Lotto): LottoPrize {
+        val matchedCount = matchLottoNumberCount(lotto)
+        return LottoPrize.valueOf(matchedCount)
+    }
+
+    private fun matchLottoNumberCount(lotto: Lotto): Int {
         val lottoNumbers = lotto.lottoNumbers
         return winningLottoNumbers.intersect(lottoNumbers).size
     }

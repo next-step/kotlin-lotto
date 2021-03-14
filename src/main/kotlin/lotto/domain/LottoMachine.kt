@@ -15,6 +15,6 @@ class LottoMachine(private val lottoPrice: Int, private val lottoGenerator: Lott
     }
 
     fun result(lottos: List<Lotto>, winningLotto: WinningLotto): List<LottoPrize> {
-        return lottos.map { LottoPrize.match(it, winningLotto) }
+        return lottos.map { winningLotto.calculateLottoPrize(it) }
     }
 }

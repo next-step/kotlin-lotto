@@ -9,8 +9,7 @@ enum class LottoPrize(val count: Int, val reward: Int) {
     WHACK(0, 0);
 
     companion object {
-        fun match(lotto: Lotto, winningLotto: WinningLotto): LottoPrize {
-            val matchedCount = winningLotto.matchCount(lotto)
+        fun valueOf(matchedCount: Int): LottoPrize {
             return values().firstOrNull { it.count == matchedCount } ?: WHACK
         }
     }
