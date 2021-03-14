@@ -9,14 +9,14 @@ class LottoNumbersTest {
 
     @Test
     fun `LottoNumber가 다른 LottoNumber와 몇 개 매칭되는지 확인한다`() {
-        val lottoNumbers1 = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
-        val lottoNumbers2 = WinningNumbers(listOf(3, 4, 5, 6, 7, 8), 45)
-        val lottoNumbers3 = WinningNumbers(listOf(6, 7, 8, 9, 10, 11), 45)
-        val lottoNumbers4 = WinningNumbers(listOf(2, 3, 4, 5, 6, 7), 1)
+        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6), 7)
+        val lottoNumbers2 = LottoNumbers(listOf(3, 4, 5, 6, 7, 8))
+        val lottoNumbers3 = LottoNumbers(listOf(6, 7, 8, 9, 10, 11))
+        val lottoNumbers4 = LottoNumbers(listOf(2, 3, 4, 5, 6, 7))
 
-        assertThat(lottoNumbers1.findWinningType(lottoNumbers2)).isEqualTo(LotteryMatchType.Four)
-        assertThat(lottoNumbers1.findWinningType(lottoNumbers3)).isEqualTo(LotteryMatchType.NonProfit)
-        assertThat(lottoNumbers1.findWinningType(lottoNumbers4)).isEqualTo(LotteryMatchType.FiveWithBonus)
+        assertThat(winningNumbers.findWinningType(lottoNumbers2)).isEqualTo(LotteryMatchType.Four)
+        assertThat(winningNumbers.findWinningType(lottoNumbers3)).isEqualTo(LotteryMatchType.NonProfit)
+        assertThat(winningNumbers.findWinningType(lottoNumbers4)).isEqualTo(LotteryMatchType.FiveWithBonus)
     }
 
     @Test
@@ -35,5 +35,17 @@ class LottoNumbersTest {
     fun `로또 번호가 중복되는 숫자가 있으면 안된다`() {
         assertThatThrownBy { LottoNumbers(listOf(1, 2, 2, 4, 5)) }
             .isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @Test
+    fun `contain 메서드가 특정 로또번호를 가지고 있는지 여부를 리턴한다`() {
+        val lottoNumbers = LottoNumbers(listOf(3, 4, 5, 6, 7, 8))
+        assertThat(lottoNumbers.contains(LottoNumber.from(3))).isTrue()
+        assertThat(lottoNumbers.contains(LottoNumber.from(4))).isTrue()
+        assertThat(lottoNumbers.contains(LottoNumber.from(5))).isTrue()
+        assertThat(lottoNumbers.contains(LottoNumber.from(6))).isTrue()
+        assertThat(lottoNumbers.contains(LottoNumber.from(7))).isTrue()
+        assertThat(lottoNumbers.contains(LottoNumber.from(8))).isTrue()
+        assertThat(lottoNumbers.contains(LottoNumber.from(9))).isFalse()
     }
 }
