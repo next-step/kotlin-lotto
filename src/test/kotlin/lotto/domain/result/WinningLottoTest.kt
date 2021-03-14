@@ -3,6 +3,7 @@ package lotto.domain.result
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.createLotto
+import lotto.domain.createLottoResult
 import lotto.domain.strategy.OneToSixStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -17,14 +18,15 @@ internal class WinningLottoTest {
         assertThat(actual.numbers.containsAll(createLotto(1, 2, 3, 4, 5, 6))).isTrue
     }
 
-    @DisplayName("로또 티켓들을 인자로 넣은 경우 당첨 결과 리스트를 반환")
+    @DisplayName("로또 티켓들을 인자로 넣은 경우 LottoResult 반환")
     @Test
     fun match() {
         val tickets = listOf(LottoTicket.create(OneToSixStrategy()), LottoTicket.create(OneToSixStrategy()))
-        val expected = listOf(LottoRank.FIRST, LottoRank.FIRST)
+        val expected = createLottoResult()
+        expected[LottoRank.FIRST] = 2
 
         val actual = WinningLotto.of("1, 2, 3, 4, 5, 6").match(LottoTickets(tickets))
 
-        assertThat(actual).isEqualTo(expected)
+        assertThat(actual.result).isEqualTo(expected)
     }
 }

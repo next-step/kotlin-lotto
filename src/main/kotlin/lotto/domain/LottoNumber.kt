@@ -4,7 +4,7 @@ import lotto.domain.strategy.LottoNumberStrategy.Companion.MAX_LOTTO_NUMBER
 import lotto.domain.strategy.LottoNumberStrategy.Companion.MIN_LOTTO_NUMBER
 
 data class LottoNumber(private val input: String) {
-    private val number: Int
+    val number: Int
 
     init {
         val number = input.toInt()

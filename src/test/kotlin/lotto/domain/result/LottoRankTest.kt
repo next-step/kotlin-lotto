@@ -1,5 +1,6 @@
 package lotto.domain.result
 
+import lotto.domain.createLottoResult
 import lotto.domain.result.LottoRank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -10,11 +11,15 @@ internal class LottoRankTest {
     @Test
     fun rank() {
         val matchCounts = listOf(6, 5, 4, 3, 2, 1)
-        val expected =
-            listOf(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FOURTH, LottoRank.NONE, LottoRank.NONE)
+        val expected = createLottoResult()
+        expected[LottoRank.FIRST] = 1
+        expected[LottoRank.SECOND] = 1
+        expected[LottoRank.THIRD] = 1
+        expected[LottoRank.FOURTH] = 1
+        expected[LottoRank.NONE] = 2
 
         val actual = LottoRank.rank(matchCounts)
 
-        assertThat(actual).isEqualTo(expected)
+        assertThat(actual.result).isEqualTo(expected)
     }
 }

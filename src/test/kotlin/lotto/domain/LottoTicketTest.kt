@@ -13,7 +13,7 @@ internal class LottoTicketTest {
         val ticket = LottoTicket.create(LottoNumberStrategy())
         assertAll(
             { assertThat(ticket.numbers.size).isEqualTo(6) },
-            { assertThat(ticket.numbers.all { it in 1..45 }).isTrue() }
+            { assertThat(ticket.numbers.all { it.number in 1..45 }).isTrue }
         )
     }
 }

@@ -8,12 +8,16 @@ enum class LottoRank(private val matchCount: Int, private val prize: Long) {
     NONE(0, 0L);
 
     companion object {
+        private val matcher = mapOf(Pair(FIRST, 0), Pair(SECOND, 0), Pair(THIRD, 0), Pair(FOURTH, 0), Pair(NONE, 0))
+
         private fun of(matchCount: Int): LottoRank {
             return values().find { matchCount == it.matchCount } ?: NONE
         }
 
-        fun rank(matchCounts: List<Int>): List<LottoRank> {
-            return matchCounts.map { of(it) }
+        fun rank(matchCounts: List<Int>): LottoResult {
+            val result = matcher.toMutableMap()
+            matchCounts.forEach { result[of(it)] = result[of(it)]!! + 1 }
+            return LottoResult(result)
         }
     }
 }

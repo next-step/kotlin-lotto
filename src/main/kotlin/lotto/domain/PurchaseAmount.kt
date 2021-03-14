@@ -11,7 +11,7 @@ class PurchaseAmount(input: String) {
     }
 
     private fun validateUnit(amount: Int) {
-        require(amount / 1000 == 0) { "구입할 금액은 천원 단위로 입력할 수 있습니다." }
+        require(amount % 1000 == 0) { "구입할 금액은 천원 단위로 입력할 수 있습니다." }
     }
 
     private fun validateNegative(amount: Int) {
