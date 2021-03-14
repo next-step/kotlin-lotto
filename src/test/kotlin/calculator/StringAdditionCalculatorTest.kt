@@ -9,4 +9,10 @@ internal class StringAdditionCalculatorTest {
         val calculator = StringAdditionCalculator()
         assertThat(calculator.calculate("")).isEqualTo(0)
     }
+
+    @Test
+    fun `null이 주어질 경우, 0을 반환`() {
+        val calculator = StringAdditionCalculator()
+        assertThat(calculator.calculate(null)).isEqualTo(0)
+    }
 }
