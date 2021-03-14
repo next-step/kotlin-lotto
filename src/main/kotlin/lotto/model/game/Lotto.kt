@@ -12,8 +12,8 @@ data class Lotto(val lottoNumbers: Set<LottoNumber>) {
 
     constructor(inputBeforeSplit: String) : this(Delimiter(inputBeforeSplit).split().map { it.toInt() })
 
-    fun getMatchCount(winningLotto: Lotto): Int {
-        return lottoNumbers.count { winningLotto.hasNumber(it) }
+    fun getMatchCount(lotto: Lotto): Int {
+        return lottoNumbers.count { lotto.hasNumber(it) }
     }
 
     fun hasNumber(lottoNumber: LottoNumber): Boolean {
