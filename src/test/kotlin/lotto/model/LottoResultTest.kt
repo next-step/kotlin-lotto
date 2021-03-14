@@ -1,10 +1,10 @@
 package lotto.model
 
-import lotto.model.LottoPlace.FIRST
-import lotto.model.LottoPlace.SECOND
-import lotto.model.LottoPlace.THIRD
-import lotto.model.LottoPlace.FOURTH
-import lotto.model.LottoPlace.FIFTH
+import lotto.model.WinningPlace.FIRST
+import lotto.model.WinningPlace.SECOND
+import lotto.model.WinningPlace.THIRD
+import lotto.model.WinningPlace.FOURTH
+import lotto.model.WinningPlace.FIFTH
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments

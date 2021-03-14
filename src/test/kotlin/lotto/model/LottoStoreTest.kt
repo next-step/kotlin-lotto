@@ -20,10 +20,10 @@ internal class LottoStoreTest {
         @JvmStatic
         fun buyTicketCountProvider(): List<Arguments> {
             return listOf(
-                Arguments { arrayOf(Money.thousand, 1) },
+                Arguments { arrayOf(Money.THOUSAND, 1) },
                 Arguments { arrayOf(Money(3000), 3) },
                 Arguments { arrayOf(Money(2500), 2) },
-                Arguments { arrayOf(Money.zero, 0) }
+                Arguments { arrayOf(Money.ZERO, 0) }
             )
         }
     }
