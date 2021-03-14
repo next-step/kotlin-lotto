@@ -1,8 +1,8 @@
 package lotto.model
 
-class LottoStore(private val price: Money = Money(1000)) {
+class LottoStore(private val price: Money = Money.thousand) {
     fun buy(money: Money): LottoTickets {
-        val ticketCount = money.dividedBy(price).toInt()
+        val ticketCount = (money / price).toInt()
 
         return LottoTickets.issue(ticketCount)
     }
