@@ -23,6 +23,10 @@ class ConsoleOutput : OutputView {
     }
 
     private fun printLottoTicket(ticket: LottoTicket) {
-        println("[${ticket.numbers.sorted().joinToString(", ")}]")
+        println("[${ticket.numbers.joinToString(", ")}]")
+    }
+
+    override fun printInputWinningNumbersMessage() {
+        println("지난 주 당첨 번호를 입력해 주세요.")
     }
 }

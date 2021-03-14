@@ -1,15 +1,19 @@
 package lotto.domain
 
-class LottoTicket private constructor(val numbers: Set<Int>) {
+import lotto.domain.strategy.NumberGenerateStrategy
+
+class LottoTicket private constructor(val numbers: Set<LottoNumber>) {
+    fun getMatchCount(lottoNumbers: List<LottoNumber>): Int {
+        return lottoNumbers.filter { numbers.contains(it) }.count()
+    }
+
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
 
-        fun create(): LottoTicket {
-            val numbers = HashSet<Int>()
+        fun create(numberStrategy: NumberGenerateStrategy): LottoTicket {
+            val numbers = HashSet<LottoNumber>()
             while (numbers.size != LOTTO_NUMBER_COUNT) {
-                numbers.add((MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).random())
+                numbers.add(LottoNumber(numberStrategy.generate()))
             }
             return LottoTicket(numbers)
         }
