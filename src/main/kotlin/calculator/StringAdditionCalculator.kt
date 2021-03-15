@@ -2,9 +2,10 @@ package calculator
 
 class StringAdditionCalculator {
     fun calculate(expression: String?): Int {
-        return when (expression) {
-            null, "" -> 0
-            else -> expression.toInt()
+        if (expression.isNullOrBlank()) {
+            return 0
         }
+
+        return expression.toInt()
     }
 }
