@@ -1,6 +1,9 @@
 package lotto.domain
 
-class LottoNumber private constructor(val number: Int) {
+class LottoNumber private constructor(private val number: Int) {
+    init {
+        validate(number)
+    }
 
     override fun toString(): String {
         return "$number"
@@ -9,12 +12,16 @@ class LottoNumber private constructor(val number: Int) {
     companion object {
         const val MINIMUM_LOTTO_NUMBER = 1
         const val MAXIMUM_LOTTO_NUMBER = 45
-        private val cache: Array<LottoNumber> = Array(MAXIMUM_LOTTO_NUMBER + 1) { LottoNumber(it) }
+        private val cache: MutableMap<Int, LottoNumber> = hashMapOf()
+
+        init {
+            (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).forEach {
+                cache[it] = LottoNumber(it)
+            }
+        }
 
         fun from(number: Int): LottoNumber {
-            validate(number)
-
-            return cache[number]
+            return cache[number] ?: LottoNumber(number)
         }
 
         private fun validate(number: Int) {
