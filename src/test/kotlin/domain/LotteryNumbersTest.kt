@@ -35,10 +35,9 @@ class LotteryNumbersTest {
         @JvmStatic
         fun wrongSizeLotteryNumbers(): Stream<Arguments> =
             Stream.of(
-                Arguments.of(1, 2, 3, 3, 5, 6, 7),
-                Arguments.of(4, 10, 25, 34),
-                Arguments.of(4),
-                Arguments.of()
+                Arguments.of(listOf(1, 2, 3, 3, 5, 6, 7)),
+                Arguments.of(listOf(4, 10, 25, 34)),
+                Arguments.of(listOf(4))
             )
     }
 }
