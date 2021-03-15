@@ -13,21 +13,21 @@ class LotteryTicketMakerTest {
         val lotteryTicketMaker = DefaultLotteryTicketMaker()
         val lotteryTicket: LotteryTicket = lotteryTicketMaker.createAutoLotteryTicket()
 
-        val lottoNumberList: List<LottoNumber> = lotteryTicket.lottoNumbers.lottoNumbers
-        assertThat(lottoNumberList).hasSize(6)
-        assertThat(lottoNumberList).isSubsetOf((1..45).map { LottoNumber.from(it) })
+        val numberList: List<Int> = lotteryTicket.lottoNumbers.toIntList()
+        assertThat(numberList).hasSize(6)
+        assertThat(numberList).isSubsetOf((1..45))
 
         // 겹치는 숫자가 없다.
-        for (number in lottoNumberList) {
-            val sameNumberCount = lottoNumberList.filter { it == number }.count()
+        for (number in numberList) {
+            val sameNumberCount = numberList.filter { it == number }.count()
             assertThat(sameNumberCount).isEqualTo(1)
         }
 
         // 정렬되어 있다.
         var preNum = 0
-        for (lottoNumber in lottoNumberList) {
-            assertThat(lottoNumber.lottoNumber).isGreaterThan(preNum)
-            preNum = lottoNumber.lottoNumber
+        for (number in numberList) {
+            assertThat(number).isGreaterThan(preNum)
+            preNum = number
         }
     }
 
@@ -37,14 +37,7 @@ class LotteryTicketMakerTest {
         val lottoNumbers = LottoNumbers(listOf(11, 12, 13, 14, 15, 16))
         val lotteryTicket: LotteryTicket = lotteryTicketMaker.createManualLotteryTicket(lottoNumbers)
 
-        val numbers = lotteryTicket.lottoNumbers.lottoNumbers
-        assertThat(numbers).containsExactly(
-            LottoNumber.from(11),
-            LottoNumber.from(12),
-            LottoNumber.from(13),
-            LottoNumber.from(14),
-            LottoNumber.from(15),
-            LottoNumber.from(16)
-        )
+        val numbers = lotteryTicket.lottoNumbers.toIntList()
+        assertThat(numbers).containsExactly(11, 12, 13, 14, 15, 16)
     }
 }

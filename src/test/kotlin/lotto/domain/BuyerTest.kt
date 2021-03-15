@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.data.BuyingData
+import lotto.data.LottoNumber
 import lotto.data.LottoNumbers
 import lotto.data.WinningNumbers
 import lotto.domain.maker.TestLotteryTicketMaker
@@ -19,14 +20,19 @@ class BuyerTest {
     }
 
     @Test
-    fun `로또를 구매한 경우, 수동 입력한 로또 번호가 포함되어 있는지 확인한`() {
+    fun `로또를 구매한 경우, 수동 입력한 로또 번호가 포함되어 있는지 확인한다`() {
         val buyer = Buyer()
         val lottoNumbersList = listOf(LottoNumbers(listOf(11, 12, 13, 14, 15, 16)))
         val buyingData = BuyingData(1000, lottoNumbersList)
         val tickets = buyer.buyLotteryTickets(buyingData, TestLotteryTicketMaker())
 
         assertThat(tickets).hasSize(1)
-        assertThat(tickets[0].lottoNumbers.lottoNumbers).extracting("lottoNumber").containsExactly(11, 12, 13, 14, 15, 16)
+        assertThat(tickets[0].lottoNumbers.contains(LottoNumber.from(11))).isTrue()
+        assertThat(tickets[0].lottoNumbers.contains(LottoNumber.from(12))).isTrue()
+        assertThat(tickets[0].lottoNumbers.contains(LottoNumber.from(13))).isTrue()
+        assertThat(tickets[0].lottoNumbers.contains(LottoNumber.from(14))).isTrue()
+        assertThat(tickets[0].lottoNumbers.contains(LottoNumber.from(15))).isTrue()
+        assertThat(tickets[0].lottoNumbers.contains(LottoNumber.from(16))).isTrue()
     }
 
     @Test

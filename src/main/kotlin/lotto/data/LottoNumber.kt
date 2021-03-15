@@ -3,10 +3,10 @@ package lotto.data
 import java.lang.IllegalArgumentException
 
 class LottoNumber private constructor(
-    val lottoNumber: Int
+    val value: Int
 ) {
     init {
-        require(lottoNumber in 1..45) { "로또 숫자는 1에서 45사이의 숫자여야 합니다." }
+        require(value in 1..45) { "로또 숫자는 1에서 45사이의 숫자여야 합니다." }
     }
 
     companion object {
