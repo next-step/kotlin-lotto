@@ -13,7 +13,8 @@ class WinningLotto(private val winningLottoNumbers: List<LottoNumber>) {
 
     fun calculateLottoPrize(lotto: Lotto): LottoPrize {
         val matchedCount = matchLottoNumberCount(lotto)
-        return LottoPrize.valueOf(matchedCount)
+        val hasBonusNumber = false
+        return LottoPrize.valueOf(matchedCount, hasBonusNumber)
     }
 
     private fun matchLottoNumberCount(lotto: Lotto): Int {
