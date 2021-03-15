@@ -3,31 +3,31 @@ package lotto.data
 class LottoNumbers(
     numbers: List<Int>
 ) {
-    private val lottoNumbers: List<LottoNumber> = numbers.map { LottoNumber.from(it) }
+    private val values: List<LottoNumber> = numbers.map { LottoNumber.from(it) }
 
     init {
-        require(lottoNumbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호의 개수는 6개여야 합니다." }
+        require(values.size == LOTTO_NUMBERS_SIZE) { "로또 번호의 개수는 6개여야 합니다." }
         require(!hasDuplicatedNumber()) { "중복되는 숫자는 없어야 합니다." }
     }
 
     fun contains(lottoNumber: LottoNumber): Boolean {
-        return lottoNumbers.contains(lottoNumber)
+        return values.contains(lottoNumber)
     }
 
-    fun count(predicate: (LottoNumber) -> Boolean): Int {
-        return lottoNumbers.count(predicate)
+    fun countMatchedNumber(targetLottoNumbers: LottoNumbers): Int {
+        return values.count { targetLottoNumbers.contains(it) }
     }
 
     private fun hasDuplicatedNumber(): Boolean {
-        return lottoNumbers.find(::isDuplicated) != null
+        return values.find(::isDuplicated) != null
     }
 
     private fun isDuplicated(lottoNumber: LottoNumber): Boolean {
-        return lottoNumbers.count { it == lottoNumber } != COUNT_OF_UNIQUE_NUMBER
+        return values.count { it == lottoNumber } != COUNT_OF_UNIQUE_NUMBER
     }
 
     fun toIntList(): List<Int> =
-        lottoNumbers.map { it.lottoNumber }
+        values.map { it.value }
 
     companion object {
         private const val LOTTO_NUMBERS_SIZE = 6

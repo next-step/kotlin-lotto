@@ -5,8 +5,7 @@ import lotto.data.LottoNumbers
 import lotto.domain.LotteryTicket
 
 class DefaultLotteryTicketMaker : LotteryTicketMaker {
-
-    override fun createLotteryTicket(): LotteryTicket {
+    override fun createAutoLotteryTicket(): LotteryTicket {
         val numbers = (LottoNumber.LOTTERY_MIN_NUMBER..LottoNumber.LOTTERY_MAX_NUMBER).shuffled()
             .take(LotteryTicketMaker.LOTTERY_NUMBER_SIZE)
             .sorted()

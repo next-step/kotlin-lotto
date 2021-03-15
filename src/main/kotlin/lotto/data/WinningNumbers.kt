@@ -14,7 +14,7 @@ class WinningNumbers(
     }
 
     fun findWinningType(targetLottoNumbers: LottoNumbers): LotteryMatchType {
-        val matchCount = lottoNumbers.count { targetLottoNumbers.contains(it) }
+        val matchCount = lottoNumbers.countMatchedNumber(targetLottoNumbers)
         val hasBonusNumber = targetLottoNumbers.contains(bonusNumber)
         return LotteryMatchType.findByMatchCount(matchCount, hasBonusNumber)
     }
