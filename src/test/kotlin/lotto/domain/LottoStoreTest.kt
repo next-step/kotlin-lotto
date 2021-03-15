@@ -14,8 +14,8 @@ internal class LottoStoreTest {
         val money = Money(14000)
         val expected = money / LOTTO_PRICE
         // when
-        val lottos = LottoStore().buy(money).lottos
+        val lottos = LottoStore().buy(money)
         // then
-        assertThat(lottos.size).isEqualTo(expected)
+        assertThat(lottos.getLottoCount()).isEqualTo(expected)
     }
 }

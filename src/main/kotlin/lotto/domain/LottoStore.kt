@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.vo.Lotto
-import lotto.vo.LottoBasket
 import lotto.vo.Money
 
 class LottoStore {

@@ -1,8 +1,9 @@
-package lotto.vo
+package lotto.domain
 
-import lotto.domain.LottoPrize
+import lotto.vo.LottoNumber
+import lotto.vo.WinningLotto
 
-data class Lotto(val lottoNumbers: Set<LottoNumber>) {
+class Lotto(val lottoNumbers: Set<LottoNumber>) {
     init {
         require(lottoNumbers.size == LOTTO_SIZE) { "하나의 로또에 로또 번호는 정확히 6개만 허용됩니다." }
     }
@@ -14,18 +15,12 @@ data class Lotto(val lottoNumbers: Set<LottoNumber>) {
         }
     }
 
-    fun match(winnerNumber: WinnerLotto): LottoPrize {
+    fun match(winningNumber: WinningLotto): LottoPrize {
         var count = 0
-        lottoNumbers.intersect(winnerNumber.winnerLotto).forEach {
+        lottoNumbers.intersect(winningNumber.winningLotto).forEach {
             count++
         }
-        return when (count) {
-            3 -> LottoPrize.THREE_MATCH
-            4 -> LottoPrize.FOUR_MATCH
-            5 -> LottoPrize.FIVE_MATCH
-            6 -> LottoPrize.SIX_MATCH
-            else -> LottoPrize.NOT_MATCH
-        }
+        return LottoPrize.from(count)
     }
 
     override fun toString(): String {

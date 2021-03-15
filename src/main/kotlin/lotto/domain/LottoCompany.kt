@@ -1,28 +1,28 @@
 package lotto.domain
 
-import lotto.vo.*
+import lotto.vo.LottoNumber
+import lotto.vo.Money
+import lotto.vo.Statistics
+import lotto.vo.WinningLotto
 import kotlin.math.round
 
 const val ROUND_OFF_HUNDRED = 100.0
 
 class LottoCompany {
 
-    lateinit var winnerNumber: WinnerLotto
+    lateinit var winningNumber: WinningLotto
 
-    fun calculateEarningRate(winners: Winners, totalMoney: Money): Double {
-        val beforeRound = winners.getTotalPrizeMoney() / totalMoney.money.toDouble()
+    fun calculateEarningRate(statistics: Statistics, totalMoney: Money): Double {
+        val beforeRound = statistics.getTotalPrizeMoney() / totalMoney.money.toDouble()
         return round(beforeRound * ROUND_OFF_HUNDRED) / ROUND_OFF_HUNDRED
     }
 
-    fun findWinners(lottos: LottoBasket): Winners {
-        val winners = mutableListOf<LottoPrize>()
-        lottos.lottos.forEach {
-            winners.add(it.match(winnerNumber))
-        }
-        return Winners(winners)
+    fun findWinners(lottos: LottoBasket): Statistics {
+        val winningStats = lottos.match(winningNumber)
+        return Statistics(winningStats)
     }
 
-    fun setWinnerNumber(numbers: List<LottoNumber>) {
-        winnerNumber = WinnerLotto(numbers)
+    fun setWinnerNumber(numbers: Set<LottoNumber>) {
+        winningNumber = WinningLotto(numbers)
     }
 }

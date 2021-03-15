@@ -1,7 +1,9 @@
 package lotto.domain
 
 import lotto.domain.LottoStore.Companion.LOTTO_PRICE
-import lotto.vo.*
+import lotto.vo.LottoNumber
+import lotto.vo.Money
+import lotto.vo.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -12,7 +14,7 @@ internal class LottoCompanyTest {
     fun setWinnerNumberTest() {
         // given
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -23,7 +25,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         // then
-        assertThat(comp.winnerNumber).isEqualTo(WinnerLotto(winnerNums))
+        assertThat(comp.winningNumber).isEqualTo(WinningLotto(winnerNums))
     }
 
     @Test
@@ -34,7 +36,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -45,9 +47,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).containsExactly(LottoPrize.SIX_MATCH)
+        assertThat(winners).containsKey(LottoPrize.SIX_MATCH)
     }
 
     @Test
@@ -58,7 +60,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -69,9 +71,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).containsExactly(LottoPrize.FIVE_MATCH)
+        assertThat(winners).containsKey(LottoPrize.FIVE_MATCH)
     }
 
     @Test
@@ -82,7 +84,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -93,9 +95,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).containsExactly(LottoPrize.FOUR_MATCH)
+        assertThat(winners).containsKey(LottoPrize.FOUR_MATCH)
     }
 
     @Test
@@ -106,7 +108,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -117,9 +119,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).containsExactly(LottoPrize.THREE_MATCH)
+        assertThat(winners).containsKey(LottoPrize.THREE_MATCH)
     }
 
     @Test
@@ -130,7 +132,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(7),
             LottoNumber.from(8),
             LottoNumber.from(9),
@@ -141,9 +143,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).containsExactly(LottoPrize.NOT_MATCH)
+        assertThat(winners).containsKey(LottoPrize.NOT_MATCH)
     }
 
     @Test
@@ -159,7 +161,7 @@ internal class LottoCompanyTest {
         )
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -170,9 +172,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).contains(LottoPrize.SIX_MATCH, LottoPrize.FIVE_MATCH)
+        assertThat(winners).containsKeys(LottoPrize.SIX_MATCH, LottoPrize.FIVE_MATCH)
     }
 
     @Test
@@ -189,7 +191,7 @@ internal class LottoCompanyTest {
         )
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -200,9 +202,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).contains(LottoPrize.SIX_MATCH, LottoPrize.FIVE_MATCH, LottoPrize.FOUR_MATCH)
+        assertThat(winners).containsKeys(LottoPrize.SIX_MATCH, LottoPrize.FIVE_MATCH, LottoPrize.FOUR_MATCH)
     }
 
     @Test
@@ -223,7 +225,7 @@ internal class LottoCompanyTest {
         )
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -234,9 +236,9 @@ internal class LottoCompanyTest {
 
         // when
         comp.setWinnerNumber(winnerNums)
-        val winners = comp.findWinners(soldLotto).winners
+        val winners = comp.findWinners(soldLotto).stats
         // then
-        assertThat(winners).contains(
+        assertThat(winners).containsKeys(
             LottoPrize.SIX_MATCH,
             LottoPrize.FIVE_MATCH,
             LottoPrize.FOUR_MATCH,
@@ -252,7 +254,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -264,7 +266,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.lottos.size * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(2000000.0)
     }
@@ -277,7 +279,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -289,7 +291,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.lottos.size * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(1500.0)
     }
@@ -302,7 +304,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -314,7 +316,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.lottos.size * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(50.0)
     }
@@ -327,7 +329,7 @@ internal class LottoCompanyTest {
         val soldLotto = LottoBasket(listOf(Lotto.of(manualLottoNumber)))
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -339,7 +341,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.lottos.size * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(5.0)
     }
@@ -366,7 +368,7 @@ internal class LottoCompanyTest {
         )
 
         val comp = LottoCompany()
-        val winnerNums = listOf(
+        val winnerNums = setOf(
             LottoNumber.from(1),
             LottoNumber.from(2),
             LottoNumber.from(3),
@@ -377,7 +379,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.lottos.size * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(0.83)
     }

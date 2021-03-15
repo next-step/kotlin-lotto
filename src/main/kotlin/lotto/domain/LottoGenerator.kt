@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.vo.Lotto
 import lotto.vo.LottoNumber
 
 object LottoGenerator {
