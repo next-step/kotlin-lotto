@@ -12,6 +12,6 @@ object LottoMachine {
     }
 
     private fun dispense(ticketCount: Int): List<LottoTicket> {
-        return (0 until ticketCount).map { LottoTicket.create() }
+        return (1..ticketCount).map { LottoTicket.create() }
     }
 }
