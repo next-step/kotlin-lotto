@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
@@ -34,5 +35,22 @@ class LottoTest {
         val result = assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
 
         assertThat(result.message).isEqualTo(expectedMessage)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "1, true",
+        "2, true",
+        "7, false",
+        "8, false"
+    )
+    fun `로또에 임의의 번호가 존재하는지 확인할 수 있다`(input: Int, expected: Boolean) {
+        val lottoNumbers = (1..6).map { LottoNumber(it) }
+        val lotto = Lotto(lottoNumbers)
+        val inputNumber = LottoNumber(input)
+
+        val result = lotto.hasNumber(inputNumber)
+
+        assertThat(result).isEqualTo(expected)
     }
 }

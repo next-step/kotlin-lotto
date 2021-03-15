@@ -1,6 +1,6 @@
 package lotto.domain
 
-class WinningLotto(private val winningLottoNumbers: List<LottoNumber>) {
+class WinningLotto(private val winningLottoNumbers: List<LottoNumber>, private val bonusNumber: LottoNumber) {
 
     init {
         require(winningLottoNumbers.size == VALID_WINNING_LOTTO_NUMBER_COUNT) { "로또번호 개수가 ${VALID_WINNING_LOTTO_NUMBER_COUNT}개가 아닙니다." }
@@ -13,7 +13,7 @@ class WinningLotto(private val winningLottoNumbers: List<LottoNumber>) {
 
     fun calculateLottoPrize(lotto: Lotto): LottoPrize {
         val matchedCount = matchLottoNumberCount(lotto)
-        val hasBonusNumber = false
+        val hasBonusNumber = lotto.hasNumber(bonusNumber)
         return LottoPrize.valueOf(matchedCount, hasBonusNumber)
     }
 
