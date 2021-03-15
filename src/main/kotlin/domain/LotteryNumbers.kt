@@ -6,7 +6,7 @@ class LotteryNumbers(numbers: List<Int>) {
     }.toHashSet()
 
     init {
-        require(numbers.size == MAX_LOTTERY_NUMBERS_SIZE) { "로또 번호의 개수는 6개이여야 합니다. : ${numbers.size}" }
+        require(this.numbers.size == MAX_LOTTERY_NUMBERS_SIZE) { "로또 번호의 개수는 6개이여야 합니다. : ${this.numbers.size}" }
     }
 
     companion object {
