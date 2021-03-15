@@ -31,13 +31,31 @@ class LotteryNumbersTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("duplicateLotteryNumbers")
+    fun `로또 번호는 중복되면 안된다`(numbers: List<Int>) {
+        assertThrows<IllegalArgumentException> {
+            LotteryNumbers(numbers)
+        }
+    }
+
+
     companion object {
         @JvmStatic
         fun wrongSizeLotteryNumbers(): Stream<Arguments> =
             Stream.of(
-                Arguments.of(listOf(1, 2, 3, 3, 5, 6, 7)),
+                Arguments.of(listOf(1, 2, 3, 20, 5, 6, 7)),
                 Arguments.of(listOf(4, 10, 25, 34)),
                 Arguments.of(listOf(4))
             )
+
+        @JvmStatic
+        fun duplicateLotteryNumbers(): Stream<Arguments> =
+            Stream.of(
+                Arguments.of(listOf(1, 1, 3, 3, 5, 6)),
+                Arguments.of(listOf(45, 45, 45, 45, 45, 45)),
+                Arguments.of(listOf(1, 1, 1, 1, 1, 1))
+            )
+
     }
 }
