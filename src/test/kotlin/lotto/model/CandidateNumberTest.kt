@@ -10,7 +10,7 @@ internal class CandidateNumberTest {
     @ValueSource(ints = [0, 50])
     fun `로또 번호는 1에서 45 사이의 자연수이다`(number: Int) {
         assertThrows<IllegalArgumentException> {
-            CandidateNumber(number)
+            CandidateNumber.get(number)
         }
     }
 }
