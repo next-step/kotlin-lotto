@@ -15,6 +15,10 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.contains(number)
     }
 
+    fun matchedNumberCount(other: Lotto): Int {
+        return lottoNumbers.intersect(other.lottoNumbers).size
+    }
+
     companion object {
         private const val VALID_LOTTO_NUMBER_COUNT = 6
     }

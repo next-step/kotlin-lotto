@@ -4,8 +4,11 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
+import java.util.stream.Stream
 
 class LottoTest {
 
@@ -52,5 +55,28 @@ class LottoTest {
         val result = lotto.hasNumber(inputNumber)
 
         assertThat(result).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLottos")
+    fun `두 로또에 함께 존재하는 번호 개수를 확인할 수 있다`(number: IntRange, number2: IntRange, expected: Int) {
+        val lotto = Lotto(number.map { LottoNumber(it) })
+        val other = Lotto(number2.map { LottoNumber(it) })
+
+        val result = lotto.matchedNumberCount(other)
+
+        assertThat(result).isEqualTo(expected)
+    }
+
+    companion object {
+        @JvmStatic
+        fun provideLottos(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of(1..6, 1..6, 6),
+                Arguments.of(1..6, 2..7, 5),
+                Arguments.of(1..6, 6..11, 1),
+                Arguments.of(1..6, 7..12, 0)
+            )
+        }
     }
 }

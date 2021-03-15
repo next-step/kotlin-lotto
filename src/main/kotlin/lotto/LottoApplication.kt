@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.RandomLottoGenerator
@@ -27,7 +28,7 @@ class LottoApplication(private val userInterface: UserInterface) {
         val winningLottoNumbers = userInterface.inputLastWeekWinningLottoNumbers()
         val winningLottoBonusNumber = userInterface.inputLastWeekWinningLottoBonusNumber()
 
-        val winningLotto = WinningLotto(winningLottoNumbers.map { LottoNumber(it) }, LottoNumber(winningLottoBonusNumber))
+        val winningLotto = WinningLotto(Lotto(winningLottoNumbers.map { LottoNumber(it) }), LottoNumber(winningLottoBonusNumber))
 
         val result = lottoMachine.result(lottos, winningLotto)
         userInterface.outputWinningStatistics(StatisticsDto.of(result, amount))
