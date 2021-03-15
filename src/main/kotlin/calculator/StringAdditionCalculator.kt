@@ -6,7 +6,11 @@ class StringAdditionCalculator {
             return 0
         }
 
-        return expression.split(",")
+        return expression.split(DELIMITER)
             .sumBy { it.toInt() }
+    }
+
+    companion object {
+        private const val DELIMITER = ","
     }
 }
