@@ -7,8 +7,8 @@ import lotto.model.WinningPlace.FOURTH
 import lotto.model.WinningPlace.FIFTH
 import lotto.model.WinningPlace.MISS
 
-data class WinningCounter(
-    private val counter: MutableMap<WinningPlace, Int> = mutableMapOf(
+data class WinningCounter constructor(
+    private var counter: MutableMap<WinningPlace, Int> = mutableMapOf(
         FIRST to 0,
         SECOND to 0,
         THIRD to 0,
@@ -20,6 +20,10 @@ data class WinningCounter(
         get() {
             return counter.entries.fold(Money.ZERO, sumWinningsTimesCount())
         }
+
+    init {
+        counter = counter.entries.associateBy({ it.key }, { it.value }).toMutableMap()
+    }
 
     constructor(tickets: LottoTickets, winningCondition: WinningCondition) : this() {
         tickets.forEach {

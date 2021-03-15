@@ -1,5 +1,8 @@
 package lotto.model
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 data class Money(val amount: Int) {
 
     operator fun plus(other: Money): Money {
@@ -11,7 +14,7 @@ data class Money(val amount: Int) {
     }
 
     operator fun div(other: Money): Double {
-        return amount.toDouble() / other.amount.toDouble()
+        return BigDecimal(amount).divide(BigDecimal(other.amount), 8, RoundingMode.CEILING).toDouble()
     }
 
     companion object {
