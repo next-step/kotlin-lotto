@@ -1,6 +1,7 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -30,5 +31,12 @@ internal class StringAdditionCalculatorTest {
     )
     fun `두 숫자 사이에 쉼표가 있는 경우, 두 숫자의 합을 반환`(expression: String, sum: Int) {
         assertThat(calculator.calculate(expression)).isEqualTo(sum)
+    }
+
+    @Test
+    fun `여러 숫자와 그 사이에 쉼표가 있는 경우, 모든 숫자의 합을 반환`() {
+        assertThat(calculator.calculate("1,2,3")).isEqualTo(6)
+        assertThat(calculator.calculate("1,2,3,4,5,6,7,8,9,10")).isEqualTo(55)
+        assertThat(calculator.calculate("876,54,3,21,0")).isEqualTo(954)
     }
 }
