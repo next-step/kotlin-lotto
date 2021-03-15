@@ -17,7 +17,10 @@ object ResultView {
         val statistics = winningLottoStatistics.statistics.toList().sortedWith(compareBy { it.first.matchCount })
             .map { "${it.first.matchCount}개 일치 (${it.first.winningMoney}원)- ${it.second}개" }.joinToString("\n")
         println(statistics)
-        println("총 수익률은 ${cutProfitRatePoint(winningLottoStatistics.profitRate)}입니다.")
+    }
+
+    fun printLottoProfitRate(profitRate: Double) {
+        println("총 수익률은 ${cutProfitRatePoint(profitRate)}입니다.")
     }
 
     private fun cutProfitRatePoint(profitRate: Double): Double {

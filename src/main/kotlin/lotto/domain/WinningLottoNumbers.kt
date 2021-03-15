@@ -4,8 +4,14 @@ class WinningLottoNumbers private constructor(
     val lottoNumbers: List<LottoNumber>
 ) {
 
-    fun isContainLottoNumber(lottoNumber: LottoNumber): Boolean {
+    private fun isContainLottoNumber(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.contains(lottoNumber)
+    }
+
+    fun countWinningNumbers(lottoTicket: LottoTicket): Int {
+        return lottoTicket.lottoNumbers.filter {
+            this.isContainLottoNumber(it)
+        }.size
     }
 
     companion object {
