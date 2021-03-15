@@ -19,6 +19,7 @@ class LotteryNumberTest {
     fun `로또 번호는 중복되면 안된다`() {
         val lotteryNumbers = LotteryNumbers(listOf(1, 1, 2, 3, 4, 5, 7))
 
-        assertThat(lotteryNumbers.lotteryNumbers.size).isEqualTo(6)
+        assertThat(lotteryNumbers.numbers.size).isEqualTo(6)
     }
 }
+
