@@ -36,6 +36,7 @@ object StatisticsView {
             LotteryMatchType.Three -> "3개 일치"
             LotteryMatchType.Four -> "4개 일치"
             LotteryMatchType.Five -> "5개 일치"
+            LotteryMatchType.FiveWithBonus -> "5개 일치, 보너스 볼 일치"
             LotteryMatchType.Six -> "6개 일치"
         }
 }

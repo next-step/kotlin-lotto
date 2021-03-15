@@ -11,7 +11,5 @@ interface LotteryTicketMaker {
     companion object {
         const val LOTTERY_TICKET_PRICE = 1000
         const val LOTTERY_NUMBER_SIZE = 6
-        const val LOTTERY_MIN_NUMBER = 1
-        const val LOTTERY_MAX_NUMBER = 45
     }
 }

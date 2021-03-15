@@ -1,9 +1,11 @@
 package lotto.domain
 
 import lotto.data.LottoNumbers
+import lotto.data.WinningNumbers
+import lotto.enums.LotteryMatchType
 
 class LotteryTicket(val lottoNumbers: LottoNumbers) {
-    fun findMatchCount(winningNumbers: LottoNumbers): Int {
-        return lottoNumbers.findMatchCount(winningNumbers)
+    fun findWinningType(winningNumbers: WinningNumbers): LotteryMatchType {
+        return winningNumbers.findWinningType(lottoNumbers)
     }
 }
