@@ -1,6 +1,7 @@
 package domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -20,9 +21,17 @@ class LotteryFactoryTest {
 
     @ParameterizedTest
     @ValueSource(ints = [-2000, 0, 900, 999])
-    internal fun `개당 금액이 1000원 이하인 경우 생성을 실패한다`(wrongInputPrice: Int) {
+    fun `개당 금액이 1000원 이하인 경우 생성을 실패한다`(wrongInputPrice: Int) {
         assertThrows<IllegalArgumentException> {
             LotteryFactory(wrongInputPrice)
         }
+    }
+
+    @Test
+    fun `입력한 금액에 따른 개수만큼 로또를 구매한다`() {
+        val lotteryFactory = LotteryFactory(2000)
+        val lotteries = lotteryFactory.buy()
+
+        assertThat(lotteries.lotteries.size).isEqualTo(2)
     }
 }
