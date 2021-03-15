@@ -1,10 +1,9 @@
 package stringcalculator.domain
 
-class Tokens(
-    stringTokens: List<String>,
-    val tokens: List<Token> = toTokenList(stringTokens)
-) {
+class Tokens private constructor(stringTokens: List<String>) {
+    val tokens: List<Token> = stringTokens.map { Token.from(it) }
+
     companion object {
-        fun toTokenList(stringTokens: List<String>): List<Token> = stringTokens.map { Token(it) }
+        fun from(stringTokens: List<String>): Tokens = Tokens(stringTokens)
     }
 }
