@@ -6,6 +6,6 @@ import lotto.enums.LotteryMatchType
 
 class LotteryTicket(val lottoNumbers: LottoNumbers) {
     fun findWinningType(winningNumbers: WinningNumbers): LotteryMatchType {
-        return lottoNumbers.findWinningType(winningNumbers)
+        return winningNumbers.findWinningType(lottoNumbers)
     }
 }

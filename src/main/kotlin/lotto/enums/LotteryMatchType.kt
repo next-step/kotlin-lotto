@@ -13,7 +13,7 @@ enum class LotteryMatchType(
 
     companion object {
         fun findByMatchCount(matchCount: Int, hasBonusNumber: Boolean): LotteryMatchType {
-            if (matchCount == 5 && hasBonusNumber) {
+            if (matchCount == FiveWithBonus.matchCount && hasBonusNumber) {
                 return FiveWithBonus
             }
             return values().filter { it != FiveWithBonus }.find { it.matchCount == matchCount } ?: NonProfit

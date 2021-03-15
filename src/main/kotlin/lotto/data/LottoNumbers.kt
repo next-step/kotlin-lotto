@@ -1,10 +1,9 @@
 package lotto.data
 
-import lotto.enums.LotteryMatchType
-
 class LottoNumbers(
     numbers: List<Int>
 ) {
+    //TODO: change to private
     val lottoNumbers: List<LottoNumber> = numbers.map { LottoNumber.from(it) }
 
     init {
@@ -12,32 +11,27 @@ class LottoNumbers(
         require(!hasDuplicatedNumber()) { "중복되는 숫자는 없어야 합니다." }
     }
 
-    fun findWinningType(winningNumbers: WinningNumbers): LotteryMatchType {
-        val matchCount = lottoNumbers.count { winningNumbers.lottoNumbers.contains(it) }
-        val hasBonusNumber = lottoNumbers.contains(winningNumbers.bonusNumber)
-        return LotteryMatchType.findByMatchCount(matchCount, hasBonusNumber)
-    }
-
-    private fun contains(lottoNumber: LottoNumber): Boolean {
+    fun contains(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.contains(lottoNumber)
     }
 
+    fun count(predicate: (LottoNumber) -> Boolean): Int {
+        return lottoNumbers.count(predicate)
+    }
+
     private fun hasDuplicatedNumber(): Boolean {
-        lottoNumbers.forEach { lottoNumber ->
-            if (isDuplicated(lottoNumber)) return true
-        }
-        return false
+        return lottoNumbers.find(::isDuplicated) != null
     }
 
     private fun isDuplicated(lottoNumber: LottoNumber): Boolean {
-        val sameNumberCount = lottoNumbers.filter { it == lottoNumber }.count()
-        if (sameNumberCount > 1) {
-            return true
-        }
-        return false
+        return lottoNumbers.count { it == lottoNumber } != COUNT_OF_UNIQUE_NUMBER
     }
+
+    fun toIntList(): List<Int> =
+        lottoNumbers.map { it.lottoNumber }
 
     companion object {
         private const val LOTTO_NUMBERS_SIZE = 6
+        private const val COUNT_OF_UNIQUE_NUMBER = 1
     }
 }
