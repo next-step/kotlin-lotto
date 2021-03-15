@@ -1,13 +1,10 @@
 package domain
 
-import kotlin.random.Random
+object RandomNumbers {
+    private const val MIN_INDEX = 0
 
-class RandomNumbers : Numbers {
-    fun makeNumbers(min: Int, max: Int, size: Int): List<Int> {
-        return (1..size).map { Random.nextInt(min, max) }
-    }
-
-    override fun makeNumber(min: Int, max: Int): Int {
-        return Random.nextInt(min, max)
+    fun generate(min: Int, max: Int, size: Int): List<Int> {
+        val numbers = (min..max).map { it }.shuffled()
+        return numbers.subList(MIN_INDEX, size)
     }
 }
