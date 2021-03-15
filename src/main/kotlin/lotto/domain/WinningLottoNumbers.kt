@@ -24,7 +24,7 @@ class WinningLottoNumbers private constructor(
                 "당첨 번호는 ${WINNING_LOTTO_NUMBERS_SIZE}개의 수로 이뤄져야 합니다."
             }
 
-            require(tokens.groupBy { it }.all{ it.value.size == 1 }) {
+            require(tokens.groupBy { it }.all { it.value.size == 1 }) {
                 "당첨 번호는 중복된 번호를 허용할 수 없습니다."
             }
         }

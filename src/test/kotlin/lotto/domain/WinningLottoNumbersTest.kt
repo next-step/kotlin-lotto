@@ -1,7 +1,6 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -22,11 +21,13 @@ internal class WinningLottoNumbersTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = [
-        "1, 1, 2, 3, 4, 5",
-        "1, 1, 1, 1, 1, 1",
-        "45, 44, 43, 20, 20, 5"
-    ])
+    @ValueSource(
+        strings = [
+            "1, 1, 2, 3, 4, 5",
+            "1, 1, 1, 1, 1, 1",
+            "45, 44, 43, 20, 20, 5"
+        ]
+    )
     fun `중복 번호 검증`(stringWinningLottoNumbers: String) {
         assertThrows<IllegalArgumentException> {
             WinningLottoNumbers.from(stringWinningLottoNumbers)

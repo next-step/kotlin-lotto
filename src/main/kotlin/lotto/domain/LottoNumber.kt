@@ -9,7 +9,7 @@ class LottoNumber private constructor(val number: Int) {
     companion object {
         const val MINIMUM_LOTTO_NUMBER = 1
         const val MAXIMUM_LOTTO_NUMBER = 45
-        private val cache: Array<LottoNumber> = Array(MAXIMUM_LOTTO_NUMBER + 1){ LottoNumber(it) }
+        private val cache: Array<LottoNumber> = Array(MAXIMUM_LOTTO_NUMBER + 1) { LottoNumber(it) }
 
         fun from(number: Int): LottoNumber {
             validate(number)
@@ -23,5 +23,4 @@ class LottoNumber private constructor(val number: Int) {
             }
         }
     }
-
 }
