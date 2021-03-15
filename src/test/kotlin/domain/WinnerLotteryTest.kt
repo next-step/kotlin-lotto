@@ -24,4 +24,15 @@ class WinnerLotteryTest {
 
         assertThat(count).isEqualTo(3)
     }
+
+    @Test
+    fun `로또번호와 당첨번호가 3개 일치하면 5_000원을 받는다`() {
+        val lotteryNumbers = LotteryNumbers(TEST_NUMBERS)
+
+        val winnerLottery = WinnerLottery(listOf(1, 3, 5, 24, 15, 40))
+
+        val count = winnerLottery.matchCount(lotteryNumbers)
+
+        assertThat(count).isEqualTo(3)
+    }
 }
