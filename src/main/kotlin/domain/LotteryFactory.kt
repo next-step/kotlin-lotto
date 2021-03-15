@@ -12,7 +12,7 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
         return Lotteries.of(count)
     }
 
-    fun calculateLotteryCountByPrice(): Int {
+    private fun calculateLotteryCountByPrice(): Int {
         return inputPrice / unitPrice
     }
 }
