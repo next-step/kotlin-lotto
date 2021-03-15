@@ -7,15 +7,21 @@ import org.junit.jupiter.api.assertAll
 class RandomNumbersTest {
 
     @Test
-    fun `6개의 랜덤 값을 생성한다`() {
-        val randomNumber = RandomNumbers()
-
-        val randoms = randomNumber.makeNumbers(0, 45, 6)
+    fun `6개의 1부터 45이하의 중복되지 않는 랜덤 값을 생성한다`() {
+        val randoms = RandomNumbers.generate(1, 45, 6)
 
         assertAll(
             { assertThat(randoms.size).isEqualTo(6) },
-            { assertThat(randoms[0]).isGreaterThan(1) },
-            { assertThat(randoms[0]).isLessThan(45) }
+            {
+                assertAllRangeOfNumbers(randoms)
+            }
         )
+    }
+
+    private fun assertAllRangeOfNumbers(randoms: List<Int>) {
+        randoms.map {
+            assertThat(it).isGreaterThan(1)
+            assertThat(it).isLessThan(45)
+        }
     }
 }
