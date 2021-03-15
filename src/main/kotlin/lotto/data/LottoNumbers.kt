@@ -3,9 +3,9 @@ package lotto.data
 import lotto.enums.LotteryMatchType
 
 class LottoNumbers(
-    values: List<Int>
+    numbers: List<Int>
 ) {
-    val lottoNumbers: List<LottoNumber> = values.map { LottoNumber.from(it) }
+    val lottoNumbers: List<LottoNumber> = numbers.map { LottoNumber.from(it) }
 
     init {
         require(lottoNumbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호의 개수는 6개여야 합니다." }
