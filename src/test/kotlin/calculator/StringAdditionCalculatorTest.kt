@@ -1,8 +1,8 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -21,10 +21,14 @@ internal class StringAdditionCalculatorTest {
         assertThat(calculator.calculate("$integer")).isEqualTo(integer)
     }
 
-    @Test
-    fun `두 숫자 사이에 쉼표가 있는 경우, 두 숫자의 합을 반환`() {
-        assertThat(calculator.calculate("1,2")).isEqualTo(3)
-        assertThat(calculator.calculate("3,9")).isEqualTo(12)
-        assertThat(calculator.calculate("13,987")).isEqualTo(1000)
+    @ParameterizedTest
+    @CsvSource(
+        "1,2=3",
+        "3,9=12",
+        "13,987=1000",
+        delimiterString = "="
+    )
+    fun `두 숫자 사이에 쉼표가 있는 경우, 두 숫자의 합을 반환`(expression: String, sum: Int) {
+        assertThat(calculator.calculate(expression)).isEqualTo(sum)
     }
 }
