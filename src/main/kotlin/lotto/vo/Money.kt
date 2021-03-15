@@ -5,6 +5,8 @@ data class Money(val money: Int) {
         require(money >= DEFAULT_MONEY) { "돈은 0보다 작을 수 없습니다." }
     }
 
+    operator fun div(right: Money) = this.money / right.money
+
     companion object {
         private const val DEFAULT_MONEY = 0
         fun from(num: String): Money {
@@ -13,6 +15,4 @@ data class Money(val money: Int) {
             )
         }
     }
-
-    operator fun div(right: Money) = this.money / right.money
 }

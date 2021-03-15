@@ -8,22 +8,19 @@ class Lotto(val lottoNumbers: Set<LottoNumber>) {
         require(lottoNumbers.size == LOTTO_SIZE) { "하나의 로또에 로또 번호는 정확히 6개만 허용됩니다." }
     }
 
-    companion object {
-        val LOTTO_SIZE = 6
-        fun of(numbers: Set<Int>): Lotto {
-            return Lotto(numbers.map { LottoNumber.from(it) }.sortedBy { it.number }.toSet())
-        }
-    }
-
     fun match(winningNumber: WinningLotto): LottoPrize {
-        var count = 0
-        lottoNumbers.intersect(winningNumber.winningLotto).forEach {
-            count++
-        }
+        val count = lottoNumbers.intersect(winningNumber.winningLotto).size
         return LottoPrize.from(count)
     }
 
     override fun toString(): String {
         return "$lottoNumbers"
+    }
+
+    companion object {
+        val LOTTO_SIZE = 6
+        fun of(numbers: Set<Int>): Lotto {
+            return Lotto(numbers.map { LottoNumber.from(it) }.sortedBy { it.number }.toSet())
+        }
     }
 }

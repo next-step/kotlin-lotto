@@ -266,7 +266,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.size * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(2000000.0)
     }
@@ -291,7 +291,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.size * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(1500.0)
     }
@@ -316,7 +316,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.size * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(50.0)
     }
@@ -341,7 +341,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.size * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(5.0)
     }
@@ -379,7 +379,7 @@ internal class LottoCompanyTest {
         // when
         comp.setWinnerNumber(winnerNums)
         val winners = comp.findWinners(soldLotto)
-        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.getLottoCount() * LOTTO_PRICE.money))
+        val earningRatio = comp.calculateEarningRate(winners, Money(soldLotto.size * LOTTO_PRICE.money))
         // then
         assertThat(earningRatio).isEqualTo(0.83)
     }

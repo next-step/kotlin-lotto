@@ -6,8 +6,10 @@ import lotto.vo.Statistics
 
 object OutputView {
     fun showPurchaseStatus(lottos: LottoBasket) {
-        println("${lottos.getLottoCount()}개를 구매했습니다.")
-        lottos.doLottos(::println)
+        println("${lottos.size}개를 구매했습니다.")
+        lottos.forEach {
+            println(it)
+        }
     }
 
     fun showWinningStatus(statistics: Statistics) {

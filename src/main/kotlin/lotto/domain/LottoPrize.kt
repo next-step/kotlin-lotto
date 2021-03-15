@@ -7,8 +7,7 @@ enum class LottoPrize(val value: Int, val price: Int) {
 
     companion object {
         fun from(value: Int): LottoPrize {
-            if (value < 3 || value > 6) return NOT_MATCH
-            return values().first { it.value == value }
+            return values().find { it.value == value } ?: NOT_MATCH
         }
     }
 }

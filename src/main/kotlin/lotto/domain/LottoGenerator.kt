@@ -1,18 +1,10 @@
 package lotto.domain
 
-import lotto.vo.LottoNumber
+import lotto.vo.LottoNumber.Companion.LOTTO_NUM_RANGE
 
 object LottoGenerator {
     fun generate(): Lotto {
-        val autoLotto = mutableSetOf<Int>()
-        (1..Lotto.LOTTO_SIZE).forEach { _ ->
-            autoLotto.add(makeAutoNumber(autoLotto))
-        }
+        val autoLotto = LOTTO_NUM_RANGE.shuffled().subList(0, Lotto.LOTTO_SIZE).toSet()
         return Lotto.of(autoLotto)
-    }
-
-    private fun makeAutoNumber(exceptList: Set<Int>): Int {
-        val result = LottoNumber.LOTTO_NUM_RANGE.random()
-        return if (result !in exceptList) result else makeAutoNumber(exceptList)
     }
 }
