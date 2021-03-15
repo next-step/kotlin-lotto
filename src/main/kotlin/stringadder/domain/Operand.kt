@@ -1,9 +1,9 @@
 package stringadder.domain
 
 data class Operand(private val token: String) {
-    val operand: Int = validateNumber(token)
+    val operand: Int = parseNumber(token)
 
-    private fun validateNumber(token: String): Int {
+    private fun parseNumber(token: String): Int {
         try {
             val number = token.toInt()
             validatePositive(number)

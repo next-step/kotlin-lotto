@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class OperandTest {
 
@@ -14,9 +16,10 @@ internal class OperandTest {
     }
 
     @DisplayName("인자로 숫자가 아닌 값이 들어온 경우 예외 발생")
-    @Test
-    fun validateNumber() {
-        assertThrows<IllegalArgumentException> { Operand("a") }
+    @ParameterizedTest
+    @ValueSource(strings = ["a", "A", "*", "-"])
+    fun validateNumber(input: String) {
+        assertThrows<IllegalArgumentException> { Operand(input) }
     }
 
     @DisplayName("인자로 음수가 들어온 경우 예외 발생")

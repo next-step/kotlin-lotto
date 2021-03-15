@@ -1,6 +1,6 @@
 package stringadder.domain
 
-private val PATTERN = Regex("//(.*)\\\\n(.*)")
+private val PATTERN = Regex("//(.+)\\\\n(.*)")
 
 object Parser {
     fun parse(read: String): Expression {
