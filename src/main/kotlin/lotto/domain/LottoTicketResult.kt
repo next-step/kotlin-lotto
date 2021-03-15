@@ -9,7 +9,7 @@ class LottoTicketResult(
     val lottoRank: LottoRank = findLottoRank()
 
     private fun findLottoRank(): LottoRank {
-        val collectCount = userLottoTicket.getCollectCount(winNumber.winLottoTicket)
-        return LottoRank.findRank(collectCount)
+        val matchCount = userLottoTicket.getMatchCount(winNumber.winLottoTicket)
+        return LottoRank.findRank(matchCount)
     }
 }

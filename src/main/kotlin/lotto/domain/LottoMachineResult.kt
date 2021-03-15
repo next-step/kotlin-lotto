@@ -13,7 +13,7 @@ class LottoMachineResult(
         userLottoTickets.map { LottoTicketResult(userLottoTicket = it, winNumber = winNumber) }
 
     fun getLottoRankCount(lottoRank: LottoRank): Int {
-        return lottoTicketResults.filter { it.lottoRank == lottoRank }.count()
+        return lottoTicketResults.count { it.lottoRank == lottoRank }
     }
 
     fun calculateProfit(purchaseInfo: PurchaseInfo): Double {

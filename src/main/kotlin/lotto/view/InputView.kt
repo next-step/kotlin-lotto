@@ -1,9 +1,9 @@
 package lotto.view
 
 object InputView {
-    fun purchase(): Int {
+    tailrec fun purchase(): Int {
         println("구입금액을 입력해 주세요.")
-        return readLine()?.toInt() ?: 0
+        return readLine()?.toIntOrNull() ?: purchase()
     }
 
     fun winNumber(): String {

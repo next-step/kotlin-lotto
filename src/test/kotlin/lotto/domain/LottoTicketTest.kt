@@ -58,6 +58,6 @@ internal class LottoTicketTest {
     fun winLottoTicketCount() {
         val winLottoTicket = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6))
         val userLottoTicket = LottoTicket.of(listOf(5, 6, 7, 8, 9, 10))
-        assertThat(userLottoTicket.getCollectCount(winLottoTicket)).isEqualTo(2)
+        assertThat(userLottoTicket.getMatchCount(winLottoTicket)).isEqualTo(2)
     }
 }

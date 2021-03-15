@@ -12,10 +12,9 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
         }
     }
 
-    fun getCollectCount(winLottoTicket: LottoTicket): Int {
+    fun getMatchCount(winLottoTicket: LottoTicket): Int {
         return winLottoTicket.lottoNumbers
-            .map { this.lottoNumbers.contains(it) }
-            .count { it }
+            .count { it in lottoNumbers }
     }
 
     override fun toString(): String {
