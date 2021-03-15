@@ -20,7 +20,7 @@ class WinnerLotteryTest {
 
         val winnerLottery = WinnerLottery(listOf(1, 3, 5, 24, 15, 40))
 
-        val count = winnerLottery.matchCount(winnerLottery)
+        val count = winnerLottery.matchCount(lotteryNumbers)
 
         assertThat(count).isEqualTo(3)
     }
