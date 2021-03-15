@@ -15,11 +15,7 @@ class LottoTicket private constructor(
                 .map { LottoNumber.from(it) }
 
         fun create(): LottoTicket {
-            return create(LOTTO_NUMBERS_SIZE)
-        }
-
-        private fun create(lottoNumberSize: Int): LottoTicket {
-            return LottoTicket(LOTTO_NUMBER_CANDIDATES.shuffled().take(lottoNumberSize))
+            return LottoTicket(LOTTO_NUMBER_CANDIDATES.shuffled().take(LOTTO_NUMBERS_SIZE))
         }
     }
 }
