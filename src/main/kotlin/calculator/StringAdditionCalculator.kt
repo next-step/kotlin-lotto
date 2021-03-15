@@ -6,6 +6,7 @@ class StringAdditionCalculator {
             return 0
         }
 
-        return expression.toInt()
+        return expression.toIntOrNull()
+            ?: expression.split(",").map { it.toInt() }.sum()
     }
 }
