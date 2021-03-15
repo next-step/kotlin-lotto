@@ -5,6 +5,7 @@ class WinningLotto(private val winningLottoNumbers: List<LottoNumber>, private v
     init {
         require(winningLottoNumbers.size == VALID_WINNING_LOTTO_NUMBER_COUNT) { "로또번호 개수가 ${VALID_WINNING_LOTTO_NUMBER_COUNT}개가 아닙니다." }
         require(hasNotDuplicatedLottoNumber(winningLottoNumbers)) { "중복된 로또번호가 있습니다." }
+        require(!winningLottoNumbers.contains(bonusNumber)) { "당첨번호 중에 보너스번호가 존재할 수 없습니다." }
     }
 
     private fun hasNotDuplicatedLottoNumber(lottoNumbers: List<LottoNumber>): Boolean {
