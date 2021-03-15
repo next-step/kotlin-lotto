@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.LottoData
+import lotto.LottoPrizeData
 import lotto.WinnerLottoData
 
 object OutputView {
@@ -16,7 +17,7 @@ object OutputView {
         println("---------")
 
         winnerLottoData.getLottoPrizeDataList().forEach {
-            println("${it.matchCount}개 일치 (${it.prizeMoney}원)- ${winnerLottoData.getWinnerStepCount(it.matchCount)}개")
+            if (it.includeBonusNumber) showPrintForBonus(it, winnerLottoData) else showPrint(it, winnerLottoData)
         }
 
         val prizeRate = winnerLottoData.getPrizeRate()
@@ -27,5 +28,21 @@ object OutputView {
         }
 
         println(resultMessage)
+    }
+
+    private fun showPrint(lottoPrizeData: LottoPrizeData, winnerLottoData: WinnerLottoData) {
+        println(
+            "${lottoPrizeData.matchCount}개 일치 " +
+                "(${lottoPrizeData.prizeMoney}원)- " +
+                "${winnerLottoData.getWinnerStepCount(lottoPrizeData.matchCount)}개"
+        )
+    }
+
+    private fun showPrintForBonus(lottoPrizeData: LottoPrizeData, winnerLottoData: WinnerLottoData) {
+        println(
+            "${lottoPrizeData.matchCount}개 일치, " +
+                "보너스 볼 일치(${lottoPrizeData.prizeMoney}원)- " +
+                "${winnerLottoData.getWinnerStepCountWithBonusNumber(lottoPrizeData.matchCount)}개"
+        )
     }
 }

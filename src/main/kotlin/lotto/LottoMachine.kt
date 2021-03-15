@@ -6,16 +6,14 @@ class LottoMachine(private val lottoPay: Int, private val lottoPrizeInfo: LottoP
         private const val startNumber: Int = 1
         private const val endNumber: Int = 45
         private const val maxCount: Int = 6
-        private var paymentAmount: Int = 0
     }
 
     fun issue(amount: Int): List<LottoData> {
-        paymentAmount = amount
         return if (lottoPay > amount) emptyList() else makeLottoList(amount)
     }
 
-    fun getWinnerLottoData(winnerNumbers: List<Int>, lottoDataList: List<LottoData>): WinnerLottoData {
-        return WinnerLottoData(LottoWin(winnerNumbers).getWinners(lottoDataList), lottoPrizeInfo, paymentAmount)
+    fun getWinnerLottoData(winnerNumberData: WinnerNumberData, lottoDataList: List<LottoData>, amount: Int): WinnerLottoData {
+        return WinnerLottoData(LottoWin(winnerNumberData).getWinners(lottoDataList), lottoPrizeInfo, amount)
     }
 
     private fun makeLottoList(amount: Int): List<LottoData> {
