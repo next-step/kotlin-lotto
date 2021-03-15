@@ -23,21 +23,6 @@ class RandomNumbersTest {
         )
     }
 
-    @Test
-    fun `입력 개수만큼 로또를 생성한다`() {
-        val lotteries = Lotteries.of(5)
-
-        assertThat(lotteries.lotteries).hasSize(5)
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = [-1, 0, -20])
-    fun `입력 개수가 0보다 작은경우 생성되지 않는다`(wrongCount: Int) {
-        assertThrows<IllegalArgumentException> {
-            Lotteries.of(wrongCount)
-        }
-    }
-
     private fun assertAllRangeOfNumbers(randoms: List<Int>) {
         randoms.map {
             assertThat(it).isGreaterThan(MIN_LOTTERY_NUMBER)
