@@ -12,10 +12,8 @@ class WinningLottoTicket(
     }
 
     fun compare(ticket: LottoTicket, bonusNumber: LottoNumber): WinningBoard {
-        val matchNumbers = mutableListOf<LottoNumber>()
-        numbers.forEach {
-            ticket.fillMatchNumber(matchNumbers, it)
-        }
+        val matchNumbers = ticket.findMatchNumber(numbers)
+
         return WinningBoard.findBy(matchNumbers.size)
             .upgrade(ticket.hasNumber(bonusNumber))
     }

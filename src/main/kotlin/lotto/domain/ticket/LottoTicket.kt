@@ -12,13 +12,11 @@ class LottoTicket(
         }
     }
 
-    fun fillMatchNumber(matchNumbers: MutableList<LottoNumber>, number: LottoNumber) {
-        if (numbers.contains(number)) {
-            matchNumbers.add(number)
-        }
-    }
-
     fun hasNumber(lottoNumber: LottoNumber) = numbers.contains(lottoNumber)
+
+    fun findMatchNumber(numbers: List<LottoNumber>): List<LottoNumber> {
+        return numbers.filter { numbers.contains(it) }
+    }
 
     companion object {
         const val TICKET_SIZE = 6
