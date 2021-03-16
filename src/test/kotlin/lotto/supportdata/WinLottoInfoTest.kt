@@ -22,4 +22,12 @@ internal class WinLottoInfoTest {
             WinLottoInfo("1, 2, 3, 4, 5,", 7).winLottoTicket
         }
     }
+
+    @Test
+    @DisplayName("입력으로 받은 당첨번호 숫자는 보너스 숫자와 겹칠 수 없다")
+    fun bonusNumberValidate() {
+        assertThrows<IllegalArgumentException> {
+            WinLottoInfo("1, 2, 3, 4, 5, 6", 6)
+        }
+    }
 }

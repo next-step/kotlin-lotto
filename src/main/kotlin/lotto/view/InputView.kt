@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.supportdata.PurchaseInfo
 import lotto.supportdata.WinLottoInfo
+import java.lang.IllegalArgumentException
 
 object InputView {
     private tailrec fun purchase(): Int {
@@ -24,6 +25,11 @@ object InputView {
     fun makeWinLottoInfo(): WinLottoInfo {
         val winNumber = winNumbers()
         val bonusBall = bonusBall()
-        return WinLottoInfo(winNumber, bonusBall)
+        return try {
+            WinLottoInfo(winNumber, bonusBall)
+        } catch (e: IllegalArgumentException) {
+            println("다시 입력해주세요 \nㄴ사유 : ${e.message} \n")
+            makeWinLottoInfo()
+        }
     }
 }
