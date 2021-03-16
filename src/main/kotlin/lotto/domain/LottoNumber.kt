@@ -9,6 +9,9 @@ data class LottoNumber(val number: Int) {
         return number.toString()
     }
 
+    override fun toString(): String {
+        return number.toString()
+    }
     companion object {
         const val LOTTO_MINIMUM_NUMBER = 1
         const val LOTTO_MAXIMUM_NUMBER = 45

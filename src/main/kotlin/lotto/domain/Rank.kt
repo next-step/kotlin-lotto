@@ -23,5 +23,8 @@ enum class Rank(val count: Int, val amount: Long, val matchCondition: String = "
         fun getWonRank(): List<Rank> {
             return values().filter { it != FAIL }
         }
+        fun getWonRank(): List<Rank> {
+            return listOf(FORTH, THIRD, SECOND, FIRST)
+        }
     }
 }
