@@ -13,7 +13,7 @@
                 - [ ] Rank는 당첨갯수를 기반으로 몇등인지 return이 가능해야한다 -> Rank.getRank(맞은갯수: int)
             - [ ] LottoRanks는 스스로 총합금액을 return할줄 알아야 한다 -> LottoRank.sum() -> Int
       
-    - [ ] 로또는 6개의 숫자를 갖고 있다 -> Lotto
+    - [X] 로또는 6개의 숫자를 갖고 있다 -> Lotto
         - [ ] 생성시 LottoNumber을 같이 생성한다.
         - [ ] 로또 넘버 생성기를 주입이 가능해야 한다 
         - [ ] 로또의 숫자는 랜덤적으로 생성이 가능하다 -> LottoNumberRandomGenerator
