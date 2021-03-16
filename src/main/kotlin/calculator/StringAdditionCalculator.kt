@@ -6,7 +6,7 @@ class StringAdditionCalculator {
             return 0
         }
 
-        if (expression.contains("//.\n".toRegex())) {
+        if (expression.contains(CUSTOM_DELIMITER_REGEX)) {
             return 0
         }
 
@@ -17,5 +17,6 @@ class StringAdditionCalculator {
     companion object {
         private const val COMMA_DELIMITER = ","
         private const val COLON_DELIMITER = ":"
+        private val CUSTOM_DELIMITER_REGEX = "//.\n".toRegex()
     }
 }
