@@ -21,7 +21,7 @@ class WinnerLottery(numbers: List<Int>) {
         result[count] = result.getOrDefault(count, DEFAULT_MATCH_COUNT) + ADD_COUNT_VALUE
     }
 
-    fun matchCount(lotteryNumbers: LotteryNumbers): Int {
+    private fun matchCount(lotteryNumbers: LotteryNumbers): Int {
         return lotteryNumbers.numbers.filter { this.lotteryNumbers.numbers.contains(it) }.count()
     }
 
