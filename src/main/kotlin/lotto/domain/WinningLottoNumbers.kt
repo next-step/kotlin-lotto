@@ -18,7 +18,7 @@ class WinningLottoNumbers private constructor(
         private const val WINNING_LOTTO_NUMBERS_SIZE = 6
 
         fun from(stringWinningLottoNumbers: String): WinningLottoNumbers {
-            val winningLottoNumberTokens = stringWinningLottoNumbers.split(", ")
+            val winningLottoNumberTokens = stringWinningLottoNumbers.trim().split(",").map { it.trim() }
 
             validate(winningLottoNumberTokens)
 
