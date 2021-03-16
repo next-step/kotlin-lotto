@@ -29,7 +29,11 @@ class LottoApplication(private val userInterface: UserInterface) {
         val winningLottoNumbers = userInterface.inputLastWeekWinningLottoNumbers()
         val winningLottoBonusNumber = userInterface.inputLastWeekWinningLottoBonusNumber()
 
-        val winningLotto = WinningLotto(Lotto(winningLottoNumbers.map { LottoNumber(it) }), LottoNumber(winningLottoBonusNumber))
+        val winningLotto = run {
+            val lotto = Lotto(winningLottoNumbers.map { LottoNumber(it) })
+            val bonusNumber = LottoNumber(winningLottoBonusNumber)
+            WinningLotto(lotto = lotto, bonusNumber = bonusNumber)
+        }
 
         val result = LottoResult(winningLotto, lottos)
         userInterface.outputWinningStatistics(StatisticsDto.of(result.result(), amount))
