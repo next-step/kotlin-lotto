@@ -20,5 +20,5 @@
         - [X] 로또 숫자는 1~45까지 갖고 있다 -> LottoNumber
         - [X] 로또의 숫자는 중첩이 불가능하다 -> Set
         - [X] 숫자를 맞춰 등수를 알아야 한다.
-- [ ] 출력 시 LottoCollection.getRanks() 를 통해 출력을 한다.
-    - [ ] LottoRankCollection.sum() / LottoCollection.lotto.size * 1000 을 수익률로 보여준다.
+- [X] 출력 시 LottoCollection.getRanks() 를 통해 출력을 한다.
+    - [X] LottoRankCollection.sum() / LottoCollection.lotto.size * 1000 을 수익률로 보여준다.

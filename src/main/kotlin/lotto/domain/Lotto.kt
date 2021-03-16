@@ -19,6 +19,10 @@ class Lotto(
         return Rank.getRankByCount(wonNumberCount)
     }
 
+    override fun toString(): String {
+        return numbers.joinToString(prefix = "[", postfix = "]")
+    }
+
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
     }
