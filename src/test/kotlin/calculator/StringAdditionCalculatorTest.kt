@@ -2,7 +2,6 @@ package calculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -76,13 +75,16 @@ internal class StringAdditionCalculatorTest {
         assertThat(calculator.calculate(expression)).isEqualTo(sum)
     }
 
-    @Test
-    fun `음수를 전달하는 경우 RuntimeException을 던진다`() {
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "-1",
+            "2,-5",
+            "//;\n1;2;-3"
+        ]
+    )
+    fun `음수를 전달하는 경우 RuntimeException을 던진다`(expression: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy {
-                calculator.calculate("-1")
-                calculator.calculate("2,-5")
-                calculator.calculate("//;\n1;2;-3")
-            }
+            .isThrownBy { calculator.calculate(expression) }
     }
 }
