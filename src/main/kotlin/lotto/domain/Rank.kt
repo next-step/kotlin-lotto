@@ -11,6 +11,7 @@ enum class Rank(val count: Int, val amount: Int) {
         fun getRankByCount(count: Int): Rank {
             return values().firstOrNull { it.count == count } ?: FAIL
         }
+
         fun getWonRank(): List<Rank> {
             return listOf(FORTH, THIRD, SECOND, FIRST)
         }
