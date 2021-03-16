@@ -7,7 +7,7 @@ enum class Rank(val matchCount: Int, val price: Int) {
     FOURTH(3, 5_000);
 
     fun matchCount(lotteryNumbers: LotteryNumbers, winnerLottery: WinnerLottery): Int {
-        return lotteryNumbers.numbers.filter { winnerLottery.numbers.numbers.contains(it) }.count()
+        return lotteryNumbers.numbers.filter { winnerLottery.lotteryNumbers.numbers.contains(it) }.count()
     }
 
     companion object {

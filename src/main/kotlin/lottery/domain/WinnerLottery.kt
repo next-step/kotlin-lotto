@@ -1,13 +1,13 @@
 package lottery.domain
 
 class WinnerLottery(numbers: List<Int>) {
-    val numbers: LotteryNumbers = LotteryNumbers(numbers)
+    val lotteryNumbers: LotteryNumbers = LotteryNumbers(numbers)
 
     fun match(lotteries: List<Lottery>): HashMap<Int, Int> {
         val result = HashMap<Int, Int>()
 
         lotteries.map {
-            val count = matchCount(it.numbers)
+            val count = matchCount(it.lotteryNumbers)
 
             if (Rank.isInTheRank(count)) {
                 addMatchCount(result, count)
@@ -22,7 +22,7 @@ class WinnerLottery(numbers: List<Int>) {
     }
 
     fun matchCount(lotteryNumbers: LotteryNumbers): Int {
-        return lotteryNumbers.numbers.filter { this.numbers.numbers.contains(it) }.count()
+        return lotteryNumbers.numbers.filter { this.lotteryNumbers.numbers.contains(it) }.count()
     }
 
     companion object {
