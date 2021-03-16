@@ -38,7 +38,7 @@ internal class LottosTest {
         val third = winningLotto.match(lotto2)
 
         assertThat(result.elements.keys).contains(first, third)
-        assertThat(result.elements[first] ?: throw NullPointerException()).isEqualTo(1)
-        assertThat(result.elements[third] ?: throw NullPointerException()).isEqualTo(1)
+        assertThat(result.elements[first]).isEqualTo(1)
+        assertThat(result.elements[third]).isEqualTo(1)
     }
 }
