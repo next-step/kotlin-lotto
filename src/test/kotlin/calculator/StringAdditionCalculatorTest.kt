@@ -1,7 +1,6 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -49,12 +48,17 @@ internal class StringAdditionCalculatorTest {
         assertThat(calculator.calculate(expression)).isEqualTo(sum)
     }
 
-    @Test
-    fun `커스텀 구분자 구문을 지정한 문자열을 전달해도 실패하지 않는다`() {
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "//;\n1;2;3",
+            "//;\n1;2,3",
+            "//&\n1&2&3"
+        ]
+    )
+    fun `커스텀 구분자 구문을 지정한 문자열을 전달해도 실패하지 않는다`(expression: String) {
         assertDoesNotThrow {
-            calculator.calculate("//;\n1;2;3")
-            calculator.calculate("//;\n1;2,3")
-            calculator.calculate("//&\n1&2&3")
+            calculator.calculate(expression)
         }
     }
 }
