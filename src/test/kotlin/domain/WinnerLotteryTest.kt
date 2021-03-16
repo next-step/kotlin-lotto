@@ -31,7 +31,8 @@ class WinnerLotteryTest {
         val lotteries = listOf(
             LotteryNumbers(listOf(1, 3, 5, 2, 9, 40)),
             LotteryNumbers(listOf(34, 24, 1, 15, 3, 5)),
-            LotteryNumbers(listOf(3, 1, 5, 15, 24, 40))
+            LotteryNumbers(listOf(3, 1, 5, 15, 24, 40)),
+            LotteryNumbers(listOf(1, 3, 5, 40, 24, 15))
         )
 
         val winnerLottery = WinnerLottery(listOf(1, 3, 5, 24, 15, 40))
@@ -39,10 +40,9 @@ class WinnerLotteryTest {
         val matchCounts = winnerLottery.match(lotteries)
 
         assertAll (
-            { assertThat(matchCounts[3]).isEqualTo(1) },
             { assertThat(matchCounts[4]).isEqualTo(1) },
-            { assertThat(matchCounts[5]).isEqualTo(0) },
-            { assertThat(matchCounts[6]).isEqualTo(1) }
+            { assertThat(matchCounts[5]).isEqualTo(1) },
+            { assertThat(matchCounts[6]).isEqualTo(2) }
         )
     }
 }
