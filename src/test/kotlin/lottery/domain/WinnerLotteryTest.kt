@@ -1,4 +1,4 @@
-package domain
+package lottery.domain
 
 import fixture.LotteryFixture.TEST_NUMBERS
 import org.assertj.core.api.Assertions.assertThat

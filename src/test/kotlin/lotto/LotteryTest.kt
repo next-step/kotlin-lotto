@@ -1,6 +1,6 @@
 package lotto
 
-import domain.Lottery
+import lottery.domain.Lottery
 import fixture.LotteryFixture.TEST_LOTTERY_NUMBERS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

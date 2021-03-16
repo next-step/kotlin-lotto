@@ -1,4 +1,4 @@
-package view
+package lottery.view
 
 object InputView {
     fun printInputPrice() {

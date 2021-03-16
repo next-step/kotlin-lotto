@@ -1,4 +1,4 @@
-package domain
+package calculator
 
 object Calculator {
     private const val FIND_DELIMITER_AND_OPERAND_PATTERN = "//(.)\n(.*)"

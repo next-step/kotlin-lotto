@@ -1,6 +1,6 @@
 package fixture
 
-import domain.LotteryNumbers
+import lottery.domain.LotteryNumbers
 
 object LotteryFixture {
     val TEST_NUMBERS = listOf(1, 3, 5, 6, 2, 8)

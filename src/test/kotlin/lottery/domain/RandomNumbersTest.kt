@@ -1,4 +1,4 @@
-package domain
+package lottery.domain
 
 import fixture.LotteryFixture.LOTTERY_NUMBERS_SIZE
 import fixture.LotteryFixture.MAX_LOTTERY_NUMBER
@@ -22,7 +22,7 @@ class RandomNumbersTest {
 
     private fun assertAllRangeOfNumbers(randoms: List<Int>) {
         randoms.map {
-            assertThat(it).isGreaterThan(MIN_LOTTERY_NUMBER)
+            assertThat(it).isGreaterThanOrEqualTo(MIN_LOTTERY_NUMBER)
             assertThat(it).isLessThanOrEqualTo(MAX_LOTTERY_NUMBER)
         }
     }

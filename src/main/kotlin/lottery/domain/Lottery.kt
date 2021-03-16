@@ -1,4 +1,4 @@
-package domain
+package lottery.domain
 
 class Lottery(val numbers: LotteryNumbers, val price: Int = DEFAULT_LOTTO_PRICE) {
     companion object {

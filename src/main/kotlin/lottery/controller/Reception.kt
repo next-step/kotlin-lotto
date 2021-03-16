@@ -1,4 +1,4 @@
-package controller
+package lottery.controller
 
 object Reception {
     private const val LOTTERY_NUMBER_DELIMITERS = ","

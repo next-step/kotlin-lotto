@@ -1,4 +1,4 @@
-package domain
+package lottery.domain
 
 object RandomNumbers {
     private const val MIN_INDEX = 0

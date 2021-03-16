@@ -1,4 +1,4 @@
-package domain
+package lottery.domain
 
 enum class Rank(val matchCount: Int, val price: Int) {
     FIRST(6, 200_000_000),

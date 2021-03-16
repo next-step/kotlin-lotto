@@ -1,4 +1,4 @@
-package domain
+package lottery.domain
 
 class Lotteries(val lotteries: List<Lottery>) {
     companion object {

@@ -1,6 +1,6 @@
-package domain
+package lottery.domain
 
-import domain.Lottery.Companion.DEFAULT_LOTTO_PRICE
+import lottery.domain.Lottery.Companion.DEFAULT_LOTTO_PRICE
 
 class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = DEFAULT_LOTTO_PRICE) {
     init {

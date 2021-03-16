@@ -1,11 +1,11 @@
-package controller
+package lottery.controller
 
-import domain.LotteryFactory
-import domain.WinnerLottery
-import view.InputView
-import view.InputView.printInputLastWinnerLottery
-import view.ResultView
-import view.ResultView.printMatchNumbers
+import lottery.domain.LotteryFactory
+import lottery.domain.WinnerLottery
+import lottery.view.InputView
+import lottery.view.InputView.printInputLastWinnerLottery
+import lottery.view.ResultView
+import lottery.view.ResultView.printMatchNumbers
 
 fun main() {
     InputView.printInputPrice()

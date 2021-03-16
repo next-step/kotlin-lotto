@@ -1,4 +1,4 @@
-package domain
+package lottery.domain
 
 class LotteryNumber private constructor(private val number: Int) {
     companion object {

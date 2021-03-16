@@ -1,7 +1,7 @@
-package view
+package lottery.view
 
-import domain.Lottery
-import domain.Rank
+import lottery.domain.Lottery
+import lottery.domain.Rank
 
 object ResultView {
     private const val DEFAULT_MATCH_COUNT_VALUE = 0
