@@ -5,6 +5,7 @@ import lotto.domain.LottoNumber
 class LottoTicket(
     val numbers: Set<LottoNumber>
 ) {
+    constructor(numbers: List<String>) : this(numbers.map { LottoNumber.of(it) }.toSet())
 
     init {
         require(numbers.size == TICKET_SIZE) {

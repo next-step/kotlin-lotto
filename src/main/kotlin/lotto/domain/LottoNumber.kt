@@ -33,6 +33,10 @@ data class LottoNumber(
             }
         }
 
+        fun of(number: String): LottoNumber {
+            return of(number.trim().toInt())
+        }
+
         fun getLottoNumbers() = LottoCache.cache.toList()
     }
 }

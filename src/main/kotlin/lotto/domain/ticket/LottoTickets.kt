@@ -11,4 +11,20 @@ class LottoTickets(
         }
         return LottoResult(winningBoards)
     }
+
+    fun merge(lottoTickets: LottoTickets): LottoTickets {
+        val tickets = this.tickets.toMutableList()
+        tickets.addAll(lottoTickets.tickets)
+        return LottoTickets(tickets)
+    }
+
+    fun size(): Int {
+        return tickets.size
+    }
+
+    companion object {
+        fun empty(): LottoTickets {
+            return LottoTickets(emptyList())
+        }
+    }
 }
