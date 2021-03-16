@@ -3,6 +3,7 @@ package domain
 import fixture.LotteryFixture.TEST_NUMBERS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class WinnerLotteryTest {
     @Test
@@ -26,13 +27,22 @@ class WinnerLotteryTest {
     }
 
     @Test
-    fun `로또번호와 당첨번호가 3개 일치하면 5_000원을 받는다`() {
-        val lotteryNumbers = LotteryNumbers(TEST_NUMBERS)
+    fun `로또번호들 중에 당첨번호와 일치하는 개수들을 전달한다`() {
+        val lotteries = listOf(
+            LotteryNumbers(listOf(1, 3, 5, 2, 9, 40)),
+            LotteryNumbers(listOf(34, 24, 1, 15, 3, 5)),
+            LotteryNumbers(listOf(3, 1, 5, 15, 24, 40))
+        )
 
         val winnerLottery = WinnerLottery(listOf(1, 3, 5, 24, 15, 40))
 
-        val count = winnerLottery.matchCount(lotteryNumbers)
+        val matchCounts = winnerLottery.match(lotteries)
 
-        assertThat(count).isEqualTo(3)
+        assertAll (
+            { assertThat(matchCounts[3]).isEqualTo(1) },
+            { assertThat(matchCounts[4]).isEqualTo(1) },
+            { assertThat(matchCounts[5]).isEqualTo(0) },
+            { assertThat(matchCounts[6]).isEqualTo(1) }
+        )
     }
 }
