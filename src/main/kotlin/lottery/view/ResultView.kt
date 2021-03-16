@@ -5,6 +5,10 @@ import lottery.domain.Rank
 import lottery.domain.RankCounts
 
 object ResultView {
+    fun printProfit(profit: String) {
+        print("총 수익률은 ${profit}입니다.")
+    }
+
     fun printLotteriesNumbers(lotteries: List<Lottery>) {
         lotteries.map { println(it.toString()) }
     }
