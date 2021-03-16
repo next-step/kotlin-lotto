@@ -6,11 +6,12 @@ class StringAdditionCalculator {
             return 0
         }
 
-        return expression.split(DELIMITER, ":")
+        return expression.split(COMMA_DELIMITER, COLON_DELIMITER)
             .sumBy { it.toInt() }
     }
 
     companion object {
-        private const val DELIMITER = ","
+        private const val COMMA_DELIMITER = ","
+        private const val COLON_DELIMITER = ":"
     }
 }
