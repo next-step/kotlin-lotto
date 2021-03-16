@@ -1,3 +1,0 @@
-package vo
-
-class TokensTest
