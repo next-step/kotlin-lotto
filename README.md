@@ -4,9 +4,9 @@
         - [X] 1000원 보다 적으면 Exception -> Input(amount: Int)
         - [X] 1000원 보다 많으면 / 1000의 갯수만큼 구매가 가능하다. -> Input.count -> amount / 1000
     
-- [ ] 여러개의 로또를 구매가 가능하다. -> LottoCollection
-    - [ ] 로또 개수만큼 만들 수 있다. -> LottoCollection(int, generator)
-        - [ ] 인자로는 로또 개수, 생성기를 주입이 가능하다.
+- [X] 여러개의 로또를 구매가 가능하다. -> LottoCollection
+    - [X] 로또 개수만큼 만들 수 있다. -> LottoCollection(int, generator)
+        - [X] 인자로는 로또 개수, 생성기를 주입이 가능하다.
     - [ ] 로또 당첨 번호를 받아서, 등수를 return 할 수 있어야 한다 -> LottoCollection.getRanks() -> LottoRanks
         - [ ] LottoRanks에는 6,5,4,3개 일치한 값의 갯수를 가지고 있어야 한다. -> LottoRank(Rank: enums, count)
             - [ ] Rank는 스스로 당첨금액을 알고 있어야 한다. ( enums ) 

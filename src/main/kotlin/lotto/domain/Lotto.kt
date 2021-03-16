@@ -1,12 +1,9 @@
 package lotto.domain
 
 class Lotto(
-    private val _numbers: MutableSet<LottoNumber> = mutableSetOf(),
-    generator: LottoNumberGenerator = LottoNumberRandomGenerator(
-        LottoNumber.LOTTO_MINIMUM_NUMBER,
-        LottoNumber.LOTTO_MAXIMUM_NUMBER
-    )
+    generator: LottoNumberGenerator = LottoNumberRandomGenerator()
 ) {
+    private val _numbers: MutableSet<LottoNumber> = mutableSetOf()
     val numbers: Set<LottoNumber>
         get() = _numbers
 
