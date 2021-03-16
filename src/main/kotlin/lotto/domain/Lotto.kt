@@ -1,12 +1,12 @@
 package lotto.domain
 
-class Lotto(val _numbers: MutableList<LottoNumber> = mutableListOf()) {
+class Lotto(val _numbers: MutableList<LottoNumber> = mutableListOf(), generator: LottoNumberGenerator) {
     val numbers: List<LottoNumber>
         get() = _numbers
 
     init {
         repeat(LOTTO_NUMBER_COUNT) {
-            _numbers.add(LottoNumber(1))
+            _numbers.add(LottoNumber(generator.number))
         }
     }
 
