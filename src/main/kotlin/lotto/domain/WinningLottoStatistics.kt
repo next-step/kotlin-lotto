@@ -28,6 +28,12 @@ class WinningLottoStatistics(
         return LottoRank.selectByMatchCount(winningLottoNumbers.countWinningNumbers(lottoTicket))
     }
 
+    fun calculateProfitRate(buyingPrice: Int): Double {
+        return statistics.entries.fold(0) {
+            total, winningPrice -> total + winningPrice.key.winningMoney * winningPrice.value
+        } / buyingPrice.toDouble()
+    }
+
     companion object {
         private const val DEFAULT_RANK_COUNT = 0
         private const val ADD_RANK_COUNT = 1
