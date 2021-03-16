@@ -1,22 +1,18 @@
 package lottery.domain
 
 class LotteryMatcher(private val winnerLottery: WinnerLottery, private val createdLotteries: List<Lottery>) {
-    fun match(): HashMap<Int, Int> {
-        val result = HashMap<Int, Int>()
+    fun match(): RankCounts {
+        val rankCounts = RankCounts()
 
         createdLotteries.map {
             val count = matchCount(it.lotteryNumbers)
 
             if (Rank.isInTheRank(count)) {
-                addMatchCount(result, count)
+                rankCounts.addMatchCount(Rank.valueOf(count))
             }
         }
 
-        return result
-    }
-
-    private fun addMatchCount(result: HashMap<Int, Int>, count: Int) {
-        result[count] = result.getOrDefault(count, WinnerLottery.DEFAULT_MATCH_COUNT) + WinnerLottery.ADD_COUNT_VALUE
+        return rankCounts
     }
 
     private fun matchCount(lotteryNumbers: LotteryNumbers): Int {

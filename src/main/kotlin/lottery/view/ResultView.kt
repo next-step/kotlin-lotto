@@ -2,16 +2,15 @@ package lottery.view
 
 import lottery.domain.Lottery
 import lottery.domain.Rank
+import lottery.domain.RankCounts
 
 object ResultView {
-    private const val DEFAULT_MATCH_COUNT_VALUE = 0
-
     fun printLotteriesNumbers(lotteries: List<Lottery>) {
         lotteries.map { println(it.toString()) }
     }
 
-    fun printMatchNumbers(start: Int, end: Int, match: Map<Int, Int>) {
-        (start..end).forEach { printMatchNumber(match.getOrDefault(it, DEFAULT_MATCH_COUNT_VALUE), Rank.valueOf(it)) }
+    fun printMatchNumbers(start: Int, end: Int, match: RankCounts) {
+        (start..end).forEach { printMatchNumber(match.retrieve(Rank.valueOf(it)), Rank.valueOf(it)) }
     }
 
     private fun printMatchNumber(matchCount: Int, rank: Rank) {

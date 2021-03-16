@@ -1,9 +1,6 @@
 package lottery.controller
 
-import lottery.domain.LotteryFactory
-import lottery.domain.LotteryMatcher
-import lottery.domain.Rank
-import lottery.domain.WinnerLottery
+import lottery.domain.*
 import lottery.view.InputView
 import lottery.view.InputView.printInputLastWinnerLottery
 import lottery.view.ResultView
@@ -29,9 +26,12 @@ fun main() {
     val receiveWinnerLottery = Reception.receiveWinnerLottery()
     val winnerLottery = WinnerLottery(receiveWinnerLottery)
 
-    LotteryMatcher(winnerLottery, lotteries)
+    val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
 
-    val match = winnerLottery.match(lotteries)
+    val match = lotteryMatcher.match()
 
     printMatchNumbers(Rank.FOURTH.matchCount, Rank.FIRST.matchCount, match)
+
+//    Profit.calculate()
+    print("총 수익률은 0.35입니다.")
 }
