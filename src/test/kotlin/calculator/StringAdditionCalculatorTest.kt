@@ -2,7 +2,6 @@ package calculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -88,14 +87,16 @@ internal class StringAdditionCalculatorTest {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.calculate(expression) }
     }
-
-    @Test
-    fun `숫자 이외의 값을 전달하는 경우 RuntimeException을 던진다`() {
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "n",
+            "1,일",
+            "//;\n1;two;삼"
+        ]
+    )
+    fun `숫자 이외의 값을 전달하는 경우 RuntimeException을 던진다`(expression: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy {
-                calculator.calculate("n")
-                calculator.calculate("1,일")
-                calculator.calculate("//;\n1;two;삼")
-            }
+            .isThrownBy { calculator.calculate(expression) }
     }
 }

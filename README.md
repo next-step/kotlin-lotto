@@ -19,7 +19,7 @@
   
 - 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.
   - [x] 음수를 전달하는 경우 RuntimeException을 던진다.
-  - [ ] 숫자 이외의 값을 전달하는 경우 RuntimeException을 던진다.
+  - [x] 숫자 이외의 값을 전달하는 경우 RuntimeException을 던진다.
 
 ### 프로그래밍 요구 사항
 - indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
