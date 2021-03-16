@@ -1,7 +1,7 @@
 # Step2
 - [ ] 구입금액 입력이 가능하다. -> InputView
-    - [ ] 로또의 가격은 1000원이다.
-        - [ ] 1000원 보다 적으면 Exception -> Input(amount: Int)
+    - [X] 로또의 가격은 1000원이다.
+        - [X] 1000원 보다 적으면 Exception -> Input(amount: Int)
         - [ ] 1000원 보다 많으면 / 1000의 갯수만큼 구매가 가능하다. -> Input.count -> amount / 1000
     
 - [ ] 여러개의 로또를 구매가 가능하다. -> LottoCollection
