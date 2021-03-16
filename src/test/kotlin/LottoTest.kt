@@ -5,6 +5,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
@@ -70,18 +71,11 @@ class LottoTest {
         assertThat(yieldRate, `is`(1230.0))
     }
 
-    @Test
-    fun `저번주 로또번호를 입력하지 않거나 빈 값을 넣으면 예외가 발생한다`() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `저번주 로또번호를 입력하지 않거나 빈 값을 넣으면 예외가 발생한다`(numberLine: String?) {
         assertThrows<IllegalArgumentException> {
-            lotto.validateLottoCard(null)
-        }
-
-        assertThrows<IllegalArgumentException> {
-            lotto.validateLottoCard("")
-        }
-
-        assertThrows<IllegalArgumentException> {
-            lotto.validateLottoCard("    ")
+            lotto.validateLottoCard(numberLine)
         }
     }
 
