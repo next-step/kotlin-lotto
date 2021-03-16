@@ -28,6 +28,35 @@ class LottoTests {
                 LottoNumber(6)
             )
     }
+
+    @Test
+    fun `로또 번호와 당첨번호와 매칭하여 가져와야 한다`() {
+        val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
+
+        val rank: Rank = lotto.matchByWonNumber(
+            arrayListOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(44),
+                LottoNumber(45)
+            )
+        )
+
+        assertThat(rank)
+            .isEqualTo(Rank.getRankByCount(4))
+
+        assertThat(lotto.numbers)
+            .containsExactlyInAnyOrder(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6)
+            )
+    }
     @Test
     fun `로또의 숫자는 중첩이 불가능하다 마지막 숫자인 6이 맨 끝에 있으므로 queue는 empty가 되어야 한다`() {
         var queue: Queue<Int> = LinkedList()
