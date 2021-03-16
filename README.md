@@ -22,3 +22,5 @@
         - [X] 숫자를 맞춰 등수를 알아야 한다.
 - [X] 출력 시 LottoCollection.getRanks() 를 통해 출력을 한다.
     - [X] LottoRankCollection.sum() / LottoCollection.lotto.size * 1000 을 수익률로 보여준다.
+- [ ] 당첨번호 LottoClass가 있어야 한다.
+    - [ ] 숫자는 6개만 받을 수 있다. List<LottoNumber>
