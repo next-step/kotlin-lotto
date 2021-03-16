@@ -13,8 +13,4 @@ class LottoMachine(private val lottoPrice: Int, private val lottoGenerator: Lott
         val sellableLottoCount = money / lottoPrice
         return (1..sellableLottoCount).map { lottoGenerator.generate() }
     }
-
-    fun result(lottos: List<Lotto>, winningLotto: WinningLotto): List<LottoPrize> {
-        return lottos.map { winningLotto.calculateLottoPrize(it) }
-    }
 }
