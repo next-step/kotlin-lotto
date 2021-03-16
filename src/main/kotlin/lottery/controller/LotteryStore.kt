@@ -1,6 +1,10 @@
 package lottery.controller
 
-import lottery.domain.*
+import lottery.domain.LotteryFactory
+import lottery.domain.LotteryMatcher
+import lottery.domain.Rank
+import lottery.domain.WinnerLottery
+import lottery.domain.Profit
 import lottery.view.InputView
 import lottery.view.InputView.printInputLastWinnerLottery
 import lottery.view.ResultView
@@ -22,7 +26,8 @@ fun main() {
     val receiveWinnerLottery = Reception.receiveWinnerLottery()
     val winnerLottery = WinnerLottery(receiveWinnerLottery)
 
-    val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
+    val lotteryMatcher =
+        LotteryMatcher(winnerLottery, lotteries)
     val rankCounts = lotteryMatcher.match()
 
     printMatchNumbers(Rank.FOURTH.matchCount, Rank.FIRST.matchCount, rankCounts)
