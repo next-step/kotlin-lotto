@@ -28,10 +28,10 @@ fun main() {
 
     val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
 
-    val match = lotteryMatcher.match()
+    val rankCounts = lotteryMatcher.match()
 
-    printMatchNumbers(Rank.FOURTH.matchCount, Rank.FIRST.matchCount, match)
+    printMatchNumbers(Rank.FOURTH.matchCount, Rank.FIRST.matchCount, rankCounts)
 
-//    Profit.calculate()
-    print("총 수익률은 0.35입니다.")
+    val profit = Profit.calculate(inputMoney, rankCounts.calculateJackpots())
+    ResultView.printProfit(profit)
 }
