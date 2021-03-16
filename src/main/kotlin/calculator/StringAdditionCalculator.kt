@@ -17,13 +17,20 @@ class StringAdditionCalculator {
 
     private fun sumNumberAdditionExpression(numberAdditionExpression: String, customDelimiter: String? = null): Int {
         return splitExpressionByDelimiters(numberAdditionExpression, customDelimiter)
-            .sumBy { it.toInt().also { if (it < 0) throw RuntimeException() } }
+            .sumBy { it.toPositiveInt() }
     }
 
     private fun splitExpressionByDelimiters(numberAdditionExpression: String, customDelimiter: String?): List<String> {
         return numberAdditionExpression.split(
             *listOfNotNull(customDelimiter, COMMA_DELIMITER, COLON_DELIMITER).toTypedArray()
         )
+    }
+
+    private fun String.toPositiveInt(): Int {
+        val integer = this.toInt()
+        require(integer >= 0)
+
+        return integer
     }
 
     companion object {
