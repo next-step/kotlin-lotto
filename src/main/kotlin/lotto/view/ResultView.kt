@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoCollection
-import lotto.domain.LottoNumber
+import lotto.domain.LottoWonNumber
 import lotto.domain.Rank
 
 class ResultView(private val lottoCollection: LottoCollection) {
@@ -9,7 +9,7 @@ class ResultView(private val lottoCollection: LottoCollection) {
         lottoCollection.lotto.forEach { println(it) }
     }
 
-    fun printWon(wonNumber: List<LottoNumber>) {
+    fun printWon(wonNumber: LottoWonNumber) {
         val matchByWonNumber = lottoCollection.matchByWonNumber(wonNumber)
         val wonRank = Rank.getWonRank()
 
@@ -18,7 +18,7 @@ class ResultView(private val lottoCollection: LottoCollection) {
         }
     }
 
-    fun printRate(wonNumber: List<LottoNumber>) {
+    fun printRate(wonNumber: LottoWonNumber) {
         val matchByWonNumber = lottoCollection.matchByWonNumber(wonNumber)
         val rate: Double = (matchByWonNumber.sumAmount.toDouble() / (lottoCollection.lotto.size * 1000).toDouble())
 

@@ -34,13 +34,15 @@ class LottoTests {
         val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
         val rank: Rank = lotto.matchByWonNumber(
-            arrayListOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(44),
-                LottoNumber(45)
+            LottoWonNumber(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(44),
+                    LottoNumber(45)
+                )
             )
         )
 
@@ -57,6 +59,7 @@ class LottoTests {
                 LottoNumber(6)
             )
     }
+
     @Test
     fun `로또의 숫자는 중첩이 불가능하다 마지막 숫자인 6이 맨 끝에 있으므로 queue는 empty가 되어야 한다`() {
         var queue: Queue<Int> = LinkedList()
@@ -89,6 +92,7 @@ class LottoTests {
                 get() = increase++
         }
     }
+
     fun 중첩된_숫자가_쫀재하는_제너레이터(queue: Queue<Int>): LottoNumberGenerator {
         return object : LottoNumberGenerator {
             override val number: Int

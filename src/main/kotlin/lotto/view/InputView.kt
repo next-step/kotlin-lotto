@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoWonNumber
 
 class InputView {
     fun input(): Input {
@@ -12,10 +13,13 @@ class InputView {
 
         return input
     }
-    fun inputWonNumber(): List<LottoNumber> {
+    fun inputWonNumber(): LottoWonNumber {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        return readLine()!!.split(",")
+        val lottoNumbers = readLine()!!.split(",")
             .map { LottoNumber(it.trim().toInt()) }
+            .toSet()
+
+        return LottoWonNumber(lottoNumbers)
     }
 }

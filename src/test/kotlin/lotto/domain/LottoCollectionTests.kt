@@ -25,7 +25,7 @@ class LottoCollectionTests {
 
     @Test
     fun `원하는대로 생성해서 당첨 갯수와 총액을 구해보자`() {
-        val wonNumber: List<LottoNumber> = listOf(
+        val wonNumber: Set<LottoNumber> = setOf(
             LottoNumber(1),
             LottoNumber(2),
             LottoNumber(3),
@@ -58,7 +58,7 @@ class LottoCollectionTests {
                 Lotto(failWonNUmber)
             )
         )
-        val matchByWonNumber = lottoCollection.matchByWonNumber(wonNumber)
+        val matchByWonNumber = lottoCollection.matchByWonNumber(LottoWonNumber(wonNumber))
 
         assertThat(matchByWonNumber.rankCount[Rank.FIRST])
             .isEqualTo(2)

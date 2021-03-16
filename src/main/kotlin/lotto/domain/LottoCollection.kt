@@ -12,7 +12,7 @@ class LottoCollection(private val _lotto: MutableList<Lotto>) {
         }
     }
 
-    fun matchByWonNumber(wonNumber: List<LottoNumber>): LottoRankCollection {
+    fun matchByWonNumber(wonNumber: LottoWonNumber): LottoRankCollection {
         val rankCount: Map<Rank, Int> = _lotto
             .map {
                 it.matchByWonNumber(wonNumber)
