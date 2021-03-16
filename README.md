@@ -18,6 +18,6 @@
         - [X] 로또 넘버 생성기를 주입이 가능해야 한다 
         - [X] 로또의 숫자는 랜덤적으로 생성이 가능하다 -> LottoNumberRandomGenerator
         - [X] 로또 숫자는 1~45까지 갖고 있다 -> LottoNumber
-        - [ ] 로또의 숫자는 중첩이 불가능하다 -> Set
+        - [X] 로또의 숫자는 중첩이 불가능하다 -> Set
 - [ ] 출력 시 LottoCollection.getRanks() 를 통해 출력을 한다.
     - [ ] LottoRanks.sum() / LottoCollection.lotto.size * 1000 을 수익률로 보여준다.
