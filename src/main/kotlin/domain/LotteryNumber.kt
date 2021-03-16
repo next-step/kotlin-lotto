@@ -26,4 +26,8 @@ class LotteryNumber private constructor(private val number: Int) {
     override fun hashCode(): Int {
         return number
     }
+
+    override fun toString(): String {
+        return number.toString()
+    }
 }

@@ -12,4 +12,8 @@ class LotteryNumbers(numbers: List<Int>) {
     companion object {
         const val MAX_LOTTERY_NUMBERS_SIZE = 6
     }
+
+    override fun toString(): String {
+        return "[ ${numbers.joinToString()} ]"
+    }
 }
