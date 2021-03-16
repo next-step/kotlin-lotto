@@ -1,6 +1,7 @@
 package lotto.dto
 
 import lotto.domain.LottoPrize
+import java.math.BigDecimal
 
 data class StatisticsDto(val prizeRankCount: Map<LottoPrize, Int>, val profitRate: Double) {
 
@@ -16,9 +17,9 @@ data class StatisticsDto(val prizeRankCount: Map<LottoPrize, Int>, val profitRat
                 .map { it.toLong() }
                 .sum()
 
-            val profitRate = allRewards.toDouble() / amount
+            val profitRate = BigDecimal(allRewards).divide(BigDecimal(amount))
 
-            return StatisticsDto(prizeRankCount, profitRate)
+            return StatisticsDto(prizeRankCount, profitRate.toDouble())
         }
     }
 }
