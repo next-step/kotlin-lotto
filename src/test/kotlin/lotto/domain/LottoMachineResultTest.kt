@@ -1,7 +1,7 @@
 package lotto.domain
 
 import lotto.supportdata.PurchaseInfo
-import lotto.supportdata.WinNumber
+import lotto.supportdata.WinLottoInfo
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -13,7 +13,7 @@ internal class LottoMachineResultTest {
     @DisplayName("원하는 순위의 당첨 결과의 개수를 확인할 수 있다")
     fun getLottoRankCount() {
         // give
-        val winNumber = WinNumber("1,2,3,4,10,11")
+        val winNumber = WinLottoInfo("1,2,3,4,10,11", 24)
         val userTicket1 = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6)) // 4개
         val userTicket2 = LottoTicket.of(listOf(1, 2, 3, 4, 10, 11)) // 6개
         val userTicket3 = LottoTicket.of(listOf(3, 4, 10, 11, 12, 13)) // 4개
@@ -30,7 +30,7 @@ internal class LottoMachineResultTest {
     @DisplayName("구매가격과 로또 당첨금을 기반으로한 수익률을 계산한다.")
     fun getYield() {
         // give
-        val winNumber = WinNumber("1,2,3,4,10,11")
+        val winNumber = WinLottoInfo("1,2,3,4,10,11", 24)
         val fourth = LottoTicket.of(listOf(1, 2, 3, 20, 21, 22)) // 3개
         val lottoMachineResult = LottoMachineResult(listOf(fourth), winNumber)
         val purchaseInfo = PurchaseInfo(14000)

@@ -19,7 +19,7 @@ object OutputView {
         println("---------")
         LottoRank.values()
             .filter { it != LottoRank.OUT }
-            .forEach { println("${it.matchCount}개 일치 (${it.price}원)- ${lottoMachineResult.getLottoRankCount(it)}개") }
+            .forEach { println("${it.infoString} - ${lottoMachineResult.getLottoRankCount(it)}개") }
         println("총 수익률은 ${lottoMachineResult.calculateProfit(purchaseInfo)}입니다.")
     }
 }

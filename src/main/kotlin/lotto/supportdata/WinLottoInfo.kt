@@ -1,9 +1,11 @@
 package lotto.supportdata
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 
-class WinNumber(private val winNumberInput: String) {
+class WinLottoInfo(private val winNumberInput: String, private val bonusNumberInput: Int) {
     val winLottoTicket: LottoTicket = parseInputToLotto()
+    val bonusNumber: LottoNumber = LottoNumber(bonusNumberInput)
 
     private fun parseInputToLotto(): LottoTicket {
         val numbers = winNumberInput.split(DELIMITER)

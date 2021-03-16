@@ -54,6 +54,14 @@ internal class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("lottoTicket에 해당하는 lottoNumber가 있는지 확인하는 contains 함수를 밖으로 뺀다.")
+    fun contain() {
+        val lottoTicket = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(LottoNumber(1) in lottoTicket).isTrue()
+        assertThat(LottoNumber(7) in lottoTicket).isFalse()
+    }
+
+    @Test
     @DisplayName("갖고잇는 두 로또 티켓을 비교하여 겹치는 숫자의 개수를 반환한다.")
     fun winLottoTicketCount() {
         val winLottoTicket = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6))

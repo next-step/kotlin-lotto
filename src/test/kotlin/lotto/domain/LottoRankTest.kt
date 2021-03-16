@@ -18,4 +18,18 @@ internal class LottoRankTest {
         assertThat(LottoRank.findRank(5)).isEqualTo(LottoRank.SECOND)
         assertThat(LottoRank.findRank(6)).isEqualTo(LottoRank.FIRST)
     }
+
+    @Test
+    @DisplayName("보너스 넘버를 맞췄는지 여부에 따라서 Rank가 달라진다.")
+    internal fun findRankSecondAndBonus() {
+        assertThat(LottoRank.findRank(5)).isEqualTo(LottoRank.SECOND)
+        assertThat(LottoRank.findRank(5, false)).isEqualTo(LottoRank.BONUS)
+    }
+
+    @Test
+    @DisplayName("rank 에 따라 안내하는 문자열이 달라진다.")
+    internal fun infoString() {
+        assertThat(LottoRank.findRank(5)).isEqualTo("5개 일치 (1500000원)")
+        assertThat(LottoRank.findRank(5, false)).isEqualTo("5개 일치, 보너스 볼 일치(30000000원)")
+    }
 }

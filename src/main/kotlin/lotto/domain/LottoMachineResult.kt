@@ -3,14 +3,14 @@ package lotto.domain
 import lotto.math.getProfit
 import lotto.math.roundTo
 import lotto.supportdata.PurchaseInfo
-import lotto.supportdata.WinNumber
+import lotto.supportdata.WinLottoInfo
 
 class LottoMachineResult(
-    private val userLottoTickets: List<LottoTicket>,
-    private val winNumber: WinNumber
+    userLottoTickets: List<LottoTicket>,
+    private val winLottoInfo: WinLottoInfo
 ) {
     private val lottoTicketResults: List<LottoTicketResult> =
-        userLottoTickets.map { LottoTicketResult(userLottoTicket = it, winNumber = winNumber) }
+        userLottoTickets.map { LottoTicketResult(userLottoTicket = it, winLottoInfo = winLottoInfo) }
 
     fun getLottoRankCount(lottoRank: LottoRank): Int {
         return lottoTicketResults.count { it.lottoRank == lottoRank }
