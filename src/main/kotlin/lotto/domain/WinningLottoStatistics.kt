@@ -21,16 +21,20 @@ class WinningLottoStatistics(
     }
 
     private fun addRankStatistics(lottoRank: LottoRank?) {
-        if (lottoRank != null) statistics[lottoRank] = statistics.getOrDefault(lottoRank, DEFAULT_RANK_COUNT) + ADD_RANK_COUNT
+        if (lottoRank != null) {
+            val prevRankCount = statistics.getOrDefault(lottoRank, DEFAULT_RANK_COUNT)
+            statistics[lottoRank] = prevRankCount + ADD_RANK_COUNT
+        }
     }
 
     private fun rank(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): LottoRank? {
-        return LottoRank.selectByMatchCount(winningLottoNumbers.countWinningNumbers(lottoTicket))
+        val winningNumberCount = winningLottoNumbers.countWinningNumbers(lottoTicket)
+        return LottoRank.selectByMatchCount(winningNumberCount)
     }
 
     fun calculateProfitRate(buyingPrice: Int): Double {
-        return statistics.entries.fold(0) {
-            total, winningPrice -> total + winningPrice.key.winningMoney * winningPrice.value
+        return statistics.entries.fold(0) { total, winningPrice ->
+            total + winningPrice.key.winningMoney * winningPrice.value
         } / buyingPrice.toDouble()
     }
 
