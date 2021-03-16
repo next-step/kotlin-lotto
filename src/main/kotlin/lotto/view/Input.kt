@@ -1,6 +1,9 @@
 package lotto.view
 
 class Input(val amount: Int) {
+    val lottoCount: Int
+        get() = amount / PER_LOTTO_PRICE
+
     init {
         require(amount >= PER_LOTTO_PRICE)
     }
