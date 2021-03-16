@@ -1,6 +1,6 @@
 package lotto.view
 
-class Input(val amount: Int) {
+class Input(private val amount: Int) {
     val lottoCount: Int
         get() = amount / PER_LOTTO_PRICE
 
