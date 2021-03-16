@@ -10,7 +10,6 @@ internal class WinningLottoTest {
     fun `보너스 번호는 우승 티켓과 겹쳐선 안된다`() {
         // given
         val bonusNumber = LottoNumber.of(1)
-        // when
 
         // then
         assertThrows<IllegalArgumentException> {
