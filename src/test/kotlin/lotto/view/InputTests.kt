@@ -12,6 +12,7 @@ class InputTests {
     fun `금액이 1000 보다 작으면 Exception이 발생해야 한다`(amount: Int) {
         assertThrows<IllegalArgumentException> { Input(amount) }
     }
+
     @ParameterizedTest
     @ValueSource(ints = [1000, 2000, 3000, 4000])
     fun `금액이 1000 보다 크면은 Exception은 발생을 안한다`(amount: Int) {
