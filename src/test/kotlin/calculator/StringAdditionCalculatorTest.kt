@@ -1,6 +1,7 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -60,5 +61,13 @@ internal class StringAdditionCalculatorTest {
         assertDoesNotThrow {
             calculator.calculate(expression)
         }
+    }
+
+    @Test
+    fun `커스텀 구분자로 숫자를 분리한다`() {
+        assertThat(calculator.calculate("//;\n1;2;3")).isEqualTo(6)
+        assertThat(calculator.calculate("//*\n1*2*3")).isEqualTo(6)
+        assertThat(calculator.calculate("//*\n1")).isEqualTo(1)
+        assertThat(calculator.calculate("//&\n1&2,3:4")).isEqualTo(10)
     }
 }
