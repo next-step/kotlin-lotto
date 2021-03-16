@@ -22,4 +22,3 @@ class LotteryNumberTest {
         assertThat(lotteryNumbers.numbers.size).isEqualTo(6)
     }
 }
-

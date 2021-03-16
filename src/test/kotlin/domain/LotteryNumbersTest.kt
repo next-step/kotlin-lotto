@@ -39,7 +39,6 @@ class LotteryNumbersTest {
         }
     }
 
-
     companion object {
         @JvmStatic
         fun wrongSizeLotteryNumbers(): Stream<Arguments> =
@@ -56,6 +55,5 @@ class LotteryNumbersTest {
                 Arguments.of(listOf(45, 45, 45, 45, 45, 45)),
                 Arguments.of(listOf(1, 1, 1, 1, 1, 1))
             )
-
     }
 }

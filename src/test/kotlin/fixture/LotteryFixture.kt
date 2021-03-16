@@ -8,4 +8,6 @@ object LotteryFixture {
 
     const val MIN_LOTTERY_NUMBER = 1
     const val MAX_LOTTERY_NUMBER = 45
+
+    const val LOTTERY_NUMBERS_SIZE = 6
 }
