@@ -1,6 +1,7 @@
-package lotto.domain
+package lotto.domain.lottogenerator
 
-object RandomLottoGenerator {
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 
     fun generate(): Lotto {
         return Lotto(
