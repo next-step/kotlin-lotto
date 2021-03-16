@@ -11,6 +11,10 @@ class RankCounts {
         return rankCounts.getOrDefault(rank, DEFAULT_MATCH_COUNT)
     }
 
+    fun calculateJackpots(): Int {
+        return rankCounts.map { it.key.price * it.value }.sum()
+    }
+
     companion object {
         const val DEFAULT_MATCH_COUNT = 0
         const val ADD_COUNT_VALUE = 1
