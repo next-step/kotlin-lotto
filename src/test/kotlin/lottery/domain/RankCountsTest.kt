@@ -20,12 +20,12 @@ class RankCountsTest {
     fun `모든 등수의 당첨금들 합을 가져온다`() {
         val rankCounts = createRankCounts()
 
-        val amount = rankCounts.calulateJackpots()
+        val amount = rankCounts.calculateJackpots()
 
-        assertThat(amount).isEqualTo((first.price * 2) + second.price + third.price)
+        assertThat(amount).isEqualTo((Rank.FIRST.price * 2) + Rank.SECOND.price + Rank.THIRD.price)
     }
 
-    fun createRankCounts(): RankCounts {
+    private fun createRankCounts(): RankCounts {
         val rankCounts = RankCounts()
         val first = Rank.FIRST
         val second = Rank.SECOND
