@@ -1,7 +1,5 @@
 package lotto.domain
 
-import java.util.ArrayList
-
 class Lotto(
     generator: LottoNumberGenerator = LottoNumberRandomGenerator()
 ) {
@@ -16,7 +14,7 @@ class Lotto(
         }
     }
 
-    fun matchByWonNumber(wonNumber: ArrayList<LottoNumber>): Rank {
+    fun matchByWonNumber(wonNumber: List<LottoNumber>): Rank {
         val wonNumberCount: Int = numbers.count { wonNumber.contains(it) }
         return Rank.getRankByCount(wonNumberCount)
     }
