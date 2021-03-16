@@ -1,6 +1,8 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -72,5 +74,15 @@ internal class StringAdditionCalculatorTest {
     )
     fun `커스텀 구분자로 숫자를 분리한다`(expression: String, sum: Int) {
         assertThat(calculator.calculate(expression)).isEqualTo(sum)
+    }
+
+    @Test
+    fun `음수를 전달하는 경우 RuntimeException을 던진다`() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy {
+                calculator.calculate("-1")
+                calculator.calculate("2,-5")
+                calculator.calculate("//;\n1;2;-3")
+            }
     }
 }

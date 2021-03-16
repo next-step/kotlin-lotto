@@ -17,7 +17,7 @@ class StringAdditionCalculator {
 
     private fun sumNumberAdditionExpression(numberAdditionExpression: String, customDelimiter: String? = null): Int {
         return splitExpressionByDelimiters(numberAdditionExpression, customDelimiter)
-            .sumBy { it.toInt() }
+            .sumBy { it.toInt().also { if (it < 0) throw RuntimeException() } }
     }
 
     private fun splitExpressionByDelimiters(numberAdditionExpression: String, customDelimiter: String?): List<String> {
