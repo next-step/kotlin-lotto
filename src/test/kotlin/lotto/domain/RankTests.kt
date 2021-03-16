@@ -30,6 +30,6 @@ class RankTests {
     @ValueSource(ints = [0, 1, 2])
     fun `그 외에는 돈이 아깝두아`(count: Int) {
         assertThat(Rank.getRankByCount(count))
-            .isNull()
+            .isEqualTo(Rank.FAIL)
     }
 }
