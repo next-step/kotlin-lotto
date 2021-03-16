@@ -15,7 +15,7 @@ class LottoTicket(
     fun hasNumber(lottoNumber: LottoNumber) = numbers.contains(lottoNumber)
 
     fun findMatchNumber(numbers: List<LottoNumber>): List<LottoNumber> {
-        return numbers.filter { numbers.contains(it) }
+        return numbers.filter { this.numbers.contains(it) }
     }
 
     companion object {

@@ -3,12 +3,18 @@ package lotto.domain.result
 import lotto.domain.ticket.WinningBoard
 import lotto.domain.value.Price
 
-class LottoResult {
-    val result = mutableMapOf<WinningBoard, Int>()
+class LottoResult(
+    winningBoards: List<WinningBoard>
+) {
+    private val result = mutableMapOf<WinningBoard, Int>()
 
-    fun add(winningBoard: WinningBoard) {
-        result[winningBoard] = result[winningBoard]?.plus(1) ?: 1
+    init {
+        winningBoards.forEach {
+            result[it] = this.get(it) + 1
+        }
     }
+
+    fun result() = result.toMap()
 
     fun get(winningBoard: WinningBoard): Int {
         return result[winningBoard] ?: 0

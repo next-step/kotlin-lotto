@@ -24,7 +24,7 @@ private fun Iterable<LottoNumber>.showNumbers() {
 fun showResultStatic(result: LottoResult, price: Price) {
     println("당첨 통계")
     println("================")
-    result.result.showResult()
+    result.result().showResult()
     println("총 수익률은 ${result.calculateProfit(price)}")
 }
 

@@ -6,11 +6,9 @@ class LottoTickets(
     val tickets: List<LottoTicket>
 ) {
     fun compare(winningLotto: WinningLotto): LottoResult {
-        val result = LottoResult()
-        tickets.forEach {
-            val winningBoard = winningLotto.compare(it)
-            result.add(winningBoard)
+        val winningBoards = tickets.map {
+            winningLotto.compare(it)
         }
-        return result
+        return LottoResult(winningBoards)
     }
 }
