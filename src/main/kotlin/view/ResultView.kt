@@ -1,13 +1,20 @@
 package view
 
-object ResultView {
-    private const val LOTTERY_NUMBER_DELIMITERS = ","
+import domain.Lottery
+import domain.Rank
 
-    fun printLottery(LotteryNumbers: List<String>) {
-        print("[ ${jointToLotteryNumbers(LotteryNumbers, LOTTERY_NUMBER_DELIMITERS)} ]")
+object ResultView {
+    private const val DEFAULT_MATCH_COUNT_VALUE = 0
+
+    fun printLotteriesNumbers(lotteries: List<Lottery>) {
+        lotteries.map { println(it.toString()) }
     }
 
-    private fun jointToLotteryNumbers(lotteryNumbers: List<String>, delimiter: String): String {
-        return lotteryNumbers.joinToString("$delimiter ")
+    fun printMatchNumbers(start: Int, end: Int, match: Map<Int, Int>) {
+        (start..end).forEach { printMatchNumber(match.getOrDefault(it, DEFAULT_MATCH_COUNT_VALUE), Rank.valueOf(it)) }
+    }
+
+    private fun printMatchNumber(matchCount: Int, rank: Rank) {
+        println("${rank.matchCount}개 일치 (${rank.price}원)- $matchCount")
     }
 }
