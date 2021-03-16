@@ -33,16 +33,4 @@ internal class WinningLottoNumbersTest {
             WinningLottoNumbers.from(stringWinningLottoNumbers)
         }
     }
-
-    @Test
-    fun `번호를 가지고 있는지 검증`() {
-        val winningLottoNumbers = WinningLottoNumbers.from("1, 2, 3, 4, 5, 6")
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(1))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(2))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(3))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(4))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(5))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(6))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(7))).isFalse()
-    }
 }
