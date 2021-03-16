@@ -3,12 +3,11 @@ package domain
 class WinnerLottery(numbers: List<Int>) {
     val numbers: LotteryNumbers = LotteryNumbers(numbers)
 
-    // 만약 10개 중 3개가 일치한다면
-    fun match(lotteries: List<LotteryNumbers>): HashMap<Int, Int> {
+    fun match(lotteries: List<Lottery>): HashMap<Int, Int> {
         val result = HashMap<Int, Int>()
 
         lotteries.map {
-            val count = matchCount(it)
+            val count = matchCount(it.numbers)
 
             if (Rank.isInTheRank(count)) {
                 addMatchCount(result, count)
