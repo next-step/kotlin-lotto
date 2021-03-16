@@ -10,7 +10,7 @@ class WinnerLottery(numbers: List<Int>) {
         lotteries.map {
             val count = matchCount(it)
 
-            if (count == Rank.FOURTH.matchCount || count == 4 || count == 5 || count == 6) {
+            if (Rank.isInTheRank(count)) {
                 addMatchCount(result, count)
             }
         }
