@@ -23,8 +23,9 @@ class LottoGameTest {
 
     @Test
     fun `수동으로 사고 난 뒤 남은돈을 전부 자동으로 구매하는지 확인`() {
-        val manualLottoes = lottoGame.purchaseManualLottoes(2, manualNumbers.slice(1..2))
-        val autoLottoes = lottoGame.purchaseAutoLottoes()
+        val manualStrategy = ManualStrategy(manualNumbers.slice(1..2))
+        lottoGame.purchaseLottoes(manualStrategy, 2)
+        val autoLottoes = lottoGame.purchaseLottoes(AutoStrategy())
 
         assertThat(autoLottoes.toList().size).isEqualTo(2)
     }
@@ -32,7 +33,7 @@ class LottoGameTest {
     @Test
     fun `가진 금액에 비해서 사려는 수동 로또가 많을 때 Exception 발생 확인`() {
         assertThrows<IllegalStateException> {
-            lottoGame.purchaseManualLottoes(5, manualNumbers)
+            lottoGame.purchaseLottoes(ManualStrategy(manualNumbers), 5)
         }
     }
 }

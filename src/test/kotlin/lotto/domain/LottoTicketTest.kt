@@ -10,7 +10,7 @@ class LottoTicketTest {
 
     @Test
     fun `자동으로 로또 생성 시 모두 범위 내 숫자인지 확인`() {
-        val lottoes = lottoGames.purchaseAutoLottoes().toList()
+        val lottoes = lottoGames.purchaseLottoes(AutoStrategy()).toList()
 
         for (lotto in lottoes) {
             assertThat(lottoNumbers).containsAll(lotto.value)
