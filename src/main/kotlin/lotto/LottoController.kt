@@ -1,9 +1,7 @@
 package lotto
 
+import lotto.domain.LottoGame
 import lotto.domain.LottoNumber
-import lotto.domain.LottoResult
-import lotto.domain.LottoStore
-import lotto.domain.LottoStore.Companion.LOTTO_COST
 import lotto.domain.LottoTicket
 import lotto.domain.Lottoes
 import lotto.domain.Money
@@ -11,43 +9,44 @@ import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
+private val inputView = InputView()
+private val outputView = OutputView()
+
 fun main() {
-    val inputView = InputView()
-    val outputView = OutputView()
-    val lottoStore = LottoStore()
-    val lottoResult = LottoResult()
-    var purchasedManualLottoes: Lottoes = Lottoes(emptyList())
-
     val money = Money(inputView.inputMoney())
-
     val numberOfManual = inputView.inputNumberOfManual()
-    if (numberOfManual > 0) {
-        if (numberOfManual * LOTTO_COST > money.currentMoney) throw RuntimeException("사고자 하는 수량이 현재 가진 돈보다 많습니다.")
-        val stringManualNumbers = inputView.inputManualNumbers(numberOfManual)
-        val manualNumbers = stringManualNumbers.map { strings ->
-            convertStringToInt(strings)
-        }
-        purchasedManualLottoes = lottoStore.purchaseManual(money, numberOfManual, manualNumbers)
-    }
+    val lottoGame = LottoGame(money)
 
-    val purchasedAutoLottoes = lottoStore.purchaseAuto(money)
-    outputView.printPurchasedLottoes(purchasedManualLottoes, purchasedAutoLottoes)
+    val manualLottoes = inputManualLottoes(numberOfManual, lottoGame) ?: Lottoes(emptyList())
+    val autoLottoes = lottoGame.purchaseAutoLottoes()
 
-    val universalLottoes = Lottoes(purchasedManualLottoes.toList() + purchasedAutoLottoes.toList())
+    outputView.printPurchasedLottoes(manualLottoes, autoLottoes)
+    val universalLottoes = Lottoes(manualLottoes.toList() + autoLottoes.toList())
+    val winningLotto = WinningLotto(createWinningTicket(), createBonusNumber())
 
-    val winningNumbers = LottoTicket(
+    outputView.printLottoesResult(
+        money,
+        autoLottoes.getMyLottoesRanks(winningLotto),
+        manualLottoes.getMyLottoesRanks(winningLotto)
+    )
+}
+
+private fun createWinningTicket(): LottoTicket {
+    return LottoTicket(
         inputView.inputPrizeNumber().map {
             LottoNumber.from(it.toInt())
         }
     )
-    val bonusNumber = LottoNumber.from(inputView.inputBonusNumber())
-
-    val ranks = lottoResult.getMyLottoesRanks(universalLottoes, WinningLotto(winningNumbers, bonusNumber))
-    outputView.printLottoesResult(money, ranks)
 }
 
-private fun convertStringToInt(strings: List<String>): List<Int> {
-    return strings.map {
-        it.toInt()
+private fun createBonusNumber(): LottoNumber {
+    return LottoNumber.from(inputView.inputBonusNumber())
+}
+
+private fun inputManualLottoes(numberOfManual: Int, game: LottoGame): Lottoes? {
+    if (numberOfManual > 0) {
+        val manualNumbers = inputView.inputManualNumbers(numberOfManual)
+        return game.purchaseManualLottoes(numberOfManual, manualNumbers)
     }
+    return null
 }

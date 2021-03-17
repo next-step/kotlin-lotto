@@ -3,6 +3,8 @@ package calculator.domain
 class Number(val value: Int) {
     constructor(stringNumber: String) : this(stringNumber.toInt()) {
         checkValidateNumber(stringNumber)
+    }
+    init {
         checkNegativeNumber(value)
     }
 
