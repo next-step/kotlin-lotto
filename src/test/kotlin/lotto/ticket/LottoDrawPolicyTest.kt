@@ -15,7 +15,7 @@ internal class LottoDrawPolicyTest {
     @Test
     fun `(draw) 로또 뽑기는 6자리만 뽑는다`() {
         // given
-        val policy: LottoDrawPolicy = ManualDrawPolicy("1,2,3,4,5,6")
+        val policy: LottoDrawPolicy = ManualDrawPolicy("1,2,3,4,5,6,7")
         // when
         // then
         assertThat(policy.draw()).isEqualTo(
@@ -30,11 +30,10 @@ internal class LottoDrawPolicyTest {
         )
     }
 
-    @ParameterizedTest
-    @CsvSource("1,2,3,4,5,6,7", "1,2,3,4,5")
-    fun `(draw) 로또는 6자리를 초과하거나 모자를 경우 예외발생`(txNumber: String) {
+    @Test
+    fun `(draw) 로또는 6자리 보다 적을 경우 예외발생`() {
         // given
-        val policy: LottoDrawPolicy = ManualDrawPolicy(txNumber)
+        val policy: LottoDrawPolicy = ManualDrawPolicy("1,2,3,4,5")
         // when
         // then
         assertThrows<IllegalArgumentException> { policy.draw() }
@@ -49,25 +48,24 @@ internal class LottoDrawPolicyTest {
         assertThrows<IllegalArgumentException> { policy.draw() }
     }
 
-    // applyDrawPolicy test
+    // Policy test
 
     @RepeatedTest(45)
-    fun `(applyDrawPolicy) 수동 뽑기 전략은 들어온 문자를 로또 번호로 변환한다`(repetitionInfo: RepetitionInfo) {
+    fun `(Policy) 수동 뽑기 전략은 들어온 문자를 로또 번호로 변환한다`(repetitionInfo: RepetitionInfo) {
         // given
         val index = repetitionInfo.currentRepetition
         val policy: LottoDrawPolicy = ManualDrawPolicy(index.toString())
         // when
         // then
-        assertThat(policy.applyDrawPolicy()).isEqualTo(setOf(LottoNumber(index)))
+        assertThat(policy.lottoNumbers).isEqualTo(setOf(LottoNumber(index)))
     }
 
     @ParameterizedTest
     @CsvSource("0", "46")
-    fun `(applyDrawPolicy) 수동 뽑기 전략은 1~45범위 외의 숫자는 전략 적용 불가`(txNumber: String) {
+    fun `(Policy) 수동 뽑기 전략은 1~45범위 외의 숫자는 전략 적용 불가`(txNumber: String) {
         // given
-        val policy: LottoDrawPolicy = ManualDrawPolicy(txNumber)
         // when
         // then
-        assertThrows<IllegalArgumentException> { policy.applyDrawPolicy() }
+        assertThrows<IllegalArgumentException> { ManualDrawPolicy(txNumber) }
     }
 }

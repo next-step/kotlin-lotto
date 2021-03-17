@@ -4,10 +4,10 @@ import lotto.ticket.LottoNumber.Companion.LOTTO_NUMBER_BOX
 
 interface LottoDrawPolicy {
 
-    fun applyDrawPolicy(): Set<LottoNumber>
+    val lottoNumbers: Set<LottoNumber>
 
     fun draw(): Set<LottoNumber> {
-        val lottoNumbers = applyDrawPolicy()
+        val lottoNumbers = this.lottoNumbers
             .take(TICKET_SIZE)
             .toSet()
 
@@ -21,15 +21,13 @@ interface LottoDrawPolicy {
 }
 
 class AutoDrawPolicy : LottoDrawPolicy {
-    override fun applyDrawPolicy(): Set<LottoNumber> = LOTTO_NUMBER_BOX.values.shuffled().toSet()
+    override val lottoNumbers: Set<LottoNumber> = LOTTO_NUMBER_BOX.values.shuffled().toSet()
 }
 
 class ManualDrawPolicy(txNumbers: String) : LottoDrawPolicy {
 
-    private val numbers = txNumbers.split(LOTTO_NUMBER_DELIMITER)
-        .map { it.trim().toInt() }
-
-    override fun applyDrawPolicy(): Set<LottoNumber> = numbers
+    override val lottoNumbers: Set<LottoNumber> = txNumbers.split(LOTTO_NUMBER_DELIMITER)
+        .map { it.toInt() }
         .map { LOTTO_NUMBER_BOX[it] ?: throw IllegalArgumentException("로또번호($it)로 사용할 수 없습니다.") }
         .toSet()
 

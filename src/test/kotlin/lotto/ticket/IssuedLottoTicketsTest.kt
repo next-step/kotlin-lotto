@@ -17,7 +17,7 @@ internal class IssuedLottoTicketsTest {
 
                 ),
                 LottoTicket(
-                    ManualDrawPolicy("1, 2, 3, 4, 11, 12")
+                    ManualDrawPolicy("1,2,3,4,11,12")
                 )
             )
         )
