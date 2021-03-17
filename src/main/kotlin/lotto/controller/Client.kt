@@ -9,9 +9,11 @@ import lotto.view.OutputView
 
 fun main() {
     val moneyAmount = InputView.readMoney()
+    val manualTicketCount = InputView.readManualTicketCount()
+    val candidateNumbers = InputView.readCandidateNumbers(manualTicketCount)
 
     val store = LottoStore()
-    val tickets = store.buy(moneyAmount)
+    val tickets = store.buy(moneyAmount, candidateNumbers)
 
     OutputView.printTickets(tickets)
 
