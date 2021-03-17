@@ -11,6 +11,14 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.distinct().size == VALID_LOTTO_NUMBER_COUNT
     }
 
+    fun hasNumber(number: LottoNumber): Boolean {
+        return lottoNumbers.contains(number)
+    }
+
+    fun matchedNumberCount(other: Lotto): Int {
+        return lottoNumbers.intersect(other.lottoNumbers).size
+    }
+
     companion object {
         private const val VALID_LOTTO_NUMBER_COUNT = 6
     }

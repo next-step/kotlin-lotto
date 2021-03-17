@@ -1,5 +1,6 @@
 package lotto.userInterface
 
+import lotto.domain.LottoPrize
 import lotto.dto.LottoNumbersDto
 import lotto.dto.StatisticsDto
 
@@ -17,6 +18,11 @@ class Console : UserInterface {
             ?: listOf()
     }
 
+    override fun inputLastWeekWinningLottoBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readLine()?.toInt() ?: 0
+    }
+
     override fun outputPurchasedMessage(dto: LottoNumbersDto) {
         println("${dto.count}개를 구매했습니다.")
         dto.lottos.forEach { println(it) }
@@ -26,9 +32,19 @@ class Console : UserInterface {
         println("당첨 통계")
         println("---------")
 
-        dto.prizeRankCount.forEach { println("${it.key.count}개 일치 (${it.key.reward}원)- ${it.value}개") }
+        dto.prizeRankCount.forEach { println("${matchingCountMessage(it.key)} (${it.key.reward}원)- ${it.value}개") }
 
         println("총 수익률은 ${dto.profitRate}입니다.")
+    }
+
+    private fun matchingCountMessage(lottoPrize: LottoPrize): String {
+        var message = "${lottoPrize.count}개 일치"
+
+        if (lottoPrize == LottoPrize.SECOND_PRIZE) {
+            message += ", 보너스 볼 일치"
+        }
+
+        return message
     }
 
     companion object {

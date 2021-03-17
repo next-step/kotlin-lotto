@@ -1,12 +1,15 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
+import lotto.domain.LottoResult
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.dto.StatisticsDto
 import lotto.dto.toLottoNumbersDto
 import lotto.userInterface.Console
+import lotto.userInterface.UserInterface
 
 fun main() {
     val console = Console()
@@ -14,7 +17,7 @@ fun main() {
     app.run()
 }
 
-class LottoApplication(private val userInterface: Console) {
+class LottoApplication(private val userInterface: UserInterface) {
 
     private val lottoMachine = LottoMachine(LOTTO_PRICE, RandomLottoGenerator())
 
@@ -24,10 +27,16 @@ class LottoApplication(private val userInterface: Console) {
         userInterface.outputPurchasedMessage(lottos.toLottoNumbersDto())
 
         val winningLottoNumbers = userInterface.inputLastWeekWinningLottoNumbers()
-        val winningLotto = WinningLotto(winningLottoNumbers.map { LottoNumber(it) })
+        val winningLottoBonusNumber = userInterface.inputLastWeekWinningLottoBonusNumber()
 
-        val result = lottoMachine.result(lottos, winningLotto)
-        userInterface.outputWinningStatistics(StatisticsDto.of(result, amount))
+        val winningLotto = run {
+            val lotto = Lotto(winningLottoNumbers.map { LottoNumber(it) })
+            val bonusNumber = LottoNumber(winningLottoBonusNumber)
+            WinningLotto(lotto = lotto, bonusNumber = bonusNumber)
+        }
+
+        val result = LottoResult(winningLotto, lottos)
+        userInterface.outputWinningStatistics(StatisticsDto.of(result.result(), amount))
     }
 
     companion object {
