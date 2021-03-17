@@ -39,4 +39,21 @@ class LottoWonNumberTests {
             )
         }
     }
+
+    @Test
+    fun `기존 로또 번호와 보너스 번호는 겹치면 안된다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoWonNumber(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                ),
+                LottoNumber(6)
+            )
+        }
+    }
 }
