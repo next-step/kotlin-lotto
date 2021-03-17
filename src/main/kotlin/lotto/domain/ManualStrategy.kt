@@ -3,8 +3,10 @@ package lotto.domain
 class ManualStrategy(
     private val stringManualNumbers: List<List<String>>
 ) : LottoStrategy {
-    override fun generateLotto(quantity: Int): Lottoes {
-        return Lottoes(makeManualLottoes(quantity, stringManualNumbers))
+    override fun generateLotto(money: Money): Lottoes {
+        val numberOfManual = stringManualNumbers.size
+        money.spendMoney(LottoGame.LOTTO_COST * numberOfManual)
+        return Lottoes(makeManualLottoes(numberOfManual, stringManualNumbers))
     }
 
     private fun makeManualLottoes(numberOfManual: Int, stringManualNumbers: List<List<String>>): List<LottoTicket> {

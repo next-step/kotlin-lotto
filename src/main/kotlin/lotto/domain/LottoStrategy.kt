@@ -1,5 +1,5 @@
 package lotto.domain
 
 interface LottoStrategy {
-    fun generateLotto(quantity: Int): Lottoes
+    fun generateLotto(money: Money): Lottoes
 }

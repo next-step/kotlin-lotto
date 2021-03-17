@@ -14,6 +14,7 @@ class Money(initMoney: Int) {
     }
 
     fun spendMoney(money: Int) {
+        checkEnoughMoney(money)
         currentMoney -= money
         spentMoney += money
     }
@@ -27,6 +28,11 @@ class Money(initMoney: Int) {
         return BigDecimal(winningMoney)
             .divide(spentMoney.toBigDecimal(), 2, RoundingMode.FLOOR)
             .toString()
+    }
+
+    private fun checkEnoughMoney(spendMoney: Int) {
+        if (spendMoney > currentMoney) throw IllegalStateException("사고자 하는 수량이 현재 가진 돈보다 많습니다." +
+            "현재 돈 :$currentMoney 쓰려는 돈: $spendMoney")
     }
 
     private fun checkValidateMoney(money: Int) {

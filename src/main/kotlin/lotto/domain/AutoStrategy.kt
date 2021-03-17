@@ -1,7 +1,9 @@
 package lotto.domain
 
 class AutoStrategy : LottoStrategy {
-    override fun generateLotto(quantity: Int): Lottoes {
+    override fun generateLotto(money: Money): Lottoes {
+        val quantity = (money.currentMoney / LottoGame.LOTTO_COST).toInt()
+        money.spendAllMoney()
         return Lottoes(
             (1..quantity).map {
                 makeAutoLottoTicket()

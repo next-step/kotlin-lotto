@@ -48,7 +48,7 @@ private fun createBonusNumber(): LottoNumber {
 private fun inputManualLottoes(numberOfManual: Int, game: LottoGame): Lottoes? {
     if (numberOfManual > 0) {
         val manualNumbers = inputView.inputManualNumbers(numberOfManual)
-        return game.purchaseLottoes(ManualStrategy(manualNumbers), numberOfManual)
+        return game.purchaseLottoes(ManualStrategy(manualNumbers))
     }
     return null
 }
