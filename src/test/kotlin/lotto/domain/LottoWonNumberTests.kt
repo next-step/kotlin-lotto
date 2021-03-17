@@ -17,7 +17,8 @@ class LottoWonNumberTests {
                     LottoNumber(4),
                     LottoNumber(5),
                     LottoNumber(1)
-                )
+                ),
+                LottoNumber(10)
             )
         }
     }
@@ -33,7 +34,8 @@ class LottoWonNumberTests {
                     LottoNumber(4),
                     LottoNumber(5),
                     LottoNumber(6)
-                )
+                ),
+                LottoNumber(10)
             )
         }
     }
