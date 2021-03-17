@@ -6,7 +6,9 @@ class Lottoes(
     fun getMyLottoesRanks(winningLotto: WinningLotto): LottoesRank {
         return LottoesRank(
             value.groupBy { lottoTicket ->
-                winningLotto.getTicketRank(lottoTicket)
+                val countOfMatch = lottoTicket.getCountOfMatch(winningLotto.winningNumbers)
+                val bonusMatched = lottoTicket.isNumberContains(winningLotto.bonusNumber)
+                Rank.valueOf(countOfMatch, bonusMatched)
             }
         )
     }

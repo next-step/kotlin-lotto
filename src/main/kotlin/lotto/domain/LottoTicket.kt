@@ -9,6 +9,16 @@ class LottoTicket(val value: Set<LottoNumber>) {
         checkValidateLottoTicket()
     }
 
+    fun getCountOfMatch(winningLotto: LottoTicket): Int {
+        return winningLotto.value.count { lottoNumber ->
+            value.contains(lottoNumber)
+        }
+    }
+
+    fun isNumberContains(lottoNumber: LottoNumber): Boolean {
+        return value.contains(lottoNumber)
+    }
+
     private fun checkValidateLottoTicket() {
         if (value.size != LENGTH_OF_LOTTO) throw RuntimeException("로또의 숫자는 6개가 존재해야 합니다.")
     }
