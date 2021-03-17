@@ -9,14 +9,14 @@ class LottoRankCollectionTest {
         val lottos: MutableMap<Rank, Int> = hashMapOf()
         lottos.put(Rank.FIRST, 1)
         lottos.put(Rank.THIRD, 3)
-        lottos.put(Rank.THIRD, 5)
+        lottos.put(Rank.FOURTH, 5)
         lottos.put(Rank.FIFTH, 10)
 
         val lottoRankCollection: LottoRankCollection = LottoRankCollection(lottos)
 
         assertThat(lottoRankCollection.sumAmount)
             .isEqualTo(
-                Rank.FIRST.amount * 1 + Rank.THIRD.amount * 3 + Rank.THIRD.amount * 5 + Rank.FIFTH.amount * 10
+                Rank.FIRST.amount * 1 + Rank.THIRD.amount * 3 + Rank.FOURTH.amount * 5 + Rank.FIFTH.amount * 10
             )
     }
 }

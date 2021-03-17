@@ -12,7 +12,7 @@
             - [X] Rank는 스스로 당첨금액을 알고 있어야 한다. ( enums ) 
                 - [X] Rank는 당첨갯수를 기반으로 몇등인지 return이 가능해야한다 -> Rank.getRank(맞은갯수: int)
                 - [X] 기존에 1등을 제외한 나머지는 + 1등 씩 밀려야한다.
-                - [ ] 5개의 숫자가 맞고 1개의 보너스 볼이 맞으면 2등이다.
+                - [X] 5개의 숫자가 맞고 1개의 보너스 볼이 맞으면 2등이다.
                 
             - [X] LottoRankCollection는 스스로 총합금액을 return할줄 알아야 한다 -> LottoRank.sum() -> Int
       

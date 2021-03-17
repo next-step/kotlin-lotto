@@ -48,7 +48,7 @@ class LottoTests {
         )
 
         assertThat(rank)
-            .isEqualTo(Rank.getRankByCount(4))
+            .isEqualTo(Rank.getRankByCount(4, false))
 
         assertThat(lotto.numbers)
             .containsExactlyInAnyOrder(
@@ -83,6 +83,40 @@ class LottoTests {
                 LottoNumber(5),
                 LottoNumber(6)
             )
+    }
+
+    @Test
+    fun `5개가 맞고, 1개의 보너스가 맞으면은 2등이다 `() {
+        val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
+
+        val rank: Rank = lotto.matchByWonNumber(
+            LottoWonNumber(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(44),
+                    LottoNumber(45)
+                ),
+                LottoNumber(43)
+            )
+        )
+
+        val wonNumber: LottoWonNumber = LottoWonNumber(
+            setOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(10)
+            ),
+            LottoNumber(6)
+        )
+
+        assertThat(lotto.matchByWonNumber(wonNumber))
+            .isEqualTo(Rank.SECOND)
     }
 
     fun 순차적으로_증가하는_로또번호_제너레이터(): LottoNumberGenerator {
