@@ -13,22 +13,6 @@ class LottoTicket(val value: Set<LottoNumber>) {
         if (value.size != LENGTH_OF_LOTTO) throw RuntimeException("로또의 숫자는 6개가 존재해야 합니다.")
     }
 
-    fun getTicketRank(winningLotto: WinningLotto): Rank {
-        val countOfMatch = getCountOfMatch(winningLotto.winningNumbers.value)
-        val bonusMatches = isBonusNumberMatch(winningLotto.bonusNumber)
-        return Rank.valueOf(countOfMatch, bonusMatches)
-    }
-
-    private fun getCountOfMatch(lottoNumbers: Set<LottoNumber>): Int {
-        return value.count { lottoNumber ->
-            lottoNumbers.contains(lottoNumber)
-        }
-    }
-
-    private fun isBonusNumberMatch(bonusNumber: LottoNumber): Boolean {
-        return value.contains(bonusNumber)
-    }
-
     companion object {
         private val LENGTH_OF_LOTTO = 6
 

@@ -6,7 +6,7 @@ class Lottoes(
     fun getMyLottoesRanks(winningLotto: WinningLotto): LottoesRank {
         return LottoesRank(
             value.groupBy { lottoTicket ->
-                lottoTicket.getTicketRank(winningLotto)
+                winningLotto.getTicketRank(lottoTicket)
             }
         )
     }
