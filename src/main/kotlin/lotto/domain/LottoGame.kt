@@ -18,7 +18,7 @@ class LottoGame(private var money: Money) {
     }
 
     private fun checkEnoughMoney(numberOfManual: Int) {
-        if (numberOfManual * LOTTO_COST > money.currentMoney) throw RuntimeException("사고자 하는 수량이 현재 가진 돈보다 많습니다.")
+        if (numberOfManual * LOTTO_COST > money.currentMoney) throw IllegalStateException("사고자 하는 수량이 현재 가진 돈보다 많습니다.")
     }
 
     private fun convertStringToInt(strings: List<String>): List<Int> {
