@@ -9,8 +9,10 @@ class Lotto(val lottoNumbers: Set<LottoNumber>) {
     }
 
     fun match(winningNumber: WinningLotto): LottoPrize {
+        var isBonusMatch = false
         val count = lottoNumbers.intersect(winningNumber.winningLotto).size
-        return LottoPrize.from(count)
+        if (winningNumber.bonusNumber in lottoNumbers) isBonusMatch = true
+        return LottoPrize.from(count, isBonusMatch)
     }
 
     override fun toString(): String {

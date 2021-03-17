@@ -22,7 +22,7 @@ class LottoCompany {
         return Statistics(winningStats)
     }
 
-    fun setWinnerNumber(numbers: Set<LottoNumber>) {
-        winningNumber = WinningLotto(numbers)
+    fun setWinnerNumber(numbers: Set<LottoNumber>, bonusNumber: LottoNumber) {
+        winningNumber = WinningLotto(numbers, bonusNumber)
     }
 }
