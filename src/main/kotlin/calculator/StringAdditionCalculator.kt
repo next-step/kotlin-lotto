@@ -8,7 +8,7 @@ class StringAdditionCalculator {
 
         if (expression.contains(CUSTOM_DELIMITER_REGEX)) {
             val matchResult = CUSTOM_DELIMITER_REGEX.find(expression)!!
-            val (_, customDelimiter, numberAdditionExpression) = matchResult.groupValues
+            val (customDelimiter, numberAdditionExpression) = matchResult.destructured
             return sumNumberAdditionExpression(numberAdditionExpression, customDelimiter)
         }
 
