@@ -29,7 +29,8 @@ class WinningLottoStatistics(
 
     private fun rank(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): LottoRank? {
         val winningNumberCount = winningLottoNumbers.countWinningNumbers(lottoTicket)
-        return LottoRank.selectByMatchCount(winningNumberCount)
+        val matchBonus = lottoTicket.isBonusNumberMatch(winningLottoNumbers.bonusLotto)
+        return LottoRank.selectByMatchCount(winningNumberCount, matchBonus)
     }
 
     fun calculateProfitRate(buyingPrice: Int): Double {

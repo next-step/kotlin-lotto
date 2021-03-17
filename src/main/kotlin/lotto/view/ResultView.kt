@@ -15,7 +15,7 @@ object ResultView {
 
     fun printWinningLottoStatistics(winningLottoStatistics: WinningLottoStatistics) {
         val statistics = winningLottoStatistics.statistics.toList().sortedWith(compareBy { it.first.matchCount })
-            .map { "${it.first.matchCount}개 일치 (${it.first.winningMoney}원)- ${it.second}개" }.joinToString("\n")
+            .map { "${it.first} - ${it.second}개" }.joinToString("\n")
         println(statistics)
     }
 
