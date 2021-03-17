@@ -24,7 +24,7 @@ class WinningLottoNumbers private constructor(
 
             val winningLottoInstance = Lotto.from(winningLottoNumberTokens.map { LottoNumber.from(it.toInt()) })
             val bonusLotto = LottoNumber.from(bonusNumber)
-            return WinningLottoNumbers(lotto = winningLottoInstance , bonusLotto = bonusLotto)
+            return WinningLottoNumbers(lotto = winningLottoInstance, bonusLotto = bonusLotto)
         }
 
         private fun validate(tokens: List<String>) {
