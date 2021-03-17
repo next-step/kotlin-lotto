@@ -1,3 +1,7 @@
+import LottoCard.Companion.LOTTO_LAST_NUMBER
+import LottoCard.Companion.LOTTO_NUMBER_CNT
+import LottoCard.Companion.LOTTO_START_NUMBER
+
 fun main() {
     val lotto = Lotto()
     val price = lotto.validatePrice(inputPrice())
@@ -5,22 +9,35 @@ fun main() {
     val lottoCards = LottoCards(lottoCnt)
     printLottoCards(lottoCards)
 
-    val beforeWeekLottoCard = LottoCard(inputLottoNumber())
-    val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard)
+    val numbers = lotto.validateLottoCard(inputLottoNumber())
+    val beforeWeekLottoCard = LottoCard(numbers)
+    val bonusNumber = lotto.validateBonusNumber(inputBonusNumber())
+    val statistic = lottoCards.getStatistic(beforeWeekLottoCard, bonusNumber)
     val yieldRate = lotto.getYieldRate(statistic, price)
     printResult(statistic, yieldRate)
 }
 
 class Lotto {
-    fun getYieldRate(statistic: List<Winning>, price: Int): Double {
-        return statistic.map { it.price }.sum().toDouble() / price
+    fun getYieldRate(statistic: Map<Winning, Int>, price: Int): Double {
+        return statistic.map { it.key.price * it.value }.sum().toDouble() / price
     }
 
-    fun getStatistic(lottoCards: LottoCards, beforeWeekLottoCard: LottoCard): List<Winning> {
-        return lottoCards.cards.map {
-            val count = it.getMatchCount(beforeWeekLottoCard)
-            Winning.matchWinning(count)
-        }
+    fun validateBonusNumber(numberLine: String?): Int {
+        require(!numberLine.isNullOrBlank()) { "보너스 번호를 반드시 입력해야 합니다." }
+
+        return numberLine.parseInt()
+    }
+
+    fun validateLottoCard(numberLine: String?): List<Int> {
+        require(!numberLine.isNullOrBlank()) { "로또 번호를 반드시 입력해야 합니다." }
+
+        val strNumbers = numberLine.replace(WHITESPACE_REGEX, EMPTY_STRING).split(",")
+        require(strNumbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개입니다." }
+
+        val numbers = strNumbers.map { it.parseInt() }
+        require(numbers.none { it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
+
+        return numbers
     }
 
     fun validatePrice(strPrice: String?): Int {
@@ -38,5 +55,7 @@ class Lotto {
 
     companion object {
         private const val LOTTO_PRICE = 1000
+        private val WHITESPACE_REGEX = Regex("\\s")
+        private const val EMPTY_STRING = ""
     }
 }

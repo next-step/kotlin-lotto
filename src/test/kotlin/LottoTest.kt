@@ -5,6 +5,8 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 class LottoTest {
@@ -64,26 +66,41 @@ class LottoTest {
 
     @Test
     fun `수익률을 정상적으로 계산한다`() {
-        val yieldRate = lotto.getYieldRate(listOf(Winning.SECOND, Winning.SECOND, Winning.THIRD), 50000)
-        assertThat(yieldRate, `is`(61.0))
+        val map = mapOf(Winning.SECOND to 2, Winning.THIRD to 1)
+        val yieldRate = lotto.getYieldRate(map, 50000)
+        assertThat(yieldRate, `is`(1230.0))
     }
 
-    @Test
-    fun `정상적으로 당첨 통계 로직을 수행한다`() {
-        val lottoCards = LottoCards(0)
-        val lottoCardsData = listOf(
-            LottoCard("1, 2, 3, 4, 5, 6"), LottoCard("11, 12, 13, 14, 15, 16"),
-            LottoCard("1, 2, 3, 14, 15, 16")
-        )
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `저번주 로또번호를 입력하지 않거나 빈 값을 넣으면 예외가 발생한다`(numberLine: String?) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(numberLine)
+        }
+    }
 
-        ReflectionUtil.setField(lottoCards, "cards", lottoCardsData)
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5", "1, 2, 3, 4, 5, 6, 7"])
+    fun `로또 번호를 6개 입력하지 않으면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(numbers)
+        }
+    }
 
-        val beforeWeekLottoCard = LottoCard("1, 2, 3, 4, 5, 6")
-        val statistic = lotto.getStatistic(lottoCards, beforeWeekLottoCard).filter { it != Winning.NONE }
+    @ParameterizedTest
+    @ValueSource(strings = ["-1,2,-3,74,95,100", "1, 2, 3, 4, 5, 66"])
+    fun `입력된 숫자가 로또 번호 범위에 포함되지 않으면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(numbers)
+        }
+    }
 
-        assertThat(statistic.filter { it == Winning.FIRST }.size, `is`(1))
-        assertThat(statistic.filter { it == Winning.FOURTH }.size, `is`(1))
-        assertThat(statistic.size, `is`(2))
+    @ParameterizedTest
+    @ValueSource(strings = ["a,b,c,d,e,f", "1, 2, 3, 4, 5, error"])
+    fun `숫자가 아닌 값이 문자가 등록되면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validateLottoCard(numbers)
+        }
     }
 
     companion object {
