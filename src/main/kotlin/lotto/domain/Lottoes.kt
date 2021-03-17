@@ -9,6 +9,8 @@ class Lottoes(
                 val countOfMatch = lottoTicket.getCountOfMatch(winningLotto.winningNumbers)
                 val bonusMatched = lottoTicket.isNumberContains(winningLotto.bonusNumber)
                 Rank.valueOf(countOfMatch, bonusMatched)
+            }.mapValues {
+                it.value.size
             }
         )
     }

@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
 import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
+import java.lang.IllegalArgumentException
 
 class LottoTicket(val value: Set<LottoNumber>) {
 
@@ -20,7 +21,7 @@ class LottoTicket(val value: Set<LottoNumber>) {
     }
 
     private fun checkValidateLottoTicket() {
-        if (value.size != LENGTH_OF_LOTTO) throw RuntimeException("로또의 숫자는 6개가 존재해야 합니다.")
+        if (value.size != LENGTH_OF_LOTTO) throw IllegalArgumentException("숫자는 6개가 존재해야 합니다.")
     }
 
     companion object {
