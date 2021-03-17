@@ -62,18 +62,18 @@ class LottoCollectionTests {
 
         assertThat(matchByWonNumber.rankCount[Rank.FIRST])
             .isEqualTo(2)
-        assertThat(matchByWonNumber.rankCount[Rank.SECOND])
+        assertThat(matchByWonNumber.rankCount[Rank.THIRD])
             .isEqualTo(1)
         assertThat(matchByWonNumber.rankCount[Rank.THIRD])
             .isEqualTo(1)
-        assertThat(matchByWonNumber.rankCount[Rank.FORTH])
+        assertThat(matchByWonNumber.rankCount[Rank.FIFTH])
             .isEqualTo(3)
         assertThat(matchByWonNumber.rankCount[Rank.FAIL])
             .isEqualTo(2)
 
         assertThat(matchByWonNumber.sumAmount)
             .isEqualTo(
-                Rank.FIRST.amount * 2 + Rank.SECOND.amount * 1 + Rank.THIRD.amount * 1 + Rank.FORTH.amount * 3
+                Rank.FIRST.amount * 2 + Rank.THIRD.amount * 1 + Rank.THIRD.amount * 1 + Rank.FIFTH.amount * 3
             )
     }
 
