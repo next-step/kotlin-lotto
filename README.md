@@ -11,6 +11,9 @@
         - [X] LottoRankCollection에는 6,5,4,3개 일치한 값의 갯수를 가지고 있어야 한다. -> Map<Rank, Integer> 
             - [X] Rank는 스스로 당첨금액을 알고 있어야 한다. ( enums ) 
                 - [X] Rank는 당첨갯수를 기반으로 몇등인지 return이 가능해야한다 -> Rank.getRank(맞은갯수: int)
+                - [ ] 기존에 1등을 제외한 나머지는 + 1등 씩 밀려야한다.
+                - [ ] 5개의 숫자가 맞고 1개의 보너스 볼이 맞으면 2등이다.
+                
             - [X] LottoRankCollection는 스스로 총합금액을 return할줄 알아야 한다 -> LottoRank.sum() -> Int
       
     - [X] 로또는 6개의 숫자를 갖고 있다 -> Lotto
@@ -24,3 +27,4 @@
     - [X] LottoRankCollection.sum() / LottoCollection.lotto.size * 1000 을 수익률로 보여준다.
 - [X] 당첨번호 LottoClass가 있어야 한다.
     - [X] 숫자는 6개만 받을 수 있다. Set<LottoNumber>
+    - [ ] 보너스 숫자를 하나 더 받을 수 있다.
