@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource
 class LottoStoreTest {
 
     private lateinit var lottoStore: LottoStore
-    private lateinit var money: Money
-
     @BeforeEach
     fun init() {
         lottoStore = LottoStore()
@@ -19,8 +17,8 @@ class LottoStoreTest {
     @ParameterizedTest
     @ValueSource(ints = [1000, 10000, 14000])
     fun `금액넣었을때 금액에 맞는 로또가 생성되는지 확인`(moneyValue: Int) {
-        money = Money(moneyValue)
-        val lottoes = lottoStore.purchaseAuto(money)
-        assertThat(lottoes.toList().size).isEqualTo(money.spentMoney / LOTTO_COST)
+        val quantity = moneyValue / LOTTO_COST
+        val lottoes = lottoStore.purchaseAuto(quantity)
+        assertThat(lottoes.toList().size).isEqualTo(moneyValue / LOTTO_COST)
     }
 }

@@ -7,14 +7,17 @@ class LottoGame(private var money: Money) {
 
     fun purchaseManualLottoes(numberOfManual: Int, stringManualNumbers: List<List<String>>): Lottoes {
         checkEnoughMoney(numberOfManual)
+        money.spendMoney(LOTTO_COST * numberOfManual)
         val manualNumbers = stringManualNumbers.map { strings ->
             convertStringToInt(strings)
         }
-        return lottoStore.purchaseManual(money, numberOfManual, manualNumbers)
+        return lottoStore.purchaseManual(numberOfManual, manualNumbers)
     }
 
     fun purchaseAutoLottoes(): Lottoes {
-        return lottoStore.purchaseAuto(money)
+        val quantity = (money.currentMoney / LOTTO_COST).toInt()
+        money.spendAllMoney()
+        return lottoStore.purchaseAuto(quantity)
     }
 
     private fun checkEnoughMoney(numberOfManual: Int) {
