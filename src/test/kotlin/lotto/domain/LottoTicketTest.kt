@@ -10,8 +10,8 @@ internal class LottoTicketTest {
         val ticket2 = LottoTicket.create()
         val ticket3 = LottoTicket.create()
 
-        assertThat(ticket1.lottoNumbers.size).isEqualTo(6)
-        assertThat(ticket2.lottoNumbers.size).isEqualTo(6)
-        assertThat(ticket3.lottoNumbers.size).isEqualTo(6)
+        assertThat(ticket1.lotto.numbers.size).isEqualTo(6)
+        assertThat(ticket2.lotto.numbers.size).isEqualTo(6)
+        assertThat(ticket3.lotto.numbers.size).isEqualTo(6)
     }
 }
