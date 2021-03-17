@@ -9,6 +9,10 @@ class Money(initMoney: Int) {
     var currentMoney: Long = initMoney.toLong()
         private set
 
+    init {
+        checkValidateMoney(initMoney)
+    }
+
     fun spendMoney(money: Int) {
         currentMoney -= money
         spentMoney += money
@@ -20,6 +24,12 @@ class Money(initMoney: Int) {
     }
 
     fun calculateRateOfReturn(winningMoney: Long): String {
-        return BigDecimal(winningMoney).divide(spentMoney.toBigDecimal(), 2, RoundingMode.FLOOR).toString()
+        return BigDecimal(winningMoney)
+            .divide(spentMoney.toBigDecimal(), 2, RoundingMode.FLOOR)
+            .toString()
+    }
+
+    private fun checkValidateMoney(money: Int) {
+        require(money > 0) { "돈은 0보다 큰 수를 입력해주세요" }
     }
 }
