@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
 import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 
-class LottoTicket(val value: List<LottoNumber>) {
+class LottoTicket(val value: Set<LottoNumber>) {
 
     init {
         checkValidateLottoTicket()
@@ -19,7 +19,7 @@ class LottoTicket(val value: List<LottoNumber>) {
         return Rank.valueOf(countOfMatch, bonusMatches)
     }
 
-    private fun getCountOfMatch(lottoNumbers: List<LottoNumber>): Int {
+    private fun getCountOfMatch(lottoNumbers: Set<LottoNumber>): Int {
         return value.count { lottoNumber ->
             lottoNumbers.contains(lottoNumber)
         }
@@ -41,7 +41,7 @@ class LottoTicket(val value: List<LottoNumber>) {
             return LottoTicket(
                 numbers.map { number ->
                     LottoNumber.from(number)
-                }
+                }.toSet()
             )
         }
 
@@ -49,7 +49,7 @@ class LottoTicket(val value: List<LottoNumber>) {
             return LottoTicket(
                 numbers.map { number ->
                     LottoNumber.from(number)
-                }
+                }.toSet()
             )
         }
     }
