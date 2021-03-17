@@ -14,3 +14,9 @@ fun inputWinningNumbers(): WinningNumberRequest {
     val request = readLine() ?: throw IllegalArgumentException("번호를 입력해주세요.")
     return WinningNumberRequest(request)
 }
+
+fun inputBonusNumber(): Int {
+    println("보너스 번호를 입력해주세요.")
+    val request = readLine() ?: throw IllegalArgumentException("번호를 입력해주세요.")
+    return request.toInt()
+}
