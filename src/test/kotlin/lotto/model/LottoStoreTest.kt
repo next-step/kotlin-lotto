@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.number.CandidateNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -16,6 +17,20 @@ internal class LottoStoreTest {
         assertThat(result.size).isEqualTo(ticketCount)
     }
 
+    @ParameterizedTest
+    @MethodSource("buyCandidateNumbersTicketsProvider")
+    fun `수동으로 사고싶은 만큼 CandidateNumbers를 주면 알맞은 LottoTicket을 준다`(
+        money: Money,
+        listOfCandidateNumbers: List<CandidateNumbers>,
+        lottoTickets: LottoTickets
+    ) {
+        val result = store.buy(money, listOfCandidateNumbers)
+
+        assertThat(result.size).isEqualTo(lottoTickets.size)
+        assertThat(result[0].candidateNumbers).isEqualTo(lottoTickets[0].candidateNumbers)
+        assertThat(result[1].candidateNumbers).isEqualTo(lottoTickets[1].candidateNumbers)
+    }
+
     companion object {
         @JvmStatic
         fun buyTicketCountProvider(): List<Arguments> {
@@ -24,6 +39,32 @@ internal class LottoStoreTest {
                 Arguments { arrayOf(Money(3000), 3) },
                 Arguments { arrayOf(Money(2500), 2) },
                 Arguments { arrayOf(Money.ZERO, 0) }
+            )
+        }
+
+        @JvmStatic
+        fun buyCandidateNumbersTicketsProvider(): List<Arguments> {
+            val listOfCandidateNumbers = listOf(
+                CandidateNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                CandidateNumbers(listOf(7, 8, 9, 10, 11, 12))
+            )
+
+            return listOf(
+                Arguments {
+                    arrayOf(
+                        Money(5000),
+                        listOfCandidateNumbers,
+                        LottoTickets(
+                            listOf(
+                                LottoTicket(listOfCandidateNumbers[0]),
+                                LottoTicket(listOfCandidateNumbers[1]),
+                                LottoTicket(),
+                                LottoTicket(),
+                                LottoTicket()
+                            )
+                        )
+                    )
+                }
             )
         }
     }
