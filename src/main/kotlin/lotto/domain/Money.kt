@@ -1,5 +1,8 @@
 package lotto.domain
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 class Money(initMoney: Int) {
     var spentMoney: Long = 0L
         private set
@@ -17,6 +20,6 @@ class Money(initMoney: Int) {
     }
 
     fun calculateRateOfReturn(winningMoney: Long): String {
-        return String.format("%.2f", winningMoney.toDouble() / spentMoney.toDouble())
+        return BigDecimal(winningMoney).divide(spentMoney.toBigDecimal(), 2, RoundingMode.FLOOR).toString()
     }
 }
