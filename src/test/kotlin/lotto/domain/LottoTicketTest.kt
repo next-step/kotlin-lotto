@@ -2,15 +2,25 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTicketTest {
 
     private val lottoNumbers = (1..45).map { number -> LottoNumber.from(number) }
 
     @Test
-    fun `로또 1개 자동으로 만들기`() {
+    fun `자동으로 로또 생성 시 모두 범위 내 숫자인지 확인`() {
         val lotto = LottoTicket.generateAuto()
         assertThat(lottoNumbers).containsAll(lotto.value)
+    }
+
+    @Test
+    fun `자동으로 로또 생성 시 중복 번호가 없는지 확인`() {
+        val lotto = LottoTicket.generateAuto()
+        val duplicatedNumbers = lotto.value.groupBy { lottoNumber -> lottoNumber }
+            .filter { it.value.size > 1 }
+
+        assertThat(duplicatedNumbers).isEmpty()
     }
 
     @Test

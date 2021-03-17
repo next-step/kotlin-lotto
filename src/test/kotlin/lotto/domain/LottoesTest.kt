@@ -19,7 +19,7 @@ class LottoesTest {
                 LottoTicket.generateManual(listOf(5, 21, 31, 44, 25, 10))
             )
         )
-        val winningNumbers = listOf<LottoNumber>(
+        val winningNumbers = setOf<LottoNumber>(
             LottoNumber.from(3),
             LottoNumber.from(5),
             LottoNumber.from(6),
