@@ -21,6 +21,10 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.joinToString(", ", "[", "]")
     }
 
+    operator fun contains(lottoNumber: LottoNumber): Boolean {
+        return lottoNumber in this.lottoNumbers
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
 
