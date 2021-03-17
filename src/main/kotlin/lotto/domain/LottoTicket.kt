@@ -1,9 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
-import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
-import java.lang.IllegalArgumentException
-
 class LottoTicket(val value: Set<LottoNumber>) {
 
     init {
@@ -25,20 +21,7 @@ class LottoTicket(val value: Set<LottoNumber>) {
     }
 
     companion object {
-        private val LENGTH_OF_LOTTO = 6
-
-        fun generateAuto(): LottoTicket {
-            val numbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
-                .shuffled()
-                .take(LENGTH_OF_LOTTO)
-                .sorted()
-
-            return LottoTicket(
-                numbers.map { number ->
-                    LottoNumber.from(number)
-                }.toSet()
-            )
-        }
+        const val LENGTH_OF_LOTTO = 6
 
         fun generateManual(numbers: List<Int>): LottoTicket {
             return LottoTicket(

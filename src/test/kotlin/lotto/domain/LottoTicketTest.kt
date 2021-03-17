@@ -6,20 +6,15 @@ import org.junit.jupiter.api.Test
 class LottoTicketTest {
 
     private val lottoNumbers = (1..45).map { number -> LottoNumber.from(number) }
+    private val lottoGames = LottoGame(Money(3000))
 
     @Test
     fun `자동으로 로또 생성 시 모두 범위 내 숫자인지 확인`() {
-        val lotto = LottoTicket.generateAuto()
-        assertThat(lottoNumbers).containsAll(lotto.value)
-    }
+        val lottoes = lottoGames.purchaseAutoLottoes().toList()
 
-    @Test
-    fun `자동으로 로또 생성 시 중복 번호가 없는지 확인`() {
-        val lotto = LottoTicket.generateAuto()
-        val duplicatedNumbers = lotto.value.groupBy { lottoNumber -> lottoNumber }
-            .filter { it.value.size > 1 }
-
-        assertThat(duplicatedNumbers).isEmpty()
+        for (lotto in lottoes) {
+            assertThat(lottoNumbers).containsAll(lotto.value)
+        }
     }
 
     @Test

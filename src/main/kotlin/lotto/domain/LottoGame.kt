@@ -17,8 +17,24 @@ class LottoGame(private var money: Money) {
         val quantity = (money.currentMoney / LOTTO_COST).toInt()
         money.spendAllMoney()
 
-        val lottoes = (1..quantity).map { LottoTicket.generateAuto() }
+        val lottoes = (1..quantity).map {
+            generateAutoLotto()
+        }
+
         return Lottoes(lottoes)
+    }
+
+    private fun generateAutoLotto(): LottoTicket {
+        val numbers = (LottoNumber.MIN_LOTTO_NUMBER..LottoNumber.MAX_LOTTO_NUMBER)
+            .shuffled()
+            .take(LottoTicket.LENGTH_OF_LOTTO)
+            .sorted()
+
+        return LottoTicket(
+            numbers.map { number ->
+                LottoNumber.from(number)
+            }.toSet()
+        )
     }
 
     private fun checkEnoughMoney(numberOfManual: Int) {
