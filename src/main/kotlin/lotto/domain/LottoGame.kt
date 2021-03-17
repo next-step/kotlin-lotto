@@ -2,18 +2,16 @@ package lotto.domain
 
 class LottoGame(private var money: Money) {
 
-    fun purchaseManualLottoes(numberOfManual: Int, stringManualNumbers: List<List<String>>): Lottoes {
+    fun purchaseManualLottoes(numberOfManual: Int, stringManualNumbers: List<List<String>>, lottoStrategy: LottoStrategy): Lottoes {
         checkEnoughMoney(numberOfManual)
         money.spendMoney(LOTTO_COST * numberOfManual)
-        val lottoStrategy = ManualStrategy(stringManualNumbers)
 
         return lottoStrategy.generateLotto(numberOfManual)
     }
 
-    fun purchaseAutoLottoes(): Lottoes {
+    fun purchaseAutoLottoes(lottoStrategy: LottoStrategy): Lottoes {
         val quantity = (money.currentMoney / LOTTO_COST).toInt()
         money.spendAllMoney()
-        val lottoStrategy = AutoStrategy()
 
         return lottoStrategy.generateLotto(quantity)
     }

@@ -1,9 +1,11 @@
 package lotto
 
+import lotto.domain.AutoStrategy
 import lotto.domain.LottoGame
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.Lottoes
+import lotto.domain.ManualStrategy
 import lotto.domain.Money
 import lotto.domain.WinningLotto
 import lotto.ui.InputView
@@ -18,7 +20,7 @@ fun main() {
     val lottoGame = LottoGame(money)
 
     val manualLottoes = inputManualLottoes(numberOfManual, lottoGame) ?: Lottoes(emptyList())
-    val autoLottoes = lottoGame.purchaseAutoLottoes()
+    val autoLottoes = lottoGame.purchaseAutoLottoes(AutoStrategy())
 
     outputView.printPurchasedLottoes(manualLottoes, autoLottoes)
     val universalLottoes = Lottoes(manualLottoes.toList() + autoLottoes.toList())
@@ -46,7 +48,7 @@ private fun createBonusNumber(): LottoNumber {
 private fun inputManualLottoes(numberOfManual: Int, game: LottoGame): Lottoes? {
     if (numberOfManual > 0) {
         val manualNumbers = inputView.inputManualNumbers(numberOfManual)
-        return game.purchaseManualLottoes(numberOfManual, manualNumbers)
+        return game.purchaseManualLottoes(numberOfManual, manualNumbers, ManualStrategy(manualNumbers))
     }
     return null
 }
