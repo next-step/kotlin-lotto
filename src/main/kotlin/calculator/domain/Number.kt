@@ -1,15 +1,10 @@
 package calculator.domain
 
 class Number(val value: Int) {
-    constructor(stringNumber: String) : this(stringNumber.toInt()) {
-        checkValidateNumber(stringNumber)
-    }
+    constructor(stringNumber: String) : this(stringNumber.toIntOrNull() ?: throw RuntimeException("$stringNumber 은 올바른 숫자가 아닙니"))
+
     init {
         checkNegativeNumber(value)
-    }
-
-    private fun checkValidateNumber(stringNumber: String) {
-        stringNumber.toIntOrNull() ?: throw RuntimeException("$stringNumber 은 올바른 숫자가 아닙니다.")
     }
 
     private fun checkNegativeNumber(number: Int) {
