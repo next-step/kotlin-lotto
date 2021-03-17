@@ -42,7 +42,8 @@ class LottoTests {
                     LottoNumber(4),
                     LottoNumber(44),
                     LottoNumber(45)
-                )
+                ),
+                LottoNumber(43)
             )
         )
 

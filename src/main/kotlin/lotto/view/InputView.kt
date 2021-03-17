@@ -21,6 +21,10 @@ class InputView {
             .map { LottoNumber(it.trim().toInt()) }
             .toSet()
 
-        return LottoWonNumber(lottoNumbers)
+        println("보너스 번호를 입력해 주세요")
+
+        val bonusNumber = LottoNumber(readLine()!!.toInt())
+
+        return LottoWonNumber(lottoNumbers, bonusNumber)
     }
 }
