@@ -13,7 +13,8 @@ fun main() {
 
     val winnerLottoNumber = InputView.inputWinnerNumber()
     val comp = LottoCompany()
-    comp.setWinnerNumber(winnerLottoNumber)
+    val bonusNumber = InputView.inputBonusNumber()
+    comp.setWinnerNumber(winnerLottoNumber, bonusNumber)
 
     val winners = comp.findWinners(lottos)
     OutputView.showWinningStatus(winners)
