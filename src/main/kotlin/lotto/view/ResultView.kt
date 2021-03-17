@@ -14,7 +14,7 @@ class ResultView(private val lottoCollection: LottoCollection) {
         val wonRank = Rank.getWonRank()
 
         wonRank.forEach {
-            println("${it.count}개 일치 (${it.amount}원)- ${matchByWonNumber.rankCount[it] ?: 0}")
+            println("${it.matchCondition} (${it.amount}원)- ${matchByWonNumber.rankCount[it] ?: 0}")
         }
     }
 
