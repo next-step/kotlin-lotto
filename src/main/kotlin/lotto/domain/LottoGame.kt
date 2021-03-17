@@ -1,9 +1,6 @@
 package lotto.domain
 
-import lotto.domain.LottoStore.Companion.LOTTO_COST
-
 class LottoGame(private var money: Money) {
-    private val lottoStore = LottoStore()
 
     fun purchaseManualLottoes(numberOfManual: Int, stringManualNumbers: List<List<String>>): Lottoes {
         checkEnoughMoney(numberOfManual)
@@ -11,13 +8,17 @@ class LottoGame(private var money: Money) {
         val manualNumbers = stringManualNumbers.map { strings ->
             convertStringToInt(strings)
         }
-        return lottoStore.purchaseManual(numberOfManual, manualNumbers)
+
+        val lottoes = manualNumbers.map { LottoTicket.generateManual(it) }
+        return Lottoes(lottoes)
     }
 
     fun purchaseAutoLottoes(): Lottoes {
         val quantity = (money.currentMoney / LOTTO_COST).toInt()
         money.spendAllMoney()
-        return lottoStore.purchaseAuto(quantity)
+
+        val lottoes = (1..quantity).map { LottoTicket.generateAuto() }
+        return Lottoes(lottoes)
     }
 
     private fun checkEnoughMoney(numberOfManual: Int) {
@@ -28,5 +29,9 @@ class LottoGame(private var money: Money) {
         return strings.map {
             it.toInt()
         }
+    }
+
+    companion object {
+        const val LOTTO_COST = 1000
     }
 }
