@@ -9,7 +9,7 @@ class RankTests {
     @Test
     fun `3개 맞으면 5천원 짜리 당첨이야`() {
         assertThat(Rank.getRankByCount(3))
-            .isEqualTo(Rank.FORTH)
+            .isEqualTo(Rank.FIFTH)
     }
 
     @Test
@@ -21,7 +21,7 @@ class RankTests {
     @Test
     fun `5개 맞으면 150만원 짜리 당첨이야`() {
         assertThat(Rank.getRankByCount(5))
-            .isEqualTo(Rank.SECOND)
+            .isEqualTo(Rank.THIRD)
     }
 
     @Test
