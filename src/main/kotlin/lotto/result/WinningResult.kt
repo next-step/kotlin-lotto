@@ -1,24 +1,24 @@
 package lotto.result
 
 class WinningResult(
-    private val winningStatistics: Map<PrizeRank, Int>
+    private val winningStatistics: Map<Rank, Int>
 ) {
 
     val totalPrize: Prize = winningStatistics.entries
         .map { it.key.prizeAmount * it.value }
         .reduce { left, right -> left + right }
+        .toPrize()
 
-    fun getPrize(prizeRank: PrizeRank): Int {
-        return winningStatistics[prizeRank] ?: 0
+    fun findRankCount(rank: Rank): Int {
+        return winningStatistics[rank] ?: 0
     }
 
     companion object {
-        fun aggregate(prizeRanks: List<PrizeRank>): WinningResult {
+        fun aggregate(ranks: List<Rank>): WinningResult {
             return WinningResult(
-                winningStatistics = prizeRanks.groupingBy { it }
+                winningStatistics = ranks.groupingBy { it }
                     .eachCount()
             )
         }
     }
 }
-

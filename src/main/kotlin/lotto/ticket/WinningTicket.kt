@@ -1,9 +1,17 @@
 package lotto.ticket
 
 class WinningTicket(
-    private val lottoNumbers: Set<LottoNumber>
+    policy: LottoDrawPolicy
 ) {
-    fun matchNumber(lottoNumber: LottoNumber):Boolean{
+    private val lottoNumbers: Set<LottoNumber> = policy.draw()
+
+    fun matchNumber(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.contains(lottoNumber)
+    }
+
+    companion object {
+        fun ofTxNumbers(txNumbers: String): WinningTicket {
+            return WinningTicket(ManualDrawPolicy(txNumbers))
+        }
     }
 }

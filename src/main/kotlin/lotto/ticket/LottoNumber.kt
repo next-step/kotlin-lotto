@@ -3,15 +3,13 @@ package lotto.ticket
 data class LottoNumber(private val number: Int) {
 
     companion object {
-        private const val LOTTO_NUMBER_UNDER_BOUND = 1
-        private const val LOTTO_NUMBER_UPPER_BOUND = 45
+        private const val MIN_NUMBER = 1
+        private const val MAX_NUMBER = 45
+        val LOTTO_NUMBER_BOX: Map<Int, LottoNumber> =
+            (MIN_NUMBER..MAX_NUMBER).map { it to LottoNumber(it) }.toMap()
+    }
 
-        fun ofNumber(number: Int): LottoNumber {
-            require(enableLottoNumber(number)) { "로또 번호는 1 ~ 45 사이의 값이어야 합니다. - $number" }
-            return LottoNumber(number)
-        }
-
-        private fun enableLottoNumber(number: Int) =
-            number < LOTTO_NUMBER_UNDER_BOUND || number > LOTTO_NUMBER_UPPER_BOUND
+    override fun toString(): String {
+        return "$number"
     }
 }

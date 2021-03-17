@@ -1,13 +1,22 @@
 package lotto.ticket
 
-import lotto.result.PrizeRank
+import lotto.result.Rank
 
 class LottoTicket(
-    private val lottoNumbers: Set<LottoNumber>
+    policy: LottoDrawPolicy
 ) {
+    val lottoNumbers: Set<LottoNumber> = policy.draw()
 
-    fun match(winningTicket: WinningTicket): PrizeRank {
+    fun match(winningTicket: WinningTicket): Rank {
         val matchCount = lottoNumbers.filter { winningTicket.matchNumber(it) }.size
-        return PrizeRank.ofMatchCount(matchCount)
+        return Rank.ofMatchCount(matchCount)
+    }
+
+    companion object {
+        private val AUTO_DRAW_POLICY: LottoDrawPolicy = AutoDrawPolicy()
+
+        fun ofAuto(): LottoTicket {
+            return LottoTicket(AUTO_DRAW_POLICY)
+        }
     }
 }
