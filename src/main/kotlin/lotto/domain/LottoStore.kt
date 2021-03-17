@@ -9,11 +9,7 @@ class LottoStore {
     }
 
     fun purchaseManual(numberOfManuals: Int, numbersOfTickets: List<List<Int>>): Lottoes {
-        val lottoes = arrayListOf<LottoTicket>()
-        for (numbers in numbersOfTickets) {
-            lottoes.add(LottoTicket.generateManual(numbers))
-        }
-
+        val lottoes = numbersOfTickets.map { LottoTicket.generateManual(it) }
         return Lottoes(lottoes)
     }
 
