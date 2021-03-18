@@ -11,6 +11,6 @@ data class LottoNumber(val value: Int) : Comparable<LottoNumber> {
     }
 
     override fun compareTo(other: LottoNumber): Int {
-        return value - other.value
+        return value.compareTo(other.value)
     }
 }
