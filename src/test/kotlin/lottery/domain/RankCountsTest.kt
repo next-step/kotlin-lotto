@@ -11,8 +11,8 @@ class RankCountsTest {
 
         assertAll(
             { assertThat(rankCounts.rankCounts[Rank.FIRST]).isEqualTo(2) },
-            { assertThat(rankCounts.rankCounts[Rank.SECOND]).isEqualTo(1) },
-            { assertThat(rankCounts.rankCounts[Rank.THIRD]).isEqualTo(1) }
+            { assertThat(rankCounts.rankCounts[Rank.THIRD]).isEqualTo(1) },
+            { assertThat(rankCounts.rankCounts[Rank.FOURTH]).isEqualTo(1) }
         )
     }
 
@@ -22,14 +22,14 @@ class RankCountsTest {
 
         val amount = rankCounts.calculateJackpots()
 
-        assertThat(amount).isEqualTo((Rank.FIRST.price * 2) + Rank.SECOND.price + Rank.THIRD.price)
+        assertThat(amount).isEqualTo((Rank.FIRST.price * 2) + Rank.THIRD.price + Rank.FOURTH.price)
     }
 
     private fun createRankCounts(): RankCounts {
         val rankCounts = RankCounts()
         val first = Rank.FIRST
-        val second = Rank.SECOND
-        val third = Rank.THIRD
+        val second = Rank.THIRD
+        val third = Rank.FOURTH
 
         rankCounts.addMatchCount(first)
         rankCounts.addMatchCount(first)

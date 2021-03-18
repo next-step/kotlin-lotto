@@ -20,8 +20,8 @@ class LotteryMatcherTest {
         val matchCounts = lotteryMatcher.match()
 
         org.junit.jupiter.api.assertAll(
+            { Assertions.assertThat(matchCounts.retrieve(Rank.FOURTH)).isEqualTo(1) },
             { Assertions.assertThat(matchCounts.retrieve(Rank.THIRD)).isEqualTo(1) },
-            { Assertions.assertThat(matchCounts.retrieve(Rank.SECOND)).isEqualTo(1) },
             { Assertions.assertThat(matchCounts.retrieve(Rank.FIRST)).isEqualTo(2) }
         )
     }

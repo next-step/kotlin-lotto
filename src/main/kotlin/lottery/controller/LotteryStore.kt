@@ -30,7 +30,7 @@ fun main() {
         LotteryMatcher(winnerLottery, lotteries)
     val rankCounts = lotteryMatcher.match()
 
-    printMatchNumbers(Rank.FOURTH.matchCount, Rank.FIRST.matchCount, rankCounts)
+    printMatchNumbers(Rank.FIFTH.matchCount, Rank.FIRST.matchCount, rankCounts)
 
     val profit = Profit.calculate(inputMoney, rankCounts.calculateJackpots())
     ResultView.printProfit(profit)
