@@ -9,11 +9,7 @@ enum class Rank(val matchCount: Int, val price: Int, val isBonus: Boolean) {
 
     companion object {
         fun isInTheRank(count: Int, isBonus: Boolean): Boolean {
-            return values().filter { it.matchCount == count }.any()
-        }
-
-        fun isInTheRank(count: Int): Boolean {
-            return values().filter { it.matchCount == count }.any()
+            return values().filter { it.matchCount == count && it.isBonus == isBonus }.any()
         }
 
         fun valueOf(matchCount: Int): Rank {
