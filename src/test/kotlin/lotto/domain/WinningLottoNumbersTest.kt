@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource
 internal class WinningLottoNumbersTest {
     @Test
     fun `당첨 번호 갯수와 번호 검증`() {
-        val winningLottoNumbers = WinningLottoNumbers.of("1, 2, 3, 4, 5, 6", 7)
+        val winningLottoNumbers = WinningLottoNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
 
         assertThat(winningLottoNumbers.lotto.numbers.size).isEqualTo(6)
         assertThat(winningLottoNumbers.lotto.numbers[0]).isEqualTo(LottoNumber.from(1))
@@ -28,7 +28,7 @@ internal class WinningLottoNumbersTest {
     )
     fun `중복 번호 검증`(stringWinningLottoNumbers: String, bonusNumber: Int) {
         assertThrows<IllegalArgumentException> {
-            WinningLottoNumbers.of(stringWinningLottoNumbers, bonusNumber)
+            WinningLottoNumbers.of(LottoNumberTokenizer.tokenize(stringWinningLottoNumbers), bonusNumber)
         }
     }
 
@@ -40,7 +40,7 @@ internal class WinningLottoNumbersTest {
     )
     fun `보너스볼과 당첨번호 중복 번호 검증`(stringWinningLottoNumbers: String, bonusNumber: Int) {
         assertThrows<IllegalArgumentException> {
-            WinningLottoNumbers.of(stringWinningLottoNumbers, bonusNumber)
+            WinningLottoNumbers.of(LottoNumberTokenizer.tokenize(stringWinningLottoNumbers), bonusNumber)
         }
     }
 }

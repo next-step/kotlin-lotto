@@ -4,12 +4,12 @@ class LottoTicket private constructor(
     val lotto: Lotto
 ) {
 
-    fun isBonusNumberMatch(bonusNumber: LottoNumber): Boolean {
-        return lotto.contains(bonusNumber)
+    fun isBonusNumberMatch(bonusLotto: LottoNumber): Boolean {
+        return lotto.contains(bonusLotto)
     }
 
-    override fun toString(): String {
-        return "$lotto"
+    fun count(lotto: Lotto): Int {
+        return this.lotto.count(lotto)
     }
 
     companion object {
