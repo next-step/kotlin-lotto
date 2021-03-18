@@ -1,6 +1,6 @@
 package domain
 
-class Money(val value: Int) {
+data class Money(val value: Int) {
     init {
         require(value > 0)
     }
