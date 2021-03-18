@@ -12,7 +12,7 @@ import lottery.view.ResultView.printMatchNumbers
 
 fun main() {
     InputView.printInputPrice()
-    val inputMoney = Reception.receiveMoney()
+    val inputMoney = Reception.receiveNumber()
 
     val factory = LotteryFactory(inputMoney)
     ResultView.printCountOfBuyLottery(factory.calculateLotteryCountByPrice())
@@ -28,7 +28,9 @@ fun main() {
 
     val lotteryMatcher =
         LotteryMatcher(winnerLottery, lotteries)
-    val rankCounts = lotteryMatcher.match()
+
+    val inputBonusBall = Reception.receiveNumber()
+    val rankCounts = lotteryMatcher.match(inputBonusBall)
 
     printMatchNumbers(Rank.FIFTH.matchCount, Rank.FIRST.matchCount, rankCounts)
 
