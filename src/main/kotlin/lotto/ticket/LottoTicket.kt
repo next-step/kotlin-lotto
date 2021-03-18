@@ -8,7 +8,12 @@ class LottoTicket(
     val lottoNumbers: Set<LottoNumber> = policy.draw()
 
     fun match(winningTicket: WinningTicket): Rank {
-        val matchCount = lottoNumbers.filter { winningTicket.matchNumber(it) }.size
+        val matchCount = lottoNumbers
+            .filter {
+                winningTicket.matchNumber(it)
+            }
+            .size
+
         return Rank.ofMatchCount(matchCount)
     }
 

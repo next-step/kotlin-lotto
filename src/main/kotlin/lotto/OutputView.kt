@@ -26,7 +26,7 @@ fun printResultStatic(request: PurchaseRequest, result: WinningResult) {
     println("당첨 통계")
     println("================")
     printStatics(result)
-    println("총 수익률은 ${result.totalPrize.calculateYield(request.amount)}")
+    println("총 수익률은 ${result.totalPrize.calculateProfit(request.amount)}")
 }
 
 private fun printStatics(result: WinningResult) {

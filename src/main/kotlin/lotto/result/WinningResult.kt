@@ -1,6 +1,6 @@
 package lotto.result
 
-class WinningResult(
+class WinningResult private constructor(
     private val winningStatistics: Map<Rank, Int>
 ) {
 

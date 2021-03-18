@@ -4,7 +4,7 @@ import kotlin.math.floor
 
 data class Prize(private val prizeAmount: Long) {
 
-    fun calculateYield(investment: Long): Double {
+    fun calculateProfit(investment: Long): Double {
         val yield = prizeAmount.toDouble() / investment
 
         // 소수점 절삭
