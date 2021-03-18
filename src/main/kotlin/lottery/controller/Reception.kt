@@ -4,13 +4,19 @@ object Reception {
     private const val LOTTERY_NUMBER_DELIMITERS = ","
 
     fun receiveWinnerLottery(): List<Int> {
-        val splitedNumbers = readLine()!!.split(LOTTERY_NUMBER_DELIMITERS)
+        val splitedNumbers = readLineNotNull().split(LOTTERY_NUMBER_DELIMITERS)
         return splitedNumbers.map { it.toIntOrException() }
     }
 
     fun receiveMoney(): Int {
-        val readNumber = readLine()!!
+        val readNumber = readLineNotNull()
         return readNumber.toIntOrException()
+    }
+
+    private fun readLineNotNull():String {
+        val readLine = readLine()
+        require(readLine != null) { "입력값이 존재하지 않습니다." }
+        return readLine
     }
 
     private fun String.toIntOrException() =
