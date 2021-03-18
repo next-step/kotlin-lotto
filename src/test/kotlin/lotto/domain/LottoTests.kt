@@ -34,7 +34,7 @@ class LottoTests {
         val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
         val rank: Rank = lotto.matchByWonNumber(
-            LottoWonNumber(
+            LottoWonNumbers(
                 setOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -90,7 +90,7 @@ class LottoTests {
         val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
         val rank: Rank = lotto.matchByWonNumber(
-            LottoWonNumber(
+            LottoWonNumbers(
                 setOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -103,7 +103,7 @@ class LottoTests {
             )
         )
 
-        val wonNumber: LottoWonNumber = LottoWonNumber(
+        val wonNumbers: LottoWonNumbers = LottoWonNumbers(
             setOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -115,7 +115,7 @@ class LottoTests {
             LottoNumber(6)
         )
 
-        assertThat(lotto.matchByWonNumber(wonNumber))
+        assertThat(lotto.matchByWonNumber(wonNumbers))
             .isEqualTo(Rank.SECOND)
     }
 

@@ -12,10 +12,10 @@ class LottoCollection(private val _lotto: MutableList<Lotto>) {
         }
     }
 
-    fun matchByWonNumber(wonNumber: LottoWonNumber): LottoRankCollection {
+    fun matchByWonNumber(wonNumbers: LottoWonNumbers): LottoRankCollection {
         val rankCount: Map<Rank, Int> = _lotto
             .map {
-                it.matchByWonNumber(wonNumber)
+                it.matchByWonNumber(wonNumbers)
             }
             .groupingBy { it }
             .eachCount()

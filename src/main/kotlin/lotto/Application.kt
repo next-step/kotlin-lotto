@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.LottoCollection
-import lotto.domain.LottoWonNumber
+import lotto.domain.LottoWonNumbers
 import lotto.view.Input
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -16,8 +16,8 @@ fun main() {
 
     resultView.printLotto()
 
-    val wonNumber: LottoWonNumber = inputView.inputWonNumber()
+    val wonNumbers: LottoWonNumbers = inputView.inputWonNumber()
 
-    resultView.printWon(wonNumber)
-    resultView.printRate(wonNumber)
+    resultView.printWon(wonNumbers)
+    resultView.printRate(wonNumbers)
 }

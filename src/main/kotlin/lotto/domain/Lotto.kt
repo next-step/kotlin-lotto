@@ -14,9 +14,9 @@ class Lotto(
         }
     }
 
-    fun matchByWonNumber(wonNumber: LottoWonNumber): Rank {
-        val wonNumberCount: Int = numbers.count { wonNumber.lottoNumber.contains(it) }
-        val matchBonus: Boolean = numbers.contains(wonNumber.bonusNUmber)
+    fun matchByWonNumber(wonNumbers: LottoWonNumbers): Rank {
+        val wonNumberCount: Int = numbers.count { wonNumbers.lottoNumber.contains(it) }
+        val matchBonus: Boolean = numbers.contains(wonNumbers.bonusNUmber)
 
         return Rank.getRankByCount(wonNumberCount, matchBonus)
     }
