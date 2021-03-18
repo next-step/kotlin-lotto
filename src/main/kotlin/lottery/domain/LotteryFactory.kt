@@ -9,7 +9,7 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
 
     fun buy(): Lotteries {
         val count = calculateLotteryCountByPrice()
-        return Lotteries.of(count)
+        return Lotteries.of(count, RandomNumbersGenerator)
     }
 
     fun calculateLotteryCountByPrice(): Int {
