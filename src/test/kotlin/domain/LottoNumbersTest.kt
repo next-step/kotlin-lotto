@@ -21,4 +21,11 @@ internal class LottoNumbersTest {
         assertThatIllegalArgumentException()
             .isThrownBy { LottoNumbers((1..lottoNumberCount).map { LottoNumber(it) }) }
     }
+
+    @Test
+    fun `로또숫자열 내의 로또숫자는 서로 같을 수 없다`() {
+        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(1, 1, 1, 1, 1, 1) }
+        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(1, 2, 3, 4, 5, 5) }
+        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(45, 45, 1, 5, 1, 6) }
+    }
 }

@@ -2,6 +2,7 @@ package domain
 
 class LottoNumbers(val numbers: List<LottoNumber>) {
     init {
+        require(numbers.toSet().size == SIZE)
         require(numbers.size == SIZE)
     }
 
