@@ -5,7 +5,7 @@ class LotteryMatcher(private val winnerLottery: WinnerLottery, private val creat
         val rankCounts = RankCounts()
 
         createdLotteries.map {
-            val count = matchCount(it.lotteryNumbers)
+            val count = winnerLottery.matchCount(it.lotteryNumbers)
 
             if (Rank.isInTheRank(count)) {
                 rankCounts.addMatchCount(Rank.valueOf(count))
@@ -14,10 +14,4 @@ class LotteryMatcher(private val winnerLottery: WinnerLottery, private val creat
 
         return rankCounts
     }
-
-    private fun matchCount(lotteryNumbers: LotteryNumbers): Int {
-        return lotteryNumbers.numbers.filter { retrieveLotteryNumbers().contains(it) }.count()
-    }
-
-    private fun retrieveLotteryNumbers() = winnerLottery.retrieveLotteryNumbers()
 }
