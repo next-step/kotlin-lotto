@@ -13,7 +13,10 @@ internal class WinningCategoryTest {
                 "FIVE_CORRECT",
                 "SIX_CORRECT"
             )
+    }
 
+    @Test
+    fun `각 당첨항목마다 일치하는 개수를 가지고 있다`() {
         assertThat(WinningCategory.THREE_CORRECT.numberOfMatched).isEqualTo(3)
         assertThat(WinningCategory.FOUR_CORRECT.numberOfMatched).isEqualTo(4)
         assertThat(WinningCategory.FIVE_CORRECT.numberOfMatched).isEqualTo(5)
