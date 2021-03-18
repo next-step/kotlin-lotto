@@ -3,41 +3,37 @@ package lotto.view
 import lotto.domain.LottoGame
 import lotto.domain.LottoNumbers
 import lotto.domain.Ranking
-import java.io.PrintWriter
 
-interface Output {
-    val writer: PrintWriter
-    fun write()
+object Output {
 
-    class PickNumber(
-        private val lottoNumbers: List<LottoNumbers>,
-        override val writer: PrintWriter = PrintWriter(System.out, true)
-    ) : Output {
-        override fun write() {
-            lottoNumbers.map { it.joinToString(prefix = "[", postfix = "]") }
-                .forEach { writer.write(it) }
-        }
+    fun printPickNumber(manualPickCount: Int, lottoNumbers: List<LottoNumbers>) {
+        println("\n수동으로 ${manualPickCount}장, 자동으로 ${lottoNumbers.size - manualPickCount}개를 구매했습니다.")
+        lottoNumbers.map { it.joinToString(prefix = "[", postfix = "]") }
+            .forEach { println(it) }
     }
 
-    class LottoResult(
-        private val lottoResult: LottoGame.Result,
-        override val writer: PrintWriter = PrintWriter(System.out, true)
-    ) : Output {
-        override fun write() {
-            writer.println(
-                """
+    fun printLottoResult(lottoResult: LottoGame.Result) {
+        println(
+            """
             당첨 통계
             ---------
-                """.trimIndent()
-            )
-            val entries = lottoResult.entries()
-            enumValues<Ranking.Rank>()
-                .filterNot { it == Ranking.Rank.MISS }
-                .forEach { rank ->
-                    writer.println("${rank.match.count}개 일치 (${rank.amount}원)- ${entries[rank] ?: 0}개")
-                }
+            """.trimIndent()
+        )
+        val entries = lottoResult.entries()
+        enumValues<Ranking.Rank>()
+            .filterNot { it == Ranking.Rank.MISS }
+            .forEach { rank ->
+                println(rankMessage(rank, entries[rank] ?: 0))
+            }
 
-            writer.println("총 수익률은 ${lottoResult.profit()}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        println("총 수익률은 ${lottoResult.profit()}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    }
+
+    private fun rankMessage(rank: Ranking.Rank, count: Int): String {
+        var resultMessage = "${rank.match.count}개 일치"
+        if (rank == Ranking.Rank.SECOND) {
+            resultMessage += ", 보너스 볼 일치"
         }
+        return resultMessage + " (${rank.amount}원)- ${count}개"
     }
 }
