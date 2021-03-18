@@ -23,5 +23,4 @@ class WinnerLotteryTest {
 
         assertThat(matchCount).isEqualTo(2)
     }
-
 }
