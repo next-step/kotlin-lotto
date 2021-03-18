@@ -16,6 +16,8 @@ class LotteryMatcher(private val winnerLottery: WinnerLottery, private val creat
     }
 
     private fun matchCount(lotteryNumbers: LotteryNumbers): Int {
-        return lotteryNumbers.numbers.filter { winnerLottery.lotteryNumbers.numbers.contains(it) }.count()
+        return lotteryNumbers.numbers.filter { retrieveLotteryNumbers().contains(it) }.count()
     }
+
+    private fun retrieveLotteryNumbers() = winnerLottery.retrieveLotteryNumbers()
 }
