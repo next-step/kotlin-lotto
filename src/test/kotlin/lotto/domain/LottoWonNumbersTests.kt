@@ -28,6 +28,22 @@ class LottoWonNumbersTests {
     }
 
     @Test
+    fun `6개 미만이면 문제가 된다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoWonNumbers(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5)
+                ),
+                LottoNumber(10)
+            )
+        }
+    }
+
+    @Test
     fun `기존 로또 번호와 보너스 번호는 겹치면 안된다`() {
         assertThrows<IllegalArgumentException> {
             LottoWonNumbers(setOf(1, 2, 3, 4, 5, 6), 6)
