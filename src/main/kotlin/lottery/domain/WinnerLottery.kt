@@ -1,7 +1,9 @@
 package lottery.domain
 
 class WinnerLottery(numbers: List<Int>) {
-    val lotteryNumbers: LotteryNumbers = LotteryNumbers(numbers)
+    val winnerLottery: LotteryNumbers = LotteryNumbers(numbers)
 
-    fun retrieveLotteryNumbers() = lotteryNumbers.numbers
+    fun matchCount(lotteryNumbers: LotteryNumbers): Int {
+        return lotteryNumbers.filter { winnerLottery.contains(it) }.count()
+    }
 }
