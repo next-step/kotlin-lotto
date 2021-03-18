@@ -22,4 +22,9 @@ class RankTest {
     fun `당첨번호와 5개가 일치하고 보너스볼이 있으면 당첨된 것이다`() {
         assertThat(Rank.isInTheRank(5, true)).isTrue()
     }
+
+    @Test
+    fun `당첨번호와 5개가 일치하고 보너스볼도 일치하면 2등이다`() {
+        assertThat(Rank.valueOf(5, true)).isEqualTo(Rank.SECOND)
+    }
 }
