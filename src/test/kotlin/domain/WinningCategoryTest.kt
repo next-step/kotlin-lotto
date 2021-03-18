@@ -27,4 +27,15 @@ internal class WinningCategoryTest {
     fun `각 당첨항목마다 일치하는 개수를 가지고 있다`(category: WinningCategory, numberOfMatched: Int) {
         assertThat(category.numberOfMatched).isEqualTo(numberOfMatched)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "THREE_CORRECT, 5000",
+        "FOUR_CORRECT, 50000",
+        "FIVE_CORRECT, 1500000",
+        "SIX_CORRECT, 2000000000"
+    )
+    fun `당첨항목마다 당첨금은 아래와 같다`(category: WinningCategory, prize: Int) {
+        assertThat(category.prize).isEqualTo(Money(prize))
+    }
 }
