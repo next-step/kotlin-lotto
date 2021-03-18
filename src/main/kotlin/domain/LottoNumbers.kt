@@ -3,6 +3,10 @@ package domain
 import java.util.SortedSet
 
 class LottoNumbers(val numbers: SortedSet<LottoNumber>) {
+    fun countIntersection(other: LottoNumbers): Int {
+        return numbers.intersect(other.numbers).size
+    }
+
     init {
         require(numbers.size == SIZE)
     }

@@ -39,4 +39,17 @@ internal class LottoNumbersTest {
         assertThat(LottoNumbers(9, 1, 43, 2, 8, 10).numbers)
             .containsExactlyElementsOf(listOf(1, 2, 8, 9, 10, 43).map { LottoNumber(it) })
     }
+
+    @Test
+    fun `다른 로또숫자열과 비교하면, 일치하는 로또숫자의 개수를 반환한다`() {
+        val a = LottoNumbers(1, 2, 3, 4, 5, 6)
+        val b = LottoNumbers(3, 4, 5, 6, 7, 8)
+        assertThat(a.countIntersection(b)).isEqualTo(4)
+        val c = LottoNumbers(1, 2, 3, 4, 5, 6)
+        val d = LottoNumbers(40, 41, 42, 43, 44, 45)
+        assertThat(c.countIntersection(d)).isEqualTo(0)
+        val e = LottoNumbers(1, 9, 26, 28, 30, 41)
+        val f = LottoNumbers(1, 9, 26, 28, 30, 41)
+        assertThat(e.countIntersection(f)).isEqualTo(6)
+    }
 }
