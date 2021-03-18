@@ -7,7 +7,7 @@ import java.lang.IllegalArgumentException
 
 class LottoWonNumbersTests {
     @Test
-    fun `6개 미만이면 에러가 발생한다`() {
+    fun `6개 이지만, 중첩되면은 안된다`() {
         assertThrows<IllegalArgumentException> {
             LottoWonNumbers(
                 setOf(
@@ -34,6 +34,22 @@ class LottoWonNumbersTests {
                     LottoNumber(4),
                     LottoNumber(5),
                     LottoNumber(6)
+                ),
+                LottoNumber(10)
+            )
+        }
+    }
+
+    @Test
+    fun `6개 미만이면 문제가 된다`() {
+        assertThrows<IllegalArgumentException> {
+            LottoWonNumbers(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5)
                 ),
                 LottoNumber(10)
             )
