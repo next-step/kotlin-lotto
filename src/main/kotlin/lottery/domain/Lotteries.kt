@@ -8,16 +8,17 @@ class Lotteries(val lotteries: List<Lottery>) {
         private const val LOTTERY_SIZE = 6
         private const val MIN_LOTTERY_COUNT = 0
 
-        fun of(count: Int): Lotteries {
+        fun of(count: Int, generator: NumbersGenerator): Lotteries {
             require(count > MIN_LOTTERY_COUNT) { "입력한 로또의 개수가 올바르지 않습니다." }
 
             return Lotteries(
                 (START_LOTTERY_COUNT..count).map {
-                    Lottery(LotteryNumbers(generateRandoms()))
+                    Lottery(LotteryNumbers(generateRandoms(generator)))
                 }
             )
         }
 
-        private fun generateRandoms() = RandomNumbers.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_SIZE)
+        private fun generateRandoms(generator: NumbersGenerator): List<Int>
+                = generator.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_SIZE)
     }
 }
