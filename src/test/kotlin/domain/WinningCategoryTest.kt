@@ -2,6 +2,8 @@ package domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 internal class WinningCategoryTest {
     @Test
@@ -15,11 +17,14 @@ internal class WinningCategoryTest {
             )
     }
 
-    @Test
-    fun `각 당첨항목마다 일치하는 개수를 가지고 있다`() {
-        assertThat(WinningCategory.THREE_CORRECT.numberOfMatched).isEqualTo(3)
-        assertThat(WinningCategory.FOUR_CORRECT.numberOfMatched).isEqualTo(4)
-        assertThat(WinningCategory.FIVE_CORRECT.numberOfMatched).isEqualTo(5)
-        assertThat(WinningCategory.SIX_CORRECT.numberOfMatched).isEqualTo(6)
+    @ParameterizedTest
+    @CsvSource(
+        "THREE_CORRECT, 3",
+        "FOUR_CORRECT, 4",
+        "FIVE_CORRECT, 5",
+        "SIX_CORRECT, 6"
+    )
+    fun `각 당첨항목마다 일치하는 개수를 가지고 있다`(category: WinningCategory, numberOfMatched: Int) {
+        assertThat(category.numberOfMatched).isEqualTo(numberOfMatched)
     }
 }
