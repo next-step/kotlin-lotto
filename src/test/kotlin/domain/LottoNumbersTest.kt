@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoNumbersTest {
@@ -22,10 +23,13 @@ internal class LottoNumbersTest {
             .isThrownBy { LottoNumbers((1..lottoNumberCount).map { LottoNumber(it) }) }
     }
 
-    @Test
-    fun `로또숫자열 내의 로또숫자는 서로 같을 수 없다`() {
-        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(1, 1, 1, 1, 1, 1) }
-        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(1, 2, 3, 4, 5, 5) }
-        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(45, 45, 1, 5, 1, 6) }
+    @ParameterizedTest
+    @CsvSource(
+        "1, 1, 1, 1, 1, 1",
+        "1, 2, 3, 4, 5, 5",
+        "45, 45, 1, 5, 1, 6"
+    )
+    fun `로또숫자열 내의 로또숫자는 서로 같을 수 없다`(n1: Int, n2: Int, n3: Int, n4: Int, n5: Int, n6: Int) {
+        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(n1, n2, n3, n4, n5, n6) }
     }
 }
