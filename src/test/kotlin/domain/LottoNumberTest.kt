@@ -28,4 +28,10 @@ internal class LottoNumberTest {
     fun `로또숫자는 서로 다른 객체라도, 값이 같으면 동일하다`() {
         assertThat(LottoNumber(1)).isEqualTo(LottoNumber(1))
     }
+
+    @Test
+    fun `로또숫자는 서로 대소 비교를 할 수 있다`() {
+        assertThat(LottoNumber(1)).isLessThan(LottoNumber(2))
+        assertThat(LottoNumber(3)).isGreaterThan(LottoNumber(2))
+    }
 }
