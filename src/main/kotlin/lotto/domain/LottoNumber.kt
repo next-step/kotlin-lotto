@@ -12,9 +12,9 @@ class LottoNumber private constructor(private val number: Int) {
     companion object {
         const val MINIMUM_LOTTO_NUMBER = 1
         const val MAXIMUM_LOTTO_NUMBER = 45
-        private val cache: Map<Int, LottoNumber> = (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).map {
-            Pair(it, LottoNumber(it))
-        }.toMap()
+        private val cache: Map<Int, LottoNumber> = (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).associateWith {
+            LottoNumber(it)
+        }
 
         fun from(number: Int): LottoNumber {
             return cache[number] ?: LottoNumber(number)
