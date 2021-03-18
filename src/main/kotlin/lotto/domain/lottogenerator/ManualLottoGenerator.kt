@@ -6,10 +6,9 @@ import lotto.domain.LottoNumber
 class ManualLottoGenerator(private val elements: List<Int>) : LottoGenerator {
 
     override fun generate(): Lotto {
-        return Lotto(
-            elements
-                .map { LottoNumber.of(it) }
-                .toSet()
-        )
+        val lottoNumbers = elements
+            .map { LottoNumber.of(it) }
+            .toSet()
+        return Lotto(lottoNumbers)
     }
 }
