@@ -8,9 +8,8 @@ object Reception {
         return splitedNumbers.map { it.toIntOrException() }
     }
 
-    fun receiveMoney(): Int {
-        val readNumber = readLineNotNull()
-        return readNumber.toIntOrException()
+    fun receiveNumber(): Int {
+        return readLineNotNull().toIntOrException()
     }
 
     private fun readLineNotNull():String {
