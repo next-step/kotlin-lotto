@@ -3,6 +3,8 @@ package domain
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class MoneyTest {
     @Test
@@ -10,10 +12,9 @@ internal class MoneyTest {
         assertDoesNotThrow { Money(1) }
     }
 
-    @Test
-    fun `돈은 0원 이하가 될 수 없다`() {
-        assertThatIllegalArgumentException().isThrownBy { Money(0) }
-        assertThatIllegalArgumentException().isThrownBy { Money(-1) }
-        assertThatIllegalArgumentException().isThrownBy { Money(Int.MIN_VALUE) }
+    @ParameterizedTest
+    @ValueSource(ints = [0, -1, Int.MIN_VALUE])
+    fun `돈은 0원 이하가 될 수 없다`(value: Int) {
+        assertThatIllegalArgumentException().isThrownBy { Money(value) }
     }
 }
