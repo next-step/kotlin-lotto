@@ -1,6 +1,6 @@
 package lottery.domain
 
-class LotteryNumbers(numbers: List<Int>) {
+class LotteryNumbers(numbers: List<Int>) : List<Int> by numbers {
     val numbers: HashSet<LotteryNumber> = numbers.map {
         LotteryNumber.from(it)
     }.toHashSet()
