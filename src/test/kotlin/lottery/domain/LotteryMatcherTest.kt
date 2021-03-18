@@ -2,6 +2,7 @@ package lottery.domain
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class LotteryMatcherTest {
     @Test
@@ -17,9 +18,9 @@ class LotteryMatcherTest {
 
         val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
 
-        val matchCounts = lotteryMatcher.match()
+        val matchCounts = lotteryMatcher.match(10)
 
-        org.junit.jupiter.api.assertAll(
+        assertAll(
             { Assertions.assertThat(matchCounts.retrieve(Rank.FOURTH)).isEqualTo(1) },
             { Assertions.assertThat(matchCounts.retrieve(Rank.THIRD)).isEqualTo(1) },
             { Assertions.assertThat(matchCounts.retrieve(Rank.FIRST)).isEqualTo(2) }
