@@ -11,6 +11,10 @@ internal class LottoNumbersTest {
             LottoNumbers(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
             LottoNumbers(1, 2, 3, 4, 5, 6)
         }
+    }
+
+    @Test
+    fun `로또숫자열은 숫자 6개 이외로는 생성할 수 없다`() {
         assertThatIllegalArgumentException().isThrownBy { LottoNumbers(listOf(LottoNumber(1))) }
         assertThatIllegalArgumentException().isThrownBy { LottoNumbers(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6), LottoNumber(7))) }
     }
