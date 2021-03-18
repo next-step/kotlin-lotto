@@ -1,9 +1,8 @@
 package lotto.domain
 
-class Lotto constructor(
+class Lotto(
     val numbers: List<LottoNumber>
 ) {
-
     init {
         require(numbers.size == LOTTO_NUMBERS_SIZE) {
             "로또 번호는 6개여야 합니다."
@@ -15,13 +14,9 @@ class Lotto constructor(
     }
 
     fun count(lotto: Lotto): Int {
-        return this.numbers.filter {
+        return this.numbers.count {
             lotto.numbers.contains(it)
-        }.size
-    }
-
-    override fun toString(): String {
-        return "[${numbers.joinToString(", ")}]"
+        }
     }
 
     companion object {
