@@ -3,6 +3,8 @@ package domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 internal class LottoTest {
     @Test
@@ -18,15 +20,25 @@ internal class LottoTest {
         }
     }
 
-    @Test
-    fun `다른 로또숫자열을 받아, 자신의 로또숫자열과 일치하는 수가 몇 개인지 반환한다`() {
+    @ParameterizedTest
+    @CsvSource(
+        "'1:2:3:4:5:6', 6",
+        "'2:3:4:5:6:7', 5",
+        "'3:4:5:6:7:8', 4",
+        "'4:5:6:7:8:9', 3",
+        "'5:6:7:8:9:10', 2",
+        "'6:7:8:9:10:11', 1",
+        "'7:8:9:10:11:12', 0"
+    )
+    fun `다른 로또숫자열을 받아, 자신의 로또숫자열과 일치하는 수가 몇 개인지 반환한다`(numbers: String, numberOfMatched: Int) {
         val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
-        assertThat(Lotto(1, 2, 3, 4, 5, 6).countMatchedBy(winningNumbers)).isEqualTo(6)
-        assertThat(Lotto(2, 3, 4, 5, 6, 7).countMatchedBy(winningNumbers)).isEqualTo(5)
-        assertThat(Lotto(3, 4, 5, 6, 7, 8).countMatchedBy(winningNumbers)).isEqualTo(4)
-        assertThat(Lotto(4, 5, 6, 7, 8, 9).countMatchedBy(winningNumbers)).isEqualTo(3)
-        assertThat(Lotto(5, 6, 7, 8, 9, 10).countMatchedBy(winningNumbers)).isEqualTo(2)
-        assertThat(Lotto(6, 7, 8, 9, 10, 11).countMatchedBy(winningNumbers)).isEqualTo(1)
-        assertThat(Lotto(7, 8, 9, 10, 11, 12).countMatchedBy(winningNumbers)).isEqualTo(0)
+        val lotto = parseLotto(numbers)
+        assertThat(lotto.countMatchedBy(winningNumbers)).isEqualTo(numberOfMatched)
+    }
+
+    private fun parseLotto(numbers: String): Lotto {
+        return numbers.split(":")
+            .map { it.toInt() }
+            .let { Lotto(it) }
     }
 }
