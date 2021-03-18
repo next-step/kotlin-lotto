@@ -1,5 +1,6 @@
 package domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -31,5 +32,11 @@ internal class LottoNumbersTest {
     )
     fun `로또숫자열 내의 로또숫자는 서로 같을 수 없다`(n1: Int, n2: Int, n3: Int, n4: Int, n5: Int, n6: Int) {
         assertThatIllegalArgumentException().isThrownBy { LottoNumbers(n1, n2, n3, n4, n5, n6) }
+    }
+
+    @Test
+    fun `로또숫자열 내의 로또숫자는 생성 시 순서와 관계없이 정렬되어 있다`() {
+        assertThat(LottoNumbers(9, 1, 43, 2, 8, 10).numbers)
+            .containsExactlyElementsOf(listOf(1, 2, 8, 9, 10, 43).map { LottoNumber(it) })
     }
 }
