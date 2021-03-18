@@ -1,6 +1,6 @@
 package domain
 
-class LottoNumber(val value: Int) {
+data class LottoNumber(val value: Int) {
     init {
         require(value in MIN..MAX)
     }

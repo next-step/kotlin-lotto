@@ -1,5 +1,6 @@
 package domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -21,5 +22,10 @@ internal class LottoNumberTest {
     @ValueSource(ints = [0, -1, 46, 47])
     fun `로또숫자의 범위 이외의 수로 생성할 수 없다`(number: Int) {
         assertThatIllegalArgumentException().isThrownBy { LottoNumber(number) }
+    }
+
+    @Test
+    fun `로또숫자는 서로 다른 객체라도, 값이 같으면 동일하다`() {
+        assertThat(LottoNumber(1)).isEqualTo(LottoNumber(1))
     }
 }
