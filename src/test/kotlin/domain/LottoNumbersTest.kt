@@ -40,16 +40,22 @@ internal class LottoNumbersTest {
             .containsExactlyElementsOf(listOf(1, 2, 8, 9, 10, 43).map { LottoNumber(it) })
     }
 
-    @Test
-    fun `다른 로또숫자열과 비교하면, 일치하는 로또숫자의 개수를 반환한다`() {
-        val a = LottoNumbers(1, 2, 3, 4, 5, 6)
-        val b = LottoNumbers(3, 4, 5, 6, 7, 8)
-        assertThat(a.countIntersection(b)).isEqualTo(4)
-        val c = LottoNumbers(1, 2, 3, 4, 5, 6)
-        val d = LottoNumbers(40, 41, 42, 43, 44, 45)
-        assertThat(c.countIntersection(d)).isEqualTo(0)
-        val e = LottoNumbers(1, 9, 26, 28, 30, 41)
-        val f = LottoNumbers(1, 9, 26, 28, 30, 41)
-        assertThat(e.countIntersection(f)).isEqualTo(6)
+    @ParameterizedTest
+    @CsvSource(
+        "'1:2:3:4:5:6','3:4:5:6:7:8',4",
+        "'1:2:3:4:5:6','40:41:42:43:44:45',0",
+        "'1:9:26:28:30:41','1:9:26:28:30:41',6"
+    )
+    fun `다른 로또숫자열과 비교하면, 일치하는 로또숫자의 개수를 반환한다`(someNumbers: String, otherNumbers: String, count: Int) {
+        val some = parseLottoNumbers(someNumbers)
+        val other = parseLottoNumbers(otherNumbers)
+        assertThat(some.countIntersection(other)).isEqualTo(count)
+    }
+
+    private fun parseLottoNumbers(someNumbers: String): LottoNumbers {
+        return someNumbers.split(":")
+            .map { it.toInt() }
+            .map { LottoNumber(it) }
+            .let { LottoNumbers(it) }
     }
 }
