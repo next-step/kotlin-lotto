@@ -12,7 +12,7 @@ internal class LottosMachineTest {
     private val manualLottoGenerator2 = ManualLottoGenerator(listOf(7, 8, 9, 10, 11, 12))
 
     @Test
-    fun `입력 금액보다 수동 로또 구매 금액이 더 큰 경우 예외 처리`() {
+    fun `입력 금액보다 수동 로또 구매 금액이 더 큰 경우 객체 생성이 불가능하다`() {
         val money = Money(1000)
         val manualLottoGenerators = listOf(
             manualLottoGenerator1,
@@ -22,7 +22,7 @@ internal class LottosMachineTest {
     }
 
     @Test
-    fun `입력 금액과 수동 로또 구매 금액이 같은 경우 예외 처리 하지 않는다`() {
+    fun `입력 금액과 수동 로또 구매 금액이 같은 경우 객체 생성이 가능하다`() {
         val money = Money(2000)
         val manualLottoGenerators = listOf(
             manualLottoGenerator1,

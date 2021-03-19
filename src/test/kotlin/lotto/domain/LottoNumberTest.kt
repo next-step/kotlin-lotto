@@ -15,7 +15,7 @@ internal class LottoNumberTest {
 
     @ParameterizedTest(name = "{0}일 경우")
     @ValueSource(ints = [0, 46])
-    fun `로또 넘버는 1~45 사이의 값을 가진다 예외 처리`(value: Int) {
+    fun `로또 넘버는 1~45 사이의 값을 가진다 1~45가 아닌경우 생성 불가능하다`(value: Int) {
         assertThrows<IndexOutOfBoundsException> { LottoNumber.of(value) }
     }
 }

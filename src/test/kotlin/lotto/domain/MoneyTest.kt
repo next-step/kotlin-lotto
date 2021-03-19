@@ -13,7 +13,7 @@ internal class MoneyTest {
     }
 
     @Test
-    fun `money는 1000원 단위만 존재한다 예외`() {
+    fun `money는 1000원 단위만 존재한다 1000원 단위가 아니면 객체 생성이 불가능`() {
         assertThrows<IllegalArgumentException> { Money(1001) }
     }
 
