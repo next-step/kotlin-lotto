@@ -4,45 +4,43 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.CsvSource
 
 internal class WinningLottoNumbersTest {
     @Test
     fun `당첨 번호 갯수와 번호 검증`() {
-        val winningLottoNumbers = WinningLottoNumbers.from("1, 2, 3, 4, 5, 6")
+        val winningLottoNumbers = WinningLottoNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
 
-        assertThat(winningLottoNumbers.lottoNumbers.size).isEqualTo(6)
-        assertThat(winningLottoNumbers.lottoNumbers[0]).isEqualTo(LottoNumber.from(1))
-        assertThat(winningLottoNumbers.lottoNumbers[1]).isEqualTo(LottoNumber.from(2))
-        assertThat(winningLottoNumbers.lottoNumbers[2]).isEqualTo(LottoNumber.from(3))
-        assertThat(winningLottoNumbers.lottoNumbers[3]).isEqualTo(LottoNumber.from(4))
-        assertThat(winningLottoNumbers.lottoNumbers[4]).isEqualTo(LottoNumber.from(5))
-        assertThat(winningLottoNumbers.lottoNumbers[5]).isEqualTo(LottoNumber.from(6))
+        assertThat(winningLottoNumbers.lotto.numbers.size).isEqualTo(6)
+        assertThat(winningLottoNumbers.lotto.numbers[0]).isEqualTo(LottoNumber.from(1))
+        assertThat(winningLottoNumbers.lotto.numbers[1]).isEqualTo(LottoNumber.from(2))
+        assertThat(winningLottoNumbers.lotto.numbers[2]).isEqualTo(LottoNumber.from(3))
+        assertThat(winningLottoNumbers.lotto.numbers[3]).isEqualTo(LottoNumber.from(4))
+        assertThat(winningLottoNumbers.lotto.numbers[4]).isEqualTo(LottoNumber.from(5))
+        assertThat(winningLottoNumbers.lotto.numbers[5]).isEqualTo(LottoNumber.from(6))
     }
 
     @ParameterizedTest
-    @ValueSource(
-        strings = [
-            "1, 1, 2, 3, 4, 5",
-            "1, 1, 1, 1, 1, 1",
-            "45, 44, 43, 20, 20, 5"
-        ]
+    @CsvSource(
+        "'1, 1, 2, 3, 4, 5', 6",
+        "'1, 1, 1, 1, 1, 1', 2",
+        "'45, 44, 43, 20, 20, 5', 4"
     )
-    fun `중복 번호 검증`(stringWinningLottoNumbers: String) {
+    fun `중복 번호 검증`(stringWinningLottoNumbers: String, bonusNumber: Int) {
         assertThrows<IllegalArgumentException> {
-            WinningLottoNumbers.from(stringWinningLottoNumbers)
+            WinningLottoNumbers.of(LottoNumberTokenizer.tokenize(stringWinningLottoNumbers), bonusNumber)
         }
     }
 
-    @Test
-    fun `번호를 가지고 있는지 검증`() {
-        val winningLottoNumbers = WinningLottoNumbers.from("1, 2, 3, 4, 5, 6")
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(1))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(2))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(3))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(4))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(5))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(6))).isTrue()
-        assertThat(winningLottoNumbers.isContainLottoNumber(LottoNumber.from(7))).isFalse()
+    @ParameterizedTest
+    @CsvSource(
+        "'1, 2, 3, 4, 5, 6', 6",
+        "'45, 44, 43, 42, 41, 1', 1",
+        "'30, 25, 17, 1, 2, 3', 17"
+    )
+    fun `보너스볼과 당첨번호 중복 번호 검증`(stringWinningLottoNumbers: String, bonusNumber: Int) {
+        assertThrows<IllegalArgumentException> {
+            WinningLottoNumbers.of(LottoNumberTokenizer.tokenize(stringWinningLottoNumbers), bonusNumber)
+        }
     }
 }

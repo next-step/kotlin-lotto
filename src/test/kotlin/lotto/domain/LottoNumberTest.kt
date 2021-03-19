@@ -22,4 +22,19 @@ internal class LottoNumberTest {
             LottoNumber.from(number)
         }
     }
+
+    @Test
+    fun `associateWith로 만드는 로또 번호 캐시맵 테스트`() {
+        val cache1: Map<Int, LottoNumber> = (1..45).map {
+            Pair(it, LottoNumber.from(it))
+        }.toMap()
+
+        val cache2: Map<Int, LottoNumber> = (1..45).associateWith { LottoNumber.from(it) }
+
+        assertThat(cache1.size).isEqualTo(cache2.size)
+
+        (1..45).forEach {
+            assertThat(cache1[it]).isEqualTo(cache2[it])
+        }
+    }
 }

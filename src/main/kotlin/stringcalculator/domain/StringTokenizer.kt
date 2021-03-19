@@ -10,8 +10,8 @@ object StringTokenizer {
     private const val DEFAULT_CUSTOM_DELIMITER_REGEX = "$DEFAULT_SUFFIX_OF_CUSTOM_DELIMITER(.)$DEFAULT_PREFIX_OF_CUSTOM_DELIMITER(.*)"
 
     fun tokenize(numbersString: String): Tokens {
-        val customDelimiter = Regex(DEFAULT_CUSTOM_DELIMITER_REGEX).find(numbersString)
-        customDelimiter?.let {
+        val result = Regex(DEFAULT_CUSTOM_DELIMITER_REGEX).find(numbersString)
+        result?.let {
             val (customDelimiter, matchedNumbersString) = it.destructured
 
             return Tokens.from(matchedNumbersString.split(customDelimiter))
