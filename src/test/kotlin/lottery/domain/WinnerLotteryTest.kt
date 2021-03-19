@@ -3,6 +3,8 @@ package lottery.domain
 import fixture.LotteryFixture.TEST_NUMBERS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class WinnerLotteryTest {
     @Test
@@ -22,5 +24,13 @@ class WinnerLotteryTest {
         val matchCount = WinnerLottery(numbers).matchCount(lotteryNumbers)
 
         assertThat(matchCount).isEqualTo(2)
+    }
+
+    @ParameterizedTest
+    @CsvSource("1, true", "8, true", "45, false")
+    fun `우승자 당첨번호에 보너스볼이 포함되는지 확인한다`(number: Int, expected: Boolean) {
+        val hasBonusBall = WinnerLottery(listOf(1, 8, 20, 14, 9, 40)).contains(number)
+
+        assertThat(hasBonusBall).isEqualTo(expected)
     }
 }
