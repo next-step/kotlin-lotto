@@ -8,7 +8,7 @@ internal class IssuedLottoTicketsTest {
 
     @Test
     fun `내가 발급받은 로또를 당첨번호와 맞춰 당첨금을 받는다`() {
-        val winningTicket = WinningTicket.ofTxNumbers("1,2,3,4,5,6")
+        val winningTicket = WinningTicket.ofTxNumbers(txNumbers = "1,2,3,4,5,6", txBonusBall = "12")
 
         val lottoTickets = IssuedLottoTickets(
             listOf(

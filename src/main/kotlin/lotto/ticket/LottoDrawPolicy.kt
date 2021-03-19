@@ -21,14 +21,16 @@ interface LottoDrawPolicy {
 }
 
 class AutoDrawPolicy : LottoDrawPolicy {
-    override val lottoNumbers: Set<LottoNumber> = LOTTO_NUMBER_BOX.values.shuffled().toSet()
+    override val lottoNumbers: Set<LottoNumber> = LOTTO_NUMBER_BOX.values
+        .shuffled()
+        .toSet()
 }
 
 class ManualDrawPolicy(txNumbers: String) : LottoDrawPolicy {
 
     override val lottoNumbers: Set<LottoNumber> = txNumbers.split(LOTTO_NUMBER_DELIMITER)
         .map { it.toInt() }
-        .map { LOTTO_NUMBER_BOX[it] ?: throw IllegalArgumentException("로또번호($it)로 사용할 수 없습니다.") }
+        .map { LottoNumber.drawNumber(it) }
         .toSet()
 
     companion object {
