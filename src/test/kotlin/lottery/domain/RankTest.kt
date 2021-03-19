@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class RankTest {
     @ParameterizedTest
-    @CsvSource("3, FIFTH", "4, FOURTH", "5, SECOND", "6, FIRST")
-    fun `맞춘 개수에 맞게 등수를 조회한다`(count: Int, expectedRank: Rank) {
-        assertThat(Rank.valueOf(count)).isEqualTo(expectedRank)
+    @CsvSource("3, false, FIFTH", "4, false, FOURTH", "5, false, THIRD", "5, true, SECOND", "6, false, FIRST")
+    fun `맞춘 개수에 맞게 등수를 조회한다`(count: Int, isBonus: Boolean, expectedRank: Rank) {
+        assertThat(Rank.valueOf(count, isBonus)).isEqualTo(expectedRank)
     }
 
     @ParameterizedTest
