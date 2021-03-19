@@ -1,4 +1,4 @@
-package lotto.userInterface
+package lotto.userinterface
 
 import lotto.domain.LottoPrize
 import lotto.dto.LottoNumbersDto

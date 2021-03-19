@@ -8,8 +8,8 @@ import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.dto.StatisticsDto
 import lotto.dto.toLottoNumbersDto
-import lotto.userInterface.Console
-import lotto.userInterface.UserInterface
+import lotto.userinterface.Console
+import lotto.userinterface.UserInterface
 
 fun main() {
     val console = Console()
