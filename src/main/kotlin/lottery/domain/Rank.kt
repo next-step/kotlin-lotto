@@ -12,10 +12,6 @@ enum class Rank(val matchCount: Int, val price: Int, val hasBonus: Boolean = fal
             return values().filter { it.matchCount == count && it.hasBonus == hasBonus }.any()
         }
 
-        fun valueOf(matchCount: Int): Rank {
-            return values().first { it.matchCount == matchCount }
-        }
-
         fun valueOf(matchCount: Int, hasBonus: Boolean): Rank {
             return values().first { it.matchCount == matchCount && it.hasBonus == hasBonus}
         }
