@@ -5,6 +5,10 @@ class Lottery(val lotteryNumbers: LotteryNumbers, val price: Int = DEFAULT_LOTTO
         const val DEFAULT_LOTTO_PRICE = 1000
     }
 
+    fun hasBonusBall(bonusBall: BonusBall): Boolean {
+        return lotteryNumbers.contains(bonusBall.number)
+    }
+
     override fun toString(): String {
         return lotteryNumbers.toString()
     }
