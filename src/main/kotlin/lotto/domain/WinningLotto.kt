@@ -6,7 +6,14 @@ class WinningLotto(private val lotto: Lotto, private val bonusNumber: LottoNumbe
         require(!lotto.hasNumber(bonusNumber)) { "당첨번호 중에 보너스번호가 존재할 수 없습니다." }
     }
 
-    fun calculateLottoPrize(lotto: Lotto): LottoPrize {
+    fun calculateLottoPrize(lotto: List<Lotto>): Map<LottoPrize, Int> {
+        return lotto.map(::calculateLottoPrize)
+            .filter { it != LottoPrize.WHACK }
+            .groupingBy { it }
+            .eachCount()
+    }
+
+    private fun calculateLottoPrize(lotto: Lotto): LottoPrize {
         val matchedCount = matchLottoNumberCount(lotto)
         val hasBonusNumber = lotto.hasNumber(bonusNumber)
         return LottoPrize.valueOf(matchedCount, hasBonusNumber)

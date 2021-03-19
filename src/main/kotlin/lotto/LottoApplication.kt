@@ -3,7 +3,6 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
-import lotto.domain.LottoResult
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.dto.StatisticsDto
@@ -35,8 +34,9 @@ class LottoApplication(private val userInterface: UserInterface) {
             WinningLotto(lotto = lotto, bonusNumber = bonusNumber)
         }
 
-        val result = LottoResult(winningLotto, lottos)
-        userInterface.outputWinningStatistics(StatisticsDto.of(result.result(), amount))
+        val lottoPrizes = winningLotto.calculateLottoPrize(lottos)
+
+        userInterface.outputWinningStatistics(StatisticsDto.of(lottoPrizes, amount))
     }
 
     companion object {
