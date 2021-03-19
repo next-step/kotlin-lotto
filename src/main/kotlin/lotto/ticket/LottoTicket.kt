@@ -5,7 +5,7 @@ class LottoTicket(
 ) {
     val lottoNumbers: Set<LottoNumber> = policy.draw()
 
-    fun hasLottoNumber(lottoNumber: LottoNumber): Boolean {
+    fun hasWinningNumber(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.contains(lottoNumber)
     }
 

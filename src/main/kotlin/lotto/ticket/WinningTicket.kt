@@ -6,17 +6,17 @@ class WinningTicket(
     policy: LottoDrawPolicy,
     private val bonusBall: LottoNumber
 ) {
-    private val lottoNumbers: Set<LottoNumber> = policy.draw()
+    private val winningNumbers: Set<LottoNumber> = policy.draw()
 
     init {
-        require(!lottoNumbers.contains(bonusBall)) { "보너스 번호 ${this.bonusBall} 와 당첨번호는 같을 수 없습니다" }
+        require(!winningNumbers.contains(bonusBall)) { "보너스 번호 ${this.bonusBall} 와 당첨번호는 같을 수 없습니다" }
     }
 
     fun match(lottoTicket: LottoTicket): Rank = Rank.ofMatchInfo(
-        matchCount = lottoNumbers.filter {
-            lottoTicket.hasLottoNumber(it)
+        matchCount = winningNumbers.filter {
+            lottoTicket.hasWinningNumber(it)
         }.size,
-        hasBonusBall = lottoTicket.hasLottoNumber(bonusBall)
+        hasBonusBall = lottoTicket.hasWinningNumber(bonusBall)
     )
 
     companion object {
