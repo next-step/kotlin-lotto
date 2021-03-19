@@ -1,13 +1,13 @@
 package lotto.view
 
-fun inputMoney(): Int {
+tailrec fun inputMoney(): Int {
     println("구입금액을 입력해 주세요.")
-    return readLine()?.toIntOrNull() ?: throw IllegalArgumentException()
+    return readLine()?.toIntOrNull() ?: inputMoney()
 }
 
-fun inputManualLottoCount(): Int {
+tailrec fun inputManualLottoCount(): Int {
     println("수동으로 구매할 로또 수를 입력해 주세요.")
-    return readLine()?.toIntOrNull() ?: throw IllegalArgumentException()
+    return readLine()?.toIntOrNull() ?: inputManualLottoCount()
 }
 
 fun inputManualLottoNumbers(): List<Int> {
@@ -24,7 +24,7 @@ fun inputWinningLottoNumbers(): List<Int> {
         .map { it.toInt() }
 }
 
-fun inputBonusNumber(): Int {
+tailrec fun inputBonusNumber(): Int {
     println("보너스 볼을 입력해 주세요.")
-    return readLine()?.toInt() ?: throw IllegalArgumentException()
+    return readLine()?.toIntOrNull() ?: inputBonusNumber()
 }
