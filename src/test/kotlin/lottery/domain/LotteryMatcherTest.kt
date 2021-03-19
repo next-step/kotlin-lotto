@@ -18,7 +18,7 @@ class LotteryMatcherTest {
 
         val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
 
-        val matchCounts = lotteryMatcher.match(10)
+        val matchCounts = lotteryMatcher.match(BonusBall(10, winnerLottery))
 
         assertAll(
             { Assertions.assertThat(matchCounts.retrieve(Rank.FOURTH)).isEqualTo(1) },
