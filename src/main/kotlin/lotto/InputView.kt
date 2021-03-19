@@ -17,5 +17,5 @@ fun inputWinningTicket(): WinningTicket {
     println("보너스 볼을 입력해 주세요.")
     val bonusBall = readLine()!!
 
-    return WinningTicket.ofTxNumbers(txNumbers, bonusBall)
+    return WinningTicket.ofTxNumbers(txNumbers = txNumbers, txBonusBall = bonusBall)
 }

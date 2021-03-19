@@ -57,7 +57,7 @@ internal class LottoDrawPolicyTest {
         val policy: LottoDrawPolicy = ManualDrawPolicy(index.toString())
         // when
         // then
-        assertThat(policy.lottoNumbers).isEqualTo(setOf(LottoNumber(index)))
+        assertThat(policy.applyPolicy()).isEqualTo(setOf(LottoNumber(index)))
     }
 
     @ParameterizedTest
@@ -66,6 +66,6 @@ internal class LottoDrawPolicyTest {
         // given
         // when
         // then
-        assertThrows<IllegalArgumentException> { ManualDrawPolicy(txNumber) }
+        assertThrows<IllegalArgumentException> { ManualDrawPolicy(txNumber).applyPolicy() }
     }
 }

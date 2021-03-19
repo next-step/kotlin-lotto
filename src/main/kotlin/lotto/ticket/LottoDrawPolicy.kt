@@ -4,10 +4,10 @@ import lotto.ticket.LottoNumber.Companion.LOTTO_NUMBER_BOX
 
 interface LottoDrawPolicy {
 
-    val lottoNumbers: Set<LottoNumber>
+    fun applyPolicy(): Set<LottoNumber>
 
     fun draw(): Set<LottoNumber> {
-        val lottoNumbers = this.lottoNumbers
+        val lottoNumbers = applyPolicy()
             .take(TICKET_SIZE)
             .toSet()
 
@@ -21,14 +21,14 @@ interface LottoDrawPolicy {
 }
 
 class AutoDrawPolicy : LottoDrawPolicy {
-    override val lottoNumbers: Set<LottoNumber> = LOTTO_NUMBER_BOX.values
+    override fun applyPolicy(): Set<LottoNumber> = LOTTO_NUMBER_BOX.values
         .shuffled()
         .toSet()
 }
 
-class ManualDrawPolicy(txNumbers: String) : LottoDrawPolicy {
+class ManualDrawPolicy(private val txNumbers: String) : LottoDrawPolicy {
 
-    override val lottoNumbers: Set<LottoNumber> = txNumbers.split(LOTTO_NUMBER_DELIMITER)
+    override fun applyPolicy(): Set<LottoNumber> = txNumbers.split(LOTTO_NUMBER_DELIMITER)
         .map { it.toInt() }
         .map { LottoNumber.drawNumber(it) }
         .toSet()
