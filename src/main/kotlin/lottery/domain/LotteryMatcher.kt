@@ -4,13 +4,12 @@ class LotteryMatcher(
     private val winnerLottery: WinnerLottery,
     private val createdLotteries: List<Lottery>
 ) {
-    fun match(bonusBall: Int): RankCounts {
+    fun match(bonusBall: BonusBall): RankCounts {
         val rankCounts = RankCounts()
 
         createdLotteries.map {
             val count = winnerLottery.matchCount(it.lotteryNumbers)
-            val hasBonus = it.lotteryNumbers.contains(bonusBall)
-
+            val hasBonus = it.hasBonusBall(bonusBall)
 
             if (Rank.isInTheRank(count, hasBonus)) {
                 rankCounts.addMatchCount(Rank.valueOf(count, hasBonus))
