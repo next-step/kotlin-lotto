@@ -8,8 +8,8 @@ import org.junit.jupiter.api.assertThrows
 
 internal class LottosMachineTest {
 
-    val manualLottoGenerator1 = ManualLottoGenerator(listOf(1, 2, 3, 4, 5, 6))
-    val manualLottoGenerator2 = ManualLottoGenerator(listOf(7, 8, 9, 10, 11, 12))
+    private val manualLottoGenerator1 = ManualLottoGenerator(listOf(1, 2, 3, 4, 5, 6))
+    private val manualLottoGenerator2 = ManualLottoGenerator(listOf(7, 8, 9, 10, 11, 12))
 
     @Test
     fun `입력 금액보다 수동 로또 구매 금액이 더 큰 경우 예외 처리`() {
