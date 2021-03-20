@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.LottoGame.Companion.LOTTO_COST
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -11,6 +12,10 @@ class Money(initMoney: Int) {
 
     init {
         checkValidateMoney(initMoney)
+    }
+
+    fun getQuantityOfAvailablePurchase(): Int {
+        return (currentMoney / LOTTO_COST).toInt()
     }
 
     fun spendMoney(money: Int) {
