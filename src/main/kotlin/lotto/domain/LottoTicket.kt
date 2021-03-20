@@ -16,15 +16,7 @@ class LottoTicket(val value: TreeSet<LottoNumber>) {
         )
     )
 
-    fun getCountOfMatch(lottoTicket: LottoTicket): Int {
-        return lottoTicket.value.count { lottoNumber ->
-            value.contains(lottoNumber)
-        }
-    }
 
-    fun isNumberContains(lottoNumber: LottoNumber): Boolean {
-        return value.contains(lottoNumber)
-    }
 
     private fun checkValidateLottoTicket() {
         if (value.size != LENGTH_OF_LOTTO) throw IllegalArgumentException("숫자는 6개가 존재해야 합니다.")
