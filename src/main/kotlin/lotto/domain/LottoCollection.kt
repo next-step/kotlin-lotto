@@ -4,11 +4,11 @@ class LottoCollection(private val _lotto: MutableList<Lotto>) {
     val lotto: List<Lotto>
         get() = _lotto
 
-    constructor(count: Int, _generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(mutableListOf()) {
+    constructor(count: Int, generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(mutableListOf()) {
         require(count >= 1)
 
         repeat(count) {
-            _lotto.add(Lotto(_generator))
+            _lotto.add(Lotto(generator))
         }
     }
 
