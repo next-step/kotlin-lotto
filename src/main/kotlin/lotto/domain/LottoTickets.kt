@@ -9,10 +9,7 @@ class LottoTickets(val tickets: List<LottoTicket>) {
 
     companion object {
         fun create(count: Int, numberStrategy: NumberGenerateStrategy): LottoTickets {
-            return LottoTickets(
-                mutableListOf<LottoTicket>()
-                    .also { tickets -> repeat(count) { tickets.add(LottoTicket.create(numberStrategy)) } }
-            )
+            return LottoTickets((1..count).map { LottoTicket.create(numberStrategy) }.toList())
         }
     }
 }
