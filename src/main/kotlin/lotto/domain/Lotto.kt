@@ -1,17 +1,17 @@
 package lotto.domain
 
-class Lotto {
-    private val numbers: List<Int> = (1..45).toList()
-    val lottoNumbers: List<Int> = makeLottoNumbers()
+class Lotto(val lottoNumbers: List<LottoNumber>) {
+    init {
+        require(lottoNumbers.size == LOTTO_NUMBER_COUNT) {
+            "로또 번호는 ${LOTTO_NUMBER_COUNT}개 여야 합니다."
+        }
+    }
 
-    private fun makeLottoNumbers(): List<Int> {
-        return numbers
-            .shuffled()
-            .subList(0, LOTTO_NUMBER_COUNT)
-            .sorted()
+    fun matchCount(winningLotto: List<LottoNumber>): Int {
+        return lottoNumbers.filter(winningLotto::contains).count()
     }
 
     companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
+        const val LOTTO_NUMBER_COUNT = 6
     }
 }
