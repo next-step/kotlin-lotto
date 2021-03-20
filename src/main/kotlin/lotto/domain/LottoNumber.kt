@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumber private constructor(private val value: Int): Comparable<LottoNumber> {
+class LottoNumber private constructor(private val value: Int) : Comparable<LottoNumber> {
 
     override fun toString(): String {
         return value.toString()

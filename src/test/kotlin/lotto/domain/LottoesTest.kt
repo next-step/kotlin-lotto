@@ -19,7 +19,7 @@ class LottoesTest {
                 LottoTicket(listOf(5, 21, 31, 44, 25, 10))
             )
         )
-        val winningNumbers = listOf<Int>(3,5,6,7,8,9)
+        val winningNumbers = listOf<Int>(3, 5, 6, 7, 8, 9)
 
         val bonusNumber = LottoNumber.from(11)
         winningLotto = WinningLotto(LottoTicket(winningNumbers), bonusNumber)
