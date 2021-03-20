@@ -24,6 +24,8 @@ object OutputView {
     }
 
     private fun LottoRank.rankInfoString(): String =
-        if (this == LottoRank.BONUS) "${matchCount}개 일치, 보너스 볼 일치(${price}원)"
-        else "${matchCount}개 일치 (${price}원)"
+        when (this) {
+            LottoRank.BONUS -> "${matchCount}개 일치, 보너스 볼 일치(${price}원)"
+            else -> "${matchCount}개 일치 (${price}원)"
+        }
 }
