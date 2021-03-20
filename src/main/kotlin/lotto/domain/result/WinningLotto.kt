@@ -12,7 +12,7 @@ class WinningLotto private constructor(val numbers: LottoTicket) {
 
     companion object {
         fun of(input: String): WinningLotto {
-            val lottoTicket = LottoTicket(input.split(", ").map { LottoNumber(it) }.toSet())
+            val lottoTicket = LottoTicket(input.split(",").map { LottoNumber(it.trim()) }.toSet())
             return WinningLotto(lottoTicket)
         }
     }
