@@ -1,4 +1,6 @@
-package lottery.domain
+package lottery.view
+
+import lottery.domain.Rank
 
 enum class RankPrinter(val rank: Rank, val content: String) {
     FIFTH(Rank.FIFTH, "${Rank.FIFTH.matchCount}개 일치"),

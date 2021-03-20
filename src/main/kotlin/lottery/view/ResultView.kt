@@ -3,7 +3,6 @@ package lottery.view
 import lottery.domain.Lottery
 import lottery.domain.Rank
 import lottery.domain.RankCounts
-import lottery.domain.RankPrinter
 
 object ResultView {
     fun printCountOfBuyLottery(price: Int) {
