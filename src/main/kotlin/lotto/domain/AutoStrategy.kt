@@ -17,10 +17,6 @@ class AutoStrategy : LottoStrategy {
             .take(LottoTicket.LENGTH_OF_LOTTO)
             .sorted()
 
-        return LottoTicket(
-            numbers.map { number ->
-                LottoNumber.from(number)
-            }.toSet()
-        )
+        return LottoTicket.generateManual(numbers)
     }
 }
