@@ -1,6 +1,10 @@
 package lottery.controller
 
-import lottery.domain.*
+import lottery.domain.Profit
+import lottery.domain.BonusBall
+import lottery.domain.LotteryFactory
+import lottery.domain.LotteryMatcher
+import lottery.domain.WinnerLottery
 import lottery.view.InputView
 import lottery.view.InputView.printInputBonusBall
 import lottery.view.InputView.printInputLastWinnerLottery
