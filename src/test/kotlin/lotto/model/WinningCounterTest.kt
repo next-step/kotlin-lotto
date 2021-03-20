@@ -18,9 +18,9 @@ internal class WinningCounterTest {
     fun `인자로 주어진 counter 를 그대로 사용하지 않는다`() {
         val paramCounter = mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)
 
-        val result1 = WinningCounter(paramCounter)
+        val result1 = WinningCounter.Builder().counter(paramCounter).build()
         paramCounter[FIRST] = 1
-        val result2 = WinningCounter(paramCounter)
+        val result2 = WinningCounter.Builder().counter(paramCounter).build()
 
         assertThat(result1).isNotEqualTo(result2)
     }
@@ -33,7 +33,7 @@ internal class WinningCounterTest {
         lottoTickets: LottoTickets,
         winningCounter: WinningCounter
     ) {
-        val result = WinningCounter(lottoTickets, WinningCondition(winningNumbers, bonusNumbers))
+        val result = WinningCounter.Builder().counter(lottoTickets, WinningCondition(winningNumbers, bonusNumbers)).build()
 
         assertThat(result).isEqualTo(winningCounter)
     }
@@ -47,7 +47,7 @@ internal class WinningCounterTest {
                         WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
                         BonusNumber.get(7),
                         LottoTickets(listOf(LottoTicket(listOf(7, 8, 9, 10, 11, 12)))),
-                        WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0))
+                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)).build()
                     )
                 },
                 Arguments {
@@ -55,7 +55,7 @@ internal class WinningCounterTest {
                         WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
                         BonusNumber.get(7),
                         LottoTickets(listOf(LottoTicket(listOf(1, 2, 3, 10, 11, 12)))),
-                        WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1))
+                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build()
                     )
                 },
                 Arguments {
@@ -68,7 +68,7 @@ internal class WinningCounterTest {
                                 LottoTicket(listOf(1, 2, 3, 4, 11, 12))
                             )
                         ),
-                        WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1, FIFTH to 1))
+                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1, FIFTH to 1)).build()
                     )
                 },
                 Arguments {
@@ -81,7 +81,7 @@ internal class WinningCounterTest {
                                 LottoTicket(listOf(1, 2, 3, 4, 5, 12))
                             )
                         ),
-                        WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0))
+                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build()
                     )
                 }
             )

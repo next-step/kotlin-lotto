@@ -20,7 +20,7 @@ fun main() {
     val winningNumbers = InputView.readWinningNumbers()
     val bonusNumber = InputView.readBonusNumber()
 
-    val winningCounter = WinningCounter(tickets, WinningCondition(winningNumbers, bonusNumber))
+    val winningCounter = WinningCounter.Builder().counter(tickets, WinningCondition(winningNumbers, bonusNumber)).build()
     val result = LottoResult(winningCounter, moneyAmount)
 
     OutputView.printResult(result)

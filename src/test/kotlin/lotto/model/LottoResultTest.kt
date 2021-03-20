@@ -29,22 +29,22 @@ internal class LottoResultTest {
             return listOf(
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)), Money(10_000)),
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)), Money(10_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
                         true
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)), Money(10_000)),
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 1, SECOND to 1, THIRD to 0, FOURTH to 0, FIFTH to 0)), Money(10_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 1, SECOND to 1, THIRD to 0, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
                         false
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)), Money(10_000)),
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)), Money(23_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(23_000)),
                         false
                     )
                 }
@@ -56,19 +56,19 @@ internal class LottoResultTest {
             return listOf(
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)), Money(5_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build(), Money(5_000)),
                         1.0
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)), Money(5_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)).build(), Money(5_000)),
                         0.0
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)), Money(14_000)),
+                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build(), Money(14_000)),
                         0.35
                     )
                 }
