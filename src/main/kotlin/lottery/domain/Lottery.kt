@@ -1,10 +1,6 @@
 package lottery.domain
 
 class Lottery(val lotteryNumbers: LotteryNumbers, val price: Int = DEFAULT_LOTTO_PRICE) {
-    companion object {
-        const val DEFAULT_LOTTO_PRICE = 1000
-    }
-
     fun hasBonusBall(bonusBall: BonusBall): Boolean {
         return lotteryNumbers.contains(bonusBall.number)
     }
@@ -29,5 +25,9 @@ class Lottery(val lotteryNumbers: LotteryNumbers, val price: Int = DEFAULT_LOTTO
         var result = lotteryNumbers.hashCode()
         result = 31 * result + price
         return result
+    }
+
+    companion object {
+        const val DEFAULT_LOTTO_PRICE = 1000
     }
 }
