@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 
 object ResultView {
@@ -7,8 +8,8 @@ object ResultView {
         println("$count 개를 구매했습니다.")
     }
 
-    fun showLotto(lottoNumber: String) {
-        println("[$lottoNumber]")
+    fun showLotto(lottoNumber: List<LottoNumber>) {
+        println(lottoNumber)
     }
 
     fun showWinningStatistics() {
@@ -16,8 +17,11 @@ object ResultView {
         println("--------")
     }
 
-    fun showRankCount(count: Int, rank: LottoRank) {
-        println("${rank.matchCount}개 일치 (${rank.winningPrice}원) - $count 개")
+    fun showRankCount(lottoRanks: Map<LottoRank, Int>) {
+        println("3개 일치 (${LottoRank.FOURTH.winningPrice}원) - ${lottoRanks[LottoRank.FOURTH] ?: 0} 개")
+        println("4개 일치 (${LottoRank.THIRD.winningPrice}원) - ${lottoRanks[LottoRank.THIRD] ?: 0} 개")
+        println("5개 일치 (${LottoRank.SECOND.winningPrice}원) - ${lottoRanks[LottoRank.SECOND] ?: 0} 개")
+        println("6개 일치 (${LottoRank.FIRST.winningPrice}원) - ${lottoRanks[LottoRank.FIRST] ?: 0} 개")
     }
 
     fun showProfitRate(rate: Float) {
