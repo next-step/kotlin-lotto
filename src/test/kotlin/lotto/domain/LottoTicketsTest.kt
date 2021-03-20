@@ -23,9 +23,13 @@ internal class LottoTicketsTest {
     @Test
     fun getMatchCounts() {
         val tickets = LottoTickets.create(2, OneToSixStrategy())
+        val bonusNumber = LottoNumber(7)
 
-        val actual = tickets.getMatchCounts(createLotto(1, 2, 3, 4, 5, 6))
+        val actual = tickets.getMatchInfos(createLotto(1, 2, 3, 4, 5, 6), bonusNumber)
 
-        assertThat(actual).isEqualTo(listOf(6, 6))
+        assertAll(
+            { assertThat(actual.map { it.matchCount }).isEqualTo(listOf(6, 6)) },
+            { assertThat(actual.map { it.hasBonus }).isEqualTo(listOf(false, false)) }
+        )
     }
 }

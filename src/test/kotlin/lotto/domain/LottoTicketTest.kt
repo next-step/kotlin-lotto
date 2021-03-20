@@ -34,9 +34,13 @@ internal class LottoTicketTest {
     @Test
     fun getMatchCount() {
         val numbers = createLotto(1, 2, 3, 43, 44, 45)
+        val bonusNumber = LottoNumber(7)
         val ticket = LottoTicket.create(OneToSixStrategy())
 
-        assertThat(ticket.getMatchCount(numbers)).isEqualTo(3)
+        assertAll(
+            { assertThat(ticket.getMatchInfo(numbers, bonusNumber).matchCount).isEqualTo(3) },
+            { assertThat(ticket.getMatchInfo(numbers, bonusNumber).hasBonus).isEqualTo(false) }
+        )
     }
 
     @DisplayName("로또 티켓을 생성할 때 로또 숫자의 개수가 맞지 않을 경우 예외 발생")

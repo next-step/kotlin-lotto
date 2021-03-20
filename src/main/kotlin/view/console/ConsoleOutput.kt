@@ -41,6 +41,10 @@ class ConsoleOutput : OutputView {
         println(builder)
     }
 
+    override fun printInputBonusNumberMessage() {
+        println("보너스 볼을 입력해주세요.")
+    }
+
     private fun appendLottoDetail(result: LottoResult, builder: StringBuilder) {
         LottoRank.values().reversed().drop(1)
             .forEach { builder.append("${it.matchCount}개 일치 (${it.prize}원) - ${result.result[it]}개\n") }

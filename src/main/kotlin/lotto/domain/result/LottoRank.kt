@@ -14,9 +14,9 @@ enum class LottoRank(val matchCount: Int, val prize: Long) {
             return values().find { matchCount == it.matchCount } ?: NONE
         }
 
-        fun rank(matchCounts: List<Int>): LottoResult {
+        fun rank(matchInfos: List<MatchInfo>): LottoResult {
             val result = matcher.toMutableMap()
-            matchCounts.forEach { result[of(it)] = result[of(it)]!! + 1 }
+            matchInfos.forEach { result[of(it.matchCount)] = result[of(it.matchCount)]!! + 1 }
             return LottoResult(result)
         }
     }
