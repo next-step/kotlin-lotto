@@ -18,7 +18,8 @@ class Lotteries(val lotteries: List<Lottery>) {
             )
         }
 
-        private fun generateRandoms(generator: NumbersGenerator): List<Int>
-                = generator.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_SIZE)
+        private fun generateRandoms(generator: NumbersGenerator): List<Int> {
+            return generator.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_SIZE)
+        }
     }
 }
