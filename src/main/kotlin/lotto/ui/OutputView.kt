@@ -27,12 +27,9 @@ class OutputView {
         println("5개 일치 (1,500,000원) - ${(lottoesRankMap[Rank.THIRD] ?: 0)}개")
         println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${(lottoesRankMap[Rank.SECOND] ?: 0)}개")
         println("6개 일치 (2,000,000,000원) - ${(lottoesRankMap[Rank.FIRST] ?: 0)}개")
-
-        printRateOfReturn(money, lottoesRank)
     }
 
-    private fun printRateOfReturn(money: Money, lottoesRank: LottoesRank) {
-        val lottoesWinningMoney = lottoesRank.getWinningMoney()
-        println("총 수익률은 ${money.calculateRateOfReturn(lottoesWinningMoney)}입니다.")
+    fun printRateOfReturn(money: Money, winningMoney: Long) {
+        println("총 수익률은 ${money.calculateRateOfReturn(winningMoney)}입니다.")
     }
 }

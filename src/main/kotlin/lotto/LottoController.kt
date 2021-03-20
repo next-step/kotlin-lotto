@@ -26,10 +26,13 @@ fun main() {
     val universalLottoes = Lottoes(manualLottoes.toList() + autoLottoes.toList())
     val winningLotto = WinningLotto(createWinningTicket(), createBonusNumber())
 
+    val ranks = universalLottoes.getMyLottoesRanks(winningLotto)
     outputView.printLottoesResult(
         money,
-        universalLottoes.getMyLottoesRanks(winningLotto)
+        ranks
     )
+
+    outputView.printRateOfReturn(money, ranks.getWinningMoney())
 }
 
 private fun createWinningTicket(): LottoTicket {
