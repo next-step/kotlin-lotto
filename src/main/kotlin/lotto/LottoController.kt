@@ -19,7 +19,7 @@ fun main() {
     val numberOfManual = inputView.inputNumberOfManual()
     val lottoGame = LottoGame(money)
 
-    val manualLottoes = inputManualLottoes(numberOfManual, lottoGame) ?: Lottoes(emptyList())
+    val manualLottoes = inputManualLottoes(numberOfManual, lottoGame)
     val autoLottoes = lottoGame.purchaseLottoes(AutoStrategy())
 
     outputView.printPurchasedLottoes(manualLottoes, autoLottoes)
@@ -44,10 +44,10 @@ private fun createBonusNumber(): LottoNumber {
     return LottoNumber.from(inputView.inputBonusNumber())
 }
 
-private fun inputManualLottoes(numberOfManual: Int, game: LottoGame): Lottoes? {
+private fun inputManualLottoes(numberOfManual: Int, game: LottoGame): Lottoes {
     if (numberOfManual > 0) {
         val manualNumbers = inputView.inputManualNumbers(numberOfManual)
         return game.purchaseLottoes(ManualStrategy(manualNumbers))
     }
-    return null
+    return Lottoes(emptyList())
 }
