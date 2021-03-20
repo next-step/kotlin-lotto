@@ -8,8 +8,8 @@ class LottoTicket(val value: TreeSet<LottoNumber>) {
         checkValidateLottoTicket()
     }
 
-    fun getCountOfMatch(winningLotto: LottoTicket): Int {
-        return winningLotto.value.count { lottoNumber ->
+    fun getCountOfMatch(lottoTicket: LottoTicket): Int {
+        return lottoTicket.value.count { lottoNumber ->
             value.contains(lottoNumber)
         }
     }
