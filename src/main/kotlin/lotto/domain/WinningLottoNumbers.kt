@@ -11,8 +11,8 @@ class WinningLottoNumbers private constructor(
         }
     }
 
-    fun countWinningNumbers(lottoTicket: LottoTicket): Int {
-        return lottoTicket.count(this.lotto)
+    fun countWinningNumbers(lotto: Lotto): Int {
+        return lotto.count(this.lotto)
     }
 
     companion object {

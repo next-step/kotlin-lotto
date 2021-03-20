@@ -1,7 +1,7 @@
 package lotto.domain
 
 class WinningLottoStatistics(
-    lottoTickets: List<LottoTicket>,
+    lottoTickets: List<Lotto>,
     winningLottoNumbers: WinningLottoNumbers
 ) {
     val statistics: MutableMap<LottoRank, Int> = hashMapOf()
@@ -27,9 +27,9 @@ class WinningLottoStatistics(
         }
     }
 
-    private fun rank(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): LottoRank {
-        val winningNumberCount = winningLottoNumbers.countWinningNumbers(lottoTicket)
-        val matchBonus = lottoTicket.isBonusNumberMatch(winningLottoNumbers.bonusLotto)
+    private fun rank(lotto: Lotto, winningLottoNumbers: WinningLottoNumbers): LottoRank {
+        val winningNumberCount = winningLottoNumbers.countWinningNumbers(lotto)
+        val matchBonus = lotto.contains(winningLottoNumbers.bonusLotto)
         return LottoRank.selectByMatchCount(winningNumberCount, matchBonus)
     }
 

@@ -1,7 +1,7 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.LottoRank
-import lotto.domain.LottoTicket
 import lotto.domain.WinningLottoStatistics
 import kotlin.math.floor
 import kotlin.math.pow
@@ -9,7 +9,7 @@ import kotlin.math.pow
 object ResultView {
     private const val MAXIMUM_PROFIT_RATE_POINT = 2
 
-    fun printLottoTickets(lottoTickets: List<LottoTicket>) {
+    fun printLottoTickets(lottoTickets: List<Lotto>) {
         println("${lottoTickets.size}개를 구매했습니다.")
         lottoTickets.forEach {
             println(toLottoTicketString(it))
@@ -30,8 +30,8 @@ object ResultView {
         return floor(profitRate * (10.0.pow(MAXIMUM_PROFIT_RATE_POINT).toInt())) / (10.0).pow(MAXIMUM_PROFIT_RATE_POINT).toInt()
     }
 
-    private fun toLottoTicketString(lottoTicket: LottoTicket): String {
-        return "${lottoTicket.lotto.numbers}"
+    private fun toLottoTicketString(lotto: Lotto): String {
+        return "${lotto.numbers}"
     }
 
     private fun toLottoRankString(lottoRank: LottoRank): String {
