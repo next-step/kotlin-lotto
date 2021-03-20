@@ -1,10 +1,11 @@
-package lottery.controller
+package lottery.view
 
 object Reception {
     private const val LOTTERY_NUMBER_DELIMITERS = ","
 
     fun receiveWinnerLottery(): List<Int> {
-        val splitedNumbers = readLineNotNull().split(LOTTERY_NUMBER_DELIMITERS)
+        val splitedNumbers = readLineNotNull()
+            .split(LOTTERY_NUMBER_DELIMITERS)
         return splitedNumbers.map { it.toIntOrException() }
     }
 
