@@ -13,9 +13,7 @@ object Reception {
     }
 
     private fun readLineNotNull(): String {
-        val readLine = readLine()
-        require(readLine != null) { "입력값이 존재하지 않습니다." }
-        return readLine
+        return readLine() ?: throw IllegalArgumentException("입력값이 존재하지 않습니다.")
     }
 
     private fun String.toIntOrException() =
