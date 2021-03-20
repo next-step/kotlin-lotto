@@ -47,7 +47,13 @@ class ConsoleOutput : OutputView {
 
     private fun appendLottoDetail(result: LottoResult, builder: StringBuilder) {
         LottoRank.values().reversed().drop(1)
-            .forEach { builder.append("${it.matchCount}개 일치 (${it.prize}원) - ${result.result[it]}개\n") }
+            .forEach lit@{
+                if (it == LottoRank.SECOND) {
+                    builder.append("${it.matchCount}개 일치, 보너스 볼 일치 (${it.prize}원) - ${result.result[it]}개\n")
+                    return@lit
+                }
+                builder.append("${it.matchCount}개 일치 (${it.prize}원) - ${result.result[it]}개\n")
+            }
     }
 
     private fun appendEarning(result: LottoResult, builder: StringBuilder) {
