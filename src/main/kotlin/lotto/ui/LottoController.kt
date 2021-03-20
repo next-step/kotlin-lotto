@@ -14,7 +14,7 @@ class LottoController private constructor(
 ) {
     fun run() {
         outputView.printPurchaseAmountMessage()
-        val tickets = LottoStore().purchase(inputView.read(), LottoNumberStrategy())
+        val tickets = LottoStore.purchase(inputView.read(), LottoNumberStrategy())
         outputView.printLottoTickets(tickets)
 
         outputView.printInputWinningNumbersMessage()

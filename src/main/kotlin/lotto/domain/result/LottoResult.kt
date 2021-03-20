@@ -1,6 +1,6 @@
 package lotto.domain.result
 
-import lotto.domain.LottoStore.Companion.LOTTO_PRICE
+import lotto.domain.LottoStore.LOTTO_PRICE
 
 class LottoResult(val result: Map<LottoRank, Int>) {
     val earning: Double
