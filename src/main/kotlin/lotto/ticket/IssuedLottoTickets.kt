@@ -6,10 +6,9 @@ class IssuedLottoTickets(
     val lottoTickets: List<LottoTicket>
 ) {
 
-    fun match(winningTicket: WinningTicket): WinningResult {
-        val prizes = lottoTickets.map { it.match(winningTicket) }
-        return WinningResult.aggregate(
-            ranks = prizes
-        )
-    }
+    fun match(winningTicket: WinningTicket) = WinningResult.aggregate(
+        ranks = lottoTickets.map {
+            winningTicket.match(it)
+        }
+    )
 }
