@@ -18,6 +18,17 @@ internal class LottoTicketTest {
         )
     }
 
+    @DisplayName("미리 생성된 로또 넘버를 통해 로또 티켓 생성")
+    @Test
+    fun create_cache() {
+        val ticket1 = LottoTicket.create(OneToSixStrategy())
+        val ticket2 = LottoTicket.create(OneToSixStrategy())
+        val number1 = ticket1.numbers.find { it == LottoNumber(1) }
+        val number2 = ticket2.numbers.find { it == LottoNumber(1) }
+
+        assertThat(number1 === number2).isTrue
+    }
+
     @DisplayName("로또 번호 리스트를 받아 일치하는 결과 수 반환")
     @Test
     fun getMatchCount() {
