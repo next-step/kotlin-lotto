@@ -1,8 +1,6 @@
 package lotto.domain
 
 import lotto.domain.LottoGame.Companion.LOTTO_COST
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 class Money(initMoney: Int) {
     var spentMoney: Long = 0L
@@ -27,12 +25,6 @@ class Money(initMoney: Int) {
     fun spendAllMoney() {
         spentMoney += currentMoney
         currentMoney -= currentMoney
-    }
-
-    fun calculateRateOfReturn(winningMoney: Long): String {
-        return BigDecimal(winningMoney)
-            .divide(spentMoney.toBigDecimal(), 2, RoundingMode.FLOOR)
-            .toString()
     }
 
     private fun checkEnoughMoney(spendMoney: Int) {

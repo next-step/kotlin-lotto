@@ -29,7 +29,7 @@ class OutputView {
         println("6개 일치 (2,000,000,000원) - ${(lottoesRankMap[Rank.FIRST] ?: 0)}개")
     }
 
-    fun printRateOfReturn(money: Money, winningMoney: Long) {
-        println("총 수익률은 ${money.calculateRateOfReturn(winningMoney)}입니다.")
+    fun printRateOfReturn(rateOfReturn: String) {
+        println("총 수익률은 ${rateOfReturn}입니다.")
     }
 }
