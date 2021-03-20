@@ -19,5 +19,6 @@ fun createLottoResult() = mutableMapOf(
     Pair(LottoRank.SECOND, 0),
     Pair(LottoRank.THIRD, 0),
     Pair(LottoRank.FOURTH, 0),
+    Pair(LottoRank.FIFTH, 0),
     Pair(LottoRank.NONE, 0)
 )
