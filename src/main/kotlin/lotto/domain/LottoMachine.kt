@@ -4,7 +4,7 @@ import lotto.supportdata.PurchaseInfo
 
 class LottoMachine(private val purchaseInfo: PurchaseInfo) {
 
-    fun makeLottoTickets(): List<LottoTicket> = List(purchaseInfo.ticketNumber) { makeRandomLottoTickets() }
+    fun makeLottoTickets(): List<LottoTicket> = List(purchaseInfo.autoTicketNumber) { makeRandomLottoTickets() }
 
     private fun makeRandomLottoTickets(): LottoTicket {
         val lottoNumbers = LottoNumber.baseLottoNumbers
