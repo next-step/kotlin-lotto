@@ -17,4 +17,11 @@ object InputView {
         require(!winnerNumber.isNullOrBlank()) { "입력값은 null 혹은 공백이 될 수 없습니다." }
         return winnerNumber.split(",").map { LottoNumber.from(it.trim()) }.toSet()
     }
+
+    fun inputBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 입력해 주세요.")
+        val bonusNumber = readLine()
+        require(!bonusNumber.isNullOrBlank()) { "입력값은 null 혹은 공백이 될 수 없습니다." }
+        return LottoNumber.from(bonusNumber.trim())
+    }
 }
