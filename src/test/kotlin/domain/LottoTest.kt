@@ -36,6 +36,11 @@ internal class LottoTest {
         assertThat(lotto.countMatchedBy(winningNumbers)).isEqualTo(numberOfMatched)
     }
 
+    @Test
+    fun `로또의 가격은 1000원이다`() {
+        assertThat(Lotto.PRICE).isEqualTo(Money(1000))
+    }
+
     private fun parseLotto(numbers: String): Lotto {
         return numbers.split(":")
             .map { it.toInt() }
