@@ -12,7 +12,7 @@ object Reception {
         return readLineNotNull().toIntOrException()
     }
 
-    private fun readLineNotNull():String {
+    private fun readLineNotNull(): String {
         val readLine = readLine()
         require(readLine != null) { "입력값이 존재하지 않습니다." }
         return readLine
