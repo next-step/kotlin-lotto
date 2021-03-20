@@ -5,7 +5,12 @@ class LottoCollection(val lotto: List<Lotto>) {
         require(lotto.isNotEmpty()) { "로또는 1개 이상을 갖고있어야 합니다." }
     }
 
-    constructor(count: Int, generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(createLotto(count, generator))
+    constructor(count: Int, generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(
+        createLotto(
+            count,
+            generator
+        )
+    )
 
     fun matchByWonNumber(wonNumbers: LottoWonNumbers): LottoRankCollection {
         val rankCount: Map<Rank, Int> = lotto
