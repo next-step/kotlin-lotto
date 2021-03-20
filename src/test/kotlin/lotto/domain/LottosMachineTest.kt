@@ -34,7 +34,7 @@ internal class LottosMachineTest {
     @Test
     fun `입력 금액에 맞는 로또개수가 나온다`() {
         val money = Money(1000)
-        val lottos = LottosMachine(money, emptyList()).create()
+        val lottos = LottosMachine(money).create()
         val count = money.div(Lotto.PRICE).toInt()
         assertThat(lottos.elements.size).isEqualTo(count)
     }
