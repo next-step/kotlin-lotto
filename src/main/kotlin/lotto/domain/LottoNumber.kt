@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumber private constructor(private val value: Int) {
+class LottoNumber private constructor(private val value: Int): Comparable<LottoNumber> {
 
     override fun toString(): String {
         return value.toString()
@@ -14,5 +14,11 @@ class LottoNumber private constructor(private val value: Int) {
         fun from(value: Int): LottoNumber {
             return NUMBERS[value] ?: throw IllegalArgumentException("로또의 번호는 1~45번 까지 있습니다.")
         }
+    }
+
+    override fun compareTo(other: LottoNumber): Int {
+        return if(value > other.value){
+            1
+        } else -1
     }
 }

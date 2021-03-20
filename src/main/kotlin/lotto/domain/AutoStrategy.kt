@@ -15,7 +15,6 @@ class AutoStrategy : LottoStrategy {
         val numbers = (LottoNumber.MIN_LOTTO_NUMBER..LottoNumber.MAX_LOTTO_NUMBER)
             .shuffled()
             .take(LottoTicket.LENGTH_OF_LOTTO)
-            .sorted()
 
         return LottoTicket.generateManual(numbers)
     }

@@ -1,6 +1,8 @@
 package lotto.domain
 
-class LottoTicket(val value: Set<LottoNumber>) {
+import java.util.TreeSet
+
+class LottoTicket(val value: TreeSet<LottoNumber>) {
 
     init {
         checkValidateLottoTicket()
@@ -25,9 +27,9 @@ class LottoTicket(val value: Set<LottoNumber>) {
 
         fun generateManual(numbers: List<Int>): LottoTicket {
             return LottoTicket(
-                numbers.map { number ->
+                TreeSet(numbers.map { number ->
                     LottoNumber.from(number)
-                }.toSet()
+                })
             )
         }
     }
