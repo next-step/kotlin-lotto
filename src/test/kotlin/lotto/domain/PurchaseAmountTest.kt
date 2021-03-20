@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.LottoStore.LOTTO_PRICE
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -21,5 +23,11 @@ internal class PurchaseAmountTest {
     @Test
     fun init() {
         assertThrows<IllegalArgumentException> { PurchaseAmount("a") }
+    }
+
+    @DisplayName("가격을 인자로 받아 구매할 로또의 개수 반환")
+    @Test
+    fun calculateLottoCount() {
+        assertThat(PurchaseAmount("3000").calculateLottoCount(LOTTO_PRICE)).isEqualTo(3)
     }
 }

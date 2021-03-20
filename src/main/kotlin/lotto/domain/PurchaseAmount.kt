@@ -10,6 +10,10 @@ class PurchaseAmount(input: String) {
         this.amount = amount
     }
 
+    fun calculateLottoCount(price: Int): Int {
+        return amount / price
+    }
+
     private fun validateUnit(amount: Int) {
         require(amount % 1000 == 0) { "구입할 금액은 천원 단위로 입력할 수 있습니다." }
     }
