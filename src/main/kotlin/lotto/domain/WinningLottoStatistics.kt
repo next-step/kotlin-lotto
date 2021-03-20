@@ -15,19 +15,19 @@ class WinningLottoStatistics(
     }
 
     private fun initializeRankMap() {
-        LottoRank.values().forEach {
+        LottoRank.valuesNotIncludeNotPlace().forEach {
             statistics[it] = 0
         }
     }
 
-    private fun addRankStatistics(lottoRank: LottoRank?) {
-        if (lottoRank != null) {
+    private fun addRankStatistics(lottoRank: LottoRank) {
+        if (lottoRank != LottoRank.NOT_PLACE) {
             val prevRankCount = statistics.getOrDefault(lottoRank, DEFAULT_RANK_COUNT)
             statistics[lottoRank] = prevRankCount + ADD_RANK_COUNT
         }
     }
 
-    private fun rank(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): LottoRank? {
+    private fun rank(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): LottoRank {
         val winningNumberCount = winningLottoNumbers.countWinningNumbers(lottoTicket)
         val matchBonus = lottoTicket.isBonusNumberMatch(winningLottoNumbers.bonusLotto)
         return LottoRank.selectByMatchCount(winningNumberCount, matchBonus)
