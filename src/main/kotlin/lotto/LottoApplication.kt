@@ -34,9 +34,10 @@ class LottoApplication(private val userInterface: UserInterface) {
             WinningLotto(lotto = lotto, bonusNumber = bonusNumber)
         }
 
-        val lottoPrizes = winningLotto.calculateLottoPrize(lottos)
+        val prizeRankCount = winningLotto.calculateLottoPrize(lottos)
+        val profit = Profit(prizeRankCount, amount)
 
-        userInterface.outputWinningStatistics(StatisticsDto.of(lottoPrizes, amount))
+        userInterface.outputWinningStatistics(StatisticsDto(prizeRankCount, profit.rate()))
     }
 
     companion object {
