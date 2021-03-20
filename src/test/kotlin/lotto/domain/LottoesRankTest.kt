@@ -26,14 +26,6 @@ class LottoesRankTest {
     }
 
     @Test
-    fun `등수 별 인원 확인`() {
-        val lottoesRank = lottoes.getMyLottoesRanks(winningLotto)
-        assertThat(lottoesRank.getRanks()).isEqualTo(
-            mapOf(Rank.FIRST to 2, Rank.SECOND to 1, Rank.THIRD to 1)
-        )
-    }
-
-    @Test
     fun `당첨금 확인`() {
         val lottoesRank = lottoes.getMyLottoesRanks(winningLotto)
         assertThat(lottoesRank.getWinningMoney()).isEqualTo(4_031_500_000L)

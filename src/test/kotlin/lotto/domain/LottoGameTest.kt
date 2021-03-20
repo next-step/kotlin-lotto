@@ -7,12 +7,14 @@ import org.junit.jupiter.api.assertThrows
 
 class LottoGameTest {
 
+    private lateinit var allLottoNumbers: List<LottoNumber>
     private lateinit var lottoGame: LottoGame
     private lateinit var manualNumbers: List<List<String>>
     private lateinit var overManualNumbers: List<List<String>>
 
     @BeforeEach
     fun init() {
+        allLottoNumbers = (1..45).map { number -> LottoNumber.from(number) }
         lottoGame = LottoGame(Money(4000))
         manualNumbers = listOf(
             listOf("3", "5", "6", "7", "8", "13"),
@@ -27,6 +29,15 @@ class LottoGameTest {
             listOf("5", "21", "31", "44", "25", "10"),
             listOf("5", "21", "31", "44", "25", "10")
         )
+    }
+
+    @Test
+    fun `자동으로 로또 생성 시 모두 범위 내 숫자인지 확인`() {
+        val lottoes = lottoGame.purchaseLottoes(AutoStrategy()).toList()
+
+        for (lotto in lottoes) {
+            assertThat(allLottoNumbers).containsOnlyOnceElementsOf(lotto.value)
+        }
     }
 
     @Test
