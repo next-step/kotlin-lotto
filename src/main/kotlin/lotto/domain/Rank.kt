@@ -14,6 +14,7 @@ enum class Rank(val count: Int, val amount: Long, val matchCondition: String = "
             if (secondWonCondition) {
                 return SECOND
             }
+
             return values().firstOrNull {
                 it.count == count
             } ?: FAIL

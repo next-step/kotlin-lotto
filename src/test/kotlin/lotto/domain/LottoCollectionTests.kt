@@ -61,6 +61,7 @@ class LottoCollectionTests {
                 Lotto(secondWonNumber)
             )
         )
+
         val matchByWonNumber = lottoCollection.matchByWonNumber(LottoWonNumbers(wonNumber, LottoNumber(10)))
 
         assertThat(matchByWonNumber.rankCount[Rank.FIRST])

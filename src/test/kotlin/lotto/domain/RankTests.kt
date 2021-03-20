@@ -34,7 +34,7 @@ class RankTests {
 
     @ParameterizedTest
     @ValueSource(booleans = [true, false])
-    fun `6개 맞으면 집사야지`(matchBonus: Boolean) {
+    fun `6개 맞으면 집사야지 1등`(matchBonus: Boolean) {
         assertThat(Rank.getRankByCount(6, matchBonus))
             .isEqualTo(Rank.FIRST)
     }
