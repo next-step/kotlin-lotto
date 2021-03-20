@@ -22,7 +22,6 @@ object ResultView {
     fun printResult(resultLottoStatistics: ResultLottoStatistics) {
         printWinningLottoStatistics(resultLottoStatistics.winningLottoStatistics)
         printLottoProfitRate(resultLottoStatistics.profitRate)
-
     }
 
     private fun printWinningLottoStatistics(winningLottoStatistics: WinningLottoStatistics) {

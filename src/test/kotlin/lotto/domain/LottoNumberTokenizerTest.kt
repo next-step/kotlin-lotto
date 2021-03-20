@@ -1,7 +1,6 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -23,7 +22,6 @@ internal class LottoNumberTokenizerTest {
         assertThat(lottoNumberTokens[4]).isEqualTo(5)
         assertThat(lottoNumberTokens[5]).isEqualTo(6)
     }
-
 
     @ParameterizedTest
     @ValueSource(

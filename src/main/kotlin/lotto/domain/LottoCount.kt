@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoCount private constructor(
     val value: Int
-): Comparable<LottoCount> {
+) : Comparable<LottoCount> {
     init {
         require(value >= ZERO_VALUE) {
             "로또 카운트는 ${ZERO_VALUE}를 포함한 양수만 허용됩니다"
