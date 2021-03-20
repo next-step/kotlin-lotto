@@ -8,13 +8,8 @@ import lotto.model.WinningPlace.FIFTH
 import lotto.model.WinningPlace.MISS
 
 data class WinningCounter private constructor(
-    private val counter: MutableMap<WinningPlace, Int> = mutableMapOf(
-        FIRST to 0,
-        SECOND to 0,
-        THIRD to 0,
-        FOURTH to 0,
-        FIFTH to 0
-    )
+    private val counter: MutableMap<WinningPlace, Int>,
+    private val winningCondition: WinningCondition
 ) : Map<WinningPlace, Int> by counter {
     val priceSum: Money
         get() {
@@ -26,7 +21,29 @@ data class WinningCounter private constructor(
             accu + winningPlace.price * winningCount
         }
 
-    class Builder {
+    fun record(lottoTicket: LottoTicket) {
+        val (winningCount, bonusExist) = winningCondition.check(lottoTicket)
+
+        record(winningCount, bonusExist)
+    }
+
+    private fun record(matchCount: Int, bonusExist: Boolean) {
+        val place = WinningPlace.match(matchCount, bonusExist)
+
+        increment(place)
+    }
+
+    private fun increment(place: WinningPlace) {
+        if (place == MISS) {
+            return
+        }
+
+        counter[place] = counter.getValue(place) + 1
+    }
+
+    class Builder(
+        private var winningCondition: WinningCondition
+    ) {
         private var counter: MutableMap<WinningPlace, Int> = mutableMapOf(
             FIRST to 0,
             SECOND to 0,
@@ -35,37 +52,18 @@ data class WinningCounter private constructor(
             FIFTH to 0
         )
 
-        fun counter(tickets: LottoTickets, winningCondition: WinningCondition): Builder {
-            tickets.forEach {
-                val winningCount = it.countMatch(winningCondition.winningNumbers)
-                val bonusCount = it.countMatch(winningCondition.bonusNumber)
-
-                record(winningCount, bonusCount)
-            }
-            return this
-        }
-
         fun counter(counter: MutableMap<WinningPlace, Int>): Builder {
             this.counter = counter
             return this
         }
 
-        private fun record(matchCount: Int, bonusCount: Int) {
-            val place = WinningPlace.match(matchCount, bonusCount > 0)
-
-            increment(place)
-        }
-
-        private fun increment(place: WinningPlace) {
-            if (place == MISS) {
-                return
-            }
-
-            counter[place] = counter.getValue(place) + 1
+        fun winningCondition(winningCondition: WinningCondition): Builder {
+            this.winningCondition = winningCondition
+            return this
         }
 
         fun build(): WinningCounter {
-            return WinningCounter(counter.toMutableMap())
+            return WinningCounter(counter.toMutableMap(), winningCondition)
         }
     }
 }

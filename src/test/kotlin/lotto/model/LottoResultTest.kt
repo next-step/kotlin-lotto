@@ -5,6 +5,8 @@ import lotto.model.WinningPlace.SECOND
 import lotto.model.WinningPlace.THIRD
 import lotto.model.WinningPlace.FOURTH
 import lotto.model.WinningPlace.FIFTH
+import lotto.model.number.BonusNumber
+import lotto.model.number.WinningNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -24,27 +26,31 @@ internal class LottoResultTest {
     }
 
     companion object {
+        private val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
+        private val bonusNumber = BonusNumber.get(7)
+        private val winningCondition = WinningCondition(winningNumbers, bonusNumber)
+
         @JvmStatic
         fun lottoResultProvider(): List<Arguments> {
             return listOf(
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
                         true
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 1, SECOND to 1, THIRD to 0, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 1, SECOND to 1, THIRD to 0, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
                         false
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(23_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(10_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build(), Money(23_000)),
                         false
                     )
                 }
@@ -56,19 +62,19 @@ internal class LottoResultTest {
             return listOf(
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build(), Money(5_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build(), Money(5_000)),
                         1.0
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)).build(), Money(5_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)).build(), Money(5_000)),
                         0.0
                     )
                 },
                 Arguments {
                     arrayOf(
-                        LottoResult(WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build(), Money(14_000)),
+                        LottoResult(WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build(), Money(14_000)),
                         0.35
                     )
                 }

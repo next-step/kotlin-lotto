@@ -18,9 +18,9 @@ internal class WinningCounterTest {
     fun `인자로 주어진 counter 를 그대로 사용하지 않는다`() {
         val paramCounter = mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)
 
-        val result1 = WinningCounter.Builder().counter(paramCounter).build()
+        val result1 = WinningCounter.Builder(winningCondition).counter(paramCounter).build()
         paramCounter[FIRST] = 1
-        val result2 = WinningCounter.Builder().counter(paramCounter).build()
+        val result2 = WinningCounter.Builder(winningCondition).counter(paramCounter).build()
 
         assertThat(result1).isNotEqualTo(result2)
     }
@@ -28,60 +28,58 @@ internal class WinningCounterTest {
     @ParameterizedTest
     @MethodSource("winningCounterProvider")
     fun `당첨 번호를 입력 받아서 알맞은 WinningCounter 를 반환한다`(
-        winningNumbers: WinningNumbers,
-        bonusNumbers: BonusNumber,
         lottoTickets: LottoTickets,
         winningCounter: WinningCounter
     ) {
-        val result = WinningCounter.Builder().counter(lottoTickets, WinningCondition(winningNumbers, bonusNumbers)).build()
+        val result = WinningCounter.Builder(winningCondition).build()
+
+        lottoTickets.forEach {
+            result.record(it)
+        }
 
         assertThat(result).isEqualTo(winningCounter)
     }
 
     companion object {
+        private val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
+        private val bonusNumber = BonusNumber.get(7)
+        private val winningCondition = WinningCondition(winningNumbers, bonusNumber)
+
         @JvmStatic
         fun winningCounterProvider(): List<Arguments> {
             return listOf(
                 Arguments {
                     arrayOf(
-                        WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                        BonusNumber.get(7),
                         LottoTickets(listOf(LottoTicket(listOf(7, 8, 9, 10, 11, 12)))),
-                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)).build()
+                        WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0)).build()
                     )
                 },
                 Arguments {
                     arrayOf(
-                        WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                        BonusNumber.get(7),
                         LottoTickets(listOf(LottoTicket(listOf(1, 2, 3, 10, 11, 12)))),
-                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build()
+                        WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 1)).build()
                     )
                 },
                 Arguments {
                     arrayOf(
-                        WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                        BonusNumber.get(7),
                         LottoTickets(
                             listOf(
                                 LottoTicket(listOf(1, 2, 3, 10, 11, 12)),
                                 LottoTicket(listOf(1, 2, 3, 4, 11, 12))
                             )
                         ),
-                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1, FIFTH to 1)).build()
+                        WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 1, FIFTH to 1)).build()
                     )
                 },
                 Arguments {
                     arrayOf(
-                        WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                        BonusNumber.get(7),
                         LottoTickets(
                             listOf(
                                 LottoTicket(listOf(1, 2, 3, 4, 5, 7)),
                                 LottoTicket(listOf(1, 2, 3, 4, 5, 12))
                             )
                         ),
-                        WinningCounter.Builder().counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build()
+                        WinningCounter.Builder(winningCondition).counter(mutableMapOf(FIRST to 0, SECOND to 1, THIRD to 1, FOURTH to 0, FIFTH to 0)).build()
                     )
                 }
             )

@@ -8,8 +8,8 @@ import lotto.model.number.LottoNumbers
 class LottoTicket(val candidateNumbers: CandidateNumbers = autoCreate()) {
     constructor(candidateNumbers: List<Int>) : this(CandidateNumbers(candidateNumbers))
 
-    fun countMatch(targetNumber: LottoNumber): Int {
-        return if (candidateNumbers.contains(targetNumber)) 1 else 0
+    fun isMatch(targetNumber: LottoNumber): Boolean {
+        return candidateNumbers.contains(targetNumber)
     }
 
     fun countMatch(targetNumbers: LottoNumbers): Int {
