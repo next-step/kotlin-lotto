@@ -1,12 +1,12 @@
 package lotto.domain
 
 class Lotto(
-    generator: LottoNumberGenerator = LottoNumberRandomGenerator(),
-    val numbers: Set<LottoNumber> = createLottoNumberByGenerator(generator)
+    val numbers: Set<LottoNumber>
 ) {
     init {
         require(numbers.size == 6) { "로또 번호는 6개가 있어야 합니다" }
     }
+    constructor(generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(createLottoNumberByGenerator(generator))
 
     fun matchByWonNumber(wonNumbers: LottoWonNumbers): Rank {
         val wonNumberCount: Int = numbers.count { wonNumbers.lottoNumber.contains(it) }
@@ -24,7 +24,7 @@ class Lotto(
         private fun createLottoNumberByGenerator(generator: LottoNumberGenerator): Set<LottoNumber> {
             val lottoNumbers = mutableSetOf<LottoNumber>()
             while (lottoNumbers.size < LOTTO_NUMBER_COUNT) {
-                lottoNumbers.add(LottoNumber(generator.number))
+                lottoNumbers.add(LottoNumber(generator.pickNumber()))
             }
 
             return lottoNumbers.toSet()

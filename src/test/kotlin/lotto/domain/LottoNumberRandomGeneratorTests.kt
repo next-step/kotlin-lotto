@@ -10,7 +10,7 @@ class LottoNumberRandomGeneratorTests {
         val checkSet: MutableSet<Int> = mutableSetOf()
         val generator: LottoNumberGenerator = LottoNumberRandomGenerator(1, 5)
         while (checkSet.size < 5) {
-            val number = generator.number
+            val number = generator.pickNumber()
 
             checkSet.add(number)
             callCount++

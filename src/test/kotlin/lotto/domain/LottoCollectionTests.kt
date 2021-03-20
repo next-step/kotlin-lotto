@@ -85,9 +85,7 @@ class LottoCollectionTests {
     fun 원하는_대로_만들어_주는_제너레이터(random: Array<Int>): LottoNumberGenerator {
         return object : LottoNumberGenerator {
             private var count = 0
-
-            override val number: Int
-                get() = random[count++ % 6]
+            override fun pickNumber(): Int = random[count++ % 6]
         }
     }
 }

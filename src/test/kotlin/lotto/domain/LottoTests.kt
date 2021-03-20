@@ -123,15 +123,13 @@ class LottoTests {
         return object : LottoNumberGenerator {
             private var increase: Int = 1
 
-            override val number: Int
-                get() = increase++
+            override fun pickNumber(): Int = increase++
         }
     }
 
     fun 중첩된_숫자가_쫀재하는_제너레이터(queue: Queue<Int>): LottoNumberGenerator {
         return object : LottoNumberGenerator {
-            override val number: Int
-                get() = queue.poll()
+            override fun pickNumber(): Int = queue.poll()
         }
     }
 }
