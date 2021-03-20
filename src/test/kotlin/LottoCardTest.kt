@@ -2,6 +2,9 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoCardTest {
 
@@ -40,5 +43,25 @@ class LottoCardTest {
         assertThat(statistic.filter { it.key == Winning.THIRD }.size, Matchers.`is`(1))
         assertThat(statistic.filter { it.key == Winning.FIFTH }.size, Matchers.`is`(1))
         assertThat(statistic.size, Matchers.`is`(4))
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3,4,5", "1,2,3,4,5,6,7"])
+    fun `로또 번호를 6개 입력하지 않으면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            LottoCard(parseNumbers(numbers))
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1,2,-3,74,95,100", "1,2,3,4,5,66"])
+    fun `입력된 숫자가 로또 번호 범위에 포함되지 않으면 예외가 발생한다`(numbers: String) {
+        assertThrows<IllegalArgumentException> {
+            LottoCard(parseNumbers(numbers))
+        }
+    }
+
+    private fun parseNumbers(numberLine: String): List<Int> {
+        return numberLine.split(",").map { it.parseInt() }
     }
 }

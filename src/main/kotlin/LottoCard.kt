@@ -3,10 +3,17 @@ class LottoCard {
 
     constructor() {
         numbers = LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT)
+        validateNumbers()
     }
 
     constructor(numbers: List<Int>) {
         this.numbers = numbers
+        validateNumbers()
+    }
+
+    private fun validateNumbers() {
+        require(numbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개여야 합니다." }
+        require(numbers.none { it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
     }
 
     fun getWinning(winningLottoCard: LottoCard, bonusNumber: Int): Winning {
