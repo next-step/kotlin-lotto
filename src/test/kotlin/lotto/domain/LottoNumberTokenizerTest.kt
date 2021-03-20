@@ -1,8 +1,10 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoNumberTokenizerTest {
     @ParameterizedTest
@@ -20,5 +22,15 @@ internal class LottoNumberTokenizerTest {
         assertThat(lottoNumberTokens[3]).isEqualTo(4)
         assertThat(lottoNumberTokens[4]).isEqualTo(5)
         assertThat(lottoNumberTokens[5]).isEqualTo(6)
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(
+        strings = ["", " ", "   "]
+    )
+    fun `빈 값 토큰화 시도하면 빈 리스트 반환`(stringLottoNumbers: String) {
+        val lottoNumberTokens: List<Int> = LottoNumberTokenizer.tokenize(stringLottoNumbers)
+        assertThat(lottoNumberTokens.isEmpty()).isTrue()
     }
 }

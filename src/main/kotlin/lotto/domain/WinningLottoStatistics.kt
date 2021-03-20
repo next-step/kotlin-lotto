@@ -1,7 +1,7 @@
 package lotto.domain
 
 class WinningLottoStatistics(
-    lottoTickets: List<Lotto>,
+    lottoTicket: LottoTicket,
     winningLottoNumbers: WinningLottoNumbers
 ) {
     val statistics: MutableMap<LottoRank, Int> = hashMapOf()
@@ -9,7 +9,7 @@ class WinningLottoStatistics(
     init {
         initializeRankMap()
 
-        lottoTickets.forEach {
+        lottoTicket.getTickets().forEach {
             addRankStatistics(rank(it, winningLottoNumbers))
         }
     }
@@ -33,10 +33,12 @@ class WinningLottoStatistics(
         return LottoRank.selectByMatchCount(winningNumberCount, matchBonus)
     }
 
-    fun calculateProfitRate(buyingPrice: Int): Double {
-        return statistics.entries.fold(0) { total, winningPrice ->
+    fun calculateProfitRate(buyingPrice: LottoPrice): LottoProfitRate {
+        val total = statistics.entries.fold(0) { total, winningPrice ->
             total + winningPrice.key.winningMoney * winningPrice.value
-        } / buyingPrice.toDouble()
+        }
+
+        return LottoProfitRate(total, buyingPrice)
     }
 
     companion object {

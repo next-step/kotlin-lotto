@@ -1,17 +1,16 @@
 package lotto.domain
 
 object LottoMachine {
-    const val LOTTO_TICKET_PRICE: Int = 1000
+    fun buy(buyingLotto: BuyingLotto): LottoTicket {
+        val automaticLotto = dispenseAuto(buyingLotto.automaticCount)
 
-    fun buy(price: Int): List<Lotto> {
-        require(price >= LOTTO_TICKET_PRICE) {
-            "최소 ${LOTTO_TICKET_PRICE}원 이상 구매해야 합니다."
-        }
-        val ticketCount = price / LOTTO_TICKET_PRICE
-        return dispense(ticketCount)
+        return LottoTicket(
+            manuals = buyingLotto.manualLotto,
+            automatics = automaticLotto
+        )
     }
 
-    private fun dispense(ticketCount: Int): List<Lotto> {
-        return (1..ticketCount).map { Lotto.create() }
+    private fun dispenseAuto(count: LottoCount): List<Lotto> {
+        return (1..count.value).map { Lotto.create() }
     }
 }
