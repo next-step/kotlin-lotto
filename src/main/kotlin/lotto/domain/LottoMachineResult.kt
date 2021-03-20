@@ -17,7 +17,7 @@ class LottoMachineResult(
     }
 
     fun calculateProfit(purchaseInfo: PurchaseInfo): Double {
-        val purchaseMoney: Int = purchaseInfo.money
+        val purchaseMoney: Int = purchaseInfo.moneyInput
         val winningMoney: Int = lottoTicketResults
             .map { it.lottoRank.price }
             .sum()

@@ -3,8 +3,7 @@ package lotto.domain
 import lotto.supportdata.PurchaseInfo
 
 class LottoMachine(private val purchaseInfo: PurchaseInfo) {
-
-    fun makeLottoTickets(): List<LottoTicket> = List(purchaseInfo.autoTicketNumber) { makeRandomLottoTickets() }
+    fun makeAutoLottoTickets(): List<LottoTicket> = List(purchaseInfo.autoTicketNumber) { makeRandomLottoTickets() }
 
     private fun makeRandomLottoTickets(): LottoTicket {
         val lottoNumbers = LottoNumber.baseLottoNumbers
