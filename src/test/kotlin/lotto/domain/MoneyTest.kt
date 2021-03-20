@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.LottoGame.Companion.LOTTO_COST
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.assertThrows
 class MoneyTest {
 
     private lateinit var money: Money
+    private val LOTTO_COST = 1000
 
     @BeforeEach
     fun init() {
@@ -22,14 +24,16 @@ class MoneyTest {
 
     @Test
     fun `모든 돈을 다 써버리고 잔액 확인`() {
-        money.spendAllMoney()
+        val availableQuantity = money.getQuantityOfAvailablePurchase()
+        money.spendMoney(availableQuantity * LOTTO_COST)
         assertThat(money.currentMoney).isEqualTo(0)
     }
 
     @Test
     fun `돈을 일부 사용한 다음 남은 돈을 모두 사용한다`() {
         money.spendMoney(3000)
-        money.spendAllMoney()
+        val availableQuantity = money.getQuantityOfAvailablePurchase()
+        money.spendMoney(availableQuantity * LOTTO_COST)
         assertThat(money.currentMoney).isEqualTo(0)
     }
 

@@ -22,11 +22,6 @@ class Money(initMoney: Int) {
         spentMoney += money
     }
 
-    fun spendAllMoney() {
-        spentMoney += currentMoney
-        currentMoney -= currentMoney
-    }
-
     private fun checkEnoughMoney(spendMoney: Int) {
         check(spendMoney <= currentMoney) {
             "사고자 하는 수량이 현재 가진 돈보다 많습니다.[현재 돈 :$currentMoney 쓰려는 돈: $spendMoney]"
