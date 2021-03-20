@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertThrows
 
 internal class LottoTicketTest {
     @DisplayName("1 이상 45 이하의 숫자를 가진 로또 티켓 생성")
@@ -36,5 +37,23 @@ internal class LottoTicketTest {
         val ticket = LottoTicket.create(OneToSixStrategy())
 
         assertThat(ticket.getMatchCount(numbers)).isEqualTo(3)
+    }
+
+    @DisplayName("로또 티켓을 생성할 때 로또 숫자의 개수가 맞지 않을 경우 예외 발생")
+    @Test
+    fun validateSize() {
+        assertThrows<IllegalArgumentException> {
+            LottoTicket(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                    LottoNumber(7),
+                )
+            )
+        }
     }
 }

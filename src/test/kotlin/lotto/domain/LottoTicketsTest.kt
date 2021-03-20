@@ -14,8 +14,8 @@ internal class LottoTicketsTest {
 
         assertAll(
             { assertThat(actual.tickets.size).isEqualTo(2) },
-            { assertThat(actual.tickets[0].numbers.containsAll(createLotto(1, 2, 3, 4, 5, 6))).isTrue },
-            { assertThat(actual.tickets[1].numbers.containsAll(createLotto(1, 2, 3, 4, 5, 6))).isTrue },
+            { assertThat(actual.tickets[0].numbers.containsAll(createLotto(1, 2, 3, 4, 5, 6).numbers)).isTrue },
+            { assertThat(actual.tickets[1].numbers.containsAll(createLotto(1, 2, 3, 4, 5, 6).numbers)).isTrue },
         )
     }
 

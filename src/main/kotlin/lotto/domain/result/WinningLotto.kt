@@ -1,9 +1,10 @@
 package lotto.domain.result
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 
-class WinningLotto private constructor(val numbers: List<LottoNumber>) {
+class WinningLotto private constructor(val numbers: LottoTicket) {
     fun match(lottoTickets: LottoTickets): LottoResult {
         val matchCounts = lottoTickets.getMatchCounts(numbers)
         return LottoRank.rank(matchCounts)
@@ -11,7 +12,8 @@ class WinningLotto private constructor(val numbers: List<LottoNumber>) {
 
     companion object {
         fun of(input: String): WinningLotto {
-            return WinningLotto(input.split(", ").map { LottoNumber(it) })
+            val lottoTicket = LottoTicket(input.split(", ").map { LottoNumber(it) }.toSet())
+            return WinningLotto(lottoTicket)
         }
     }
 }

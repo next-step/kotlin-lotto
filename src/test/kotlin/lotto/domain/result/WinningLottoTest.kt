@@ -15,7 +15,7 @@ internal class WinningLottoTest {
     fun of() {
         val actual = WinningLotto.of("1, 2, 3, 4, 5, 6")
 
-        assertThat(actual.numbers.containsAll(createLotto(1, 2, 3, 4, 5, 6))).isTrue
+        assertThat(actual.numbers.numbers.containsAll(createLotto(1, 2, 3, 4, 5, 6).numbers)).isTrue
     }
 
     @DisplayName("로또 티켓들을 인자로 넣은 경우 LottoResult 반환")

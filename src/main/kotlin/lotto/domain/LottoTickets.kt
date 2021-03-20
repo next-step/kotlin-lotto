@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.strategy.NumberGenerateStrategy
 
 class LottoTickets(val tickets: List<LottoTicket>) {
-    fun getMatchCounts(numbers: List<LottoNumber>): List<Int> {
+    fun getMatchCounts(numbers: LottoTicket): List<Int> {
         return tickets.map { it.getMatchCount(numbers) }
     }
 
