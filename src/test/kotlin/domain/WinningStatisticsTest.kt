@@ -32,18 +32,18 @@ internal class WinningStatisticsTest {
     ) {
         val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
         val sixCorrectLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val fiveCorrectLotto = Lotto(2, 3, 4, 5, 6, 7)
-        val fourCorrectLotto = Lotto(3, 4, 5, 6, 7, 8)
-        val threeCorrectLotto = Lotto(4, 5, 6, 7, 8, 9)
+        val fiveCorrectLotto = Lotto(1, 2, 3, 4, 5, 45)
+        val fourCorrectLotto = Lotto(1, 2, 3, 4, 44, 45)
+        val threeCorrectLotto = Lotto(1, 2, 3, 43, 44, 45)
         val noCorrectLotto = Lotto(40, 41, 42, 43, 44, 45)
 
         val statistics = WinningStatistics(
             winningNumbers = winningNumbers,
-            lottos = List(sixCorrectCount) { sixCorrectLotto } +
-                List(fiveCorrectCount) { fiveCorrectLotto } +
-                List(fourCorrectCount) { fourCorrectLotto } +
-                List(threeCorrectCount) { threeCorrectLotto } +
-                List(noCorrectCount) { noCorrectLotto },
+            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
+                fiveCorrectLotto.nTimes(fiveCorrectCount) +
+                fourCorrectLotto.nTimes(fourCorrectCount) +
+                threeCorrectLotto.nTimes(threeCorrectCount) +
+                noCorrectLotto.nTimes(noCorrectCount),
             lottoUnitPrice = Money(1000)
         )
 
@@ -52,4 +52,6 @@ internal class WinningStatisticsTest {
         assertThat(statistics.countLottoBy(WinningCategory.FOUR_CORRECT)).isEqualTo(fourCorrectCount)
         assertThat(statistics.countLottoBy(WinningCategory.THREE_CORRECT)).isEqualTo(threeCorrectCount)
     }
+
+    private fun Lotto.nTimes(number: Int): List<Lotto> = List(number) { this }
 }
