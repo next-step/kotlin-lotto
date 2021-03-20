@@ -28,8 +28,7 @@ fun main() {
 
     outputView.printLottoesResult(
         money,
-        autoLottoes.getMyLottoesRanks(winningLotto),
-        manualLottoes.getMyLottoesRanks(winningLotto)
+        universalLottoes.getMyLottoesRanks(winningLotto)
     )
 }
 

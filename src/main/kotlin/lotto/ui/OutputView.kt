@@ -18,23 +18,21 @@ class OutputView {
         }
     }
 
-    fun printLottoesResult(money: Money, manualRanks: LottoesRank, autoRanks: LottoesRank) {
-        val manualRankMap = manualRanks.getRanks()
-        val autoRankMap = autoRanks.getRanks()
+    fun printLottoesResult(money: Money, lottoesRank: LottoesRank) {
+        val lottoesRankMap = lottoesRank.getRanks()
         println("\n당첨 통계")
         println("------------")
-        println("3개 일치 (5000원) - ${(manualRankMap[Rank.FIFTH] ?: 0) + (autoRankMap[Rank.FIFTH] ?: 0)}개")
-        println("4개 일치 (50,000원) - ${(manualRankMap[Rank.FOURTH] ?: 0) + (autoRankMap[Rank.FOURTH] ?: 0)}개")
-        println("5개 일치 (1,500,000원) - ${(manualRankMap[Rank.THIRD] ?: 0) + (autoRankMap[Rank.THIRD] ?: 0)}개")
-        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${(manualRankMap[Rank.SECOND] ?: 0) + (autoRankMap[Rank.SECOND] ?: 0)}개")
-        println("6개 일치 (2,000,000,000원) - ${(manualRankMap[Rank.FIRST] ?: 0) + (autoRankMap[Rank.FIRST] ?: 0)}개")
+        println("3개 일치 (5000원) - ${(lottoesRankMap[Rank.FIFTH] ?: 0)}개")
+        println("4개 일치 (50,000원) - ${(lottoesRankMap[Rank.FOURTH] ?: 0)}개")
+        println("5개 일치 (1,500,000원) - ${(lottoesRankMap[Rank.THIRD] ?: 0)}개")
+        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${(lottoesRankMap[Rank.SECOND] ?: 0)}개")
+        println("6개 일치 (2,000,000,000원) - ${(lottoesRankMap[Rank.FIRST] ?: 0)}개")
 
-        printRateOfReturn(money, manualRanks, autoRanks)
+        printRateOfReturn(money, lottoesRank)
     }
 
-    private fun printRateOfReturn(money: Money, manualRanks: LottoesRank, autoRanks: LottoesRank) {
-        val manualLottesMoney = manualRanks.getWinningMoney()
-        val autoLottesMoney = autoRanks.getWinningMoney()
-        println("총 수익률은 ${money.calculateRateOfReturn(manualLottesMoney + autoLottesMoney)}입니다.")
+    private fun printRateOfReturn(money: Money, lottoesRank: LottoesRank) {
+        val lottoesWinningMoney = lottoesRank.getWinningMoney()
+        println("총 수익률은 ${money.calculateRateOfReturn(lottoesWinningMoney)}입니다.")
     }
 }
