@@ -34,17 +34,7 @@ class LottoTests {
         val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
         val rank: Rank = lotto.matchByWonNumber(
-            LottoWonNumbers(
-                setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(44),
-                    LottoNumber(45)
-                ),
-                LottoNumber(43)
-            )
+            LottoWonNumbers(setOf(1, 2, 3, 4, 44, 45), 43)
         )
 
         assertThat(rank)
@@ -89,31 +79,9 @@ class LottoTests {
     fun `5개가 맞고, 1개의 보너스가 맞으면은 2등이다 `() {
         val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
-        val rank: Rank = lotto.matchByWonNumber(
-            LottoWonNumbers(
-                setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(44),
-                    LottoNumber(45)
-                ),
-                LottoNumber(43)
-            )
-        )
+        val rank: Rank = lotto.matchByWonNumber(LottoWonNumbers(setOf(1, 2, 3, 4, 44, 45), 43))
 
-        val wonNumbers: LottoWonNumbers = LottoWonNumbers(
-            setOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(10)
-            ),
-            LottoNumber(6)
-        )
+        val wonNumbers: LottoWonNumbers = LottoWonNumbers(setOf(1, 2, 3, 4, 5, 10), 6)
 
         assertThat(lotto.matchByWonNumber(wonNumbers))
             .isEqualTo(Rank.SECOND)
