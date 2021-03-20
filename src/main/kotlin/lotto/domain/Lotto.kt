@@ -13,7 +13,7 @@ class Lotto(val numbers: Set<LottoNumber>) {
 
     fun matchByWonNumber(wonNumbers: LottoWonNumbers): Rank {
         val wonNumberCount: Int = numbers.count { wonNumbers.lottoNumber.contains(it) }
-        val matchBonus: Boolean = numbers.contains(wonNumbers.bonusNUmber)
+        val matchBonus: Boolean = numbers.contains(wonNumbers.bonusNumber)
 
         return Rank.getRankByCount(wonNumberCount, matchBonus)
     }
