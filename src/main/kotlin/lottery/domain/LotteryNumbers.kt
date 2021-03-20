@@ -9,10 +9,6 @@ class LotteryNumbers(numbers: List<Int>) : List<Int> by numbers {
         require(this.numbers.size == MAX_LOTTERY_NUMBERS_SIZE) { "로또 번호의 개수는 6개이여야 합니다. : ${this.numbers.size}" }
     }
 
-    companion object {
-        const val MAX_LOTTERY_NUMBERS_SIZE = 6
-    }
-
     override fun toString(): String {
         return "[ ${numbers.joinToString()} ]"
     }
@@ -30,5 +26,9 @@ class LotteryNumbers(numbers: List<Int>) : List<Int> by numbers {
 
     override fun hashCode(): Int {
         return numbers.hashCode()
+    }
+
+    companion object {
+        const val MAX_LOTTERY_NUMBERS_SIZE = 6
     }
 }
