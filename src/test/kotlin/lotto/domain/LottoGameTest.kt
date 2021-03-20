@@ -1,47 +1,51 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class LottoGameTest {
 
-    private lateinit var lottoGame: LottoGame
-
-    @BeforeEach
-    fun setup() {
-        lottoGame = LottoGame(listOf(1, 2, 3, 4, 5, 6))
+    @Test
+    fun `3등 로또 번호 2개가 들어 있는 경우`() {
+        val lotto1 = Lotto(1, 2, 3, 4, 9, 11)
+        val lotto2 = Lotto(1, 2, 3, 4, 10, 12)
+        val lotto3 = Lotto(45, 44, 43, 42, 41, 40)
+        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val lottoGame = LottoGame(listOf(lotto1, lotto2, lotto3))
+        assertThat(lottoGame.matchLotto(winningLotto)[LottoRank.THIRD]).isEqualTo(2)
     }
 
     @Test
-    fun `당첨 숫자와 일치하는 숫자가 3개 이다`() {
-        val lottoNumbers = listOf(1, 2, 3, 7, 8, 9)
-        assertThat(lottoGame.findMatchCount(lottoNumbers)).isEqualTo(3)
+    fun `4등 로또 번호 2개가 들어 있는 경우`() {
+        val lotto1 = Lotto(1, 7, 3, 4, 9, 11)
+        val lotto2 = Lotto(1, 8, 3, 4, 10, 12)
+        val lotto3 = Lotto(45, 44, 43, 42, 41, 40)
+        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val lottoGame = LottoGame(listOf(lotto1, lotto2, lotto3))
+        assertThat(lottoGame.matchLotto(winningLotto)[LottoRank.FOURTH]).isEqualTo(2)
     }
 
     @Test
-    fun `당첨 숫자와 일치하는 숫자가 4개 이다`() {
-        val lottoNumbers = listOf(1, 2, 3, 4, 8, 9)
-        assertThat(lottoGame.findMatchCount(lottoNumbers)).isEqualTo(4)
+    fun `2등 로또 번호 2개가 들어 있는 경우`() {
+        val lotto1 = Lotto(1, 2, 3, 4, 5, 11)
+        val lotto2 = Lotto(1, 2, 3, 4, 5, 12)
+        val lotto3 = Lotto(45, 44, 43, 42, 41, 40)
+        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val lottoGame = LottoGame(listOf(lotto1, lotto2, lotto3))
+        assertThat(lottoGame.matchLotto(winningLotto)[LottoRank.SECOND]).isEqualTo(2)
     }
 
     @Test
-    fun `당첨 숫자와 일치하는 숫자가 5개 이다`() {
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 9)
-        assertThat(lottoGame.findMatchCount(lottoNumbers)).isEqualTo(5)
+    fun `1등 로또 번호 2개가 들어 있는 경우`() {
+        val lotto1 = Lotto(1, 2, 3, 4, 5, 6)
+        val lotto2 = Lotto(1, 2, 3, 4, 5, 6)
+        val lotto3 = Lotto(45, 44, 43, 42, 41, 40)
+        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val lottoGame = LottoGame(listOf(lotto1, lotto2, lotto3))
+        assertThat(lottoGame.matchLotto(winningLotto)[LottoRank.FIRST]).isEqualTo(2)
     }
 
-    @Test
-    fun `3등이 1개인 경우`() {
-        lottoGame.addMatchedLottoRankCount(LottoRank.THIRD)
-        assertThat(lottoGame.getRankCount(LottoRank.THIRD)).isEqualTo(1)
-    }
-
-    @Test
-    fun `2등이 3개인 경우`() {
-        lottoGame.addMatchedLottoRankCount(LottoRank.SECOND)
-        lottoGame.addMatchedLottoRankCount(LottoRank.SECOND)
-        lottoGame.addMatchedLottoRankCount(LottoRank.SECOND)
-        assertThat(lottoGame.getRankCount(LottoRank.SECOND)).isEqualTo(3)
+    private fun Lotto(vararg numbers: Int): Lotto {
+        return Lotto(numbers.map { LottoNumber.from(it) })
     }
 }
