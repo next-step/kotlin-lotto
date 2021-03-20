@@ -8,6 +8,14 @@ class LottoTicket(val value: TreeSet<LottoNumber>) {
         checkValidateLottoTicket()
     }
 
+    constructor(numbers: List<Int>) : this(
+        TreeSet(
+            numbers.map { number ->
+                LottoNumber.from(number)
+            }
+        )
+    )
+
     fun getCountOfMatch(lottoTicket: LottoTicket): Int {
         return lottoTicket.value.count { lottoNumber ->
             value.contains(lottoNumber)
@@ -24,13 +32,5 @@ class LottoTicket(val value: TreeSet<LottoNumber>) {
 
     companion object {
         const val LENGTH_OF_LOTTO = 6
-
-        fun generateManual(numbers: List<Int>): LottoTicket {
-            return LottoTicket(
-                TreeSet(numbers.map { number ->
-                    LottoNumber.from(number)
-                })
-            )
-        }
     }
 }

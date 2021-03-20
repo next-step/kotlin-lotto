@@ -16,6 +16,6 @@ class AutoStrategy : LottoStrategy {
             .shuffled()
             .take(LottoTicket.LENGTH_OF_LOTTO)
 
-        return LottoTicket.generateManual(numbers)
+        return LottoTicket(numbers)
     }
 }

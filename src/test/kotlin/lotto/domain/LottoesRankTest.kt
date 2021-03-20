@@ -13,20 +13,13 @@ class LottoesRankTest {
     fun init() {
         lottoes = Lottoes(
             listOf(
-                LottoTicket.generateManual(listOf(3, 5, 6, 7, 8, 13)),
-                LottoTicket.generateManual(listOf(3, 5, 6, 7, 8, 11)),
-                LottoTicket.generateManual(listOf(3, 5, 6, 7, 8, 9)),
-                LottoTicket.generateManual(listOf(3, 5, 6, 7, 8, 9))
+                LottoTicket(listOf(3, 5, 6, 7, 8, 13)),
+                LottoTicket(listOf(3, 5, 6, 7, 8, 11)),
+                LottoTicket(listOf(3, 5, 6, 7, 8, 9)),
+                LottoTicket(listOf(3, 5, 6, 7, 8, 9))
             )
         )
-        val winningNumbers = setOf<LottoNumber>(
-            LottoNumber.from(3),
-            LottoNumber.from(5),
-            LottoNumber.from(6),
-            LottoNumber.from(7),
-            LottoNumber.from(8),
-            LottoNumber.from(9)
-        )
+        val winningNumbers = listOf<Int>(3,5,6,7,8,9)
 
         val bonusNumber = LottoNumber.from(11)
         winningLotto = WinningLotto(LottoTicket(winningNumbers), bonusNumber)

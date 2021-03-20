@@ -17,8 +17,10 @@ class LottoNumber private constructor(private val value: Int): Comparable<LottoN
     }
 
     override fun compareTo(other: LottoNumber): Int {
-        return if(value > other.value){
-            1
-        } else -1
+        return when {
+            value > other.value -> 1
+            value == other.value -> 0
+            else -> -1
+        }
     }
 }

@@ -33,7 +33,7 @@ fun main() {
 }
 
 private fun createWinningTicket(): LottoTicket {
-    return LottoTicket.generateManual(
+    return LottoTicket(
         inputView.inputPrizeNumber().map {
             it.toInt()
         }

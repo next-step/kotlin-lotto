@@ -14,7 +14,7 @@ class ManualStrategy(
             convertStringToInt(strings)
         }
 
-        return manualNumbers.map { LottoTicket.generateManual(it) }
+        return manualNumbers.map { LottoTicket(it) }
     }
 
     private fun convertStringToInt(strings: List<String>): List<Int> {
