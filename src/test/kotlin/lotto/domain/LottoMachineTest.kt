@@ -11,7 +11,7 @@ internal class LottoMachineTest {
     @Test
     @DisplayName("주어진 구매 정보만큼 랜덤하게 숫자를 생성한 로또 티켓을 만들 수 있다.")
     fun makeRandomLottoTickets() {
-        val lottoTicket = LottoMachine(PurchaseInfo(14000)).makeAutoLottoTickets()
+        val lottoTicket = LottoMachine(PurchaseInfo(14000)).makeLottoTickets()
         assertThat(lottoTicket.size).isEqualTo(14)
     }
 }
