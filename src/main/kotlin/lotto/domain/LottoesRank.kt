@@ -4,9 +4,7 @@ class LottoesRank(
     private val value: Map<Rank, Int>
 ) {
     fun getRanks(): Map<Rank, Int> {
-        return value.mapValues { rank ->
-            rank.value
-        }
+        return value
     }
 
     fun getWinningMoney(): Long {
