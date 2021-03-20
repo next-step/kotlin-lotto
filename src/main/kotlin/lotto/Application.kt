@@ -1,21 +1,35 @@
 package lotto.view
 
-import lotto.domain.LottoMachine
-import lotto.domain.LottoNumberTokenizer
-import lotto.domain.WinningLottoNumbers
-import lotto.domain.WinningLottoStatistics
+import lotto.controller.LottoGame
+import lotto.domain.BuyingLotto
+import lotto.domain.LottoCount
+import lotto.domain.LottoPrice
+import lotto.domain.ManualLottoCount
+import lotto.domain.ManualNumbers
 
 fun main() {
-    val buyingPrice = InputView.enterLottoBuyingPrice()
-    val lottoTickets = LottoMachine.buy(buyingPrice)
-    ResultView.printLottoTickets(lottoTickets)
-    val stringLottoNumbers = InputView.enterLastWeekWinningLottoNumbers()
-    val winningLottoNumberTokens = LottoNumberTokenizer.tokenize(stringLottoNumbers)
-    val bonusNumber = InputView.enterBonusNumber()
+    val buyingPrice = LottoPrice(InputView.enterLottoBuyingPrice())
+    buyingPrice.getMaximumCount()
+    val manualLottoCount = ManualLottoCount(buyingPrice, LottoCount.from(InputView.enterManualLottoCount()))
+    val game = LottoGame(
+        BuyingLotto(
+            buyingPrice,
+            askManualLotto(manualLottoCount)
+        )
+    )
+    val lottoTicket = game.start()
+    ResultView.printLottoTickets(lottoTicket)
+    val result = game.doResult(lottoTicket)
+    ResultView.printResult(result)
+}
 
-    val winningLottoNumbers = WinningLottoNumbers.of(winningLottoNumberTokens, bonusNumber)
-    val winningLottoStatistics = WinningLottoStatistics(lottoTickets, winningLottoNumbers)
-    val lottoProfitRate = winningLottoStatistics.calculateProfitRate(buyingPrice)
-    ResultView.printWinningLottoStatistics(winningLottoStatistics)
-    ResultView.printLottoProfitRate(lottoProfitRate)
+fun askManualLotto(manualLottoCount: ManualLottoCount): ManualNumbers? {
+    if(manualLottoCount.count.isEmpty()) return null
+    val manualNumbers = mutableListOf<String>()
+
+    repeat(manualLottoCount.count.value) {
+        manualNumbers.add(InputView.enterManualLottoNumbers(manualLottoCount.count))
+    }
+
+    return ManualNumbers(manualNumbers)
 }
