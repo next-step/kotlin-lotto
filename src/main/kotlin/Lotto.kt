@@ -6,6 +6,7 @@ fun main() {
     val passiveCnt = lotto.validatePassiveCnt(inputPassive(), lottoCnt)
 
     val lottoCards = LottoCards()
+    inputPassiveNumbers(passiveCnt, lotto).forEach { lottoCards.addLottoCard(it) }
     lottoCards.generateRandomLottoCard(lottoCnt)
     printLottoCards(lottoCards)
 
