@@ -10,8 +10,6 @@ import lotto.domain.Money
 import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.OutputView
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 private val inputView = InputView()
 private val outputView = OutputView()
