@@ -1,3 +1,7 @@
 package view
 
-class WinningStatisticsView
+class WinningStatisticsView {
+    fun print() {
+        println("당첨 통계\n---------")
+    }
+}
