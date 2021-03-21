@@ -16,16 +16,14 @@ class StringAddCalculator {
             text.split(",", ":")
         }
         return if (numbers.size == 1) {
-            text.toInt().also { number ->
-                if (number < 0) throw RuntimeException()
-            }
+            text.parseNumber()
         } else {
-            numbers.map {
-                it.toInt().also { number ->
-                    if (number < 0) throw RuntimeException()
-                }
-            }.sum()
+            numbers.map { it.parseNumber() }.sum()
         }
+    }
+
+    private fun String.parseNumber() = toInt().also { number ->
+        if (number < 0) throw RuntimeException()
     }
 
 }
