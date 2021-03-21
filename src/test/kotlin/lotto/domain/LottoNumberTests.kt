@@ -9,7 +9,7 @@ import java.lang.IllegalArgumentException
 class LottoNumberTests {
     @ParameterizedTest
     @ValueSource(ints = [0, 46])
-    fun `로또 번호는 1~45가 아니면 Exception이 발생한다`(number: Int) {
+    fun `로또 번호는 1~45가 아니면 IllegalArgumentException이 발생한다`(number: Int) {
         assertThrows<IllegalArgumentException> { LottoNumber(number) }
     }
 
