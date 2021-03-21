@@ -1,5 +1,6 @@
 package domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
@@ -21,5 +22,18 @@ internal class LottoStoreTest {
         assertDoesNotThrow {
             val lottos: List<Lotto> = store.buyLottos(Money(1000))
         }
+    }
+
+    @Test
+    fun `로또판매기에 준 돈으로 살 수 있는 최대한의 로또를 살 수 있다`() {
+        var store = LottoStore(Money(1000))
+        assertThat(store.buyLottos(Money(999))).hasSize(0)
+        assertThat(store.buyLottos(Money(1001))).hasSize(1)
+        assertThat(store.buyLottos(Money(10000))).hasSize(10)
+
+        store = LottoStore(Money(500))
+        assertThat(store.buyLottos(Money(999))).hasSize(1)
+        assertThat(store.buyLottos(Money(1001))).hasSize(2)
+        assertThat(store.buyLottos(Money(10000))).hasSize(20)
     }
 }
