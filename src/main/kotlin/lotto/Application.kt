@@ -8,7 +8,9 @@ import lotto.view.OutputView
 fun main() {
     val money = InputView.inputPrice()
 
-    val lottos = LottoStore().buy(money)
+    val manualLottos = InputView.inputManualLotto(money)
+
+    val lottos = LottoStore().buy(money, manualLottos)
     OutputView.showPurchaseStatus(lottos)
 
     val winnerLottoNumber = InputView.inputWinnerNumber()

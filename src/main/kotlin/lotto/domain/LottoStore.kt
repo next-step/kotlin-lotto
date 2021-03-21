@@ -4,9 +4,13 @@ import lotto.vo.Money
 
 class LottoStore {
     fun buy(money: Money): LottoBasket {
-        val lottoCount = money / LOTTO_PRICE
-        val lottos = (1..lottoCount).map { createLotto() }
-        return LottoBasket(lottos)
+        return buy(money, emptyList())
+    }
+
+    fun buy(money: Money, manualLottos: List<Lotto>): LottoBasket {
+        val autoLottoCount = money / LOTTO_PRICE - manualLottos.size
+        val autoLottos = (1..autoLottoCount).map { createLotto() }
+        return LottoBasket(autoLottos + manualLottos)
     }
 
     private fun createLotto(): Lotto {
