@@ -19,5 +19,5 @@ fun main() {
 
     val statistics = WinningStatistics(winningNumbersInput.toLottoNumbers(), lottos)
 
-    WinningStatisticsView().print(statistics)
+    WinningStatisticsView().print(statistics, store.price)
 }

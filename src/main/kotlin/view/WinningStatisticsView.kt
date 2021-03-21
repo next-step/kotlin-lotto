@@ -1,12 +1,14 @@
 package view
 
+import domain.money.Money
 import domain.statistics.WinningCategory
 import domain.statistics.WinningStatistics
 
 class WinningStatisticsView {
-    fun print(statistics: WinningStatistics) {
+    fun print(statistics: WinningStatistics, lottoPrice: Money) {
         println("당첨 통계\n---------")
         printCountsMatchedForAllCategories(statistics)
+        println("총 수익률은 ${statistics.calculateRatioOfIncomeToExpenditure(lottoPrice)}입니다.")
     }
 
     private fun printCountsMatchedForAllCategories(statistics: WinningStatistics) {
