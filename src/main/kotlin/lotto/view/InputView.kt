@@ -1,8 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoWonNumbers
-
 class InputView {
     fun input(): Input {
         println("구입금액을 입력해 주세요.")
@@ -21,7 +18,7 @@ class InputView {
         return inputAmount.toIntOrNull() ?: throw IllegalArgumentException("구임금액은 숫자여야 합니다.")
     }
 
-    fun inputWonNumber(): LottoWonNumbers {
+    fun inputWonNumber(): LottoWonInput {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val numbers = readLine()
         require(!numbers.isNullOrBlank()) { "당첨 번호의 입력은 필수입니다. " }
@@ -29,7 +26,6 @@ class InputView {
         val lottoNumbers = numbers.split(",")
             .map { it.trim() }
             .map { it.toIntOrNull() ?: throw IllegalArgumentException("당첨번호는 숫자여야 합니다.") }
-            .map(::LottoNumber)
             .toSet()
 
         println("보너스 번호를 입력해 주세요")
@@ -39,6 +35,6 @@ class InputView {
 
         val bonusNumber = inputBonusNumber.toIntOrNull() ?: throw IllegalArgumentException("보너스 번호는 숫자여야 합니다.")
 
-        return LottoWonNumbers(lottoNumbers, LottoNumber(bonusNumber))
+        return LottoWonInput(lottoNumbers, bonusNumber)
     }
 }
