@@ -7,7 +7,7 @@ fun main() {
 
     val lottoCards = LottoCards()
     inputPassiveNumbers(passiveCnt, lotto).forEach { lottoCards.addLottoCard(it) }
-    lottoCards.generateRandomLottoCard(lottoCnt)
+    lottoCards.generateRandomLottoCard(lottoCnt - passiveCnt)
     printLottoCards(lottoCards)
 
     val beforeWeekLottoCard = lotto.parseLottoCard(inputLottoNumber())
