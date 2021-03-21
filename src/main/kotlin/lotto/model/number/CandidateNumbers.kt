@@ -10,12 +10,6 @@ class CandidateNumbers(candidateNumbers: TreeSet<CandidateNumber>) : LottoNumber
     constructor(candidateNumbers: List<Int>) : this(TreeSet(candidateNumbers.map { CandidateNumber.get(it) }))
 
     companion object {
-        private const val CANDIDATE_SIZE = 6
-
-        fun autoCreate(): CandidateNumbers {
-            return CandidateNumbers(
-                List(LottoNumber.MAXIMUM) { i -> i + 1 }.shuffled().subList(0, CANDIDATE_SIZE)
-            )
-        }
+        const val CANDIDATE_SIZE = 6
     }
 }

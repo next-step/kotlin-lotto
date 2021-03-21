@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 internal class LottoStoreTest {
-    private val store = LottoStore()
+    private val store = LottoStore(RandomNumbersGenerator())
 
     @ParameterizedTest
     @MethodSource("buyTicketCountProvider")

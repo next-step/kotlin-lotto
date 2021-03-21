@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.model.LottoResult
 import lotto.model.LottoStore
+import lotto.model.RandomNumbersGenerator
 import lotto.model.WinningCondition
 import lotto.model.WinningCounter
 import lotto.view.InputView
@@ -12,7 +13,7 @@ fun main() {
     val manualTicketCount = InputView.readManualTicketCount()
     val candidateNumbers = InputView.readCandidateNumbers(manualTicketCount)
 
-    val store = LottoStore()
+    val store = LottoStore(RandomNumbersGenerator())
     val tickets = store.buy(moneyAmount, candidateNumbers)
 
     OutputView.printTickets(tickets)

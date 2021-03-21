@@ -6,8 +6,8 @@ class LottoTickets(private val lottoTickets: List<LottoTicket>) : List<LottoTick
     }
 
     companion object {
-        fun issue(ticketCount: Int): LottoTickets {
-            return LottoTickets((1..ticketCount).map { LottoTicket() })
+        fun issue(ticketCount: Int, generator: NumbersGenerator): LottoTickets {
+            return LottoTickets((1..ticketCount).map { LottoTicket(generator) })
         }
     }
 }
