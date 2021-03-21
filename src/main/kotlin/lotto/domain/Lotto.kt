@@ -13,7 +13,6 @@ data class Lotto(val numbers: List<Int>) {
     }
 
     companion object {
-        private const val PRICE = 1000
         private const val NUMBER_SIZE = 6
         private const val NUMBER_RANGE_START = 1
         private const val NUMBER_RANGE_END = 45
@@ -23,10 +22,8 @@ data class Lotto(val numbers: List<Int>) {
             return NUMBER_RANGE.shuffled().take(NUMBER_SIZE).sorted()
         }
 
-        fun buyRandom(price: Int): List<Lotto> {
-            return List(price / PRICE) {
-                Lotto(generateRandom())
-            }
+        fun buyRandom(): Lotto {
+            return Lotto(generateRandom())
         }
     }
 }
