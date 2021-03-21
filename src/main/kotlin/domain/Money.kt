@@ -13,6 +13,10 @@ data class Money(val value: Int) : Comparable<Money> {
         return this.value.compareTo(other.value)
     }
 
+    fun dividedBy(other: Money): Int {
+        return this.value / other.value
+    }
+
     init {
         require(value >= 0)
     }
