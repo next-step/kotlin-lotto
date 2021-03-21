@@ -34,7 +34,7 @@ class LottoCardTest {
         ).forEach { lottoCards.addLottoCard(it) }
 
         val beforeWeekLottoCard = LottoCard(listOf(1, 2, 3, 4, 5, 6))
-        val bonusNumber = 7
+        val bonusNumber = LottoNumber(7)
         val statistic = lottoCards.getStatistic(beforeWeekLottoCard, bonusNumber)
 
         assertThat(statistic.filter { it.key == Winning.FIRST }.size, Matchers.`is`(1))

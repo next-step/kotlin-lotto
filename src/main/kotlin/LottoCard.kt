@@ -1,22 +1,22 @@
 class LottoCard {
-    private val numbers: List<Int>
+    private val numbers: List<LottoNumber>
 
     constructor() {
-        numbers = LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT)
+        numbers = LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT).map { LottoNumber(it) }
         validateNumbers()
     }
 
     constructor(numbers: List<Int>) {
-        this.numbers = numbers
+        this.numbers = numbers.map { LottoNumber(it) }
         validateNumbers()
     }
 
     private fun validateNumbers() {
         require(numbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개여야 합니다." }
-        require(numbers.none { it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
+        require(numbers.none { it.number < LOTTO_START_NUMBER || it.number > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
     }
 
-    fun getWinning(winningLottoCard: LottoCard, bonusNumber: Int): Winning {
+    fun getWinning(winningLottoCard: LottoCard, bonusNumber: LottoNumber): Winning {
         val count = numbers.filter { winningLottoCard.numbers.contains(it) }.size
         return Winning.matchWinning(count, numbers.contains(bonusNumber))
     }
@@ -48,7 +48,7 @@ class LottoCards {
         }
     }
 
-    fun getStatistic(beforeWeekLottoCard: LottoCard, bonusNumber: Int): Map<Winning, Int> {
+    fun getStatistic(beforeWeekLottoCard: LottoCard, bonusNumber: LottoNumber): Map<Winning, Int> {
         return cards.map { it.getWinning(beforeWeekLottoCard, bonusNumber) }
             .filter { it != Winning.NONE }.groupingBy { it }.eachCount()
     }
