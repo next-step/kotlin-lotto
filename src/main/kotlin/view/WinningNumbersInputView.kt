@@ -2,7 +2,11 @@ package view
 
 class WinningNumbersInputView {
     fun receiveWinningNumbers(sentence: String): WinningNumbersInput {
-        println("\n$sentence")
+        printDirectiveSentence(sentence)
         return WinningNumbersInput(readLine()!!)
+    }
+
+    private fun printDirectiveSentence(sentence: String) {
+        println("\n$sentence")
     }
 }
