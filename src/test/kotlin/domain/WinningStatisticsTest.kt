@@ -7,6 +7,13 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 internal class WinningStatisticsTest {
+    private val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+    private val sixCorrectLotto = Lotto(1, 2, 3, 4, 5, 6)
+    private val fiveCorrectLotto = Lotto(1, 2, 3, 4, 5, 45)
+    private val fourCorrectLotto = Lotto(1, 2, 3, 4, 44, 45)
+    private val threeCorrectLotto = Lotto(1, 2, 3, 43, 44, 45)
+    private val noCorrectLotto = Lotto(40, 41, 42, 43, 44, 45)
+
     @Test
     fun `당첨통계는 당첨로또숫자열과 로또 리스트와 로또 하나의 가격으로 생성된다`() {
         assertDoesNotThrow {
@@ -20,22 +27,7 @@ internal class WinningStatisticsTest {
 
     @Test
     fun `당첨통계는 총 당첨금을 알려준다`() {
-        val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
-        val sixCorrectLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val fiveCorrectLotto = Lotto(1, 2, 3, 4, 5, 45)
-        val fourCorrectLotto = Lotto(1, 2, 3, 4, 44, 45)
-        val threeCorrectLotto = Lotto(1, 2, 3, 43, 44, 45)
-        val noCorrectLotto = Lotto(40, 41, 42, 43, 44, 45)
-
-        var statistics = WinningStatistics(
-            winningNumbers = winningNumbers,
-            lottos = sixCorrectLotto.nTimes(1) +
-                fiveCorrectLotto.nTimes(3) +
-                fourCorrectLotto.nTimes(5) +
-                threeCorrectLotto.nTimes(7) +
-                noCorrectLotto.nTimes(9),
-            lottoUnitPrice = Money(1000)
-        )
+        var statistics = makeStatisticsWithWinningCount(1, 3, 5, 7, 9)
 
         var expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * 1) +
             (WinningCategory.FIVE_CORRECT.prize * 3) +
@@ -44,15 +36,7 @@ internal class WinningStatisticsTest {
 
         assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
 
-        statistics = WinningStatistics(
-            winningNumbers = winningNumbers,
-            lottos = sixCorrectLotto.nTimes(7) +
-                fiveCorrectLotto.nTimes(0) +
-                fourCorrectLotto.nTimes(8) +
-                threeCorrectLotto.nTimes(1) +
-                noCorrectLotto.nTimes(9),
-            lottoUnitPrice = Money(1000)
-        )
+        statistics = makeStatisticsWithWinningCount(7, 0, 8, 1, 9)
 
         expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * 7) +
             (WinningCategory.FIVE_CORRECT.prize * 0) +
@@ -74,28 +58,30 @@ internal class WinningStatisticsTest {
         threeCorrectCount: Int,
         noCorrectCount: Int
     ) {
-        val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
-        val sixCorrectLotto = Lotto(1, 2, 3, 4, 5, 6)
-        val fiveCorrectLotto = Lotto(1, 2, 3, 4, 5, 45)
-        val fourCorrectLotto = Lotto(1, 2, 3, 4, 44, 45)
-        val threeCorrectLotto = Lotto(1, 2, 3, 43, 44, 45)
-        val noCorrectLotto = Lotto(40, 41, 42, 43, 44, 45)
-
-        val statistics = WinningStatistics(
-            winningNumbers = winningNumbers,
-            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
-                fiveCorrectLotto.nTimes(fiveCorrectCount) +
-                fourCorrectLotto.nTimes(fourCorrectCount) +
-                threeCorrectLotto.nTimes(threeCorrectCount) +
-                noCorrectLotto.nTimes(noCorrectCount),
-            lottoUnitPrice = Money(1000)
-        )
+        val statistics =
+            makeStatisticsWithWinningCount(sixCorrectCount, fiveCorrectCount, fourCorrectCount, threeCorrectCount, noCorrectCount)
 
         assertThat(statistics.countLottoBy(WinningCategory.SIX_CORRECT)).isEqualTo(sixCorrectCount)
         assertThat(statistics.countLottoBy(WinningCategory.FIVE_CORRECT)).isEqualTo(fiveCorrectCount)
         assertThat(statistics.countLottoBy(WinningCategory.FOUR_CORRECT)).isEqualTo(fourCorrectCount)
         assertThat(statistics.countLottoBy(WinningCategory.THREE_CORRECT)).isEqualTo(threeCorrectCount)
     }
+
+    private fun makeStatisticsWithWinningCount(
+        sixCorrectCount: Int,
+        fiveCorrectCount: Int,
+        fourCorrectCount: Int,
+        threeCorrectCount: Int,
+        noCorrectCount: Int
+    ) = WinningStatistics(
+        winningNumbers = winningNumbers,
+        lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
+            fiveCorrectLotto.nTimes(fiveCorrectCount) +
+            fourCorrectLotto.nTimes(fourCorrectCount) +
+            threeCorrectLotto.nTimes(threeCorrectCount) +
+            noCorrectLotto.nTimes(noCorrectCount),
+        lottoUnitPrice = Money(1000)
+    )
 
     private fun Lotto.nTimes(number: Int): List<Lotto> = List(number) { this }
 }
