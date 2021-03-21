@@ -6,6 +6,10 @@ import domain.statistics.WinningStatistics
 class WinningStatisticsView {
     fun print(statistics: WinningStatistics) {
         println("당첨 통계\n---------")
+        printCountsMatchedForAllCategories(statistics)
+    }
+
+    private fun printCountsMatchedForAllCategories(statistics: WinningStatistics) {
         WinningCategory.values().forEach { category ->
             printCountMatched(statistics, category)
         }
