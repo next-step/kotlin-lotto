@@ -87,6 +87,26 @@ class LottoTest {
         }
     }
 
+    @Test
+    fun `수동으로 구매하는 로또의 수는 총 구매 로또 수보다 적어야한다`() {
+        assertThat(lotto.validatePassiveCnt("3", 10), `is`(3))
+    }
+
+    @Test
+    fun `수동으로 구매하는 로또의 수가 총 구매 로또 수보다 크면 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            lotto.validatePassiveCnt("100", 10)
+        }
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `수동 로또번호 갯수를 입력하지 않거나 빈 값을 넣으면 예외가 발생한다`(passiveCnt: String?) {
+        assertThrows<IllegalArgumentException> {
+            lotto.validatePassiveCnt(passiveCnt, 10)
+        }
+    }
+
     companion object {
         @JvmStatic
         fun buyLotto(): Stream<Arguments> {

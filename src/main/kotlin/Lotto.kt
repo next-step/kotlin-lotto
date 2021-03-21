@@ -3,6 +3,8 @@ fun main() {
     val lotto = Lotto()
     val price = lotto.validatePrice(inputPrice())
     val lottoCnt = lotto.canBuyCount(price)
+    val passiveCnt = lotto.validatePassiveCnt(inputPassive(), lottoCnt)
+
     val lottoCards = LottoCards(lottoCnt)
     printLottoCards(lottoCards)
 
@@ -15,6 +17,7 @@ fun main() {
 }
 
 class Lotto {
+
     fun getYieldRate(statistic: Map<Winning, Int>, price: Int): Double {
         return statistic.map { it.key.price * it.value }.sum().toDouble() / price
     }
@@ -28,6 +31,16 @@ class Lotto {
     fun parseNumbers(numberLine: String?): List<Int> {
         require(!numberLine.isNullOrBlank()) { "로또 번호를 반드시 입력해야 합니다." }
         return numberLine.replace(WHITESPACE_REGEX, EMPTY_STRING).split(",").map { it.parseInt() }
+    }
+
+    fun validatePassiveCnt(passiveCnt: String?, lottoCnt: Int): Int {
+        require(!passiveCnt.isNullOrBlank()) { "수동으로 구매할 로또 수를 입력해 주세요." }
+
+        val cnt = passiveCnt.parseInt()
+        require(cnt >= 0) { "숫자는 0보다 같거나 커야합니다." }
+        require(cnt < lottoCnt) { "로또는 ${lottoCnt}개만 구입할수 있습니다." }
+
+        return cnt
     }
 
     fun validatePrice(strPrice: String?): Int {
