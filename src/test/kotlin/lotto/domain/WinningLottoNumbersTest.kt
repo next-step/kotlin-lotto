@@ -43,4 +43,19 @@ internal class WinningLottoNumbersTest {
             WinningLottoNumbers.of(LottoNumberTokenizer.tokenize(stringWinningLottoNumbers), bonusNumber)
         }
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'1,11,41,21,22,23', 1",
+        "'1,2,41,21,22,23', 2",
+        "'3,4,5,21,22,23', 3",
+        "'4,5,6,21,22,3', 4",
+        "'11,2,3,4,5,6', 5",
+        "'1,2,3,4,5,6', 6"
+    )
+    fun `당첨로또 갯수 카운트`(lottoNumbers: String, expectedCount: Int) {
+        val winningLottoNumbers = WinningLottoNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
+        val lotto = Lotto.from(LottoNumberTokenizer.tokenize(lottoNumbers).map { LottoNumber.from(it) })
+        assertThat(winningLottoNumbers.countWinningNumbers(lotto)).isEqualTo(expectedCount)
+    }
 }
