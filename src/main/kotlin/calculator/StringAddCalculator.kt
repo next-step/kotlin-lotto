@@ -8,10 +8,10 @@ class StringAddCalculator {
         if (text.isNullOrBlank()) {
             return 0
         }
-        val result = Regex("//(.)\n(.*)").find(text)
+        val result = Regex(REGEX_PATTERN).find(text)
         val numbers = if (result != null) {
             val customDelimiter = result.groupValues[1]
-            result.groupValues[2].split(",", ":", customDelimiter)
+            result.groupValues[2].split(DELIMITER_COMMA, DELIMITER_COLON, customDelimiter)
         } else {
             text.split(",", ":")
         }
@@ -24,6 +24,12 @@ class StringAddCalculator {
 
     private fun String.parseNumber() = toInt().also { number ->
         if (number < 0) throw RuntimeException()
+    }
+
+    companion object {
+        private const val REGEX_PATTERN = "//(.)\n(.*)"
+        private const val DELIMITER_COMMA = ","
+        private const val DELIMITER_COLON = ":"
     }
 
 }
