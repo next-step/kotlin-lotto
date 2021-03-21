@@ -31,7 +31,7 @@ fun main() {
     val ranks = universalLottoes.getMyLottoesRanks(winningLotto)
     outputView.printLottoesResult(money, ranks)
 
-    val rateOfReturn = calculateRateOfReturn(ranks.getWinningMoney(), money.spentMoney)
+    val rateOfReturn = ranks.calcualteRateOfReutrn(money.spentMoney)
     outputView.printRateOfReturn(rateOfReturn)
 }
 
@@ -53,10 +53,4 @@ private fun inputManualLottoes(numberOfManual: Int, game: LottoGame): Lottoes {
         return game.purchaseLottoes(ManualStrategy(manualNumbers))
     }
     return Lottoes(emptyList())
-}
-
-private fun calculateRateOfReturn(winningMoney: Long, spentMoney: Long): String {
-    return BigDecimal(winningMoney)
-        .divide(spentMoney.toBigDecimal(), 2, RoundingMode.FLOOR)
-        .toString()
 }
