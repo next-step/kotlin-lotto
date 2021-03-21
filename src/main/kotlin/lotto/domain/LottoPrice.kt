@@ -15,6 +15,9 @@ class LottoPrice(
 
     fun calculateAutomaticCount(manualLottoCount: LottoCount): LottoCount {
         return LottoCount.from(value / MINIMUM_PRICE - manualLottoCount.value)
+    fun calculateAutomaticCount(manualLottoCount: Int): Int {
+        return value / MINIMUM_PRICE_UNIT - manualLottoCount
+    }
     }
 
     companion object {

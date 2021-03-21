@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoCount
 
 object InputView {
     private const val BUYING_COMMENT = "구입금액을 입력해 주세요."
@@ -29,8 +28,7 @@ object InputView {
         return readLine()?.toInt() ?: throw IllegalArgumentException()
     }
 
-    fun enterManualLottoNumbers(manualCount: LottoCount): String {
-        if (manualCount.isEmpty()) return ""
+    fun enterManualLottoNumbers(): String {
         println(MANUAL_LOTTO_NUMBERS_COMMENT)
         return readLine() ?: throw IllegalArgumentException()
     }

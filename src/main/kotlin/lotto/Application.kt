@@ -26,9 +26,10 @@ fun main() {
 fun askManualLotto(manualLottoCount: ManualLottoCount): ManualNumbers? {
     if (manualLottoCount.count.isEmpty()) return null
     val manualNumbers = mutableListOf<String>()
+fun askManualLotto(manualLottoCount: Int): ManualNumbers {
 
-    repeat(manualLottoCount.count.value) {
-        manualNumbers.add(InputView.enterManualLottoNumbers(manualLottoCount.count))
+    repeat(manualLottoCount) {
+        manualNumbers.add(InputView.enterManualLottoNumbers())
     }
 
     return ManualNumbers(manualNumbers)

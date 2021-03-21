@@ -10,7 +10,7 @@ object LottoMachine {
         )
     }
 
-    private fun dispenseAuto(count: LottoCount): List<Lotto> {
-        return (1..count.value).map { Lotto.create() }
+    private fun dispenseAuto(count: Int): List<Lotto> {
+        return (1..count).map { Lotto.create() }
     }
 }
