@@ -1,12 +1,16 @@
 package domain
 
-data class Money(val value: Int) {
+data class Money(val value: Int) : Comparable<Money> {
     operator fun plus(other: Money): Money {
         return Money(this.value + other.value)
     }
 
     operator fun times(number: Int): Money {
         return Money(this.value * number)
+    }
+
+    override fun compareTo(other: Money): Int {
+        return this.value.compareTo(other.value)
     }
 
     init {

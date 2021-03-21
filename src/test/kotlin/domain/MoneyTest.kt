@@ -24,4 +24,11 @@ internal class MoneyTest {
     fun `돈은 서로 다른 객체라도, 금액이 같으면 동일하다`() {
         assertThat(Money(1)).isEqualTo(Money(1))
     }
+
+    @Test
+    fun `돈은 서로 대소 비교를 할 수 있다`() {
+        val other = Money(1000)
+        assertThat(Money(999)).isLessThan(other)
+        assertThat(Money(1001)).isGreaterThan(other)
+    }
 }
