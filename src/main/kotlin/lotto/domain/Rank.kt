@@ -10,12 +10,17 @@ enum class Rank(val matchCount: Int, val prizeMoney: Money) {
     MISS(0, Money.ZERO);
 
     companion object {
+
         fun of(matchCount: Int, bonusMatch: Boolean): Rank {
-            if (matchCount == 5 && bonusMatch) {
+            if (SECOND.matchCount == matchCount && bonusMatch) {
                 return SECOND
             }
 
-            return if (matchCount == 5) THIRD else values().find { it.matchCount == matchCount } ?: MISS
+            return if (THIRD.matchCount == matchCount) {
+                THIRD
+            } else {
+                values().find { it.matchCount == matchCount } ?: MISS
+            }
         }
     }
 }
