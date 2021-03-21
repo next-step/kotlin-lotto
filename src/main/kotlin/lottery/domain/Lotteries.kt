@@ -1,6 +1,6 @@
 package lottery.domain
 
-class Lotteries(val lotteries: List<Lottery>) {
+class Lotteries private constructor(val lotteries: List<Lottery>) {
     companion object {
         private const val START_LOTTERY_COUNT = 1
         private const val MIN_LOTTERY_NUMBER = 1
