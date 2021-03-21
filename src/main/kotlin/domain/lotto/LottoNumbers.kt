@@ -17,6 +17,18 @@ class LottoNumbers(val numbers: SortedSet<LottoNumber>) {
         listOf(n1, n2, n3, n4, n5, n6).map { LottoNumber(it) }
     )
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as LottoNumbers
+        if (countIntersection(other) == SIZE) return true
+        return false
+    }
+
+    override fun hashCode(): Int {
+        return numbers.hashCode()
+    }
+
     companion object {
         const val SIZE = 6
     }

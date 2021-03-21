@@ -1,3 +1,8 @@
 package view
 
-class WinningNumbersInputView
+class WinningNumbersInputView {
+    fun receiveWinningNumbers(sentence: String): WinningNumbersInput {
+        println("\n$sentence")
+        return WinningNumbersInput(readLine()!!)
+    }
+}
