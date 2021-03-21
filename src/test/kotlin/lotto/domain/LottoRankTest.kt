@@ -25,11 +25,4 @@ internal class LottoRankTest {
         assertThat(LottoRank.findRank(5)).isEqualTo(LottoRank.SECOND)
         assertThat(LottoRank.findRank(5, true)).isEqualTo(LottoRank.BONUS)
     }
-
-    @Test
-    @DisplayName("rank 에 따라 안내하는 문자열이 달라진다.")
-    internal fun infoString() {
-        assertThat(LottoRank.findRank(5).infoString).isEqualTo("5개 일치 (1500000원)")
-        assertThat(LottoRank.findRank(5, true).infoString).isEqualTo("5개 일치, 보너스 볼 일치(30000000원)")
-    }
 }

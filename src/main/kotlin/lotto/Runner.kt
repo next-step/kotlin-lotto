@@ -8,7 +8,7 @@ import lotto.view.OutputView
 fun main(args: Array<String>) {
     val purchaseInfo = InputView.makePurchaseInfo()
     val userLottoTickets = LottoMachine(purchaseInfo).makeLottoTickets()
-    OutputView.printPurchasingLottoNumber(userLottoTickets)
+    OutputView.printPurchasingLottoNumber(purchaseInfo, userLottoTickets)
 
     val winLottoInfo = InputView.makeWinLottoInfo()
     val lottoMachineResult = LottoMachineResult(userLottoTickets, winLottoInfo)
