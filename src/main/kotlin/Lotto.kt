@@ -5,7 +5,8 @@ fun main() {
     val lottoCnt = lotto.canBuyCount(price)
     val passiveCnt = lotto.validatePassiveCnt(inputPassive(), lottoCnt)
 
-    val lottoCards = LottoCards(lottoCnt)
+    val lottoCards = LottoCards()
+    lottoCards.generateRandomLottoCard(lottoCnt)
     printLottoCards(lottoCards)
 
     val beforeWeekLottoCard = lotto.parseLottoCard(inputLottoNumber())

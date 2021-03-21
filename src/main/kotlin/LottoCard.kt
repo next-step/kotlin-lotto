@@ -33,8 +33,20 @@ class LottoCard {
     }
 }
 
-class LottoCards(cnt: Int) {
-    var cards: List<LottoCard> = (1..cnt).map { LottoCard() }
+class LottoCards {
+    private val _cards = mutableListOf<LottoCard>()
+    val cards: List<LottoCard>
+        get() = _cards.toList()
+
+    fun addLottoCard(lottoCard: LottoCard) {
+        _cards.add(lottoCard)
+    }
+
+    fun generateRandomLottoCard(cnt: Int) {
+        repeat(cnt) {
+            addLottoCard(LottoCard())
+        }
+    }
 
     fun getStatistic(beforeWeekLottoCard: LottoCard, bonusNumber: Int): Map<Winning, Int> {
         return cards.map { it.getWinning(beforeWeekLottoCard, bonusNumber) }
