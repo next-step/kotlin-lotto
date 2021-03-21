@@ -1,8 +1,10 @@
 import domain.money.Money
+import domain.statistics.WinningStatistics
 import domain.store.LottoStore
 import view.BuyingInputView
 import view.BuyingResultView
 import view.WinningNumbersInputView
+import view.WinningStatisticsView
 
 fun main() {
     val store = LottoStore(price = Money(1000))
@@ -15,5 +17,7 @@ fun main() {
 
     val winningNumbersInput = WinningNumbersInputView().receiveWinningNumbers("지난 주 당첨 번호를 입력해주세요")
 
-    println(winningNumbersInput.numbers)
+    val statistics = WinningStatistics(winningNumbersInput.toLottoNumbers(), lottos)
+
+    WinningStatisticsView().print(statistics)
 }
