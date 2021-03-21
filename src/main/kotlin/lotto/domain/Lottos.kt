@@ -3,8 +3,11 @@ package lotto.domain
 class Lottos(private val lottos: List<Lotto>) : List<Lotto> by lottos {
 
     fun matchAll(target: Lotto) = LottoResult(
-        map { it.match(target) }
+        originalPrice = originalPrice(),
+        matchResult = map { it.match(target) }
     )
+
+    private fun originalPrice() = this.size * PRICE
 
     companion object {
         private const val PRICE = 1000

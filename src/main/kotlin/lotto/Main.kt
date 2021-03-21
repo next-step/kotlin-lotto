@@ -13,5 +13,6 @@ fun main() {
     resultView.printBoughtResult(lottos)
     val matchLotto = Lotto(inputView.lastWeekMatchNumbers())
     val lottoResult = lottos.matchAll(matchLotto)
-    resultView.printLottoResult(lottoResult)
+    resultView.printStatistics(lottoResult)
+    resultView.printProfit(lottoResult)
 }

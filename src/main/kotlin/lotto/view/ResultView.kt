@@ -3,6 +3,7 @@ package lotto.view
 import lotto.domain.LottoResult
 import lotto.domain.Lottos
 import lotto.domain.Prize
+import kotlin.math.floor
 
 class ResultView {
 
@@ -14,13 +15,32 @@ class ResultView {
         println()
     }
 
-    fun printLottoResult(result: LottoResult) {
+    fun printStatistics(result: LottoResult) {
         println("당첨 통계")
         println("---------")
-        val prizes = Prize.all()
-        for (prize in prizes) {
-            val count = result.same(prize.matchCount)
-            println("${prize.matchCount}개 일치 (${prize.money}원)- ${count}개")
+        result.statistics().forEach {
+            println("${it.prize.matchCount}개 일치 (${it.prize.money}원)- ${it.count}개")
         }
+    }
+
+    fun printProfit(result: LottoResult) {
+        val profitPercent = floor(result.profit() * 100) / 100
+        print("총 수익률은 ${profitPercent}입니다.")
+        print("(기준이 ${PROFIT_PERCENT_STANDARD}이기 때문에 ")
+        when {
+            profitPercent < PROFIT_PERCENT_STANDARD -> {
+                print("결과적으로 손해라는 의미임)")
+            }
+            profitPercent == PROFIT_PERCENT_STANDARD.toDouble() -> {
+                print("결과적으로 동일하다는 의미임)")
+            }
+            else -> {
+                print("결과적으로 이득이라는 의미임)")
+            }
+        }
+    }
+
+    companion object {
+        private const val PROFIT_PERCENT_STANDARD = 1
     }
 }
