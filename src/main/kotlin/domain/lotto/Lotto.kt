@@ -1,4 +1,6 @@
-package domain
+package domain.lotto
+
+import domain.money.Money
 
 class Lotto(val numbers: LottoNumbers) {
     fun countMatchedBy(winningNumbers: LottoNumbers): Int {

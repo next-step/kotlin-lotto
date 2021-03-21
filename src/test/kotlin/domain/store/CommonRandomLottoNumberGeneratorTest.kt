@@ -1,5 +1,7 @@
-package domain
+package domain.store
 
+import domain.lotto.LottoNumber
+import domain.lotto.LottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow

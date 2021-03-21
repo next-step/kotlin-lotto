@@ -1,4 +1,8 @@
-package domain
+package domain.statistics
+
+import domain.lotto.Lotto
+import domain.lotto.LottoNumbers
+import domain.money.Money
 
 class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto>) {
     val totalWinningPrizes: Money

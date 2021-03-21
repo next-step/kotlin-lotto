@@ -1,4 +1,4 @@
-package domain
+package domain.lotto
 
 data class LottoNumber(val value: Int) : Comparable<LottoNumber> {
     init {

@@ -1,5 +1,6 @@
-package domain
+package domain.lotto
 
+import domain.money.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow

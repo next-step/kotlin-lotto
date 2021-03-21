@@ -1,4 +1,6 @@
-package domain
+package domain.statistics
+
+import domain.money.Money
 
 enum class WinningCategory(val numberOfMatched: Int, val prize: Money) {
     THREE_CORRECT(3, Money(5_000)),

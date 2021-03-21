@@ -1,4 +1,7 @@
-package domain
+package domain.store
+
+import domain.lotto.Lotto
+import domain.money.Money
 
 class LottoStore(val price: Money, private val randomLottoNumberGenerator: RandomLottoNumberGenerator = CommonRandomLottoNumberGenerator()) {
     init {

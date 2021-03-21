@@ -1,9 +1,10 @@
-package domain
+package domain.store
 
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
-import org.junit.jupiter.api.Assertions.assertDoesNotThrow
+import domain.lotto.Lotto
+import domain.money.Money
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -15,7 +16,7 @@ internal class LottoStoreTest {
 
     @Test
     fun `로또판매기의 로또 가격은 0원일 수 없다`() {
-        assertThatIllegalArgumentException().isThrownBy { LottoStore(Money.ZERO) }
+        Assertions.assertThatIllegalArgumentException().isThrownBy { LottoStore(Money.ZERO) }
     }
 
     @Test
@@ -37,6 +38,6 @@ internal class LottoStoreTest {
     )
     fun `로또판매기에 준 돈으로 살 수 있는 최대한의 로또를 살 수 있다`(lottoPrice: Int, moneyToBuy: Int, lottoCount: Int) {
         val store = LottoStore(Money(lottoPrice))
-        assertThat(store.buyLottos(Money(moneyToBuy))).hasSize(lottoCount)
+        Assertions.assertThat(store.buyLottos(Money(moneyToBuy))).hasSize(lottoCount)
     }
 }

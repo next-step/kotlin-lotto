@@ -1,6 +1,8 @@
-package domain
+package domain.statistics
 
-import org.assertj.core.api.Assertions.assertThat
+import domain.lotto.Lotto
+import domain.lotto.LottoNumbers
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -50,7 +52,7 @@ internal class WinningStatisticsTest {
             (WinningCategory.FOUR_CORRECT.prize * fourCorrectCount) +
             (WinningCategory.THREE_CORRECT.prize * threeCorrectCount)
 
-        assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
+        Assertions.assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
     }
 
     @ParameterizedTest
@@ -74,10 +76,17 @@ internal class WinningStatisticsTest {
         )
 
         assertAll(
-            { assertThat(statistics.countLottoBy(WinningCategory.SIX_CORRECT)).isEqualTo(sixCorrectCount) },
-            { assertThat(statistics.countLottoBy(WinningCategory.FIVE_CORRECT)).isEqualTo(fiveCorrectCount) },
-            { assertThat(statistics.countLottoBy(WinningCategory.FOUR_CORRECT)).isEqualTo(fourCorrectCount) },
-            { assertThat(statistics.countLottoBy(WinningCategory.THREE_CORRECT)).isEqualTo(threeCorrectCount) }
+            { Assertions.assertThat(statistics.countLottoBy(WinningCategory.SIX_CORRECT)).isEqualTo(sixCorrectCount) },
+            {
+                Assertions.assertThat(statistics.countLottoBy(WinningCategory.FIVE_CORRECT)).isEqualTo(fiveCorrectCount)
+            },
+            {
+                Assertions.assertThat(statistics.countLottoBy(WinningCategory.FOUR_CORRECT)).isEqualTo(fourCorrectCount)
+            },
+            {
+                Assertions.assertThat(statistics.countLottoBy(WinningCategory.THREE_CORRECT))
+                    .isEqualTo(threeCorrectCount)
+            }
         )
     }
 
