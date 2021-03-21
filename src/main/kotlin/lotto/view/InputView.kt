@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoPrice
 
 object InputView {
     private const val BUYING_COMMENT = "구입금액을 입력해 주세요."
@@ -23,9 +24,15 @@ object InputView {
         return readLine()?.toInt() ?: throw IllegalArgumentException()
     }
 
-    fun enterManualLottoCount(): Int {
+    fun enterManualLottoCount(buyingPrice: LottoPrice): Int {
         println(MANUAL_LOTTO_COUNT_COMMENT)
-        return readLine()?.toInt() ?: throw IllegalArgumentException()
+        val manualLottoCount = readLine()?.toInt() ?: throw IllegalArgumentException()
+
+        require(buyingPrice.isGreaterThanEqualsByCount(manualLottoCount)) {
+            "수동 로또 구매수는 구입금액을 초과할 수 없습니다."
+        }
+
+        return manualLottoCount
     }
 
     fun enterManualLottoNumbers(): String {
