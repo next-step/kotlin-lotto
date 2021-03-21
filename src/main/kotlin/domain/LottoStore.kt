@@ -6,6 +6,10 @@ class LottoStore(val price: Money) {
     }
 
     fun buyLottos(money: Money): List<Lotto> {
-        return (1..(money.value / price.value)).map { Lotto(1, 2, 3, 4, 5, 6) }
+        return (1..(countLottoToSellBy(money))).map { generateLotto() }
     }
+
+    private fun countLottoToSellBy(money: Money) = money.value / price.value
+
+    private fun generateLotto() = Lotto(1, 2, 3, 4, 5, 6)
 }
