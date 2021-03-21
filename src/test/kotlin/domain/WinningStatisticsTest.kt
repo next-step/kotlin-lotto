@@ -20,8 +20,7 @@ internal class WinningStatisticsTest {
         assertDoesNotThrow {
             WinningStatistics(
                 winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6),
-                lottos = listOf(Lotto(1, 2, 3, 4, 5, 6)),
-                lottoUnitPrice = Money(1000)
+                lottos = listOf(Lotto(1, 2, 3, 4, 5, 6))
             )
         }
     }
@@ -94,8 +93,7 @@ internal class WinningStatisticsTest {
             fiveCorrectLotto.nTimes(fiveCorrectCount) +
             fourCorrectLotto.nTimes(fourCorrectCount) +
             threeCorrectLotto.nTimes(threeCorrectCount) +
-            noCorrectLotto.nTimes(noCorrectCount),
-        lottoUnitPrice = Money(1000)
+            noCorrectLotto.nTimes(noCorrectCount)
     )
 
     private fun Lotto.nTimes(number: Int): List<Lotto> = List(number) { this }

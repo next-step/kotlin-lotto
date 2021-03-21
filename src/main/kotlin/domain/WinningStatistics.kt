@@ -1,6 +1,6 @@
 package domain
 
-class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto>, lottoUnitPrice: Money) {
+class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto>) {
     val totalWinningPrizes: Money
         get() {
             return (WinningCategory.SIX_CORRECT.prize * countLottoBy(WinningCategory.SIX_CORRECT)) +
