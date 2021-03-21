@@ -9,19 +9,9 @@ data class WinningLotto(
     }
 
     fun getRankOfTicket(lottoTicket: LottoTicket): Rank {
-        val countOfMatch = getCountOfMatch(lottoTicket)
-        val bonusMatched = isNumberContains(lottoTicket)
+        val countOfMatch = lottoTicket.getCountOfMatch(winningNumbers)
+        val bonusMatched = lottoTicket.isNumberContains(bonusNumber)
         return Rank.valueOf(countOfMatch, bonusMatched)
-    }
-
-    private fun getCountOfMatch(lottoTicket: LottoTicket): Int {
-        return lottoTicket.value.count { lottoNumber ->
-            winningNumbers.value.contains(lottoNumber)
-        }
-    }
-
-    private fun isNumberContains(lottoTicket: LottoTicket): Boolean {
-        return lottoTicket.value.contains(bonusNumber)
     }
 
     private fun checkWinningNumbersContainsBonusNumber() {
