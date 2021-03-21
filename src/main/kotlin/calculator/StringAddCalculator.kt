@@ -7,10 +7,11 @@ class StringAddCalculator {
             return 0
         }
         val numbers = text.split(",")
-        if (numbers.size == 1) {
-            return text.toInt()
+        return if (numbers.size == 1) {
+            text.toInt()
+        } else {
+            numbers.map { it.toInt() }.sum()
         }
-        return 0
     }
 
 }
