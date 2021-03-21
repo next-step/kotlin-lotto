@@ -92,45 +92,34 @@ internal class WinningStatisticsTest {
         )
     }
 
-    @Test
-    fun `당첨통계는 수익률을 알려준다`() {
-        val thousand = Money(1000)
-        var statistics = makeStatisticsWithWinningCount(
-            0,
-            1,
-            2,
-            3,
-            4
+    @ParameterizedTest
+    @CsvSource(
+        "1000,0,1,2,3,4",
+        "400,3,2,7,100,2000"
+    )
+    fun `당첨통계는 수익률을 알려준다`(
+        lottoPriceValue: Long,
+        sixCorrectCount: Int,
+        fiveCorrectCount: Int,
+        fourCorrectCount: Int,
+        threeCorrectCount: Int,
+        noCorrectCount: Int
+    ) {
+        val lottoPrice = Money(lottoPriceValue)
+        val statistics = makeStatisticsWithWinningCount(
+            sixCorrectCount,
+            fiveCorrectCount,
+            fourCorrectCount,
+            threeCorrectCount,
+            noCorrectCount
         )
 
-        assertThat(
-            statistics.calculateRatioOfIncomeToExpenditure(thousand)
-        ).isEqualTo(
-            (
-                (WinningCategory.SIX_CORRECT.prize * 0) +
-                    (WinningCategory.FIVE_CORRECT.prize * 1) +
-                    (WinningCategory.FOUR_CORRECT.prize * 2) +
-                    (WinningCategory.THREE_CORRECT.prize * 3)
-                ).value.toDouble() / (thousand.value * 10).toDouble()
-        )
+        val totalWinningPrizes = statistics.totalWinningPrizes
+        val lottoCount = sixCorrectCount + fiveCorrectCount + fourCorrectCount + threeCorrectCount + noCorrectCount
 
-        val fourHundred = Money(400)
-        statistics = makeStatisticsWithWinningCount(
-            2,
-            1,
-            2,
-            3,
-            4
-        )
-
-        assertThat(statistics.calculateRatioOfIncomeToExpenditure(fourHundred))
+        assertThat(statistics.calculateRatioOfIncomeToExpenditure(lottoPrice))
             .isEqualTo(
-                (
-                    (WinningCategory.SIX_CORRECT.prize * 2) +
-                        (WinningCategory.FIVE_CORRECT.prize * 1) +
-                        (WinningCategory.FOUR_CORRECT.prize * 2) +
-                        (WinningCategory.THREE_CORRECT.prize * 3)
-                    ).value.toDouble() / (fourHundred.value * 12).toDouble()
+                totalWinningPrizes.value.toDouble() / (lottoPrice.value * lottoCount).toDouble()
             )
     }
 
