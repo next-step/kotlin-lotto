@@ -2,7 +2,7 @@ package lotto.domain
 
 class Lotto(val numbers: Set<LottoNumber>) {
     init {
-        require(numbers.size == 6) { "로또 번호는 6개가 있어야 합니다" }
+        require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 6개가 있어야 합니다" }
     }
 
     constructor(generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(
