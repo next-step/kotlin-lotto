@@ -1,6 +1,6 @@
 package domain
 
-class LottoStore(val price: Money) {
+class LottoStore(val price: Money, private val randomLottoNumberGenerator: RandomLottoNumberGenerator = CommonRandomLottoNumberGenerator()) {
     init {
         require(price > Money.ZERO)
     }
@@ -11,5 +11,5 @@ class LottoStore(val price: Money) {
 
     private fun countLottoToSellBy(money: Money) = money.dividedBy(price)
 
-    private fun generateLotto() = Lotto(1, 2, 3, 4, 5, 6)
+    private fun generateLotto() = Lotto(randomLottoNumberGenerator.generate())
 }

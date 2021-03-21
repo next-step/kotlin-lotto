@@ -18,6 +18,6 @@ class LottoNumbers(val numbers: SortedSet<LottoNumber>) {
     )
 
     companion object {
-        private const val SIZE = 6
+        const val SIZE = 6
     }
 }
