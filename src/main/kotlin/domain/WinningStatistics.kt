@@ -3,13 +3,15 @@ package domain
 class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto>) {
     val totalWinningPrizes: Money
         get() {
-            return (WinningCategory.SIX_CORRECT.prize * countLottoBy(WinningCategory.SIX_CORRECT)) +
-                (WinningCategory.FIVE_CORRECT.prize * countLottoBy(WinningCategory.FIVE_CORRECT)) +
-                (WinningCategory.FOUR_CORRECT.prize * countLottoBy(WinningCategory.FOUR_CORRECT)) +
-                (WinningCategory.THREE_CORRECT.prize * countLottoBy(WinningCategory.THREE_CORRECT))
+            return sumPrizesOf(WinningCategory.SIX_CORRECT) +
+                sumPrizesOf(WinningCategory.FIVE_CORRECT) +
+                sumPrizesOf(WinningCategory.FOUR_CORRECT) +
+                sumPrizesOf(WinningCategory.THREE_CORRECT)
         }
 
     fun countLottoBy(category: WinningCategory): Int {
         return lottos.count { it.countMatchedBy(winningNumbers) == category.numberOfMatched }
     }
+
+    private fun sumPrizesOf(category: WinningCategory) = category.prize * countLottoBy(category)
 }
