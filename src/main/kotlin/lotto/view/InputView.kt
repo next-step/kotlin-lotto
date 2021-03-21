@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.model.Money
-import lotto.model.number.BonusNumber
+import lotto.model.number.CandidateNumber
 import lotto.model.number.CandidateNumbers
 import lotto.model.number.WinningNumbers
 
@@ -33,8 +33,8 @@ object InputView {
         )
     }
 
-    fun readBonusNumber(): BonusNumber {
-        return BonusNumber.get(readLine("보너스 볼을 입력해 주세요.").toInt())
+    fun readBonusNumber(): CandidateNumber {
+        return CandidateNumber.get(readLine("보너스 볼을 입력해 주세요.").toInt())
     }
 
     fun readCandidateNumbers(times: Int): List<CandidateNumbers> {
