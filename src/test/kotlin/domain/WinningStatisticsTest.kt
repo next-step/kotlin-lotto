@@ -24,24 +24,24 @@ internal class WinningStatisticsTest {
             )
         }
     }
+    @ParameterizedTest
+    @CsvSource(
+        "1,3,5,7,9",
+        "7,0,8,1,9"
+    )
+    fun `당첨통계는 총 당첨금을 알려준다`(
+        sixCorrectCount: Int,
+        fiveCorrectCount: Int,
+        fourCorrectCount: Int,
+        threeCorrectCount: Int,
+        noCorrectCount: Int
+    ) {
+        val statistics = makeStatisticsWithWinningCount(sixCorrectCount, fiveCorrectCount, fourCorrectCount, threeCorrectCount, noCorrectCount)
 
-    @Test
-    fun `당첨통계는 총 당첨금을 알려준다`() {
-        var statistics = makeStatisticsWithWinningCount(1, 3, 5, 7, 9)
-
-        var expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * 1) +
-            (WinningCategory.FIVE_CORRECT.prize * 3) +
-            (WinningCategory.FOUR_CORRECT.prize * 5) +
-            (WinningCategory.THREE_CORRECT.prize * 7)
-
-        assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
-
-        statistics = makeStatisticsWithWinningCount(7, 0, 8, 1, 9)
-
-        expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * 7) +
-            (WinningCategory.FIVE_CORRECT.prize * 0) +
-            (WinningCategory.FOUR_CORRECT.prize * 8) +
-            (WinningCategory.THREE_CORRECT.prize * 1)
+        val expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * sixCorrectCount) +
+            (WinningCategory.FIVE_CORRECT.prize * fiveCorrectCount) +
+            (WinningCategory.FOUR_CORRECT.prize * fourCorrectCount) +
+            (WinningCategory.THREE_CORRECT.prize * threeCorrectCount)
 
         assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
     }
