@@ -5,7 +5,6 @@ import lotto.domain.LottoGame.Companion.LOTTO_COST
 class AutoStrategy : LottoStrategy {
     override fun generateLotto(money: Money): Lottoes {
         val quantity = money.getQuantityOfAvailablePurchase()
-        money.spendMoney(quantity * LOTTO_COST)
         return Lottoes(
             (1..quantity).map {
                 makeAutoLottoTicket()

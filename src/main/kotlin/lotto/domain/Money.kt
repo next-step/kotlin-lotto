@@ -13,7 +13,10 @@ class Money(initMoney: Int) {
     }
 
     fun getQuantityOfAvailablePurchase(): Int {
-        return (currentMoney / LOTTO_COST).toInt()
+        val quantity = (currentMoney / LOTTO_COST).toInt()
+        spentMoney += currentMoney
+        currentMoney -= currentMoney
+        return quantity
     }
 
     fun spendMoney(money: Int) {
