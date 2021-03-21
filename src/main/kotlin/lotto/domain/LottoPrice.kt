@@ -10,6 +10,7 @@ class LottoPrice(
     }
 
     fun isGreaterThanEqualsByCount(count: Int): Boolean {
+        if(count < MINIMUM_COUNT_UNIT) return true
         return this >= convertCountToLottoPrice(count)
     }
 
@@ -27,5 +28,6 @@ class LottoPrice(
 
     companion object {
         const val MINIMUM_PRICE_UNIT = 1000
+        const val MINIMUM_COUNT_UNIT = 1
     }
 }
