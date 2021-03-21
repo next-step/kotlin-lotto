@@ -80,14 +80,14 @@ class LottoTests {
 
     fun 순차적으로_증가하는_로또번호_제너레이터(): LottoNumberGenerator {
         return object : LottoNumberGenerator {
-            override fun pickNumber(): List<LottoNumber> = (1..6).map(::LottoNumber).toList()
+            override fun pickNumber(): Set<LottoNumber> = (1..6).map(::LottoNumber).toSet()
         }
     }
 
     fun 중첩된_숫자가_쫀재하는_제너레이터(): LottoNumberGenerator {
         return object : LottoNumberGenerator {
-            override fun pickNumber(): List<LottoNumber> =
-                listOf(1, 2, 3, 1, 4, 2, 1, 2, 3, 1, 4, 5, 1, 1, 4, 3, 2, 5, 6).map(::LottoNumber).toList()
+            override fun pickNumber(): Set<LottoNumber> =
+                listOf(1, 2, 3, 1, 4, 2, 1, 2, 3, 1, 4, 5, 1, 1, 4, 3, 2, 5, 6).map(::LottoNumber).toSet()
         }
     }
 }

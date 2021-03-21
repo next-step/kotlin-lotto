@@ -1,5 +1,5 @@
 package lotto.domain
 
 interface LottoNumberGenerator {
-    fun pickNumber(): List<LottoNumber>
+    fun pickNumber(): Set<LottoNumber>
 }

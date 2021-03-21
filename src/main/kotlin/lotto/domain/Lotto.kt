@@ -5,11 +5,7 @@ class Lotto(val numbers: Set<LottoNumber>) {
         require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 6개가 있어야 합니다" }
     }
 
-    constructor(generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(
-        createLottoNumberByGenerator(
-            generator
-        )
-    )
+    constructor(generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(generator.pickNumber())
 
     fun matchByWonNumber(wonNumbers: LottoWonNumbers): Rank {
         val wonNumberCount: Int = numbers.count { wonNumbers.lottoNumber.contains(it) }
@@ -24,9 +20,5 @@ class Lotto(val numbers: Set<LottoNumber>) {
 
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
-
-        private fun createLottoNumberByGenerator(generator: LottoNumberGenerator): Set<LottoNumber> {
-            return generator.pickNumber().toSet()
-        }
     }
 }

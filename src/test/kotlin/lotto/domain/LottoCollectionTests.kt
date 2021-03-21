@@ -86,7 +86,7 @@ class LottoCollectionTests {
     fun 원하는_대로_만들어_주는_제너레이터(random: List<Int>): LottoNumberGenerator {
 
         return object : LottoNumberGenerator {
-            override fun pickNumber(): List<LottoNumber> = random.map(::LottoNumber)
+            override fun pickNumber(): Set<LottoNumber> = random.map(::LottoNumber).toSet()
         }
     }
 }
