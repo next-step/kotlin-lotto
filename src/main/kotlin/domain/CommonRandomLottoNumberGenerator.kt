@@ -2,9 +2,13 @@ package domain
 
 class CommonRandomLottoNumberGenerator : RandomLottoNumberGenerator {
     override fun generate(): LottoNumbers {
-        return (1..45).shuffled()
-            .take(6)
+        return NUMBER_RANGE.shuffled()
+            .take(LottoNumbers.SIZE)
             .map { LottoNumber(it) }
             .let { LottoNumbers(it) }
+    }
+
+    companion object {
+        private val NUMBER_RANGE = LottoNumber.MIN..LottoNumber.MAX
     }
 }
