@@ -34,12 +34,12 @@ class LottoCollectionTests {
             LottoNumber(6)
         )
 
-        val firstWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 5, 6))
-        val thirdWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 5, 45))
-        val fourthWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 44, 45))
-        val fifthWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 43, 44, 45))
-        val failWonNUmber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 42, 43, 44, 45))
-        val secondWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 5, 10))
+        val firstWonNumber = 원하는_대로_만들어_주는_제너레이터(random = listOf(1, 2, 3, 4, 5, 6))
+        val thirdWonNumber = 원하는_대로_만들어_주는_제너레이터(random = listOf(1, 2, 3, 4, 5, 45))
+        val fourthWonNumber = 원하는_대로_만들어_주는_제너레이터(random = listOf(1, 2, 3, 4, 44, 45))
+        val fifthWonNumber = 원하는_대로_만들어_주는_제너레이터(random = listOf(1, 2, 3, 43, 44, 45))
+        val failWonNUmber = 원하는_대로_만들어_주는_제너레이터(random = listOf(1, 2, 42, 43, 44, 45))
+        val secondWonNumber = 원하는_대로_만들어_주는_제너레이터(random = listOf(1, 2, 3, 4, 5, 10))
 
         // 1등 2개,
         // 2등 1개
@@ -83,10 +83,10 @@ class LottoCollectionTests {
             )
     }
 
-    fun 원하는_대로_만들어_주는_제너레이터(random: Array<Int>): LottoNumberGenerator {
+    fun 원하는_대로_만들어_주는_제너레이터(random: List<Int>): LottoNumberGenerator {
+
         return object : LottoNumberGenerator {
-            private var count = 0
-            override fun pickNumber(): Int = random[count++ % 6]
+            override fun pickNumber(): List<LottoNumber> = random.map(::LottoNumber)
         }
     }
 }

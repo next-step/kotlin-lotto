@@ -26,13 +26,7 @@ class Lotto(val numbers: Set<LottoNumber>) {
         private const val LOTTO_NUMBER_COUNT = 6
 
         private fun createLottoNumberByGenerator(generator: LottoNumberGenerator): Set<LottoNumber> {
-            val lottoNumbers = mutableSetOf<LottoNumber>()
-
-            while (lottoNumbers.size < LOTTO_NUMBER_COUNT) {
-                lottoNumbers.add(LottoNumber(generator.pickNumber()))
-            }
-
-            return lottoNumbers.toSet()
+            return generator.pickNumber().toSet()
         }
     }
 }
