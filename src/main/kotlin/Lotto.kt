@@ -8,8 +8,7 @@ fun main() {
     val lottoCards = LottoCards(lottoCnt)
     printLottoCards(lottoCards)
 
-    val numbers = lotto.parseNumbers(inputLottoNumber())
-    val beforeWeekLottoCard = LottoCard(numbers)
+    val beforeWeekLottoCard = lotto.parseLottoCard(inputLottoNumber())
     val bonusNumber = lotto.validateBonusNumber(inputBonusNumber())
     val statistic = lottoCards.getStatistic(beforeWeekLottoCard, bonusNumber)
     val yieldRate = lotto.getYieldRate(statistic, price)
@@ -28,9 +27,10 @@ class Lotto {
         return numberLine.parseInt()
     }
 
-    fun parseNumbers(numberLine: String?): List<Int> {
+    fun parseLottoCard(numberLine: String?): LottoCard {
         require(!numberLine.isNullOrBlank()) { "로또 번호를 반드시 입력해야 합니다." }
-        return numberLine.replace(WHITESPACE_REGEX, EMPTY_STRING).split(",").map { it.parseInt() }
+        val numbers = numberLine.replace(WHITESPACE_REGEX, EMPTY_STRING).split(",").map { it.parseInt() }
+        return LottoCard(numbers)
     }
 
     fun validatePassiveCnt(passiveCnt: String?, lottoCnt: Int): Int {

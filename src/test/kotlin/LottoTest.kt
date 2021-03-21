@@ -75,7 +75,7 @@ class LottoTest {
     @NullAndEmptySource
     fun `저번주 로또번호를 입력하지 않거나 빈 값을 넣으면 예외가 발생한다`(numberLine: String?) {
         assertThrows<IllegalArgumentException> {
-            lotto.parseNumbers(numberLine)
+            lotto.parseLottoCard(numberLine)
         }
     }
 
@@ -83,7 +83,7 @@ class LottoTest {
     @ValueSource(strings = ["a,b,c,d,e,f", "1, 2, 3, 4, 5, error"])
     fun `숫자가 아닌 값이 문자가 등록되면 예외가 발생한다`(numbers: String) {
         assertThrows<IllegalArgumentException> {
-            lotto.parseNumbers(numbers)
+            lotto.parseLottoCard(numbers)
         }
     }
 
