@@ -16,5 +16,7 @@ data class Lotto(val numbers: List<Int>) {
         private const val NUMBER_RANGE_START = 1
         private const val NUMBER_RANGE_END = 45
         private val NUMBER_RANGE = NUMBER_RANGE_START..NUMBER_RANGE_END
+
+        fun buyRandom(price: Int): List<Lotto> { return emptyList() }
     }
 }
