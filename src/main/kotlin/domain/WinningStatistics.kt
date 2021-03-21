@@ -4,7 +4,7 @@ class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto
     val totalWinningPrizes: Money
         get() {
             return WinningCategory.values()
-                .fold(Money(0)) { acc, category -> acc + sumPrizesOf(category) }
+                .fold(Money.ZERO) { acc, category -> acc + sumPrizesOf(category) }
         }
 
     fun countLottoBy(category: WinningCategory): Int {
