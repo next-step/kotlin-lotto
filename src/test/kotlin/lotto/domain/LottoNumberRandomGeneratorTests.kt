@@ -9,8 +9,9 @@ class LottoNumberRandomGeneratorTests {
         var callCount = 0
         val checkSet: MutableSet<Int> = mutableSetOf()
         val generator: LottoNumberGenerator = LottoNumberRandomGenerator(1, 5)
+
         while (checkSet.size < 5) {
-            val number = generator.number
+            val number = generator.pickNumber()
 
             checkSet.add(number)
             callCount++
@@ -19,8 +20,6 @@ class LottoNumberRandomGeneratorTests {
         assertThat(callCount)
             .isGreaterThanOrEqualTo(5)
         assertThat(checkSet)
-            .containsExactlyInAnyOrder(
-                1, 2, 3, 4, 5
-            )
+            .containsExactlyInAnyOrder(1, 2, 3, 4, 5)
     }
 }

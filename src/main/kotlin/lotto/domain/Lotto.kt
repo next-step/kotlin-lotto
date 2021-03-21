@@ -1,22 +1,21 @@
 package lotto.domain
 
-class Lotto(
-    generator: LottoNumberGenerator = LottoNumberRandomGenerator()
-) {
-
-    private val _numbers: MutableSet<LottoNumber> = mutableSetOf()
-    val numbers: Set<LottoNumber>
-        get() = _numbers
-
+class Lotto(val numbers: Set<LottoNumber>) {
     init {
-        while (_numbers.size < LOTTO_NUMBER_COUNT) {
-            _numbers.add(LottoNumber(generator.number))
-        }
+        require(numbers.size == 6) { "로또 번호는 6개가 있어야 합니다" }
     }
 
-    fun matchByWonNumber(wonNumber: LottoWonNumber): Rank {
-        val wonNumberCount: Int = numbers.count { wonNumber.lottoNumber.contains(it) }
-        return Rank.getRankByCount(wonNumberCount)
+    constructor(generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(
+        createLottoNumberByGenerator(
+            generator
+        )
+    )
+
+    fun matchByWonNumber(wonNumbers: LottoWonNumbers): Rank {
+        val wonNumberCount: Int = numbers.count { wonNumbers.lottoNumber.contains(it) }
+        val matchBonus: Boolean = numbers.contains(wonNumbers.bonusNumber)
+
+        return Rank.getRankByCount(wonNumberCount, matchBonus)
     }
 
     override fun toString(): String {
@@ -24,6 +23,16 @@ class Lotto(
     }
 
     companion object {
-        const val LOTTO_NUMBER_COUNT = 6
+        private const val LOTTO_NUMBER_COUNT = 6
+
+        private fun createLottoNumberByGenerator(generator: LottoNumberGenerator): Set<LottoNumber> {
+            val lottoNumbers = mutableSetOf<LottoNumber>()
+
+            while (lottoNumbers.size < LOTTO_NUMBER_COUNT) {
+                lottoNumbers.add(LottoNumber(generator.pickNumber()))
+            }
+
+            return lottoNumbers.toSet()
+        }
     }
 }

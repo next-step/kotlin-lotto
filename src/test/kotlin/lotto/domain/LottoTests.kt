@@ -34,20 +34,11 @@ class LottoTests {
         val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
         val rank: Rank = lotto.matchByWonNumber(
-            LottoWonNumber(
-                setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(44),
-                    LottoNumber(45)
-                )
-            )
+            LottoWonNumbers(setOf(1, 2, 3, 4, 44, 45), 43)
         )
 
         assertThat(rank)
-            .isEqualTo(Rank.getRankByCount(4))
+            .isEqualTo(Rank.getRankByCount(4, false))
 
         assertThat(lotto.numbers)
             .containsExactlyInAnyOrder(
@@ -84,19 +75,29 @@ class LottoTests {
             )
     }
 
+    @Test
+    fun `5개가 맞고, 1개의 보너스가 맞으면은 2등이다 `() {
+        val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
+
+        val rank: Rank = lotto.matchByWonNumber(LottoWonNumbers(setOf(1, 2, 3, 4, 44, 45), 43))
+
+        val wonNumbers: LottoWonNumbers = LottoWonNumbers(setOf(1, 2, 3, 4, 5, 10), 6)
+
+        assertThat(lotto.matchByWonNumber(wonNumbers))
+            .isEqualTo(Rank.SECOND)
+    }
+
     fun 순차적으로_증가하는_로또번호_제너레이터(): LottoNumberGenerator {
         return object : LottoNumberGenerator {
             private var increase: Int = 1
 
-            override val number: Int
-                get() = increase++
+            override fun pickNumber(): Int = increase++
         }
     }
 
     fun 중첩된_숫자가_쫀재하는_제너레이터(queue: Queue<Int>): LottoNumberGenerator {
         return object : LottoNumberGenerator {
-            override val number: Int
-                get() = queue.poll()
+            override fun pickNumber(): Int = queue.poll()
         }
     }
 }

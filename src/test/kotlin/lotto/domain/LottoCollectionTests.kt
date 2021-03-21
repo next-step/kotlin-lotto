@@ -35,10 +35,11 @@ class LottoCollectionTests {
         )
 
         val firstWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 5, 6))
-        val secondWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 5, 45))
-        val thirdWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 44, 45))
-        val fourthWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 43, 44, 45))
+        val thirdWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 5, 45))
+        val fourthWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 44, 45))
+        val fifthWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 43, 44, 45))
         val failWonNUmber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 42, 43, 44, 45))
+        val secondWonNumber = 원하는_대로_만들어_주는_제너레이터(random = arrayOf(1, 2, 3, 4, 5, 10))
 
         // 1등 2개,
         // 2등 1개
@@ -49,40 +50,43 @@ class LottoCollectionTests {
             mutableListOf(
                 Lotto(firstWonNumber),
                 Lotto(firstWonNumber),
-                Lotto(secondWonNumber),
                 Lotto(thirdWonNumber),
                 Lotto(fourthWonNumber),
-                Lotto(fourthWonNumber),
-                Lotto(fourthWonNumber),
+                Lotto(fifthWonNumber),
+                Lotto(fifthWonNumber),
+                Lotto(fifthWonNumber),
                 Lotto(failWonNUmber),
-                Lotto(failWonNUmber)
+                Lotto(failWonNUmber),
+                Lotto(secondWonNumber),
+                Lotto(secondWonNumber)
             )
         )
-        val matchByWonNumber = lottoCollection.matchByWonNumber(LottoWonNumber(wonNumber))
+
+        val matchByWonNumber = lottoCollection.matchByWonNumber(LottoWonNumbers(wonNumber, LottoNumber(10)))
 
         assertThat(matchByWonNumber.rankCount[Rank.FIRST])
             .isEqualTo(2)
-        assertThat(matchByWonNumber.rankCount[Rank.SECOND])
-            .isEqualTo(1)
         assertThat(matchByWonNumber.rankCount[Rank.THIRD])
             .isEqualTo(1)
-        assertThat(matchByWonNumber.rankCount[Rank.FORTH])
+        assertThat(matchByWonNumber.rankCount[Rank.FOURTH])
+            .isEqualTo(1)
+        assertThat(matchByWonNumber.rankCount[Rank.FIFTH])
             .isEqualTo(3)
         assertThat(matchByWonNumber.rankCount[Rank.FAIL])
+            .isEqualTo(2)
+        assertThat(matchByWonNumber.rankCount[Rank.SECOND])
             .isEqualTo(2)
 
         assertThat(matchByWonNumber.sumAmount)
             .isEqualTo(
-                Rank.FIRST.amount * 2 + Rank.SECOND.amount * 1 + Rank.THIRD.amount * 1 + Rank.FORTH.amount * 3
+                Rank.FIRST.amount * 2 + Rank.THIRD.amount * 1 + Rank.FOURTH.amount * 1 + Rank.FIFTH.amount * 3 + Rank.SECOND.amount * 2
             )
     }
 
     fun 원하는_대로_만들어_주는_제너레이터(random: Array<Int>): LottoNumberGenerator {
         return object : LottoNumberGenerator {
             private var count = 0
-
-            override val number: Int
-                get() = random[count++ % 6]
+            override fun pickNumber(): Int = random[count++ % 6]
         }
     }
 }

@@ -1,25 +1,37 @@
 package lotto.domain
 
-class LottoCollection(private val _lotto: MutableList<Lotto>) {
-    val lotto: List<Lotto>
-        get() = _lotto
-
-    constructor(count: Int, _generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(mutableListOf()) {
-        require(count >= 1)
-
-        repeat(count) {
-            _lotto.add(Lotto(_generator))
-        }
+class LottoCollection(val lotto: List<Lotto>) {
+    init {
+        require(lotto.isNotEmpty()) { "로또는 1개 이상을 갖고있어야 합니다." }
     }
 
-    fun matchByWonNumber(wonNumber: LottoWonNumber): LottoRankCollection {
-        val rankCount: Map<Rank, Int> = _lotto
+    constructor(count: Int, generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(
+        createLotto(
+            count,
+            generator
+        )
+    )
+
+    fun matchByWonNumber(wonNumbers: LottoWonNumbers): LottoRankCollection {
+        val rankCount: Map<Rank, Int> = lotto
             .map {
-                it.matchByWonNumber(wonNumber)
+                it.matchByWonNumber(wonNumbers)
             }
             .groupingBy { it }
             .eachCount()
 
         return LottoRankCollection(rankCount)
+    }
+
+    companion object {
+        private fun createLotto(count: Int, generator: LottoNumberGenerator): List<Lotto> {
+            val lotto: MutableList<Lotto> = mutableListOf()
+
+            repeat(count) {
+                lotto.add(Lotto(generator))
+            }
+
+            return lotto.toList()
+        }
     }
 }
