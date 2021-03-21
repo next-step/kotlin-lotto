@@ -5,8 +5,4 @@ data class LottoNumber(val number: Int) {
     init {
         require(number in LOTTO_START_NUMBER..LOTTO_LAST_NUMBER)
     }
-
-    override fun toString(): String {
-        return number.toString()
-    }
 }

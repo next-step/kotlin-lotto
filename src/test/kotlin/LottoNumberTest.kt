@@ -8,7 +8,7 @@ import java.lang.IllegalArgumentException
 class LottoNumberTest {
     @Test
     fun `로또 번호 숫자 범위에서는 정상적으로 객체가 생성된다`() {
-        assertThat(LottoNumber(7).toString()).isEqualTo("7")
+        assertThat(LottoNumber(7).number).isEqualTo(7)
     }
 
     @ParameterizedTest

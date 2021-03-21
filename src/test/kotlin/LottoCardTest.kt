@@ -17,7 +17,7 @@ class LottoCardTest {
         assertThat(lottoCards.cards.size, Matchers.`is`(cnt))
         assertThat(
             lottoCards.cards.filter {
-                (ReflectionUtil.getField(it, "numbers") as List<*>).size ==
+                (ReflectionUtil.getField(it, "_numbers") as List<*>).size ==
                     ReflectionUtil.getField(it, "LOTTO_NUMBER_CNT")
             }.size,
             `is`(cnt)

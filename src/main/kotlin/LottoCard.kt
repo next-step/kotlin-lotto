@@ -1,28 +1,26 @@
 class LottoCard {
-    private val numbers: List<LottoNumber>
+    private val _numbers: List<LottoNumber>
+    val numbers: List<LottoNumber>
+        get() = _numbers.toList()
 
     constructor() {
-        numbers = LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT).map { LottoNumber(it) }
+        _numbers = LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT).map { LottoNumber(it) }
         validateNumbers()
     }
 
     constructor(numbers: List<Int>) {
-        this.numbers = numbers.map { LottoNumber(it) }
+        this._numbers = numbers.map { LottoNumber(it) }
         validateNumbers()
     }
 
     private fun validateNumbers() {
-        require(numbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개여야 합니다." }
-        require(numbers.none { it.number < LOTTO_START_NUMBER || it.number > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
+        require(_numbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개여야 합니다." }
+        require(_numbers.none { it.number < LOTTO_START_NUMBER || it.number > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
     }
 
     fun getWinning(winningLottoCard: LottoCard, bonusNumber: LottoNumber): Winning {
-        val count = numbers.filter { winningLottoCard.numbers.contains(it) }.size
-        return Winning.matchWinning(count, numbers.contains(bonusNumber))
-    }
-
-    override fun toString(): String {
-        return numbers.toString()
+        val count = _numbers.filter { winningLottoCard._numbers.contains(it) }.size
+        return Winning.matchWinning(count, _numbers.contains(bonusNumber))
     }
 
     companion object {
