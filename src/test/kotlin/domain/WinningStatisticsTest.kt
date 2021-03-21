@@ -18,6 +18,50 @@ internal class WinningStatisticsTest {
         }
     }
 
+    @Test
+    fun `당첨통계는 총 당첨금을 알려준다`() {
+        val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+        val sixCorrectLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val fiveCorrectLotto = Lotto(1, 2, 3, 4, 5, 45)
+        val fourCorrectLotto = Lotto(1, 2, 3, 4, 44, 45)
+        val threeCorrectLotto = Lotto(1, 2, 3, 43, 44, 45)
+        val noCorrectLotto = Lotto(40, 41, 42, 43, 44, 45)
+
+        var statistics = WinningStatistics(
+            winningNumbers = winningNumbers,
+            lottos = sixCorrectLotto.nTimes(1) +
+                fiveCorrectLotto.nTimes(3) +
+                fourCorrectLotto.nTimes(5) +
+                threeCorrectLotto.nTimes(7) +
+                noCorrectLotto.nTimes(9),
+            lottoUnitPrice = Money(1000)
+        )
+
+        var expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * 1) +
+            (WinningCategory.FIVE_CORRECT.prize * 3) +
+            (WinningCategory.FOUR_CORRECT.prize * 5) +
+            (WinningCategory.THREE_CORRECT.prize * 7)
+
+        assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
+
+        statistics = WinningStatistics(
+            winningNumbers = winningNumbers,
+            lottos = sixCorrectLotto.nTimes(7) +
+                fiveCorrectLotto.nTimes(0) +
+                fourCorrectLotto.nTimes(8) +
+                threeCorrectLotto.nTimes(1) +
+                noCorrectLotto.nTimes(9),
+            lottoUnitPrice = Money(1000)
+        )
+
+        expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * 7) +
+            (WinningCategory.FIVE_CORRECT.prize * 0) +
+            (WinningCategory.FOUR_CORRECT.prize * 8) +
+            (WinningCategory.THREE_CORRECT.prize * 1)
+
+        assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
+    }
+
     @ParameterizedTest
     @CsvSource(
         "1,2,3,4,5",
