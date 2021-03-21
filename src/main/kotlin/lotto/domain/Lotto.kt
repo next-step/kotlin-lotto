@@ -1,10 +1,12 @@
 package lotto.domain
 
-data class Lotto(val numbers: List<Int>) {
+data class Lotto(val numbers: List<Int>) : List<Int> by numbers {
 
     init {
         require(validateNumbers())
     }
+
+    fun match(target: Lotto) = intersect(target).size
 
     private fun validateNumbers(): Boolean {
         numbers.distinct().also {

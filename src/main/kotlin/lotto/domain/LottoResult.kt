@@ -1,9 +1,8 @@
 package lotto.domain
 
-class LottoResult(val lottos: Lottos, val matchLotto: Lotto) {
+class LottoResult(private val matchResult: List<Int>) {
 
-    fun matchSame(count: Int): Int {
-        return 0
+    fun same(count: Int): Int {
+        return matchResult.count { it == count }
     }
-
 }

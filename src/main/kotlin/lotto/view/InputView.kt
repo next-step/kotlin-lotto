@@ -1,7 +1,5 @@
 package lotto.view
 
-import lotto.domain.Lottos
-
 class InputView {
 
     private fun read(description: String): String {
@@ -13,10 +11,14 @@ class InputView {
 
     fun price() = readInt("구입금액을 입력해 주세요.")
 
-    fun printBoughtResult(lottos: Lottos) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach {
-            println(it.numbers)
-        }
+    fun lastWeekMatchNumbers(): List<Int> {
+        val rawNumbers = read("지난 주 당첨 번호를 입력해 주세요.")
+        return rawNumbers
+            .split(NUMBER_DELIMITERS)
+            .map { it.toInt() }
+    }
+
+    companion object {
+        private const val NUMBER_DELIMITERS = ", "
     }
 }
