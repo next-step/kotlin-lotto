@@ -1,6 +1,6 @@
 package domain.money
 
-data class Money(val value: Int) : Comparable<Money> {
+data class Money(val value: Long) : Comparable<Money> {
     operator fun plus(other: Money): Money {
         return Money(this.value + other.value)
     }
@@ -13,7 +13,7 @@ data class Money(val value: Int) : Comparable<Money> {
         return this.value.compareTo(other.value)
     }
 
-    fun dividedBy(other: Money): Int {
+    fun dividedBy(other: Money): Long {
         return this.value / other.value
     }
 

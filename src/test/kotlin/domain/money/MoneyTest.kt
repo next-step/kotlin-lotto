@@ -8,14 +8,14 @@ import org.junit.jupiter.params.provider.ValueSource
 
 internal class MoneyTest {
     @ParameterizedTest
-    @ValueSource(ints = [0, 1, Int.MAX_VALUE])
-    fun `돈은 정수 하나로 생성된다`(value: Int) {
+    @ValueSource(longs = [0, 1, Long.MAX_VALUE])
+    fun `돈은 정수 하나로 생성된다`(value: Long) {
         assertDoesNotThrow { Money(value) }
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [-1, Int.MIN_VALUE])
-    fun `돈은 0원 미만이 될 수 없다`(value: Int) {
+    @ValueSource(longs = [-1, Long.MIN_VALUE])
+    fun `돈은 0원 미만이 될 수 없다`(value: Long) {
         Assertions.assertThatIllegalArgumentException().isThrownBy { Money(value) }
     }
 

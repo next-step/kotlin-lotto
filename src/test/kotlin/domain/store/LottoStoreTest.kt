@@ -36,7 +36,7 @@ internal class LottoStoreTest {
         "500, 1001, 2",
         "500, 10000, 20"
     )
-    fun `로또판매기에 준 돈으로 살 수 있는 최대한의 로또를 살 수 있다`(lottoPrice: Int, moneyToBuy: Int, lottoCount: Int) {
+    fun `로또판매기에 준 돈으로 살 수 있는 최대한의 로또를 살 수 있다`(lottoPrice: Long, moneyToBuy: Long, lottoCount: Int) {
         val store = LottoStore(Money(lottoPrice))
         Assertions.assertThat(store.buyLottos(Money(moneyToBuy))).hasSize(lottoCount)
     }

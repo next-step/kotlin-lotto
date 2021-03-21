@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource
 
 internal class BuyingInputTest {
     @ParameterizedTest
-    @ValueSource(ints = [1, 1500, Int.MAX_VALUE])
-    fun `구매금액입력값은 돈으로 변환할 수 있다`(amount: Int) {
+    @ValueSource(longs = [1, 1500, Long.MAX_VALUE])
+    fun `구매금액입력값은 돈으로 변환할 수 있다`(amount: Long) {
         assertThat(BuyingInput(amount).toMoney()).isEqualTo(Money(amount))
     }
 }

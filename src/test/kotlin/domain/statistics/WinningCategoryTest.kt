@@ -36,7 +36,7 @@ internal class WinningCategoryTest {
         "FIVE_CORRECT, 1500000",
         "SIX_CORRECT, 2000000000"
     )
-    fun `당첨항목마다 당첨금은 아래와 같다`(category: WinningCategory, prize: Int) {
+    fun `당첨항목마다 당첨금은 아래와 같다`(category: WinningCategory, prize: Long) {
         assertThat(category.prize).isEqualTo(Money(prize))
     }
 }
