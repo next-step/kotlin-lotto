@@ -7,7 +7,9 @@ data class Lotto(val numbers: List<Int>) {
     }
 
     private fun validateNumbers(): Boolean {
-        return numbers.size == 6 && numbers.filterNot { it in NUMBER_RANGE }.isEmpty()
+        numbers.distinct().also {
+            return it.size == 6 && it.filterNot { number -> number in NUMBER_RANGE }.isEmpty()
+        }
     }
 
     companion object {
