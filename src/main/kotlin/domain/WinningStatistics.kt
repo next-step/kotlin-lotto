@@ -3,10 +3,8 @@ package domain
 class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto>) {
     val totalWinningPrizes: Money
         get() {
-            return sumPrizesOf(WinningCategory.SIX_CORRECT) +
-                sumPrizesOf(WinningCategory.FIVE_CORRECT) +
-                sumPrizesOf(WinningCategory.FOUR_CORRECT) +
-                sumPrizesOf(WinningCategory.THREE_CORRECT)
+            return WinningCategory.values()
+                .fold(Money(0)) { acc, category -> acc + sumPrizesOf(category) }
         }
 
     fun countLottoBy(category: WinningCategory): Int {
