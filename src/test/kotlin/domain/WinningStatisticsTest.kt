@@ -36,7 +36,13 @@ internal class WinningStatisticsTest {
         threeCorrectCount: Int,
         noCorrectCount: Int
     ) {
-        val statistics = makeStatisticsWithWinningCount(sixCorrectCount, fiveCorrectCount, fourCorrectCount, threeCorrectCount, noCorrectCount)
+        val statistics = makeStatisticsWithWinningCount(
+            sixCorrectCount,
+            fiveCorrectCount,
+            fourCorrectCount,
+            threeCorrectCount,
+            noCorrectCount
+        )
 
         val expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * sixCorrectCount) +
             (WinningCategory.FIVE_CORRECT.prize * fiveCorrectCount) +
@@ -58,8 +64,13 @@ internal class WinningStatisticsTest {
         threeCorrectCount: Int,
         noCorrectCount: Int
     ) {
-        val statistics =
-            makeStatisticsWithWinningCount(sixCorrectCount, fiveCorrectCount, fourCorrectCount, threeCorrectCount, noCorrectCount)
+        val statistics = makeStatisticsWithWinningCount(
+            sixCorrectCount,
+            fiveCorrectCount,
+            fourCorrectCount,
+            threeCorrectCount,
+            noCorrectCount
+        )
 
         assertThat(statistics.countLottoBy(WinningCategory.SIX_CORRECT)).isEqualTo(sixCorrectCount)
         assertThat(statistics.countLottoBy(WinningCategory.FIVE_CORRECT)).isEqualTo(fiveCorrectCount)
