@@ -19,9 +19,9 @@ internal class LottoTest {
     }
 
     @Test
-    internal fun `로또 1장의 가격은 1000원이고 구입 금액을 입력해서 구입할 수 있다`() {
-        val lottos = Lotto.buyRandom(3000)
-        assertThat(lottos.size).isEqualTo(3)
+    internal fun `로또를 자동으로 구입할 수 있다`() {
+        val lotto = Lotto.buyRandom()
+        assertThat(lotto.numbers.size).isEqualTo(6)
     }
 
     companion object {
