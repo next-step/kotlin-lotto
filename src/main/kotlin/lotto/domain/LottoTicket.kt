@@ -25,7 +25,7 @@ class LottoTicket(val value: TreeSet<LottoNumber>) {
     }
 
     private fun checkValidateLottoTicket() {
-        require(value.size == LENGTH_OF_LOTTO) { "숫자는 6개가 존재해야 합니다."}
+        require(value.size == LENGTH_OF_LOTTO) { "숫자는 6개가 존재해야 합니다." }
     }
 
     companion object {

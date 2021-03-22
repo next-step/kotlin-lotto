@@ -2,7 +2,6 @@ package lotto.ui
 
 import lotto.domain.Lottoes
 import lotto.domain.LottoesRank
-import lotto.domain.Money
 import lotto.domain.Rank
 
 class OutputView {
