@@ -35,8 +35,8 @@ class LottoGameTest {
     fun `자동으로 로또 생성 시 모두 범위 내 숫자인지 확인`() {
         val lottoes = lottoGame.purchaseLottoes(AutoStrategy()).toList()
 
-        for (lotto in lottoes) {
-            assertThat(allLottoNumbers).containsOnlyOnceElementsOf(lotto.value)
+        assertThat(lottoes).allSatisfy { lottoTicket ->
+            assertThat(allLottoNumbers).containsAll(lottoTicket.value)
         }
     }
 
