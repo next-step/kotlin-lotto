@@ -21,11 +21,11 @@ object LottoMachine {
         }
     }
 
-    fun dispenseAuto(count: Int): List<Lotto> {
+    private fun dispenseAuto(count: Int): List<Lotto> {
         return (1..count).map { Lotto.create() }
     }
 
-    fun dispenseManual(manualNumbers: ManualNumbers): List<Lotto> {
+    private fun dispenseManual(manualNumbers: ManualNumbers): List<Lotto> {
         return manualNumbers.toLottos()
     }
 }
