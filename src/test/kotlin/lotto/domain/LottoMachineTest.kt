@@ -20,9 +20,8 @@ internal class LottoMachineTest {
     ) {
         val buyingPrice = LottoPrice(price)
         val manualNumbers = ManualNumbers((1..manualLottoCount).map { "1,2,3,4,5,6" })
-        val buyingLotto = BuyingLotto(buyingPrice, manualNumbers)
 
-        val lottoTicket = LottoMachine.buy(buyingLotto)
+        val lottoTicket = LottoMachine.buy(buyingPrice, manualNumbers)
         assertThat(lottoTicket.automatics.size).isEqualTo(expectedAutomaticCount)
         assertThat(lottoTicket.manuals.size).isEqualTo(expectedManualLottoCount)
         assertThat(lottoTicket.getTickets().size).isEqualTo(totalLottoCount)

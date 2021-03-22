@@ -1,16 +1,31 @@
 package lotto.domain
 
 object LottoMachine {
-    fun buy(buyingLotto: BuyingLotto): LottoTicket {
-        val automaticLotto = dispenseAuto(buyingLotto.automaticCount)
+    fun buy(price: LottoPrice, manualNumbers: ManualNumbers): LottoTicket {
+        val manualLottos: List<Lotto> = dispenseManual(manualNumbers)
+        val automaticLottos: List<Lotto> = dispenseAuto(price.calculateAutomaticCount(manualLottos.size))
 
-        return LottoTicket(
-            manuals = buyingLotto.manualLotto,
-            automatics = automaticLotto
+        val ticket = LottoTicket(
+            manuals = manualLottos,
+            automatics = automaticLottos
         )
+
+        buyingValidate(price, ticket)
+
+        return ticket
     }
 
-    private fun dispenseAuto(count: Int): List<Lotto> {
+    private fun buyingValidate(price: LottoPrice, lottoTicket: LottoTicket) {
+        require(price.isExceedPriceByCount(lottoTicket.totalLottoCount())) {
+            "로또 구매수는 구입금액을 초과할 수 없습니다."
+        }
+    }
+
+    fun dispenseAuto(count: Int): List<Lotto> {
         return (1..count).map { Lotto.create() }
+    }
+
+    fun dispenseManual(manualNumbers: ManualNumbers): List<Lotto> {
+        return manualNumbers.toLottos()
     }
 }

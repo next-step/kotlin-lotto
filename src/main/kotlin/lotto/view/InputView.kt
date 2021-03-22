@@ -24,15 +24,9 @@ object InputView {
         return readLine()?.toInt() ?: throw IllegalArgumentException()
     }
 
-    fun enterManualLottoCount(buyingPrice: LottoPrice): Int {
+    fun enterManualLottoCount(): Int {
         println(MANUAL_LOTTO_COUNT_COMMENT)
-        val manualLottoCount = readLine()?.toInt() ?: throw IllegalArgumentException()
-
-        require(buyingPrice.isGreaterThanEqualsByCount(manualLottoCount)) {
-            "수동 로또 구매수는 구입금액을 초과할 수 없습니다."
-        }
-
-        return manualLottoCount
+        return readLine()?.toInt() ?: throw IllegalArgumentException()
     }
 
     fun enterManualLottoNumbers(): String {
