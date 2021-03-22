@@ -2,12 +2,12 @@ package lotto.domain
 
 class LottoWonNumbers(private val lottoNumber: Set<LottoNumber>, private val bonusNumber: LottoNumber) {
     init {
-        require(lottoNumber.size == Lotto.LOTTO_NUMBER_COUNT) { "당첨 로또 번호는 6개여야 합니다" }
+        require(lottoNumber.size == LottoTicket.LOTTO_NUMBER_COUNT) { "당첨 로또 번호는 6개여야 합니다" }
         require(!lottoNumber.contains(bonusNumber)) { "당첨 로또 번호에는 보너스 당첨번호가 존재해서는 안됩니다." }
     }
 
-    fun match(lottoCollection: LottoCollection): LottoRankCollection {
-        val rankCount: Map<Rank, Int> = lottoCollection
+    fun match(lottoTickets: LottoTickets): LottoRankCollection {
+        val rankCount: Map<Rank, Int> = lottoTickets
             .map {
                 match(it)
             }
@@ -17,9 +17,9 @@ class LottoWonNumbers(private val lottoNumber: Set<LottoNumber>, private val bon
         return LottoRankCollection(rankCount)
     }
 
-    fun match(lotto: Lotto): Rank {
-        val wonNumberCount: Int = lotto.count { lottoNumber.contains(it) }
-        val matchBonus: Boolean = lotto.contains(bonusNumber)
+    fun match(lottoTicket: LottoTicket): Rank {
+        val wonNumberCount: Int = lottoTicket.count { lottoNumber.contains(it) }
+        val matchBonus: Boolean = lottoTicket.contains(bonusNumber)
 
         return Rank.getRankByCount(wonNumberCount, matchBonus)
     }

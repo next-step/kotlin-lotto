@@ -1,16 +1,16 @@
 package lotto.view
 
-import lotto.domain.LottoCollection
+import lotto.domain.LottoTickets
 import lotto.domain.LottoWonNumbers
 import lotto.domain.Rank
 
-class ResultView(private val lottoCollection: LottoCollection) {
+class ResultView(private val lottoTickets: LottoTickets) {
     fun printLotto() {
-        lottoCollection.lotto.forEach { println(it) }
+        lottoTickets.lottoTickets.forEach { println(it) }
     }
 
     fun printWon(wonNumbers: LottoWonNumbers) {
-        val matchByWonNumber = wonNumbers.match(lottoCollection)
+        val matchByWonNumber = wonNumbers.match(lottoTickets)
         val wonRank = Rank.getWonRank()
 
         wonRank.forEach {
@@ -19,8 +19,8 @@ class ResultView(private val lottoCollection: LottoCollection) {
     }
 
     fun printRate(wonNumbers: LottoWonNumbers) {
-        val matchByWonNumber = wonNumbers.match(lottoCollection)
-        val rate: Double = (matchByWonNumber.sumAmount.toDouble() / (lottoCollection.lotto.size * 1000).toDouble())
+        val matchByWonNumber = wonNumbers.match(lottoTickets)
+        val rate: Double = (matchByWonNumber.sumAmount.toDouble() / (lottoTickets.lottoTickets.size * 1000).toDouble())
 
         print("총 수익률은 ${"%.2f".format(rate)}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }

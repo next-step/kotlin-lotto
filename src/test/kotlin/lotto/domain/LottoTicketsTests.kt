@@ -7,20 +7,20 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import java.lang.IllegalArgumentException
 
-class LottoCollectionTests {
+class LottoTicketsTests {
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 4, 5])
     fun `여러개의 로또를 구매가 가능하다`(count: Int) {
-        val lottoCollection: LottoCollection = LottoCollection(count)
+        val lottoTickets: LottoTickets = LottoTickets(count)
 
-        assertThat(lottoCollection.lotto.size)
+        assertThat(lottoTickets.lottoTickets.size)
             .isEqualTo(count)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [-1, 0])
     fun `로또는 1개이상 구매가 가능하다`(count: Int) {
-        assertThrows<IllegalArgumentException> { LottoCollection(count) }
+        assertThrows<IllegalArgumentException> { LottoTickets(count) }
     }
 
     @Test
@@ -46,23 +46,23 @@ class LottoCollectionTests {
         // 3등 1개
         // 4등 3개
         // 실패 2개
-        val lottoCollection: LottoCollection = LottoCollection(
+        val lottoTickets: LottoTickets = LottoTickets(
             mutableListOf(
-                Lotto(firstWonNumber),
-                Lotto(firstWonNumber),
-                Lotto(thirdWonNumber),
-                Lotto(fourthWonNumber),
-                Lotto(fifthWonNumber),
-                Lotto(fifthWonNumber),
-                Lotto(fifthWonNumber),
-                Lotto(failWonNUmber),
-                Lotto(failWonNUmber),
-                Lotto(secondWonNumber),
-                Lotto(secondWonNumber)
+                LottoTicket(firstWonNumber),
+                LottoTicket(firstWonNumber),
+                LottoTicket(thirdWonNumber),
+                LottoTicket(fourthWonNumber),
+                LottoTicket(fifthWonNumber),
+                LottoTicket(fifthWonNumber),
+                LottoTicket(fifthWonNumber),
+                LottoTicket(failWonNUmber),
+                LottoTicket(failWonNUmber),
+                LottoTicket(secondWonNumber),
+                LottoTicket(secondWonNumber)
             )
         )
 
-        val matchByWonNumber = LottoWonNumbers(wonNumber, LottoNumber(10)).match(lottoCollection)
+        val matchByWonNumber = LottoWonNumbers(wonNumber, LottoNumber(10)).match(lottoTickets)
 
         assertThat(matchByWonNumber.rankCount[Rank.FIRST])
             .isEqualTo(2)
