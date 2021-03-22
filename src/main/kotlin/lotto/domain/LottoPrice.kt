@@ -9,7 +9,7 @@ class LottoPrice(
         }
     }
 
-    fun isGreaterThanEqualsByCount(count: Int): Boolean {
+    fun isExceedPriceByCount(count: Int): Boolean {
         if(count < MINIMUM_COUNT_UNIT) return true
         return this >= convertCountToLottoPrice(count)
     }
