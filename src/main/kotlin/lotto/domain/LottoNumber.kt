@@ -6,6 +6,10 @@ class LottoNumber private constructor(private val value: Int) : Comparable<Lotto
         return value.toString()
     }
 
+    override fun compareTo(other: LottoNumber): Int {
+        return value.compareTo(other.value)
+    }
+
     companion object {
         const val MIN_LOTTO_NUMBER = 1
         const val MAX_LOTTO_NUMBER = 45
@@ -13,14 +17,6 @@ class LottoNumber private constructor(private val value: Int) : Comparable<Lotto
 
         fun from(value: Int): LottoNumber {
             return NUMBERS[value] ?: throw IllegalArgumentException("로또의 번호는 1~45번 까지 있습니다.")
-        }
-    }
-
-    override fun compareTo(other: LottoNumber): Int {
-        return when {
-            value > other.value -> 1
-            value == other.value -> 0
-            else -> -1
         }
     }
 }
