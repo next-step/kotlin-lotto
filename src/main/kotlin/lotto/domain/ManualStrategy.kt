@@ -8,10 +8,10 @@ class ManualStrategy(
     override fun generateLotto(money: Money): Lottoes {
         val numberOfManual = stringManualNumbers.size
         money.spendMoney(LOTTO_COST * numberOfManual)
-        return Lottoes(makeManualLottoes(numberOfManual, stringManualNumbers))
+        return Lottoes(makeManualLottoes(stringManualNumbers))
     }
 
-    private fun makeManualLottoes(numberOfManual: Int, stringManualNumbers: List<List<String>>): List<LottoTicket> {
+    private fun makeManualLottoes(stringManualNumbers: List<List<String>>): List<LottoTicket> {
         val manualNumbers = stringManualNumbers.map { strings ->
             convertStringToInt(strings)
         }

@@ -27,7 +27,7 @@ fun main() {
     val winningLotto = WinningLotto(createWinningTicket(), createBonusNumber())
 
     val ranks = universalLottoes.getMyLottoesRanks(winningLotto)
-    outputView.printLottoesResult(money, ranks)
+    outputView.printLottoesResult(ranks)
 
     val rateOfReturn = ranks.calcualteRateOfReutrn(money.spentMoney)
     outputView.printRateOfReturn(rateOfReturn)

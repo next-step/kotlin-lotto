@@ -18,15 +18,14 @@ class OutputView {
         }
     }
 
-    fun printLottoesResult(money: Money, lottoesRank: LottoesRank) {
-        val lottoesRankMap = lottoesRank.getRanks()
+    fun printLottoesResult(lottoesRank: LottoesRank) {
         println("\n당첨 통계")
         println("------------")
-        println("3개 일치 (5000원) - ${(lottoesRankMap[Rank.FIFTH] ?: 0)}개")
-        println("4개 일치 (50,000원) - ${(lottoesRankMap[Rank.FOURTH] ?: 0)}개")
-        println("5개 일치 (1,500,000원) - ${(lottoesRankMap[Rank.THIRD] ?: 0)}개")
-        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${(lottoesRankMap[Rank.SECOND] ?: 0)}개")
-        println("6개 일치 (2,000,000,000원) - ${(lottoesRankMap[Rank.FIRST] ?: 0)}개")
+        println("3개 일치 (5000원) - ${(lottoesRank.value[Rank.FIFTH] ?: 0)}개")
+        println("4개 일치 (50,000원) - ${(lottoesRank.value[Rank.FOURTH] ?: 0)}개")
+        println("5개 일치 (1,500,000원) - ${(lottoesRank.value[Rank.THIRD] ?: 0)}개")
+        println("5개 일치, 보너스 볼 일치 (30,000,000원) - ${(lottoesRank.value[Rank.SECOND] ?: 0)}개")
+        println("6개 일치 (2,000,000,000원) - ${(lottoesRank.value[Rank.FIRST] ?: 0)}개")
     }
 
     fun printRateOfReturn(rateOfReturn: String) {
