@@ -26,13 +26,15 @@ fun main() {
 
     printInputLastWinnerLottery()
     val receiveWinnerLottery = Reception.receiveWinnerLottery()
-    val winnerLottery = WinnerLottery(receiveWinnerLottery)
-
-    val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
 
     printInputBonusBall()
     val inputBonusBall = Reception.receiveNumber()
-    val bonusBall = BonusBall(inputBonusBall, winnerLottery)
+
+    val winnerLottery = WinnerLottery(receiveWinnerLottery, BonusBall(inputBonusBall))
+
+    val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
+
+    val bonusBall = BonusBall(inputBonusBall)
 
     val rankCounts = lotteryMatcher.match(bonusBall)
 
