@@ -7,6 +7,6 @@ internal class LottoProfitRateTest {
     @Test
     fun `수익률 계산`() {
         val lottoProfitRate = LottoProfitRate(14000, LottoPrice(14000))
-        assertThat(lottoProfitRate.value).isEqualTo(1.0)
+        assertThat(lottoProfitRate.profitRate).isEqualTo(1.0)
     }
 }

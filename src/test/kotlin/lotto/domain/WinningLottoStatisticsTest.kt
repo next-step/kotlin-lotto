@@ -25,6 +25,6 @@ internal class WinningLottoStatisticsTest {
 
         val winningLottoStatistics = WinningLottoStatistics(lottoTicket, winningLottoNumbers)
         val lottoProfitRate = winningLottoStatistics.calculateProfitRate(LottoPrice(price))
-        assertThat(lottoProfitRate.value).isEqualTo(expectedProfitRate)
+        assertThat(lottoProfitRate.profitRate).isEqualTo(expectedProfitRate)
     }
 }

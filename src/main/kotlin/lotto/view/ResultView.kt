@@ -33,7 +33,7 @@ object ResultView {
     }
 
     private fun printLottoProfitRate(profitRate: LottoProfitRate) {
-        println("총 수익률은 ${cutProfitRatePoint(profitRate.value)}입니다.")
+        println("총 수익률은 ${cutProfitRatePoint(profitRate.profitRate)}입니다.")
     }
 
     private fun cutProfitRatePoint(profitRate: Double): Double {
