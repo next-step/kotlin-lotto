@@ -10,6 +10,8 @@
     - [ ] 자동은 전체 금액에서 수동으로 로또를 구매한것 만큼 빼고서는 생성되어야 한다.
     - [X] 로또 개수만큼 만들 수 있다. -> LottoCollection(int, generator)
         - [X] 인자로는 로또 개수, 생성기를 주입이 가능하다.
+        - [ ] 인자로는 로또컬랙션, 로또 개수, 생성기를 주입이 가능하다.
+            - [ ] 새로운 객체를 만들 때는 로또컬랙션 + 로또 갯수로 만들어진다.
     - [X] 로또 당첨 번호를 받아서, 등수를 return 할 수 있어야 한다 -> LottoCollection.matchByWonNumber() -> LottoRankCollection
         - [X] LottoRankCollection에는 6,5,4,3개 일치한 값의 갯수를 가지고 있어야 한다. -> Map<Rank, Integer> 
             - [X] Rank는 스스로 당첨금액을 알고 있어야 한다. ( enums ) 
