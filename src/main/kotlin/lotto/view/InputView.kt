@@ -34,7 +34,9 @@ class InputView {
         return ManualCountInput(readLine())
     }
 
-    fun inputManualLottoTickets(count: Int): ManualLottoInputs {
+    fun inputManualLottoTickets(manualCountInput: ManualCountInput): ManualLottoInputs {
+        val count = manualCountInput.lottoCount
+
         if (count == 0) return ManualLottoInputs()
         println("수동으로 구매할 번호를 입력해 주세요.")
 
