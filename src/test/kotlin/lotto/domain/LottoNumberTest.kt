@@ -16,12 +16,12 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 4, 5, 45])
     fun `유효한 번호를 넣었을 때 잘 생성이 되는지 확인`(number: Int) {
-        assertThat(LottoNumber.from(number)).isEqualTo(LottoNumber.from(number))
+        assertThat(LottoNumber.from(number)).isSameAs(LottoNumber.from(number))
     }
 
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 4, 5, 45])
     fun `value가 같으면 같은 인스턴스로 인식하는지 확인`(number: Int) {
-        assertThat(LottoNumber.from(number)).isEqualTo(LottoNumber.from(number))
+        assertThat(LottoNumber.from(number)).isSameAs(LottoNumber.from(number))
     }
 }

@@ -28,14 +28,14 @@ class LottoesTest {
     @Test
     fun `로또 번호들의 등수 확인`() {
         val lottoRanks = lottoes.getMyLottoesRanks(winningLotto)
-        val ranks = lottoRanks.getRanks().keys
+        val ranks = lottoRanks.value.keys
         assertThat(ranks.toList()).isEqualTo(listOf(Rank.THIRD, Rank.SECOND, Rank.FIRST, Rank.MISS))
     }
 
     @Test
     fun `등수 별 인원 확인`() {
         val lottoesRank = lottoes.getMyLottoesRanks(winningLotto)
-        assertThat(lottoesRank.getRanks()).isEqualTo(
+        assertThat(lottoesRank.value).isEqualTo(
             mapOf(Rank.FIRST to 1, Rank.SECOND to 1, Rank.THIRD to 1, Rank.MISS to 1)
         )
     }
