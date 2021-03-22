@@ -10,7 +10,7 @@ class ResultView(private val lottoCollection: LottoCollection) {
     }
 
     fun printWon(wonNumbers: LottoWonNumbers) {
-        val matchByWonNumber = lottoCollection.matchByWonNumber(wonNumbers)
+        val matchByWonNumber = wonNumbers.match(lottoCollection)
         val wonRank = Rank.getWonRank()
 
         wonRank.forEach {
@@ -19,7 +19,7 @@ class ResultView(private val lottoCollection: LottoCollection) {
     }
 
     fun printRate(wonNumbers: LottoWonNumbers) {
-        val matchByWonNumber = lottoCollection.matchByWonNumber(wonNumbers)
+        val matchByWonNumber = wonNumbers.match(lottoCollection)
         val rate: Double = (matchByWonNumber.sumAmount.toDouble() / (lottoCollection.lotto.size * 1000).toDouble())
 
         print("총 수익률은 ${"%.2f".format(rate)}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")

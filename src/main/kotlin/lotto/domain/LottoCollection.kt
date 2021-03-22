@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoCollection(val lotto: List<Lotto>) {
+class LottoCollection(val lotto: List<Lotto>) : List<Lotto> by lotto {
     init {
         require(lotto.isNotEmpty()) { "로또는 1개 이상을 갖고있어야 합니다." }
     }
@@ -11,17 +11,6 @@ class LottoCollection(val lotto: List<Lotto>) {
             generator
         )
     )
-
-    fun matchByWonNumber(wonNumbers: LottoWonNumbers): LottoRankCollection {
-        val rankCount: Map<Rank, Int> = lotto
-            .map {
-                it.matchByWonNumber(wonNumbers)
-            }
-            .groupingBy { it }
-            .eachCount()
-
-        return LottoRankCollection(rankCount)
-    }
 
     companion object {
         private fun createLotto(count: Int, generator: LottoNumberGenerator): List<Lotto> {

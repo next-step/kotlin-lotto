@@ -31,8 +31,8 @@ class LottoTests {
     fun `로또 번호와 당첨번호와 매칭하여 가져와야 한다`() {
         val lotto: Lotto = Lotto(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
-        val rank: Rank = lotto.matchByWonNumber(
-            LottoWonNumbers(setOf(1, 2, 3, 4, 44, 45), 43)
+        val rank: Rank = LottoWonNumbers(setOf(1, 2, 3, 4, 44, 45), 43).match(
+            lotto
         )
 
         assertThat(rank)
@@ -74,7 +74,7 @@ class LottoTests {
 
         val wonNumbers: LottoWonNumbers = LottoWonNumbers(setOf(1, 2, 3, 4, 5, 10), 6)
 
-        assertThat(lotto.matchByWonNumber(wonNumbers))
+        assertThat(wonNumbers.match(lotto))
             .isEqualTo(Rank.SECOND)
     }
 
