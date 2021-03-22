@@ -4,7 +4,10 @@
         - [X] 1000원 보다 적으면 Exception -> Input(amount: Int)
         - [X] 1000원 보다 많으면 / 1000의 갯수만큼 구매가 가능하다. -> Input.count -> amount / 1000
     - [X] 입력을 통해 보너스 번호를 얻을 수 있어야 한다.
+    - [ ] 수동으로 구매할 개수를 정할 수 있다.
+        - [ ] 개수를 지정한 만큼 로또 번호를 입력한다.
 - [X] 여러개의 로또를 구매가 가능하다. -> LottoCollection
+    - [ ] 자동은 전체 금액에서 수동으로 로또를 구매한것 만큼 빼고서는 생성되어야 한다.
     - [X] 로또 개수만큼 만들 수 있다. -> LottoCollection(int, generator)
         - [X] 인자로는 로또 개수, 생성기를 주입이 가능하다.
     - [X] 로또 당첨 번호를 받아서, 등수를 return 할 수 있어야 한다 -> LottoCollection.matchByWonNumber() -> LottoRankCollection
