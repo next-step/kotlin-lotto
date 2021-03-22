@@ -1,9 +1,10 @@
 package lottery.controller
 
-import lottery.domain.Profit
 import lottery.domain.BonusBall
-import lottery.domain.LotteryFactory
 import lottery.domain.LotteryMatcher
+import lottery.domain.Profit
+import lottery.domain.LotteryFactory
+import lottery.domain.RandomNumbersGenerator
 import lottery.domain.WinnerLottery
 import lottery.view.InputView
 import lottery.view.InputView.printInputBonusBall
@@ -19,7 +20,7 @@ fun main() {
     val factory = LotteryFactory(inputMoney)
     ResultView.printCountOfBuyLottery(factory.calculateLotteryCountByPrice())
 
-    val createdTicket = factory.buy()
+    val createdTicket = factory.buy(RandomNumbersGenerator)
     val lotteries = createdTicket.lotteries
 
     ResultView.printLotteriesNumbers(lotteries)
