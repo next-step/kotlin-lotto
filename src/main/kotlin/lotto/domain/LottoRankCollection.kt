@@ -10,6 +10,7 @@ class LottoRankCollection(val rankCount: Map<Rank, Int>) {
         for (element in this) {
             sum += selector(element)
         }
+
         return sum
     }
 }
