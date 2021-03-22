@@ -89,4 +89,6 @@ class LottoTicketsTests {
             override fun pickNumber(): Set<LottoNumber> = random.map(::LottoNumber).toSet()
         }
     }
+
+    fun LottoNumber(number: Int): LottoNumber = LottoNumber.from(number)
 }

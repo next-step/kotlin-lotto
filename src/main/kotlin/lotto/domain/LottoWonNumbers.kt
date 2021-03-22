@@ -25,7 +25,9 @@ class LottoWonNumbers(private val lottoNumber: Set<LottoNumber>, private val bon
     }
 
     constructor(lottoNumber: Set<Int>, bonusNumber: Int) : this(
-        lottoNumber.map(::LottoNumber).toSet(),
-        LottoNumber(bonusNumber)
+        lottoNumber
+            .map { LottoNumber.from(it) }
+            .toSet(),
+        LottoNumber.from(bonusNumber)
     )
 }
