@@ -11,4 +11,6 @@ class LottoTicket(
 
         return tickets
     }
+
+    fun totalLottoCount(): Int = manuals.size + automatics.size
 }
