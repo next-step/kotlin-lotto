@@ -24,7 +24,7 @@ internal class LottoPriceTest {
     )
     fun `금액이 카운트단위보다 크거나 같은 경우 참`(price: Int, count: Int, expected: Boolean) {
         val lottoPrice = LottoPrice(price)
-        assertThat(lottoPrice.isGreaterThanEqualsByCount(count)).isEqualTo(expected)
+        assertThat(lottoPrice.isExceedPriceByCount(count)).isEqualTo(expected)
     }
 
     @ParameterizedTest
