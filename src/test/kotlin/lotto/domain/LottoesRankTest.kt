@@ -6,28 +6,16 @@ import org.junit.jupiter.api.Test
 
 class LottoesRankTest {
 
-    private lateinit var lottoes: Lottoes
-    private lateinit var winningLotto: WinningLotto
+    private lateinit var lottoesRank: LottoesRank
+    private var spentMoney: Long = 1000
 
     @BeforeEach
     fun init() {
-        lottoes = Lottoes(
-            listOf(
-                LottoTicket(listOf(3, 5, 6, 7, 8, 13)),
-                LottoTicket(listOf(3, 5, 6, 7, 8, 11)),
-                LottoTicket(listOf(3, 5, 6, 7, 8, 9)),
-                LottoTicket(listOf(3, 5, 6, 7, 8, 9))
-            )
-        )
-        val winningNumbers = listOf<Int>(3, 5, 6, 7, 8, 9)
-
-        val bonusNumber = LottoNumber.from(11)
-        winningLotto = WinningLotto(LottoTicket(winningNumbers), bonusNumber)
+        lottoesRank = LottoesRank(mapOf(Rank.FIRST to 1))
     }
 
     @Test
-    fun `당첨금 확인`() {
-        val lottoesRank = lottoes.getMyLottoesRanks(winningLotto)
-        assertThat(lottoesRank.getWinningMoney()).isEqualTo(4_031_500_000L)
+    fun `1등일 때 수익률 확인`() {
+        assertThat(lottoesRank.calcualteRateOfReutrn(spentMoney)).isEqualTo("2000000.00")
     }
 }
