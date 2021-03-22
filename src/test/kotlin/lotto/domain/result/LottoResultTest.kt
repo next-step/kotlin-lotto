@@ -10,7 +10,7 @@ internal class LottoResultTest {
     @Test
     fun getEarning() {
         val result = createLottoResult()
-        result[LottoRank.FOURTH] = 1
+        result[LottoRank.FIFTH] = 1
         val expected = 5.0
 
         val actual = LottoResult(result).earning

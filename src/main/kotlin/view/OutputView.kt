@@ -15,4 +15,6 @@ interface OutputView {
     fun printInputWinningNumbersMessage()
 
     fun printLottoResult(result: LottoResult)
+
+    fun printInputBonusNumberMessage()
 }

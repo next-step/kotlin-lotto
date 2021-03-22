@@ -14,11 +14,15 @@ class LottoController private constructor(
 ) {
     fun run() {
         outputView.printPurchaseAmountMessage()
-        val tickets = LottoStore().purchase(inputView.read(), LottoNumberStrategy())
+        val tickets = LottoStore.purchase(inputView.read(), LottoNumberStrategy())
         outputView.printLottoTickets(tickets)
 
         outputView.printInputWinningNumbersMessage()
-        val result = WinningLotto.of(inputView.read()).match(tickets)
+        val winningNumbers = inputView.read()
+        outputView.printInputBonusNumberMessage()
+        val bonusNumber = inputView.read()
+
+        val result = WinningLotto.of(winningNumbers, bonusNumber).match(tickets)
         outputView.printLottoResult(result)
     }
 
