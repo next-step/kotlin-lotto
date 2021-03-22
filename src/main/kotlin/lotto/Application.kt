@@ -2,24 +2,25 @@ package lotto
 
 import lotto.domain.LottoTickets
 import lotto.domain.LottoWonNumbers
-import lotto.view.Input
+import lotto.view.input.AmountInput
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
     val inputView: InputView = InputView()
-    val input: Input = inputView.input()
+    val amountInput: AmountInput = inputView.input()
 
-    val lottoCollection = LottoTickets(input.lottoCount)
+    val lottoCollection = LottoTickets(amountInput.lottoCount)
 
     val resultView: ResultView = ResultView(lottoCollection)
 
     resultView.printLotto()
 
-    val inputWonNumber = inputView.inputWonNumber()
+    val wonNumbers = inputView.inputWonNumber()
+    val bonusNumber = inputView.inputBonusNumber()
 
-    val wonNumbers: LottoWonNumbers = LottoWonNumbers(inputWonNumber.wonNumber, inputWonNumber.bonusNumber)
+    val lottoWonNumber: LottoWonNumbers = LottoWonNumbers(wonNumbers.wonNumber, bonusNumber.bonusNumber)
 
-    resultView.printWon(wonNumbers)
-    resultView.printRate(wonNumbers)
+    resultView.printWon(lottoWonNumber)
+    resultView.printRate(lottoWonNumber)
 }
