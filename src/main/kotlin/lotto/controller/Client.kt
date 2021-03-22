@@ -2,24 +2,28 @@ package lotto.controller
 
 import lotto.model.LottoResult
 import lotto.model.LottoStore
+import lotto.model.Money
 import lotto.model.RandomNumbersGenerator
 import lotto.model.WinningCondition
 import lotto.model.WinningCounter
+import lotto.model.number.CandidateNumber
+import lotto.model.number.CandidateNumbers
+import lotto.model.number.WinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val moneyAmount = InputView.readMoney()
+    val moneyAmount = Money(InputView.readMoney())
     val manualTicketCount = InputView.readManualTicketCount()
-    val candidateNumbers = InputView.readCandidateNumbers(manualTicketCount)
+    val listOfCandidateNumbers = InputView.readListOfCandidateNumbers(manualTicketCount).map { CandidateNumbers(it) }
 
     val store = LottoStore(RandomNumbersGenerator())
-    val tickets = store.buy(moneyAmount, candidateNumbers)
+    val tickets = store.buy(moneyAmount, listOfCandidateNumbers)
 
     OutputView.printTickets(tickets)
 
-    val winningNumbers = InputView.readWinningNumbers()
-    val bonusNumber = InputView.readBonusNumber()
+    val winningNumbers = WinningNumbers(InputView.readWinningNumbers())
+    val bonusNumber = CandidateNumber.get(InputView.readBonusNumber())
 
     val winningCounter = WinningCounter.Builder(WinningCondition(winningNumbers, bonusNumber)).build()
 
