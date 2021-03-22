@@ -6,7 +6,4 @@ class LottoGame(private val money: Money) {
         return lottoStrategy.generateLotto(money)
     }
 
-    companion object {
-        const val LOTTO_COST = 1000
-    }
 }

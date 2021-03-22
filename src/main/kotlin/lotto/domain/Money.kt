@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoGame.Companion.LOTTO_COST
-
 class Money(initMoney: Int) {
     var spentMoney: Long = 0L
         private set
@@ -33,5 +31,9 @@ class Money(initMoney: Int) {
 
     private fun checkValidateMoney(money: Int) {
         require(money > 0) { "돈은 0보다 큰 수를 입력해주세요" }
+    }
+
+    companion object {
+        const val LOTTO_COST = 1000
     }
 }
