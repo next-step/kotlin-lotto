@@ -2,7 +2,7 @@ package lotto.view.input
 
 import lotto.domain.LottoNumber
 
-data class BonusInput(val input: String?) {
+class BonusInput(input: String?) {
     val bonusNumber: LottoNumber
 
     init {

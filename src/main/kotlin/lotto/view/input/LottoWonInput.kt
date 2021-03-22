@@ -3,7 +3,7 @@ package lotto.view.input
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 
-data class LottoWonInput(val input: String?) {
+class LottoWonInput(input: String?) {
     val wonNumber: Set<LottoNumber>
 
     init {
