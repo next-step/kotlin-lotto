@@ -13,7 +13,7 @@ class LottoTicketTest {
 
     @BeforeEach
     fun init() {
-        lottoTicket = LottoTicket(listOf(1, 2, 3, 4 ,5, 10))
+        lottoTicket = LottoTicket(listOf(1, 2, 3, 4, 5, 10))
     }
 
     @Test
