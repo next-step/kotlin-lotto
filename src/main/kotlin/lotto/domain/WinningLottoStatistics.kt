@@ -15,7 +15,7 @@ class WinningLottoStatistics(
     }
 
     private fun initializeRankMap() {
-        LottoRank.valuesNotIncludeNotPlace().forEach {
+        LottoRank.valuesExcludeNotPlace().forEach {
             statistics[it] = 0
         }
     }

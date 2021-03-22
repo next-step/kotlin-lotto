@@ -29,7 +29,7 @@ internal class LottoRankTest {
 
     @Test
     fun `매치되지 않는 등수를 제외한 값 테스트`() {
-        val ranks = LottoRank.valuesNotIncludeNotPlace()
+        val ranks = LottoRank.valuesExcludeNotPlace()
         assertThat(ranks).containsAll(
             listOf(
                 LottoRank.FIRST_PLACE,

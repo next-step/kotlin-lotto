@@ -11,12 +11,14 @@ enum class LottoRank(val matchCount: Int, val winningMoney: Int, val matchBonus:
     companion object {
         private const val SECOND_OR_THIRD_PLACE_MATCH_COUNT = 5
 
-        fun valuesNotIncludeNotPlace(): List<LottoRank> {
+        fun valuesExcludeNotPlace(): List<LottoRank> {
             return values().filter { it != NOT_PLACE }
         }
 
+        private fun isSecondOrThirdPlaceMatchCount(matchCount: Int): Boolean = matchCount == SECOND_OR_THIRD_PLACE_MATCH_COUNT
+
         fun selectByMatchCount(matchCount: Int, matchBonus: Boolean): LottoRank {
-            if (matchCount == SECOND_OR_THIRD_PLACE_MATCH_COUNT) {
+            if (isSecondOrThirdPlaceMatchCount(matchCount)) {
                 return values().find { it.matchCount == matchCount && it.matchBonus == matchBonus } ?: NOT_PLACE
             }
             return values().find { it.matchCount == matchCount } ?: NOT_PLACE
