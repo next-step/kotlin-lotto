@@ -5,10 +5,15 @@ import lotto.domain.LottoWonNumbers
 import lotto.view.input.AmountInput
 import lotto.view.InputView
 import lotto.view.ResultView
+import lotto.view.input.ManualCountInput
+import lotto.view.input.ManualLottoInputs
 
 fun main() {
     val inputView: InputView = InputView()
+
     val amountInput: AmountInput = inputView.input()
+    val manualCountInput: ManualCountInput = inputView.inputManualCount()
+    val manualLottoInput: ManualLottoInputs = inputView.inputManualLottoTickets(manualCountInput.count)
 
     val lottoCollection = LottoTickets(amountInput.lottoCount)
 
