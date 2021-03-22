@@ -23,7 +23,7 @@ fun main() {
     val autoLottoes = lottoGame.purchaseLottoes(AutoStrategy())
 
     outputView.printPurchasedLottoes(manualLottoes, autoLottoes)
-    val universalLottoes = Lottoes(manualLottoes.toList() + autoLottoes.toList())
+    val universalLottoes = manualLottoes + autoLottoes
     val winningLotto = WinningLotto(createWinningTicket(), createBonusNumber())
 
     val ranks = universalLottoes.getMyLottoesRanks(winningLotto)

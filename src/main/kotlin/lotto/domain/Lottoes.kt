@@ -16,4 +16,8 @@ class Lottoes(
     fun toList(): List<LottoTicket> {
         return value.toList()
     }
+
+    operator fun plus(lottoes: Lottoes): Lottoes {
+        return Lottoes(value + lottoes.value)
+    }
 }
