@@ -24,7 +24,6 @@ class MoneyTest {
     @Test
     fun `모든 돈을 다 써버리고 잔액 확인`() {
         val availableQuantity = money.getQuantityOfAvailablePurchase()
-        money.spendMoney(availableQuantity * LOTTO_COST)
         assertThat(money.currentMoney).isEqualTo(0)
     }
 
@@ -32,7 +31,6 @@ class MoneyTest {
     fun `돈을 일부 사용한 다음 남은 돈을 모두 사용한다`() {
         money.spendMoney(3000)
         val availableQuantity = money.getQuantityOfAvailablePurchase()
-        money.spendMoney(availableQuantity * LOTTO_COST)
         assertThat(money.currentMoney).isEqualTo(0)
     }
 
