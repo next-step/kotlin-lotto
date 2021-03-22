@@ -4,6 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.ManualLottoGenerator
+import lotto.domain.PositiveNumber
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.dto.StatisticsDto
@@ -23,17 +24,15 @@ class LottoApplication(private val userInterface: UserInterface) {
 
     fun run() {
         val amount = userInterface.inputPurchaseAmount()
-        val manualLottoCount = userInterface.inputManualLottoCount().also {
-            require(it > 0) { "수동로또 개수는 자연수여야 합니다." }
-        }
+        val manualLottoCount = userInterface.inputManualLottoCount().let(::PositiveNumber)
         val manualLottoNumbers =
-            userInterface.inputManualLottoNumbers(count = manualLottoCount).map { it.map(::LottoNumber) }
+            userInterface.inputManualLottoNumbers(count = manualLottoCount.value).map { it.map(::LottoNumber) }
 
         val lottos = lottoMachine.sellLottos(amount, manualLottoNumbers.map(::ManualLottoGenerator))
         userInterface.outputPurchasedMessage(
             lottos.toLottoNumbersDto(
-                manualLottoCount = manualLottoCount,
-                randomLottoCount = lottos.size - manualLottoCount
+                manualLottoCount = manualLottoCount.value,
+                randomLottoCount = lottos.size - manualLottoCount.value
             )
         )
 
@@ -49,7 +48,7 @@ class LottoApplication(private val userInterface: UserInterface) {
         val prizeRankCount = winningLotto.calculateLottoPrize(lottos)
         val profit = Profit(prizeRankCount, amount)
 
-        userInterface.outputWinningStatistics(StatisticsDto(prizeRankCount, profit.rate()))
+        userInterface.outputWinningStatistics(StatisticsDto.of(prizeRankCount, profit.rate()))
     }
 
     companion object {
