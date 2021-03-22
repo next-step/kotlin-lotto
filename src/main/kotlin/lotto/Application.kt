@@ -1,13 +1,13 @@
-package lotto.view
-
 import lotto.controller.LottoGame
 import lotto.domain.BuyingLotto
 import lotto.domain.LottoPrice
 import lotto.domain.ManualNumbers
+import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
     val buyingPrice = LottoPrice(InputView.enterLottoBuyingPrice())
-    val manualLottoCount = InputView.enterManualLottoCount(buyingPrice)
+    val manualLottoCount = InputView.enterManualLottoCount()
     val lottoTicket = LottoGame.start(BuyingLotto(buyingPrice, askManualLotto(manualLottoCount)))
     ResultView.printLottoTickets(lottoTicket)
     val result = LottoGame.doResult(lottoTicket, buyingPrice)
