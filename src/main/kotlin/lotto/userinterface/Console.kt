@@ -43,7 +43,7 @@ class Console : UserInterface {
     }
 
     override fun outputPurchasedMessage(dto: LottoNumbersDto) {
-        println("${dto.count}개를 구매했습니다.")
+        println("수동으로 ${dto.manualLottoCount}장, 자동으로 ${dto.randomLottoCount}개를 구매했습니다.")
         dto.lottos.forEach { println(it) }
     }
 

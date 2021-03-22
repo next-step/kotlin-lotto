@@ -30,7 +30,12 @@ class LottoApplication(private val userInterface: UserInterface) {
             userInterface.inputManualLottoNumbers(count = manualLottoCount).map { it.map(::LottoNumber) }
 
         val lottos = lottoMachine.sellLottos(amount, manualLottoNumbers.map(::ManualLottoGenerator))
-        userInterface.outputPurchasedMessage(lottos.toLottoNumbersDto())
+        userInterface.outputPurchasedMessage(
+            lottos.toLottoNumbersDto(
+                manualLottoCount = manualLottoCount,
+                randomLottoCount = lottos.size - manualLottoCount
+            )
+        )
 
         val winningLottoNumbers = userInterface.inputLastWeekWinningLottoNumbers()
         val winningLottoBonusNumber = userInterface.inputLastWeekWinningLottoBonusNumber()
