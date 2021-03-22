@@ -7,7 +7,14 @@ import lotto.model.number.LottoNumbers
 class LottoTicket(val candidateNumbers: CandidateNumbers) {
     constructor(candidateNumbers: List<Int>) : this(CandidateNumbers(candidateNumbers))
 
-    constructor(generator: NumbersGenerator = RandomNumbersGenerator()) : this(CandidateNumbers(generator.getNumbers(LottoNumber.MAXIMUM, CandidateNumbers.CANDIDATE_SIZE)))
+    constructor(generator: NumbersGenerator = RandomNumbersGenerator()) : this(
+        CandidateNumbers(
+            generator.getNumbers(
+                LottoNumber.MAXIMUM,
+                CandidateNumbers.CANDIDATE_SIZE
+            )
+        )
+    )
 
     fun isMatch(targetNumber: LottoNumber): Boolean {
         return candidateNumbers.contains(targetNumber)
