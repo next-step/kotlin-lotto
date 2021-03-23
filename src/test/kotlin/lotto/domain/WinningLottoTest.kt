@@ -18,9 +18,9 @@ internal class WinningLottoTest {
                         LottoNumber.from(5),
                         LottoNumber.from(6)
                     )
-                ), LottoNumber.from(6)
+                ),
+                LottoNumber.from(6)
             )
         }.isInstanceOf(IllegalArgumentException::class.java)
-
     }
 }

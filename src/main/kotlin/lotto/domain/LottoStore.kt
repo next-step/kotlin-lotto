@@ -17,5 +17,4 @@ class LottoStore {
     companion object {
         private const val LOTTO_DEFAULT_PRICE = 1000
     }
-
 }
