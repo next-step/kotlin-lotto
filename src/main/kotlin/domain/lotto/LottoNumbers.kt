@@ -17,8 +17,8 @@ class LottoNumbers(val numbers: SortedSet<LottoNumber>) {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         other as LottoNumbers
-        if (countIntersection(other) == SIZE) return true
-        return false
+        if (numbers != other.numbers) return false
+        return true
     }
 
     override fun hashCode(): Int {
