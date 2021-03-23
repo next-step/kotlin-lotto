@@ -16,10 +16,11 @@ class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto
     }
 
     fun calculateRatioOfIncomeToExpenditure(lottoPrice: Money): IncomeExpenditureRatio {
-        return IncomeExpenditureRatio.calculatedBy(income = totalWinningPrizes, expenditure = calculateTotalExpenditure(lottoPrice))
+        return IncomeExpenditureRatio.calculatedBy(
+            income = totalWinningPrizes,
+            expenditure = lottoPrice * lottos.size
+        )
     }
 
     private fun sumPrizesOf(category: WinningCategory) = category.prize * countLottoBy(category)
-
-    private fun calculateTotalExpenditure(lottoPrice: Money): Money = lottoPrice * lottos.size
 }
