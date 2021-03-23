@@ -9,10 +9,8 @@ class LottoStore(val price: Money, private val randomLottoNumberGenerator: Rando
     }
 
     fun buyLottos(money: Money): List<Lotto> {
-        return (1..(countLottoToSellBy(money))).map { generateLotto() }
+        return (1..(money.dividedBy(price))).map { generateLotto() }
     }
-
-    private fun countLottoToSellBy(money: Money) = money.dividedBy(price)
 
     private fun generateLotto() = Lotto(randomLottoNumberGenerator.generate())
 }
