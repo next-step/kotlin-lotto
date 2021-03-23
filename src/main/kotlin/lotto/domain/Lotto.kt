@@ -11,6 +11,10 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.filter(winningLotto::contains).count()
     }
 
+    fun matchBonus(bonusNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusNumber)
+    }
+
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
     }
