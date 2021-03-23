@@ -7,6 +7,6 @@ class CommonRandomLottoNumberGenerator : RandomLottoNumberGenerator {
     override fun generate(): LottoNumbers {
         return LottoNumber.VALUES.shuffled()
             .take(LottoNumbers.SIZE)
-            .let { LottoNumbers(it) }
+            .let { LottoNumbers.fromList(it) }
     }
 }

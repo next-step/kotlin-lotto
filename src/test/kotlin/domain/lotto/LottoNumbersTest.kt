@@ -12,7 +12,16 @@ internal class LottoNumbersTest {
     @Test
     fun `로또숫자열은 여섯 개의 로또숫자로 생성된다`() {
         assertDoesNotThrow {
-            LottoNumbers((1..6).map { LottoNumber.parse(it) })
+            LottoNumbers(
+                sortedSetOf(
+                    LottoNumber.N01,
+                    LottoNumber.N02,
+                    LottoNumber.N03,
+                    LottoNumber.N04,
+                    LottoNumber.N05,
+                    LottoNumber.N06
+                )
+            )
         }
     }
 
@@ -20,7 +29,7 @@ internal class LottoNumbersTest {
     @ValueSource(ints = [1, 3, 5, 7])
     fun `로또숫자열은 숫자 6개 이외로는 생성할 수 없다`(lottoNumberCount: Int) {
         assertThatIllegalArgumentException()
-            .isThrownBy { LottoNumbers((1..lottoNumberCount).map { LottoNumber.parse(it) }) }
+            .isThrownBy { LottoNumbers.fromList((1..lottoNumberCount).map { LottoNumber.parse(it) }) }
     }
 
     @ParameterizedTest
@@ -55,6 +64,6 @@ internal class LottoNumbersTest {
         return someNumbers.split(":")
             .map { it.toInt() }
             .map { LottoNumber.parse(it) }
-            .let { LottoNumbers(it) }
+            .let { LottoNumbers(it.toSortedSet()) }
     }
 }

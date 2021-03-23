@@ -7,8 +7,6 @@ class LottoNumbers(val numbers: SortedSet<LottoNumber>) {
         require(numbers.size == SIZE)
     }
 
-    constructor(numbers: List<LottoNumber>) : this(numbers.toSortedSet())
-
     fun countIntersection(other: LottoNumbers): Int {
         return numbers.intersect(other.numbers).size
     }
@@ -27,5 +25,7 @@ class LottoNumbers(val numbers: SortedSet<LottoNumber>) {
 
     companion object {
         const val SIZE = 6
+
+        fun fromList(numbers: List<LottoNumber>): LottoNumbers = LottoNumbers(numbers.toSortedSet())
     }
 }

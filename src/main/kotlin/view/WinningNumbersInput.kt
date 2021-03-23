@@ -7,7 +7,7 @@ data class WinningNumbersInput(val numbers: List<Int>) {
     constructor(numbers: String) : this(parseNumbers(numbers))
 
     fun toLottoNumbers(): LottoNumbers {
-        return LottoNumbers(numbers.map { LottoNumber.parse(it) })
+        return LottoNumbers.fromList(numbers.map { LottoNumber.parse(it) })
     }
 
     companion object {
