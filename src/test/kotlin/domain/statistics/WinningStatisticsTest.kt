@@ -4,7 +4,6 @@ import domain.lotto.Lotto
 import domain.lotto.lottoNumberOf
 import domain.lotto.lottoOf
 import domain.money.Money
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -56,7 +55,7 @@ internal class WinningStatisticsTest {
             (WinningCategory.FOUR_CORRECT.prize * fourCorrectCount) +
             (WinningCategory.THREE_CORRECT.prize * threeCorrectCount)
 
-        Assertions.assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
+        assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
     }
 
     @ParameterizedTest
