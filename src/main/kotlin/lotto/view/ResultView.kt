@@ -4,7 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoProfitRate
 import lotto.domain.LottoRank
 import lotto.domain.LottoTicket
-import lotto.domain.ResultLottoStatistics
+import lotto.vo.ResultLottoStatistics
 import lotto.domain.WinningLottoStatistics
 import kotlin.math.floor
 import kotlin.math.pow

@@ -5,7 +5,7 @@ import lotto.domain.LottoNumberTokenizer
 import lotto.domain.LottoPrice
 import lotto.domain.LottoTicket
 import lotto.domain.ManualNumbers
-import lotto.domain.ResultLottoStatistics
+import lotto.vo.ResultLottoStatistics
 import lotto.domain.WinningLottoNumbers
 import lotto.domain.WinningLottoStatistics
 import lotto.view.InputView
