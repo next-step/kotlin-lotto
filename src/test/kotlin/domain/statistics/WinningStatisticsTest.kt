@@ -90,34 +90,26 @@ internal class WinningStatisticsTest {
 
     @ParameterizedTest
     @CsvSource(
-        "1000,0,1,2,3,4",
-        "400,3,2,7,100,2000"
+        "1000, 3",
+        "1000, 5",
+        "2000, 5"
     )
-    fun `당첨통계는 수익률을 알려준다`(
-        lottoPriceValue: Long,
-        sixCorrectCount: Int,
-        fiveCorrectCount: Int,
-        fourCorrectCount: Int,
-        threeCorrectCount: Int,
-        noCorrectCount: Int
-    ) {
-        val lottoPrice = Money(lottoPriceValue)
+    fun `당첨통계는 수익률을 반환한다`(lottoPriceValue: Long, lottoCount: Int) {
         val statistics = WinningStatistics(
             winningNumbers = winningNumbers,
-            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
-                fiveCorrectLotto.nTimes(fiveCorrectCount) +
-                fourCorrectLotto.nTimes(fourCorrectCount) +
-                threeCorrectLotto.nTimes(threeCorrectCount) +
-                noCorrectLotto.nTimes(noCorrectCount)
+            lottos = sixCorrectLotto.nTimes(lottoCount)
         )
 
-        val totalWinningPrizes = statistics.totalWinningPrizes
-        val lottoCount = sixCorrectCount + fiveCorrectCount + fourCorrectCount + threeCorrectCount + noCorrectCount
+        val lottoPrice = Money(lottoPriceValue)
 
-        assertThat(statistics.calculateRatioOfIncomeToExpenditure(lottoPrice))
-            .isEqualTo(
-                totalWinningPrizes.value.toDouble() / (lottoPrice.value * lottoCount).toDouble()
+        assertThat(
+            statistics.calculateRatioOfIncomeToExpenditure(lottoPrice)
+        ).isEqualTo(
+            IncomeExpenditureRatio.calculatedBy(
+                income = statistics.totalWinningPrizes,
+                expenditure = lottoPrice * lottoCount
             )
+        )
     }
 
     private fun Lotto.nTimes(number: Int): List<Lotto> = List(number) { this }

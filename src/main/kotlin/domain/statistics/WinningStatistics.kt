@@ -15,8 +15,8 @@ class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: List<Lotto
         return lottos.count { it.countMatchedBy(winningNumbers) == category.numberOfMatched }
     }
 
-    fun calculateRatioOfIncomeToExpenditure(lottoPrice: Money): Double {
-        return totalWinningPrizes.value.toDouble() / calculateTotalExpenditure(lottoPrice).value.toDouble()
+    fun calculateRatioOfIncomeToExpenditure(lottoPrice: Money): IncomeExpenditureRatio {
+        return IncomeExpenditureRatio.calculatedBy(income = totalWinningPrizes, expenditure = calculateTotalExpenditure(lottoPrice))
     }
 
     private fun sumPrizesOf(category: WinningCategory) = category.prize * countLottoBy(category)
