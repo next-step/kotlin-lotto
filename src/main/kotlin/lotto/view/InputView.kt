@@ -6,6 +6,12 @@ object InputView {
         return readLine()?.toInt() ?: 0
     }
 
+    fun inputBonusNumber(): Int {
+        println("보너스 볼을 입력해주세요.")
+        val inputValue = readLine()?.toIntOrNull()
+        return inputValue ?: throw IllegalArgumentException("$inputValue 는 숫자가 아닙니다")
+    }
+
     fun inputWinnerLottoNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return readLine()
