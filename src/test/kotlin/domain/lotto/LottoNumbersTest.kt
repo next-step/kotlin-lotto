@@ -13,7 +13,6 @@ internal class LottoNumbersTest {
     fun `로또숫자열은 여섯 개의 로또숫자로 생성된다`() {
         assertDoesNotThrow {
             LottoNumbers((1..6).map { LottoNumber.parse(it) })
-            LottoNumbers(1, 2, 3, 4, 5, 6)
         }
     }
 
@@ -31,12 +30,12 @@ internal class LottoNumbersTest {
         "45, 45, 1, 5, 1, 6"
     )
     fun `로또숫자열 내의 로또숫자는 서로 같을 수 없다`(n1: Int, n2: Int, n3: Int, n4: Int, n5: Int, n6: Int) {
-        assertThatIllegalArgumentException().isThrownBy { LottoNumbers(n1, n2, n3, n4, n5, n6) }
+        assertThatIllegalArgumentException().isThrownBy { lottoNumberOf(n1, n2, n3, n4, n5, n6) }
     }
 
     @Test
     fun `로또숫자열 내의 로또숫자는 생성 시 순서와 관계없이 정렬되어 있다`() {
-        assertThat(LottoNumbers(9, 1, 43, 2, 8, 10).numbers)
+        assertThat(lottoNumberOf(9, 1, 43, 2, 8, 10).numbers)
             .containsExactlyElementsOf(listOf(1, 2, 8, 9, 10, 43).map { LottoNumber.parse(it) })
     }
 

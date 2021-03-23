@@ -1,7 +1,7 @@
 package domain.statistics
 
 import domain.lotto.Lotto
-import domain.lotto.LottoNumbers
+import domain.lotto.lottoNumberOf
 import domain.money.Money
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 internal class WinningStatisticsTest {
-    private val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+    private val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
     private val sixCorrectLotto = Lotto(1, 2, 3, 4, 5, 6)
     private val fiveCorrectLotto = Lotto(1, 2, 3, 4, 5, 45)
     private val fourCorrectLotto = Lotto(1, 2, 3, 4, 44, 45)
@@ -23,7 +23,7 @@ internal class WinningStatisticsTest {
     fun `당첨통계는 당첨로또숫자열과 로또 리스트와 로또 하나의 가격으로 생성된다`() {
         assertDoesNotThrow {
             WinningStatistics(
-                winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6),
+                winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
                 lottos = listOf(Lotto(1, 2, 3, 4, 5, 6))
             )
         }

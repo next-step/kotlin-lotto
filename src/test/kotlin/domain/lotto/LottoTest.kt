@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource
 internal class LottoTest {
     @Test
     fun `로또는 로또숫자열 하나로 생성된다`() {
-        assertDoesNotThrow { Lotto(LottoNumbers(1, 2, 3, 4, 5, 6)) }
+        assertDoesNotThrow { Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6)) }
     }
 
     @Test
@@ -32,7 +32,7 @@ internal class LottoTest {
         "'7:8:9:10:11:12', 0"
     )
     fun `다른 로또숫자열을 받아, 자신의 로또숫자열과 일치하는 수가 몇 개인지 반환한다`(numbers: String, numberOfMatched: Int) {
-        val winningNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+        val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
         val lotto = parseLotto(numbers)
         assertThat(lotto.countMatchedBy(winningNumbers)).isEqualTo(numberOfMatched)
     }
