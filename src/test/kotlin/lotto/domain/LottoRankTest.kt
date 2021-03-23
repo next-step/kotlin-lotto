@@ -7,11 +7,11 @@ internal class LottoRankTest {
 
     @Test
     fun `3등`() {
-        assertThat(LottoRank.matchRank(4)).isEqualTo(LottoRank.THIRD)
+        assertThat(LottoRank.matchRank(5, false)).isEqualTo(LottoRank.THIRD)
     }
 
     @Test
     fun `2등`() {
-        assertThat(LottoRank.matchRank(5)).isEqualTo(LottoRank.SECOND)
+        assertThat(LottoRank.matchRank(5, true)).isEqualTo(LottoRank.SECOND)
     }
 }
