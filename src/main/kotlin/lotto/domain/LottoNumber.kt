@@ -1,7 +1,5 @@
 package lotto.domain
 
-import kotlin.IllegalArgumentException
-
 class LottoNumber private constructor(private val value: Int) {
 
     override fun equals(other: Any?): Boolean {
@@ -22,7 +20,7 @@ class LottoNumber private constructor(private val value: Int) {
 
         fun from(value: Int): LottoNumber {
             return (MINIMUM_NUMBER..MAXIMUM_NUMBER).associateWith(::LottoNumber)[value]
-                ?: throw IllegalArgumentException ("$value 로또 번호에 포함되지 않는 숫자 입니다")
+                ?: throw IllegalArgumentException("$value 로또 번호에 포함되지 않는 숫자 입니다")
         }
     }
 }

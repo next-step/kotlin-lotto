@@ -5,7 +5,7 @@ import java.text.DecimalFormat
 
 class ProfitCalculation {
 
-    fun getProfitRate(lottoRanks : Map<LottoRank, Int>, budget: Int): Float {
+    fun getProfitRate(lottoRanks: Map<LottoRank, Int>, budget: Int): Float {
         val rate = lottoRanks.map { it.value * it.key.winningPrice }
             .sum() / budget.toFloat()
         return roundDecimal(rate)
