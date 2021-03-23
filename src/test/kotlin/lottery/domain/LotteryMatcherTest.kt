@@ -1,7 +1,9 @@
 package lottery.domain
 
+import fixture.LotteryFixture.TEST_BONUS_BALL
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class LotteryMatcherTest {
     @Test
@@ -13,15 +15,15 @@ class LotteryMatcherTest {
             createLottery(listOf(1, 3, 5, 40, 24, 15))
         )
 
-        val winnerLottery = WinnerLottery(listOf(1, 3, 5, 24, 15, 40))
+        val winnerLottery = WinnerLottery(listOf(1, 3, 5, 24, 15, 40), TEST_BONUS_BALL)
 
         val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
 
-        val matchCounts = lotteryMatcher.match()
+        val matchCounts = lotteryMatcher.match(TEST_BONUS_BALL)
 
-        org.junit.jupiter.api.assertAll(
+        assertAll(
+            { Assertions.assertThat(matchCounts.retrieve(Rank.FOURTH)).isEqualTo(1) },
             { Assertions.assertThat(matchCounts.retrieve(Rank.THIRD)).isEqualTo(1) },
-            { Assertions.assertThat(matchCounts.retrieve(Rank.SECOND)).isEqualTo(1) },
             { Assertions.assertThat(matchCounts.retrieve(Rank.FIRST)).isEqualTo(2) }
         )
     }

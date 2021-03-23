@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-class LotteryNumbersTest {
+class LotteryNumbersGeneratorTest {
     @Test
     fun `6개의 로또 번호를 가진다`() {
         val lotteryNumbers = LotteryNumbers(listOf(1, 2, 3, 4, 5, 6))

@@ -7,10 +7,10 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
-class RandomNumbersTest {
+class RandomNumbersGeneratorGeneratorTest {
     @Test
     fun `6개의 1부터 45이하의 중복되지 않는 랜덤 값을 생성한다`() {
-        val randoms = RandomNumbers.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_NUMBERS_SIZE)
+        val randoms = RandomNumbersGenerator.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_NUMBERS_SIZE)
 
         assertAll(
             { assertThat(randoms.size).isEqualTo(6) },

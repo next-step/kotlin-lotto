@@ -1,21 +1,31 @@
 package lottery.domain
 
-class LotteryMatcher(private val winnerLottery: WinnerLottery, private val createdLotteries: List<Lottery>) {
-    fun match(): RankCounts {
-        val rankCounts = RankCounts()
+class LotteryMatcher(
+    private val winnerLottery: WinnerLottery,
+    private val createdLotteries: List<Lottery>
+) {
+    fun match(bonusBall: BonusBall): RankCounts {
+        var rankCounts = RankCounts()
 
         createdLotteries.map {
-            val count = matchCount(it.lotteryNumbers)
+            val count = winnerLottery.matchCount(it.lotteryNumbers)
+            val hasBonus = it.hasBonusBall(bonusBall)
 
-            if (Rank.isInTheRank(count)) {
-                rankCounts.addMatchCount(Rank.valueOf(count))
-            }
+            rankCounts = addMatchCountWhenInTheRank(count, hasBonus, rankCounts)
         }
 
         return rankCounts
     }
 
-    private fun matchCount(lotteryNumbers: LotteryNumbers): Int {
-        return lotteryNumbers.numbers.filter { winnerLottery.lotteryNumbers.numbers.contains(it) }.count()
+    private fun addMatchCountWhenInTheRank(
+        count: Int,
+        hasBonus: Boolean,
+        rankCounts: RankCounts
+    ): RankCounts {
+        if (Rank.isInTheRank(count, hasBonus)) {
+            rankCounts.addMatchCount(Rank.valueOf(count, hasBonus))
+        }
+
+        return rankCounts
     }
 }

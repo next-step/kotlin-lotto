@@ -16,11 +16,11 @@ object ResultView {
         lotteries.map { println(it.toString()) }
     }
 
-    fun printMatchNumbers(start: Int, end: Int, match: RankCounts) {
-        (start..end).forEach { printMatchNumber(match.retrieve(Rank.valueOf(it)), Rank.valueOf(it)) }
+    fun printMatchNumbers(match: RankCounts) {
+        Rank.values().forEach { printMatchNumber(match.retrieve(it), it) }
     }
 
     private fun printMatchNumber(matchCount: Int, rank: Rank) {
-        println("${rank.matchCount}개 일치 (${rank.price}원)- $matchCount")
+        println("${RankPrinter.valueOf(rank).content} (${rank.price}원)- $matchCount")
     }
 }
