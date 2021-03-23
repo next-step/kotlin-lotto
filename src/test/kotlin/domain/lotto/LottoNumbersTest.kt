@@ -12,7 +12,7 @@ internal class LottoNumbersTest {
     @Test
     fun `로또숫자열은 여섯 개의 로또숫자로 생성된다`() {
         assertDoesNotThrow {
-            LottoNumbers((1..6).map { LottoNumber(it) })
+            LottoNumbers((1..6).map { LottoNumber.parse(it) })
             LottoNumbers(1, 2, 3, 4, 5, 6)
         }
     }
@@ -21,7 +21,7 @@ internal class LottoNumbersTest {
     @ValueSource(ints = [1, 3, 5, 7])
     fun `로또숫자열은 숫자 6개 이외로는 생성할 수 없다`(lottoNumberCount: Int) {
         assertThatIllegalArgumentException()
-            .isThrownBy { LottoNumbers((1..lottoNumberCount).map { LottoNumber(it) }) }
+            .isThrownBy { LottoNumbers((1..lottoNumberCount).map { LottoNumber.parse(it) }) }
     }
 
     @ParameterizedTest
@@ -37,7 +37,7 @@ internal class LottoNumbersTest {
     @Test
     fun `로또숫자열 내의 로또숫자는 생성 시 순서와 관계없이 정렬되어 있다`() {
         assertThat(LottoNumbers(9, 1, 43, 2, 8, 10).numbers)
-            .containsExactlyElementsOf(listOf(1, 2, 8, 9, 10, 43).map { LottoNumber(it) })
+            .containsExactlyElementsOf(listOf(1, 2, 8, 9, 10, 43).map { LottoNumber.parse(it) })
     }
 
     @ParameterizedTest
@@ -55,7 +55,7 @@ internal class LottoNumbersTest {
     private fun parseLottoNumbers(someNumbers: String): LottoNumbers {
         return someNumbers.split(":")
             .map { it.toInt() }
-            .map { LottoNumber(it) }
+            .map { LottoNumber.parse(it) }
             .let { LottoNumbers(it) }
     }
 }
