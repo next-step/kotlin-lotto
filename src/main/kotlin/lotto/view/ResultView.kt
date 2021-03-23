@@ -19,7 +19,11 @@ object ResultView {
 
     fun showRankCount(lottoRanks: Map<LottoRank, Int>) {
         LottoRank.values().forEach {
-            println("${it.matchCount}개 일치 (${it.winningPrice}원) - ${lottoRanks[it] ?: 0} 개")
+            println(
+                "${it.matchCount}개 일치" +
+                        "${if (it == LottoRank.SECOND) ", 보너스 볼 일치" else ""} " +
+                        "(${it.winningPrice}원) - ${lottoRanks[it] ?: 0} 개"
+            )
         }
     }
 
