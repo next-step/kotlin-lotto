@@ -29,6 +29,6 @@ object WinningStatisticsView {
         statistics: WinningStatistics,
         lottoPrice: Money
     ) {
-        println("총 수익률은 ${statistics.calculateRatioOfIncomeToExpenditure(lottoPrice)}입니다.")
+        println("총 수익률은 ${statistics.calculateRatioOfIncomeToExpenditure(lottoPrice).value}입니다.")
     }
 }
