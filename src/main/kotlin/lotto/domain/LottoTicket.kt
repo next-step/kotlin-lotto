@@ -1,34 +1,34 @@
 package lotto.domain
 
-class LottoTicket(lottoNumbers: List<LottoNumber>) {
-    val value: List<LottoNumber> = lottoNumbers.sortedBy { it.value }
+import java.util.TreeSet
 
-    fun getCountOfMatch(winningNumbers: List<LottoNumber>): Int {
-        return value.count { lottoNumber ->
-            winningNumbers.contains(lottoNumber)
-        }
+class LottoTicket(val value: TreeSet<LottoNumber>) {
+
+    init {
+        checkValidateLottoTicket()
+    }
+
+    constructor(numbers: List<Int>) : this(
+        TreeSet(
+            numbers.map { number ->
+                LottoNumber.from(number)
+            }
+        )
+    )
+
+    fun getCountOfMatch(lottoTicket: LottoTicket): Int {
+        return lottoTicket.value.count(::isNumberContains)
+    }
+
+    fun isNumberContains(lottoNumber: LottoNumber): Boolean {
+        return value.contains(lottoNumber)
+    }
+
+    private fun checkValidateLottoTicket() {
+        require(value.size == LENGTH_OF_LOTTO) { "숫자는 6개가 존재해야 합니다." }
     }
 
     companion object {
-        private const val MIN_LOTTO_NUMBER = 1
-        private const val MAX_LOTTO_NUMBER = 45
-
-        fun generateAuto(): LottoTicket {
-            val numbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).shuffled().slice(0..5)
-
-            return LottoTicket(
-                numbers.map { number ->
-                    LottoNumber(number)
-                }
-            )
-        }
-
-        fun generateManual(numbers: List<Int>): LottoTicket {
-            return LottoTicket(
-                numbers.map { number ->
-                    LottoNumber(number)
-                }
-            )
-        }
+        const val LENGTH_OF_LOTTO = 6
     }
 }
