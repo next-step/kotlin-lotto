@@ -11,7 +11,7 @@ internal class LottoGameTest {
     @MethodSource("lotto")
     fun `각등수의 로또 번호 2개가 들어 있는 경우`(lotto1: Lotto, lotto2: Lotto, lottoRank: LottoRank) {
         val lotto3 = Lotto(45, 44, 43, 42, 41, 40)
-        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val winningLotto = WinningLotto(Lotto(1, 2, 3, 4, 5, 6), LottoNumber.from(7))
         val lottoGame = LottoGame(listOf(lotto1, lotto2, lotto3))
         assertThat(lottoGame.matchLotto(winningLotto)[lottoRank]).isEqualTo(2)
     }
@@ -22,16 +22,21 @@ internal class LottoGameTest {
             Arguments.of(
                 Lotto(1, 7, 3, 4, 9, 11),
                 Lotto(1, 8, 3, 4, 10, 12),
-                LottoRank.FOURTH
+                LottoRank.FIFTH
             ),
             Arguments.of(
                 Lotto(1, 2, 3, 4, 9, 11),
                 Lotto(1, 2, 3, 4, 10, 12),
-                LottoRank.THIRD
+                LottoRank.FOURTH
             ),
             Arguments.of(
                 Lotto(1, 2, 3, 4, 5, 11),
                 Lotto(1, 2, 3, 4, 5, 12),
+                LottoRank.THIRD
+            ),
+            Arguments.of(
+                Lotto(1, 2, 3, 4, 5, 7),
+                Lotto(1, 2, 3, 4, 5, 7),
                 LottoRank.SECOND
             ),
             Arguments.of(
