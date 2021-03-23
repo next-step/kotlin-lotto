@@ -1,6 +1,6 @@
 package view
 
-class BuyingInputView {
+object BuyingInputView {
     fun receiveAmount(directiveSentence: String): BuyingInput {
         printDirectiveSentence(directiveSentence)
         return BuyingInput(readLine()!!)

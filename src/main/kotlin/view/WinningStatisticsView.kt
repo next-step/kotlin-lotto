@@ -4,7 +4,7 @@ import domain.money.Money
 import domain.statistics.WinningCategory
 import domain.statistics.WinningStatistics
 
-class WinningStatisticsView {
+object WinningStatisticsView {
     fun print(statistics: WinningStatistics, lottoPrice: Money) {
         printHeader()
         printCountsMatchedForAllCategories(statistics)

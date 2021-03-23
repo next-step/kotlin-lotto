@@ -1,6 +1,6 @@
 package view
 
-class WinningNumbersInputView {
+object WinningNumbersInputView {
     fun receiveWinningNumbers(sentence: String): WinningNumbersInput {
         printDirectiveSentence(sentence)
         return WinningNumbersInput(readLine()!!)

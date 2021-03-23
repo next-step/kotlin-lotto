@@ -2,7 +2,7 @@ package view
 
 import domain.lotto.Lotto
 
-class BuyingResultView {
+object BuyingResultView {
     fun print(lottos: List<Lotto>) {
         printLottoCount(lottos)
         printAllLottoNumbers(lottos)
