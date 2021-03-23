@@ -25,6 +25,30 @@ internal class LottoNumbersTest {
         }
     }
 
+    @Test
+    fun `로또숫자열은 서로 다른 객체라도, 가지고 있는 로또숫자가 일치하면 동일하다`() {
+        val one = LottoNumbers(
+            sortedSetOf(
+                LottoNumber.N01,
+                LottoNumber.N02,
+                LottoNumber.N03,
+                LottoNumber.N04,
+                LottoNumber.N05,
+                LottoNumber.N06
+            )
+        )
+        val other = LottoNumbers(
+            sortedSetOf(
+                LottoNumber.N01,
+                LottoNumber.N02,
+                LottoNumber.N03,
+                LottoNumber.N04,
+                LottoNumber.N05,
+                LottoNumber.N06
+            )
+        )
+        assertThat(one).isEqualTo(other)
+    }
     @ParameterizedTest
     @ValueSource(ints = [1, 3, 5, 7])
     fun `로또숫자열은 숫자 6개 이외로는 생성할 수 없다`(lottoNumberCount: Int) {
