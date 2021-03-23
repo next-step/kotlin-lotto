@@ -1,18 +1,18 @@
 package lotto
 
 import lotto.domain.LottoPrize
+import lotto.domain.Money
 import lotto.domain.PositiveNumber
-import java.math.BigDecimal
 
-class Profit(private val prizeRankCount: Map<LottoPrize, PositiveNumber>, private val purchaseAmount: Int) {
+class Profit(private val prizeRankCount: Map<LottoPrize, PositiveNumber>, private val purchaseAmount: Money) {
 
     fun rate(): Double {
         val allRewards = prizeRankCount.entries
-            .sumByLong { (lottoPrize, count) -> lottoPrize.reward.toLong() * count.value }
-        return BigDecimal(allRewards).divide(BigDecimal(purchaseAmount)).toDouble()
+            .sumByMoney { (lottoPrize, count) -> lottoPrize.reward * count }
+        return allRewards.rateOf(purchaseAmount).toDouble()
     }
 }
 
-private inline fun <T> Iterable<T>.sumByLong(selector: (T) -> Long): Long {
-    return map { selector(it) }.sum()
+private inline fun <T> Iterable<T>.sumByMoney(selector: (T) -> Money): Money {
+    return map { selector(it) }.fold(Money.EMPTY) { acc, money -> acc + money }
 }

@@ -1,6 +1,5 @@
 package lotto.userinterface
 
-import lotto.domain.LottoPrize
 import lotto.dto.LottoNumbersDto
 import lotto.dto.StatisticsDto
 
@@ -51,15 +50,15 @@ class Console : UserInterface {
         println("당첨 통계")
         println("---------")
 
-        dto.prizeRankCount.forEach { println("${matchingCountMessage(it.key)} (${it.key.reward}원)- ${it.value}개") }
+        dto.prizeRankCount.forEach { println("${matchingCountMessage(it.matchedCount)} (${it.reward}원)- ${it.winnerCount}개") }
 
         println("총 수익률은 ${dto.profitRate}입니다.")
     }
 
-    private fun matchingCountMessage(lottoPrize: LottoPrize): String {
-        var message = "${lottoPrize.count}개 일치"
+    private fun matchingCountMessage(matchedCount: Int): String {
+        var message = "$matchedCount 개 일치"
 
-        if (lottoPrize == LottoPrize.SECOND_PRIZE) {
+        if (matchedCount == 2) {
             message += ", 보너스 볼 일치"
         }
 
