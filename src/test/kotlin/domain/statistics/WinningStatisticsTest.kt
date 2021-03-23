@@ -81,17 +81,10 @@ internal class WinningStatisticsTest {
         )
 
         assertAll(
-            { Assertions.assertThat(statistics.countLottoBy(WinningCategory.SIX_CORRECT)).isEqualTo(sixCorrectCount) },
-            {
-                Assertions.assertThat(statistics.countLottoBy(WinningCategory.FIVE_CORRECT)).isEqualTo(fiveCorrectCount)
-            },
-            {
-                Assertions.assertThat(statistics.countLottoBy(WinningCategory.FOUR_CORRECT)).isEqualTo(fourCorrectCount)
-            },
-            {
-                Assertions.assertThat(statistics.countLottoBy(WinningCategory.THREE_CORRECT))
-                    .isEqualTo(threeCorrectCount)
-            }
+            { assertThat(statistics.countLottoBy(WinningCategory.SIX_CORRECT)).isEqualTo(sixCorrectCount) },
+            { assertThat(statistics.countLottoBy(WinningCategory.FIVE_CORRECT)).isEqualTo(fiveCorrectCount) },
+            { assertThat(statistics.countLottoBy(WinningCategory.FOUR_CORRECT)).isEqualTo(fourCorrectCount) },
+            { assertThat(statistics.countLottoBy(WinningCategory.THREE_CORRECT)).isEqualTo(threeCorrectCount) }
         )
     }
 
