@@ -42,12 +42,13 @@ internal class WinningStatisticsTest {
         threeCorrectCount: Int,
         noCorrectCount: Int
     ) {
-        val statistics = makeStatisticsWithWinningCount(
-            sixCorrectCount,
-            fiveCorrectCount,
-            fourCorrectCount,
-            threeCorrectCount,
-            noCorrectCount
+        val statistics = WinningStatistics(
+            winningNumbers = winningNumbers,
+            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
+                fiveCorrectLotto.nTimes(fiveCorrectCount) +
+                fourCorrectLotto.nTimes(fourCorrectCount) +
+                threeCorrectLotto.nTimes(threeCorrectCount) +
+                noCorrectLotto.nTimes(noCorrectCount)
         )
 
         val expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * sixCorrectCount) +
@@ -70,12 +71,13 @@ internal class WinningStatisticsTest {
         threeCorrectCount: Int,
         noCorrectCount: Int
     ) {
-        val statistics = makeStatisticsWithWinningCount(
-            sixCorrectCount,
-            fiveCorrectCount,
-            fourCorrectCount,
-            threeCorrectCount,
-            noCorrectCount
+        val statistics = WinningStatistics(
+            winningNumbers = winningNumbers,
+            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
+                fiveCorrectLotto.nTimes(fiveCorrectCount) +
+                fourCorrectLotto.nTimes(fourCorrectCount) +
+                threeCorrectLotto.nTimes(threeCorrectCount) +
+                noCorrectLotto.nTimes(noCorrectCount)
         )
 
         assertAll(
@@ -107,12 +109,13 @@ internal class WinningStatisticsTest {
         noCorrectCount: Int
     ) {
         val lottoPrice = Money(lottoPriceValue)
-        val statistics = makeStatisticsWithWinningCount(
-            sixCorrectCount,
-            fiveCorrectCount,
-            fourCorrectCount,
-            threeCorrectCount,
-            noCorrectCount
+        val statistics = WinningStatistics(
+            winningNumbers = winningNumbers,
+            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
+                fiveCorrectLotto.nTimes(fiveCorrectCount) +
+                fourCorrectLotto.nTimes(fourCorrectCount) +
+                threeCorrectLotto.nTimes(threeCorrectCount) +
+                noCorrectLotto.nTimes(noCorrectCount)
         )
 
         val totalWinningPrizes = statistics.totalWinningPrizes
@@ -123,21 +126,6 @@ internal class WinningStatisticsTest {
                 totalWinningPrizes.value.toDouble() / (lottoPrice.value * lottoCount).toDouble()
             )
     }
-
-    private fun makeStatisticsWithWinningCount(
-        sixCorrectCount: Int,
-        fiveCorrectCount: Int,
-        fourCorrectCount: Int,
-        threeCorrectCount: Int,
-        noCorrectCount: Int
-    ) = WinningStatistics(
-        winningNumbers = winningNumbers,
-        lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
-            fiveCorrectLotto.nTimes(fiveCorrectCount) +
-            fourCorrectLotto.nTimes(fourCorrectCount) +
-            threeCorrectLotto.nTimes(threeCorrectCount) +
-            noCorrectLotto.nTimes(noCorrectCount)
-    )
 
     private fun Lotto.nTimes(number: Int): List<Lotto> = List(number) { this }
 }
