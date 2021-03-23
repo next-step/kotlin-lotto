@@ -2,6 +2,7 @@ package domain.statistics
 
 import domain.lotto.Lotto
 import domain.lotto.lottoNumberOf
+import domain.lotto.lottoOf
 import domain.money.Money
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
@@ -13,18 +14,18 @@ import org.junit.jupiter.params.provider.CsvSource
 
 internal class WinningStatisticsTest {
     private val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
-    private val sixCorrectLotto = Lotto(1, 2, 3, 4, 5, 6)
-    private val fiveCorrectLotto = Lotto(1, 2, 3, 4, 5, 45)
-    private val fourCorrectLotto = Lotto(1, 2, 3, 4, 44, 45)
-    private val threeCorrectLotto = Lotto(1, 2, 3, 43, 44, 45)
-    private val noCorrectLotto = Lotto(40, 41, 42, 43, 44, 45)
+    private val sixCorrectLotto = lottoOf(1, 2, 3, 4, 5, 6)
+    private val fiveCorrectLotto = lottoOf(1, 2, 3, 4, 5, 45)
+    private val fourCorrectLotto = lottoOf(1, 2, 3, 4, 44, 45)
+    private val threeCorrectLotto = lottoOf(1, 2, 3, 43, 44, 45)
+    private val noCorrectLotto = lottoOf(40, 41, 42, 43, 44, 45)
 
     @Test
     fun `당첨통계는 당첨로또숫자열과 로또 리스트와 로또 하나의 가격으로 생성된다`() {
         assertDoesNotThrow {
             WinningStatistics(
                 winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
-                lottos = listOf(Lotto(1, 2, 3, 4, 5, 6))
+                lottos = listOf(lottoOf(1, 2, 3, 4, 5, 6))
             )
         }
     }

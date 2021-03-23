@@ -13,14 +13,6 @@ internal class LottoTest {
         assertDoesNotThrow { Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6)) }
     }
 
-    @Test
-    fun `로또는 숫자 6개로도 생성된다`() {
-        assertDoesNotThrow {
-            Lotto(listOf(1, 2, 3, 4, 5, 6))
-            Lotto(1, 2, 3, 4, 5, 6)
-        }
-    }
-
     @ParameterizedTest
     @CsvSource(
         "'1:2:3:4:5:6', 6",
@@ -44,7 +36,7 @@ internal class LottoTest {
 
     private fun parseLotto(numbers: String): Lotto {
         return numbers.split(":")
-            .map { it.toInt() }
-            .let { Lotto(it) }
+            .map { LottoNumber.parse(it.toInt()) }
+            .let { Lotto(LottoNumbers.fromList(it)) }
     }
 }
