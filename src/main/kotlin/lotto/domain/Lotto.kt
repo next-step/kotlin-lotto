@@ -20,17 +20,9 @@ class Lotto(
     }
 
     companion object {
-        private const val LOTTO_NUMBERS_SIZE = 6
+        const val LOTTO_NUMBERS_SIZE = 6
 
         fun from(lottoNumbers: List<LottoNumber>): Lotto {
-            return Lotto(lottoNumbers)
-        }
-
-        fun create(): Lotto {
-            val lottoNumbers = (LottoNumber.MINIMUM_LOTTO_NUMBER..LottoNumber.MAXIMUM_LOTTO_NUMBER).map {
-                LottoNumber.from(it)
-            }.shuffled().take(LOTTO_NUMBERS_SIZE)
-
             return Lotto(lottoNumbers)
         }
     }
