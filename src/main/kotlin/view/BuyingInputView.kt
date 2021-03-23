@@ -1,12 +1,8 @@
 package view
 
 object BuyingInputView {
-    fun receiveAmount(directiveSentence: String): BuyingInput {
-        printDirectiveSentence(directiveSentence)
+    fun receiveAmount(): BuyingInput {
+        println("구입금액을 입력해 주세요.")
         return BuyingInput(readLine()!!)
-    }
-
-    private fun printDirectiveSentence(sentence: String) {
-        println(sentence)
     }
 }

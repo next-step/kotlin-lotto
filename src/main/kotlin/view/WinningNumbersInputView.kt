@@ -1,12 +1,8 @@
 package view
 
 object WinningNumbersInputView {
-    fun receiveWinningNumbers(sentence: String): WinningNumbersInput {
-        printDirectiveSentence(sentence)
+    fun receiveWinningNumbers(): WinningNumbersInput {
+        println("\n지난 주 당첨 번호를 입력해주세요")
         return WinningNumbersInput(readLine()!!)
-    }
-
-    private fun printDirectiveSentence(sentence: String) {
-        println("\n$sentence")
     }
 }
