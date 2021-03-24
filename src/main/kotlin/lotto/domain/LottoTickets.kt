@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTickets(private val lottoTickets: List<LottoTicket>) : List<LottoTicket> by lottoTickets {
+data class LottoTickets(private val lottoTickets: List<LottoTicket>) : List<LottoTicket> by lottoTickets {
     constructor(count: Int, generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(
         createLotto(
             count,
@@ -8,7 +8,11 @@ class LottoTickets(private val lottoTickets: List<LottoTicket>) : List<LottoTick
         )
     )
 
-    constructor(count: Int, manualLottoTickets: LottoTickets, generator: LottoNumberGenerator = LottoNumberRandomGenerator()) : this(
+    constructor(
+        count: Int,
+        manualLottoTickets: LottoTickets,
+        generator: LottoNumberGenerator = LottoNumberRandomGenerator()
+    ) : this(
         createLotto(
             count - manualLottoTickets.size,
             generator

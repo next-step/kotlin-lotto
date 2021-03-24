@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoWonNumbers(private val lottoNumber: Set<LottoNumber>, private val bonusNumber: LottoNumber) {
+data class LottoWonNumbers(private val lottoNumber: Set<LottoNumber>, private val bonusNumber: LottoNumber) {
     init {
         require(lottoNumber.size == LottoTicket.LOTTO_NUMBER_COUNT) { "당첨 로또 번호는 ${LottoTicket.LOTTO_NUMBER_COUNT} 개여야 합니다" }
         require(!lottoNumber.contains(bonusNumber)) { "당첨 로또 번호에는 보너스 당첨번호가 존재해서는 안됩니다." }
