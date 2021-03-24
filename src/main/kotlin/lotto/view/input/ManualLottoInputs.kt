@@ -3,9 +3,11 @@ package lotto.view.input
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 
-class ManualLottoInputs(private val manualLottoInputs: List<ManualLottoInput>) {
+data class ManualLottoInputs(private val manualLottoInputs: List<ManualLottoInput>) :
+    List<ManualLottoInput> by manualLottoInputs {
+
     val lottoTickets: LottoTickets
-        get() = LottoTickets(manualLottoInputs.map { LottoTicket(it.lottoNumbers) })
+        get() = LottoTickets(map { LottoTicket(it.lottoNumbers) })
 
     constructor() : this(listOf())
 }
