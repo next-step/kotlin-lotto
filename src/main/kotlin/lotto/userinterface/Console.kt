@@ -5,12 +5,12 @@ import lotto.dto.StatisticsDto
 import lotto.dto.WinningLottoDto
 
 class Console : UserInterface {
-    override tailrec fun inputPurchaseAmount(): Int {
+    override tailrec fun inputPurchaseAmount(lottoPrice: Int): Int {
         println("구입금액을 입력해 주세요.")
         val money = readLine()?.toIntOrNull()
 
-        if (money == null || money <= 0 || money % 1000 != 0) {
-            return inputPurchaseAmount()
+        if (money == null || money <= 0 || money % lottoPrice != 0) {
+            return inputPurchaseAmount(lottoPrice)
         }
 
         return money

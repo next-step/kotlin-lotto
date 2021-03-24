@@ -23,7 +23,7 @@ class LottoApplication(private val userInterface: UserInterface) {
     private val lottoMachine = LottoMachine(LOTTO_PRICE, RandomLottoGenerator())
 
     fun run() {
-        val amount = userInterface.inputPurchaseAmount().let(::Money)
+        val amount = userInterface.inputPurchaseAmount(LOTTO_PRICE.value.toInt()).let(::Money)
         val manualLottoCount = userInterface.inputManualLottoCount()
         val manualLottoNumbers =
             userInterface.inputManualLottoNumbers(count = manualLottoCount).map { it.map(::LottoNumber) }
