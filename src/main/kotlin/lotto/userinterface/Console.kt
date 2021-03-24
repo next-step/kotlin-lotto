@@ -37,7 +37,7 @@ class Console : UserInterface {
             ?.split(LOTTO_NUMBERS_DELIMITER)
             ?.map { it.trim() }
             ?.mapNotNull { it.toIntOrNull() }
-            ?.filter { it in 1..45 }
+            ?.filter { it in LOTTO_NUMBER_RANGE }
             ?.distinct()
             ?: listOf()
 
@@ -64,7 +64,7 @@ class Console : UserInterface {
         println("보너스 볼을 입력해 주세요.")
         val bonusNumber = readLine()?.toIntOrNull()
 
-        if (bonusNumber == null || bonusNumber !in 1..45 || bonusNumber in lottoNumbers)
+        if (bonusNumber == null || bonusNumber !in LOTTO_NUMBER_RANGE || bonusNumber in lottoNumbers)
             return inputLastWeekWinningLottoBonusNumber(lottoNumbers)
 
         return bonusNumber
@@ -96,5 +96,6 @@ class Console : UserInterface {
 
     companion object {
         private const val LOTTO_NUMBERS_DELIMITER = ","
+        private val LOTTO_NUMBER_RANGE = (1..45)
     }
 }
