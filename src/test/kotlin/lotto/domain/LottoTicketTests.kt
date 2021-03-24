@@ -78,6 +78,20 @@ class LottoTicketTests {
             .isEqualTo(Rank.SECOND)
     }
 
+    @Test
+    fun `직접 입력한 로또를 포함하여 자동생성이 가능해야 한다`() {
+        val manualTicket = LottoTicket(generator = 순차적으로_증가하는_로또번호_제너레이터())
+        val manualLottoTickets = LottoTickets(listOf(manualTicket))
+
+        val lottoTickets = LottoTickets(2, manualLottoTickets)
+
+        assertThat(lottoTickets.size)
+            .isEqualTo(2)
+
+        assertThat(lottoTickets)
+            .contains(manualTicket)
+    }
+
     fun 순차적으로_증가하는_로또번호_제너레이터(): LottoNumberGenerator {
         return object : LottoNumberGenerator {
             override fun pickNumber(): Set<LottoNumber> = (1..6).map(::LottoNumber).toSet()
