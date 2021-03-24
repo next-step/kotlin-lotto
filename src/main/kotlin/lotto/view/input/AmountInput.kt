@@ -14,6 +14,6 @@ class AmountInput(input: String?) {
     constructor(input: Int) : this(input.toString())
 
     companion object {
-        const val PER_LOTTO_PRICE = 1000
+        private const val PER_LOTTO_PRICE = 1000
     }
 }
