@@ -14,42 +14,45 @@ import lotto.vo.ResultLottoStatistics
 object LottoGame {
 
     fun start(price: LottoPrice, manualLottoCount: Int): LottoTicket {
-        val lottoMachine = LottoMachine(AutoLottoGenerator())
         val automaticLottoCount = price.calculateAutomaticCount(manualLottoCount)
-        val manualLottoNumbers = (1..manualLottoCount).map { askManualLotto() }
-        val automaticLottos = (1..automaticLottoCount).map { lottoMachine.buy() }
-        val manualLottos = manualLottoNumbers.map {
-            lottoMachine.setGenerator(ManualLottoGenerator(it))
-            lottoMachine.buy()
-        }
-        val lottoTicket = LottoTicket(
-            manuals = manualLottos,
-            automatics = automaticLottos
-        )
+        val manualLottoNumbers = askManualLottos(manualLottoCount)
 
-        validateLottoCount(price, lottoTicket)
-
-        return lottoTicket
+        return createTicket(price, automaticLottoCount, manualLottoNumbers)
     }
 
-    private fun validateLottoCount(price: LottoPrice, lottoTicket: LottoTicket) {
-        require(price.isExceedPriceByCount(lottoTicket.totalLottoCount())) {
-            "로또 구매수는 구입금액을 초과할 수 없습니다."
+    private fun createTicket(
+        price: LottoPrice,
+        automaticLottoCount: Int,
+        manualLottoNumbers: List<String>
+    ): LottoTicket {
+        val autoLottoMachine = LottoMachine(AutoLottoGenerator())
+        val automaticLottos = (1..automaticLottoCount).map { autoLottoMachine.buy() }
+        val manualLottos = manualLottoNumbers.map {
+            LottoMachine(ManualLottoGenerator(it)).buy()
         }
+
+        return LottoTicket(
+            manualLottos = manualLottos,
+            automaticLottos = automaticLottos,
+            price = price
+        )
+    }
+
+    private fun askManualLottos(manualLottoCount: Int): List<String> {
+        return (1..manualLottoCount).map { askManualLotto() }
     }
 
     private fun askManualLotto(): String {
         return InputView.enterManualLottoNumbers()
     }
 
-    fun doResult(lottoTicket: LottoTicket, buyingPrice: LottoPrice): ResultLottoStatistics {
+    fun doResult(lottoTicket: LottoTicket): ResultLottoStatistics {
         val stringLottoNumbers = InputView.enterLastWeekWinningLottoNumbers()
-        val winningLottoNumberTokens = LottoNumberTokenizer.tokenize(stringLottoNumbers)
         val bonusNumber = InputView.enterBonusNumber()
 
-        val winningLottoNumbers = WinningLottoNumbers.of(winningLottoNumberTokens, bonusNumber)
+        val winningLottoNumbers = WinningLottoNumbers.of(stringLottoNumbers, bonusNumber)
         val winningLottoStatistics = WinningLottoStatistics(lottoTicket, winningLottoNumbers)
-        val lottoProfitRate = winningLottoStatistics.calculateProfitRate(buyingPrice)
+        val lottoProfitRate = winningLottoStatistics.calculateProfitRate(lottoTicket.price)
 
         return ResultLottoStatistics(
             winningLottoStatistics,

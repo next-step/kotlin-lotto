@@ -19,7 +19,11 @@ internal class LottoTicketTest {
             Lotto.from(LottoNumberTokenizer.tokenize("1,2,3,4,5,6").map { LottoNumber.from(it) })
         }
 
-        val lottoTicket = LottoTicket(manual, automatic)
-        assertThat(lottoTicket.getTickets().size).isEqualTo(expectedSize)
+        val lottoTicket = LottoTicket(
+            manualLottos = manual,
+            automaticLottos =  automatic,
+            price = LottoPrice(99999999)
+        )
+        assertThat(lottoTicket.lottos.size).isEqualTo(expectedSize)
     }
 }

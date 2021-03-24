@@ -21,7 +21,11 @@ internal class WinningLottoStatisticsTest {
             Lotto.from(LottoNumberTokenizer.tokenize("3,4,5,6,41,42").map { LottoNumber.from(it) })
         )
 
-        val lottoTicket = LottoTicket(manual, listOf())
+        val lottoTicket = LottoTicket(
+            manualLottos = manual,
+            automaticLottos = listOf(),
+            price = LottoPrice(price)
+        )
 
         val winningLottoStatistics = WinningLottoStatistics(lottoTicket, winningLottoNumbers)
         val lottoProfitRate = winningLottoStatistics.calculateProfitRate(LottoPrice(price))
