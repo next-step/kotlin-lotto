@@ -9,10 +9,14 @@ data class LottoWonInput(private val wonNumbers: Set<LottoNumber>) : Set<LottoNu
     }
 
     constructor(wonNumbers: String) : this(
-        wonNumbers.split(",")
+        wonNumbers.split(LOTTO_NUMBER_SPLITTER)
             .map { it.trim() }
             .map { it.toIntOrNull() ?: throw IllegalArgumentException("당첨번호는 숫자여야 합니다.") }
             .map { LottoNumber.from(it) }
             .toSet()
     )
+
+    companion object {
+        private const val LOTTO_NUMBER_SPLITTER = ","
+    }
 }
