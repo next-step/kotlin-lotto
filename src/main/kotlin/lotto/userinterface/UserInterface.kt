@@ -2,11 +2,13 @@ package lotto.userinterface
 
 import lotto.dto.LottoNumbersDto
 import lotto.dto.StatisticsDto
+import lotto.dto.WinningLottoDto
 
 interface UserInterface {
     fun inputPurchaseAmount(): Int
     fun inputManualLottoCount(): Int
     fun inputManualLottoNumbers(count: Int): List<List<Int>>
+    fun inputLastWeekWinningLotto(): WinningLottoDto
     fun inputLastWeekWinningLottoNumbers(): List<Int>
     fun inputLastWeekWinningLottoBonusNumber(): Int
     fun outputPurchasedMessage(dto: LottoNumbersDto)

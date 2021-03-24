@@ -2,6 +2,7 @@ package lotto.userinterface
 
 import lotto.dto.LottoNumbersDto
 import lotto.dto.StatisticsDto
+import lotto.dto.WinningLottoDto
 
 class Console : UserInterface {
     override fun inputPurchaseAmount(): Int {
@@ -31,6 +32,12 @@ class Console : UserInterface {
             ?.distinct()
             ?: listOf()
         return if (lottoNumbers.size == 6) lottoNumbers else inputLottoNumber(retry = true)
+    }
+
+    override fun inputLastWeekWinningLotto(): WinningLottoDto {
+        val lottoNumbers = inputLastWeekWinningLottoNumbers()
+        val bonusNumber = inputLastWeekWinningLottoBonusNumber()
+        return WinningLottoDto(lottoNumbers, bonusNumber)
     }
 
     override fun inputLastWeekWinningLottoNumbers(): List<Int> {
