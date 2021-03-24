@@ -83,7 +83,7 @@ class LottoTicketTests {
         val manualTicket = LottoTicket(generator = 순차적으로_증가하는_로또번호_제너레이터())
         val manualLottoTickets = LottoTickets(listOf(manualTicket))
 
-        val lottoTickets = LottoTickets(2, manualLottoTickets)
+        val lottoTickets = LottoTickets(1, manualLottoTickets)
 
         assertThat(lottoTickets.size)
             .isEqualTo(2)
