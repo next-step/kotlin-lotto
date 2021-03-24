@@ -9,12 +9,12 @@ data class LottoTickets(private val lottoTickets: List<LottoTicket>) : List<Lott
     )
 
     constructor(
-        count: Int,
+        autoCount: Int,
         manualLottoTickets: LottoTickets,
         generator: LottoNumberGenerator = LottoNumberRandomGenerator()
     ) : this(
         createLotto(
-            count - manualLottoTickets.size,
+            autoCount,
             generator
         ) + manualLottoTickets
     )
