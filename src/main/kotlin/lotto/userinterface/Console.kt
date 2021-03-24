@@ -6,12 +6,14 @@ import lotto.dto.StatisticsDto
 class Console : UserInterface {
     override fun inputPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        return readLine()?.toInt() ?: 0
+        val money = readLine()?.toIntOrNull() ?: inputPurchaseAmount()
+        return if (money > 0 && money % 1000 == 0) money else inputPurchaseAmount()
     }
 
-    override tailrec fun inputManualLottoCount(): Int {
+    override fun inputManualLottoCount(): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
-        return readLine()?.toInt() ?: inputManualLottoCount()
+        val lottoCount = readLine()?.toIntOrNull() ?: inputManualLottoCount()
+        return if (lottoCount >= 0) lottoCount else inputManualLottoCount()
     }
 
     override fun inputManualLottoNumbers(count: Int): List<List<Int>> {
@@ -21,24 +23,36 @@ class Console : UserInterface {
 
     private fun inputManualLottoNumber(retry: Boolean = false): List<Int> {
         if (retry) println("로또번호를 잘못 입력하셨습니다. 다시 입력해 주세요.")
-        return readLine()
+        val lottoNumbers = readLine()
             ?.split(MANUAL_LOTTO_NUMBERS_DELIMITER)
             ?.map { it.trim() }
-            ?.map { it.toInt() }
-            ?: inputManualLottoNumber(retry = true)
+            ?.mapNotNull { it.toIntOrNull() }
+            ?.filter { it in 1..45 }
+            ?.distinct()
+            ?: listOf()
+        return if (lottoNumbers.size == 6) lottoNumbers else inputManualLottoNumber(retry = true)
     }
 
     override fun inputLastWeekWinningLottoNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readLine()?.split(WINNING_LOTTO_NUMBERS_DELIMITER)
+        val winningLotto = readLine()
+            ?.split(WINNING_LOTTO_NUMBERS_DELIMITER)
             ?.map { it.trim() }
-            ?.map { it.toInt() }
+            ?.mapNotNull { it.toIntOrNull() }
+            ?.filter { it in 1..45 }
+            ?.distinct()
             ?: listOf()
+        return if (winningLotto.size == 6) winningLotto
+        else {
+            println("로또번호를 잘못 입력하셨습니다. 다시 입력해 주세요.")
+            inputLastWeekWinningLottoNumbers()
+        }
     }
 
     override fun inputLastWeekWinningLottoBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        return readLine()?.toInt() ?: 0
+        val bonusNumber = readLine()?.toIntOrNull() ?: inputLastWeekWinningLottoBonusNumber()
+        return if (bonusNumber in 1..45) bonusNumber else inputLastWeekWinningLottoBonusNumber()
     }
 
     override fun outputPurchasedMessage(dto: LottoNumbersDto) {
