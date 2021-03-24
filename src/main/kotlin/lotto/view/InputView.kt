@@ -8,33 +8,35 @@ import lotto.view.input.BonusInput
 import lotto.view.input.LottoWonInput
 
 class InputView {
-    fun input(): AmountInput {
+    tailrec fun input(): AmountInput {
         println("구입금액을 입력해 주세요.")
 
-        val input = AmountInput(readLine())
-
-        return input
+        val readLine = readLine()
+        if (readLine.isNullOrEmpty()) {
+            return input()
+        }
+        return AmountInput(readLine)
     }
 
-    fun inputWonNumber(): LottoWonInput {
+    tailrec fun inputWonNumber(): LottoWonInput {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
         return LottoWonInput(readLine())
     }
 
-    fun inputBonusNumber(): BonusInput {
+    tailrec fun inputBonusNumber(): BonusInput {
         println("보너스 번호를 입력해 주세요")
 
         return BonusInput(readLine())
     }
 
-    fun inputManualCount(): ManualCountInput {
+    tailrec fun inputManualCount(): ManualCountInput {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
 
         return ManualCountInput(readLine())
     }
 
-    fun inputManualLottoTickets(manualCountInput: ManualCountInput): ManualLottoInputs {
+    tailrec fun inputManualLottoTickets(manualCountInput: ManualCountInput): ManualLottoInputs {
         val count = manualCountInput.lottoCount
 
         if (count == 0) return ManualLottoInputs()
