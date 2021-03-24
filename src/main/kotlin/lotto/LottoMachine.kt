@@ -1,22 +1,25 @@
 package lotto
 
-class LottoMachine(private val lottoPay: Int, private val lottoPrizeInfo: LottoPrizeInfo) {
+import lotto.LottoConst.Companion.endNumber
+import lotto.LottoConst.Companion.lottoPay
+import lotto.LottoConst.Companion.maxCount
+import lotto.LottoConst.Companion.startNumber
+import lotto.utils.NumberUtil
 
-    companion object {
-        private const val startNumber: Int = 1
-        private const val endNumber: Int = 45
-        private const val maxCount: Int = 6
+class LottoMachine {
+
+    fun issue(amount: Int): LottoPaper {
+        require(lottoPay <= amount)
+        return LottoPaper(makeLottoNumbers(amount))
     }
 
-    fun issue(amount: Int): List<LottoData> {
-        return if (lottoPay > amount) emptyList() else makeLottoList(amount)
+    fun getLottoRank(winnerNumber: WinnerNumber, lottoPaper: LottoPaper): LottoRankPaper {
+        return LottoRankPaper(lottoPaper.lottoNumbers.map { LottoRank.matchRank(winnerNumber, it) })
     }
 
-    fun getWinnerLottoData(winnerNumberData: WinnerNumberData, lottoDataList: List<LottoData>, amount: Int): WinnerLottoData {
-        return WinnerLottoData(LottoWin(winnerNumberData).getWinners(lottoDataList), lottoPrizeInfo, amount)
-    }
-
-    private fun makeLottoList(amount: Int): List<LottoData> {
-        return (1..(amount / lottoPay)).map { Lotto(startNumber, endNumber, maxCount).issue() }
+    private fun makeLottoNumbers(amount: Int): List<LottoNumber> {
+        return (1..(amount / lottoPay)).map {
+            LottoNumber(NumberUtil.makeNumbers(maxCount, startNumber, endNumber))
+        }
     }
 }
