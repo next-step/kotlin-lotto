@@ -35,4 +35,4 @@
     - [X] 숫자는 6개만 받을 수 있다. Set<LottoNumber>
     - [X] 보너스 숫자를 하나 더 받을 수 있다.
     - [X] 보너스 번호와 기존 번호는 겹쳐서는 안된다.
-- [ ] 전체구매 개수와 수동 입력 개수를 입력하면은 오토개수가 몇개인지 나와야 한다 => LottoEachCountCalculator
+- [X] 전체구매 개수와 수동 입력 개수를 입력하면은 오토개수가 몇개인지 나와야 한다 => LottoEachCountCalculator
