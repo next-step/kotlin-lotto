@@ -5,8 +5,8 @@ class LottoTicket(
     automaticLottos: List<Lotto>,
     val price: LottoPrice,
     val lottos: List<Lotto> = manualLottos + automaticLottos,
-    val automaticCount: Int = manualLottos.size,
-    val manualCount: Int = automaticLottos.size
+    val automaticCount: Int = automaticLottos.size,
+    val manualCount: Int = manualLottos.size
 ) {
     init {
         require(price.isExceedPriceByCount(lottos.size)) {
