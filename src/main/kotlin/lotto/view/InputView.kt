@@ -15,6 +15,7 @@ class InputView {
         if (readLine.isNullOrEmpty()) {
             return input()
         }
+
         return AmountInput(readLine)
     }
 
@@ -25,6 +26,7 @@ class InputView {
         if (readLine.isNullOrEmpty()) {
             return inputWonNumber()
         }
+
         return LottoWonInput(readLine)
     }
 
@@ -35,6 +37,7 @@ class InputView {
         if (readLine.isNullOrEmpty()) {
             return inputBonusNumber()
         }
+
         return BonusInput(readLine)
     }
 
@@ -45,6 +48,7 @@ class InputView {
         if (readLine.isNullOrEmpty()) {
             return inputManualCount()
         }
+
         return ManualCountInput(readLine)
     }
 
@@ -55,7 +59,6 @@ class InputView {
         println("수동으로 구매할 번호를 입력해 주세요.")
 
         val lottoTickets = mutableListOf<ManualLottoInput>()
-
         repeat(count) { index ->
             lottoTickets.add(inputManualLottoTicket(index))
         }
