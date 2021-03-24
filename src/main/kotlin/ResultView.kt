@@ -1,5 +1,9 @@
 fun printLottoCards(lottoCards: LottoCards) {
-    lottoCards.cards.forEach { println(it) }
+    lottoCards.cards.forEach { printLottoCard(it) }
+}
+
+fun printLottoCard(lottoCard: LottoCard) {
+    println("[${lottoCard.numbers.map { it.number }.joinToString(", ")}]")
 }
 
 fun printResult(statistic: Map<Winning, Int>, yieldRate: Double) {

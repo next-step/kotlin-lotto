@@ -1,21 +1,25 @@
 class LottoCard {
-    private val numbers: List<Int>
+    private val _numbers: List<LottoNumber>
+    val numbers: List<LottoNumber>
+        get() = _numbers.toList()
 
     constructor() {
-        numbers = LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT)
+        _numbers = LOTTO_NUMBERS.shuffled().subList(0, LOTTO_NUMBER_CNT).map { LottoNumber(it) }
+        validateNumbers()
     }
 
     constructor(numbers: List<Int>) {
-        this.numbers = numbers
+        this._numbers = numbers.map { LottoNumber(it) }
+        validateNumbers()
     }
 
-    fun getWinning(winningLottoCard: LottoCard, bonusNumber: Int): Winning {
-        val count = numbers.filter { winningLottoCard.numbers.contains(it) }.size
-        return Winning.matchWinning(count, numbers.contains(bonusNumber))
+    private fun validateNumbers() {
+        require(_numbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개여야 합니다." }
     }
 
-    override fun toString(): String {
-        return numbers.toString()
+    fun getWinning(winningLottoCard: LottoCard, bonusNumber: LottoNumber): Winning {
+        val count = _numbers.filter { winningLottoCard._numbers.contains(it) }.size
+        return Winning.matchWinning(count, _numbers.contains(bonusNumber))
     }
 
     companion object {
@@ -26,10 +30,22 @@ class LottoCard {
     }
 }
 
-class LottoCards(cnt: Int) {
-    var cards: List<LottoCard> = (1..cnt).map { LottoCard() }
+class LottoCards {
+    private val _cards = mutableListOf<LottoCard>()
+    val cards: List<LottoCard>
+        get() = _cards.toList()
 
-    fun getStatistic(beforeWeekLottoCard: LottoCard, bonusNumber: Int): Map<Winning, Int> {
+    fun addLottoCard(lottoCard: LottoCard) {
+        _cards.add(lottoCard)
+    }
+
+    fun generateRandomLottoCard(cnt: Int) {
+        repeat(cnt) {
+            addLottoCard(LottoCard())
+        }
+    }
+
+    fun getStatistic(beforeWeekLottoCard: LottoCard, bonusNumber: LottoNumber): Map<Winning, Int> {
         return cards.map { it.getWinning(beforeWeekLottoCard, bonusNumber) }
             .filter { it != Winning.NONE }.groupingBy { it }.eachCount()
     }
