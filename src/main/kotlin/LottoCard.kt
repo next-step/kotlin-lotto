@@ -15,7 +15,6 @@ class LottoCard {
 
     private fun validateNumbers() {
         require(_numbers.size == LOTTO_NUMBER_CNT) { "로또 번호는 6개여야 합니다." }
-        require(_numbers.none { it.number < LOTTO_START_NUMBER || it.number > LOTTO_LAST_NUMBER }) { "입력된 숫자가 로또 번호의 범위 밖입니다." }
     }
 
     fun getWinning(winningLottoCard: LottoCard, bonusNumber: LottoNumber): Winning {
