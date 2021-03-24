@@ -40,12 +40,12 @@ class Console : UserInterface {
         return WinningLottoDto(lottoNumbers, bonusNumber)
     }
 
-    override fun inputLastWeekWinningLottoNumbers(): List<Int> {
+    private fun inputLastWeekWinningLottoNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return inputLottoNumber()
     }
 
-    override fun inputLastWeekWinningLottoBonusNumber(): Int {
+    private fun inputLastWeekWinningLottoBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
         val bonusNumber = readLine()?.toIntOrNull() ?: inputLastWeekWinningLottoBonusNumber()
         return if (bonusNumber in 1..45) bonusNumber else inputLastWeekWinningLottoBonusNumber()

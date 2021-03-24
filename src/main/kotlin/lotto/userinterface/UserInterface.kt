@@ -9,8 +9,6 @@ interface UserInterface {
     fun inputManualLottoCount(): Int
     fun inputManualLottoNumbers(count: Int): List<List<Int>>
     fun inputLastWeekWinningLotto(): WinningLottoDto
-    fun inputLastWeekWinningLottoNumbers(): List<Int>
-    fun inputLastWeekWinningLottoBonusNumber(): Int
     fun outputPurchasedMessage(dto: LottoNumbersDto)
     fun outputWinningStatistics(dto: StatisticsDto)
 }
