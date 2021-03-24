@@ -1,11 +1,11 @@
 package lotto.view.input
 
-class ManualCountInput(input: String?) {
-    val lottoCount: Int
+data class ManualCountInput(val lottoCount: Int) {
+    constructor(input: String) : this(input.toInt())
 
-    init {
-        require(!input.isNullOrBlank()) { "보너스 번호는 필수입니다." }
-
-        lottoCount = input.toIntOrNull() ?: throw IllegalArgumentException("보너스 번호는 숫자여야 합니다.")
+    companion object {
+        private fun String.toInt(): Int {
+            return this.toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자야여 합니다.")
+        }
     }
 }

@@ -41,7 +41,11 @@ class InputView {
     tailrec fun inputManualCount(): ManualCountInput {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
 
-        return ManualCountInput(readLine())
+        val readLine = readLine()
+        if (readLine.isNullOrEmpty()) {
+            return inputManualCount()
+        }
+        return ManualCountInput(readLine)
     }
 
     tailrec fun inputManualLottoTickets(manualCountInput: ManualCountInput): ManualLottoInputs {
