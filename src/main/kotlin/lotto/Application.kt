@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoEachCountCalculator
 import lotto.domain.LottoTickets
 import lotto.domain.LottoWonNumbers
 import lotto.view.input.AmountInput
@@ -17,7 +18,9 @@ fun main() {
     val manualCountInput: ManualCountInput = inputView.inputManualCount()
     val manualLottoInput: ManualLottoInputs = inputView.inputManualLottoTickets(manualCountInput)
 
-    val lottoCollection = LottoTickets(amountInput.lottoCount, manualLottoInput.lottoTickets)
+    val lottoEachCountCalculator = LottoEachCountCalculator(amountInput.lottoCount, manualCountInput.lottoCount)
+
+    val lottoCollection = LottoTickets(lottoEachCountCalculator.autoCount, manualLottoInput.lottoTickets)
     resultView.printEachTypeCount(amountInput, manualCountInput)
     resultView.printLotto(lottoCollection)
 
