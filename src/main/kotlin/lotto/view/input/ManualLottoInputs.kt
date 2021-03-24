@@ -6,8 +6,7 @@ import lotto.domain.LottoTickets
 data class ManualLottoInputs(private val manualLottoInputs: List<ManualLottoInput>) :
     List<ManualLottoInput> by manualLottoInputs {
 
-    val lottoTickets: LottoTickets
-        get() = LottoTickets(map { LottoTicket(it.lottoNumbers) })
+    val lottoTickets: LottoTickets = LottoTickets(map { LottoTicket(it.lottoNumbers) })
 
     constructor() : this(listOf())
 }
