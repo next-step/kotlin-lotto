@@ -23,7 +23,7 @@ fun main() {
     val wonNumbers = inputView.inputWonNumber()
     val bonusNumber = inputView.inputBonusNumber()
 
-    val lottoWonNumber: LottoWonNumbers = LottoWonNumbers(wonNumbers.wonNumber, bonusNumber.bonusNumber)
+    val lottoWonNumber: LottoWonNumbers = LottoWonNumbers(wonNumbers, bonusNumber.bonusNumber)
 
     resultView.printWon(lottoCollection, lottoWonNumber)
     resultView.printRate(lottoCollection, lottoWonNumber)

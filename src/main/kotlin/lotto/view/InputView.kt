@@ -21,7 +21,11 @@ class InputView {
     tailrec fun inputWonNumber(): LottoWonInput {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        return LottoWonInput(readLine())
+        val readLine = readLine()
+        if (readLine.isNullOrEmpty()) {
+            return inputWonNumber()
+        }
+        return LottoWonInput(readLine)
     }
 
     tailrec fun inputBonusNumber(): BonusInput {
