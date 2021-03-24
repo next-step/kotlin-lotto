@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoTicket(val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
+class LottoTicket(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 6개가 있어야 합니다" }
     }

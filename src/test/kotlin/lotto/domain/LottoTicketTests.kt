@@ -8,7 +8,7 @@ class LottoTicketTests {
     fun `로또 생성시 6개의 숫자를 가지고 있어야 한다`() {
         val lottoTicket: LottoTicket = LottoTicket(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
-        assertThat(lottoTicket.numbers.size)
+        assertThat(lottoTicket.size)
             .isEqualTo(6)
     }
 
@@ -16,7 +16,7 @@ class LottoTicketTests {
     fun `로또 생성시 제너레이터에 의존해야한다`() {
         val lottoTicket: LottoTicket = LottoTicket(generator = 순차적으로_증가하는_로또번호_제너레이터())
 
-        assertThat(lottoTicket.numbers)
+        assertThat(lottoTicket)
             .containsExactlyInAnyOrder(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -38,7 +38,7 @@ class LottoTicketTests {
         assertThat(rank)
             .isEqualTo(Rank.getRankByCount(4, false))
 
-        assertThat(lottoTicket.numbers)
+        assertThat(lottoTicket)
             .containsExactlyInAnyOrder(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -55,9 +55,9 @@ class LottoTicketTests {
 
         val lottoTicket: LottoTicket = LottoTicket(generator = 중첩된숫자가쫀재하는제너레이터)
 
-        assertThat(lottoTicket.numbers.size)
+        assertThat(lottoTicket.size)
             .isEqualTo(6)
-        assertThat(lottoTicket.numbers)
+        assertThat(lottoTicket)
             .containsExactlyInAnyOrder(
                 LottoNumber(1),
                 LottoNumber(2),

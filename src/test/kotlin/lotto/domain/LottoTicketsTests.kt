@@ -13,7 +13,7 @@ class LottoTicketsTests {
     fun `여러개의 로또를 구매가 가능하다`(count: Int) {
         val lottoTickets: LottoTickets = LottoTickets(count)
 
-        assertThat(lottoTickets.lottoTickets.size)
+        assertThat(lottoTickets.size)
             .isEqualTo(count)
     }
 
@@ -64,17 +64,17 @@ class LottoTicketsTests {
 
         val matchByWonNumber = LottoWonNumbers(wonNumber, LottoNumber(10)).match(lottoTickets)
 
-        assertThat(matchByWonNumber.rankCount[Rank.FIRST])
+        assertThat(matchByWonNumber[Rank.FIRST])
             .isEqualTo(2)
-        assertThat(matchByWonNumber.rankCount[Rank.THIRD])
+        assertThat(matchByWonNumber[Rank.THIRD])
             .isEqualTo(1)
-        assertThat(matchByWonNumber.rankCount[Rank.FOURTH])
+        assertThat(matchByWonNumber[Rank.FOURTH])
             .isEqualTo(1)
-        assertThat(matchByWonNumber.rankCount[Rank.FIFTH])
+        assertThat(matchByWonNumber[Rank.FIFTH])
             .isEqualTo(3)
-        assertThat(matchByWonNumber.rankCount[Rank.FAIL])
+        assertThat(matchByWonNumber[Rank.FAIL])
             .isEqualTo(2)
-        assertThat(matchByWonNumber.rankCount[Rank.SECOND])
+        assertThat(matchByWonNumber[Rank.SECOND])
             .isEqualTo(2)
 
         assertThat(matchByWonNumber.sumAmount)

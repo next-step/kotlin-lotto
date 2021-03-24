@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoRanks(val rankCount: Map<Rank, Int>) {
+class LottoRanks(private val rankCount: Map<Rank, Int>) : Map<Rank, Int> by rankCount {
     val sumAmount: Long
         get() = rankCount.entries
             .sumByLong { (it.key.amount) * (it.value).toLong() }
