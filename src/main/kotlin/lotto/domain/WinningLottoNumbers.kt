@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.generator.ManualLottoGenerator
+
 class WinningLottoNumbers private constructor(
     val lotto: Lotto,
     val bonusLotto: LottoNumber
@@ -17,12 +19,12 @@ class WinningLottoNumbers private constructor(
 
     companion object {
 
-        fun of(winningLottoNumberTokens: List<Int>, bonusNumber: Int): WinningLottoNumbers {
-            validate(winningLottoNumberTokens)
+        fun of(lottoNumbers: String, bonusNumber: Int): WinningLottoNumbers {
+            validate(LottoNumberTokenizer.tokenize(lottoNumbers))
+            val lotto = ManualLottoGenerator(lottoNumbers).generate()
 
-            val winningLottoInstance = Lotto.from(winningLottoNumberTokens.map { LottoNumber.from(it) })
             val bonusLotto = LottoNumber.from(bonusNumber)
-            return WinningLottoNumbers(lotto = winningLottoInstance, bonusLotto = bonusLotto)
+            return WinningLottoNumbers(lotto, bonusLotto)
         }
 
         private fun validate(tokens: List<Int>) {

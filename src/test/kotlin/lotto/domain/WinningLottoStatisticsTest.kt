@@ -13,7 +13,7 @@ internal class WinningLottoStatisticsTest {
         "1000000000, 2.000055"
     )
     fun `1등, 3등, 4등에 당첨되었을 때 구매금액에 따른 수익률 계산`(price: Int, expectedProfitRate: Double) {
-        val winningLottoNumbers = WinningLottoNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
+        val winningLottoNumbers = WinningLottoNumbers.of("1,2,3,4,5,6", 7)
 
         val manual = listOf(
             Lotto.from(LottoNumberTokenizer.tokenize("1,2,3,4,5,6").map { LottoNumber.from(it) }),
