@@ -48,7 +48,7 @@ class InputView {
         return ManualCountInput(readLine)
     }
 
-    tailrec fun inputManualLottoTickets(manualCountInput: ManualCountInput): ManualLottoInputs {
+    fun inputManualLottoTickets(manualCountInput: ManualCountInput): ManualLottoInputs {
         val count = manualCountInput.lottoCount
 
         if (count == 0) return ManualLottoInputs()
@@ -56,10 +56,21 @@ class InputView {
 
         val lottoTickets = mutableListOf<ManualLottoInput>()
 
-        repeat(count) {
-            lottoTickets.add(ManualLottoInput(readLine()))
+        repeat(count) { index ->
+            lottoTickets.add(inputManualLottoTicket(index))
         }
 
         return ManualLottoInputs(lottoTickets)
+    }
+
+    private tailrec fun inputManualLottoTicket(index: Int): ManualLottoInput {
+        println("$index 번 째 번호를 입력해주세요.")
+
+        val readLine = readLine()
+        if (readLine.isNullOrBlank()) {
+            return inputManualLottoTicket(index)
+        }
+
+        return ManualLottoInput(readLine)
     }
 }
