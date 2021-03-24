@@ -18,35 +18,24 @@ class Console : UserInterface {
 
     override fun inputManualLottoNumbers(count: Int): List<List<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return (1..count).map { inputManualLottoNumber() }
+        return (1..count).map { inputLottoNumber() }
     }
 
-    private fun inputManualLottoNumber(retry: Boolean = false): List<Int> {
+    private fun inputLottoNumber(retry: Boolean = false): List<Int> {
         if (retry) println("로또번호를 잘못 입력하셨습니다. 다시 입력해 주세요.")
         val lottoNumbers = readLine()
-            ?.split(MANUAL_LOTTO_NUMBERS_DELIMITER)
+            ?.split(LOTTO_NUMBERS_DELIMITER)
             ?.map { it.trim() }
             ?.mapNotNull { it.toIntOrNull() }
             ?.filter { it in 1..45 }
             ?.distinct()
             ?: listOf()
-        return if (lottoNumbers.size == 6) lottoNumbers else inputManualLottoNumber(retry = true)
+        return if (lottoNumbers.size == 6) lottoNumbers else inputLottoNumber(retry = true)
     }
 
     override fun inputLastWeekWinningLottoNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningLotto = readLine()
-            ?.split(WINNING_LOTTO_NUMBERS_DELIMITER)
-            ?.map { it.trim() }
-            ?.mapNotNull { it.toIntOrNull() }
-            ?.filter { it in 1..45 }
-            ?.distinct()
-            ?: listOf()
-        return if (winningLotto.size == 6) winningLotto
-        else {
-            println("로또번호를 잘못 입력하셨습니다. 다시 입력해 주세요.")
-            inputLastWeekWinningLottoNumbers()
-        }
+        return inputLottoNumber()
     }
 
     override fun inputLastWeekWinningLottoBonusNumber(): Int {
@@ -80,7 +69,6 @@ class Console : UserInterface {
     }
 
     companion object {
-        private const val WINNING_LOTTO_NUMBERS_DELIMITER = ","
-        private const val MANUAL_LOTTO_NUMBERS_DELIMITER = ","
+        private const val LOTTO_NUMBERS_DELIMITER = ","
     }
 }
