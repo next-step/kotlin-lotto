@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoNumber private constructor(val number: Int) {
+data class LottoNumber(val number: Int) {
     init {
         require(number in LOTTO_MINIMUM_NUMBER..LOTTO_MAXIMUM_NUMBER) { "로또 번호는 $LOTTO_MINIMUM_NUMBER 이상 $LOTTO_MAXIMUM_NUMBER 여야 해요." }
     }
