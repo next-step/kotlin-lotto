@@ -5,7 +5,6 @@ import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.ManualLottoGenerator
 import lotto.domain.Money
-import lotto.domain.PositiveNumber
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.dto.StatisticsDto
@@ -25,15 +24,15 @@ class LottoApplication(private val userInterface: UserInterface) {
 
     fun run() {
         val amount = userInterface.inputPurchaseAmount().let(::Money)
-        val manualLottoCount = userInterface.inputManualLottoCount().let(::PositiveNumber)
+        val manualLottoCount = userInterface.inputManualLottoCount()
         val manualLottoNumbers =
-            userInterface.inputManualLottoNumbers(count = manualLottoCount.value).map { it.map(::LottoNumber) }
+            userInterface.inputManualLottoNumbers(count = manualLottoCount).map { it.map(::LottoNumber) }
 
         val lottos = lottoMachine.sellLottos(amount, manualLottoNumbers.map(::ManualLottoGenerator))
         userInterface.outputPurchasedMessage(
             lottos.toLottoNumbersDto(
-                manualLottoCount = manualLottoCount.value,
-                randomLottoCount = lottos.size - manualLottoCount.value
+                manualLottoCount = manualLottoCount,
+                randomLottoCount = lottos.size - manualLottoCount
             )
         )
 

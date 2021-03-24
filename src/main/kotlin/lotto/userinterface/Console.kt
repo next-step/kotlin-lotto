@@ -5,16 +5,26 @@ import lotto.dto.StatisticsDto
 import lotto.dto.WinningLottoDto
 
 class Console : UserInterface {
-    override fun inputPurchaseAmount(): Int {
+    override tailrec fun inputPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        val money = readLine()?.toIntOrNull() ?: inputPurchaseAmount()
-        return if (money > 0 && money % 1000 == 0) money else inputPurchaseAmount()
+        val money = readLine()?.toIntOrNull()
+
+        if (money == null || money <= 0 || money % 1000 != 0) {
+            return inputPurchaseAmount()
+        }
+
+        return money
     }
 
-    override fun inputManualLottoCount(): Int {
+    override tailrec fun inputManualLottoCount(): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
-        val lottoCount = readLine()?.toIntOrNull() ?: inputManualLottoCount()
-        return if (lottoCount >= 0) lottoCount else inputManualLottoCount()
+        val lottoCount = readLine()?.toIntOrNull()
+
+        if (lottoCount == null || lottoCount < 0) {
+            return inputManualLottoCount()
+        }
+
+        return lottoCount
     }
 
     override fun inputManualLottoNumbers(count: Int): List<List<Int>> {
@@ -22,8 +32,7 @@ class Console : UserInterface {
         return (1..count).map { inputLottoNumber() }
     }
 
-    private fun inputLottoNumber(retry: Boolean = false): List<Int> {
-        if (retry) println("로또번호를 잘못 입력하셨습니다. 다시 입력해 주세요.")
+    private tailrec fun inputLottoNumber(): List<Int> {
         val lottoNumbers = readLine()
             ?.split(LOTTO_NUMBERS_DELIMITER)
             ?.map { it.trim() }
@@ -31,7 +40,13 @@ class Console : UserInterface {
             ?.filter { it in 1..45 }
             ?.distinct()
             ?: listOf()
-        return if (lottoNumbers.size == 6) lottoNumbers else inputLottoNumber(retry = true)
+
+        if (lottoNumbers.size != 6) {
+            println("로또번호를 잘못 입력하셨습니다. 다시 입력해 주세요.")
+            return inputLottoNumber()
+        }
+
+        return lottoNumbers
     }
 
     override fun inputLastWeekWinningLotto(): WinningLottoDto {
