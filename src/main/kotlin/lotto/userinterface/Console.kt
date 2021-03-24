@@ -36,7 +36,7 @@ class Console : UserInterface {
 
     override fun inputLastWeekWinningLotto(): WinningLottoDto {
         val lottoNumbers = inputLastWeekWinningLottoNumbers()
-        val bonusNumber = inputLastWeekWinningLottoBonusNumber()
+        val bonusNumber = inputLastWeekWinningLottoBonusNumber(lottoNumbers)
         return WinningLottoDto(lottoNumbers, bonusNumber)
     }
 
@@ -45,10 +45,10 @@ class Console : UserInterface {
         return inputLottoNumber()
     }
 
-    private fun inputLastWeekWinningLottoBonusNumber(): Int {
+    private fun inputLastWeekWinningLottoBonusNumber(lottoNumbers: List<Int>): Int {
         println("보너스 볼을 입력해 주세요.")
-        val bonusNumber = readLine()?.toIntOrNull() ?: inputLastWeekWinningLottoBonusNumber()
-        return if (bonusNumber in 1..45) bonusNumber else inputLastWeekWinningLottoBonusNumber()
+        val bonusNumber = readLine()?.toIntOrNull() ?: inputLastWeekWinningLottoBonusNumber(lottoNumbers)
+        return if (bonusNumber in 1..45 && bonusNumber !in lottoNumbers) bonusNumber else inputLastWeekWinningLottoBonusNumber(lottoNumbers)
     }
 
     override fun outputPurchasedMessage(dto: LottoNumbersDto) {
