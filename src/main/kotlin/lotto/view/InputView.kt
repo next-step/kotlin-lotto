@@ -27,7 +27,11 @@ class InputView {
     tailrec fun inputBonusNumber(): BonusInput {
         println("보너스 번호를 입력해 주세요")
 
-        return BonusInput(readLine())
+        val readLine = readLine()
+        if (readLine.isNullOrEmpty()) {
+            return inputBonusNumber()
+        }
+        return BonusInput(readLine)
     }
 
     tailrec fun inputManualCount(): ManualCountInput {
