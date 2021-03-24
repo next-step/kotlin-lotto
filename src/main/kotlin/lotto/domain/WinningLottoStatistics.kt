@@ -9,7 +9,7 @@ class WinningLottoStatistics(
     init {
         initializeRankMap()
 
-        lottoTicket.getTickets().forEach {
+        lottoTicket.lottos.forEach {
             addRankStatistics(rank(it, winningLottoNumbers))
         }
     }

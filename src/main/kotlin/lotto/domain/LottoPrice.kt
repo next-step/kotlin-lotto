@@ -18,10 +18,6 @@ class LottoPrice(
         return value / MINIMUM_PRICE_UNIT
     }
 
-    private fun convertCountToLottoPrice(count: Int): LottoPrice {
-        return LottoPrice(count * MINIMUM_PRICE_UNIT)
-    }
-
     fun calculateAutomaticCount(manualLottoCount: Int): Int {
         return convertLottoPriceToCount() - manualLottoCount
     }

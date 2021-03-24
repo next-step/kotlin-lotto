@@ -8,6 +8,6 @@ fun main() {
     val manualLottoCount = InputView.enterManualLottoCount()
     val lottoTicket = LottoGame.start(buyingPrice, manualLottoCount)
     ResultView.printLottoTickets(lottoTicket)
-    val result = LottoGame.doResult(lottoTicket, buyingPrice)
+    val result = LottoGame.doResult(lottoTicket)
     ResultView.printResult(result)
 }

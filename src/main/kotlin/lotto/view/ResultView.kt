@@ -13,8 +13,8 @@ object ResultView {
     private const val MAXIMUM_PROFIT_RATE_POINT = 2
 
     fun printLottoTickets(lottoTicket: LottoTicket) {
-        println("수동으로 ${lottoTicket.manuals.size}장, 자동으로 ${lottoTicket.automatics.size}장을 구매했습니다.")
-        lottoTicket.getTickets().forEach {
+        println("수동으로 ${lottoTicket.manualCount}장, 자동으로 ${lottoTicket.automaticCount}장을 구매했습니다.")
+        lottoTicket.lottos.forEach {
             println(toLottoTicketString(it))
         }
     }
