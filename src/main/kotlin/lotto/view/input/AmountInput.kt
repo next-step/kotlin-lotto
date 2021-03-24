@@ -9,14 +9,10 @@ data class AmountInput(private val amount: Int) {
         lottoCount = amount / PER_LOTTO_PRICE
     }
 
-    constructor(lottoCount: String) : this(lottoCount.toInt())
+    constructor(lottoCount: String) : this(lottoCount.toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자야여 합니다."))
 
     companion object {
         private const val PER_LOTTO_PRICE = 1000
         private const val DEFAULT_LOTTO_COUNT = 0
-
-        private fun String.toInt(): Int {
-            return this.toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자야여 합니다.")
-        }
     }
 }

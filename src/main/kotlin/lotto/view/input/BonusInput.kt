@@ -4,12 +4,6 @@ import lotto.domain.LottoNumber
 
 data class BonusInput(val bonusNumber: LottoNumber) {
 
-    constructor(input: String) : this(input.toInt())
+    constructor(input: String) : this(input.toIntOrNull() ?: throw IllegalArgumentException("보너스 번호는 숫자야여 합니다."))
     constructor(input: Int) : this(LottoNumber.from(input))
-
-    companion object {
-        private fun String.toInt(): Int {
-            return this.toIntOrNull() ?: throw IllegalArgumentException("금액은 숫자야여 합니다.")
-        }
-    }
 }
