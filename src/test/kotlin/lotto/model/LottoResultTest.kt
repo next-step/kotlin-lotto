@@ -6,7 +6,7 @@ import lotto.model.WinningPlace.THIRD
 import lotto.model.WinningPlace.FOURTH
 import lotto.model.WinningPlace.FIFTH
 import lotto.model.number.WinningNumber
-import lotto.model.number.WinningNumbers
+import lotto.model.number.WinningNumbersFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -26,7 +26,7 @@ internal class LottoResultTest {
     }
 
     companion object {
-        private val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
+        private val winningNumbers = WinningNumbersFactory.create(listOf(1, 2, 3, 4, 5, 6))
         private val bonusNumber = WinningNumber.get(7)
         private val winningCondition = WinningCondition(winningNumbers, bonusNumber)
 

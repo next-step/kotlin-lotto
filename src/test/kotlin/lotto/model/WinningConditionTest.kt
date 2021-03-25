@@ -2,6 +2,7 @@ package lotto.model
 
 import lotto.model.number.WinningNumber
 import lotto.model.number.WinningNumbers
+import lotto.model.number.WinningNumbersFactory
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -22,7 +23,7 @@ internal class WinningConditionTest {
             return listOf(
                 Arguments {
                     arrayOf(
-                        WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                        WinningNumbersFactory.create(listOf(1, 2, 3, 4, 5, 6)),
                         WinningNumber.get(1)
                     )
                 }

@@ -1,6 +1,7 @@
 package lotto.model
 
 import lotto.model.number.LottoNumbers
+import lotto.model.number.LottoNumbersFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -45,8 +46,8 @@ internal class LottoStoreTest {
         @JvmStatic
         fun buyLottoNumbersTicketsProvider(): List<Arguments> {
             val listOfLottoNumbers = listOf(
-                LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                LottoNumbers(listOf(7, 8, 9, 10, 11, 12))
+                LottoNumbersFactory.create(listOf(1, 2, 3, 4, 5, 6)),
+                LottoNumbersFactory.create(listOf(7, 8, 9, 10, 11, 12))
             )
 
             return listOf(
