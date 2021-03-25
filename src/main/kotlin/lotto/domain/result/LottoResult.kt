@@ -17,7 +17,7 @@ class LottoResult(
     fun result() = result.toMap()
 
     fun get(winningBoard: WinningBoard): Int {
-        return result[winningBoard] ?: 0
+        return result[winningBoard] ?: NOT_EXIST
     }
 
     fun calculateProfit(price: Price): Double {
@@ -43,5 +43,9 @@ class LottoResult(
 
     override fun hashCode(): Int {
         return result.hashCode()
+    }
+
+    companion object {
+        private const val NOT_EXIST = 0
     }
 }
