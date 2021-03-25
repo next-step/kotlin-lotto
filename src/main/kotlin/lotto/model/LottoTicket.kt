@@ -1,33 +1,25 @@
 package lotto.model
 
-import lotto.model.number.CandidateNumbers
 import lotto.model.number.LottoNumber
 import lotto.model.number.LottoNumbers
+import lotto.model.number.WinningNumber
+import lotto.model.number.WinningNumbers
 
-class LottoTicket(val candidateNumbers: CandidateNumbers) {
-    constructor(candidateNumbers: List<Int>) : this(CandidateNumbers(candidateNumbers))
+class LottoTicket(val candidateNumbers: LottoNumbers) {
+    constructor(candidateNumbers: List<Int>) : this(LottoNumbers(candidateNumbers))
 
     constructor(generator: NumbersGenerator = RandomNumbersGenerator()) : this(
-        CandidateNumbers(
-            generator.getNumbers(
-                LottoNumber.MAXIMUM,
-                CandidateNumbers.CANDIDATE_SIZE
-            )
-        )
+        LottoNumbers(generator.getNumbers(LottoNumber.MAXIMUM, LottoNumbers.CANDIDATE_SIZE))
     )
 
-    fun isMatch(targetNumber: LottoNumber): Boolean {
+    fun isMatch(targetNumber: WinningNumber): Boolean {
         return candidateNumbers.contains(targetNumber)
     }
 
-    fun countMatch(targetNumbers: LottoNumbers): Int {
+    fun countMatch(targetNumbers: WinningNumbers): Int {
         return candidateNumbers.filter {
             targetNumbers.contains(it)
         }.count()
-    }
-
-    override fun toString(): String {
-        return candidateNumbers.toString()
     }
 
     companion object {

@@ -1,6 +1,6 @@
 package lotto.model.number
 
-abstract class LottoNumber(private val lottoNumber: Int) : Comparable<LottoNumber> {
+open class LottoNumber internal constructor(private val lottoNumber: Int) : Comparable<LottoNumber> {
     override fun equals(other: Any?): Boolean {
         if (other is LottoNumber) {
             return lottoNumber == other.lottoNumber
@@ -21,10 +21,18 @@ abstract class LottoNumber(private val lottoNumber: Int) : Comparable<LottoNumbe
     }
 
     companion object {
-        const val MINIMUM = 1
+        private const val MINIMUM = 1
         const val MAXIMUM = 45
 
-        fun validate(lottoNumber: Int) {
+        private val LOTTO_NUMBERS = (MINIMUM..MAXIMUM).map { WinningNumber(it) }
+
+        fun get(lottoNumber: Int): LottoNumber {
+            validate(lottoNumber)
+
+            return LOTTO_NUMBERS[lottoNumber - 1]
+        }
+
+        private fun validate(lottoNumber: Int) {
             require(lottoNumber in MINIMUM..MAXIMUM) { "로또 숫자는 1부터 45 까지의 자연수입니다!" }
         }
     }

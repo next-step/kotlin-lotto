@@ -2,6 +2,6 @@ package lotto.model.number
 
 import java.util.TreeSet
 
-class WinningNumbers(winningNumbers: TreeSet<WinningNumber>) : LottoNumbers(winningNumbers) {
+data class WinningNumbers(private val winningNumbers: TreeSet<WinningNumber>) : Set<WinningNumber> by winningNumbers {
     constructor(winningNumbers: List<Int>) : this(TreeSet(winningNumbers.map { WinningNumber.get(it) }))
 }

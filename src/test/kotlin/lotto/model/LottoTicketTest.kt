@@ -1,6 +1,6 @@
 package lotto.model
 
-import lotto.model.number.CandidateNumber
+import lotto.model.number.LottoNumber
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -16,6 +16,6 @@ internal class LottoTicketTest {
         val lottoTicket = LottoTicket(testNumberGenerator)
 
         assertThat(lottoTicket.candidateNumbers.size).isEqualTo(6)
-        assertThat(lottoTicket.candidateNumbers.first()).isEqualTo(CandidateNumber.get(1))
+        assertThat(lottoTicket.candidateNumbers.first()).isEqualTo(LottoNumber.get(1))
     }
 }

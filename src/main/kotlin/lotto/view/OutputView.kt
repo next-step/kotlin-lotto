@@ -6,7 +6,9 @@ import lotto.model.LottoTickets
 object OutputView {
     fun printTickets(tickets: LottoTickets) {
         println("${tickets.size}개를 구매했습니다.")
-        tickets.forEach { println(it) }
+        tickets.forEach {
+            println(it.candidateNumbers.lottoNumbers.joinToString(separator = ", ", prefix = "[", postfix = "]"))
+        }
     }
 
     fun printResult(result: LottoResult) {

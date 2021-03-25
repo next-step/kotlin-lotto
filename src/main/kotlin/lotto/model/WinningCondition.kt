@@ -1,9 +1,9 @@
 package lotto.model
 
-import lotto.model.number.CandidateNumber
+import lotto.model.number.WinningNumber
 import lotto.model.number.WinningNumbers
 
-data class WinningCondition(val winningNumbers: WinningNumbers, val bonusNumber: CandidateNumber) {
+data class WinningCondition(val winningNumbers: WinningNumbers, val bonusNumber: WinningNumber) {
     fun check(lottoTicket: LottoTicket): Pair<Int, Boolean> {
         val winningCount = lottoTicket.countMatch(winningNumbers)
         val bonusMatch = lottoTicket.isMatch(bonusNumber)

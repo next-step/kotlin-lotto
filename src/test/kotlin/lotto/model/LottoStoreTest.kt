@@ -1,6 +1,6 @@
 package lotto.model
 
-import lotto.model.number.CandidateNumbers
+import lotto.model.number.LottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -18,13 +18,13 @@ internal class LottoStoreTest {
     }
 
     @ParameterizedTest
-    @MethodSource("buyCandidateNumbersTicketsProvider")
-    fun `수동으로 사고싶은 만큼 CandidateNumbers를 주면 알맞은 LottoTicket을 준다`(
+    @MethodSource("buyLottoNumbersTicketsProvider")
+    fun `수동으로 사고싶은 만큼 LottoNumbers를 주면 알맞은 LottoTicket을 준다`(
         money: Money,
-        listOfCandidateNumbers: List<CandidateNumbers>,
+        listOfLottoNumbers: List<LottoNumbers>,
         lottoTickets: LottoTickets
     ) {
-        val result = store.buy(money, listOfCandidateNumbers)
+        val result = store.buy(money, listOfLottoNumbers)
 
         assertThat(result.size).isEqualTo(lottoTickets.size)
         assertThat(result[0].candidateNumbers).isEqualTo(lottoTickets[0].candidateNumbers)
@@ -43,21 +43,21 @@ internal class LottoStoreTest {
         }
 
         @JvmStatic
-        fun buyCandidateNumbersTicketsProvider(): List<Arguments> {
-            val listOfCandidateNumbers = listOf(
-                CandidateNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                CandidateNumbers(listOf(7, 8, 9, 10, 11, 12))
+        fun buyLottoNumbersTicketsProvider(): List<Arguments> {
+            val listOfLottoNumbers = listOf(
+                LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                LottoNumbers(listOf(7, 8, 9, 10, 11, 12))
             )
 
             return listOf(
                 Arguments {
                     arrayOf(
                         Money(5000),
-                        listOfCandidateNumbers,
+                        listOfLottoNumbers,
                         LottoTickets(
                             listOf(
-                                LottoTicket(listOfCandidateNumbers[0]),
-                                LottoTicket(listOfCandidateNumbers[1]),
+                                LottoTicket(listOfLottoNumbers[0]),
+                                LottoTicket(listOfLottoNumbers[1]),
                                 LottoTicket(),
                                 LottoTicket(),
                                 LottoTicket()
