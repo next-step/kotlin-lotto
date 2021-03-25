@@ -9,7 +9,12 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
 
     fun buy(generator: NumbersGenerator): Lotteries {
         val count = calculateLotteryCountByPrice()
-        return Lotteries.of(count, generateLotteryNumbers(generator))
+
+        val allNumbers = (START_LOTTERY_COUNT..count).map {
+            generateLotteryNumbers(generator)
+        }
+
+        return Lotteries.of(allNumbers)
     }
 
     private fun generateLotteryNumbers(generator: NumbersGenerator): List<Int> {
@@ -24,5 +29,6 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
         private const val MIN_LOTTERY_NUMBER = 1
         private const val MAX_LOTTERY_NUMBER = 45
         private const val LOTTERY_SIZE = 6
+        private const val START_LOTTERY_COUNT = 1
     }
 }
