@@ -12,10 +12,10 @@ enum class LottoRank(val matchCount: Int, val winningPrice: Int) {
         fun matchRank(matchCount: Int, matchBonus: Boolean): LottoRank {
             val rank = values().find {
                 it.matchCount == matchCount
-            }
-            if (rank?.matchCount == SECOND.matchCount && matchBonus) return SECOND
-            if (rank?.matchCount == THIRD.matchCount && !matchBonus) return THIRD
-            return rank ?: FAIL
+            } ?: FAIL
+            if (rank.matchCount == SECOND.matchCount && matchBonus) return SECOND
+            if (rank.matchCount == THIRD.matchCount && !matchBonus) return THIRD
+            return rank
         }
     }
 }
