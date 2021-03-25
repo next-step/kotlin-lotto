@@ -15,5 +15,9 @@ class LottoTicket(
         fun ofAuto(): LottoTicket {
             return LottoTicket(AUTO_DRAW_POLICY)
         }
+
+        fun ofManual(txNumbers: String): LottoTicket {
+            return LottoTicket(ManualDrawPolicy(txNumbers))
+        }
     }
 }
