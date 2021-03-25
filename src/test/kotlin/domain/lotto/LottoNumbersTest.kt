@@ -14,12 +14,12 @@ internal class LottoNumbersTest {
         assertDoesNotThrow {
             LottoNumbers(
                 sortedSetOf(
-                    LottoNumber.N01,
-                    LottoNumber.N02,
-                    LottoNumber.N03,
-                    LottoNumber.N04,
-                    LottoNumber.N05,
-                    LottoNumber.N06
+                    LottoNumber.parse(1),
+                    LottoNumber.parse(2),
+                    LottoNumber.parse(3),
+                    LottoNumber.parse(4),
+                    LottoNumber.parse(5),
+                    LottoNumber.parse(6)
                 )
             )
         }
@@ -29,22 +29,22 @@ internal class LottoNumbersTest {
     fun `로또숫자열은 서로 다른 객체라도, 가지고 있는 로또숫자가 일치하면 동일하다`() {
         val one = LottoNumbers(
             sortedSetOf(
-                LottoNumber.N01,
-                LottoNumber.N02,
-                LottoNumber.N03,
-                LottoNumber.N04,
-                LottoNumber.N05,
-                LottoNumber.N06
+                LottoNumber.parse(1),
+                LottoNumber.parse(2),
+                LottoNumber.parse(3),
+                LottoNumber.parse(4),
+                LottoNumber.parse(5),
+                LottoNumber.parse(6)
             )
         )
         val other = LottoNumbers(
             sortedSetOf(
-                LottoNumber.N01,
-                LottoNumber.N02,
-                LottoNumber.N03,
-                LottoNumber.N04,
-                LottoNumber.N05,
-                LottoNumber.N06
+                LottoNumber.parse(1),
+                LottoNumber.parse(2),
+                LottoNumber.parse(3),
+                LottoNumber.parse(4),
+                LottoNumber.parse(5),
+                LottoNumber.parse(6)
             )
         )
         assertThat(one).isEqualTo(other)
@@ -54,22 +54,22 @@ internal class LottoNumbersTest {
     fun `리스트로 생성한 로또숫자열은 생성자로 생성한 로또숫자열과 동일하다`() {
         val one = LottoNumbers(
             sortedSetOf(
-                LottoNumber.N01,
-                LottoNumber.N02,
-                LottoNumber.N03,
-                LottoNumber.N04,
-                LottoNumber.N05,
-                LottoNumber.N06
+                LottoNumber.parse(1),
+                LottoNumber.parse(2),
+                LottoNumber.parse(3),
+                LottoNumber.parse(4),
+                LottoNumber.parse(5),
+                LottoNumber.parse(6)
             )
         )
         val other = LottoNumbers.fromList(
             listOf(
-                LottoNumber.N01,
-                LottoNumber.N02,
-                LottoNumber.N03,
-                LottoNumber.N04,
-                LottoNumber.N05,
-                LottoNumber.N06
+                LottoNumber.parse(1),
+                LottoNumber.parse(2),
+                LottoNumber.parse(3),
+                LottoNumber.parse(4),
+                LottoNumber.parse(5),
+                LottoNumber.parse(6)
             )
         )
         assertThat(one).isEqualTo(other)
