@@ -1,26 +1,29 @@
 package lotto.view
 
-import lotto.LottoData
-import lotto.LottoPrizeData
-import lotto.WinnerLottoData
+import lotto.LottoPaper
+import lotto.LottoRankPaper
+import lotto.LottoRank
 
 object OutputView {
 
-    fun showPurchases(lottoDataList: List<LottoData>) {
-        val purchaseCount = lottoDataList.size
+    fun showPurchases(lottoPaper: LottoPaper) {
+        val purchaseCount = lottoPaper.lottoNumbers.size
         println("${purchaseCount}개를 구매했습니다.")
-        lottoDataList.forEach { println(it.numbers) }
+        lottoPaper.lottoNumbers.forEach { println(it.numbers) }
     }
 
-    fun showResult(winnerLottoData: WinnerLottoData) {
+    fun showResult(lottoRank: LottoRankPaper) {
         println("당첨 통계")
         println("---------")
 
-        winnerLottoData.getLottoPrizeDataList().forEach {
-            if (it.includeBonusNumber) showPrintForBonus(it, winnerLottoData) else showPrint(it, winnerLottoData)
-        }
+        LottoRank.values()
+            .toList()
+            .sortedByDescending { it.rank }
+            .forEach {
+                showPrint(it, lottoRank.getRankCount(it))
+            }
 
-        val prizeRate = winnerLottoData.getPrizeRate()
+        val prizeRate = lottoRank.getPrizeRate()
         val resultMessage = StringBuilder()
         resultMessage.apply {
             append("총 수익률은 ${prizeRate}입니다.")
@@ -30,19 +33,9 @@ object OutputView {
         println(resultMessage)
     }
 
-    private fun showPrint(lottoPrizeData: LottoPrizeData, winnerLottoData: WinnerLottoData) {
-        println(
-            "${lottoPrizeData.matchCount}개 일치 " +
-                "(${lottoPrizeData.prizeMoney}원)- " +
-                "${winnerLottoData.getWinnerStepCount(lottoPrizeData.matchCount)}개"
-        )
-    }
-
-    private fun showPrintForBonus(lottoPrizeData: LottoPrizeData, winnerLottoData: WinnerLottoData) {
-        println(
-            "${lottoPrizeData.matchCount}개 일치, " +
-                "보너스 볼 일치(${lottoPrizeData.prizeMoney}원)- " +
-                "${winnerLottoData.getWinnerStepCountWithBonusNumber(lottoPrizeData.matchCount)}개"
-        )
+    private fun showPrint(rank: LottoRank, rankCount: Int) {
+        var extraMessage = " "
+        if (rank == LottoRank.SECOND) extraMessage = ", 보너스 볼 일치"
+        println("${rank.matchCount}개 일치$extraMessage(${rank.prizeMoney}원)- ${rankCount}개")
     }
 }
