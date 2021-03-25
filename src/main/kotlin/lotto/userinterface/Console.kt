@@ -39,7 +39,7 @@ class Console : UserInterface {
             ?.mapNotNull { it.toIntOrNull() }
             ?.filter { it in LOTTO_NUMBER_RANGE }
             ?.distinct()
-            ?: listOf()
+            ?: emptyList()
 
         if (lottoNumbers.size != 6) {
             println("로또번호를 잘못 입력하셨습니다. 다시 입력해 주세요.")
