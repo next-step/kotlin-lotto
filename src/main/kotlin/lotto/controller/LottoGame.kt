@@ -1,7 +1,6 @@
 package lotto.controller
 
 import lotto.domain.LottoMachine
-import lotto.domain.LottoNumberTokenizer
 import lotto.domain.LottoPrice
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLottoNumbers
@@ -13,7 +12,9 @@ import lotto.vo.ResultLottoStatistics
 
 object LottoGame {
 
-    fun start(price: LottoPrice, manualLottoCount: Int): LottoTicket {
+    fun start(): LottoTicket {
+        val price = LottoPrice(InputView.enterLottoBuyingPrice())
+        val manualLottoCount = InputView.enterManualLottoCount()
         val automaticLottoCount = price.calculateAutomaticCount(manualLottoCount)
         val manualLottoNumbers = askManualLottos(manualLottoCount)
 
