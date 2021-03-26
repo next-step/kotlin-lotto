@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoStore  {
+class LottoStore {
     fun getPurchasableLottoCount(budget: Int): Int {
         return budget / LOTTO_DEFAULT_PRICE
     }
@@ -17,5 +17,4 @@ class LottoStore  {
     companion object {
         private const val LOTTO_DEFAULT_PRICE = 1000
     }
-
 }

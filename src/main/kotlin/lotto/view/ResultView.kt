@@ -18,10 +18,11 @@ object ResultView {
     }
 
     fun showRankCount(lottoRanks: Map<LottoRank, Int>) {
-        println("3개 일치 (${LottoRank.FOURTH.winningPrice}원) - ${lottoRanks[LottoRank.FOURTH] ?: 0} 개")
-        println("4개 일치 (${LottoRank.THIRD.winningPrice}원) - ${lottoRanks[LottoRank.THIRD] ?: 0} 개")
-        println("5개 일치 (${LottoRank.SECOND.winningPrice}원) - ${lottoRanks[LottoRank.SECOND] ?: 0} 개")
-        println("6개 일치 (${LottoRank.FIRST.winningPrice}원) - ${lottoRanks[LottoRank.FIRST] ?: 0} 개")
+        LottoRank.values().forEach {
+            println(
+                "${it.matchCount}개 일치 ${if (it == LottoRank.SECOND) ", 보너스 볼 일치" else ""} (${it.winningPrice}원) - ${lottoRanks[it] ?: 0} 개"
+            )
+        }
     }
 
     fun showProfitRate(rate: Float) {
