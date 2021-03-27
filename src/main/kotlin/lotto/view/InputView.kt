@@ -8,12 +8,12 @@ import lotto.view.input.BonusInput
 import lotto.view.input.LottoWonInput
 
 class InputView {
-    tailrec fun input(): AmountInput {
+    tailrec fun amoutInput(): AmountInput {
         println("구입금액을 입력해 주세요.")
 
         val readLine = readLine()
         if (readLine.isNullOrEmpty()) {
-            return input()
+            return amoutInput()
         }
 
         return AmountInput(readLine)
