@@ -1,10 +1,9 @@
 package lotto.domain.vender
 
 import lotto.domain.ticket.LottoTicket
-import lotto.domain.value.Price
 
 abstract class TicketVendor {
-    abstract fun buyAutomaticTicket(price: Price): List<LottoTicket>
+    abstract fun buyTickets(): List<LottoTicket>
 
     companion object {
         const val TICKET_PRICE: Long = 1000

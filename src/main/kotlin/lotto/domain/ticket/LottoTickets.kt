@@ -22,6 +22,16 @@ class LottoTickets(
         return tickets.size
     }
 
+    fun automaticSize(): Int {
+        return tickets.filterIsInstance<LottoTicket.AutomaticLottoTicket>()
+            .size
+    }
+
+    fun manualSize(): Int {
+        return tickets.filterIsInstance<LottoTicket.ManualLottoTicket>()
+            .size
+    }
+
     companion object {
         fun empty(): LottoTickets {
             return LottoTickets(emptyList())

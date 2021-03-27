@@ -9,10 +9,12 @@ internal class LottoTicketsTest {
     @Test
     fun `로또 티켓 뭉치와 우승 티켓을 비교하여 결과를 산출한다`() {
         // given
-        val expectResult = LottoResult(listOf(
-            WinningBoard.SIX,
-            WinningBoard.THREE
-        ))
+        val expectResult = LottoResult(
+            listOf(
+                WinningBoard.SIX,
+                WinningBoard.THREE
+            )
+        )
         val bonusNumber = LottoNumber.of(20)
 
         val winningLottoTicket = WinningLottoTicket(
@@ -28,7 +30,7 @@ internal class LottoTicketsTest {
 
         val lottoTickets = LottoTickets(
             listOf(
-                LottoTicket(
+                LottoTicket.AutomaticLottoTicket(
                     setOf(
                         LottoNumber.of(1),
                         LottoNumber.of(2),
@@ -38,7 +40,7 @@ internal class LottoTicketsTest {
                         LottoNumber.of(6)
                     )
                 ),
-                LottoTicket(
+                LottoTicket.AutomaticLottoTicket(
                     setOf(
                         LottoNumber.of(1),
                         LottoNumber.of(2),

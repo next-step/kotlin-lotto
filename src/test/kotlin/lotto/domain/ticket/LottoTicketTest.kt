@@ -9,7 +9,7 @@ internal class LottoTicketTest {
     @Test
     fun `로또 티켓은 중복되지 않은 6개의 숫자로 이루어져야만 한다`() {
         assertThrows<IllegalArgumentException> {
-            LottoTicket(
+            LottoTicket.AutomaticLottoTicket(
                 setOf(
                     LottoNumber.of(1),
                     LottoNumber.of(1),
