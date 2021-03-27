@@ -39,4 +39,19 @@ internal class WinningCategoryTest {
     fun `당첨항목마다 당첨금은 아래와 같다`(category: WinningCategory, prize: Long) {
         assertThat(category.prize).isEqualTo(Money(prize))
     }
+
+    @ParameterizedTest(name = "{0}개가 매칭되면 {1}를 반환해야 한다")
+    @CsvSource(
+        "3, THREE_CORRECT",
+        "4, FOUR_CORRECT",
+        "5, FIVE_CORRECT",
+        "6, SIX_CORRECT"
+    )
+    fun matchNumberOfTest(numberOfMatched: Int, expectedCategory: WinningCategory) {
+        // when
+        val actual = WinningCategory.matchNumberOf(numberOfMatched)
+
+        // then
+        assertThat(actual).isEqualTo(expectedCategory)
+    }
 }
