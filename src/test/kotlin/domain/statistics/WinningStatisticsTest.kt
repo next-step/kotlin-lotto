@@ -1,6 +1,5 @@
 package domain.statistics
 
-import domain.lotto.Lotto
 import domain.lotto.lottoNumberOf
 import domain.lotto.lottoOf
 import domain.money.Money
@@ -43,11 +42,11 @@ internal class WinningStatisticsTest {
     ) {
         val statistics = WinningStatistics(
             winningNumbers = winningNumbers,
-            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
-                fiveCorrectLotto.nTimes(fiveCorrectCount) +
-                fourCorrectLotto.nTimes(fourCorrectCount) +
-                threeCorrectLotto.nTimes(threeCorrectCount) +
-                noCorrectLotto.nTimes(noCorrectCount)
+            lottos = List(sixCorrectCount) { sixCorrectLotto } +
+                List(fiveCorrectCount) { fiveCorrectLotto } +
+                List(fourCorrectCount) { fourCorrectLotto } +
+                List(threeCorrectCount) { threeCorrectLotto } +
+                List(noCorrectCount) { noCorrectLotto }
         )
 
         val expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * sixCorrectCount) +
@@ -72,11 +71,11 @@ internal class WinningStatisticsTest {
     ) {
         val statistics = WinningStatistics(
             winningNumbers = winningNumbers,
-            lottos = sixCorrectLotto.nTimes(sixCorrectCount) +
-                fiveCorrectLotto.nTimes(fiveCorrectCount) +
-                fourCorrectLotto.nTimes(fourCorrectCount) +
-                threeCorrectLotto.nTimes(threeCorrectCount) +
-                noCorrectLotto.nTimes(noCorrectCount)
+            lottos = List(sixCorrectCount) { sixCorrectLotto } +
+                List(fiveCorrectCount) { fiveCorrectLotto } +
+                List(fourCorrectCount) { fourCorrectLotto } +
+                List(threeCorrectCount) { threeCorrectLotto } +
+                List(noCorrectCount) { noCorrectLotto }
         )
 
         assertAll(
@@ -96,7 +95,7 @@ internal class WinningStatisticsTest {
     fun `당첨통계는 수익률을 반환한다`(lottoPriceValue: Long, lottoCount: Int) {
         val statistics = WinningStatistics(
             winningNumbers = winningNumbers,
-            lottos = sixCorrectLotto.nTimes(lottoCount)
+            lottos = List(lottoCount) { sixCorrectLotto }
         )
 
         val lottoPrice = Money(lottoPriceValue)
@@ -110,6 +109,4 @@ internal class WinningStatisticsTest {
             )
         )
     }
-
-    private fun Lotto.nTimes(number: Int): List<Lotto> = List(number) { this }
 }
