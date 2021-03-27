@@ -1,7 +1,7 @@
 package lotto.domain
 
 class WinningLottoStatistics(
-    lottoTickets: List<LottoTicket>,
+    lottoTicket: LottoTicket,
     winningLottoNumbers: WinningLottoNumbers
 ) {
     val statistics: MutableMap<LottoRank, Int> = hashMapOf()
@@ -9,34 +9,36 @@ class WinningLottoStatistics(
     init {
         initializeRankMap()
 
-        lottoTickets.forEach {
+        lottoTicket.lottos.forEach {
             addRankStatistics(rank(it, winningLottoNumbers))
         }
     }
 
     private fun initializeRankMap() {
-        LottoRank.values().forEach {
+        LottoRank.valuesExcludeNotPlace().forEach {
             statistics[it] = 0
         }
     }
 
-    private fun addRankStatistics(lottoRank: LottoRank?) {
-        if (lottoRank != null) {
+    private fun addRankStatistics(lottoRank: LottoRank) {
+        if (lottoRank != LottoRank.NOT_PLACE) {
             val prevRankCount = statistics.getOrDefault(lottoRank, DEFAULT_RANK_COUNT)
             statistics[lottoRank] = prevRankCount + ADD_RANK_COUNT
         }
     }
 
-    private fun rank(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): LottoRank? {
-        val winningNumberCount = winningLottoNumbers.countWinningNumbers(lottoTicket)
-        val matchBonus = lottoTicket.isBonusNumberMatch(winningLottoNumbers.bonusLotto)
+    private fun rank(lotto: Lotto, winningLottoNumbers: WinningLottoNumbers): LottoRank {
+        val winningNumberCount = winningLottoNumbers.countWinningNumbers(lotto)
+        val matchBonus = lotto.contains(winningLottoNumbers.bonusLotto)
         return LottoRank.selectByMatchCount(winningNumberCount, matchBonus)
     }
 
-    fun calculateProfitRate(buyingPrice: Int): Double {
-        return statistics.entries.fold(0) { total, winningPrice ->
+    fun calculateProfitRate(buyingPrice: LottoPrice): LottoProfitRate {
+        val total = statistics.entries.fold(0) { total, winningPrice ->
             total + winningPrice.key.winningMoney * winningPrice.value
-        } / buyingPrice.toDouble()
+        }
+
+        return LottoProfitRate(total, buyingPrice)
     }
 
     companion object {

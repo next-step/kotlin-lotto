@@ -1,6 +1,7 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -24,5 +25,19 @@ internal class LottoRankTest {
                 Arguments.of(3, false, LottoRank.FIFTH_PLACE)
             )
         }
+    }
+
+    @Test
+    fun `매치되지 않는 등수를 제외한 값 테스트`() {
+        val ranks = LottoRank.valuesExcludeNotPlace()
+        assertThat(ranks).containsAll(
+            listOf(
+                LottoRank.FIRST_PLACE,
+                LottoRank.SECOND_PLACE,
+                LottoRank.THIRD_PLACE,
+                LottoRank.FORTH_PLACE,
+                LottoRank.FIFTH_PLACE
+            )
+        )
     }
 }

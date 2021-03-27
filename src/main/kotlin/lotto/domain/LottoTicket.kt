@@ -1,21 +1,17 @@
 package lotto.domain
 
-class LottoTicket private constructor(
-    val lotto: Lotto
+class LottoTicket(
+    manualLottos: List<Lotto>,
+    automaticLottos: List<Lotto>,
+    val price: LottoPrice
 ) {
+    val lottos: List<Lotto> = manualLottos + automaticLottos
+    val automaticCount: Int = automaticLottos.size
+    val manualCount: Int = manualLottos.size
 
-    fun isBonusNumberMatch(bonusLotto: LottoNumber): Boolean {
-        return lotto.contains(bonusLotto)
-    }
-
-    fun count(lotto: Lotto): Int {
-        return this.lotto.count(lotto)
-    }
-
-    companion object {
-        fun create(): LottoTicket {
-            val lottoInstance = Lotto.create()
-            return LottoTicket(lottoInstance)
+    init {
+        require(price.isExceedPriceByCount(lottos.size)) {
+            "로또 구매수는 구입금액을 초과할 수 없습니다."
         }
     }
 }
