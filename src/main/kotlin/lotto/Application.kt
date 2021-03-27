@@ -11,8 +11,8 @@ import lotto.view.input.ManualLottoInputs
 import lotto.view.ouput.LottoRate
 
 fun main() {
-    val inputView: InputView = InputView()
-    val resultView: ResultView = ResultView()
+    val inputView = InputView()
+    val resultView = ResultView()
 
     val amountInput: AmountInput = inputView.input()
     val manualCountInput: ManualCountInput = inputView.inputManualCount()
@@ -27,7 +27,7 @@ fun main() {
     val wonNumbers = inputView.inputWonNumber()
     val bonusNumber = inputView.inputBonusNumber()
 
-    val lottoWonNumber: LottoWonNumbers = LottoWonNumbers(wonNumbers, bonusNumber.bonusNumber)
+    val lottoWonNumber = LottoWonNumbers(wonNumbers, bonusNumber.bonusNumber)
     val matchByWonNumbers = lottoWonNumber.match(lottoCollection)
 
     resultView.printWon(matchByWonNumbers)
