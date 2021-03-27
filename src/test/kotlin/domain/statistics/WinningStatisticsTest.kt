@@ -1,14 +1,15 @@
 package domain.statistics
 
+import domain.lotto.Lotto
 import domain.lotto.lottoNumberOf
 import domain.lotto.lottoOf
 import domain.money.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class WinningStatisticsTest {
     private val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
@@ -57,33 +58,51 @@ internal class WinningStatisticsTest {
         assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{6}과 일치하는 로또의 개수를 구한다")
     @CsvSource(
-        "1,2,3,4,5",
-        "5,4,3,2,1"
+        "1,2,3,4,5,6,SIX_CORRECT",
+        "1,2,3,4,5,45,FIVE_CORRECT",
+        "1,2,3,4,44,45,FOUR_CORRECT",
+        "1,2,3,43,44,45,THREE_CORRECT"
     )
-    fun `통계 조회를 하면 3개부터 6개까지 일치하는 개수를 알려준다`(
-        sixCorrectCount: Int,
-        fiveCorrectCount: Int,
-        fourCorrectCount: Int,
-        threeCorrectCount: Int,
-        noCorrectCount: Int
+    fun countLottoByTest(
+        n1: Int,
+        n2: Int,
+        n3: Int,
+        n4: Int,
+        n5: Int,
+        n6: Int,
+        category: WinningCategory
     ) {
+        // given
         val statistics = WinningStatistics(
-            winningNumbers = winningNumbers,
-            lottos = List(sixCorrectCount) { sixCorrectLotto } +
-                List(fiveCorrectCount) { fiveCorrectLotto } +
-                List(fourCorrectCount) { fourCorrectLotto } +
-                List(threeCorrectCount) { threeCorrectLotto } +
-                List(noCorrectCount) { noCorrectLotto }
+            winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
+            lottos = listOf(Lotto(lottoNumberOf(n1, n2, n3, n4, n5, n6)))
         )
 
-        assertAll(
-            { assertThat(statistics.countLottoBy(WinningCategory.SIX_CORRECT)).isEqualTo(sixCorrectCount) },
-            { assertThat(statistics.countLottoBy(WinningCategory.FIVE_CORRECT)).isEqualTo(fiveCorrectCount) },
-            { assertThat(statistics.countLottoBy(WinningCategory.FOUR_CORRECT)).isEqualTo(fourCorrectCount) },
-            { assertThat(statistics.countLottoBy(WinningCategory.THREE_CORRECT)).isEqualTo(threeCorrectCount) }
+        // when
+        val actual = statistics.countLottoBy(category)
+
+        // then
+        assertThat(actual).isEqualTo(1)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [1, 2])
+    fun `총 로또 중 6개 모두 일치하는 로또의 개수를 구한다`(expectedCount: Int) {
+        // given
+        val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
+        val sixCorrectLottos = (1..expectedCount).map { Lotto(winningNumbers) }
+        val statistics = WinningStatistics(
+            winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
+            lottos = sixCorrectLottos
         )
+
+        // when
+        val actual = statistics.countLottoBy(WinningCategory.SIX_CORRECT)
+
+        // then
+        assertThat(actual).isEqualTo(expectedCount)
     }
 
     @ParameterizedTest
