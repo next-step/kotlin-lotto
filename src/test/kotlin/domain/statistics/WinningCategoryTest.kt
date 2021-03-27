@@ -42,12 +42,16 @@ internal class WinningCategoryTest {
 
     @ParameterizedTest(name = "{0}개가 매칭되면 {1}를 반환해야 한다")
     @CsvSource(
+        "0, null",
+        "1, null",
+        "2, null",
         "3, THREE_CORRECT",
         "4, FOUR_CORRECT",
         "5, FIVE_CORRECT",
-        "6, SIX_CORRECT"
+        "6, SIX_CORRECT",
+        nullValues = ["null"]
     )
-    fun matchNumberOfTest(numberOfMatched: Int, expectedCategory: WinningCategory) {
+    fun matchNumberOfTest(numberOfMatched: Int, expectedCategory: WinningCategory?) {
         // when
         val actual = WinningCategory.matchNumberOf(numberOfMatched)
 
