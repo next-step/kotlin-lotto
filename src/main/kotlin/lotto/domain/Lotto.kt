@@ -22,10 +22,6 @@ class Lotto(val numbers: Set<LottoNumber>) {
         return numbers.joinToString(prefix = "[", postfix = "]")
     }
 
-    override fun toString(): String {
-        return numbers.joinToString(prefix = "[", postfix = "]")
-    }
-
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
 
