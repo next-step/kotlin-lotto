@@ -3,7 +3,6 @@ package domain.statistics
 import domain.money.Money
 
 data class IncomeExpenditureRatio(val value: Double) {
-
     init {
         require(value >= 0.0)
     }
