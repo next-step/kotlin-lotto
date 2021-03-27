@@ -16,13 +16,13 @@ class LottoTicketVendor(
         return tickets.toList()
     }
 
-    private fun autoTickets(): MutableList<LottoTicket.AutomaticLottoTicket> {
+    private fun autoTickets(): List<LottoTicket.AutomaticLottoTicket> {
         val autoPrice = dto.price - Price(dto.manualAmount.times(TICKET_PRICE))
         val autoAmount = autoPrice / TICKET_PRICE
 
         return (0 until autoAmount).map {
             LottoTicket.create()
-        }.toMutableList()
+        }
     }
 
     private fun manualTickets(): List<LottoTicket.ManualLottoTicket> {

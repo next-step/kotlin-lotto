@@ -3,7 +3,7 @@ package lotto.view
 import lotto.domain.value.Price
 import lotto.view.request.LottoPurchaseRequest
 import lotto.view.request.LottoPurchaseRequest.ManualNumberRequest
-import lotto.view.request.WinningNumberRequest
+import lotto.view.request.WinningLottoRequest
 
 fun lottoRequest(): LottoPurchaseRequest {
     val price = inputPrice()
@@ -44,13 +44,21 @@ private fun inputManualNumbers(amount: Int): ManualNumberRequest {
     )
 }
 
-fun inputWinningNumbers(): WinningNumberRequest {
-    println("지난 주 당첨 번호를 입력해 주세요.")
-    val request = readLine() ?: throw IllegalArgumentException("당첨 번호를 입력해주세요.")
-    return WinningNumberRequest(request)
+fun winningLottoRequest(): WinningLottoRequest {
+    val winningNumbers = inputWinningNumbers()
+    val bonusNumber = inputBonusNumber()
+    return WinningLottoRequest(
+        winningNumbers,
+        bonusNumber
+    )
 }
 
-fun inputBonusNumber(): Int {
+private fun inputWinningNumbers(): String {
+    println("지난 주 당첨 번호를 입력해 주세요.")
+    return readLine() ?: throw IllegalArgumentException("당첨 번호를 입력해주세요.")
+}
+
+private fun inputBonusNumber(): Int {
     println("보너스 번호를 입력해주세요.")
     val request = readLine() ?: throw IllegalArgumentException("보너스 번호를 입력해주세요.")
     return request.toInt()

@@ -12,7 +12,7 @@ data class LottoPurchaseRequest(
         val numbers: List<String>
     )
 
-    fun toCreateDto(): LottoTicketCreateDto {
+    fun toLottoTicketCreateDto(): LottoTicketCreateDto {
         return LottoTicketCreateDto(
             price = price,
             manualAmount = manualNumberRequest.amount,
