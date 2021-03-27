@@ -19,6 +19,9 @@ enum class Rank(
             it.matchCount == matchCount
         } ?: FAIL
 
+        /*
+        * step1지원을 위해 퍼블릭 인터페이스 유지
+        * */
         fun ofMatchCount(matchCount: Int): Rank = when (val rank = findByMatchCount(matchCount)) {
             BONUS_SECOND -> SECOND
             else -> rank
