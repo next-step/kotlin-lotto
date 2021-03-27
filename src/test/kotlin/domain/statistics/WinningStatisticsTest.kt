@@ -12,13 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class WinningStatisticsTest {
-    private val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
-    private val sixCorrectLotto = lottoOf(1, 2, 3, 4, 5, 6)
-    private val fiveCorrectLotto = lottoOf(1, 2, 3, 4, 5, 45)
-    private val fourCorrectLotto = lottoOf(1, 2, 3, 4, 44, 45)
-    private val threeCorrectLotto = lottoOf(1, 2, 3, 43, 44, 45)
-    private val noCorrectLotto = lottoOf(40, 41, 42, 43, 44, 45)
-
     @Test
     fun `당첨통계는 당첨로또숫자열과 로또 리스트와 로또 하나의 가격으로 생성된다`() {
         assertDoesNotThrow {
@@ -27,35 +20,6 @@ internal class WinningStatisticsTest {
                 lottos = listOf(lottoOf(1, 2, 3, 4, 5, 6))
             )
         }
-    }
-
-    @ParameterizedTest
-    @CsvSource(
-        "1,3,5,7,9",
-        "7,0,8,1,9"
-    )
-    fun `당첨통계는 총 당첨금을 알려준다`(
-        sixCorrectCount: Int,
-        fiveCorrectCount: Int,
-        fourCorrectCount: Int,
-        threeCorrectCount: Int,
-        noCorrectCount: Int
-    ) {
-        val statistics = WinningStatistics(
-            winningNumbers = winningNumbers,
-            lottos = List(sixCorrectCount) { sixCorrectLotto } +
-                List(fiveCorrectCount) { fiveCorrectLotto } +
-                List(fourCorrectCount) { fourCorrectLotto } +
-                List(threeCorrectCount) { threeCorrectLotto } +
-                List(noCorrectCount) { noCorrectLotto }
-        )
-
-        val expectedTotalPrizes = (WinningCategory.SIX_CORRECT.prize * sixCorrectCount) +
-            (WinningCategory.FIVE_CORRECT.prize * fiveCorrectCount) +
-            (WinningCategory.FOUR_CORRECT.prize * fourCorrectCount) +
-            (WinningCategory.THREE_CORRECT.prize * threeCorrectCount)
-
-        assertThat(statistics.totalWinningPrizes).isEqualTo(expectedTotalPrizes)
     }
 
     @ParameterizedTest(name = "{6}과 일치하는 로또의 개수를 구한다")
@@ -113,8 +77,8 @@ internal class WinningStatisticsTest {
     )
     fun `당첨통계는 수익률을 반환한다`(lottoPriceValue: Long, lottoCount: Int) {
         val statistics = WinningStatistics(
-            winningNumbers = winningNumbers,
-            lottos = List(lottoCount) { sixCorrectLotto }
+            winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
+            lottos = List(lottoCount) { Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6)) }
         )
 
         val lottoPrice = Money(lottoPriceValue)
