@@ -21,7 +21,7 @@ class LottoResult(
     }
 
     fun calculateProfit(price: Price): Double {
-        return Price(calculateTotalReward()).calculateRate(price)
+        return Price(calculateTotalReward()).rate(price)
     }
 
     fun calculateTotalReward(): Long {

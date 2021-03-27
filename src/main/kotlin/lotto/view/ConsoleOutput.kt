@@ -8,7 +8,7 @@ import lotto.domain.ticket.WinningBoard
 import lotto.domain.value.Price
 
 fun showLottoTickets(tickets: LottoTickets) {
-    println("수동: ${tickets.manualSize()}자동:${tickets.automaticSize()}개 구매")
+    println("수동: ${tickets.manualSize()} 자동:${tickets.automaticSize()}개 구매")
     tickets.tickets
         .showTickets()
 }
