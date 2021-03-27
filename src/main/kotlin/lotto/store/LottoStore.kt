@@ -8,17 +8,18 @@ object LottoStore {
 
     fun purchase(request: PurchaseRequest): IssuedLottoTickets {
         val issueCount = request.amount / LOTTO_PRICE
-        val tickets = issueManualLotto(issueCount = issueCount, txManualLottos = request.txManualLottoTickets)
-        repeat(issueCount.toInt() - tickets.size) {
-            tickets.add(LottoTicket.ofAuto())
-        }
-        return IssuedLottoTickets(tickets)
+
+        val manualTickets = issueManualLotto(issueCount = issueCount, txManualLottos = request.txManualLottoTickets)
+
+        val autoTickets = (0 until issueCount - manualTickets.size).map { LottoTicket.ofAuto() }
+
+        return IssuedLottoTickets(manualTickets.plus(autoTickets))
     }
 
-    private fun issueManualLotto(issueCount: Long, txManualLottos: List<String>): MutableList<LottoTicket> {
+    private fun issueManualLotto(issueCount: Long, txManualLottos: List<String>): List<LottoTicket> {
         require(issueCount >= txManualLottos.size) { "구입 금액${txManualLottos.size}이 부족합니다." }
         return txManualLottos.map {
             LottoTicket.ofManual(it)
-        }.toMutableList()
+        }
     }
 }
