@@ -3,7 +3,6 @@ package lotto.domain
 import lotto.domain.FakeLottoGenerator.Companion.fakeLottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 class LottoMachineManualTest {
 
@@ -33,19 +32,5 @@ class LottoMachineManualTest {
         val result = lottoMachine.sellLottos(Money(money), manualLottoGenerators)
 
         assertThat(result).containsExactly(*expected.toTypedArray())
-    }
-
-    @Test
-    fun `수동로또를 구매하는데 금액이 부족한 경우 예외를 반환한다`() {
-        val money = 1000
-        val manualLottoGenerators = listOf(oneToSixManualLottoGenerator, oneToSixManualLottoGenerator)
-        val expected =
-            "수동 로또를 구매하기에 부족한 금액입니다. money: $money, lottoPrice: $lottoPrice, manualLottoGenerators size: ${manualLottoGenerators.size}"
-        val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), randomLottoGenerator = DummyLottoGenerator())
-
-        val result =
-            assertThrows<IllegalArgumentException> { lottoMachine.sellLottos(Money(money), manualLottoGenerators) }
-
-        assertThat(result.message).isEqualTo(expected)
     }
 }
