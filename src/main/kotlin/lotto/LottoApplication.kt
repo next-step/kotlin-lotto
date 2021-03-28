@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.ManualLottoGenerator
@@ -8,8 +7,8 @@ import lotto.domain.Money
 import lotto.domain.Profit
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
+import lotto.dto.LottoNumbersDto
 import lotto.dto.StatisticsDto
-import lotto.dto.toLottoNumbersDto
 import lotto.userinterface.Console
 import lotto.userinterface.UserInterface
 
@@ -25,25 +24,16 @@ class LottoApplication(private val userInterface: UserInterface) {
 
     fun run() {
         val amount = userInterface.inputPurchaseAmount(LOTTO_PRICE.value.toInt()).let(::Money)
-        val manualLottoCount = userInterface.inputManualLottoCount()
-        val manualLottoNumbers =
-            userInterface.inputManualLottoNumbers(count = manualLottoCount).map { it.map(::LottoNumber) }
+        val manualLottoNumbers = userInterface.inputManualLottoNumbers().map { it.map(::LottoNumber) }
 
         val lottos = lottoMachine.sellLottos(amount, manualLottoNumbers.map(::ManualLottoGenerator))
-        userInterface.outputPurchasedMessage(
-            lottos.toLottoNumbersDto(
-                manualLottoCount = manualLottoCount,
-                randomLottoCount = lottos.size - manualLottoCount
-            )
-        )
+        val manualLottoCount = manualLottoNumbers.count()
+        val randomLottoCount = lottos.count() - manualLottoCount
+
+        userInterface.outputPurchasedMessage(LottoNumbersDto(manualLottoCount, randomLottoCount, lottos))
 
         val (winningLottoNumbers, winningLottoBonusNumber) = userInterface.inputLastWeekWinningLotto()
-
-        val winningLotto = run {
-            val lotto = Lotto(winningLottoNumbers.map { LottoNumber(it) })
-            val bonusNumber = LottoNumber(winningLottoBonusNumber)
-            WinningLotto(lotto = lotto, bonusNumber = bonusNumber)
-        }
+        val winningLotto = WinningLotto(lottoNumbers = winningLottoNumbers, bonusNumber = winningLottoBonusNumber)
 
         val prizeRankCount = winningLotto.calculateLottoPrize(lottos)
         val profit = Profit(prizeRankCount, amount)

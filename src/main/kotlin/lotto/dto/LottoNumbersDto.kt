@@ -2,7 +2,14 @@ package lotto.dto
 
 import lotto.domain.Lotto
 
-fun List<Lotto>.toLottoNumbersDto(manualLottoCount: Int, randomLottoCount: Int) =
-    run { LottoNumbersDto(this.map { it.lottoNumbers.map { it.value } }, manualLottoCount, randomLottoCount) }
-
-data class LottoNumbersDto(val lottos: List<List<Int>>, val manualLottoCount: Int, val randomLottoCount: Int)
+data class LottoNumbersDto(
+    val lottos: List<List<Int>>,
+    val manualLottoCount: Int,
+    val randomLottoCount: Int
+) {
+    constructor(manualLottoCount: Int, randomLottoCount: Int, lottos: List<Lotto>) : this(
+        lottos = lottos.map { lotto -> lotto.lottoNumbers.map { it.value } },
+        manualLottoCount = manualLottoCount,
+        randomLottoCount = randomLottoCount
+    )
+}

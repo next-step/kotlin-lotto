@@ -17,7 +17,14 @@ class Console : UserInterface {
         return money
     }
 
-    override tailrec fun inputManualLottoCount(): Int {
+    override fun inputManualLottoNumbers(): List<List<Int>> {
+        val manualLottoCount = inputManualLottoCount()
+
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (1..manualLottoCount).map { inputLottoNumber() }
+    }
+
+    private tailrec fun inputManualLottoCount(): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
         val lottoCount = readLine()?.toIntOrNull()
 
@@ -26,11 +33,6 @@ class Console : UserInterface {
         }
 
         return lottoCount
-    }
-
-    override fun inputManualLottoNumbers(count: Int): List<List<Int>> {
-        println("수동으로 구매할 번호를 입력해 주세요.")
-        return (1..count).map { inputLottoNumber() }
     }
 
     private tailrec fun inputLottoNumber(): List<Int> {
