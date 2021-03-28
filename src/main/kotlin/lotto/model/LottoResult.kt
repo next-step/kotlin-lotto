@@ -1,9 +1,10 @@
 package lotto.model
 
+import lotto.model.winning.WinningCounter
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-data class LottoResult(val winningCounter: WinningCounter, val ticketPriceSum: Money) {
+data class LottoResult(val winningCounter: WinningCounter, private val ticketPriceSum: Money) {
     val benefitRate: Double
         get() {
             val totalPrice = winningCounter.priceSum

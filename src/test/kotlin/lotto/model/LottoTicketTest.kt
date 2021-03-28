@@ -15,7 +15,7 @@ internal class LottoTicketTest {
 
         val lottoTicket = LottoTicket(testNumberGenerator)
 
-        assertThat(lottoTicket.candidateNumbers.size).isEqualTo(6)
-        assertThat(lottoTicket.candidateNumbers.first()).isEqualTo(LottoNumber.get(1))
+        assertThat(lottoTicket.lottoNumbers.size).isEqualTo(6)
+        assertThat(lottoTicket.lottoNumbers.first()).isEqualTo(LottoNumber.get(1))
     }
 }

@@ -1,4 +1,6 @@
-package lotto.model
+package lotto.model.winning
+
+import lotto.model.Money
 
 enum class WinningPlace(val price: Money, val count: Int, val bonusExist: Boolean) {
     FIRST(Money(2_000_000_000), 6, false),

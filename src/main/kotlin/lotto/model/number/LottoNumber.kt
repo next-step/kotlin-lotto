@@ -1,21 +1,6 @@
 package lotto.model.number
 
-open class LottoNumber internal constructor(private val lottoNumber: Int) : Comparable<LottoNumber> {
-    override fun equals(other: Any?): Boolean {
-        if (other is LottoNumber) {
-            return lottoNumber == other.lottoNumber
-        }
-        return false
-    }
-
-    override fun hashCode(): Int {
-        return lottoNumber.hashCode()
-    }
-
-    override fun toString(): String {
-        return lottoNumber.toString()
-    }
-
+data class LottoNumber private constructor(private val lottoNumber: Int) : Comparable<LottoNumber> {
     override fun compareTo(other: LottoNumber): Int {
         return this.lottoNumber.compareTo(other.lottoNumber)
     }
@@ -24,7 +9,7 @@ open class LottoNumber internal constructor(private val lottoNumber: Int) : Comp
         private const val MINIMUM = 1
         const val MAXIMUM = 45
 
-        private val LOTTO_NUMBERS = (MINIMUM..MAXIMUM).map { WinningNumber(it) }
+        private val LOTTO_NUMBERS = (MINIMUM..MAXIMUM).map { LottoNumber(it) }
 
         fun get(lottoNumber: Int): LottoNumber {
             validate(lottoNumber)
