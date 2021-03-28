@@ -124,6 +124,38 @@ internal class MoneyTest {
         assertThat(result.message).isEqualTo(expected)
     }
 
+    @ParameterizedTest(name = "{0} / {1} 몫: {2}")
+    @CsvSource(
+        "100, 1, 100",
+        "100, 20, 5"
+    )
+    fun `판매가능한 로또 개수를 계산한다`(money: Long, LottoPrice: Long, expected: Int) {
+        val result = Money(money).sellableLottoCount(Money(LottoPrice))
+        assertThat(result).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "1001, 1000",
+        "15, 10"
+    )
+    fun `판매가능한 로또 개수를 계산 시 남은돈이 있는 경우 예외를 반환한다`(money: Long, lottoPrice: Long) {
+        val expectedMessage = "로또 구매 후 남은 돈이 있을 수 없습니다. money: $money, lottoPrice: $lottoPrice"
+        val result = assertThrows<IllegalArgumentException> { Money(money).sellableLottoCount(Money(lottoPrice)) }
+        assertThat(result.message).isEqualTo(expectedMessage)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "999, 1000",
+        "5, 10"
+    )
+    fun `판매가능한 로또 개수를 계산 시 구입금액이 로또가격보다 작은 경우 예외를 반환한다`(money: Long, lottoPrice: Long) {
+        val expectedMessage = "구입금액은 로또가격보다 크거나 같아야 합니다. money: $money, lottoPrice: $lottoPrice"
+        val result = assertThrows<IllegalArgumentException> { Money(money).sellableLottoCount(Money(lottoPrice)) }
+        assertThat(result.message).isEqualTo(expectedMessage)
+    }
+
     @Test
     fun `비교 연산이 가능하다`() {
         assertAll(
