@@ -7,12 +7,13 @@ data class StatisticsDto(
     val prizeRankCount: List<PrizeRankCountDto>,
     val profitRate: Double
 ) {
-
-    companion object {
-        fun of(prizeRankCount: Map<LottoPrize, PositiveNumber>, profitRate: Double): StatisticsDto {
-            return StatisticsDto(prizeRankCount.map { (key, value) -> PrizeRankCountDto(key, value) }, profitRate)
-        }
-    }
+    constructor(
+        prizeRankCount: Map<LottoPrize, PositiveNumber>,
+        profitRate: Double
+    ) : this(
+        prizeRankCount.map { PrizeRankCountDto(it.key, it.value) },
+        profitRate
+    )
 }
 
 data class PrizeRankCountDto(
