@@ -1,6 +1,6 @@
 package lottery.domain
 
-class RankCounts(val lottery: List<Lottery>, winnerLottery: WinnerLottery) {
+class RankCounts(lottery: List<Lottery>, winnerLottery: WinnerLottery) {
     val rankCounts: Map<Rank, Int> =
         lottery.filter { Rank.isInTheRank(countMatchNumbers(winnerLottery, it), hasBonus(it, winnerLottery)) }
             .groupBy { Rank.valueOf(countMatchNumbers(winnerLottery, it), hasBonus(it, winnerLottery)) }
