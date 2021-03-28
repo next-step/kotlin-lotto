@@ -21,14 +21,14 @@ class LottoWonNumbersTests {
     }
 
     @Test
-    fun `6개 미만이면 문제가 된다`() {
+    fun `6개 미만이면 문제가 IllegalArgumentException이 발생한다`() {
         assertThrows<IllegalArgumentException> {
             LottoWonNumbers(setOf(1, 2, 3, 4, 5), 10)
         }
     }
 
     @Test
-    fun `기존 로또 번호와 보너스 번호는 겹치면 안된다`() {
+    fun `기존 로또 번호와 보너스 번호는 겹치면 IllegalArgumentException이 발생한다`() {
         assertThrows<IllegalArgumentException> {
             LottoWonNumbers(setOf(1, 2, 3, 4, 5, 6), 6)
         }

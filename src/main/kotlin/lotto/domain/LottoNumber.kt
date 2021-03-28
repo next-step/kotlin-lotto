@@ -12,5 +12,11 @@ data class LottoNumber(val number: Int) {
     companion object {
         const val LOTTO_MINIMUM_NUMBER = 1
         const val LOTTO_MAXIMUM_NUMBER = 45
+
+        private val NUMBERS: Map<Int, LottoNumber> = (LOTTO_MINIMUM_NUMBER..LOTTO_MAXIMUM_NUMBER).associateWith(::LottoNumber)
+
+        fun from(value: Int): LottoNumber {
+            return NUMBERS[value] ?: throw IllegalArgumentException()
+        }
     }
 }
