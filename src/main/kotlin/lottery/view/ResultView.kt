@@ -5,8 +5,8 @@ import lottery.domain.Rank
 import lottery.domain.RankCounts
 
 object ResultView {
-    fun printCountOfBuyLottery(price: Int) {
-        println("${price}개를 구매하였습니다.")
+    fun printCountOfBuyLottery(manualLotteryCount: Int, autoLotteryCount: Int) {
+        println("수동으로 ${manualLotteryCount}, 자동으로 ${autoLotteryCount}개를 구매했습니다.")
     }
     fun printProfit(profit: String) {
         print("총 수익률은 ${profit}입니다.")
