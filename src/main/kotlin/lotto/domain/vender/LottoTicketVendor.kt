@@ -1,18 +1,33 @@
 package lotto.domain.vender
 
 import lotto.domain.ticket.LottoTicket
+import lotto.domain.ticket.LottoTicketCreateDto
 import lotto.domain.value.Price
 
-class LottoTicketVendor : TicketVendor {
-    override fun buyAutomaticTicket(price: Price): List<LottoTicket> {
-        val amount = price / TICKET_PRICE
+class LottoTicketVendor(
+    private val dto: LottoTicketCreateDto
+) : TicketVendor() {
 
-        return (0 until amount).map {
+    override fun buyTickets(): List<LottoTicket> {
+        val tickets = mutableListOf<LottoTicket>()
+        tickets.addAll(autoTickets())
+        tickets.addAll(manualTickets())
+
+        return tickets.toList()
+    }
+
+    private fun autoTickets(): List<LottoTicket.AutomaticLottoTicket> {
+        val autoPrice = dto.price - Price(dto.manualAmount.times(TICKET_PRICE))
+        val autoAmount = autoPrice / TICKET_PRICE
+
+        return (0 until autoAmount).map {
             LottoTicket.create()
         }
     }
 
-    companion object {
-        const val TICKET_PRICE: Long = 1000
+    private fun manualTickets(): List<LottoTicket.ManualLottoTicket> {
+        return dto.manualRequest.map {
+            LottoTicket.ManualLottoTicket(it.split(","))
+        }
     }
 }

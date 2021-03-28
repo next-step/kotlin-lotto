@@ -3,12 +3,14 @@ package lotto.view
 import lotto.domain.LottoNumber
 import lotto.domain.result.LottoResult
 import lotto.domain.ticket.LottoTicket
+import lotto.domain.ticket.LottoTickets
 import lotto.domain.ticket.WinningBoard
 import lotto.domain.value.Price
 
-fun showLottoTickets(tickets: List<LottoTicket>) {
-    println("${tickets.size}개 구매")
-    tickets.showTickets()
+fun showLottoTickets(tickets: LottoTickets) {
+    println("수동: ${tickets.manualSize()} 자동:${tickets.automaticSize()}개 구매")
+    tickets.tickets
+        .showTickets()
 }
 
 private fun Iterable<LottoTicket>.showTickets() {

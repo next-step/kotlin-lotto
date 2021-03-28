@@ -1,28 +1,27 @@
 package lotto
 
-import lotto.domain.LottoNumber
 import lotto.domain.ticket.LottoTickets
-import lotto.domain.ticket.WinningLotto
-import lotto.domain.ticket.WinningLottoTicket
 import lotto.domain.vender.LottoTicketVendor
-import lotto.view.inputBonusNumber
-import lotto.view.inputPrice
-import lotto.view.inputWinningNumbers
+import lotto.view.lottoRequest
 import lotto.view.showLottoTickets
 import lotto.view.showResultStatic
+import lotto.view.winningLottoRequest
 
-class Lotto {
+object Lotto {
     fun start() {
-        val price = inputPrice()
-        val ticketVendor = LottoTicketVendor()
-        val buyTickets = ticketVendor.buyAutomaticTicket(price)
-        val tickets = LottoTickets(buyTickets)
-        showLottoTickets(tickets.tickets)
+        val purchaseRequest = lottoRequest()
+        val lottoTicketCreateDto = purchaseRequest.toLottoTicketCreateDto()
 
-        val winningTicket = WinningLottoTicket(inputWinningNumbers().toNumbers())
-        val bonusNumber = LottoNumber.of(inputBonusNumber())
-        val lottoResult = tickets.compare(WinningLotto(winningTicket, bonusNumber))
+        val vendor = LottoTicketVendor(lottoTicketCreateDto)
+        val tickets = LottoTickets(vendor.buyTickets())
+        showLottoTickets(tickets)
 
-        showResultStatic(lottoResult, price)
+        val winningRequest = winningLottoRequest()
+        val winningLottoCreator = winningRequest.toWinningLottoCreator()
+
+        val winningLotto = winningLottoCreator.toWinningLotto()
+        val lottoResult = tickets.compare(winningLotto)
+
+        showResultStatic(lottoResult, purchaseRequest.price)
     }
 }

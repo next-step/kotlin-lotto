@@ -42,7 +42,7 @@ internal class WinningLottoTicketTest {
             )
         )
 
-        val lottoTicket = LottoTicket(lottoNumbers)
+        val lottoTicket = LottoTicket.AutomaticLottoTicket(lottoNumbers)
         val bonusNumber = LottoNumber.of(45)
 
         // when

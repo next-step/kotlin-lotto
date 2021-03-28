@@ -1,8 +1,11 @@
 package lotto.domain.vender
 
 import lotto.domain.ticket.LottoTicket
-import lotto.domain.value.Price
 
-interface TicketVendor {
-    fun buyAutomaticTicket(price: Price): List<LottoTicket>
+abstract class TicketVendor {
+    abstract fun buyTickets(): List<LottoTicket>
+
+    companion object {
+        const val TICKET_PRICE: Long = 1000
+    }
 }

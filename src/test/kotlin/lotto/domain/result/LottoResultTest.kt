@@ -28,13 +28,15 @@ internal class LottoResultTest {
     @Test
     fun `로또 결과의 총 상금을 반환한다`() {
         // given
-        val result = LottoResult(listOf(
-            NONE,
-            THREE,
-            FOUR,
-            FIVE,
-            SIX
-        ))
+        val result = LottoResult(
+            listOf(
+                NONE,
+                THREE,
+                FOUR,
+                FIVE,
+                SIX
+            )
+        )
         val expectReward = NONE.reward + THREE.reward + FOUR.reward + FIVE.reward + SIX.reward
 
         // when
