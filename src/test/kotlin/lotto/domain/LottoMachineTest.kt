@@ -35,7 +35,7 @@ class LottoMachineTest {
     fun `로또를 판매 시 받는 돈이 로또금액에 맞게 떨어지 않는 경우 예외를 반환한다`(lottoPrice: Int, money: Int) {
         val expectedMessage = "로또 구매 후 남은 돈이 있을 수 없습니다. money: $money, lottoPrice: $lottoPrice"
         val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), lottoGenerator = FakeLottoGenerator())
-        val result = assertThrows<java.lang.IllegalArgumentException> { lottoMachine.sellLottos(money = Money(money)) }
+        val result = assertThrows<IllegalArgumentException> { lottoMachine.sellLottos(money = Money(money)) }
         assertThat(result.message).isEqualTo(expectedMessage)
     }
 
@@ -47,7 +47,7 @@ class LottoMachineTest {
     fun `로또를 판매 시 받는 돈이 로또 한개의 가격보다 작은 경우 예외를 반환한다`(lottoPrice: Int, money: Int) {
         val expectedMessage = "금액은 로또가격보다 크거나 같아야 합니다. money: $money, lottoPrice: $lottoPrice"
         val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), lottoGenerator = FakeLottoGenerator())
-        val result = assertThrows<java.lang.IllegalArgumentException> { lottoMachine.sellLottos(money = Money(money)) }
+        val result = assertThrows<IllegalArgumentException> { lottoMachine.sellLottos(money = Money(money)) }
         assertThat(result.message).isEqualTo(expectedMessage)
     }
 
@@ -90,7 +90,7 @@ class LottoMachineTest {
         val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), lottoGenerator = DummyLottoGenerator())
 
         val result =
-            assertThrows<java.lang.IllegalArgumentException> { lottoMachine.sellLottos(Money(money), manualLottos) }
+            assertThrows<IllegalArgumentException> { lottoMachine.sellLottos(Money(money), manualLottos) }
 
         assertThat(result.message).isEqualTo(expected)
     }
