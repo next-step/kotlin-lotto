@@ -17,16 +17,25 @@ fun main() {
     InputView.printInputPrice()
     val inputMoney = Reception.receiveNumber()
 
-    val factory = LotteryFactory(inputMoney)
-    ResultView.printCountOfBuyLottery(factory.calculateLotteryCountByPrice())
+    InputView.printInputCountOfManualLottery()
+    val countOfManualLottery = Reception.receiveNumber()
 
-    val createdTicket = factory.buy(RandomNumbersGenerator)
+    InputView.printInputManualLotteryNumbers()
+
+    val manualLotteries = Reception.receiveManualLotteryNumbers(countOfManualLottery)
+
+    val factory = LotteryFactory(inputMoney)
+    val countOfLotteries = factory.calculateLotteryCountByPrice()
+    val countOfAutoLotteries = factory.calculateAutoLotteryCount(countOfLotteries, countOfManualLottery)
+    ResultView.printCountOfBuyLottery(countOfManualLottery, countOfAutoLotteries)
+
+    val createdTicket = factory.buy(RandomNumbersGenerator, manualLotteries)
     val lotteries = createdTicket.lotteries
 
     ResultView.printLotteriesNumbers(lotteries)
 
     printInputLastWinnerLottery()
-    val receiveWinnerLottery = Reception.receiveWinnerLottery()
+    val receiveWinnerLottery = Reception.receiveLotteryNumbers()
 
     printInputBonusBall()
     val inputBonusBall = Reception.receiveNumber()
