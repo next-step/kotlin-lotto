@@ -2,6 +2,7 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -123,13 +124,17 @@ internal class MoneyTest {
         assertThat(result.message).isEqualTo(expected)
     }
 
+    @Test
     fun `비교 연산이 가능하다`() {
-        assertThat(Money(200) > Money(100)).isTrue()
-        assertThat(Money(200) >= Money(100)).isTrue()
-        assertThat(Money(100) >= Money(100)).isTrue()
-        assertThat(Money(100) == Money(100)).isTrue()
-        assertThat(Money(100) < Money(200)).isTrue()
-        assertThat(Money(100) <= Money(200)).isTrue()
-        assertThat(Money(200) <= Money(200)).isTrue()
+        assertAll(
+            "비교 연산이 가능하다",
+            { assertThat(Money(200) > Money(100)).isTrue() },
+            { assertThat(Money(200) >= Money(100)).isTrue() },
+            { assertThat(Money(100) >= Money(100)).isTrue() },
+            { assertThat(Money(100) == Money(100)).isTrue() },
+            { assertThat(Money(100) < Money(200)).isTrue() },
+            { assertThat(Money(100) <= Money(200)).isTrue() },
+            { assertThat(Money(200) <= Money(200)).isTrue() }
+        )
     }
 }
