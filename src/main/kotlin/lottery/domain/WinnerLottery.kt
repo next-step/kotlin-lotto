@@ -1,6 +1,6 @@
 package lottery.domain
 
-class WinnerLottery(numbers: List<Int>, bonusBall: BonusBall) {
+class WinnerLottery(numbers: List<Int>, val bonusBall: BonusBall) {
     init {
         require(numbers.isNotContains(bonusBall)) { "보너스 볼은 당첨 번호에 포함될 수 없습니다." }
     }
