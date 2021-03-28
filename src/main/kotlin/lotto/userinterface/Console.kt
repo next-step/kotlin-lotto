@@ -1,6 +1,7 @@
 package lotto.userinterface
 
 import lotto.dto.LottoNumbersDto
+import lotto.dto.PrizeRankCountDto
 import lotto.dto.StatisticsDto
 import lotto.dto.WinningLottoDto
 
@@ -76,13 +77,19 @@ class Console : UserInterface {
     }
 
     override fun outputWinningStatistics(dto: StatisticsDto) {
-        println("당첨 통계")
-        println("---------")
+        val winningStatisticsMessage =
+            """
+                |당첨 통계 
+                |--------- 
+                |${dto.prizeRankCount.joinToString(System.lineSeparator()) { it.toView() }} 
+                |총 수익률은 ${dto.profitRate}입니다.
+            """.trimMargin()
 
-        dto.prizeRankCount.forEach { println("${matchingCountMessage(it.matchedCount)} (${it.reward}원)- ${it.winnerCount}개") }
-
-        println("총 수익률은 ${dto.profitRate}입니다.")
+        println(winningStatisticsMessage)
     }
+
+    private fun PrizeRankCountDto.toView(): CharSequence =
+        "${matchingCountMessage(this.matchedCount)} (${this.reward}원)- ${this.winnerCount}개"
 
     private fun matchingCountMessage(matchedCount: Int): String {
         var message = "$matchedCount 개 일치"
