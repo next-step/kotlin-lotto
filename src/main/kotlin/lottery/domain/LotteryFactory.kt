@@ -7,20 +7,38 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
         require(unitPrice in DEFAULT_LOTTO_PRICE until inputPrice) { "잘못된 금액을 입력하였습니다." }
     }
 
-    fun buy(generator: NumbersGenerator): Lotteries {
+    fun buy(generator: NumbersGenerator, manualLotteryNumbers: List<List<Int>>): Lotteries {
         val count = calculateLotteryCountByPrice()
 
-        val allNumbers = (START_LOTTERY_COUNT..count).map { generateLotteryNumbers(generator) }
+        val countOfAutoLottery = calculateAutoLotteryCount(count, manualLotteryNumbers.size)
 
-        return Lotteries.of(allNumbers)
+        val autoLotteryNumbers = generateAutoLotteryNumbers(countOfAutoLottery, generator)
+
+        val allLotteryNumbers = merge(autoLotteryNumbers, manualLotteryNumbers)
+
+        return Lotteries.of(allLotteryNumbers)
+    }
+
+    private fun merge(firstNumbers: List<List<Int>>, secondNumbers: List<List<Int>>): List<List<Int>> {
+        return firstNumbers.plus(secondNumbers)
+    }
+
+    private fun generateAutoLotteryNumbers(
+        countOfAutoLottery: Int,
+        generator: NumbersGenerator
+    ): List<List<Int>> = (START_LOTTERY_COUNT..countOfAutoLottery).map { generateLotteryNumbers(generator) }
+
+    fun calculateAutoLotteryCount(
+        allLotteryCount: Int,
+        manualLotteryCount: Int
+    ) = allLotteryCount - manualLotteryCount
+
+    fun calculateLotteryCountByPrice(): Int {
+        return (inputPrice / unitPrice)
     }
 
     private fun generateLotteryNumbers(generator: NumbersGenerator): List<Int> {
         return generator.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_SIZE)
-    }
-
-    fun calculateLotteryCountByPrice(): Int {
-        return inputPrice / unitPrice
     }
 
     companion object {
