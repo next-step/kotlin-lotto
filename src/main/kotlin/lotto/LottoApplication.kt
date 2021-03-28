@@ -5,6 +5,7 @@ import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.ManualLottoGenerator
 import lotto.domain.Money
+import lotto.domain.Profit
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.dto.StatisticsDto

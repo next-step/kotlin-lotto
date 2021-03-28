@@ -1,8 +1,4 @@
-package lotto
-
-import lotto.domain.LottoPrize
-import lotto.domain.Money
-import lotto.domain.PositiveNumber
+package lotto.domain
 
 class Profit(private val prizeRankCount: Map<LottoPrize, PositiveNumber>, private val purchaseAmount: Money) {
 
