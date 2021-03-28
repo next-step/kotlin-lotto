@@ -7,12 +7,9 @@ data class StatisticsDto(
     val prizeRankCount: List<PrizeRankCountDto>,
     val profitRate: Double
 ) {
-    constructor(
-        prizeRankCount: Map<LottoPrize, PositiveNumber>,
-        profitRate: Double
-    ) : this(
-        prizeRankCount.map { PrizeRankCountDto(it.key, it.value) },
-        profitRate
+    constructor(prizeRankCount: Map<LottoPrize, PositiveNumber>, profitRate: Double) : this(
+        prizeRankCount = prizeRankCount.map { PrizeRankCountDto(it.key, it.value) },
+        profitRate = profitRate
     )
 }
 
