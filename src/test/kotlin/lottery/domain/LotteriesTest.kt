@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class LotteriesTest {
     @Test
     fun `입력 개수만큼 로또를 생성한다`() {
-        val allNumbers = listOf(TEST_NUMBERS, TEST_NUMBERS, TEST_NUMBERS, TEST_NUMBERS, TEST_NUMBERS)
+        val allNumbers = Numbers(listOf(TEST_NUMBERS, TEST_NUMBERS, TEST_NUMBERS, TEST_NUMBERS, TEST_NUMBERS))
 
         val lotteries = Lotteries.of(allNumbers)
 
@@ -27,7 +27,7 @@ class LotteriesTest {
     @ParameterizedTest
     @ValueSource(ints = [-1, 0, -20])
     fun `입력 개수가 0보다 작은경우 생성되지 않는다`(wrongCount: Int) {
-        val allNumbers = (1..wrongCount).map { TEST_NUMBERS }
+        val allNumbers = Numbers((1..wrongCount).map { TEST_NUMBERS })
 
         assertThrows<IllegalArgumentException> {
             Lotteries.of(allNumbers)

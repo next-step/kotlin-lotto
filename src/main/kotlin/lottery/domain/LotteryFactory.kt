@@ -7,26 +7,22 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
         require(unitPrice in DEFAULT_LOTTO_PRICE until inputPrice) { "잘못된 금액을 입력하였습니다." }
     }
 
-    fun buy(generator: NumbersGenerator, manualLotteryNumbers: List<List<Int>>): Lotteries {
+    fun buy(generator: NumbersGenerator, manualLotteryNumbers: Numbers): Lotteries {
         val count = calculateLotteryCountByPrice()
 
         val countOfAutoLottery = calculateAutoLotteryCount(count, manualLotteryNumbers.size)
 
         val autoLotteryNumbers = generateAutoLotteryNumbers(countOfAutoLottery, generator)
 
-        val allLotteryNumbers = merge(autoLotteryNumbers, manualLotteryNumbers)
+        val allLotteryNumbers = manualLotteryNumbers.merge(autoLotteryNumbers)
 
         return Lotteries.of(allLotteryNumbers)
-    }
-
-    private fun merge(firstNumbers: List<List<Int>>, secondNumbers: List<List<Int>>): List<List<Int>> {
-        return firstNumbers.plus(secondNumbers)
     }
 
     private fun generateAutoLotteryNumbers(
         countOfAutoLottery: Int,
         generator: NumbersGenerator
-    ): List<List<Int>> = (START_LOTTERY_COUNT..countOfAutoLottery).map { generateLotteryNumbers(generator) }
+    ): Numbers = Numbers((START_LOTTERY_COUNT..countOfAutoLottery).map { generateLotteryNumbers(generator) })
 
     fun calculateAutoLotteryCount(
         allLotteryCount: Int,
