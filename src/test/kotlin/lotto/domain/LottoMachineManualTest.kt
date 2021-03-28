@@ -16,7 +16,7 @@ class LottoMachineManualTest {
         val money = 1000
         val manualLottoGenerators = listOf(oneToSixManualLottoGenerator)
         val expected = Lotto(oneToSixLottoNumbers)
-        val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), randomLottoGenerator = DummyLottoGenerator())
+        val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), lottoGenerator = DummyLottoGenerator())
 
         val result = lottoMachine.sellLottos(Money(money), manualLottoGenerators)
 
@@ -28,7 +28,7 @@ class LottoMachineManualTest {
         val money = 3000
         val manualLottoGenerators = listOf(oneToSixManualLottoGenerator)
         val expected = listOf(Lotto(oneToSixLottoNumbers), Lotto(fakeLottoNumbers), Lotto(fakeLottoNumbers))
-        val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), randomLottoGenerator = FakeLottoGenerator())
+        val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), lottoGenerator = FakeLottoGenerator())
 
         val result = lottoMachine.sellLottos(Money(money), manualLottoGenerators)
 
@@ -41,7 +41,7 @@ class LottoMachineManualTest {
         val manualLottoGenerators = listOf(oneToSixManualLottoGenerator, oneToSixManualLottoGenerator)
         val expected =
             "수동 로또를 구매하기에 부족한 금액입니다. money: $money, lottoPrice: $lottoPrice, manualLottoGenerators size: ${manualLottoGenerators.size}"
-        val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), randomLottoGenerator = DummyLottoGenerator())
+        val lottoMachine = LottoMachine(lottoPrice = Money(lottoPrice), lottoGenerator = DummyLottoGenerator())
 
         val result =
             assertThrows<IllegalArgumentException> { lottoMachine.sellLottos(Money(money), manualLottoGenerators) }
