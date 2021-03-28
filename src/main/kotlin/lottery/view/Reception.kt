@@ -2,6 +2,11 @@ package lottery.view
 
 object Reception {
     private const val LOTTERY_NUMBER_DELIMITERS = ","
+    private const val START_INDEX = 1
+
+    fun receiveManualLotteryNumbers(countOfManualLottery: Int): List<List<Int>> {
+        return (START_INDEX..countOfManualLottery).map { receiveLotteryNumbers() }
+    }
 
     fun receiveLotteryNumbers(): List<Int> {
         val splitedNumbers = readLineNotNull().split(LOTTERY_NUMBER_DELIMITERS)
