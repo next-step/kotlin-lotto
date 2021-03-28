@@ -1,9 +1,10 @@
 package lottery.controller
 
-import lottery.domain.BonusBall
-import lottery.domain.LotteryMatcher
 import lottery.domain.Profit
+import lottery.domain.RankCounts
+import lottery.domain.BonusBall
 import lottery.domain.LotteryFactory
+import lottery.domain.Numbers
 import lottery.domain.RandomNumbersGenerator
 import lottery.domain.WinnerLottery
 import lottery.view.InputView
@@ -29,7 +30,7 @@ fun main() {
     val countOfAutoLotteries = factory.calculateAutoLotteryCount(countOfLotteries, countOfManualLottery)
     ResultView.printCountOfBuyLottery(countOfManualLottery, countOfAutoLotteries)
 
-    val createdTicket = factory.buy(RandomNumbersGenerator, manualLotteries)
+    val createdTicket = factory.buy(RandomNumbersGenerator, Numbers(manualLotteries))
     val lotteries = createdTicket.lotteries
 
     ResultView.printLotteriesNumbers(lotteries)
@@ -42,11 +43,7 @@ fun main() {
 
     val winnerLottery = WinnerLottery(receiveWinnerLottery, BonusBall(inputBonusBall))
 
-    val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
-
-    val bonusBall = BonusBall(inputBonusBall)
-
-    val rankCounts = lotteryMatcher.match(bonusBall)
+    val rankCounts = RankCounts(lotteries, winnerLottery)
 
     printMatchNumbers(rankCounts)
 
