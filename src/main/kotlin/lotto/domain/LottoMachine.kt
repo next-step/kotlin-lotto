@@ -1,8 +1,8 @@
 package lotto.domain
 
-class LottoMachine(private val lottoPrice: Money, private val lottoGenerator: LottoGenerator) {
+class LottoMachine(private val lottoPrice: Money, private val randomLottoGenerator: LottoGenerator) {
 
-    fun sellLottos(money: Money, manualLottoGenerators: List<ManualLottoGenerator> = emptyList()): List<Lotto> {
+    fun sellLottos(money: Money, manualLottoGenerators: List<LottoGenerator> = emptyList()): List<Lotto> {
         require(manualLottoGenerators.isEmpty() || money >= lottoPrice * PositiveNumber(manualLottoGenerators.size)) { "수동 로또를 구매하기에 부족한 금액입니다. money: ${money.value}, lottoPrice: ${lottoPrice.value}, manualLottoGenerators size: ${manualLottoGenerators.size}" }
 
         val sellableAllLottoCount = money.sellableLottoCount(lottoPrice)
@@ -10,9 +10,9 @@ class LottoMachine(private val lottoPrice: Money, private val lottoGenerator: Lo
         val manualLottoCount = manualLottoGenerators.count()
         val randomLottoCount = sellableAllLottoCount - manualLottoCount
 
-        val manualLotto = manualLottoGenerators.map { it.generate() }
-        val randomLotto = List(randomLottoCount) { lottoGenerator.generate() }
+        val manualLottos = manualLottoGenerators.map { it.generate() }
+        val randomLottos = List(randomLottoCount) { randomLottoGenerator.generate() }
 
-        return manualLotto + randomLotto
+        return manualLottos + randomLottos
     }
 }
