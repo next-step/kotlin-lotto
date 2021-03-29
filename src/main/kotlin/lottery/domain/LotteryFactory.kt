@@ -19,10 +19,9 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
         return Lotteries.of(allLotteryNumbers)
     }
 
-    private fun generateAutoLotteryNumbers(
-        countOfAutoLottery: Int,
-        generator: NumbersGenerator
-    ): Numbers = Numbers((START_LOTTERY_COUNT..countOfAutoLottery).map { generateLotteryNumbers(generator) })
+    private fun generateAutoLotteryNumbers(countOfAutoLottery: Int, generator: NumbersGenerator): Numbers {
+        return Numbers((START_LOTTERY_COUNT..countOfAutoLottery).map { generateLotteryNumbers(generator) })
+    }
 
     fun calculateAutoLotteryCount(
         allLotteryCount: Int,
@@ -33,8 +32,8 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
         return (inputPrice / unitPrice)
     }
 
-    private fun generateLotteryNumbers(generator: NumbersGenerator): List<Int> {
-        return generator.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_SIZE)
+    private fun generateLotteryNumbers(generator: NumbersGenerator): LotteryNumbers {
+        return LotteryNumbers(generator.generate(MIN_LOTTERY_NUMBER, MAX_LOTTERY_NUMBER, LOTTERY_SIZE))
     }
 
     companion object {
