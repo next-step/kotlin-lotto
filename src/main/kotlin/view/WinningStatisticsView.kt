@@ -2,6 +2,7 @@ package view
 
 import domain.lotto.Lottos
 import domain.money.Money
+import domain.winning.WinningCategory
 import domain.winning.WinningNumbers
 import domain.winning.WinningStatistics
 
@@ -19,9 +20,10 @@ object WinningStatisticsView {
     private fun printCountsMatchedForAllCategories(lottos: Lottos, winningNumbers: WinningNumbers) {
         lottos.matches(winningNumbers)
             .entries
+            .filter { (category) -> category != WinningCategory.LOSE }
             .sortedBy { (category) -> category }
             .forEach { (category, matchCount) ->
-                println("${category.numberOfMatched}개 일치 (${category.prize.value}원)- ${matchCount}개")
+                println("${category.toDescription()} (${category.prize.value}원)- ${matchCount}개")
             }
     }
 
@@ -30,5 +32,14 @@ object WinningStatisticsView {
         lottoPrice: Money
     ) {
         println("총 수익률은 ${statistics.calculateRatioOfIncomeToExpenditure(lottoPrice).value}입니다.")
+    }
+
+    private fun WinningCategory.toDescription(): String = when (this) {
+        WinningCategory.SIX_CORRECT -> "6개 일치"
+        WinningCategory.FIVE_WITH_BONUS_CORRECT -> "5개 일치, 보너스 볼 일치"
+        WinningCategory.FIVE_CORRECT -> "5개 일치"
+        WinningCategory.FOUR_CORRECT -> "4개 일치"
+        WinningCategory.THREE_CORRECT -> "3개 일치"
+        else -> "꽝"
     }
 }

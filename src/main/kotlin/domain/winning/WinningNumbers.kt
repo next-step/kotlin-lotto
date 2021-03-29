@@ -9,7 +9,7 @@ class WinningNumbers(val numbers: LottoNumbers, val bonus: LottoNumber) {
         require(bonus !in numbers)
     }
 
-    fun determineWinning(lotto: Lotto): WinningCategory? {
+    fun determineWinning(lotto: Lotto): WinningCategory {
         return WinningCategory.matchNumberOf(lotto.countMatchedBy(numbers), bonus in lotto.numbers)
     }
 }

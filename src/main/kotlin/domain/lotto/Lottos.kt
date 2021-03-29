@@ -7,7 +7,7 @@ class Lottos(private val values: List<Lotto>) {
     val size: Int = values.size
 
     fun matches(winningNumbers: WinningNumbers): Map<WinningCategory, Int> {
-        return values.mapNotNull { winningNumbers.determineWinning(it) }
+        return values.map { lotto -> winningNumbers.determineWinning(lotto) }
             .groupingBy { it }
             .eachCount()
     }

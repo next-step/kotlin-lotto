@@ -53,7 +53,8 @@ internal class WinningNumbersTest {
         "1,2,3,4,5,7, FIVE_CORRECT",
         "1,2,3,4,7,8, FOUR_CORRECT",
         "1,2,3,7,8,9, THREE_CORRECT",
-        "1,2,3,4,5,45, FIVE_WITH_BONUS_CORRECT"
+        "1,2,3,4,5,45, FIVE_WITH_BONUS_CORRECT",
+        "7,8,9,10,11,12, LOSE"
     )
     internal fun `당첨번호는 로또를 보고 당첨항목을 판별한다`(
         n1: Int,
