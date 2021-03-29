@@ -7,6 +7,10 @@ class LottoNumbers(private val numbers: SortedSet<LottoNumber>) {
         require(numbers.size == SIZE)
     }
 
+    operator fun contains(number: LottoNumber): Boolean {
+        return number in numbers
+    }
+
     fun toList(): List<LottoNumber> {
         return numbers.toList()
     }

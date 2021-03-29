@@ -13,7 +13,7 @@ class WinningNumbers(val numbers: LottoNumbers, val bonus: LottoNumber) {
         val category = WinningCategory.matchNumberOf(lotto.countMatchedBy(numbers))
             ?: return null
 
-        if (category == WinningCategory.FIVE_CORRECT && lotto.numbers.toList().contains(bonus)) {
+        if (category == WinningCategory.FIVE_CORRECT && bonus in lotto.numbers) {
             return WinningCategory.FIVE_WITH_BONUS_CORRECT
         }
 
