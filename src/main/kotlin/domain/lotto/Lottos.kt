@@ -1,6 +1,6 @@
 package domain.lotto
 
-import domain.statistics.WinningCategory
+import domain.winning.WinningCategory
 
 class Lottos(private val values: List<Lotto>) {
     val size: Int = values.size

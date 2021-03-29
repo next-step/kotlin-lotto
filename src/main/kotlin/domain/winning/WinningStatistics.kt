@@ -1,4 +1,4 @@
-package domain.statistics
+package domain.winning
 
 import domain.lotto.LottoNumbers
 import domain.lotto.Lottos

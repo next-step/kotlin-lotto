@@ -1,4 +1,4 @@
-package domain.statistics
+package domain.winning
 
 import domain.money.Money
 

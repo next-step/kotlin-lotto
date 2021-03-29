@@ -3,7 +3,7 @@ package view
 import domain.lotto.LottoNumbers
 import domain.lotto.Lottos
 import domain.money.Money
-import domain.statistics.WinningStatistics
+import domain.winning.WinningStatistics
 
 object WinningStatisticsView {
     fun print(statistics: WinningStatistics, lottos: Lottos, lottoPrice: Money) {

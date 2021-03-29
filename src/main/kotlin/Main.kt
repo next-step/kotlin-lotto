@@ -1,6 +1,6 @@
 import domain.lotto.Lottos
 import domain.money.Money
-import domain.statistics.WinningStatistics
+import domain.winning.WinningStatistics
 import domain.store.LottoStore
 import view.BuyingInputView
 import view.BuyingResultView
