@@ -1,7 +1,9 @@
 package domain.winning
 
+import domain.lotto.Lotto
 import domain.lotto.LottoNumber
 import domain.lotto.lottoNumberOf
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -43,5 +45,36 @@ internal class WinningNumbersTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(createWinningNumbers)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "1,2,3,4,5,6, SIX_CORRECT",
+        "1,2,3,4,5,7, FIVE_CORRECT",
+        "1,2,3,4,7,8, FOUR_CORRECT",
+        "1,2,3,7,8,9, THREE_CORRECT",
+        "1,2,3,4,5,45, FIVE_WITH_BONUS_CORRECT"
+    )
+    internal fun `당첨번호는 로또를 보고 당첨항목을 판별한다`(
+        n1: Int,
+        n2: Int,
+        n3: Int,
+        n4: Int,
+        n5: Int,
+        n6: Int,
+        expectedCategory: WinningCategory
+    ) {
+        // given
+        val winningNumbers = WinningNumbers(
+            numbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
+            bonus = LottoNumber.parse(45)
+        )
+        val lotto = Lotto(lottoNumberOf(n1, n2, n3, n4, n5, n6))
+
+        // when
+        val actual = winningNumbers.determineWinning(lotto)
+
+        // then
+        assertThat(actual).isEqualTo(expectedCategory)
     }
 }
