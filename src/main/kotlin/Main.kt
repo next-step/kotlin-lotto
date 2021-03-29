@@ -15,6 +15,6 @@ fun main() {
     BuyingResultView.print(lottos)
 
     val winningNumbersInput = WinningNumbersInputView.receiveWinningNumbers()
-    val statistics = WinningStatistics(winningNumbersInput.toLottoNumbers(), lottos)
+    val statistics = WinningStatistics(winningNumbersInput.toWinningNumbers(), lottos)
     WinningStatisticsView.print(statistics, lottos, store.price)
 }

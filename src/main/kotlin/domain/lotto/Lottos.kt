@@ -1,12 +1,13 @@
 package domain.lotto
 
 import domain.winning.WinningCategory
+import domain.winning.WinningNumbers
 
 class Lottos(private val values: List<Lotto>) {
     val size: Int = values.size
 
-    fun matches(winningNumbers: LottoNumbers): Map<WinningCategory, Int> {
-        return values.mapNotNull { lotto -> WinningCategory.matchNumberOf(lotto.countMatchedBy(winningNumbers)) }
+    fun matches(winningNumbers: WinningNumbers): Map<WinningCategory, Int> {
+        return values.mapNotNull { winningNumbers.determineWinning(it) }
             .groupingBy { it }
             .eachCount()
     }

@@ -1,10 +1,9 @@
 package domain.winning
 
-import domain.lotto.LottoNumbers
 import domain.lotto.Lottos
 import domain.money.Money
 
-class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: Lottos) {
+class WinningStatistics(val winningNumbers: WinningNumbers, val lottos: Lottos) {
     fun calculateRatioOfIncomeToExpenditure(lottoPrice: Money): IncomeExpenditureRatio {
         return IncomeExpenditureRatio.calculatedBy(
             income = sumPrizes(),

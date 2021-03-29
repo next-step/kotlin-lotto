@@ -1,8 +1,8 @@
 package view
 
-import domain.lotto.LottoNumbers
 import domain.lotto.Lottos
 import domain.money.Money
+import domain.winning.WinningNumbers
 import domain.winning.WinningStatistics
 
 object WinningStatisticsView {
@@ -16,7 +16,7 @@ object WinningStatisticsView {
         println("당첨 통계\n---------")
     }
 
-    private fun printCountsMatchedForAllCategories(lottos: Lottos, winningNumbers: LottoNumbers) {
+    private fun printCountsMatchedForAllCategories(lottos: Lottos, winningNumbers: WinningNumbers) {
         lottos.matches(winningNumbers)
             .entries
             .sortedBy { (category) -> category }

@@ -1,6 +1,7 @@
 package domain.lotto
 
 import domain.winning.WinningCategory
+import domain.winning.WinningNumbers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -10,8 +11,9 @@ class LottosTest {
     @ValueSource(ints = [1, 2])
     fun `총 로또 중 6개 모두 일치하는 로또의 개수를 구한다`(expectedCount: Int) {
         // given
-        val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
-        val lottos = Lottos((1..expectedCount).map { Lotto(winningNumbers) })
+        val numbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
+        val winningNumbers = WinningNumbers(numbers, bonus = LottoNumber.parse(7))
+        val lottos = Lottos((1..expectedCount).map { Lotto(numbers) })
         val expected = mapOf(WinningCategory.SIX_CORRECT to expectedCount)
 
         // when
@@ -25,7 +27,10 @@ class LottosTest {
     @ValueSource(ints = [1, 2])
     fun `총 로또 중 5개 일치하는 로또의 개수를 구한다`(expectedCount: Int) {
         // given
-        val winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
+        val winningNumbers = WinningNumbers(
+            lottoNumberOf(1, 2, 3, 4, 5, 6),
+            bonus = LottoNumber.parse(7)
+        )
         val lottoNumbers = lottoNumberOf(1, 2, 3, 4, 5, 45)
         val lottos = Lottos((1..expectedCount).map { Lotto(lottoNumbers) })
         val expected = mapOf(WinningCategory.FIVE_CORRECT to expectedCount)
