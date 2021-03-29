@@ -41,7 +41,7 @@ data class Money(val value: Long) : Comparable<Money> {
         require(lottoPrice != EMPTY) { "로또 가격이 0원입니다." }
         require(this >= lottoPrice) { "구입금액은 로또가격보다 크거나 같아야 합니다. money: ${this.value}, lottoPrice: ${lottoPrice.value}" }
         require(this % lottoPrice == EMPTY) { "로또 구매 후 남은 돈이 있을 수 없습니다. money: ${this.value}, lottoPrice: ${lottoPrice.value}" }
-        require(minLottoCount == 0 || this >= lottoPrice * PositiveNumber(minLottoCount)) { "수동 로또를 구매하기에 부족한 금액입니다. money: ${this.value}, lottoPrice: ${lottoPrice.value}, minLottoCount: $minLottoCount" }
+        require(minLottoCount == 0 || this >= lottoPrice * PositiveNumber(minLottoCount)) { "로또를 구매하기에 부족한 금액입니다. money: ${this.value}, lottoPrice: ${lottoPrice.value}, minLottoCount: $minLottoCount" }
 
         return this.div(lottoPrice)
     }

@@ -174,7 +174,7 @@ internal class MoneyTest {
     )
     fun `판매가능한 로또 개수를 계산 시 로또개수가 최소 로또 구매 개수보다 작은 경우 예외를 반환한다`(money: Long, lottoPrice: Long, minLottoCount: Int) {
         val expectedMessage =
-            "수동 로또를 구매하기에 부족한 금액입니다. money: $money, lottoPrice: $lottoPrice, minLottoCount: $minLottoCount"
+            "로또를 구매하기에 부족한 금액입니다. money: $money, lottoPrice: $lottoPrice, minLottoCount: $minLottoCount"
 
         val result = assertThrows<IllegalArgumentException> {
             Money(money).sellableLottoCount(Money(lottoPrice), minLottoCount)
