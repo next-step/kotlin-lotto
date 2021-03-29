@@ -1,11 +1,13 @@
 package lottery.view
 
+import lottery.domain.LotteryNumbers
+
 object Reception {
     private const val LOTTERY_NUMBER_DELIMITERS = ","
     private const val START_INDEX = 1
 
-    fun receiveManualLotteryNumbers(countOfManualLottery: Int): List<List<Int>> {
-        return (START_INDEX..countOfManualLottery).map { receiveLotteryNumbers() }
+    fun receiveManualLotteryNumbers(countOfManualLottery: Int): List<LotteryNumbers> {
+        return (START_INDEX..countOfManualLottery).map { LotteryNumbers(receiveLotteryNumbers()) }
     }
 
     fun receiveLotteryNumbers(): List<Int> {
