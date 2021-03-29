@@ -1,6 +1,6 @@
 package lottery.domain
 
-class Numbers(val numbers: List<List<Int>>) : List<List<Int>> by numbers {
+class Numbers(val numbers: List<LotteryNumbers>) : List<LotteryNumbers> by numbers {
     fun merge(inputNumbers: Numbers): Numbers {
         return Numbers(numbers.plus(inputNumbers))
     }
