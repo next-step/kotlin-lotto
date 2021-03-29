@@ -18,12 +18,11 @@ object WinningStatisticsView {
     }
 
     private fun printCountsMatchedForAllCategories(lottos: Lottos, winningNumbers: WinningNumbers) {
-        lottos.matches(winningNumbers)
-            .entries
-            .filter { (category) -> category != WinningCategory.LOSE }
-            .sortedBy { (category) -> category }
-            .forEach { (category, matchCount) ->
-                println("${category.toDescription()} (${category.prize.value}원)- ${matchCount}개")
+        val countByCategory = lottos.matches(winningNumbers)
+        WinningCategory.values()
+            .filter { it != WinningCategory.LOSE }
+            .forEach { category ->
+                println("${category.toDescription()} (${category.prize.value}원)- ${countByCategory[category] ?: 0}개")
             }
     }
 
