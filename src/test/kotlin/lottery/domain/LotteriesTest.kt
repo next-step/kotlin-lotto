@@ -1,7 +1,6 @@
 package lottery.domain
 
 import fixture.LotteryFixture.TEST_LOTTERY_NUMBERS
-import fixture.LotteryFixture.TEST_NUMBERS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -11,8 +10,15 @@ import org.junit.jupiter.params.provider.ValueSource
 class LotteriesTest {
     @Test
     fun `입력 개수만큼 로또를 생성한다`() {
-        val allNumbers = Numbers(listOf(TEST_LOTTERY_NUMBERS, TEST_LOTTERY_NUMBERS,
-            TEST_LOTTERY_NUMBERS, TEST_LOTTERY_NUMBERS, TEST_LOTTERY_NUMBERS))
+        val allNumbers = Numbers(
+            listOf(
+                TEST_LOTTERY_NUMBERS,
+                TEST_LOTTERY_NUMBERS,
+                TEST_LOTTERY_NUMBERS,
+                TEST_LOTTERY_NUMBERS,
+                TEST_LOTTERY_NUMBERS
+            )
+        )
 
         val lotteries = Lotteries.of(allNumbers)
 

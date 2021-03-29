@@ -40,6 +40,5 @@ class LotteryFactory(private val inputPrice: Int, private val unitPrice: Int = D
         private const val LOTTERY_SIZE = 6
         private const val START_LOTTERY_COUNT = 1
         private const val DEFAULT_LOTTO_PRICE = 1000
-
     }
 }
