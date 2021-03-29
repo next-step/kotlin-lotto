@@ -6,7 +6,7 @@ import domain.lotto.LottoNumbers
 
 class WinningNumbers(val numbers: LottoNumbers, val bonus: LottoNumber) {
     init {
-        require(numbers.toList().none { it == bonus })
+        require(bonus !in numbers)
     }
 
     fun determineWinning(lotto: Lotto): WinningCategory? {
