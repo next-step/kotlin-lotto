@@ -3,7 +3,7 @@ package lotto.domain
 class LottoMachine(private val lottoPrice: Money, private val randomLottoGenerator: LottoGenerator) {
 
     fun sellLottos(money: Money, manualLottoGenerators: List<LottoGenerator> = emptyList()): List<Lotto> {
-        val sellableAllLottoCount = money.sellableLottoCount(lottoPrice, PositiveNumber(manualLottoGenerators.count()))
+        val sellableAllLottoCount = money.sellableLottoCount(lottoPrice, manualLottoGenerators.count())
 
         val manualLottoCount = manualLottoGenerators.count()
         val randomLottoCount = sellableAllLottoCount - manualLottoCount
