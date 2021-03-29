@@ -38,7 +38,7 @@ data class WinningCounter private constructor(
                 counter[place] = counter.getValue(place) + 1
             }
 
-            return counter.toMap()
+            return counter
         }
     }
 }

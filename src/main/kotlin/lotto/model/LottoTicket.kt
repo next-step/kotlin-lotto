@@ -3,7 +3,7 @@ package lotto.model
 import lotto.model.number.LottoNumber
 import lotto.model.number.LottoNumbers
 
-class LottoTicket(val lottoNumbers: LottoNumbers) {
+data class LottoTicket(val lottoNumbers: LottoNumbers) {
     constructor(vararg lottoNumbers: Int) : this(LottoNumbers(lottoNumbers.toList()))
 
     constructor(generator: NumbersGenerator = RandomNumbersGenerator()) : this(

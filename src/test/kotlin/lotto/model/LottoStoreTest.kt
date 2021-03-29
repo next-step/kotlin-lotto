@@ -26,9 +26,7 @@ internal class LottoStoreTest {
     ) {
         val result = store.buy(money, listOfLottoNumbers)
 
-        assertThat(result.size).isEqualTo(lottoTickets.size)
-        assertThat(result[0].lottoNumbers).isEqualTo(lottoTickets[0].lottoNumbers)
-        assertThat(result[1].lottoNumbers).isEqualTo(lottoTickets[1].lottoNumbers)
+        assertThat(result).containsAll(lottoTickets)
     }
 
     companion object {
@@ -56,10 +54,7 @@ internal class LottoStoreTest {
                         listOfLottoNumbers,
                         LottoTickets(
                             LottoTicket(listOfLottoNumbers[0]),
-                            LottoTicket(listOfLottoNumbers[1]),
-                            LottoTicket(),
-                            LottoTicket(),
-                            LottoTicket()
+                            LottoTicket(listOfLottoNumbers[1])
                         )
                     )
                 }
