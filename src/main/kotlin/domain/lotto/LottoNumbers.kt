@@ -2,9 +2,13 @@ package domain.lotto
 
 import java.util.SortedSet
 
-class LottoNumbers(val numbers: SortedSet<LottoNumber>) {
+class LottoNumbers(private val numbers: SortedSet<LottoNumber>) {
     init {
         require(numbers.size == SIZE)
+    }
+
+    fun toList(): List<LottoNumber> {
+        return numbers.toList()
     }
 
     fun countIntersection(other: LottoNumbers): Int {

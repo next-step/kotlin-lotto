@@ -5,6 +5,6 @@ import domain.lotto.LottoNumbers
 
 class WinningNumbers(val numbers: LottoNumbers, val bonus: LottoNumber) {
     init {
-        require(numbers.numbers.none { it == bonus })
+        require(numbers.toList().none { it == bonus })
     }
 }
