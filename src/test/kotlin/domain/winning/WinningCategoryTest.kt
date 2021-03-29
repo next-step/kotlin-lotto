@@ -61,4 +61,17 @@ internal class WinningCategoryTest {
         // then
         assertThat(actual).isEqualTo(expectedCategory)
     }
+
+    @ParameterizedTest(name = "5개가 같고, 보너스 번호 포함여부가 {0}면 {1}를 반환해야 한다")
+    @CsvSource(
+        "true, FIVE_WITH_BONUS_CORRECT",
+        "false, FIVE_CORRECT"
+    )
+    internal fun matchingWithBonus(bonusMatched: Boolean, expectedCategory: WinningCategory) {
+        // when
+        val actual = WinningCategory.matchNumberOf(numberOfMatched = 5, bonusMatched = bonusMatched)
+
+        // then
+        assertThat(actual).isEqualTo(expectedCategory)
+    }
 }

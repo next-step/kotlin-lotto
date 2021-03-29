@@ -10,11 +10,12 @@ enum class WinningCategory(val numberOfMatched: Int, val prize: Money) {
     SIX_CORRECT(6, Money(2_000_000_000));
 
     companion object {
-        fun matchNumberOf(numberOfMatched: Int): WinningCategory? = when (numberOfMatched) {
-            3 -> THREE_CORRECT
-            4 -> FOUR_CORRECT
-            5 -> FIVE_CORRECT
-            6 -> SIX_CORRECT
+        fun matchNumberOf(numberOfMatched: Int, bonusMatched: Boolean = false): WinningCategory? = when {
+            numberOfMatched == 3 -> THREE_CORRECT
+            numberOfMatched == 4 -> FOUR_CORRECT
+            numberOfMatched == 5 && bonusMatched -> FIVE_WITH_BONUS_CORRECT
+            numberOfMatched == 5 -> FIVE_CORRECT
+            numberOfMatched == 6 -> SIX_CORRECT
             else -> null
         }
     }

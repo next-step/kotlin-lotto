@@ -10,13 +10,6 @@ class WinningNumbers(val numbers: LottoNumbers, val bonus: LottoNumber) {
     }
 
     fun determineWinning(lotto: Lotto): WinningCategory? {
-        val category = WinningCategory.matchNumberOf(lotto.countMatchedBy(numbers))
-            ?: return null
-
-        if (category == WinningCategory.FIVE_CORRECT && bonus in lotto.numbers) {
-            return WinningCategory.FIVE_WITH_BONUS_CORRECT
-        }
-
-        return category
+        return WinningCategory.matchNumberOf(lotto.countMatchedBy(numbers), bonus in lotto.numbers)
     }
 }
