@@ -17,6 +17,7 @@ import lottery.view.ResultView.printMatchNumbers
 fun main() {
     InputView.printInputPrice()
     val inputMoney = Reception.receiveNumber()
+    val factory = LotteryFactory(inputMoney)
 
     InputView.printInputCountOfManualLottery()
     val countOfManualLottery = Reception.receiveNumber()
@@ -25,7 +26,6 @@ fun main() {
 
     val manualLotteries = Reception.receiveManualLotteryNumbers(countOfManualLottery)
 
-    val factory = LotteryFactory(inputMoney)
     val countOfLotteries = factory.calculateLotteryCountByPrice()
     val countOfAutoLotteries = factory.calculateAutoLotteryCount(countOfLotteries, countOfManualLottery)
     ResultView.printCountOfBuyLottery(countOfManualLottery, countOfAutoLotteries)
@@ -44,7 +44,6 @@ fun main() {
     val winnerLottery = WinnerLottery(receiveWinnerLottery, BonusBall(inputBonusBall))
 
     val rankCounts = RankCounts(lotteries, winnerLottery)
-
     printMatchNumbers(rankCounts)
 
     val profit = Profit.calculate(inputMoney, rankCounts.calculateJackpots())
