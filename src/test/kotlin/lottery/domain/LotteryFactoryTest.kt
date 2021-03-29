@@ -1,7 +1,7 @@
 package lottery.domain
 
 import fixture.LotteryFixture.TEST_GENERATOR
-import fixture.LotteryFixture.TEST_NUMBERS
+import fixture.LotteryFixture.TEST_LOTTERY_NUMBERS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -41,7 +41,7 @@ class LotteryFactoryTest {
     fun `수동 로또 번호를 입력받아 로또들을 생성한다`() {
         val factory = LotteryFactory(30000)
 
-        val buyLotteries = factory.buy(TEST_GENERATOR, Numbers(listOf(TEST_NUMBERS)))
+        val buyLotteries = factory.buy(TEST_GENERATOR, Numbers(listOf(TEST_LOTTERY_NUMBERS)))
 
         assertThat(buyLotteries.lotteries).hasSize(30)
     }
