@@ -5,6 +5,7 @@ import lottery.domain.LotteryNumbers
 object Reception {
     private const val LOTTERY_NUMBER_DELIMITERS = ","
     private const val START_INDEX = 1
+    private const val LOTTERY_NUMBER_SIZE = 6
 
     fun receiveManualLotteryNumbers(countOfManualLottery: Int): List<LotteryNumbers> {
         return (START_INDEX..countOfManualLottery).map { LotteryNumbers(receiveLotteryNumbers()) }
@@ -12,6 +13,9 @@ object Reception {
 
     fun receiveLotteryNumbers(): List<Int> {
         val splitedNumbers = readLineNotNull().split(LOTTERY_NUMBER_DELIMITERS)
+
+        require(splitedNumbers.size == LOTTERY_NUMBER_SIZE) { "로또 번호는 6개이어야 합니다." }
+
         return splitedNumbers.map { it.toIntOrException() }
     }
 
