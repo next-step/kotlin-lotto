@@ -1,11 +1,15 @@
 package lottery.domain
 
-class RankCounts {
-    val rankCounts: HashMap<Rank, Int> = hashMapOf()
+class RankCounts(lottery: List<Lottery>, winnerLottery: WinnerLottery) {
+    val rankCounts: Map<Rank, Int> =
+        lottery.filter { Rank.isInTheRank(countMatchNumbers(winnerLottery, it), hasBonus(it, winnerLottery)) }
+            .groupBy { Rank.valueOf(countMatchNumbers(winnerLottery, it), hasBonus(it, winnerLottery)) }
+            .mapValues { it.value.count() }
 
-    fun addMatchCount(count: Rank) {
-        rankCounts[count] = rankCounts.getOrDefault(count, DEFAULT_MATCH_COUNT) + ADD_COUNT_VALUE
-    }
+    private fun hasBonus(it: Lottery, winnerLottery: WinnerLottery) = it.hasBonusBall(winnerLottery.bonusBall)
+
+    private fun countMatchNumbers(winnerLottery: WinnerLottery, it: Lottery) =
+        winnerLottery.matchCount(it.lotteryNumbers)
 
     fun retrieve(rank: Rank): Int {
         return rankCounts.getOrDefault(rank, DEFAULT_MATCH_COUNT)
@@ -17,6 +21,5 @@ class RankCounts {
 
     companion object {
         const val DEFAULT_MATCH_COUNT = 0
-        const val ADD_COUNT_VALUE = 1
     }
 }

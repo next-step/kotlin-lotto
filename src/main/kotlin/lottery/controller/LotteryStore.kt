@@ -1,10 +1,13 @@
 package lottery.controller
 
-import lottery.domain.BonusBall
-import lottery.domain.LotteryMatcher
-import lottery.domain.Profit
-import lottery.domain.LotteryFactory
+import lottery.domain.Numbers
 import lottery.domain.RandomNumbersGenerator
+import lottery.domain.LotteryNumbers
+import lottery.domain.BonusBall
+import lottery.domain.Profit
+import lottery.domain.Lottery
+import lottery.domain.LotteryFactory
+import lottery.domain.RankCounts
 import lottery.domain.WinnerLottery
 import lottery.view.InputView
 import lottery.view.InputView.printInputBonusBall
@@ -16,31 +19,56 @@ import lottery.view.ResultView.printMatchNumbers
 fun main() {
     InputView.printInputPrice()
     val inputMoney = Reception.receiveNumber()
-
     val factory = LotteryFactory(inputMoney)
-    ResultView.printCountOfBuyLottery(factory.calculateLotteryCountByPrice())
 
-    val createdTicket = factory.buy(RandomNumbersGenerator)
-    val lotteries = createdTicket.lotteries
+    InputView.printInputCountOfManualLottery()
+    val countOfManualLottery = Reception.receiveNumber()
 
-    ResultView.printLotteriesNumbers(lotteries)
+    InputView.printInputManualLotteryNumbers()
 
-    printInputLastWinnerLottery()
-    val receiveWinnerLottery = Reception.receiveWinnerLottery()
+    val manualLotteries = Reception.receiveManualLotteryNumbers(countOfManualLottery)
 
-    printInputBonusBall()
-    val inputBonusBall = Reception.receiveNumber()
+    printCountOfLotteries(factory, countOfManualLottery)
 
-    val winnerLottery = WinnerLottery(receiveWinnerLottery, BonusBall(inputBonusBall))
+    val lotteries = buyLotteries(factory, manualLotteries)
 
-    val lotteryMatcher = LotteryMatcher(winnerLottery, lotteries)
+    val receiveWinnerLottery = receiveWinnerLotteryNumbers()
 
-    val bonusBall = BonusBall(inputBonusBall)
+    val winnerLottery = receiveWinnerLottery(receiveWinnerLottery)
 
-    val rankCounts = lotteryMatcher.match(bonusBall)
+    calculateProfit(lotteries, winnerLottery, inputMoney)
+}
 
+private fun calculateProfit(lotteries: List<Lottery>, winnerLottery: WinnerLottery, inputMoney: Int) {
+    val rankCounts = RankCounts(lotteries, winnerLottery)
     printMatchNumbers(rankCounts)
 
     val profit = Profit.calculate(inputMoney, rankCounts.calculateJackpots())
     ResultView.printProfit(profit)
+}
+
+private fun receiveWinnerLottery(receiveWinnerLottery: List<Int>): WinnerLottery {
+    printInputBonusBall()
+    val inputBonusBall = Reception.receiveNumber()
+    return WinnerLottery(receiveWinnerLottery, BonusBall(inputBonusBall))
+}
+
+private fun receiveWinnerLotteryNumbers(): List<Int> {
+    printInputLastWinnerLottery()
+    return Reception.receiveLotteryNumbers()
+}
+
+private fun buyLotteries(factory: LotteryFactory, manualLotteries: List<LotteryNumbers>): List<Lottery> {
+    val createdTicket = factory.buy(RandomNumbersGenerator, Numbers(manualLotteries))
+    val lotteries = createdTicket.lotteries
+
+    ResultView.printLotteriesNumbers(lotteries)
+    return lotteries
+}
+
+private fun printCountOfLotteries(factory: LotteryFactory, countOfManualLottery: Int) {
+    val countOfLotteries = factory.calculateLotteryCountByPrice()
+    val countOfAutoLotteries = factory.calculateAutoLotteryCount(countOfLotteries, countOfManualLottery)
+
+    ResultView.printCountOfBuyLottery(countOfManualLottery, countOfAutoLotteries)
 }
