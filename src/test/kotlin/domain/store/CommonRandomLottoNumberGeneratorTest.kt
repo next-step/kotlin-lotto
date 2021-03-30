@@ -19,6 +19,6 @@ internal class CommonRandomLottoNumberGeneratorTest {
     @Test
     fun `무작위로또숫자생성기는 로또숫자열의 최대 개수만큼 생성한다`() {
         val quickPick = CommonRandomLottoNumberGenerator().generate()
-        assertThat(quickPick.numbers).hasSize(LottoNumbers.SIZE)
+        assertThat(quickPick.toList()).hasSize(LottoNumbers.SIZE)
     }
 }

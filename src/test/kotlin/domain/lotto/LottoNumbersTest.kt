@@ -93,8 +93,8 @@ internal class LottoNumbersTest {
     }
 
     @Test
-    fun `로또숫자열 내의 로또숫자는 생성 시 순서와 관계없이 정렬되어 있다`() {
-        assertThat(lottoNumberOf(9, 1, 43, 2, 8, 10).numbers)
+    fun `로또숫자열 내의 로또숫자를 리스트로 받으면 생성 시 순서와 관계없이 정렬되어 있다`() {
+        assertThat(lottoNumberOf(9, 1, 43, 2, 8, 10).toList())
             .containsExactlyElementsOf(listOf(1, 2, 8, 9, 10, 43).map { LottoNumber.parse(it) })
     }
 
@@ -115,5 +115,22 @@ internal class LottoNumbersTest {
             .map { it.toInt() }
             .map { LottoNumber.parse(it) }
             .let { LottoNumbers(it.toSortedSet()) }
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "1, true",
+        "7, false"
+    )
+    internal fun `로또숫자열 내의 로또숫자가 포함되어 있는지 알 수 있다`(num: Int, expectedContains: Boolean) {
+        // given
+        val lottoNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6)
+        val lottoNumber = LottoNumber.parse(num)
+
+        // when
+        val actual: Boolean = lottoNumber in lottoNumbers
+
+        // then
+        assertThat(actual).isEqualTo(expectedContains)
     }
 }

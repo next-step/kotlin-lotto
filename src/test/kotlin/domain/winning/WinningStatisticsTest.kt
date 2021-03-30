@@ -1,6 +1,7 @@
-package domain.statistics
+package domain.winning
 
 import domain.lotto.Lotto
+import domain.lotto.LottoNumber
 import domain.lotto.Lottos
 import domain.lotto.lottoNumberOf
 import domain.lotto.lottoOf
@@ -13,10 +14,15 @@ import org.junit.jupiter.params.provider.CsvSource
 
 internal class WinningStatisticsTest {
     @Test
-    fun `당첨통계는 당첨로또숫자열과 로또 리스트와 로또 하나의 가격으로 생성된다`() {
+    fun `당첨통계는 당첨번호와 로또 리스트와 로또 하나의 가격으로 생성된다`() {
+        val winningNumbers = WinningNumbers(
+            lottoNumberOf(1, 2, 3, 4, 5, 6),
+            bonus = LottoNumber.parse(7)
+        )
+
         assertDoesNotThrow {
             WinningStatistics(
-                winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
+                winningNumbers = winningNumbers,
                 lottos = Lottos(listOf(lottoOf(1, 2, 3, 4, 5, 6)))
             )
         }
@@ -31,7 +37,10 @@ internal class WinningStatisticsTest {
     fun `당첨통계는 수익률을 반환한다`(lottoPriceValue: Long, lottoCount: Int, expectedRatio: Double) {
         val lottos = Lottos(List(lottoCount) { Lotto(lottoNumberOf(1, 2, 3, 43, 44, 45)) })
         val statistics = WinningStatistics(
-            winningNumbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
+            winningNumbers = WinningNumbers(
+                lottoNumberOf(1, 2, 3, 4, 5, 6),
+                bonus = LottoNumber.parse(7)
+            ),
             lottos = lottos
         )
         val expected = IncomeExpenditureRatio(expectedRatio)

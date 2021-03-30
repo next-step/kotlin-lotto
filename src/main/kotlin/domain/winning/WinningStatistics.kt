@@ -1,10 +1,9 @@
-package domain.statistics
+package domain.winning
 
-import domain.lotto.LottoNumbers
 import domain.lotto.Lottos
 import domain.money.Money
 
-class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: Lottos) {
+class WinningStatistics(val winningNumbers: WinningNumbers, val lottos: Lottos) {
     fun calculateRatioOfIncomeToExpenditure(lottoPrice: Money): IncomeExpenditureRatio {
         return IncomeExpenditureRatio.calculatedBy(
             income = sumPrizes(),
@@ -13,8 +12,8 @@ class WinningStatistics(val winningNumbers: LottoNumbers, val lottos: Lottos) {
     }
 
     private fun sumPrizes(): Money {
-        return lottos.matches(winningNumbers)
-            .map { (category, matchCount) -> category.prize * matchCount }
-            .fold(Money.ZERO) { acc, money -> acc + money }
+        return lottos.toList()
+            .map { winningNumbers.determineWinning(it) }
+            .fold(Money.ZERO) { acc, category -> acc + category.prize }
     }
 }

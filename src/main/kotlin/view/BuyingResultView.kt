@@ -18,6 +18,6 @@ object BuyingResultView {
     }
 
     private fun printLottoNumbers(lotto: Lotto) {
-        println("[${lotto.numbers.numbers.joinToString { it.value.toString() }}]")
+        println("[${lotto.numbers.toList().joinToString { it.value.toString() }}]")
     }
 }
