@@ -9,7 +9,7 @@ data class WinningNumbersInput(val numbers: List<Int>, val bonus: Int) {
 
     fun toWinningNumbers(): WinningNumbers {
         return WinningNumbers(
-            LottoNumbers.fromList(numbers.map { LottoNumber.parse(it) }),
+            numbers = LottoNumbers.fromList(numbers.map { LottoNumber.parse(it) }),
             bonus = LottoNumber.parse(bonus)
         )
     }

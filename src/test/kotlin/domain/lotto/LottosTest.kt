@@ -28,7 +28,7 @@ class LottosTest {
     fun `총 로또 중 5개 일치하는 로또의 개수를 구한다`(expectedCount: Int) {
         // given
         val winningNumbers = WinningNumbers(
-            lottoNumberOf(1, 2, 3, 4, 5, 6),
+            numbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
             bonus = LottoNumber.parse(7)
         )
         val lottoNumbers = lottoNumberOf(1, 2, 3, 4, 5, 45)
