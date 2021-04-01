@@ -6,17 +6,10 @@ class PurchaseAmount(input: String) {
     init {
         val amount = input.toInt()
         validateNegative(amount)
-        validateUnit(amount)
         this.amount = amount
     }
 
-    fun calculateLottoCount(price: Int): Int {
-        return amount / price
-    }
-
-    private fun validateUnit(amount: Int) {
-        require(amount % 1000 == 0) { "구입할 금액은 천원 단위로 입력할 수 있습니다." }
-    }
+    operator fun div(lottoPrice: LottoPrice): Int = amount / lottoPrice.price
 
     private fun validateNegative(amount: Int) {
         require(amount >= 0) { "구입할 금액은 음수가 될 수 없습니다." }

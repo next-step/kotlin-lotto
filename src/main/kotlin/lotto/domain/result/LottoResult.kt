@@ -8,5 +8,5 @@ class LottoResult(val result: Map<LottoRank, Int>) {
 
     private fun calculateProfit() = result.map { it.key.prize * it.value }.sum().toDouble()
 
-    private fun calculatePurchaseAmount() = (result.values.sum() * LOTTO_PRICE).toDouble()
+    private fun calculatePurchaseAmount() = (result.values.sum() * LOTTO_PRICE.price).toDouble()
 }
