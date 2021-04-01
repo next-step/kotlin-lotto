@@ -16,7 +16,7 @@ internal class PurchaseAmountTest {
     @DisplayName("숫자가 아닌 문자를 입력한 경우 예외 발생")
     @Test
     fun init() {
-        assertThrows<IllegalArgumentException> { PurchaseAmount("a") }
+        assertThrows<NumberFormatException> { PurchaseAmount("a") }
     }
 
     @DisplayName("가격을 인자로 받아 구매할 로또의 개수 반환")

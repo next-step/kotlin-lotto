@@ -17,9 +17,9 @@ class LottoTicket(numbers: Set<LottoNumber>) {
         require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 티켓은 로또 숫자 6개로 이루어져야 합니다." }
     }
 
-    fun getMatchInfo(lottoNumbers: LottoTicket, bonusNumber: LottoNumber): MatchInfo {
-        val matchCount = lottoNumbers.numbers.filter { numbers.contains(it) }.count()
-        val hasBonus = lottoNumbers.numbers.contains(bonusNumber)
+    fun getMatchInfo(winningNumbers: LottoTicket, bonusNumber: LottoNumber): MatchInfo {
+        val matchCount = winningNumbers.numbers.count { numbers.contains(it) }
+        val hasBonus = winningNumbers.numbers.contains(bonusNumber)
         return MatchInfo.of(matchCount, hasBonus)
     }
 

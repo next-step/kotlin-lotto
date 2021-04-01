@@ -22,7 +22,8 @@ class LottoController private constructor(
         outputView.printInputBonusNumberMessage()
         val bonusNumber = inputView.read()
 
-        val result = WinningLotto.of(winningNumbers, bonusNumber).match(tickets)
+        val result = WinningLotto.of(winningNumbers, bonusNumber)
+            .match(tickets)
         outputView.printLottoResult(result)
     }
 
