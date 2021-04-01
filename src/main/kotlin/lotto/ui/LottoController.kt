@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.LottoNumberFactory
 import lotto.domain.LottoStore
 import lotto.domain.result.WinningLotto
 import lotto.domain.strategy.LottoNumberStrategy
@@ -22,7 +23,7 @@ class LottoController private constructor(
         outputView.printInputBonusNumberMessage()
         val bonusNumber = inputView.read()
 
-        val result = WinningLotto.of(winningNumbers, bonusNumber)
+        val result = WinningLotto.of(LottoNumberFactory.create(winningNumbers), bonusNumber)
             .match(tickets)
         outputView.printLottoResult(result)
     }

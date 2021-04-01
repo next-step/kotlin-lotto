@@ -11,9 +11,8 @@ class WinningLotto private constructor(val numbers: LottoTicket, private val bon
     }
 
     companion object {
-        fun of(input: String, bonusNumber: String): WinningLotto {
-            val lottoTicket = LottoTicket(input.split(",").map { LottoNumber(it.trim()) }.toSet())
-            return WinningLotto(lottoTicket, LottoNumber(bonusNumber))
+        fun of(lottoNumbers: List<LottoNumber>, bonusNumber: String): WinningLotto {
+            return WinningLotto(LottoTicket(lottoNumbers.toSet()), LottoNumber(bonusNumber))
         }
     }
 }
