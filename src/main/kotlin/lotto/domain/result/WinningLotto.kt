@@ -7,7 +7,7 @@ import lotto.domain.LottoTickets
 class WinningLotto private constructor(val numbers: LottoTicket, private val bonusNumber: LottoNumber) {
     fun match(lottoTickets: LottoTickets): LottoResult {
         val matchInfos = lottoTickets.getMatchInfos(numbers, bonusNumber)
-        return LottoRank.rank(matchInfos)
+        return LottoMatcher().rank(matchInfos)
     }
 
     companion object {
