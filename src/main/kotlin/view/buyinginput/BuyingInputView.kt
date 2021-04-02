@@ -1,4 +1,7 @@
-package view
+package view.buyinginput
+
+import view.BuyingInput
+import view.InvalidInput
 
 object BuyingInputView {
     fun receiveAmount(): BuyingInput {

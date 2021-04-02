@@ -2,7 +2,7 @@ import domain.lotto.Lottos
 import domain.money.Money
 import domain.winning.WinningStatistics
 import domain.store.LottoStore
-import view.BuyingInputView
+import view.buyinginput.BuyingInputView
 import view.BuyingResultView
 import view.WinningNumbersInputView
 import view.WinningStatisticsView

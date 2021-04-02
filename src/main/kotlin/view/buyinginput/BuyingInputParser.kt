@@ -1,6 +1,9 @@
-package view
+package view.buyinginput
 
 import domain.lotto.Lotto
+import view.BuyingInput
+import view.BuyingInputParsedResult
+import view.InvalidInput
 
 object BuyingInputParser {
     fun parse(input: String): BuyingInputParsedResult {
