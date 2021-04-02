@@ -7,7 +7,7 @@ object BuyingInputView {
         return readBuyingAmount()
     }
 
-    private fun readBuyingAmount(): BuyingInput {
+    private tailrec fun readBuyingAmount(): BuyingInput {
         val line = readLine()!!
 
         return when (val result = BuyingInputParser.parse(line)) {
