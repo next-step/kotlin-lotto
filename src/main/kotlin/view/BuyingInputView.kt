@@ -10,13 +10,11 @@ object BuyingInputView {
     private fun readBuyingAmount(): BuyingInput {
         val line = readLine()!!
 
-        val result = BuyingInputParser.parse(line)
-
-        when (result) {
-            is BuyingInput -> return result
+        return when (val result = BuyingInputParser.parse(line)) {
+            is BuyingInput -> result
             is InvalidInput -> {
                 println(result.warningMessage)
-                return readBuyingAmount()
+                readBuyingAmount()
             }
         }
     }
