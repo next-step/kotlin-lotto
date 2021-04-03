@@ -22,6 +22,6 @@ internal class PurchaseAmountTest {
     @DisplayName("가격을 인자로 받아 구매할 로또의 개수 반환")
     @Test
     fun calculateLottoCount() {
-        assertThat(PurchaseAmount("3000") / LOTTO_PRICE).isEqualTo(3)
+        assertThat(PurchaseAmount("3000") / LOTTO_PRICE).isEqualTo(LottoCount(3))
     }
 }

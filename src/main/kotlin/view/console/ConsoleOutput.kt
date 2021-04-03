@@ -28,7 +28,8 @@ class ConsoleOutput : OutputView {
     }
 
     override fun printLottoTickets(autoTickets: LottoTickets, manualTickets: LottoTickets) {
-        println("${autoTickets.tickets.size}개를 구매했습니다.")
+        println("수동으로 ${manualTickets.tickets.size}개, 자동으로 ${autoTickets.tickets.size}개를 구매했습니다.")
+        manualTickets.tickets.forEach { printLottoTicket(it) }
         autoTickets.tickets.forEach { printLottoTicket(it) }
     }
 

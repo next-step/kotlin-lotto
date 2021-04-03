@@ -8,8 +8,8 @@ class LottoTickets(val tickets: List<LottoTicket>) {
     }
 
     companion object {
-        fun create(count: Int, shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>): LottoTickets {
-            return LottoTickets((1..count).map { LottoTicket.create(shuffleStrategy) })
+        fun create(count: LottoCount, shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>): LottoTickets {
+            return LottoTickets(count.repeat { LottoTicket.create(shuffleStrategy) })
         }
     }
 }
