@@ -1,22 +1,26 @@
 package lotto.dto
 
 import lotto.domain.LottoPrize
-import java.math.BigDecimal
+import lotto.domain.PositiveNumber
 
-data class StatisticsDto(val prizeRankCount: Map<LottoPrize, Int>, val profitRate: Double) {
-
-    companion object {
-        fun of(result: Map<LottoPrize, Int>, amount: Int): StatisticsDto {
-            val allRewards = result.entries
-                .sumByLong { (lottoPrize, count) -> lottoPrize.reward.toLong() * count }
-
-            val profitRate = BigDecimal(allRewards).divide(BigDecimal(amount))
-
-            return StatisticsDto(result, profitRate.toDouble())
-        }
-    }
+data class StatisticsDto(
+    val prizeRankCount: List<PrizeRankCountDto>,
+    val profitRate: Double
+) {
+    constructor(prizeRankCount: Map<LottoPrize, PositiveNumber>, profitRate: Double) : this(
+        prizeRankCount = prizeRankCount.map { PrizeRankCountDto(it.key, it.value) },
+        profitRate = profitRate
+    )
 }
 
-private inline fun <T> Iterable<T>.sumByLong(selector: (T) -> Long): Long {
-    return map { selector(it) }.sum()
+data class PrizeRankCountDto(
+    val matchedCount: Int,
+    val reward: Long,
+    val winnerCount: Int
+) {
+    constructor(lottoPrize: LottoPrize, winnerCount: PositiveNumber) : this(
+        matchedCount = lottoPrize.count,
+        reward = lottoPrize.reward.value,
+        winnerCount = winnerCount.value
+    )
 }

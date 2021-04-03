@@ -1,15 +1,16 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
-import lotto.domain.LottoResult
+import lotto.domain.ManualLottoGenerator
+import lotto.domain.Money
+import lotto.domain.Profit
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
+import lotto.dto.LottoNumbersDto
 import lotto.dto.StatisticsDto
-import lotto.dto.toLottoNumbersDto
-import lotto.userInterface.Console
-import lotto.userInterface.UserInterface
+import lotto.userinterface.Console
+import lotto.userinterface.UserInterface
 
 fun main() {
     val console = Console()
@@ -22,24 +23,25 @@ class LottoApplication(private val userInterface: UserInterface) {
     private val lottoMachine = LottoMachine(LOTTO_PRICE, RandomLottoGenerator())
 
     fun run() {
-        val amount = userInterface.inputPurchaseAmount()
-        val lottos = lottoMachine.sellLottos(amount)
-        userInterface.outputPurchasedMessage(lottos.toLottoNumbersDto())
+        val amount = userInterface.inputPurchaseAmount(LOTTO_PRICE.value.toInt()).let(::Money)
+        val manualLottoNumbers = userInterface.inputManualLottoNumbers().map { it.map(::LottoNumber) }
 
-        val winningLottoNumbers = userInterface.inputLastWeekWinningLottoNumbers()
-        val winningLottoBonusNumber = userInterface.inputLastWeekWinningLottoBonusNumber()
+        val lottos = lottoMachine.sellLottos(amount, manualLottoNumbers.map(::ManualLottoGenerator))
+        val manualLottoCount = manualLottoNumbers.count()
+        val randomLottoCount = lottos.count() - manualLottoCount
 
-        val winningLotto = run {
-            val lotto = Lotto(winningLottoNumbers.map { LottoNumber(it) })
-            val bonusNumber = LottoNumber(winningLottoBonusNumber)
-            WinningLotto(lotto = lotto, bonusNumber = bonusNumber)
-        }
+        userInterface.outputPurchasedMessage(LottoNumbersDto(manualLottoCount, randomLottoCount, lottos))
 
-        val result = LottoResult(winningLotto, lottos)
-        userInterface.outputWinningStatistics(StatisticsDto.of(result.result(), amount))
+        val (winningLottoNumbers, winningLottoBonusNumber) = userInterface.inputLastWeekWinningLotto()
+        val winningLotto = WinningLotto(lottoNumbers = winningLottoNumbers, bonusNumber = winningLottoBonusNumber)
+
+        val prizeRankCount = winningLotto.calculateLottoPrize(lottos)
+        val profit = Profit(prizeRankCount, amount)
+
+        userInterface.outputWinningStatistics(StatisticsDto(prizeRankCount, profit.rate()))
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1000
+        private val LOTTO_PRICE = Money(1000)
     }
 }

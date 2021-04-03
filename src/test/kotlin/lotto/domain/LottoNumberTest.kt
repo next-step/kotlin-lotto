@@ -19,7 +19,7 @@ class LottoNumberTest {
     @ValueSource(ints = [-1, 0, 46, 100])
     fun `1~45 이외의 로또번호 생성 시 예외를 반환한다`(value: Int) {
         val expectedMessage = "로또번호를 생성할 수 없는 값이다. value: $value"
-        val result: IllegalStateException = assertThrows { LottoNumber(value) }
+        val result: IllegalArgumentException = assertThrows { LottoNumber(value) }
         assertThat(result.message).isEqualTo(expectedMessage)
     }
 
