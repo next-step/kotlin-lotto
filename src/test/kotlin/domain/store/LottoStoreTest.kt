@@ -52,7 +52,10 @@ internal class LottoStoreTest {
         val expected: List<LottoNumbers> = listOf(lottoNumberOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val boughtLottos = store.buyLottos(Money(1000), listOf(lottoNumberOf(1, 2, 3, 4, 5, 6)))
+        val boughtLottos = store.buyLottos(
+            money = Money(1000),
+            manualPicks = ManualPicks(listOf(lottoNumberOf(1, 2, 3, 4, 5, 6)))
+        )
         val actual = boughtLottos.map { it.numbers }
 
         // then
@@ -72,7 +75,10 @@ internal class LottoStoreTest {
         val store = LottoStore(price = Money(1000))
 
         // when
-        val actual = store.buyLottos(Money(money), listOf(lottoNumberOf(1, 2, 3, 4, 5, 6)))
+        val actual = store.buyLottos(
+            money = Money(money),
+            manualPicks = ManualPicks(listOf(lottoNumberOf(1, 2, 3, 4, 5, 6)))
+        )
 
         // then
         assertThat(actual).hasSize(boughtCount)
@@ -81,9 +87,11 @@ internal class LottoStoreTest {
     @Test
     fun `금액에 비례한 구매 수량보다 수동 선택 개수가 많지 않아야 한다`() {
         val store = LottoStore(Money(1000))
-        val manualPicks = listOf(
-            lottoNumberOf(1, 2, 3, 4, 5, 6),
-            lottoNumberOf(1, 2, 3, 4, 5, 6)
+        val manualPicks = ManualPicks(
+            listOf(
+                lottoNumberOf(1, 2, 3, 4, 5, 6),
+                lottoNumberOf(1, 2, 3, 4, 5, 6)
+            )
         )
 
         assertThatIllegalArgumentException().isThrownBy { store.buyLottos(Money(1000), manualPicks) }
@@ -97,14 +105,14 @@ internal class LottoStoreTest {
             override fun generate() = randomNumbers
         }
         val store = LottoStore(Money(1000), randomLottoNumbersGenerator)
-        val manualPicks = listOf(
+        val manualPickNumbersList = listOf(
             lottoNumberOf(1, 2, 3, 4, 5, 6),
             lottoNumberOf(7, 8, 9, 10, 11, 12)
         )
-        val expectedList: List<LottoNumbers> = manualPicks + randomNumbers
+        val expectedList: List<LottoNumbers> = manualPickNumbersList + randomNumbers
 
         // when
-        val boughtLottos = store.buyLottos(Money(3000), manualPicks)
+        val boughtLottos = store.buyLottos(Money(3000), ManualPicks(manualPickNumbersList))
         val actualList = boughtLottos.map { it.numbers }
 
         // then
