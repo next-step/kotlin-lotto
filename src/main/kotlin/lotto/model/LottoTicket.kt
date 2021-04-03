@@ -1,16 +1,20 @@
 package lotto.model
 
-data class LottoTicket(val numbers: LottoNumbers = LottoNumbers.autoCreate()) {
+import lotto.model.number.LottoNumber
+import lotto.model.number.LottoNumbers
 
-    constructor(numbers: List<Int>) : this(LottoNumbers(numbers))
+data class LottoTicket(val lottoNumbers: LottoNumbers) {
+    constructor(vararg lottoNumbers: Int) : this(LottoNumbers(lottoNumbers.toList()))
 
-    fun countMatch(targetNumbers: Set<LottoNumber>): Int {
-        return targetNumbers.count {
-            numbers.contains(it)
-        }
+    fun isMatch(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.isMatch(lottoNumber)
     }
 
-    override fun toString(): String {
-        return numbers.joinToString(separator = ", ", prefix = "[", postfix = "]")
+    fun countMatch(targetNumbers: LottoNumbers): Int {
+        return lottoNumbers.countMatch(targetNumbers)
+    }
+
+    companion object {
+        val PRICE = Money.THOUSAND
     }
 }

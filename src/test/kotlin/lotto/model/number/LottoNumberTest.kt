@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.model.number
 
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -9,7 +9,7 @@ internal class LottoNumberTest {
     @ValueSource(ints = [0, 50])
     fun `로또 번호는 1에서 45 사이의 자연수이다`(number: Int) {
         assertThrows<IllegalArgumentException> {
-            LottoNumber(number)
+            LottoNumber.get(number)
         }
     }
 }

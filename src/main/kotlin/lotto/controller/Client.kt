@@ -1,26 +1,31 @@
 package lotto.controller
 
-import lotto.model.BonusNumbers
 import lotto.model.LottoResult
 import lotto.model.LottoStore
 import lotto.model.Money
-import lotto.model.WinningCounter
-import lotto.model.WinningNumbers
+import lotto.model.RandomNumbersGenerator
+import lotto.model.winning.WinningCondition
+import lotto.model.winning.WinningCounter
+import lotto.model.number.LottoNumber
+import lotto.model.number.LottoNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val moneyAmount = Money(InputView.readLine("구입금액을 입력해 주세요.").toInt())
+    val moneyAmount = Money(InputView.readMoney())
+    val manualTicketCount = InputView.readManualTicketCount()
+    val listOfCandidateNumbers = InputView.readListOfCandidateNumbers(manualTicketCount).map { LottoNumbers(it) }
 
-    val store = LottoStore()
-    val tickets = store.buy(moneyAmount)
+    val store = LottoStore(RandomNumbersGenerator())
+    val tickets = store.buy(moneyAmount, listOfCandidateNumbers)
 
     OutputView.printTickets(tickets)
 
-    val winningNumbers = WinningNumbers(InputView.readLine("지난 주 당첨 번호를 입력해 주세요.").split(",").map { it.toInt() })
-    val bonusNumbers = BonusNumbers(listOf(InputView.readLine("보너스 볼을 입력해 주세요.").toInt()))
+    val winningNumbers = LottoNumbers(InputView.readWinningNumbers())
+    val bonusNumber = LottoNumber.get(InputView.readBonusNumber())
 
-    val winningCounter = WinningCounter(tickets, winningNumbers, bonusNumbers)
+    val winningCounter = WinningCounter(tickets, WinningCondition(winningNumbers, bonusNumber))
+
     val result = LottoResult(winningCounter, moneyAmount)
 
     OutputView.printResult(result)

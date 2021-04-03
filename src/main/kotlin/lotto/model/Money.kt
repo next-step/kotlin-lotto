@@ -1,20 +1,24 @@
 package lotto.model
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 data class Money(val amount: Int) {
-    operator fun div(price: Money): Double {
-        return amount.toDouble() / price.amount.toDouble()
+
+    operator fun plus(other: Money): Money {
+        return Money(amount + other.amount)
     }
 
     operator fun times(other: Int): Money {
         return Money(amount * other)
     }
 
-    operator fun plus(other: Money): Money {
-        return Money(amount + other.amount)
+    operator fun div(other: Money): Double {
+        return BigDecimal(amount).divide(BigDecimal(other.amount), 8, RoundingMode.CEILING).toDouble()
     }
 
     companion object {
-        val zero = Money(0)
-        val thousand = Money(1000)
+        val THOUSAND = Money(1000)
+        val ZERO = Money(0)
     }
 }

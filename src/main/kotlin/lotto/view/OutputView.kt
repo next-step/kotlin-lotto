@@ -6,13 +6,15 @@ import lotto.model.LottoTickets
 object OutputView {
     fun printTickets(tickets: LottoTickets) {
         println("${tickets.size}개를 구매했습니다.")
-        tickets.forEach { println(it) }
+        tickets.forEach {
+            println(it.lottoNumbers.joinToString(separator = ", ", prefix = "[", postfix = "]"))
+        }
     }
 
     fun printResult(result: LottoResult) {
         println("당첨 통계")
         result.winningCounter.forEach { (lottoPlace, count) ->
-            println("${lottoPlace.winningCount}개 일치${if (lottoPlace.bonusCount >= 1) ", 보너스 볼 일치" else ""} (${lottoPlace.winnings.amount}원)- ${count}개")
+            println("${lottoPlace.count}개 일치${if (lottoPlace.bonusExist) ", 보너스 볼 일치" else ""} (${lottoPlace.price.amount}원)- ${count}개")
         }
         println("총 수익률은 ${result.benefitRate}입니다.")
     }
