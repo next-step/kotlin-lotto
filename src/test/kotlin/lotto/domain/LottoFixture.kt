@@ -32,3 +32,5 @@ fun createLottoResult() = mutableMapOf(
     Pair(LottoRank.FIFTH, 0),
     Pair(LottoRank.NONE, 0)
 )
+
+val ONE_TO_SIX = { _: List<LottoNumber> -> createLottoNumbers(1, 2, 3, 4, 5, 6).shuffled() }

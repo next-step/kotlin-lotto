@@ -3,7 +3,7 @@ package lotto.ui
 import lotto.domain.LottoNumberFactory
 import lotto.domain.LottoStore
 import lotto.domain.result.WinningLotto
-import lotto.domain.strategy.LottoNumberStrategy
+import lotto.domain.strategy.RANDOM_SHUFFLE
 import view.InputView
 import view.OutputView
 import view.console.ConsoleInput
@@ -15,7 +15,7 @@ class LottoController private constructor(
 ) {
     fun run() {
         outputView.printPurchaseAmountMessage()
-        val tickets = LottoStore.purchase(inputView.read(), LottoNumberStrategy())
+        val tickets = LottoStore.purchase(inputView.read(), RANDOM_SHUFFLE)
         outputView.printLottoTickets(tickets)
 
         outputView.printInputWinningNumbersMessage()

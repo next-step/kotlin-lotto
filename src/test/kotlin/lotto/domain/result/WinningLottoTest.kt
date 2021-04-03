@@ -2,10 +2,10 @@ package lotto.domain.result
 
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
+import lotto.domain.ONE_TO_SIX
 import lotto.domain.createLotto
 import lotto.domain.createLottoNumbers
 import lotto.domain.createLottoResult
-import lotto.domain.strategy.OneToSixStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -22,7 +22,7 @@ internal class WinningLottoTest {
     @DisplayName("로또 티켓들을 인자로 넣은 경우 LottoResult 반환")
     @Test
     fun match() {
-        val tickets = listOf(LottoTicket.create(OneToSixStrategy()), LottoTicket.create(OneToSixStrategy()))
+        val tickets = listOf(LottoTicket.create(ONE_TO_SIX), LottoTicket.create(ONE_TO_SIX))
         val expected = createLottoResult()
         expected[LottoRank.FIRST] = 2
 

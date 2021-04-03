@@ -1,9 +1,8 @@
 package lotto.domain
 
+import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
+import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 import lotto.domain.result.MatchInfo
-import lotto.domain.strategy.LottoNumberStrategy.Companion.MAX_LOTTO_NUMBER
-import lotto.domain.strategy.LottoNumberStrategy.Companion.MIN_LOTTO_NUMBER
-import lotto.domain.strategy.NumberGenerateStrategy
 
 class LottoTicket(numbers: Set<LottoNumber>) {
     val numbers: Set<LottoNumber>
@@ -29,10 +28,10 @@ class LottoTicket(numbers: Set<LottoNumber>) {
             val list = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).map { LottoNumber(it) }
         }
 
-        fun create(numberStrategy: NumberGenerateStrategy): LottoTicket {
+        fun create(shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>): LottoTicket {
             val numbers = HashSet<LottoNumber>()
             while (numbers.size != LOTTO_NUMBER_COUNT) {
-                numbers.add(lottoCache.list[numberStrategy.generate() - 1])
+                numbers.add(shuffleStrategy(lottoCache.list).first())
             }
             return LottoTicket(numbers)
         }

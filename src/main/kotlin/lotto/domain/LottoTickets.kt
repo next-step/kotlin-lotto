@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.domain.result.MatchInfo
-import lotto.domain.strategy.NumberGenerateStrategy
 
 class LottoTickets(val tickets: List<LottoTicket>) {
     fun getMatchInfos(winningNumbers: LottoTicket, bonusNumber: LottoNumber): List<MatchInfo> {
@@ -9,8 +8,8 @@ class LottoTickets(val tickets: List<LottoTicket>) {
     }
 
     companion object {
-        fun create(count: Int, numberStrategy: NumberGenerateStrategy): LottoTickets {
-            return LottoTickets((1..count).map { LottoTicket.create(numberStrategy) })
+        fun create(count: Int, shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>): LottoTickets {
+            return LottoTickets((1..count).map { LottoTicket.create(shuffleStrategy) })
         }
     }
 }
