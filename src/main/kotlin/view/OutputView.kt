@@ -10,11 +10,15 @@ interface OutputView {
 
     fun printPurchaseAmountMessage()
 
-    fun printLottoTickets(tickets: LottoTickets)
+    fun printLottoTickets(autoTickets: LottoTickets, manualTickets: LottoTickets)
 
     fun printInputWinningNumbersMessage()
 
     fun printLottoResult(result: LottoResult)
 
     fun printInputBonusNumberMessage()
+
+    fun printManualLottoCountMessage()
+
+    fun printInputManualLottoNumbersMessage()
 }

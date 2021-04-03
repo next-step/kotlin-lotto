@@ -19,9 +19,17 @@ class ConsoleOutput : OutputView {
         println("구입금액을 입력해 주세요.")
     }
 
-    override fun printLottoTickets(tickets: LottoTickets) {
-        println("${tickets.tickets.size}개를 구매했습니다.")
-        tickets.tickets.forEach { printLottoTicket(it) }
+    override fun printManualLottoCountMessage() {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+    }
+
+    override fun printInputManualLottoNumbersMessage() {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+    }
+
+    override fun printLottoTickets(autoTickets: LottoTickets, manualTickets: LottoTickets) {
+        println("${autoTickets.tickets.size}개를 구매했습니다.")
+        autoTickets.tickets.forEach { printLottoTicket(it) }
     }
 
     private fun printLottoTicket(ticket: LottoTicket) {

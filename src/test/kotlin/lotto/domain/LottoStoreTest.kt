@@ -5,10 +5,19 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 internal class LottoStoreTest {
-    @DisplayName("로또 구매 금액을 입력한 경우 로또 생성")
+    @DisplayName("자동 로또 생성")
     @Test
-    fun purchase() {
-        val lottoTickets = LottoStore.purchase("2000", ONE_TO_SIX)
+    fun purchaseAuto() {
+        val lottoTickets = LottoStore.purchaseAuto(PurchaseAmount("2000"), ONE_TO_SIX)
+        assertThat(lottoTickets.tickets.size).isEqualTo(2)
+    }
+
+    @DisplayName("수동 로또 생성")
+    @Test
+    fun purchaseManual() {
+        val lottoTickets = LottoStore.purchaseManual(ManualCount(2)) {
+            createLottoNumbers(1, 2, 3, 4, 5, 6)
+        }
         assertThat(lottoTickets.tickets.size).isEqualTo(2)
     }
 }
