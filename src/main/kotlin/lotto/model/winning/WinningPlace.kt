@@ -20,11 +20,7 @@ enum class WinningPlace(val price: Money, val count: Int, val bonusExist: Boolea
                 return candidates.last { it.bonusExist == bonusExist }
             }
 
-            if (candidates.isEmpty()) {
-                return MISS
-            }
-
-            return candidates.first()
+            return candidates.firstOrNull() ?: MISS
         }
 
         private fun isSecondOrThird(candidates: List<WinningPlace>): Boolean {

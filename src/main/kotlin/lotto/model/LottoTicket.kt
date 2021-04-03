@@ -6,10 +6,6 @@ import lotto.model.number.LottoNumbers
 data class LottoTicket(val lottoNumbers: LottoNumbers) {
     constructor(vararg lottoNumbers: Int) : this(LottoNumbers(lottoNumbers.toList()))
 
-    constructor(generator: NumbersGenerator = RandomNumbersGenerator()) : this(
-        LottoNumbers(generator.getNumbers(LottoNumber.MAXIMUM, LottoNumbers.CANDIDATE_SIZE))
-    )
-
     fun isMatch(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.isMatch(lottoNumber)
     }

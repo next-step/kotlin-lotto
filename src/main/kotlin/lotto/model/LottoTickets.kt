@@ -9,10 +9,4 @@ class LottoTickets private constructor(private val lottoTickets: Set<LottoTicket
     operator fun plus(other: LottoTickets): LottoTickets {
         return LottoTickets(lottoTickets + other.lottoTickets)
     }
-
-    companion object {
-        fun issue(ticketCount: Int, generator: NumbersGenerator): LottoTickets {
-            return LottoTickets((1..ticketCount).map { LottoTicket(generator) })
-        }
-    }
 }

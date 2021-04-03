@@ -13,6 +13,6 @@ data class WinningCondition(val winningNumbers: LottoNumbers, val bonusNumber: L
         val winningCount = lottoTicket.countMatch(winningNumbers)
         val bonusMatch = lottoTicket.isMatch(bonusNumber)
 
-        return Pair(winningCount, bonusMatch)
+        return winningCount to bonusMatch
     }
 }

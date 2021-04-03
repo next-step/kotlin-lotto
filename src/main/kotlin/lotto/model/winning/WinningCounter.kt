@@ -14,7 +14,7 @@ data class WinningCounter private constructor(
 ) : Map<WinningPlace, Int> by counter {
     val priceSum: Money
         get() {
-            return counter.toMutableMap().entries.fold(Money.ZERO, sumWinningsTimesCount())
+            return counter.entries.fold(Money.ZERO, sumWinningsTimesCount())
         }
 
     constructor(lottoTickets: LottoTickets, winningCondition: WinningCondition) : this(buildCounter(lottoTickets, winningCondition))
@@ -22,7 +22,7 @@ data class WinningCounter private constructor(
     constructor(vararg counters: Pair<WinningPlace, Int>) : this(counters.associate { it })
 
     private fun sumWinningsTimesCount() =
-        { accu: Money, (winningPlace: WinningPlace, winningCount: Int): MutableMap.MutableEntry<WinningPlace, Int> ->
+        { accu: Money, (winningPlace: WinningPlace, winningCount: Int): Map.Entry<WinningPlace, Int> ->
             accu + winningPlace.price * winningCount
         }
 

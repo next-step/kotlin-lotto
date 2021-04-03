@@ -12,13 +12,8 @@ data class LottoNumber private constructor(private val lottoNumber: Int) : Compa
         private val LOTTO_NUMBERS = (MINIMUM..MAXIMUM).map { LottoNumber(it) }
 
         fun get(lottoNumber: Int): LottoNumber {
-            validate(lottoNumber)
-
-            return LOTTO_NUMBERS[lottoNumber - 1]
-        }
-
-        private fun validate(lottoNumber: Int) {
-            require(lottoNumber in MINIMUM..MAXIMUM) { "로또 숫자는 1부터 45 까지의 자연수입니다!" }
+            return LOTTO_NUMBERS.getOrNull(lottoNumber - 1)
+                ?: throw IllegalArgumentException("로또 숫자는 $MINIMUM 부터 $MAXIMUM 까지의 자연수입니다!")
         }
     }
 }
