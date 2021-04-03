@@ -3,7 +3,7 @@ package lotto.domain
 data class PositiveNumber(val value: Int) {
 
     init {
-        check(value > 0) { "자연수가 아닙니다. value: $value" }
+        require(value > 0) { "자연수가 아닙니다. value: $value" }
     }
 
     operator fun minus(other: PositiveNumber): PositiveNumber {

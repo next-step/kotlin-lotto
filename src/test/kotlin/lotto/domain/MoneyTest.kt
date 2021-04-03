@@ -29,7 +29,7 @@ internal class MoneyTest {
     @ValueSource(ints = [-1, -10, -100])
     fun `음수인 돈을 생성할 수 없다`(value: Long) {
         val expected = "돈은 음수가 될 수 없습니다. value: $value"
-        val result: IllegalStateException = assertThrows { Money(value) }
+        val result: IllegalArgumentException = assertThrows { Money(value) }
         assertThat(result.message).isEqualTo(expected)
     }
 
@@ -62,7 +62,7 @@ internal class MoneyTest {
     )
     fun `뺄셈 결과가 음수면 예외를 반환한다`(value1: Long, value2: Long) {
         val expected = "돈은 음수가 될 수 없습니다. value: ${value1 - value2}"
-        val result: IllegalStateException = assertThrows { Money(value1) - Money(value2) }
+        val result: IllegalArgumentException = assertThrows { Money(value1) - Money(value2) }
         assertThat(result.message).isEqualTo(expected)
     }
 

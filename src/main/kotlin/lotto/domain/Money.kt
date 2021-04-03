@@ -6,7 +6,7 @@ import java.math.RoundingMode
 data class Money(val value: Long) : Comparable<Money> {
 
     init {
-        check(value >= 0) { "돈은 음수가 될 수 없습니다. value: $value" }
+        require(value >= 0) { "돈은 음수가 될 수 없습니다. value: $value" }
     }
 
     constructor(value: Int) : this(value.toLong())
