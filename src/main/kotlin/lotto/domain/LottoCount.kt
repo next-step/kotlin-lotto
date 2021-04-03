@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoCount(private val count: Int) {
+data class LottoCount(val count: Int) {
     constructor(count: String) : this(count.toInt())
 
     operator fun minus(other: LottoCount) = LottoCount(count - other.count)

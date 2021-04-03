@@ -23,11 +23,10 @@ class LottoController private constructor(
         val manualCount = LottoCount(inputView.read())
 
         outputView.printInputManualLottoNumbersMessage()
-        val manualTickets = LottoStore.purchaseManual(manualCount) {
+        val tickets = LottoStore.purchase(purchaseAmount, manualCount, RANDOM_SHUFFLE) {
             LottoNumberFactory.create(inputView.read())
         }
-        val autoTickets = LottoStore.purchaseAuto(purchaseAmount, manualCount, RANDOM_SHUFFLE)
-        outputView.printLottoTickets(autoTickets, manualTickets)
+        outputView.printLottoTickets(tickets, manualCount)
 
         outputView.printInputWinningNumbersMessage()
         val winningNumbers = inputView.read()
@@ -35,7 +34,7 @@ class LottoController private constructor(
         val bonusNumber = inputView.read()
 
         val result = WinningLotto.of(LottoNumberFactory.create(winningNumbers), bonusNumber)
-            .match(autoTickets)
+            .match(tickets)
         outputView.printLottoResult(result)
     }
 

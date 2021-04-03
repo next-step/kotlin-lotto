@@ -1,5 +1,6 @@
 package view
 
+import lotto.domain.LottoCount
 import lotto.domain.LottoTickets
 import lotto.domain.result.LottoResult
 
@@ -10,7 +11,7 @@ interface OutputView {
 
     fun printPurchaseAmountMessage()
 
-    fun printLottoTickets(autoTickets: LottoTickets, manualTickets: LottoTickets)
+    fun printLottoTickets(tickets: LottoTickets, manualCount: LottoCount)
 
     fun printInputWinningNumbersMessage()
 
