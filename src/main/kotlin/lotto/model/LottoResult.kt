@@ -7,13 +7,12 @@ import java.math.RoundingMode
 data class LottoResult(val winningCounter: WinningCounter, private val ticketPriceSum: Money) {
     val benefitRate: Double
         get() {
-            val totalPrice = winningCounter.priceSum
-
-            val benefitRate = totalPrice / ticketPriceSum
-            return ceilToSecond(benefitRate)
+            return BigDecimal(winningCounter.priceSum / ticketPriceSum)
+                .setScale(SCALE, RoundingMode.DOWN)
+                .toDouble()
         }
 
-    private fun ceilToSecond(double: Double): Double {
-        return BigDecimal(double).setScale(2, RoundingMode.DOWN).toDouble()
+    companion object {
+        private const val SCALE = 2
     }
 }

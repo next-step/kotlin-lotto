@@ -2,7 +2,7 @@ package lotto.model.number
 
 import java.util.TreeSet
 
-data class LottoNumbers private constructor(val lottoNumbers: TreeSet<LottoNumber>) : Set<LottoNumber> by lottoNumbers {
+data class LottoNumbers private constructor(private val lottoNumbers: TreeSet<LottoNumber>) : Set<LottoNumber> by lottoNumbers {
     init {
         require(lottoNumbers.size == CANDIDATE_SIZE) { "로또 티켓은 6개의 로또 숫자로 이루어져 있다" }
     }

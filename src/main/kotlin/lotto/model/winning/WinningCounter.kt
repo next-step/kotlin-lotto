@@ -28,7 +28,7 @@ data class WinningCounter private constructor(
 
     companion object {
         private fun buildCounter(lottoTickets: LottoTickets, winningCondition: WinningCondition): Map<WinningPlace, Int> {
-            val counter = mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0, MISS to 0)
+            val counter = buildInitialCounter()
 
             lottoTickets.forEach {
                 val (winningCount, bonusExist) = winningCondition.check(it)
@@ -40,5 +40,8 @@ data class WinningCounter private constructor(
 
             return counter
         }
+
+        private fun buildInitialCounter() =
+            mutableMapOf(FIRST to 0, SECOND to 0, THIRD to 0, FOURTH to 0, FIFTH to 0, MISS to 0)
     }
 }
