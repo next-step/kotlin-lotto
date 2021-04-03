@@ -1,6 +1,10 @@
 package domain.money
 
 data class Money(val value: Long) : Comparable<Money> {
+    init {
+        require(value >= 0)
+    }
+
     operator fun plus(other: Money): Money {
         return Money(this.value + other.value)
     }
@@ -15,10 +19,6 @@ data class Money(val value: Long) : Comparable<Money> {
 
     fun dividedBy(other: Money): Long {
         return this.value / other.value
-    }
-
-    init {
-        require(value >= 0)
     }
 
     companion object {
