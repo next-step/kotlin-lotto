@@ -9,8 +9,14 @@ object ManualPickInputView {
         val LottoNumberParsedResult = readLottoNumbers()
     }
 
-    private fun readLottoNumbers(): LottoNumberParsedResult {
+    private tailrec fun readLottoNumbers(): ParsedManualNumbers {
         val input = readLine()!!
-        return LottoNumberParser.parse(input)
+        return when (val result = LottoNumberParser.parse(input)) {
+            is ParsedManualNumbers -> return result
+            is InvalidManualNumbers -> {
+                println(result.message)
+                readLottoNumbers()
+            }
+        }
     }
 }
