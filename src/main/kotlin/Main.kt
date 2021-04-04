@@ -4,6 +4,7 @@ import domain.winning.WinningStatistics
 import domain.store.LottoStore
 import view.buyinginput.BuyingInputView
 import view.BuyingResultView
+import view.ManualPickInputView
 import view.WinningNumbersInputView
 import view.WinningStatisticsView
 
@@ -11,6 +12,8 @@ fun main() {
     val store = LottoStore(price = Money(1000))
 
     val buyingInput = BuyingInputView.receiveAmount()
+    ManualPickInputView.receiveManualPick()
+
     val lottos = Lottos(store.buyLottos(buyingInput.toMoney()))
     BuyingResultView.print(lottos)
 
