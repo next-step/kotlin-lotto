@@ -11,7 +11,7 @@ object LottoNumberParser {
         val parsedInts = parseIntList(input).filterNotNull()
 
         if (parsedInts.size != LottoNumbers.SIZE) {
-            return InvalidManualNumbers("1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
+            return InvalidManualNumbers("잘못된 로또번호입니다. 1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
         }
 
         return ParsedManualNumbers(parsedInts)

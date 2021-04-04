@@ -29,7 +29,7 @@ internal class LottoNumberParserTest {
     )
     fun `숫자 여섯자리가 아니라면 유효하지않은결과를 반환`(input: String) {
         // given
-        val expected = InvalidManualNumbers("1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
+        val expected = InvalidManualNumbers("잘못된 로또번호입니다. 1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
 
         // when
         val actual = LottoNumberParser.parse(input)
