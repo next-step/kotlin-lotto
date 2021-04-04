@@ -1,4 +1,8 @@
-package view
+package view.manualpick
+
+import view.InvalidManualNumbers
+import view.LottoNumberParser
+import view.ParsedManualNumbers
 
 object ManualPickInputView {
     fun receiveManualPick() {

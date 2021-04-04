@@ -1,4 +1,4 @@
-package view
+package view.manualpick
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest

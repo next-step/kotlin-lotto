@@ -4,7 +4,7 @@ import domain.winning.WinningStatistics
 import domain.store.LottoStore
 import view.buyinginput.BuyingInputView
 import view.BuyingResultView
-import view.ManualPickInputView
+import view.manualpick.ManualPickInputView
 import view.WinningNumbersInputView
 import view.WinningStatisticsView
 

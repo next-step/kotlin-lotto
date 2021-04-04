@@ -1,4 +1,4 @@
-package view
+package view.manualpick
 
 object ManualPickCountParser {
     fun parse(input: String): Int {
