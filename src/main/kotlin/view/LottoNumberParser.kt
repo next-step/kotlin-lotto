@@ -17,6 +17,7 @@ object LottoNumberParser {
         return ParsedManualNumbers(parsedInts)
     }
 
-    private fun parseIntList(input: String) = input.split(",").map { it.trim().toIntOrNull() }
+    private fun parseIntList(input: String) = input.split(",")
+        .map { it.trim().toIntOrNull() }
         .toSet()
 }
