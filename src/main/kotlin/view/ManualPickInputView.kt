@@ -6,7 +6,7 @@ object ManualPickInputView {
         val count = readLine()!!.toInt()
 
         println("수동으로 구매할 번호를 입력해 주세요.")
-        val LottoNumberParsedResult = readLottoNumbers()
+        val results = (1..count).map { readLottoNumbers() }
     }
 
     private tailrec fun readLottoNumbers(): ParsedManualNumbers {
