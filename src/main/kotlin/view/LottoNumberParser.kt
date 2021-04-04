@@ -18,4 +18,5 @@ object LottoNumberParser {
     }
 
     private fun parseIntList(input: String) = input.split(",").map { it.trim().toIntOrNull() }
+        .toSet()
 }

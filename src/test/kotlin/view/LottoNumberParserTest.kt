@@ -39,6 +39,19 @@ internal class LottoNumberParserTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = ["1,1,2,2,3,3"])
+    fun `중복된 숫자가 있다면 유효하지않은결과를 반환`(input: String) {
+        // given
+        val expected = InvalidManualNumbers("잘못된 로또번호입니다. 1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
+
+        // when
+        val actual = LottoNumberParser.parse(input)
+
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
     @CsvSource(
         "'1,2,3,4,5,6';1;2;3;4;5;6",
         "'40,41,42,43,44,45';40;41;42;43;44;45",
