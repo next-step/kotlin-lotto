@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottosTest {
@@ -61,31 +62,20 @@ class LottosTest {
         assertThat(actual).isEqualTo(expected)
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = [3, 10])
-    fun `보유한 로또 중 수동선택 로또의 개수를 반환할 수 있다`(expectedCount: Int) {
+    @ParameterizedTest(name = "보유한 로또 중 {0}의 개수를 {1}개 반환해야 한다")
+    @CsvSource(
+        "MANUAL, 3",
+        "MANUAL, 10",
+        "AUTO, 3",
+        "AUTO, 10"
+    )
+    fun `보유한 로또 중 수동선택 로또의 개수를 반환할 수 있다`(pickType: PickType, expectedCount: Int) {
         // given
-        val manualLotto = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6), PickType.MANUAL)
-        val manuals = List(expectedCount) { manualLotto }
-        val lottos = Lottos(manuals)
+        val lotto = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6), pickType)
+        val lottos = Lottos(List(expectedCount) { lotto })
 
         // when
-        val actual = lottos.countBy(PickType.MANUAL)
-
-        // then
-        assertThat(actual).isEqualTo(expectedCount)
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = [3, 10])
-    fun `보유한 로또 중 자동선택 로또의 개수를 반환할 수 있다`(expectedCount: Int) {
-        // given
-        val autoLotto = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6), PickType.AUTO)
-        val autos = List(expectedCount) { autoLotto }
-        val lottos = Lottos(autos)
-
-        // when
-        val actual = lottos.countBy(PickType.AUTO)
+        val actual = lottos.countBy(pickType)
 
         // then
         assertThat(actual).isEqualTo(expectedCount)
