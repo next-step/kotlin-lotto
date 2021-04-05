@@ -60,4 +60,55 @@ class LottosTest {
         // then
         assertThat(actual).isEqualTo(expected)
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [3, 10])
+    fun `보유한 로또 중 수동선택 로또의 개수를 반환할 수 있다`(expectedCount: Int) {
+        // given
+        val manualLotto = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6), PickType.MANUAL)
+        val manuals = List(expectedCount) { manualLotto }
+        val lottos = Lottos(manuals)
+
+        // when
+        val actual = lottos.countManualPick()
+
+        // then
+        assertThat(actual).isEqualTo(expectedCount)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [3, 10])
+    fun `보유한 로또 중 자동선택 로또의 개수를 반환할 수 있다`(expectedCount: Int) {
+        // given
+        val autoLotto = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6), PickType.AUTO)
+        val autos = List(expectedCount) { autoLotto }
+        val lottos = Lottos(autos)
+
+        // when
+        val actual = lottos.countAutoPick()
+
+        // then
+        assertThat(actual).isEqualTo(expectedCount)
+    }
+
+    @Test
+    fun `수동개수와 자동개수의 합은 총합과 같다`() {
+        // given
+        val manualCount = 5
+        val manualLotto = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6), PickType.MANUAL)
+        val manuals = List(manualCount) { manualLotto }
+
+        val autoCount = 3
+        val autoLotto = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6), PickType.AUTO)
+        val autos = List(autoCount) { autoLotto }
+
+        val lottos = Lottos(manuals + autos)
+        val expectedCount = lottos.size
+
+        // when
+        val actual = lottos.countManualPick() + lottos.countAutoPick()
+
+        // then
+        assertThat(actual).isEqualTo(expectedCount)
+    }
 }

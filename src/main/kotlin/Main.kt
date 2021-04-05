@@ -12,9 +12,9 @@ fun main() {
     val store = LottoStore(price = Money(1000))
 
     val buyingInput = BuyingInputView.receiveAmount()
-    ManualPickInputView.receiveManualPick()
+    val manualPickInput = ManualPickInputView.receiveManualPick()
 
-    val lottos = store.buyLottos(buyingInput.toMoney())
+    val lottos = store.buyLottos(buyingInput.toMoney(), manualPickInput.toManualPicks())
     BuyingResultView.print(lottos)
 
     val winningNumbersInput = WinningNumbersInputView.receiveWinningNumbers()

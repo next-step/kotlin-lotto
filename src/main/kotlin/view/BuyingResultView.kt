@@ -10,7 +10,7 @@ object BuyingResultView {
     }
 
     private fun printLottoCount(lottos: Lottos) {
-        println("${lottos.size}개를 구매했습니다")
+        println("수동으로 ${lottos.countManualPick()}장, 자동으로 ${lottos.countAutoPick()}장 구매했습니다")
     }
 
     private fun printAllLottoNumbers(lottos: Lottos) {

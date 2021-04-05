@@ -1,5 +1,8 @@
 package view
 
+import domain.lotto.LottoNumber
+import domain.lotto.LottoNumbers
+
 sealed class LottoNumberParsedResult
 
 class ParsedManualNumbers(any: List<Int>) : LottoNumberParsedResult() {
@@ -24,6 +27,11 @@ class ParsedManualNumbers(any: List<Int>) : LottoNumberParsedResult() {
 
     override fun hashCode(): Int {
         return numbers.hashCode()
+    }
+
+    fun toLottoNumbers(): LottoNumbers {
+        val lottoNumberList = numbers.map { LottoNumber.parse(it) }
+        return LottoNumbers.fromList(lottoNumberList)
     }
 }
 
