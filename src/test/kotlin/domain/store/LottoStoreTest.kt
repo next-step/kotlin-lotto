@@ -1,7 +1,7 @@
 package domain.store
 
-import domain.lotto.Lotto
 import domain.lotto.LottoNumbers
+import domain.lotto.Lottos
 import domain.lotto.lottoNumberOf
 import domain.money.Money
 import org.assertj.core.api.Assertions
@@ -27,7 +27,7 @@ internal class LottoStoreTest {
     fun `로또판매기에 돈을 주고 로또들을 살 수 있다`() {
         val store = LottoStore(Money(1000))
         assertDoesNotThrow {
-            val lottos: List<Lotto> = store.buyLottos(Money(1000))
+            val lottos: Lottos = store.buyLottos(Money(1000))
         }
     }
 
@@ -42,7 +42,7 @@ internal class LottoStoreTest {
     )
     fun `로또판매기에 준 돈으로 살 수 있는 최대한의 로또를 살 수 있다`(lottoPrice: Long, moneyToBuy: Long, lottoCount: Int) {
         val store = LottoStore(Money(lottoPrice))
-        Assertions.assertThat(store.buyLottos(Money(moneyToBuy))).hasSize(lottoCount)
+        assertThat(store.buyLottos(Money(moneyToBuy)).toList()).hasSize(lottoCount)
     }
 
     @Test
@@ -56,7 +56,7 @@ internal class LottoStoreTest {
             money = Money(1000),
             manualPicks = ManualPicks(listOf(lottoNumberOf(1, 2, 3, 4, 5, 6)))
         )
-        val actual = boughtLottos.map { it.numbers }
+        val actual = boughtLottos.toList().map { it.numbers }
 
         // then
         assertThat(actual).containsAnyElementsOf(expected)
@@ -78,7 +78,7 @@ internal class LottoStoreTest {
         val actual = store.buyLottos(
             money = Money(money),
             manualPicks = ManualPicks(listOf(lottoNumberOf(1, 2, 3, 4, 5, 6)))
-        )
+        ).toList()
 
         // then
         assertThat(actual).hasSize(boughtCount)
@@ -113,7 +113,7 @@ internal class LottoStoreTest {
 
         // when
         val boughtLottos = store.buyLottos(Money(3000), ManualPicks(manualPickNumbersList))
-        val actualList = boughtLottos.map { it.numbers }
+        val actualList = boughtLottos.toList().map { it.numbers }
 
         // then
         assertThat(actualList).containsExactlyElementsOf(expectedList)

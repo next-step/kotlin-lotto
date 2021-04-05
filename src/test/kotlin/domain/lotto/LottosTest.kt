@@ -3,6 +3,8 @@ package domain.lotto
 import domain.winning.WinningCategory
 import domain.winning.WinningNumbers
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -40,5 +42,22 @@ class LottosTest {
 
         // then
         Assertions.assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `로또들을 더하면 더한 순서대로 합쳐진다`() {
+        // given
+        val lotto1st = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6))
+        val lotto2nd = Lotto(lottoNumberOf(2, 3, 4, 5, 6, 7))
+        val lotto3rd = Lotto(lottoNumberOf(3, 4, 5, 6, 7, 8))
+        val lotto4th = Lotto(lottoNumberOf(4, 5, 6, 7, 8, 9))
+        val expected = listOf(lotto1st, lotto2nd, lotto3rd, lotto4th)
+
+        // when
+        val concatenatedLottos = Lottos(listOf(lotto1st, lotto2nd)) + Lottos(listOf(lotto3rd, lotto4th))
+        val actual = concatenatedLottos.toList()
+
+        // then
+        assertThat(actual).isEqualTo(expected)
     }
 }

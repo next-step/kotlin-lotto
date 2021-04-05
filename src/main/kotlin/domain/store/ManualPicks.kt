@@ -2,10 +2,11 @@ package domain.store
 
 import domain.lotto.Lotto
 import domain.lotto.LottoNumbers
+import domain.lotto.Lottos
 
 class ManualPicks(val list: List<LottoNumbers>) {
     val size: Int
         get() = list.size
 
-    fun toLottoList(): List<Lotto> = list.map { Lotto(it) }
+    fun toLottos(): Lottos = Lottos(list.map { Lotto(it) })
 }

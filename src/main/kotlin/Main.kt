@@ -1,4 +1,4 @@
-import domain.lotto.Lottos
+
 import domain.money.Money
 import domain.winning.WinningStatistics
 import domain.store.LottoStore
@@ -14,7 +14,7 @@ fun main() {
     val buyingInput = BuyingInputView.receiveAmount()
     ManualPickInputView.receiveManualPick()
 
-    val lottos = Lottos(store.buyLottos(buyingInput.toMoney()))
+    val lottos = store.buyLottos(buyingInput.toMoney())
     BuyingResultView.print(lottos)
 
     val winningNumbersInput = WinningNumbersInputView.receiveWinningNumbers()

@@ -31,7 +31,9 @@ internal class ManualPicksTest {
         ).map { it.numbers }
 
         // when
-        val actual: List<LottoNumbers> = manualPicks.toLottoList().map { it.numbers }
+        val actual: List<LottoNumbers> = manualPicks.toLottos()
+            .toList()
+            .map { it.numbers }
 
         // then
         assertThat(actual).containsExactlyElementsOf(expected)
