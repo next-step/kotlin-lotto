@@ -11,7 +11,7 @@ internal class LottoNumberParserTest {
     @EmptySource
     fun `빈 문자열일 경우 유효하지않은결과를 반환`(input: String) {
         // given
-        val expected = InvalidManualNumbers("빈 문자열입니다. 다시 입력해 주세요.")
+        val expected = InvalidLottoNumbers("빈 문자열입니다. 다시 입력해 주세요.")
 
         // when
         val actual = LottoNumberParser.parse(input)
@@ -29,7 +29,7 @@ internal class LottoNumberParserTest {
     )
     fun `숫자 여섯자리가 아니라면 유효하지않은결과를 반환`(input: String) {
         // given
-        val expected = InvalidManualNumbers("잘못된 로또번호입니다. 1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
+        val expected = InvalidLottoNumbers("잘못된 로또번호입니다. 1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
 
         // when
         val actual = LottoNumberParser.parse(input)
@@ -42,7 +42,7 @@ internal class LottoNumberParserTest {
     @ValueSource(strings = ["1,1,2,2,3,3"])
     fun `중복된 숫자가 있다면 유효하지않은결과를 반환`(input: String) {
         // given
-        val expected = InvalidManualNumbers("잘못된 로또번호입니다. 1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
+        val expected = InvalidLottoNumbers("잘못된 로또번호입니다. 1부터 45 사이 숫자 여섯 개를 입력해 주세요.")
 
         // when
         val actual = LottoNumberParser.parse(input)
@@ -67,7 +67,7 @@ internal class LottoNumberParserTest {
         n6: Int
     ) {
         // given
-        val expected = ParsedManualNumbers(listOf(n1, n2, n3, n4, n5, n6))
+        val expected = ParsedLottoNumbers(listOf(n1, n2, n3, n4, n5, n6))
 
         val actual = LottoNumberParser.parse(input)
         // when
@@ -91,7 +91,7 @@ internal class LottoNumberParserTest {
         n6: Int
     ) {
         // given
-        val expected = ParsedManualNumbers(listOf(n1, n2, n3, n4, n5, n6))
+        val expected = ParsedLottoNumbers(listOf(n1, n2, n3, n4, n5, n6))
 
         val actual = LottoNumberParser.parse(input)
         // when

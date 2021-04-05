@@ -10,11 +10,11 @@ object WinningNumbersInputView {
         return WinningNumbersInput(winningNumbers, bonus)
     }
 
-    private tailrec fun readLottoNumbers(): ParsedManualNumbers {
+    private tailrec fun readLottoNumbers(): ParsedLottoNumbers {
         val input = readLine()!!
         return when (val result = LottoNumberParser.parse(input)) {
-            is ParsedManualNumbers -> return result
-            is InvalidManualNumbers -> {
+            is ParsedLottoNumbers -> return result
+            is InvalidLottoNumbers -> {
                 println(result.message)
                 readLottoNumbers()
             }

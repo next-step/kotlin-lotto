@@ -1,8 +1,8 @@
 package view.manualpick
 
-import view.InvalidManualNumbers
+import view.InvalidLottoNumbers
 import view.LottoNumberParser
-import view.ParsedManualNumbers
+import view.ParsedLottoNumbers
 
 object ManualPickInputView {
     fun receiveManualPick(): ManualPickInput {
@@ -18,11 +18,11 @@ object ManualPickInputView {
         return ManualPickInput(results)
     }
 
-    private tailrec fun readLottoNumbers(): ParsedManualNumbers {
+    private tailrec fun readLottoNumbers(): ParsedLottoNumbers {
         val input = readLine()!!
         return when (val result = LottoNumberParser.parse(input)) {
-            is ParsedManualNumbers -> return result
-            is InvalidManualNumbers -> {
+            is ParsedLottoNumbers -> return result
+            is InvalidLottoNumbers -> {
                 println(result.message)
                 readLottoNumbers()
             }

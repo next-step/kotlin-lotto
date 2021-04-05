@@ -5,7 +5,7 @@ import domain.lotto.lottoNumberOf
 import domain.store.ManualPicks
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import view.ParsedManualNumbers
+import view.ParsedLottoNumbers
 
 internal class ManualPickInputTest {
     @Test
@@ -13,8 +13,8 @@ internal class ManualPickInputTest {
         // given
 
         val parsedNumbersList = listOf(
-            ParsedManualNumbers(listOf(1, 2, 3, 4, 5, 6)),
-            ParsedManualNumbers(listOf(2, 3, 4, 5, 6, 7))
+            ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+            ParsedLottoNumbers(listOf(2, 3, 4, 5, 6, 7))
         )
 
         val expectedList: List<LottoNumbers> = listOf(

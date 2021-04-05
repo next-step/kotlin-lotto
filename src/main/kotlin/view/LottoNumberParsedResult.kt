@@ -5,7 +5,7 @@ import domain.lotto.LottoNumbers
 
 sealed class LottoNumberParsedResult
 
-class ParsedManualNumbers(any: List<Int>) : LottoNumberParsedResult() {
+class ParsedLottoNumbers(any: List<Int>) : LottoNumberParsedResult() {
     val numbers: Set<Int> = any.toSet()
 
     init {
@@ -18,7 +18,7 @@ class ParsedManualNumbers(any: List<Int>) : LottoNumberParsedResult() {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as ParsedManualNumbers
+        other as ParsedLottoNumbers
 
         if (numbers != other.numbers) return false
 
@@ -35,4 +35,4 @@ class ParsedManualNumbers(any: List<Int>) : LottoNumberParsedResult() {
     }
 }
 
-data class InvalidManualNumbers(val message: String) : LottoNumberParsedResult()
+data class InvalidLottoNumbers(val message: String) : LottoNumberParsedResult()
