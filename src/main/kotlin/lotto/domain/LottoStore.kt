@@ -7,10 +7,10 @@ object LottoStore {
             amount: PurchaseAmount,
             manualCount: LottoCount,
             shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>,
-            purchase: () -> List<LottoNumber>
+            manualPurchaser: () -> List<LottoNumber>
     ): LottoTickets {
         val purchaseCount = amount / LOTTO_PRICE
-        val manual = purchaseManual(manualCount, purchase)
+        val manual = purchaseManual(manualCount, manualPurchaser)
         val auto = purchaseAuto(purchaseCount - manualCount, shuffleStrategy)
         return LottoTickets(manual + auto)
     }
@@ -19,7 +19,7 @@ object LottoStore {
         return count.repeat { LottoTicket.create(shuffleStrategy) }
     }
 
-    fun purchaseManual(manualCount: LottoCount, purchase: () -> List<LottoNumber>): List<LottoTicket> {
-        return manualCount.repeat { LottoTicket(purchase.invoke().toSet()) }
+    fun purchaseManual(manualCount: LottoCount, manualPurchaser: () -> List<LottoNumber>): List<LottoTicket> {
+        return manualCount.repeat { LottoTicket(manualPurchaser.invoke().toSet()) }
     }
 }
