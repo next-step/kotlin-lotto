@@ -2,6 +2,7 @@ package domain.store
 
 import domain.lotto.Lotto
 import domain.lotto.LottoNumbers
+import domain.lotto.PickType
 import domain.lotto.lottoNumberOf
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -37,5 +38,23 @@ internal class ManualPicksTest {
 
         // then
         assertThat(actual).containsExactlyElementsOf(expected)
+    }
+
+    @Test
+    fun `수동선택이 만든 로또는 모두 수동선택이다`() {
+        // given
+        val manualPicks = ManualPicks(
+            listOf(
+                lottoNumberOf(1, 2, 3, 4, 5, 6),
+                lottoNumberOf(2, 3, 4, 5, 6, 7),
+                lottoNumberOf(3, 4, 5, 6, 7, 8)
+            )
+        )
+
+        // when
+        val actual: List<Lotto> = manualPicks.toLottos().toList()
+
+        // then
+        assertThat(actual).allMatch { it.pickType == PickType.MANUAL }
     }
 }

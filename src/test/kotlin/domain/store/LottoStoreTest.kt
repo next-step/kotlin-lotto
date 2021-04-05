@@ -1,13 +1,16 @@
 package domain.store
 
+import domain.lotto.Lotto
 import domain.lotto.LottoNumbers
 import domain.lotto.Lottos
+import domain.lotto.PickType
 import domain.lotto.lottoNumberOf
 import domain.money.Money
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -98,6 +101,17 @@ internal class LottoStoreTest {
     }
 
     @Test
+    fun `수동선택 없이 생성한 로또는 전부 자동타입이다`() {
+        // given
+        val lottoPrice = Money(1000)
+        val store = LottoStore(lottoPrice)
+        // when
+        val actual: List<Lotto> = store.buyLottos(lottoPrice * 10).toList()
+        // then
+        assertThat(actual).hasSize(10).allMatch { it.pickType == PickType.AUTO }
+    }
+
+    @Test
     fun `로또판매기에서 로또를 살 때, 수동 입력한 순서대로 구매한 로또의 맨앞에서부터 바뀐다`() {
         // given
         val randomNumbers = lottoNumberOf(40, 41, 42, 43, 44, 45)
@@ -109,13 +123,15 @@ internal class LottoStoreTest {
             lottoNumberOf(1, 2, 3, 4, 5, 6),
             lottoNumberOf(7, 8, 9, 10, 11, 12)
         )
-        val expectedList: List<LottoNumbers> = manualPickNumbersList + randomNumbers
+        val expectedNumbersList: List<LottoNumbers> = manualPickNumbersList + randomNumbers
 
         // when
-        val boughtLottos = store.buyLottos(Money(3000), ManualPicks(manualPickNumbersList))
-        val actualList = boughtLottos.toList().map { it.numbers }
+        val actualList = store.buyLottos(Money(3000), ManualPicks(manualPickNumbersList)).toList()
 
         // then
-        assertThat(actualList).containsExactlyElementsOf(expectedList)
+        assertAll(
+            { assertThat(actualList.map { it.numbers }).containsExactlyElementsOf(expectedNumbersList) },
+            { assertThat(actualList.take(2)).allMatch { it.pickType == PickType.MANUAL } }
+        )
     }
 }
