@@ -2,6 +2,7 @@ package view
 
 import domain.lotto.Lotto
 import domain.lotto.Lottos
+import domain.lotto.PickType
 
 object BuyingResultView {
     fun print(lottos: Lottos) {
@@ -10,7 +11,7 @@ object BuyingResultView {
     }
 
     private fun printLottoCount(lottos: Lottos) {
-        println("수동으로 ${lottos.countManualPick()}장, 자동으로 ${lottos.countAutoPick()}장 구매했습니다")
+        println("수동으로 ${lottos.countBy(PickType.MANUAL)}장, 자동으로 ${lottos.countBy(PickType.AUTO)}장 구매했습니다")
     }
 
     private fun printAllLottoNumbers(lottos: Lottos) {

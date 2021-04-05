@@ -70,7 +70,7 @@ class LottosTest {
         val lottos = Lottos(manuals)
 
         // when
-        val actual = lottos.countManualPick()
+        val actual = lottos.countBy(PickType.MANUAL)
 
         // then
         assertThat(actual).isEqualTo(expectedCount)
@@ -85,7 +85,7 @@ class LottosTest {
         val lottos = Lottos(autos)
 
         // when
-        val actual = lottos.countAutoPick()
+        val actual = lottos.countBy(PickType.AUTO)
 
         // then
         assertThat(actual).isEqualTo(expectedCount)
@@ -106,7 +106,7 @@ class LottosTest {
         val expectedCount = lottos.size
 
         // when
-        val actual = lottos.countManualPick() + lottos.countAutoPick()
+        val actual = lottos.countBy(PickType.MANUAL) + lottos.countBy(PickType.AUTO)
 
         // then
         assertThat(actual).isEqualTo(expectedCount)

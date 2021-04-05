@@ -18,11 +18,7 @@ class Lottos(private val values: List<Lotto>) {
 
     fun toList(): List<Lotto> = values
 
-    fun countManualPick(): Int {
-        return values.count { it.pickType == PickType.MANUAL }
-    }
-
-    fun countAutoPick(): Int {
-        return values.count { it.pickType == PickType.AUTO }
+    fun countBy(pickType: PickType): Int {
+        return values.count { it.pickType == pickType }
     }
 }
