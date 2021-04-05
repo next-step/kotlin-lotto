@@ -10,8 +10,8 @@ internal class LottoRankTest {
     @DisplayName("일치 개수를 인자로 받아 해당하는 LottoRank 반환")
     @ParameterizedTest
     @MethodSource("provideMatchInfoAndRank")
-    fun of(matchInfo: MatchInfo, rank: LottoRank) {
-        assertThat(LottoRank.of(matchInfo)).isEqualTo(rank)
+    fun from(matchInfo: MatchInfo, rank: LottoRank) {
+        assertThat(LottoRank.from(matchInfo)).isEqualTo(rank)
     }
 
     companion object {

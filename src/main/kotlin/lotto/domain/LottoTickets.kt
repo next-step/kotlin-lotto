@@ -7,10 +7,6 @@ class LottoTickets(val tickets: List<LottoTicket>) {
         return tickets.map { it.getMatchInfo(winningNumbers, bonusNumber) }
     }
 
-    fun concat(lottoTickets: LottoTickets): LottoTickets {
-        return LottoTickets(tickets + lottoTickets.tickets)
-    }
-
     companion object {
         fun create(count: LottoCount, shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>): LottoTickets {
             return LottoTickets(count.repeat { LottoTicket.create(shuffleStrategy) })

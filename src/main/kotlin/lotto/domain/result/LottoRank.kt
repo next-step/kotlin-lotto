@@ -9,7 +9,7 @@ enum class LottoRank(val matchCount: Int, val hasBonus: Boolean, val prize: Long
     NONE(0, false, 0L);
 
     companion object {
-        fun of(matchInfo: MatchInfo): LottoRank {
+        fun from(matchInfo: MatchInfo): LottoRank {
             return values().find { matchInfo.matchCount == it.matchCount && matchInfo.hasBonus == it.hasBonus } ?: NONE
         }
     }

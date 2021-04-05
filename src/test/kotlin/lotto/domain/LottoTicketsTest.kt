@@ -31,18 +31,4 @@ internal class LottoTicketsTest {
             { assertThat(actual.map { it.hasBonus }).isEqualTo(listOf(false, false)) }
         )
     }
-
-    @DisplayName("로또 티켓 두 장을 합친 새로운 로또 티켓 생성")
-    @Test
-    fun concat() {
-        val tickets1 = LottoTickets(listOf(createLotto(1, 2, 3, 4, 5, 6)))
-        val tickets2 = LottoTickets(listOf(createLotto(7, 8, 9, 10, 11, 12)))
-
-        val actual = tickets1.concat(tickets2)
-
-        assertAll(
-            { assertThat(actual.tickets[0].numbers).containsAll(tickets1.tickets[0].numbers) },
-            { assertThat(actual.tickets[1].numbers).containsAll(tickets2.tickets[0].numbers) }
-        )
-    }
 }

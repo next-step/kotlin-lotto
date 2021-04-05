@@ -24,14 +24,12 @@ class LottoTicket(numbers: Set<LottoNumber>) {
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
-        private val lottoCache = object {
-            val list = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).map { LottoNumber(it) }
-        }
+        private val lottoCache = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).map { LottoNumber(it) }
 
         fun create(shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>): LottoTicket {
             val numbers = HashSet<LottoNumber>()
             while (numbers.size != LOTTO_NUMBER_COUNT) {
-                numbers.add(shuffleStrategy(lottoCache.list).first())
+                numbers.add(shuffleStrategy(lottoCache).first())
             }
             return LottoTicket(numbers)
         }
