@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class ParsedLottoNumbersTest {
@@ -43,6 +44,24 @@ internal class ParsedLottoNumbersTest {
 
         // when
         val actual: LottoNumbers = parsedNumbers.toLottoNumbers()
+
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "1, true",
+        "2, true",
+        "7, false",
+        "45, false"
+    )
+    internal fun `추출숫자열은 주어진 정수가 포함되어 있는지를 알려준다`(givenInt: Int, expected: Boolean) {
+        // given
+        val parsedNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+
+        // when
+        val actual = parsedNumbers.contains(givenInt)
 
         // then
         assertThat(actual).isEqualTo(expected)

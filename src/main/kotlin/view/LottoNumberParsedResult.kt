@@ -33,6 +33,10 @@ class ParsedLottoNumbers(any: List<Int>) : LottoNumberParsedResult() {
         val lottoNumberList = numbers.map { LottoNumber.parse(it) }
         return LottoNumbers.fromList(lottoNumberList)
     }
+
+    fun contains(integer: Int): Boolean {
+        return integer in numbers
+    }
 }
 
 data class InvalidLottoNumbers(val message: String) : LottoNumberParsedResult()

@@ -10,7 +10,7 @@ data class LottoNumber(val value: Int) : Comparable<LottoNumber> {
     }
 
     companion object {
-        private val RANGE = 1..45
+        val RANGE = 1..45
 
         val VALUES: List<LottoNumber> = RANGE.map { LottoNumber(it) }
 
