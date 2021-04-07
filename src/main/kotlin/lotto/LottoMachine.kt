@@ -19,10 +19,7 @@ class LottoMachine {
     }
 
     private fun makeLottoPaper(amount: Int, handwritingNumbers: List<String>): LottoPaper {
-        val allLottoNumbers = mutableListOf<LottoNumber>()
-        makeLottoNumbers(handwritingNumbers).let { allLottoNumbers.addAll(it) }
-        allLottoNumbers.addAll(makeLottoNumbers(amount))
-        return LottoPaper(allLottoNumbers.toList())
+        return LottoPaper(makeLottoNumbers(handwritingNumbers).plus(makeLottoNumbers(amount)))
     }
 
     private fun makeLottoNumbers(amount: Int): List<LottoNumber> {
@@ -33,7 +30,9 @@ class LottoMachine {
 
     private fun makeLottoNumbers(handwritingNumbers: List<String>): List<LottoNumber> {
         return handwritingNumbers.map {
-            LottoNumber(it.split(",").map { numberAsString -> numberAsString.trim().toInt() })
+            val numbers: List<Int> = it.split(",")
+                .map { numberAsString -> numberAsString.trim().toInt() }.toSet().sorted()
+            LottoNumber(numbers)
         }
     }
 }
