@@ -20,6 +20,6 @@ object LottoStore {
     }
 
     fun purchaseManual(manualCount: LottoCount, manualPurchaser: () -> List<LottoNumber>): List<LottoTicket> {
-        return manualCount.repeat { LottoTicket(manualPurchaser.invoke().toSet()) }
+        return manualCount.repeat { LottoTicket(manualPurchaser().toSet()) }
     }
 }
