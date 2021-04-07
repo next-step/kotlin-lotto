@@ -4,10 +4,10 @@ object LottoStore {
     val LOTTO_PRICE = LottoPrice(1000)
 
     fun purchase(
-            amount: PurchaseAmount,
-            manualCount: LottoCount,
-            shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>,
-            manualPurchaser: () -> List<LottoNumber>
+        amount: PurchaseAmount,
+        manualCount: LottoCount,
+        shuffleStrategy: (List<LottoNumber>) -> List<LottoNumber>,
+        manualPurchaser: () -> List<LottoNumber>
     ): LottoTickets {
         val purchaseCount = amount / LOTTO_PRICE
         val manual = purchaseManual(manualCount, manualPurchaser)

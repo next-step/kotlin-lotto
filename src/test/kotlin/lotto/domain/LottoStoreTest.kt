@@ -18,7 +18,7 @@ internal class LottoStoreTest {
     @Test
     fun purchaseAuto() {
         val lottoTickets = LottoStore.purchaseAuto(LottoCount(2), ONE_TO_SIX)
-        assertThat(lottoTickets.tickets.size).isEqualTo(2)
+        assertThat(lottoTickets.size).isEqualTo(2)
     }
 
     @DisplayName("수동 로또 생성")
@@ -27,6 +27,6 @@ internal class LottoStoreTest {
         val lottoTickets = LottoStore.purchaseManual(LottoCount(2)) {
             createLottoNumbers(1, 2, 3, 4, 5, 6)
         }
-        assertThat(lottoTickets.tickets.size).isEqualTo(2)
+        assertThat(lottoTickets.size).isEqualTo(2)
     }
 }
