@@ -4,10 +4,12 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-
     val inputPayment = InputView.inputPayment()
+    val inputHandwritingCount = InputView.inputHandwritingCount()
+    val inputLottoNumbers: List<String> = InputView.inputLottoNumbers(inputHandwritingCount)
+
     val lottoMachine = LottoMachine()
-    val lottoPaper: LottoPaper = lottoMachine.issue(inputPayment)
+    val lottoPaper: LottoPaper = lottoMachine.issue(inputPayment, inputLottoNumbers)
 
     OutputView.showPurchases(lottoPaper)
 

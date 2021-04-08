@@ -18,6 +18,7 @@ object OutputView {
 
         LottoRank.values()
             .toList()
+            .filter { it != LottoRank.NONE }
             .sortedByDescending { it.rank }
             .forEach {
                 showPrint(it, lottoRank.getRankCount(it))
