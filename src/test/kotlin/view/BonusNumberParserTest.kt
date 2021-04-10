@@ -10,11 +10,11 @@ internal class BonusNumberParserTest {
     @Test
     fun `숫자가 아니라면 null을 반환`() {
         // given
-        val input = "a"
+        val notANumberString = "a"
         val winningNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val actual = BonusNumberParser.parse(input, winningNumbers)
+        val actual = BonusNumberParser.parse(notANumberString, winningNumbers)
 
         // then
         assertThat(actual).isNull()
@@ -22,12 +22,12 @@ internal class BonusNumberParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["0", "-1", "46"])
-    fun `1부터 45 사이 숫자가 아니라면 null을 반환`(input: String) {
+    fun `1부터 45 사이 숫자가 아니라면 null을 반환`(invalidLottoNumberString: String) {
         // given
         val winningNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val actual = BonusNumberParser.parse(input, winningNumbers)
+        val actual = BonusNumberParser.parse(invalidLottoNumberString, winningNumbers)
 
         // then
         assertThat(actual).isNull()
@@ -35,12 +35,12 @@ internal class BonusNumberParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["1", "2", "3", "4", "5", "6"])
-    fun `숫자가 당첨번호에 포함되어 있다면 null을 반환`(input: String) {
+    fun `숫자가 당첨번호에 포함되어 있다면 null을 반환`(invalidBonusNumberString: String) {
         // given
         val winningNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val actual = BonusNumberParser.parse(input, winningNumbers)
+        val actual = BonusNumberParser.parse(invalidBonusNumberString, winningNumbers)
 
         // then
         assertThat(actual).isNull()
@@ -52,12 +52,12 @@ internal class BonusNumberParserTest {
         "'11', 11",
         "'45', 45"
     )
-    fun `숫자가 당첨번호에 포함되지 않은 1부터 45사이의 숫자면 해당 값을 반환`(input: String, expected: Int) {
+    fun `숫자가 당첨번호에 포함되지 않은 1부터 45사이의 숫자면 해당 값을 반환`(bonusNumberString: String, expected: Int) {
         // given
         val exceptNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val actual = BonusNumberParser.parse(input, exceptNumbers)
+        val actual = BonusNumberParser.parse(bonusNumberString, exceptNumbers)
 
         // then
         assertThat(actual).isEqualTo(expected)
