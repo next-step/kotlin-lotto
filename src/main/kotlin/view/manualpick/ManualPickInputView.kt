@@ -21,8 +21,7 @@ object ManualPickInputView {
     }
 
     private tailrec fun readLottoNumbers(): ParsedLottoNumbers {
-        val input = readLine()!!
-        return when (val result = LottoNumberParser.parse(input)) {
+        return when (val result = LottoNumberParser.parse(readLine()!!)) {
             is ParsedLottoNumbers -> result
             is InvalidLottoNumbers -> {
                 println(result.message)
