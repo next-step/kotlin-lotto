@@ -14,7 +14,7 @@ object ManualPickInputView {
         }
 
         println("수동으로 구매할 번호를 입력해 주세요.")
-        val results = (1..count).map { readLottoNumbers() }
+        val results = List(count) { readLottoNumbers() }
         return ManualPickInput(results)
     }
 
