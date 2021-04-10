@@ -3,7 +3,7 @@ package domain.lotto
 import domain.winning.WinningCategory
 import domain.winning.WinningNumbers
 
-class Lottos(private val values: List<Lotto>) {
+data class Lottos(private val values: List<Lotto>) {
     val size: Int = values.size
 
     operator fun plus(other: Lottos): Lottos {

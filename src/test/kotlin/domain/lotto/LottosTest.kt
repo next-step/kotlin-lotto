@@ -46,17 +46,32 @@ class LottosTest {
     }
 
     @Test
+    fun `로또들은 객체가 달라도, 가지고 있는 로또리스트가 일치하면 동일하다`() {
+        // given
+        val lotto1st = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6))
+        val lotto2nd = Lotto(lottoNumberOf(2, 3, 4, 5, 6, 7))
+        val lotto3rd = Lotto(lottoNumberOf(3, 4, 5, 6, 7, 8))
+        val lotto4th = Lotto(lottoNumberOf(4, 5, 6, 7, 8, 9))
+
+        // when
+        val one = Lottos(listOf(lotto1st, lotto2nd, lotto3rd, lotto4th))
+        val another = Lottos(listOf(lotto1st, lotto2nd, lotto3rd, lotto4th))
+
+        // then
+        assertThat(one).isEqualTo(another)
+    }
+
+    @Test
     fun `로또들을 더하면 더한 순서대로 합쳐진다`() {
         // given
         val lotto1st = Lotto(lottoNumberOf(1, 2, 3, 4, 5, 6))
         val lotto2nd = Lotto(lottoNumberOf(2, 3, 4, 5, 6, 7))
         val lotto3rd = Lotto(lottoNumberOf(3, 4, 5, 6, 7, 8))
         val lotto4th = Lotto(lottoNumberOf(4, 5, 6, 7, 8, 9))
-        val expected = listOf(lotto1st, lotto2nd, lotto3rd, lotto4th)
+        val expected = Lottos(listOf(lotto1st, lotto2nd, lotto3rd, lotto4th))
 
         // when
-        val concatenatedLottos = Lottos(listOf(lotto1st, lotto2nd)) + Lottos(listOf(lotto3rd, lotto4th))
-        val actual = concatenatedLottos.toList()
+        val actual = Lottos(listOf(lotto1st, lotto2nd)) + Lottos(listOf(lotto3rd, lotto4th))
 
         // then
         assertThat(actual).isEqualTo(expected)
