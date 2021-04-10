@@ -6,7 +6,7 @@ object WinningNumbersInputView {
         val winningNumbers = readLottoNumbers()
 
         println("보너스 볼을 입력해주세요.")
-        val bonus = readBonusNumber(except = winningNumbers)
+        val bonus = readBonusNumber(winningNumbers)
         return WinningNumbersInput(winningNumbers, bonus)
     }
 
@@ -21,14 +21,14 @@ object WinningNumbersInputView {
         }
     }
 
-    private tailrec fun readBonusNumber(except: ParsedLottoNumbers): Int {
-        val result = BonusNumberParser.parse(readLine()!!, except)
+    private tailrec fun readBonusNumber(winningNumbers: ParsedLottoNumbers): Int {
+        val result = BonusNumberParser.parse(readLine()!!, winningNumbers)
 
         if (result != null) {
             return result
         }
 
         println("당첨 번호에 없는 1부터 45 사이의 숫자를 입력해 주세요.")
-        return readBonusNumber(except)
+        return readBonusNumber(winningNumbers)
     }
 }

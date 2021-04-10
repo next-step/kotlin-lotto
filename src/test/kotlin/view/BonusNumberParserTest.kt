@@ -11,10 +11,10 @@ internal class BonusNumberParserTest {
     fun `숫자가 아니라면 null을 반환`() {
         // given
         val input = "a"
-        val exceptNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val actual = BonusNumberParser.parse(input, exceptNumbers)
+        val actual = BonusNumberParser.parse(input, winningNumbers)
 
         // then
         assertThat(actual).isNull()
@@ -24,10 +24,10 @@ internal class BonusNumberParserTest {
     @ValueSource(strings = ["0", "-1", "46"])
     fun `1부터 45 사이 숫자가 아니라면 null을 반환`(input: String) {
         // given
-        val exceptNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val actual = BonusNumberParser.parse(input, exceptNumbers)
+        val actual = BonusNumberParser.parse(input, winningNumbers)
 
         // then
         assertThat(actual).isNull()
@@ -35,12 +35,12 @@ internal class BonusNumberParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["1", "2", "3", "4", "5", "6"])
-    fun `숫자가 예외숫자들에 포함되어 있다면 null을 반환`(input: String) {
+    fun `숫자가 당첨번호에 포함되어 있다면 null을 반환`(input: String) {
         // given
-        val exceptNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val actual = BonusNumberParser.parse(input, exceptNumbers)
+        val actual = BonusNumberParser.parse(input, winningNumbers)
 
         // then
         assertThat(actual).isNull()
@@ -52,7 +52,7 @@ internal class BonusNumberParserTest {
         "'11', 11",
         "'45', 45"
     )
-    fun `숫자가 예외숫자들에 포함되지 않은 1부터 45사이의 숫자면 해당 값을 반환`(input: String, expected: Int) {
+    fun `숫자가 당첨번호에 포함되지 않은 1부터 45사이의 숫자면 해당 값을 반환`(input: String, expected: Int) {
         // given
         val exceptNumbers = ParsedLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
