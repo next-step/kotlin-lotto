@@ -5,7 +5,7 @@ import domain.lotto.Lottos
 import domain.lotto.PickType
 import domain.money.Money
 
-class LottoStore(val price: Money, private val randomLottoNumberGenerator: RandomLottoNumberGenerator = CommonRandomLottoNumberGenerator()) {
+class LottoStore(val price: Money, private val lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator()) {
     init {
         require(price > Money.ZERO)
     }
@@ -23,5 +23,5 @@ class LottoStore(val price: Money, private val randomLottoNumberGenerator: Rando
 
     private fun generateAutoPickLottos(size: Long): Lottos = Lottos((1..size).map { generateLotto() })
 
-    private fun generateLotto() = Lotto(randomLottoNumberGenerator.generate(), PickType.AUTO)
+    private fun generateLotto() = Lotto(lottoNumberGenerator.generate(), PickType.AUTO)
 }

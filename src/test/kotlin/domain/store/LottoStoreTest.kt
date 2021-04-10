@@ -114,16 +114,16 @@ internal class LottoStoreTest {
     @Test
     fun `로또판매기에서 로또를 살 때, 수동 입력한 순서대로 구매한 로또의 맨앞에서부터 바뀐다`() {
         // given
-        val randomNumbers = lottoNumberOf(40, 41, 42, 43, 44, 45)
-        val randomLottoNumbersGenerator = object : RandomLottoNumberGenerator {
-            override fun generate() = randomNumbers
+        val numbersForGenerator = lottoNumberOf(40, 41, 42, 43, 44, 45)
+        val numbersGenerator = object : LottoNumberGenerator {
+            override fun generate() = numbersForGenerator
         }
-        val store = LottoStore(Money(1000), randomLottoNumbersGenerator)
+        val store = LottoStore(Money(1000), numbersGenerator)
         val manualPickNumbersList = listOf(
             lottoNumberOf(1, 2, 3, 4, 5, 6),
             lottoNumberOf(7, 8, 9, 10, 11, 12)
         )
-        val expectedNumbersList: List<LottoNumbers> = manualPickNumbersList + randomNumbers
+        val expectedNumbersList: List<LottoNumbers> = manualPickNumbersList + numbersForGenerator
 
         // when
         val actualList = store.buyLottos(Money(3000), ManualPicks(manualPickNumbersList)).toList()
