@@ -1,5 +1,6 @@
 package view.console
 
+import lotto.domain.LottoCount
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.result.LottoRank
@@ -19,8 +20,16 @@ class ConsoleOutput : OutputView {
         println("구입금액을 입력해 주세요.")
     }
 
-    override fun printLottoTickets(tickets: LottoTickets) {
-        println("${tickets.tickets.size}개를 구매했습니다.")
+    override fun printManualLottoCountMessage() {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+    }
+
+    override fun printInputManualLottoNumbersMessage() {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+    }
+
+    override fun printLottoTickets(tickets: LottoTickets, manualCount: LottoCount) {
+        println("수동으로 ${manualCount.count}개, 자동으로 ${tickets.tickets.size - manualCount.count}개를 구매했습니다.")
         tickets.tickets.forEach { printLottoTicket(it) }
     }
 

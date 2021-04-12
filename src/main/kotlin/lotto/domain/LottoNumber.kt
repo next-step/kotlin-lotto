@@ -1,8 +1,5 @@
 package lotto.domain
 
-import lotto.domain.strategy.LottoNumberStrategy.Companion.MAX_LOTTO_NUMBER
-import lotto.domain.strategy.LottoNumberStrategy.Companion.MIN_LOTTO_NUMBER
-
 data class LottoNumber(private val input: String) {
     val number: Int
 
@@ -16,5 +13,10 @@ data class LottoNumber(private val input: String) {
 
     private fun validateRange(number: Int) {
         require(number in (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)) { "로또 번호는 $MIN_LOTTO_NUMBER 이상 $MAX_LOTTO_NUMBER 이하여야 합니다." }
+    }
+
+    companion object {
+        const val MIN_LOTTO_NUMBER = 1
+        const val MAX_LOTTO_NUMBER = 45
     }
 }

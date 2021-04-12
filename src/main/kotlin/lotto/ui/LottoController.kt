@@ -1,8 +1,11 @@
 package lotto.ui
 
+import lotto.domain.LottoCount
+import lotto.domain.LottoNumberFactory
 import lotto.domain.LottoStore
+import lotto.domain.PurchaseAmount
 import lotto.domain.result.WinningLotto
-import lotto.domain.strategy.LottoNumberStrategy
+import lotto.domain.strategy.RANDOM_SHUFFLE
 import view.InputView
 import view.OutputView
 import view.console.ConsoleInput
@@ -14,15 +17,24 @@ class LottoController private constructor(
 ) {
     fun run() {
         outputView.printPurchaseAmountMessage()
-        val tickets = LottoStore.purchase(inputView.read(), LottoNumberStrategy())
-        outputView.printLottoTickets(tickets)
+        val purchaseAmount = PurchaseAmount(inputView.read())
+
+        outputView.printManualLottoCountMessage()
+        val manualCount = LottoCount(inputView.read())
+
+        outputView.printInputManualLottoNumbersMessage()
+        val tickets = LottoStore.purchase(purchaseAmount, manualCount, RANDOM_SHUFFLE) {
+            LottoNumberFactory.create(inputView.read())
+        }
+        outputView.printLottoTickets(tickets, manualCount)
 
         outputView.printInputWinningNumbersMessage()
         val winningNumbers = inputView.read()
         outputView.printInputBonusNumberMessage()
         val bonusNumber = inputView.read()
 
-        val result = WinningLotto.of(winningNumbers, bonusNumber).match(tickets)
+        val result = WinningLotto.of(LottoNumberFactory.create(winningNumbers), bonusNumber)
+            .match(tickets)
         outputView.printLottoResult(result)
     }
 
