@@ -16,7 +16,7 @@ internal class WinningStatisticsTest {
     @Test
     fun `당첨통계는 당첨번호와 로또 리스트와 로또 하나의 가격으로 생성된다`() {
         val winningNumbers = WinningNumbers(
-            lottoNumberOf(1, 2, 3, 4, 5, 6),
+            numbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
             bonus = LottoNumber.parse(7)
         )
 
@@ -38,7 +38,7 @@ internal class WinningStatisticsTest {
         val lottos = Lottos(List(lottoCount) { Lotto(lottoNumberOf(1, 2, 3, 43, 44, 45)) })
         val statistics = WinningStatistics(
             winningNumbers = WinningNumbers(
-                lottoNumberOf(1, 2, 3, 4, 5, 6),
+                numbers = lottoNumberOf(1, 2, 3, 4, 5, 6),
                 bonus = LottoNumber.parse(7)
             ),
             lottos = lottos

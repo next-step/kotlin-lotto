@@ -39,6 +39,6 @@ object WinningStatisticsView {
         WinningCategory.FIVE_CORRECT -> "5개 일치"
         WinningCategory.FOUR_CORRECT -> "4개 일치"
         WinningCategory.THREE_CORRECT -> "3개 일치"
-        else -> "꽝"
+        WinningCategory.LOSE -> "꽝"
     }
 }

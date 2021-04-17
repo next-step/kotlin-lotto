@@ -1,9 +1,10 @@
-package view
+package view.buyinginput
 
 import domain.money.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import view.BuyingInput
 
 internal class BuyingInputTest {
     @ParameterizedTest
