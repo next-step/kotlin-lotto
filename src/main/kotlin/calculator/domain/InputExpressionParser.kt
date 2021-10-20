@@ -1,11 +1,7 @@
 package calculator.domain
 
 class InputExpressionParser {
-    fun parse(input: String?): Operands {
-        if (input.isNullOrBlank()) {
-            return OPERANDS_OF_ZERO
-        }
-
+    fun parse(input: String): Operands {
         val parsedInput = parseByCustomDelimiter(input) ?: parseByDefaultDelimiter(input)
         return Operands.from(parsedInput)
     }
@@ -28,6 +24,5 @@ class InputExpressionParser {
     companion object {
         private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"
         private val DEFAULT_DELIMITERS = listOf(",", ":")
-        private val OPERANDS_OF_ZERO = Operands.from(listOf("0"))
     }
 }
