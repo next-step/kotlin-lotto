@@ -1,7 +1,5 @@
-package domain
+package calculator.domain
 
-import calculator.domain.Operand
-import calculator.domain.Operands
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -33,7 +31,7 @@ class OperandsTest {
     fun `덧셈 결과가 0인 테스트`(operand1: String?, operand2: String?) {
         val operands = Operands.from(listOf(operand1, operand2) as List<String>)
 
-        assertThat(operands.getSum()).isEqualTo(0);
+        assertThat(operands.getSum()).isEqualTo(0)
     }
 
     @ParameterizedTest
@@ -43,11 +41,11 @@ class OperandsTest {
         "'345', '467'"
     )
     fun `0이상의 숫자를 입력하면 정상적으로 피연산자가 생성된다`(operand1: String, operand2: String) {
-        val operands = Operands.from(listOf(operand1, operand2) as List<String>)
+        val operands = Operands.from(listOf(operand1, operand2))
 
         assertThat(operands).isNotNull
-        assertThat(operands.size()).isEqualTo(2);
-        assertThat(operands[0]).isEqualTo(Operand.from(operand1));
-        assertThat(operands[1]).isEqualTo(Operand.from(operand2));
+        assertThat(operands.size()).isEqualTo(2)
+        assertThat(operands[0]).isEqualTo(Operand.from(operand1))
+        assertThat(operands[1]).isEqualTo(Operand.from(operand2))
     }
 }

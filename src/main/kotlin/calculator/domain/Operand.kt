@@ -1,7 +1,7 @@
 package calculator.domain
 
 @JvmInline
-value class Operand private constructor(val value: Int) {
+value class Operand(val value: Int) {
     companion object {
         private const val WRONG_OPERAND_INPUT = "잘못된 피연산자 입력입니다."
 

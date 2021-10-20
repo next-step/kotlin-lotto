@@ -1,6 +1,5 @@
-package domain
+package calculator.domain
 
-import calculator.domain.Operand
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
