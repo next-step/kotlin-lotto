@@ -11,9 +11,9 @@ class InputExpressionParser {
     }
 
     private fun parseByCustomDelimiter(input: String): List<String>? {
-        val found = Regex(CUSTOM_DELIMITER_PATTERN).find(input)
+        val matchResult = Regex(CUSTOM_DELIMITER_PATTERN).find(input)
 
-        found?.let {
+        matchResult?.let {
             val (customDelimiter, parsedInput) = it.destructured
             return parsedInput.split(customDelimiter)
         }

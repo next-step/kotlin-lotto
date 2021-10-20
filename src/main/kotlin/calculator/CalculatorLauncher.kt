@@ -8,7 +8,7 @@ class CalculatorLauncher(val inputView: InputView, val resultView: ResultView, v
     fun launch() {
         var inputExpression = inputView.receiveInputExpression()
 
-        while (!CalculatorLauncher.EXIT_KEY.equals(inputExpression, true)) {
+        while (!EXIT_KEY.equals(inputExpression, true)) {
             resultView.showResult(calculator.calculate(inputExpression))
             inputExpression = inputView.receiveInputExpression()
         }
