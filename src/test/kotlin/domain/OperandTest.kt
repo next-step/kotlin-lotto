@@ -1,4 +1,6 @@
-import calculator.Operand
+package domain
+
+import calculator.domain.Operand
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -21,6 +23,6 @@ class OperandTest {
     fun `정상적인 값이 입력된 경우 Operand가 정상적으로 생성된다`(input: String) {
         val operand = Operand.from(input)
 
-        assertThat(operand).isEqualTo(Operand(input.toInt()))
+        assertThat(operand.value).isEqualTo(input.toInt())
     }
 }
