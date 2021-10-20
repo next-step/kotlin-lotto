@@ -1,6 +1,5 @@
-package calculator
+package calculator.domain
 
-import calculator.domain.Expression
 import calculator.exception.InvalidExpressionException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
@@ -81,5 +80,20 @@ class ExpressionTest {
         // Act, Assert
         assertThatExceptionOfType(InvalidExpressionException::class.java)
             .isThrownBy { sut.prepareCalculation() }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3"])
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다")
+    fun `sut returns segregated expressions when custom delimiter`(input: String) {
+        // Assert
+        val sut = Expression(input)
+
+        // Act
+        val numbers = sut.prepareCalculation()
+
+        // Assert
+        assertThat(numbers).hasSize(3)
+        assertThat(numbers).contains(1, 2, 3)
     }
 }
