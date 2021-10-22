@@ -14,7 +14,7 @@ object StringUtils {
     }
 
     fun toNumbers(splitText: List<String>): List<Int> {
-        return splitText.map { it.toInt() }
+        return splitText.map { Integer.parseUnsignedInt(it) }
     }
 
     private const val COMMA_AND_COLON = ",|:"
