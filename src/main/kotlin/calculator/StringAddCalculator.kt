@@ -5,9 +5,8 @@ import calculator.utils.StringUtils
 class StringAddCalculator {
 
     fun add(text: String?): Int {
-        require(!text.isNullOrBlank()) { return 0 }
-        val splitText = StringUtils.splitTextByDelimiter(text)
-        return sum(StringUtils.toNumbers(splitText))
+        val numbers = StringUtils.parseToNumbers(text)
+        return sum(numbers)
     }
 
     private fun sum(numbers: List<Int>): Int {
