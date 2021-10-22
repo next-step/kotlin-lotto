@@ -19,7 +19,7 @@ internal class StringAddCalculatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(text: String) {
+    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(text: String?) {
         assertThat(calculator.add(text)).isEqualTo(0)
     }
 
