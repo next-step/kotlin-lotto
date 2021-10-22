@@ -8,8 +8,8 @@ internal class StringUtilsTest {
     @Test
     fun `문자열을 구분자를 기준으로 문자 목록으로 리턴한다`() {
         // given
-        val givenText = "a,b,c"
-        val givenDelimiter = ","
+        val givenText = "a,b:c"
+        val givenDelimiter = ",|:"
 
         // when
         val actual = StringUtils.splitTextByDelimiter(givenText, givenDelimiter)

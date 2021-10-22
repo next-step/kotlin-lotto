@@ -6,7 +6,7 @@ class StringAddCalculator {
 
     fun add(text: String?): Int {
         require(!text.isNullOrBlank()) { return 0 }
-        val splitText = StringUtils.splitTextByDelimiter(text, COMMA)
+        val splitText = StringUtils.splitTextByDelimiter(text, COMMA_AND_COLON)
         return sum(StringUtils.toNumbers(splitText))
     }
 
@@ -15,6 +15,6 @@ class StringAddCalculator {
     }
 
     companion object {
-        private const val COMMA = ","
+        private const val COMMA_AND_COLON = ",|:"
     }
 }
