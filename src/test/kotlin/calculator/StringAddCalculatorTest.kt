@@ -24,7 +24,7 @@ internal class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1"])
+    @ValueSource(strings = ["1", "2", "3"])
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String) {
         assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text))
     }
