@@ -3,12 +3,10 @@ package calculator.lotto.view.input
 class ConsoleInputView : InputView {
     override fun getPurchaseAmount() {
         println(RECEIVE_PURCHASE_AMOUNT_MESSAGE)
-        //readLine()
     }
 
     override fun getWonNumbers() {
         println(RECEIVE_WON_NUMBERS_MESSAGE)
-        //readLine()
     }
 
     companion object {
