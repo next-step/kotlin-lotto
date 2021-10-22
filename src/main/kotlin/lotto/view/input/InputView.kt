@@ -1,4 +1,4 @@
-package calculator.lotto.view.input
+package lotto.view.input
 
 interface InputView {
     fun getPurchaseAmount()

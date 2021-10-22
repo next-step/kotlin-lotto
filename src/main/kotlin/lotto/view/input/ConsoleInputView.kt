@@ -1,4 +1,4 @@
-package calculator.lotto.view.input
+package lotto.view.input
 
 class ConsoleInputView : InputView {
     override fun getPurchaseAmount() {
