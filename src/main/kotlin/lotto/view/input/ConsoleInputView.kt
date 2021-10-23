@@ -1,12 +1,17 @@
 package lotto.view.input
 
+import lotto.domain.LottoPurchaseAmount
+import lotto.domain.WinningInfo
+
 class ConsoleInputView : InputView {
-    override fun getPurchaseAmount() {
+    override fun getPurchaseAmount(): LottoPurchaseAmount {
         println(RECEIVE_PURCHASE_AMOUNT_MESSAGE)
+        return LottoPurchaseAmount.from(readLine() ?: "")
     }
 
-    override fun getWonNumbers() {
+    override fun getWonNumbers(): WinningInfo {
         println(RECEIVE_WON_NUMBERS_MESSAGE)
+        return WinningInfo(WinningInfo.from(readLine() ?: ""))
     }
 
     companion object {
