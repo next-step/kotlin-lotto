@@ -27,7 +27,7 @@ class OperandsTest {
         "'0', '0'",
     )
     fun `덧셈 결과가 0인 테스트`(operand1: String, operand2: String) {
-        val operands = Operands.from(listOf(operand1, operand2) as List<String>)
+        val operands = Operands.from(listOf(operand1, operand2))
 
         assertThat(operands.getSum()).isEqualTo(0)
     }
