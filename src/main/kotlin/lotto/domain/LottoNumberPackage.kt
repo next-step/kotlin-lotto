@@ -10,8 +10,10 @@ data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
         return numbers.size
     }
 
-    fun getSortedNumbers(): SortedSet<LottoNumber> {
-        return numbers.toSortedSet(compareBy { it.value })
+    fun getSortedNumbers(): SortedSet<Int> {
+        return numbers
+            .map { it.value }
+            .toSortedSet(compareBy { it })
     }
 
     init {
