@@ -11,7 +11,7 @@ class Operands private constructor(private val operands: List<Operand>) {
 
     companion object {
         fun from(inputs: List<String>): Operands {
-            return Operands(inputs.map { Operand.from(it) })
+            return Operands(inputs.map { Operand.from(it.trim()) })
         }
     }
 }
