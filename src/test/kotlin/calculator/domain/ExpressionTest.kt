@@ -28,7 +28,7 @@ class ExpressionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1"])
+    @ValueSource(strings = ["1", "2", "3", "10"])
     @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다")
     fun `sut returns one when input is one`(input: String) {
         // Arrange
@@ -39,7 +39,7 @@ class ExpressionTest {
 
         // Assert
         assertThat(numbers).hasSize(1)
-        assertThat(numbers).containsExactly(1)
+        assertThat(numbers).containsExactly(input.toInt())
     }
 
     @Test

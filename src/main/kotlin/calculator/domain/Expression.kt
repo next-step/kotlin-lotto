@@ -14,9 +14,6 @@ class Expression(
         if (value.isNullOrBlank()) {
             return listOf(ZERO)
         }
-        if (value == "1") {
-            return listOf(ONE)
-        }
         val result: MatchResult? = customRegex.find(value)
         result?.let {
             val customDelimiter = it.groupValues[1]
