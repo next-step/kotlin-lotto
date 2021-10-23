@@ -5,8 +5,6 @@ import calculator.exception.InvalidExpressionException
 class Expression(
     private val value: String? = null,
 ) {
-    private val _numbers = mutableListOf<Int>()
-
     fun prepareCalculation(): List<Int> {
         val expressions = segregateExpressions()
         return validateExpressions(expressions)
@@ -28,11 +26,12 @@ class Expression(
     }
 
     private fun validateExpressions(expressions: List<String>): List<Int> {
-        for (number in expressions) {
+        val numbers = mutableListOf<Int>()
+        expressions.forEach { number ->
             validateNumber(number)
-            _numbers.add(number.toInt())
+            numbers.add(number.toInt())
         }
-        return _numbers.toList()
+        return numbers.toList()
     }
 
     private fun validateNumber(element: String) {
