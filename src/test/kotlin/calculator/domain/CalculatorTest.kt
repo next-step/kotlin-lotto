@@ -13,11 +13,10 @@ class CalculatorTest {
     @DisplayName("입력받은 식의 합을 반환한다")
     fun `sut returns correctly`(input: String, expected: String) {
         // Arrange
-        val expression = Expression(input)
-        val sut = Calculator(expression)
+        val sut = Calculator(input)
 
         // Act
-        val result = sut.calculate()
+        val result = sut.add()
 
         // Assert
         assertThat(result).isEqualTo(expected.toInt())
@@ -27,11 +26,10 @@ class CalculatorTest {
     @DisplayName("커스텀 구분자를 지정한 식의 합을 반환한다")
     fun `sut returns segregated expressions when custom delimiter`() {
         // Assert
-        val expression = Expression("//@\n1@2@3")
-        val sut = Calculator(expression)
+        val sut = Calculator("//@\n1@2@3")
 
         // Act
-        val result = sut.calculate()
+        val result = sut.add()
 
         // Assert
         assertThat(result).isEqualTo(6)

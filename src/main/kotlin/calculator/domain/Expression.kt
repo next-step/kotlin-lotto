@@ -1,14 +1,9 @@
 package calculator.domain
 
-class Expression(
+class Expression private constructor(
     private val value: String? = null,
 ) {
-    fun prepareCalculation(): List<Number> {
-        val expressions = segregateExpressions()
-        return convertNumbers(expressions)
-    }
-
-    private fun segregateExpressions(): List<String> {
+    fun segregateExpressions(): List<String> {
         if (value.isNullOrBlank()) {
             return listOf(ZERO)
         }
@@ -20,16 +15,15 @@ class Expression(
         return value.split(DELIMITER_COMMA, DELIMITER_COLON)
     }
 
-    private fun convertNumbers(expressions: List<String>): List<Number> {
-        return expressions.map { Number(it) }
-            .toList()
-    }
-
     companion object {
         private val customRegex: Regex = Regex("//(.)\n(.*)")
 
         private const val DELIMITER_COMMA = ","
         private const val DELIMITER_COLON = ":"
         private const val ZERO = "0"
+
+        fun from(input: String?): List<String> {
+            return Expression(input).segregateExpressions()
+        }
     }
 }
