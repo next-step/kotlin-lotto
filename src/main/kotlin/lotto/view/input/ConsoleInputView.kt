@@ -9,7 +9,7 @@ class ConsoleInputView : InputView {
         return LottoPurchaseAmount.from(readLine() ?: "")
     }
 
-    override fun getWonNumbers(): WinningInfo {
+    override fun getWinningInfo(): WinningInfo {
         println(RECEIVE_WON_NUMBERS_MESSAGE)
         return WinningInfo(WinningInfo.from(readLine() ?: ""))
     }

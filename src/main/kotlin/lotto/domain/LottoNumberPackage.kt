@@ -1,6 +1,6 @@
 package lotto.domain
 
-import java.util.*
+import java.util.SortedSet
 
 /**
  * 로또 1게임

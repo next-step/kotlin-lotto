@@ -9,8 +9,8 @@ data class WinningInfo(val winningNumberPackage: LottoNumberPackage) {
         }
 
         private fun getLottoNumbers(input: String): Set<LottoNumber> {
-            return input.trim().split(WINNING_NUMBER_SPLIT_DELIMITER)
-                .map { LottoNumber.from(it) }
+            return input.split(WINNING_NUMBER_SPLIT_DELIMITER)
+                .map { LottoNumber.from(it.trim()) }
                 .toSet()
         }
     }
