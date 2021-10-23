@@ -7,7 +7,7 @@ class Expression(
 ) {
     fun prepareCalculation(): List<Int> {
         val expressions = segregateExpressions()
-        return validateExpressions(expressions)
+        return convertNumbers(expressions)
     }
 
     private fun segregateExpressions(): List<String> {
@@ -22,19 +22,17 @@ class Expression(
         return value.split(DELIMITER_COMMA, DELIMITER_COLON)
     }
 
-    private fun validateExpressions(expressions: List<String>): List<Int> {
-        val numbers = mutableListOf<Int>()
-        expressions.forEach { number ->
-            validateNumber(number)
-            numbers.add(number.toInt())
-        }
-        return numbers.toList()
+    private fun convertNumbers(expressions: List<String>): List<Int> {
+        return expressions.filter { validateNumber(it) }
+            .map { it.toInt() }
+            .toList()
     }
 
-    private fun validateNumber(element: String) {
+    private fun validateNumber(element: String): Boolean {
         if (!numberRegex.containsMatchIn(element) || element.toInt() < 0) {
             throw InvalidExpressionException()
         }
+        return true
     }
 
     companion object {
