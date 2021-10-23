@@ -1,6 +1,8 @@
 package calculator
 
 class StringAddCalculator {
+    private val customRegex = Regex("//(.)\n(.*)")
+
     fun add(text: String?): Int {
         if (text.isNullOrEmpty()) return RETURN_NULL_OR_EMPTY_STRING
         return convertTextToIntList(text).sum()
@@ -17,7 +19,7 @@ class StringAddCalculator {
     private fun split(text: String): List<String> = text.split(DELIMITER_UNIT_ONE, DELIMITER_UNIT_SECOND)
 
     private fun splitCustom(text: String): List<String>? {
-        val result = Regex("//(.)\n(.*)").find(text)
+        val result = customRegex.find(text)
         result?.let {
             val customDelimiter = it.groupValues[1]
             return it.groupValues[2].split(customDelimiter)
