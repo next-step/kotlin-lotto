@@ -22,6 +22,7 @@ internal class LottoNumberTest {
 
             assertThat(lottoNumber).isNotNull
             assertThat(lottoNumber.value).isEqualTo(number)
+            assertThat(lottoNumber).isEqualTo(LottoNumber(number))
         }
     }
 }
