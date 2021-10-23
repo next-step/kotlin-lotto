@@ -5,6 +5,6 @@ class Calculator(
 ) {
     fun calculate(): Int {
         return expression.prepareCalculation()
-            .sum()
+            .sumOf { it.toInt() }
     }
 }
