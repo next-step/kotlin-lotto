@@ -3,14 +3,14 @@ package lotto.domain
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoPurchaseAmountTest {
 
     @ParameterizedTest
-    @NullAndEmptySource
-    fun `로또 구입 금액으로 null 이나 빈 문자열을 입력하면 IllegalArgumentException을 발생시킨다`(input: String?) {
+    @EmptySource
+    fun `로또 구입 금액으로 null 이나 빈 문자열을 입력하면 IllegalArgumentException을 발생시킨다`(input: String) {
         Assertions.assertThatThrownBy {
             LottoPurchaseAmount.from(input)
         }.isInstanceOf(IllegalArgumentException::class.java)
