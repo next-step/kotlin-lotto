@@ -11,7 +11,7 @@ internal class LottoPurchaseCountTest {
     fun `1_000원 이상 2_000원 미만의 금액을 입력하면 로또 1장을 구입할 수 있다`(amount: Int) {
         val count = LottoPurchaseCount.from(amount)
 
-        assertThat(count.count).isEqualTo(1)
+        assertThat(count.value).isEqualTo(1)
     }
 
     @ParameterizedTest
@@ -19,7 +19,7 @@ internal class LottoPurchaseCountTest {
     fun `10_000원 이상 11_000원 미만의 금액을 입력하면 로또 10장을 구입할 수 있다`(amount: Int) {
         val count = LottoPurchaseCount.from(amount)
 
-        assertThat(count.count).isEqualTo(10)
+        assertThat(count.value).isEqualTo(10)
     }
 
     @ParameterizedTest
@@ -27,7 +27,7 @@ internal class LottoPurchaseCountTest {
     fun `99_000원 이상 100_000원 미만의 금액을 입력하면 로또 99장을 구입할 수 있다`(amount: Int) {
         val count = LottoPurchaseCount.from(amount)
 
-        assertThat(count.count).isEqualTo(99)
+        assertThat(count.value).isEqualTo(99)
     }
 
     @ParameterizedTest
@@ -35,6 +35,6 @@ internal class LottoPurchaseCountTest {
     fun `100_000원의 금액을 입력하면 로또 100장을 구입할 수 있다`(amount: Int) {
         val count = LottoPurchaseCount.from(amount)
 
-        assertThat(count.count).isEqualTo(100)
+        assertThat(count.value).isEqualTo(100)
     }
 }
