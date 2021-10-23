@@ -1,11 +1,17 @@
 package lotto.domain
 
+import java.util.*
+
 /**
  * 로또 1게임
  */
 data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
     fun size(): Int {
         return numbers.size
+    }
+
+    fun getSortedNumbers(): SortedSet<LottoNumber> {
+        return numbers.toSortedSet(compareBy { it.value })
     }
 
     init {

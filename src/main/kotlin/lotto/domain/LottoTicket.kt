@@ -4,7 +4,7 @@ import lotto.service.LottoNumberPackagesGenerator
 
 class LottoTicket private constructor(
     private val purchaseInfo: LottoPurchaseInfo,
-    private val lottoPackages: List<LottoNumberPackage>
+    val lottoPackages: List<LottoNumberPackage>
 ) {
 
     companion object {

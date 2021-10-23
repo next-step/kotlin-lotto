@@ -17,7 +17,7 @@ value class LottoNumber(val value: Int) {
 
         fun from(input: String): LottoNumber {
             val value = input.toIntOrNull()
-            require( value != null) { WRONG_LOTTO_NUMBER_MESSAGE }
+            require(value != null) { WRONG_LOTTO_NUMBER_MESSAGE }
             return LottoNumber(value)
         }
     }

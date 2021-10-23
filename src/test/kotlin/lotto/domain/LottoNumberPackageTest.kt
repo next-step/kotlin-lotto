@@ -21,12 +21,52 @@ internal class LottoNumberPackageTest {
 
     private fun getInvalidSizeOfLottoNumbers(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(listOf(LottoNumber(1))),
-            Arguments.of(listOf(LottoNumber(1),LottoNumber(2))),
-            Arguments.of(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3))),
-            Arguments.of(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4))),
-            Arguments.of(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5))),
-            Arguments.of(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6), LottoNumber(7)))
+            Arguments.of(
+                listOf(
+                    LottoNumber(1)
+                )
+            ),
+            Arguments.of(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2)
+                )
+            ),
+            Arguments.of(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3)
+                )
+            ),
+            Arguments.of(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4)
+                )
+            ),
+            Arguments.of(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5)
+                )
+            ),
+            Arguments.of(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                    LottoNumber(7)
+                )
+            )
         )
     }
 
@@ -41,7 +81,51 @@ internal class LottoNumberPackageTest {
 
     private fun getValidSizeOfLottoNumbers(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
+            Arguments.of(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            )
+        )
+    }
+
+    @ParameterizedTest
+    @MethodSource("getUnsortedLottoNumbers")
+    fun `정렬 되지 않은 번호번호로 LottoNumberPackage 를 생성한 후 getSortedNumbers()를 호출하면 정렬된 번호를 얻을 수 있다`(numbers: List<LottoNumber>) {
+        val lottoNumberPackage = LottoNumberPackage(numbers.toSet())
+
+        assertThat(lottoNumberPackage).isNotNull
+        assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
+        assertThat(lottoNumberPackage.getSortedNumbers()).isEqualTo(numbers.toSortedSet(compareBy { it.value }))
+    }
+
+    private fun getUnsortedLottoNumbers(): Stream<Arguments> {
+        return Stream.of(
+            Arguments.of(
+                listOf(
+                    LottoNumber(2),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(1),
+                    LottoNumber(6),
+                    LottoNumber(3)
+                )
+            ),
+            Arguments.of(
+                listOf(
+                    LottoNumber(43),
+                    LottoNumber(25),
+                    LottoNumber(17),
+                    LottoNumber(9),
+                    LottoNumber(33),
+                    LottoNumber(29)
+                )
+            )
         )
     }
 }

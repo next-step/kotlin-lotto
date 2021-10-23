@@ -38,6 +38,6 @@ internal class LottoPurchaseAmountTest {
         val amount = LottoPurchaseAmount.from(input)
 
         assertThat(amount).isNotNull
-        assertThat(amount.amount).isEqualTo(input.toInt())
+        assertThat(amount.value).isEqualTo(input.toInt())
     }
 }

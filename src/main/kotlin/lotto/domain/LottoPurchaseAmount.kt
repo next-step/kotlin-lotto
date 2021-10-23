@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class LottoPurchaseAmount private constructor(val amount: Int) {
+value class LottoPurchaseAmount constructor(val value: Int) {
 
     companion object {
         private const val MINIMUM_LOTTO_PURCHASE_AMOUNT = 1_000
