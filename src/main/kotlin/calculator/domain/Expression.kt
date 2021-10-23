@@ -5,8 +5,6 @@ import calculator.exception.InvalidExpressionException
 class Expression(
     private val value: String? = null,
 ) {
-    private val numberRegex: Regex = Regex("[0-9]")
-    private val customRegex: Regex = Regex("//(.)\n(.*)")
     private val _numbers = mutableListOf<Int>()
 
     fun prepareCalculation(): List<Int> {
@@ -44,6 +42,9 @@ class Expression(
     }
 
     companion object {
+        private val numberRegex: Regex = Regex("[0-9]")
+        private val customRegex: Regex = Regex("//(.)\n(.*)")
+
         private const val DELIMITER_COMMA = ","
         private const val DELIMITER_COLON = ":"
         private const val ZERO = "0"
