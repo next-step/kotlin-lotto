@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object RandomNumberGenerator : LottoNumberGenerator {
     override fun generateNumbers(): List<LottoNumber> {

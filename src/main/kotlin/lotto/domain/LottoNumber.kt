@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 @JvmInline
 value class LottoNumber private constructor(val number: Int) : Comparable<LottoNumber> {
