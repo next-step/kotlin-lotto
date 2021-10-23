@@ -3,7 +3,7 @@ package lotto
 data class Lotto(val lottoNumbers: List<LottoNumber>) {
 
     init {
-        require(lottoNumbers.size == LOTTO_NUMBER_SIZE) { throw IllegalArgumentException(LOTTO_SIZE) }
+        require(lottoNumbers.toMutableSet().size == LOTTO_NUMBER_SIZE) { throw IllegalArgumentException(LOTTO_SIZE) }
     }
 
     companion object {
