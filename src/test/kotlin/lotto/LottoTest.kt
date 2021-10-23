@@ -20,7 +20,7 @@ internal class LottoTest {
         )
 
         val lotto = Lotto(lottoNumbers)
-        assertThat(lotto.lottoNumbers).hasSize(6)
+        assertThat(lotto.getLottoNumbers()).hasSize(6)
     }
 
     @Test
@@ -34,5 +34,27 @@ internal class LottoTest {
         )
 
         assertThatCode { Lotto(lottoNumbers) }.isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @Test
+    fun `추출 번호는 오름차순으로 정렬되어 표시 된다`() {
+        val lottoNumber1 = LottoNumber.valueOf(6)
+        val lottoNumber2 = LottoNumber.valueOf(5)
+        val lottoNumber3 = LottoNumber.valueOf(4)
+        val lottoNumber4 = LottoNumber.valueOf(3)
+        val lottoNumber5 = LottoNumber.valueOf(2)
+        val lottoNumber6 = LottoNumber.valueOf(1)
+        val lottoNumbers = listOf(
+            lottoNumber1, lottoNumber2, lottoNumber3,
+            lottoNumber4, lottoNumber5, lottoNumber6
+        )
+
+        val lotto = Lotto(lottoNumbers)
+
+        assertThat(lotto.getLottoNumbers()).containsExactlyInAnyOrder(
+            lottoNumber6, lottoNumber5,
+            lottoNumber4, lottoNumber3,
+            lottoNumber2, lottoNumber1
+        )
     }
 }

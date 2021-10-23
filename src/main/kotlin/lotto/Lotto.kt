@@ -1,9 +1,15 @@
 package lotto
 
-data class Lotto(val lottoNumbers: List<LottoNumber>) {
+data class Lotto(private val lottoNumbers: List<LottoNumber>) {
 
     init {
-        require(lottoNumbers.toMutableSet().size == LOTTO_NUMBER_SIZE) { throw IllegalArgumentException(LOTTO_SIZE) }
+        require(lottoNumbers.toMutableSet().size == LOTTO_NUMBER_SIZE) {
+            throw IllegalArgumentException(LOTTO_SIZE)
+        }
+    }
+
+    fun getLottoNumbers(): List<LottoNumber> {
+        return lottoNumbers.sorted().toList()
     }
 
     companion object {
