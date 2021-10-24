@@ -10,7 +10,7 @@ class ConsoleInputView : InputView {
     }
 
     override fun getWinningInfo(): WinningInfo {
-        println(RECEIVE_WON_NUMBERS_MESSAGE)
+        println("\n" + RECEIVE_WON_NUMBERS_MESSAGE)
         return WinningInfo(WinningInfo.from(readLine() ?: ""))
     }
 
