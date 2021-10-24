@@ -57,4 +57,15 @@ internal class LottoTest {
             lottoNumber2, lottoNumber1
         )
     }
+
+    @Test
+    fun `주어진 로또와 입력받은 로또의 번호 일치하는 갯수를 리턴한다`() {
+        val lottoNumbers = (1..6).map { LottoNumber.valueOf(it) }
+        val givenLotto = Lotto(lottoNumbers)
+        val compareLotto = Lotto(lottoNumbers)
+
+        val count = givenLotto.countMatchedNumbers(compareLotto)
+
+        assertThat(count).isEqualTo(6)
+    }
 }

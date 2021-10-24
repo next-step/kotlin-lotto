@@ -1,0 +1,34 @@
+package lotto.domain
+
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class LottosTest {
+
+    @Test
+    fun `로또 목록을 생성할 수 있다`() {
+        val lottoGenerator = LottoGenerator()
+        val budget = Budget.valueOf(5000)
+        val generatedLottos = lottoGenerator.generateLottos(budget)
+
+        val lottos = Lottos(generatedLottos)
+        assertThat(lottos.lottos).hasSize(5)
+    }
+
+    @Test
+    fun `로또 목록에서 입력된 로또와 일치하는 갯수 목록을 리턴한다`() {
+        val lottoNumbers1 = (1..6).map { LottoNumber.valueOf(it) }
+        val lottoNumbers2 = (2..7).map { LottoNumber.valueOf(it) }
+        val lottoNumbers3 = (3..8).map { LottoNumber.valueOf(it) }
+        val givenLotto1 = Lotto(lottoNumbers1)
+        val givenLotto2 = Lotto(lottoNumbers2)
+        val givenLotto3 = Lotto(lottoNumbers3)
+
+        val lottos = Lottos(listOf(givenLotto1, givenLotto2, givenLotto3))
+        val compareLotto = Lotto(lottoNumbers1)
+
+        val actual = lottos.checkMatching(compareLotto)
+
+        assertThat(actual).containsExactlyInAnyOrder(6, 5, 4)
+    }
+}
