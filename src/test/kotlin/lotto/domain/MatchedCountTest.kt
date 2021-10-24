@@ -22,7 +22,7 @@ internal class MatchedCountTest {
         val matchedCount = MatchedCount.from(input)
 
         assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.getRank()).isEqualTo(LottoResultRank.MISSED)
+        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.MISSED)
     }
 
     @Test
@@ -30,7 +30,7 @@ internal class MatchedCountTest {
         val matchedCount = MatchedCount.from(3)
 
         assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.getRank()).isEqualTo(LottoResultRank.FIFTH)
+        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.FIFTH)
     }
 
     @Test
@@ -38,7 +38,7 @@ internal class MatchedCountTest {
         val matchedCount = MatchedCount.from(4)
 
         assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.getRank()).isEqualTo(LottoResultRank.FOURTH)
+        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.FOURTH)
     }
 
     @Test
@@ -46,7 +46,7 @@ internal class MatchedCountTest {
         val matchedCount = MatchedCount.from(5)
 
         assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.getRank()).isEqualTo(LottoResultRank.THIRD)
+        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.THIRD)
     }
 
     @Test
@@ -54,6 +54,6 @@ internal class MatchedCountTest {
         val matchedCount = MatchedCount.from(6)
 
         assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.getRank()).isEqualTo(LottoResultRank.FIRST)
+        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.FIRST)
     }
 }

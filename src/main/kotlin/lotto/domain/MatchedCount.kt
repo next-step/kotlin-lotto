@@ -13,7 +13,7 @@ value class MatchedCount private constructor(val value: Int) {
         }
     }
 
-    fun getRank() : LottoResultRank {
+    fun rank(): LottoResultRank {
         return LottoResultRank.getRank(value)
     }
 }
