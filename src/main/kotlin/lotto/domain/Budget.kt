@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class Budget private constructor(private val value: Int) {
+value class Budget private constructor(val value: Int) {
     init {
         require(value >= LOTTO_PRICE) { throw IllegalArgumentException(MINIMUM_VALUE_REQUIRED) }
     }

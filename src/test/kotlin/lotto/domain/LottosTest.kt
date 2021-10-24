@@ -20,15 +20,17 @@ internal class LottosTest {
         val lottoNumbers1 = (1..6).map { LottoNumber.valueOf(it) }
         val lottoNumbers2 = (2..7).map { LottoNumber.valueOf(it) }
         val lottoNumbers3 = (3..8).map { LottoNumber.valueOf(it) }
+        val lottoNumbers4 = (1..6).map { LottoNumber.valueOf(it) }
         val givenLotto1 = Lotto(lottoNumbers1)
         val givenLotto2 = Lotto(lottoNumbers2)
         val givenLotto3 = Lotto(lottoNumbers3)
+        val givenLotto4 = Lotto(lottoNumbers4)
 
-        val lottos = Lottos(listOf(givenLotto1, givenLotto2, givenLotto3))
+        val lottos = Lottos(listOf(givenLotto1, givenLotto2, givenLotto3, givenLotto4))
         val compareLotto = Lotto(lottoNumbers1)
 
         val actual = lottos.checkMatching(compareLotto)
 
-        assertThat(actual).containsExactlyInAnyOrder(6, 5, 4)
+        assertThat(actual.values).containsExactly(2, 1, 1)
     }
 }

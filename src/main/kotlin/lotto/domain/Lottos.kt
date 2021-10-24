@@ -2,7 +2,9 @@ package lotto.domain
 
 data class Lottos(val lottos: List<Lotto>) {
 
-    fun checkMatching(lotto: Lotto): List<Int> {
-        return lottos.map { it.countMatchedNumbers(lotto) }
+    fun checkMatching(lotto: Lotto): Map<Reward, Int> {
+        return lottos.map { Reward.of(it.countMatchedNumbers(lotto)) }
+            .groupingBy { it }
+            .eachCount()
     }
 }
