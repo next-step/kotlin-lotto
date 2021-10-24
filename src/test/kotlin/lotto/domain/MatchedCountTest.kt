@@ -33,7 +33,6 @@ internal class MatchedCountTest {
         assertThat(matchedCount.getRank()).isEqualTo(LottoResultRank.FIFTH)
     }
 
-
     @Test
     fun `일치 개수가 4개 인 경우 FOURTH LottoResultRank 를 반환한다`() {
         val matchedCount = MatchedCount.from(4)
