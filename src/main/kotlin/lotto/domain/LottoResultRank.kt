@@ -3,12 +3,12 @@ package lotto.domain
 import java.util.Arrays
 import java.util.stream.Collectors
 
-enum class LottoResultRank(val matchedCount: Int, val prizeMoney: Long, val shouldCompareBonusNumber: Boolean) {
-    FIRST(6, 2_000_000_000L, false),
-    THIRD(5, 1_500_000L, false),
-    FOURTH(4, 50_000L, false),
-    FIFTH(3, 5_000L, false),
-    MISSED(0, 0L, false)
+enum class LottoResultRank(val matchedCount: Int, val prizeMoney: Long) {
+    MISSED(0, 0L),
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    FIRST(6, 2_000_000_000L),
     ;
 
     companion object {
