@@ -16,6 +16,14 @@ data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
             .toSortedSet(compareBy { it })
     }
 
+    fun matchedCount(winningNumberPackage: LottoNumberPackage): MatchedCount {
+        return MatchedCount.from(numbers.intersect(winningNumberPackage.numbers).size)
+    }
+
+    fun prizeMoney(winningNumberPackage: LottoNumberPackage): Long {
+        return matchedCount(winningNumberPackage).rank().prizeMoney
+    }
+
     init {
         require(numbers.size == LOTTO_GAME_NUMBER_COUNT) { INVALID_LOTTO_GAME_NUMBER_COUNT_MESSAGE }
     }
