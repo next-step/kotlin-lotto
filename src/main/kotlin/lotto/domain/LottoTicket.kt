@@ -4,7 +4,7 @@ import lotto.service.LottoNumberPackagesGenerator
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class LottoTicket (
+class LottoTicket(
     private val purchaseInfo: LottoPurchaseInfo,
     val lottoPackages: List<LottoNumberPackage>
 ) {
