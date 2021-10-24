@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class Money private constructor(val value: Int) {
+value class Budget private constructor(private val value: Int) {
     init {
         require(value >= LOTTO_PRICE) { throw IllegalArgumentException(MINIMUM_VALUE_REQUIRED) }
     }
@@ -11,12 +11,11 @@ value class Money private constructor(val value: Int) {
     }
 
     companion object {
-        private const val MINIMUM_MONEY_PRICE = 0
         private const val LOTTO_PRICE = 1000
         private const val MINIMUM_VALUE_REQUIRED = "최소 로또 금액이 되어야합니다."
 
-        fun valueOf(value: Int): Money {
-            return Money(value)
+        fun valueOf(value: Int): Budget {
+            return Budget(value)
         }
     }
 }

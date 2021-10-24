@@ -10,12 +10,12 @@ internal class LottoGeneratorTest {
     @ValueSource(ints = [1000, 5000, 10_000])
     fun `로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다`(givenValue: Int) {
         // given
-        val money = Money.valueOf(givenValue)
+        val budget = Budget.valueOf(givenValue)
         val lottoPrice = 1000
         val lottoGenerator = LottoGenerator()
 
         // when
-        val actual = lottoGenerator.generateLottos(money)
+        val actual = lottoGenerator.generateLottos(budget)
 
         // then
         assertThat(actual).hasSize(givenValue / lottoPrice)
