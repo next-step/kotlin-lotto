@@ -7,7 +7,7 @@ data class LottoResult(val result: Map<Reward, Int>) {
 
     fun updateRewards(checked: Map<Reward, Int>): LottoResult {
         var rewardResult = result
-        for (match in Reward.values()) {
+        Reward.values().forEach { match ->
             val foundValue = Pair(match, checked.getOrDefault(match, 0))
             rewardResult = rewardResult + foundValue
         }

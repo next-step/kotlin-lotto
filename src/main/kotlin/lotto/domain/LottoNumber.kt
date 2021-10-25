@@ -19,4 +19,8 @@ value class LottoNumber private constructor(val number: Int) : Comparable<LottoN
     override fun compareTo(other: LottoNumber): Int {
         return this.number - other.number
     }
+
+    override fun toString(): String {
+        return number.toString()
+    }
 }

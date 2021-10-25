@@ -10,7 +10,7 @@ object StringUtils {
     }
 
     fun toNumber(text: String): Int {
-        return Integer.parseUnsignedInt(text)
+        return Integer.parseUnsignedInt(text.trim())
     }
 
     private const val DELIMITER = ","
