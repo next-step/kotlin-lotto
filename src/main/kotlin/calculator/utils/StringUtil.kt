@@ -1,8 +1,7 @@
 package calculator.utils
 
 object StringUtil {
-    private const val COMMA = ","
+    private val BASIC_PATTERN = Regex(",|:")
 
-    fun convertTextToList(text: String): List<String> =
-        text.split(COMMA)
+    fun convertTextToList(text: String): List<String> = text.split(BASIC_PATTERN)
 }
