@@ -3,15 +3,15 @@ package lotto.domain
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-data class Result(val result: Map<Reward, Int>) {
+data class LottoResult(val result: Map<Reward, Int>) {
 
-    fun updateRewards(checked: Map<Reward, Int>): Result {
+    fun updateRewards(checked: Map<Reward, Int>): LottoResult {
         var rewardResult = result
         for (match in Reward.values()) {
             val foundValue = Pair(match, checked.getOrDefault(match, 0))
             rewardResult = rewardResult + foundValue
         }
-        return Result(rewardResult)
+        return LottoResult(rewardResult)
     }
 
     fun getTotalAmount(): Int {
@@ -34,6 +34,6 @@ data class Result(val result: Map<Reward, Int>) {
     }
 
     companion object {
-        val EMPTY = Result(emptyMap())
+        val EMPTY = LottoResult(emptyMap())
     }
 }
