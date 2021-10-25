@@ -6,7 +6,11 @@ object StringUtil {
 
     fun convertTextToList(text: String): List<String> =
         CUSTOM_PATTERN.find(text)?.let {
-            val (customDelimiter, matchingText) = it.destructured
-            matchingText.split(customDelimiter)
+            splitTextFromCustomPattern(it)
         } ?: text.split(BASIC_PATTERN)
+
+    private fun splitTextFromCustomPattern(it: MatchResult): List<String> {
+        val (customDelimiter, matchingText) = it.destructured
+        return matchingText.split(customDelimiter)
+    }
 }
