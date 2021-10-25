@@ -33,4 +33,13 @@ internal class LottosTest {
 
         assertThat(actual.values).containsExactly(2, 1, 1)
     }
+
+    @Test
+    fun `로또 예산을 입력받아 로또 목록을 생성하여 리턴한다`() {
+        val budget = Budget.valueOf(5000)
+
+        val actual = Lottos.createLottos(budget)
+
+        assertThat(actual.lottos).hasSize(5)
+    }
 }

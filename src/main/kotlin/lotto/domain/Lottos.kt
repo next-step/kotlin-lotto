@@ -7,4 +7,11 @@ data class Lottos(val lottos: List<Lotto>) {
             .groupingBy { it }
             .eachCount()
     }
+
+    companion object {
+        fun createLottos(budgets: Budget): Lottos {
+            val lottoGenerator = LottoGenerator()
+            return Lottos(lottoGenerator.generateLottos(budgets))
+        }
+    }
 }
