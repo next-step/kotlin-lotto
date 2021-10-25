@@ -32,4 +32,17 @@ class StringAddCalculatorTest {
         // then
         assertThat(sum).isSameAs(text.toInt())
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2"])
+    fun `숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(text: String) {
+        // given
+        val stringAddCalculator = StringAddCalculator(text)
+
+        // when
+        val sum = stringAddCalculator.add()
+
+        // then
+        assertThat(sum).isSameAs(3)
+    }
 }
