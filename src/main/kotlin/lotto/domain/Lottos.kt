@@ -10,7 +10,7 @@ data class Lottos(val lottos: List<Lotto>) {
 
     companion object {
         fun createLottos(budgets: Budget): Lottos {
-            val lottoGenerator = LottoGenerator()
+            val lottoGenerator = LottoGenerator(RandomNumberGenerator())
             return Lottos(lottoGenerator.generateLottos(budgets))
         }
     }

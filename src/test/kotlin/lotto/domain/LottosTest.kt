@@ -7,7 +7,7 @@ internal class LottosTest {
 
     @Test
     fun `로또 목록을 생성할 수 있다`() {
-        val lottoGenerator = LottoGenerator()
+        val lottoGenerator = LottoGenerator(RandomNumberGenerator())
         val budget = Budget.valueOf(5000)
         val generatedLottos = lottoGenerator.generateLottos(budget)
 

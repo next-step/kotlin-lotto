@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoGenerator(
-    private val lottoNumberGenerator: LottoNumberGenerator = RandomNumberGenerator()
+    private val lottoNumberGenerator: LottoNumberGenerator
 ) {
     fun generateLottos(budget: Budget): List<Lotto> {
         return (1..budget.getLottoCount())

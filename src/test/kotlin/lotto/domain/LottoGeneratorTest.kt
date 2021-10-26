@@ -12,7 +12,7 @@ internal class LottoGeneratorTest {
         // given
         val budget = Budget.valueOf(givenValue)
         val lottoPrice = 1000
-        val lottoGenerator = LottoGenerator()
+        val lottoGenerator = LottoGenerator(RandomNumberGenerator())
 
         // when
         val actual = lottoGenerator.generateLottos(budget)
