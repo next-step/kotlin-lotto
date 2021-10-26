@@ -20,7 +20,6 @@ class SeparatorsTest {
     fun `커스텀 구분자가 없는 문자열이 있으면 기본 구분자만 가진 객체를 생성한다`(expression: String) {
         val expected = Separators.of(setOf(Separator(","), Separator(":")))
         val actual = Separators.of(expression)
-
         assertThat(actual).isEqualTo(expected)
     }
 }
