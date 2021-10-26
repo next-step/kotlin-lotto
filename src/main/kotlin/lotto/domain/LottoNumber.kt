@@ -6,6 +6,14 @@ value class LottoNumber private constructor(val number: Int) : Comparable<LottoN
         require(number in LOTTO_MINIMUM_NUMBER..LOTTO_MAXIMUM_NUMBER) { throw IllegalArgumentException(NOT_NUMBER_RANGER) }
     }
 
+    override fun compareTo(other: LottoNumber): Int {
+        return this.number - other.number
+    }
+
+    override fun toString(): String {
+        return number.toString()
+    }
+
     companion object {
         private const val NOT_NUMBER_RANGER = "로또의 범위가 아닙니다"
         private const val LOTTO_MINIMUM_NUMBER = 1
@@ -14,13 +22,5 @@ value class LottoNumber private constructor(val number: Int) : Comparable<LottoN
         fun valueOf(value: Int): LottoNumber {
             return LottoNumber(value)
         }
-    }
-
-    override fun compareTo(other: LottoNumber): Int {
-        return this.number - other.number
-    }
-
-    override fun toString(): String {
-        return number.toString()
     }
 }
