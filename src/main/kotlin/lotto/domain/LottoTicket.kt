@@ -24,7 +24,7 @@ class LottoTicket(
 
     companion object {
         fun from(purchaseInfo: LottoPurchaseInfo, packagesGenerator: LottoNumberPackagesGenerator): LottoTicket {
-            return LottoTicket(purchaseInfo, packagesGenerator.generate(purchaseInfo.purchaseCount.value))
+            return LottoTicket(purchaseInfo, packagesGenerator.generate(purchaseInfo.purchaseCount))
         }
     }
 }
