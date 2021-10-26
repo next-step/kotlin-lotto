@@ -4,27 +4,24 @@ import lotto.service.LottoNumberPackagesGenerator
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class LottoTicket(
-    private val purchaseInfo: LottoPurchaseInfo,
-    val lottoPackages: List<LottoNumberPackage>
-) {
+class LottoTicket(val lottoPackages: List<LottoNumberPackage>) {
     fun resultStatistics(winningInfo: WinningInfo): Map<LottoResultRank, Int> {
         return lottoPackages
             .groupingBy { it.matchedCount(winningInfo.winningNumberPackage).rank() }
             .eachCount()
     }
 
-    fun totalProfitRate(winningInfo: WinningInfo): BigDecimal {
+    fun totalProfitRate(winningInfo: WinningInfo, purchaseAmount: LottoPurchaseAmount): BigDecimal {
         return lottoPackages
             .sumOf { it.prizeMoney(winningInfo.winningNumberPackage) }
             .toBigDecimal()
             .setScale(2, RoundingMode.HALF_UP)
-            .div(purchaseInfo.purchaseAmount.value!!.toBigDecimal())
+            .div(purchaseAmount.value!!.toBigDecimal())
     }
 
     companion object {
-        fun from(purchaseInfo: LottoPurchaseInfo, packagesGenerator: LottoNumberPackagesGenerator): LottoTicket {
-            return LottoTicket(purchaseInfo, packagesGenerator.generate(purchaseInfo.purchaseCount))
+        fun from(purchaseCount: LottoPurchaseCount, packagesGenerator: LottoNumberPackagesGenerator): LottoTicket {
+            return LottoTicket(packagesGenerator.generate(purchaseCount))
         }
     }
 }
