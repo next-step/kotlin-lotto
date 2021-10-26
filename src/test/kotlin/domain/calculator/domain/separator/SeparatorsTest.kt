@@ -22,4 +22,12 @@ class SeparatorsTest {
         val actual = Separators.of(expression)
         assertThat(actual).isEqualTo(expected)
     }
+
+    @ParameterizedTest(name = "연산식: {0}")
+    @ValueSource(strings = ["//;\n1", "//;\n1;2", "//;\n1,2:3", "//;\n1;2;3"])
+    fun `커스텀 구분자가 있는 문자열이 있으면 커스텀 구분자도 가진 객체를 생성한다`(expression: String) {
+        val expected = Separators.of(setOf(Separator(","), Separator(":"), Separator(";")))
+        val actual = Separators.of(expression)
+        assertThat(actual).isEqualTo(expected)
+    }
 }
