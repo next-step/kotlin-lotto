@@ -1,6 +1,6 @@
 package domain.calculator
 
-import domain.calculator.domain.Expression
+import domain.calculator.domain.expression.Expression
 import domain.calculator.ui.InputView
 import domain.calculator.ui.ResultView
 import global.strategy.ConsoleInputStrategy

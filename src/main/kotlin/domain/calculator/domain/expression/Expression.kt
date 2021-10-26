@@ -1,8 +1,7 @@
-package domain.calculator.domain
+package domain.calculator.domain.expression
 
 @JvmInline
 value class Expression(private val _expression: String?) {
-
     val expression: String
         get() {
             if (_expression.isNullOrBlank()) {
@@ -12,6 +11,6 @@ value class Expression(private val _expression: String?) {
         }
 
     companion object {
-        const val DEFAULT_STRING = "0";
+        const val DEFAULT_STRING = "0"
     }
 }
