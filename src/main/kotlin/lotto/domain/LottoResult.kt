@@ -28,12 +28,13 @@ data class LottoResult(val result: Map<Reward, Int>) {
     }
 
     private fun roundOffDecimal(number: Double): Double {
-        val df = DecimalFormat("#.##")
-        df.roundingMode = RoundingMode.FLOOR
-        return df.format(number).toDouble()
+        val decimalFormat = DecimalFormat(PATTERN)
+        decimalFormat.roundingMode = RoundingMode.FLOOR
+        return decimalFormat.format(number).toDouble()
     }
 
     companion object {
         val EMPTY = LottoResult(emptyMap())
+        val PATTERN = "#.##"
     }
 }
