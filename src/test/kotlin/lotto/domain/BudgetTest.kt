@@ -1,8 +1,8 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatCode
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -30,7 +30,6 @@ internal class BudgetTest {
     @ParameterizedTest
     @ValueSource(ints = [100, 500, 900])
     fun `예산에 최소 로또 금액을 입력하지 않으면 예외를 던진다`(givenValue: Int) {
-        assertThatCode { Budget.valueOf(givenValue) }
-            .isInstanceOf(IllegalArgumentException::class.java)
+        assertThrows<IllegalArgumentException> { Budget.valueOf(givenValue) }
     }
 }

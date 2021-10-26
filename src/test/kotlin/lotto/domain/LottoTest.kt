@@ -1,8 +1,8 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatCode
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class LottoTest {
 
@@ -18,7 +18,7 @@ internal class LottoTest {
     fun `로또는 로또 번호가 6개가 아니라면 예외를 던진다`() {
         val lottoNumbers = (1..5).map { LottoNumber.valueOf(it) }
 
-        assertThatCode { Lotto(lottoNumbers) }.isInstanceOf(IllegalArgumentException::class.java)
+        assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
     }
 
     @Test
@@ -33,7 +33,7 @@ internal class LottoTest {
             lottoNumber1, lottoNumber2, lottoNumber3,
             lottoNumber4, lottoNumber5, lottoNumber6
         )
-        assertThatCode { Lotto(lottoNumbers) }.isInstanceOf(IllegalArgumentException::class.java)
+        assertThrows<IllegalArgumentException> { Lotto(lottoNumbers) }
     }
 
     @Test
