@@ -1,5 +1,5 @@
 package global.strategy
 
-interface OutputStrategy {
+fun interface OutputStrategy {
     fun output(element: String)
 }
