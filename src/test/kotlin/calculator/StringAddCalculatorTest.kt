@@ -73,4 +73,30 @@ class StringAddCalculatorTest {
         // then
         assertThat(sum).isSameAs(6)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "1;2;-3"])
+    fun `문자열 계산기에 음수를 전달하는 경우 NumberFormatException 예외 처리를 한다`(text: String) {
+        // given
+        val stringAddCalculator = StringAddCalculator(text)
+
+        // when
+        val actual = runCatching { stringAddCalculator.add() }.exceptionOrNull()
+
+        // then
+        assertThat(actual).hasMessageContaining("Invalid number format:")
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["아", "1,2,아"])
+    fun `문자열 계산기에 문자열을 전달하는 경우 NumberFormatException 예외 처리를 한다`(text: String) {
+        // given
+        val stringAddCalculator = StringAddCalculator(text)
+
+        // when
+        val actual = runCatching { stringAddCalculator.add() }.exceptionOrNull()
+
+        // then
+        assertThat(actual).hasMessageContaining("Invalid number format:")
+    }
 }

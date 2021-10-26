@@ -1,13 +1,13 @@
 package calculator.utils
 
 object StringUtil {
-    private val BASIC_PATTERN = Regex(",|:")
-    private val CUSTOM_PATTERN = Regex("//(.)\n(.*)")
+    private val basicPattern = Regex(",|:")
+    private val customPattern = Regex("//(.)\n(.*)")
 
     fun convertTextToList(text: String): List<String> =
-        CUSTOM_PATTERN.find(text)?.let {
+        customPattern.find(text)?.let {
             splitTextFromCustomPattern(it)
-        } ?: text.split(BASIC_PATTERN)
+        } ?: text.split(basicPattern)
 
     private fun splitTextFromCustomPattern(it: MatchResult): List<String> {
         val (customDelimiter, matchingText) = it.destructured
