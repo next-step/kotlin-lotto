@@ -1,6 +1,7 @@
 package lotto.views
 
 import lotto.domain.Budget
+import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.Lottos
 import lotto.domain.Reward
@@ -16,11 +17,22 @@ object OutputView {
             append(lottoCount).append(LOTTO_COUNT_INFORMATION)
             append(System.lineSeparator())
             lottos.lottos.forEach { lotto ->
-                append(lotto)
+                append(printLottoNumbers(lotto))
                 append(System.lineSeparator())
             }
         }
         println(inputInformation)
+    }
+
+    private fun printLottoNumbers(lotto: Lotto): String {
+        val lottoNumbers = lotto.getLottoNumbers()
+            .joinToString(COMMA) { it.number.toString() }
+        val result = buildString {
+            append(BRACE_OPEN)
+            append(lottoNumbers)
+            append(BRACE_CLOSE)
+        }
+        return result
     }
 
     fun showResult(lottoResult: LottoResult, budget: Budget) {
@@ -49,4 +61,7 @@ object OutputView {
     private const val LOTTO_COUNT = "개"
     private const val TOTAL_PROFIT = "총 수익률은"
     private const val LOTTO_MATCHED = "개 일치"
+    private const val BRACE_OPEN = "["
+    private const val BRACE_CLOSE = "]"
+    private const val COMMA = ","
 }

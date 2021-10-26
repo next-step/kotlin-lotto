@@ -10,11 +10,6 @@ value class LottoNumber private constructor(val number: Int) : Comparable<LottoN
     override fun compareTo(other: LottoNumber): Int {
         return this.number - other.number
     }
-
-    override fun toString(): String {
-        return number.toString()
-    }
-
     companion object {
         private const val NOT_NUMBER_RANGER = "로또의 범위가 아닙니다"
         private const val LOTTO_MINIMUM_NUMBER = 1
