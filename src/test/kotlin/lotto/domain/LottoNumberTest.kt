@@ -18,11 +18,10 @@ internal class LottoNumberTest {
     @Test
     fun `1이상 45이하의 숫자가 로또 번호로 입력되면 정상적인 LottoNumber가 생성된다`() {
         IntRange(1, 45).forEach { number ->
-            val lottoNumber = LottoNumber(number)
-
+            val lottoNumber = LottoNumberPool[number]
             assertThat(lottoNumber).isNotNull
             assertThat(lottoNumber.value).isEqualTo(number)
-            assertThat(lottoNumber).isEqualTo(LottoNumber(number))
+            assertThat(lottoNumber).isEqualTo(LottoNumberPool[number])
         }
     }
 }
