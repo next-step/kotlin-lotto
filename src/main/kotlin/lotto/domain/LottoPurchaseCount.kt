@@ -7,7 +7,7 @@ value class LottoPurchaseCount private constructor(val value: Int) {
         private const val LOTTO_PRICE = 1_000
 
         fun from(purchaseAmount: LottoPurchaseAmount): LottoPurchaseCount {
-            return LottoPurchaseCount(purchaseAmount.value / LOTTO_PRICE)
+            return LottoPurchaseCount(purchaseAmount.value!! / LOTTO_PRICE)
         }
     }
 }

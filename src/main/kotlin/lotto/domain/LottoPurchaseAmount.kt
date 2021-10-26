@@ -1,7 +1,11 @@
 package lotto.domain
 
 @JvmInline
-value class LottoPurchaseAmount constructor(val value: Int) {
+value class LottoPurchaseAmount private constructor(val value: Int?) {
+
+    init {
+        require(value != null && value in MINIMUM_LOTTO_PURCHASE_AMOUNT..MAXIMUM_LOTTO_PURCHASE_AMOUNT) { WRONG_LOTTO_PURCHASE_AMOUNT_MESSAGE }
+    }
 
     companion object {
         private const val MINIMUM_LOTTO_PURCHASE_AMOUNT = 1_000
@@ -10,9 +14,7 @@ value class LottoPurchaseAmount constructor(val value: Int) {
             "잘못된 로또 구입 금액입니다.(${MINIMUM_LOTTO_PURCHASE_AMOUNT}원)~(${MAXIMUM_LOTTO_PURCHASE_AMOUNT}원 입력)"
 
         fun from(input: String): LottoPurchaseAmount {
-            val value = input.toIntOrNull()
-            require(value != null && value >= MINIMUM_LOTTO_PURCHASE_AMOUNT && value <= MAXIMUM_LOTTO_PURCHASE_AMOUNT) { WRONG_LOTTO_PURCHASE_AMOUNT_MESSAGE }
-            return LottoPurchaseAmount(value)
+            return LottoPurchaseAmount(input.toIntOrNull())
         }
     }
 }

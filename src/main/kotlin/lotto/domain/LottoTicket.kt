@@ -19,7 +19,7 @@ class LottoTicket(
             .sumOf { it.prizeMoney(winningInfo.winningNumberPackage) }
             .toBigDecimal()
             .setScale(2, RoundingMode.HALF_UP)
-            .div(purchaseInfo.purchaseAmount.value.toBigDecimal())
+            .div(purchaseInfo.purchaseAmount.value!!.toBigDecimal())
     }
 
     companion object {

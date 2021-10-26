@@ -17,7 +17,7 @@ internal class LottoTicketTest {
     fun `2개의 로또 게임 중 당첨번호와 3개 이상 일치하는 게임번호가 없을 경우 결과통계에는 MISSED Rank만 존재하고 수익율은 0을 반환한다`(
         gameNumbers: List<List<Int>>
     ) {
-        val purchaseAmount = LottoPurchaseAmount(2000)
+        val purchaseAmount = LottoPurchaseAmount.from("2000")
         val lottoPurchaseInfo = LottoPurchaseInfo(LottoPurchaseCount.from(purchaseAmount), purchaseAmount)
 
         val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
@@ -63,7 +63,7 @@ internal class LottoTicketTest {
     fun `5개의 로또 게임 중 당첨번호와 3개가 일치하는 게임번호가 1개 있을 경우 결과통계와 수익율을 정상적으로 반환한다`(
         gameNumbers: List<List<Int>>
     ) {
-        val purchaseAmount = LottoPurchaseAmount(5000)
+        val purchaseAmount = LottoPurchaseAmount.from("5000")
         val lottoPurchaseInfo = LottoPurchaseInfo(LottoPurchaseCount.from(purchaseAmount), purchaseAmount)
 
         val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
@@ -119,7 +119,7 @@ internal class LottoTicketTest {
     fun `5개의 로또 게임 중 당첨번호와 3개가 일치하는 게임번호가 1개 있고, 4개가 일치하는 게임번호가 1개 있을 경우 결과통계와 수익율을 정상적으로 반환한다`(
         gameNumbers: List<List<Int>>
     ) {
-        val purchaseAmount = LottoPurchaseAmount(5000)
+        val purchaseAmount = LottoPurchaseAmount.from("5000")
         val lottoPurchaseInfo = LottoPurchaseInfo(LottoPurchaseCount.from(purchaseAmount), purchaseAmount)
 
         val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
@@ -176,7 +176,7 @@ internal class LottoTicketTest {
     fun `5개의 로또 게임 중 당첨번호와 5개가 일치하는 게임번호가 1개 있을 경우 결과통계와 수익율을 정상적으로 반환한다`(
         gameNumbers: List<List<Int>>
     ) {
-        val purchaseAmount = LottoPurchaseAmount(5000)
+        val purchaseAmount = LottoPurchaseAmount.from("5000")
         val lottoPurchaseInfo = LottoPurchaseInfo(LottoPurchaseCount.from(purchaseAmount), purchaseAmount)
 
         val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
@@ -232,7 +232,7 @@ internal class LottoTicketTest {
     fun `5개의 로또 게임 중 당첨번호와 6개 일치하는 게임번호가 1개 있을 경우 결과통계와 수익율을 정상적으로 반환한다`(
         gameNumbers: List<List<Int>>
     ) {
-        val purchaseAmount = LottoPurchaseAmount(5000)
+        val purchaseAmount = LottoPurchaseAmount.from("5000")
         val lottoPurchaseInfo = LottoPurchaseInfo(LottoPurchaseCount.from(purchaseAmount), purchaseAmount)
 
         val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
