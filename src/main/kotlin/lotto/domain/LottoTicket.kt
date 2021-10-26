@@ -8,13 +8,13 @@ class LottoTicket(
     private val purchaseInfo: LottoPurchaseInfo,
     val lottoPackages: List<LottoNumberPackage>
 ) {
-    fun getResultStatistics(winningInfo: WinningInfo): Map<LottoResultRank, Int> {
+    fun resultStatistics(winningInfo: WinningInfo): Map<LottoResultRank, Int> {
         return lottoPackages
             .groupingBy { it.matchedCount(winningInfo.winningNumberPackage).rank() }
             .eachCount()
     }
 
-    fun getTotalProfitRate(winningInfo: WinningInfo): BigDecimal {
+    fun totalProfitRate(winningInfo: WinningInfo): BigDecimal {
         return lottoPackages
             .sumOf { it.prizeMoney(winningInfo.winningNumberPackage) }
             .toBigDecimal()
