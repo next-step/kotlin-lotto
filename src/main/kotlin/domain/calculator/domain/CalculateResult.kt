@@ -1,6 +1,7 @@
 package domain.calculator.domain
 
-class CalculateResult(val result: Int) {
+@JvmInline
+value class CalculateResult(val result: Int) {
     init {
         if (result < MINIMUM) throw RuntimeException("")
     }
