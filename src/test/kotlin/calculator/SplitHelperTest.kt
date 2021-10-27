@@ -37,4 +37,20 @@ class SplitHelperTest {
         val actual = helper.split(input)
         assertEquals(expected, actual)
     }
+
+    @DisplayName(""" "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다. """)
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "//;\n1;2;3",
+            "//=\n1=2=3"
+        ]
+    )
+    fun `문자 사이에 커스텀 구분자를 지정할 수 있다`(input: String) {
+        val helper = SplitHelper()
+
+        val expected = listOf("1", "2", "3")
+        val actual = helper.split(input)
+        assertEquals(expected, actual)
+    }
 }
