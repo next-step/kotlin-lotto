@@ -7,7 +7,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.NullSource
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -19,7 +18,7 @@ class LottoTest {
     fun `correct purchase amount`(price: Int) {
         val sample = Price(price)
 
-        assertThat(sample.price).isEqualTo(price)
+        assertThat(sample.value).isEqualTo(price)
     }
 
     @ValueSource(ints = [10, -199, 134256])
@@ -39,6 +38,4 @@ class LottoTest {
             .isThrownBy{ Price(price) }
             .withMessage(EXCEPTION_PRICE_NULL)
     }
-
-
 }

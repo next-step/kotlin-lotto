@@ -58,7 +58,7 @@ class StringAddCalculatorTest {
     @ValueSource(strings = ["d,3", "g:3:e"])
     fun character(text: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy{ calculator.add(text) }
+            .isThrownBy { calculator.add(text) }
             .withMessage(EXCEPTION_NULL_OR_EMPTY)
     }
 
@@ -66,7 +66,7 @@ class StringAddCalculatorTest {
     @Test
     fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy{ calculator.add("-1") }
+            .isThrownBy { calculator.add("-1") }
             .withMessage(EXCEPTION_NULL_OR_EMPTY)
     }
 }
