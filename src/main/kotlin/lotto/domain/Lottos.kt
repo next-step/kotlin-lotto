@@ -2,8 +2,8 @@ package lotto.domain
 
 data class Lottos(val lottos: List<Lotto>) {
 
-    fun checkMatching(lotto: Lotto): Map<Reward, Int> {
-        return lottos.map { Reward.of(it.countMatchedNumbers(lotto)) }
+    fun checkMatching(lotto: Lotto, bonusNumber: LottoNumber): Map<Reward, Int> {
+        return lottos.map { Reward.of(it.countMatchedNumbers(lotto), it.containsBonusNumber(bonusNumber)) }
             .groupingBy { it }
             .eachCount()
     }
