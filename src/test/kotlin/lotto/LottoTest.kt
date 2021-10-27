@@ -26,7 +26,7 @@ class LottoTest {
     @DisplayName("구매 금액을 올바르게 입력하지 않은 경우")
     fun `incorrect purchase amount`(price: Int) {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy{ Price(price) }
+            .isThrownBy { Price(price) }
             .withMessage(EXCEPTION_PRICE_FORMAT)
     }
 
@@ -35,7 +35,7 @@ class LottoTest {
     @DisplayName("구매 금액을 입력하지 않은 경우")
     fun `null of purchase amount`(price: Int?) {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy{ Price(price) }
+            .isThrownBy { Price(price) }
             .withMessage(EXCEPTION_PRICE_NULL)
     }
 }
