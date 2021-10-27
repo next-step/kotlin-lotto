@@ -9,8 +9,10 @@ class StringAddCalculator {
             return 0
         }
 
-        return splitHelper
+        val positiveNumbers = splitHelper
             .split(text)
-            .sumOf { it.toInt() }
+            .map { it.toInt() }
+            .let(::PositiveNumbers)
+        return positiveNumbers.sum()
     }
 }
