@@ -14,39 +14,38 @@
 5. 문자열을 getter 하고 split 하는 방법도 있지만 구분자에서 값을 받으면 나눈 값을 반환해도 좋을 듯  
   
 ## 설계      
-* [ ] Expression : 입력된 문자열      
+* [x] Expression : 입력된 문자열      
   * 입력된 문자열에 대한 VO 클래스 
   * Null 또는 공백으로만 이루어졌는지 확인후 반환 값 다르게 로직 구성
-* [ ] Separator : 구분자
+* [x] Separator : 구분자
   * 하나의 구분자에 대한 VO 클래스
   * Null 체크
   * 공백으로만 이루어졌는지 체크
   * 숫자로 이루어졌다면? 이건 좀 고민해봐야할 듯 
-* [ ] Separators : 구분자 일급 컬렉션
+* [x] Separators : 구분자 일급 컬렉션
   * 일급 컬렉션 VO 클래스 
   * `Set<Seperator>` 를 가지고 있는 일급 컬렉션
   * Null 체크, 
   * empty() 체크 
   * 알맞게 분리한 문자열 반환 
-* [ ] CalculationResult : 결과값 -> 팩토리 메서드로 조작 가능      
+* [x] CalculationResult : 결과값 -> 팩토리 메서드로 조작 가능      
   * 결과값에 대한 VO 클래스
   * get()를 지원해서 View 에서 사용
-* [ ] CalculationStrategy : 계산 자체에 대한 인터페이스   
-  * AddCalculationStrategyStrategy : 덧셈 연산에 대한 작업 
-* [ ] Calculator : 계산기
+* ~~[] CalculationStrategy : 계산 자체에 대한 인터페이스~~   
+  * ~~AddCalculationStrategyStrategy : 덧셈 연산에 대한 작업~~ 
+* [x] Calculator : 계산기
   * 싱글턴 객체로 사용 
   * Service 전용 클래스 
-* [ ] CalculatorApplication  
-  * 싱글턴 객체로 사용   
+* [x] CalculatorApplication  
   * Input/Output 받는 Controller     
-* [ ] InputView   
+* [x] InputView   
   * 싱글턴이면 좋지만 프로퍼티 들어오면 그냥 사용  
-* [ ] ResultView  
+* [x] ResultView  
   * 싱글턴이면 좋지만 프로퍼티 들어오면 그냥 사용  
-* [ ] InputStrategy : 입력 방식에 대한 전략    
-    * [ ] ConsoleInputStrategy : 콘솔 입력에 대한 방식   
-* [ ] ConsoleOutputStrategy : 출력 방식에 대한 전략    
-    * [ ] ConsoleOutputStrategy : 콘솔 출력에 대한 방식
+* [x] InputStrategy : 입력 방식에 대한 전략    
+    * [x] ConsoleInputStrategy : 콘솔 입력에 대한 방식   
+* [x] ConsoleOutputStrategy : 출력 방식에 대한 전략    
+    * [x] ConsoleOutputStrategy : 콘솔 출력에 대한 방식
   
 # 플로우 
 

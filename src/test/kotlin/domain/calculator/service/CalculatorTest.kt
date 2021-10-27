@@ -73,11 +73,4 @@ class CalculatorTest {
 
         assertThat(actual).isEqualTo(expected)
     }
-
-    // @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
-    // @Test
-    // fun negative() {
-    //     assertThatExceptionOfType(RuntimeException::class.java)
-    //         .isThrownBy(() -> calculator.add("-1"));
-    // }
 }

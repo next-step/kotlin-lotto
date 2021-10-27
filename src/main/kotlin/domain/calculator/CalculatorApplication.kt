@@ -15,7 +15,8 @@ class CalculatorApplication(
     fun execute() {
         val expression = expression()
         val calculateResult = Calculator.calculate(expression)
-        resultView.output(calculateResult.result.toString())
+        val result = calculateResult.result
+        resultView.output(result.toString())
     }
 
     private fun expression(): Expression {
