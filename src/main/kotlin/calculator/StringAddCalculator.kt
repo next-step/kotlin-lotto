@@ -3,6 +3,9 @@ package calculator
 class StringAddCalculator {
 
     fun add(text: String?): Int {
-        return 0
+        if (text.isNullOrEmpty()) {
+            return 0
+        }
+        return text.toInt()
     }
 }
