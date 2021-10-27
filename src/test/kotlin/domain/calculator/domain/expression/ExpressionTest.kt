@@ -1,5 +1,6 @@
 package domain.calculator.domain.expression
 
+import domain.calculator.domain.operand.PositiveOperand
 import domain.calculator.strategy.CustomSeparatorRegexStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -43,5 +44,18 @@ class ExpressionTest {
         val expression = Expression(rawExpression, CustomSeparatorRegexStrategy)
 
         assertThrows<RuntimeException> { expression.customSeparatorExpression() }
+    }
+
+    @ParameterizedTest(name = "연산식: `{0}`")
+    @ValueSource(strings = ["1", "1,2", "1,2:3"])
+    fun `커스텀 구분자가 없는 입력된 연산식에서 실제 계산될 연산 숫자들을 리스트로 반환한다`(rawExpression: String) {
+        val expected = rawExpression.split(Regex(",|:")).asSequence()
+            .map { PositiveOperand(it.toInt()) }
+            .toList()
+
+        val expression = Expression(rawExpression, CustomSeparatorRegexStrategy)
+        val actual = expression.split(",|:")
+
+        assertThat(actual).isEqualTo(expected)
     }
 }
