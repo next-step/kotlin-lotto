@@ -1,5 +1,9 @@
 package lotto
 
+import lotto.model.Lotto
+import lotto.model.Lotto.Companion.EXCEPTION_DUPLICATED_LOTTO_NUMBER
+import lotto.model.Lotto.Companion.EXCEPTION_LOTTO_FORMAT
+import lotto.model.LottoNumber
 import lotto.model.Price
 import lotto.model.Price.Companion.EXCEPTION_PRICE_FORMAT
 import lotto.model.Price.Companion.EXCEPTION_PRICE_NULL
@@ -46,6 +50,40 @@ class LottoTest {
     fun `check lotto count`(price: Int) {
         val sample = Price(price)
 
-        assertThat(sample.lottoCount).isEqualTo(price/1000)
+        assertThat(sample.lottoCount).isEqualTo(price / 1000)
+    }
+
+    // 로또 객체 테스트 코드
+    @Test
+    @DisplayName("로또가 번호 순서대로 정렬되어 나오는지 확인")
+    fun `check lotto number sorting`() {
+        val list =
+            listOf(LottoNumber(7), LottoNumber(5), LottoNumber(1), LottoNumber(6), LottoNumber(3), LottoNumber(4))
+        val lotto = Lotto(list)
+
+        println(lotto.printNumber())
+        assertThat(lotto.numbers).isEqualTo(listOf(1,3,4,5,7,6))
+    }
+
+    @Test
+    @DisplayName("로또가 번호가 중복되어 나오는지 확인")
+    fun `duplicated lotto number`() {
+        val list =
+            listOf(LottoNumber(43), LottoNumber(5), LottoNumber(1), LottoNumber(39), LottoNumber(1), LottoNumber(1))
+
+        assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { Lotto(list) }
+            .withMessage(EXCEPTION_DUPLICATED_LOTTO_NUMBER)
+    }
+
+    @Test
+    @DisplayName("로또가 번호가 중복되어 나오는지 확인")
+    fun `incorrect lotto number`() {
+        val list =
+            listOf(LottoNumber(39), LottoNumber(7), LottoNumber(5), LottoNumber(1), LottoNumber(6), LottoNumber(3), LottoNumber(4))
+
+        assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { Lotto(list) }
+            .withMessage(EXCEPTION_LOTTO_FORMAT)
     }
 }
