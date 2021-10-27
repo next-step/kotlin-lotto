@@ -4,6 +4,7 @@ import domain.calculator.strategy.CustomSeparatorRegexStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -34,5 +35,13 @@ class ExpressionTest {
         val expected = Regex(CustomSeparatorRegexStrategy.SEPARATOR_REGEX).find(rawExpression)!!.groupValues[2]
 
         assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest(name = "연산식: `{0}`")
+    @ValueSource(strings = ["", "1", "1,2", "1,2:3"])
+    fun `커스텀 구분자가 아닌데 커스텀 구분자를 찾으려고 하면 에러가 발생한다`(rawExpression: String) {
+        val expression = Expression(rawExpression, CustomSeparatorRegexStrategy)
+
+        assertThrows<RuntimeException> { expression.customSeparatorExpression() }
     }
 }

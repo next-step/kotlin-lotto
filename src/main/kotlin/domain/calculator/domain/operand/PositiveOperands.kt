@@ -1,4 +1,4 @@
-package domain.calculator.domain
+package domain.calculator.domain.operand
 
 @JvmInline
 value class PositiveOperands private constructor(val operands: List<PositiveOperand>) {

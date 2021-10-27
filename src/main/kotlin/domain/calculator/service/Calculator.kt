@@ -1,6 +1,6 @@
 package domain.calculator.service
 
-import domain.calculator.domain.PositiveOperands
+import domain.calculator.domain.operand.PositiveOperands
 import domain.calculator.domain.expression.Expression
 import domain.calculator.domain.result.CalculateResult
 import domain.calculator.domain.separator.Separators
