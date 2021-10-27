@@ -50,6 +50,10 @@ object OutputView {
             if (key == Reward.NONE) {
                 return@forEach
             }
+            if (key == Reward.SECOND) {
+                println("${key.matchCount} $LOTTO_MATCHED, $BONUS_BALL_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
+                return@forEach
+            }
             println("${key.matchCount} $LOTTO_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
         }
     }
@@ -64,4 +68,5 @@ object OutputView {
     private const val BRACE_OPEN = "["
     private const val BRACE_CLOSE = "]"
     private const val COMMA = ","
+    private const val BONUS_BALL_MATCHED = "보너스 볼 일치"
 }
