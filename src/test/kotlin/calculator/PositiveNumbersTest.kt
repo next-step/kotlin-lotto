@@ -1,7 +1,6 @@
 package calculator
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -34,14 +33,13 @@ class PositiveNumbersTest {
         val numbers = input.split(",").map { it.toInt() }
         val expected = PositiveNumbers(numbers).sum()
 
-        Assertions.assertEquals(expected, actual.toInt())
+        assertEquals(expected, actual.toInt())
     }
 
-    @DisplayName("문자열 리스트로 분리된 숫자를 만들 수 있다.")
     @Test
     fun `문자열 리스트로 분리된 숫자를 만들 수 있다`() {
         val numbers = PositiveNumbers.from(listOf("1", "2", "3"))
 
-        Assertions.assertEquals(numbers, PositiveNumbers(listOf(1, 2, 3)))
+        assertEquals(numbers, PositiveNumbers(listOf(1, 2, 3)))
     }
 }
