@@ -6,6 +6,7 @@ import lotto.model.Price.Companion.EXCEPTION_PRICE_NULL
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -37,5 +38,14 @@ class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Price(price) }
             .withMessage(EXCEPTION_PRICE_NULL)
+    }
+
+    @ValueSource(ints = [1000, 5000, 100000])
+    @ParameterizedTest
+    @DisplayName("입력한 금액에 맞게 로또의 개수가 만들어졌는지 확인")
+    fun `check lotto count`(price: Int) {
+        val sample = Price(price)
+
+        assertThat(sample.lottoCount).isEqualTo(price/1000)
     }
 }
