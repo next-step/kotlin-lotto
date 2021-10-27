@@ -1,9 +1,11 @@
 package domain.calculator.strategy
 
 object CustomSeparatorRegexStrategy : RegexStrategy {
-    const val SEPARATOR_REGEX = "//(.)\n(.*)"
+    const val SEPARATOR_REGEX = "//(.)\\n(.*)"
 
-    override fun check(expression: String): Boolean = (matchResult(expression) != null)
+    override fun check(expression: String): Boolean {
+        return (matchResult(expression) != null)
+    }
 
     override fun groupValue(expression: String, index: Int): String {
         val result = matchResult(expression) ?: throw RuntimeException("")

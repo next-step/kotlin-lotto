@@ -1,7 +1,7 @@
 package domain.calculator
 
 import domain.calculator.domain.expression.Expression
-import domain.calculator.domain.separator.Separators
+import domain.calculator.service.Calculator
 import domain.calculator.strategy.CustomSeparatorRegexStrategy
 import domain.calculator.ui.InputView
 import domain.calculator.ui.ResultView
@@ -14,9 +14,8 @@ class CalculatorApplication(
 ) {
     fun execute() {
         val expression = expression()
-
-        val calculationExpression = expression.calculationExpression()
-        val separators = Separators.of(expression)
+        val calculateResult = Calculator.calculate(expression)
+        resultView.output(calculateResult.result.toString())
     }
 
     private fun expression(): Expression {

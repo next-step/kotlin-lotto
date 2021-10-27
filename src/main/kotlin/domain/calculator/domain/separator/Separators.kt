@@ -6,14 +6,18 @@ import domain.calculator.domain.separator.Separator.Companion.DEFAULT_SEPARATOR_
 import domain.calculator.strategy.RegexStrategy
 
 @JvmInline
-value class Separators private constructor(private val separators: Set<Separator>) {
+value class Separators private constructor(private val _separators: Set<Separator>) {
+    val separators: String
+        get() = _separators
+            .map(Separator::separator)
+            .joinToString("|")
+
     init {
-        if (separators.isEmpty()) throw RuntimeException(EMPTY_SET_EXCEPTION_MESSAGE)
+        if (_separators.isEmpty()) throw RuntimeException(EMPTY_EXCEPTION_MESSAGE)
     }
 
     companion object {
-        private const val EMPTY_SET_EXCEPTION_MESSAGE = "Separators, 비어있는 컬렉션은 입력될 수 없습니다."
-
+        private const val EMPTY_EXCEPTION_MESSAGE = "Separators, 비어있는 컬렉션은 입력될 수 없습니다."
         fun of(separators: Set<Separator>): Separators = Separators(separators.toSet())
         fun of(expression: String, regexStrategy: RegexStrategy): Separators = of(Expression(expression, regexStrategy))
         fun of(expression: Expression): Separators =
@@ -30,7 +34,7 @@ value class Separators private constructor(private val separators: Set<Separator
 
         private fun customSeparators(expression: Expression): Set<Separator> =
             setOf(
-                Separator(expression.customExpression())
+                Separator(expression.customSeparatorExpression())
             )
     }
 }

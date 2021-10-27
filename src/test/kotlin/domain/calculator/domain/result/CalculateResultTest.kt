@@ -1,5 +1,6 @@
-package domain.calculator.domain
+package domain.calculator.domain.result
 
+import domain.calculator.domain.result.CalculateResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
