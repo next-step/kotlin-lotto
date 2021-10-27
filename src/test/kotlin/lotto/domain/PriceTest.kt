@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.exception.InvalidLottoPriceException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -18,7 +19,7 @@ class PriceTest {
 
         // Act
         val sut = Price(value)
-        val result = sut.buy()
+        val result = sut.checkLottoCount()
 
         // Assert
         assertThat(result).isEqualTo(expected.toInt())
@@ -28,6 +29,6 @@ class PriceTest {
     @DisplayName("로또 구입 금액이 1000원 단위로 나누어 떨어지지 않을 경우 예외 발생")
     fun `sut throw IllegalArgumentException when Price is not divide`() {
         // Act, Assert
-        assertThrows<IllegalArgumentException> { Price(1500) }
+        assertThrows<InvalidLottoPriceException> { Price(1500) }
     }
 }
