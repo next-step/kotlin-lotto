@@ -59,13 +59,21 @@ class CalculatorTest {
         assertThat(actual).isEqualTo(expected)
     }
 
-    // @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
-    // @ParameterizedTest
-    // @ValueSource(strings = ["//;\n1;2;3"])
-    // fun customDelimiter(text: String) {
-    //     assertThat(calculator.add(text)).isSameAs(6);
-    // }
-    //
+    @ParameterizedTest(name = "연산식 : {0}")
+    @ValueSource(strings = ["//;\n1;2;3", "//,\n1,2,3", "//%\n1%2%3"])
+    fun `더블 슬래시와 개행문자 사이에 커스텀 구분자를 지정할 수 있다`(rawExpression: String) {
+        val expression = Expression(rawExpression, CustomSeparatorRegexStrategy)
+        val calculateExpression = expression.calculateExpression()
+        val separator = rawExpression[2].toString()
+
+        val expected = calculateExpression.split(separator).sumOf { it.toInt() }
+
+        val result = calculator.calculate(expression)
+        val actual = result.result
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
     // @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     // @Test
     // fun negative() {
