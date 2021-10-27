@@ -35,13 +35,18 @@ class CalculatorTest {
         assertThat(result.result).isEqualTo(Integer.valueOf(rawExpression))
     }
 
-    // @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
-    // @ParameterizedTest
-    // @ValueSource(strings = ["1,2"])
-    // fun twoNumbers(text: String) {
-    //     assertThat(calculator.add(text)).isSameAs(3);
-    // }
-    //
+    @ParameterizedTest(name = "연산식 : {0}")
+    @ValueSource(strings = ["1,2", "3,5", "100,100"])
+    fun `숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(rawExpression: String) {
+        val expected = rawExpression.split(Regex(",|:")).sumOf { it.toInt() }
+
+        val expression = Expression(rawExpression, CustomSeparatorRegexStrategy)
+        val result = calculator.calculate(expression)
+        val actual = result.result
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
     // @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
     // @ParameterizedTest
     // @ValueSource(strings = ["1,2:3"])
