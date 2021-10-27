@@ -47,13 +47,18 @@ class CalculatorTest {
         assertThat(actual).isEqualTo(expected)
     }
 
-    // @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
-    // @ParameterizedTest
-    // @ValueSource(strings = ["1,2:3"])
-    // fun colons(text: String) {
-    //     assertThat(calculator.add(text)).isSameAs(6);
-    // }
-    //
+    @ParameterizedTest(name = "연산식 : {0}")
+    @ValueSource(strings = ["1,2", "1:3", "1,2:3"])
+    fun `구분자를 쉼표 이외에 콜론을 사용할 수 있다`(rawExpression: String) {
+        val expected = rawExpression.split(Regex(",|:")).sumOf { it.toInt() }
+
+        val expression = Expression(rawExpression, CustomSeparatorRegexStrategy)
+        val result = calculator.calculate(expression)
+        val actual = result.result
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
     // @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     // @ParameterizedTest
     // @ValueSource(strings = ["//;\n1;2;3"])
