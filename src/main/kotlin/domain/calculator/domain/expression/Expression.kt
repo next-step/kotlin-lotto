@@ -25,7 +25,7 @@ data class Expression(private val _expression: String?, private val regexStrateg
     fun split(delimiters: String): List<PositiveOperand> =
         calculateExpression().split(Regex(delimiters))
             .asSequence()
-            .map(PositiveOperand::of)
+            .map(::PositiveOperand)
             .toList()
 
     companion object {
