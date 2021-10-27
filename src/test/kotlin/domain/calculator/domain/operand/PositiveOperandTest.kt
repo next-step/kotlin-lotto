@@ -3,6 +3,7 @@ package domain.calculator.domain.operand
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -18,5 +19,11 @@ class PositiveOperandTest {
             { assertThat(positiveOperand).isNotNull },
             { assertThat(positiveOperand).isExactlyInstanceOf(PositiveOperand::class.java) }
         )
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "-100", Integer.MIN_VALUE.toString()])
+    fun `음수값은 객체를 생성할 수 없다`(operandString: String) {
+        assertThrows<RuntimeException> { PositiveOperand(operandString) }
     }
 }
