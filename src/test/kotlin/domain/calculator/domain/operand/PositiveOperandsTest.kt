@@ -24,4 +24,12 @@ class PositiveOperandsTest {
     fun `비어있는 리스트로 생성 시도를 할 경우 예외를 발생한다`() {
         assertThrows<RuntimeException> { PositiveOperands.of(listOf()) }
     }
+
+    @Test
+    fun `합산 결과를 반환한다`() {
+        val operandList = listOf(PositiveOperand(1), PositiveOperand(2))
+        val positiveOperands = PositiveOperands.of(operandList)
+
+        assertThat(positiveOperands.sum()).isEqualTo(3)
+    }
 }
