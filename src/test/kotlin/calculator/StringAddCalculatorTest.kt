@@ -61,4 +61,10 @@ class StringAddCalculatorTest {
     fun negative() {
         assertThrows<RuntimeException> { calculator.add("-1") }
     }
+
+    @DisplayName("숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생해야 한다.")
+    @Test
+    fun nonNumber() {
+        assertThrows<RuntimeException> { calculator.add("-1,+,2") }
+    }
 }

@@ -8,11 +8,8 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()) {
             return 0
         }
-
-        val positiveNumbers = splitHelper
-            .split(text)
-            .map { it.toInt() }
-            .let(::PositiveNumbers)
+        val splitText = splitHelper.split(text)
+        val positiveNumbers = PositiveNumbers.from(splitText)
         return positiveNumbers.sum()
     }
 }
