@@ -46,4 +46,14 @@
 * [ ] InputStrategy : 입력 방식에 대한 전략    
     * [ ] ConsoleInputStrategy : 콘솔 입력에 대한 방식   
 * [ ] ConsoleOutputStrategy : 출력 방식에 대한 전략    
-    * [ ] ConsoleOutputStrategy : 콘솔 출력에 대한 방식 
+    * [ ] ConsoleOutputStrategy : 콘솔 출력에 대한 방식
+  
+# 플로우 
+
+1. Null이거나 빈값이 될 수 있는 rawExpression을 입력받는다.  
+2. 입력받은 rawExpression을 Expression으로 감싼다.  
+3. Expression 에서 Separators 를 반환한다.  
+    1. 커스텀 가지고 있으면 커스텀 구분자 반환   
+    2. 커스텀 가지고 있지않으면 디폴트 커스텀 구분자 반환 
+4. Expression 에서 CalculationExpression 을 반환한다.  
+5. CalculationExpression 에서 Separators를 넘기면 값을 반환한다.

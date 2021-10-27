@@ -1,6 +1,7 @@
 package domain.calculator
 
 import domain.calculator.domain.expression.Expression
+import domain.calculator.strategy.CustomSeparatorRegexStrategy
 import domain.calculator.ui.InputView
 import domain.calculator.ui.ResultView
 import global.strategy.ConsoleInputStrategy
@@ -16,7 +17,7 @@ class CalculatorApplication(
 
     private fun expression(): Expression {
         return try {
-            Expression(inputView.inputExpression())
+            Expression(inputView.inputExpression(), CustomSeparatorRegexStrategy)
         } catch (e: Exception) {
             e.message?.let(resultView::output)
             expression()

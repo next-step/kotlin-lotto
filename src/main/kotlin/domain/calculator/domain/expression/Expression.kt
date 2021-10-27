@@ -1,35 +1,30 @@
 package domain.calculator.domain.expression
 
-@JvmInline
-value class Expression(private val _expression: String?) {
-    val expression: String
-        get() {
-            if (_expression.isNullOrBlank()) {
-                return DEFAULT_STRING
-            }
-            return _expression
-        }
+import domain.calculator.strategy.RegexStrategy
 
-    val customSeparator: String
-        get() {
-            val result: MatchResult? = Regex(SEPARATOR_REGEX).find(expression)
-            result?.let { return it.groupValues[CUSTOM_SEPARATOR_INDEX] }
-            throw RuntimeException(NO_HAVE_CUSTOM_SEPARATOR_EXCEPTION_MESSAGE)
-        }
+data class Expression(private val _expression: String?, private val regexStrategy: RegexStrategy) {
+    private val expression: String = if (_expression.isNullOrBlank()) DEFAULT_STRING else _expression
 
-    fun hasCustomExpression(): Boolean {
-        val result: MatchResult? = Regex(SEPARATOR_REGEX).find(expression)
-        result?.let { return true }
-        return false
+    fun customExpression(): String {
+        return when (hasCustomExpression()) {
+            true -> regexStrategy.groupValue(expression, CUSTOM_SEPARATOR)
+            else -> throw RuntimeException()
+        }
     }
 
-    companion object {
-        private const val NO_HAVE_CUSTOM_SEPARATOR_EXCEPTION_MESSAGE = "커스텀 구분자가 없습니다."
+    fun calculationExpression(): String {
+        return when (hasCustomExpression()) {
+            true -> regexStrategy.groupValue(expression, NUMBER_EXPRESSION)
+            else -> expression
+        }
+    }
 
-        private const val SEPARATOR_REGEX = "//(.)\n(.*)" // 이거 인터페이스 분리해야겠다.
+    fun hasCustomExpression(): Boolean = regexStrategy.check(expression)
+
+    companion object {
         private const val DEFAULT_STRING = "0"
 
-        private const val CUSTOM_SEPARATOR_INDEX = 1
-        private const val NUMBER_POSITION = 2
+        private const val CUSTOM_SEPARATOR = 1
+        private const val NUMBER_EXPRESSION = 2
     }
 }
