@@ -1,6 +1,10 @@
 package lotto.view.input
 
-import lotto.domain.*
+import lotto.domain.BonusNumber
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumberPackage
+import lotto.domain.LottoPurchaseAmount
+import lotto.domain.WinningNumbers
 
 class ConsoleInputView : InputView {
     override fun getPurchaseAmount(): LottoPurchaseAmount {
