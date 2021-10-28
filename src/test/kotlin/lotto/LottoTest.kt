@@ -7,7 +7,7 @@ class LottoTest {
     @Test
     fun `로또는 개당 1000원이다`() {
         // given
-        val lotto = Lotto(lottoNumbers = listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto()
 
         // then
         assertThat(lotto.price).isEqualTo(1000)
