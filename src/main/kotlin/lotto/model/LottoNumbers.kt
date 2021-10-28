@@ -30,6 +30,17 @@ data class LottoNumbers(
 
     private fun asList(): List<Int> = listOf(num1, num2, num3, num4, num5, num6)
 
+    fun match(numbers: LottoNumbers): Int {
+        val numbers1 = asList()
+        val numbers2 = numbers.asList()
+
+        val array = IntArray(MAX_NUMBER + 1)
+        numbers1.forEach { num -> array[num]++ }
+        numbers2.forEach { num -> array[num]++ }
+
+        return array.filter { it == 2 }.size
+    }
+
     companion object {
         private const val LOTTO_SIZE = 6
         private const val MIN_NUMBER = 0
