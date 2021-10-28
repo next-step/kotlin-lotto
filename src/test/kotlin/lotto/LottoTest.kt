@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.GenerateLotto
 import lotto.model.Lotto
 import lotto.model.Lotto.Companion.EXCEPTION_DUPLICATED_LOTTO_NUMBER
 import lotto.model.Lotto.Companion.EXCEPTION_LOTTO_FORMAT
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullSource
 import org.junit.jupiter.params.provider.ValueSource
+import kotlin.random.Random
 
 class LottoTest {
 
@@ -61,7 +63,6 @@ class LottoTest {
             listOf(LottoNumber(7), LottoNumber(5), LottoNumber(1), LottoNumber(6), LottoNumber(3), LottoNumber(4))
         val lotto = Lotto(list)
 
-        println(lotto.printNumber())
         assertThat(lotto.numbers).isEqualTo(listOf(1,3,4,5,7,6))
     }
 
@@ -85,5 +86,14 @@ class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Lotto(list) }
             .withMessage(EXCEPTION_LOTTO_FORMAT)
+    }
+
+    @Test
+    @DisplayName("로또가 번호 범위 확인")
+    fun `check lotto number range`() {
+        val lottos = GenerateLotto(Price(3000)).generateLottoList()
+        val randomLotto = lottos[Random.nextInt(0,2)]
+
+        assertThat(randomLotto.numbers[Random.nextInt(0,6)].number).isBetween(1, 45)
     }
 }

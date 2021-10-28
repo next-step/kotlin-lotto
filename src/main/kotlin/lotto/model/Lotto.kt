@@ -16,10 +16,6 @@ data class Lotto(
             .sorted()
             .map { LottoNumber(it) }
 
-    fun printNumber() {
-        println("[${numbers.joinToString()}]")
-    }
-
     companion object {
         private const val SIZE_LOTTO_NUMBER = 6
         const val EXCEPTION_LOTTO_FORMAT = "숫자 포멧에 맞지 않습니다."
