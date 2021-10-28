@@ -24,8 +24,9 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
+        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
 
-        val winningInfo = WinningInfo(winningNumberPackage)
+        val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
         val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(0.00).setScale(2, RoundingMode.HALF_UP)
@@ -70,8 +71,9 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
+        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
 
-        val winningInfo = WinningInfo(winningNumberPackage)
+        val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
         val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(1.00).setScale(2, RoundingMode.HALF_UP)
@@ -126,8 +128,9 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
+        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
 
-        val winningInfo = WinningInfo(winningNumberPackage)
+        val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
         val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         result.resultStatistics
@@ -184,8 +187,9 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
+        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
 
-        val winningInfo = WinningInfo(winningNumberPackage)
+        val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
         val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(300.00).setScale(2, RoundingMode.HALF_UP)
@@ -240,8 +244,9 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
+        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
 
-        val winningInfo = WinningInfo(winningNumberPackage)
+        val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
         val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(400000.00).setScale(2, RoundingMode.HALF_UP)

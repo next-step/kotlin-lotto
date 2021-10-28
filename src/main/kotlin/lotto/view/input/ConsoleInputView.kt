@@ -8,9 +8,9 @@ class ConsoleInputView : InputView {
         return LottoPurchaseAmount.from(readLine() ?: "")
     }
 
-    override fun getWinningNumbers(): WinningInfo {
+    override fun getWinningNumbers(): LottoNumberPackage {
         println("\n" + RECEIVE_WINNING_NUMBERS_MESSAGE)
-        return WinningInfo(WinningInfo.from(readLine() ?: ""))
+        return WinningNumbers.from(readLine() ?: "")
     }
 
     override fun getBonusNumber(winningNumbers: LottoNumberPackage): LottoNumber {
