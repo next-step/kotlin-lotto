@@ -1,6 +1,6 @@
 package calculator
 
-import calculator.domain.StringAddCalculator
+import calculator.domain.CalculatorImpl
 import calculator.usecase.SplitParser
 import calculator.view.InputView
 import calculator.view.ResultView
@@ -8,8 +8,7 @@ import calculator.view.ResultView
 fun main() {
     val inputView = InputView()
     val resultView = ResultView()
-    val parser = SplitParser()
-    val calculator = StringAddCalculator(parser)
+    val calculator = CalculatorImpl(SplitParser())
 
     val input = inputView.input()
 
