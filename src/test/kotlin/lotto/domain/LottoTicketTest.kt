@@ -18,7 +18,8 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("2000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
+        val gameNumberPackages =
+            gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
@@ -63,7 +64,8 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
+        val gameNumberPackages =
+            gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
@@ -118,7 +120,8 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
+        val gameNumberPackages =
+            gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
@@ -175,7 +178,8 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
+        val gameNumberPackages =
+            gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
@@ -230,7 +234,8 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
+        val gameNumberPackages =
+            gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()

@@ -9,10 +9,10 @@ import org.junit.jupiter.params.provider.ValueSource
 internal class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [0, 46, 100])
-    fun `1미만이나 45초과의 숫자가 로또 번호로 입력되면 IndexOutOfBoundsException이 발생한다`(number: Int) {
+    fun `1미만이나 45초과의 숫자가 로또 번호로 입력되면 IllegalArgumentException이 발생한다`(number: Int) {
         Assertions.assertThatThrownBy {
             LottoNumber[number]
-        }.isInstanceOf(IndexOutOfBoundsException::class.java)
+        }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @Test
