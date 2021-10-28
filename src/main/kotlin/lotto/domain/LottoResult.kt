@@ -28,6 +28,5 @@ data class LottoResult(val result: Map<Reward, Int>) {
 
     companion object {
         val EMPTY = LottoResult(emptyMap())
-        private const val NUMBER_FORMAT = 2
     }
 }
