@@ -8,4 +8,6 @@ class Lotto(
     init {
         require(price >= 0)
     }
+
+    fun match(numbers: LottoNumbers): Int = this.numbers.match(numbers)
 }
