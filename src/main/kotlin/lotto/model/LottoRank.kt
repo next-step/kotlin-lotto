@@ -8,7 +8,7 @@ private const val RANK_MATCH_FIFTH = 2
 
 enum class LottoRank(
     val winnings: Int,
-    private val match: Int
+    val match: Int
 ) {
     First(2_000_000_000, RANK_MATCH_FIRST),
     Second(1_500_000, RANK_MATCH_SECOND),

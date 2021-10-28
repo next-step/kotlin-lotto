@@ -2,7 +2,7 @@ package lotto.model
 
 class Lotto(
     val price: Int,
-    private val numbers: LottoNumbers
+    val numbers: LottoNumbers
 ) {
 
     init {

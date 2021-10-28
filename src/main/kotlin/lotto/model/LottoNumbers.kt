@@ -41,6 +41,8 @@ data class LottoNumbers(
         return array.filter { it == 2 }.size
     }
 
+    override fun toString(): String = "[$num1, $num2, $num3, $num4, $num5, $num6]"
+
     companion object {
         private const val LOTTO_SIZE = 6
         private const val MIN_NUMBER = 1
