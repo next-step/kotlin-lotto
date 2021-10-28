@@ -17,7 +17,8 @@ class LottoController {
         OutputView.showInputResult(lottos, budgets)
         val winningLotto = Lotto(StringUtils.toLottoNumbers(InputView.askWinningLotto()))
         val bonusNumber = LottoNumber.valueOf(InputView.askBonusNumber())
-        val lottoResult = LottoResult.EMPTY.updateRewards(lottos.checkMatching(winningLotto, bonusNumber))
+        val matchedRewards = lottos.getMatchedRewards(winningLotto, bonusNumber)
+        val lottoResult = LottoResult.EMPTY.updateRewards(matchedRewards)
         OutputView.showResult(lottoResult, budgets)
     }
 }
