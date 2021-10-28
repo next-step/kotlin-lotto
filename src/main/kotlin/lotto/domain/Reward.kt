@@ -17,10 +17,12 @@ enum class Reward(
     }
 
     fun hasBonus(): Boolean {
-        return SECOND == this
+        return BONUS_REWARDS.contains(this)
     }
 
     companion object {
+        private val BONUS_REWARDS = listOf(SECOND)
+
         fun of(matchCount: Int, isBonus: Boolean): Reward {
             return values().find { it.isMatch(matchCount, isBonus) } ?: NONE
         }
