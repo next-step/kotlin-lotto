@@ -50,12 +50,17 @@ object OutputView {
             if (key == Reward.NONE) {
                 return@forEach
             }
-            if (key == Reward.SECOND) {
-                println("${key.matchCount} $LOTTO_MATCHED, $BONUS_BALL_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
-                return@forEach
-            }
+            if (printRewardHasBonus(key, value)) return@forEach
             println("${key.matchCount} $LOTTO_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
         }
+    }
+
+    private fun printRewardHasBonus(key: Reward, value: Int): Boolean {
+        if (key.hasBonus()) {
+            println("${key.matchCount} $LOTTO_MATCHED, $BONUS_BALL_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
+            return true
+        }
+        return false
     }
 
     private const val LOTTO_COUNT_INFORMATION = "개를 구매했습니다"
