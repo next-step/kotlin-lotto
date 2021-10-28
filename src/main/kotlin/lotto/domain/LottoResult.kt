@@ -22,7 +22,7 @@ data class LottoResult(val result: Map<Reward, Int>) {
     fun getProfit(budget: Budget): BigDecimal {
         val totalAmount = getTotalAmount().toBigDecimal()
         val budgetAmount = budget.value.toBigDecimal()
-        return totalAmount.divide(budgetAmount, 2, RoundingMode.DOWN)
+        return totalAmount.divide(budgetAmount, NUMBER_FORMAT, RoundingMode.DOWN)
     }
 
     private fun getTotal(reward: Reward): Int {
@@ -31,5 +31,6 @@ data class LottoResult(val result: Map<Reward, Int>) {
 
     companion object {
         val EMPTY = LottoResult(emptyMap())
+        private const val NUMBER_FORMAT = 2
     }
 }
