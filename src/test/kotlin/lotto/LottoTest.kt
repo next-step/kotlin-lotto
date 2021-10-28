@@ -7,10 +7,13 @@ class LottoTest {
     @Test
     fun `로또는 개당 1000원이다`() {
         // given
-        val lotto = Lotto()
+        val lottos = Lottos(1000)
+
+        // when
+        val purchaseLottos = lottos.buy()
 
         // then
-        assertThat(lotto.price).isEqualTo(1000)
+        assertThat(purchaseLottos.size).isEqualTo(1)
     }
 
     @Test
@@ -38,5 +41,17 @@ class LottoTest {
 
         // then
         assertThat(actual).hasMessageContaining("중복 된 숫자는 들어올 수 없습니다.")
+    }
+
+    @Test
+    fun `로또는 여러개 살 수 있다`() {
+        // given
+        val lottos = Lottos(14000)
+
+        // when
+        val purchaseLottos = lottos.buy()
+
+        // then
+        assertThat(purchaseLottos.size).isEqualTo(14)
     }
 }
