@@ -43,7 +43,7 @@ data class LottoNumbers(
 
     companion object {
         private const val LOTTO_SIZE = 6
-        private const val MIN_NUMBER = 0
+        private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
     }
 }
