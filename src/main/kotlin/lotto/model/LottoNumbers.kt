@@ -11,18 +11,27 @@ data class LottoNumbers(
 
     init {
         checkNumberRange()
+        checkDuplicate()
     }
 
     private fun checkNumberRange() {
-        val numbers = listOf(num1, num2, num3, num4, num5, num6)
+        val numbers = asList()
         val hasOutOfRangeNumber = numbers.any { num -> num !in MIN_NUMBER..MAX_NUMBER }
 
-        if (hasOutOfRangeNumber) {
-            throw IllegalArgumentException("로또 번호는 0 ~ 45 사이의 값만 생성이 가능합니다.")
-        }
+        require(!hasOutOfRangeNumber)
     }
 
+    private fun checkDuplicate() {
+        val numbers = asList()
+        val distinctSize = numbers.distinct().size
+
+        require(distinctSize == LOTTO_SIZE)
+    }
+
+    private fun asList(): List<Int> = listOf(num1, num2, num3, num4, num5, num6)
+
     companion object {
+        private const val LOTTO_SIZE = 6
         private const val MIN_NUMBER = 0
         private const val MAX_NUMBER = 45
     }
