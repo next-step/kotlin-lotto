@@ -1,8 +1,11 @@
 package lotto.model
 
 class Lotto(
+    val price: Int,
     private val numbers: LottoNumbers
 ) {
 
-    val price = 1_000
+    init {
+        require(price >= 0)
+    }
 }

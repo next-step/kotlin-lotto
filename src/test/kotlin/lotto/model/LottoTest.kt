@@ -1,16 +1,17 @@
 package lotto.model
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
 
-    @DisplayName("로또의 가격은 1,000원이다.")
+    @DisplayName("로또의 가격이 0보다 작으면 RuntimeException 예외가 발생해야 한다.")
     @Test
     fun lottoPrice() {
-        val numbers = LottoNumbers(1, 2, 3, 4, 5, 6)
-        val lotto = Lotto(numbers)
-        assertThat(lotto.price).isEqualTo(1000)
+        assertThrows<RuntimeException> {
+            val numbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+            Lotto(-5000, numbers)
+        }
     }
 }

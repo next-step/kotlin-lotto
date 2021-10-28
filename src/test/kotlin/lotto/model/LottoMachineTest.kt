@@ -21,7 +21,7 @@ class LottoMachineTest {
     @ValueSource(ints = [0, 5, 10, 20, 6, 14])
     @ParameterizedTest
     fun lottoCount(size: Int) {
-        val actual = machine.createLotto(size).size
+        val actual = machine.createLotto(size, 0).size
         assertEquals(size, actual)
     }
 
@@ -29,7 +29,7 @@ class LottoMachineTest {
     @Test
     fun lottoNegative() {
         assertThrows<RuntimeException> {
-            machine.createLotto(-1)
+            machine.createLotto(-1, 0)
         }
     }
 }

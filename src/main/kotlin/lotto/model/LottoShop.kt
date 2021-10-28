@@ -7,7 +7,7 @@ class LottoShop {
 
         val size = amount / LOTTO_PRICE
         val machine = LottoMachine()
-        return machine.createLotto(size)
+        return machine.createLotto(size, LOTTO_PRICE)
     }
 
     companion object {
