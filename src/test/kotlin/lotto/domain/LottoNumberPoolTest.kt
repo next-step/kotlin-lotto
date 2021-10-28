@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 internal class LottoNumberPoolTest {
     @Test
     fun `getShuffledLottoNumbers() 함수를 호출하면 1~45 사이의 로또 번호 6개가 생성된다`() {
-        val shuffledLottoNumbers = LottoNumberPool.getShuffledLottoNumbers()
+        val shuffledLottoNumbers = LottoNumber.getShuffledLottoNumbers()
 
         assertThat(shuffledLottoNumbers).isNotNull
         assertThat(shuffledLottoNumbers.size).isEqualTo(LOTTO_GAME_NUMBER_COUNT)

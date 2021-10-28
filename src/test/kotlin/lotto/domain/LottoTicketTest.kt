@@ -18,19 +18,20 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("2000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
+        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
 
         val winningInfo = WinningInfo(winningNumberPackage)
-        val resultStatistics = lottoTicket.resultStatistics(winningInfo)
+
+        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(0.00).setScale(2, RoundingMode.HALF_UP)
 
-        assertThat(resultStatistics).isNotNull
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(2)
-        assertThat(lottoTicket.totalProfitRate(winningInfo, purchaseAmount)).isEqualTo(expectedTotalProfitRate)
+        assertThat(result.resultStatistics).isNotNull
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(2)
+        assertThat(result.profitRate).isEqualTo(expectedTotalProfitRate)
     }
 
     private fun getMissedRankLottoGamePackages(): Stream<Arguments> {
@@ -62,20 +63,21 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
+        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
 
         val winningInfo = WinningInfo(winningNumberPackage)
-        val resultStatistics = lottoTicket.resultStatistics(winningInfo)
+
+        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(1.00).setScale(2, RoundingMode.HALF_UP)
 
-        assertThat(resultStatistics).isNotNull
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(4)
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.FIFTH, 0)).isEqualTo(1)
-        assertThat(lottoTicket.totalProfitRate(winningInfo, purchaseAmount)).isEqualTo(expectedTotalProfitRate)
+        assertThat(result.resultStatistics).isNotNull
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(4)
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.FIFTH, 0)).isEqualTo(1)
+        assertThat(result.profitRate).isEqualTo(expectedTotalProfitRate)
     }
 
     private fun getOneFifthRankLottoGamePackages(): Stream<Arguments> {
@@ -116,21 +118,23 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
+        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
 
         val winningInfo = WinningInfo(winningNumberPackage)
-        val resultStatistics = lottoTicket.resultStatistics(winningInfo)
+
+        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
+        result.resultStatistics
         val expectedTotalProfitRate = BigDecimal(11.00).setScale(2, RoundingMode.HALF_UP)
 
-        assertThat(resultStatistics).isNotNull
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(3)
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.FIFTH, 0)).isEqualTo(1)
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.FOURTH, 0)).isEqualTo(1)
-        assertThat(lottoTicket.totalProfitRate(winningInfo, purchaseAmount)).isEqualTo(expectedTotalProfitRate)
+        assertThat(result.resultStatistics).isNotNull
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(3)
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.FIFTH, 0)).isEqualTo(1)
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.FOURTH, 0)).isEqualTo(1)
+        assertThat(result.profitRate).isEqualTo(expectedTotalProfitRate)
     }
 
     private fun getFifthAndFourthRankLottoGamePackages(): Stream<Arguments> {
@@ -171,20 +175,21 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
+        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
 
         val winningInfo = WinningInfo(winningNumberPackage)
-        val resultStatistics = lottoTicket.resultStatistics(winningInfo)
+
+        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(300.00).setScale(2, RoundingMode.HALF_UP)
 
-        assertThat(resultStatistics).isNotNull
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(4)
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.THIRD, 0)).isEqualTo(1)
-        assertThat(lottoTicket.totalProfitRate(winningInfo, purchaseAmount)).isEqualTo(expectedTotalProfitRate)
+        assertThat(result.resultStatistics).isNotNull
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(4)
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.THIRD, 0)).isEqualTo(1)
+        assertThat(result.profitRate).isEqualTo(expectedTotalProfitRate)
     }
 
     private fun getThirdRankLottoGamePackages(): Stream<Arguments> {
@@ -225,20 +230,21 @@ internal class LottoTicketTest {
         gameNumbers: List<List<Int>>
     ) {
         val purchaseAmount = LottoPurchaseAmount.from("5000")
-        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber(it) }.toSet()) }.toList()
+        val gameNumberPackages = gameNumbers.map { it -> LottoNumberPackage(it.map { LottoNumber[it] }.toSet()) }.toList()
         val lottoTicket = LottoTicket(gameNumberPackages)
 
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
 
         val winningInfo = WinningInfo(winningNumberPackage)
-        val resultStatistics = lottoTicket.resultStatistics(winningInfo)
+
+        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(400000.00).setScale(2, RoundingMode.HALF_UP)
 
-        assertThat(resultStatistics).isNotNull
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(4)
-        assertThat(resultStatistics.getOrDefault(LottoResultRank.FIRST, 0)).isEqualTo(1)
-        assertThat(lottoTicket.totalProfitRate(winningInfo, purchaseAmount)).isEqualTo(expectedTotalProfitRate)
+        assertThat(result.resultStatistics).isNotNull
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.MISSED, 0)).isEqualTo(4)
+        assertThat(result.resultStatistics.getOrDefault(LottoResultRank.FIRST, 0)).isEqualTo(1)
+        assertThat(result.profitRate).isEqualTo(expectedTotalProfitRate)
     }
 
     private fun getFirstRankLottoGamePackages(): Stream<Arguments> {

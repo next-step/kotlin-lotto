@@ -1,6 +1,7 @@
 package lotto.view.result
 
 import lotto.domain.LottoPurchaseCount
+import lotto.domain.LottoResult
 import lotto.domain.LottoResultRank
 import lotto.domain.LottoTicket
 import java.math.BigDecimal
@@ -15,11 +16,11 @@ class ConsoleResultView : ResultView {
         lottoTicket.lottoPackages.forEach { println(it.getSortedNumbers()) }
     }
 
-    override fun showResultStatistics(resultStatistics: Map<LottoResultRank, Int>, totalProfitRate: BigDecimal) {
+    override fun showResultStatistics(result: LottoResult) {
         println("\n당첨 통계")
         println("---------")
-        showMatchedCounts(resultStatistics)
-        showTotalProfitRate(totalProfitRate)
+        showMatchedCounts(result.resultStatistics)
+        showTotalProfitRate(result.profitRate)
     }
 
     private fun showMatchedCounts(resultStatistics: Map<LottoResultRank, Int>) {

@@ -6,6 +6,10 @@ import java.util.SortedSet
  * 로또 1게임
  */
 data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
+    init {
+        require(numbers.size == LOTTO_GAME_NUMBER_COUNT) { INVALID_LOTTO_GAME_NUMBER_COUNT_MESSAGE }
+    }
+
     fun size(): Int {
         return numbers.size
     }
@@ -16,16 +20,12 @@ data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
             .toSortedSet(compareBy { it })
     }
 
-    fun matchedCount(winningNumberPackage: LottoNumberPackage): MatchedCount {
+    fun getMatchedCount(winningNumberPackage: LottoNumberPackage): MatchedCount {
         return MatchedCount.from(numbers.intersect(winningNumberPackage.numbers).size)
     }
 
-    fun prizeMoney(winningNumberPackage: LottoNumberPackage): Long {
-        return matchedCount(winningNumberPackage).rank().prizeMoney
-    }
-
-    init {
-        require(numbers.size == LOTTO_GAME_NUMBER_COUNT) { INVALID_LOTTO_GAME_NUMBER_COUNT_MESSAGE }
+    fun getPrizeMoney(winningNumberPackage: LottoNumberPackage): Long {
+        return getMatchedCount(winningNumberPackage).rank().prizeMoney
     }
 
     companion object {

@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoPurchaseInfo
+import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
 import lotto.service.AutomaticLottoNumberPackagesGenerator
 import lotto.view.input.InputView
@@ -15,6 +16,6 @@ class LottoGameLauncher(private val inputView: InputView, private val resultView
         resultView.showLottoTicketNumber(ticket)
 
         val winningInfo = inputView.getWinningInfo()
-        resultView.showResultStatistics(ticket.resultStatistics(winningInfo), ticket.totalProfitRate(winningInfo, purchaseInfo.purchaseAmount))
+        resultView.showResultStatistics(LottoResult.from(ticket, winningInfo, purchaseInfo.purchaseAmount))
     }
 }
