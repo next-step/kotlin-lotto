@@ -1,7 +1,6 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -17,11 +16,6 @@ internal class RewardTest {
             { assertThat(reward).isEqualTo(Reward.of(match, isBonus)) },
             { assertThat(reward.amount).isEqualTo(amount) }
         )
-    }
-
-    @Test
-    fun test() {
-        assertThat(Reward.THIRD).isEqualTo(Reward.of(5, false))
     }
 
     companion object {
