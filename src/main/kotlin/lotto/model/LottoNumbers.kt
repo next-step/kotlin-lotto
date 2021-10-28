@@ -45,5 +45,27 @@ data class LottoNumbers(
         private const val LOTTO_SIZE = 6
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
+
+        fun generateRandomNumbers(): LottoNumbers {
+            val array = IntArray(MAX_NUMBER + 1)
+            var times = 0
+            while (times < LOTTO_SIZE) {
+                val number = (MIN_NUMBER..MAX_NUMBER).random()
+                if (array[number] > 0) {
+                    continue
+                }
+                array[number] = number
+                times++
+            }
+            val numbers = array.filter { it > 0 }
+            return LottoNumbers(
+                num1 = numbers[0],
+                num2 = numbers[1],
+                num3 = numbers[2],
+                num4 = numbers[3],
+                num5 = numbers[4],
+                num6 = numbers[5],
+            )
+        }
     }
 }

@@ -9,12 +9,12 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoNumbersTest {
 
-    @DisplayName("로또 번호의 숫자가 0 보다 작거나 45보다 크다면 RuntimeException 예외가 발생해야 한다.")
+    @DisplayName("로또 번호의 숫자가 1 보다 작거나 45보다 크다면 RuntimeException 예외가 발생해야 한다.")
     @ParameterizedTest
     @ValueSource(
         strings = [
             "-1, 2, 3, 4, 5, 6",
-            "1, 2, 3, 4, 5, 50"
+            "0, 2, 3, 4, 5, 50"
         ]
     )
     fun lottoRange(input: String) {
