@@ -12,6 +12,10 @@ enum class Reward(
     FIFTH(3, 5_000, { match, isBonus -> 3 == match }),
     NONE(0, 0, { match, isBonus -> false });
 
+    fun hasNoMatch(): Boolean {
+        return NONE == this
+    }
+
     fun hasBonus(): Boolean {
         return SECOND == this
     }

@@ -47,20 +47,23 @@ object OutputView {
         val treeMapReverse = TreeMap<Reward, Int>(Collections.reverseOrder())
         treeMapReverse.putAll(lottoResult.result)
         treeMapReverse.forEach { (key, value) ->
-            if (key == Reward.NONE) {
+            if (key.hasNoMatch()) {
                 return@forEach
             }
-            if (printRewardHasBonus(key, value)) return@forEach
-            println("${key.matchCount} $LOTTO_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
+            if (key.hasBonus()) {
+                printRewardWithBonus(key, value)
+                return@forEach
+            }
+            printWithOutBonus(key, value)
         }
     }
 
-    private fun printRewardHasBonus(key: Reward, value: Int): Boolean {
-        if (key.hasBonus()) {
-            println("${key.matchCount} $LOTTO_MATCHED, $BONUS_BALL_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
-            return true
-        }
-        return false
+    private fun printWithOutBonus(key: Reward, value: Int) {
+        println("${key.matchCount} $LOTTO_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
+    }
+
+    private fun printRewardWithBonus(key: Reward, value: Int) {
+        println("${key.matchCount} $LOTTO_MATCHED, $BONUS_BALL_MATCHED (${key.amount})$MONEY_UNIT - ${value}$LOTTO_COUNT")
     }
 
     private const val LOTTO_COUNT_INFORMATION = "개를 구매했습니다"
