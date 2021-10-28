@@ -15,7 +15,7 @@ class LottoGameLauncher(private val inputView: InputView, private val resultView
         val ticket = LottoTicket.from(purchaseInfo.purchaseCount, AutomaticLottoNumberPackagesGenerator())
         resultView.showLottoTicketNumber(ticket)
 
-        val winningInfo = inputView.getWinningInfo()
+        val winningInfo = inputView.getWinningNumbers()
         resultView.showResultStatistics(LottoResult.from(ticket, winningInfo, purchaseInfo.purchaseAmount))
     }
 }

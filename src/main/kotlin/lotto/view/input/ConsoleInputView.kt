@@ -1,7 +1,6 @@
 package lotto.view.input
 
-import lotto.domain.LottoPurchaseAmount
-import lotto.domain.WinningInfo
+import lotto.domain.*
 
 class ConsoleInputView : InputView {
     override fun getPurchaseAmount(): LottoPurchaseAmount {
@@ -9,13 +8,19 @@ class ConsoleInputView : InputView {
         return LottoPurchaseAmount.from(readLine() ?: "")
     }
 
-    override fun getWinningInfo(): WinningInfo {
-        println("\n" + RECEIVE_WON_NUMBERS_MESSAGE)
+    override fun getWinningNumbers(): WinningInfo {
+        println("\n" + RECEIVE_WINNING_NUMBERS_MESSAGE)
         return WinningInfo(WinningInfo.from(readLine() ?: ""))
+    }
+
+    override fun getBonusNumber(winningNumbers: LottoNumberPackage): LottoNumber {
+        println(RECEIVE_BONUS_NUMBER_MESSAGE)
+        return BonusNumber.from(readLine() ?: "", winningNumbers)
     }
 
     companion object {
         private const val RECEIVE_PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
-        private const val RECEIVE_WON_NUMBERS_MESSAGE = "지난 주 당첨번호를 입력해 주세요."
+        private const val RECEIVE_WINNING_NUMBERS_MESSAGE = "지난 주 당첨번호를 입력해 주세요."
+        private const val RECEIVE_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요."
     }
 }

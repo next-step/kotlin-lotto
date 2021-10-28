@@ -25,7 +25,7 @@ value class LottoNumber private constructor(val value: Int) {
         fun from(input: String): LottoNumber {
             val value = input.toIntOrNull()
             require(value != null) { WRONG_LOTTO_NUMBER_MESSAGE }
-            return numberPool[value]
+            return numberPool[value-1]
         }
 
         fun getShuffledLottoNumbers(): Set<LottoNumber> {
