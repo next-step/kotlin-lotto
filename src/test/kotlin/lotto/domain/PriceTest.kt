@@ -8,6 +8,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
+@DisplayName("구입 금액 테스트")
 class PriceTest {
 
     @ParameterizedTest
