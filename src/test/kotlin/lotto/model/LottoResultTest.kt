@@ -21,4 +21,25 @@ class LottoResultTest {
 
         assertEquals(expected, actual)
     }
+
+    @DisplayName("14,000원으로 5등이 1개 당첨된 경우 수익률은 0.35가 된다.")
+    @Test
+    fun lottoRateOfReturn() {
+        val lotto = Lotto(
+            price = 1000,
+            numbers = LottoNumbers(10, 11, 12, 13, 14, 15)
+        )
+        val fifthLotto = Lotto(
+            price = 1000,
+            numbers = LottoNumbers(10, 2, 12, 13, 14, 6)
+        )
+        val winLottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 10)
+        val lottoList = List(13) { lotto } + fifthLotto
+        val result = LottoResult(lottoList, winLottoNumbers)
+
+        val expected = 0.35f
+        val actual = result.rateOfReturn
+
+        assertEquals(expected, actual)
+    }
 }
