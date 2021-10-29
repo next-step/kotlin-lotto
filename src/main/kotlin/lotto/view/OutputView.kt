@@ -30,5 +30,14 @@ class OutputView {
             println("${SECOND.matchCount}개 일치 (${SECOND.winningMoney}원) - ${matchResult[SECOND] ?: 0}개")
             println("${FIRST.matchCount}개 일치 (${FIRST.winningMoney}원) - ${matchResult[FIRST] ?: 0}개")
         }
+
+        fun printProfitRate(profitRate: Double) {
+            val result = if (profitRate >= 1.0) {
+                "이득"
+            } else {
+                "손해"
+            }
+            println("총 수익률은 ${profitRate}입니다. (기준이 1이기 때문에 결과적으로 ${result}라는 의미임)")
+        }
     }
 }

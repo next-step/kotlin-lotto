@@ -22,4 +22,5 @@ fun main() {
     OutputView.printLottoMatchResult(matchResult)
     val profitRate = ProfitRate(matchResult, inputPrice)
     val result = profitRate.calculate()
+    OutputView.printProfitRate(result)
 }
