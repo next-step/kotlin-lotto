@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.LottoPrice.Companion.LOTTO_PRICE
+
 class Lottos(private val money: Int) {
 
     private var purchasedLottos = mutableListOf<Lotto>()
@@ -11,8 +13,4 @@ class Lottos(private val money: Int) {
 
     fun correspondToWinningNumber(winningNumber: List<Int>): List<LottoResult> =
         LottoResults(purchasedLottos).result(winningNumber)
-
-    companion object {
-        private const val LOTTO_PRICE = 1000
-    }
 }
