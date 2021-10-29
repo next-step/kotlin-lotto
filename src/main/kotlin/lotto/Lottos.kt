@@ -9,6 +9,9 @@ class Lottos(private val money: Int) {
         return purchasedLottos.toList()
     }
 
+    fun correspondToWinningNumber(winningNumber: List<Int>): List<LottoResult> =
+        LottoResults(purchasedLottos).result(winningNumber)
+
     companion object {
         private const val LOTTO_PRICE = 1000
     }
