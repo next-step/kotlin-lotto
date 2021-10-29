@@ -2,6 +2,7 @@ package lotto
 
 import lotto.application.LottoService
 import lotto.domain.Price
+import lotto.domain.ProfitRate
 import lotto.domain.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -19,4 +20,6 @@ fun main() {
     val matchResult = lottoService.matchWinningNumber(winningNumber)
 
     OutputView.printLottoMatchResult(matchResult)
+    val profitRate = ProfitRate(matchResult, inputPrice)
+    val result = profitRate.calculate()
 }
