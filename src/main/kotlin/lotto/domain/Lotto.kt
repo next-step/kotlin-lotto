@@ -9,6 +9,10 @@ data class Lotto(val numbers: List<LottoNumber>) {
         }
     }
 
+    fun checkMatch(winningLotto: Lotto): Match {
+        return Match.valueOf(numbers.count { winningLotto.numbers.contains(it) })
+    }
+
     companion object {
         const val SIZE = 6
         fun from(numbers: List<Int>): Lotto {

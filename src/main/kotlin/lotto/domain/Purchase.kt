@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.exception.IllegalPurchaseException
 
-data class Purchase(private val purchasePrice: Int) {
+data class Purchase(val purchasePrice: Int) {
     init {
         if (purchasePrice < 0) {
             throw IllegalPurchaseException()
