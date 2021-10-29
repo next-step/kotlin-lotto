@@ -23,10 +23,11 @@ class LottoResultsTest {
         // when
         val firstPrize = LottoPrize.FIRST.prize
         val correspondLottoResult = lottoResults.result(winningNumber).first() {
-            it.prizeAndCountPair().first == firstPrize
+            val lottoPrize = it.prizeAndCountPair().first
+            lottoPrize.prize == firstPrize
         }
 
         // then
-        assertThat(correspondLottoResult.prizeAndCountPair().first).isEqualTo(firstPrize)
+        assertThat(correspondLottoResult.prizeAndCountPair().first.prize).isEqualTo(firstPrize)
     }
 }

@@ -16,8 +16,8 @@ value class TotalRate(private val lottoResults: List<LottoResult>) {
     private fun sumLottoCount() = (lottoResults.sumOf { it.prizeAndCountPair().second } * LOTTO_PRICE).toBigDecimal()
 
     private fun sumPrize() = lottoResults.sumOf {
-        val (prize, count) = it.prizeAndCountPair()
-        prize * count
+        val (lottoPrize, count) = it.prizeAndCountPair()
+        lottoPrize.prize * count
     }.toBigDecimal()
 
     companion object {
