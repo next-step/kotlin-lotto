@@ -7,6 +7,9 @@ data class Lotto(val numbers: List<LottoNumber>) {
         if (numbers.size != SIZE) {
             throw IllegalLottoException()
         }
+        if (numbers.distinct().size != numbers.size) {
+            throw IllegalLottoException("로또의 번호가 중복되어서는 안됩니다.")
+        }
     }
 
     fun checkMatch(winningLotto: Lotto): Match {

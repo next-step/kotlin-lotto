@@ -11,11 +11,14 @@ internal class LottosTest {
     @ParameterizedTest
     @ValueSource(ints = [2, 3, 4, 5, 6])
     fun constructor(quantity: Int) {
-        val numberGenerator = object : NumberGenerator {
-            override fun getNumber() = 1
+        val generatorFactory = object : GeneratorFactory {
+            override fun createNumberGenerator(): () -> Int {
+                var number = 1
+                return (fun(): Int { return number++ })
+            }
         }
-        val expected = (1..quantity).map { Lotto((1..Lotto.SIZE).map { LottoNumber(1) }) }
-        assertThat(Lottos.from(quantity, numberGenerator).list)
+        val expected = (1..quantity).map { Lotto((1..Lotto.SIZE).map { LottoNumber(it) }) }
+        assertThat(Lottos.from(quantity, generatorFactory).list)
             .isEqualTo(expected)
     }
 
