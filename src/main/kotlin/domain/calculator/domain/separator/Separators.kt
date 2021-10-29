@@ -7,10 +7,6 @@ import domain.calculator.strategy.RegexStrategy
 
 @JvmInline
 value class Separators private constructor(private val _separators: Set<Separator>) {
-    init {
-        if (_separators.isEmpty()) throw RuntimeException(EMPTY_EXCEPTION_MESSAGE)
-    }
-
     val separators: String
         get() = _separators
             .map(Separator::separator)
@@ -20,18 +16,17 @@ value class Separators private constructor(private val _separators: Set<Separato
         private const val EMPTY_EXCEPTION_MESSAGE = "Separators, 비어있는 컬렉션은 입력될 수 없습니다."
         private const val REGEX_SEPARATOR = "|"
 
-        fun of(separators: Set<Separator>): Separators = Separators(separators.toSet())
         fun of(expression: String, regexStrategy: RegexStrategy): Separators = of(Expression(expression, regexStrategy))
         fun of(expression: Expression): Separators =
-            when (expression.hasCustomExpression()) {
-                true -> Separators(customSeparators(expression))
-                false -> Separators(defaultSeparators())
-            }
+            if (expression.hasCustomExpression()) Separators(customSeparators(expression))
+            else Separators(defaultSeparators())
+
+        fun of(separators: Set<Separator>): Separators =
+            if (separators.isEmpty()) throw RuntimeException(EMPTY_EXCEPTION_MESSAGE)
+            else Separators(separators.toSet())
 
         private fun customSeparators(expression: Expression): Set<Separator> =
-            setOf(
-                Separator(expression.customSeparatorExpression())
-            )
+            setOf(Separator(expression.customSeparatorExpression()))
 
         private fun defaultSeparators(): Set<Separator> =
             setOf(

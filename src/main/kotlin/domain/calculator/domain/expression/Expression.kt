@@ -3,21 +3,20 @@ package domain.calculator.domain.expression
 import domain.calculator.domain.operand.PositiveOperand
 import domain.calculator.strategy.RegexStrategy
 
-data class Expression(private val _expression: String?, private val regexStrategy: RegexStrategy) {
-    private val expression: String = if (_expression.isNullOrBlank()) DEFAULT_STRING else _expression
+data class Expression(private val expression: String = DEFAULT_STRING, private val regexStrategy: RegexStrategy) {
 
     fun customSeparatorExpression(): String {
-        return when (hasCustomExpression()) {
-            true -> regexStrategy.groupValue(expression, CUSTOM_SEPARATOR)
-            else -> throw RuntimeException(NO_EXIST_CUSTOM_SEPARATOR_EXCEPTION_MESSAGE)
+        if (hasCustomExpression()) {
+            return regexStrategy.groupValue(expression, CUSTOM_SEPARATOR)
         }
+        throw RuntimeException(NO_EXIST_CUSTOM_SEPARATOR_EXCEPTION_MESSAGE)
     }
 
     fun calculateExpression(): String {
-        return when (hasCustomExpression()) {
-            true -> regexStrategy.groupValue(expression, NUMBER_EXPRESSION)
-            else -> expression
+        if (hasCustomExpression()) {
+            return regexStrategy.groupValue(expression, NUMBER_EXPRESSION)
         }
+        return expression
     }
 
     fun hasCustomExpression(): Boolean = regexStrategy.check(expression)
