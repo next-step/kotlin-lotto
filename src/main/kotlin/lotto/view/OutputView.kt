@@ -1,6 +1,11 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.Rank
+import lotto.domain.Rank.FIRST
+import lotto.domain.Rank.FOURTH
+import lotto.domain.Rank.SECOND
+import lotto.domain.Rank.THIRD
 
 class OutputView {
 
@@ -8,12 +13,22 @@ class OutputView {
         private const val SEPARATOR = ", "
         private const val PREFIX = "["
         private const val POSTFIX = "]"
+        private const val PRINT_LOTTO_RESULT = "당첨 통계"
 
         fun printBoughtLottos(lottos: List<Lotto>) {
             repeat(lottos.size) {
                 val lotto: Lotto = lottos[it]
                 println(lotto.lottoNumbers.joinToString(SEPARATOR, PREFIX, POSTFIX))
             }
+        }
+
+        fun printLottoMatchResult(matchResult: Map<Rank, Int>) {
+            println(PRINT_LOTTO_RESULT)
+            println("---------")
+            println("${FOURTH.matchCount}개 일치 (${FOURTH.winningMoney}원) - ${matchResult[FOURTH] ?: 0}개")
+            println("${THIRD.matchCount}개 일치 (${THIRD.winningMoney}원) - ${matchResult[THIRD] ?: 0}개")
+            println("${SECOND.matchCount}개 일치 (${SECOND.winningMoney}원) - ${matchResult[SECOND] ?: 0}개")
+            println("${FIRST.matchCount}개 일치 (${FIRST.winningMoney}원) - ${matchResult[FIRST] ?: 0}개")
         }
     }
 }
