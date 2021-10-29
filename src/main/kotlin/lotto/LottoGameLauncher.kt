@@ -18,6 +18,12 @@ class LottoGameLauncher(private val inputView: InputView, private val resultView
 
         val winningNumbers = inputView.getWinningNumbers()
         val bonusNumber = inputView.getBonusNumber(winningNumbers)
-        resultView.showResultStatistics(LottoResult.from(ticket, WinningInfo(winningNumbers, bonusNumber), purchaseInfo.purchaseAmount))
+        resultView.showResultStatistics(
+            LottoResult.from(
+                ticket,
+                WinningInfo(winningNumbers, bonusNumber),
+                purchaseInfo.purchaseAmount
+            )
+        )
     }
 }

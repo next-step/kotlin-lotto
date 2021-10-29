@@ -13,7 +13,10 @@ internal class BonusNumberTest {
 
     @ParameterizedTest
     @MethodSource("getBonusNumberDuplicatedWithWinningNumbers")
-    fun `보너스번호 생성 시 당첨번호와 중복된 번호를 입력하면 IllegalArgumentException 이 발생한다`(bonusNumber: String, winningNumbers: List<Int>) {
+    fun `보너스번호 생성 시 당첨번호와 중복된 번호를 입력하면 IllegalArgumentException 이 발생한다`(
+        bonusNumber: String,
+        winningNumbers: List<Int>
+    ) {
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
 
         Assertions.assertThatThrownBy {
@@ -34,7 +37,10 @@ internal class BonusNumberTest {
 
     @ParameterizedTest
     @MethodSource("getBonusNumberNotDuplicatedWithWinningNumbers")
-    fun `보너스번호 생성 시 당첨번호와 중복되지 않는 번호를 입력하면 정상적으로 LottoNumber 객체가 생성된다`(bonusNumberInput: String, winningNumbers: List<Int>) {
+    fun `보너스번호 생성 시 당첨번호와 중복되지 않는 번호를 입력하면 정상적으로 LottoNumber 객체가 생성된다`(
+        bonusNumberInput: String,
+        winningNumbers: List<Int>
+    ) {
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val bonusNumber = BonusNumber.from(bonusNumberInput, winningNumberPackage)
 

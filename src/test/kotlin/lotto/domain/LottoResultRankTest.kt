@@ -57,7 +57,6 @@ class LottoResultRankTest {
         val rankKey = LottoResultRankKey(MatchedCount.of(6))
         val rank = LottoResultRank.getRank(rankKey)
 
-
         Assertions.assertThat(rank).isNotNull
         Assertions.assertThat(rank).isEqualTo(LottoResultRank.FIRST)
     }

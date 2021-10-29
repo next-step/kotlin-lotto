@@ -22,7 +22,10 @@ data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
 
     fun getRankKey(winningInfo: WinningInfo): LottoResultRankKey {
         val matchedCount = getMatchedCount(winningInfo.winningNumberPackage)
-        return LottoResultRankKey(matchedCount, matchedCount.shouldCheckBonusNumber() && matchedBonusNumber(winningInfo.bonusNumber))
+        return LottoResultRankKey(
+            matchedCount,
+            matchedCount.shouldCheckBonusNumber() && matchedBonusNumber(winningInfo.bonusNumber)
+        )
     }
 
     private fun getMatchedCount(winningNumberPackage: LottoNumberPackage): MatchedCount {

@@ -1,6 +1,6 @@
 package lotto.domain
 
-import java.util.Arrays
+import java.util.*
 import java.util.stream.Collectors
 
 enum class LottoResultRank(val lottoResultRankKey: LottoResultRankKey, val prizeMoney: Long) {
