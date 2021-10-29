@@ -2,7 +2,7 @@ package lotto.model
 
 class LottoShop {
 
-    fun buyLotto(amount: Int): List<Lotto> {
+    fun buy(amount: Int): List<Lotto> {
         require(amount >= 0)
 
         val size = amount / LOTTO_PRICE

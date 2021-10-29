@@ -8,7 +8,7 @@ class LottoMachine {
         return List(size) {
             Lotto(
                 price = price,
-                numbers = LottoNumbers.generateRandomNumbers()
+                numbers = LottoNumbers.random()
             )
         }
     }

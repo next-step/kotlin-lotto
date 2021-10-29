@@ -1,6 +1,6 @@
 package lotto.model
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -19,7 +19,7 @@ class LottoResultTest {
         val expected = 1
         val actual = result.winners(LottoRank.Second)
 
-        assertEquals(expected, actual)
+        assertThat(actual).isEqualTo(expected)
     }
 
     @DisplayName("14,000원으로 5등이 1개 당첨된 경우 수익률은 0.35가 된다.")
@@ -40,6 +40,6 @@ class LottoResultTest {
         val expected = 0.35f
         val actual = result.rateOfReturn
 
-        assertEquals(expected, actual)
+        assertThat(actual).isEqualTo(expected)
     }
 }

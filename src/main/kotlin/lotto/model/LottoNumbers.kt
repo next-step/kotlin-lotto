@@ -48,7 +48,7 @@ data class LottoNumbers(
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
 
-        fun generateRandomNumbers(): LottoNumbers {
+        fun random(): LottoNumbers {
             val array = IntArray(MAX_NUMBER + 1)
             var times = 0
             while (times < LOTTO_SIZE) {

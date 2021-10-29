@@ -10,8 +10,10 @@ class LottoTest {
     @Test
     fun lottoPrice() {
         assertThrows<RuntimeException> {
-            val numbers = LottoNumbers(1, 2, 3, 4, 5, 6)
-            Lotto(-5000, numbers)
+            Lotto(
+                price = -5000,
+                numbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+            )
         }
     }
 }

@@ -30,6 +30,7 @@ class LottoResult(
         val totalPrice = lottoList.sumOf { it.price }
         val totalWinnings = winnersByRank.map { (rank, count) -> rank.winnings * count }.sum()
         val rateOfReturn = (totalWinnings.toFloat() / totalPrice)
+        // 소수점 2자리 유지
         return floor(rateOfReturn * 100) / 100
     }
 
