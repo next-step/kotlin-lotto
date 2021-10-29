@@ -12,11 +12,13 @@ class LottoService(
         lottos
             .map { it.matchWinningNumber(winningNumbers) }
             .map { Rank.valueOf(it) }
-            .forEach { matchResult[it] = matchResult.getOrDefault(it, 0) + 1 }
+            .forEach { matchResult[it] = matchResult.getOrDefault(it, 0) + INCREASE }
         return matchResult.toMap()
     }
 
     companion object {
+        private const val INCREASE = 1
+
         fun generateAutoLotto(lottoCount: Int = 1): LottoService {
             val lottos: List<Lotto> = (0 until lottoCount)
                 .map { LottoNumberGenerator.generate() }
