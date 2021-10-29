@@ -20,12 +20,21 @@ data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
             .toSortedSet(compareBy { it })
     }
 
-    fun getMatchedCount(winningNumberPackage: LottoNumberPackage): MatchedCount {
-        return MatchedCount.from(numbers.intersect(winningNumberPackage.numbers).size)
+    fun getRankKey(winningInfo: WinningInfo): LottoResultRankKey {
+        val matchedCount = getMatchedCount(winningInfo.winningNumberPackage)
+        return LottoResultRankKey(matchedCount, matchedCount.shouldCheckBonusNumber() && matchedBonusNumber(winningInfo.bonusNumber))
     }
 
-    fun getPrizeMoney(winningNumberPackage: LottoNumberPackage): Long {
-        return getMatchedCount(winningNumberPackage).rank().prizeMoney
+    private fun getMatchedCount(winningNumberPackage: LottoNumberPackage): MatchedCount {
+        return MatchedCount.of(numbers.intersect(winningNumberPackage.numbers).size)
+    }
+
+    private fun matchedBonusNumber(bonusNumber: LottoNumber): Boolean {
+        return numbers.contains(bonusNumber)
+    }
+
+    fun getPrizeMoney(winningInfo: WinningInfo): Long {
+        return getRankKey(winningInfo).rank().prizeMoney
     }
 
     companion object {

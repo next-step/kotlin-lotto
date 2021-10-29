@@ -64,22 +64,24 @@ internal class LottoNumberPackageTest {
     @MethodSource("getMissedRankedGameNumbers")
     fun `당첨번호와 2개 이하의 번호가 일치하는 로또 번호를 입력하면 MISSED LottoResultRank 에 상금은 0원이다`(
         lottoNumbers: List<Int>,
-        winningNumbers: List<Int>
+        winningNumbers: List<Int>,
+        bonusNumberInput: String
     ) {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
+        val winningInfo = WinningInfo(winningNumberPackage, BonusNumber.from(bonusNumberInput, winningNumberPackage))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getMatchedCount(winningNumberPackage).rank()).isEqualTo(LottoResultRank.MISSED)
-        assertThat(lottoNumberPackage.getPrizeMoney(winningNumberPackage)).isEqualTo(0L)
+        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.MISSED)
+        assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(0L)
     }
 
     private fun getMissedRankedGameNumbers(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(7, 8, 9, 10, 11, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 8, 9, 10, 11, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 9, 10, 11, 12)),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(7, 8, 9, 10, 11, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 8, 9, 10, 11, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 9, 10, 11, 12), "13"),
         )
     }
 
@@ -87,23 +89,25 @@ internal class LottoNumberPackageTest {
     @MethodSource("getFifthRankedGameNumbers")
     fun `당첨번호와 3개의 번호가 일치하는 로또 번호를 입력하면 FIFTH LottoResultRank 에 상금은 5000원이다`(
         lottoNumbers: List<Int>,
-        winningNumbers: List<Int>
+        winningNumbers: List<Int>,
+        bonusNumberInput: String
     ) {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
+        val winningInfo = WinningInfo(winningNumberPackage, BonusNumber.from(bonusNumberInput, winningNumberPackage))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getMatchedCount(winningNumberPackage).rank()).isEqualTo(LottoResultRank.FIFTH)
-        assertThat(lottoNumberPackage.getPrizeMoney(winningNumberPackage)).isEqualTo(5000L)
+        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.FIFTH)
+        assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(5000L)
     }
 
     private fun getFifthRankedGameNumbers(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 10, 11, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(4, 5, 6, 10, 11, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 3, 5, 10, 11, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(2, 4, 6, 10, 11, 12)),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 10, 11, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(4, 5, 6, 10, 11, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 3, 5, 10, 11, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(2, 4, 6, 10, 11, 12), "13"),
         )
     }
 
@@ -111,44 +115,72 @@ internal class LottoNumberPackageTest {
     @MethodSource("getFourthRankedGameNumbers")
     fun `당첨번호와 4개의 번호가 일치하는 로또 번호를 입력하면 FOURTH LottoResultRank 에 상금은 50000원이다`(
         lottoNumbers: List<Int>,
-        winningNumbers: List<Int>
+        winningNumbers: List<Int>,
+        bonusNumberInput: String
     ) {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
+        val winningInfo = WinningInfo(winningNumberPackage, BonusNumber.from(bonusNumberInput, winningNumberPackage))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getMatchedCount(winningNumberPackage).rank()).isEqualTo(LottoResultRank.FOURTH)
-        assertThat(lottoNumberPackage.getPrizeMoney(winningNumberPackage)).isEqualTo(50000L)
+        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.FOURTH)
+        assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(50000L)
     }
 
     private fun getFourthRankedGameNumbers(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 11, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(2, 3, 4, 5, 11, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(3, 4, 5, 6, 11, 12)),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 11, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(2, 3, 4, 5, 11, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(3, 4, 5, 6, 11, 12), "13"),
         )
     }
 
     @ParameterizedTest
     @MethodSource("getThirdRankedGameNumbers")
-    fun `당첨번호와 5개의 번호가 일치하는 로또 번호를 입력하면 THIRD LottoResultRank 에 상금은 1500000원이다`(
+    fun `당첨번호와 5개의 번호가 일치하고 보너스 번호와 일치하지 않는 로또 번호를 입력하면 THIRD LottoResultRank 에 상금은 1500000원이다`(
         lottoNumbers: List<Int>,
-        winningNumbers: List<Int>
+        winningNumbers: List<Int>,
+        bonusNumberInput: String
     ) {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
+        val winningInfo = WinningInfo(winningNumberPackage, BonusNumber.from(bonusNumberInput, winningNumberPackage))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getMatchedCount(winningNumberPackage).rank()).isEqualTo(LottoResultRank.THIRD)
-        assertThat(lottoNumberPackage.getPrizeMoney(winningNumberPackage)).isEqualTo(1_500_000L)
+        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.THIRD)
+        assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(1_500_000L)
     }
 
     private fun getThirdRankedGameNumbers(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 12)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(2, 3, 4, 5, 6, 12)),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 12), "13"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(2, 3, 4, 5, 6, 12), "13"),
+        )
+    }
+
+    @ParameterizedTest
+    @MethodSource("getSecondRankedGameNumbers")
+    fun `당첨번호와 5개의 번호가 일치하고 보너스 번호와 일치하는 로또 번호를 입력하면 SECOND LottoResultRank 에 상금은 3000000원이다`(
+        lottoNumbers: List<Int>,
+        winningNumbers: List<Int>,
+        bonusNumberInput: String
+    ) {
+        val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
+        val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
+        val winningInfo = WinningInfo(winningNumberPackage, BonusNumber.from(bonusNumberInput, winningNumberPackage))
+
+        assertThat(lottoNumberPackage).isNotNull
+        assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
+        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.SECOND)
+        assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(3_000_000L)
+    }
+
+    private fun getSecondRankedGameNumbers(): Stream<Arguments> {
+        return Stream.of(
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 12), "6"),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(2, 3, 4, 5, 6, 12), "1"),
         )
     }
 
@@ -156,21 +188,23 @@ internal class LottoNumberPackageTest {
     @MethodSource("getFirstRankedGameNumbers")
     fun `당첨번호와 6개의 번호가 일치하는 로또 번호를 입력하면 FIRST LottoResultRank 에 상금은 20억원이다`(
         lottoNumbers: List<Int>,
-        winningNumbers: List<Int>
+        winningNumbers: List<Int>,
+        bonusNumberInput: String
     ) {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
+        val winningInfo = WinningInfo(winningNumberPackage, BonusNumber.from(bonusNumberInput, winningNumberPackage))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getMatchedCount(winningNumberPackage).rank()).isEqualTo(LottoResultRank.FIRST)
-        assertThat(lottoNumberPackage.getPrizeMoney(winningNumberPackage)).isEqualTo(2_000_000_000L)
+        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.FIRST)
+        assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(2_000_000_000L)
     }
 
     private fun getFirstRankedGameNumbers(): Stream<Arguments> {
         return Stream.of(
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6)),
-            Arguments.of(listOf(7, 8, 9, 10, 11, 12), listOf(7, 8, 9, 10, 11, 12)),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6), "13"),
+            Arguments.of(listOf(7, 8, 9, 10, 11, 12), listOf(7, 8, 9, 10, 11, 12), "13"),
         )
     }
 }

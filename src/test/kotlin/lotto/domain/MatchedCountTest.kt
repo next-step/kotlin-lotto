@@ -12,48 +12,26 @@ internal class MatchedCountTest {
     @ValueSource(ints = [-1, 7, 100])
     fun `0~6 사이의 일치 개수를 입력하지 않으면 IllegalArgumentException을 발생시킨다`(input: Int) {
         Assertions.assertThatThrownBy {
-            MatchedCount.from(input)
+            MatchedCount[input]
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [0, 1, 2])
-    fun `일치 개수가 0~2개 인 경우 MISSED LottoResultRank 를 반환한다`(input: Int) {
-        val matchedCount = MatchedCount.from(input)
+    @ValueSource(ints = [0, 1, 2, 3, 4, 6])
+    fun `일치 개수가 0, 1, 2, 3, 4, 6개 인 경우 MatchCount 객체가 정상적으로 생성되고, 보너스 번호를 체크할 필요는 없다`(input: Int) {
+        val matchedCount = MatchedCount[input]
 
         assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.MISSED)
+        assertThat(matchedCount.value).isEqualTo(input)
+        assertThat(matchedCount.shouldCheckBonusNumber()).isFalse
     }
 
     @Test
-    fun `일치 개수가 3개 인 경우 FIFTH LottoResultRank 를 반환한다`() {
-        val matchedCount = MatchedCount.from(3)
+    fun `일치 개수가 5개 인 경우 보너스 번호를 체크해야 한다`() {
+        val matchedCount = MatchedCount[5]
 
         assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.FIFTH)
-    }
-
-    @Test
-    fun `일치 개수가 4개 인 경우 FOURTH LottoResultRank 를 반환한다`() {
-        val matchedCount = MatchedCount.from(4)
-
-        assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.FOURTH)
-    }
-
-    @Test
-    fun `일치 개수가 5개 인 경우 THIRD LottoResultRank 를 반환한다`() {
-        val matchedCount = MatchedCount.from(5)
-
-        assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.THIRD)
-    }
-
-    @Test
-    fun `일치 개수가 6개 인 경우 FIRST LottoResultRank 를 반환한다`() {
-        val matchedCount = MatchedCount.from(6)
-
-        assertThat(matchedCount).isNotNull
-        assertThat(matchedCount.rank()).isEqualTo(LottoResultRank.FIRST)
+        assertThat(matchedCount.value).isEqualTo(5)
+        assertThat(matchedCount.shouldCheckBonusNumber()).isTrue
     }
 }

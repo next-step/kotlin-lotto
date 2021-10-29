@@ -3,7 +3,7 @@ package lotto.domain
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class LottoResult(val resultStatistics: Map<LottoResultRank, Int>, val profitRate: BigDecimal) {
+data class LottoResult(val resultStatistics: Map<LottoResultRank, Int>, val profitRate: BigDecimal) {
     companion object {
         fun from(ticket: LottoTicket, winningInfo: WinningInfo, purchaseAmount: LottoPurchaseAmount): LottoResult {
             return LottoResult(
@@ -14,7 +14,7 @@ class LottoResult(val resultStatistics: Map<LottoResultRank, Int>, val profitRat
 
         private fun getResultStatistics(ticket: LottoTicket, winningInfo: WinningInfo): Map<LottoResultRank, Int> {
             return ticket.lottoPackages
-                .groupingBy { it.getMatchedCount(winningInfo.winningNumberPackage).rank() }
+                .groupingBy { it.getRankKey(winningInfo).rank() }
                 .eachCount()
         }
 
@@ -24,7 +24,7 @@ class LottoResult(val resultStatistics: Map<LottoResultRank, Int>, val profitRat
             purchaseAmount: LottoPurchaseAmount
         ): BigDecimal {
             return ticket.lottoPackages
-                .sumOf { it.getPrizeMoney(winningInfo.winningNumberPackage) }
+                .sumOf { it.getPrizeMoney(winningInfo) }
                 .toBigDecimal()
                 .setScale(2, RoundingMode.HALF_UP)
                 .div(purchaseAmount.value!!.toBigDecimal())
