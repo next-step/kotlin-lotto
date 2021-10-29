@@ -2,17 +2,29 @@ package lotto.domain
 
 enum class Reward(
     val matchCount: Int,
-    val amount: Int
+    val amount: Int,
+    val isMatch: (match: Int, isBonus: Boolean) -> Boolean
 ) {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    NONE(0, 0);
+    FIRST(6, 2_000_000_000, { match, _ -> 6 == match }),
+    SECOND(5, 30_000_000, { match, isBonus -> 5 == match && isBonus }),
+    THIRD(5, 1_500_000, { match, isBonus -> 5 == match && !isBonus }),
+    FOURTH(4, 50_000, { match, _ -> 4 == match }),
+    FIFTH(3, 5_000, { match, _ -> 3 == match }),
+    NONE(0, 0, { _, _ -> false });
+
+    fun hasNoMatch(): Boolean {
+        return NONE == this
+    }
+
+    fun hasBonus(): Boolean {
+        return BONUS_REWARDS.contains(this)
+    }
 
     companion object {
-        fun of(matchCount: Int): Reward {
-            return values().firstOrNull { it.matchCount == matchCount } ?: NONE
+        private val BONUS_REWARDS = listOf(SECOND)
+
+        fun of(matchCount: Int, isBonus: Boolean): Reward {
+            return values().find { it.isMatch(matchCount, isBonus) } ?: NONE
         }
     }
 }

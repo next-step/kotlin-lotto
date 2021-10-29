@@ -2,6 +2,7 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 internal class LottoResultTest {
 
@@ -11,7 +12,7 @@ internal class LottoResultTest {
 
         val actual = LottoResult.EMPTY.updateRewards(givenRecord)
 
-        assertThat(actual.result.values).containsExactly(2, 3, 0, 0, 0)
+        assertThat(actual.result.values).containsExactly(2, 3, 0, 0, 0, 0)
     }
 
     @Test
@@ -20,16 +21,16 @@ internal class LottoResultTest {
 
         val actual = LottoResult.EMPTY.updateRewards(givenRecord)
 
-        assertThat(actual.getTotalAmount()).isEqualTo(55000)
+        assertThat(actual.getTotalAmount()).isEqualTo(1550000)
     }
 
     @Test
     fun `수익률을 리턴한다`() {
-        val givenRecord = mapOf(Reward.FOURTH to 1)
+        val givenRecord = mapOf(Reward.FIFTH to 1)
         val budget = Budget.valueOf(14000)
 
         val actual = LottoResult(givenRecord).getProfit(budget)
 
-        assertThat(actual).isEqualTo(0.35)
+        assertThat(actual).isEqualTo(BigDecimal.valueOf(0.35))
     }
 }

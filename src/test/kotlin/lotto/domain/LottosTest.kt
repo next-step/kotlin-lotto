@@ -28,8 +28,9 @@ internal class LottosTest {
 
         val lottos = Lottos(listOf(givenLotto1, givenLotto2, givenLotto3, givenLotto4))
         val compareLotto = Lotto(lottoNumbers1)
+        val bonusNumber = LottoNumber.valueOf(45)
 
-        val actual = lottos.checkMatching(compareLotto)
+        val actual = lottos.getMatchedRewards(compareLotto, bonusNumber)
 
         assertThat(actual.values).containsExactly(2, 1, 1)
     }

@@ -1,7 +1,6 @@
 package lotto.domain
 
-import java.math.RoundingMode
-import java.text.DecimalFormat
+import java.math.BigDecimal
 
 data class LottoResult(val result: Map<Reward, Int>) {
 
@@ -19,22 +18,15 @@ data class LottoResult(val result: Map<Reward, Int>) {
             .fold(0) { total, amount -> total + amount }
     }
 
-    fun getProfit(budget: Budget): Double {
-        return roundOffDecimal(getTotalAmount().toDouble() / budget.value.toDouble())
+    fun getProfit(budget: Budget): BigDecimal {
+        return budget.getProfit(getTotalAmount())
     }
 
     private fun getTotal(reward: Reward): Int {
         return result[reward]?.times(reward.amount) ?: 0
     }
 
-    private fun roundOffDecimal(number: Double): Double {
-        val decimalFormat = DecimalFormat(PATTERN)
-        decimalFormat.roundingMode = RoundingMode.FLOOR
-        return decimalFormat.format(number).toDouble()
-    }
-
     companion object {
         val EMPTY = LottoResult(emptyMap())
-        val PATTERN = "#.##"
     }
 }
