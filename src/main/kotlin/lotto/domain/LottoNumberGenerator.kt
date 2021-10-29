@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoNumberGenerator {
     fun generateNumber(): List<Int> = NUMBER_RANGE.shuffled().take(NUMBER_SIZE).sorted()

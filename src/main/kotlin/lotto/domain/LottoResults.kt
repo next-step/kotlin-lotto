@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 @JvmInline
 value class LottoResults(private val purchasedLottos: List<Lotto>) {
