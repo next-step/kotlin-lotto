@@ -13,6 +13,6 @@ fun main() {
     val lottoService = LottoService.from(lottoCount)
     OutputView.printBoughtLottos(lottoService.lottos)
 
-    val inputWinningNumber = InputView.inputWinningNumber()
-    val winningNumber = WinningNumber(inputWinningNumber)
+    val inputWinningNumber: List<String> = InputView.inputWinningNumber()
+    val winningNumber = WinningNumber.from(inputWinningNumber)
 }
