@@ -10,7 +10,7 @@ fun main() {
     val inputPrice = InputView.inputPrice() ?: 0
     val lottoCount = Price(inputPrice).checkLottoCount()
     InputView.printBoughtLotto(lottoCount)
-    val lottoService = LottoService.from(lottoCount)
+    val lottoService = LottoService.generateAutoLotto(lottoCount)
     OutputView.printBoughtLottos(lottoService.lottos)
 
     val inputWinningNumber: List<String> = InputView.inputWinningNumber()

@@ -17,7 +17,7 @@ class LottoServiceTest {
     @DisplayName("n개의 로또를 반환한다")
     fun `sut returns lottos`(lottoCount: Int, expected: Int) {
         // Arrange
-        val sut = LottoService.from(lottoCount)
+        val sut = LottoService.generateAutoLotto(lottoCount)
 
         // Act
         val lottos: List<Lotto> = sut.lottos
@@ -41,7 +41,7 @@ class LottoServiceTest {
 
         // Act
         val sut = LottoService(lottos)
-        val result: Map<Rank, Int> = sut.matchWinningNumber(lottos, winningNumber)
+        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber)
 
         // Assert
         assertThat(result[Rank.SECOND]).isEqualTo(1)
