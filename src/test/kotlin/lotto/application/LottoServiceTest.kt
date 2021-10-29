@@ -28,7 +28,7 @@ class LottoServiceTest {
 
     @Test
     @DisplayName("n개의 로또들의 당첨 결과를 수집할 수 있다")
-    fun `sut returns match count when lotto numbers contains winning number`() {
+    fun `sut returns match result`() {
         // Arrange
         val lottos = listOf(
             Lotto(listOf(3, 4, 5, 6, 7, 27)),
