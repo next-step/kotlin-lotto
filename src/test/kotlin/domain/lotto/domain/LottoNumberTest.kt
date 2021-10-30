@@ -7,15 +7,15 @@ import org.junit.jupiter.api.RepetitionInfo
 import org.junit.jupiter.api.assertAll
 
 @DisplayName("로또(Lotto)")
-class LottoTest {
+class LottoNumberTest {
 
-    @RepeatedTest(value = 45, name = "{displayName}, {currentRepetition}/{totalRepetitions}")
+    @RepeatedTest(value = 45, name = "현재, {currentRepetition}/{totalRepetitions}")
     fun `1~45 사이의 숫자로 로또를 생성할 수 있다`(repetitionInfo: RepetitionInfo) {
-        val lotto = Lotto(repetitionInfo.currentRepetition)
+        val lotto = LottoNumber.of(repetitionInfo.currentRepetition)
 
         assertAll(
             { assertThat(lotto).isNotNull },
-            { assertThat(lotto).isExactlyInstanceOf(Lotto::class.java) },
+            { assertThat(lotto).isExactlyInstanceOf(LottoNumber::class.java) },
         )
     }
 }
