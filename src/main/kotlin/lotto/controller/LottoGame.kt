@@ -14,7 +14,7 @@ object LottoGame {
     fun run() {
         val purchase = Purchase(InputView.askPurchase())
         val lottos = Lottos.of(purchase.calculateQuantity(Lotto.PRICE), RandomGeneratorFactory())
-        OutputView.printLottos(LottosDto(lottos.exportLottos()))
+        OutputView.printLottos(LottosDto.from(lottos))
 
         val winningLotto = Lotto.from(InputView.askWinningNumbers())
         val statistics = Statistics(lottos.countMatches(winningLotto))

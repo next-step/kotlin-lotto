@@ -1,12 +1,8 @@
 package lotto.domain
 
-class Lottos(val list: List<Lotto>) {
-    fun exportLottos(): List<List<Int>> {
-        return list.map { it.numbers.map { it.value } }
-    }
-
+class Lottos(val lottos: List<Lotto>) {
     fun countMatches(winningLotto: Lotto): Map<Match, Int> {
-        return list.map { it.checkMatch(winningLotto) }
+        return lottos.map { it.checkMatch(winningLotto) }
             .groupingBy { it }
             .eachCount()
     }
