@@ -4,7 +4,7 @@ package lotto.model
  * 로또 숫자 하나의 객체
  * */
 @JvmInline
-value class LottoNumber (val number: Int) {
+value class LottoNumber(val number: Int) {
     init {
         require(number in MIN_NUMBER..MAX_NUMBER) { EXCEPTION_NUMBER_FORMAT }
     }

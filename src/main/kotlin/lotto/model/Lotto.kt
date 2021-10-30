@@ -11,10 +11,7 @@ data class Lotto(
         require(item.distinct().size == SIZE_LOTTO_NUMBER) { EXCEPTION_DUPLICATED_LOTTO_NUMBER }
     }
 
-    val numbers: List<LottoNumber> =
-        item.map { it.number }
-            .sorted()
-            .map { LottoNumber(it) }
+    val numbers: List<LottoNumber> = item.sortedBy { it.number }
 
     companion object {
         private const val SIZE_LOTTO_NUMBER = 6
