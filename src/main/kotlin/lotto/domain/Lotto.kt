@@ -5,7 +5,7 @@ class Lotto(
     val price: Int,
 ) {
     init {
-        require(numbers.size == 6) { "6개의 번호를 입력해야합니다." }
+        require(numbers.size == NUMBER_SIZE) { "6개의 번호를 입력해야합니다." }
     }
 
     fun sortilege(
@@ -28,5 +28,9 @@ class Lotto(
 
     override fun toString(): String {
         return "$numbers"
+    }
+
+    companion object {
+        private const val NUMBER_SIZE = 6
     }
 }
