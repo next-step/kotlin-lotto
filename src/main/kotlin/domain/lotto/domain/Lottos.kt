@@ -9,7 +9,7 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
         val eachCount = lottos
             .groupingBy { MatchBoard.values(it.match(winningLotto)) }
             .eachCount()
-        return MatchBoard.values()
+        return MatchBoard.valuesExcludedMiss()
             .associateWith { eachCount[it] ?: NO_MATCH }
     }
 

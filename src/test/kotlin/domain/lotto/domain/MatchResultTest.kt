@@ -30,7 +30,7 @@ class MatchResultTest {
 
     @Test
     fun `당첨 결과를 반환한다`() {
-        val expected = MatchBoard.values().associateWith { 0 }
+        val expected = MatchBoard.valuesExcludedMiss().associateWith { 0 }
         val matchResult = MatchResult.of(expected)
         val actual = matchResult.matchResult
 

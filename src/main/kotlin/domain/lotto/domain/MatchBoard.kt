@@ -13,5 +13,7 @@ enum class MatchBoard(private val numberOfMatch: Int, private val matchPrize: In
             values().asSequence()
                 .find { it.numberOfMatch == numberOfMatch }
                 ?: MISS
+
+        fun valuesExcludedMiss(): List<MatchBoard> = values().filterNot { it == MISS }
     }
 }
