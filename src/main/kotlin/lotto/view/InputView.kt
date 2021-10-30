@@ -13,6 +13,8 @@ object InputView {
         val input = readLine()
         require(!input.isNullOrBlank()) { "당첨 번호는 , 로 구분된 6개의 숫자이어야 합니다." }
         return input.filterNot { it.isWhitespace() }
-            .split(",").map { it.toInt() }
+            .split(DELIMITER).map { it.toInt() }
     }
+
+    private const val DELIMITER = ","
 }
