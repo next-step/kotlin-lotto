@@ -21,10 +21,13 @@ fun main() {
     outputView.printLotto(lottos)
 
     val winningNumbers = inputView.inputWinningNumber()
-    val statistics = lottoGame.confirmWinning(
-        winningNumbers = winningNumbers,
-        lottos = lottos,
-    )
 
-    outputView.printStatistics(statistics)
+    lottoGame
+        .confirmWinning(
+            winningNumbers = winningNumbers,
+            lottos = lottos,
+        )
+        .let { statistics ->
+            outputView.printStatistics(statistics)
+        }
 }
