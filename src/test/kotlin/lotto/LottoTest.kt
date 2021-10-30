@@ -1,9 +1,6 @@
 package lotto
 
-import lotto.model.GenerateLotto
 import lotto.model.Lotto
-import lotto.model.Lotto.Companion.EXCEPTION_DUPLICATED_LOTTO_NUMBER
-import lotto.model.Lotto.Companion.EXCEPTION_LOTTO_FORMAT
 import lotto.model.LottoNumber
 import lotto.model.Price
 import lotto.model.Price.Companion.EXCEPTION_PRICE_FORMAT
@@ -15,7 +12,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullSource
 import org.junit.jupiter.params.provider.ValueSource
-import kotlin.random.Random
 
 class LottoTest {
 
@@ -59,41 +55,14 @@ class LottoTest {
     @Test
     @DisplayName("로또가 번호 순서대로 정렬되어 나오는지 확인")
     fun `check lotto number sorting`() {
+        // given
         val list =
             listOf(LottoNumber(7), LottoNumber(5), LottoNumber(1), LottoNumber(6), LottoNumber(3), LottoNumber(4))
+
+        // when
         val lotto = Lotto(list)
 
+        // then
         assertThat(lotto.numbers).isEqualTo(listOf(1, 3, 4, 5, 7, 6))
-    }
-
-    @Test
-    @DisplayName("로또가 번호가 중복되어 나오는지 확인")
-    fun `duplicated lotto number`() {
-        val list =
-            listOf(LottoNumber(43), LottoNumber(5), LottoNumber(1), LottoNumber(39), LottoNumber(1), LottoNumber(1))
-
-        assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { Lotto(list) }
-            .withMessage(EXCEPTION_DUPLICATED_LOTTO_NUMBER)
-    }
-
-    @Test
-    @DisplayName("로또가 번호가 중복되어 나오는지 확인")
-    fun `incorrect lotto number`() {
-        val list =
-            listOf(LottoNumber(39), LottoNumber(7), LottoNumber(5), LottoNumber(1), LottoNumber(6), LottoNumber(3), LottoNumber(4))
-
-        assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { Lotto(list) }
-            .withMessage(EXCEPTION_LOTTO_FORMAT)
-    }
-
-    @Test
-    @DisplayName("로또가 번호 범위 확인")
-    fun `check lotto number range`() {
-        val lottos = GenerateLotto(Price(3000)).generateLottoList()
-        val randomLotto = lottos[Random.nextInt(0, 2)]
-
-        assertThat(randomLotto.numbers[Random.nextInt(0, 6)].number).isBetween(1, 45)
     }
 }
