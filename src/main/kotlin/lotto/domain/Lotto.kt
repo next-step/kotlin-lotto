@@ -19,6 +19,7 @@ value class Lotto(val numbers: List<LottoNumber>) {
 
     companion object {
         const val SIZE = 6
+        const val PRICE = 1000
         fun from(numbers: List<Int>): Lotto {
             return Lotto(numbers.map { LottoNumber(it) })
         }

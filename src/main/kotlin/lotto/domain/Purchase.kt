@@ -10,11 +10,7 @@ value class Purchase(val purchasePrice: Int) {
         }
     }
 
-    fun calculateQuantity(): Int {
-        return purchasePrice / LOTTO_PRICE
-    }
-
-    companion object {
-        private const val LOTTO_PRICE = 1000
+    fun calculateQuantity(lottoPrice: Int): Int {
+        return purchasePrice / lottoPrice
     }
 }

@@ -13,7 +13,7 @@ import lotto.view.OutputView
 object LottoGame {
     fun run() {
         val purchase = Purchase(InputView.askPurchase())
-        val lottos = Lottos.of(purchase.calculateQuantity(), RandomGeneratorFactory())
+        val lottos = Lottos.of(purchase.calculateQuantity(Lotto.PRICE), RandomGeneratorFactory())
         OutputView.printLottos(LottosDto(lottos.exportLottos()))
 
         val winningLotto = Lotto.from(InputView.askWinningNumbers())
