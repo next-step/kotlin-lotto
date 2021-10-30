@@ -64,7 +64,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.firstRank)
+        assertEquals(10, actual.getFirstRankCount())
         assertEquals(20_000_000_000, actual.totalReward)
     }
 
@@ -89,7 +89,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.secondRank)
+        assertEquals(10, actual.getSecondRankCount())
         assertEquals(15_000_000, actual.totalReward)
     }
 
@@ -114,7 +114,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.thirdRank)
+        assertEquals(10, actual.getThirdRankCount())
         assertEquals(500_000, actual.totalReward)
     }
 
@@ -139,7 +139,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.fourthRank)
+        assertEquals(10, actual.getFourthRankCount())
         assertEquals(50_000, actual.totalReward)
     }
 
@@ -164,9 +164,9 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(0, actual.firstRank)
-        assertEquals(0, actual.secondRank)
-        assertEquals(0, actual.thirdRank)
-        assertEquals(0, actual.fourthRank)
+        assertEquals(0, actual.getFirstRankCount())
+        assertEquals(0, actual.getSecondRankCount())
+        assertEquals(0, actual.getThirdRankCount())
+        assertEquals(0, actual.getFourthRankCount())
     }
 }

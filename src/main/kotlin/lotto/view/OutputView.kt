@@ -14,10 +14,10 @@ class OutputView {
     }
 
     fun printStatistics(statistics: LottoStatistics) {
-        println("3개 일치 (5000원) - ${statistics.fourthRank}")
-        println("4개 일치 (50000원) - ${statistics.thirdRank}")
-        println("5개 일치 (1500000) - ${statistics.secondRank}")
-        println("6개 일치 (2000000000원) - ${statistics.firstRank}")
+        println("3개 일치 (5000원) - ${statistics.getFourthRankCount()}")
+        println("4개 일치 (50000원) - ${statistics.getThirdRankCount()}")
+        println("5개 일치 (1500000) - ${statistics.getSecondRankCount()}")
+        println("6개 일치 (2000000000원) - ${statistics.getFirstRankCount()}")
         println("총 수익률은 ${statistics.getYield()}")
     }
 }

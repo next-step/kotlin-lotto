@@ -2,7 +2,6 @@ package lotto.usecase
 
 import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
-import lotto.domain.Rank
 import lotto.domain.WinningNumber
 
 class WinningsChecker {
@@ -18,10 +17,7 @@ class WinningsChecker {
 
         return LottoStatistics(
             totalPurchaseAmount = totalPurchaseAmount,
-            firstRank = ranks.filter { rank -> rank == Rank.FIRST }.size,
-            secondRank = ranks.filter { rank -> rank == Rank.SECOND }.size,
-            thirdRank = ranks.filter { rank -> rank == Rank.THIRD }.size,
-            fourthRank = ranks.filter { rank -> rank == Rank.FOURTH }.size,
+            ranks = ranks,
             totalReward = ranks.sumOf { rank -> rank.reward },
         )
     }
