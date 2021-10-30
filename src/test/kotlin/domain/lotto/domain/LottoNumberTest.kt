@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.RepetitionInfo
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 
@@ -46,5 +47,13 @@ class LottoNumberTest {
             { assertThat(actual).isEqualTo(expected) },
             { assertThat(actual).hasSameHashCodeAs(expected) },
         )
+    }
+
+    @Test
+    fun `1~45 사이의 모든 로또번호를 반환한다`() {
+        val expected = (1..45).associateWith { i -> LottoNumber.of(i) }.values.toSortedSet()
+
+        val lottoNumbers: Set<LottoNumber> = LottoNumber.values()
+        assertThat(lottoNumbers).containsAll(expected)
     }
 }
