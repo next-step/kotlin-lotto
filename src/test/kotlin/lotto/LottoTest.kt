@@ -63,7 +63,7 @@ class LottoTest {
             listOf(LottoNumber(7), LottoNumber(5), LottoNumber(1), LottoNumber(6), LottoNumber(3), LottoNumber(4))
         val lotto = Lotto(list)
 
-        assertThat(lotto.numbers).isEqualTo(listOf(1,3,4,5,7,6))
+        assertThat(lotto.numbers).isEqualTo(listOf(1, 3, 4, 5, 7, 6))
     }
 
     @Test
@@ -92,8 +92,8 @@ class LottoTest {
     @DisplayName("로또가 번호 범위 확인")
     fun `check lotto number range`() {
         val lottos = GenerateLotto(Price(3000)).generateLottoList()
-        val randomLotto = lottos[Random.nextInt(0,2)]
+        val randomLotto = lottos[Random.nextInt(0, 2)]
 
-        assertThat(randomLotto.numbers[Random.nextInt(0,6)].number).isBetween(1, 45)
+        assertThat(randomLotto.numbers[Random.nextInt(0, 6)].number).isBetween(1, 45)
     }
 }
