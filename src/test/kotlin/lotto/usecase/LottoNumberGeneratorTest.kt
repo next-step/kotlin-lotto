@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test
 
 class LottoNumberGeneratorTest {
     @Test
-    fun `번호 생성시 6개 생성 되는지 확인`() {
-        val actual = LottoNumberGenerator().generate()
+    fun `전략에 알맞는 숫자가 생성되는지 테스트`() {
+        val actual = LottoNumberGenerator(TestHelperNumberGenerateStrategy()).generate()
 
-        assertEquals(6, actual.size)
+        actual.forEach {
+            assertEquals(6, it)
+        }
     }
 }

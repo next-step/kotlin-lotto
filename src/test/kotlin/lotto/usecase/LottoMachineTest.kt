@@ -6,7 +6,9 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoMachineTest {
 
-    private val machine = LottoMachine(LottoNumberGenerator())
+    private val machine = LottoMachine(
+        LottoNumberGenerator(RandomNumberGenerateStrategy())
+    )
 
     @ValueSource(ints = [1000, 2000, 3000, 4000, 5000])
     @ParameterizedTest

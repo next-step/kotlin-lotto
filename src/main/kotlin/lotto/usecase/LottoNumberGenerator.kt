@@ -1,15 +1,16 @@
 package lotto.usecase
 
-class LottoNumberGenerator : Generator {
+class LottoNumberGenerator(
+    private val strategy: NumberGenerateStrategy,
+) : Generator {
 
     override fun generate(): List<Int> {
-        return LOTTO_NUMBER_SIZE.map {
-            LOTTO_NUMBER_RANGE.random()
+        return (1..LOTTO_NUMBER_SIZE).map {
+            strategy.generate()
         }
     }
 
     companion object {
-        private val LOTTO_NUMBER_RANGE = (1..45)
-        private val LOTTO_NUMBER_SIZE = (1..6)
+        private const val LOTTO_NUMBER_SIZE = 6
     }
 }
