@@ -24,7 +24,7 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
-        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
+        val bonusNumber = LottoNumber.from("7", winningNumberPackage)
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
@@ -71,7 +71,7 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
-        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
+        val bonusNumber = LottoNumber.from("7", winningNumberPackage)
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
@@ -128,7 +128,7 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
-        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
+        val bonusNumber = LottoNumber.from("7", winningNumberPackage)
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
@@ -187,7 +187,7 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
-        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
+        val bonusNumber = LottoNumber.from("7", winningNumberPackage)
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
@@ -244,7 +244,7 @@ internal class LottoTicketTest {
 
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber[it] }.toSet()
         val winningNumberPackage = LottoNumberPackage(winningNumbers)
-        val bonusNumber = BonusNumber.from("7", winningNumberPackage)
+        val bonusNumber = LottoNumber.from("7", winningNumberPackage)
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 

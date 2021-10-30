@@ -1,6 +1,5 @@
 package lotto.view.input
 
-import lotto.domain.BonusNumber
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumberPackage
 import lotto.domain.LottoPurchaseAmount
@@ -19,7 +18,7 @@ class ConsoleInputView : InputView {
 
     override fun getBonusNumber(winningNumbers: LottoNumberPackage): LottoNumber {
         println(RECEIVE_BONUS_NUMBER_MESSAGE)
-        return BonusNumber.from(readLine() ?: "", winningNumbers)
+        return LottoNumber.from(readLine() ?: "", winningNumbers)
     }
 
     companion object {
