@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertThrows
 
 @DisplayName("로또결과(MatchResult)")
 class MatchResultTest {
@@ -17,5 +18,12 @@ class MatchResultTest {
             { assertThat(matchResult).isNotNull },
             { assertThat(matchResult).isExactlyInstanceOf(MatchResult::class.java) }
         )
+    }
+
+    @Test
+    fun `비어있는 매칭 결과를 입력하면 예외를 발생시킨다`() {
+        val exception = assertThrows<EmptyMatchResultMapException> { MatchResult.of(mapOf()) }
+
+        assertThat(exception.message).isEqualTo("")
     }
 }
