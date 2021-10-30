@@ -36,4 +36,15 @@ class LottoNumberTest {
 
         assertThat(exception.message).isEqualTo("%s는 LottoNumber 의 범위를 벗어난 값입니다.".format(lottoNumber))
     }
+
+    @RepeatedTest(value = 45, name = "현재, {currentRepetition}/{totalRepetitions}")
+    fun `1~45 사이의 숫자로 생성된 로또 번호는 서로 같다`(repetitionInfo: RepetitionInfo) {
+        val expected = LottoNumber.of(repetitionInfo.currentRepetition)
+        val actual = LottoNumber.of(repetitionInfo.currentRepetition)
+
+        assertAll(
+            { assertThat(actual).isEqualTo(expected) },
+            { assertThat(actual).hasSameHashCodeAs(expected) },
+        )
+    }
 }
