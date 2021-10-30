@@ -35,6 +35,6 @@ class LottoTest {
             of(3), of(4), of(5)
         )
         val exception = assertThrows<InvalidLottoNumberSizeException> { Lotto.of(sortedSetOf) }
-        assertThat(exception).isEqualTo("Lotto 에 속한 LottoNumber 의 개수 %s는 6이 아닙니다.".format(sortedSetOf.size))
+        assertThat(exception.message).isEqualTo("Lotto 에 속한 LottoNumber 의 개수 %s는 6이 아니다.".format(sortedSetOf.size))
     }
 }

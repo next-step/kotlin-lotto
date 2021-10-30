@@ -1,5 +1,6 @@
 package domain.lotto.domain
 
+import domain.lotto.error.InvalidLottoNumberSizeException
 import domain.lotto.strategy.LottoShuffleStrategy
 
 @JvmInline
@@ -27,7 +28,7 @@ value class Lotto private constructor(private val lotto: Set<LottoNumber>) {
                 throw IllegalArgumentException()
             }
             if (lotto.size != TO_INDEX) {
-                throw IllegalArgumentException()
+                throw InvalidLottoNumberSizeException(lotto.size)
             }
         }
     }
