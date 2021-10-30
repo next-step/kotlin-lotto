@@ -8,32 +8,18 @@ import org.junit.jupiter.api.assertThrows
 class LottoTest {
     @Test
     fun `Lotto 숫자 5개 일때 exception`() {
-        val exception = assertThrows<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             val numbers = listOf(1, 2, 3, 4, 5)
             Lotto(numbers, 1000)
         }
-        val expected = "6개의 번호를 입력해야합니다."
-
-        assertEquals(expected, exception.message)
     }
 
     @Test
     fun `Lotto 숫자 7개 일때 exception`() {
-        val exception = assertThrows<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             val numbers = listOf(1, 2, 3, 4, 5, 6, 7)
             Lotto(numbers, 1000)
         }
-        val expected = "6개의 번호를 입력해야합니다."
-
-        assertEquals(expected, exception.message)
-    }
-
-    @Test
-    fun `Lotto 숫자 6개 일때 생성 성공`() {
-        val numbers = listOf(1, 2, 3, 4, 5, 6)
-        Lotto(numbers, 1000)
-
-        // success
     }
 
     @Test
