@@ -1,5 +1,6 @@
 package domain.lotto.domain
 
+import domain.lotto.error.EmptyMatchResultMapException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -24,6 +25,6 @@ class MatchResultTest {
     fun `비어있는 매칭 결과를 입력하면 예외를 발생시킨다`() {
         val exception = assertThrows<EmptyMatchResultMapException> { MatchResult.of(mapOf()) }
 
-        assertThat(exception.message).isEqualTo("")
+        assertThat(exception.message).isEqualTo("로또 결과가 비어있습니다.")
     }
 }
