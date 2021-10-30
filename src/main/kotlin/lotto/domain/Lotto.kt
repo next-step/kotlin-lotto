@@ -11,9 +11,11 @@ class Lotto(
     fun sortilege(
         winningNumber: WinningNumber,
     ): Rank {
-        val matchCount = numbers.map { number ->
-            winningNumber.contain(number)
-        }.filter { it }
+        val matchCount = numbers
+            .map { number ->
+                winningNumber.contain(number)
+            }
+            .filter { it }
 
         val rank = when (matchCount.size) {
             6 -> Rank.FIRST
