@@ -51,9 +51,9 @@ class LottoNumberTest {
 
     @Test
     fun `1~45 사이의 모든 로또번호를 반환한다`() {
-        val expected = (1..45).associateWith { i -> LottoNumber.of(i) }.values.toSortedSet()
+        val expected = (1..45).associateWith { i -> LottoNumber.of(i) }.values.toList()
 
-        val lottoNumbers: Set<LottoNumber> = LottoNumber.values()
+        val lottoNumbers = LottoNumber.values()
         assertThat(lottoNumbers).containsAll(expected)
     }
 }
