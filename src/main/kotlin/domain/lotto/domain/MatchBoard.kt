@@ -1,6 +1,6 @@
 package domain.lotto.domain
 
-enum class WinningResult(private val numberOfMatch: Int, private val winningPrize: Int) {
+enum class MatchBoard(private val numberOfMatch: Int, private val matchPrize: Int) {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -9,7 +9,7 @@ enum class WinningResult(private val numberOfMatch: Int, private val winningPriz
     MISS(0, 0);
 
     companion object {
-        fun values(numberOfMatch: Int): WinningResult =
+        fun values(numberOfMatch: Int): MatchBoard =
             values().asSequence()
                 .find { it.numberOfMatch == numberOfMatch }
                 ?: MISS

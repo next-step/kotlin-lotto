@@ -24,13 +24,15 @@ class LottosTest {
         )
     }
 
-    // @Test
-    // fun `당첨 로또를 입력하면 당첨 결과를 반환한다`() {
-    //     val size = 1
-    //     val lottoShuffleStrategy = LottoShuffleStrategy { it.sorted() }
-    //     val lottos: Lottos = Lottos.from(size, lottoShuffleStrategy)
-    //     val lotto = Lotto.of("1, 2, 3, 4, 5, 6") { it.split(", ") }
-    //
-    //     lottos.match(lotto)
-    // }
+    @Test
+    fun `당첨 로또를 입력하면 당첨 결과를 반환한다`() {
+        val expected = MatchBoard.values().associateWith { 0 }.toMutableMap()
+        expected[MatchBoard.FIRST] = 1
+
+        val lottos: Lottos = Lottos.from(1) { it.sorted() }
+        val lotto = Lotto.of("1, 2, 3, 4, 5, 6") { it.split(", ") }
+
+        val actual = lottos.match(lotto)
+        assertThat(actual).isEqualTo(expected)
+    }
 }

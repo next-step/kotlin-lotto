@@ -22,9 +22,11 @@ value class Lotto private constructor(private val lotto: Set<LottoNumber>) {
         }
 
         fun of(lotto: String, splitStrategy: SplitStrategy): Lotto =
-            of(splitStrategy.split(lotto)
-                .map { LottoNumber.of(it.toInt()) }
-                .toSortedSet())
+            of(
+                splitStrategy.split(lotto)
+                    .map { LottoNumber.of(it.toInt()) }
+                    .toSortedSet()
+            )
 
         fun of(lotto: Set<LottoNumber>): Lotto =
             if (lotto.size == TO_INDEX) Lotto(lotto.toSortedSet())
