@@ -2,7 +2,8 @@ package lotto.domain
 
 import lotto.exception.IllegalLottoException
 
-data class Lotto(val numbers: List<LottoNumber>) {
+@JvmInline
+value class Lotto(val numbers: List<LottoNumber>) {
     init {
         if (numbers.size != SIZE) {
             throw IllegalLottoException()
