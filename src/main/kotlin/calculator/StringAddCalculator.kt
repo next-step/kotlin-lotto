@@ -1,6 +1,6 @@
 package calculator
 
-class StringAddCalculator {
+object StringAddCalculator {
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
             return 0
@@ -19,9 +19,10 @@ class StringAddCalculator {
     }
 
     private fun getDelimiters(text: String): List<String> {
-        return if (text.startsWith("//")) listOf(
-            ",", ":",
-            text.substringAfter("//").substringBefore("\n")
-        ) else listOf(",", ":")
+        return if (text.startsWith("//")) {
+            listOf(",", ":", text.substringAfter("//").substringBefore("\n"))
+        } else {
+            listOf(",", ":")
+        }
     }
 }
