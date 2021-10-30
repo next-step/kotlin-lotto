@@ -21,7 +21,7 @@ class LottoGame(
     ): LottoStatistics {
         val winningNumber = WinningNumber(winningNumbers)
 
-        return winningsChecker.check(
+        return winningsChecker.confirmWinning(
             lottos = lottos,
             winningNumber = winningNumber
         )

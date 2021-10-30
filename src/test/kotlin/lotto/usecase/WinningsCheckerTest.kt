@@ -18,7 +18,7 @@ class WinningsCheckerTest {
             )
         }
 
-        val actual = winningsChecker.check(
+        val actual = winningsChecker.confirmWinning(
             lottos = lottos,
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
@@ -35,7 +35,7 @@ class WinningsCheckerTest {
             )
         }
 
-        val actual = winningsChecker.check(
+        val actual = winningsChecker.confirmWinning(
             lottos = lottos,
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
@@ -59,7 +59,7 @@ class WinningsCheckerTest {
             )
         }
 
-        val actual = winningsChecker.check(
+        val actual = winningsChecker.confirmWinning(
             lottos = firstRankLottos + blankLottos,
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
@@ -84,7 +84,7 @@ class WinningsCheckerTest {
             )
         }
 
-        val actual = winningsChecker.check(
+        val actual = winningsChecker.confirmWinning(
             lottos = secondRankLottos + blankLottos,
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
@@ -109,7 +109,7 @@ class WinningsCheckerTest {
             )
         }
 
-        val actual = winningsChecker.check(
+        val actual = winningsChecker.confirmWinning(
             lottos = thirdRankLottos + blankLottos,
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
@@ -134,7 +134,7 @@ class WinningsCheckerTest {
             )
         }
 
-        val actual = winningsChecker.check(
+        val actual = winningsChecker.confirmWinning(
             lottos = fourthRankLottos + blankLottos,
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
@@ -159,7 +159,7 @@ class WinningsCheckerTest {
             )
         }
 
-        val actual = winningsChecker.check(
+        val actual = winningsChecker.confirmWinning(
             lottos = fourthRankLottos + blankLottos,
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )

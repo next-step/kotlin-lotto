@@ -7,7 +7,7 @@ import lotto.domain.WinningNumber
 
 class WinningsChecker {
 
-    fun check(
+    fun confirmWinning(
         lottos: List<Lotto>,
         winningNumber: WinningNumber,
     ): LottoStatistics {
