@@ -13,8 +13,6 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
                 .map { Lotto.of(shuffleStrategy) }
                 .toList())
 
-        fun of(lottos: List<Lotto>) =
-            if (lottos.isNotEmpty()) Lottos(lottos.toList())
-            else throw IllegalArgumentException()
+        fun of(lottos: List<Lotto>): Lottos = Lottos(lottos.toList())
     }
 }

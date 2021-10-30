@@ -29,6 +29,25 @@ class LottoTest {
     }
 
     @Test
+    fun `숫자로 변환 가능한 문자열을 입력하면 로또를 생성한다`() {
+        val expected = Lotto.of(
+            sortedSetOf(
+                of(1), of(2), of(3),
+                of(4), of(5), of(6),
+            )
+        )
+
+        val lottoString = "1, 2, 3, 4, 5, 6"
+        val actual: Lotto = Lotto.of(lottoString)
+
+        assertAll(
+            { assertThat(actual).isNotNull },
+            { assertThat(actual).isExactlyInstanceOf(Lotto::class.java) },
+            { assertThat(actual).isEqualTo(expected) }
+        )
+    }
+
+    @Test
     fun `로또의 숫자 개수가 6개가 아니면 예외를 발생시킨다`() {
         val sortedSetOf = sortedSetOf(
             of(1), of(2),
