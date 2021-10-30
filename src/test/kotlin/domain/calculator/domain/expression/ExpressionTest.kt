@@ -13,9 +13,8 @@ import org.junit.jupiter.params.provider.ValueSource
 class ExpressionTest {
 
     @Test
-    fun `null 값이 들어오면 0값 문자열을 반환한다`() {
-        val nullString: String? = null
-        val expression = Expression(nullString, CustomSeparatorRegexStrategy)
+    fun `디폴트 값으로 0 문자열을 반환한다`() {
+        val expression = Expression(regexStrategy = CustomSeparatorRegexStrategy)
 
         assertThat(expression.calculateExpression()).isEqualTo("0")
     }

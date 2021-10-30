@@ -5,8 +5,8 @@ import domain.calculator.strategy.CustomSeparatorRegexStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 @DisplayName("계산기(Calculator)")
@@ -18,10 +18,9 @@ class CalculatorTest {
         calculator = Calculator
     }
 
-    @ParameterizedTest(name = "연산식 : {0}")
-    @NullAndEmptySource
-    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(rawExpression: String?) {
-        val expression = Expression(rawExpression, CustomSeparatorRegexStrategy)
+    @Test
+    fun `디폴트 값으로 0을 반환해야 한다`() {
+        val expression = Expression(regexStrategy = CustomSeparatorRegexStrategy)
         val result = calculator.calculate(expression)
         assertThat(result.result).isZero
     }
