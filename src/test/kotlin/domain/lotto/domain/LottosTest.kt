@@ -24,12 +24,13 @@ class LottosTest {
         )
     }
 
-    @Test
-    fun `당첨 로또를 입력하면 당첨 결과를 반환한다`() {
-        val size = 1
-        val lottoShuffleStrategy = LottoShuffleStrategy { it.sorted() }
-        val lottos: Lottos = Lottos.from(size, lottoShuffleStrategy)
-
-        // lottos.match()
-    }
+    // @Test
+    // fun `당첨 로또를 입력하면 당첨 결과를 반환한다`() {
+    //     val size = 1
+    //     val lottoShuffleStrategy = LottoShuffleStrategy { it.sorted() }
+    //     val lottos: Lottos = Lottos.from(size, lottoShuffleStrategy)
+    //     val lotto = Lotto.of("1, 2, 3, 4, 5, 6") { it.split(", ") }
+    //
+    //     lottos.match(lotto)
+    // }
 }

@@ -38,7 +38,7 @@ class LottoTest {
         )
 
         val lottoString = "1, 2, 3, 4, 5, 6"
-        val actual: Lotto = Lotto.of(lottoString) { it.split(", ")}
+        val actual: Lotto = Lotto.of(lottoString) { it.split(", ") }
 
         assertAll(
             { assertThat(actual).isNotNull },
@@ -55,5 +55,19 @@ class LottoTest {
         )
         val exception = assertThrows<InvalidLottoNumberSizeException> { Lotto.of(sortedSetOf) }
         assertThat(exception.message).isEqualTo("Lotto 에 속한 LottoNumber 의 개수 %s는 6이 아니다.".format(sortedSetOf.size))
+    }
+
+    @Test
+    fun `다른 로또와 비교해서 동일한 로또번호의 개수를 반환한다`() {
+        val standard: Lotto = Lotto.of("1, 2, 3, 4, 5, 6") { it.split(", ") }
+        val allMatch: Lotto = Lotto.of("1, 2, 3, 4, 5, 6") { it.split(", ") }
+        val nonMatch: Lotto = Lotto.of("45, 44, 43, 42, 41, 40") { it.split(", ") }
+        val someMatch: Lotto = Lotto.of("4, 5, 6, 7, 8, 9") { it.split(", ") }
+
+        assertAll(
+            { assertThat(standard.match(allMatch)).isEqualTo(6) },
+            { assertThat(standard.match(nonMatch)).isZero() },
+            { assertThat(standard.match(someMatch)).isEqualTo(3) },
+        )
     }
 }

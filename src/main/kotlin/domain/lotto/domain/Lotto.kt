@@ -7,6 +7,8 @@ import global.strategy.split.SplitStrategy
 @JvmInline
 value class Lotto private constructor(private val lotto: Set<LottoNumber>) {
 
+    fun match(other: Lotto): Int = other.lotto.count { lotto.contains(it) }
+
     companion object {
         const val PRICE = 1_000
         private const val FROM_INDEX = 0

@@ -5,6 +5,11 @@ import domain.lotto.strategy.LottoShuffleStrategy
 @JvmInline
 value class Lottos private constructor(private val lottos: List<Lotto>) {
 
+    // fun match(winningLotto: Lotto) {
+    //     lottos.asSequence()
+    //         .map {  }
+    // }
+
     companion object {
         private const val START = 1
 
