@@ -17,8 +17,18 @@ value class Lotto private constructor(private val lotto: Set<LottoNumber>) {
             return of(selectedLottoNumbers.toSortedSet())
         }
 
-        fun of(lotto: Set<LottoNumber>): Lotto =
-            if (lotto.isNotEmpty()) Lotto(lotto.toSortedSet())
-            else throw IllegalArgumentException()
+        fun of(lotto: Set<LottoNumber>): Lotto {
+            validateLotto(lotto)
+            return Lotto(lotto.toSortedSet())
+        }
+
+        private fun validateLotto(lotto: Set<LottoNumber>) {
+            if (lotto.isNullOrEmpty()) {
+                throw IllegalArgumentException()
+            }
+            if (lotto.size != TO_INDEX) {
+                throw IllegalArgumentException()
+            }
+        }
     }
 }

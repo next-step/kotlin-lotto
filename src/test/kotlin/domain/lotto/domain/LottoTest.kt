@@ -1,10 +1,12 @@
 package domain.lotto.domain
 
 import domain.lotto.domain.LottoNumber.Companion.of
+import domain.lotto.error.InvalidLottoNumberSizeException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertThrows
 
 @DisplayName("로또(Lotto)")
 class LottoTest {
@@ -24,5 +26,15 @@ class LottoTest {
             { assertThat(actual).isExactlyInstanceOf(Lotto::class.java) },
             { assertThat(actual).isEqualTo(expected) }
         )
+    }
+
+    @Test
+    fun `로또의 숫자 개수가 6개가 아니면 예외를 발생시킨다`() {
+        val sortedSetOf = sortedSetOf(
+            of(1), of(2),
+            of(3), of(4), of(5)
+        )
+        val exception = assertThrows<InvalidLottoNumberSizeException> { Lotto.of(sortedSetOf) }
+        assertThat(exception).isEqualTo("Lotto 에 속한 LottoNumber 의 개수 %s는 6이 아닙니다.".format(sortedSetOf.size))
     }
 }
