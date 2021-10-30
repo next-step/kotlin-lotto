@@ -44,7 +44,7 @@ class WinningsCheckerTest {
     }
 
     @Test
-    fun `로또 당첨결과 FIRST 가 10개일때 firstRanks size 10, 총 상금 200억`() {
+    fun `로또 당첨결과 1등이 10개일때 firstRanks size 10, 총 상금 200억`() {
         val firstRankLottos = (1..10).map {
             Lotto(
                 listOf(1, 2, 3, 4, 5, 6),
@@ -69,7 +69,7 @@ class WinningsCheckerTest {
     }
 
     @Test
-    fun `로또 당첨결과 SECOND 가 10개일때 secondRanks size 10, 총 상금 1500만원`() {
+    fun `로또 당첨결과 2등이 10개일때 secondRanks size 10, 총 상금 1500만원`() {
         val secondRankLottos = (1..10).map {
             Lotto(
                 listOf(1, 2, 3, 4, 5, 0),
@@ -94,7 +94,7 @@ class WinningsCheckerTest {
     }
 
     @Test
-    fun `로또 당첨결과 THIRD 가 10개일때 thirdRank size 10, 상금 50만원`() {
+    fun `로또 당첨결과 3등이 10개일때 thirdRank size 10, 상금 50만원`() {
         val thirdRankLottos = (1..10).map {
             Lotto(
                 listOf(1, 2, 3, 4, 0, 0),
@@ -119,7 +119,7 @@ class WinningsCheckerTest {
     }
 
     @Test
-    fun `로또 당첨결과 FOURTH 가 10개일때 fourthRanks size 10, 상금 5만원`() {
+    fun `로또 당첨결과 4등이 10개일때 fourthRanks size 10, 상금 5만원`() {
         val fourthRankLottos = (1..10).map {
             Lotto(
                 listOf(1, 2, 3, 0, 0, 0),
@@ -144,7 +144,7 @@ class WinningsCheckerTest {
     }
 
     @Test
-    fun `로또 모두 BLANK 일때 firstRanks, secondRanks, thirdRanks, fourthRanks size 0`() {
+    fun `로또 모두 꽝 일때 firstRanks, secondRanks, thirdRanks, fourthRanks size 0`() {
         val fourthRankLottos = (1..10).map {
             Lotto(
                 listOf(1, 2, 0, 0, 0, 0),
