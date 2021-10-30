@@ -13,9 +13,11 @@ class InputView {
         println(INPUT_WINNING_NUMBERS)
         val winningNumbers = readLine() ?: DEFAULT_WINNING_NUMBERS
 
-        return winningNumbers.split(SEPARATOR).map { winningNumber ->
-            winningNumber.toInt()
-        }
+        return winningNumbers
+            .split(SEPARATOR)
+            .map { winningNumber ->
+                winningNumber.toInt()
+            }
     }
 
     companion object {
