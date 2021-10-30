@@ -37,7 +37,7 @@ data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
     }
 
     fun getPrizeMoney(winningInfo: WinningInfo): Long {
-        return getRankKey(winningInfo).rank().prizeMoney
+        return LottoResultRank.getRank(getRankKey(winningInfo)).prizeMoney
     }
 
     companion object {

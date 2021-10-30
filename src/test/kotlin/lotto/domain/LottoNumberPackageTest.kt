@@ -70,10 +70,11 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.MISSED)
+        assertThat(rank).isEqualTo(LottoResultRank.MISSED)
         assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(0L)
     }
 
@@ -95,10 +96,11 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.FIFTH)
+        assertThat(rank).isEqualTo(LottoResultRank.FIFTH)
         assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(5000L)
     }
 
@@ -121,10 +123,11 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.FOURTH)
+        assertThat(rank).isEqualTo(LottoResultRank.FOURTH)
         assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(50000L)
     }
 
@@ -146,10 +149,11 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.THIRD)
+        assertThat(rank).isEqualTo(LottoResultRank.THIRD)
         assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(1_500_000L)
     }
 
@@ -170,10 +174,11 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.SECOND)
+        assertThat(rank).isEqualTo(LottoResultRank.SECOND)
         assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(3_000_000L)
     }
 
@@ -194,10 +199,11 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
-        assertThat(lottoNumberPackage.getRankKey(winningInfo).rank()).isEqualTo(LottoResultRank.FIRST)
+        assertThat(rank).isEqualTo(LottoResultRank.FIRST)
         assertThat(lottoNumberPackage.getPrizeMoney(winningInfo)).isEqualTo(2_000_000_000L)
     }
 

@@ -30,7 +30,6 @@ internal class LottoNumberTest {
         }
     }
 
-
     @ParameterizedTest
     @MethodSource("getBonusNumberDuplicatedWithWinningNumbers")
     fun `보너스번호 생성 시 당첨번호와 중복된 번호를 입력하면 IllegalArgumentException 이 발생한다`(
