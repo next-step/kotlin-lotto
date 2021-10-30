@@ -25,7 +25,6 @@ internal class RandomGeneratorFactoryTest {
     @DisplayName("generator 가 생성할 수 있는 것보다 더 많이 생성하면 예외가 발생한다.")
     @Test
     fun exhausted() {
-        val max = 5
         val numberGenerator = RandomGeneratorFactory(min, max).createNumberGenerator()
         assertThatExceptionOfType(NoSuchElementException::class.java)
             .isThrownBy { (min..(max + 10)).map { numberGenerator() } }
