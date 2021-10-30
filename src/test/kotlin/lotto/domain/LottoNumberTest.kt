@@ -19,7 +19,7 @@ internal class LottoNumberTest {
     }
 
     @TestFactory
-    fun equals() = (1..45).map {
+    fun equals() = (LottoNumber.MIN..LottoNumber.MAX).map {
         DynamicTest.dynamicTest("로또의 번호가 같으면 같은 객체로 인식되어야 한다. $it") {
             assertThat(LottoNumber(it))
                 .isEqualTo(LottoNumber(it))

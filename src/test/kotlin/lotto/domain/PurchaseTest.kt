@@ -19,9 +19,9 @@ internal class PurchaseTest {
 
     @DisplayName("로또 가격을 1000 으로 하여 수량을 계산해야한다.")
     @ParameterizedTest
-    @CsvSource("999,0", "46000,46", "12345,12")
+    @CsvSource("999,0", "46000,46", "12300,12")
     fun `수량 계산`(purchasePrice: Int, expectedQuantity: Int) {
-        assertThat(Purchase(purchasePrice).calculateQuantity())
+        assertThat(Purchase(purchasePrice).calculateQuantity(Lotto.PRICE))
             .isEqualTo(expectedQuantity)
     }
 }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.TestFactory
 
 internal class LottoTest {
     @TestFactory
-    fun `잘못된 로또번호 갯수`() = listOf(emptyList(), (1..5), (1..7), (1..45))
+    fun `잘못된 로또번호 갯수`() = listOf(emptyList(), (1..5), (1..7), (1..43))
         .map {
             DynamicTest.dynamicTest("로또는 6개의 번호를 가져야 한다. $it") {
                 assertThatExceptionOfType(IllegalLottoException::class.java)
@@ -19,7 +19,7 @@ internal class LottoTest {
         }
 
     @TestFactory
-    fun `중복된 로또번호`() = listOf(listOf(1, 1, 2, 3, 4, 5), listOf(41, 42, 43, 43, 44, 45))
+    fun `중복된 로또번호`() = listOf(listOf(1, 1, 2, 3, 4, 5), listOf(41, 42, 43, 43, 44, 40))
         .map {
             DynamicTest.dynamicTest("로또의 번호는 중복될 수 없다. $it") {
                 assertThatExceptionOfType(IllegalLottoException::class.java)
@@ -28,7 +28,7 @@ internal class LottoTest {
         }
 
     @TestFactory
-    fun equals() = listOf((1..6), (21..26), (40..45))
+    fun equals() = listOf((1..6), (21..26), (30..35))
         .map {
             DynamicTest.dynamicTest("로또가 같으면 같다고 인식되어야 한다. $it") {
                 assertThat(Lotto(it.map { number -> LottoNumber(number) }))
