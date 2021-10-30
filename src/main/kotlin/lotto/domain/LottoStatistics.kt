@@ -2,27 +2,26 @@ package lotto.domain
 
 class LottoStatistics(
     val totalPurchaseAmount: Int,
-    val ranks: List<Rank>,
-    val totalReward: Long,
+    val winningStatistics: WinningStatistics,
 ) {
 
     fun getFirstRankCount(): Int {
-        return ranks.filter { it == Rank.FIRST }.size
+        return winningStatistics.getFirstRankCount()
     }
 
     fun getSecondRankCount(): Int {
-        return ranks.filter { it == Rank.SECOND }.size
+        return winningStatistics.getSecondRankCount()
     }
 
     fun getThirdRankCount(): Int {
-        return ranks.filter { it == Rank.THIRD }.size
+        return winningStatistics.getThirdRankCount()
     }
 
     fun getFourthRankCount(): Int {
-        return ranks.filter { it == Rank.FOURTH }.size
+        return winningStatistics.getFourthRankCount()
     }
 
     fun getYield(): Double {
-        return totalReward.toDouble() / totalPurchaseAmount
+        return winningStatistics.getTotalReward() / totalPurchaseAmount
     }
 }

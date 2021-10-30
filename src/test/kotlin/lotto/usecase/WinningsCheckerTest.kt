@@ -10,40 +10,6 @@ class WinningsCheckerTest {
     private val winningsChecker = WinningsChecker()
 
     @Test
-    fun `로또 10장 샀을 때 총 가격이 10000원`() {
-        val lottos = (1..10).map {
-            Lotto(
-                listOf(1, 2, 3, 4, 5, 6),
-                1000
-            )
-        }
-
-        val actual = winningsChecker.confirmWinning(
-            lottos = lottos,
-            winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
-        )
-
-        assertEquals(10000, actual.totalPurchaseAmount)
-    }
-
-    @Test
-    fun `로또 20장 샀을 때 총 가격이 20000원`() {
-        val lottos = (1..20).map {
-            Lotto(
-                listOf(1, 2, 3, 4, 5, 6),
-                1000
-            )
-        }
-
-        val actual = winningsChecker.confirmWinning(
-            lottos = lottos,
-            winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
-        )
-
-        assertEquals(20000, actual.totalPurchaseAmount)
-    }
-
-    @Test
     fun `로또 당첨결과 1등이 10개일때 firstRanks size 10, 총 상금 200억`() {
         val firstRankLottos = (1..10).map {
             Lotto(
@@ -65,7 +31,7 @@ class WinningsCheckerTest {
         )
 
         assertEquals(10, actual.getFirstRankCount())
-        assertEquals(20_000_000_000, actual.totalReward)
+        assertEquals(20_000_000_000.0, actual.getTotalReward())
     }
 
     @Test
@@ -90,7 +56,7 @@ class WinningsCheckerTest {
         )
 
         assertEquals(10, actual.getSecondRankCount())
-        assertEquals(15_000_000, actual.totalReward)
+        assertEquals(15_000_000.0, actual.getTotalReward())
     }
 
     @Test
@@ -115,7 +81,7 @@ class WinningsCheckerTest {
         )
 
         assertEquals(10, actual.getThirdRankCount())
-        assertEquals(500_000, actual.totalReward)
+        assertEquals(500_000.0, actual.getTotalReward())
     }
 
     @Test
@@ -140,7 +106,7 @@ class WinningsCheckerTest {
         )
 
         assertEquals(10, actual.getFourthRankCount())
-        assertEquals(50_000, actual.totalReward)
+        assertEquals(50_000.0, actual.getTotalReward())
     }
 
     @Test

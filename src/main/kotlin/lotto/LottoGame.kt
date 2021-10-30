@@ -3,6 +3,7 @@ package lotto
 import lotto.`interface`.LottoGame
 import lotto.usecase.LottoMachine
 import lotto.usecase.LottoNumberGenerator
+import lotto.usecase.PurchaseAmountCalculator
 import lotto.usecase.RandomNumberGenerateStrategy
 import lotto.usecase.WinningsChecker
 import lotto.view.InputView
@@ -16,6 +17,7 @@ fun main() {
             LottoNumberGenerator(RandomNumberGenerateStrategy())
         ),
         winningsChecker = WinningsChecker(),
+        calculator = PurchaseAmountCalculator(),
     )
 
     val purchaseAmount = inputView.inputPurchaseAmount()
@@ -26,7 +28,7 @@ fun main() {
     val winningNumbers = inputView.inputWinningNumber()
 
     lottoGame
-        .confirmWinning(
+        .statistics(
             winningNumbers = winningNumbers,
             lottos = lottos,
         )
