@@ -9,7 +9,7 @@ class StringAddCalculator {
             return 0
         }
         val splitText = splitHelper.split(text)
-        val positiveNumbers = PositiveNumbers.from(splitText)
-        return positiveNumbers.sum()
+        val numbers = splitText.map { PositiveNumber(it.toInt()) }
+        return numbers.sum()
     }
 }
