@@ -18,10 +18,10 @@ class Lotto(
             .filter { it }
 
         val rank = when (matchCount.size) {
-            6 -> Rank.FIRST
-            5 -> Rank.SECOND
-            4 -> Rank.THIRD
-            3 -> Rank.FOURTH
+            SIX_MATCH -> Rank.FIRST
+            FIVE_MATCH -> Rank.SECOND
+            FOUR_MATCH -> Rank.THIRD
+            THREE_MATCH -> Rank.FOURTH
             else -> Rank.BLANK
         }
 
@@ -34,5 +34,9 @@ class Lotto(
 
     companion object {
         private const val NUMBER_SIZE = 6
+        private const val SIX_MATCH = 6
+        private const val FIVE_MATCH = 5
+        private const val FOUR_MATCH = 4
+        private const val THREE_MATCH = 3
     }
 }
