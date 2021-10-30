@@ -27,7 +27,7 @@ internal class RandomGeneratorFactoryTest {
     fun exhausted() {
         val numberGenerator = RandomGeneratorFactory(min, max).createNumberGenerator()
         assertThatExceptionOfType(NoSuchElementException::class.java)
-            .isThrownBy { (min..(max + 10)).map { numberGenerator() } }
+            .isThrownBy { repeat(max + 10) { numberGenerator() } }
     }
 
     companion object {
