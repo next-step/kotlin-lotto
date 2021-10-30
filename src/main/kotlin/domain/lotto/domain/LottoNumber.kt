@@ -23,5 +23,7 @@ value class LottoNumber private constructor(private val lottoNumber: Int) : Comp
             }
             return CACHE.getValue(lottoNumber)
         }
+
+        fun values(): Set<LottoNumber> = CACHE.values.toSortedSet()
     }
 }
