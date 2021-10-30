@@ -14,7 +14,7 @@ internal class LottosTest {
         val generatorFactory = object : GeneratorFactory {
             override fun createNumberGenerator(): () -> Int {
                 var number = 1
-                return (fun(): Int { return number++ })
+                return { number++ }
             }
         }
         val expected = (1..quantity).map { Lotto((1..Lotto.SIZE).map { LottoNumber(it) }) }
