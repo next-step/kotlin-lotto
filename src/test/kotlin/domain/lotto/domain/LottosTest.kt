@@ -2,9 +2,11 @@ package domain.lotto.domain
 
 import domain.lotto.strategy.LottoShuffleStrategy
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
+@DisplayName("로또들(Lottos)")
 class LottosTest {
 
     @Test
