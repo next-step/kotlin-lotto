@@ -14,7 +14,11 @@ value class Lotto(val numbers: List<LottoNumber>) {
     }
 
     fun checkMatch(winningLotto: Lotto): Match {
-        return Match.valueOf(numbers.count { winningLotto.numbers.contains(it) })
+        return Match.valueOf(winningLotto.count(numbers))
+    }
+
+    private fun count(lottoNumbers: List<LottoNumber>): Int {
+        return lottoNumbers.count { numbers.contains(it) }
     }
 
     companion object {
