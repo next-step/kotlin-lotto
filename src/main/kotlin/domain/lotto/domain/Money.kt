@@ -16,5 +16,3 @@ value class Money(private val money: Int = DEFAULT_MONEY) {
         private const val DEFAULT_MONEY = 0
     }
 }
-
-

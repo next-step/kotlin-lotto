@@ -1,5 +1,6 @@
 package domain.lotto
 
+import domain.lotto.domain.Lotto
 import domain.lotto.domain.Money
 import domain.lotto.service.LottoService
 import domain.lotto.ui.LottoInputView
@@ -13,7 +14,7 @@ class LottoApplication(
 ) {
     fun run() {
         val money = purchaseLottoByConsole()
-        lottoResultView.announceLottoCounts()
+        lottoResultView.announceNumberOfPurchases(money.numberOfPurchases(Lotto.PRICE))
         val result = LottoService.run(money)
     }
 
