@@ -5,8 +5,8 @@ import domain.calculator.service.Calculator
 import domain.calculator.strategy.CustomSeparatorRegexStrategy
 import domain.calculator.ui.InputView
 import domain.calculator.ui.ResultView
-import global.strategy.ConsoleInputStrategy
-import global.strategy.ConsoleOutputStrategy
+import global.strategy.ui.ConsoleInputStrategy
+import global.strategy.ui.ConsoleOutputStrategy
 
 class CalculatorApplication(
     private val inputView: InputView,

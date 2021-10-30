@@ -38,7 +38,7 @@ class LottoTest {
         )
 
         val lottoString = "1, 2, 3, 4, 5, 6"
-        val actual: Lotto = Lotto.of(lottoString)
+        val actual: Lotto = Lotto.of(lottoString) { it.split(", ")}
 
         assertAll(
             { assertThat(actual).isNotNull },

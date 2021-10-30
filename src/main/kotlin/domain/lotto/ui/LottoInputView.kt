@@ -1,7 +1,7 @@
 package domain.lotto.ui
 
-import global.strategy.ConsoleInputStrategy
-import global.strategy.ConsoleOutputStrategy
+import global.strategy.ui.ConsoleInputStrategy
+import global.strategy.ui.ConsoleOutputStrategy
 
 class LottoInputView(
     private val consoleInputStrategy: ConsoleInputStrategy,

@@ -5,8 +5,8 @@ import domain.lotto.domain.Money
 import domain.lotto.service.LottoService
 import domain.lotto.ui.LottoInputView
 import domain.lotto.ui.LottoResultView
-import global.strategy.ConsoleInputStrategy
-import global.strategy.ConsoleOutputStrategy
+import global.strategy.ui.ConsoleInputStrategy
+import global.strategy.ui.ConsoleOutputStrategy
 
 class LottoApplication(
     private val lottoInputView: LottoInputView,

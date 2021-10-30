@@ -1,6 +1,6 @@
 package domain.lotto.ui
 
-import global.strategy.ConsoleOutputStrategy
+import global.strategy.ui.ConsoleOutputStrategy
 
 class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) {
     fun announceNumberOfPurchases(numberOfPurchases: Int) {

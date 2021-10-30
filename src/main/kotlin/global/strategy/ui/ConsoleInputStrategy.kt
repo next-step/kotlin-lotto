@@ -1,4 +1,4 @@
-package global.strategy
+package global.strategy.ui
 
 object ConsoleInputStrategy : InputStrategy {
     private const val LITERAL_NEW_LINE = """\n"""
