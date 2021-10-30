@@ -28,7 +28,7 @@ internal class LottoTicketTest {
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
-        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
+        val result = lottoTicket.buildResult(winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(0.00).setScale(2, RoundingMode.HALF_UP)
 
         assertThat(result.resultStatistics).isNotNull
@@ -75,7 +75,7 @@ internal class LottoTicketTest {
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
-        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
+        val result = lottoTicket.buildResult(winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(1.00).setScale(2, RoundingMode.HALF_UP)
 
         assertThat(result.resultStatistics).isNotNull
@@ -132,7 +132,7 @@ internal class LottoTicketTest {
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
-        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
+        val result = lottoTicket.buildResult(winningInfo, purchaseAmount)
         result.resultStatistics
         val expectedTotalProfitRate = BigDecimal(11.00).setScale(2, RoundingMode.HALF_UP)
 
@@ -191,7 +191,7 @@ internal class LottoTicketTest {
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
-        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
+        val result = lottoTicket.buildResult(winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(300.00).setScale(2, RoundingMode.HALF_UP)
 
         assertThat(result.resultStatistics).isNotNull
@@ -248,7 +248,7 @@ internal class LottoTicketTest {
 
         val winningInfo = WinningInfo(winningNumberPackage, bonusNumber)
 
-        val result = LottoResult.from(lottoTicket, winningInfo, purchaseAmount)
+        val result = lottoTicket.buildResult(winningInfo, purchaseAmount)
         val expectedTotalProfitRate = BigDecimal(400000.00).setScale(2, RoundingMode.HALF_UP)
 
         assertThat(result.resultStatistics).isNotNull
