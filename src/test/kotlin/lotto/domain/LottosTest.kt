@@ -18,7 +18,7 @@ internal class LottosTest {
             }
         }
         val expected = (1..quantity).map { Lotto((1..Lotto.SIZE).map { LottoNumber(it) }) }
-        assertThat(Lottos.from(quantity, generatorFactory).list)
+        assertThat(Lottos.of(quantity, generatorFactory).list)
             .isEqualTo(expected)
     }
 

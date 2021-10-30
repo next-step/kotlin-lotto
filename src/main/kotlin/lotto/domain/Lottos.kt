@@ -12,7 +12,7 @@ class Lottos(val list: List<Lotto>) {
     }
 
     companion object {
-        fun from(quantity: Int, generatorFactory: GeneratorFactory): Lottos {
+        fun of(quantity: Int, generatorFactory: GeneratorFactory): Lottos {
             val lottoList = (1..quantity).map { generatorFactory.createNumberGenerator() }
                 .map { Lotto.from((1..Lotto.SIZE).map { it() }) }
             return Lottos(lottoList)

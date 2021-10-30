@@ -4,7 +4,7 @@ import lotto.domain.Match
 
 data class ResultDto(val ratio: Double, val result: String) {
     companion object {
-        fun from(ratio: Double, countedMatches: Map<Match, Int>): ResultDto {
+        fun of(ratio: Double, countedMatches: Map<Match, Int>): ResultDto {
             return ResultDto(ratio, serialize(countedMatches))
         }
 
