@@ -4,6 +4,7 @@ object Fixture {
     val lottos = Lottos(
         listOf(
             createLotto(1, 2, 3, 4, 5, 6),
+            createLotto(1, 2, 3, 4, 5, 7),
             createLotto(1, 2, 3, 4, 5, 11),
             createLotto(1, 2, 3, 4, 5, 12),
             createLotto(1, 2, 3, 4, 7, 11),
@@ -22,8 +23,9 @@ object Fixture {
     )
 
     val winningLotto = createLotto(1, 2, 3, 4, 5, 6)
+    val bonus = LottoNumber(7)
 
-    val statistics = Statistics(lottos.countMatches(winningLotto))
+    val statistics = Statistics(lottos.countMatches(winningLotto, bonus))
 
     private fun createLotto(vararg numbers: Int): Lotto {
         return Lotto.from(numbers.toList())

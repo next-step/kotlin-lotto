@@ -1,8 +1,8 @@
 package lotto.domain
 
 class Lottos(val lottos: List<Lotto>) {
-    fun countMatches(winningLotto: Lotto): Map<Match, Int> {
-        return lottos.map { it.checkMatch(winningLotto) }
+    fun countMatches(winningLotto: Lotto, bonus: LottoNumber): Map<Match, Int> {
+        return lottos.map { it.checkMatch(winningLotto, bonus) }
             .groupingBy { it }
             .eachCount()
     }

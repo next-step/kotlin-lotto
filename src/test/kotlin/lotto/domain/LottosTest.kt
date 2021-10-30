@@ -27,12 +27,13 @@ internal class LottosTest {
     fun countMatches() {
         val expected = mapOf(
             Match.SIX to 1,
+            Match.BONUS to 1,
             Match.FIVE to 2,
             Match.FOUR to 3,
             Match.THREE to 4,
             Match.NONE to 5
         )
-        assertThat(Fixture.lottos.countMatches(Fixture.winningLotto))
+        assertThat(Fixture.lottos.countMatches(Fixture.winningLotto, Fixture.bonus))
             .isEqualTo(expected)
     }
 }

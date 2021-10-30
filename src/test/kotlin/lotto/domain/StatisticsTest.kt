@@ -9,7 +9,7 @@ internal class StatisticsTest {
     @Test
     fun calculateProfit() {
         val purchasePrice = 1000000000
-        val profit = 2000000000 * 1 + 1500000 * 2 + 50000 * 3 + 5000 * 4
+        val profit = 2000000000 + 30000000 + 1500000 * 2 + 50000 * 3 + 5000 * 4
         assertThat(Fixture.statistics.calculateRatio(purchasePrice))
             .isEqualTo(profit.toDouble() / purchasePrice)
     }

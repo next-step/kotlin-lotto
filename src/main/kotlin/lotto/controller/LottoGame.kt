@@ -21,7 +21,8 @@ object LottoGame {
         OutputView.printLottos(LottosDto.from(lottos))
 
         val winningLotto = Lotto.from(InputView.askWinningNumbers())
-        val statistics = Statistics(lottos.countMatches(winningLotto))
+        val bonus = LottoNumber(InputView.askBonus())
+        val statistics = Statistics(lottos.countMatches(winningLotto, bonus))
         OutputView.printResult(
             ResultDto.of(
                 statistics.calculateRatio(purchase.purchasePrice),
