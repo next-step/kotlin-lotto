@@ -10,7 +10,7 @@ data class LottoStatisticFormat(
     private val totalPrice: Int = LottoRank.values().filter { it != LottoRank.MISS }.sumOf { getRankProfit(it) }
 
     val profit: String = String.format(FORMAT_PROFIT,
-        (totalPrice / purchasedPrice.value!! + totalPrice % purchasedPrice.value).toDouble())
+        (totalPrice / purchasedPrice.price + totalPrice % purchasedPrice.price).toDouble())
 
     private fun getRankCount(rank: LottoRank): Int = winList[rank] ?: 0
 

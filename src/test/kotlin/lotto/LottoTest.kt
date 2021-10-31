@@ -21,7 +21,7 @@ class LottoTest {
     fun `correct purchase amount`(price: Int) {
         val sample = Price(price)
 
-        assertThat(sample.value).isEqualTo(price)
+        assertThat(sample.price).isEqualTo(price)
     }
 
     @ValueSource(ints = [10, -199, 134256])

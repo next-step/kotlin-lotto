@@ -4,13 +4,14 @@ package lotto.model
  * 구앱 금액 및 로또 생성 개수 관리 클래스
  * */
 data class Price(
-    val value: Int?
+    private val value: Int?
 ) {
     init {
         require(value != null && value >= MIN_PRICE) { EXCEPTION_PRICE_NULL }
         require(value % MIN_PRICE == 0) { EXCEPTION_PRICE_FORMAT }
     }
 
+    val price: Int = value ?: 0
     val lottoCount: Int = value?.div(MIN_PRICE) ?: DEFAULT_LOTTO_COUNT
 
     companion object {
