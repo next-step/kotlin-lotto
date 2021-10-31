@@ -3,7 +3,11 @@ package lotto.model
 /**
  * 로또 당첨번호 생성 클래스
  * */
-class Lottos private constructor(private val price: Price, private val purchasedLotto: List<Lotto>, private val lastWinNumber: Lotto) {
+class Lottos private constructor(
+    private val price: Price,
+    private val purchasedLotto: List<Lotto>,
+    private val lastWinNumber: Lotto,
+) {
 
     fun compareLottoList(): LottoStatisticFormat {
         val hashMap = hashMapOf<LottoRank, Int>()
