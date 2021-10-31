@@ -30,7 +30,7 @@ value class LottoNumber private constructor(val value: Int) {
         }
 
         fun from(input: String, lottoNumberPackage: LottoNumberPackage): LottoNumber {
-            val bonusNumber = LottoNumber.from(input)
+            val bonusNumber = from(input)
             require(!lottoNumberPackage.numbers.contains(bonusNumber)) { RECEIVED_DUPLICATED_WITH_WINNING_NUMBERS }
             return bonusNumber
         }
