@@ -13,7 +13,7 @@ value class Price(
         }
     }
 
-    fun checkLottoCount(): Int = value.div(DEFAULT_LOTTO_PRICE)
+    fun getLottoCount(): Int = value.div(DEFAULT_LOTTO_PRICE)
 
     companion object {
         private const val DEFAULT_LOTTO_PRICE = 1000

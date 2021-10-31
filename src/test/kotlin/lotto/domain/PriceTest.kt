@@ -20,7 +20,7 @@ class PriceTest {
 
         // Act
         val sut = Price(value)
-        val result = sut.checkLottoCount()
+        val result = sut.getLottoCount()
 
         // Assert
         assertThat(result).isEqualTo(expected.toInt())
