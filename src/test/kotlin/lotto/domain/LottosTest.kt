@@ -1,30 +1,11 @@
-package lotto.application
+package lotto.domain
 
-import lotto.domain.Lotto
-import lotto.domain.Rank
-import lotto.domain.WinningNumber
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
 
 @DisplayName("로또 관리 테스트")
-class LottoServiceTest {
-
-    @ParameterizedTest
-    @CsvSource(value = ["1,1", "14,14"])
-    @DisplayName("n개의 로또를 반환한다")
-    fun `sut returns lottos`(lottoCount: Int, expected: Int) {
-        // Arrange
-        val sut = LottoService.generateAutoLotto(lottoCount)
-
-        // Act
-        val lottos: List<Lotto> = sut.lottos
-
-        // Assert
-        assertThat(lottos).hasSize(expected)
-    }
+class LottosTest {
 
     @Test
     @DisplayName("n개의 로또들의 당첨 결과를 수집할 수 있다")
@@ -40,7 +21,7 @@ class LottoServiceTest {
         )
 
         // Act
-        val sut = LottoService(lottos)
+        val sut = Lottos(lottos)
         val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber)
 
         // Assert

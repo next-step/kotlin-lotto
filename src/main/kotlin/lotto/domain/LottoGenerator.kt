@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoNumberGenerator {
+object LottoGenerator {
 
     private const val LOTTO_FIRST_NUMBER = 1
     private const val LOTTO_LAST_NUMBER = 45
@@ -11,7 +11,14 @@ object LottoNumberGenerator {
         (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER).toList()
     }
 
-    fun generate(): List<Int> {
+    fun generateAutoLotto(lottoCount: Int = 1): List<Lotto> {
+        return (0 until lottoCount)
+            .map { generate() }
+            .map { Lotto(it) }
+            .toList()
+    }
+
+    private fun generate(): List<Int> {
         return lottoNumbers
             .shuffled()
             .subList(LOTTO_FIRST_INDEX, LOTTO_LAST_INDEX)
