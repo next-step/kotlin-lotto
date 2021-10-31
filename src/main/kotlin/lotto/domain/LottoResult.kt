@@ -26,6 +26,15 @@ data class LottoResult(val result: Map<Reward, Int>) {
         return result[reward]?.times(reward.amount) ?: 0
     }
 
+    fun getLottoResult(
+        lottos: Lottos,
+        winningLottoInformation: Pair<Lotto, LottoNumber>,
+    ): LottoResult {
+        val (winningLotto, bonusNumber) = winningLottoInformation
+        val matchedRewards = lottos.getMatchedRewards(winningLotto, bonusNumber)
+        return updateRewards(matchedRewards)
+    }
+
     companion object {
         val EMPTY = LottoResult(emptyMap())
     }
