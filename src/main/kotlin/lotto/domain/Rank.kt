@@ -10,6 +10,10 @@ enum class Rank(
     FOURTH(3, 5_000),
     MISS(0, 0);
 
+    fun getTotalWinningMoney(matchResultValue: Int): Int {
+        return this.winningMoney * matchResultValue
+    }
+
     companion object {
         fun valueOf(matchCount: Int): Rank {
             return values().find { it.matchCount == matchCount } ?: MISS

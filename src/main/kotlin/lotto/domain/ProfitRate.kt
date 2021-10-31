@@ -13,8 +13,8 @@ class ProfitRate(
     }
 
     private fun getTotalWinningMoney(): Int {
-        return matchResult.keys
-            .sumOf { (matchResult[it] ?: DEFAULT_ZERO) * it.winningMoney }
+        return matchResult.entries
+            .sumOf { it.key.getTotalWinningMoney(it.value) }
     }
 
     private fun calculate(totalWinningMoney: Int): Double {
