@@ -3,6 +3,7 @@ package lotto.model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoResultTest {
 
@@ -32,5 +33,17 @@ class LottoResultTest {
         val actual = result.rateOfReturn
 
         assertThat(actual).isEqualTo(expected)
+    }
+
+    @DisplayName("당첨 로또와 보너스 볼의 숫자가 중복되면 RuntimeException 예외가 발생한다.")
+    @Test
+    fun lottoResultDuplicateBonus() {
+        val lotto = LottoCreator.manualZeroPrice(1, 2, 3, 4, 5, 6)
+        val winLottoNumbers = LottoNumbers.manual(1, 2, 3, 4, 5, 6)
+        val bonus = LottoNumber(1)
+
+        assertThrows<RuntimeException> {
+            LottoResult.of(listOf(lotto), winLottoNumbers, bonus)
+        }
     }
 }

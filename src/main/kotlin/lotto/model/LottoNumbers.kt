@@ -22,6 +22,8 @@ data class LottoNumbers(
 
     private fun asList(): List<LottoNumber> = listOf(num1, num2, num3, num4, num5, num6)
 
+    fun contains(number: LottoNumber): Boolean = asList().contains(number)
+
     fun match(numbers: LottoNumbers): Int {
         val numbers1 = asList()
         val numbers2 = numbers.asList()

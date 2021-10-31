@@ -11,6 +11,20 @@ data class LottoResult(
 
     companion object {
 
+        fun of(
+            lottoList: List<Lotto>,
+            winLottoNumbers: LottoNumbers,
+            bonus: LottoNumber
+        ): LottoResult {
+            require(!winLottoNumbers.contains(bonus))
+            val winnersByRank = makeWinnersByRank(lottoList, winLottoNumbers)
+            val rateOfReturn = makeRateOfReturn(winnersByRank, lottoList)
+            return LottoResult(
+                winnersByRank = winnersByRank,
+                rateOfReturn = rateOfReturn
+            )
+        }
+
         fun of(lottoList: List<Lotto>, winLottoNumbers: LottoNumbers): LottoResult {
             val winnersByRank = makeWinnersByRank(lottoList, winLottoNumbers)
             val rateOfReturn = makeRateOfReturn(winnersByRank, lottoList)
