@@ -18,7 +18,7 @@ class Lottos private constructor(private val price: Price, private val purchased
         var number = 0
         item.numbers
             .forEach { lottoNumber ->
-                if (lastWinNumber.numbers.contains(lottoNumber)) ++ number
+                if (lastWinNumber.numbers.contains(lottoNumber)) ++number
             }
         return number
     }
