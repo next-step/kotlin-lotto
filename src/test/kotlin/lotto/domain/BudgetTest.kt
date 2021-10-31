@@ -24,7 +24,7 @@ internal class BudgetTest {
         val expected = givenValue / lottoPrice
 
         // then
-        assertThat(budget.getLottoCount()).isEqualTo(expected)
+        assertThat(budget.getTotalLottoCount()).isEqualTo(expected)
     }
 
     @ParameterizedTest

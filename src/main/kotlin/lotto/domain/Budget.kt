@@ -9,7 +9,7 @@ value class Budget private constructor(val value: Int) {
         require(value >= LOTTO_PRICE) { throw IllegalArgumentException(MINIMUM_VALUE_REQUIRED) }
     }
 
-    fun getLottoCount(): Int {
+    fun getTotalLottoCount(): Int {
         return value / LOTTO_PRICE
     }
 
@@ -19,11 +19,11 @@ value class Budget private constructor(val value: Int) {
     }
 
     fun validateManualCount(manualCount: Int): Boolean {
-        return getLottoCount() > manualCount
+        return getTotalLottoCount() > manualCount
     }
 
-    fun getRemainCount(manualCount: Int): Int {
-        return getLottoCount() - manualCount
+    fun getRemainCount(count: Int): Int {
+        return getTotalLottoCount() - count
     }
 
     companion object {

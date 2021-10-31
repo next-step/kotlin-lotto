@@ -12,7 +12,7 @@ import java.util.TreeMap
 object OutputView {
 
     fun showInputResult(lottos: Lottos, budget: Budget) {
-        val lottoCount = budget.getLottoCount()
+        val lottoCount = budget.getTotalLottoCount()
         val inputInformation = buildString {
             append(lottoCount).append(LOTTO_COUNT_INFORMATION)
             append(System.lineSeparator())
