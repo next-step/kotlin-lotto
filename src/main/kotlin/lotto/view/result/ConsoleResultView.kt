@@ -14,7 +14,7 @@ class ConsoleResultView : ResultView {
 
     override fun showLottoTicketNumber(lottoTicket: LottoTicket) {
         lottoTicket
-            .lottoPackages()
+            .lottoPackages
             .forEach { println(it.getSortedNumbers()) }
     }
 
