@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoNumberGenerator {
-    fun generateNumber(): List<Int> = NUMBER_RANGE.shuffled().take(NUMBER_SIZE).sorted()
+    fun generateRandomNumber(): List<Int> = NUMBER_RANGE.shuffled().take(NUMBER_SIZE).sorted()
 
     companion object {
         private const val NUMBER_SIZE = 6

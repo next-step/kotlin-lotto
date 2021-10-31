@@ -10,7 +10,7 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
 
     companion object {
         fun buy(money: Int): Lottos {
-            val values = MutableList(money / Lotto.PRICE) { Lotto() }
+            val values = MutableList(money / Lotto.PRICE) { Lotto.generate() }
             return Lottos(values)
         }
     }

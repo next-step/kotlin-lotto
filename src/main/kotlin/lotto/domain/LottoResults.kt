@@ -8,6 +8,6 @@ value class LottoResults(private val purchasedLottos: List<Lotto>) {
 
     private fun matchingToList(winningNumber: List<Int>): List<Int> =
         purchasedLottos.map {
-            it.lottoNumbers.intersect(winningNumber).count()
+            it.toNumberList().intersect(winningNumber).count()
         }
 }

@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoPrize
 import lotto.domain.LottoResults
 import org.assertj.core.api.Assertions.assertThat
@@ -13,8 +14,8 @@ class LottoResultsTest {
         // given
         val lottoResults = LottoResults(
             purchasedLottos = listOf(
-                Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto(listOf(1, 5, 7, 10, 12, 17))
+                Lotto(LottoNumber(listOf(1, 2, 3, 4, 5, 6))),
+                Lotto(LottoNumber(listOf(1, 5, 7, 10, 12, 17)))
             )
         )
 

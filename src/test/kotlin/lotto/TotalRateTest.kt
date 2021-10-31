@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoResults
 import lotto.domain.TotalRate
 import org.assertj.core.api.Assertions.assertThat
@@ -14,20 +15,20 @@ class TotalRateTest {
 
         val lottoResults = LottoResults(
             purchasedLottos = listOf(
-                Lotto(listOf(8, 21, 23, 41, 42, 43)),
-                Lotto(listOf(3, 5, 11, 16, 32, 38)),
-                Lotto(listOf(7, 11, 16, 35, 36, 447)),
-                Lotto(listOf(1, 8, 11, 31, 41, 42)),
-                Lotto(listOf(13, 14, 16, 38, 42, 45)),
-                Lotto(listOf(7, 11, 30, 40, 42, 43)),
-                Lotto(listOf(2, 13, 22, 32, 38, 45)),
-                Lotto(listOf(23, 25, 33, 36, 39, 41)),
-                Lotto(listOf(1, 3, 5, 14, 22, 45)),
-                Lotto(listOf(5, 9, 38, 41, 43, 44)),
-                Lotto(listOf(2, 8, 9, 18, 19, 21)),
-                Lotto(listOf(13, 14, 18, 21, 23, 35)),
-                Lotto(listOf(17, 21, 29, 37, 42, 45)),
-                Lotto(listOf(3, 8, 27, 30, 35, 44))
+                Lotto(LottoNumber(listOf(8, 21, 23, 41, 42, 43))),
+                Lotto(LottoNumber(listOf(3, 5, 11, 16, 32, 38))),
+                Lotto(LottoNumber(listOf(7, 11, 16, 35, 36, 447))),
+                Lotto(LottoNumber(listOf(1, 8, 11, 31, 41, 42))),
+                Lotto(LottoNumber(listOf(13, 14, 16, 38, 42, 45))),
+                Lotto(LottoNumber(listOf(7, 11, 30, 40, 42, 43))),
+                Lotto(LottoNumber(listOf(2, 13, 22, 32, 38, 45))),
+                Lotto(LottoNumber(listOf(23, 25, 33, 36, 39, 41))),
+                Lotto(LottoNumber(listOf(1, 3, 5, 14, 22, 45))),
+                Lotto(LottoNumber(listOf(5, 9, 38, 41, 43, 44))),
+                Lotto(LottoNumber(listOf(2, 8, 9, 18, 19, 21))),
+                Lotto(LottoNumber(listOf(13, 14, 18, 21, 23, 35))),
+                Lotto(LottoNumber(listOf(17, 21, 29, 37, 42, 45))),
+                Lotto(LottoNumber(listOf(3, 8, 27, 30, 35, 44)))
             )
         ).result(winningNumber)
 
