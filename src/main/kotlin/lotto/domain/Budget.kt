@@ -18,6 +18,14 @@ value class Budget private constructor(val value: Int) {
         return convertedAmount.divide(value.toBigDecimal(), NUMBER_FORMAT, RoundingMode.DOWN)
     }
 
+    fun validateManualCount(manualCount: Int): Boolean {
+        return getLottoCount() > manualCount
+    }
+
+    fun getRemainCount(manualCount: Int): Int {
+        return getLottoCount() - manualCount
+    }
+
     companion object {
         private const val LOTTO_PRICE = 1000
         private const val MINIMUM_VALUE_REQUIRED = "최소 로또 금액이 되어야합니다."
