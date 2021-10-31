@@ -4,7 +4,6 @@ import lotto.presentation.LottoGame
 import lotto.usecase.LottoMachine
 import lotto.usecase.LottoNumberGenerator
 import lotto.usecase.PurchaseAmountCalculator
-import lotto.usecase.RandomNumberGenerateStrategy
 import lotto.usecase.WinningsChecker
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -13,9 +12,7 @@ fun main() {
     val inputView = InputView()
     val outputView = OutputView()
     val lottoGame = LottoGame(
-        lottoMachine = LottoMachine(
-            LottoNumberGenerator(RandomNumberGenerateStrategy())
-        ),
+        lottoMachine = LottoMachine(LottoNumberGenerator()),
         winningsChecker = WinningsChecker(),
         calculator = PurchaseAmountCalculator(),
     )

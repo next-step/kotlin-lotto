@@ -11,13 +11,14 @@ class LottoMachine(
 
         return (1..numberOfPurchase).map {
             Lotto(
-                numbers = lottoNumberGenerator.generate(),
+                numbers = lottoNumberGenerator.generate(LOTTO_NUMBER_RANGE),
                 price = LOTTO_PRICE,
             )
         }
     }
 
     companion object {
-        const val LOTTO_PRICE = 1_000
+        private const val LOTTO_PRICE = 1_000
+        private val LOTTO_NUMBER_RANGE = (1..45)
     }
 }
