@@ -7,26 +7,25 @@ object LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
 
-    private lateinit var price: Price
-    private lateinit var purchasedLotto: List<Lotto>
-
     fun runLottoGame() {
-        inputPrice()
-        generateLottos()
-        getResult()
+        val price = inputPrice()
+        val purchasedLottoList = generateLottos(price)
+        getResult(price, purchasedLottoList)
     }
 
-    private fun inputPrice() {
-        price = Price(inputView.inputLottoPrice())
+    private fun inputPrice(): Price {
+        val price = Price(inputView.inputLottoPrice())
         outputView.resultLottoCount(price.lottoCount)
+        return price
     }
 
-    private fun generateLottos() {
-        purchasedLotto = LottoNumberListProcessor(price).generateLottoList()
+    private fun generateLottos(price: Price): List<Lotto> {
+        val purchasedLotto = LottoNumberListProcessor(price).generateLottoList()
         outputView.printNumber(purchasedLotto)
+        return purchasedLotto
     }
 
-    private fun getResult() {
+    private fun getResult(price: Price, purchasedLotto: List<Lotto>) {
         val winNumberList = inputView.inputLastLottoWinNumber()
         val lottos = Lottos.inputWinNumber(price, purchasedLotto, winNumberList)
         val result = lottos.compareLottoList()
