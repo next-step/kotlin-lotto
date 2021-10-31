@@ -10,18 +10,19 @@ import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
 
-    @ValueSource(ints = [1000, 5000, 100000])
+    @CsvSource(value = ["1000,1","5000,5","10000,10"])
     @ParameterizedTest
-    @DisplayName("구매 금액을 올바르게 입력한 경우")
-    fun `correct purchase amount`(price: Int) {
+    @DisplayName("구매 금액에 따른 로또 생성 갯수 확인")
+    fun `correct purchase amount`(price: Int, expected: Int) {
         val sample = Price(price)
 
-        assertThat(sample.price).isEqualTo(price)
+        assertThat(sample.lottoCount).isEqualTo(expected)
     }
 
     @ValueSource(ints = [10, -199, 134256])

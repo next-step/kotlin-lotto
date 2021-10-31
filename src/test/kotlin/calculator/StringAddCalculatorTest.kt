@@ -1,8 +1,6 @@
 package calculator
 
-import calculator.StringAddCalculator.Companion.EXCEPTION_NULL_OR_EMPTY
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -68,7 +66,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["d,3", "g:3:e"])
     fun character(text: String) {
-        assertThrows<RuntimeException>{
+        assertThrows<RuntimeException> {
             calculator.add(text)
         }
     }
@@ -78,7 +76,7 @@ class StringAddCalculatorTest {
     fun negative() {
         val negativeNumber = "-1"
 
-        assertThrows<RuntimeException>{
+        assertThrows<RuntimeException> {
             calculator.add(negativeNumber)
         }
     }
