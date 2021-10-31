@@ -14,9 +14,10 @@ class OutputView {
 
     // 로또 당첨 번호 출력
     fun printNumber(lottos: List<Lotto>) {
-        lottos.forEach {
-            println("[${it.numbers.map { it.number }.joinToString()}]")
-        }
+        lottos
+            .forEach { lottoNumber ->
+                println("[${lottoNumber.numbers.map { it.number }.joinToString()}]")
+            }
         println("")
     }
 
@@ -31,8 +32,8 @@ class OutputView {
         LottoRank.values()
             .filter { it != LottoRank.MISS }
             .sortedBy { it.countOfMatch }
-            .forEach {
-                println("${it.countOfMatch}개 일치 (${it.winningMoney})- ${result.winList[it] ?: 0}개")
+            .forEach { rank ->
+                println("${rank.countOfMatch}개 일치 (${rank.winningMoney})- ${result.winList[rank] ?: 0}개")
             }
     }
 }
