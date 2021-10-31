@@ -5,16 +5,16 @@ package lotto.model
  * */
 data class LottoStatisticFormat(
     val purchasedPrice: Price,
-    val winList: HashMap<LottoRank, Int>
+    val winList: HashMap<LottoRank, Int>,
 ) {
-    private val totalPrice: Int = (getRankCount(LottoRank.FIRST) * LottoRank.FIRST.winningMoney) +
-        (getRankCount(LottoRank.SECOND) * LottoRank.SECOND.winningMoney) +
-        (getRankCount(LottoRank.THIRD) * LottoRank.THIRD.winningMoney) +
-        (getRankCount(LottoRank.FOURTH) * LottoRank.FOURTH.winningMoney)
+    private val totalPrice: Int = LottoRank.values().filter { it != LottoRank.MISS }.sumOf { getRankProfit(it) }
 
-    val profit: String = String.format(FORMAT_PROFIT, (totalPrice / purchasedPrice.value!! + totalPrice % purchasedPrice.value).toDouble())
+    val profit: String = String.format(FORMAT_PROFIT,
+        (totalPrice / purchasedPrice.value!! + totalPrice % purchasedPrice.value).toDouble())
 
     private fun getRankCount(rank: LottoRank): Int = winList[rank] ?: 0
+
+    private fun getRankProfit(rank: LottoRank): Int = (getRankCount(rank) * rank.winningMoney)
 
     companion object {
         private const val FORMAT_PROFIT = "%.2f"
