@@ -36,4 +36,15 @@ class MatchResultTest {
 
         assertThat(actual).isEqualTo(expected)
     }
+
+    @Test
+    fun `총 당첨금을 반환한다`() {
+        val expected = MatchBoard.values().sumOf { it.matchPrize }
+
+        val matchResultMap = MatchBoard.valuesExcludedMiss().associateWith { 1 }.toMutableMap()
+        val matchResult = MatchResult.of(matchResultMap)
+        val winnings = matchResult.winnings()
+
+        assertThat(winnings).isEqualTo(expected)
+    }
 }
