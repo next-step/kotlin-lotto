@@ -1,7 +1,7 @@
 package lotto.model
 
 /**
- * 구앱 금액 및 로또 생성 개수 관리 클래스
+ * 구앱 금액 관리 클래스
  * */
 data class Price(
     private val value: Int?

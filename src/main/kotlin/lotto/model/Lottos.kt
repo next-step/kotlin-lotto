@@ -9,7 +9,7 @@ class Lottos private constructor(private val price: Price, private val purchased
         val hashMap = hashMapOf<LottoRank, Int>()
         purchasedLotto.forEach { lotto ->
             val rank = LottoRank.findMatchRank(compareNumber(lotto))
-            hashMap[rank] = hashMap.getOrDefault(rank, 0) + ADD_ONE_LOTTO // 어떤 것을 의미하는 걸까요
+            hashMap[rank] = hashMap.getOrDefault(rank, 0) + ADD_ONE_LOTTO
         }
         return LottoStatisticFormat(price, hashMap)
     }
