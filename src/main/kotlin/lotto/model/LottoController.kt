@@ -22,7 +22,7 @@ object LottoController {
     }
 
     private fun generateLottos() {
-        purchasedLotto = GenerateLotto(price).generateLottoList()
+        purchasedLotto = LottoNumberListProcessor(price).generateLottoList()
         outputView.printNumber(purchasedLotto)
     }
 
