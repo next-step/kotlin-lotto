@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoPrice.Companion.LOTTO_PRICE
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -13,7 +12,7 @@ value class TotalRate(private val lottoResults: List<LottoResult>) {
         return totalPrize.divide(budget, 2, RoundingMode.FLOOR)
     }
 
-    private fun sumLottoCount() = (lottoResults.sumOf { it.prizeAndCountPair().second } * LOTTO_PRICE).toBigDecimal()
+    private fun sumLottoCount() = (lottoResults.sumOf { it.prizeAndCountPair().second } * Lotto.PRICE).toBigDecimal()
 
     private fun sumPrize() = lottoResults.sumOf {
         val (lottoPrize, count) = it.prizeAndCountPair()

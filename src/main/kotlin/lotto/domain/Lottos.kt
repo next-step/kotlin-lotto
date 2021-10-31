@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoPrice.Companion.LOTTO_PRICE
-
 @JvmInline
 value class Lottos private constructor(private val lottos: List<Lotto>) {
 
@@ -12,7 +10,7 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
 
     companion object {
         fun buy(money: Int): Lottos {
-            val values = MutableList(money / LOTTO_PRICE) { Lotto() }
+            val values = MutableList(money / Lotto.PRICE) { Lotto() }
             return Lottos(values)
         }
     }
