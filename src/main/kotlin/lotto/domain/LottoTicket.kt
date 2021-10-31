@@ -1,22 +1,14 @@
 package lotto.domain
 
 import lotto.service.LottoNumberPackagesGenerator
-import java.math.BigDecimal
-import java.math.RoundingMode
 
-class LottoTicket(val lottoPackages: List<LottoNumberPackage>) {
-    fun resultStatistics(winningInfo: WinningInfo): Map<LottoResultRank, Int> {
-        return lottoPackages
-            .groupingBy { it.matchedCount(winningInfo.winningNumberPackage).rank() }
-            .eachCount()
+class LottoTicket(private val lottoPackages: List<LottoNumberPackage>) {
+    fun lottoPackages(): List<LottoNumberPackage> {
+        return lottoPackages.toList()
     }
 
-    fun totalProfitRate(winningInfo: WinningInfo, purchaseAmount: LottoPurchaseAmount): BigDecimal {
-        return lottoPackages
-            .sumOf { it.prizeMoney(winningInfo.winningNumberPackage) }
-            .toBigDecimal()
-            .setScale(2, RoundingMode.HALF_UP)
-            .div(purchaseAmount.value!!.toBigDecimal())
+    fun buildResult(winningInfo: WinningInfo, purchaseAmount: LottoPurchaseAmount): LottoResult {
+        return LottoResult(lottoPackages(), winningInfo, purchaseAmount)
     }
 
     companion object {

@@ -1,7 +1,7 @@
 package lotto.service
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumberPackage
-import lotto.domain.LottoNumberPool
 import lotto.domain.LottoPurchaseCount
 
 class AutomaticLottoNumberPackagesGenerator : LottoNumberPackagesGenerator {
@@ -11,6 +11,6 @@ class AutomaticLottoNumberPackagesGenerator : LottoNumberPackagesGenerator {
     }
 
     private fun getShuffledPackage(): LottoNumberPackage {
-        return LottoNumberPackage(LottoNumberPool.getShuffledLottoNumbers())
+        return LottoNumberPackage(LottoNumber.getShuffledLottoNumbers())
     }
 }

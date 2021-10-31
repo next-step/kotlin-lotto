@@ -6,12 +6,12 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class WinningInfoTest {
+internal class WinningNumbersTest {
     @ParameterizedTest
     @EmptySource
     fun `당첨 번호에 빈 문자열을 입력하면 IllegalArgumentException이 발생한다`(input: String) {
         Assertions.assertThatThrownBy {
-            WinningInfo.from(input)
+            WinningNumbers.from(input)
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
@@ -26,7 +26,7 @@ internal class WinningInfoTest {
     )
     fun `당첨 번호에 숫자가 아닌 값을 입력하면 IllegalArgumentException이 발생한다`(input: String) {
         Assertions.assertThatThrownBy {
-            WinningInfo.from(input)
+            WinningNumbers.from(input)
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
@@ -43,7 +43,7 @@ internal class WinningInfoTest {
     )
     fun `당첨 번호가 6개가 아니면 IllegalArgumentException이 발생한다`(input: String) {
         Assertions.assertThatThrownBy {
-            WinningInfo.from(input)
+            WinningNumbers.from(input)
         }.isInstanceOf(IllegalArgumentException::class.java)
     }
 
@@ -55,7 +55,7 @@ internal class WinningInfoTest {
         ]
     )
     fun `당첨 번호가 6개를 입력하면 정상적으로 WinningInfo 가 생성된다`(input: String) {
-        val winningInfo = WinningInfo.from(input)
+        val winningInfo = WinningNumbers.from(input)
 
         assertThat(winningInfo).isNotNull
         assertThat(winningInfo.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
