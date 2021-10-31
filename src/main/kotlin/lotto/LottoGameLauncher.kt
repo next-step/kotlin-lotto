@@ -9,10 +9,10 @@ import lotto.view.result.ResultView
 
 class LottoGameLauncher(private val inputView: InputView, private val resultView: ResultView) {
     fun launch() {
-        val purchaseInfo = LottoPurchaseInfo.from(inputView.getPurchaseAmount())
-        resultView.showPurchaseCount(purchaseInfo.purchaseCount)
+        val purchaseInfo = LottoPurchaseInfo.from(inputView.getPurchaseAmount(), inputView.getManualPurchaseCount())
+        val ticket = LottoTicket.from(purchaseInfo.automaticPurchaseCount, AutomaticLottoNumberPackagesGenerator())
 
-        val ticket = LottoTicket.from(purchaseInfo.purchaseCount, AutomaticLottoNumberPackagesGenerator())
+        resultView.showPurchaseCount(purchaseInfo.purchaseCount)
         resultView.showLottoTicketNumber(ticket)
 
         val winningNumbers = inputView.getWinningNumbers()
