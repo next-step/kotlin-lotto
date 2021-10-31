@@ -17,16 +17,7 @@ data class LottoResult(
             bonus: LottoNumber
         ): LottoResult {
             require(!winLottoNumbers.contains(bonus))
-            val winnersByRank = makeWinnersByRank(lottoList, winLottoNumbers)
-            val rateOfReturn = makeRateOfReturn(winnersByRank, lottoList)
-            return LottoResult(
-                winnersByRank = winnersByRank,
-                rateOfReturn = rateOfReturn
-            )
-        }
-
-        fun of(lottoList: List<Lotto>, winLottoNumbers: LottoNumbers): LottoResult {
-            val winnersByRank = makeWinnersByRank(lottoList, winLottoNumbers)
+            val winnersByRank = makeWinnersByRank(lottoList, winLottoNumbers, bonus)
             val rateOfReturn = makeRateOfReturn(winnersByRank, lottoList)
             return LottoResult(
                 winnersByRank = winnersByRank,
@@ -36,11 +27,15 @@ data class LottoResult(
 
         private fun makeWinnersByRank(
             lottoList: List<Lotto>,
-            winLottoNumbers: LottoNumbers
+            winLottoNumbers: LottoNumbers,
+            bonus: LottoNumber
         ): Map<LottoRank, Int> {
             val winnersByRank = mutableMapOf<LottoRank, Int>()
             lottoList.forEach { lotto ->
-                val rank = LottoRank.find(lotto.match(winLottoNumbers))
+                val rank = LottoRank.valueOf(
+                    match = lotto.match(winLottoNumbers),
+                    bonus = lotto.contains(bonus)
+                )
                 if (rank != null) {
                     winnersByRank[rank] = winnersByRank.getOrDefault(rank, 0) + 1
                 }

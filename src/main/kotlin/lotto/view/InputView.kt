@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
 
 class InputView {
@@ -23,5 +24,11 @@ class InputView {
             num5 = numbers[4],
             num6 = numbers[5],
         )
+    }
+
+    fun getBonusLottoNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val number = readLine()!!.toInt()
+        return LottoNumber(number)
     }
 }
