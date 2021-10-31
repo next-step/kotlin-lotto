@@ -28,7 +28,11 @@ class Lottos private constructor(
     }
 
     companion object {
-        fun inputWinNumber(price: Price, purchasedLotto: List<Lotto>, numbers: String?): Lottos {
+        fun inputWinNumber(
+            price: Price,
+            purchasedLotto: List<Lotto>,
+            numbers: String?
+        ): Lottos {
             require(numbers != null) { EXCEPTION_INPUT_NUMBER_NULL }
 
             val list = numbers
