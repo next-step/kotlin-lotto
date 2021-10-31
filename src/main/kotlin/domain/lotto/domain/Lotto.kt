@@ -5,7 +5,9 @@ import domain.lotto.strategy.LottoShuffleStrategy
 import global.strategy.split.SplitStrategy
 
 @JvmInline
-value class Lotto private constructor(private val lotto: Set<LottoNumber>) {
+value class Lotto private constructor(private val _lotto: Set<LottoNumber>) {
+    val lotto: Set<LottoNumber>
+        get() = _lotto.toSortedSet()
 
     fun match(other: Lotto): Int = other.lotto.count { lotto.contains(it) }
 

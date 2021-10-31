@@ -14,7 +14,13 @@ class LottoInputView(
         return money.toInt()
     }
 
+    fun winningLotto(): String {
+        consoleOutputStrategy.output(WINNING_LOTTO_MESSAGE)
+        return consoleInputStrategy.input() ?: throw RuntimeException()
+    }
+
     companion object {
         private const val PURCHASE_MESSAGE = "구입금액을 입력해 주세요."
+        private const val WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
     }
 }

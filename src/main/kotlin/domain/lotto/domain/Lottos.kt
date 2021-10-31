@@ -3,7 +3,9 @@ package domain.lotto.domain
 import domain.lotto.strategy.LottoShuffleStrategy
 
 @JvmInline
-value class Lottos private constructor(private val lottos: List<Lotto>) {
+value class Lottos private constructor(private val _lottos: List<Lotto>) {
+    val lottos: List<Lotto>
+        get() = _lottos.toList()
 
     fun match(winningLotto: Lotto): Map<MatchBoard, Int> {
         val eachCount = lottos

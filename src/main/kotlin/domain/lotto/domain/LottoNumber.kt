@@ -3,7 +3,7 @@ package domain.lotto.domain
 import domain.lotto.error.InvalidLottoNumberRangeException
 
 @JvmInline
-value class LottoNumber private constructor(private val lottoNumber: Int) : Comparable<LottoNumber> {
+value class LottoNumber private constructor(val lottoNumber: Int) : Comparable<LottoNumber> {
     init {
         if (!((MINIMUM..MAXIMUM).contains(lottoNumber))) {
             throw InvalidLottoNumberRangeException(lottoNumber)
