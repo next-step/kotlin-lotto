@@ -11,10 +11,12 @@ enum class LottoRank(
     Fifth(5_000, 3);
 
     companion object {
-        fun valueOf(match: Int, bonus: Boolean): LottoRank? = if (match == Second.match && bonus) {
-            Second
-        } else {
-            values().find { it.match == match }
+        fun valueOf(match: Int, bonus: Boolean): LottoRank? = when (match) {
+            First.match -> First
+            Second.match -> if (bonus) Second else Third
+            Fourth.match -> Fourth
+            Fifth.match -> Fifth
+            else -> null
         }
     }
 }
