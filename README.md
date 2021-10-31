@@ -15,4 +15,4 @@
 - [x] 하나의 숫자를 입력하면 그대로 반환한다.
 - [ ] 빈 문자열 또는 null을 입력하면 0을 반환한다.
 - [x] 숫자 이외의 값을 전달하면 RuntimeException 예외를 throw 한다.
-- [ ] 음수를 전달하면 RuntimeException 예외를 throw 한다.
+- [x] 음수를 전달하면 RuntimeException 예외를 throw 한다.

@@ -1,8 +1,10 @@
 package stringcalculator
 
+import stringcalculator.utils.toPositiveInt
+
 class Calculator {
     fun calculate(rawInput: String?): Int {
-        return rawInput?.split(*DEFAULT_DELIMITERS)!!.sumOf { it.toInt() }
+        return rawInput?.split(*DEFAULT_DELIMITERS)!!.sumOf { it.toPositiveInt() }
     }
 
     companion object {
