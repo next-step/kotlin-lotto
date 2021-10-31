@@ -35,7 +35,7 @@ class CalculatorTest {
 
     @ParameterizedTest
     @CsvSource("1,2:3|6", "1:2,3|6", delimiter = '|')
-    fun `쉼표와 콜론으로 구분된 숫자들의 합을 반환한다`(input: String, expected: Int) {
+    fun `쉼표와 콜론의 조합으로 구분된 숫자들의 합을 반환한다`(input: String, expected: Int) {
         val result = calculator.calculate(input)
 
         assertThat(result).isEqualTo(expected)
