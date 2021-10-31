@@ -13,14 +13,23 @@ import lotto.views.OutputView
 class LottoController {
 
     fun startLottoGame() {
-        val budgets = Budget.valueOf(InputView.askLottoBudget())
-        val purchaseInformation = PurchaseInformation(budgets, 2)
+        val purchaseInformation = getPurchaseInformation()
         val lottos = Lottos.createLottos(purchaseInformation)
-        OutputView.showInputResult(lottos, budgets)
+        OutputView.showInputResult(lottos, purchaseInformation)
+        val winningLottoInformation = getWinningLottoInformation()
+        val lottoResult = LottoResult.EMPTY.getLottoResult(lottos, winningLottoInformation)
+        OutputView.showResult(lottoResult, purchaseInformation)
+    }
+
+    private fun getWinningLottoInformation(): Pair<Lotto, LottoNumber> {
         val winningLotto = Lotto(StringUtils.toLottoNumbers(InputView.askWinningLotto()))
         val bonusNumber = LottoNumber.valueOf(InputView.askBonusNumber())
-        val matchedRewards = lottos.getMatchedRewards(winningLotto, bonusNumber)
-        val lottoResult = LottoResult.EMPTY.updateRewards(matchedRewards)
-        OutputView.showResult(lottoResult, budgets)
+        return Pair(winningLotto, bonusNumber)
+    }
+
+    private fun getPurchaseInformation(): PurchaseInformation {
+        val budgets = Budget.valueOf(InputView.askLottoBudget())
+        val manualCount = InputView.askManualLottoCount()
+        return PurchaseInformation(budgets, manualCount)
     }
 }

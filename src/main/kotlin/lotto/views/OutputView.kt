@@ -1,18 +1,17 @@
 package lotto.views
 
-import lotto.domain.Budget
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.Lottos
+import lotto.domain.PurchaseInformation
 import lotto.domain.Reward
 import java.util.Collections
-
 import java.util.TreeMap
 
 object OutputView {
 
-    fun showInputResult(lottos: Lottos, budget: Budget) {
-        val lottoCount = budget.getTotalLottoCount()
+    fun showInputResult(lottos: Lottos, purchaseInformation: PurchaseInformation) {
+        val lottoCount = purchaseInformation.getTotalLottoCount()
         val inputInformation = buildString {
             append(lottoCount).append(LOTTO_COUNT_INFORMATION)
             append(System.lineSeparator())
@@ -35,11 +34,12 @@ object OutputView {
         return result
     }
 
-    fun showResult(lottoResult: LottoResult, budget: Budget) {
+    fun showResult(lottoResult: LottoResult, purchaseInformation: PurchaseInformation) {
         println(GAME_RESULT)
         println(DASH)
 
         showRewards(lottoResult)
+        val budget = purchaseInformation.budget
         println("$TOTAL_PROFIT ${lottoResult.getProfit(budget)}입니다.")
     }
 
