@@ -1,6 +1,6 @@
 package lotto.model
 
-class Lotto(
+data class Lotto(
     val price: Int,
     val numbers: LottoNumbers
 ) {

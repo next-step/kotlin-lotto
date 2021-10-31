@@ -15,7 +15,7 @@ class InputView {
             .split(",")
             .map { it.trim().toInt() }
 
-        return LottoNumbers(
+        return LottoNumbers.manual(
             num1 = numbers[0],
             num2 = numbers[1],
             num3 = numbers[2],
