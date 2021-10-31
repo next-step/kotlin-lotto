@@ -10,9 +10,9 @@ enum class LottoRank(val countOfMatch: Int, val winningMoney: Int) {
     FOURTH(3, 5_000),
     MISS(0, 0);
 
-   companion object {
-       fun compareMatchRank(number: Int): LottoRank {
-           return values().find { it.countOfMatch == number } ?: MISS
-       }
-   }
+    companion object {
+        fun compareMatchRank(number: Int): LottoRank {
+            return values().find { it.countOfMatch == number } ?: MISS
+        }
+    }
 }

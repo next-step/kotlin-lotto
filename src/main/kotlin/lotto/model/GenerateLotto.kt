@@ -7,7 +7,7 @@ class GenerateLotto(private val price: Price) {
     fun generateLottoList(): List<Lotto> =
         (0 until price.lottoCount)
             .map {
-                Lotto(GenerateRandomInt.generateNumbers(LottoNumber.getRandomRangeList())
+                Lotto(RandomNumberGenerationProcessor.generateNumbers(LottoNumber.getRandomRangeList())
                     .map { LottoNumber((it)) }
                 )
             }

@@ -3,7 +3,7 @@ package lotto.model
 /**
  * 랜덤 숫자 반환하는 클래스
  * */
-object GenerateRandomInt {
+object RandomNumberGenerationProcessor {
     private const val NUMBER_START = 0
     private const val NUMBER_END = 6
 
