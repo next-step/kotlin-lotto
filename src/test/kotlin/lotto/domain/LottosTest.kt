@@ -43,4 +43,16 @@ internal class LottosTest {
 
         assertThat(actual.lottos).hasSize(5)
     }
+
+    @Test
+    fun `수동 구매 정보를 입력받아 로또 목록을 생성하여 리턴한다`() {
+        val budget = Budget.valueOf(2000)
+        val lottoNumbers = listOf("1, 2, 3, 4, 5, 6")
+
+        val purchaseInformation = PurchaseInformation(budget, 1, lottoNumbers)
+
+        val actual = Lottos.createLottos(purchaseInformation)
+
+        assertThat(actual.lottos).hasSize(2)
+    }
 }

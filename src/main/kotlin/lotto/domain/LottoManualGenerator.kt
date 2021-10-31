@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoManualGenerator(
-    val purchaseInformation: PurchaseInformation
+    private val purchaseInformation: PurchaseInformation
 ) {
     fun generateLottos(): List<Lotto> {
         return purchaseInformation.textLottos
