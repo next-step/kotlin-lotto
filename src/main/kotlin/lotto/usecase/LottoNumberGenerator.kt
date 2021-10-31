@@ -3,9 +3,14 @@ package lotto.usecase
 class LottoNumberGenerator : Generator {
 
     override fun generate(range: IntRange): List<Int> {
-        return (1..LOTTO_NUMBER_SIZE).map {
-            range.random()
+        val numbers = mutableListOf<Int>()
+
+        repeat(LOTTO_NUMBER_SIZE) {
+            val number = range.random()
+            numbers.add(number)
         }
+
+        return numbers.toList()
     }
 
     companion object {
