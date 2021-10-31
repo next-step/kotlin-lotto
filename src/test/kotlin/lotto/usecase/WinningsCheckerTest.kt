@@ -1,6 +1,7 @@
 package lotto.usecase
 
 import lotto.domain.Lotto
+import lotto.domain.Rank
 import lotto.domain.WinningNumber
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -30,7 +31,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.getFirstRankCount())
+        assertEquals(10, actual.getCountByRank(Rank.FIRST))
         assertEquals(20_000_000_000.0, actual.getTotalReward())
     }
 
@@ -55,7 +56,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.getSecondRankCount())
+        assertEquals(10, actual.getCountByRank(Rank.SECOND))
         assertEquals(15_000_000.0, actual.getTotalReward())
     }
 
@@ -80,7 +81,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.getThirdRankCount())
+        assertEquals(10, actual.getCountByRank(Rank.THIRD))
         assertEquals(500_000.0, actual.getTotalReward())
     }
 
@@ -105,7 +106,7 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(10, actual.getFourthRankCount())
+        assertEquals(10, actual.getCountByRank(Rank.FOURTH))
         assertEquals(50_000.0, actual.getTotalReward())
     }
 
@@ -130,9 +131,9 @@ class WinningsCheckerTest {
             winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         )
 
-        assertEquals(0, actual.getFirstRankCount())
-        assertEquals(0, actual.getSecondRankCount())
-        assertEquals(0, actual.getThirdRankCount())
-        assertEquals(0, actual.getFourthRankCount())
+        assertEquals(0, actual.getCountByRank(Rank.FIRST))
+        assertEquals(0, actual.getCountByRank(Rank.SECOND))
+        assertEquals(0, actual.getCountByRank(Rank.THIRD))
+        assertEquals(0, actual.getCountByRank(Rank.FOURTH))
     }
 }

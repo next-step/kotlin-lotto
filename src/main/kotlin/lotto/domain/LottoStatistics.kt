@@ -5,20 +5,8 @@ class LottoStatistics(
     val winningStatistics: WinningStatistics,
 ) {
 
-    fun getFirstRankCount(): Int {
-        return winningStatistics.getFirstRankCount()
-    }
-
-    fun getSecondRankCount(): Int {
-        return winningStatistics.getSecondRankCount()
-    }
-
-    fun getThirdRankCount(): Int {
-        return winningStatistics.getThirdRankCount()
-    }
-
-    fun getFourthRankCount(): Int {
-        return winningStatistics.getFourthRankCount()
+    fun getCountByRank(rank: Rank): Int {
+        return winningStatistics.getCountByRank(rank)
     }
 
     fun getYield(): Double {
