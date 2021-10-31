@@ -4,9 +4,11 @@ import domain.lotto.error.EmptyMatchResultMapException
 
 @JvmInline
 value class MatchResult private constructor(private val _matchResult: Map<MatchBoard, Int>) {
-
     val matchResult: Map<MatchBoard, Int>
         get() = _matchResult.toMap()
+
+    fun winnings(): Int = _matchResult.asSequence()
+        .sumOf { it.value * it.key.matchPrize }
 
     companion object {
         fun of(matchResult: Map<MatchBoard, Int>): MatchResult =
