@@ -12,7 +12,7 @@ class LottoController(private val inputView: InputView, private val resultView: 
         val lottos = Lottos.buy(budget)
         resultView.viewPurchaseLotto(lottos.toList())
         val winningNumber = inputView.inputWinningNumber()
-        val lottoResult = lottos.correspondToWinningNumber(winningNumber)
-        resultView.viewLottoResults(lottoResult, TotalRate.calculatingOf(lottoResult))
+        val lottoResults = lottos.correspondToWinningNumber(winningNumber)
+        resultView.viewLottoResults(lottoResults, TotalRate.calculatingOf(lottoResults))
     }
 }

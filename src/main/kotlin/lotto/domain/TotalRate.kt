@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 @JvmInline
-value class TotalRate(private val lottoResults: List<LottoResult>) {
+value class TotalRate(private val lottoResults: LottoResults) {
 
     private fun calculating(): BigDecimal {
         val totalPrize = sumPrize()
@@ -12,14 +12,15 @@ value class TotalRate(private val lottoResults: List<LottoResult>) {
         return totalPrize.divide(budget, 2, RoundingMode.FLOOR)
     }
 
-    private fun sumLottoCount() = (lottoResults.sumOf { it.prizeAndCountPair().second } * Lotto.PRICE).toBigDecimal()
+    private fun sumLottoCount() =
+        (lottoResults.toList().sumOf { it.prizeAndCountPair().second } * Lotto.PRICE).toBigDecimal()
 
-    private fun sumPrize() = lottoResults.sumOf {
+    private fun sumPrize() = lottoResults.toList().sumOf {
         val (lottoPrize, count) = it.prizeAndCountPair()
         lottoPrize.prize * count
     }.toBigDecimal()
 
     companion object {
-        fun calculatingOf(lottoResults: List<LottoResult>): BigDecimal = TotalRate(lottoResults).calculating()
+        fun calculatingOf(lottoResults: LottoResults): BigDecimal = TotalRate(lottoResults).calculating()
     }
 }

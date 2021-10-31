@@ -12,18 +12,18 @@ class LottoResultsTest {
     @Test
     fun `1등 상품과 일치하는지 테스트`() {
         // given
-        val lottoResults = LottoResults(
+        val winningNumber = listOf(1, 2, 3, 4, 5, 6)
+        val lottoResults = LottoResults.matchingWinningNumber(
             purchasedLottos = listOf(
                 Lotto(LottoNumber(listOf(1, 2, 3, 4, 5, 6))),
                 Lotto(LottoNumber(listOf(1, 5, 7, 10, 12, 17)))
-            )
+            ),
+            winningNumber = winningNumber
         )
-
-        val winningNumber = listOf(1, 2, 3, 4, 5, 6)
 
         // when
         val firstPrize = LottoPrize.FIRST.prize
-        val correspondLottoResult = lottoResults.result(winningNumber).first() {
+        val correspondLottoResult = lottoResults.toList().first() {
             val lottoPrize = it.prizeAndCountPair().first
             lottoPrize.prize == firstPrize
         }

@@ -13,7 +13,7 @@ class TotalRateTest {
         // given
         val winningNumber = listOf(1, 2, 3, 4, 5, 6)
 
-        val lottoResults = LottoResults(
+        val lottoResults = LottoResults.matchingWinningNumber(
             purchasedLottos = listOf(
                 Lotto(LottoNumber(listOf(8, 21, 23, 41, 42, 43))),
                 Lotto(LottoNumber(listOf(3, 5, 11, 16, 32, 38))),
@@ -29,8 +29,9 @@ class TotalRateTest {
                 Lotto(LottoNumber(listOf(13, 14, 18, 21, 23, 35))),
                 Lotto(LottoNumber(listOf(17, 21, 29, 37, 42, 45))),
                 Lotto(LottoNumber(listOf(3, 8, 27, 30, 35, 44)))
-            )
-        ).result(winningNumber)
+            ),
+            winningNumber = winningNumber
+        )
 
         // when
         val totalRate = TotalRate.calculatingOf(lottoResults)

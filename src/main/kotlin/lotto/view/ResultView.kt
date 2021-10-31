@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
+import lotto.domain.LottoResults
 import java.math.BigDecimal
 
 class ResultView {
@@ -13,10 +14,10 @@ class ResultView {
         }
     }
 
-    fun viewLottoResults(lottoResult: List<LottoResult>, totalBenefit: BigDecimal) {
+    fun viewLottoResults(lottoResult: LottoResults, totalBenefit: BigDecimal) {
         println("당첨 통계")
         println("--------")
-        lottoResult.forEach {
+        lottoResult.toList().forEach {
             val (lottoPrize, count) = it.prizeAndCountPair()
             println("${lottoPrize.matchingNumberCount}개 일치 (${lottoPrize.prize})- ${count}개")
         }

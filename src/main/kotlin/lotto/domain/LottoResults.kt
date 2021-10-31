@@ -1,13 +1,19 @@
 package lotto.domain
 
 @JvmInline
-value class LottoResults(private val purchasedLottos: List<Lotto>) {
+value class LottoResults private constructor(private val lottoResults: List<LottoResult>) {
 
-    fun result(winningNumber: List<Int>): List<LottoResult> =
-        LottoPrize.toList().map { LottoResult(it, matchingToList(winningNumber)) }
+    fun toList(): List<LottoResult> = lottoResults.toList()
 
-    private fun matchingToList(winningNumber: List<Int>): List<Int> =
-        purchasedLottos.map {
-            it.toNumberList().intersect(winningNumber).count()
+    companion object {
+        fun matchingWinningNumber(winningNumber: List<Int>, purchasedLottos: List<Lotto>): LottoResults {
+            val lottoNumberIntersectCounts: List<Int> = purchasedLottos.map {
+                it.toNumberList().intersect(winningNumber).count()
+            }
+            val lottoResults: List<LottoResult> = LottoPrize.toList().map {
+                LottoResult.matchingNumber(it, lottoNumberIntersectCounts)
+            }
+            return LottoResults(lottoResults)
         }
+    }
 }
