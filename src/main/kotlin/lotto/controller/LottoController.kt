@@ -13,9 +13,13 @@ import lotto.views.OutputView
 class LottoController {
 
     fun startLottoGame() {
-        val purchaseInformation = getPurchaseInformation()
+        val budgets = Budget.valueOf(InputView.askLottoBudget())
+        val manualCount = InputView.askManualLottoCount()
+        val manualLottos = InputView.askManualLottos(manualCount)
+        val purchaseInformation = PurchaseInformation(budgets, manualCount, manualLottos)
         val lottos = Lottos.createLottos(purchaseInformation)
         OutputView.showInputResult(lottos, purchaseInformation)
+
         val winningLottoInformation = getWinningLottoInformation()
         val lottoResult = LottoResult.EMPTY.getLottoResult(lottos, winningLottoInformation)
         OutputView.showResult(lottoResult, purchaseInformation)
@@ -25,11 +29,5 @@ class LottoController {
         val winningLotto = Lotto(StringUtils.toLottoNumbers(InputView.askWinningLotto()))
         val bonusNumber = LottoNumber.valueOf(InputView.askBonusNumber())
         return Pair(winningLotto, bonusNumber)
-    }
-
-    private fun getPurchaseInformation(): PurchaseInformation {
-        val budgets = Budget.valueOf(InputView.askLottoBudget())
-        val manualCount = InputView.askManualLottoCount()
-        return PurchaseInformation(budgets, manualCount)
     }
 }
