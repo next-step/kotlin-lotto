@@ -16,13 +16,13 @@ class LottosTest {
             Lotto(listOf(5, 7, 13, 27, 31, 45))
         )
 
-        val winningNumber = WinningNumber.from(
+        val winningNumber = WinningNumber(
             listOf("3", "5", "7", "13", "31", "45")
         )
 
         // Act
         val sut = Lottos(lottos)
-        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber)
+        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber.winningNumbers)
 
         // Assert
         assertThat(result[Rank.SECOND]).isEqualTo(1)

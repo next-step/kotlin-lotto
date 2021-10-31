@@ -16,10 +16,10 @@ class WinningNumberTest {
         val inputWinningNumber = listOf("1", "2", "3", "4", "5", "6")
 
         // Act
-        val winningNumber = WinningNumber.from(inputWinningNumber)
+        val winningNumber = WinningNumber(inputWinningNumber)
 
         // Assert
-        assertThat(winningNumber).hasSize(6)
+        assertThat(winningNumber.winningNumbers).hasSize(6)
     }
 
     @Test
@@ -29,7 +29,7 @@ class WinningNumberTest {
         val inputWinningNumber = emptyList<String>()
 
         // Act, Assert
-        assertThrows<InvalidWinningNumberException> { WinningNumber.from(inputWinningNumber) }
+        assertThrows<InvalidWinningNumberException> { WinningNumber(inputWinningNumber) }
     }
 
     @Test
@@ -39,7 +39,7 @@ class WinningNumberTest {
         val inputWinningNumber = listOf("1", "2", "3", "4", "5", "6", "7")
 
         // Act, Assert
-        assertThrows<InvalidWinningNumberException> { WinningNumber.from(inputWinningNumber) }
+        assertThrows<InvalidWinningNumberException> { WinningNumber(inputWinningNumber) }
     }
 
     @Test
@@ -49,6 +49,6 @@ class WinningNumberTest {
         val inputWinningNumber = listOf("1", "2", "3", "4", "5", "46")
 
         // Act, Assert
-        assertThrows<InvalidWinningNumberException> { WinningNumber.from(inputWinningNumber) }
+        assertThrows<InvalidWinningNumberException> { WinningNumber(inputWinningNumber) }
     }
 }

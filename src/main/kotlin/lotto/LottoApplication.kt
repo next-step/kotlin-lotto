@@ -18,9 +18,9 @@ fun main() {
     OutputView.printBoughtLottos(lottos)
 
     val inputWinningNumber: List<String> = InputView.inputWinningNumber()
-    val winningNumber = WinningNumber.from(inputWinningNumber)
+    val winningNumber = WinningNumber(inputWinningNumber)
 
-    val matchResult = Lottos(lottos).matchWinningNumber(winningNumber)
+    val matchResult = Lottos(lottos).matchWinningNumber(winningNumber.winningNumbers)
     OutputView.printLottoMatchResult(matchResult)
 
     val profitRate = ProfitRate(matchResult, inputPrice)
