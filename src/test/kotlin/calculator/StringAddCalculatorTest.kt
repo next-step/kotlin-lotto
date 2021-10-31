@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -67,9 +68,9 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["d,3", "g:3:e"])
     fun character(text: String) {
-        assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { calculator.add(text) }
-            .withMessage(EXCEPTION_NULL_OR_EMPTY)
+        assertThrows<RuntimeException>{
+            calculator.add(text)
+        }
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
@@ -77,8 +78,8 @@ class StringAddCalculatorTest {
     fun negative() {
         val negativeNumber = "-1"
 
-        assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { calculator.add(negativeNumber) }
-            .withMessage(EXCEPTION_NULL_OR_EMPTY)
+        assertThrows<RuntimeException>{
+            calculator.add(negativeNumber)
+        }
     }
 }
