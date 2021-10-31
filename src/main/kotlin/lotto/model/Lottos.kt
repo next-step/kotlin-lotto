@@ -7,7 +7,7 @@ class Lottos private constructor(private val price: Price, private val purchased
     fun compareLottoList(): LottoStatisticFormat {
         val hashMap = hashMapOf<LottoRank, Int>()
         purchasedLotto.forEach { lotto ->
-            val rank = LottoRank.compareMatchRank(compareNumber(lotto))
+            val rank = LottoRank.findMatchRank(compareNumber(lotto))
             hashMap[rank] = hashMap.getOrDefault(rank, 0) + 1
         }
         return LottoStatisticFormat(price, hashMap)
