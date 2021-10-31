@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
 
-    @CsvSource(value = ["1000,1","5000,5","10000,10"])
+    @CsvSource(value = ["1000,1", "5000,5", "10000,10"])
     @ParameterizedTest
     @DisplayName("구매 금액에 따른 로또 생성 갯수 확인")
     fun `correct purchase amount`(price: Int, expected: Int) {
@@ -58,7 +58,13 @@ class LottoTest {
     fun `check lotto number sorting`() {
         // given
         val list =
-            listOf(LottoNumber(7), LottoNumber(5), LottoNumber(1), LottoNumber(6), LottoNumber(3), LottoNumber(4))
+            listOf(LottoNumber(7),
+                LottoNumber(5),
+                LottoNumber(1),
+                LottoNumber(6),
+                LottoNumber(3),
+                LottoNumber(4)
+            )
 
         // when
         val lotto = Lotto(list)
