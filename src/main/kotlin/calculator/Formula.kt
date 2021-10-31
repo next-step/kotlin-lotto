@@ -11,6 +11,8 @@ class Formula(input: String) {
         operands = stringFormulaToOperand(customDelimiterAndOperands.last(), customDelimiter)
     }
 
+    fun sumValues(): Int = operands.sumOf { it.value }
+
     private fun stringFormulaToOperand(input: String, customDelimiter: String?) =
         stringFormulaToStringValues(input, customDelimiter).map { Operand(it) }
 
@@ -20,6 +22,4 @@ class Formula(input: String) {
 
     private fun splitInputOperand(input: String, vararg delimiters: String = arrayOf(",", ":")): List<String> =
         input.split(*delimiters)
-
-    fun sumValues(): Int = operands.sumOf { it.value }
 }

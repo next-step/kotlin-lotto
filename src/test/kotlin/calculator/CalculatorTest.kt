@@ -1,6 +1,7 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -41,5 +42,13 @@ class CalculatorTest {
         val actual = Calculator.add(input)
         val expected = 6
         assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "A", "//;\nA;2;3", "//;\n-1;2;3"])
+    @DisplayName("문자열 계산기에 음수 또는 문자열을 전달하는 경우 RuntimeException 예외가 발생 한다.")
+    fun `문자열 계산기에 음수 또는 문자열을 전달하는 경우 RuntimeException 예외가 발생 한다`(input: String) {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { Calculator.add(input) }
     }
 }
