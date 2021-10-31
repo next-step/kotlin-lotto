@@ -8,7 +8,7 @@ class LottoNumberListProcessor(private val price: Price) {
         (0 until price.lottoCount)
             .map {
                 Lotto(
-                    RandomNumberGenerationProcessor.generateNumbers(range = LottoNumber.getRandomRangeList())
+                    RandomNumberGenerationProcessor.generateNumbers(range = LottoNumber.getLottoNumberRange())
                         .map { LottoNumber((it)) }
                 )
             }
