@@ -1,6 +1,6 @@
 package lotto.domain
 
-class PurchaseInformation(val budget: Budget, val manualCount: Int) {
+class PurchaseInformation(val budget: Budget, val manualCount: Int, val textLottos: List<String> = emptyList()) {
     init {
         require(budget.validateManualCount(manualCount))
     }
