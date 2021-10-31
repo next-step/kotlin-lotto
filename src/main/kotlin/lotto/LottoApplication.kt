@@ -1,6 +1,6 @@
 package lotto
 
-import lotto.`interface`.LottoGame
+import lotto.presentation.LottoGame
 import lotto.usecase.LottoMachine
 import lotto.usecase.LottoNumberGenerator
 import lotto.usecase.PurchaseAmountCalculator

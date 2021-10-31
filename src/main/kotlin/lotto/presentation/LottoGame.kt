@@ -1,4 +1,4 @@
-package lotto.`interface`
+package lotto.presentation
 
 import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
