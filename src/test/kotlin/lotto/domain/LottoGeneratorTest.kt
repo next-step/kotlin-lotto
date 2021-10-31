@@ -13,9 +13,10 @@ internal class LottoGeneratorTest {
         val budget = Budget.valueOf(givenValue)
         val lottoPrice = 1000
         val lottoGenerator = LottoGenerator(RandomNumberGenerator())
+        val purchaseInformation = PurchaseInformation(budget, 0)
 
         // when
-        val actual = lottoGenerator.generateLottos(budget)
+        val actual = lottoGenerator.generateLottos(purchaseInformation)
 
         // then
         assertThat(actual).hasSize(givenValue / lottoPrice)

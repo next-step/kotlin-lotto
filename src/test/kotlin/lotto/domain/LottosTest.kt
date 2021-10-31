@@ -7,12 +7,11 @@ internal class LottosTest {
 
     @Test
     fun `로또 목록을 생성할 수 있다`() {
-        val lottoGenerator = LottoGenerator(RandomNumberGenerator())
-        val budget = Budget.valueOf(5000)
-        val generatedLottos = lottoGenerator.generateLottos(budget)
+        val lottoNumbers1 = (1..6).map { LottoNumber.valueOf(it) }
+        val givenLotto1 = Lotto(lottoNumbers1)
+        val lottos = Lottos(listOf(givenLotto1))
 
-        val lottos = Lottos(generatedLottos)
-        assertThat(lottos.lottos).hasSize(5)
+        assertThat(lottos).isNotNull
     }
 
     @Test
@@ -36,10 +35,11 @@ internal class LottosTest {
     }
 
     @Test
-    fun `로또 예산을 입력받아 로또 목록을 생성하여 리턴한다`() {
+    fun `구매 정보를 입력받아 로또 목록을 생성하여 리턴한다`() {
         val budget = Budget.valueOf(5000)
+        val purchaseInformation = PurchaseInformation(budget, 0)
 
-        val actual = Lottos.createLottos(budget)
+        val actual = Lottos.createLottos(purchaseInformation)
 
         assertThat(actual.lottos).hasSize(5)
     }
