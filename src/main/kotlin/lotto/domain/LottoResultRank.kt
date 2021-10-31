@@ -1,8 +1,5 @@
 package lotto.domain
 
-import java.util.*
-import java.util.stream.Collectors
-
 enum class LottoResultRank(val lottoResultRankKey: LottoResultRankKey, val prizeMoney: Long) {
     MISSED(LottoResultRankKey(MatchedCount.of(0)), 0L),
     FIFTH(LottoResultRankKey(MatchedCount.of(3)), 5_000L),
@@ -13,8 +10,7 @@ enum class LottoResultRank(val lottoResultRankKey: LottoResultRankKey, val prize
     ;
 
     companion object {
-        private val rankMap = Arrays.stream(values())
-            .collect(Collectors.toMap({ rank: LottoResultRank -> rank.lottoResultRankKey }) { rank: LottoResultRank -> rank })
+        private val rankMap = values().associateBy { it.lottoResultRankKey }
 
         fun getRank(key: LottoResultRankKey): LottoResultRank {
             return rankMap.getOrDefault(key, MISSED)
