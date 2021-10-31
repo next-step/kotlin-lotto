@@ -18,7 +18,7 @@ class ExpressionTest {
 
         // Assert
         assertThat(numbers).hasSize(1)
-        assertThat(numbers).containsExactly("0")
+        assertThat(numbers).containsExactly(Number("0"))
     }
 
     @ParameterizedTest
@@ -30,7 +30,7 @@ class ExpressionTest {
 
         // Assert
         assertThat(numbers).hasSize(1)
-        assertThat(numbers).containsExactly(input)
+        assertThat(numbers).containsExactly(Number(input))
     }
 
     @Test
@@ -44,7 +44,7 @@ class ExpressionTest {
 
         // Assert
         assertThat(numbers).hasSize(2)
-        assertThat(numbers).contains("1", "2")
+        assertThat(numbers).contains(Number("1"), Number("2"))
     }
 
     @Test
@@ -58,7 +58,7 @@ class ExpressionTest {
 
         // Assert
         assertThat(numbers).hasSize(3)
-        assertThat(numbers).contains("1", "2", "3")
+        assertThat(numbers).contains(Number("1"), Number("2"), Number("3"))
     }
 
     @ParameterizedTest
@@ -70,6 +70,6 @@ class ExpressionTest {
 
         // Assert
         assertThat(numbers).hasSize(3)
-        assertThat(numbers).contains("1", "2", "3")
+        assertThat(numbers).contains(Number("1"), Number("2"), Number("3"))
     }
 }
