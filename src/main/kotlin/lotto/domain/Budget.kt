@@ -19,7 +19,7 @@ value class Budget private constructor(val value: Int) {
     }
 
     fun validateManualCount(manualCount: Int): Boolean {
-        return getTotalLottoCount() > manualCount
+        return getTotalLottoCount() >= manualCount
     }
 
     fun getRemainCount(count: Int): Int {
