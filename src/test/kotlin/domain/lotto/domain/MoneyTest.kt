@@ -39,4 +39,14 @@ class MoneyTest {
 
         assertThat(numberOfPurchases).isEqualTo(Math.floorDiv(moneyInt, 1000))
     }
+
+    @ParameterizedTest(name = "입력값 : {0}")
+    @ValueSource(ints = [0, 1_000, 10_000, 99_999, 100_0001, Integer.MAX_VALUE])
+    fun `현재 소유한 값을 기준으로 다른 값과 비교했을때의 비율을 반환한다`(moneyInt: Int) {
+        val expected = Integer.MAX_VALUE.toDouble().div(moneyInt.toDouble())
+        val money = Money(moneyInt)
+        val actual = money.yield(Money(Integer.MAX_VALUE))
+
+        assertThat(actual).isEqualTo(expected)
+    }
 }

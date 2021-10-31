@@ -19,10 +19,9 @@ class ExpressionTest {
         assertThat(expression.calculateExpression()).isEqualTo("0")
     }
 
-    @ParameterizedTest(name = "공백 연산값: `{0}`")
-    @ValueSource(strings = ["", " ", "   "])
-    fun `공백값으로 이루어진 문자열이 들어오면 0값 문자열을 반환한다`(emptyString: String) {
-        val expression = Expression(emptyString, CustomSeparatorRegexStrategy)
+    @Test
+    fun `공백값으로 이루어진 문자열이 들어오면 0값 문자열을 반환한다`() {
+        val expression = Expression(regexStrategy = CustomSeparatorRegexStrategy)
 
         assertThat(expression.calculateExpression()).isEqualTo("0")
     }

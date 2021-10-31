@@ -26,7 +26,7 @@ class LottosTest {
 
     @Test
     fun `당첨 로또를 입력하면 당첨 결과를 반환한다`() {
-        val expected = MatchBoard.values().associateWith { 0 }.toMutableMap()
+        val expected = MatchBoard.valuesExcludedMiss().associateWith { 0 }.toMutableMap()
         expected[MatchBoard.FIRST] = 1
 
         val lottos: Lottos = Lottos.from(1) { it.sorted() }
