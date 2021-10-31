@@ -9,7 +9,7 @@ class Lottos private constructor(
     private val lastWinNumber: Lotto,
 ) {
 
-    fun compareLottoList(): LottoStatisticFormat {
+    fun compareLottoResult(): LottoStatisticFormat {
         val hashMap = hashMapOf<LottoRank, Int>()
         purchasedLotto.forEach { lotto ->
             val rank = LottoRank.findMatchRank(compareNumber(lotto))

@@ -58,7 +58,8 @@ class LottoTest {
     fun `check lotto number sorting`() {
         // given
         val list =
-            listOf(LottoNumber(7),
+            listOf(
+                LottoNumber(7),
                 LottoNumber(5),
                 LottoNumber(1),
                 LottoNumber(6),

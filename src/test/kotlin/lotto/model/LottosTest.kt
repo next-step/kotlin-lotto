@@ -23,7 +23,7 @@ class LottosTest {
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber)
 
         // then
-        Assertions.assertThat(lottos.compareLottoList())
+        Assertions.assertThat(lottos.compareLottoResult())
             .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.FIRST to 1)))
     }
 
