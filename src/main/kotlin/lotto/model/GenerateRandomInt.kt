@@ -8,6 +8,7 @@ object GenerateRandomInt {
     private const val NUMBER_END = 6
 
     fun generateNumbers(range: List<Int>): List<Int> =
-        (range).shuffled()
+        (range)
+            .shuffled()
             .subList(NUMBER_START, NUMBER_END)
 }
