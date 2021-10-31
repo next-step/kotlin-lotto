@@ -8,7 +8,7 @@ value class MatchResult private constructor(private val _matchResult: Map<MatchB
         get() = _matchResult.toMap()
 
     fun winnings(): Int = _matchResult.asSequence()
-        .sumOf { it.value * it.key.matchPrize }
+        .sumOf { Math.multiplyExact(it.value, it.key.matchPrize) }
 
     companion object {
         fun of(matchResult: Map<MatchBoard, Int>): MatchResult =
