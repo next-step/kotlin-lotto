@@ -9,10 +9,10 @@ class LottoTest {
     @Test
     fun `로또는 개당 1000원이다`() {
         // given
-        val lottos = Lottos(1000)
+        val lottos = Lottos.buy(1000)
 
         // when
-        val purchaseLottos = lottos.buy()
+        val purchaseLottos = lottos.toList()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(1)
@@ -48,10 +48,10 @@ class LottoTest {
     @Test
     fun `로또는 여러개 살 수 있다`() {
         // given
-        val lottos = Lottos(14000)
+        val lottos = Lottos.buy(14000)
 
         // when
-        val purchaseLottos = lottos.buy()
+        val purchaseLottos = lottos.toList()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(14)

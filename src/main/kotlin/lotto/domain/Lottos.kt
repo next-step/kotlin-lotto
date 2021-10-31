@@ -2,15 +2,18 @@ package lotto.domain
 
 import lotto.domain.LottoPrice.Companion.LOTTO_PRICE
 
-class Lottos(private val money: Int) {
-
-    private var purchasedLottos = mutableListOf<Lotto>()
-
-    fun buy(): List<Lotto> {
-        purchasedLottos = MutableList(money / LOTTO_PRICE) { Lotto() }
-        return purchasedLottos.toList()
-    }
+@JvmInline
+value class Lottos private constructor(private val lottos: List<Lotto>) {
 
     fun correspondToWinningNumber(winningNumber: List<Int>): List<LottoResult> =
-        LottoResults(purchasedLottos).result(winningNumber)
+        LottoResults(lottos).result(winningNumber)
+
+    fun toList(): List<Lotto> = lottos.toList()
+
+    companion object {
+        fun buy(money: Int): Lottos {
+            val values = MutableList(money / LOTTO_PRICE) { Lotto() }
+            return Lottos(values)
+        }
+    }
 }
