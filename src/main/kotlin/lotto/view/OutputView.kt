@@ -18,7 +18,7 @@ class OutputView {
         fun printBoughtLottos(lottos: List<Lotto>) {
             repeat(lottos.size) {
                 val lotto: Lotto = lottos[it]
-                println(lotto.lottoNumbers.joinToString(SEPARATOR, PREFIX, POSTFIX))
+                println(lotto.getLottoNumbers().joinToString(SEPARATOR, PREFIX, POSTFIX))
             }
         }
 

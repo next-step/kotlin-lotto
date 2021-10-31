@@ -33,7 +33,7 @@ class LottoAutoStrategyTest {
         val lottos = sut.generate(1)
 
         // Assert
-        val lottoNumbers = lottos[0].lottoNumbers
+        val lottoNumbers = lottos[0].getLottoNumbers()
         assertThat(lottoNumbers.first()).isGreaterThanOrEqualTo(1)
         assertThat(lottoNumbers.last()).isLessThanOrEqualTo(45)
     }

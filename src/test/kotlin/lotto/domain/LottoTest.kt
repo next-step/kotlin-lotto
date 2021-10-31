@@ -12,10 +12,11 @@ class LottoTest {
     fun `sut returns match count when lotto numbers contains winning number`() {
         // Arrange
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 7)
+        val numbers = listOf(1, 2, 3, 4, 5, 7)
+        val lottoNumber = LottoNumber(numbers)
 
         // Act
-        val sut = Lotto(lottoNumbers)
+        val sut = Lotto(lottoNumber)
         val matchCount = sut.matchWinningNumber(winningNumbers)
 
         // Assert

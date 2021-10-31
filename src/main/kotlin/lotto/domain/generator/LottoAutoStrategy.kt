@@ -1,6 +1,7 @@
 package lotto.domain.generator
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 
 class LottoAutoStrategy : LottoGeneratorStrategy {
 
@@ -10,17 +11,18 @@ class LottoAutoStrategy : LottoGeneratorStrategy {
 
     override fun generate(lottoCount: Int): List<Lotto> {
         return (0 until lottoCount)
-            .map { generateLottoNumbers() }
+            .map { generateLottoNumber() }
             .map { Lotto(it) }
             .toList()
     }
 
-    private fun generateLottoNumbers(): List<Int> {
-        return lottoNumbers
+    private fun generateLottoNumber(): LottoNumber {
+        val lottoNumbers = lottoNumbers
             .shuffled()
             .subList(LOTTO_FIRST_INDEX, LOTTO_LAST_INDEX)
             .sorted()
             .toList()
+        return LottoNumber(lottoNumbers)
     }
 
     companion object {
