@@ -9,7 +9,7 @@ class Lottos private constructor(private val price: Price, private val purchased
         val hashMap = hashMapOf<LottoRank, Int>()
         purchasedLotto.forEach { lotto ->
             val rank = LottoRank.findMatchRank(compareNumber(lotto))
-            hashMap[rank] = hashMap.getOrDefault(rank, 0) + 1
+            hashMap[rank] = hashMap.getOrDefault(rank, 0) + ADD_ONE_LOTTO // 어떤 것을 의미하는 걸까요
         }
         return LottoStatisticFormat(price, hashMap)
     }
@@ -29,11 +29,13 @@ class Lottos private constructor(private val price: Price, private val purchased
 
             val list = numbers
                 .split(DELIMITER)
-                .map { LottoNumber(it.toIntOrNull() ?: -1) }
+                .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
             return Lottos(price, purchasedLotto, Lotto(list))
         }
 
         private const val DELIMITER = ","
+        private const val ERROR_INT = -1
+        private const val ADD_ONE_LOTTO = 1
         const val EXCEPTION_INPUT_NUMBER_NULL = "입력된 숫자가 없습니다."
     }
 }
