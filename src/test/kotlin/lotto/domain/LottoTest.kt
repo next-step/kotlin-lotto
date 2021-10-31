@@ -40,7 +40,7 @@ internal class LottoTest {
     @Test
     fun threeMatch() {
         val lotto = Lotto.from(listOf(1, 2, 3, 9, 8, 7))
-        assertThat(lotto.checkMatch(Fixture.winningLotto))
+        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
             .isEqualTo(Match.THREE)
     }
 
@@ -48,23 +48,31 @@ internal class LottoTest {
     @Test
     fun fourMatch() {
         val lotto = Lotto.from(listOf(1, 2, 3, 4, 8, 7))
-        assertThat(lotto.checkMatch(Fixture.winningLotto))
+        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
             .isEqualTo(Match.FOUR)
     }
 
     @DisplayName("로또번호를 5개 맞추면 FIVE 를 반환한다.")
     @Test
     fun fiveMatch() {
-        val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 7))
-        assertThat(lotto.checkMatch(Fixture.winningLotto))
+        val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 8))
+        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
             .isEqualTo(Match.FIVE)
+    }
+
+    @DisplayName("로또번호를 5개와 보너스볼을 맞추면 BONUS 를 반환한다.")
+    @Test
+    fun bonusMatch() {
+        val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 7))
+        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
+            .isEqualTo(Match.BONUS)
     }
 
     @DisplayName("로또번호를 6개 맞추면 SIX 를 반환한다.")
     @Test
     fun sixMatch() {
         val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(lotto.checkMatch(Fixture.winningLotto))
+        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
             .isEqualTo(Match.SIX)
     }
 }

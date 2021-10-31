@@ -8,13 +8,20 @@ object InputView {
         return input.toInt()
     }
 
+    fun askBonus(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val input = readLine()
+        require(!input.isNullOrBlank()) { "보너스 볼은 1과 45사이의 숫자이어야 합니다." }
+        return input.toInt()
+    }
+
     fun askWinningNumbers(): List<Int> {
         println("지난주 당첨 번호를 입력해 주세요.")
         val input = readLine()
         require(!input.isNullOrBlank()) { "당첨 번호는 , 로 구분된 6개의 숫자이어야 합니다." }
         return input.filterNot { it.isWhitespace() }
-            .split(DELIMITER).map { it.toInt() }
+            .split(WINNING_NUMBER_DELIMITER).map { it.toInt() }
     }
 
-    private const val DELIMITER = ","
+    private const val WINNING_NUMBER_DELIMITER = ","
 }

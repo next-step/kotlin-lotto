@@ -14,7 +14,7 @@ internal class LottosTest {
         val generatorFactory = object : GeneratorFactory {
             override fun createNumberGenerator(): () -> Int {
                 var number = 1
-                return (fun(): Int { return number++ })
+                return { number++ }
             }
         }
         val expected = (1..quantity).map { Lotto((1..Lotto.SIZE).map { LottoNumber(it) }) }
@@ -27,12 +27,13 @@ internal class LottosTest {
     fun countMatches() {
         val expected = mapOf(
             Match.SIX to 1,
+            Match.BONUS to 1,
             Match.FIVE to 2,
             Match.FOUR to 3,
             Match.THREE to 4,
             Match.NONE to 5
         )
-        assertThat(Fixture.lottos.countMatches(Fixture.winningLotto))
+        assertThat(Fixture.lottos.countMatches(Fixture.winningLotto, Fixture.bonus))
             .isEqualTo(expected)
     }
 }

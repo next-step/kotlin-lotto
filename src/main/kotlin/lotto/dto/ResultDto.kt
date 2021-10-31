@@ -20,6 +20,9 @@ data class ResultDto(val ratio: Double, val result: String) {
                 Match.FIVE,
                 countedMatches.getOrDefault(Match.FIVE, defaultCount)
             ) + serialize(
+                Match.BONUS,
+                countedMatches.getOrDefault(Match.BONUS, defaultCount)
+            ) + serialize(
                 Match.SIX,
                 countedMatches.getOrDefault(Match.SIX, defaultCount)
             )
@@ -34,6 +37,7 @@ data class ResultDto(val ratio: Double, val result: String) {
                 Match.THREE -> "3개 일치"
                 Match.FOUR -> "4개 일치"
                 Match.FIVE -> "5개 일치"
+                Match.BONUS -> "5개 일치, 보너스 볼 일치"
                 Match.SIX -> "6개 일치"
                 Match.NONE -> ""
             }
