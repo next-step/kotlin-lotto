@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test
 
 class LottosTest {
     @Test
-    @DisplayName("로또 결과가 옳바르게 출력된 경우")
-    fun `correct lotto result`() {
+    @DisplayName("로또 1등 당첨되는 경우 확인")
+    fun `check result of first winner`() {
         // given
         val price = Price(1000)
         val purchasedList = listOf(Lotto(listOf(LottoNumber(10), LottoNumber(1), LottoNumber(13), LottoNumber(23), LottoNumber(33), LottoNumber(43))))
@@ -22,7 +22,7 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("지난주 당첨 번호 포멧이 옳바르지 않는 경우")
+    @DisplayName("지난주 당첨 번호 입력값이 없는 경우")
     fun `incorrect win number list format`() {
         // given
         val price = Price(1000)

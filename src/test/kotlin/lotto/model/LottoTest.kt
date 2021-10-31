@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
  * */
 class LottoTest {
     @Test
-    @DisplayName("로또 리스트가 옳바른 경우")
+    @DisplayName("로또 랜덤번호가 잘 생성된 경우")
     fun `correct lotto list format`() {
         // given
         val lottoList = listOf(LottoNumber(10), LottoNumber(1), LottoNumber(13), LottoNumber(23), LottoNumber(33), LottoNumber(43))
