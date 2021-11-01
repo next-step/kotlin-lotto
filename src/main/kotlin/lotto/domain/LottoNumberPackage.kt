@@ -41,8 +41,19 @@ data class LottoNumberPackage(val numbers: Set<LottoNumber>) {
     }
 
     companion object {
+        private const val LOTTO_NUMBERS_SPLIT_DELIMITER = ","
         const val LOTTO_GAME_NUMBER_COUNT = 6
         private const val INVALID_LOTTO_GAME_NUMBER_COUNT_MESSAGE =
             "잘못된 로또 번호 개수입니다.(번호 ${LOTTO_GAME_NUMBER_COUNT}개 입력)"
+
+        fun from(input: String): LottoNumberPackage {
+            return LottoNumberPackage(getLottoNumbers(input))
+        }
+
+        private fun getLottoNumbers(input: String): Set<LottoNumber> {
+            return input.split(LOTTO_NUMBERS_SPLIT_DELIMITER)
+                .map { LottoNumber.from(it.trim()) }
+                .toSet()
+        }
     }
 }

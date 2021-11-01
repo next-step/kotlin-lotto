@@ -8,8 +8,11 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class ConsoleResultView : ResultView {
-    override fun showPurchaseCount(purchaseCount: LottoPurchaseCount) {
-        println("${purchaseCount.value}개를 구매했습니다.")
+    override fun showPurchaseCount(
+        manualPurchaseCount: LottoPurchaseCount,
+        automaticPurchaseCount: LottoPurchaseCount
+    ) {
+        println("수동으로 ${manualPurchaseCount.value}장, 자동으로 ${automaticPurchaseCount.value}장을 구매했습니다.")
     }
 
     override fun showLottoTicketNumber(lottoTicket: LottoTicket) {

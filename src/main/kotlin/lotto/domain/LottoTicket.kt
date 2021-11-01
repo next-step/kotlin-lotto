@@ -30,10 +30,11 @@ data class LottoTicket(private val _lottoPackages: List<LottoNumberPackage>) {
 
     companion object {
         fun from(
-            purchaseCount: LottoPurchaseCount,
+            manualNumbers: List<LottoNumberPackage>,
+            automaticPurchaseCount: LottoPurchaseCount,
             packagesGenerator: LottoNumberPackagesGenerator
         ): LottoTicket {
-            return LottoTicket(packagesGenerator.generate(purchaseCount))
+            return LottoTicket(manualNumbers.plus(packagesGenerator.generate(automaticPurchaseCount)))
         }
     }
 }

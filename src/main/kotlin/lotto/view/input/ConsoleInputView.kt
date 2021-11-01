@@ -4,7 +4,6 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoNumberPackage
 import lotto.domain.LottoPurchaseAmount
 import lotto.domain.LottoPurchaseCount
-import lotto.domain.WinningNumbers
 
 class ConsoleInputView : InputView {
     override fun getPurchaseAmount(): LottoPurchaseAmount {
@@ -17,9 +16,16 @@ class ConsoleInputView : InputView {
         return LottoPurchaseCount.from(readLine() ?: "")
     }
 
+    override fun getManualNumbers(manualPurchaseCount: LottoPurchaseCount): List<LottoNumberPackage> {
+        println(RECEIVE_MANUAL_NUMBERS_MESSAGE)
+        return IntRange(1, manualPurchaseCount.value)
+            .map { LottoNumberPackage.from(readLine() ?: "") }
+            .toList()
+    }
+
     override fun getWinningNumbers(): LottoNumberPackage {
         println("\n" + RECEIVE_WINNING_NUMBERS_MESSAGE)
-        return WinningNumbers.from(readLine() ?: "")
+        return LottoNumberPackage.from(readLine() ?: "")
     }
 
     override fun getBonusNumber(winningNumbers: LottoNumberPackage): LottoNumber {
