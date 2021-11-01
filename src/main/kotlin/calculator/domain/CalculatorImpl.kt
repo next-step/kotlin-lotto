@@ -2,11 +2,7 @@ package calculator.domain
 
 import calculator.usecase.Parser
 
-interface Calculator {
-    fun calculate(input: String): Int
-}
-
-class StringAddCalculator(
+class CalculatorImpl(
     private val parser: Parser,
 ) : Calculator {
 

@@ -11,7 +11,7 @@ class SplitParserTest {
 
     @ValueSource(strings = ["1,2,3", "1,2:3", "1:2:3"])
     @ParameterizedTest
-    fun `1,2,3이 기본 separator 로 이루어졌을 때 결과 listOf(1,2,3)`(input: String) {
+    fun `1,2,3이 basic separator 로 이루어졌을 때 결과 listOf(1,2,3)`(input: String) {
         val expected = listOf(1, 2, 3)
         val actual = parser.parse(input)
 
@@ -39,7 +39,7 @@ class SplitParserTest {
 
     @ValueSource(strings = ["1,-2,3", "1,2:-3", "-1,2:3"])
     @ParameterizedTest
-    fun `음수가 올경우 가 아닐경우 exception`(input: String) {
+    fun `음수가 올경우 exception`(input: String) {
         val exception = assertThrows<IllegalArgumentException> {
             parser.parse(input)
         }
