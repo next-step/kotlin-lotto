@@ -13,12 +13,12 @@ value class Lotto(val numbers: List<LottoNumber>) {
         }
     }
 
-    fun checkMatch(winningLotto: Lotto, bonus: LottoNumber): Match {
-        return Match.valueOf(winningLotto.count(numbers), numbers.contains(bonus))
+    fun contains(lottoNumber: LottoNumber): Boolean {
+        return numbers.contains(lottoNumber)
     }
 
-    private fun count(lottoNumbers: List<LottoNumber>): Int {
-        return lottoNumbers.count { numbers.contains(it) }
+    fun countSameNumbers(lotto: Lotto): Int {
+        return lotto.numbers.count { contains(it) }
     }
 
     companion object {

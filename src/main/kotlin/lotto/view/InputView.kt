@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.dto.WinningLottoDto
+
 object InputView {
     fun askPurchase(): Int {
         println("구입금액을 입력해주세요.")
@@ -17,12 +19,16 @@ object InputView {
         return readNumber()
     }
 
-    fun askWinningNumbers(): List<Int> {
+    fun askWinningLotto(): WinningLottoDto {
+        return WinningLottoDto(askWinningNumbers(), askBonus())
+    }
+
+    private fun askWinningNumbers(): List<Int> {
         println("\n지난주 당첨 번호를 입력해 주세요.")
         return readLottoNumbers()
     }
 
-    fun askBonus(): Int {
+    private fun askBonus(): Int {
         println("보너스 볼을 입력해 주세요.")
         val input = readLine()
         require(!input.isNullOrBlank()) { "보너스 볼은 1과 45사이의 숫자이어야 합니다." }

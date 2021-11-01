@@ -33,9 +33,8 @@ object Fixture {
             listOf(21, 22, 23, 24, 25, 15)
         )
     )
-    val winningLotto = createLotto()
-    val bonus = LottoNumber(7)
-    val statistics = Statistics(lottos.countMatches(winningLotto, bonus))
+    val winningLotto = WinningLotto(createLotto(), LottoNumber(7))
+    val statistics = Statistics(lottos.countMatches(winningLotto))
     val generatorFactory = object : GeneratorFactory {
         override fun createNumberGenerator(): () -> Int {
             var number = 1

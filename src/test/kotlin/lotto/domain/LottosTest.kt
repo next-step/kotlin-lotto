@@ -46,7 +46,7 @@ internal class LottosTest {
             Match.THREE to 4,
             Match.NONE to 5
         )
-        assertThat(Fixture.lottos.countMatches(Fixture.winningLotto, Fixture.bonus))
+        assertThat(Fixture.lottos.countMatches(Fixture.winningLotto))
             .isEqualTo(expected)
     }
 }

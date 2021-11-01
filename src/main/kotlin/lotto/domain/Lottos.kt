@@ -3,8 +3,8 @@ package lotto.domain
 import lotto.exception.IllegalLottosException
 
 class Lottos(val lottos: List<Lotto>) {
-    fun countMatches(winningLotto: Lotto, bonus: LottoNumber): Map<Match, Int> {
-        return lottos.map { it.checkMatch(winningLotto, bonus) }
+    fun countMatches(winningLotto: WinningLotto): Map<Match, Int> {
+        return lottos.map { winningLotto.checkMatch(it) }
             .groupingBy { it }
             .eachCount()
     }

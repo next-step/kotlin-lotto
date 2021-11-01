@@ -22,9 +22,8 @@ object LottoGame {
         val lottos = manualLottos.merge(autoLottos)
         OutputView.printLottos(LottosDto.from(manualLottos.size(), autoLottos.size(), lottos))
 
-        val winningLotto = Lotto.from(InputView.askWinningNumbers())
-        val bonus = LottoNumber(InputView.askBonus())
-        val statistics = Statistics(lottos.countMatches(winningLotto, bonus))
+        val winningLotto = InputView.askWinningLotto().toWinningLotto()
+        val statistics = Statistics(lottos.countMatches(winningLotto))
         OutputView.printResult(
             ResultDto.of(
                 statistics.calculateRatio(purchase.purchasePrice),
