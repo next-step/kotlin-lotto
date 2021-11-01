@@ -3,6 +3,10 @@ package calculator.domain
 @JvmInline
 value class Operands(val values: List<Operand>) {
 
+    fun sumOf(): Int {
+        return values.sumOf { it.value }
+    }
+
     companion object {
         private val EMPTY_OPERANDS = Operands(listOf(Operand.ZERO))
 

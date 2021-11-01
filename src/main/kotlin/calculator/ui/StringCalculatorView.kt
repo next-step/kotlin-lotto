@@ -1,6 +1,6 @@
 package calculator.ui
 
-class StringCalculatorView {
+object StringCalculatorView {
 
     fun input(): String = readLine() ?: EMPTY_STRING
 
@@ -8,7 +8,5 @@ class StringCalculatorView {
         println("$result")
     }
 
-    companion object {
-        private const val EMPTY_STRING = ""
-    }
+    private const val EMPTY_STRING = ""
 }

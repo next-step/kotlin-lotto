@@ -1,8 +1,8 @@
 package calculator.domain
 
-class AdditionCalculator : Calculator {
+object AdditionCalculator : Calculator {
 
     override fun calculate(operands: Operands): Int {
-        return operands.values.sumOf { it.value }
+        return operands.sumOf()
     }
 }

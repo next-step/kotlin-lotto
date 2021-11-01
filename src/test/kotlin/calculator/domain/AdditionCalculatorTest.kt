@@ -12,7 +12,7 @@ class AdditionCalculatorTest {
         val operands = OperandsFixture.OPERANDS_SUM_OF_SIX
 
         // when
-        val answer = AdditionCalculator().calculate(operands)
+        val answer = AdditionCalculator.calculate(operands)
 
         // then
         Assertions.assertThat(answer).isEqualTo(6)
