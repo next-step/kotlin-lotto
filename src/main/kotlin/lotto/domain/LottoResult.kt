@@ -28,7 +28,7 @@ data class LottoResult(val result: Map<Reward, Int>) {
 
     fun getLottoResult(
         lottos: Lottos,
-        winningLottoInformation: Pair<Lotto, LottoNumber>,
+        winningLottoInformation: WinningLottoInformation,
     ): LottoResult {
         val (winningLotto, bonusNumber) = winningLottoInformation
         val matchedRewards = lottos.getMatchedRewards(winningLotto, bonusNumber)
