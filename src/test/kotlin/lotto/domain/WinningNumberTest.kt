@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.exception.InvalidLottoNumberException
 import lotto.exception.InvalidWinningNumberException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -49,6 +50,6 @@ class WinningNumberTest {
         val inputWinningNumber = listOf("1", "2", "3", "4", "5", "46")
 
         // Act, Assert
-        assertThrows<InvalidWinningNumberException> { WinningNumber(inputWinningNumber) }
+        assertThrows<InvalidLottoNumberException> { WinningNumber(inputWinningNumber) }
     }
 }

@@ -12,8 +12,25 @@ class LottosTest {
     fun `sut returns match result`() {
         // Arrange
         val lottos = listOf(
-            Lotto(LottoNumber(listOf(3, 4, 5, 6, 7, 27))),
-            Lotto(LottoNumber(listOf(5, 7, 13, 27, 31, 45)))
+            Lotto(
+                LottoNumbers(
+                    listOf(
+                        LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6), LottoNumber(7), LottoNumber(27),
+                    )
+                )
+            ),
+            Lotto(
+                LottoNumbers(
+                    listOf(
+                        LottoNumber(5),
+                        LottoNumber(7),
+                        LottoNumber(13),
+                        LottoNumber(27),
+                        LottoNumber(31),
+                        LottoNumber(45),
+                    )
+                )
+            )
         )
 
         val winningNumber = WinningNumber(
