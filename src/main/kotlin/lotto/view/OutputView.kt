@@ -12,8 +12,7 @@ class OutputView {
         println("${count}개를 구매했습니다.")
     }
 
-    // 로또 당첨 번호 출력
-    fun printNumber(lottos: List<Lotto>) {
+    fun printWinNumbers(lottos: List<Lotto>) {
         lottos
             .forEach { lottoNumber ->
                 println("[${lottoNumber.numbers.map { it.number }.joinToString()}]")

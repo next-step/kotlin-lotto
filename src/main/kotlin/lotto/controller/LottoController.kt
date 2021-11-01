@@ -25,7 +25,7 @@ object LottoController {
 
     private fun generateLottos(price: Price): List<Lotto> {
         val purchasedLotto = LottoNumberListGenerator(price).generateLottoList()
-        outputView.printNumber(purchasedLotto)
+        outputView.printWinNumbers(purchasedLotto)
         return purchasedLotto
     }
 
