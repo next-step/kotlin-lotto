@@ -1,6 +1,6 @@
 package lotto.model
 
-class Lotto(
+data class Lotto(
     val price: Int,
     val numbers: LottoNumbers
 ) {
@@ -10,4 +10,6 @@ class Lotto(
     }
 
     fun match(numbers: LottoNumbers): Int = this.numbers.match(numbers)
+
+    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
 }

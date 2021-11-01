@@ -1,22 +1,22 @@
 package lotto.model
 
-private const val RANK_MATCH_FIRST = 6
-private const val RANK_MATCH_SECOND = 5
-private const val RANK_MATCH_THIRD = 4
-private const val RANK_MATCH_FOURTH = 3
-private const val RANK_MATCH_FIFTH = 2
-
 enum class LottoRank(
     val winnings: Int,
     val match: Int
 ) {
-    First(2_000_000_000, RANK_MATCH_FIRST),
-    Second(1_500_000, RANK_MATCH_SECOND),
-    Third(50_000, RANK_MATCH_THIRD),
-    Fourth(10_000, RANK_MATCH_FOURTH),
-    Fifth(5_000, RANK_MATCH_FIFTH);
+    First(2_000_000_000, 6),
+    Second(30_000_000, 5),
+    Third(1_5000_000, 5),
+    Fourth(50_000, 4),
+    Fifth(5_000, 3);
 
     companion object {
-        fun find(match: Int): LottoRank? = values().find { it.match == match }
+        fun valueOf(match: Int, bonus: Boolean): LottoRank? = when (match) {
+            First.match -> First
+            Second.match -> if (bonus) Second else Third
+            Fourth.match -> Fourth
+            Fifth.match -> Fifth
+            else -> null
+        }
     }
 }

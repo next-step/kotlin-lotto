@@ -17,7 +17,8 @@ class LottoController {
         outputView.printLottoList(lottoList)
 
         val winnerNumbers = inputView.getWinnerLottoNumbers()
-        val result = LottoResult(lottoList, winnerNumbers)
+        val bonus = inputView.getBonusLottoNumber()
+        val result = LottoResult.of(lottoList, winnerNumbers, bonus)
         outputView.printLottoResult(result)
     }
 }

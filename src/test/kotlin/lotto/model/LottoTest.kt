@@ -10,10 +10,7 @@ class LottoTest {
     @Test
     fun lottoPrice() {
         assertThrows<RuntimeException> {
-            Lotto(
-                price = -5000,
-                numbers = LottoNumbers(1, 2, 3, 4, 5, 6)
-            )
+            LottoCreator.random(price = -5000)
         }
     }
 }

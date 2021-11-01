@@ -3,43 +3,68 @@ package lotto.model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoResultTest {
 
-    @DisplayName("같은 번호가 5개 일치하면 2등이 된다.")
+    @DisplayName("같은 번호가 3개 일치하면 5등이 된다.")
     @Test
     fun lottoResultWinners() {
-        val lotto = Lotto(
-            price = 1000,
-            numbers = LottoNumbers(1, 2, 3, 4, 5, 6)
-        )
-        val winLottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 10)
-        val result = LottoResult(listOf(lotto), winLottoNumbers)
+        val lotto = LottoCreator.manualZeroPrice(1, 2, 3, 4, 5, 6)
+        val winLottoNumbers = LottoNumbers.manual(1, 2, 3, 10, 11, 12)
+        val bonus = LottoNumber(45)
+        val result = LottoResult.of(listOf(lotto), winLottoNumbers, bonus)
 
-        val expected = 1
-        val actual = result.winners(LottoRank.Second)
-
-        assertThat(actual).isEqualTo(expected)
+        val actual = result.winners(LottoRank.Fifth)
+        assertThat(actual).isOne
     }
 
-    @DisplayName("14,000원으로 5등이 1개 당첨된 경우 수익률은 0.35가 된다.")
+    @DisplayName("14,000원으로 5,000원을 얻으면 수익률은 0.35가 된다.")
     @Test
     fun lottoRateOfReturn() {
-        val lotto = Lotto(
-            price = 1000,
-            numbers = LottoNumbers(10, 11, 12, 13, 14, 15)
-        )
-        val fifthLotto = Lotto(
-            price = 1000,
-            numbers = LottoNumbers(10, 2, 12, 13, 14, 6)
-        )
-        val winLottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 10)
-        val lottoList = List(13) { lotto } + fifthLotto
-        val result = LottoResult(lottoList, winLottoNumbers)
+        val lotto = LottoCreator.manual(price = 14000, 1, 2, 3, 4, 5, 6)
+        val winLottoNumbers = LottoNumbers.manual(1, 2, 3, 10, 11, 12)
+        val bonus = LottoNumber(45)
+        val result = LottoResult.of(listOf(lotto), winLottoNumbers, bonus)
 
         val expected = 0.35f
         val actual = result.rateOfReturn
-
         assertThat(actual).isEqualTo(expected)
+    }
+
+    @DisplayName("당첨 로또와 보너스 볼의 숫자가 중복되면 RuntimeException 예외가 발생한다.")
+    @Test
+    fun lottoResultDuplicateBonus() {
+        val lotto = LottoCreator.manualZeroPrice(1, 2, 3, 4, 5, 6)
+        val winLottoNumbers = LottoNumbers.manual(1, 2, 3, 4, 5, 6)
+        val bonus = LottoNumber(1)
+
+        assertThrows<RuntimeException> {
+            LottoResult.of(listOf(lotto), winLottoNumbers, bonus)
+        }
+    }
+
+    @DisplayName("번호가 5개 일치한 상태에서 보너스 볼을 맞추면 2등이 된다.")
+    @Test
+    fun lottoResultSecondRank() {
+        val lotto = LottoCreator.manualZeroPrice(1, 2, 3, 4, 5, 7)
+        val win = LottoNumbers.manual(1, 2, 3, 4, 5, 6)
+        val bonus = LottoNumber(7)
+        val result = LottoResult.of(listOf(lotto), win, bonus)
+
+        val actual = result.winners(LottoRank.Second)
+        assertThat(actual).isOne
+    }
+
+    @DisplayName("번호가 5개 일치한 상태에서 보너스 볼을 맞추지 못하면 3등이 된다.")
+    @Test
+    fun lottoResultKeepRank() {
+        val lotto = LottoCreator.manualZeroPrice(1, 2, 3, 4, 5, 8)
+        val win = LottoNumbers.manual(1, 2, 3, 4, 5, 6)
+        val bonus = LottoNumber(7)
+        val result = LottoResult.of(listOf(lotto), win, bonus)
+
+        val actual = result.winners(LottoRank.Third)
+        assertThat(actual).isOne
     }
 }
