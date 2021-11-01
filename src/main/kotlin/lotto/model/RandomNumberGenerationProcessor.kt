@@ -7,8 +7,10 @@ object RandomNumberGenerationProcessor {
     private const val NUMBER_START = 0
     private const val NUMBER_END = 6
 
-    fun generateNumbers(range: List<Int>): List<Int> =
-        (range)
+    fun generateNumbers(range: List<Int>): List<Int> {
+        require(range.size > 6)
+        return (range)
             .shuffled()
             .subList(NUMBER_START, NUMBER_END)
+    }
 }
