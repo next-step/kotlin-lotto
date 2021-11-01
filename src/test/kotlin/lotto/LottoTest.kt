@@ -27,7 +27,7 @@ class LottoTest {
 
     @ValueSource(ints = [10, -199, 134256])
     @ParameterizedTest
-    @DisplayName("구매 금액을 올바르게 입력하지 않은 경우")
+    @DisplayName("구매 금액의 범위에 맞지 않는 숫자가 입력된 경우")
     fun `incorrect purchase amount`(price: Int) {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Price(price) }
@@ -36,7 +36,7 @@ class LottoTest {
 
     @NullSource
     @ParameterizedTest
-    @DisplayName("구매 금액을 입력하지 않은 경우")
+    @DisplayName("구매 금액에 null이 입려된 경우")
     fun `null of purchase amount`(price: Int?) {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Price(price) }

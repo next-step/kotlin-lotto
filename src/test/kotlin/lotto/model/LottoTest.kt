@@ -25,7 +25,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 리스트의 사이즈가 맞지 않는 경우")
+    @DisplayName("로또 형식이 맞지 않는 경우")
     fun `check lotto list format`() {
         // given
         val lottoList = listOf(LottoNumber(21), LottoNumber(32), LottoNumber(1), LottoNumber(13), LottoNumber(23), LottoNumber(33), LottoNumber(43))
@@ -37,7 +37,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 리스트의 중복된 숫자가 있는 경우")
+    @DisplayName("로또 중복된 숫자가 있는 경우")
     fun `check duplicated lotto item`() {
         // given
         val lottoList = listOf(LottoNumber(10), LottoNumber(10), LottoNumber(10), LottoNumber(13), LottoNumber(23), LottoNumber(33))
