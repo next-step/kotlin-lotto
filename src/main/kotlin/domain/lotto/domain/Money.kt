@@ -12,7 +12,11 @@ value class Money(private val money: Int = DEFAULT_MONEY) {
 
     fun numberOfPurchases(productPrice: Int): Int = Math.floorDiv(money, productPrice)
 
-    fun yield(other: Money): Double = other.money.toDouble().div(money.toDouble())
+    fun yield(other: Money): Double {
+        val otherMoney = other.money
+        val otherMoneyDouble = otherMoney.toDouble()
+        return otherMoneyDouble.div(money.toDouble())
+    }
 
     companion object {
         private const val DEFAULT_MONEY = 0

@@ -10,5 +10,6 @@ object LottoService {
     fun lottos(money: Money, shuffleStrategy: LottoShuffleStrategy) =
         Lottos.from(money.numberOfPurchases(Lotto.PRICE), shuffleStrategy)
 
-    fun match(lottos: Lottos, winningLotto: Lotto): MatchResult = MatchResult.of(lottos.match(winningLotto))
+    fun match(lottos: Lottos, winningLotto: Lotto): MatchResult =
+        MatchResult.of(lottos.match(winningLotto))
 }

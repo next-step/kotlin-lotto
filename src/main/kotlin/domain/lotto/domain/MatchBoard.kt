@@ -9,9 +9,7 @@ enum class MatchBoard(val numberOfMatch: Int, val matchPrize: Int) {
 
     companion object {
         fun values(numberOfMatch: Int): MatchBoard =
-            values().asSequence()
-                .find { it.numberOfMatch == numberOfMatch }
-                ?: MISS
+            values().find { it.numberOfMatch == numberOfMatch } ?: MISS
 
         fun valuesExcludedMiss(): List<MatchBoard> = values().filterNot { it == MISS }
     }

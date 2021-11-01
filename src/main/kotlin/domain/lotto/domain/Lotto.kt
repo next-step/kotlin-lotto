@@ -5,9 +5,7 @@ import domain.lotto.strategy.LottoShuffleStrategy
 import global.strategy.split.SplitStrategy
 
 @JvmInline
-value class Lotto private constructor(private val _lotto: Set<LottoNumber>) {
-    val lotto: Set<LottoNumber>
-        get() = _lotto.toSortedSet()
+value class Lotto private constructor(val lotto: Set<LottoNumber>) {
 
     fun match(other: Lotto): Int = other.lotto.count { lotto.contains(it) }
 
@@ -30,8 +28,11 @@ value class Lotto private constructor(private val _lotto: Set<LottoNumber>) {
                     .toSortedSet()
             )
 
-        fun of(lotto: Set<LottoNumber>): Lotto =
-            if (lotto.size == TO_INDEX) Lotto(lotto.toSortedSet())
-            else throw InvalidLottoNumberSizeException(lotto.size)
+        fun of(lotto: Set<LottoNumber>): Lotto {
+            if (lotto.size < TO_INDEX || lotto.size > TO_INDEX) {
+                throw InvalidLottoNumberSizeException(lotto.size)
+            }
+            return Lotto(lotto.toSortedSet())
+        }
     }
 }

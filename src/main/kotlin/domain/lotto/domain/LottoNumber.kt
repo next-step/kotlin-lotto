@@ -5,9 +5,7 @@ import domain.lotto.error.InvalidLottoNumberRangeException
 @JvmInline
 value class LottoNumber private constructor(val lottoNumber: Int) : Comparable<LottoNumber> {
     init {
-        if (!((MINIMUM..MAXIMUM).contains(lottoNumber))) {
-            throw InvalidLottoNumberRangeException(lottoNumber)
-        }
+        validateLottoNumberRange(lottoNumber)
     }
 
     override fun compareTo(other: LottoNumber): Int = lottoNumber.compareTo(other.lottoNumber)
@@ -18,12 +16,16 @@ value class LottoNumber private constructor(val lottoNumber: Int) : Comparable<L
         private const val MAXIMUM = 45
 
         fun of(lottoNumber: Int): LottoNumber {
-            if (!((MINIMUM..MAXIMUM).contains(lottoNumber))) {
-                throw InvalidLottoNumberRangeException(lottoNumber)
-            }
+            validateLottoNumberRange(lottoNumber)
             return CACHE.getValue(lottoNumber)
         }
 
         fun values(): List<LottoNumber> = CACHE.values.toList()
+
+        private fun validateLottoNumberRange(lottoNumber: Int) {
+            if (!((MINIMUM..MAXIMUM).contains(lottoNumber))) {
+                throw InvalidLottoNumberRangeException(lottoNumber)
+            }
+        }
     }
 }
