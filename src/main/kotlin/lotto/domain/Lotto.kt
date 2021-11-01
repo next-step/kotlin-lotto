@@ -17,15 +17,9 @@ class Lotto(
             }
             .filter { it }
 
-        val rank = when (matchCount.size) {
-            SIX_MATCH -> Rank.FIRST
-            FIVE_MATCH -> Rank.SECOND
-            FOUR_MATCH -> Rank.THIRD
-            THREE_MATCH -> Rank.FOURTH
-            else -> Rank.BLANK
-        }
+        val isMatchedBonusNumber = winningNumber.isMatchedBonusNumber(numbers)
 
-        return rank
+        return Rank.findBy(matchCount.size, isMatchedBonusNumber)
     }
 
     override fun toString(): String {
@@ -34,9 +28,5 @@ class Lotto(
 
     companion object {
         private const val NUMBER_SIZE = 6
-        private const val SIX_MATCH = 6
-        private const val FIVE_MATCH = 5
-        private const val FOUR_MATCH = 4
-        private const val THREE_MATCH = 3
     }
 }

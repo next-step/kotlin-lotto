@@ -23,11 +23,13 @@ fun main() {
     outputView.printLotto(lottos)
 
     val winningNumbers = inputView.inputWinningNumber()
+    val bonusNumber = inputView.inputBonusNumber()
 
     lottoGame
         .statistics(
             winningNumbers = winningNumbers,
             lottos = lottos,
+            bonusNumber = bonusNumber,
         )
         .let { statistics ->
             outputView.printStatistics(statistics)

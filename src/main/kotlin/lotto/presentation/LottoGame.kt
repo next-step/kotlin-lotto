@@ -20,8 +20,9 @@ class LottoGame(
     fun statistics(
         winningNumbers: List<Int>,
         lottos: List<Lotto>,
+        bonusNumber: Int,
     ): LottoStatistics {
-        val winningNumber = WinningNumber(winningNumbers)
+        val winningNumber = WinningNumber(winningNumbers, bonusNumber)
         val winningStatistics = winningsChecker.confirmWinning(
             lottos = lottos,
             winningNumber = winningNumber
