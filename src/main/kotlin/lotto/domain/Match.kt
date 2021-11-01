@@ -10,13 +10,18 @@ enum class Match(val prize: Int) {
 
     companion object {
         fun valueOf(count: Int, isBonus: Boolean): Match {
-            return when (count) {
-                3 -> THREE
-                4 -> FOUR
-                5 -> if (isBonus) BONUS else FIVE
-                6 -> SIX
-                else -> NONE
-            }
+            return mapper.getOrDefault(Pair(count, isBonus), NONE)
         }
+
+        private val mapper = mapOf(
+            Pair(3, true) to THREE,
+            Pair(3, false) to THREE,
+            Pair(4, true) to FOUR,
+            Pair(4, false) to FOUR,
+            Pair(5, true) to BONUS,
+            Pair(5, false) to FIVE,
+            Pair(6, true) to SIX,
+            Pair(6, false) to SIX,
+        )
     }
 }
