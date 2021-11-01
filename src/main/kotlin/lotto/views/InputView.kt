@@ -17,7 +17,25 @@ object InputView {
         return readLine()?.toIntOrNull() ?: askBonusNumber()
     }
 
+    tailrec fun askManualLottoCount(): Int {
+        println(MANUAL_LOTTO_COUNT_QUESTION)
+        return readLine()?.toIntOrNull() ?: askManualLottoCount()
+    }
+
+    fun askManualLottos(count: Int): List<String> {
+        println(ASK_MANUAL_LOTTOS_QUESTION)
+        return (1..count).map {
+            getManualLotto()
+        }
+    }
+
+    tailrec fun getManualLotto(): String {
+        return readLine() ?: getManualLotto()
+    }
+
     private const val LOTTO_BUDGET_QUESTION = "구입금액을 입력해 주세요."
     private const val WINNING_LOTTO_QUESTION = "지난 주 당첨 번호를 입력해 주세요."
     private const val BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요."
+    private const val MANUAL_LOTTO_COUNT_QUESTION = "수동으로 구매할 로또 수를 입력해 주세요."
+    private const val ASK_MANUAL_LOTTOS_QUESTION = "수동으로 구매할 번호를 입력해 주세요."
 }

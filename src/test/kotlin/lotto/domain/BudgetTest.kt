@@ -24,12 +24,20 @@ internal class BudgetTest {
         val expected = givenValue / lottoPrice
 
         // then
-        assertThat(budget.getLottoCount()).isEqualTo(expected)
+        assertThat(budget.getTotalLottoCount()).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [100, 500, 900])
     fun `예산에 최소 로또 금액을 입력하지 않으면 예외를 던진다`(givenValue: Int) {
         assertThrows<IllegalArgumentException> { Budget.valueOf(givenValue) }
+    }
+
+    @Test
+    fun `남은 갯수를 리턴한다`() {
+        val givenBudget = Budget.valueOf(4000)
+        val manualCount = 2
+
+        assertThat(givenBudget.getRemainCount(manualCount)).isEqualTo(2)
     }
 }

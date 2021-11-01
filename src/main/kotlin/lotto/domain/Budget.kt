@@ -9,13 +9,17 @@ value class Budget private constructor(val value: Int) {
         require(value >= LOTTO_PRICE) { throw IllegalArgumentException(MINIMUM_VALUE_REQUIRED) }
     }
 
-    fun getLottoCount(): Int {
+    fun getTotalLottoCount(): Int {
         return value / LOTTO_PRICE
     }
 
     fun getProfit(compareAmount: Int): BigDecimal {
         val convertedAmount = compareAmount.toBigDecimal()
         return convertedAmount.divide(value.toBigDecimal(), NUMBER_FORMAT, RoundingMode.DOWN)
+    }
+
+    fun getRemainCount(count: Int): Int {
+        return getTotalLottoCount() - count
     }
 
     companion object {

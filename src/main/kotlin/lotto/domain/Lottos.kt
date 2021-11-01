@@ -9,9 +9,14 @@ data class Lottos(val lottos: List<Lotto>) {
     }
 
     companion object {
-        fun createLottos(budgets: Budget): Lottos {
-            val lottoGenerator = LottoGenerator(RandomNumberGenerator())
-            return Lottos(lottoGenerator.generateLottos(budgets))
+        fun createLottos(purchaseInformation: PurchaseInformation): Lottos {
+            val lottoAutoGenerator = LottoAutoGenerator(purchaseInformation)
+            val autoGenerateLottos = lottoAutoGenerator.generateLottos()
+
+            val lottoManualGenerator = LottoManualGenerator(purchaseInformation)
+            val manualGenerateLottos = lottoManualGenerator.generateLottos()
+
+            return Lottos(autoGenerateLottos + manualGenerateLottos)
         }
     }
 }

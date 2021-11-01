@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class LottoGeneratorTest {
+internal class LottoAutoGeneratorTest {
 
     @ParameterizedTest
     @ValueSource(ints = [1000, 5000, 10_000])
@@ -12,10 +12,11 @@ internal class LottoGeneratorTest {
         // given
         val budget = Budget.valueOf(givenValue)
         val lottoPrice = 1000
-        val lottoGenerator = LottoGenerator(RandomNumberGenerator())
+        val purchaseInformation = PurchaseInformation(budget, 0)
+        val lottoAutoGenerator = LottoAutoGenerator(purchaseInformation)
 
         // when
-        val actual = lottoGenerator.generateLottos(budget)
+        val actual = lottoAutoGenerator.generateLottos()
 
         // then
         assertThat(actual).hasSize(givenValue / lottoPrice)
