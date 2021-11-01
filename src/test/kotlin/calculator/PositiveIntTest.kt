@@ -19,22 +19,37 @@ class PositiveIntTest {
 
     @Test
     fun `문자로부터 양의 정수 생성`() {
-        assertDoesNotThrow {
-            PositiveInt("0")
-        }
+        // given
+        val value = "0"
+
+        // when
+        val create = { PositiveInt(value) }
+
+        // then
+        assertDoesNotThrow(create)
     }
 
     @Test
     fun `숫자가 아닌 경우 예외`() {
-        assertThrows<RuntimeException> {
-            PositiveInt("a")
-        }
+        // given
+        val value = "a"
+
+        // when
+        val create: () -> Unit = { PositiveInt(value) }
+
+        // then
+        assertThrows<RuntimeException>(create)
     }
 
     @Test
     fun `양의 정수가 아닌 경우 예외`() {
-        assertThrows<RuntimeException> {
-            PositiveInt(-1)
-        }
+        // given
+        val value = -1
+
+        // when
+        val create: () -> Unit = { PositiveInt(value) }
+
+        // then
+        assertThrows<RuntimeException>(create)
     }
 }

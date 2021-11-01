@@ -22,11 +22,9 @@ object Calculator {
             ?: return ParseResult(expression, DEFAULT_DELIMITERS)
         return ParseResult(
             result.groupValues[EXPRESSION_INDEX],
-            result.groupValues[DELIMITER_INDEX],
+            DEFAULT_DELIMITERS + result.groupValues[DELIMITER_INDEX],
         )
     }
 
-    private data class ParseResult(val expression: String, val delimiters: List<String>) {
-        constructor(expression: String, delimiter: String) : this(expression, listOf(delimiter))
-    }
+    private data class ParseResult(val expression: String, val delimiters: List<String>)
 }
