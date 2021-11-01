@@ -14,11 +14,11 @@ object LottoController {
     fun runLottoGame() {
         val price = inputPrice()
         val purchasedLottoList = generateLottos(price)
-        getResult(price, purchasedLottoList)
+        printResult(price, purchasedLottoList)
     }
 
     private fun inputPrice(): Price {
-        val price = Price(inputView.inputLottoPrice())
+        val price = Price(inputView.takePurchasedPrice())
         outputView.resultLottoCount(price.lottoCount)
         return price
     }
@@ -29,7 +29,7 @@ object LottoController {
         return purchasedLotto
     }
 
-    private fun getResult(price: Price, purchasedLotto: List<Lotto>) {
+    private fun printResult(price: Price, purchasedLotto: List<Lotto>) {
         val winNumberList = inputView.inputLastLottoWinNumber()
         val lottos = Lottos.inputWinNumber(price, purchasedLotto, winNumberList)
         val result = lottos.compareLottoResult()
