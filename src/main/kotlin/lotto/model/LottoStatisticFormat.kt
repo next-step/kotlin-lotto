@@ -7,7 +7,10 @@ data class LottoStatisticFormat(
     val purchasedPrice: Price,
     val winList: HashMap<LottoRank, Int>,
 ) {
-    private val totalPrice: Int = LottoRank.values().filter { it != LottoRank.MISS }.sumOf { getRankProfit(it) }
+    private val totalPrice: Int = LottoRank
+        .values()
+        .filter { it != LottoRank.MISS }
+        .sumOf { getRankProfit(it) }
 
     val profit: String = String.format(
         FORMAT_PROFIT,
