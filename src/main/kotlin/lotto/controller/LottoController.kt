@@ -1,5 +1,9 @@
-package lotto.model
+package lotto.controller
 
+import lotto.model.Lotto
+import lotto.model.LottoNumberListProcessor
+import lotto.model.Lottos
+import lotto.model.Price
 import lotto.view.InputView
 import lotto.view.OutputView
 
