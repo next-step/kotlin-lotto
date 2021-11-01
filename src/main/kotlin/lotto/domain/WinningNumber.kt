@@ -5,14 +5,14 @@ import lotto.exception.InvalidWinningNumberException
 import lotto.exception.InvalidWinningNumberException.Companion.INVALID_WINNING_NUMBER_MESSAGE
 
 class WinningNumber(
-    winningNumbers: List<String>,
+    value: List<String>,
 ) {
-    val winningNumbers: List<LottoNumber> = winningNumbers.map {
+    val winningNumbers: List<LottoNumber> = value.map {
         LottoNumber(it.toInt())
     }
 
     init {
-        if (winningNumbers.isEmpty() || winningNumbers.size != LOTTO_SIZE) {
+        if (value.isEmpty() || value.size != LOTTO_SIZE) {
             throw InvalidWinningNumberException(INVALID_WINNING_NUMBER_MESSAGE)
         }
     }
