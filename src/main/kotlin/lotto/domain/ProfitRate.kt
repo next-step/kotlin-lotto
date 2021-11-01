@@ -25,7 +25,6 @@ class ProfitRate(
     }
 
     companion object {
-        private const val DEFAULT_ZERO = 0
         private const val PROFIT_RATE_PATTERN = "#.##"
     }
 }

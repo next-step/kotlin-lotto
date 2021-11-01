@@ -1,7 +1,11 @@
 package lotto.domain.generator
 
 import lotto.domain.Lotto
-import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoOperator.LOTTO_FIRST_INDEX
+import lotto.domain.LottoOperator.LOTTO_FIRST_NUMBER
+import lotto.domain.LottoOperator.LOTTO_LAST_INDEX
+import lotto.domain.LottoOperator.LOTTO_LAST_NUMBER
 
 class LottoAutoStrategy : LottoGeneratorStrategy {
 
@@ -16,19 +20,12 @@ class LottoAutoStrategy : LottoGeneratorStrategy {
             .toList()
     }
 
-    private fun generateLottoNumber(): LottoNumber {
+    private fun generateLottoNumber(): LottoNumbers {
         val lottoNumbers = lottoNumbers
             .shuffled()
             .subList(LOTTO_FIRST_INDEX, LOTTO_LAST_INDEX)
             .sorted()
             .toList()
-        return LottoNumber(lottoNumbers)
-    }
-
-    companion object {
-        private const val LOTTO_FIRST_NUMBER = 1
-        private const val LOTTO_LAST_NUMBER = 45
-        private const val LOTTO_FIRST_INDEX = 0
-        private const val LOTTO_LAST_INDEX = 6
+        return LottoNumbers(lottoNumbers)
     }
 }
