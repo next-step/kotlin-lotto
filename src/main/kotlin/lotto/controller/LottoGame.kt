@@ -14,11 +14,13 @@ import lotto.view.OutputView
 object LottoGame {
     fun run() {
         val purchase = Purchase(InputView.askPurchase())
-        val lottos = Lottos.of(
-            purchase.calculateQuantity(Lotto.PRICE),
+        val manualLottos = Lottos.from(InputView.askManualLottos())
+        val autoLottos = Lottos.of(
+            purchase.calculateQuantity(Lotto.PRICE) - manualLottos.size(),
             RandomGeneratorFactory(LottoNumber.MIN, LottoNumber.MAX)
         )
-        OutputView.printLottos(LottosDto.from(lottos))
+        val lottos = manualLottos.merge(autoLottos)
+        OutputView.printLottos(LottosDto.from(manualLottos.size(), autoLottos.size(), lottos))
 
         val winningLotto = Lotto.from(InputView.askWinningNumbers())
         val bonus = LottoNumber(InputView.askBonus())
