@@ -12,13 +12,15 @@ import lotto.view.OutputView
 fun main() {
     val inputPrice = InputView.inputPrice() ?: 0
     val lottoCount = Price(inputPrice).getLottoCount()
-    InputView.printBoughtLotto(lottoCount)
+    OutputView.printBoughtLotto(lottoCount)
 
     val lottos = LottoGenerator().generate(lottoCount, LottoAutoStrategy())
     OutputView.printBoughtLottos(lottos)
 
     val inputWinningNumber: List<String> = InputView.inputWinningNumber()
     val winningNumber = WinningNumber(inputWinningNumber)
+
+    val inputBonusNumber = InputView.inputBonusNumber() ?: 0
 
     val matchResult = Lottos(lottos).matchWinningNumber(winningNumber.winningNumbers)
     OutputView.printLottoMatchResult(matchResult)

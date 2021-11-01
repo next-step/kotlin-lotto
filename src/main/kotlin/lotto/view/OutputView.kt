@@ -14,6 +14,11 @@ class OutputView {
         private const val PREFIX = "["
         private const val POSTFIX = "]"
         private const val PRINT_LOTTO_RESULT = "당첨 통계"
+        private const val BOUGHT_LOTTO_MESSAGE = "개를 구매했습니다."
+
+        fun printBoughtLotto(lottoCount: Int) {
+            println("${lottoCount}$BOUGHT_LOTTO_MESSAGE")
+        }
 
         fun printBoughtLottos(lottos: List<Lotto>) {
             repeat(lottos.size) {
