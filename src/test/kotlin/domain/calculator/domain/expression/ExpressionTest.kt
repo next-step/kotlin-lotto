@@ -13,17 +13,15 @@ import org.junit.jupiter.params.provider.ValueSource
 class ExpressionTest {
 
     @Test
-    fun `null 값이 들어오면 0값 문자열을 반환한다`() {
-        val nullString: String? = null
-        val expression = Expression(nullString, CustomSeparatorRegexStrategy)
+    fun `디폴트 값으로 0 문자열을 반환한다`() {
+        val expression = Expression(regexStrategy = CustomSeparatorRegexStrategy)
 
         assertThat(expression.calculateExpression()).isEqualTo("0")
     }
 
-    @ParameterizedTest(name = "공백 연산값: `{0}`")
-    @ValueSource(strings = ["", " ", "   "])
-    fun `공백값으로 이루어진 문자열이 들어오면 0값 문자열을 반환한다`(emptyString: String) {
-        val expression = Expression(emptyString, CustomSeparatorRegexStrategy)
+    @Test
+    fun `공백값으로 이루어진 문자열이 들어오면 0값 문자열을 반환한다`() {
+        val expression = Expression(regexStrategy = CustomSeparatorRegexStrategy)
 
         assertThat(expression.calculateExpression()).isEqualTo("0")
     }

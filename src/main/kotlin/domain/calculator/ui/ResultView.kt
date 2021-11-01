@@ -1,7 +1,7 @@
 package domain.calculator.ui
 
 import domain.calculator.ui.ViewConstants.OUTPUT_RESULT_MESSAGE
-import global.strategy.OutputStrategy
+import global.strategy.ui.OutputStrategy
 
 class ResultView(private val outputStrategy: OutputStrategy) {
     fun output(element: String) = outputStrategy.output(OUTPUT_RESULT_MESSAGE + element)
