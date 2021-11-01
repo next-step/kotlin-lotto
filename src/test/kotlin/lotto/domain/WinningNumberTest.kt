@@ -20,7 +20,7 @@ class WinningNumberTest {
         val winningNumber = WinningNumber(inputWinningNumber)
 
         // Assert
-        assertThat(winningNumber.winningNumbers).hasSize(6)
+        assertThat(winningNumber.value).hasSize(6)
     }
 
     @Test

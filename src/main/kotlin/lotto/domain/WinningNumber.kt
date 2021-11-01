@@ -7,7 +7,7 @@ import lotto.exception.InvalidWinningNumberException.Companion.INVALID_WINNING_N
 class WinningNumber(
     value: List<String>,
 ) {
-    val winningNumbers: List<LottoNumber> = value.map {
+    val value: List<LottoNumber> = value.map {
         LottoNumber(it.toInt())
     }
 
