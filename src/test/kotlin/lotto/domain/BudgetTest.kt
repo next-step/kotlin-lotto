@@ -34,14 +34,6 @@ internal class BudgetTest {
     }
 
     @Test
-    fun `에산으로 수동구매 갯수 가능여부를 리턴한다`() {
-        val givenBudget = Budget.valueOf(2000)
-        val manualCount = 1
-
-        assertThat(givenBudget.validateManualCount(manualCount)).isTrue
-    }
-
-    @Test
     fun `남은 갯수를 리턴한다`() {
         val givenBudget = Budget.valueOf(4000)
         val manualCount = 2

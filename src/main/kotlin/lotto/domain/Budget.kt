@@ -18,10 +18,6 @@ value class Budget private constructor(val value: Int) {
         return convertedAmount.divide(value.toBigDecimal(), NUMBER_FORMAT, RoundingMode.DOWN)
     }
 
-    fun validateManualCount(manualCount: Int): Boolean {
-        return getTotalLottoCount() >= manualCount
-    }
-
     fun getRemainCount(count: Int): Int {
         return getTotalLottoCount() - count
     }
