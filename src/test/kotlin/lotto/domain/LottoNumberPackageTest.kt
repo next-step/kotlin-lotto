@@ -2,6 +2,7 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatCode
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -264,9 +265,6 @@ internal class LottoNumberPackageTest {
         ]
     )
     fun `당첨 번호가 6개를 입력하면 정상적으로 WinningInfo 가 생성된다`(input: String) {
-        val winningInfo = LottoNumberPackage.from(input)
-
-        assertThat(winningInfo).isNotNull
-        assertThat(winningInfo.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
+        assertThatCode { LottoNumberPackage.from(input) }.doesNotThrowAnyException()
     }
 }
