@@ -8,7 +8,7 @@ enum class MatchBoard(val numberOfMatch: Int, val matchPrize: Int) {
     FIRST(6, 2_000_000_000);
 
     companion object {
-        fun values(numberOfMatch: Int): MatchBoard =
+        fun values(numberOfMatch: Int, isMatchBonus: Boolean): MatchBoard =
             values().find { it.numberOfMatch == numberOfMatch } ?: MISS
 
         fun valuesExcludedMiss(): List<MatchBoard> = values().filterNot { it == MISS }

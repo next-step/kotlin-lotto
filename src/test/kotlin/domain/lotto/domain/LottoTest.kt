@@ -78,7 +78,8 @@ class LottoTest {
         value = [
             "1, 2, 3, 4, 5, 6:1:true", "1, 2, 3, 4, 5, 6:6:true", "1, 2, 3, 4, 5, 6:7:false",
             "40, 41, 42, 43, 44, 45:40:true", "40, 41, 42, 43, 44, 45:45:true", "40, 41, 42, 43, 44, 45:39:false"
-        ], delimiter = ':'
+        ],
+        delimiter = ':'
     )
     fun `동일한 로또 번호를 가지고 있는지 여부를 반환한다`(lottoString: String, bonusBall: Int, expected: Boolean) {
         val lotto = Lotto.of(lottoString) { it.split(",") }
