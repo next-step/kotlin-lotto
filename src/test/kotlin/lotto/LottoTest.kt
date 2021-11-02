@@ -13,7 +13,7 @@ class LottoTest {
         val lottos = Lottos.buy(1000)
 
         // when
-        val purchaseLottos = lottos.toList()
+        val purchaseLottos = lottos.getLottos()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(1)
@@ -25,7 +25,7 @@ class LottoTest {
         val lotto = Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
 
         // then
-        assertThat(lotto.toNumberList().size).isEqualTo(6)
+        assertThat(lotto.getLottoNumbers().size).isEqualTo(6)
     }
 
     @Test
@@ -54,7 +54,7 @@ class LottoTest {
         val lottos = Lottos.buy(14000)
 
         // when
-        val purchaseLottos = lottos.toList()
+        val purchaseLottos = lottos.getLottos()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(14)

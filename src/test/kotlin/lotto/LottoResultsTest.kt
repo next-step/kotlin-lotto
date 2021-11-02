@@ -24,7 +24,7 @@ class LottoResultsTest {
 
         // when
         val firstPrize = LottoPrize.FIRST.prize
-        val correspondLottoResult = lottoResults.toList().first() {
+        val correspondLottoResult = lottoResults.getResults().first() {
             val lottoPrize = it.prizeAndCountPair().first
             lottoPrize.prize == firstPrize
         }
@@ -48,7 +48,7 @@ class LottoResultsTest {
 
         // when
         val firstPrize = LottoPrize.SECOND.prize
-        val correspondLottoResult = lottoResults.toList().first() {
+        val correspondLottoResult = lottoResults.getResults().first() {
             val lottoPrize = it.prizeAndCountPair().first
             lottoPrize.prize == firstPrize
         }

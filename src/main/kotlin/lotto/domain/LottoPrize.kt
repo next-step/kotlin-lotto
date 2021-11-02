@@ -9,7 +9,7 @@ enum class LottoPrize(val matchingNumberCount: Int, val prize: Int) {
     MISS(0, 0);
 
     companion object {
-        fun toList() = values().toList()
+        fun getPrizes() = values().toList()
 
         fun valueOf(countOfMatch: Int, matchBonus: Boolean): LottoPrize {
             return values().find {
