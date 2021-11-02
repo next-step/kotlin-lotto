@@ -3,6 +3,7 @@ package domain.lotto.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -22,5 +23,19 @@ class WinningLottoTest {
             { assertThat(winningLotto).isNotNull },
             { assertThat(winningLotto).isExactlyInstanceOf(WinningLotto::class.java) },
         )
+    }
+
+    @ParameterizedTest(name = "당첨 로또 : {0}, 보너스볼: {1}")
+    @CsvSource(
+        value = [
+            "1, 2, 3, 4, 5, 6:1", "1, 2, 3, 4, 5, 6:6",
+            "40, 41, 42, 43, 44, 45:40", "40, 41, 42, 43, 44, 45: 45"], delimiter = ':'
+    )
+    fun `로또 당첨 번호와 보너스 번호가 중복 되어서는 안 된다`(winningLotto: String, bonusBall: Int) {
+        val exception = assertThrows<DuplicateLottoNumberException> {
+            WinningLotto.from(winningLotto, bonusBall) { it.split(", ") }
+        }
+
+        assertThat(exception.message).isEqualTo("")
     }
 }
