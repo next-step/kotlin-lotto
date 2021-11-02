@@ -7,11 +7,16 @@ data class WinningLotto private constructor(val winningLotto: Lotto, val bonusBa
 
     fun isMatchBonusBall(lotto: Lotto): Boolean = lotto.contains(bonusBall)
 
-    fun match(it: Lotto): Int {
-        TODO("Not yet implemented")
+    fun match(lotto: Lotto): Int {
+        if (isMatchBonusBall(lotto)) {
+            return Math.addExact(winningLotto.match(lotto), BONUS_BALL_COUNT)
+        }
+        return winningLotto.match(lotto)
     }
 
     companion object {
+        private const val BONUS_BALL_COUNT = 1
+
         fun from(winningLotto: String, bonusBall: Int, splitStrategy: SplitStrategy): WinningLotto =
             from(Lotto.of(winningLotto, splitStrategy), LottoNumber.of(bonusBall))
 
