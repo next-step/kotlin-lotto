@@ -9,6 +9,8 @@ value class Lotto private constructor(val lotto: Set<LottoNumber>) {
 
     fun match(other: Lotto): Int = other.lotto.count { lotto.contains(it) }
 
+    fun contains(bonusBall: LottoNumber): Boolean = lotto.contains(bonusBall)
+
     companion object {
         const val PRICE = 1_000
         private const val FROM_INDEX = 0

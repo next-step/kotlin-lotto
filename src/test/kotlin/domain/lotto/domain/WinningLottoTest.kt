@@ -30,7 +30,8 @@ class WinningLottoTest {
     @CsvSource(
         value = [
             "1, 2, 3, 4, 5, 6:1", "1, 2, 3, 4, 5, 6:6",
-            "40, 41, 42, 43, 44, 45:40", "40, 41, 42, 43, 44, 45: 45"], delimiter = ':'
+            "40, 41, 42, 43, 44, 45:40", "40, 41, 42, 43, 44, 45: 45"
+        ], delimiter = ':'
     )
     fun `로또 당첨 번호와 보너스 번호가 중복 되어서는 안 된다`(winningLotto: String, bonusBall: Int) {
         val exception = assertThrows<DuplicateBonusBallNumberException> {

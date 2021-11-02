@@ -15,7 +15,7 @@ data class WinningLotto(val winningLotto: Lotto, val bonusBall: LottoNumber) {
         }
 
         private fun validateDuplicateNumber(winningLotto: Lotto, bonusBall: LottoNumber) {
-            if(winningLotto.contain(bonusBall)) {
+            if(winningLotto.contains(bonusBall)) {
                 throw DuplicateBonusBallNumberException(bonusBall.lottoNumber)
             }
         }
