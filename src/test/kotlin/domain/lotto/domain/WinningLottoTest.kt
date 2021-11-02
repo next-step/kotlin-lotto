@@ -1,5 +1,6 @@
 package domain.lotto.domain
 
+import domain.lotto.error.DuplicateBonusBallNumberException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertAll
@@ -32,10 +33,10 @@ class WinningLottoTest {
             "40, 41, 42, 43, 44, 45:40", "40, 41, 42, 43, 44, 45: 45"], delimiter = ':'
     )
     fun `로또 당첨 번호와 보너스 번호가 중복 되어서는 안 된다`(winningLotto: String, bonusBall: Int) {
-        val exception = assertThrows<DuplicateLottoNumberException> {
+        val exception = assertThrows<DuplicateBonusBallNumberException> {
             WinningLotto.from(winningLotto, bonusBall) { it.split(", ") }
         }
 
-        assertThat(exception.message).isEqualTo("")
+        assertThat(exception.message).isEqualTo("보너스 번호 %s 는 중복되었습니다.".format(bonusBall))
     }
 }
