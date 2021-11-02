@@ -55,4 +55,25 @@ class WinningLottoTest {
 
         assertThat(actual).isEqualTo(expected)
     }
+
+    @ParameterizedTest(name = "당첨 로또 : {0}, 보너스볼: {1}")
+    @CsvSource(
+        value = [
+            "1, 2, 3, 4, 5, 6:7:7, 8, 9, 10, 11, 12:1",
+            "2, 3, 4, 5, 6, 7:1:8, 9, 10, 11, 12, 13:0",
+            "1, 2, 3, 4, 5, 6:7:1, 2, 3, 4, 5, 6:6",
+            "1, 2, 3, 4, 5, 6:7:2, 3, 4, 5, 6, 7:6",
+            "40, 41, 42, 43, 44, 45:39:39, 38, 37, 36, 35, 34:1",
+            "39, 40, 41, 42, 43, 44:45:39, 38, 37, 36, 35, 34:0",
+            "40, 41, 42, 43, 44, 45:39:40, 41, 42, 43, 44, 45:6",
+            "40, 41, 42, 43, 44, 45:39:39, 41, 42, 43, 44, 45:6"],
+        delimiter = ':'
+    )
+    fun `보너스 번호를 포함한 당첨 로또와 일치하는 로또 번호 갯수를 반환한다`(winningLotto: String, bonusBall: Int, lotto: String, expected: Int) {
+        val winningLotto = WinningLotto.from(winningLotto, bonusBall) { it.split(", ") }
+        val lotto = Lotto.of(lotto) { it.split(", ") }
+        val actual = winningLotto.match(lotto)
+
+        assertThat(actual).isEqualTo(expected)
+    }
 }
