@@ -1,6 +1,7 @@
 package domain.lotto
 
 import domain.lotto.domain.Lotto
+import domain.lotto.domain.LottoNumber
 import domain.lotto.domain.Money
 import domain.lotto.service.LottoService
 import domain.lotto.strategy.LottoRandomShuffleStrategy
@@ -19,10 +20,22 @@ class LottoApplication(
         lottoResultView.showNumberOfPurchases(money.numberOfPurchases(Lotto.PRICE))
         val lottos = LottoService.lottos(money, LottoRandomShuffleStrategy)
         lottoResultView.showLottos(lottos)
+
         val winningLotto = winningLottoByConsole()
+        val bonusBall: LottoNumber = bonusBallByConsole()
+
         val matchResult = LottoService.match(lottos, winningLotto)
         lottoResultView.showMatchResult(matchResult)
         lottoResultView.showYield(money, Money(matchResult.winnings()))
+    }
+
+    private fun bonusBallByConsole(): LottoNumber {
+        return try {
+            LottoNumber.of(lottoInputView.bonusBall())
+        } catch (e: Exception) {
+            ConsoleOutputStrategy.output(e.message.toString())
+            bonusBallByConsole()
+        }
     }
 
     private fun purchaseLottoByConsole(): Money {

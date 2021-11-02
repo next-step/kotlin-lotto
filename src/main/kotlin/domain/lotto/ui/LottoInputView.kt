@@ -19,8 +19,15 @@ class LottoInputView(
         return consoleInputStrategy.input() ?: throw RuntimeException()
     }
 
+    fun bonusBall(): Int {
+        consoleOutputStrategy.output(BONUS_BALL_MESSAGE)
+        val bonusBall = consoleInputStrategy.input() ?: throw RuntimeException()
+        return bonusBall().toInt()
+    }
+
     companion object {
         private const val PURCHASE_MESSAGE = "구입금액을 입력해 주세요."
         private const val WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
+        private const val BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요."
     }
 }
