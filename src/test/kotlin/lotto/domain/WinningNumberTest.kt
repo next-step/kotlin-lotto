@@ -11,15 +11,19 @@ import org.junit.jupiter.api.assertThrows
 class WinningNumberTest {
 
     @Test
-    @DisplayName("6개의 당첨번호를 입력받을 수 있다")
-    fun `sut returns correctly`() {
+    @DisplayName("6개의 당첨번호를 입력받을 수 있고, 방어적 복사로 외부 값의 변경을 제한한다")
+    fun `sut returns correctly and apply defensive copy`() {
         // Arrange
-        val inputWinningNumber = listOf("1", "2", "3", "4", "5", "6")
+        val inputWinningNumber = mutableListOf("1", "2", "3", "4", "5", "6")
 
         // Act
         val winningNumber = WinningNumber(inputWinningNumber)
 
         // Assert
+        assertThat(winningNumber.value).hasSize(6)
+
+        inputWinningNumber.add("8")
+
         assertThat(winningNumber.value).hasSize(6)
     }
 

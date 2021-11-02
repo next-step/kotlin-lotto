@@ -1,8 +1,10 @@
 package lotto.domain
 
 class Lottos(
-    private val value: List<Lotto>,
+    _value: List<Lotto>,
 ) {
+    val value = ArrayList(_value)
+
     fun matchWinningNumber(winningNumbers: List<LottoNumber>, bonusNumber: Int): Map<Rank, Int> {
         return value
             .map {

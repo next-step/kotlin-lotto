@@ -5,9 +5,9 @@ import lotto.exception.InvalidWinningNumberException
 import lotto.exception.InvalidWinningNumberException.Companion.INVALID_WINNING_NUMBER_MESSAGE
 
 class WinningNumber(
-    value: List<String>,
+    _value: List<String>,
 ) {
-    val value: List<LottoNumber> = value.map {
+    val value = ArrayList(_value).map {
         LottoNumber(it.toInt())
     }
 

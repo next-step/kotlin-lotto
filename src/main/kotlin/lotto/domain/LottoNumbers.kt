@@ -5,10 +5,11 @@ import lotto.domain.LottoOperator.LOTTO_LAST_NUMBER
 import lotto.domain.LottoOperator.LOTTO_SIZE
 import lotto.exception.InvalidLottoNumberException
 
-@JvmInline
-value class LottoNumbers(
-    val value: List<LottoNumber>,
+class LottoNumbers(
+    _value: List<LottoNumber>,
 ) {
+    val value = ArrayList(_value)
+
     init {
         if (value.isEmpty() || value.distinct().size != LOTTO_SIZE) {
             throw InvalidLottoNumberException()
