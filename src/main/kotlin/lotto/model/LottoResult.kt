@@ -34,7 +34,7 @@ data class LottoResult(
             lottoList.forEach { lotto ->
                 val rank = LottoRank.valueOf(
                     match = lotto.match(winLottoNumbers),
-                    bonus = lotto.contains(bonus)
+                    bonus = bonus in lotto
                 )
                 if (rank != null) {
                     winnersByRank[rank] = winnersByRank.getOrDefault(rank, 0) + 1

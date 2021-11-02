@@ -11,5 +11,5 @@ data class Lotto(
 
     fun match(numbers: LottoNumbers): Int = this.numbers.match(numbers)
 
-    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
+    operator fun contains(number: LottoNumber): Boolean = number in numbers
 }

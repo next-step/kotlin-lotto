@@ -14,7 +14,7 @@ value class LottoNumbers private constructor(
         require(distinctSize == LOTTO_SIZE)
     }
 
-    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
+    operator fun contains(number: LottoNumber): Boolean = number in numbers
 
     fun match(target: LottoNumbers): Int {
         val array = IntArray(MAX_NUMBER + 1)
