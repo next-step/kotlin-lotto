@@ -22,7 +22,7 @@ class LottoInputView(
     fun bonusBall(): Int {
         consoleOutputStrategy.output(BONUS_BALL_MESSAGE)
         val bonusBall = consoleInputStrategy.input() ?: throw RuntimeException()
-        return bonusBall().toInt()
+        return bonusBall.toInt()
     }
 
     companion object {
