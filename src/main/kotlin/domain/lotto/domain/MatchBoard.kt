@@ -13,8 +13,7 @@ enum class MatchBoard(val numberOfMatch: Int, val matchPrize: Int) {
             if (numberOfMatch == SECOND.numberOfMatch && isMatchBonus) {
                 return SECOND
             }
-            return values().find { it.numberOfMatch == numberOfMatch }
-                ?: MISS
+            return values().find { it.numberOfMatch == numberOfMatch } ?: MISS
         }
 
         fun valuesExcludedMiss(): List<MatchBoard> = values().filterNot { it == MISS }

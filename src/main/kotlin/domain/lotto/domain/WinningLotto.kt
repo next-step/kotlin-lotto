@@ -3,7 +3,7 @@ package domain.lotto.domain
 import domain.lotto.error.DuplicateBonusBallNumberException
 import global.strategy.split.SplitStrategy
 
-data class WinningLotto private constructor(val winningLotto: Lotto, val bonusBall: LottoNumber) {
+data class WinningLotto private constructor(private val winningLotto: Lotto, private val bonusBall: LottoNumber) {
 
     fun isMatchBonusBall(lotto: Lotto): Boolean = lotto.contains(bonusBall)
 

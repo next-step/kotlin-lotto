@@ -41,8 +41,15 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
 
     private fun matchResultJoinToString(matchResult: Map<MatchBoard, Int>) =
         matchResult
-            .map { WINNING_MATCH_RESULT_MESSAGE.format(it.key.numberOfMatch, it.key.matchPrize, it.value) }
+            .map(this::winningMatchResultMessage)
             .joinToString(separator = EMPTY)
+
+    private fun winningMatchResultMessage(it: Map.Entry<MatchBoard, Int>): String {
+        if (it.key == MatchBoard.SECOND) {
+            return WINNING_MATCH_BONUS_RESULT_MESSAGE.format(it.key.numberOfMatch, it.key.matchPrize, it.value)
+        }
+        return WINNING_MATCH_RESULT_MESSAGE.format(it.key.numberOfMatch, it.key.matchPrize, it.value)
+    }
 
     fun showYield(money: Money, winnings: Money) =
         consoleOutputStrategy.output(
@@ -54,7 +61,9 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
     companion object {
         private const val NUMBER_OF_PURCHASES_MESSAGE = "%s개를 구매했습니다."
         private const val WINNING_MATCH_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개$NEW_LINE"
-        private const val WINNINGS_YIELD_MESSAGE = "총 수익률은 %4.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+        private const val WINNING_MATCH_BONUS_RESULT_MESSAGE = "%s개 일치 보너스 볼 일치(%s원)- %s개$NEW_LINE"
+
+        private const val WINNINGS_YIELD_MESSAGE = "총 수익률은 %4.2f입니다."
         private const val PERCENTAGE = 100
     }
 }
