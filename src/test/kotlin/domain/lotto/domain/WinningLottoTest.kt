@@ -51,7 +51,7 @@ class WinningLottoTest {
     fun `보너스 번호가 포함되었는지 여부를 반환한다`(winningLotto: String, bonusBall: Int, lotto: String, expected: Boolean) {
         val winningLotto = WinningLotto.from(winningLotto, bonusBall) { it.split(", ") }
         val lotto = Lotto.of(lotto) { it.split(", ") }
-        val actual = winningLotto.matchBonusBall(lotto)
+        val actual = winningLotto.isMatchBonusBall(lotto)
 
         assertThat(actual).isEqualTo(expected)
     }

@@ -5,6 +5,12 @@ import global.strategy.split.SplitStrategy
 
 data class WinningLotto private constructor(val winningLotto: Lotto, val bonusBall: LottoNumber) {
 
+    fun isMatchBonusBall(lotto: Lotto): Boolean = lotto.contains(bonusBall)
+
+    fun match(it: Lotto): Int {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         fun from(winningLotto: String, bonusBall: Int, splitStrategy: SplitStrategy): WinningLotto =
             from(Lotto.of(winningLotto, splitStrategy), LottoNumber.of(bonusBall))
