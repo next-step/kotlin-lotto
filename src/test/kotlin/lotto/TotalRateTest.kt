@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
-import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoResults
 import lotto.domain.TotalRate
 import org.assertj.core.api.Assertions.assertThat
@@ -21,13 +21,14 @@ class TotalRateTest {
 
         val lottoResults = LottoResults.matchingWinningNumber(
             purchasedLottos = listOf(
-                Lotto(LottoNumber(listOf(1, 2, 11, 7, 8, 9))),
-                Lotto(LottoNumber(listOf(1, 2, 7, 8, 9, 10))),
-                Lotto(LottoNumber(listOf(1, 7, 8, 9, 10, 11))),
-                Lotto(LottoNumber(listOf(1, 7, 8, 9, 10, 11))),
-                Lotto(LottoNumber(listOf(1, 7, 8, 9, 10, 11)))
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 11, 7, 8, 9))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 7, 8, 9, 10))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11)))
             ),
-            winningNumber = winningNumber
+            winningNumber = winningNumber,
+            bonusNumber = 7
         )
 
         // when
@@ -44,13 +45,14 @@ class TotalRateTest {
 
         val lottoResults = LottoResults.matchingWinningNumber(
             purchasedLottos = listOf(
-                Lotto(LottoNumber(listOf(1, 2, 3, 7, 8, 9))),
-                Lotto(LottoNumber(listOf(1, 2, 7, 8, 9, 10))),
-                Lotto(LottoNumber(listOf(1, 7, 8, 9, 10, 11))),
-                Lotto(LottoNumber(listOf(1, 7, 8, 9, 10, 11))),
-                Lotto(LottoNumber(listOf(1, 7, 8, 9, 10, 11)))
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 7, 8, 9))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 7, 8, 9, 10))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11)))
             ),
-            winningNumber = winningNumber
+            winningNumber = winningNumber,
+            bonusNumber = 7
         )
 
         // when
@@ -66,13 +68,14 @@ class TotalRateTest {
         // given
         val lottoResults = LottoResults.matchingWinningNumber(
             purchasedLottos = listOf(
-                Lotto(LottoNumber(listOf(8, 21, 23, 41, 42, 43))),
-                Lotto(LottoNumber(listOf(1, 2, 5, 7, 10, 12))),
-                Lotto(LottoNumber(listOf(10, 14, 17, 35, 36, 447))),
-                Lotto(LottoNumber(listOf(1, 2, 3, 5, 6, 42))),
-                Lotto(LottoNumber(listOf(1, 2, 3, 5, 6, 42)))
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(8, 21, 23, 41, 42, 43))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 5, 7, 10, 12))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(10, 14, 17, 35, 36, 447))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 5, 6, 42))),
+                Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 5, 6, 42)))
             ),
-            winningNumber = winningNumber
+            winningNumber = winningNumber,
+            bonusNumber = 7
         )
 
         // when
