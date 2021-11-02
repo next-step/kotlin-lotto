@@ -15,7 +15,8 @@ class ProfitRateTest {
             Rank.FIRST to 0,
             Rank.SECOND to 0,
             Rank.THIRD to 0,
-            Rank.FOURTH to 1,
+            Rank.FOURTH to 0,
+            Rank.FIFTH to 1,
         )
         val price = 14_000
 

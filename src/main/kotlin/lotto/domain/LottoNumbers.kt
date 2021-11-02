@@ -19,6 +19,10 @@ value class LottoNumbers(
         return value.contains(LottoNumber(winningNumber))
     }
 
+    fun containsBonusNumber(bonusNumber: Int): Boolean {
+        return value.contains(LottoNumber(bonusNumber))
+    }
+
     companion object {
         val LOTTO_NUMBERS: List<LottoNumber> = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER)
             .map { LottoNumber(it) }

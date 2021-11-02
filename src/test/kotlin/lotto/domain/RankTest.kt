@@ -10,8 +10,34 @@ import org.junit.jupiter.params.provider.ValueSource
 class RankTest {
 
     @Test
-    @DisplayName("당첨 번호 개수에 맞는 Rank 반환")
-    fun `sut returns rank`() {
+    @DisplayName("당첨 번호 개수에 맞는 Rank 반환 (1등)")
+    fun `sut returns rank first`() {
+        // Arrange
+        val matchCount = 6
+
+        // Act
+        val rank = Rank.valueOf(matchCount)
+
+        // Assert
+        assertThat(rank).isEqualTo(Rank.FIRST)
+    }
+
+    @Test
+    @DisplayName("당첨 번호 개수에 맞는 Rank 반환 (2등)")
+    fun `sut returns rank second`() {
+        // Arrange
+        val matchCount = 5
+
+        // Act
+        val rank = Rank.valueOf(matchCount, true)
+
+        // Assert
+        assertThat(rank).isEqualTo(Rank.SECOND)
+    }
+
+    @Test
+    @DisplayName("당첨 번호 개수에 맞는 Rank 반환 (3등)")
+    fun `sut returns rank third`() {
         // Arrange
         val matchCount = 5
 
@@ -19,7 +45,7 @@ class RankTest {
         val rank = Rank.valueOf(matchCount)
 
         // Assert
-        assertThat(rank).isEqualTo(Rank.SECOND)
+        assertThat(rank).isEqualTo(Rank.THIRD)
     }
 
     @ParameterizedTest
@@ -43,6 +69,6 @@ class RankTest {
         val totalWinningMoney = Rank.SECOND.getTotalWinningMoney(matchResultValue)
 
         // Assert
-        assertThat(totalWinningMoney).isEqualTo(4_500_000)
+        assertThat(totalWinningMoney).isEqualTo(90_000_000)
     }
 }

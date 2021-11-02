@@ -3,9 +3,11 @@ package lotto.domain
 class Lottos(
     private val value: List<Lotto>,
 ) {
-    fun matchWinningNumber(winningNumbers: List<LottoNumber>): Map<Rank, Int> {
-        return value.map { it.matchWinningNumber(winningNumbers) }
-            .map { Rank.valueOf(it) }
+    fun matchWinningNumber(winningNumbers: List<LottoNumber>, bonusNumber: Int): Map<Rank, Int> {
+        return value
+            .map {
+                Rank.valueOf(it.matchWinningNumber(winningNumbers), it.matchBonusNumber(bonusNumber))
+            }
             .groupingBy { it }
             .eachCount()
     }

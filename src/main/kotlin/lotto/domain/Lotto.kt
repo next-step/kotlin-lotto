@@ -10,6 +10,10 @@ value class Lotto(
         }
     }
 
+    fun matchBonusNumber(bonusNumber: Int): Boolean {
+        return lottoNumbers.containsBonusNumber(bonusNumber)
+    }
+
     fun getLottoNumbers(): List<Int> {
         return lottoNumbers.value.map { it.value }
     }

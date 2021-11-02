@@ -22,7 +22,7 @@ fun main() {
 
     val inputBonusNumber = InputView.inputBonusNumber() ?: 0
 
-    val matchResult = Lottos(lottos).matchWinningNumber(winningNumber.winningNumbers)
+    val matchResult = Lottos(lottos).matchWinningNumber(winningNumber.value, inputBonusNumber)
     OutputView.printLottoMatchResult(matchResult)
 
     val profitRate = ProfitRate(matchResult, inputPrice)
