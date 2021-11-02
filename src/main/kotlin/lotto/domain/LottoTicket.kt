@@ -16,7 +16,7 @@ data class LottoTicket(private val _lottoPackages: List<LottoNumberPackage>) {
 
     private fun buildResultStatistics(winningInfo: WinningInfo): Map<LottoResultRank, Int> {
         return lottoPackages
-            .groupingBy { LottoResultRank.getRank(it.getRankKey(winningInfo)) }
+            .groupingBy { LottoResultRank.getRank(it.getMatchedCount(winningInfo.winningNumberPackage), it.matchedBonusNumber(winningInfo.bonusNumber)) }
             .eachCount()
     }
 

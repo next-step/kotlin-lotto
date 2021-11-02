@@ -12,8 +12,8 @@ enum class LottoResultRank(val lottoResultRankKey: LottoResultRankKey, val prize
     companion object {
         private val rankMap = values().associateBy { it.lottoResultRankKey }
 
-        fun getRank(key: LottoResultRankKey): LottoResultRank {
-            return rankMap.getOrDefault(key, MISSED)
+        fun getRank(matchedCount: MatchedCount, bonusNumberMatched: Boolean): LottoResultRank {
+            return rankMap.getOrDefault(LottoResultRankKey(matchedCount, bonusNumberMatched), MISSED)
         }
     }
 }
