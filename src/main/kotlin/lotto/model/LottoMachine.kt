@@ -2,7 +2,7 @@ package lotto.model
 
 class LottoMachine {
 
-    fun createLotto(size: Int, price: Int): List<Lotto> {
+    fun auto(size: Int, price: Int): List<Lotto> {
         require(size >= 0)
 
         return List(size) {
@@ -12,4 +12,6 @@ class LottoMachine {
             )
         }
     }
+
+    fun manual(numbers: List<LottoNumbers>, price: Int): List<Lotto> = numbers.map { Lotto(price, it) }
 }
