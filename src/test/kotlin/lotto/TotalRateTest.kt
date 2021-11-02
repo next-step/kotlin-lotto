@@ -32,7 +32,7 @@ class TotalRateTest {
         )
 
         // when
-        val totalRate = TotalRate.calculatingOf(lottoResults)
+        val totalRate = TotalRate.calculatingOf(lottoResults).toBenefit()
 
         // then
         assertThat(totalRate).isEqualByComparingTo(0.toBigDecimal())
@@ -56,7 +56,7 @@ class TotalRateTest {
         )
 
         // when
-        val totalRate = TotalRate.calculatingOf(lottoResults)
+        val totalRate = TotalRate.calculatingOf(lottoResults).toBenefit()
 
         // then
         assertThat(totalRate).isEqualByComparingTo(1.00.toBigDecimal())
@@ -79,7 +79,7 @@ class TotalRateTest {
         )
 
         // when
-        val totalRate = TotalRate.calculatingOf(lottoResults)
+        val totalRate = TotalRate.calculatingOf(lottoResults).toBenefit()
 
         // then
         assertThat(totalRate).isEqualByComparingTo(expectedTotalRate)
