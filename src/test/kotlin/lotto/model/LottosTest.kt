@@ -57,7 +57,7 @@ class LottosTest {
 
         // then
         Assertions.assertThat(lottos.compareLottoResult())
-            .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.SECOND to 1)))
+            .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.THIRD to 1)))
     }
 
     @Test
@@ -84,7 +84,7 @@ class LottosTest {
 
         // then
         Assertions.assertThat(lottos.compareLottoResult())
-            .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.THIRD to 1)))
+            .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.FOURTH to 1)))
     }
 
     @Test
@@ -111,7 +111,7 @@ class LottosTest {
 
         // then
         Assertions.assertThat(lottos.compareLottoResult())
-            .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.FOURTH to 1)))
+            .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.FIFTH to 1)))
     }
 
     @Test
