@@ -26,7 +26,7 @@ object StringAddCalculator {
     }
 
     private fun splitDefault(text: String): List<String> {
-        return text.trim().split(delimiters = Delimiter.values().map { it.value }.toTypedArray())
+        return text.trim().split(delimiters = Delimiter.valuesArray())
     }
 
     private fun splitCustom(text: String): List<String> {
