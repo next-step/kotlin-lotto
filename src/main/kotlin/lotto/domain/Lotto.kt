@@ -1,11 +1,17 @@
 package lotto.domain
 
-data class Lotto(private val lottoNumber: LottoNumber) {
+data class Lotto(private val lottoNumbers: LottoNumbers) {
 
-    fun toNumberList(): List<Int> = lottoNumber.toList()
+    fun getLottoNumbers(): List<Int> = lottoNumbers.getNumbers()
+
+    fun matchingWinningNumber(winningNumber: List<Int>, bonusNumber: Int): Pair<Int, Boolean> =
+        Pair(
+            lottoNumbers.getNumbers().intersect(winningNumber).count(),
+            lottoNumbers.getNumbers().contains(bonusNumber)
+        )
 
     companion object {
-        val PRICE = 1000
-        fun generate(): Lotto = Lotto(LottoNumber())
+        const val PRICE = 1000
+        fun generate(): Lotto = Lotto(LottoNumbers.generateLottoNumbers())
     }
 }

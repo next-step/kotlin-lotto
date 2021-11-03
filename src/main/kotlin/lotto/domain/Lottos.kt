@@ -2,10 +2,7 @@ package lotto.domain
 
 @JvmInline
 value class Lottos private constructor(private val lottos: List<Lotto>) {
-    fun toList(): List<Lotto> = lottos.toList()
-
-    fun correspondToWinningNumber(winningNumber: List<Int>): LottoResults =
-        LottoResults.matchingWinningNumber(winningNumber, lottos)
+    fun getLottos(): List<Lotto> = lottos.toList()
 
     companion object {
         fun buy(money: Int): Lottos {

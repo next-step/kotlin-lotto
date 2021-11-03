@@ -3,15 +3,21 @@ package lotto.domain
 @JvmInline
 value class LottoResults private constructor(private val lottoResults: List<LottoResult>) {
 
-    fun toList(): List<LottoResult> = lottoResults.toList()
+    fun getResults(): List<LottoResult> = lottoResults.toList()
 
     companion object {
-        fun matchingWinningNumber(winningNumber: List<Int>, purchasedLottos: List<Lotto>): LottoResults {
-            val lottoNumberIntersectCounts: List<Int> = purchasedLottos.map {
-                it.toNumberList().intersect(winningNumber).count()
+        fun matchingWinningNumber(
+            winningNumber: List<Int>,
+            bonusNumber: Int,
+            purchasedLottos: List<Lotto>
+        ): LottoResults {
+
+            val matchingNumberAndIsBonusNumberPairs: List<Pair<Int, Boolean>> = purchasedLottos.map {
+                it.matchingWinningNumber(winningNumber, bonusNumber)
             }
-            val lottoResults: List<LottoResult> = LottoPrize.toList().map {
-                LottoResult.matchingNumber(it, lottoNumberIntersectCounts)
+
+            val lottoResults: List<LottoResult> = LottoPrize.getPrizes().map {
+                LottoResult.decideLottoPrize(it, matchingNumberAndIsBonusNumberPairs)
             }
             return LottoResults(lottoResults)
         }

@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.LottoResults
 import lotto.domain.Lottos
 import lotto.domain.TotalRate
 import lotto.view.InputView
@@ -10,9 +11,10 @@ class LottoController(private val inputView: InputView, private val resultView: 
     fun start() {
         val budget = inputView.inputBudget()
         val lottos = Lottos.buy(budget)
-        resultView.viewPurchaseLotto(lottos.toList())
+        resultView.viewPurchaseLotto(lottos.getLottos())
         val winningNumber = inputView.inputWinningNumber()
-        val lottoResults = lottos.correspondToWinningNumber(winningNumber)
-        resultView.viewLottoResults(lottoResults, TotalRate.calculatingOf(lottoResults))
+        val bonusNumber = inputView.inputBonusNumber()
+        val lottoResults = LottoResults.matchingWinningNumber(winningNumber, bonusNumber, lottos.getLottos())
+        resultView.viewLottoResults(lottoResults, TotalRate.calculatingOf(lottoResults).getBenefit())
     }
 }
