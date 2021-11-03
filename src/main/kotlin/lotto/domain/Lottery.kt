@@ -1,11 +1,11 @@
 package lotto.domain
 
 @JvmInline
-value class Lottery private constructor(val values: LottoNumbers) {
+value class Lottery private constructor(val numbers: LottoNumbers) {
 
     companion object {
-        fun of(values: LottoNumbers): Lottery {
-            return Lottery(values)
+        fun of(numbers: LottoNumbers): Lottery {
+            return Lottery(numbers)
         }
     }
 }
