@@ -13,13 +13,13 @@ value class Lotto private constructor(val lotto: Set<LottoNumber>) {
 
     companion object {
         const val PRICE = 1_000
-        private const val FROM_INDEX = 0
-        private const val TO_INDEX = 6
+        const val MINIMUM_SIZE = 0
+        const val MAXIMUM_SIZE = 6
 
         fun of(shuffleStrategy: LottoShuffleStrategy): Lotto {
             val lottoNumbers = LottoNumber.values()
             val shuffledLottoNumbers = shuffleStrategy.shuffle(lottoNumbers)
-            val selectedLottoNumbers = shuffledLottoNumbers.subList(FROM_INDEX, TO_INDEX)
+            val selectedLottoNumbers = shuffledLottoNumbers.subList(MINIMUM_SIZE, MAXIMUM_SIZE)
             return of(selectedLottoNumbers.toSortedSet())
         }
 
@@ -31,10 +31,10 @@ value class Lotto private constructor(val lotto: Set<LottoNumber>) {
             )
 
         fun of(lotto: Set<LottoNumber>): Lotto {
-            if (lotto.size < TO_INDEX || lotto.size > TO_INDEX) {
-                throw InvalidLottoNumberSizeException(lotto.size)
+            if ((MAXIMUM_SIZE..MAXIMUM_SIZE).contains(lotto.size)) {
+                return Lotto(lotto.toSortedSet())
             }
-            return Lotto(lotto.toSortedSet())
+            throw InvalidLottoNumberSizeException(lotto.size)
         }
     }
 }
