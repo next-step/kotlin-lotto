@@ -32,7 +32,6 @@ class Lottos private constructor(
         private const val DELIMITER = ","
         private const val ERROR_INT = -1
         private const val ADD_ONE_LOTTO = 1
-        private const val BONUS_MATCH_COUNT = 1
         const val EXCEPTION_INPUT_NUMBER_NULL = "입력된 숫자가 없습니다."
 
         fun inputWinNumber(
