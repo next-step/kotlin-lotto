@@ -1,7 +1,5 @@
 package lotto.domain
 
-private const val MONEY_PER_TICKET = 1000
-
 @JvmInline
 value class LottoMoney(val value: Int) {
 
@@ -16,5 +14,14 @@ value class LottoMoney(val value: Int) {
 
     fun calculateCount(): LottoTicketCount {
         return LottoTicketCount(value / MONEY_PER_TICKET)
+    }
+
+    companion object {
+
+        private const val MONEY_PER_TICKET = 1000
+
+        fun calculatePrice(count: LottoTicketCount): LottoMoney {
+            return LottoMoney(count.value * MONEY_PER_TICKET)
+        }
     }
 }
