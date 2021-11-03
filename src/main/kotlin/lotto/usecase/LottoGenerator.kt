@@ -1,6 +1,7 @@
 package lotto.usecase
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumbers
 
 class LottoGenerator : Generator {
 
@@ -9,7 +10,7 @@ class LottoGenerator : Generator {
         price: Int,
     ): Lotto {
         return Lotto(
-            numbers = numbers,
+            numbers = LottoNumbers(numbers),
             price = price
         )
     }
