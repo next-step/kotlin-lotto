@@ -1,7 +1,5 @@
 package lotto.domain
 
-private val VALID_LOTTO_RANGE = 1..45
-
 @JvmInline
 value class LottoNumber(val value: Int) : Comparable<LottoNumber> {
 
@@ -11,5 +9,11 @@ value class LottoNumber(val value: Int) : Comparable<LottoNumber> {
 
     override fun compareTo(other: LottoNumber): Int {
         return compareValues(value, other.value)
+    }
+
+    companion object {
+        private val VALID_LOTTO_RANGE = 1..45
+
+        val VALID_LOTTO_NUMBERS = VALID_LOTTO_RANGE.toList().map(::LottoNumber)
     }
 }
