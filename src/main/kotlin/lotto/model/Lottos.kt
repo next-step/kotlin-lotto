@@ -13,24 +13,10 @@ class Lottos private constructor(
     fun compareLottoResult(): LottoStatisticFormat {
         val hashMap = hashMapOf<LottoRank, Int>()
         purchasedLotto.forEach { lotto ->
-            val sameNumberCount = compareNumber(lotto)
-            val hasBonus = hasBonusNumber(lotto)
-            val rank = when {
-                sameNumberCount == LottoRank.FOURTH.countOfMatch && hasBonus -> LottoRank.findMatchRank(sameNumberCount + BONUS_MATCH_COUNT,
-                    true)
-                else -> LottoRank.findMatchRank(sameNumberCount, false)
-            }
+            val rank = LottoRank.findMatchRank(compareNumber(lotto), lotto.hasNumber(bonusNumber))
             hashMap[rank] = hashMap.getOrDefault(rank, 0) + ADD_ONE_LOTTO
         }
         return LottoStatisticFormat(price, hashMap)
-    }
-
-    private fun hasBonusNumber(item: Lotto): Boolean {
-        item.numbers
-            .forEach { lottoNumber ->
-                if (bonusNumber == lottoNumber.number) return true
-            }
-        return false
     }
 
     private fun compareNumber(item: Lotto): Int {

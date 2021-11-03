@@ -17,10 +17,7 @@ enum class LottoRank(
 
     companion object {
         private const val BONUS_NUMBER_MATCH_COUNT = 5
-        private fun isBonusRank(isBonusNumber: Boolean): LottoRank =
-            if (isBonusNumber) SECOND else THIRD
-
-        fun findMatchRank(number: Int, isBonusNumber: Boolean): LottoRank {
+        fun findMatchRank (number: Int, isBonusNumber: Boolean): LottoRank {
             return values()
                 .find {
                     when (number) {
@@ -29,5 +26,8 @@ enum class LottoRank(
                     }
                 } ?: MISS
         }
+
+        private fun isBonusRank(isBonusNumber: Boolean): LottoRank =
+            if (isBonusNumber) SECOND else THIRD
     }
 }

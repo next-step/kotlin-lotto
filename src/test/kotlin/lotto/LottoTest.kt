@@ -71,6 +71,6 @@ class LottoTest {
         val lotto = Lotto(list)
 
         // then
-        assertThat(lotto.numbers).isEqualTo(listOf(1, 3, 4, 5, 7, 6))
+        assertThat(lotto.numbers).isEqualTo(listOf(1, 3, 4, 5, 6, 7))
     }
 }
