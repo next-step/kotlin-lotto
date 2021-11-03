@@ -1,9 +1,6 @@
 package lotto.domain
 
-enum class LottoRanking(
-    private val count: Int,
-    val reward: Long,
-) {
+enum class LottoRanking(val count: Int, val reward: Long) {
     RANK_1(6, 2_000_000_000L),
     RANK_2(5, 150_000_000L),
     RANK_3(4, 50_000L),
