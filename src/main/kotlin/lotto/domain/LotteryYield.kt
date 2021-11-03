@@ -8,7 +8,7 @@ value class LotteryYield private constructor(val ratio: BigDecimal) {
 
     companion object {
         private fun calculate(paid: Money, reward: Money): BigDecimal {
-            return reward.value.divide(paid.value).setScale(2, RoundingMode.FLOOR)
+            return reward.value.divide(paid.value, 3, RoundingMode.HALF_EVEN).setScale(2, RoundingMode.HALF_DOWN)
         }
 
         fun of(paid: Money, reward: Money): LotteryYield {
