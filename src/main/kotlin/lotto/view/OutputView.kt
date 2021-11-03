@@ -24,15 +24,7 @@ class OutputView {
         println("당첨 통계")
         println("---------")
         printRankingList(result)
-        printProfit(result.profit)
-    }
-
-    fun printProfit(profit: Double) {
-        val result = when {
-            1.0 >= profit -> "이득"
-            else -> "손해"
-        }
-        println("총 수익률은 ${profit}입니다. (기준이 1이기 때문에 결과적으로 ${result}라는 의미임)")
+        println("총 수익률은 ${result.profit}입니다. ")
     }
 
     private fun printRankingList(result: LottoStatisticFormat) {
