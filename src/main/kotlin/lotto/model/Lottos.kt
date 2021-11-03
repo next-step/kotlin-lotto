@@ -33,6 +33,7 @@ class Lottos private constructor(
         private const val ERROR_INT = -1
         private const val ADD_ONE_LOTTO = 1
         const val EXCEPTION_INPUT_NUMBER_NULL = "입력된 숫자가 없습니다."
+        const val EXCEPTION_BONUS_NUMBER = "로또 당첨 번호와 겹치는 숫자 입니다."
 
         fun inputWinNumber(
             price: Price,
@@ -46,6 +47,9 @@ class Lottos private constructor(
             val list = numbers
                 .split(DELIMITER)
                 .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
+
+            require(!list.map { it.number }.contains(bonusNumber)) { EXCEPTION_BONUS_NUMBER }
+
             return Lottos(price, purchasedLotto, Lotto(list), bonusNumber)
         }
     }
