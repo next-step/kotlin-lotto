@@ -2,13 +2,19 @@ package lotto.domain
 
 @JvmInline
 value class Lotto(
-    private val lottoNumbers: LottoNumber,
+    private val lottoNumbers: LottoNumbers,
 ) {
-    fun matchWinningNumber(winningNumbers: List<Int>): Int {
+    fun matchWinningNumber(winningNumbers: List<LottoNumber>): Int {
         return winningNumbers.count {
-            lottoNumbers.containsWinningNumbers(it)
+            lottoNumbers.containsWinningNumbers(it.value)
         }
     }
 
-    fun getLottoNumbers(): List<Int> = lottoNumbers.value.toList()
+    fun matchBonusNumber(bonusNumber: Int): Boolean {
+        return lottoNumbers.containsBonusNumber(bonusNumber)
+    }
+
+    fun getLottoNumbers(): List<Int> {
+        return lottoNumbers.value.map { it.value }
+    }
 }

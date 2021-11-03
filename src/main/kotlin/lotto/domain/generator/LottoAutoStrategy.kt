@@ -2,12 +2,12 @@ package lotto.domain.generator
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBERS
+import lotto.domain.LottoOperator.LOTTO_FIRST_INDEX
+import lotto.domain.LottoOperator.LOTTO_LAST_INDEX
 
 class LottoAutoStrategy : LottoGeneratorStrategy {
-
-    private val lottoNumbers: List<Int> by lazy(
-        (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER)::toList
-    )
 
     override fun generate(lottoCount: Int): List<Lotto> {
         return (0 until lottoCount)
@@ -16,19 +16,14 @@ class LottoAutoStrategy : LottoGeneratorStrategy {
             .toList()
     }
 
-    private fun generateLottoNumber(): LottoNumber {
-        val lottoNumbers = lottoNumbers
+    private fun generateLottoNumber(): LottoNumbers {
+        val lottoNumbers = LOTTO_NUMBERS
+            .map { it.value }
             .shuffled()
             .subList(LOTTO_FIRST_INDEX, LOTTO_LAST_INDEX)
             .sorted()
+            .map { LottoNumber(it) }
             .toList()
-        return LottoNumber(lottoNumbers)
-    }
-
-    companion object {
-        private const val LOTTO_FIRST_NUMBER = 1
-        private const val LOTTO_LAST_NUMBER = 45
-        private const val LOTTO_FIRST_INDEX = 0
-        private const val LOTTO_LAST_INDEX = 6
+        return LottoNumbers(lottoNumbers)
     }
 }

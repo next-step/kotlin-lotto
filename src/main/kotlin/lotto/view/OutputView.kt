@@ -6,6 +6,7 @@ import lotto.domain.Rank.FIRST
 import lotto.domain.Rank.FOURTH
 import lotto.domain.Rank.SECOND
 import lotto.domain.Rank.THIRD
+import lotto.domain.Rank.FIFTH
 
 class OutputView {
 
@@ -14,6 +15,11 @@ class OutputView {
         private const val PREFIX = "["
         private const val POSTFIX = "]"
         private const val PRINT_LOTTO_RESULT = "당첨 통계"
+        private const val BOUGHT_LOTTO_MESSAGE = "개를 구매했습니다."
+
+        fun printBoughtLotto(lottoCount: Int) {
+            println("${lottoCount}$BOUGHT_LOTTO_MESSAGE")
+        }
 
         fun printBoughtLottos(lottos: List<Lotto>) {
             repeat(lottos.size) {
@@ -25,9 +31,10 @@ class OutputView {
         fun printLottoMatchResult(matchResult: Map<Rank, Int>) {
             println(PRINT_LOTTO_RESULT)
             println("---------")
+            println("${FIFTH.matchCount}개 일치 (${FIFTH.winningMoney}원) - ${matchResult[FOURTH] ?: 0}개")
             println("${FOURTH.matchCount}개 일치 (${FOURTH.winningMoney}원) - ${matchResult[FOURTH] ?: 0}개")
             println("${THIRD.matchCount}개 일치 (${THIRD.winningMoney}원) - ${matchResult[THIRD] ?: 0}개")
-            println("${SECOND.matchCount}개 일치 (${SECOND.winningMoney}원) - ${matchResult[SECOND] ?: 0}개")
+            println("${SECOND.matchCount}개 일치, 보너스 볼 일치 (${SECOND.winningMoney}원) - ${matchResult[SECOND] ?: 0}개")
             println("${FIRST.matchCount}개 일치 (${FIRST.winningMoney}원) - ${matchResult[FIRST] ?: 0}개")
         }
 

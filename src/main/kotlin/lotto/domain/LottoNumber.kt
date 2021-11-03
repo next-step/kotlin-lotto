@@ -1,21 +1,16 @@
 package lotto.domain
 
+import lotto.domain.LottoOperator.LOTTO_FIRST_NUMBER
+import lotto.domain.LottoOperator.LOTTO_LAST_NUMBER
 import lotto.exception.InvalidLottoNumberException
 
 @JvmInline
 value class LottoNumber(
-    val value: List<Int>,
+    val value: Int,
 ) {
     init {
-        val immutableLottoNumber = value.toList()
-        if (immutableLottoNumber.isEmpty() || immutableLottoNumber.distinct().size != LOTTO_SIZE) {
+        if (value !in LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER) {
             throw InvalidLottoNumberException()
         }
-    }
-
-    fun containsWinningNumbers(winningNumber: Int): Boolean = value.contains(winningNumber)
-
-    companion object {
-        private const val LOTTO_SIZE = 6
     }
 }

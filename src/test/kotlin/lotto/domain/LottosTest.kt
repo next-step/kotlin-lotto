@@ -7,25 +7,46 @@ import org.junit.jupiter.api.Test
 @DisplayName("로또 관리 테스트")
 class LottosTest {
 
+    private val lottoNumberOne = LottoNumber(1)
+    private val lottoNumberTwo = LottoNumber(2)
+    private val lottoNumberThree = LottoNumber(3)
+    private val lottoNumberFour = LottoNumber(4)
+    private val lottoNumberFive = LottoNumber(5)
+    private val lottoNumberSix = LottoNumber(6)
+    private val lottoNumberSeven = LottoNumber(7)
+
     @Test
     @DisplayName("n개의 로또들의 당첨 결과를 수집할 수 있다")
     fun `sut returns match result`() {
         // Arrange
         val lottos = listOf(
-            Lotto(LottoNumber(listOf(3, 4, 5, 6, 7, 27))),
-            Lotto(LottoNumber(listOf(5, 7, 13, 27, 31, 45)))
+            Lotto(
+                LottoNumbers(
+                    listOf(
+                        lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+                    )
+                )
+            ),
+            Lotto(
+                LottoNumbers(
+                    listOf(
+                        lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSeven,
+                    )
+                )
+            )
         )
 
         val winningNumber = WinningNumber(
-            listOf("3", "5", "7", "13", "31", "45")
+            listOf("1", "2", "3", "4", "5", "6")
         )
+        val bonusNumber = 7
 
         // Act
         val sut = Lottos(lottos)
-        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber.winningNumbers)
+        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber.value, bonusNumber)
 
         // Assert
+        assertThat(result[Rank.FIRST]).isEqualTo(1)
         assertThat(result[Rank.SECOND]).isEqualTo(1)
-        assertThat(result[Rank.FOURTH]).isEqualTo(1)
     }
 }

@@ -1,33 +1,19 @@
 package lotto.domain
 
+import lotto.domain.LottoOperator.LOTTO_SIZE
 import lotto.exception.InvalidWinningNumberException
 import lotto.exception.InvalidWinningNumberException.Companion.INVALID_WINNING_NUMBER_MESSAGE
-import lotto.exception.InvalidWinningNumberException.Companion.INVALID_WINNING_NUMBER_RANGE_MESSAGE
 
 class WinningNumber(
-    winningNumbers: List<String>,
+    _value: List<String>,
 ) {
-    val winningNumbers: List<Int> = winningNumbers.map { it.toInt() }
+    val value = ArrayList(_value).map {
+        LottoNumber(it.toInt())
+    }
 
     init {
-        if (winningNumbers.isEmpty() || winningNumbers.size != LIMIT_WINNING_NUMBER) {
+        if (value.isEmpty() || value.size != LOTTO_SIZE) {
             throw InvalidWinningNumberException(INVALID_WINNING_NUMBER_MESSAGE)
         }
-        validateWinningNumber()
-    }
-
-    private fun validateWinningNumber() {
-        for (winningNumber in winningNumbers) {
-            if (winningNumber.toInt() !in LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER) {
-                throw InvalidWinningNumberException(INVALID_WINNING_NUMBER_RANGE_MESSAGE)
-            }
-        }
-    }
-
-    companion object {
-        private const val LIMIT_WINNING_NUMBER = 6
-
-        private const val LOTTO_FIRST_NUMBER = 1
-        private const val LOTTO_LAST_NUMBER = 45
     }
 }
