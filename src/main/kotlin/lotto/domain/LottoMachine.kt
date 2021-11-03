@@ -26,6 +26,10 @@ class LottoMachine(private val generator: LottoGenerator) {
         return LotteryYield.of(paid, reward)
     }
 
+    fun calculatePaid(counts: Int): Money {
+        return Money.of(LOTTERY_PRICE.value.multiply(counts.toBigDecimal()))
+    }
+
     companion object {
         private val LOTTERY_PRICE = Money.of(1_000L)
     }
