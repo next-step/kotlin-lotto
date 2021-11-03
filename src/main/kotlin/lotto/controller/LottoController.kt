@@ -31,7 +31,8 @@ object LottoController {
 
     private fun printResult(price: Price, purchasedLotto: List<Lotto>) {
         val winNumberList = inputView.inputLastLottoWinNumber()
-        val lottos = Lottos.inputWinNumber(price, purchasedLotto, winNumberList)
+        val bonusNumber = inputView.inputBonusNumber()
+        val lottos = Lottos.inputWinNumber(price, purchasedLotto, winNumberList, bonusNumber)
         val result = lottos.compareLottoResult()
         outputView.printWinStatistic(result)
     }
