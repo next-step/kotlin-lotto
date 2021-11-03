@@ -35,7 +35,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest(name = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ValueSource(strings = ["//;\n1;2;3"])
     fun customDelimiter(text: String) {
-        assertThat(StringAddCalculator.add(text)).isSameAs(6)
+        assertThat(StringAddCalculator.add(text)).isEqualTo(6)
     }
 
     @ParameterizedTest(name = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
