@@ -36,7 +36,7 @@ class LottoTest {
 
     @NullSource
     @ParameterizedTest
-    @DisplayName("구매 금액에 null이 입려된 경우")
+    @DisplayName("구매 금액에 null이 입력된 경우")
     fun `null of purchase amount`(price: Int?) {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Price(price) }
