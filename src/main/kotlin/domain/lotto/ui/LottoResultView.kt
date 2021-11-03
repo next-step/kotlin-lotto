@@ -46,9 +46,9 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
 
     private fun winningMatchResultMessage(it: Map.Entry<MatchBoard, Int>): String {
         if (it.key == MatchBoard.SECOND) {
-            return WINNING_MATCH_BONUS_RESULT_MESSAGE.format(it.key.numberOfMatch, it.key.matchPrize, it.value)
+            return WINNING_MATCH_BONUS_RESULT_MESSAGE.format(it.key.rank.numberOfMatch, it.key.matchPrize, it.value)
         }
-        return WINNING_MATCH_RESULT_MESSAGE.format(it.key.numberOfMatch, it.key.matchPrize, it.value)
+        return WINNING_MATCH_RESULT_MESSAGE.format(it.key.rank.numberOfMatch, it.key.matchPrize, it.value)
     }
 
     fun showYield(money: Money, winnings: Money) =

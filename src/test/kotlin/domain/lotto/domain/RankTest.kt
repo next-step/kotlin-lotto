@@ -43,15 +43,20 @@ class RankTest {
 
     @ParameterizedTest(name = "당첨 갯수 = {0}, 보너스볼 필요 여부 = {1}, 사용 여부 및 기대값 = {2}")
     @CsvSource(
-        value = ["0:true:true", "0:true:false", "1:true:true", "1:true:false",
-            "2:true:true", "2:true:false", "3:true:true", "3:true:false",
-            "4:true:true", "4:true:false", "5:true:true", "5:true:false", "6:true:true", "6:true:false"
+        value = [
+            "0:true:true:true", "0:true:false:false", "0:false:true:true", "0:false:false:true",
+            "1:true:true:true", "1:true:false:false", "1:false:true:true", "1:false:false:true",
+            "2:true:true:true", "2:true:false:false", "2:false:true:true", "2:false:false:true",
+            "3:true:true:true", "3:true:false:false", "3:false:true:true", "3:false:false:true",
+            "4:true:true:true", "4:true:false:false", "4:false:true:true", "4:false:false:true",
+            "5:true:true:true", "5:true:false:false", "5:false:true:true", "5:false:false:true",
+            "6:true:true:true", "6:true:false:false", "6:false:true:true", "6:false:false:true",
         ],
         delimiter = ':'
     )
-    fun `보너스 필요가 참이면 보너스 사용 여부를 그대로 반환한다`(matchOfNumber: Int, needBonusBall: Boolean, expected: Boolean) {
+    fun `보너스 필요 유무와 보너스 여부에 따라 매칭 결과를 반환한다`(matchOfNumber: Int, needBonusBall: Boolean, matchBonusBall: Boolean, expected: Boolean) {
         val rank = Rank(matchOfNumber, needBonusBall)
-        val actual = rank.isUseBonusBall(expected)
+        val actual = rank.sameAsNeedBonusBall(matchBonusBall)
 
         assertThat(actual).isEqualTo(expected)
     }
