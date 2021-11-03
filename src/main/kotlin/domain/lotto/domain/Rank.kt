@@ -2,21 +2,21 @@ package domain.lotto.domain
 
 import domain.lotto.error.InvalidNumberOfMatchException
 
-class Rank(val numberOfMatch: Int, private val needBonusBall: Boolean = false) {
+class Rank(val numberOfMatch: Int, val necessityOfBonus: Boolean = false) {
     init {
         if (!(Lotto.MINIMUM_SIZE..Lotto.MAXIMUM_SIZE).contains(numberOfMatch)) {
             throw InvalidNumberOfMatchException(numberOfMatch)
         }
     }
 
-    fun sameAsNumberOfMatch(otherNumberOfMatch: Int) = numberOfMatch == otherNumberOfMatch
+    fun isEqualToNumberOfMatch(otherNumberOfMatch: Int): Boolean =
+        (numberOfMatch == otherNumberOfMatch)
 
-    fun sameAsNeedBonusBall(isMatchBonus: Boolean): Boolean {
-        return needBonusBall == isUseBonusBall(isMatchBonus)
-    }
+    fun isEqualToNecessityOfBonus(isMatchBonus: Boolean): Boolean =
+        (necessityOfBonus == calculateNecessity(isMatchBonus))
 
-    private fun isUseBonusBall(isMatchBonus: Boolean): Boolean {
-        if (needBonusBall) {
+    private fun calculateNecessity(isMatchBonus: Boolean): Boolean {
+        if (necessityOfBonus) {
             return isMatchBonus
         }
         return false

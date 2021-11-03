@@ -34,7 +34,7 @@ class LottoApplication(
         return try {
             WinningLotto.from(lottoByConsole(), bonusBallByConsole())
         } catch (e: Exception) {
-            exceptionView.output(e.message.toString())
+            exceptionView.showErrorMessage(e.message.toString())
             winningLottoByConsole()
         }
     }
@@ -43,7 +43,7 @@ class LottoApplication(
         return try {
             Money(lottoInputView.purchaseLotto())
         } catch (e: Exception) {
-            exceptionView.output(e.message.toString())
+            exceptionView.showErrorMessage(e.message.toString())
             purchaseLottoByConsole()
         }
     }
@@ -52,7 +52,7 @@ class LottoApplication(
         return try {
             Lotto.of(lottoInputView.winningLotto(), CommaSplitStrategy)
         } catch (e: Exception) {
-            exceptionView.output(e.message.toString())
+            exceptionView.showErrorMessage(e.message.toString())
             lottoByConsole()
         }
     }
@@ -61,7 +61,7 @@ class LottoApplication(
         return try {
             LottoNumber.of(lottoInputView.bonusBall())
         } catch (e: Exception) {
-            exceptionView.output(e.message.toString())
+            exceptionView.showErrorMessage(e.message.toString())
             bonusBallByConsole()
         }
     }

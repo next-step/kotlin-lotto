@@ -82,7 +82,7 @@ class LottoTest {
         delimiter = ':'
     )
     fun `동일한 로또 번호를 가지고 있는지 여부를 반환한다`(lottoString: String, bonusBall: Int, expected: Boolean) {
-        val lotto = Lotto.of(lottoString) { it.split(",") }
+        val lotto = Lotto.of(lottoString) { it.split(", ") }
         val bonusBall = LottoNumber.of(bonusBall)
         val actual = lotto.contains(bonusBall)
 

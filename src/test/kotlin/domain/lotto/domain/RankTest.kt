@@ -56,7 +56,7 @@ class RankTest {
     )
     fun `보너스 필요 유무와 보너스 여부에 따라 매칭 결과를 반환한다`(matchOfNumber: Int, needBonusBall: Boolean, matchBonusBall: Boolean, expected: Boolean) {
         val rank = Rank(matchOfNumber, needBonusBall)
-        val actual = rank.sameAsNeedBonusBall(matchBonusBall)
+        val actual = rank.isEqualToNecessityOfBonus(matchBonusBall)
 
         assertThat(actual).isEqualTo(expected)
     }

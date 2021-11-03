@@ -44,11 +44,13 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
             .map(this::winningMatchResultMessage)
             .joinToString(separator = EMPTY)
 
-    private fun winningMatchResultMessage(it: Map.Entry<MatchBoard, Int>): String {
-        if (it.key == MatchBoard.SECOND) {
-            return WINNING_MATCH_BONUS_RESULT_MESSAGE.format(it.key.rank.numberOfMatch, it.key.matchPrize, it.value)
+    private fun winningMatchResultMessage(entry: Map.Entry<MatchBoard, Int>): String {
+        val matchBoard = entry.key
+        val rank = matchBoard.rank
+        if (rank.necessityOfBonus) {
+            return WINNING_MATCH_BONUS_RESULT_MESSAGE.format(rank.numberOfMatch, matchBoard.matchPrize, entry.value)
         }
-        return WINNING_MATCH_RESULT_MESSAGE.format(it.key.rank.numberOfMatch, it.key.matchPrize, it.value)
+        return WINNING_MATCH_RESULT_MESSAGE.format(rank.numberOfMatch, matchBoard.matchPrize, entry.value)
     }
 
     fun showYield(money: Money, winnings: Money) =
