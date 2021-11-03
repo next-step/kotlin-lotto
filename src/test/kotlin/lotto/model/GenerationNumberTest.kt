@@ -21,7 +21,7 @@ class GenerationNumberTest {
     fun `incorrect lotto number range list`() {
         val list = (1..3).toList()
 
-        assertThrows<IllegalArgumentException>{
+        assertThrows<IllegalArgumentException> {
             RandomNumberGenerationProcessor.generateNumbers(list)
         }
     }
