@@ -21,10 +21,11 @@ enum class MatchBoard(val numberOfMatch: Int, val matchPrize: Int) {
      */
 // fun needToMatchTheBonusBall(test: Boolean): Boolean {
     //     if (available) {
-    //         return test
+    //         return test ->
     //     }
-    //     return true
+    //     return false
     // }
+    //
     companion object {
         fun values(numberOfMatch: Int, isMatchBonus: Boolean): MatchBoard {
             if (numberOfMatch == SECOND.numberOfMatch && isMatchBonus) {

@@ -15,7 +15,7 @@ class RankTest {
     @CsvSource(
         value = [
             "0:true", "0:false", "1:true", "1:false", "2:true", "2:false",
-            "3:true", "3:false", "4:true", "4:false", "5:true", "5:false", "6:false", "6:true"
+            "3:true", "3:false", "4:true", "4:false", "5:true", "5:false", "6:true", "6:false"
         ],
         delimiter = ':'
     )
@@ -39,5 +39,20 @@ class RankTest {
         assertThat(exception.message).isEqualTo(
             "맞은 로또의 개수 %s 은 ${Lotto.MINIMUM_SIZE} 과 ${Lotto.MAXIMUM_SIZE} 사이의 숫자가 아니다.".format(matchOfNumber)
         )
+    }
+
+    @ParameterizedTest(name = "당첨 갯수 = {0}, 보너스볼 필요 여부 = {1}, 사용 여부 및 기대값 = {2}")
+    @CsvSource(
+        value = ["0:true:true", "0:true:false", "1:true:true", "1:true:false",
+            "2:true:true", "2:true:false", "3:true:true", "3:true:false",
+            "4:true:true", "4:true:false", "5:true:true", "5:true:false", "6:true:true", "6:true:false"
+        ],
+        delimiter = ':'
+    )
+    fun `보너스 필요가 참이면 보너스 사용 여부를 그대로 반환한다`(matchOfNumber: Int, needBonusBall: Boolean, expected: Boolean) {
+        val rank = Rank(matchOfNumber, needBonusBall)
+        val actual = rank.isUseBonusBall(expected)
+
+        assertThat(actual).isEqualTo(expected)
     }
 }
