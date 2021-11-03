@@ -119,7 +119,7 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("보너스 숫자가 같아 2등하는 경우")
+    @DisplayName("5개의 숫자가 일치하는 상황에서 나머지 하나의 숫자가 보너스 숫자와 일치하는 경우")
     fun `check result of bonus number winner`() {
         // given
         val price = Price(1000)
