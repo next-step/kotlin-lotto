@@ -17,6 +17,11 @@ enum class LottoRank(
 
     companion object {
         private const val BONUS_NUMBER_MATCH_COUNT = 5
+        val rankListSortedByMoney =
+            values()
+                .filter { it != MISS }
+                .sortedBy { it.winningMoney }
+
         fun findMatchRank (number: Int, isBonusNumber: Boolean): LottoRank {
             return values()
                 .find {

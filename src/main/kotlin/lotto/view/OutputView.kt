@@ -28,9 +28,8 @@ class OutputView {
     }
 
     private fun printRankingList(result: LottoStatisticFormat) {
-        LottoRank.values()
-            .filter { it != LottoRank.MISS }
-            .sortedBy { it.winningMoney }
+        LottoRank
+            .rankListSortedByMoney
             .forEach { rank ->
                 when (rank) {
                     LottoRank.SECOND -> println("${rank.countOfMatch}개 일치, 보너스 볼 일치 (${rank.winningMoney}${rank.moneyUnion})- ${result.winList[rank] ?: 0}개")
