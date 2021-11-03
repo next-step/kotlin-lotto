@@ -20,7 +20,7 @@ object ConsoleInputView {
 
     private fun getInts(): List<Int> {
         return getInput().split(",")
-            .map(::toInt)
+            .map { toInt(it.trim()) }
     }
 
     private fun toInt(string: String): Int {
