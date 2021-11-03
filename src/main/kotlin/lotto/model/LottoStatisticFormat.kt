@@ -17,8 +17,4 @@ data class LottoStatisticFormat(
     private fun getRankCount(rank: LottoRank): Int = winList[rank] ?: 0
 
     private fun getRankProfit(rank: LottoRank): Int = (getRankCount(rank) * rank.winningMoney)
-
-    companion object {
-        private const val FORMAT_PROFIT = "%.2f"
-    }
 }
