@@ -8,4 +8,11 @@ class Rank(private val numberOfMatch: Int, private val needBonusBall: Boolean) {
             throw InvalidNumberOfMatchException(numberOfMatch)
         }
     }
+
+    fun isUseBonusBall(isMatchBonus: Boolean): Boolean {
+        if (needBonusBall) {
+            return isMatchBonus
+        }
+        return false
+    }
 }
