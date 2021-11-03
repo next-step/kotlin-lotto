@@ -19,7 +19,12 @@ enum class MatchBoard(val numberOfMatch: Int, val matchPrize: Int) {
      * 보너스볼이 필요하지 않다면? -> 전부다 하나의 값으로 통일 -> true 가져가는게 낫겠지? -> 있어도 사용되니까
      * 보너스볼이 필요하다면? -> 들어온 값, 그대로 내보내면 되지 않나? -> true/false 가지고 알아서 계산할 듯
      */
-
+// fun needToMatchTheBonusBall(test: Boolean): Boolean {
+    //     if (available) {
+    //         return test
+    //     }
+    //     return true
+    // }
     companion object {
         fun values(numberOfMatch: Int, isMatchBonus: Boolean): MatchBoard {
             if (numberOfMatch == SECOND.numberOfMatch && isMatchBonus) {
