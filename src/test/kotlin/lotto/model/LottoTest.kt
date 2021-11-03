@@ -22,6 +22,7 @@ class LottoTest {
 
         // then
         assertThat(list.numbers.size).isEqualTo(6)
+        assertThat(list.numbers.map { it.number }).isEqualTo(listOf(1, 10, 13, 23, 33, 43))
     }
 
     @Test
