@@ -6,12 +6,12 @@ import domain.lotto.domain.Lottos
 import domain.lotto.domain.MatchBoard
 import domain.lotto.domain.MatchResult
 import domain.lotto.domain.Money
-import global.common.StringFavoriteConstant.BLANK
-import global.common.StringFavoriteConstant.COMMA
-import global.common.StringFavoriteConstant.EMPTY
-import global.common.StringFavoriteConstant.NEW_LINE
-import global.common.StringFavoriteConstant.SQUARE_BRACKETS_POSTFIX
-import global.common.StringFavoriteConstant.SQUARE_BRACKETS_PREFIX
+import global.common.constant.StringFavoriteConstant.BLANK
+import global.common.constant.StringFavoriteConstant.COMMA
+import global.common.constant.StringFavoriteConstant.EMPTY
+import global.common.constant.StringFavoriteConstant.NEW_LINE
+import global.common.constant.StringFavoriteConstant.SQUARE_BRACKETS_POSTFIX
+import global.common.constant.StringFavoriteConstant.SQUARE_BRACKETS_PREFIX
 import global.strategy.ui.ConsoleOutputStrategy
 import kotlin.math.floor
 

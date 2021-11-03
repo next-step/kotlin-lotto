@@ -15,7 +15,9 @@ class WinningLottoTest {
     @CsvSource(
         value = [
             "1, 2, 3, 4, 5, 6:7", "2, 3, 4, 5, 6, 7:1",
-            "40, 41, 42, 43, 44, 45:39", "39, 40, 41, 42, 43, 44:45"], delimiter = ':'
+            "40, 41, 42, 43, 44, 45:39", "39, 40, 41, 42, 43, 44:45"
+        ],
+        delimiter = ':'
     )
     fun `로또 당첨 번호와 보너스 번호를 통해 생성할 수 있다`(winningLotto: String, bonusBall: Int) {
         val winningLotto = WinningLotto.from(winningLotto, bonusBall) { it.split(", ") }
@@ -31,7 +33,8 @@ class WinningLottoTest {
         value = [
             "1, 2, 3, 4, 5, 6:1", "1, 2, 3, 4, 5, 6:6",
             "40, 41, 42, 43, 44, 45:40", "40, 41, 42, 43, 44, 45: 45"
-        ], delimiter = ':'
+        ],
+        delimiter = ':'
     )
     fun `로또 당첨 번호와 보너스 번호가 중복 되어서는 안 된다`(winningLotto: String, bonusBall: Int) {
         val exception = assertThrows<DuplicateBonusBallNumberException> {
@@ -45,7 +48,8 @@ class WinningLottoTest {
     @CsvSource(
         value = [
             "1, 2, 3, 4, 5, 6:7:7, 8, 9, 10, 11, 12:true", "2, 3, 4, 5, 6, 7:1:8, 9, 10, 11, 12, 13:false",
-            "40, 41, 42, 43, 44, 45:39:39, 38, 37, 36, 35, 34:true", "39, 40, 41, 42, 43, 44:45:39, 38, 37, 36, 35, 34:false"],
+            "40, 41, 42, 43, 44, 45:39:39, 38, 37, 36, 35, 34:true", "39, 40, 41, 42, 43, 44:45:39, 38, 37, 36, 35, 34:false"
+        ],
         delimiter = ':'
     )
     fun `보너스 번호가 포함되었는지 여부를 반환한다`(winningLotto: String, bonusBall: Int, lotto: String, expected: Boolean) {
@@ -66,7 +70,8 @@ class WinningLottoTest {
             "40, 41, 42, 43, 44, 45:39:39, 38, 37, 36, 35, 34:0",
             "40, 41, 42, 43, 44, 45:39:38, 37, 36, 35, 34, 33:0",
             "40, 41, 42, 43, 44, 45:39:40, 41, 42, 43, 44, 45:6",
-            "40, 41, 42, 43, 44, 45:39:39, 41, 42, 43, 44, 45:5"],
+            "40, 41, 42, 43, 44, 45:39:39, 41, 42, 43, 44, 45:5"
+        ],
         delimiter = ':'
     )
     fun `보너스 번호를 포함한 당첨 로또와 일치하는 로또 번호 갯수를 반환한다`(winningLotto: String, bonusBall: Int, lotto: String, expected: Int) {
