@@ -10,11 +10,11 @@ value class LottoMoney(val value: Int) {
         require(value % MONEY_PER_TICKET == 0) { "1000원 단위의 금액만 허용합니다" }
     }
 
-    fun calculateChange(count: Int): LottoMoney {
-        return LottoMoney(value - count * MONEY_PER_TICKET)
+    fun calculateChange(count: LottoTicketCount): LottoMoney {
+        return LottoMoney(value - count.value * MONEY_PER_TICKET)
     }
 
-    fun calculateCount(): Int {
-        return value / MONEY_PER_TICKET
+    fun calculateCount(): LottoTicketCount {
+        return LottoTicketCount(value / MONEY_PER_TICKET)
     }
 }
