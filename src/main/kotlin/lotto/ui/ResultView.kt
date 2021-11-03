@@ -6,6 +6,7 @@ import lotto.domain.LottoGame
 object ResultView {
     private const val REQUEST_BUDGET = "구입금액을 입력해 주세요."
     private const val NUMBER_OF_LOTTO_GAMES_SUFFIX = "개를 구매했습니다."
+    private const val REQUEST_BUDGET_LAST_WEEK_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
 
     fun printRequestBudget() = println(REQUEST_BUDGET)
 
@@ -13,5 +14,10 @@ object ResultView {
         println("${lotteryPaper.getNumberOfGames()}$NUMBER_OF_LOTTO_GAMES_SUFFIX")
 
     fun printLottoPaper(lotteryPaper: LotteryPaper) = lotteryPaper.getLottoGames().forEach { printLottoGame(it) }
+
+    fun printRequestLastWeekNumber() {
+        println(REQUEST_BUDGET_LAST_WEEK_NUMBER)
+    }
+
     private fun printLottoGame(lottoGame: LottoGame) = println(lottoGame.getNumbers().joinToString(", ", "[", "]"))
 }
