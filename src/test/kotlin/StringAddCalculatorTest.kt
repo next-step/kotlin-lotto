@@ -1,30 +1,71 @@
+import StringAddCalculator.Companion.EXCEPTION_NULL_OR_EMPTY
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.EmptySource
-import org.junit.jupiter.params.provider.NullSource
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
 
-    @ParameterizedTest
-    @NullSource
-    @EmptySource
-    fun `빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다`(input: String?) {
-        // given
-        val stringAddCalculator = StringAddCalculator(input)
-        // when
-        val result: Int = stringAddCalculator.calculate()
-        // then
-        assertThat(0).isEqualTo(result)
+    private lateinit var calculator: StringAddCalculator
+
+    @BeforeEach
+    fun setUp() {
+        calculator = StringAddCalculator()
     }
+
+    @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환")
     @ParameterizedTest
-    @ValueSource(strings = ["1", "2", "3"])
-    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(input: String) {
-        // given
-        val stringAddCalculator = StringAddCalculator(input)
-        // when
-        val result: Int = stringAddCalculator.calculate()
-        // then
-        assertThat(result).isEqualTo(input.toInt())
+    @NullAndEmptySource
+    fun emptyOrNull(text: String?) {
+        assertThat(calculator.add(text)).isZero
+    }
+
+    @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환")
+    @ParameterizedTest
+    @ValueSource(strings = ["1"])
+    fun oneNumber(text: String) {
+        assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text))
+    }
+
+    @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2"])
+    fun twoNumbers(text: String) {
+        assertThat(calculator.add(text)).isSameAs(3)
+    }
+
+    @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2:3"])
+    fun colons(text: String) {
+        assertThat(calculator.add(text)).isSameAs(6)
+    }
+
+    @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정")
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3", "//=\n1=2=3"])
+    fun customDelimiter(text: String) {
+        assertThat(calculator.add(text)).isSameAs(6)
+    }
+
+    @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정")
+    @ParameterizedTest
+    @ValueSource(strings = ["3,z", "2:3:z"])
+    fun character(text: String) {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.add(text) }
+            .withMessage(EXCEPTION_NULL_OR_EMPTY)
+    }
+
+    @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리")
+    @Test
+    fun negative() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.add("-1") }
+            .withMessage(EXCEPTION_NULL_OR_EMPTY)
     }
 }
