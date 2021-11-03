@@ -7,15 +7,30 @@ class Lottos private constructor(
     private val price: Price,
     private val purchasedLotto: List<Lotto>,
     private val lastWinNumber: Lotto,
+    private val bonusNumber: Int,
 ) {
 
     fun compareLottoResult(): LottoStatisticFormat {
         val hashMap = hashMapOf<LottoRank, Int>()
         purchasedLotto.forEach { lotto ->
-            val rank = LottoRank.findMatchRank(compareNumber(lotto))
+            val sameNumberCount = compareNumber(lotto)
+            val hasBonus = hasBonusNumber(lotto)
+            val rank = when {
+                sameNumberCount == LottoRank.FOURTH.countOfMatch && hasBonus -> LottoRank.findMatchRank(sameNumberCount + BONUS_MATCH_COUNT,
+                    true)
+                else -> LottoRank.findMatchRank(sameNumberCount, false)
+            }
             hashMap[rank] = hashMap.getOrDefault(rank, 0) + ADD_ONE_LOTTO
         }
         return LottoStatisticFormat(price, hashMap)
+    }
+
+    private fun hasBonusNumber(item: Lotto): Boolean {
+        item.numbers
+            .forEach { lottoNumber ->
+                if (bonusNumber == lottoNumber.number) return true
+            }
+        return false
     }
 
     private fun compareNumber(item: Lotto): Int {
@@ -31,19 +46,22 @@ class Lottos private constructor(
         private const val DELIMITER = ","
         private const val ERROR_INT = -1
         private const val ADD_ONE_LOTTO = 1
+        private const val BONUS_MATCH_COUNT = 1
         const val EXCEPTION_INPUT_NUMBER_NULL = "입력된 숫자가 없습니다."
 
         fun inputWinNumber(
             price: Price,
             purchasedLotto: List<Lotto>,
-            numbers: String?
+            numbers: String?,
+            bonusNumber: Int?,
         ): Lottos {
             require(numbers != null) { EXCEPTION_INPUT_NUMBER_NULL }
+            require(bonusNumber != null)
 
             val list = numbers
                 .split(DELIMITER)
                 .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
-            return Lottos(price, purchasedLotto, Lotto(list))
+            return Lottos(price, purchasedLotto, Lotto(list), bonusNumber)
         }
     }
 }

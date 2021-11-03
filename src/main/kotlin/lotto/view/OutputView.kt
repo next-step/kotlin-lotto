@@ -24,15 +24,26 @@ class OutputView {
         println("당첨 통계")
         println("---------")
         printRankingList(result)
-        println("총 수익률은 ${result.profit}입니다.")
+        printProfit(result.profit)
+    }
+
+    fun printProfit(profit: Double) {
+        val result = when {
+            1.0 >= profit -> "이득"
+            else -> "손해"
+        }
+        println("총 수익률은 ${profit}입니다. (기준이 1이기 때문에 결과적으로 ${result}라는 의미임)")
     }
 
     private fun printRankingList(result: LottoStatisticFormat) {
         LottoRank.values()
             .filter { it != LottoRank.MISS }
-            .sortedBy { it.countOfMatch }
+            .sortedBy { it.winningMoney }
             .forEach { rank ->
-                println("${rank.countOfMatch}개 일치 (${rank.winningMoney})- ${result.winList[rank] ?: 0}개")
+                when (rank) {
+                    LottoRank.SECOND -> println("${rank.countOfMatch}개 일치, 보너스 볼 일치 (${rank.winningMoney}${rank.moneyUnion})- ${result.winList[rank] ?: 0}개")
+                    else -> println("${rank.countOfMatch}개 일치 (${rank.winningMoney}${rank.moneyUnion})- ${result.winList[rank] ?: 0}개")
+                }
             }
     }
 }
