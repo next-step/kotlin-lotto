@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class LottoRanking(
     private val count: Int,

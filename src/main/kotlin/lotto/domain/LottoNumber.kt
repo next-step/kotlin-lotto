@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 private val VALID_LOTTO_RANGE = 1..45
 

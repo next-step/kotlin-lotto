@@ -1,5 +1,6 @@
-package lotto
+package lotto.domain
 
+import lotto.domain.LottoRanking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
