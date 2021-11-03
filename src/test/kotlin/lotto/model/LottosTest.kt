@@ -130,7 +130,7 @@ class LottosTest {
                     LottoNumber(1),
                     LottoNumber(13),
                     LottoNumber(23),
-                    LottoNumber(9),
+                    LottoNumber(33),
                     LottoNumber(22)
                 )
             )
