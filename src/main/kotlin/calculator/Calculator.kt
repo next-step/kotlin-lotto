@@ -7,5 +7,4 @@ object Calculator {
         val formula = Formula(input)
         return formula.sumValues()
     }
-
 }
