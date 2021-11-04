@@ -4,10 +4,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.ValueSource
 
 class LottoShopTest {
 
@@ -18,12 +16,11 @@ class LottoShopTest {
         shop = LottoShop()
     }
 
-    @ParameterizedTest(name = "구입 금액이 0원보다 작으면 RuntimeException 예외가 발생해야 한다.")
-    @ValueSource(
-        ints = [-10000, -50000]
-    )
-    fun lottoShopNegative(amount: Int) {
-        assertThrows<RuntimeException> { shop.buy(amount) }
+    @DisplayName("구입 금액이 0원보다 작으면 0개의 로또를 반환한다.")
+    @Test
+    fun lottoShopNegative() {
+        val actual = shop.buy(Amount(-1500)).size
+        assertThat(actual).isZero
     }
 
     @ParameterizedTest(name = "구매한 금액 만큼의 로또가 발급되어야 한다.")
@@ -36,7 +33,7 @@ class LottoShopTest {
         delimiter = '|'
     )
     fun lottoShopCount(amount: Int, count: Int) {
-        val actual = shop.buy(amount).size
+        val actual = shop.buy(Amount(amount)).size
         assertThat(actual).isEqualTo(count)
     }
 
@@ -47,7 +44,7 @@ class LottoShopTest {
         val lottoNumbers = List(20) { LottoNumbers.random() }
 
         val expected = 14
-        val actual = shop.buy(amount, lottoNumbers).size
+        val actual = shop.buy(Amount(amount), lottoNumbers).size
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -57,7 +54,7 @@ class LottoShopTest {
         val lottoNumbers = List(10) { LottoNumbers.random() }
 
         val expected = 4
-        val actual = shop.buy(amount, lottoNumbers).count { it.isAuto }
+        val actual = shop.buy(Amount(amount), lottoNumbers).count { it.isAuto }
         assertThat(actual).isEqualTo(expected)
     }
 }

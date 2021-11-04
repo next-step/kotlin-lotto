@@ -2,17 +2,13 @@ package lotto.model
 
 class LottoShop {
 
-    fun buy(amount: Int): List<Lotto> {
-        require(amount >= 0)
-
+    fun buy(amount: Amount): List<Lotto> {
         val size = amount / LOTTO_PRICE
         val machine = LottoMachine()
         return machine.auto(Size(size), LOTTO_PRICE)
     }
 
-    fun buy(amount: Int, manualNumbers: List<LottoNumbers>): List<Lotto> {
-        require(amount >= 0)
-
+    fun buy(amount: Amount, manualNumbers: List<LottoNumbers>): List<Lotto> {
         val size = amount / LOTTO_PRICE
         val manualSize = manualNumbers.size.coerceAtMost(size)
         val autoSize = size - manualSize
