@@ -4,8 +4,8 @@ package lotto.domain
 value class Lotto(
     private val lottoNumbers: LottoNumbers,
 ) {
-    fun matchWinningNumber(winningNumbers: List<LottoNumber>): Int {
-        return winningNumbers.count {
+    fun matchWinningNumber(winningNumbers: LottoNumbers): Int {
+        return winningNumbers.value.count {
             lottoNumbers.containsWinningNumbers(it.value)
         }
     }

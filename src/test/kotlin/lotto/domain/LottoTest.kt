@@ -29,7 +29,7 @@ class LottoTest {
 
         // Act
         val sut = Lotto(lottoNumbers)
-        val matchCount = sut.matchWinningNumber(winningNumbers)
+        val matchCount = sut.matchWinningNumber(LottoNumbers(winningNumbers))
 
         // Assert
         assertThat(matchCount).isEqualTo(5)

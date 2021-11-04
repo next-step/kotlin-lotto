@@ -43,7 +43,7 @@ class LottosTest {
 
         // Act
         val sut = Lottos(lottos)
-        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber.value, bonusNumber)
+        val result: Map<Rank, Int> = sut.matchWinningNumber(LottoNumbers(winningNumber.value), bonusNumber)
 
         // Assert
         assertThat(result[Rank.FIRST]).isEqualTo(1)

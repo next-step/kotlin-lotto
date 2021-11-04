@@ -5,7 +5,7 @@ class Lottos(
 ) {
     val value = value.toList()
 
-    fun matchWinningNumber(winningNumbers: List<LottoNumber>, bonusNumber: Int): Map<Rank, Int> {
+    fun matchWinningNumber(winningNumbers: LottoNumbers, bonusNumber: Int): Map<Rank, Int> {
         return value
             .map {
                 Rank.valueOf(it.matchWinningNumber(winningNumbers), it.matchBonusNumber(bonusNumber))
