@@ -21,7 +21,7 @@ class SplitParserTest {
     @ValueSource(strings = ["//;\\n1;2;3", "//$\\n1$2$3", "//%\\n1%2%3"])
     @ParameterizedTest
     fun `1,2,3이 custom separator 로 이루어졌을 때 결과 listOf(1,2,3)`(input: String) {
-        val expected = listOf(1, 2, 3)
+        val expected = listOf(1,2,3)
         val actual = parser.parse(input)
 
         assertEquals(expected, actual)

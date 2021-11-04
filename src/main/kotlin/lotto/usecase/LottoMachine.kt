@@ -3,22 +3,31 @@ package lotto.usecase
 import lotto.domain.Lotto
 
 class LottoMachine(
-    private val lottoNumberGenerator: LottoNumberGenerator,
+    private val lottoGenerator: LottoGenerator,
 ) {
 
     fun buy(purchaseAmount: Int): List<Lotto> {
         val numberOfPurchase = purchaseAmount / LOTTO_PRICE
+        val lottos = mutableListOf<Lotto>()
 
-        return (1..numberOfPurchase).map {
-            Lotto(
-                numbers = lottoNumberGenerator.generate(LOTTO_NUMBER_RANGE),
-                price = LOTTO_PRICE,
-            )
+        repeat(numberOfPurchase) {
+            val numbers = (MIN_NUMBER..MAX_NUMBER)
+                .shuffled()
+                .subList(START_INDEX, END_INDEX)
+                .sorted()
+            val lotto = lottoGenerator.generate(numbers, LOTTO_PRICE)
+
+            lottos.add(lotto)
         }
+
+        return lottos.toList()
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1_000
-        private val LOTTO_NUMBER_RANGE = (1..45)
+        private const val MIN_NUMBER = 1
+        private const val MAX_NUMBER = 45
+        private const val START_INDEX = 0
+        private const val END_INDEX = 6
+        private const val LOTTO_PRICE = 1000
     }
 }

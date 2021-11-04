@@ -13,8 +13,8 @@ class LottoStatisticsTest {
             totalPurchaseAmount = 1000,
             winningStatistics = WinningStatistics(
                 listOf(
-                    Rank.FOURTH,
-                    Rank.FOURTH,
+                    Rank.FIFTH,
+                    Rank.FIFTH,
                 )
             )
         )
@@ -30,8 +30,8 @@ class LottoStatisticsTest {
             totalPurchaseAmount = 2000,
             winningStatistics = WinningStatistics(
                 listOf(
-                    Rank.FOURTH,
-                    Rank.FOURTH,
+                    Rank.FIFTH,
+                    Rank.FIFTH,
                 )
             )
         )

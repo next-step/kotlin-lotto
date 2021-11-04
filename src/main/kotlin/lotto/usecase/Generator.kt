@@ -1,5 +1,10 @@
 package lotto.usecase
 
+import lotto.domain.Lotto
+
 interface Generator {
-    fun generate(numberRange: IntRange): List<Int>
+    fun generate(
+        numbers: List<Int>,
+        price: Int,
+    ): Lotto
 }
