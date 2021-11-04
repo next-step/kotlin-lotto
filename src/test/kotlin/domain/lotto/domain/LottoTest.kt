@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 @DisplayName("로또(Lotto)")
 class LottoTest {
@@ -69,5 +71,21 @@ class LottoTest {
             { assertThat(standard.match(nonMatch)).isZero() },
             { assertThat(standard.match(someMatch)).isEqualTo(3) },
         )
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        value = [
+            "1, 2, 3, 4, 5, 6:1:true", "1, 2, 3, 4, 5, 6:6:true", "1, 2, 3, 4, 5, 6:7:false",
+            "40, 41, 42, 43, 44, 45:40:true", "40, 41, 42, 43, 44, 45:45:true", "40, 41, 42, 43, 44, 45:39:false"
+        ],
+        delimiter = ':'
+    )
+    fun `동일한 로또 번호를 가지고 있는지 여부를 반환한다`(lottoString: String, bonusBall: Int, expected: Boolean) {
+        val lotto = Lotto.of(lottoString) { it.split(", ") }
+        val bonusBall = LottoNumber.of(bonusBall)
+        val actual = lotto.contains(bonusBall)
+
+        assertThat(actual).isEqualTo(expected)
     }
 }

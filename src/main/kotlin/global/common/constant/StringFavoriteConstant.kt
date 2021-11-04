@@ -1,4 +1,4 @@
-package global.common
+package global.common.constant
 
 object StringFavoriteConstant {
     const val EMPTY = ""

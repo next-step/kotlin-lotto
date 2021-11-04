@@ -4,9 +4,9 @@ import domain.lotto.strategy.LottoShuffleStrategy
 
 @JvmInline
 value class Lottos private constructor(val lottos: List<Lotto>) {
-    fun match(winningLotto: Lotto): Map<MatchBoard, Int> {
+    fun match(winningLotto: WinningLotto): Map<MatchBoard, Int> {
         val eachCount = lottos
-            .groupingBy { MatchBoard.values(it.match(winningLotto)) }
+            .groupingBy { MatchBoard.values(winningLotto.match(it), winningLotto.isMatchBonusBall(it)) }
             .eachCount()
         return MatchBoard.valuesExcludedMiss()
             .associateWith { eachCount[it] ?: NO_MATCH }

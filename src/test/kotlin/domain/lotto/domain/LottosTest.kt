@@ -30,9 +30,8 @@ class LottosTest {
         expected[MatchBoard.FIRST] = 1
 
         val lottos: Lottos = Lottos.from(1) { it.sorted() }
-        val lotto = Lotto.of("1, 2, 3, 4, 5, 6") { it.split(", ") }
-
-        val actual = lottos.match(lotto)
+        val winningLotto = WinningLotto.from("1, 2, 3, 4, 5, 6", 7) { it.split(", ") }
+        val actual = lottos.match(winningLotto)
         assertThat(actual).isEqualTo(expected)
     }
 }

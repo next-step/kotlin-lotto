@@ -6,12 +6,12 @@ import domain.lotto.domain.Lottos
 import domain.lotto.domain.MatchBoard
 import domain.lotto.domain.MatchResult
 import domain.lotto.domain.Money
-import global.common.StringFavoriteConstant.BLANK
-import global.common.StringFavoriteConstant.COMMA
-import global.common.StringFavoriteConstant.EMPTY
-import global.common.StringFavoriteConstant.NEW_LINE
-import global.common.StringFavoriteConstant.SQUARE_BRACKETS_POSTFIX
-import global.common.StringFavoriteConstant.SQUARE_BRACKETS_PREFIX
+import global.common.constant.StringFavoriteConstant.BLANK
+import global.common.constant.StringFavoriteConstant.COMMA
+import global.common.constant.StringFavoriteConstant.EMPTY
+import global.common.constant.StringFavoriteConstant.NEW_LINE
+import global.common.constant.StringFavoriteConstant.SQUARE_BRACKETS_POSTFIX
+import global.common.constant.StringFavoriteConstant.SQUARE_BRACKETS_PREFIX
 import global.strategy.ui.ConsoleOutputStrategy
 import kotlin.math.floor
 
@@ -41,8 +41,17 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
 
     private fun matchResultJoinToString(matchResult: Map<MatchBoard, Int>) =
         matchResult
-            .map { WINNING_MATCH_RESULT_MESSAGE.format(it.key.numberOfMatch, it.key.matchPrize, it.value) }
+            .map(this::winningMatchResultMessage)
             .joinToString(separator = EMPTY)
+
+    private fun winningMatchResultMessage(entry: Map.Entry<MatchBoard, Int>): String {
+        val matchBoard = entry.key
+        val rank = matchBoard.rank
+        if (rank.necessityOfBonus) {
+            return WINNING_MATCH_BONUS_RESULT_MESSAGE.format(rank.numberOfMatch, matchBoard.matchPrize, entry.value)
+        }
+        return WINNING_MATCH_RESULT_MESSAGE.format(rank.numberOfMatch, matchBoard.matchPrize, entry.value)
+    }
 
     fun showYield(money: Money, winnings: Money) =
         consoleOutputStrategy.output(
@@ -54,7 +63,9 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
     companion object {
         private const val NUMBER_OF_PURCHASES_MESSAGE = "%s개를 구매했습니다."
         private const val WINNING_MATCH_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개$NEW_LINE"
-        private const val WINNINGS_YIELD_MESSAGE = "총 수익률은 %4.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+        private const val WINNING_MATCH_BONUS_RESULT_MESSAGE = "%s개 일치 보너스 볼 일치(%s원)- %s개$NEW_LINE"
+
+        private const val WINNINGS_YIELD_MESSAGE = "총 수익률은 %4.2f입니다."
         private const val PERCENTAGE = 100
     }
 }
