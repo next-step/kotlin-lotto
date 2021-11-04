@@ -15,9 +15,13 @@ class LottoShop {
 
         val size = amount / LOTTO_PRICE
         val manualSize = manualNumbers.size.coerceAtMost(size)
-        val machine = LottoMachine()
+        val autoSize = size - manualSize
 
-        return machine.manual(manualNumbers.take(manualSize), LOTTO_PRICE)
+        val machine = LottoMachine()
+        val manual = machine.manual(manualNumbers.take(manualSize), LOTTO_PRICE)
+        val auto = machine.auto(autoSize, LOTTO_PRICE)
+
+        return manual + auto
     }
 
     companion object {

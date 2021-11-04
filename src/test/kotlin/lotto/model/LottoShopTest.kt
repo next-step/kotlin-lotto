@@ -46,6 +46,18 @@ class LottoShopTest {
         val amount = 14000
         val lottoNumbers = List(20) { LottoNumbers.random() }
 
-        assertThat(shop.buy(amount, lottoNumbers).size).isEqualTo(14)
+        val expected = 14
+        val actual = shop.buy(amount, lottoNumbers).size
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @DisplayName("수동으로 구매하는 로또를 제외한 나머지는 자동으로 발급한다.")
+    fun lottoShopPurchaseAuto() {
+        val amount = 14000
+        val lottoNumbers = List(10) { LottoNumbers.random() }
+
+        val expected = 4
+        val actual = shop.buy(amount, lottoNumbers).count { it.isAuto }
+        assertThat(actual).isEqualTo(expected)
     }
 }

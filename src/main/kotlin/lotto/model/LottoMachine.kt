@@ -6,12 +6,9 @@ class LottoMachine {
         require(size >= 0)
 
         return List(size) {
-            Lotto(
-                price = price,
-                numbers = LottoNumbers.random()
-            )
+            Lotto.auto(price = price)
         }
     }
 
-    fun manual(numbers: List<LottoNumbers>, price: Int): List<Lotto> = numbers.map { Lotto(price, it) }
+    fun manual(numbers: List<LottoNumbers>, price: Int): List<Lotto> = numbers.map { Lotto.manual(price, it) }
 }
