@@ -18,10 +18,6 @@ class Lottos(val lottos: List<Lotto>) {
     }
 
     companion object {
-        fun from(lottos: List<List<Int>>): Lottos {
-            return Lottos(lottos.map { Lotto.from(it) })
-        }
-
         fun of(quantity: Int, generatorFactory: GeneratorFactory): Lottos {
             if (quantity < 0) {
                 throw IllegalLottosException("로또의 수량은 음수일 수 없습니다.")

@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.dto.LottoDto
 import lotto.dto.WinningLottoDto
 
 object InputView {
@@ -8,10 +9,10 @@ object InputView {
         return readNumber()
     }
 
-    fun askManualLottos(): List<List<Int>> {
+    fun askManualLottos(): List<LottoDto> {
         val number = askManualLottoNumber()
         println("\n수동으로 구매할 번호를 입력해 주세요.")
-        return (1..number).map { readLottoNumbers() }
+        return (1..number).map { LottoDto(readLottoNumbers()) }
     }
 
     private fun askManualLottoNumber(): Int {

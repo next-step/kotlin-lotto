@@ -14,7 +14,7 @@ import lotto.view.OutputView
 object LottoGame {
     fun run() {
         val purchase = Purchase(InputView.askPurchase())
-        val manualLottos = Lottos.from(InputView.askManualLottos())
+        val manualLottos = Lottos(InputView.askManualLottos().map { it.toLotto() })
         val autoLottos = Lottos.of(
             purchase.calculateQuantity(Lotto.PRICE) - manualLottos.size(),
             RandomGeneratorFactory(LottoNumber.MIN, LottoNumber.MAX)

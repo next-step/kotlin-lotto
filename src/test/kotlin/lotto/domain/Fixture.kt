@@ -5,32 +5,32 @@ object Fixture {
         return Lotto.from(numbers.toList())
     }
 
-    val manualLottos = Lottos.from(
+    val manualLottos = Lottos(
         listOf(
-            listOf(1, 2, 3, 4, 5, 6),
-            listOf(2, 3, 4, 5, 6, 7),
-            listOf(3, 4, 5, 6, 7, 8),
-            listOf(4, 5, 6, 7, 8, 9)
+            createLotto(1, 2, 3, 4, 5, 6),
+            createLotto(2, 3, 4, 5, 6, 7),
+            createLotto(3, 4, 5, 6, 7, 8),
+            createLotto(4, 5, 6, 7, 8, 9)
         )
     )
-    val lottos = Lottos.from(
+    val lottos = Lottos(
         listOf(
-            listOf(1, 2, 3, 4, 5, 6),
-            listOf(1, 2, 3, 4, 5, 7),
-            listOf(1, 2, 3, 4, 5, 11),
-            listOf(1, 2, 3, 4, 5, 12),
-            listOf(1, 2, 3, 4, 7, 11),
-            listOf(1, 2, 3, 4, 7, 12),
-            listOf(1, 2, 3, 4, 7, 13),
-            listOf(1, 2, 3, 7, 8, 11),
-            listOf(1, 2, 3, 7, 8, 12),
-            listOf(1, 2, 3, 7, 8, 13),
-            listOf(1, 2, 3, 7, 8, 14),
-            listOf(21, 22, 23, 24, 25, 11),
-            listOf(21, 22, 23, 24, 25, 12),
-            listOf(21, 22, 23, 24, 25, 13),
-            listOf(21, 22, 23, 24, 25, 14),
-            listOf(21, 22, 23, 24, 25, 15)
+            createLotto(1, 2, 3, 4, 5, 6),
+            createLotto(1, 2, 3, 4, 5, 7),
+            createLotto(1, 2, 3, 4, 5, 11),
+            createLotto(1, 2, 3, 4, 5, 12),
+            createLotto(1, 2, 3, 4, 7, 11),
+            createLotto(1, 2, 3, 4, 7, 12),
+            createLotto(1, 2, 3, 4, 7, 13),
+            createLotto(1, 2, 3, 7, 8, 11),
+            createLotto(1, 2, 3, 7, 8, 12),
+            createLotto(1, 2, 3, 7, 8, 13),
+            createLotto(1, 2, 3, 7, 8, 14),
+            createLotto(21, 22, 23, 24, 25, 11),
+            createLotto(21, 22, 23, 24, 25, 12),
+            createLotto(21, 22, 23, 24, 25, 13),
+            createLotto(21, 22, 23, 24, 25, 14),
+            createLotto(21, 22, 23, 24, 25, 15)
         )
     )
     val winningLotto = WinningLotto(createLotto(), LottoNumber(7))
