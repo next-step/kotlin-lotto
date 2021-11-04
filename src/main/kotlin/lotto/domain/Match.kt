@@ -1,27 +1,42 @@
 package lotto.domain
 
-enum class Match(val prize: Int) {
-    THREE(5000),
-    FOUR(50000),
-    FIVE(1500000),
-    BONUS(30000000),
-    SIX(2000000000),
-    NONE(0);
+enum class Match(val prize: Int, val lottoPrize: LottoPrize) {
+    THREE(5000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 3
+        }
+    }),
+    FOUR(50000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 4
+        }
+    }),
+    FIVE(1500000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 5 && !matchResult.matchBonus
+        }
+    }),
+    BONUS(30000000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 5 && matchResult.matchBonus
+        }
+    }),
+    SIX(2000000000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 6
+        }
+    }),
+    NONE(0, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return false
+        }
+    });
 
     companion object {
-        fun valueOf(count: Int, isBonus: Boolean): Match {
-            return mapper.getOrDefault(Pair(count, isBonus), NONE)
+        fun valueOf(count: Int, matchBonus: Boolean): Match {
+            return values().find {
+                it.lottoPrize.isMatchPrize(MatchResult(count, matchBonus))
+            } ?: NONE
         }
-
-        private val mapper = mapOf(
-            Pair(3, true) to THREE,
-            Pair(3, false) to THREE,
-            Pair(4, true) to FOUR,
-            Pair(4, false) to FOUR,
-            Pair(5, true) to BONUS,
-            Pair(5, false) to FIVE,
-            Pair(6, true) to SIX,
-            Pair(6, false) to SIX,
-        )
     }
 }

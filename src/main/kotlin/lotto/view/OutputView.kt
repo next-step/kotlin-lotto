@@ -7,7 +7,7 @@ object OutputView {
 
     fun printLottos(lottosDto: LottosDto) {
         println("\n수동으로 ${lottosDto.manualSize}장, ${lottosDto.autoSize}으로 11개를 구매했습니다.")
-        lottosDto.lottos.forEach { println(it) }
+        lottosDto.lottos.forEach { println(it.numbers) }
     }
 
     fun printResult(resultDto: ResultDto) {
