@@ -1,8 +1,8 @@
 package lotto.domain
 
-import lotto.domain.LottoOperator.LOTTO_FIRST_NUMBER
-import lotto.domain.LottoOperator.LOTTO_LAST_NUMBER
-import lotto.domain.LottoOperator.LOTTO_SIZE
+import lotto.domain.LottoNumber.Companion.LOTTO_FIRST_NUMBER
+import lotto.domain.LottoNumber.Companion.LOTTO_LAST_NUMBER
+import lotto.domain.LottoNumber.Companion.LOTTO_SIZE
 import lotto.exception.InvalidLottoNumberException
 
 class LottoNumbers(

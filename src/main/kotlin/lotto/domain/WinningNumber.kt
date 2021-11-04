@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.domain.LottoOperator.LOTTO_SIZE
+import lotto.domain.LottoNumber.Companion.LOTTO_SIZE
 import lotto.exception.InvalidWinningNumberException
 import lotto.exception.InvalidWinningNumberException.Companion.INVALID_WINNING_NUMBER_MESSAGE
 

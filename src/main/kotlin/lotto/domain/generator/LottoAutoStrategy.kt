@@ -4,8 +4,8 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBERS
-import lotto.domain.LottoOperator.LOTTO_FIRST_INDEX
-import lotto.domain.LottoOperator.LOTTO_LAST_INDEX
+import lotto.domain.generator.LottoGeneratorStrategy.Companion.LOTTO_FIRST_INDEX
+import lotto.domain.generator.LottoGeneratorStrategy.Companion.LOTTO_LAST_INDEX
 
 class LottoAutoStrategy : LottoGeneratorStrategy {
 
