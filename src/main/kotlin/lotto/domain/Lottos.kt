@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.exception.IllegalLottosException
 
-class Lottos(val lottos: List<Lotto>) {
+open class Lottos(val lottos: List<Lotto>) {
     fun countMatches(winningLotto: WinningLotto): Map<Match, Int> {
         return lottos.map { winningLotto.checkMatch(it) }
             .groupingBy { it }
