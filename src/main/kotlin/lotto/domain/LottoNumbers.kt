@@ -6,12 +6,12 @@ import lotto.domain.LottoOperator.LOTTO_SIZE
 import lotto.exception.InvalidLottoNumberException
 
 class LottoNumbers(
-    _value: List<LottoNumber>,
+    value: List<LottoNumber>,
 ) {
-    val value = ArrayList(_value)
+    val value = value.toList()
 
     init {
-        if (value.isEmpty() || value.distinct().size != LOTTO_SIZE) {
+        if (this.value.isEmpty() || this.value.distinct().size != LOTTO_SIZE) {
             throw InvalidLottoNumberException()
         }
     }
