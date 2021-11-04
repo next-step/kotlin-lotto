@@ -1,7 +1,7 @@
 package lotto.domain
 
 import lotto.fixture.LottoNumbersFixture
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class LotteryTest {
@@ -16,6 +16,6 @@ class LotteryTest {
         val matches = first.compareTo(second)
 
         // then
-        Assertions.assertThat(matches).isEqualTo(5)
+        assertThat(matches).isEqualTo(5)
     }
 }

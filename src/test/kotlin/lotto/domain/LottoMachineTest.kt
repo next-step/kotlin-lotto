@@ -1,7 +1,7 @@
 package lotto.domain
 
 import lotto.domain.strategy.MockLottoGenerator
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -19,7 +19,7 @@ class LottoMachineTest {
         val totalCount = machine.count(userBudget)
 
         // then
-        Assertions.assertThat(totalCount).isEqualTo(count)
+        assertThat(totalCount).isEqualTo(count)
     }
 
     @ParameterizedTest
@@ -32,6 +32,6 @@ class LottoMachineTest {
         val lotteries = machine.buy(count)
 
         // then
-        Assertions.assertThat(lotteries.values.size).isEqualTo(count)
+        assertThat(lotteries.values.size).isEqualTo(count)
     }
 }

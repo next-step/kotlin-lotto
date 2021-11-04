@@ -2,7 +2,8 @@ package lotto.domain
 
 import lotto.fixture.LotteriesFixture
 import lotto.fixture.LotteryFixture
-import org.junit.jupiter.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 
 class LotteryStatisticsTest {
@@ -17,12 +18,12 @@ class LotteryStatisticsTest {
         val statistics = LotteryStatistics.of(lotteries, winning).values
 
         // then
-        Assertions.assertAll(
-            { org.assertj.core.api.Assertions.assertThat(statistics.containsKey(Ranking.THIRD)) },
-            { org.assertj.core.api.Assertions.assertThat(statistics.containsKey(Ranking.FOURTH)) },
-            { org.assertj.core.api.Assertions.assertThat(statistics[Ranking.THIRD]).isEqualTo(1) },
-            { org.assertj.core.api.Assertions.assertThat(statistics[Ranking.FOURTH]).isEqualTo(1) },
-            { org.assertj.core.api.Assertions.assertThat(statistics.size).isEqualTo(2) }
+        assertAll(
+            { assertThat(statistics.containsKey(Ranking.THIRD)) },
+            { assertThat(statistics.containsKey(Ranking.FOURTH)) },
+            { assertThat(statistics[Ranking.THIRD]).isEqualTo(1) },
+            { assertThat(statistics[Ranking.FOURTH]).isEqualTo(1) },
+            { assertThat(statistics.size).isEqualTo(2) }
         )
     }
 
@@ -37,7 +38,7 @@ class LotteryStatisticsTest {
         val reward = statistics.calculate()
 
         // then
-        org.assertj.core.api.Assertions.assertThat(reward)
+        assertThat(reward)
             .isEqualTo(Money.of(Ranking.THIRD.reward.value.add(Ranking.FOURTH.reward.value)))
     }
 }

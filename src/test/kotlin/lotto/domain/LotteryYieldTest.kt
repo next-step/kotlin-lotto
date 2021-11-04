@@ -1,6 +1,6 @@
 package lotto.domain
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.math.BigDecimal
@@ -20,6 +20,6 @@ class LotteryYieldTest {
         val ratio = LotteryYield.of(userPaid, totalRewards).ratio
 
         // then
-        Assertions.assertThat(ratio).isEqualTo(expected)
+        assertThat(ratio).isEqualTo(expected)
     }
 }

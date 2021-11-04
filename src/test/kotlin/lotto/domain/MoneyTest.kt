@@ -1,6 +1,6 @@
 package lotto.domain
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -17,6 +17,6 @@ class MoneyTest {
         val totalCount = userBudget.count(ticketPrice)
 
         // then
-        Assertions.assertThat(totalCount).isEqualTo(count)
+        assertThat(totalCount).isEqualTo(count)
     }
 }
