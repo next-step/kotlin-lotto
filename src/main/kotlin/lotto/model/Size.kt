@@ -4,6 +4,6 @@ package lotto.model
 value class Size private constructor(val value: Int) {
 
     companion object {
-        fun from(value: Int): Size = Size(value.coerceAtLeast(0))
+        operator fun invoke(value: Int): Size = Size(value.coerceAtLeast(0))
     }
 }

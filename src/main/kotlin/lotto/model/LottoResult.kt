@@ -47,7 +47,7 @@ data class LottoResult(
             if (winnersByRank.isEmpty()) {
                 return 0f
             }
-            val totalPrice = lottoList.sumOf { it.price }
+            val totalPrice = lottoList.sumOf { it.price.value }
             val totalWinnings = winnersByRank.map { (rank, count) -> rank.winnings * count }.sum()
             val rateOfReturn = (totalWinnings.toFloat() / totalPrice)
             // 소수점 2자리 유지

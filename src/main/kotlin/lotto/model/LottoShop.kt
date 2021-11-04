@@ -7,7 +7,7 @@ class LottoShop {
 
         val size = amount / LOTTO_PRICE
         val machine = LottoMachine()
-        return machine.auto(Size.from(size), LOTTO_PRICE)
+        return machine.auto(Size(size), LOTTO_PRICE)
     }
 
     fun buy(amount: Int, manualNumbers: List<LottoNumbers>): List<Lotto> {
@@ -19,12 +19,12 @@ class LottoShop {
 
         val machine = LottoMachine()
         val manual = machine.manual(manualNumbers.take(manualSize), LOTTO_PRICE)
-        val auto = machine.auto(Size.from(autoSize), LOTTO_PRICE)
+        val auto = machine.auto(Size(autoSize), LOTTO_PRICE)
 
         return manual + auto
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1_000
+        private val LOTTO_PRICE = Price(1_000)
     }
 }
