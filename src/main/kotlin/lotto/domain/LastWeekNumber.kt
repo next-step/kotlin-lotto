@@ -10,4 +10,6 @@ class LastWeekNumber(numbers: List<Int>) {
         require(numbers.size == 6) { LAST_WEEK_INPUT_NUMBERS_SIZE_MUST_SIX }
         require(numbersSet.size == 6) { LAST_WEEK_NUMBERS_SIZE_MUST_SIX }
     }
+
+    fun getLastWeekSetList() = numbersSet.toSet()
 }
