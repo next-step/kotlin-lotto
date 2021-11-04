@@ -2,10 +2,13 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatCode
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -70,7 +73,7 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
-        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getMatchedCount(winningInfo.winningNumberPackage), lottoNumberPackage.matchedBonusNumber(winningInfo.bonusNumber))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
@@ -96,7 +99,7 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
-        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getMatchedCount(winningInfo.winningNumberPackage), lottoNumberPackage.matchedBonusNumber(winningInfo.bonusNumber))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
@@ -123,7 +126,7 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
-        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getMatchedCount(winningInfo.winningNumberPackage), lottoNumberPackage.matchedBonusNumber(winningInfo.bonusNumber))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
@@ -149,7 +152,7 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
-        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getMatchedCount(winningInfo.winningNumberPackage), lottoNumberPackage.matchedBonusNumber(winningInfo.bonusNumber))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
@@ -174,7 +177,7 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
-        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getMatchedCount(winningInfo.winningNumberPackage), lottoNumberPackage.matchedBonusNumber(winningInfo.bonusNumber))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
@@ -199,7 +202,7 @@ internal class LottoNumberPackageTest {
         val lottoNumberPackage = LottoNumberPackage(lottoNumbers.map { LottoNumber[it] }.toSet())
         val winningNumberPackage = LottoNumberPackage(winningNumbers.map { LottoNumber[it] }.toSet())
         val winningInfo = WinningInfo(winningNumberPackage, LottoNumber.from(bonusNumberInput, winningNumberPackage))
-        val rank = LottoResultRank.getRank(lottoNumberPackage.getRankKey(winningInfo))
+        val rank = LottoResultRank.getRank(lottoNumberPackage.getMatchedCount(winningInfo.winningNumberPackage), lottoNumberPackage.matchedBonusNumber(winningInfo.bonusNumber))
 
         assertThat(lottoNumberPackage).isNotNull
         assertThat(lottoNumberPackage.size()).isEqualTo(LottoNumberPackage.LOTTO_GAME_NUMBER_COUNT)
@@ -212,5 +215,56 @@ internal class LottoNumberPackageTest {
             Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6), "13"),
             Arguments.of(listOf(7, 8, 9, 10, 11, 12), listOf(7, 8, 9, 10, 11, 12), "13"),
         )
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    fun `당첨 번호에 빈 문자열을 입력하면 IllegalArgumentException이 발생한다`(input: String) {
+        Assertions.assertThatThrownBy {
+            LottoNumberPackage.from(input)
+        }.isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "aaa, 1, 2, 3, 4, 5",
+            "테스트, 1, 2, 3, 4, 5",
+            "!, 1, 2, 3, 4, 5",
+            "/, 1, 2, 3, 4, 5"
+        ]
+    )
+    fun `당첨 번호에 숫자가 아닌 값을 입력하면 IllegalArgumentException이 발생한다`(input: String) {
+        Assertions.assertThatThrownBy {
+            LottoNumberPackage.from(input)
+        }.isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "1",
+            "1, 2",
+            "1, 2, 3",
+            "1, 2, 3, 4",
+            "1, 2, 3, 4, 5",
+            "1, 2, 3, 4, 5, 6, 7",
+        ]
+    )
+    fun `당첨 번호가 6개가 아니면 IllegalArgumentException이 발생한다`(input: String) {
+        Assertions.assertThatThrownBy {
+            LottoNumberPackage.from(input)
+        }.isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "1, 2, 3, 4, 5, 6",
+            "21, 32, 43, 4, 15, 27"
+        ]
+    )
+    fun `당첨 번호가 6개를 입력하면 정상적으로 WinningInfo 가 생성된다`(input: String) {
+        assertThatCode { LottoNumberPackage.from(input) }.doesNotThrowAnyException()
     }
 }
