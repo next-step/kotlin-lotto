@@ -8,6 +8,7 @@ import org.junit.jupiter.api.RepetitionInfo
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 @DisplayName("로또티켓(Ticket)")
@@ -29,5 +30,22 @@ class TicketTest {
         val exception = assertThrows<InvalidTicketCountRangeException> { Ticket(ticketCount) }
 
         assertThat(exception.message).isEqualTo("%s는 Ticket 의 범위를 벗어난 값입니다.".format(ticketCount))
+    }
+
+    @ParameterizedTest(name = "입력값: {0}")
+    @CsvSource(
+        value = [
+            "1:1:0", "1:0:1", "10:1:9", "10:10:0",
+            "${Integer.MAX_VALUE}:1:${Integer.MAX_VALUE - 1}", "${Integer.MAX_VALUE}:${Integer.MAX_VALUE}:0"
+        ],
+        delimiter = ':'
+    )
+    fun `티켓끼리 빼기 연산을 할 수 있다`(standardCount: Int, operandCount: Int, expectedCount: Int) {
+        val standardTicket = Ticket(standardCount)
+        val operandTicket = Ticket(operandCount)
+        val expected = Ticket(expectedCount)
+        val actual: Ticket = standardTicket - operandTicket
+
+        assertThat(actual).isEqualTo(expected)
     }
 }
