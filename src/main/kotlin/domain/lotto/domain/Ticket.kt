@@ -2,7 +2,8 @@ package domain.lotto.domain
 
 import domain.lotto.error.InvalidTicketCountRangeException
 
-class Ticket(private val ticketCount: Int) {
+@JvmInline
+value class Ticket(val ticketCount: Int) {
     init {
         validateTicketCountRange(ticketCount)
     }
@@ -12,9 +13,13 @@ class Ticket(private val ticketCount: Int) {
     }
 
     private fun validateTicketCountRange(ticketCount: Int) {
-        if (ticketCount < 0) {
+        if (ticketCount < MINIMUM) {
             throw InvalidTicketCountRangeException(ticketCount)
         }
+    }
+
+    companion object {
+        private const val MINIMUM = 0
     }
 }
 
