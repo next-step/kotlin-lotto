@@ -21,6 +21,10 @@ class LottoApplication(
     fun run() {
         val money = purchaseLottoByConsole()
         lottoResultView.showNumberOfPurchases(money.numberOfPurchases(Lotto.PRICE))
+        // 티켓 클래스를 만들어야겠네
+        // 티켓 3 -> money -> 티켓 만들기 -> 티켓 빼기 ->
+        val manuallyPurchaseLotto = lottoInputView.manuallyPurchaseLotto()
+
         val lottos = LottoService.lottos(money, LottoRandomShuffleStrategy)
         lottoResultView.showLottos(lottos)
 
