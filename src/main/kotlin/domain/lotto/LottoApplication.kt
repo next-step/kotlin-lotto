@@ -23,12 +23,15 @@ class LottoApplication(
     fun run() {
         val money = purchaseLottoByConsole()
         lottoResultView.showNumberOfPurchases(money.numberOfPurchases(Lotto.PRICE))
-        val standardTicket = Ticket(money.numberOfPurchases(Lotto.PRICE))
-        val availableTicket = manuallyPurchaseLottoByConsole(standardTicket)
 
-        val manuallyLottos = manuallyLottosByConsole(standardTicket, availableTicket)
-        val automaticallyLottos =
-            LottoService.automaticallyGenerateLottos(availableTicket.ticketCount, LottoRandomShuffleStrategy)
+        /**
+         * TODO
+         * 리팩토링 시작
+         * */
+        val lottoPurchaseTicket = Ticket(money.numberOfPurchases(Lotto.PRICE))
+        val manuallyPurchaseTicket = manuallyPurchaseLottoByConsole(lottoPurchaseTicket)
+        val manuallyLottos = manuallyLottosByConsole(lottoPurchaseTicket, manuallyPurchaseTicket)
+        val automaticallyLottos = LottoService.automaticallyLottos(manuallyPurchaseTicket.ticketCount, LottoRandomShuffleStrategy)
 
         /**
          * TODO
@@ -37,6 +40,9 @@ class LottoApplication(
         val toMutableList = manuallyLottos.lottos.toMutableList()
         toMutableList.addAll(automaticallyLottos.lottos)
         val lottos = Lottos.of(toMutableList)
+
+        // 위에 코드는 도메인 내부로 숨기면 됨
+
         lottoResultView.showLottos(lottos)
         val winningLotto = winningLottoByConsole()
         val matchResult = LottoService.match(lottos, winningLotto)

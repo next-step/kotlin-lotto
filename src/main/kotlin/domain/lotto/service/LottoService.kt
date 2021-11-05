@@ -6,7 +6,7 @@ import domain.lotto.domain.WinningLotto
 import domain.lotto.strategy.LottoShuffleStrategy
 
 object LottoService {
-    fun automaticallyGenerateLottos(lottoGenerateCount: Int, shuffleStrategy: LottoShuffleStrategy) =
+    fun automaticallyLottos(lottoGenerateCount: Int, shuffleStrategy: LottoShuffleStrategy) =
         Lottos.from(lottoGenerateCount, shuffleStrategy)
 
     fun match(lottos: Lottos, winningLotto: WinningLotto): MatchResult =
