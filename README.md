@@ -16,3 +16,11 @@
 - [x] 빈 문자열 또는 null을 입력하면 0을 반환한다.
 - [x] 숫자 이외의 값을 전달하면 RuntimeException 예외를 throw 한다.
 - [x] 음수를 전달하면 RuntimeException 예외를 throw 한다.
+
+
+## 로또(자동)
+
+### 요구 사항 정의
+
+#### Won(Money)
+- [x] 금액을 받아 단위와 함께 표시할 수 있다.
