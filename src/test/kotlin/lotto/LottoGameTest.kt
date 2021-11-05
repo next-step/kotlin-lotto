@@ -13,7 +13,7 @@ class LottoGameTest {
     fun `lottoGame에 입력된 숫자들의 값 과 위치가 변경 되지 않는다`(lottoNumbers: List<Int>) {
         val lottoGame = LottoGame(lottoNumbers)
         val expected = lottoNumbers
-        val actual = lottoGame.getNumbers()
+        val actual = lottoGame.numbers
         assertThat(actual).isEqualTo(expected)
     }
 

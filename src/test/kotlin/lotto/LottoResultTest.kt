@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LastWeekNumber
+import lotto.domain.LotteryWinningTypes
 import lotto.domain.LottoGame
 import lotto.domain.LottoResult
 import org.assertj.core.api.Assertions.assertThat
@@ -17,8 +18,30 @@ class LottoResultTest {
             add(LottoGame(listOf(1, 2, 3, 4, 5, 7)))
             add(LottoGame(listOf(1, 2, 3, 4, 7, 8)))
             add(LottoGame(listOf(1, 2, 3, 7, 8, 9)))
+            add(LottoGame(listOf(1, 2, 7, 8, 9, 10)))
+            add(LottoGame(listOf(1, 7, 8, 9, 10, 11)))
+            add(LottoGame(listOf(7, 8, 9, 10, 11, 12)))
         }
         val resultMap = LottoResult(lottoGameList, lastWeekNumber).getLottoResultMap()
         resultMap.forEach { assertThat(it.value).isEqualTo(expectedWinningForEach) }
+    }
+
+    @Test
+    fun `로또 용지로 부터 당첨금을 받을 수 있는 게임만 확인 할 수 있다`() {
+        val lastWeekNumber = LastWeekNumber(listOf(1, 2, 3, 4, 5, 6))
+        val lottoGameList = mutableListOf<LottoGame>()
+        lottoGameList.apply {
+            add(LottoGame(listOf(1, 2, 3, 4, 5, 6)))
+            add(LottoGame(listOf(1, 2, 3, 4, 5, 7)))
+            add(LottoGame(listOf(1, 2, 3, 4, 7, 8)))
+            add(LottoGame(listOf(1, 2, 3, 7, 8, 9)))
+            add(LottoGame(listOf(1, 2, 7, 8, 9, 10)))
+            add(LottoGame(listOf(1, 7, 8, 9, 10, 11)))
+            add(LottoGame(listOf(7, 8, 9, 10, 11, 12)))
+        }
+        val resultMap = LottoResult(lottoGameList, lastWeekNumber).getLottoResultMapOnlyWinning()
+        resultMap.forEach {
+            assertThat(it.key.hits >= LotteryWinningTypes.MINIMUM_WINNING_HITS).isTrue()
+        }
     }
 }

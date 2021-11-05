@@ -11,6 +11,8 @@ object ResultView {
     private const val REQUEST_BUDGET_LAST_WEEK_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     private const val WINNING_RESULT_FORMAT = "%s개 일치 (%s원)- %s개"
     private const val WINNING_RATIO = "총 수익률은 %.2f입니다."
+    private const val GAME_RESULT_ANNOUNCE = "당첨 통계"
+    private const val GAME_RESULT_DIVIDER = "----------"
 
     fun printRequestBudget() = println(REQUEST_BUDGET)
 
@@ -24,29 +26,28 @@ object ResultView {
     }
 
     fun printLottoResult(budget: Int, lottoResult: LottoResult) {
-        println("당첨 통계")
-        println("----------")
-        printWinnings(lottoResult)
-        val fullWinnings = getFullWinnings(lottoResult)
-        printWinningRatio(budget, fullWinnings)
+        println(GAME_RESULT_ANNOUNCE)
+        println(GAME_RESULT_DIVIDER)
+
+        val lottoResultOnlyWinning = lottoResult.getLottoResultMapOnlyWinning()
+        printWinnings(lottoResultOnlyWinning)
+        printWinningRatio(budget, getFullWinnings(lottoResultOnlyWinning))
     }
 
-    private fun printWinnings(lottoResult: LottoResult) =
-        lottoResult
-            .getLottoResultMap()
+    private fun printWinnings(lottoResultOnlyWinning: Map<LotteryWinningTypes, Int>) =
+        lottoResultOnlyWinning
             .forEach {
-                val winning = LotteryWinningTypes.findWinningByHits(it.key)
-                println(WINNING_RESULT_FORMAT.format(it.key, winning, it.value))
+                val winning = LotteryWinningTypes.findWinningByHits(it.key.hits)
+                println(WINNING_RESULT_FORMAT.format(it.key.hits, winning, it.value))
             }
 
-    private fun getFullWinnings(lottoResult: LottoResult) =
-        lottoResult
-            .getLottoResultMap()
-            .map { LotteryWinningTypes.findWinningByHits(it.key) * it.value }
+    private fun getFullWinnings(lottoResultOnlyWinning: Map<LotteryWinningTypes, Int>) =
+        lottoResultOnlyWinning
+            .map { LotteryWinningTypes.findWinningByHits(it.key.hits) * it.value }
             .sum()
 
     private fun printWinningRatio(budget: Int, fullWinnings: Int) =
         println(WINNING_RATIO.format(fullWinnings / budget.toFloat()))
 
-    private fun printLottoGame(lottoGame: LottoGame) = println(lottoGame.getNumbers().joinToString(", ", "[", "]"))
+    private fun printLottoGame(lottoGame: LottoGame) = println(lottoGame.numbers.joinToString(", ", "[", "]"))
 }
