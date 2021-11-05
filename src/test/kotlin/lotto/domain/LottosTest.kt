@@ -1,19 +1,12 @@
 package lotto.domain
 
+import lotto.fixture.LottoNumberFixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @DisplayName("로또 관리 테스트")
 class LottosTest {
-
-    private val lottoNumberOne = LottoNumber(1)
-    private val lottoNumberTwo = LottoNumber(2)
-    private val lottoNumberThree = LottoNumber(3)
-    private val lottoNumberFour = LottoNumber(4)
-    private val lottoNumberFive = LottoNumber(5)
-    private val lottoNumberSix = LottoNumber(6)
-    private val lottoNumberSeven = LottoNumber(7)
 
     @Test
     @DisplayName("n개의 로또들의 당첨 결과를 수집할 수 있다")
@@ -23,14 +16,24 @@ class LottosTest {
             Lotto(
                 LottoNumbers(
                     listOf(
-                        lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+                        LottoNumberFixture.create(1),
+                        LottoNumberFixture.create(2),
+                        LottoNumberFixture.create(3),
+                        LottoNumberFixture.create(4),
+                        LottoNumberFixture.create(5),
+                        LottoNumberFixture.create(6),
                     )
                 )
             ),
             Lotto(
                 LottoNumbers(
                     listOf(
-                        lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSeven,
+                        LottoNumberFixture.create(1),
+                        LottoNumberFixture.create(2),
+                        LottoNumberFixture.create(3),
+                        LottoNumberFixture.create(4),
+                        LottoNumberFixture.create(5),
+                        LottoNumberFixture.create(7),
                     )
                 )
             )

@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.exception.InvalidLottoNumberException
+import lotto.fixture.LottoNumberFixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -9,19 +10,17 @@ import org.junit.jupiter.api.assertThrows
 @DisplayName("n개의 로또 번호 테스트")
 class LottoNumbersTest {
 
-    private val lottoNumberOne = LottoNumber(1)
-    private val lottoNumberTwo = LottoNumber(2)
-    private val lottoNumberThree = LottoNumber(3)
-    private val lottoNumberFour = LottoNumber(4)
-    private val lottoNumberFive = LottoNumber(5)
-    private val lottoNumberSix = LottoNumber(6)
-
     @Test
     @DisplayName("올바른 로또 번호 생성")
     fun `sut returns correctly`() {
         // Arrange
         val value = listOf(
-            lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+            LottoNumberFixture.create(1),
+            LottoNumberFixture.create(2),
+            LottoNumberFixture.create(3),
+            LottoNumberFixture.create(4),
+            LottoNumberFixture.create(5),
+            LottoNumberFixture.create(6),
         )
 
         // Act
@@ -30,7 +29,12 @@ class LottoNumbersTest {
         // Assert
         assertThat(lottoNumbers.value).hasSize(6)
         assertThat(lottoNumbers.value).containsExactly(
-            lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+            LottoNumberFixture.create(1),
+            LottoNumberFixture.create(2),
+            LottoNumberFixture.create(3),
+            LottoNumberFixture.create(4),
+            LottoNumberFixture.create(5),
+            LottoNumberFixture.create(6),
         )
     }
 
@@ -39,7 +43,12 @@ class LottoNumbersTest {
     fun `sut throws InvalidLottoNumberException when duplicate lotto numbers`() {
         // Arrange
         val value = listOf(
-            lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberFive,
+            LottoNumberFixture.create(1),
+            LottoNumberFixture.create(2),
+            LottoNumberFixture.create(3),
+            LottoNumberFixture.create(4),
+            LottoNumberFixture.create(5),
+            LottoNumberFixture.create(5),
         )
 
         // Act, Assert
@@ -61,7 +70,12 @@ class LottoNumbersTest {
     fun `sut returns true when winning number contains lotto numbers`() {
         // Arrange
         val value = listOf(
-            lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+            LottoNumberFixture.create(1),
+            LottoNumberFixture.create(2),
+            LottoNumberFixture.create(3),
+            LottoNumberFixture.create(4),
+            LottoNumberFixture.create(5),
+            LottoNumberFixture.create(6),
         )
         val winningNumber = 4
 
@@ -78,7 +92,12 @@ class LottoNumbersTest {
     fun `sut returns false when winning number not contains lotto numbers`() {
         // Arrange
         val value = listOf(
-            lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+            LottoNumberFixture.create(1),
+            LottoNumberFixture.create(2),
+            LottoNumberFixture.create(3),
+            LottoNumberFixture.create(4),
+            LottoNumberFixture.create(5),
+            LottoNumberFixture.create(6),
         )
         val winningNumber = 10
 
@@ -96,7 +115,12 @@ class LottoNumbersTest {
     fun `sut returns true when bonus number contains lotto numbers`() {
         // Arrange
         val value = listOf(
-            lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+            LottoNumberFixture.create(1),
+            LottoNumberFixture.create(2),
+            LottoNumberFixture.create(3),
+            LottoNumberFixture.create(4),
+            LottoNumberFixture.create(5),
+            LottoNumberFixture.create(6),
         )
         val bonusNumber = 1
 
@@ -113,7 +137,12 @@ class LottoNumbersTest {
     fun `sut returns false when bonus number not contains lotto numbers`() {
         // Arrange
         val value = listOf(
-            lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
+            LottoNumberFixture.create(1),
+            LottoNumberFixture.create(2),
+            LottoNumberFixture.create(3),
+            LottoNumberFixture.create(4),
+            LottoNumberFixture.create(5),
+            LottoNumberFixture.create(6),
         )
         val bonusNumber = 45
 
