@@ -45,6 +45,7 @@ class LottoTicketsTest {
             LottoRanking.RANK_1 to 2,
             LottoRanking.RANK_2 to 1,
             LottoRanking.RANK_3 to 1,
+            LottoRanking.NO_RANK to 3,
         )
         assertThat(result).isEqualTo(expected)
     }

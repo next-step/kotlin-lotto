@@ -30,6 +30,7 @@ class LottoStatisticsTest {
             LottoRanking.RANK_2 to 1,
             LottoRanking.RANK_3 to 1,
             LottoRanking.RANK_4 to 0,
+            LottoRanking.NO_RANK to 3,
         )
         assertThat(result.countByRanking).isEqualTo(expected)
         assertThat(result.ticketCount.value).isEqualTo(tickets.size)

@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoRanking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -27,8 +26,8 @@ class LottoRankingTest {
         Arguments.of(5, LottoRanking.RANK_2),
         Arguments.of(4, LottoRanking.RANK_3),
         Arguments.of(3, LottoRanking.RANK_4),
-        Arguments.of(2, null),
-        Arguments.of(1, null),
-        Arguments.of(0, null),
+        Arguments.of(2, LottoRanking.NO_RANK),
+        Arguments.of(1, LottoRanking.NO_RANK),
+        Arguments.of(0, LottoRanking.NO_RANK),
     )
 }
