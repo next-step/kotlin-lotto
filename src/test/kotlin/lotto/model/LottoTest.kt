@@ -48,4 +48,30 @@ class LottoTest {
             .isThrownBy { Lotto(lottoList) }
             .withMessage(EXCEPTION_DUPLICATED_LOTTO_NUMBER)
     }
+
+    @Test
+    @DisplayName("로또 숫자에 특정 번호가 있는 경우")
+    fun `check existence of input number on lotto numbers`() {
+        // given
+        val lottoList = listOf(LottoNumber(10), LottoNumber(1), LottoNumber(45), LottoNumber(13), LottoNumber(23), LottoNumber(33))
+
+        // when
+        val hasNumber = Lotto(lottoList).hasNumber(10)
+
+        // then
+        assertThat(hasNumber).isEqualTo(true)
+    }
+
+    @Test
+    @DisplayName("로또 숫자에 특정 번호가 없 경우")
+    fun `check nonexistence of input number on lotto numbers`() {
+        // given
+        val lottoList = listOf(LottoNumber(10), LottoNumber(45), LottoNumber(3), LottoNumber(13), LottoNumber(23), LottoNumber(33))
+
+        // when
+        val hasNumber = Lotto(lottoList).hasNumber(44)
+
+        // then
+        assertThat(hasNumber).isEqualTo(false)
+    }
 }

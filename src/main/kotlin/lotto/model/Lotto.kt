@@ -15,7 +15,6 @@ data class Lotto(
 
     fun hasNumber(number: Int): Boolean = item.map { it.number }.contains(number)
 
-
     companion object {
         private const val SIZE_LOTTO_NUMBER = 6
         const val EXCEPTION_LOTTO_FORMAT = "숫자 포멧에 맞지 않습니다."
