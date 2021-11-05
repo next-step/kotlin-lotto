@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.Lotto
 import lotto.domain.LottoNumberGenerator
 import lotto.domain.Lottos
 import lotto.domain.Money
@@ -13,5 +14,6 @@ object LottoController {
         val lottoNumberGenerator = LottoNumberGenerator()
         val lottos = Lottos.of(lottoNumberGenerator, money)
         OutputView.showLottos(lottos)
+        val winningLotto = Lotto.of(InputView.inputWinningNumbers())
     }
 }

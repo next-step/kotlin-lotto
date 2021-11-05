@@ -15,9 +15,20 @@ data class Lotto(val numbers: Set<LottoNumber>) {
 
     companion object {
         const val LOTTO_SIZE = 6
+        private const val DELIMITER = ","
+        private const val NUMBER_FORMAT_EXCEPTION_MESSAGE = "로또번호 형식에 맞지 않습니다."
 
         fun of(lottoNumbers: List<LottoNumber>): Lotto {
             return Lotto(lottoNumbers.toSet())
+        }
+
+        fun of(value: String): Lotto {
+            val numbers = value.split(DELIMITER).map {
+                it.trim().toIntOrNull() ?: throw IllegalArgumentException(
+                    NUMBER_FORMAT_EXCEPTION_MESSAGE
+                )
+            }
+            return of(numbers.map { LottoNumber(it) })
         }
     }
 }
