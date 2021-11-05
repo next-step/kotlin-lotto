@@ -6,6 +6,9 @@ data class Lotto(val numbers: Set<LottoNumber>) {
         require(numbers.size == LOTTO_SIZE) { "로또 숫자의 갯수는 ${LOTTO_SIZE}여야 합니다. 현재 갯수 == ${numbers.size}" }
     }
 
+    val sortedNumbers: List<LottoNumber>
+        get() = numbers.sortedBy { it.number }
+
     fun countMatchNumber(other: Lotto): Int {
         return numbers.filter { other.numbers.contains(it) }.count()
     }
