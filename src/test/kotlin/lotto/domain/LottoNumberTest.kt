@@ -33,13 +33,25 @@ class LottoNumberTest {
     @Test
     fun `로또 번호는 오름차순으로 정렬된다`() {
         // given
-        val numbers = listOf(10, 5, 6, 9, 2).map(::LottoNumber)
+        val numbers = listOf(
+            LottoNumber(10),
+            LottoNumber(5),
+            LottoNumber(6),
+            LottoNumber(9),
+            LottoNumber(2),
+        )
 
         // when
         val result = numbers.sorted()
 
         // then
-        val expected = listOf(2, 5, 6, 9, 10).map(::LottoNumber)
+        val expected = listOf(
+            LottoNumber(2),
+            LottoNumber(5),
+            LottoNumber(6),
+            LottoNumber(9),
+            LottoNumber(10),
+        )
         assertThat(result).isEqualTo(expected)
     }
 }
