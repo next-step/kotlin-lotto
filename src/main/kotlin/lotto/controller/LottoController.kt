@@ -15,5 +15,8 @@ object LottoController {
         val lottos = Lottos.of(lottoNumberGenerator, money)
         OutputView.showLottos(lottos)
         val winningLotto = Lotto.of(InputView.inputWinningNumbers())
+        val lottoResult = lottos.match(winningLotto)
+        OutputView.printOverview(lottoResult)
+        OutputView.printProfitPercent(lottoResult, money)
     }
 }

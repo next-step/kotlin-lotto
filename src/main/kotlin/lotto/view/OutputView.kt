@@ -1,7 +1,10 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoResult
 import lotto.domain.Lottos
+import lotto.domain.Money
+import lotto.domain.Rank
 
 object OutputView {
 
@@ -31,8 +34,24 @@ object OutputView {
         ) { it.number.toString() }
     }
 
-    fun print(lottos: Lottos) {
-        println(LOTTO_RESULT)
+    fun printOverview(lottoResult: LottoResult) {
         println()
+        println(LOTTO_RESULT)
+        println(DASH)
+        val overView = buildString {
+            Rank.values()
+                .filter {
+                    it != Rank.MISS
+                }
+                .forEach {
+                    append("${it.matchCount}개 일치 (${it.prize}원)- ${lottoResult.result[it] ?: 0}개")
+                    append(System.lineSeparator())
+                }
+        }
+        println(overView)
+    }
+
+    fun printProfitPercent(lottoResult: LottoResult, money: Money) {
+        println("총 수익률은 ${lottoResult.getProfit(money)}입니다.")
     }
 }
