@@ -2,10 +2,11 @@ package lotto.domain
 
 data class Lottos(val lottos: List<Lotto>) {
 
-    fun match(lotto: Lotto): Map<Rank, Int> {
-        return lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it)) }
+    fun match(lotto: Lotto): LottoResult {
+        val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it)) }
             .groupingBy { it }
             .eachCount()
+        return LottoResult(rankCounts)
     }
 
     companion object {

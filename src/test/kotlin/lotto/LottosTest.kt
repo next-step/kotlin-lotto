@@ -31,7 +31,7 @@ class LottosTest {
 
         val lottos = Lottos(listOf(lotto1, lotto2, lotto3, lotto4))
 
-        assertThat(lottos.match(winningLotto)).containsEntry(Rank.FIRST, 2).containsEntry(Rank.SECOND, 1)
+        assertThat(lottos.match(winningLotto).result).containsEntry(Rank.FIRST, 2).containsEntry(Rank.SECOND, 1)
             .containsEntry(Rank.THIRD, 1)
     }
 

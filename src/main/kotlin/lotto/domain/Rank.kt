@@ -8,6 +8,8 @@ enum class Rank(val matchCount: Int, val prize: Int) {
     MISS(0, 0),
     ;
 
+    fun prizeByCount(count: Int): Int = count * prize
+
     companion object {
         fun rankByMatchCount(matchCount: Int): Rank {
             return values().firstOrNull { it.matchCount == matchCount } ?: MISS
