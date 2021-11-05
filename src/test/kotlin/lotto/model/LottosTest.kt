@@ -198,4 +198,34 @@ class LottosTest {
             .isThrownBy { Lottos.inputWinNumber(price, purchasedList, winNumber, bonus) }
             .withMessage(EXCEPTION_INPUT_NUMBER_NULL)
     }
+
+    @Test
+    @DisplayName("당첨 번호와 로또 숫자 비교")
+    fun `compare lotto item with win numbers`() {
+        // given
+        val purchasedNumber = Lotto(
+            listOf(
+                LottoNumber(10),
+                LottoNumber(1),
+                LottoNumber(13),
+                LottoNumber(23),
+                LottoNumber(33),
+                LottoNumber(43)
+            )
+        )
+        val winNumber = Lotto(
+            listOf(
+                LottoNumber(45),
+                LottoNumber(14),
+                LottoNumber(13),
+                LottoNumber(23),
+                LottoNumber(2),
+                LottoNumber(43)
+            )
+        )
+
+        val sameNumber = Lottos.compareNumber(purchasedNumber, winNumber)
+
+        Assertions.assertThat(sameNumber).isEqualTo(3)
+    }
 }
