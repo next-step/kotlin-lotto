@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoNumber.Companion.LOTTO_FIRST_NUMBER
-import lotto.domain.LottoNumber.Companion.LOTTO_LAST_NUMBER
 import lotto.domain.LottoNumber.Companion.LOTTO_SIZE
 import lotto.exception.InvalidLottoNumberException
 
@@ -17,16 +15,10 @@ class LottoNumbers(
     }
 
     fun containsWinningNumbers(winningNumber: Int): Boolean {
-        return value.contains(LottoNumber(winningNumber))
+        return value.contains(LottoNumber.valueOf(winningNumber))
     }
 
     fun containsBonusNumber(bonusNumber: Int): Boolean {
-        return value.contains(LottoNumber(bonusNumber))
-    }
-
-    companion object {
-        val LOTTO_NUMBERS: List<LottoNumber> = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER)
-            .map { LottoNumber(it) }
-            .toList()
+        return value.contains(LottoNumber.valueOf(bonusNumber))
     }
 }

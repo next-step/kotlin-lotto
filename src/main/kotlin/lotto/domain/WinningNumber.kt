@@ -8,7 +8,7 @@ class WinningNumber(
     value: List<String>,
 ) {
     val value = value.toList().map {
-        LottoNumber(it.toInt())
+        LottoNumber.valueOf(it.toInt())
     }
 
     init {
