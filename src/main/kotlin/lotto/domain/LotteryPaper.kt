@@ -1,9 +1,12 @@
 package lotto.domain
 
+import lotto.domain.ExceptionType.BUDGET_UNSIGNED_INT
+
 class LotteryPaper(budget: Int) {
     private val lottoGames = mutableListOf<LottoGame>()
 
     init {
+        require(budget >= 0) { BUDGET_UNSIGNED_INT }
         val numberOfGames = budget / PRICE_OF_GAME
         repeat(numberOfGames) { lottoGames.add(LottoGame(makeRandomNumbers())) }
     }
