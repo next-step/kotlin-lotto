@@ -17,6 +17,6 @@ data class LottoStatisticFormat(
         fun getTotalPrice(winList: HashMap<LottoRank, Int>): Int = LottoRank
             .values()
             .filter { it != LottoRank.MISS }
-            .sumOf {  winList.getRankProfit(it) }
+            .sumOf { winList.getRankProfit(it) }
     }
 }
