@@ -27,7 +27,7 @@ class LottoTest {
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
             Lotto.of(numberList)
-        }.withMessage("로또 숫자의 갯수는 ${Lotto.LOTTO_SIZE}여야 합니다.")
+        }
     }
 
     @DisplayName(value = "Lotto번호가 중복되면 Exception을 던진다.")
