@@ -52,7 +52,6 @@ class LottoTest {
         assertThat(sample.lottoCount).isEqualTo(price / 1000)
     }
 
-    // 로또 객체 테스트 코드
     @Test
     @DisplayName("로또가 번호 순서대로 정렬되어 나오는지 확인")
     fun `check lotto number sorting`() {
