@@ -14,6 +14,6 @@ class LottoTicketsFactoryTest {
         val tickets = LottoTicketsFactory.create(LottoTicketCount(count))
 
         // then
-        assertThat(tickets.count().value).isEqualTo(count)
+        assertThat(tickets.tickets.size).isEqualTo(count)
     }
 }

@@ -1,10 +1,10 @@
 package lotto
 
 import lotto.domain.LottoMoney
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTickets
 import lotto.domain.LottoTicketsFactory
+import lotto.domain.WinningNumbers
 import lotto.ui.ConsoleInputView
 import lotto.ui.ConsoleOutputView
 import lotto.ui.dto.LottoStatisticsDto
@@ -25,11 +25,12 @@ private fun buyTickets(): LottoTickets {
     return tickets
 }
 
-private fun getWinning(): LottoNumbers {
-    return LottoNumbers(ConsoleInputView.getWinning())
+private fun getWinning(): WinningNumbers {
+    TODO()
+    // return LottoNumbers(ConsoleInputView.getWinning())
 }
 
-private fun printResult(tickets: LottoTickets, winning: LottoNumbers) {
+private fun printResult(tickets: LottoTickets, winning: WinningNumbers) {
     val statistics = LottoStatistics.from(tickets, winning)
     val result = statistics.countByRanking
     val revenue = statistics.revenue
