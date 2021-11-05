@@ -1,8 +1,8 @@
 package lotto.domain
 
-object RandomNumberGenerator {
+object LottoGenerator {
 
-    fun nextSix(): LottoNumbers {
+    fun randomTicket(): LottoNumbers {
         return LottoNumber.VALID_LOTTO_NUMBERS
             .shuffled()
             .take(6)

@@ -22,7 +22,7 @@ class LottoStatisticsTest {
         val winning = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val result = LottoStatistics.from(tickets, winning)
+        val result = LottoStatistics.from(LottoTickets(tickets), winning)
 
         // then
         val expected = mapOf(

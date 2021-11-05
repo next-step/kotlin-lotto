@@ -1,7 +1,8 @@
 package lotto.ui
 
-import lotto.ui.dto.LottoNumbersDto
+import lotto.ui.dto.LottoTicketsDto
 import lotto.ui.dto.LottoStatisticsDto
+import lotto.ui.dto.LottoTicketDto
 
 object ConsoleOutputView {
 
@@ -9,8 +10,12 @@ object ConsoleOutputView {
         println("${ticketCount}개를 구매했습니다.")
     }
 
-    fun printLottoTickets(tickets: LottoNumbersDto) {
-        val numbers = tickets.lottoNumbers.joinToString(", ")
+    fun printLottoTickets(tickets: LottoTicketsDto) {
+        tickets.tickets.forEach(::printLottoTicket)
+    }
+
+    private fun printLottoTicket(ticket: LottoTicketDto) {
+        val numbers = ticket.lottoNumbers.joinToString(", ")
         println("[${numbers}]")
     }
 
