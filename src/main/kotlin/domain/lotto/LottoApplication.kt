@@ -2,7 +2,9 @@ package domain.lotto
 
 import domain.lotto.domain.Lotto
 import domain.lotto.domain.LottoNumber
+import domain.lotto.domain.Lottos
 import domain.lotto.domain.Money
+import domain.lotto.domain.Ticket
 import domain.lotto.domain.WinningLotto
 import domain.lotto.service.LottoService
 import domain.lotto.strategy.LottoRandomShuffleStrategy
@@ -21,17 +23,48 @@ class LottoApplication(
     fun run() {
         val money = purchaseLottoByConsole()
         lottoResultView.showNumberOfPurchases(money.numberOfPurchases(Lotto.PRICE))
-        // 티켓 클래스를 만들어야겠네
-        // 티켓 3 -> money -> 티켓 만들기 -> 티켓 빼기 ->
-        val manuallyPurchaseLotto = lottoInputView.manuallyPurchaseLotto()
+        val standardTicket = Ticket(money.numberOfPurchases(Lotto.PRICE))
+        val availableTicket = manuallyPurchaseLottoByConsole(standardTicket)
 
-        val lottos = LottoService.lottos(money, LottoRandomShuffleStrategy)
+        val manuallyLottos = manuallyLottosByConsole(standardTicket, availableTicket)
+        val automaticallyLottos =
+            LottoService.automaticallyGenerateLottos(availableTicket.ticketCount, LottoRandomShuffleStrategy)
+
+        /**
+         * TODO
+         * 이 둘을 더하기
+         * */
+        val toMutableList = manuallyLottos.lottos.toMutableList()
+        toMutableList.addAll(automaticallyLottos.lottos)
+        val lottos = Lottos.of(toMutableList)
         lottoResultView.showLottos(lottos)
-
         val winningLotto = winningLottoByConsole()
         val matchResult = LottoService.match(lottos, winningLotto)
         lottoResultView.showMatchResult(matchResult)
         lottoResultView.showYield(money, Money(matchResult.winnings()))
+    }
+
+    private fun manuallyLottosByConsole(standardTicket: Ticket, availableTicket: Ticket): Lottos {
+        return try {
+            Lottos.of(
+                lottoInputView.manuallyLottos((standardTicket - availableTicket).ticketCount)
+                    .map { Lotto.of(it, CommaSplitStrategy) }
+                    .toList()
+            )
+        } catch (e: Exception) {
+            exceptionView.showErrorMessage(e.message.toString())
+            manuallyLottosByConsole(standardTicket, availableTicket)
+        }
+    }
+
+    private fun manuallyPurchaseLottoByConsole(standardTicket: Ticket): Ticket {
+        return try {
+            val manuallyTicket = Ticket(lottoInputView.manuallyPurchaseLotto())
+            return standardTicket - manuallyTicket
+        } catch (e: Exception) {
+            exceptionView.showErrorMessage(e.message.toString())
+            manuallyPurchaseLottoByConsole(standardTicket)
+        }
     }
 
     private fun winningLottoByConsole(): WinningLotto {

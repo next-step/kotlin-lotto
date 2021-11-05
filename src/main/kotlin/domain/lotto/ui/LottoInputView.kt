@@ -20,6 +20,13 @@ class LottoInputView(
         return money.toInt()
     }
 
+    fun manuallyLottos(ticketCount: Int): List<String> {
+        consoleOutputStrategy.output(MANUALLY_INPUT_LOTTOS_MESSAGE)
+        return (1..ticketCount).map {
+            consoleInputStrategy.input() ?: throw RuntimeException()
+        }.toList()
+    }
+
     fun winningLotto(): String {
         consoleOutputStrategy.output(WINNING_LOTTO_MESSAGE)
         return consoleInputStrategy.input() ?: throw RuntimeException()
@@ -34,6 +41,7 @@ class LottoInputView(
     companion object {
         private const val PURCHASE_MESSAGE = "구입금액을 입력해 주세요."
         private const val MANUALLY_PURCHASE_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요."
+        private const val MANUALLY_INPUT_LOTTOS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요."
         private const val WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
         private const val BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요."
     }
