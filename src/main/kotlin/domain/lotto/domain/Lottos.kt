@@ -12,6 +12,8 @@ value class Lottos private constructor(val lottos: List<Lotto>) {
             .associateWith { eachCount[it] ?: NO_MATCH }
     }
 
+    operator fun plus(secondLottos: Lottos): Lottos = of(lottos + secondLottos.lottos)
+
     companion object {
         private const val NO_MATCH = 0
         private const val START = 1

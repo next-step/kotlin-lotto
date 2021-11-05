@@ -22,32 +22,27 @@ class LottoApplication(
 ) {
     fun run() {
         val money = purchaseLottoByConsole()
-        lottoResultView.showNumberOfPurchases(money.numberOfPurchases(Lotto.PRICE))
-
-        /**
-         * TODO
-         * 리팩토링 시작
-         * */
         val lottoPurchaseTicket = Ticket(money.numberOfPurchases(Lotto.PRICE))
         val manuallyPurchaseTicket = manuallyPurchaseLottoByConsole(lottoPurchaseTicket)
         val manuallyLottos = manuallyLottosByConsole(lottoPurchaseTicket, manuallyPurchaseTicket)
         val automaticallyLottos = LottoService.automaticallyLottos(manuallyPurchaseTicket.ticketCount, LottoRandomShuffleStrategy)
 
-        /**
-         * TODO
-         * 이 둘을 더하기
-         * */
-        val toMutableList = manuallyLottos.lottos.toMutableList()
-        toMutableList.addAll(automaticallyLottos.lottos)
-        val lottos = Lottos.of(toMutableList)
-
-        // 위에 코드는 도메인 내부로 숨기면 됨
-
+        val lottos = manuallyLottos + automaticallyLottos
         lottoResultView.showLottos(lottos)
         val winningLotto = winningLottoByConsole()
         val matchResult = LottoService.match(lottos, winningLotto)
         lottoResultView.showMatchResult(matchResult)
         lottoResultView.showYield(money, Money(matchResult.winnings()))
+    }
+
+    private fun manuallyPurchaseLottoByConsole(standardTicket: Ticket): Ticket {
+        return try {
+            val manuallyTicket = Ticket(lottoInputView.manuallyPurchaseLotto())
+            return standardTicket - manuallyTicket
+        } catch (e: Exception) {
+            exceptionView.showErrorMessage(e.message.toString())
+            manuallyPurchaseLottoByConsole(standardTicket)
+        }
     }
 
     private fun manuallyLottosByConsole(standardTicket: Ticket, availableTicket: Ticket): Lottos {
@@ -60,16 +55,6 @@ class LottoApplication(
         } catch (e: Exception) {
             exceptionView.showErrorMessage(e.message.toString())
             manuallyLottosByConsole(standardTicket, availableTicket)
-        }
-    }
-
-    private fun manuallyPurchaseLottoByConsole(standardTicket: Ticket): Ticket {
-        return try {
-            val manuallyTicket = Ticket(lottoInputView.manuallyPurchaseLotto())
-            return standardTicket - manuallyTicket
-        } catch (e: Exception) {
-            exceptionView.showErrorMessage(e.message.toString())
-            manuallyPurchaseLottoByConsole(standardTicket)
         }
     }
 

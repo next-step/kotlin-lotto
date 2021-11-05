@@ -16,9 +16,6 @@ import global.strategy.ui.ConsoleOutputStrategy
 import kotlin.math.floor
 
 class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) {
-    fun showNumberOfPurchases(numberOfPurchases: Int) =
-        consoleOutputStrategy.output(NUMBER_OF_PURCHASES_MESSAGE.format(numberOfPurchases))
-
     fun showLottos(lottos: Lottos) =
         consoleOutputStrategy.output(lottosJoinToString(lottos.lottos))
 
