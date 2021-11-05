@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
+import lotto.domain.Wallet
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,10 +11,10 @@ class LottoTest {
     @Test
     fun `로또는 개당 1000원이다`() {
         // given
-        val lottos = Lottos.buy(1000)
+        val lottos = Lottos.buyAutoLottos(Wallet(1000))
 
         // when
-        val purchaseLottos = lottos.getLottos()
+        val purchaseLottos = lottos.toList()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(1)
@@ -51,10 +52,10 @@ class LottoTest {
     @Test
     fun `로또는 여러개 살 수 있다`() {
         // given
-        val lottos = Lottos.buy(14000)
+        val lottos = Lottos.buyAutoLottos(Wallet(14000))
 
         // when
-        val purchaseLottos = lottos.getLottos()
+        val purchaseLottos = lottos.toList()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(14)
