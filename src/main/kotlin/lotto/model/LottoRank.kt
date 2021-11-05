@@ -22,7 +22,7 @@ enum class LottoRank(
                 .filter { it != MISS }
                 .sortedBy { it.winningMoney }
 
-        fun findMatchRank (number: Int, isBonusNumber: Boolean): LottoRank {
+        fun findMatchRank(number: Int, isBonusNumber: Boolean): LottoRank {
             return values()
                 .find {
                     when (number) {
