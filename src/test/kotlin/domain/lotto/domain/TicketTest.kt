@@ -1,13 +1,13 @@
 package domain.lotto.domain
 
-import domain.lotto.error.InvalidTicketSizeRangeException
+import domain.lotto.error.InvalidTicketCountRangeException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.RepetitionInfo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 @DisplayName("로또티켓(Ticket)")
@@ -23,11 +23,11 @@ class TicketTest {
         )
     }
 
+    @ParameterizedTest(name = "입력값: {0}")
     @ValueSource(ints = [-1, -10, -100, Integer.MIN_VALUE])
-    @Test
-    fun `0 미만의 정수가 들어가면 티켓은 예외를 발생한다`(ticketSize: Int) {
-        val exception = assertThrows<InvalidTicketSizeRangeException> { Ticket(ticketSize) }
+    fun `티켓의 범위를 벗어난 값이 들어가면 티켓은 예외를 발생한다`(ticketCount: Int) {
+        val exception = assertThrows<InvalidTicketCountRangeException> { Ticket(ticketCount) }
 
-        assertThat(exception.message).isEqualTo("%s는 Ticket 의 범위를 벗어난 값입니다.".format(ticketSize))
+        assertThat(exception.message).isEqualTo("%s는 Ticket 의 범위를 벗어난 값입니다.".format(ticketCount))
     }
 }
