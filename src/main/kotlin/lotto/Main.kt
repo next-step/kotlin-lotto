@@ -1,6 +1,8 @@
 package lotto
 
 import lotto.domain.LottoMoney
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTickets
 import lotto.domain.LottoTicketsFactory
@@ -26,8 +28,9 @@ private fun buyTickets(): LottoTickets {
 }
 
 private fun getWinning(): WinningNumbers {
-    TODO()
-    // return LottoNumbers(ConsoleInputView.getWinning())
+    val winning = LottoNumbers(ConsoleInputView.getWinning())
+    val bonus = LottoNumber(ConsoleInputView.getBonus())
+    return WinningNumbers(winning, bonus)
 }
 
 private fun printResult(tickets: LottoTickets, winning: WinningNumbers) {

@@ -6,7 +6,7 @@ import java.util.SortedMap
 data class LottoStatisticsDto(val statistics: SortedMap<LottoRanking, Int>, val revenue: Double) {
 
     constructor(statistics: Map<LottoRanking, Int>, revenue: Double) : this(
-        statistics.toSortedMap(reverseOrder()),
+        statistics.toSortedMap(reverseOrder()).apply { remove(LottoRanking.NO_RANK) },
         revenue,
     )
 }
