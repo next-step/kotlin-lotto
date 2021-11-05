@@ -36,3 +36,5 @@
 
 #### LottoPrize
 - [x] 일치된 번호 개수로 LottoPrize 를 가져올 수 있다.
+- [x] 정해진 상금이 없는 경우 null 을 반환한다.
+
