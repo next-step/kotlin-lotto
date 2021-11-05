@@ -5,9 +5,9 @@ class LottoResult(private val lottoPrize: LottoPrize, private val matchingCount:
     fun prizeAndCountPair() = Pair(lottoPrize, matchingCount)
 
     companion object {
-        fun decideLottoPrize(lottoPrize: LottoPrize, matchingNumber: List<Pair<Int, Boolean>>) =
-            LottoResult(lottoPrize, matchingNumber.count { (matchingNumberCounts, isBonus) ->
-                LottoPrize.valueOf(matchingNumberCounts, isBonus) == lottoPrize
+        fun decideLottoPrize(lottoPrize: LottoPrize, matchingNumber: List<MatchingWinningNumber>) =
+            LottoResult(lottoPrize, matchingNumber.count {
+                LottoPrize.valueOf(it.winningNumberCount, it.bonusNumber) == lottoPrize
             })
     }
 }
