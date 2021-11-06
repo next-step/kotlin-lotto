@@ -11,16 +11,13 @@ enum class LottoPrize(val matchingNumberCount: Int, val prize: Int) {
     companion object {
         fun getPrizes() = values().toList()
 
-        fun valueOf(countOfMatch: Int, matchBonus: Boolean): LottoPrize {
-            return values().find {
-                if (countOfMatch == 5 && matchBonus) {
-                    return SECOND
-                } else if (countOfMatch == 5 && !matchBonus) {
-                    return THIRD
-                } else {
-                    it.matchingNumberCount == countOfMatch
-                }
-            } ?: MISS
-        }
+        fun valueOf(countOfMatch: Int, matchBonus: Boolean): LottoPrize =
+            when (countOfMatch) {
+                FIRST.matchingNumberCount -> FIRST
+                THIRD.matchingNumberCount -> if (matchBonus) SECOND else THIRD
+                FOURTH.matchingNumberCount -> FOURTH
+                FIFTH.matchingNumberCount -> FIFTH
+                else -> MISS
+            }
     }
 }
