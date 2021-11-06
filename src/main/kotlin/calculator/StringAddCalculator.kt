@@ -26,14 +26,16 @@ object StringAddCalculator {
     }
 
     private fun splitDefault(text: String): List<String> {
-        return text.trim().split(delimiters = Delimiter.values().map { it.value }.toTypedArray())
+        return text.trim().split(delimiters = Delimiter.valuesArray())
     }
 
     private fun splitCustom(text: String): List<String> {
         val matchResult = customRegex.find(text)
-        matchResult?.let {
-            val (customDelimiter, tokens) = it.destructured
-            return tokens.split(customDelimiter)
-        } ?: return emptyList()
+        return if (matchResult != null) {
+            val (customDelimiter, tokens) = matchResult.destructured
+            tokens.split(customDelimiter)
+        } else {
+            emptyList()
+        }
     }
 }
