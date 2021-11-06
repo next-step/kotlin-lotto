@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.Lotto
+import lotto.model.LottoNumber
 import lotto.model.LottoNumberListGenerator
 import lotto.model.Lottos
 import lotto.model.Price
@@ -32,7 +33,7 @@ object LottoController {
     private fun printResult(price: Price, purchasedLotto: List<Lotto>) {
         val winNumberList = inputView.inputLastLottoWinNumber()
         val bonusNumber = inputView.inputBonusNumber()
-        val lottos = Lottos.inputWinNumber(price, purchasedLotto, winNumberList, bonusNumber)
+        val lottos = Lottos.inputWinNumber(price, purchasedLotto, winNumberList, LottoNumber(bonusNumber))
         val result = lottos.compareLottoResult()
         outputView.printWinStatistic(result)
     }

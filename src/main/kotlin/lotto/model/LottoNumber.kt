@@ -4,12 +4,16 @@ package lotto.model
  * 로또 숫자 하나의 객체
  * */
 @JvmInline
-value class LottoNumber(val number: Int) {
+value class LottoNumber(
+    private val value: Int?
+) {
     init {
-        require(number in MIN_NUMBER..MAX_NUMBER) { EXCEPTION_NUMBER_FORMAT }
+        require(value != null)
+        require(value in MIN_NUMBER..MAX_NUMBER) { EXCEPTION_NUMBER_FORMAT }
     }
 
-    fun isSameNumber(expectedNumber: Int): Boolean = number == expectedNumber
+    val number: Int
+        get() = value ?: MIN_NUMBER
 
     companion object {
         private const val MIN_NUMBER = 1

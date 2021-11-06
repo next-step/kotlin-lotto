@@ -7,7 +7,7 @@ class Lottos private constructor(
     private val price: Price,
     private val purchasedLotto: List<Lotto>,
     private val lastWinNumber: Lotto,
-    private val bonusNumber: Int,
+    private val bonusNumber: LottoNumber,
 ) {
 
     fun compareLottoResult(): LottoStatisticFormat {
@@ -39,16 +39,15 @@ class Lottos private constructor(
             price: Price,
             purchasedLotto: List<Lotto>,
             numbers: String?,
-            bonusNumber: Int?,
+            bonusNumber: LottoNumber,
         ): Lottos {
             require(numbers != null) { EXCEPTION_INPUT_NUMBER_NULL }
-            require(bonusNumber != null)
 
             val list = numbers
                 .split(DELIMITER)
                 .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
 
-            require(!list.map { it.number }.contains(bonusNumber)) { EXCEPTION_BONUS_NUMBER }
+            require(!list.map { it }.contains(bonusNumber)) { EXCEPTION_BONUS_NUMBER }
             return Lottos(price, purchasedLotto, Lotto(list), bonusNumber)
         }
     }
