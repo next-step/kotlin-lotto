@@ -1,7 +1,5 @@
 package stringcalculator
 
-import stringcalculator.utils.getCustomDelimiter
-import stringcalculator.utils.getInput
 import stringcalculator.utils.toPositiveInt
 
 class Calculator {
@@ -16,7 +14,8 @@ class Calculator {
     private fun parse(rawInput: String): List<Int> {
         val result = CUSTOM_DELIMITER_PATTERN.find(rawInput)
         result?.let {
-            return splitAndCast(it.getInput, it.getCustomDelimiter)
+            val (customDelimiter, input) = it.destructured
+            return splitAndCast(input, customDelimiter)
         }
         return splitAndCast(rawInput)
     }
