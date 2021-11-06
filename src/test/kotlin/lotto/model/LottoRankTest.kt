@@ -16,7 +16,6 @@ class LottoRankTest {
         val numberFour = 3
         val numberFive = 0
 
-
         // when
         val rank1 = LottoRank.findMatchRank(numberOne)
         val rank2 = LottoRank.findMatchRank(numberTwo)
@@ -41,7 +40,6 @@ class LottoRankTest {
         val numberThree = 4
         val numberFour = 3
         val numberFive = 0
-
 
         // when
         val rank1 = LottoRank.findMatchRank(numberOne, true)

@@ -21,11 +21,11 @@ class LottoStatisticTest {
         )
 
         // when
-        val firstRank = resultList.getRankCount(LottoRank.FIRST)
-        val second = resultList.getRankCount(LottoRank.SECOND)
-        val third = resultList.getRankCount(LottoRank.THIRD)
-        val fourth = resultList.getRankCount(LottoRank.FOURTH)
-        val fifth = resultList.getRankCount(LottoRank.FIFTH)
+        val firstRank = getRankCount(resultList, LottoRank.FIRST)
+        val second = getRankCount(resultList, LottoRank.SECOND)
+        val third = getRankCount(resultList, LottoRank.THIRD)
+        val fourth = getRankCount(resultList, LottoRank.FOURTH)
+        val fifth = getRankCount(resultList, LottoRank.FIFTH)
 
         // then
         Assertions.assertThat(firstRank).isEqualTo(1)
@@ -48,11 +48,11 @@ class LottoStatisticTest {
         )
 
         // when
-        val firstRank = resultList.getRankProfit(LottoRank.FIRST)
-        val second = resultList.getRankProfit(LottoRank.SECOND)
-        val third = resultList.getRankProfit(LottoRank.THIRD)
-        val fourth = resultList.getRankProfit(LottoRank.FOURTH)
-        val fifth = resultList.getRankProfit(LottoRank.FIFTH)
+        val firstRank = getRankProfit(resultList, LottoRank.FIRST)
+        val second = getRankProfit(resultList, LottoRank.SECOND)
+        val third = getRankProfit(resultList, LottoRank.THIRD)
+        val fourth = getRankProfit(resultList, LottoRank.FOURTH)
+        val fifth = getRankProfit(resultList, LottoRank.FIFTH)
 
         // then
         Assertions.assertThat(firstRank).isEqualTo(1 * LottoRank.FIRST.winningMoney)
