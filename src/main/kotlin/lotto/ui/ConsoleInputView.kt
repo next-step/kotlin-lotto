@@ -12,6 +12,11 @@ object ConsoleInputView {
         return getInts()
     }
 
+    fun getBonus(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return getInt()
+    }
+
     private fun getInput(): String = requireNotNull(readLine())
 
     private fun getInt(): Int {

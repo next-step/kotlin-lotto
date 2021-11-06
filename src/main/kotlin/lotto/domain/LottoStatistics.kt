@@ -1,6 +1,8 @@
 package lotto.domain
 
-class LottoStatistics(val ticketCount: LottoTicketCount, val countByRanking: Map<LottoRanking, Int>) {
+class LottoStatistics(val countByRanking: Map<LottoRanking, Int>) {
+
+    private val ticketCount = LottoTicketCount(countByRanking.values.sum())
 
     val revenue: Double
         get() {
@@ -17,19 +19,11 @@ class LottoStatistics(val ticketCount: LottoTicketCount, val countByRanking: Map
 
         private const val DEFAULT_RANKING_COUNT = 0
 
-        fun from(tickets: List<LottoNumbers>, winning: LottoNumbers): LottoStatistics {
-            return LottoStatistics(LottoTicketCount(tickets.size), countRankingFrom(tickets, winning))
-        }
-
-        private fun countRankingFrom(tickets: List<LottoNumbers>, winning: LottoNumbers): Map<LottoRanking, Int> {
-            val statistics = tickets.mapNotNull { it.findRankingBy(winning) }
-                .groupingBy { it }
-                .eachCount()
-            return LottoRanking.values()
+        fun from(tickets: LottoTickets, winning: WinningNumbers): LottoStatistics {
+            val statistics = tickets.countRankingFrom(winning)
+            val statisticsWithDefault = LottoRanking.values()
                 .associateWith { statistics[it] ?: DEFAULT_RANKING_COUNT }
+            return LottoStatistics(statisticsWithDefault)
         }
-
-        private fun LottoNumbers.findRankingBy(winning: LottoNumbers): LottoRanking? =
-            LottoRanking.from(winning.countSameNumber(this))
     }
 }

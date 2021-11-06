@@ -4,7 +4,7 @@ package lotto.domain
 value class LottoNumber(val value: Int) : Comparable<LottoNumber> {
 
     init {
-        require(value in VALID_LOTTO_RANGE) { "로또 번호는 1~45 사이입니다." }
+        require(value in VALID_LOTTO_RANGE) { "${value}이/가 1~45 범위 내에 있어야 합니다." }
     }
 
     override fun compareTo(other: LottoNumber): Int {
