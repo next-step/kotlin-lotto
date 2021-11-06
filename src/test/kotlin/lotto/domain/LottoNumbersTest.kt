@@ -45,7 +45,7 @@ class LottoNumbersTest {
     }
 
     @Test
-    fun `보너스넘버가 존재한지 않는다면 false`() {
+    fun `보너스넘버가 존재하지 않는다면 false`() {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumbers = LottoNumbers(numbers)
 
