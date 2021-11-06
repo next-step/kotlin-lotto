@@ -14,14 +14,19 @@ class WinningLotto(lottoNumber: String) {
         return number
     }
 
-    fun getWinningLottoNumber(): List<Int> {
+    fun getWinningLottoNumberList(): List<Int> {
         return winningLottoNumberList
+    }
+
+    fun containsLottoNumber(lottoNumber: Int): Boolean {
+        return winningLottoNumberList.contains(lottoNumber)
     }
 
     companion object {
         private const val LOTTO_NUMBER_MIN = 1
         private const val LOTTO_NUMBER_MAX = 45
-        private const val LOTTO_NUMBER_OUT_RAGE = "로또 번호의 범위는 ${lotto.domain.WinningLotto.Companion.LOTTO_NUMBER_MIN} ~ ${lotto.domain.WinningLotto.Companion.LOTTO_NUMBER_MAX} 만 가능합니다."
-        private const val LOTTO_NUMBER_OVERLAP = "로또 번호는 중복 될 수 없습니다."
+        private const val LOTTO_NUMBER_OUT_RAGE =
+            "로또 번호의 범위는 ${lotto.domain.WinningLotto.Companion.LOTTO_NUMBER_MIN} ~ ${lotto.domain.WinningLotto.Companion.LOTTO_NUMBER_MAX} 만 가능합니다."
+        private const val LOTTO_NUMBER_OVERLAP = "로또 번호는 중복 될수 없고 로또 번호는 6개여야 합니다."
     }
 }
