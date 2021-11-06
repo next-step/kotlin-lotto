@@ -1,5 +1,5 @@
 package lotto.domain
 
-class BonusNumber(
+data class BonusNumber(
     val number: Int
 )
