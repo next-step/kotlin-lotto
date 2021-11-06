@@ -4,21 +4,23 @@ data class LottoGameResult(val numberOfHit: Int, val bonus: Boolean = false) {
     override fun equals(other: Any?): Boolean {
         if (other !is LottoGameResult)
             return false
-        val isSameHit = numberOfHit == other.numberOfHit
-        if (!isSameHit)
+        if (numberOfHit != other.numberOfHit)
             return false
-        if (BONUS_ABLE_HIT_LIST.contains(numberOfHit))
-            return other.bonus == bonus
+        if (bonus || other.bonus)
+            return checkResultByTypes(other)
         return true
+    }
+
+    private fun checkResultByTypes(other: LottoGameResult): Boolean {
+        val typesByHits = LotteryWinningTypes.findTypesByHits(numberOfHit)
+        if (typesByHits.size == 1)
+            return true
+        return bonus == other.bonus
     }
 
     override fun hashCode(): Int {
         var result = numberOfHit
         result = 31 * result + bonus.hashCode()
         return result
-    }
-
-    companion object {
-        val BONUS_ABLE_HIT_LIST = listOf(5)
     }
 }

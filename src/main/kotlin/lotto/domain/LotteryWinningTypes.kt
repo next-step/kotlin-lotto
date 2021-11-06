@@ -17,5 +17,7 @@ enum class LotteryWinningTypes(val result: LottoGameResult, val winnings: Int) {
 
         fun findTypeByLottoGameResult(lottoGameResult: LottoGameResult) =
             values().find { it.result == lottoGameResult } ?: throw IllegalArgumentException(NOT_DEFINED_HIT)
+
+        fun findTypesByHits(hit: Int) = values().filter { it.result.numberOfHit == hit }
     }
 }
