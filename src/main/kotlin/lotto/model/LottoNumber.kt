@@ -9,6 +9,8 @@ value class LottoNumber(val number: Int) {
         require(number in MIN_NUMBER..MAX_NUMBER) { EXCEPTION_NUMBER_FORMAT }
     }
 
+    fun isSameNumber(expectedNumber: Int): Boolean = number == expectedNumber
+
     companion object {
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
