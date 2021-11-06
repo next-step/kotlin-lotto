@@ -32,7 +32,7 @@ enum class LottoRank(
                 } ?: MISS
         }
 
-        private fun isBonusRank(isBonusNumber: Boolean): LottoRank =
+        fun isBonusRank(isBonusNumber: Boolean): LottoRank =
             if (isBonusNumber) SECOND else THIRD
     }
 }

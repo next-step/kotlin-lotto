@@ -55,4 +55,35 @@ class LottoRankTest {
         Assertions.assertThat(rank4).isEqualTo(LottoRank.FIFTH)
         Assertions.assertThat(rank5).isEqualTo(LottoRank.MISS)
     }
+
+    @Test
+    @DisplayName("보너스 번호가 없는 상황에서의 2등 확인")
+    fun `check second rank when it has not bonus number`() {
+        // given
+        val hasBonusNumber = false
+        val sameNumberCount = 5
+
+        // when
+        val secondRank = LottoRank.isBonusRank(hasBonusNumber)
+        val findSecondRank = LottoRank.findMatchRank(sameNumberCount, false)
+
+        // then
+        Assertions.assertThat(secondRank).isEqualTo(LottoRank.THIRD)
+        Assertions.assertThat(secondRank).isEqualTo(findSecondRank)
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 있는 상황에서의 2등 확인")
+    fun `check second rank when it has bonus number`() {
+        // given
+        val hasBonusNumber = true
+        val sameNumberCount = 5
+
+        // when
+        val secondRank = LottoRank.isBonusRank(hasBonusNumber)
+        val findSecondRank = LottoRank.findMatchRank(sameNumberCount, true)
+
+        // then
+        Assertions.assertThat(secondRank).isEqualTo(findSecondRank)
+    }
 }
