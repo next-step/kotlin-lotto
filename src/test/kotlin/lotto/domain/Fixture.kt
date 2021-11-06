@@ -1,6 +1,18 @@
 package lotto.domain
 
 object Fixture {
+    fun createLotto(vararg numbers: Int = intArrayOf(1, 2, 3, 4, 5, 6)): Lotto {
+        return Lotto.from(numbers.toList())
+    }
+
+    val manualLottos = Lottos(
+        listOf(
+            createLotto(1, 2, 3, 4, 5, 6),
+            createLotto(2, 3, 4, 5, 6, 7),
+            createLotto(3, 4, 5, 6, 7, 8),
+            createLotto(4, 5, 6, 7, 8, 9)
+        )
+    )
     val lottos = Lottos(
         listOf(
             createLotto(1, 2, 3, 4, 5, 6),
@@ -21,13 +33,12 @@ object Fixture {
             createLotto(21, 22, 23, 24, 25, 15)
         )
     )
-
-    val winningLotto = createLotto(1, 2, 3, 4, 5, 6)
-    val bonus = LottoNumber(7)
-
-    val statistics = Statistics(lottos.countMatches(winningLotto, bonus))
-
-    private fun createLotto(vararg numbers: Int): Lotto {
-        return Lotto.from(numbers.toList())
+    val winningLotto = WinningLotto(createLotto(), LottoNumber(7))
+    val statistics = Statistics(lottos.countMatches(winningLotto))
+    val generatorFactory = object : GeneratorFactory {
+        override fun createNumberGenerator(): () -> Int {
+            var number = 1
+            return { number++ }
+        }
     }
 }

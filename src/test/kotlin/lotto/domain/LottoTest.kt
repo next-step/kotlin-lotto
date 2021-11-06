@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
+import org.junit.jupiter.api.assertAll
 
 internal class LottoTest {
     @TestFactory
@@ -36,43 +37,26 @@ internal class LottoTest {
             }
         }
 
-    @DisplayName("로또번호를 3개 맞추면 THREE 를 반환한다.")
+    @DisplayName("로또가 특정 로또번호를 가지고 있다면 True 를 반환한다.")
     @Test
-    fun threeMatch() {
-        val lotto = Lotto.from(listOf(1, 2, 3, 9, 8, 7))
-        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
-            .isEqualTo(Match.THREE)
+    fun containsTrue() {
+        val numbers = (1..6)
+        val lotto = Lotto.from(numbers.toList())
+        assertAll(numbers.map { { assertThat(lotto.contains(LottoNumber(it))).isTrue } })
     }
 
-    @DisplayName("로또번호를 4개 맞추면 FOUR 를 반환한다.")
+    @DisplayName("로또가 특정 로또번호를 가지고 있지 않다면 False 를 반환한다.")
     @Test
-    fun fourMatch() {
-        val lotto = Lotto.from(listOf(1, 2, 3, 4, 8, 7))
-        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
-            .isEqualTo(Match.FOUR)
+    fun containsFalse() {
+        val numbers = (11..16)
+        val lotto = Lotto.from(numbers.toList())
+        assertAll(numbers.map { it + 10 }.map { { assertThat(lotto.contains(LottoNumber(it))).isFalse } })
     }
 
-    @DisplayName("로또번호를 5개 맞추면 FIVE 를 반환한다.")
+    @DisplayName("같은 로또번호의 갯수를 알수 있어야 한다.")
     @Test
-    fun fiveMatch() {
-        val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 8))
-        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
-            .isEqualTo(Match.FIVE)
-    }
-
-    @DisplayName("로또번호를 5개와 보너스볼을 맞추면 BONUS 를 반환한다.")
-    @Test
-    fun bonusMatch() {
-        val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 7))
-        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
-            .isEqualTo(Match.BONUS)
-    }
-
-    @DisplayName("로또번호를 6개 맞추면 SIX 를 반환한다.")
-    @Test
-    fun sixMatch() {
-        val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(lotto.checkMatch(Fixture.winningLotto, Fixture.bonus))
-            .isEqualTo(Match.SIX)
+    fun count() {
+        assertThat(Lotto.from((1..6).toList()).countSameNumbers(Lotto.from((4..9).toList())))
+            .isEqualTo(3)
     }
 }

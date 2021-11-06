@@ -1,22 +1,42 @@
 package lotto.domain
 
-enum class Match(val prize: Int) {
-    THREE(5000),
-    FOUR(50000),
-    FIVE(1500000),
-    BONUS(30000000),
-    SIX(2000000000),
-    NONE(0);
+enum class Match(val prize: Int, val lottoPrize: LottoPrize) {
+    THREE(5000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 3
+        }
+    }),
+    FOUR(50000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 4
+        }
+    }),
+    FIVE(1500000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 5 && !matchResult.matchBonus
+        }
+    }),
+    BONUS(30000000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 5 && matchResult.matchBonus
+        }
+    }),
+    SIX(2000000000, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return matchResult.count == 6
+        }
+    }),
+    NONE(0, object : LottoPrize {
+        override fun isMatchPrize(matchResult: MatchResult): Boolean {
+            return false
+        }
+    });
 
     companion object {
-        fun valueOf(count: Int, isBonus: Boolean): Match {
-            return when (count) {
-                3 -> THREE
-                4 -> FOUR
-                5 -> if (isBonus) BONUS else FIVE
-                6 -> SIX
-                else -> NONE
-            }
+        fun valueOf(count: Int, matchBonus: Boolean): Match {
+            return values().find {
+                it.lottoPrize.isMatchPrize(MatchResult(count, matchBonus))
+            } ?: NONE
         }
     }
 }
