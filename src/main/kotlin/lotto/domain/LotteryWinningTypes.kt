@@ -19,4 +19,3 @@ enum class LotteryWinningTypes(val result: LottoGameResult, val winnings: Int) {
             values().find { it.result == lottoGameResult } ?: throw IllegalArgumentException(NOT_DEFINED_HIT)
     }
 }
-// 보너스가 있음. -> 근데 hits = 4 rmfja?
