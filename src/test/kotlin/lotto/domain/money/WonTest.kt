@@ -18,4 +18,9 @@ class WonTest {
     fun `나눗셈을 할 수 있다`() {
         assertThat(Won(1000) / Won(500)).isEqualTo(2)
     }
+
+    @Test
+    fun `덧셈을 할 수 있다`() {
+        assertThat(Won(500) + Won(500)).isEqualTo(Won(1000))
+    }
 }
