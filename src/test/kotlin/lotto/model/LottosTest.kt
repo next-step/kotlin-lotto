@@ -82,7 +82,6 @@ class LottosTest {
         val winNumber = "10,1,13,23,33,43"
         val bonus = LottoNumber(4)
 
-
         // when
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
 

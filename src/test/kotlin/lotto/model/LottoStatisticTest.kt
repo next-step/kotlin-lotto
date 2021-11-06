@@ -105,7 +105,7 @@ class LottoStatisticTest {
     }
 
     @Test
-    @DisplayName("로또 당첨된 사람이 있는 경우의 수익률 계산")
+    @DisplayName("로또 당첨된 사람이 없는 경우의 수익률 계산")
     fun `check profit when it has none winner`() {
         // given
         val price = Price(1000)
