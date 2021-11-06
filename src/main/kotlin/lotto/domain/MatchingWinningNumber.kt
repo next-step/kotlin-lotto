@@ -3,9 +3,13 @@ package lotto.domain
 class MatchingWinningNumber(val winningNumberCount: Int, val bonusNumber: Boolean) {
 
     companion object {
-        fun of(lottoNumbers: List<Int>, winningNumbers: List<Int>, bonusNumber: Int): MatchingWinningNumber {
-            val winningNumberCount = lottoNumbers.intersect(winningNumbers).count()
-            val isBonus = lottoNumbers.contains(bonusNumber)
+        fun of(
+            lottoNumbers: LottoNumbers,
+            winningLotto: LottoNumbers,
+            bonusNumber: LottoNumber
+        ): MatchingWinningNumber {
+            val winningNumberCount = lottoNumbers.toInts().intersect(winningLotto.toInts()).count()
+            val isBonus = lottoNumbers.toInts().contains(bonusNumber.toInt())
             return MatchingWinningNumber(winningNumberCount, isBonus)
         }
     }

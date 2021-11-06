@@ -11,11 +11,14 @@ value class LottoResults private constructor(private val lottoResults: List<Lott
             bonusNumber: Int,
             purchasedLottos: List<Lotto>
         ): LottoResults {
+            val winningLotto = LottoNumbers.generateLottoNumbers(winningNumber)
+            val bonusLottoNumber = LottoNumber(bonusNumber)
 
             val matchingWinningNumbers: List<MatchingWinningNumber> = purchasedLottos.map {
-                MatchingWinningNumber.of(it.getLottoNumbers(), winningNumber, bonusNumber)
+                MatchingWinningNumber.of(it.getLottoNumbers(), winningLotto, bonusLottoNumber)
             }
-            val lottoResults: List<LottoResult> = LottoPrize.getPrizes().map {
+
+            val lottoResults = LottoPrize.getPrizes().map {
                 LottoResult.decideLottoPrize(it, matchingWinningNumbers)
             }
             return LottoResults(lottoResults)

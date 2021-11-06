@@ -91,8 +91,8 @@ class TotalRateTest {
             return Stream.of(
                 Arguments.of(listOf(1, 2, 3, 4, 5, 6), 601.0.toBigDecimal()),
                 Arguments.of(listOf(1, 2, 6, 8, 5, 10), 30.00.toBigDecimal()),
-                Arguments.of(listOf(10, 14, 18, 20, 14, 18), 0.00.toBigDecimal()),
-                Arguments.of(listOf(10, 14, 17, 20, 14, 18), 1.00.toBigDecimal())
+                Arguments.of(listOf(10, 14, 18, 20, 13, 21), 0.00.toBigDecimal()),
+                Arguments.of(listOf(10, 14, 17, 20, 13, 24), 1.00.toBigDecimal())
             )
         }
     }

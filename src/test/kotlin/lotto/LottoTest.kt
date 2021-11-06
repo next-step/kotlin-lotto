@@ -25,8 +25,11 @@ class LottoTest {
         // given
         val lotto = Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
 
+        // when
+        val lottoNumbers = lotto.getLottoNumbers().toInts()
+
         // then
-        assertThat(lotto.getLottoNumbers().size).isEqualTo(6)
+        assertThat(lottoNumbers.size).isEqualTo(6)
     }
 
     @Test
