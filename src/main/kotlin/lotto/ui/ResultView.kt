@@ -12,16 +12,17 @@ object ResultView {
     private const val REQUEST_BUDGET_LAST_WEEK_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     private const val REQUEST_BUDGET_LAST_WEEK_BONUS_NUMBER = "지난 주 보너스 번호를 입력해 주세요."
     private const val WINNING_RESULT_FORMAT = "%s개 일치 (%s원)- %s개"
+    private const val WINNING_RESULT_BONUS_FORMAT = "%s개 일치, 보너스 볼 일치(%s원)- %s개"
     private const val WINNING_RATIO = "총 수익률은 %.2f입니다."
     private const val GAME_RESULT_ANNOUNCE = "당첨 통계"
     private const val GAME_RESULT_DIVIDER = "----------"
 
+    fun printLottoBuyResult(lotteryPaper: LotteryPaper) {
+        printNumberOfLottoGames(lotteryPaper)
+        printLottoPaper(lotteryPaper)
+    }
+
     fun printRequestBudget() = println(REQUEST_BUDGET)
-
-    fun printNumberOfLottoGames(lotteryPaper: LotteryPaper) =
-        println("${lotteryPaper.getNumberOfGames()}$NUMBER_OF_LOTTO_GAMES_SUFFIX")
-
-    fun printLottoPaper(lotteryPaper: LotteryPaper) = lotteryPaper.getLottoGames().forEach { printLottoGame(it) }
 
     fun printRequestLastWeekNumber() {
         println(REQUEST_BUDGET_LAST_WEEK_NUMBER)
@@ -40,6 +41,12 @@ object ResultView {
         printWinningRatio(budget, getFullWinnings(lottoResultOnlyWinning))
     }
 
+    private fun printNumberOfLottoGames(lotteryPaper: LotteryPaper) =
+        println("${lotteryPaper.getNumberOfGames()}$NUMBER_OF_LOTTO_GAMES_SUFFIX")
+
+    private fun printLottoPaper(lotteryPaper: LotteryPaper) =
+        lotteryPaper.getLottoGames().forEach { printLottoGame(it) }
+
     private fun printWinnings(lottoResultOnlyWinning: Map<LotteryWinningTypes, Int>) =
         lottoResultOnlyWinning
             .forEach { printLottoGameResult(it.key.result, it.key.winnings, it.value) }
@@ -49,9 +56,13 @@ object ResultView {
             .map { it.key.winnings * it.value }
             .sum()
 
-    private fun printLottoGameResult(lottoResult: LottoGameResult, winning: Int, numberOfGames: Int) =
+    private fun printLottoGameResult(lottoResult: LottoGameResult, winning: Int, numberOfGames: Int) {
+        if (lottoResult.bonus) {
+            printFormatWithResult(WINNING_RESULT_BONUS_FORMAT, lottoResult.numberOfHit, winning, numberOfGames)
+            return
+        }
         printFormatWithResult(WINNING_RESULT_FORMAT, lottoResult.numberOfHit, winning, numberOfGames)
-
+    }
 
     private fun printFormatWithResult(format: String, numberOfHit: Int, winning: Int, numberOfGames: Int) =
         println(format.format(numberOfHit, winning, numberOfGames))

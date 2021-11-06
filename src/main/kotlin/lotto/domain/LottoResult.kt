@@ -30,7 +30,9 @@ data class LottoResult(
     fun getLottoResultMap() = lottoResultMap.toMap()
 
     fun getLottoResultMapOnlyWinning() =
-        lottoResultMap.filter { it.key.result.numberOfHit >= LotteryWinningTypes.MINIMUM_WINNING_HITS }
+        lottoResultMap
+            .filter { it.key.result.numberOfHit >= LotteryWinningTypes.MINIMUM_WINNING_HITS }
+            .toSortedMap(compareBy { it.winnings })
 
     private fun getGameResults(
         lottoGame: LottoGame,
