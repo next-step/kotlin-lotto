@@ -11,15 +11,15 @@ value class Money private constructor(val value: BigDecimal) {
     }
 
     companion object {
-        fun of(value: Int): Money {
-            return of(value.toBigDecimal())
+        fun valueOf(value: Int): Money {
+            return valueOf(value.toBigDecimal())
         }
 
-        fun of(value: Long): Money {
-            return of(BigDecimal.valueOf(value))
+        fun valueOf(value: Long): Money {
+            return valueOf(BigDecimal.valueOf(value))
         }
 
-        fun of(value: BigDecimal): Money {
+        fun valueOf(value: BigDecimal): Money {
             return Money(value)
         }
     }

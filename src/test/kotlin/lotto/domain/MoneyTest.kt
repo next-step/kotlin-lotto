@@ -10,8 +10,8 @@ class MoneyTest {
     @CsvSource(value = ["10000, 1000, 10", "20000, 200, 100", "1000, 10000, 0"])
     fun `구매가능한 티켓의 개수를 계산할 수 있다`(budget: Int, price: Int, count: Int) {
         // given
-        val userBudget = Money.of(budget)
-        val ticketPrice = Money.of(price)
+        val userBudget = Money.valueOf(budget)
+        val ticketPrice = Money.valueOf(price)
 
         // when
         val totalCount = userBudget.count(ticketPrice)

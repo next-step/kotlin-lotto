@@ -39,6 +39,6 @@ class LotteryStatisticsTest {
 
         // then
         assertThat(reward)
-            .isEqualTo(Money.of(Ranking.THIRD.reward.value.add(Ranking.FOURTH.reward.value)))
+            .isEqualTo(Money.valueOf(Ranking.THIRD.reward.value.add(Ranking.FOURTH.reward.value)))
     }
 }

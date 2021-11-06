@@ -16,11 +16,11 @@ class LotteryApplication(
     private val machine: LottoMachine
 ) {
     fun run() {
-        view.welcome()
-        val budget = Money.of(view.input())
-        val counts = machine.count(budget)
-        val lotteries = machine.buy(counts)
-        val paid = machine.calculatePaid(counts)
+        view.inputPrompt()
+        val budget = Money.valueOf(view.input())
+        val lotteryCounts = machine.count(budget)
+        val lotteries = machine.buy(lotteryCounts)
+        val paid = machine.calculatePaid(lotteryCounts)
 
         view.displayLotteries(lotteries)
         val winning = WinningLottery.of(view.inputWinningNumbers())

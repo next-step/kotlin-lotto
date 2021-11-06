@@ -13,7 +13,7 @@ class LottoMachineTest {
     fun `주어진 예산으로 구매 가능한 로또 개수를 계산할 수 있다`(budget: Int, count: Int) {
         // given
         val machine = LottoMachine(MockLottoGenerator)
-        val userBudget = Money.of(budget)
+        val userBudget = Money.valueOf(budget)
 
         // when
         val totalCount = machine.count(userBudget)

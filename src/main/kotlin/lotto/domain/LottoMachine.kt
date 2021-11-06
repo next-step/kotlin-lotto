@@ -27,10 +27,10 @@ class LottoMachine(private val generator: LottoGenerator) {
     }
 
     fun calculatePaid(counts: Int): Money {
-        return Money.of(LOTTERY_PRICE.value.multiply(counts.toBigDecimal()))
+        return Money.valueOf(LOTTERY_PRICE.value.multiply(counts.toBigDecimal()))
     }
 
     companion object {
-        private val LOTTERY_PRICE = Money.of(1_000L)
+        private val LOTTERY_PRICE = Money.valueOf(1_000L)
     }
 }
