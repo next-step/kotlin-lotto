@@ -16,7 +16,7 @@ class OutputView {
         private const val POSTFIX = "]"
         private const val PRINT_LOTTO_RESULT = "당첨 통계"
 
-        fun printBoughtLotto(manualLottoCount: Int, autoLottoCount: Int) {
+        fun printBoughtLottoCount(manualLottoCount: Int, autoLottoCount: Int) {
             println("수동으로 ${manualLottoCount}장, 자동으로 ${autoLottoCount}개를 구매했습니다.")
         }
 
