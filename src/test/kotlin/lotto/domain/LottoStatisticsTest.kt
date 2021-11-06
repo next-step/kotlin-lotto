@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.model.LottoStatistics
+import lotto.domain.model.WinningStatistics
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

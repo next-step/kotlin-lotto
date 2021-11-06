@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.WinningNumbers
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

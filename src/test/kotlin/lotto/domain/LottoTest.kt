@@ -1,5 +1,10 @@
 package lotto.domain
 
+import lotto.domain.model.BonusNumber
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoNumbers
+import lotto.domain.model.Price
+import lotto.domain.model.WinningNumbers
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -29,7 +34,7 @@ class LottoTest {
             BonusNumber(LottoNumber(8))
         )
 
-        val lotto = Lotto(LottoNumbers(numbers), 1000)
+        val lotto = Lotto(LottoNumbers(numbers), Price(1000))
         val actual = lotto.sortilege(winningNumber)
 
         assertEquals(Rank.BLANK, actual)
@@ -55,10 +60,11 @@ class LottoTest {
                     LottoNumber(6),
                     LottoNumber(7),
                 )
-            ), BonusNumber(LottoNumber(8))
+            ),
+            BonusNumber(LottoNumber(8))
         )
 
-        val lotto = Lotto(LottoNumbers(numbers), 1000)
+        val lotto = Lotto(LottoNumbers(numbers), Price(1000))
         val actual = lotto.sortilege(winningNumber)
 
         assertEquals(Rank.BLANK, actual)
@@ -89,7 +95,7 @@ class LottoTest {
             BonusNumber(LottoNumber(8))
         )
 
-        val lotto = Lotto(LottoNumbers(numbers), 1000)
+        val lotto = Lotto(LottoNumbers(numbers), Price(1000))
         val actual = lotto.sortilege(winningNumber)
 
         assertEquals(Rank.FIFTH, actual)
@@ -120,7 +126,7 @@ class LottoTest {
             BonusNumber(LottoNumber(8))
         )
 
-        val lotto = Lotto(LottoNumbers(numbers), 1000)
+        val lotto = Lotto(LottoNumbers(numbers), Price(1000))
         val actual = lotto.sortilege(winningNumber)
 
         assertEquals(Rank.FOURTH, actual)
@@ -151,7 +157,7 @@ class LottoTest {
             BonusNumber(LottoNumber(8))
         )
 
-        val lotto = Lotto(LottoNumbers(numbers), 1000)
+        val lotto = Lotto(LottoNumbers(numbers), Price(1000))
         val actual = lotto.sortilege(winningNumber)
 
         assertEquals(Rank.THIRD, actual)
@@ -179,10 +185,13 @@ class LottoTest {
                     LottoNumber(7),
                 )
             ),
-            BonusNumber(LottoNumber(8))
+            BonusNumber(LottoNumber(8)),
         )
 
-        val lotto = Lotto(LottoNumbers(numbers), 1000)
+        val lotto = Lotto(
+            LottoNumbers(numbers),
+            Price(1000),
+        )
         val actual = lotto.sortilege(winningNumber)
 
         assertEquals(Rank.SECOND, actual)
@@ -209,10 +218,14 @@ class LottoTest {
                     LottoNumber(6),
                     LottoNumber(7),
                 )
-            ), BonusNumber(LottoNumber(8))
+            ),
+            BonusNumber(LottoNumber(8))
         )
 
-        val lotto = Lotto(LottoNumbers(numbers), 1000)
+        val lotto = Lotto(
+            LottoNumbers(numbers),
+            Price(1000),
+        )
         val actual = lotto.sortilege(winningNumber)
 
         assertEquals(Rank.FIRST, actual)

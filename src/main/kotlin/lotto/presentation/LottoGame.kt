@@ -1,11 +1,11 @@
 package lotto.presentation
 
-import lotto.domain.BonusNumber
-import lotto.domain.LottoNumber
-import lotto.domain.LottoStatistics
-import lotto.domain.Lottos
 import lotto.domain.WinningNumber
-import lotto.domain.WinningNumbers
+import lotto.domain.model.BonusNumber
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoStatistics
+import lotto.domain.model.Lottos
+import lotto.domain.model.WinningNumbers
 import lotto.usecase.LottoMachine
 import lotto.usecase.PurchaseAmountCalculator
 import lotto.usecase.WinningsChecker
@@ -29,7 +29,9 @@ class LottoGame(
         val automaticLottos = lottoMachine.automaticBuy(automaticCount)
         val passivityLottos = lottoMachine.passivityBuy(
             passivityLottoNumbers.map { passivityLottoNumber ->
-                passivityLottoNumber.map { number -> LottoNumber(number) }
+                passivityLottoNumber.map { number ->
+                    LottoNumber(number)
+                }
             }
         )
 
@@ -44,22 +46,23 @@ class LottoGame(
         lottos: Lottos,
         bonusNumber: Int,
     ): LottoStatistics {
-
         val winningNumber = WinningNumber(
-            WinningNumbers(
+            numbers = WinningNumbers(
                 winningNumbers.map { number ->
                     LottoNumber(number)
-                }),
-            BonusNumber(LottoNumber(bonusNumber))
+                }
+            ),
+            bonusNumber = BonusNumber(LottoNumber(bonusNumber)),
         )
+
         val winningStatistics = winningsChecker.confirmWinning(
-            lottos = lottos.getLottos(),
-            winningNumber = winningNumber
+            lottos = lottos,
+            winningNumber = winningNumber,
         )
 
         return LottoStatistics(
-            totalPurchaseAmount = calculator.getTotalPurchaseAmount(lottos.getLottos()),
-            winningStatistics = winningStatistics
+            totalPurchaseAmount = calculator.getTotalPurchaseAmount(lottos),
+            winningStatistics = winningStatistics,
         )
     }
 }

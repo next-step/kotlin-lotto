@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.LottoStatistics
-import lotto.domain.Lottos
+import lotto.domain.model.LottoStatistics
+import lotto.domain.model.Lottos
 import lotto.domain.Rank
 
 class OutputView {

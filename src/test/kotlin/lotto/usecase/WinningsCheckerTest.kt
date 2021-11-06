@@ -1,12 +1,14 @@
 package lotto.usecase
 
-import lotto.domain.BonusNumber
+import lotto.domain.model.BonusNumber
 import lotto.domain.Lotto
-import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoNumbers
+import lotto.domain.model.Price
 import lotto.domain.Rank
 import lotto.domain.WinningNumber
-import lotto.domain.WinningNumbers
+import lotto.domain.model.Lottos
+import lotto.domain.model.WinningNumbers
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -27,7 +29,7 @@ class WinningsCheckerTest {
         val firstRankLottos = (1..10).map {
             Lotto(
                 LottoNumbers(numbers),
-                1000
+                Price(1000)
             )
         }
 
@@ -43,12 +45,15 @@ class WinningsCheckerTest {
                         LottoNumber(0),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
         val actual = winningsChecker.confirmWinning(
-            lottos = firstRankLottos + blankLottos,
+            lottos = Lottos(
+                automaticLottos = firstRankLottos + blankLottos,
+                passivityLottos = emptyList()
+            ),
             winningNumber = WinningNumber(
                 WinningNumbers(
                     listOf(
@@ -82,7 +87,7 @@ class WinningsCheckerTest {
                         LottoNumber(8),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
@@ -98,12 +103,15 @@ class WinningsCheckerTest {
                         LottoNumber(0),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
         val actual = winningsChecker.confirmWinning(
-            lottos = secondRankLottos + blankLottos,
+            lottos = Lottos(
+                automaticLottos = secondRankLottos + blankLottos,
+                passivityLottos = emptyList()
+            ),
             winningNumber = WinningNumber(
                 WinningNumbers(
                     listOf(
@@ -137,7 +145,7 @@ class WinningsCheckerTest {
                         LottoNumber(0),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
@@ -153,12 +161,15 @@ class WinningsCheckerTest {
                         LottoNumber(0),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
         val actual = winningsChecker.confirmWinning(
-            lottos = thirdRankLottos + blankLottos,
+            lottos = Lottos(
+                automaticLottos = thirdRankLottos + blankLottos,
+                passivityLottos = emptyList()
+            ),
             winningNumber = WinningNumber(
                 WinningNumbers(
                     listOf(
@@ -192,7 +203,7 @@ class WinningsCheckerTest {
                         LottoNumber(0),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
@@ -208,12 +219,15 @@ class WinningsCheckerTest {
                         LottoNumber(0),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
         val actual = winningsChecker.confirmWinning(
-            lottos = fourthRankLottos + blankLottos,
+            lottos = Lottos(
+                automaticLottos = fourthRankLottos + blankLottos,
+                passivityLottos = emptyList()
+            ),
             winningNumber = WinningNumber(
                 WinningNumbers(
                     listOf(
@@ -235,22 +249,6 @@ class WinningsCheckerTest {
 
     @Test
     fun `로또 모두 꽝 일때 firstRanks, secondRanks, thirdRanks, fourthRanks size 0`() {
-        val fourthRankLottos = (1..10).map {
-            Lotto(
-                LottoNumbers(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(0),
-                        LottoNumber(0),
-                        LottoNumber(0),
-                        LottoNumber(0),
-                    )
-                ),
-                1000
-            )
-        }
-
         val blankLottos = (1..10).map {
             Lotto(
                 LottoNumbers(
@@ -263,12 +261,15 @@ class WinningsCheckerTest {
                         LottoNumber(0),
                     )
                 ),
-                1000
+                Price(1000)
             )
         }
 
         val actual = winningsChecker.confirmWinning(
-            lottos = fourthRankLottos + blankLottos,
+            lottos = Lottos(
+                automaticLottos = blankLottos,
+                passivityLottos = emptyList()
+            ),
             winningNumber = WinningNumber(
                 WinningNumbers(
                     listOf(

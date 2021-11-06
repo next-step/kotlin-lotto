@@ -1,7 +1,8 @@
 package lotto.usecase
 
 import lotto.domain.Lotto
-import lotto.domain.LottoNumber
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.Price
 
 class LottoMachine(
     private val lottoGenerator: LottoGenerator,
@@ -16,7 +17,10 @@ class LottoMachine(
                 .subList(START_INDEX, END_INDEX)
                 .sorted()
                 .map { number -> LottoNumber(number) }
-            val lotto = lottoGenerator.generate(lottoNumbers, LOTTO_PRICE)
+            val lotto = lottoGenerator.generate(
+                numbers = lottoNumbers,
+                price = Price(LOTTO_PRICE)
+            )
 
             lottos.add(lotto)
         }
@@ -30,7 +34,7 @@ class LottoMachine(
         return passivityLottoNumbers.map { passivityLottoNumber ->
             lottoGenerator.generate(
                 numbers = passivityLottoNumber,
-                price = LOTTO_PRICE,
+                price = Price(LOTTO_PRICE),
             )
         }
     }

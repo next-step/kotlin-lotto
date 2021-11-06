@@ -1,7 +1,8 @@
 package lotto.usecase
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoNumbers
+import lotto.domain.model.Price
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -19,7 +20,7 @@ class LottoGeneratorTest {
             LottoNumber(5),
             LottoNumber(6),
         )
-        val lotto = generator.generate(numbers, 1000)
+        val lotto = generator.generate(numbers, Price(1000))
 
         assertEquals(LottoNumbers(numbers), lotto.numbers)
     }

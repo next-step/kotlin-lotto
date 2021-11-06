@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.domain.model.BonusNumber
+import lotto.domain.model.WinningNumbers
+
 class WinningNumber(
     val numbers: WinningNumbers,
     val bonusNumber: BonusNumber,
