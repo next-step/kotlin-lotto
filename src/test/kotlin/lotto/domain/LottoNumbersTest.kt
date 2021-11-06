@@ -57,7 +57,7 @@ class LottoNumbersTest {
 
     @Test
     @DisplayName("LottoNumbers toString 호출 했을 때 [numbers]")
-    fun toString_test() {
+    fun `override toString 가 의도된대로 동작하는지 테스트`() {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val lottoNumbers = LottoNumbers(numbers)
         val actual = lottoNumbers.toString()
