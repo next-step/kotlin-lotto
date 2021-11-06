@@ -16,7 +16,7 @@ object LottoView {
 
     fun inputWinningNumbers(): List<Int> = readLine()?.split(DELIMITER)?.map { it.trim().toInt() } ?: listOf()
 
-    fun welcome() {
+    fun inputPrompt() {
         println("구매금액을 입력해 주세요.")
     }
 
