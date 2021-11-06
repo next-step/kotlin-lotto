@@ -7,6 +7,10 @@ data class LottoNumbers(
         require(numbers.size == NUMBER_SIZE) { "6개의 번호를 입력해야합니다." }
     }
 
+    override fun toString(): String {
+        return numbers.toString()
+    }
+
     fun getMatchCount(winningNumbers: WinningNumbers): Int {
         return numbers
             .map { number ->
@@ -18,10 +22,6 @@ data class LottoNumbers(
 
     fun isMatchedBonusNumber(bonusNumber: BonusNumber): Boolean {
         return numbers.contains(bonusNumber.number)
-    }
-
-    override fun toString(): String {
-        return numbers.toString()
     }
 
     companion object {
