@@ -47,7 +47,7 @@ class Lottos private constructor(
                 .split(DELIMITER)
                 .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
 
-            require(!list.map { it }.contains(bonusNumber)) { EXCEPTION_BONUS_NUMBER }
+            require(!list.contains(bonusNumber)) { EXCEPTION_BONUS_NUMBER }
             return Lottos(price, purchasedLotto, Lotto(list), bonusNumber)
         }
     }
