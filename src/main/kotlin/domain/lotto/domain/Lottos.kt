@@ -22,5 +22,7 @@ value class Lottos private constructor(val lottos: List<Lotto>) {
             of((START..numberOfPurchase).map { Lotto.of(shuffleStrategy) }.toList())
 
         fun of(lottos: List<Lotto>): Lottos = Lottos(lottos.toList())
+
+        fun empty(): Lottos = of(listOf())
     }
 }

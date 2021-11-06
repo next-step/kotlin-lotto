@@ -23,9 +23,13 @@ class LottoApplication(
     fun run() {
         val money = purchaseLottoByConsole()
         val lottoPurchaseTicket = Ticket(money.numberOfPurchases(Lotto.PRICE))
+        if(lottoPurchaseTicket.ticketCount == Ticket.MINIMUM) {
+            return lottoResultView.showNoHaveTicketResult()
+        }
         val manuallyPurchaseTicket = manuallyPurchaseLottoByConsole(lottoPurchaseTicket)
         val manuallyLottos = manuallyLottosByConsole(lottoPurchaseTicket, manuallyPurchaseTicket)
-        val automaticallyLottos = LottoService.automaticallyLottos(manuallyPurchaseTicket.ticketCount, LottoRandomShuffleStrategy)
+        val automaticallyLottos =
+            LottoService.automaticallyLottos(manuallyPurchaseTicket.ticketCount, LottoRandomShuffleStrategy)
 
         val lottos = manuallyLottos + automaticallyLottos
         lottoResultView.showLottos(lottos)
@@ -47,6 +51,9 @@ class LottoApplication(
 
     private fun manuallyLottosByConsole(standardTicket: Ticket, availableTicket: Ticket): Lottos {
         return try {
+            if((standardTicket - availableTicket).ticketCount == Ticket.MINIMUM) {
+                return Lottos.empty()
+            }
             Lottos.of(
                 lottoInputView.manuallyLottos((standardTicket - availableTicket).ticketCount)
                     .map { Lotto.of(it, CommaSplitStrategy) }

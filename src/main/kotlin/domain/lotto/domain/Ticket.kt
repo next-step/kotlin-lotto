@@ -19,7 +19,9 @@ value class Ticket(val ticketCount: Int) {
     }
 
     companion object {
-        private const val MINIMUM = 0
+        const val MINIMUM = 0
+
+        fun noHaveTicket():Ticket = Ticket(MINIMUM)
     }
 }
 

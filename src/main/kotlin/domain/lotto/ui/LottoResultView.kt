@@ -16,8 +16,13 @@ import global.strategy.ui.ConsoleOutputStrategy
 import kotlin.math.floor
 
 class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) {
-    fun showLottos(lottos: Lottos) =
+    fun showNoHaveTicketResult() =
+        consoleOutputStrategy.output(NO_HAVE_TICKET_MESSAGE)
+
+    fun showLottos(lottos: Lottos) {
+        consoleOutputStrategy.output(GENERATED_LOTTOS_MESSAGE)
         consoleOutputStrategy.output(lottosJoinToString(lottos.lottos))
+    }
 
     private fun lottosJoinToString(lottos: List<Lotto>) =
         lottos.joinToString(separator = EMPTY, transform = this::showLotto)
@@ -58,10 +63,10 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
         )
 
     companion object {
-        private const val NUMBER_OF_PURCHASES_MESSAGE = "%s개를 구매했습니다."
+        private const val NO_HAVE_TICKET_MESSAGE = "구매한 로또가 없습니다"
+        private const val GENERATED_LOTTOS_MESSAGE =  "로또 리스트"
         private const val WINNING_MATCH_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개$NEW_LINE"
         private const val WINNING_MATCH_BONUS_RESULT_MESSAGE = "%s개 일치 보너스 볼 일치(%s원)- %s개$NEW_LINE"
-
         private const val WINNINGS_YIELD_MESSAGE = "총 수익률은 %4.2f입니다."
         private const val PERCENTAGE = 100
     }
