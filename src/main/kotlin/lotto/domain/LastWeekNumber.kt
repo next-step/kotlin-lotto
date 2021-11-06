@@ -11,5 +11,7 @@ class LastWeekNumber(numbers: List<Int>) {
         require(numbersSet.size == 6) { LAST_WEEK_NUMBERS_SIZE_MUST_SIX }
     }
 
+    fun contains(number: Int) = numbersSet.contains(number)
+
     fun getLastWeekSetList() = numbersSet.toSet()
 }

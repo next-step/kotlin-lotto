@@ -20,10 +20,19 @@ object InputView {
         val numbersInput = readLine()
         requireNotNull(numbersInput) { INPUT_MUST_NOT_NULL }
         val numbersInString = numbersInput.split(delimiter)
-        numbersInString.forEach { isUnsignedInt(it) }
+        numbersInString.forEach { require(isUnsignedInt(it)) { INPUT_MUST_UNSIGNED_INT } }
         val numbers = numbersInString.map { it.toInt() }
         numbers.forEach { isValidatedLastWeekNumber(it) }
         return numbers
+    }
+
+    fun readInputForLastWeekBonusNumbers(): Int {
+        val numbersInput = readLine()
+        requireNotNull(numbersInput) { INPUT_MUST_NOT_NULL }
+        require(isUnsignedInt(numbersInput)) { INPUT_MUST_UNSIGNED_INT }
+        val number = numbersInput.toInt()
+        isValidatedLastWeekNumber(number)
+        return number
     }
 
     private fun isUnsignedInt(numberOfString: String) = numberOfString.matches(unsignedNumberRegex)

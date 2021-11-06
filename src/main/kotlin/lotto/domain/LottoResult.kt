@@ -1,6 +1,10 @@
 package lotto.domain
 
-data class LottoResult(private val lottoGames: List<LottoGame>, private val lastWeekNumber: LastWeekNumber) {
+data class LottoResult(
+    private val lottoGames: List<LottoGame>,
+    private val lastWeekNumber: LastWeekNumber,
+    private val bonusNumber: BonusNumber
+) {
     private val lottoResultMap = LinkedHashMap<LotteryWinningTypes, Int>().apply {
         LotteryWinningTypes.values().forEach { put(it, 0) }
     }
@@ -8,25 +12,33 @@ data class LottoResult(private val lottoGames: List<LottoGame>, private val last
     init {
         val lastWeekNumberSet = lastWeekNumber.getLastWeekSetList()
         val numberOfHits = lottoGames
-            .map { getGameHits(it, lastWeekNumberSet) }
+            .map { getGameResults(it, lastWeekNumberSet, bonusNumber) }
 
         numberOfHits
             .forEach {
-                val currentWinningType = LotteryWinningTypes.findTypeByHits(it)
+                val currentWinningType = LotteryWinningTypes.findTypeByLottoGameResult(it)
                 lottoResultMap[currentWinningType] = lottoResultMap.getOrDefault(currentWinningType, 0) + 1
             }
     }
 
-    constructor(lotteryPaper: LotteryPaper, lastWeekNumber: LastWeekNumber) : this(
+    constructor(lotteryPaper: LotteryPaper, lastWeekNumber: LastWeekNumber, bonusNumber: BonusNumber) : this(
         lotteryPaper.getLottoGames(),
-        lastWeekNumber
+        lastWeekNumber,
+        bonusNumber
     )
 
     fun getLottoResultMap() = lottoResultMap.toMap()
 
     fun getLottoResultMapOnlyWinning() =
-        lottoResultMap.filter { it.key.hits >= LotteryWinningTypes.MINIMUM_WINNING_HITS }
+        lottoResultMap.filter { it.key.result.numberOfHit >= LotteryWinningTypes.MINIMUM_WINNING_HITS }
 
-    private fun getGameHits(lottoGame: LottoGame, lastWeekNumberSet: Set<Int>): Int =
-        lottoGame.numbers.filter { number -> lastWeekNumberSet.contains(number) }.size
+    private fun getGameResults(
+        lottoGame: LottoGame,
+        lastWeekNumberSet: Set<Int>,
+        bonusNumber: BonusNumber
+    ): LottoGameResult {
+        val hits = lottoGame.numbers.filter { number -> lastWeekNumberSet.contains(number) }.size
+        val containBonus = lottoGame.numbers.contains(bonusNumber.number)
+        return LottoGameResult(hits, containBonus)
+    }
 }
