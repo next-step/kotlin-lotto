@@ -24,7 +24,7 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = 4
+        val bonus = LottoNumber(4)
 
         // when
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
@@ -52,7 +52,7 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = 4
+        val bonus = LottoNumber(4)
 
         // when
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
@@ -80,7 +80,8 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = 4
+        val bonus = LottoNumber(4)
+
 
         // when
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
@@ -108,7 +109,7 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = 4
+        val bonus = LottoNumber(4)
 
         // when
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
@@ -136,7 +137,7 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = 22
+        val bonus = LottoNumber(22)
 
         // when
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
@@ -164,7 +165,7 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = 6
+        val bonus = LottoNumber(6)
 
         // when
         val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
@@ -192,7 +193,7 @@ class LottosTest {
             )
         )
         val winNumber = null
-        val bonus = 4
+        val bonus = LottoNumber(4)
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Lottos.inputWinNumber(price, purchasedList, winNumber, bonus) }

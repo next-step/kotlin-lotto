@@ -56,7 +56,7 @@ class LottoTest {
         val lottoList = listOf(LottoNumber(10), LottoNumber(1), LottoNumber(45), LottoNumber(13), LottoNumber(23), LottoNumber(33))
 
         // when
-        val hasNumber = Lotto(lottoList).hasNumber(10)
+        val hasNumber = Lotto(lottoList).hasNumber(LottoNumber(10))
 
         // then
         assertThat(hasNumber).isEqualTo(true)
@@ -69,7 +69,7 @@ class LottoTest {
         val lottoList = listOf(LottoNumber(10), LottoNumber(45), LottoNumber(3), LottoNumber(13), LottoNumber(23), LottoNumber(33))
 
         // when
-        val hasNumber = Lotto(lottoList).hasNumber(44)
+        val hasNumber = Lotto(lottoList).hasNumber(LottoNumber(44))
 
         // then
         assertThat(hasNumber).isEqualTo(false)
