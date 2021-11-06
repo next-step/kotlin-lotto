@@ -14,39 +14,33 @@ class LottosTest {
         // Arrange
         val lottos = listOf(
             Lotto(
-                LottoNumbers(
-                    listOf(
-                        LottoNumberFixture.create(1),
-                        LottoNumberFixture.create(2),
-                        LottoNumberFixture.create(3),
-                        LottoNumberFixture.create(4),
-                        LottoNumberFixture.create(5),
-                        LottoNumberFixture.create(6),
-                    )
+                listOf(
+                    LottoNumberFixture.create(1),
+                    LottoNumberFixture.create(2),
+                    LottoNumberFixture.create(3),
+                    LottoNumberFixture.create(4),
+                    LottoNumberFixture.create(5),
+                    LottoNumberFixture.create(6),
                 )
             ),
             Lotto(
-                LottoNumbers(
-                    listOf(
-                        LottoNumberFixture.create(1),
-                        LottoNumberFixture.create(2),
-                        LottoNumberFixture.create(3),
-                        LottoNumberFixture.create(4),
-                        LottoNumberFixture.create(5),
-                        LottoNumberFixture.create(7),
-                    )
+                listOf(
+                    LottoNumberFixture.create(1),
+                    LottoNumberFixture.create(2),
+                    LottoNumberFixture.create(3),
+                    LottoNumberFixture.create(4),
+                    LottoNumberFixture.create(5),
+                    LottoNumberFixture.create(7),
                 )
             )
         )
 
-        val winningNumber = WinningNumber(
-            listOf("1", "2", "3", "4", "5", "6")
-        )
-        val bonusNumber = 7
+        val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
+        val winningNumber = WinningNumber.of(winningNumbers, 7)
 
         // Act
         val sut = Lottos(lottos)
-        val result: Map<Rank, Int> = sut.matchWinningNumber(LottoNumbers(winningNumber.value), bonusNumber)
+        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber)
 
         // Assert
         assertThat(result[Rank.FIRST]).isEqualTo(1)

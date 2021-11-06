@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.exception.InvalidLottoNumberException
 import lotto.exception.InvalidWinningNumberException
+import lotto.fixture.LottoNumberFixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -17,14 +18,44 @@ class WinningNumberTest {
         val inputWinningNumber = mutableListOf("1", "2", "3", "4", "5", "6")
 
         // Act
-        val winningNumber = WinningNumber(inputWinningNumber)
+        val winningNumber = WinningNumber.of(inputWinningNumber, 45)
 
         // Assert
-        assertThat(winningNumber.value).hasSize(6)
+        assertThat(winningNumber.getLottoNumbers()).hasSize(6)
 
         inputWinningNumber.add("8")
 
-        assertThat(winningNumber.value).hasSize(6)
+        assertThat(winningNumber.getLottoNumbers()).hasSize(6)
+    }
+
+    @Test
+    @DisplayName("당첨 번호에 로또 번호가 포함될 경우 true 반환")
+    fun `sut returns true when winning number contains lotto numbers`() {
+        // Arrange
+        val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
+        val bonusNumber = 8
+
+        // Act
+        val sut = WinningNumber.of(winningNumbers, bonusNumber)
+        val result = sut.containsLottoNumber(LottoNumberFixture.create(1))
+
+        // Assert
+        assertThat(result).isTrue
+    }
+
+    @Test
+    @DisplayName("당첨 번호에 로또 번호가 포함되어있지 않은 경우 false 반환")
+    fun `sut returns false when winning number not contains lotto numbers`() {
+        // Arrange
+        val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
+        val bonusNumber = 8
+
+        // Act
+        val sut = WinningNumber.of(winningNumbers, bonusNumber)
+        val result = sut.containsLottoNumber(LottoNumberFixture.create(45))
+
+        // Assert
+        assertThat(result).isFalse
     }
 
     @Test
@@ -34,7 +65,7 @@ class WinningNumberTest {
         val inputWinningNumber = emptyList<String>()
 
         // Act, Assert
-        assertThrows<InvalidWinningNumberException> { WinningNumber(inputWinningNumber) }
+        assertThrows<InvalidWinningNumberException> { WinningNumber.of(inputWinningNumber, 45) }
     }
 
     @Test
@@ -44,7 +75,7 @@ class WinningNumberTest {
         val inputWinningNumber = listOf("1", "2", "3", "4", "5", "6", "7")
 
         // Act, Assert
-        assertThrows<InvalidWinningNumberException> { WinningNumber(inputWinningNumber) }
+        assertThrows<InvalidWinningNumberException> { WinningNumber.of(inputWinningNumber, 45) }
     }
 
     @Test
@@ -54,6 +85,6 @@ class WinningNumberTest {
         val inputWinningNumber = listOf("1", "2", "3", "4", "5", "46")
 
         // Act, Assert
-        assertThrows<InvalidLottoNumberException> { WinningNumber(inputWinningNumber) }
+        assertThrows<InvalidLottoNumberException> { WinningNumber.of(inputWinningNumber, 45) }
     }
 }

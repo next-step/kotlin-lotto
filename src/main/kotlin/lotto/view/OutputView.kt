@@ -2,11 +2,11 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.Rank
+import lotto.domain.Rank.FIFTH
 import lotto.domain.Rank.FIRST
 import lotto.domain.Rank.FOURTH
 import lotto.domain.Rank.SECOND
 import lotto.domain.Rank.THIRD
-import lotto.domain.Rank.FIFTH
 
 class OutputView {
 
@@ -31,7 +31,7 @@ class OutputView {
         fun printLottoMatchResult(matchResult: Map<Rank, Int>) {
             println(PRINT_LOTTO_RESULT)
             println("---------")
-            println("${FIFTH.matchCount}개 일치 (${FIFTH.winningMoney}원) - ${matchResult[FOURTH] ?: 0}개")
+            println("${FIFTH.matchCount}개 일치 (${FIFTH.winningMoney}원) - ${matchResult[FIFTH] ?: 0}개")
             println("${FOURTH.matchCount}개 일치 (${FOURTH.winningMoney}원) - ${matchResult[FOURTH] ?: 0}개")
             println("${THIRD.matchCount}개 일치 (${THIRD.winningMoney}원) - ${matchResult[THIRD] ?: 0}개")
             println("${SECOND.matchCount}개 일치, 보너스 볼 일치 (${SECOND.winningMoney}원) - ${matchResult[SECOND] ?: 0}개")

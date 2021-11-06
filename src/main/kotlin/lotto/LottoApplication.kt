@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
 import lotto.domain.Price
 import lotto.domain.ProfitRate
@@ -19,12 +18,10 @@ fun main() {
     OutputView.printBoughtLottos(lottos)
 
     val inputWinningNumber: List<String> = InputView.inputWinningNumber()
-    val winningNumber = WinningNumber(inputWinningNumber)
-    val winningNumbers = LottoNumbers(winningNumber.value)
-
     val inputBonusNumber = InputView.inputBonusNumber() ?: 0
+    val winningNumber = WinningNumber.of(inputWinningNumber, inputBonusNumber)
 
-    val matchResult = Lottos(lottos).matchWinningNumber(winningNumbers, inputBonusNumber)
+    val matchResult = Lottos(lottos).matchWinningNumber(winningNumber)
     OutputView.printLottoMatchResult(matchResult)
 
     val profitRate = ProfitRate(matchResult, inputPrice)
