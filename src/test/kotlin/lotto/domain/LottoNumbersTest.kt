@@ -3,6 +3,7 @@ package lotto.domain
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -52,5 +53,15 @@ class LottoNumbersTest {
         val actual = lottoNumbers.isMatchedBonusNumber(BonusNumber(7))
 
         assertFalse(actual)
+    }
+
+    @Test
+    @DisplayName("LottoNumbers toString 호출 했을 때 [numbers]")
+    fun toString_test() {
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+        val lottoNumbers = LottoNumbers(numbers)
+        val actual = lottoNumbers.toString()
+
+        assertEquals("[1, 2, 3, 4, 5, 6]", actual)
     }
 }
