@@ -12,7 +12,12 @@ import lotto.view.OutputView
 fun main() {
     val inputPrice = InputView.inputPrice() ?: 0
     val lottoCount = Price(inputPrice).getLottoCount()
-    OutputView.printBoughtLotto(lottoCount)
+    val inputManualLottoCount = InputView.printManualLottoCount() ?: 0
+    val manualLottos = InputView.printManualLottoNumbers(inputManualLottoCount)
+
+    val manualLottoCount = manualLottos.size
+    val autoLottoCount = lottoCount - manualLottoCount
+    OutputView.printBoughtLotto(manualLottoCount, autoLottoCount)
 
     val lottos = LottoGenerator().generate(lottoCount, LottoAutoStrategy())
     OutputView.printBoughtLottos(lottos)
