@@ -42,7 +42,7 @@ data class LottoResult(
 
     private fun getGameResults(
         lottoGame: LottoGame,
-        lastWeekNumberSet: Set<Int>,
+        lastWeekNumberSet: Set<LottoNumber>,
         bonusNumber: BonusNumber
     ): LottoGameResult {
         val hits = lottoGame.numbers.filter { number -> lastWeekNumberSet.contains(number) }.size

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import lotto.domain.LottoGameResult
 import org.assertj.core.api.Assertions.assertThat

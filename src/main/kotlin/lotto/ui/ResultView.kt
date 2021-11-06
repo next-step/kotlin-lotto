@@ -2,6 +2,7 @@ package lotto.ui
 
 import lotto.domain.LotteryPaper
 import lotto.domain.LotteryWinningTypes
+import lotto.domain.LottoBudget
 import lotto.domain.LottoGame
 import lotto.domain.LottoGameResult
 import lotto.domain.LottoResult
@@ -32,7 +33,7 @@ object ResultView {
         println(REQUEST_BUDGET_LAST_WEEK_BONUS_NUMBER)
     }
 
-    fun printLottoResult(budget: Int, lottoResult: LottoResult) {
+    fun printLottoResult(budget: LottoBudget, lottoResult: LottoResult) {
         println(GAME_RESULT_ANNOUNCE)
         println(GAME_RESULT_DIVIDER)
 
@@ -67,8 +68,14 @@ object ResultView {
     private fun printFormatWithResult(format: String, numberOfHit: Int, winning: Int, numberOfGames: Int) =
         println(format.format(numberOfHit, winning, numberOfGames))
 
-    private fun printWinningRatio(budget: Int, fullWinnings: Int) =
-        println(WINNING_RATIO.format(fullWinnings / budget.toFloat()))
+    private fun printWinningRatio(budget: LottoBudget, fullWinnings: Int) =
+        println(WINNING_RATIO.format(budget.getWinningRatio(fullWinnings)))
 
-    private fun printLottoGame(lottoGame: LottoGame) = println(lottoGame.numbers.joinToString(", ", "[", "]"))
+    private fun printLottoGame(lottoGame: LottoGame) {
+        lottoGame
+            .numbers
+            .map { it.number }
+            .joinToString(", ", "[", "]")
+            .also { println(it) }
+    }
 }

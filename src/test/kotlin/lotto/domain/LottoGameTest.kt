@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.LottoGame
+import lotto.LottoNumberList.Companion.lottoNumberListOf
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -10,7 +10,7 @@ import java.util.stream.Stream
 class LottoGameTest {
     @ParameterizedTest
     @MethodSource("lottoNumbersData")
-    fun `lottoGame에 입력된 숫자들의 값 과 위치가 변경 되지 않는다`(lottoNumbers: List<Int>) {
+    fun `lottoGame에 입력된 숫자들의 값 과 위치가 변경 되지 않는다`(lottoNumbers: List<LottoNumber>) {
         val lottoGame = LottoGame(lottoNumbers)
         val expected = lottoNumbers
         val actual = lottoGame.numbers
@@ -21,8 +21,8 @@ class LottoGameTest {
         @JvmStatic
         fun lottoNumbersData(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6)),
-                Arguments.of(listOf(2, 4, 8, 10, 15, 33))
+                Arguments.of(lottoNumberListOf(1, 2, 3, 4, 5, 6)),
+                Arguments.of(lottoNumberListOf(2, 4, 8, 10, 15, 33))
             )
         }
     }
