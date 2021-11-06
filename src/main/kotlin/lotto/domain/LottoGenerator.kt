@@ -15,13 +15,13 @@ class LottoGenerator(val lottoPrice: Money) {
     }
 
     private fun createLotto(): Lotto {
-        val numbers = NUMBER_POOL.shuffled().slice(NUMBERS_RANGE)
+        val numbers = LottoNUMBERS.shuffled().slice(NUMBER_PICK_RANGE)
         return Lotto(numbers)
     }
 
     companion object {
-        private val NUMBERS_RANGE = (0..5)
-        private val NUMBER_POOL = (1..45).toList()
+        private val LottoNUMBERS = (1..45).map { LottoNumber(it) }
+        private val NUMBER_PICK_RANGE = (0..5)
         private const val NOT_ENOUGH_MONEY = "금액이 부족합니다."
     }
 }

@@ -1,13 +1,13 @@
 package lotto.domain
 
-class Lotto(val numbers: List<Int>) {
+class Lotto(val numbers: List<LottoNumber>) {
 
     init {
         require(numbers.size == REQUIRED_SIZE_OF_NUMBERS) { INVALID_SIZE_OF_NUMBERS_ERROR_MSG }
         require(numbers.size == numbers.distinct().size) { DUPLICATE_NUMBER_ERROR_MSG }
     }
 
-    fun countMatches(winningNumbers: List<Int>): Int {
+    fun countMatches(winningNumbers: List<LottoNumber>): Int {
         return (numbers intersect winningNumbers).size
     }
 
