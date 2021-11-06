@@ -14,5 +14,7 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
             val values = lottoNumbers.map { Lotto.from(it) }
             return Lottos(values)
         }
+
+        fun from(lottos: List<Lotto>): Lottos = Lottos(lottos)
     }
 }

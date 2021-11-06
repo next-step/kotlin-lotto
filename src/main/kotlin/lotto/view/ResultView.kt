@@ -9,7 +9,7 @@ class ResultView {
 
     fun viewPurchaseLotto(lottos: LottoStore) {
         println("수동으로 ${lottos.getManualLottoSize()} 장, 자동으로 ${lottos.getAutoLottoSize()}개를 구매했습니다.")
-        lottos.getAllLottos().forEach {
+        lottos.getAllLottos().toList().forEach {
             println(it.getLottoNumbers())
         }
     }

@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoStore private constructor(private val manualLottos: Lottos, private val autoLottos: Lottos) {
 
-    fun getAllLottos(): List<Lotto> = manualLottos.toList() + autoLottos.toList()
+    fun getAllLottos(): Lottos = Lottos.from(manualLottos.toList() + autoLottos.toList())
     fun getManualLottoSize(): Int = manualLottos.toList().size
     fun getAutoLottoSize(): Int = autoLottos.toList().size
 
