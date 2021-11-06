@@ -147,7 +147,7 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("로또 번호가 모두 같지 않는 경우")
+    @DisplayName("로또 번호가 모두 같지 않은 경우")
     fun `check result of none winner`() {
         // given
         val price = Price(1000)
@@ -200,7 +200,7 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 로또 숫자 비교")
+    @DisplayName("당첨 번호와 로또 숫자 비교하여 일치하는 개수 확인")
     fun `compare lotto item with win numbers`() {
         // given
         val purchasedNumber = Lotto(
