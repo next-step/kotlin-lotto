@@ -1,12 +1,13 @@
 package lotto.usecase
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 
 class LottoGenerator : Generator {
 
     override fun generate(
-        numbers: List<Int>,
+        numbers: List<LottoNumber>,
         price: Int,
     ): Lotto {
         return Lotto(

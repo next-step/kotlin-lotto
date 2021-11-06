@@ -18,7 +18,15 @@ fun main() {
     )
 
     val purchaseAmount = inputView.inputPurchaseAmount()
-    val lottos = lottoGame.buy(purchaseAmount)
+    val passivityCount = inputView.inputPassivityCount()
+    val passivityLottoNumbers = inputView.inputPassivityLottoNumbers(passivityCount)
+
+    val availablePurchaseCount = purchaseAmount / LottoMachine.LOTTO_PRICE
+
+    val lottos = lottoGame.buy(
+        availablePurchaseCount = availablePurchaseCount,
+        passivityLottoNumbers = passivityLottoNumbers,
+    )
 
     outputView.printLotto(lottos)
 

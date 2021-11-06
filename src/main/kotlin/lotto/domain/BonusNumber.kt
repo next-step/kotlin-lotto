@@ -1,5 +1,5 @@
 package lotto.domain
 
 data class BonusNumber(
-    val number: Int
+    val number: LottoNumber
 )

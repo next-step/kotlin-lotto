@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoNumbers(
-    private val numbers: List<Int>,
+    val numbers: List<LottoNumber>,
 ) {
     init {
         require(numbers.size == NUMBER_SIZE) { "6개의 번호를 입력해야합니다." }

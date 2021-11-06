@@ -1,6 +1,8 @@
 package lotto.usecase
 
+import lotto.domain.LottoNumber
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -10,12 +12,55 @@ class LottoMachineTest {
         LottoGenerator()
     )
 
-    @ValueSource(ints = [1000, 2000, 3000, 4000, 5000])
+    @ValueSource(ints = [1, 2, 3, 4, 5])
     @ParameterizedTest
-    fun `구매금액 1000원당 1장구매`(purchaseAmount: Int) {
-        val expected = purchaseAmount / 1000
-        val lottos = machine.buy(purchaseAmount)
+    fun `자동구매요청한 개수만큼 Lotto 생성`(automaticCount: Int) {
+        val lottos = machine.automaticBuy(automaticCount)
 
-        assertEquals(expected, lottos.size)
+        assertEquals(automaticCount, lottos.size)
+    }
+
+    @Test
+    fun `수동구매 요청한 개수만큼 Lotto 생성`() {
+        val number1 = listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6),
+        )
+        val number2 = listOf(
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6),
+            LottoNumber(7),
+        )
+        val passivityNumbers = listOf(
+            number1, number2
+        )
+
+        val passivityLottos = machine.passivityBuy(passivityNumbers)
+
+        assertEquals(2, passivityLottos.size)
+    }
+
+    @Test
+    fun `수동구매 요청한 번호로 Lotto 생성`() {
+        val number = listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6),
+        )
+        val passivityNumbers = listOf(number)
+
+        val passivityLottos = machine.passivityBuy(passivityNumbers)
+
+        assertEquals(number, passivityLottos[0].numbers.numbers)
     }
 }

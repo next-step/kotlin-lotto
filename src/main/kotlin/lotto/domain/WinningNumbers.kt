@@ -1,13 +1,13 @@
 package lotto.domain
 
 class WinningNumbers(
-    val numbers: List<Int>
+    val numbers: List<LottoNumber>
 ) {
     init {
         require(numbers.size == WINNING_NUMBER_SIZE) { "당첨번호는 6개여야 합니다." }
     }
 
-    fun contains(number: Int): Boolean {
+    fun contains(number: LottoNumber): Boolean {
         return numbers.contains(number)
     }
 
