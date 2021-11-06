@@ -13,7 +13,7 @@ class LottoWinCheckerTest {
         val lottos = (0..lottoCount).map { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
 
-        val results = LottoWinChecker(lottos).checkWin(winningNumbers)
+        val results = LottoWinChecker(lottos).getPrizes(winningNumbers)
 
         assertThat(results.size).isEqualTo(lottos.size)
     }
@@ -24,7 +24,7 @@ class LottoWinCheckerTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winningNumbers = input.split(",").map { it.toInt() }
 
-        val results = LottoWinChecker(listOf(lotto)).checkWin(winningNumbers)
+        val results = LottoWinChecker(listOf(lotto)).getPrizes(winningNumbers)
 
         assertThat(results.first()).isEqualTo(expectedPrize)
     }
