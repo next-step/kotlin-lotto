@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 
 class WinningNumbersTest {
     @Test
-    fun `인자의 개수가 5일때 exception`() {
+    fun `당첨번호의 개수가 5일때 exception`() {
         assertThrows<IllegalArgumentException> {
             val numbers = listOf(1, 2, 3, 4, 5)
             WinningNumbers(numbers)
@@ -15,7 +15,7 @@ class WinningNumbersTest {
     }
 
     @Test
-    fun `인자의 개수가 7일때 exception`() {
+    fun `당첨번호의 개수가 7일때 exception`() {
         assertThrows<IllegalArgumentException> {
             val numbers = listOf(1, 2, 3, 4, 5, 6, 7)
             WinningNumbers(numbers)
@@ -23,7 +23,7 @@ class WinningNumbersTest {
     }
 
     @Test
-    fun `인자로 건낸 Number 를 포함하고 있을경우 true`() {
+    fun `로또번호가 당첨번호 안에 포함될경우 true`() {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val winningNumbers = WinningNumbers(numbers)
 
@@ -33,7 +33,7 @@ class WinningNumbersTest {
     }
 
     @Test
-    fun `인자로 건낸 Number 를 포함하고 있지 않을경우 false`() {
+    fun `로또번호가 당첨번호 안에 포함하고 있지 않은경우 false`() {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
         val winningNumbers = WinningNumbers(numbers)
 
