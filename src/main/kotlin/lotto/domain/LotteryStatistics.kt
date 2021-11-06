@@ -9,7 +9,7 @@ value class LotteryStatistics private constructor(val values: Map<Ranking, Int>)
 
     companion object {
         private fun statisticize(lotteries: Lotteries, winning: Lottery): Map<Ranking, Int> {
-            return lotteries.values.map { Ranking.calculate(it.compareTo(winning)) }
+            return lotteries.rank(winning)
                 .groupingBy { it }
                 .eachCount()
         }
