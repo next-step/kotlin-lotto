@@ -11,7 +11,7 @@ class LottoMachine(private val generator: LottoGenerator) {
     fun buy(counts: Int): Lotteries {
         return (1..counts)
             .map { generator.generate() }
-            .let { Lotteries.of(it) }
+            .run { Lotteries.of(this) }
     }
 
     fun calculate(lotteries: Lotteries, winning: Lottery): LotteryStatistics {
