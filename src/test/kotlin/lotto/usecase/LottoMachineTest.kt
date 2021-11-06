@@ -1,6 +1,7 @@
 package lotto.usecase
 
 import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoNumbers
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -39,7 +40,8 @@ class LottoMachineTest {
             LottoNumber(7),
         )
         val passivityNumbers = listOf(
-            number1, number2
+            LottoNumbers(number1),
+            LottoNumbers(number2),
         )
 
         val passivityLottos = machine.passivityBuy(passivityNumbers)
@@ -57,7 +59,9 @@ class LottoMachineTest {
             LottoNumber(5),
             LottoNumber(6),
         )
-        val passivityNumbers = listOf(number)
+        val passivityNumbers = listOf(
+            LottoNumbers(number)
+        )
 
         val passivityLottos = machine.passivityBuy(passivityNumbers)
 

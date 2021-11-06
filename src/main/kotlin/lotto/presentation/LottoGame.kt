@@ -3,6 +3,7 @@ package lotto.presentation
 import lotto.domain.WinningNumber
 import lotto.domain.model.BonusNumber
 import lotto.domain.model.LottoNumber
+import lotto.domain.model.LottoNumbers
 import lotto.domain.model.LottoStatistics
 import lotto.domain.model.Lottos
 import lotto.domain.model.WinningNumbers
@@ -25,15 +26,16 @@ class LottoGame(
         require(availablePurchaseCount >= passivityCount) { "수동으로 구매요청한 개수가 구매가능한 로또개수보다 많습니다." }
 
         val automaticCount = availablePurchaseCount - passivityCount
+        val lottoNumbers = passivityLottoNumbers.map { passivityLottoNumber ->
+            val numbers = passivityLottoNumber.map { number ->
+                LottoNumber(number)
+            }
+
+            LottoNumbers(numbers)
+        }
 
         val automaticLottos = lottoMachine.automaticBuy(automaticCount)
-        val passivityLottos = lottoMachine.passivityBuy(
-            passivityLottoNumbers.map { passivityLottoNumber ->
-                passivityLottoNumber.map { number ->
-                    LottoNumber(number)
-                }
-            }
-        )
+        val passivityLottos = lottoMachine.passivityBuy(lottoNumbers)
 
         return Lottos(
             automaticLottos = automaticLottos,

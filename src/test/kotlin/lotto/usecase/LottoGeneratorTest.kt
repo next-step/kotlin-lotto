@@ -20,7 +20,10 @@ class LottoGeneratorTest {
             LottoNumber(5),
             LottoNumber(6),
         )
-        val lotto = generator.generate(numbers, Price(1000))
+        val lotto = generator.generate(
+            numbers = LottoNumbers(numbers),
+            price = Price(1000)
+        )
 
         assertEquals(LottoNumbers(numbers), lotto.numbers)
     }
