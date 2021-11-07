@@ -1,6 +1,9 @@
 package lotto.domain
 
-data class Lottos(val lottos: List<Lotto>) {
+@JvmInline
+value class Lottos private constructor(
+    val lottos: List<Lotto>
+) {
 
     fun match(lotto: Lotto): LottoResult {
         val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it)) }
@@ -10,6 +13,11 @@ data class Lottos(val lottos: List<Lotto>) {
     }
 
     companion object {
+
+        fun of(lottos: List<Lotto>): Lottos {
+            return Lottos(lottos)
+        }
+
         fun of(lottoGenerator: LottoGenerator): Lottos {
             return Lottos(lottoGenerator.generateLotto())
         }
