@@ -34,8 +34,8 @@ class LottoGame(
             LottoNumbers(numbers)
         }
 
-        val automaticLottos = lottoMachine.automaticBuy(automaticCount)
-        val passivityLottos = lottoMachine.passivityBuy(lottoNumbers)
+        val automaticLottos = lottoMachine.buyAutomatic(automaticCount)
+        val passivityLottos = lottoMachine.buyPassivity(lottoNumbers)
 
         return Lottos(
             automaticLottos = automaticLottos,

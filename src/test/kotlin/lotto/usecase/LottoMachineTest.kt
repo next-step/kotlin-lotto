@@ -16,7 +16,7 @@ class LottoMachineTest {
     @ValueSource(ints = [1, 2, 3, 4, 5])
     @ParameterizedTest
     fun `자동구매요청한 개수만큼 Lotto 생성`(automaticCount: Int) {
-        val lottos = machine.automaticBuy(automaticCount)
+        val lottos = machine.buyAutomatic(automaticCount)
 
         assertEquals(automaticCount, lottos.size)
     }
@@ -44,7 +44,7 @@ class LottoMachineTest {
             LottoNumbers(number2),
         )
 
-        val passivityLottos = machine.passivityBuy(passivityNumbers)
+        val passivityLottos = machine.buyPassivity(passivityNumbers)
 
         assertEquals(2, passivityLottos.size)
     }
@@ -63,7 +63,7 @@ class LottoMachineTest {
             LottoNumbers(number)
         )
 
-        val passivityLottos = machine.passivityBuy(passivityNumbers)
+        val passivityLottos = machine.buyPassivity(passivityNumbers)
 
         assertEquals(number, passivityLottos[0].numbers.numbers)
     }

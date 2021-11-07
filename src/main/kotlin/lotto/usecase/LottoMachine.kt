@@ -9,7 +9,7 @@ class LottoMachine(
     private val lottoGenerator: LottoGenerator,
 ) {
 
-    fun automaticBuy(automaticCount: Int): List<Lotto> {
+    fun buyAutomatic(automaticCount: Int): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
 
         repeat(automaticCount) {
@@ -29,7 +29,7 @@ class LottoMachine(
         return lottos.toList()
     }
 
-    fun passivityBuy(
+    fun buyPassivity(
         passivityLottoNumbers: List<LottoNumbers>
     ): List<Lotto> {
         return passivityLottoNumbers.map { passivityLottoNumber ->
