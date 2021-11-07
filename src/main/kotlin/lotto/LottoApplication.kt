@@ -7,6 +7,7 @@ import lotto.usecase.LottoMachine
 import lotto.usecase.LottoGenerator
 import lotto.usecase.PurchaseAmountCalculator
 import lotto.usecase.WinningsChecker
+import lotto.util.LottoNumberParser
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -24,7 +25,12 @@ fun main() {
     val passivityCount = inputView.inputPassivityCount()
     val passivityLottoNumbers = inputView.inputPassivityLottoNumbers(passivityCount)
 
-    val lottos = buyLottos(purchaseAmount, passivityLottoNumbers)
+    val lottos = buyLottos(
+        purchaseAmount,
+        passivityLottoNumbers.map { passivityLottoNumber ->
+            LottoNumberParser.parse(passivityLottoNumber)
+        }
+    )
     outputView.printLotto(lottos)
 
     val winningNumbers = inputView.inputWinningNumber()
@@ -32,7 +38,7 @@ fun main() {
 
     getStatistics(
         lottos,
-        winningNumbers,
+        LottoNumberParser.parse(winningNumbers),
         bonusNumber
     ).let { statistics ->
         outputView.printStatistics(statistics)

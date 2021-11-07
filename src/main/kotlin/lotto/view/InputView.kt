@@ -16,31 +16,19 @@ class InputView {
         return passivityCount.toInt()
     }
 
-    fun inputWinningNumber(): List<Int> {
+    fun inputWinningNumber(): String {
         println(INPUT_WINNING_NUMBERS)
-        val winningNumbers = readLine() ?: DEFAULT_WINNING_NUMBERS
-
-        return winningNumbers
-            .split(SEPARATOR)
-            .map { winningNumber ->
-                winningNumber.toInt()
-            }
+        return readLine() ?: DEFAULT_WINNING_NUMBERS
     }
 
-    fun inputPassivityLottoNumbers(passivityCount: Int): List<List<Int>> {
+    fun inputPassivityLottoNumbers(passivityCount: Int): List<String> {
         println(INPUT_PASSIVITY_NUMBER)
-        val lottoNumbers = mutableListOf<List<Int>>()
+        val lottoNumbers = mutableListOf<String>()
 
         repeat(passivityCount) {
             val passivityLottoNumber = readLine() ?: DEFAULT_LOTTO_NUMBERS
 
-            val numbers = passivityLottoNumber
-                .split(SEPARATOR)
-                .map { winningNumber ->
-                    winningNumber.toInt()
-                }
-
-            lottoNumbers.add(numbers)
+            lottoNumbers.add(passivityLottoNumber)
         }
 
         return lottoNumbers.toList()
@@ -59,7 +47,6 @@ class InputView {
         private const val INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요."
         private const val INPUT_BONUS_NUMBER = "보너스 번호를 입력해주세요."
         private const val INPUT_PASSIVITY_NUMBER = "수동으로 구매할 번호를 입력해 주세요."
-        private const val SEPARATOR = ","
         private const val DEFAULT_PURCHASE_AMOUNT = "0"
         private const val DEFAULT_WINNING_NUMBERS = "0,0,0,0,0,0"
         private const val DEFAULT_LOTTO_NUMBERS = "1,2,3,4,5,6"
