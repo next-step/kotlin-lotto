@@ -1,7 +1,5 @@
 package lotto.view
 
-import java.lang.RuntimeException
-
 class InputView {
 
     fun inputPurchaseAmount(): Int {
