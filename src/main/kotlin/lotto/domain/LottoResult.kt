@@ -13,7 +13,6 @@ class LottoResult(userLottoList: List<Lotto>, private val winningLotto: WinningL
 
         userLottoList
             .forEach { recordLottoPrize(it) }
-
     }
 
     private fun recordLottoPrize(lotto: Lotto) {
@@ -29,6 +28,4 @@ class LottoResult(userLottoList: List<Lotto>, private val winningLotto: WinningL
         .filter { it.key >= 3 && it.value != 0 }
         .map { PrizeType.findPrizeMoney(it.key) }
         .sum()
-
-
 }

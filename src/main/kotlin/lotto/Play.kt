@@ -26,7 +26,5 @@ object Play {
 
         val sum = lottoResult.totalPrizeMoney()
         ResultView.statistics(sum, userLottoBuyMoney)
-
     }
-
 }

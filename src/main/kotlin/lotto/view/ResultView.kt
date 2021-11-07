@@ -16,7 +16,7 @@ object ResultView {
         println("-------------------------------")
 
         prizeResult
-            .filter { it.key >=3 }
+            .filter { it.key >= 3 }
             .forEach { println("${it.key} 개 일치 (${PrizeType.findPrizeMoney(it.key)})ㅡ ${it.value} 개") }
     }
 
