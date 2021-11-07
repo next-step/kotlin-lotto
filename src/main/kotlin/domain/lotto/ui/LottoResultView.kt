@@ -64,7 +64,7 @@ class LottoResultView(private val consoleOutputStrategy: ConsoleOutputStrategy) 
 
     companion object {
         private const val NO_HAVE_TICKET_MESSAGE = "구매한 로또가 없습니다"
-        private const val GENERATED_LOTTOS_MESSAGE =  "로또 리스트"
+        private const val GENERATED_LOTTOS_MESSAGE = "로또 리스트"
         private const val WINNING_MATCH_RESULT_MESSAGE = "%s개 일치 (%s원)- %s개$NEW_LINE"
         private const val WINNING_MATCH_BONUS_RESULT_MESSAGE = "%s개 일치 보너스 볼 일치(%s원)- %s개$NEW_LINE"
         private const val WINNINGS_YIELD_MESSAGE = "총 수익률은 %4.2f입니다."
