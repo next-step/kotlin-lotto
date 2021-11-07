@@ -54,4 +54,28 @@ class LottoNumberTest {
         )
         assertThat(result).isEqualTo(expected)
     }
+
+    @Test
+    fun `문자열로부터 로또 번호를 만들 수 있다`() {
+        // given
+        val number = "35"
+
+        // when
+        val result = LottoNumber.valueOf(number)
+
+        // then
+        assertThat(result).isEqualTo(LottoNumber.valueOf(35))
+    }
+
+    @Test
+    fun `정수가 아닌 문자열은 허용하지 않는다`() {
+        // given
+        val number = "ab"
+
+        // when
+        val create: () -> Unit = { LottoNumber.valueOf(number) }
+
+        // then
+        assertThrows<IllegalArgumentException>(create)
+    }
 }

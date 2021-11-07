@@ -18,6 +18,11 @@ value class LottoNumber private constructor(val value: Int) : Comparable<LottoNu
             return VALID_LOTTO_NUMBERS.getOrNull(value - 1) ?: LottoNumber(value)
         }
 
+        fun valueOf(value: String): LottoNumber {
+            val lottoNumber = value.toIntOrNull() ?: throw IllegalArgumentException("${value}은/는 정수가 아닙니다.")
+            return valueOf(lottoNumber)
+        }
+
         val VALID_LOTTO_NUMBERS = VALID_LOTTO_RANGE.toList().map(::LottoNumber)
     }
 }
