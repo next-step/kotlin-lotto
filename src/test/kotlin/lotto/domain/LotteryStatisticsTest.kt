@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.fixture.BonusBallFixture
 import lotto.fixture.LotteriesFixture
 import lotto.fixture.LotteryFixture
 import org.assertj.core.api.Assertions.assertThat
@@ -13,16 +14,17 @@ class LotteryStatisticsTest {
         // given
         val lotteries = LotteriesFixture.LOTTERIES
         val winning = LotteryFixture.WINNING_LOTTERY
+        val bonusBall = BonusBallFixture.BONUS_BALL
 
         // when
-        val statistics = LotteryStatistics.of(lotteries, winning).values
+        val statistics = LotteryStatistics.of(lotteries, winning, bonusBall).values
 
         // then
         assertAll(
-            { assertThat(statistics.containsKey(Ranking.THIRD)) },
             { assertThat(statistics.containsKey(Ranking.FOURTH)) },
-            { assertThat(statistics[Ranking.THIRD]).isEqualTo(1) },
+            { assertThat(statistics.containsKey(Ranking.FIFTH)) },
             { assertThat(statistics[Ranking.FOURTH]).isEqualTo(1) },
+            { assertThat(statistics[Ranking.FIFTH]).isEqualTo(1) },
             { assertThat(statistics.size).isEqualTo(2) }
         )
     }
@@ -32,13 +34,14 @@ class LotteryStatisticsTest {
         // given
         val lotteries = LotteriesFixture.LOTTERIES
         val winning = LotteryFixture.WINNING_LOTTERY
-        val statistics = LotteryStatistics.of(lotteries, winning)
+        val bonusBall = BonusBallFixture.BONUS_BALL
+        val statistics = LotteryStatistics.of(lotteries, winning, bonusBall)
 
         // when
         val reward = statistics.calculate()
 
         // then
         assertThat(reward)
-            .isEqualTo(Money.from(Ranking.THIRD.reward.value.add(Ranking.FOURTH.reward.value)))
+            .isEqualTo(Money.from(Ranking.FOURTH.reward.value.add(Ranking.FIFTH.reward.value)))
     }
 }
