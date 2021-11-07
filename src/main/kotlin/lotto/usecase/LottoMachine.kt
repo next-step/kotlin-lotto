@@ -45,6 +45,6 @@ class LottoMachine(
         private const val MAX_NUMBER = 45
         private const val START_INDEX = 0
         private const val END_INDEX = 6
-        const val LOTTO_PRICE = 1000
+        const val LOTTO_PRICE = 1_000
     }
 }
