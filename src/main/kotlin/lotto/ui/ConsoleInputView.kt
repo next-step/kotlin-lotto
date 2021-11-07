@@ -13,6 +13,7 @@ object ConsoleInputView {
     }
 
     fun getManualLottoTickets(count: Int): List<String> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
         return (1..count).map { getInput() }
     }
 

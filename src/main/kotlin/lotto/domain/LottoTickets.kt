@@ -12,5 +12,9 @@ class LottoTickets(tickets: List<LottoNumbers>) {
 
     private fun LottoNumbers.findRankingBy(winning: WinningNumbers): LottoRanking =
         LottoRanking.from(winning.countSameNumber(this), winning.containsBonus(this))
+
+    operator fun plus(other: LottoTickets): LottoTickets {
+        return LottoTickets(tickets + other.tickets)
+    }
 }
 
