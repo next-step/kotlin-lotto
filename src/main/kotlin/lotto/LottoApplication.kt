@@ -21,14 +21,15 @@ fun main() {
     val autoLottoCount = lottoCount - manualLottoCount
     val autoLottos = LottoGenerator().generate(autoLottoCount, LottoAutoStrategy())
 
+    val totalLottos = manualLottos.plus(autoLottos)
     OutputView.printBoughtLottoCount(manualLottoCount, autoLottoCount)
-    OutputView.printBoughtLottos(autoLottos)
+    OutputView.printBoughtLottos(totalLottos)
 
     val inputWinningNumber: List<String> = InputView.inputWinningNumber()
     val inputBonusNumber = InputView.inputBonusNumber() ?: 0
     val winningNumber = WinningNumber.of(inputWinningNumber, inputBonusNumber)
 
-    val matchResult = Lottos(autoLottos).matchWinningNumber(winningNumber)
+    val matchResult = Lottos(totalLottos).matchWinningNumber(winningNumber)
     OutputView.printLottoMatchResult(matchResult)
 
     val profitRate = ProfitRate(matchResult, inputPrice)
