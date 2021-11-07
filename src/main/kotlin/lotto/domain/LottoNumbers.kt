@@ -12,6 +12,10 @@ value class LottoNumbers private constructor(val values: List<LottoNumber>) {
         require(values.distinct().count() == LOTTO_NUMBER_COUNTS) { "중복된 번호를 선택할 수 없습니다." }
     }
 
+    fun isContainLottoNumber(number: LottoNumber): Boolean {
+        return values.contains(number)
+    }
+
     companion object {
         const val LOTTO_NUMBER_COUNTS = 6
 
