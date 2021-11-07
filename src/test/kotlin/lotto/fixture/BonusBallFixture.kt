@@ -1,7 +1,6 @@
 package lotto.fixture
 
 import lotto.domain.BonusBall
-import lotto.domain.LottoNumber
 
 class BonusBallFixture {
 
