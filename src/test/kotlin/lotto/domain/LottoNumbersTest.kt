@@ -105,7 +105,7 @@ class LottoNumbersTest {
 
     @Test
     @DisplayName("LottoNumbers toString 호출 했을 때 [numbers]")
-    fun `override toString 가 의도된대로 동작하는지 테스트`() {
+    fun `override toString numbers 만 출력이 된다`() {
         val numbers = listOf(
             LottoNumber(1),
             LottoNumber(2),
