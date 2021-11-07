@@ -1,6 +1,9 @@
 package lotto.domain
 
-data class Money(private val money: Int) {
+@JvmInline
+value class Money private constructor(
+    private val money: Int
+) {
 
     init {
         require(money >= LOTTO_PRICE) { NOT_ENOUGH_MONEY_MESSAGE }
