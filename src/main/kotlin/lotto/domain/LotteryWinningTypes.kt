@@ -1,25 +1,23 @@
 package lotto.domain
 
 import lotto.domain.ExceptionType.NOT_DEFINED_HIT
-import lotto.domain.ExceptionType.NOT_DEFINED_HIT_FOR_WINNINGS
 
-enum class LotteryWinningTypes(val hits: Int, val winnings: Int) {
-    Zero(0, 0),
-    One(1, 0),
-    Two(2, 0),
-    Three(3, 5_000),
-    Four(4, 50_000),
-    Five(5, 1_500_000),
-    Six(6, 2_000_000_000);
+enum class LotteryWinningTypes(val result: LottoGameResult, val winnings: Int) {
+    Zero(LottoGameResult(0), 0),
+    One(LottoGameResult(1), 0),
+    Two(LottoGameResult(2), 0),
+    Three(LottoGameResult(3), 5_000),
+    Four(LottoGameResult(4), 50_000),
+    Five(LottoGameResult(5), 1_500_000),
+    FiveWithBonus(LottoGameResult(5, true), 30_000_000),
+    Six(LottoGameResult(6), 2_000_000_000);
 
     companion object {
         const val MINIMUM_WINNING_HITS = 3
-        fun findWinningByHits(hits: Int) =
-            values()
-                .find { it.hits == hits }?.winnings ?: throw IllegalArgumentException(NOT_DEFINED_HIT_FOR_WINNINGS)
 
-        fun findTypeByHits(hits: Int) =
-            values()
-                .find { it.hits == hits } ?: throw IllegalArgumentException(NOT_DEFINED_HIT)
+        fun findTypeByLottoGameResult(lottoGameResult: LottoGameResult) =
+            values().find { it.result == lottoGameResult } ?: throw IllegalArgumentException(NOT_DEFINED_HIT)
+
+        fun findTypesByHits(hit: Int) = values().filter { it.result.numberOfHit == hit }
     }
 }
