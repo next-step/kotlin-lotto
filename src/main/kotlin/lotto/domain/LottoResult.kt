@@ -10,7 +10,7 @@ data class LottoResult(val result: Map<Rank, Int>) {
     }
 
     fun getProfit(money: Money): Float {
-        val profit = (getTotalPrize() / (money.lottoCount * Money.LOTTO_PRICE * 1f))
+        val profit = (getTotalPrize() / (Lotto.getPurchasedLottoCount(money) * Lotto.PRICE.money * 1f))
         return DECIMAL_FORMAT.format(profit).toFloat()
     }
 
