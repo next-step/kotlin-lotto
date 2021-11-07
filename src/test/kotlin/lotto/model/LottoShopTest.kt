@@ -19,7 +19,7 @@ class LottoShopTest {
     @DisplayName("구입 금액이 0원보다 작으면 0개의 로또를 반환한다.")
     @Test
     fun lottoShopNegative() {
-        val actual = shop.buy(Amount(-1500)).size
+        val actual = shop.buy(Amount.valueOf(-1500)).size
         assertThat(actual).isZero
     }
 
@@ -33,7 +33,7 @@ class LottoShopTest {
         delimiter = '|'
     )
     fun lottoShopCount(amount: Int, count: Int) {
-        val actual = shop.buy(Amount(amount)).size
+        val actual = shop.buy(Amount.valueOf(amount)).size
         assertThat(actual).isEqualTo(count)
     }
 
@@ -44,7 +44,7 @@ class LottoShopTest {
         val lottoNumbers = List(20) { LottoNumbers.random() }
 
         val expected = 14
-        val actual = shop.buy(Amount(amount), lottoNumbers).size
+        val actual = shop.buy(Amount.valueOf(amount), lottoNumbers).size
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -54,7 +54,7 @@ class LottoShopTest {
         val lottoNumbers = List(10) { LottoNumbers.random() }
 
         val expected = 4
-        val actual = shop.buy(Amount(amount), lottoNumbers).count { it.isAuto }
+        val actual = shop.buy(Amount.valueOf(amount), lottoNumbers).count { it.isAuto }
         assertThat(actual).isEqualTo(expected)
     }
 }

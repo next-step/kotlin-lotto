@@ -19,14 +19,14 @@ class LottoMachineTest {
     @ValueSource(ints = [0, 5, 10, 20, 6, 14])
     @ParameterizedTest(name = "발급 매수만큼의 로또가 발급되어야 한다.")
     fun lottoCount(size: Int) {
-        val actual = machine.auto(Size(size), Price(0)).size
+        val actual = machine.auto(Size.valueOf(size), Price.valueOf(0)).size
         assertThat(actual).isEqualTo(size)
     }
 
     @DisplayName("발급 매수가 0보다 작은 경우 0개를 발급한다.")
     @Test
     fun lottoNegative() {
-        val actual = machine.auto(Size(-5), Price(0)).size
+        val actual = machine.auto(Size.valueOf(-5), Price.valueOf(0)).size
         assertThat(actual).isZero
     }
 
@@ -40,5 +40,5 @@ class LottoMachineTest {
         assertThat(actual).isEqualTo(expected)
     }
 
-    private fun LottoMachine.manual(numbers: LottoNumbers): List<Lotto> = manual(listOf(numbers), Price(0))
+    private fun LottoMachine.manual(numbers: LottoNumbers): List<Lotto> = manual(listOf(numbers), Price.valueOf(0))
 }

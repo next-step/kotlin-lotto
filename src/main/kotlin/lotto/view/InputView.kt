@@ -8,7 +8,7 @@ class InputView {
 
     fun getPurchaseAmount(): Amount {
         println("구입금액을 입력해 주세요.")
-        return Amount(readLine()!!.toInt())
+        return Amount.valueOf(readLine()!!.toInt())
     }
 
     fun getManualLottoNumbers(): List<LottoNumbers> {
