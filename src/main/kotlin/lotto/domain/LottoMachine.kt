@@ -14,8 +14,8 @@ class LottoMachine(private val generator: LottoGenerator) {
             .run { Lotteries.of(this) }
     }
 
-    fun calculate(lotteries: Lotteries, winning: Lottery): LotteryStatistics {
-        return LotteryStatistics.of(lotteries, winning)
+    fun calculate(lotteries: Lotteries, winning: Lottery, bonusBall: BonusBall): LotteryStatistics {
+        return LotteryStatistics.of(lotteries, winning, bonusBall)
     }
 
     fun settle(statistics: LotteryStatistics): Money {
