@@ -5,7 +5,7 @@ import calculator.domain.Calculator
 import calculator.domain.Expression
 import calculator.ui.StringCalculatorView
 
-fun main() = StringCalculatorApplication(StringCalculatorView(), AdditionCalculator()).run()
+fun main() = StringCalculatorApplication(StringCalculatorView, AdditionCalculator).run()
 
 class StringCalculatorApplication(
     private val view: StringCalculatorView,
