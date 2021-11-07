@@ -20,6 +20,10 @@ object LottoView {
         println("구매금액을 입력해 주세요.")
     }
 
+    fun inputBonusBallPrompt() {
+        println("보너스 볼을 입력해 주세요.")
+    }
+
     fun displayLotteries(lotteries: Lotteries) {
         println("${lotteries.values.size}개를 구매했습니다.")
         println(showLotteries(lotteries))
@@ -47,7 +51,8 @@ object LottoView {
         statistics.values.entries
             .filter { entry -> !Ranking.isNone(entry.key) }
             .forEach { (key, value) ->
-                result.append("${key.matches}개 일치 (${key.reward.value}원)- ${value}개").append(LINE_FEED)
+                result.append("${key.matches}개 일치${if (Ranking.isSecond(key)) ",보너스 볼 일치" else ""} (${key.reward.value}원)- ${value}개")
+                    .append(LINE_FEED)
             }
         return result.toString()
     }
