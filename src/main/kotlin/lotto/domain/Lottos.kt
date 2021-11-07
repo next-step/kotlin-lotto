@@ -10,11 +10,8 @@ data class Lottos(val lottos: List<Lotto>) {
     }
 
     companion object {
-        fun of(lottoNumberGenerator: LottoNumberGenerator, money: Money): Lottos {
-            val lottoList = (0 until money.lottoCount).map {
-                lottoNumberGenerator.generateLottoNumber()
-            }.map { Lotto.of(it) }
-            return Lottos(lottoList)
+        fun of(lottoGenerator: LottoGenerator): Lottos {
+            return Lottos(lottoGenerator.generateLotto())
         }
     }
 }
