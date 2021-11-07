@@ -2,7 +2,9 @@ package domain.lotto
 
 import domain.lotto.domain.Lotto
 import domain.lotto.domain.LottoNumber
+import domain.lotto.domain.Lottos
 import domain.lotto.domain.Money
+import domain.lotto.domain.TicketCount
 import domain.lotto.domain.WinningLotto
 import domain.lotto.service.LottoService
 import domain.lotto.strategy.LottoRandomShuffleStrategy
@@ -20,14 +22,48 @@ class LottoApplication(
 ) {
     fun run() {
         val money = purchaseLottoByConsole()
-        lottoResultView.showNumberOfPurchases(money.numberOfPurchases(Lotto.PRICE))
-        val lottos = LottoService.lottos(money, LottoRandomShuffleStrategy)
-        lottoResultView.showLottos(lottos)
+        val lottoPurchaseTicket = TicketCount(money.numberOfPurchases(Lotto.PRICE))
+        if (lottoPurchaseTicket.ticketCount == TicketCount.MINIMUM) {
+            return lottoResultView.showNoHaveTicketResult()
+        }
+        val manuallyPurchaseTicket = manuallyPurchaseLottoByConsole(lottoPurchaseTicket)
+        val manuallyLottos = manuallyLottosByConsole(lottoPurchaseTicket, manuallyPurchaseTicket)
+        val automaticallyLottos =
+            LottoService.automaticallyLottos(manuallyPurchaseTicket.ticketCount, LottoRandomShuffleStrategy)
 
+        val lottos = manuallyLottos + automaticallyLottos
+        lottoResultView.showLottos(lottos)
         val winningLotto = winningLottoByConsole()
         val matchResult = LottoService.match(lottos, winningLotto)
         lottoResultView.showMatchResult(matchResult)
         lottoResultView.showYield(money, Money(matchResult.winnings()))
+    }
+
+    private fun manuallyPurchaseLottoByConsole(standardTicketCount: TicketCount): TicketCount {
+        return try {
+            val manuallyTicket = TicketCount(lottoInputView.manuallyPurchaseLotto())
+            return standardTicketCount.subtract(manuallyTicket)
+        } catch (e: Exception) {
+            exceptionView.showErrorMessage(e.message.toString())
+            manuallyPurchaseLottoByConsole(standardTicketCount)
+        }
+    }
+
+    private fun manuallyLottosByConsole(standardTicketCount: TicketCount, availableTicketCount: TicketCount): Lottos {
+        return try {
+            val manuallyTicket = standardTicketCount.subtract(availableTicketCount)
+            if (manuallyTicket.ticketCount == TicketCount.MINIMUM) {
+                return Lottos.empty()
+            }
+            Lottos.of(
+                lottoInputView.manuallyLottos(manuallyTicket.ticketCount)
+                    .map { Lotto.of(it, CommaSplitStrategy) }
+                    .toList()
+            )
+        } catch (e: Exception) {
+            exceptionView.showErrorMessage(e.message.toString())
+            manuallyLottosByConsole(standardTicketCount, availableTicketCount)
+        }
     }
 
     private fun winningLottoByConsole(): WinningLotto {

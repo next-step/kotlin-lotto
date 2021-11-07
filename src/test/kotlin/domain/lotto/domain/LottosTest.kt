@@ -1,6 +1,7 @@
 package domain.lotto.domain
 
 import domain.lotto.strategy.LottoShuffleStrategy
+import global.strategy.split.SplitStrategy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -32,6 +33,17 @@ class LottosTest {
         val lottos: Lottos = Lottos.from(1) { it.sorted() }
         val winningLotto = WinningLotto.from("1, 2, 3, 4, 5, 6", 7) { it.split(", ") }
         val actual = lottos.match(winningLotto)
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `로또들 끼리 덧셈이 가능하다`() {
+        val splitStrategy = SplitStrategy { it.split(", ") }
+        val expected = Lottos.of(listOf(Lotto.of("1, 2, 3, 4, 5, 6", splitStrategy), Lotto.of("1, 2, 3, 4, 5, 6", splitStrategy)))
+        val firstLottos = Lottos.of(listOf(Lotto.of("1, 2, 3, 4, 5, 6", splitStrategy)))
+        val secondLottos = Lottos.of(listOf(Lotto.of("1, 2, 3, 4, 5, 6", splitStrategy)))
+
+        val actual: Lottos = firstLottos + secondLottos
         assertThat(actual).isEqualTo(expected)
     }
 }
