@@ -1,6 +1,7 @@
 package lotto.domain
 
-class LottoTicketCount(val value: Int) {
+@JvmInline
+value class LottoTicketCount(val value: Int) {
 
     init {
         require(value >= 0) { "티켓 갯수는 0 이상의 정수입니다" }

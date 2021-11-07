@@ -34,19 +34,6 @@ class LottoMoneyTest {
     }
 
     @Test
-    fun `티켓 갯수가 주어지면 갯수만큼 사고 남은 거스름돈을 계산한다`() {
-        // given
-        val money = LottoMoney(10000)
-        val count = LottoTicketCount(6)
-
-        // when
-        val result = money.calculateChange(count)
-
-        // then
-        assertThat(result.value).isEqualTo(4000)
-    }
-
-    @Test
     fun `주어진 돈으로 살 수 있는 티켓 갯수를 계산한다`() {
         // given
         val money = LottoMoney(10000)
