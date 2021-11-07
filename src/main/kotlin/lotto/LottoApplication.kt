@@ -10,8 +10,6 @@ import lotto.usecase.WinningsChecker
 import lotto.view.InputView
 import lotto.view.OutputView
 
-val inputView = InputView()
-val outputView = OutputView()
 val lottoGame = LottoGame(
     lottoMachine = LottoMachine(LottoGenerator()),
     winningsChecker = WinningsChecker(),
@@ -19,19 +17,32 @@ val lottoGame = LottoGame(
 )
 
 fun main() {
-    val lottos = buyLottos()
-    outputView.printLotto(lottos)
+    val inputView = InputView()
+    val outputView = OutputView()
 
-    getStatistics(lottos).let { statistics ->
-        outputView.printStatistics(statistics)
-    }
-}
-
-private fun buyLottos(): Lottos {
     val purchaseAmount = inputView.inputPurchaseAmount()
     val passivityCount = inputView.inputPassivityCount()
     val passivityLottoNumbers = inputView.inputPassivityLottoNumbers(passivityCount)
 
+    val lottos = buyLottos(purchaseAmount, passivityLottoNumbers)
+    outputView.printLotto(lottos)
+
+    val winningNumbers = inputView.inputWinningNumber()
+    val bonusNumber = inputView.inputBonusNumber()
+
+    getStatistics(
+        lottos,
+        winningNumbers,
+        bonusNumber
+    ).let { statistics ->
+        outputView.printStatistics(statistics)
+    }
+}
+
+private fun buyLottos(
+    purchaseAmount: Int,
+    passivityLottoNumbers: List<List<Int>>,
+): Lottos {
     val availablePurchaseCount = purchaseAmount / LottoMachine.LOTTO_PRICE
 
     return lottoGame.buy(
@@ -40,10 +51,11 @@ private fun buyLottos(): Lottos {
     )
 }
 
-private fun getStatistics(lottos: Lottos): LottoStatistics {
-    val winningNumbers = inputView.inputWinningNumber()
-    val bonusNumber = inputView.inputBonusNumber()
-
+private fun getStatistics(
+    lottos: Lottos,
+    winningNumbers: List<Int>,
+    bonusNumber: Int,
+): LottoStatistics {
     return lottoGame.statistics(
         winningNumbers = winningNumbers,
         lottos = lottos,
