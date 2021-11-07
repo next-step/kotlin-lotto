@@ -4,7 +4,7 @@ package lotto.domain
 value class LotteryStatistics private constructor(val values: Map<Ranking, Int>) {
 
     fun calculate(): Money {
-        return Money.valueOf(values.entries.sumOf { (key, value) -> key.reward.value.multiply(value.toBigDecimal()) })
+        return Money.from(values.entries.sumOf { (key, value) -> key.reward.value.multiply(value.toBigDecimal()) })
     }
 
     companion object {

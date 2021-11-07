@@ -13,7 +13,7 @@ class LotteryTest {
         val second = Lottery.of(LottoNumbersFixture.LOTTO_NUMBER_SET_SECOND)
 
         // when
-        val matches = first.compareTo(second)
+        val matches = first.drawLottery(second)
 
         // then
         assertThat(matches).isEqualTo(5)

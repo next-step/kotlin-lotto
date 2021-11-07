@@ -17,8 +17,8 @@ class LotteryApplication(
 ) {
     fun run() {
         view.inputPrompt()
-        val budget = Money.valueOf(view.input())
-        val lotteryCounts = machine.count(budget)
+        val money = Money.from(view.input())
+        val lotteryCounts = machine.count(money)
         val lotteries = machine.buy(lotteryCounts)
         val paid = machine.calculatePaid(lotteryCounts)
 
