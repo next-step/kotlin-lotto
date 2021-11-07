@@ -1,7 +1,9 @@
 package lotto.domain
 
+import lotto.fixture.BonusBallFixture
 import lotto.fixture.LottoNumbersFixture
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 
 class LotteryTest {
@@ -17,5 +19,19 @@ class LotteryTest {
 
         // then
         assertThat(matches).isEqualTo(5)
+    }
+
+    @Test
+    fun `보너스 볼 번호를 포함하고 있는지 확인할 수 있다`() {
+        // given
+        val first = Lottery.of(LottoNumbersFixture.LOTTO_NUMBER_SET_FIRST)
+        val second = Lottery.of(LottoNumbersFixture.LOTTO_NUMBER_SET_SECOND)
+        val bonusBall = BonusBallFixture.BONUS_BALL
+
+        // then
+        assertAll(
+            { assertThat(first.isContainBonusBall(bonusBall.value)).isTrue },
+            { assertThat(second.isContainBonusBall(bonusBall.value)).isFalse }
+        )
     }
 }
