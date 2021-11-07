@@ -1,8 +1,11 @@
 package lotto.domain
 
 import lotto.fixture.LottoNumberFixture
+import lotto.fixture.LottoNumbersFixture
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.assertj.core.api.ThrowableAssert
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 
 class LottoNumbersTest {
@@ -29,5 +32,23 @@ class LottoNumbersTest {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy(throwingCallable)
             .withMessage("6개의 번호를 선택해야 합니다.")
+    }
+
+    @Test
+    fun `특정 로또 번호를 포함하고 있는지 확인할 수 있다`() {
+        // given
+        val lottoNumbers = LottoNumbersFixture.LOTTO_NUMBER_SET_FIRST
+
+        // then
+        assertAll(
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.ONE)).isTrue },
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.FIVE)).isTrue },
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.SEVEN)).isTrue },
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.TEN)).isTrue },
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.TWENTY_THREE)).isTrue },
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.THIRTY)).isTrue },
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.FORTY_FOUR)).isFalse },
+            { assertThat(lottoNumbers.isContainLottoNumber(LottoNumberFixture.FORTY_FIVE)).isFalse }
+        )
     }
 }
