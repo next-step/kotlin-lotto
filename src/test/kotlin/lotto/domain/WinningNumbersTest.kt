@@ -12,7 +12,7 @@ class WinningNumbersTest {
     @Test
     fun `당첨 번호와 티켓의 일치하는 갯수를 구한다`() {
         // given
-        val winningNumbers = WinningNumbers(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(7))
+        val winningNumbers = WinningNumbers(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(7))
         val ticket = LottoNumbers(listOf(4, 5, 6, 7, 8, 9))
 
         // when
@@ -26,7 +26,7 @@ class WinningNumbersTest {
     @CsvSource(value = ["7,true", "8,false"])
     fun `티켓이 보너스 번호를 포함하는지 여부를 확인한다`(bonus: Int, expected: Boolean) {
         // given
-        val winningNumbers = WinningNumbers(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(bonus))
+        val winningNumbers = WinningNumbers(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(bonus))
         val ticket = LottoNumbers(listOf(2, 3, 4, 5, 6, 7))
 
         // when
@@ -40,7 +40,7 @@ class WinningNumbersTest {
     fun `당첨 번호와 보너스 번호는 중복될 수 없다`() {
         // given
         val winning = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
-        val bonus = LottoNumber(1)
+        val bonus = LottoNumber.valueOf(1)
 
         // when
         val create: () -> Unit = { WinningNumbers(winning, bonus) }

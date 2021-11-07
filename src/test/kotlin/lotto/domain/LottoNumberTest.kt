@@ -14,7 +14,7 @@ class LottoNumberTest {
     @ValueSource(ints = [1, 23, 45])
     fun `1~45 사이의 로또 번호 생성`(value: Int) {
         // when
-        val create = { LottoNumber(value) }
+        val create = { LottoNumber.valueOf(value) }
 
         // then
         assertDoesNotThrow(create)
@@ -24,7 +24,7 @@ class LottoNumberTest {
     @ValueSource(ints = [-1, 46])
     fun `1~45 이외의 숫자로 로또 번호를 생성하면 예외 발생`(value: Int) {
         // when
-        val create: () -> Unit = { LottoNumber(value) }
+        val create: () -> Unit = { LottoNumber.valueOf(value) }
 
         // then
         assertThrows<IllegalArgumentException>(create)
@@ -34,11 +34,11 @@ class LottoNumberTest {
     fun `로또 번호는 오름차순으로 정렬된다`() {
         // given
         val numbers = listOf(
-            LottoNumber(10),
-            LottoNumber(5),
-            LottoNumber(6),
-            LottoNumber(9),
-            LottoNumber(2),
+            LottoNumber.valueOf(10),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(6),
+            LottoNumber.valueOf(9),
+            LottoNumber.valueOf(2),
         )
 
         // when
@@ -46,11 +46,11 @@ class LottoNumberTest {
 
         // then
         val expected = listOf(
-            LottoNumber(2),
-            LottoNumber(5),
-            LottoNumber(6),
-            LottoNumber(9),
-            LottoNumber(10),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(6),
+            LottoNumber.valueOf(9),
+            LottoNumber.valueOf(10),
         )
         assertThat(result).isEqualTo(expected)
     }

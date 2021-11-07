@@ -1,6 +1,8 @@
 package lotto.domain
 
-class LottoTickets(val tickets: List<LottoNumbers>) {
+class LottoTickets(tickets: List<LottoNumbers>) {
+
+    val tickets = tickets.toList()
 
     fun countRankingFrom(winning: WinningNumbers): Map<LottoRanking, Int> {
         return tickets.map { it.findRankingBy(winning) }

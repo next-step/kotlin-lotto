@@ -64,10 +64,10 @@ class LottoTicketCountTest {
         val count = LottoTicketCount(5)
 
         // when
-        count.useTicket()
+        val result = count.useTicket()
 
         // then
-        assertThat(count).extracting("remain").isEqualTo(4)
+        assertThat(result.value).isEqualTo(4)
     }
 
     @Test

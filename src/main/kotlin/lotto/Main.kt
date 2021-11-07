@@ -29,7 +29,7 @@ private fun buyTickets(): LottoTickets {
 
 private fun getWinning(): WinningNumbers {
     val winning = LottoNumbers(ConsoleInputView.getWinning())
-    val bonus = LottoNumber(ConsoleInputView.getBonus())
+    val bonus = LottoNumber.valueOf(ConsoleInputView.getBonus())
     return WinningNumbers(winning, bonus)
 }
 

@@ -2,7 +2,9 @@ package lotto.domain
 
 private const val VALID_LOTTO_SIZE = 6
 
-class LottoNumbers(val numbers: Set<LottoNumber>) {
+class LottoNumbers(numbers: Set<LottoNumber>) {
+
+    val numbers = numbers.toSet()
 
     constructor(numbers: Collection<LottoNumber>) : this(numbers.toSet())
 
@@ -21,7 +23,7 @@ class LottoNumbers(val numbers: Set<LottoNumber>) {
 
 @Suppress("FunctionName")
 fun LottoNumbers(numbers: Collection<Int>): LottoNumbers {
-    val lottoNumbers = numbers.mapTo(HashSet()) { LottoNumber(it) }
+    val lottoNumbers = numbers.mapTo(HashSet()) { LottoNumber.valueOf(it) }
     return LottoNumbers(lottoNumbers)
 }
 

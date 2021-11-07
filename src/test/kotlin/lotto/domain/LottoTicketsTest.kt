@@ -18,7 +18,7 @@ class LottoTicketsTest {
             LottoNumbers(listOf(6, 7, 8, 9, 10, 11)),
             LottoNumbers(listOf(7, 8, 9, 10, 11, 12)),
         )
-        val winning = WinningNumbers(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(45))
+        val winning = WinningNumbers(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(45))
         val lottoTickets = LottoTickets(tickets)
 
         // when
