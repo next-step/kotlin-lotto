@@ -7,6 +7,16 @@ object ConsoleInputView {
         return getInt()
     }
 
+    fun getManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해주세요.")
+        return getInt()
+    }
+
+    fun getManualLottoTickets(count: Int): List<String> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (1..count).map { getInput() }
+    }
+
     fun getWinning(): List<Int> {
         println("지난주 당첨 번호를 입력해주세요.")
         return getInts()

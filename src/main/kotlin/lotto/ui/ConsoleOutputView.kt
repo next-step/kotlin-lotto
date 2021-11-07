@@ -1,14 +1,15 @@
 package lotto.ui
 
 import lotto.domain.LottoRanking
-import lotto.ui.dto.LottoTicketsDto
 import lotto.ui.dto.LottoStatisticsDto
 import lotto.ui.dto.LottoTicketDto
+import lotto.ui.dto.LottoTicketsCountDto
+import lotto.ui.dto.LottoTicketsDto
 
 object ConsoleOutputView {
 
-    fun printTicketCount(ticketCount: Int) {
-        println("${ticketCount}개를 구매했습니다.")
+    fun printTicketCount(ticketCount: LottoTicketsCountDto) {
+        println("수동으로 ${ticketCount.manual}장, 자동으로 ${ticketCount.auto}개 구매했습니다.")
     }
 
     fun printLottoTickets(tickets: LottoTicketsDto) {

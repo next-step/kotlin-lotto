@@ -24,7 +24,7 @@ enum class LottoRanking(val count: Int, val bonus: Boolean?, val reward: Long) {
     companion object {
 
         fun from(count: Int, bonus: Boolean): LottoRanking {
-            return values().firstOrNull {
+            return values().find {
                 it.isCountMatch(count) && it.isBonusMatch(bonus)
             } ?: NO_RANK
         }

@@ -21,7 +21,7 @@ class LottoNumbersTest {
         val result = LottoNumbers(numbers)
 
         // then
-        val expected = numbers.map { LottoNumber(it) }.toSet()
+        val expected = numbers.map { LottoNumber.valueOf(it) }.toSet()
         assertThat(result.numbers).isEqualTo(expected)
     }
 
@@ -90,7 +90,7 @@ class LottoNumbersTest {
     fun `LottoNumbers에 LottoNumber가 포함되어있는지 여부를 구한다`(numbers: List<Int>, number: Int, expected: Boolean) {
         // given
         val lottoNumbers = LottoNumbers(numbers)
-        val lottoNumber = LottoNumber(number)
+        val lottoNumber = LottoNumber.valueOf(number)
 
         // when
         val result = lottoNumbers.contains(lottoNumber)
