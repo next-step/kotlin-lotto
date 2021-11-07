@@ -17,7 +17,7 @@ class LottoAutoStrategyTest {
         val sut = LottoAutoStrategy()
 
         // Act
-        val lottos = sut.generate(lottoCount)
+        val lottos = sut.generateAuto(lottoCount)
 
         // Assert
         assertThat(lottos).hasSize(lottoCount)
@@ -30,7 +30,7 @@ class LottoAutoStrategyTest {
         val sut = LottoAutoStrategy()
 
         // Act
-        val lottos = sut.generate(1)
+        val lottos = sut.generateAuto(1)
 
         // Assert
         val lottoNumbers = lottos[0].getLottoNumbers()

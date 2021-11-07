@@ -3,7 +3,8 @@ package lotto.domain.generator
 import lotto.domain.Lotto
 
 interface LottoGeneratorStrategy {
-    fun generate(lottoCount: Int): List<Lotto>
+    fun generateAuto(lottoCount: Int): List<Lotto>
+    fun generateManual(manualNumbers: List<String>): List<Lotto>
 
     companion object {
         const val LOTTO_FIRST_INDEX = 0

@@ -5,10 +5,11 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_CACHE
 import lotto.domain.generator.LottoGeneratorStrategy.Companion.LOTTO_FIRST_INDEX
 import lotto.domain.generator.LottoGeneratorStrategy.Companion.LOTTO_LAST_INDEX
+import lotto.exception.NotSupportedException
 
 class LottoAutoStrategy : LottoGeneratorStrategy {
 
-    override fun generate(lottoCount: Int): List<Lotto> {
+    override fun generateAuto(lottoCount: Int): List<Lotto> {
         return (0 until lottoCount)
             .map { generateLottoNumber() }
             .map { Lotto(it) }
@@ -23,5 +24,9 @@ class LottoAutoStrategy : LottoGeneratorStrategy {
             .sorted()
             .map { LottoNumber.valueOf(it) }
             .toList()
+    }
+
+    override fun generateManual(manualNumbers: List<String>): List<Lotto> {
+        throw NotSupportedException()
     }
 }

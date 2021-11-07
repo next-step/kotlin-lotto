@@ -5,6 +5,10 @@ import lotto.domain.Lotto
 class LottoGenerator {
 
     fun generate(lottoCount: Int, lottoGeneratorStrategy: LottoGeneratorStrategy): List<Lotto> {
-        return lottoGeneratorStrategy.generate(lottoCount)
+        return lottoGeneratorStrategy.generateAuto(lottoCount)
+    }
+
+    fun generate(inputtedManualNumbers: List<String>, lottoGeneratorStrategy: LottoGeneratorStrategy): List<Lotto> {
+        return lottoGeneratorStrategy.generateManual(inputtedManualNumbers)
     }
 }
