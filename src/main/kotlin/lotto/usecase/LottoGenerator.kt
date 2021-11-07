@@ -1,16 +1,17 @@
 package lotto.usecase
 
 import lotto.domain.Lotto
-import lotto.domain.LottoNumbers
+import lotto.domain.model.LottoNumbers
+import lotto.domain.model.Price
 
 class LottoGenerator : Generator {
 
     override fun generate(
-        numbers: List<Int>,
-        price: Int,
+        numbers: LottoNumbers,
+        price: Price,
     ): Lotto {
         return Lotto(
-            numbers = LottoNumbers(numbers),
+            numbers = numbers,
             price = price
         )
     }

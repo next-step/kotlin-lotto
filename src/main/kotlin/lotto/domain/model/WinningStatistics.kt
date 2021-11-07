@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.domain.model
+
+import lotto.domain.Rank
 
 class WinningStatistics(
     private val ranks: List<Rank>,

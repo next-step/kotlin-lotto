@@ -1,15 +1,17 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.LottoStatistics
+import lotto.domain.model.LottoStatistics
+import lotto.domain.model.Lottos
 import lotto.domain.Rank
 
 class OutputView {
 
-    fun printLotto(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
+    fun printLotto(
+        lottos: Lottos,
+    ) {
+        println("수동으로 ${lottos.getPassivityLottoSize()}장, 자동으로 ${lottos.getAutomaticLottoSize()}장을 구매했습니다.")
 
-        lottos.forEach { lotto ->
+        (lottos.getLottos()).forEach { lotto ->
             println(lotto)
         }
     }

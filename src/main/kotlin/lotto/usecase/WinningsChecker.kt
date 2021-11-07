@@ -1,18 +1,20 @@
 package lotto.usecase
 
-import lotto.domain.Lotto
 import lotto.domain.WinningNumber
-import lotto.domain.WinningStatistics
+import lotto.domain.model.Lottos
+import lotto.domain.model.WinningStatistics
 
 class WinningsChecker {
 
     fun confirmWinning(
-        lottos: List<Lotto>,
+        lottos: Lottos,
         winningNumber: WinningNumber,
     ): WinningStatistics {
-        val ranks = lottos.map { lotto ->
-            lotto.sortilege(winningNumber)
-        }
+        val ranks = lottos
+            .getLottos()
+            .map { lotto ->
+                lotto.sortilege(winningNumber)
+            }
 
         return WinningStatistics(
             ranks = ranks

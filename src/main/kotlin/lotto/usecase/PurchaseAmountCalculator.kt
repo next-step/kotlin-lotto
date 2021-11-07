@@ -1,9 +1,11 @@
 package lotto.usecase
 
-import lotto.domain.Lotto
+import lotto.domain.model.Lottos
 
 class PurchaseAmountCalculator {
-    fun getTotalPurchaseAmount(lottos: List<Lotto>): Int {
-        return lottos.sumOf { lotto -> lotto.price }
+    fun getTotalPurchaseAmount(lottos: Lottos): Int {
+        return lottos
+            .getLottos()
+            .sumOf { lotto -> lotto.price.price }
     }
 }

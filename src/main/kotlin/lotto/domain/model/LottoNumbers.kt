@@ -1,10 +1,14 @@
-package lotto.domain
+package lotto.domain.model
 
 data class LottoNumbers(
-    private val numbers: List<Int>,
+    val numbers: List<LottoNumber>,
 ) {
     init {
         require(numbers.size == NUMBER_SIZE) { "6개의 번호를 입력해야합니다." }
+    }
+
+    override fun toString(): String {
+        return numbers.toString()
     }
 
     fun getMatchCount(winningNumbers: WinningNumbers): Int {
@@ -18,10 +22,6 @@ data class LottoNumbers(
 
     fun isMatchedBonusNumber(bonusNumber: BonusNumber): Boolean {
         return numbers.contains(bonusNumber.number)
-    }
-
-    override fun toString(): String {
-        return numbers.toString()
     }
 
     companion object {

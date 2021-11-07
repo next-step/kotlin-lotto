@@ -1,8 +1,11 @@
 package lotto.domain
 
+import lotto.domain.model.LottoNumbers
+import lotto.domain.model.Price
+
 class Lotto(
     val numbers: LottoNumbers,
-    val price: Int,
+    val price: Price,
 ) {
     fun sortilege(
         winningNumber: WinningNumber,

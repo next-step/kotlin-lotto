@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.domain.model
+
+import lotto.domain.Rank
 
 class LottoStatistics(
     val totalPurchaseAmount: Int,
