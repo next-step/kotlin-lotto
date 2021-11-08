@@ -7,18 +7,12 @@ data class LottoStatisticFormat(
     val purchasedPrice: Price,
     val winList: HashMap<LottoRank, Int>,
 ) {
-    private val totalPrice: Int = LottoRank.values().filter { it != LottoRank.MISS }.sumOf { getRankProfit(it) }
-
-    val profit: String = String.format(
-        FORMAT_PROFIT,
-        (totalPrice / purchasedPrice.price + totalPrice % purchasedPrice.price).toDouble()
-    )
-
-    private fun getRankCount(rank: LottoRank): Int = winList[rank] ?: 0
-
-    private fun getRankProfit(rank: LottoRank): Int = (getRankCount(rank) * rank.winningMoney)
+    val profit: Double = ((getTotalPrice(winList) / purchasedPrice.price).toFloat()).toDouble()
 
     companion object {
-        private const val FORMAT_PROFIT = "%.2f"
+        fun getTotalPrice(winList: HashMap<LottoRank, Int>): Int = LottoRank
+            .values()
+            .filter { it.winningMoney != 0 }
+            .sumOf { LottoRank.getRankProfit(winList, it) }
     }
 }

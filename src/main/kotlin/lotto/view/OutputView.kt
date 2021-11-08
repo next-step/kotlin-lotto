@@ -12,8 +12,7 @@ class OutputView {
         println("${count}개를 구매했습니다.")
     }
 
-    // 로또 당첨 번호 출력
-    fun printNumber(lottos: List<Lotto>) {
+    fun printWinNumbers(lottos: List<Lotto>) {
         lottos
             .forEach { lottoNumber ->
                 println("[${lottoNumber.numbers.map { it.number }.joinToString()}]")
@@ -25,15 +24,17 @@ class OutputView {
         println("당첨 통계")
         println("---------")
         printRankingList(result)
-        println("총 수익률은 ${result.profit}입니다.")
+        println("총 수익률은 ${result.profit}입니다. ")
     }
 
     private fun printRankingList(result: LottoStatisticFormat) {
-        LottoRank.values()
-            .filter { it != LottoRank.MISS }
-            .sortedBy { it.countOfMatch }
+        LottoRank
+            .getRankListByMoneyExceptValue(LottoRank.MISS.winningMoney)
             .forEach { rank ->
-                println("${rank.countOfMatch}개 일치 (${rank.winningMoney})- ${result.winList[rank] ?: 0}개")
+                when (rank) {
+                    LottoRank.SECOND -> println("${rank.countOfMatch}개 일치, 보너스 볼 일치 (${rank.winningMoney}${rank.moneyUnion})- ${result.winList[rank] ?: 0}개")
+                    else -> println("${rank.countOfMatch}개 일치 (${rank.winningMoney}${rank.moneyUnion})- ${result.winList[rank] ?: 0}개")
+                }
             }
     }
 }

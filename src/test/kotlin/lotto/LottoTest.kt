@@ -27,7 +27,7 @@ class LottoTest {
 
     @ValueSource(ints = [10, -199, 134256])
     @ParameterizedTest
-    @DisplayName("구매 금액을 올바르게 입력하지 않은 경우")
+    @DisplayName("구매 금액이 천원 단위가 아닌 금액을 입력한 경우 경우")
     fun `incorrect purchase amount`(price: Int) {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Price(price) }
@@ -36,7 +36,7 @@ class LottoTest {
 
     @NullSource
     @ParameterizedTest
-    @DisplayName("구매 금액을 입력하지 않은 경우")
+    @DisplayName("구매 금액에 null이 입력된 경우")
     fun `null of purchase amount`(price: Int?) {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { Price(price) }
@@ -52,7 +52,6 @@ class LottoTest {
         assertThat(sample.lottoCount).isEqualTo(price / 1000)
     }
 
-    // 로또 객체 테스트 코드
     @Test
     @DisplayName("로또가 번호 순서대로 정렬되어 나오는지 확인")
     fun `check lotto number sorting`() {
@@ -71,6 +70,16 @@ class LottoTest {
         val lotto = Lotto(list)
 
         // then
-        assertThat(lotto.numbers).isEqualTo(listOf(1, 3, 4, 5, 7, 6))
+        assertThat(lotto.numbers).isEqualTo(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+                LottoNumber(7)
+            )
+        )
+        assertThat(lotto.numbers.map { it.number }).isEqualTo(listOf(1, 3, 4, 5, 6, 7))
     }
 }

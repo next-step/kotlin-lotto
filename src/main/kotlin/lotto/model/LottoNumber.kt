@@ -4,12 +4,19 @@ package lotto.model
  * 로또 숫자 하나의 객체
  * */
 @JvmInline
-value class LottoNumber(val number: Int) {
+value class LottoNumber(
+    private val value: Int?
+) {
     init {
-        require(number in MIN_NUMBER..MAX_NUMBER) { EXCEPTION_NUMBER_FORMAT }
+        require(value != null)
+        require(value in MIN_NUMBER..MAX_NUMBER) { EXCEPTION_NUMBER_FORMAT }
     }
 
+    val number: Int
+        get() = value ?: ERROR_NUMBER
+
     companion object {
+        private const val ERROR_NUMBER = -1
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
         const val EXCEPTION_NUMBER_FORMAT = "숫자 포멧에 맞지 않습니다."
