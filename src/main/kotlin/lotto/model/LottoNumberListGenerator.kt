@@ -4,10 +4,10 @@ package lotto.model
  * 로또를 생성하는 클래스
  * */
 class LottoNumberListGenerator(private val price: Price) {
-    fun generateLottoList(): List<Lotto> =
+    fun generateLottoList(range: List<Int>): List<Lotto> =
         (0 until price.lottoCount)
             .map {
-                Lotto(generateRandomNumbers(LottoNumber.getLottoNumberRange().shuffled()))
+                Lotto(generateRandomNumbers(range))
             }
 
     companion object {

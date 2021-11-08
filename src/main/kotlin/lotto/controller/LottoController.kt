@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.Lotto
+import lotto.model.LottoNumber
 import lotto.model.LottoNumberListGenerator
 import lotto.model.Lottos
 import lotto.model.Price
@@ -25,7 +26,7 @@ object LottoController {
     }
 
     private fun generateLottos(price: Price): List<Lotto> {
-        val purchasedLotto = LottoNumberListGenerator(price).generateLottoList()
+        val purchasedLotto = LottoNumberListGenerator(price).generateLottoList(LottoNumber.getLottoNumberRange().shuffled())
         outputView.printWinNumbers(purchasedLotto)
         return purchasedLotto
     }
