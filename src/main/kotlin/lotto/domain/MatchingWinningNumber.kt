@@ -4,10 +4,11 @@ class MatchingWinningNumber(val winningNumberCount: Int, val bonusNumber: Boolea
 
     companion object {
         fun of(
-            lottoNumbers: LottoNumbers,
+            lotto: Lotto,
             winningLottoNumbers: LottoNumbers,
             bonusNumber: LottoNumber
         ): MatchingWinningNumber {
+            val lottoNumbers = lotto.getLottoNumbers()
             val matchingCount = lottoNumbers.getMatchingCount(winningLottoNumbers)
             val isBonus = lottoNumbers.isBonusNumber(bonusNumber)
             return MatchingWinningNumber(matchingCount, isBonus)

@@ -31,7 +31,7 @@ class TotalRateTest {
                     Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11)))
                 )
             ),
-            winningLottoNumber = winningNumber,
+            winningLottoNumbers = winningNumber,
             bonusLottoNumber = LottoNumber(7)
         )
 
@@ -57,7 +57,7 @@ class TotalRateTest {
                     Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 7, 8, 9, 10, 11)))
                 )
             ),
-            winningLottoNumber = winningNumber,
+            winningLottoNumbers = winningNumber,
             bonusLottoNumber = LottoNumber(7)
         )
 
@@ -82,7 +82,7 @@ class TotalRateTest {
                     Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 5, 6, 42)))
                 )
             ),
-            winningLottoNumber = LottoNumbers.generateLottoNumbers(winningNumber),
+            winningLottoNumbers = LottoNumbers.generateLottoNumbers(winningNumber),
             bonusLottoNumber = LottoNumber(7)
         )
 

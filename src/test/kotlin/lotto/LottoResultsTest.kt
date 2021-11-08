@@ -22,7 +22,7 @@ class LottoResultsTest {
                     Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 5, 7, 10, 12, 17)))
                 )
             ),
-            winningLottoNumber = winningNumber,
+            winningLottoNumbers = winningNumber,
             bonusLottoNumber = LottoNumber(7)
 
         )
@@ -49,7 +49,7 @@ class LottoResultsTest {
                     Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 5, 7, 10, 12, 17)))
                 )
             ),
-            winningLottoNumber = winningNumber,
+            winningLottoNumbers = winningNumber,
             bonusLottoNumber = LottoNumber(6)
         )
 

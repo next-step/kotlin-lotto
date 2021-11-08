@@ -7,14 +7,13 @@ value class LottoResults private constructor(private val lottoResults: List<Lott
 
     companion object {
         fun matchingWinningNumber(
-            winningLottoNumber: LottoNumbers,
+            winningLottoNumbers: LottoNumbers,
             bonusLottoNumber: LottoNumber,
             purchasedLottos: Lottos
         ): LottoResults {
 
-            val matchingWinningNumbers: List<MatchingWinningNumber> = purchasedLottos.toList().map {
-                MatchingWinningNumber.of(it.getLottoNumbers(), winningLottoNumber, bonusLottoNumber)
-            }
+            val matchingWinningNumbers: List<MatchingWinningNumber> =
+                purchasedLottos.toMatchingWinningNumbers(winningLottoNumbers, bonusLottoNumber)
 
             val lottoResults = LottoPrize.getPrizes().map {
                 LottoResult.decideLottoPrize(it, matchingWinningNumbers)
