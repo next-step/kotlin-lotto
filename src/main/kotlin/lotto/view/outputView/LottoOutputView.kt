@@ -13,6 +13,7 @@ class LottoOutputView : OutputView {
 
     override fun printLottoWinCheckResult(paidMoney: Money, prizes: List<LottoPrize>) {
         val countContainer = mutableMapOf(
+            LottoPrize.FIFTH to INITIAL_COUNT,
             LottoPrize.FOURTH to INITIAL_COUNT,
             LottoPrize.THIRD to INITIAL_COUNT,
             LottoPrize.SECOND to INITIAL_COUNT,
@@ -42,7 +43,8 @@ class LottoOutputView : OutputView {
     }
 
     private fun printLottoPrize(lottoPrize: LottoPrize, count: Int) {
-        println(LOTTO_PRIZE_RESULT_TEMPLATE.format(lottoPrize.matchCount, lottoPrize.amount, count))
+        val bonusMatchMessage = if (lottoPrize == LottoPrize.SECOND) BONUS_MATCH else ""
+        println(LOTTO_PRIZE_RESULT_TEMPLATE.format(lottoPrize.matchCount, bonusMatchMessage, lottoPrize.amount, count))
     }
 
     private fun printProfitRatio(paidMoney: Money, totalPrizeAmount: Money) {
@@ -53,7 +55,8 @@ class LottoOutputView : OutputView {
     companion object {
         private const val INITIAL_COUNT = 0
         private const val BUY_RESULT_MSG = "%s개를 구매했습니다."
-        private const val LOTTO_PRIZE_RESULT_TEMPLATE = "%s개 일치 (%s원)- %s개"
+        private const val LOTTO_PRIZE_RESULT_TEMPLATE = "%s개 일치 %s(%s원)- %s개"
+        private const val BONUS_MATCH = ", 보너스 볼 일치"
         private const val PROFIT_RATIO_TEMPLATE = "총 수익률은 %.2f입니다."
     }
 }
