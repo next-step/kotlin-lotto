@@ -18,7 +18,6 @@ class Lottos private constructor(
 
     companion object {
         private const val ADD_ONE_LOTTO = 1
-        const val EXCEPTION_INPUT_NUMBER_NULL = "입력된 숫자가 없습니다."
 
         fun compareNumber(item: Lotto, lastWinNumber: Lotto): Int {
             var number = 0
