@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.BonusBall
 import lotto.domain.Lotto
 import lotto.domain.LottoGeneratorImpl
 import lotto.domain.LottoNumber
@@ -31,8 +32,8 @@ class LottosTest {
 
         val lottos = Lottos.of(listOf(lotto1, lotto2, lotto3, lotto4))
 
-        assertThat(lottos.match(winningLotto).result).containsEntry(Rank.FIRST, 2).containsEntry(Rank.SECOND, 1)
-            .containsEntry(Rank.THIRD, 1)
+        assertThat(lottos.match(winningLotto, BonusBall("45", winningLotto)).result).containsEntry(Rank.FIRST, 2).containsEntry(Rank.THIRD, 1)
+            .containsEntry(Rank.FOURTH, 1)
     }
 
     @ParameterizedTest(name = "money와 LottoNumberGenerator를 통해 lottos를 생성할 수 있다.")
