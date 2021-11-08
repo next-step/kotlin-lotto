@@ -2,15 +2,25 @@ package lotto.model
 
 class LottoShop {
 
-    fun buy(amount: Int): List<Lotto> {
-        require(amount >= 0)
+    private val machine = LottoMachine()
 
+    fun buy(amount: Amount): List<Lotto> {
         val size = amount / LOTTO_PRICE
-        val machine = LottoMachine()
-        return machine.createLotto(size, LOTTO_PRICE)
+        return machine.auto(Size.valueOf(size), LOTTO_PRICE)
+    }
+
+    fun buy(amount: Amount, manualNumbers: List<LottoNumbers>): List<Lotto> {
+        val size = amount / LOTTO_PRICE
+        val manualSize = manualNumbers.size.coerceAtMost(size)
+        val autoSize = size - manualSize
+
+        val manual = machine.manual(manualNumbers.take(manualSize), LOTTO_PRICE)
+        val auto = machine.auto(Size.valueOf(autoSize), LOTTO_PRICE)
+
+        return manual + auto
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1_000
+        private val LOTTO_PRICE = Price.valueOf(1_000)
     }
 }

@@ -12,8 +12,9 @@ class LottoController {
 
     fun start() {
         val amount = inputView.getPurchaseAmount()
+        val lottoNumbers = inputView.getManualLottoNumbers()
         val shop = LottoShop()
-        val lottoList = shop.buy(amount)
+        val lottoList = shop.buy(amount, lottoNumbers)
         outputView.printLottoList(lottoList)
 
         val winnerNumbers = inputView.getWinnerLottoNumbers()

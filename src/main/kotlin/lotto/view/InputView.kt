@@ -1,17 +1,34 @@
 package lotto.view
 
+import lotto.model.Amount
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
 
 class InputView {
 
-    fun getPurchaseAmount(): Int {
+    fun getPurchaseAmount(): Amount {
         println("구입금액을 입력해 주세요.")
-        return readLine()!!.toInt()
+        return Amount.valueOf(readLine()!!.toInt())
+    }
+
+    fun getManualLottoNumbers(): List<LottoNumbers> {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
+        val size = readLine()!!.toInt()
+
+        println("\n수동으로 구매할 번호를 입력해 주세요.")
+        val numbers = mutableListOf<LottoNumbers>()
+        repeat(size) {
+            numbers.add(getLottoNumbers())
+        }
+        return numbers
     }
 
     fun getWinnerLottoNumbers(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
+        return getLottoNumbers()
+    }
+
+    private fun getLottoNumbers(): LottoNumbers {
         val numbers = readLine()!!
             .split(",")
             .map { it.trim().toInt() }

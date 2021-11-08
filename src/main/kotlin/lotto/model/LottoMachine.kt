@@ -2,14 +2,7 @@ package lotto.model
 
 class LottoMachine {
 
-    fun createLotto(size: Int, price: Int): List<Lotto> {
-        require(size >= 0)
+    fun auto(size: Size, price: Price): List<Lotto> = List(size.value) { Lotto.auto(price = price) }
 
-        return List(size) {
-            Lotto(
-                price = price,
-                numbers = LottoNumbers.random()
-            )
-        }
-    }
+    fun manual(numbers: List<LottoNumbers>, price: Price): List<Lotto> = numbers.map { Lotto.manual(price, it) }
 }

@@ -7,7 +7,9 @@ import lotto.model.LottoResult
 class OutputView {
 
     fun printLottoList(lottoList: List<Lotto>) {
-        println("${lottoList.size}개를 구매했습니다.")
+        val auto = lottoList.count { it.isAuto }
+        val manual = lottoList.count { it.isManual }
+        println("수동으로 ${manual}장, 자동으로 ${auto}개를 구매했습니다.")
         lottoList.forEach { lotto -> println(lotto.numbers) }
         println()
     }
