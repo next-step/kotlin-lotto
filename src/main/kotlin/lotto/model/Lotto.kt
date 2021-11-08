@@ -13,7 +13,7 @@ data class Lotto(
 
     val numbers: List<LottoNumber> = item.sortedBy { it.number }
 
-    fun hasNumber(number: LottoNumber): Boolean = item.map { it == number }.toList().contains(true)
+    fun hasNumber(number: LottoNumber): Boolean = item.contains(number)
 
     companion object {
         private const val SIZE_LOTTO_NUMBER = 6
