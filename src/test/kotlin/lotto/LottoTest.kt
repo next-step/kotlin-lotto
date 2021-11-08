@@ -53,7 +53,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또는 여러개 살 수 있다`() {
+    fun `14000원으로 로또 14장을 살 수 있다`() {
         // given
         val lottos = Lottos.buyAutoLottos(Wallet(14000))
 

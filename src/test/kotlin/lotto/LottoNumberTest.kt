@@ -9,7 +9,7 @@ class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = [0, 46])
-    fun `로또 번호가 범위 안에 포함되어 있지 않으면 에러`(input: Int) {
+    fun `0과 46은 로또 범위에 들어가있지 않기 때문에 에러를 발생시킨다`(input: Int) {
         // given
         val actual =
             runCatching { LottoNumber(input) }.exceptionOrNull()

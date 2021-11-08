@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertAll
 class LottoStoreTest {
 
     @Test
-    fun `수동 로또를 안사면 자동 로또만 사진다`() {
+    fun `14000원으로 수동 로또를 안사면 자동 로또가 14장이 구매가 되어지는지 테스트`() {
         // given
         val wallet = Wallet(14000)
 
@@ -21,7 +21,7 @@ class LottoStoreTest {
     }
 
     @Test
-    fun `수동 로또와 자동 로또의 갯수가 맞는지 테스트`() {
+    fun `14000원으로 수동 로또 3장을 사면, 수동 로또는 3장, 자동 로또는 11장인지 테스트`() {
         // given
         val wallet = Wallet(14000)
         val manualLottoTexts = listOf("1,2,3,4,5,6", "1,2,3,4,5,6", "2,3,4,5,6,7")

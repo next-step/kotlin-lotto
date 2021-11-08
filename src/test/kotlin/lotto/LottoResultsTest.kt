@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 class LottoResultsTest {
 
     @Test
-    fun `1등 상품과 일치하는지 테스트`() {
+    fun `1등 상품과 일치하는 로또가 하나 있는지 테스트`() {
         // given
         val winningNumber = LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
         val lottoResults = LottoResults.matchingWinningNumber(
@@ -39,7 +39,7 @@ class LottoResultsTest {
     }
 
     @Test
-    fun `2등 상품과 일치하는지 테스트`() {
+    fun `2등 상품과 일치하는 로또가 하나 있는지 테스트`() {
         // given
         val winningNumber = LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
         val lottoResults = LottoResults.matchingWinningNumber(
