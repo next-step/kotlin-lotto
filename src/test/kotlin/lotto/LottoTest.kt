@@ -23,13 +23,14 @@ class LottoTest {
     @Test
     fun `로또는 6개 숫자로 이루어져 있다`() {
         // given
-        val lotto = Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        val lottoNumbers = LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto(lottoNumbers)
 
         // when
-        val lottoNumbers = lotto.getLottoNumbers().toInts()
+        val matchingCount = lotto.getLottoNumbers().getMatchingCount(lottoNumbers)
 
         // then
-        assertThat(lottoNumbers.size).isEqualTo(6)
+        assertThat(matchingCount).isEqualTo(6)
     }
 
     @Test

@@ -9,7 +9,7 @@ class MatchingWinningNumber(val winningNumberCount: Int, val bonusNumber: Boolea
             bonusNumber: LottoNumber
         ): MatchingWinningNumber {
             val matchingCount = lottoNumbers.getMatchingCount(winningLottoNumbers)
-            val isBonus = lottoNumbers.toInts().contains(bonusNumber.toInt())
+            val isBonus = lottoNumbers.isBonusNumber(bonusNumber)
             return MatchingWinningNumber(matchingCount, isBonus)
         }
     }

@@ -2,10 +2,10 @@ package lotto.domain
 
 class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
 
-    fun toInts() = lottoNumbers.map { it.toInt() }
-
     fun getMatchingCount(otherLottoNumbers: LottoNumbers): Int =
-        lottoNumbers.intersect(otherLottoNumbers.toInts()).count()
+        lottoNumbers.intersect(otherLottoNumbers.lottoNumbers).count()
+
+    fun isBonusNumber(bonusNumber: LottoNumber) = bonusNumber in lottoNumbers
 
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6

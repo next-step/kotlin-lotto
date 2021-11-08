@@ -1,8 +1,6 @@
 package lotto.domain
 
-@JvmInline
-value class LottoNumber(private val number: Int) {
-    fun toInt() = number
+data class LottoNumber(private val number: Int) {
 
     init {
         require(number in NUMBER_RANGE) { "범위에 벗어난 숫자입니다." }
