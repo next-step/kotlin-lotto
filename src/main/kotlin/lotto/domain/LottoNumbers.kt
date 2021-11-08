@@ -4,6 +4,9 @@ class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
 
     fun toInts() = lottoNumbers.map { it.toInt() }
 
+    fun getMatchingCount(otherLottoNumbers: LottoNumbers): Int =
+        lottoNumbers.intersect(otherLottoNumbers.toInts()).count()
+
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6
 
@@ -13,6 +16,7 @@ class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
             return LottoNumbers(lottoNumber.map { LottoNumber(it) })
         }
 
-        private fun generateRandomNumber(): List<Int> = LottoNumber.NUMBER_RANGE.shuffled().take(LOTTO_NUMBER_SIZE).sorted()
+        private fun generateRandomNumber(): List<Int> =
+            LottoNumber.NUMBER_RANGE.shuffled().take(LOTTO_NUMBER_SIZE).sorted()
     }
 }

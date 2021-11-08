@@ -5,12 +5,12 @@ class MatchingWinningNumber(val winningNumberCount: Int, val bonusNumber: Boolea
     companion object {
         fun of(
             lottoNumbers: LottoNumbers,
-            winningLotto: LottoNumbers,
+            winningLottoNumbers: LottoNumbers,
             bonusNumber: LottoNumber
         ): MatchingWinningNumber {
-            val winningNumberCount = lottoNumbers.toInts().intersect(winningLotto.toInts()).count()
+            val matchingCount = lottoNumbers.getMatchingCount(winningLottoNumbers)
             val isBonus = lottoNumbers.toInts().contains(bonusNumber.toInt())
-            return MatchingWinningNumber(winningNumberCount, isBonus)
+            return MatchingWinningNumber(matchingCount, isBonus)
         }
     }
 }
