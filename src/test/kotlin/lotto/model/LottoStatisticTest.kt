@@ -1,66 +1,10 @@
 package lotto.model
 
-import lotto.model.LottoStatisticFormat.Companion.getRankCount
-import lotto.model.LottoStatisticFormat.Companion.getRankProfit
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottoStatisticTest {
-
-    @Test
-    @DisplayName("당첨 등수 개수 확인")
-    fun `check each rank count`() {
-        // given
-        val resultList = hashMapOf(
-            LottoRank.FIRST to 1,
-            LottoRank.SECOND to 3,
-            LottoRank.THIRD to 2,
-            LottoRank.FOURTH to 4,
-            LottoRank.FIFTH to 1
-        )
-
-        // when
-        val firstRank = getRankCount(resultList, LottoRank.FIRST)
-        val second = getRankCount(resultList, LottoRank.SECOND)
-        val third = getRankCount(resultList, LottoRank.THIRD)
-        val fourth = getRankCount(resultList, LottoRank.FOURTH)
-        val fifth = getRankCount(resultList, LottoRank.FIFTH)
-
-        // then
-        Assertions.assertThat(firstRank).isEqualTo(1)
-        Assertions.assertThat(second).isEqualTo(3)
-        Assertions.assertThat(third).isEqualTo(2)
-        Assertions.assertThat(fourth).isEqualTo(4)
-        Assertions.assertThat(fifth).isEqualTo(1)
-    }
-
-    @Test
-    @DisplayName("각 등수별 수익금 금액 확인")
-    fun `check each rank profit price`() {
-        // given
-        val resultList = hashMapOf(
-            LottoRank.FIRST to 1,
-            LottoRank.SECOND to 3,
-            LottoRank.THIRD to 2,
-            LottoRank.FOURTH to 4,
-            LottoRank.FIFTH to 1
-        )
-
-        // when
-        val firstRank = getRankProfit(resultList, LottoRank.FIRST)
-        val second = getRankProfit(resultList, LottoRank.SECOND)
-        val third = getRankProfit(resultList, LottoRank.THIRD)
-        val fourth = getRankProfit(resultList, LottoRank.FOURTH)
-        val fifth = getRankProfit(resultList, LottoRank.FIFTH)
-
-        // then
-        Assertions.assertThat(firstRank).isEqualTo(1 * LottoRank.FIRST.winningMoney)
-        Assertions.assertThat(second).isEqualTo(3 * LottoRank.SECOND.winningMoney)
-        Assertions.assertThat(third).isEqualTo(2 * LottoRank.THIRD.winningMoney)
-        Assertions.assertThat(fourth).isEqualTo(4 * LottoRank.FOURTH.winningMoney)
-        Assertions.assertThat(fifth).isEqualTo(1 * LottoRank.FIFTH.winningMoney)
-    }
 
     @Test
     @DisplayName("수익금 총 금액 확인")

@@ -17,10 +17,17 @@ enum class LottoRank(
 
     companion object {
         private const val BONUS_NUMBER_MATCH_COUNT = 5
-        val rankListSortedByMoney =
-            values()
-                .filter { it.winningMoney != 0 }
+
+        private fun isBonusRank(isBonusNumber: Boolean): LottoRank =
+            if (isBonusNumber) SECOND else THIRD
+
+        fun getRankListByMonetExceptValue(exceptRank: LottoRank): List<LottoRank> {
+            return values()
+                .filter { it.winningMoney != exceptRank.winningMoney }
                 .sortedBy { it.winningMoney }
+        }
+        fun getRankCount(list: HashMap<LottoRank, Int>, rank: LottoRank): Int = list[rank] ?: 0
+        fun getRankProfit(list: HashMap<LottoRank, Int>, rank: LottoRank): Int = (getRankCount(list, rank) * rank.winningMoney)
 
         fun findMatchRank(number: Int, isBonusNumber: Boolean = false): LottoRank {
             return values()
@@ -31,8 +38,5 @@ enum class LottoRank(
                     }
                 } ?: MISS
         }
-
-        fun isBonusRank(isBonusNumber: Boolean): LottoRank =
-            if (isBonusNumber) SECOND else THIRD
     }
 }

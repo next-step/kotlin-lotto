@@ -1,6 +1,5 @@
 package lotto.model
 
-import lotto.model.Lottos.Companion.EXCEPTION_INPUT_NUMBER_NULL
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -24,13 +23,14 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = LottoNumber(4)
+        val bonus = 4
+        val winNumbers = WinNumber.inputWinNumber(winNumber, bonus)
 
         // when
-        val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
+        val lottos = Lottos.executeLottoComparison(purchasedList)
 
         // then
-        Assertions.assertThat(lottos.compareLottoResult())
+        Assertions.assertThat(lottos.compareLottoResult(price, winNumbers))
             .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.FIRST to 1)))
     }
 
@@ -52,13 +52,14 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = LottoNumber(4)
+        val bonus = 4
+        val winNumbers = WinNumber.inputWinNumber(winNumber, bonus)
 
         // when
-        val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
+        val lottos = Lottos.executeLottoComparison(purchasedList)
 
         // then
-        Assertions.assertThat(lottos.compareLottoResult())
+        Assertions.assertThat(lottos.compareLottoResult(price, winNumbers))
             .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.THIRD to 1)))
     }
 
@@ -80,13 +81,14 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = LottoNumber(4)
+        val bonus = 4
+        val winNumbers = WinNumber.inputWinNumber(winNumber, bonus)
 
         // when
-        val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
+        val lottos = Lottos.executeLottoComparison(purchasedList)
 
         // then
-        Assertions.assertThat(lottos.compareLottoResult())
+        Assertions.assertThat(lottos.compareLottoResult(price, winNumbers))
             .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.FOURTH to 1)))
     }
 
@@ -108,13 +110,14 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = LottoNumber(4)
+        val bonus = 4
+        val winNumbers = WinNumber.inputWinNumber(winNumber, bonus)
 
         // when
-        val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
+        val lottos = Lottos.executeLottoComparison(purchasedList)
 
         // then
-        Assertions.assertThat(lottos.compareLottoResult())
+        Assertions.assertThat(lottos.compareLottoResult(price, winNumbers))
             .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.FIFTH to 1)))
     }
 
@@ -136,13 +139,14 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = LottoNumber(22)
+        val bonus = 22
+        val winNumbers = WinNumber.inputWinNumber(winNumber, bonus)
 
         // when
-        val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
+        val lottos = Lottos.executeLottoComparison(purchasedList)
 
         // then
-        Assertions.assertThat(lottos.compareLottoResult())
+        Assertions.assertThat(lottos.compareLottoResult(price, winNumbers))
             .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.SECOND to 1)))
     }
 
@@ -164,39 +168,15 @@ class LottosTest {
             )
         )
         val winNumber = "10,1,13,23,33,43"
-        val bonus = LottoNumber(6)
+        val bonus = 6
+        val winNumbers = WinNumber.inputWinNumber(winNumber, bonus)
 
         // when
-        val lottos = Lottos.inputWinNumber(price, purchasedList, winNumber, bonus)
+        val lottos = Lottos.executeLottoComparison(purchasedList)
 
         // then
-        Assertions.assertThat(lottos.compareLottoResult())
+        Assertions.assertThat(lottos.compareLottoResult(price, winNumbers))
             .isEqualTo(LottoStatisticFormat(price, hashMapOf(LottoRank.MISS to 1)))
-    }
-
-    @Test
-    @DisplayName("지난주 당첨 번호 입력값이 없는 경우")
-    fun `incorrect win number list format`() {
-        // given
-        val price = Price(1000)
-        val purchasedList = listOf(
-            Lotto(
-                listOf(
-                    LottoNumber(10),
-                    LottoNumber(1),
-                    LottoNumber(13),
-                    LottoNumber(23),
-                    LottoNumber(33),
-                    LottoNumber(43)
-                )
-            )
-        )
-        val winNumber = null
-        val bonus = LottoNumber(4)
-
-        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { Lottos.inputWinNumber(price, purchasedList, winNumber, bonus) }
-            .withMessage(EXCEPTION_INPUT_NUMBER_NULL)
     }
 
     @Test
