@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.Lotto
+import lotto.model.LottoCount
 import lotto.model.LottoNumber
 import lotto.model.LottoNumberListGenerator
 import lotto.model.Lottos
@@ -21,7 +22,9 @@ object LottoController {
 
     private fun inputPrice(): Price {
         val price = Price(inputView.takePurchasedPrice())
-        outputView.resultLottoCount(price.lottoCount)
+        val manualLottoCount = inputView.inputManualLottoCount() ?: 0
+        val manualLottoList = inputView.inputManualLottoNumber(manualLottoCount)
+        outputView.resultLottoCount(LottoCount(price.lottoCount).createLottoNumber(manualLottoCount), LottoCount(price.lottoCount - manualLottoCount).createLottoNumber())
         return price
     }
 

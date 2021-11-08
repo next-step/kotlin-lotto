@@ -8,8 +8,8 @@ import lotto.model.LottoStatisticFormat
  * 로또 관련된 결과를 알려주는 클래스
  * */
 class OutputView {
-    fun resultLottoCount(count: Int) {
-        println("${count}개를 구매했습니다.")
+    fun resultLottoCount(manualCount: Int, autoCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 
     fun printWinNumbers(lottos: List<Lotto>) {
