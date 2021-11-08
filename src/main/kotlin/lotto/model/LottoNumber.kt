@@ -13,9 +13,10 @@ value class LottoNumber(
     }
 
     val number: Int
-        get() = value ?: MIN_NUMBER
+        get() = value ?: ERROR_NUMBER
 
     companion object {
+        private const val ERROR_NUMBER = -1
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
         const val EXCEPTION_NUMBER_FORMAT = "숫자 포멧에 맞지 않습니다."
