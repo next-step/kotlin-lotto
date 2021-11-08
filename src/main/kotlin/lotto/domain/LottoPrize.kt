@@ -8,11 +8,7 @@ enum class LottoPrize(val matchCount: Int, val amount: Money) {
 
     companion object {
         fun fromMatchCount(matchCount: Int): LottoPrize? {
-            return try {
-                values().first { it.matchCount == matchCount }
-            } catch (error: NoSuchElementException) {
-                null
-            }
+            return values().find { it.matchCount == matchCount }
         }
     }
 }
