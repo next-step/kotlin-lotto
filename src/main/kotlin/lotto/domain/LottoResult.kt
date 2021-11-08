@@ -30,7 +30,7 @@ data class LottoResult(
     fun getLottoResultMapOnlyWinning() =
         lottoResultMap
             .filter { it.key.result.numberOfHit >= LotteryWinningTypes.MINIMUM_WINNING_HITS }
-            .toSortedMap(compareBy { it.winnings })
+            .toSortedMap(compareBy { it.lottoWinning.winning })
 
     private fun initLottoResultMap(): LinkedHashMap<LotteryWinningTypes, Int> {
         val lottoResultMap = LinkedHashMap<LotteryWinningTypes, Int>()
@@ -47,6 +47,6 @@ data class LottoResult(
     ): LottoGameResult {
         val hits = lottoGame.numbers.filter { number -> lastWeekNumberSet.contains(number) }.size
         val containBonus = lottoGame.numbers.contains(bonusNumber.number)
-        return LottoGameResult(hits, containBonus)
+        return LottoGameResult(LottoHit(hits), BonusAble(containBonus))
     }
 }

@@ -1,20 +1,14 @@
 package lotto.domain
 
-data class LottoGameResult(val numberOfHit: Int, val bonus: Boolean = false) {
+data class LottoGameResult(val numberOfHit: LottoHit, val bonus: BonusAble = BonusAble(false)) {
     override fun equals(other: Any?): Boolean {
         if (other !is LottoGameResult)
             return false
         if (numberOfHit != other.numberOfHit)
             return false
-        if (bonus || other.bonus)
+        if (bonus.able || other.bonus.able)
             return checkResultByTypes(other)
         return true
-    }
-
-    override fun hashCode(): Int {
-        var result = numberOfHit
-        result = 31 * result + bonus.hashCode()
-        return result
     }
 
     private fun checkResultByTypes(other: LottoGameResult): Boolean {
@@ -22,5 +16,11 @@ data class LottoGameResult(val numberOfHit: Int, val bonus: Boolean = false) {
         if (typesByHits.size == 1)
             return true
         return bonus == other.bonus
+    }
+
+    override fun hashCode(): Int {
+        var result = numberOfHit.hashCode()
+        result = 31 * result + bonus.hashCode()
+        return result
     }
 }

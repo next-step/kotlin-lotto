@@ -5,6 +5,7 @@ import lotto.domain.LotteryWinningTypes
 import lotto.domain.LottoBudget
 import lotto.domain.LottoGame
 import lotto.domain.LottoGameResult
+import lotto.domain.LottoHit
 import lotto.domain.LottoResult
 
 object ResultView {
@@ -50,22 +51,22 @@ object ResultView {
 
     private fun printWinnings(lottoResultOnlyWinning: Map<LotteryWinningTypes, Int>) =
         lottoResultOnlyWinning
-            .forEach { printLottoGameResult(it.key.result, it.key.winnings, it.value) }
+            .forEach { printLottoGameResult(it.key.result, it.key.lottoWinning.winning, it.value) }
 
     private fun getFullWinnings(lottoResultOnlyWinning: Map<LotteryWinningTypes, Int>) =
         lottoResultOnlyWinning
-            .map { it.key.winnings * it.value }
+            .map { it.key.lottoWinning.winning * it.value }
             .sum()
 
     private fun printLottoGameResult(lottoResult: LottoGameResult, winning: Int, numberOfGames: Int) {
-        if (lottoResult.bonus) {
+        if (lottoResult.bonus.able) {
             printFormatWithResult(WINNING_RESULT_BONUS_FORMAT, lottoResult.numberOfHit, winning, numberOfGames)
             return
         }
         printFormatWithResult(WINNING_RESULT_FORMAT, lottoResult.numberOfHit, winning, numberOfGames)
     }
 
-    private fun printFormatWithResult(format: String, numberOfHit: Int, winning: Int, numberOfGames: Int) =
+    private fun printFormatWithResult(format: String, numberOfHit: LottoHit, winning: Int, numberOfGames: Int) =
         println(format.format(numberOfHit, winning, numberOfGames))
 
     private fun printWinningRatio(budget: LottoBudget, fullWinnings: Int) =

@@ -9,6 +9,7 @@ data class LottoNumber(val number: Int) {
     init {
         isNumberInRange(number)
     }
+    operator fun compareTo(other: LottoNumber): Int = compareValuesBy(this, other, LottoNumber::number)
 
     constructor(stringValue: String) : this(stringValue.toValidatedUnsignedInt())
 
