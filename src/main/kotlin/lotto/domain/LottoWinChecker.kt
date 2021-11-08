@@ -3,6 +3,7 @@ package lotto.domain
 class LottoWinChecker(private val lottos: List<Lotto>) {
 
     fun getPrizes(winningNumbers: List<LottoNumber>, bonusNumber: LottoNumber): List<LottoPrize> {
+        require(bonusNumber !in winningNumbers) { ALREADY_USED_BONUS_NUMBER_ERROR_MSG }
         return lottos
             .mapNotNull {
                 val matchCount = it.countMatches(winningNumbers)
@@ -10,5 +11,9 @@ class LottoWinChecker(private val lottos: List<Lotto>) {
                 LottoPrize.fromMatchCount(matchCount, bonusMatch)
             }
             .sortedBy { it.matchCount }
+    }
+
+    companion object {
+        private const val ALREADY_USED_BONUS_NUMBER_ERROR_MSG = "이미 사용된 번호입니다."
     }
 }
