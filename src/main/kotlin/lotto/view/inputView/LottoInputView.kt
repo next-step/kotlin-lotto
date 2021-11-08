@@ -15,7 +15,10 @@ class LottoInputView : InputView {
         println(RECEIVE_WINNING_NUMBERS_MSG)
         val input = readLine()
         require(!input.isNullOrBlank()) { EMPTY_STRING_ERROR_MSG }
-        return input.split(",").map { LottoNumber(it.toInt()) }
+        return input
+            .filter { !it.isWhitespace() }
+            .split(",")
+            .map { LottoNumber(it.toInt()) }
     }
 
     override fun receiveBonusNumber(): LottoNumber {
