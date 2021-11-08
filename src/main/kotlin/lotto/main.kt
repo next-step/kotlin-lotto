@@ -16,7 +16,8 @@ fun main() {
     lottoOutputView.printLottoBuyResult(lottos)
 
     val winningNumbers = lottoInputView.receiveWinningNumbers()
-    val prizes = LottoWinChecker(lottos).getPrizes(winningNumbers)
+    val bonusMatch = lottoInputView.receiveBonusNumber()
+    val prizes = LottoWinChecker(lottos).getPrizes(winningNumbers, bonusMatch)
 
     lottoOutputView.printLottoWinCheckResult(moneyToPay, prizes)
 }
