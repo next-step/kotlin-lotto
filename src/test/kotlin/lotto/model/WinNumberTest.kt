@@ -5,28 +5,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class WinNumberTest {
-    @Test
-    @DisplayName("지난주 당첨 번호 파싱하는 로직 확인")
-    fun `check parsing logic of last win numbers`() {
-        // given
-        val input = "1,2,3,4,5,6"
-        val expected = Lotto(
-            listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6),
-            )
-        )
-
-        // when
-        val lottoNumber = WinNumber.parsingTextToLotto(input)
-
-        // then
-        Assertions.assertThat(lottoNumber).isEqualTo(expected)
-    }
 
     @Test
     @DisplayName("당첨 번호 생성 확인")

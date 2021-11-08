@@ -16,8 +16,17 @@ data class Lotto(
     fun hasNumber(number: LottoNumber): Boolean = item.contains(number)
 
     companion object {
+        private const val DELIMITER = ","
+        private const val ERROR_INT = -1
         private const val SIZE_LOTTO_NUMBER = 6
         const val EXCEPTION_LOTTO_FORMAT = "숫자 포멧에 맞지 않습니다."
         const val EXCEPTION_DUPLICATED_LOTTO_NUMBER = "중복된 숫자가 존재합니다."
+
+        fun parsingTextToLotto(text: String): Lotto {
+            val list = text
+                .split(DELIMITER)
+                .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
+            return Lotto(list)
+        }
     }
 }

@@ -20,15 +20,6 @@ class WinNumber private constructor(
 
     companion object {
         private const val EXCEPTION_BONUS_NUMBER = "로또 당첨 번호와 겹치는 숫자 입니다."
-        private const val DELIMITER = ","
-        private const val ERROR_INT = -1
-
-        fun parsingTextToLotto(text: String): Lotto {
-            val list = text
-                .split(DELIMITER)
-                .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
-            return Lotto(list)
-        }
 
         fun inputWinNumber(
             lastWinNumber: String?,
@@ -37,7 +28,7 @@ class WinNumber private constructor(
             require(!lastWinNumber.isNullOrBlank())
             require(bonusNumber != null)
 
-            return WinNumber(parsingTextToLotto(lastWinNumber), LottoNumber(bonusNumber))
+            return WinNumber(Lotto.parsingTextToLotto(lastWinNumber), LottoNumber(bonusNumber))
         }
     }
 }

@@ -10,6 +10,11 @@ class LottoNumberListGenerator(private val price: Price) {
                 Lotto(generateRandomNumbers(range))
             }
 
+    fun generateManualLottoList(list: List<String>): List<Lotto> {
+        return list
+            .map { Lotto.parsingTextToLotto(it) }
+    }
+
     companion object {
         private const val NUMBER_START = 0
         private const val NUMBER_END = 6
