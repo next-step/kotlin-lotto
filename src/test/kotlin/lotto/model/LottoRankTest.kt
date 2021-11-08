@@ -1,6 +1,6 @@
 package lotto.model
 
-import lotto.model.LottoRank.Companion.getRankListByMonetExceptValue
+import lotto.model.LottoRank.Companion.getRankListByMoneyExceptValue
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -224,7 +224,7 @@ class LottoRankTest {
             LottoRank.FIRST
         )
 
-        val list = getRankListByMonetExceptValue(exceptRank)
+        val list = getRankListByMoneyExceptValue(exceptRank)
 
         Assertions.assertThat(list).isEqualTo(exceptList)
     }

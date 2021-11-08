@@ -21,7 +21,7 @@ enum class LottoRank(
         private fun isBonusRank(isBonusNumber: Boolean): LottoRank =
             if (isBonusNumber) SECOND else THIRD
 
-        fun getRankListByMonetExceptValue(exceptRank: LottoRank): List<LottoRank> {
+        fun getRankListByMoneyExceptValue(exceptRank: LottoRank): List<LottoRank> {
             return values()
                 .filter { it.winningMoney != exceptRank.winningMoney }
                 .sortedBy { it.winningMoney }
