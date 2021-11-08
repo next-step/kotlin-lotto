@@ -47,9 +47,18 @@ class LottoTest {
 
     @DisplayName(value = "콤마 DELIMITER를 통해 LOTTO를 생성할 수 있다.")
     @Test
-    fun `콤마 DELIMITER를 통해 LOTTO를 생성할 수 있다`() {
+    fun `콤마 DELIMITER를 통해 Lotto를 생성할 수 있다`() {
         val lotto = Lotto.of("1, 2, 3, 4, 5, 6")
 
         assertThat(lotto).isEqualTo(Lotto.of((1..6).map { LottoNumber.of(it) }))
+    }
+
+    @ParameterizedTest(name = "Lotto는 LottoNumber를 포함하는지 알 수 있다.")
+    @CsvSource(value = ["1, true", "2, true", "3, true", "4, true", "5, true", "6, true", "7 ,false"])
+    fun `Lotto는 LottoNumber를 포함하는지 알 수 있다`(value: Int, expected: Boolean) {
+        val numberList = (1..6).map { LottoNumber.of(it) }
+        val lotto = Lotto.of(numberList)
+
+        assertThat(lotto.hasLottoNumber(LottoNumber.of(value))).isEqualTo(expected)
     }
 }
