@@ -11,6 +11,7 @@ import lotto.domain.LottoResult
 object ResultView {
     private const val REQUEST_BUDGET = "구입금액을 입력해 주세요."
     private const val NUMBER_OF_LOTTO_GAMES_SUFFIX = "개를 구매했습니다."
+    private const val REQUEST_NUMBER_OF_MANUAL_SELECT_GAME = "수동으로 구매할 로또 수를 입력해 주세요."
     private const val REQUEST_BUDGET_LAST_WEEK_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     private const val REQUEST_BUDGET_LAST_WEEK_BONUS_NUMBER = "지난 주 보너스 번호를 입력해 주세요."
     private const val WINNING_RESULT_FORMAT = "%s개 일치 (%s원)- %s개"
@@ -26,6 +27,9 @@ object ResultView {
 
     fun printRequestBudget() = println(REQUEST_BUDGET)
 
+    fun printRequestNumberOfManualSelectGames() {
+        println(REQUEST_NUMBER_OF_MANUAL_SELECT_GAME)
+    }
     fun printRequestLastWeekNumber() {
         println(REQUEST_BUDGET_LAST_WEEK_NUMBER)
     }

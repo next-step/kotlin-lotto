@@ -7,15 +7,20 @@ import lotto.domain.LottoResult
 import lotto.ui.InputView.readInputForLastWeekBonusNumbers
 import lotto.ui.InputView.readInputForLastWeekNumbers
 import lotto.ui.InputView.readInputForLottoGameBudget
+import lotto.ui.InputView.readInputForNumberOfManualSelectGame
 import lotto.ui.ResultView.printLottoBuyResult
 import lotto.ui.ResultView.printLottoResult
 import lotto.ui.ResultView.printRequestBudget
 import lotto.ui.ResultView.printRequestLastWeekBonusNumber
 import lotto.ui.ResultView.printRequestLastWeekNumber
+import lotto.ui.ResultView.printRequestNumberOfManualSelectGames
 
 fun main() {
     printRequestBudget()
     val budget = readInputForLottoGameBudget()
+    printRequestNumberOfManualSelectGames()
+    readInputForNumberOfManualSelectGame()
+
     val lotteryPaper = LotteryPaper(budget)
     printLottoBuyResult(lotteryPaper)
     printRequestLastWeekNumber()

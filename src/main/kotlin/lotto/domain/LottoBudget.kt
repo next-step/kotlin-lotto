@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.domain.ExceptionType.BUDGET_UNSIGNED_INT
 
-data class LottoBudget(private val budget: Int) {
+data class LottoBudget(private var budget: Int) {
     init {
         checkBudgetUnsigned()
     }
