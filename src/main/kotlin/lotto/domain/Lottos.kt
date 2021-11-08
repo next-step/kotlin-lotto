@@ -20,8 +20,8 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
             return Lottos(values)
         }
 
-        fun buyManualLottos(lottoNumbers: List<LottoNumbers>): Lottos {
-            val values = lottoNumbers.map { Lotto.from(it) }
+        fun buyManualLottos(manualLottoNumbers: ManualLottoNumbers): Lottos {
+            val values = manualLottoNumbers.buyLottos()
             return Lottos(values)
         }
 
