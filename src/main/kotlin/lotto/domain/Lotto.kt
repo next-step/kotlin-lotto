@@ -16,6 +16,10 @@ value class Lotto private constructor(
         return numbers.filter { other.numbers.contains(it) }.count()
     }
 
+    fun hasLottoNumber(lottoNumber: LottoNumber): Boolean {
+        return numbers.contains(lottoNumber)
+    }
+
     companion object {
         const val SIZE = 6
         val PRICE = Money.of(1000)
