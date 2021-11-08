@@ -1,9 +1,8 @@
-package lotto.domain.money
+package lotto.domain
 
-interface Money {
-    val value: Int
-    val displayValue: String
+data class Money(val value: Int) {
 
+    operator fun plus(other: Money) = Money(value + other.value)
     operator fun div(other: Money) = value / other.value
     operator fun compareTo(other: Money) = value.compareTo(other.value)
 }

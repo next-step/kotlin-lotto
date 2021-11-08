@@ -1,7 +1,7 @@
 package lotto.view.inputView
 
 import lotto.domain.LottoNumber
-import lotto.domain.money.Money
+import lotto.domain.Money
 
 interface InputView {
     fun receiveMoney(): Money

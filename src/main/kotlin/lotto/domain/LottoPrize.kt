@@ -1,13 +1,10 @@
 package lotto.domain
 
-import lotto.domain.money.Money
-import lotto.domain.money.Won
-
 enum class LottoPrize(val matchCount: Int, val amount: Money) {
-    FOURTH(3, Won(5_000)),
-    THIRD(4, Won(50_000)),
-    SECOND(5, Won(1_500_000)),
-    FIRST(6, Won(2_000_000_000));
+    FOURTH(3, Money(5_000)),
+    THIRD(4, Money(50_000)),
+    SECOND(5, Money(1_500_000)),
+    FIRST(6, Money(2_000_000_000));
 
     companion object {
         fun fromMatchCount(matchCount: Int): LottoPrize? {

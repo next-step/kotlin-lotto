@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.money.Money
-
 class LottoGenerator(val lottoPrice: Money) {
 
     fun generate(paidPrice: Money): List<Lotto> {
