@@ -215,7 +215,7 @@ class LottoRankTest {
     @Test
     @DisplayName("상금 별 등급 정렬 로직 확인")
     fun `check sorting of rank list by money`() {
-        val exceptRank = LottoRank.MISS
+        val exceptMoney = LottoRank.MISS.winningMoney
         val exceptList = listOf(
             LottoRank.FIFTH,
             LottoRank.FOURTH,
@@ -224,7 +224,7 @@ class LottoRankTest {
             LottoRank.FIRST
         )
 
-        val list = getRankListByMoneyExceptValue(exceptRank)
+        val list = getRankListByMoneyExceptValue(exceptMoney)
 
         Assertions.assertThat(list).isEqualTo(exceptList)
     }
