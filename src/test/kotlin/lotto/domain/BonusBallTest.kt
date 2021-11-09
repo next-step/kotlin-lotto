@@ -1,20 +1,20 @@
 package lotto.domain
 
-import lotto.fixture.WinningLotteryFixture
-import org.assertj.core.api.Assertions
+import lotto.fixture.LottoNumbersFixture
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.CsvSource
 
 class BonusBallTest {
 
     @ParameterizedTest
-    @ValueSource(ints = [1, 2, 3, 4, 5, 6])
-    fun `보너스 볼은 당첨번호에 포함될 수 없다`(value: Int) {
+    @CsvSource(value = ["1,true", "5,true", "11,true", "45,false"])
+    fun `보너스 볼이 로또 번호에 포함되었는지 확인할 수 있다`(value: Int, expect: Boolean) {
         // given
-        val winning = WinningLotteryFixture.WINNING_LOTTERY
+        val lottoNumbers = LottoNumbersFixture.LOTTO_NUMBER_SET_WINNING
+        val bonusBall = BonusBall.of(value)
 
         // then
-        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { BonusBall.of(winning, LottoNumber.of(value)) }
+        assertThat(bonusBall.isIn(lottoNumbers)).isEqualTo(expect)
     }
 }

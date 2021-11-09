@@ -30,8 +30,8 @@ class LotteryTest {
 
         // then
         assertAll(
-            { assertThat(first.isContainBonusBall(bonusBall.value)).isTrue },
-            { assertThat(second.isContainBonusBall(bonusBall.value)).isFalse }
+            { assertThat(first.isContainBonusBall(bonusBall)).isFalse },
+            { assertThat(second.isContainBonusBall(bonusBall)).isTrue }
         )
     }
 }

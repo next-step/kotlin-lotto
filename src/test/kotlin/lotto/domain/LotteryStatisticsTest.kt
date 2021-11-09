@@ -1,8 +1,7 @@
 package lotto.domain
 
-import lotto.fixture.BonusBallFixture
 import lotto.fixture.LotteriesFixture
-import lotto.fixture.LotteryFixture
+import lotto.fixture.WinningLotteryFixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
@@ -13,11 +12,10 @@ class LotteryStatisticsTest {
     fun `로또 통계를 생성할 수 있다`() {
         // given
         val lotteries = LotteriesFixture.LOTTERIES
-        val winning = LotteryFixture.WINNING_LOTTERY
-        val bonusBall = BonusBallFixture.BONUS_BALL
+        val winningLottery = WinningLotteryFixture.WINNING_LOTTERY
 
         // when
-        val statistics = LotteryStatistics.of(lotteries, winning, bonusBall).values
+        val statistics = LotteryStatistics.of(lotteries, winningLottery).values
 
         // then
         assertAll(
@@ -33,9 +31,8 @@ class LotteryStatisticsTest {
     fun `총 당첨금을 계산할 수 있다`() {
         // given
         val lotteries = LotteriesFixture.LOTTERIES
-        val winning = LotteryFixture.WINNING_LOTTERY
-        val bonusBall = BonusBallFixture.BONUS_BALL
-        val statistics = LotteryStatistics.of(lotteries, winning, bonusBall)
+        val winningLottery = WinningLotteryFixture.WINNING_LOTTERY
+        val statistics = LotteryStatistics.of(lotteries, winningLottery)
 
         // when
         val reward = statistics.calculate()

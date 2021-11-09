@@ -2,7 +2,6 @@ package lotto
 
 import lotto.domain.BonusBall
 import lotto.domain.LottoMachine
-import lotto.domain.LottoNumber
 import lotto.domain.Money
 import lotto.domain.WinningLottery
 import lotto.domain.strategy.LottoAutoGenerator
@@ -25,12 +24,13 @@ class LotteryApplication(
         val paid = machine.calculatePaid(lotteryCounts)
 
         view.displayLotteries(lotteries)
-        val winning = WinningLottery.of(view.inputWinningNumbers())
+        val winningNumbers = view.inputWinningNumbers()
 
         view.inputBonusBallPrompt()
-        val bonusBall = BonusBall.of(winning, LottoNumber.of(view.input()))
+        val bonusBall = BonusBall.of(view.input())
+        val winningLottery = WinningLottery.of(winningNumbers, bonusBall)
 
-        val statistics = machine.calculate(lotteries, winning.lottery, bonusBall)
+        val statistics = machine.calculate(lotteries, winningLottery)
         val earn = machine.settle(statistics)
         val ratio = machine.calculateYield(paid, earn)
 
