@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class MoneyTest {
 
-    @ParameterizedTest(name = "Money를 더할 수 있다.")
+    @ParameterizedTest(name = "Money를 나눌 수 있다.")
     @CsvSource(value = ["1300, 1000, 1", "2999, 1000, 2", "19000, 1000, 19"])
     fun `Money는 나눌 수 있다`(value1: String, value2: String, expected: Int) {
         val money1 = Money.of(value1)
