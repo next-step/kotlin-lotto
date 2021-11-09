@@ -2,6 +2,7 @@ package lotto.view.inputView
 
 import lotto.domain.LottoNumber
 import lotto.domain.Money
+import lotto.domain.WinningLotto
 
 class LottoInputView : InputView {
     override fun receiveMoney(): Money {
@@ -11,7 +12,13 @@ class LottoInputView : InputView {
         return Money(input.toInt())
     }
 
-    override fun receiveWinningNumbers(): List<LottoNumber> {
+    override fun receiveWinningLotto(): WinningLotto {
+        val winningNumbers = receiveWinningNumbers()
+        val bonusNumber = receiveBonusNumber()
+        return WinningLotto(winningNumbers, bonusNumber)
+    }
+
+    private fun receiveWinningNumbers(): List<LottoNumber> {
         println(RECEIVE_WINNING_NUMBERS_MSG)
         val input = readLine()
         require(!input.isNullOrBlank()) { EMPTY_STRING_ERROR_MSG }
@@ -21,7 +28,7 @@ class LottoInputView : InputView {
             .map { LottoNumber(it.toInt()) }
     }
 
-    override fun receiveBonusNumber(): LottoNumber {
+    private fun receiveBonusNumber(): LottoNumber {
         println(RECEIVE_BONUS_NUMBER_MSG)
         val input = readLine()
         require(!input.isNullOrBlank()) { EMPTY_STRING_ERROR_MSG }

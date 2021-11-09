@@ -1,9 +1,11 @@
 package lotto.domain
 
-class LottoWinChecker(private val lottos: List<Lotto>) {
-
-    fun getPrizes(winningNumbers: List<LottoNumber>, bonusNumber: LottoNumber): List<LottoPrize> {
+class WinningLotto(private val winningNumbers: List<LottoNumber>, private val bonusNumber: LottoNumber) {
+    init {
         require(bonusNumber !in winningNumbers) { ALREADY_USED_BONUS_NUMBER_ERROR_MSG }
+    }
+
+    fun getPrizes(lottos: List<Lotto>): List<LottoPrize> {
         return lottos
             .mapNotNull {
                 val matchCount = it.countMatches(winningNumbers)
@@ -14,6 +16,6 @@ class LottoWinChecker(private val lottos: List<Lotto>) {
     }
 
     companion object {
-        private const val ALREADY_USED_BONUS_NUMBER_ERROR_MSG = "이미 사용된 번호입니다."
+        private const val ALREADY_USED_BONUS_NUMBER_ERROR_MSG = "보너스 번호가 이미 사용된 번호입니다."
     }
 }
