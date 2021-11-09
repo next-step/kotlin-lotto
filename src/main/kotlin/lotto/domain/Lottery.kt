@@ -2,8 +2,13 @@ package lotto.domain
 
 @JvmInline
 value class Lottery private constructor(val numbers: LottoNumbers) {
-    fun compareTo(lottery: Lottery): Int {
-        return numbers.values.count { lottery.numbers.values.contains(it) }
+
+    fun drawLottery(lottery: Lottery): Int {
+        return numbers.countMatchedNumbers(lottery.numbers)
+    }
+
+    fun isContainBonusBall(bonusBall: BonusBall): Boolean {
+        return bonusBall.isIn(numbers)
     }
 
     companion object {

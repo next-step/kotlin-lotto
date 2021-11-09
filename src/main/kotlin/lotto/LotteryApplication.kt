@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.BonusBall
 import lotto.domain.LottoMachine
 import lotto.domain.Money
 import lotto.domain.WinningLottery
@@ -17,15 +18,19 @@ class LotteryApplication(
 ) {
     fun run() {
         view.inputPrompt()
-        val budget = Money.valueOf(view.input())
-        val lotteryCounts = machine.count(budget)
+        val money = Money.from(view.input())
+        val lotteryCounts = machine.count(money)
         val lotteries = machine.buy(lotteryCounts)
         val paid = machine.calculatePaid(lotteryCounts)
 
         view.displayLotteries(lotteries)
-        val winning = WinningLottery.of(view.inputWinningNumbers())
+        val winningNumbers = view.inputWinningNumbers()
 
-        val statistics = machine.calculate(lotteries, winning.lottery)
+        view.inputBonusBallPrompt()
+        val bonusBall = BonusBall.of(view.input())
+        val winningLottery = WinningLottery.of(winningNumbers, bonusBall)
+
+        val statistics = machine.calculate(lotteries, winningLottery)
         val earn = machine.settle(statistics)
         val ratio = machine.calculateYield(paid, earn)
 
