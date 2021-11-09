@@ -43,8 +43,13 @@ object OutputView {
                 .filter {
                     it != Rank.MISS
                 }
+                .sortedByDescending { it.ordinal }
                 .forEach {
-                    append("${it.matchCount}개 일치 (${it.prize}원)- ${lottoResult.result[it] ?: 0}개")
+                    if (it.matchBonus) {
+                        append("${it.matchCount}개 일치, 보너스 볼 일치 (${it.prize}원)- ${lottoResult.result[it] ?: 0}개")
+                    } else {
+                        append("${it.matchCount}개 일치 (${it.prize}원)- ${lottoResult.result[it] ?: 0}개")
+                    }
                     append(System.lineSeparator())
                 }
         }

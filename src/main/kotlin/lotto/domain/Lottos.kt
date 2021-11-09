@@ -1,20 +1,25 @@
 package lotto.domain
 
-data class Lottos(val lottos: List<Lotto>) {
+@JvmInline
+value class Lottos private constructor(
+    val lottos: List<Lotto>
+) {
 
-    fun match(lotto: Lotto): LottoResult {
-        val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it)) }
+    fun match(lotto: Lotto, bonusBall: BonusBall): LottoResult {
+        val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it), it.hasLottoNumber(bonusBall.lottoNumber)) }
             .groupingBy { it }
             .eachCount()
-        return LottoResult(rankCounts)
+        return LottoResult.of(rankCounts)
     }
 
     companion object {
-        fun of(lottoNumberGenerator: LottoNumberGenerator, money: Money): Lottos {
-            val lottoList = (0 until money.lottoCount).map {
-                lottoNumberGenerator.generateLottoNumber()
-            }.map { Lotto.of(it) }
-            return Lottos(lottoList)
+
+        fun of(lottos: List<Lotto>): Lottos {
+            return Lottos(lottos)
+        }
+
+        fun of(lottoGenerator: LottoGenerator): Lottos {
+            return Lottos(lottoGenerator.generateLotto())
         }
     }
 }
