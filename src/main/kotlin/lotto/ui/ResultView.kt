@@ -12,6 +12,7 @@ object ResultView {
     private const val REQUEST_BUDGET = "구입금액을 입력해 주세요."
     private const val NUMBER_OF_LOTTO_GAMES_SUFFIX = "개를 구매했습니다."
     private const val REQUEST_NUMBER_OF_MANUAL_SELECT_GAME = "수동으로 구매할 로또 수를 입력해 주세요."
+    private const val REQUEST_MANUAL_SELECT_GAME_NUMBERS = "수동으로 구매할 번호를 입력해 주세요."
     private const val REQUEST_BUDGET_LAST_WEEK_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     private const val REQUEST_BUDGET_LAST_WEEK_BONUS_NUMBER = "지난 주 보너스 번호를 입력해 주세요."
     private const val WINNING_RESULT_FORMAT = "%s개 일치 (%s원)- %s개"
@@ -30,6 +31,11 @@ object ResultView {
     fun printRequestNumberOfManualSelectGames() {
         println(REQUEST_NUMBER_OF_MANUAL_SELECT_GAME)
     }
+
+    fun printRequestManualSelectGameNumbers() {
+        println(REQUEST_MANUAL_SELECT_GAME_NUMBERS)
+    }
+
     fun printRequestLastWeekNumber() {
         println(REQUEST_BUDGET_LAST_WEEK_NUMBER)
     }
@@ -51,7 +57,7 @@ object ResultView {
         println("${lotteryPaper.getNumberOfGames()}$NUMBER_OF_LOTTO_GAMES_SUFFIX")
 
     private fun printLottoPaper(lotteryPaper: LotteryPaper) =
-        lotteryPaper.getLottoGames().forEach { printLottoGame(it) }
+        lotteryPaper.getLottoGameList().getGames().forEach { printLottoGame(it) }
 
     private fun printWinnings(lottoResultOnlyWinning: Map<LotteryWinningTypes, Int>) =
         lottoResultOnlyWinning

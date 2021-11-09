@@ -1,14 +1,19 @@
 package lotto.domain
 
-class LotteryPaper(budget: LottoBudget) {
-    private val lottoGames = mutableListOf<LottoGame>()
+class LotteryPaper(private val lottoNumberSelectPaper: LottoNumberSelectPaper) {
+    private val lottoGameList = LottoGameList()
 
     init {
-        val numberOfGames = budget.getNumberOfGames()
-        repeat(numberOfGames) { lottoGames.add(LottoGame.createWithAutoSelect()) }
+        lottoGameList.addAll(lottoNumberSelectPaper.getManualSelectedLottoGames())
+        val numberOfAutoGenerateGames =
+            with(lottoNumberSelectPaper) { budget.getNumberOfGames() - numberOfManualSelectGames.numberOfGames }
+
+        repeat(numberOfAutoGenerateGames) { lottoGameList.add(LottoGame.createWithAutoSelect()) }
     }
 
-    fun getLottoGames() = lottoGames.toList()
+    fun getLottoGameList() = lottoGameList
 
-    fun getNumberOfGames() = lottoGames.size
+    fun getLottoBudget() = lottoNumberSelectPaper.budget
+
+    fun getNumberOfGames() = lottoGameList.size()
 }

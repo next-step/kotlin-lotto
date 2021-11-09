@@ -10,4 +10,9 @@ class LottoNumberTest {
         assertThatIllegalArgumentException().isThrownBy { LottoNumber("H") }
             .withMessage(ExceptionType.INPUT_MUST_UNSIGNED_INT)
     }
+    @Test
+    fun `숫자를 입력받은 경우 예외를 발생시키지 않는다`() {
+        assertThatIllegalArgumentException().isThrownBy { LottoNumber("H") }
+            .withMessage(ExceptionType.INPUT_MUST_UNSIGNED_INT)
+    }
 }

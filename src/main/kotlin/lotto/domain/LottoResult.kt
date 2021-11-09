@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoResult(
-    private val lottoGames: List<LottoGame>,
+    private val lottoGames: LottoGameList,
     private val lastWeekNumber: LastWeekNumber,
     private val bonusNumber: BonusNumber
 ) {
@@ -10,6 +10,7 @@ data class LottoResult(
     init {
         val lastWeekNumberSet = lastWeekNumber.getLastWeekSetList()
         val numberOfHits = lottoGames
+            .getGames()
             .map { getGameResults(it, lastWeekNumberSet, bonusNumber) }
 
         numberOfHits
@@ -20,7 +21,7 @@ data class LottoResult(
     }
 
     constructor(lotteryPaper: LotteryPaper, lastWeekNumber: LastWeekNumber, bonusNumber: BonusNumber) : this(
-        lotteryPaper.getLottoGames(),
+        lotteryPaper.getLottoGameList(),
         lastWeekNumber,
         bonusNumber
     )

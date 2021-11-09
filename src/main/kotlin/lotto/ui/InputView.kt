@@ -4,6 +4,7 @@ import lotto.domain.ExceptionType.INPUT_MUST_NOT_NULL
 import lotto.domain.ExceptionType.INPUT_MUST_UNSIGNED_INT
 import lotto.domain.ExceptionType.NUMBER_OF_MANUAL_SELECT_GAME_MUST_UNSIGNED_INT
 import lotto.domain.LottoBudget
+import lotto.domain.LottoGame
 import lotto.domain.LottoNumber
 
 object InputView {
@@ -22,6 +23,11 @@ object InputView {
         requireNotNull(numberOfManualSelectGame) { INPUT_MUST_NOT_NULL }
         require(isUnsignedInt(numberOfManualSelectGame)) { NUMBER_OF_MANUAL_SELECT_GAME_MUST_UNSIGNED_INT }
         return numberOfManualSelectGame.toInt()
+    }
+    fun readInputNumbersForManualSelectGame(): LottoGame {
+        val numbersForManualSelectGame = readLine()
+        requireNotNull(numbersForManualSelectGame) { INPUT_MUST_NOT_NULL }
+        return LottoGame.createWithNumberListString(numbersForManualSelectGame)
     }
 
     fun readInputForLastWeekNumbers(): List<LottoNumber> {
