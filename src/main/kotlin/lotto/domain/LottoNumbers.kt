@@ -16,6 +16,10 @@ value class LottoNumbers private constructor(val values: List<LottoNumber>) {
         return values.contains(number)
     }
 
+    fun countMatchedNumbers(lottoNumbers: LottoNumbers): Int {
+        return values.count { lottoNumbers.values.contains(it) }
+    }
+
     companion object {
         const val LOTTO_NUMBER_COUNTS = 6
 

@@ -10,6 +10,10 @@ class WinningLottery(private val lottery: Lottery, private val bonusBall: BonusB
         require(!lottery.isContainBonusBall(bonusBall)) { "보너스 볼은 당첨번호에 포함된 번호일 수 없습니다." }
     }
 
+    fun rank(lotteries: Lotteries): List<Ranking> {
+        return lotteries.values.map { Ranking.calculate(it.drawLottery(lottery), it.isContainBonusBall(bonusBall)) }
+    }
+
     companion object {
         fun of(lottery: Lottery, bonusBall: BonusBall): WinningLottery {
             return WinningLottery(lottery, bonusBall)

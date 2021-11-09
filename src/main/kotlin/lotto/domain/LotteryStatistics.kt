@@ -8,14 +8,14 @@ value class LotteryStatistics private constructor(val values: Map<Ranking, Int>)
     }
 
     companion object {
-        private fun statisticize(lotteries: Lotteries, winning: Lottery, bonusBall: BonusBall): Map<Ranking, Int> {
-            return lotteries.rank(winning, bonusBall)
+        private fun statisticize(lotteries: Lotteries, winningLottery: WinningLottery): Map<Ranking, Int> {
+            return winningLottery.rank(lotteries)
                 .groupingBy { it }
                 .eachCount()
         }
 
-        fun of(lotteries: Lotteries, winning: Lottery, bonusBall: BonusBall): LotteryStatistics {
-            return LotteryStatistics(statisticize(lotteries, winning, bonusBall))
+        fun of(lotteries: Lotteries, winningLottery: WinningLottery): LotteryStatistics {
+            return LotteryStatistics(statisticize(lotteries, winningLottery))
         }
     }
 }
