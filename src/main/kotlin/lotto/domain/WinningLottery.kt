@@ -1,14 +1,28 @@
 package lotto.domain
 
-@JvmInline
-value class WinningLottery(val lottery: Lottery) {
+class WinningLottery(private val lottery: Lottery, private val bonusBall: BonusBall) {
+
+    init {
+        verify(lottery, bonusBall)
+    }
+
+    private fun verify(lottery: Lottery, bonusBall: BonusBall) {
+        require(!lottery.isContainBonusBall(bonusBall)) { "보너스 볼은 당첨번호에 포함된 번호일 수 없습니다." }
+    }
 
     companion object {
-        fun of(numbers: List<Int>): WinningLottery {
+        fun of(lottery: Lottery, bonusBall: BonusBall): WinningLottery {
+            return WinningLottery(lottery, bonusBall)
+        }
+
+        fun of(lottoNumbers: LottoNumbers, bonusBall: BonusBall): WinningLottery {
+            return of(Lottery.of(lottoNumbers), bonusBall)
+        }
+
+        fun of(numbers: List<Int>, bonusBall: BonusBall): WinningLottery {
             return numbers.map { LottoNumber.of(it) }
                 .run { LottoNumbers.of(this) }
-                .run { Lottery.of(this) }
-                .run { WinningLottery(this) }
+                .run { of(this, bonusBall) }
         }
     }
 }
