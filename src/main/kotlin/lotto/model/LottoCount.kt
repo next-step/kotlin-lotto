@@ -10,8 +10,9 @@ class LottoCount(
     fun createLottoNumber(count: Int? = null): Int {
         return when {
             count == null -> maxCount
-            maxCount < MIN_COUNT -> MIN_COUNT // 최대 개수가 음수인 경우 0반환
-            count > maxCount -> maxCount // 입력 개수가 최대 개수보다 많은 경우 최대 개수 반환
+            maxCount < MIN_COUNT -> MIN_COUNT
+            count < MIN_COUNT -> MIN_COUNT
+            count > maxCount -> throw IllegalArgumentException("입력한 수만큼 로또를 생성할 수 없습니다.")
             else -> count
         }
     }
