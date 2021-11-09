@@ -26,6 +26,7 @@ data class Lotto(
             val list = text
                 .split(DELIMITER)
                 .map { LottoNumber(it.toIntOrNull() ?: ERROR_INT) }
+                .sortedBy { it.number }
             return Lotto(list)
         }
     }

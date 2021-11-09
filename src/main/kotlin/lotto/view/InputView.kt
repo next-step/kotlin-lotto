@@ -24,8 +24,13 @@ class InputView {
         return readLine()?.toIntOrNull()
     }
 
-    fun inputManualLottoNumber(): String? {
+    fun inputManualLottoNumber(count: Int): List<String?> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return readLine()
+        val manualLottoLists = mutableListOf<String?>()
+        repeat(count) {
+            val inputManualLottoNumber = readLine()
+            manualLottoLists.add(inputManualLottoNumber)
+        }
+        return manualLottoLists
     }
 }

@@ -97,5 +97,4 @@ class LottoTest {
         // then
         assertThat(lottoNumber).isEqualTo(expected)
     }
-
 }

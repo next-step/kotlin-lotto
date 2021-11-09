@@ -10,23 +10,22 @@ class LottoNumberListGeneratorTest {
     @DisplayName("수동 로또 번호들 생성해 반환하는 로직 테스트")
     fun `check manual lotto generation logic`() {
         // given
-        val price = Price(1000)
         val numbers = listOf("1,10,22,13,14,45")
         val expected = listOf(
             Lotto(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(10),
-                    LottoNumber(22),
                     LottoNumber(13),
                     LottoNumber(14),
+                    LottoNumber(22),
                     LottoNumber(45),
                 )
             )
         )
 
         // when
-        val lottoList = LottoNumberListGenerator(price).generateManualLottoList(numbers)
+        val lottoList = LottoNumberListGenerator.generateManualLottoList(numbers)
 
         // then
         assertThat(lottoList).isEqualTo(expected)
@@ -43,16 +42,16 @@ class LottoNumberListGeneratorTest {
                 listOf(
                     LottoNumber(1),
                     LottoNumber(10),
-                    LottoNumber(22),
                     LottoNumber(13),
                     LottoNumber(14),
+                    LottoNumber(22),
                     LottoNumber(45),
                 )
             )
         )
 
         // when
-        val lottoList = LottoNumberListGenerator(price).generateLottoList(numbers)
+        val lottoList = LottoNumberListGenerator.generateAutoLottoList(price.lottoCount, numbers)
 
         // then
         assertThat(lottoList).isEqualTo(expected)
@@ -67,9 +66,9 @@ class LottoNumberListGeneratorTest {
         val expected = listOf(
             LottoNumber(1),
             LottoNumber(10),
-            LottoNumber(22),
             LottoNumber(13),
             LottoNumber(14),
+            LottoNumber(22),
             LottoNumber(45),
         )
 

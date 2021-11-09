@@ -9,11 +9,11 @@ import lotto.model.LottoStatisticFormat
  * */
 class OutputView {
     fun resultLottoCount(manualCount: Int, autoCount: Int) {
-        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
+        println("\n수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 
-    fun printWinNumbers(lottos: List<Lotto>) {
-        lottos
+    fun printWinNumbers(manualList: List<Lotto>, lottos: List<Lotto>) {
+        (manualList.plus(lottos))
             .forEach { lottoNumber ->
                 println("[${lottoNumber.numbers.map { it.number }.joinToString()}]")
             }
