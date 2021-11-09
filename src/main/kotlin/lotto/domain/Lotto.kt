@@ -1,20 +1,31 @@
 package lotto.domain
 
-@JvmInline
-value class Lotto(
-    private val lottoNumbers: LottoNumbers,
+import lotto.exception.InvalidLottoNumberException
+
+class Lotto(
+    value: List<LottoNumber>,
 ) {
-    fun matchWinningNumber(winningNumbers: List<LottoNumber>): Int {
-        return winningNumbers.count {
-            lottoNumbers.containsWinningNumbers(it.value)
+    val value = value.toList()
+
+    init {
+        if (this.value.isEmpty() || this.value.distinct().size != LottoNumber.LOTTO_SIZE) {
+            throw InvalidLottoNumberException()
         }
     }
 
-    fun matchBonusNumber(bonusNumber: Int): Boolean {
-        return lottoNumbers.containsBonusNumber(bonusNumber)
+    fun matchWinningNumber(winningNumber: WinningNumber): Int {
+        return value.count {
+            winningNumber.containsLottoNumber(it)
+        }
+    }
+
+    fun matchBonusNumber(winningNumber: WinningNumber): Boolean {
+        return value.any {
+            winningNumber.containsBonusNumber(it)
+        }
     }
 
     fun getLottoNumbers(): List<Int> {
-        return lottoNumbers.value.map { it.value }
+        return value.map { it.value }
     }
 }

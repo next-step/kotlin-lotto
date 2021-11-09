@@ -1,14 +1,17 @@
 package lotto.domain
 
 class Lottos(
-    _value: List<Lotto>,
+    value: List<Lotto>,
 ) {
-    val value = ArrayList(_value)
+    val value = value.toList()
 
-    fun matchWinningNumber(winningNumbers: List<LottoNumber>, bonusNumber: Int): Map<Rank, Int> {
+    fun matchWinningNumber(winningNumber: WinningNumber): Map<Rank, Int> {
         return value
             .map {
-                Rank.valueOf(it.matchWinningNumber(winningNumbers), it.matchBonusNumber(bonusNumber))
+                Rank.valueOf(
+                    it.matchWinningNumber(winningNumber),
+                    it.matchBonusNumber(winningNumber)
+                )
             }
             .groupingBy { it }
             .eachCount()

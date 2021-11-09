@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.fixture.LottoNumberFixture
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -7,43 +8,39 @@ import org.junit.jupiter.api.Test
 @DisplayName("로또 관리 테스트")
 class LottosTest {
 
-    private val lottoNumberOne = LottoNumber(1)
-    private val lottoNumberTwo = LottoNumber(2)
-    private val lottoNumberThree = LottoNumber(3)
-    private val lottoNumberFour = LottoNumber(4)
-    private val lottoNumberFive = LottoNumber(5)
-    private val lottoNumberSix = LottoNumber(6)
-    private val lottoNumberSeven = LottoNumber(7)
-
     @Test
     @DisplayName("n개의 로또들의 당첨 결과를 수집할 수 있다")
     fun `sut returns match result`() {
         // Arrange
         val lottos = listOf(
             Lotto(
-                LottoNumbers(
-                    listOf(
-                        lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSix,
-                    )
+                listOf(
+                    LottoNumberFixture.create(1),
+                    LottoNumberFixture.create(2),
+                    LottoNumberFixture.create(3),
+                    LottoNumberFixture.create(4),
+                    LottoNumberFixture.create(5),
+                    LottoNumberFixture.create(6),
                 )
             ),
             Lotto(
-                LottoNumbers(
-                    listOf(
-                        lottoNumberOne, lottoNumberTwo, lottoNumberThree, lottoNumberFour, lottoNumberFive, lottoNumberSeven,
-                    )
+                listOf(
+                    LottoNumberFixture.create(1),
+                    LottoNumberFixture.create(2),
+                    LottoNumberFixture.create(3),
+                    LottoNumberFixture.create(4),
+                    LottoNumberFixture.create(5),
+                    LottoNumberFixture.create(7),
                 )
             )
         )
 
-        val winningNumber = WinningNumber(
-            listOf("1", "2", "3", "4", "5", "6")
-        )
-        val bonusNumber = 7
+        val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
+        val winningNumber = WinningNumber.of(winningNumbers, 7)
 
         // Act
         val sut = Lottos(lottos)
-        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber.value, bonusNumber)
+        val result: Map<Rank, Int> = sut.matchWinningNumber(winningNumber)
 
         // Assert
         assertThat(result[Rank.FIRST]).isEqualTo(1)

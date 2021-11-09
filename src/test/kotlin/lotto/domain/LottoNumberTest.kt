@@ -14,6 +14,6 @@ class LottoNumberTest {
     @DisplayName("1 ~ 45 범위가 아닌 번호가 입력될 경우 예외 발생")
     fun `sut throw when lotto number doesn't fit the range`(number: Int) {
         // Act, Assert
-        assertThrows<InvalidLottoNumberException> { LottoNumber(number) }
+        assertThrows<InvalidLottoNumberException> { LottoNumber.valueOf(number) }
     }
 }
