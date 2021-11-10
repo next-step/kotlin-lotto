@@ -2,6 +2,7 @@ package lotto.domain
 
 class LottoResult(private val lottoPrize: LottoPrize, private val matchingCount: Int) {
 
+    fun getMatchingCount() = matchingCount
     fun prizeAndCountPair() = Pair(lottoPrize, matchingCount)
 
     companion object {
