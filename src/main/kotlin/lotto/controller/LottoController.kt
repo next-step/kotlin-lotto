@@ -14,7 +14,9 @@ class LottoController(private val inputView: InputView, private val resultView: 
     fun start() {
         val wallet = Wallet(inputView.inputBudget())
         val manualLottoNumberTexts = inputView.inputManualLotto()
-        val lottoStore = LottoStore.purchaseLotto(wallet, manualLottoNumberTexts)
+        val lottoStore = LottoStore.enter(wallet).apply {
+            this.purchaseLotto(manualLottoNumberTexts)
+        }
         resultView.viewPurchaseLotto(lottoStore)
         val winningNumber = LottoNumbers.generateLottoNumbers(inputView.inputWinningNumber())
         val bonusNumber = LottoNumber(inputView.inputBonusNumber())

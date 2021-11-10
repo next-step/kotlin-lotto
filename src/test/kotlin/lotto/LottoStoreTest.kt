@@ -12,12 +12,13 @@ class LottoStoreTest {
     fun `14000원으로 수동 로또를 안사면 자동 로또가 14장이 구매가 되어지는지 테스트`() {
         // given
         val wallet = Wallet(14000)
+        val lottoStore = LottoStore.enter(wallet)
 
         // when
-        val purchaseLotto = LottoStore.purchaseLotto(wallet)
+        lottoStore.purchaseLotto()
 
         // then
-        assertThat(purchaseLotto.getAutoLottoSize()).isEqualTo(14)
+        assertThat(lottoStore.getAutoLottoSize()).isEqualTo(14)
     }
 
     @Test
@@ -25,14 +26,15 @@ class LottoStoreTest {
         // given
         val wallet = Wallet(14000)
         val manualLottoTexts = listOf("1,2,3,4,5,6", "1,2,3,4,5,6", "2,3,4,5,6,7")
+        val lottoStore = LottoStore.enter(wallet)
 
         // when
-        val purchaseLotto = LottoStore.purchaseLotto(wallet, manualLottoTexts)
+        lottoStore.purchaseLotto(manualLottoTexts)
 
         //
         assertAll({
-            assertThat(purchaseLotto.getAutoLottoSize()).isEqualTo(11)
-            assertThat(purchaseLotto.getManualLottoSize()).isEqualTo(3)
+            assertThat(lottoStore.getAutoLottoSize()).isEqualTo(11)
+            assertThat(lottoStore.getManualLottoSize()).isEqualTo(3)
         })
     }
 }

@@ -3,9 +3,7 @@ package lotto.domain
 @JvmInline
 value class Lottos private constructor(private val lottos: List<Lotto>) {
 
-    operator fun plus(other: Lottos): Lottos {
-        return Lottos(lottos + other.lottos)
-    }
+    operator fun plus(other: Lottos): Lottos = Lottos(lottos + other.lottos)
 
     fun toList(): List<Lotto> = lottos.toList()
 
@@ -15,13 +13,13 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
         lottos.map { MatchingWinningNumber.of(it, winningNumbers, bonusNumber) }
 
     companion object {
-        fun buyAutoLottos(money: Wallet): Lottos {
+        fun generateAutoLottos(money: Wallet): Lottos {
             val values = MutableList(money.getLeftMoney() / Lotto.PRICE) { Lotto.generate() }
             return Lottos(values)
         }
 
-        fun buyManualLottos(manualLottoNumbers: ManualLottoNumbers): Lottos {
-            val values = manualLottoNumbers.buyLottos()
+        fun generateManualLottos(manualLottoNumbers: ManualLottoNumbers): Lottos {
+            val values = manualLottoNumbers.generate()
             return Lottos(values)
         }
 

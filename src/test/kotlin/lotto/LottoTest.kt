@@ -11,7 +11,7 @@ class LottoTest {
     @Test
     fun `로또는 개당 1000원이다`() {
         // given
-        val lottos = Lottos.buyAutoLottos(Wallet(1000))
+        val lottos = Lottos.generateAutoLottos(Wallet(1000))
 
         // when
         val purchaseLottos = lottos.toList()
@@ -56,7 +56,7 @@ class LottoTest {
     @Test
     fun `14000원으로 로또 14장을 살 수 있다`() {
         // given
-        val lottos = Lottos.buyAutoLottos(Wallet(14000))
+        val lottos = Lottos.generateAutoLottos(Wallet(14000))
 
         // when
         val purchaseLottos = lottos.toList()

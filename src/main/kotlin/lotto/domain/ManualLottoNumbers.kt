@@ -5,9 +5,7 @@ import lotto.utils.StringUtil
 @JvmInline
 value class ManualLottoNumbers(private val lottoNumbers: List<LottoNumbers>) {
 
-    fun getSize() = lottoNumbers.size
-
-    fun buyLottos(): List<Lotto> = lottoNumbers.map { Lotto.from(it) }
+    fun generate(): List<Lotto> = lottoNumbers.map { Lotto.from(it) }
 
     companion object {
         fun generateManualLottoNumbers(lottoNumberTexts: List<String>): ManualLottoNumbers {
