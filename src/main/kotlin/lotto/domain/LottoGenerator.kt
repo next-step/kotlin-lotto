@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.money.Money
-
 class LottoGenerator(val lottoPrice: Money) {
 
     fun generate(paidPrice: Money): List<Lotto> {
@@ -15,13 +13,13 @@ class LottoGenerator(val lottoPrice: Money) {
     }
 
     private fun createLotto(): Lotto {
-        val numbers = LottoNUMBERS.shuffled().slice(NUMBER_PICK_RANGE)
+        val numbers = LOTTO_NUMBERS.shuffled().take(LOTTO_NUMBERS_COUNT)
         return Lotto(numbers)
     }
 
     companion object {
-        private val LottoNUMBERS = (1..45).map { LottoNumber(it) }
-        private val NUMBER_PICK_RANGE = (0..5)
+        private val LOTTO_NUMBERS = (1..45).map { LottoNumber(it) }
+        private const val LOTTO_NUMBERS_COUNT = 6
         private const val NOT_ENOUGH_MONEY = "금액이 부족합니다."
     }
 }

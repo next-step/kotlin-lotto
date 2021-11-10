@@ -11,6 +11,10 @@ class Lotto(val numbers: List<LottoNumber>) {
         return (numbers intersect winningNumbers).size
     }
 
+    fun checkBonusMatch(bonusNumber: LottoNumber): Boolean {
+        return bonusNumber in numbers
+    }
+
     companion object {
         private const val REQUIRED_SIZE_OF_NUMBERS = 6
         private const val INVALID_SIZE_OF_NUMBERS_ERROR_MSG = "총 $REQUIRED_SIZE_OF_NUMBERS 개의 번호가 필요합니다."

@@ -1,22 +1,21 @@
 package lotto
 
 import lotto.domain.LottoGenerator
-import lotto.domain.LottoWinChecker
-import lotto.domain.money.Won
+import lotto.domain.Money
 import lotto.view.inputView.LottoInputView
 import lotto.view.outputView.LottoOutputView
 
 fun main() {
     val lottoInputView = LottoInputView()
     val lottoOutputView = LottoOutputView()
-    val lottoGenerator = LottoGenerator(lottoPrice = Won(5000))
+    val lottoGenerator = LottoGenerator(lottoPrice = Money(1000))
 
     val moneyToPay = lottoInputView.receiveMoney()
     val lottos = lottoGenerator.generate(paidPrice = moneyToPay)
     lottoOutputView.printLottoBuyResult(lottos)
 
-    val winningNumbers = lottoInputView.receiveWinningNumbers()
-    val prizes = LottoWinChecker(lottos).getPrizes(winningNumbers)
+    val winningLotto = lottoInputView.receiveWinningLotto()
+    val prizes = winningLotto.getPrizes(lottos)
 
     lottoOutputView.printLottoWinCheckResult(moneyToPay, prizes)
 }

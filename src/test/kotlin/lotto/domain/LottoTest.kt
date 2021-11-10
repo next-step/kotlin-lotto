@@ -38,4 +38,13 @@ class LottoTest {
 
         assertThat(matchedCount).isEqualTo(expectedCount)
     }
+
+    @ParameterizedTest
+    @CsvSource("1,true", "10,false")
+    fun `보너스 번호를 입력하면 일치 여부를 리턴한다`(bonusNumber: Int, expectedResult: Boolean) {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val matched = lotto.checkBonusMatch(bonusNumber = LottoNumber(bonusNumber))
+
+        assertThat(matched).isEqualTo(expectedResult)
+    }
 }

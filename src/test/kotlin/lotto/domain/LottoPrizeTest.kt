@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class LottoPrizeTest {
     @ParameterizedTest
-    @CsvSource("3,FOURTH", "4,THIRD", "5,SECOND", "6,FIRST")
-    fun `일치된 번호 개수로 LottoPrize 를 가져올 수 있다`(input: Int, expectedPrize: LottoPrize) {
-        val prize = LottoPrize.fromMatchCount(input)
+    @CsvSource("3,false,FIFTH", "4,false,FOURTH", "5,false,THIRD", "5,true,SECOND", "6,false,FIRST")
+    fun `일치된 번호 개수로 LottoPrize 를 가져올 수 있다`(input: Int, bonusMatch: Boolean, expectedPrize: LottoPrize) {
+        val prize = LottoPrize.fromMatchCount(input, bonusMatch)
         assertThat(prize).isEqualTo(expectedPrize)
     }
 
