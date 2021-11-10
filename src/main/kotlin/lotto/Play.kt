@@ -1,8 +1,8 @@
 package lotto
 
-import lotto.domain.LottoResult
+import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
-import lotto.domain.WinningLotto
+import lotto.domain.lotto.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -20,11 +20,11 @@ object Play {
 
         val winningLotto = WinningLotto(InputView.lastWeekLottoNumber())
 
-        val lottoResult = LottoResult(userLottoList, winningLotto)
+        val lottoWin = LottoPrize(userLottoList, winningLotto)
 
-        ResultView.lottoResult(lottoResult.allPrizeResult())
+        ResultView.lottoResult(lottoWin.prizeResult)
 
-        val sum = lottoResult.totalPrizeMoney()
+        val sum = lottoWin.totalPrizeMoney()
         ResultView.statistics(sum, userLottoBuyMoney)
     }
 }

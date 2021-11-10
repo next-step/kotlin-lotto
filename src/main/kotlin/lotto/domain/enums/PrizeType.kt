@@ -1,6 +1,6 @@
 package lotto.domain.enums
 
-enum class PrizeType(val answer: Int, val prizeMoney: Int) {
+enum class PrizeType(val match: Int, val money: Int) {
 
     THREE(3, 5_000),
     FOUR(4, 50_000),
@@ -8,12 +8,16 @@ enum class PrizeType(val answer: Int, val prizeMoney: Int) {
     SIX(6, 2_000_000_000);
 
     companion object {
-        fun findPrizeMoney(answer: Int): Int {
-            return values().find { it.answer == answer }?.prizeMoney ?: 0
+        fun findPrizeMoney(match: Int): Int {
+            return values()
+                .find { it.match == match }
+                ?.money ?: 0
         }
 
-        fun findAnswer(answer: Int): Int {
-            return values().find { it.answer == answer }?.answer ?: 0
+        fun findMatchCount(match: Int): Int {
+            return values()
+                .find { it.match == match }
+                ?.match ?: 0
         }
     }
 }

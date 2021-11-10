@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.lotto.Lotto
 import lotto.domain.enums.PrizeType
 
 object ResultView {
@@ -11,7 +11,7 @@ object ResultView {
         userLotto.forEach { println(it.lottoNumber.toString()) }
     }
 
-    fun lottoResult(prizeResult: MutableMap<Int, Int>) {
+    fun lottoResult(prizeResult: Map<Int, Int>) {
         println(DEFAULT_MESSAGE)
         println("-------------------------------")
 

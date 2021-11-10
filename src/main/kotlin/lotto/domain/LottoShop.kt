@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.lotto.Lotto
+
 object LottoShop {
 
     private const val LOTTO_PRICE = 1_000
@@ -7,13 +9,26 @@ object LottoShop {
     private const val ZERO = 0
     private const val LACK_MONEY_MESSAGE = "금액이 부족 합니다."
 
+    private const val LOTTO_MIN_NUMBER = 1
+    private const val LOTTO_MAX_NUMBER = 45
+    private val LOTTO_RANGE = arrayOf(0, 6)
+
     fun createLottoTicket(money: Int): List<Lotto> {
         require(money % LOTTO_PRICE == 0) { IllegalArgumentException(LOTTO_PRICE_ERROR_MESSAGE) }
         require(money > ZERO) { IllegalArgumentException(LACK_MONEY_MESSAGE) }
 
         val lottoCount: Int = money / LOTTO_PRICE
 
-        return (1..lottoCount)
-            .map { Lotto() }
+        val lottoList = mutableListOf<Lotto>()
+
+        for (i in 0..lottoCount) {
+            lottoList.add(Lotto(generatorLotto()))
+        }
+        return lottoList
     }
+
+    private fun generatorLotto(): List<Int> = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER)
+        .shuffled()
+        .subList(LOTTO_RANGE[0], LOTTO_RANGE[1])
+        .sorted()
 }
