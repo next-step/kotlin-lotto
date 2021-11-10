@@ -32,7 +32,7 @@ class TotalRateTest {
                 )
             ),
             winningLottoNumbers = winningNumber,
-            bonusLottoNumber = LottoNumber(7)
+            bonusLottoNumber = LottoNumber.from(7)
         )
 
         // when
@@ -58,7 +58,7 @@ class TotalRateTest {
                 )
             ),
             winningLottoNumbers = winningNumber,
-            bonusLottoNumber = LottoNumber(7)
+            bonusLottoNumber = LottoNumber.from(7)
         )
 
         // when
@@ -83,7 +83,7 @@ class TotalRateTest {
                 )
             ),
             winningLottoNumbers = LottoNumbers.generateLottoNumbers(winningNumber),
-            bonusLottoNumber = LottoNumber(7)
+            bonusLottoNumber = LottoNumber.from(7)
         )
 
         // when

@@ -13,7 +13,7 @@ class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
         fun generateLottoNumbers(lottoNumber: List<Int> = generateRandomNumber()): LottoNumbers {
             require(lottoNumber.size == LOTTO_NUMBER_SIZE) { "숫자가 6개가 들어와야 합니다." }
             require(lottoNumber.distinct().size == LOTTO_NUMBER_SIZE) { "중복 된 숫자는 들어올 수 없습니다." }
-            return LottoNumbers(lottoNumber.map { LottoNumber(it) })
+            return LottoNumbers(lottoNumber.map { LottoNumber.from(it) })
         }
 
         private fun generateRandomNumber(): List<Int> =
