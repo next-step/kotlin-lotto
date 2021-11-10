@@ -2,6 +2,8 @@ package lotto.domain
 
 data class LottoNumber(private val number: Int) {
 
+    fun toInt() = number
+
     companion object {
         private const val NUMBER_START = 1
         private const val NUMBER_END = 45

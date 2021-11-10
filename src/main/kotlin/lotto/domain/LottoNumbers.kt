@@ -2,6 +2,8 @@ package lotto.domain
 
 class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
 
+    fun toIntList() = lottoNumbers.map { it.toInt() }
+
     fun getMatchingCount(otherLottoNumbers: LottoNumbers): Int =
         lottoNumbers.intersect(otherLottoNumbers.lottoNumbers).count()
 

@@ -1,8 +1,9 @@
 package lotto.domain
 
-data class Lotto(private val lottoNumbers: LottoNumbers) {
+class Lotto(private val lottoNumbers: LottoNumbers) {
 
     fun getLottoNumbers(): LottoNumbers = lottoNumbers
+    fun convertLottoNumberToInt(): List<Int> = lottoNumbers.toIntList()
 
     companion object {
         const val PRICE = 1000
