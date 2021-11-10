@@ -13,5 +13,11 @@ data class LottoNumber(private val number: Int) {
         fun from(value: Int): LottoNumber {
             return NUMBERS[value] ?: throw IllegalArgumentException("범위에 벗어난 숫자입니다.")
         }
+
+        fun ofBonusNumber(value: Int, winningNumber: LottoNumbers): LottoNumber {
+            val bonusNumber = NUMBERS[value] ?: throw IllegalArgumentException("범위에 벗어난 숫자입니다.")
+            require(winningNumber.checkOverlapToBonusNumber(bonusNumber)) { "당첨 번호와 겹치는 숫자가 있습니다." }
+            return bonusNumber
+        }
     }
 }

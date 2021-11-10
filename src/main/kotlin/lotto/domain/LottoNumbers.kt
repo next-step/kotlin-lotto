@@ -9,6 +9,8 @@ class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
 
     fun isBonusNumber(bonusNumber: LottoNumber) = bonusNumber in lottoNumbers
 
+    fun checkOverlapToBonusNumber(bonusNumber: LottoNumber): Boolean = !lottoNumbers.contains(bonusNumber)
+
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6
 

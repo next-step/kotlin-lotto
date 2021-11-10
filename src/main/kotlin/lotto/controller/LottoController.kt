@@ -19,7 +19,7 @@ class LottoController(private val inputView: InputView, private val resultView: 
         }
         resultView.viewPurchaseLotto(lottoStore)
         val winningNumber = LottoNumbers.generateLottoNumbers(inputView.inputWinningNumber())
-        val bonusNumber = LottoNumber.from(inputView.inputBonusNumber())
+        val bonusNumber = LottoNumber.ofBonusNumber(inputView.inputBonusNumber(), winningNumber)
         val lottoResults = LottoResults.matchingWinningNumber(winningNumber, bonusNumber, lottoStore.getAllLottos())
         resultView.viewLottoResults(lottoResults, TotalRate.calculatingOf(lottoResults).getBenefit())
     }

@@ -23,7 +23,7 @@ class LottoResultsTest {
                 )
             ),
             winningLottoNumbers = winningNumber,
-            bonusLottoNumber = LottoNumber.from(7)
+            bonusLottoNumber = LottoNumber.ofBonusNumber(7, winningNumber)
 
         )
 
@@ -50,7 +50,7 @@ class LottoResultsTest {
                 )
             ),
             winningLottoNumbers = winningNumber,
-            bonusLottoNumber = LottoNumber.from(6)
+            bonusLottoNumber = LottoNumber.ofBonusNumber(7, winningNumber)
         )
 
         // when
