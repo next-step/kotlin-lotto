@@ -9,12 +9,11 @@ class LottoGame(val numbers: List<LottoNumber>) {
 
     companion object {
         private val numberPool = List(45) { v -> v + 1 }
-        private const val delimiter = ","
 
         fun createWithAutoSelect() = LottoGame(makeRandomNumbers())
 
-        fun createWithNumberListString(stringList: String) =
-            LottoGame(stringList.split(delimiter).map { LottoNumber(it) })
+        fun createWithNumberListString(stringList: List<String>) =
+            LottoGame(stringList.map { LottoNumber(it) })
 
         private fun makeRandomNumbers() =
             numberPool

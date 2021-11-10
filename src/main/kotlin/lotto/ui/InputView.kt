@@ -24,14 +24,15 @@ object InputView {
         require(isUnsignedInt(numberOfManualSelectGame)) { NUMBER_OF_MANUAL_SELECT_GAME_MUST_UNSIGNED_INT }
         return numberOfManualSelectGame.toInt()
     }
+
     fun readInputNumbersForManualSelectGame(): LottoGame {
-        val numbersForManualSelectGame = readLine()
+        val numbersForManualSelectGame = readLine()?.replace(" ", "")
         requireNotNull(numbersForManualSelectGame) { INPUT_MUST_NOT_NULL }
-        return LottoGame.createWithNumberListString(numbersForManualSelectGame)
+        return LottoGame.createWithNumberListString(numbersForManualSelectGame.split(delimiter))
     }
 
     fun readInputForLastWeekNumbers(): List<LottoNumber> {
-        val numbersInput = readLine()
+        val numbersInput = readLine()?.replace(" ", "")
         requireNotNull(numbersInput) { INPUT_MUST_NOT_NULL }
         val numbersInString = numbersInput.split(delimiter)
         return numbersInString.map { LottoNumber(it) }
