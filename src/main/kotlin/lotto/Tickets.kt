@@ -9,7 +9,7 @@ value class Tickets(private val tickets: List<Ticket>) {
     companion object {
         fun from(money: Money): Tickets {
             val count = money.value / TICKET_PRICE
-            return Tickets((1..count).map { Ticket() })
+            return Tickets((1..count).map { Ticket.random() })
         }
     }
 }
