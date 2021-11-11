@@ -5,7 +5,7 @@ private const val MINIMUM_PRICE = 1000
 @JvmInline
 value class Money private constructor(val value: Int) {
     init {
-        require(value > MINIMUM_PRICE) { "지불 금액은 최소 금액(1000원) 이상이어야 합니다." }
+        require(value > MINIMUM_PRICE) { "지불 금액은 최소 금액(${MINIMUM_PRICE}원) 이상이어야 합니다." }
     }
 
     companion object {
