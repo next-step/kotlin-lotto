@@ -4,7 +4,6 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.Money
 
-
 data class ManualLottoOutput(val lottos: List<Lotto>, val balance: Money)
 
 class ManualLottoInputView(private val paidMoney: Money) {
