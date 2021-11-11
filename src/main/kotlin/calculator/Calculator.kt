@@ -2,6 +2,7 @@ package calculator
 
 class Calculator {
     fun add(value: String?): Int {
-        TODO()
+        if (value.isNullOrBlank()) return 0
+        return 0
     }
 }
