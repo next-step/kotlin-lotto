@@ -9,7 +9,7 @@ class LottoResultTest {
     fun `로또 용지와 지난 당첨 번호를 이용해 당첨 결과를 산정 할 수 있다`() {
         val lastWeekNumber = LastWeekNumber(lottoNumberListOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = BonusNumber(7, lastWeekNumber)
-        val lottoGameList = mutableListOf<LottoGame>()
+        val lottoGameList = LottoGameList()
         val expectedWinningForEach = 1
         lottoGameList.apply {
             add(LottoGame(lottoNumberListOf(1, 2, 3, 4, 5, 6)))
@@ -29,7 +29,7 @@ class LottoResultTest {
     fun `로또 용지로 부터 당첨금을 받을 수 있는 게임만 확인 할 수 있다`() {
         val lastWeekNumber = LastWeekNumber(lottoNumberListOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = BonusNumber(7, lastWeekNumber)
-        val lottoGameList = mutableListOf<LottoGame>()
+        val lottoGameList = LottoGameList()
         lottoGameList.apply {
             add(LottoGame(lottoNumberListOf(1, 2, 3, 4, 5, 6)))
             add(LottoGame(lottoNumberListOf(1, 2, 3, 4, 5, 7)))
