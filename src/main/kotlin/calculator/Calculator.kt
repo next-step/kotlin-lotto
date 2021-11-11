@@ -3,7 +3,6 @@ package calculator
 class Calculator {
     fun add(value: String?): Int {
         if (value.isNullOrBlank()) return 0
-        if (value.toIntOrNull() != null && value.toInt() > 0) return value.toInt()
         val matchResult = CUSTOM_DELIMITER_REGEX.find(value)
         if (matchResult != null) {
             return calculateWithCustomDelimiter(matchResult)
