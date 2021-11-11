@@ -12,7 +12,7 @@ class LottoPrize(
     private val _prizeResult: MutableMap<Int, Int> = (3..6)
         .associateWith { 0 } as MutableMap<Int, Int>
 
-    val prizeResult: Map<Int, Int> = _prizeResult
+    val prizeResult: Map<Int, Int> get() = _prizeResult
 
     init {
         userLottoList
