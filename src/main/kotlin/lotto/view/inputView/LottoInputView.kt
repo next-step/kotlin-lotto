@@ -4,15 +4,15 @@ import lotto.domain.LottoNumber
 import lotto.domain.Money
 import lotto.domain.WinningLotto
 
-class LottoInputView : InputView {
-    override fun receiveMoney(): Money {
+class LottoInputView {
+    fun receiveMoney(): Money {
         println(RECEIVE_MONEY_MSG)
         val input = readLine()
         require(!input.isNullOrBlank()) { EMPTY_STRING_ERROR_MSG }
         return Money(input.toInt())
     }
 
-    override fun receiveWinningLotto(): WinningLotto {
+    fun receiveWinningLotto(): WinningLotto {
         val winningNumbers = receiveWinningNumbers()
         val bonusNumber = receiveBonusNumber()
         return WinningLotto(winningNumbers, bonusNumber)
