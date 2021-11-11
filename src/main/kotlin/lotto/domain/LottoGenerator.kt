@@ -1,9 +1,9 @@
 package lotto.domain
 
-class LottoGenerator(val lottoPrice: Money) {
+class LottoGenerator {
 
     fun generate(paidPrice: Money): List<Lotto> {
-        val numberOfLottoToGenerate = getNumberOfLottoToGenerate(lottoPrice, paidPrice)
+        val numberOfLottoToGenerate = getNumberOfLottoToGenerate(Lotto.UNIT_PRICE, paidPrice)
         return (1..numberOfLottoToGenerate).map { createLotto() }
     }
 
