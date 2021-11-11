@@ -3,7 +3,9 @@ package lotto.domain.lotto
 import lotto.domain.lotto.error.LottoExceptionMessage
 import lotto.filter.LottoFilter
 
-class WinningLotto(lottoNumber: String) {
+class WinningLotto(
+    lottoNumber: String
+) {
 
     private val _winningLottoNumber: List<Int>
     val winningLottoNumber get() = _winningLottoNumber
@@ -21,5 +23,4 @@ class WinningLotto(lottoNumber: String) {
     fun containsLottoNumber(lottoNumber: Int): Boolean {
         return _winningLottoNumber.contains(lottoNumber)
     }
-
 }

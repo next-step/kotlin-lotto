@@ -1,6 +1,9 @@
 package lotto.domain.enums
 
-enum class PrizeType(val match: Int, val money: Int) {
+enum class PrizeType(
+    val match: Int,
+    val money: Int
+) {
 
     THREE(3, 5_000),
     FOUR(4, 50_000),
@@ -14,7 +17,7 @@ enum class PrizeType(val match: Int, val money: Int) {
                 ?.money ?: 0
         }
 
-        fun findMatchCount(match: Int): Int {
+        fun containsMatch(match: Int): Int {
             return values()
                 .find { it.match == match }
                 ?.match ?: 0
