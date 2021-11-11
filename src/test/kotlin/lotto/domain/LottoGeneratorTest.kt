@@ -15,12 +15,4 @@ class LottoGeneratorTest {
         val lottos = LottoGenerator().generate(paidPrice = Money(paidPrice))
         assertThat(lottos).hasSize(expectedCount)
     }
-
-    @Test
-    fun `모자란 구입 금액을 입력하면 에러를 일으킨다`() {
-        assertThrows<IllegalArgumentException> {
-            LottoGenerator()
-                .generate(paidPrice = Money(900))
-        }
-    }
 }
