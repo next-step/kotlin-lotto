@@ -10,19 +10,18 @@ class TicketTest {
         assertAll(
             {
                 assertThatExceptionOfType(IllegalArgumentException::class.java)
-                    .isThrownBy { Ticket.of(listOf(1, 2, 3, 4, 5)) }
+                    .isThrownBy { Ticket.of(1, 2, 3, 4, 5) }
             },
             {
                 assertThatExceptionOfType(IllegalArgumentException::class.java)
-                    .isThrownBy { Ticket.of(emptyList()) }
+                    .isThrownBy { Ticket.of() }
             },
-
-            )
+        )
     }
 
     @Test
     fun `로또 티켓에 중복된 번호가 있으면 예외를 발생한다`() {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { Ticket.of(listOf(1, 1, 1, 1, 1, 1)) }
+            .isThrownBy { Ticket.of(1, 1, 1, 1, 1, 1) }
     }
 }
