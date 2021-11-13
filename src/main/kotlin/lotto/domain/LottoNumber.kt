@@ -18,11 +18,18 @@ value class LottoNumber private constructor(
         val LOTTO_NUMBERS = (MIN_LOTTO_NUM..MAX_LOTTO_NUM).map { LottoNumber(it) }
 
         fun from(value: Int): LottoNumber {
+            if (value !in MIN_LOTTO_NUM..MAX_LOTTO_NUM) {
+                throw IllegalArgumentException(WRONG_LOTTO_NUM_MESSAGE)
+            }
             return LOTTO_NUMBERS[value - 1]
         }
 
         fun from(value: String): LottoNumber {
-            return LOTTO_NUMBERS[value.toIntOrNull()?.minus(1) ?: throw IllegalArgumentException(NUMBER_FORMAT_EXCEPTION_MESSAGE)]
+            val number = value.toIntOrNull() ?: throw IllegalArgumentException(NUMBER_FORMAT_EXCEPTION_MESSAGE)
+            if (number !in MIN_LOTTO_NUM..MAX_LOTTO_NUM) {
+                throw IllegalArgumentException(WRONG_LOTTO_NUM_MESSAGE)
+            }
+            return LOTTO_NUMBERS[number - 1]
         }
     }
 }
