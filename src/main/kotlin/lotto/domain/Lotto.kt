@@ -28,6 +28,15 @@ value class Lotto private constructor(
         private val lottoSizeNotMatchedMessage: (numberSize: Int) -> String =
             { "로또 숫자의 갯수는 ${SIZE}여야 합니다. 현재 갯수 == $it" }
 
+        fun getPurchasedLottoCount(money: Money): Int {
+            require(money >= PRICE) { NOT_ENOUGH_MONEY_MESSAGE }
+            return money / PRICE
+        }
+
+        fun getMoneyByLottoCount(count: Int): Money {
+            return Money.from(PRICE.money * count)
+        }
+
         fun from(lottoNumbers: List<LottoNumber>): Lotto {
             return Lotto(lottoNumbers.toSet())
         }
@@ -39,11 +48,6 @@ value class Lotto private constructor(
                 )
             }
             return from(numbers.map { LottoNumber.from(it) })
-        }
-
-        fun getPurchasedLottoCount(money: Money): Int {
-            require(money >= PRICE) { NOT_ENOUGH_MONEY_MESSAGE }
-            return money / PRICE
         }
     }
 }
