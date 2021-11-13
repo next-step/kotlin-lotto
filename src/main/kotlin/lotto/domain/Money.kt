@@ -9,6 +9,8 @@ value class Money private constructor(
 
     operator fun compareTo(other: Money) = money.compareTo(other.money)
 
+    operator fun minus(other: Money) = money.minus(other.money)
+
     companion object {
         const val NUMBER_FORMAT_EXCEPTION_MESSAGE = "금액은 숫자만 입력할 수 있습니다"
 
