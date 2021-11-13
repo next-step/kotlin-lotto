@@ -14,11 +14,11 @@ value class Lottos private constructor(
 
     companion object {
 
-        fun of(lottos: List<Lotto>): Lottos {
+        fun from(lottos: List<Lotto>): Lottos {
             return Lottos(lottos)
         }
 
-        fun of(lottoGenerator: LottoGenerator): Lottos {
+        fun from(lottoGenerator: LottoGenerator): Lottos {
             return Lottos(lottoGenerator.generateLotto())
         }
     }

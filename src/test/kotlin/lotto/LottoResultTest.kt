@@ -15,7 +15,7 @@ class LottoResultTest {
         val result = listOf(Rank.FIRST to 3, Rank.SECOND to 2).toMap() // 900만원
         val lottoResult = LottoResult(result)
 
-        val money = Money.of("10000000") // 1000만원
+        val money = Money.from("10000000") // 1000만원
 
         assertThat(lottoResult.getProfit(money)).isEqualTo(0.9f)
     }

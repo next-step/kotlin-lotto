@@ -7,6 +7,6 @@ class LottoGeneratorImpl(
 
     override fun generateLotto(): List<Lotto> {
         val purchasedLottoCount = Lotto.getPurchasedLottoCount(money)
-        return (0 until purchasedLottoCount).map { Lotto.of(lottoNumberGenerator.generateLottoNumber()) }
+        return (0 until purchasedLottoCount).map { Lotto.from(lottoNumberGenerator.generateLottoNumber()) }
     }
 }

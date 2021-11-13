@@ -2,8 +2,8 @@ package lotto.domain
 
 class BonusBall private constructor(val lottoNumber: LottoNumber) {
 
-    constructor(bonusNumber: String, winningLotto: Lotto) : this(LottoNumber.of(bonusNumber)) {
-        require(!winningLotto.contains(LottoNumber.of(bonusNumber))) {
+    constructor(bonusNumber: String, winningLotto: Lotto) : this(LottoNumber.from(bonusNumber)) {
+        require(!winningLotto.contains(LottoNumber.from(bonusNumber))) {
             WINNING_LOTTO_CONTAIN_BONUS_NUMBER_EXCEPTION
         }
     }

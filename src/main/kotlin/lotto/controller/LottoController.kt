@@ -12,11 +12,11 @@ import lotto.view.OutputView
 object LottoController {
 
     fun start() {
-        val money = Money.of(InputView.getMoney())
+        val money = Money.from(InputView.getMoney())
         val lottoGenerator: LottoGenerator = LottoGeneratorImpl(money)
-        val lottos = Lottos.of(lottoGenerator)
+        val lottos = Lottos.from(lottoGenerator)
         OutputView.showLottos(lottos)
-        val winningLotto = Lotto.of(InputView.inputWinningNumbers())
+        val winningLotto = Lotto.from(InputView.inputWinningNumbers())
         val bonusBall = BonusBall(InputView.inputBonusBall(), winningLotto)
         val lottoResult = lottos.match(winningLotto, bonusBall)
         OutputView.printOverview(lottoResult)
