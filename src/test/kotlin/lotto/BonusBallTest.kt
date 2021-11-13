@@ -16,7 +16,7 @@ class BonusBallTest {
         val winningLotto = Lotto.from(winningLottoNumbers)
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
-            BonusBall("3", winningLotto)
+            BonusBall.of("3", winningLotto)
         }.withMessage(BonusBall.WINNING_LOTTO_CONTAIN_BONUS_NUMBER_EXCEPTION)
     }
 }
