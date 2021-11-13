@@ -13,7 +13,7 @@ class LottoResultTest {
     @Test
     fun `LottoResult를 통해 수익률을 계산할 수 있다`() {
         val result = listOf(Rank.FIRST to 3, Rank.SECOND to 2).toMap() // 900만원
-        val lottoResult = LottoResult(result)
+        val lottoResult = LottoResult.of(result)
 
         val money = Money.from("10000000") // 1000만원
 

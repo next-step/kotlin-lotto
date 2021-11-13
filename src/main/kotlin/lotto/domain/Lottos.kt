@@ -18,8 +18,8 @@ value class Lottos private constructor(
             return Lottos(lottos)
         }
 
-        fun from(lottoGenerator: LottoGenerator): Lottos {
-            return Lottos(lottoGenerator.generateLotto())
+        fun of(lottoGenerator: LottoGenerator, money: Money): Lottos {
+            return Lottos(lottoGenerator.generateLotto(money))
         }
     }
 }

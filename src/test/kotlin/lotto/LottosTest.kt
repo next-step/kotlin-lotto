@@ -41,9 +41,9 @@ class LottosTest {
     @CsvSource("10000, 10", "9000, 9", "8350, 8", "99999, 99")
     fun `money와 LottoNumberGenerator를 통해 lottos를 생성할 수 있다`(value: Int, expected: Int) {
         val money = Money.from(value)
-        val lottoGenerator = LottoGeneratorImpl(money)
+        val lottoGenerator = LottoGeneratorImpl()
 
-        val lottos = Lottos.from(lottoGenerator)
+        val lottos = Lottos.from(lottoGenerator.generateLotto(money))
 
         assertThat(lottos.lottos.size).isEqualTo(expected)
     }
