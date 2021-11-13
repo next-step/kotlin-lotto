@@ -13,8 +13,8 @@ value class Lottos private constructor(private val lottos: List<Lotto>) {
         lottos.map { MatchingWinningNumber.of(it, winningNumbers, bonusNumber) }
 
     companion object {
-        fun generateAutoLottos(money: Wallet): Lottos {
-            val values = MutableList(money.getLeftMoney() / Lotto.PRICE) { Lotto.generate() }
+        fun generateAutoLottos(lottoCount: Int): Lottos {
+            val values = MutableList(lottoCount) { Lotto.generate() }
             return Lottos(values)
         }
 

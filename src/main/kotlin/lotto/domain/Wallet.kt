@@ -1,9 +1,5 @@
 package lotto.domain
 
-class Wallet(private var money: Int) {
-    fun buyLotto(size: Int) {
-        money -= Lotto.PRICE * size
-    }
-
-    fun getLeftMoney(): Int = money
+class Wallet(private val money: Int) {
+    fun getAbleToBuyAutoLottoCounts(manualLottoCounts: Int = 0): Int = (money / Lotto.PRICE) - manualLottoCounts
 }

@@ -1,31 +1,18 @@
 package lotto.domain
 
-class LottoStore private constructor(private val wallet: Wallet) {
+class LottoStore {
 
-    private var manualLottos: Lottos = Lottos.from(emptyList())
-    private var autoLottos: Lottos = Lottos.from(emptyList())
-
-    fun purchaseLotto(manualLottoNumberTexts: List<String> = emptyList()) {
-        purchaseManualLottos(manualLottoNumberTexts)
-        purchaseAutoLottos()
+    fun sellLotto(purchaseAutoLottoNumbers: Int = 0, manualLottoNumberTexts: ManualLottoNumbers): Lottos {
+        val manualLottos = sellManualLottos(manualLottoNumberTexts)
+        val autoLottos = sellAutoLottos(purchaseAutoLottoNumbers)
+        return manualLottos + autoLottos
     }
 
-    private fun purchaseManualLottos(manualLottoNumberTexts: List<String>) {
-        val manualLottoNumbers = ManualLottoNumbers.generateManualLottoNumbers(manualLottoNumberTexts)
-        manualLottos = Lottos.generateManualLottos(manualLottoNumbers)
-        wallet.buyLotto(manualLottos.getSize())
+    private fun sellManualLottos(manualLottoNumbers: ManualLottoNumbers): Lottos {
+        return Lottos.generateManualLottos(manualLottoNumbers)
     }
 
-    private fun purchaseAutoLottos() {
-        autoLottos = Lottos.generateAutoLottos(wallet)
-        wallet.buyLotto(autoLottos.getSize())
-    }
-
-    fun getAllLottos(): Lottos = manualLottos + autoLottos
-    fun getManualLottoSize(): Int = manualLottos.getSize()
-    fun getAutoLottoSize(): Int = autoLottos.getSize()
-
-    companion object {
-        fun enter(wallet: Wallet): LottoStore = LottoStore(wallet)
+    private fun sellAutoLottos(purchaseAutoLottoNumbers: Int): Lottos {
+        return Lottos.generateAutoLottos(purchaseAutoLottoNumbers)
     }
 }
