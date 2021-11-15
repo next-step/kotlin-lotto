@@ -11,20 +11,22 @@ import lotto.view.printResult
 
 fun start() {
     val money = getMoney()
-    val count = getLottoCount(money)
-    val lottoTickets = getLottoTickets(count)
+    val lottoCount = getLottoCount(money)
+    val lottoTickets = getLottoTickets(lottoCount)
     val winningNumbers = getWinningNumbers()
     val result = lottoTickets.matchWith(winningNumbers)
     printResult(result)
     printProfit(result.calculateProfit(money))
 }
 
-fun getMoney(): Money = Money.make(getPurchaseAmount())
+fun getMoney(): Money = Money.makeForBuyingLotto(getPurchaseAmount())
 
-fun getLottoCount(money: Money): Int = money.convertToLottoTicketCount().apply {
-    printHowManyPurchase(this)
+fun getLottoCount(money: Money): Int = money.let {
+    val lottoCount = it.convertToLottoTicketCount()
+    printHowManyPurchase(lottoCount)
+    lottoCount
 }
 
-fun getLottoTickets(count: Int): LottoTickets = LottoTickets(count).apply {
+fun getLottoTickets(count: Int): LottoTickets = LottoTickets.make(count).apply {
     printLottoTickets(this)
 }

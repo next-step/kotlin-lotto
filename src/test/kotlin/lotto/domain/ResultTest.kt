@@ -11,7 +11,7 @@ class ResultTest {
 
     @Test
     fun `이익 계산`() {
-        assertThat(Result(listOf(3)).calculateProfit(Money.make(5000))).isEqualTo(1.00)
-        assertThat(Result(listOf(4)).calculateProfit(Money.make(5000))).isEqualTo(10.0)
+        assertThat(Result(listOf(3)).calculateProfit(Money.makeForBuyingLotto(5000))).isEqualTo(1.00)
+        assertThat(Result(listOf(4)).calculateProfit(Money.makeForBuyingLotto(5000))).isEqualTo(10.0)
     }
 }
