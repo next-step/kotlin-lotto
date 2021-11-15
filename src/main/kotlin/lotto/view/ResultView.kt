@@ -1,16 +1,16 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoPrize
 import lotto.domain.LottoResults
+import lotto.domain.Lottos
 import java.math.BigDecimal
 
 class ResultView {
 
-    fun viewPurchaseLotto(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach {
-            println(it.getLottoNumbers())
+    fun viewPurchaseLotto(lottos: Lottos, autoLottoNumberSize: Int, manualLottoSize: Int) {
+        println("수동으로 $manualLottoSize 장, 자동으로 $autoLottoNumberSize 개를 구매했습니다.")
+        lottos.toList().forEach {
+            println(it.convertLottoNumberToInt())
         }
     }
 

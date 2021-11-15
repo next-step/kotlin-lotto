@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
+import lotto.domain.Wallet
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,10 +11,11 @@ class LottoTest {
     @Test
     fun `로또는 개당 1000원이다`() {
         // given
-        val lottos = Lottos.buy(1000)
+        val wallet = Wallet(1000)
+        val lottos = Lottos.generateAutoLottos(wallet.getAbleToBuyAutoLottoCounts())
 
         // when
-        val purchaseLottos = lottos.getLottos()
+        val purchaseLottos = lottos.toList()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(1)
@@ -22,10 +24,14 @@ class LottoTest {
     @Test
     fun `로또는 6개 숫자로 이루어져 있다`() {
         // given
-        val lotto = Lotto(LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        val lottoNumbers = LottoNumbers.generateLottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto(lottoNumbers)
+
+        // when
+        val matchingCount = lotto.getLottoNumbers().getMatchingCount(lottoNumbers)
 
         // then
-        assertThat(lotto.getLottoNumbers().size).isEqualTo(6)
+        assertThat(matchingCount).isEqualTo(6)
     }
 
     @Test
@@ -49,12 +55,13 @@ class LottoTest {
     }
 
     @Test
-    fun `로또는 여러개 살 수 있다`() {
+    fun `14000원으로 로또 14장을 살 수 있다`() {
         // given
-        val lottos = Lottos.buy(14000)
+        val wallet = Wallet(14000)
+        val lottos = Lottos.generateAutoLottos(wallet.getAbleToBuyAutoLottoCounts())
 
         // when
-        val purchaseLottos = lottos.getLottos()
+        val purchaseLottos = lottos.toList()
 
         // then
         assertThat(purchaseLottos.size).isEqualTo(14)

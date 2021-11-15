@@ -2,12 +2,27 @@ package lotto.domain
 
 @JvmInline
 value class Lottos private constructor(private val lottos: List<Lotto>) {
-    fun getLottos(): List<Lotto> = lottos.toList()
+
+    operator fun plus(other: Lottos): Lottos = Lottos(lottos + other.lottos)
+
+    fun toList(): List<Lotto> = lottos.toList()
+
+    fun getSize(): Int = lottos.size
+
+    fun toMatchingWinningNumbers(winningNumbers: LottoNumbers, bonusNumber: LottoNumber): List<MatchingWinningNumber> =
+        lottos.map { MatchingWinningNumber.of(it, winningNumbers, bonusNumber) }
 
     companion object {
-        fun buy(money: Int): Lottos {
-            val values = MutableList(money / Lotto.PRICE) { Lotto.generate() }
+        fun generateAutoLottos(lottoCount: Int): Lottos {
+            val values = MutableList(lottoCount) { Lotto.generate() }
             return Lottos(values)
         }
+
+        fun generateManualLottos(manualLottoNumbers: ManualLottoNumbers): Lottos {
+            val values = manualLottoNumbers.generate()
+            return Lottos(values)
+        }
+
+        fun from(lottos: List<Lotto>): Lottos = Lottos(lottos)
     }
 }
