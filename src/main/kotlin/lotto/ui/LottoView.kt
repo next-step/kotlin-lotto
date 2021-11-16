@@ -4,6 +4,8 @@ import lotto.domain.Lotteries
 import lotto.domain.Lottery
 import lotto.domain.LotteryStatistics
 import lotto.domain.LotteryYield
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.Ranking
 import java.lang.StringBuilder
 
@@ -14,7 +16,7 @@ object LottoView {
 
     fun input(): Int = readLine()?.toIntOrNull() ?: 0
 
-    fun inputWinningNumbers(): List<Int> = readLine()?.split(DELIMITER)?.map { it.trim().toInt() } ?: listOf()
+    fun inputNumbers(): List<Int> = readLine()?.split(DELIMITER)?.map { it.trim().toInt() } ?: listOf()
 
     fun inputPrompt() {
         println("구매금액을 입력해 주세요.")
@@ -22,6 +24,24 @@ object LottoView {
 
     fun inputBonusBallPrompt() {
         println("보너스 볼을 입력해 주세요.")
+    }
+
+    fun inputManualCountPrompt(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return input()
+    }
+
+    fun inputSelectedLottoNumbersPrompt(counts: Int): List<LottoNumbers> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        return (1..counts)
+            .map { inputManualLottoNumbers() }
+            .map { LottoNumbers.of(it) }
+    }
+
+    private fun inputManualLottoNumbers(): List<LottoNumber> {
+        return inputNumbers()
+            .map { LottoNumber.of(it) }
     }
 
     fun displayLotteries(lotteries: Lotteries) {
