@@ -38,8 +38,8 @@ class LottoMachine(private val generator: LottoNumberGenerator = LottoNumberAuto
         return LotteryYield.of(paid, reward)
     }
 
-    fun calculatePaid(counts: Int): Money {
-        return Money.from(LOTTERY_PRICE.value.multiply(counts.toBigDecimal()))
+    fun calculatePaid(order: Order): Money {
+        return Money.from(LOTTERY_PRICE.value.multiply(order.total().toBigDecimal()))
     }
 
     companion object {
