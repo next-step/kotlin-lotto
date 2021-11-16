@@ -11,7 +11,7 @@ class WinningLotteryTest {
     fun `보너스 볼은 당첨번호에 포함될 수 없다`(value: Int) {
         // given
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val bonusBall = BonusBall.of(value)
+        val bonusBall = LottoNumber.of(value)
 
         // then
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
