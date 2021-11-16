@@ -12,6 +12,11 @@ fun getWinningNumbers(): List<Int> {
     return getNumbers(readLine())
 }
 
+fun getBonusNumber(): Int {
+    println("보너스 볼을 입력해 주세요.")
+    return getNumber(readLine())
+}
+
 fun getNumbers(input: String?): List<Int> {
     validateNullOrBlank(input)
     return input!!.split(DELIMITER)

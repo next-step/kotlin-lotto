@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoTickets
+import lotto.domain.Rank
 import lotto.domain.Result
 
 fun printLottoTickets(lottoTickets: LottoTickets) {
@@ -9,12 +10,16 @@ fun printLottoTickets(lottoTickets: LottoTickets) {
 }
 
 fun printHowManyPurchase(count: Int) {
-    println("${count}를 구매했습니다.")
+    println("${count}개를 구매했습니다.")
 }
 
 fun printResult(result: Result) {
-    (3..6).forEach {
-        println("${it}개 일치 (${Result.prizeMoney[it]}원) - ${result.values[it]}개")
+    Rank.values().sliceArray(0..4).forEach {
+        if (it.matchBonus) {
+            println("${it.countOfMatch}개 일치, 보너스 볼 일치(${it.winningMoney}원) - ${result.values[it]}개")
+        } else {
+            println("${it.countOfMatch}개 일치 (${it.winningMoney}원) - ${result.values[it]}개")
+        }
     }
 }
 

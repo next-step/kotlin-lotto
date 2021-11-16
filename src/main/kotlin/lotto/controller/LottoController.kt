@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.LottoTickets
 import lotto.domain.Money
+import lotto.view.getBonusNumber
 import lotto.view.getPurchaseAmount
 import lotto.view.getWinningNumbers
 import lotto.view.printHowManyPurchase
@@ -14,7 +15,8 @@ fun start() {
     val lottoCount = getLottoCount(money)
     val lottoTickets = getLottoTickets(lottoCount)
     val winningNumbers = getWinningNumbers()
-    val result = lottoTickets.matchWith(winningNumbers)
+    val bonusNumber = getBonusNumber()
+    val result = lottoTickets.matchWith(winningNumbers, bonusNumber)
     printResult(result)
     printProfit(result.calculateProfit(money))
 }
