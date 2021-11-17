@@ -2,8 +2,8 @@ package lotto.domain
 
 data class LottoTickets private constructor(val tickets: List<LottoTicket>) {
 
-    fun matchWith(winningNumbers: List<Int>, bonusNumber: Int): Result {
-        return Result(tickets.map { it.countWith(winningNumbers, bonusNumber) })
+    fun matchWith(winningNumbers: WinningNumbers): Result {
+        return Result(tickets.map { it.countWith(winningNumbers) })
     }
 
     companion object {

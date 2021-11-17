@@ -1,19 +1,19 @@
 package lotto.domain
 
 class Result(matchHistories: List<MatchingCount>) {
-    val values: Map<Rank, Int>
+    val values: Map<Rank, Int> = matchHistories.groupingBy { Rank.valueOf(it) }
+        .eachCount()
+        .toMutableMap()
+        .also(this::setZeroIfNotExist)
 
-    init {
-        this.values = matchHistories.fold(mutableMapOf()) { map, matchingCount ->
-            map[Rank.valueOf(matchingCount)] = map.getOrDefault(Rank.valueOf(matchingCount), 0) + 1
-            map
-        }
-
-        Rank.values().forEach { rank ->
-            values[rank] = values[rank]?.let { values[rank] } ?: 0
-        }
+    private fun setZeroIfNotExist(map: MutableMap<Rank, Int>) {
+        Rank.values().forEach { rank -> map[rank] = map[rank] ?: ZERO }
     }
 
-    fun calculateProfit(money: Money): Double = values.map { it.key.winningMoney * it.value }
+    fun calculateProfit(money: Money): Double = values.map { (rank, matchCount) -> rank.winningMoney * matchCount }
         .reduce { acc, i -> acc + i } / money.value.toDouble()
+
+    companion object {
+        private const val ZERO = 0
+    }
 }
