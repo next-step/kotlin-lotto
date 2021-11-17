@@ -45,5 +45,6 @@ object Play {
         return lottoResult.totalPrizeMoney()
     }
 
-    private fun lottoResult(totalPrizeMoney: Int, userLottoBuyMoney: Int) = ResultView.statistics(totalPrizeMoney, userLottoBuyMoney)
+    private fun lottoResult(totalPrizeMoney: Int, userLottoBuyMoney: Int) =
+        ResultView.statistics(totalPrizeMoney, userLottoBuyMoney)
 }
