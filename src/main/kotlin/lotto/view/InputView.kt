@@ -1,5 +1,7 @@
 package lotto.view
 
+private const val DELIMITER = ", "
+
 fun getPurchaseAmount(): Int {
     println("구입금액을 입력해 주세요.")
     return getNumber(readLine())
@@ -10,9 +12,14 @@ fun getWinningNumbers(): List<Int> {
     return getNumbers(readLine())
 }
 
+fun getBonusNumber(): Int {
+    println("보너스 볼을 입력해 주세요.")
+    return getNumber(readLine())
+}
+
 fun getNumbers(input: String?): List<Int> {
     validateNullOrBlank(input)
-    return input!!.split(", ")
+    return input!!.split(DELIMITER)
         .map { it.toInt() }
 }
 
