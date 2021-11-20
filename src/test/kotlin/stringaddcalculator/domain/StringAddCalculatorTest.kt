@@ -1,4 +1,4 @@
-package domain
+package stringaddcalculator.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
