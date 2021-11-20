@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Order(private val manual: Int, val auto: Int, val selected: List<LottoNumbers> = listOf()) {
+data class Order(private val manual: Int, val auto: Int, val selected: List<LottoNumbers> = listOf()) {
 
     fun total(): Int {
         return manual + auto
