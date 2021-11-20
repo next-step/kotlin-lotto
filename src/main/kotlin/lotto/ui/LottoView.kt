@@ -36,12 +36,13 @@ object LottoView {
 
         return (1..counts)
             .map { inputManualLottoNumbers() }
-            .map { LottoNumbers.of(it) }
+            .run { toList() }
     }
 
-    private fun inputManualLottoNumbers(): List<LottoNumber> {
+    private fun inputManualLottoNumbers(): LottoNumbers {
         return inputNumbers()
             .map { LottoNumber.of(it) }
+            .run { LottoNumbers.of(this) }
     }
 
     fun displayLotteries(lotteries: Lotteries) {
