@@ -59,6 +59,6 @@ class LottoTest {
         val numberList = (1..6).map { LottoNumber.from(it) }
         val lotto = Lotto.from(numberList)
 
-        assertThat(lotto.contains(LottoNumber.from(value))).isEqualTo(expected)
+        assertThat(LottoNumber.from(value) in lotto).isEqualTo(expected)
     }
 }

@@ -6,7 +6,7 @@ value class Lottos private constructor(
 ) {
 
     fun match(lotto: Lotto, bonusBall: BonusBall): LottoResult {
-        val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it), it.contains(bonusBall.lottoNumber)) }
+        val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it), bonusBall.lottoNumber in it) }
             .groupingBy { it }
             .eachCount()
         return LottoResult.of(rankCounts)
