@@ -1,9 +1,9 @@
 package lotto.domain
 
+import lotto.domain.strategy.DefaultLottoNumberAutoGenerator
 import lotto.domain.strategy.LottoNumberAutoGenerator
-import lotto.domain.strategy.LottoNumberGenerator
 
-class LottoMachine(private val generator: LottoNumberGenerator = LottoNumberAutoGenerator) {
+class LottoMachine(private val generator: LottoNumberAutoGenerator = DefaultLottoNumberAutoGenerator) {
 
     fun count(budget: Money): Int {
         return budget.count(LOTTERY_PRICE)

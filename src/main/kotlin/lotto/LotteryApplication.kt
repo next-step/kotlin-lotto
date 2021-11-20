@@ -6,12 +6,12 @@ import lotto.domain.LottoNumber
 import lotto.domain.Money
 import lotto.domain.Order
 import lotto.domain.WinningLottery
-import lotto.domain.strategy.LottoNumberAutoGenerator
+import lotto.domain.strategy.DefaultLottoNumberAutoGenerator
 import lotto.ui.LottoView
 
 fun main() = LotteryApplication(
     LottoView,
-    LottoMachine(LottoNumberAutoGenerator)
+    LottoMachine(DefaultLottoNumberAutoGenerator)
 ).run()
 
 class LotteryApplication(
