@@ -15,6 +15,7 @@ class LottoNumberFixture {
         val THIRTY_THREE = LottoNumber.of(33)
         val FORTY_FOUR = LottoNumber.of(44)
         val FORTY_FIVE = LottoNumber.of(45)
+        val BONUS_BALL = FORTY_FIVE
 
         val DUPLICATED_LOTTO_NUMBER_LIST = listOf(ONE, ONE, SEVEN, THIRTY, FIVE, TWENTY_THREE)
         val LOTTO_NUMBER_LIST_OF_SEVEN = listOf(ONE, SEVEN, TEN, THIRTY, FORTY_FIVE, FIVE, TWENTY_THREE)

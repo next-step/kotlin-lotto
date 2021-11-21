@@ -7,8 +7,8 @@ value class Lottery private constructor(val numbers: LottoNumbers) {
         return numbers.countMatchedNumbers(lottery.numbers)
     }
 
-    fun isContainBonusBall(bonusBall: BonusBall): Boolean {
-        return bonusBall.isIn(numbers)
+    fun isContainBall(number: LottoNumber): Boolean {
+        return numbers.isContainLottoNumber(number)
     }
 
     companion object {

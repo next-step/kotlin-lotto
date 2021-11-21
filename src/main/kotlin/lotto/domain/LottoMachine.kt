@@ -1,17 +1,29 @@
 package lotto.domain
 
-import lotto.domain.strategy.LottoGenerator
+import lotto.domain.strategy.DefaultLottoNumberAutoGenerator
+import lotto.domain.strategy.LottoNumberAutoGenerator
 
-class LottoMachine(private val generator: LottoGenerator) {
+class LottoMachine(private val generator: LottoNumberAutoGenerator = DefaultLottoNumberAutoGenerator) {
 
     fun count(budget: Money): Int {
         return budget.count(LOTTERY_PRICE)
     }
 
-    fun buy(counts: Int): Lotteries {
+    private fun manualTicketing(selected: List<LottoNumbers>): Lotteries {
+        return selected
+            .map { Lottery.of(it) }
+            .run { Lotteries.of(this) }
+    }
+
+    private fun automaticTicketing(counts: Int): Lotteries {
         return (1..counts)
             .map { generator.generate() }
+            .map { Lottery.of(it) }
             .run { Lotteries.of(this) }
+    }
+
+    fun buy(order: Order): Lotteries {
+        return manualTicketing(order.selected) + automaticTicketing(order.auto)
     }
 
     fun calculate(lotteries: Lotteries, winningLottery: WinningLottery): LotteryStatistics {
@@ -26,8 +38,8 @@ class LottoMachine(private val generator: LottoGenerator) {
         return LotteryYield.of(paid, reward)
     }
 
-    fun calculatePaid(counts: Int): Money {
-        return Money.from(LOTTERY_PRICE.value.multiply(counts.toBigDecimal()))
+    fun calculatePaid(order: Order): Money {
+        return Money.from(LOTTERY_PRICE.value.multiply(order.total().toBigDecimal()))
     }
 
     companion object {
