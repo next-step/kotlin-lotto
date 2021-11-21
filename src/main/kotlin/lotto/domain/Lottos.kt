@@ -6,7 +6,7 @@ value class Lottos private constructor(
 ) {
 
     fun match(lotto: Lotto, bonusBall: BonusBall): LottoResult {
-        val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it), it.hasLottoNumber(bonusBall.lottoNumber)) }
+        val rankCounts = lottos.map { Rank.rankByMatchCount(lotto.countMatchNumber(it), bonusBall.lottoNumber in it) }
             .groupingBy { it }
             .eachCount()
         return LottoResult.of(rankCounts)
@@ -14,12 +14,12 @@ value class Lottos private constructor(
 
     companion object {
 
-        fun of(lottos: List<Lotto>): Lottos {
+        fun from(lottos: List<Lotto>): Lottos {
             return Lottos(lottos)
         }
 
-        fun of(lottoGenerator: LottoGenerator): Lottos {
-            return Lottos(lottoGenerator.generateLotto())
+        fun of(lottoGenerator: LottoGenerator, money: Money): Lottos {
+            return Lottos(lottoGenerator.generateLotto(money))
         }
     }
 }

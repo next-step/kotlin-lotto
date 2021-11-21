@@ -2,5 +2,5 @@ package lotto.domain
 
 interface LottoGenerator {
 
-    fun generateLotto(): List<Lotto>
+    fun generateLotto(money: Money): List<Lotto>
 }

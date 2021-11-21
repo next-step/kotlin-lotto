@@ -14,11 +14,16 @@ object OutputView {
     private const val LOTTO_RESULT = "당첨 통계"
     private const val DASH = "---------"
 
-    fun showLottos(lottos: Lottos) {
+    fun showLottos(manualLottos: Lottos, autoLottos: Lottos) {
         val output = buildString {
-            append(lottos.lottos.count()).append("개를 구매했습니다.")
+            append("수동으로 ").append("${manualLottos.lottos.count()}장, ")
+            append("자동으로 ").append("${autoLottos.lottos.count()}개를 구매했습니다.")
             append(System.lineSeparator())
-            lottos.lottos.forEach {
+            manualLottos.lottos.forEach {
+                append(printLottoNumbers(it))
+                append(System.lineSeparator())
+            }
+            autoLottos.lottos.forEach {
                 append(printLottoNumbers(it))
                 append(System.lineSeparator())
             }
@@ -26,7 +31,7 @@ object OutputView {
         println(output)
     }
 
-    fun printLottoNumbers(lotto: Lotto): String {
+    private fun printLottoNumbers(lotto: Lotto): String {
         return lotto.sortedNumbers.joinToString(
             separator = COMMA,
             prefix = PREFIX,

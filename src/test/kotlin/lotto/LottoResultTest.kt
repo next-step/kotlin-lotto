@@ -12,11 +12,11 @@ class LottoResultTest {
     @DisplayName(value = "LottoResult를 통해 수익률을 계산할 수 있다.")
     @Test
     fun `LottoResult를 통해 수익률을 계산할 수 있다`() {
-        val result = listOf(Rank.FIRST to 3, Rank.SECOND to 2).toMap() // 900만원
-        val lottoResult = LottoResult(result)
+        val result = listOf(Rank.SECOND to 3, Rank.THIRD to 2).toMap() // 9300만원
+        val lottoResult = LottoResult.of(result)
 
-        val money = Money.of("10000000") // 1000만원
+        val money = Money.from("9300000") // 930만원
 
-        assertThat(lottoResult.getProfit(money)).isEqualTo(0.9f)
+        assertThat(lottoResult.getProfit(money)).isEqualTo(10.0f)
     }
 }
