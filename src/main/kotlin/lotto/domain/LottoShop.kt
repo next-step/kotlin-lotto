@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.domain.generator.LottoGenerator
+import lotto.domain.lotto.generator.LottoGenerator
 import lotto.domain.lotto.user.Lotto
 
 object LottoShop {
@@ -19,7 +19,7 @@ object LottoShop {
         val lottoList = mutableListOf<Lotto>()
 
         repeat(lottoCount) {
-            lottoList.add(Lotto(LottoGenerator.generatorLotto()))
+            lottoList.add(Lotto(LottoGenerator.generatorUserLotto()))
         }
 
         return lottoList.toList()

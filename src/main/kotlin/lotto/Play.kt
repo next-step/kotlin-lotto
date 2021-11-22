@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
+import lotto.domain.lotto.generator.LottoGenerator
 import lotto.domain.lotto.user.Lotto
 import lotto.domain.lotto.winning.WinningLotto
 import lotto.view.InputView
@@ -36,7 +37,7 @@ object Play {
         return userLottoList
     }
 
-    private fun winningLottoInput(): WinningLotto = WinningLotto(InputView.lastWeekLottoNumber())
+    private fun winningLottoInput(): WinningLotto = WinningLotto(LottoGenerator.generatorWinningLotto(InputView.lastWeekLottoNumber()))
 
     private fun lottoPrize(userLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
 
