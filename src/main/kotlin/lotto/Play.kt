@@ -3,8 +3,8 @@ package lotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
-import lotto.domain.lotto.Lotto
-import lotto.domain.lotto.WinningLotto
+import lotto.domain.lotto.user.Lotto
+import lotto.domain.lotto.winning.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 

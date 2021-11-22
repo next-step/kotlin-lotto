@@ -2,8 +2,8 @@ package lotto
 
 import lotto.domain.LottoPrize
 import lotto.domain.enums.PrizeType
-import lotto.domain.lotto.Lotto
-import lotto.domain.lotto.WinningLotto
+import lotto.domain.lotto.user.Lotto
+import lotto.domain.lotto.winning.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource

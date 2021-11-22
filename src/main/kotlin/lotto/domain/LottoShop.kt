@@ -1,7 +1,7 @@
 package lotto.domain
 
 import lotto.domain.generator.LottoGenerator
-import lotto.domain.lotto.Lotto
+import lotto.domain.lotto.user.Lotto
 
 object LottoShop {
 

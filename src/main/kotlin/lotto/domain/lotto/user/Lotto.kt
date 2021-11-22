@@ -1,4 +1,4 @@
-package lotto.domain.lotto
+package lotto.domain.lotto.user
 
 import lotto.domain.lotto.error.LottoExceptionMessage
 

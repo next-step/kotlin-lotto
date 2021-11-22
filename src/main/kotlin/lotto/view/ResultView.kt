@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Statistics
-import lotto.domain.lotto.Lotto
+import lotto.domain.lotto.user.Lotto
 import lotto.domain.enums.PrizeType
 
 object ResultView {

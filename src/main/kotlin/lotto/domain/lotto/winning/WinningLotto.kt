@@ -1,4 +1,4 @@
-package lotto.domain.lotto
+package lotto.domain.lotto.winning
 
 import lotto.domain.lotto.error.LottoExceptionMessage
 import lotto.filter.LottoFilter
