@@ -26,7 +26,6 @@ object ResultView {
     }
 
     fun statistics(prizeAllMoney: Int, lottoBuyMoney: Int) {
-        println("총 수익률은 ${Statistics.action(prizeAllMoney, lottoBuyMoney)} 입니다.")
+        println("총 수익률은 ${Statistics.calculation(prizeAllMoney, lottoBuyMoney)} 입니다.")
     }
-
 }
