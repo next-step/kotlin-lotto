@@ -16,7 +16,7 @@ object LottoMatch {
             .toMutableMap()
 
         for (lotto in userLottoNumbers) {
-            val matchCount = lotto.lottoNumber
+            val matchCount = lotto.getLottoNumber()
                 .filter { winningLotto.containsLottoNumber(it) }
                 .size
 

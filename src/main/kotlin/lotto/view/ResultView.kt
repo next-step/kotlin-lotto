@@ -14,7 +14,7 @@ object ResultView {
     }
 
     fun printUserLotto(userLotto: List<Lotto>) {
-        userLotto.forEach { println(it.lottoNumber.toString()) }
+        userLotto.forEach { println(it.getLottoNumber().toString()) }
     }
 
     fun lottoResult(prizeResult: Map<Int, Int>) {
