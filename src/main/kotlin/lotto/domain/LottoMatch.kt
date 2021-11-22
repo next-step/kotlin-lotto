@@ -20,13 +20,13 @@ object LottoMatch {
                 .filter { winningLotto.containsLottoNumber(it) }
                 .size
 
-            lottoMinMatchGreaterThanEqual(matchCount, lottoPrizeMap)
+            matchCountGreaterThanEqualLottoMinMatch(matchCount, lottoPrizeMap)
         }
 
         return lottoPrizeMap.toMap()
     }
 
-    private fun lottoMinMatchGreaterThanEqual(matchCount: Int, lottoPrizeMap: MutableMap<Int, Int>) {
+    private fun matchCountGreaterThanEqualLottoMinMatch(matchCount: Int, lottoPrizeMap: MutableMap<Int, Int>) {
         if (matchCount >= LOTTO_MIN_MATCH)
             lottoPrizeMap[matchCount] = +LOTTO_MATCH_UP_COUNT
     }
