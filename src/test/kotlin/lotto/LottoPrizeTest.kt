@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.enums.PrizeType
 import lotto.domain.lotto.user.Lotto
@@ -23,7 +24,8 @@ class LottoPrizeTest {
         val winningLotto = convertWinningLotto(winningLottoNumber)
 
         // when
-        val lottoPrize = LottoPrize(userLotto, winningLotto)
+        val prizeMap = LottoMatch.match(userLotto, winningLotto)
+        val lottoPrize = LottoPrize(prizeMap)
 
         // then
         assertThat(lottoPrize.totalPrizeMoney()).isEqualTo(PrizeType.THREE.money)
@@ -41,7 +43,8 @@ class LottoPrizeTest {
         val winningLotto = convertWinningLotto(winningLottoNumber)
 
         // when
-        val lottoPrize = LottoPrize(userLotto, winningLotto)
+        val prizeMap = LottoMatch.match(userLotto, winningLotto)
+        val lottoPrize = LottoPrize(prizeMap)
 
         assertThat(lottoPrize.totalPrizeMoney()).isEqualTo(PrizeType.FOUR.money)
     }
@@ -58,7 +61,8 @@ class LottoPrizeTest {
         val winningLotto = convertWinningLotto(winningLottoNumber)
 
         // when
-        val lottoPrize = LottoPrize(userLotto, winningLotto)
+        val prizeMap = LottoMatch.match(userLotto, winningLotto)
+        val lottoPrize = LottoPrize(prizeMap)
 
         assertThat(lottoPrize.totalPrizeMoney()).isEqualTo(PrizeType.FIVE.money)
     }
@@ -75,12 +79,19 @@ class LottoPrizeTest {
         val winningLotto = convertWinningLotto(winningLottoNumber)
 
         // when
-        val lottoPrize = LottoPrize(userLotto, winningLotto)
+        val prizeMap = LottoMatch.match(userLotto, winningLotto)
+        val lottoPrize = LottoPrize(prizeMap)
 
         assertThat(lottoPrize.totalPrizeMoney()).isEqualTo(PrizeType.SIX.money)
     }
 
-    private fun convertUserLotto(userLottoNumber: String): List<Lotto> = listOf(Lotto(userLottoNumber.split(",").map { it.trim().toInt() }.toList()))
+    private fun convertUserLotto(userLottoNumber: String): List<Lotto> = listOf(Lotto(userLottoNumber
+        .split(",")
+        .map { it.trim().toInt() }
+        .toList()))
 
-    private fun convertWinningLotto(winningLottoNumber: String): WinningLotto = WinningLotto(winningLottoNumber)
+    private fun convertWinningLotto(winningLottoNumber: String): WinningLotto = WinningLotto(winningLottoNumber
+        .split(",")
+        .map { it.trim().toInt() }
+        .toList())
 }

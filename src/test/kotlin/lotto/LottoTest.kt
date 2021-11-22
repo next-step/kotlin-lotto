@@ -11,9 +11,9 @@ class LottoTest {
 
         val customLottoNumber = listOf(1, 2, 43, 42, 45, 22).sorted()
 
-        val lotto: Lotto = Lotto(customLottoNumber)
+        val lotto = Lotto(customLottoNumber)
 
-        checkSameLottoNumber(lotto.lottoNumber, customLottoNumber, 6)
+        checkSameLottoNumber(lotto.getLottoNumber(), customLottoNumber, 6)
     }
 
     private fun checkSameLottoNumber(createLotto: List<Int>, customLotto: List<Int>, size: Int) {

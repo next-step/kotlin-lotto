@@ -2,6 +2,5 @@ package lotto.filter
 
 interface Filter {
 
-    fun verify(value: Int): Any
-
+    fun verify(value: Int): Int
 }

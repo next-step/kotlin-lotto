@@ -9,7 +9,7 @@ class LottoFilterTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["1", "10", "21", "30", "41", "45"])
-    fun `들어오는 로또 번호 값이 로또 범위 (1 ~ 45 )  안에 있는 있는지 테스트 한다 통과하면 그대로 값 리턴 된다`(number: Int) {
+    fun `들어오는 로또 번호 값이 로또 범위 (1 ~ 45 )  안에 있는 있는지 확인합니다`(number: Int) {
         assertThat(LottoFilter.verify(number)).isEqualTo(number)
     }
 
