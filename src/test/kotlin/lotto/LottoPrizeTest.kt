@@ -3,8 +3,8 @@ package lotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.enums.PrizeType
-import lotto.domain.lotto.user.Lotto
-import lotto.domain.lotto.winning.WinningLotto
+import lotto.domain.entity.user.Lotto
+import lotto.domain.entity.winning.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -85,13 +85,19 @@ class LottoPrizeTest {
         assertThat(lottoPrize.totalPrizeMoney()).isEqualTo(PrizeType.SIX.money)
     }
 
-    private fun convertUserLotto(userLottoNumber: String): List<Lotto> = listOf(Lotto(userLottoNumber
-        .split(",")
-        .map { it.trim().toInt() }
-        .toList()))
+    private fun convertUserLotto(userLottoNumber: String): List<Lotto> = listOf(
+        Lotto(
+            userLottoNumber
+                .split(",")
+                .map { it.trim().toInt() }
+                .toList()
+        )
+    )
 
-    private fun convertWinningLotto(winningLottoNumber: String): WinningLotto = WinningLotto(winningLottoNumber
-        .split(",")
-        .map { it.trim().toInt() }
-        .toList())
+    private fun convertWinningLotto(winningLottoNumber: String): WinningLotto = WinningLotto(
+        winningLottoNumber
+            .split(",")
+            .map { it.trim().toInt() }
+            .toList()
+    )
 }

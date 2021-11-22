@@ -1,6 +1,6 @@
-package lotto.domain.lotto.user
+package lotto.domain.entity.user
 
-import lotto.domain.lotto.error.LottoExceptionMessage
+import lotto.domain.entity.error.LottoExceptionMessage
 
 class Lotto(
     private val lottoNumber: List<Int>

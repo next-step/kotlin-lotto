@@ -1,6 +1,6 @@
-package lotto
+package lotto.entity
 
-import lotto.domain.lotto.user.Lotto
+import lotto.domain.entity.user.Lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

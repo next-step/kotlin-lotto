@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.lotto.user.Lotto
-import lotto.domain.lotto.winning.WinningLotto
+import lotto.domain.entity.user.Lotto
+import lotto.domain.entity.winning.WinningLotto
 
 object LottoMatch {
 

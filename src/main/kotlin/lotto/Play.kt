@@ -3,9 +3,9 @@ package lotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
-import lotto.domain.lotto.generator.LottoGenerator
-import lotto.domain.lotto.user.Lotto
-import lotto.domain.lotto.winning.WinningLotto
+import lotto.domain.entity.generator.LottoGenerator
+import lotto.domain.entity.user.Lotto
+import lotto.domain.entity.winning.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
