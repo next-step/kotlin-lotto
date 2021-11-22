@@ -21,10 +21,11 @@ object LottoShop {
 
         val lottoList = mutableListOf<Lotto>()
 
-        for (i in 0..lottoCount) {
+        repeat(lottoCount) {
             lottoList.add(Lotto(generatorLotto()))
         }
-        return lottoList
+
+        return lottoList.toList()
     }
 
     private fun generatorLotto(): List<Int> = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER)
