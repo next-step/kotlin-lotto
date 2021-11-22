@@ -3,6 +3,9 @@ package lotto.entity
 import lotto.domain.entity.user.Lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
 
@@ -14,6 +17,18 @@ class LottoTest {
         val lotto = Lotto(customLottoNumber)
 
         checkSameLottoNumber(lotto.getLottoNumber(), customLottoNumber, 6)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,3,5", "1,19,31,34,36,44,45"])
+    fun `생성된 로또 번호가 로또 번호 개수인(6개)가 아닐시 IllegalArgumentException 예외가 발생한다`(lottoNumber: String) {
+        assertThrows<IllegalArgumentException> { Lotto(
+            lottoNumber
+                .split(",")
+                .map { it.trim().toInt() }
+                .sorted()
+                .toList()
+        ) }
     }
 
     private fun checkSameLottoNumber(createLotto: List<Int>, customLotto: List<Int>, size: Int) {
