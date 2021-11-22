@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
 import lotto.domain.lotto.Lotto
@@ -38,11 +39,12 @@ object Play {
     private fun winningLottoInput(): WinningLotto = WinningLotto(InputView.lastWeekLottoNumber())
 
     private fun lottoPrize(userLottoList: List<Lotto>, winningLotto: WinningLotto): Int {
-        val lottoResult = LottoPrize(userLottoList, winningLotto)
 
-        ResultView.lottoResult(lottoResult.prizeResult)
+        val lottoPrize = LottoPrize(LottoMatch.match(userLottoList, winningLotto))
 
-        return lottoResult.totalPrizeMoney()
+        ResultView.lottoResult(lottoPrize.allPrize())
+
+        return lottoPrize.totalPrizeMoney()
     }
 
     private fun lottoResult(totalPrizeMoney: Int, userLottoBuyMoney: Int) =
