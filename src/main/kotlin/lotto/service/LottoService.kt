@@ -1,7 +1,7 @@
 package lotto.service
 
-import lotto.domain.Scoreboard
 import lotto.domain.Lottos
+import lotto.domain.Scoreboard
 
 interface LottoService {
     fun randomLottos(input: String?): Lottos
