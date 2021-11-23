@@ -10,7 +10,9 @@ class Lotto(
         require(lottoNumber.distinct().size == LOTTO_NUMBER_COUNT) { LottoExceptionMessage.LOTTO_NUMBER_OVERLAP }
     }
 
-    fun getLottoNumber(): List<Int> = lottoNumber.sorted().toList()
+    fun getLottoNumber(): List<Int> = lottoNumber
+        .sorted()
+        .toList()
 
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
