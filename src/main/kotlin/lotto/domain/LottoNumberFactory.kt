@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object LottoNumberFactory {
     const val NUMBER_FROM = 1

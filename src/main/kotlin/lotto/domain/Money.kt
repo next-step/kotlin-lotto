@@ -1,16 +1,21 @@
-package lotto
+package lotto.domain
 
-private const val MINIMUM_PRICE = 1000
 
 @JvmInline
 value class Money private constructor(val value: Int) {
-    init {
-        require(value > MINIMUM_PRICE) { "지불 금액은 최소 금액(${MINIMUM_PRICE}원) 이상이어야 합니다." }
+    operator fun times(number: Int): Money {
+        return Money(value * number)
+    }
+
+    operator fun plus(other: Money): Money {
+        return Money((value + other.value))
     }
 
     companion object {
+
         fun of(value: String?): Money {
             require(!value.isNullOrBlank()) { "지불 금액은 비어있거나 null일 수 없습니다." }
+            require(value.toInt() >= 0) { "지불 금액은 0보다 작을 수 없습니다." }
             return Money(value.toInt())
         }
 
