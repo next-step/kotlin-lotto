@@ -23,8 +23,8 @@ class Calculator {
     }
 
     companion object {
-        val DEFAULT_DELIMITERS = arrayOf(",", ":")
-        val CUSTOM_DELIMITER_REGEX = Regex("//(.+)\\n(.+)")
+        private val DEFAULT_DELIMITERS = arrayOf(",", ":")
+        private val CUSTOM_DELIMITER_REGEX = Regex("//(.+)\\n(.+)")
     }
 }
 
