@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.params.ParameterizedTest
