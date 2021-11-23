@@ -2,13 +2,13 @@ package calculator.domain
 
 import calculator.parser.StringSplitModule
 
-class StringAddCalculator(
-    private val stringSplitModule: StringSplitModule = StringSplitModule()
-) {
+class StringAddCalculator {
 
     fun add(text: String?): Int {
         if (text.isNullOrEmpty() || text.isNullOrBlank()) return 0
 
-        return stringSplitModule.split(text).sumOf { it }
+        return StringSplitModule
+            .split(text)
+            .sumOf { it }
     }
 }

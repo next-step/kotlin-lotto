@@ -55,4 +55,10 @@ class StringAddCalculatorTest {
     fun `음수가 전달될 경우 런타임 에러가 발생한다`(text: String) {
         assertThrows<RuntimeException> { calculator.add(text) }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["ㅁ", "하하", "에러다!"])
+    fun `숫자 외의 값이 전달될 경우 NumberFormatException 예외가 발생한다`(text: String) {
+        assertThrows<NumberFormatException> { calculator.add(text) }
+    }
 }
