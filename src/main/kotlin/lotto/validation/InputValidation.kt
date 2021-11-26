@@ -2,11 +2,10 @@ package lotto.validation
 
 import lotto.constant.Const
 import lotto.constant.Message
-import lotto.domain.Lotto
-import kotlin.IllegalArgumentException
 
 object InputValidation {
     private const val MAX_LOTTO_NUMBER_COUNT = 6
+    private val LOTTO_NUMBER_RANGE = 1..45
 
     fun checkAmountPaid(input: String) {
         require(input.toIntOrNull() != null) { IllegalArgumentException(Message.ILLEGAL_AMOUNT_MESSAGE) }
@@ -17,7 +16,7 @@ object InputValidation {
         require(list.size == MAX_LOTTO_NUMBER_COUNT) { IllegalArgumentException(Message.ILLEGAL_NUMBER_MESSAGE) }
         list.forEach {
             require(it.toIntOrNull() != null) { IllegalArgumentException(Message.ILLEGAL_NUMBER_MESSAGE) }
-            require(Lotto.allNumber.contains(it.toInt())) { IllegalArgumentException(Message.ILLEGAL_NUMBER_MESSAGE) }
+            require(LOTTO_NUMBER_RANGE.contains(it.toInt())) { IllegalArgumentException(Message.ILLEGAL_NUMBER_MESSAGE) }
         }
     }
 }
