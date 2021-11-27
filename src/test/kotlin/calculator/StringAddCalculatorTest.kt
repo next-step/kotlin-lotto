@@ -19,4 +19,18 @@ class StringAddCalculatorTest {
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자 반환`(text: String) {
         assertThat(calculator.calculate(text)).isEqualTo(text.toInt())
     }
+
+    @Test
+    fun `컴마를 구분자로 사용하는 경우`() {
+        assertThat(calculator.calculate(",")).isEqualTo(0)
+        assertThat(calculator.calculate("1,2")).isEqualTo(3)
+        assertThat(calculator.calculate("1,2,3")).isEqualTo(6)
+    }
+
+    @Test
+    fun `컴마와 콜론을 구분자로 사용하는 경우`() {
+        assertThat(calculator.calculate(",2:3")).isEqualTo(5)
+        assertThat(calculator.calculate("1,2:3")).isEqualTo(6)
+        assertThat(calculator.calculate("1,2:3:4")).isEqualTo(10)
+    }
 }
