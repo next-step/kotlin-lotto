@@ -5,13 +5,25 @@ class StringAddCalculator {
         if (text.isNullOrBlank())
             return 0
 
-        if (text.matches(NUM_REGEX))
-            return text.toInt()
+        return parseToNum(text).sum()
+    }
 
-        return 1
+    private fun parseToNum(text: String): List<Int> {
+        val stringNums = text.split(COMMA_AND_COLON_REGEX)
+        return stringNums.map { convertToInt(it) }
+    }
+
+    private fun convertToInt(num: String): Int {
+        return if (num.isNullOrBlank())
+            0
+        else if (num.matches(NUM_REGEX))
+            num.toInt()
+        else
+            throw RuntimeException("숫자가 아닌 값을 입력할 수 없습니다.")
     }
 
     companion object {
         val NUM_REGEX = "\\d+".toRegex()
+        val COMMA_AND_COLON_REGEX = ",|:".toRegex()
     }
 }
