@@ -24,7 +24,7 @@ class StringAddCalculator {
         else if (num.matches(NUM_REGEX))
             num.toInt()
         else
-            throw RuntimeException("숫자가 아닌 값을 입력할 수 없습니다.")
+            throw RuntimeException("음수나 숫자가 아닌 값을 입력할 수 없습니다.")
     }
 
     companion object {
