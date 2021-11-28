@@ -5,11 +5,16 @@ class StringAddCalculator {
         if (text.isNullOrBlank())
             return 0
 
+        CUSTOM_DELIMITER_REGEX.find(text)?.let {
+            val customDelimiter = it.groupValues[1].toRegex()
+            return parseToNum(it.groupValues[2], customDelimiter).sum()
+        }
+
         return parseToNum(text).sum()
     }
 
-    private fun parseToNum(text: String): List<Int> {
-        val stringNums = text.split(COMMA_AND_COLON_REGEX)
+    private fun parseToNum(text: String, delimiter: Regex = COMMA_AND_COLON_REGEX): List<Int> {
+        val stringNums = text.split(delimiter)
         return stringNums.map { convertToInt(it) }
     }
 
@@ -25,5 +30,6 @@ class StringAddCalculator {
     companion object {
         val NUM_REGEX = "\\d+".toRegex()
         val COMMA_AND_COLON_REGEX = ",|:".toRegex()
+        val CUSTOM_DELIMITER_REGEX = "//(.)\\n(.*)".toRegex()
     }
 }
