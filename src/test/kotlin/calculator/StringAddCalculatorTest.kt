@@ -33,4 +33,10 @@ class StringAddCalculatorTest {
         assertThat(calculator.calculate("1,2:3")).isEqualTo(6)
         assertThat(calculator.calculate("1,2:3:4")).isEqualTo(10)
     }
+
+    @Test
+    fun `커스텀 구분자 지정하여 숫자들의 합 구하기`() {
+        assertThat(calculator.calculate("//!\n1!2!3")).isEqualTo(6)
+        assertThat(calculator.calculate("//;\n1;2;3;4")).isEqualTo(10)
+    }
 }
