@@ -2,6 +2,7 @@ package calculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -38,5 +39,11 @@ class StringAddCalculatorTest {
     fun `커스텀 구분자 지정하여 숫자들의 합 구하기`() {
         assertThat(calculator.calculate("//!\n1!2!3")).isEqualTo(6)
         assertThat(calculator.calculate("//;\n1;2;3;4")).isEqualTo(10)
+    }
+
+    @Test
+    fun `입력값에 음수가 있는 경우 RuntimeException 예외 처리`() {
+        assertThrows<RuntimeException> { calculator.calculate("-5") }
+        assertThrows<RuntimeException> { calculator.calculate("1,-2:3:-4") }
     }
 }
