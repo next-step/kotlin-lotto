@@ -1,9 +1,15 @@
 package lotto.view
 
+import lotto.domain.Lotto
+
 class ResultView {
 
     fun showLottoCount(count: Int) {
         println(LOTTO_COUNT_MSG.format(count))
+    }
+
+    fun showLottoNums(lottoNums: MutableList<Lotto>) {
+        lottoNums.forEach { println(it.nums) }
     }
 
     companion object {

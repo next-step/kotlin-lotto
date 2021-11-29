@@ -10,4 +10,5 @@ fun main() {
     val lottoGame = LottoGame(inputView.readMoney())
 
     resultView.showLottoCount(lottoGame.count)
+    resultView.showLottoNums(lottoGame.getLottoNums())
 }
