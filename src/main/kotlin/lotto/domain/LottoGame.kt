@@ -1,11 +1,11 @@
 package lotto.domain
 
-class LottoGame(private val money: Int) {
+class LottoGame(money: Int) {
     val count = money / PRICE
+    private val lottoNums = mutableListOf<Lotto>()
 
-    fun getLottoNums(): MutableList<Lotto> {
-        val lottoNums = mutableListOf<Lotto>()
-        repeat(count) { lottoNums.add(Lotto()) }
+    fun makeLottoNums(): MutableList<Lotto> {
+        repeat(count) { lottoNums.add(Lotto.buy()) }
         return lottoNums
     }
 

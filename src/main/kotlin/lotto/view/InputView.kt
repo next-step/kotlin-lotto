@@ -13,25 +13,21 @@ class InputView {
         return money.toInt()
     }
 
-    fun readWinningNums(): List<Int> {
+    fun readWinningNums(): Lotto {
         println(INPUT_WINNING_NUMS_MSG)
         return parseToWinningNums(readLine())
     }
 
-    fun parseToWinningNums(nums: String?): List<Int> {
+    fun parseToWinningNums(nums: String?): Lotto {
         require(nums != null) { INVALID_WINNING_NUMS_EXCEPTION_MSG }
 
         val stringNums = nums.split(WINNING_NUM_DELIMITER)
-        require(stringNums.distinct().size == Lotto.MAX_SIZE) { INVALID_WINNING_NUMS_EXCEPTION_MSG }
-        return stringNums.map { convertToLottoNum(it) }
+        return Lotto(stringNums.map { convertToLottoNum(it) })
     }
 
     private fun convertToLottoNum(num: String?): Int {
         require(num != null && num.toIntOrNull() != null) { INVALID_WINNING_NUMS_EXCEPTION_MSG }
-
-        val resultNum = num.toInt()
-        require(resultNum in Lotto.NUM_RANGE) { INVALID_WINNING_NUMS_EXCEPTION_MSG }
-        return resultNum
+        return num.toInt()
     }
 
     companion object {
