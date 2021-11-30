@@ -10,6 +10,7 @@ class ResultView {
 
     fun showLottoNums(lottoNums: MutableList<Lotto>) {
         lottoNums.forEach { println(it.nums) }
+        println()
     }
 
     companion object {

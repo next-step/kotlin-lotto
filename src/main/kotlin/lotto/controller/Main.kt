@@ -11,4 +11,6 @@ fun main() {
 
     resultView.showLottoCount(lottoGame.count)
     resultView.showLottoNums(lottoGame.getLottoNums())
+
+    val winningNums = inputView.readWinningNums()
 }
