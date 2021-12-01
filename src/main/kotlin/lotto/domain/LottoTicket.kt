@@ -1,7 +1,6 @@
 package lotto.domain
 
-@JvmInline
-value class LottoTicket private constructor(val numbers: List<Int>) {
+class LottoTicket private constructor(val numbers: List<LottoNumber>) : List<LottoNumber> by numbers {
     fun countWith(winningNumbers: WinningNumbers): MatchingCount =
         MatchingCount(
             winningNumbers.winningNumbers.count { numbers.contains(it) },
@@ -16,11 +15,17 @@ value class LottoTicket private constructor(val numbers: List<Int>) {
         private const val ONE_THOUSAND = 1000
 
         fun generateByAuto(): LottoTicket {
-            return LottoTicket((1..45).shuffled().subList(0, 6).sorted())
+            return LottoTicket(
+                (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER)
+                    .shuffled()
+                    .subList(0, 6)
+                    .sorted()
+                    .map(LottoNumber.Companion::from)
+            )
         }
 
         fun generateByManual(numbers: List<Int>): LottoTicket {
-            return LottoTicket(numbers)
+            return LottoTicket(numbers.map(LottoNumber.Companion::from))
         }
 
         fun getCostForOneTicket(): Int {
