@@ -1,5 +1,5 @@
 package lotto.domain
 
-object LottoNumbersFactory {
-    fun create(count: Int) = LottoNumbers(count)
+class LottoNumbersFactory(private val lottoNumberFactory: LottoNumberFactory) {
+    fun create(count: Int) = LottoNumbers(count, lottoNumberFactory)
 }

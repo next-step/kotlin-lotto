@@ -1,7 +1,7 @@
 package lotto.domain
 
-class Lotto(count: Int) {
-    private val lottoNumbers = LottoNumbersFactory.create(count)
+class Lotto(count: Int, lottoNumberFactory: LottoNumberFactory) {
+    private val lottoNumbers = LottoNumbersFactory(lottoNumberFactory).create(count)
     private val winningState = WinningState()
 
     fun checkMatchingNumbers(winningNumber: List<String>) {
