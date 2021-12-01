@@ -3,8 +3,10 @@ package lotto.domain
 @JvmInline
 value class LottoTicket private constructor(val numbers: List<Int>) {
     fun countWith(winningNumbers: WinningNumbers): MatchingCount =
-        MatchingCount(winningNumbers.winningNumbers.count { numbers.contains(it) },
-            numbers.contains(winningNumbers.bonusNumber))
+        MatchingCount(
+            winningNumbers.winningNumbers.count { numbers.contains(it) },
+            numbers.contains(winningNumbers.bonusNumber)
+        )
 
     override fun toString(): String {
         return "$numbers"
@@ -15,6 +17,10 @@ value class LottoTicket private constructor(val numbers: List<Int>) {
 
         fun generateByAuto(): LottoTicket {
             return LottoTicket((1..45).shuffled().subList(0, 6).sorted())
+        }
+
+        fun generateByManual(numbers: List<Int>): LottoTicket {
+            return LottoTicket(numbers)
         }
 
         fun getCostForOneTicket(): Int {
