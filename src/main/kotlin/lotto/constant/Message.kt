@@ -4,6 +4,7 @@ object Message {
     const val INPUT_PURCHASE_AMOUNT = "구입 금액을 입력해 주세요."
     const val INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     const val ILLEGAL_AMOUNT_MESSAGE = "정확한 금액을 입력해주세요."
+    const val ILLEGAL_PRICE_MESSAGE = "1000원 부터 구매 가능합니다."
     const val ILLEGAL_NUMBER_MESSAGE = "정확한 번호를 입력해주세요."
     const val LINE = "---------"
     const val WINNING_STATE = "당첨 통계"

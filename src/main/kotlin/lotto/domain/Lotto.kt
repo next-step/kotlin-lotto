@@ -6,12 +6,12 @@ class Lotto(count: Int) {
 
     fun checkMatchingNumbers(winningNumber: List<String>) {
         getLottoNumbers().forEach {
-            recordResult(it, winningNumber)
+            recordResult(addMatchCount(it, winningNumber))
         }
     }
 
-    fun recordResult(lottoNumber: LottoNumber, winningNumber: List<String>) {
-        Winning.getWinningResult(addMatchCount(lottoNumber, winningNumber))?.let { winning ->
+    private fun recordResult(matchCount: Int) {
+        Winning.getWinningResult(matchCount)?.let { winning ->
             winningState.recordResult(winning)
         }
     }
