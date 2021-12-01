@@ -22,7 +22,7 @@ class InputView {
         require(nums != null) { INVALID_WINNING_NUMS_EXCEPTION_MSG }
 
         val stringNums = nums.split(WINNING_NUM_DELIMITER)
-        return Lotto(stringNums.map { convertToLottoNum(it) })
+        return Lotto(stringNums.map { convertToLottoNum(it) }.toSet())
     }
 
     private fun convertToLottoNum(num: String?): Int {

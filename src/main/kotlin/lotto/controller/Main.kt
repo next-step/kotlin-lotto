@@ -12,4 +12,5 @@ fun main() {
     resultView.showLottoNums(lottoGame.makeLottoNums())
 
     val winningNums = inputView.readWinningNums()
+    resultView.showWinningStats(lottoGame.matchLottoNums(winningNums))
 }
