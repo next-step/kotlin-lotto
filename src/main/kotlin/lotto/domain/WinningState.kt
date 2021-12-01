@@ -7,19 +7,27 @@ class WinningState {
         winningList.add(result)
     }
 
-    fun findFirstCount() = winningList.filter { it == Winning.FIRST }.size
+    fun getWinningCount(winning: Winning): Int {
+        return winningList.filter {
+            it == winning
+        }.size
+    }
 
-    fun findSecondCount() = winningList.filter { it == Winning.SECOND }.size
-
-    fun findThirdCount() = winningList.filter { it == Winning.THIRD }.size
-
-    fun findFourthCount() = winningList.filter { it == Winning.FOURTH }.size
-
-    fun getWinningAmount(): Int {
+    fun getAllWinningAmount(): Int {
         return winningList.map {
-            it.prise
+            getWinningAmount(it)
         }.sumOf { amount ->
             amount
+        }
+    }
+
+    private fun getWinningAmount(winning: Winning): Int {
+        return when (winning) {
+            Winning.FIRST -> 2000000000
+            Winning.SECOND -> 1500000
+            Winning.THIRD -> 50000
+            Winning.FOURTH -> 5000
+            Winning.FAIL -> 0
         }
     }
 }

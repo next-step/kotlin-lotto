@@ -6,8 +6,13 @@ class Lotto(count: Int) {
 
     fun checkMatchingNumbers(winningNumber: List<String>) {
         getLottoNumbers().forEach {
-            val result = Winning.getWinningResult(addMatchCount(it, winningNumber))
-            winningState.recordResult(result)
+            recordResult(it, winningNumber)
+        }
+    }
+
+    fun recordResult(lottoNumber: LottoNumber, winningNumber: List<String>) {
+        Winning.getWinningResult(addMatchCount(lottoNumber, winningNumber))?.let { winning ->
+            winningState.recordResult(winning)
         }
     }
 

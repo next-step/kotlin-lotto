@@ -21,6 +21,6 @@ fun main() {
     lotto.checkMatchingNumbers(winningNumber)
     ResultView.printWinningResult(lotto.getWinningStatus())
 
-    val margin = lotto.getWinningStatus().getWinningAmount().toDouble() / amount.toDouble()
+    val margin = lotto.getWinningStatus().getAllWinningAmount().toDouble() / amount.toDouble()
     ResultView.printMargin(margin)
 }

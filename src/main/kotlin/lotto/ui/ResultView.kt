@@ -2,6 +2,7 @@ package lotto.ui
 
 import lotto.constant.Message
 import lotto.domain.LottoNumber
+import lotto.domain.Winning
 import lotto.domain.WinningState
 
 object ResultView {
@@ -16,10 +17,11 @@ object ResultView {
         println()
         println(Message.WINNING_STATE)
         println(Message.LINE)
-        printFourthCount(winningStatus.findFourthCount())
-        printThirdCount(winningStatus.findThirdCount())
-        printSecondCount(winningStatus.findSecondCount())
-        printFirstCount(winningStatus.findFirstCount())
+
+        printFourthCount(winningStatus.getWinningCount(Winning.FOURTH))
+        printThirdCount(winningStatus.getWinningCount(Winning.THIRD))
+        printSecondCount(winningStatus.getWinningCount(Winning.SECOND))
+        printFirstCount(winningStatus.getWinningCount(Winning.FIRST))
     }
 
     private fun printFourthCount(count: Int) {
