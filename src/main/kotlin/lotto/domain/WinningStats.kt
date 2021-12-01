@@ -11,4 +11,9 @@ class WinningStats(private val money: Int) {
     fun getWinningCountByPrize(prize: Prize): Int {
         return matchStats[prize] ?: 0
     }
+
+    fun getProfitRate(): Double {
+        val totalPrizeMoney = matchStats.map { it.key.money * it.value }.sum()
+        return totalPrizeMoney / money.toDouble()
+    }
 }
