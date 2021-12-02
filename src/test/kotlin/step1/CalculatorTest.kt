@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class CalculatorTest {
 
-    private val calculator = Calculator(Seperator())
+    private val calculator = Calculator(Separator())
 
     @ParameterizedTest
     @ValueSource(strings = ["6,2:4", "3,2:7", "1,8,3", "6:2:4", "6,6", "6:6", "12"])
