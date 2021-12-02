@@ -1,6 +1,6 @@
-package domain
+package stringaddcalculator.domain
 
-import Message
+import stringaddcalculator.Message
 
 class StringAddCalculator {
     fun calculate(input: String): Int {

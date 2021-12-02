@@ -1,4 +1,4 @@
-package domain
+package stringaddcalculator.domain
 
 class Calculation(val expression: String, val customDelimiter: String = EMPTY) {
     fun splitExpression(): List<String> {
