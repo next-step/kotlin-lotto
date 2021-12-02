@@ -11,13 +11,13 @@ class TicketGeneratorTest {
 
     @Test
     fun `티켓 단건 생성`() {
-        val ticket = ticketGenerator.tickets(1000).first()
+        val ticket = ticketGenerator.tickets(1000).tickets.first()
         assertTrue(ticket.numbers.isNotEmpty())
     }
 
     @Test
     fun `티켓 다건 생성`() {
-        val tickets = ticketGenerator.tickets(15300)
+        val tickets = ticketGenerator.tickets(15300).tickets
         assertEquals(15, tickets.size)
     }
 

@@ -11,13 +11,24 @@ class Ticket(val numbers: List<Int>) {
         require(numbers.toMutableSet().size == NUMBER_COUNT)
     }
 
-    fun getRank(winningNumber: List<Int>): Rank {
-        return this.find(winningNumber) ?: Rank.NONE
+    fun getRank(winningNumber: List<Int>, bonusNumber: Int): Rank {
+        return this.find(winningNumber, bonusNumber) ?: Rank.NONE
     }
 
-    fun find(winningNumber: List<Int>): Rank? {
+    private fun find(winningNumber: List<Int>, bonusNumber: Int): Rank? {
         val sameNumber = numbers.filter { winningNumber.contains(it) }
-        return Rank.values().firstOrNull { it.sameCount == sameNumber.size }
+        return when (sameNumber.size) {
+            5 -> getRankWithBonus(numbers.contains(bonusNumber))
+            else -> Rank.values().firstOrNull { it.sameCount == sameNumber.size }
+        }
+    }
+
+    private fun getRankWithBonus(isBonusWin: Boolean): Rank {
+        if (isBonusWin) {
+            return Rank.SECOND
+        }
+
+        return Rank.THIRD
     }
 
     companion object {
