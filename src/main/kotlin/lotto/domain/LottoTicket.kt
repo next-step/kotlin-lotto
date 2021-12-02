@@ -20,12 +20,12 @@ class LottoTicket private constructor(val numbers: List<LottoNumber>) : List<Lot
                     .shuffled()
                     .subList(0, 6)
                     .sorted()
-                    .map(LottoNumber.Companion::from)
+                    .map(LottoNumber::from)
             )
         }
 
         fun generateByManual(numbers: List<Int>): LottoTicket {
-            return LottoTicket(numbers.map(LottoNumber.Companion::from))
+            return LottoTicket(numbers.map(LottoNumber::from))
         }
 
         fun getCostForOneTicket(): Int {
