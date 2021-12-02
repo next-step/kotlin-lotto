@@ -12,7 +12,12 @@ class Ticket(val numbers: List<Int>) {
     }
 
     fun getRank(winningNumber: List<Int>): Rank {
-        return Rank.find(winningNumber, this) ?: Rank.NONE
+        return this.find(winningNumber) ?: Rank.NONE
+    }
+
+    fun find(winningNumber: List<Int>): Rank? {
+        val sameNumber = numbers.filter { winningNumber.contains(it) }
+        return Rank.values().firstOrNull { it.sameCount == sameNumber.size }
     }
 
     companion object {

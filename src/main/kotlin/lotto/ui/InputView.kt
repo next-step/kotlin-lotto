@@ -9,11 +9,9 @@ import java.util.*
  */
 class InputView {
 
-    private val scanner = Scanner(System.`in`)
-
     fun getAmount(): String {
         println("구입금액을 입력해 주세요.")
-        return scanner.nextLine()
+        return readLine()!!
     }
 
     fun showTicketCount(tickets: List<Ticket>) {
@@ -26,7 +24,7 @@ class InputView {
 
     fun getWinningNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return scanner.nextLine().split(",").map { it.toInt() }
+        return readLine()!!.split(",").map { it.toInt() }
     }
 
 }

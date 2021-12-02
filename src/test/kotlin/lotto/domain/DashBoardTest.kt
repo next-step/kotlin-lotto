@@ -29,7 +29,7 @@ class DashBoardTest {
     }
 
     private fun tickets(): List<Ticket> {
-        val ticketGenerator = TicketGenerator(NumberStrategyImpl(winningNumbers))
+        val ticketGenerator = TicketGenerator(RandomNumberStrategy(winningNumbers))
 
         return ticketGenerator.tickets(amount)
     }

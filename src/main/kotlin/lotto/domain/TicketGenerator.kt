@@ -2,7 +2,6 @@ package lotto.domain
 
 class TicketGenerator(private val numberStrategy: NumberStrategy) {
 
-
     private val TICKET_PRICE = 1000
 
     fun tickets(amount: Int): List<Ticket> {

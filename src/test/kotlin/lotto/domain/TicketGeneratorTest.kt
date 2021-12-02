@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class TicketGeneratorTest {
 
-    private val ticketGenerator = TicketGenerator(NumberStrategyImpl(NUMBERS))
+    private val ticketGenerator = TicketGenerator(RandomNumberStrategy(NUMBERS))
 
     @Test
     fun `티켓 단건 생성`() {
