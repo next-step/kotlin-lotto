@@ -4,11 +4,14 @@ class TicketGenerator(private val numberStrategy: NumberStrategy) {
 
     private val TICKET_PRICE = 1000
 
-    fun tickets(amount: Int): Tickets {
-        val count = amount / TICKET_PRICE
-        return Tickets(MutableList(count) {
+    fun tickets(amount: Int, manualTickets: Tickets? = Tickets(emptyList())): Tickets {
+
+        val count = (amount / TICKET_PRICE) - manualTickets?.tickets?.size!!
+        val tickets = Tickets(MutableList(count) {
             this.ticket()
-        })
+        } + manualTickets.tickets)
+
+        return tickets
     }
 
     private fun ticket(): Ticket {
