@@ -10,7 +10,7 @@ class InputView {
 
     fun getAmount(): String {
         println("구입금액을 입력해 주세요.")
-        return readLine()!!
+        return readLine()!!.trim()
     }
 
     fun showTicketCount(tickets: List<Ticket>) {
@@ -23,12 +23,12 @@ class InputView {
 
     fun getWinningNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readLine()!!.split(",").map { it.toInt() }
+        return readLine()!!.trim().split(",").map { it.toInt() }
     }
 
     fun getBonusNumber(): String {
         println("보너스 볼을 입력해 주세요.")
-        return readLine()!!
+        return readLine()!!.trim()
     }
 
 }
