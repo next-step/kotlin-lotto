@@ -16,19 +16,9 @@ class Ticket(val numbers: List<Int>) {
     }
 
     private fun find(winningNumber: List<Int>, bonusNumber: Int): Rank? {
-        val sameNumber = numbers.filter { winningNumber.contains(it) }
-        return when (sameNumber.size) {
-            5 -> getRankWithBonus(numbers.contains(bonusNumber))
-            else -> Rank.values().firstOrNull { it.sameCount == sameNumber.size }
-        }
-    }
-
-    private fun getRankWithBonus(isBonusWin: Boolean): Rank {
-        if (isBonusWin) {
-            return Rank.SECOND
-        }
-
-        return Rank.THIRD
+        val sameNumbers = numbers.filter { winningNumber.contains(it) }
+        val isBonusWin = numbers.contains(bonusNumber)
+        return Rank.rank(sameNumbers, isBonusWin)
     }
 
     companion object {
