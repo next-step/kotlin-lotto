@@ -9,7 +9,9 @@ fun interface NumberStrategy {
     fun numbers(): List<Int>
 
     companion object {
-        val NUMBERS = IntRange(1, 45).toList()
+        private const val LOTTO_START_NUMBER = 1
+        private const val LOTTO_MAX_NUMBER = 45
+        val NUMBERS = IntRange(LOTTO_START_NUMBER, LOTTO_MAX_NUMBER).toList()
     }
 
 }
