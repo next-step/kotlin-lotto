@@ -9,8 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource
 class LottoNumberTest {
     @ParameterizedTest
     @CsvSource("1, 1", "2, 2", "3, 3")
-    fun `from은 동일한 수를 내보낸다`(param: Int, expected: String) {
-        assertThat(LottoNumber.from(param).toString()).isEqualTo(expected)
+    fun `from은 동일한 수를 내보낸다`(param: Int, expected: Int) {
+        assertThat(LottoNumber.from(param)).isEqualTo(LottoNumber.from(expected))
     }
 
     @Test
