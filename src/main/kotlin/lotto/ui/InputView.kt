@@ -8,9 +8,9 @@ import lotto.domain.Ticket
  */
 class InputView {
 
-    fun getAmount(): String {
+    fun getAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        return readLine()!!.trim()
+        return readLine()!!.trim().toInt()
     }
 
     fun showTicketCount(tickets: List<Ticket>) {
@@ -23,12 +23,16 @@ class InputView {
 
     fun getWinningNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readLine()!!.trim().split(",").map { it.toInt() }
+        return readLine()!!.trim().split(SEPERATOR).map { it.toInt() }
     }
 
     fun getBonusNumber(): String {
         println("보너스 볼을 입력해 주세요.")
         return readLine()!!.trim()
+    }
+    
+    companion object {
+        private const val SEPERATOR = ","
     }
 
 }

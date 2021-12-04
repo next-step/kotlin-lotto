@@ -14,7 +14,7 @@ fun main() {
     val amount = inputView.getAmount()
 
     val ticketGenerator = TicketGenerator(RandomNumberStrategy(NumberStrategy.NUMBERS))
-    val allTicket = ticketGenerator.tickets(amount.toInt())
+    val allTicket = ticketGenerator.tickets(amount)
     inputView.showTicketCount(allTicket.tickets)
 
     val winningNumbers = WinningNumber(inputView.getWinningNumbers(), inputView.getBonusNumber().toInt())
@@ -22,7 +22,7 @@ fun main() {
     val resultView = ResultView()
     val dashBoard = DashBoard()
     val result = allTicket.result(winningNumbers.numbers, winningNumbers.bonusNumber)
-    val prize = dashBoard.earnings(result, amount.toInt())
+    val prize = dashBoard.earnings(result, amount)
     resultView.showResult(result)
     resultView.showEarnings(prize)
 
