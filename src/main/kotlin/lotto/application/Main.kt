@@ -20,9 +20,8 @@ fun main() {
     val winningNumbers = WinningNumber(inputView.getWinningNumbers(), inputView.getBonusNumber().toInt())
 
     val resultView = ResultView()
-    val dashBoard = DashBoard()
     val result = allTicket.result(winningNumbers.numbers, winningNumbers.bonusNumber)
-    val prize = dashBoard.earnings(result, amount)
+    val prize = allTicket.earnings(result, amount)
     resultView.showResult(result)
     resultView.showEarnings(prize)
 
