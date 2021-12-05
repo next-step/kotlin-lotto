@@ -9,7 +9,7 @@ class Adder {
     }
 
     private fun getNumbers(input: String): List<Int> {
-        return input.split(delimiters = delimiter).map { it -> checkNumber(it) }
+        return input.split(delimiters = delimiter).map { checkNumber(it) }
     }
 
     private fun checkNumber(input: String): Int {
