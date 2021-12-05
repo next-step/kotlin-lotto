@@ -43,7 +43,7 @@ object Play {
 
         val lottoPrize = LottoPrize(LottoMatch.match(userLottoList, winningLotto))
 
-        ResultView.lottoResult(lottoPrize.allPrize())
+        ResultView.lottoResult(lottoPrize.getPrize)
 
         return lottoPrize.totalPrizeMoney()
     }
