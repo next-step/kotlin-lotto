@@ -5,7 +5,6 @@ import stringcalculator.util.StringExpressionParser.splitByDefaultDelimiter
 import stringcalculator.util.StringExpressionParser.toOneDigitNaturalNumber
 
 class StringAddCalculator {
-    @Throws(RuntimeException::class)
     fun add(expression: String?): Int {
         if (expression.isNullOrBlank()) {
             return DEFAULT_VALUE
@@ -13,9 +12,10 @@ class StringAddCalculator {
 
         val numbersByCustomDelimiter = expression.splitByCustomDelimiter()
         if (numbersByCustomDelimiter.isNotEmpty()) {
-            return numbersByCustomDelimiter.sumOf {
-                it.toOneDigitNaturalNumber()
-            }
+            return numbersByCustomDelimiter
+                .sumOf {
+                    it.toOneDigitNaturalNumber()
+                }
         }
 
         return expression.splitByDefaultDelimiter()
