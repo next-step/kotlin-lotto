@@ -3,13 +3,12 @@ package lotto.domain
 import lotto.domain.enums.PrizeType
 
 class LottoPrize(
-    private val prize: Map<Int, Int> = mutableMapOf()
+    private val prize: Map<PrizeType, Int> = mutableMapOf()
 ) {
 
     val getPrize get() = prize.toMap()
 
     fun totalPrizeMoney(): Int = prize
-        .filter { it.value != 0 }
-        .map { PrizeType.findPrizeMoney(it.key) }
+        .map { it.key.money * it.value }
         .sum()
 }
