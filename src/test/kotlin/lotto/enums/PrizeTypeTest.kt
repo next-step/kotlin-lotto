@@ -9,34 +9,33 @@ import org.junit.jupiter.params.provider.ValueSource
 class PrizeTypeTest {
 
     @ParameterizedTest
-    @ValueSource(strings = ["3", "4", "5", "6"])
-    fun `지난 주 로또 번호와 일치한 개수가 당첨 목록 있는지 확인합니다`(match: Int) {
-        assertThat(PrizeType.containsMatch(match)).isEqualTo(match)
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["1", "2"])
-    fun `지난 주 로또 번호와 일치한 개수가 당첨 목록에 없으면 0을 반환 하는지 확인합니다`(match: Int) {
-        assertThat(PrizeType.containsMatch(match)).isZero
+    @ValueSource(strings = ["0", "1", "2"])
+    fun `3개 미만이 당첨될경우 나머지 PrizeType이 반환되는지 확인합니다`(match: Int) {
+        assertThat(PrizeType.findPrize(match, false)).isEqualTo(PrizeType.OTHER_PLACE)
     }
 
     @Test
-    fun `3개가 당첨될경우 3개의 당첨금액인 5,000원이 반환되는지 확인합니다`() {
-        assertThat(PrizeType.findPrizeMoney(3)).isEqualTo(PrizeType.THREE.money)
+    fun `3개가 당첨될경우 5등의 PrizeType이 반환되는지 확인합니다`() {
+        assertThat(PrizeType.findPrize(3, false)).isEqualTo(PrizeType.FIFTH_PLACE)
     }
 
     @Test
-    fun `4개가 당첨될경우 4개의 당첨금액인 50,000원이 반한되는지 확인합니다`() {
-        assertThat(PrizeType.findPrizeMoney(4)).isEqualTo(PrizeType.FOUR.money)
+    fun `4개가 당첨될경우 4등의 PrizeType이 반한되는지 확인합니다`() {
+        assertThat(PrizeType.findPrize(4, false)).isEqualTo(PrizeType.FOURTH_PLACE)
     }
 
     @Test
-    fun `5개가 당첨될 경우 5개의 당첨금액인 1,500,000원이 반환되는지 확인합니다`() {
-        assertThat(PrizeType.findPrizeMoney(5)).isEqualTo(PrizeType.FIVE.money)
+    fun `5개가 당첨되고 보너스번호 미포함일 경우 3등의 PrizeType이 반환되는지 확인합니다`() {
+        assertThat(PrizeType.findPrize(5, false)).isEqualTo(PrizeType.THIRD_PLACE)
     }
 
     @Test
-    fun `6개가 당첨될 경우 6개의 당첨금액인 2,000,000,000원이 반환되는지 확인합니다`() {
-        assertThat(PrizeType.findPrizeMoney(6)).isEqualTo(PrizeType.SIX.money)
+    fun `5개가 당첨되고 보너스번호 포함일 경우 2등의 PrizeType이 반환되는지 확인합니다`() {
+        assertThat(PrizeType.findPrize(5, true)).isEqualTo(PrizeType.SECOND_PLACE)
+    }
+
+    @Test
+    fun `6개가 당첨될 경우 1등의 PrizeType이 반환되는지 확인합니다`() {
+        assertThat(PrizeType.findPrize(6, false)).isEqualTo(PrizeType.FIRST_PLACE)
     }
 }
