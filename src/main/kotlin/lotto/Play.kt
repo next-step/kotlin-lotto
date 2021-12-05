@@ -6,6 +6,7 @@ import lotto.domain.LottoShop
 import lotto.domain.entity.generator.LottoGenerator
 import lotto.domain.entity.user.Lotto
 import lotto.domain.entity.winning.WinningLotto
+import lotto.filter.LottoMoneyFilter
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -28,7 +29,9 @@ object Play {
 
     private fun userLottoInput(userLottoBuyMoney: Int): List<Lotto> {
 
-        val userLottoList = LottoShop.createLottoTicket(userLottoBuyMoney)
+        val ticketingCount = LottoMoneyFilter.verify(userLottoBuyMoney)
+
+        val userLottoList = LottoShop.createLottoTicket(ticketingCount)
 
         ResultView.lottoPurchasesCount(userLottoList.size)
 
