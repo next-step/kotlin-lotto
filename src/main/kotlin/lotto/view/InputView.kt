@@ -21,5 +21,4 @@ object InputView {
         println(LAST_WEEK_LOTTO_BONUS_NUMBER_MESSAGE)
         return readLine()!!.toInt()
     }
-
 }

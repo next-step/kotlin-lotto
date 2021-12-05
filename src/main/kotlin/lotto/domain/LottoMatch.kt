@@ -25,7 +25,8 @@ object LottoMatch {
                 .filter { winningLotto.containsLottoNumber(it) }
                 .size
 
-            val bonusMatch = lotto.getLottoNumber().find { it == bonusNumber.lottoNumber } != null
+            val bonusMatch = lotto.getLottoNumber()
+                .find { it == bonusNumber.lottoNumber } != null
 
             matchCountGreaterThanEqualLottoMinMatch(matchCount, lottoPrize, bonusMatch)
         }
@@ -35,14 +36,13 @@ object LottoMatch {
 
     private fun matchCountGreaterThanEqualLottoMinMatch(matchCount: Int, lottoPrize: MutableMap<PrizeType, Int>, bonusMatch: Boolean) {
         val prizeType: PrizeType = PrizeType.findPrize(matchCount, bonusMatch)
-        lottoPrize[prizeType] =  nullOrPlus(lottoPrize[prizeType])
+        lottoPrize[prizeType] = nullOrPlus(lottoPrize[prizeType])
     }
 
-    private fun nullOrPlus(number : Int?): Int {
+    private fun nullOrPlus(number: Int?): Int {
         if (number == null) {
             return 0
         }
         return number + 1
     }
-
 }

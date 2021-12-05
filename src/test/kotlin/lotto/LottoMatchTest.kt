@@ -32,7 +32,6 @@ class LottoMatchTest {
         val match = LottoMatch.match(userLotto, winningLotto, bonusNumber)
         val prizeType = PrizeType.findPrize(matchCount, false)
 
-
         // then
         assertThat(match[prizeType]).isEqualTo(1)
     }

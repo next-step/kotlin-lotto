@@ -45,7 +45,6 @@ class LottoPrizeTest {
         val winningLotto = convertWinningLotto(winningLottoNumber)
         val bonusNumber = BonusNumber(bonus)
 
-
         // when
         val prizeMap = LottoMatch.match(userLotto, winningLotto, bonusNumber)
         val lottoPrize = LottoPrize(prizeMap)
