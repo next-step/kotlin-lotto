@@ -9,6 +9,7 @@ import stringcalculator.util.StringExpressionValidator.isOneDigitNaturalNumber
 
 @DisplayName("문자열 계산에 필요한 유효성 검사를 담당하는 객체인 `StringExpressionValidator` 테스트")
 internal class StringExpressionValidatorTest {
+
     @DisplayName("`null`, `빈 문자열`이 주어지면 `null`, `빈 문자열` 확인 시 `true` 반환")
     @ParameterizedTest
     @NullAndEmptySource
