@@ -6,10 +6,6 @@ package lotto.domain
  */
 class DashBoard {
 
-    fun result(winningNumbers: List<Int>, tickets: List<Ticket>): Map<Rank, List<Ticket>> {
-        return tickets.groupBy { it.getRank(winningNumbers) }
-    }
-
     fun earnings(result: Map<Rank, List<Ticket>>, amount: Int): Double {
         val prize = getPrize(result)
         return prize.div(amount.toDouble())
