@@ -17,12 +17,12 @@ object ResultView {
         userLotto.forEach { println(it.getLottoNumber().toString()) }
     }
 
-    fun lottoResult(prizeResult: Map<Int, Int>) {
+    fun lottoResult(prizeResult: Map<PrizeType, Int>) {
         println(DEFAULT_MESSAGE)
         println("-------------------------------")
 
         prizeResult
-            .forEach { println("${it.key} 개 일치 (${PrizeType.findPrizeMoney(it.key)})ㅡ ${it.value} 개") }
+            .forEach { println("${it.key.match} 개 일치 (${it.key.money})ㅡ ${it.value} 개") }
     }
 
     fun statistics(prizeAllMoney: Int, lottoBuyMoney: Int) {
