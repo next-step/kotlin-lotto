@@ -2,7 +2,6 @@ package lotto
 
 import lotto.domain.LottoShop
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -28,5 +27,4 @@ class LottoShopTest {
         private const val LOTTO_MIN_NUMBER = 1
         private const val LOTTO_MAX_NUMBER = 45
     }
-
 }
