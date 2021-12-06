@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.Ticket.Companion.LOTTO_NUMBER_COUNT
+
 
 /**
  *
@@ -8,7 +10,7 @@ package lotto.domain
 class RandomNumberStrategy(private val targets: List<Int>) : NumberStrategy {
 
     override fun numbers(): List<Int> {
-        return targets.shuffled().subList(0, 6).sorted()
+        return targets.shuffled().subList(0, LOTTO_NUMBER_COUNT).sorted()
     }
 
 }

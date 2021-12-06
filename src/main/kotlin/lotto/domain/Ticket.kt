@@ -8,7 +8,7 @@ class Ticket(val numbers: List<Int>) {
 
     init {
         require(numbers.none { it > MAX_NUMBER })
-        require(numbers.toMutableSet().size == NUMBER_COUNT)
+        require(numbers.toMutableSet().size == LOTTO_NUMBER_COUNT)
     }
 
     fun getRank(winningNumber: List<Int>, bonusNumber: Int): Rank {
@@ -23,7 +23,7 @@ class Ticket(val numbers: List<Int>) {
 
     companion object {
         const val MAX_NUMBER = 45
-        const val NUMBER_COUNT = 6
+        const val LOTTO_NUMBER_COUNT = 6
     }
 
 }
