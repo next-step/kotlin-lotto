@@ -13,8 +13,8 @@ class InputView {
         return readLine()!!.trim().toInt()
     }
 
-    fun showTicketCount(tickets: List<Ticket>, manualCount: String) {
-        println("수동으로 ${manualCount}장, 자동으로 ${tickets.size - manualCount.toInt()}개를 구매했습니다.")
+    fun showTicketCount(tickets: List<Ticket>, manualCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${tickets.size - manualCount}개를 구매했습니다.")
         tickets.forEach {
             println(it.numbers)
         }
@@ -28,12 +28,12 @@ class InputView {
 
     fun getBonusNumber(): String {
         println("보너스 볼을 입력해 주세요.")
-        return readLine()!!
+        return readLine()!!.trim()
     }
 
-    fun getManualTicketCount(): String {
+    fun getManualTicketCount(): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
-        return readLine()!!
+        return readLine()!!.trim().toInt()
     }
 
     fun getManualTicketNumbers(count: Int): MutableList<List<Int>> {
