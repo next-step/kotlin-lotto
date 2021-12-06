@@ -9,11 +9,12 @@ class LottoGame(private val money: Int) {
         return lottoNums
     }
 
-    fun matchLottoNums(winningNums: Lotto): WinningStats {
+    fun matchLottoNums(winningNums: Lotto, bonusNum: Int): WinningStats {
         val winningStats = WinningStats(money)
         lottoNums.forEach {
             val matchCount = it.nums.intersect(winningNums.nums).size
-            winningStats.addMatchCount(Prize.findPrize(matchCount))
+            val matchBonus = it.nums.contains(bonusNum)
+            winningStats.addMatchCount(Prize.findPrize(matchCount, matchBonus))
         }
         return winningStats
     }
