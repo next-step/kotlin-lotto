@@ -50,10 +50,12 @@ class InputView {
         }
 
         fun validateBonusNum(bonusNum: String?, winningNums: Lotto): Int {
-            require(
-                bonusNum != null && bonusNum.toIntOrNull() != null && !winningNums.nums.contains(bonusNum.toInt())
-            ) { INVALID_BONUS_NUM_EXCEPTION_MSG }
-            return bonusNum.toInt()
+            require(bonusNum != null && bonusNum.toIntOrNull() != null) { INVALID_BONUS_NUM_EXCEPTION_MSG }
+
+            val resultNum = bonusNum.toInt()
+            require(Lotto.NUM_RANGE.contains(resultNum)) { INVALID_BONUS_NUM_EXCEPTION_MSG }
+            require(!winningNums.nums.contains(resultNum)) { INVALID_BONUS_NUM_EXCEPTION_MSG }
+            return resultNum
         }
     }
 }
