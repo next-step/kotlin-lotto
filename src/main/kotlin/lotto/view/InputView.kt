@@ -8,11 +8,6 @@ class InputView {
         return validateMoney(readLine())
     }
 
-    fun validateMoney(money: String?): Int {
-        require(money != null && money.toIntOrNull() != null) { INVALID_MONEY_EXCEPTION_MSG }
-        return money.toInt()
-    }
-
     fun readWinningNums(): Lotto {
         println(INPUT_WINNING_NUMS_MSG)
         return parseToWinningNums(readLine())
@@ -37,5 +32,10 @@ class InputView {
         private const val INVALID_WINNING_NUMS_EXCEPTION_MSG =
             "당첨 번호를 바르게 입력해 주세요. (1 ~ 45 사이의 서로 다른 6개의 숫자를 쉼표로 구분하여 입력)"
         private val WINNING_NUM_DELIMITER = ",\\s*".toRegex()
+
+        fun validateMoney(money: String?): Int {
+            require(money != null && money.toIntOrNull() != null) { INVALID_MONEY_EXCEPTION_MSG }
+            return money.toInt()
+        }
     }
 }

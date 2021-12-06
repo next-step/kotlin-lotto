@@ -11,13 +11,13 @@ class InputTest {
 
     @Test
     fun `로또 구입금액에 빈 문자열 또는 null을 입력한 경우`() {
-        assertThrows<IllegalArgumentException> { inputView.validateMoney(null) }
-        assertThrows<IllegalArgumentException> { inputView.validateMoney("") }
+        assertThrows<IllegalArgumentException> { InputView.validateMoney(null) }
+        assertThrows<IllegalArgumentException> { InputView.validateMoney("") }
     }
 
     @Test
     fun `로또 구입금액에 숫자가 아닌 값을 입력한 경우`() {
-        assertThrows<IllegalArgumentException> { inputView.validateMoney("abc") }
+        assertThrows<IllegalArgumentException> { InputView.validateMoney("abc") }
     }
 
     @Test
