@@ -1,21 +1,30 @@
 package lotto
 
 import lotto.domain.LottoShop
-import org.junit.jupiter.api.assertThrows
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoShopTest {
 
     @ParameterizedTest
-    @ValueSource(strings = ["1", "1001", "2500", "3500"])
-    fun `로또 구매 금액이 천원단위가 아닐시 IllegalArgumentException 에러가 발생한다`(money: Int) {
-        assertThrows<IllegalArgumentException> { LottoShop.createLottoTicket(money) }
+    @ValueSource(strings = ["1", "20", "38", "111"])
+    fun `구매한 로또 개수만큼 발권되는지 확인한`(ticketingCount: Int) {
+        assertThat(LottoShop.createLottoTicket(ticketingCount).size).isEqualTo(ticketingCount)
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["-1", "-999999", "-102031"])
-    fun `로또 구매 금액에 음수로 들어오면 IllegalArgumentException 에러를 발생 한다`(money: Int) {
-        assertThrows<IllegalArgumentException> { LottoShop.createLottoTicket(money) }
+    @ValueSource(strings = ["1", "2", "15"])
+    fun `발권된 로또가 로또 범위(1~45)에 존재하는지 확인한다`(ticketingCount: Int) {
+        LottoShop.createLottoTicket(ticketingCount).forEach { lotto ->
+            lotto
+                .getLottoNumber()
+                .forEach { assertThat(it).isBetween(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER) }
+        }
+    }
+
+    companion object {
+        private const val LOTTO_MIN_NUMBER = 1
+        private const val LOTTO_MAX_NUMBER = 45
     }
 }
