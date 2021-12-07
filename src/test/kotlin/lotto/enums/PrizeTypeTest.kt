@@ -48,5 +48,4 @@ class PrizeTypeTest {
     fun `보너스 당첨번호 당첨이 안되었을 경우 3등의 PrizeType이 반환되는지 확인합니다()`() {
         assertThat(PrizeType.isBonus(false)).isEqualTo(PrizeType.THIRD_PLACE)
     }
-
 }
