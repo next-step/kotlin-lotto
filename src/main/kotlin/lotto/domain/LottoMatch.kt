@@ -7,7 +7,6 @@ import lotto.domain.enums.PrizeType
 
 object LottoMatch {
 
-    private const val LOTTO_MATCH_UP_COUNT = 1
     private const val DEFAULT_VALUE = 0
 
     fun match(userLottoNumbers: List<Lotto>, winningLotto: WinningLotto, bonusNumber: BonusNumber): Map<PrizeType, Int> {
