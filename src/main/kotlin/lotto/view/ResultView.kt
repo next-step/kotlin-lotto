@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoPrize
 import lotto.domain.Statistics
 import lotto.domain.entity.user.Lotto
 import lotto.domain.enums.PrizeType
@@ -21,8 +22,12 @@ object ResultView {
         println(DEFAULT_MESSAGE)
         println("-------------------------------")
 
-        prizeResult
-            .forEach { println("${it.key.match} 개 일치 (${it.key.money})ㅡ ${it.value} 개") }
+        println("3개 일치 (${PrizeType.FIFTH_PLACE.money}) - ${prizeResult[PrizeType.FIFTH_PLACE] ?: 0}")
+        println("4개 일치 (${PrizeType.FOURTH_PLACE.money}) - ${prizeResult[PrizeType.FOURTH_PLACE] ?: 0}")
+        println("5개 일치 (${PrizeType.THIRD_PLACE.money}) - ${prizeResult[PrizeType.THIRD_PLACE] ?: 0}")
+        println("5개 일치, 보너스 볼 일치 (${PrizeType.SECOND_PLACE.money}) - ${prizeResult[PrizeType.SECOND_PLACE] ?: 0}")
+        println("6개 일치 (${PrizeType.FIRST_PLACE.money}) - ${prizeResult[PrizeType.FIRST_PLACE] ?: 0}")
+
     }
 
     fun statistics(prizeAllMoney: Int, lottoBuyMoney: Int) {

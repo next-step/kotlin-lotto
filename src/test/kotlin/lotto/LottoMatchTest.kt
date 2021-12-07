@@ -41,7 +41,7 @@ class LottoMatchTest {
         value = ["1,2,3,4,5,6|11,13,24,35,44,45|7|0", "1,11,22,33,41,45|1,12,23,34,42,44|43|1", "1,11,22,33,41,45|1,11,24,34,35,40|43|2"],
         delimiterString = "|"
     )
-    fun `로또 번호가 3개 미만으로 매칭될경우 0개가 카운팅 되는걸 확인한다`(
+    fun `로또 번호가 3개 미만으로 매칭될경우 OTHER_TYPE가 카운팅 되는걸 확인한다`(
         userLottoNumber: String,
         winningLottoNumber: String,
         bonus: Int,
@@ -58,7 +58,7 @@ class LottoMatchTest {
         val prizeType = PrizeType.findPrize(matchCount, false)
 
         // then
-        assertThat(match[prizeType]).isEqualTo(0)
+        assertThat(match[PrizeType.OTHER_PLACE]).isEqualTo(1)
     }
 
     private fun convertUserLotto(userLottoNumber: String): List<Lotto> = listOf(
