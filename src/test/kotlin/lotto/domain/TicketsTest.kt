@@ -33,7 +33,7 @@ class TicketsTest {
     }
 
     private fun tickets(): Tickets {
-        val ticketGenerator = TicketGenerator(RandomNumberStrategy(winningNumbers))
+        val ticketGenerator = TicketGenerator(FixNumberStrategy(winningNumbers))
 
         return ticketGenerator.tickets(amount)
     }

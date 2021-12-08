@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.Ticket.Companion.MAX_NUMBER
-import lotto.domain.Ticket.Companion.NUMBER_COUNT
+import lotto.domain.LottoNumber.Companion.MAX_NUMBER
+import lotto.domain.Ticket.Companion.LOTTO_NUMBER_COUNT
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -14,8 +14,8 @@ class TicketTest {
     fun `티켓 생성시 올바른 티켓 번호 검증`() {
         val ticketGenerator = TicketGenerator(FixNumberStrategy(listOf(1, 2, 3, 4, 5, 6)))
         val ticket = ticketGenerator.tickets(1000).tickets.first()
-        assertTrue(ticket.numbers.none { it > MAX_NUMBER })
-        assertTrue(ticket.numbers.size == NUMBER_COUNT)
+        assertTrue(ticket.numbers.map { it.number }.none { it > MAX_NUMBER })
+        assertTrue(ticket.numbers.size == LOTTO_NUMBER_COUNT)
     }
 
     @ParameterizedTest

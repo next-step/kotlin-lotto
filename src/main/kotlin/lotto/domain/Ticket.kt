@@ -4,10 +4,9 @@ package lotto.domain
  *
  * @author Leo
  */
-class Ticket(val numbers: List<Int>) {
+class Ticket(val numbers: List<LottoNumber>) {
 
     init {
-        require(numbers.none { it > MAX_NUMBER })
         require(numbers.toMutableSet().size == LOTTO_NUMBER_COUNT)
     }
 
@@ -15,15 +14,22 @@ class Ticket(val numbers: List<Int>) {
         return this.find(winningNumber, bonusNumber) ?: Rank.NONE
     }
 
+    fun getNumbers(): String {
+        return numbers.map { it.number }
+            .joinToString(separator = NUMBERS_SEPERATOR, prefix = NUMBERS_BRACKET_START, postfix = NUMBERS_BRACKET_END)
+    }
+
     private fun find(winningNumber: List<Int>, bonusNumber: Int): Rank? {
-        val sameNumbers = numbers.filter { winningNumber.contains(it) }
-        val isBonusWin = numbers.contains(bonusNumber)
-        return Rank.rank(sameNumbers, isBonusWin)
+        val sameNumbers = numbers.filter { winningNumber.contains(it.number) }
+        val isBonusWin = numbers.map { it.number }.contains(bonusNumber)
+        return Rank.rank(sameNumbers.map { it.number }, isBonusWin)
     }
 
     companion object {
-        const val MAX_NUMBER = 45
         const val LOTTO_NUMBER_COUNT = 6
+        private const val NUMBERS_BRACKET_START = "["
+        private const val NUMBERS_BRACKET_END = "]"
+        private const val NUMBERS_SEPERATOR = ","
     }
 
 }

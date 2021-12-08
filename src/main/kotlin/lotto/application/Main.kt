@@ -16,7 +16,7 @@ fun main() {
     val manualTicketNumbers = inputView.getManualTicketNumbers(manualCount)
     val manualTickets = Tickets(manualTicketNumbers.map { Ticket(it) })
 
-    val ticketGenerator = TicketGenerator(RandomNumberStrategy(NumberStrategy.NUMBERS))
+    val ticketGenerator = TicketGenerator(RandomNumberStrategy)
     val allTicket = ticketGenerator.tickets(amount, manualTickets)
     inputView.showTicketCount(allTicket.tickets, manualCount)
 

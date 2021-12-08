@@ -4,9 +4,11 @@ package lotto.domain
  *
  * @author Leo
  */
-fun interface NumberStrategy {
+interface NumberStrategy {
 
-    fun numbers(): List<Int>
+    fun numbers(): List<LottoNumber>
+
+    fun find(target: Int): LottoNumber
 
     companion object {
         private const val LOTTO_START_NUMBER = 1

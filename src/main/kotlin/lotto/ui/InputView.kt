@@ -1,5 +1,7 @@
 package lotto.ui
 
+import lotto.domain.LottoNumber
+import lotto.domain.RandomNumberStrategy
 import lotto.domain.Ticket
 
 /**
@@ -16,7 +18,7 @@ class InputView {
     fun showTicketCount(tickets: List<Ticket>, manualCount: Int) {
         println("수동으로 ${manualCount}장, 자동으로 ${tickets.size - manualCount}개를 구매했습니다.")
         tickets.forEach {
-            println(it.numbers)
+            println(it.getNumbers())
         }
         println("")
     }
@@ -36,15 +38,12 @@ class InputView {
         return readLine()!!.trim().toInt()
     }
 
-    fun getManualTicketNumbers(count: Int): MutableList<List<Int>> {
+    fun getManualTicketNumbers(count: Int): List<List<LottoNumber>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        val numbers = mutableListOf<List<Int>>()
-        IntRange(1, count).forEach {
+        return IntRange(1, count).map {
             val input = readLine()!!
-            numbers.add(input.split(SEPERATOR).map { it.toInt() })
+            input.split(SEPERATOR).map { RandomNumberStrategy.find(it.toInt()) }
         }
-
-        return numbers
     }
 
     companion object {

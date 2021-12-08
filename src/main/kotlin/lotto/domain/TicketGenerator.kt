@@ -17,7 +17,7 @@ class TicketGenerator(private val numberStrategy: NumberStrategy) {
     }
 
     companion object {
-        private val TICKET_PRICE = 1000
+        private const val TICKET_PRICE = 1000
     }
 
 }
