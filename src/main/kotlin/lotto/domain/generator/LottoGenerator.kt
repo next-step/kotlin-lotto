@@ -1,4 +1,4 @@
-package lotto.domain.entity.generator
+package lotto.domain.generator
 
 import lotto.filter.LottoFilter
 

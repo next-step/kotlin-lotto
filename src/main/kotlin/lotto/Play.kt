@@ -3,7 +3,7 @@ package lotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
-import lotto.domain.entity.generator.LottoGenerator
+import lotto.domain.generator.LottoGenerator
 import lotto.domain.entity.user.Lotto
 import lotto.domain.entity.winning.BonusNumber
 import lotto.domain.entity.winning.WinningLotto
@@ -37,7 +37,7 @@ object Play {
 
         val userLottoList = LottoShop.createLottoTicket(ticketingCount)
 
-        ResultView.lottoPurchasesCount(userLottoList.size)
+        ResultView.lottoPurchasesCount(0, userLottoList.size)
 
         ResultView.printUserLotto(userLottoList)
 
