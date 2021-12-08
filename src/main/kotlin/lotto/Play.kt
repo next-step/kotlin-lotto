@@ -29,7 +29,7 @@ object Play {
         lottoResult(totalPrizeMoney, userLottoBuyMoney)
     }
 
-    private fun userLottoBuy(): Int = InputView.inputLottoBuyPrice()
+    private fun userLottoBuy(): Int = InputView.lottoBuyPrice()
 
     private fun userLottoInput(userLottoBuyMoney: Int): List<Lotto> {
 
