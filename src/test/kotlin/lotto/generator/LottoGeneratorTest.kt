@@ -1,4 +1,4 @@
-package lotto.entity.generator
+package lotto.generator
 
 import lotto.domain.generator.LottoGenerator
 import org.assertj.core.api.Assertions.assertThat
