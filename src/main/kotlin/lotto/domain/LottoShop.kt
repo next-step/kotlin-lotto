@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.entity.common.LottoNumber
 import lotto.domain.entity.user.Lotto
 
 object LottoShop {
@@ -16,9 +17,10 @@ object LottoShop {
             lottoList.add(
                 Lotto(
                     lottoNumber = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER)
+                        .map { LottoNumber(it) }
                         .shuffled()
                         .take(LOTTO_LENGTH)
-                        .sorted()
+                        .sortedBy { it.number }
                 )
             )
         }

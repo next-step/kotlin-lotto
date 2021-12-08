@@ -1,9 +1,10 @@
 package lotto.domain.entity.winning
 
+import lotto.domain.entity.common.LottoNumber
 import lotto.domain.entity.error.LottoExceptionMessage
 
 class WinningLotto(
-    private val winningLottoNumber: List<Int>
+    private val winningLottoNumber: List<LottoNumber>
 ) {
 
     init {
@@ -11,6 +12,6 @@ class WinningLotto(
     }
 
     fun containsLottoNumber(lottoNumber: Int): Boolean {
-        return winningLottoNumber.contains(lottoNumber)
+        return winningLottoNumber.find { it.number == lottoNumber } != null
     }
 }

@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
+import lotto.domain.entity.common.LottoNumber
 import lotto.domain.generator.LottoGenerator
 import lotto.domain.entity.user.Lotto
 import lotto.domain.entity.winning.BonusNumber
@@ -35,6 +36,8 @@ object Play {
 
         val ticketingCount = LottoMoneyFilter.verify(userLottoBuyMoney)
 
+        val lottoManualBuyCount = InputView.lottoManualBuyCount()
+
         val userLottoList = LottoShop.createLottoTicket(ticketingCount)
 
         ResultView.lottoPurchasesCount(0, userLottoList.size)
@@ -50,7 +53,7 @@ object Play {
 
         val bonusNumber = LottoFilter.verify(InputView.lastWeekBonusNumber())
 
-        return BonusNumber(bonusNumber)
+        return BonusNumber(LottoNumber(bonusNumber))
     }
 
     private fun lottoPrize(userLottoList: List<Lotto>, winningLotto: WinningLotto, bonusNumber: BonusNumber): Int {

@@ -1,12 +1,13 @@
 package lotto.domain.generator
 
+import lotto.domain.entity.common.LottoNumber
 import lotto.filter.LottoFilter
 
 object LottoGenerator {
 
-    fun generatorWinningLotto(winningLottoNumber: String): List<Int> = winningLottoNumber
+    fun generatorWinningLotto(winningLottoNumber: String): List<LottoNumber> = winningLottoNumber
         .split(",")
-        .map { LottoFilter.verify(it.trim().toInt()) }
         .distinct()
-        .sorted()
+        .map { LottoNumber(LottoFilter.verify(it.trim().toInt())) }
+        .sortedBy { it.number }
 }
