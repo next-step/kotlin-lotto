@@ -18,10 +18,11 @@ class ResultView {
     fun showWinningStats(stats: WinningStats) {
         println(WINNING_STATS_MSG)
         PRIZES.forEach {
-            if (it == SECOND) {
-                println(SECOND_MATCH_COUNT_MSG.format(it.matchCount, it.money, stats.getWinningCountByPrize(it)))
-            } else {
-                println(MATCH_COUNT_MSG.format(it.matchCount, it.money, stats.getWinningCountByPrize(it)))
+            when (it.matchBonus) {
+                true ->
+                    println(MATCH_COUNT_AND_BONUS_MSG.format(it.matchCount, it.money, stats.getWinningCountByPrize(it)))
+                false ->
+                    println(MATCH_COUNT_MSG.format(it.matchCount, it.money, stats.getWinningCountByPrize(it)))
             }
         }
         println(PROFIT_RATE_MSG.format(stats.getProfitRate()))
@@ -31,7 +32,7 @@ class ResultView {
         private const val LOTTO_COUNT_MSG = "%d개를 구매했습니다."
         private const val WINNING_STATS_MSG = "\n당첨 통계\n---------"
         private const val MATCH_COUNT_MSG = "%d개 일치 (%d원)- %d개"
-        private const val SECOND_MATCH_COUNT_MSG = "%d개 일치, 보너스 볼 일치(%d원)- %d개"
+        private const val MATCH_COUNT_AND_BONUS_MSG = "%d개 일치, 보너스 볼 일치(%d원)- %d개"
         private const val PROFIT_RATE_MSG = "총 수익률은 %.2f입니다."
         private val PRIZES = listOf(FIFTH, FOURTH, THIRD, SECOND, FIRST)
     }
