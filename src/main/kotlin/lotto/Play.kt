@@ -3,7 +3,8 @@ package lotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
 import lotto.domain.LottoShop
-import lotto.domain.entity.generator.LottoGenerator
+import lotto.domain.entity.common.LottoNumber
+import lotto.domain.generator.LottoGenerator
 import lotto.domain.entity.user.Lotto
 import lotto.domain.entity.winning.BonusNumber
 import lotto.domain.entity.winning.WinningLotto
@@ -29,28 +30,32 @@ object Play {
         lottoResult(totalPrizeMoney, userLottoBuyMoney)
     }
 
-    private fun userLottoBuy(): Int = InputView.inputLottoBuyPrice()
+    private fun userLottoBuy(): Int = InputView.lottoBuyPrice()
 
     private fun userLottoInput(userLottoBuyMoney: Int): List<Lotto> {
 
         val ticketingCount = LottoMoneyFilter.verify(userLottoBuyMoney)
 
-        val userLottoList = LottoShop.createLottoTicket(ticketingCount)
+        val lottoManualBuyCount = InputView.lottoManualBuyCount()
 
-        ResultView.lottoPurchasesCount(userLottoList.size)
+        val manualLotto = InputView.lottoManualBuyNumber(lottoManualBuyCount)
+
+        val userLottoList = LottoShop.createLottoTicket(ticketingCount - lottoManualBuyCount, manualLotto)
+
+        ResultView.lottoPurchasesCount(lottoManualBuyCount, userLottoList.size)
 
         ResultView.printUserLotto(userLottoList)
 
         return userLottoList
     }
 
-    private fun winningLottoInput(): WinningLotto = WinningLotto(LottoGenerator.generatorWinningLotto(InputView.lastWeekLottoNumber()))
+    private fun winningLottoInput(): WinningLotto = WinningLotto(LottoGenerator.generatorLotto(InputView.lastWeekLottoNumber()))
 
     private fun bonusNumberInput(): BonusNumber {
 
         val bonusNumber = LottoFilter.verify(InputView.lastWeekBonusNumber())
 
-        return BonusNumber(bonusNumber)
+        return BonusNumber(LottoNumber(bonusNumber))
     }
 
     private fun lottoPrize(userLottoList: List<Lotto>, winningLotto: WinningLotto, bonusNumber: BonusNumber): Int {

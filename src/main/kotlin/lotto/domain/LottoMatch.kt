@@ -16,11 +16,11 @@ object LottoMatch {
 
         for (lotto in userLottoNumbers) {
             val matchCount = lotto.getLottoNumber()
-                .filter { winningLotto.containsLottoNumber(it) }
+                .filter { winningLotto.containsLottoNumber(it.number) }
                 .size
 
             val bonusMatch = lotto.getLottoNumber()
-                .find { it == bonusNumber.lottoNumber } != null
+                .find { bonusNumber.compareToLottoNumber(it) } != null
 
             val prizeType = PrizeType.findPrize(matchCount, bonusMatch)
 

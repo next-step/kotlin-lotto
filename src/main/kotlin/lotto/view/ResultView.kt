@@ -7,14 +7,13 @@ import lotto.domain.enums.PrizeType
 object ResultView {
 
     private const val DEFAULT_MESSAGE = "당첨 통계"
-    private const val LOTTO_PURCHASES_MESSAGE = "개를 구입 하였습니다."
 
-    fun lottoPurchasesCount(purchasesCount: Int) {
-        println("$purchasesCount $LOTTO_PURCHASES_MESSAGE")
+    fun lottoPurchasesCount(manualCount: Int, purchasesCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${purchasesCount}개를 구매했습니다.")
     }
 
     fun printUserLotto(userLotto: List<Lotto>) {
-        userLotto.forEach { println(it.getLottoNumber().toString()) }
+        userLotto.forEach { println(it) }
     }
 
     fun lottoResult(prizeResult: Map<PrizeType, Int>) {
