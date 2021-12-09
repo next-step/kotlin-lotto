@@ -9,7 +9,7 @@ class LottoGame(private val money: Int) {
         return lottoNums
     }
 
-    fun matchLottoNums(winningNums: Lotto, bonusNum: Int): WinningStats {
+    fun matchLottoNums(winningNums: Lotto, bonusNum: LottoNum): WinningStats {
         val winningStats = WinningStats(money)
         lottoNums.forEach {
             val matchCount = it.nums.intersect(winningNums.nums).size

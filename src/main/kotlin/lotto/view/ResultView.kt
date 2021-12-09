@@ -11,7 +11,7 @@ import lotto.domain.WinningStats
 class ResultView {
     fun showLottoNums(lottoNums: MutableList<Lotto>) {
         println(LOTTO_COUNT_MSG.format(lottoNums.size))
-        lottoNums.forEach { println(it.nums) }
+        lottoNums.forEach { println(it.nums.toString()) }
         println()
     }
 

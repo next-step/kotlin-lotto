@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNum
 
 class InputView {
     private lateinit var winningNums: Lotto
@@ -23,12 +24,12 @@ class InputView {
         return winningNums
     }
 
-    private fun convertToLottoNum(num: String?): Int {
+    private fun convertToLottoNum(num: String?): LottoNum {
         require(num != null && num.toIntOrNull() != null) { INVALID_WINNING_NUMS_EXCEPTION_MSG }
-        return num.toInt()
+        return LottoNum(num.toInt())
     }
 
-    fun readBonusNum(): Int {
+    fun readBonusNum(): LottoNum {
         println(INPUT_BONUS_NUM_MSG)
         return validateBonusNum(readLine(), winningNums)
     }
@@ -49,11 +50,10 @@ class InputView {
             return money.toInt()
         }
 
-        fun validateBonusNum(bonusNum: String?, winningNums: Lotto): Int {
+        fun validateBonusNum(bonusNum: String?, winningNums: Lotto): LottoNum {
             require(bonusNum != null && bonusNum.toIntOrNull() != null) { INVALID_BONUS_NUM_EXCEPTION_MSG }
 
-            val resultNum = bonusNum.toInt()
-            require(Lotto.NUM_RANGE.contains(resultNum)) { INVALID_BONUS_NUM_EXCEPTION_MSG }
+            val resultNum = LottoNum(bonusNum.toInt())
             require(!winningNums.nums.contains(resultNum)) { INVALID_BONUS_NUM_EXCEPTION_MSG }
             return resultNum
         }
