@@ -23,10 +23,10 @@ class LottoGameTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["100", "1000", "10000"])
+    @ValueSource(strings = ["1000", "10000", "123456"])
     fun `구매 금액에 따른 구매 개수 테스트`(input: String) {
         val money = input.toInt()
         val lottoGame = LottoGame(money)
-        assertThat(lottoGame.count).isEqualTo(money / LottoGame.PRICE)
+        assertThat(lottoGame.totalLottoCount).isEqualTo(money / LottoGame.PRICE)
     }
 }

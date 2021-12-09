@@ -9,9 +9,9 @@ import lotto.domain.Prize.FIFTH
 import lotto.domain.WinningStats
 
 class ResultView {
-    fun showLottoNums(lottoNums: MutableList<Lotto>) {
-        println(LOTTO_COUNT_MSG.format(lottoNums.size))
-        lottoNums.forEach { println(it.nums.toString()) }
+    fun showLottoTickets(manualCount: Int, lottoTickets: List<Lotto>) {
+        println(LOTTO_COUNT_MSG.format(manualCount, lottoTickets.size - manualCount))
+        lottoTickets.forEach { println(it.nums.toString()) }
         println()
     }
 
@@ -29,7 +29,7 @@ class ResultView {
     }
 
     companion object {
-        private const val LOTTO_COUNT_MSG = "%d개를 구매했습니다."
+        private const val LOTTO_COUNT_MSG = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다."
         private const val WINNING_STATS_MSG = "\n당첨 통계\n---------"
         private const val MATCH_COUNT_MSG = "%d개 일치 (%d원)- %d개"
         private const val MATCH_COUNT_AND_BONUS_MSG = "%d개 일치, 보너스 볼 일치(%d원)- %d개"

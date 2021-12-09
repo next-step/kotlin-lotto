@@ -23,7 +23,7 @@ class Lotto(val nums: Set<LottoNum>) {
             .sortedBy { it.num }
             .toSet()
 
-        fun buy(): Lotto {
+        fun buyAuto(): Lotto {
             return Lotto(makeRandomNums())
         }
     }
