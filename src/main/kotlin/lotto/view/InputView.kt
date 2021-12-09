@@ -21,8 +21,18 @@ object InputView {
         return readLine()?.toInt() ?: 0
     }
 
-    fun lottoManualBuyNumber(): String {
-        return readLine() ?: DEFAULT_LOTTO_NUMBER
+    fun lottoManualBuyNumber(manualBuyCount: Int): List<String> {
+        println(LOTTO_MANUAL_BUY_INPUT_MESSAGE)
+
+        val manualLotto = mutableListOf<String>()
+
+        repeat(manualBuyCount) {
+            manualLotto.add(
+                readLine() ?: DEFAULT_LOTTO_NUMBER
+            )
+        }
+
+        return manualLotto
     }
 
     fun lastWeekLottoNumber(): String {

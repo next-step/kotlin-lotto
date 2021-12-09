@@ -13,7 +13,7 @@ object ResultView {
     }
 
     fun printUserLotto(userLotto: List<Lotto>) {
-        userLotto.forEach { println(it.getLottoNumber().toString()) }
+        userLotto.forEach { println(it) }
     }
 
     fun lottoResult(prizeResult: Map<PrizeType, Int>) {

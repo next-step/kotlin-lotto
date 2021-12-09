@@ -1,11 +1,12 @@
 package lotto
 
+import lotto.common.ConvertLotto
 import lotto.domain.LottoMatch
 import lotto.domain.LottoPrize
+import lotto.domain.entity.common.LottoNumber
 import lotto.domain.enums.PrizeType
 import lotto.domain.entity.user.Lotto
 import lotto.domain.entity.winning.BonusNumber
-import lotto.domain.entity.winning.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -19,11 +20,10 @@ class LottoPrizeTest {
         userLottoNumber: String,
         bonus: Int
     ) {
-
         // given
-        val userLotto: List<Lotto> = convertUserLotto(userLottoNumber)
-        val winningLotto = convertWinningLotto(winningLottoNumber)
-        val bonusNumber = BonusNumber(bonus)
+        val userLotto: List<Lotto> = ConvertLotto.convertUserLotto(userLottoNumber)
+        val winningLotto = ConvertLotto.convertWinningLotto(winningLottoNumber)
+        val bonusNumber = BonusNumber(LottoNumber(bonus))
 
         // when
         val prizeMap = LottoMatch.match(userLotto, winningLotto, bonusNumber)
@@ -41,9 +41,9 @@ class LottoPrizeTest {
         bonus: Int
     ) {
         // given
-        val userLotto: List<Lotto> = convertUserLotto(userLottoNumber)
-        val winningLotto = convertWinningLotto(winningLottoNumber)
-        val bonusNumber = BonusNumber(bonus)
+        val userLotto: List<Lotto> = ConvertLotto.convertUserLotto(userLottoNumber)
+        val winningLotto = ConvertLotto.convertWinningLotto(winningLottoNumber)
+        val bonusNumber = BonusNumber(LottoNumber(bonus))
 
         // when
         val prizeMap = LottoMatch.match(userLotto, winningLotto, bonusNumber)
@@ -60,9 +60,9 @@ class LottoPrizeTest {
         bonus: Int
     ) {
         // given
-        val userLotto: List<Lotto> = convertUserLotto(userLottoNumber)
-        val winningLotto = convertWinningLotto(winningLottoNumber)
-        val bonusNumber = BonusNumber(bonus)
+        val userLotto: List<Lotto> = ConvertLotto.convertUserLotto(userLottoNumber)
+        val winningLotto = ConvertLotto.convertWinningLotto(winningLottoNumber)
+        val bonusNumber = BonusNumber(LottoNumber(bonus))
 
         // when
         val prizeMap = LottoMatch.match(userLotto, winningLotto, bonusNumber)
@@ -80,9 +80,9 @@ class LottoPrizeTest {
         bonus: Int
     ) {
         // given
-        val userLotto: List<Lotto> = convertUserLotto(userLottoNumber)
-        val winningLotto = convertWinningLotto(winningLottoNumber)
-        val bonusNumber = BonusNumber(bonus)
+        val userLotto: List<Lotto> = ConvertLotto.convertUserLotto(userLottoNumber)
+        val winningLotto = ConvertLotto.convertWinningLotto(winningLottoNumber)
+        val bonusNumber = BonusNumber(LottoNumber(bonus))
 
         // when
         val prizeMap = LottoMatch.match(userLotto, winningLotto, bonusNumber)
@@ -100,9 +100,9 @@ class LottoPrizeTest {
         bonus: Int
     ) {
         // given
-        val userLotto: List<Lotto> = convertUserLotto(userLottoNumber)
-        val winningLotto = convertWinningLotto(winningLottoNumber)
-        val bonusNumber = BonusNumber(bonus)
+        val userLotto: List<Lotto> = ConvertLotto.convertUserLotto(userLottoNumber)
+        val winningLotto = ConvertLotto.convertWinningLotto(winningLottoNumber)
+        val bonusNumber = BonusNumber(LottoNumber(bonus))
 
         // when
         val prizeMap = LottoMatch.match(userLotto, winningLotto, bonusNumber)
@@ -110,20 +110,4 @@ class LottoPrizeTest {
 
         assertThat(lottoPrize.totalPrizeMoney()).isEqualTo(PrizeType.FIRST_PLACE.money)
     }
-
-    private fun convertUserLotto(userLottoNumber: String): List<Lotto> = listOf(
-        Lotto(
-            userLottoNumber
-                .split(",")
-                .map { it.trim().toInt() }
-                .toList()
-        )
-    )
-
-    private fun convertWinningLotto(winningLottoNumber: String): WinningLotto = WinningLotto(
-        winningLottoNumber
-            .split(",")
-            .map { it.trim().toInt() }
-            .toList()
-    )
 }

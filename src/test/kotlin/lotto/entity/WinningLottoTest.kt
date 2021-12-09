@@ -1,5 +1,6 @@
 package lotto.entity
 
+import lotto.domain.entity.common.LottoNumber
 import lotto.domain.entity.winning.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
@@ -16,8 +17,8 @@ class WinningLottoTest {
             WinningLotto(
                 winningLottoNumber
                     .split(",")
-                    .map { it.trim().toInt() }
-                    .sorted()
+                    .map { LottoNumber(it.trim().toInt()) }
+                    .sortedBy { it.number }
                     .toList()
             )
         }
@@ -37,13 +38,12 @@ class WinningLottoTest {
         assertThat(winningLotto.containsLottoNumber(targetNumber)).isFalse
     }
 
-    private fun convertWinningLotto(winningLottoNumber: String) : WinningLotto =
+    private fun convertWinningLotto(winningLottoNumber: String): WinningLotto =
         WinningLotto(
             winningLottoNumber
                 .split(",")
-                .map { it.trim().toInt() }
-                .sorted()
+                .map { LottoNumber(it.trim().toInt()) }
+                .sortedBy { it.number }
                 .toList()
         )
-
 }

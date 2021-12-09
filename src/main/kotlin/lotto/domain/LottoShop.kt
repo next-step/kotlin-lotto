@@ -9,7 +9,7 @@ object LottoShop {
     private const val LOTTO_MAX_NUMBER = 45
     private val LOTTO_LENGTH = 6
 
-    fun createLottoTicket(ticketingCount: Int): List<Lotto> {
+    fun createLottoTicket(ticketingCount: Int, manualLotto: List<String>): List<Lotto> {
 
         val lottoList = mutableListOf<Lotto>()
 
@@ -20,6 +20,17 @@ object LottoShop {
                         .map { LottoNumber(it) }
                         .shuffled()
                         .take(LOTTO_LENGTH)
+                        .sortedBy { it.number }
+                )
+            )
+        }
+
+        for (manualLottoNumber in manualLotto) {
+            lottoList.add(
+                Lotto(
+                    lottoNumber = manualLottoNumber
+                        .split(",")
+                        .map { LottoNumber(it.trim().toInt()) }
                         .sortedBy { it.number }
                 )
             )

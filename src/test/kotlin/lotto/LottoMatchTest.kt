@@ -1,9 +1,10 @@
 package lotto
 
+import lotto.common.ConvertLotto
 import lotto.domain.LottoMatch
+import lotto.domain.entity.common.LottoNumber
 import lotto.domain.entity.user.Lotto
 import lotto.domain.entity.winning.BonusNumber
-import lotto.domain.entity.winning.WinningLotto
 import lotto.domain.enums.PrizeType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -22,11 +23,10 @@ class LottoMatchTest {
         bonus: Int,
         matchCount: Int
     ) {
-
         // given
-        val userLotto = convertUserLotto(userLottoNumber)
-        val winningLotto = convertWinningLotto(winningLottoNumber)
-        val bonusNumber = BonusNumber(bonus)
+        val userLotto: List<Lotto> = ConvertLotto.convertUserLotto(userLottoNumber)
+        val winningLotto = ConvertLotto.convertWinningLotto(winningLottoNumber)
+        val bonusNumber = BonusNumber(LottoNumber(bonus))
 
         // when
         val match = LottoMatch.match(userLotto, winningLotto, bonusNumber)
@@ -49,9 +49,9 @@ class LottoMatchTest {
     ) {
 
         // given
-        val userLotto = convertUserLotto(userLottoNumber)
-        val winningLotto = convertWinningLotto(winningLottoNumber)
-        val bonusNumber = BonusNumber(bonus)
+        val userLotto: List<Lotto> = ConvertLotto.convertUserLotto(userLottoNumber)
+        val winningLotto = ConvertLotto.convertWinningLotto(winningLottoNumber)
+        val bonusNumber = BonusNumber(LottoNumber(bonus))
 
         // when
         val match = LottoMatch.match(userLotto, winningLotto, bonusNumber)
@@ -60,20 +60,4 @@ class LottoMatchTest {
         // then
         assertThat(match[PrizeType.OTHER_PLACE]).isEqualTo(1)
     }
-
-    private fun convertUserLotto(userLottoNumber: String): List<Lotto> = listOf(
-        Lotto(
-            userLottoNumber
-                .split(",")
-                .map { it.trim().toInt() }
-                .toList()
-        )
-    )
-
-    private fun convertWinningLotto(winningLottoNumber: String): WinningLotto = WinningLotto(
-        winningLottoNumber
-            .split(",")
-            .map { it.trim().toInt() }
-            .toList()
-    )
 }

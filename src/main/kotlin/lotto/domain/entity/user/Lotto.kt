@@ -15,6 +15,10 @@ class Lotto(
         .sortedBy { it.number }
         .toList()
 
+    override fun toString(): String {
+        return lottoNumber.toString()
+    }
+
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
     }

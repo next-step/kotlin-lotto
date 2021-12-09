@@ -38,9 +38,11 @@ object Play {
 
         val lottoManualBuyCount = InputView.lottoManualBuyCount()
 
-        val userLottoList = LottoShop.createLottoTicket(ticketingCount)
+        val manualLotto = InputView.lottoManualBuyNumber(lottoManualBuyCount)
 
-        ResultView.lottoPurchasesCount(0, userLottoList.size)
+        val userLottoList = LottoShop.createLottoTicket(ticketingCount - lottoManualBuyCount, manualLotto)
+
+        ResultView.lottoPurchasesCount(lottoManualBuyCount, userLottoList.size)
 
         ResultView.printUserLotto(userLottoList)
 

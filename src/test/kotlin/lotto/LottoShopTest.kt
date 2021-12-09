@@ -19,7 +19,7 @@ class LottoShopTest {
         LottoShop.createLottoTicket(ticketingCount).forEach { lotto ->
             lotto
                 .getLottoNumber()
-                .forEach { assertThat(it).isBetween(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER) }
+                .forEach { assertThat(it.number).isBetween(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER) }
         }
     }
 
