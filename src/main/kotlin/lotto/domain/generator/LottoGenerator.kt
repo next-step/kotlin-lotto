@@ -5,7 +5,7 @@ import lotto.filter.LottoFilter
 
 object LottoGenerator {
 
-    fun generatorWinningLotto(winningLottoNumber: String): List<LottoNumber> = winningLottoNumber
+    fun generatorLotto(lottoNumber: String): List<LottoNumber> = lottoNumber
         .split(",")
         .distinct()
         .map { LottoNumber(LottoFilter.verify(it.trim().toInt())) }

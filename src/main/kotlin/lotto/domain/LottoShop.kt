@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.domain.entity.common.LottoNumber
 import lotto.domain.entity.user.Lotto
+import lotto.domain.generator.LottoGenerator
 
 object LottoShop {
 
@@ -28,10 +29,7 @@ object LottoShop {
         for (manualLottoNumber in manualLotto) {
             lottoList.add(
                 Lotto(
-                    lottoNumber = manualLottoNumber
-                        .split(",")
-                        .map { LottoNumber(it.trim().toInt()) }
-                        .sortedBy { it.number }
+                    LottoGenerator.generatorLotto(manualLottoNumber)
                 )
             )
         }

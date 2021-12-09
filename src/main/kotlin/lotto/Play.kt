@@ -49,7 +49,7 @@ object Play {
         return userLottoList
     }
 
-    private fun winningLottoInput(): WinningLotto = WinningLotto(LottoGenerator.generatorWinningLotto(InputView.lastWeekLottoNumber()))
+    private fun winningLottoInput(): WinningLotto = WinningLotto(LottoGenerator.generatorLotto(InputView.lastWeekLottoNumber()))
 
     private fun bonusNumberInput(): BonusNumber {
 
