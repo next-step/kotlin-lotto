@@ -20,7 +20,7 @@ object LottoMatch {
                 .size
 
             val bonusMatch = lotto.getLottoNumber()
-                .find { it.number == bonusNumber.lottoNumber.number } != null
+                .find { bonusNumber.compareToLottoNumber(it) } != null
 
             val prizeType = PrizeType.findPrize(matchCount, bonusMatch)
 
