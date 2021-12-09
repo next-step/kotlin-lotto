@@ -7,7 +7,7 @@ object LottoShop {
 
     private const val LOTTO_MIN_NUMBER = 1
     private const val LOTTO_MAX_NUMBER = 45
-    private val LOTTO_LENGTH = 6
+    private const val LOTTO_LENGTH = 6
 
     fun createLottoTicket(ticketingCount: Int, manualLotto: List<String>): List<Lotto> {
 
