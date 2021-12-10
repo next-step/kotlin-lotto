@@ -9,7 +9,10 @@ fun main() {
     val resultView = ResultView()
     val lottoGame = LottoGame(inputView.readMoney())
 
-    resultView.showLottoNums(lottoGame.makeLottoNums())
+    val manualCount = inputView.readManualCount(lottoGame.totalLottoCount)
+    val manualLottoTickets = inputView.readManualNums(manualCount)
+
+    resultView.showLottoTickets(manualCount, lottoGame.buyLottoTickets(manualCount, manualLottoTickets))
 
     val winningNums = inputView.readWinningNums()
     val bonusNum = inputView.readBonusNum()
