@@ -14,3 +14,7 @@ class LottoNumber(val number: Int) {
     }
 
 }
+
+object LottoNumbers {
+    val ALL_LOTTO_NUMBERS = (LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER).map { LottoNumber(it) }
+}
