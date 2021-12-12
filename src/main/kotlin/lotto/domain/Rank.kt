@@ -16,7 +16,7 @@ enum class Rank(val prize: Int, val sameCount: Int, val bonus: Boolean = false) 
     companion object {
         fun rank(sameNumbers: List<Int>, isBonusWin: Boolean): Rank? {
             return when (sameNumbers.size) {
-                5 -> getRankWithBonus(isBonusWin)
+                RANK_SECOND_COUNT -> getRankWithBonus(isBonusWin)
                 else -> values().firstOrNull { it.sameCount == sameNumbers.size }
             }
 
@@ -29,6 +29,8 @@ enum class Rank(val prize: Int, val sameCount: Int, val bonus: Boolean = false) 
 
             return THIRD
         }
+
+        private const val RANK_SECOND_COUNT = 5
     }
 
 }

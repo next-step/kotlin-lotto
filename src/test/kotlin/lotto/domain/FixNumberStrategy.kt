@@ -6,8 +6,11 @@ package lotto.domain
  */
 class FixNumberStrategy(private val targets: List<Int>) : NumberStrategy {
 
-    override fun numbers(): List<Int> {
-        return targets
+    override fun numbers(): List<LottoNumber> {
+        return targets.map { LottoNumber(it) }
     }
 
+    override fun find(target: Int): LottoNumber {
+        TODO("Not yet implemented")
+    }
 }

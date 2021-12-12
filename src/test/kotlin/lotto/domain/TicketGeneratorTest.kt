@@ -1,13 +1,12 @@
 package lotto.domain
 
-import lotto.domain.NumberStrategy.Companion.NUMBERS
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class TicketGeneratorTest {
 
-    private val ticketGenerator = TicketGenerator(RandomNumberStrategy(NUMBERS))
+    private val ticketGenerator = TicketGenerator(RandomNumberStrategy)
 
     @Test
     fun `티켓 단건 생성`() {

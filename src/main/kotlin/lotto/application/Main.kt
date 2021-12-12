@@ -12,10 +12,13 @@ fun main() {
 
     val inputView = InputView()
     val amount = inputView.getAmount()
+    val manualCount = inputView.getManualTicketCount()
+    val manualTicketNumbers = inputView.getManualTicketNumbers(manualCount)
+    val manualTickets = Tickets(manualTicketNumbers.map { Ticket(it) })
 
-    val ticketGenerator = TicketGenerator(RandomNumberStrategy(NumberStrategy.NUMBERS))
-    val allTicket = ticketGenerator.tickets(amount)
-    inputView.showTicketCount(allTicket.tickets)
+    val ticketGenerator = TicketGenerator(RandomNumberStrategy)
+    val allTicket = ticketGenerator.tickets(amount, manualTickets)
+    inputView.showTicketCount(allTicket.tickets, manualCount)
 
     val winningNumbers = WinningNumber(inputView.getWinningNumbers(), inputView.getBonusNumber().toInt())
 
