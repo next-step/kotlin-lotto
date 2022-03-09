@@ -3,12 +3,12 @@ package lotto.domain
 data class Lotto(val numbers: List<Int>) : List<Int> by numbers {
 
     init {
-        require(validateNumbers())
+        require(isValidNumbers())
     }
 
     fun match(target: Lotto) = intersect(target).size
 
-    private fun validateNumbers(): Boolean {
+    private fun isValidNumbers(): Boolean {
         numbers.distinct().also {
             return it.size == NUMBER_SIZE && it.filterNot { number -> number in NUMBER_RANGE }.isEmpty()
         }
