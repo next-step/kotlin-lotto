@@ -1,13 +1,16 @@
 package lotto.domain.ticket
 
-data class LotteryNumber(val value: Int = LOTTERY_NUMBER_VALID_RANGE.random()) {
+@JvmInline
+value class LotteryNumber(val value: Int = LOTTERY_NUMBER_VALID_RANGE.random()) {
     init {
-        require(value in LOTTERY_NUMBER_VALID_RANGE)
+        require(value in LOTTERY_NUMBER_VALID_RANGE) { ERR_INVALID_VALUE }
     }
 
     companion object {
-        private const val START_RANGE = 1
-        private const val END_RANGE = 45
-        private val LOTTERY_NUMBER_VALID_RANGE = START_RANGE..END_RANGE
+        const val STARTING_VALUE = 1
+        const val ENDING_VALUE = 45
+        const val ERR_INVALID_VALUE = "[ERROR] The given number must be in the range $STARTING_VALUE to $ENDING_VALUE"
+
+        val LOTTERY_NUMBER_VALID_RANGE = STARTING_VALUE..ENDING_VALUE
     }
 }
