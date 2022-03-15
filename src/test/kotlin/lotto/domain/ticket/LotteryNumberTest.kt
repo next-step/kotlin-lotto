@@ -38,7 +38,7 @@ internal class LotteryNumberTest {
 
     @DisplayName("1보다 작거나 45보다 큰 값이 주어지면 `LotteryNumber` 객체 생성 실패")
     @ParameterizedTest
-    @ValueSource(ints = [-200, -8 -1, 0, 46, 50, 101, 800, 1_000_000])
+    @ValueSource(ints = [-200, -8, -1, 0, 46, 50, 101, 800, 1_000_000])
     fun `create a LotteryNumber if given value that is smaller than one or greater than forty five`(givenNumbers: Int) {
         // Arrange
         // Act
