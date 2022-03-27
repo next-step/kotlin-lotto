@@ -2,7 +2,6 @@ package lotto.view
 
 import lotto.domain.LottoResult
 import lotto.domain.Lottos
-import lotto.domain.Prize
 import kotlin.math.floor
 
 class ResultView {
@@ -18,8 +17,8 @@ class ResultView {
     fun printStatistics(result: LottoResult) {
         println("당첨 통계")
         println("---------")
-        result.statistics().forEach {
-            println("${it.prize.matchCount}개 일치 (${it.prize.money}원)- ${it.count}개")
+        result.statistics().forEach { (prize, count) ->
+            println("${prize.matchCount}개 일치 (${prize.money}원)- ${count}개")
         }
     }
 

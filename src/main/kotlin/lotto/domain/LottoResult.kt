@@ -1,27 +1,23 @@
 package lotto.domain
 
+import lotto.util.filterNotNull
+
 class LottoResult(
     private val originalPrice: Int,
     private val matchResult: List<Int>
 ) {
 
-    private fun same(count: Int): Int {
-        return matchResult.count { it == count }
-    }
-
-    fun statistics(): List<LottoStatistics> {
-        val prizes = Prize.all()
-        val statistics = mutableListOf<LottoStatistics>()
-        for (prize in prizes) {
-            val count = same(prize.matchCount)
-            statistics.add(LottoStatistics(prize, count))
-        }
-        return statistics
-    }
+    fun statistics(): LottoStatistics =
+        matchResult
+            .groupingBy { Prize.of(it) }
+            .eachCount()
+            .filterNotNull()
 
     fun profit(): Double {
         val statistics = statistics()
-        val earned = statistics.map { it.prize.money * it.count }.sum()
+        val earned = statistics
+            .map { (prize, count) -> (prize.money) * count }
+            .sum()
         return earned.toDouble().div(originalPrice)
     }
 }
