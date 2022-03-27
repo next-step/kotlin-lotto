@@ -1,6 +1,6 @@
-package lotto.domain.ticket
+package lotto.domain.ticket.lottery
 
-import lotto.domain.ticket.LotteryNumber.Companion.LOTTERY_NUMBER_VALID_RANGE
+import lotto.domain.ticket.lottery.LotteryNumber.Companion.LOTTERY_NUMBER_VALID_RANGE
 
 @JvmInline
 value class LotteryNumbers private constructor(

@@ -1,8 +1,8 @@
-package lotto.domain.ticket
+package lotto.domain.ticket.lottery
 
-import lotto.domain.ticket.LotteryNumber.Companion.ENDING_VALUE
-import lotto.domain.ticket.LotteryNumber.Companion.STARTING_VALUE
-import lotto.domain.ticket.LotteryNumbers.Companion.LOTTERY_NUMBERS_SIZE
+import lotto.domain.ticket.lottery.LotteryNumber.Companion.ENDING_VALUE
+import lotto.domain.ticket.lottery.LotteryNumber.Companion.STARTING_VALUE
+import lotto.domain.ticket.lottery.LotteryNumbers.Companion.LOTTERY_NUMBERS_SIZE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

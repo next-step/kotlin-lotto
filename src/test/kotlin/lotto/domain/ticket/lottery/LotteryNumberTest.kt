@@ -1,8 +1,8 @@
-package lotto.domain.ticket
+package lotto.domain.ticket.lottery
 
-import lotto.domain.ticket.LotteryNumber.Companion.ENDING_VALUE
-import lotto.domain.ticket.LotteryNumber.Companion.ERR_INVALID_VALUE
-import lotto.domain.ticket.LotteryNumber.Companion.STARTING_VALUE
+import lotto.domain.ticket.lottery.LotteryNumber.Companion.ENDING_VALUE
+import lotto.domain.ticket.lottery.LotteryNumber.Companion.ERR_INVALID_VALUE
+import lotto.domain.ticket.lottery.LotteryNumber.Companion.STARTING_VALUE
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName

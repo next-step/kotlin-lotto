@@ -1,4 +1,4 @@
-package lotto.domain.ticket
+package lotto.domain.ticket.lottery
 
 @JvmInline
 value class LotteryNumber(val value: Int = LOTTERY_NUMBER_VALID_RANGE.random()) {
