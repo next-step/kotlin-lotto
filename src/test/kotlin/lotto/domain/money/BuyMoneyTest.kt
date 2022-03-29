@@ -1,26 +1,26 @@
 package lotto.domain.money
 
-import lotto.domain.money.Money.Companion.DEFAULT_TICKET_PRICE
-import lotto.domain.money.Money.Companion.ERR_INVALID_MONEY_VALUE
+import lotto.domain.money.BuyMoney.Companion.DEFAULT_TICKET_PRICE
+import lotto.domain.money.BuyMoney.Companion.ERR_INVALID_MONEY_VALUE
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-@DisplayName("로또 복권을 구매할 때 사용할 객체 `Money` 테스트")
-internal class MoneyTest {
+@DisplayName("로또 복권을 구매할 때 사용할 객체 `BuyMoney` 테스트")
+internal class BuyMoneyTest {
 
     @DisplayName("티켓 기본가인 ${DEFAULT_TICKET_PRICE}의 배수로 구성된 값이 주어지면 `Money` 객체 생성")
     @ParameterizedTest
     @ValueSource(ints = [1_000, 2_000, 10_000, 15_000, 33_000, 78_000, 100_000, 1_500_000])
-    fun `create Money if given value that is composed of a multiple of ${DEFAULT_TICKET_PRICE}`(givenMoney: Int) {
+    fun `create Money if given value that is composed of a multiple of default ticket price`(givenMoney: Int) {
         // Arrange
         // Act
-        val money = Money(givenMoney)
+        val buyMoney = BuyMoney(givenMoney)
 
         // Assert
-        assertThat(money.value).isEqualTo(givenMoney)
+        assertThat(buyMoney.value).isEqualTo(givenMoney)
     }
 
     @DisplayName("주어지는 값이 `0`보다 작거나 같으면 `Money` 객체 생성 실패")
@@ -31,7 +31,7 @@ internal class MoneyTest {
         // Act
         // Assert
         assertThatThrownBy() {
-            Money(givenMoney)
+            BuyMoney(givenMoney)
         }.isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining(ERR_INVALID_MONEY_VALUE)
     }
@@ -44,7 +44,7 @@ internal class MoneyTest {
         // Act
         // Assert
         assertThatThrownBy() {
-            Money(givenMoney)
+            BuyMoney(givenMoney)
         }.isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining(ERR_INVALID_MONEY_VALUE)
     }

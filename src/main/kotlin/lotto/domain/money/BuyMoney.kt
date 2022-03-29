@@ -1,7 +1,7 @@
 package lotto.domain.money
 
 @JvmInline
-value class Money(val value: Int) {
+value class BuyMoney(val value: Int) {
     init {
         assertGivenValueIsValid(value)
     }
