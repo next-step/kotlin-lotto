@@ -8,7 +8,7 @@ object LottoShop {
 
     fun quickPickBuy(money: BuyMoney): List<LottoGame> {
         return (START_TICKET..money.howManyBuyTicket).map {
-            LottoGame.auto()
+            LottoGame.quickPick()
         }
     }
 }

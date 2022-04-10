@@ -12,10 +12,10 @@ internal class LottoGameTest {
 
     @DisplayName("로또 복권 티켓의 한 게임을 자동 생성 시 중복된 값을 갖지 않는 `LottoGame` 객체 생성")
     @Test
-    fun `auto create LottoGame`() {
+    fun `auto-generated LottoGame`() {
         // Arrange
         // Act
-        val lottoGame = LottoGame.auto()
+        val lottoGame = LottoGame.quickPick()
 
         val valueSet = lottoGame.value.toSet()
 
@@ -28,7 +28,7 @@ internal class LottoGameTest {
     fun `value-function return value that is included in the range one to forty five if auto create LottoGame`() {
         // Arrange
         // Act
-        val lottoGame = LottoGame.auto()
+        val lottoGame = LottoGame.quickPick()
 
         val lotteryNumbers = lottoGame.value
 

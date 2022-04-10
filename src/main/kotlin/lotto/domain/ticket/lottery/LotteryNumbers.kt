@@ -23,7 +23,7 @@ value class LotteryNumbers private constructor(
         private const val START_INDEX = 0
         private const val END_INDEX = 6
 
-        fun auto(): LotteryNumbers {
+        fun quickPick(): LotteryNumbers {
             val randomLotteryNumbers = LOTTERY_NUMBER_VALID_RANGE.shuffled()
                 .subList(START_INDEX, END_INDEX)
                 .map { LotteryNumber(it) }

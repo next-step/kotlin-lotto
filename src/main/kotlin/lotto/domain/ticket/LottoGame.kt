@@ -14,8 +14,8 @@ value class LottoGame private constructor(
     }
 
     companion object {
-        fun auto(): LottoGame {
-            return LottoGame(LotteryNumbers.auto())
+        fun quickPick(): LottoGame {
+            return LottoGame(LotteryNumbers.quickPick())
         }
     }
 }

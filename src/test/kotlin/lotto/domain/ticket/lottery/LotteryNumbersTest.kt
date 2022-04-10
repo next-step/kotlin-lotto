@@ -15,7 +15,7 @@ internal class LotteryNumbersTest {
     fun `create a LotteryNumbers that is included in the range one to forty five if auto-generated`() {
         // Arrange
         // Act
-        val lotteryNumbers = LotteryNumbers.auto()
+        val lotteryNumbers = LotteryNumbers.quickPick()
 
         // Assert
         lotteryNumbers.values
@@ -28,7 +28,7 @@ internal class LotteryNumbersTest {
     @Test
     fun `create a LotteryNumbers that is not duplicate if auto-generated`() {
         // Arrange
-        val lotteryNumbers = LotteryNumbers.auto()
+        val lotteryNumbers = LotteryNumbers.quickPick()
 
         // Act
         val valueSet = lotteryNumbers.values.toSet()
@@ -42,7 +42,7 @@ internal class LotteryNumbersTest {
     fun `assert lotteryNumbers size is 6 in LotteryNumbers if create a LotteryNumbers`() {
         // Arrange
         // Act
-        val lotteryNumberValuesSize = LotteryNumbers.auto().size
+        val lotteryNumberValuesSize = LotteryNumbers.quickPick().size
 
         // Assert
         assertThat(lotteryNumberValuesSize).isEqualTo(LOTTERY_NUMBERS_SIZE)
