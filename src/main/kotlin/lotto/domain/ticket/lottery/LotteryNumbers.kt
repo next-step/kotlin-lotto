@@ -31,5 +31,19 @@ value class LotteryNumbers private constructor(
 
             return LotteryNumbers(randomLotteryNumbers)
         }
+
+        fun of(givenNumbers: List<Int>): LotteryNumbers {
+            val uniqueNumberSet = givenNumbers.toSet()
+
+            if (uniqueNumberSet.size != LOTTERY_NUMBERS_SIZE) {
+                throw IllegalArgumentException(ERR_INVALID_SIZE)
+            }
+
+            return LotteryNumbers(
+                uniqueNumberSet.map {
+                    LotteryNumber(it)
+                }.toSet()
+            )
+        }
     }
 }
