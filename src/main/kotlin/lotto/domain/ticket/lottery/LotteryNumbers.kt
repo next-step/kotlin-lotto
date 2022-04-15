@@ -16,6 +16,12 @@ value class LotteryNumbers private constructor(
     val size: Int
         get() = _lotteryNumbers.size
 
+    fun numberOfMatchesWithWinningNumbers(winningLotteryNumbers: LotteryNumbers): Int {
+        return _lotteryNumbers.count {
+            it.value in winningLotteryNumbers.values
+        }
+    }
+
     companion object {
         const val LOTTERY_NUMBERS_SIZE: Int = 6
 
