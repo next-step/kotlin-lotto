@@ -20,10 +20,11 @@ class ResultView {
         result.statistics().forEach { (prize, count) ->
             println("${prize.matchCount}개 일치 (${prize.money}원)- ${count}개")
         }
+        printProfit(result)
     }
 
-    fun printProfit(result: LottoResult) {
-        val profitPercent = floor(result.profit() * 100) / 100
+    private fun printProfit(result: LottoResult) {
+        val profitPercent = floor(result.profit() * MAX_PERCENT) / MAX_PERCENT
         print("총 수익률은 ${profitPercent}입니다.")
         print("(기준이 ${PROFIT_PERCENT_STANDARD}이기 때문에 ")
         when {
@@ -41,5 +42,6 @@ class ResultView {
 
     companion object {
         private const val PROFIT_PERCENT_STANDARD = 1
+        private const val MAX_PERCENT = 100
     }
 }
