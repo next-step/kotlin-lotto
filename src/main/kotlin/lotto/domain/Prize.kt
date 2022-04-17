@@ -11,9 +11,7 @@ enum class Prize(
     SIX_MATCHED(6, 2_000_000_000);
 
     companion object {
-        fun of(matchCount: Int): Prize? {
-            return values()
-                .find { it.matchCount == matchCount }
-        }
+        fun of(matchCount: Int): Prize? = values()
+            .find { it.matchCount == matchCount }
     }
 }
