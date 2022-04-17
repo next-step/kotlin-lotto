@@ -1,7 +1,5 @@
 package calculator
 
-import java.lang.RuntimeException
-
 class StringAddCalculator {
 
     fun add(text: String?): Int {
@@ -34,5 +32,4 @@ class StringAddCalculator {
         private const val DELIMITER_COLON = ":"
         private val REGEX = Regex(REGEX_PATTERN)
     }
-
 }

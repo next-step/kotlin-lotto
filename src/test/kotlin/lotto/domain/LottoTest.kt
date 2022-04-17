@@ -31,7 +31,8 @@ internal class LottoTest {
     @ParameterizedTest
     @MethodSource("provideMatchCount")
     internal fun `기준이 되는 로또 숫자와 비교했을 때 몇 개의 숫자가 동일한지 확인할 수 있다`(
-        candidateNumbers: List<Int>, matchCount: Int
+        candidateNumbers: List<Int>,
+        matchCount: Int
     ) {
         val candidate = Lotto(candidateNumbers)
         val targetLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
