@@ -17,5 +17,9 @@ value class LottoGame private constructor(
         fun quickPick(): LottoGame {
             return LottoGame(LotteryNumbers.quickPick())
         }
+
+        fun of(lotteryNumbers: LotteryNumbers): LottoGame {
+            return LottoGame(lotteryNumbers)
+        }
     }
 }
