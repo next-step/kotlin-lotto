@@ -2,7 +2,7 @@ package lotto.domain
 
 enum class Prize(
     val matchCount: Int,
-    val money: Long
+    val money: Money
 ) {
 
     THREE_MATCHED(3, 5_000),

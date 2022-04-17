@@ -1,25 +1,14 @@
 package lotto.domain
 
-class Lottos(private val lottos: List<Lotto>) {
-
-    fun matchAll(target: Lotto) = LottoResult(
-        originalPrice = originalPrice(),
-        matchResult = lottos.map { it.match(target) }
-    )
-
-    fun size() = lottos.size
-
-    fun forEach(action: (Lotto) -> Unit) {
-        for (element in lottos) action(element)
-    }
-
-    private fun originalPrice() = size() * PRICE
+class Lottos(private val lottos: List<Lotto>) : List<Lotto> by lottos {
 
     companion object {
-        private const val PRICE = 1000
+        private const val PRICE = 1_000L
 
-        fun buyRandom(price: Int): Lottos {
-            return Lottos(List(price / PRICE) { Lotto.buyRandom() })
+        fun buyRandom(budget: Money): Lottos {
+            return Lottos(List(availablePurchases(budget)) { Lotto.buyRandom() })
         }
+
+        private fun availablePurchases(budget: Money): Int = (budget / PRICE).toInt()
     }
 }

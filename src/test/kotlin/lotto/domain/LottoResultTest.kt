@@ -16,7 +16,7 @@ internal class LottoResultTest {
             )
         )
         val matchLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val statistics = lottos.matchAll(matchLotto).statistics()
+        val statistics = LottoStatistics(lottos = lottos, target = matchLotto)
         assertThat(statistics).containsExactlyEntriesOf(
             mapOf(
                 Prize.SIX_MATCHED to 2,
@@ -27,13 +27,14 @@ internal class LottoResultTest {
 
     @Test
     internal fun `총 수익률과 결과적으로 손해인지 이득인지 알려준다`() {
+        val originalBudget = 1_000L
         val lottos = Lottos(
             listOf(
                 Lotto(listOf(11, 12, 13, 14, 15, 16))
             )
         )
         val matchLotto = Lotto(listOf(1, 2, 3, 11, 12, 13))
-        val result = lottos.matchAll(matchLotto)
-        assertThat(result.profit()).isEqualTo(5.0)
+        val result = LottoStatistics(lottos = lottos, target = matchLotto)
+        assertThat(result.profit(originalBudget)).isEqualTo(5L)
     }
 }
