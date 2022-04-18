@@ -1,12 +1,17 @@
 package lotto.domain
 
-class Lotto(val numbers: List<Int>) : List<LottoNumber> by numbers.map(::LottoNumber) {
+class Lotto(numbers: List<Int>) {
+
+    private val _numbers: MutableList<LottoNumber> = numbers
+        .map(::LottoNumber)
+        .toMutableList()
+    val numbers: List<LottoNumber> get() = _numbers
 
     init {
         require(isValid())
     }
 
-    fun match(target: Lotto) = intersect(target).size
+    fun match(target: Lotto) = numbers.intersect(target.numbers.toSet()).size
 
     private fun isValid(): Boolean = numbers
         .distinct()
