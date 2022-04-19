@@ -20,6 +20,6 @@ internal class LottoShopTest {
         val lottoGames = LottoShop.quickPickBuy(buyMoney)
 
         // Assert
-        assertThat(lottoGames.size).isEqualTo(buyMoney.howManyBuyTicket)
+        assertThat(lottoGames.size).isEqualTo(buyMoney.howManyBuyLottoGames)
     }
 }

@@ -16,14 +16,14 @@ value class BuyMoney(val value: Int) {
         MIN_VALUE < value
 
     private fun isMultipleOfTicketDefaultPrice(value: Int): Boolean =
-        value % DEFAULT_TICKET_PRICE == 0
+        value % DEFAULT_LOTTO_GAME_PRICE == 0
 
-    val howManyBuyTicket: Int
-        get() = value / DEFAULT_TICKET_PRICE
+    val howManyBuyLottoGames: Int
+        get() = value / DEFAULT_LOTTO_GAME_PRICE
 
     companion object {
         const val MIN_VALUE = 0
-        const val DEFAULT_TICKET_PRICE: Int = 1_000
-        const val ERR_INVALID_MONEY_VALUE = "[ERROR] The given value must be greater than $MIN_VALUE and multiple of $DEFAULT_TICKET_PRICE"
+        const val DEFAULT_LOTTO_GAME_PRICE: Int = 1_000
+        const val ERR_INVALID_MONEY_VALUE = "[ERROR] The given value must be greater than $MIN_VALUE and multiple of $DEFAULT_LOTTO_GAME_PRICE"
     }
 }
