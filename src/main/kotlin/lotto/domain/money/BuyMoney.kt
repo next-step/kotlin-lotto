@@ -3,12 +3,8 @@ package lotto.domain.money
 @JvmInline
 value class BuyMoney(val value: Int) {
     init {
-        assertGivenValueIsValid(value)
-    }
-
-    private fun assertGivenValueIsValid(value: Int) {
         require(isGreaterThanZero(value) && isMultipleOfTicketDefaultPrice(value)) {
-            IllegalArgumentException(ERR_INVALID_MONEY_VALUE)
+            ERR_INVALID_MONEY_VALUE
         }
     }
 
