@@ -1,9 +1,8 @@
 package stringcalculator.util
 
-import stringcalculator.util.StringExpressionValidator.isNotOneDigitNaturalNumber
+import stringcalculator.util.StringExpressionValidator.isOneDigitNaturalNumber
 
 object StringExpressionParser {
-    private const val INVALID_NUMBER_ERR_MESSAGE = "[Error] : Invalid number value"
     private const val COMMA_DELIMITER = ","
     private const val COLON_DELIMITER = ":"
     private const val DELIMITER_GROUP = 1
@@ -22,9 +21,9 @@ object StringExpressionParser {
             } ?: listOf()
 
     fun String.toOneDigitNaturalNumber(): Int {
-        if (this.isNotOneDigitNaturalNumber()) {
-            throw RuntimeException(INVALID_NUMBER_ERR_MESSAGE)
-        }
+        require(
+            this.isOneDigitNaturalNumber()
+        )
 
         return this.toInt()
     }

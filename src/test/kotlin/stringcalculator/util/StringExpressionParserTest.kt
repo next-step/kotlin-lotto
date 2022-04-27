@@ -12,6 +12,7 @@ import java.util.stream.Stream
 
 @DisplayName("문자열 계산시 변환을 담당하는 객체인 `StringExpressionParserTest` 테스트")
 internal class StringExpressionParserTest {
+
     @DisplayName("`,`, `:`와 같이 기본 구분자로 구성된 숫자 문자열이 주어지면 포함된 숫자들을 쪼개어 리스트로 반환 성공")
     @ParameterizedTest
     @MethodSource("expressionThatContainsDefaultDelimiter")
@@ -113,7 +114,6 @@ internal class StringExpressionParserTest {
                     "//!\n9!8!7!6!5!4!3!2!1",
                     listOf("9", "8", "7", "6", "5", "4", "3", "2", "1")
                 ),
-                // "//#\n2#4#4", ""
                 Arguments.of(
                     "//#\n2#4#4",
                     listOf("2", "4", "4")

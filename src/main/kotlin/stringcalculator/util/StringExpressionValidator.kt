@@ -5,5 +5,4 @@ object StringExpressionValidator {
     private val NATURAL_NUMBER_REGEX = Regex(ONE_DIGIT_NATURAL_NUMBER_EXP)
 
     fun String.isOneDigitNaturalNumber(): Boolean = this.matches(NATURAL_NUMBER_REGEX)
-    fun String.isNotOneDigitNaturalNumber(): Boolean = !this.isOneDigitNaturalNumber()
 }
