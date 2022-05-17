@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class StringAddCalculatorTest : DescribeSpec({
-    val calculator = StringAddCalculator()
+    val calculator = StringAddCalculator
 
     describe("calculate") {
         context("null 을 입력할 경우") {

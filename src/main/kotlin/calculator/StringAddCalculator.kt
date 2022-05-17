@@ -2,7 +2,12 @@ package calculator
 
 import java.util.regex.Pattern
 
-class StringAddCalculator {
+object StringAddCalculator {
+    private val CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)")
+    private val DEFAULT_DELIMITERS = listOf(",", ":").toTypedArray()
+    private const val DELIMITER_INDEX = 1
+    private const val NUMBERS_INDEX = 2
+
     fun calculate(input: String?): Int {
         if (input == null || input.isEmpty()) {
             return 0
@@ -19,12 +24,5 @@ class StringAddCalculator {
         } else {
             input.split(*DEFAULT_DELIMITERS).map(CalculatorNumber::of)
         }
-    }
-
-    companion object {
-        private val CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)")
-        private val DEFAULT_DELIMITERS = listOf(",", ":").toTypedArray()
-        private const val DELIMITER_INDEX = 1
-        private const val NUMBERS_INDEX = 2
     }
 }
