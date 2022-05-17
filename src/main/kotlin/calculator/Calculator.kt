@@ -5,7 +5,7 @@ object Calculator {
         if(input.isNullOrBlank()) {
             return 0
         }
-        return input.split(",")
+        return input.split(",", ":")
             .sumOf{ it.toInt() }
     }
 }
