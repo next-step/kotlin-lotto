@@ -6,7 +6,7 @@ class StringAddCalculator {
             return 0
         }
 
-        return text.split(",").map { it.trim().toInt() }
+        return text.split(Regex(",|:")).map { it.trim().toInt() }
             .reduce { a, b -> a + b }
     }
 }
