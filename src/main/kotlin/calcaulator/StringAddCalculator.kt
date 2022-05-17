@@ -7,6 +7,7 @@ class StringAddCalculator {
         }
 
         return text.toNumberTokenList()
+            .validate { it >= 0 }
             .reduce { a, b -> a + b }
     }
 
@@ -23,5 +24,13 @@ class StringAddCalculator {
 
         private fun String.toNumberTokenList() =
             this.toCalculatorInput().toNumberTokenList()
+
+        private fun <E> Collection<E>.validate(action: (E) -> Boolean): Collection<E> {
+            val invalidValue = this.filterNot(action)
+            if (invalidValue.isNotEmpty()) {
+                throw RuntimeException()
+            }
+            return this
+        }
     }
 }
