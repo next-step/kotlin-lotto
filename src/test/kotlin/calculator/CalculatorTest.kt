@@ -29,14 +29,14 @@ class CalculatorTest : FunSpec({
     }
 
     test("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.") {
-        shouldThrow<java.lang.RuntimeException> {
+        shouldThrow<RuntimeException> {
             calculate("-1")
             calculate("-1,2,3")
         }
     }
 
     test("숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생해야 한다.") {
-        shouldThrow<java.lang.RuntimeException> {
+        shouldThrow<RuntimeException> {
             calculate("A")
             calculate("A,2,3")
         }

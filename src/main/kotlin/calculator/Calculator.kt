@@ -1,23 +1,30 @@
 package calculator
 
 fun calculate(input: String?): Int {
-    return checkValidation(input)?.let { text -> getSplitList(text).sumOf() } ?: 0
+    return checkValidation(input)
+        ?.let { text -> getSplitList(text).sumOf() }
+        ?: 0
 }
 
 private fun checkValidation(input: String?): String? {
-    return if (input.isNullOrBlank()) { null } else { input }
+    return input.takeUnless {
+        it.isNullOrBlank()
+    }
 }
 
 private fun getSplitList(input: String): List<String> {
-    return Regex(DELIMITER_REGEX).find(input)?.let {
-        it.groupValues[2].split(it.groupValues[1])
-    } ?: input.split(",", ":")
+    return DELIMITER_REGEX.toRegex().find(input)
+        ?.let {
+            val (_, delimiter, target) = it.groupValues
+            target.split(delimiter)
+        }
+        ?: input.split(",", ":")
 }
 
-private fun List<String>.sumOf(): Int {
-    return this.map { it.toIntOrNull() ?: throw RuntimeException() }
-        .onEach { if (it < 0) throw RuntimeException() }
-        .sumOf { it }
+private fun List<String>.sumOf() = sumOf {
+    it.toIntOrNull()
+        ?.takeIf { number -> number >= 0 }
+        ?: throw RuntimeException()
 }
 
 const val DELIMITER_REGEX = "//(.)\n(.*)"
