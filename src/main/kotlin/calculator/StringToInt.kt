@@ -1,5 +1,9 @@
 package calculator
 
+const val NULL_OR_EMPTY_VALUE = 0
 fun parseToInt(string: String?): Int {
-    return string!!.toInt()
+    if (string.isNullOrBlank()) {
+        return NULL_OR_EMPTY_VALUE
+    }
+    return string.toInt()
 }
