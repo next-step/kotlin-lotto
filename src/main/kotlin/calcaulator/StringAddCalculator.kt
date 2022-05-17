@@ -6,7 +6,14 @@ class StringAddCalculator {
             return 0
         }
 
-        return text.split(Regex(",|:")).map { it.trim().toInt() }
+        return text.toNumberTokenList()
             .reduce { a, b -> a + b }
+    }
+
+    private fun String.toNumberTokenList() = CalculatorInput(this, Regex(DEFAULT_DELIMITER))
+        .toNumberTokenList()
+
+    companion object {
+        private const val DEFAULT_DELIMITER = ",|:"
     }
 }
