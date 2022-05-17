@@ -3,6 +3,7 @@ package calculator
 import calcaulator.StringAddCalculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -45,5 +46,15 @@ internal class StringAddCalculatorTest {
     )
     fun `구분자를 쉼표(,) 이외에 콜론을 사용할 수 있다`(text: String, expected: Int) {
         assertThat(calculator.add(text)).isSameAs(expected)
+    }
+
+    @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다")
+    @ParameterizedTest
+    @CsvSource(
+        "'//;\n1;2;3',6",
+        "'//;\n1;2;3;4',10"
+    )
+    fun customDelimiter(text: String) {
+        assertThat(calculator.add(text)).isSameAs(6)
     }
 }
