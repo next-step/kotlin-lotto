@@ -74,7 +74,7 @@ internal class StringAddCalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = [" ", "      ", ",:,"])
-    fun `blank 값을 입력할 경우 0을 반환해야 한다`(text: String?) {
+    fun `blank 값을 입력할 경우 0을 반환해야 한다`(text: String) {
         assertThat(calculator.add(text)).isZero
     }
 }
