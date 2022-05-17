@@ -5,6 +5,8 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()) {
             return 0
         }
-        return text.toInt()
+
+        return text.split(",").map { it.trim().toInt() }
+            .reduce { a, b -> a + b }
     }
 }

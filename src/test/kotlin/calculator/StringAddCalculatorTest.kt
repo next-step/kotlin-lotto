@@ -4,6 +4,7 @@ import calcaulator.StringAddCalculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -26,5 +27,14 @@ internal class StringAddCalculatorTest {
     @ValueSource(strings = ["1", "2", "3", "4", "100"])
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String) {
         assertThat(calculator.add(text)).isSameAs(text.toInt())
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'1,2',3",
+        "'1,2,3',6"
+    )
+    fun `숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(text: String, expected: Int) {
+        assertThat(calculator.add(text)).isSameAs(expected)
     }
 }
