@@ -9,4 +9,8 @@ class CalculatorTest : FunSpec({
         Calculator.calculate("") shouldBe 0
         Calculator.calculate(null) shouldBe 0
     }
+
+    test("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.") {
+        Calculator.calculate("1") shouldBe 1
+    }
 })

@@ -2,6 +2,6 @@ package calculator
 
 object Calculator {
     fun calculate(input: String?): Int {
-        return 0
+        return input?.toIntOrNull() ?: 0
     }
 }
