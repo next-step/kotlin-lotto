@@ -65,4 +65,16 @@ internal class StringAddCalculatorTest {
     fun negative(text: String) {
         assertThrows<RuntimeException> { calculator.add(text) }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;a;3"])
+    fun `숫자가 아닌 값`(text: String) {
+        assertThrows<RuntimeException> { calculator.add(text) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = [" ", "      ", ",:,"])
+    fun `blank 값을 입력할 경우 0을 반환해야 한다`(text: String?) {
+        assertThat(calculator.add(text)).isZero
+    }
 }
