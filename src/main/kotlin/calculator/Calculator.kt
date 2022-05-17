@@ -2,6 +2,10 @@ package calculator
 
 object Calculator {
     fun calculate(input: String?): Int {
-        return input?.toIntOrNull() ?: 0
+        if(input.isNullOrBlank()) {
+            return 0
+        }
+        return input.split(",")
+            .sumOf{ it.toInt() }
     }
 }
