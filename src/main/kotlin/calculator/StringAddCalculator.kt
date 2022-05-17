@@ -7,28 +7,24 @@ class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0
         }
+        return numbers(input).reduce { a, b -> a + b }.value
+    }
 
-        val matcher = Pattern.compile("//(.)\\n(.*)").matcher(input)
-        if (matcher.find()) {
-            val delimiter = matcher.group(1)
-            return matcher.group(2)
-                .split(delimiter)
-                .sumOf {
-                    val number = it.toInt()
-                    if (number < 0) {
-                        throw IllegalArgumentException()
-                    }
-                    number
-                }
+    private fun numbers(input: String): List<CalculatorNumber> {
+        val matcher = CUSTOM_DELIMITER_PATTERN.matcher(input)
+        return if (matcher.find()) {
+            val delimiter = matcher.group(DELIMITER_INDEX)
+            val numbers = matcher.group(NUMBERS_INDEX)
+            numbers.split(delimiter).map(CalculatorNumber::of)
+        } else {
+            input.split(*DEFAULT_DELIMITERS).map(CalculatorNumber::of)
         }
+    }
 
-        val numbers = input.split(",", ":")
-        return numbers.sumOf {
-            val number = it.toInt()
-            if (number < 0) {
-                throw IllegalArgumentException()
-            }
-            number
-        }
+    companion object {
+        private val CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)")
+        private val DEFAULT_DELIMITERS = listOf(",", ":").toTypedArray()
+        private const val DELIMITER_INDEX = 1
+        private const val NUMBERS_INDEX = 2
     }
 }

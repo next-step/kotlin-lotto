@@ -7,30 +7,30 @@ import io.kotest.matchers.shouldBe
 class EscapeStringFilterTest : DescribeSpec({
 
     // excluded
-    describe("include escape string \\n"){
+    describe("include escape string \\n") {
         // excluded
-        context("something..."){
+        context("something...") {
             // excluded
-            it("something..."){
+            it("something...") {
                 true shouldBe true
             }
         }
     }
 
     // run
-    describe("something..."){
+    describe("something...") {
         // excluded
-        context("include escape string \\n"){
+        context("include escape string \\n") {
             // excluded
-            it("something true"){
+            it("something true") {
                 true shouldBe true
             }
         }
 
         // run
-        context("something ..."){
+        context("something ...") {
             // run
-            it("include escape string \\n"){
+            it("include escape string \\n") {
                 true shouldBe true
             }
         }
