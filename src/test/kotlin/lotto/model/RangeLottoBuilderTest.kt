@@ -45,4 +45,25 @@ internal class RangeLottoBuilderTest {
         val lottos = lottoBuilder.createLottosByAmount(purchaseAmount = purchaseAmount)
         assertThat(lottos.lottoList.size).isEqualTo(expectedCountOfLotto)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'1,2,3,4,5,6',6",
+        "'1,2,3,4,5,16',5",
+        "'1,2,3,4,15,16',4",
+        "'1,2,3,14,15,16',3",
+        "'1,2,13,14,15,16',2",
+        "'1,12,13,14,15,16',1",
+        "'11,12,13,14,15,16',0",
+        "'11,12,3,14,15,6',2",
+    )
+    fun `1~45 사이 숫자 중 6개 당첨 번호를 만들어 일치 갯수를 계산한다`(lottoNumberString: String, expectedMatchCount: Int) {
+
+        val winningLottoNumber = "1,2,3,4,5,6"
+
+        val lotto = StringLottoBuilder(lottoNumberString).createLotto()
+        val winningLotto = StringLottoBuilder(winningLottoNumber).createLotto()
+
+        assertThat(winningLotto.countOfMatchNumber(lotto)).isEqualTo(expectedMatchCount)
+    }
 }
