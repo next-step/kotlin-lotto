@@ -6,6 +6,7 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
+import lotto.view.input.parser.PurchaseCountInputView
 import lotto.view.output.ConsoleOutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -228,5 +229,19 @@ internal class RangeLottoBuilderTest {
 
         // then
         assertThat(actualString.toString()).isEqualTo(expectedString)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "0,0", // purchase amount , purchasable lotto count
+        "900,0",
+        "1000,1",
+        "1100,1",
+        "11000,11"
+    )
+    fun `콘솔입력을 통해 금액을 입력 받는다`(purchaseAmount: Int, expectedCountOfLotto: Int) {
+
+        val purchaseCountInputView = PurchaseCountInputView(policy) { purchaseAmount }
+        assertThat(purchaseCountInputView.getInput()).isEqualTo(expectedCountOfLotto)
     }
 }
