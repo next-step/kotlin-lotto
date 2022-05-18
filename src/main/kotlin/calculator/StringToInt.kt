@@ -1,6 +1,7 @@
 package calculator
 
-const val NULL_OR_EMPTY_VALUE = 0
+private const val NULL_OR_EMPTY_VALUE = 0
+private const val ZERO = 0
 
 fun parseToInt(string: String?): Int {
     if (string.isNullOrBlank()) {
@@ -18,7 +19,7 @@ fun parseToInt(string: String?): Int {
 }
 
 private fun validateNegative(number: Int) {
-    if (number < 0) {
+    if (number < ZERO) {
         throw RuntimeException()
     }
 }
