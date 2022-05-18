@@ -18,7 +18,7 @@ class StringAddCalculator(
 
         val operands = extractOperands(expression)
 
-        return Adder.add(operands)
+        return operands.sumOf { it.value }
     }
 
     private fun extractOperands(expression: String): List<Operand> {
