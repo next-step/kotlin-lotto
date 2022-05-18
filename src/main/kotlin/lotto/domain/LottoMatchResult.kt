@@ -1,22 +1,23 @@
 package lotto.domain
 
 import lotto.domain.LottoSeller.Companion.rewardPriceMap
+import lotto.domain.enums.LottoRank
 
 class LottoMatchResult(
     private val winningLotto: WinningLotto,
     private val lottoList: List<Lotto>
 ) {
-    val matchingMap: Map<Int, Int> = lottoList
+    val matchingMap: Map<LottoRank, Int> = lottoList
         .map { it.match(winningLotto) }
-        .groupingBy { it.size }
+        .groupingBy { LottoRank.of(it.size) }
         .eachCount()
 
     val revenue = matchingMap
         .entries
         .sumOf { (matchingCount, count) -> rewardPrice(matchingCount) * count }
 
-    fun matchingCountBy(matchingCount: Int): Int {
-        return matchingMap.getOrDefault(matchingCount, 0)
+    fun matchingCountBy(lottoRank: LottoRank): Int {
+        return matchingMap.getOrDefault(lottoRank, 0)
     }
 
     fun rateOfReturn(): String {
@@ -24,7 +25,7 @@ class LottoMatchResult(
         return String.format("%.2f", revenue.toDouble() / totalPrice.toDouble())
     }
 
-    private fun rewardPrice(matchingCount: Int): Long {
-        return rewardPriceMap.getOrDefault(matchingCount, 0)
+    private fun rewardPrice(lottoRank: LottoRank): Long {
+        return rewardPriceMap.getOrDefault(lottoRank.matchingCount, 0)
     }
 }

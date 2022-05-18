@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.comparables.shouldBeGreaterThanOrEqualTo
 import io.kotest.matchers.ints.shouldBeGreaterThan
+import lotto.domain.enums.LottoRank
 
 class LottoMatchResultTest : FunSpec({
 
@@ -12,7 +13,7 @@ class LottoMatchResultTest : FunSpec({
     )
 
     test("matchingCountBy") {
-        lottoMatchResult.matchingCountBy(3) shouldBeGreaterThan 0
+        lottoMatchResult.matchingCountBy(LottoRank.FIFTH) shouldBeGreaterThan 0
     }
 
     test("rateOfReturn") {

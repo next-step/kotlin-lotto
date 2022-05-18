@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.enums.LottoRank
 
 class WinningLottoTest : FunSpec({
 
@@ -15,9 +16,9 @@ class WinningLottoTest : FunSpec({
         val matchResult = winningLotto.match(lottoList)
 
         matchResult.matchingMap shouldBe mapOf(
-            4 to 1,
-            5 to 1,
-            6 to 1
+            LottoRank.FOURTH to 1,
+            LottoRank.THIRD to 1,
+            LottoRank.FIRST to 1
         )
     }
 })
