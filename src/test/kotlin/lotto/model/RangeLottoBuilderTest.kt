@@ -1,10 +1,12 @@
 package lotto.model
 
+import lotto.model.data.Lottos
 import lotto.model.data.Policy645
 import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
+import lotto.view.output.ConsoleOutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -158,5 +160,25 @@ internal class RangeLottoBuilderTest {
             { assertThat(statistics.winningCountMap[Winning.FIFTH]).isEqualTo(1) },
             { assertThat(statistics.winningCountMap[Winning.LOST_GAME]).isEqualTo(1) }
         )
+    }
+
+    @Test
+    fun `화면에 로또 리스트를 출력 한다`() {
+
+        // given
+        val lotto = StringLottoBuilder("1,2,3,4,5,6").createLotto()
+        val expectedString = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]\n\n"
+        val actualString = StringBuilder()
+
+        val outputView = ConsoleOutputView { outString ->
+            actualString.append(outString)
+            actualString.append("\n")
+        }
+
+        // when
+        outputView.printLottos(Lottos(listOf(lotto,lotto)))
+
+        // then
+        assertThat(actualString.toString()).isEqualTo(expectedString)
     }
 }
