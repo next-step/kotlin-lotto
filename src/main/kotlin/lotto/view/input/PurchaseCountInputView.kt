@@ -1,8 +1,7 @@
-package lotto.view.input.parser
+package lotto.view.input
 
 import lotto.model.data.Policy
-import lotto.view.input.ConsoleReader
-import lotto.view.input.InputView
+import lotto.view.input.parser.IntInputParser
 
 class PurchaseCountInputView(
     private val policy: Policy,

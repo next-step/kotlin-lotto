@@ -6,7 +6,7 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
-import lotto.view.input.parser.PurchaseCountInputView
+import lotto.view.input.PurchaseCountInputView
 import lotto.view.output.ConsoleOutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
