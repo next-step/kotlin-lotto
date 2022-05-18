@@ -7,7 +7,10 @@ import lotto.ui.WinningLottoView
 
 fun main() {
     LottoPurchaseView.inputPriceForPurchase()
-        .let { LottoSeller().purchaseAuto(it).also { LottoPurchaseView.printPurchaseResult(it.size) } }
+        .let {
+            LottoSeller().purchaseAuto(it)
+                .also { lotteList -> LottoPurchaseView.printPurchaseResult(lotteList.size) }
+        }
         .let { WinningLottoView.inputWinningLotto().match(it) }
         .let { StatisticsView.printResult(it) }
 }
