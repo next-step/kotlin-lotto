@@ -1,5 +1,6 @@
 package stringaddcalculator.domain
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
@@ -11,6 +12,11 @@ class OperandSpecs : DescribeSpec({
         }
         it("다른 피연산자와 더할 수 있다.") {
             Operand(1) + Operand(2) shouldBe Operand(3)
+        }
+        context("음수인 숫자를 입력받으면") {
+            it("예외를 발생시킨다.") {
+                shouldThrowExactly<RuntimeException> { Operand(-1) }
+            }
         }
     }
 })
