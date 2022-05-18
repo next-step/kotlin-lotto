@@ -10,11 +10,16 @@ class Separators {
     val size = separators.size
 
     operator fun contains(separator: String): Boolean {
-        return separators.any { it == Separator(separator) }
+        return separators.any { it.value == separator }
     }
 
     fun add(separator: String) {
         separators.add(Separator(separator))
+    }
+
+    fun toRegex(): Regex {
+        val string = separators.joinToString("") { it.value }
+        return "[$string]".toRegex()
     }
 
     companion object {

@@ -25,5 +25,11 @@ class SeparatorsSpecs : DescribeSpec({
             separators.add(",")
             separators.size shouldBe 2
         }
+
+        it("모든 구분자를 정규식으로 표현할 수 있다") {
+            val separators = Separators()
+            separators.add("^")
+            separators.toRegex() shouldBe Regex("[:,^]")
+        }
     }
 })
