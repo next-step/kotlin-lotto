@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.data.Policy645
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -9,20 +10,20 @@ import org.junit.jupiter.params.provider.CsvSource
 
 internal class RangeLottoBuilderTest {
 
+    private val policy = Policy645()
     private lateinit var lottoBuilder: RangeLottoBuilder
-    private val rangeOfNumbers = 1..45
-    private val countOfNumberToSelect = 6
-    private val priceOfLotto = 1000
 
     @BeforeEach
     fun setUp() {
-        lottoBuilder = RangeLottoBuilder(rangeOfNumbers, countOfNumberToSelect, priceOfLotto)
+        lottoBuilder = RangeLottoBuilder(policy)
     }
 
     @Test
     fun `1~45 사이 숫자 중 6개를 랜덤하게 뽑아내어 로또를 만든다`() {
 
         val lotto = lottoBuilder.createLotto()
+        val rangeOfNumbers = policy.rangeOfNumbers
+        val countOfNumberToSelect = policy.countOfNumberToSelect
 
         assertAll(
             { assertThat(lotto.numbers.filter { it !in rangeOfNumbers }).isEmpty() },
