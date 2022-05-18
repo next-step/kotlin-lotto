@@ -6,6 +6,7 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Winning.LOST_GAME
 import lotto.model.data.WinningSet
+import lotto.model.data.isWin
 
 object LottoEvaluator {
 
