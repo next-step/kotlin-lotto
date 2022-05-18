@@ -8,7 +8,7 @@ class PurchaseCountInputView(
     moneyAmountProvider: (() -> Int)? = null
 ) : InputView<Int> {
 
-    private val inputParser = PurchaseAmountInputParser(policy.priceOfLotto..MAX_AMOUNT_TO_PURCHASE)
+    private val inputParser = PurchaseAmountInputParser(policy)
     private val readInputAction = moneyAmountProvider ?: this::readAmountFromConsole
 
     override fun getInput(): Int {
@@ -24,6 +24,5 @@ class PurchaseCountInputView(
 
     companion object {
         private const val MESSAGE_TO_PURCHASE = "구입금액을 입력해 주세요."
-        private const val MAX_AMOUNT_TO_PURCHASE = 100_000 // 10만원 초과는 불법
     }
 }

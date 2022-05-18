@@ -13,7 +13,7 @@ internal class PurchaseAmountInputParserTest {
 
     @BeforeEach
     fun setUp() {
-        purchaseAmountInputParser = PurchaseAmountInputParser(policy.priceOfLotto..100_000)
+        purchaseAmountInputParser = PurchaseAmountInputParser(policy)
     }
 
     @ParameterizedTest
