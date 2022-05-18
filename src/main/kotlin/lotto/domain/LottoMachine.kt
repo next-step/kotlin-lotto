@@ -2,14 +2,7 @@ package lotto.domain
 
 class LottoMachine {
 
-    fun purchaseAuto(money: Long): List<Lotto> {
-        val numberOfPurchases = money / LOTTO_PRICE
-        return (1..numberOfPurchases)
-            .toList()
-            .map { generateAuto() }
-    }
-
-    private fun generateAuto(): Lotto {
+    fun generateAuto(): Lotto {
         return Lotto()
     }
 
