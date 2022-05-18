@@ -42,33 +42,23 @@ class StringAddTest {
     }
 
     @Test
-    fun `리스트의 합을 반환한다`() {
-        val numbers = listOf(1, 2, 3)
-        val addCalculator = AddCalculator()
+    fun `쉽표, 콜론으로 구분하여 수의 합을 반환한다`() {
+        val input = "1:2,3:4"
 
-        val answer = addCalculator.sum(numbers)
-        val expect = 6
+        val addCalculator = AddCalculator()
+        val answer = addCalculator.sum(input)
+
+        val expect = 10
         assertThat(answer).isEqualTo(expect)
     }
 
     @Test
-    fun `쉽표, 콜론으로 구분하여 수의 합을 반환한다`() {
-        val input = "1:2,3:4"
-
-        val inputValidator = InputValidator()
-        val inputParser = InputParser()
+    fun `숫자 하나만 들어오면 해당 숫자 반환`() {
+        val input = "1"
         val addCalculator = AddCalculator()
+        val answer = addCalculator.sum(input)
+        val expect = 1
 
-        val tokens = inputParser.parse(input)
-
-        tokens.forEach {
-            inputValidator.checkNatualAndZero(it)
-        }
-
-        val numbers = tokens.map { it.toInt() }
-        val answer = addCalculator.sum(numbers)
-
-        val expect = 10
         assertThat(answer).isEqualTo(expect)
     }
 }
