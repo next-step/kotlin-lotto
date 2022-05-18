@@ -1,6 +1,9 @@
 package lotto.model
 
 import lotto.model.data.Policy645
+import lotto.model.data.Result
+import lotto.model.data.Results
+import lotto.model.data.Statistics
 import lotto.model.data.Winning
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -106,5 +109,55 @@ internal class RangeLottoBuilderTest {
 
         // then
         assertThat(results.resultList.sumOf { it.winning.winMoney }).isEqualTo(expectedWonMoney)
+    }
+
+    @Test
+    fun `당첨 통계를 계산한다 -  Statistics`() {
+
+        // given
+        val resultList = listOf(
+            // 낙첨 1개,
+            // 3등 4개,
+            // 4등 3개,
+            // 5등 1개,
+            // 1등 1개,
+            Result(lottoBuilder.createLotto(), Winning.LOST_GAME),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+
+            Result(lottoBuilder.createLotto(), Winning.FIFTH),
+
+            Result(lottoBuilder.createLotto(), Winning.FIRST),
+
+            Result(lottoBuilder.createLotto(), Winning.FOURTH),
+            Result(lottoBuilder.createLotto(), Winning.FOURTH),
+            Result(lottoBuilder.createLotto(), Winning.FOURTH),
+        )
+        val results = Results(resultList)
+
+        val expectedLottoCount = resultList.size
+        val expectedTotalCost = expectedLottoCount * policy.priceOfLotto
+        val expectedTotalWonAmount = resultList.sumOf { it.winning.winMoney }
+        val expectedWinRatio = expectedTotalWonAmount.toDouble() / expectedTotalCost.toDouble()
+
+        // when
+        val statistics = Statistics(results, policy)
+
+        // then
+        assertAll(
+            { assertThat(statistics.lottoCount).isEqualTo(expectedLottoCount) },
+            { assertThat(statistics.totalCost).isEqualTo(expectedTotalCost) },
+            { assertThat(statistics.totalWonAmount).isEqualTo(expectedTotalWonAmount) },
+            { assertThat(statistics.winningRatio).isEqualTo(expectedWinRatio) },
+
+            { assertThat(statistics.winningCountMap[Winning.FIRST]).isEqualTo(1) },
+            { assertThat(statistics.winningCountMap[Winning.THIRD]).isEqualTo(4) },
+            { assertThat(statistics.winningCountMap[Winning.FOURTH]).isEqualTo(3) },
+            { assertThat(statistics.winningCountMap[Winning.FIFTH]).isEqualTo(1) },
+            { assertThat(statistics.winningCountMap[Winning.LOST_GAME]).isEqualTo(1) },
+
+            )
     }
 }

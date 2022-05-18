@@ -14,3 +14,5 @@ enum class Winning(private val matchCount: Int, val winMoney: Int) {
             return winningLotto.countOfMatchNumber(lotto) == this.matchCount
     }
 }
+
+val WinningSet = setOf(Winning.LOST_GAME, Winning.FIFTH, Winning.FOURTH, Winning.THIRD, Winning.FIRST)
