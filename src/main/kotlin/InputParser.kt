@@ -1,5 +1,4 @@
 class InputParser {
-
     fun parse(input: String, delimiters: String = DEFAULT_DELIMITER): List<String> {
         val customDelimiterMatch = "//(.)\n(.*)".toRegex().find(delimiters) ?: return parse(input, delimiters.toRegex())
 
