@@ -156,8 +156,7 @@ internal class RangeLottoBuilderTest {
             { assertThat(statistics.winningCountMap[Winning.THIRD]).isEqualTo(4) },
             { assertThat(statistics.winningCountMap[Winning.FOURTH]).isEqualTo(3) },
             { assertThat(statistics.winningCountMap[Winning.FIFTH]).isEqualTo(1) },
-            { assertThat(statistics.winningCountMap[Winning.LOST_GAME]).isEqualTo(1) },
-
-            )
+            { assertThat(statistics.winningCountMap[Winning.LOST_GAME]).isEqualTo(1) }
+        )
     }
 }
