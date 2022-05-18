@@ -1,9 +1,9 @@
 package lotto.view.input.parser
 
-import calcaulator.util.toIntList
 import lotto.model.data.Lotto
 import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.Policy
+import lotto.util.toBlankRemovedIntList
 
 class LottoInputParser(private val policy: Policy) : InputParser<Lotto> {
 
@@ -11,7 +11,7 @@ class LottoInputParser(private val policy: Policy) : InputParser<Lotto> {
 
         require(!inputString.isNullOrBlank()) { "잘못된 입력입이다." }
 
-        val numbers = inputString.toIntList(Regex(",")).toSet()
+        val numbers = inputString.toBlankRemovedIntList()
         val invalidNumbers = numbers.filter { it !in policy.rangeOfNumbers }
         val range = policy.rangeOfNumbers
 

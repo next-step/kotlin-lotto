@@ -1,11 +1,11 @@
 package lotto.contoller
 
-import calcaulator.util.toIntList
 import lotto.model.LottoBuilder
 import lotto.model.data.Lotto
 import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.Policy645
 import lotto.model.data.Statistics
+import lotto.util.toBlankRemovedIntList
 import lotto.view.input.InputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
@@ -40,8 +40,8 @@ internal class LottoControllerTest {
     }
 
     private fun createController(lottoNumberString: String, winningNumber: String): LottoController {
-        val lottoNumber = lottoNumberString.toIntList(delimiter = Regex(","))
-        val winningNumber = winningNumber.toIntList(delimiter = Regex(","))
+        val lottoNumber = lottoNumberString.toBlankRemovedIntList()
+        val winningNumber = winningNumber.toBlankRemovedIntList()
         val lottoBuilder = object : LottoBuilder {
             override fun createLotto(): Lotto {
                 return lottoNumber.toLotto()
