@@ -24,9 +24,17 @@ class StringAddCalculatorSpecs : DescribeSpec({
 
         context("숫자와 기본 구분자가 포함된 유효한 문자열을 입력받으면") {
             val input = "1,3:4"
-            it("숫자의 합을 반환한다") {
+            it("구분된 숫자의 합을 반환한다") {
                 val calculator = StringAddCalculator()
                 calculator.calculate(input) shouldBe 8
+            }
+        }
+
+        context("커스텀 구분자가 포함된 유효한 문자열을 입력받으면") {
+            val input = "//;\n1,2:3;4"
+            it("구분된 숫자의 합을 반환한다") {
+                val calculator = StringAddCalculator()
+                calculator.calculate(input) shouldBe 10
             }
         }
     }
