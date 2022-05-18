@@ -8,15 +8,17 @@ fun parseToInt(string: String?): Int {
     }
 
     return try {
-        validateNegative(string.toInt())
+        val number = string.toInt()
+        validateNegative(number)
+
+        number
     } catch (e: Exception) {
         throw RuntimeException()
     }
 }
 
-fun validateNegative(toInt: Int): Int {
-    if (toInt < 0) {
-        throw java.lang.RuntimeException()
+private fun validateNegative(number: Int) {
+    if (number < 0) {
+        throw RuntimeException()
     }
-    return toInt
 }
