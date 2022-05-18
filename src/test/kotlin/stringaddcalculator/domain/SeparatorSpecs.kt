@@ -15,7 +15,16 @@ class SeparatorSpecs : DescribeSpec({
             val value = ""
             it("예외를 발생시킨다") {
                 shouldThrowExactly<IllegalArgumentException> {
-                    Separator("")
+                    Separator(value)
+                }
+            }
+        }
+
+        context("구분자 문자가 숫자라면") {
+            val value = "100"
+            it("예외를 발생시킨다") {
+                shouldThrowExactly<IllegalArgumentException> {
+                    Separator(value)
                 }
             }
         }
