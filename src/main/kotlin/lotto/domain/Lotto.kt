@@ -13,7 +13,7 @@ class Lotto(numbers: List<Int> = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER).shuffled()
         this.numbers = numbers.toSortedSet()
     }
 
-    fun contains(target: Lotto): Set<Int> {
+    fun match(target: Lotto): Set<Int> {
         return numbers.filter {
             target.numbers.contains(it)
         }.toSortedSet()
