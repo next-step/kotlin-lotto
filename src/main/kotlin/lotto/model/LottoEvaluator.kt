@@ -10,11 +10,11 @@ import lotto.model.data.isWin
 
 object LottoEvaluator {
 
-    fun evaluate(winningLotto: Lotto, lotto: Lotto) = Result(
-        lotto, WinningSet.find { it.isWin(winningLotto, lotto) } ?: LOST_GAME
-    )
-
     fun evaluate(winningLotto: Lotto, lottos: Lottos) = Results(
         lottos.map { lotto -> evaluate(winningLotto, lotto) }
+    )
+
+    fun evaluate(winningLotto: Lotto, lotto: Lotto) = Result(
+        lotto, WinningSet.find { it.isWin(winningLotto, lotto) } ?: LOST_GAME
     )
 }
