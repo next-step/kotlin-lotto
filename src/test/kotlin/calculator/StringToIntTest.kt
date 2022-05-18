@@ -1,9 +1,11 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullSource
 import org.junit.jupiter.params.provider.ValueSource
+import java.lang.RuntimeException
 
 class StringToIntTest {
 
@@ -21,5 +23,17 @@ class StringToIntTest {
         val result = parseToInt(input)
 
         assertThat(result).isEqualTo(0)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["아무거나 입력", "문자"])
+    fun `숫자가 아닌 경우 RunTimeException을 반환한다`(input: String) {
+        assertThrows<RuntimeException> { parseToInt(input) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "-100"])
+    fun `음수를 받는 경우 RunTimeException을 반환한다`(input: String) {
+        assertThrows<RuntimeException> { parseToInt(input) }
     }
 }
