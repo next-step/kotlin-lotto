@@ -12,7 +12,7 @@ class CalculatorTest : FreeSpec({
             Calculator.calculate(input) shouldBe 0
         }
 
-        "black로 이루어진 문자열일 경우 0을 반황해야한다." {
+        "blank로 이루어진 문자열일 경우 0을 반황해야한다." {
             val input = "  "
             Calculator.calculate(input) shouldBe 0
         }
