@@ -12,7 +12,9 @@ object StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0
         }
-        return numbers(input).reduce { a, b -> a + b }.value
+        return numbers(input)
+            .reduce { a, b -> a + b }
+            .value
     }
 
     private fun numbers(input: String): List<CalculatorNumber> {
@@ -20,9 +22,13 @@ object StringAddCalculator {
         return if (matcher.find()) {
             val delimiter = matcher.group(DELIMITER_INDEX)
             val numbers = matcher.group(NUMBERS_INDEX)
-            numbers.split(delimiter).map(CalculatorNumber::of)
+            numbers
+                .split(delimiter)
+                .map(CalculatorNumber::of)
         } else {
-            input.split(*DEFAULT_DELIMITERS).map(CalculatorNumber::of)
+            input
+                .split(*DEFAULT_DELIMITERS)
+                .map(CalculatorNumber::of)
         }
     }
 }
