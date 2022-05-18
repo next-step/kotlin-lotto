@@ -5,15 +5,20 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberException
+import lotto.exception.InvalidLottoNumberSizeException
 
 class LottoTest : FunSpec({
     test("Lotto 숫자는 6개로 구성된다.") {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         lotto.numbers.size shouldBe 6
 
-        shouldThrow<InvalidLottoNumberException> {
+        shouldThrow<InvalidLottoNumberSizeException> {
             Lotto(listOf())
+        }
+        shouldThrow<InvalidLottoNumberSizeException> {
             Lotto(listOf(1))
+        }
+        shouldThrow<InvalidLottoNumberSizeException> {
             Lotto(listOf(1, 2, 3, 4, 5, 6, 7))
         }
     }
@@ -21,6 +26,15 @@ class LottoTest : FunSpec({
     test("로또 숫자는 중복이 없어야 한다.") {
         shouldThrow<DuplicateLottoNumberException> {
             Lotto(listOf(1, 1, 1, 4, 5, 6))
+        }
+    }
+
+    test("로또 번호는 1 부터 45까지 허용된다.") {
+        shouldThrow<InvalidLottoNumberException> {
+            Lotto(listOf(0, 2, 3, 4, 5, 6))
+        }
+        shouldThrow<InvalidLottoNumberException> {
+            Lotto(listOf(1, 2, 3, 4, 5, 100))
         }
     }
 

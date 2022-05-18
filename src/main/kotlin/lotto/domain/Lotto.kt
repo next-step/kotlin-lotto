@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberException
+import lotto.exception.InvalidLottoNumberSizeException
 import java.util.SortedSet
 
 class Lotto(numbers: List<Int>) {
@@ -20,10 +21,13 @@ class Lotto(numbers: List<Int>) {
 
     private fun validateNumbers(numbers: List<Int>) {
         if (numbers.size != LOTTO_NUMBER_SIZE) {
-            throw InvalidLottoNumberException()
+            throw InvalidLottoNumberSizeException()
         }
         if (numbers.distinct().size != LOTTO_NUMBER_SIZE) {
             throw DuplicateLottoNumberException()
+        }
+        if (numbers.any { it !in 1..45 }) {
+            throw InvalidLottoNumberException()
         }
     }
 
