@@ -6,13 +6,12 @@ class LottoMatchResult(
     private val winningLotto: WinningLotto,
     private val lottoList: List<Lotto>
 ) {
-
-    private val matchingMap: Map<Int, Int> = lottoList
+    val matchingMap: Map<Int, Int> = lottoList
         .map { it.match(winningLotto) }
         .groupingBy { it.size }
         .eachCount()
 
-    private val revenue = matchingMap
+    val revenue = matchingMap
         .entries
         .sumOf { (matchingCount, count) -> rewardPrice(matchingCount) * count }
 
