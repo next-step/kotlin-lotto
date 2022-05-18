@@ -10,7 +10,7 @@ class LottoMachine {
     }
 
     private fun generateAuto(): Lotto {
-        return Lotto(listOf(1, 2, 3, 4, 5, 6))
+        return Lotto()
     }
 
     companion object {

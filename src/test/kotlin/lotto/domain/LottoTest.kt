@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberException
@@ -47,5 +48,18 @@ class LottoTest : FunSpec({
         val lotto = Lotto(listOf(2, 1, 6, 5, 4, 3))
         val target = Lotto(listOf(3, 4, 5, 6, 7, 8))
         lotto.contains(target) shouldBe sortedSetOf(3, 4, 5, 6)
+    }
+
+    test("로또 자동 발급시 번호는 랜덤하게 생성된다.") {
+        val numberMap = (1..100)
+            .asSequence()
+            .map { Lotto() }
+            .onEach { println(it.numbers) }
+            .flatMap { it.numbers }
+            .sorted()
+            .groupingBy { it }.eachCount()
+
+        numberMap.keys.size shouldBeInRange 6..45
+        println(numberMap)
     }
 })
