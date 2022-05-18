@@ -1,5 +1,6 @@
 package stringaddcalculator.domain
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
@@ -16,6 +17,24 @@ class SeparatorsSpecs : DescribeSpec({
             val separator = "*"
             it("새로운 구분자를 추가할 수 있다") {
                 Separators().add(separator)
+            }
+        }
+
+        context("숫자인 구분자 문자를 추가하면") {
+            val separator = "5"
+            it("예외를 발생시킨다.") {
+                shouldThrowExactly<IllegalArgumentException> {
+                    Separators().add(separator)
+                }
+            }
+        }
+
+        context("길이가 1보다 긴 구분자 문자를 추가하면") {
+            val separator = "@#"
+            it("예외를 발생시킨다.") {
+                shouldThrowExactly<IllegalArgumentException> {
+                    Separators().add(separator)
+                }
             }
         }
 
