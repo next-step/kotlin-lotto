@@ -27,6 +27,16 @@ class ParseTest : DescribeSpec({
         }
     }
 
+    context("계산식에 음수가 포함되어있을 때") {
+        it("RuntimeException 을 반환한다.") {
+            val exception = shouldThrow<RuntimeException> {
+                Parse("3:-2", listOf(",", ":")).result
+            }
+
+            exception.message shouldBe "음수는 계산 할 수 없습니다."
+        }
+    }
+
     context("계산식에 빈 문자열이 포함되어있을 때") {
         it("0을 반환한다") {
             val expectParse = Parse(":2,2", listOf(":", ",")).result
