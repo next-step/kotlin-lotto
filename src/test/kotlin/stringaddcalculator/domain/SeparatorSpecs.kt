@@ -20,6 +20,15 @@ class SeparatorSpecs : DescribeSpec({
             }
         }
 
+        context("구분자 문자의 길이가 1보다 크다면") {
+            val value = ";)"
+            it("예외를 발생시킨다") {
+                shouldThrowExactly<IllegalArgumentException> {
+                    Separator(value)
+                }
+            }
+        }
+
         context("구분자 문자가 숫자라면") {
             val value = "100"
             it("예외를 발생시킨다") {
