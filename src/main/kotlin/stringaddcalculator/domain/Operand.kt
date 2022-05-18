@@ -11,5 +11,10 @@ value class Operand(val value: Int) {
 
     companion object {
         private const val MINIMUM_VALUE = 0
+
+        fun of(stingValue: String): Operand {
+            val value = stingValue.toIntOrNull() ?: throw NumberFormatException("숫자가 아닌 문자입니다.")
+            return Operand(value)
+        }
     }
 }

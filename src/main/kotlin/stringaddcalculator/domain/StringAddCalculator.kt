@@ -24,7 +24,7 @@ class StringAddCalculator(
     private fun extractOperands(expression: String): List<Operand> {
         println(separators.toRegex())
         return expression.split(separators.toRegex())
-            .map { Operand(it.toInt()) }
+            .map { Operand.of(it) }
     }
 
     private fun isContainsCustomSeparator(input: String): Boolean {
