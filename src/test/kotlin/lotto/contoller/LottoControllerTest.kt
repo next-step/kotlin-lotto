@@ -1,8 +1,8 @@
 package lotto.contoller
 
-import lotto.model.LottoBuilder
 import lotto.model.data.Lotto
 import lotto.model.data.Lotto.Companion.toLotto
+import lotto.model.data.Lottos
 import lotto.model.data.Policy645
 import lotto.model.data.Statistics
 import lotto.view.input.InputView
@@ -45,25 +45,18 @@ internal class LottoControllerTest {
         val lotto = lottoNumberString.toLotto(policy)
         val winningLotto = winningNumber.toLotto(policy)
 
-        val lottoBuilder = object : LottoBuilder {
-            override fun createLotto(): Lotto {
-                return lotto
-            }
-        }
-
         val winningLottoInputView = object : InputView<Lotto> {
             override fun getInput(): Lotto {
                 return winningLotto
             }
         }
 
-        val purchaseView = object : InputView<Int> {
-            override fun getInput() = 1
+        val purchaseView = object : InputView<Lottos> {
+            override fun getInput() = Lottos(listOf(lotto))
         }
 
         return LottoController(
-            lottoBuilder = lottoBuilder,
-            lottoCountInputView = purchaseView,
+            lottosInputView = purchaseView,
             winningLottoInputView = winningLottoInputView,
             outputView = null // headless test
         )

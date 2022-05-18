@@ -7,7 +7,7 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
-import lotto.view.input.PurchaseCountInputView
+import lotto.view.input.LottosInputView
 import lotto.view.output.ConsoleOutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -165,26 +165,6 @@ internal class RangeLottoBuilderTest {
     }
 
     @Test
-    fun `화면에 로또 리스트를 출력 한다`() {
-
-        // given
-        val lotto = "1, 2, 3, 4, 5, 6".toLotto(policy)
-        val expectedString = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]\n\n"
-        val actualString = StringBuilder()
-
-        val outputView = ConsoleOutputView(policy) { outString ->
-            actualString.append(outString)
-            actualString.append("\n")
-        }
-
-        // when
-        outputView.printLottos(Lottos(listOf(lotto, lotto)))
-
-        // then
-        assertThat(actualString.toString()).isEqualTo(expectedString)
-    }
-
-    @Test
     fun `당첨 통계를 출력한다`() {
 
         // given
@@ -242,7 +222,7 @@ internal class RangeLottoBuilderTest {
     )
     fun `콘솔입력을 통해 금액을 입력 받는다`(purchaseAmount: Int, expectedCountOfLotto: Int) {
 
-        val purchaseCountInputView = PurchaseCountInputView(policy) { purchaseAmount }
-        assertThat(purchaseCountInputView.getInput()).isEqualTo(expectedCountOfLotto)
+        val lottosInputView = LottosInputView(policy) { purchaseAmount }
+        assertThat(lottosInputView.getInput().size).isEqualTo(expectedCountOfLotto)
     }
 }
