@@ -10,4 +10,4 @@ data class Lotto private constructor(val numbers: Set<Int>) {
     }
 }
 
-data class Lottos(val lottoList: List<Lotto>)
+data class Lottos(val lottoList: List<Lotto>) : List<Lotto> by lottoList

@@ -11,7 +11,7 @@ class ConsoleOutputView(private val policy: Policy, private val printlnOnScreen:
     OutputView {
 
     override fun printLottos(lottos: Lottos) {
-        lottos.lottoList.map { it.toDisplayString() }
+        lottos.map { it.toDisplayString() }
             .forEach(this.printlnOnScreen)
         this.printlnOnScreen("")
     }

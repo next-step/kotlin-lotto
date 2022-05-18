@@ -15,6 +15,6 @@ object LottoEvaluator {
     )
 
     fun evaluate(winningLotto: Lotto, lottos: Lottos) = Results(
-        lottos.lottoList.map { lotto -> evaluate(winningLotto, lotto) }
+        lottos.map { lotto -> evaluate(winningLotto, lotto) }
     )
 }

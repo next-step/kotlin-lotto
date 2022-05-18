@@ -50,7 +50,7 @@ internal class RangeLottoBuilderTest {
     fun `1000원의 배수로 갯수 만큼 로또를 생성한다`(purchaseAmount: Int, expectedCountOfLotto: Int) {
 
         val lottos = lottoBuilder.createLottosByAmount(purchaseAmount = purchaseAmount)
-        assertThat(lottos.lottoList.size).isEqualTo(expectedCountOfLotto)
+        assertThat(lottos.size).isEqualTo(expectedCountOfLotto)
     }
 
     @ParameterizedTest
@@ -111,7 +111,7 @@ internal class RangeLottoBuilderTest {
         val results = LottoEvaluator.evaluate(winningLotto, lottos)
 
         // then
-        assertThat(results.resultList.sumOf { it.winning.winMoney }).isEqualTo(expectedWonMoney)
+        assertThat(results.sumOf { it.winning.winMoney }).isEqualTo(expectedWonMoney)
     }
 
     @Test
