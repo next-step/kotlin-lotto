@@ -1,9 +1,6 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.Lotto
-import lotto.domain.LottoMachine
-
-object LottoSeller {
+class LottoSeller {
     private val lottoMachine = LottoMachine()
 
     fun purchaseAuto(money: Long): List<Lotto> {
