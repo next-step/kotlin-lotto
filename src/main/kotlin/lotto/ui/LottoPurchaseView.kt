@@ -1,5 +1,7 @@
 package lotto.ui
 
+import lotto.domain.Lotto
+
 object LottoPurchaseView {
 
     fun inputPriceForPurchase(): Long {
@@ -10,7 +12,11 @@ object LottoPurchaseView {
         return inputPrice
     }
 
-    fun printPurchaseResult(lottoCount: Int) {
-        println("${lottoCount}개를 구매했습니다.")
+    fun printPurchaseResult(lottoList: List<Lotto>) {
+        println("${lottoList.size}개를 구매했습니다.")
+        lottoList.forEach {
+            println(it.numbers)
+        }
+        println()
     }
 }

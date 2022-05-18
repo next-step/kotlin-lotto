@@ -16,6 +16,7 @@ object WinningLottoView {
                     ?: throw IllegalArgumentException()
             }
         require(numbers.size == 6) { "당첨번호 입력이 잘못 되었습니다." }
+        println()
         return numbers
     }
 }

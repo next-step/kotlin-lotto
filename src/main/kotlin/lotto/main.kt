@@ -9,7 +9,7 @@ fun main() {
     LottoPurchaseView.inputPriceForPurchase()
         .let {
             LottoSeller().purchaseAuto(it)
-                .also { lotteList -> LottoPurchaseView.printPurchaseResult(lotteList.size) }
+                .also { lotteList -> LottoPurchaseView.printPurchaseResult(lotteList) }
         }
         .let { WinningLottoView.inputWinningLotto().match(it) }
         .let { StatisticsView.printResult(it) }
