@@ -24,7 +24,7 @@
   - [X] 화면에 로또 통계를 출력 한다
   - [X] 콘솔입력을 통해 금액을 입력 받는다
   - [X] 콘솔입력을 통해 당첨 번호( winning lotto)을 입력 받는다 
-- [] Controller 구현하여 각 모듈을 통합한다 
+- [X] Controller 구현하여 각 모듈을 통합한다 
   
 
 ## Requirements for the step 1 StringAddCalculator
