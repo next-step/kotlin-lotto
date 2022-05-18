@@ -8,9 +8,12 @@ object StringParser {
     private const val COMMA_DELIMITER = ","
     private const val SEMICOLON_DELIMITER = ";"
 
-    fun getNumberStrings(input: String): List<String> {
+    fun getNumberStrings(input: String?): List<String> {
+        if (input == null) {
+            return emptyList()
+        }
         var strings = input
-        val customDelimiter = CustomDelimiterFinder.find(input, CUSTOM_DELIMITER_REGEX)
+        val customDelimiter = CustomDelimiterFinder.find(strings, CUSTOM_DELIMITER_REGEX)
 
         if (customDelimiter != null) {
             strings = strings.replace(CUSTOM_DELIMITER_REGEX, REGEX_REPLACEMENT_STRING)
