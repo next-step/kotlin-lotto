@@ -66,4 +66,25 @@ internal class RangeLottoBuilderTest {
 
         assertThat(winningLotto.countOfMatchNumber(lotto)).isEqualTo(expectedMatchCount)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'1,2,3,4,5,6',2000000000",
+        "'1,2,3,4,5,16',1500000",
+        "'1,2,3,4,15,16',50000",
+        "'1,2,3,14,15,16',5000",
+        "'1,2,13,14,15,16',0",
+        "'1,12,13,14,15,16',0",
+        "'11,12,13,14,15,16',0",
+        "'11,12,3,14,5,6',5000",
+    )
+    fun `일치 갯수에 따른 당청 종류 및 당첨 금액 를 판정한다`(lottoNumberString: String, expectedWonMoney: Int) {
+
+        val winningLottoNumber = "1,2,3,4,5,6"
+        val lotto = StringLottoBuilder(lottoNumberString).createLotto()
+        val winningLotto = StringLottoBuilder(winningLottoNumber).createLotto()
+
+        val winning = LottoEvaluator.evaluate(winningLotto, lotto)
+        assertThat(winning.winMoney).isEqualTo(expectedWonMoney)
+    }
 }
