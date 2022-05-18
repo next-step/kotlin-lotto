@@ -12,7 +12,7 @@ import java.lang.RuntimeException
 class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
-    fun `빈 문자열 또는 null 을 입력할 경우 0 을 반환한다`(input: String) {
+    fun `빈 문자열 또는 null 을 입력할 경우 0 을 반환한다`(input: String?) {
         assertThat(StringAddCalculator.add(input)).isZero
     }
 
