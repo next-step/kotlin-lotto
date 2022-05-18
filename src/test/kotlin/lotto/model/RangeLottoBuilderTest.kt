@@ -84,7 +84,7 @@ internal class RangeLottoBuilderTest {
         val lotto = StringLottoBuilder(lottoNumberString).createLotto()
         val winningLotto = StringLottoBuilder(winningLottoNumber).createLotto()
 
-        val winning = LottoEvaluator.evaluate(winningLotto, lotto)
-        assertThat(winning.winMoney).isEqualTo(expectedWonMoney)
+        val result = LottoEvaluator.evaluate(winningLotto, lotto)
+        assertThat(result.winning.winMoney).isEqualTo(expectedWonMoney)
     }
 }
