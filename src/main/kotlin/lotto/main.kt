@@ -1,12 +1,13 @@
 package lotto
 
-import lotto.ui.LottoMatchingView
+import lotto.domain.LottoSeller
 import lotto.ui.LottoPurchaseView
 import lotto.ui.StatisticsView
+import lotto.ui.WinningLottoView
 
 fun main() {
-    val money = LottoPurchaseView.inputPriceForPurchase()
-    val lottoList = LottoPurchaseView.purchase(money)
-    val matchingMap = LottoMatchingView.match(lottoList)
-    StatisticsView.printResult(money, matchingMap)
+    LottoPurchaseView.inputPriceForPurchase()
+        .let { LottoSeller().purchaseAuto(it).also { LottoPurchaseView.printPurchaseResult(it.size) } }
+        .let { WinningLottoView.inputWinningLotto().match(it) }
+        .let { StatisticsView.printResult(it) }
 }

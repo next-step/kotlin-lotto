@@ -5,7 +5,7 @@ import lotto.exception.InvalidLottoNumberException
 import lotto.exception.InvalidLottoNumberSizeException
 import java.util.SortedSet
 
-class Lotto(numbers: List<Int> = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER).shuffled().take(LOTTO_NUMBER_SIZE)) {
+open class Lotto(numbers: List<Int> = nonDuplicatedNumbers()) {
     val numbers: SortedSet<Int>
 
     init {
@@ -31,9 +31,16 @@ class Lotto(numbers: List<Int> = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER).shuffled()
         }
     }
 
+    private fun nonDuplicatedNumbers(): List<Int> {
+        return (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER).shuffled().take(LOTTO_NUMBER_SIZE)
+    }
+
     companion object {
         const val LOTTO_MIN_NUMBER = 1
         const val LOTTO_MAX_NUMBER = 45
         const val LOTTO_NUMBER_SIZE = 6
+        private fun nonDuplicatedNumbers() = (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER)
+            .shuffled()
+            .take(LOTTO_NUMBER_SIZE)
     }
 }

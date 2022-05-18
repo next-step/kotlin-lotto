@@ -1,17 +1,10 @@
 package lotto.ui
 
-import lotto.domain.Lotto
+import lotto.domain.WinningLotto
 
-object LottoMatchingView {
-    fun match(lottoList: List<Lotto>): Map<Int, Int> {
-        val winningLotto = inputWinningLotto()
-        return lottoList
-            .map { it.match(winningLotto) }
-            .groupingBy { it.size }.eachCount()
-    }
-
-    private fun inputWinningLotto(): Lotto {
-        return Lotto(inputWinningNumber())
+object WinningLottoView {
+    fun inputWinningLotto(): WinningLotto {
+        return WinningLotto(inputWinningNumber())
     }
 
     private fun inputWinningNumber(): List<Int> {
