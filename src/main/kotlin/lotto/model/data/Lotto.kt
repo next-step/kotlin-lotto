@@ -1,6 +1,7 @@
 package lotto.model.data
 
 data class Lotto private constructor(val numbers: Set<Int>) {
+
     fun countOfMatchNumber(other: Lotto) =
         this.numbers.filter(other.numbers::contains).size
 

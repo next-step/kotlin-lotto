@@ -23,10 +23,10 @@ internal class LottoInputParserTest {
         strings = [
             "1,2,3,4,5,6,7", // lage case
             "1,2,3,4", // small case
-            "1,2,3,4,15,46", // over rage
-            "1,2,3,14,15,50", // over rage
-            "0,2,13,14,15,16", // under Range
-            "1,12,100,14,15,16" // over rage
+            "1,2,3,4,15,46", // over range case
+            "1,2,3,14,15,50", // over range case
+            "0,2,13,14,15,16", // under range case
+            "1,12,100,14,15,16" // over range case
         ]
     )
     fun `잘못된 로또 번호 입력 체크 `(lottoNumberString: String) {
