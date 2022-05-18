@@ -13,7 +13,7 @@ class StringAddCalculatorTest {
     private lateinit var calculator: StringAddCalculator
 
     @BeforeEach
-    fun setUp( /* Lint Check */) {
+    fun setUp() {
         calculator = StringAddCalculator()
     }
 
