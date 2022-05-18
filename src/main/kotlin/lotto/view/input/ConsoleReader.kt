@@ -5,12 +5,8 @@ import lotto.view.input.parser.InputParser
 object ConsoleReader {
 
     fun <T> read(message: String, inputParser: InputParser<T>): T {
-        var resultValue: T? = null
-        while (resultValue == null) {
-            println(message)
-            resultValue = tryToRead(inputParser)
-        }
-        return resultValue
+        println(message)
+        return tryToRead(inputParser) ?: read(message, inputParser)
     }
 
     private fun <T> tryToRead(inputParser: InputParser<T>) = try {
