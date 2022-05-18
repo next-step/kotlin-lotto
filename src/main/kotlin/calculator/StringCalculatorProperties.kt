@@ -18,12 +18,12 @@ sealed interface StringCalculatorProperties {
     }
 }
 
-private class DefaultStringCalculatorProperties(input: String) : StringCalculatorProperties {
+class DefaultStringCalculatorProperties(input: String) : StringCalculatorProperties {
     override val delimiters: Array<String> = arrayOf(",", ":")
     override val numberString: String = input
 }
 
-private class CustomStringCalculatorProperties(input: String) : StringCalculatorProperties {
+class CustomStringCalculatorProperties(input: String) : StringCalculatorProperties {
     override val delimiters: Array<String>
     override val numberString: String
 
