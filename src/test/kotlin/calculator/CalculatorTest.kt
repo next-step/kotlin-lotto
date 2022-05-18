@@ -11,7 +11,7 @@ internal class CalculatorTest {
         val calculator = Calculator()
 
         // when
-        val result = calculator.calculate("")
+        val result = calculator.add("")
 
         // then
         assertThat(result).isEqualTo(0)
@@ -23,10 +23,10 @@ internal class CalculatorTest {
         val calculator = Calculator()
 
         // when
-        val result = calculator.calculate("1,2,3")
+        val result = calculator.add("1,2,3")
 
         // then
-        assertThat(result).isEqualTo(3)
+        assertThat(result).isEqualTo(6)
     }
 
     @Test
@@ -35,10 +35,10 @@ internal class CalculatorTest {
         val calculator = Calculator()
 
         // when
-        val result = calculator.calculate("1:2:3")
+        val result = calculator.add("1:2:3")
 
         // then
-        assertThat(result).isEqualTo(3)
+        assertThat(result).isEqualTo(6)
     }
 
     @Test
@@ -47,7 +47,7 @@ internal class CalculatorTest {
         val calculator = Calculator()
 
         // when
-        val result = calculator.calculate("1:2,3")
+        val result = calculator.add("1:2,3")
 
         // then
         assertThat(result).isEqualTo(6)

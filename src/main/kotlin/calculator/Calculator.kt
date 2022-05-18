@@ -1,7 +1,13 @@
 package calculator
 
 class Calculator {
-    fun calculate(expression: String): Int {
-        return 0
+    fun add(expression: String): Int {
+
+        if (expression.isBlank()) {
+            return 0
+        }
+
+        return expression.split("[,:]".toRegex())
+            .sumOf { it.toInt() }
     }
 }
