@@ -1,6 +1,6 @@
 package lotto.model.data
 
-enum class Winning(private val matchCount: Int, val winMoney: Int) {
+enum class Winning(val matchCount: Int, val winMoney: Int) {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),

@@ -170,13 +170,61 @@ internal class RangeLottoBuilderTest {
         val expectedString = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]\n\n"
         val actualString = StringBuilder()
 
-        val outputView = ConsoleOutputView { outString ->
+        val outputView = ConsoleOutputView(policy) { outString ->
             actualString.append(outString)
             actualString.append("\n")
         }
 
         // when
-        outputView.printLottos(Lottos(listOf(lotto,lotto)))
+        outputView.printLottos(Lottos(listOf(lotto, lotto)))
+
+        // then
+        assertThat(actualString.toString()).isEqualTo(expectedString)
+    }
+
+    @Test
+    fun `당첨 통계를 출력한다`() {
+
+        // given
+        val resultList = listOf(
+            // 낙첨 1개,
+            // 3등 4개,
+            // 4등 3개,
+            // 5등 1개,
+            // 1등 1개,
+            Result(lottoBuilder.createLotto(), Winning.LOST_GAME),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+            Result(lottoBuilder.createLotto(), Winning.THIRD),
+
+            Result(lottoBuilder.createLotto(), Winning.FIFTH),
+
+            Result(lottoBuilder.createLotto(), Winning.FIRST),
+
+            Result(lottoBuilder.createLotto(), Winning.FOURTH),
+            Result(lottoBuilder.createLotto(), Winning.FOURTH),
+            Result(lottoBuilder.createLotto(), Winning.FOURTH),
+        )
+        val results = Results(resultList)
+        val actualString = StringBuilder()
+        val outputView = ConsoleOutputView(policy) { outString ->
+            actualString.append(outString)
+            actualString.append("\n")
+        }
+
+        val expectedString = listOf(
+            "당첨 통계",
+            "----------",
+            "3개 일치 (5000원) - 1개",
+            "4개 일치 (50000원) - 3개",
+            "5개 일치 (1500000원) - 4개",
+            "6개 일치 (2000000000원) - 1개",
+            "총 수익률은 200615.50입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)"
+        ).joinToString(separator = "\n", postfix = "\n")
+
+        // when
+        outputView.printResults(results)
 
         // then
         assertThat(actualString.toString()).isEqualTo(expectedString)
