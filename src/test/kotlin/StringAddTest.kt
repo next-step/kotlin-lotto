@@ -61,4 +61,24 @@ class StringAddTest {
 
         assertThat(answer).isEqualTo(expect)
     }
+
+    @Test
+    fun `빈 문자열이 들어오면 0 반환`() {
+        val input = ""
+        val addCalculator = AddCalculator()
+        val answer = addCalculator.sum(input)
+        val expect = 0
+
+        assertThat(answer).isEqualTo(expect)
+    }
+
+    @Test
+    fun `null 문자열이 들어오면 0 반환`() {
+        val input: String? = null
+        val addCalculator = AddCalculator()
+        val answer = addCalculator.sum(input)
+        val expect = 0
+
+        assertThat(answer).isEqualTo(expect)
+    }
 }
