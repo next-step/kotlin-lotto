@@ -5,13 +5,14 @@ import lotto.model.data.Lotto
 import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.Policy645
 import lotto.model.data.Statistics
-import lotto.util.toBlankRemovedIntList
 import lotto.view.input.InputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 internal class LottoControllerTest {
+
+    private val policy = Policy645()
 
     @ParameterizedTest
     @CsvSource(
@@ -40,17 +41,19 @@ internal class LottoControllerTest {
     }
 
     private fun createController(lottoNumberString: String, winningNumber: String): LottoController {
-        val lottoNumber = lottoNumberString.toBlankRemovedIntList()
-        val winningNumber = winningNumber.toBlankRemovedIntList()
+
+        val lotto = lottoNumberString.toLotto(policy)
+        val winningLotto = winningNumber.toLotto(policy)
+
         val lottoBuilder = object : LottoBuilder {
             override fun createLotto(): Lotto {
-                return lottoNumber.toLotto()
+                return lotto
             }
         }
 
         val winningLottoInputView = object : InputView<Lotto> {
             override fun getInput(): Lotto {
-                return winningNumber.toLotto()
+                return winningLotto
             }
         }
 

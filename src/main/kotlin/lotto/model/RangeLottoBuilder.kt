@@ -10,7 +10,7 @@ class RangeLottoBuilder(val policy: Policy) : LottoBuilder {
     override fun createLotto(): Lotto {
         return policy.rangeOfNumbers.shuffled()
             .subList(0, policy.countOfNumberToSelect)
-            .toLotto()
+            .toLotto(policy)
     }
 
     fun createLottosByAmount(purchaseAmount: Int): Lottos {

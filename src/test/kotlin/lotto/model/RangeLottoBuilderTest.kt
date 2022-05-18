@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.Lottos
 import lotto.model.data.Policy645
 import lotto.model.data.Result
@@ -68,8 +69,8 @@ internal class RangeLottoBuilderTest {
 
         val winningLottoNumber = "1,2,3,4,5,6"
 
-        val lotto = StringLottoBuilder(lottoNumberString).createLotto()
-        val winningLotto = StringLottoBuilder(winningLottoNumber).createLotto()
+        val lotto = lottoNumberString.toLotto(policy)
+        val winningLotto = winningLottoNumber.toLotto(policy)
 
         assertThat(winningLotto.countOfMatchNumber(lotto)).isEqualTo(expectedMatchCount)
     }
@@ -88,8 +89,8 @@ internal class RangeLottoBuilderTest {
     fun `일치 갯수에 따른 당청 종류 및 당첨 금액 를 판정한다`(lottoNumberString: String, expectedWonMoney: Int) {
 
         val winningLottoNumber = "1,2,3,4,5,6"
-        val lotto = StringLottoBuilder(lottoNumberString).createLotto()
-        val winningLotto = StringLottoBuilder(winningLottoNumber).createLotto()
+        val lotto = lottoNumberString.toLotto(policy)
+        val winningLotto = winningLottoNumber.toLotto(policy)
 
         val result = LottoEvaluator.evaluate(winningLotto, lotto)
         assertThat(result.winning.winMoney).isEqualTo(expectedWonMoney)
@@ -104,8 +105,8 @@ internal class RangeLottoBuilderTest {
         val countOfLotto = 3
 
         val expectedWonMoney = countOfLotto * Winning.THIRD.winMoney
-        val lottos = StringLottoBuilder(lottoNumberString).createLottos(countOfLotto)
-        val winningLotto = StringLottoBuilder(winningLottoNumber).createLotto()
+        val lottos = Lottos(List(countOfLotto) { lottoNumberString.toLotto(policy) })
+        val winningLotto = winningLottoNumber.toLotto(policy)
 
         // when
         val results = LottoEvaluator.evaluate(winningLotto, lottos)
@@ -167,7 +168,7 @@ internal class RangeLottoBuilderTest {
     fun `화면에 로또 리스트를 출력 한다`() {
 
         // given
-        val lotto = StringLottoBuilder("1,2,3,4,5,6").createLotto()
+        val lotto = "1, 2, 3, 4, 5, 6".toLotto(policy)
         val expectedString = "[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]\n\n"
         val actualString = StringBuilder()
 
