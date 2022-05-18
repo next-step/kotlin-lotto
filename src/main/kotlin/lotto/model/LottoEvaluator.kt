@@ -9,8 +9,6 @@ import lotto.model.data.WinningSet
 
 object LottoEvaluator {
 
-
-
     fun evaluate(winningLotto: Lotto, lotto: Lotto) = Result(
         lotto,
         WinningSet.find { it.isWin(winningLotto, lotto) } ?: LOST_GAME
