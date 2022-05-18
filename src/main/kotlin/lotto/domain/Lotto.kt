@@ -12,6 +12,12 @@ class Lotto(numbers: List<Int>) {
         this.numbers = numbers.toSortedSet()
     }
 
+    fun contains(target: Lotto): Set<Int> {
+        return numbers.filter {
+            target.numbers.contains(it)
+        }.toSortedSet()
+    }
+
     private fun validateNumbers(numbers: List<Int>) {
         if (numbers.size != LOTTO_NUMBER_SIZE) {
             throw InvalidLottoNumberException()

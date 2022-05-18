@@ -28,4 +28,10 @@ class LottoTest : FunSpec({
         val lotto = Lotto(listOf(2, 1, 6, 5, 4, 3))
         lotto.numbers shouldBe sortedSetOf(1, 2, 3, 4, 5, 6)
     }
+
+    test("로또 숫자끼리 비교가 가능하다.") {
+        val lotto = Lotto(listOf(2, 1, 6, 5, 4, 3))
+        val target = Lotto(listOf(3, 4, 5, 6, 7, 8))
+        lotto.contains(target) shouldBe sortedSetOf(3, 4, 5, 6)
+    }
 })
