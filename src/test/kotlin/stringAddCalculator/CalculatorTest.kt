@@ -16,5 +16,10 @@ class CalculatorTest : FreeSpec({
             val input = "  "
             Calculator.calculate(input) shouldBe 0
         }
+
+        "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
+            val input = "2"
+            Calculator.calculate(input) shouldBe 2
+        }
     }
 })
