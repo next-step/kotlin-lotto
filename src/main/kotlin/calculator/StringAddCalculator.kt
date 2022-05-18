@@ -4,7 +4,7 @@ import java.util.regex.Pattern
 
 object StringAddCalculator {
     private val CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)")
-    private val DEFAULT_DELIMITERS = listOf(",", ":").toTypedArray()
+    private val DEFAULT_DELIMITERS = arrayOf(",", ":")
     private const val DELIMITER_INDEX = 1
     private const val NUMBERS_INDEX = 2
 
