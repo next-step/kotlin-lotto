@@ -1,10 +1,10 @@
-package stringcalcuator
+package stringcalcuator.dto
 
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import stringcalculator.InputDto
+import stringcalculator.dto.InputDto
 
 class InputDtoTest : DescribeSpec({
 

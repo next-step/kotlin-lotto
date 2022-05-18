@@ -1,4 +1,4 @@
-package stringcalculator
+package stringcalculator.dto
 
 class InputDto(expression: String) {
     var customSeparatorString: String? = null
