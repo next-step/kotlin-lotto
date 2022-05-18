@@ -46,3 +46,9 @@
 
 ### Calculator
 - `StringExpressionParser` 에서 숫자를 받고 총합 값을 내보낸다
+
+## 작업 리스트
+- [x] InputDto 구현
+- [ ] StringExpressionParser 구현
+- [ ] Separator 구현
+- [ ] Calculator 구현
