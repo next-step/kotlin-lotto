@@ -42,8 +42,15 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["-1,2", "1:-2"])
+    @ValueSource(strings = ["-1", "-1,2", "1:-2", "//!\n1!-2"])
     fun `음수를 전달 할 경우 RuntimeException 이 발생한다`(input: String) {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { StringAddCalculator.add(input) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["a", "a,2"])
+    fun `숫자가 아닌 문자열이 입력될 경우 RuntimeException 이 발생한다`(input: String) {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { StringAddCalculator.add(input) }
     }
