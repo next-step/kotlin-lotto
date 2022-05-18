@@ -34,7 +34,7 @@ internal class RangeLottoBuilderTest {
 
     @ParameterizedTest
     @CsvSource(
-        "0,0",
+        "0,0", // purchase amount , purchasable lotto count
         "900,0",
         "1000,1",
         "1100,1",
@@ -48,7 +48,7 @@ internal class RangeLottoBuilderTest {
 
     @ParameterizedTest
     @CsvSource(
-        "'1,2,3,4,5,6',6",
+        "'1,2,3,4,5,6',6", // lotto numbers , expected match count when the winning number is 1,2,3,4,5,6
         "'1,2,3,4,5,16',5",
         "'1,2,3,4,15,16',4",
         "'1,2,3,14,15,16',3",
@@ -69,7 +69,7 @@ internal class RangeLottoBuilderTest {
 
     @ParameterizedTest
     @CsvSource(
-        "'1,2,3,4,5,6',2000000000",
+        "'1,2,3,4,5,6',2000000000", // lotto numbers , expected won money when the winning number is 1,2,3,4,5,6
         "'1,2,3,4,5,16',1500000",
         "'1,2,3,4,15,16',50000",
         "'1,2,3,14,15,16',5000",
