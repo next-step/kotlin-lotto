@@ -7,7 +7,7 @@
 ## Function list
 
 - [X] 1~45 사이 숫자 중 6개를 랜덤하게 뽑아내어 로또를 만든다. - Lotto / LottoBuilder 
-- [] 1000원의 배수로 갯수 만큼 로또를 생성한다. - Lottos / LottoBuilder
+- [X] 1000원의 배수로 갯수 만큼 로또를 생성한다. - Lottos / LottoBuilder
 - [] 1~45 사이 숫자 중 6개 당첨 번호를 만들어 일치 갯수를 계산한다. - LottoBuilder
 - [] 일치 갯수에 따른 당청 종류 및 당첨 금액 를 판정한다 - enum clas Winning
   - [] 0~2개 일치 낙첨 / 0원 
