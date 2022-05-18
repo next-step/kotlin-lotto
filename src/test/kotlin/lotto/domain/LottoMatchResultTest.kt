@@ -17,6 +17,6 @@ class LottoMatchResultTest : FunSpec({
     }
 
     test("rateOfReturn") {
-        lottoMatchResult.rateOfReturn().toDouble() shouldBeGreaterThanOrEqualTo 1.0
+        lottoMatchResult.rateOfReturn() shouldBeGreaterThanOrEqualTo 1.0
     }
 })

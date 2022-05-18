@@ -15,9 +15,9 @@ class LottoMatchResult(
         return matchingMap.getOrDefault(lottoRank, 0)
     }
 
-    fun rateOfReturn(): String {
+    fun rateOfReturn(): Double {
         val totalPrice = LottoSeller.LOTTO_PRICE * lottoList.size
-        return String.format("%.2f", revenue().toDouble() / totalPrice.toDouble())
+        return revenue().toDouble() / totalPrice.toDouble()
     }
 
     private fun revenue(): Long {

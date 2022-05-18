@@ -9,6 +9,7 @@ object StatisticsView {
         println("---------")
 
         LottoRank.values()
+            .filter { it != LottoRank.NONE }
             .sortedBy { it.matchingCount }
             .forEach {
                 println("${it.matchingCount}개 일치 (${it.rewardPrice}원)- ${lottoMatchResult.matchingCountBy(it)}개")
