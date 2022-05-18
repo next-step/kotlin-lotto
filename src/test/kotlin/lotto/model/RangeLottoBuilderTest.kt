@@ -1,6 +1,7 @@
 package lotto.model
 
 import lotto.model.data.Policy645
+import lotto.model.data.Winning
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -86,5 +87,24 @@ internal class RangeLottoBuilderTest {
 
         val result = LottoEvaluator.evaluate(winningLotto, lotto)
         assertThat(result.winning.winMoney).isEqualTo(expectedWonMoney)
+    }
+
+    @Test
+    fun `여러 로또 (lottos)를 한번에 판정할 수 있는 기능`() {
+
+        // given
+        val lottoNumberString = "1,2,3,4,5,16" // 3등 1500000
+        val winningLottoNumber = "1,2,3,4,5,6"
+        val countOfLotto = 3
+
+        val expectedWonMoney = countOfLotto * Winning.THIRD.winMoney
+        val lottos = StringLottoBuilder(lottoNumberString).createLottos(countOfLotto)
+        val winningLotto = StringLottoBuilder(winningLottoNumber).createLotto()
+
+        // when
+        val results = LottoEvaluator.evaluate(winningLotto, lottos)
+
+        // then
+        assertThat(results.resultList.sumOf { it.winning.winMoney }).isEqualTo(expectedWonMoney)
     }
 }
