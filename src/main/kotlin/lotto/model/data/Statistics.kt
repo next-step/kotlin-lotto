@@ -9,7 +9,7 @@ class Statistics(results: Results, policy: Policy) {
     val winningCountMap = results.toWinningCountMap()
 
     private fun Results.toWinningCountMap(): Map<Winning, Int> {
-        return WinningSet.associateWith { winning -> this.getCountOfWinning(winning) }
+        return Winnings.associateWith { winning -> this.getCountOfWinning(winning) }
             .toSortedMap { o1, o2 -> o1.winMoney - o2.winMoney }
     }
 

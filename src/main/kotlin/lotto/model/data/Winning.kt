@@ -15,4 +15,4 @@ fun Winning.isWin(winningLotto: Lotto, lotto: Lotto): Boolean {
         return winningLotto.countOfMatchNumber(lotto) == this.matchCount
 }
 
-val WinningSet = setOf(Winning.LOST_GAME, Winning.FIFTH, Winning.FOURTH, Winning.THIRD, Winning.FIRST)
+val Winnings = Winning.values()
