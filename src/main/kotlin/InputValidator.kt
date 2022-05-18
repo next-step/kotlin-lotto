@@ -1,5 +1,5 @@
 class InputValidator {
-    fun checkNatualAndZero(input: Int) {
-        require(input >= 0)
+    fun checkNatualAndZero(input: String) {
+        require(input.toInt() >= 0)
     }
 }
