@@ -5,7 +5,7 @@ import lotto.model.data.Lottos
 import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Winning.LOST_GAME
-import lotto.model.data.WinningSet
+import lotto.model.data.Winnings
 import lotto.model.data.isWin
 
 object LottoEvaluator {
@@ -15,6 +15,6 @@ object LottoEvaluator {
     )
 
     fun evaluate(winningLotto: Lotto, lotto: Lotto) = Result(
-        lotto, WinningSet.find { it.isWin(winningLotto, lotto) } ?: LOST_GAME
+        lotto, Winnings.find { it.isWin(winningLotto, lotto) } ?: LOST_GAME
     )
 }
