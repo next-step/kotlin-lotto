@@ -2,13 +2,17 @@ package lotto.domain
 
 import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberException
+import java.util.SortedSet
 
-class Lotto(val numbers: List<Int>) {
+class Lotto(numbers: List<Int>) {
+    val numbers: SortedSet<Int>
+
     init {
-        validateNumbers()
+        validateNumbers(numbers)
+        this.numbers = numbers.toSortedSet()
     }
 
-    private fun validateNumbers() {
+    private fun validateNumbers(numbers: List<Int>) {
         if (numbers.size != LOTTO_NUMBER_SIZE) {
             throw InvalidLottoNumberException()
         }

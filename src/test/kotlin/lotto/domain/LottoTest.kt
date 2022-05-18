@@ -7,7 +7,6 @@ import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberException
 
 class LottoTest : FunSpec({
-
     test("Lotto 숫자는 6개로 구성된다.") {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         lotto.numbers.size shouldBe 6
@@ -23,5 +22,10 @@ class LottoTest : FunSpec({
         shouldThrow<DuplicateLottoNumberException> {
             Lotto(listOf(1, 1, 1, 4, 5, 6))
         }
+    }
+
+    test("로또 숫자는 정렬해서 조회한다.") {
+        val lotto = Lotto(listOf(2, 1, 6, 5, 4, 3))
+        lotto.numbers shouldBe sortedSetOf(1, 2, 3, 4, 5, 6)
     }
 })
