@@ -1,3 +1,5 @@
+package stringAddCalculator
+
 object StringAddCalculator {
     fun add(formula: String?): Int {
         if(formula.isNullOrEmpty()) return 0

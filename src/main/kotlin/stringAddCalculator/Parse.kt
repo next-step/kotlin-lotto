@@ -1,3 +1,5 @@
+package stringAddCalculator
+
 class Parse(private var formula: String, delimiters: List<String>) {
     init {
         val regexResult = Regex("//(.)\n(.*)").find(formula)

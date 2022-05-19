@@ -1,6 +1,9 @@
+package stringAddCalculator
+
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import stringAddCalculator.Parse
 
 class ParseTest : DescribeSpec({
     it("계산식을 구분자에 맞춰 split 하여 반환한다.") {

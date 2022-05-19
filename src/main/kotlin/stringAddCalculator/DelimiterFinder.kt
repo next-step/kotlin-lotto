@@ -1,3 +1,5 @@
+package stringAddCalculator
+
 object DelimiterFinder {
     fun find(formula: String): List<String> {
         val customDelimiter = Regex("//(.)\n(.*)").find(formula)
