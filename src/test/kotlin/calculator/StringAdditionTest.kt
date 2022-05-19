@@ -2,10 +2,25 @@ package calculator
 
 import StringAddition
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 class StringAdditionTest {
+    @CsvSource(
+        value = [
+            "'1,2:3', ',|:'",
+            "'1^2^3', '\\^'",
+            "'1*2*3', '\\*'",
+            "'1$2$3', '\\$'",
+            "'1%2%3', '\\%'"
+        ]
+    )
+    @ParameterizedTest
+    fun `정규식 학습 테스트를 하자`(exp: String, reg: String) {
+        assertThat(exp.split(Regex(reg))).isEqualTo(listOf("1", "2", "3"))
+    }
+
     @CsvSource(
         value = [
             "'6,2,1', 9",
@@ -49,15 +64,14 @@ class StringAdditionTest {
 
     @CsvSource(
         value = [
-            "'1,2:3', ',|:'",
-            "'1^2^3', '\\^'",
-            "'1*2*3', '\\*'",
-            "'1$2$3', '\\$'",
-            "'1%2%3', '\\%'"
+            "'//#\n1&1#2'",
+            "'//$\n1-2$2'",
+            "'//*\n1*-2*2",
         ]
     )
     @ParameterizedTest
-    fun `정규식 학습 테스트를 하자`(exp: String, reg: String) {
-        assertThat(exp.split(Regex(reg))).isEqualTo(listOf("1", "2", "3"))
+    fun `문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다`(exp: String) {
+        val stringAddition = StringAddition(exp)
+        assertThrows<RuntimeException> { stringAddition.execute() }
     }
 }

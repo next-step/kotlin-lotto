@@ -29,8 +29,22 @@ class StringAddition(private val exp: String) {
     private fun String.takeIfNotEmpty(): String? = takeIf { it.isNotEmpty() }
 
     private fun List<String>.toMapAndFold(initial: Int = 0): Int =
-        map { it.toInt() }
-            .fold(initial) { total: Int, num: Int -> total + num }
+        map { it.toIntThrow() }
+            .fold(initial) { total: Int, num: Int ->
+                require(num >= 0)
+                total + num
+            }
+
+    private fun require(condition: Boolean) {
+        if (!condition) throw RuntimeException("음수는 입력할 수 없습니다.")
+    }
+
+    private fun String.toIntThrow() =
+        try {
+            this.toInt()
+        } catch (e: Exception) {
+            throw RuntimeException("구분자외에는 숫자만 입력해야합니다.")
+        }
 
     companion object {
         private const val DEFAULT_SPLIT = "(,|:)"
