@@ -4,7 +4,7 @@ import string.addition.caculator.domain.Operand
 
 object OperandParser {
     private const val DEFAULT_DELIMITER_PATTERN = "[,:]"
-    private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"
+    private const val CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n(.*)"
 
     fun parse(inputStr: String): List<Operand> {
         val customDelimiterResult = Regex(CUSTOM_DELIMITER_PATTERN).find(inputStr)
