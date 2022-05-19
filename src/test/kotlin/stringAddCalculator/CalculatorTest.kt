@@ -2,6 +2,7 @@ package stringAddCalculator
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
 class CalculatorTest : FreeSpec({
@@ -9,7 +10,14 @@ class CalculatorTest : FreeSpec({
     "calculate" - {
 
         "정상적인 게산기 동작 확인" {
-            val input = "1"
+            withData(
+                "1" to 1,
+                "" to 0,
+                "1:2,3" to 6,
+                "//!\n2!3" to 5,
+            ) { (input, output) ->
+                Calculator.calculate(input) shouldBe output
+            }
         }
     }
 
