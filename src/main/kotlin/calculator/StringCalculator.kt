@@ -6,7 +6,7 @@ class StringCalculator {
         return if (input.isNullOrBlank()) {
             0
         } else {
-            val token = input.split(",").map { it.toInt() }
+            val token = input.split(',', ':').map { it.toInt() }
             when (token.size) {
                 2 -> token[0] + token[1]
                 else -> token[0]
