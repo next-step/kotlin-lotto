@@ -7,12 +7,3 @@ enum class Winning(val matchCount: Int, val winMoney: Int) {
     FIRST(6, 2_000_000_000),
     LOST_GAME(0, 0)
 }
-
-fun Winning.isWin(winningLotto: Lotto, lotto: Lotto): Boolean {
-    return if (this.matchCount == 0)
-        false
-    else
-        return winningLotto.countOfMatchNumber(lotto) == this.matchCount
-}
-
-val Winnings = Winning.values()

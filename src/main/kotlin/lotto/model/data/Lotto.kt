@@ -4,9 +4,6 @@ import lotto.util.toBlankRemovedIntList
 
 data class Lotto private constructor(val numbers: Set<Int>) {
 
-    fun countOfMatchNumber(other: Lotto) =
-        this.numbers.filter(other.numbers::contains).size
-
     companion object {
         fun Collection<Int>.toLotto(policy: Policy): Lotto {
             policy.validateNumbers(this)

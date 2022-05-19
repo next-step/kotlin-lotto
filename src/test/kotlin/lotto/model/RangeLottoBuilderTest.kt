@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.LottoEvaluator.countOfMatchNumber
 import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.Lottos
 import lotto.model.data.Policy645
