@@ -10,4 +10,8 @@ object Calculator {
     fun splitString(input: String): List<String> {
         return input.split(",")
     }
+
+    fun convertInt(inputList: List<String>): List<Int> {
+        return inputList.map { it.toInt() }
+    }
 }

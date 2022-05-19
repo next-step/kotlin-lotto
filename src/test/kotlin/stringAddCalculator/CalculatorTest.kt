@@ -30,4 +30,12 @@ class CalculatorTest : FreeSpec({
             Calculator.splitString(inputString) shouldBe listOf("1", "2")
         }
     }
+
+    "convertInt" - {
+
+        "분리된 문자열이 숫자로 변환되어야한다." {
+            val splitList = listOf("1", "2")
+            Calculator.convertInt(splitList) shouldBe listOf(1, 2)
+        }
+    }
 })
