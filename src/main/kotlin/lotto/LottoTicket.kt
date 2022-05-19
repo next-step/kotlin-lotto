@@ -14,6 +14,13 @@ data class LottoTicket(val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers.contains(lottoNumber)
     }
 
+    fun matching(other: LottoTicket): Int {
+        return lottoNumbers.count {
+            other.lottoNumbers
+                .contains(it)
+        }
+    }
+
     companion object {
         private const val LOTTO_NUMBERS_SIZE = 6
     }
