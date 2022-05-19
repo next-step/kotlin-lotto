@@ -1,11 +1,9 @@
 package calculator
 
 object CustomDelimiterFinder {
-    private const val CUSTOM_DELIMITER_POSITION = 1
+    private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
 
-    fun find(input: String, regex: Regex): String? {
-        return regex.find(input)?.let { matchResult ->
-            matchResult.groupValues[CUSTOM_DELIMITER_POSITION]
-        }
+    fun find(input: String): MatchResult? {
+        return CUSTOM_DELIMITER_REGEX.find(input)
     }
 }

@@ -1,24 +1,22 @@
 package calculator
 
 object StringParser {
-
-    private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n")
-
-    private const val REGEX_REPLACEMENT_STRING = ""
     private const val COMMA_DELIMITER = ","
     private const val SEMICOLON_DELIMITER = ";"
 
-    fun getNumberStrings(input: String?): List<String> {
-        if (input == null) {
-            return emptyList()
-        }
-        var strings = input
-        val customDelimiter = CustomDelimiterFinder.find(strings, CUSTOM_DELIMITER_REGEX)
+    private const val CUSTOM_DELIMITER_INDEX = 1
+    private const val NUMBER_STRING_INDEX = 2
 
-        if (customDelimiter != null) {
-            strings = strings.replace(CUSTOM_DELIMITER_REGEX, REGEX_REPLACEMENT_STRING)
+    fun getNumberStrings(input: String): List<String> {
+        val matcherResult = CustomDelimiterFinder.find(input)
+
+        return if (matcherResult != null) {
+            val delimiter = matcherResult.groupValues[CUSTOM_DELIMITER_INDEX]
+            val numberStrings = matcherResult.groupValues[NUMBER_STRING_INDEX]
+            numberStrings.splitAsDelimiter(delimiter)
+        } else {
+            input.splitAsDelimiter()
         }
-        return strings.splitAsDelimiter(customDelimiter)
     }
 
     private fun String.splitAsDelimiter(customDelimiter: String? = null): List<String> {
