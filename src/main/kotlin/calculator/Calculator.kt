@@ -10,4 +10,8 @@ object Calculator {
 
         return text.split(SPLIT_REGEX).map { it.toInt() }
     }
+
+    fun sum(numbers: List<Int>): Int {
+        return numbers.sum()
+    }
 }
