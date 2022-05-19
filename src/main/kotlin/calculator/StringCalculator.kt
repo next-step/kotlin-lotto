@@ -6,11 +6,12 @@ class StringCalculator {
         return if (input.isNullOrBlank()) {
             0
         } else {
-            val token = input.split(',', ':').map { it.toInt() }
-            when (token.size) {
-                2 -> token[0] + token[1]
-                else -> token[0]
-            }
+            val customDelimiter = Regex("//(.)\n(.*)").find(input)
+            if (customDelimiter != null) {
+                customDelimiter.groupValues[2].split(customDelimiter.groupValues[1])
+            } else {
+                input.split(',', ':')
+            }.sumOf { it.toInt() }
         }
     }
 }
