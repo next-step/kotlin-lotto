@@ -46,5 +46,4 @@
   
 - `로또 티켓(LottoTicket)`
   - 6개의 `로또 번호(LottoNumber)`를 가진다
-  - [ ] 6개가 아닌 번호들이 주어졌을 경우 IllegalArgumentException 예외가 발생한다.
-  - [ ] 로또 번호가 포함되어있는지 확인할 수 있다.
+  - [X] 6개가 아닌 번호들이 주어졌을 경우 IllegalArgumentException 예외가 발생한다. 
