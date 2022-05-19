@@ -20,4 +20,10 @@ data class Lotto private constructor(val numbers: Set<Int>) {
     }
 }
 
-data class Lottos(val lottoList: List<Lotto>) : List<Lotto> by lottoList
+data class Lottos(val lottoList: List<Lotto>) : List<Lotto> by lottoList {
+    companion object {
+        fun of(vararg lottos: Lotto) = Lottos(lottos.toList())
+    }
+}
+
+inline fun Lottos(count: Int = 1, init: (Int) -> Lotto) = Lottos(List(count, init))

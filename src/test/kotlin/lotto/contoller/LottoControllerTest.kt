@@ -43,16 +43,13 @@ internal class LottoControllerTest {
     private fun createController(lottoNumberString: String, winningNumber: String): LottoController {
 
         val lotto = lottoNumberString.toLotto(policy)
-        val winningLotto = winningNumber.toLotto(policy)
 
         val winningLottoInputView = object : InputView<Lotto> {
-            override fun getInput(): Lotto {
-                return winningLotto
-            }
+            override fun getInput() = winningNumber.toLotto(policy)
         }
 
         val purchaseView = object : InputView<Lottos> {
-            override fun getInput() = Lottos(listOf(lotto))
+            override fun getInput() = Lottos.of(lotto)
         }
 
         return LottoController(

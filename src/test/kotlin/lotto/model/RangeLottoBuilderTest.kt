@@ -105,7 +105,7 @@ internal class RangeLottoBuilderTest {
         val countOfLotto = 3
 
         val expectedWonMoney = countOfLotto * Winning.THIRD.winMoney
-        val lottos = Lottos(List(countOfLotto) { lottoNumberString.toLotto(policy) })
+        val lottos = Lottos(countOfLotto) { lottoNumberString.toLotto(policy) }
         val winningLotto = winningLottoNumber.toLotto(policy)
 
         // when
