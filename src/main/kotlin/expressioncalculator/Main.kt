@@ -1,5 +1,4 @@
 package expressioncalculator
 
 fun main() {
-
 }
