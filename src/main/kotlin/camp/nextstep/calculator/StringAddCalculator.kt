@@ -1,8 +1,8 @@
 package camp.nextstep.calculator
 
-class StringAddCalculator {
+object StringAddCalculator {
 
-    fun add(expression: String): Int {
-        TODO()
+    fun calculate(expression: String): Int {
+        return 0
     }
 }
