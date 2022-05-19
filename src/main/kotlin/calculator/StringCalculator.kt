@@ -5,7 +5,7 @@ class StringCalculator {
         if (input.isNullOrBlank()) return 0
 
         val numbers = useCustomDelimiter(input) ?: useDefaultDelimiter(input)
-        return numbers.sumOf { it.toInt() }
+        return sumOfNumbers(numbers)
     }
 
     private fun useCustomDelimiter(input: String): List<String>? {
@@ -20,6 +20,11 @@ class StringCalculator {
     private fun useDefaultDelimiter(input: String): List<String> {
         return input.split(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
     }
+
+    private fun sumOfNumbers(numbers: List<String>): Int {
+        return numbers.sumOf { it.toIntOrNull() ?: throw RuntimeException() }
+    }
+
     companion object {
         private const val DEFAULT_DELIMITER_COMMA = ","
         private const val DEFAULT_DELIMITER_COLON = ":"

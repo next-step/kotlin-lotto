@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -35,6 +36,9 @@ class StringCalculatorTest : FreeSpec({
         }
         "null 값을 입력할 경우 0을 반환한다." {
             StringCalculator().calculate(null) shouldBe 0
+        }
+        "숫자가 아닌 값이 입력될 경우 RuntimeException 예외처리를 한다." {
+            shouldThrow<RuntimeException> { StringCalculator().calculate("---") }
         }
     }
 })
