@@ -5,7 +5,7 @@ import lotto.domain.Lotto
 object LotteryRandomGenerator {
 
     fun generateLotteryTickets(numberOfTickets: Int): List<Lotto> {
-        return (1..numberOfTickets).map { Lotto(generate()) }
+        return List(numberOfTickets) { Lotto(generate()) }
     }
 
     fun generate(): List<Int> {
