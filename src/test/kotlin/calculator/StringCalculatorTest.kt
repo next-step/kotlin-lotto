@@ -16,4 +16,10 @@ class StringCalculatorTest : FreeSpec({
             StringCalculator().calculate("4,2:4") shouldBe 10
         }
     }
+
+    "커스텀 구분자로 구분되는 경우" - {
+        "//와 \n 문자 사이에 커스텀 구분자로 구분된 각 숫자의 합을 반환한다." {
+            StringCalculator().calculate("//;\n4;2;4") shouldBe 10
+        }
+    }
 })
