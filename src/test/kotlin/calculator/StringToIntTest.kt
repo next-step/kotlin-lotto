@@ -30,10 +30,4 @@ class StringToIntTest {
     fun `숫자가 아닌 경우 RunTimeException을 반환한다`(input: String) {
         assertThrows<RuntimeException> { parseToInt(input) }
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["-1", "-100"])
-    fun `음수를 받는 경우 RunTimeException을 반환한다`(input: String) {
-        assertThrows<RuntimeException> { parseToInt(input) }
-    }
 }

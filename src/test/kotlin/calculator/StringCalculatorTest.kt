@@ -1,6 +1,8 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -15,6 +17,13 @@ class StringCalculatorTest {
         val sum = calculator.sum(numberStrings)
 
         assertThat(sum).isEqualTo(expectResult)
+    }
+
+    @Test
+    fun `음수를 받는 경우 RunTimeException을 반환한다`() {
+        val calculator = StringCalculator()
+
+        assertThrows<RuntimeException> { calculator.sum(listOf("-1", "100")) }
     }
 
     companion object {
