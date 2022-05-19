@@ -1,6 +1,7 @@
 package stringAddCalculator
 
 object Calculator {
+    const val NEGATIVE_ERROR = "음수는 계산할 수 없습니다."
     private const val COMMA_DELIMITER = ","
     private const val COLON_DELIMITER = ":"
     private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
@@ -26,5 +27,11 @@ object Calculator {
 
     fun add(numberList: List<Int>): Int {
         return numberList.sum()
+    }
+
+    fun checkNegative(numberList: List<Int>) {
+        numberList.forEach {
+            if (it < 0) throw RuntimeException(NEGATIVE_ERROR)
+        }
     }
 }

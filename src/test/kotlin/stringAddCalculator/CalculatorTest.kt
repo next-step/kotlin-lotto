@@ -1,5 +1,6 @@
 package stringAddCalculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -57,6 +58,17 @@ class CalculatorTest : FreeSpec({
         "숫자 리스트의 모든 수의 합을 반환한다." {
             val numberList = listOf(1, 2, 3)
             Calculator.add(numberList) shouldBe 6
+        }
+    }
+
+    "checkNegative" - {
+
+        "분리된 문자열에 음수가 존재하면 RuntimeException" {
+            val numberList = listOf(1, -2, 3)
+            val exception = shouldThrow<RuntimeException> {
+                Calculator.checkNegative(numberList)
+            }
+            exception.message shouldBe Calculator.NEGATIVE_ERROR
         }
     }
 })
