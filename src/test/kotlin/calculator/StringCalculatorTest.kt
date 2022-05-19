@@ -22,4 +22,10 @@ class StringCalculatorTest : FreeSpec({
             StringCalculator().calculate("//;\n4;2;4") shouldBe 10
         }
     }
+
+    "숫자 하나를 문자열로 입력할 경우" - {
+        "해당 숫자를 반환한다" {
+            StringCalculator().calculate("4") shouldBe 4
+        }
+    }
 })
