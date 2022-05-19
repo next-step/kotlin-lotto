@@ -7,7 +7,7 @@ interface IInput {
 
 class Input: IInput {
     override fun readPurchaseAmount() = readln().toIntOrThrow()
-    override fun readLastWeekWinningNumbers(): List<Int> = readln().split(", ").map { it.toIntOrThrow()}
+    override fun readLastWeekWinningNumbers(): List<Int> = readln().split(",").map { it.trim().toIntOrThrow()}
 
     private fun String.toIntOrThrow() = toIntOrNull() ?: throw IllegalArgumentException("숫자가 아닙니다.")
 }
