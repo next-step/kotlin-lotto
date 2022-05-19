@@ -1,24 +1,25 @@
-class StringAddition(private val exp: String) {
-    fun execute(): Int =
-        matchCustomSplit(exp)
-            ?.let { customSplitAndFold(it) }
-            ?: splitAndFold(exp)
+import util.findPattern
+import util.takeIfNotEmpty
+import util.toIntThrow
 
-    private fun customSplitAndFold(includeCustomSplit: MatchResult): Int {
-        val (split, exp) = includeCustomSplit.let {
-            Pair(it.groupValues[1], it.groupValues[2])
-        }
-        return splitAndFold(exp, split)
+class StringAddition(private val exp: String) {
+    fun execute(): Int {
+        val (split, target) = exp.findPattern(CUSTOM_PATTERN).extract(default = exp)
+        return add(target, split)
     }
 
-    private fun splitAndFold(exp: String, split: String = DEFAULT_SPLIT) =
+    private fun MatchResult?.extract(default: String): Pair<String, String> {
+        val split: String = this?.groupValues?.get(1) ?: DEFAULT_SPLIT
+        val target: String = this?.groupValues?.get(2) ?: default
+        return Pair(split, target)
+    }
+
+    private fun add(exp: String, split: String = DEFAULT_SPLIT) =
         exp
             .takeIfNotEmpty()
             ?.split(replaceAndRegex(split))
-            ?.toMapAndFold()
+            ?.toMapAndReduce()
             ?: 0
-
-    private fun matchCustomSplit(exp: String) = Regex(CUSTOM_PATTERN).find(exp)
 
     private fun replaceAndRegex(split: String): Regex =
         if (isDefaultSplit(split)) Regex(split)
@@ -26,11 +27,9 @@ class StringAddition(private val exp: String) {
 
     private fun isDefaultSplit(split: String) = split == DEFAULT_SPLIT
 
-    private fun String.takeIfNotEmpty(): String? = takeIf { it.isNotEmpty() }
-
-    private fun List<String>.toMapAndFold(initial: Int = 0): Int =
+    private fun List<String>.toMapAndReduce(): Int =
         map { it.toIntThrow() }
-            .fold(initial) { total: Int, num: Int ->
+            .reduce { total: Int, num: Int ->
                 require(num >= 0)
                 total + num
             }
@@ -38,13 +37,6 @@ class StringAddition(private val exp: String) {
     private fun require(condition: Boolean) {
         if (!condition) throw RuntimeException("음수는 입력할 수 없습니다.")
     }
-
-    private fun String.toIntThrow() =
-        try {
-            this.toInt()
-        } catch (e: Exception) {
-            throw RuntimeException("구분자외에는 숫자만 입력해야합니다.")
-        }
 
     companion object {
         private const val DEFAULT_SPLIT = "(,|:)"
