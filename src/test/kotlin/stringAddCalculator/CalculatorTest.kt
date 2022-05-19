@@ -29,6 +29,11 @@ class CalculatorTest : FreeSpec({
             val inputString = "1,2"
             Calculator.splitString(inputString) shouldBe listOf("1", "2")
         }
+
+        ": 을 기준으로 문자열이 분리되어야한다." {
+            val inputString = "1:2"
+            Calculator.splitString(inputString) shouldBe listOf("1", "2")
+        }
     }
 
     "convertInt" - {

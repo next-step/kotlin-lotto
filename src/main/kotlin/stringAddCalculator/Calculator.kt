@@ -8,7 +8,7 @@ object Calculator {
     }
 
     fun splitString(input: String): List<String> {
-        return input.split(",")
+        return input.split(",|:".toRegex())
     }
 
     fun convertInt(inputList: List<String>): List<Int> {
