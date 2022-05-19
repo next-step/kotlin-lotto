@@ -1,6 +1,8 @@
 package stringAddCalculator
 
 object Calculator {
+    private const val COMMA_DELIMITER = ","
+    private const val COLON_DELIMITER = ":"
     private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
 
     fun calculate(input: String?): Int {
@@ -9,7 +11,7 @@ object Calculator {
     }
 
     fun splitString(input: String): List<String> {
-        return input.split(",|:".toRegex())
+        return input.split(("$COLON_DELIMITER|$COMMA_DELIMITER").toRegex())
     }
 
     fun customDelimiter(input: String): List<String> {
