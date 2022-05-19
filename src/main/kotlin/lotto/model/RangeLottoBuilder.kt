@@ -8,8 +8,8 @@ import lotto.model.data.Policy
 class RangeLottoBuilder(val policy: Policy) : LottoBuilder {
 
     override fun createLotto(): Lotto {
-        return policy.rangeOfNumbers.shuffled()
-            .subList(0, policy.countOfNumberToSelect)
+        return policy.rangeOfNumbers
+            .selectNumbers(policy.countOfNumberToSelect)
             .toLotto(policy)
     }
 
@@ -17,4 +17,6 @@ class RangeLottoBuilder(val policy: Policy) : LottoBuilder {
         val countOfLotto = purchaseAmount / policy.priceOfLotto
         return this.createLottos(countOfLotto)
     }
+
+    private fun IntRange.selectNumbers(count: Int) = this.shuffled().subList(0, count)
 }
