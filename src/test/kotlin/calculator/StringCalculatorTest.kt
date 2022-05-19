@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
@@ -46,6 +47,12 @@ class StringCalculatorTest : StringSpec({
         ) { left, right, delimiter ->
             val customDelimiter = "//$delimiter\n"
             calculator.add("$customDelimiter$left$delimiter$right") shouldBe left + right
+        }
+    }
+    "문자열 덧셈 계산기는 음수가 입력된 경우 RuntimeException 예외를 발생한다." {
+        val calculator = StringCalculator()
+        shouldThrowExactly<RuntimeException> {
+            calculator.add("1,2,-3")
         }
     }
 })
