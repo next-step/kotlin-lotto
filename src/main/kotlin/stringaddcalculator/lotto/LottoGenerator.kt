@@ -1,8 +1,6 @@
 package stringaddcalculator.lotto
 
-import kotlin.random.Random
-import kotlin.random.asJavaRandom
-import kotlin.streams.toList
+import stringaddcalculator.lotto.LottoNumber.Companion.LOTTO_NUMBER_RANGE
 
 interface LottoGenerator {
     fun generate(): Lotto
@@ -10,12 +8,19 @@ interface LottoGenerator {
 
 object RandomLottoGenerator : LottoGenerator {
     override fun generate(): Lotto {
-        val numbers = Random.asJavaRandom()
-            .ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
-            .distinct()
-            .limit(Lotto.SIZE_OF_LOTTO_NUMBERS.toLong())
-            .mapToObj { LottoNumber(it) }
-            .toList()
-        return Lotto(numbers)
+        val lottoNumbers = LOTTO_NUMBER_RANGE
+            .shuffled()
+            .take(Lotto.SIZE_OF_LOTTO_NUMBERS)
+            .map { LottoNumber(it) }
+        return Lotto(lottoNumbers)
+    }
+}
+
+class FixedLottoGenerator(
+    private val fixedNumbers: Collection<Int>
+) : LottoGenerator {
+    override fun generate(): Lotto {
+        val lottoNumbers = fixedNumbers.map { LottoNumber(it) }
+        return Lotto(lottoNumbers)
     }
 }
