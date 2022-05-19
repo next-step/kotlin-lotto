@@ -31,4 +31,10 @@ internal class CalculatorTest {
         assertThat(Calculator.sum(listOf(1, 2))).isEqualTo(3)
         assertThat(Calculator.sum(listOf(1, 2, 3))).isEqualTo(6)
     }
+
+    @Test
+    fun `커스텀 구분자를 이용한 Split 확인`() {
+        assertThat(Calculator.split("//;\n1;2;3")).isEqualTo(listOf(1, 2, 3))
+        assertThat(Calculator.split("//@\n1@2@3")).isEqualTo(listOf(1, 2, 3))
+    }
 }
