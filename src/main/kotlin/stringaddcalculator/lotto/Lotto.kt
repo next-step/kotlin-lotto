@@ -1,10 +1,16 @@
 package stringaddcalculator.lotto
 
 class Lotto(
-    private val numbers: Set<LottoNumber>
+    _numbers: Collection<LottoNumber>
 ) {
+    val numbers = _numbers.toSortedSet()
+
     init {
         require(numbers.size == SIZE_OF_LOTTO_NUMBERS) { "로또 번호의 개수는 반드시 $SIZE_OF_LOTTO_NUMBERS 개이어야 합니다" }
+    }
+
+    fun getMatchingNumbers(other: Lotto): Int {
+        return numbers.intersect(other.numbers).size
     }
 
     companion object {
