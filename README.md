@@ -41,8 +41,8 @@
 ### 도메인 모델
 - `로또 번호(LottoNumber)`
   - 로또 번호는 1~45의 숫자이다.
-  - [ ] 로또 번호 이외의 숫자가 주어지면 IllegalArgumentException 예외가 발생한다.
-  - [ ] 로또 번호를 비교할 수 있다.
+  - [X] 로또 번호 이외의 숫자가 주어지면 IllegalArgumentException 예외가 발생한다.
+  - [X] 로또 번호를 비교할 수 있다.
   
 - `로또 티켓(LottoTicket)`
   - 6개의 `로또 번호(LottoNumber)`를 가진다
