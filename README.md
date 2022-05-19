@@ -47,3 +47,11 @@
 - `로또 티켓(LottoTicket)`
   - 6개의 `로또 번호(LottoNumber)`를 가진다
   - [X] 6개가 아닌 번호들이 주어졌을 경우 IllegalArgumentException 예외가 발생한다. 
+
+
+### 반영해야할 요구사항
+- 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다 - LottoSeller
+- 로또 구입 개수에 따른 로또를 발급해야한다 - LottoMachine
+- 두 로또 티켓을 비교하여 일치하는 로또 번호의 수를 반환한다 - LottoTicket
+- 일치하는 로또 번호의 수로 로또 당첨 등수를 반환한다 - LottoRanking
+- 로또 티켓들의 당첨 등수를 확인한다 - LottoTickets
