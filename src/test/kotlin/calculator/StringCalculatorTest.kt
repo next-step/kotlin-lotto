@@ -40,5 +40,8 @@ class StringCalculatorTest : FreeSpec({
         "숫자가 아닌 값이 입력될 경우 RuntimeException 예외처리를 한다." {
             shouldThrow<RuntimeException> { StringCalculator().calculate("---") }
         }
+        "음수를 전달하는 경우 RuntimeException 예외 처리를 한다." {
+            shouldThrow<RuntimeException> { StringCalculator().calculate("-1") }
+        }
     }
 })
