@@ -155,7 +155,7 @@ internal class RangeLottoBuilderTest {
             { assertThat(statistics.lottoCount).isEqualTo(expectedLottoCount) },
             { assertThat(statistics.totalCost).isEqualTo(expectedTotalCost) },
             { assertThat(statistics.totalWonAmount).isEqualTo(expectedTotalWonAmount) },
-            { assertThat(statistics.winningRatio).isEqualTo(expectedWinRatio) },
+            { assertThat(statistics.yield).isEqualTo(expectedWinRatio) },
 
             { assertThat(statistics.winningCountMap[Winning.FIRST]).isEqualTo(1) },
             { assertThat(statistics.winningCountMap[Winning.THIRD]).isEqualTo(4) },
@@ -192,7 +192,7 @@ internal class RangeLottoBuilderTest {
         val results = Results(resultList)
         val actualString = StringBuilder()
         val outputView = ConsoleOutputView(policy) { outString ->
-            actualString.append(outString)
+            actualString.append(outString.toString())
             actualString.append("\n")
         }
 
