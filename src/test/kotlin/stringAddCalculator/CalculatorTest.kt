@@ -12,7 +12,7 @@ class CalculatorTest : FreeSpec({
             Calculator.calculate(input) shouldBe 0
         }
 
-        "blank로 이루어진 문자열일 경우 0을 반황해야한다." {
+        "blank로 이루어진 문자열일 경우 0을 반환해야한다." {
             val input = "  "
             Calculator.calculate(input) shouldBe 0
         }
@@ -33,6 +33,14 @@ class CalculatorTest : FreeSpec({
         ": 을 기준으로 문자열이 분리되어야한다." {
             val inputString = "1:2"
             Calculator.splitString(inputString) shouldBe listOf("1", "2")
+        }
+    }
+
+    "findDelimiter" - {
+
+        "`//`와 `\n` 문자 사이에 커스텀 구분자를 기준으로 문자열이 분리되어야한다.." {
+            val customString = "//;\n1;2;3"
+            Calculator.customDelimiter(customString) shouldBe listOf("1", "2", "3")
         }
     }
 
