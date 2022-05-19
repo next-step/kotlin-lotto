@@ -29,10 +29,10 @@ internal class LottoInputParserTest {
             "1,12,100,14,15,16" // over range case
         ]
     )
-    fun `잘못된 로또 번호 입력 체크 `(lottoNumberString: String) {
+    fun `잘못된 로또 번호 입력 체크 `(lottoNumbers: String) {
 
         assertThrows<IllegalArgumentException> {
-            lottoInputParser.parseValue(lottoNumberString)
+            lottoInputParser.parseValue(lottoNumbers)
         }
     }
 
@@ -43,12 +43,12 @@ internal class LottoInputParserTest {
             "45,44,43,42,41,40"
         ]
     )
-    fun `정상 로또 번호 입력 체크 `(lottoNumberString: String) {
+    fun `정상 로또 번호 입력 체크 `(lottoNumbers: String) {
 
-        val expectedString = lottoNumberString.toBlankRemovedIntSet()
+        val expectedString = lottoNumbers.toBlankRemovedIntSet()
             .sorted().joinToString(",")
 
-        assertThat(lottoInputParser.parseValue(lottoNumberString).numbers.joinToString(","))
+        assertThat(lottoInputParser.parseValue(lottoNumbers).numbers.joinToString(","))
             .isEqualTo(expectedString)
     }
 }

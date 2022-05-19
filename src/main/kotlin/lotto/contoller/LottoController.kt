@@ -18,9 +18,8 @@ class LottoController(
     fun executeGame(): Results {
         val lottos = lottosInputView.getInput()
         val winningLotto = winningLottoInputView.getInput()
-        val resultList = lottoEvaluator.evaluate(winningLotto, lottos)
-        outputView?.printResults(resultList)
-
-        return resultList
+        val results = lottoEvaluator.evaluate(winningLotto, lottos)
+        outputView?.printResults(results)
+        return results
     }
 }

@@ -66,12 +66,12 @@ internal class RangeLottoBuilderTest {
         "'11,12,13,14,15,16',0",
         "'11,12,3,14,15,6',2",
     )
-    fun `1~45 사이 숫자 중 6개 당첨 번호를 만들어 일치 갯수를 계산한다`(lottoNumberString: String, expectedMatchCount: Int) {
+    fun `1~45 사이 숫자 중 6개 당첨 번호를 만들어 일치 갯수를 계산한다`(lottoNumbers: String, expectedMatchCount: Int) {
 
-        val winningLottoNumber = "1,2,3,4,5,6"
+        val winningNumbers = "1,2,3,4,5,6"
 
-        val lotto = lottoNumberString.toLotto(policy)
-        val winningLotto = winningLottoNumber.toLotto(policy)
+        val lotto = lottoNumbers.toLotto(policy)
+        val winningLotto = winningNumbers.toLotto(policy)
 
         assertThat(winningLotto.countOfMatchNumber(lotto)).isEqualTo(expectedMatchCount)
     }
@@ -87,11 +87,11 @@ internal class RangeLottoBuilderTest {
         "'11,12,13,14,15,16',0",
         "'11,12,3,14,5,6',5000",
     )
-    fun `일치 갯수에 따른 당청 종류 및 당첨 금액 를 판정한다`(lottoNumberString: String, expectedWonMoney: Int) {
+    fun `일치 갯수에 따른 당청 종류 및 당첨 금액 를 판정한다`(lottoNumbers: String, expectedWonMoney: Int) {
 
-        val winningLottoNumber = "1,2,3,4,5,6"
-        val lotto = lottoNumberString.toLotto(policy)
-        val winningLotto = winningLottoNumber.toLotto(policy)
+        val winningNumbers = "1,2,3,4,5,6"
+        val lotto = lottoNumbers.toLotto(policy)
+        val winningLotto = winningNumbers.toLotto(policy)
 
         val result = LottoEvaluator.evaluate(winningLotto, lotto)
         assertThat(result.winning.winMoney).isEqualTo(expectedWonMoney)
@@ -101,13 +101,13 @@ internal class RangeLottoBuilderTest {
     fun `여러 로또 (lottos)를 한번에 판정할 수 있는 기능`() {
 
         // given
-        val lottoNumberString = "1,2,3,4,5,16" // 3등 1500000
-        val winningLottoNumber = "1,2,3,4,5,6"
+        val lottoNumbers = "1,2,3,4,5,16" // 3등 1500000
+        val winningNumbers = "1,2,3,4,5,6"
         val countOfLotto = 3
 
         val expectedWonMoney = countOfLotto * Winning.THIRD.winMoney
-        val lottos = Lottos(countOfLotto) { lottoNumberString.toLotto(policy) }
-        val winningLotto = winningLottoNumber.toLotto(policy)
+        val lottos = Lottos(countOfLotto) { lottoNumbers.toLotto(policy) }
+        val winningLotto = winningNumbers.toLotto(policy)
 
         // when
         val results = LottoEvaluator.evaluate(winningLotto, lottos)
