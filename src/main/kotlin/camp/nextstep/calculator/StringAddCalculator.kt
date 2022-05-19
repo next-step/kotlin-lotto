@@ -2,7 +2,23 @@ package camp.nextstep.calculator
 
 object StringAddCalculator {
 
-    fun calculate(expression: String): Int {
-        return 0
+    private val EXPRESSION_PATTERN = Regex("""^(//(.)\n)?((\d+(\2|[,:])?)+)$""")
+    private val DEFAULT_DELIMITERS = Regex("[,:]")
+
+    fun calculate(exp: String?): Int {
+        if (exp.isNullOrBlank()) return 0
+        val matchResult = EXPRESSION_PATTERN.matchEntire(exp) ?: throw RuntimeException("올바른 표현식을 입력해주세요.")
+
+        val (_, delimiter, validExp) = matchResult.destructured
+        val tokens = if (delimiter.isNotEmpty()) validExp.split(delimiter) else validExp.split(DEFAULT_DELIMITERS)
+        val numbers = try {
+            tokens.map { it.toInt() }
+        } catch (numberFormatException: NumberFormatException) {
+            throw RuntimeException("올바른 구분자와 숫자를 입력해주세요.")
+        }
+
+        if (numbers.filter { it < 0 }.take(1).isNotEmpty()) throw RuntimeException("양수를 입력해주세요.")
+
+        return numbers.sum()
     }
 }
