@@ -24,4 +24,10 @@ class StringCalculatorTest : StringSpec({
             calculator.add(input.toString()) shouldBe input
         }
     }
+    "문자열 덧셈 계산기는 숫자 두개와 구분자를 입력하는 경우 두 숫자의 합을 반환한다." {
+        val calculator = StringCalculator()
+        checkAll(Arb.int(0..9), Arb.int(10..19)) { left, right ->
+            calculator.add("$left,$right") shouldBe left + right
+        }
+    }
 })
