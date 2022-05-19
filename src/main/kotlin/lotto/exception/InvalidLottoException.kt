@@ -1,3 +1,3 @@
 package lotto.exception
 
-open class InvalidLottoException(message: String) : Exception(message)
+sealed class InvalidLottoException(message: String) : Exception(message)

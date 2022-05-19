@@ -4,10 +4,12 @@ class LottoSeller {
     private val lottoMachine = LottoMachine()
 
     fun purchaseAuto(inputPrice: Long): List<Lotto> {
-        val numberOfPurchases = inputPrice / LOTTO_PRICE
-        return (1..numberOfPurchases)
-            .toList()
-            .map { lottoMachine.generateAuto() }
+        return List(numberOfPurchases(inputPrice)) {}
+            .map { lottoMachine.generate() }
+    }
+
+    private fun numberOfPurchases(inputPrice: Long): Int {
+        return (inputPrice / LOTTO_PRICE).toInt()
     }
 
     companion object {

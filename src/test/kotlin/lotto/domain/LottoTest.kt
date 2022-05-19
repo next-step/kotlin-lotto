@@ -7,12 +7,10 @@ import io.kotest.matchers.shouldBe
 import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberException
 import lotto.exception.InvalidLottoNumberSizeException
+import lotto.util.RandomLottoNumberGenerator
 
 class LottoTest : FunSpec({
     test("Lotto 숫자는 6개로 구성된다.") {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        lotto.numbers.size shouldBe 6
-
         shouldThrow<InvalidLottoNumberSizeException> {
             Lotto(listOf())
         }
@@ -41,25 +39,23 @@ class LottoTest : FunSpec({
 
     test("로또 숫자는 정렬해서 조회한다.") {
         val lotto = Lotto(listOf(2, 1, 6, 5, 4, 3))
-        lotto.numbers shouldBe sortedSetOf(1, 2, 3, 4, 5, 6)
+        lotto.numbers.toString() shouldBe "[1, 2, 3, 4, 5, 6]"
     }
 
     test("로또 숫자끼리 비교가 가능하다.") {
         val lotto = Lotto(listOf(2, 1, 6, 5, 4, 3))
-        val target = Lotto(listOf(3, 4, 5, 6, 7, 8))
-        lotto.match(target) shouldBe sortedSetOf(3, 4, 5, 6)
+        val winningLotto = WinningLotto(listOf(3, 4, 5, 6, 7, 8))
+        winningLotto.matchingNumbers(lotto) shouldBe listOf(3, 4, 5, 6)
     }
 
     test("로또 자동 발급시 번호는 랜덤하게 생성된다.") {
-        val numberMap = (1..100)
-            .asSequence()
-            .map { Lotto() }
-            .onEach { println(it.numbers) }
+        val numberMap = List(100) {}
+            .map { Lotto(RandomLottoNumberGenerator.generate()) }
+            .map { it.numbers }
             .flatMap { it.numbers }
             .sorted()
             .groupingBy { it }.eachCount()
 
         numberMap.keys.size shouldBeInRange 6..45
-        println(numberMap)
     }
 })

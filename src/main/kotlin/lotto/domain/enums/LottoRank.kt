@@ -7,9 +7,13 @@ enum class LottoRank(val matchingCount: Int, val rewardPrice: Long) {
     FIFTH(3, 5_000),
     NONE(-1, 0);
 
+    fun sumOfPrice(numberOfLotto: Int): Long {
+        return rewardPrice * numberOfLotto
+    }
+
     companion object {
         fun of(matchingCount: Int): LottoRank {
-            return values().firstOrNull { it.matchingCount == matchingCount } ?: NONE
+            return values().find { it.matchingCount == matchingCount } ?: NONE
         }
     }
 }
