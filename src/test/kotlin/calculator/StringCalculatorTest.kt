@@ -28,4 +28,13 @@ class StringCalculatorTest : FreeSpec({
             StringCalculator().calculate("4") shouldBe 4
         }
     }
+
+    "입력오류" - {
+        "빈 문자열을 입력할 경우 0을 반환한다." {
+            StringCalculator().calculate("") shouldBe 0
+        }
+        "null 값을 입력할 경우 0을 반환한다." {
+            StringCalculator().calculate(null) shouldBe 0
+        }
+    }
 })

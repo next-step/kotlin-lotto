@@ -1,7 +1,9 @@
 package calculator
 
 class StringCalculator {
-    fun calculate(input: String): Int {
+    fun calculate(input: String?): Int {
+        if (input.isNullOrBlank()) return 0
+
         val numbers = useCustomDelimiter(input) ?: useDefaultDelimiter(input)
         return numbers.sumOf { it.toInt() }
     }
