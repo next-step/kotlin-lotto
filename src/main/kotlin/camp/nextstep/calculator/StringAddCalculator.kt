@@ -10,15 +10,23 @@ object StringAddCalculator {
         val matchResult = EXPRESSION_PATTERN.matchEntire(exp) ?: throw RuntimeException("올바른 표현식을 입력해주세요.")
 
         val (_, delimiter, validExp) = matchResult.destructured
-        val tokens = if (delimiter.isNotEmpty()) validExp.split(delimiter) else validExp.split(DEFAULT_DELIMITERS)
-        val numbers = try {
-            tokens.map { it.toInt() }
+        val stringNumbers = if (delimiter.isNotEmpty()) validExp.split(delimiter) else validExp.split(DEFAULT_DELIMITERS)
+        val numbers = mapToInt(stringNumbers)
+
+        if (!isPositiveNumbers(numbers)) throw RuntimeException("양수만 입력해주세요.")
+
+        return numbers.sum()
+    }
+
+    private fun mapToInt(stringNumbers: List<String>): List<Int> {
+        return try {
+            stringNumbers.map { it.toInt() }
         } catch (numberFormatException: NumberFormatException) {
             throw RuntimeException("올바른 구분자와 숫자를 입력해주세요.")
         }
+    }
 
-        if (numbers.filter { it < 0 }.take(1).isNotEmpty()) throw RuntimeException("양수를 입력해주세요.")
-
-        return numbers.sum()
+    private fun isPositiveNumbers(numbers: List<Int>): Boolean {
+        return numbers.filter { it < 0 }.take(1).isEmpty()
     }
 }
