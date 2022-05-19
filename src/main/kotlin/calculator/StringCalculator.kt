@@ -7,11 +7,14 @@ class StringCalculator {
             0
         } else {
             val customDelimiter = Regex("//(.)\n(.*)").find(input)
-            if (customDelimiter != null) {
+            val numbers = if (customDelimiter != null) {
                 customDelimiter.groupValues[2].split(customDelimiter.groupValues[1])
             } else {
                 input.split(',', ':')
-            }.sumOf { it.toInt() }
+            }.map { it.toInt() }
+
+            if (numbers.any { it < 0 }) throw RuntimeException()
+            else numbers.sum()
         }
     }
 }
