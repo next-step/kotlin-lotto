@@ -14,4 +14,8 @@ object Calculator {
     fun convertInt(inputList: List<String>): List<Int> {
         return inputList.map { it.toInt() }
     }
+
+    fun add(numberList: List<Int>): Int {
+        return numberList.sum()
+    }
 }

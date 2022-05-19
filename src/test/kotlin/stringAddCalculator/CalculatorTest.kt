@@ -38,4 +38,12 @@ class CalculatorTest : FreeSpec({
             Calculator.convertInt(splitList) shouldBe listOf(1, 2)
         }
     }
+
+    "add" - {
+
+        "숫자 리스트의 모든 수의 합을 반환한다." {
+            val numberList = listOf(1, 2, 3)
+            Calculator.add(numberList) shouldBe 6
+        }
+    }
 })
