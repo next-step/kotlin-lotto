@@ -4,25 +4,32 @@ object Calculator {
     const val NEGATIVE_ERROR = "음수는 계산할 수 없습니다."
     private const val COMMA_DELIMITER = ","
     private const val COLON_DELIMITER = ":"
-    private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
+    private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
 
     fun calculate(input: String?): Int {
-        if (input.isNullOrBlank()) return 0
-        return input.toInt()
+        val checkInput: String = checkInput(input)
+        val splitList = customDelimiter(checkInput) ?: splitString(checkInput)
+        val convertIntList = convertInt(splitList)
+        return add(convertIntList)
     }
+
+    fun checkInput(input: String?): String = if (input.isNullOrBlank()) "0" else input
 
     fun splitString(input: String): List<String> {
         return input.split(("$COLON_DELIMITER|$COMMA_DELIMITER").toRegex())
     }
 
-    fun customDelimiter(input: String): List<String> {
-        val result = Regex(CUSTOM_DELIMITER).find(input)!!
-        val (delimiter, splitStringList) = result.groupValues
+    fun customDelimiter(input: String): List<String>? {
+        val result = CUSTOM_DELIMITER_REGEX.find(input) ?: return null
+        val delimiter = result.groupValues[1]
+        val splitStringList = result.groupValues[2]
         return splitStringList.split(delimiter)
     }
 
     fun convertInt(inputList: List<String>): List<Int> {
-        return inputList.map { it.toInt() }
+        val numberList = inputList.map { it.toInt() }
+        checkNegative(numberList)
+        return numberList
     }
 
     fun add(numberList: List<Int>): Int {
