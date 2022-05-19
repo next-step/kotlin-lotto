@@ -10,8 +10,12 @@ data class Operand(private val inputStr: String) {
         }
         number = inputStr.toInt()
 
-        require(number > 0) {
+        require(number >= 0) {
             throw RuntimeException("An operand from the input string should be greater than zero")
         }
+    }
+
+    companion object {
+        val zero = Operand("0")
     }
 }

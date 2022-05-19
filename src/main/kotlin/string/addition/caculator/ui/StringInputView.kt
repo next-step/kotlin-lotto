@@ -10,7 +10,7 @@ object StringInputView {
         println("--기본 구분자: [,:] ex. 1:3:1")
         println("--커스텀 구분자는 // 와 \\n 사이에 입력한다 ex. //?\\n1?3?1")
         print(">>>")
-        val inputStr = readln()
+        val inputStr = readln().replace(" ", "")
         return OperandParser.parse(inputStr)
     }
 }

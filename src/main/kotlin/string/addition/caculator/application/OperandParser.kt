@@ -23,7 +23,7 @@ object OperandParser {
 
     private fun parseByDelimiter(operandsStr: String, delimiter: Regex): List<Operand> {
         return if (operandsStr.isEmpty()) {
-            listOf()
+            listOf(Operand.zero)
         } else {
             operandsStr.split(delimiter)
                 .map { Operand(it) }
