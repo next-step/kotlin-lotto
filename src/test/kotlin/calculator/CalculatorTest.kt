@@ -2,6 +2,7 @@ package calculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class CalculatorTest {
 
@@ -26,15 +27,34 @@ internal class CalculatorTest {
     }
 
     @Test
-    fun `Int 값으로 이루어진 List의 합`() {
-        assertThat(Calculator.sum(listOf(0))).isEqualTo(0)
-        assertThat(Calculator.sum(listOf(1, 2))).isEqualTo(3)
-        assertThat(Calculator.sum(listOf(1, 2, 3))).isEqualTo(6)
-    }
-
-    @Test
     fun `커스텀 구분자를 이용한 Split 확인`() {
         assertThat(Calculator.split("//;\n1;2;3")).isEqualTo(listOf(1, 2, 3))
         assertThat(Calculator.split("//@\n1@2@3")).isEqualTo(listOf(1, 2, 3))
+    }
+
+    @Test
+    fun `문자가 포함된 Input 값 RuntimeException 확인`() {
+        assertThrows<RuntimeException> { Calculator.split("1,2:a") }
+    }
+
+    @Test
+    fun `음수가 포함된 Input 값 RuntimeException 확인`() {
+        assertThrows<RuntimeException> { Calculator.split("1,2:-3") }
+    }
+
+    @Test
+    fun `커스텀 구분자에 음수값이 포함된 Input 값 RuntimeException 확인`() {
+        assertThrows<RuntimeException> { Calculator.split("//;\n1;2;-3") }
+    }
+
+    @Test
+    fun `커스텀 구분자에 문자가 포함된 Input 값 RuntimeException 확인`() {
+        assertThrows<RuntimeException> { Calculator.split("//;\n1;2;a") }
+    }
+
+    @Test
+    fun `Calculator 기능 테스트`() {
+        assertThat(Calculator.calculate("//@\n1@2@3")).isEqualTo(6)
+        assertThat(Calculator.calculate("1,2:3:4")).isEqualTo(10)
     }
 }
