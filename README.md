@@ -18,7 +18,7 @@
 - [x] 입력된 문자열을 파싱해 반환한다. : StringParser
   - [x] 기본 구분자로 파싱
   - [x] 커스텀 구분자로 파싱
-- [ ] 파싱된 결과가 숫자 이외의 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다. : Params
+- [x] 파싱된 결과가 숫자 이외의 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다. : Params
 - [ ] 계산기를 구현한다. : Calculator
 - [ ] View를 구현한다
 - [ ] Controller를 구현한다
