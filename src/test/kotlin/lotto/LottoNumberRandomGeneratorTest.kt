@@ -25,7 +25,7 @@ class LottoNumberRandomGeneratorTest : FreeSpec({
 
         "테스트를 위해 입력한 로또 랜덤 리스트가 나와야한다." {
             val input = listOf(1, 2, 3, 4, 5, 6)
-            LottoNumberGenerator.Fake(input) shouldBe input
+            LottoNumberGenerator.Fake(input).numberSet() shouldBe input
         }
     }
 })
