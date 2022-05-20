@@ -1,4 +1,4 @@
-package stringaddcalculator.lotto
+package lotto.domain
 
 class Lotto(
     _numbers: Set<LottoNumber>

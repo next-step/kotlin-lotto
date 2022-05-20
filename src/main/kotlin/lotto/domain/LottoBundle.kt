@@ -1,4 +1,4 @@
-package stringaddcalculator.lotto
+package lotto.domain
 
 class LottoBundle(
     private val bundle: List<Lotto>

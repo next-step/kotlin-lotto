@@ -1,12 +1,12 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import stringaddcalculator.lotto.Lotto
+import lotto.domain.Lotto
 
-class LottoTest : DescribeSpec({
+class LottoSpecs : DescribeSpec({
 
     describe("로또는") {
         it("로또 번호의 개수가 6개가 아니면 예외를 발생시킨다.") {

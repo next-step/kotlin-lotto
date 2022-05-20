@@ -1,6 +1,6 @@
-package stringaddcalculator.lotto
+package lotto.domain
 
-import stringaddcalculator.lotto.LottoNumber.Companion.LOTTO_NUMBER_RANGE
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_RANGE
 
 interface LottoGenerator {
     fun generate(): Lotto

@@ -1,14 +1,12 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainExactly
-import stringaddcalculator.lotto.Lotto
-import stringaddcalculator.lotto.LottoBundle
-import stringaddcalculator.lotto.WinningPlace.BLANK
-import stringaddcalculator.lotto.WinningPlace.FIRST
-import stringaddcalculator.lotto.WinningPlace.SECOND
-import stringaddcalculator.lotto.WinningPlace.THIRD
+import lotto.domain.WinningPlace.BLANK
+import lotto.domain.WinningPlace.FIRST
+import lotto.domain.WinningPlace.SECOND
+import lotto.domain.WinningPlace.THIRD
 
 class LottoBundleSpecs : DescribeSpec({
 

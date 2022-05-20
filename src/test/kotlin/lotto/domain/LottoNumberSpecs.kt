@@ -1,9 +1,9 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.inspectors.forAll
-import stringaddcalculator.lotto.LottoNumber
+import lotto.domain.LottoNumber
 
 class LottoNumberSpecs : DescribeSpec({
     describe("로또 번호는") {

@@ -1,4 +1,4 @@
-package stringaddcalculator.lotto
+package lotto.domain
 
 enum class WinningPlace(
     val reward: Int,

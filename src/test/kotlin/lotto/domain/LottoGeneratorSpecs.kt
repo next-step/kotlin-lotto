@@ -1,11 +1,11 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.DescribeSpec
-import stringaddcalculator.lotto.FixedLottoGenerator
-import stringaddcalculator.lotto.RandomLottoGenerator
+import lotto.domain.FixedLottoGenerator
+import lotto.domain.RandomLottoGenerator
 
-class LottoGeneratorTest : DescribeSpec({
+class LottoGeneratorSpecs : DescribeSpec({
 
     describe("랜덤 로또 생성기는") {
         it("로또를 생성한다") {
