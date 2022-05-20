@@ -4,6 +4,7 @@ package calculator
 value class PositiveNumber(
     val value: Int
 ) {
+
     init {
         require(value >= 0) { "음수는 입력할수 없습니다." }
     }

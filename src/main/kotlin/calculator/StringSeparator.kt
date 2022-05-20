@@ -1,6 +1,7 @@
 package calculator
 
 object StringSeparator {
+
     private const val DEFAULT_DELIMITER = ",|:"
     private val CUSTOM_REGEX = Regex("//(.)\n(.*)")
     private val DEFAULT_NUMBER = PositiveNumbers(listOf(PositiveNumber(0)))
