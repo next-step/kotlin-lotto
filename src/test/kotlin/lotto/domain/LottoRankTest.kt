@@ -7,13 +7,13 @@ import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.vo.Money
 
-class LottoRankingTest : DescribeSpec({
+class LottoRankTest : DescribeSpec({
     describe("of") {
         context("일치하는 로또 번호의 수가 6개인 경우") {
             it("1등을 반환한다 (당첨 금액 2_000_000_000)") {
-                val ranking = LottoRanking.of(6)
+                val ranking = LottoRank.of(6)
                 assertSoftly {
-                    ranking shouldBe LottoRanking.FIRST
+                    ranking shouldBe LottoRank.FIRST
                     ranking.winningAmount shouldBe Money.of(2_000_000_000)
                 }
             }
@@ -21,9 +21,9 @@ class LottoRankingTest : DescribeSpec({
 
         context("일치하는 로또 번호의 수가 5개인 경우") {
             it("2등을 반환한다 (당첨 금액 1_500_000)") {
-                val ranking = LottoRanking.of(5)
+                val ranking = LottoRank.of(5)
                 assertSoftly {
-                    ranking shouldBe LottoRanking.SECOND
+                    ranking shouldBe LottoRank.SECOND
                     ranking.winningAmount shouldBe Money.of(1_500_000)
                 }
             }
@@ -31,9 +31,9 @@ class LottoRankingTest : DescribeSpec({
 
         context("일치하는 로또 번호의 수가 4개인 경우") {
             it("3등을 반환한다 (당첨 금액 50_000)") {
-                val ranking = LottoRanking.of(4)
+                val ranking = LottoRank.of(4)
                 assertSoftly {
-                    ranking shouldBe LottoRanking.THIRD
+                    ranking shouldBe LottoRank.THIRD
                     ranking.winningAmount shouldBe Money.of(50_000)
                 }
             }
@@ -42,9 +42,9 @@ class LottoRankingTest : DescribeSpec({
 
         context("일치하는 로또 번호의 수가 3개인 경우") {
             it("4등을 반환한다 (당첨 금액 5_000)") {
-                val ranking = LottoRanking.of(3)
+                val ranking = LottoRank.of(3)
                 assertSoftly {
-                    ranking shouldBe LottoRanking.FOURTH
+                    ranking shouldBe LottoRank.FOURTH
                     ranking.winningAmount shouldBe Money.of(5_000)
                 }
             }
@@ -53,9 +53,9 @@ class LottoRankingTest : DescribeSpec({
         context("일치하는 로또 번호의 수가 0~2개인 경우") {
             it("미당첨을 반환한다 (당첨 금액 0)") {
                 listOf(0, 1, 2).forAll { matchCount ->
-                    val ranking = LottoRanking.of(matchCount)
+                    val ranking = LottoRank.of(matchCount)
                     assertSoftly {
-                        ranking shouldBe LottoRanking.NOTTING
+                        ranking shouldBe LottoRank.NOTTING
                         ranking.winningAmount shouldBe Money.ZERO
                     }
                 }
@@ -66,7 +66,7 @@ class LottoRankingTest : DescribeSpec({
             it("IllegalArgumentException 예외가 발생한다") {
                 listOf(-1, 7).forAll { matchCount ->
                     shouldThrow<IllegalArgumentException> {
-                        LottoRanking.of(matchCount)
+                        LottoRank.of(matchCount)
                     }
                 }
             }

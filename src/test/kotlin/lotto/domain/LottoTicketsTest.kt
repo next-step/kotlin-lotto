@@ -14,7 +14,7 @@ class LottoTicketsTest : DescribeSpec({
                     listOf(`기본 로또 티켓(1~6)`())
                 )
 
-                lottoTickets.matching(winningLotto) shouldBe listOf(LottoRanking.FIRST)
+                lottoTickets.matching(winningLotto) shouldBe listOf(LottoRank.FIRST)
             }
 
             it("1등 1개, 2등 1개") {
@@ -25,7 +25,7 @@ class LottoTicketsTest : DescribeSpec({
                     )
                 )
 
-                lottoTickets.matching(winningLotto) shouldBe listOf(LottoRanking.FIRST, LottoRanking.SECOND)
+                lottoTickets.matching(winningLotto) shouldBe listOf(LottoRank.FIRST, LottoRank.SECOND)
             }
 
             it("1등 1개, 3등 1개, 4등1개, 미당첨 2개") {
@@ -40,11 +40,11 @@ class LottoTicketsTest : DescribeSpec({
                 )
 
                 val expected = listOf(
-                    LottoRanking.FIRST,
-                    LottoRanking.THIRD,
-                    LottoRanking.FOURTH,
-                    LottoRanking.NOTTING,
-                    LottoRanking.NOTTING,
+                    LottoRank.FIRST,
+                    LottoRank.THIRD,
+                    LottoRank.FOURTH,
+                    LottoRank.NOTTING,
+                    LottoRank.NOTTING,
                 )
                 lottoTickets.matching(winningLotto) shouldBe expected
             }

@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.vo.Money
 
-enum class LottoRanking(
+enum class LottoRank(
     val matchCount: Int,
     val winningAmount: Money
 ) {
@@ -13,12 +13,12 @@ enum class LottoRanking(
     NOTTING(2, Money.of(0));
 
     companion object {
-        fun of(matchCount: Int): LottoRanking {
+        fun of(matchCount: Int): LottoRank {
             require(matchCountRange(matchCount)) {
                 "당첨 결과는 0~6 까지 허용합니다 (입력:$matchCount)"
             }
 
-            return LottoRanking.values()
+            return LottoRank.values()
                 .find { it.matchCount == matchCount }
                 ?: NOTTING
         }
