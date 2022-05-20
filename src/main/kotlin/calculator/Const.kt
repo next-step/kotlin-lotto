@@ -8,5 +8,6 @@ object Const {
 
     object ErrorMsg {
         const val INPUT_IS_NOT_POSITIVE_NUMBER_ERROR_MSG = "0이나 양수가 아닌 값이 들어있습니다."
+        const val CANNOT_USE_PERIOD_FOR_DELIMITER = "마침표(.)는 구분자로 사용할 수 없습니다."
     }
 }

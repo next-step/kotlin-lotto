@@ -8,6 +8,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import java.lang.IllegalArgumentException
 
 class InputProcessorTests {
     private lateinit var inputProcessor: InputProcessor
@@ -51,6 +52,12 @@ class InputProcessorTests {
     fun customDelimiter(text: String) {
         val expected = positiveNumberList("1", "2", "3")
         assertThat(inputProcessor.convertStringToList(text)).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["""//.\n1.2.3"""])
+    fun `마침표는 커스텀 구분자로 사용할 수 없다`(text: String) {
+        assertThrows<IllegalArgumentException> { inputProcessor.convertStringToList(text) }
     }
 
     private fun positiveNumberList(vararg tokens: String) =
