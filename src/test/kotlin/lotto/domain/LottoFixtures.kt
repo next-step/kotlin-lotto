@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 
 fun `기본 로또 번호 목록(1~6)`() = createLottoNumbers(1..6)

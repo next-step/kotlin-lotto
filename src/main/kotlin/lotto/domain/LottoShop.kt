@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoShop(private val lottoMachine: LottoMachine = DefaultLottoMachine) {
     fun buying(amount: Money): LottoTickets {
