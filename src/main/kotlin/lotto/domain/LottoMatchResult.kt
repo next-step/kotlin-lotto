@@ -13,8 +13,8 @@ class LottoMatchResult(
     companion object {
         fun of(winningLotto: WinningLotto, lottoList: List<Lotto>): LottoMatchResult {
             val matchingMap = lottoList
-                .map { winningLotto.matchingNumbers(it) }
-                .groupingBy { LottoRank.of(it.size) }
+                .map { Pair(winningLotto.matchingNumbers(it), winningLotto.isMatchBonusNumber(it)) }
+                .groupingBy { LottoRank.of(it.first.size, it.second) }
                 .eachCount()
             val revenue = revenue(matchingMap)
             val rateOfReturn = rateOfReturn(revenue, lottoList.size)
