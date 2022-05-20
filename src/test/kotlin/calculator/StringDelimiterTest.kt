@@ -17,7 +17,7 @@ class StringDelimiterTest {
 
     @Test
     fun `커스텀 구분자로 문자열을 나눈다`() {
-        val testString = "//!\n1;2,3!4"
+        val testString = "//!\\n1;2,3!4"
         val expected = listOf("1", "2", "3", "4")
 
         Assertions.assertThat(StringParser.getNumberStrings(testString)).isEqualTo(expected)

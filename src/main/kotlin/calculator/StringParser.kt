@@ -1,9 +1,7 @@
 package calculator
 
 object StringParser {
-    private const val COMMA_DELIMITER = ","
-    private const val SEMICOLON_DELIMITER = ";"
-
+    private val BASE_DELIMITERS = arrayOf(",", ";")
     private const val CUSTOM_DELIMITER_INDEX = 1
     private const val NUMBER_STRING_INDEX = 2
 
@@ -13,19 +11,13 @@ object StringParser {
         return if (matcherResult != null) {
             val delimiter = matcherResult.groupValues[CUSTOM_DELIMITER_INDEX]
             val numberStrings = matcherResult.groupValues[NUMBER_STRING_INDEX]
-            numberStrings.splitAsDelimiter(delimiter)
+            numberStrings.splitAsDelimiter(BASE_DELIMITERS + delimiter)
         } else {
-            input.splitAsDelimiter()
+            input.splitAsDelimiter(BASE_DELIMITERS)
         }
     }
 
-    private fun String.splitAsDelimiter(customDelimiter: String? = null): List<String> {
-        var delimiters = arrayOf(COMMA_DELIMITER, SEMICOLON_DELIMITER)
-
-        customDelimiter?.let {
-            delimiters += it
-        }
-
+    private fun String.splitAsDelimiter(delimiters: Array<String>): List<String> {
         return this.split(*delimiters)
     }
 }
