@@ -10,7 +10,7 @@ class LottoTicketTest : DescribeSpec({
     describe("constructor") {
         context("6개의 서로 다른 로또 번호들이 주어졌을 때") {
             it("로또 티켓이 생성된다") {
-                val lottoNumbers = `기본 로또 목록(1~6)`()
+                val lottoNumbers = `기본 로또 번호 목록(1~6)`()
 
                 LottoTicket(lottoNumbers) shouldNotBe null
             }
@@ -72,7 +72,7 @@ class LottoTicketTest : DescribeSpec({
 
     describe("matching") {
         context("두 로또 티켓이 주어졌을 때") {
-            val lottoTicket = LottoTicket(`기본 로또 목록(1~6)`())
+            val lottoTicket = LottoTicket(`기본 로또 번호 목록(1~6)`())
             it("모든 번호의 수가 일치하면 6을 반환한다") {
                 val otherLottoTicket = LottoTicket(
                     listOf(
@@ -121,11 +121,3 @@ class LottoTicketTest : DescribeSpec({
     }
 })
 
-private fun `기본 로또 목록(1~6)`() = listOf(
-    LottoNumber(1),
-    LottoNumber(2),
-    LottoNumber(3),
-    LottoNumber(4),
-    LottoNumber(5),
-    LottoNumber(6),
-)
