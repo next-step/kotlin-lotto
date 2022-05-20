@@ -6,7 +6,9 @@ sealed interface StringCalculatorProperties {
 
     fun getPositiveInts(): List<Int> = numberString.split(*delimiters).map { it.toPositiveInt() }
 
-    private fun String.toPositiveInt(): Int = toInt().takeIf { it >= 0 } ?: throw IllegalArgumentException("음수가 아닌 정수를 입력해주세요.")
+    private fun String.toPositiveInt(): Int = toInt()
+        .takeIf { it >= 0 }
+        ?: throw IllegalArgumentException("음수가 아닌 정수를 입력해주세요.")
 
     companion object {
         fun of(input: String): StringCalculatorProperties =
