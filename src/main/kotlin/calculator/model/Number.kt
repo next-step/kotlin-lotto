@@ -1,7 +1,7 @@
 package calculator.model
 
 @JvmInline
-value class Number(
+value class Number private constructor(
     private val number: Int
 ) {
 
