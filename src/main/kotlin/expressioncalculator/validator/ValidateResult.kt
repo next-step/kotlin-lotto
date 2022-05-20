@@ -1,6 +1,6 @@
 package expressioncalculator.validator
 
-sealed class ValidateResult {
-    object Success
-    object Failed
+sealed interface ValidateResult {
+    object Success : ValidateResult
+    object Failed : ValidateResult
 }
