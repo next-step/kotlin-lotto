@@ -1,8 +1,7 @@
-package stringAddCalculator
+package stringaddcalculator
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import stringAddCalculator.DelimiterFinder
 
 class DelimiterFinderTest : DescribeSpec({
     it("기본 구분자를 반환한다.") {

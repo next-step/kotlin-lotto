@@ -1,4 +1,4 @@
-package stringAddCalculator
+package stringaddcalculator
 
 class Parse(private var formula: String, delimiters: List<String>) {
     init {
