@@ -1,7 +1,5 @@
 package calculator
 
-private val customDelimiterRegex = "//(.)\\n(.*)".toRegex()
-
 sealed interface StringCalculatorProperties {
     val delimiters: Array<String>
     val numberString: String
@@ -11,10 +9,11 @@ sealed interface StringCalculatorProperties {
     private fun String.toPositiveInt(): Int = toInt().takeIf { it >= 0 } ?: throw IllegalArgumentException("음수가 아닌 정수를 입력해주세요.")
 
     companion object {
-        fun of(input: String): StringCalculatorProperties = when (customDelimiterRegex.matches(input)) {
-            true -> CustomStringCalculatorProperties(input)
-            false -> DefaultStringCalculatorProperties(input)
-        }
+        fun of(input: String): StringCalculatorProperties =
+            when (CustomStringCalculatorProperties.isDelimiterCustom(input)) {
+                true -> CustomStringCalculatorProperties(input)
+                false -> DefaultStringCalculatorProperties(input)
+            }
     }
 }
 
@@ -31,5 +30,11 @@ class CustomStringCalculatorProperties(input: String) : StringCalculatorProperti
         val matchResult = customDelimiterRegex.matchEntire(input)!!
         delimiters = arrayOf(matchResult.groupValues[1])
         numberString = matchResult.groupValues[2]
+    }
+
+    companion object {
+        private val customDelimiterRegex = "//(.)\\n(.*)".toRegex()
+
+        fun isDelimiterCustom(input: String): Boolean = customDelimiterRegex.matches(input)
     }
 }
