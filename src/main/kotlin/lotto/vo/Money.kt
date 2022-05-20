@@ -34,5 +34,4 @@ data class Money(val amount: BigDecimal) {
             return Money(amount.toBigDecimal())
         }
     }
-
 }

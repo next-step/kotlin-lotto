@@ -39,7 +39,6 @@ class LottoRankTest : DescribeSpec({
             }
         }
 
-
         context("일치하는 로또 번호의 수가 3개인 경우") {
             it("4등을 반환한다 (당첨 금액 5_000)") {
                 val ranking = LottoRank.of(3)
@@ -71,6 +70,5 @@ class LottoRankTest : DescribeSpec({
                 }
             }
         }
-
     }
 })
