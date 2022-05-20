@@ -2,8 +2,6 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.DescribeSpec
-import lotto.domain.FixedLottoGenerator
-import lotto.domain.RandomLottoGenerator
 
 class LottoGeneratorSpecs : DescribeSpec({
 

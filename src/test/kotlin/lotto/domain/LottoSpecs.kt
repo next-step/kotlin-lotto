@@ -4,7 +4,6 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
 
 class LottoSpecs : DescribeSpec({
 
