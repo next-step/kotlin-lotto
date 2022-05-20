@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.vo.Money
+
 enum class LottoRanking(
     val matchCount: Int,
     val winningAmount: Money

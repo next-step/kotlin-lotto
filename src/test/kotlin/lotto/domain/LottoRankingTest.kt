@@ -5,6 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
+import lotto.vo.Money
 
 class LottoRankingTest : DescribeSpec({
     describe("of") {

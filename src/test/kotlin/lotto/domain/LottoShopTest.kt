@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import lotto.vo.Money
 
 class LottoShopTest : DescribeSpec({
     val lottoShop = LottoShop { `기본 로또 티켓(1~6)`() }
