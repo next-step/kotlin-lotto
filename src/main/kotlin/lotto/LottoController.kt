@@ -14,8 +14,8 @@ class LottoController {
         val inputPrice = LottoPurchaseView.inputPriceForPurchase()
         val lottoList = purchaseLotto(inputPrice)
         val winningLotto = WinningLottoView.inputWinningLotto()
-        val matchResult = winningLotto.match(lottoList)
-        StatisticsView.printResult(matchResult)
+        val matchReport = winningLotto.match(lottoList)
+        StatisticsView.printResult(matchReport)
     }
 
     private fun purchaseLotto(inputPrice: Long): List<Lotto> {

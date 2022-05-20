@@ -6,7 +6,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.domain.enums.LottoRank
 
-class LottoMatchResultTest : FunSpec({
+class LottoMatchReportTest : FunSpec({
 
     test("로또 1장 매칭 테스트") {
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 45)
@@ -20,14 +20,14 @@ class LottoMatchResultTest : FunSpec({
             row(lotto(11, 12, 13, 14, 15, 16), 0, 0, 0, 0, 0, 1, 0.0),
         ) {
             lotto: Lotto, first: Int, second: Int, third: Int, fourth: Int, fifth: Int, none: Int, rateOfReturn: Double ->
-            val lottoMatchResult = LottoMatchResult.of(winningLotto, listOf(lotto))
-            lottoMatchResult.matchingCountBy(LottoRank.FIRST) shouldBe first
-            lottoMatchResult.matchingCountBy(LottoRank.SECOND) shouldBe second
-            lottoMatchResult.matchingCountBy(LottoRank.THIRD) shouldBe third
-            lottoMatchResult.matchingCountBy(LottoRank.FOURTH) shouldBe fourth
-            lottoMatchResult.matchingCountBy(LottoRank.FIFTH) shouldBe fifth
-            lottoMatchResult.matchingCountBy(LottoRank.NONE) shouldBe none
-            lottoMatchResult.rateOfReturn shouldBe rateOfReturn
+            val lottoMatchReport = LottoMatchReport.of(winningLotto, listOf(lotto))
+            lottoMatchReport.matchingCountBy(LottoRank.FIRST) shouldBe first
+            lottoMatchReport.matchingCountBy(LottoRank.SECOND) shouldBe second
+            lottoMatchReport.matchingCountBy(LottoRank.THIRD) shouldBe third
+            lottoMatchReport.matchingCountBy(LottoRank.FOURTH) shouldBe fourth
+            lottoMatchReport.matchingCountBy(LottoRank.FIFTH) shouldBe fifth
+            lottoMatchReport.matchingCountBy(LottoRank.NONE) shouldBe none
+            lottoMatchReport.rateOfReturn shouldBe rateOfReturn
         }
     }
 
@@ -46,14 +46,14 @@ class LottoMatchResultTest : FunSpec({
             )
         ) {
             lottoList: List<Lotto>, first: Int, second: Int, third: Int, fourth: Int, fifth: Int, none: Int, rateOfReturn: Double ->
-            val lottoMatchResult = LottoMatchResult.of(winningLotto, lottoList)
-            lottoMatchResult.matchingCountBy(LottoRank.FIRST) shouldBe first
-            lottoMatchResult.matchingCountBy(LottoRank.SECOND) shouldBe second
-            lottoMatchResult.matchingCountBy(LottoRank.THIRD) shouldBe third
-            lottoMatchResult.matchingCountBy(LottoRank.FOURTH) shouldBe fourth
-            lottoMatchResult.matchingCountBy(LottoRank.FIFTH) shouldBe fifth
-            lottoMatchResult.matchingCountBy(LottoRank.NONE) shouldBe none
-            lottoMatchResult.rateOfReturn shouldBe rateOfReturn
+            val lottoMatchReport = LottoMatchReport.of(winningLotto, lottoList)
+            lottoMatchReport.matchingCountBy(LottoRank.FIRST) shouldBe first
+            lottoMatchReport.matchingCountBy(LottoRank.SECOND) shouldBe second
+            lottoMatchReport.matchingCountBy(LottoRank.THIRD) shouldBe third
+            lottoMatchReport.matchingCountBy(LottoRank.FOURTH) shouldBe fourth
+            lottoMatchReport.matchingCountBy(LottoRank.FIFTH) shouldBe fifth
+            lottoMatchReport.matchingCountBy(LottoRank.NONE) shouldBe none
+            lottoMatchReport.rateOfReturn shouldBe rateOfReturn
         }
     }
 })

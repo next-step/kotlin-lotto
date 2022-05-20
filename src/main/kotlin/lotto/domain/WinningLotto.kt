@@ -5,12 +5,12 @@ class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumb
         require(bonusNumber in LottoNumbers.LOTTO_MIN_NUMBER..LottoNumbers.LOTTO_MAX_NUMBER)
     }
 
-    fun match(lotto: Lotto): LottoMatchResult {
-        return LottoMatchResult.of(this, listOf(lotto))
+    fun match(lotto: Lotto): LottoMatchReport {
+        return LottoMatchReport.of(this, listOf(lotto))
     }
 
-    fun match(lottoList: List<Lotto>): LottoMatchResult {
-        return LottoMatchResult.of(this, lottoList)
+    fun match(lottoList: List<Lotto>): LottoMatchReport {
+        return LottoMatchReport.of(this, lottoList)
     }
 
     fun matchingNumbers(lotto: Lotto): List<Int> {

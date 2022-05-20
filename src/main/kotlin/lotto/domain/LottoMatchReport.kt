@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.domain.enums.LottoRank
 
-class LottoMatchResult(
+class LottoMatchReport(
     val matchingMap: Map<LottoRank, Int>,
     val rateOfReturn: Double
 ) {
@@ -11,14 +11,14 @@ class LottoMatchResult(
     }
 
     companion object {
-        fun of(winningLotto: WinningLotto, lottoList: List<Lotto>): LottoMatchResult {
+        fun of(winningLotto: WinningLotto, lottoList: List<Lotto>): LottoMatchReport {
             val matchingMap = lottoList
                 .map { Pair(winningLotto.matchingNumbers(it), winningLotto.isMatchBonusNumber(it)) }
                 .groupingBy { LottoRank.of(it.first.size, it.second) }
                 .eachCount()
             val revenue = revenue(matchingMap)
             val rateOfReturn = rateOfReturn(revenue, lottoList.size)
-            return LottoMatchResult(matchingMap, rateOfReturn)
+            return LottoMatchReport(matchingMap, rateOfReturn)
         }
 
         private fun rateOfReturn(revenue: Long, numberOfLotto: Int): Double {
