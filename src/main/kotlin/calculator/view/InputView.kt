@@ -7,6 +7,6 @@ object InputView {
         val inputStr = readlnOrNull()
 
         val inputProcessor = InputProcessor()
-        inputProcessor.convertStringToZeroIfNull(inputStr)
+        inputProcessor.convertStringToList(inputStr)
     }
 }
