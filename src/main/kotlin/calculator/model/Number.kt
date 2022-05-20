@@ -2,7 +2,7 @@ package calculator.model
 
 @JvmInline
 value class Number private constructor(
-    private val number: Int
+    val number: Int
 ) {
 
     companion object {
