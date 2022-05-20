@@ -1,3 +1,5 @@
+package view
+
 class InputParser {
     fun parse(input: String): List<String> {
         val customDelimiterMatch = CUSTOM_DELIMITER_REGEX.toRegex().find(input) ?: return parse(input, DEFAULT_DELIMITER.toRegex())
