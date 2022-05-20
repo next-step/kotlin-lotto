@@ -9,6 +9,6 @@ class LottoShop(private val lottoMachine: LottoMachine = DefaultLottoMachine) {
     }
 
     companion object {
-        private val LOTTO_TICKET_PRICE = Money.of(1_000)
+        val LOTTO_TICKET_PRICE = Money.of(1_000)
     }
 }
