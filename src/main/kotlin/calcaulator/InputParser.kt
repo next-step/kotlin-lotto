@@ -17,6 +17,6 @@ fun String?.parseInput(): Collection<Int> {
         .validate { it >= 0 }
 }
 
-private fun MatchResult?.getGroupValueAt(index: Int, default: String) =
+private fun MatchResult?.getGroupValueAt(index: Int, default: String): String =
     this?.groupValues?.get(index)
         ?: default
