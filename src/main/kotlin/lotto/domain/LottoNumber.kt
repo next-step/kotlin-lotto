@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoNumber(private val number: Int) {
+data class LottoNumber(val number: Int) {
 
     init {
         require(number in (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER)) {
