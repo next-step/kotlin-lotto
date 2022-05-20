@@ -11,8 +11,7 @@ object RandomLottoGenerator : LottoGenerator {
         val lottoNumbers = LOTTO_NUMBER_RANGE
             .shuffled()
             .take(Lotto.SIZE_OF_LOTTO_NUMBERS)
-            .map { LottoNumber(it) }
-        return Lotto(lottoNumbers)
+        return Lotto.of(lottoNumbers)
     }
 }
 
@@ -20,7 +19,6 @@ class FixedLottoGenerator(
     private val fixedNumbers: Collection<Int>
 ) : LottoGenerator {
     override fun generate(): Lotto {
-        val lottoNumbers = fixedNumbers.map { LottoNumber(it) }
-        return Lotto(lottoNumbers)
+        return Lotto.of(fixedNumbers)
     }
 }
