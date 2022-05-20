@@ -8,10 +8,9 @@ class StringAddTest {
     @ValueSource(strings = ["-1", "a"])
     @ParameterizedTest
     fun `음수 값, 숫자가아닌 인풋이 들어오면 런타임 익셉션 던진다`(input: String) {
-        val inputValidator = InputValidator()
 
         assertThrows<RuntimeException> {
-            inputValidator.checkNatualAndZero(input)
+            InputValidator.checkNatualAndZero(input)
         }
     }
 

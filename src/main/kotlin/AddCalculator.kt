@@ -1,5 +1,4 @@
 class AddCalculator {
-    private val inputValidator = InputValidator()
     private val inputParser = InputParser()
 
     fun sum(input: String?): Int {
@@ -20,7 +19,7 @@ class AddCalculator {
 
     private fun checkValidNumbers(tokens: List<String>) {
         tokens.forEach {
-            inputValidator.checkNatualAndZero(it)
+            InputValidator.checkNatualAndZero(it)
         }
     }
 }
