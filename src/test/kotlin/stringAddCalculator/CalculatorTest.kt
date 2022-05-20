@@ -9,7 +9,7 @@ class CalculatorTest : FreeSpec({
 
     "calculate" - {
 
-        "정상적인 게산기 동작 확인" {
+        "조건에 맞는 입력값에 따라 덧셈이 되는 동작 확인" {
             withData(
                 "1" to 1,
                 "" to 0,
@@ -21,39 +21,39 @@ class CalculatorTest : FreeSpec({
         }
     }
 
-    "checkInput" - {
+    "checkInputAndChangeZero" - {
 
         "null일 경우 0를 반환해야한다." {
             val input = null
-            Calculator.checkInput(input) shouldBe "0"
+            Calculator.checkInputAndChangeZero(input) shouldBe "0"
         }
 
         "blank로 이루어진 문자열일 경우 0을 반환해야한다." {
             val input = "  "
-            Calculator.checkInput(input) shouldBe "0"
+            Calculator.checkInputAndChangeZero(input) shouldBe "0"
         }
     }
 
-    "splitString" - {
+    "splitByDefaultDelimiter" - {
 
         ", 을 기준으로 문자열이 분리되어야한다." {
             val inputString = "1,2"
-            Calculator.splitString(inputString) shouldBe listOf("1", "2")
+            Calculator.splitByDefaultDelimiter(inputString) shouldBe listOf("1", "2")
         }
 
         ": 을 기준으로 문자열이 분리되어야한다." {
             val inputString = "1:2"
-            Calculator.splitString(inputString) shouldBe listOf("1", "2")
+            Calculator.splitByDefaultDelimiter(inputString) shouldBe listOf("1", "2")
         }
 
         ",와 : 을 기준으로 문자열이 분리되어야한다." {
             val inputString = "1,2:3"
-            Calculator.splitString(inputString) shouldBe listOf("1", "2", "3")
+            Calculator.splitByDefaultDelimiter(inputString) shouldBe listOf("1", "2", "3")
         }
 
         "단일 문자여도 리스로 반환되어야한다." {
             val inputString = "1"
-            Calculator.splitString(inputString) shouldBe listOf(inputString)
+            Calculator.splitByDefaultDelimiter(inputString) shouldBe listOf(inputString)
         }
     }
 
@@ -73,11 +73,11 @@ class CalculatorTest : FreeSpec({
         }
     }
 
-    "add" - {
+    "accumulateSum" - {
 
         "숫자 리스트의 모든 수의 합을 반환한다." {
             val numberList = listOf(1, 2, 3)
-            Calculator.add(numberList) shouldBe 6
+            Calculator.accumulateSum(numberList) shouldBe 6
         }
     }
 

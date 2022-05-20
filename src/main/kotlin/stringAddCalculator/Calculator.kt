@@ -9,32 +9,33 @@ object Calculator {
     private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
 
     fun calculate(input: String?): Int {
-        val checkInput: String = checkInput(input)
-        val splitList = splitCustomDelimiter(checkInput) ?: splitString(checkInput)
-        val convertIntList = convertInt(splitList)
-        return add(convertIntList)
+        val checkInput: String = checkInputAndChangeZero(input)
+        var splitByDelimiter = splitCustomDelimiter(checkInput)
+        if (splitByDelimiter.isEmpty()) splitByDelimiter = splitByDefaultDelimiter(checkInput)
+        val convertIntList = convertInt(splitByDelimiter)
+        return accumulateSum(convertIntList)
     }
 
-    fun checkInput(input: String?): String = if (input.isNullOrBlank()) "0" else input
+    fun checkInputAndChangeZero(input: String?): String = if (input.isNullOrBlank()) "0" else input
 
-    fun splitString(input: String): List<String> {
+    fun splitByDefaultDelimiter(input: String): List<String> {
         return input.split(DEFAULT_DELIMITER_REGEX)
     }
 
-    fun splitCustomDelimiter(input: String): List<String>? {
-        val result = CUSTOM_DELIMITER_REGEX.find(input) ?: return null
+    fun splitCustomDelimiter(input: String): List<String> {
+        val result = CUSTOM_DELIMITER_REGEX.find(input) ?: return emptyList()
         val delimiter = result.groupValues[1]
-        val splitStringList = result.groupValues[2]
-        return splitStringList.split(delimiter)
+        val splitInputByRegex = result.groupValues[2]
+        return splitInputByRegex.split(delimiter)
     }
 
     fun convertInt(inputList: List<String>): List<Int> {
-        val numberList = inputList.map { it.toInt() }
-        checkNegative(numberList)
-        return numberList
+        val convertAllToInt = inputList.map { it.toInt() }
+        checkNegative(convertAllToInt)
+        return convertAllToInt
     }
 
-    fun add(numberList: List<Int>): Int {
+    fun accumulateSum(numberList: List<Int>): Int {
         return numberList.sum()
     }
 
