@@ -23,6 +23,10 @@ data class Money(val amount: BigDecimal) {
         return amount.divide(other.amount, scale, roundingMode)
     }
 
+    fun multiply(count: Int): Money {
+        return Money(amount.multiply(count.toBigDecimal()))
+    }
+
     companion object {
         val ZERO = Money(BigDecimal.ZERO)
 

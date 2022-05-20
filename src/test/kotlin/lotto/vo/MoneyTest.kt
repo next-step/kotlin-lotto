@@ -50,4 +50,12 @@ class MoneyTest : DescribeSpec({
             }
         }
     }
+
+    describe("multiply") {
+        it("두 금액을 곱할 수 있다") {
+            val money = Money.of(100)
+
+            money.multiply(5) shouldBe Money.of(500)
+        }
+    }
 })
