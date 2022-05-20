@@ -20,6 +20,15 @@ class InputProcessorTests {
     @NullAndEmptySource
     @ValueSource(strings = [" ", "\t"])
     fun emptyOrNull(text: String?) {
-        assertThat(inputProcessor.convertStringToZeroIfNull(text)).isEqualTo("0")
+        val expected = "0"
+        assertThat(inputProcessor.convertStringToZeroIfNull(text)).isEqualTo(expected)
+    }
+
+    @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "4"])
+    fun oneNumber(text: String) {
+        val expected = text
+        assertThat(inputProcessor.convertStringToZeroIfNull(text)).isEqualTo(expected)
     }
 }
