@@ -4,12 +4,13 @@ object Calculator {
     const val NEGATIVE_ERROR = "음수는 계산할 수 없습니다."
     private const val COMMA_DELIMITER = ","
     private const val COLON_DELIMITER = ":"
+
     private val DEFAULT_DELIMITER_REGEX = Regex("$COLON_DELIMITER|$COMMA_DELIMITER")
     private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
 
     fun calculate(input: String?): Int {
         val checkInput: String = checkInput(input)
-        val splitList = customDelimiter(checkInput) ?: splitString(checkInput)
+        val splitList = splitCustomDelimiter(checkInput) ?: splitString(checkInput)
         val convertIntList = convertInt(splitList)
         return add(convertIntList)
     }
@@ -20,7 +21,7 @@ object Calculator {
         return input.split(DEFAULT_DELIMITER_REGEX)
     }
 
-    fun customDelimiter(input: String): List<String>? {
+    fun splitCustomDelimiter(input: String): List<String>? {
         val result = CUSTOM_DELIMITER_REGEX.find(input) ?: return null
         val delimiter = result.groupValues[1]
         val splitStringList = result.groupValues[2]

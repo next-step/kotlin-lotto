@@ -61,7 +61,7 @@ class CalculatorTest : FreeSpec({
 
         "`//`와 `\n` 문자 사이에 커스텀 구분자를 기준으로 문자열이 분리되어야한다.." {
             val customString = "//;\n1;2;3"
-            Calculator.customDelimiter(customString) shouldBe listOf("1", "2", "3")
+            Calculator.splitCustomDelimiter(customString) shouldBe listOf("1", "2", "3")
         }
     }
 
