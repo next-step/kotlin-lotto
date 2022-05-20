@@ -1,12 +1,13 @@
 package calculator.view
 
+import calculator.model.PositiveNumber
 import calculator.processor.InputProcessor
 
-object InputView {
-    fun getInputStrAndConvertToList() {
+class InputView {
+    fun getInputStrAndConvertToList(): List<PositiveNumber> {
         val inputStr = readlnOrNull()
 
         val inputProcessor = InputProcessor()
-        inputProcessor.convertStringToList(inputStr)
+        return inputProcessor.convertStringToList(inputStr)
     }
 }

@@ -1,11 +1,12 @@
 package calculator.processor
 
+import calculator.model.PositiveNumber
+
 class InputProcessor {
-    fun convertStringToList(text: String?): List<String> {
+    fun convertStringToList(text: String?): List<PositiveNumber> {
         val notEmptyText = convertStringToZeroIfNull(text)
-        val tokens = notEmptyText.split(DEFAULT_DELIMITER_REGEX.toRegex())
-        println(tokens)
-        return tokens
+        return notEmptyText.split(DEFAULT_DELIMITER_REGEX.toRegex())
+            .map { PositiveNumber(it.trim()) }
     }
 
     private fun convertStringToZeroIfNull(text: String?) =
