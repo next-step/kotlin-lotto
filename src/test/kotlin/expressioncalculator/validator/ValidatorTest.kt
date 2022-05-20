@@ -9,12 +9,8 @@ class ValidatorTest {
     @ValueSource(strings = ["", "haha", "hoho"])
     fun `Validator를 구현하여 input이 유효한지 검사할 수 있다`(input: String?) {
         val validator = object : Validator {
-            override fun validate(input: String?): ValidateResult {
-                return if (input.isNullOrEmpty()) {
-                    ValidateResult.Failed
-                } else {
-                    ValidateResult.Success
-                }
+            override fun isValid(input: String?): Boolean {
+                return !input.isNullOrEmpty()
             }
         }
 
