@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.processor.CalculatorProcessor
 import calculator.view.InputView
 import calculator.view.OutputView
 
@@ -9,5 +10,7 @@ fun main() {
 
     outputView.initMsg()
     val numbers = inputView.getInputStrAndConvertToList()
-    println(numbers)
+
+    val result = CalculatorProcessor().add(numbers)
+    outputView.result(result)
 }
