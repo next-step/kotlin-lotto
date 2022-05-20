@@ -6,7 +6,10 @@ import lotto.ui.LottoPurchaseView
 import lotto.ui.StatisticsView
 import lotto.ui.WinningLottoView
 
-class LottoController(private val lottoSeller: LottoSeller) {
+class LottoController {
+
+    private val lottoSeller = LottoSeller()
+
     fun start() {
         val inputPrice = LottoPurchaseView.inputPriceForPurchase()
         val lottoList = purchaseLotto(inputPrice)

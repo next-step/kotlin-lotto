@@ -1,5 +1,5 @@
 package lotto.domain
 
-class Lotto(numbers: List<Int>) {
-    val numbers: LottoNumbers = LottoNumbers(numbers)
+class Lotto(val numbers: LottoNumbers) {
+    constructor(numbers: List<Int>) : this(LottoNumbers(numbers))
 }
