@@ -13,7 +13,7 @@ class LottoRankingTest : DescribeSpec({
                 val ranking = LottoRanking.of(6)
                 assertSoftly {
                     ranking shouldBe LottoRanking.FIRST
-                    ranking.winningAmount shouldBe 2_000_000_000
+                    ranking.winningAmount shouldBe Money.of(2_000_000_000)
                 }
             }
         }
@@ -23,7 +23,7 @@ class LottoRankingTest : DescribeSpec({
                 val ranking = LottoRanking.of(5)
                 assertSoftly {
                     ranking shouldBe LottoRanking.SECOND
-                    ranking.winningAmount shouldBe 1_500_000
+                    ranking.winningAmount shouldBe Money.of(1_500_000)
                 }
             }
         }
@@ -33,7 +33,7 @@ class LottoRankingTest : DescribeSpec({
                 val ranking = LottoRanking.of(4)
                 assertSoftly {
                     ranking shouldBe LottoRanking.THIRD
-                    ranking.winningAmount shouldBe 50_000
+                    ranking.winningAmount shouldBe Money.of(50_000)
                 }
             }
         }
@@ -44,7 +44,7 @@ class LottoRankingTest : DescribeSpec({
                 val ranking = LottoRanking.of(3)
                 assertSoftly {
                     ranking shouldBe LottoRanking.FOURTH
-                    ranking.winningAmount shouldBe 5_000
+                    ranking.winningAmount shouldBe Money.of(5_000)
                 }
             }
         }
@@ -55,7 +55,7 @@ class LottoRankingTest : DescribeSpec({
                     val ranking = LottoRanking.of(matchCount)
                     assertSoftly {
                         ranking shouldBe LottoRanking.NOTTING
-                        ranking.winningAmount shouldBe 0
+                        ranking.winningAmount shouldBe Money.ZERO
                     }
                 }
             }

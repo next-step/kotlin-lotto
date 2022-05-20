@@ -1,12 +1,12 @@
 package lotto
 
 class LottoShop(private val lottoMachine: LottoMachine = DefaultLottoMachine) {
-    fun buying(amount: Long): LottoTickets {
-        val ticketCount = (amount / LOTTO_TICKET_PRICE).toInt()
+    fun buying(amount: Money): LottoTickets {
+        val ticketCount = amount / LOTTO_TICKET_PRICE
         return LottoTickets((1..ticketCount).map { lottoMachine.generate() })
     }
 
     companion object {
-        private const val LOTTO_TICKET_PRICE = 1_000
+        private val LOTTO_TICKET_PRICE = Money.of(1_000)
     }
 }

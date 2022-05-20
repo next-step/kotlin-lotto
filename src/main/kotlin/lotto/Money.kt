@@ -24,6 +24,8 @@ data class Money(val amount: BigDecimal) {
     }
 
     companion object {
+        val ZERO = Money(BigDecimal.ZERO)
+
         fun of(amount: Int): Money {
             return Money(amount.toBigDecimal())
         }

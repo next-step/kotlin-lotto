@@ -9,14 +9,14 @@ class LottoShopTest : DescribeSpec({
     describe("buying") {
         context("로또 구입 1_000원이 주어졌을 때") {
             it("1개의 로또 티켓을 발급해야 한다") {
-                val lottoTickets = lottoShop.buying(1_000)
+                val lottoTickets = lottoShop.buying(Money.of(1_000))
 
                 lottoTickets.lottoTickets.size shouldBe 1
             }
 
             context("로또 구입 11_000원이 주어졌을 때") {
                 it("11개의 로또 티켓을 발급해야 한다") {
-                    val lottoTickets = lottoShop.buying(11_000)
+                    val lottoTickets = lottoShop.buying(Money.of(11_000))
 
                     lottoTickets.lottoTickets.size shouldBe 11
                 }
