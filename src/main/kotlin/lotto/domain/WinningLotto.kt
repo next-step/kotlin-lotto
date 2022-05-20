@@ -1,14 +1,13 @@
 package lotto.domain
 
-class WinningLotto(numbers: List<Int>) {
-
-    private val numbers: LottoNumbers = LottoNumbers(numbers)
+class WinningLotto(private val lottoNumbers: LottoNumbers) {
+    constructor(numbers: List<Int>) : this(LottoNumbers(numbers))
 
     fun match(lottoList: List<Lotto>): LottoMatchResult {
         return LottoMatchResult.of(this, lottoList)
     }
 
     fun matchingNumbers(lotto: Lotto): List<Int> {
-        return numbers.matchingNumbers(lotto.numbers)
+        return lottoNumbers.matchingNumbers(lotto.numbers)
     }
 }
