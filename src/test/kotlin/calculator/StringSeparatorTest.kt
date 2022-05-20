@@ -15,7 +15,6 @@ class StringSeparatorTest : StringSpec({
         defaultDelimiter.forAll {
             StringSeparator.separate(it.key) shouldBe it.value
         }
-
     }
 
     "입력값이 비었거나 null인 경우 기본 값을 반환한다." {
