@@ -3,7 +3,7 @@ package stringcalculator.domain.customparser
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainAll
 
-class StringExpressionParserTest : DescribeSpec({
+class CustomExpressionParserTest : DescribeSpec({
     it("연산식에서 구분자, 숫자 문자열을 분리한다") {
         // given
         val expression = "1,2:3"

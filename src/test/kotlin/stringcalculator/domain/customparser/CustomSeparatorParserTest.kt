@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 
-class StringCustomSeparatorParserTest : DescribeSpec({
+class CustomSeparatorParserTest : DescribeSpec({
     it("커스텀 구분자 문자열에서 구분자 문자(ParserSeparator)를 추출한다") {
         // given
         val successSeparatorString = ";"

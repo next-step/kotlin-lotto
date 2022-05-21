@@ -6,7 +6,7 @@ import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 
-class StringNumberParserTest : DescribeSpec({
+class CustomNumbersStringParserTest : DescribeSpec({
     it("Separators, 숫자가 포함된 문자열을 받아서 숫자를 추출한다") {
         // given
         val expression = "1,2:3"
