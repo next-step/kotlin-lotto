@@ -33,7 +33,7 @@ internal class StringAddCalculatorTest : FreeSpec({
         calculator.add("1,2:3") shouldBe 6
     }
 
-    "//와 \n 문자 사이에 커스텀 구분자를 지정할 수 있다." {
+    "//와 newline 문자 사이에 커스텀 구분자를 지정할 수 있다." {
         calculator.add("//;\n1;2;3") shouldBe 6
     }
 })

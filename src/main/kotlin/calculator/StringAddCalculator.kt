@@ -6,10 +6,31 @@ class StringAddCalculator {
             return 0
         }
 
-        if (text == "//;\n1;2;3") {
-            return 6
+        val delimiter = getDelimiter(text)
+        val numbers = getNumberText(text)
+
+        return numbers
+            .split(delimiter)
+            .sumOf { it.toInt() }
+    }
+
+    private fun getNumberText(text: String): String {
+        val result = Regex("^//.\n(.*)").find(text)
+
+        result?.let {
+            return it.groupValues[1]
         }
 
-        return text.split(",|:".toRegex()).sumOf { it.toInt() }
+        return text
+    }
+
+    private fun getDelimiter(text: String): Regex {
+        val result = Regex("^//(.)\n").find(text)
+
+        result?.let {
+            return it.groupValues[1].toRegex()
+        }
+
+        return Regex("[,|:]")
     }
 }
