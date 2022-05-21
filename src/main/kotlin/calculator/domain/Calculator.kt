@@ -16,8 +16,10 @@ object Calculator {
     }
 
     private fun getNumberList(input: String): List<Operand> {
-        return input.split(
-            "[${DEFAULT_SEPARATORS.joinToString("")}]".toRegex()
-        ).map { Operand.of(it) }
+        return input.split(getDefaultRegex()).map { Operand.of(it) }
+    }
+
+    private fun getDefaultRegex(): Regex {
+        return "[${DEFAULT_SEPARATORS.joinToString("")}]".toRegex()
     }
 }
