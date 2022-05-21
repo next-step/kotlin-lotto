@@ -13,15 +13,9 @@ class RegexMatchedValidatorTest {
     @ValueSource(strings = ["//;\n1;2;3", "//a\n1;2;3", "/dn1;2;3"])
     @NullAndEmptySource
     fun `RegexMatchedValidator는 input이 지정한 정규식에 일치하면 유효하다`(input: String?) {
-        val isMatched = input?.let {
+        val expected = input?.let {
             regex.matches(it)
         } ?: false
-
-        val expected = if (isMatched) {
-            ValidateResult.Success
-        } else {
-            ValidateResult.Failed
-        }
 
         assertThat(regexExistValidator.validate(input)).isEqualTo(expected)
     }

@@ -10,11 +10,7 @@ class EmptyValidatorTest {
     @ValueSource(strings = ["", "   ", "haha", "hoho"])
     @NullAndEmptySource
     fun `EmptyValidator는 input이 null이거나 비어있으면 유효하다`(input: String?) {
-        val expected = if (input.isNullOrBlank()) {
-            ValidateResult.Success
-        } else {
-            ValidateResult.Failed
-        }
+        val expected = input.isNullOrBlank()
 
         Assertions.assertThat(EmptyValidator.validate(input)).isEqualTo(expected)
     }

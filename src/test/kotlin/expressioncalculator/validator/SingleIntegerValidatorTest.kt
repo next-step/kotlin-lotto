@@ -10,11 +10,7 @@ class SingleIntegerValidatorTest {
     @ValueSource(strings = ["1", "2", "3", "4", "zz", "haha"])
     @NullAndEmptySource
     fun `SingleIntegerValidator는 input을 Int로 변환할 수 있을 경우 유효하다`(input: String?) {
-        val expected = if (input?.toIntOrNull() != null) {
-            ValidateResult.Success
-        } else {
-            ValidateResult.Failed
-        }
+        val expected = input?.toIntOrNull() != null
 
         assertThat(SingleIntegerValidator.validate(input)).isEqualTo(expected)
     }
