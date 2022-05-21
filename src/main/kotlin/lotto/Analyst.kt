@@ -32,9 +32,9 @@ class Analyst(private val lastWeekWinningNumbers: List<Int>) {
 
     companion object {
         private const val FOURTH_PRIZE_PRICE = 5000
-        private const val THIRD_PRIZE_PRICE = 50000
-        private const val SECOND_PRIZE_PRICE = 1500000
-        private const val FIRST_PRIZE_PRICE = 2000000000
+        private const val THIRD_PRIZE_PRICE = 50_000
+        private const val SECOND_PRIZE_PRICE = 1_500_000
+        private const val FIRST_PRIZE_PRICE = 2_000_000_000
     }
 }
 

@@ -5,9 +5,9 @@ import io.kotest.matchers.shouldBe
 
 class AnalystTest : DescribeSpec({
     val fourthPrizePrice = 5000
-    val thirdPrizePrice = 50000
-    val secondPrizePrice = 1500000
-    val firstPrizePrice = 2000000000
+    val thirdPrizePrice = 50_000
+    val secondPrizePrice = 1_500_000
+    val firstPrizePrice = 2_000_000_000
 
     describe("analyze") {
         it("지난 주 로또 당첨 번호와 3개의 숫자가 맞으면 4등이다") {
