@@ -1,11 +1,15 @@
 package calculator.model
 
 object AddCalculator {
+    private val DEFAULT_DELIMITER_REGEX = "[,:]".toRegex()
 
-    operator fun invoke(numbers: List<Int>): Number {
-        val sum = numbers.map { Number.from(it) }
+    fun calculate(input: String?): Int {
+        if (input.isNullOrBlank()) {
+            return 0
+        }
+
+        return input.split(DEFAULT_DELIMITER_REGEX)
+            .map { Number.from(it.toInt()) }
             .sumOf { it.number }
-
-        return Number.from(sum)
     }
 }

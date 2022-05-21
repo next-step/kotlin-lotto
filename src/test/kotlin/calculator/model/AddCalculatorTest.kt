@@ -10,17 +10,14 @@ class AddCalculatorTest {
 
     @ParameterizedTest(name = "{0} = {1}")
     @CsvSource(
-        "1 = 1",
-        "1 + 2 = 3",
-        "1 + 2 + 3 = 6",
+        " = 0",
+        "1,2 = 3",
+        "1,2,3 = 6",
+        "3,4:5 = 12",
         delimiter = '='
     )
-    fun `덧셈을 정상적으로 계산`(expression: String, result: Int) {
-        // given
-        val numbers = expression.split("+")
-            .map { it.trim().toInt() }
-
+    fun `덧셈을 정상적으로 계산`(input: String?, result: Int) {
         // when, then
-        assertEquals(AddCalculator(numbers), Number.from(result))
+        assertEquals(AddCalculator.calculate(input), result)
     }
 }
