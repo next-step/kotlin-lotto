@@ -21,7 +21,7 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1", "11", "111", "1234"])
+    @ValueSource(strings = ["1", "11", "111", "1234", "0", "012"])
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(expression: String?) {
         assertThat(calculator.add(expression)).isEqualTo(expression?.toInt())
     }
