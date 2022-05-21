@@ -8,7 +8,7 @@ interface LottoNumberGenerator {
         private val lottoNumberList: List<Int>
     ) : LottoNumberGenerator {
         override fun numberSet(): List<Int> {
-            return lottoNumberList
+            return lottoNumberList.sorted()
         }
     }
 }

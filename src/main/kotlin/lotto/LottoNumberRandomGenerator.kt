@@ -2,7 +2,7 @@ package lotto
 
 class LottoNumberRandomGenerator : LottoNumberGenerator {
     override fun numberSet(): List<Int> {
-        return lottoNumberList.shuffled().subList(0, 6)
+        return lottoNumberList.shuffled().subList(0, 6).sorted()
     }
 
     companion object {
