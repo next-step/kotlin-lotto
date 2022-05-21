@@ -19,7 +19,7 @@ class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumb
         return matchingNumbers(lotto).size
     }
 
-    fun matchingNumbers(lotto: Lotto): List<Int> {
+    private fun matchingNumbers(lotto: Lotto): List<Int> {
         return lottoNumbers.matchingNumbers(lotto.numbers)
     }
 

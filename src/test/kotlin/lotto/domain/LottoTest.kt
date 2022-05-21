@@ -42,12 +42,6 @@ class LottoTest : FunSpec({
         lotto.numbers.toString() shouldBe "[1, 2, 3, 4, 5, 6]"
     }
 
-    test("로또 숫자끼리 비교가 가능하다.") {
-        val lotto = Lotto(listOf(2, 1, 6, 5, 4, 3))
-        val winningLotto = WinningLotto(listOf(3, 4, 5, 6, 7, 8), 45)
-        winningLotto.matchingNumbers(lotto) shouldBe listOf(3, 4, 5, 6)
-    }
-
     test("로또 자동 발급시 번호는 랜덤하게 생성된다.") {
         val numberMap = List(100) {}
             .map { Lotto(RandomLottoNumberGenerator.generate()) }
