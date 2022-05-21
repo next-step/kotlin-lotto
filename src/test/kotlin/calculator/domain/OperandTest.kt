@@ -2,6 +2,7 @@ package calculator.domain
 
 import calculator.constants.Messages
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 /**
@@ -20,5 +21,12 @@ class OperandTest {
         Assertions.assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
             Operand.of("hi")
         }.withMessageMatching(Messages.INSERT_NOT_NUMBER)
+    }
+
+    @Test
+    fun `Operand끼리 더했을때 값이 정확히 나온다`() {
+        val a = Operand(1)
+        val b = Operand(2)
+        assertThat((a + b).value).isEqualTo(3)
     }
 }

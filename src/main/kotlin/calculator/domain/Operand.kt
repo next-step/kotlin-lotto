@@ -6,11 +6,15 @@ import calculator.constants.Messages
  * 피연산자를 저장하는 클래스
  * Created by Jaesungchi on 2022.05.21..
  */
-data class Operand(private val value: Int) {
+data class Operand(val value: Int) {
 
     init {
         if (value < MINIMUM_VALID_NUMBER)
             throw RuntimeException(Messages.INSERT_NEGATIVE_NUMBER)
+    }
+
+    operator fun plus(another: Operand): Operand {
+        return Operand(value + another.value)
     }
 
     companion object {
