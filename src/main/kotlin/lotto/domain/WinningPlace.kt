@@ -2,7 +2,7 @@ package lotto.domain
 
 enum class WinningPlace(
     val reward: Int,
-    private val requiredMatchingCount: Int,
+    val requiredMatchingCount: Int,
 ) {
     FIRST(2_000_000_000, 6),
     SECOND(1_500_000, 5),

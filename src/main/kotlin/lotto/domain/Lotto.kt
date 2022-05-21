@@ -22,4 +22,8 @@ class Lotto(
             return Lotto(numberSet)
         }
     }
+
+    override fun toString(): String {
+        return numbers.toString()
+    }
 }

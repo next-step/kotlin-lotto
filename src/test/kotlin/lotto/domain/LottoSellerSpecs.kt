@@ -10,7 +10,7 @@ class LottoSellerSpecs : DescribeSpec({
         context("로또를 구입할 충분한 금액을 받으면") {
             it("(금액/로또 가격) 만큼의 로또로 구성된 로또 뭉치를 제공한다") {
                 val lottoBundle = LottoSeller().sell(1_4000)
-                lottoBundle.bundle.size shouldBe 14
+                lottoBundle.size shouldBe 14
             }
         }
 
