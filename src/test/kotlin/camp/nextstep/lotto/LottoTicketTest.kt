@@ -21,6 +21,19 @@ internal class LottoTicketTest {
         assertTrue(ticket.numbers.containsAll(numbers))
     }
 
+    @DisplayName("로또 티켓은 6개의 숫자를 오름차순으로 가진다.")
+    @Test
+    fun sortNumbersTest() {
+        val numbers = listOf(6, 4, 2, 3, 1, 5)
+        val ticket = LottoTicket(numbers)
+
+        val sortedNumbers = numbers.sorted()
+
+        for (i in 0 until LottoTicket.LOTTO_NUMBERS) {
+            assertEquals(sortedNumbers[i], ticket.numbers[i])
+        }
+    }
+
     @DisplayName("로또 티켓은 6개보다 적거나 많은 숫자를 가질 수 없다.")
     @ParameterizedTest
     @MethodSource("illegalNumbers")
