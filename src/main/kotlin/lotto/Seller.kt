@@ -1,7 +1,9 @@
 package lotto
 
+typealias Lotto = List<Int>
+
 class Seller(private val randomNumbersGenerator: IRandomNumberGenerator) {
-    lateinit var lottos: List<List<Int>>
+    lateinit var lottos: List<Lotto>
 
     fun issueFor(purchaseAmount: Int) {
         val lottoCount = purchaseAmount / PRICE_OF_ONE_LOTTO

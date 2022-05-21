@@ -3,8 +3,8 @@ package lotto
 class Analyst(private val lastWeekWinningNumbers: List<Int>) {
     lateinit var result: Map<String, Any>
 
-    fun analyze(purchaseAmount: Int, lottos: List<List<Int>>) {
-        var numberOfCorrects = mutableListOf<Int>()
+    fun analyze(purchaseAmount: Int, lottos: List<Lotto>) {
+        val numberOfCorrects = mutableListOf<Int>()
 
         lottos.forEach {
             it
