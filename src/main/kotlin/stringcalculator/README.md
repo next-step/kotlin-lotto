@@ -35,17 +35,9 @@
 
 ## 계산 영역
 
-### calculateNumber
-
-- 분리된 숫자
-
-### numberListManager
-
-- 분리된 숫자를 관리한다
-
 ### Calculator
 
-- `calculateNumbers` 에서 숫자를 받고 총합 값을 내보낸다 - sumAll
+- 숫자를 받고 총합 값을 내보낸다 - sumAll
 
 ## 문자 분리 하기 위한 영역
 
