@@ -29,14 +29,11 @@
 
 ## 도메인 
 
-### InputDto   
-- 연산식 문자에 유효성 검사를 합니다
-  - 커스텀 구분자 가 아닌 경우 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
-  - 커스텀 구분자 인 경우 `;n` 이후에 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
+### calculateNumber
+- 분리된 숫자
 
-### StringExpressionParser
-- 연산식에서 구분자(`Separator`)를 사용하여 숫자들을 가지고 온다.
-- 숫자 유효성 검사
+### calculateNumbers
+- 분리된 숫자를 관리한다
 
 ### Separator
 - 구분자를 관리한다
@@ -44,8 +41,28 @@
 - 구분자 유효성 검사
   - 커스텀 구분자 가 숫자인 경우 IllegalArgumentException 발생
 
+### Separators
+- 구분자들을 관리한다.
+
 ### Calculator
 - `StringExpressionParser` 에서 숫자를 받고 총합 값을 내보낸다
+
+### InputDto   
+- 연산식 문자에 유효성 검사를 합니다
+  - 커스텀 구분자 가 아닌 경우 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
+  - 커스텀 구분자 인 경우 `;n` 이후에 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
+
+### StringExpressionParser
+- 연산식에서 구분자, 숫자 문자열을 분리한다.
+- 연산식에서 구분자(`Separator`)를 사용하여 숫자들을 가지고 온다.
+- 숫자 유효성 검사
+
+### StringSeparatorParser
+
+### StringNumbersParser
+- 
+
+
 
 ## 작업 리스트
 - [x] InputDto 구현
