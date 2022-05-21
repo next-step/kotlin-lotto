@@ -1,6 +1,6 @@
 package lotto
 
-class ResultView(private val output: IOutput) {
+class ResultView(private val output: Output) {
     fun showLottos(lottos: List<List<Int>>) {
         output.print("${lottos.size}개를 구입했습니다.")
         lottos.forEach { output.print(it.toString()) }

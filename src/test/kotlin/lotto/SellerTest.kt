@@ -19,6 +19,6 @@ class SellerTest : DescribeSpec({
     }
 })
 
-class StubRandomNumberGenerator(private val numbers: List<Int>): IRandomNumberGenerator {
+class StubRandomNumberGenerator(private val numbers: List<Int>): RandomNumberGenerator {
     override fun generate() = numbers
 }

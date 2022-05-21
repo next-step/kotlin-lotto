@@ -61,7 +61,7 @@ class ResultViewTest : DescribeSpec({
     }
 })
 
-class StubOutput : IOutput {
+class StubOutput : Output {
     lateinit var view: String
 
     override fun print(message: String) {

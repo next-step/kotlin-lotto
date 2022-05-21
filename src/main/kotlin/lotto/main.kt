@@ -2,15 +2,15 @@ package lotto
 
 fun main() {
     // 구입할 로또 갯수 입력(View)
-    val inputView = InputView(Input())
+    val inputView = InputView(ReadInput())
     val purchaseAmount = inputView.askPurchaseAmount()
 
     // 로또 구입(Model)
-    val seller = Seller(RandomNumbersGenerator())
+    val seller = Seller(LottoGenerator())
     seller.issueFor(purchaseAmount)
 
     // 구입한 로또를 사용자에게 출력(View)
-    val resultView = ResultView(Output())
+    val resultView = ResultView(PrintOutput())
     resultView.showLottos(seller.lottos)
 
     // 지난 주 당첨 번호를 사용자에게 출력(View)

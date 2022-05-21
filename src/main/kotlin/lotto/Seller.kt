@@ -2,7 +2,7 @@ package lotto
 
 typealias Lotto = List<Int>
 
-class Seller(private val randomNumbersGenerator: IRandomNumberGenerator) {
+class Seller(private val randomNumbersGenerator: RandomNumberGenerator) {
     lateinit var lottos: List<Lotto>
 
     fun issueFor(purchaseAmount: Int) {

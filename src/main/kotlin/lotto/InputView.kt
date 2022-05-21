@@ -1,6 +1,6 @@
 package lotto
 
-class InputView(private val input: IInput) {
+class InputView(private val input: Input) {
     fun askPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
         return input.readPurchaseAmount()

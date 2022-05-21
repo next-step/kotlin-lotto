@@ -1,10 +1,10 @@
 package lotto
 
-interface IOutput {
+interface Output {
     fun print(message: String)
 }
 
-class Output : IOutput {
+class PrintOutput : Output {
     override fun print(message: String) {
         println(message)
     }

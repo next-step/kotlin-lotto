@@ -28,7 +28,7 @@ class InputViewTest : DescribeSpec({
 
 })
 
-class StubInput(private val purchaseAmount: Int, private val numbers: List<Int>): IInput {
+class StubInput(private val purchaseAmount: Int, private val numbers: List<Int>): Input {
     override fun readPurchaseAmount(): Int = purchaseAmount
 
     override fun readLastWeekWinningNumbers(): List<Int> = numbers
