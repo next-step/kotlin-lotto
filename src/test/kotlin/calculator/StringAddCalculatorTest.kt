@@ -24,4 +24,8 @@ internal class StringAddCalculatorTest : FreeSpec({
             }
         }
     }
+
+    "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다" {
+        calculator.add("1,2") shouldBe 3
+    }
 })
