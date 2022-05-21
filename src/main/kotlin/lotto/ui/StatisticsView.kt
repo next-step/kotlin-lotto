@@ -9,12 +9,15 @@ object StatisticsView {
         println("---------")
 
         LottoRank.values()
+            .reversed()
             .filter { it != LottoRank.NONE }
-            .sortedBy { it.matchingCount }
             .forEach {
-                println("${it.matchingCount}개 일치 (${it.rewardPrice}원)- ${lottoMatchReport.matchingCountBy(it)}개")
+                rank ->
+                when (rank) {
+                    LottoRank.SECOND -> println("${rank.matchingCount}개 일치, 보너스 볼 일치 (${rank.rewardPrice}원)- ${lottoMatchReport.matchingCountBy(rank)}개")
+                    else -> println("${rank.matchingCount}개 일치 (${rank.rewardPrice}원)- ${lottoMatchReport.matchingCountBy(rank)}개")
+                }
             }
-
         println("총 수익률은 ${lottoMatchReport.rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 }
