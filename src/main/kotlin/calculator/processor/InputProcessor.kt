@@ -11,11 +11,7 @@ class InputProcessor {
     }
 
     private fun convertStringToZeroIfNull(text: String?) =
-        if (text.isNullOrBlank()) {
-            ZERO_STR
-        } else {
-            text
-        }
+        text.takeIf { !it.isNullOrBlank() } ?: ZERO_STR
 
     private fun splitToDelimiter(text: String): List<String> {
         val matchResult = CUSTOM_DELIMITER_REGEX.find(text)
