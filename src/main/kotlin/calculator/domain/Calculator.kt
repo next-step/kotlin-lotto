@@ -5,6 +5,7 @@ package calculator.domain
  * Created by Jaesungchi on 2022.05.21..
  */
 object Calculator {
+    private val CUSTOM_REGEX = Regex("//(.)\n(.*)")
     private val DEFAULT_SEPARATORS = listOf(Separator(":"), Separator(","))
     fun getResultOfCalculate(input: String?): Int {
         // 빈 문장 또는 null이 입력되면 0을 반환 한다.
@@ -16,10 +17,16 @@ object Calculator {
     }
 
     private fun getNumberList(input: String): List<Operand> {
-        return input.split(getDefaultRegex()).map { Operand.of(it) }
+        val result = CUSTOM_REGEX.find(input)
+        return if (result != null) {
+            val customDelimiter = Separator(result.groupValues[1])
+            result.groupValues[2].split(customDelimiter.value).map { Operand.of(it) }
+        } else {
+            input.split(getDefaultRegex()).map { Operand.of(it) }
+        }
     }
 
     private fun getDefaultRegex(): Regex {
-        return "[${DEFAULT_SEPARATORS.joinToString("")}]".toRegex()
+        return "[${DEFAULT_SEPARATORS.joinToString("|")}]".toRegex()
     }
 }
