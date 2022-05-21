@@ -9,7 +9,7 @@ class StringAddCalculator {
     private fun sumBy(numberInput: String, delimiter: Regex): Int =
         numberInput
             .split(delimiter)
-            .sumOf { it.toIntOrThrow() }
+            .sumOf { it.toPositiveOrThrow() }
 
     private fun getNumberInput(text: String): String =
         INPUT_NUMBER_REGEX.find(text)
@@ -24,7 +24,7 @@ class StringAddCalculator {
 
     private fun MatchResult.getMatched(): String = this.groupValues[MATCHED_GROUP_INDEX]
 
-    private fun String.toIntOrThrow(): Int =
+    private fun String.toPositiveOrThrow(): Int =
         toInt()
             .takeIf { it >= 0 }
             ?: throw RuntimeException("Negative number is not allowed")
