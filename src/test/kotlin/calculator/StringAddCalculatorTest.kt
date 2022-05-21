@@ -16,4 +16,12 @@ internal class StringAddCalculatorTest : FreeSpec({
             }
         }
     }
+
+    "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다" - {
+        listOf("1", "5", "9").forEach { input ->
+            "$input 을 입력한 경우" {
+                calculator.add(input) shouldBe input.toInt()
+            }
+        }
+    }
 })

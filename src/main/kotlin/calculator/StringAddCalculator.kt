@@ -6,6 +6,6 @@ class StringAddCalculator {
             return 0
         }
 
-        TODO()
+        return text.toInt()
     }
 }
