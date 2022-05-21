@@ -1,12 +1,19 @@
 package calculator
 
 import io.kotest.core.spec.style.FreeSpec
+import io.kotest.matchers.shouldBe
 
 internal class StringAddCalculatorTest : FreeSpec({
+    val calculator = StringAddCalculator()
 
-    "계산기 객체를 생성하고 add 메소드를 호출할 수 있다" {
-        val calculator = StringAddCalculator()
-
-        calculator.add("text")
+    "결과값이 0이되는 경우" - {
+        listOf(
+            "빈 문자열" to "  ",
+            "null" to null,
+        ).forEach { (name, input) ->
+            name {
+                calculator.add(input) shouldBe 0
+            }
+        }
     }
 })
