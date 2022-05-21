@@ -13,19 +13,19 @@ class CalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4", "1:2:3:4"])
     fun `쉼표 또는 콜론으로 문장을 잘 구분한다`(source: String) {
-        TODO("Not yet implemented")
+        assertThat(Calculator.getResultOfCalculate(source)).isEqualTo(10)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["//+\n1+2+3+4", "//;\n1;2;3;4"])
     fun `커스텀 구분자로 문장을 잘 분리한다`(source: String) {
-        TODO("Not yet implemented")
+        assertThat(Calculator.getResultOfCalculate(source)).isEqualTo(10)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4", "1:2:3:4", "//+\n1+2+3+4"])
     fun `분리된 문장에서 계산을 하고 결과 값을 잘 받는다`(source: String) {
-        TODO("Not yet implemented")
+        assertThat(Calculator.getResultOfCalculate(source)).isEqualTo(10)
     }
 
     @ParameterizedTest
@@ -37,6 +37,6 @@ class CalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["3"])
     fun `숫자 하나만 입력되면 그대로 반환 한다`(source: String) {
-        TODO("Not yet implemented")
+        assertThat(Calculator.getResultOfCalculate(source)).isEqualTo(3)
     }
 }
