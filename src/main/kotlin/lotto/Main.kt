@@ -13,6 +13,7 @@ fun main() {
 
     val lottoJudgment = LottoJudgment(LottoTicket(lastLottoWinnerNumbers))
 
-    println("당첨통계")
-    println("----------")
+    val myLottoResult = myLottos.getMyLottoResult(lottoJudgment)
+    LottoResultView.printLottoResult(myLottoResult)
+    LottoResultView.printLottoProfilt(myLottos.getProfit(myLottoResult))
 }

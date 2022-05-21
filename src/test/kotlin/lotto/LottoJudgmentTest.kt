@@ -31,13 +31,13 @@ class LottoJudgmentTest {
     fun `당첨 번호와 일치하는 번호 갯수에 따라 로또 등수와 금액을 반환한다`() {
         val lottoJudgment = LottoJudgment(lastLottoTicket)
 
-        assertThat(lottoJudgment.getPrice(6)).isEqualTo(LottoWinnerPolicy.FIRST_PRICE.price)
-        assertThat(lottoJudgment.getPrice(5)).isEqualTo(LottoWinnerPolicy.SECOND_PRICE.price)
-        assertThat(lottoJudgment.getPrice(4)).isEqualTo(LottoWinnerPolicy.THIRD_PRICE.price)
-        assertThat(lottoJudgment.getPrice(3)).isEqualTo(LottoWinnerPolicy.FOURTH_PRICE.price)
-        assertThat(lottoJudgment.getPrice(2)).isEqualTo(LottoWinnerPolicy.NONE.price)
-        assertThat(lottoJudgment.getPrice(1)).isEqualTo(LottoWinnerPolicy.NONE.price)
-        assertThat(lottoJudgment.getPrice(0)).isEqualTo(LottoWinnerPolicy.NONE.price)
+        assertThat(lottoJudgment.getRanking(6)).isEqualTo(LottoWinnerRank.FIRST_PRICE)
+        assertThat(lottoJudgment.getRanking(5)).isEqualTo(LottoWinnerRank.SECOND_PRICE)
+        assertThat(lottoJudgment.getRanking(4)).isEqualTo(LottoWinnerRank.THIRD_PRICE)
+        assertThat(lottoJudgment.getRanking(3)).isEqualTo(LottoWinnerRank.FOURTH_PRICE)
+        assertThat(lottoJudgment.getRanking(2)).isEqualTo(LottoWinnerRank.NONE)
+        assertThat(lottoJudgment.getRanking(1)).isEqualTo(LottoWinnerRank.NONE)
+        assertThat(lottoJudgment.getRanking(0)).isEqualTo(LottoWinnerRank.NONE)
     }
 
     companion object {

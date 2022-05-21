@@ -14,7 +14,7 @@ class LottoJudgment(
         return matchNumberCount
     }
 
-    fun getPrice(matchNumberCount: Int): LottoWinnerPolicy {
-        return LottoWinnerPolicy.getRank(matchNumberCount)
+    fun getRanking(matchNumberCount: Int): LottoWinnerRank {
+        return LottoWinnerRank.getRank(matchNumberCount)
     }
 }

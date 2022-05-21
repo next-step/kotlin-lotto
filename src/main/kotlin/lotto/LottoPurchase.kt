@@ -16,8 +16,4 @@ class LottoPurchase {
             throw RuntimeException("로또 구매 비용이 부족합니다. - `$money` (최소`$LOTTO_PRICE` 이상 필요)")
         }
     }
-
-    companion object {
-        private const val LOTTO_PRICE = 1_000
-    }
 }
