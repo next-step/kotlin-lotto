@@ -11,7 +11,7 @@ class InputViewTest : DescribeSpec({
 
             val expectPrice = inputView.askPurchaseAmount()
 
-             expectPrice shouldBe purchaseAmount
+            expectPrice shouldBe purchaseAmount
         }
     }
 
@@ -25,10 +25,9 @@ class InputViewTest : DescribeSpec({
             expectPrice shouldBe lastWeekWinningNumber
         }
     }
-
 })
 
-class StubInput(private val purchaseAmount: Int, private val numbers: List<Int>): Input {
+class StubInput(private val purchaseAmount: Int, private val numbers: List<Int>) : Input {
     override fun readPurchaseAmount(): Int = purchaseAmount
 
     override fun readLastWeekWinningNumbers(): List<Int> = numbers

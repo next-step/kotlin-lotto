@@ -19,10 +19,10 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 1)
-            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
-            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.fourthPrize.numberOfCorrect shouldBe 1
+            analyst.result.thirdPrize.numberOfCorrect shouldBe 0
+            analyst.result.secondPrize.numberOfCorrect shouldBe 0
+            analyst.result.firstPrize.numberOfCorrect shouldBe 0
             analyst.result.rateOfReturn shouldBe String.format("%.2f", fourthPrizePrice / purchaseAmount.toDouble())
         }
 
@@ -35,10 +35,10 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 1)
-            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
-            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.fourthPrize.numberOfCorrect shouldBe 0
+            analyst.result.thirdPrize.numberOfCorrect shouldBe 1
+            analyst.result.secondPrize.numberOfCorrect shouldBe 0
+            analyst.result.firstPrize.numberOfCorrect shouldBe 0
             analyst.result.rateOfReturn shouldBe String.format("%.2f", thirdPrizePrice / purchaseAmount.toDouble())
         }
 
@@ -51,10 +51,10 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 1)
-            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.fourthPrize.numberOfCorrect shouldBe 0
+            analyst.result.thirdPrize.numberOfCorrect shouldBe 0
+            analyst.result.secondPrize.numberOfCorrect shouldBe 1
+            analyst.result.firstPrize.numberOfCorrect shouldBe 0
             analyst.result.rateOfReturn shouldBe String.format("%.2f", secondPrizePrice / purchaseAmount.toDouble())
         }
 
@@ -67,10 +67,10 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
-            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 1)
+            analyst.result.fourthPrize.numberOfCorrect shouldBe 0
+            analyst.result.thirdPrize.numberOfCorrect shouldBe 0
+            analyst.result.secondPrize.numberOfCorrect shouldBe 0
+            analyst.result.firstPrize.numberOfCorrect shouldBe 1
             analyst.result.rateOfReturn shouldBe String.format("%.2f", firstPrizePrice / purchaseAmount.toDouble())
         }
 
@@ -83,10 +83,10 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
-            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.fourthPrize.numberOfCorrect shouldBe 0
+            analyst.result.thirdPrize.numberOfCorrect shouldBe 0
+            analyst.result.secondPrize.numberOfCorrect shouldBe 0
+            analyst.result.firstPrize.numberOfCorrect shouldBe 0
             analyst.result.rateOfReturn shouldBe "0.00"
         }
     }
