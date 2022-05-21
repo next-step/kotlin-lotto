@@ -9,8 +9,6 @@ object StringAddCalculator {
 
         val expression = Expression(formula)
 
-        expression.parse()
-
-        return expression.operands.reduce { acc, current -> acc + current }
+        return expression.parse().reduce { acc, current -> acc + current }
     }
 }

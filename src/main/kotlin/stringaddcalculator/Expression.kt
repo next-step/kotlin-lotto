@@ -1,9 +1,7 @@
 package stringaddcalculator
 
 class Expression(var formula: String) {
-    lateinit var operands: List<Int>
-
-    fun parse() {
+    fun parse(): List<Int> {
         val regexFindResult = Regex(CUSTOM_DELIMITER).find(formula)
 
         if(regexFindResult != null) {
@@ -11,11 +9,10 @@ class Expression(var formula: String) {
             val expression = regexFindResult.groupValues[2]
             val delimitersRegex = (listOf(customDelimiter) + DEFAULT_DELIMITER).joinToString("|").toRegex()
 
-            operands = expression.split(delimitersRegex).map { it.toPositiveIntOrThrow() }
-            return
+            return expression.split(delimitersRegex).map { it.toPositiveIntOrThrow() }
         }
 
-        operands = formula.split(DEFAULT_DELIMITER.joinToString("|").toRegex()).map { it.toPositiveIntOrThrow() }
+        return formula.split(DEFAULT_DELIMITER.joinToString("|").toRegex()).map { it.toPositiveIntOrThrow() }
     }
 
     private fun String.toIntOrThrow() = requireNotNull(toIntOrNull()) { "올바른 계산식이 아닙니다." }
