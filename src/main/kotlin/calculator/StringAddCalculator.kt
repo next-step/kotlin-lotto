@@ -1,28 +1,15 @@
 package calculator
 
 class StringAddCalculator {
-    fun add(text: String?): Int {
-        if (text.isNullOrBlank()) {
-            return 0
-        }
+    fun add(text: String?): Int =
+        if (text.isNullOrBlank()) 0
+        else
+            sumBy(getNumberInput(text), getDelimiter(text))
 
-        val numberInput = getNumberInput(text)
-        val delimiter = getDelimiter(text)
-
-        return sum(numberInput, delimiter)
-    }
-
-    private fun sum(numberInput: String, delimiter: Regex): Int =
+    private fun sumBy(numberInput: String, delimiter: Regex): Int =
         numberInput
             .split(delimiter)
-            .sumOf {
-                val number = it.toInt()
-                if (number < 0) {
-                    throw RuntimeException("Negative number is not allowed")
-                }
-
-                number
-            }
+            .sumOf { it.toIntOrThrow() }
 
     private fun getNumberInput(text: String): String =
         INPUT_NUMBER_REGEX.find(text)
@@ -36,6 +23,11 @@ class StringAddCalculator {
             ?: DEFAULT_DELIMITER_REGEX
 
     private fun MatchResult.getMatched(): String = this.groupValues[MATCHED_GROUP_INDEX]
+
+    private fun String.toIntOrThrow(): Int =
+        toInt()
+            .takeIf { it >= 0 }
+            ?: throw RuntimeException("Negative number is not allowed")
 
     companion object {
         private val INPUT_NUMBER_REGEX = Regex("//.\n(.*)")
