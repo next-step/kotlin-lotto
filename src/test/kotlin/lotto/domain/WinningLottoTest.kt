@@ -10,26 +10,30 @@ class WinningLottoTest : FunSpec({
 
     test("로또 숫자 6개가 일치할 때, 1등으로 매칭된다.") {
         val lotto = lotto(1, 2, 3, 4, 5, 6)
-        winningLotto.match(lotto).matchingMap shouldBe mapOf(LottoRank.FIRST to 1)
+        winningLotto.match(lotto) shouldBe LottoRank.FIRST
     }
 
     test("로또 숫자 5개가 일치하고, 보너스 번호가 일치할 때, 2등으로 매칭된다.") {
         val lotto = lotto(1, 2, 3, 4, 5, 45)
-        winningLotto.match(lotto).matchingMap shouldBe mapOf(LottoRank.SECOND to 1)
+        winningLotto.match(lotto) shouldBe LottoRank.SECOND
     }
 
     test("로또 숫자 5개가 일치할 때, 3등으로 매칭된다.") {
         val lotto = lotto(1, 2, 3, 4, 5, 16)
-        winningLotto.match(lotto).matchingMap shouldBe mapOf(LottoRank.THIRD to 1)
+        winningLotto.match(lotto) shouldBe LottoRank.THIRD
     }
 
     test("로또 숫자 4개가 일치할 때, 4등으로 매칭된다.") {
         val lotto = lotto(1, 2, 3, 4, 15, 16)
-        winningLotto.match(lotto).matchingMap shouldBe mapOf(LottoRank.FOURTH to 1)
+        winningLotto.match(lotto) shouldBe LottoRank.FOURTH
     }
 
     test("로또 숫자 3개가 일치할 때, 5등으로 매칭된다.") {
         val lotto = lotto(1, 2, 3, 14, 15, 16)
-        winningLotto.match(lotto).matchingMap shouldBe mapOf(LottoRank.FIFTH to 1)
+        winningLotto.match(lotto) shouldBe LottoRank.FIFTH
     }
 })
+
+fun lotto(vararg numbers: Int): Lotto {
+    return Lotto(numbers.toList())
+}

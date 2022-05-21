@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoMatchReport
 import lotto.domain.LottoSeller
 import lotto.ui.LottoPurchaseView
 import lotto.ui.StatisticsView
@@ -14,8 +15,8 @@ class LottoController {
         val inputPrice = LottoPurchaseView.inputPriceForPurchase()
         val lottoList = purchaseLotto(inputPrice)
         val winningLotto = WinningLottoView.inputWinningLotto()
-        val matchReport = winningLotto.match(lottoList)
-        StatisticsView.printResult(matchReport)
+        val lottoRanks = winningLotto.match(lottoList)
+        StatisticsView.printResult(LottoMatchReport.of(lottoRanks))
     }
 
     private fun purchaseLotto(inputPrice: Long): List<Lotto> {
