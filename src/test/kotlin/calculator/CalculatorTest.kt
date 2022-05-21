@@ -37,4 +37,10 @@ class CalculatorTest {
     fun `구분자를 , 이외에 콜론을 사용할 수 있다`(expression: String?) {
         assertThat(calculator.add(expression)).isEqualTo(6)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//*\n1*2*3"])
+    fun `커스텀 구분자를 지정하는 경우에도 덧셈 결과가 정상이다`(expression: String?) {
+        assertThat(calculator.add(expression)).isEqualTo(6)
+    }
 }
