@@ -2,13 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.maps.shouldContain
 import io.kotest.matchers.shouldBe
-import lotto.domain.WinningPlace.BLANK
-import lotto.domain.WinningPlace.FIRST
-import lotto.domain.WinningPlace.FOURTH
-import lotto.domain.WinningPlace.SECOND
-import lotto.domain.WinningPlace.THIRD
 import lotto.domain.WinningPlace.values
 
 class LottoBuyerSpecs : DescribeSpec({
@@ -51,11 +45,10 @@ class LottoBuyerSpecs : DescribeSpec({
             it("로또 당첨 결과를 확인할 수 있다") {
                 buyer.confirmWinning(winningLotto).also { winningResult ->
                     winningResult.rateOfReturn shouldBe values().sumOf { it.reward } / money.toDouble()
-                    winningResult.groupByWinningPlace shouldContain (FIRST to listOf(FIRST.reward))
-                    winningResult.groupByWinningPlace shouldContain (SECOND to listOf(SECOND.reward))
-                    winningResult.groupByWinningPlace shouldContain (THIRD to listOf(THIRD.reward))
-                    winningResult.groupByWinningPlace shouldContain (FOURTH to listOf(FOURTH.reward))
-                    winningResult.groupByWinningPlace shouldContain (BLANK to listOf(BLANK.reward))
+                    winningResult.first shouldBe 1
+                    winningResult.second shouldBe 1
+                    winningResult.third shouldBe 1
+                    winningResult.fourth shouldBe 1
                 }
             }
         }

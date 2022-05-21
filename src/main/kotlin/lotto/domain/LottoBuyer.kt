@@ -33,5 +33,10 @@ data class WinningResult(
     }
     val rateOfReturn = totalReword / cost.toDouble()
 
-    val groupByWinningPlace = winnings.groupBy({ it }, { it.reward })
+    private val groupByWinningPlace = winnings.groupBy({ it }, { it.reward })
+
+    val first = groupByWinningPlace[WinningPlace.FIRST]?.size ?: 0
+    val second = groupByWinningPlace[WinningPlace.SECOND]?.size ?: 0
+    val third = groupByWinningPlace[WinningPlace.THIRD]?.size ?: 0
+    val fourth = groupByWinningPlace[WinningPlace.FOURTH]?.size ?: 0
 }
