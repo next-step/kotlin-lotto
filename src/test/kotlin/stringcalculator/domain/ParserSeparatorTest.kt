@@ -1,9 +1,8 @@
-package stringcalcuator.dto
+package stringcalculator.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import stringcalculator.domain.ParserSeparator
 
 class ParserSeparatorTest : DescribeSpec({
     it("ParserSeparator 는 문자열에서 숫자를 구분하기 위한 문자를 보관한다") {
