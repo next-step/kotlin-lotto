@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource
  * Created by Jaesungchi on 2022.05.21..
  */
 class CalculatorTest {
-
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4", "1:2:3:4"])
     fun `쉼표 또는 콜론으로 문장을 잘 구분한다`(source: String) {

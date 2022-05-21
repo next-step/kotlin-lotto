@@ -8,8 +8,7 @@ import calculator.constants.Messages
  */
 data class Operand(val value: Int) {
     init {
-        if (value < MINIMUM_VALID_NUMBER)
-            throw RuntimeException(Messages.INSERT_NEGATIVE_NUMBER)
+        if (value < MINIMUM_VALID_NUMBER) throw RuntimeException(Messages.INSERT_NEGATIVE_NUMBER)
     }
 
     operator fun plus(another: Operand): Operand {

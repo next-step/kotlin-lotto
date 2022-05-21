@@ -7,13 +7,12 @@ package calculator.domain
 object Calculator {
     private val CUSTOM_REGEX = Regex("//(.)\n(.*)")
     private val DEFAULT_SEPARATORS = listOf(Separator(":"), Separator(","))
+
     fun getResultOfCalculate(input: String?): Int {
         // 빈 문장 또는 null이 입력되면 0을 반환 한다.
-        if (input.isNullOrBlank()) {
-            return 0
-        }
-        val numbers = getNumberList(input)
-        return numbers.reduce { left, right -> left + right }.value
+        if (input.isNullOrBlank()) return 0
+
+        return getNumberList(input).reduce { left, right -> left + right }.value
     }
 
     private fun getNumberList(input: String): List<Operand> {
