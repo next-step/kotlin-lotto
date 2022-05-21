@@ -8,8 +8,7 @@ object AddCalculator {
             return 0
         }
 
-        return input.split(DEFAULT_DELIMITER_REGEX)
-            .map { Number.from(it) }
-            .sumOf { it.number }
+        val numbers = input.split(DEFAULT_DELIMITER_REGEX)
+        return Numbers.from(numbers).sum()
     }
 }
