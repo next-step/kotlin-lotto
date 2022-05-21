@@ -4,7 +4,7 @@ class StringExpressionParser(expression: String) {
     private val stringNumberParser: StringNumberParser
     private val separators: ParserSeparators = ParserSeparators.ofStringExpression()
 
-    fun getParsedNumber(): List<Number> {
+    fun getParsedNumber(): List<Int> {
         return stringNumberParser.parsedNumbers
     }
 
