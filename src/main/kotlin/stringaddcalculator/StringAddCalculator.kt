@@ -7,8 +7,6 @@ object StringAddCalculator {
         // val delimiters = DelimiterFinder.find(formula)
         // return Parse(formula, delimiters).result.reduce { acc, current -> acc + current }
 
-        val expression = Expression(formula)
-
-        return expression.parse().reduce { acc, current -> acc + current }
+        return Expression.parse(formula).reduce { acc, current -> acc + current }
     }
 }

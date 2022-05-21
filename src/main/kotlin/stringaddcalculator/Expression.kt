@@ -1,7 +1,7 @@
 package stringaddcalculator
 
-class Expression(var formula: String) {
-    fun parse(): List<Int> {
+object Expression {
+    fun parse(formula: String): List<Int> {
         val regexFindResult = Regex(CUSTOM_DELIMITER).find(formula)
 
         if(regexFindResult != null) {
@@ -25,9 +25,7 @@ class Expression(var formula: String) {
         return number
     }
 
-    companion object {
-        private val DEFAULT_DELIMITER = listOf(":", ",")
+    private val DEFAULT_DELIMITER = listOf(":", ",")
 
-        private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
-    }
+    private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
 }
