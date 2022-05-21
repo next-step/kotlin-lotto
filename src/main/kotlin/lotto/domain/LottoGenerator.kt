@@ -14,11 +14,3 @@ object RandomLottoGenerator : LottoGenerator {
         return Lotto.of(lottoNumbers)
     }
 }
-
-class FixedLottoGenerator(
-    private val fixedNumbers: Collection<Int>
-) : LottoGenerator {
-    override fun generate(): Lotto {
-        return Lotto.of(fixedNumbers)
-    }
-}

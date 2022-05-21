@@ -28,7 +28,7 @@ class LottoBundleSpecs : DescribeSpec({
                         Lotto.of(listOf(8, 9, 10, 14, 19, 20)),
                     )
                 )
-                lottoBundle.confirmWinning(winning) shouldContainExactly listOf(FIRST, SECOND, THIRD, BLANK)
+                lottoBundle.matchWinning(winning) shouldContainExactly listOf(FIRST, SECOND, THIRD, BLANK)
             }
         }
     }
