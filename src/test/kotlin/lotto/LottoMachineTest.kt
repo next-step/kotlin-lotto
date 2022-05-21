@@ -9,17 +9,19 @@ class LottoMachineTest : FreeSpec({
     "init" - {
 
         "주어진 금액이 1000원 미만일 경우 IllegalArgumentException" {
-            val payment = 100
+            val payment = "100"
+            val dto = InputPaymentRequestDto.convertInt(payment)
             val exception = shouldThrow<IllegalArgumentException> {
-                LottoMachine(payment)
+                LottoMachine(dto)
             }
             exception.message shouldBe LottoMachine.INVALID_PAYMENT
         }
 
         "주어진 금액이 로또 가격으로 나누어 떨어지지 않을 경우 IllegalArgumentException" {
-            val payment = 1100
+            val payment = "1100"
+            val dto = InputPaymentRequestDto.convertInt(payment)
             val exception = shouldThrow<IllegalArgumentException> {
-                LottoMachine(payment)
+                LottoMachine(dto)
             }
             exception.message shouldBe LottoMachine.CANNOT_ISSUANCE_LOTTO
         }

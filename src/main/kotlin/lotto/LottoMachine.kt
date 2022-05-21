@@ -1,8 +1,10 @@
 package lotto
 
 class LottoMachine(
-    private val inputPayment: Int
+    dto: InputPaymentRequestDto
 ) {
+
+    private val inputPayment: Int = dto.payment
 
     init {
         require(inputPayment >= Lotto.LOTTO_PRICE) { INVALID_PAYMENT }
