@@ -1,6 +1,6 @@
 package stringcalculator.domain.customparser
 
-class CustomExpressionParser(expression: String) {
+class CustomExpressionParser(private val expression: String) {
     private val stringNumberParser: CustomNumbersStringParser
     private val separators: ParserSeparators = ParserSeparators.ofStringExpression()
 
@@ -9,22 +9,29 @@ class CustomExpressionParser(expression: String) {
     }
 
     init {
-        var numberExpression: String = expression
-        if (hasCustomSeparatorString(expression)) {
-            val customSeparatorParser = CustomSeparatorParser(
-                expression.substring(0, CustomSeparatorParser.findEndIndexForSubstring(expression))
-            )
-            separators.add(customSeparatorParser.parserSeparator)
-            numberExpression =
-                numberExpression.substring(CustomSeparatorParser.findEndIndexForSubstring(expression))
-        }
-
-        stringNumberParser = CustomNumbersStringParser(numberExpression, separators)
+        initCustomSeparator()
+        stringNumberParser = CustomNumbersStringParser(getNumbersExpressionString(), separators)
     }
 
-    companion object {
-        fun hasCustomSeparatorString(expression: String): Boolean {
-            return CustomSeparatorParser.findEndIndexForSubstring(expression) >= 0
+    private fun initCustomSeparator() {
+        if (hasCustomSeparatorString()) {
+            val customSeparatorParser = CustomSeparatorParser(getCustomExpressionString())
+            separators.add(customSeparatorParser.parserSeparator)
         }
+    }
+
+    private fun getNumbersExpressionString(): String {
+        if (hasCustomSeparatorString()) {
+            return expression.substring(CustomSeparatorParser.findEndIndexForSubstring(expression))
+        }
+        return expression
+    }
+
+    private fun getCustomExpressionString(): String {
+        return expression.substring(0, CustomSeparatorParser.findEndIndexForSubstring(expression))
+    }
+
+    private fun hasCustomSeparatorString(): Boolean {
+        return CustomSeparatorParser.findEndIndexForSubstring(expression) >= 0
     }
 }
