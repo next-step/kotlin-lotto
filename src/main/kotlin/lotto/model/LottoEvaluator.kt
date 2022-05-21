@@ -1,7 +1,12 @@
 package lotto.model
 
-import lotto.model.data.*
+import lotto.model.data.Lotto
+import lotto.model.data.Lottos
+import lotto.model.data.Result
+import lotto.model.data.Results
+import lotto.model.data.Winning
 import lotto.model.data.Winning.LOST_GAME
+import lotto.model.data.WinningLotto
 
 object LottoEvaluator {
 
@@ -19,11 +24,16 @@ object LottoEvaluator {
         this.numbers.filter(other.numbers::contains).size
 
     private fun WinningLotto.getBestWinningFor(lotto: Lotto): Winning {
-        return winnings.find { it.isWin(this, lotto) } ?: LOST_GAME
+        return winnings.filter { it.isWin(this, lotto) }
+            .maxByOrNull { it.winMoney } ?: LOST_GAME
     }
 
     private fun Winning.isWin(winningLotto: WinningLotto, lotto: Lotto): Boolean {
-        return if (this.matchCount == 0) false
-        else return winningLotto.countOfMatchNumber(lotto) == this.matchCount
+        return when {
+            this.matchCount == 0 -> false
+            winningLotto.countOfMatchNumber(lotto) != this.matchCount -> false
+            this.isMustBonusNumberMatch -> winningLotto.bonusNumber in lotto.numbers
+            else -> true
+        }
     }
 }
