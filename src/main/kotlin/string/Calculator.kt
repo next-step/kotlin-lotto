@@ -7,19 +7,40 @@ class Calculator() {
         }
 
         val inputs = parse(input)
+
         if (inputs.size == ONE_NUMBER_SIZE) {
             return inputs[0].toInt()
         }
 
-        return 1
+        return add(inputs)
+    }
+
+    private fun add(inputs: List<String>): Int {
+        var result = 0
+        for(input in inputs) {
+            result += input.toInt()
+        }
+
+        return result
     }
 
     private fun parse(input: String): List<String> {
-        return validateEach(split(input))
+        val r = split(input)
+        println(r)
+        return validateEach(r)
     }
 
     private fun split(input: String): List<String> {
-        return input.split(DELIMITER_REGEX.toRegex())
+        return customDelimiterSplit(input) ?: input.split(DELIMITER_REGEX.toRegex())
+    }
+
+    private fun customDelimiterSplit(input: String): List<String>? {
+        val result = Regex("//(.)\n(.*)").find(input)
+
+        return result?.let {
+            val customDelimiter = it.groupValues[1]
+            return  it.groupValues[2].split(customDelimiter)
+        }
     }
 
     private fun validateEach(inputs: List<String>): List<String> {

@@ -2,8 +2,10 @@ package string
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import kotlin.math.exp
 
 class CalculatorTest {
     @ParameterizedTest
@@ -18,6 +20,13 @@ class CalculatorTest {
     fun `숫자 하나를 입력할 경우 해당 숫자를 반환한다`(input: String) {
         val calculator = Calculator()
         Assertions.assertThat(calculator.sum(input)).isEqualTo(input.toInt())
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n10;20;30"])
+    fun `커스텀 구분자를 통해 덧셈을 할 수 있다`(test: String) {
+        val calculator = Calculator()
+        Assertions.assertThat(calculator.sum(test)).isEqualTo(60)
     }
 
     @ParameterizedTest
