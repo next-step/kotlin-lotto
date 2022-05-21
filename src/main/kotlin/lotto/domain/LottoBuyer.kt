@@ -18,20 +18,27 @@ class LottoBuyer(
         return lottoBundle.copy()
     }
 
-    fun confirmWinning(winningNumber: Set<Int>): WinningResult {
-        validateWinningNumber(winningNumber)
+    fun confirmWinning(winningNumber: WinningNumber): WinningResult {
         check(this::lottoBundle.isInitialized) { "보유한 로또 뭉치가 없습니다" }
-        val winnings = lottoBundle.matchWinning(Lotto.of(winningNumber))
+        val winnings = lottoBundle.matchWinning(winningNumber.toLotto())
         return WinningResult(winnings, money)
     }
+}
 
-    private fun validateWinningNumber(winningNumber: Set<Int>) {
-        require(winningNumber.size == Lotto.SIZE_OF_LOTTO_NUMBERS) {
+data class WinningNumber(
+    private val numbers: Set<Int>
+) {
+    init {
+        require(numbers.size == Lotto.SIZE_OF_LOTTO_NUMBERS) {
             "당첨 번호는 중복되지 않은 6개의 숫자이어야 합니다"
         }
-        require(winningNumber.all { it in LottoNumber.LOTTO_NUMBER_RANGE }) {
+        require(numbers.all { it in LottoNumber.LOTTO_NUMBER_RANGE }) {
             "당첨 번호는 1 ~ 45 사이의 값만 가질 수 있습니다"
         }
+    }
+
+    fun toLotto(): Lotto {
+        return Lotto.of(numbers)
     }
 }
 
