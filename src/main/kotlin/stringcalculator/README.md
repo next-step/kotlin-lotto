@@ -27,25 +27,26 @@
 - [ ] 커스텀 구분자 인 경우 `;n` 이후에 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
 - [ ] 커스텀 구분자 가 숫자인 경우 IllegalArgumentException 발생 
 
-## 도메인 
+# 도메인 
+
+## 계산 영역
 
 ### calculateNumber
 - 분리된 숫자
 
-### calculateNumbers
+### numberListManager
 - 분리된 숫자를 관리한다
 
-### Separator
-- 구분자를 관리한다
-- 연산식에서 커스텀 구분자를 가져옵니다.
-- 구분자 유효성 검사
-  - 커스텀 구분자 가 숫자인 경우 IllegalArgumentException 발생
+### Calculator
+- `calculateNumbers` 에서 숫자를 받고 총합 값을 내보낸다 - sumAll
+
+## 문자 분리 하기 위한 영역
+
+
 
 ### Separators
 - 구분자들을 관리한다.
 
-### Calculator
-- `StringExpressionParser` 에서 숫자를 받고 총합 값을 내보낸다
 
 ### InputDto   
 - 연산식 문자에 유효성 검사를 합니다
@@ -61,6 +62,11 @@
 
 ### StringNumbersParser
 - 
+### Separator
+- 구분자를 관리한다
+- 연산식에서 커스텀 구분자를 가져옵니다.
+- 구분자 유효성 검사
+  - 커스텀 구분자 가 숫자인 경우 IllegalArgumentException 발생
 
 
 
