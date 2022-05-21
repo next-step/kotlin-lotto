@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 
 class CustomNumbersStringParserTest : DescribeSpec({
-    it("Separators, 숫자가 포함된 문자열을 받아서 숫자를 추출한다") {
+    it("구분자, 숫자가 포함된 문자열을 받아서 숫자를 추출한다") {
         // given
         val expression = "1,2:3"
         val ofStringExpression = ParserSeparators.ofStringExpression()
@@ -24,7 +24,7 @@ class CustomNumbersStringParserTest : DescribeSpec({
     }
 
     describe("validation") {
-        it("Separators`(구분자들) 이 없는 경우 IllegalArgumentException 가 발생한다") {
+        it("ParserSeparators`(구분자들) 이 없는 경우 IllegalArgumentException 가 발생한다") {
             // given
             val expression = "1:2:3"
 
@@ -38,7 +38,7 @@ class CustomNumbersStringParserTest : DescribeSpec({
             }.shouldHaveMessage("숫자를 추출하기 위한 구분자가 없습니다")
         }
 
-        it("숫자, `Separators`(구분자들) 이외에 문자가 들어가 있는 경우 IllegalArgumentException 가 발생한다.") {
+        it("숫자, `ParserSeparators`(구분자들) 이외에 문자가 들어가 있는 경우 IllegalArgumentException 가 발생한다.") {
             // given
             val expression = "1Test2Test3"
             val separators = ParserSeparators.ofStringExpression()
