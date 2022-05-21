@@ -7,9 +7,9 @@ class StringAddCalculator {
         }
 
         val delimiter = getDelimiter(text)
-        val numbers = getNumberText(text)
+        val numberInput = getNumberInput(text)
 
-        return numbers
+        return numberInput
             .split(delimiter)
             .sumOf {
                 val number = it.toInt()
@@ -21,7 +21,7 @@ class StringAddCalculator {
             }
     }
 
-    private fun getNumberText(text: String): String {
+    private fun getNumberInput(text: String): String {
         val result = INPUT_NUMBER_REGEX.find(text)
 
         result?.let {
