@@ -11,13 +11,24 @@ class LottoSeller {
     fun sell(amount: Int): List<LottoTicket> {
         val purchaseLottoTickets = mutableListOf<LottoTicket>()
         repeat(amount) {
-            purchaseLottoTickets.add(LottoTicket(listOf(1, 2, 3, 4, 5, 6)))
+            purchaseLottoTickets.add(LottoTicket(takeLottoNumbers()))
         }
 
         return purchaseLottoTickets
     }
 
+    private fun takeLottoNumbers(): List<Int> {
+        val grabs = mutableSetOf<Int>()
+        while (grabs.size < 6) {
+            grabs.add(LOTTO_NUMBER_RANGE.random())
+        }
+
+        return grabs.toList()
+    }
+
     companion object {
         const val LOTTO_PURCHASE_PRICE_PER_PIECE = 1_000
+        val LOTTO_NUMBER_RANGE = IntRange(1, 45)
+
     }
 }
