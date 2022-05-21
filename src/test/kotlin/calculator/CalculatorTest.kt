@@ -31,4 +31,10 @@ class CalculatorTest {
     fun `숫자 두개를 , 구분자로 입력할 경우 두 숫자의 합을 반환한다`(expression: String?) {
         assertThat(calculator.add(expression)).isEqualTo(3)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2:3"])
+    fun `구분자를 , 이외에 콜론을 사용할 수 있다`(expression: String?) {
+        assertThat(calculator.add(expression)).isEqualTo(6)
+    }
 }
