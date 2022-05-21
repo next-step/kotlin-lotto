@@ -19,7 +19,7 @@ class StringAddCalculator {
     }
 
     private fun getNumberText(text: String): String {
-        val result = Regex("^//.\n(.*)").find(text)
+        val result = INPUT_NUMBER_REGEX.find(text)
 
         result?.let {
             return it.groupValues[1]
@@ -29,12 +29,18 @@ class StringAddCalculator {
     }
 
     private fun getDelimiter(text: String): Regex {
-        val result = Regex("^//(.)\n").find(text)
+        val result = DELIMITER_REGEX.find(text)
 
         result?.let {
             return it.groupValues[1].toRegex()
         }
 
-        return Regex("[,|:]")
+        return DEFAULT_DELIMITER_REGEX
+    }
+
+    companion object {
+        private val INPUT_NUMBER_REGEX = Regex("//.\n(.*)")
+        private val DELIMITER_REGEX = Regex("//(.)\n")
+        private val DEFAULT_DELIMITER_REGEX = Regex("[,|:]")
     }
 }
