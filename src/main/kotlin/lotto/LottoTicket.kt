@@ -1,3 +1,3 @@
 package lotto
 
-class LottoTicket(val numbers: List<Int>)
+data class LottoTicket(val numbers: List<Int>)
