@@ -1,15 +1,29 @@
 package lotto
 
 class LottoMachine(
-    dto: InputPaymentRequestDto
+    dto: InputPaymentRequestDto,
+    private val lottoNumberGenerator: LottoNumberGenerator,
 ) {
-
     private val inputPayment: Int = dto.payment
 
     init {
         require(inputPayment >= Lotto.LOTTO_PRICE) { INVALID_PAYMENT }
         val remPayment = inputPayment.rem(Lotto.LOTTO_PRICE)
         require(remPayment == 0) { CANNOT_ISSUANCE_LOTTO }
+    }
+
+    private val lotto: Lotto = Lotto(inputPayment, lottoNumberGenerator)
+
+    private val _lottoRecord: MutableList<LottoGenerator> = mutableListOf()
+    val lottoRecord: List<LottoGenerator> get() = _lottoRecord
+
+    fun sellLotto() {
+        val issuanceLottoCount = lotto.issuanceCount()
+        repeat(issuanceLottoCount) {
+            this._lottoRecord.add(
+                LottoGenerator(lotto.issuance())
+            )
+        }
     }
 
     companion object {
