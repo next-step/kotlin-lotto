@@ -11,7 +11,7 @@ class CalculatorTest : DescribeSpec({
         val successTotalSum = 6
 
         // when
-        val totalSum = Calculator.getTotalSum(numbers)
+        val totalSum = Calculator.getTotal(numbers)
 
         // then
         successTotalSum shouldBe totalSum

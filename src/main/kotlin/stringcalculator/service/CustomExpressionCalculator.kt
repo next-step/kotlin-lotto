@@ -9,6 +9,6 @@ class CustomExpressionCalculator(inputDto: InputDto) {
     private val customExpressionParser: CustomExpressionParser = CustomExpressionParser(inputDto.inputString)
 
     fun getTotal(): OutPutDto {
-        return OutPutDto(Calculator.getTotalSum(customExpressionParser.getParsedNumber()))
+        return OutPutDto(Calculator.getTotal(customExpressionParser.getParsedNumber()))
     }
 }
