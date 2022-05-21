@@ -16,7 +16,7 @@ class NumberTest {
     }
 
     @Test
-    fun `숫자가 0 이상이면 정상 발생`() {
+    fun `숫자가 0 이상이면 정상 생성`() {
         // given, when, then
         Number.from(0)
     }
