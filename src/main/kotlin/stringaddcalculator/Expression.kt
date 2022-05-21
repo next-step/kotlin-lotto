@@ -4,7 +4,7 @@ object Expression {
     fun parse(formula: String): List<Int> {
         val regexFindResult = Regex(CUSTOM_DELIMITER).find(formula)
 
-        if(regexFindResult != null) {
+        if (regexFindResult != null) {
             val customDelimiter = regexFindResult.groupValues[1]
             val expression = regexFindResult.groupValues[2]
             val delimitersRegex = (listOf(customDelimiter) + DEFAULT_DELIMITER).joinToString("|").toRegex()
