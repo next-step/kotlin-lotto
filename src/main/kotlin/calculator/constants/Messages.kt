@@ -7,4 +7,5 @@ package calculator.constants
 object Messages {
     const val INSERT_NOT_NUMBER = "숫자 이외의 값이 들어갔습니다."
     const val INSERT_NEGATIVE_NUMBER = "음수가 들어갔습니다."
+    const val SEPARATE_HAVE_NUMBER = "구분자에 숫자가 있습니다."
 }

@@ -7,7 +7,6 @@ import calculator.constants.Messages
  * Created by Jaesungchi on 2022.05.21..
  */
 data class Operand(val value: Int) {
-
     init {
         if (value < MINIMUM_VALID_NUMBER)
             throw RuntimeException(Messages.INSERT_NEGATIVE_NUMBER)
