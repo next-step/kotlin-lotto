@@ -8,14 +8,10 @@ import calculator.constants.Messages
  */
 data class Separator(val value: String) {
     init {
-        require(!isHaveNumber(value)) { Messages.SEPARATE_HAVE_NUMBER }
+        require(isNotHaveNumber(value)) { Messages.SEPARATE_HAVE_NUMBER }
     }
 
-    private fun isHaveNumber(value: String): Boolean {
-        return value.map {
-            it.isDigit()
-        }.find {
-            it
-        } ?: false
+    private fun isNotHaveNumber(value: String): Boolean {
+        return value.none { it.isDigit() }
     }
 }
