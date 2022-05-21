@@ -1,7 +1,7 @@
 package string
 
-class Calculator(private val input: String?) {
-    fun sum(): Int {
+class Calculator() {
+    fun sum(input: String?): Int {
         if (input.isNullOrBlank()) {
             return 0
         }
