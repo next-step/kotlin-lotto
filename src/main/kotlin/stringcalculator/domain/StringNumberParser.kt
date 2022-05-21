@@ -24,7 +24,7 @@ class StringNumberParser(stringExpression: String, separators: ParserSeparators)
 
         fun validateExpressionForIncludeOtherStrings(expression: String, separators: ParserSeparators) {
             val separatorsString = separators.getSeparatorsString().joinToString(separator = ",")
-            require(Regex("([$separatorsString,-\\d])+").matches(expression)) {
+            require(Regex("([$separatorsString,\\d,-])+").matches(expression)) {
                 "숫자, 구분 문자($separatorsString) 를 제외한 문자가 포함 되어 있습니다"
             }
         }
