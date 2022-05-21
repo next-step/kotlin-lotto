@@ -19,9 +19,3 @@ class CalculatorTest {
         assertThat(calculator.add(expression)).isEqualTo(0)
     }
 }
-
-class Calculator {
-    fun add(expression: String?): Int {
-        return 0
-    }
-}
