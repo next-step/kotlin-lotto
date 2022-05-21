@@ -15,23 +15,15 @@
 
 ## 명시된 테스트 케이스
 
-- [ ] "" 을 입력한 경우 0 이 반환된다
-- [ ] null 을 입력한 경우 0 이 반환된다
-- [ ] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다
-- [ ] 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.
-- [ ] 구분자 문자로 콜론(:)을 사용할 수 있다.
-- [ ] "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다
-- [ ] 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.
+- [x] "" 을 입력한 경우 0 이 반환된다
+- [x] null 을 입력한 경우 0 이 반환된다
+- [x] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다
+- [x] 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.
+- [x] 구분자 문자로 콜론(:)을 사용할 수 있다.
+- [x] "//"와 "\n" 문자 사이에 커스텀 구분자를 지정할 수 있다
+- [x] 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.
 
-## 추가한 테스트 케이스
-
-#### 예외 케이스
-
-- [ ] 커스텀 구분자 가 아닌 경우 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
-- [ ] 커스텀 구분자 인 경우 `;n` 이후에 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
-- [ ] 커스텀 구분자 가 숫자인 경우 IllegalArgumentException 발생
-
-# 도메인
+# domain 패키지 설명
 
 ## 계산 영역
 
@@ -39,45 +31,59 @@
 
 - 숫자를 받고 총합 값을 내보낸다 - sumAll
 
-## 문자 분리 하기 위한 영역
+## 문자에서 숫자, 커스텀 구분자를 추출하는 영역
 
-### Separators
+### ParserSeparator
 
-- 구분자들을 관리한다.
+- 연산식에서 숫자를 추출할때 사용하는 구분자
+- validation
+    - 빈문자열이 들어오면 IllegalArgumentException 발생
+    - 숫자가 들어가 있는 경우 IllegalArgumentException 발생
+    - 중간에 숫자가 포함되어 있는 경우 IllegalArgumentException 발생
 
-### InputDto
+### ParserSeparators
 
-- 연산식 문자에 유효성 검사를 합니다
-    - 커스텀 구분자 가 아닌 경우 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
-    - 커스텀 구분자 인 경우 `;n` 이후에 숫자, ',' ':' 를 제외한 문자 입력시 IllegalArgumentException 발생
+- `ParserSeparator` 리스트로 관리한다
+- 구분자 추가
 
-### StringExpressionParser
+### CustomNumbersStringParser
 
-- 연산식에서 구분자, 숫자 문자열을 분리한다.
-- 연산식에서 구분자(`Separator`)를 사용하여 숫자들을 가지고 온다.
+- `ParserSeparators`(구분자들) 받아서 문자열에서 숫자들을 추출한다. ex) "1,2:3"을 넣으면 1, 2, 3 을 추출한다
+- validation
+    - `ParserSeparators`(구분자들) 이 없는 경우 IllegalArgumentException 가 발생한다
+    - 숫자, `ParserSeparators`(구분자들) 이외에 문자가 들어가 있는 경우 IllegalArgumentException 가 발생한다.
+    - 추출한 숫자가 음수 인 경우 IllegalArgumentException 발생
 
-### StringSeparatorParser
+### CustomSeparatorParser
 
-- 구분자
-- 구분자가 -인 경우 IllegalArgumentException 이 발생한다
+- 커스텀 구분자를 선언하는 문자열에서 커스텀 구분자를 가져온다 ex) "//;\n" 을 넣으면 ";" 을 추출한다
+- validation
+    - 구분자가 -인 경우 IllegalArgumentException 이 발생한다
+    - 커스텀 구분자 포맷만 있고 구분자 문자열은 없는 경우 IllegalArgumentException 발생 ex) "//\n"
+    - 커스텀 구분자 시작 부분이 없는 경우 IllegalArgumentException 발생 ex) ";\n"
+    - 커스텀 구분자 끝이 없는 경우 에러가 IllegalArgumentException 발생 "//;"
 
-### StringNumbersParser
+### CustomExpressionParser
 
-- `Separators`(구분자들) 받아서 문자열에서 숫자들을 추출한다.
-- `Separators`(구분자들) 이 없는 경우 IllegalArgumentException 가 발생한다
-- 숫자, `Separators`(구분자들) 이외에 문자가 들어가 있는 경우 IllegalArgumentException 가 발생한다.
-- 추출한 숫자가 음수 인 경우 IllegalArgumentException 발생
+- `CustomNumbersStringParser`, `CustomSeparatorParser` 협력으로 연산식에서 구분자, 숫자을 분리하고 보관한다
+  ex1)  "1,2:3"을 넣으면 1, 2, 3 을 추출한다
+  ex2)  "//;\n1;2;3"을 넣으면 1, 2, 3 을 추출한다
 
-### Separator
+# service 패키지 설명
 
-- 구분자를 관리한다
-- 연산식에서 커스텀 구분자를 가져옵니다.
-- 구분자 유효성 검사
-    - 커스텀 구분자 가 숫자인 경우 IllegalArgumentException 발생
+### CustomExpressionCalculator
+
+- 외부에서 InputDto 로 값을 받고 연산식에서 `CustomExpressionParser`으로 숫자를 추출하고 `Calculator`로 종합 값 구해 OutputDto 로 내보내준다.
+
+# view 패키지 설명
+
+### CustomExpressionCalculatorView
+
+- 입력과 출력을 위한 UI 용 String 을 만들어준다
 
 ## 작업 리스트
 
-- [x] InputDto 구현
-- [ ] StringExpressionParser 구현
-- [ ] Separator 구현
-- [ ] Calculator 구현
+- [x] domain 구현
+- [x] service 구현
+- [x] view 구현
+- [x] main 함수 구현
