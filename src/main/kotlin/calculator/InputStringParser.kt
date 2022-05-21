@@ -7,7 +7,7 @@ class InputStringParser(private val input: String) {
             .takeIf { it.isContainCustomDelimiter() }
             ?.let { splitByCustomDelimiter(input) }
             ?: input.split(DEFAULT_DELIMITER_REGEX).map { it.toInt() }
-        Validator.negativeNumberValidate(numbers)
+        negativeNumberValidate(numbers)
         return numbers
     }
 
@@ -17,6 +17,10 @@ class InputStringParser(private val input: String) {
         CUSTOM_DELIMITER_REGEX.find(input)!!.let { matchResult ->
             return matchResult.groupValues[2].split(matchResult.groupValues[1]).map { it.toInt() }
         }
+    }
+
+    private fun negativeNumberValidate(numbers: List<Int>) {
+        if (numbers.any { it < 0 }) throw InvalidInputNumberException()
     }
 
     companion object {
