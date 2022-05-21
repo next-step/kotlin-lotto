@@ -22,7 +22,7 @@ internal class LottoTicketTest {
     }
 
     @DisplayName("로또 티켓은 6개보다 적거나 많은 숫자를 가질 수 없다.")
-    @ParameterizedTest(name = "{0}")
+    @ParameterizedTest
     @MethodSource("illegalNumbers")
     fun moreThanSixNumbersTest() {
         val numbers = listOf(1, 2, 3, 4, 5, 6, 7)
@@ -30,7 +30,7 @@ internal class LottoTicketTest {
     }
 
     @DisplayName("로또 티켓은 같은 숫자를 여러 개 가질 수 없다.")
-    @ParameterizedTest(name = "{0}")
+    @ParameterizedTest
     @MethodSource("illegalSameNumbers")
     fun ticketDuplicatedNumberTest() {
         val numbers = listOf(1, 2, 1, 4, 5, 6)
