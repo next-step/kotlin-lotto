@@ -37,15 +37,15 @@ class CustomSeparatorParser(stringCustomSeparator: String) {
         }
 
         private fun validateStringCustomSeparator(stringCustomSeparator: String) {
-            validateStartContain(stringCustomSeparator, START_STRING)
-            validateEndStringContains(stringCustomSeparator, START_STRING, END_STRING)
+            validateNotContainStartString(stringCustomSeparator, START_STRING)
+            validateNotContainEndString(stringCustomSeparator, START_STRING, END_STRING)
         }
 
-        private fun validateStartContain(stringCustomSeparator: String, startString: String) {
+        private fun validateNotContainStartString(stringCustomSeparator: String, startString: String) {
             require(stringCustomSeparator.indexOf(startString) >= 0) { ERROR_MESSAGE_START_STRING_NOT_CONTAIN }
         }
 
-        private fun validateEndStringContains(stringCustomSeparator: String, startString: String, endString: String) {
+        private fun validateNotContainEndString(stringCustomSeparator: String, startString: String, endString: String) {
             val startIndex = stringCustomSeparator.indexOf(startString)
             require(stringCustomSeparator.indexOf(endString, startIndex) >= 0) { ERROR_MESSAGE_END_STRING_NOT_CONTAIN }
         }
