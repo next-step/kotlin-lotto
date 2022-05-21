@@ -6,18 +6,13 @@ class Calculator() {
             return 0
         }
 
-        val inputs = parse(input)
-
-        if (inputs.size == ONE_NUMBER_SIZE) {
-            return inputs[0].toInt()
-        }
-
-        return add(inputs)
+        return add(parse(input))
     }
 
     private fun add(inputs: List<String>): Int {
         var result = 0
-        for(input in inputs) {
+
+        for (input in inputs) {
             result += input.toInt()
         }
 
@@ -25,9 +20,7 @@ class Calculator() {
     }
 
     private fun parse(input: String): List<String> {
-        val r = split(input)
-        println(r)
-        return validateEach(r)
+        return validateEach(split(input))
     }
 
     private fun split(input: String): List<String> {
@@ -39,7 +32,7 @@ class Calculator() {
 
         return result?.let {
             val customDelimiter = it.groupValues[1]
-            return  it.groupValues[2].split(customDelimiter)
+            return it.groupValues[2].split(customDelimiter)
         }
     }
 
@@ -61,6 +54,5 @@ class Calculator() {
 
     companion object {
         private const val DELIMITER_REGEX = ",|:"
-        private const val ONE_NUMBER_SIZE = 1
     }
 }
