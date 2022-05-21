@@ -1,5 +1,6 @@
 package calculator.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -12,6 +13,7 @@ class CalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2,3,4", "1:2:3:4"])
     fun `쉼표 또는 콜론으로 문장을 잘 구분한다`(source: String) {
+        TODO("Not yet implemented")
     }
 
     @ParameterizedTest
@@ -29,7 +31,7 @@ class CalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     fun `빈 문장 또는 null이 입력되면 0을 반환 한다`(source: String?) {
-        TODO("Not yet implemented")
+        assertThat(Calculator.getResultOfCalculate(source)).isEqualTo(0)
     }
 
     @ParameterizedTest
