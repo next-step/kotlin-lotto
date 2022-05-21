@@ -19,7 +19,7 @@ internal class LottoStoreTest {
             "0,0,0"
         ]
     )
-    internal fun exchangeLottoTicketsTest(money: Int, expectedTicketCount: Int, expectedBalance: Int) {
+    fun exchangeLottoTicketsTest(money: Int, expectedTicketCount: Int, expectedBalance: Int) {
         val lottoPrice = 1000
         val lottoStore = LottoStore(lottoTicketPrice = lottoPrice)
 
