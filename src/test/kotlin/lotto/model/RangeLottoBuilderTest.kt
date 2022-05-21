@@ -8,6 +8,7 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
+import lotto.model.data.WinningLotto.Companion.toWinningLotto
 import lotto.view.input.LottosInputView
 import lotto.view.output.ConsoleOutputView
 import org.assertj.core.api.Assertions.assertThat
@@ -69,9 +70,10 @@ internal class RangeLottoBuilderTest {
     fun `1~45 사이 숫자 중 6개 당첨 번호를 만들어 일치 갯수를 계산한다`(lottoNumbers: String, expectedMatchCount: Int) {
 
         val winningNumbers = "1,2,3,4,5,6"
-
+        val bonusBall = "7"
         val lotto = lottoNumbers.toLotto(policy)
         val winningLotto = winningNumbers.toLotto(policy)
+            .toWinningLotto(policy, bonusBall.toInt())
 
         assertThat(winningLotto.countOfMatchNumber(lotto)).isEqualTo(expectedMatchCount)
     }
@@ -90,8 +92,10 @@ internal class RangeLottoBuilderTest {
     fun `일치 갯수에 따른 당청 종류 및 당첨 금액 를 판정한다`(lottoNumbers: String, expectedWonMoney: Int) {
 
         val winningNumbers = "1,2,3,4,5,6"
+        val bonusBall = "7"
         val lotto = lottoNumbers.toLotto(policy)
         val winningLotto = winningNumbers.toLotto(policy)
+            .toWinningLotto(policy, bonusBall.toInt())
 
         val result = LottoEvaluator.evaluate(winningLotto, lotto)
         assertThat(result.winning.winMoney).isEqualTo(expectedWonMoney)
@@ -103,11 +107,13 @@ internal class RangeLottoBuilderTest {
         // given
         val lottoNumbers = "1,2,3,4,5,16" // 3등 1500000
         val winningNumbers = "1,2,3,4,5,6"
+        val bonusBall = "7"
         val countOfLotto = 3
 
         val expectedWonMoney = countOfLotto * Winning.THIRD.winMoney
         val lottos = Lottos(countOfLotto) { lottoNumbers.toLotto(policy) }
         val winningLotto = winningNumbers.toLotto(policy)
+            .toWinningLotto(policy, bonusBall.toInt())
 
         // when
         val results = LottoEvaluator.evaluate(winningLotto, lottos)

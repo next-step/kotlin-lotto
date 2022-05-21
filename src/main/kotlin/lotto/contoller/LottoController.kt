@@ -1,15 +1,15 @@
 package lotto.contoller
 
 import lotto.model.LottoEvaluator
-import lotto.model.data.Lotto
 import lotto.model.data.Lottos
 import lotto.model.data.Results
+import lotto.model.data.WinningLotto
 import lotto.view.input.InputView
 import lotto.view.output.OutputView
 
 class LottoController(
     private val lottosInputView: InputView<Lottos>,
-    private val winningLottoInputView: InputView<Lotto>,
+    private val winningLottoInputView: InputView<WinningLotto>,
     private val outputView: OutputView? = null // option : to support headless
 ) {
 
