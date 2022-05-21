@@ -10,15 +10,15 @@ object AddCalculator {
             return DEFAULT_SUM
         }
 
-        val customDelimiterAndTokens = CUSTOM_DELIMITER_REGEX.find(input)
-        customDelimiterAndTokens?.let {
-            return sum(customDelimiterAndTokens.groupValues[1].toRegex(), customDelimiterAndTokens.groupValues[2])
+        val delimiterAndTokens = CUSTOM_DELIMITER_REGEX.find(input)
+        delimiterAndTokens?.let {
+            return splitAndSum(delimiterAndTokens.groupValues[1].toRegex(), delimiterAndTokens.groupValues[2])
         }
 
-        return sum(tokens = input)
+        return splitAndSum(tokens = input)
     }
 
-    private fun sum(delimiter: Regex = DEFAULT_DELIMITER_REGEX, tokens: String): Int {
+    private fun splitAndSum(delimiter: Regex = DEFAULT_DELIMITER_REGEX, tokens: String): Int {
         val numbers = tokens.split(delimiter)
         return Numbers.from(numbers).sum()
     }
