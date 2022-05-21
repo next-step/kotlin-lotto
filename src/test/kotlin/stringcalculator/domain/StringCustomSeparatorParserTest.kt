@@ -9,7 +9,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
     it("커스텀 구분자 문자열에서 구분자 문자(ParserSeparator)를 추출한다") {
         // given
         val successSeparatorString = ";"
-        val stringCustomSeparator = "//${successSeparatorString}\\n"
+        val stringCustomSeparator = "//${successSeparatorString}\n"
 
         // when
         val stringCustomSeparatorParser = StringCustomSeparatorParser(stringCustomSeparator)
@@ -21,7 +21,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
     describe("validation") {
         it("커스텀 구분자 포맷만 있고 구분자 문자열은 없는 경우 IllegalArgumentException 발생") {
             // given
-            val stringCustomSeparator = "//\\n"
+            val stringCustomSeparator = "//\n"
 
             // then
             shouldThrowExactly<IllegalArgumentException> {
@@ -31,7 +31,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
 
         it("커스텀 구분자 시작 부분이 없는 경우 IllegalArgumentException 발생") {
             // given
-            val stringCustomSeparator = ";\\n"
+            val stringCustomSeparator = ";\n"
 
             // then
             shouldThrowExactly<IllegalArgumentException> {
@@ -46,7 +46,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
             // then
             shouldThrowExactly<IllegalArgumentException> {
                 StringCustomSeparatorParser(stringCustomSeparator)
-            }.shouldHaveMessage("끝을 구분하는 문자열(\\n)이 포함되어 있지 않습니다")
+            }.shouldHaveMessage("끝을 구분하는 문자열(\n)이 포함되어 있지 않습니다")
         }
     }
 })

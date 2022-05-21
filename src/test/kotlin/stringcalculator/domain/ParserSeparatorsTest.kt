@@ -40,4 +40,16 @@ class ParserSeparatorsTest : DescribeSpec({
         // then
         size shouldBe successSize
     }
+
+    it("add 는 구분자를 추가한다") {
+        // given
+        val parserSeparators = ParserSeparators.toEmpty()
+        val separator = ParserSeparator(";")
+
+        // when
+        parserSeparators.add(separator)
+
+        // then
+        parserSeparators.separators[0] shouldBe separator
+    }
 })

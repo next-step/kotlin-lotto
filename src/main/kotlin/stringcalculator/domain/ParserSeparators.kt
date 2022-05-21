@@ -1,9 +1,14 @@
 package stringcalculator.domain
 
 class ParserSeparators private constructor(parserSeparators: MutableList<ParserSeparator>) {
-    var separators = parserSeparators
+    private var _separators = parserSeparators
+    var separators: MutableList<ParserSeparator> = _separators
         private set
-        get() = field.toMutableList()
+        get() = _separators.toMutableList()
+
+    fun add(separator: ParserSeparator) {
+        _separators.add(separator)
+    }
 
     fun getSize(): Int {
         return separators.size
@@ -23,7 +28,7 @@ class ParserSeparators private constructor(parserSeparators: MutableList<ParserS
         }
 
         fun ofStringExpression(): ParserSeparators {
-            return ParserSeparators(DEFAULT_LIST_FOR_STRING_EXPRESSION)
+            return ParserSeparators(DEFAULT_LIST_FOR_STRING_EXPRESSION.toMutableList())
         }
     }
 }
