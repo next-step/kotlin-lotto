@@ -1,4 +1,4 @@
-package stringcalculator.domain
+package stringcalculator.domain.customparser
 
 class ParserSeparators private constructor(parserSeparators: MutableList<ParserSeparator>) {
     private var _separators = parserSeparators

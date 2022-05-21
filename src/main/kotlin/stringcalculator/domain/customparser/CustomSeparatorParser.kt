@@ -1,6 +1,6 @@
-package stringcalculator.domain
+package stringcalculator.domain.customparser
 
-class StringCustomSeparatorParser(stringCustomSeparator: String) {
+class CustomSeparatorParser(stringCustomSeparator: String) {
     val parserSeparator: ParserSeparator
 
     init {

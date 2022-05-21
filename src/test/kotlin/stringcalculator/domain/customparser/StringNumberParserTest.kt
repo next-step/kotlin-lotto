@@ -1,4 +1,4 @@
-package stringcalculator.domain
+package stringcalculator.domain.customparser
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
@@ -14,7 +14,7 @@ class StringNumberParserTest : DescribeSpec({
         val successNumbers = listOf(1, 2, 3)
 
         // when
-        val stringNumberParser = StringNumberParser(
+        val stringNumberParser = CustomNumbersStringParser(
             expression, ofStringExpression
         )
         val parsedNumbers = stringNumberParser.parsedNumbers
@@ -34,7 +34,7 @@ class StringNumberParserTest : DescribeSpec({
             // then
             clearedSeparators.separators.size shouldBe 0
             shouldThrowExactly<java.lang.IllegalArgumentException> {
-                StringNumberParser(expression, clearedSeparators)
+                CustomNumbersStringParser(expression, clearedSeparators)
             }.shouldHaveMessage("숫자를 추출하기 위한 구분자가 없습니다")
         }
 
@@ -45,7 +45,7 @@ class StringNumberParserTest : DescribeSpec({
 
             // then
             shouldThrowExactly<java.lang.IllegalArgumentException> {
-                StringNumberParser(expression, separators)
+                CustomNumbersStringParser(expression, separators)
             }.shouldHaveMessage("숫자, 구분 문자(:,,) 를 제외한 문자가 포함 되어 있습니다")
         }
 
@@ -56,7 +56,7 @@ class StringNumberParserTest : DescribeSpec({
 
             // then
             shouldThrowExactly<java.lang.IllegalArgumentException> {
-                StringNumberParser(expression, separators)
+                CustomNumbersStringParser(expression, separators)
             }.shouldHaveMessage("음수(-1)은 입력할수 없습니다")
         }
     }

@@ -1,4 +1,4 @@
-package stringcalculator.domain
+package stringcalculator.domain.customparser
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe

@@ -1,6 +1,6 @@
-package stringcalculator.domain
+package stringcalculator.domain.customparser
 
-class StringNumberParser(stringExpression: String, separators: ParserSeparators) {
+class CustomNumbersStringParser(stringExpression: String, separators: ParserSeparators) {
     val parsedNumbers: List<Int>
 
     init {

@@ -1,4 +1,4 @@
-package stringcalculator.domain
+package stringcalculator.domain.customparser
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainAll
@@ -10,8 +10,8 @@ class StringExpressionParserTest : DescribeSpec({
         val successParsedNumbers = listOf(1, 2, 3)
 
         // when
-        val stringExpressionParser = StringExpressionParser(expression)
-        val parsedNumber = stringExpressionParser.getParsedNumber()
+        val customExpressionParser = CustomExpressionParser(expression)
+        val parsedNumber = customExpressionParser.getParsedNumber()
 
         // then
         parsedNumber shouldContainAll successParsedNumbers
@@ -23,8 +23,8 @@ class StringExpressionParserTest : DescribeSpec({
         val successParsedNumbers = listOf(1, 2, 3)
 
         // when
-        val stringExpressionParser = StringExpressionParser(expression)
-        val parsedNumber = stringExpressionParser.getParsedNumber()
+        val customExpressionParser = CustomExpressionParser(expression)
+        val parsedNumber = customExpressionParser.getParsedNumber()
 
         // then
         parsedNumber shouldContainAll successParsedNumbers

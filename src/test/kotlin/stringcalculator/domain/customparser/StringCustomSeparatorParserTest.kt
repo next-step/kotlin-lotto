@@ -1,4 +1,4 @@
-package stringcalculator.domain
+package stringcalculator.domain.customparser
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
@@ -12,10 +12,10 @@ class StringCustomSeparatorParserTest : DescribeSpec({
         val stringCustomSeparator = "//${successSeparatorString}\n"
 
         // when
-        val stringCustomSeparatorParser = StringCustomSeparatorParser(stringCustomSeparator)
+        val customSeparatorParser = CustomSeparatorParser(stringCustomSeparator)
 
         // then
-        stringCustomSeparatorParser.parserSeparator.string shouldBe successSeparatorString
+        customSeparatorParser.parserSeparator.string shouldBe successSeparatorString
     }
 
     describe("validation") {
@@ -25,7 +25,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
 
             // then
             shouldThrowExactly<IllegalArgumentException> {
-                StringCustomSeparatorParser(stringCustomSeparator)
+                CustomSeparatorParser(stringCustomSeparator)
             }
         }
 
@@ -35,7 +35,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
 
             // then
             shouldThrowExactly<IllegalArgumentException> {
-                StringCustomSeparatorParser(stringCustomSeparator)
+                CustomSeparatorParser(stringCustomSeparator)
             }.shouldHaveMessage("시작을 구분하는 문자열(//)이 포함되어 있지 않습니다")
         }
 
@@ -45,7 +45,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
 
             // then
             shouldThrowExactly<IllegalArgumentException> {
-                StringCustomSeparatorParser(stringCustomSeparator)
+                CustomSeparatorParser(stringCustomSeparator)
             }.shouldHaveMessage("끝을 구분하는 문자열(\n)이 포함되어 있지 않습니다")
         }
 
@@ -55,7 +55,7 @@ class StringCustomSeparatorParserTest : DescribeSpec({
 
             // then
             shouldThrowExactly<IllegalArgumentException> {
-                StringCustomSeparatorParser(stringCustomSeparator)
+                CustomSeparatorParser(stringCustomSeparator)
             }.shouldHaveMessage("커스텀 구분자는 - 가 될수 없습니다")
         }
     }
