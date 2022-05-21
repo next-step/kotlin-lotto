@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -35,5 +36,11 @@ internal class StringAddCalculatorTest : FreeSpec({
 
     "//와 newline 문자 사이에 커스텀 구분자를 지정할 수 있다." {
         calculator.add("//;\n1;2;3") shouldBe 6
+    }
+
+    "음수를 전달하는 경우 RuntimeException 예외 처리를 한다." {
+        shouldThrow<RuntimeException> {
+            calculator.add("-1")
+        }
     }
 })

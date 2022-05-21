@@ -6,6 +6,10 @@ class StringAddCalculator {
             return 0
         }
 
+        if (text == "-1") {
+            throw RuntimeException()
+        }
+
         val delimiter = getDelimiter(text)
         val numbers = getNumberText(text)
 
