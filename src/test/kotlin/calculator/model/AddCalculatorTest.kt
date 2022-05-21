@@ -11,6 +11,7 @@ class AddCalculatorTest {
     @ParameterizedTest(name = "{0} = {1}")
     @CsvSource(
         " = 0",
+        "1 = 1",
         "1,2 = 3",
         "1,2,3 = 6",
         "3,4:5 = 12",
