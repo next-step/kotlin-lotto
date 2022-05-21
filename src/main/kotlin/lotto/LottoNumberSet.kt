@@ -1,5 +1,5 @@
 package lotto
 
-data class LottoGenerator(
+data class LottoNumberSet(
     val lotto: List<Int>
 )

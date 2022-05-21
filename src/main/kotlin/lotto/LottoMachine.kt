@@ -14,14 +14,14 @@ class LottoMachine(
 
     private val lotto: Lotto = Lotto(inputPayment, lottoNumberGenerator)
 
-    private val _lottoRecord: MutableList<LottoGenerator> = mutableListOf()
-    val lottoRecord: List<LottoGenerator> get() = _lottoRecord
+    private val _lottoRecord: MutableList<LottoNumberSet> = mutableListOf()
+    val lottoRecord: List<LottoNumberSet> get() = _lottoRecord
 
     fun sellLotto() {
         val issuanceLottoCount = lotto.issuanceCount()
         repeat(issuanceLottoCount) {
             this._lottoRecord.add(
-                LottoGenerator(lotto.issuance())
+                LottoNumberSet(lotto.issuance())
             )
         }
     }
