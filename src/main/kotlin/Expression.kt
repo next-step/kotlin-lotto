@@ -3,10 +3,14 @@ class Expression {
     var digits = listOf<String>()
 
     fun getTokens(text: String): List<String> {
-        return if (text.trim().isNullOrEmpty()) {
+        val tokens = if (text.trim().isNullOrEmpty()) {
             listOf("0")
         } else {
             text.split(",|:".toRegex())
         }
+
+        require(tokens.all { it.toInt() > 0 })
+
+        return tokens
     }
 }
