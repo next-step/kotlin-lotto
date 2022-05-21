@@ -10,4 +10,13 @@ class LottoNumbersTest : FunSpec({
         val numbers2 = LottoNumbers(listOf(3, 4, 5, 6, 7, 8))
         numbers1.matchingNumbers(numbers2) shouldBe listOf(3, 4, 5, 6)
     }
+
+    test("로또번호에 특정 숫자가 포함되어 있는 확인 가능합니다.") {
+        val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        (1 in lottoNumbers) shouldBe true
+        (7 in lottoNumbers) shouldBe false
+
+        (LottoNumber(1) in lottoNumbers) shouldBe true
+        (LottoNumber(7) in lottoNumbers) shouldBe false
+    }
 })

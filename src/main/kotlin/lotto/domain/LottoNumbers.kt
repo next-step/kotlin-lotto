@@ -1,43 +1,37 @@
 package lotto.domain
 
 import lotto.exception.DuplicateLottoNumberException
-import lotto.exception.InvalidLottoNumberException
 import lotto.exception.InvalidLottoNumberSizeException
 
-class LottoNumbers(val numbers: List<Int>) {
+class LottoNumbers(numbers: List<Int>) {
+
+    val numbers: List<LottoNumber> = numbers.map { LottoNumber(it) }
 
     init {
-        validateNumbers()
+        require(numbers.size == LOTTO_NUMBER_SIZE) { throw InvalidLottoNumberSizeException() }
+        require(numbers.distinct().size == LOTTO_NUMBER_SIZE) { throw DuplicateLottoNumberException() }
     }
 
-    fun matchingNumbers(numbers: LottoNumbers): List<Int> {
+    fun matchingNumbers(numbers: LottoNumbers): List<LottoNumber> {
         return this.numbers.intersect(numbers.numbers.toSet())
             .toList()
-            .sorted()
+            .sortedBy { it.number }
     }
 
-    override fun toString(): String = numbers.sorted().toString()
+    override fun toString(): String = numbers
+        .sortedBy { it.number }
+        .toString()
 
-    private fun validateNumbers() {
-        if (numbers.size != LOTTO_NUMBER_SIZE) {
-            throw InvalidLottoNumberSizeException()
-        }
-        if (numbers.distinct().size != LOTTO_NUMBER_SIZE) {
-            throw DuplicateLottoNumberException()
-        }
-        if (numbers.any { it !in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) {
-            throw InvalidLottoNumberException()
-        }
+    operator fun contains(number: Int): Boolean {
+        return LottoNumber(number) in numbers
+    }
+
+    operator fun contains(number: LottoNumber): Boolean {
+        return number in numbers
     }
 
     companion object {
-        const val LOTTO_MIN_NUMBER = 1
-        const val LOTTO_MAX_NUMBER = 45
         const val LOTTO_NUMBER_SIZE = 6
-
-        fun all(): IntRange {
-            return (LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER)
-        }
 
         fun from(numbers: List<Int>): LottoNumbers {
             return LottoNumbers(numbers.take(LOTTO_NUMBER_SIZE))

@@ -47,7 +47,7 @@ class LottoTest : FunSpec({
             .map { Lotto(RandomLottoNumberGenerator.generate()) }
             .map { it.numbers }
             .flatMap { it.numbers }
-            .sorted()
+            .sortedBy { it.number }
             .groupingBy { it }.eachCount()
 
         numberMap.keys.size shouldBeInRange 6..45

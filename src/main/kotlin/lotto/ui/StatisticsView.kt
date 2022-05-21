@@ -11,13 +11,15 @@ object StatisticsView {
         LottoRank.values()
             .reversed()
             .filter { it != LottoRank.NONE }
-            .forEach {
-                rank ->
-                when (rank) {
-                    LottoRank.SECOND -> println("${rank.matchingCount}개 일치, 보너스 볼 일치 (${rank.rewardPrice}원)- ${lottoMatchReport.matchingCountBy(rank)}개")
-                    else -> println("${rank.matchingCount}개 일치 (${rank.rewardPrice}원)- ${lottoMatchReport.matchingCountBy(rank)}개")
-                }
-            }
+            .forEach { lottoRank -> println(resultString(lottoRank, lottoMatchReport.matchingCountBy(lottoRank))) }
         println("총 수익률은 ${lottoMatchReport.rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    }
+
+    private fun resultString(lottoRank: LottoRank, lottoCount: Int): String {
+        val sb = StringBuilder()
+        sb.append("${lottoRank.matchingCount}개 일치")
+        if (lottoRank == LottoRank.SECOND) { sb.append(", 보너스 볼 일치") }
+        sb.append(" (${lottoRank.rewardPrice}원)- ${lottoCount}개")
+        return sb.toString()
     }
 }
