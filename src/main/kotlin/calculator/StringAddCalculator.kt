@@ -6,10 +6,6 @@ class StringAddCalculator {
             return 0
         }
 
-        if (text == "1,2") {
-            return 3
-        }
-
-        return text.toInt()
+        return text.split(',').sumOf { it.toInt() }
     }
 }
