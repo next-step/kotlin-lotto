@@ -1,22 +1,17 @@
 package lotto
 
-import calculator.StringParser
-import calculator.parseToInt
+import lotto.view.LottoInputView
+import lotto.view.LottoResultView
 
 fun main() {
-    println("구입 금액을 입력해 주세요")
-    val purchasePrice = readln()
+    val purchasePrice = LottoInputView.purchaseInputView()
+    val myLottos = MyLottoTickets(LottoPurchase().buyLotto(purchasePrice))
 
-    val lottos = LottoPurchase().buyLotto(parseToInt(purchasePrice))
+    LottoResultView.printPurchasedLottoInfo(myLottos.lottoTickets)
 
-    println("${lottos.size}개를 구매했습니다.")
+    val lastLottoWinnerNumbers = LottoInputView.lastWinnerLotteryInputView()
 
-    for (lotto in lottos) {
-        println(lotto.numbers)
-    }
-
-    println("지난 주 당첨 번호를 입력해 주십시오.")
-    val lastLottoWinnerNumbers = StringParser.getNumberStrings(readln())
+    val lottoJudgment = LottoJudgment(LottoTicket(lastLottoWinnerNumbers))
 
     println("당첨통계")
     println("----------")

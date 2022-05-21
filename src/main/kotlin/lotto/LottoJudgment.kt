@@ -1,7 +1,5 @@
 package lotto
 
-import lotto.money.Money
-
 class LottoJudgment(
     private val lastLottoWinnerTicket: LottoTicket
 ) {
@@ -16,8 +14,7 @@ class LottoJudgment(
         return matchNumberCount
     }
 
-    fun getPrice(matchNumberCount: Int): Money {
-        val rank = LottoWinnerPolicy.getRank(matchNumberCount)
-        return rank.price
+    fun getPrice(matchNumberCount: Int): LottoWinnerPolicy {
+        return LottoWinnerPolicy.getRank(matchNumberCount)
     }
 }
