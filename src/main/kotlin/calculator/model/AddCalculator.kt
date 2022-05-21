@@ -9,7 +9,7 @@ object AddCalculator {
         }
 
         return input.split(DEFAULT_DELIMITER_REGEX)
-            .map { Number.from(it.toInt()) }
+            .map { Number.from(it) }
             .sumOf { it.number }
     }
 }

@@ -6,16 +6,16 @@ value class Number private constructor(
 ) {
 
     companion object {
-        private const val MIN_NUMBER = 0
+        private val POSITIVE_NUMBER_REGEX = "^\\d+$".toRegex()
 
-        fun from(number: Int): Number {
-            validateMinNumber(number)
+        fun from(number: String): Number {
+            validateNumber(number)
 
-            return Number(number)
+            return Number(number.toInt())
         }
 
-        private fun validateMinNumber(number: Int) {
-            require(number >= MIN_NUMBER) { "숫자는 최소 $MIN_NUMBER 이상이어야 합니다." }
+        private fun validateNumber(number: String) {
+            require(POSITIVE_NUMBER_REGEX.matches(number)) { "0 이상의 숫자로만 생성이 가능합니다. (number: $number)" }
         }
     }
 }
