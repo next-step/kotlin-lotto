@@ -68,9 +68,14 @@
 ### StringSeparatorParser
 
 - 구분자
+- 구분자가 -인 경우 IllegalArgumentException 이 발생한다
 
 ### StringNumbersParser
-- 
+
+- `Separators`(구분자들) 받아서 문자열에서 숫자들을 추출한다.
+- `Separators`(구분자들) 이 없는 경우 IllegalArgumentException 가 발생한다
+- 숫자, `Separators`(구분자들) 이외에 문자가 들어가 있는 경우 IllegalArgumentException 가 발생한다.
+- 추출한 숫자가 음수 인 경우 IllegalArgumentException 발생
 
 ### Separator
 
