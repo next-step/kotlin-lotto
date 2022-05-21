@@ -36,7 +36,11 @@ class ConsoleOutputView(
     }
 
     private val Winning.message: String
-        get() = "${this.matchCount}개 일치"
+        get() = if (this.isMustBonusNumberMatch) {
+            "${this.matchCount}개 일치, 보너스 볼 일치"
+        } else {
+            "${this.matchCount}개 일치"
+        }
 
     private val Statistics.missRemovedWinningCountMap: Map<Winning, Int>
         get() = this.winningCountMap.filter { (winning, _) -> winning.winMoney > 0 }
