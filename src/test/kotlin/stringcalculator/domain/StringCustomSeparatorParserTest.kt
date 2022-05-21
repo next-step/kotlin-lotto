@@ -48,5 +48,15 @@ class StringCustomSeparatorParserTest : DescribeSpec({
                 StringCustomSeparatorParser(stringCustomSeparator)
             }.shouldHaveMessage("끝을 구분하는 문자열(\n)이 포함되어 있지 않습니다")
         }
+
+        it("구분자가 -인 경우 IllegalArgumentException 이 발생한다") {
+            // given
+            val stringCustomSeparator = "//-\n"
+
+            // then
+            shouldThrowExactly<IllegalArgumentException> {
+                StringCustomSeparatorParser(stringCustomSeparator)
+            }.shouldHaveMessage("커스텀 구분자는 - 가 될수 없습니다")
+        }
     }
 })
