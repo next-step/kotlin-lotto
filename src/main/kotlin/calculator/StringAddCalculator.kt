@@ -6,10 +6,14 @@ class StringAddCalculator {
             return 0
         }
 
-        val delimiter = getDelimiter(text)
         val numberInput = getNumberInput(text)
+        val delimiter = getDelimiter(text)
 
-        return numberInput
+        return sum(numberInput, delimiter)
+    }
+
+    private fun sum(numberInput: String, delimiter: Regex): Int =
+        numberInput
             .split(delimiter)
             .sumOf {
                 val number = it.toInt()
@@ -19,7 +23,6 @@ class StringAddCalculator {
 
                 number
             }
-    }
 
     private fun getNumberInput(text: String): String =
         INPUT_NUMBER_REGEX.find(text)
