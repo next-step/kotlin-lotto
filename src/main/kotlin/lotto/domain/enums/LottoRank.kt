@@ -1,14 +1,8 @@
 package lotto.domain.enums
 
-typealias RankMatching = (Boolean, Boolean) -> Boolean
-
-enum class LottoRank(
-    val matchingCount: Int,
-    val rewardPrice: Long,
-    private val isMatch: RankMatching = { isMatchCount, _ -> isMatchCount }
-) {
+enum class LottoRank(val matchingCount: Int, val rewardPrice: Long) {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000, { isMatchCount, isMatchBonus -> isMatchCount && isMatchBonus }),
+    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -18,13 +12,15 @@ enum class LottoRank(
         return rewardPrice * numberOfLotto
     }
 
-    private fun isMatchCount(matchingCount: Int): Boolean {
-        return this.matchingCount == matchingCount
-    }
-
     companion object {
         fun of(matchingCount: Int, isMatchBonusNumber: Boolean): LottoRank {
-            return values().find { it.isMatch(it.isMatchCount(matchingCount), isMatchBonusNumber) } ?: NONE
+            return when (matchingCount) {
+                FIRST.matchingCount -> FIRST
+                SECOND.matchingCount -> if (isMatchBonusNumber) SECOND else THIRD
+                FOURTH.matchingCount -> FOURTH
+                FIFTH.matchingCount -> FIFTH
+                else -> NONE
+            }
         }
     }
 }
