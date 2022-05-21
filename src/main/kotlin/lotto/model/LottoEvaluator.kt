@@ -10,6 +10,7 @@ import lotto.model.data.Winning.LOST_GAME
 object LottoEvaluator {
 
     private val winnings = Winning.values()
+
     fun evaluate(winningLotto: Lotto, lottos: Lottos) = Results(
         lottos.map { lotto -> evaluate(winningLotto, lotto) }
     )
