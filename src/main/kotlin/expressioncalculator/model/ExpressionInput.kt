@@ -6,11 +6,12 @@ data class ExpressionInput(
 ) {
     companion object {
         private const val DEFAULT_DELIMITER_REGEX_PATTERN = "[,:]"
+        private val defaultDelimiter = DEFAULT_DELIMITER_REGEX_PATTERN.toRegex()
 
         fun from(expression: Expression): ExpressionInput {
             return ExpressionInput(
                 expression = expression,
-                delimiter = Delimiter(DEFAULT_DELIMITER_REGEX_PATTERN.toRegex())
+                delimiter = Delimiter(defaultDelimiter)
             )
         }
     }
