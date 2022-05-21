@@ -19,11 +19,11 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result["3"] shouldBe listOf(fourthPrizePrice, 1)
-            analyst.result["4"] shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result["5"] shouldBe listOf(secondPrizePrice, 0)
-            analyst.result["6"] shouldBe listOf(firstPrizePrice, 0)
-            analyst.result["bf"] shouldBe String.format("%.2f", fourthPrizePrice / purchaseAmount.toDouble())
+            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 1)
+            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
+            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
+            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.rateOfReturn shouldBe String.format("%.2f", fourthPrizePrice / purchaseAmount.toDouble())
         }
 
         it("지난 주 로또 당첨 번호와 4개의 숫자가 맞으면 3등이다") {
@@ -35,11 +35,11 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result["3"] shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result["4"] shouldBe listOf(thirdPrizePrice, 1)
-            analyst.result["5"] shouldBe listOf(secondPrizePrice, 0)
-            analyst.result["6"] shouldBe listOf(firstPrizePrice, 0)
-            analyst.result["bf"] shouldBe String.format("%.2f", thirdPrizePrice / purchaseAmount.toDouble())
+            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
+            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 1)
+            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
+            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.rateOfReturn shouldBe String.format("%.2f", thirdPrizePrice / purchaseAmount.toDouble())
         }
 
         it("지난 주 로또 당첨 번호와 5개의 숫자가 맞으면 2등이다") {
@@ -51,11 +51,11 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result["3"] shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result["4"] shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result["5"] shouldBe listOf(secondPrizePrice, 1)
-            analyst.result["6"] shouldBe listOf(firstPrizePrice, 0)
-            analyst.result["bf"] shouldBe String.format("%.2f", secondPrizePrice / purchaseAmount.toDouble())
+            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
+            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
+            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 1)
+            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.rateOfReturn shouldBe String.format("%.2f", secondPrizePrice / purchaseAmount.toDouble())
         }
 
         it("지난 주 로또 당첨 번호와 6개의 숫자가 맞으면 1등이다") {
@@ -67,11 +67,11 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result["3"] shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result["4"] shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result["5"] shouldBe listOf(secondPrizePrice, 0)
-            analyst.result["6"] shouldBe listOf(firstPrizePrice, 1)
-            analyst.result["bf"] shouldBe String.format("%.2f", firstPrizePrice / purchaseAmount.toDouble())
+            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
+            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
+            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
+            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 1)
+            analyst.result.rateOfReturn shouldBe String.format("%.2f", firstPrizePrice / purchaseAmount.toDouble())
         }
 
         it("지난 주 로또 당첨 번호와 2개이하의 숫자가 맞으면 꽝이다.") {
@@ -83,11 +83,11 @@ class AnalystTest : DescribeSpec({
 
             analyst.analyze(purchaseAmount, lottos)
 
-            analyst.result["3"] shouldBe listOf(fourthPrizePrice, 0)
-            analyst.result["4"] shouldBe listOf(thirdPrizePrice, 0)
-            analyst.result["5"] shouldBe listOf(secondPrizePrice, 0)
-            analyst.result["6"] shouldBe listOf(firstPrizePrice, 0)
-            analyst.result["bf"] shouldBe "0.00"
+            analyst.result.fourthPrize shouldBe listOf(fourthPrizePrice, 0)
+            analyst.result.thirdPrize shouldBe listOf(thirdPrizePrice, 0)
+            analyst.result.secondPrize shouldBe listOf(secondPrizePrice, 0)
+            analyst.result.firstPrize shouldBe listOf(firstPrizePrice, 0)
+            analyst.result.rateOfReturn shouldBe "0.00"
         }
     }
 })
