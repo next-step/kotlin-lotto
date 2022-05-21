@@ -4,11 +4,11 @@ import java.lang.RuntimeException
 
 class LottoPurchase {
 
-    fun buyLotto(money: Int): List<Lotto> {
+    fun buyLotto(money: Int): List<LottoTicket> {
         moneyValidate(money)
         val numberOfBuy = money / LOTTO_PRICE
 
-        return List(numberOfBuy) { Lotto() }
+        return List(numberOfBuy) { LottoCreator.autoCreate() }
     }
 
     private fun moneyValidate(money: Int) {
