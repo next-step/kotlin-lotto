@@ -1,5 +1,5 @@
 package stringaddcalculator
-
+// 이전 코드
 class Parse(private var formula: String, delimiters: List<String>) {
     init {
         val regexResult = Regex(Pattern.CUSTOM_DELIMITER).find(formula)

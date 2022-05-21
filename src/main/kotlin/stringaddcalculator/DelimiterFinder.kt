@@ -1,5 +1,5 @@
 package stringaddcalculator
-
+// 이전 코드
 object DelimiterFinder {
     fun find(formula: String): List<String> {
         val customDelimiter = Regex(Pattern.CUSTOM_DELIMITER).find(formula)
