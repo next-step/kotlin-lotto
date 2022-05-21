@@ -2,6 +2,10 @@ package calculator
 
 class StringAddCalculator {
     fun add(text: String?): Int {
-        return 0
+        if (text.isNullOrBlank()) {
+            return 0
+        }
+
+        TODO()
     }
 }
