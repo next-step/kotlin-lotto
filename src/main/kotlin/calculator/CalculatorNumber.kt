@@ -1,6 +1,7 @@
 package calculator
 
-class CalculatorNumber(val num: Int?) {
+class CalculatorNumber(num: Int?) {
+    var num: Int = num!!
 
     init {
         require(num != null) {
