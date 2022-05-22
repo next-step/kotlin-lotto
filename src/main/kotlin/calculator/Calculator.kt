@@ -6,15 +6,28 @@ class Calculator {
 
         Regex("//(.)\n(.*)").find(expression)?.let { matchResult ->
             val customDelimiter = matchResult.groupValues[1]
-            val numbersByCustomDelimiter = matchResult.groupValues[2].split(customDelimiter).map { it.toInt() }
-            checkNegativeNumber(numbersByCustomDelimiter)
-
-            return addNumbers(numbersByCustomDelimiter)
+            return processCalculate(expression = matchResult.groupValues[2], customDelimiter = customDelimiter)
         }
 
-        val numbers = expression.split(",", ":").map { it.toInt() }
+        return processCalculate(expression = expression)
+    }
+
+    private fun processCalculate(expression: String, customDelimiter: String? = null): Int {
+        val delimiters = getDelimiters(customDelimiter)
+
+        val numbers = expression.split(delimiters = delimiters).map { it.toInt() }
         checkNegativeNumber(numbers)
         return addNumbers(numbers)
+    }
+
+    private fun getDelimiters(customDelimiter: String?): Array<String> {
+        var delimiters = arrayOf(",", ":")
+
+        customDelimiter?.let {
+            delimiters = delimiters.plus(customDelimiter)
+        }
+
+        return delimiters
     }
 
     private fun checkNegativeNumber(numbers: List<Int>) {
