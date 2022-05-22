@@ -1,5 +1,13 @@
 package lotto
 
-class MyLottoResult(
-    val result: Map<LottoWinnerRank, Int>
-)
+data class MyLottoResult(
+    private val result: Map<LottoWinnerRank, Int> = mutableMapOf()
+) {
+    val totalEarning = result
+        .map { it.key.price * it.value }
+        .sum()
+
+    fun getCount(ranking: LottoWinnerRank): Int {
+        return result.getOrDefault(ranking, 0)
+    }
+}
