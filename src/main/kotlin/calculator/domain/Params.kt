@@ -1,15 +1,15 @@
 package calculator.domain
 
-class Params(value: String?) {
+class Params(text: String?) {
     val intList: List<Int>
 
     init {
-        if (value.isNullOrBlank() || value.isEmpty()) {
+        if (text.isNullOrBlank() || text.isEmpty()) {
             intList = listOf(0)
         } else {
-            val stringList = split(value)
-            stringList.forEach { validate(it) }
-            intList = stringList.map { toInt(it) }
+            val tokens = split(text)
+            tokens.forEach { validate(it) }
+            intList = tokens.map { toInt(it) }
         }
     }
 
@@ -20,38 +20,21 @@ class Params(value: String?) {
         return it.toInt()
     }
 
-    private fun validate(string: String) {
-        if (string.matches(".*[^\\d^\\s]+.*".toRegex())) {
+    private fun validate(token: String) {
+        if (token.matches(".*[^\\d^\\s]+.*".toRegex())) {
             throw RuntimeException("숫자가 아닌 입력은 들어올 수 없습니다. (음수도 안됩니다!)")
         }
     }
 
-    private fun split(value: String): List<String> {
-        val delimiter = getDelimiter(value)
-        val contents = getContents(value)
-        return contents.split(delimiter)
+    private fun split(text: String): List<String> {
+        val result = Regex("//(.)\n(.*)").find(text)
+        return result?.let {
+            val customDelimiter = it.groupValues[1]
+            it.groupValues[2].split(customDelimiter)
+        } ?: text.split(DEFAULT_DELIMITER)
     }
-
-    private fun getDelimiter(value: String): Regex {
-        if (hasCustomDelimiter(value)) {
-            return value.split("//|\n".toRegex())[1].toRegex()
-        } else {
-            return DEFAULT_DELIMITER
-        }
-    }
-
-    private fun getContents(value: String): String {
-        if (hasCustomDelimiter(value)) {
-            return value.split("//|\n".toRegex())[2]
-        } else {
-            return value
-        }
-    }
-
-    private fun hasCustomDelimiter(value: String): Boolean =
-        value.contains("//") && value.contains("\n")
 
     companion object {
-        private val DEFAULT_DELIMITER: Regex = "[,;]".toRegex()
+        private val DEFAULT_DELIMITER: Regex = "[,:]".toRegex()
     }
 }

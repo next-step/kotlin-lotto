@@ -10,8 +10,9 @@ class ParamsTest {
 
     @Test
     fun `getParams 해피패스 테스트`() {
-        Assertions.assertThat(Params("1;2;3").intList).isEqualTo(listOf(1, 2, 3))
+        Assertions.assertThat(Params("1:2:3").intList).isEqualTo(listOf(1, 2, 3))
         Assertions.assertThat(Params("2,3,4").intList).isEqualTo(listOf(2, 3, 4))
+        Assertions.assertThat(Params("2,3:4").intList).isEqualTo(listOf(2, 3, 4))
     }
 
     @Test
