@@ -7,9 +7,7 @@ class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumb
     constructor(numbers: List<Int>, bonusNumber: Int) : this(LottoNumbers(numbers), LottoNumber(bonusNumber))
 
     init {
-        require(bonusNumber !in lottoNumbers) {
-            throw DuplicateLottoNumberException()
-        }
+        if (bonusNumber in lottoNumbers) throw DuplicateLottoNumberException()
     }
 
     fun match(lotto: Lotto): LottoRank {

@@ -16,10 +16,10 @@ object StatisticsView {
     }
 
     private fun resultString(lottoRank: LottoRank, lottoCount: Int): String {
-        val sb = StringBuilder()
-        sb.append("${lottoRank.matchingCount}개 일치")
-        if (lottoRank == LottoRank.SECOND) { sb.append(", 보너스 볼 일치") }
-        sb.append(" (${lottoRank.rewardPrice}원)- ${lottoCount}개")
-        return sb.toString()
+        return buildString {
+            append("${lottoRank.matchingCount}개 일치")
+            if (lottoRank == LottoRank.SECOND) { append(", 보너스 볼 일치") }
+            append(" (${lottoRank.rewardPrice}원)- ${lottoCount}개")
+        }
     }
 }

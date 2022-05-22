@@ -1,12 +1,10 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.enums.LottoRank
 import lotto.exception.DuplicateLottoNumberException
-import lotto.exception.InvalidLottoNumberException
 
 class WinningLottoTest : FunSpec({
 
@@ -18,33 +16,6 @@ class WinningLottoTest : FunSpec({
 
         shouldThrow<DuplicateLottoNumberException> {
             WinningLotto(listOf(1, 2, 3, 4, 5, 6), 1)
-        }
-    }
-
-    test("로또 보너스 숫자는 1부터 45 사이의 숫자입니다.") {
-        val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
-
-        shouldNotThrow<InvalidLottoNumberException> {
-            WinningLotto(listOf(1, 2, 3, 4, 5, 6), 45)
-            WinningLotto(lottoNumbers, LottoNumber(45))
-        }
-        shouldThrow<InvalidLottoNumberException> {
-            WinningLotto(listOf(1, 2, 3, 4, 5, 6), 0)
-        }
-        shouldThrow<InvalidLottoNumberException> {
-            WinningLotto(listOf(1, 2, 3, 4, 5, 6), -1)
-        }
-        shouldThrow<InvalidLottoNumberException> {
-            WinningLotto(listOf(1, 2, 3, 4, 5, 6), 46)
-        }
-        shouldThrow<InvalidLottoNumberException> {
-            WinningLotto(lottoNumbers, LottoNumber(0))
-        }
-        shouldThrow<InvalidLottoNumberException> {
-            WinningLotto(lottoNumbers, LottoNumber(-1))
-        }
-        shouldThrow<InvalidLottoNumberException> {
-            WinningLotto(lottoNumbers, LottoNumber(46))
         }
     }
 

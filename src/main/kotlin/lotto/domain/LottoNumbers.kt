@@ -8,8 +8,8 @@ class LottoNumbers(numbers: List<Int>) {
     val numbers: List<LottoNumber> = numbers.map { LottoNumber(it) }
 
     init {
-        require(numbers.size == LOTTO_NUMBER_SIZE) { throw InvalidLottoNumberSizeException() }
-        require(numbers.distinct().size == LOTTO_NUMBER_SIZE) { throw DuplicateLottoNumberException() }
+        if (numbers.size != LOTTO_NUMBER_SIZE) throw InvalidLottoNumberSizeException()
+        if (numbers.distinct().size != LOTTO_NUMBER_SIZE) throw DuplicateLottoNumberException()
     }
 
     fun matchingNumbers(numbers: LottoNumbers): List<LottoNumber> {
