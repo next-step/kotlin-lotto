@@ -1,6 +1,6 @@
 package lotto
 
-class LottoStore(private val issuer: LottoIssuable) {
+class Store(private val issuer: Issuable) {
 
     fun buy(money: Money): List<Lotto> =
         List(money.amount / LOTTO_PRICE) {

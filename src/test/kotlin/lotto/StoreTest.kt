@@ -5,11 +5,11 @@ import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
-internal class LottoStoreTest : FreeSpec({
-    val store = LottoStore { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
+internal class StoreTest : FreeSpec({
 
     "0원으로 구매를 시도하면 로또를 얻지 못한다" {
         val money = Money(0)
+        val store = Store { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
 
         val result = store.buy(money)
 
@@ -23,6 +23,8 @@ internal class LottoStoreTest : FreeSpec({
             14999 to 14,
         ).forEach { (money, count) ->
             "$money 원으로 구매하는 경우 $count 개를 받는다" {
+                val store = Store { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
+
                 val result = store.buy(Money(money))
 
                 result shouldHaveSize count
@@ -32,9 +34,9 @@ internal class LottoStoreTest : FreeSpec({
 
     "제공한 발급자를 통해서 로또를 생성한다" {
         val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10))
-        val lottoStore = LottoStore { lotto }
+        val store = Store { lotto }
 
-        val result = lottoStore.buy(Money(LottoStore.LOTTO_PRICE))
+        val result = store.buy(Money(Store.LOTTO_PRICE))
 
         result.first() shouldBe lotto
     }

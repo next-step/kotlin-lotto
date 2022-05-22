@@ -1,6 +1,6 @@
 package lotto
 
-object LottoIssuer : LottoIssuable {
+object Issuer : Issuable {
     private val NUMBER_RANGE = (1..45)
 
     override fun issue(): Lotto =

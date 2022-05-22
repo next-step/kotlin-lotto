@@ -1,5 +1,5 @@
 package lotto
 
-fun interface LottoIssuable {
+fun interface Issuable {
     fun issue(): Lotto
 }

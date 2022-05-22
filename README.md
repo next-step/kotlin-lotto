@@ -62,14 +62,14 @@
 
 - Money: 금액을 이미하는 값 객체
 - Lotto: 로또를 의미하는 값 객체
-- LottoIssuable: 로또 생성기 (interface)
+- Issuable: 로또 생성기 (interface)
     - test 에서 해당 인터페이스 구현한 stub 사용
-    - main 에서 랜덤한 로또를 생성하는 `LottoIssuer` 사용
-- LottoStore: 로또 생성기와 금액을 받아 Lotto 목록을 반환
+    - main 에서 랜덤한 로또를 생성하는 `Issuer` 사용
+- Store: 로또 생성기와 금액을 받아 Lotto 목록을 반환
 - WinPolicy: 당첨 조건을 의미, 맞아야 하는 숫자 개수와 당첨 금액을 가짐
-- LottoWinningNumber: 당첨 번호를 의미하는 값 객체
-- LottoMatcher: 당첨 번호와 로또 리스트를 받아서 당첨 조건에 따른 결과를 반환
-- LottoMatchResult: 당첨 결과, `LottoPolicy` 와 당첨 개수를 쌍으로 가지는 값 객체
+- WinningNumbers: 당첨 번호 목록을 의미하는 값 객체
+- Matcher: 당첨 번호와 로또 리스트를 받아서 당첨 조건에 따른 결과를 반환
+- MatchResult: 당첨 결과, `WinPolicy` 와 당첨 개수를 쌍으로 가지는 값 객체
 
 ### 작업 사항
 
@@ -80,11 +80,11 @@
     - [x] 숫자 리스트를 받아 Lotto 인스턴스를 생성한다
     - [x] 입력받은 리스트의 크기가 6이 아니면 에러가 발생한다
     - [x] 입력받은 숫자에 동일한 값이 존재하면 에러가 발생한다
-- LottoIssuer
+- Issuer
     - [x] 로또를 생성할 수 있다
     - [x] 생성한 로또는 1에서 45 사이의 숫자를 가진다
     - [x] 생성한 로또 숫자는 오름차순으로 정렬된다
-- LottoStore
+- Store
     - [x] 0원으로 구매를 시도하면 로또를 얻지 못한다
     - [x] 금액에 따라 올바른 로또 목록을 받는다
     - [x] 제공한 발급자를 통해서 로또를 생성한다

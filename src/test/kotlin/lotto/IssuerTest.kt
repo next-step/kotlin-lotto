@@ -6,17 +6,17 @@ import io.kotest.matchers.ints.shouldBeBetween
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-internal class LottoIssuerTest : StringSpec({
+internal class IssuerTest : StringSpec({
 
     "로또를 생성할 수 있다" {
-        val lotto = LottoIssuer.issue()
+        val lotto = Issuer.issue()
 
         lotto.shouldBeInstanceOf<Lotto>()
     }
 
     "생성한 로또는 1에서 45 사이의 숫자를 가진다" {
         repeat(1000) {
-            val lotto = LottoIssuer.issue()
+            val lotto = Issuer.issue()
 
             lotto.numbers.forAll {
                 it.shouldBeBetween(1, 45)
@@ -26,7 +26,7 @@ internal class LottoIssuerTest : StringSpec({
 
     "생성한 로또 숫자는 오름차순으로 정렬된다 " {
         repeat(1000) {
-            val lotto = LottoIssuer.issue()
+            val lotto = Issuer.issue()
 
             lotto.numbers shouldBe lotto.numbers.sorted()
         }
