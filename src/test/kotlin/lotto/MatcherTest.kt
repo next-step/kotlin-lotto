@@ -45,4 +45,18 @@ internal class MatcherTest : FreeSpec({
 
         results.map { it.matchCount } shouldBe listOf(2, 4, 5)
     }
+
+    "각 당첨 조건에 해당하는 당첨 액수를 반환한다" {
+        val winNumbers = WinNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val policies = listOf(
+            WinPolicy(4, Money(200)),
+            WinPolicy(2, Money(100)),
+            WinPolicy(5, Money(300)),
+        )
+        val matcher = Matcher(winNumbers, policies)
+
+        val results = matcher.makeResult()
+
+        results.map { it.price } shouldBe listOf(Money(100), Money(200), Money(300))
+    }
 })
