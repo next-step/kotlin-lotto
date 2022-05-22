@@ -3,7 +3,9 @@ package calculator
 import calculator.exception.NegativeNumericException
 import calculator.exception.NotNumericException
 
-class StringAddCalculator {
+object StringAddCalculator {
+    private val DEFAULT_DELIMITERS = arrayOf(":", ",")
+    private val CUSTOM_DELIMITERS = Regex("//(.)₩n(.*)")
 
     fun calculate(text: String): Int {
         val tokens = CUSTOM_DELIMITERS.find(text)
@@ -44,8 +46,4 @@ class StringAddCalculator {
         }
     }
 
-    companion object {
-        private val DEFAULT_DELIMITERS = arrayOf(":", ",")
-        private val CUSTOM_DELIMITERS = Regex("//(.)₩n(.*)")
-    }
 }
