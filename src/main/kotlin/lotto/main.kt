@@ -13,5 +13,5 @@ fun main() {
 
     val printView = PrintView()
     printView.printLottoCount(lottoStore.lottoCount)
-
+    printView.printBoughtLottoList(lottoStore.boughtLottos)
 }
