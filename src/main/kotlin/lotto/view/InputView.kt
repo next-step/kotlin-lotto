@@ -3,9 +3,10 @@ package lotto.view
 import lotto.Const
 
 class InputView {
-    fun readPrice(): String {
+    fun readPrice(): Int {
         printMsg(Const.OutputMsg.GET_PRICE_MSG)
-        return readInputAndRequireNotBlank()
+        val input = readInputAndRequireNotBlank()
+        return converseToInt(input)
     }
 
     private fun printMsg(message: String) = println(message)
@@ -16,4 +17,6 @@ class InputView {
 
         return input
     }
+
+    private fun converseToInt(value: String) = requireNotNull(value.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR }
 }
