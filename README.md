@@ -31,6 +31,6 @@
 ### 3차 todo list
 - [ ] 테스트 클래스 위치를 실제 클래스와 맞추기
 - [ ] 커스텀 구분자의 sum test
-- [ ] 오타수정
+- [x] 오타수정
 - [x] InputParser object클래스
 - [x] domain 에서 view 패키지 참조 수정
