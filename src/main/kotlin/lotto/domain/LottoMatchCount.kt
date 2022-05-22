@@ -4,7 +4,7 @@ data class LottoMatchCount(val number: Int) {
 
     init {
         require(number in MIN_MATCH_COUNT..MAX_MATCH_COUNT) {
-            "로또 일치 개수는 $MIN_MATCH_COUNT 와 $MAX_MATCH_COUNT 사이여야 합니다. (입력:${number})"
+            "로또 일치 개수는 $MIN_MATCH_COUNT 와 $MAX_MATCH_COUNT 사이여야 합니다. (입력:$number)"
         }
     }
 
