@@ -4,12 +4,19 @@ import lotto.LottoTicket
 
 class LottoJudge {
 
-    fun determineWinning(lottoTickets: List<LottoTicket>, wonLottoNumbers: List<Int>): Map<LottoWinningEnum?, Int> {
+    fun determineLottoWinnings(lottoTickets: List<LottoTicket>, wonLottoNumbers: List<Int>): Map<LottoWinningEnum, Int> {
+        val lottoWinningEnums = LottoWinningEnum.values()
+            .associateWith { INIT_WINNING_COUNT }
+            .toMutableMap()
 
-        return lottoTickets
-            .map { LottoWinningEnum.of(countMatchLottoNumber(it, wonLottoNumbers)) }
+        val determinedLottoWinnings = lottoTickets
+            .mapNotNull { LottoWinningEnum.of(countMatchLottoNumber(it, wonLottoNumbers)) }
             .groupingBy { it }
             .eachCount()
+            .toMutableMap()
+
+        lottoWinningEnums.putAll(determinedLottoWinnings)
+        return lottoWinningEnums
     }
 
     private fun countMatchLottoNumber(lottoTicket: LottoTicket, wonLottoNumbers: List<Int>): Int {
@@ -17,5 +24,9 @@ class LottoJudge {
         return lottoTicket.numbers
             .sorted()
             .count { wonLottoNumbers.contains(it) }
+    }
+
+    companion object {
+        const val INIT_WINNING_COUNT = 0
     }
 }

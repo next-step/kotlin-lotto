@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.LottoTicket
+import lotto.agency.LottoWinningEnum
 
 class ResultView {
 
@@ -12,5 +13,21 @@ class ResultView {
         lottoTickets.map {
             println(it.numbers)
         }
+    }
+
+    fun printWinningStatistics(winnings: Map<LottoWinningEnum, Int>, money: Int) {
+        printMatchedCount(winnings)
+        printProfitRate(winnings, money)
+    }
+
+    private fun printMatchedCount(winnings: Map<LottoWinningEnum, Int>) {
+        winnings.map {
+            println("${it.key?.matchCount}개 일치 (${it.key?.winningMoney}원) : ${it.value}개")
+        }
+    }
+
+    private fun printProfitRate(winnings: Map<LottoWinningEnum, Int>, money: Int) {
+        val profitRate = winnings.map { it.key.winningMoney.times(it.value) }.sumOf { it.toDouble() } / money.toDouble()
+        println("총 수익률은 " + String.format("%.2f", profitRate) + "입니다.")
     }
 }
