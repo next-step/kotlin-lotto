@@ -1,12 +1,13 @@
 package lotto
 
-class Matcher(val winNumbers: WinNumbers, private val policies: List<WinPolicy>) {
+class Matcher(val winNumbers: WinNumbers, policies: List<WinPolicy>) {
+    private val sortedPolicies = policies.sortedBy { it.matchCount }
 
     fun makeResult(): List<MatchResult> {
-        return policies.map {
+        return sortedPolicies.map {
             MatchResult(
-                matchCount = 0,
-                price = Money(0),
+                matchCount = it.matchCount,
+                price = it.priceAmount,
                 winCount = 0
             )
         }
