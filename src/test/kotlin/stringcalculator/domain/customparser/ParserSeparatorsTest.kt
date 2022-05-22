@@ -7,15 +7,15 @@ class ParserSeparatorsTest : DescribeSpec({
     it("ofStringExpression 팩토리는 ':', ',' 를 기본값으로 갖고 있다") {
         // given
         val parserSeparators = ParserSeparators.ofStringExpression()
-        val defaultSeparatorList = listOf<ParserSeparator>(
-            ParserSeparator(":"),
-            ParserSeparator(",")
-        )
 
         // when
         val separators = parserSeparators.separators
 
         // then
+        val defaultSeparatorList = listOf<ParserSeparator>(
+            ParserSeparator(":"),
+            ParserSeparator(",")
+        )
         separators.size shouldBe defaultSeparatorList.size
         separators[0].string shouldBe defaultSeparatorList[0].string
         separators[1].string shouldBe defaultSeparatorList[1].string
@@ -32,12 +32,12 @@ class ParserSeparatorsTest : DescribeSpec({
     it("getSize 는 구분자 리스트 size 를 가져온다") {
         // given
         val parserSeparators = ParserSeparators.toEmpty()
-        val successSize = 0
 
         // when
         val size = parserSeparators.getSize()
 
         // then
+        val successSize = 0
         size shouldBe successSize
     }
 

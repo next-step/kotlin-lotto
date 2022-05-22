@@ -8,13 +8,13 @@ import io.kotest.matchers.throwable.shouldHaveMessage
 class CustomSeparatorParserTest : DescribeSpec({
     it("커스텀 구분자 문자열에서 구분자 문자(ParserSeparator)를 추출한다") {
         // given
-        val successSeparatorString = ";"
-        val stringCustomSeparator = "//${successSeparatorString}\n"
+        val stringCustomSeparator = "//;\n"
 
         // when
         val customSeparatorParser = CustomSeparatorParser(stringCustomSeparator)
 
         // then
+        val successSeparatorString = ";"
         customSeparatorParser.parserSeparator.string shouldBe successSeparatorString
     }
 

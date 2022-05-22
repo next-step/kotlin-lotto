@@ -8,12 +8,12 @@ class CalculatorTest : DescribeSpec({
     it("숫자를 받고 총합 값을 내보낸다 ") {
         // given
         val numbers = listOf<Int>(1, 2, 3)
-        val successTotalSum = 6
 
         // when
         val totalSum = Calculator.getTotal(numbers)
 
         // then
+        val successTotalSum = 6
         successTotalSum shouldBe totalSum
     }
 })

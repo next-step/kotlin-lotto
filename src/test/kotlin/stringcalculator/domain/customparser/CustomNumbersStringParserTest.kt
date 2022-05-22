@@ -11,7 +11,6 @@ class CustomNumbersStringParserTest : DescribeSpec({
         // given
         val expression = "1,2:3"
         val ofStringExpression = ParserSeparators.ofStringExpression()
-        val successNumbers = listOf(1, 2, 3)
 
         // when
         val stringNumberParser = CustomNumbersStringParser(
@@ -20,6 +19,7 @@ class CustomNumbersStringParserTest : DescribeSpec({
         val parsedNumbers = stringNumberParser.parsedNumbers
 
         // then
+        val successNumbers = listOf(1, 2, 3)
         successNumbers shouldContainAll parsedNumbers
     }
 
