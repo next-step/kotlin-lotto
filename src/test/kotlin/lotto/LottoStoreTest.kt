@@ -16,16 +16,16 @@ internal class LottoStoreTest : FreeSpec({
         result.shouldBeEmpty()
     }
 
-    "금액에 따라 올바른 로또 목록을 받는다" - {
+    "구매 성공" - {
         listOf(
-            1000,
-            5000,
-            14000,
-        ).forEach { money ->
-            "$money 원으로 구매하는 경우" {
+            1000 to 1,
+            14000 to 14,
+            14999 to 14,
+        ).forEach { (money, count) ->
+            "$money 원으로 구매하는 경우 $count 개를 받는다" {
                 val result = store.buy(Money(money))
 
-                result shouldHaveSize money / 1000
+                result shouldHaveSize count
             }
         }
     }
