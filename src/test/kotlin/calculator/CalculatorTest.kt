@@ -2,9 +2,11 @@ package calculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import kotlin.math.exp
 
 class CalculatorTest {
     private lateinit var calculator: Calculator
@@ -42,5 +44,11 @@ class CalculatorTest {
     @ValueSource(strings = ["//*\n1*2*3"])
     fun `커스텀 구분자를 지정하는 경우에도 덧셈 결과가 정상이다`(expression: String?) {
         assertThat(calculator.add(expression)).isEqualTo(6)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "5,-1", "-1;65,22", "//*\n1*-2*3"])
+    fun `음수를 전달할 경우 RuntimeException 예외가 발생해야 한다`(expression: String?) {
+        assertThrows<RuntimeException> { calculator.add(expression) }
     }
 }
