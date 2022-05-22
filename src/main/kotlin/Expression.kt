@@ -1,31 +1,35 @@
 class Expression {
-    var operators = listOf<String>()
-    var digits = listOf<String>()
+
+    private var DELEMITER_REGEX: String
+
+    init {
+        DELEMITER_REGEX = DEFAULT_DELEMITER_REGEX
+    }
 
     fun getTokens(text: String): List<Int>? {
+        val inputString: String? = toCustomSplitter(text)
+
+        return inputString?.let {
+            if (it?.trim().isNullOrEmpty()) return listOf(0)
+            else {
+                if (it.split(DELEMITER_REGEX.toRegex())?.any { it.toInt() < 0 }) throw RuntimeException()
+                it.split(DELEMITER_REGEX.toRegex()).map { it.toInt() }
+            }
+        }
+    }
+
+    private fun toCustomSplitter(text: String): String? {
         val result = Regex(NEWLINE_REGEX).find(text)
-        val inputString = result?.let {
+        return result?.let {
             val customDelimiter = it.groupValues[1]
             DELEMITER_REGEX = customDelimiter
 
             it.groupValues[2]
-        }
-
-        val tokens = inputString?.let {
-            if (it?.trim().isNullOrEmpty()) {
-                return listOf(0)
-            } else {
-                it.split(DELEMITER_REGEX.toRegex()).map { it.toInt() }
-            }
-        }
-
-        require(tokens?.all { it > 0 } ?: false)
-
-        return tokens
+        } ?: text
     }
 
     companion object {
         private val NEWLINE_REGEX = """//(.)\\n(.*)"""
-        private var DELEMITER_REGEX = ",|:"
+        private val DEFAULT_DELEMITER_REGEX = ",|:"
     }
 }
