@@ -1,7 +1,7 @@
 package lotto
 
 class InputWinningLottoNumberDto(
-    val lasWeekWinningNumber: List<Number>
+    val lasWeekWinningNumber: List<Int>
 ) {
 
     companion object {
@@ -14,7 +14,7 @@ class InputWinningLottoNumberDto(
             return InputWinningLottoNumberDto(convertIntWinningNumber)
         }
 
-        fun checkNegative(numberList: List<Int>) {
+        private fun checkNegative(numberList: List<Int>) {
             numberList.forEach {
                 if (it < 0) throw IllegalArgumentException(NEGATIVE_ERROR)
             }

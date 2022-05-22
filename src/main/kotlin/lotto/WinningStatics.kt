@@ -3,10 +3,12 @@ package lotto
 import kotlin.math.floor
 
 class WinningStatics(
-    private val payment: Int,
-    private val winningLottoNumber: List<Int>,
+    paymentDto: InputPaymentRequestDto,
+    lastWeekWinningLottoDto: InputWinningLottoNumberDto,
     private val lottoRecord: List<LottoNumberSet>
 ) {
+    private val payment: Int = paymentDto.payment
+    private val winningLottoNumber: List<Int> = lastWeekWinningLottoDto.lasWeekWinningNumber
 
     fun run(): WinningStaticsResponseDto {
         val containCountList: List<Int> = lottoRecord.map {
