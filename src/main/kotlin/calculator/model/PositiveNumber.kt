@@ -4,18 +4,13 @@ import calculator.Const
 
 @JvmInline
 value class PositiveNumber(
-    private val numberStr: String
+    private val number: Double
 ) {
     init {
-        val number = stringToDouble()
         validateNaturalNumber(number)
     }
 
-    fun toDouble() = numberStr.toDouble()
-
-    private fun stringToDouble() =
-        numberStr.toDoubleOrNull()
-            ?: throw RuntimeException(Const.ErrorMsg.INPUT_IS_NOT_POSITIVE_NUMBER_ERROR_MSG)
+    fun toDouble() = number
 
     private fun validateNaturalNumber(number: Double) {
         if (number < 0) {

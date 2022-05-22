@@ -7,7 +7,11 @@ class InputProcessor {
     fun convertStringToList(text: String?): List<PositiveNumber> {
         val notEmptyText = convertStringToZeroIfNull(text)
         return splitToDelimiter(notEmptyText)
-            .map { PositiveNumber(it.trim()) }
+            .map {
+                val number = it.trim().toDoubleOrNull()
+                    ?: throw RuntimeException(Const.ErrorMsg.INPUT_IS_NOT_POSITIVE_NUMBER_ERROR_MSG)
+                PositiveNumber(number)
+            }
     }
 
     private fun convertStringToZeroIfNull(text: String?) =
