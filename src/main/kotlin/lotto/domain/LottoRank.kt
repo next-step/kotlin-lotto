@@ -20,8 +20,7 @@ enum class LottoRank(
                 "당첨 결과는 ${MATCH_COUNT_RANGE.first}~${MATCH_COUNT_RANGE.last} 까지 허용합니다 (입력:$matchCount)"
             }
 
-            return LottoRank.values()
-                .find { it.matchCount == matchCount }
+            return values().find { it.matchCount == matchCount }
                 ?: NOTTING
         }
 
