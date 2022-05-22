@@ -11,6 +11,6 @@ value class Lotto(val numbers: List<Int>) {
     private fun List<Int>.isUnique(): Boolean = toSet().size == size
 
     companion object {
-        private const val NUMBER_COUNT = 6
+        const val NUMBER_COUNT = 6
     }
 }

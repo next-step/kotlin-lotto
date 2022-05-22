@@ -1,8 +1,12 @@
 package lotto
 
-class LottoIssuer : LottoIssuable {
+object LottoIssuer : LottoIssuable {
+    private val NUMBER_RANGE = (1..45)
 
-    override fun issue(): Lotto {
-        return Lotto(listOf(1, 2, 3, 4, 5, 6))
-    }
+    override fun issue(): Lotto =
+        NUMBER_RANGE
+            .shuffled()
+            .subList(0, Lotto.NUMBER_COUNT)
+            .sorted()
+            .let(::Lotto)
 }
