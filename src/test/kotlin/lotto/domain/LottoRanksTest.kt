@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import lotto.vo.Money
 
 class LottoRanksTest : DescribeSpec({
 
@@ -41,7 +42,7 @@ class LottoRanksTest : DescribeSpec({
                     )
                 )
 
-                lottoRanks.profitRate() shouldBe "2.50".toBigDecimal()
+                lottoRanks.profitRate(Money.of(2_000)) shouldBe "2.50".toBigDecimal()
             }
 
             it("구매금액 5_000, 당첨금액 1_550_000") {
@@ -55,7 +56,7 @@ class LottoRanksTest : DescribeSpec({
                     )
                 )
 
-                lottoRanks.profitRate() shouldBe "310.00".toBigDecimal()
+                lottoRanks.profitRate(Money.of(5_000)) shouldBe "310.00".toBigDecimal()
             }
         }
     }

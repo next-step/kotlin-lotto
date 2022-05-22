@@ -21,5 +21,5 @@ fun main() {
     val winningLotto = LottoTicket.of(winningLottoRequest.winningLottoNumbers)
     val lottoRanks = lottoTickets.matching(winningLotto)
 
-    ResultView.print(WinningLottoResponse.of(lottoRanks.count(), lottoRanks.profitRate()))
+    ResultView.print(WinningLottoResponse.of(lottoRanks.count(), lottoRanks.profitRate(lottoTickets.amount())))
 }

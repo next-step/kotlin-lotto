@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import lotto.vo.Money
 
 class LottoTicketsTest : DescribeSpec({
 
@@ -47,6 +48,28 @@ class LottoTicketsTest : DescribeSpec({
                     LottoRank.NOTTING,
                 )
                 lottoTickets.matching(winningLotto) shouldBe LottoRanks(expected)
+            }
+        }
+    }
+
+    describe("amount") {
+        context("로또 티켓을 1개 구매하였을 때") {
+            it("1000 원을 반환한다") {
+                val lottoTickets = LottoTickets(
+                    listOf(`기본 로또 티켓(1~6)`())
+                )
+
+                lottoTickets.amount() shouldBe Money.of(1000)
+            }
+        }
+
+        context("로또 티켓을 3개 구매하였을 때") {
+            it("3000 원을 반환한다") {
+                val lottoTickets = LottoTickets(
+                    listOf(`기본 로또 티켓(1~6)`(), `기본 로또 티켓(1~6)`(), `기본 로또 티켓(1~6)`())
+                )
+
+                lottoTickets.amount() shouldBe Money.of(3000)
             }
         }
     }
