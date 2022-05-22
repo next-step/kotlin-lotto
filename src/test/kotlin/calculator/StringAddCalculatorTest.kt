@@ -35,12 +35,7 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = [
-        "1+2+3",
-        "1+A+3",
-        "1,2*3",
-        "1!2!3"
-    ])
+    @ValueSource(strings = ["1+2+3", "1+A+3", "1,2*3", "1!2!3"])
     fun `비 정상적인 수식 입력 시 실패`(input: String) {
         Assertions.assertThatThrownBy { StringAddCalculator.calculate(input) }
             .isInstanceOf(NotNumericException::class.java)

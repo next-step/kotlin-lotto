@@ -45,5 +45,4 @@ object StringAddCalculator {
             throw NegativeNumericException("음수가 입력되었습니다.")
         }
     }
-
 }
