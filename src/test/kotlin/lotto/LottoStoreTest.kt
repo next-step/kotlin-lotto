@@ -3,10 +3,10 @@ package lotto
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 
 internal class LottoStoreTest : FreeSpec({
-    val issuer = LottoIssuable { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
-    val store = LottoStore(issuer)
+    val store = LottoStore { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
 
     "0원으로 구매를 시도하면 로또를 얻지 못한다" {
         val money = Money(0)
@@ -28,5 +28,14 @@ internal class LottoStoreTest : FreeSpec({
                 result shouldHaveSize count
             }
         }
+    }
+
+    "제공한 발급자를 통해서 로또를 생성한다" {
+        val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10))
+        val lottoStore = LottoStore { lotto }
+
+        val result = lottoStore.buy(Money(LottoStore.LOTTO_PRICE))
+
+        result.first() shouldBe lotto
     }
 })
