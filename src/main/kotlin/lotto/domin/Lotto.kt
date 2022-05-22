@@ -1,4 +1,6 @@
-package lotto
+package lotto.domin
+
+import lotto.util.LottoNumberGenerator
 
 class Lotto(
     private val payment: Int,

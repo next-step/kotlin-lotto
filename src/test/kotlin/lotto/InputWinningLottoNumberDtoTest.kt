@@ -3,8 +3,9 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import lotto.InputWinningLottoNumberDto.Companion.CANNOT_CONVERT_INT
-import lotto.InputWinningLottoNumberDto.Companion.NEGATIVE_ERROR
+import lotto.dto.InputWinningLottoNumberDto
+import lotto.dto.InputWinningLottoNumberDto.Companion.CANNOT_CONVERT_INT
+import lotto.dto.InputWinningLottoNumberDto.Companion.NEGATIVE_ERROR
 
 class InputWinningLottoNumberDtoTest : FreeSpec({
 

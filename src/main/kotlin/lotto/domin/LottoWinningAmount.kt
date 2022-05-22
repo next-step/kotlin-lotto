@@ -1,4 +1,4 @@
-package lotto
+package lotto.domin
 
 enum class LottoWinningAmount(
     val matchCount: Int,

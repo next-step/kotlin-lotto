@@ -1,4 +1,4 @@
-package lotto
+package lotto.dto
 
 class InputWinningLottoNumberDto(
     val lasWeekWinningNumber: List<Int>

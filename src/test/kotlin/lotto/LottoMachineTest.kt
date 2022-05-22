@@ -3,6 +3,9 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domin.LottoMachine
+import lotto.dto.InputPaymentRequestDto
+import lotto.util.LottoNumberGenerator
 
 class LottoMachineTest : FreeSpec({
 

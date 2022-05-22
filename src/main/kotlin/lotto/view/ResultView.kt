@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domin.LottoNumberSet
+import lotto.dto.WinningStaticsResponseDto
 
 class ResultView() {
 

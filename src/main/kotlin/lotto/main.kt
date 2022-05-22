@@ -1,5 +1,14 @@
 package lotto
 
+import lotto.domin.LottoMachine
+import lotto.domin.WinningStatics
+import lotto.dto.InputPaymentRequestDto
+import lotto.dto.InputWinningLottoNumberDto
+import lotto.util.LottoNumberGenerator
+import lotto.util.LottoNumberRandomGenerator
+import lotto.view.InputView
+import lotto.view.ResultView
+
 fun main() {
     val inputView = InputView()
     val resultView = ResultView()

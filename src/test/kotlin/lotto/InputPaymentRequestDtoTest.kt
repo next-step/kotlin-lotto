@@ -3,7 +3,8 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import lotto.InputPaymentRequestDto.Companion.CANNOT_CONVERT_INT
+import lotto.dto.InputPaymentRequestDto
+import lotto.dto.InputPaymentRequestDto.Companion.CANNOT_CONVERT_INT
 
 class InputPaymentRequestDtoTest : FreeSpec({
 

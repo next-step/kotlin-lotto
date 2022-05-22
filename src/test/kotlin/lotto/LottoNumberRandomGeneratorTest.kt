@@ -2,6 +2,8 @@ package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.util.LottoNumberGenerator
+import lotto.util.LottoNumberRandomGenerator
 
 class LottoNumberRandomGeneratorTest : FreeSpec({
 

@@ -2,6 +2,11 @@ package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domin.LottoNumberSet
+import lotto.domin.LottoWinningAmount
+import lotto.domin.WinningStatics
+import lotto.dto.InputPaymentRequestDto
+import lotto.dto.InputWinningLottoNumberDto
 
 class WinningStaticsTest : FreeSpec({
 

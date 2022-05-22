@@ -1,5 +1,8 @@
-package lotto
+package lotto.domin
 
+import lotto.dto.InputPaymentRequestDto
+import lotto.dto.InputWinningLottoNumberDto
+import lotto.dto.WinningStaticsResponseDto
 import kotlin.math.floor
 
 class WinningStatics(

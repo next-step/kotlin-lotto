@@ -1,4 +1,7 @@
-package lotto
+package lotto.domin
+
+import lotto.dto.InputPaymentRequestDto
+import lotto.util.LottoNumberGenerator
 
 class LottoMachine(
     dto: InputPaymentRequestDto,

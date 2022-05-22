@@ -1,4 +1,4 @@
-package lotto
+package lotto.dto
 
 data class InputPaymentRequestDto(
     val payment: Int
