@@ -23,7 +23,7 @@ class WinningStatics(
                 containCountList.count { it == lottoWinningAmount.matchCount }
             }
 
-        val profitRatio: Double = profitRatio1(matchWinningLotto)
+        val profitRatio: Double = profitRatio(matchWinningLotto)
 
         return WinningStaticsResponseDto(matchWinningLotto, profitRatio)
     }
@@ -33,14 +33,7 @@ class WinningStatics(
             if (winningLottoNumber.contains(it)) 1.toInt() else 0
         }
 
-    private fun profitRatio(matchWinningLotto: Map<LottoWinningAmount, Int>): Double = matchWinningLotto
-        .map { (lottoWinningAmount, count) ->
-            lottoWinningAmount.winningAmount * count
-        }
-        .sum()
-        .toDouble() / payment
-
-    private fun profitRatio1(matchWinningLotto: Map<LottoWinningAmount, Int>): Double {
+    private fun profitRatio(matchWinningLotto: Map<LottoWinningAmount, Int>): Double {
         val result: Double = matchWinningLotto
             .map { (lottoWinningAmount, count) ->
                 lottoWinningAmount.winningAmount * count
