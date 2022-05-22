@@ -38,7 +38,7 @@ internal class WinPolicyTest : FreeSpec({
         val matched = Lotto(listOf(1, 2, 3, 4, 5, 6))
         winPolicy.isMatch(winNumbers, matched) shouldBe true
 
-        val notMatched = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        val notMatched = Lotto(listOf(1, 2, 3, 4, 5, 9))
         winPolicy.isMatch(winNumbers, notMatched) shouldBe false
     }
 })
