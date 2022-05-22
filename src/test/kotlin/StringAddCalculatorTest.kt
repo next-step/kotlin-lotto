@@ -13,7 +13,7 @@ class StringAddCalculatorTest {
 
     @BeforeEach
     fun setUp() {
-        calculator = StringAddCalculator;
+        calculator = StringAddCalculator
     }
 
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
@@ -55,6 +55,6 @@ class StringAddCalculatorTest {
     @Test
     fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy {calculator.add("-1")}
+            .isThrownBy { calculator.add("-1") }
     }
 }

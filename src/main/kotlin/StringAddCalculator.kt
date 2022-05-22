@@ -10,7 +10,7 @@ object StringAddCalculator {
         return numbers.sum()
     }
 
-    private fun getNumbersFrom(text: String): List<Int>  =
+    private fun getNumbersFrom(text: String): List<Int> =
         (getTokenWithCustomDelimiter(text) ?: getToken(text)).map { it.toInt() }
 
     private fun getTokenWithCustomDelimiter(text: String): List<String>? =
