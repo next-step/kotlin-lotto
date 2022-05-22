@@ -1,7 +1,6 @@
 package lotto
 
 @JvmInline
-
 value class Money(val amount: Int) {
 
     init {
