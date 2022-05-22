@@ -8,16 +8,16 @@ class LottoSeller {
         return money / LOTTO_PURCHASE_PRICE_PER_PIECE
     }
 
-    fun sell(amount: Int): List<LottoTicket> {
+    fun sell(amount: Int, selectedLottoNumber: List<Int>): List<LottoTicket> {
         val purchaseLottoTickets = mutableListOf<LottoTicket>()
         repeat(amount) {
-            purchaseLottoTickets.add(LottoTicket(takeLottoNumbers()))
+            purchaseLottoTickets.add(LottoTicket(selectedLottoNumber))
         }
 
         return purchaseLottoTickets
     }
 
-    private fun takeLottoNumbers(): List<Int> {
+    fun takeLottoNumbers(): List<Int> {
         val grabs = mutableSetOf<Int>()
         while (grabs.size < 6) {
             grabs.add(LOTTO_NUMBER_RANGE.random())

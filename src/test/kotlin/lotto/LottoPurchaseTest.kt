@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.agency.LottoWinningEnum
+import lotto.agency.LottoJudge
 import lotto.exception.MinimumPurchaseMoneyException
 import lotto.exception.NotNumericException
 import lotto.exception.WonLottoNumberCountInconsistencyException
@@ -16,7 +18,7 @@ class LottoPurchaseTest {
         val money = 13500
         val lottoSeller = LottoSeller()
         val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
-        val purchaseLottoTickets = lottoSeller.sell(lottoPurchaseAmount)
+        val purchaseLottoTickets = lottoSeller.sell(lottoPurchaseAmount, lottoSeller.takeLottoNumbers())
 
         assertThat(purchaseLottoTickets.size).isEqualTo(lottoPurchaseAmount)
     }
@@ -57,4 +59,18 @@ class LottoPurchaseTest {
             .isInstanceOf(WonLottoNumberCountInconsistencyException::class.java)
     }
 
+    @Test
+    fun `입력된 지난주 당첨 번호를 토대로 당첨 여부를 계산`() {
+        val money = 1000
+        val lottoSeller = LottoSeller()
+        val wonLottoLastWeek = listOf(1, 2, 3, 4, 5, 6)
+        val selectedLottoNumbers = listOf(5, 7, 11, 1, 21, 2)
+        val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
+        val purchaseLottoTickets = lottoSeller.sell(lottoPurchaseAmount, selectedLottoNumbers)
+
+        val lottoJudge = LottoJudge()
+        val result = lottoJudge.determineWinning(purchaseLottoTickets, wonLottoLastWeek)
+
+        assertThat(result[LottoWinningEnum.FOURTH_PLACE]).isEqualTo(1)
+    }
 }
