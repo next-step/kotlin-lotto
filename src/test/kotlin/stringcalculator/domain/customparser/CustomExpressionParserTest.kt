@@ -11,7 +11,7 @@ class CustomExpressionParserTest : DescribeSpec({
 
         // when
         val customExpressionParser = CustomExpressionParser(expression)
-        val parsedNumber = customExpressionParser.getParsedNumber()
+        val parsedNumber = customExpressionParser.parsedNumber
 
         // then
         parsedNumber shouldContainAll successParsedNumbers
@@ -24,7 +24,7 @@ class CustomExpressionParserTest : DescribeSpec({
 
         // when
         val customExpressionParser = CustomExpressionParser(expression)
-        val parsedNumber = customExpressionParser.getParsedNumber()
+        val parsedNumber = customExpressionParser.parsedNumber
 
         // then
         parsedNumber shouldContainAll successParsedNumbers

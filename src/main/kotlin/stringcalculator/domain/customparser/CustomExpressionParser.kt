@@ -3,10 +3,8 @@ package stringcalculator.domain.customparser
 class CustomExpressionParser(private val expression: String) {
     private val stringNumberParser: CustomNumbersStringParser
     private val separators: ParserSeparators = ParserSeparators.ofStringExpression()
-
-    fun getParsedNumber(): List<Int> {
-        return stringNumberParser.parsedNumbers
-    }
+    val parsedNumber: List<Int>
+        get() = stringNumberParser.parsedNumbers
 
     init {
         initCustomSeparator()
