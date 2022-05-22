@@ -14,10 +14,10 @@ class CustomNumbersStringParser(stringExpression: String, separators: ParserSepa
     private fun splitBySeparators(
         stringExpression: String,
         separators: ParserSeparators
-    ) = stringExpression.split(Regex(separators.getSeparatorsString().toString())).map { it.toInt() }
+    ) = stringExpression.split(Regex(separators.separatorsString.toString())).map { it.toInt() }
 
     private fun validateSeparatorsEmpty(separators: ParserSeparators) {
-        require(separators.getSize() > 0) { ERROR_MESSAGE_SEPARATOR_ZERO }
+        require(separators.size > 0) { ERROR_MESSAGE_SEPARATOR_ZERO }
     }
 
     companion object {
@@ -43,6 +43,6 @@ class CustomNumbersStringParser(stringExpression: String, separators: ParserSepa
         }
 
         private fun getSeparatorStringForRegex(separators: ParserSeparators) =
-            separators.getSeparatorsString().joinToString(separator = ",")
+            separators.separatorsString.joinToString(separator = ",")
     }
 }

@@ -5,17 +5,13 @@ class ParserSeparators private constructor(parserSeparators: MutableList<ParserS
     var separators: MutableList<ParserSeparator> = _separators
         private set
         get() = _separators.toMutableList()
+    val separatorsString: List<String>
+        get() = _separators.map { it.string }
+    val size: Int
+        get() = _separators.size
 
     fun add(separator: ParserSeparator) {
         _separators.add(separator)
-    }
-
-    fun getSize(): Int {
-        return separators.size
-    }
-
-    fun getSeparatorsString(): List<String> {
-        return separators.map { it.string }
     }
 
     companion object {

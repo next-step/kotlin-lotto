@@ -34,7 +34,7 @@ class ParserSeparatorsTest : DescribeSpec({
         val parserSeparators = ParserSeparators.toEmpty()
 
         // when
-        val size = parserSeparators.getSize()
+        val size = parserSeparators.size
 
         // then
         val successSize = 0
