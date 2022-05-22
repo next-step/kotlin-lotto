@@ -27,3 +27,10 @@
 - [x] test클래스와 실제 클래스 명 일치
 - [x] object 사용 고려하기
 - [x] 상수들 선언으로 사용
+
+### 3차 todo list
+- [ ] 테스트 클래스 위치를 실제 클래스와 맞추기
+- [ ] 커스텀 구분자의 sum test
+- [ ] 오타수정
+- [ ] InputParser object클래스
+- [ ] domain 에서 view 패키지 참조 수정
