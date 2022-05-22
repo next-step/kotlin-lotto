@@ -4,9 +4,7 @@ class CustomNumbersStringParser(stringExpression: String, separators: ParserSepa
     val parsedNumbers: List<Int>
 
     init {
-        validateSeparatorsEmpty(separators)
         validateExpressionIncludeOtherStrings(stringExpression, separators)
-
         parsedNumbers = splitBySeparators(stringExpression, separators)
         validateParsedNumberForIncludeNegativeNumber(parsedNumbers)
     }
@@ -16,13 +14,7 @@ class CustomNumbersStringParser(stringExpression: String, separators: ParserSepa
         separators: ParserSeparators
     ) = stringExpression.split(Regex(separators.separatorsString.toString())).map { it.toInt() }
 
-    private fun validateSeparatorsEmpty(separators: ParserSeparators) {
-        require(separators.size > 0) { ERROR_MESSAGE_SEPARATOR_ZERO }
-    }
-
     companion object {
-        private const val ERROR_MESSAGE_SEPARATOR_ZERO = "숫자를 추출하기 위한 구분자가 없습니다"
-
         private fun validateParsedNumberForIncludeNegativeNumber(parsedNumbers: List<Int>) {
             parsedNumbers.forEach { require(it >= 0) { getErrorMessageIncludeNegativeNumber(it) } }
         }

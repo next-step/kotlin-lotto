@@ -3,7 +3,6 @@ package stringcalculator.domain.customparser
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainAll
-import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 
 class CustomNumbersStringParserTest : DescribeSpec({
@@ -24,20 +23,6 @@ class CustomNumbersStringParserTest : DescribeSpec({
     }
 
     describe("validation") {
-        it("ParserSeparators`(구분자들) 이 없는 경우 IllegalArgumentException 가 발생한다") {
-            // given
-            val expression = "1:2:3"
-
-            // when
-            val clearedSeparators = ParserSeparators(listOf())
-
-            // then
-            clearedSeparators.separators.size shouldBe 0
-            shouldThrowExactly<java.lang.IllegalArgumentException> {
-                CustomNumbersStringParser(expression, clearedSeparators)
-            }.shouldHaveMessage("숫자를 추출하기 위한 구분자가 없습니다")
-        }
-
         it("숫자, `ParserSeparators`(구분자들) 이외에 문자가 들어가 있는 경우 IllegalArgumentException 가 발생한다.") {
             // given
             val expression = "1Test2Test3"
