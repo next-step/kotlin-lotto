@@ -2,7 +2,6 @@ package lotto.view.input.parser
 
 import lotto.model.data.Lotto
 import lotto.model.data.Policy
-import lotto.model.data.WinningLotto.Companion.toWinningLotto
 
 open class BonusNumberInputParser(
     private val policy: Policy,
@@ -11,7 +10,7 @@ open class BonusNumberInputParser(
 
     override fun parseValue(inputString: String?): Int {
         val bonusNumber = super.parseValue(inputString)
-        this.lotto.toWinningLotto(policy, bonusNumber)
+        policy.validateWinningNumbers(this.lotto.numbers, bonusNumber)
         return bonusNumber
     }
 }

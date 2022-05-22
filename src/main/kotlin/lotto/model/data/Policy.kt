@@ -11,4 +11,9 @@ interface Policy {
         require(numbers.size == countOfNumberToSelect)
         require(numbers.none { it !in rangeOfNumbers })
     }
+
+    fun validateWinningNumbers(numbers: Collection<Int>, bonusNumber: Int) {
+        validateNumbers(numbers)
+        require(bonusNumber in this.rangeOfNumbers)
+    }
 }
