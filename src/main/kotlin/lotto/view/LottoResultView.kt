@@ -19,7 +19,7 @@ object LottoResultView {
 
         LottoWinnerRank.getRankingList()
             .forEach { ranking ->
-                printLottoRankingCountAndPrice(ranking, myResult.result[ranking])
+                printLottoRankingCountAndPrice(ranking, myResult.getCount(ranking))
             }
     }
 
@@ -28,7 +28,6 @@ object LottoResultView {
     }
 
     private fun printLottoRankingCountAndPrice(lottoRank: LottoWinnerRank, count: Int?) {
-        val count = count ?: 0
         println("${lottoRank.matchCount}개 일치 (${lottoRank.price}원) - ${count}개")
     }
 }

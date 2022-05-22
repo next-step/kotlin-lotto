@@ -14,10 +14,7 @@ class MyLottoTickets(
     }
 
     fun getProfit(myLottoResult: MyLottoResult): Double {
-        val totalEarningByLotto = myLottoResult.result
-            .map { it.key.price * it.value }
-            .sum()
-
+        val totalEarningByLotto = myLottoResult.totalEarning
         return (totalEarningByLotto / lottoTickets.size * LOTTO_PRICE).toDouble()
     }
 }
