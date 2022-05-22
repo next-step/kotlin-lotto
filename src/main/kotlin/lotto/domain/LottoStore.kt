@@ -4,7 +4,7 @@ class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = Lo
     val lottoCount = money / EACH_LOTTO_PRICE
     val boughtLottos = mutableListOf<List<Int>>()
     val totalYieldRatio
-        get() = totalMoney.toFloat() / money
+        get() = totalMoney.toDouble() / money
     private var totalMoney = 0
 
     init {

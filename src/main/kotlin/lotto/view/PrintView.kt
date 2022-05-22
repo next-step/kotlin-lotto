@@ -15,7 +15,7 @@ class PrintView {
         }
     }
 
-    fun printYield(yieldRatio: Float) {
+    fun printYield(yieldRatio: Double) {
         print(LOTTO_YIELD_RATIO_FORMAT.format(yieldRatio))
     }
 
