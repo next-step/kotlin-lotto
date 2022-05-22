@@ -29,7 +29,9 @@ class StringAddCalculatorTest {
     @Test
     fun `정상적인 numerics 입력 시 add 연산 성공`() {
         val numerics = listOf("1", "2", "3", "4", "5")
-        assertThat(StringAddCalculator.addCalculate(numerics)).isEqualTo(15)
+        val addCalculateMethod = StringAddCalculator.javaClass.getDeclaredMethod("addCalculate", List::class.java)
+        addCalculateMethod.isAccessible = true
+        assertThat(addCalculateMethod.invoke(StringAddCalculator, numerics)).isEqualTo(15)
     }
 
     @ParameterizedTest
@@ -48,7 +50,9 @@ class StringAddCalculatorTest {
     @EmptySource
     @ValueSource(strings = ["\n", " ", "   ", "\t"])
     fun `공백 입력시 0으로 변환`(input: String) {
-        assertThat(StringAddCalculator.getNumeric(input)).isEqualTo(0)
+        val getNumericMethod = StringAddCalculator.javaClass.getDeclaredMethod("getNumeric", String::class.java)
+        getNumericMethod.isAccessible = true
+        assertThat(getNumericMethod.invoke(StringAddCalculator, input)).isEqualTo(0)
     }
 
     @ParameterizedTest

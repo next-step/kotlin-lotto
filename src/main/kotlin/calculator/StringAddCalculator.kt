@@ -17,13 +17,13 @@ object StringAddCalculator {
         return addCalculate(tokens)
     }
 
-    fun addCalculate(tokens: List<String>): Int {
+    private fun addCalculate(tokens: List<String>): Int {
         return tokens
             .map { getNumeric(it) }
             .sumOf { it }
     }
 
-    fun getNumeric(token: String?): Int {
+    private fun getNumeric(token: String?): Int {
         return if (token.isNullOrBlank()) {
             0
         } else {
