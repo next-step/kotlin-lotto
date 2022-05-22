@@ -15,10 +15,10 @@ object InputConverter {
     }
 
     private fun MatchResult?.toExpressionInput(input: String): ExpressionInput {
-        return this?.let { matchResult ->
+        return this?.destructured?.let { (delimiter, expression) ->
             ExpressionInput(
-                expression = Expression(matchResult.groupValues[2]),
-                delimiter = Delimiter(matchResult.groupValues[1])
+                expression = Expression(expression),
+                delimiter = Delimiter(delimiter)
             )
         } ?: ExpressionInput.from(Expression(input))
     }
