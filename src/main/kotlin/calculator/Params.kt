@@ -1,4 +1,4 @@
-package calculator.domain
+package calculator
 
 class Params(text: String?) {
     val intList: List<Int>
