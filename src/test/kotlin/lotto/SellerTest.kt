@@ -9,16 +9,16 @@ class SellerTest : DescribeSpec({
             val purchaseAmount = 14000
             val lottoPrice = 1000
             val lottoCount = purchaseAmount / lottoPrice
-            val lottoNumbers = listOf(1,2,3,4,5,6)
+            val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
             val seller = Seller(StubRandomNumberGenerator(lottoNumbers))
 
             seller.issueFor(14000)
 
-            seller.lottos shouldBe  (1..lottoCount).map { lottoNumbers }
+            seller.lottos shouldBe (1..lottoCount).map { lottoNumbers }
         }
     }
 })
 
-class StubRandomNumberGenerator(private val numbers: List<Int>): RandomNumberGenerator {
+class StubRandomNumberGenerator(private val numbers: List<Int>) : RandomNumberGenerator {
     override fun generate() = numbers
 }

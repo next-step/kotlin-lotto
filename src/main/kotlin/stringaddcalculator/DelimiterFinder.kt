@@ -1,4 +1,5 @@
 package stringaddcalculator
+
 // 이전 코드
 object DelimiterFinder {
     fun find(formula: String): List<String> {
