@@ -33,6 +33,6 @@ class MyLottoTicketsTest {
 
         val myProfilt = myLottoTickets.getProfit(MyLottoResult(mapOf(LottoWinnerRank.FOURTH_PRICE to 1)))
 
-        assertThat(myProfilt).isEqualTo((5000 / 3 * 1000).toDouble())
+        assertThat(myProfilt).isEqualTo(((5000).toDouble() / (3 * 1000).toDouble()))
     }
 }
