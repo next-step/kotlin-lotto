@@ -24,5 +24,11 @@ internal class LottoTest : FreeSpec({
                 }
             }
         }
+
+        "중복된 값이 존재하는 경우" {
+            shouldThrow<IllegalArgumentException> {
+                Lotto(listOf(1, 2, 3, 4, 6, 6))
+            }
+        }
     }
 })
