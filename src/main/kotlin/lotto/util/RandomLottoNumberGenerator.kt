@@ -1,11 +1,12 @@
 package lotto.util
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 
 object RandomLottoNumberGenerator : LottoNumberGenerator {
-    override fun generate(): List<Int> {
-        return (LottoNumbers.LOTTO_MIN_NUMBER..LottoNumbers.LOTTO_MAX_NUMBER)
+    override fun generate(): LottoNumbers {
+        return LottoNumber.all()
             .shuffled()
-            .take(LottoNumbers.LOTTO_NUMBER_SIZE)
+            .let { LottoNumbers.from(it) }
     }
 }

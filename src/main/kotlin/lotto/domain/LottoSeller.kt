@@ -4,8 +4,9 @@ class LottoSeller {
     private val lottoMachine = LottoMachine()
 
     fun purchaseAuto(inputPrice: Long): List<Lotto> {
-        return List(numberOfPurchases(inputPrice)) {}
-            .map { lottoMachine.generate() }
+        return List(numberOfPurchases(inputPrice)) {
+            lottoMachine.generate()
+        }
     }
 
     private fun numberOfPurchases(inputPrice: Long): Int {
