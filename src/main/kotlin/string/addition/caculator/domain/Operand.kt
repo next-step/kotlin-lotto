@@ -1,21 +1,20 @@
 package string.addition.caculator.domain
 
-data class Operand(private val inputStr: String) {
-    var number: Int
-        private set
+@JvmInline
+value class Operand(val number: Int?) {
 
     init {
-        require(inputStr.toIntOrNull() != null) {
+        number ?: run {
             throw RuntimeException("An operand from the input string should be a Number")
         }
-        number = inputStr.toInt()
-
-        require(number >= 0) {
+        if (number < 0) {
             throw RuntimeException("An operand from the input string should be greater than zero")
         }
     }
 
+    constructor(inputStr: String) : this(inputStr.toIntOrNull())
+
     companion object {
-        val zero = Operand("0")
+        val zero = Operand(0)
     }
 }
