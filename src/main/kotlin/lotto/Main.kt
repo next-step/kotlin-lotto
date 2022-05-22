@@ -8,7 +8,7 @@ import lotto.view.ResultView
 
 fun main() {
     val inputView = InputView()
-    val text = inputView.printEnterMoney()
+    val text = inputView.enterMoney()
 
     val lottoValidate = LottoValidate()
     lottoValidate.validatePurchase(text)
@@ -18,7 +18,7 @@ fun main() {
     val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
     val lottoTickets = lottoSeller.sell(lottoPurchaseAmount)
 
-    val wonLottoLastWeek = inputView.printEnterWonLottoLastWeek()
+    val wonLottoLastWeek = inputView.enterWonLottoLastWeek()
     lottoValidate.validateWonLotto(wonLottoLastWeek)
 
     val lottoJudge = LottoJudge()
