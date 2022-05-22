@@ -12,7 +12,7 @@ class ParserSeparatorsTest : DescribeSpec({
         val separators = parserSeparators.separators
 
         // then
-        val defaultSeparatorList = listOf<ParserSeparator>(
+        val defaultSeparatorList = listOf(
             ParserSeparator(":"),
             ParserSeparator(",")
         )
