@@ -1,6 +1,7 @@
 package stringcalculator.domain.customparser
 
-class ParserSeparator(val string: String) {
+@JvmInline
+value class ParserSeparator(val string: String) {
 
     init {
         validate()
