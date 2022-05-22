@@ -1,6 +1,8 @@
-import util.findPattern
-import util.takeIfNotEmpty
-import util.toIntThrow
+package stringadd
+
+import stringadd.util.findPattern
+import stringadd.util.takeIfNotEmpty
+import stringadd.util.toIntThrow
 
 class StringAddition(private val text: String) {
     fun execute(): Int {

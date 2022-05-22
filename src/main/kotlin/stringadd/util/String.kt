@@ -1,4 +1,4 @@
-package util
+package stringadd.util
 
 fun String.toIntThrow() =
     try {
