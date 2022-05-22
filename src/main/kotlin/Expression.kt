@@ -6,7 +6,7 @@ class Expression {
         DELEMITER_REGEX = DEFAULT_DELEMITER_REGEX
     }
 
-    fun getTokens(text: String): List<Int>? {
+    fun getTokens(text: String): List<Int> {
         val inputString: String? = toCustomSplitter(text)
 
         return inputString?.let {
@@ -15,7 +15,7 @@ class Expression {
                 if (it.split(DELEMITER_REGEX.toRegex())?.any { it.toInt() < 0 }) throw RuntimeException()
                 it.split(DELEMITER_REGEX.toRegex()).map { it.toInt() }
             }
-        }
+        }!!
     }
 
     private fun toCustomSplitter(text: String): String? {
