@@ -1,4 +1,4 @@
-package view
+package domain
 
 object InputValidator {
     fun checkNatualAndZero(input: String) {
