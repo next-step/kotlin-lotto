@@ -1,10 +1,13 @@
 package lotto
 
+import lotto.domain.LottoPrice
 import lotto.view.InputView
 
 fun main() {
     val inputView = InputView()
 
     val price = inputView.readPrice()
-    print(price)
+    val lottoPrice = LottoPrice(price)
+
+    print(lottoPrice)
 }
