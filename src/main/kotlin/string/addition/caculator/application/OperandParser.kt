@@ -3,30 +3,21 @@ package string.addition.caculator.application
 import string.addition.caculator.domain.Operand
 
 object OperandParser {
-    private const val DEFAULT_DELIMITER_PATTERN = "[,:]"
-    private const val CUSTOM_DELIMITER_PATTERN = "//(.)\\\\n(.*)"
+    private val DEFAULT_DELIMITER_PATTERN = Regex("[,:]")
+    private val CUSTOM_DELIMITER_PATTERN = Regex("//(.)\\\\n(.*)")
 
     fun parse(inputStr: String): List<Operand> {
-        val customDelimiterResult = Regex(CUSTOM_DELIMITER_PATTERN).find(inputStr)
-        return if (customDelimiterResult == null) {
-            parseByDelimiter(
-                operandsStr = inputStr,
-                delimiter = DEFAULT_DELIMITER_PATTERN.toRegex()
-            )
-        } else {
-            parseByDelimiter(
-                operandsStr = customDelimiterResult.groupValues[2],
-                delimiter = customDelimiterResult.groupValues[1].toRegex()
-            )
+
+        return when (val customDelimiterResult = CUSTOM_DELIMITER_PATTERN.find(inputStr)) {
+            null -> parseByDelimiter(inputStr, DEFAULT_DELIMITER_PATTERN)
+            else -> parseByDelimiter(customDelimiterResult.groupValues[2], Regex(customDelimiterResult.groupValues[1]))
         }
     }
 
     private fun parseByDelimiter(operandsStr: String, delimiter: Regex): List<Operand> {
-        return if (operandsStr.isEmpty()) {
-            listOf(Operand.zero)
-        } else {
-            operandsStr.split(delimiter)
-                .map { Operand(it) }
+        return when {
+            operandsStr.isEmpty() -> listOf(Operand.zero)
+            else -> operandsStr.split(delimiter).map { Operand(it) }
         }
     }
 }
