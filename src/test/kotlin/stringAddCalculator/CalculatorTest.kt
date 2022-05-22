@@ -9,7 +9,7 @@ class CalculatorTest : FreeSpec({
 
     "calculate" - {
 
-        "조건에 맞는 입력값에 따라 덧셈이 되는 동작 확인" {
+        "입력값이 유효한 경우 덧셈이 되는 동작 확인" {
             withData(
                 "1" to 1,
                 "" to 0,
