@@ -13,9 +13,8 @@ class StringTokenizer(
 
     private fun extract(input: String): Pair<String?, String> {
         val matchResult = CUSTOM_REGEX.find(input)
-        return matchResult?.let {
-            it.groupValues[1] to it.groupValues[2]
-        } ?: (null to input)
+            ?: return null to input
+        return matchResult.groupValues[1] to matchResult.groupValues[2]
     }
 
     companion object {
