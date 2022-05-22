@@ -4,8 +4,18 @@ class StringAddCalculator {
 
     fun add(text: String?): Int {
         val value = validateWithConvertZero(text)
-        return getValues(value)
+        val values = getValues(value)
+        validate(values)
+        return values
             .sumOf { it.toInt() }
+    }
+
+    private fun validate(values: List<String>) {
+        values.forEach {
+            if (it.toInt() < 0) {
+                throw RuntimeException()
+            }
+        }
     }
 
     private fun getValues(value: String): List<String> {
