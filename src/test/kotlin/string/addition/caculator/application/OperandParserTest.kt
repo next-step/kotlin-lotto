@@ -11,7 +11,7 @@ class OperandParserTest {
     @ValueSource(strings = ["1,2,3", "1:2:3", "1,2:3"])
     fun `parse string by default delimiter`(inputStr: String) {
         // given
-        val expected = (1..3).toList().map { Operand(it.toString()) }
+        val expected = (1..3).map { Operand(it.toString()) }
 
         // when
         val result = OperandParser.parse(inputStr)
@@ -37,7 +37,7 @@ class OperandParserTest {
     @ValueSource(strings = ["//;\\n1;2;3", "//!\\n1!2!3", "//f\\n1f2f3"])
     fun `get custom delimiter btw double slash and newline character`(inputStr: String) {
         // given
-        val expected = (1..3).toList().map { Operand(it.toString()) }
+        val expected = (1..3).map { Operand(it.toString()) }
 
         // when
         val result = OperandParser.parse(inputStr)
