@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
 internal class MatcherTest : FreeSpec({
@@ -29,5 +30,19 @@ internal class MatcherTest : FreeSpec({
         val results = matcher.makeResult()
 
         results shouldHaveSize policies.size
+    }
+
+    "당첨 결과는 숫자 일치개수의 오름차순으로 정렬한다" {
+        val winNumbers = WinNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val policies = listOf(
+            WinPolicy(4, Money(200)),
+            WinPolicy(2, Money(100)),
+            WinPolicy(5, Money(200)),
+        )
+        val matcher = Matcher(winNumbers, policies)
+
+        val results = matcher.makeResult()
+
+        results.map { it.matchCount } shouldBe listOf(2, 4, 5)
     }
 })
