@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoMakerImpl : LottoMaker {
     override fun makeLottoNumbers(): List<Int> {
