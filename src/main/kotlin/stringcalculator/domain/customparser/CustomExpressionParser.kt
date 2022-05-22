@@ -1,21 +1,22 @@
 package stringcalculator.domain.customparser
 
-class CustomExpressionParser(private val expression: String) {
+class CustomExpressionParser(private val expression: String, defaultSeparators: ParserSeparators) {
     private val stringNumberParser: CustomNumbersStringParser
-    private val separators: ParserSeparators = ParserSeparators.ofStringExpression()
+    private val separators: ParserSeparators
     val parsedNumber: List<Int>
         get() = stringNumberParser.parsedNumbers
 
     init {
-        initCustomSeparator()
-        stringNumberParser = CustomNumbersStringParser(getNumbersExpressionString(), separators)
-    }
+        val paramSeparators: MutableList<ParserSeparator> = mutableListOf()
+        paramSeparators.addAll(defaultSeparators.separators)
 
-    private fun initCustomSeparator() {
         if (hasCustomSeparatorString()) {
             val customSeparatorParser = CustomSeparatorParser(getCustomExpressionString())
-            separators.add(customSeparatorParser.parserSeparator)
+            paramSeparators.add(customSeparatorParser.parserSeparator)
         }
+
+        separators = ParserSeparators(paramSeparators)
+        stringNumberParser = CustomNumbersStringParser(getNumbersExpressionString(), separators)
     }
 
     private fun getNumbersExpressionString(): String {

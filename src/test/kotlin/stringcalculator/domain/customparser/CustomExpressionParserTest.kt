@@ -4,12 +4,14 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainAll
 
 class CustomExpressionParserTest : DescribeSpec({
+    val defaultSeparators = ParserSeparators(listOf(ParserSeparator(","), ParserSeparator(":")))
+
     it("연산식에서 구분자, 숫자 문자열을 분리한다") {
         // given
         val expression = "1,2:3"
 
         // when
-        val customExpressionParser = CustomExpressionParser(expression)
+        val customExpressionParser = CustomExpressionParser(expression, defaultSeparators)
         val parsedNumber = customExpressionParser.parsedNumber
 
         // then
@@ -22,7 +24,7 @@ class CustomExpressionParserTest : DescribeSpec({
         val expression = "//;\n1;2;3"
 
         // when
-        val customExpressionParser = CustomExpressionParser(expression)
+        val customExpressionParser = CustomExpressionParser(expression, defaultSeparators)
         val parsedNumber = customExpressionParser.parsedNumber
 
         // then
