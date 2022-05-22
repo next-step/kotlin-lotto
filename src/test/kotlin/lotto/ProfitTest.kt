@@ -20,13 +20,13 @@ internal class ProfitTest : StringSpec({
     "구입 금액이 당첨 금액합보다 큰 경우 수익률은 1.0 보다 작다" {
         val money = Money(50000)
         val results = listOf(
-            MatchResult(3, Money(5000), 3),
+            MatchResult(3, Money(5000), 4),
             MatchResult(4, Money(10000), 0),
         )
 
         val profit = Profit(money, results)
 
-        profit.value shouldBe 1.0
+        profit.value shouldBe 0.4
     }
 
     "구입 금액이 당첨 금액합보다 적은경우 수익률은 1.0 보다 크다" {
@@ -38,6 +38,6 @@ internal class ProfitTest : StringSpec({
 
         val profit = Profit(money, results)
 
-        profit.value shouldBe 2.0
+        profit.value shouldBe 3.0
     }
 })
