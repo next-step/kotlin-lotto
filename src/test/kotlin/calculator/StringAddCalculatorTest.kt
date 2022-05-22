@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
@@ -34,7 +35,8 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = [""])
+    @EmptySource
+    @ValueSource(strings = ["\n", " ", "   ", "\t"])
     fun `공백 입력시 0으로 변환`(input: String) {
         val stringAddCalculator = StringAddCalculator()
         assertThat(stringAddCalculator.getNumeric(input)).isEqualTo(0)
