@@ -9,7 +9,7 @@ internal class MoneyTest : StringSpec({
     "금액을 받아 Money 인스턴스를 생성한다" {
         val amount = 1000
 
-        val instance = Money.of(amount)
+        val instance = Money(amount)
 
         instance.amount shouldBe amount
     }
@@ -18,7 +18,7 @@ internal class MoneyTest : StringSpec({
         val amount = -1
 
         shouldThrow<IllegalArgumentException> {
-            Money.of(amount)
+            Money(amount)
         }
     }
 })
