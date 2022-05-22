@@ -18,7 +18,7 @@ object InputConverter {
         return this?.let { matchResult ->
             ExpressionInput(
                 expression = Expression(matchResult.groupValues[2]),
-                delimiter = Delimiter(matchResult.groupValues[1].toRegex())
+                delimiter = Delimiter(matchResult.groupValues[1])
             )
         } ?: ExpressionInput.from(Expression(input))
     }
