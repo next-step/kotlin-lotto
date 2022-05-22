@@ -43,19 +43,19 @@ class LottoPurchaseTest {
 
     @Test
     fun `지난주 당첨 번호 - 입력값이 숫자가 아니면 에러처리`() {
-        val wonLottoLastWeek = listOf("1", "2", "3", "4", "5", "six")
+        val wonLotto = listOf("1", "2", "3", "4", "5", "six")
         val lottoValidate = LottoValidate()
 
-        Assertions.assertThatThrownBy { lottoValidate.validateWonLotto(wonLottoLastWeek) }
+        Assertions.assertThatThrownBy { lottoValidate.validateWonLotto(wonLotto) }
             .isInstanceOf(NotNumericException::class.java)
     }
 
     @Test
     fun `지난주 당첨 번호 - 당첨번호는 6자리이고, 6자리가 아니면 에러처리`() {
-        val wonLottoLastWeek = listOf("1", "2", "3", "4", "5")
+        val wonLotto = listOf("1", "2", "3", "4", "5")
         val lottoValidate = LottoValidate()
 
-        Assertions.assertThatThrownBy { lottoValidate.validateWonLotto(wonLottoLastWeek) }
+        Assertions.assertThatThrownBy { lottoValidate.validateWonLotto(wonLotto) }
             .isInstanceOf(WonLottoNumberCountInconsistencyException::class.java)
     }
 }

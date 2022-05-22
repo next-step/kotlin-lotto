@@ -1,7 +1,5 @@
 package lotto.agency
 
-import lotto.LottoTicket
-
 class LottoJudge {
 
     fun determineLottoWinnings(lottoTickets: List<LottoTicket>, wonLottoNumbers: List<Int>): Map<LottoWinningEnum, Int> {

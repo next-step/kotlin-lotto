@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.LottoTicket
+import lotto.agency.LottoTicket
 import lotto.agency.LottoWinningEnum
 
 class ResultView {

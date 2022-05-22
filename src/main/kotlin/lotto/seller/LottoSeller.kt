@@ -1,6 +1,6 @@
 package lotto.seller
 
-import lotto.LottoTicket
+import lotto.agency.LottoTicket
 
 class LottoSeller {
 

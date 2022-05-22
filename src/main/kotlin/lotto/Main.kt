@@ -2,27 +2,30 @@ package lotto
 
 import lotto.agency.LottoJudge
 import lotto.seller.LottoSeller
+import lotto.utils.TextConverter
 import lotto.validation.LottoValidate
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
+    val textConverter = TextConverter()
     val inputView = InputView()
-    val text = inputView.enterMoney()
+    val textMoney = inputView.enterMoney()
 
     val lottoValidate = LottoValidate()
-    lottoValidate.validatePurchase(text)
+    lottoValidate.validatePurchase(textMoney)
 
-    val money = text.toInt()
+    val money = textConverter.toNumeric(textMoney)
     val lottoSeller = LottoSeller()
     val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
     val lottoTickets = lottoSeller.sell(lottoPurchaseAmount)
 
-    val wonLottoLastWeek = inputView.enterWonLottoLastWeek()
-    lottoValidate.validateWonLotto(wonLottoLastWeek)
+    val textWonLotto = inputView.enterWonLotto()
+    lottoValidate.validateWonLotto(textWonLotto)
+    val wonLotto = textConverter.toNumerics(textWonLotto)
 
     val lottoJudge = LottoJudge()
-    val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoLastWeek.map { it.toInt() })
+    val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLotto)
 
     val resultView = ResultView()
     resultView.printPurchaseAmount(lottoPurchaseAmount)
