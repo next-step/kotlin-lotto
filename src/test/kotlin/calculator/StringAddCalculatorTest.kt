@@ -19,6 +19,9 @@ class StringAddCalculatorTest {
             "1,2,3=6",
             "1:2:3=6",
             "1,2:3,4:5:6:7,8:9,10=55",
+            "//;₩n1;2;3=6",
+            "//;₩n1;2;3,4:5=15",
+            "//#₩n1,2:3#4:5:6#7#8,9:10=55"
         ],
         delimiter = '='
     )
@@ -35,7 +38,7 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1+2+3", "1+A+3", "1,2*3", "1!2!3"])
+    @ValueSource(strings = ["1+2+3", "1+A+3", "1,2*3", "1!2!3", "//#₩n1,2:3#4:5+6#7#8,9:10"])
     fun `비 정상적인 수식 입력 시 실패`(input: String) {
         Assertions.assertThatThrownBy { StringAddCalculator.calculate(input) }
             .isInstanceOf(NotNumericException::class.java)

@@ -11,7 +11,7 @@ object StringAddCalculator {
         val tokens = CUSTOM_DELIMITERS.find(text)
             ?.let {
                 val customDelimiter = it.groupValues[1]
-                it.groupValues[2].split(customDelimiter)
+                it.groupValues[2].split(customDelimiter, *DEFAULT_DELIMITERS)
             } ?: text.split(*DEFAULT_DELIMITERS)
 
         return addCalculate(tokens)
