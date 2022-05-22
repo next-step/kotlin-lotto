@@ -7,12 +7,24 @@ import io.kotest.matchers.shouldNotBe
 
 class LottoTicketTest : DescribeSpec({
 
-    describe("constructor") {
+    describe("constructor, of") {
         context("6개의 서로 다른 로또 번호들이 주어졌을 때") {
             it("로또 티켓이 생성된다") {
                 val lottoNumbers = `기본 로또 번호 목록(1~6)`()
 
                 LottoTicket(lottoNumbers) shouldNotBe null
+            }
+
+            it("문자열과 구분자로 구성된 경우 로또 티켓이 생성된다") {
+                val lottoNumbers = "1, 2, 3, 4, 5, 6"
+
+                LottoTicket.of(lottoNumbers) shouldNotBe null
+            }
+
+            it("숫자 목록으로 구성된 경우 로또 티켓이 생성 된다") {
+                val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
+
+                LottoTicket.of(lottoNumbers) shouldNotBe null
             }
         }
 
