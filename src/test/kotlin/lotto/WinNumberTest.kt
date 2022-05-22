@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -9,6 +10,12 @@ internal class WinNumberTest : FreeSpec({
         val winNumbers = WinNumbers(listOf(1, 2, 3, 4, 5, 6))
 
         winNumbers.value shouldBe listOf(1, 2, 3, 4, 5, 6)
+    }
+
+    "숫자 목록에 중복된 값이 존재하면 에러가 발생한다" {
+        shouldThrow<IllegalArgumentException> {
+            WinNumbers(listOf(1, 2, 3, 4, 4, 6))
+        }
     }
 
     "주어진 로또와 일치하는 숫자의 개수를 반환한다" - {
