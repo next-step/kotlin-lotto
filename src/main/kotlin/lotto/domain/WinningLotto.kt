@@ -4,7 +4,7 @@ import lotto.domain.enums.LottoRank
 import lotto.exception.DuplicateLottoNumberException
 
 class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
-    constructor(numbers: List<Int>, bonusNumber: Int) : this(LottoNumbers(numbers), LottoNumber(bonusNumber))
+    constructor(numbers: List<Int>, bonusNumber: Int) : this(LottoNumbers(*numbers.toIntArray()), LottoNumber(bonusNumber))
 
     init {
         if (bonusNumber in lottoNumbers) throw DuplicateLottoNumberException()

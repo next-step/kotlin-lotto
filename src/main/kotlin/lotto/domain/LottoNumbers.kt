@@ -3,9 +3,9 @@ package lotto.domain
 import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberSizeException
 
-class LottoNumbers(numbers: List<Int>) {
+class LottoNumbers(vararg numbers: Int) {
 
-    val numbers: List<LottoNumber> = numbers.map { LottoNumber(it) }
+    val numbers: List<LottoNumber> = numbers.toList().map { LottoNumber(it) }
 
     init {
         if (numbers.size != LOTTO_NUMBER_SIZE) throw InvalidLottoNumberSizeException()
@@ -34,7 +34,7 @@ class LottoNumbers(numbers: List<Int>) {
         const val LOTTO_NUMBER_SIZE = 6
 
         fun from(numbers: List<Int>): LottoNumbers {
-            return LottoNumbers(numbers.take(LOTTO_NUMBER_SIZE))
+            return LottoNumbers(*numbers.take(LOTTO_NUMBER_SIZE).toIntArray())
         }
     }
 }
