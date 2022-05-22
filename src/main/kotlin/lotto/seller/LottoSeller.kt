@@ -29,6 +29,5 @@ class LottoSeller {
     companion object {
         const val LOTTO_PURCHASE_PRICE_PER_PIECE = 1_000
         val LOTTO_NUMBER_RANGE = IntRange(1, 45)
-
     }
 }

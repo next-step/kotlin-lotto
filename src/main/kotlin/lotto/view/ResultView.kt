@@ -22,7 +22,7 @@ class ResultView {
 
     private fun printMatchedCount(winnings: Map<LottoWinningEnum, Int>) {
         winnings.map {
-            println("${it.key?.matchCount}개 일치 (${it.key?.winningMoney}원) : ${it.value}개")
+            println("${it.key.matchCount}개 일치 (${it.key.winningMoney}원) : ${it.value}개")
         }
     }
 

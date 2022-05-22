@@ -1,7 +1,5 @@
 package lotto
 
-import lotto.agency.LottoWinningEnum
-import lotto.agency.LottoJudge
 import lotto.exception.MinimumPurchaseMoneyException
 import lotto.exception.NotNumericException
 import lotto.exception.WonLottoNumberCountInconsistencyException
