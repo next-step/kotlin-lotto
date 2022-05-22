@@ -18,15 +18,15 @@ data class WinningLottoResponse(
             )
         }
     }
-}
 
-data class LottoRankResponse(
-    val matchCount: Int,
-    val amount: BigDecimal
-) {
-    companion object {
-        fun of(lottoRank: LottoRank): LottoRankResponse {
-            return LottoRankResponse(lottoRank.matchCount, lottoRank.winningAmount.amount)
+    data class LottoRankResponse(
+        val matchCount: Int,
+        val amount: BigDecimal
+    ) {
+        companion object {
+            fun of(lottoRank: LottoRank): LottoRankResponse {
+                return LottoRankResponse(lottoRank.matchCount, lottoRank.winningAmount.amount)
+            }
         }
     }
 }

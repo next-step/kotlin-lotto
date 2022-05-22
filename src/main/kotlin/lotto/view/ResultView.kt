@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.dto.LottoRankResponse
 import lotto.dto.LottoTicketResponse
 import lotto.dto.WinningLottoResponse
 import java.math.BigDecimal
@@ -30,7 +29,7 @@ object ResultView {
         }
     }
 
-    private fun printCountByRank(countByRank: Map<LottoRankResponse, Int>) {
+    private fun printCountByRank(countByRank: Map<WinningLottoResponse.LottoRankResponse, Int>) {
         countByRank.forEach { println("${it.key.matchCount}개 일치 (${it.key.amount}원)- ${it.value}개") }
     }
 
