@@ -13,7 +13,11 @@ object ExpressionParser {
         }
     }
 
-    private fun Expression.toStringNumbers(delimiter: Delimiter) = value.split(delimiter.value)
+    private fun Expression.toStringNumbers(delimiter: Delimiter) = if (value.isBlank()) {
+        listOf()
+    } else {
+        value.split(delimiter.value)
+    }
 
     private fun List<String>.toIntNumbers() = map { stringNumber ->
         IntValidator.validate(stringNumber.toIntOrNull())
