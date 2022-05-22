@@ -3,7 +3,7 @@ package stringcalculator.view
 import stringcalculator.dto.InputDto
 import stringcalculator.dto.OutPutDto
 
-class CustomExpressionCalculatorView {
+object CustomExpressionCalculatorView {
     fun getInputViewString(): String {
         return "커스텀 연산식을 입력해주세요. 형식은 //'구분자'\\n'숫자''구분자''숫자'.. 입니다"
     }
