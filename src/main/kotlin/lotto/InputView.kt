@@ -9,7 +9,7 @@ class InputView {
 
     fun winningNumber(): List<String> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumber = readlnOrNull() ?: throw IllegalArgumentException()
-        return winningNumber.split(',')
+        val lastWeekWinningNumber = readlnOrNull() ?: throw IllegalArgumentException()
+        return lastWeekWinningNumber.split(',')
     }
 }
