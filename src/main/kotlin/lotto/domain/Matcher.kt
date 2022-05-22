@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Matcher(private val winNumbers: WinNumbers, policies: List<WinPolicy>) {
     private val sortedPolicies = policies.sortedBy { it.matchCount }

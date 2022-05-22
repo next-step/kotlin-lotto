@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 fun main() {
     val money = Money(14000)

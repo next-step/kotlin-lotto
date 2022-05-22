@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object Issuer : Issuable {
     private val NUMBER_RANGE = (1..45)

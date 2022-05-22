@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class WinPolicy(val matchCount: Int, val priceAmount: Money) {
 

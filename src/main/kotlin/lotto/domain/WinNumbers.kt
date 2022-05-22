@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 @JvmInline
 value class WinNumbers(val value: List<Int>) {
