@@ -21,8 +21,8 @@ class LottoSpecs : DescribeSpec({
         }
 
         context("다른 로또가 주어지면") {
-            val lotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
-            val other = Lotto.of(listOf(1, 2, 3, 4, 44, 45))
+            val lotto = lotto(1, 2, 3, 4, 5, 6)
+            val other = lotto(1, 2, 3, 4, 44, 45)
 
             it("주어진 로또와 일치하는 로또 번호의 개수를 알 수 있다") {
                 lotto.countMatchingNumbers(other) shouldBe 4

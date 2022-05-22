@@ -17,15 +17,15 @@ class LottoBundleSpecs : DescribeSpec({
             }
         }
 
-        context("당첨 로또가 주어지면") {
-            val winning = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+        context("당첨 번호가 주어지면") {
+            val winning = WinningNumbers(lotto(1, 2, 3, 4, 5, 6))
             it("가지고 있는 모든 로또의 당첨 등수를 알 수 있다") {
                 val lottoBundle = LottoBundle(
                     listOf(
-                        Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
-                        Lotto.of(listOf(1, 2, 3, 4, 5, 7)),
-                        Lotto.of(listOf(1, 2, 3, 4, 9, 10)),
-                        Lotto.of(listOf(8, 9, 10, 14, 19, 20)),
+                        lotto(1, 2, 3, 4, 5, 6),
+                        lotto(1, 2, 3, 4, 5, 7),
+                        lotto(1, 2, 3, 4, 9, 10),
+                        lotto(8, 9, 10, 14, 19, 20)
                     )
                 )
                 lottoBundle.matchWinning(winning) shouldContainExactly listOf(FIRST, SECOND, THIRD, BLANK)
