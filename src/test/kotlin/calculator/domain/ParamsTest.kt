@@ -10,15 +10,15 @@ class ParamsTest {
 
     @Test
     fun `getParams 해피패스 테스트`() {
-        Assertions.assertThat(Params("1;2;3").values).isEqualTo(listOf(1, 2, 3))
-        Assertions.assertThat(Params("2,3,4").values).isEqualTo(listOf(2, 3, 4))
+        Assertions.assertThat(Params("1;2;3").intList).isEqualTo(listOf(1, 2, 3))
+        Assertions.assertThat(Params("2,3,4").intList).isEqualTo(listOf(2, 3, 4))
     }
 
     @Test
     fun `getParams 커스텀구분자 테스트`() {
-        Assertions.assertThat(Params("//;\n1;2;3").values).isEqualTo(listOf(1, 2, 3))
-        Assertions.assertThat(Params("//,\n2,3,4").values).isEqualTo(listOf(2, 3, 4))
-        Assertions.assertThat(Params("//&\n1&2&3").values).isEqualTo(listOf(1, 2, 3))
+        Assertions.assertThat(Params("//;\n1;2;3").intList).isEqualTo(listOf(1, 2, 3))
+        Assertions.assertThat(Params("//,\n2,3,4").intList).isEqualTo(listOf(2, 3, 4))
+        Assertions.assertThat(Params("//&\n1&2&3").intList).isEqualTo(listOf(1, 2, 3))
     }
 
     @ParameterizedTest
@@ -31,20 +31,20 @@ class ParamsTest {
 
     @Test
     fun `공백이 입력되면 0으로 처리한다`() {
-        Assertions.assertThat(Params(" ").values).isEqualTo(listOf(0))
-        Assertions.assertThat(Params("1, ,2").values).isEqualTo(listOf(1, 0, 2))
-        Assertions.assertThat(Params(" ,1").values).isEqualTo(listOf(0, 1))
+        Assertions.assertThat(Params(" ").intList).isEqualTo(listOf(0))
+        Assertions.assertThat(Params("1, ,2").intList).isEqualTo(listOf(1, 0, 2))
+        Assertions.assertThat(Params(" ,1").intList).isEqualTo(listOf(0, 1))
     }
 
     @Test
     fun `빈 문자열 입력되면 0으로 처리한다`() {
-        Assertions.assertThat(Params("1,,2").values).isEqualTo(listOf(1, 0, 2))
-        Assertions.assertThat(Params(",1").values).isEqualTo(listOf(0, 1))
-        Assertions.assertThat(Params("1,").values).isEqualTo(listOf(1, 0))
+        Assertions.assertThat(Params("1,,2").intList).isEqualTo(listOf(1, 0, 2))
+        Assertions.assertThat(Params(",1").intList).isEqualTo(listOf(0, 1))
+        Assertions.assertThat(Params("1,").intList).isEqualTo(listOf(1, 0))
     }
 
     @Test
     fun `null이 입력되면 0으로 처리한다`() {
-        Assertions.assertThat(Params(null).values).isEqualTo(listOf(0))
+        Assertions.assertThat(Params(null).intList).isEqualTo(listOf(0))
     }
 }

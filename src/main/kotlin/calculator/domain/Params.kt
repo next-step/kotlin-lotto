@@ -1,15 +1,15 @@
 package calculator.domain
 
 class Params(value: String?) {
-    val values: List<Int>
+    val intList: List<Int>
 
     init {
-        if (value.isNullOrBlank()) {
-            values = listOf(0)
+        if (value.isNullOrBlank() || value.isEmpty()) {
+            intList = listOf(0)
         } else {
             val stringList = split(value)
             stringList.forEach { validate(it) }
-            values = stringList.map { toInt(it) }
+            intList = stringList.map { toInt(it) }
         }
     }
 
