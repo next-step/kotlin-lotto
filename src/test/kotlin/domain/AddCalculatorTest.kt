@@ -1,6 +1,5 @@
 package domain
 
-import domain.AddCalculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -44,6 +43,15 @@ class AddCalculatorTest {
         val answer = addCalculator.sum(input)
         val expect = 0
 
+        assertThat(answer).isEqualTo(expect)
+    }
+
+    @Test
+    fun `커스텀 구분자의 sum 테스트`() {
+        val input = "//;\n1;2;3"
+        val addCalculator = AddCalculator()
+        val answer = addCalculator.sum(input)
+        val expect = 6
         assertThat(answer).isEqualTo(expect)
     }
 }
