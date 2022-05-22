@@ -1,4 +1,4 @@
-package domain
+package calculator.domain
 
 object InputParser {
     private const val CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)"

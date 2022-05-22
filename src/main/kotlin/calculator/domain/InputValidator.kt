@@ -1,4 +1,4 @@
-package domain
+package calculator.domain
 
 object InputValidator {
     fun checkNatualAndZero(input: String) {
