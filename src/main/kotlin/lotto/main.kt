@@ -16,7 +16,7 @@ fun main() {
     printView.printBoughtLottoList(lottoStore.boughtLottos)
 
     val answer = inputView.getLottoAnswer()
-    val winnerInfos = lottoStore.getWinnerInfos(answer)
+    val winnerInfos = lottoStore.getLottoResult(answer)
     printView.printWinnerInfos(winnerInfos)
 
     val yieldRatio = lottoStore.totalYieldRatio

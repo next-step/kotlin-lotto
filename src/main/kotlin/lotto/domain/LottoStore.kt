@@ -13,25 +13,25 @@ class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = Lo
         }
     }
 
-    fun getWinnerInfos(answer: List<Int>): List<LottoResult> {
-        val winnerInfos = listOf(
-            LottoResult(LottoWinInfo.WIN3, 0),
-            LottoResult(LottoWinInfo.WIN4, 0),
-            LottoResult(LottoWinInfo.WIN5, 0),
-            LottoResult(LottoWinInfo.WIN6, 0),
+    fun getLottoResult(answer: List<Int>): List<LottoResult> {
+        val lottoResult = listOf(
+            LottoResult(LottoPrizeInfo.WIN3, 0),
+            LottoResult(LottoPrizeInfo.WIN4, 0),
+            LottoResult(LottoPrizeInfo.WIN5, 0),
+            LottoResult(LottoPrizeInfo.WIN6, 0),
         )
 
         boughtLottos.forEach {
             val matchCount = getMatchCount(it, answer)
 
-            val winnerInfo = LottoWinInfo.getWinnerInfo(matchCount) ?: return@forEach
-            winnerInfos.first { info -> info.prize == winnerInfo }.also { prize ->
+            val prizeInfo = LottoPrizeInfo.getPrizeInfo(matchCount) ?: return@forEach
+            lottoResult.first { info -> info.prize == prizeInfo }.also { prize ->
                 prize.count++
                 totalMoney += prize.prize.money
             }
         }
 
-        return winnerInfos
+        return lottoResult
     }
 
     private fun getMatchCount(list1: List<Int>, list2: List<Int>): Int {
