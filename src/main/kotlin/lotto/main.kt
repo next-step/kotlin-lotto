@@ -22,4 +22,7 @@ fun main() {
 
     println()
     println(result.joinToString("\n"))
+
+    val profits = Profit(money, result)
+    println(profits.value)
 }
