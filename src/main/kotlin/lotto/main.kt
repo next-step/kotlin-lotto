@@ -21,5 +21,4 @@ fun main() {
 
     val yieldRatio = lottoStore.totalYieldRatio
     printView.printYield(yieldRatio)
-
 }
