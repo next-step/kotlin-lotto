@@ -35,7 +35,7 @@ class AdditionTest {
     @Test
     fun `Add every operands 3`() {
         // given
-        val targetNumbers = "//!\n13!25!13"
+        val targetNumbers = "//!\\n13!25!13"
         val expected = 51
         val operands = OperandParser.parse(targetNumbers)
 

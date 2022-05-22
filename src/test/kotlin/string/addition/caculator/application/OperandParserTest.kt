@@ -24,7 +24,7 @@ class OperandParserTest {
     fun `parse empty string by delimiter return empty operand list`() {
         // given
         val emptyString = String()
-        val expected = listOf<Operand>()
+        val expected = listOf(Operand.zero)
 
         // when
         val result = OperandParser.parse(emptyString)
@@ -34,7 +34,7 @@ class OperandParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\\\\n1;2;3", "//!\\\\n1!2!3", "//f\\\\n1f2f3"])
+    @ValueSource(strings = ["//;\\n1;2;3", "//!\\n1!2!3", "//f\\n1f2f3"])
     fun `get custom delimiter btw double slash and newline character`(inputStr: String) {
         // given
         val expected = (1..3).toList().map { Operand(it.toString()) }
