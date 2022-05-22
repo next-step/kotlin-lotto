@@ -1,6 +1,5 @@
 package calculator.domain
 
-import calculator.domain.AddCalculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

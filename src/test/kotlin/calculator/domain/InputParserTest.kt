@@ -2,7 +2,6 @@ package calculator.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import calculator.domain.InputParser
 
 class InputParserTest {
     @Test

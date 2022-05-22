@@ -97,4 +97,3 @@ class LottoStoreTest {
         assertThat(answer).isEqualTo(expect)
     }
 }
-
