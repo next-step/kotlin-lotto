@@ -8,6 +8,7 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
+import lotto.model.data.WinningLotto.Companion.toWinningLotto
 import lotto.view.input.LottosInputView
 import lotto.view.output.ConsoleOutputView
 import org.assertj.core.api.Assertions.assertThat
@@ -69,9 +70,10 @@ internal class RangeLottoBuilderTest {
     fun `1~45 사이 숫자 중 6개 당첨 번호를 만들어 일치 갯수를 계산한다`(lottoNumbers: String, expectedMatchCount: Int) {
 
         val winningNumbers = "1,2,3,4,5,6"
-
+        val bonusBall = "7"
         val lotto = lottoNumbers.toLotto(policy)
         val winningLotto = winningNumbers.toLotto(policy)
+            .toWinningLotto(policy, bonusBall.toInt())
 
         assertThat(winningLotto.countOfMatchNumber(lotto)).isEqualTo(expectedMatchCount)
     }
@@ -90,8 +92,10 @@ internal class RangeLottoBuilderTest {
     fun `일치 갯수에 따른 당청 종류 및 당첨 금액 를 판정한다`(lottoNumbers: String, expectedWonMoney: Int) {
 
         val winningNumbers = "1,2,3,4,5,6"
+        val bonusBall = "7"
         val lotto = lottoNumbers.toLotto(policy)
         val winningLotto = winningNumbers.toLotto(policy)
+            .toWinningLotto(policy, bonusBall.toInt())
 
         val result = LottoEvaluator.evaluate(winningLotto, lotto)
         assertThat(result.winning.winMoney).isEqualTo(expectedWonMoney)
@@ -103,11 +107,13 @@ internal class RangeLottoBuilderTest {
         // given
         val lottoNumbers = "1,2,3,4,5,16" // 3등 1500000
         val winningNumbers = "1,2,3,4,5,6"
+        val bonusBall = "7"
         val countOfLotto = 3
 
         val expectedWonMoney = countOfLotto * Winning.THIRD.winMoney
         val lottos = Lottos(countOfLotto) { lottoNumbers.toLotto(policy) }
         val winningLotto = winningNumbers.toLotto(policy)
+            .toWinningLotto(policy, bonusBall.toInt())
 
         // when
         val results = LottoEvaluator.evaluate(winningLotto, lottos)
@@ -202,6 +208,7 @@ internal class RangeLottoBuilderTest {
             "3개 일치 (5000원) - 1개",
             "4개 일치 (50000원) - 3개",
             "5개 일치 (1500000원) - 4개",
+            "5개 일치, 보너스 볼 일치 (30000000원) - 0개",
             "6개 일치 (2000000000원) - 1개",
             "총 수익률은 200615.50입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)"
         ).joinToString(separator = "\n", postfix = "\n")

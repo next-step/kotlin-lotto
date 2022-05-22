@@ -6,27 +6,34 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Winning
 import lotto.model.data.Winning.LOST_GAME
+import lotto.model.data.WinningLotto
 
 object LottoEvaluator {
 
     private val winnings = Winning.values()
-    fun evaluate(winningLotto: Lotto, lottos: Lottos) = Results(
+
+    fun evaluate(winningLotto: WinningLotto, lottos: Lottos) = Results(
         lottos.map { lotto -> evaluate(winningLotto, lotto) }
     )
 
-    fun evaluate(winningLotto: Lotto, lotto: Lotto) = Result(
+    fun evaluate(winningLotto: WinningLotto, lotto: Lotto) = Result(
         lotto, winningLotto.getBestWinningFor(lotto)
     )
 
-    fun Lotto.countOfMatchNumber(other: Lotto) =
+    fun WinningLotto.countOfMatchNumber(other: Lotto) =
         this.numbers.filter(other.numbers::contains).size
 
-    private fun Lotto.getBestWinningFor(lotto: Lotto): Winning {
-        return winnings.find { it.isWin(this, lotto) } ?: LOST_GAME
+    private fun WinningLotto.getBestWinningFor(lotto: Lotto): Winning {
+        return winnings.filter { it.isWin(this, lotto) }
+            .maxByOrNull { it.winMoney } ?: LOST_GAME
     }
 
-    private fun Winning.isWin(winningLotto: Lotto, lotto: Lotto): Boolean {
-        return if (this.matchCount == 0) false
-        else return winningLotto.countOfMatchNumber(lotto) == this.matchCount
+    private fun Winning.isWin(winningLotto: WinningLotto, lotto: Lotto): Boolean {
+        return when {
+            this.matchCount == 0 -> false
+            winningLotto.countOfMatchNumber(lotto) != this.matchCount -> false
+            this.isMustBonusNumberMatch -> winningLotto.bonusNumber in lotto.numbers
+            else -> true
+        }
     }
 }

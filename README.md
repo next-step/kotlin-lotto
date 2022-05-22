@@ -1,5 +1,19 @@
 # kotlin-lotto
 
+## Requirements for the step 3 (2등)
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 한다.
+
+## Function List 
+- [X] 2등을 위한 enum 값 추가 
+- [X] 2등을 위한 자료구조 ( 보너스 번호를 갖는 ) 클래스 추가
+- [X] 2등 (보너스 번호) 입력을 위한  InputView 수정
+- [X] 2등 출력을 위한 OutputView 수정
+- [X] 2등, 3등 구분을 위한 판정로직 추가 
+
+
+
+
 ## Requirements for the step 2 로또 자동 
 - 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 - 로또 1장의 가격은 1000원이다.
