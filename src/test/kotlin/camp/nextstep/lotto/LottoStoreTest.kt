@@ -21,7 +21,7 @@ internal class LottoStoreTest {
     )
     fun exchangeLottoTicketsTest(money: Int, expectedTicketCount: Int, expectedBalance: Int) {
         val lottoPrice = 1000
-        val lottoStore = LottoStore(lottoTicketPrice = lottoPrice)
+        val lottoStore = LottoStore(lottoTicketPrice = lottoPrice, lottoTicketMachine = LottoTicketMachine())
 
         val (tickets, balance) = lottoStore.exchange(money)
         assertEquals(expectedTicketCount, tickets.size)

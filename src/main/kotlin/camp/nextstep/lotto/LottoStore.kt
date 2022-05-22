@@ -1,6 +1,6 @@
 package camp.nextstep.lotto
 
-class LottoStore(private val lottoTicketPrice: Int) {
+class LottoStore(private val lottoTicketPrice: Int, private val lottoTicketMachine: LottoTicketMachine) {
 
     fun exchange(money: Int): Pair<List<LottoTicket>, Int> {
         val ticketCount = money.div(lottoTicketPrice)
@@ -15,6 +15,6 @@ class LottoStore(private val lottoTicketPrice: Int) {
     }
 
     private fun issueTicket(): LottoTicket {
-        return LottoTicket(listOf(1, 2, 3, 4, 5, 6))
+        return lottoTicketMachine.issueTicket()
     }
 }
