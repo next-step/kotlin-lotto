@@ -8,10 +8,9 @@ data class LottoTicket(val lottoNumbers: List<LottoNumber>) {
         }
     }
 
-    fun matching(other: LottoTicket): Int {
-        return lottoNumbers.count {
-            other.lottoNumbers.contains(it)
-        }
+    fun matching(other: LottoTicket): LottoMatchCount {
+        val matchCount = lottoNumbers.count { other.lottoNumbers.contains(it) }
+        return LottoMatchCount(matchCount)
     }
 
     companion object {

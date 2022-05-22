@@ -20,12 +20,12 @@ data class WinningLottoResponse(
     }
 
     data class LottoRankResponse(
-        val matchCount: Int,
+        val matchCount: List<Int>,
         val amount: BigDecimal
     ) {
         companion object {
             fun of(lottoRank: LottoRank): LottoRankResponse {
-                return LottoRankResponse(lottoRank.matchCount, lottoRank.winningAmount.amount)
+                return LottoRankResponse(lottoRank.matchCounts.map { it.number }, lottoRank.winningAmount.amount)
             }
         }
     }
