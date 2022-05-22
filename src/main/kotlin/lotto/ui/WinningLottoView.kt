@@ -6,13 +6,14 @@ object WinningLottoView {
     fun inputWinningLotto(): WinningLotto {
         val winningNumbers = inputWinningNumbers()
         val bonusNumber = inputBonusNumber()
-        return WinningLotto(winningNumbers, bonusNumber)
+        return WinningLotto(*winningNumbers) { bonusNumber }
     }
 
-    private fun inputWinningNumbers(): List<Int> {
+    private fun inputWinningNumbers(): IntArray {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return readln().split(",")
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException() }
+            .toIntArray()
     }
 
     private fun inputBonusNumber(): Int {
