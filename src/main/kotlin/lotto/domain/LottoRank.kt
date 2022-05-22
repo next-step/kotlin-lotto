@@ -13,9 +13,11 @@ enum class LottoRank(
     NOTTING(2, Money.of(0));
 
     companion object {
+        private val MATCH_COUNT_RANGE = 0..6
+
         fun of(matchCount: Int): LottoRank {
             require(matchCountRange(matchCount)) {
-                "당첨 결과는 0~6 까지 허용합니다 (입력:$matchCount)"
+                "당첨 결과는 ${MATCH_COUNT_RANGE.first}~${MATCH_COUNT_RANGE.last} 까지 허용합니다 (입력:$matchCount)"
             }
 
             return LottoRank.values()
@@ -23,6 +25,6 @@ enum class LottoRank(
                 ?: NOTTING
         }
 
-        private fun matchCountRange(matchCount: Int) = matchCount in 0..6
+        private fun matchCountRange(matchCount: Int) = matchCount in MATCH_COUNT_RANGE
     }
 }
