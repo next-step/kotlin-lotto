@@ -1,8 +1,10 @@
 package calculator
 
 object Parser {
-    private val parseRegex by lazy { Regex("(?://(.*)\n)?(.*)") }
     private const val DEFAULT_DELIMITERS = ",|;"
+
+    // "//(커스텀구분자)\n(수식 문자열)"
+    private val parseRegex by lazy { Regex("(?://(.*)\n)?(.*)") }
 
     fun parse(input: String?): List<String> {
         return if (input.isNullOrEmpty()) listOf()
