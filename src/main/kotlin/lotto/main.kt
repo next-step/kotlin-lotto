@@ -11,6 +11,6 @@ fun main() {
     OutputView.showPurchasedLottoBundle(lottoBuyer.buyAll())
     val numbers = InputView.readWinningNumbers()
     val bonusBall = InputView.readBonusBall()
-    val winningResult = lottoBuyer.confirmWinning(WinningLotto.from(numbers, bonusBall))
+    val winningResult = lottoBuyer.confirm(WinningLotto.from(numbers, bonusBall))
     OutputView.showWinningResult(winningResult)
 }
