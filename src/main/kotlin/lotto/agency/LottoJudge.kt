@@ -2,13 +2,13 @@ package lotto.agency
 
 class LottoJudge {
 
-    fun determineLottoWinnings(lottoTickets: List<LottoTicket>, wonLottoNumbers: List<Int>): Map<LottoWinningEnum, Int> {
-        val lottoWinningEnums = LottoWinningEnum.values()
+    fun determineLottoWinnings(lottoTickets: List<LottoTicket>, wonLottoNumbers: List<Int>): Map<LottoWinning, Int> {
+        val lottoWinningEnums = LottoWinning.values()
             .associateWith { INIT_WINNING_COUNT }
             .toMutableMap()
 
         val determinedLottoWinnings = lottoTickets
-            .mapNotNull { LottoWinningEnum.of(countMatchLottoNumber(it, wonLottoNumbers)) }
+            .mapNotNull { LottoWinning.of(countMatchLottoNumber(it, wonLottoNumbers)) }
             .groupingBy { it }
             .eachCount()
             .toMutableMap()
