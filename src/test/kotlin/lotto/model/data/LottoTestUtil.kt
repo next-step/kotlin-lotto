@@ -22,6 +22,7 @@ fun LottoNumbers.toLotto(policy: Policy): Lotto {
     return this.parseToLotto(policy).forceSucceed()
 }
 
+@VisibleForTesting
 fun CommaSeparatedInt.toLotto(policy: Policy): Lotto {
     return this.toLottoNumbers()
         .toLotto(policy)
