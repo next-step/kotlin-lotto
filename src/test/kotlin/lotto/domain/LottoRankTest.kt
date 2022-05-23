@@ -53,7 +53,7 @@ class LottoRankTest : DescribeSpec({
                 listOf(0, 1, 2).forAll { matchCount ->
                     val ranking = LottoRank.of(LottoMatchCount(matchCount))
                     assertSoftly {
-                        ranking shouldBe LottoRank.NOTTING
+                        ranking shouldBe LottoRank.NOTHING
                         ranking.winningAmount shouldBe Money.ZERO
                     }
                 }

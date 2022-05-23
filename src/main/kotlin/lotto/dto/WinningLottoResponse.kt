@@ -10,7 +10,7 @@ data class WinningLottoResponse(
     companion object {
         fun of(countByRank: Map<LottoRank, Int>, profitRate: BigDecimal): WinningLottoResponse {
             return WinningLottoResponse(
-                countByRank.filterNot { it.key == LottoRank.NOTTING }
+                countByRank.filterNot { it.key == LottoRank.NOTHING }
                     .map { LottoRankResponse.of(it.key) to it.value }
                     .reversed()
                     .toMap(),

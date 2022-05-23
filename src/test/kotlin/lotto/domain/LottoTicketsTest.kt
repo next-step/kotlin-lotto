@@ -44,8 +44,8 @@ class LottoTicketsTest : DescribeSpec({
                     LottoRank.FIRST,
                     LottoRank.THIRD,
                     LottoRank.FOURTH,
-                    LottoRank.NOTTING,
-                    LottoRank.NOTTING,
+                    LottoRank.NOTHING,
+                    LottoRank.NOTHING,
                 )
                 lottoTickets.matching(winningLotto) shouldBe LottoRanks(expected)
             }
