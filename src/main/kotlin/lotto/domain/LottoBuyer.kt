@@ -18,9 +18,9 @@ class LottoBuyer(
         return lottoBundle.copy()
     }
 
-    fun confirmWinning(winningNumbers: WinningNumbers): WinningResult {
+    fun confirmWinning(winningLotto: WinningLotto): WinningResult {
         check(this::lottoBundle.isInitialized) { "보유한 로또 뭉치가 없습니다" }
-        val winnings = lottoBundle.matchWinning(winningNumbers)
+        val winnings = lottoBundle.matchWinning(winningLotto)
         return WinningResult(winnings, money)
     }
 }

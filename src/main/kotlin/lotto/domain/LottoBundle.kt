@@ -13,11 +13,12 @@ data class LottoBundle(
         return bundle.joinToString("\n") { it.toString() }
     }
 
-    fun matchWinning(winningNumbers: WinningNumbers): List<WinningPlace> {
+    fun matchWinning(winningLotto: WinningLotto): List<WinningPlace> {
         val winnings = mutableListOf<WinningPlace>()
         bundle.forEach {
-            val matching = it.countMatchingNumbers(winningNumbers.lotto)
-            winnings.add(WinningPlace.of(matching, true))
+            val matchingNumber = it.countMatchingNumbers(winningLotto.lotto)
+            val matchingBonus = winningLotto.bonusBall in it
+            winnings.add(WinningPlace.of(matchingNumber, matchingBonus))
         }
         return winnings.toList()
     }
