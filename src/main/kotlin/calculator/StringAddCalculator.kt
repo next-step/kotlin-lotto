@@ -2,7 +2,7 @@ package calculator
 
 class StringAddCalculator {
     fun add(params: Params): Int {
-        return params.fold(0) { acc, i -> acc + i }
+        return params.fold { acc, i -> acc + i }.value
     }
 
     companion object {

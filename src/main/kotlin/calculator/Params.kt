@@ -1,32 +1,21 @@
 package calculator
 
 class Params(text: String?) {
-    val intList: List<Int>
+    val paramList: List<Param>
 
     init {
-        intList = if (text.isNullOrBlank()) {
-            listOf(0)
+        paramList = if (text.isNullOrBlank()) {
+            listOf(Param.EMPTY_PARAM)
         } else {
             val tokens = split(text)
-            tokens.forEach { validate(it) }
-            tokens.map { toInt(it) }
+            tokens.map { Param(it) }
         }
     }
 
-    fun fold(initial: Int, operation: (acc: Int, Int) -> Int): Int {
-        return intList.fold(initial, operation)
-    }
-
-    private fun toInt(token: String): Int {
-        if (token.isBlank()) {
-            return 0
-        }
-        return token.toInt()
-    }
-
-    private fun validate(token: String) {
-        if (token.matches(TOKEN_NOT_MATCH_VALIDATOR)) {
-            throw RuntimeException("숫자가 아닌 입력은 들어올 수 없습니다. (음수도 안됩니다!)")
+    fun fold(operation: (Int, Int) -> Int): Param {
+        return paramList.fold(Param.EMPTY_PARAM) {
+                acc: Param, param: Param ->
+            acc.operation(param, operation)
         }
     }
 
