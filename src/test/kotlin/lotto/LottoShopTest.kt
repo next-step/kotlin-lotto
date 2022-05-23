@@ -6,12 +6,12 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
-class LottoPurchaseTest {
+class LottoShopTest {
 
     @ParameterizedTest
     @CsvSource("1000,1", "3500, 3", "5000, 5", "9999, 9")
     fun `구매 금액에 맞는 로또를 생성한다`(money: Int, buyCount: Int) {
-        val buyLotto = LottoPurchase().buyLotto(money)
+        val buyLotto = LottoShop().buyLotto(money)
 
         assertThat(buyLotto.size).isEqualTo(buyCount)
     }
@@ -20,6 +20,6 @@ class LottoPurchaseTest {
     @ValueSource(ints = [999])
     fun `구매 금액이 적으면 로또를 생성하지 못한다`(money: Int) {
 
-        assertThrows<RuntimeException> { LottoPurchase().buyLotto(money) }
+        assertThrows<RuntimeException> { LottoShop().buyLotto(money) }
     }
 }

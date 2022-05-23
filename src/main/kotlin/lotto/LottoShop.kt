@@ -2,7 +2,7 @@ package lotto
 
 import java.lang.RuntimeException
 
-class LottoPurchase {
+class LottoShop {
 
     fun buyLotto(money: Int): List<LottoTicket> {
         moneyValidate(money)
