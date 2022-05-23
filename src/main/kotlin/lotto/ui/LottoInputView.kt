@@ -6,11 +6,11 @@ import lotto.domain.Lotto
 object LottoInputView {
     private const val ONE_LOTTO_PRICE = 1000
 
-    fun getPurchaseAmount(): Int {
+    fun getPurchaseAmount(): Pair<Int, Int> {
         println("구입금액을 입력해 주세요.")
-        val purchaseAmount = readln().toIntOrNull() ?: throw RuntimeException("")
+        val investment = readln().toIntOrNull() ?: throw RuntimeException("")
 
-        return purchaseAmount / ONE_LOTTO_PRICE
+        return Pair(investment, investment / ONE_LOTTO_PRICE)
     }
 
     fun getWinningLotteryNumber(): Lotto {

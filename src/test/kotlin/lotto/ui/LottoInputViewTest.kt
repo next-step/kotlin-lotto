@@ -15,7 +15,7 @@ internal class LottoInputViewTest {
     fun `Return number of lottery tickets that can be purchased`(input: String, expected: Int) {
         // when
         System.setIn(input.byteInputStream())
-        val lotteryTickets = LottoInputView.getPurchaseAmount()
+        val (_, lotteryTickets) = LottoInputView.getPurchaseAmount()
 
         // then
         assertThat(lotteryTickets).isEqualTo(expected)
