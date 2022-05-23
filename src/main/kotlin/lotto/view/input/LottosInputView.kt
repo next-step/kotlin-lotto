@@ -20,10 +20,18 @@ class LottosInputView(
 
     private val lottoBuilder = RangeLottoBuilder(policy)
     override fun getInput(): Lottos {
+
+        val isManualPurchaseAllowed = policy.isManualPurchaseAllowed
+
         val purchaseAmount = this.readPurchaseAmount()
         val totalLottoCount = purchaseAmount / policy.priceOfLotto
 
-        val manualLottoCount = this.manualLottosReader.readCountOfManualLotto(maxCount = totalLottoCount)
+        val manualLottoCount = if (isManualPurchaseAllowed) {
+            this.manualLottosReader.readCountOfManualLotto(maxCount = totalLottoCount)
+        } else {
+            0
+        }
+
         val automaticLottoCount = totalLottoCount - manualLottoCount
 
         val manulLottos = this.manualLottosReader.readManualLottos(manualLottoCount)
@@ -31,7 +39,11 @@ class LottosInputView(
 
         val lottos = manulLottos + autoLottos
 
-        println("수동으로 ${manualLottoCount}장, 자동으로 ${automaticLottoCount}개를 구매했습니다.")
+        if (isManualPurchaseAllowed) {
+            println("수동으로 ${manualLottoCount}장, 자동으로 ${automaticLottoCount}개를 구매했습니다.")
+        } else {
+            println("${totalLottoCount}개를 구매했습니다.")
+        }
         printLottos(lottos)
         return lottos
     }

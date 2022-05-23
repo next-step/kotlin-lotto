@@ -6,6 +6,8 @@ interface Policy {
     val priceOfLotto: Int
     val limitAmountToPurchase: Int
         get() = Int.MAX_VALUE
+    val isManualPurchaseAllowed: Boolean
+        get() = true
 
     fun validateNumbers(numbers: Collection<Int>) {
         require(numbers.size == countOfNumberToSelect)
