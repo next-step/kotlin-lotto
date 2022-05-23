@@ -15,10 +15,10 @@ class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = Ko
 
     fun getLottoResult(answer: List<Int>): List<LottoResult> {
         val lottoResult = listOf(
-            LottoResult(LottoPrizeInfo.WIN3, 0),
-            LottoResult(LottoPrizeInfo.WIN4, 0),
-            LottoResult(LottoPrizeInfo.WIN5, 0),
-            LottoResult(LottoPrizeInfo.WIN6, 0),
+            LottoResult(LottoPrizeInfo.WIN3),
+            LottoResult(LottoPrizeInfo.WIN4),
+            LottoResult(LottoPrizeInfo.WIN5),
+            LottoResult(LottoPrizeInfo.WIN6),
         )
 
         boughtLottos.forEach {
