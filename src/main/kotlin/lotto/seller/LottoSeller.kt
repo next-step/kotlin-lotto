@@ -1,10 +1,12 @@
 package lotto.seller
 
 import lotto.agency.LottoTicket
+import lotto.exception.MinimumPurchaseMoneyException
 
 class LottoSeller {
 
     fun calculateLottoPurchaseAmount(money: Int): Int {
+        validatePurchaseMoney(money)
         return money / LOTTO_PURCHASE_PRICE_PER_PIECE
     }
 
@@ -15,6 +17,12 @@ class LottoSeller {
         }
 
         return purchaseLottoTickets
+    }
+
+    private fun validatePurchaseMoney(money: Int) {
+        if (money < LOTTO_PURCHASE_PRICE_PER_PIECE) {
+            throw MinimumPurchaseMoneyException("최소 ${LOTTO_PURCHASE_PRICE_PER_PIECE}원 이상 지불하셔야 로또 구매가 가능합니다.")
+        }
     }
 
     private fun takeLottoNumbers(): List<Int> {
