@@ -17,9 +17,8 @@ class StatTest {
         val matchCounts = matchCount.split("|")
         val lottos: List<Lotto> = lottoNumbers.map { number -> Lotto { this.generateNumbers(number.trim()) } }
         val stats = Stat(lottos, Checker(lastNumber)).matchResult()
-        stats.forEachIndexed { index, record: Pair<List<Int>, Stat.MatchState> ->
-            val (_, matchState) = record
-            assertThat(matchState.matchCount).isEqualTo(matchCounts[index].trim().toInt())
+        stats.forEachIndexed { index, record: Stat.MatchState ->
+            assertThat(record.matchCount).isEqualTo(matchCounts[index].trim().toInt())
         }
     }
 

@@ -1,10 +1,8 @@
 package lotto
 
 class Stat(private val lottos: List<Lotto>, private val checker: Checker) {
-    fun matchResult(): List<Pair<List<Int>, MatchState>> = lottos
-        .map {
-            it.numbers to MatchState.of(checker.match(it.numbers))
-        }
+    fun matchResult(): List<MatchState> = lottos
+        .map { MatchState.of(checker.match(it.numbers)) }
 
     enum class MatchState(val matchCount: Int, val descriptor: String, val profit: Int) {
         MATCH_0(0, "", 0),
