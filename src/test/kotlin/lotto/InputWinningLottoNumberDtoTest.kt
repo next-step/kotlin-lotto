@@ -9,18 +9,18 @@ import lotto.dto.InputWinningLottoNumberDto.Companion.NEGATIVE_ERROR
 
 class InputWinningLottoNumberDtoTest : FreeSpec({
 
-    "convertInt" - {
+    "convertOperand" - {
 
         "입력 리스트가 정수로 변환되어야한다." {
             val input = listOf("1", "2", "3", "4", "5", "6")
-            InputWinningLottoNumberDto.convertInt(input)
+            InputWinningLottoNumberDto.convertOperand(input)
                 .lasWeekWinningNumber shouldBe listOf(1, 2, 3, 4, 5, 6)
         }
 
         "정수로 변환되지 못한 경우 IllegalArgumentException" {
             val input = listOf("1", "2", "test", "4", "5", "6")
             val exception = shouldThrow<IllegalArgumentException> {
-                InputWinningLottoNumberDto.convertInt(input)
+                InputWinningLottoNumberDto.convertOperand(input)
             }
             exception.message shouldBe CANNOT_CONVERT_INT
         }
@@ -28,7 +28,7 @@ class InputWinningLottoNumberDtoTest : FreeSpec({
         "음수가 들어올 경우 IllegalArgumentException" {
             val input = listOf("1", "2", "-1", "4", "5", "6")
             val exception = shouldThrow<IllegalArgumentException> {
-                InputWinningLottoNumberDto.convertInt(input)
+                InputWinningLottoNumberDto.convertOperand(input)
             }
             exception.message shouldBe NEGATIVE_ERROR
         }

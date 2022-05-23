@@ -13,7 +13,7 @@ class WinningStatics(
     private val payment: Int = paymentDto.payment
     private val winningLottoNumber: List<Int> = lastWeekWinningLottoDto.lasWeekWinningNumber
 
-    fun run(): WinningStaticsResponseDto {
+    fun result(): WinningStaticsResponseDto {
         val containCountList: List<Int> = lottoRecord.map {
             containsCount(it)
         }
