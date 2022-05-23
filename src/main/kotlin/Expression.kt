@@ -7,9 +7,9 @@ class Expression {
     }
 
     fun getTokens(text: String): List<Int> {
-        val inputString: String? = toCustomSplitter(text)
+        val customizedInput: String? = toCustomSplitter(text)
 
-        return inputString?.let {
+        return customizedInput?.let {
             if (it?.trim().isNullOrEmpty()) return listOf(0)
             else {
                 if (it.split(delemiterRegex.toRegex())?.any { it.toInt() < 0 }) throw RuntimeException()
