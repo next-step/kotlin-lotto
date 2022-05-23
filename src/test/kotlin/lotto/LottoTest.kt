@@ -18,4 +18,14 @@ class LottoTest {
         val lottoList = List(count) { Lotto { generate() } }
         assertThat(lottoList.size).isEqualTo(count)
     }
+
+    @Test
+    fun `생성된 로또번호는 중복을 허용하지 않는다`() {
+        val count = 10
+        val lottoList = List(count) { Lotto { generate() } }
+
+        repeat(count) {
+            assertThat(lottoList[it].numbers.distinct().size).isEqualTo(Lotto.LOTTO_NUMBER_COUNT)
+        }
+    }
 }
