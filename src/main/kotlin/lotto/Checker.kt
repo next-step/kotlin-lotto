@@ -10,12 +10,11 @@ class Checker(LastNumberText: String) {
         require(numberList.size == Lotto.LOTTO_NUMBER_COUNT) { "로또번호는 6자리 숫자입니다." }
     }
 
-    private val lastNumbers: Set<Int> = numberList
+    private val lastNumbers: List<Int> = numberList
         .map { it.trim().toIntThrow() }
         .distinct()
         .takeIf { it.size == 6 }
-        ?.toSet()
         ?: throw RuntimeException("로또번호는 중복을 허용하지 않는 6자리 숫자입니다.")
 
-    fun match(lotto: Set<Int>): Int = lotto.filter { it in lastNumbers }.size
+    fun match(lotto: List<Int>): Int = lotto.filter { it in lastNumbers }.size
 }

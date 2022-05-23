@@ -47,7 +47,7 @@ class CheckerTest {
     @ParameterizedTest
     fun `지난당첨번호와 일치하는 개수를 확인한다`(lastNumberText: String, numberText: String, matchCount: Int) {
         val checker = Checker(lastNumberText)
-        val numbers = numberText.split(",").map { it.toInt() }.toSet()
+        val numbers = numberText.split(",").map { it.toInt() }
         assertThat(checker.match(numbers)).isEqualTo(matchCount)
     }
 }
