@@ -1,7 +1,8 @@
 package lotto
 
-import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class MyLottoResultTest {
 
@@ -14,10 +15,13 @@ class MyLottoResultTest {
             )
         )
 
-        assertThat(myLottoResult.getCount(LottoWinnerRank.FIRST_PRICE)).isEqualTo(1)
-        assertThat(myLottoResult.getCount(LottoWinnerRank.SECOND_PRICE)).isEqualTo(2)
-        assertThat(myLottoResult.getCount(LottoWinnerRank.THIRD_PRICE)).isEqualTo(0)
-        assertThat(myLottoResult.getCount(LottoWinnerRank.FOURTH_PRICE)).isEqualTo(0)
-        assertThat(myLottoResult.getCount(LottoWinnerRank.NONE)).isEqualTo(0)
+        assertAll(
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FIRST_PRICE), 1) },
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FIRST_PRICE), 1) },
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.SECOND_PRICE), 2) },
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.THIRD_PRICE), 0) },
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FOURTH_PRICE), 0) },
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.NONE), 0) },
+        )
     }
 }
