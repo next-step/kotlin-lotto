@@ -29,7 +29,6 @@ class Params(text: String?) {
 
     companion object {
         private val DEFAULT_DELIMITER: Regex = "[,:]".toRegex()
-        private val TOKEN_NOT_MATCH_VALIDATOR = ".*[^\\d^\\s]+.*".toRegex()
         private val TOKEN_SPLITTER = "//(.)\n(.*)".toRegex()
     }
 }
