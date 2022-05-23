@@ -1,4 +1,4 @@
-package camp.nextstep.lotto
+package camp.nextstep.lotto.ticket
 
 class LottoStore(private val lottoTicketPrice: Int, private val lottoTicketMachine: LottoTicketMachine) {
 

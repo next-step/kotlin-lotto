@@ -1,5 +1,6 @@
 package camp.nextstep.lotto
 
+import camp.nextstep.lotto.ticket.LottoTicket
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName

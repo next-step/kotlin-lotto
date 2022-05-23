@@ -1,4 +1,4 @@
-package camp.nextstep.lotto
+package camp.nextstep.lotto.ticket
 
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

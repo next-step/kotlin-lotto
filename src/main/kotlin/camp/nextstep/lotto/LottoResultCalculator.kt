@@ -1,5 +1,7 @@
 package camp.nextstep.lotto
 
+import camp.nextstep.lotto.ticket.LottoTicket
+
 object LottoResultCalculator {
 
     fun calculate(tickets: List<LottoTicket>, winnerNumbers: List<Int>): Map<Int, List<LottoTicket>> {
