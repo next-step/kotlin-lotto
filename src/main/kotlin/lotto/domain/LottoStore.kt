@@ -1,10 +1,10 @@
 package lotto.domain
 
-class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()) {
-    val lottoCount = money / EACH_LOTTO_PRICE
+class LottoStore(private val userMoney: UserMoney, private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()) {
+    val lottoCount = userMoney.money / EACH_LOTTO_PRICE
     val boughtLottos = List(lottoCount) { lottoMaker.makeLottoNumbers() }
     val totalYieldRatio
-        get() = totalMoney.toDouble() / money
+        get() = totalMoney.toDouble() / userMoney.money
     private var totalMoney = 0
 
     fun getLottoResult(answer: List<Int>): List<LottoResult> {

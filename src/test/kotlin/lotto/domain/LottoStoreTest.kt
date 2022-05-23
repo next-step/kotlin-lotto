@@ -9,7 +9,7 @@ class LottoStoreTest {
     @ValueSource(ints = [14000, 23000])
     @ParameterizedTest
     fun `로또가 하나당 1000원으로 맞게 계산되는지 테스트`(money: Int) {
-        val lottoStore = LottoStore(money)
+        val lottoStore = LottoStore(UserMoney(money))
 
         val answer = lottoStore.lottoCount
         val expect = money / 1000
@@ -35,7 +35,7 @@ class LottoStoreTest {
             }
         }
 
-        val lottoStore = LottoStore(myMoney, lottoMaker)
+        val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
 
         val lottoResult = lottoStore.getLottoResult(lottoAnswer)
 
@@ -73,7 +73,7 @@ class LottoStoreTest {
             }
         }
 
-        val lottoStore = LottoStore(myMoney, lottoMaker)
+        val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
 
         val lottoResult = lottoStore.getLottoResult(lottoAnswer)
 
