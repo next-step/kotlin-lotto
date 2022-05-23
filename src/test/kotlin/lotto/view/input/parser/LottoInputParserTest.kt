@@ -1,7 +1,7 @@
 package lotto.view.input.parser
 
 import lotto.model.data.Policy645
-import lotto.util.toBlankRemovedIntSet
+import lotto.model.data.toLottoNumberList
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.assertThrows
@@ -45,7 +45,7 @@ internal class LottoInputParserTest {
     )
     fun `정상 로또 번호 입력 체크 `(lottoNumbers: String) {
 
-        val expectedString = lottoNumbers.toBlankRemovedIntSet()
+        val expectedString = lottoNumbers.toLottoNumberList()
             .sorted().joinToString(",")
 
         assertThat(lottoInputParser.parseValue(lottoNumbers).numbers.joinToString(","))

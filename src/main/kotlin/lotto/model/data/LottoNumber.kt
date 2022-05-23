@@ -4,13 +4,6 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
     override fun compareTo(other: LottoNumber) = this.number.compareTo(other.number)
     override fun toString() = this.number.toString()
-
-    companion object {
-
-        fun String.toLottoNumber(): LottoNumber {
-            return LottoNumber(this.toInt())
-        }
-    }
 }
 
 class LottoNumberRange(override val start: LottoNumber, override val endInclusive: LottoNumber) :
