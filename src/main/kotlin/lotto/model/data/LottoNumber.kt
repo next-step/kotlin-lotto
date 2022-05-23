@@ -29,10 +29,9 @@ class LottoNumberIterator(private val start: LottoNumber, private val endInclusi
 
     override fun hasNext() = (this.offset <= endInclusive)
     override fun next(): LottoNumber {
-        var offsetInt = this.offset.number
-
-        val nextValue = LottoNumber(offsetInt++)
-        this.offset = LottoNumber(offsetInt)
+        val offsetInt = this.offset.number
+        val nextValue = LottoNumber(offsetInt)
+        this.offset = LottoNumber(offsetInt + 1)
         return nextValue
     }
 }
