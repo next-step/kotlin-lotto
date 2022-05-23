@@ -8,6 +8,11 @@ import lotto.view.input.parser.IntInputParser
 import lotto.view.input.parser.LottoInputParser
 import lotto.view.input.parser.PurchaseAmountInputParser
 
+data class LottoCount(val total: Int, val manual: Int) {
+    val automatic: Int
+        get() = total - manual
+}
+
 class LottosInputView(
     private val policy: Policy,
     manualLottoProvider: ManualLottosInputView? = null,
@@ -18,34 +23,35 @@ class LottosInputView(
     private val readPurchaseAmount = moneyAmountProvider ?: this::readAmountFromConsole
     private val manualLottosReader = manualLottoProvider ?: this
 
-    private val lottoBuilder = RangeLottoBuilder(policy)
     override fun getInput(): Lottos {
-
-        val isManualPurchaseAllowed = policy.isManualPurchaseAllowed
-
         val purchaseAmount = this.readPurchaseAmount()
-        val totalLottoCount = purchaseAmount / policy.priceOfLotto
-
-        val manualLottoCount = if (isManualPurchaseAllowed) {
-            this.manualLottosReader.readCountOfManualLotto(maxCount = totalLottoCount)
+        val lottoCount = this.readLottoCount(purchaseAmount)
+        val lottos = this.createLottos(lottoCount)
+        if (policy.isManualPurchaseAllowed) {
+            println("수동으로 ${lottoCount.manual}장, 자동으로 ${lottoCount.automatic}개를 구매했습니다.")
         } else {
-            0
-        }
-
-        val automaticLottoCount = totalLottoCount - manualLottoCount
-
-        val manulLottos = this.manualLottosReader.readManualLottos(manualLottoCount)
-        val autoLottos = lottoBuilder.createLottos(automaticLottoCount)
-
-        val lottos = manulLottos + autoLottos
-
-        if (isManualPurchaseAllowed) {
-            println("수동으로 ${manualLottoCount}장, 자동으로 ${automaticLottoCount}개를 구매했습니다.")
-        } else {
-            println("${totalLottoCount}개를 구매했습니다.")
+            println("${lottoCount.total}개를 구매했습니다.")
         }
         printLottos(lottos)
         return lottos
+    }
+
+    private fun readLottoCount(purchaseAmount: Int): LottoCount {
+        val totalLottoCount = purchaseAmount / policy.priceOfLotto
+        val isManualPurchaseAllowed = policy.isManualPurchaseAllowed
+
+        return if (isManualPurchaseAllowed) {
+            val manualLottoCount = this.manualLottosReader.readCountOfManualLotto(maxCount = totalLottoCount)
+            LottoCount(totalLottoCount, manualLottoCount)
+        } else {
+            LottoCount(totalLottoCount, 0)
+        }
+    }
+
+    private fun createLottos(lottoCount: LottoCount): Lottos {
+        val manualLottos = this.manualLottosReader.readManualLottos(lottoCount.manual)
+        val autoLottos = RangeLottoBuilder(policy).createLottos(lottoCount.automatic)
+        return manualLottos + autoLottos
     }
 
     private fun readAmountFromConsole(): Int {
