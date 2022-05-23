@@ -1,14 +1,19 @@
 package lotto
 
+import lotto.application.WinningAnnouncer
 import lotto.ui.LotteryRandomGeneratorView
+import lotto.ui.LotteryStatisticView
 import lotto.ui.LottoInputView
 
 object LotteryApp {
     fun launch() {
-        val numberOfLotteries = LottoInputView.getPurchaseAmount()
-        LotteryRandomGeneratorView.display(numberOfLotteries)
+        val (investment, numberOfLotteries) = LottoInputView.getPurchaseAmount()
+        val generatedLotteries = LotteryRandomGeneratorView.display(numberOfLotteries)
 
-        LottoInputView.getWinningLotteryNumber()
+        val winner = LottoInputView.getWinningLotteryNumber()
+        val winnerMarkedLotteries = WinningAnnouncer.announce(winner, generatedLotteries)
+
+        LotteryStatisticView.display(investment, winnerMarkedLotteries)
     }
 }
 
