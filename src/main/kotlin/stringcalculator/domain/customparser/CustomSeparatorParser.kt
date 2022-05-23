@@ -27,6 +27,7 @@ class CustomSeparatorParser(stringCustomSeparator: String) {
         private const val ERROR_MESSAGE_START_STRING_NOT_CONTAIN = "시작을 구분하는 문자열($START_STRING)이 포함되어 있지 않습니다"
         private const val ERROR_MESSAGE_END_STRING_NOT_CONTAIN = "끝을 구분하는 문자열($END_STRING)이 포함되어 있지 않습니다"
         private const val ERROR_MESSAGE_CUSTOM_SEPARATOR_NOT_MINUS = "커스텀 구분자는 - 가 될수 없습니다"
+        val REGEX_CUSTOM_SEPARATOR_EXPRESSION = Regex("^$START_STRING.+$END_STRING")
 
         fun findEndIndexForSubstring(expression: String): Int {
             val findIndex = expression.indexOf(END_STRING)
@@ -34,6 +35,10 @@ class CustomSeparatorParser(stringCustomSeparator: String) {
                 return findIndex
             }
             return findIndex + END_STRING.length
+        }
+
+        fun hasCustomParserByExpression(expression: String): Boolean {
+            return REGEX_CUSTOM_SEPARATOR_EXPRESSION.containsMatchIn(expression)
         }
 
         private fun validateStringCustomSeparator(stringCustomSeparator: String) {

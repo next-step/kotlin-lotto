@@ -10,9 +10,8 @@ class CustomExpressionParser(private val expression: String, defaultSeparators: 
         val paramSeparators: MutableList<ParserSeparator> = mutableListOf()
         paramSeparators.addAll(defaultSeparators.separators)
 
-        if (hasCustomSeparatorString()) {
-            val customSeparatorParser = CustomSeparatorParser(getCustomExpressionString())
-            paramSeparators.add(customSeparatorParser.parserSeparator)
+        getCustomExpressionString()?.let {
+            paramSeparators.add(CustomSeparatorParser(it).parserSeparator)
         }
 
         separators = ParserSeparators(paramSeparators)
@@ -20,17 +19,11 @@ class CustomExpressionParser(private val expression: String, defaultSeparators: 
     }
 
     private fun getNumbersExpressionString(): String {
-        if (hasCustomSeparatorString()) {
-            return expression.substring(CustomSeparatorParser.findEndIndexForSubstring(expression))
-        }
-        return expression
+        return CustomSeparatorParser.REGEX_CUSTOM_SEPARATOR_EXPRESSION.replace(expression, "")
     }
 
-    private fun getCustomExpressionString(): String {
-        return expression.substring(0, CustomSeparatorParser.findEndIndexForSubstring(expression))
-    }
-
-    private fun hasCustomSeparatorString(): Boolean {
-        return CustomSeparatorParser.findEndIndexForSubstring(expression) >= 0
+    private fun getCustomExpressionString(): String? {
+        val matchResult = CustomSeparatorParser.REGEX_CUSTOM_SEPARATOR_EXPRESSION.find(expression)
+        return matchResult?.groups?.get(0)?.value
     }
 }
