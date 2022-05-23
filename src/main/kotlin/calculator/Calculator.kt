@@ -2,6 +2,7 @@ package calculator
 
 class Calculator {
     private val customDelimiterRegex = Regex("//(.)\n(.*)")
+    private var defaultDelimiters = arrayOf(",", ":")
 
     fun add(expression: String?): Int {
         if (expression.isNullOrEmpty()) return 0
@@ -23,13 +24,11 @@ class Calculator {
     }
 
     private fun getDelimiters(customDelimiter: String?): Array<String> {
-        var delimiters = arrayOf(",", ":")
-
         customDelimiter?.let {
-            delimiters = delimiters.plus(customDelimiter)
+            return defaultDelimiters.plus(customDelimiter)
         }
 
-        return delimiters
+        return defaultDelimiters
     }
 
     private fun checkNegativeNumber(numbers: List<Int>) {
