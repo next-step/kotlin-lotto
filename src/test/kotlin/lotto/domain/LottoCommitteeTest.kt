@@ -1,6 +1,5 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.LottoCommittee
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -46,7 +45,6 @@ class LottoCommitteeTest {
         val statistics = LottoCommittee.calculateStatistics(listOf(winningNumbers), winningNumbers)
         Assertions.assertThat(statistics[6]).isEqualTo(1)
     }
-
 
     @Test
     fun `3개를 맞춘 수익률을 구할 수 있다`() {

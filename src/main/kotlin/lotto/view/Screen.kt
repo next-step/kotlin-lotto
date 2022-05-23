@@ -20,7 +20,7 @@ object Screen {
     }
 
     private fun displayStatistic(matchNumber: Int, matchCount: Int, priceMap: Map<Int, Int>) {
-        println("${matchNumber}개 일치 (${priceMap[matchNumber]}원)- ${matchCount}개", )
+        println("${matchNumber}개 일치 (${priceMap[matchNumber]}원)- ${matchCount}개")
     }
 
     private fun displayReturnRate(returnRate: Double) {
