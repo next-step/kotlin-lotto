@@ -13,7 +13,8 @@ class StubOutput : Output {
         messages.add(message)
     }
 
-    fun getLines(): List<String> = messages
+    val printed: List<String>
+        get() = messages
 }
 
 class StubIO(texts: List<String> = emptyList()) : IO {
@@ -24,5 +25,6 @@ class StubIO(texts: List<String> = emptyList()) : IO {
 
     override fun print(message: String) = output.print(message)
 
-    fun getLines(): List<String> = output.getLines()
+    val printed: List<String>
+        get() = output.printed
 }

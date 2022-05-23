@@ -11,7 +11,7 @@ internal class MoneyViewTest : StringSpec({
 
         moneyView.readMoney()
 
-        io.getLines() shouldBe listOf("구입금액을 입력해 주세요.")
+        io.printed shouldBe listOf("구입금액을 입력해 주세요.")
     }
 
     "금액을 입력받을 수 있다" {
@@ -29,6 +29,6 @@ internal class MoneyViewTest : StringSpec({
 
         moneyView.readMoney()
 
-        io.getLines() shouldBe listOf("구입금액을 입력해 주세요.", "숫자만 입력해 주세요.")
+        io.printed shouldBe listOf("구입금액을 입력해 주세요.", "숫자만 입력해 주세요.")
     }
 })
