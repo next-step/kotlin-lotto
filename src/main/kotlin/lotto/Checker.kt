@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.util.toIntThrow
-import java.util.stream.Collectors.toSet
 
 class Checker(LastNumberText: String) {
 
@@ -18,5 +17,5 @@ class Checker(LastNumberText: String) {
         ?.toSet()
         ?: throw RuntimeException("로또번호는 중복을 허용하지 않는 6자리 숫자입니다.")
 
-    fun match(lotto: List<Int>): Int = lotto.filter { it in lastNumbers }.size
+    fun match(lotto: Set<Int>): Int = lotto.filter { it in lastNumbers }.size
 }
