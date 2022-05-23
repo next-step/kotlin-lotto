@@ -20,4 +20,16 @@ class CheckerTest {
     fun `지난당첨번호는 6개의 숫자이다`(lastNumber: String) {
         assertThrows<RuntimeException> { Checker(lastNumber) }
     }
+
+    @CsvSource(
+        value = [
+            "1,2,2,6,9,13",
+            "1,2,1,6,9,6",
+            "1,2,3,3,3,6",
+        ]
+    )
+    @ParameterizedTest
+    fun `지난당첨번호는 중복 숫자를 허용하지 않는다`(lastNumber: String) {
+        assertThrows<RuntimeException> { Checker(lastNumber) }
+    }
 }
