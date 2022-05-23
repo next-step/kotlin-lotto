@@ -109,4 +109,26 @@ class LottoTicketTest : DescribeSpec({
             }
         }
     }
+
+    describe("contains") {
+        context("로또 번호가 주어졌을 때") {
+            val lottoTicket = LottoTicket(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                )
+            )
+            it("포함되어 있는 경우 true 를 반환한다") {
+                lottoTicket.contains(LottoNumber(5)) shouldBe true
+            }
+
+            it("포함되어 있지 않은 경우 false 를 반환한다") {
+                lottoTicket.contains(LottoNumber(7)) shouldBe false
+            }
+        }
+    }
 })
