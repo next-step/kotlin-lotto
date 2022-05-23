@@ -5,8 +5,8 @@ data class WinningLotto(
     val bonusBall: LottoNumber
 ) {
     companion object {
-        fun from(numbers: Set<Int>, bonusNumber: Int): WinningLotto {
-            return WinningLotto(Lotto.of(numbers), LottoNumber(bonusNumber))
+        fun from(numbers: Set<Int>, bonusBall: Int): WinningLotto {
+            return WinningLotto(Lotto.of(numbers), LottoNumber(bonusBall))
         }
     }
 }

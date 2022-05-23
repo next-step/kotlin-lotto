@@ -10,6 +10,7 @@ fun main() {
     val lottoBuyer = LottoBuyer(amountOfMoney)
     OutputView.showPurchasedLottoBundle(lottoBuyer.buyAll())
     val numbers = InputView.readWinningNumbers()
-    val winningResult = lottoBuyer.confirmWinning(WinningLotto.from(numbers, 7))
+    val bonusBall = InputView.readBonusBall()
+    val winningResult = lottoBuyer.confirmWinning(WinningLotto.from(numbers, bonusBall))
     OutputView.showWinningResult(winningResult)
 }
