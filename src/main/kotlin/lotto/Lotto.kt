@@ -1,19 +1,8 @@
 package lotto
 
-class Lotto(val generate: () -> Int) {
+class Lotto(val generateLists: (Int) -> Set<Int>) {
     val numbers: Set<Int>
-        get() {
-            val list = mutableListOf<Int>()
-            do {
-                addDistinctValue(list)
-            } while (list.size < LOTTO_NUMBER_COUNT)
-            return list.toSet()
-        }
-
-    private fun addDistinctValue(list: MutableList<Int>) {
-        val number = generate()
-        if (number !in list) list.add(number)
-    }
+        get() = generateLists(LOTTO_NUMBER_COUNT)
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
@@ -21,4 +10,15 @@ class Lotto(val generate: () -> Int) {
     }
 }
 
-fun generate(): Int = (1..45).random()
+fun generateNumbers(count: Int): Set<Int> {
+    val list = mutableListOf<Int>()
+    do {
+        addDistinctValue(list)
+    } while (list.size < count)
+    return list.toSet()
+}
+
+fun addDistinctValue(list: MutableList<Int>) {
+    val number = (1..45).random()
+    if (number !in list) list.add(number)
+}
