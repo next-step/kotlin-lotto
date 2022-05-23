@@ -19,7 +19,7 @@ internal class WinPolicyTest : FreeSpec({
         }
     }
 
-    "숫자 일치 0 제공하면 에러가 발생한다" {
+    "숫자 일치 개수에 0 을 제공하면 에러가 발생한다" {
         shouldThrow<IllegalArgumentException> {
             WinPolicy(0, Money(1000))
         }
