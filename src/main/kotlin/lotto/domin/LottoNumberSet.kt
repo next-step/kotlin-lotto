@@ -1,5 +1,5 @@
 package lotto.domin
-
-data class LottoNumberSet(
+@JvmInline
+value class LottoNumberSet(
     val lotto: List<Int>
 )
