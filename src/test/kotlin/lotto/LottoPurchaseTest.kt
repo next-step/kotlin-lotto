@@ -26,5 +26,4 @@ class LottoPurchaseTest {
         Assertions.assertThatThrownBy { lottoSeller.calculateLottoPurchaseAmount(money) }
             .isInstanceOf(MinimumPurchaseMoneyException::class.java)
     }
-
 }
