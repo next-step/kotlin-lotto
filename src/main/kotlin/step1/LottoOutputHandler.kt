@@ -1,3 +1,5 @@
+package step1
+
 object LottoOutputHandler {
 
     fun display(result: Int) {

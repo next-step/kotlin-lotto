@@ -1,3 +1,5 @@
+package step1
+
 object LottoInputHandler {
 
     fun getNumbers(): List<Int> {
