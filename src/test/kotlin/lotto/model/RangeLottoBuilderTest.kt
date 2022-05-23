@@ -2,6 +2,8 @@ package lotto.model
 
 import lotto.model.LottoEvaluator.countOfMatchNumber
 import lotto.model.data.Lotto.Companion.toLotto
+import lotto.model.data.LottoNumber
+import lotto.model.data.LottoNumber.Companion.toLottoNumber
 import lotto.model.data.Lottos
 import lotto.model.data.Policy645
 import lotto.model.data.Result
@@ -75,7 +77,7 @@ internal class RangeLottoBuilderTest {
         val bonusBall = "7"
         val lotto = lottoNumbers.toLotto(policy)
         val winningLotto = winningNumbers.toLotto(policy)
-            .toWinningLotto(policy, bonusBall.toInt())
+            .toWinningLotto(policy, bonusBall.toLottoNumber())
 
         assertThat(winningLotto.countOfMatchNumber(lotto)).isEqualTo(expectedMatchCount)
     }
@@ -97,7 +99,7 @@ internal class RangeLottoBuilderTest {
         val bonusBall = "7"
         val lotto = lottoNumbers.toLotto(policy)
         val winningLotto = winningNumbers.toLotto(policy)
-            .toWinningLotto(policy, bonusBall.toInt())
+            .toWinningLotto(policy, bonusBall.toLottoNumber())
 
         val result = LottoEvaluator.evaluate(winningLotto, lotto)
         assertThat(result.winning.winMoney).isEqualTo(expectedWonMoney)
@@ -115,7 +117,7 @@ internal class RangeLottoBuilderTest {
         val expectedWonMoney = countOfLotto * Winning.THIRD.winMoney
         val lottos = Lottos(countOfLotto) { lottoNumbers.toLotto(policy) }
         val winningLotto = winningNumbers.toLotto(policy)
-            .toWinningLotto(policy, bonusBall.toInt())
+            .toWinningLotto(policy, bonusBall.toLottoNumber())
 
         // when
         val results = LottoEvaluator.evaluate(winningLotto, lottos)
@@ -238,7 +240,7 @@ internal class RangeLottoBuilderTest {
             }
 
             override fun readManualLottos(count: Int): Lottos {
-                return Lottos(count) { (1..6).toList().toLotto(policy) }
+                return Lottos(count) { (1..6).map { LottoNumber(it) }.toLotto(policy) }
             }
         }
 

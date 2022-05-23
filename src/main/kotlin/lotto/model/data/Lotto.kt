@@ -1,17 +1,15 @@
 package lotto.model.data
 
-import lotto.util.toBlankRemovedIntList
-
-data class Lotto private constructor(val numbers: Set<Int>) {
+data class Lotto private constructor(val numbers: Set<LottoNumber>) {
 
     companion object {
-        fun Collection<Int>.toLotto(policy: Policy): Lotto {
+        fun Collection<LottoNumber>.toLotto(policy: Policy): Lotto {
             policy.validateNumbers(this)
             return Lotto(this.sorted().toSet())
         }
 
         fun String.toLotto(policy: Policy): Lotto {
-            val numbers = this.toBlankRemovedIntList()
+            val numbers = this.toBlankRemovedLottoNumbers()
             return numbers.toLotto(policy)
         }
     }
