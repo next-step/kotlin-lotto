@@ -29,18 +29,6 @@ class CustomSeparatorParser(stringCustomSeparator: String) {
         private const val ERROR_MESSAGE_CUSTOM_SEPARATOR_NOT_MINUS = "커스텀 구분자는 - 가 될수 없습니다"
         val REGEX_CUSTOM_SEPARATOR_EXPRESSION = Regex("^$START_STRING.+$END_STRING")
 
-        fun findEndIndexForSubstring(expression: String): Int {
-            val findIndex = expression.indexOf(END_STRING)
-            if (findIndex < 0) {
-                return findIndex
-            }
-            return findIndex + END_STRING.length
-        }
-
-        fun hasCustomParserByExpression(expression: String): Boolean {
-            return REGEX_CUSTOM_SEPARATOR_EXPRESSION.containsMatchIn(expression)
-        }
-
         private fun validateStringCustomSeparator(stringCustomSeparator: String) {
             validateNotContainStartString(stringCustomSeparator, START_STRING)
             validateNotContainEndString(stringCustomSeparator, START_STRING, END_STRING)
