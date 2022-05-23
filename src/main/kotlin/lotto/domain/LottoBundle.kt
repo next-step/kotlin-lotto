@@ -18,13 +18,11 @@ data class LottoBundle(
     fun isNotEmpty() = bundle.isNotEmpty()
 
     fun matchWinning(winningLotto: WinningLotto): List<WinningPlace> {
-        val winnings = mutableListOf<WinningPlace>()
-        bundle.forEach {
+        return bundle.map {
             val matchingNumber = it.countMatchingNumbers(winningLotto.lotto)
             val matchingBonus = winningLotto.bonusBall in it
-            winnings.add(WinningPlace.of(matchingNumber, matchingBonus))
+            WinningPlace.of(matchingNumber, matchingBonus)
         }
-        return winnings.toList()
     }
 
     companion object {
