@@ -1,8 +1,8 @@
 package lotto
 
 import lotto.application.LottoMachine
-import lotto.application.vo.Purchase
 import lotto.application.vo.Amount
+import lotto.application.vo.Purchase
 import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.ResultView

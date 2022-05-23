@@ -1,9 +1,9 @@
 package lotto.ui
 
 import lotto.application.dto.LottoResult
+import lotto.application.vo.Purchase
 import lotto.domain.Lotto
 import lotto.domain.LottoBundle
-import lotto.application.vo.Purchase
 import lotto.domain.WinningResult
 
 object ResultView {
