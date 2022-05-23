@@ -67,3 +67,17 @@
 - [x] 테스트케이스 추가
 - [x] 매직넘버 정리
 - [x] 린트 정리
+
+### 2차 todo list
+- [ ] InputView object 클래스 변경
+- [ ] 테스트 클래스의 위치를 프로덕션과 일치시키기
+- [ ] InputValidator 테스트 추가
+- [ ] VO객체공부, 머니 객체를 VO로 변경해보기
+- [ ] LottoMakerImpl의 네이밍 고민해보기
+- [ ] 중첩 List를 객체로 한번 래핑
+- [ ] boughtLottos 불변리스트로
+- [ ] LottoPrizeInfo의 테스트 추가
+- [ ] LottoResult의 default count를 0으로 설정
+- [ ] LottoResult의 prize 카운트를 내부에서 제어하기
+- [ ] LottoResult의 돈 증가를 하나의 기능으로 제공하기
+- [ ] 통합도메인테스트 외에 각 클래스기능별 테스트도 고려해보기
