@@ -1,6 +1,9 @@
 package lotto.domain
 
-data class Lotto(val numbers: List<Int>) {
+data class Lotto(
+    val numbers: List<Int>,
+    val price: Price = Price.NONE
+) {
 
     init {
         require(numbers.all { isInRange(it) } && numbers.size == LOTTO_NUMBER_COUNT) {
@@ -9,6 +12,8 @@ data class Lotto(val numbers: List<Int>) {
     }
 
     constructor(vararg numbers: Int) : this(numbers.toList())
+
+    fun winnerPrize(): Int = price.winningPrize
 
     private fun isInRange(number: Int): Boolean {
         return LOTTO_NUMBER_RANGE.contains(number)
