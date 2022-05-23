@@ -2,7 +2,8 @@ package calculator
 
 class StringCalculator {
 
-    fun calculate(numbers: List<Int>): Int {
+    fun calculate(inputs: List<String>): Int {
+        val numbers = inputs.map(String::toInt)
         validation(numbers)
         return numbers.sum()
     }
