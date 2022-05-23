@@ -1,16 +1,15 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.RandomNumberGenerator
+import lotto.domain.Lotto.Companion.LOTTO_NUMBER_RANGE
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class RandomNumberGeneratorTest {
 
     private val tries = 10000
-    private val range = 1..45
     private val numbers = 10
     private val extractMap: Map<Int, Int> = (1..tries)
-        .flatMap { RandomNumberGenerator.getRandomNumbers(range, numbers) }
+        .flatMap { RandomNumberGenerator().getRandomNumbers(LOTTO_NUMBER_RANGE, numbers) }
         .groupingBy { it }
         .eachCount()
 
@@ -21,9 +20,9 @@ class RandomNumberGeneratorTest {
 
     @Test
     fun `주어진 범위 내에서만 나오는지 확인한다`() {
-        Assertions.assertThat(extractMap.count()).isSameAs(45)
-        Assertions.assertThat(extractMap.minOf { it.key }).isSameAs(1)
-        Assertions.assertThat(extractMap.maxOf { it.key }).isSameAs(45)
+        Assertions.assertThat(extractMap.count()).isSameAs(LOTTO_NUMBER_RANGE.last)
+        Assertions.assertThat(extractMap.minOf { it.key }).isSameAs(LOTTO_NUMBER_RANGE.first)
+        Assertions.assertThat(extractMap.maxOf { it.key }).isSameAs(LOTTO_NUMBER_RANGE.last)
     }
 
     @Test
