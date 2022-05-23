@@ -9,7 +9,7 @@ internal class StoreTest : FreeSpec({
 
     "0원으로 구매를 시도하면 로또를 얻지 못한다" {
         val money = Money(0)
-        val store = Store { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
+        val store = Store { Lotto.of(listOf(1, 2, 3, 4, 5, 6)) }
 
         val result = store.buy(money)
 
@@ -23,7 +23,7 @@ internal class StoreTest : FreeSpec({
             14999 to 14,
         ).forEach { (money, count) ->
             "$money 원으로 구매하는 경우 $count 개를 받는다" {
-                val store = Store { Lotto(listOf(1, 2, 3, 4, 5, 6)) }
+                val store = Store { Lotto.of(listOf(1, 2, 3, 4, 5, 6)) }
 
                 val result = store.buy(Money(money))
 
@@ -33,7 +33,7 @@ internal class StoreTest : FreeSpec({
     }
 
     "제공한 발급자를 통해서 로또를 생성한다" {
-        val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10))
+        val lotto = Lotto.of(listOf(5, 6, 7, 8, 9, 10))
         val store = Store { lotto }
 
         val result = store.buy(Money(Store.LOTTO_PRICE))

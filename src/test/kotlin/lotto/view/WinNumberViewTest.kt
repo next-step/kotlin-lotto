@@ -30,7 +30,7 @@ internal class WinNumberViewTest : StringSpec({
 
         val winNumbers = view.readWinNumbers()
 
-        winNumbers.value shouldBe listOf(1, 2, 3, 4, 5, 6)
+        winNumbers.value.map { it.value } shouldBe listOf(1, 2, 3, 4, 5, 6)
     }
 
     "유효한 숫자가 아니거나 개수가 맞지 않으면 다시 입력받는다" {
@@ -40,6 +40,6 @@ internal class WinNumberViewTest : StringSpec({
         val winNumbers = view.readWinNumbers()
 
         io.printed[2] shouldBe "유효한 당첨번호를 입력해주세요."
-        winNumbers.value shouldBe listOf(1, 2, 3, 4, 5, 6)
+        winNumbers.value.map { it.value } shouldBe listOf(1, 2, 3, 4, 5, 6)
     }
 })

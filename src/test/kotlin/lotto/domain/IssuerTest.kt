@@ -19,7 +19,7 @@ internal class IssuerTest : StringSpec({
             val lotto = Issuer.issue()
 
             lotto.numbers.forAll {
-                it.shouldBeBetween(1, 45)
+                it.value.shouldBeBetween(1, 45)
             }
         }
     }
@@ -28,7 +28,7 @@ internal class IssuerTest : StringSpec({
         repeat(1000) {
             val lotto = Issuer.issue()
 
-            lotto.numbers shouldBe lotto.numbers.sorted()
+            lotto.numbers.map { it.value } shouldBe lotto.numbers.map { it.value }.sorted()
         }
     }
 })

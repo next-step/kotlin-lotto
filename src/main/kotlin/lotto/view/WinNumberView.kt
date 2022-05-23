@@ -27,6 +27,6 @@ class WinNumberView(private val io: IO) {
             return read()
         }
 
-        return WinNumbers(result)
+        return WinNumbers.of(result)
     }
 }
