@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.agency.LottoTicket
 import lotto.exception.NotNumericException
 import lotto.exception.WonLottoNumberCountInconsistencyException
 
@@ -12,14 +13,15 @@ class InputView {
         return text.toInt()
     }
 
-    fun enterWonLotto(): List<Int> {
+    fun enterWonLottoTicket(): LottoTicket {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
         val text = readln().trim().split(",")
         text.map { validateNotString(it) }
         val wonLottoNumbers = text.map { it.toInt() }
         validateWonLottoNumberCount(wonLottoNumbers)
-        return wonLottoNumbers
+
+        return LottoTicket(wonLottoNumbers)
     }
 
     private fun validateNotString(toCheck: String) {
