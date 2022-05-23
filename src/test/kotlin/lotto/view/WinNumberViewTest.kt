@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 internal class WinNumberViewTest : StringSpec({
 
     "처음과 마지막에 빈 라인을 출력한다" {
-        val io = StubIO()
+        val io = StubIO(listOf("1,2,3,4,5,6"))
         val view = WinNumberView(io)
 
         view.readWinNumbers()
@@ -39,7 +39,7 @@ internal class WinNumberViewTest : StringSpec({
 
         val winNumbers = view.readWinNumbers()
 
-        io.printed[3] shouldBe "유효한 당첨번호를 입력해주세요."
+        io.printed[2] shouldBe "유효한 당첨번호를 입력해주세요."
         winNumbers.value shouldBe listOf(1, 2, 3, 4, 5, 6)
     }
 })
