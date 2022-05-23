@@ -2,8 +2,9 @@ package lotto
 
 class LottoNumberGenerator {
     companion object {
-        fun autoGenerate(): List<Int> {
-            return (1..45).shuffled().slice(0..5)
-        }
+        fun autoGenerate(): LottoNumber = LottoNumber(LOTTO_NUMBER_RANGE.shuffled().slice(LOTTO_NUMBER_COUNT))
+
+        private val LOTTO_NUMBER_RANGE = (1..45)
+        private val LOTTO_NUMBER_COUNT = (0..5)
     }
 }

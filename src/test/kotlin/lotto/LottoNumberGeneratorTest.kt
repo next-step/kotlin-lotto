@@ -7,7 +7,7 @@ class LottoNumberGeneratorTest {
     @Test
     fun `번호 생성하기`() {
         val autoNumber = LottoNumberGenerator.autoGenerate()
-        assertThat(autoNumber.count()).isEqualTo(6)
+        assertThat(autoNumber.numbers.count()).isEqualTo(6)
     }
 }
 
