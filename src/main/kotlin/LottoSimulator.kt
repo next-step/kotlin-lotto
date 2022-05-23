@@ -1,6 +1,6 @@
 
 fun main() {
-    val tokens = LottoInputHandler.display()
+    val tokens = LottoInputHandler.getNumbers()
     val sum = LottoProcessor.apply(tokens)
 
     LottoOutputHandler.display(sum)

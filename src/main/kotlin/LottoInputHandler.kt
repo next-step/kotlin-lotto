@@ -1,6 +1,6 @@
 object LottoInputHandler {
 
-    fun display(): List<Int> {
+    fun getNumbers(): List<Int> {
         displayInputMessage()
 
         val expression = Expression()
