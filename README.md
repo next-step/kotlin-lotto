@@ -69,7 +69,7 @@
 - [x] 린트 정리
 
 ### 2차 todo list
-- [ ] InputView object 클래스 변경
+- [x] 상태없는 클래스 object 클래스 변경
 - [ ] 테스트 클래스의 위치를 프로덕션과 일치시키기
 - [ ] InputValidator 테스트 추가
 - [ ] VO객체공부, 머니 객체를 VO로 변경해보기

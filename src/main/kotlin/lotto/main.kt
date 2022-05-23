@@ -5,20 +5,17 @@ import lotto.view.InputView
 import lotto.view.PrintView
 
 fun main() {
-    val inputView = InputView()
-
-    val userMoneyInput = inputView.getUserMoney()
+    val userMoneyInput = InputView.getUserMoney()
 
     val lottoStore = LottoStore(userMoneyInput)
 
-    val printView = PrintView()
-    printView.printLottoCount(lottoStore.lottoCount)
-    printView.printBoughtLottoList(lottoStore.boughtLottos)
+    PrintView.printLottoCount(lottoStore.lottoCount)
+    PrintView.printBoughtLottoList(lottoStore.boughtLottos)
 
-    val answer = inputView.getLottoAnswer()
+    val answer = InputView.getLottoAnswer()
     val winnerInfos = lottoStore.getLottoResult(answer)
-    printView.printWinnerInfos(winnerInfos)
+    PrintView.printWinnerInfos(winnerInfos)
 
     val yieldRatio = lottoStore.totalYieldRatio
-    printView.printYield(yieldRatio)
+    PrintView.printYield(yieldRatio)
 }

@@ -2,7 +2,11 @@ package lotto.view
 
 import lotto.domain.InputValidator
 
-class InputView {
+object InputView {
+    private const val LOTTO_LIST_DELIMITER = ","
+    private const val LOTTO_ANSWER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요"
+    private const val MONEY_INPUT_MESSAGE = "구매금액을 입력해 주세요."
+
     fun getUserMoney(): Int {
         var moneyInput: String
         do {
@@ -44,11 +48,5 @@ class InputView {
             println(e.message)
             false
         }
-    }
-
-    companion object {
-        private const val LOTTO_LIST_DELIMITER = ","
-        private const val LOTTO_ANSWER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요"
-        private const val MONEY_INPUT_MESSAGE = "구매금액을 입력해 주세요."
     }
 }
