@@ -2,9 +2,12 @@ package calculator
 
 class Parser {
 
-    fun parse(input: String): List<String> {
-        val (delimiters, expression) = parseDelimiterAndExpression(input)
-        return expression.split(delimiters.toRegex())
+    fun parse(input: String?): List<String> {
+        return if (input.isNullOrEmpty()) listOf()
+        else {
+            val (delimiters, expression) = parseDelimiterAndExpression(input)
+            expression.split(delimiters.toRegex())
+        }
     }
 
     private fun parseDelimiterAndExpression(input: String): Pair<String, String> {

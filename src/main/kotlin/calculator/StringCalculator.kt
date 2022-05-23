@@ -1,9 +1,11 @@
 package calculator
 
 class StringCalculator {
+    private val parser = Parser()
 
-    fun calculate(inputs: List<String>): Int {
-        val numbers = inputs.map(String::toInt)
+    fun calculate(inputs: String?): Int {
+        val strings = parser.parse(inputs)
+        val numbers = strings.map(String::toInt)
         validation(numbers)
         return numbers.sum()
     }
