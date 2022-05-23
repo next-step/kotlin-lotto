@@ -1,6 +1,8 @@
 package string
 
-class Calculator() {
+object Calculator {
+    private const val DELIMITER_REGEX = ",|:"
+
     fun sum(input: String?): Int {
         if (input.isNullOrBlank()) {
             return 0
@@ -10,13 +12,7 @@ class Calculator() {
     }
 
     private fun add(inputs: List<String>): Int {
-        var result = 0
-
-        for (input in inputs) {
-            result += input.toInt()
-        }
-
-        return result
+        return inputs.sumOf { it.toInt() }
     }
 
     private fun parse(input: String): List<String> {
@@ -32,7 +28,7 @@ class Calculator() {
 
         return result?.let {
             val customDelimiter = it.groupValues[1]
-            return it.groupValues[2].split(customDelimiter)
+            return it.groupValues[2].split("$customDelimiter|${DELIMITER_REGEX}".toRegex())
         }
     }
 
@@ -50,9 +46,5 @@ class Calculator() {
         if (num == null || num < 0) {
             throw RuntimeException("음수 혹은 숫자가 아닌 값이 들어왔습니다")
         }
-    }
-
-    companion object {
-        private const val DELIMITER_REGEX = ",|:"
     }
 }
