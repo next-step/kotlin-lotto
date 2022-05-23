@@ -2,10 +2,9 @@ package lotto
 
 import lotto.domain.Issuer
 import lotto.domain.Matcher
-import lotto.domain.Money
 import lotto.domain.Profit
 import lotto.domain.Store
-import lotto.domain.WinPolicy
+import lotto.domain.WinCondition
 import lotto.view.Console
 import lotto.view.ConsoleOutput
 import lotto.view.LottoView
@@ -27,13 +26,7 @@ fun main() {
 
     val winNumbers = WinNumberView(console).readWinNumbers()
 
-    val policies = listOf(
-        WinPolicy(3, Money(5000)),
-        WinPolicy(4, Money(50000)),
-        WinPolicy(5, Money(1500000)),
-        WinPolicy(6, Money(2000000000)),
-    )
-    val matcher = Matcher(winNumbers, policies)
+    val matcher = Matcher(winNumbers, WinCondition.toWinPolicy())
     val result = matcher.makeResult(lottos)
 
     ResultView(output).print(result)
