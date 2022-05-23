@@ -8,8 +8,9 @@ object Screen {
         6 to 2_000_000_000
     )
 
-    fun display(statistics: Map<Int, Int>) {
+    fun display(price: Int, statistics: Map<Int, Int>) {
         displayStatistics(statistics)
+        displayReturnRate(price, statistics)
     }
 
     private fun displayStatistics(statistics: Map<Int, Int>) {
@@ -25,7 +26,26 @@ object Screen {
         println("${matchNumber}개 일치 (${getPrice(matchNumber)}원)- ${matchCount}개", )
     }
 
+    private fun displayReturnRate(price: Int, statistics: Map<Int, Int>) {
+        println("총 수익률은 ${calculateReturnRate(price, statistics)}입니다.")
+    }
+
+    private fun calculateReturnRate(price: Int, statistics: Map<Int, Int>): Double {
+        return (calculateReturnPrice(statistics) / price).toDouble()
+    }
+
+    private fun calculateReturnPrice(statistics: Map<Int, Int>): Int {
+        var returnPrice = 0
+
+        for ((matchNumber, matchCount) in statistics) {
+            returnPrice += matchCount * getPrice(matchNumber)
+        }
+
+        return returnPrice
+    }
+
     private fun getPrice(matchNumber: Int): Int {
         return MATCH_PRICE_MAP[matchNumber] ?: 0
     }
+
 }
