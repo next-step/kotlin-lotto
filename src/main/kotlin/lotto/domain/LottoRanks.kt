@@ -11,10 +11,14 @@ data class LottoRanks(val lottoRanks: List<LottoRank>) {
             .associateWith { lottoRank -> lottoRanks.count { it == lottoRank } }
     }
 
-    fun profitRate(base: Money, scale: Int = 2, roundingMode: RoundingMode = RoundingMode.HALF_UP): BigDecimal {
+    fun profitRate(base: Money): BigDecimal {
         return lottoRanks.asSequence()
             .map { it.winningAmount }
             .reduce { acc, money -> acc + money }
-            .divide(base, scale, roundingMode)
+            .divide(base, PROFIT_RATE_SCALE, RoundingMode.HALF_UP)
+    }
+
+    companion object {
+        private const val PROFIT_RATE_SCALE = 2
     }
 }
