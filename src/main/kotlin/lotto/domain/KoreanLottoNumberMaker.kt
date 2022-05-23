@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoMakerImpl : LottoMaker {
+class KoreanLottoNumberMaker : LottoMaker {
     override fun makeLottoNumbers(): List<Int> {
         val range = List(LOTTO_COUNT) { it + LOTTO_START_OFFSET }
         val shuffled = range.shuffled()

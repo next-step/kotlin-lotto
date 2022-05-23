@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = LottoMakerImpl()) {
+class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()) {
     val lottoCount = money / EACH_LOTTO_PRICE
     val boughtLottos = mutableListOf<List<Int>>()
     val totalYieldRatio
