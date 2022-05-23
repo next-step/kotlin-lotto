@@ -75,9 +75,9 @@
 - [ ] VO객체공부, 머니 객체를 VO로 변경해보기
 - [x] LottoMakerImpl의 네이밍 고민해보기
 - [ ] 중첩 List를 객체로 한번 래핑
-- [ ] boughtLottos 불변리스트로
+- [x] boughtLottos 불변리스트로
 - [ ] LottoPrizeInfo의 테스트 추가
 - [x] LottoResult의 default count를 0으로 설정
-- [ ] LottoResult의 prize 카운트를 내부에서 제어하기
+- [x] LottoResult의 prize 카운트를 내부에서 제어하기
 - [ ] LottoResult의 돈 증가를 하나의 기능으로 제공하기
 - [ ] 통합도메인테스트 외에 각 클래스기능별 테스트도 고려해보기
