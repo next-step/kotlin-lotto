@@ -18,4 +18,12 @@ class LottoTest {
             Assertions.assertThat(Lotto.create()).allMatch { number -> number in 1..45 }
         }
     }
+
+    @Test
+    fun `로또 번호는 정렬되어 있다`() {
+        repeat(5) {
+            val lottoNumbers = Lotto.create()
+            Assertions.assertThat(lottoNumbers).isEqualTo(lottoNumbers.sorted())
+        }
+    }
 }

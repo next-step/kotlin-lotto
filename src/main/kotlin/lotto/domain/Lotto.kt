@@ -6,6 +6,6 @@ object Lotto {
     private const val MAX_LOTTO_INDEX = 6
 
     fun create(): List<Int> {
-        return BASIC_LOTTO.shuffled().subList(MIN_LOTTO_INDEX, MAX_LOTTO_INDEX)
+        return BASIC_LOTTO.shuffled().subList(MIN_LOTTO_INDEX, MAX_LOTTO_INDEX).sorted()
     }
 }
