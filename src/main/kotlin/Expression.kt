@@ -1,6 +1,6 @@
 class Expression {
 
-    private var delemiterRegex: String
+    private var delemiterRegex: Regex
 
     init {
         delemiterRegex = DEFAULT_DELEMITER_REGEX
@@ -12,24 +12,24 @@ class Expression {
         return customizedInput?.let {
             if (it?.trim().isNullOrEmpty()) return listOf(0)
             else {
-                if (it.split(delemiterRegex.toRegex())?.any { it.toInt() < 0 }) throw RuntimeException()
-                it.split(delemiterRegex.toRegex()).map { it.toInt() }
+                if (it.split(delemiterRegex)?.any { it.toInt() < 0 }) throw RuntimeException()
+                it.split(delemiterRegex).map { it.toInt() }
             }
         }!!
     }
 
     private fun toCustomSplitter(text: String): String? {
-        val result = Regex(NEWLINE_REGEX).find(text)
+        val result = NEWLINE_REGEX.find(text)
         return result?.let {
             val customDelimiter = it.groupValues[1]
-            delemiterRegex = customDelimiter
+            delemiterRegex = Regex(customDelimiter)
 
             it.groupValues[2]
         } ?: text
     }
 
     companion object {
-        private val NEWLINE_REGEX = """//(.)\\n(.*)"""
-        private val DEFAULT_DELEMITER_REGEX = ",|:"
+        private val NEWLINE_REGEX = Regex("""//(.)\\n(.*)""")
+        private val DEFAULT_DELEMITER_REGEX = Regex(",|:")
     }
 }
