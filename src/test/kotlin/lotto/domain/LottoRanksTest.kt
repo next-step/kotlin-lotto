@@ -37,7 +37,7 @@ class LottoRanksTest : DescribeSpec({
             it("구매금액 2_000, 당첨금액 5_000") {
                 val lottoRanks = LottoRanks(
                     listOf(
-                        LottoRank.FOURTH,
+                        LottoRank.FIFTH,
                         LottoRank.NOTHING,
                     )
                 )
@@ -48,8 +48,8 @@ class LottoRanksTest : DescribeSpec({
             it("구매금액 5_000, 당첨금액 1_550_000") {
                 val lottoRanks = LottoRanks(
                     listOf(
-                        LottoRank.SECOND,
                         LottoRank.THIRD,
+                        LottoRank.FOURTH,
                         LottoRank.NOTHING,
                         LottoRank.NOTHING,
                         LottoRank.NOTHING,

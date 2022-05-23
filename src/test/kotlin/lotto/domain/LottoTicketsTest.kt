@@ -8,7 +8,7 @@ class LottoTicketsTest : DescribeSpec({
 
     describe("matching") {
         context("당첨 번호가 주어졌을 때 당첨 등수들을 확인한다") {
-            val winningLotto = `기본 로또 티켓(1~6)`()
+            val winningLotto = WinningLotto(`기본 로또 티켓(1~6)`(), LottoNumber(7))
 
             it("1등") {
                 val lottoTickets = LottoTickets(
@@ -29,7 +29,7 @@ class LottoTicketsTest : DescribeSpec({
                 lottoTickets.matching(winningLotto) shouldBe LottoRanks(listOf(LottoRank.FIRST, LottoRank.SECOND))
             }
 
-            it("1등 1개, 3등 1개, 4등1개, 미당첨 2개") {
+            it("1등 1개, 4등 1개, 5등1개, 미당첨 2개") {
                 val lottoTickets = LottoTickets(
                     listOf(
                         `기본 로또 티켓(1~6)`(),
@@ -42,8 +42,8 @@ class LottoTicketsTest : DescribeSpec({
 
                 val expected = listOf(
                     LottoRank.FIRST,
-                    LottoRank.THIRD,
                     LottoRank.FOURTH,
+                    LottoRank.FIFTH,
                     LottoRank.NOTHING,
                     LottoRank.NOTHING,
                 )

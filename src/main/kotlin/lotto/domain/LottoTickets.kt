@@ -4,12 +4,8 @@ import lotto.vo.Money
 
 class LottoTickets(val lottoTickets: List<LottoTicket>) {
 
-    fun matching(winningLotto: LottoTicket): LottoRanks {
-        val lottoRanks = lottoTickets.map {
-            val matchCount = winningLotto.matching(it)
-            LottoRank.of(matchCount)
-        }
-        return LottoRanks(lottoRanks)
+    fun matching(winningLotto: WinningLotto): LottoRanks {
+        return LottoRanks(lottoTickets.map { winningLotto.matching(it) })
     }
 
     fun amount(): Money {
