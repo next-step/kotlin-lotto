@@ -10,8 +10,7 @@ class LottoJudgment(
     }
 
     fun matchNumberCount(ticket: LottoTicket): Int {
-        val matchedNumbers = ticket.numbers.intersect(lastLottoWinnerTicket.numbers)
-        return matchedNumbers.size
+        return lastLottoWinnerTicket.matchCountWith(ticket)
     }
 
     fun getRanking(matchNumberCount: Int): LottoWinnerRank {
