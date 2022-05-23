@@ -17,6 +17,7 @@ class Lotto(val generate: () -> Int) {
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
+        const val LOTTO_NUMBER_DIVIDE_TEXT = ","
     }
 }
 
