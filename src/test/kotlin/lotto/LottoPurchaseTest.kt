@@ -1,6 +1,6 @@
 package lotto
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -13,7 +13,7 @@ class LottoPurchaseTest {
     fun `구매 금액에 맞는 로또를 생성한다`(money: Int, buyCount: Int) {
         val buyLotto = LottoPurchase().buyLotto(money)
 
-        Assertions.assertThat(buyLotto.size).isEqualTo(buyCount)
+        assertThat(buyLotto.size).isEqualTo(buyCount)
     }
 
     @ParameterizedTest
