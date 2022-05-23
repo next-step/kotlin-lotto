@@ -1,17 +1,19 @@
 package lotto
 
 class Stat(private val lottos: List<Lotto>, private val checker: Checker) {
-    fun matchResult(): List<MatchState> = lottos
-        .map { MatchState.of(checker.match(it.numbers)) }
-
-    fun sumResult(record: List<MatchState>): List<StatResult> {
-        return List(AVAILABLE_COUNT + 1) {
-            StatResult(
-                matchState = MatchState.of(it + AVAILABLE_COUNT),
-                count = record.matchStateCount(it + AVAILABLE_COUNT)
-            )
+    val matchRecords: List<MatchState>
+        get() = lottos.map { MatchState.of(checker.match(it.numbers)) }
+    private val mergeRecords: List<StatResult>
+        get() {
+            return List(AVAILABLE_COUNT + 1) {
+                StatResult(
+                    matchState = MatchState.of(it + AVAILABLE_COUNT),
+                    count = matchRecords.matchStateCount(it + AVAILABLE_COUNT),
+                )
+            }
         }
-    }
+    val sumRecords: List<StatResult>
+        get() = mergeRecords.map { it.copy(sum = it.matchState.profit * it.count) }
 
     private fun List<MatchState>.matchStateCount(matchCount: Int): Int {
         return this.filter { it.matchCount == matchCount }.size
@@ -22,4 +24,4 @@ class Stat(private val lottos: List<Lotto>, private val checker: Checker) {
     }
 }
 
-class StatResult(val matchState: MatchState, count: Int)
+data class StatResult(val matchState: MatchState, val count: Int, val sum: Int = 0)
