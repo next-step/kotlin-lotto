@@ -71,7 +71,7 @@
 ### 2차 todo list
 - [x] 상태없는 클래스 object 클래스 변경
 - [x] 테스트 클래스의 위치를 프로덕션과 일치시키기
-- [ ] InputValidator 테스트 추가
+- [x] InputValidator 테스트 추가
 - [ ] VO객체공부, 머니 객체를 VO로 변경해보기
 - [x] LottoMakerImpl의 네이밍 고민해보기
 - [ ] 중첩 List를 객체로 한번 래핑
