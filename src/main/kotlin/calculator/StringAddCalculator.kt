@@ -1,49 +1,38 @@
 package calculator
 
 class StringAddCalculator {
-    fun add(text: String?): Int {
-        if (text.isNullOrBlank()) {
-            return 0
-        }
+    fun add(text: String?): Int =
+        if (text.isNullOrBlank()) 0
+        else
+            sumBy(getNumberInput(text), getDelimiter(text))
 
-        val delimiter = getDelimiter(text)
-        val numberInput = getNumberInput(text)
-
-        return numberInput
+    private fun sumBy(numberInput: String, delimiter: Regex): Int =
+        numberInput
             .split(delimiter)
-            .sumOf {
-                val number = it.toInt()
-                if (number < 0) {
-                    throw RuntimeException("Negative number is not allowed")
-                }
+            .sumOf { it.toPositiveOrThrow() }
 
-                number
-            }
-    }
+    private fun getNumberInput(text: String): String =
+        INPUT_NUMBER_REGEX.find(text)
+            ?.getMatched()
+            ?: text
 
-    private fun getNumberInput(text: String): String {
-        val result = INPUT_NUMBER_REGEX.find(text)
+    private fun getDelimiter(text: String): Regex =
+        DELIMITER_REGEX.find(text)
+            ?.getMatched()
+            ?.toRegex()
+            ?: DEFAULT_DELIMITER_REGEX
 
-        result?.let {
-            return it.groupValues[1]
-        }
+    private fun MatchResult.getMatched(): String = this.groupValues[MATCHED_GROUP_INDEX]
 
-        return text
-    }
-
-    private fun getDelimiter(text: String): Regex {
-        val result = DELIMITER_REGEX.find(text)
-
-        result?.let {
-            return it.groupValues[1].toRegex()
-        }
-
-        return DEFAULT_DELIMITER_REGEX
-    }
+    private fun String.toPositiveOrThrow(): Int =
+        toInt()
+            .takeIf { it >= 0 }
+            ?: throw RuntimeException("Negative number is not allowed")
 
     companion object {
         private val INPUT_NUMBER_REGEX = Regex("//.\n(.*)")
         private val DELIMITER_REGEX = Regex("//(.)\n")
         private val DEFAULT_DELIMITER_REGEX = Regex("[,|:]")
+        private const val MATCHED_GROUP_INDEX = 1
     }
 }
