@@ -5,8 +5,8 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import lotto.domain.WinningPlace.BLANK
 import lotto.domain.WinningPlace.FIRST
+import lotto.domain.WinningPlace.FOURTH
 import lotto.domain.WinningPlace.SECOND
-import lotto.domain.WinningPlace.THIRD
 
 class LottoBundleSpecs : DescribeSpec({
 
@@ -28,7 +28,7 @@ class LottoBundleSpecs : DescribeSpec({
                         lotto(8, 9, 10, 14, 19, 20)
                     )
                 )
-                lottoBundle.matchWinning(winning) shouldContainExactly listOf(FIRST, SECOND, THIRD, BLANK)
+                lottoBundle.matchWinning(winning) shouldContainExactly listOf(FIRST, SECOND, FOURTH, BLANK)
             }
         }
     }

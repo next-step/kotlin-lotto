@@ -17,7 +17,7 @@ data class LottoBundle(
         val winnings = mutableListOf<WinningPlace>()
         bundle.forEach {
             val matching = it.countMatchingNumbers(winningNumbers.lotto)
-            winnings.add(WinningPlace.of(matching))
+            winnings.add(WinningPlace.of(matching, true))
         }
         return winnings.toList()
     }
