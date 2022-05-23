@@ -3,15 +3,15 @@ package lotto.model.data
 data class Lotto private constructor(val numbers: Set<LottoNumber>) {
 
     companion object {
-        fun LottoNumbers.toLotto(policy: Policy): Lotto {
-            policy.validateNumbers(this)
-            return Lotto(this.sorted().toSet())
-        }
 
-        fun CommaSeparatedInt.toLotto(policy: Policy): Lotto {
-            return this.toLottoNumbers()
-                .toLotto(policy)
-        }
+        fun LottoNumbers.parseToLotto(policy: Policy): ParseResult<Lotto> =
+            when (val error = policy.validateNumbers(this)) {
+                null -> ParseResult.Value(Lotto(this.sorted().toSet()))
+                else -> ParseResult.Error(error)
+            }
+
+        fun CommaSeparatedInt.parseToLotto(policy: Policy): ParseResult<Lotto> =
+            this.toLottoNumbers().parseToLotto(policy)
     }
 }
 

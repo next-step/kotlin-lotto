@@ -1,5 +1,6 @@
 package lotto.view.input
 
+import lotto.model.data.ParseResult
 import lotto.view.input.parser.InputParser
 
 object ConsoleReader {
@@ -8,16 +9,23 @@ object ConsoleReader {
         if (message.isNotEmpty()) {
             println(message)
         }
-        return tryToRead(inputParser) ?: read(message, inputParser)
+
+        return when (val parsedValue = this.tryToRead(inputParser)) {
+            is ParseResult.Value -> parsedValue.value
+            is ParseResult.Error -> {
+                println(parsedValue.error.message ?: "")
+                read(message, inputParser)
+            }
+        }
     }
 
-    private fun <T> tryToRead(inputParser: InputParser<T>) = try {
+    private fun <T> tryToRead(inputParser: InputParser<T>): ParseResult<T> =
         parseString(readLine(), inputParser)
-    } catch (e: Exception) {
-        println(e.message)
-        null
-    }
 
-    private fun <T> parseString(inputString: String?, inputParser: InputParser<T>) =
-        if (inputString.isNullOrBlank()) null else inputParser.parseValue(inputString)
+    private fun <T> parseString(inputString: String?, inputParser: InputParser<T>): ParseResult<T> =
+        if (inputString.isNullOrBlank()) {
+            ParseResult.Error("빈 문자열이 입력되었습니다.")
+        } else {
+            inputParser.parseValue(inputString)
+        }
 }

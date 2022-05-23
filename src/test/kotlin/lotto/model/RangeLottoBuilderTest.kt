@@ -1,7 +1,6 @@
 package lotto.model
 
 import lotto.model.LottoEvaluator.countOfMatchNumber
-import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.LottoNumbers.Companion.toLottoNumbers
 import lotto.model.data.Lottos
 import lotto.model.data.Policy645
@@ -9,9 +8,9 @@ import lotto.model.data.Result
 import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
-import lotto.model.data.WinningLotto.Companion.toWinningLotto
 import lotto.model.data.toLotto
 import lotto.model.data.toLottoNumber
+import lotto.model.data.toWinningLotto
 import lotto.view.input.LottosInputView
 import lotto.view.input.ManualLottosInputView
 import lotto.view.output.ConsoleOutputView
