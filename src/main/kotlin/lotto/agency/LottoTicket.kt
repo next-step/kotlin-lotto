@@ -26,13 +26,9 @@ class LottoTicket() {
     private fun takeLottoNumbers(): List<Int> {
         val grabs = mutableSetOf<Int>()
         while (grabs.size < 6) {
-            grabs.add(LOTTO_NUMBER_RANGE.random())
+            grabs.add(LottoNumber.getRandomOne())
         }
 
         return grabs.toList()
-    }
-
-    companion object {
-        val LOTTO_NUMBER_RANGE = IntRange(1, 45)
     }
 }
