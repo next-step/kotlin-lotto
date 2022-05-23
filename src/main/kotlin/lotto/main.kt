@@ -1,11 +1,29 @@
-package lotto.domain
+package lotto
+
+import lotto.domain.Issuer
+import lotto.domain.Matcher
+import lotto.domain.Money
+import lotto.domain.Profit
+import lotto.domain.Store
+import lotto.domain.WinNumbers
+import lotto.domain.WinPolicy
+import lotto.view.Console
+import lotto.view.ConsoleInput
+import lotto.view.ConsoleOutput
+import lotto.view.LottoView
+import lotto.view.MoneyView
 
 fun main() {
-    val money = Money(14000)
+    val input = ConsoleInput()
+    val output = ConsoleOutput()
+    val console = Console()
+
+    val money = MoneyView(console).readMoney()
+
     val store = Store(Issuer)
     val lottos = store.buy(money)
 
-    println(lottos.map { it.numbers }.joinToString("\n"))
+    LottoView(output, lottos).print()
 
     val winNumbers = WinNumbers(listOf(1, 2, 3, 4, 5, 6))
 
