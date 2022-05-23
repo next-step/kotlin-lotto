@@ -5,9 +5,16 @@ import lotto.util.LottoNumberGenerator
 
 class LottoMachine(
     dto: InputPaymentRequestDto,
-    private val lottoNumberGenerator: LottoNumberGenerator,
+    lottoNumberGenerator: LottoNumberGenerator,
 ) {
     private val inputPayment: Int = dto.payment
+    private val lotto: Lotto = Lotto(inputPayment, lottoNumberGenerator)
+
+    private val _lottoRecord: MutableList<LottoNumberSet> = mutableListOf()
+    val lottoRecord: List<LottoNumberSet> get() = _lottoRecord
+
+    private var _issuanceLottoCount: Int = 0
+    val issuanceLottoCount: Int get() = _issuanceLottoCount
 
     init {
         require(inputPayment >= Lotto.LOTTO_PRICE) { INVALID_PAYMENT }
@@ -15,15 +22,9 @@ class LottoMachine(
         require(remPayment == 0) { CANNOT_ISSUANCE_LOTTO }
     }
 
-    private val lotto: Lotto = Lotto(inputPayment, lottoNumberGenerator)
-
-    private val _lottoRecord: MutableList<LottoNumberSet> = mutableListOf()
-    val lottoRecord: List<LottoNumberSet> get() = _lottoRecord
-    var issuanceLottoCount: Int = 0
-
     fun sellLotto() {
-        this.issuanceLottoCount = lotto.issuanceCount()
-        repeat(issuanceLottoCount) {
+        _issuanceLottoCount = lotto.issuanceCount()
+        repeat(_issuanceLottoCount) {
             this._lottoRecord.add(
                 LottoNumberSet(lotto.issuance())
             )
