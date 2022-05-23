@@ -11,7 +11,10 @@ data class Lotto private constructor(val numbers: Set<LottoNumber>) {
             }
 
         fun CommaSeparatedInt.parseToLotto(policy: Policy): ParseResult<Lotto> =
-            this.toLottoNumbers().parseToLotto(policy)
+            when (val error = this.firstError) {
+                null -> this.toLottoNumbers().parseToLotto(policy)
+                else -> ParseResult.Error(error)
+            }
     }
 }
 
