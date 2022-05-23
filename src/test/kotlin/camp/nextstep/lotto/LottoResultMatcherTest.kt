@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-internal class LottoResultCalculatorTest {
+internal class LottoResultMatcherTest {
 
     @DisplayName("당첨 번호가 [1, 2, 3, 4, 5, 6] 일 때,")
     @ParameterizedTest(name = "로또 티켓이 {0} 이면 {1} 개가 일치한다.")
@@ -18,7 +18,7 @@ internal class LottoResultCalculatorTest {
     fun matchedLottoNumbers(ticketNumbers: List<Int>, expectedMatchCount: Int) {
         val lottoTicket = LottoTicket(ticketNumbers)
 
-        val matchedCount = LottoResultCalculator.matchCount(lottoTicket, listOf(1, 2, 3, 4, 5, 6))
+        val matchedCount = LottoResultMatcher.count(lottoTicket, listOf(1, 2, 3, 4, 5, 6))
 
         assertEquals(expectedMatchCount, matchedCount)
     }
@@ -40,7 +40,7 @@ internal class LottoResultCalculatorTest {
         )
         val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
 
-        val matchResult = LottoResultCalculator.calculate(tickets, winnerNumbers)
+        val matchResult = LottoResultMatcher.mapToMatch(tickets, winnerNumbers)
 
         val sixMatched = requireNotNull(matchResult[6])
         val fiveMatched = requireNotNull(matchResult[5])
