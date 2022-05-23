@@ -21,9 +21,11 @@ class ResultView {
     }
 
     private fun printMatchedCount(winnings: Map<LottoWinning, Int>) {
-        winnings.map {
-            println("${it.key.matchCount}개 일치 (${it.key.winningMoney}원) : ${it.value}개")
-        }
+        winnings
+            .filter { it.key != LottoWinning.LOSE }
+            .map {
+                println("${it.key.matchCount}개 일치 (${it.key.winningMoney}원) : ${it.value}개")
+            }
     }
 
     private fun printProfitRate(winnings: Map<LottoWinning, Int>, money: Int) {
