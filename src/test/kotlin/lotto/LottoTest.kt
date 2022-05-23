@@ -17,9 +17,3 @@ class LottoTest {
         assertThat(lottoSeller.purchaseLotto(1000)).isEqualTo(1)
     }
 }
-
-class LottoSeller {
-    fun purchaseLotto(money: Int): Int {
-        return 1
-    }
-}
