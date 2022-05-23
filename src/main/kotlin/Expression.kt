@@ -1,9 +1,9 @@
 class Expression {
 
-    private var DELEMITER_REGEX: String
+    private var delemiterRegex: String
 
     init {
-        DELEMITER_REGEX = DEFAULT_DELEMITER_REGEX
+        delemiterRegex = DEFAULT_DELEMITER_REGEX
     }
 
     fun getTokens(text: String): List<Int> {
@@ -12,8 +12,8 @@ class Expression {
         return inputString?.let {
             if (it?.trim().isNullOrEmpty()) return listOf(0)
             else {
-                if (it.split(DELEMITER_REGEX.toRegex())?.any { it.toInt() < 0 }) throw RuntimeException()
-                it.split(DELEMITER_REGEX.toRegex()).map { it.toInt() }
+                if (it.split(delemiterRegex.toRegex())?.any { it.toInt() < 0 }) throw RuntimeException()
+                it.split(delemiterRegex.toRegex()).map { it.toInt() }
             }
         }!!
     }
@@ -22,7 +22,7 @@ class Expression {
         val result = Regex(NEWLINE_REGEX).find(text)
         return result?.let {
             val customDelimiter = it.groupValues[1]
-            DELEMITER_REGEX = customDelimiter
+            delemiterRegex = customDelimiter
 
             it.groupValues[2]
         } ?: text
