@@ -14,7 +14,11 @@ fun main() {
         val winningNumbers = LottoCommittee.createWinningNumbers(readln())
         val statistics = LottoCommittee.calculateStatistics(lottos, winningNumbers)
 
-        Screen.display(price, statistics)
+        Screen.display(
+            statistics,
+            LottoCommittee.MATCH_PRICE_MAP,
+            LottoCommittee.calculateReturnRate(price, statistics)
+        )
     } catch (e: NumberFormatException) {
         println("숫자가 아닌 값이 들어왔습니다")
     }

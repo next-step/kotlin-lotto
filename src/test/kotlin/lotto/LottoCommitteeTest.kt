@@ -46,4 +46,26 @@ class LottoCommitteeTest {
         val statistics = LottoCommittee.calculateStatistics(listOf(winningNumbers), winningNumbers)
         Assertions.assertThat(statistics[6]).isEqualTo(1)
     }
+
+
+    @Test
+    fun `3개를 맞춘 수익률을 구할 수 있다`() {
+        val matchCount = 5
+        val price = 15_000
+
+        val returnRate = LottoCommittee.calculateReturnRate(price, mapOf(3 to matchCount, 4 to 0, 5 to 0, 6 to 0))
+        val expect = (LottoCommittee.MATCH_PRICE_MAP[3] ?: 0) * matchCount
+
+        Assertions.assertThat(returnRate).isEqualTo(expect / price.toDouble())
+    }
+
+    @Test
+    fun `6개를 맞춘 수익률을 구할 수 있다`() {
+        val matchCount = 1
+        val price = 1_000
+
+        val returnRate = LottoCommittee.calculateReturnRate(price, mapOf(3 to 0, 4 to 0, 5 to 0, 6 to matchCount))
+        val expect = (LottoCommittee.MATCH_PRICE_MAP[6] ?: 0) * matchCount
+        Assertions.assertThat(returnRate).isEqualTo(expect / 1000.toDouble())
+    }
 }
