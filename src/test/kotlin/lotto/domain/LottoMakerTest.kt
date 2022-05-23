@@ -1,6 +1,5 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.LottoMakerImpl
 import org.junit.jupiter.api.Test
 
 class LottoMakerTest {
