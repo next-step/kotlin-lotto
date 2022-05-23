@@ -21,16 +21,16 @@ class CalculatorTest : FreeSpec({
         }
     }
 
-    "checkInputAndChangeZero" - {
+    "getInputOrDefault" - {
 
         "null일 경우 0를 반환해야한다." {
             val input = null
-            Calculator.checkInputAndChangeZero(input) shouldBe "0"
+            Calculator.getInputOrDefault(input) shouldBe "0"
         }
 
         "blank로 이루어진 문자열일 경우 0을 반환해야한다." {
             val input = "  "
-            Calculator.checkInputAndChangeZero(input) shouldBe "0"
+            Calculator.getInputOrDefault(input) shouldBe "0"
         }
     }
 
@@ -65,11 +65,11 @@ class CalculatorTest : FreeSpec({
         }
     }
 
-    "convertInt" - {
+    "convertOperand" - {
 
         "분리된 문자열이 숫자로 변환되어야한다." {
             val splitList = listOf("1", "2")
-            Calculator.convertInt(splitList) shouldBe listOf(1, 2)
+            Calculator.convertOperand(splitList) shouldBe listOf(1, 2)
         }
     }
 
