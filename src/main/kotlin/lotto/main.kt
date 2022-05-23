@@ -5,16 +5,16 @@ import lotto.domain.Matcher
 import lotto.domain.Money
 import lotto.domain.Profit
 import lotto.domain.Store
-import lotto.domain.WinNumbers
 import lotto.domain.WinPolicy
 import lotto.view.Console
-import lotto.view.ConsoleInput
 import lotto.view.ConsoleOutput
 import lotto.view.LottoView
 import lotto.view.MoneyView
+import lotto.view.ProfitView
+import lotto.view.ResultView
+import lotto.view.WinNumberView
 
 fun main() {
-    val input = ConsoleInput()
     val output = ConsoleOutput()
     val console = Console()
 
@@ -25,9 +25,7 @@ fun main() {
 
     LottoView(output, lottos).print()
 
-    val winNumbers = WinNumbers(listOf(1, 2, 3, 4, 5, 6))
-
-    print(winNumbers.value.joinToString(","))
+    val winNumbers = WinNumberView(console).readWinNumbers()
 
     val policies = listOf(
         WinPolicy(3, Money(5000)),
@@ -38,9 +36,9 @@ fun main() {
     val matcher = Matcher(winNumbers, policies)
     val result = matcher.makeResult(lottos)
 
-    println()
-    println(result.joinToString("\n"))
+    ResultView(output).print(result)
 
     val profits = Profit(money, result)
-    println(profits.value)
+
+    ProfitView(output).print(profits)
 }
