@@ -1,6 +1,8 @@
 package calculator
 
-class Parser {
+object Parser {
+    private val parseRegex by lazy { Regex("(?://(.*)\n)?(.*)") }
+    private const val DEFAULT_DELIMITERS = ",|;"
 
     fun parse(input: String?): List<String> {
         return if (input.isNullOrEmpty()) listOf()
@@ -16,11 +18,5 @@ class Parser {
             if (delimiter.isEmpty()) DEFAULT_DELIMITERS to expression
             else delimiter to expression
         } ?: (DEFAULT_DELIMITERS to input)
-    }
-
-    companion object {
-        val parseRegex by lazy { Regex("(?://(.*)\n)?(.*)") }
-
-        const val DEFAULT_DELIMITERS = ",|;"
     }
 }
