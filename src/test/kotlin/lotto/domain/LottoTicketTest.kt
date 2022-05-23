@@ -75,7 +75,7 @@ class LottoTicketTest : DescribeSpec({
                     )
                 )
 
-                lottoTicket.matching(otherLottoTicket) shouldBe LottoMatchCount(6)
+                lottoTicket.matching(otherLottoTicket) shouldBe 6
             }
 
             it("3개의 번호의 수가 일치하면 3을 반환한다") {
@@ -90,7 +90,7 @@ class LottoTicketTest : DescribeSpec({
                     )
                 )
 
-                lottoTicket.matching(otherLottoTicket) shouldBe LottoMatchCount(3)
+                lottoTicket.matching(otherLottoTicket) shouldBe 3
             }
 
             it("하나도 일치하지 않으면 0을 반환한다") {
@@ -105,7 +105,7 @@ class LottoTicketTest : DescribeSpec({
                     )
                 )
 
-                lottoTicket.matching(otherLottoTicket) shouldBe LottoMatchCount(0)
+                lottoTicket.matching(otherLottoTicket) shouldBe 0
             }
         }
     }

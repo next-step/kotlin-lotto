@@ -25,7 +25,7 @@ data class WinningLottoResponse(
     ) {
         companion object {
             fun of(lottoRank: LottoRank): LottoRankResponse {
-                return LottoRankResponse(lottoRank.matchCounts.map { it.number }, lottoRank.winningAmount.amount)
+                return LottoRankResponse(lottoRank.matchCounts, lottoRank.winningAmount.amount)
             }
         }
     }
