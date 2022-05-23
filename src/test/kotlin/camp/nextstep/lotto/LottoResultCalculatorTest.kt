@@ -1,0 +1,77 @@
+package camp.nextstep.lotto
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
+
+internal class LottoResultCalculatorTest {
+
+    @DisplayName("당첨 번호가 [1, 2, 3, 4, 5, 6] 일 때,")
+    @ParameterizedTest(name = "로또 티켓이 {0} 이면 {1} 개가 일치한다.")
+    @MethodSource("lottoNumbers")
+    fun matchedLottoNumbers(ticketNumbers: List<Int>, expectedMatchCount: Int) {
+        val lottoTicket = LottoTicket(ticketNumbers)
+
+        val matchedCount = LottoResultCalculator.matchCount(lottoTicket, listOf(1, 2, 3, 4, 5, 6))
+
+        assertEquals(expectedMatchCount, matchedCount)
+    }
+
+    @DisplayName("여러 개의 티켓에 대하여 일치하는 개수를 기준으로 계산할 수 있다.")
+    @Test
+    fun calculateLottoTickets() {
+        val tickets = listOf(
+            LottoTicket(listOf(1, 2, 3, 4, 5, 6)), // 6
+            LottoTicket(listOf(10, 2, 3, 4, 5, 6)), // 5
+            LottoTicket(listOf(1, 2, 3, 41, 5, 6)), // 5
+            LottoTicket(listOf(12, 22, 31, 4, 5, 6)), // 3
+            LottoTicket(listOf(16, 26, 35, 4, 5, 6)), // 3
+            LottoTicket(listOf(13, 23, 32, 41, 5, 6)), // 2
+            LottoTicket(listOf(17, 27, 36, 41, 5, 6)), // 2
+            LottoTicket(listOf(18, 28, 37, 41, 5, 6)), // 2
+            LottoTicket(listOf(14, 24, 33, 41, 45, 6)), // 1
+            LottoTicket(listOf(15, 25, 34, 41, 44, 45)), // 0
+        )
+        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
+
+        val matchResult = LottoResultCalculator.calculate(tickets, winnerNumbers)
+
+        val sixMatched = requireNotNull(matchResult[6])
+        val fiveMatched = requireNotNull(matchResult[5])
+        val fourMatched = requireNotNull(matchResult[4])
+        val threeMatched = requireNotNull(matchResult[3])
+        val twoMatched = requireNotNull(matchResult[2])
+        val oneMatched = requireNotNull(matchResult[1])
+        val zeroMatched = requireNotNull(matchResult[0])
+
+        assertEquals(1, sixMatched.size)
+        assertEquals(2, fiveMatched.size)
+        assertEquals(0, fourMatched.size)
+        assertEquals(2, threeMatched.size)
+        assertEquals(3, twoMatched.size)
+        assertEquals(1, oneMatched.size)
+        assertEquals(1, zeroMatched.size)
+
+        assertTrue(zeroMatched[0].numbers.containsAll(listOf(15, 25, 34, 41, 44, 45)))
+    }
+
+    companion object {
+        @JvmStatic
+        fun lottoNumbers(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.arguments(listOf(1, 2, 3, 4, 5, 6), 6),
+                Arguments.arguments(listOf(1, 2, 3, 4, 5, 10), 5),
+                Arguments.arguments(listOf(11, 22, 3, 4, 5, 6), 4),
+                Arguments.arguments(listOf(11, 2, 3, 4, 41, 43), 3),
+                Arguments.arguments(listOf(11, 12, 13, 14, 5, 6), 2),
+                Arguments.arguments(listOf(11, 12, 13, 14, 15, 6), 1),
+                Arguments.arguments(listOf(11, 12, 13, 14, 15, 16), 0),
+            )
+        }
+    }
+}
