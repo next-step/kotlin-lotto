@@ -1,10 +1,10 @@
 package lotto.domain
 
 class KoreanLottoNumberMaker : LottoMaker {
-    override fun makeLottoNumbers(): List<Int> {
+    override fun makeLottoNumbers(): LottoNumbers {
         val range = List(LOTTO_COUNT) { it + LOTTO_START_OFFSET }
         val shuffled = range.shuffled()
-        return shuffled.subList(LOTTO_START, LOTTO_END)
+        return LottoNumbers(shuffled.subList(LOTTO_START, LOTTO_END))
     }
 
     companion object {

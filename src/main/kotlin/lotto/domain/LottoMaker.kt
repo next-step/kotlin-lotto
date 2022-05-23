@@ -1,5 +1,5 @@
 package lotto.domain
 
 interface LottoMaker {
-    fun makeLottoNumbers(): List<Int>
+    fun makeLottoNumbers(): LottoNumbers
 }

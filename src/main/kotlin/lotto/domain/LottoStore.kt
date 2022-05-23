@@ -16,7 +16,7 @@ class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = Ko
         )
 
         boughtLottos.forEach {
-            val matchCount = getMatchCount(it, answer)
+            val matchCount = getMatchCount(it.lottoNumbers, answer)
 
             val prizeInfo = LottoPrizeInfo.getPrizeInfo(matchCount) ?: return@forEach
             lottoResult.first { info -> info.prize == prizeInfo }.also { prize ->

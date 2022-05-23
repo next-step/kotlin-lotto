@@ -30,8 +30,8 @@ class LottoStoreTest {
 
             private var idx = 0
 
-            override fun makeLottoNumbers(): List<Int> {
-                return lottoList[idx++]
+            override fun makeLottoNumbers(): LottoNumbers {
+                return LottoNumbers(lottoList[idx++])
             }
         }
 
@@ -68,8 +68,8 @@ class LottoStoreTest {
 
             private var idx = 0
 
-            override fun makeLottoNumbers(): List<Int> {
-                return lottoList[idx++]
+            override fun makeLottoNumbers(): LottoNumbers {
+                return LottoNumbers(lottoList[idx++])
             }
         }
 

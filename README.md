@@ -74,7 +74,7 @@
 - [x] InputValidator 테스트 추가
 - [ ] VO객체공부, 머니 객체를 VO로 변경해보기
 - [x] LottoMakerImpl의 네이밍 고민해보기
-- [ ] 중첩 List를 객체로 한번 래핑
+- [x] 중첩 List를 객체로 한번 래핑
 - [x] boughtLottos 불변리스트로
 - [x] LottoPrizeInfo의 테스트 추가
 - [x] LottoResult의 default count를 0으로 설정

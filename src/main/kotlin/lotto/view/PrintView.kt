@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoResult
 
 object PrintView {
@@ -16,9 +17,9 @@ object PrintView {
         println("$count$LOTTO_COUNT_MESSAGE")
     }
 
-    fun printBoughtLottoList(boughtLotto: List<List<Int>>) {
+    fun printBoughtLottoList(boughtLotto: List<LottoNumbers>) {
         repeat(boughtLotto.size) { lottoIdx ->
-            val lottoResult = boughtLotto[lottoIdx].joinToString(LOTTO_NUMBER_SEPARATOR)
+            val lottoResult = boughtLotto[lottoIdx].lottoNumbers.joinToString(LOTTO_NUMBER_SEPARATOR)
 
             println("$LOTTO_NUMBER_PREFIX$lottoResult$LOTT_NUMBER_POSTFIX")
         }
