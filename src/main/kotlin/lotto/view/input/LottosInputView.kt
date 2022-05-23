@@ -8,11 +8,6 @@ import lotto.view.input.parser.IntInputParser
 import lotto.view.input.parser.LottoInputParser
 import lotto.view.input.parser.PurchaseAmountInputParser
 
-data class LottoCount(val total: Int, val manual: Int) {
-    val automatic: Int
-        get() = total - manual
-}
-
 class LottosInputView(
     private val policy: Policy,
     manualLottoProvider: ManualLottosInputView? = null,
@@ -92,5 +87,10 @@ class LottosInputView(
         private const val MESSAGE_TO_PURCHASE = "구입금액을 입력해 주세요."
         private const val MESSAGE_FOR_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요."
         private const val MESSAGE_FOR_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요."
+    }
+
+    private data class LottoCount(val total: Int, val manual: Int) {
+        val automatic: Int
+            get() = total - manual
     }
 }
