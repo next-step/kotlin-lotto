@@ -9,13 +9,10 @@ class Expression {
     fun getTokens(text: String): List<Int> {
         val customizedInput: String? = toCustomSplitter(text)
 
-        return customizedInput?.let {
-            if (it?.trim().isNullOrEmpty()) return listOf(0)
-            else {
-                if (it.split(delemiterRegex)?.any { it.toInt() < 0 }) throw RuntimeException()
-                it.split(delemiterRegex).map { it.toInt() }
-            }
-        }!!
+        if (customizedInput == null || customizedInput.trim().isNullOrEmpty()) return listOf(0)
+
+        if (customizedInput.split(delemiterRegex)?.any { it.toInt() < 0 }) throw RuntimeException()
+        return customizedInput.split(delemiterRegex).map { it.toInt() }
     }
 
     private fun toCustomSplitter(text: String): String? {
