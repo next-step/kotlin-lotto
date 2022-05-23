@@ -15,7 +15,7 @@ data class Lotto(val numbers: List<Int>) {
     }
 
     companion object {
-        private val LOTTO_NUMBER_RANGE = 1..45
-        private const val LOTTO_NUMBER_COUNT = 6
+        val LOTTO_NUMBER_RANGE = 1..45
+        const val LOTTO_NUMBER_COUNT = 6
     }
 }
