@@ -1,27 +1,27 @@
 package calculator.vo
 
-data class Number(private val value: Int) {
+data class IntNumber(private val value: Int) {
 
     init {
         require(0 <= value) { IllegalArgumentException::class }
     }
 
-    operator fun plus(other: Number) = Number(value + other.value)
+    operator fun plus(other: IntNumber) = IntNumber(value + other.value)
 
     companion object {
 
-        fun fromString(stringNumber: String): Number {
+        fun fromString(stringNumber: String): IntNumber {
             validate(stringNumber)
-            return Number(stringNumber.toInt())
+            return IntNumber(stringNumber.toInt())
         }
 
         private fun validate(value: String) {
             if (value.isEmpty() || value.isBlank()) {
-                throw IllegalArgumentException()
+                throw IllegalArgumentException(value)
             }
 
             if (!value.matches(NUMBER_REGX)) {
-                throw IllegalArgumentException()
+                throw IllegalArgumentException(value)
             }
         }
 
