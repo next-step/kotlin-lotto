@@ -1,11 +1,11 @@
 package lotto.contoller
 
-import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.Lottos
 import lotto.model.data.Policy645
 import lotto.model.data.Statistics
 import lotto.model.data.WinningLotto
 import lotto.model.data.WinningLotto.Companion.toWinningLotto
+import lotto.model.data.toLotto
 import lotto.model.data.toLottoNumber
 import lotto.view.input.InputView
 import org.assertj.core.api.Assertions

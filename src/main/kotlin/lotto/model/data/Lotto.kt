@@ -3,14 +3,14 @@ package lotto.model.data
 data class Lotto private constructor(val numbers: Set<LottoNumber>) {
 
     companion object {
-        fun Collection<LottoNumber>.toLotto(policy: Policy): Lotto {
+        fun LottoNumbers.toLotto(policy: Policy): Lotto {
             policy.validateNumbers(this)
             return Lotto(this.sorted().toSet())
         }
 
-        fun String.toLotto(policy: Policy): Lotto {
-            val numbers = this.toBlankRemovedLottoNumbers()
-            return numbers.toLotto(policy)
+        fun CommaSeparatedInt.toLotto(policy: Policy): Lotto {
+            return this.toLottoNumbers()
+                .toLotto(policy)
         }
     }
 }

@@ -8,9 +8,5 @@ fun String.toLottoNumber(): LottoNumber {
 }
 
 @VisibleForTesting
-fun String.toLottoNumberList() =
-    this.split(",").map { it.toLottoNumber() }
-
-@VisibleForTesting
-fun String.toLottoNumberSet() =
-    this.toLottoNumberList().toSet()
+fun String.toLottoNumbers() =
+    CommaSeparatedInt(this).toLottoNumbers()

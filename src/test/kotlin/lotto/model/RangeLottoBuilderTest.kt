@@ -2,7 +2,7 @@ package lotto.model
 
 import lotto.model.LottoEvaluator.countOfMatchNumber
 import lotto.model.data.Lotto.Companion.toLotto
-import lotto.model.data.LottoNumber
+import lotto.model.data.LottoNumbers.Companion.toLottoNumbers
 import lotto.model.data.Lottos
 import lotto.model.data.Policy645
 import lotto.model.data.Result
@@ -10,6 +10,7 @@ import lotto.model.data.Results
 import lotto.model.data.Statistics
 import lotto.model.data.Winning
 import lotto.model.data.WinningLotto.Companion.toWinningLotto
+import lotto.model.data.toLotto
 import lotto.model.data.toLottoNumber
 import lotto.view.input.LottosInputView
 import lotto.view.input.ManualLottosInputView
@@ -240,7 +241,7 @@ internal class RangeLottoBuilderTest {
             }
 
             override fun readManualLottos(count: Int): Lottos {
-                return Lottos(count) { (1..6).map { LottoNumber(it) }.toLotto(policy) }
+                return Lottos(count) { (1..6).map { it }.toLottoNumbers().toLotto(policy) }
             }
         }
 
