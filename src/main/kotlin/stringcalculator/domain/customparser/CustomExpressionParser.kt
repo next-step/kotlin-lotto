@@ -4,7 +4,7 @@ class CustomExpressionParser(private val expression: String, defaultSeparators: 
     private val stringNumberParser: CustomNumbersStringParser
     private val separators: ParserSeparators
     val parsedNumber: List<Int>
-        get() = stringNumberParser.parsedNumbers
+        get() = stringNumberParser.parsedPositiveNumbers.map { it.value }
 
     init {
         val paramSeparators: MutableList<ParserSeparator> = mutableListOf()
