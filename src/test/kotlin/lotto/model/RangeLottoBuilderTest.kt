@@ -10,6 +10,7 @@ import lotto.model.data.Statistics
 import lotto.model.data.Winning
 import lotto.model.data.WinningLotto.Companion.toWinningLotto
 import lotto.view.input.LottosInputView
+import lotto.view.input.ManualLottosInputView
 import lotto.view.output.ConsoleOutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.lang.Integer.max
 
 internal class RangeLottoBuilderTest {
 
@@ -230,7 +232,17 @@ internal class RangeLottoBuilderTest {
     )
     fun `콘솔입력을 통해 금액을 입력 받는다`(purchaseAmount: Int, expectedCountOfLotto: Int) {
 
-        val lottosInputView = LottosInputView(policy) { purchaseAmount }
+        val manualLottoProvider = object : ManualLottosInputView {
+            override fun readCountOfManualLotto(maxCount: Int): Int {
+                return max(0, maxCount - 3) // 자동으로 3장, 나머지는 수동
+            }
+
+            override fun readManualLottos(count: Int): Lottos {
+                return Lottos(count) { (1..6).toList().toLotto(policy) }
+            }
+        }
+
+        val lottosInputView = LottosInputView(policy, manualLottoProvider) { purchaseAmount }
         assertThat(lottosInputView.getInput().size).isEqualTo(expectedCountOfLotto)
     }
 }

@@ -18,6 +18,11 @@ data class Lotto private constructor(val numbers: Set<Int>) {
 }
 
 data class Lottos(val lottoList: List<Lotto>) : List<Lotto> by lottoList {
+
+    operator fun plus(other: Lottos) = Lottos(
+        listOf(this.lottoList, other.lottoList).flatten()
+    )
+
     companion object {
         fun of(vararg lottos: Lotto) = Lottos(lottos.toList())
     }
