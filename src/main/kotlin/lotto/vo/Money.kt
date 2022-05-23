@@ -3,7 +3,8 @@ package lotto.vo
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-data class Money(val amount: BigDecimal) {
+@JvmInline
+value class Money(val amount: BigDecimal) {
 
     init {
         require(amount >= BigDecimal.ZERO) {
