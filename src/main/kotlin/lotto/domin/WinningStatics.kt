@@ -1,5 +1,6 @@
 package lotto.domin
 
+import lotto.domin.LottoWinningAmount.Companion.matchWinningLotto
 import lotto.dto.InputPaymentRequestDto
 import lotto.dto.InputWinningLottoNumberDto
 import lotto.dto.WinningStaticsResponseDto
@@ -14,15 +15,10 @@ class WinningStatics(
     private val winningLottoNumber: List<Int> = lastWeekWinningLottoDto.lasWeekWinningNumber
 
     fun result(): WinningStaticsResponseDto {
-        val containCountList: List<Int> = lottoRecord.map {
+        val sameLottoNumberCount: List<Int> = lottoRecord.map {
             containsCount(it)
         }
-
-        val matchWinningLotto: Map<LottoWinningAmount, Int> = LottoWinningAmount.values()
-            .associateWith { lottoWinningAmount ->
-                containCountList.count { it == lottoWinningAmount.matchCount }
-            }
-
+        val matchWinningLotto: Map<LottoWinningAmount, Int> = matchWinningLotto(sameLottoNumberCount)
         val profitRatio: Double = profitRatio(matchWinningLotto)
 
         return WinningStaticsResponseDto(matchWinningLotto, profitRatio)
