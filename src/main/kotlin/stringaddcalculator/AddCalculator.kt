@@ -6,7 +6,7 @@ class AddCalculator {
             return 0
 
         return expression
-            .split(",")
+            .split(",", ":")
             .map { it.trim().toInt() }
             .reduce { sum, operand -> sum + operand }
     }

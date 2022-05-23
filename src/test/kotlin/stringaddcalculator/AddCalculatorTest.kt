@@ -28,7 +28,19 @@ class AddCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = ["'1,2',3", "'1,2,3,4,5',15"])
-    fun `숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(expression: String, expect: Int) {
+    fun `숫자 두 개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(expression: String, expect: Int) {
+        assertThat(addCalculator.calculate(expression)).isEqualTo(expect)
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["'1:2',3", "'1:2:3:4:5',15"])
+    fun `숫자를 콜론 구분자로 입력할 경우 숫자들의 합을 반환한다`(expression: String, expect: Int) {
+        assertThat(addCalculator.calculate(expression)).isEqualTo(expect)
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["'1:2,5',8", "'1:2,3:4,5',15"])
+    fun `숫자를 컴마(,)와 콜론 구분자로 입력할 경우 숫자들의 합을 반환한다`(expression: String, expect: Int) {
         assertThat(addCalculator.calculate(expression)).isEqualTo(expect)
     }
 }
