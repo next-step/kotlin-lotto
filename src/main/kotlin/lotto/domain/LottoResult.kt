@@ -7,4 +7,6 @@ class LottoResult(val prize: LottoPrizeInfo) {
     fun increaseMatchCount() {
         count++
     }
+
+    fun getPrizeMoney() = prize.money
 }

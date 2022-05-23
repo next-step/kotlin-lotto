@@ -21,13 +21,18 @@ class LottoStore(private val money: Int, private val lottoMaker: LottoMaker = Ko
             val prizeInfo = LottoPrizeInfo.getPrizeInfo(matchCount) ?: return@forEach
             lottoResult.first { info -> info.prize == prizeInfo }.also { prize ->
                 prize.increaseMatchCount()
-                totalMoney += prize.prize.money
+
+                addPrizeMoney(prize.getPrizeMoney())
             }
         }
 
         return lottoResult
     }
-    
+
+    private fun addPrizeMoney(money: Int) {
+        totalMoney += money
+    }
+
     private fun getMatchCount(list1: List<Int>, list2: List<Int>): Int {
         return list1.intersect(list2.toSet()).size
     }
