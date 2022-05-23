@@ -1,6 +1,7 @@
 package lotto.model.data
 
-data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
+@JvmInline
+value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
     override fun compareTo(other: LottoNumber) = this.number.compareTo(other.number)
     override fun toString() = this.number.toString()
