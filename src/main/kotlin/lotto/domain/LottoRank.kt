@@ -4,22 +4,26 @@ import lotto.vo.Money
 
 enum class LottoRank(
     val matchCounts: List<Int>,
+    val bonusMatch: Boolean = false,
     val winningAmount: Money
 ) {
-    FIRST(listOf(6), Money.of(2_000_000_000)),
-    SECOND(listOf(5), Money.of(1_500_000)),
-    THIRD(listOf(4), Money.of(50_000)),
-    FOURTH(listOf(3), Money.of(5_000)),
-    NOTHING(listOf(2, 1, 0), Money.of(0));
+    FIRST(matchCounts = listOf(6), winningAmount = Money.of(2_000_000_000)),
+    SECOND(matchCounts = listOf(5), bonusMatch = true, winningAmount = Money.of(30_000_000)),
+    THIRD(matchCounts = listOf(5), winningAmount = Money.of(1_500_000)),
+    FOURTH(matchCounts = listOf(4), winningAmount = Money.of(50_000)),
+    FIFTH(matchCounts = listOf(3), winningAmount = Money.of(5_000)),
+    NOTHING(matchCounts = listOf(2, 1, 0), winningAmount = Money.of(0));
 
     companion object {
         private const val MIN_MATCH_COUNT = 0
         private const val MAX_MATCH_COUNT = 6
 
-        fun of(matchCount: Int): LottoRank {
+        fun of(matchCount: Int, bonusMatch: Boolean): LottoRank {
             validateMatchCount(matchCount)
-            return values().find { it.matchCounts.contains(matchCount) }
-                ?: NOTHING
+            return values().find {
+                it.matchCounts.contains(matchCount) &&
+                        it.bonusMatch == bonusMatch
+            } ?: NOTHING
         }
 
         private fun validateMatchCount(matchCount: Int) {
