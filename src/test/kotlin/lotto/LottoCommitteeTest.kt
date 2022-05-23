@@ -36,14 +36,14 @@ class LottoCommitteeTest {
     @Test
     fun `3개를 맞춘 통계를 구할 수 있다`() {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val statistics = LottoCommittee.createStatistics(listOf(listOf(4, 5, 6, 7, 8, 9)), winningNumbers)
+        val statistics = LottoCommittee.calculateStatistics(listOf(listOf(4, 5, 6, 7, 8, 9)), winningNumbers)
         Assertions.assertThat(statistics[3]).isEqualTo(1)
     }
 
     @Test
     fun `6개를 맞춘 통계를 구할 수 있다`() {
         val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val statistics = LottoCommittee.createStatistics(listOf(winningNumbers), winningNumbers)
+        val statistics = LottoCommittee.calculateStatistics(listOf(winningNumbers), winningNumbers)
         Assertions.assertThat(statistics[6]).isEqualTo(1)
     }
 }

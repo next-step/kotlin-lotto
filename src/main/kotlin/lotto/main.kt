@@ -12,7 +12,7 @@ fun main() {
 
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumbers = LottoCommittee.createWinningNumbers(readln())
-        val statistics = LottoCommittee.createStatistics(lottos, winningNumbers)
+        val statistics = LottoCommittee.calculateStatistics(lottos, winningNumbers)
 
         Screen.display(price, statistics)
     } catch (e: NumberFormatException) {

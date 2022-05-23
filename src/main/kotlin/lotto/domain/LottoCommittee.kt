@@ -16,7 +16,7 @@ object LottoCommittee {
         else throw IllegalArgumentException("입력 값에 문제가 있습니다.")
     }
 
-    fun createStatistics(
+    fun calculateStatistics(
         lottos: List<List<Int>>,
         winningNumbers: List<Int>
     ): Map<Int, Int> {

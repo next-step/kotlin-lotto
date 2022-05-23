@@ -27,11 +27,12 @@ object Screen {
     }
 
     private fun displayReturnRate(price: Int, statistics: Map<Int, Int>) {
-        println("총 수익률은 ${calculateReturnRate(price, statistics)}입니다.")
+        val returnRate = calculateReturnRate(price, statistics)
+        println("총 수익률은 ${String.format("%.2f", returnRate)}입니다.")
     }
 
     private fun calculateReturnRate(price: Int, statistics: Map<Int, Int>): Double {
-        return (calculateReturnPrice(statistics) / price).toDouble()
+        return (calculateReturnPrice(statistics) / price.toDouble())
     }
 
     private fun calculateReturnPrice(statistics: Map<Int, Int>): Int {
@@ -47,5 +48,4 @@ object Screen {
     private fun getPrice(matchNumber: Int): Int {
         return MATCH_PRICE_MAP[matchNumber] ?: 0
     }
-
 }
