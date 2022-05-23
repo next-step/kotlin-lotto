@@ -2,10 +2,9 @@ package calculator
 
 class Parser {
 
-    fun parse(expression: String): List<Int> {
+    fun parse(expression: String): List<String> {
         return expression
             .split(*DEFAULT_DELIMITERS.toCharArray())
-            .map(String::toInt)
     }
 
     companion object {
