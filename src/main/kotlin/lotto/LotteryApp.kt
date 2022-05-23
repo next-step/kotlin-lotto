@@ -7,6 +7,8 @@ object LotteryApp {
     fun launch() {
         val numberOfLotteries = LottoInputView.getPurchaseAmount()
         LotteryRandomGeneratorView.display(numberOfLotteries)
+
+        LottoInputView.getWinningLotteryNumber()
     }
 }
 
