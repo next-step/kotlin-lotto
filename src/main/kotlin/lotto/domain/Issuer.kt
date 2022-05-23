@@ -6,7 +6,7 @@ object Issuer : Issuable {
     override fun issue(): Lotto =
         NUMBER_RANGE
             .shuffled()
-            .subList(0, Lotto.NUMBER_COUNT)
+            .take(Lotto.NUMBER_COUNT)
             .sorted()
             .let(::Lotto)
 }
