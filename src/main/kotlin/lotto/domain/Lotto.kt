@@ -10,7 +10,7 @@ data class Lotto(val numbers: List<Int>) {
 
     constructor(vararg numbers: Int) : this(numbers.toList())
 
-    fun isInRange(number: Int): Boolean {
+    private fun isInRange(number: Int): Boolean {
         return LOTTO_NUMBER_RANGE.contains(number)
     }
 
