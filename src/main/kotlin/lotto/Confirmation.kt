@@ -1,5 +1,5 @@
 package lotto
 
-class Confirmation(val winningNumber: String) {
+class Confirmation(val winningNumber: String, lotto: Lotto) {
 
 }
