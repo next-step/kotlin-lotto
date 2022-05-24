@@ -26,7 +26,7 @@ class ResultView {
 
     companion object {
         private const val BUY_COUNT_TEXT = "개를 구매했습니다."
-        private const val WINING_STAT_TEXT = "당첨 통계"
+        private const val WINING_STAT_TEXT = "\n당첨 통계\n---------"
         private const val TRY_COUNT_TEXT = "총 수익률은 %s입니다."
     }
 }
