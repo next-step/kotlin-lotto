@@ -1,17 +1,17 @@
 package calculator.model
 
 @JvmInline
-value class Number private constructor(
+value class PositiveNumber private constructor(
     val number: Int
 ) {
 
     companion object {
         private val POSITIVE_NUMBER_REGEX = "^\\d+$".toRegex()
 
-        fun from(number: String): Number {
+        fun from(number: String): PositiveNumber {
             validateNumber(number)
 
-            return Number(number.toInt())
+            return PositiveNumber(number.toInt())
         }
 
         private fun validateNumber(number: String) {
