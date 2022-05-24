@@ -7,8 +7,13 @@ class StringAddCalculator {
             return 0
         }
 
-        val regex = Separator.toRegexWith("|")
-        val positiveNumbers = PositiveNumbers.of(text.split(regex = regex))
+        val positiveNumbers = PositiveNumbers.of(splitTextByPattern(text))
         return positiveNumbers.addAll().value
     }
+
+    private fun splitTextByPattern(text: String): List<String> =
+        when (Separator.matchByCustomSeparator(text)) {
+            true -> Separator.CUSTOM.split(text)
+            false -> Separator.DEFAULT.split(text)
+        }
 }
