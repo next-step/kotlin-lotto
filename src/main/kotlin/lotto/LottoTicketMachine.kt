@@ -8,7 +8,9 @@ object LottoTicketMachine {
     private val RANGE_OF_LOTTO_NUMBER = MIN_RANGE_OF_NUMBER..MAX_RANGE_OF_NUMBER
     const val SIZE_OF_LOTTO_NUMBER = 6
 
-    fun generate(): List<Int> {
+    fun generate(): LottoTicket = LottoTicket(generateNumbers())
+
+    private fun generateNumbers(): List<Int> {
         return RANGE_OF_LOTTO_NUMBER
             .shuffled()
             .take(SIZE_OF_LOTTO_NUMBER)
