@@ -9,10 +9,10 @@ class LottoStatisticsTest : BehaviorSpec({
     Given("로또 통계는") {
         val lastLottoNumbers = setOf(1, 2, 3, 4, 5, 6)
         val lottoTickets = listOf(
-            LottoTicket(listOf(1, 2, 3, 10, 11, 12)),
-            LottoTicket(listOf(1, 2, 3, 4, 11, 12)),
-            LottoTicket(listOf(1, 2, 3, 4, 5, 12)),
-            LottoTicket(listOf(1, 2, 3, 4, 5, 6)),
+            LottoTicket(setOf(1, 2, 3, 10, 11, 12)),
+            LottoTicket(setOf(1, 2, 3, 4, 11, 12)),
+            LottoTicket(setOf(1, 2, 3, 4, 5, 12)),
+            LottoTicket(setOf(1, 2, 3, 4, 5, 6)),
         )
 
         When("1개 이상의 포함된 로또 티켓 목록이 입력되면") {

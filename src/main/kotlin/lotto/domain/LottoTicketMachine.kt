@@ -10,10 +10,11 @@ object LottoTicketMachine {
 
     fun generate(size: Int = 1) = List(size) { LottoTicket(generateNumbers()) }
 
-    private fun generateNumbers(): List<Int> {
+    private fun generateNumbers(): Set<Int> {
         return RANGE_OF_LOTTO_NUMBER
             .shuffled()
             .take(SIZE_OF_LOTTO_NUMBER)
             .sorted()
+            .toSet()
     }
 }

@@ -9,39 +9,20 @@ class LottoStatistics(
         require(lottoTickets.isNotEmpty())
     }
 
-    fun getMatchCount(match: LottoMatch): Int {
-        return when (match) {
-            LottoMatch.THREE -> {
-                lottoTickets
-                    .filter { it.numbers.intersect(lastLottoNumbers).size == match.count }
-                    .size
-            }
-            LottoMatch.FOUR -> {
-                lottoTickets
-                    .filter { it.numbers.intersect(lastLottoNumbers).size == match.count }
-                    .size
-            }
-            LottoMatch.FIVE -> {
-                lottoTickets
-                    .filter { it.numbers.intersect(lastLottoNumbers).size == match.count }
-                    .size
-            }
-            LottoMatch.SIX -> {
-                lottoTickets
-                    .filter { it.numbers.intersect(lastLottoNumbers).size == match.count }
-                    .size
-            }
-        }
-    }
+    fun getMatchCount(match: LottoMatch): Int = getMatchCount(match.count)
+
+    private fun getMatchCount(matchCount: Int): Int =
+        lottoTickets
+            .filter { it.numbers.intersect(lastLottoNumbers).size == matchCount }
+            .size
 
     fun getProfit(purchase: Int): Double {
         require(purchase > 0)
         return getRewards().toDouble() / purchase.toDouble()
     }
 
-    private fun getRewards(): Long {
-        return LottoMatch
+    private fun getRewards(): Long =
+        LottoMatch
             .values()
             .sumOf { getMatchCount(it) * it.reward }
-    }
 }

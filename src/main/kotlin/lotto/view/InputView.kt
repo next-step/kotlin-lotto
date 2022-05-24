@@ -36,7 +36,7 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
     private fun writeLine(message: String) = writer("$message\n")
 
     private fun String.tokenize(): List<String> =
-        split(",")
+        split(DELIMITER)
             .map { it.trim() }
             .filter { it.isNotBlank() }
 
@@ -45,4 +45,8 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
 
     private fun <R, T : R> Result<T>.getOrIllegalArgumentException(): R =
         getOrElse { throw IllegalArgumentException(it.message) }
+
+    companion object {
+        private const val DELIMITER = ","
+    }
 }
