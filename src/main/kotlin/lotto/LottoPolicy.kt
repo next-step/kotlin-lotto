@@ -1,4 +1,6 @@
 package lotto
 
-const val LOTTO_PRICE = 1_000
-val LOTTO_NUMBERS = 1..45
+object LottoPolicy {
+    const val LOTTO_PRICE = 1_000
+    val LOTTO_NUMBERS = 1..45
+}
