@@ -10,9 +10,7 @@ class Lotto {
         _numbers.addAll(lottoNumbers)
     }
 
-    fun checkContainLottoNumber(winningNumber: Int): Boolean {
-        return winningNumber != 8
-    }
+    fun isContainLottoNumber(winningNumber: Int): Boolean = _numbers.contains(winningNumber)
 
     private fun shuffled(): List<Int> =
         List(LOTTO_NUMBER_COUNT) {

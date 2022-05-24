@@ -22,8 +22,8 @@ class LottoTest {
     @Test
     fun `당첨 번호가 로또 번호들에 포함되어있다면 true를 반환한다`() {
         lotto.processLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(lotto.checkContainLottoNumber(1)).isEqualTo(true)
-        assertThat(lotto.checkContainLottoNumber(5)).isEqualTo(true)
-        assertThat(lotto.checkContainLottoNumber(8)).isEqualTo(false)
+        assertThat(lotto.isContainLottoNumber(1)).isEqualTo(true)
+        assertThat(lotto.isContainLottoNumber(5)).isEqualTo(true)
+        assertThat(lotto.isContainLottoNumber(8)).isEqualTo(false)
     }
 }
