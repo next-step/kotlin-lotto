@@ -1,17 +1,12 @@
-package domain
-
-import view.InputParser
-import view.InputValidator
+package calculator.domain
 
 class AddCalculator {
-    private val inputParser = InputParser()
-
     fun sum(input: String?): Int {
         if (input.isNullOrBlank()) {
             return 0
         }
 
-        val tokens = inputParser.parse(input)
+        val tokens = InputParser.parse(input)
         checkValidNumbers(tokens)
 
         val numbers = tokens.map { it.toInt() }
