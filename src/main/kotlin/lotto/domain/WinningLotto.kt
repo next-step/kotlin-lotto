@@ -6,8 +6,8 @@ data class WinningLotto(
 ) {
     fun matching(lottoTicket: LottoTicket): LottoRank {
         return LottoRank.of(
-            lottoTicket.matching(winningTicket),
-            lottoTicket.contains(bonusNumber)
+            matchCount = lottoTicket.matching(winningTicket),
+            bonusMatch = lottoTicket.contains(bonusNumber)
         )
     }
 }

@@ -18,7 +18,10 @@ enum class LottoRank(
         private const val MAX_MATCH_COUNT = 6
 
         fun of(matchCount: Int, bonusMatch: Boolean): LottoRank {
-            validateMatchCount(matchCount)
+            require(matchCount in MIN_MATCH_COUNT..MAX_MATCH_COUNT) {
+                "로또 일치 개수는 $MIN_MATCH_COUNT 와 $MAX_MATCH_COUNT 사이여야 합니다. (입력:$matchCount)"
+            }
+
             if (SECOND.matchCounts.contains(matchCount) && bonusMatch) {
                 return SECOND
             }
@@ -26,14 +29,6 @@ enum class LottoRank(
             return values().filterNot { it == SECOND }
                 .find { it.matchCounts.contains(matchCount) }
                 ?: NOTHING
-        }
-
-        private fun validateMatchCount(matchCount: Int) {
-            if (matchCount < MIN_MATCH_COUNT || matchCount > MAX_MATCH_COUNT) {
-                throw IllegalArgumentException(
-                    "로또 일치 개수는 $MIN_MATCH_COUNT 와 $MAX_MATCH_COUNT 사이여야 합니다. (입력:$matchCount)"
-                )
-            }
         }
     }
 }

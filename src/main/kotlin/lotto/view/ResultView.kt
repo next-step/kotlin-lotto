@@ -12,9 +12,13 @@ object ResultView {
     private const val PROFIT_RATE_BENEFIT = "(기준이 1을 넘어서 이득임)"
     private const val PROFIT_RATE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
 
-    fun printRank(lottoTicketResponses: List<LottoTicketResponse>) {
+    fun printLottoTickets(lottoTicketResponses: List<LottoTicketResponse>) {
         println("${lottoTicketResponses.size}$LOTTO_BUYING_COUNT")
-        printLottoTickets(lottoTicketResponses)
+
+        lottoTicketResponses.forEach {
+            println("[${it.lottoNumbers.joinToString(LOTTO_NUMBER_DELIMITER) { lottoNumber -> lottoNumber.toString() }}]")
+        }
+
         println()
     }
 
@@ -24,21 +28,18 @@ object ResultView {
         printProfitRate(winningLottoResponse.profitRate)
     }
 
-    private fun printLottoTickets(lottoTicketResponses: List<LottoTicketResponse>) {
-        lottoTicketResponses.forEach {
-            println("[${it.lottoNumbers.joinToString(LOTTO_NUMBER_DELIMITER) { lottoNumber -> lottoNumber.toString() }}]")
-        }
-    }
-
     private fun printCountByRank(countByRank: Map<LottoRank, Int>) {
         countByRank.forEach { printRank(it.key, it.value) }
     }
 
     private fun printRank(lottoRank: LottoRank, count: Int) {
+        val matchCount = lottoRank.matchCounts.first()
+        val winningAmount = lottoRank.winningAmount.amount
+
         if (lottoRank == LottoRank.SECOND) {
-            println("${lottoRank.matchCounts.first()}개 일치, 보너스 볼 일치(${lottoRank.winningAmount.amount}원)- ${count}개")
+            println("${matchCount}개 일치, 보너스 볼 일치(${winningAmount}원)- ${count}개")
         } else {
-            println("${lottoRank.matchCounts.first()}개 일치 (${lottoRank.winningAmount.amount}원)- ${count}개")
+            println("${matchCount}개 일치 (${winningAmount}원)- ${count}개")
         }
     }
 

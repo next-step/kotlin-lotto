@@ -16,7 +16,7 @@ fun main() {
     val lottoShop = LottoShop()
     val lottoTickets = lottoShop.buying(Money(buyingRequest.amount))
 
-    ResultView.printRank(LottoTicketResponse.listOf(lottoTickets))
+    ResultView.printLottoTickets(LottoTicketResponse.listOf(lottoTickets))
 
     val winningLottoRequest = InputView.winningLotto()
 
