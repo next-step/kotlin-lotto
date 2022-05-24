@@ -1,6 +1,6 @@
 package lotto
 
-object LottoNumberMachine {
+object LottoTicketMachine {
 
     private const val MIN_RANGE_OF_NUMBER = 1
     private const val MAX_RANGE_OF_NUMBER = 45
