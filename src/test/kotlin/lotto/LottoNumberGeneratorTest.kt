@@ -10,5 +10,3 @@ class LottoNumberGeneratorTest {
         assertThat(autoNumber.numbers.count()).isEqualTo(6)
     }
 }
-
-

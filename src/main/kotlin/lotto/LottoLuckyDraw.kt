@@ -27,4 +27,3 @@ class LottoLuckyDraw(
     private fun List<Int>.isContainNumber(input: Int, matchCount: Int): Int =
         if (this.contains(input)) matchCount + 1 else matchCount
 }
-

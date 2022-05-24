@@ -1,10 +1,10 @@
 package lotto
 
-class LottoPurchase(insertAmount: Int) {
+class LottoStore(insertAmount: Int) {
 
     val ableToPurchaseCount = insertAmount.div(LOTTO_UNIT_PRICE)
 
-    fun purchaseLotto(): List<LottoNumber> {
+    fun purchase(): List<LottoNumber> {
         return List(this.ableToPurchaseCount) { LottoNumberGenerator.autoGenerate() }
     }
 
