@@ -7,14 +7,11 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class InputParserTest {
-
-    private val inputParser = InputParser()
-
     @Test
     fun `커스텀구분자테스트 - 구분자를 파싱했다면 listOf("구분자")를 만들어 반환`() {
         val input = "//*\n2/1*5,3"
 
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
 
         assertThat(expression).isEqualTo("2/1*5,3")
         assertThat(delimiter).isEqualTo("*")
@@ -24,7 +21,7 @@ internal class InputParserTest {
     fun `커스텀구분자테스트 - 구분자를 파싱하지 못했다면 null 반환`() {
         val input = "/d\n2/1*5,3"
 
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
 
         assertThat(expression).isEqualTo(input)
         assertThat(delimiter).isNull()
@@ -34,7 +31,7 @@ internal class InputParserTest {
     fun `커스텀구분자테스트 - 구분자 파싱 위치에 알파벳이 존재하면 listOf(알파벳)를 반환`() {
         val input = "//a\n2/1*5,3"
 
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
 
         assertThat(expression).isEqualTo("2/1*5,3")
         assertThat(delimiter).isEqualTo("a")
@@ -44,7 +41,7 @@ internal class InputParserTest {
     fun `커스텀구분자테스트 - 구분자 파싱 위치에 숫자가 존재하면 null 반환`() {
         val input = "//3\n2/1*5,3"
 
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
 
         assertThat(expression).isEqualTo(input)
         assertThat(delimiter).isNull()
@@ -55,7 +52,7 @@ internal class InputParserTest {
     fun `표현식파싱테스트 - 전달받은 delimiter를 사용하여 파싱하는 것 테스트`(delimiter: String) {
         val expression = "1${delimiter}2${delimiter}3"
 
-        val actual = inputParser.parseExpression(expression, delimiter)
+        val actual = InputParser.parseExpression(expression, delimiter)
 
         assertThat(actual).isEqualTo(listOf(1, 2, 3))
     }
@@ -65,7 +62,7 @@ internal class InputParserTest {
     fun `표현식파싱테스트 - 표현식에 전달받은 delimiter가 아닌 delimiter가 포함된 경우 파싱 예외 테스트`(delimiter: String) {
         val expression = "1:2,3"
 
-        assertThrows<RuntimeException>("부적절한 계산식입니다.") { inputParser.parseExpression(expression, delimiter) }
+        assertThrows<RuntimeException>("부적절한 계산식입니다.") { InputParser.parseExpression(expression, delimiter) }
     }
 
     @Test
@@ -73,7 +70,7 @@ internal class InputParserTest {
         val expression = "1:2,3"
         val delimiter = null
 
-        val actual = inputParser.parseExpression(expression, delimiter)
+        val actual = InputParser.parseExpression(expression, delimiter)
 
         assertThat(actual).isEqualTo(listOf(1, 2, 3))
     }
@@ -84,14 +81,14 @@ internal class InputParserTest {
         val expression = "1|2,3"
         val delimiter = null
 
-        assertThrows<RuntimeException>("부적절한 계산식입니다.") { inputParser.parseExpression(expression, delimiter) }
+        assertThrows<RuntimeException>("부적절한 계산식입니다.") { InputParser.parseExpression(expression, delimiter) }
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["1,2:3", "//a\n1a2a3"])
     fun `파싱 통합테스트 - 파싱성공 테스트`(input: String) {
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
-        val actual = inputParser.parseExpression(expression, delimiter)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
+        val actual = InputParser.parseExpression(expression, delimiter)
 
         assertThat(actual).isEqualTo(listOf(1, 2, 3))
     }
@@ -101,17 +98,17 @@ internal class InputParserTest {
     fun `파싱 통합테스트 - 파싱실패 테스트`() {
         val input = "1,2.3"
 
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
 
-        assertThrows<RuntimeException>("부적절한 계산식입니다.") { inputParser.parseExpression(expression, delimiter) }
+        assertThrows<RuntimeException>("부적절한 계산식입니다.") { InputParser.parseExpression(expression, delimiter) }
     }
 
     @Test
     fun `파싱 통합테스트 - 기본 구분자로 파싱 테스트 - 숫자 한개`() {
         val input = "1"
 
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
-        val actual = inputParser.parseExpression(expression, delimiter)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
+        val actual = InputParser.parseExpression(expression, delimiter)
 
         assertThat(actual).isEqualTo(listOf(1))
     }

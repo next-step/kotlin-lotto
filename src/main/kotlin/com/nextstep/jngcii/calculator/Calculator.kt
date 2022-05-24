@@ -1,6 +1,6 @@
 package com.nextstep.jngcii.calculator
 
-class Calculator {
+object Calculator {
     fun run(numbers: List<Int>): Int {
         return numbers.sum()
     }

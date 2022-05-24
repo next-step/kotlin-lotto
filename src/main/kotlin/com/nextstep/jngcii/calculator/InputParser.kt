@@ -1,6 +1,8 @@
 package com.nextstep.jngcii.calculator
 
-class InputParser {
+object InputParser {
+    private const val COMMA = ","
+    private const val COLON = ":"
     private val delimiterParseRegex = Regex("//(\\D)\n(.*)")
     private val defaultDelimiterRegex = Regex("$COMMA|$COLON")
 
@@ -32,10 +34,5 @@ class InputParser {
             throw RuntimeException("양의 정수만 입력 가능합니다.")
         }
         return this
-    }
-
-    companion object {
-        private const val COMMA = ","
-        private const val COLON = ":"
     }
 }
