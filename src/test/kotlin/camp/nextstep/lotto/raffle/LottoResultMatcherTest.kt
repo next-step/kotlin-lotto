@@ -1,4 +1,4 @@
-package camp.nextstep.lotto
+package camp.nextstep.lotto.raffle
 
 import camp.nextstep.lotto.ticket.LottoTicket
 import org.junit.jupiter.api.Assertions.assertEquals
