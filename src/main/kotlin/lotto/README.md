@@ -20,7 +20,7 @@
 ## TO-DO LIST
 1. [x] 구매금액을 입력 받는다.
 2. [x] 구매금액에 빈칸이나 Null입력시 IllegalArgumentException을 던진다.
-3. [ ] 구매금액은 숫자만 입력 받고 아니면 IllegalArgumentException을 던진다.
+3. [x] 구매금액이 숫자가 아니라면 IllegalArgumentException을 던진다.
 4. [ ] 구매금액에 맞게 로또를 구매한다.
 5. [ ] 로또 번호 6개를 자동 발행한다.
 6. [ ] 로또번호 발행은 번호 순으로 출력한다.
