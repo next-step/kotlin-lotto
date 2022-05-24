@@ -14,21 +14,8 @@ class LottoTest {
 
     @Test
     fun `로또가 발행될 때 번호가 발급된다`() {
-        lotto.processLotto()
+        lotto.processLotto(listOf(1, 1, 1, 1, 1, 1))
         assertThat(lotto.numbers.size).isEqualTo(6)
         assertThat(lotto.numbers[1]).isNotEqualTo(0)
-    }
-}
-
-class Lotto {
-    val numbers = arrayListOf<Int>()
-
-    fun processLotto() {
-        numbers.add(1)
-        numbers.add(1)
-        numbers.add(1)
-        numbers.add(1)
-        numbers.add(1)
-        numbers.add(1)
     }
 }
