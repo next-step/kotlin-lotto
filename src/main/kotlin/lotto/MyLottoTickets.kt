@@ -15,6 +15,6 @@ class MyLottoTickets(
 
     fun getProfit(myLottoResult: MyLottoResult): Double {
         val totalEarningByLotto = myLottoResult.totalEarning
-        return totalEarningByLotto.toDouble() / (lottoTickets.size * LOTTO_PRICE).toDouble()
+        return totalEarningByLotto.toDouble() / (lottoTickets.size * LottoPolicy.LOTTO_PRICE).toDouble()
     }
 }
