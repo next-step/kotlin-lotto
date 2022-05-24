@@ -1,6 +1,6 @@
 package lotto
 
-class Receipt(private val payment: Int) {
+class Receipt(val payment: Int) {
     val lottoCount
         get() = payment / LOTTO_PRICE
 
