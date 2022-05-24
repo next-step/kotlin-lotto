@@ -13,13 +13,11 @@ class LottoUserTest {
     }
 
     @Test
-    fun `로또 당첨금의 총합을 계산한다`() {
-        assertThat(lottoUser.calculateWinningMoney()).isEqualTo(5000)
-    }
-}
-
-class LottoUser {
-    fun calculateWinningMoney(): Int {
-        return 5000
+    fun `당첨 번호를 알려주면 로또 당첨금의 총합을 계산한다`() {
+        lottoUser.purchaseLotto(3000)
+        lottoUser.lottos[0].processLotto(listOf(0, 0, 3, 1, 2, 0))
+        lottoUser.lottos[1].processLotto(listOf(1, 2, 3, 10, 0, 0))
+        lottoUser.lottos[2].processLotto(listOf(1, 0, 3, 0, 0, 0))
+        assertThat(lottoUser.calculateWinningMoney(listOf(1, 2, 3, 10, 6, 7))).isEqualTo(55000)
     }
 }
