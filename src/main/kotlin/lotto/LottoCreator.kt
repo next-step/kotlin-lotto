@@ -5,6 +5,8 @@ import kotlin.random.Random
 object LottoCreator {
 
     fun issue(count: Int): List<List<Int>> {
+        require(count > 0)
+
         val randomIssuedList = mutableListOf<List<Int>>()
         repeat(count) {
             randomIssuedList.add(
