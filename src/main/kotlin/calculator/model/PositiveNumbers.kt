@@ -1,12 +1,10 @@
 package calculator.model
 
 class PositiveNumbers private constructor(
-    private val numbers: List<PositiveNumber>
+    numbers: List<PositiveNumber>
 ) {
 
-    fun sum(): Int {
-        return numbers.sumOf { it.number }
-    }
+    val sum: Int = numbers.sumOf { it.number }
 
     companion object {
         fun from(numbers: List<String>): PositiveNumbers {

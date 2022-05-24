@@ -20,6 +20,6 @@ object AddCalculator {
 
     private fun splitAndSum(delimiter: Regex = DEFAULT_DELIMITER_REGEX, tokens: String): Int {
         val numbers = tokens.split(delimiter)
-        return PositiveNumbers.from(numbers).sum()
+        return PositiveNumbers.from(numbers).sum
     }
 }

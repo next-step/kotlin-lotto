@@ -13,6 +13,6 @@ class PositiveNumbersTest {
         val numbers = PositiveNumbers.from(listOf("1", "2", "3"))
 
         // when, then
-        assertEquals(numbers.sum(), 6)
+        assertEquals(numbers.sum, 6)
     }
 }
