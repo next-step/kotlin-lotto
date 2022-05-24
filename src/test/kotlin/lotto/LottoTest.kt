@@ -3,6 +3,8 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class LottoTest {
     private lateinit var lotto: Lotto
@@ -33,8 +35,9 @@ class LottoTest {
         assertThat(lotto.getContainLottoNumberSameCount(listOf(2, 9, 3, 11, 10, 1))).isEqualTo(3)
     }
 
-    @Test
-    fun `로또 번호와 당첨 번호가 3개 일치한다면 5000원으로 교환한다`() {
-        assertThat(lotto.exchangeWinningMoney(3)).isEqualTo(5000)
+    @ParameterizedTest
+    @CsvSource("3,5000", "4,50000", "5,1500000", "6,2000000000", "2,0")
+    fun `로또 번호와 당첨 번호가 3개 일치한다면 5000원으로 교환한다`(sameCount: Int, winningMoney: Int) {
+        assertThat(lotto.exchangeWinningMoney(sameCount)).isEqualTo(winningMoney)
     }
 }
