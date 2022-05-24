@@ -1,6 +1,6 @@
 package lotto
 
-class Confirmation(private val winningValue: String, lotto: Lotto) {
+class Confirmation(winningValue: String, lotto: Lotto) {
     val winningNumbers = winningValue
         .replace(" ", "")
         .split(",")
