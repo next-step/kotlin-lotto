@@ -1,6 +1,6 @@
-package domain
+package lotto
 
-import domain.LottoCreator.issue
+import lotto.LottoCreator.issue
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
