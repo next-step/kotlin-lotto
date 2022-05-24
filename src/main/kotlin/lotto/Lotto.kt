@@ -1,8 +1,11 @@
 package lotto
 
-class Lotto(val generateLists: (Int) -> List<Int>) {
-    val numbers: List<Int>
-        get() = generateLists(LOTTO_NUMBER_COUNT)
+class Lotto(generateLists: (Int) -> List<Int>) {
+    var numbers: List<Int> = listOf()
+
+    init {
+        numbers = generateLists(LOTTO_NUMBER_COUNT)
+    }
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
