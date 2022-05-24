@@ -28,6 +28,9 @@ object LottoResultView {
     }
 
     private fun printLottoRankingCountAndPrice(lottoRank: LottoWinnerRank, count: Int?) {
-        println("${lottoRank.matchCount}개 일치 (${lottoRank.price}원) - ${count}개")
+        when (lottoRank) {
+            LottoWinnerRank.SECOND_PRICE -> println("${lottoRank.matchCount}개 일치, 보너스 볼 일치 (${lottoRank.price}원) - ${count}개")
+            else -> println("${lottoRank.matchCount}개 일치 (${lottoRank.price}원) - ${count}개")
+        }
     }
 }
