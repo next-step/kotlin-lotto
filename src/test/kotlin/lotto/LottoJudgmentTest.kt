@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -49,6 +50,11 @@ class LottoJudgmentTest {
             { Assertions.assertEquals(lottoJudgment.getRanking(expectSecond), LottoWinnerRank.SECOND_PRICE) },
             { Assertions.assertEquals(lottoJudgment.getRanking(expectThird), LottoWinnerRank.THIRD_PRICE) },
         )
+    }
+
+    @Test
+    fun ` 2등 보너스 번호에 지난당첨 번호가 있으면 익셉션을 발생시킨다`() {
+        assertThrows<IllegalArgumentException> { LottoJudgment(lastLottoTicket, lastLottoTicket.numbers.first()) }
     }
 
     companion object {

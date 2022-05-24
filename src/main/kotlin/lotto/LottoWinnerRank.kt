@@ -23,7 +23,7 @@ enum class LottoWinnerRank(val matchCount: Int, val price: Int) {
         fun getRankingList(): List<LottoWinnerRank> {
             return values()
                 .filter { it != NONE }
-                .sortedBy { it.matchCount }
+                .sortedBy { it.price }
         }
     }
 }

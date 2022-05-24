@@ -10,7 +10,8 @@ fun main() {
     LottoResultView.printPurchasedLottoInfo(myLottos.lottoTickets)
 
     val lastLottoWinnerNumbers = LottoInputView.lastWinnerLotteryInputView()
-    val lottoJudgment = LottoJudgment(LottoTicket(lastLottoWinnerNumbers))
+    val bonusNumber = LottoInputView.bonusNumberInputView()
+    val lottoJudgment = LottoJudgment(LottoTicket(lastLottoWinnerNumbers), bonusNumber)
     val myLottoResult = myLottos.getMyLottoResult(lottoJudgment)
     val profit = myLottos.getProfit(myLottoResult)
 
