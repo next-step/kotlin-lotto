@@ -7,9 +7,9 @@ class LottoUser {
         get() = _lottos
     private val _lottos = arrayListOf<Lotto>()
 
-    fun purchaseLotto(money: Int) {
+    fun purchaseLotto(enableLottoPurchaseCount: Int) {
         _lottos.clear()
-        _lottos.addAll(LottoSeller.sellLotto(money))
+        _lottos.addAll(LottoSeller.sellLotto(enableLottoPurchaseCount))
     }
 
     fun calculateWinningMoney(winningNumber: List<Int>): Int {

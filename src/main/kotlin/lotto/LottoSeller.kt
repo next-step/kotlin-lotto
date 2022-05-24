@@ -5,8 +5,7 @@ object LottoSeller {
 
     fun enableSellLottoCount(money: Int): Int = (money / LOTTO_PRICE)
 
-    fun sellLotto(money: Int): List<Lotto> {
-        val lottoCount: Int = enableSellLottoCount(money)
-        return List(lottoCount) { Lotto().apply { processLotto() } }
+    fun sellLotto(enableLottoPurchaseCount: Int): List<Lotto> {
+        return List(enableLottoPurchaseCount) { Lotto().apply { processLotto() } }
     }
 }
