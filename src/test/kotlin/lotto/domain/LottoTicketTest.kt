@@ -75,7 +75,7 @@ class LottoTicketTest : DescribeSpec({
                     )
                 )
 
-                lottoTicket.matching(otherLottoTicket) shouldBe LottoMatchCount(6)
+                lottoTicket.matching(otherLottoTicket) shouldBe 6
             }
 
             it("3개의 번호의 수가 일치하면 3을 반환한다") {
@@ -90,7 +90,7 @@ class LottoTicketTest : DescribeSpec({
                     )
                 )
 
-                lottoTicket.matching(otherLottoTicket) shouldBe LottoMatchCount(3)
+                lottoTicket.matching(otherLottoTicket) shouldBe 3
             }
 
             it("하나도 일치하지 않으면 0을 반환한다") {
@@ -105,7 +105,29 @@ class LottoTicketTest : DescribeSpec({
                     )
                 )
 
-                lottoTicket.matching(otherLottoTicket) shouldBe LottoMatchCount(0)
+                lottoTicket.matching(otherLottoTicket) shouldBe 0
+            }
+        }
+    }
+
+    describe("contains") {
+        context("로또 번호가 주어졌을 때") {
+            val lottoTicket = LottoTicket(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6),
+                )
+            )
+            it("포함되어 있는 경우 true 를 반환한다") {
+                lottoTicket.contains(LottoNumber(5)) shouldBe true
+            }
+
+            it("포함되어 있지 않은 경우 false 를 반환한다") {
+                lottoTicket.contains(LottoNumber(7)) shouldBe false
             }
         }
     }

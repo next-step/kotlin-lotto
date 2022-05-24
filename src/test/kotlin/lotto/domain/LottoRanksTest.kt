@@ -17,7 +17,7 @@ class LottoRanksTest : DescribeSpec({
                         LottoRank.THIRD,
                         LottoRank.FOURTH,
                         LottoRank.FOURTH,
-                        LottoRank.NOTTING,
+                        LottoRank.NOTHING,
                     )
                 )
                 val countByLottoRanks = lottoRanks.count()
@@ -26,7 +26,7 @@ class LottoRanksTest : DescribeSpec({
                     countByLottoRanks[LottoRank.SECOND] shouldBe 1
                     countByLottoRanks[LottoRank.THIRD] shouldBe 1
                     countByLottoRanks[LottoRank.FOURTH] shouldBe 2
-                    countByLottoRanks[LottoRank.NOTTING] shouldBe 1
+                    countByLottoRanks[LottoRank.NOTHING] shouldBe 1
                 }
             }
         }
@@ -37,8 +37,8 @@ class LottoRanksTest : DescribeSpec({
             it("구매금액 2_000, 당첨금액 5_000") {
                 val lottoRanks = LottoRanks(
                     listOf(
-                        LottoRank.FOURTH,
-                        LottoRank.NOTTING,
+                        LottoRank.FIFTH,
+                        LottoRank.NOTHING,
                     )
                 )
 
@@ -48,11 +48,11 @@ class LottoRanksTest : DescribeSpec({
             it("구매금액 5_000, 당첨금액 1_550_000") {
                 val lottoRanks = LottoRanks(
                     listOf(
-                        LottoRank.SECOND,
                         LottoRank.THIRD,
-                        LottoRank.NOTTING,
-                        LottoRank.NOTTING,
-                        LottoRank.NOTTING,
+                        LottoRank.FOURTH,
+                        LottoRank.NOTHING,
+                        LottoRank.NOTHING,
+                        LottoRank.NOTHING,
                     )
                 )
 

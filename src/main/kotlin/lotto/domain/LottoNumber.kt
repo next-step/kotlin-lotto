@@ -11,5 +11,9 @@ data class LottoNumber(val number: Int) {
     companion object {
         const val LOTTO_MIN_NUMBER = 1
         const val LOTTO_MAX_NUMBER = 45
+
+        fun of(value: String): LottoNumber {
+            return LottoNumber(value.toInt())
+        }
     }
 }
