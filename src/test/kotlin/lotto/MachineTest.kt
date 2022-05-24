@@ -22,4 +22,11 @@ internal class MachineTest {
 
         assertThat(machine.lottoList.size).isEqualTo(10)
     }
+
+    @Test
+    fun `통계 기능을 확인한다`() {
+        val machine = Machine(10002)
+        machine.purchase()
+        machine.statistics()
+    }
 }
