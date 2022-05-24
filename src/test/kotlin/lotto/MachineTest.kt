@@ -7,7 +7,7 @@ internal class MachineTest {
 
     @Test
     fun `로또 기계는 금액을 전달 받는다`() {
-        assertThat(Machine(10000).price).isEqualTo(Machine(10000).price)
+        assertThat(Machine(10000).purchasePrice).isEqualTo(Machine(10000).purchasePrice)
     }
 
     @Test
@@ -17,6 +17,9 @@ internal class MachineTest {
 
     @Test
     fun `구매 가능한 로또 수 만큼 랜덤 생성된 목록을 확인한다`() {
-        assertThat(Machine(10002).lottoList.size).isEqualTo(10)
+        val machine = Machine(10002)
+        machine.purchase()
+
+        assertThat(machine.lottoList.size).isEqualTo(10)
     }
 }
