@@ -22,10 +22,8 @@ class LottoNumberRange(override val start: LottoNumber, override val endInclusiv
     fun toIntRange() = IntRange(start.number, endInclusive.number)
 }
 
-class LottoNumberIterator(private val start: LottoNumber, private val endInclusive: LottoNumber) :
+class LottoNumberIterator(private var offset: LottoNumber, private val endInclusive: LottoNumber) :
     Iterator<LottoNumber> {
-
-    private var offset = start
 
     override fun hasNext() = (this.offset <= endInclusive)
     override fun next(): LottoNumber {
