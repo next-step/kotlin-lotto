@@ -25,13 +25,13 @@ object InputParser {
         return try {
             this.toInt()
         } catch (e: NumberFormatException) {
-            throw RuntimeException("부적절한 계산식입니다.")
+            throw IllegalArgumentException("부적절한 계산식입니다.")
         }
     }
 
     private fun Int.onlyPositiveOrThrow(): Int {
         if (this < 0) {
-            throw RuntimeException("양의 정수만 입력 가능합니다.")
+            throw IllegalArgumentException("양의 정수만 입력 가능합니다.")
         }
         return this
     }

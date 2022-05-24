@@ -62,7 +62,9 @@ internal class InputParserTest {
     fun `표현식파싱테스트 - 표현식에 전달받은 delimiter가 아닌 delimiter가 포함된 경우 파싱 예외 테스트`(delimiter: String) {
         val expression = "1:2,3"
 
-        assertThrows<RuntimeException>("부적절한 계산식입니다.") { InputParser.parseExpression(expression, delimiter) }
+        assertThrows<IllegalArgumentException>("부적절한 계산식입니다.") {
+            InputParser.parseExpression(expression, delimiter)
+        }
     }
 
     @Test
@@ -81,7 +83,9 @@ internal class InputParserTest {
         val expression = "1|2,3"
         val delimiter = null
 
-        assertThrows<RuntimeException>("부적절한 계산식입니다.") { InputParser.parseExpression(expression, delimiter) }
+        assertThrows<IllegalArgumentException>("부적절한 계산식입니다.") {
+            InputParser.parseExpression(expression, delimiter)
+        }
     }
 
     @ParameterizedTest
@@ -100,7 +104,20 @@ internal class InputParserTest {
 
         val (expression, delimiter) = InputParser.parseDelimiter(input)
 
-        assertThrows<RuntimeException>("부적절한 계산식입니다.") { InputParser.parseExpression(expression, delimiter) }
+        assertThrows<IllegalArgumentException>("부적절한 계산식입니다.") {
+            InputParser.parseExpression(expression, delimiter)
+        }
+    }
+
+    @Test
+    fun `파싱 통합테스트 - 음수 파싱 실패 테스트`() {
+        val input = "1,-2:3"
+
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
+
+        assertThrows<IllegalArgumentException>("양의 정수만 입력 가능합니다.") {
+            InputParser.parseExpression(expression, delimiter)
+        }
     }
 
     @Test
