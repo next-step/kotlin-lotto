@@ -18,4 +18,8 @@ fun main() {
 
     val lottoLuckyDraw = LottoLuckyDraw(drawNumber)
     lottoLuckyDraw.doLuckDraw(purchasedLotto)
+    val statistics = lottoLuckyDraw.getStatistics
+
+    statistics.getReport()
+    statistics.getResult(input)
 }
