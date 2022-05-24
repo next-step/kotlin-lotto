@@ -11,4 +11,6 @@ fun main() {
     val lottoUser = LottoUser()
     lottoUser.purchaseLotto(enableLottoPurchaseCount)
     LottoOutputView.printPurchaseLotto(enableLottoPurchaseCount)
+
+    LottoOutputView.printLottoNumbers(lottoUser.lottos)
 }
