@@ -2,20 +2,33 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.api.Test
 
 class LottoTest {
-    private lateinit var lottoSeller: LottoSeller
+    private lateinit var lotto: Lotto
 
     @BeforeEach
-    fun setUp() {
-        lottoSeller = LottoSeller()
+    fun setup() {
+        lotto = Lotto()
     }
 
-    @ParameterizedTest
-    @CsvSource("1000,1", "22000,22", "5500,5")
-    fun `1000원당 1장의 로또를 구매한다`(money: Int, lottoCount: Int) {
-        assertThat(lottoSeller.purchaseLotto(money)).isEqualTo(lottoCount)
+    @Test
+    fun `로또가 발행될 때 번호가 발급된다`() {
+        lotto.processLotto()
+        assertThat(lotto.numbers.size).isEqualTo(6)
+        assertThat(lotto.numbers[1]).isNotEqualTo(0)
+    }
+}
+
+class Lotto {
+    val numbers = arrayListOf<Int>()
+
+    fun processLotto() {
+        numbers.add(1)
+        numbers.add(1)
+        numbers.add(1)
+        numbers.add(1)
+        numbers.add(1)
+        numbers.add(1)
     }
 }
