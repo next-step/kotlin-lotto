@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class WinPolicy(val matchCount: Int, val priceAmount: Money) {
+data class WinPolicy(val matchCount: Int, val priceAmount: Money, val useBonus: Boolean = false) {
 
     init {
         require(1 <= matchCount) { "숫자 일치 개수는 1보다 커야합니다" }

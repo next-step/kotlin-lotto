@@ -27,6 +27,10 @@ class WinNumberView(private val io: IO) {
             return read()
         }
 
-        return WinNumbers.of(result)
+        io.read().toIntOrNull()?.let {
+            return WinNumbers.of(result, it)
+        }
+
+        return read()
     }
 }

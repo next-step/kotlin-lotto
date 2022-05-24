@@ -8,6 +8,6 @@ enum class WinCondition(val matchCount: Int, val price: Int) {
 
     companion object {
         fun toWinPolicy(): List<WinPolicy> =
-            WinCondition.values().map { WinPolicy(it.matchCount, Money(it.price)) }
+            WinCondition.values().map { WinPolicy(it.matchCount, Money(it.price), false) }
     }
 }

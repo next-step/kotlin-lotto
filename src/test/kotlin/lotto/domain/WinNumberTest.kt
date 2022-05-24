@@ -6,20 +6,27 @@ import io.kotest.matchers.shouldBe
 
 internal class WinNumberTest : FreeSpec({
 
-    "숫자 목록을 받아 인스턴스를 생성한다" {
-        val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6))
+    "숫자 목록과 보너스 번호를 받아 인스턴스를 생성한다" {
+        val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
 
         winNumbers.value.map { it.value } shouldBe listOf(1, 2, 3, 4, 5, 6)
+        winNumbers.bonus shouldBe LottoNumber(7)
     }
 
     "숫자 목록에 중복된 값이 존재하면 에러가 발생한다" {
         shouldThrow<IllegalArgumentException> {
-            WinNumbers.of(listOf(1, 2, 3, 4, 4, 6))
+            WinNumbers.of(listOf(1, 2, 3, 4, 4, 6), 7)
+        }
+    }
+
+    "숫자 목록과 보너스 숫자에 중복된 값이 존재하면 에러가 발생한다" {
+        shouldThrow<IllegalArgumentException> {
+            WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 3)
         }
     }
 
     "주어진 로또와 일치하는 숫자의 개수를 반환한다" - {
-        val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6))
+        val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
 
         listOf(
             Lotto.of(listOf(1, 2, 3, 4, 5, 6)) to 6,
@@ -34,5 +41,12 @@ internal class WinNumberTest : FreeSpec({
                 winNumbers.matchCount(lotto) shouldBe count
             }
         }
+    }
+
+    "보너스 일치 여부를 반환한다" {
+        val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
+
+        winNumbers.isBonusMatched(7) shouldBe true
+        winNumbers.isBonusMatched(6) shouldBe false
     }
 })
