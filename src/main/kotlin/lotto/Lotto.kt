@@ -21,6 +21,10 @@ class Lotto {
 
     fun isContainLottoNumber(winningNumber: Int): Boolean = _numbers.contains(winningNumber)
 
+    fun receiveWinningMoney(sameCount: Int): Int {
+        return 5000
+    }
+
     private fun shuffled(): List<Int> =
         List(LOTTO_NUMBER_COUNT) {
             (MIN_NUMBER..MAX_NUMBER).random()

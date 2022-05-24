@@ -32,4 +32,9 @@ class LottoTest {
         lotto.processLotto(listOf(1, 2, 3, 4, 5, 6))
         assertThat(lotto.getContainLottoNumberSameCount(listOf(2, 9, 3, 11, 10, 1))).isEqualTo(3)
     }
+
+    @Test
+    fun `로또 번호와 당첨 번호가 3개 일치한다면 5000원을 수령한다`() {
+        assertThat(lotto.receiveWinningMoney(3)).isEqualTo(5000)
+    }
 }
