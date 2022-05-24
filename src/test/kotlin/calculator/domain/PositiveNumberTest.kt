@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-internal class AddNumberTest : FreeSpec({
+internal class PositiveNumberTest : FreeSpec({
 
     "숫자 이외의 값이 전달되면 예외가 발생한다." - {
         listOf(
@@ -14,7 +14,7 @@ internal class AddNumberTest : FreeSpec({
             "%$",
         ).forEach { text ->
             "'$text' 가 전달되면 예외가 발생한다." {
-                val exception = shouldThrowExactly<RuntimeException> { AddNumber.from(text = text) }
+                val exception = shouldThrowExactly<RuntimeException> { PositiveNumber.from(text = text) }
                 exception.message shouldBe "'$text' 는 정수로 변환할 수 없는 문자열입니다."
             }
         }
@@ -27,7 +27,7 @@ internal class AddNumberTest : FreeSpec({
             -100,
         ).forEach { negativeNumber ->
             "'$negativeNumber' 가 전달되면 예외가 발생한다." {
-                val exception = shouldThrowExactly<RuntimeException> { AddNumber(value = negativeNumber) }
+                val exception = shouldThrowExactly<RuntimeException> { PositiveNumber(value = negativeNumber) }
                 exception.message shouldBe "덧셈 피연산자 값은 음수일 수 없습니다. ($negativeNumber)"
             }
         }

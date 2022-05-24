@@ -1,6 +1,6 @@
 package calculator.domain
 
-data class AddNumber(
+data class PositiveNumber(
     val value: Int,
 ) {
     init {
@@ -10,7 +10,7 @@ data class AddNumber(
     }
 
     companion object {
-        fun from(text: String): AddNumber = kotlin.runCatching { AddNumber(text.toInt()) }
+        fun from(text: String): PositiveNumber = kotlin.runCatching { PositiveNumber(text.toInt()) }
             .getOrElse { throw RuntimeException("'$text' 는 정수로 변환할 수 없는 문자열입니다.") }
     }
 }

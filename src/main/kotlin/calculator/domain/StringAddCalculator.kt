@@ -8,7 +8,7 @@ class StringAddCalculator {
         }
 
         val regex = Separator.toRegexWith("|")
-        val addNumbers = AddNumbers.of(text.split(regex = regex))
-        return addNumbers.addAll().value
+        val positiveNumbers = PositiveNumbers.of(text.split(regex = regex))
+        return positiveNumbers.addAll().value
     }
 }

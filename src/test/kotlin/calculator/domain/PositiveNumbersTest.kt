@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-internal class AddNumbersTest : FreeSpec({
+internal class PositiveNumbersTest : FreeSpec({
 
     "주어진 정수의 총합을 반환한다." - {
         listOf(
@@ -13,8 +13,8 @@ internal class AddNumbersTest : FreeSpec({
             row(listOf(10, 20), 30),
         ).forEach { (numbers, result) ->
             "'$numbers'의 총합은 '$result'다." {
-                val addNumbers = AddNumbers(numbers.map { AddNumber(it) })
-                addNumbers.addAll() shouldBe AddNumber(result)
+                val positiveNumbers = PositiveNumbers(numbers.map { PositiveNumber(it) })
+                positiveNumbers.addAll() shouldBe PositiveNumber(result)
             }
         }
     }
