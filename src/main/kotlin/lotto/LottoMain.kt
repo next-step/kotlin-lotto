@@ -1,5 +1,10 @@
 package lotto
 
+import lotto.domain.LottoStatistics
+import lotto.domain.LottoStore
+import lotto.view.InputView
+import lotto.view.ResultView
+
 fun main() {
     val inputView = InputView(reader = ::readLine, writer = ::print)
     val resultView = ResultView(writer = ::print)

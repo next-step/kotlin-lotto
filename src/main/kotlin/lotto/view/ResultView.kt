@@ -1,4 +1,8 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoMatch
+import lotto.domain.LottoStatistics
+import lotto.domain.LottoTicket
 
 class ResultView(
     private val writer: (String) -> Unit
@@ -17,7 +21,7 @@ class ResultView(
     }
 
     private fun printStatisticsHeader() {
-        writeLine("당첨 동계")
+        writeLine("\n당첨 동계")
         writeLine("-".repeat(10))
     }
 

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoStatistics(
     private val lottoTickets: List<LottoTicket>,

@@ -1,4 +1,4 @@
-package lotto
+package lotto.view
 
 class InputView(private val reader: () -> String?, private val writer: (String) -> Unit) {
 
@@ -14,7 +14,7 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
     }
 
     private fun printInputPurchaseMoney() {
-        writer("구입금액을 입력해 주세요.\n")
+        writeLine("구입금액을 입력해 주세요.")
     }
 
     fun readLastLottoNumbers(): Set<Int> {
@@ -30,8 +30,10 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
     }
 
     private fun printInputLastLottoNumbers() {
-        writer("지난 주 당첨 번호를 입력해 주세요.\n")
+        writeLine("\n지난 주 당첨 번호를 입력해 주세요.")
     }
+
+    private fun writeLine(message: String) = writer("$message\n")
 
     private fun String.tokenize(): List<String> =
         split(",")
