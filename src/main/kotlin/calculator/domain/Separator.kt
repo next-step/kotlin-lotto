@@ -9,7 +9,7 @@ enum class Separator(
 
     companion object {
         fun toRegexWith(separatorValue: String) = values()
-            .joinToString(separator = separatorValue)
+            .joinToString(separator = separatorValue) { it.text }
             .toRegex()
     }
 }
