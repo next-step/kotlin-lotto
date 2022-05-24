@@ -10,8 +10,13 @@ class Lotto {
         _numbers.addAll(lottoNumbers)
     }
 
-    fun getContainLottoNumberCount(winningNumbers: List<Int>): Int {
-        return 3
+    fun getContainLottoNumberSameCount(winningNumbers: List<Int>): Int {
+        var sameCount = 0
+        winningNumbers.forEach { winningNumber ->
+            if (isContainLottoNumber(winningNumber)) sameCount++
+        }
+
+        return sameCount
     }
 
     fun isContainLottoNumber(winningNumber: Int): Boolean = _numbers.contains(winningNumber)

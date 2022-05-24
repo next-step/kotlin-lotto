@@ -30,6 +30,6 @@ class LottoTest {
     @Test
     fun `당첨 번호와 로또 번호가 일치한 양를 반환한다`() {
         lotto.processLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(lotto.getContainLottoNumberCount(listOf(2, 9, 3, 11, 10, 1))).isEqualTo(3)
+        assertThat(lotto.getContainLottoNumberSameCount(listOf(2, 9, 3, 11, 10, 1))).isEqualTo(3)
     }
 }
