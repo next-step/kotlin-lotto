@@ -15,7 +15,7 @@ fun main() {
     val resultView = ResultView()
 
     val payment: String = inputView.payment()
-    val paymentRequestDto = InputPaymentRequestDto.convertInt(payment)
+    val paymentRequestDto = InputPaymentRequestDto.convertToOperand(payment)
 
     val lottoRecord = buyLotto(resultView, paymentRequestDto)
     lottoStatics(inputView, resultView, paymentRequestDto, lottoRecord)
