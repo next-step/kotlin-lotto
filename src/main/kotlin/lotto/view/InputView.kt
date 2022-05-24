@@ -1,3 +1,9 @@
 package lotto.view
 
-object InputView
+object InputView {
+    private const val MESSAGE_INPUT_PURCHASE_AMOUNT = "구입 금액을 입력해 주세요"
+
+    fun receiveUserInput() {
+        println(MESSAGE_INPUT_PURCHASE_AMOUNT)
+    }
+}
