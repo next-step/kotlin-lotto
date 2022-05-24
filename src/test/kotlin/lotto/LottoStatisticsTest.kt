@@ -32,7 +32,7 @@ class LottoStatisticsTest : BehaviorSpec({
             And("총 구매 금액을 입력하면") {
                 val purchase = 4000
                 val reward = 5000 + 50000 + 1500000 + 2000000000
-                val profit = reward / purchase
+                val profit = reward.toDouble() / purchase.toDouble()
                 Then("총 수익율을 반환한다") {
                     statistics.getProfit(purchase) shouldBe profit
                 }
