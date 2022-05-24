@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.LottoBuyer
-import lotto.domain.WinningNumbers
+import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
@@ -10,6 +10,7 @@ fun main() {
     val lottoBuyer = LottoBuyer(amountOfMoney)
     OutputView.showPurchasedLottoBundle(lottoBuyer.buyAll())
     val numbers = InputView.readWinningNumbers()
-    val winningResult = lottoBuyer.confirmWinning(WinningNumbers.of(numbers))
+    val bonusBall = InputView.readBonusBall()
+    val winningResult = lottoBuyer.confirm(WinningLotto.from(numbers, bonusBall))
     OutputView.showWinningResult(winningResult)
 }

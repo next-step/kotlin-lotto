@@ -5,20 +5,27 @@ data class LottoBundle(
 ) {
     val size = bundle.size
 
-    init {
-        require(bundle.isNotEmpty()) { "로또는 하나 이상 존재해야 합니다" }
-    }
-
     override fun toString(): String {
         return bundle.joinToString("\n") { it.toString() }
     }
 
-    fun matchWinning(winningNumbers: WinningNumbers): List<WinningPlace> {
-        val winnings = mutableListOf<WinningPlace>()
-        bundle.forEach {
-            val matching = it.countMatchingNumbers(winningNumbers.lotto)
-            winnings.add(WinningPlace.of(matching))
+    operator fun plus(other: LottoBundle): LottoBundle {
+        val targetBundle = bundle.toMutableList()
+        targetBundle.addAll(other.bundle)
+        return LottoBundle(targetBundle.toList())
+    }
+
+    fun isNotEmpty() = bundle.isNotEmpty()
+
+    fun matchWinning(winningLotto: WinningLotto): List<WinningPlace> {
+        return bundle.map {
+            val matchingNumber = it.countMatchingNumbers(winningLotto.lotto)
+            val matchingBonus = winningLotto.bonusBall in it
+            WinningPlace.of(matchingNumber, matchingBonus)
         }
-        return winnings.toList()
+    }
+
+    companion object {
+        val EMPTY = LottoBundle(emptyList())
     }
 }
