@@ -25,13 +25,11 @@ internal class MachineTest {
 
     @Test
     fun `통계 기능을 확인한다`() {
-        val machine = Machine(10002)
+        val machine = Machine(14000)
         machine.purchase()
         machine.statistics(
             "1, 2, 3, 4, 5, 6",
             listOf(
-                Lotto(numbers = setOf(1, 2, 3, 4, 5, 6)),
-                Lotto(numbers = setOf(1, 2, 3, 4, 10, 11)),
                 Lotto(numbers = setOf(1, 2, 3, 10, 11, 12))
             )
         )

@@ -1,5 +1,7 @@
 package lotto
 
+import java.lang.Math.floor
+import java.lang.Math.round
 import kotlin.random.Random
 
 class Machine(val purchasePrice: Int) {
@@ -26,27 +28,18 @@ class Machine(val purchasePrice: Int) {
         return list.toSet()
     }
 
-    private fun winningPrice(confirmation: Confirmation): Int {
-        return when (confirmation.winningNumbers.size) {
-            3 -> 5000
-            4 -> 50000
-            5 -> 1500000
-            6 -> 2000000000
-            else -> 0
-        }
-    }
 
     fun statistics(winningValue: String, lottoList: List<Lotto>) {
         val confirmationList = lottoList.map { Confirmation(winningValue, it) }
-
-        val third = confirmationList.filter { it.winningNumbers.size == 3 }.size
-        val forth = confirmationList.filter { it.winningNumbers.size == 4 }.size
-        val fifth = confirmationList.filter { it.winningNumbers.size == 5 }.size
-        val sixth = confirmationList.filter { it.winningNumbers.size == 6 }.size
-
-        println("3개 일치 (5000원)- ${third}개")
-        println("4개 일치 (50000원)- ${forth}개")
-        println("5개 일치 (1500000원)- ${fifth}개")
-        println("6개 일치 (2000000000원)- ${sixth}개")
+        val third = confirmationList.filter { it.winningNumbers.size == 3 }
+        val forth = confirmationList.filter { it.winningNumbers.size == 4 }
+        val fifth = confirmationList.filter { it.winningNumbers.size == 5 }
+        val sixth = confirmationList.filter { it.winningNumbers.size == 6 }
+        val totalWinningPrice = third.sumOf { it.price } + forth.sumOf { it.price } + fifth.sumOf { it.price } + sixth.sumOf { it.price }
+        println("3개 일치 (5000원)- ${third.size}개")
+        println("4개 일치 (50000원)- ${forth.size}개")
+        println("5개 일치 (1500000원)- ${fifth.size}개")
+        println("6개 일치 (2000000000원)- ${sixth.size}개")
+        println("총 수익률은 ${String.format("%.2f", totalWinningPrice.toDouble() / purchasePrice.toDouble())}입니다.")
     }
 }
