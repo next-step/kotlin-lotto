@@ -9,7 +9,7 @@ class Machine(val price: Int) {
         Lotto(makeRandomNumbers())
     }
 
-    private fun makeRandomNumbers(): List<Int> {
+    private fun makeRandomNumbers(): Set<Int> {
         val list = mutableListOf<Int>()
 
         while (list.size < 6) {
@@ -19,6 +19,6 @@ class Machine(val price: Int) {
             }
         }
 
-        return list.toList()
+        return list.toSet()
     }
 }
