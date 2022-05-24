@@ -17,7 +17,8 @@ class Matcher(private val winNumbers: WinNumbers, policies: List<WinPolicy>) {
             LottoMatchResult(
                 matchCount = it.matchCount,
                 price = it.priceAmount,
-                winCount = lottos.count { lotto -> it.isMatch(winNumbers, lotto) }
+                winCount = lottos.count { lotto -> it.isMatch(winNumbers, lotto) },
+                bonus = it.useBonus,
             )
         }
 }
