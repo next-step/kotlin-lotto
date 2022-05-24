@@ -6,9 +6,16 @@ class StringAddCalculator {
         if(text.isNullOrBlank()) {
             return ZERO
         }
-        val numbers = getStringListWithDefinedRegx(text).map { string -> string.toInt() }
+        val numbers = (getStringListWithCustomRegx(text) ?: getStringListWithDefinedRegx(text))
+            .map { string -> string.toInt() }
         validatedMinus(numbers)
         return numbers.sum()
+    }
+
+    private fun getStringListWithCustomRegx(text: String) : List<String>? {
+        return Regex("//(.)\n(.*)").find(text)?.let {
+            it.groupValues[2].split(it.groupValues[1])
+        }
     }
 
     private fun getStringListWithDefinedRegx(text: String) : List<String> {

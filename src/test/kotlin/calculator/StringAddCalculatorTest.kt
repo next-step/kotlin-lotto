@@ -1,7 +1,6 @@
 package calculator
 
 import org.assertj.core.api.Assertions
-import org.assertj.core.util.Strings
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -59,5 +58,11 @@ class StringAddCalculatorTest {
         delimiter = '/')
     fun `6) 음수를 전달한 경우 RuntimeException 예외가 발생해야 한다`(text: String, result: Int) {
         assertThrows<RuntimeException> { calculator.add(text) }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3"])
+    fun `7) 커스텀 구분자를 지정할 수 있다`(text: String) {
+        Assertions.assertThat(calculator.add(text)).isEqualTo(6)
     }
 }
