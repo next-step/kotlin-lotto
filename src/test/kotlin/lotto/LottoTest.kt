@@ -34,7 +34,7 @@ class LottoTest {
     }
 
     @Test
-    fun `로또 번호와 당첨 번호가 3개 일치한다면 5000원을 수령한다`() {
-        assertThat(lotto.receiveWinningMoney(3)).isEqualTo(5000)
+    fun `로또 번호와 당첨 번호가 3개 일치한다면 5000원으로 교환한다`() {
+        assertThat(lotto.exchangeWinningMoney(3)).isEqualTo(5000)
     }
 }
