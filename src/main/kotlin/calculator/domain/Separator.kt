@@ -1,15 +1,24 @@
 package calculator.domain
 
 enum class Separator(
-    val text: String,
+    private val regex: Regex,
+    val split: (String) -> List<String>,
 ) {
-    REST(","),
-    COLON(":"),
+    DEFAULT(
+        Regex("[,:]"),
+        { text -> text.split(DEFAULT.regex) }
+    ),
+    CUSTOM(
+        Regex("//(.)\n(.*)"),
+        { text ->
+            val matchResult = CUSTOM.regex.matchEntire(text)!!
+            matchResult.groupValues[2].split(matchResult.groupValues[1])
+        }),
     ;
 
     companion object {
-        fun toRegexWith(separatorValue: String) = values()
-            .joinToString(separator = separatorValue) { it.text }
-            .toRegex()
+        fun matchByCustomSeparator(text: String): Boolean {
+            return CUSTOM.regex.matches(text)
+        }
     }
 }

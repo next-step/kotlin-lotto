@@ -1,22 +1,22 @@
 package calculator.domain
 
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
+import io.kotest.data.row
+import io.kotest.matchers.shouldBe
 
 internal class SeparatorTest : FreeSpec({
 
-    "주어진 문자열로 조합된 구분자목록 문자열을 반환한다." - {
+    "주어진 문자열이 커스텀 구분자를 포함했는지 아닌지를 판별한다." - {
         listOf(
-            "a",
-            "|",
-            "1",
-        ).forEach { separatorValue ->
-            "'$separatorValue'로 조합된 구분자목록 문자열 반환" {
-                val regex = Separator.toRegexWith(separatorValue = separatorValue)
-                regex.toString()
-                    .split(separatorValue)
-                    .map { Separator.valueOf(it) }
-                    .shouldContainExactlyInAnyOrder(expected = Separator.values())
+            row("//;\n", true),
+            row("//A\n", true),
+            row("|", false),
+            row(";", false),
+            row(",", false),
+            row("1", false),
+        ).forEach { (text, result) ->
+            "'$text'가 커스텀 구분자인지 결과는 '$result'다." {
+                Separator.matchByCustomSeparator(text) shouldBe result
             }
         }
     }
