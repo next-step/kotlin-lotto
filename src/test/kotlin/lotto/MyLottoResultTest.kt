@@ -11,16 +11,16 @@ class MyLottoResultTest {
         val myLottoResult = MyLottoResult(
             mapOf(
                 LottoWinnerRank.FIRST_PRICE to 1,
-                LottoWinnerRank.SECOND_PRICE to 2,
+                LottoWinnerRank.THIRD_PRICE to 2,
             )
         )
 
         assertAll(
             { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FIRST_PRICE), 1) },
             { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FIRST_PRICE), 1) },
-            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.SECOND_PRICE), 2) },
-            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.THIRD_PRICE), 0) },
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.THIRD_PRICE), 2) },
             { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FOURTH_PRICE), 0) },
+            { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FIFTH_PRICE), 0) },
             { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.NONE), 0) },
         )
     }
