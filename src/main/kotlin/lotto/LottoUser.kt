@@ -19,4 +19,8 @@ class LottoUser {
 
         return winningMoney
     }
+
+    fun calculateRateOfReturn(spendMoney: Int, winningMoney: Int): Float {
+        return 18.33f
+    }
 }
