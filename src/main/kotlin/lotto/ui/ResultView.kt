@@ -1,6 +1,7 @@
 package lotto.ui
 
 import lotto.Lotto
+import lotto.StatResult
 
 class ResultView {
 
@@ -10,6 +11,13 @@ class ResultView {
 
     fun lottoNumbers(lottos: List<Lotto>) {
         lottos.forEach { println(it.numbers) }
+    }
+
+    fun result(resultList: List<StatResult>) {
+        println(WINING_STAT_TEXT)
+        resultList.forEach {
+            println(it.matchState.descriptor.format(it.count))
+        }
     }
 
     companion object {
