@@ -46,7 +46,7 @@ internal class WinNumberTest : FreeSpec({
     "보너스 일치 여부를 반환한다" {
         val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
 
-        winNumbers.isBonusMatched(7) shouldBe true
-        winNumbers.isBonusMatched(6) shouldBe false
+        winNumbers.hasBonus(Lotto.of(listOf(1, 2, 3, 4, 5, 6))) shouldBe false
+        winNumbers.hasBonus(Lotto.of(listOf(1, 2, 3, 4, 5, 7))) shouldBe true
     }
 })

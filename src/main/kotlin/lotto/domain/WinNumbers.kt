@@ -9,7 +9,7 @@ data class WinNumbers(val value: List<LottoNumber>, val bonus: LottoNumber) {
 
     fun matchCount(lotto: Lotto): Int = value.count { lotto.numbers.contains(it) }
 
-    fun isBonusMatched(number: Int): Boolean = bonus.value == number
+    fun hasBonus(lotto: Lotto): Boolean = bonus in lotto.numbers
 
     companion object {
         fun of(numbers: List<Int>, bonus: Int): WinNumbers = WinNumbers(numbers.map(::LottoNumber), LottoNumber(bonus))
