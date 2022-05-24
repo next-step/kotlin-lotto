@@ -1,5 +1,7 @@
 package lotto
 
+import kotlin.math.round
+
 class LottoUser {
     val lottos: List<Lotto>
         get() = _lottos
@@ -20,7 +22,7 @@ class LottoUser {
         return winningMoney
     }
 
-    fun calculateRateOfReturn(spendMoney: Int, winningMoney: Int): Float {
-        return 18.33f
+    fun calculateRateOfReturn(spendMoney: Int, winningMoney: Int): Double {
+        return round(winningMoney / spendMoney.toDouble() * 100) / 100
     }
 }
