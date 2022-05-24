@@ -1,5 +1,6 @@
 package camp.nextstep.lotto.raffle
 
+import camp.nextstep.lotto.number.LottoNumbers
 import camp.nextstep.lotto.ticket.LottoTicket
 
 object LottoResultMatcher {
@@ -7,7 +8,7 @@ object LottoResultMatcher {
     fun mapToMatch(tickets: List<LottoTicket>, winnerNumbers: List<Int>): Map<Int, List<LottoTicket>> {
         val result = mutableMapOf<Int, MutableList<LottoTicket>>()
 
-        for (matchCount in 0..LottoTicket.LOTTO_NUMBERS) {
+        for (matchCount in 0..LottoNumbers.LOTTO_NUMBERS) {
             result[matchCount] = mutableListOf()
         }
 

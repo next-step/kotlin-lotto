@@ -5,10 +5,10 @@ import camp.nextstep.lotto.interfaces.cli.GamblerReader
 import camp.nextstep.lotto.interfaces.cli.GamblerWriter
 import camp.nextstep.lotto.interfaces.cli.LottoResultWriter
 import camp.nextstep.lotto.interfaces.cli.WinnerNumbersReader
+import camp.nextstep.lotto.number.LottoNumbers
 import camp.nextstep.lotto.raffle.LottoResultMatcher
 import camp.nextstep.lotto.raffle.Winnings
 import camp.nextstep.lotto.ticket.LottoStore
-import camp.nextstep.lotto.ticket.LottoTicket
 import camp.nextstep.lotto.ticket.LottoTicketMachine
 
 fun main() {
@@ -23,7 +23,7 @@ fun main() {
 
     GamblerWriter.write(gambler)
 
-    val winnerNumbers = WinnerNumbersReader.read(LottoTicket.LOTTO_NUMBERS)
+    val winnerNumbers = WinnerNumbersReader.read(LottoNumbers.LOTTO_NUMBERS)
     val winningsMap = LottoResultMatcher
         .mapToMatch(gambler.tickets, winnerNumbers)
         .filterKeys { Winnings.isWinningCount(it) }

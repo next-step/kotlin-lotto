@@ -1,5 +1,6 @@
 package camp.nextstep.lotto.ticket
 
+import camp.nextstep.lotto.number.LottoNumbers
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
@@ -29,7 +30,7 @@ internal class LottoTicketTest {
 
         val sortedNumbers = numbers.sorted()
 
-        for (i in 0 until LottoTicket.LOTTO_NUMBERS) {
+        for (i in 0 until LottoNumbers.LOTTO_NUMBERS) {
             assertEquals(sortedNumbers[i], ticket.numbers[i])
         }
     }
