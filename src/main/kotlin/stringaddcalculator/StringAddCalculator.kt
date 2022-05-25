@@ -9,4 +9,4 @@ object StringAddCalculator {
 
         return Expression.parse(formula).reduce { acc, current -> acc + current }
     }
-}
+}  

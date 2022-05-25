@@ -39,4 +39,3 @@ class Analyst(private val lastWeekWinningNumbers: List<Int>) {
         private const val FIRST_PRIZE_PRICE = 2_000_000_000
     }
 }
-
