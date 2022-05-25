@@ -6,7 +6,7 @@ fun main() {
     val purchaseAmount = inputView.askPurchaseAmount()
 
     // 로또 구입(Model)
-    val seller = Seller(LottoGenerator())
+    val seller = Seller(RandomLottoNumberFactory())
     seller.issueFor(purchaseAmount)
 
     // 구입한 로또를 사용자에게 출력(View)

@@ -1,10 +1,10 @@
 package lotto
 
-interface RandomNumberGenerator {
+interface LottoNumberFactory {
     fun generate(): List<Int>
 }
 
-class LottoGenerator : RandomNumberGenerator {
+class RandomLottoNumberFactory : LottoNumberFactory {
     override fun generate() = LOTTO_NUMBER_COUNT.map { LOTTO_NUMBER_RANGE.random() }
 
     companion object {
