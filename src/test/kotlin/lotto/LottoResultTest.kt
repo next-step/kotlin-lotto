@@ -19,7 +19,7 @@ internal class LottoResultTest {
         delimiter = ':'
     )
     fun `전달 받은 당첨 번호의 수와 당첨 금액 확인`(winningValue: String, lottoValue: String, machCount: Int, prize: Int) {
-        val lottoResult = LottoResult(winningValue, Lotto(numbers = lottoValue.split(",").map { it.toInt() }.toSet()))
+        val lottoResult = LottoResult(winningValue, Lotto(numbers = lottoValue.split(",").map { it.toInt() }.toList()))
 
         assertThat(lottoResult.machCount).isEqualTo(machCount)
         assertThat(lottoResult.prize).isEqualTo(prize)

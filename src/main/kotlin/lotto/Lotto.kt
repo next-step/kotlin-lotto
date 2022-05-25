@@ -1,4 +1,4 @@
 package lotto
 
 
-data class Lotto(val numbers: Set<Int>)
+data class Lotto(val numbers: List<Int>)

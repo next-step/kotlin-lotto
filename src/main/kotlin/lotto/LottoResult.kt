@@ -8,7 +8,7 @@ class LottoResult(winningValue: String, lotto: Lotto) {
         .replace(" ", "")
         .split(",")
         .map { it.toInt() }
-        .intersect(lotto.numbers)
+        .intersect(lotto.numbers.toSet())
 
     val machCount = winningNumbers.size
 

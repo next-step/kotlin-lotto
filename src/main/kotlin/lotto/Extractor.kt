@@ -9,7 +9,7 @@ object Extractor {
     private const val MAX_LOTTO_COUNT = 6
     private const val MAX_LOTTO_NUMBER = 45
 
-    fun getAutoNumbers(): Set<Int> {
+    fun getAutoNumbers(): List<Int> {
         val list = mutableListOf<Int>()
         while (list.size < MAX_LOTTO_COUNT) {
             val random = Random.nextInt(1, MAX_LOTTO_NUMBER)
@@ -18,6 +18,6 @@ object Extractor {
                 list.add(random)
             }
         }
-        return list.toSet()
+        return list.toList().sorted()
     }
 }

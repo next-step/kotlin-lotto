@@ -1,4 +1,5 @@
 package lotto
+
 class Machine(val purchasePrice: Int) {
     var lottoCount = 0
         private set
@@ -6,7 +7,8 @@ class Machine(val purchasePrice: Int) {
     var lottoList = emptyList<Lotto>()
         private set
 
-    private var lottoResultList = emptyList<LottoResult>()
+    var lottoResultList = emptyList<LottoResult>()
+        private set
 
     private fun List<Lotto>.checkResult(winningValue: String): List<LottoResult> {
         return this.map { LottoResult(winningValue, it) }
@@ -23,9 +25,6 @@ class Machine(val purchasePrice: Int) {
         lottoResultList = lottoList.checkResult(winningValue)
     }
 
-    fun getStatistics(): List<String> {
-        return Statistics.get(lottoResultList, purchasePrice)
-    }
 
     companion object {
         private const val LOTTO_PRICE = 1000
