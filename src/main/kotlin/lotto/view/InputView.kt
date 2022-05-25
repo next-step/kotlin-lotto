@@ -49,5 +49,4 @@ object InputView {
         val bonusNumber = readln()
         return WinningLottoRequest(winningLottoNumbers, bonusNumber)
     }
-
 }

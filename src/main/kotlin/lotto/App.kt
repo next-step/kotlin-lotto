@@ -24,8 +24,8 @@ fun main() {
     val winningLottoRequest = InputView.winningLotto()
 
     val winningLotto = WinningLotto(
-        LottoTicket.of(winningLottoRequest.winningLottoNumbers),
-        LottoNumber.of(winningLottoRequest.bonusNumber)
+        winningTicket = LottoTicket.of(winningLottoRequest.winningLottoNumbers),
+        bonusNumber = LottoNumber.of(winningLottoRequest.bonusNumber)
     )
     val lottoRanks = lottoTickets.matching(winningLotto)
 
