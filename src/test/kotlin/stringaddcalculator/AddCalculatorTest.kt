@@ -2,6 +2,7 @@ package stringaddcalculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -17,30 +18,37 @@ class AddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     fun `빈 문자열 또는 null을 입력할 경우 0을 반환해한다`(expression: String?) {
-        assertThat(addCalculator.calculate(expression)).isEqualTo(0)
+        assertThat(addCalculator.calculate(Expression(expression))).isEqualTo(0)
     }
 
     @ParameterizedTest
-    @CsvSource(value = ["1, 1", "100, 100", "0, 0", "-1, -1"])
+    @CsvSource(value = ["1, 1", "100, 100", "0, 0", "5, 5"])
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(expression: String, expect: Int) {
-        assertThat(addCalculator.calculate(expression)).isEqualTo(expect)
+        assertThat(addCalculator.calculate(Expression(expression))).isEqualTo(expect)
     }
 
     @ParameterizedTest
     @CsvSource(value = ["'1,2',3", "'1,2,3,4,5',15"])
     fun `숫자를 컴마(,) 구분자로 입력할 경우 숫자들의 합을 반환한다`(expression: String, expect: Int) {
-        assertThat(addCalculator.calculate(expression)).isEqualTo(expect)
+        assertThat(addCalculator.calculate(Expression(expression))).isEqualTo(expect)
     }
 
     @ParameterizedTest
     @CsvSource(value = ["'1:2',3", "'1:2:3:4:5',15"])
     fun `숫자를 콜론 구분자로 입력할 경우 숫자들의 합을 반환한다`(expression: String, expect: Int) {
-        assertThat(addCalculator.calculate(expression)).isEqualTo(expect)
+        assertThat(addCalculator.calculate(Expression(expression))).isEqualTo(expect)
     }
 
     @ParameterizedTest
     @CsvSource(value = ["'1:2,5',8", "'1:2,3:4,5',15"])
     fun `숫자를 컴마(,)와 콜론 구분자로 입력할 경우 숫자들의 합을 반환한다`(expression: String, expect: Int) {
-        assertThat(addCalculator.calculate(expression)).isEqualTo(expect)
+        assertThat(addCalculator.calculate(Expression(expression))).isEqualTo(expect)
+    }
+
+    @DisplayName(value = "//와 \n 문자 사이에 커스텀 구분자를 지정할 수 있다")
+    @ParameterizedTest
+    @CsvSource(value = ["'//;\\n3;2',5", "'1:2,3#4,5//#\\n',15"])
+    fun customDelimiterTest(expression: String, expect: Int) {
+        assertThat(addCalculator.calculate(Expression(expression))).isEqualTo(expect)
     }
 }
