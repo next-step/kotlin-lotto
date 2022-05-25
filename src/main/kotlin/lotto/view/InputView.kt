@@ -8,6 +8,7 @@ object InputView {
     private const val LOTTO_LIST_DELIMITER = ","
     private const val LOTTO_ANSWER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요"
     private const val MONEY_INPUT_MESSAGE = "구매금액을 입력해 주세요."
+    private const val LOTTO_BONUS_BALL_MESSAGE = "보너스볼을 입력해 주세요"
 
     fun getUserMoney(): Int {
         var moneyInput: String
@@ -40,6 +41,25 @@ object InputView {
         } while (isValidLottoAnswer(lottoInput).not())
 
         return LottoNumbers(lottoInput.split(LOTTO_LIST_DELIMITER).map { LottoNumber(it.toInt()) })
+    }
+
+    fun getBonusBall(): LottoNumber {
+        var lottoBonusInput: String
+        do {
+            lottoBonusInput = getUserInputWithMessage(LOTTO_BONUS_BALL_MESSAGE)
+        } while (isValidLottoBonusBall(lottoBonusInput).not())
+
+        return LottoNumber(lottoBonusInput.toInt())
+    }
+
+    private fun isValidLottoBonusBall(lotto: String): Boolean {
+        return try {
+            InputValidator.checkValidBonusBall(lotto)
+            true
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            false
+        }
     }
 
     private fun isValidLottoAnswer(lotto: String): Boolean {

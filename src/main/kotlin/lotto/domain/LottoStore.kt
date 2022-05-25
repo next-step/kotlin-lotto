@@ -7,7 +7,7 @@ class LottoStore(private val userMoney: UserMoney, private val lottoMaker: Lotto
         get() = totalMoney.toDouble() / userMoney.money
     private var totalMoney = 0
 
-    fun getLottoResult(answer: LottoNumbers): List<LottoResult> {
+    fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
         val lottoResult = listOf(
             LottoResult(LottoPrizeInfo.WIN3),
             LottoResult(LottoPrizeInfo.WIN4),

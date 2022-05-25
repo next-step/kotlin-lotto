@@ -20,6 +20,7 @@ class LottoStoreTest {
     @Test
     fun `로또 각당첨등수 개수가 바른지 테스트`() {
         val lottoAnswer = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val bonusBall = LottoNumber(10)
         val myMoney = 3000
         val lottoMaker = object : LottoMaker {
             private val lottoList = listOf(
@@ -36,8 +37,7 @@ class LottoStoreTest {
         }
 
         val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
-
-        val lottoResult = lottoStore.getLottoResult(lottoAnswer)
+        val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 
         val answer3prize = lottoResult.first { it.prize == LottoPrizeInfo.WIN3 }.count
         val answer4prize = lottoResult.first { it.prize == LottoPrizeInfo.WIN4 }.count
@@ -58,6 +58,7 @@ class LottoStoreTest {
     @Test
     fun `로또 당첨의 수익률이 바른지 테스트`() {
         val lottoAnswer = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val bonusBall = LottoNumber(10)
         val myMoney = 3000
         val lottoMaker = object : LottoMaker {
             private val lottoList = listOf(
@@ -75,7 +76,7 @@ class LottoStoreTest {
 
         val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
 
-        val lottoResult = lottoStore.getLottoResult(lottoAnswer)
+        val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 
         val prize3 = lottoResult.first { it.prize == LottoPrizeInfo.WIN3 }
         val prize4 = lottoResult.first { it.prize == LottoPrizeInfo.WIN4 }

@@ -11,6 +11,10 @@ object InputValidator {
         require(input.toInt() > 0) { ERROR_MSG_FOR_NATURAL_NUMBER }
     }
 
+    fun checkValidBonusBall(input: String) {
+        require(input.toInt() in LOTTO_RANGE) { ERROR_MSG_FOR_NATURAL_NUMBER }
+    }
+
     fun checkValidLotto(input: String) {
         val splitted = input.split(LOTTO_LIST_DELIMITER)
         require(splitted.size == LOTTO_SIZE) {
