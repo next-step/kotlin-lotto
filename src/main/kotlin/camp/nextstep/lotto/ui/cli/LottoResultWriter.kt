@@ -1,6 +1,6 @@
-package camp.nextstep.lotto.interfaces.cli
+package camp.nextstep.lotto.ui.cli
 
-import camp.nextstep.lotto.interfaces.LottoResult
+import camp.nextstep.lotto.ui.LottoResult
 
 object LottoResultWriter {
 

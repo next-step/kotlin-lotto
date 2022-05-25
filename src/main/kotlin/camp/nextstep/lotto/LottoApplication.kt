@@ -1,15 +1,15 @@
 package camp.nextstep.lotto
 
-import camp.nextstep.lotto.interfaces.LottoResult
-import camp.nextstep.lotto.interfaces.cli.GamblerReader
-import camp.nextstep.lotto.interfaces.cli.GamblerWriter
-import camp.nextstep.lotto.interfaces.cli.LottoResultWriter
-import camp.nextstep.lotto.interfaces.cli.WinnerNumbersReader
 import camp.nextstep.lotto.number.LottoNumbers
 import camp.nextstep.lotto.raffle.LottoResultMatcher
 import camp.nextstep.lotto.raffle.Winnings
 import camp.nextstep.lotto.ticket.LottoStore
 import camp.nextstep.lotto.ticket.LottoTicketMachine
+import camp.nextstep.lotto.ui.LottoResult
+import camp.nextstep.lotto.ui.cli.GamblerReader
+import camp.nextstep.lotto.ui.cli.GamblerWriter
+import camp.nextstep.lotto.ui.cli.LottoResultWriter
+import camp.nextstep.lotto.ui.cli.WinnerNumbersReader
 
 fun main() {
     val lottoTicketPrice = 1_000

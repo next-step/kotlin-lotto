@@ -1,4 +1,4 @@
-package camp.nextstep.lotto.interfaces.cli
+package camp.nextstep.lotto.ui.cli
 
 import camp.nextstep.lotto.ticket.LottoTicket
 import camp.nextstep.lotto.user.Gambler

@@ -1,4 +1,4 @@
-package camp.nextstep.lotto.interfaces
+package camp.nextstep.lotto.ui
 
 import camp.nextstep.lotto.raffle.Winnings
 

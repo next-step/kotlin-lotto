@@ -1,4 +1,4 @@
-package camp.nextstep.lotto.interfaces.cli
+package camp.nextstep.lotto.ui.cli
 
 object WinnerNumbersReader {
 
