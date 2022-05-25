@@ -1,3 +1,4 @@
 package lotto.domain
 
-class UserMoney(val money: Int)
+@JvmInline
+value class UserMoney(val money: Int)

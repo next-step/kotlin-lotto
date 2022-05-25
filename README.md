@@ -85,5 +85,5 @@
 ### 3차 todo list
 - [ ] 린트 확인
 - [ ] 로또번호들도 VO객체로?
-- [ ] UserMoney inline class 고려
+- [x] UserMoney inline class 고려
 - [x] 테스트 이름 수정
