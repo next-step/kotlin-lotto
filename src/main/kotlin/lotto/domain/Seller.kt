@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 typealias Lotto = List<Int>
 

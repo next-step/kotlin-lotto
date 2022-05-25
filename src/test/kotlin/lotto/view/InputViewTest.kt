@@ -2,6 +2,8 @@ package lotto
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import lotto.view.Input
+import lotto.view.InputView
 
 class InputViewTest : DescribeSpec({
     describe("askPurchaseAmount") {

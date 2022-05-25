@@ -1,4 +1,4 @@
-package lotto
+package lotto.view
 
 interface Output {
     fun print(message: String)

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 data class LottoResultDto(
     private val firstPrizeCount: Int,

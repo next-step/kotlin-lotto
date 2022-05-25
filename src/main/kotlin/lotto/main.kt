@@ -1,5 +1,13 @@
 package lotto
 
+import lotto.domain.RandomLottoNumberFactory
+import lotto.domain.Seller
+import lotto.domain.WinningNumber
+import lotto.view.InputView
+import lotto.view.PrintOutput
+import lotto.view.ReadInput
+import lotto.view.ResultView
+
 fun main() {
     // 구입할 로또 갯수 입력(View)
     val inputView = InputView(ReadInput())

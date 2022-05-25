@@ -1,4 +1,8 @@
-package lotto
+package lotto.view
+
+import lotto.domain.Lotto
+import lotto.domain.LottoResultDto
+import lotto.domain.PrizeDto
 
 class ResultView(private val output: Output) {
     fun showLottos(lottos: List<Lotto>) {

@@ -1,4 +1,4 @@
-package lotto
+package lotto.view
 
 class InputView(private val input: Input) {
     fun askPurchaseAmount(): Int {

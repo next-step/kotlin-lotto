@@ -2,6 +2,10 @@ package lotto
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoResultDto
+import lotto.domain.Rank
+import lotto.view.Output
+import lotto.view.ResultView
 
 class ResultViewTest : DescribeSpec({
     describe("showAnalyzeResult") {

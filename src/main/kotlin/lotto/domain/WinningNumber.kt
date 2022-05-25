@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class WinningNumber(private val lastWeekWinningNumbers: List<Int>) {
     fun match(purchaseAmount: Int, lottos: List<Lotto>): LottoResultDto {
