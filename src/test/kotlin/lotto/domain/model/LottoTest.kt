@@ -2,6 +2,7 @@ package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoTest {
     @Test
@@ -10,5 +11,12 @@ class LottoTest {
         val lotto = Lotto(lottoNumbers)
 
         assertThat(lotto.numbers).isEqualTo(lottoNumbers)
+    }
+
+    @Test
+    fun `Lotto의 숫자가 6개가 아니면 IllegalArgumentException이 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5))
+        }
     }
 }
