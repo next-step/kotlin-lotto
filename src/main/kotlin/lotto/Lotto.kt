@@ -11,12 +11,7 @@ class Lotto {
     }
 
     fun getContainLottoNumberSameCount(winningNumbers: List<Int>): Int {
-        var sameCount = 0
-        winningNumbers.forEach { winningNumber ->
-            if (isContainLottoNumber(winningNumber)) sameCount++
-        }
-
-        return sameCount
+        return winningNumbers.count { isContainLottoNumber(it) }
     }
 
     fun isContainLottoNumber(winningNumber: Int): Boolean = _numbers.contains(winningNumber)
@@ -31,10 +26,14 @@ class Lotto {
         }
     }
 
-    private fun shuffled(): List<Int> =
-        List(LOTTO_NUMBER_COUNT) {
-            (MIN_NUMBER..MAX_NUMBER).random()
+    private fun shuffled(): List<Int> {
+        val numbers = mutableSetOf<Int>()
+        while (numbers.size < 6) {
+            numbers.add((MIN_NUMBER..MAX_NUMBER).random())
         }
+
+        return numbers.toList()
+    }
 
     companion object {
         const val MIN_NUMBER = 1

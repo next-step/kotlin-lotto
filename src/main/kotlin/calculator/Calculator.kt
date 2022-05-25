@@ -2,7 +2,7 @@ package calculator
 
 class Calculator {
     private val customDelimiterRegex = Regex("//(.)\n(.*)")
-    private var defaultDelimiters = arrayOf(",", ":")
+    private val defaultDelimiters = arrayOf(",", ":")
 
     fun add(expression: String?): Int {
         if (expression.isNullOrEmpty()) return 0

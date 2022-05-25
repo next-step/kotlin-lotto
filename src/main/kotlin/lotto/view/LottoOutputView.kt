@@ -9,7 +9,7 @@ object LottoOutputView {
 
     fun printLottoNumbers(lottos: List<Lotto>) {
         lottos.forEach { lotto ->
-            println(lotto.numbers)
+            println(lotto.numbers.sorted())
         }
     }
 
