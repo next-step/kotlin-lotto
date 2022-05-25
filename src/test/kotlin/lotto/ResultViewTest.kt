@@ -14,10 +14,10 @@ class ResultViewTest : DescribeSpec({
             resultView.showAnalyzeResult(
                 LottoResultDto(
                     lottoResult = mapOf(
-                        "3" to listOf(fourthPrizePrice, 1),
-                        "4" to listOf(fourthPrizePrice, 0),
-                        "5" to listOf(fourthPrizePrice, 0),
-                        "6" to listOf(fourthPrizePrice, 0)
+                        MatchCount.FOURTH_PRIZE.toString() to listOf(fourthPrizePrice, 1),
+                        MatchCount.THIRD_PRIZE.toString() to listOf(fourthPrizePrice, 0),
+                        MatchCount.SECOND_PRIZE.toString() to listOf(fourthPrizePrice, 0),
+                        MatchCount.FIRST_PRIZE.toString() to listOf(fourthPrizePrice, 0)
                     ),
                     rateOfReturn = "0.35"
                 )
