@@ -2,7 +2,7 @@ package lotto.domain
 
 import org.junit.jupiter.api.Test
 
-class LottoMakerTest {
+class KoreanLottoNumberMakerTest {
     @Test
     fun `랜덤 수가 1~45에 중복없는지 테스트`() {
         val lottoMaker = KoreanLottoNumberMaker()
