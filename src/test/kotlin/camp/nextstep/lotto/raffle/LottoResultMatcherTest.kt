@@ -1,8 +1,8 @@
 package camp.nextstep.lotto.raffle
 
 import camp.nextstep.lotto.ticket.LottoTicket
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -58,7 +58,7 @@ internal class LottoResultMatcherTest {
         assertEquals(1, oneMatched.size)
         assertEquals(1, zeroMatched.size)
 
-        assertTrue(zeroMatched[0].numbers.containsAll(listOf(15, 25, 34, 41, 44, 45)))
+        assertThat(zeroMatched[0].numbers).containsExactly(15, 25, 34, 41, 44, 45)
     }
 
     companion object {

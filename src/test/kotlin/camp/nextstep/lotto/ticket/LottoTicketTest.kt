@@ -1,8 +1,8 @@
 package camp.nextstep.lotto.ticket
 
 import camp.nextstep.lotto.number.LottoNumbers
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -19,7 +19,7 @@ internal class LottoTicketTest {
         val ticket = LottoTicket(numbers)
 
         assertEquals(6, ticket.numbers.size)
-        assertTrue(ticket.numbers.containsAll(numbers))
+        assertThat(ticket.numbers).containsExactly(1, 2, 3, 4, 5, 6)
     }
 
     @DisplayName("로또 티켓은 6개의 숫자를 오름차순으로 가진다.")
