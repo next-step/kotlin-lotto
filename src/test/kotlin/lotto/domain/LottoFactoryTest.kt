@@ -18,4 +18,11 @@ class LottoFactoryTest {
         val sortTicketNumbers = ticket.numbers.sorted()
         assertThat(ticket.numbers).isEqualTo(sortTicketNumbers)
     }
+
+    @Test
+    internal fun `로또번호는 중복이 되면 안된다`() {
+        val ticket = LottoFactory.getRandomLottoTicket()
+        val distinctTicketNumbers = ticket.numbers.distinct()
+        assertThat(ticket.numbers).isEqualTo(distinctTicketNumbers)
+    }
 }

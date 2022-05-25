@@ -13,7 +13,11 @@ object LottoFactory {
     private const val LOTTO_SIZE = 6
 
     fun getRandomLottoTicket(): LottoTicket {
-        return LottoTicket(List(LOTTO_SIZE) { getRandomNumber() }.sorted())
+        val numbers = mutableSetOf<Int>()
+        while (numbers.size < LOTTO_SIZE) {
+            numbers.add(getRandomNumber())
+        }
+        return LottoTicket(numbers.sorted())
     }
 
     private fun getRandomNumber() = Random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)

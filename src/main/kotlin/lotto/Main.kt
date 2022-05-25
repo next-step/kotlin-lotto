@@ -1,10 +1,10 @@
 package lotto
 
-import lotto.view.InputView
+import lotto.controller.LottoController
 
 /**
  * Created by Jaesungchi on 2022.05.24..
  */
-class Main {
-    val money = InputView.getPrice()
+fun main() {
+    LottoController.playLotto()
 }
