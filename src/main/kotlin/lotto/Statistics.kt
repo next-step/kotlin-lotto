@@ -3,22 +3,35 @@ package lotto
 /**
  * 로또 통계
  */
-object Statistics {
+class Statistics(private val lottoResultList: List<LottoResult>, private val purchasePrice: Int) {
     private val prizeList = LottoResult.Prize.values()
-    fun get(lottoResultList: List<LottoResult>, purchasePrice: Int): List<String> {
 
-        val displayList = prizeList.map { prizeItem ->
-            val ownLottoResult = lottoResultList.filter {
-                it.machCount == prizeItem.machCount
-            }
+    var totalEarnings = 0.0
+        private set
 
-            return@map "${prizeItem.machCount}개 일치 ${prizeItem.price}원 (${ownLottoResult.size})개"
-        }.toMutableList()
+    val items = mutableListOf<StatisticsItem>()
 
-        lottoResultList.sumOf { it.prize }.let {
-            displayList.add("총 수익률은  ${String.format("%.2f", it.toDouble() / purchasePrice.toDouble())}입니다")
+    fun run() {
+        prizeList.map { prizeItem ->
+            StatisticsItem(
+                standardPrize = prizeItem.price,
+                prize = prizeItem,
+                machLottoCount = lottoResultList.filter { it.machCount == prizeItem.machCount }.size,
+            )
+        }.sortedBy {
+            it.prize.machCount
+        }.apply {
+            items.addAll(this)
         }
 
-        return displayList.toList()
+        totalEarnings = lottoResultList.sumOf { it.prize }.let {
+            return@let String.format("%.2f", it.toDouble() / purchasePrice.toDouble()).toDouble()
+        }
     }
 }
+
+data class StatisticsItem(
+    val standardPrize: Int,
+    val prize: LottoResult.Prize,
+    val machLottoCount: Int
+)
