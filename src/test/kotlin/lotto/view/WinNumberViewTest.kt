@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 internal class WinNumberViewTest : StringSpec({
 
     "처음과 마지막에 빈 라인을 출력한다" {
-        val io = StubIO(listOf("1,2,3,4,5,6"))
+        val io = StubIO(listOf("1,2,3,4,5,6", "7"))
         val view = WinNumberView(io)
 
         view.readWinNumbers()
@@ -16,7 +16,7 @@ internal class WinNumberViewTest : StringSpec({
     }
 
     "입력 안내 문구를 출력한다" {
-        val io = StubIO(listOf("1,2,3,4,5,6"))
+        val io = StubIO(listOf("1,2,3,4,5,6", "7"))
         val view = WinNumberView(io)
 
         view.readWinNumbers()
@@ -25,7 +25,7 @@ internal class WinNumberViewTest : StringSpec({
     }
 
     "6 개의 당첨 번호를 입력받는다" {
-        val io = StubIO(listOf("1,2,3,4,5,6"))
+        val io = StubIO(listOf("1,2,3,4,5,6", "7"))
         val view = WinNumberView(io)
 
         val winNumbers = view.readWinNumbers()
@@ -34,7 +34,7 @@ internal class WinNumberViewTest : StringSpec({
     }
 
     "유효한 숫자가 아니거나 개수가 맞지 않으면 다시 입력받는다" {
-        val io = StubIO(listOf("invalid", "1, 2 ,3,4 ,5 ,6"))
+        val io = StubIO(listOf("invalid", "1, 2 ,3,4 ,5 ,6", "7"))
         val view = WinNumberView(io)
 
         val winNumbers = view.readWinNumbers()

@@ -33,12 +33,23 @@ internal class WinPolicyTest : FreeSpec({
 
     "주어진 로또가 조건에 일치하는지 확인한다" {
         val winPolicy = WinPolicy(4, Money(1000))
-        val winNumbers = WinNumbers.of(listOf(3, 4, 5, 6, 7, 8))
+        val winNumbers = WinNumbers.of(listOf(3, 4, 5, 6, 7, 8), 9)
 
         val matched = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
         winPolicy.isMatch(winNumbers, matched) shouldBe true
 
         val notMatched = Lotto.of(listOf(1, 2, 3, 4, 5, 9))
+        winPolicy.isMatch(winNumbers, notMatched) shouldBe false
+    }
+
+    "주어진 로또가 보너스 볼 조건에 일치하는지 확인한다" {
+        val winPolicy = WinPolicy(3, Money(1000), true)
+        val winNumbers = WinNumbers.of(listOf(3, 4, 5, 6, 7, 8), 9)
+
+        val matched = Lotto.of(listOf(1, 2, 3, 4, 5, 9))
+        winPolicy.isMatch(winNumbers, matched) shouldBe true
+
+        val notMatched = Lotto.of(listOf(1, 2, 3, 4, 5, 10))
         winPolicy.isMatch(winNumbers, notMatched) shouldBe false
     }
 })

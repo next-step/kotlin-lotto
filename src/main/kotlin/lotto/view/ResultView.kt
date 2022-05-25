@@ -9,7 +9,9 @@ class ResultView(private val output: Output) {
         output.print("---------")
 
         results.forEach {
-            output.print("${it.matchCount}개 일치 (${it.price.amount}원)- ${it.winCount}개")
+            output.print(
+                "${it.matchCount}개 일치${if (it.bonus) ", 보너스 볼 일치" else " "}(${it.price.amount}원)- ${it.winCount}개"
+            )
         }
     }
 }
