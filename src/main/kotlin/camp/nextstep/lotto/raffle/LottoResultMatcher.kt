@@ -5,7 +5,7 @@ import camp.nextstep.lotto.ticket.LottoTicket
 
 object LottoResultMatcher {
 
-    fun mapToMatch(tickets: List<LottoTicket>, winnerNumbers: List<Int>): Map<Int, List<LottoTicket>> {
+    fun ticketsByMatchedCount(tickets: List<LottoTicket>, winnerNumbers: List<Int>): TicketsByMatchCount {
         val result = mutableMapOf<Int, MutableList<LottoTicket>>()
 
         for (matchCount in 0..LottoNumbers.LOTTO_NUMBERS) {
@@ -17,7 +17,7 @@ object LottoResultMatcher {
             requireNotNull(result[matchedCount]).add(ticket)
         }
 
-        return result
+        return TicketsByMatchCount(result)
     }
 
     fun count(ticket: LottoTicket, winnerNumbers: List<Int>): Int {

@@ -51,7 +51,7 @@ internal class LottoResultMatcherTest {
         )
         val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
 
-        val matchResult = LottoResultMatcher.mapToMatch(tickets, winnerNumbers)
+        val matchResult = LottoResultMatcher.ticketsByMatchedCount(tickets, winnerNumbers)
 
         val sixMatched = requireNotNull(matchResult[6])
         val fiveMatched = requireNotNull(matchResult[5])

@@ -25,7 +25,7 @@ fun main() {
 
     val winnerNumbers = WinnerNumbersReader.read(LottoNumbers.LOTTO_NUMBERS)
     val winningsMap = LottoResultMatcher
-        .mapToMatch(gambler.tickets, winnerNumbers)
+        .ticketsByMatchedCount(gambler.tickets, winnerNumbers)
         .filterKeys { Winnings.isWinningCount(it) }
         .map { (matchedCount, tickets) -> Winnings.of(matchedCount) to tickets.size }
         .toMap()
