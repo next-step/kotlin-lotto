@@ -24,4 +24,12 @@ class InputViewTest {
             InputView.getPrice { source }
         }
     }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `지난 주 당첨 번호에 빈칸이나 Null이 들어가면 IllegalArgumentException을 던진다`(source: String?) {
+        assertThrows<IllegalArgumentException> {
+            InputView.getWinningNumber { source }
+        }
+    }
 }

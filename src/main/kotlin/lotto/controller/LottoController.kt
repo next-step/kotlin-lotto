@@ -12,5 +12,7 @@ object LottoController {
         val money = InputView.getPrice()
         val tickets = LottoStore().buyLotto(money)
         OutputView.printTicket(tickets)
+
+        val winningNumber = InputView.getWinningNumber()
     }
 }
