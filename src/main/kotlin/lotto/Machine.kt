@@ -1,6 +1,6 @@
 package lotto
 
-class Machine(val purchasePrice: Int) {
+class Machine(private val purchasePrice: Int) {
     var lottoCount = 0
         private set
 
