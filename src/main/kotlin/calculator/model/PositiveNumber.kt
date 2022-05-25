@@ -14,8 +14,7 @@ value class PositiveNumber private constructor(
             return PositiveNumber(number.toInt())
         }
 
-        private fun validateNumber(number: String) {
+        private fun validateNumber(number: String) =
             require(POSITIVE_NUMBER_REGEX.matches(number)) { "0 이상의 숫자로만 생성이 가능합니다. (number: $number)" }
-        }
     }
 }
