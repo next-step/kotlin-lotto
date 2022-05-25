@@ -1,9 +1,7 @@
 package lotto
 
-class Analyst(private val lastWeekWinningNumbers: List<Int>) {
-    lateinit var result: LottoResultDto
-
-    fun analyze(purchaseAmount: Int, lottos: List<Lotto>) {
+class WinningNumber(private val lastWeekWinningNumbers: List<Int>) {
+    fun match(purchaseAmount: Int, lottos: List<Lotto>): LottoResultDto {
         val numberOfCorrects = mutableListOf<Int>()
 
         lottos.forEach {
@@ -19,7 +17,7 @@ class Analyst(private val lastWeekWinningNumbers: List<Int>) {
                     SECOND_PRIZE_PRICE * numberOfCorrects.countNumber(5) +
                     FIRST_PRIZE_PRICE * numberOfCorrects.countNumber(6)
 
-        result = LottoResultDto(
+        return LottoResultDto(
             lottoResult = mapOf(
                 "3" to listOf(FOURTH_PRIZE_PRICE, numberOfCorrects.countNumber(3)),
                 "4" to listOf(THIRD_PRIZE_PRICE, numberOfCorrects.countNumber(4)),

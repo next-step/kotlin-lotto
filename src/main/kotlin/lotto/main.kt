@@ -17,9 +17,9 @@ fun main() {
     val lastWeekWinningNumber = inputView.askLastWeekWinningNumber()
 
     // 로또 분석(Model)
-    val analyst = Analyst(lastWeekWinningNumber)
-    analyst.analyze(purchaseAmount, lottos)
+    val winningNumber = WinningNumber(lastWeekWinningNumber)
+    val result = winningNumber.match(purchaseAmount, lottos)
 
     // 당첨 통계를 사용자에게 출력(View)
-    resultView.showAnalyzeResult(analyst.result)
+    resultView.showAnalyzeResult(result)
 }
