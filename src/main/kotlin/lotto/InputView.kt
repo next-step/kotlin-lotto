@@ -16,7 +16,7 @@ fun main() {
 
     println("당첨 통계")
 
-    machine.run(winningValue)
+    machine.checkResult(winningValue)
 
     val statistics = Statistics(machine.lottoResultList, purchasePrice).apply {
         this.run()

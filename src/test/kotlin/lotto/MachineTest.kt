@@ -17,7 +17,7 @@ internal class MachineTest {
         ]
     )
     fun `구매 금액 기준 구매할 수 있는 로또 수 확인`(money: Int, expected: Int) {
-        assertThat(Machine(money).apply { this.purchase() }.lottoCount).isEqualTo(expected)
+        assertThat(Machine(money).lottoCount).isEqualTo(expected)
     }
 
     @ParameterizedTest
@@ -32,8 +32,7 @@ internal class MachineTest {
     )
     fun `구매 금액 기준 실제 생성된 로또의 수 확인`(money: Int, expected: Int) {
         assertThat(Machine(money).apply {
-            this.purchase()
-            this.run("1,2,3,4,5,6")
+            this.checkResult("1,2,3,4,5,6")
         }.lottoResultList.size).isEqualTo(expected)
     }
 }
