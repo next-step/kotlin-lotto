@@ -12,28 +12,19 @@ class WinningNumber(private val lastWeekWinningNumbers: List<Int>) {
         }
 
         val winningAmount =
-            FOURTH_PRIZE_PRICE * numberOfCorrects.countNumber(MatchCount.FOURTH_PRIZE) +
-                    THIRD_PRIZE_PRICE * numberOfCorrects.countNumber(MatchCount.THIRD_PRIZE) +
-                    SECOND_PRIZE_PRICE * numberOfCorrects.countNumber(MatchCount.SECOND_PRIZE) +
-                    FIRST_PRIZE_PRICE * numberOfCorrects.countNumber(MatchCount.FIRST_PRIZE)
+            Rank.FIRST.winningMoney * numberOfCorrects.countNumber(Rank.FIRST.countOfMatch) +
+                    Rank.SECOND.winningMoney * numberOfCorrects.countNumber(Rank.SECOND.countOfMatch) +
+                    Rank.THIRD.winningMoney * numberOfCorrects.countNumber(Rank.THIRD.countOfMatch) +
+                    Rank.FOURTH.winningMoney * numberOfCorrects.countNumber(Rank.FOURTH.countOfMatch)
 
         return LottoResultDto(
-            lottoResult = mapOf(
-                MatchCount.FOURTH_PRIZE.toString() to listOf(FOURTH_PRIZE_PRICE, numberOfCorrects.countNumber(MatchCount.FOURTH_PRIZE)),
-                MatchCount.THIRD_PRIZE.toString() to listOf(THIRD_PRIZE_PRICE, numberOfCorrects.countNumber(MatchCount.THIRD_PRIZE)),
-                MatchCount.SECOND_PRIZE.toString() to listOf(SECOND_PRIZE_PRICE, numberOfCorrects.countNumber(MatchCount.SECOND_PRIZE)),
-                MatchCount.FIRST_PRIZE.toString() to listOf(FIRST_PRIZE_PRICE, numberOfCorrects.countNumber(MatchCount.FIRST_PRIZE)),
-            ),
-            rateOfReturn = String.format("%.2f", winningAmount / purchaseAmount.toDouble())
+            numberOfCorrects.countNumber(Rank.FIRST.countOfMatch),
+            numberOfCorrects.countNumber(Rank.SECOND.countOfMatch),
+            numberOfCorrects.countNumber(Rank.THIRD.countOfMatch),
+            numberOfCorrects.countNumber(Rank.FOURTH.countOfMatch),
+            String.format("%.2f", winningAmount / purchaseAmount.toDouble())
         )
     }
 
     private fun List<Int>.countNumber(num: Int): Int = count { it == num }
-
-    companion object {
-        private const val FOURTH_PRIZE_PRICE = 5000
-        private const val THIRD_PRIZE_PRICE = 50_000
-        private const val SECOND_PRIZE_PRICE = 1_500_000
-        private const val FIRST_PRIZE_PRICE = 2_000_000_000
-    }
 }

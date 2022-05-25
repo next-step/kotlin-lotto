@@ -1,11 +1,33 @@
 package lotto
 
-data class LottoResultDto(private val lottoResult: Map<String, List<Int>>, val rateOfReturn: String) {
-    val firstPrize = PrizeDto(MatchCount.FIRST_PRIZE, requireNotNull(lottoResult[MatchCount.FIRST_PRIZE.toString()]))
+data class LottoResultDto(
+    private val firstPrizeCount: Int,
+    private val secondPrizeCount: Int,
+    private val thirdPrizeCount: Int,
+    private val fourthPrizeCount: Int,
+    val rateOfReturn: String
+) {
+    val firstPrize = PrizeDto(
+        Rank.FIRST.countOfMatch,
+        Rank.FIRST.winningMoney,
+        firstPrizeCount,
+    )
 
-    val secondPrize = PrizeDto(MatchCount.SECOND_PRIZE, requireNotNull(lottoResult[MatchCount.SECOND_PRIZE.toString()]))
+    val secondPrize = PrizeDto(
+        Rank.SECOND.countOfMatch,
+        Rank.SECOND.winningMoney,
+        secondPrizeCount,
+    )
 
-    val thirdPrize = PrizeDto(MatchCount.THIRD_PRIZE, requireNotNull(lottoResult[MatchCount.THIRD_PRIZE.toString()]))
+    val thirdPrize = PrizeDto(
+        Rank.THIRD.countOfMatch,
+        Rank.THIRD.winningMoney,
+        thirdPrizeCount,
+    )
 
-    val fourthPrize = PrizeDto(MatchCount.FOURTH_PRIZE, requireNotNull(lottoResult[MatchCount.FOURTH_PRIZE.toString()]))
+    val fourthPrize = PrizeDto(
+        Rank.FOURTH.countOfMatch,
+        Rank.FOURTH.winningMoney,
+        fourthPrizeCount,
+    )
 }

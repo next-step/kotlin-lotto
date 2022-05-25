@@ -4,29 +4,17 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class ResultViewTest : DescribeSpec({
-    val fourthPrizePrice = 5000
-
     describe("showAnalyzeResult") {
         it("통계 값을 사용자에게 출력한다.") {
             val stub = StubOutput()
             val resultView = ResultView(stub)
 
-            resultView.showAnalyzeResult(
-                LottoResultDto(
-                    lottoResult = mapOf(
-                        MatchCount.FOURTH_PRIZE.toString() to listOf(fourthPrizePrice, 1),
-                        MatchCount.THIRD_PRIZE.toString() to listOf(fourthPrizePrice, 0),
-                        MatchCount.SECOND_PRIZE.toString() to listOf(fourthPrizePrice, 0),
-                        MatchCount.FIRST_PRIZE.toString() to listOf(fourthPrizePrice, 0)
-                    ),
-                    rateOfReturn = "0.35"
-                )
-            )
+            resultView.showAnalyzeResult(LottoResultDto(1, 0, 0, 0, "0.35"))
 
-            stub.outputs[0] shouldBe "3개 일치 (${fourthPrizePrice}원)- 1개"
-            stub.outputs[1] shouldBe "4개 일치 (${fourthPrizePrice}원)- 0개"
-            stub.outputs[2] shouldBe "5개 일치 (${fourthPrizePrice}원)- 0개"
-            stub.outputs[3] shouldBe "6개 일치 (${fourthPrizePrice}원)- 0개"
+            stub.outputs[0] shouldBe "3개 일치 (${Rank.FOURTH.winningMoney}원)- 0개"
+            stub.outputs[1] shouldBe "4개 일치 (${Rank.THIRD.winningMoney}원)- 0개"
+            stub.outputs[2] shouldBe "5개 일치 (${Rank.SECOND.winningMoney}원)- 0개"
+            stub.outputs[3] shouldBe "6개 일치 (${Rank.FIRST.winningMoney}원)- 1개"
             stub.outputs[4] shouldBe "총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
         }
     }
