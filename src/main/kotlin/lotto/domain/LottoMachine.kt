@@ -9,6 +9,6 @@ class LottoMachine {
     }
 
     fun generate(lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator): Lotto {
-        return Lotto(lottoNumberGenerator)
+        return Lotto(lottoNumberGenerator.generate(), true)
     }
 }

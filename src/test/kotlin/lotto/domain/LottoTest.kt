@@ -35,8 +35,7 @@ class LottoTest : FunSpec({
     }
 
     test("로또 자동 발급") {
-        Lotto().isAutoPick shouldBe true
-        Lotto(RandomLottoNumberGenerator).isAutoPick shouldBe true
+        Lotto(RandomLottoNumberGenerator.generate(), true).isAutoPick shouldBe true
     }
 
     test("로또 수동 발급") {

@@ -4,7 +4,6 @@ import lotto.domain.enums.LottoRank
 import lotto.exception.DuplicateLottoNumberException
 
 class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
-    constructor(vararg numbers: Int, bonusNumber: () -> Int) : this(LottoNumbers(*numbers), LottoNumber(bonusNumber.invoke()))
 
     init {
         if (bonusNumber in lottoNumbers) throw DuplicateLottoNumberException()
@@ -28,5 +27,28 @@ class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumb
 
     private fun isMatchBonusNumber(lotto: Lotto): Boolean {
         return bonusNumber in lotto
+    }
+
+    companion object {
+        class Builder(private val lottoNumbers: LottoNumbers) {
+
+            constructor(vararg numbers: Int) : this(LottoNumbers(*numbers))
+
+            fun bonus(bonusNumber: LottoNumber): WinningLotto {
+                return WinningLotto(lottoNumbers, bonusNumber)
+            }
+
+            fun bonus(number: Int): WinningLotto {
+                return bonus(LottoNumber(number))
+            }
+        }
+
+        fun winningLottoOf(vararg numbers: Int): Builder {
+            return Builder(*numbers)
+        }
+
+        fun winningLottoOf(lottoNumbers: LottoNumbers): Builder {
+            return Builder(lottoNumbers)
+        }
     }
 }

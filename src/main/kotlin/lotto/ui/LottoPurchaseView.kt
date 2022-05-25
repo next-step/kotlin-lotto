@@ -28,7 +28,7 @@ object LottoPurchaseView {
         return List(manualLottoCount) {
             readln().split(",")
                 .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException() }
-                .let { LottoNumbers(*it.toIntArray()) }
+                .let { LottoNumbers.from(it) }
         }.also { println() }
     }
 

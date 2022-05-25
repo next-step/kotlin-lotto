@@ -6,7 +6,7 @@ class LottoSeller {
 
     fun purchase(inputPrice: Long, inputManualLottoNumbers: List<LottoNumbers>): List<Lotto> {
         val numberOfPurchases = numberOfPurchases(inputPrice)
-        if (numberOfPurchases == 0) return listOf()
+        if (numberOfPurchases == 0) return emptyList()
         val autoLottoCount = numberOfPurchases - inputManualLottoNumbers.size
         return purchaseManually(inputManualLottoNumbers) + purchaseAuto(autoLottoCount)
     }
