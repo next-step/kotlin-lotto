@@ -1,18 +1,28 @@
 package lotto
 
-import org.junit.jupiter.api.Test
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 internal class LottoResultTest {
 
-    @Test
-    fun `로또 확인을 위해 지난 주 당첨 번호, Lotto 정보를 전달 받는다`() {
-        LottoResult("1, 2, 3, 4, 5, 6", Lotto(setOf()))
+    @ParameterizedTest
+    @CsvSource(
+        value = [
+            "1,2,3,4,5,6 : 7,8,9,10,11,12 : 0 : 0",
+            "1,2,3,4,5,6 : 1,2,3,7,8,9 : 3 : 5000",
+            "1,2,3,4,5,6 : 1,2,3,7,8,9 : 3 : 5000",
+            "1,2,3,4,5,6 : 1,2,3,4,8,9 : 4 : 50000",
+            "1,2,3,4,5,6 : 1,2,3,4,5,9 : 5 : 1500000",
+            "1,2,3,4,5,6 : 1,2,3,4,5,6 : 6 : 2000000000",
+        ],
+        delimiter = ':'
+    )
+    fun `전달 받은 당첨 번호의 수와 당첨 금액 확인`(winningValue: String, lottoValue: String, machCount: Int, prize: Int) {
+        val lottoResult = LottoResult(winningValue, Lotto(numbers = lottoValue.split(",").map { it.toInt() }.toSet()))
+
+        assertThat(lottoResult.machCount).isEqualTo(machCount)
+        assertThat(lottoResult.prize).isEqualTo(prize)
     }
 
-    @Test
-    fun `당첨된 숫자의 갯수를 확인한다`() {
-//        assertThat(
-//            Confirmation("1, 2, 3, 4, 5, 6", Lotto(setOf(1, 2, 3, 10, 11, 12))).winningNumbers.size
-//        ).isEqualTo(3)
-    }
 }
