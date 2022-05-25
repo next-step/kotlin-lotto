@@ -15,7 +15,7 @@ class LottoShopTest : DescribeSpec({
                     Money.of(1000) to 1,
                     Money.of(11_000) to 11
                 ).forAll { (money, expectedCount) ->
-                    val lottoTickets = lottoShop.buying(money)
+                    val lottoTickets = lottoShop.buying(money, buyingRequest.manualNumbers)
                     lottoTickets.lottoTickets.size shouldBe expectedCount
                 }
             }
