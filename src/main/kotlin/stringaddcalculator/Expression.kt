@@ -11,7 +11,9 @@ class Expression(private val expression: String?) {
 
         return operandString
             .split(Regex(delimiter))
+            .checkOperandIsNum()
             .map { it.trim().toInt() }
+            .checkOperandIsMoreThanZero()
     }
 
     private fun getOperandString(result: MatchResult?, default: String): String {
@@ -30,6 +32,16 @@ class Expression(private val expression: String?) {
 
     private fun MatchResult?.getGroupValue(i: Int): String? {
         return this?.groupValues?.get(i)
+    }
+
+    private fun List<String>.checkOperandIsNum(): List<String> {
+        require(this.all { it.toIntOrNull() != null })
+        return this
+    }
+
+    private fun List<Int>.checkOperandIsMoreThanZero(): List<Int> {
+        require(this.all { it >= 0 })
+        return this
     }
 
     companion object {

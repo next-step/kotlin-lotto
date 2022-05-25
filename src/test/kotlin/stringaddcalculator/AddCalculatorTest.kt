@@ -1,11 +1,13 @@
 package stringaddcalculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.ValueSource
 
 class AddCalculatorTest {
     private lateinit var addCalculator: AddCalculator
@@ -50,5 +52,13 @@ class AddCalculatorTest {
     @CsvSource(value = ["'//;\\n3;2',5", "'1:2,3#4,5//#\\n',15"])
     fun customDelimiterTest(expression: String, expect: Int) {
         assertThat(addCalculator.calculate(Expression(expression))).isEqualTo(expect)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1,2,3", "a,10;5"])
+    fun `음수나 숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생한다`(expression: String) {
+        assertThatIllegalArgumentException().isThrownBy {
+            addCalculator.calculate(Expression(expression))
+        }
     }
 }
