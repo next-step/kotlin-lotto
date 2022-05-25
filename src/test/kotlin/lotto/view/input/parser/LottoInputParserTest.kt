@@ -1,10 +1,11 @@
 package lotto.view.input.parser
 
+import lotto.model.data.ParseResult
 import lotto.model.data.Policy645
-import lotto.util.toBlankRemovedIntSet
+import lotto.model.data.forceSucceed
+import lotto.model.data.toLottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -30,10 +31,8 @@ internal class LottoInputParserTest {
         ]
     )
     fun `잘못된 로또 번호 입력 체크 `(lottoNumbers: String) {
-
-        assertThrows<IllegalArgumentException> {
-            lottoInputParser.parseValue(lottoNumbers)
-        }
+        val parsedLotto = lottoInputParser.parseValue(lottoNumbers)
+        assertThat(parsedLotto).isInstanceOf(ParseResult.Error::class.java)
     }
 
     @ParameterizedTest
@@ -45,10 +44,14 @@ internal class LottoInputParserTest {
     )
     fun `정상 로또 번호 입력 체크 `(lottoNumbers: String) {
 
-        val expectedString = lottoNumbers.toBlankRemovedIntSet()
+        val expectedString = lottoNumbers.toLottoNumbers()
             .sorted().joinToString(",")
 
-        assertThat(lottoInputParser.parseValue(lottoNumbers).numbers.joinToString(","))
-            .isEqualTo(expectedString)
+        assertThat(
+            lottoInputParser
+                .parseValue(lottoNumbers)
+                .forceSucceed()
+                .numbers.joinToString(",")
+        ).isEqualTo(expectedString)
     }
 }

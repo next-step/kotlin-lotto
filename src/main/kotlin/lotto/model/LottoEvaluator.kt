@@ -10,8 +10,6 @@ import lotto.model.data.WinningLotto
 
 object LottoEvaluator {
 
-    private val winnings = Winning.values()
-
     fun evaluate(winningLotto: WinningLotto, lottos: Lottos) = Results(
         lottos.map { lotto -> evaluate(winningLotto, lotto) }
     )
@@ -23,10 +21,9 @@ object LottoEvaluator {
     fun WinningLotto.countOfMatchNumber(other: Lotto) =
         this.numbers.filter(other.numbers::contains).size
 
-    private fun WinningLotto.getBestWinningFor(lotto: Lotto): Winning {
-        return winnings.filter { it.isWin(this, lotto) }
-            .maxByOrNull { it.winMoney } ?: LOST_GAME
-    }
+    private fun WinningLotto.getBestWinningFor(lotto: Lotto) = Winning.values()
+        .filter { it.isWin(this, lotto) }
+        .maxByOrNull { it.winMoney } ?: LOST_GAME
 
     private fun Winning.isWin(winningLotto: WinningLotto, lotto: Lotto): Boolean {
         return when {

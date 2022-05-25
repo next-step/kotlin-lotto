@@ -1,11 +1,12 @@
 package lotto.contoller
 
-import lotto.model.data.Lotto.Companion.toLotto
 import lotto.model.data.Lottos
 import lotto.model.data.Policy645
 import lotto.model.data.Statistics
 import lotto.model.data.WinningLotto
-import lotto.model.data.WinningLotto.Companion.toWinningLotto
+import lotto.model.data.toLotto
+import lotto.model.data.toLottoNumber
+import lotto.model.data.toWinningLotto
 import lotto.view.input.InputView
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
@@ -74,7 +75,7 @@ internal class LottoControllerTest {
 
         val lotto = lottoNumbers.toLotto(policy)
         val winningLotto = winningNumbers.toLotto(policy)
-            .toWinningLotto(policy, bonusBall.toInt())
+            .toWinningLotto(policy, bonusBall.toLottoNumber())
 
         val winningLottoInputView = object : InputView<WinningLotto> {
             override fun getInput() = winningLotto
