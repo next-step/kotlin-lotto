@@ -1,13 +1,10 @@
 package lotto.view
 
-class InputView<T>(
-    private val inputMessage: String
-) {
-    fun receiveUserInput() {
-        printInputMessage()
-    }
+import lotto.model.UserInputRequest
 
-    private fun printInputMessage() {
-        println(inputMessage)
+object InputView {
+    fun <T> receiveUserInput(userInputRequest: UserInputRequest<T>): T {
+        println(userInputRequest.message)
+        return userInputRequest.inputConverter.convert(readln())
     }
 }
