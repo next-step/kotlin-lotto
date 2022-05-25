@@ -1,7 +1,7 @@
 package com.nextstep.jngcii.calculator
 
 object InputParser {
-    private val delimiterParseRegex = Regex("//(\\D)\n(.*)")
+    private val delimiterParseRegex = Regex("//(\\D)₩n(.*)")
     private val defaultDelimiterRegex = Regex("[,:]")
 
     fun parseDelimiter(input: String): Pair<String, String?> {
