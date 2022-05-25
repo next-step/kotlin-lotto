@@ -11,5 +11,10 @@ class WinningNumber(stringWinningNumber: String) {
         winningNumber = stringWinningNumber.split(",").map {
             it.trim().toInt()
         }
+        require(winningNumber.size == LOTTO_COUNT_LIMITS)
+    }
+
+    companion object {
+        private const val LOTTO_COUNT_LIMITS = 6
     }
 }
