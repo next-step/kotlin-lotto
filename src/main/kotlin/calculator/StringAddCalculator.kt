@@ -10,17 +10,27 @@ class StringAddCalculator {
 
         val (del, content) = text.extractDelimiter()
 
-        val tokens = content.split(*delimiters.addIfNotNull(del))
-            .map { it.toInt() }
+        val dels = delimiters.addIfNotNull(del)
 
-        return tokens.reduce { total, right -> total + right }
+        val tokens = content.split(*dels)
+            .map { it.toPositiveInt() }
+
+        return tokens.sum()
+    }
+}
+
+private fun String.toPositiveInt() = this.toInt().takeIf {
+    it >= 0
+} ?: throw IllegalArgumentException("Num should not be negative")
+
+private fun Array<String>.addIfNotNull(str: String?) =
+    if (str != null) {
+        this + str
+    } else {
+        this
     }
 
-    private fun Array<String>.addIfNotNull(str: String?) =
-        if (str != null) { this + str } else { this }
-
-    private fun String.extractDelimiter() =
-        Regex("""//(.)\\n(.*)""").find(this)
-            ?.let { Pair(it.groupValues[1], it.groupValues[2]) }
-            ?: Pair(null, this)
-}
+private fun String.extractDelimiter() =
+    Regex("""//(.)\n(.*)""").find(this)
+        ?.let { Pair(it.groupValues[1], it.groupValues[2]) }
+        ?: Pair(null, this)
