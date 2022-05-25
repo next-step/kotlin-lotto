@@ -1,6 +1,6 @@
 package calculator.model
 
-object CustomSeparator : Separable {
+object CustomSeparator : SepartorStrategy {
     private val INPUT_PATTERN = "//(.)\n(.*)".toRegex()
 
     override fun isSeparable(input: String) = INPUT_PATTERN.matches(input)

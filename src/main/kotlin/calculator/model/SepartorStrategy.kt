@@ -1,6 +1,6 @@
 package calculator.model
 
-interface Separable {
+interface SepartorStrategy {
     fun isSeparable(input: String): Boolean
 
     fun separate(input: String): List<String>

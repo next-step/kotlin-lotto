@@ -1,6 +1,6 @@
 package calculator.model
 
-object DefaultSeparator : Separable {
+object DefaultSeparator : SepartorStrategy {
     private val INPUT_PATTERN = "(.)([:|,](.))*".toRegex()
     private val DEFAULT_DELIMITER_REGEX = "[,:]".toRegex()
 
