@@ -23,7 +23,11 @@ class ResultViewTest : DescribeSpec({
                 )
             )
 
-            stub.view shouldBe "총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+            stub.outputs[0] shouldBe "3개 일치 (${fourthPrizePrice}원)- 1개"
+            stub.outputs[1] shouldBe "4개 일치 (${fourthPrizePrice}원)- 0개"
+            stub.outputs[2] shouldBe "5개 일치 (${fourthPrizePrice}원)- 0개"
+            stub.outputs[3] shouldBe "6개 일치 (${fourthPrizePrice}원)- 0개"
+            stub.outputs[4] shouldBe "총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
         }
     }
 
@@ -34,15 +38,16 @@ class ResultViewTest : DescribeSpec({
 
             resultView.showLottos(listOf(listOf(1, 2, 3, 4, 5, 6)))
 
-            stub.view shouldBe "[1, 2, 3, 4, 5, 6]"
+            stub.outputs[0] shouldBe "1개를 구입했습니다."
+            stub.outputs[1] shouldBe "[1, 2, 3, 4, 5, 6]"
         }
     }
 })
 
 class StubOutput : Output {
-    lateinit var view: String
+    var outputs: MutableList<String> = mutableListOf()
 
     override fun print(message: String) {
-        this.view = message
+        this.outputs.add(message)
     }
 }

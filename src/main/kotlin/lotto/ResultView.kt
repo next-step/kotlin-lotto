@@ -17,7 +17,7 @@ class ResultView(private val output: Output) {
     }
 
     private fun buildMatchPrizeResultFor(prize: PrizeDto) =
-        "${prize.matchCount}개 일치 (${prize.price}}원)- ${prize.numberOfCorrect}개"
+        "${prize.matchCount}개 일치 (${prize.price}원)- ${prize.numberOfCorrect}개"
 
     private fun buildRateOfReturnFor(rateOfReturn: String) =
         "총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 ${if (rateOfReturn.toDouble() > 1) "이득이" else "손해"}라는 의미임)"
