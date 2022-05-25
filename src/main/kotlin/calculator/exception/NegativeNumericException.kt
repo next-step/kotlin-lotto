@@ -1,3 +1,3 @@
 package calculator.exception
 
-class NegativeNumericException(message: String) : RuntimeException(message)
+class NegativeNumericException(message: String) : IllegalStateException(message)

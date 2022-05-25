@@ -2,7 +2,6 @@ package calculator
 
 fun main() {
     val text = readln()
-    val stringAddCalculator = StringAddCalculator()
-    val result = stringAddCalculator.calculate(text)
+    val result = StringAddCalculator.calculate(text)
     println(result)
 }
