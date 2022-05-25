@@ -13,7 +13,7 @@ object LottoFactory {
     private const val LOTTO_SIZE = 6
 
     fun getRandomLottoTicket(): LottoTicket {
-        return LottoTicket(List(LOTTO_SIZE) { getRandomNumber() })
+        return LottoTicket(List(LOTTO_SIZE) { getRandomNumber() }.sorted())
     }
 
     private fun getRandomNumber() = Random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
