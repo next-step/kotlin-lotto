@@ -1,5 +1,7 @@
 package lotto.model.data
 
+import lotto.util.shuffleAndSelect
+
 interface Policy {
     val rangeOfNumbers: LottoNumberRange
     val countOfNumberToSelect: Int
@@ -25,4 +27,7 @@ interface Policy {
                 null
             }
     }
+
+    fun randomNumbers(count: Int = this.countOfNumberToSelect): List<LottoNumber> =
+        this.rangeOfNumbers.shuffleAndSelect(count)
 }
