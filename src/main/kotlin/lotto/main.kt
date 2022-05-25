@@ -15,7 +15,7 @@ fun main() {
     val resultView = ResultView()
 
     val payment: String = inputView.payment()
-    val paymentRequestDto = InputPaymentRequestDto.convertToOperand(payment)
+    val paymentRequestDto = InputPaymentRequestDto.convertPayment(payment)
 
     val lottoRecord = buyLotto(resultView, paymentRequestDto)
     lottoStatics(inputView, resultView, paymentRequestDto, lottoRecord)
@@ -41,7 +41,7 @@ fun lottoStatics(
     val lastWeekWinningLotto: List<String> = inputView.winningNumber()
     val winningStat = WinningStatics(
         paymentRequestDto,
-        InputWinningLottoNumberDto.convertOperand(lastWeekWinningLotto),
+        InputWinningLottoNumberDto.convertLottoNumber(lastWeekWinningLotto),
         lottoRecord
     ).result()
 

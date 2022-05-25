@@ -12,11 +12,27 @@ class WinningStaticsTest : FreeSpec({
 
     "result" - {
 
-        "당첨 로또 개수와 수익률을 반환한다." {
+        "당첨된 로또가 없는 경우 결과를 반환한다." {
+            val lottoNumberSet = LottoNumberSet(listOf(13, 14, 15, 16, 17, 18))
+            val lottoRecord = listOf(lottoNumberSet)
+            val paymentDto = InputPaymentRequestDto.convertPayment("14000")
+            val winningLotto = InputWinningLottoNumberDto.convertLottoNumber(listOf("1", "2", "3", "10", "11", "12"))
+            val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
+
+            val winningResult = winningStat.result()
+
+            LottoWinningAmount.values().forEach { it ->
+                print(it)
+                winningResult.winningLottoList[it] shouldBe 0
+            }
+            winningResult.profitRatio shouldBe 0
+        }
+
+        "당첨 로또가 3개인 경우의 결과를 반환한다." {
             val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 4, 5, 6))
             val lottoRecord = listOf(lottoNumberSet)
-            val paymentDto = InputPaymentRequestDto.convertToOperand("14000")
-            val winningLotto = InputWinningLottoNumberDto.convertOperand(listOf("1", "2", "3", "10", "11", "12"))
+            val paymentDto = InputPaymentRequestDto.convertPayment("14000")
+            val winningLotto = InputWinningLottoNumberDto.convertLottoNumber(listOf("1", "2", "3", "10", "11", "12"))
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
 
             val winningResult = winningStat.result()
@@ -24,6 +40,48 @@ class WinningStaticsTest : FreeSpec({
             winningResult.winningLottoList[LottoWinningAmount.FOURTH] shouldBe 1
 
             winningResult.profitRatio shouldBe 0.35
+        }
+
+        "당첨 로또가 4개인 경우의 결과를 반환한다." {
+            val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 10, 5, 6))
+            val lottoRecord = listOf(lottoNumberSet)
+            val paymentDto = InputPaymentRequestDto.convertPayment("14000")
+            val winningLotto = InputWinningLottoNumberDto.convertLottoNumber(listOf("1", "2", "3", "10", "11", "12"))
+            val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
+
+            val winningResult = winningStat.result()
+
+            winningResult.winningLottoList[LottoWinningAmount.THIRD] shouldBe 1
+
+            winningResult.profitRatio shouldBe 3.57
+        }
+
+        "당첨 로또가 5개인 경우의 결과를 반환한다." {
+            val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 10, 11, 6))
+            val lottoRecord = listOf(lottoNumberSet)
+            val paymentDto = InputPaymentRequestDto.convertPayment("14000")
+            val winningLotto = InputWinningLottoNumberDto.convertLottoNumber(listOf("1", "2", "3", "10", "11", "12"))
+            val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
+
+            val winningResult = winningStat.result()
+
+            winningResult.winningLottoList[LottoWinningAmount.SECOND] shouldBe 1
+
+            winningResult.profitRatio shouldBe 107.14
+        }
+
+        "당첨 로또가 6개인 경우의 결과를 반환한다." {
+            val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 10, 11, 12))
+            val lottoRecord = listOf(lottoNumberSet)
+            val paymentDto = InputPaymentRequestDto.convertPayment("14000")
+            val winningLotto = InputWinningLottoNumberDto.convertLottoNumber(listOf("1", "2", "3", "10", "11", "12"))
+            val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
+
+            val winningResult = winningStat.result()
+
+            winningResult.winningLottoList[LottoWinningAmount.FIRST] shouldBe 1
+
+            winningResult.profitRatio shouldBe 142857.14
         }
     }
 })

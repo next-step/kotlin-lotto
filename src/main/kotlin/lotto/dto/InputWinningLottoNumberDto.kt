@@ -6,7 +6,7 @@ class InputWinningLottoNumberDto(
 
     companion object {
 
-        fun convertOperand(lasWeekWinningNumber: List<String>): InputWinningLottoNumberDto {
+        fun convertLottoNumber(lasWeekWinningNumber: List<String>): InputWinningLottoNumberDto {
             val convertIntWinningNumber = lasWeekWinningNumber.map {
                 it.toIntOrNull() ?: throw IllegalArgumentException(CANNOT_CONVERT_INT)
             }
