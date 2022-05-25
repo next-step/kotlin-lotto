@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoShop
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
-import lotto.dto.LottoTicketResponse
+import lotto.dto.LottoTicketsResponse
 import lotto.dto.WinningLottoResponse
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -14,9 +14,12 @@ fun main() {
     val buyingRequest = InputView.buying()
 
     val lottoShop = LottoShop()
-    val lottoTickets = lottoShop.buying(Money(buyingRequest.amount))
+    val lottoTickets = lottoShop.buying(
+        amount = Money(buyingRequest.amount),
+        manualNumbers = buyingRequest.manualNumbers
+    )
 
-    ResultView.printLottoTickets(LottoTicketResponse.listOf(lottoTickets))
+    ResultView.printLottoTickets(LottoTicketsResponse.of(lottoTickets, buyingRequest.manualCount))
 
     val winningLottoRequest = InputView.winningLotto()
 
