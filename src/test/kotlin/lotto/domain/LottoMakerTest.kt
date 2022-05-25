@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.model.Lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
@@ -18,6 +19,6 @@ class LottoMakerTest {
     fun `LottoMaker가 만들어내는 로또는 6개의 숫자로 이루어진다`() {
         val lotto = LottoMaker.make()
 
-        assertThat(lotto.numbers.size).isEqualTo(LottoMaker.LOTTO_NUMBER_COUNT)
+        assertThat(lotto.numbers.size).isEqualTo(Lotto.LOTTO_NUMBER_COUNT)
     }
 }
