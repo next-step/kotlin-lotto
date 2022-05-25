@@ -6,13 +6,9 @@ object Parser {
     // "//(커스텀구분자)\n(수식 문자열)"
     private val parseRegex by lazy { Regex("(?://(.*)\n)?(.*)") }
 
-    fun parse(input: String?): List<String> {
-        return if (input.isNullOrEmpty()) {
-            emptyList()
-        } else {
-            val (delimiters, expression) = parseDelimiterAndExpression(input)
-            expression.split(delimiters.toRegex())
-        }
+    fun parse(input: String): List<String> {
+        val (delimiters, expression) = parseDelimiterAndExpression(input)
+        return expression.split(delimiters.toRegex())
     }
 
     private fun parseDelimiterAndExpression(input: String): Pair<String, String> {
