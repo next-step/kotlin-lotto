@@ -8,7 +8,7 @@ import lotto.model.LottoTicket
 class LottoStore {
     fun buyLotto(money: Int): List<LottoTicket> {
         val ticketCount: Int = money / LOTTO_PRICE
-        return List(ticketCount) { LottoFactory.getRandomLottoTicket() }
+        return List(ticketCount) { LottoTicketFactory.getRandomLottoTicket() }
     }
 
     companion object {
