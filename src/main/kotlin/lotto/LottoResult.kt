@@ -3,8 +3,8 @@ package lotto
 /**
  * 로또 결과
  */
-class LottoResult(winningValue: String, lotto: Lotto) {
-    private val winningNumbers = winningValue
+class LottoResult(officialWinningValue: String, lotto: Lotto) {
+    private val winningNumbers = officialWinningValue
         .replace(" ", "")
         .split(",")
         .map { it.toInt() }

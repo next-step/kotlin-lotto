@@ -41,7 +41,7 @@ internal class StatisticsTest {
     @ParameterizedTest
     @MethodSource("statisticsData")
     fun `로또 통계 결과 확인`(lottoList: List<Lotto>, purchasePrice: Int, expectedEarnings: Double, expectedList: List<StatisticsItem>) {
-        val stat = Statistics(lottoList.map { LottoResult(lotto = it, winningValue = "1,2,3,4,5,6") }, purchasePrice).apply {
+        val stat = Statistics(lottoList.map { LottoResult(lotto = it, officialWinningValue = "1,2,3,4,5,6") }, purchasePrice).apply {
             this.run()
         }
 
