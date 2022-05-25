@@ -61,4 +61,12 @@ class AddCalculatorTest {
             addCalculator.calculate(Expression(expression))
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//10\\n12,3","//5\\n1;2;3"])
+    fun `커스텀 구분자에 숫자를 전달할 경우 RuntimeException 예외가 발생한다`(expression: String) {
+        assertThatIllegalArgumentException().isThrownBy {
+            addCalculator.calculate(Expression(expression))
+        }
+    }
 }

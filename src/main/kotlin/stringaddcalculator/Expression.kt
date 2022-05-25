@@ -7,7 +7,7 @@ class Expression(private val expression: String?) {
 
         val result = CUSTOM_REGEX.toRegex().find(expression)
         val operandString = getOperandString(result, default = expression)
-        val delimiter = result.getGroupValue(2)?.run { "[$this,:]" } ?: DEFAULT_DELIMITER
+        val delimiter = result.getGroupValue(2)?.run { "[$this,:]" }?.checkOperatorIsNotNumber() ?: DEFAULT_DELIMITER
 
         return operandString
             .split(Regex(delimiter))
@@ -41,6 +41,11 @@ class Expression(private val expression: String?) {
 
     private fun List<Int>.checkOperandIsMoreThanZero(): List<Int> {
         require(this.all { it >= 0 })
+        return this
+    }
+
+    private fun String.checkOperatorIsNotNumber(): String {
+        require(this.toIntOrNull() == null)
         return this
     }
 
