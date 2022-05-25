@@ -16,9 +16,12 @@ object StringSeparator {
             ?: toPositiveNumbers(inputString)
     }
 
-    private fun toPositiveNumbers(inputString: String, delimiter: String = DEFAULT_DELIMITER): PositiveNumbers = inputString.split(delimiter.toRegex())
+    private fun toPositiveNumbers(
+        inputString: String,
+        delimiter: String = DEFAULT_DELIMITER
+    ): PositiveNumbers = inputString.split(delimiter.toRegex())
         .map {
             it.toIntOrNull()?.let { intValue -> PositiveNumber(intValue) }
                 ?: throw IllegalArgumentException("숫자가 아닌경우 변환할수 없습니다.")
-        }.run { PositiveNumbers(this) }
+        }.let(::PositiveNumbers)
 }
