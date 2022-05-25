@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 
 class AmountTest : StringSpec({
     "구입 금액을 생성할수 있다" {
-        shouldNotThrow<Throwable> { Amount(1000) }
+        shouldNotThrow<Throwable> { Amount(1_000) }
     }
 
     "구입 금액이 0원 미만일 경우 Exception을 던진다" {

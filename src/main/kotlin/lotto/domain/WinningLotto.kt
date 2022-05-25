@@ -2,16 +2,16 @@ package lotto.domain
 
 import lotto.domain.vo.LottoNumber
 
-class WinningLotto {
+class WinningLotto(winningNumbers: List<Int>) {
     private val winningLotto: Lotto
 
-    constructor(winningNumbers: List<Int>) {
+    init {
         winningLotto = Lotto(winningNumbers.map(::LottoNumber).toSet())
     }
 
     fun match(
         lottoBundle: LottoBundle
-    ): List<WinningResult> = lottoBundle.lottos.map { WinningResult.findResult(matchCount(it)) }
+    ): List<MatchType> = lottoBundle.lottos.map { MatchType.findMatchType(matchCount(it)) }
 
     private fun matchCount(purchaseLotto: Lotto): Int =
         winningLotto.lottoNumbers.count { lottoNumber -> purchaseLotto.lottoNumbers.contains(lottoNumber) }

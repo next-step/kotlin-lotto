@@ -25,6 +25,18 @@ class LottoTest : StringSpec({
             LottoNumber(2),
             LottoNumber(3),
             LottoNumber(4),
+            LottoNumber(5)
+        )
+
+        shouldThrow<IllegalArgumentException> { Lotto(lottoNumbers) }
+    }
+
+    "로또 숫자가 중복되는 경우 Exception을 던진다" {
+        val lottoNumbers = setOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(4),
+            LottoNumber(4),
             LottoNumber(5),
             LottoNumber(5)
         )
