@@ -2,7 +2,7 @@ package lotto.domain
 
 class KoreanLottoNumberMaker : LottoMaker {
     override fun makeLottoNumbers(): LottoNumbers {
-        val range = List(LOTTO_COUNT) { it + LOTTO_START_OFFSET }
+        val range = List(LOTTO_COUNT) { LottoNumber(it + LOTTO_START_OFFSET) }
         val shuffled = range.shuffled()
         return LottoNumbers(shuffled.subList(LOTTO_START, LOTTO_END))
     }

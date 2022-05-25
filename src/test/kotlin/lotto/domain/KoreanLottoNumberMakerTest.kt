@@ -8,7 +8,7 @@ class KoreanLottoNumberMakerTest {
         val lottoMaker = KoreanLottoNumberMaker()
         val randomList = lottoMaker.makeLottoNumbers()
 
-        require(randomList.lottoNumbers.all { it in 1..45 })
+        require(randomList.lottoNumbers.all { it.number in 1..45 })
         require(randomList.lottoNumbers.distinct().size == randomList.lottoNumbers.size)
     }
 }

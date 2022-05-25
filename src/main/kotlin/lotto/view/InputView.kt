@@ -1,6 +1,8 @@
 package lotto.view
 
 import lotto.domain.InputValidator
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 
 object InputView {
     private const val LOTTO_LIST_DELIMITER = ","
@@ -31,13 +33,13 @@ object InputView {
         return readln()
     }
 
-    fun getLottoAnswer(): List<Int> {
+    fun getLottoAnswer(): LottoNumbers {
         var lottoInput: String
         do {
             lottoInput = getUserInputWithMessage(LOTTO_ANSWER_INPUT_MESSAGE)
         } while (isValidLottoAnswer(lottoInput).not())
 
-        return lottoInput.split(LOTTO_LIST_DELIMITER).map { it.toInt() }
+        return LottoNumbers(lottoInput.split(LOTTO_LIST_DELIMITER).map { LottoNumber(it.toInt()) })
     }
 
     private fun isValidLottoAnswer(lotto: String): Boolean {

@@ -19,7 +19,7 @@ object PrintView {
 
     fun printBoughtLottoList(boughtLotto: List<LottoNumbers>) {
         repeat(boughtLotto.size) { lottoIdx ->
-            val lottoResult = boughtLotto[lottoIdx].lottoNumbers.joinToString(LOTTO_NUMBER_SEPARATOR)
+            val lottoResult = boughtLotto[lottoIdx].lottoNumbers.map { it.number }.joinToString(LOTTO_NUMBER_SEPARATOR)
 
             println("$LOTTO_NUMBER_PREFIX$lottoResult$LOTT_NUMBER_POSTFIX")
         }

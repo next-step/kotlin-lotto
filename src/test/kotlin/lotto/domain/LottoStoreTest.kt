@@ -19,7 +19,7 @@ class LottoStoreTest {
 
     @Test
     fun `로또 각당첨등수 개수가 바른지 테스트`() {
-        val lottoAnswer = listOf(1, 2, 3, 4, 5, 6)
+        val lottoAnswer = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         val myMoney = 3000
         val lottoMaker = object : LottoMaker {
             private val lottoList = listOf(
@@ -31,7 +31,7 @@ class LottoStoreTest {
             private var idx = 0
 
             override fun makeLottoNumbers(): LottoNumbers {
-                return LottoNumbers(lottoList[idx++])
+                return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
         }
 
@@ -57,7 +57,7 @@ class LottoStoreTest {
 
     @Test
     fun `로또 당첨의 수익률이 바른지 테스트`() {
-        val lottoAnswer = listOf(1, 2, 3, 4, 5, 6)
+        val lottoAnswer = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         val myMoney = 3000
         val lottoMaker = object : LottoMaker {
             private val lottoList = listOf(
@@ -69,7 +69,7 @@ class LottoStoreTest {
             private var idx = 0
 
             override fun makeLottoNumbers(): LottoNumbers {
-                return LottoNumbers(lottoList[idx++])
+                return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
         }
 
