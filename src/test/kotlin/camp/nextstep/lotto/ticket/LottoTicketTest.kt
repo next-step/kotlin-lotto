@@ -68,7 +68,7 @@ internal class LottoTicketTest {
         assertThrows<IllegalArgumentException> { LottoTicket(numbers.toList()) }
     }
 
-    @DisplayName("로또 티켓은 1부터 45까지 숫자로 이루어질 수 있다.")
+    @DisplayName("로또 티켓은 1보다 작거나 45보다 큰 숫자로 이루어질 수 없다.")
     @ParameterizedTest(name = "1 <= {0} <= 45 을 만족하지 않는다.")
     @CsvSource(
         delimiter = '_',
