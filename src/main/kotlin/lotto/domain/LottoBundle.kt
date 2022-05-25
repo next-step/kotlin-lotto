@@ -10,12 +10,10 @@ data class LottoBundle(
     }
 
     operator fun plus(other: LottoBundle): LottoBundle {
-        val targetBundle = bundle.toMutableList()
-        targetBundle.addAll(other.bundle)
-        return LottoBundle(targetBundle.toList())
+        return LottoBundle(bundle + other.bundle)
     }
 
-    fun isNotEmpty() = bundle.isNotEmpty()
+    fun isNotEmpty(): Boolean = bundle.isNotEmpty()
 
     fun matchWinning(winningLotto: WinningLotto): List<WinningPlace> {
         return bundle.map {

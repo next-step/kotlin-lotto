@@ -11,7 +11,7 @@ class LottoSeller(
             lottoGenerator.generate()
         }
 
-        return LottoBundle(bundle.toList())
+        return LottoBundle(bundle)
     }
 
     companion object {

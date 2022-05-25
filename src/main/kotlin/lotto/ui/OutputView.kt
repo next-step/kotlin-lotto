@@ -25,7 +25,7 @@ object OutputView {
         values().filter { it != BLANK }
             .sortedBy { it.reward }
             .forEach {
-                println("${it.requiredMatchingCount}개 일치${if (isSecondPlace(it)) ", 보너스 볼 일치" else ""}(${it.reward}원) - ${winningResult[it]}")
+                println("${it.requiredMatchingCount}개 일치${if (isSecondPlace(it)) ", 보너스 볼 일치" else ""}(${it.reward}원) - ${winningResult[it]}개")
             }
     }
 
