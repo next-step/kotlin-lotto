@@ -1,6 +1,6 @@
 package calculator.model
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -14,7 +14,7 @@ class PositiveNumberTest {
     fun `음수 또는 숫자 이외의 값으로 생성하면 예외가 발생`(number: String) {
         // when, then
         val exception = assertThrows<IllegalArgumentException> { PositiveNumber.from(number) }
-        Assertions.assertEquals("0 이상의 숫자로만 생성이 가능합니다. (number: $number)", exception.message)
+        assertEquals("0 이상의 숫자로만 생성이 가능합니다. (number: $number)", exception.message)
     }
 
     @ParameterizedTest
