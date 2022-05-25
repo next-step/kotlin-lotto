@@ -16,8 +16,7 @@ object LottoController {
         OutputView.printTicket(tickets)
 
         val company = LottoCompany(InputView.getWinningNumber())
-        val prizes = tickets.mapNotNull { company.findCorrectLotto(it) }
-        val lottoResults = company.convertPrizeToLottoResult(prizes)
+        val lottoResults = company.convertTicketsToLottoResults(tickets)
         OutputView.printLottoResult(lottoResults)
         OutputView.printYield(YieldCalculator.calculateYield(money, lottoResults))
     }

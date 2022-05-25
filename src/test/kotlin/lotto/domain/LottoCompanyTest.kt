@@ -26,8 +26,8 @@ class LottoCompanyTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
-    internal fun `로또와 당첨번호가 일치하는 갯수를 찾는다`(source: String) {
-        val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 7))
-        assertThat(LottoCompany(source).findCorrectLotto(ticket)?.matchCount).isEqualTo(5)
+    internal fun `로또와 당첨번호가 일치하는 갯수를 찾고 몇등인지 잘 반환한다`(source: String) {
+        val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(LottoCompany(source).convertTicketsToLottoResults(listOf(ticket)).last().count).isEqualTo(1)
     }
 }

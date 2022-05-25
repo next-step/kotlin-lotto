@@ -18,13 +18,17 @@ class LottoCompany(stringWinningNumber: String) {
         require(winningNumber.size == LOTTO_COUNT_LIMITS)
     }
 
-    fun findCorrectLotto(ticket: LottoTicket): Prize? {
+    fun convertTicketsToLottoResults(tickets: List<LottoTicket>): List<LottoResult> {
+        return convertPrizeToLottoResult(tickets.mapNotNull { findCorrectLotto(it) })
+    }
+
+    private fun findCorrectLotto(ticket: LottoTicket): Prize? {
         val union = ticket.numbers + winningNumber
         val matchCounts = ticket.numbers.size + winningNumber.size - union.distinct().size
         return Prize.of(matchCounts)
     }
 
-    fun convertPrizeToLottoResult(prizes: List<Prize>): List<LottoResult> {
+    private fun convertPrizeToLottoResult(prizes: List<Prize>): List<LottoResult> {
         val lottoResults = mutableListOf<LottoResult>()
         lottoResults.add(
             LottoResult(
@@ -53,7 +57,6 @@ class LottoCompany(stringWinningNumber: String) {
                 prizes.filter { it.matchCount == FIRST_PLACE_MATCH_COUNT }.size
             )
         )
-
         return lottoResults
     }
 
