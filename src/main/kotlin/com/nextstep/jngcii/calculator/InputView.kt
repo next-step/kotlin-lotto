@@ -3,8 +3,8 @@ package com.nextstep.jngcii.calculator
 class InputView(
     private val inputParser: InputParser
 ) {
-    fun getNumbers(): List<Int> {
-        val input = readLine()
+    fun getNumbers(read: () -> String?): List<Int> {
+        val input = read()
 
         if (input.isNullOrBlank()) {
             return listOf(ZERO)
