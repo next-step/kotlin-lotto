@@ -7,8 +7,6 @@ fun main() {
 
     val machine = Machine(purchasePrice)
 
-    machine.purchase()
-
     println("${machine.lottoCount}개를 구매했습니다.")
     println(machine.lottoList.joinToString { "\n${it.numbers}" })
     println("지난 주 당첨 번호를 입력해 주세요.")
