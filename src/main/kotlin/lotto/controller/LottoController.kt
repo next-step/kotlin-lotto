@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.LottoCompany
 import lotto.domain.LottoStore
+import lotto.domain.YieldCalculator
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -18,5 +19,6 @@ object LottoController {
         val prizes = tickets.mapNotNull { company.findCorrectLotto(it) }
         val lottoResults = company.convertPrizeToLottoResult(prizes)
         OutputView.printLottoResult(lottoResults)
+        OutputView.printYield(YieldCalculator.calculateYield(money, lottoResults))
     }
 }

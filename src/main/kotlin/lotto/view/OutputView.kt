@@ -23,4 +23,8 @@ object OutputView {
         println(Messages.CORRECT_FIVE.format(lottoResults[2].count))
         println(Messages.CORRECT_SIX.format(lottoResults[3].count))
     }
+
+    fun printYield(yields: Double) {
+        println(Messages.PRINT_YIELD.format(yields))
+    }
 }

@@ -12,4 +12,5 @@ object Messages {
     const val CORRECT_FOUR = "4개 일치 (50000원)- %s개"
     const val CORRECT_FIVE = "5개 일치 (1500000원)- %s개"
     const val CORRECT_SIX = "6개 일치 (2000000000원)- %s개"
+    const val PRINT_YIELD = "총 수익률은 %.2f입니다.(기존이 1이기 때문에 결과적으로 손해라는 의미임)"
 }
