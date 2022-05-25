@@ -1,22 +1,33 @@
 package camp.nextstep.lotto.raffle
 
+import camp.nextstep.lotto.IntArrayConverter
 import camp.nextstep.lotto.ticket.LottoTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
+import org.junit.jupiter.params.converter.ConvertWith
+import org.junit.jupiter.params.provider.CsvSource
 
 internal class LottoResultMatcherTest {
 
     @DisplayName("당첨 번호가 [1, 2, 3, 4, 5, 6] 일 때,")
     @ParameterizedTest(name = "로또 티켓이 {0} 이면 {1} 개가 일치한다.")
-    @MethodSource("lottoNumbers")
-    fun matchedLottoNumbers(ticketNumbers: List<Int>, expectedMatchCount: Int) {
-        val lottoTicket = LottoTicket(ticketNumbers)
+    @CsvSource(
+        delimiter = '|',
+        value = [
+            "1, 2, 3, 4, 5, 6|6",
+            "1, 2, 3, 4, 5, 10|5",
+            "11, 22, 3, 4, 5, 6|4",
+            "11, 2, 3, 4, 41, 43|3",
+            "11, 12, 13, 14, 5, 6|2",
+            "11, 12, 13, 14, 15, 6|1",
+            "11, 12, 13, 14, 15, 16|0"
+        ]
+    )
+    fun matchedLottoNumbers(@ConvertWith(IntArrayConverter::class) ticketNumbers: IntArray, expectedMatchCount: Int) {
+        val lottoTicket = LottoTicket(ticketNumbers.toList())
 
         val matchedCount = LottoResultMatcher.count(lottoTicket, listOf(1, 2, 3, 4, 5, 6))
 
@@ -59,20 +70,5 @@ internal class LottoResultMatcherTest {
         assertEquals(1, zeroMatched.size)
 
         assertThat(zeroMatched[0].numbers).containsExactly(15, 25, 34, 41, 44, 45)
-    }
-
-    companion object {
-        @JvmStatic
-        fun lottoNumbers(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.arguments(listOf(1, 2, 3, 4, 5, 6), 6),
-                Arguments.arguments(listOf(1, 2, 3, 4, 5, 10), 5),
-                Arguments.arguments(listOf(11, 22, 3, 4, 5, 6), 4),
-                Arguments.arguments(listOf(11, 2, 3, 4, 41, 43), 3),
-                Arguments.arguments(listOf(11, 12, 13, 14, 5, 6), 2),
-                Arguments.arguments(listOf(11, 12, 13, 14, 15, 6), 1),
-                Arguments.arguments(listOf(11, 12, 13, 14, 15, 16), 0),
-            )
-        }
     }
 }
