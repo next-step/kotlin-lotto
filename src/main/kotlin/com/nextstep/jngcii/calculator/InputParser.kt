@@ -1,10 +1,8 @@
 package com.nextstep.jngcii.calculator
 
 object InputParser {
-    private const val COMMA = ","
-    private const val COLON = ":"
     private val delimiterParseRegex = Regex("//(\\D)\n(.*)")
-    private val defaultDelimiterRegex = Regex("$COMMA|$COLON")
+    private val defaultDelimiterRegex = Regex("[,:]")
 
     fun parseDelimiter(input: String): Pair<String, String?> {
         delimiterParseRegex.find(input)?.let {
