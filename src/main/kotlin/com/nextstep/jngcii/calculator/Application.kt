@@ -1,12 +1,8 @@
 package com.nextstep.jngcii.calculator
 
 fun main() {
-    val inputParser = InputParser
-    val inputView = InputView(inputParser)
-    val resultView = ResultView
-    val calculator = Calculator
-
+    val inputView = InputView(InputParser)
     val numbers = inputView.getNumbers()
-    val result = calculator.run(numbers)
-    resultView.print(result)
+    val result = Calculator.run(numbers)
+    ResultView.print(result)
 }
