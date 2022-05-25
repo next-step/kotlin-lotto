@@ -6,7 +6,7 @@ class LottoBuyer(
 ) {
 
     fun buyAll(lottoSeller: LottoSeller = LottoSeller()): LottoBundle {
-        lottoBundle += lottoSeller.sell(money)
+        lottoBundle += lottoSeller.sellAutoLotto(money)
         return lottoBundle.copy()
     }
 
