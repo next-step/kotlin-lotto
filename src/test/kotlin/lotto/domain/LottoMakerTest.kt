@@ -1,6 +1,5 @@
-package lotto.domain.model
+package lotto.domain
 
-import lotto.domain.LottoMaker
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
