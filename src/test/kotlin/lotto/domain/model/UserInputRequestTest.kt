@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.domain.model
 
 import lotto.view.inputconverter.InputConverter
 import org.assertj.core.api.Assertions.assertThat

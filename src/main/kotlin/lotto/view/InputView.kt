@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.model.UserInputRequest
+import lotto.domain.model.UserInputRequest
 
 object InputView {
     fun <T> receiveUserInput(userInputRequest: UserInputRequest<T>): T {
