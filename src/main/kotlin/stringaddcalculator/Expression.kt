@@ -5,8 +5,8 @@ class Expression(private val expression: String?) {
         if (expression.isNullOrBlank())
             return listOf(0)
 
-        val result = CUSTOM_REGEX.toRegex().find(expression)
-        val operandString = getOperandString(result, default = expression)
+        val result = CUSTOM_REGEX.find(expression)
+        val operandString = getOperandString(result) ?: expression
         val delimiter = result.getGroupValue(2)?.run { "[$this,:]" }?.checkOperatorIsNotNumber() ?: DEFAULT_DELIMITER
 
         return operandString
@@ -16,16 +16,14 @@ class Expression(private val expression: String?) {
             .checkOperandIsMoreThanZero()
     }
 
-    private fun getOperandString(result: MatchResult?, default: String): String {
-        var tempString = ""
-        result.getGroupValue(1)?.let {
-            tempString += it
+    private fun getOperandString(result: MatchResult?): String? {
+        var tempString: String? = buildString {
+            append(result.getGroupValue(1) ?: "")
+            append(result.getGroupValue(3) ?: "")
         }
-        result.getGroupValue(3)?.let {
-            tempString += it
-        }
-        if (tempString.isEmpty())
-            tempString = default
+
+        if (tempString?.length == 0)
+            tempString = null
 
         return tempString
     }
@@ -51,6 +49,6 @@ class Expression(private val expression: String?) {
 
     companion object {
         private const val DEFAULT_DELIMITER = "[,:]"
-        private const val CUSTOM_REGEX = """(.*)//(.)\\n(.*)"""
+        private val CUSTOM_REGEX = """(.*)//(.)\\n(.*)""".toRegex()
     }
 }
