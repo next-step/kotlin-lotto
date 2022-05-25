@@ -14,8 +14,9 @@ object InputView {
 
     fun getWinningNumber(readStringValue: () -> String? = { readlnOrNull() }): String {
         println(Messages.WRITE_WINNING_NUMBER)
-        require(!readStringValue().isNullOrBlank())
-        return readStringValue() ?: throw IllegalArgumentException()
+        val input = readStringValue()
+        require(!input.isNullOrBlank())
+        return input
     }
 
     private fun changeStringToInt(input: String?): Int {

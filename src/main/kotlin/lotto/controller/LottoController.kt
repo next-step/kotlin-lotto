@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoStore
+import lotto.domain.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -13,6 +14,6 @@ object LottoController {
         val tickets = LottoStore().buyLotto(money)
         OutputView.printTicket(tickets)
 
-        val winningNumber = InputView.getWinningNumber()
+        WinningNumber(InputView.getWinningNumber())
     }
 }
