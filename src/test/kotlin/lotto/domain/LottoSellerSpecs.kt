@@ -9,8 +9,9 @@ class LottoSellerSpecs : DescribeSpec({
     describe("로또 판매자는") {
         context("로또를 구입할 충분한 금액을 받으면") {
             it("(금액/로또 가격) 만큼의 로또로 구성된 로또 뭉치를 제공한다") {
-                val lottoBundle = LottoSeller().sellAutoLotto(1_4000)
+                val (lottoBundle, changes) = LottoSeller().sellAutoLotto(1_4500)
                 lottoBundle.size shouldBe 14
+                changes shouldBe 500
             }
         }
 
@@ -28,10 +29,11 @@ class LottoSellerSpecs : DescribeSpec({
                 lottoCoupon(1, 2, 3, 4, 5, 7),
                 lottoCoupon(1, 2, 3, 4, 7, 8),
             )
-            val receivedMoney = 3000
+            val receivedMoney = 3500
             it("`로또 쿠폰`에 적힌 번호에 해당하는 로또를 판매한다") {
-                val lottoBundle = LottoSeller().sellManualLotto(receivedMoney, coupons)
+                val (lottoBundle, changes) = LottoSeller().sellManualLotto(receivedMoney, coupons)
                 lottoBundle.size shouldBe 3
+                changes shouldBe 500
             }
         }
 

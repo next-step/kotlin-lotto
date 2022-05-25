@@ -8,7 +8,8 @@ import lotto.ui.OutputView
 fun main() {
     val amountOfMoney = InputView.readAmountOfMoney()
     val lottoBuyer = LottoBuyer(amountOfMoney)
-    OutputView.showPurchasedLottoBundle(lottoBuyer.buyAll())
+    lottoBuyer.buyAll()
+    OutputView.showPurchasedLottoBundle(lottoBuyer.getLottoBundle())
     val numbers = InputView.readWinningNumbers()
     val bonusBall = InputView.readBonusBall()
     val winningResult = lottoBuyer.confirm(WinningLotto.from(numbers, bonusBall))
