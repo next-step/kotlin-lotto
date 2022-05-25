@@ -1,6 +1,7 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -29,5 +30,11 @@ class LottoLuckyDrawTest {
         luckyDraw.doLuckDraw(lottoList)
         val luckyDrawResult = luckyDraw.getStatistics
         assertThat(luckyDrawResult.six).isEqualTo(1)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1, 2, 3, 4, 5, -6", "2, 3, 4, 5, 66", "5, -1, 6, 7, 8, 9"])
+    fun `당첨번호 에러 처리 테스트`(input: String) {
+        assertThrows<IllegalArgumentException> { LottoLuckyDraw(input) }
     }
 }
