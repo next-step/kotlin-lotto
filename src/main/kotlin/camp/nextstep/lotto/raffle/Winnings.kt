@@ -8,17 +8,17 @@ enum class Winnings(val matchedCount: Int, val winnings: Int) {
 
     companion object {
 
-        private val winningMatchCounts = 3..6
+        private val WINNINGS_MATCH_COUNTS = 3..6
 
-        private val countWinningsMap = mapOf(
+        private val COUNT_WINNINGS_MAP = mapOf(
             THREE.matchedCount to THREE,
             FOUR.matchedCount to FOUR,
             FIVE.matchedCount to FIVE,
             SIX.matchedCount to SIX
         )
 
-        fun of(matchedCount: Int) = requireNotNull(countWinningsMap[matchedCount])
+        fun of(matchedCount: Int) = requireNotNull(COUNT_WINNINGS_MAP[matchedCount])
 
-        fun isWinningCount(matchedCount: Int) = matchedCount in winningMatchCounts
+        fun isWinningCount(matchedCount: Int) = matchedCount in WINNINGS_MATCH_COUNTS
     }
 }
