@@ -12,7 +12,7 @@ enum class Prize(val matchCount: Int, val reward: Int) {
     FOURTH_PLACE(3, 5000);
 
     companion object {
-        fun of(matchCount: Int): Prize =
-            values().first { it.matchCount == matchCount }
+        fun of(matchCount: Int): Prize? =
+            values().find { it.matchCount == matchCount }
     }
 }

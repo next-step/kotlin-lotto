@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.constants.Messages
+import lotto.model.LottoResult
 import lotto.model.LottoTicket
 
 /**
@@ -13,5 +14,13 @@ object OutputView {
         tickets.forEach {
             println(it.numbers.toString())
         }
+    }
+
+    fun printLottoResult(lottoResults: List<LottoResult>) {
+        println(Messages.LOTTO_RESULT)
+        println(Messages.CORRECT_THREE.format(lottoResults[0].count))
+        println(Messages.CORRECT_FOUR.format(lottoResults[1].count))
+        println(Messages.CORRECT_FIVE.format(lottoResults[2].count))
+        println(Messages.CORRECT_SIX.format(lottoResults[3].count))
     }
 }
