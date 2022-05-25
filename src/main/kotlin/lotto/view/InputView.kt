@@ -36,10 +36,16 @@ object InputView {
 
     private fun manualNumbers(manualCount: Int): List<String> {
         println(INPUT_MANUAL_NUMBER)
-        return List(manualCount) { index ->
-            print("${index + 1}. ")
-            readln()
-        }.also { println() }
+        return List(manualCount) { manualNumber() }
+            .also { println() }
+    }
+
+    private fun manualNumber(): String {
+        val manualNumber = readln()
+        if(manualNumber.isEmpty()){
+            return readln()
+        }
+        return manualNumber
     }
 
     fun winningLotto(): WinningLottoRequest {
