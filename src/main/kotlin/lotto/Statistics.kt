@@ -4,15 +4,13 @@ package lotto
  * 로또 통계
  */
 class Statistics(private val lottoResultList: List<LottoResult>, private val purchasePrice: Int) {
-    private val prizeList = LottoResult.Prize.values()
-
     var totalEarnings = 0.0
         private set
 
     val items = mutableListOf<StatisticsItem>()
 
     fun run() {
-        prizeList.map { prizeItem ->
+        LottoResult.Prize.values().map { prizeItem ->
             StatisticsItem(
                 standardPrize = prizeItem.price,
                 prize = prizeItem,
