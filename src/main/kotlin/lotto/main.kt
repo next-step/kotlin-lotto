@@ -7,18 +7,18 @@ fun main() {
 
     // 로또 구입(Model)
     val seller = Seller(RandomLottoNumberFactory())
-    seller.issueFor(purchaseAmount)
+    val lottos = seller.sell(purchaseAmount)
 
     // 구입한 로또를 사용자에게 출력(View)
     val resultView = ResultView(PrintOutput())
-    resultView.showLottos(seller.lottos)
+    resultView.showLottos(lottos)
 
     // 지난 주 당첨 번호를 사용자에게 출력(View)
     val lastWeekWinningNumber = inputView.askLastWeekWinningNumber()
 
     // 로또 분석(Model)
     val analyst = Analyst(lastWeekWinningNumber)
-    analyst.analyze(purchaseAmount, seller.lottos)
+    analyst.analyze(purchaseAmount, lottos)
 
     // 당첨 통계를 사용자에게 출력(View)
     resultView.showAnalyzeResult(analyst.result)
