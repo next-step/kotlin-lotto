@@ -2,11 +2,11 @@ package lotto
 
 typealias Lotto = List<Int>
 
-class Seller(private val randomNumbersGenerator: LottoNumberFactory) {
+class Seller(private val randomLottoNumberFactory: LottoNumberFactory) {
     fun sell(purchaseAmount: Int): List<Lotto> {
         val lottoCount = purchaseAmount / PRICE_OF_ONE_LOTTO
 
-        return (1..lottoCount).map { randomNumbersGenerator.generate() }
+        return (1..lottoCount).map { randomLottoNumberFactory.generate() }
     }
 
     companion object {
