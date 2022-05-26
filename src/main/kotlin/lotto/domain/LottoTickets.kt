@@ -6,22 +6,23 @@ class LottoTickets(private val tickets: List<LottoTicket>) : List<LottoTicket> b
         require(tickets.isNotEmpty())
     }
 
-    fun getMatchCount(match: LottoMatch, lastNumbers: LottoLastNumbers): Int =
-        if (match.withBonus) {
-            getMatchCountWithBonus(match, lastNumbers)
-        } else {
-            getMatchCountWithoutBonus(match, lastNumbers)
+    fun getMatchResult(lastNumbers: LottoLastNumbers): Map<LottoMatch, MatchCount> {
+        return mutableMapOf<LottoMatch, MatchCount>().apply {
+            LottoMatch.values().forEach {
+                put(it, getMatchCount(it, lastNumbers))
+            }
         }
+    }
 
-    private fun getMatchCountWithBonus(match: LottoMatch, lastNumbers: LottoLastNumbers): Int =
-        getMatchTickets(match, lastNumbers)
-            .filter { it.numbers.contains(lastNumbers.bonus) }
-            .size
-
-    private fun getMatchCountWithoutBonus(match: LottoMatch, lastNumbers: LottoLastNumbers): Int =
-        getMatchTickets(match, lastNumbers)
-            .filterNot { it.numbers.contains(lastNumbers.bonus) }
-            .size
+    private fun getMatchCount(match: LottoMatch, lastNumbers: LottoLastNumbers): Int {
+        return getMatchTickets(match, lastNumbers).let { matchTickets ->
+            if (match.withBonus) {
+                matchTickets.filter { it.numbers.contains(lastNumbers.bonus) }
+            } else {
+                matchTickets.filterNot { it.numbers.contains(lastNumbers.bonus) }
+            }
+        }.size
+    }
 
     private fun getMatchTickets(match: LottoMatch, lastNumbers: LottoLastNumbers): List<LottoTicket> =
         filter { it.numbers.intersect(lastNumbers).size == match.count }

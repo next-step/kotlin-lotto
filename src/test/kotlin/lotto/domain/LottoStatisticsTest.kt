@@ -17,23 +17,24 @@ class LottoStatisticsTest : BehaviorSpec({
             )
         )
         val lottoLastNumbers = LottoLastNumbers(setOf(1, 2, 3, 4, 5, 6), 7)
+        val matchResult = lottoTickets.getMatchResult(lottoLastNumbers)
 
         When("1개 이상의 포함된 로또 티켓 목록이 입력되면") {
-            val statistics = LottoStatistics(lottoTickets, lottoLastNumbers)
+            val statistics = LottoStatistics(matchResult)
             Then("3개 일치 개수를 반환한다") {
-                statistics.getMatchCount(LottoMatch.THREE) shouldBe 1
+                statistics[LottoMatch.THREE] shouldBe 1
             }
             Then("4개 일치 개수를 반환한다") {
-                statistics.getMatchCount(LottoMatch.FOUR) shouldBe 1
+                statistics[LottoMatch.FOUR] shouldBe 1
             }
             Then("5개 일치 개수를 반환한다") {
-                statistics.getMatchCount(LottoMatch.FIVE) shouldBe 1
+                statistics[LottoMatch.FIVE] shouldBe 1
             }
             Then("5개 + 보너스 번호 일치 개수를 반환한다") {
-                statistics.getMatchCount(LottoMatch.FIVE_BONUS) shouldBe 1
+                statistics[LottoMatch.FIVE_BONUS] shouldBe 1
             }
             Then("6개 일치 개수를 반환한다") {
-                statistics.getMatchCount(LottoMatch.SIX) shouldBe 1
+                statistics[LottoMatch.SIX] shouldBe 1
             }
             And("총 구매 금액을 입력하면") {
                 val purchase = 4000

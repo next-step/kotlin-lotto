@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoMatch
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTickets
 import java.math.BigDecimal
@@ -27,9 +26,9 @@ class ResultView(
     }
 
     private fun printStatisticsMatch(statistics: LottoStatistics) {
-        LottoMatch.values().forEach {
-            val extraPolicy = if (it.withBonus) ", 보너스 볼 일치" else " "
-            writeLine("${it.count}개 일치${extraPolicy}(${it.reward}원)- ${statistics.getMatchCount(it)}개")
+        statistics.entries.forEach { (lottoMatch, matchCount) ->
+            val extraPolicy = if (lottoMatch.withBonus) ", 보너스 볼 일치" else " "
+            writeLine("${lottoMatch.count}개 일치${extraPolicy}(${lottoMatch.reward}원)- ${matchCount}개")
         }
     }
 
@@ -46,7 +45,7 @@ class ResultView(
         when {
             profit > BigDecimal.ONE -> "이익이"
             profit < BigDecimal.ONE -> "손해"
-            else -> "중간이"
+            else -> "무승부"
         }
 
     private fun writeLine(message: String) = writer("$message\n")

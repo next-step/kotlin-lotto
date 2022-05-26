@@ -3,21 +3,18 @@ package lotto.domain
 import java.math.BigDecimal
 import java.math.MathContext
 
-class LottoStatistics(
-    private val lottoTickets: LottoTickets,
-    private val lottoLastNumbers: LottoLastNumbers
-) {
+typealias MatchCount = Int
 
-    fun getMatchCount(match: LottoMatch): Int = lottoTickets.getMatchCount(match, lottoLastNumbers)
+class LottoStatistics(private val statistics: Map<LottoMatch, MatchCount>) : Map<LottoMatch, Int> by statistics {
 
     fun getProfit(purchase: Int): BigDecimal {
         require(purchase > 0)
         return getRewards().divide(purchase.toBigDecimal(), MathContext.DECIMAL128)
     }
 
-    private fun getRewards(): BigDecimal =
-        LottoMatch
-            .values()
-            .sumOf { getMatchCount(it) * it.reward }
-            .toBigDecimal()
+    private fun getRewards(): BigDecimal {
+        return filterValues { count -> count > 0 }
+            .map { it.key.reward.toBigDecimal() * it.value.toBigDecimal() }
+            .sumOf { it }
+    }
 }
