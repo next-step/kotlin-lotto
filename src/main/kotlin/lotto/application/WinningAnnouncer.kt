@@ -6,9 +6,9 @@ import lotto.domain.Price
 object WinningAnnouncer {
 
     fun announce(winner: Lotto, lotteries: List<Lotto>): List<Lotto> {
-        val targetNumbers = winner.numbers.sorted()
+        val targetNumbers = winner.sortedNumbers()
         return lotteries.map { lotto ->
-            val sortedNumbers = lotto.numbers.sorted()
+            val sortedNumbers = lotto.sortedNumbers()
             checkLotteryResult(
                 lotto,
                 countCorrectNumbers(targetNumbers, sortedNumbers)
@@ -18,8 +18,7 @@ object WinningAnnouncer {
 
     private fun countCorrectNumbers(o1: List<Int>, o2: List<Int>): Int {
         return o1.zip(o2)
-            .map { it.first - it.second }
-            .count { it == 0 }
+            .count { it.first == it.second }
     }
 
     private fun checkLotteryResult(lotto: Lotto, correctedNumberCounts: Int): Lotto {

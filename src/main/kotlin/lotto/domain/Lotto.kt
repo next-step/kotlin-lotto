@@ -15,8 +15,10 @@ data class Lotto(
 
     fun winnerPrize(): Int = price.winningPrize
 
+    fun sortedNumbers(): List<Int> = numbers.sorted()
+
     private fun isInRange(number: Int): Boolean {
-        return LOTTO_NUMBER_RANGE.contains(number)
+        return number in LOTTO_NUMBER_RANGE
     }
 
     companion object {
