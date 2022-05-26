@@ -28,3 +28,18 @@
   * [x] 로또발급번호를 보여준다
   * [x] 당첨통계를 보여준다
   * [x] 수익률을 보여준다
+
+# 로또(자동)
+## refactor list
+* [ ] 패키지 정리
+* [ ] view layer에서 관리되어야할 변수들 이동
+* [ ] generateList 검증로직 추가
+  * [ ] generateList 테스트코드 추가
+* [ ] intersect 적용
+* [ ] MatchState 관련 구조변경
+* [ ] Stat 도메인 책임분리
+* [ ] 일급컬렉션으로 변경
+  * [ ] List<Lotto> -> Lottos
+  * [ ] List<MatchState> -> MatchStates
+* [ ] 수익률 계산방식 변경
+* [ ] view 호출로직 최소화(마지막에 한번만 하면되지 않을까?)
