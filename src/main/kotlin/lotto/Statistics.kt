@@ -18,13 +18,12 @@ class Statistics {
                     standardPrize = it.price,
                     prize = it,
                     matchLottoCount = winningPrizes.prizes.filter { prize ->
-                        prize.matchCount == it.matchCount
+                        prize == it
                     }.size,
                 )
             }.sortedBy {
                 it.prize.matchCount
             })
-
 
         earnings = winningPrizes.prizes.sumOf { it.price }.let {
             println(it.toDouble() / purchaseMoney.money.toDouble())
