@@ -12,14 +12,5 @@ class LottoNumbers(val lottoNumbers: List<LottoNumber>) {
     }
 }
 
-class LottoNumber(val number: Int) {
-    override fun hashCode(): Int {
-        return number
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (other !is LottoNumber) return false
-
-        return number == other.number
-    }
-}
+@JvmInline
+value class LottoNumber(val number: Int)

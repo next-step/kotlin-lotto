@@ -101,7 +101,7 @@
 
 ### 2차 todo list
 - [x] user money가 한개 가격을 받아 카운트를 리턴하게?
-- [ ] LottoNumber도 인라인 클래스로
+- [x] LottoNumber도 인라인 클래스로
 - [ ] LottoNumber를 재사용 가능하게 캐싱을 이용
 - [ ] totalMoney와 money모두 유저머니 객체로? 
 - [ ] getMatchCount의 네이밍 고민
