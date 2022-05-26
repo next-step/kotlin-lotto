@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class LottoRankTest {
     @Test
-    fun `WinningLotto는 몇 개 일치해야 하는지와 당첨 금액을 보관한다`() {
+    fun `LottoRank는 몇 개 일치해야 하는지와 당첨 금액을 보관한다`() {
         assertThat(LottoRank.FOURTH.numberOfMatches).isEqualTo(3)
         assertThat(LottoRank.FOURTH.winnings).isEqualTo(5_000)
 
