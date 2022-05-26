@@ -38,8 +38,9 @@ fun main() {
     resultView.printLottoTickets(lottoTickets)
 
     val lastLottoTicket = inputView.readLastLottoNumbers().run { LottoTicket(this) }
+    val lastLottoBonusNumber = inputView.readBonusLottoNumber()
 
-    val lottoStatistics = LottoStatistics(lottoTickets, lastLottoTicket)
+    val lottoStatistics = LottoStatistics(lottoTickets, lastLottoTicket, lastLottoBonusNumber)
     resultView.printLottoStatistics(lottoStatistics)
 
     val actualPurchaseMoney = purchaseMoney - changes
