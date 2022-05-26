@@ -29,4 +29,13 @@ object InputView {
 
         return WinningLottoTicket(winningValue)
     }
+
+    fun getBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readLine()?.toInt()
+
+        requireNotNull(bonusNumber) { NULL_MESSAGE }
+
+        return LottoNumber(bonusNumber)
+    }
 }
