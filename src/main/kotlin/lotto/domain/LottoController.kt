@@ -19,8 +19,11 @@ class LottoController(private val readInput: ReadInput, private val printOutput:
         val resultView = ResultView(printOutput)
         resultView.showLottos(lottos)
 
-        // 지난 주 당첨 번호를 사용자에게 출력(View)
+        // 지난 주 당첨 번호를 입력(View)
         val lastWeekWinningNumber = inputView.askLastWeekWinningNumber()
+
+        // 보너스 볼을 입력(View)
+        val bonusNumber = inputView.askBonusNumber()
 
         // 로또 분석(Model)
         val winningNumber = WinningNumber(lastWeekWinningNumber)
