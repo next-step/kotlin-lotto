@@ -23,7 +23,7 @@ class LottoMachine {
     fun checkResult(winningLottoTicket: LottoTicket, bonusLottoNumber: LottoNumber) {
         winningPrizes = WinningPrizes(
             lottoTickets.lottery.map {
-                val matchCount = winningLottoTicket.checkMatching(it).size
+                val matchCount = winningLottoTicket.numbers.intersect(it.numbers.toSet()).size
                 val matchBonus = matchCount == BONUS_LOTTO_NUMBER_COUNT && it.hasBonusNumber(bonusLottoNumber)
 
                 LottoResult().check(
@@ -33,10 +33,6 @@ class LottoMachine {
             }
         )
     }
-
-    private fun LottoTicket.hasBonusNumber(bonusLottoNumber: LottoNumber): Boolean = bonusLottoNumber in this.numbers
-
-    private fun LottoTicket.checkMatching(lottoTicket: LottoTicket) = this.numbers.intersect(lottoTicket.numbers.toSet())
 
     companion object {
         private const val LOTTO_PRICE = 1000
