@@ -1,13 +1,14 @@
 package lotto.domain
 
 class LottoMachine(private val receipt: Receipt) {
-    fun issue(): List<Lotto> {
-        return List(receipt.lottoCount) { Lotto { LottoGenerator().generateNumbers() } }
+    fun issue(): LottoTickets {
+        val lottoTickets = List(receipt.lottoCount) { LottoTicket(LottoGenerator().generateNumbers()) }
+        return LottoTickets(lottoTickets)
     }
 
-    fun verify(lastNumber: String, lottos: List<Lotto>): List<StatResult> {
+    fun verify(lastNumber: LottoTicket, lottoTickets: LottoTickets): List<StatResult> {
         val checker = Checker(lastNumber)
-        return Stat(lottos, checker).sumRecords
+        return Stat(lottoTickets, checker).sumRecords
     }
 
     fun yields(resultList: List<StatResult>): Double {

@@ -1,8 +1,8 @@
 package lotto.domain
 
-class Stat(private val lottos: List<LottoTicket>, private val checker: Checker) {
+class Stat(private val lottoTickets: LottoTickets, private val checker: Checker) {
     val matchRecords: List<MatchState>
-        get() = lottos.map { MatchState.of(checker.match(it)) }
+        get() = lottoTickets.lottoTickets.map { MatchState.of(checker.match(it)) }
     private val mergeRecords: List<StatResult>
         get() {
             return List(AVAILABLE_COUNT + 1) {
