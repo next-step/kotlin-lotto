@@ -1,8 +1,8 @@
 package calculator
 
 class StringAddCalculator {
-    fun add(text: String?) : Int {
-        if(text.isNullOrBlank()) {
+    fun add(text: String?): Int {
+        if (text.isNullOrBlank()) {
             return ZERO
         }
         val numbers = TextParsing.textParse(text)
@@ -15,4 +15,3 @@ class StringAddCalculator {
         private const val ZERO = 0
     }
 }
-
