@@ -19,3 +19,9 @@
 - [x] 빈 문자열 또는 null값을 입력할 경우 0을 반환한다.
 - [x] 문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외가 발생한다.
 - [x] 문자열 계산기에 정수가 아닌 값을 전달하는 경우 RuntimeException 예외가 발생한다.
+- 코드리뷰 반영
+  - [ ] 검증/연산을 수행하는 객체를 분리하기 ([review](https://github.com/next-step/kotlin-lotto/pull/269#discussion_r878018838))
+  - [ ] 명시적으로 람다변수를 사용하도록 수정 ([review](https://github.com/next-step/kotlin-lotto/pull/269#discussion_r878019003))
+  - [ ] inline함수의 리턴을 명확하게 수정 ([review](https://github.com/next-step/kotlin-lotto/pull/269#discussion_r878021037))
+  - [ ] require 함수 활용 ([review](https://github.com/next-step/kotlin-lotto/pull/269#discussion_r878022149))
+  - [ ] 정규식은 생성비용이 높아 미리 생성하는게 좋다👍 ([review](https://github.com/next-step/kotlin-lotto/pull/269#discussion_r878023153))
