@@ -1,52 +1,31 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
+import org.junit.platform.engine.support.discovery.SelectorResolver.Match
+import java.lang.Math.floor
+import java.lang.Math.round
 
 internal class StatisticsTest {
 
-    companion object {
-        @JvmStatic
-        private fun statisticsData(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of(
-                    listOf(Lotto(listOf(1, 2, 3, 4, 5, 6))),
-                    10000,
-                    200000.00,
-                    listOf(
-                        StatisticsItem(standardPrize = 5000, prize = LottoResult.Prize.THIRD, machLottoCount = 0),
-                        StatisticsItem(standardPrize = 50000, prize = LottoResult.Prize.FORTH, machLottoCount = 0),
-                        StatisticsItem(standardPrize = 1500000, prize = LottoResult.Prize.FIFTH, machLottoCount = 0),
-                        StatisticsItem(standardPrize = 2000000000, prize = LottoResult.Prize.SIXTH, machLottoCount = 1),
-                    )
-                ),
-                Arguments.of(
-                    listOf(Lotto(listOf(1, 2, 3, 7, 8, 9)), Lotto(listOf(4, 5, 6, 10, 11, 12))),
-                    10000,
-                    1.00,
-                    listOf(
-                        StatisticsItem(standardPrize = 5000, prize = LottoResult.Prize.THIRD, machLottoCount = 2),
-                        StatisticsItem(standardPrize = 50000, prize = LottoResult.Prize.FORTH, machLottoCount = 0),
-                        StatisticsItem(standardPrize = 1500000, prize = LottoResult.Prize.FIFTH, machLottoCount = 0),
-                        StatisticsItem(standardPrize = 2000000000, prize = LottoResult.Prize.SIXTH, machLottoCount = 0),
-                    )
-                ),
+    @Test
+    fun `일치하는 숫자가 3개인 로또가 한개인 경우 통계데이터 확인`() {
+        assertThat(Statistics().apply {
+            this.run(
+                winningPrizes = WinningPrizes(prizes = listOf(LottoResult.Prize.THIRD)),
+                purchaseMoney = PurchaseMoney(14000)
             )
-        }
+        }.earnings).isEqualTo(0.35)
     }
 
-    @ParameterizedTest
-    @MethodSource("statisticsData")
-    fun `로또 통계 결과 확인`(lottoList: List<Lotto>, purchasePrice: Int, expectedEarnings: Double, expectedList: List<StatisticsItem>) {
-        val stat = Statistics(lottoList.map { LottoResult(lotto = it, officialWinningValue = "1,2,3,4,5,6") }, purchasePrice).apply {
-            this.run()
-        }
-
-        assertThat(stat.totalEarnings).isEqualTo(expectedEarnings)
-        assertThat(stat.items).isEqualTo(expectedList)
-
+    @Test
+    fun `일치하는 숫자가 6개인 로또가 한개인 경우 통계데이터 확인`() {
+        assertThat(Statistics().apply {
+            this.run(
+                winningPrizes = WinningPrizes(prizes = listOf(LottoResult.Prize.SIXTH)),
+                purchaseMoney = PurchaseMoney(1000)
+            )
+        }.earnings).isEqualTo(2000000.0)
     }
 }

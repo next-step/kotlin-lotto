@@ -1,35 +1,40 @@
 package lotto
 
-/**
- * 로또 통계
- */
-class Statistics(private val lottoResultList: List<LottoResult>, private val purchasePrice: Int) {
-    var totalEarnings = 0.0
+import kotlin.math.floor
+
+class StatisticsRows(val rows: List<Statistics.Row> = emptyList())
+
+class Statistics {
+    var earnings = 0.0
         private set
 
-    val items = mutableListOf<StatisticsItem>()
+    var statisticsRows = StatisticsRows()
+        private set
 
-    fun run() {
-        LottoResult.Prize.values().map { prizeItem ->
-            StatisticsItem(
-                standardPrize = prizeItem.price,
-                prize = prizeItem,
-                machLottoCount = lottoResultList.filter { it.machCount == prizeItem.machCount }.size,
-            )
-        }.sortedBy {
-            it.prize.machCount
-        }.apply {
-            items.addAll(this)
-        }
+    fun run(winningPrizes: WinningPrizes, purchaseMoney: PurchaseMoney) {
+        statisticsRows = StatisticsRows(LottoResult.Prize.values().filter { it.price > 0 }
+            .map {
+                Row(
+                    standardPrize = it.price,
+                    prize = it,
+                    machLottoCount = winningPrizes.prizes.filter { prize ->
+                        prize.machCount == it.machCount
+                    }.size,
+                )
+            }.sortedBy {
+                it.prize.machCount
+            })
 
-        totalEarnings = lottoResultList.sumOf { it.prize }.let {
-            return@let String.format("%.2f", it.toDouble() / purchasePrice.toDouble()).toDouble()
+
+        earnings = winningPrizes.prizes.sumOf { it.price }.let {
+            println(it.toDouble() / purchaseMoney.money.toDouble())
+            floor(it.toDouble() / purchaseMoney.money.toDouble() * 100) / 100
         }
     }
-}
 
-data class StatisticsItem(
-    val standardPrize: Int,
-    val prize: LottoResult.Prize,
-    val machLottoCount: Int
-)
+    data class Row(
+        val standardPrize: Int,
+        val prize: LottoResult.Prize,
+        val machLottoCount: Int
+    )
+}

@@ -1,29 +1,29 @@
 package lotto
 
-/**
- * 로또 결과
- */
-class LottoResult(officialWinningValue: String, lotto: Lotto) {
-    private val winningNumbers = officialWinningValue
-        .replace(" ", "")
-        .split(",")
-        .map { it.toInt() }
-        .intersect(lotto.numbers.toSet())
+class LottoResult {
+    var prize: Prize = Prize.NONE
+        private set
 
-    val machCount = winningNumbers.size
+    fun check(machRuleFunc: () -> Set<Int>): LottoResult {
+        prize = Prize.getOrNull(
+            machCount = machRuleFunc().size
+        ) ?: Prize.NONE
 
-    val prize = Prize.getOrNull(machCount) ?: 0
+        return this
+    }
 
     enum class Prize(val machCount: Int, val price: Int) {
-        THIRD(3, 5000),
-        FORTH(4, 50000),
-        FIFTH(5, 1500000),
-        SIXTH(6, 2000000000);
+        NONE(0, 0),
+        FIRST(1, 0),
+        SECOND(2, 0),
+        THIRD(3, 5_000),
+        FORTH(4, 50_000),
+        FIFTH(5, 1_500_000),
+        SIXTH(6, 2_000_000_000);
 
         companion object {
-            fun getOrNull(machCount: Int): Int? =
-                values().firstOrNull() { it.machCount == machCount }?.price
+            fun getOrNull(machCount: Int): Prize? =
+                values().firstOrNull() { it.machCount == machCount }
         }
     }
 }
-
