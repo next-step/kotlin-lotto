@@ -1,6 +1,7 @@
 package lotto.ui
 
 import lotto.domain.LottoNumber
+import lotto.util.toLottoNumbers
 
 class InputView {
     fun readPayment(): Int {
@@ -10,9 +11,7 @@ class InputView {
 
     fun readLastNumber(): List<LottoNumber> {
         println(LAST_NUMBER_TEXT)
-        return readln()
-            .split(LOTTO_NUMBER_DIVIDE_TEXT)
-            .map { LottoNumber(it.toInt()) }
+        return readln().toLottoNumbers(LOTTO_NUMBER_DIVIDE_TEXT)
     }
 
     companion object {

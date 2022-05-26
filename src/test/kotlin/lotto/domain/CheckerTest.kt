@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.ui.InputView.Companion.LOTTO_NUMBER_DIVIDE_TEXT
+import lotto.util.toLottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -18,9 +20,9 @@ class CheckerTest {
     )
     @ParameterizedTest
     fun `지난당첨번호와 일치하는 개수를 확인한다`(lottoNumberText: String, lastNumberText: String, matchCount: Int) {
-        val lastNumber = lastNumberText.split(",").map { LottoNumber(it.toInt()) }
+        val lastNumber = lastNumberText.toLottoNumbers(LOTTO_NUMBER_DIVIDE_TEXT)
         val checker = Checker(lastNumber)
-        val numbers = lottoNumberText.split(",").map { LottoNumber(it.toInt()) }
+        val numbers = lottoNumberText.toLottoNumbers(LOTTO_NUMBER_DIVIDE_TEXT)
         assertThat(checker.match(numbers)).isEqualTo(matchCount)
     }
 }
