@@ -23,6 +23,13 @@ class LottoTicketNumbers private constructor(val value: List<LottoTicketNumber>)
         private const val ERROR_MESSAGE_BY_LOTTO_NUMBER_SIZE =
             "로또 티켓은 $VALIDATED_LOTTO_TICKET_NUMBER_SIZE 개수의 로또 번호를 가지고 있어야 됩니다"
 
+        fun ofString(lottoNumbersString: String, delimiters: String): LottoTicketNumbers {
+            val lottoNumbersByInt = lottoNumbersString
+                .split(delimiters)
+                .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("숫자 데이터를 입력해주세요(입력값: $it)") }
+            return ofInts(lottoNumbersByInt)
+        }
+
         fun ofInts(lottoNumbersByInt: List<Int>): LottoTicketNumbers {
             return LottoTicketNumbers(lottoNumbersByInt.map { LottoTicketNumber(it) })
         }
