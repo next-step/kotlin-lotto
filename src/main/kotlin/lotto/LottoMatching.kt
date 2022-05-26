@@ -18,7 +18,7 @@ class LottoMatching {
         })
     }
 
-    fun checkResult(winningLottoTicket: LottoTicket) {
+    fun checkResult(winningLottoTicket: LottoTicket, bonusLottoNumber : LottoNumber) {
         winningPrizes = WinningPrizes(lottoTickets.lottery.map {
             LottoResult().check {
                 winningLottoTicket.numbers.intersect(it.numbers.toSet())
