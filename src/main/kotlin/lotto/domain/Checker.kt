@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Checker(private val lastNumbers: List<LottoNumber>) {
-    fun match(lottos: List<LottoNumber>): Int =
-        lottos.filter { it in lastNumbers }.size
+class Checker(private val lastNumbers: LottoTicket) {
+    fun match(lottoTicket: LottoTicket): Int =
+        lottoTicket.numbers.filter { it in lastNumbers.numbers }.size
 }

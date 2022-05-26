@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.util.toLottoNumbers
 
 class InputView {
@@ -9,7 +9,7 @@ class InputView {
         return readln().toInt()
     }
 
-    fun readLastNumber(): List<LottoNumber> {
+    fun readLastNumber(): LottoTicket {
         println(LAST_NUMBER_TEXT)
         return readln().toLottoNumbers(LOTTO_NUMBER_DIVIDE_TEXT)
     }

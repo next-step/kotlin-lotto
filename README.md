@@ -42,7 +42,8 @@
 * [ ] MatchState 관련 구조변경
 * [ ] Stat 도메인 책임분리
 * [ ] 일급컬렉션으로 변경
-  * [ ] List<Lotto> -> Lottos
+  * [x] List<LottoNumber> -> LottoTicket
+  * [ ] List<LottoTicket> -> LottoTickets
   * [ ] List<MatchState> -> MatchStates
 * [ ] 수익률 계산방식 변경
 * [ ] view 호출로직 최소화(마지막에 한번만 하면되지 않을까?)

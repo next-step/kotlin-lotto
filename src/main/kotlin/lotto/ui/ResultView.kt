@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.domain.Lotto
+import lotto.domain.LottoTicket
 import lotto.domain.StatResult
 
 class ResultView {
@@ -9,7 +9,7 @@ class ResultView {
         println("$count" + BUY_COUNT_TEXT)
     }
 
-    fun lottoNumbers(lottos: List<Lotto>) {
+    fun lottoNumbers(lottos: List<LottoTicket>) {
         lottos.forEach { println(it.numbers) }
     }
 
