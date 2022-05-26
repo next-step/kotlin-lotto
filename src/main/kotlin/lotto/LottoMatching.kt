@@ -10,7 +10,7 @@ class LottoMatching {
     var winningPrizes = WinningPrizes()
         private set
 
-    fun purchase(purchaseMoney: PurchaseMoney) {
+    fun purchase(purchaseMoney: PurchaseMoney, numbers: List<LottoNumber> = Extractor.getAutoNumbers()) {
         lottoTicketCount = purchaseMoney.money / LOTTO_PRICE
 
         lottoTickets = LottoTickets((1..lottoTicketCount).toList().map {
@@ -29,4 +29,8 @@ class LottoMatching {
     companion object {
         private const val LOTTO_PRICE = 1000
     }
+}
+
+fun  LottoTicket.hasBonusNumber(bonusLottoNumber: LottoNumber): Boolean {
+    return  bonusLottoNumber in this.numbers
 }
