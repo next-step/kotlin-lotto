@@ -98,3 +98,16 @@
 - [x] 보너스볼도 비교한다
 - [x] 보너스볼의 결과도 수익률에 반영한다
 - [x] 마지막으로 린트체크
+
+### 2차 todo list
+- [ ] user money가 한개 가격을 받아 카운트를 리턴하게?
+- [ ] LottoNumber도 인라인 클래스로
+- [ ] LottoNumber를 재사용 가능하게 캐싱을 이용
+- [ ] totalMoney와 money모두 유저머니 객체로? 
+- [ ] getMatchCount의 네이밍 고민
+- [ ] lotto1.intersectCount(lotto2)를 직접 호출하기
+- [ ] LottoNumbers 테스트 추가
+- [ ] view단에서 도메인객체까지 만들어주지말고 도메인단에서 생성
+- [ ] checkValidBonusBall 테스트
+- [ ] 보너스볼 에러메시지 이상한지 체크
+- [ ] 이넘값 자체가 보너스볼인지 판단하게 갖고있기
