@@ -1,7 +1,7 @@
 package lotto
 
 
-class LottoNumber(val number: Int) {
+data class LottoNumber(val number: Int) {
     init {
         require(number >= LottoRule.MIN_NUMBER && number <= LottoRule.MAX_NUMBER) {
             NOT_RANGE_NUMBER_MESSAGE
