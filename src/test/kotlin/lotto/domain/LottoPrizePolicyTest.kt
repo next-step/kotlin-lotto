@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class LottoPrizePolicyTest : DescribeSpec({
-    val wonLottoNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoTicketNumber(it) }
+    val wonLottoNumbers = LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6))
     val wonMatchedCount = 3
     val wonPrize = Money(3000)
     val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonLottoNumbers, wonPrize)
