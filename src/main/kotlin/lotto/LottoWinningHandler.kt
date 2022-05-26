@@ -2,9 +2,18 @@ package lotto
 
 object LottoWinningHandler {
 
-    fun getStatistic () {
+    fun matchCount(issuedLottos: List<List<Int>>, winningInfo: LottoWinningInfo): MutableMap<Int, Int> {
+        val result = mutableMapOf<Int, Int>()
 
+        for (ticket in issuedLottos) {
+            val c = count(ticket, winningInfo.getWinningNumbers())
+            result[c] = result[c]?.plus(1) ?: 1
+        }
+
+        return result
     }
 
-    const val PRICE_PER_LOTTO = 1000
+    private fun count(ticket: List<Int>, winnerNumbers: List<Int>): Int {
+        return winnerNumbers.count { ticket.contains(it) }
+    }
 }
