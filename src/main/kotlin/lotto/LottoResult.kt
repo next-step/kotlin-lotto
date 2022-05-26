@@ -4,7 +4,7 @@ class LottoResult {
     var prize: Prize = Prize.NONE
         private set
 
-    fun check(matchCount : Int, matchBonus : Boolean): LottoResult {
+    fun check(matchCount: Int, matchBonus: Boolean): LottoResult {
         prize = Prize.getOrNull(
             matchCount = matchCount,
             matchBonus = matchBonus
@@ -28,7 +28,7 @@ class LottoResult {
                 return if (matchBonus) {
                     FIFTH_BONUS
                 } else {
-                    values().firstOrNull() { it.matchCount == matchCount }
+                    values().filter { it != FIFTH_BONUS }.firstOrNull { it.matchCount == matchCount }
                 }
             }
         }

@@ -5,7 +5,6 @@ import lotto.LottoRule.LOTTO_NUMBER_COUNT
 class LottoTickets(val lottery: List<LottoTicket> = emptyList())
 class WinningLottoTicket(numbers: List<LottoNumber>) : LottoTicket(numbers)
 
-
 open class LottoTicket(val numbers: List<LottoNumber>) {
     init {
 
@@ -16,7 +15,6 @@ open class LottoTicket(val numbers: List<LottoNumber>) {
         require(numbers.size == LOTTO_NUMBER_COUNT) {
             NOT_MATCH_NUMBER_COUNT
         }
-
     }
 
     companion object {

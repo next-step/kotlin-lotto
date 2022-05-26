@@ -1,6 +1,5 @@
 package lotto
 
-
 fun main() {
     val purchaseMoney = InputView.getPurchaseMoney()
 

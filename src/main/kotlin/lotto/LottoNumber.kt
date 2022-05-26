@@ -1,6 +1,5 @@
 package lotto
 
-
 data class LottoNumber(val number: Int) {
     init {
         require(number >= LottoRule.MIN_NUMBER && number <= LottoRule.MAX_NUMBER) {

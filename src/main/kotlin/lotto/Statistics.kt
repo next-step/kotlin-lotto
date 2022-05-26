@@ -12,18 +12,20 @@ class Statistics {
         private set
 
     fun run(winningPrizes: WinningPrizes, purchaseMoney: PurchaseMoney) {
-        statisticsRows = StatisticsRows(LottoResult.Prize.values().filter { it.price > 0 }
-            .map {
-                Row(
-                    standardPrize = it.price,
-                    prize = it,
-                    matchLottoCount = winningPrizes.prizes.filter { prize ->
-                        prize == it
-                    }.size,
-                )
-            }.sortedBy {
-                it.prize.matchCount
-            })
+        statisticsRows = StatisticsRows(
+            LottoResult.Prize.values().filter { it.price > 0 }
+                .map {
+                    Row(
+                        standardPrize = it.price,
+                        prize = it,
+                        matchLottoCount = winningPrizes.prizes.filter { prize ->
+                            prize == it
+                        }.size,
+                    )
+                }.sortedBy {
+                    it.prize.matchCount
+                }
+        )
 
         earnings = winningPrizes.prizes.sumOf { it.price }.let {
             println(it.toDouble() / purchaseMoney.money.toDouble())
