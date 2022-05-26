@@ -10,12 +10,12 @@ class LottoMachine {
     var winningPrizes = WinningPrizes()
         private set
 
-    fun purchase(purchaseMoney: PurchaseMoney, numbers: List<LottoNumber> = Extractor.getAutoNumbers()) {
+    fun purchase(purchaseMoney: PurchaseMoney, lottoNumbers: List<LottoNumber> = Extractor.getAutoNumbers()) {
         lottoTicketCount = purchaseMoney.money / LOTTO_PRICE
 
         lottoTickets = LottoTickets(
             (1..lottoTicketCount).toList().map {
-                LottoTicket(numbers)
+                LottoTicket(lottoNumbers)
             }
         )
     }
@@ -24,7 +24,7 @@ class LottoMachine {
         winningPrizes = WinningPrizes(
             lottoTickets.lottery.map {
                 val matchCount = winningLottoTicket.checkMatching(it).size
-                val matchBonus = matchCount == 5 && it.hasBonusNumber(bonusLottoNumber)
+                val matchBonus = matchCount == BONUS_LOTTO_NUMBER_COUNT && it.hasBonusNumber(bonusLottoNumber)
 
                 LottoResult().check(
                     matchCount = matchCount,
@@ -40,5 +40,6 @@ class LottoMachine {
 
     companion object {
         private const val LOTTO_PRICE = 1000
+        private const val BONUS_LOTTO_NUMBER_COUNT = 5
     }
 }

@@ -10,7 +10,7 @@ internal class LottoMachineTest {
         val lottoMachine = LottoMachine().apply {
             this.purchase(
                 purchaseMoney = PurchaseMoney(1000),
-                numbers = lottoNumbers
+                lottoNumbers = lottoNumbers
             )
             this.checkResult(
                 winningLottoTicket = LottoTicket(lottoNumbers),
@@ -27,7 +27,7 @@ internal class LottoMachineTest {
         val lottoMachine = LottoMachine().apply {
             this.purchase(
                 purchaseMoney = PurchaseMoney(1000),
-                numbers = (1..6).map { LottoNumber(it) }
+                lottoNumbers = (1..6).map { LottoNumber(it) }
             )
             this.checkResult(
                 winningLottoTicket = LottoTicket((2..7).map { LottoNumber(it) }),
