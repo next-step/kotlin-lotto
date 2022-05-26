@@ -8,6 +8,6 @@ class LottoBendingMachineTest {
     fun `LottoBendingMachine은 건네준 금액에 맞는 수의 로또를 발급한다`() {
         val lottos = LottoBendingMachine.purchase(13500)
 
-        assertThat(lottos.size).isEqualTo(13)
+        assertThat(lottos.value.size).isEqualTo(13)
     }
 }
