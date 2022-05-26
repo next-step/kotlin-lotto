@@ -100,7 +100,7 @@
 - [x] 마지막으로 린트체크
 
 ### 2차 todo list
-- [ ] user money가 한개 가격을 받아 카운트를 리턴하게?
+- [x] user money가 한개 가격을 받아 카운트를 리턴하게?
 - [ ] LottoNumber도 인라인 클래스로
 - [ ] LottoNumber를 재사용 가능하게 캐싱을 이용
 - [ ] totalMoney와 money모두 유저머니 객체로? 

@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoStore(private val userMoney: UserMoney, private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()) {
-    val lottoCount = userMoney.money / EACH_LOTTO_PRICE
+    val lottoCount = userMoney.getLottoCount()
     val boughtLottos = List(lottoCount) { lottoMaker.makeLottoNumbers() }
     val totalYieldRatio
         get() = totalMoney.toDouble() / userMoney.money
@@ -35,9 +35,5 @@ class LottoStore(private val userMoney: UserMoney, private val lottoMaker: Lotto
 
     private fun isMatchBonus(bonusNumber: LottoNumber, answer: LottoNumbers): Boolean {
         return answer.hasNumber(bonusNumber)
-    }
-
-    companion object {
-        private const val EACH_LOTTO_PRICE = 1000
     }
 }
