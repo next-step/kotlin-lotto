@@ -12,7 +12,7 @@ class LottoTicketMachineTest : BehaviorSpec({
 
     Given("로또 번호 발급기는") {
         And("무작위 번호로된 티켓을 1개 생성하고") {
-            val tickets = LottoTicketMachine.generate()
+            val tickets = LottoTicketMachine.generate(1)
 
             Then("생성된 티켓은 1개다") {
                 tickets shouldHaveSize 1

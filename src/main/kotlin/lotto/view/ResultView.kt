@@ -2,14 +2,14 @@ package lotto.view
 
 import lotto.domain.LottoMatch
 import lotto.domain.LottoStatistics
-import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import java.math.BigDecimal
 
 class ResultView(
     private val writer: (String) -> Unit
 ) {
 
-    fun printLottoTickets(tickets: List<LottoTicket>) {
+    fun printLottoTickets(tickets: LottoTickets) {
         writeLine("${tickets.size}개를 구매했습니다.")
         tickets.forEach { ticket ->
             writer(ticket.numbers.joinToString(prefix = PREFIX_LOTTO_NUMBERS, postfix = POSTFIX_LOTTO_NUMBERS))

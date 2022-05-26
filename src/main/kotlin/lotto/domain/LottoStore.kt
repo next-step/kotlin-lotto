@@ -9,7 +9,7 @@ object LottoStore {
      *
      * @return 로또 티켓 목록, 잔돈
      */
-    fun buy(money: Int): Pair<List<LottoTicket>, Int> {
+    fun buy(money: Int): Pair<LottoTickets, Int> {
         require(money >= PRICE_OF_ONE_LOTTO_TICKET)
         require(money <= PRICE_OF_ONE_LOTTO_TICKET * MAXIMUM_SIZE_OF_TICKET)
         val numberOfTicket = money / PRICE_OF_ONE_LOTTO_TICKET
