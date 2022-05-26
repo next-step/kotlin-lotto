@@ -12,4 +12,9 @@ class InputView {
         val lastWeekWinningNumber = readlnOrNull() ?: throw IllegalArgumentException()
         return lastWeekWinningNumber.replace(" ", "").split(',')
     }
+
+    fun bonusBall(): String {
+        println("보너스 볼을 입력해 주세요.")
+        return readlnOrNull() ?: throw IllegalArgumentException()
+    }
 }

@@ -39,6 +39,7 @@ fun lottoStatics(
     lottoRecord: List<LottoNumberSet>
 ) {
     val lastWeekWinningLotto: List<String> = inputView.winningNumber()
+    val bonusBall: String = inputView.bonusBall()
     val winningStat = WinningStatics(
         paymentRequestDto,
         InputWinningLottoNumberDto.convertLottoNumber(lastWeekWinningLotto),
