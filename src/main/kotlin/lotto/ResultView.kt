@@ -7,15 +7,21 @@ object ResultView {
     }
 
     fun printTickets(lottoTickets: LottoTickets) {
-        lottoTickets.lottery.forEach {
-            println(it.numbers)
+        lottoTickets.lottery.forEach { lottoTicket ->
+            println(lottoTicket.numbers.map { it.number })
         }
     }
 
     fun printStatistics(statisticsRows: StatisticsRows) {
         println("당첨 통계")
         statisticsRows.rows.forEach {
-            println("${it.prize.matchCount}개 일치 ${it.standardPrize}원 (${it.matchLottoCount})개")
+            val bonusText = if (it.prize == LottoResult.Prize.FIFTH_BONUS) {
+                ", 보너스 볼 일치"
+            } else {
+                ""
+            }
+
+            println("${it.prize.matchCount}개 일치$bonusText ${it.standardPrize}원 (${it.matchLottoCount})개")
         }
     }
 
