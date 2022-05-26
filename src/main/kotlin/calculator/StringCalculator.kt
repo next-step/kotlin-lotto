@@ -10,10 +10,11 @@ class StringCalculator {
 
     private fun useCustomDelimiter(input: String): List<String>? {
         val result = CUSTOM_DELIMITER_PATTERN_REGEX.find(input)
-        return result?.let {
-            val customDelimiter = it.groupValues[REGEX_DELIMITER_INDEX]
-            it.groupValues[REGEX_VALUES_INDEX].split(customDelimiter)
-        }
+        return result
+            ?.destructured
+            ?.let { (customDelimiter, expression) ->
+                expression.split(customDelimiter)
+            }
     }
 
     private fun useDefaultDelimiter(input: String): List<String> {
@@ -29,8 +30,6 @@ class StringCalculator {
     companion object {
         private const val DEFAULT_DELIMITER_COMMA = ","
         private const val DEFAULT_DELIMITER_COLON = ":"
-        private const val REGEX_DELIMITER_INDEX = 1
-        private const val REGEX_VALUES_INDEX = 2
 
         private val CUSTOM_DELIMITER_PATTERN_REGEX = "//(.)\n(.*)".toRegex()
     }
