@@ -7,8 +7,6 @@ import java.math.BigDecimal
 class LottoStatisticsTest : BehaviorSpec({
 
     Given("로또 통계는") {
-        val lastLottoTicket = LottoTicket(setOf(1, 2, 3, 4, 5, 6))
-        val lastLottoBonusNumber = 7
         val lottoTickets = LottoTickets(
             listOf(
                 LottoTicket(setOf(1, 2, 3, 10, 11, 12)),
@@ -18,9 +16,10 @@ class LottoStatisticsTest : BehaviorSpec({
                 LottoTicket(setOf(1, 2, 3, 4, 5, 6)),
             )
         )
+        val lottoLastNumbers = LottoLastNumbers(setOf(1, 2, 3, 4, 5, 6), 7)
 
         When("1개 이상의 포함된 로또 티켓 목록이 입력되면") {
-            val statistics = LottoStatistics(lottoTickets, lastLottoTicket, lastLottoBonusNumber)
+            val statistics = LottoStatistics(lottoTickets, lottoLastNumbers)
             Then("3개 일치 개수를 반환한다") {
                 statistics.getMatchCount(LottoMatch.THREE) shouldBe 1
             }

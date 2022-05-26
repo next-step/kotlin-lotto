@@ -5,17 +5,10 @@ import java.math.MathContext
 
 class LottoStatistics(
     private val lottoTickets: LottoTickets,
-    private val lastLottoTicket: LottoTicket,
-    private val lastLottoBonusNumber: Int
+    private val lottoLastNumbers: LottoLastNumbers
 ) {
 
-    init {
-        require(lastLottoBonusNumber in LottoTicket.RANGE_OF_LOTTO_NUMBER)
-        require(lastLottoTicket.numbers.contains(lastLottoBonusNumber).not())
-    }
-
-    fun getMatchCount(match: LottoMatch): Int =
-        lottoTickets.getMatchCount(match, lastLottoTicket, lastLottoBonusNumber)
+    fun getMatchCount(match: LottoMatch): Int = lottoTickets.getMatchCount(match, lottoLastNumbers)
 
     fun getProfit(purchase: Int): BigDecimal {
         require(purchase > 0)

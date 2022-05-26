@@ -16,24 +16,23 @@ class LottoTicketsTest : BehaviorSpec({
                 LottoTicket(setOf(1, 2, 3, 4, 5, 6)),
             )
         )
-        val lastLottoTicket = LottoTicket(setOf(1, 2, 3, 4, 5, 6))
-        val lastLottoBonusNumber = 7
+        val lottoLastNumbers = LottoLastNumbers(setOf(1, 2, 3, 4, 5, 6), 7)
 
         When("6개의 로또 번호 와 1개의 보너스 번호가 입력이 되면") {
             Then("3개 일치 개수를 반환한다") {
-                lottoTickets.getMatchCount(LottoMatch.THREE, lastLottoTicket, lastLottoBonusNumber) shouldBe 1
+                lottoTickets.getMatchCount(LottoMatch.THREE, lottoLastNumbers) shouldBe 1
             }
             Then("4개 일치 개수를 반환한다") {
-                lottoTickets.getMatchCount(LottoMatch.FOUR, lastLottoTicket, lastLottoBonusNumber) shouldBe 1
+                lottoTickets.getMatchCount(LottoMatch.FOUR, lottoLastNumbers) shouldBe 1
             }
             Then("5개 일치 개수를 반환한다") {
-                lottoTickets.getMatchCount(LottoMatch.FIVE, lastLottoTicket, lastLottoBonusNumber) shouldBe 1
+                lottoTickets.getMatchCount(LottoMatch.FIVE, lottoLastNumbers) shouldBe 1
             }
             Then("5개 + 보너스 번호 일치 개수를 반환한다") {
-                lottoTickets.getMatchCount(LottoMatch.FIVE_BONUS, lastLottoTicket, lastLottoBonusNumber) shouldBe 1
+                lottoTickets.getMatchCount(LottoMatch.FIVE_BONUS, lottoLastNumbers) shouldBe 1
             }
             Then("6개 일치 개수를 반환한다") {
-                lottoTickets.getMatchCount(LottoMatch.SIX, lastLottoTicket, lastLottoBonusNumber) shouldBe 1
+                lottoTickets.getMatchCount(LottoMatch.SIX, lottoLastNumbers) shouldBe 1
             }
         }
 

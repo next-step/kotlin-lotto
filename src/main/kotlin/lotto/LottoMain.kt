@@ -1,8 +1,8 @@
 package lotto
 
+import lotto.domain.LottoLastNumbers
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoStore
-import lotto.domain.LottoTicket
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -37,10 +37,9 @@ fun main() {
     val (lottoTickets, changes) = LottoStore.buy(purchaseMoney)
     resultView.printLottoTickets(lottoTickets)
 
-    val lastLottoTicket = inputView.readLastLottoNumbers().run { LottoTicket(this) }
-    val lastLottoBonusNumber = inputView.readBonusLottoNumber()
+    val lottoLastNumbers = LottoLastNumbers(inputView.readLastLottoNumbers(), inputView.readBonusLottoNumber())
 
-    val lottoStatistics = LottoStatistics(lottoTickets, lastLottoTicket, lastLottoBonusNumber)
+    val lottoStatistics = LottoStatistics(lottoTickets, lottoLastNumbers)
     resultView.printLottoStatistics(lottoStatistics)
 
     val actualPurchaseMoney = purchaseMoney - changes
