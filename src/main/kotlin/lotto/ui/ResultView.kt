@@ -1,7 +1,7 @@
 package lotto.ui
 
-import lotto.Lotto
-import lotto.StatResult
+import lotto.domain.Lotto
+import lotto.domain.StatResult
 
 class ResultView {
 

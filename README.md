@@ -31,7 +31,7 @@
 
 # 로또(자동)
 ## refactor list
-* [ ] 패키지 정리
+* [x] 패키지 정리
 * [ ] view layer에서 관리되어야할 변수들 이동
 * [ ] generateList 검증로직 추가
   * [ ] generateList 테스트코드 추가

@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Stat(private val lottos: List<Lotto>, private val checker: Checker) {
     val matchRecords: List<MatchState>

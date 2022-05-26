@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Lotto(generateLists: (Int) -> List<Int>) {
     var numbers: List<Int> = listOf()

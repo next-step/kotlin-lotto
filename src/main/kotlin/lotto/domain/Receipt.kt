@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Receipt(val payment: Int) {
     val lottoCount

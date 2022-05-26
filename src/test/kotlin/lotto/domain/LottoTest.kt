@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
-import lotto.Lotto.Companion.LOTTO_NUMBER_COUNT
+import lotto.domain.Lotto.Companion.LOTTO_NUMBER_COUNT
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

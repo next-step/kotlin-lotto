@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class MatchState(val matchCount: Int, val descriptor: String, val profit: Int) {
     MATCH_0(0, "", 0),

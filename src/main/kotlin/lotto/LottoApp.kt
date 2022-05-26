@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.LottoMachine
+import lotto.domain.Receipt
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
