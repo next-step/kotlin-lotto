@@ -18,10 +18,9 @@ object OutputView {
 
     fun printLottoResult(lottoResults: List<LottoResult>) {
         println(Messages.LOTTO_RESULT)
-        println(Messages.CORRECT_THREE.format(lottoResults[0].count))
-        println(Messages.CORRECT_FOUR.format(lottoResults[1].count))
-        println(Messages.CORRECT_FIVE.format(lottoResults[2].count))
-        println(Messages.CORRECT_SIX.format(lottoResults[3].count))
+        lottoResults.forEach {
+            println(it.prizeMessage)
+        }
     }
 
     fun printYield(yields: Double) {
