@@ -10,11 +10,10 @@ class StringCalculator {
 
     private fun useCustomDelimiter(input: String): List<String>? {
         val result = CUSTOM_DELIMITER_PATTERN_REGEX.find(input)
-        result?.let {
+        return result?.let {
             val customDelimiter = it.groupValues[REGEX_DELIMITER_INDEX]
-            return it.groupValues[REGEX_VALUES_INDEX].split(customDelimiter)
+            it.groupValues[REGEX_VALUES_INDEX].split(customDelimiter)
         }
-        return null
     }
 
     private fun useDefaultDelimiter(input: String): List<String> {
