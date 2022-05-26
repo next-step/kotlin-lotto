@@ -7,6 +7,10 @@ class LottoTicket private constructor(val lottoTicketNumbers: List<LottoTicketNu
         validateDuplicateLottoNumber()
     }
 
+    fun getMatchedCount(lottoNumbers: List<LottoTicketNumber>): Int {
+        return lottoTicketNumbers.count { lottoTicketNumber -> lottoNumbers.contains(lottoTicketNumber) }
+    }
+
     private fun validateDuplicateLottoNumber() {
         val sortedLottoTicketNumbers = lottoTicketNumbers.sortedBy { lottoTicketNumber -> lottoTicketNumber.value }
         sortedLottoTicketNumbers.forEachIndexed { index, lottoTicketNumber ->
