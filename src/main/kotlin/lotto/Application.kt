@@ -15,6 +15,7 @@ fun main() {
     val lottoBundle = lottoMachine.buyAuto()
     ResultView.printLottoBundle(lottoBundle)
 
-    val lottoResult = lottoMachine.drawLottoBundle(lottoBundle, WinningLotto(InputView.inputWinningNumber()))
+    val winningLotto = WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber())
+    val lottoResult = lottoMachine.drawLottoBundle(lottoBundle, winningLotto)
     ResultView.printWinningResult(lottoResult)
 }
