@@ -34,7 +34,7 @@
 
 #### LottoTicket 로또 티켓
 
-- LottoTicketNumber를 6개 미만으로 넣으면 에러가 발생한다
+- LottoTicketNumber 를 6개 미만으로 넣으면 에러가 발생한다
 - 중복된 LottoTicketNumber 번호를 가지고 있으면 안된다.
 
 ```
