@@ -7,22 +7,18 @@ import lotto.constants.Messages
  * Created by Jaesungchi on 2022.05.25..
  */
 data class LottoResult(val prize: Prize, val count: Int) {
-    val prizeMessage: String
-
-    init {
-        prizeMessage = when (prize) {
-            Prize.FIRST_PLACE -> {
-                Messages.CORRECT_SIX.format(count)
-            }
-            Prize.SECOND_PLACE -> {
-                Messages.CORRECT_FIVE.format(count)
-            }
-            Prize.THIRD_PLACE -> {
-                Messages.CORRECT_FOUR.format(count)
-            }
-            else -> {
-                Messages.CORRECT_THREE.format(count)
-            }
+    val prizeMessage: String = when (prize) {
+        Prize.FIRST_PLACE -> {
+            Messages.CORRECT_SIX.format(count)
+        }
+        Prize.SECOND_PLACE -> {
+            Messages.CORRECT_FIVE.format(count)
+        }
+        Prize.THIRD_PLACE -> {
+            Messages.CORRECT_FOUR.format(count)
+        }
+        else -> {
+            Messages.CORRECT_THREE.format(count)
         }
     }
 }
