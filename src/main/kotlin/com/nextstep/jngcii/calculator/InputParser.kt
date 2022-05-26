@@ -1,11 +1,11 @@
 package com.nextstep.jngcii.calculator
 
 object InputParser {
-    private val delimiterParseRegex = Regex("//(\\D)\\\\n(.*)")
-    private val defaultDelimiterRegex = Regex("[,:]")
+    private val DELIMITER_PARSE_REGEX = Regex("//(\\D)\\\\n(.*)")
+    private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
 
     fun parseDelimiter(input: String): Pair<String, String?> {
-        delimiterParseRegex.find(input)?.let {
+        DELIMITER_PARSE_REGEX.find(input)?.let {
             val (delimiter, expression) = it.destructured
             return Pair(expression, delimiter)
         }
@@ -14,7 +14,7 @@ object InputParser {
 
     fun parseExpression(input: String, delimiter: String? = null): List<Int> {
         val parsedResults = delimiter?.let { input.split(it) }
-            ?: input.split(defaultDelimiterRegex)
+            ?: input.split(DEFAULT_DELIMITER_REGEX)
 
         return parsedResults.map { it.toIntOrThrow().onlyPositiveOrThrow() }
     }
