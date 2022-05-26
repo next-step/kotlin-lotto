@@ -9,16 +9,18 @@ object LottoCreator {
 
         val randomIssuedList = mutableListOf<List<Int>>()
         repeat(count) {
-            randomIssuedList.add(
-                generateSequence { Random(Random.nextInt()).nextInt(LOTTO_NUMBER_RANGE.first, LOTTO_NUMBER_RANGE.last) }
-                    .distinct()
-                    .take(LOTTO_NUMBER_COUNT)
-                    .sorted()
-                    .toList()
-            )
+            randomIssuedList.add(randomNumbers())
         }
 
         return randomIssuedList
+    }
+
+    val randomNumbers = {
+        generateSequence { Random(Random.nextInt()).nextInt(LOTTO_NUMBER_RANGE.first, LOTTO_NUMBER_RANGE.last) }
+            .distinct()
+            .take(LOTTO_NUMBER_COUNT)
+            .sorted()
+            .toList()
     }
 
     const val LOTTO_NUMBER_COUNT = 6
