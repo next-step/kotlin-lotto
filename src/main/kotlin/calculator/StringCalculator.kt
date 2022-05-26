@@ -9,7 +9,7 @@ class StringCalculator {
     }
 
     private fun useCustomDelimiter(input: String): List<String>? {
-        val result = Regex(CUSTOM_DELIMITER_PATTERN).find(input)
+        val result = CUSTOM_DELIMITER_PATTERN_REGEX.find(input)
         result?.let {
             val customDelimiter = it.groupValues[REGEX_DELIMITER_INDEX]
             return it.groupValues[REGEX_VALUES_INDEX].split(customDelimiter)
@@ -33,6 +33,6 @@ class StringCalculator {
         private const val REGEX_DELIMITER_INDEX = 1
         private const val REGEX_VALUES_INDEX = 2
 
-        private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"
+        private val CUSTOM_DELIMITER_PATTERN_REGEX = "//(.)\n(.*)".toRegex()
     }
 }
