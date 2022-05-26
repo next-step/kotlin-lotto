@@ -18,10 +18,10 @@ class LottoMatching {
         })
     }
 
-    fun checkResult(winningLottoTicket: LottoTicket, bonusLottoNumber : LottoNumber) {
+    fun checkResult(winningLottoTicket: LottoTicket, bonusLottoNumber: LottoNumber) {
         winningPrizes = WinningPrizes(lottoTickets.lottery.map {
             val matchCount = winningLottoTicket.checkMatching(it).size
-            val matchBonus = matchCount == 5 && bonusLottoNumber in it.numbers
+            val matchBonus = matchCount == 5 && it.hasBonusNumber(bonusLottoNumber)
 
             LottoResult().check(
                 matchCount = matchCount,
@@ -30,6 +30,8 @@ class LottoMatching {
         })
     }
 
+    private fun LottoTicket.hasBonusNumber(bonusLottoNumber: LottoNumber): Boolean = bonusLottoNumber in this.numbers
+
     private fun LottoTicket.checkMatching(lottoTicket: LottoTicket) = this.numbers.intersect(lottoTicket.numbers.toSet())
 
     companion object {
@@ -37,6 +39,4 @@ class LottoMatching {
     }
 }
 
-fun  LottoTicket.hasBonusNumber(bonusLottoNumber: LottoNumber): Boolean {
-    return  bonusLottoNumber in this.numbers
-}
+

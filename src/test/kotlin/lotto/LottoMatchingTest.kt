@@ -23,11 +23,6 @@ internal class LottoMatchingTest {
     }
 
     @Test
-    fun `보너스 일치 여부를 확인한다`() {
-        assertThat(LottoTicket(numbers = (1..6).map { LottoNumber(it) }).hasBonusNumber(LottoNumber((1)))).isEqualTo(true)
-    }
-
-    @Test
     fun `로또 Prize을 확인하기 위하여 당첨 번호, 보너스 일치 여부를 전달한다`() {
         val lottoNumbers = (2..7).map { LottoNumber(it) }
         val lottoMachine = LottoMatching().apply {
