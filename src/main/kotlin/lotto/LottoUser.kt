@@ -20,6 +20,10 @@ class LottoUser {
     }
 
     fun calculateRateOfReturn(spendMoney: Int, winningMoney: Int): Double {
-        return round(winningMoney / spendMoney.toDouble() * 100) / 100
+        return round(winningMoney / spendMoney.toDouble() * DECIMAL_POINT_SECOND_PLACE) / DECIMAL_POINT_SECOND_PLACE
+    }
+
+    companion object {
+        const val DECIMAL_POINT_SECOND_PLACE = 100
     }
 }
