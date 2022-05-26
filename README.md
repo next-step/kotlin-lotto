@@ -106,7 +106,7 @@
 - [x] totalMoney와 money모두 유저머니 객체로? 
 - [x] getMatchCount의 네이밍 고민
 - [x] lotto1.intersectCount(lotto2)를 직접 호출하기
-- [ ] LottoNumbers 테스트 추가
+- [x] LottoNumbers 테스트 추가
 - [ ] view단에서 도메인객체까지 만들어주지말고 도메인단에서 생성
 - [ ] checkValidBonusBall 테스트
 - [ ] 보너스볼 에러메시지 이상한지 체크
