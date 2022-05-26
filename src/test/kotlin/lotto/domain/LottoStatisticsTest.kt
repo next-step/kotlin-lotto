@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import java.math.BigDecimal
 
 class LottoStatisticsTest : BehaviorSpec({
 
@@ -31,8 +32,7 @@ class LottoStatisticsTest : BehaviorSpec({
             }
             And("총 구매 금액을 입력하면") {
                 val purchase = 4000
-                val reward = 5000 + 50000 + 1500000 + 2000000000
-                val profit = reward.toDouble() / purchase.toDouble()
+                val profit = BigDecimal(500388.75)
                 Then("총 수익율을 반환한다") {
                     statistics.getProfit(purchase) shouldBe profit
                 }
