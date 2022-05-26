@@ -23,7 +23,7 @@ class StringCalculator {
 
     private fun sumOfNumbers(numbers: List<String>): Int {
         return numbers.map { it.toIntOrNull() ?: throw RuntimeException() }
-            .onEach { if (it < 0) throw RuntimeException() }
+            .onEach { require(it < 0) }
             .sum()
     }
 
