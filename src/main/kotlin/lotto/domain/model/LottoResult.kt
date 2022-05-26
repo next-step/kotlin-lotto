@@ -15,12 +15,12 @@ value class LottoResult(val value: List<LottoWinning>) {
         }
     }
 
-    private operator fun contains(rank: LottoRank): Boolean {
-        return value.find { it.rank == rank } != null
-    }
+    private operator fun contains(rank: LottoRank): Boolean = value.find { it.rank == rank } != null
 
-    operator fun get(rank: LottoRank): LottoWinning {
-        return value.first { it.rank == rank }
+    operator fun get(rank: LottoRank): LottoWinning = value.first { it.rank == rank }
+
+    fun getTotalEarns(): Int = value.sumOf { lottoWinning ->
+        lottoWinning.rank.winnings * lottoWinning.count
     }
 
     companion object {

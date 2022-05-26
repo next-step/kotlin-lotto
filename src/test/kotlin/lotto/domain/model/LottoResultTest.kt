@@ -75,4 +75,21 @@ class LottoResultTest {
         assertThat(lottoResult[LottoRank.SECOND].count).isEqualTo(0)
         assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1)
     }
+
+    @Test
+    fun `getTotalEarns를 통해 총 복권 당첨금을 구할 수 있다`() {
+        val lottoWinningList = listOf(
+            LottoWinning(LottoRank.FOURTH, 2),
+            LottoWinning(LottoRank.THIRD, 1),
+            LottoWinning(LottoRank.SECOND, 1),
+            LottoWinning(LottoRank.FIRST, 0)
+        )
+        val lottoResult = LottoResult(lottoWinningList)
+
+        val expected = lottoWinningList.sumOf { lottoWinning ->
+            lottoWinning.rank.winnings * lottoWinning.count
+        }
+
+        assertThat(lottoResult.getTotalEarns()).isEqualTo(expected)
+    }
 }
