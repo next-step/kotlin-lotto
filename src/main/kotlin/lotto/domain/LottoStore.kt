@@ -4,8 +4,8 @@ class LottoStore(private val userMoney: UserMoney, private val lottoMaker: Lotto
     val lottoCount = userMoney.getLottoCount()
     val boughtLottos = List(lottoCount) { lottoMaker.makeLottoNumbers() }
     val totalYieldRatio
-        get() = totalMoney.toDouble() / userMoney.money
-    private var totalMoney = 0
+        get() = totalMoney.money.toDouble() / userMoney.money
+    private var totalMoney = UserMoney()
 
     fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
         val lottoResult = LottoPrizeInfo.values().map { LottoResult(it) }
@@ -25,7 +25,7 @@ class LottoStore(private val userMoney: UserMoney, private val lottoMaker: Lotto
         return lottoResult
     }
 
-    private fun addPrizeMoney(money: Int) {
+    private fun addPrizeMoney(money: UserMoney) {
         totalMoney += money
     }
 

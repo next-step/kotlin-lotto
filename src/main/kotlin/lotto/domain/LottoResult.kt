@@ -10,5 +10,5 @@ class LottoResult(val prize: LottoPrizeInfo) {
         count++
     }
 
-    fun getPrizeMoney() = prize.money
+    fun getPrizeMoney(): UserMoney = prize.money
 }

@@ -103,7 +103,7 @@
 - [x] user money가 한개 가격을 받아 카운트를 리턴하게?
 - [x] LottoNumber도 인라인 클래스로
 - [x] LottoNumber를 재사용 가능하게 캐싱을 이용
-- [ ] totalMoney와 money모두 유저머니 객체로? 
+- [x] totalMoney와 money모두 유저머니 객체로? 
 - [ ] getMatchCount의 네이밍 고민
 - [ ] lotto1.intersectCount(lotto2)를 직접 호출하기
 - [ ] LottoNumbers 테스트 추가

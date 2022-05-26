@@ -83,10 +83,10 @@ class LottoStoreTest {
         val prize5 = lottoResult.first { it.prize == LottoPrizeInfo.WIN5 }
         val prize6 = lottoResult.first { it.prize == LottoPrizeInfo.WIN6 }
 
-        val prize3Money = prize3.prize.money * prize3.count
-        val prize4Money = prize4.prize.money * prize4.count
-        val prize5Money = prize5.prize.money * prize5.count
-        val prize6Money = prize6.prize.money * prize6.count
+        val prize3Money = prize3.prize.money.money * prize3.count
+        val prize4Money = prize4.prize.money.money * prize4.count
+        val prize5Money = prize5.prize.money.money * prize5.count
+        val prize6Money = prize6.prize.money.money * prize6.count
 
         val totalMoney = prize3Money + prize4Money + prize5Money + prize6Money
         val answer = lottoStore.totalYieldRatio

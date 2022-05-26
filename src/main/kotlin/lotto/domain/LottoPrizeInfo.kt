@@ -1,11 +1,11 @@
 package lotto.domain
 
-enum class LottoPrizeInfo(val matchCount: Int, val money: Int) {
-    WIN3(3, 5000),
-    WIN4(4, 50000),
-    WIN5(5, 1500000),
-    WIN5_BONUS(5, 30000000),
-    WIN6(6, 2000000000);
+enum class LottoPrizeInfo(val matchCount: Int, val money: UserMoney) {
+    WIN3(3, UserMoney(5000)),
+    WIN4(4, UserMoney(50000)),
+    WIN5(5, UserMoney(1500000)),
+    WIN5_BONUS(5, UserMoney(30000000)),
+    WIN6(6, UserMoney(2000000000));
 
     fun isBonus(): Boolean {
         return this == WIN5_BONUS
