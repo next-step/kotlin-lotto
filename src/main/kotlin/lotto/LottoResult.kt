@@ -19,6 +19,7 @@ class LottoResult {
         THIRD(3, 5_000),
         FORTH(4, 50_000),
         FIFTH(5, 1_500_000),
+        FIFTH_BONUS(6, 30_000_000),
         SIXTH(6, 2_000_000_000);
 
         companion object {
