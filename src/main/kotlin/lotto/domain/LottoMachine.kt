@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoMachine(private val receipt: Receipt) {
     fun issue(): List<Lotto> {
-        return List(receipt.lottoCount) { Lotto { generateNumbers(Lotto.LOTTO_NUMBER_COUNT) } }
+        return List(receipt.lottoCount) { Lotto { LottoGenerator().generateNumbers() } }
     }
 
     fun verify(lastNumber: String, lottos: List<Lotto>): List<StatResult> {
