@@ -9,7 +9,7 @@ import kotlin.random.Random
  * 로또 번호 추출기
  */
 object Extractor {
-    fun getAutoNumbers(): List<Int> {
+    fun getAutoNumbers(): List<LottoNumber> {
         val list = mutableListOf<Int>()
         while (list.size < LOTTO_NUMBER_COUNT) {
             val random = Random.nextInt(MIN_NUMBER, MAX_NUMBER)
@@ -18,6 +18,7 @@ object Extractor {
                 list.add(random)
             }
         }
-        return list.toList().sorted()
+        return list.sorted()
+            .map { LottoNumber(it) }
     }
 }

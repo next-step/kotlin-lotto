@@ -14,13 +14,13 @@ class LottoMachine {
         lottoTicketCount = purchaseMoney.money / LOTTO_PRICE
 
         lottoTickets = LottoTickets((1..lottoTicketCount).toList().map {
-            Lotto(Extractor.getAutoNumbers())
+            LottoTicket(Extractor.getAutoNumbers())
         })
     }
 
-    fun checkResult(winningLotto: Lotto) {
+    fun checkResult(winningLottoTicket: LottoTicket) {
         winningPrizes = WinningPrizes(lottoTickets.lottery.map {
-            LottoResult().check { winningLotto.numbers.intersect(it.numbers.toSet()) }
+            LottoResult().check { winningLottoTicket.numbers.intersect(it.numbers.toSet()) }
                 .prize
         })
     }

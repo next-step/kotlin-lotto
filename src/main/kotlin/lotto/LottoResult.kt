@@ -4,7 +4,7 @@ class LottoResult {
     var prize: Prize = Prize.NONE
         private set
 
-    fun check(machRuleFunc: () -> Set<Int>): LottoResult {
+    fun check(machRuleFunc: () -> Set<LottoNumber>): LottoResult {
         prize = Prize.getOrNull(
             machCount = machRuleFunc().size
         ) ?: Prize.NONE

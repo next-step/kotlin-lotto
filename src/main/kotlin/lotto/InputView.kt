@@ -15,17 +15,18 @@ object InputView {
         return PurchaseMoney(money)
     }
 
-    fun getWinningNumbers(): WinningLotto {
+    fun getWinningNumbers(): WinningLottoTicket {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
         val winningValue = readLine()
             ?.replace(" ", "")
             ?.split(",")
             ?.map { it.toIntOrNull() ?: throw IllegalArgumentException(NEGATIVE_NUMBER_MESSAGE) }
+            ?.map { LottoNumber(it) }
 
 
         requireNotNull(winningValue) { NULL_MESSAGE }
 
-        return WinningLotto(winningValue)
+        return WinningLottoTicket(winningValue)
     }
 }
