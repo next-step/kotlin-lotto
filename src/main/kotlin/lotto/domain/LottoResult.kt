@@ -4,7 +4,7 @@ class LottoResult(val prize: LottoPrizeInfo) {
     var count = 0
         private set
 
-    val isBonus = prize.isBonus()
+    val isBonus = prize.isBonus
 
     fun increaseMatchCount() {
         count++
