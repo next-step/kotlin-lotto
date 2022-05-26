@@ -28,7 +28,7 @@ class ResultView(
     private fun printStatisticsMatch(statistics: LottoStatistics) {
         statistics.entries.forEach { (lottoMatch, matchCount) ->
             val extraPolicy = if (lottoMatch.withBonus) ", 보너스 볼 일치" else " "
-            writeLine("${lottoMatch.count}개 일치${extraPolicy}(${lottoMatch.reward}원)- ${matchCount}개")
+            writeLine("${lottoMatch.count}개 일치$extraPolicy(${lottoMatch.reward}원)- ${matchCount}개")
         }
     }
 
