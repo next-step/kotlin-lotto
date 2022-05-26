@@ -50,7 +50,7 @@ class LottoTest {
         fun invalidCountNumbers() = listOf(
             Arguments.of(listOf(1)),
             Arguments.of(listOf(1, 2, 3)),
-            Arguments.of(listOf(1, 2, 3, 4, 5, 6)),
+            Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7)),
         )
 
         @JvmStatic
