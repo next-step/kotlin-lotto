@@ -1,15 +1,12 @@
 package lotto.ui
 
-import lotto.application.LotteryRandomGenerator
 import lotto.domain.Lotto
 
 object LotteryRandomGeneratorView {
 
-    fun display(numberOfTickets: Int): List<Lotto> {
-        println("${numberOfTickets}개를 구매했습니다.")
-        val lotteries = LotteryRandomGenerator.generateLotteryTickets(numberOfTickets)
+    fun display(lotteries: List<Lotto>) {
+        println("${lotteries.size}개를 구매했습니다.")
 
         lotteries.forEach { println(it) }
-        return lotteries
     }
 }
