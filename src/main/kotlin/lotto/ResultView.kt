@@ -15,7 +15,7 @@ object ResultView {
     fun printStatistics(statisticsRows: StatisticsRows) {
         println("당첨 통계")
         statisticsRows.rows.forEach {
-            println("${it.prize.machCount}개 일치 ${it.standardPrize}원 (${it.machLottoCount})개")
+            println("${it.prize.matchCount}개 일치 ${it.standardPrize}원 (${it.matchLottoCount})개")
         }
     }
 

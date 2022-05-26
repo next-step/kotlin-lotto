@@ -1,6 +1,6 @@
 package lotto
 
-class LottoMachine {
+class LottoMatching {
     var lottoTicketCount = 0
         private set
 
@@ -20,8 +20,9 @@ class LottoMachine {
 
     fun checkResult(winningLottoTicket: LottoTicket) {
         winningPrizes = WinningPrizes(lottoTickets.lottery.map {
-            LottoResult().check { winningLottoTicket.numbers.intersect(it.numbers.toSet()) }
-                .prize
+            LottoResult().check {
+                winningLottoTicket.numbers.intersect(it.numbers.toSet())
+            }.prize
         })
     }
 

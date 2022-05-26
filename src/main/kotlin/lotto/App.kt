@@ -4,20 +4,20 @@ package lotto
 fun main() {
     val purchaseMoney = InputView.getPurchaseMoney()
 
-    val lottoMachine = LottoMachine()
+    val lottoMatching = LottoMatching()
 
-    lottoMachine.purchase(purchaseMoney)
+    lottoMatching.purchase(purchaseMoney)
 
-    ResultView.printTicketCount(lottoMachine.lottoTicketCount)
+    ResultView.printTicketCount(lottoMatching.lottoTicketCount)
 
-    ResultView.printTickets(lottoMachine.lottoTickets)
+    ResultView.printTickets(lottoMatching.lottoTickets)
 
     val winningNumbers = InputView.getWinningNumbers()
 
-    lottoMachine.checkResult(winningNumbers)
+    lottoMatching.checkResult(winningNumbers)
 
     val statistics = Statistics().apply {
-        this.run(lottoMachine.winningPrizes, purchaseMoney)
+        this.run(lottoMatching.winningPrizes, purchaseMoney)
     }
 
     ResultView.printStatistics(statistics.statisticsRows)

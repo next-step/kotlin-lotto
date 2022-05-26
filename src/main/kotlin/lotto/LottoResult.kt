@@ -4,15 +4,15 @@ class LottoResult {
     var prize: Prize = Prize.NONE
         private set
 
-    fun check(machRuleFunc: () -> Set<LottoNumber>): LottoResult {
+    fun check(matchRuleFunc: () -> Set<LottoNumber>): LottoResult {
         prize = Prize.getOrNull(
-            machCount = machRuleFunc().size
+            matchCount = matchRuleFunc().size,
         ) ?: Prize.NONE
 
         return this
     }
 
-    enum class Prize(val machCount: Int, val price: Int) {
+    enum class Prize(val matchCount: Int, val price: Int) {
         NONE(0, 0),
         FIRST(1, 0),
         SECOND(2, 0),
@@ -22,8 +22,9 @@ class LottoResult {
         SIXTH(6, 2_000_000_000);
 
         companion object {
-            fun getOrNull(machCount: Int): Prize? =
-                values().firstOrNull() { it.machCount == machCount }
+            fun getOrNull(matchCount: Int): Prize? {
+                return values().firstOrNull() { it.matchCount == matchCount }
+            }
         }
     }
 }

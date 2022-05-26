@@ -17,12 +17,12 @@ class Statistics {
                 Row(
                     standardPrize = it.price,
                     prize = it,
-                    machLottoCount = winningPrizes.prizes.filter { prize ->
-                        prize.machCount == it.machCount
+                    matchLottoCount = winningPrizes.prizes.filter { prize ->
+                        prize.matchCount == it.matchCount
                     }.size,
                 )
             }.sortedBy {
-                it.prize.machCount
+                it.prize.matchCount
             })
 
 
@@ -35,6 +35,6 @@ class Statistics {
     data class Row(
         val standardPrize: Int,
         val prize: LottoResult.Prize,
-        val machLottoCount: Int
+        val matchLottoCount: Int
     )
 }
