@@ -22,7 +22,7 @@ class LottoMachineTest : StringSpec({
 
     "로또 당첨 결과를 알수 있다" {
         val lottoBundle = lottoMachine.buyAuto()
-        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 45)
 
         lottoMachine.drawLottoBundle(lottoBundle, winningLotto).winningRate shouldBeGreaterThanOrEqual 0.0
     }
