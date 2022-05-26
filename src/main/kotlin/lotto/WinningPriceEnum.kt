@@ -10,5 +10,6 @@ enum class WinningPriceEnum(val number: Int, val price: Int) {
 }
 
 fun getPrice(number: Int): Int {
-    return WinningPriceEnum.values().first { it.number.equals(number) }.price
+    return WinningPriceEnum.values().filter { it.number.equals(number) }
+        .map { return it.price }.first()
 }

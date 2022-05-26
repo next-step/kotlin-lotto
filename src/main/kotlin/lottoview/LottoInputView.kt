@@ -1,23 +1,26 @@
 package lottoview
 
+import lotto.LottoPriceRule
 import lotto.LottoPurchaseHandler
 import lotto.LottoWinningInfo
 
 object LottoInputView {
 
-    fun inputPurchaseAmount() {
+    fun inputPurchaseAmount(): LottoPriceRule {
         println(INPUT_PURCHASE_AMOUNT_MESSAGE)
         val amount = readln()
 
         val priceInfo = LottoPurchaseHandler.getLottoCountByAmount(amount.toInt())
         println(priceInfo.count.toString() + INPUT_PURCHASE_NUMBER_MESSAGE)
+
+        return priceInfo
     }
 
-    fun inputWinningNumbers() {
+    fun inputWinningNumbers(): LottoWinningInfo {
         println(INPUT_WINNING_NUMBER_MESSAGE)
         val winningNumbers = readln()
 
-        LottoWinningInfo(winningNumbers)
+        return LottoWinningInfo(winningNumbers)
     }
 
     const val INPUT_PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
