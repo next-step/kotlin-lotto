@@ -23,8 +23,7 @@ class LottoCompany(stringWinningNumber: String) {
     }
 
     private fun findCorrectLotto(ticket: LottoTicket): Prize? {
-        val union = ticket.numbers + winningNumber
-        val matchCounts = ticket.numbers.size + winningNumber.size - union.distinct().size
+        val matchCounts = ticket.numbers.intersect(winningNumber.toSet()).size
         return Prize.of(matchCounts)
     }
 
