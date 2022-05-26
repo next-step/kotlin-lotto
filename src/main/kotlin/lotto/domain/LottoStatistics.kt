@@ -5,7 +5,7 @@ import java.math.MathContext
 
 class LottoStatistics(
     private val lottoTickets: List<LottoTicket>,
-    private val lastLottoNumbers: Set<Int>
+    private val lastLottoTicket: LottoTicket
 ) {
 
     init {
@@ -16,7 +16,7 @@ class LottoStatistics(
 
     private fun getMatchCount(matchCount: Int): Int =
         lottoTickets
-            .filter { it.numbers.intersect(lastLottoNumbers).size == matchCount }
+            .filter { it.numbers.intersect(lastLottoTicket.numbers).size == matchCount }
             .size
 
     fun getProfit(purchase: Int): BigDecimal {

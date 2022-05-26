@@ -8,7 +8,7 @@ import java.math.BigDecimal
 class LottoStatisticsTest : BehaviorSpec({
 
     Given("로또 통계는") {
-        val lastLottoNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val lastLottoTicket = LottoTicket(setOf(1, 2, 3, 4, 5, 6))
         val lottoTickets = listOf(
             LottoTicket(setOf(1, 2, 3, 10, 11, 12)),
             LottoTicket(setOf(1, 2, 3, 4, 11, 12)),
@@ -17,7 +17,7 @@ class LottoStatisticsTest : BehaviorSpec({
         )
 
         When("1개 이상의 포함된 로또 티켓 목록이 입력되면") {
-            val statistics = LottoStatistics(lottoTickets, lastLottoNumbers)
+            val statistics = LottoStatistics(lottoTickets, lastLottoTicket)
             Then("3개 일치 개수를 반환한다") {
                 statistics.getMatchCount(LottoMatch.THREE) shouldBe 1
             }
@@ -42,7 +42,7 @@ class LottoStatisticsTest : BehaviorSpec({
         When("0개의 로도 티켓 목록이 입력되면") {
             Then("IllegalArgumentException 예외 발생") {
                 shouldThrowExactly<IllegalArgumentException> {
-                    LottoStatistics(emptyList(), lastLottoNumbers)
+                    LottoStatistics(emptyList(), lastLottoTicket)
                 }
             }
         }
