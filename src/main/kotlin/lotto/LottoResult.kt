@@ -4,9 +4,9 @@ class LottoResult {
     var prize: Prize = Prize.NONE
         private set
 
-    fun check(matchRuleFunc: () -> Set<LottoNumber>): LottoResult {
+    fun check(matchCount : Int, matchBonus : Boolean): LottoResult {
         prize = Prize.getOrNull(
-            matchCount = matchRuleFunc().size,
+            matchCount = matchCount,
         ) ?: Prize.NONE
 
         return this
