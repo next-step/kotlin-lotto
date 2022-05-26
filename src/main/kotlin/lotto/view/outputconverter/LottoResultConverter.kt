@@ -8,10 +8,10 @@ object LottoResultConverter : OutputConverter<LottoResult> {
     private const val DIVIDER = "---------"
 
     override fun convert(printable: LottoResult): String {
-        val lottoWinningMessages = printable.value.map { lottoWinning ->
-            "\n${lottoWinning.toPrintableText()}"
+        val lottoWinningMessages = printable.value.joinToString("\n") { lottoWinning ->
+            lottoWinning.toPrintableText()
         }
-        return "$GUIDANCE_MESSAGE\n$DIVIDER$lottoWinningMessages"
+        return "$GUIDANCE_MESSAGE\n$DIVIDER\n$lottoWinningMessages"
     }
 
     private fun LottoWinning.toPrintableText(): String {

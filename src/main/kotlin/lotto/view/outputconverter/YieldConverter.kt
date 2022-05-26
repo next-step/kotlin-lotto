@@ -9,7 +9,7 @@ object YieldConverter : OutputConverter<Yield> {
     }
 
     private fun Yield.toPrintableText(): String {
-        val df = DecimalFormat("#.00")
+        val df = DecimalFormat("0.00")
 
         return df.format(value)
     }
