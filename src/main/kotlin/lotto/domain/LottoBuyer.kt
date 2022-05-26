@@ -1,10 +1,10 @@
 package lotto.domain
 
 class LottoBuyer(
-    private val initialMoney: Int,
+    private val initialMoney: Money,
     private var lottoBundle: LottoBundle = LottoBundle.EMPTY,
 ) {
-    var money: Int = initialMoney
+    var money: Money = initialMoney
         private set
 
     fun buyAll(lottoSeller: LottoSeller = LottoSeller()) {

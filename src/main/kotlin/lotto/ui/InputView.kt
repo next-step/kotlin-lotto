@@ -3,12 +3,20 @@ package lotto.ui
 import lotto.domain.Lotto
 import lotto.domain.LottoCoupon
 import lotto.domain.LottoNumber
+import lotto.domain.Money
 
 object InputView {
 
-    tailrec fun readAmountOfMoney(): Int {
+    tailrec fun readAmountOfMoney(): Money {
         println("구입금액을 입력해 주세요.")
-        return readln().toIntOrNull() ?: readAmountOfMoney()
+        val amount = readln().toIntOrNull()
+        return when (amount != null && amount >= 0) {
+            true -> Money(amount)
+            else -> {
+                println("**잘못된 금액을 입력했습니다! 다시 입력해 주세요**")
+                readAmountOfMoney()
+            }
+        }
     }
 
     tailrec fun readWinningLotto(): Lotto {
@@ -19,7 +27,7 @@ object InputView {
         return when (result.isSuccess) {
             true -> result.getOrThrow()
             false -> {
-                println("잘못된 번호를 입력했습니다! 다시 입력해 주세요")
+                println("**잘못된 당첨 번호를 입력했습니다! 다시 입력해 주세요**")
                 readWinningLotto()
             }
         }
@@ -45,7 +53,7 @@ object InputView {
         return when (result.isSuccess) {
             true -> result.getOrThrow()
             false -> {
-                println("잘못된 번호를 입력했습니다! 다시 입력해 주세요")
+                println("**잘못된 보너스 번호를 입력했습니다! 다시 입력해 주세요**")
                 readBonusBall()
             }
         }
@@ -82,7 +90,7 @@ object InputView {
         return when (result.isSuccess) {
             true -> result.getOrThrow()
             false -> {
-                println("잘못된 번호를 입력했습니다! 다시 입력해 주세요")
+                println("**잘못된 로또 번호를 입력했습니다! 다시 입력해 주세요**")
                 readLottoCoupon()
             }
         }

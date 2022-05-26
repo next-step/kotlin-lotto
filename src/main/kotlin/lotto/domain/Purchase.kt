@@ -2,5 +2,5 @@ package lotto.domain
 
 data class Purchase(
     val lottoBundle: LottoBundle,
-    val changes: Int
+    val changes: Money
 )
