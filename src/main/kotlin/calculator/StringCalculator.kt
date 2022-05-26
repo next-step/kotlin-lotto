@@ -4,8 +4,9 @@ class StringCalculator {
     fun calculate(input: String?): Int {
         if (input.isNullOrBlank()) return 0
 
-        val numbers = useCustomDelimiter(input) ?: useDefaultDelimiter(input)
-        return sumOfNumbers(numbers)
+        val numbers: List<PositiveNumber> =
+            (useCustomDelimiter(input) ?: useDefaultDelimiter(input)).map { PositiveNumber.of(it) }
+        return numbers.sumOf { it.num }
     }
 
     private fun useCustomDelimiter(input: String): List<String>? {
@@ -19,12 +20,6 @@ class StringCalculator {
 
     private fun useDefaultDelimiter(input: String): List<String> {
         return input.split(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
-    }
-
-    private fun sumOfNumbers(numbers: List<String>): Int {
-        return numbers.map { it.toIntOrNull() ?: throw RuntimeException() }
-            .onEach { require(it < 0) }
-            .sum()
     }
 
     companion object {
