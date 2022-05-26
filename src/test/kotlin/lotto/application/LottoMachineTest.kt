@@ -10,11 +10,11 @@ import lotto.domain.WinningLotto
 
 class LottoMachineTest : StringSpec({
     "로또 기계를 생성할수 있다" {
-        shouldNotThrow<Throwable> { LottoMachine(Purchase(Amount(2000))) }
+        shouldNotThrow<Throwable> { LottoMachine(Purchase(Amount(2_000))) }
     }
 
     "자동 로또를 구입할수 있다" {
-        val purchase = Purchase(Amount(2000))
+        val purchase = Purchase(Amount(2_000))
         val lottoBundle = LottoMachine(purchase).buyAuto()
 
         lottoBundle.lottos shouldHaveSize purchase.lottoPurchaseCount
@@ -22,12 +22,12 @@ class LottoMachineTest : StringSpec({
 
     "로또 당첨 결과를 알수 있다" {
         val lottoBundle = lottoMachine.buyAuto()
-        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 45)
 
-        lottoMachine.drawLottoBundle(lottoBundle, winningLotto).winningPrice shouldBeGreaterThanOrEqual 0.0
+        lottoMachine.drawLottoBundle(lottoBundle, winningLotto).winningRate shouldBeGreaterThanOrEqual 0.0
     }
 }) {
     companion object {
-        private val lottoMachine = LottoMachine(Purchase(Amount(10000)))
+        private val lottoMachine = LottoMachine(Purchase(Amount(10_000)))
     }
 }

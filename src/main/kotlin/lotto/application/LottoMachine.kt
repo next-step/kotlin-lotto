@@ -26,9 +26,11 @@ class LottoMachine(
         winningLotto: WinningLotto
     ): LottoResult {
         val winningResults = winningLotto.match(lottoBundle)
-        val winningAmount = winningResults.map { it.amount }
-            .reduce { acc, amount -> acc + amount }.value.div(purchase.amount.value.toDouble())
-        return LottoResult(winningAmount, winningResults.groupingBy { it }.eachCount())
+        val winningRate = winningResults.map { it.amount }
+            .reduce { acc, amount -> acc + amount }
+            .value
+            .div(purchase.amount.value.toDouble())
+        return LottoResult(winningRate, winningResults.groupingBy { it }.eachCount())
     }
 
     companion object {

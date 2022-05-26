@@ -4,7 +4,7 @@ import lotto.application.dto.LottoResult
 import lotto.application.vo.Purchase
 import lotto.domain.Lotto
 import lotto.domain.LottoBundle
-import lotto.domain.WinningResult
+import lotto.domain.MatchType
 
 object ResultView {
     fun printLottoBundle(lottoBundle: LottoBundle) {
@@ -22,10 +22,15 @@ object ResultView {
     fun printWinningResult(lottoResult: LottoResult) {
         println("당첨 통계")
         println("--------")
-        WinningResult.values()
+        MatchType.values()
             .filter { it.matchCount > 0 }
-            .forEach { println("${it.matchCount}개 일치 (${it.amount.value}원)- ${lottoResult.winningResults[it] ?: 0}개") }
+            .forEach { printWinningResult(it, lottoResult) }
+        println("총 수익률은 ${lottoResult.winningRate}입니다.")
+    }
 
-        println("총 수익률은 ${lottoResult.winningPrice}입니다.")
+    private fun printWinningResult(it: MatchType, lottoResult: LottoResult) {
+        if (it == MatchType.FIVE_AND_BONUS_MATCH)
+            println("${it.matchCount}개 일치, 보너스 볼 일치 (${it.amount.value}원)- ${lottoResult.winningResults[it] ?: 0}개")
+        else println("${it.matchCount}개 일치 (${it.amount.value}원)- ${lottoResult.winningResults[it] ?: 0}개")
     }
 }
