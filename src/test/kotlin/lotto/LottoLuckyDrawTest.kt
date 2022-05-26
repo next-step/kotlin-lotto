@@ -19,17 +19,7 @@ class LottoLuckyDrawTest {
     @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
     internal fun `당첨 테스트`(input: String) {
         val lottoList = listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6)))
-        LottoLuckyDraw(input).doLuckDraw(lottoList)
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
-    internal fun `통계 테스트`(input: String) {
-        val lottoList = listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6)))
-        val luckyDraw = LottoLuckyDraw(input)
-        luckyDraw.doLuckDraw(lottoList)
-        val luckyDrawResult = luckyDraw.getStatistics
-        assertThat(luckyDrawResult.six).isEqualTo(1)
+        LottoLuckyDraw(input).draw(lottoList)
     }
 
     @ParameterizedTest

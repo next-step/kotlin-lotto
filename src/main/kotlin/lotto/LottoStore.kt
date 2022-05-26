@@ -9,6 +9,6 @@ class LottoStore(insertAmount: Int) {
     }
 
     companion object {
-        const val LOTTO_UNIT_PRICE = 1000
+        private const val LOTTO_UNIT_PRICE = 1000
     }
 }
