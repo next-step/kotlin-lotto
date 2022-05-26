@@ -1,6 +1,7 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldBeSorted
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.property.Arb
@@ -14,16 +15,16 @@ class LottoTicketMachineTest : BehaviorSpec({
             val tickets = LottoTicketMachine.generate()
 
             Then("생성된 티켓은 1개다") {
-                tickets.shouldHaveSize(1)
+                tickets shouldHaveSize 1
             }
 
             val actual = tickets.first().numbers
             Then("생성된 번호는 6개이다") {
-                actual.shouldHaveSize(LottoTicketMachine.SIZE_OF_LOTTO_NUMBER)
+                actual shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
             }
 
             Then("생성된 번호는 모두 다른 번호이다") {
-                actual.distinct().shouldHaveSize(LottoTicketMachine.SIZE_OF_LOTTO_NUMBER)
+                actual.distinct() shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
             }
 
             Then("생성된 번호는 오름차순으로 정렬되어 있다") {
@@ -36,22 +37,21 @@ class LottoTicketMachineTest : BehaviorSpec({
             val tickets = LottoTicketMachine.generate(numberOfTicket)
 
             Then("생성된 티켓의 개수는 요청 개수와 동일하다") {
-                tickets.shouldHaveSize(numberOfTicket)
+                tickets shouldHaveSize numberOfTicket
             }
 
-            tickets.forEach { ticket ->
-                val actual = ticket.numbers
-                val actualName = actual.joinToString()
+            tickets.forAll { (numbers) ->
+                val actualName = numbers.joinToString()
                 Then("생성된 번호는 6개이다 ($actualName)") {
-                    actual.shouldHaveSize(LottoTicketMachine.SIZE_OF_LOTTO_NUMBER)
+                    numbers shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
                 }
 
                 Then("생성된 번호는 모두 다른 번호이다 ($actualName)") {
-                    actual.distinct().shouldHaveSize(LottoTicketMachine.SIZE_OF_LOTTO_NUMBER)
+                    numbers.distinct() shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
                 }
 
                 Then("생성된 번호는 오름차순으로 정렬되어 있다 ($actualName)") {
-                    actual.shouldBeSorted()
+                    numbers.shouldBeSorted()
                 }
             }
         }
