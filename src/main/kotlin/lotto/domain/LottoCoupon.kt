@@ -1,13 +1,13 @@
 package lotto.domain
 
 data class LottoCoupon(
-    val numbers: Set<LottoNumber>
+    private val lotto: Lotto
 ) {
+    val toLotto: Lotto = lotto.copy()
+
     companion object {
         fun of(numbers: Collection<Int>): LottoCoupon {
-            val lottoNumbers = numbers.map { LottoNumber(it) }
-                .toSet()
-            return LottoCoupon(lottoNumbers)
+            return LottoCoupon(Lotto.of(numbers))
         }
     }
 }

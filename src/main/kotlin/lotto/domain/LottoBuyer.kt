@@ -7,18 +7,16 @@ class LottoBuyer(
     var money: Int = initialMoney
         private set
 
-    fun buyAll(lottoSeller: LottoSeller = LottoSeller()): Int {
+    fun buyAll(lottoSeller: LottoSeller = LottoSeller()) {
         val (boughtBundle, changes) = lottoSeller.sellAutoLotto(money)
         lottoBundle += boughtBundle
         money = changes
-        return boughtBundle.size
     }
 
-    fun buy(lottoCoupons: List<LottoCoupon>, lottoSeller: LottoSeller = LottoSeller()): Int {
+    fun buy(lottoCoupons: List<LottoCoupon>, lottoSeller: LottoSeller = LottoSeller()) {
         val (boughtBundle, changes) = lottoSeller.sellManualLotto(money, lottoCoupons)
         lottoBundle += boughtBundle
         money = changes
-        return boughtBundle.size
     }
 
     fun getLottoBundle(): LottoBundle = lottoBundle.copy()

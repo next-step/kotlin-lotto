@@ -30,7 +30,7 @@ class LottoBuyerSpecs : DescribeSpec({
             val lottoGenerator = FixedLottoGenerator(lottoList)
             val lottoSeller = LottoSeller(lottoGenerator)
             it("로또 뭉치를 구매할 수 있다") {
-                buyer.buyAll(lottoSeller) shouldBe 4
+                buyer.buyAll(lottoSeller)
                 buyer.getLottoBundle().size shouldBe 4
                 buyer.money shouldBe 0
             }
@@ -41,7 +41,7 @@ class LottoBuyerSpecs : DescribeSpec({
                     lottoCoupon(1, 2, 3, 4, 5, 7),
                     lottoCoupon(1, 2, 3, 4, 7, 8),
                 )
-                buyer.buy(lottoCoupon, lottoSeller) shouldBe 3
+                buyer.buy(lottoCoupon, lottoSeller)
                 buyer.getLottoBundle().size shouldBe 3
                 buyer.money shouldBe 1000
             }
@@ -49,14 +49,14 @@ class LottoBuyerSpecs : DescribeSpec({
 
         context("로또를 구매할 금액이 부족하다면") {
             val buyer = LottoBuyer(100)
-            it("로또를 구매할 수 없다") {
-                shouldThrowExactly<IllegalArgumentException> {
-                    buyer.buyAll()
-                }
+            it("로또를 구매하지 못한다") {
+                buyer.buyAll()
+                buyer.getLottoBundle().size shouldBe 0
+                buyer.money shouldBe 100
             }
         }
 
-        context("로또 뭉치가 있고 당첨 번호를 알고 있다면") {
+        context("로또 묶음이 있고 당첨 번호를 알고 있다면") {
             val lottoBundle = LottoBundle(lottoList)
             val buyer = LottoBuyer(7_000, lottoBundle)
             val winningLotto = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
@@ -73,7 +73,7 @@ class LottoBuyerSpecs : DescribeSpec({
             }
         }
 
-        context("로또 뭉치를 보유하지 않았으면") {
+        context("로또 묶음을 보유하지 않았으면") {
             val buyer = LottoBuyer(4_000)
             val winningLotto = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
             it("로또 당첨 결과를 확인할 수 없다") {

@@ -4,9 +4,8 @@ fun lotto(vararg numbers: Int): Lotto {
     return Lotto.of(numbers.toList())
 }
 
-fun lottoCoupon(vararg number: Int): LottoCoupon {
+fun lottoCoupon(vararg numbers: Int): LottoCoupon {
     return LottoCoupon(
-        number.map { LottoNumber(it) }
-            .toSet()
+        Lotto.of(numbers.toList())
     )
 }
