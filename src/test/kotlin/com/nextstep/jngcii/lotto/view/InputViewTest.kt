@@ -36,7 +36,7 @@ internal class InputViewTest {
         "2000, 2",
         "1234, 1",
         "1, 0",
-        "30000, 1"
+        "30000, 30"
     )
     fun `양의 정수를 입력하면 1000으로 나눈 몫을 반환`(input: String, expected: Int) {
         val actual: Int = InputView.getCount(input)
