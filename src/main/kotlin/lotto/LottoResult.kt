@@ -7,6 +7,7 @@ class LottoResult {
     fun check(matchCount : Int, matchBonus : Boolean): LottoResult {
         prize = Prize.getOrNull(
             matchCount = matchCount,
+            matchBonus = matchBonus
         ) ?: Prize.NONE
 
         return this
@@ -23,8 +24,12 @@ class LottoResult {
         SIXTH(6, 2_000_000_000);
 
         companion object {
-            fun getOrNull(matchCount: Int): Prize? {
-                return values().firstOrNull() { it.matchCount == matchCount }
+            fun getOrNull(matchCount: Int, matchBonus: Boolean): Prize? {
+                return if (matchBonus) {
+                    FIFTH_BONUS
+                } else {
+                    values().firstOrNull() { it.matchCount == matchCount }
+                }
             }
         }
     }
