@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.enums.LottoRank
 import lotto.exception.DuplicateLottoNumberException
 
-class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
+class WinningLotto private constructor(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
 
     init {
         if (bonusNumber in lottoNumbers) throw DuplicateLottoNumberException()
@@ -18,10 +18,10 @@ class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumb
     }
 
     private fun matchingCount(lotto: Lotto): Int {
-        return matchingNumbers(lotto).size
+        return matchingLottoNumbers(lotto).size
     }
 
-    private fun matchingNumbers(lotto: Lotto): List<LottoNumber> {
+    private fun matchingLottoNumbers(lotto: Lotto): List<LottoNumber> {
         return lottoNumbers.matchingNumbers(lotto.numbers)
     }
 
@@ -30,25 +30,8 @@ class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumb
     }
 
     companion object {
-        class Builder(private val lottoNumbers: LottoNumbers) {
-
-            constructor(vararg numbers: Int) : this(LottoNumbers(*numbers))
-
-            fun bonus(bonusNumber: LottoNumber): WinningLotto {
-                return WinningLotto(lottoNumbers, bonusNumber)
-            }
-
-            fun bonus(number: Int): WinningLotto {
-                return bonus(LottoNumber(number))
-            }
-        }
-
-        fun winningLottoOf(vararg numbers: Int): Builder {
-            return Builder(*numbers)
-        }
-
-        fun winningLottoOf(lottoNumbers: LottoNumbers): Builder {
-            return Builder(lottoNumbers)
+        fun of(lottoNumbers: LottoNumbers, bonusNumber: LottoNumber): WinningLotto {
+            return WinningLotto(lottoNumbers, bonusNumber)
         }
     }
 }

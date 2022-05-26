@@ -19,16 +19,16 @@ class LottoNumberTest : FunSpec({
 
     test("로또 숫자는 1부터 45 사이의 숫자입니다.") {
         shouldNotThrow<InvalidLottoNumberException> {
-            (1..4).forEach { LottoNumber(it) }
+            (1..4).forEach { LottoNumber.of(it) }
         }
         shouldThrow<InvalidLottoNumberException> {
-            LottoNumber(-1)
+            LottoNumber.of(-1)
         }
         shouldThrow<InvalidLottoNumberException> {
-            LottoNumber(0)
+            LottoNumber.of(0)
         }
         shouldThrow<InvalidLottoNumberException> {
-            LottoNumber(46)
+            LottoNumber.of(46)
         }
     }
 })

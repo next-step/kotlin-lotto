@@ -3,9 +3,7 @@ package lotto.domain
 import lotto.exception.DuplicateLottoNumberException
 import lotto.exception.InvalidLottoNumberSizeException
 
-class LottoNumbers(vararg numbers: Int) {
-
-    val numbers: List<LottoNumber> = numbers.toList().map { LottoNumber(it) }
+class LottoNumbers private constructor(val numbers: List<LottoNumber>) {
 
     init {
         if (numbers.size != LOTTO_NUMBER_SIZE) throw InvalidLottoNumberSizeException()
@@ -23,7 +21,7 @@ class LottoNumbers(vararg numbers: Int) {
         .toString()
 
     operator fun contains(number: Int): Boolean {
-        return LottoNumber(number) in numbers
+        return LottoNumber.of(number) in numbers
     }
 
     operator fun contains(number: LottoNumber): Boolean {
@@ -31,10 +29,18 @@ class LottoNumbers(vararg numbers: Int) {
     }
 
     companion object {
-        const val LOTTO_NUMBER_SIZE = 6
+        private const val LOTTO_NUMBER_SIZE = 6
 
         fun from(numbers: List<Int>): LottoNumbers {
-            return LottoNumbers(*numbers.take(LOTTO_NUMBER_SIZE).toIntArray())
+            return LottoNumbers(numbers.take(LOTTO_NUMBER_SIZE).map { LottoNumber.of(it) })
+        }
+
+        fun of(vararg numbers: Int): LottoNumbers {
+            return LottoNumbers(numbers.toList().map { LottoNumber.of(it) })
+        }
+
+        fun of(lottoNumbers: List<LottoNumber>): LottoNumbers {
+            return LottoNumbers(lottoNumbers)
         }
     }
 }

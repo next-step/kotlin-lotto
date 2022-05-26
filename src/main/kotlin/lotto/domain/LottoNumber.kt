@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.exception.InvalidLottoNumberException
 
 @JvmInline
-value class LottoNumber(val number: Int) {
+value class LottoNumber private constructor(val number: Int) {
 
     init {
         require(number in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER) {

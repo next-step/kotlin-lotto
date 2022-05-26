@@ -15,7 +15,7 @@ class LottoSellerTest : FunSpec({
     }
 
     test("수동 로또 구매 후 나머지 금액은 자동으로 발급된다.") {
-        val lottoNumbers = LottoNumbers(1, 2, 3, 4, 5, 6)
+        val lottoNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
         lottoSeller.purchase(0, listOf(lottoNumbers)).size shouldBe 0
         lottoSeller.purchase(500, listOf(lottoNumbers)).size shouldBe 0
         lottoSeller.purchase(1_000, listOf(lottoNumbers)).size shouldBe 1

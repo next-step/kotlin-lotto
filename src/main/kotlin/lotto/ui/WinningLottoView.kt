@@ -1,27 +1,28 @@
 package lotto.ui
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.WinningLotto
-import lotto.domain.WinningLotto.Companion.winningLottoOf
 
 object WinningLottoView {
     fun inputWinningLotto(): WinningLotto {
-        val winningNumbers = inputWinningNumbers()
-        val bonusNumber = inputBonusNumber()
-        return winningLottoOf(winningNumbers).bonus(bonusNumber)
+        val winningNumbers = inputWinningLottoNumbers()
+        val bonusNumber = inputWinningLottoBonusNumber()
+        return WinningLotto.of(winningNumbers, bonusNumber)
     }
 
-    private fun inputWinningNumbers(): LottoNumbers {
+    private fun inputWinningLottoNumbers(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         return readln().split(",")
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException() }
-            .let { LottoNumbers(*it.toIntArray()) }
+            .map { LottoNumber.of(it) }
+            .let { LottoNumbers.of(it) }
     }
 
-    private fun inputBonusNumber(): Int {
+    private fun inputWinningLottoBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         val bonusNumbers = readln().toIntOrNull() ?: throw IllegalArgumentException()
         println()
-        return bonusNumbers
+        return LottoNumber.of(bonusNumbers)
     }
 }
