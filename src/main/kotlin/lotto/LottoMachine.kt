@@ -1,6 +1,6 @@
 package lotto
 
-class LottoMatching {
+class LottoMachine {
     var lottoTicketCount = 0
         private set
 

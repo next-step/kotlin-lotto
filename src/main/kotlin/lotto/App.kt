@@ -3,22 +3,22 @@ package lotto
 fun main() {
     val purchaseMoney = InputView.getPurchaseMoney()
 
-    val lottoMatching = LottoMatching()
+    val lottoMachine = LottoMachine()
 
-    lottoMatching.purchase(purchaseMoney)
+    lottoMachine.purchase(purchaseMoney)
 
-    ResultView.printTicketCount(lottoMatching.lottoTicketCount)
+    ResultView.printTicketCount(lottoMachine.lottoTicketCount)
 
-    ResultView.printTickets(lottoMatching.lottoTickets)
+    ResultView.printTickets(lottoMachine.lottoTickets)
 
     val winningNumbers = InputView.getWinningNumbers()
 
     val bonusNumber = InputView.getBonusNumber()
 
-    lottoMatching.checkResult(winningNumbers, bonusNumber)
+    lottoMachine.checkResult(winningNumbers, bonusNumber)
 
     val statistics = Statistics().apply {
-        this.run(lottoMatching.winningPrizes, purchaseMoney)
+        this.run(lottoMachine.winningPrizes, purchaseMoney)
     }
 
     ResultView.printStatistics(statistics.statisticsRows)
