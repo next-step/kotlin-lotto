@@ -17,6 +17,6 @@ enum class MatchType(val matchCount: Int, val amount: Amount) {
             matchCount: Int,
             hasBonusNumber: Boolean
         ): MatchType = if (hasBonusNumber && matchCount == FIVE_MATCH_COUNT) FIVE_AND_BONUS_MATCH
-                       else values().find { winningType -> winningType.matchCount == matchCount } ?: NONE_MATCH
+        else values().find { winningType -> winningType.matchCount == matchCount } ?: NONE_MATCH
     }
 }
