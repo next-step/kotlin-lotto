@@ -21,4 +21,9 @@ internal class LottoMatchingTest {
         assertThat(lottoMachine.lottoTicketCount).isEqualTo(1)
         assertThat(lottoMachine.winningPrizes.prizes).isEqualTo(listOf(LottoResult.Prize.SIXTH))
     }
+
+    @Test
+    fun `보너스 일치 여부를 확인한다`() {
+        LottoTicket(numbers = (1..6).map { LottoNumber(it) }).hasBonusNumber(LottoNumber((1)))
+    }
 }
