@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumber(val number: Int = 0) {
+data class LottoNumber(val number: Int = 0) {
     init {
         require(number > 0)
         require(number in LOTTO_NUMBER_RANGE)

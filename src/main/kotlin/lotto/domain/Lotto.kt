@@ -6,8 +6,4 @@ class Lotto(generateLists: () -> List<LottoNumber>) {
     init {
         numbers = generateLists()
     }
-
-    companion object {
-        const val LOTTO_NUMBER_DIVIDE_TEXT = ","
-    }
 }

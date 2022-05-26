@@ -35,6 +35,7 @@
 * [x] 지불금액은 1원이상의 숫자여야 한다 - Receipt
 * [ ] view layer에서 관리되어야할 변수들 이동
 * [x] 로또번호 하나를 객체로 포장한다 - LottoNumber
+  * [x] 지난 로또번호 입력받아 저장하는 로직도 LottoNumber 객체로 변경
 * [x] generateList를 별도 LottoGenerator 메소드로변경하고 검증로직 추가
   * [x] generateList 테스트코드 추가
 * [ ] intersect 적용
