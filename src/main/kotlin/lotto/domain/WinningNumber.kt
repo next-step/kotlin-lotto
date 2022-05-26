@@ -2,29 +2,32 @@ package lotto.domain
 
 class WinningNumber(private val lastWeekWinningNumbers: List<Int>) {
     fun match(purchaseAmount: Int, lottos: List<Lotto>): LottoResultDto {
-        val numberOfCorrects = mutableListOf<Int>()
-
-        lottos.forEach {
-            it
+        val numberOfCorrectsByRank = lottos.map {
+            val numberOfCorrect = it
                 .mapIndexed { index, value -> lastWeekWinningNumbers[index] == value }
                 .count { value -> value }
-                .also { numberOfCorrect -> numberOfCorrects.add(numberOfCorrect) }
+
+            val rank = Rank.find(numberOfCorrect)
+
+            NumberOfCorrectsByRank(numberOfCorrect, rank)
         }
 
-        val winningAmount =
-            Rank.FIRST.winningMoney * numberOfCorrects.countNumber(Rank.FIRST.countOfMatch) +
-                    Rank.SECOND.winningMoney * numberOfCorrects.countNumber(Rank.SECOND.countOfMatch) +
-                    Rank.THIRD.winningMoney * numberOfCorrects.countNumber(Rank.THIRD.countOfMatch) +
-                    Rank.FOURTH.winningMoney * numberOfCorrects.countNumber(Rank.FOURTH.countOfMatch)
+        val winningAmount = numberOfCorrectsByRank.sumOf {
+            val (_, rank) = it
+            rank.winningMoney
+        }
 
         return LottoResultDto(
-            numberOfCorrects.countNumber(Rank.FIRST.countOfMatch),
-            numberOfCorrects.countNumber(Rank.SECOND.countOfMatch),
-            numberOfCorrects.countNumber(Rank.THIRD.countOfMatch),
-            numberOfCorrects.countNumber(Rank.FOURTH.countOfMatch),
+            numberOfCorrectsByRank.countNumber(Rank.FIRST.numberOfCorrect),
+            numberOfCorrectsByRank.countNumber(Rank.SECOND.numberOfCorrect),
+            numberOfCorrectsByRank.countNumber(Rank.THIRD.numberOfCorrect),
+            numberOfCorrectsByRank.countNumber(Rank.FOURTH.numberOfCorrect),
             String.format("%.2f", winningAmount / purchaseAmount.toDouble())
         )
     }
 
-    private fun List<Int>.countNumber(num: Int): Int = count { it == num }
+    private fun List<NumberOfCorrectsByRank>.countNumber(countOfMatch: Int): Int = count {
+        val (numberOfCorrect) = it
+        numberOfCorrect == countOfMatch
+    }
 }

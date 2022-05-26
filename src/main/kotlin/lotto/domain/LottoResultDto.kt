@@ -8,25 +8,25 @@ data class LottoResultDto(
     val rateOfReturn: String
 ) {
     val firstPrize = PrizeDto(
-        Rank.FIRST.countOfMatch,
+        Rank.FIRST.numberOfCorrect,
         Rank.FIRST.winningMoney,
         firstPrizeCount,
     )
 
     val secondPrize = PrizeDto(
-        Rank.SECOND.countOfMatch,
+        Rank.SECOND.numberOfCorrect,
         Rank.SECOND.winningMoney,
         secondPrizeCount,
     )
 
     val thirdPrize = PrizeDto(
-        Rank.THIRD.countOfMatch,
+        Rank.THIRD.numberOfCorrect,
         Rank.THIRD.winningMoney,
         thirdPrizeCount,
     )
 
     val fourthPrize = PrizeDto(
-        Rank.FOURTH.countOfMatch,
+        Rank.FOURTH.numberOfCorrect,
         Rank.FOURTH.winningMoney,
         fourthPrizeCount,
     )
