@@ -1,4 +1,5 @@
 package stringaddcalculator
+
 // 이전 코드
 class Parse(private var formula: String, delimiters: List<String>) {
     init {
@@ -19,7 +20,7 @@ class Parse(private var formula: String, delimiters: List<String>) {
     private fun String.toPositiveIntOrThrow(): Int {
         val number = toIntOrThrow()
 
-        require(number > 0) {"음수는 계산 할 수 없습니다."}
+        require(number > 0) { "음수는 계산 할 수 없습니다." }
 
         return number
     }
