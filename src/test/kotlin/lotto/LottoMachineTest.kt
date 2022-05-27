@@ -10,7 +10,7 @@ internal class LottoMachineTest {
         val lottoMachine = LottoMachine().apply {
             this.purchase(
                 purchaseMoney = PurchaseMoney(1000),
-                lottoNumbers = lottoNumbers
+                randomNumberFunc = { lottoNumbers }
             )
             this.checkResult(
                 winningLottoTicket = LottoTicket(lottoNumbers),
@@ -27,7 +27,7 @@ internal class LottoMachineTest {
         val lottoMachine = LottoMachine().apply {
             this.purchase(
                 purchaseMoney = PurchaseMoney(1000),
-                lottoNumbers = (1..6).map { LottoNumber(it) }
+                randomNumberFunc = { (1..6).map { LottoNumber(it) } }
             )
             this.checkResult(
                 winningLottoTicket = LottoTicket((2..7).map { LottoNumber(it) }),
@@ -37,5 +37,22 @@ internal class LottoMachineTest {
 
         assertThat(lottoMachine.lottoTicketCount).isEqualTo(1)
         assertThat(lottoMachine.winningPrizes.prizes).isEqualTo(listOf(LottoResult.Prize.FIFTH_BONUS))
+    }
+
+    @Test
+    fun `보너스 번호는 없으며 당첨번호 3개로 구성된 내용을 확인한다`() {
+        val lottoMachine = LottoMachine().apply {
+            this.purchase(
+                purchaseMoney = PurchaseMoney(1000),
+                randomNumberFunc = { (1..6).map { LottoNumber(it) } }
+            )
+            this.checkResult(
+                winningLottoTicket = LottoTicket((4..9).map { LottoNumber(it) }),
+                bonusLottoNumber = LottoNumber(1)
+            )
+        }
+
+        assertThat(lottoMachine.lottoTicketCount).isEqualTo(1)
+        assertThat(lottoMachine.winningPrizes.prizes).isEqualTo(listOf(LottoResult.Prize.THIRD))
     }
 }

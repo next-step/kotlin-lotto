@@ -5,7 +5,7 @@ fun main() {
 
     val lottoMachine = LottoMachine()
 
-    lottoMachine.purchase(purchaseMoney)
+    lottoMachine.purchase(purchaseMoney, Extractor.randomNumberFunc)
 
     ResultView.printTicketCount(lottoMachine.lottoTicketCount)
 

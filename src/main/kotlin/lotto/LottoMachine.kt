@@ -10,12 +10,12 @@ class LottoMachine {
     var winningPrizes = WinningPrizes()
         private set
 
-    fun purchase(purchaseMoney: PurchaseMoney, lottoNumbers: List<LottoNumber> = Extractor.getAutoNumbers()) {
+    fun purchase(purchaseMoney: PurchaseMoney, randomNumberFunc: () -> List<LottoNumber>) {
         lottoTicketCount = purchaseMoney.money / LOTTO_PRICE
 
         lottoTickets = LottoTickets(
             (1..lottoTicketCount).toList().map {
-                LottoTicket(lottoNumbers)
+                LottoTicket(randomNumberFunc())
             }
         )
     }
