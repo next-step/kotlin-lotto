@@ -1,5 +1,6 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -23,5 +24,15 @@ class MyLottoResultTest {
             { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.FIFTH_PRICE), 0) },
             { Assertions.assertEquals(myLottoResult.getCount(LottoWinnerRank.NONE), 0) },
         )
+    }
+
+    @Test
+    fun `당첨로또에 대한 이익률 을 계산한다`() {
+        val lottoCount = 1
+        val myLottoResult = MyLottoResult(mapOf(LottoWinnerRank.FIFTH_PRICE to lottoCount))
+
+        val myProfit = myLottoResult.getProfit()
+
+        assertThat(myProfit).isEqualTo(((5000).toDouble() / (lottoCount * 1000).toDouble()))
     }
 }
