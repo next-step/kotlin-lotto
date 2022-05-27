@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class LottoTest {
     @Test
     fun `로또 1장의 가격은 1000원이다`() {
-        val price = Lotto().price
+        val price = Lotto.PRICE
 
         assertThat(price).isEqualTo(1000)
     }
