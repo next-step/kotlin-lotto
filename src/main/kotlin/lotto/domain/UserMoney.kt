@@ -3,6 +3,14 @@ package lotto.domain
 @JvmInline
 value class UserMoney(val money: Int = 0) {
 
+    init {
+        checkMoneyCondition()
+    }
+
+    private fun checkMoneyCondition() {
+        require(money >= MIN_MONEY)
+    }
+
     fun getLottoCount(): Int {
         return money / EACH_LOTTO_PRICE
     }
@@ -13,5 +21,6 @@ value class UserMoney(val money: Int = 0) {
 
     companion object {
         private const val EACH_LOTTO_PRICE = 1000
+        private const val MIN_MONEY = 0
     }
 }
