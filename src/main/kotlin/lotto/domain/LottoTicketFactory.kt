@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.model.LottoTicket
-import kotlin.random.Random
 
 /**
  * 로또 번호를 자동으로 발급해주는 클래스
@@ -20,6 +19,4 @@ object LottoTicketFactory {
             .sorted()
         return LottoTicket(numbers)
     }
-
-    private fun getRandomNumber() = Random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
 }

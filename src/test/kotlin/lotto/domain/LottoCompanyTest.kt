@@ -46,4 +46,12 @@ class LottoCompanyTest {
             LottoCompany.of(source)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
+    internal fun `로또티켓들을 당첨 결과로 잘 변경한다`(winningNumbers: String) {
+        val company = LottoCompany.of(winningNumbers)
+        val tickets = listOf(LottoTicket(listOf(1, 2, 3, 4, 5, 6)), LottoTicket(listOf(1, 2, 3, 4, 5, 7)))
+        assertThat(company.convertTicketsToLottoResults(tickets).size).isEqualTo(2)
+    }
 }
