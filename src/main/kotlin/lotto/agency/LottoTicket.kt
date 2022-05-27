@@ -5,24 +5,36 @@ import lotto.exception.WonLottoNumberCountInconsistencyException
 
 class LottoTicket(numbers: List<LottoNumber>) {
 
-    var numbers: List<LottoNumber>
+    val numbers: List<LottoNumber>
 
     init {
-        if (numbers.size != 6) {
-            throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 6개를 입력해야합니다.")
-        }
-
-        this.numbers = numbers.toList()
-    }
-
-    fun checkDuplicate(number: Int) {
-        if (numbers.contains(LottoNumber(number)))
-            throw AlreadySelectedNumberException("이미 선택된 번호입니다.")
+        validateLottoCount(numbers)
+        this.numbers = numbers
     }
 
     fun countMatchWonLottoTicket(wonLottoTicket: LottoTicket): Int {
-        return numbers.map { it.number }
+        return numbers
+            .map { lottoTicket -> lottoTicket.number }
             .sorted()
-            .count { wonLottoTicket.numbers.map { it.number }.contains(it) }
+            .count { wonLottoTicket.numbers.map { wonLottoNumber -> wonLottoNumber.number }.contains(it) }
+    }
+
+    fun validateDuplicate(number: LottoNumber) {
+        if (numbers.contains(number))
+            throw AlreadySelectedNumberException("입력한 번호는 이미 선택된 번호입니다.")
+    }
+
+    private fun validateLottoCount(numbers: List<LottoNumber>) {
+        if (numbers.size != LOTTO_COUNT_POLICY) {
+            throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 ${LOTTO_COUNT_POLICY}개를 입력해야합니다.")
+        }
+
+        if (numbers.map { it.number }.distinct().size != LOTTO_COUNT_POLICY) {
+            throw AlreadySelectedNumberException("이미 선택된 번호가 있습니다.")
+        }
+    }
+
+    companion object {
+        const val LOTTO_COUNT_POLICY = 6
     }
 }

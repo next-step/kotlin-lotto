@@ -31,7 +31,7 @@ class InputView {
         val text = readln()
         validateNotString(text)
         val bonusLottoNumber = text.toInt()
-        validateBonusLottoTicket(wonLottoTicket, bonusLottoNumber)
+        validateBonusLottoTicket(wonLottoTicket, LottoNumber(bonusLottoNumber))
         return bonusLottoNumber
     }
 
@@ -41,8 +41,8 @@ class InputView {
         }
     }
 
-    private fun validateBonusLottoTicket(wonLottoTicket: LottoTicket, bonusLottoNumber: Int) {
-        wonLottoTicket.checkDuplicate(bonusLottoNumber)
+    private fun validateBonusLottoTicket(wonLottoTicket: LottoTicket, bonusLottoNumber: LottoNumber) {
+        wonLottoTicket.validateDuplicate(bonusLottoNumber)
     }
 
     private fun validateWonLottoNumberCount(toCheck: List<LottoNumber>) {
