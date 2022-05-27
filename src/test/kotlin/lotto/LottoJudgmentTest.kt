@@ -13,10 +13,11 @@ import java.util.stream.Stream
 class LottoJudgmentTest {
 
     private val lastLottoTicket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
+    private val bonusNumber = 10
 
     @Test
     fun `지난주 당첨 로또로 로또 판단기를 생성한다`() {
-        LottoJudgment(lastLottoTicket)
+        LottoJudgment(lastLottoTicket, bonusNumber)
     }
 
     @ParameterizedTest
@@ -24,7 +25,7 @@ class LottoJudgmentTest {
     fun `지난주 당첨 번호와 일치하는 갯수를 확인한다`(numbers: List<Int>, matchCount: Int) {
         val myLottoTicket = LottoTicket(numbers)
 
-        val lottoJudgment = LottoJudgment(lastLottoTicket)
+        val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)
 
         val matchNumberCount = lottoJudgment.matchNumberCount(myLottoTicket)
         assertThat(matchNumberCount).isEqualTo(matchCount)
@@ -33,7 +34,7 @@ class LottoJudgmentTest {
     @ParameterizedTest
     @MethodSource("lottoNumbersAndRank")
     fun `로또 티켓을 전달하면, 등수를 반환한다`(ticketNumbers: List<Int>, rank: LottoWinnerRank) {
-        val lottoJudgment = LottoJudgment(lastLottoTicket)
+        val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)
         val compareLotto = LottoTicket(ticketNumbers)
         assertThat(lottoJudgment.getRanking(compareLotto)).isEqualTo(rank)
     }
