@@ -1,26 +1,27 @@
 package lotto.view
 
+import lotto.domain.enum.Priority
+
 object Screen {
     fun display(
         statistics: Map<Int, Int>,
-        priceMap: Map<Int, Int>,
         returnRate: Double
     ) {
-        displayStatistics(statistics, priceMap)
+        displayStatistics(statistics)
         displayReturnRate(returnRate)
     }
 
-    private fun displayStatistics(statistics: Map<Int, Int>, priceMap: Map<Int, Int>) {
+    private fun displayStatistics(statistics: Map<Int, Int>) {
         println("당첨 통계")
         println("---------")
 
         for ((matchNumber, matchCount) in statistics) {
-            displayStatistic(matchNumber, matchCount, priceMap)
+            displayStatistic(matchNumber, matchCount)
         }
     }
 
-    private fun displayStatistic(matchNumber: Int, matchCount: Int, priceMap: Map<Int, Int>) {
-        println("${matchNumber}개 일치 (${priceMap[matchNumber]}원)- ${matchCount}개")
+    private fun displayStatistic(matchNumber: Int, matchCount: Int) {
+        println("${matchNumber}개 일치 (${Priority.getPrice(matchNumber)}원)- ${matchCount}개")
     }
 
     private fun displayReturnRate(returnRate: Double) {

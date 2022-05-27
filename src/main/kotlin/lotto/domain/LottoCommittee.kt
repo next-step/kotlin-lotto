@@ -1,15 +1,11 @@
 package lotto.domain
 
+import lotto.domain.enum.Priority
+
 object LottoCommittee {
     private const val LOTTO_NUMBER_COUNT = 6
     private val MATCHING_NUMBER_RANGE = 3..6
     private val LOTTO_VALID_RANGE = 1..45
-    val MATCH_PRICE_MAP = mapOf(
-        3 to 5_000,
-        4 to 50_000,
-        5 to 1_500_000,
-        6 to 2_000_000_000
-    )
 
     fun createWinningNumbers(input: String): List<Int> {
         val winningNumbers = input
@@ -23,33 +19,33 @@ object LottoCommittee {
     }
 
     fun calculateStatistics(
-        lottos: List<List<Int>>,
+        lottos: List<LottoTicket>,
         winningNumbers: List<Int>
     ): Map<Int, Int> {
-        val statistics = mutableMapOf<Int, Int>()
-
-        for (matchNumber in MATCHING_NUMBER_RANGE) {
-            statistics[matchNumber] = matchCount(matchNumber, lottos, winningNumbers)
-        }
-
-        return statistics
+        return MATCHING_NUMBER_RANGE.associateWith { matchCounts(it, lottos, winningNumbers) }
     }
 
-    private fun matchCount(
+    private fun matchCounts(
         matchNumber: Int,
-        lottos: List<List<Int>>,
+        lottos: List<LottoTicket>,
         winningNumbers: List<Int>
     ): Int {
         var result = 0
 
         for (lotto in lottos) {
-            val containCount = lotto.filter { winningNumbers.contains(it) }.size
-            if (containCount == matchNumber) {
-                result += 1
-            }
+            result += matchCount(matchNumber, lotto, winningNumbers)
         }
 
         return result
+    }
+
+    private fun matchCount(
+        matchNumber: Int,
+        lotto: LottoTicket,
+        winningNumbers: List<Int>
+    ): Int {
+        val containCount = lotto.numbers.filter { winningNumbers.contains(it) }.size
+        return if (containCount == matchNumber) 1 else 0
     }
 
     fun calculateReturnRate(price: Int, statistics: Map<Int, Int>): Double {
@@ -60,13 +56,9 @@ object LottoCommittee {
         var returnPrice = 0
 
         for ((matchNumber, matchCount) in statistics) {
-            returnPrice += matchCount * getPrice(matchNumber)
+            returnPrice += matchCount * Priority.getPrice(matchNumber)
         }
 
         return returnPrice
-    }
-
-    private fun getPrice(matchNumber: Int): Int {
-        return MATCH_PRICE_MAP[matchNumber] ?: 0
     }
 }

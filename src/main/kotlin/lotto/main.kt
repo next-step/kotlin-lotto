@@ -8,7 +8,7 @@ fun main() {
     try {
         println("구입금액을 입력해 주세요.")
         val price = readln().toInt()
-        val lottos = LottoMarket.sell(price)
+        val lottos = LottoMarket.buy(price)
 
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumbers = LottoCommittee.createWinningNumbers(readln())
@@ -16,7 +16,6 @@ fun main() {
 
         Screen.display(
             statistics,
-            LottoCommittee.MATCH_PRICE_MAP,
             LottoCommittee.calculateReturnRate(price, statistics)
         )
     } catch (e: NumberFormatException) {

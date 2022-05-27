@@ -1,9 +1,11 @@
 package lotto.domain
 
+import lotto.generator.NumbersGenerator
+
 object LottoMarket {
     private const val lottoPrice = 1_000
 
-    fun sell(price: Int): List<List<Int>> {
+    fun buy(price: Int): List<LottoTicket> {
         return createLottos(lottoAmount(price))
     }
 
@@ -11,12 +13,12 @@ object LottoMarket {
         return price / lottoPrice
     }
 
-    private fun createLottos(amount: Int): List<List<Int>> {
+    private fun createLottos(amount: Int): List<LottoTicket> {
         println("${amount}개를 구매했습니다.")
 
-        val lottos = mutableListOf<List<Int>>()
+        val lottos = mutableListOf<LottoTicket>()
         repeat(amount) {
-            lottos.add(Lotto.create())
+            lottos.add(LottoTicket(NumbersGenerator.create()))
         }
 
         return lottos
