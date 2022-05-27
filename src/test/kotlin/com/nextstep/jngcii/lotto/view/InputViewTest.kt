@@ -63,7 +63,7 @@ internal class InputViewTest {
         ]
     )
     fun `(당첨번호 파싱) 콤마(,)로 구분된 각 원소가 digit이 아니면 예외를 발생`(input: String) {
-        assertThrows<IllegalArgumentException>("콤마(,)로 구분된 숫자 리스트만 입력 가능합니다") {
+        assertThrows<IllegalArgumentException>("정수만 입력 가능합니다.") {
             InputView.getNumbers(input)
         }
     }

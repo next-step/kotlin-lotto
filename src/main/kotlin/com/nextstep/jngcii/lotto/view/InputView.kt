@@ -12,6 +12,13 @@ object InputView {
         return pay.getQuotient(LOTTO_PRICE)
     }
 
+    fun getNumbers(input: String?): List<Int> {
+        require(!input.isNullOrBlank()) { "입력값이 없습니다" }
+        return input
+            .split(",")
+            .map { it.trim().toIntOrThrow() }
+    }
+
     private fun String.toIntOrThrow(): Int {
         try {
             return this.toInt()
