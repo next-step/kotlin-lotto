@@ -47,4 +47,4 @@
   * [x] List<MatchState> -> MatchStates
   * [x] List<StatResult> -> StatResults
 * [x] 수익률 계산방식 변경
-* [ ] view 호출로직 최소화(마지막에 한번만 하면되지 않을까?)
+* [x] view 호출로직 최소화(마지막에 한번만 하면되지 않을까?)

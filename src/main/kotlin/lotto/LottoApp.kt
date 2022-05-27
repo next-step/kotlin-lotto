@@ -11,20 +11,11 @@ fun main() {
 
     val payment = inputView.readPayment()
     val receipt = Receipt(payment)
-
-    resultView.buyCount(receipt.lottoCount)
-
     val lottoMachine = LottoMachine(receipt)
-    val lottos = lottoMachine.issue()
-
-    resultView.lottoNumbers(lottos)
-
-    val lastNumber = inputView.readLastNumber()
-    val statResults = lottoMachine.verify(lastNumber, lottos)
-
-    resultView.result(statResults)
-
+    val lottoTickets = lottoMachine.issue()
+    val lastLottoTicket = inputView.readLastNumber()
+    val statResults = lottoMachine.verify(lastLottoTicket, lottoTickets)
     val yields = lottoMachine.yields(statResults)
 
-    resultView.yields(yields)
+    resultView.result(receipt, lottoTickets, statResults, yields)
 }

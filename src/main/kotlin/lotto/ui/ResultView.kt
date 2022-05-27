@@ -1,28 +1,39 @@
 package lotto.ui
 
 import lotto.domain.LottoTickets
-import lotto.domain.StatResult
+import lotto.domain.Receipt
+import lotto.domain.StatResults
 
 class ResultView {
+    fun result(
+        receipt: Receipt,
+        lottoTickets: LottoTickets,
+        statResults: StatResults,
+        yields: Double
+    ) {
+        buyCount(receipt.lottoCount)
+        lottoNumbers(lottoTickets)
+        stat(statResults)
+        yields(yields)
+    }
 
-    fun buyCount(count: Int) {
+    private fun buyCount(count: Int) {
         println("$count" + BUY_COUNT_TEXT)
     }
 
-    fun lottoNumbers(lottoTickets: LottoTickets) {
+    private fun lottoNumbers(lottoTickets: LottoTickets) {
         lottoTickets.lottoTickets.forEach { println(it.toText()) }
     }
 
-    fun result(resultList: List<StatResult>) {
+    private fun stat(statResults: StatResults) {
         println(WINING_STAT_TEXT)
-        resultList.forEach {
+        statResults.statResults.forEach {
             println(
-                WINING_RESULT_TEXT
-                    .format(
-                        it.matchState.matchCount,
-                        it.matchState.profit,
-                        it.count
-                    )
+                WINING_RESULT_TEXT.format(
+                    it.matchState.matchCount,
+                    it.matchState.profit,
+                    it.count
+                )
             )
         }
     }
