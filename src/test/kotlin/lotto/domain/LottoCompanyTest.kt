@@ -38,4 +38,12 @@ class LottoCompanyTest {
             LottoCompany(source)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["2, 2, 3, 4, 5, 6"])
+    internal fun `당첨번호는 중복이 되면 IllegalArgumentException을 던진다`(source: String) {
+        assertThrows<IllegalArgumentException> {
+            LottoCompany(source)
+        }
+    }
 }
