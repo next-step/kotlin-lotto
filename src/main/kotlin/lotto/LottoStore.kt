@@ -1,18 +1,25 @@
 package lotto
 
 import lotto.domain.LottoProvider
+import lotto.domain.WinningLotto
+import lotto.domain.prize.LottoPrizeCalculator
 import lotto.view.InputView
 import lotto.view.OutputView
 
 object LottoStore {
     fun open() {
-        val provider = LottoProvider(InputView.readTotalPayment())
+        val payment = InputView.readTotalPayment()
+        val provider = LottoProvider(payment)
 
         OutputView.printNumberOfLottosBought(provider.numberOfLottos)
         OutputView.printLottoNumbers(provider.lottos)
 
         if (provider.numberOfLottos > 0) {
-            val winningNumbers = InputView.readWinningNumbers()
+            val winningLotto = WinningLotto(InputView.readWinningNumbers())
+
+            val prizeCalculator = LottoPrizeCalculator(winningLotto, provider.lottos)
+
+            OutputView.printLottoPrizeStatistics(payment, prizeCalculator)
         }
     }
 }
