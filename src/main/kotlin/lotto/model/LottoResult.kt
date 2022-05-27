@@ -7,7 +7,7 @@ import lotto.constants.Messages
  * Created by Jaesungchi on 2022.05.25..
  */
 data class LottoResult(val prize: Prize, val count: Int) {
-    val prizeMessage: String = when (prize) {
+    val prizeMessage: String? = when (prize) {
         Prize.FIRST_PLACE -> {
             Messages.CORRECT_SIX.format(count)
         }
@@ -17,8 +17,9 @@ data class LottoResult(val prize: Prize, val count: Int) {
         Prize.THIRD_PLACE -> {
             Messages.CORRECT_FOUR.format(count)
         }
-        else -> {
+        Prize.FOURTH_PLACE -> {
             Messages.CORRECT_THREE.format(count)
         }
+        else -> null
     }
 }

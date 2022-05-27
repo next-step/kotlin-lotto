@@ -19,7 +19,9 @@ object OutputView {
     fun printLottoResult(lottoResults: List<LottoResult>) {
         println(Messages.LOTTO_RESULT)
         lottoResults.forEach {
-            println(it.prizeMessage)
+            it.prizeMessage?.let { message ->
+                println(message)
+            }
         }
     }
 
