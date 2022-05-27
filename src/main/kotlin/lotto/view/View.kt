@@ -10,7 +10,7 @@ object View {
         return readln().toInt()
     }
 
-    fun printAbleToPurchaseLottoCount(lottoStore: LottoStore) {
+    fun purchasableLottoCount(lottoStore: LottoStore) {
         lottoStore.purchasable.also {
             println("${it}개를 구매했습니다.")
         }
