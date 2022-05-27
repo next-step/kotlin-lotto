@@ -21,17 +21,6 @@ class LottoJudgmentTest {
     }
 
     @ParameterizedTest
-    @MethodSource("lottoNumbersAndMatchCount")
-    fun `지난주 당첨 번호와 일치하는 갯수를 확인한다`(numbers: List<Int>, matchCount: Int) {
-        val myLottoTicket = LottoTicket(numbers)
-
-        val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)
-
-        val matchNumberCount = lottoJudgment.matchNumberCount(myLottoTicket)
-        assertThat(matchNumberCount).isEqualTo(matchCount)
-    }
-
-    @ParameterizedTest
     @MethodSource("lottoNumbersAndRank")
     fun `로또 티켓을 전달하면, 등수를 반환한다`(ticketNumbers: List<Int>, rank: LottoWinnerRank) {
         val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)

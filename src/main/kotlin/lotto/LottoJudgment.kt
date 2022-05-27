@@ -16,11 +16,11 @@ class LottoJudgment(
         return getRanking(matchNumberCount, ticket.hasNumber(bonusNumber))
     }
 
-    fun matchNumberCount(ticket: LottoTicket): Int {
+    private fun matchNumberCount(ticket: LottoTicket): Int {
         return lastLottoWinnerTicket.matchCountWith(ticket)
     }
 
-    fun getRanking(matchNumberCount: Int, hasBonusNumber: Boolean): LottoWinnerRank {
+    private fun getRanking(matchNumberCount: Int, hasBonusNumber: Boolean): LottoWinnerRank {
         return LottoWinnerRank.getRank(matchNumberCount, hasBonusNumber)
     }
 }
