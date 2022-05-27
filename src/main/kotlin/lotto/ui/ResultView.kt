@@ -10,7 +10,7 @@ class ResultView {
     }
 
     fun lottoNumbers(lottoTickets: LottoTickets) {
-        lottoTickets.lottoTickets.forEach { println(it.numbers) }
+        lottoTickets.lottoTickets.forEach { println(it.toText()) }
     }
 
     fun result(resultList: List<StatResult>) {
