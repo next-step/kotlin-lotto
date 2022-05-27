@@ -40,10 +40,10 @@
   * [x] generateList 테스트코드 추가
 * [ ] intersect 적용
 * [ ] MatchState 관련 구조변경
-* [ ] Stat 도메인 책임분리
-* [ ] 일급컬렉션으로 변경
+* [x] Stat 도메인 책임을 LottoTickets, MatchStates 분리하다보니 StatResult로 대체 
+* [x] 일급컬렉션으로 변경
   * [x] List<LottoNumber> -> LottoTicket
   * [x] List<LottoTicket> -> LottoTickets
-  * [ ] List<MatchState> -> MatchStates
+  * [x] List<MatchState> -> MatchStates
 * [ ] 수익률 계산방식 변경
 * [ ] view 호출로직 최소화(마지막에 한번만 하면되지 않을까?)
