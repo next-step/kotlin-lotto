@@ -1,6 +1,6 @@
 package lotto.auto.domain
 
-import lotto.auto.port.NumberGenerator
+import lotto.auto.infra.port.NumberGenerator
 import lotto.auto.vo.LottoScore
 
 class Lotto(private val numbers: List<Int>) {

@@ -1,6 +1,6 @@
 package lotto.auto.view
 
-import lotto.auto.port.IOSystem
+import lotto.auto.infra.port.IOSystem
 
 class InputMoneyView(private val ioSystem: IOSystem) {
 

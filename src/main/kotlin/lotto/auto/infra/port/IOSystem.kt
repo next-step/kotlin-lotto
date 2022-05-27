@@ -1,3 +1,3 @@
-package lotto.auto.port
+package lotto.auto.infra.port
 
 interface IOSystem : InputSystem, OutputSystem
