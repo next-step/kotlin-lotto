@@ -18,4 +18,11 @@ internal class MoneyTest {
         assertThatIllegalArgumentException()
             .isThrownBy { Money(BigDecimal(-1)) }
     }
+
+    @Test
+    fun `나누기`() {
+        val money = Money(BigDecimal(1000))
+        val divideMoney = money.divide(1000)
+        assertThat(divideMoney.get).isEqualTo(1)
+    }
 }

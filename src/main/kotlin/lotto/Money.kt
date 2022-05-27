@@ -11,6 +11,8 @@ data class Money(private val _value: BigDecimal) {
     val get: Int
         get() = _value.intValueExact()
 
+    fun divide(value: Int): Money = Money(_value.divide(BigDecimal(value)))
+
     private fun validate(value: Int) {
         if (value <= 0) {
             throw IllegalArgumentException()
