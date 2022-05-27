@@ -16,7 +16,7 @@ internal class LottoPriceTest {
 
     @ParameterizedTest(name = "`{0}`인 경우 LottoPrice 생성 성공")
     @ValueSource(ints = [0, 1500, 1])
-    fun `입력한 값이 0이거나 양의 정수이면 LottoPrice 생성 성공`(price: Int) {
+    internal fun `입력한 값이 0이거나 양의 정수이면 LottoPrice 생성 성공`(price: Int) {
         assertThat(LottoPrice(price).get()).isEqualTo(price)
     }
 }

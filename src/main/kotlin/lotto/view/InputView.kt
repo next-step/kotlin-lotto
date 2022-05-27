@@ -3,10 +3,9 @@ package lotto.view
 import lotto.Const
 
 class InputView {
-    fun readPrice(): Int {
+    fun readPrice(): String? {
         printMsg(Const.OutputMsg.GET_PRICE_MSG)
-        val input = readInputAndRequireNotBlank()
-        return converseToInt(input)
+        return readlnOrNull()
     }
 
     private fun printMsg(message: String) = println(message)
