@@ -10,11 +10,6 @@ enum class LottoScore(private val matchCount: Int, private val rewardMoney: Int)
 
     companion object {
 
-        fun matchCountOf(count: Int): LottoScore {
-            if (count in 0..2) {
-                return BANG
-            }
-            return LottoScore.values().find { it.matchCount == count } ?: BANG
-        }
+        fun matchCountOf(count: Int): LottoScore = LottoScore.values().find { it.matchCount == count } ?: BANG
     }
 }
