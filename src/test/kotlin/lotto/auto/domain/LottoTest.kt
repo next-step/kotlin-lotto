@@ -86,5 +86,19 @@ internal class LottoTest : BehaviorSpec({
                 shouldThrow<IllegalArgumentException>(throwableAction)
             }
         }
+
+        `when`("자동 발급한 경우") {
+            val randomNumber = listOf(6, 5, 4, 3, 2, 1)
+            val result = Lotto.craeteRandomNumbers(RandomStub(randomNumber))
+            then("랜덤한 숫자를 가진 로또를 발행한다.") {
+                result.match(Lotto(randomNumber)) shouldBe LottoScore.ONE_PLACE
+            }
+        }
     }
 })
+
+class RandomStub(private val actualNumbers: List<Int>) {
+
+    private var index = 0
+    fun getNumber() = actualNumbers[index++]
+}
