@@ -2,7 +2,7 @@ package lotto
 
 import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
-import lotto.domain.UserMoney
+import lotto.domain.Money
 import lotto.domain.toLottoNumbers
 import lotto.view.InputView
 import lotto.view.PrintView
@@ -10,7 +10,7 @@ import lotto.view.PrintView
 fun main() {
     val userMoneyInput = InputView.getUserMoney()
 
-    val userMoney = UserMoney(userMoneyInput)
+    val userMoney = Money(userMoneyInput)
     val lottoStore = LottoStore(userMoney)
 
     PrintView.printLottoCount(lottoStore.lottoCount)

@@ -1,11 +1,11 @@
 package lotto.domain
 
-class LottoStore(private val userMoney: UserMoney, private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()) {
-    val lottoCount = userMoney.getLottoCount()
+class LottoStore(private val money: Money, private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()) {
+    val lottoCount = money.getLottoCount()
     val boughtLottos = List(lottoCount) { lottoMaker.makeLottoNumbers() }
     val totalYieldRatio
-        get() = totalMoney.money.toDouble() / userMoney.money
-    private var totalMoney = UserMoney()
+        get() = totalMoney.money.toDouble() / money.money
+    private var totalMoney = Money()
 
     fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
         val lottoResult = LottoPrizeInfo.values().map { LottoResult(it) }
@@ -25,7 +25,7 @@ class LottoStore(private val userMoney: UserMoney, private val lottoMaker: Lotto
         return lottoResult
     }
 
-    private fun addPrizeMoney(money: UserMoney) {
+    private fun addPrizeMoney(money: Money) {
         totalMoney += money
     }
 

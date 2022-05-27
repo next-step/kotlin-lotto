@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class UserMoney(val money: Int = 0) {
+value class Money(val money: Int = 0) {
 
     init {
         checkMoneyCondition()
@@ -15,8 +15,8 @@ value class UserMoney(val money: Int = 0) {
         return money / EACH_LOTTO_PRICE
     }
 
-    operator fun plus(other: UserMoney): UserMoney {
-        return UserMoney(money + other.money)
+    operator fun plus(other: Money): Money {
+        return Money(money + other.money)
     }
 
     companion object {
