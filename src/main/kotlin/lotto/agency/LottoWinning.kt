@@ -10,16 +10,24 @@ enum class LottoWinning(val matchCount: Int, val winningMoney: Int) {
     LOSE(0, 0);
 
     companion object {
+        private const val SECOND_OR_THIRD_PLACE_DECIDE = 5
+
         fun of(matchCount: Int, isMatchedBonus: Boolean): LottoWinning {
             return values().find {
-                if (matchCount == 5 && isMatchedBonus) {
-                    return SECOND_PLACE
-                } else if (matchCount == 5 && !isMatchedBonus) {
-                    return THIRD_PLACE
+                if (matchCount == SECOND_OR_THIRD_PLACE_DECIDE) {
+                    return decideSecondOrThirdPlace(isMatchedBonus)
                 } else {
                     it.matchCount == matchCount
                 }
             } ?: LOSE
+        }
+
+        private fun decideSecondOrThirdPlace(isMatchedBonus: Boolean): LottoWinning {
+            return if (isMatchedBonus) {
+                SECOND_PLACE
+            } else {
+                THIRD_PLACE
+            }
         }
     }
 }
