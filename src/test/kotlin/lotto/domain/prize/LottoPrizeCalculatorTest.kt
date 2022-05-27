@@ -3,7 +3,7 @@ package lotto.domain.prize
 import lotto.domain.Lotto
 import lotto.domain.WinningLotto
 import lotto.domain.numbers.CustomNumbersGenerator
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class LottoPrizeCalculatorTest {
@@ -47,7 +47,9 @@ class LottoPrizeCalculatorTest {
 
         val expectedTotalPrize = expectedPrizes.sumOf { it.prizeAmount }
 
-        Assertions.assertThat(prizeCalculator.prizes).isEqualTo(expectedPrizes)
-        Assertions.assertThat(prizeCalculator.totalPrizeAmount).isEqualTo(expectedTotalPrize)
+        assertThat(prizeCalculator.prizes).isEqualTo(expectedPrizes)
+        assertThat(prizeCalculator.totalPrizeAmount).isEqualTo(expectedTotalPrize)
+        assertThat(prizeCalculator.numberOf(LottoPrize.SIX_MATCHES)).isEqualTo(1)
+        assertThat(prizeCalculator.numberOf(LottoPrize.FIVE_MATCHES)).isEqualTo(2)
     }
 }

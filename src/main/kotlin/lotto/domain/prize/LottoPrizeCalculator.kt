@@ -9,4 +9,6 @@ class LottoPrizeCalculator(winningLotto: WinningLotto, lottoBought: List<Lotto>)
         .map { LottoPrize.of(it) }
 
     val totalPrizeAmount: Int = prizes.sumOf { it.prizeAmount }
+
+    fun numberOf(lottoPrize: LottoPrize) = prizes.filter { it == lottoPrize }.size
 }
