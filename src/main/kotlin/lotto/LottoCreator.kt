@@ -5,7 +5,7 @@ object LottoCreator {
 
     fun autoCreate(): LottoTicket {
 
-        val lottoNumbers = LOTTO_NUMBERS
+        val lottoNumbers = LottoPolicy.LOTTO_NUMBER_RANGE
             .shuffled()
             .take(PICK_LOTTO_NUMBER_SIZE)
             .sorted()

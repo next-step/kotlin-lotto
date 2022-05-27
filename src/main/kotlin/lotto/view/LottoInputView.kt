@@ -14,4 +14,9 @@ object LottoInputView {
         println("지난 주 당첨 번호를 입력해 주십시오.")
         return StringParser.getNumberStrings(readln()).map(::parseToInt)
     }
+
+    fun bonusNumberInputView(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return parseToInt(readln())
+    }
 }
