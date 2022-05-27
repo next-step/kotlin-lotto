@@ -6,7 +6,6 @@ class StringAddCalculator {
         if (text.isNullOrBlank()) {
             return ZERO
         }
-
         return text.toInt()
     }
 
