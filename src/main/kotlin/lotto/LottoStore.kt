@@ -10,6 +10,10 @@ object LottoStore {
 
         OutputView.printNumberOfLottosBought(provider.numberOfLottos)
         OutputView.printLottoNumbers(provider.lottos)
+
+        if (provider.numberOfLottos > 0) {
+            val winningNumbers = InputView.readWinningNumbers()
+        }
     }
 }
 
