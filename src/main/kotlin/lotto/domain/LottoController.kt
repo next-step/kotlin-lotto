@@ -4,7 +4,7 @@ import lotto.view.ResultView
 import lotto.view.View
 
 class LottoController() {
-    fun execute() {
+    fun play() {
         val insertAmount = View.insertAmount()
         val lottoStore = LottoStore(insertAmount)
         View.purchasableLottoCount(lottoStore)

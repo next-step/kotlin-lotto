@@ -1,25 +1,20 @@
 package lotto.domain
 
-import lotto.domain.dto.DrawNumberEnum
+import lotto.domain.dto.Rank
 import lotto.domain.dto.LottoNumber
 
 class LottoDrawResult(private val luckyDrawNumber: List<Int>) {
-    val getThree
-        get() = this.three
-    val getFour
-        get() = this.four
-    val getFive
-        get() = this.five
-    val getSix
-        get() = this.six
-    val getResult
-        get() = this.result
-    private var result: Long = 0
-    private var three: Int = 0
-    private var four: Int = 0
-    private var five: Int = 0
-    private var six = 0
-    private var none: Int = 0
+    var result: Long = 0
+        private set
+    var three: Int = 0
+        private set
+    var four: Int = 0
+        private set
+    var five: Int = 0
+        private set
+    var six = 0
+        private set
+    var none: Int = 0
 
     fun draw(lottoList: List<LottoNumber>) {
         lottoList.forEach {
@@ -34,21 +29,21 @@ class LottoDrawResult(private val luckyDrawNumber: List<Int>) {
 
     private fun plusCount(result: Int) {
         when (result) {
-            DrawNumberEnum.THREE.count -> {
+            Rank.FOURTH.count -> {
                 three++
-                this.result = this.result + DrawNumberEnum.THREE.amount
+                this.result = this.result + Rank.FOURTH.amount
             }
-            DrawNumberEnum.FOUR.count -> {
+            Rank.THIRD.count -> {
                 four++
-                this.result = this.result + DrawNumberEnum.FOUR.amount
+                this.result = this.result + Rank.THIRD.amount
             }
-            DrawNumberEnum.FIVE.count -> {
+            Rank.SECOND.count -> {
                 five++
-                this.result = this.result + DrawNumberEnum.FIVE.amount
+                this.result = this.result + Rank.SECOND.amount
             }
-            DrawNumberEnum.SIX.count -> {
+            Rank.FIRST.count -> {
                 six++
-                this.result = this.result + DrawNumberEnum.SIX.amount
+                this.result = this.result + Rank.FIRST.amount
             }
             else -> none++
         }
