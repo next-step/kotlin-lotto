@@ -5,7 +5,8 @@ import lotto.exception.WonLottoNumberCountInconsistencyException
 
 class LottoTicket(numbers: List<LottoNumber>) {
 
-    val numbers: List<LottoNumber>
+    var numbers: List<LottoNumber>
+    private set
 
     init {
         validateLottoCount(numbers)
