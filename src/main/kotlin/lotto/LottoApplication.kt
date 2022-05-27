@@ -20,4 +20,8 @@ fun main() {
     }
 
     val lottoCount = lottoPurchase.getLotto(lottoPrice)
+    outputView.resultPurchaseLotto(lottoCount)
+
+    val lottoTickets = lottoPurchase.getLottoTickets(lottoCount)
+    outputView.resultLottoTickets(lottoTickets)
 }

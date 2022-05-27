@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.Const
+import java.util.Collections
 
 class LottoPurchase {
     fun getMoney(money: String?): LottoPrice {
@@ -10,6 +11,14 @@ class LottoPurchase {
     }
 
     fun getLotto(price: LottoPrice) = price.get() / 1000
+
+    fun getLottoTickets(count: Int): List<LottoTicket> {
+        val lottoTickets = mutableListOf<LottoTicket>()
+        repeat(count) {
+            lottoTickets.add(LottoTicket.new())
+        }
+        return Collections.unmodifiableList(lottoTickets)
+    }
 
     companion object {
         const val LOTTO_PRICE = 1000

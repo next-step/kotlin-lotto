@@ -2,6 +2,7 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -36,5 +37,12 @@ internal class LottoPurchaseTest {
     internal fun `가격에 따라 구입할 로또의 개수를 구한다`(price: Int, lottoCount: Int) {
         val lottoPrice = LottoPrice(price)
         assertThat(lottoPurchase.getLotto(lottoPrice)).isEqualTo(lottoCount)
+    }
+
+    @Test
+    internal fun `입력한 개수에 맞추어 로또티켓을 받는다`() {
+        val expected = 5
+        val lottoTickets = lottoPurchase.getLottoTickets(expected)
+        assertThat(lottoTickets.size).isEqualTo(expected)
     }
 }
