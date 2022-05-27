@@ -9,13 +9,10 @@ import lotto.model.Prize
  * 당첨 번호를 갖고, 당첨 여부를 알려주는 클래스.
  * Created by Jaesungchi on 2022.05.25..
  */
-class LottoCompany(stringWinningNumber: String) {
+class LottoCompany(winningNumbers: List<Int>) {
     val winningTicket: LottoTicket
 
     init {
-        val winningNumbers = stringWinningNumber.split(",").map {
-            it.trim().toInt()
-        }
         require(winningNumbers.size == LOTTO_COUNT_LIMITS) { Messages.Error.WINNING_NUMBER_IS_OVER_BASE }
         winningTicket = LottoTicket(winningNumbers)
     }
@@ -37,5 +34,11 @@ class LottoCompany(stringWinningNumber: String) {
 
     companion object {
         private const val LOTTO_COUNT_LIMITS = 6
+        fun of(stringWinningNumber: String): LottoCompany {
+            val winningNumbers = stringWinningNumber.split(",").map {
+                it.trim().toInt()
+            }
+            return LottoCompany(winningNumbers)
+        }
     }
 }
