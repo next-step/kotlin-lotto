@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.dto.Rank
 import lotto.domain.dto.LottoNumber
+import lotto.domain.dto.Rank
 
 class LottoDrawResult(private val luckyDrawNumber: List<Int>) {
     var result: Long = 0
@@ -14,7 +14,7 @@ class LottoDrawResult(private val luckyDrawNumber: List<Int>) {
         private set
     var six = 0
         private set
-    var none: Int = 0
+    private var none: Int = 0
 
     fun draw(lottoList: List<LottoNumber>) {
         lottoList.forEach {
