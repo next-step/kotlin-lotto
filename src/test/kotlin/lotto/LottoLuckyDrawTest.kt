@@ -1,5 +1,8 @@
 package lotto
 
+import lotto.domain.LottoDrawResult
+import lotto.domain.LottoLuckyDraw
+import lotto.domain.dto.LottoNumber
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -19,7 +22,7 @@ class LottoLuckyDrawTest {
     @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
     internal fun `당첨 테스트`(input: String) {
         val lottoList = listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6)))
-        LottoLuckyDraw(input).draw(lottoList)
+        LottoDrawResult(LottoLuckyDraw(input).luckyNumber).draw(lottoList)
     }
 
     @ParameterizedTest

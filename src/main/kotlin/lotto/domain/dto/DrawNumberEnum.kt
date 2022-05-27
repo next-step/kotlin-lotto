@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain.dto
 
-enum class MatchEnum(val count: Int, val amount: Long) {
+enum class DrawNumberEnum(val count: Int, val amount: Long) {
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),

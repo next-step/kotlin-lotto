@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoStore
+import lotto.domain.dto.LottoNumber
 
 object View {
 
@@ -8,7 +11,7 @@ object View {
     }
 
     fun printAbleToPurchaseLottoCount(lottoStore: LottoStore) {
-        lottoStore.ableToPurchaseCount.also {
+        lottoStore.purchasable.also {
             println("${it}개를 구매했습니다.")
         }
     }
