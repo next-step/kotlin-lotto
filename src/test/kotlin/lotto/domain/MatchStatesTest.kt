@@ -7,6 +7,7 @@ class MatchStatesTest {
     @Test
     fun `로또번호가 3개이상 일치하는 로또티켓별로 당첨번호개수와 당첨금액을 확인한다`() {
         val matchStates = listOf(
+            MatchState.NOT_MATCH,
             MatchState.MATCH_6,
             MatchState.MATCH_6,
             MatchState.MATCH_5,

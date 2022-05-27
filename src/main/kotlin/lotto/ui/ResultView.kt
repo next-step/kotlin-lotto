@@ -16,7 +16,14 @@ class ResultView {
     fun result(resultList: List<StatResult>) {
         println(WINING_STAT_TEXT)
         resultList.forEach {
-            println(it.matchState.descriptor.format(it.count))
+            println(
+                WINING_RESULT_TEXT
+                    .format(
+                        it.matchState.matchCount,
+                        it.matchState.profit,
+                        it.count
+                    )
+            )
         }
     }
 
@@ -27,6 +34,7 @@ class ResultView {
     companion object {
         private const val BUY_COUNT_TEXT = "개를 구매했습니다."
         private const val WINING_STAT_TEXT = "\n당첨 통계\n---------"
+        private const val WINING_RESULT_TEXT = "%s개 일치 (%s원)- %s개"
         private const val TRY_COUNT_TEXT = "총 수익률은 %s입니다."
     }
 }
