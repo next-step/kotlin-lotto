@@ -17,6 +17,7 @@ class MatchStatesTest {
             StatResult(MatchState.MATCH_3),
             StatResult(MatchState.MATCH_4, 2, MatchState.MATCH_4.profit * 2),
             StatResult(MatchState.MATCH_5, 1, MatchState.MATCH_5.profit * 1),
+            StatResult(MatchState.MATCH_5_BONUS),
             StatResult(MatchState.MATCH_6)
         )
         val accumulateList = MatchStates(matchStates).accumulate()
