@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class LottoNumbersTest {
     @Test
     fun `LottoNumbers에 교집합의 개수가 맞는지 테스트`() {
-        val numbers1 = LottoNumbers(
+        val lottoAnswer = LottoNumbers(
             listOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -14,7 +14,7 @@ class LottoNumbersTest {
             )
         )
 
-        val numbers2 = LottoNumbers(
+        val userPickedLotto = LottoNumbers(
             listOf(
                 LottoNumber(1),
                 LottoNumber(3),
@@ -22,7 +22,7 @@ class LottoNumbersTest {
             )
         )
 
-        val answer = numbers1.intersectCount(numbers2)
+        val answer = lottoAnswer.intersectCount(userPickedLotto)
         val expect = 2
 
         assertThat(answer).isEqualTo(expect)
