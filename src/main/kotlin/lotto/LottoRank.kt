@@ -7,7 +7,6 @@ enum class LottoRank(val matchCount: Int, val price: Long) {
     THREE_MATCH(3, 5_000L),
     LOSE(0, 0);
 
-
     companion object {
 
         fun selectRank(matchCount: Int): LottoRank {
