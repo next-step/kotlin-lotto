@@ -3,6 +3,7 @@ package lotto.auto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.auto.port.NumberGenerator
 import lotto.auto.vo.LottoScore
 
 internal class LottoTest : BehaviorSpec({
@@ -89,7 +90,7 @@ internal class LottoTest : BehaviorSpec({
 
         `when`("자동 발급한 경우") {
             val randomNumber = listOf(6, 5, 4, 3, 2, 1)
-            val result = Lotto.craeteRandomNumbers(RandomStub(randomNumber))
+            val result = Lotto.createRandomNumbers(RandomStub(randomNumber))
             then("랜덤한 숫자를 가진 로또를 발행한다.") {
                 result.match(Lotto(randomNumber)) shouldBe LottoScore.ONE_PLACE
             }
@@ -97,8 +98,8 @@ internal class LottoTest : BehaviorSpec({
     }
 })
 
-class RandomStub(private val actualNumbers: List<Int>) {
+class RandomStub(private val actualNumbers: List<Int>) : NumberGenerator {
 
     private var index = 0
-    fun getNumber() = actualNumbers[index++]
+    override fun getNumber() = actualNumbers[index++]
 }
