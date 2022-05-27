@@ -207,4 +207,37 @@ class LottoJudgeTest {
 
         assertThat(determinedLottoTicket[LottoWinning.FOURTH_PLACE]).isEqualTo(1)
     }
+
+    @Test
+    fun `로또가 당첨되지 않은 경우`() {
+
+        val lottoTickets = listOf(
+            LottoTicket(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            )
+        )
+        val wonLottoTicket = LottoTicket(
+            listOf(
+                LottoNumber(10),
+                LottoNumber(1),
+                LottoNumber(27),
+                LottoNumber(44),
+                LottoNumber(2),
+                LottoNumber(7)
+            )
+        )
+        val bonusLottoNumber = 7
+
+        val lottoJudge = LottoJudge()
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+
+        assertThat(determinedLottoTicket[LottoWinning.LOSE]).isEqualTo(1)
+    }
 }
