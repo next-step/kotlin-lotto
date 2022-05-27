@@ -12,10 +12,6 @@ class LottoMachine(private val receipt: Receipt) {
     }
 
     fun yields(resultList: List<StatResult>): Double {
-        val totalProfit = resultList.sumOf { it.sum }
-        return Profit(
-            profit = totalProfit.toDouble(),
-            payment = receipt.payment.toDouble()
-        ).yields
+        return StatResults(resultList).yield(receipt)
     }
 }
