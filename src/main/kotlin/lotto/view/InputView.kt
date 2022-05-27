@@ -33,6 +33,19 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
         writeLine("\n지난 주 당첨 번호를 입력해 주세요.")
     }
 
+    fun readBonusLottoNumber(): Int {
+        printInputBonusLottoNumber()
+
+        val value = reader()
+        requireNotNull(value)
+        require(value.isNotBlank())
+        return runCatching { value.toInt() }.getOrIllegalArgumentException()
+    }
+
+    private fun printInputBonusLottoNumber() {
+        writeLine("보너스 볼을 입력해 주세요.")
+    }
+
     private fun writeLine(message: String) = writer("$message\n")
 
     private fun String.tokenize(): List<String> =

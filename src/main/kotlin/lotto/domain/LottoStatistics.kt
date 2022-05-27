@@ -1,28 +1,20 @@
 package lotto.domain
 
-class LottoStatistics(
-    private val lottoTickets: List<LottoTicket>,
-    private val lastLottoNumbers: Set<Int>
-) {
+import java.math.BigDecimal
+import java.math.MathContext
 
-    init {
-        require(lottoTickets.isNotEmpty())
-    }
+typealias MatchCount = Int
 
-    fun getMatchCount(match: LottoMatch): Int = getMatchCount(match.count)
+class LottoStatistics(private val statistics: Map<LottoMatch, MatchCount>) : Map<LottoMatch, Int> by statistics {
 
-    private fun getMatchCount(matchCount: Int): Int =
-        lottoTickets
-            .filter { it.numbers.intersect(lastLottoNumbers).size == matchCount }
-            .size
-
-    fun getProfit(purchase: Int): Double {
+    fun getProfit(purchase: Int): BigDecimal {
         require(purchase > 0)
-        return getRewards().toDouble() / purchase.toDouble()
+        return getRewards().divide(purchase.toBigDecimal(), MathContext.DECIMAL128)
     }
 
-    private fun getRewards(): Long =
-        LottoMatch
-            .values()
-            .sumOf { getMatchCount(it) * it.reward }
+    private fun getRewards(): BigDecimal {
+        return filterValues { count -> count > 0 }
+            .map { it.key.reward.toBigDecimal() * it.value.toBigDecimal() }
+            .sumOf { it }
+    }
 }
