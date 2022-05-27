@@ -79,7 +79,12 @@ internal class LottoTest : BehaviorSpec({
         }
 
         `when`("1~45 범위 외의 숫자가 포함된 경우") {
-            then("IllegalArgumentException 예외를 던진다.")
+            val throwableAction = {
+                Lotto(listOf(1, 2, 3, 46, 5, 6))
+            }
+            then("IllegalArgumentException 예외를 던진다.") {
+                shouldThrow<IllegalArgumentException>(throwableAction)
+            }
         }
     }
 })
