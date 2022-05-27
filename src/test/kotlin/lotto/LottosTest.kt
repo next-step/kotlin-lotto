@@ -7,7 +7,6 @@ internal class LottosTest {
 
     @Test
     fun `로또객체생성`() {
-
         val lottoNumbers = hashSetOf(
             LottoNumber(2),
             LottoNumber(3),
