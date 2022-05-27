@@ -1,0 +1,5 @@
+package newlotto
+
+fun main() {
+
+}
