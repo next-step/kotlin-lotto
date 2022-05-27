@@ -9,7 +9,8 @@ class StringAddCalculator {
 
         return CustomSplitter.splitStrings(text)
             .ifEmpty { DefaultSplitter.splitStrings(text) }
-            .map { it.toInt() }
+            .map(::PositiveNumber)
+            .map { it.value() }
             .reduce { a, b -> a + b }
     }
 
