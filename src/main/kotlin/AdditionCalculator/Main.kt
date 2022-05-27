@@ -11,7 +11,6 @@ fun main() {
   }
 
   val splitter = Splitter(expression)
-  println(splitter.tokens)
-
-
+  val result = StringAddCalculator().add(splitter.tokens)
+  ResultView.showResult(result)
 }
