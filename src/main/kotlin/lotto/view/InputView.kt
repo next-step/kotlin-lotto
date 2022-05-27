@@ -20,6 +20,7 @@ class InputView {
         val text = readln().trim().split(",")
         text.map { validateNotString(it) }
         val wonLottoNumbers = text.map { it.toInt() }.map { LottoNumber(it) }
+        
         validateWonLottoNumberCount(wonLottoNumbers)
 
         return LottoTicket(wonLottoNumbers)
@@ -34,7 +35,7 @@ class InputView {
         validateBonusLottoTicket(wonLottoTicket, LottoNumber(bonusLottoNumber))
         return bonusLottoNumber
     }
-
+    
     private fun validateNotString(toCheck: String) {
         if (toCheck.toIntOrNull() == null) {
             throw NotNumericException("로또 구매를 위해서는 숫자를 입력하셔야 합니다.")

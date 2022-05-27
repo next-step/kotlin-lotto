@@ -79,6 +79,7 @@ class LottoJudgeTest {
 
     @Test
     fun `로또 3등에 당첨된 경우`() {
+      
         val lottoTickets = listOf(
             LottoTicket(
                 listOf(
