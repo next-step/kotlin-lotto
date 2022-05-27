@@ -1,7 +1,9 @@
 package lotto
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
 import lotto.domain.UserMoney
+import lotto.domain.toLottoNumbers
 import lotto.view.InputView
 import lotto.view.PrintView
 
@@ -15,7 +17,8 @@ fun main() {
     PrintView.printBoughtLottoList(lottoStore.boughtLottos)
 
     val answer = InputView.getLottoAnswer()
-    val winnerInfos = lottoStore.getLottoResult(answer)
+    val bonusBall = InputView.getBonusBall()
+    val winnerInfos = lottoStore.getLottoResult(answer.toLottoNumbers(), LottoNumber(bonusBall))
     PrintView.printWinnerInfos(winnerInfos)
 
     val yieldRatio = lottoStore.totalYieldRatio

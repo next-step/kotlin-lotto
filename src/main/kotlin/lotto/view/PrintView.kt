@@ -11,6 +11,7 @@ object PrintView {
     private const val LOTTO_COUNT_MESSAGE = "개를 구매했습니다."
 
     private const val LOTTO_WIN_FORMAT = "%d개 일치(%d원)- %d개"
+    private const val LOTTO_WIN_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개"
     private const val LOTTO_YIELD_RATIO_FORMAT = "총 수익률은 %.2f입니다."
 
     fun printLottoCount(count: Int) {
@@ -19,7 +20,7 @@ object PrintView {
 
     fun printBoughtLottoList(boughtLotto: List<LottoNumbers>) {
         repeat(boughtLotto.size) { lottoIdx ->
-            val lottoResult = boughtLotto[lottoIdx].lottoNumbers.joinToString(LOTTO_NUMBER_SEPARATOR)
+            val lottoResult = boughtLotto[lottoIdx].lottoNumbers.map { it.number }.joinToString(LOTTO_NUMBER_SEPARATOR)
 
             println("$LOTTO_NUMBER_PREFIX$lottoResult$LOTT_NUMBER_POSTFIX")
         }
@@ -31,7 +32,8 @@ object PrintView {
 
     fun printWinnerInfos(result: List<LottoResult>) {
         result.forEach {
-            val printResult = LOTTO_WIN_FORMAT.format(it.prize.matchCount, it.prize.money, it.count)
+            val lottoFormat = if (it.isBonus) LOTTO_WIN_BONUS_FORMAT else LOTTO_WIN_FORMAT
+            val printResult = lottoFormat.format(it.prize.matchCount, it.prize.money, it.count)
 
             println(printResult)
         }

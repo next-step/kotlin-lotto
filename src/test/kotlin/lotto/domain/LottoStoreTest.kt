@@ -19,7 +19,8 @@ class LottoStoreTest {
 
     @Test
     fun `로또 각당첨등수 개수가 바른지 테스트`() {
-        val lottoAnswer = listOf(1, 2, 3, 4, 5, 6)
+        val lottoAnswer = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val bonusBall = LottoNumber(10)
         val myMoney = 3000
         val lottoMaker = object : LottoMaker {
             private val lottoList = listOf(
@@ -31,13 +32,12 @@ class LottoStoreTest {
             private var idx = 0
 
             override fun makeLottoNumbers(): LottoNumbers {
-                return LottoNumbers(lottoList[idx++])
+                return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
         }
 
         val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
-
-        val lottoResult = lottoStore.getLottoResult(lottoAnswer)
+        val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 
         val answer3prize = lottoResult.first { it.prize == LottoPrizeInfo.WIN3 }.count
         val answer4prize = lottoResult.first { it.prize == LottoPrizeInfo.WIN4 }.count
@@ -57,7 +57,8 @@ class LottoStoreTest {
 
     @Test
     fun `로또 당첨의 수익률이 바른지 테스트`() {
-        val lottoAnswer = listOf(1, 2, 3, 4, 5, 6)
+        val lottoAnswer = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val bonusBall = LottoNumber(10)
         val myMoney = 3000
         val lottoMaker = object : LottoMaker {
             private val lottoList = listOf(
@@ -69,23 +70,23 @@ class LottoStoreTest {
             private var idx = 0
 
             override fun makeLottoNumbers(): LottoNumbers {
-                return LottoNumbers(lottoList[idx++])
+                return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
         }
 
         val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
 
-        val lottoResult = lottoStore.getLottoResult(lottoAnswer)
+        val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 
         val prize3 = lottoResult.first { it.prize == LottoPrizeInfo.WIN3 }
         val prize4 = lottoResult.first { it.prize == LottoPrizeInfo.WIN4 }
         val prize5 = lottoResult.first { it.prize == LottoPrizeInfo.WIN5 }
         val prize6 = lottoResult.first { it.prize == LottoPrizeInfo.WIN6 }
 
-        val prize3Money = prize3.prize.money * prize3.count
-        val prize4Money = prize4.prize.money * prize4.count
-        val prize5Money = prize5.prize.money * prize5.count
-        val prize6Money = prize6.prize.money * prize6.count
+        val prize3Money = prize3.prize.money.money * prize3.count
+        val prize4Money = prize4.prize.money.money * prize4.count
+        val prize5Money = prize5.prize.money.money * prize5.count
+        val prize6Money = prize6.prize.money.money * prize6.count
 
         val totalMoney = prize3Money + prize4Money + prize5Money + prize6Money
         val answer = lottoStore.totalYieldRatio

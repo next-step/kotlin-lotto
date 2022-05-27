@@ -81,3 +81,33 @@
 - [x] LottoResult의 prize 카운트를 내부에서 제어하기
 - [x] LottoResult의 돈 증가를 하나의 기능으로 제공하기
 - [x] 통합도메인테스트 외에 각 클래스기능별 테스트도 고려해보기
+
+### 3차 todo list
+- [x] 린트 확인
+- [x] 로또번호들도 VO객체로?
+- [x] UserMoney inline class 고려
+- [x] 테스트 이름 수정
+
+
+## 3단계 - 로또(2등)
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야한다.
+
+### 1차 todo list
+- [x] 보너스 볼을 입력받는다
+- [x] 보너스볼도 비교한다
+- [x] 보너스볼의 결과도 수익률에 반영한다
+- [x] 마지막으로 린트체크
+
+### 2차 todo list
+- [x] user money가 한개 가격을 받아 카운트를 리턴하게?
+- [x] LottoNumber도 인라인 클래스로
+- [x] LottoNumber를 재사용 가능하게 캐싱을 이용
+- [x] totalMoney와 money모두 유저머니 객체로? 
+- [x] getMatchCount의 네이밍 고민
+- [x] lotto1.intersectCount(lotto2)를 직접 호출하기
+- [x] LottoNumbers 테스트 추가
+- [x] view단에서 도메인객체까지 만들어주지말고 도메인단에서 생성
+- [x] checkValidBonusBall 테스트
+- [x] 보너스볼 에러메시지 이상한지 체크
+- [x] 이넘값 자체가 보너스볼인지 판단하게 갖고있기

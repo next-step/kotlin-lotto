@@ -14,6 +14,14 @@ class InputValidatorTest {
         }
     }
 
+    @ValueSource(strings = ["-1", "0"])
+    @ParameterizedTest
+    fun `보너스볼 자연수가 아닌 수로 입력했을때 에러 발생시키는지 테스트`(input: String) {
+        assertThrows<IllegalArgumentException> {
+            InputValidator.checkValidBonusBall(input)
+        }
+    }
+
     @ValueSource(strings = ["1,2,3", "1", "1,2,3,4,5,6,7,8"])
     @ParameterizedTest
     fun `로또번호의 개수가 6개가 아닐때 에러인지 테스트`(input: String) {
