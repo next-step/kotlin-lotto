@@ -6,8 +6,8 @@ class LottoMachine(private val receipt: Receipt) {
         return LottoTickets(lottoTickets)
     }
 
-    fun verify(lastNumber: LottoTicket, lottoTickets: LottoTickets): StatResults {
-        val checker = Checker(lastNumber)
+    fun verify(lastNumber: LottoTicket, bonusNumber: LottoNumber, lottoTickets: LottoTickets): StatResults {
+        val checker = Checker(lastNumber, bonusNumber)
         val matchStateList = lottoTickets.win(checker)
         val statResultList = MatchStates(matchStateList).accumulate()
         return StatResults(statResultList)

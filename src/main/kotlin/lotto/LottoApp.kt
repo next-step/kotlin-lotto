@@ -14,7 +14,8 @@ fun main() {
     val lottoMachine = LottoMachine(receipt)
     val lottoTickets = lottoMachine.issue()
     val lastLottoTicket = inputView.readLastNumber()
-    val statResults = lottoMachine.verify(lastLottoTicket, lottoTickets)
+    val bonusNumber = inputView.readBonusNumber()
+    val statResults = lottoMachine.verify(lastLottoTicket, bonusNumber, lottoTickets)
     val yields = lottoMachine.yields(statResults)
 
     resultView.result(receipt, lottoTickets, statResults, yields)

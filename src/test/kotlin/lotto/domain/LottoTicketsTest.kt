@@ -38,7 +38,7 @@ class LottoTicketsTest {
             )
         )
 
-        val checker = Checker(lastWinTicket)
+        val checker = Checker(lastWinTicket, LottoNumber(45))
         val winList = LottoTickets(
             listOf(
                 lottoTicket1,
