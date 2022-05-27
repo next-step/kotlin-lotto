@@ -24,7 +24,11 @@ class ResultView {
         winnings
             .filter { it.key != LottoWinning.LOSE }
             .map {
-                println("${it.key.matchCount}개 일치 (${it.key.winningMoney}원) : ${it.value}개")
+                if (it.key == LottoWinning.SECOND_PLACE) {
+                    println("${it.key.matchCount}개 일치, 보너스 볼 일치 (${it.key.winningMoney}원) : ${it.value}개")
+                } else {
+                    println("${it.key.matchCount}개 일치 (${it.key.winningMoney}원) : ${it.value}개")
+                }
             }
     }
 

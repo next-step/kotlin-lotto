@@ -24,6 +24,14 @@ class InputView {
         return LottoTicket(wonLottoNumbers)
     }
 
+    fun enterBonusLottoNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+
+        val text = readln()
+        validateNotString(text)
+        return text.toInt()
+    }
+
     private fun validateNotString(toCheck: String) {
         if (toCheck.toIntOrNull() == null) {
             throw NotNumericException("로또 구매를 위해서는 숫자를 입력하셔야 합니다.")
