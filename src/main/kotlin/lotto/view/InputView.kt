@@ -32,7 +32,7 @@ object InputView {
         return readln()
     }
 
-    fun getLottoAnswer(): List<Int>{
+    fun getLottoAnswer(): List<Int> {
         var lottoInput: String
         do {
             lottoInput = getUserInputWithMessage(LOTTO_ANSWER_INPUT_MESSAGE)
