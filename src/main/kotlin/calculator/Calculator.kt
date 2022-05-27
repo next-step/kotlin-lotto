@@ -1,10 +1,13 @@
 package calculator
 
 class Calculator {
+    private val customDelimiterRegex = Regex("//(.)\n(.*)")
+    private val defaultDelimiters = arrayOf(",", ":")
+
     fun add(expression: String?): Int {
         if (expression.isNullOrEmpty()) return 0
 
-        Regex("//(.)\n(.*)").find(expression)?.let { matchResult ->
+        customDelimiterRegex.find(expression)?.let { matchResult ->
             val customDelimiter = matchResult.groupValues[1]
             return processCalculate(expression = matchResult.groupValues[2], customDelimiter = customDelimiter)
         }
@@ -17,31 +20,20 @@ class Calculator {
 
         val numbers = expression.split(delimiters = delimiters).map { it.toInt() }
         checkNegativeNumber(numbers)
-        return addNumbers(numbers)
+        return numbers.sum()
     }
 
     private fun getDelimiters(customDelimiter: String?): Array<String> {
-        var delimiters = arrayOf(",", ":")
-
         customDelimiter?.let {
-            delimiters = delimiters.plus(customDelimiter)
+            return defaultDelimiters.plus(customDelimiter)
         }
 
-        return delimiters
+        return defaultDelimiters
     }
 
     private fun checkNegativeNumber(numbers: List<Int>) {
         numbers.forEach { number ->
             if (number < 0) throw RuntimeException()
         }
-    }
-
-    private fun addNumbers(numbers: List<Int>): Int {
-        var result = 0
-        numbers.forEach { number ->
-            result += number
-        }
-
-        return result
     }
 }
