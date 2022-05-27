@@ -8,12 +8,10 @@ import lotto.domain.StatResults
 class ResultView {
     fun result(
         receipt: Receipt,
-        lottoTickets: LottoTickets,
         statResults: StatResults,
         yields: Double
     ) {
         buyCount(receipt.lottoCount)
-        lottoNumbers(lottoTickets)
         stat(statResults)
         yields(yields)
     }
@@ -22,7 +20,7 @@ class ResultView {
         println("$count" + BUY_COUNT_TEXT)
     }
 
-    private fun lottoNumbers(lottoTickets: LottoTickets) {
+    fun lottoNumbers(lottoTickets: LottoTickets) {
         lottoTickets.lottoTickets.forEach { println(it.toText()) }
     }
 
