@@ -11,6 +11,6 @@ class Receipt(val payment: Int) {
     fun buyPrice() = lottoCount * LOTTO_PRICE
 
     companion object {
-        const val LOTTO_PRICE = 1_000
+        private const val LOTTO_PRICE = 1_000
     }
 }

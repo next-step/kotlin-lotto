@@ -12,10 +12,8 @@ enum class MatchState(val matchCount: Int, val profit: Int) {
     companion object {
         fun of(matchCount: Int, isBonus: Boolean): MatchState {
             if (isBonus) return MATCH_5_BONUS
-
-            return runCatching {
-                values().first { it.matchCount == matchCount }
-            }.getOrDefault(NOT_MATCH)
+            return values().firstOrNull { it.matchCount == matchCount }
+                ?: NOT_MATCH
         }
     }
 }
