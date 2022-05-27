@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.constants.Messages
 import lotto.domain.LottoTicketFactory
 
 /**
@@ -8,7 +9,7 @@ import lotto.domain.LottoTicketFactory
  */
 data class LottoTicket(val numbers: List<Int>) {
     init {
-        require(numbers.none { it !in LottoTicketFactory.LOTTO_NUMBER_RANGE })
-        require(numbers.size == numbers.toSet().size)
+        require(numbers.none { it !in LottoTicketFactory.LOTTO_NUMBER_RANGE }) { Messages.Error.NUMBER_IS_OVER_OR_UNDER_BASE }
+        require(numbers.size == numbers.toSet().size) { Messages.Error.CANNOT_DUPLICATE_NUMBER }
     }
 }

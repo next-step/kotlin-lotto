@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.constants.Messages
 import lotto.model.LottoResult
 import lotto.model.LottoTicket
 import lotto.model.Prize
@@ -15,7 +16,7 @@ class LottoCompany(stringWinningNumber: String) {
         val winningNumbers = stringWinningNumber.split(",").map {
             it.trim().toInt()
         }
-        require(winningNumbers.size == LOTTO_COUNT_LIMITS)
+        require(winningNumbers.size == LOTTO_COUNT_LIMITS) { Messages.Error.WINNING_NUMBER_IS_OVER_BASE }
         winningTicket = LottoTicket(winningNumbers)
     }
 
