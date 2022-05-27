@@ -30,6 +30,10 @@ class Lotto {
         return numbers.hashCode()
     }
 
+    fun toString(delimiter: String, prefix: String = "", postfix: String = ""): String {
+        return numbers.joinToString(delimiter, prefix, postfix)
+    }
+
     companion object {
         val LOTTO_NUMBER_RANGE = 1..45
         const val LOTTO_NUMBER_COUNT = 6
