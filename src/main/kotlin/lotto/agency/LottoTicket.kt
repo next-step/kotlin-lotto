@@ -1,34 +1,28 @@
 package lotto.agency
 
-class LottoTicket() {
+import lotto.exception.AlreadySelectedNumberException
+import lotto.exception.WonLottoNumberCountInconsistencyException
 
-    private var _numbers: List<Int>
+class LottoTicket(numbers: List<LottoNumber>) {
+
+    var numbers: List<LottoNumber>
 
     init {
-        this._numbers = takeLottoNumbers()
-    }
-
-    constructor(numbers: List<Int>) : this() {
-        this._numbers = numbers
-    }
-
-    val numbers: List<Int>
-        get() {
-            return _numbers
+        if (numbers.size != 6) {
+            throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 6개를 입력해야합니다.")
         }
+
+        this.numbers = numbers.toList()
+    }
+
+    fun checkDuplicate(number: Int) {
+        if (numbers.contains(LottoNumber(number)))
+            throw AlreadySelectedNumberException("이미 선택된 번호입니다.")
+    }
 
     fun countMatchWonLottoTicket(wonLottoTicket: LottoTicket): Int {
-        return _numbers
+        return numbers.map { it.number }
             .sorted()
-            .count { wonLottoTicket._numbers.contains(it) }
-    }
-
-    private fun takeLottoNumbers(): List<Int> {
-        val grabs = mutableSetOf<Int>()
-        while (grabs.size < 6) {
-            grabs.add(LottoNumber.getRandomOne())
-        }
-
-        return grabs.toList()
+            .count { wonLottoTicket.numbers.map { it.number }.contains(it) }
     }
 }

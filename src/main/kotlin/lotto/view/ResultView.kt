@@ -10,8 +10,8 @@ class ResultView {
     }
 
     fun printPurchaseLottoTickets(lottoTickets: List<LottoTicket>) {
-        lottoTickets.map {
-            println(it.numbers)
+        lottoTickets.map { lottoTicket ->
+            println(lottoTicket.numbers.map { it.number })
         }
     }
 

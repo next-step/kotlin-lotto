@@ -1,7 +1,7 @@
 package lotto.view
 
+import lotto.agency.LottoNumber
 import lotto.agency.LottoTicket
-import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.NotNumericException
 import lotto.exception.WonLottoNumberCountInconsistencyException
 
@@ -19,7 +19,7 @@ class InputView {
 
         val text = readln().trim().split(",")
         text.map { validateNotString(it) }
-        val wonLottoNumbers = text.map { it.toInt() }
+        val wonLottoNumbers = text.map { it.toInt() }.map { LottoNumber(it) }
         validateWonLottoNumberCount(wonLottoNumbers)
 
         return LottoTicket(wonLottoNumbers)
@@ -42,12 +42,10 @@ class InputView {
     }
 
     private fun validateBonusLottoTicket(wonLottoTicket: LottoTicket, bonusLottoNumber: Int) {
-        if (wonLottoTicket.numbers.contains(bonusLottoNumber)) {
-            throw AlreadySelectedNumberException("이미 선택된 번호입니다.")
-        }
+        wonLottoTicket.checkDuplicate(bonusLottoNumber)
     }
 
-    private fun validateWonLottoNumberCount(toCheck: List<Int>) {
+    private fun validateWonLottoNumberCount(toCheck: List<LottoNumber>) {
         if (toCheck.size != WON_LOTTO_NUMBER_COUNT) {
             throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 ${WON_LOTTO_NUMBER_COUNT}개를 입력해야합니다.")
         }

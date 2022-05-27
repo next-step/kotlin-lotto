@@ -13,7 +13,7 @@ class LottoPurchaseTest {
         val money = 13500
         val lottoSeller = LottoSeller()
         val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
-        val purchaseLottoTickets = lottoSeller.sell(lottoPurchaseAmount)
+        val purchaseLottoTickets = lottoSeller.buy(lottoPurchaseAmount)
 
         assertThat(purchaseLottoTickets.size).isEqualTo(lottoPurchaseAmount)
     }

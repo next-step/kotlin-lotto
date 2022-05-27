@@ -18,7 +18,7 @@ class LottoJudge {
     }
 
     private fun isContainsBonusLottoNumber(lottoTicket: LottoTicket, bonusLottoNumber: Int): Boolean {
-        return lottoTicket.numbers.contains(bonusLottoNumber)
+        return lottoTicket.numbers.map { it.number }.contains(bonusLottoNumber)
     }
 
     companion object {
