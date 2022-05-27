@@ -19,5 +19,5 @@ object StringAddCalculator {
         else -> throw IllegalArgumentException("알맞은 수식어가 아닙니다.")
     }
 
-    private fun List<String>.getSumOfStrings() = sumOf { PositiveNumber.get(it) }
+    private fun List<String>.getSumOfStrings() = sumOf { PositiveNumber(it).value }
 }
