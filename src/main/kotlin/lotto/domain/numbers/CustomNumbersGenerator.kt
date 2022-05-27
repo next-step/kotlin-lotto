@@ -1,4 +1,4 @@
-package lotto.numbers
+package lotto.domain.numbers
 
 class CustomNumbersGenerator(private val customNumbers: List<Int>) : LottoNumbersGenerator() {
     override fun generate(): List<Int> = customNumbers

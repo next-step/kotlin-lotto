@@ -1,4 +1,4 @@
-package lotto.numbers
+package lotto.domain.numbers
 
 abstract class LottoNumbersGenerator {
     protected val lottoNumberPool = (1..45)

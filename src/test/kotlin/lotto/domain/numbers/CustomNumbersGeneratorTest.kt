@@ -1,4 +1,4 @@
-package lotto.numbers
+package lotto.domain.numbers
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
