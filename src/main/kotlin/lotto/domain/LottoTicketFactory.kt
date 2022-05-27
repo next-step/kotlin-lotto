@@ -8,8 +8,8 @@ import kotlin.random.Random
  * Created by Jaesungchi on 2022.05.24..
  */
 object LottoTicketFactory {
-    private const val MIN_LOTTO_NUMBER = 1
-    private const val MAX_LOTTO_NUMBER = 45
+    const val MIN_LOTTO_NUMBER = 1
+    const val MAX_LOTTO_NUMBER = 45
     private const val LOTTO_SIZE = 6
 
     fun getRandomLottoTicket(): LottoTicket {

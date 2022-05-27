@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.LottoTicketFactory.MAX_LOTTO_NUMBER
+import lotto.domain.LottoTicketFactory.MIN_LOTTO_NUMBER
 import lotto.model.LottoResult
 import lotto.model.LottoTicket
 import lotto.model.Prize
@@ -16,6 +18,7 @@ class LottoCompany(stringWinningNumber: String) {
             it.trim().toInt()
         }
         require(winningNumbers.size == LOTTO_COUNT_LIMITS)
+        require(winningNumbers.none { it !in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER })
         winningTicket = LottoTicket(winningNumbers)
     }
 

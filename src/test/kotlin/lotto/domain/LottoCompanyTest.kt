@@ -30,4 +30,12 @@ class LottoCompanyTest {
         val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
         assertThat(LottoCompany(source).convertTicketsToLottoResults(listOf(ticket)).last().count).isEqualTo(1)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["0, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 46"])
+    internal fun `지난 주 당첨 번호가 1보다 작거나 45보다 크다면 IllegalArgumentException을 던진다`(source: String) {
+        assertThrows<IllegalArgumentException> {
+            LottoCompany(source)
+        }
+    }
 }
