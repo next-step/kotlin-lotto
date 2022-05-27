@@ -23,4 +23,22 @@ class MatchStatesTest {
 
         assertThat(accumulateList).isEqualTo(expect)
     }
+    @Test
+    fun `보너스번호로 2등 당첨을 확인한다`() {
+        val matchStates = listOf(
+            MatchState.NOT_MATCH,
+            MatchState.MATCH_5_BONUS
+        )
+
+        val expect = listOf(
+            StatResult(MatchState.MATCH_3),
+            StatResult(MatchState.MATCH_4),
+            StatResult(MatchState.MATCH_5),
+            StatResult(MatchState.MATCH_5_BONUS, 1, MatchState.MATCH_5_BONUS.profit * 1),
+            StatResult(MatchState.MATCH_6)
+        )
+        val accumulateList = MatchStates(matchStates).accumulate()
+
+        assertThat(accumulateList).isEqualTo(expect)
+    }
 }

@@ -20,6 +20,7 @@ class MatchStates(private val matchStates: List<MatchState>) {
             StatResult(MatchState.MATCH_3),
             StatResult(MatchState.MATCH_4),
             StatResult(MatchState.MATCH_5),
+            StatResult(MatchState.MATCH_5_BONUS),
             StatResult(MatchState.MATCH_6),
         )
     }
