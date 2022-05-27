@@ -21,10 +21,10 @@ class LottoCompany(stringWinningNumber: String) {
     }
 
     fun convertTicketsToLottoResults(tickets: List<LottoTicket>): List<LottoResult> {
-        return convertPrizeToLottoResult(tickets.mapNotNull { findCorrectLotto(it) })
+        return convertPrizeToLottoResult(tickets.map { findCorrectLotto(it) })
     }
 
-    private fun findCorrectLotto(ticket: LottoTicket): Prize? {
+    private fun findCorrectLotto(ticket: LottoTicket): Prize {
         val matchCounts = ticket.numbers.intersect(winningTicket.numbers.toSet()).size
         return Prize.of(matchCounts)
     }
