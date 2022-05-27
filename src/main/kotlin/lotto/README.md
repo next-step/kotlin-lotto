@@ -53,3 +53,7 @@
 - [x] 3, 4, 5, 6개 일치하는 로또 갯수를 계산할 수 있다 - LottoPrizeCalculator
 - [x] 당첨된 로또로 얻은 수익을 계산할 수 있다 - LottoPrizeCalculator
 - [x] 당첨 통계를 사용자에게 프린트해준다 - OutputView
+
+## 리뷰 반영
+1. PositiveNumber 인라인 클래스로 변경
+2. Splitters 에 토큰으로 나누어주는 메소드 구현
