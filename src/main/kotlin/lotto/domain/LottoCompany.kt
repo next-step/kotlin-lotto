@@ -9,13 +9,14 @@ import lotto.model.Prize
  * Created by Jaesungchi on 2022.05.25..
  */
 class LottoCompany(stringWinningNumber: String) {
-    val winningNumber: List<Int>
+    val winningTicket: LottoTicket
 
     init {
-        winningNumber = stringWinningNumber.split(",").map {
+        val winningNumbers = stringWinningNumber.split(",").map {
             it.trim().toInt()
         }
-        require(winningNumber.size == LOTTO_COUNT_LIMITS)
+        require(winningNumbers.size == LOTTO_COUNT_LIMITS)
+        winningTicket = LottoTicket(winningNumbers)
     }
 
     fun convertTicketsToLottoResults(tickets: List<LottoTicket>): List<LottoResult> {
@@ -23,7 +24,7 @@ class LottoCompany(stringWinningNumber: String) {
     }
 
     private fun findCorrectLotto(ticket: LottoTicket): Prize? {
-        val matchCounts = ticket.numbers.intersect(winningNumber.toSet()).size
+        val matchCounts = ticket.numbers.intersect(winningTicket.numbers.toSet()).size
         return Prize.of(matchCounts)
     }
 

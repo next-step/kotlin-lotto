@@ -13,7 +13,7 @@ class LottoCompanyTest {
     @ParameterizedTest
     @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
     internal fun `지난 주 당첨 번호 입력 받은걸 ','로 나눈다`(source: String) {
-        assertThat(LottoCompany(source).winningNumber.size).isEqualTo(6)
+        assertThat(LottoCompany(source).winningTicket).isNotNull
     }
 
     @ParameterizedTest
