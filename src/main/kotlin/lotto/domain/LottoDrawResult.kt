@@ -29,42 +29,28 @@ class LottoDrawResult(private val luckyDrawNumber: List<Int>) {
 
     private fun checkDrawResult(lottoNumber: LottoNumber): Int {
         val numbers = lottoNumber.numbers
-        var matchCount = 0
-        luckyDrawNumber.forEach {
-            matchCount = numbers.addMatchCountOrNull(it, matchCount)
-        }
-        return matchCount
+        return luckyDrawNumber.count { numbers.contains(it) }
     }
-
-    private fun List<Int>.addMatchCountOrNull(input: Int, matchCount: Int): Int =
-        if (this.contains(input)) matchCount + 1 else matchCount
 
     private fun plusCount(result: Int) {
         when (result) {
-            THREE -> {
+            DrawNumberEnum.THREE.count -> {
                 three++
                 this.result = this.result + DrawNumberEnum.THREE.amount
             }
-            FOUR -> {
+            DrawNumberEnum.FOUR.count -> {
                 four++
-                this.result = this.result + result + DrawNumberEnum.FOUR.amount
+                this.result = this.result + DrawNumberEnum.FOUR.amount
             }
-            FIVE -> {
+            DrawNumberEnum.FIVE.count -> {
                 five++
-                this.result = this.result + result + DrawNumberEnum.FIVE.amount
+                this.result = this.result + DrawNumberEnum.FIVE.amount
             }
-            SIX -> {
+            DrawNumberEnum.SIX.count -> {
                 six++
-                this.result = this.result + result + DrawNumberEnum.SIX.amount
+                this.result = this.result + DrawNumberEnum.SIX.amount
             }
             else -> none++
         }
-    }
-
-    companion object {
-        private const val THREE = 3
-        private const val FOUR = 4
-        private const val FIVE = 5
-        private const val SIX = 6
     }
 }
