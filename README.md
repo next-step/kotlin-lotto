@@ -27,7 +27,7 @@
 - PurchaseRecord
   - [x] 구매한 Lotto 들을 프로퍼티로 갖는다.
 - LottoShop
-  - [ ] 금액을 입력하면 PurchaseRecord를 반환한다.
-  - [ ] 천원단위로 떨어지지 않으면? > 천원단위 내림하여 계산한다.
+  - [x] 금액을 입력하면 PurchaseRecord를 반환한다.
+  - [x] 천원단위로 떨어지지 않으면? > 천원단위 내림하여 계산한다.
   - [ ] 당첨번호(Lotto)를 반환한다.
 
