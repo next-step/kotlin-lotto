@@ -9,7 +9,7 @@ internal class LottoMachineTest {
     fun `로또생성테스트`() {
         val lottoMaker = object : LottoMaker {
             override fun make(): Lotto {
-                val lottoNumbers = hashSetOf(
+                val lottoNumbers = listOf(
                     LottoNumber(2),
                     LottoNumber(3),
                     LottoNumber(1),

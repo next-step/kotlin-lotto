@@ -8,7 +8,7 @@ internal class LottoTest {
 
     @Test
     fun `Lotto객체생성`() {
-        val lottoNumbers = hashSetOf(
+        val lottoNumbers = listOf(
             LottoNumber(2),
             LottoNumber(3),
             LottoNumber(1),
@@ -24,7 +24,7 @@ internal class LottoTest {
 
     @Test
     fun `Lotto 유효성 검증`() {
-        val lottoNumbers = hashSetOf(
+        val lottoNumbers = listOf(
             LottoNumber(2),
             LottoNumber(3),
             LottoNumber(1),

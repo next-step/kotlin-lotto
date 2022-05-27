@@ -9,5 +9,5 @@
 [x] `LottoNumber` 의 일급컬렉션인 `WinningLotto` 생성
 [x] `LottoRank` enum 객체 생성
 [x] `LottoRank` 의 일급컬렉션인 `LottoRanks` 생성
-[] 통계 역할인 `Statistic` 객체 생성  
+[x] 통계 역할인 `Statistics` 객체 생성  
 

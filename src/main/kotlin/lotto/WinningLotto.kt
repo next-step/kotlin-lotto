@@ -1,15 +1,19 @@
 package lotto
 
-class WinningLotto(private val _lottoNumbers: HashSet<LottoNumber>) {
+class WinningLotto(private val _lottoNumbers: Set<LottoNumber>) {
 
-    val get: HashSet<LottoNumber>
-        get() = _lottoNumbers.toHashSet()
+    val get: Set<LottoNumber>
+        get() = _lottoNumbers.toSet()
 
     init {
         validate(_lottoNumbers)
     }
 
-    private fun validate(lottoNumbers: HashSet<LottoNumber>) {
+    fun matchCount(lottos: Set<LottoNumber>): Int {
+        return lottos.count { _lottoNumbers.contains(it) }
+    }
+
+    private fun validate(lottoNumbers: Set<LottoNumber>) {
         if (lottoNumbers.size != MIN_SIZE) {
             throw IllegalArgumentException()
         }

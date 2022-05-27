@@ -1,16 +1,15 @@
 package lotto
 
-class Lotto(private val _lotto: HashSet<LottoNumber>) {
+class Lotto(private val _lotto: List<LottoNumber>) {
 
     init {
-        validate(_lotto)
+        validate(_lotto.toSet())
     }
 
-    val get: HashSet<LottoNumber>
-        get() = HashSet(_lotto)
+    val get: Set<LottoNumber>
+        get() = _lotto.toSet()
 
-    private fun validate(lotto: HashSet<LottoNumber>) {
-
+    private fun validate(lotto: Set<LottoNumber>) {
         if (lotto.size != MIN_SIZE) {
             throw IllegalArgumentException()
         }
