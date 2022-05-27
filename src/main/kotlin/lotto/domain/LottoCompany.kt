@@ -29,7 +29,7 @@ class LottoCompany(winningNumbers: List<Int>) {
     private fun convertPrizeToLottoResult(prizes: List<Prize>): List<LottoResult> {
         return prizes.groupingBy { it.matchCount }.eachCount().map {
             LottoResult(Prize.of(it.key), it.value)
-        }.sortedBy { it.prize.matchCount }
+        }
     }
 
     companion object {
