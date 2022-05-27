@@ -91,7 +91,7 @@ internal class LottoTest : BehaviorSpec({
         `when`("자동 발급한 경우") {
             val randomNumber = listOf(6, 5, 4, 3, 2, 1)
             val result = Lotto.createRandomNumbers(RandomStub(randomNumber))
-            then("랜덤한 숫자를 가진 로또를 발행한다.") {
+            then("숫자 생성기에 의해 생성된 숫자를 가진 로또를 발행한다.") {
                 result.match(Lotto(randomNumber)) shouldBe LottoScore.ONE_PLACE
             }
         }
