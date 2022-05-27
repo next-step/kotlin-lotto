@@ -6,6 +6,14 @@ import com.nextstep.jngcii.lotto.model.ProfitState
 import com.nextstep.jngcii.lotto.model.Rank
 
 object ResultView {
+    fun printBeforeGetCount() {
+        println("구입금액을 입력해 주세요.")
+    }
+
+    fun printBeforeGetNumbers() {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+    }
+
     fun printList(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
         lottos.forEach {
@@ -25,7 +33,7 @@ object ResultView {
 
         val rate = Calculator.calculateYield(count, ranks)
         val state = ProfitState.of(rate)
-        println("총 수익률은 ${rate}입니다.(기준이 ${ProfitState.ORIGIN_POINT}이기 때문에 결과적으로 ${state.phaseOfPrint} 의미임")
+        println("총 수익률은 ${rate}입니다.(기준이 ${ProfitState.ORIGIN_POINT}이기 때문에 결과적으로 ${state.phaseOfPrint} 의미임)")
     }
 
     private val Lotto.prettier
