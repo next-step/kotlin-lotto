@@ -9,7 +9,7 @@ value class LottoResult(val value: List<LottoWinning>) {
     }
 
     private fun isValidResult(): Boolean {
-        val lottoRanks = LottoRank.values()
+        val lottoRanks = LottoRank.winnerPlace()
         return value.size == lottoRanks.size && lottoRanks.all { rank ->
             rank in this
         }
@@ -31,14 +31,11 @@ value class LottoResult(val value: List<LottoWinning>) {
                 return lottoWinningMap[numberOfMatches] ?: 0
             }
 
-            val lottoWinningList = listOf(
-                LottoWinning(LottoRank.FOURTH, getCount(LottoRank.FOURTH.numberOfMatches)),
-                LottoWinning(LottoRank.THIRD, getCount(LottoRank.THIRD.numberOfMatches)),
-                LottoWinning(LottoRank.SECOND, getCount(LottoRank.SECOND.numberOfMatches)),
-                LottoWinning(LottoRank.FIRST, getCount(LottoRank.FIRST.numberOfMatches)),
-            )
+            val lottoWinnings = LottoRank.winnerPlace().map { lottoRank ->
+                LottoWinning(lottoRank, getCount(lottoRank.numberOfMatches))
+            }
 
-            return LottoResult(lottoWinningList)
+            return LottoResult(lottoWinnings)
         }
     }
 }
