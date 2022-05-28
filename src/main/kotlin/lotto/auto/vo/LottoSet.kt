@@ -4,5 +4,6 @@ import lotto.auto.domain.Lotto
 
 class LottoSet(private val lottos: List<Lotto>) {
 
-    fun countPlace(winningLottery: Lotto, place: LottoScore): Int = lottos.count { it.match(winningLottery) == place }
+    fun countPlace(winningLottery: Lotto, place: LottoScore): Int =
+        lottos.count { it.match(winningLottery) == place }
 }
