@@ -7,8 +7,8 @@ import java.util.Collections
 
 class LottoPurchase {
     fun getMoney(money: String?): LottoPrice {
-        require(!money.isNullOrBlank()) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR }
-        val moneyToInt = requireNotNull(money.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR }
+        require(!money.isNullOrBlank()) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
+        val moneyToInt = requireNotNull(money.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR_MSG }
         return LottoPrice(moneyToInt)
     }
 

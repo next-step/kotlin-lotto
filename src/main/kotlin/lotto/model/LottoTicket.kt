@@ -1,10 +1,12 @@
 package lotto.model
 
+import lotto.Const
+
 class LottoTicket(
     private val lottoTicket: Set<LottoNumber>
 ) {
     init {
-        require(lottoTicket.size == LOTTO_NUMBER_COUNT) { "로또는 6개의 숫자로 이루어져 있습니다." }
+        require(lottoTicket.size == LOTTO_NUMBER_COUNT) { Const.ErrorMsg.LOTTO_TICKET_NUMBER_IS_NOT_6_ERROR_MSG }
     }
 
     fun get() = lottoTicket.sortedBy { it.get() }.toSet()

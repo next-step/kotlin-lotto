@@ -1,10 +1,12 @@
 package lotto.model
 
+import lotto.Const
+
 class LottoNumber(
     private val value: Int
 ) {
     init {
-        require(value in MIN_LOTTO_NUM..MAX_LOTTO_NUM) { "로또 번호가 아닙니다." }
+        require(value in MIN_LOTTO_NUM..MAX_LOTTO_NUM) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
     }
 
     fun get() = value

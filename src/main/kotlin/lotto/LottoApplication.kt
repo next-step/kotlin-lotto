@@ -13,7 +13,7 @@ fun main() {
     val outputView = OutputView()
 
     // 구입금액 입력받기
-    val price = inputView.readPrice()
+    val price = inputView.printMsgAndReadValue(Const.OutputMsg.GET_PRICE_MSG)
 
     // 구입금액 validation
     val lottoPurchase = LottoPurchase()
@@ -33,11 +33,11 @@ fun main() {
     outputView.resultLottoTickets(lottoTickets)
 
     // 지난주 로또 당첨번호 받기
-    val lastWinningNumber = inputView.readWinningNum()
+    val lastWinningNumber = inputView.printMsgAndReadValue("\n${Const.OutputMsg.LOTTO_NUM_MSG}")
     val lastWinningTicket = try {
         WinningNumber().winningNumberToLottoTicket(lastWinningNumber)
     } catch (e: IllegalArgumentException) {
-        print(Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_WINNING_NUMBER_ERROR)
+        print(Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_WINNING_NUMBER_ERROR_MSG)
         return
     }
 

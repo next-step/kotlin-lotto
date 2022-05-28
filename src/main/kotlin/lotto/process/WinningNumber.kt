@@ -6,7 +6,7 @@ import lotto.model.LottoTicket
 
 class WinningNumber {
     fun winningNumberToLottoTicket(winningNumber: String?): LottoTicket {
-        requireNotNull(winningNumber) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR }
+        requireNotNull(winningNumber) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
         val winningNumbers = winningNumberToLottoNumberList(winningNumber)
         return LottoTicket(winningNumbers)
     }

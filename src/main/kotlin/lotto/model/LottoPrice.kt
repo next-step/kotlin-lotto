@@ -12,6 +12,6 @@ class LottoPrice(
     fun get() = price
 
     private fun requirePositiveNumber() {
-        require(price >= 0) { Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_PRICE_ERROR }
+        require(price >= 0) { Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_PRICE_ERROR_MSG }
     }
 }
