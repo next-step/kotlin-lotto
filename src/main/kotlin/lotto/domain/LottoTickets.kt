@@ -1,9 +1,9 @@
 package lotto.domain
 
-class LottoTickets(private val tickets: List<LottoTicket>) : List<LottoTicket> by tickets {
+data class LottoTickets(private val tickets: List<LottoTicket>) : List<LottoTicket> by tickets {
 
     init {
-        require(tickets.isNotEmpty())
+        require(isNotEmpty())
     }
 
     fun getMatchResult(lastNumbers: LottoLastNumbers): Map<LottoMatch, MatchCount> {
@@ -17,13 +17,13 @@ class LottoTickets(private val tickets: List<LottoTicket>) : List<LottoTicket> b
     private fun getMatchCount(match: LottoMatch, lastNumbers: LottoLastNumbers): Int {
         return getMatchTickets(match, lastNumbers).let { matchTickets ->
             if (match.withBonus) {
-                matchTickets.filter { it.numbers.contains(lastNumbers.bonus) }
+                matchTickets.filter { it.contains(lastNumbers.bonus) }
             } else {
-                matchTickets.filterNot { it.numbers.contains(lastNumbers.bonus) }
+                matchTickets.filterNot { it.contains(lastNumbers.bonus) }
             }
         }.size
     }
 
     private fun getMatchTickets(match: LottoMatch, lastNumbers: LottoLastNumbers): List<LottoTicket> =
-        filter { it.numbers.intersect(lastNumbers).size == match.count }
+        filter { it.intersect(lastNumbers).size == match.count }
 }
