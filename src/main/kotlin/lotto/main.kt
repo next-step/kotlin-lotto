@@ -6,12 +6,13 @@ import lotto.domain.TicketSeller
 import lotto.dto.UserMoneyInputDto
 import lotto.dto.WinningNumbersInputDto
 import lotto.util.KotlinRandomGenerate
+import lotto.view.BuyLottoInputView
 
 fun main() {
     val lottoTicketPrice = Money(1000)
     val ticketSeller = TicketSeller(lottoTicketPrice, KotlinRandomGenerate)
 
-    println("구입금액을 입력해 주세요.")
+    println(BuyLottoInputView.showUserMoneyInputGuide())
     val userMoneyInputDto = UserMoneyInputDto(readln())
     val boughtLottoTickets = ticketSeller.buyPossibleLottoTicket(userMoneyInputDto.userMoney)
 
@@ -22,7 +23,7 @@ fun main() {
     }
 
     println()
-    println("지난 주 당첨 번호를 입력해 주세요.")
+    println(BuyLottoInputView.showWinningLottoNumbersInputGuide())
     val winningNumbersInputDto = WinningNumbersInputDto(readln())
 
     println()
