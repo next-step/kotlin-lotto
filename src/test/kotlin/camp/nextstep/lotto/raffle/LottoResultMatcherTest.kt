@@ -53,9 +53,9 @@ internal class LottoResultMatcherTest {
 
         val winningTickets = LottoResultMatcher.winningTickets(tickets, winnerNumbers)
 
-        assertThat(winningTickets.filter { it.winnings == Winnings.SIX }).hasSize(1)
-        assertThat(winningTickets.filter { it.winnings == Winnings.FIVE }).hasSize(2)
-        assertThat(winningTickets.filter { it.winnings == Winnings.FOUR }).hasSize(0)
-        assertThat(winningTickets.filter { it.winnings == Winnings.THREE }).hasSize(2)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FIRST }).hasSize(1)
+        assertThat(winningTickets.filter { it.winnings == Winnings.THIRD }).hasSize(2)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FOURTH }).hasSize(0)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FIFTH }).hasSize(2)
     }
 }
