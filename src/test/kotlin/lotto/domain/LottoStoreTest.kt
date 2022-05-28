@@ -19,6 +19,19 @@ class LottoStoreTest {
     }
 
     @Test
+    fun `자동, 수동의 개수가 총금액내에서 일치하는지 테스트`() {
+        val manualCount = 3
+        val money = 5000
+        val totalCount = 5
+        val lottoStore = LottoStore(Money(money), manualCount)
+
+        val autoCount = lottoStore.autoLottoCount
+        val answer = manualCount + autoCount
+
+        assertThat(answer).isEqualTo(totalCount)
+    }
+
+    @Test
     fun `로또 각당첨등수 개수가 바른지 테스트`() {
         val lottoAnswer = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         val bonusBall = LottoNumber(10)
