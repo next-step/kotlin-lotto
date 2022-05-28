@@ -2,6 +2,7 @@ package camp.nextstep.lotto.raffle
 
 enum class Winnings(val matchedCount: Int, val winnings: Int) {
     SIX(6, 2_000_000_000),
+    FIVE_WITH_BONUS(5, 30_000_000),
     FIVE(5, 1_500_000),
     FOUR(4, 50_000),
     THREE(3, 5_000);
@@ -17,7 +18,10 @@ enum class Winnings(val matchedCount: Int, val winnings: Int) {
             SIX.matchedCount to SIX
         )
 
-        fun of(matchedCount: Int) = requireNotNull(COUNT_WINNINGS_MAP[matchedCount])
+        fun of(matchedCount: Int, matchedBonus: Boolean = false): Winnings {
+            if (matchedBonus && matchedCount == 5) return FIVE_WITH_BONUS
+            return requireNotNull(COUNT_WINNINGS_MAP[matchedCount])
+        }
 
         fun isWinningCount(matchedCount: Int) = matchedCount in WINNINGS_MATCH_COUNTS
     }
