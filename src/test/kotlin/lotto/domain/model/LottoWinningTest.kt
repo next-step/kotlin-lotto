@@ -2,6 +2,7 @@ package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class LottoWinningTest {
     @Test
@@ -11,7 +12,9 @@ class LottoWinningTest {
             count = 1
         )
 
-        assertThat(lottoWinning.rank).isEqualTo(LottoRank.FIRST)
-        assertThat(lottoWinning.count).isEqualTo(1)
+        assertAll(
+            { assertThat(lottoWinning.rank).isEqualTo(LottoRank.FIRST) },
+            { assertThat(lottoWinning.count).isEqualTo(1) }
+        )
     }
 }

@@ -3,6 +3,7 @@ package lotto.domain.model
 import lotto.view.inputconverter.InputConverter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class UserInputRequestTest {
     @Test
@@ -18,7 +19,9 @@ class UserInputRequestTest {
             inputConverter = inputConverter
         )
 
-        assertThat(userInputRequest.message).isEqualTo(message)
-        assertThat(userInputRequest.inputConverter).isEqualTo(inputConverter)
+        assertAll(
+            { assertThat(userInputRequest.message).isEqualTo(message) },
+            { assertThat(userInputRequest.inputConverter).isEqualTo(inputConverter) }
+        )
     }
 }

@@ -2,6 +2,7 @@ package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 
 class LottoResultTest {
@@ -74,10 +75,12 @@ class LottoResultTest {
         )
         val lottoResult = LottoResult.from(lottoWinningMap)
 
-        assertThat(lottoResult[LottoRank.FOURTH].count).isEqualTo(3)
-        assertThat(lottoResult[LottoRank.THIRD].count).isEqualTo(1)
-        assertThat(lottoResult[LottoRank.SECOND].count).isEqualTo(0)
-        assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1)
+        assertAll(
+            { assertThat(lottoResult[LottoRank.FOURTH].count).isEqualTo(3) },
+            { assertThat(lottoResult[LottoRank.THIRD].count).isEqualTo(1) },
+            { assertThat(lottoResult[LottoRank.SECOND].count).isEqualTo(0) },
+            { assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1) }
+        )
     }
 
     @Test
