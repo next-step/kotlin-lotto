@@ -9,16 +9,8 @@ object LottoBendingMachine {
     fun purchase(purchaseAmount: Int, lottoFactory: LottoFactory): Lottos {
         val purchaseCount = getPurchaseCount(purchaseAmount)
 
-        return makeLottos(purchaseCount, lottoFactory)
+        return Lottos.of(purchaseCount, lottoFactory)
     }
 
     private fun getPurchaseCount(purchaseAmount: Int): Int = purchaseAmount / LOTTO_PRICE
-
-    private fun makeLottos(purchaseCount: Int, lottoFactory: LottoFactory): Lottos {
-        val lottoList = List(purchaseCount) {
-            lottoFactory.create()
-        }
-
-        return Lottos(lottoList)
-    }
 }

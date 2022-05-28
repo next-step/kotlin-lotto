@@ -41,4 +41,18 @@ class LottosTest {
             { assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1) }
         )
     }
+
+    @Test
+    fun `발급할 로또 개수와 LottoFactory를 받아 Lottos를 만들 수 있다`() {
+        val lottos = Lottos.of(
+            2,
+            object : LottoFactory {
+                override fun create(): Lotto {
+                    return Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+                }
+            }
+        )
+
+        assertThat(lottos.value.size).isEqualTo(2)
+    }
 }

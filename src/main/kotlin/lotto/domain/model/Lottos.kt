@@ -15,4 +15,14 @@ value class Lottos(val value: List<Lotto>) {
             numberOfMatches.isWin()
         }
     }
+
+    companion object {
+        fun of(purchaseCount: Int, lottoFactory: LottoFactory): Lottos {
+            return Lottos(
+                List(purchaseCount) {
+                    lottoFactory.create()
+                }
+            )
+        }
+    }
 }
