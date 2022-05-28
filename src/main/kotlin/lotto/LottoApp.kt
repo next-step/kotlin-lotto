@@ -19,7 +19,7 @@ fun main() {
     val lottoResults = mutableMapOf<Winning, Int>()
 
     tickets.forEach { lotto ->
-        val winning = WinningMatcher(winner).getPlace(lotto)
+        val winning = WinningMatcher(winner, bonus).getPlace(lotto)
         lottoResults[winning] = lottoResults.getOrDefault(winning, 0) + 1
     }
 
