@@ -2,7 +2,7 @@ package lotto.auto.vo
 
 import lotto.auto.domain.Lotto
 
-class LottoSet(private val lottos: List<Lotto>) {
+class LottoSet(private val lottos: List<Lotto>) : List<Lotto> by lottos {
 
     fun countPlace(winningLottery: Lotto, place: LottoScore): Int =
         lottos.count { it.match(winningLottery) == place }
@@ -15,7 +15,7 @@ class LottoSet(private val lottos: List<Lotto>) {
             .div(totalCost())
             .toDouble()
 
-    private fun totalCost(): Int = lottos.size * LOTTERY_PRICE
+    private fun totalCost(): Int = lottos.size * Lotto.PRICE
 
     private fun totalRewardMoney(winningLottery: Lotto): Int =
         groupPlace(winningLottery)
@@ -23,9 +23,4 @@ class LottoSet(private val lottos: List<Lotto>) {
             .sumOf { (rank, count) ->
                 rank.rewardMoney * count
             }
-
-    companion object {
-
-        const val LOTTERY_PRICE = 1_000
-    }
 }

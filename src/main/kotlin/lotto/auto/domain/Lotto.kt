@@ -21,9 +21,11 @@ value class Lotto(private val numbers: List<Int>) {
 
     companion object {
 
-        const val LOTTO_NUMBER_LENGTH = 6
-        const val MIN_LOTTO_NUMBER = 1
-        const val MAX_LOTTO_NUMBER = 45
+        const val PRICE = 1_000
+
+        private const val LOTTO_NUMBER_LENGTH = 6
+        private const val MIN_LOTTO_NUMBER = 1
+        private const val MAX_LOTTO_NUMBER = 45
 
         fun createRandomNumbers(numberGenerator: NumberGenerator): Lotto {
             val numbers = mutableListOf<Int>()
