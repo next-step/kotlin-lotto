@@ -1,11 +1,12 @@
 package lotto.application
 
+import lotto.domain.Lotteries
 import lotto.domain.Lotto
 
 object LotteryRandomGenerator {
 
-    fun generateLotteryTickets(numberOfTickets: Int): List<Lotto> {
-        return List(numberOfTickets) { Lotto(generate()) }
+    fun generateLotteryTickets(numberOfTickets: Int): Lotteries {
+        return Lotteries(numberOfTickets, this::generate)
     }
 
     fun generate(): List<Int> {

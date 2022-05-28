@@ -1,11 +1,12 @@
 package lotto.application
 
+import lotto.domain.Lotteries
 import lotto.domain.Lotto
 import lotto.domain.Price
 
 object WinningAnnouncer {
 
-    fun announce(winner: Lotto, lotteries: List<Lotto>): List<Lotto> {
+    fun announce(winner: Lotto, lotteries: Lotteries): Lotteries {
         return lotteries.map { lotto ->
             checkLotteryResult(
                 lotto,

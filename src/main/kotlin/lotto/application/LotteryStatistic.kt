@@ -1,16 +1,17 @@
 package lotto.application
 
-import lotto.domain.Lotto
+import lotto.domain.Lotteries
+import lotto.domain.Lotteries.Companion.flatten
 import lotto.domain.Price
 
 object LotteryStatistic {
 
-    fun getPriceGroupedLotteries(lotteries: List<Lotto>): Map<Price, List<Lotto>> =
-        lotteries.groupBy { it.price }.toMap()
+    fun getPriceGroupedLotteries(lotteries: Lotteries): Map<Price, Lotteries> =
+        lotteries.groupBy { it.price }
 
     fun getEarningRate(
         investment: Int,
-        priceGroupedLotteries: Map<Price, List<Lotto>>
+        priceGroupedLotteries: Map<Price, Lotteries>
     ): Float {
         val profit = priceGroupedLotteries.values.flatten().sumOf { it.winnerPrize() }
 
