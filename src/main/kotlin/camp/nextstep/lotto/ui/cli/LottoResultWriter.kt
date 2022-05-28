@@ -1,14 +1,19 @@
 package camp.nextstep.lotto.ui.cli
 
+import camp.nextstep.lotto.raffle.Winnings
+import camp.nextstep.lotto.ticket.LottoTicket
 import camp.nextstep.lotto.ui.LottoResult
 
 object LottoResultWriter {
 
     fun write(result: LottoResult) {
+        val emptyWinningsMap = Winnings.values().associateWith { listOf<LottoTicket>() }
+        val winningsTicketMap = emptyWinningsMap + result.winningTickets.groupBy { it.winnings }
+
         println("당첨 통계")
         println("---------")
-        for ((winnings, count) in result.winningsCountMap) {
-            println("${winnings.matchedCount}개 일치 (${winnings.winnings}원) - ${count}개")
+        for ((winnings, tickets) in winningsTicketMap) {
+            println("${winnings.matchedCount}개 일치 (${winnings.winnings}원) - ${tickets.size}개")
         }
 
         val earningRate = result.totalEarn / result.seed

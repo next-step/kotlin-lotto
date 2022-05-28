@@ -1,23 +1,21 @@
 package camp.nextstep.lotto.raffle
 
-import camp.nextstep.lotto.number.LottoNumbers
 import camp.nextstep.lotto.ticket.LottoTicket
 
 object LottoResultMatcher {
 
-    fun ticketsByMatchedCount(tickets: List<LottoTicket>, winnerNumbers: List<Int>): TicketsByMatchCount {
-        val result = mutableMapOf<Int, MutableList<LottoTicket>>()
-
-        for (matchCount in 0..LottoNumbers.LOTTO_NUMBERS) {
-            result[matchCount] = mutableListOf()
-        }
+    fun winningTickets(tickets: List<LottoTicket>, winnerNumbers: List<Int>): List<WinningTicket> {
+        val result = mutableListOf<WinningTicket>()
 
         for (ticket in tickets) {
             val matchedCount = count(ticket, winnerNumbers)
-            requireNotNull(result[matchedCount]).add(ticket)
+
+            if (Winnings.isWinningCount(matchedCount)) {
+                result.add(WinningTicket(Winnings.of(matchedCount), ticket))
+            }
         }
 
-        return TicketsByMatchCount(result)
+        return result
     }
 
     fun count(ticket: LottoTicket, winnerNumbers: List<Int>): Int {

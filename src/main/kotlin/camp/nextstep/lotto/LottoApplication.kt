@@ -2,7 +2,6 @@ package camp.nextstep.lotto
 
 import camp.nextstep.lotto.number.LottoNumbers
 import camp.nextstep.lotto.raffle.LottoResultMatcher
-import camp.nextstep.lotto.raffle.Winnings
 import camp.nextstep.lotto.ticket.LottoStore
 import camp.nextstep.lotto.ticket.LottoTicketMachine
 import camp.nextstep.lotto.ui.LottoResult
@@ -24,13 +23,9 @@ fun main() {
     GamblerWriter.write(gambler)
 
     val winnerNumbers = WinnerNumbersReader.read(LottoNumbers.LOTTO_NUMBERS)
-    val winningsMap = LottoResultMatcher
-        .ticketsByMatchedCount(gambler.tickets, winnerNumbers)
-        .filterKeys { Winnings.isWinningCount(it) }
-        .map { (matchedCount, tickets) -> Winnings.of(matchedCount) to tickets.size }
-        .toMap()
-    val totalEarning = winningsMap.map { it.key.winnings to it.value }.sumOf { it.first * it.second }
-    val lottoResult = LottoResult(winningsMap, seedMoney, totalEarning)
+    val winningTickets = LottoResultMatcher.winningTickets(gambler.tickets, winnerNumbers)
+    val totalEarning = winningTickets.sumOf { it.winnings.winnings }
+    val lottoResult = LottoResult(winningTickets, seedMoney, totalEarning)
 
     LottoResultWriter.write(lottoResult)
 }

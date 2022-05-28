@@ -51,24 +51,11 @@ internal class LottoResultMatcherTest {
         )
         val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
 
-        val matchResult = LottoResultMatcher.ticketsByMatchedCount(tickets, winnerNumbers)
+        val winningTickets = LottoResultMatcher.winningTickets(tickets, winnerNumbers)
 
-        val sixMatched = requireNotNull(matchResult[6])
-        val fiveMatched = requireNotNull(matchResult[5])
-        val fourMatched = requireNotNull(matchResult[4])
-        val threeMatched = requireNotNull(matchResult[3])
-        val twoMatched = requireNotNull(matchResult[2])
-        val oneMatched = requireNotNull(matchResult[1])
-        val zeroMatched = requireNotNull(matchResult[0])
-
-        assertEquals(1, sixMatched.size)
-        assertEquals(2, fiveMatched.size)
-        assertEquals(0, fourMatched.size)
-        assertEquals(2, threeMatched.size)
-        assertEquals(3, twoMatched.size)
-        assertEquals(1, oneMatched.size)
-        assertEquals(1, zeroMatched.size)
-
-        assertThat(zeroMatched[0].numbers).containsExactly(15, 25, 34, 41, 44, 45)
+        assertThat(winningTickets.filter { it.winnings == Winnings.SIX }).hasSize(1)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FIVE }).hasSize(2)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FOUR }).hasSize(0)
+        assertThat(winningTickets.filter { it.winnings == Winnings.THREE }).hasSize(2)
     }
 }
