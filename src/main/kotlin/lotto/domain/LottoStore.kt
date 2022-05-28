@@ -13,4 +13,8 @@ object LottoStore {
         val numberOfTicket = money / LOTTO_TICKET_PRICE
         return LottoTicketMachine.generate(numberOfTicket)
     }
+
+    fun getLottoTicketPrice(): Int {
+        return LOTTO_TICKET_PRICE
+    }
 }
