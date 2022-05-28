@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.dto.WinningStatDto
+
 class LottoPrizeManager {
     private val lottoPrizePolices: MutableList<LottoPrizePolicy> = mutableListOf()
     val polices
@@ -8,6 +10,18 @@ class LottoPrizeManager {
     fun addUniquePolicy(prizePolicy: LottoPrizePolicy) {
         validateUniqueItem(prizePolicy)
         lottoPrizePolices.add(prizePolicy)
+    }
+
+    fun getWinningStats(
+        lottoTickets: List<LottoTicket>,
+        winningLottoNumbers: LottoTicketNumbers
+    ): List<WinningStatDto> {
+        return lottoPrizePolices.map { lottoPrizePolicy ->
+            WinningStatDto(
+                lottoPrizePolicy,
+                lottoTickets.count { lottoTicket -> lottoPrizePolicy.isWon(lottoTicket, winningLottoNumbers) }
+            )
+        }
     }
 
     private fun validateUniqueItem(prizePolicy: LottoPrizePolicy) {
