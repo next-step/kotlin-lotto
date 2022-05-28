@@ -71,5 +71,17 @@ internal class LottoSetTest : BehaviorSpec({
                 result shouldBe 5
             }
         }
+
+        `when`("결과를 기준으로 그룹핑 시") {
+            val result = lottoSet.groupPlace(lastWeekLotto)
+
+            then("각 등수의 당첨자 수를 Map으로 반환한다.") {
+                result[LottoScore.ONE_PLACE] shouldBe 1
+                result[LottoScore.TWO_PLACE] shouldBe 2
+                result[LottoScore.THIRD_PLACE] shouldBe 3
+                result[LottoScore.FOUR_PLACE] shouldBe 4
+                result[LottoScore.BANG] shouldBe 5
+            }
+        }
     }
 })
