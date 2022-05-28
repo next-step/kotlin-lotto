@@ -3,8 +3,8 @@ package lotto
 import lotto.domin.LottoMachine
 import lotto.domin.LottoNumberSet
 import lotto.domin.WinningStatics
-import lotto.dto.InputPaymentRequestDto
 import lotto.dto.InputLottoNumberDto
+import lotto.dto.InputPaymentRequestDto
 import lotto.util.LottoNumberGenerator
 import lotto.util.LottoNumberRandomGenerator
 import lotto.view.InputView

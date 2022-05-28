@@ -14,10 +14,10 @@ class LottoWinningAmount : FreeSpec({
             val containList = listOf(MatchCount(3, 0), MatchCount(5, 0))
             val result = matchWinningLotto(containList)
 
-            result[LottoWinningAmount.FOURTH] shouldBe 1
-            result[LottoWinningAmount.THIRD] shouldBe 0
-            result[LottoWinningAmount.SECOND] shouldBe 1
-            result[LottoWinningAmount.SECOND_BONUS] shouldBe 0
+            result[LottoWinningAmount.FIFTH] shouldBe 1
+            result[LottoWinningAmount.FOURTH] shouldBe 0
+            result[LottoWinningAmount.THIRD] shouldBe 1
+            result[LottoWinningAmount.SECOND] shouldBe 0
             result[LottoWinningAmount.FIRST] shouldBe 0
         }
     }

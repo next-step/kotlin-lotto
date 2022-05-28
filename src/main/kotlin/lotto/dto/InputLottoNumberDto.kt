@@ -7,6 +7,9 @@ class InputLottoNumberDto(
 
     companion object {
 
+        const val CANNOT_CONVERT_INT = "정수로 변환할 수 업습니다."
+        const val NEGATIVE_ERROR = "음수는 입력할 수 없습니다."
+
         fun of(
             lastWeekWinningNumber: List<String>,
             bonusNumber: String,
@@ -29,8 +32,5 @@ class InputLottoNumberDto(
                 if (it < 0) throw IllegalArgumentException(NEGATIVE_ERROR)
             }
         }
-
-        const val CANNOT_CONVERT_INT = "정수로 변환할 수 업습니다."
-        const val NEGATIVE_ERROR = "음수는 입력할 수 없습니다."
     }
 }

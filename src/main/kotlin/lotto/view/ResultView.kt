@@ -20,7 +20,11 @@ class ResultView() {
     fun printResult(winningStaticsResponseDto: WinningStaticsResponseDto) {
         val winningLotto = winningStaticsResponseDto.winningLottoList
         winningLotto.forEach { (lottoWinningAmount, count) ->
-            println("${lottoWinningAmount.title} (${lottoWinningAmount.winningAmount}원)- ${count}개")
+            if (lottoWinningAmount.bonusMatchCount == 1) {
+                println("${lottoWinningAmount.matchCount}개 일치, 보너스 볼 일치 (${lottoWinningAmount.winningAmount}원)- ${count}개")
+            } else {
+                println("${lottoWinningAmount.matchCount}개 일치 (${lottoWinningAmount.winningAmount}원)- ${count}개")
+            }
         }
         println("총 수익률은 ${winningStaticsResponseDto.profitRatio}입니다.")
     }
