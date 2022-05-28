@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoPrizeManager
 import lotto.domain.LottoPrizePolicy
 import lotto.domain.Money
 import lotto.domain.TicketSeller
@@ -29,15 +30,14 @@ fun main() {
     println()
     println("당첨통계")
     println("---------")
-    val lottoPrizePolicyList = listOf(
-        LottoPrizePolicy(3, Money(5000)),
-        LottoPrizePolicy(4, Money(50000)),
-        LottoPrizePolicy(5, Money(1500000)),
-        LottoPrizePolicy(6, Money(2000000000))
-    )
+    val lottoPrizeManager = LottoPrizeManager()
+    lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(3, Money(5000)))
+    lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(4, Money(50000)))
+    lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(5, Money(1500000)))
+    lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(6, Money(2000000000)))
 
     var totalPrize = 0
-    lottoPrizePolicyList.forEach { lottoPrizePolicy ->
+    lottoPrizeManager.polices.forEach { lottoPrizePolicy ->
         val prizeCount = boughtLottoTickets.count {
             lottoPrizePolicy.won(
                 it,
