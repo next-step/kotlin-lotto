@@ -3,20 +3,26 @@ package lotto.domain
 class LottoBuyer(
     private val initialMoney: Money,
     private var lottoBundle: LottoBundle = LottoBundle.EMPTY,
+    private var lottoSeller: LottoSeller = LottoSeller()
 ) {
     var money: Money = initialMoney
         private set
 
-    fun buyAll(lottoSeller: LottoSeller = LottoSeller()) {
-        val (boughtBundle, changes) = lottoSeller.sellAutoLotto(money)
+    fun buyAll() {
+        val amountOfLotto = lottoSeller.getAvailableAmountOfLotto(money)
+        val payment = lottoSeller.getPayment(amountOfLotto)
+        val boughtBundle = lottoSeller.sellAutoLotto(payment)
         lottoBundle += boughtBundle
-        money = changes
+        money -= payment
     }
 
-    fun buy(lottoCoupons: List<LottoCoupon>, lottoSeller: LottoSeller = LottoSeller()) {
-        val (boughtBundle, changes) = lottoSeller.sellManualLotto(money, lottoCoupons)
+    fun buy(lottoCoupons: List<LottoCoupon>) {
+        val payment = lottoSeller.getPayment(lottoCoupons.size)
+        require(money >= payment) { "보유한 금액으로 로또를 구입할 수 없습니다" }
+
+        val boughtBundle = lottoSeller.sellManualLotto(payment, lottoCoupons)
         lottoBundle += boughtBundle
-        money = changes
+        money -= payment
     }
 
     fun getLottoBundle(): LottoBundle = lottoBundle.copy()
@@ -24,6 +30,7 @@ class LottoBuyer(
     fun confirm(winningLotto: WinningLotto): WinningResult {
         check(lottoBundle.isNotEmpty()) { "보유한 로또 뭉치가 없습니다" }
         val winnings = lottoBundle.matchWinning(winningLotto)
-        return WinningResult(winnings, if (initialMoney == money) initialMoney else initialMoney - money)
+        val payment = if (initialMoney == money) initialMoney else initialMoney - money
+        return WinningResult(winnings, payment)
     }
 }

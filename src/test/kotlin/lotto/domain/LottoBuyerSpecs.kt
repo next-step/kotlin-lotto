@@ -26,11 +26,11 @@ class LottoBuyerSpecs : DescribeSpec({
 
     describe("로또 구매자는") {
         context("로또를 구매할 금액이 있으면") {
-            val buyer = LottoBuyer(Money(4_000))
             val lottoGenerator = FixedLottoGenerator(lottoList)
             val lottoSeller = LottoSeller(lottoGenerator)
+            val buyer = LottoBuyer(Money(4_000), lottoSeller = lottoSeller)
             it("로또 뭉치를 구매할 수 있다") {
-                buyer.buyAll(lottoSeller)
+                buyer.buyAll()
                 buyer.getLottoBundle().size shouldBe 4
                 buyer.money.amount shouldBe 0
             }
@@ -41,9 +41,9 @@ class LottoBuyerSpecs : DescribeSpec({
                     lottoCoupon(1, 2, 3, 4, 5, 7),
                     lottoCoupon(1, 2, 3, 4, 7, 8),
                 )
-                buyer.buy(lottoCoupon, lottoSeller)
+                buyer.buy(lottoCoupon)
                 buyer.getLottoBundle().size shouldBe 3
-                buyer.money.amount shouldBe 1000
+                buyer.money.amount shouldBe 1_000
             }
         }
 

@@ -8,10 +8,11 @@ import lotto.ui.OutputView
 
 fun main() {
     val amountOfMoney = InputView.readAmountOfMoney()
-    val lottoBuyer = LottoBuyer(amountOfMoney)
+    val lottoSeller = LottoSeller()
+    val lottoBuyer = LottoBuyer(amountOfMoney, lottoSeller = lottoSeller)
 
     val numberOfManualLotto = InputView.readNumberOfManualLotto(
-        LottoSeller.getAvailableAmountOfLotto(amountOfMoney)
+        lottoSeller.getAvailableAmountOfLotto(amountOfMoney)
     )
     val lottoCoupon = InputView.readLottoCoupons(numberOfManualLotto)
     lottoBuyer.buy(lottoCoupon)
