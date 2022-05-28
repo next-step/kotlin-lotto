@@ -2,8 +2,8 @@ package lotto.domain
 
 class Store(private val issuer: Issuable) {
 
-    fun buy(money: Money): List<Lotto> =
-        List(money.amount / LOTTO_PRICE) {
+    fun buy(request: PurchaseRequest): List<Lotto> =
+        List(request.money.amount / LOTTO_PRICE) {
             issuer.issue()
         }
 

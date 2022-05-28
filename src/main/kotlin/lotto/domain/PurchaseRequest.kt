@@ -2,7 +2,7 @@ package lotto.domain
 
 data class PurchaseRequest(
     val money: Money,
-    val manualLottos: List<Lotto>,
+    val manualLottos: List<Lotto> = emptyList(),
 ) {
 
     init {
