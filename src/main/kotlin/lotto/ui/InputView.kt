@@ -48,7 +48,7 @@ object InputView {
     tailrec fun readBonusBall(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         val result = runCatching {
-            LottoNumber(readln().toInt())
+            LottoNumber.of(readln().toInt())
         }
         return when (result.isSuccess) {
             true -> result.getOrThrow()

@@ -25,7 +25,7 @@ data class Lotto(
         const val SIZE_OF_LOTTO_NUMBERS = 6
 
         fun of(numbers: Collection<Int>): Lotto {
-            val numberSet = numbers.map { LottoNumber(it) }
+            val numberSet = numbers.map { LottoNumber.of(it) }
                 .toSet()
             return Lotto(numberSet)
         }

@@ -59,7 +59,7 @@ class LottoBuyerSpecs : DescribeSpec({
         context("로또 묶음이 있고 당첨 번호를 알고 있다면") {
             val lottoBundle = LottoBundle(lottoList)
             val buyer = LottoBuyer(Money(7_000), lottoBundle)
-            val winningLotto = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+            val winningLotto = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(7))
             it("로또 당첨 결과를 확인할 수 있다") {
                 buyer.confirm(winningLotto).also { winningResult ->
                     winningResult.rateOfReturn shouldBe values().sumOf { it.reward } / 7_000.0
@@ -75,7 +75,7 @@ class LottoBuyerSpecs : DescribeSpec({
 
         context("로또 묶음을 보유하지 않았으면") {
             val buyer = LottoBuyer(Money(4_000))
-            val winningLotto = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+            val winningLotto = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(7))
             it("로또 당첨 결과를 확인할 수 없다") {
                 shouldThrowExactly<IllegalStateException> {
                     buyer.confirm(winningLotto)
