@@ -1,25 +1,25 @@
 package lotto
 
-import lotto.ui.Request
-import lotto.ui.Response
+import lotto.ui.LottoInputTitle
+import lotto.ui.LottoResponse
 import java.math.BigDecimal
 
 fun main() {
 
-    Request.requestPurchaseLotto()
+    LottoInputTitle.requestPurchaseLotto()
     val lottoSeller = LottoSeller(Money(BigDecimal(readln().toInt())))
-    Response.responsePurchase(lottoSeller.getLottoCount())
+    LottoResponse.responsePurchase(lottoSeller.getLottoCount())
 
     val lottoMachine = LottoMachine(AutoLottoMaker())
     val buyLottos = lottoMachine.buyLotto(lottoSeller.getLottoCount())
-    Response.responseLottos(buyLottos.get)
+    LottoResponse.responseLottos(buyLottos.lottos)
 
-    Request.requestWinningLotto()
+    LottoInputTitle.requestWinningLotto()
     val winningLotto = WinningLotto(convertWinningLotto(readln()))
 
-    Response.responseStatisticTitle()
-    val statistics = Statistics(winningLotto, buyLottos.get)
-    Response.responseStatistics(statistics.getWinningResult(), statistics.getYield())
+    LottoResponse.responseStatisticTitle()
+    val statistics = Statistics(winningLotto, buyLottos.lottos)
+    LottoResponse.responseStatistics(statistics.getWinningResult(), statistics.getYield())
 }
 
 fun convertWinningLotto(lottoString: String): HashSet<LottoNumber> {

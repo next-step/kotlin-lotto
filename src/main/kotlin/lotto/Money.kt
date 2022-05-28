@@ -2,7 +2,7 @@ package lotto
 
 import java.math.BigDecimal
 
-data class Money(private val _value: BigDecimal) {
+class Money(private val _value: BigDecimal) {
 
     init {
         validate(_value.intValueExact())

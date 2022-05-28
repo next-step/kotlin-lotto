@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 internal class WinningLottoTest {
     @Test
-    fun `객체생성테스트`() {
+    fun `객체 생성`() {
         val lottoNumbers = setOf(
             LottoNumber(2),
             LottoNumber(3),
@@ -32,7 +32,7 @@ internal class WinningLottoTest {
     }
 
     @Test
-    fun `유효성 테스트`() {
+    fun `유효성 검사`() {
         val lottoNumbers = setOf(
             LottoNumber(2),
             LottoNumber(3)
@@ -43,7 +43,7 @@ internal class WinningLottoTest {
     }
 
     @Test
-    fun `match 테스트`() {
+    fun `match `() {
         val lottoNumbers = setOf(
             LottoNumber(2),
             LottoNumber(3),
