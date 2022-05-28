@@ -19,7 +19,6 @@ fun main() {
     lottoStore.buyManualLottos(manualLottoNumbers.map {
         LottoNumbers.of(it)
     })
-    lottoStore.rollAutoLotto()
 
     PrintView.printLottoCount(manualLottoCount, lottoStore.autoLottoCount)
     PrintView.printBoughtLottoList(lottoStore.boughtLottos)
