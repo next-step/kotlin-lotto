@@ -10,15 +10,23 @@ class LottoBuyer(
 
     fun buyAll() {
         val amountOfLotto = lottoSeller.getAvailableAmountOfLotto(money)
-        val payment = lottoSeller.getPayment(amountOfLotto)
+        val payment = lottoSeller.getPayment(amountOfLotto).also {
+            requireEnoughPayment(it)
+        }
+
         val boughtBundle = lottoSeller.sellAutoLotto(payment)
         lottoBundle += boughtBundle
         money -= payment
     }
 
-    fun buy(lottoCoupons: List<LottoCoupon>) {
-        val payment = lottoSeller.getPayment(lottoCoupons.size)
+    private fun requireEnoughPayment(payment: Money) {
         require(money >= payment) { "보유한 금액으로 로또를 구입할 수 없습니다" }
+    }
+
+    fun buy(lottoCoupons: List<LottoCoupon>) {
+        val payment = lottoSeller.getPayment(lottoCoupons.size).also {
+            requireEnoughPayment(it)
+        }
 
         val boughtBundle = lottoSeller.sellManualLotto(payment, lottoCoupons)
         lottoBundle += boughtBundle
