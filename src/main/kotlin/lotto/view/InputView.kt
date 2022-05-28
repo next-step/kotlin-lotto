@@ -5,14 +5,14 @@ import lotto.domain.Lotto
 class InputView {
     fun getMoney(): Int {
         println(INPUT_MONEY)
-        return readln().toIntOrNull() ?: throw RuntimeException()
+        return readln().toIntOrNull() ?: throw IllegalArgumentException()
     }
 
     fun getPastWinner(): Lotto {
         println(INPUT_LAST_WINNER)
         val numbers = readln()
             .split(LOTTO_SPLIT_DELIMITER)
-            .map { it.toIntOrNull() ?: throw RuntimeException(ERROR_WINNER_TICKET_VALIDATION) }
+            .map { it.toIntOrNull() ?: throw IllegalArgumentException(ERROR_WINNER_TICKET_VALIDATION) }
             .toSet()
         return Lotto.of(numbers)
     }

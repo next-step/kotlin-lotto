@@ -1,7 +1,7 @@
 package calculator
 
 class PositiveNumber(private val value: String) {
-    val num = value.toIntOrNull() ?: throw RuntimeException()
+    val num = value.toIntOrNull() ?: throw IllegalArgumentException()
 
     init {
         require(num >= 0)
