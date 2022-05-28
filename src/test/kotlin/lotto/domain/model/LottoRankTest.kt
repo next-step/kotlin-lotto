@@ -1,21 +1,24 @@
 package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoRankTest {
-    @Test
-    fun `LottoRank는 몇 개 일치해야 하는지와 당첨 금액을 보관한다`() {
-        assertThat(LottoRank.FOURTH.numberOfMatches).isEqualTo(3)
-        assertThat(LottoRank.FOURTH.winnings).isEqualTo(5_000)
+    @ParameterizedTest
+    @ValueSource(ints = [3, 4, 5, 6])
+    fun `from을 통해 맞춘 개수에 맞는 LottoRank를 얻을 수 있다`(input: Int) {
+        val numberOfMatches = NumberOfMatches(input)
+        val lottoRank = LottoRank.from(numberOfMatches)
 
-        assertThat(LottoRank.THIRD.numberOfMatches).isEqualTo(4)
-        assertThat(LottoRank.THIRD.winnings).isEqualTo(50_000)
+        assertThat(lottoRank.numberOfMatches).isEqualTo(numberOfMatches)
+    }
 
-        assertThat(LottoRank.SECOND.numberOfMatches).isEqualTo(5)
-        assertThat(LottoRank.SECOND.winnings).isEqualTo(1_500_000)
+    @ParameterizedTest
+    @ValueSource(ints = [1, 2, 0, 33, 8, 7])
+    fun `유효하지 않은 개수를 from에 전달한다면 NOTHING을 반환한다`(input: Int) {
+        val lottoRank = LottoRank.from(NumberOfMatches(input))
 
-        assertThat(LottoRank.FIRST.numberOfMatches).isEqualTo(6)
-        assertThat(LottoRank.FIRST.winnings).isEqualTo(2_000_000_000)
+        assertThat(lottoRank).isEqualTo(LottoRank.NOTHING)
     }
 }
