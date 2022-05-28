@@ -7,6 +7,8 @@ object InputView {
     private const val LOTTO_ANSWER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요"
     private const val MONEY_INPUT_MESSAGE = "구매금액을 입력해 주세요."
     private const val LOTTO_BONUS_BALL_MESSAGE = "보너스볼을 입력해 주세요"
+    private const val LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요"
+    private const val LOTTO_MANUAL_MESSAGE = "수동으로 구매할 번호를 입력해 주세요"
 
     fun getUserMoney(): Int {
         var moneyInput: String
@@ -32,11 +34,11 @@ object InputView {
         return readln()
     }
 
-    fun getLottoAnswer(): List<Int> {
+    fun getLottoNumbers(): List<Int> {
         var lottoInput: String
         do {
             lottoInput = getUserInputWithMessage(LOTTO_ANSWER_INPUT_MESSAGE)
-        } while (isValidLottoAnswer(lottoInput).not())
+        } while (isValidLottoNumbers(lottoInput).not())
 
         return lottoInput.split(LOTTO_LIST_DELIMITER).map { it.toInt() }
     }
@@ -50,6 +52,15 @@ object InputView {
         return lottoBonusInput.toInt()
     }
 
+    fun getLottoCount(): Int {
+        var lottoCount: String
+        do {
+            lottoCount = getUserInputWithMessage(LOTTO_COUNT_MESSAGE)
+        } while (isValidLottoBonusBall(lottoCount).not())
+
+        return lottoCount.toInt()
+    }
+
     private fun isValidLottoBonusBall(lotto: String): Boolean {
         return try {
             InputValidator.checkValidBonusBall(lotto)
@@ -60,7 +71,7 @@ object InputView {
         }
     }
 
-    private fun isValidLottoAnswer(lotto: String): Boolean {
+    private fun isValidLottoNumbers(lotto: String): Boolean {
         return try {
             InputValidator.checkValidLotto(lotto)
             true
