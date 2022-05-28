@@ -1,6 +1,6 @@
 package lotto.auto.vo
 
-enum class LottoScore(private val matchCount: Int, private val rewardMoney: Int) {
+enum class LottoScore(val matchCount: Int, val rewardMoney: Int) {
 
     BANG(0, 0),
     FOUR_PLACE(3, 5_000),
