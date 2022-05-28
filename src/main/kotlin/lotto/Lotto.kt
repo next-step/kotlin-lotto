@@ -24,7 +24,7 @@ class Lotto {
             FOUR_COUNT -> FOUR_COUNT_MONEY
             FIVE_COUNT -> FIVE_COUNT_MONEY
             SIX_COUNT -> SIX_COUNT_MONEY
-            else -> 0
+            else -> ELSE_COUNT_MONEY
         }
     }
 
@@ -40,5 +40,6 @@ class Lotto {
         private const val FOUR_COUNT_MONEY = 50000
         private const val FIVE_COUNT_MONEY = 150000
         private const val SIX_COUNT_MONEY = 2000000000
+        private const val ELSE_COUNT_MONEY = 0
     }
 }
