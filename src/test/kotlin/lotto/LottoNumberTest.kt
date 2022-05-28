@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
+import lotto.domain.LottoNumber
 import java.lang.IllegalArgumentException
 
 class LottoNumberTest : FreeSpec({

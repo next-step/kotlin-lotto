@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoMachine {
     fun buy(money: Int): List<Lotto> {

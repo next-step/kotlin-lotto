@@ -3,6 +3,8 @@ package lotto
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.doubles.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoStatistics
+import lotto.domain.Winning
 
 class LottoStatisticsTest : FreeSpec({
     "구매금액과 당첨금액을 이용해 수익률을 계산할 수 있다" {

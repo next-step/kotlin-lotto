@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Winning(val winningAmount: Int, val matchCount: Int) {
     FOURTH_PLACE(5_000, 3),

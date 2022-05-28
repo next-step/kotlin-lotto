@@ -3,6 +3,8 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import java.lang.IllegalArgumentException
 
 class LottoTest : FreeSpec({

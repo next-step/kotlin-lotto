@@ -2,6 +2,9 @@ package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.Winning
+import lotto.domain.WinningMatcher
 
 class WinningMatcherTest : FreeSpec({
     "지난주 당첨번호와" - {

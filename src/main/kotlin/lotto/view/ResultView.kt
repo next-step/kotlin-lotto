@@ -1,4 +1,8 @@
-package lotto
+package lotto.view
+
+import lotto.domain.Lotto
+import lotto.domain.LottoStatistics
+import lotto.domain.Winning
 
 class ResultView {
     fun printTickets(lottos: List<Lotto>) {
