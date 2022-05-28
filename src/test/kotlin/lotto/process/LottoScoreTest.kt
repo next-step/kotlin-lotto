@@ -3,7 +3,7 @@ package lotto.process
 import lotto.model.LottoNumber
 import lotto.model.LottoPrice
 import lotto.model.LottoPrize
-import lotto.view.LottoResult
+import lotto.model.LottoResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll

@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.model.LottoResult
 import lotto.model.LottoTicket
 import lotto.process.LottoPurchase.Companion.LOTTO_PRICE
 
