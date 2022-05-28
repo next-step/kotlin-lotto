@@ -15,15 +15,5 @@ class UserMoneyInputDtoTest : DescribeSpec({
                 UserMoneyInputDto(moneyByString)
             }.shouldHaveMessage("금액은 숫자를 입력해주세요")
         }
-
-        it("음수인 경우 에러 발생") {
-            // given
-            val moneyByString = "-10"
-
-            // then
-            shouldThrowExactly<IllegalArgumentException> {
-                UserMoneyInputDto(moneyByString)
-            }.shouldHaveMessage("0 이상에 금액을 입력해주세요")
-        }
     }
 })

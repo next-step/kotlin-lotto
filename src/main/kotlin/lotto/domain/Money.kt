@@ -1,3 +1,7 @@
 package lotto.domain
 
-data class Money(val value: Int)
+inline class Money(val value: Int) {
+    init {
+        require(value >= 0) { "0 이상에 금액을 입력해주세요" }
+    }
+}

@@ -39,7 +39,7 @@ fun main() {
 
     var totalPrize = 0
     lottoPrizePolicyList.forEach { lottoPrizePolicy ->
-        val prizeCount = buyLottoTickets.count { lottoPrizePolicy.won(it) !== null }
+        val prizeCount = buyLottoTickets.count { lottoPrizePolicy.won(it) != null }
         totalPrize += lottoPrizePolicy.wonPrize.value * prizeCount
         println("${lottoPrizePolicy.wonMatchedCount}개 일치 (${lottoPrizePolicy.wonPrize.value})-${prizeCount}개")
     }
