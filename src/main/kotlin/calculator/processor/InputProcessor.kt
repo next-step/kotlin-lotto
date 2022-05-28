@@ -7,24 +7,23 @@ class InputProcessor {
     fun convertStringToList(text: String?): List<PositiveNumber> {
         val notEmptyText = convertStringToZeroIfNull(text)
         return splitToDelimiter(notEmptyText)
-            .map { PositiveNumber(it.trim()) }
+            .map {
+                val number = it.trim().toDoubleOrNull()
+                    ?: throw RuntimeException(Const.ErrorMsg.INPUT_IS_NOT_POSITIVE_NUMBER_ERROR_MSG)
+                PositiveNumber(number)
+            }
     }
 
     private fun convertStringToZeroIfNull(text: String?) =
-        if (text.isNullOrBlank()) {
-            ZERO_STR
-        } else {
-            text
-        }
+        text.takeIf { !it.isNullOrBlank() } ?: ZERO_STR
 
     private fun splitToDelimiter(text: String): List<String> {
-        val matchResult = Regex(CUSTOM_DELIMITER_REGEX_PATTERN).find(text)
+        val matchResult = CUSTOM_DELIMITER_REGEX.find(text)
         return matchResult?.let {
-            val customDelimiter = it.groupValues[1]
+            val (customDelimiter, tokens) = matchResult.destructured
             requireDelimiterIsNotPeriod(customDelimiter)
-
-            it.groupValues[2].split(customDelimiter)
-        } ?: text.split(DEFAULT_DELIMITER_REGEX_PATTERN.toRegex())
+            tokens.split(customDelimiter)
+        } ?: text.split(DEFAULT_DELIMITER_REGEX)
     }
 
     private fun requireDelimiterIsNotPeriod(delimiter: String) =
@@ -33,7 +32,7 @@ class InputProcessor {
     companion object {
         private const val ZERO_STR = "0"
         private const val PERIOD_STR = "."
-        private const val CUSTOM_DELIMITER_REGEX_PATTERN = """//(.)\\n(.*)"""
-        private const val DEFAULT_DELIMITER_REGEX_PATTERN = ",|:"
+        private val CUSTOM_DELIMITER_REGEX = Regex("""//(.)\\n(.*)""")
+        private val DEFAULT_DELIMITER_REGEX = Regex(",|:")
     }
 }

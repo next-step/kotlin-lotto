@@ -41,7 +41,7 @@ class InputProcessorTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["-1", "a", "-1,2", "a,-3"])
+    @ValueSource(strings = ["-1", "a", "-1,2", "a,-3", "1,"])
     fun `문자열 계산기에 음수나 다른 문자열을 전달하는 경우 RuntimeException 예외 처리를 한다`(text: String) {
         assertThrows<RuntimeException> { inputProcessor.convertStringToList(text) }
     }
@@ -61,5 +61,5 @@ class InputProcessorTests {
     }
 
     private fun positiveNumberList(vararg tokens: String) =
-        tokens.map { PositiveNumber(it) }
+        tokens.map { PositiveNumber(it.trim().toDouble()) }
 }

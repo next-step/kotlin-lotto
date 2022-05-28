@@ -9,11 +9,13 @@ class OutputView {
 
     fun result(result: Double) {
         val resultToIntoOrDouble =
-            if (result % 1 == 0.0) {
+            if (exactInt(result)) {
                 result.toInt()
             } else {
                 result
             }
         println(resultToIntoOrDouble)
     }
+
+    fun exactInt(result: Double) = result % 1 == 0.0
 }

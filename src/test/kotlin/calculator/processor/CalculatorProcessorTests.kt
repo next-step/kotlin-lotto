@@ -29,5 +29,7 @@ class CalculatorProcessorTests {
     }
 
     private fun positiveNumberList(str: String) =
-        str.split(",").map { PositiveNumber(it) }
+        str.split(",").map {
+            PositiveNumber(it.trim().toDouble())
+        }
 }
