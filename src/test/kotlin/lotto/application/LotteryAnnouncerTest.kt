@@ -3,10 +3,10 @@ package lotto.application
 import lotto.domain.Lotteries
 import lotto.domain.Lotto
 import lotto.domain.Price
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.MapAssert
 import org.junit.jupiter.api.Test
 
-class WinningAnnouncerTest {
+class LotteryAnnouncerTest {
 
     @Test
     fun `winning doesn't depend on the order of numbers`() {
@@ -18,13 +18,10 @@ class WinningAnnouncerTest {
             )
         )
 
-        val winner = Lotto(listOf(1, 2, 3, 4, 5, 6), Price.FIRST)
+        val winner = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
-        val result = WinningAnnouncer.announce(winner, lotteries)
+        val result = LotteryAnnouncer.announce(winner, lotteries)
 
-        assertThat(result.elements)
-            .filteredOn { it.price == Price.FIRST }
-            .first()
-            .isNotNull
+        MapAssert(result).extractingByKey(Price.FIRST).isNotNull
     }
 }

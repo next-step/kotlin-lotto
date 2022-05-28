@@ -10,11 +10,5 @@ data class Lotteries(val elements: List<Lotto>) {
 
     fun forEach(lambda: (lotto: Lotto) -> Unit) = elements.forEach { lambda(it) }
 
-    fun map(lambda: (lotto: Lotto) -> Lotto) = Lotteries(elements.map { lambda(it) })
-
     fun <T> groupBy(lambda: (lotto: Lotto) -> T) = elements.groupBy(lambda).mapValues { Lotteries(it.value) }
-
-    companion object {
-        fun Collection<Lotteries>.flatten() = this.flatMap { it.elements }
-    }
 }

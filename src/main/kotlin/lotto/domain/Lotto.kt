@@ -1,8 +1,7 @@
 package lotto.domain
 
 data class Lotto(
-    val numbers: List<Int>,
-    val price: Price = Price.NONE
+    val numbers: List<Int>
 ) {
 
     init {
@@ -12,8 +11,6 @@ data class Lotto(
     }
 
     constructor(vararg numbers: Int) : this(numbers.toList())
-
-    fun winnerPrize(): Int = price.winningPrize
 
     fun correctNumberCounts(other: Lotto): Int =
         (numbers.sorted() zip other.numbers.sorted())

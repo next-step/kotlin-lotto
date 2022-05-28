@@ -1,8 +1,7 @@
 package lotto
 
+import lotto.application.LotteryAnnouncer
 import lotto.application.LotteryRandomGenerator
-import lotto.application.LotteryStatistic
-import lotto.application.WinningAnnouncer
 import lotto.ui.LotteryRandomGeneratorView
 import lotto.ui.LotteryStatisticView
 import lotto.ui.LottoInputView
@@ -14,10 +13,9 @@ object LotteryApp {
         LotteryRandomGeneratorView.display(generatedLotteries)
 
         val winner = LottoInputView.getWinningLotteryNumber()
-        val winnerMarkedLotteries = WinningAnnouncer.announce(winner, generatedLotteries)
+        val priceGroupedLotteries = LotteryAnnouncer.announce(winner, generatedLotteries)
 
-        val priceGroupedLotteries = LotteryStatistic.getPriceGroupedLotteries(winnerMarkedLotteries)
-        val earningRate = LotteryStatistic.getEarningRate(investment, priceGroupedLotteries)
+        val earningRate = LotteryAnnouncer.getEarningRate(investment, priceGroupedLotteries)
         LotteryStatisticView.display(priceGroupedLotteries, earningRate)
     }
 }
