@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.view
+
+import lotto.model.LottoPrize
 
 data class LottoResult(
     val lottoPrize: LottoPrize,

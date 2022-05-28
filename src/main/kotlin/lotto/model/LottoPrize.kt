@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.model
 
 enum class LottoPrize(val matchCount: Int, val prizeMoney: Int) {
     THREE_MATCH(3, 5000),

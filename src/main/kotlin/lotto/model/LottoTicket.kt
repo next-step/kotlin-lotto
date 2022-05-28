@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.model
 
 class LottoTicket(
     private val lottoTicket: Set<LottoNumber>

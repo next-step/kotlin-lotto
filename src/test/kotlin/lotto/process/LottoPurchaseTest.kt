@@ -1,5 +1,6 @@
-package lotto.domain
+package lotto.process
 
+import lotto.model.LottoPrice
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

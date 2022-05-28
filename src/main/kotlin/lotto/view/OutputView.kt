@@ -1,8 +1,7 @@
 package lotto.view
 
-import lotto.domain.LottoPurchase.Companion.LOTTO_PRICE
-import lotto.domain.LottoResult
-import lotto.domain.LottoTicket
+import lotto.model.LottoTicket
+import lotto.process.LottoPurchase.Companion.LOTTO_PRICE
 
 class OutputView {
     fun cannotPurchaseLotto() {

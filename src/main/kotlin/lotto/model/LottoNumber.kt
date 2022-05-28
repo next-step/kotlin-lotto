@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.model
 
 class LottoNumber(
     private val value: Int
