@@ -1,6 +1,8 @@
 package lotto.dto
 
+import lotto.domain.LottoNumber
+
 data class WinningLottoRequest(
-    val winningLottoNumbers: String,
-    val bonusNumber: String
+    val winningLottoNumbers: List<LottoNumber>,
+    val bonusNumber: LottoNumber
 )

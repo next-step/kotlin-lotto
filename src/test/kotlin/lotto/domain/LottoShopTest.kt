@@ -12,7 +12,7 @@ class LottoShopTest : DescribeSpec({
                 return `기본 로또 티켓(1~6)`()
             }
 
-            override fun generateManual(lottoNumbers: String): LottoTicket {
+            override fun generateManual(lottoNumbers: List<LottoNumber>): LottoTicket {
                 return `기본 로또 티켓(1~6)`()
             }
         }

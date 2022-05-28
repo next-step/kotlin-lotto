@@ -1,11 +1,12 @@
 package lotto.dto
 
-import java.math.BigDecimal
+import lotto.domain.LottoNumber
+import lotto.vo.Money
 
 data class LottoBuyingRequest(
-    val amount: BigDecimal,
+    val amount: Money,
     val manualCount: Int,
-    val manualNumbers: List<String>
+    val manualNumbers: List<List<LottoNumber>>,
 ) {
     init {
         require(manualCount == manualNumbers.size) {

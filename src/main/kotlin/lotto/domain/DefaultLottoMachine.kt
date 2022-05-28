@@ -13,7 +13,7 @@ object DefaultLottoMachine : LottoMachine {
         return LottoTicket(lottoNumbers)
     }
 
-    override fun generateManual(lottoNumbers: String): LottoTicket {
-        return LottoTicket.of(lottoNumbers)
+    override fun generateManual(lottoNumbers: List<LottoNumber>): LottoTicket {
+        return LottoTicket(lottoNumbers)
     }
 }

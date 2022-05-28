@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.LottoNumber
 import lotto.domain.LottoShop
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
@@ -8,14 +7,13 @@ import lotto.dto.LottoTicketsResponse
 import lotto.dto.WinningLottoResponse
 import lotto.view.InputView
 import lotto.view.ResultView
-import lotto.vo.Money
 
 fun main() {
     val buyingRequest = InputView.buying()
 
     val lottoShop = LottoShop()
     val lottoTickets = lottoShop.buying(
-        buyingAmount = Money(buyingRequest.amount),
+        buyingAmount = buyingRequest.amount,
         manualNumbers = buyingRequest.manualNumbers
     )
 
@@ -24,8 +22,8 @@ fun main() {
     val winningLottoRequest = InputView.winningLotto()
 
     val winningLotto = WinningLotto(
-        winningTicket = LottoTicket.of(winningLottoRequest.winningLottoNumbers),
-        bonusNumber = LottoNumber.of(winningLottoRequest.bonusNumber)
+        winningTicket = LottoTicket(winningLottoRequest.winningLottoNumbers),
+        bonusNumber = winningLottoRequest.bonusNumber
     )
     val lottoRanks = lottoTickets.matching(winningLotto)
 

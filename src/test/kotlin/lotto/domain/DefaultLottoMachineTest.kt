@@ -14,8 +14,7 @@ class DefaultLottoMachineTest : DescribeSpec({
 
     describe("generateManual") {
         it("수동 로또 티켓을 생성한다") {
-            val lottoNumbers = "1, 2, 3, 4, 5, 6"
-            DefaultLottoMachine.generateManual(lottoNumbers) shouldBe LottoTicket(
+            DefaultLottoMachine.generateManual(`기본 로또 번호 목록(1~6)`()) shouldBe LottoTicket(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
