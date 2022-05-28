@@ -43,4 +43,6 @@ fun main() {
 
     val lottoScore = LottoScore()
     val result = lottoScore.compareNumber(lastWinningTicket, lottoTickets)
+
+    outputView.winningResult(result)
 }

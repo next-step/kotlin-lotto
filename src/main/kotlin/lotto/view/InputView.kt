@@ -9,7 +9,7 @@ class InputView {
     }
 
     fun readWinningNum(): String? {
-        printMsg(Const.OutputMsg.LOTTO_NUM_MSG)
+        printMsg("\n${Const.OutputMsg.LOTTO_NUM_MSG}")
         return readlnOrNull()
     }
 
