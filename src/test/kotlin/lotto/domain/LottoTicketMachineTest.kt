@@ -23,15 +23,15 @@ class LottoTicketMachineTest : DescribeSpec({
             val givenLottoTickets: LottoTickets = LottoTicketMachine.generate(givenNumber)
 
             it("개수 만큼 로또를 생성한다.") {
-                givenLottoTickets.lottoTickets.size shouldBe 6
+                givenLottoTickets.getLottoTickets().size shouldBe 6
             }
 
             it("로또는 서로 다른 번호를 가진다.") {
-                givenLottoTickets.lottoTickets.distinct().size shouldBe 6
+                givenLottoTickets.getLottoTickets().distinct().size shouldBe 6
             }
 
             it("로또 번호는 오름차순으로 정렬된다.") {
-                givenLottoTickets.lottoTickets.forEach { ticket ->
+                givenLottoTickets.getLottoTickets().forEach { ticket ->
                     run {
                         ticket.numbers.toList().shouldBeSorted()
                     }
