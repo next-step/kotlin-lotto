@@ -35,7 +35,30 @@
 - [x] 출력
   - 구매 금액만큼 발행된 티켓을 출력한다.
   - 당첨 여부를 판단해 당첨 금액과 수익률을 출력한다.
-- [ ] 로또 앱 구현
+- [x] 로또 앱 구현
+- 코드리뷰 반영
+  - 테스트 코드 정리
+    - [ ] 좋은 단위테스트는 결과가 올바른지 알 수 있어야 하고 경계조건이 설정되어 있어야 한다 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882665191))
+    - [ ] 테스트명을 명확하게 작성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882693619))
+    - [ ] 꽝인 경우 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882750160))
+    - [ ] 자주 사용하는 변수를 test fixture 로 생성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882701463))
+  - 객체의 역할에 맞게 기능 구현 
+    - [ ] 정렬 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882666093))
+    - [ ] 맞는 개수 비교 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882746666))
+    - [ ] 수익률 표시 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882754116))
+    - [ ] LottoResult 객체 생성해서 테스트해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
+    - [ ] Money 객체 분리하기
+  - [ ] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882728105))
+  - [ ] List Builder 사용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882735688))
+  - [ ] Map과 관련된 코드 개선 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
+  - [ ] 상수는 선언해서 사용하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882736373))
+  - [ ] BigDecimal 적용 (Double은 소수점 정밀도에 있어 한계가 있어 값이 유실될 수 있다.) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882767934))
+  - [ ] 익셉션 정리 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882770530))
+  - [ ] 패키지 분리 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882810460))
+  - [ ] 수익률 계산시 잔돈도 계산하기
+  - [ ] 출력 시 요구사항에 맞게 출력하기(toString으로 동일하게 표현되고 있지만, 의도해서 표현하는 방식으로 개선해보자) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882791720))
+  - [ ] 당첨이 되지 않은 등수도 표시되어야 한다.([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882797294))
+
 
 ## Step1 : 문자열 덧셈
 ### 요구사항
