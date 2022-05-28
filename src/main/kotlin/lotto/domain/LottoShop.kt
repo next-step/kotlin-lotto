@@ -3,8 +3,8 @@ package lotto.domain
 class LottoShop {
     val randomNumberGenerator: RandomNumberGenerator = RandomNumberGenerator()
 
-    fun purchase(one: Int): PurchaseRecord {
-        val lottos = (1..one / LOTTO_PRICE).map { Lotto(randomNumberGenerator) }
+    fun purchase(cash: Int): PurchaseRecord {
+        val lottos = (1..cash / LOTTO_PRICE).map { Lotto(randomNumberGenerator) }
         return PurchaseRecord(lottos)
     }
 
