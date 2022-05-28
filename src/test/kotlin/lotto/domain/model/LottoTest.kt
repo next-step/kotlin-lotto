@@ -25,6 +25,6 @@ class LottoTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
 
-        assertThat(lotto checkWith winningNumbers).isEqualTo(5)
+        assertThat(lotto.checkWith(winningNumbers)).isEqualTo(5)
     }
 }
