@@ -8,6 +8,7 @@ import lotto.domain.WinCondition
 import lotto.view.Console
 import lotto.view.ConsoleOutput
 import lotto.view.LottoView
+import lotto.view.ManualIssueView
 import lotto.view.MoneyView
 import lotto.view.ProfitView
 import lotto.view.ResultView
@@ -19,8 +20,10 @@ fun main() {
 
     val money = MoneyView(console).readMoney()
 
+    val request = ManualIssueView(console).getPurchaseRequest(money)
+
     val store = Store(Issuer)
-    val lottos = store.buy(money)
+    val lottos = store.sell(request)
 
     LottoView(output, lottos).print()
 
