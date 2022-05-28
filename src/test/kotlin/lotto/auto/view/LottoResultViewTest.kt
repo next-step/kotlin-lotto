@@ -29,7 +29,7 @@ internal class LottoResultViewTest : BehaviorSpec({
                 |4개 일치(50000원)-0개
                 |5개 일치(1500000원)-1개
                 |6개 일치(2000000000원)-1개
-                |총 수익률은 0.35입니다.
+                |총 수익률은 1000750.0입니다.
                 """.trimMargin()
                 stubIOSystem.screenBuffer.joinToString("") shouldBe expected
             }
