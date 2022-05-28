@@ -8,6 +8,11 @@ class InputView {
         return readlnOrNull()
     }
 
+    fun readWinningNum(): String? {
+        printMsg(Const.OutputMsg.LOTTO_NUM_MSG)
+        return readlnOrNull()
+    }
+
     private fun printMsg(message: String) = println(message)
 
     private fun readInputAndRequireNotBlank(): String {

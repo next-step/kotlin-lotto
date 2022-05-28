@@ -2,15 +2,19 @@ package lotto
 
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoPurchase.Companion.LOTTO_PRICE
+import lotto.domain.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
+import java.lang.IllegalArgumentException
 
 fun main() {
     val inputView = InputView()
     val outputView = OutputView()
 
+    // 구입금액 입력받기
     val price = inputView.readPrice()
 
+    // 구입금액 validation
     val lottoPurchase = LottoPurchase()
     val lottoPrice = lottoPurchase.getMoney(price)
 
@@ -19,9 +23,22 @@ fun main() {
         return
     }
 
+    // 구입금액에 따른 로또 개수 반환
     val lottoCount = lottoPurchase.getLotto(lottoPrice)
     outputView.resultPurchaseLotto(lottoCount)
 
+    // 로또 개수에 맞추어 로또 번호 반환
     val lottoTickets = lottoPurchase.getLottoTickets(lottoCount)
     outputView.resultLottoTickets(lottoTickets)
+
+    // 지난주 로또 당첨번호 받기
+    val lastWinningNumber = inputView.readWinningNum()
+    val lastWinningTicket = try {
+        WinningNumber().winningNumberToLottoTicket(lastWinningNumber)
+    } catch (e: IllegalArgumentException) {
+        print(Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_WINNING_NUMBER_ERROR)
+        return
+    }
+
+    println(lastWinningTicket)
 }

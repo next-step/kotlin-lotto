@@ -66,7 +66,7 @@
   [x] 구입금액이 정수가 아닌 경우 IllegalArgumentException 발생
   [x] 구입금액이 0보다 작으면 IllegalArgumentException 발생
 [x] 금액에 따른 로또 개수 구하기
-[ ] 당첨 번호 입력받기
+[x] 당첨 번호 입력받기
 [x] 개수에 맞추어 로또 생성하기
 [ ] 사용자의 로또와 당첨 번호 비교하기
 [ ] 당첨 통계 구현 하기
