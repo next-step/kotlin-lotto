@@ -18,7 +18,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [55, 32, 156, 266, 334, 23, 1, 4, 0])
     fun `1에서 45까지의 숫자 외의 값이 들어온다면 IllegalArgumentException이 발생한다`(input: Int) {
-        if (input in LottoNumber.lottoNumberRange) {
+        if (input in LottoNumber.LOTTO_NUMBER_RANGE) {
             assertDoesNotThrow { LottoNumber(input) }
         } else {
             assertThrows<IllegalArgumentException> { LottoNumber(input) }

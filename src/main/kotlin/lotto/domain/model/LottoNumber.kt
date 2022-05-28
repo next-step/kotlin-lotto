@@ -3,7 +3,7 @@ package lotto.domain.model
 @JvmInline
 value class LottoNumber(val value: Int) {
     init {
-        require(value in lottoNumberRange) {
+        require(value in LOTTO_NUMBER_RANGE) {
             "$MESSAGE_INVALID_NUMBER$value"
         }
     }
@@ -14,6 +14,6 @@ value class LottoNumber(val value: Int) {
         private const val START_LOTTO_NUMBER = 1
         private const val END_LOTTO_NUMBER = 45
 
-        val lottoNumberRange = (START_LOTTO_NUMBER..END_LOTTO_NUMBER)
+        val LOTTO_NUMBER_RANGE = (START_LOTTO_NUMBER..END_LOTTO_NUMBER)
     }
 }

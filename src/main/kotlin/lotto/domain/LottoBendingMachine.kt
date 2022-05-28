@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.model.Lotto
 import lotto.domain.model.Lottos
 
 object LottoBendingMachine {
@@ -15,7 +16,7 @@ object LottoBendingMachine {
 
     private fun makeLottos(purchaseCount: Int): Lottos {
         val lottoList = List(purchaseCount) {
-            LottoMaker.make()
+            Lotto.make()
         }
 
         return Lottos(lottoList)

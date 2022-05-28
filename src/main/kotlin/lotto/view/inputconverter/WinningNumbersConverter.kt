@@ -1,5 +1,6 @@
 package lotto.view.inputconverter
 
+import lotto.domain.model.LottoNumber
 import lotto.domain.model.WinningNumbers
 
 object WinningNumbersConverter : InputConverter<WinningNumbers> {
@@ -9,8 +10,8 @@ object WinningNumbersConverter : InputConverter<WinningNumbers> {
         val numbers = input
             .split(DELIMITER)
             .map { stringNumber ->
-                stringNumber.toInt()
-            }
+                LottoNumber(stringNumber.toInt())
+            }.toSet()
 
         return WinningNumbers(numbers)
     }
