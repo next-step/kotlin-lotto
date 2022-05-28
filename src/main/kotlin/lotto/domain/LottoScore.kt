@@ -4,7 +4,7 @@ class LottoScore {
     fun compareNumber(winningTicket: LottoTicket, lottoTickets: List<LottoTicket>): List<LottoResult> {
         val matchCounts = lottoTickets.map { lottoTicket ->
             lottoTicket.get().mapNotNull { lottoNumber ->
-                winningTicket.get().find { it.comapare(lottoNumber) }
+                winningTicket.get().find { it == lottoNumber }
             }.size
         }
 

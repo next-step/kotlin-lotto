@@ -33,7 +33,15 @@ internal class LottoNumberTest {
         val lottoNumber2 = LottoNumber(4)
 
         assertThat(lottoNumber1.get()).isEqualTo(lottoNumber2.get())
-        assertThat(lottoNumber1.comapare(lottoNumber2))
-        assertThat(lottoNumber1).isNotEqualTo(lottoNumber2)
+        assertThat(lottoNumber1).isEqualTo(lottoNumber2)
+    }
+
+    @Test
+    internal fun `같은 값의 LottoNumber를 set에 넣으면 중복이다`() {
+        val lottoNumber1 = LottoNumber(4)
+        val lottoNumber2 = LottoNumber(4)
+
+        val lottoNumbers = setOf(lottoNumber1, lottoNumber2)
+        assertThat(lottoNumbers.size).isEqualTo(1)
     }
 }

@@ -9,7 +9,11 @@ class LottoNumber(
 
     fun get() = value
 
-    fun comapare(compareValue: LottoNumber) = value == compareValue.get()
+    override fun equals(other: Any?): Boolean = (value == (other as? LottoNumber)?.value)
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 
     companion object {
         const val MIN_LOTTO_NUM = 1
