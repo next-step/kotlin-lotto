@@ -16,7 +16,6 @@ object BuyLottoOutputView {
                 .lottoTicketNumbers.value.map { it.value }.sorted()
                 .joinToString(prefix = "[", postfix = "]") + DIVIDING
         }
-        result += DIVIDING
         return result
     }
 
