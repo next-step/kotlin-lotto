@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoBuyer
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest

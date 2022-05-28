@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoBuyer {
     private val _lottoNumbers = ArrayList<Lotto>()

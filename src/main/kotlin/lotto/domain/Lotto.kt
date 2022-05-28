@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Lotto {
     private val _lottoNumber = ArrayList<Int>()
@@ -14,6 +14,7 @@ class Lotto {
         return (LOTTO_START_NUMBER..LOTTO_END_NUMBER)
             .shuffled()
             .take(LOTTO_SIZE)
+            .sorted()
     }
 
     fun getCountWithWinningLottoNumber(winningLottoNumbers: List<Int>): Int {
