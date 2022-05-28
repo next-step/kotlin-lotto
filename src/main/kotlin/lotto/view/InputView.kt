@@ -42,7 +42,7 @@ object InputView {
 
     private fun manualNumber(): String {
         val manualNumber = readln()
-        if(manualNumber.isEmpty()){
+        if (manualNumber.isEmpty()) {
             return readln()
         }
         return manualNumber
