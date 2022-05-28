@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoMachine {
     fun buy(money: Int): List<Lotto> {
-        require(money >= 1000) { ERROR_NOT_ENOUGH_MONEY }
+        require(money >= TICKET_PRICE) { ERROR_NOT_ENOUGH_MONEY }
 
         val ticketCount: Int = money / TICKET_PRICE
         val tickets = mutableListOf<Lotto>()
