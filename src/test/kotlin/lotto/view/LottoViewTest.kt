@@ -13,7 +13,7 @@ internal class LottoViewTest : StringSpec({
 
         view.print()
 
-        output.printed.first() shouldBe "수동으로 0장, 자동으로 5개를 구매했습니다."
+        output.printed.first() shouldBe "\n수동으로 0장, 자동으로 5개를 구매했습니다."
     }
 
     "구매한 로또의 숫자리스트를 출력한다" {

@@ -18,7 +18,7 @@ internal class StoreTest : FreeSpec({
         val money = Money(0)
         val request = PurchaseRequest(money)
 
-        val result = store.buy(request)
+        val result = store.sell(request)
 
         result.shouldBeEmpty()
     }
@@ -30,7 +30,7 @@ internal class StoreTest : FreeSpec({
             14999 to 14,
         ).forEach { (money, count) ->
             "$money 원으로 구매하는 경우 $count 개를 받는다" {
-                val result = store.buy(PurchaseRequest(Money(money)))
+                val result = store.sell(PurchaseRequest(Money(money)))
 
                 result shouldHaveSize count
             }
@@ -41,7 +41,7 @@ internal class StoreTest : FreeSpec({
         val request = PurchaseRequest(Money(1), manualLottos)
 
         shouldThrow<IllegalArgumentException> {
-            store.buy(request)
+            store.sell(request)
         }
     }
 
@@ -49,7 +49,7 @@ internal class StoreTest : FreeSpec({
         val lottoCount = 10
         val money = Money(Store.LOTTO_PRICE * lottoCount)
 
-        val result = store.buy(PurchaseRequest(money, manualLottos))
+        val result = store.sell(PurchaseRequest(money, manualLottos))
 
         result.count { it.isManual } shouldBe manualLottos.size
         result.count { it.isAuto } shouldBe lottoCount - manualLottos.size
