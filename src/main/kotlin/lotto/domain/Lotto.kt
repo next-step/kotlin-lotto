@@ -15,7 +15,9 @@ data class Lotto(
 
     fun winnerPrize(): Int = price.winningPrize
 
-    fun sortedNumbers(): List<Int> = numbers.sorted()
+    fun correctNumberCounts(other: Lotto): Int =
+        (numbers.sorted() zip other.numbers.sorted())
+            .count { it.first == it.second }
 
     private fun isInRange(number: Int): Boolean {
         return number in LOTTO_NUMBER_RANGE
