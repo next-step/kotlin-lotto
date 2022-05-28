@@ -6,7 +6,7 @@ data class LottoNumber(val number: Int) {
     }
 
     companion object {
-        private const val MIN_NUMBER = 1
-        private const val MAX_NUMBER = 45
+        const val MIN_NUMBER = 1
+        const val MAX_NUMBER = 45
     }
 }

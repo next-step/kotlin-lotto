@@ -18,7 +18,7 @@ internal class TicketMachineTest {
     )
     fun `정상 구매`(amount: Int, expected: Int) {
         // given
-        val ticketMachine = TicketMachine()
+        val ticketMachine = TicketMachine(NumberGenerator())
 
         // when
         val tickets = ticketMachine.buy(amount)
@@ -31,7 +31,7 @@ internal class TicketMachineTest {
     @ValueSource(ints = [-1000, 999, 100])
     fun `구매 금액이 음수거나 한개도 못사는 경우`(amount: Int) {
         // given
-        val ticketMachine = TicketMachine()
+        val ticketMachine = TicketMachine(NumberGenerator(1, 45))
 
         // when
         val tickets = ticketMachine.buy(amount)
