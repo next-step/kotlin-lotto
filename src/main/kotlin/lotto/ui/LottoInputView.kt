@@ -5,14 +5,12 @@ import lotto.domain.Lotto
 import lotto.domain.Worth
 
 object LottoInputView {
-    private const val ONE_LOTTO_PRICE = 1000
 
     fun getPurchaseAmount(): Worth {
         println("구입금액을 입력해 주세요.")
         val investment = readln().toIntOrNull() ?: throw RuntimeException("")
-        val numberOfLotteries = investment / ONE_LOTTO_PRICE
 
-        return Worth(investment, numberOfLotteries)
+        return Worth(investment)
     }
 
     fun getWinningLotteryNumber(): Lotto {
