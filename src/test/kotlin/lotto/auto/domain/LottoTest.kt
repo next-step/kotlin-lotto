@@ -90,7 +90,7 @@ internal class LottoTest : BehaviorSpec({
 
         `when`("자동 발급한 경우") {
             val randomNumber = listOf(6, 5, 4, 3, 2, 1)
-            val result = Lotto.createRandomNumbers(RandomStub(randomNumber))
+            val result = Lotto.createRandomNumbers(StubNumberGenerator(randomNumber))
             then("숫자 생성기에 의해 생성된 숫자를 가진 로또를 발행한다.") {
                 result.match(Lotto(randomNumber)) shouldBe LottoScore.ONE_PLACE
             }
@@ -98,8 +98,11 @@ internal class LottoTest : BehaviorSpec({
     }
 })
 
-class RandomStub(private val actualNumbers: List<Int>) : NumberGenerator {
+class StubNumberGenerator(private val actualNumbers: List<Int>) : NumberGenerator {
 
     private var index = 0
-    override fun getNumber() = actualNumbers[index++]
+    override fun getNumber(): Int {
+        index = index++ % actualNumbers.size
+        return actualNumbers[index]
+    }
 }
