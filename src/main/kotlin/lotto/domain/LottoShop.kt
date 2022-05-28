@@ -3,12 +3,12 @@ package lotto.domain
 import lotto.vo.Money
 
 class LottoShop(private val lottoMachine: LottoMachine = DefaultLottoMachine) {
-    fun buying(amount: Money, manualNumbers: List<String> = emptyList()): LottoTickets {
-        require(amount >= manualTicketsAmount(manualNumbers)) {
+    fun buying(buyingAmount: Money, manualNumbers: List<String> = emptyList()): LottoTickets {
+        require(buyingAmount >= manualTicketsAmount(manualNumbers)) {
             "구매 금액이 부족합니다"
         }
 
-        val autoCount = amount / LOTTO_TICKET_PRICE - manualNumbers.size
+        val autoCount = buyingAmount / LOTTO_TICKET_PRICE - manualNumbers.size
         val manualLottoTickets = manualNumbers.map(lottoMachine::generateManual)
         val autoLottoTickets = List(autoCount) { lottoMachine.generateAuto() }
         return LottoTickets(manualLottoTickets + autoLottoTickets)

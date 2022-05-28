@@ -15,7 +15,7 @@ fun main() {
 
     val lottoShop = LottoShop()
     val lottoTickets = lottoShop.buying(
-        amount = Money(buyingRequest.amount),
+        buyingAmount = Money(buyingRequest.amount),
         manualNumbers = buyingRequest.manualNumbers
     )
 
