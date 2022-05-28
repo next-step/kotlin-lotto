@@ -16,7 +16,7 @@ class LottoPrizeManagerTest : DescribeSpec({
         lottoPrizeManager.addUniquePolicy(addPrizePolicy)
 
         // then
-        lottoPrizeManager.getItem(0).wonMatchedCount shouldBe addPrizePolicy.wonMatchedCount
+        lottoPrizeManager.polices[0].wonMatchedCount shouldBe addPrizePolicy.wonMatchedCount
     }
 
     describe("validate") {

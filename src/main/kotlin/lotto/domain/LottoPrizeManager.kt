@@ -2,10 +2,8 @@ package lotto.domain
 
 class LottoPrizeManager {
     private val lottoPrizePolices: MutableList<LottoPrizePolicy> = mutableListOf()
-
-    fun getItem(index: Int): LottoPrizePolicy {
-        return lottoPrizePolices[index]
-    }
+    val polices
+        get() = lottoPrizePolices.toList()
 
     fun addUniquePolicy(prizePolicy: LottoPrizePolicy) {
         validateUniqueItem(prizePolicy)
