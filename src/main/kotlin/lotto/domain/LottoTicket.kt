@@ -7,7 +7,7 @@ class LottoTicket(
         require(lottoTicket.size == LOTTO_NUMBER_COUNT) { "로또는 6개의 숫자로 이루어져 있습니다." }
     }
 
-    fun get() = lottoTicket.sortedBy { it.get() }
+    fun get() = lottoTicket.sortedBy { it.get() }.toSet()
 
     override fun toString() = buildString {
         append("[")

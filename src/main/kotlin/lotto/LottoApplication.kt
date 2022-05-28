@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoPurchase.Companion.LOTTO_PRICE
+import lotto.domain.LottoScore
 import lotto.domain.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -40,5 +41,6 @@ fun main() {
         return
     }
 
-    println(lastWinningTicket)
+    val lottoScore = LottoScore()
+    val result = lottoScore.compareNumber(lastWinningTicket, lottoTickets)
 }
