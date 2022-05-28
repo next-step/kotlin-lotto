@@ -8,9 +8,13 @@ object IntValidator {
         .requireNotNull()
         .requirePositiveNumber()
 
-    private fun Int?.requireNotNull(): Int = this ?: throw RuntimeException(MESSAGE_NOT_NUMBER_EXCEPTION)
+    private fun Int?.requireNotNull(): Int = requireNotNull(this) {
+        MESSAGE_NOT_NUMBER_EXCEPTION
+    }
 
     private fun Int.requirePositiveNumber(): Int = this.also { number ->
-        if (number < 0) throw RuntimeException(MESSAGE_NEGATIVE_NUMBER_EXCEPTION)
+        require(number >= 0) {
+            MESSAGE_NEGATIVE_NUMBER_EXCEPTION
+        }
     }
 }
