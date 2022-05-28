@@ -13,4 +13,10 @@ object LottoStatistics {
     fun calculateEarningRate(money: Int, winningTotalMoney: Int): Double {
         return round(winningTotalMoney / money.toDouble() * 100) / 100
     }
+
+    fun getLottoWinningCountOfLottoRank(lottoNumbers: List<Lotto>, winningLottoNumbers: List<Int>, count: Int): Int {
+        return lottoNumbers.filter { lotto ->
+            lotto.getCountWithWinningLottoNumber(winningLottoNumbers) == count
+        }.size
+    }
 }
