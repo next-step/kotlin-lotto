@@ -7,6 +7,9 @@ data class Lotto(val type: LottoType, val numbers: List<LottoNumber>) {
         require(numbers.isUnique()) { "로또에 중복된 숫자가 존재할 수 없습니다" }
     }
 
+    val isAuto: Boolean
+        get() = type == LottoType.AUTO
+
     private fun List<LottoNumber>.isUnique(): Boolean = toSet().size == size
 
     companion object {
