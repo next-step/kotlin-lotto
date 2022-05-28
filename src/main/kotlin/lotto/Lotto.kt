@@ -11,14 +11,17 @@ class Lotto {
     }
 
     private fun generateLottoNumber(): List<Int> {
-        return (LOTTO_START_NUMBER..LOTTO_END_NUMBER).shuffled().take(LOTTO_SIZE)
+        return (LOTTO_START_NUMBER..LOTTO_END_NUMBER)
+            .shuffled()
+            .take(LOTTO_SIZE)
     }
 
-    fun getCountWithWinningLotteryNumber(winningLottoNumbers: List<Int>): Int {
-        return winningLottoNumbers.filter { number -> _lottoNumber.contains(number) }.size
+    fun getCountWithWinningLottoNumber(winningLottoNumbers: List<Int>): Int {
+        return winningLottoNumbers
+            .filter { number -> _lottoNumber.contains(number) }.size
     }
 
-    fun exchangeMoney(count: Int): Int {
+    fun exchangeCountToMoney(count: Int): Int {
         return when (count) {
             THREE_COUNT -> THREE_COUNT_MONEY
             FOUR_COUNT -> FOUR_COUNT_MONEY

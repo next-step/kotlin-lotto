@@ -1,5 +1,7 @@
 package lotto
 
+import kotlin.math.round
+
 class LottoBuyer {
     private val _lottoNumbers = ArrayList<Lotto>()
     val lottoNumbers
@@ -20,6 +22,17 @@ class LottoBuyer {
             result.add(Lotto().also { it.getLottoNumber() })
         }
         return result
+    }
+
+    fun calculateWinningTotalMoney(winningLottoNumbers: List<Int>): Int {
+        return _lottoNumbers.sumOf { lotto ->
+            val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers)
+            lotto.exchangeCountToMoney(count)
+        }
+    }
+
+    fun calculateEarningRate(money: Int, winningTotalMoney: Int): Double {
+        return round(winningTotalMoney / money.toDouble() * 100) / 100
     }
 
     companion object {
