@@ -6,34 +6,32 @@ import io.kotest.matchers.shouldBe
 
 class LottoTicketsTest : BehaviorSpec({
 
-    Given("로또 번호 티켓 목록은") {
+    Given("로또 티켓 목록은") {
         val lottoTickets = LottoTickets(
             listOf(
                 LottoTicket(setOf(1, 2, 3, 10, 11, 12)),
-                LottoTicket(setOf(1, 2, 3, 4, 11, 12)),
-                LottoTicket(setOf(1, 2, 3, 4, 5, 12)),
-                LottoTicket(setOf(1, 2, 3, 4, 5, 7)),
+                LottoTicket(setOf(1, 2, 5, 10, 11, 12)),
                 LottoTicket(setOf(1, 2, 3, 4, 5, 6)),
             )
         )
         val lottoLastNumbers = LottoLastNumbers(setOf(1, 2, 3, 4, 5, 6), 7)
-        val matchResult = lottoTickets.getMatchResult(lottoLastNumbers)
 
-        When("6개의 로또 번호 와 1개의 보너스 번호가 입력이 되면") {
-            Then("3개 일치 개수를 반환한다") {
-                matchResult[LottoMatch.THREE] shouldBe 1
+        When("지난주 당첨번호를 입력하면") {
+            Then("총 3개가 일치하는 통계를 반환한다") {
+                val statistics = lottoTickets.getLottoStatistics(lottoLastNumbers)
+                statistics.values.sum() shouldBe 3
             }
-            Then("4개 일치 개수를 반환한다") {
-                matchResult[LottoMatch.FOUR] shouldBe 1
+            Then("번호 1개가 일치하는 티켓 개수는 null을 반환한다") {
+                val statistics = lottoTickets.getLottoStatistics(lottoLastNumbers)
+                statistics[LottoMatch.ONE] shouldBe null
             }
-            Then("5개 일치 개수를 반환한다") {
-                matchResult[LottoMatch.FIVE] shouldBe 1
+            Then("번호 3개가 일치하는 티켓 개수는 2를 반환한다") {
+                val statistics = lottoTickets.getLottoStatistics(lottoLastNumbers)
+                statistics[LottoMatch.THREE] shouldBe 2
             }
-            Then("5개 + 보너스 번호 일치 개수를 반환한다") {
-                matchResult[LottoMatch.FIVE_BONUS] shouldBe 1
-            }
-            Then("6개 일치 개수를 반환한다") {
-                matchResult[LottoMatch.SIX] shouldBe 1
+            Then("번호 6개가 일치하는 티켓 개수는 1를 반환한다") {
+                val statistics = lottoTickets.getLottoStatistics(lottoLastNumbers)
+                statistics[LottoMatch.SIX] shouldBe 1
             }
         }
 
