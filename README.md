@@ -30,4 +30,7 @@
   - [x] 금액을 입력하면 PurchaseRecord를 반환한다.
   - [x] 천원단위로 떨어지지 않으면? > 천원단위 내림하여 계산한다.
   - [ ] 당첨번호(Lotto)를 반환한다.
-
+- WinnerStat
+  - [x] PurchaseRecord와 Winner(List<Int>)를 파라미터로 받아 당첨 통계를 만든다.
+  - [x] 3~6개 일치 항목별 당첨 수를 갖는다.
+  - [x] 총 수익률을 반환한다.
