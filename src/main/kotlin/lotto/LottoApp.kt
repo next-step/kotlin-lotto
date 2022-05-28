@@ -14,6 +14,7 @@ fun main() {
     ResultView().printTickets(tickets)
 
     val winner = InputView().getPastWinner()
+    val bonus = InputView().getBonusNumber()
 
     val lottoResults = mutableMapOf<Winning, Int>()
 
