@@ -26,6 +26,11 @@ class OutputView {
         println(result)
     }
 
+    fun winningRate(rateResult: Double) {
+        // 총 수익률은 0.35입니다.
+        println("총 수익률은 %.2f입니다.".format(rateResult))
+    }
+
     private fun winningLottoResults(lottoResults: List<LottoResult>) = buildString {
         lottoResults.sortedBy { it.lottoPrize.matchCount }
             .forEach {

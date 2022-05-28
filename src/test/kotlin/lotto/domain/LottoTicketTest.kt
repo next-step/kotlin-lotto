@@ -17,7 +17,7 @@ internal class LottoTicketTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [1, 2, 3, 4, 5, 7])
+    @ValueSource(ints = [1, 2, 3, 4, 5])
     internal fun `로또 티켓의 숫자가 6개가 아닌 경우 IllegalArgumentException 에러 발생`(lottoNumCount: Int) {
         assertThrows<IllegalArgumentException> { makeRandomLottoTicket(lottoNumCount) }
     }

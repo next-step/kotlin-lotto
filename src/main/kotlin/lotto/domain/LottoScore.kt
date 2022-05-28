@@ -16,4 +16,12 @@ class LottoScore {
             }
         }.filterNotNull()
     }
+
+    fun rateOfResult(lottoPrice: LottoPrice, lottoResults: List<LottoResult>): Double {
+        return sumOfResult(lottoResults).toDouble() / lottoPrice.get()
+    }
+
+    private fun sumOfResult(lottoResults: List<LottoResult>) = lottoResults.sumOf {
+        it.lottoPrize.prizeMoney * it.lottoCount
+    }
 }
