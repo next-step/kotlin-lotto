@@ -72,17 +72,17 @@ internal class MatcherTest : FreeSpec({
             Triple(
                 "5개 0회 6개 0회",
                 listOf(
-                    Lotto.of(listOf(1, 2, 3, 4, 7, 8)),
-                    Lotto.of(listOf(3, 4, 5, 6, 7, 8)),
+                    Lotto.autoOf(1, 2, 3, 4, 7, 8),
+                    Lotto.autoOf(3, 4, 5, 6, 7, 8),
                 ),
                 listOf(0, 0),
             ),
             Triple(
                 "5개 2회 6개 1회",
                 listOf(
-                    Lotto.of(listOf(1, 2, 3, 4, 5, 7)),
-                    Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto.of(listOf(2, 3, 4, 5, 6, 7))
+                    Lotto.autoOf(1, 2, 3, 4, 5, 7),
+                    Lotto.autoOf(1, 2, 3, 4, 5, 6),
+                    Lotto.autoOf(2, 3, 4, 5, 6, 7)
                 ),
                 listOf(2, 1),
             ),
@@ -101,8 +101,8 @@ internal class MatcherTest : FreeSpec({
         )
         val matcher = Matcher(winNumbers, policies)
         val lottos = listOf(
-            Lotto.of(listOf(2, 3, 4, 5, 7, 8)),
-            Lotto.of(listOf(2, 3, 4, 5, 8, 9)),
+            Lotto.autoOf(2, 3, 4, 5, 7, 8),
+            Lotto.autoOf(2, 3, 4, 5, 8, 9),
         )
 
         val results = matcher.makeResult(lottos)

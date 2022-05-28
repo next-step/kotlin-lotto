@@ -7,7 +7,7 @@ import lotto.domain.Lotto
 internal class LottoViewTest : StringSpec({
 
     "구매한 로또 개수를 출력한다" {
-        val lottos = List(5) { Lotto.of(listOf(1, 2, 3, 4, 5, 6)) }
+        val lottos = List(5) { Lotto.autoOf(1, 2, 3, 4, 5, 6) }
         val output = StubOutput()
         val view = LottoView(output, lottos)
 
@@ -18,8 +18,8 @@ internal class LottoViewTest : StringSpec({
 
     "구매한 로또의 숫자리스트를 출력한다" {
         val lottos = listOf(
-            Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
-            Lotto.of(listOf(7, 8, 9, 10, 11, 12)),
+            Lotto.autoOf(1, 2, 3, 4, 5, 6),
+            Lotto.autoOf(7, 8, 9, 10, 11, 12),
         )
         val output = StubOutput()
         val view = LottoView(output, lottos)
