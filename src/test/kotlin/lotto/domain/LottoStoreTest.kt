@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.int
 import io.kotest.property.checkAll
@@ -13,13 +12,10 @@ class LottoStoreTest : BehaviorSpec({
         When("1000원 이상의 돈으로") {
             val money = 34_567
             val expectedTickets = 34
-            val expectedChanges = 567
 
             And("로또 티켓을 구매하면") {
-                Then("로또 티켓은 1000원에 1개로 받는다 (금액: $money, 개수: $expectedTickets, 잔돈: $expectedChanges)") {
-                    val (lottoTickets, changes) = LottoStore.buy(money)
-                    lottoTickets shouldHaveSize expectedTickets
-                    changes shouldBe expectedChanges
+                Then("로또 티켓은 1000원에 1개로 받는다 (금액: $money, 개수: $expectedTickets)") {
+                    LottoStore.buy(money) shouldHaveSize expectedTickets
                 }
             }
 
