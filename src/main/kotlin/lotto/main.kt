@@ -11,7 +11,7 @@ import lotto.view.PrintView
 fun main() {
     val userMoneyInput = InputView.getUserMoney()
     val userMoney = Money(userMoneyInput)
-    val manualLottoCount = InputView.getLottoCount()
+    val manualLottoCount = InputView.getLottoCount(max = userMoney.getLottoCount())
     val lottoStore = LottoStore(userMoney, manualLottoCount)
 
     val manualLottoNumbers = InputView.getLottoNumbers(manualLottoCount)
