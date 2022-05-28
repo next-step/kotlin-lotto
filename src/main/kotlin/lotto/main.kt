@@ -3,8 +3,8 @@ package lotto
 import lotto.domin.LottoMachine
 import lotto.domin.LottoNumberSet
 import lotto.domin.WinningStatics
+import lotto.dto.InputLottoNumberDto
 import lotto.dto.InputPaymentRequestDto
-import lotto.dto.InputWinningLottoNumberDto
 import lotto.util.LottoNumberGenerator
 import lotto.util.LottoNumberRandomGenerator
 import lotto.view.InputView
@@ -15,7 +15,7 @@ fun main() {
     val resultView = ResultView()
 
     val payment: String = inputView.payment()
-    val paymentRequestDto = InputPaymentRequestDto.convertToOperand(payment)
+    val paymentRequestDto = InputPaymentRequestDto.convertPayment(payment)
 
     val lottoRecord = buyLotto(resultView, paymentRequestDto)
     lottoStatics(inputView, resultView, paymentRequestDto, lottoRecord)
@@ -39,9 +39,10 @@ fun lottoStatics(
     lottoRecord: List<LottoNumberSet>
 ) {
     val lastWeekWinningLotto: List<String> = inputView.winningNumber()
+    val bonusBall: String = inputView.bonusBall()
     val winningStat = WinningStatics(
         paymentRequestDto,
-        InputWinningLottoNumberDto.convertOperand(lastWeekWinningLotto),
+        InputLottoNumberDto.of(lastWeekWinningLotto, bonusBall),
         lottoRecord
     ).result()
 
