@@ -3,12 +3,15 @@ package lotto.auto.domain
 import lotto.auto.infra.port.NumberGenerator
 import lotto.auto.vo.LottoScore
 
-class Lotto(private val numbers: List<Int>) {
+@JvmInline
+value class Lotto(private val numbers: List<Int>) {
 
     init {
         require(numbers.distinct().count() == LOTTO_NUMBER_LENGTH)
         require(numbers.all(::isValidNumber))
     }
+
+    override fun toString(): String = numbers.toString()
 
     fun match(other: Lotto): LottoScore = LottoScore.matchCountOf(countingMatchNumber(other))
 
