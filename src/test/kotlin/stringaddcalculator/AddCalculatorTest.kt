@@ -5,9 +5,7 @@ import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -69,23 +67,6 @@ class AddCalculatorTest {
     fun `커스텀 구분자에 숫자를 전달할 경우 RuntimeException 예외가 발생한다`(expression: String) {
         assertThatIllegalArgumentException().isThrownBy {
             addCalculator.calculate(Expression(expression))
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("expressionParseTest")
-    fun `Expression parse() 테스트`(expression: String, expect: List<Int>) {
-        assertThat(Expression(expression).parse()).isEqualTo(expect)
-    }
-
-    companion object {
-        @JvmStatic
-        private fun expressionParseTest(): List<Arguments> {
-            return listOf(
-                Arguments.of("1:2,3", listOf(1, 2, 3)),
-                Arguments.of("//&\\n1&2:3", listOf(1, 2, 3)),
-                Arguments.of("1,2//&\\n&3", listOf(1, 2, 3))
-            )
         }
     }
 }
