@@ -21,10 +21,10 @@ class LottoTest {
     }
 
     @Test
-    fun `checkWith를 통해 WinningNumbers를 받아 번호가 몇 개 일치하는지 확인할 수 있다`() {
+    fun `getNumberOfMatchesWith를 통해 WinningNumbers를 받아 번호가 몇 개 일치하는지 확인할 수 있다`() {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
 
-        assertThat(lotto.checkWith(winningNumbers)).isEqualTo(5)
+        assertThat(lotto.getNumberOfMatchesWith(winningNumbers)).isEqualTo(5)
     }
 }

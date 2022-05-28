@@ -8,7 +8,7 @@ value class Lotto(val numbers: List<Int>) {
         }
     }
 
-    fun checkWith(winningNumbers: WinningNumbers): Int = numbers.count { number ->
+    fun getNumberOfMatchesWith(winningNumbers: WinningNumbers): Int = numbers.count { number ->
         winningNumbers.value.contains(number)
     }
 
