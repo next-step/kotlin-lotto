@@ -10,13 +10,13 @@ object LottoTicketFactory {
     private const val MIN_LOTTO_NUMBER = 1
     private const val MAX_LOTTO_NUMBER = 45
     val LOTTO_NUMBER_RANGE = MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER
-    private const val LOTTO_SIZE = 6
+    const val LOTTO_SIZE = 6
 
     fun getRandomLottoTicket(): LottoTicket {
         val numbers = LOTTO_NUMBER_RANGE
             .shuffled()
             .take(LOTTO_SIZE)
             .sorted()
-        return LottoTicket(numbers)
+        return LottoTicket.of(numbers)
     }
 }

@@ -21,26 +21,17 @@ object OutputView {
 
     fun printLottoResult(lottoResults: List<LottoResult>) {
         println(Messages.LOTTO_RESULT)
-        println(
-            Messages.CORRECT_THREE.format(
-                lottoResults.find { it.prize == Prize.FOURTH_PLACE }?.count ?: NOT_HAVE_TICKET_COUNT
+
+        enumValues<Prize>().map { prize ->
+            if (prize == Prize.LOSER_PLACE) return@map
+            println(
+                Messages.CORRECT_OUTPUT.format(
+                    prize.matchCount,
+                    prize.reward,
+                    lottoResults.find { it.prize == prize }?.count ?: NOT_HAVE_TICKET_COUNT
+                )
             )
-        )
-        println(
-            Messages.CORRECT_FOUR.format(
-                lottoResults.find { it.prize == Prize.THIRD_PLACE }?.count ?: NOT_HAVE_TICKET_COUNT
-            )
-        )
-        println(
-            Messages.CORRECT_FIVE.format(
-                lottoResults.find { it.prize == Prize.SECOND_PLACE }?.count ?: NOT_HAVE_TICKET_COUNT
-            )
-        )
-        println(
-            Messages.CORRECT_SIX.format(
-                lottoResults.find { it.prize == Prize.FIRST_PLACE }?.count ?: NOT_HAVE_TICKET_COUNT
-            )
-        )
+        }
     }
 
     fun printYield(yields: Double) {

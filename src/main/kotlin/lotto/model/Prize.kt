@@ -6,11 +6,12 @@ package lotto.model
  */
 
 enum class Prize(val matchCount: Int, val reward: Int) {
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 500000),
+    LOSER_PLACE(0, 0),
     FOURTH_PLACE(3, 5000),
-    LOSER_PLACE(0, 0);
+    THIRD_PLACE(4, 500000),
+    SECOND_PLACE(5, 1500000),
+    FIRST_PLACE(6, 2000000000)
+    ;
 
     companion object {
         fun of(matchCount: Int): Prize =

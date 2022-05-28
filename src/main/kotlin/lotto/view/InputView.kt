@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.constants.ErrorMessages
 import lotto.constants.Messages
 
 /**
@@ -15,12 +16,11 @@ object InputView {
     fun getWinningNumber(readStringValue: () -> String? = { readlnOrNull() }): String {
         println(Messages.WRITE_WINNING_NUMBER)
         val input = readStringValue()
-        require(!input.isNullOrBlank()) { Messages.Error.INPUT_IS_NULL_OR_BLANK }
+        require(!input.isNullOrBlank()) { ErrorMessages.INPUT_IS_NULL_OR_BLANK }
         return input
     }
 
     private fun changeStringToInt(input: String?): Int {
-        require(!input.isNullOrBlank()) { Messages.Error.INPUT_IS_NULL_OR_BLANK }
-        return input.toIntOrNull() ?: throw IllegalArgumentException(Messages.Error.INPUT_IS_NOT_NUMBER)
+        return input?.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessages.INPUT_IS_NOT_NUMBER)
     }
 }

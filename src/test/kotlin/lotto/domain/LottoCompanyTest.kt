@@ -26,8 +26,8 @@ class LottoCompanyTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
-    internal fun `로또와 당첨번호가 일치하는 갯수를 찾고 몇등인지 잘 반환한다`(source: String) {
-        val ticket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
+    internal fun `로또번호와 당첨번호가 모두 일치하는 1등을 반환한다`(source: String) {
+        val ticket = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6))
         assertThat(LottoCompany.of(source).convertTicketsToLottoResults(listOf(ticket)).last().count).isEqualTo(1)
     }
 
@@ -51,7 +51,7 @@ class LottoCompanyTest {
     @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
     internal fun `로또티켓들을 당첨 결과로 잘 변경한다`(winningNumbers: String) {
         val company = LottoCompany.of(winningNumbers)
-        val tickets = listOf(LottoTicket(listOf(1, 2, 3, 4, 5, 6)), LottoTicket(listOf(1, 2, 3, 4, 5, 7)))
+        val tickets = listOf(LottoTicket.of(listOf(1, 2, 3, 4, 5, 6)), LottoTicket.of(listOf(1, 2, 3, 4, 5, 7)))
         assertThat(company.convertTicketsToLottoResults(tickets).size).isEqualTo(2)
     }
 }
