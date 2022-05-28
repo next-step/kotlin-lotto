@@ -1,7 +1,6 @@
 package lotto.controller
 
 import lotto.domain.LottoBendingMachine
-import lotto.domain.LottoWinningChecker
 import lotto.domain.YieldCalculator
 import lotto.domain.model.UserInputRequest
 import lotto.domain.model.WinningNumbers
@@ -26,7 +25,7 @@ object LottoController {
         )
 
         val winningNumbers = getWinningNumbers()
-        val lottoResult = LottoWinningChecker.check(lottos, winningNumbers)
+        val lottoResult = lottos.checkWith(winningNumbers)
         OutputView.print(
             printable = lottoResult,
             outputConverter = LottoResultConverter
