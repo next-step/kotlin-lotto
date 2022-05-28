@@ -1,3 +1,5 @@
+package calculator
+
 object StringAddCalculator {
 
     private val customDelimiterRule: Regex = Regex("//(.)\n(.*)")
