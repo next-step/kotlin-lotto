@@ -6,6 +6,11 @@ data class LottoTicket(private val numbers: Set<Int>) : Set<Int> by numbers {
         require(size == SIZE_OF_LOTTO_NUMBER)
         require(all { it in RANGE_OF_LOTTO_NUMBER })
     }
+
+    fun getMatch(lastNumbers: LottoLastNumbers): LottoMatch {
+        val matchCount = intersect(lastNumbers).size
+        val isContainBonus = contains(lastNumbers.bonus)
+        return LottoMatch.find(matchCount, isContainBonus)
     }
 
     companion object {
