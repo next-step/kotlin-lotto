@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoStatistics(private val money: Int, results: Map<Winning, Int>) {
+class LottoStatistics(private val money: Money, results: Map<Winning, Int>) {
     var totalAmount: Double = 0.0
 
     init {
@@ -9,5 +9,5 @@ class LottoStatistics(private val money: Int, results: Map<Winning, Int>) {
         }
     }
 
-    fun getYield(): Double = totalAmount / money
+    fun getYield(): Double = totalAmount / money.price
 }
