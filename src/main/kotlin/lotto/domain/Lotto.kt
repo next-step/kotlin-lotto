@@ -12,8 +12,23 @@ data class Lotto(
 
     constructor(vararg numbers: Int) : this(numbers.toList())
 
-    fun correctNumberCounts(other: Lotto): Int =
-        (numbers.sorted() zip other.numbers.sorted())
+    fun checkResult(winner: Lotto, bonusNumber: Int): Price {
+        return when (correctNumberCounts(winner.numbers)) {
+            6 -> Price.FIRST
+            5 -> checkSecondOrThirdPrice(winner, bonusNumber)
+            4 -> Price.FOURTH
+            3 -> Price.FIFTH
+            else -> Price.NONE
+        }
+    }
+
+    private fun checkSecondOrThirdPrice(winner: Lotto, bonusNumber: Int): Price {
+        return if ((winner.numbers + listOf(bonusNumber)).containsAll(this.numbers)) Price.SECOND
+        else Price.THIRD
+    }
+
+    private fun correctNumberCounts(numbers: List<Int>): Int =
+        (this.numbers.sorted() zip numbers.sorted())
             .count { it.first == it.second }
 
     private fun isInRange(number: Int): Boolean {

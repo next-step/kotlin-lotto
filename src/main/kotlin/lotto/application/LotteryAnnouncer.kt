@@ -6,9 +6,9 @@ import lotto.domain.Price
 
 object LotteryAnnouncer {
 
-    fun announce(winner: Lotto, lotteries: Lotteries): Map<Price, Lotteries> {
+    fun announce(winner: Lotto, bonusNumber: Int, lotteries: Lotteries): Map<Price, Lotteries> {
         return lotteries.groupBy {
-            checkLotteryResult(winner.correctNumberCounts(it))
+            it.checkResult(winner, bonusNumber)
         }
     }
 
@@ -19,15 +19,5 @@ object LotteryAnnouncer {
         val profit = priceGroupedLotteries.map { entry -> entry.key.winningPrize * entry.value.count() }.sum()
 
         return profit.toFloat().div(investment)
-    }
-
-    private fun checkLotteryResult(correctedNumberCounts: Int): Price {
-        return when (correctedNumberCounts) {
-            6 -> Price.FIRST
-            5 -> Price.SECOND
-            4 -> Price.THIRD
-            3 -> Price.FOURTH
-            else -> Price.NONE
-        }
     }
 }

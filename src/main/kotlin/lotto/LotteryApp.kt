@@ -14,7 +14,7 @@ object LotteryApp {
 
         val winner = LottoInputView.getWinningLotteryNumber()
         val bonusNumber = LottoInputView.getBonusNumber()
-        val priceGroupedLotteries = LotteryAnnouncer.announce(winner, generatedLotteries)
+        val priceGroupedLotteries = LotteryAnnouncer.announce(winner, bonusNumber, generatedLotteries)
 
         val earningRate = LotteryAnnouncer.getEarningRate(investment, priceGroupedLotteries)
         LotteryStatisticView.display(priceGroupedLotteries, earningRate)
