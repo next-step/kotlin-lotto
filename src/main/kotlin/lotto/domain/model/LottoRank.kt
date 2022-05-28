@@ -16,5 +16,7 @@ enum class LottoRank(
                 lottoRank.numberOfMatches == numberOfMatches
             } ?: NOTHING
         }
+
+        fun winnerPlace(): List<LottoRank> = values().filterNot { it == NOTHING }
     }
 }

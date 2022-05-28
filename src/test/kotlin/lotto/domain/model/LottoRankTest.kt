@@ -1,6 +1,7 @@
 package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -20,5 +21,12 @@ class LottoRankTest {
         val lottoRank = LottoRank.from(NumberOfMatches(input))
 
         assertThat(lottoRank).isEqualTo(LottoRank.NOTHING)
+    }
+
+    @Test
+    fun `winnerPlace를 통해 당첨 됐을 때의 Rank만 가져올 수 있다`() {
+        val lottoRanks = LottoRank.winnerPlace()
+
+        assertThat(lottoRanks).doesNotContainSequence(LottoRank.NOTHING)
     }
 }
