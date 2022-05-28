@@ -7,14 +7,14 @@ class LottoPrizePolicyTest : DescribeSpec({
     val wonLottoNumbers = LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6))
     val wonMatchedCount = 3
     val wonPrize = Money(3000)
-    val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonLottoNumbers, wonPrize)
+    val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize)
 
     it("우승한 경우 상품을 준다") {
         // given
         val wonLottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 10, 20, 30))
 
         // when
-        val prize = lottoPrizePolicy.won(wonLottoTicket)
+        val prize = lottoPrizePolicy.won(wonLottoTicket, wonLottoNumbers)
 
         // then
         prize shouldBe wonPrize
@@ -25,7 +25,7 @@ class LottoPrizePolicyTest : DescribeSpec({
         val defeatedLottoTicket = LottoTicket.ofInts(listOf(1, 2, 40, 10, 20, 30))
 
         // when
-        val prize = lottoPrizePolicy.won(defeatedLottoTicket)
+        val prize = lottoPrizePolicy.won(defeatedLottoTicket, wonLottoNumbers)
 
         // then
         prize shouldBe null

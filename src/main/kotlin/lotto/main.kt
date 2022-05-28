@@ -30,15 +30,20 @@ fun main() {
     println("당첨통계")
     println("---------")
     val lottoPrizePolicyList = listOf(
-        LottoPrizePolicy(3, winningNumbersInputDto.winningLottoTicketNumbers, Money(5000)),
-        LottoPrizePolicy(4, winningNumbersInputDto.winningLottoTicketNumbers, Money(50000)),
-        LottoPrizePolicy(5, winningNumbersInputDto.winningLottoTicketNumbers, Money(1500000)),
-        LottoPrizePolicy(6, winningNumbersInputDto.winningLottoTicketNumbers, Money(2000000000))
+        LottoPrizePolicy(3, Money(5000)),
+        LottoPrizePolicy(4, Money(50000)),
+        LottoPrizePolicy(5, Money(1500000)),
+        LottoPrizePolicy(6, Money(2000000000))
     )
 
     var totalPrize = 0
     lottoPrizePolicyList.forEach { lottoPrizePolicy ->
-        val prizeCount = boughtLottoTickets.count { lottoPrizePolicy.won(it) != null }
+        val prizeCount = boughtLottoTickets.count {
+            lottoPrizePolicy.won(
+                it,
+                winningNumbersInputDto.winningLottoTicketNumbers
+            ) != null
+        }
         totalPrize += lottoPrizePolicy.wonPrize.value * prizeCount
         println("${lottoPrizePolicy.wonMatchedCount}개 일치 (${lottoPrizePolicy.wonPrize.value})-${prizeCount}개")
     }
