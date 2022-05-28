@@ -56,6 +56,16 @@ class LottoTicketNumbersTest : DescribeSpec({
             }.shouldHaveMessage("로또 티켓은 6 개수의 로또 번호를 가지고 있어야 됩니다")
         }
 
+        it(" 알맞은 갯수의 로또 넘버를 초과하여 가지고 있는 경우 에러가 발생한다.") {
+            // given
+            val lottoNumbersByInt = listOf(1, 2, 3, 4, 5, 6, 7)
+
+            // then
+            shouldThrowExactly<IllegalArgumentException> {
+                LottoTicketNumbers.ofInts(lottoNumbersByInt)
+            }.shouldHaveMessage("로또 티켓은 6 개수의 로또 번호를 가지고 있어야 됩니다")
+        }
+
         it("중복된 로또 번호를 입력하면 에러가 발생한다") {
             // given
             val lottoNumbersByInt = listOf(1, 1, 1, 1, 1, 1)
