@@ -17,7 +17,6 @@ internal class LottoScoreTest {
             LottoTicket(1, 2, 3, 8, 9, 10), // 3match
             LottoTicket(1, 2, 5, 10, 11, 12), // 3match
             LottoTicket(1, 2, 3, 4, 18, 17), // 4match
-            LottoTicket(40, 1, 2, 3, 4, 5), // 5match
             LottoTicket(1, 2, 3, 4, 5, 6), // 6match
         )
         val winningTicket = LottoTicket(1, 2, 3, 4, 5, 6)
@@ -26,7 +25,7 @@ internal class LottoScoreTest {
         val expected = mapOf(
             LottoPrize.THREE_MATCH to 2,
             LottoPrize.FOUR_MATCH to 1,
-            LottoPrize.FIVE_MATCH to 1,
+            LottoPrize.FIVE_MATCH to 0,
             LottoPrize.SIX_MATCH to 1
         )
 

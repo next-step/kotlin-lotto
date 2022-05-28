@@ -15,11 +15,10 @@ class LottoScore {
 
         val compareResult = matchCounts.groupingBy { it }.eachCount()
 
-        return compareResult.map { (matchCount, lottoCount) ->
-            LottoPrize.find(matchCount)?.let { LottoPrize ->
-                LottoResult(LottoPrize, lottoCount)
-            }
-        }.filterNotNull()
+        return LottoPrize.values().map { lottoPrize ->
+            val lottoCount = compareResult.getOrDefault(lottoPrize.matchCount, 0)
+            LottoResult(lottoPrize, lottoCount)
+        }
     }
 
     fun rateOfResult(lottoPrice: LottoPrice, lottoResults: List<LottoResult>): Double {
