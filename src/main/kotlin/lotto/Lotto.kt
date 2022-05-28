@@ -1,4 +1,9 @@
 package lotto
 
 @JvmInline
-value class Lotto(val numbers: Set<Int>)
+value class Lotto(val numbers: Set<Int>) {
+    init {
+        require(numbers.size == LOTTO_COUNT)
+        require(numbers.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER })
+    }
+}
