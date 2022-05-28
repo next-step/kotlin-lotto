@@ -6,6 +6,15 @@ data class LottoTickets(private val tickets: List<LottoTicket>) : List<LottoTick
         require(isNotEmpty())
     }
 
+    fun getLottoStatistics(lastNumbers: LottoLastNumbers): LottoStatistics =
+        LottoStatistics(
+            this
+                .map { it.getMatch(lastNumbers) }
+                .groupBy { it }
+                .map { it.key to it.value.size }
+                .toMap()
+        )
+
     fun getMatchResult(lastNumbers: LottoLastNumbers): Map<LottoMatch, MatchCount> {
         return mutableMapOf<LottoMatch, MatchCount>().apply {
             LottoMatch.values().forEach {
