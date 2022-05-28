@@ -26,4 +26,14 @@ internal class LottoNumberTest {
         val actual = LottoNumber.random()
         assertThat(actual.get()).isIn(1..45)
     }
+
+    @Test
+    internal fun `LottoNumber의 값을 비교하면 같다`() {
+        val lottoNumber1 = LottoNumber(4)
+        val lottoNumber2 = LottoNumber(4)
+
+        assertThat(lottoNumber1.get()).isEqualTo(lottoNumber2.get())
+        assertThat(lottoNumber1.comapare(lottoNumber2))
+        assertThat(lottoNumber1).isNotEqualTo(lottoNumber2)
+    }
 }

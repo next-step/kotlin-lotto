@@ -9,6 +9,8 @@ class LottoNumber(
 
     fun get() = value
 
+    fun comapare(compareValue: LottoNumber) = value == compareValue.get()
+
     companion object {
         const val MIN_LOTTO_NUM = 1
         const val MAX_LOTTO_NUM = 45
