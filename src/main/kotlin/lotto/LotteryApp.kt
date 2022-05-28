@@ -13,6 +13,7 @@ object LotteryApp {
         LotteryRandomGeneratorView.display(generatedLotteries)
 
         val winner = LottoInputView.getWinningLotteryNumber()
+        val bonusNumber = LottoInputView.getBonusNumber()
         val priceGroupedLotteries = LotteryAnnouncer.announce(winner, generatedLotteries)
 
         val earningRate = LotteryAnnouncer.getEarningRate(investment, priceGroupedLotteries)

@@ -19,4 +19,10 @@ object LottoInputView {
 
         return Lotto(WinningNumberParser.parse(winningLotteryNumber))
     }
+
+    fun getBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+
+        return readln().toIntOrNull() ?: throw RuntimeException("")
+    }
 }
