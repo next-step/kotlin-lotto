@@ -2,6 +2,8 @@ package lotto.controller
 
 import lotto.domain.LottoBendingMachine
 import lotto.domain.LottoYieldCalculator
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.RangeLottoFactory
 import lotto.domain.model.UserInputRequest
 import lotto.domain.model.WinningNumbers
 import lotto.view.InputView
@@ -18,7 +20,7 @@ object LottoController {
 
     fun execute() {
         val purchaseAmount = getPurchaseAmount()
-        val lottos = LottoBendingMachine.purchase(purchaseAmount)
+        val lottos = LottoBendingMachine.purchase(purchaseAmount, RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE))
         OutputView.println(
             printable = lottos,
             outputConverter = LottosConverter
