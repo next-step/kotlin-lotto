@@ -18,7 +18,7 @@ class LottoTicketMachineTest : BehaviorSpec({
                 tickets shouldHaveSize 1
             }
 
-            val actual = tickets.first().numbers
+            val actual = tickets.first()
             Then("생성된 번호는 6개이다") {
                 actual shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
             }
@@ -40,7 +40,7 @@ class LottoTicketMachineTest : BehaviorSpec({
                 tickets shouldHaveSize numberOfTicket
             }
 
-            tickets.forAll { (numbers) ->
+            tickets.forAll { numbers ->
                 val actualName = numbers.joinToString()
                 Then("생성된 번호는 6개이다 ($actualName)") {
                     numbers shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
