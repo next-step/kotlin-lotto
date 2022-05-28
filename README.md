@@ -28,3 +28,28 @@
   * [x] 로또발급번호를 보여준다
   * [x] 당첨통계를 보여준다
   * [x] 수익률을 보여준다
+
+# 로또(자동)
+## refactor list
+* [x] 패키지 정리
+* [x] 지불금액은 1원이상의 숫자여야 한다 - Receipt
+* [x] view layer에서 관리되어야할 변수들 이동
+* [x] 로또번호 하나를 객체로 포장한다 - LottoNumber
+  * [x] 지난 로또번호 입력받아 저장하는 로직도 LottoNumber 객체로 변경
+* [x] generateList를 별도 LottoGenerator 메소드로변경하고 검증로직 추가
+  * [x] generateList 테스트코드 추가
+* [x] intersect 적용 - Checker
+* [x] MatchState 관련 구조변경
+* [x] Stat 도메인 책임을 LottoTickets, MatchStates 분리하다보니 StatResult로 대체 
+* [x] 일급컬렉션으로 변경
+  * [x] List<LottoNumber> -> LottoTicket
+  * [x] List<LottoTicket> -> LottoTickets
+  * [x] List<MatchState> -> MatchStates
+  * [x] List<StatResult> -> StatResults
+* [x] 수익률 계산방식 변경
+* [x] view 호출로직 최소화(마지막에 한번만 하면되지 않을까?)
+
+# 로또(2등)
+## 기능요구사항 
+* [x] 2등을 위해 추가 번호를 하나 더 추첨한다.
+* [x] 당첨 통계에 2등도 추가해야 한다.

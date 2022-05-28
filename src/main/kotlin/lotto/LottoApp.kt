@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.domain.LottoMachine
+import lotto.domain.Receipt
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -9,20 +11,15 @@ fun main() {
 
     val payment = inputView.readPayment()
     val receipt = Receipt(payment)
-
-    resultView.buyCount(receipt.lottoCount)
-
     val lottoMachine = LottoMachine(receipt)
-    val lottos = lottoMachine.issue()
+    val lottoTickets = lottoMachine.issue()
 
-    resultView.lottoNumbers(lottos)
+    resultView.lottoNumbers(lottoTickets)
 
-    val lastNumber = inputView.readLastNumber()
-    val statResults = lottoMachine.verify(lastNumber, lottos)
-
-    resultView.result(statResults)
-
+    val lastLottoTicket = inputView.readLastNumber()
+    val bonusNumber = inputView.readBonusNumber()
+    val statResults = lottoMachine.verify(lastLottoTicket, bonusNumber, lottoTickets)
     val yields = lottoMachine.yields(statResults)
 
-    resultView.yields(yields)
+    resultView.result(receipt, statResults, yields)
 }
