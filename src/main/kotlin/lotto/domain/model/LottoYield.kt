@@ -1,7 +1,7 @@
 package lotto.domain.model
 
 @JvmInline
-value class Yield(val value: Double) {
+value class LottoYield(val value: Double) {
     fun isLoss(): Boolean = value < PROFIT_THRESHOLD
 
     companion object {
