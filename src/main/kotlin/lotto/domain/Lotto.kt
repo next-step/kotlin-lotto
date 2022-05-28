@@ -10,6 +10,9 @@ data class Lotto(val type: LottoType, val numbers: List<LottoNumber>) {
     val isAuto: Boolean
         get() = type == LottoType.AUTO
 
+    val isManual: Boolean
+        get() = type == LottoType.MANUAL
+
     private fun List<LottoNumber>.isUnique(): Boolean = toSet().size == size
 
     companion object {
