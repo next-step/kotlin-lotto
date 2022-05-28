@@ -83,5 +83,13 @@ internal class LottoSetTest : BehaviorSpec({
                 result[LottoScore.BANG] shouldBe 5
             }
         }
+
+        `when`("수익률 계산 시") {
+            val result = lottoSet.rate()
+
+            then("구매비용 대비 당첨금의 수익률을 반환한다.") {
+                result shouldBe 0.35
+            }
+        }
     }
 })
