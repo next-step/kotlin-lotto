@@ -3,6 +3,7 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
 import lotto.domain.Winning
+import kotlin.math.round
 
 class ResultView {
     fun printTickets(lottos: List<Lotto>) {
@@ -28,7 +29,8 @@ class ResultView {
     }
 
     fun printWinningStatistics(statistics: LottoStatistics) {
-        println("총 수익률은 ${statistics.getYield()}입니다.(${if (statistics.getYield() >= 1) PRINT_IS_GAIN else PRINT_IS_LOSE})")
+        val displayYield = round(statistics.getYield() * DISPLAY_SECOND_DIGIT) / DISPLAY_SECOND_DIGIT
+        println("총 수익률은 $displayYield 입니다.(${if (statistics.getYield() >= 1) PRINT_IS_GAIN else PRINT_IS_LOSE})")
     }
 
     companion object {
@@ -36,5 +38,7 @@ class ResultView {
         private const val PRINT_LINE = "---------"
         private const val PRINT_IS_LOSE = "기준이 1이기 때문에 결과적으로 손해이다."
         private const val PRINT_IS_GAIN = "기준이 1이기 때문에 결과적으로 이득이다."
+
+        private const val DISPLAY_SECOND_DIGIT = 100
     }
 }

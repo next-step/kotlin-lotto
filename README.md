@@ -45,7 +45,7 @@
   - 객체의 역할에 맞게 기능 구현 
     - [x] 정렬 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882666093))
     - [ ] 맞는 개수 비교 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882746666))
-    - [ ] 수익률 표시 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882754116))
+    - [x] 수익률 표시 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882754116))
     - [ ] LottoResult 객체 생성해서 테스트해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
     - [ ] Money 객체 분리하기
   - [ ] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882728105))
