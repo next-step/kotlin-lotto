@@ -10,6 +10,12 @@ class LottoNumbers(val lottoNumbers: List<LottoNumber>) {
     fun hasNumber(number: LottoNumber): Boolean {
         return lottoNumbers.contains(number)
     }
+
+    companion object {
+        fun of(lottoNumbersList: List<Int>): LottoNumbers {
+            return LottoNumbers(lottoNumbersList.map { LottoNumber(it) })
+        }
+    }
 }
 
 @JvmInline

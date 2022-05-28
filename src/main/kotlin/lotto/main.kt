@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
 import lotto.domain.Money
 import lotto.domain.toLottoNumbers
@@ -11,13 +12,19 @@ fun main() {
     val userMoneyInput = InputView.getUserMoney()
     val userMoney = Money(userMoneyInput)
     val manualLottoCount = InputView.getLottoCount()
+    val lottoStore = LottoStore(userMoney, manualLottoCount)
 
-    val lottoStore = LottoStore(userMoney)
+    val manualLottoNumbers = InputView.getLottoNumbers(manualLottoCount)
 
-    PrintView.printLottoCount(lottoStore.lottoCount)
+    lottoStore.buyManualLottos(manualLottoNumbers.map {
+        LottoNumbers.of(it)
+    })
+    lottoStore.rollAutoLotto()
+
+    PrintView.printLottoCount(manualLottoCount, lottoStore.autoLottoCount)
     PrintView.printBoughtLottoList(lottoStore.boughtLottos)
 
-    val answer = InputView.getLottoNumbers()
+    val answer = InputView.getLottoNumbers(InputView.LOTTO_ANSWER_INPUT_MESSAGE)
     val bonusBall = InputView.getBonusBall()
     val winnerInfos = lottoStore.getLottoResult(answer.toLottoNumbers(), LottoNumber(bonusBall))
     PrintView.printWinnerInfos(winnerInfos)

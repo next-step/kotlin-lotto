@@ -4,10 +4,6 @@ package lotto.domain
 value class Money(val money: Int = 0) {
 
     init {
-        checkMoneyCondition()
-    }
-
-    private fun checkMoneyCondition() {
         require(money >= MIN_MONEY)
     }
 

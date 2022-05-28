@@ -11,7 +11,7 @@ class LottoStoreTest {
     fun `로또가 하나당 1000원으로 맞게 계산되는지 테스트`(money: Int) {
         val lottoStore = LottoStore(Money(money))
 
-        val answer = lottoStore.lottoCount
+        val answer = lottoStore.autoLottoCount
         val expect = money / 1000
 
         assertThat(answer).isEqualTo(expect)
