@@ -19,7 +19,7 @@ internal class LottoTest {
 
         val lotto = Lotto(lottoNumbers)
 
-        assertThat(lotto.get.size).isEqualTo(6)
+        assertThat(lotto.numbers.size).isEqualTo(6)
     }
 
     @Test

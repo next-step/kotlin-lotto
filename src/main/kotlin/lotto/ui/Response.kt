@@ -15,7 +15,7 @@ object Response {
 
     fun responseLottos(lottos: List<Lotto>) {
         lottos.forEach { it ->
-            val toIntArray = it.get
+            val toIntArray = it.numbers
                 .map { it.number }
                 .toString()
 

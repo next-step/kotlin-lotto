@@ -6,7 +6,7 @@ class Lotto(private val _lotto: List<LottoNumber>) {
         validate(_lotto.toSet())
     }
 
-    val get: Set<LottoNumber>
+    val numbers: Set<LottoNumber>
         get() = _lotto.toSet()
 
     private fun validate(lotto: Set<LottoNumber>) {
