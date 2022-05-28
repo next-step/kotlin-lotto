@@ -1,9 +1,11 @@
 package lotto.domain
 
-data class LottoTicket(val numbers: Set<Int>) {
+data class LottoTicket(private val numbers: Set<Int>) : Set<Int> by numbers {
 
     init {
-        require(numbers.size == SIZE_OF_LOTTO_NUMBER)
+        require(size == SIZE_OF_LOTTO_NUMBER)
+        require(all { it in RANGE_OF_LOTTO_NUMBER })
+    }
     }
 
     companion object {
@@ -11,5 +13,7 @@ data class LottoTicket(val numbers: Set<Int>) {
         private const val MAX_RANGE_OF_NUMBER = 45
         const val SIZE_OF_LOTTO_NUMBER = 6
         val RANGE_OF_LOTTO_NUMBER = MIN_RANGE_OF_NUMBER..MAX_RANGE_OF_NUMBER
+
+        fun of(vararg number: Int): LottoTicket = LottoTicket(number.toSet())
     }
 }
