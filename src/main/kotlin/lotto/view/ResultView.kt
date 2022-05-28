@@ -7,9 +7,10 @@ object ResultView {
     fun getReport(lottoDrawResult: LottoDrawResult) {
         println("당첨 통계")
         println("---------")
-        printResult(Rank.FOURTH, lottoDrawResult.three)
-        printResult(Rank.THIRD, lottoDrawResult.four)
-        printResult(Rank.SECOND, lottoDrawResult.five)
+        printResult(Rank.FIFTH, lottoDrawResult.three)
+        printResult(Rank.FOURTH, lottoDrawResult.four)
+        printResult(Rank.THIRD, lottoDrawResult.five)
+        printRankSecondResult(Rank.SECOND, lottoDrawResult.fiveWithBonus)
         printResult(Rank.FIRST, lottoDrawResult.six)
     }
 
@@ -19,6 +20,10 @@ object ResultView {
 
     private fun printResult(rank: Rank, matchCount: Int) {
         println("${rank.count}개 일치 (${rank.amount}원) - ${matchCount}개")
+    }
+
+    private fun printRankSecondResult(rank: Rank, matchCount: Int) {
+        println("${rank.count}개 일치, 보너스볼 일치 (${rank.amount}원) - ${matchCount}개")
     }
 
     private fun getResultRate(lottoDrawResult: LottoDrawResult, insertAmount: Int): String {
