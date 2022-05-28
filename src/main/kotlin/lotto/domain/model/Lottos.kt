@@ -6,13 +6,13 @@ value class Lottos(val value: List<Lotto>) {
         return LottoResult.from(toLottoWinningMap(winningNumbers))
     }
 
-    private fun toLottoWinningMap(winningNumbers: WinningNumbers): Map<Int, Int> {
+    private fun toLottoWinningMap(winningNumbers: WinningNumbers): Map<NumberOfMatches, Int> {
         return value.map { lotto ->
             lotto.getNumberOfMatchesWith(winningNumbers)
         }.groupingBy { numberOfMatches ->
             numberOfMatches
         }.eachCount().filter { (numberOfMatches, _) ->
-            numberOfMatches in LottoRank.NUMBER_OF_MATCHES_RANGE
+            numberOfMatches.isWin()
         }
     }
 }

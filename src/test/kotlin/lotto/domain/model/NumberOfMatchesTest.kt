@@ -18,7 +18,7 @@ class NumberOfMatchesTest {
     fun `isWin을 통해 당첨금을 받을 수 있는 일치수인지 확인한다`(input: Int) {
         val numberOfMatches = NumberOfMatches(input)
 
-        val expected = input in NumberOfMatches.winNumberRange
+        val expected = input in NumberOfMatches.WIN_NUMBER_RANGE
 
         assertThat(numberOfMatches.isWin()).isEqualTo(expected)
     }

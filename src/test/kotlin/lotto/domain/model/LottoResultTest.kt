@@ -67,7 +67,11 @@ class LottoResultTest {
 
     @Test
     fun `Int, Int를 key-value로 하는 Map을 넘겨서 LottoResult를 만들 수 있다`() {
-        val lottoWinningMap = mapOf(3 to 3, 4 to 1, 6 to 1)
+        val lottoWinningMap = mapOf(
+            NumberOfMatches(3) to 3,
+            NumberOfMatches(4) to 1,
+            NumberOfMatches(6) to 1
+        )
         val lottoResult = LottoResult.from(lottoWinningMap)
 
         assertThat(lottoResult[LottoRank.FOURTH].count).isEqualTo(3)

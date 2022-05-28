@@ -8,8 +8,12 @@ value class Lotto(val numbers: List<Int>) {
         }
     }
 
-    fun getNumberOfMatchesWith(winningNumbers: WinningNumbers): Int = numbers.count { number ->
-        winningNumbers.value.contains(number)
+    fun getNumberOfMatchesWith(winningNumbers: WinningNumbers): NumberOfMatches {
+        val numberOfMatches = numbers.count { number ->
+            winningNumbers.value.contains(number)
+        }
+
+        return NumberOfMatches(numberOfMatches)
     }
 
     companion object {
