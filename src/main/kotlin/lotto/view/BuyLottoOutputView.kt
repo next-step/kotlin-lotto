@@ -1,11 +1,24 @@
 package lotto.view
 
+import lotto.domain.LottoTicket
 import lotto.domain.Money
 import lotto.dto.WinningStatDto
 import kotlin.math.floor
 
 object BuyLottoOutputView {
     private const val DIVIDING = "\n"
+
+    fun showAllBoughtTickets(boughtTickets: List<LottoTicket>): String {
+        var result = ""
+        result += "${boughtTickets.size}를 구매했습니다" + DIVIDING
+        boughtTickets.forEach { lottoTicket ->
+            result += lottoTicket
+                .lottoTicketNumbers.value.map { it.value }.sorted()
+                .joinToString(prefix = "[", postfix = "]") + DIVIDING
+        }
+        result += DIVIDING
+        return result
+    }
 
     fun showWinningStartLabel(): String {
         return """당첨통계

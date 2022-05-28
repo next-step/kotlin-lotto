@@ -2,11 +2,31 @@ package lotto.view
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import lotto.domain.LottoPrizePolicy
+import lotto.domain.LottoTicket
 import lotto.domain.Money
 import lotto.dto.WinningStatDto
 
 class BuyLottoOutputViewTest : DescribeSpec({
+
+    it("구매한 티켓을 보여준다") {
+        // given
+        val lottoTickets: List<LottoTicket> = listOf(
+            LottoTicket.ofInts(listOf(1, 2, 3, 4, 5, 6)),
+            LottoTicket.ofInts(listOf(11, 12, 13, 14, 15, 16)),
+            LottoTicket.ofInts(listOf(21, 22, 23, 24, 25, 26)),
+        )
+
+        // when
+        val showAllBoughtTickets = BuyLottoOutputView.showAllBoughtTickets(lottoTickets)
+
+        // then
+        showAllBoughtTickets shouldContain """3를 구매했습니다
+[1, 2, 3, 4, 5, 6]
+[11, 12, 13, 14, 15, 16]
+[21, 22, 23, 24, 25, 26]"""
+    }
 
     it("당첨 통계 전체를 보여준다") {
         // given
