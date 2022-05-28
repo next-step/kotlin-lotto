@@ -3,13 +3,10 @@ package lotto.domain
 import lotto.domain.enums.LottoRank
 import lotto.exception.DuplicateLottoNumberException
 
-class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
-    constructor(numbers: List<Int>, bonusNumber: Int) : this(LottoNumbers(numbers), LottoNumber(bonusNumber))
+class WinningLotto private constructor(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
 
     init {
-        require(bonusNumber !in lottoNumbers) {
-            throw DuplicateLottoNumberException()
-        }
+        if (bonusNumber in lottoNumbers) throw DuplicateLottoNumberException()
     }
 
     fun match(lotto: Lotto): LottoRank {
@@ -21,14 +18,20 @@ class WinningLotto(private val lottoNumbers: LottoNumbers, private val bonusNumb
     }
 
     private fun matchingCount(lotto: Lotto): Int {
-        return matchingNumbers(lotto).size
+        return matchingLottoNumbers(lotto).size
     }
 
-    private fun matchingNumbers(lotto: Lotto): List<LottoNumber> {
+    private fun matchingLottoNumbers(lotto: Lotto): List<LottoNumber> {
         return lottoNumbers.matchingNumbers(lotto.numbers)
     }
 
     private fun isMatchBonusNumber(lotto: Lotto): Boolean {
         return bonusNumber in lotto
+    }
+
+    companion object {
+        fun of(lottoNumbers: LottoNumbers, bonusNumber: LottoNumber): WinningLotto {
+            return WinningLotto(lottoNumbers, bonusNumber)
+        }
     }
 }

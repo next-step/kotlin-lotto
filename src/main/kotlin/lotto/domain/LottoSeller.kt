@@ -1,10 +1,23 @@
 package lotto.domain
 
 class LottoSeller {
+
     private val lottoMachine = LottoMachine()
 
-    fun purchaseAuto(inputPrice: Long): List<Lotto> {
-        return List(numberOfPurchases(inputPrice)) {
+    fun purchase(inputPrice: Long, inputManualLottoNumbers: List<LottoNumbers>): List<Lotto> {
+        val numberOfPurchases = numberOfPurchases(inputPrice)
+        if (numberOfPurchases == 0) return emptyList()
+        val autoLottoCount = numberOfPurchases - inputManualLottoNumbers.size
+        return purchaseManually(inputManualLottoNumbers) + purchaseAuto(autoLottoCount)
+    }
+
+    private fun purchaseManually(inputManualLottoNumbers: List<LottoNumbers>): List<Lotto> {
+        return inputManualLottoNumbers
+            .map { lottoMachine.generate(it) }
+    }
+
+    private fun purchaseAuto(autoLottoCount: Int): List<Lotto> {
+        return List(autoLottoCount) {
             lottoMachine.generate()
         }
     }
