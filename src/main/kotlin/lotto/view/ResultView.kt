@@ -17,12 +17,13 @@ class ResultView {
         println(PRINT_WINNING_STATISTICS)
         println(PRINT_LINE)
 
-        result.keys.sortedByDescending { it.matchCount }
-        result.forEach { (winning, winningCount) ->
+        Winning.values().forEach { winning ->
             if (winning == Winning.LOSE) return@forEach
+            val winningCount = result[winning] ?: 0
             val matchCount = winning.matchCount
             val amount = winning.winningAmount
-            println("$matchCount 개 일치 ($amount 원)- $winningCount 개")
+
+            println("$matchCount 개 일치 ($amount 원) - $winningCount 개")
         }
     }
 
