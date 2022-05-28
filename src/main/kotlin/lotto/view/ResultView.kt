@@ -16,7 +16,7 @@ object ResultView {
 
         lottoTickets.lottoTickets
             .forEach {
-                println("[${it.lottoNumbers.joinToString(LOTTO_NUMBER_DELIMITER) { lottoNumber -> lottoNumber.toString() }}]")
+                println("[${it.lottoNumbers.joinToString(LOTTO_NUMBER_DELIMITER)}]")
             }
 
         println()
