@@ -1,9 +1,11 @@
 package lotto.domain
 
+import lotto.domain.exception.LottoSizeMismatchException
+
 class LottoTicket(val numbers: Set<Int>) {
     init {
         require(numbers.size == LOTTO_SIZE) {
-            "6자리 로또 티켓을 입력해주세요."
+            throw LottoSizeMismatchException("6자리 로또 티켓을 입력해주세요.")
         }
     }
 
