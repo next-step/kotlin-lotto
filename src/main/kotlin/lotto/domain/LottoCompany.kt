@@ -20,11 +20,7 @@ class LottoCompany(val winningTicket: LottoTicket) {
     }
 
     private fun convertPrizeToLottoResult(prizes: List<Prize>): List<LottoResult> {
-        // TODO 여기서 한단계 더 가봅시다! prizes를 groupingBy를 통하여, LottoResult를 만들고 Prize를 다시 넣어주는 것은 중복된 생성이라고 생각해요.
-        // 어떻게 해야 개선을 할 수 있을까요?🤔
-        return prizes.groupingBy { it.matchCount }.eachCount().map {
-            LottoResult(Prize.of(it.key), it.value)
-        }
+        return prizes.groupBy { it }.map { LottoResult(it.key, it.value.size) }
     }
 
     companion object {
