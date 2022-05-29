@@ -15,7 +15,7 @@ class InputView {
     }
 
     fun getBonusNumber(): LottoNumber {
-        val inputStr = printMsgAndReadValue("\n${Const.OutputMsg.LOTTO_NUM_MSG}")
+        val inputStr = printMsgAndReadValue("\n${Const.OutputMsg.BONUS_NUM_MSG}")
         requireNotNull(inputStr) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
         val number = requireNotNull(inputStr.trim().toIntOrNull()) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
         return LottoNumber(number)

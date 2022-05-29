@@ -6,6 +6,7 @@ object Const {
     object OutputMsg {
         const val GET_PRICE_MSG = "구입금액을 입력해 주세요."
         const val LOTTO_NUM_MSG = "지난 주 당첨 번호를 입력해 주세요."
+        const val BONUS_NUM_MSG = "보너스 볼을 입력해 주세요."
     }
 
     object ErrorMsg {
