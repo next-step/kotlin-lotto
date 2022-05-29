@@ -3,11 +3,8 @@ package lotto.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.NullAndEmptySource
-import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoPurchaseTest {
     private lateinit var lottoPurchase: LottoPurchase
@@ -15,13 +12,6 @@ internal class LottoPurchaseTest {
     @BeforeEach
     fun setUp() {
         lottoPurchase = LottoPurchase()
-    }
-
-    @ParameterizedTest(name = "`{0}`인 경우 IllegalArgumentException 에러 발생")
-    @NullAndEmptySource
-    @ValueSource(strings = ["a", "!"])
-    internal fun `입력한 값이 empty이거나 숫자가 아니면 IllegalArgumentException 에러 발생`(money: String?) {
-        assertThrows<IllegalArgumentException> { lottoPurchase.getMoney(money) }
     }
 
     @ParameterizedTest(name = "`{0}`원을 내면 로또`{1}개를 구매할 수 있다`")
