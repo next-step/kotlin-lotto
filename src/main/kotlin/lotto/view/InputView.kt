@@ -30,7 +30,7 @@ object InputView {
         println(INPUT_WINNING_LOTTO)
         val winningLottoNumbers = toLottoNumbers(manualNumbers())
         println(INPUT_BONUS_NUMBER)
-        val bonusNumber = toBonusNumber(readln())
+        val bonusNumber = toBonusNumber(readln(), winningLottoNumbers)
         return WinningLottoRequest(winningLottoNumbers, bonusNumber)
     }
 
@@ -84,7 +84,7 @@ object InputView {
     private fun toLottoNumbers(manualNumbers: String): List<LottoNumber> {
         return try {
             val lottoNumbers = manualNumbers.split(LOTTO_NUMBER_SEPARATOR)
-            require(lottoNumbers.size == LottoTicket.LOTTO_NUMBERS_SIZE)
+            require(lottoNumbers.distinct().size == LottoTicket.LOTTO_NUMBERS_SIZE)
             lottoNumbers.map(LottoNumber::of)
         } catch (e: IllegalArgumentException) {
             println("로또 번호 목록이 잘못 입력 되었습니다. 다시 입력해주세요 (번호 구분자: $LOTTO_NUMBER_SEPARATOR))")
@@ -100,12 +100,14 @@ object InputView {
         return manualNumber
     }
 
-    private fun toBonusNumber(value: String): LottoNumber {
+    private fun toBonusNumber(value: String, winningLottoNumbers: List<LottoNumber>): LottoNumber {
         return try {
-            LottoNumber.of(value)
+            val bonusNumber = LottoNumber.of(value)
+            require(!winningLottoNumbers.contains(bonusNumber))
+            bonusNumber
         } catch (e: IllegalArgumentException) {
             println("보너스 번호가 잘못 입력 되었습니다. 다시 입력해주세요.")
-            return toBonusNumber(readln())
+            return toBonusNumber(readln(), winningLottoNumbers)
         }
     }
 }
