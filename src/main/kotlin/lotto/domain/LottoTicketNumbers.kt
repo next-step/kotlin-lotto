@@ -6,6 +6,14 @@ class LottoTicketNumbers private constructor(val value: List<LottoTicketNumber>)
         validateDuplicateLottoNumber()
     }
 
+    fun notHasLottoNumber(lottoTicketNumber: LottoTicketNumber): Boolean {
+        return !hasLottoNumber(lottoTicketNumber)
+    }
+
+    fun hasLottoNumber(lottoTicketNumber: LottoTicketNumber): Boolean {
+        return value.contains(lottoTicketNumber)
+    }
+
     fun findMatchedCount(compareLottoNumbers: LottoTicketNumbers): Int {
         return value.count { lottoTicketNumber -> compareLottoNumbers.value.contains(lottoTicketNumber) }
     }
