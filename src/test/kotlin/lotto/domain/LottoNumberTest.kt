@@ -22,11 +22,6 @@ internal class LottoNumberTest {
     }
 
     @Test
-    internal fun `random 함수를 사용하여 로또 번호를 생성하면 1 ~ 45 사이의 값으로 생성된다`() {
-        val actual = LottoNumber.random()
-        assertThat(actual).isIn(1..45)
-    }
-    @Test
     internal fun `같은 값의 LottoNumber를 set에 넣으면 중복이다`() {
         val lottoNumber1 = LottoNumber(4)
         val lottoNumber2 = LottoNumber(4)

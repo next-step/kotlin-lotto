@@ -6,7 +6,7 @@ import java.math.RoundingMode
 class LottoScore {
     fun compareNumber(winningTicket: LottoTicket, lottoTickets: List<LottoTicket>): List<LottoResult> {
         val matchCounts = lottoTickets.map { lottoTicket ->
-            lottoTicket.compareEqualCount(winningTicket)
+            lottoTicket.countIntersect(winningTicket)
         }
 
         val compareResult = matchCounts.groupingBy { it }.eachCount()
