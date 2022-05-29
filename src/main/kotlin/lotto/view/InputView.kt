@@ -1,15 +1,18 @@
 package lotto.view
 
+import lotto.domain.PurchaseMoney
+import lotto.domain.toPurchaseMoney
+
 class InputView(private val reader: () -> String?, private val writer: (String) -> Unit) {
 
-    fun readPurchaseMoney(): Int {
+    fun readPurchaseMoney(): PurchaseMoney {
         printInputPurchaseMoney()
 
         val value = reader()
         requireNotNull(value)
         require(value.isNotBlank())
         return kotlin
-            .runCatching { value.toInt() }
+            .runCatching { value.toInt().toPurchaseMoney() }
             .getOrIllegalArgumentException()
     }
 
