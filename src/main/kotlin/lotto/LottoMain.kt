@@ -49,7 +49,7 @@ fun main() {
     resultView.printLottoTickets(lottoTickets)
 
     val lottoLastNumbers = LottoLastNumbers(
-        inputView.readLastLottoNumbers(),
+        inputView.readLastLottoTicket(),
         inputView.readBonusLottoNumber()
     )
 

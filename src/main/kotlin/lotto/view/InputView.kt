@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.PurchaseMoney
 import lotto.domain.toLottoNumber
@@ -55,10 +56,12 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
         writeLine("\n수동으로 구매할 번호를 입력해 주세요.")
     }
 
-    fun readLastLottoNumbers(): Set<Int> {
+    fun readLastLottoTicket(): LottoTicket.LastLottoTicket {
         printInputLastLottoNumbers()
 
-        return readLottoNumber()
+        return LottoTicket.LastLottoTicket(
+            readLottoNumber().toLottoNumber()
+        )
     }
 
     private fun readLottoNumber(): Set<Int> {

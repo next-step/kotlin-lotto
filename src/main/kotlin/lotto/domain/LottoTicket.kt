@@ -14,6 +14,7 @@ sealed class LottoTicket(numbers: Set<LottoNumber>) : Set<LottoNumber> by number
 
     data class ManualLottoTicket(private val numbers: Set<LottoNumber>) : LottoTicket(numbers)
     data class AutoLottoTicket(private val numbers: Set<LottoNumber>) : LottoTicket(numbers)
+    data class LastLottoTicket(private val numbers: Set<LottoNumber>) : LottoTicket(numbers)
 
     companion object {
         const val SIZE_OF_LOTTO_NUMBER = 6
