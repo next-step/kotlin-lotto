@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoStore(
     private val money: Money,
-    private val manualCount: Int,
+    manualCount: Int,
     private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()
 ) {
     val autoLottoCount = money.getLottoCount() - manualCount
