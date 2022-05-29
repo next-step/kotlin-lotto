@@ -42,15 +42,14 @@ class StringAddCalculatorTest {
         assertEquals(expected, actual)
     }
 
-
     @DisplayName("//와 ₩n 문자 사이에 커스텀 구분자를 지정할 수 있다")
     @ParameterizedTest
-    @ValueSource(strings = [""])
-    fun customDelimiter(inputStr: String?) {
-        // TODO
+    @CsvSource(value = ["//;\\n1;2;3|6", "//a\\n1a1a1|3"], delimiter = '|')
+    fun customDelimiter(inputStr: String, expected: Long) {
+        val sut = StringAddCalculator()
+        val actual = sut.calculate(inputStr.replace("\\n", "\n"))
+        assertEquals(expected, actual)
     }
-
-
     @ParameterizedTest
     @ValueSource(strings = [""])
     fun `음수를 전달하는 경우 RuntimeException 예외가 발생해야 한다`(inputStr: String?) {
