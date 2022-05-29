@@ -11,19 +11,13 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("invalidCountNumbers")
     fun `Lotto 생성시 6개의 숫자가 오지 않으면 예외를 발생`(numbers: List<Int>) {
-        assertThrows<IllegalArgumentException>("6개의 숫자가 아닙니다.") { Lotto(numbers) }
+        assertThrows<IllegalArgumentException>("중복없는 6개의 숫자가 아닙니다.") { Lotto(numbers) }
     }
 
     @Test
     fun `Lotto 생성시 내부에 같은 숫자가 있다면 예외를 발생`() {
         val numbers: List<Int> = listOf(1, 2, 3, 4, 5, 5)
-        assertThrows<IllegalArgumentException>("각기 다른 6개의 숫자가 아닙니다.") { Lotto(numbers) }
-    }
-
-    @ParameterizedTest
-    @MethodSource("invalidElementNumbers")
-    fun `Lotto 생성시 리스트에 1~45 가 아닌 숫자가 있다면 예외를 발생`(numbers: List<Int>) {
-        assertThrows<IllegalArgumentException>("1~45에 해당하는 숫자로 이루어진 리스여야합니다.") { Lotto(numbers) }
+        assertThrows<IllegalArgumentException>("중복없는 6개의 숫자가 아닙니다.") { Lotto(numbers) }
     }
 
     @ParameterizedTest
