@@ -4,8 +4,8 @@ import lotto.domain.dto.LottoMatchResult
 import lotto.domain.dto.LottoNumber
 import lotto.domain.dto.Rank
 
-class LottoDrawResult(private val luckyDrawNumber: List<Int>, private val bonusNumber: Int) {
-    var result: Long = 0
+class LottoDraw(private val luckyDrawNumber: List<Int>, private val bonusNumber: Int) {
+    var winAmount: Long = 0
         private set
     var three: Int = 0
         private set
@@ -37,19 +37,18 @@ class LottoDrawResult(private val luckyDrawNumber: List<Int>, private val bonusN
         when (lottoMatchResult.matchCount) {
             Rank.FIFTH.count -> {
                 three++
-                this.result.add(Rank.FIFTH)
+                this.winAmount.add(Rank.FIFTH)
             }
             Rank.FOURTH.count -> {
                 four++
-                this.result.add(Rank.FOURTH)
+                this.winAmount.add(Rank.FOURTH)
             }
             Rank.SECOND.count -> {
-                five++
-                this.result.addSecondOrThirdAmount(lottoMatchResult)
+                this.winAmount.addSecondOrThirdAmount(lottoMatchResult)
             }
             Rank.FIRST.count -> {
                 six++
-                this.result.add(Rank.FIRST)
+                this.winAmount.add(Rank.FIRST)
             }
             else -> none++
         }

@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoLuckyDraw(
+class LottoValidator(
     luckyNumberString: String,
     bonusNumberString: String
 ) {
@@ -16,8 +16,8 @@ class LottoLuckyDraw(
         require(LUCKY_DRAW_MIN_NUM <= bonusNumberString.toInt()) { "보너스 숫자는 1 이상만 입력 가능합니다." }
     }
 
-    val luckyNumber = luckyNumberString.replace(" ", "").split(",").map { it.toInt() }
-    val bonusNumber = bonusNumberString.toInt()
+    val getLuckyNumbers = luckyNumberString.replace(" ", "").split(",").map { it.toInt() }
+    val getBonusNumber = bonusNumberString.toInt()
 
     companion object {
         private const val LUCKY_DRAW_MIN_NUM = 1
