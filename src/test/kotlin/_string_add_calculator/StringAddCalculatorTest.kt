@@ -22,7 +22,7 @@ internal class StringAddCalculatorTest : ExpectSpec({
             }
         }
 
-        expect("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환") {
+        expect("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.") {
             forAll(
                 row("1", 1),
                 row("2", 2),
@@ -61,22 +61,15 @@ internal class StringAddCalculatorTest : ExpectSpec({
         }
 
         expect("//와 \n 문자 사이에 커스텀 구분자를 지정할 수 있다.") {
-            forAll(
-                row("//*\n1*2*3", 6),
-                row("//^\n2^4^6", 12),
-            ) {
-                text, expect ->
+            val result = calculator.add("//;\n1;2;3")
 
-                val result = calculator.add(text)
-
-                result shouldBe expect
-            }
+            result shouldBe 6
         }
 
-        expect("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다") {
+        expect("음수를 전달할 경우 RuntimeException 예외가 발생한다.") {
             forAll(
                 row("-1,2,3"),
-                row("//^\n2^4^-1"),
+                row("//;\n2;4^;1"),
             ) {
                 text ->
                 shouldThrow<RuntimeException> { calculator.add(text) }
