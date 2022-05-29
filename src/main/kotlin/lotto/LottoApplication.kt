@@ -42,7 +42,7 @@ fun main() {
 
     // 당첨통계
     val lottoScore = LottoScore()
-    val lottoResults = lottoScore.compareNumber(lastWinningTicket, lottoTickets)
+    val lottoResults = lottoScore.compareNumber(lastWinningTicket, bonusNumber, lottoTickets)
     // 수익률
     val rateResult = lottoScore.rateOfResult(lottoPrice, lottoResults)
 

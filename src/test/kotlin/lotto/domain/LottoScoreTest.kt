@@ -15,15 +15,19 @@ internal class LottoScoreTest {
             LottoTicket(1, 2, 3, 8, 9, 10), // 3match
             LottoTicket(1, 2, 5, 10, 11, 12), // 3match
             LottoTicket(1, 2, 3, 4, 18, 17), // 4match
+            LottoTicket(1, 2, 3, 5, 6, 19), // 5match
+            LottoTicket(1, 2, 3, 4, 5, 23), // 5match
+            LottoTicket(1, 2, 3, 4, 5, 7), // 5match - bonus
             LottoTicket(1, 2, 3, 4, 5, 6), // 6match
         )
         val winningTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val bonusNumber = LottoNumber(7)
 
-        val lottoResults = LottoScore().compareNumber(winningTicket, lottoTickets)
+        val lottoResults = LottoScore().compareNumber(winningTicket, bonusNumber, lottoTickets)
         val expected = mapOf(
             LottoPrize.FIRST to 1,
-            LottoPrize.SECOND to 0,
-            LottoPrize.THIRD to 0,
+            LottoPrize.SECOND to 1,
+            LottoPrize.THIRD to 2,
             LottoPrize.FOURTH to 1,
             LottoPrize.FIFTH to 2
         )
