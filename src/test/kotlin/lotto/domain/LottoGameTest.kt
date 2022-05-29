@@ -19,7 +19,7 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = ["14000|14", "1000|1", "2000|2"], delimiter = '|')
     fun `로또 구입 금액에 해당하는 로또 수를 계산할 수 있다`(money: Long, expected: Int) {
-        assertThat(lottoGame.generateLotto(money)).isEqualTo(expected)
+        assertThat(lottoGame.generateLotto(money).size).isEqualTo(expected)
     }
 
     @ParameterizedTest

@@ -8,4 +8,5 @@ fun main() {
     val inputMoney = InputView.readLottoPurchaseAmount()
     val lottos = LottoGame().generateLotto(inputMoney)
     ResultView.showLottos(lottos)
+    InputView.readWinningNumbers()
 }
