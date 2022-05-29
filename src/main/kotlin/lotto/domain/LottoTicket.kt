@@ -10,6 +10,10 @@ class LottoTicket(numbers: List<Int>) {
         lottoNumbers = numbers.map { LottoNumber(it) }
     }
 
+    fun contains(number: LottoNumber): Boolean {
+        return lottoNumbers.contains(number)
+    }
+
     companion object {
         const val NUMBER_SIZE = 6
     }

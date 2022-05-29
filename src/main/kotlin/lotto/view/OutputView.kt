@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoPrize
 import lotto.domain.LottoTicket
 
 class OutputView {
@@ -10,11 +11,15 @@ class OutputView {
         }
     }
 
-    fun printStat() {
-        println("당첨 통계\n---------")
+    fun printStat(winningInfo: Map<LottoPrize, Int>) {
+        println("\n당첨 통계\n---------")
+        LottoPrize.values()
+            .filter { it.money > 0 }
+            .sortedBy { it.matchedCount }
+            .forEach { println("${it.matchedCount}개 일치 (${it.money}원) - ${winningInfo[it] ?: 0}개") }
     }
 
-    fun printRevenue() {
-        println("총 수익률은 ${0.35}입니다.")
+    fun printRevenue(total: Int, profit: Int) {
+        println("총 수익률은 %.2f 입니다.".format(profit.toDouble() / total))
     }
 }

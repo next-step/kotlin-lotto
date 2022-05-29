@@ -13,8 +13,12 @@ class LottoSimulator(
         val ticketMachine = TicketMachine(NumberGenerator())
         val tickets = ticketMachine.buy(inputView.amount())
         outputView.printTickets(tickets)
+
         val winningNumbers = inputView.winningNumbers()
-        println(winningNumbers)
+        val winningInfo = winningNumbers.compare(tickets)
+
+        outputView.printStat(winningInfo)
+        outputView.printRevenue(inputView.amount(), winningInfo.entries.sumOf { it.key.money * it.value })
     }
 }
 
