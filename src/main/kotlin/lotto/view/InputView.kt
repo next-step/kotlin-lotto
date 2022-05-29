@@ -13,6 +13,11 @@ object InputView {
         return changeStringToInt(readStringValue())
     }
 
+    fun getBonusNumber(readStringValue: () -> String? = { readlnOrNull() }): Int {
+        println(Messages.WRITE_BONUS_NUMBER)
+        return changeStringToInt(readStringValue())
+    }
+
     fun getWinningNumber(readStringValue: () -> String? = { readlnOrNull() }): String {
         println(Messages.WRITE_WINNING_NUMBER)
         val input = readStringValue()

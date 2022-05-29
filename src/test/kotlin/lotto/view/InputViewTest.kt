@@ -32,4 +32,20 @@ class InputViewTest {
             InputView.getWinningNumber { source }
         }
     }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `보너스 볼에 빈칸이나 Null이 들어가면 IllegalArgumentException을 던진다`(source: String?) {
+        assertThrows<IllegalArgumentException> {
+            InputView.getBonusNumber { source }
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["십사", "오"])
+    fun `보너스 볼이 숫자가 아니라면 IllegalArgumentException을 던진다`(source: String?) {
+        assertThrows<IllegalArgumentException> {
+            InputView.getBonusNumber { source }
+        }
+    }
 }
