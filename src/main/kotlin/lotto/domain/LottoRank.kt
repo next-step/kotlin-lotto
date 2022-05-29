@@ -4,7 +4,7 @@ import lotto.vo.Money
 
 enum class LottoRank(
     val matchCounts: List<Int>,
-    val winningAmount: Money
+    val winningAmount: Money,
 ) {
     FIRST(matchCounts = listOf(6), winningAmount = Money.of(2_000_000_000)),
     SECOND(matchCounts = listOf(5), winningAmount = Money.of(30_000_000)),
@@ -14,11 +14,13 @@ enum class LottoRank(
     NOTHING(matchCounts = listOf(2, 1, 0), winningAmount = Money.of(0));
 
     companion object {
-        private const val MIN_MATCH_COUNT = 0
-        private const val MAX_MATCH_COUNT = 6
+        private val MATCH_COUNT_RANGE = 0..6
 
         fun of(matchCount: Int, bonusMatch: Boolean): LottoRank {
-            validateMatchCount(matchCount)
+            require(matchCount in MATCH_COUNT_RANGE) {
+                "로또 일치 개수는 ${MATCH_COUNT_RANGE.first} 와 ${MATCH_COUNT_RANGE.last} 사이여야 합니다. (입력:$matchCount)"
+            }
+
             if (SECOND.matchCounts.contains(matchCount) && bonusMatch) {
                 return SECOND
             }
@@ -26,14 +28,6 @@ enum class LottoRank(
             return values().filterNot { it == SECOND }
                 .find { it.matchCounts.contains(matchCount) }
                 ?: NOTHING
-        }
-
-        private fun validateMatchCount(matchCount: Int) {
-            if (matchCount < MIN_MATCH_COUNT || matchCount > MAX_MATCH_COUNT) {
-                throw IllegalArgumentException(
-                    "로또 일치 개수는 $MIN_MATCH_COUNT 와 $MAX_MATCH_COUNT 사이여야 합니다. (입력:$matchCount)"
-                )
-            }
         }
     }
 }

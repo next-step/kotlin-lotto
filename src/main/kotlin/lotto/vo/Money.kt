@@ -4,12 +4,16 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 @JvmInline
-value class Money(val amount: BigDecimal) {
+value class Money(val amount: BigDecimal) : Comparable<Money> {
 
     init {
         require(amount >= BigDecimal.ZERO) {
             "금액은 0원 이상이어야 합니다 (입력:$amount)"
         }
+    }
+
+    override fun compareTo(other: Money): Int {
+        return amount.compareTo(other.amount)
     }
 
     operator fun plus(other: Money): Money {
@@ -29,8 +33,6 @@ value class Money(val amount: BigDecimal) {
     }
 
     companion object {
-        val ZERO = Money(BigDecimal.ZERO)
-
         fun of(amount: Int): Money {
             return Money(amount.toBigDecimal())
         }

@@ -1,5 +1,7 @@
 package lotto.domain
 
-fun interface LottoMachine {
-    fun generate(): LottoTicket
+interface LottoMachine {
+    fun generateAuto(): LottoTicket
+
+    fun generateManual(lottoNumbers: List<LottoNumber>): LottoTicket
 }

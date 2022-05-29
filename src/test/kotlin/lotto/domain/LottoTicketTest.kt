@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
@@ -62,66 +63,24 @@ class LottoTicketTest : DescribeSpec({
 
     describe("matching") {
         context("두 로또 티켓이 주어졌을 때") {
-            val lottoTicket = LottoTicket(`기본 로또 번호 목록(1~6)`())
-            it("모든 번호의 수가 일치하면 6을 반환한다") {
-                val otherLottoTicket = LottoTicket(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(5),
-                        LottoNumber(6),
-                    )
-                )
+            val lottoTicket = `기본 로또 티켓(1~6)`()
 
-                lottoTicket.matching(otherLottoTicket) shouldBe 6
-            }
-
-            it("3개의 번호의 수가 일치하면 3을 반환한다") {
-                val otherLottoTicket = LottoTicket(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(7),
-                        LottoNumber(8),
-                        LottoNumber(9),
-                    )
-                )
-
-                lottoTicket.matching(otherLottoTicket) shouldBe 3
-            }
-
-            it("하나도 일치하지 않으면 0을 반환한다") {
-                val otherLottoTicket = LottoTicket(
-                    listOf(
-                        LottoNumber(7),
-                        LottoNumber(8),
-                        LottoNumber(9),
-                        LottoNumber(10),
-                        LottoNumber(11),
-                        LottoNumber(12),
-                    )
-                )
-
-                lottoTicket.matching(otherLottoTicket) shouldBe 0
+            it("일치하는 번호의 수를 반환한다") {
+                listOf(
+                    `기본 로또 티켓(1~6)`() to 6,
+                    `로또 티켓`(4..9) to 3,
+                    `로또 티켓`(7..12) to 0,
+                ).forAll { (otherTicket, matchCount) ->
+                    lottoTicket.matching(otherTicket) shouldBe matchCount
+                }
             }
         }
     }
 
     describe("contains") {
         context("로또 번호가 주어졌을 때") {
-            val lottoTicket = LottoTicket(
-                listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6),
-                )
-            )
+            val lottoTicket = `기본 로또 티켓(1~6)`()
+
             it("포함되어 있는 경우 true 를 반환한다") {
                 lottoTicket.contains(LottoNumber(5)) shouldBe true
             }

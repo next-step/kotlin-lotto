@@ -1,5 +1,6 @@
 package lotto.vo
 
+import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.inspectors.forAll
@@ -55,6 +56,16 @@ class MoneyTest : DescribeSpec({
             val money = Money.of(100)
 
             money.multiply(5) shouldBe Money.of(500)
+        }
+    }
+
+    describe("compareTo") {
+        it("두 금액을 비교할 수 있다.") {
+            assertSoftly {
+                (Money.of(0) == Money.of(0)) shouldBe true
+                (Money.of(0) > Money.of(100)) shouldBe false
+                (Money.of(0) < Money.of(100)) shouldBe true
+            }
         }
     }
 })

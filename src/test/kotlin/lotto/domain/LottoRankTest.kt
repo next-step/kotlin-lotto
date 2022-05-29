@@ -1,97 +1,32 @@
 package lotto.domain
 
-import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import lotto.vo.Money
 
 class LottoRankTest : DescribeSpec({
 
     describe("of") {
-        context("일치하는 로또 번호의 수가 6개인 경우") {
-            it("1등을 반환한다 (당첨 금액 2_000_000_000)") {
-                val ranking = LottoRank.of(6, false)
-                assertSoftly {
-                    ranking shouldBe LottoRank.FIRST
-                    ranking.winningAmount shouldBe Money.of(2_000_000_000)
-                }
-            }
-        }
-
-        context("일치하는 로또 번호의 수가 5개이면서 ") {
-            it("보너스볼이 일치할 경우 2등을 반환한다 (당첨 금액 30_000_000)") {
-                val ranking = LottoRank.of(5, true)
-                assertSoftly {
-                    ranking shouldBe LottoRank.SECOND
-                    ranking.winningAmount shouldBe Money.of(30_000_000)
-                }
-            }
-
-            it("보너스 번호가 일치하지 않는 경우 3등을 반환한다 (당첨 금액 1_500_000)") {
-                val ranking = LottoRank.of(5, false)
-                assertSoftly {
-                    ranking shouldBe LottoRank.THIRD
-                    ranking.winningAmount shouldBe Money.of(1_500_000)
-                }
-            }
-        }
-
-        context("일치하는 로또 번호의 수가 4개이면서 ") {
-            it("보너스 번호가 일치하는 경우 4등을 반환한다 (당첨 금액 50_000)") {
-                val ranking = LottoRank.of(4, true)
-                assertSoftly {
-                    ranking shouldBe LottoRank.FOURTH
-                    ranking.winningAmount shouldBe Money.of(50_000)
-                }
-            }
-
-            it("보너스 번호가 일치하지 않는 경우 4등을 반환한다 (당첨 금액 50_000)") {
-                val ranking = LottoRank.of(4, false)
-                assertSoftly {
-                    ranking shouldBe LottoRank.FOURTH
-                    ranking.winningAmount shouldBe Money.of(50_000)
-                }
-            }
-        }
-
-        context("일치하는 로또 번호의 수가 3개이면서") {
-            it("보너스 번호가 일치하는 경우 5등을 반환한다 (당첨 금액 5_000)") {
-                val ranking = LottoRank.of(3, true)
-                assertSoftly {
-                    ranking shouldBe LottoRank.FIFTH
-                    ranking.winningAmount shouldBe Money.of(5_000)
-                }
-            }
-
-            it("보너스 번호가 일치하지 않는 경우 5등을 반환한다 (당첨 금액 5_000)") {
-                val ranking = LottoRank.of(3, false)
-                assertSoftly {
-                    ranking shouldBe LottoRank.FIFTH
-                    ranking.winningAmount shouldBe Money.of(5_000)
-                }
-            }
-        }
-
-        context("일치하는 로또 번호의 수가 0~2개이면서") {
-            it("보너스 번호가 일치하는 경우 미당첨을 반환한다 (당첨 금액 0)") {
-                listOf(0, 1, 2).forAll { matchCount ->
-                    val ranking = LottoRank.of(matchCount, true)
-                    assertSoftly {
-                        ranking shouldBe LottoRank.NOTHING
-                        ranking.winningAmount shouldBe Money.ZERO
-                    }
-                }
-            }
-
-            it("보너스 번호가 일치하지 않는 경우 미당첨을 반환한다 (당첨 금액 0)") {
-                listOf(0, 1, 2).forAll { matchCount ->
-                    val ranking = LottoRank.of(matchCount, false)
-                    assertSoftly {
-                        ranking shouldBe LottoRank.NOTHING
-                        ranking.winningAmount shouldBe Money.ZERO
-                    }
+        context("일치하는 로또 번호의 수와 보너스볼 일치 여부가 주어졌을 때") {
+            it("각 해당하는 등수를 생성한다") {
+                listOf(
+                    LottoRank.of(6, true) to LottoRank.FIRST,
+                    LottoRank.of(6, false) to LottoRank.FIRST,
+                    LottoRank.of(5, true) to LottoRank.SECOND,
+                    LottoRank.of(5, false) to LottoRank.THIRD,
+                    LottoRank.of(4, true) to LottoRank.FOURTH,
+                    LottoRank.of(4, false) to LottoRank.FOURTH,
+                    LottoRank.of(3, true) to LottoRank.FIFTH,
+                    LottoRank.of(3, false) to LottoRank.FIFTH,
+                    LottoRank.of(2, true) to LottoRank.NOTHING,
+                    LottoRank.of(2, false) to LottoRank.NOTHING,
+                    LottoRank.of(1, true) to LottoRank.NOTHING,
+                    LottoRank.of(1, false) to LottoRank.NOTHING,
+                    LottoRank.of(0, true) to LottoRank.NOTHING,
+                    LottoRank.of(0, false) to LottoRank.NOTHING,
+                ).forAll { (rank, expectedRank) ->
+                    rank shouldBe expectedRank
                 }
             }
         }

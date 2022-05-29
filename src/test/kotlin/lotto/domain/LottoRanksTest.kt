@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.vo.Money
 
@@ -33,30 +34,17 @@ class LottoRanksTest : DescribeSpec({
     }
 
     describe("profitRate") {
-        context("수익률을 구할 수 있다") {
-            it("구매금액 2_000, 당첨금액 5_000") {
-                val lottoRanks = LottoRanks(
-                    listOf(
-                        LottoRank.FIFTH,
-                        LottoRank.NOTHING,
-                    )
-                )
-
-                lottoRanks.profitRate(Money.of(2_000)) shouldBe "2.50".toBigDecimal()
-            }
-
-            it("구매금액 5_000, 당첨금액 1_550_000") {
-                val lottoRanks = LottoRanks(
-                    listOf(
-                        LottoRank.THIRD,
-                        LottoRank.FOURTH,
-                        LottoRank.NOTHING,
-                        LottoRank.NOTHING,
-                        LottoRank.NOTHING,
-                    )
-                )
-
-                lottoRanks.profitRate(Money.of(5_000)) shouldBe "310.00".toBigDecimal()
+        context("당첨 결과와 구매 금액이 주어졌을 때") {
+            it("당첨 금액의 수익률(소수점 2자리, 반올림)을 구할 수 있다") {
+                val lottoRanks = LottoRanks(listOf(LottoRank.FIFTH, LottoRank.NOTHING)) // 5_000원
+                listOf(
+                    Money.of(1_000) to "5.00".toBigDecimal(),
+                    Money.of(2_000) to "2.50".toBigDecimal(),
+                    Money.of(3_000) to "1.67".toBigDecimal(),
+                    Money.of(4_000) to "1.25".toBigDecimal(),
+                ).forAll { (buyingAmount, profitRate) ->
+                    lottoRanks.profitRate(buyingAmount) shouldBe profitRate
+                }
             }
         }
     }
