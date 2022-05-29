@@ -2,14 +2,14 @@ package lotto.domain
 
 class WinnerStat(
     private val purchaseRecord: PurchaseRecord,
-    private val winnerNumbers: List<LottoNumber>
+    private val winner: Winner
 ) {
-    val winnerMap: Map<Winner, Int>
+    val winnerTypeMap: Map<WinnerType, Int>
 
     init {
-        winnerMap = purchaseRecord
+        winnerTypeMap = purchaseRecord
             .lottoList
-            .map { lotto -> getWinner(lotto, winnerNumbers) }
+            .map { lotto -> getWinnerType(lotto, winner) }
             .filterNotNull()
             .groupingBy { it }
             .eachCount()
@@ -17,13 +17,15 @@ class WinnerStat(
 
     fun per(): Double {
         val price = purchaseRecord.lottoList.size * LottoShop.LOTTO_PRICE
-        val earning = winnerMap.map { e -> e.key.prizeMonery * e.value }.sum()
+        val earning = winnerTypeMap.map { e -> e.key.prizeMonery * e.value }.sum()
         return earning / price.toDouble()
     }
 
-    private fun getWinner(lotto: Lotto, winnerNumbers: List<LottoNumber>): Winner? {
-        return Winner.values()
-            .find { it.matchedNumbers == getMatchedNumbers(lotto, winnerNumbers) }
+    private fun getWinnerType(lotto: Lotto, winnerNumbers: Winner): WinnerType? {
+        return WinnerType.valueOf(
+            getMatchedNumbers(lotto, winnerNumbers.lottoNumbers),
+            lotto.contains(winnerNumbers.bonusNumber)
+        )
     }
 
     private fun getMatchedNumbers(lotto: Lotto, winnerNumbers: List<LottoNumber>): Int {

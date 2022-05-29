@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.domain.PurchaseRecord
-import lotto.domain.Winner
 import lotto.domain.WinnerStat
+import lotto.domain.WinnerType
 
 object ResultView {
     fun printPurchaseRecord(purchaseRecord: PurchaseRecord) {
@@ -17,11 +17,11 @@ object ResultView {
         println("당첨 통계")
         println("---------")
 
-        Winner.values()
+        WinnerType.values()
             .sortedBy { it.matchedNumbers }
-            .forEach { winner ->
-                val winNumbers = winnerStat.winnerMap.getOrDefault(winner, 0)
-                println("${winner.matchedNumbers}개 일치 (${winner.prizeMonery}원) - ${winNumbers}개")
+            .forEach { winnerType ->
+                val winNumbers = winnerStat.winnerTypeMap.getOrDefault(winnerType, 0)
+                println("$winnerType - ${winNumbers}개")
             }
 
         println("총 수익률은 ${winnerStat.per()}. (${getAppendix(winnerStat.per())})")
