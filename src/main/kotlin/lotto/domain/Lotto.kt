@@ -1,6 +1,9 @@
 package lotto.domain
 
-data class Lotto(val type: LottoType, val numbers: List<LottoNumber>) {
+data class Lotto(
+    private val type: LottoType,
+    val numbers: List<LottoNumber>,
+) {
 
     init {
         require(numbers.size == NUMBER_COUNT) { "로또 숫자의 개수는 $NUMBER_COUNT 이어야 합니다" }
