@@ -8,19 +8,13 @@ class LottoJudge {
             .toMutableMap()
 
         val determinedLottoWinnings = lottoTickets
-            .map { LottoWinning.of(it.countMatchWonLottoTicket(wonLottoTicket), isContainsBonus(it, wonLottoTicket)) }
+            .map { LottoWinning.of(it.countMatchWonLottoTicket(wonLottoTicket), it.isMatchedBonus(wonLottoTicket.bonus!!)) }
             .groupingBy { it }
             .eachCount()
             .toMutableMap()
 
         lottoWinningEnums.putAll(determinedLottoWinnings)
         return lottoWinningEnums
-    }
-
-    private fun isContainsBonus(lottoTicket: LottoTicket, wonLottoTicket: LottoTicket): Boolean {
-        return lottoTicket.numbers
-            .map { it.number }
-            .contains(wonLottoTicket.bonus?.number)
     }
 
     companion object {

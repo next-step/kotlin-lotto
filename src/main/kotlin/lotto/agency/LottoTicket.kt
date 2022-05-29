@@ -23,6 +23,10 @@ class LottoTicket(numbers: List<LottoNumber>, bonus: LottoNumber? = null) {
             .count { wonLottoTicket.numbers.map { wonLottoNumber -> wonLottoNumber.number }.contains(it) }
     }
 
+    fun isMatchedBonus(bonus: LottoNumber): Boolean {
+        return numbers.map { it.number }.contains(bonus.number)
+    }
+
     fun validateDuplicate(number: LottoNumber) {
         if (numbers.contains(number))
             throw AlreadySelectedNumberException("입력한 번호는 이미 선택된 번호입니다.")
