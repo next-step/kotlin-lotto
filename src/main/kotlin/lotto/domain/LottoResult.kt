@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.domain
 
 data class LottoResult(
     val lottoPrize: LottoPrize,
