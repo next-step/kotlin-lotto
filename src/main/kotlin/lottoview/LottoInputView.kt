@@ -10,7 +10,7 @@ object LottoInputView {
         println(INPUT_PURCHASE_AMOUNT_MESSAGE)
         val amount = readln()
 
-        val priceInfo = LottoPurchaseHandler.getLottoCountByAmount(amount.toInt())
+        val priceInfo = LottoPurchaseHandler.calculateLottoCountByAmount(amount.toInt())
         println(priceInfo.count.toString() + INPUT_PURCHASE_NUMBER_MESSAGE)
 
         return priceInfo

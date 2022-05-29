@@ -2,7 +2,6 @@ package lottoview
 
 import lotto.LottoWinningHandler.matchCount
 import lotto.LottoWinningInfo
-import lotto.WinningPriceEnum
 import lotto.getPrice
 
 object LottoOutputView {
@@ -22,7 +21,7 @@ object LottoOutputView {
     }
 
     fun displayRevenue(amount: Int, revenue: Int) {
-        val revenuePercentage : Double = (revenue / amount).toDouble()
+        val revenuePercentage: Double = (revenue / amount).toDouble()
         println(REVENUE_MESSAGE.format(revenuePercentage))
     }
 

@@ -7,9 +7,8 @@ object LottoCreator {
     fun issue(count: Int): List<List<Int>> {
         require(count > 0)
 
-        val randomIssuedList = mutableListOf<List<Int>>()
-        repeat(count) {
-            randomIssuedList.add(randomNumbers())
+        val randomIssuedList = (1..count).map {
+            randomNumbers()
         }
 
         return randomIssuedList
@@ -23,6 +22,6 @@ object LottoCreator {
             .toList()
     }
 
-    const val LOTTO_NUMBER_COUNT = 6
-    val LOTTO_NUMBER_RANGE = (1..45)
+    private const val LOTTO_NUMBER_COUNT = 6
+    private val LOTTO_NUMBER_RANGE = (1..45)
 }

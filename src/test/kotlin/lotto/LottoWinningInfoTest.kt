@@ -21,7 +21,6 @@ class LottoWinningInfoTest {
         assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
             winningInfo.getWinningNumbers()
         }
-
     }
 
     @Test

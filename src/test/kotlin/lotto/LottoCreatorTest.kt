@@ -1,7 +1,8 @@
 package lotto
 
 import lotto.LottoCreator.issue
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class LottoCreatorTest {
@@ -20,7 +21,7 @@ class LottoCreatorTest {
 
     @Test
     fun `설정한 수가 음수인 경우 IllegalArgumentException 오류를 던져야 한다`() {
-        assertThatExceptionOfType(IllegalArgumentException::class.java).isThrownBy {
+        assertThrows(IllegalArgumentException::class.java) {
             issue(-1)
         }
     }
