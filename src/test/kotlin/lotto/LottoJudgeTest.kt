@@ -14,7 +14,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -26,20 +26,19 @@ class LottoJudgeTest {
         )
         val wonLottoTicket =
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(2),
                     LottoNumber(4),
                     LottoNumber(3),
                     LottoNumber(1),
                     LottoNumber(5),
                     LottoNumber(6)
-                )
+                ),
+                bonus = LottoNumber(7)
             )
 
-        val bonusLottoNumber = 7
-
         val lottoJudge = LottoJudge()
-        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
         assertThat(determinedLottoTicket[LottoWinning.FIRST_PLACE]).isEqualTo(1)
     }
@@ -49,7 +48,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -60,19 +59,19 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            listOf(
+            numbers = listOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
                 LottoNumber(4),
                 LottoNumber(5),
                 LottoNumber(10)
-            )
+            ),
+            bonus = LottoNumber(7)
         )
-        val bonusLottoNumber = 7
 
         val lottoJudge = LottoJudge()
-        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
         assertThat(determinedLottoTicket[LottoWinning.SECOND_PLACE]).isEqualTo(1)
     }
@@ -82,7 +81,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -93,19 +92,19 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            listOf(
+            numbers = listOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
                 LottoNumber(4),
                 LottoNumber(5),
                 LottoNumber(10)
-            )
+            ),
+            bonus = LottoNumber(7)
         )
-        val bonusLottoNumber = 7
 
         val lottoJudge = LottoJudge()
-        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
         assertThat(determinedLottoTicket[LottoWinning.THIRD_PLACE]).isEqualTo(1)
     }
@@ -115,7 +114,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -126,19 +125,19 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            listOf(
+            numbers = listOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
                 LottoNumber(4),
                 LottoNumber(10),
                 LottoNumber(22)
-            )
+            ),
+            bonus = LottoNumber(7)
         )
-        val bonusLottoNumber = 7
 
         val lottoJudge = LottoJudge()
-        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
         assertThat(determinedLottoTicket[LottoWinning.FOURTH_PLACE]).isEqualTo(1)
     }
@@ -148,7 +147,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -159,19 +158,19 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            listOf(
+            numbers = listOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(23),
                 LottoNumber(43),
                 LottoNumber(22),
                 LottoNumber(12)
-            )
+            ),
+            bonus = LottoNumber(7)
         )
-        val bonusLottoNumber = 7
 
         val lottoJudge = LottoJudge()
-        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
         assertThat(determinedLottoTicket[LottoWinning.LOSE]).isEqualTo(1)
     }
@@ -181,7 +180,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -192,19 +191,19 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            listOf(
+            numbers = listOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
                 LottoNumber(4),
                 LottoNumber(10),
                 LottoNumber(22)
-            )
+            ),
+            bonus = LottoNumber(7)
         )
-        val bonusLottoNumber = 7
 
         val lottoJudge = LottoJudge()
-        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
         assertThat(determinedLottoTicket[LottoWinning.FOURTH_PLACE]).isEqualTo(1)
     }
@@ -214,7 +213,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                listOf(
+                numbers = listOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -225,19 +224,19 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            listOf(
+            numbers = listOf(
                 LottoNumber(10),
                 LottoNumber(1),
                 LottoNumber(27),
                 LottoNumber(44),
                 LottoNumber(2),
                 LottoNumber(7)
-            )
+            ),
+            bonus = LottoNumber(7)
         )
-        val bonusLottoNumber = 7
 
         val lottoJudge = LottoJudge()
-        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+        val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
         assertThat(determinedLottoTicket[LottoWinning.LOSE]).isEqualTo(1)
     }

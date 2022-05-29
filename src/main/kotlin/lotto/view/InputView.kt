@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.agency.LottoNumber
 import lotto.agency.LottoTicket
+import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.NotNumericException
 
 class InputView {
@@ -16,21 +17,17 @@ class InputView {
     fun enterWonLottoTicket(): LottoTicket {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        val text = readln().trim().split(",")
-        text.map { validateNotString(it) }
-        val wonLottoNumbers = text.map { it.toInt() }.map { LottoNumber(it) }
+        val inputText1 = readln().trim().split(",")
+        inputText1.map { validateNotString(it) }
+        val wonLottoNumbers = inputText1.map { it.toInt() }.map { LottoNumber(it) }
 
-        return LottoTicket(wonLottoNumbers)
-    }
-
-    fun enterBonusLottoNumber(wonLottoTicket: LottoTicket): Int {
         println("보너스 볼을 입력해 주세요.")
+        val inputText2 = readln()
+        validateNotString(inputText2)
+        val bonus = LottoNumber(inputText2.toInt())
 
-        val text = readln()
-        validateNotString(text)
-        val bonusLottoNumber = text.toInt()
-        validateBonusLottoTicket(wonLottoTicket, LottoNumber(bonusLottoNumber))
-        return bonusLottoNumber
+        validateBonus(wonLottoNumbers, bonus)
+        return LottoTicket(wonLottoNumbers, bonus)
     }
 
     private fun validateNotString(toCheck: String) {
@@ -39,7 +36,9 @@ class InputView {
         }
     }
 
-    private fun validateBonusLottoTicket(wonLottoTicket: LottoTicket, bonusLottoNumber: LottoNumber) {
-        wonLottoTicket.validateDuplicate(bonusLottoNumber)
+    private fun validateBonus(wonLottoNumber: List<LottoNumber>, bonus: LottoNumber) {
+        if (wonLottoNumber.contains(bonus)) {
+            throw AlreadySelectedNumberException("입력한 보너스 번호는 이미 선택된 번호입니다.")
+        }
     }
 }

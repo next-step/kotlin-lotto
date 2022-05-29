@@ -14,9 +14,8 @@ fun main() {
     val lottoTickets = lottoSeller.buy(lottoPurchaseAmount)
 
     val wonLottoTicket = inputView.enterWonLottoTicket()
-    val bonusLottoNumber = inputView.enterBonusLottoNumber(wonLottoTicket)
     val lottoJudge = LottoJudge()
-    val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket, bonusLottoNumber)
+    val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
 
     val resultView = ResultView()
     resultView.printPurchaseAmount(lottoPurchaseAmount)
