@@ -26,7 +26,15 @@ object InputView {
         )
     }
 
-    private fun amount(): Money {
+    fun winningLotto(): WinningLottoRequest {
+        println(INPUT_WINNING_LOTTO)
+        val winningLottoNumbers = toLottoNumbers(manualNumbers())
+        println(INPUT_BONUS_NUMBER)
+        val bonusNumber = toBonusNumber(readln())
+        return WinningLottoRequest(winningLottoNumbers, bonusNumber)
+    }
+
+    private tailrec fun amount(): Money {
         println(INPUT_AMOUNT)
         val amount = convertMoney(readln())
 
@@ -47,7 +55,7 @@ object InputView {
         }
     }
 
-    private fun manualCount(buyingAmount: Money): Int {
+    private tailrec fun manualCount(buyingAmount: Money): Int {
         println(INPUT_MANUAL_COUNT)
         val count = convertCount(readln(), buyingAmount)
 
@@ -90,14 +98,6 @@ object InputView {
             return readln()
         }
         return manualNumber
-    }
-
-    fun winningLotto(): WinningLottoRequest {
-        println(INPUT_WINNING_LOTTO)
-        val winningLottoNumbers = toLottoNumbers(manualNumbers())
-        println(INPUT_BONUS_NUMBER)
-        val bonusNumber = toBonusNumber(readln())
-        return WinningLottoRequest(winningLottoNumbers, bonusNumber)
     }
 
     private fun toBonusNumber(value: String): LottoNumber {
