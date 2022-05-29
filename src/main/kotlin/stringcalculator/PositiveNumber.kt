@@ -5,13 +5,13 @@ class PositiveNumber(
 ) {
 
     init {
-        checkIsNegative(number)
+        require(number.toInt() >= ZERO) {
+            "입력하신 숫자 중 음수가 존재합니다."
+        }
     }
 
-    private fun checkIsNegative(number: String) {
-        if (number.toInt() < 0) {
-            throw RuntimeException("입력하신 숫자 중 음수가 존재합니다.")
-        }
+    companion object {
+        private const val ZERO = 0
     }
 
     fun value() = number.toInt()

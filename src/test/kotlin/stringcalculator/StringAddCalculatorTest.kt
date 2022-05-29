@@ -51,9 +51,9 @@ class StringAddCalculatorTest {
     fun customDelimiter(text: String) {
         assertThat(calculator.add(text)).isEqualTo(6)
     }
-    @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 IllegalArgumentException 예외 처리를 한다.")
     @Test
     fun negative() {
-        assertThrows<RuntimeException> { calculator.add("-1") }
+        assertThrows<IllegalArgumentException> { calculator.add("-1") }
     }
 }
