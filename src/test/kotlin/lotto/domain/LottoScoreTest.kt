@@ -21,10 +21,11 @@ internal class LottoScoreTest {
 
         val lottoResults = LottoScore().compareNumber(winningTicket, lottoTickets)
         val expected = mapOf(
-            LottoPrize.THREE_MATCH to 2,
-            LottoPrize.FOUR_MATCH to 1,
-            LottoPrize.FIVE_MATCH to 0,
-            LottoPrize.SIX_MATCH to 1
+            LottoPrize.FIRST to 1,
+            LottoPrize.SECOND to 0,
+            LottoPrize.THIRD to 0,
+            LottoPrize.FOURTH to 1,
+            LottoPrize.FIFTH to 2
         )
 
         assertThat(lottoResults).hasSize(expected.size)
@@ -51,8 +52,8 @@ internal class LottoScoreTest {
     internal fun `당첨 결과에 따라 수익률을 반환한다`(price: Int, expected: BigDecimal) {
         // 총 상금: 60,000
         val lottoResult = listOf(
-            LottoResult(LottoPrize.THREE_MATCH, 2),
-            LottoResult(LottoPrize.FOUR_MATCH, 1)
+            LottoResult(LottoPrize.FOURTH, 1),
+            LottoResult(LottoPrize.FIFTH, 2)
         )
         val result = LottoScore().rateOfResult(LottoPrice(price), lottoResult)
         assertThat(result).isEqualTo(expected.setScale(2, RoundingMode.HALF_UP))
