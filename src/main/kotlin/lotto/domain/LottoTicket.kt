@@ -1,12 +1,9 @@
 package lotto.domain
 
-data class LottoTicket(
-    private val numbers: Set<LottoNumber>,
-    val isManual: Boolean = false
-) : Set<LottoNumber> by numbers {
+sealed class LottoTicket(numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
 
     init {
-        require(size == SIZE_OF_LOTTO_NUMBER)
+        require(numbers.size == SIZE_OF_LOTTO_NUMBER)
     }
 
     fun getMatch(lastNumbers: LottoLastNumbers): LottoMatch {
@@ -15,9 +12,10 @@ data class LottoTicket(
         return LottoMatch.find(matchCount, isContainBonus)
     }
 
+    data class ManualLottoTicket(private val numbers: Set<LottoNumber>) : LottoTicket(numbers)
+    data class AutoLottoTicket(private val numbers: Set<LottoNumber>) : LottoTicket(numbers)
+
     companion object {
         const val SIZE_OF_LOTTO_NUMBER = 6
-
-        fun of(vararg number: Int): LottoTicket = LottoTicket(number.toSet().toLottoNumber())
     }
 }

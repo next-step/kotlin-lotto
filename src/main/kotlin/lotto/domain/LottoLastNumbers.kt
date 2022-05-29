@@ -6,5 +6,6 @@ data class LottoLastNumbers(private val tickets: LottoTicket, val bonus: LottoNu
         require(contains(bonus).not())
     }
 
-    constructor(numbers: Set<Int>, bonus: Int) : this(LottoTicket(numbers.toLottoNumber()), LottoNumber(bonus))
+    constructor(numbers: Set<Int>, bonus: Int) :
+            this(LottoTicket.ManualLottoTicket(numbers.toLottoNumber()), LottoNumber(bonus))
 }

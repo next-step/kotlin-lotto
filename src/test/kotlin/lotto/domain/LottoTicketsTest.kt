@@ -9,9 +9,9 @@ class LottoTicketsTest : BehaviorSpec({
     Given("로또 티켓 목록은") {
         val lottoTickets = LottoTickets(
             listOf(
-                LottoTicket.of(1, 2, 3, 10, 11, 12),
-                LottoTicket.of(1, 2, 5, 10, 11, 12),
-                LottoTicket.of(1, 2, 3, 4, 5, 6),
+                LottoTicket.AutoLottoTicket(setOf(1, 2, 3, 10, 11, 12).toLottoNumber()),
+                LottoTicket.AutoLottoTicket(setOf(1, 2, 5, 10, 11, 12).toLottoNumber()),
+                LottoTicket.AutoLottoTicket(setOf(1, 2, 3, 4, 5, 6).toLottoNumber())
             )
         )
         val lottoLastNumbers = LottoLastNumbers(setOf(1, 2, 3, 4, 5, 6), 7)

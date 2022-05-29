@@ -48,7 +48,7 @@ fun main() {
     val manualLottoTickets =
         inputView
             .readManualLottoNumbers(countOfManual)
-            .map { LottoTicket(numbers = it.toLottoNumber(), isManual = true) }
+            .map { LottoTicket.ManualLottoTicket(it.toLottoNumber()) }
 
     val lottoTickets = LottoStore.buy(purchaseMoney, manualLottoTickets)
     resultView.printLottoTickets(lottoTickets)
