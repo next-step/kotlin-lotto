@@ -46,7 +46,7 @@ class StringAddCalculatorTest {
 
     @DisplayName("//와 ₩n 문자 사이에 커스텀 구분자를 지정할 수 있다")
     @ParameterizedTest
-    @CsvSource(value = ["//;\\n1;2;3|6", "//a\\n1a1a1|3"], delimiter = '|')
+    @CsvSource(value = ["//;\\n1;2;3|6", "//a\\n1a1a1|3", "//-\\n1-1-1|3"], delimiter = '|')
     fun customDelimiter(inputStr: String, expected: Long) {
         val sut = StringAddCalculator()
         val actual = sut.calculate(inputStr.replace("\\n", "\n"))
@@ -61,8 +61,19 @@ class StringAddCalculatorTest {
         }
     }
 
-    @Test
-    fun `숫자 이외의 값을 전달하는 경우 RuntimeException 예외가 발생해야 한다`() {
-        // TODO
+    @ParameterizedTest
+    @ValueSource(strings = ["a,2", "2,#"])
+    fun `숫자 이외의 값을 전달하는 경우 RuntimeException 예외가 발생해야 한다`(inputStr: String) {
+        assertThrows(RuntimeException::class.java) {
+            StringAddCalculator().calculate(inputStr)
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,", "1,,2", "1$,2,3", "//;\n1;2;"])
+    fun `올바르지 않은 연산식이면 RuntimeException 예외가 발생해야 한다`(inputStr: String) {
+        assertThrows(RuntimeException::class.java) {
+            StringAddCalculator().calculate(inputStr)
+        }
     }
 }

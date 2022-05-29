@@ -18,22 +18,22 @@ class StringAddCalculator {
             ?.let {
                 val customDelimiter = it.groupValues[1]
                 val numbers = it.groupValues[2].split(customDelimiter)
-                    .map { it.toLong() }
-                    .map { number ->
-                        if (number < 0) throw RuntimeException("계산기는 양수만 계산할 수 있어요. 계산기가 전달받은 값은 $inputStr 에요.")
-                        number
-                    }
+                    .map { numberStr -> isNumeric(numberStr.toLongOrNull()) }
                 numbers.sum()
             }
     }
 
     private fun sumWhenDefaultDelimiterExist(inputStr: String): Long {
         val numbers = inputStr.split(",|:".toRegex())
-            .map { it.toLong() }
-            .map { number ->
-                if (number < 0) throw RuntimeException("계산기는 양수만 계산할 수 있어요. 계산기가 전달받은 값은 $inputStr 에요.")
-                number
-            }
+            .map { numberStr -> isNumeric(numberStr.toLongOrNull()) }
         return numbers.sum()
     }
+
+    private fun isNumeric(number: Long?): Long {
+        if (number == null || number < 0) {
+            throw RuntimeException("계산기는 0보다 큰 숫자만 계산할 수 있어요. 값을 확인해주세요. $number")
+        }
+        return number
+    }
+}
 }
