@@ -11,6 +11,8 @@ abstract class Lottery<T>(protected val numbers: List<Int>) {
 
     protected fun isValidNumber(number: Int) = number in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER
 
+    protected fun countingMatchNumber(other: Lottery<T>): Int = numbers.count(other.numbers::contains)
+
     abstract fun match(other: T): LotteryRank
 
     companion object {

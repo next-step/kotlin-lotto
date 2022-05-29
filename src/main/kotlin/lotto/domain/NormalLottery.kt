@@ -9,8 +9,6 @@ class NormalLottery(numbers: List<Int>) : Lottery<NormalLottery>(numbers) {
 
     override fun match(other: NormalLottery): LotteryRank = LotteryRank.of(countingMatchNumber(other))
 
-    private fun countingMatchNumber(other: NormalLottery): Int = numbers.count(other.numbers::contains)
-
     companion object {
 
         fun createRandomNumbers(numberGenerator: NumberGenerator<List<Int>>): NormalLottery {
