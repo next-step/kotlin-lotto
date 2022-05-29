@@ -25,14 +25,16 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
     }
 
     fun readCountOfManualLotto(): Int {
-        printInputCountOfManualLotto()
+        var countOfManual: Int? = null
+        while (countOfManual == null) {
+            printInputCountOfManualLotto()
 
-        val value = reader()
-        requireNotNull(value)
-        require(value.isNotBlank())
-        return kotlin
-            .runCatching { value.toInt() }
-            .getOrIllegalArgumentException()
+            val value = reader()
+            countOfManual = kotlin
+                .runCatching { value?.toInt() }
+                .getOrNull()
+        }
+        return countOfManual
     }
 
     private fun printInputCountOfManualLotto() {
