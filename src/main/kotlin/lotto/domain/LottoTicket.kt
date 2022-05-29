@@ -17,6 +17,8 @@ class LottoTicket(
     fun toSortedList(): List<LottoNumber> =
         value.sortedWith(CompareLottoNumbers)
 
+    fun hasNumber(number: LottoNumber) = value.any { it == number }
+
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
 

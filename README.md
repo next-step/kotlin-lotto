@@ -101,10 +101,10 @@
 - 일급 컬렉션을 사용하는 이유
 
 ### 상세 구현 사항
-[] 보너스 볼을 입력받는다.
+[x] 보너스 볼을 입력받는다.
   [x] empty이거나 숫자가 아니면 IllegalArgumentException 발생
   [x] 1 ~ 45 사이의 번호가 아니면 IllegalArgumentException 발생
-  [] 당첨 번호와 중복되면 IllegalArgumentException 발생
+  [x] 당첨 번호와 중복되면 IllegalArgumentException 발생
 [] 2등을 추가한다.
   [] 5개가 일치하고, 보너스 볼이 일치하는 경우 2등이다.
   [] 당첨통계 출력시에도 추가한다.

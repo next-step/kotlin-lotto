@@ -28,15 +28,17 @@ fun main() {
     outputView.resultLottoTickets(lottoTickets)
 
     // 지난주 로또 당첨번호 받기
+    val winningNumber = WinningNumber()
     val lastWinningNumbers = inputView.getLastWinningNumbers()
     val lastWinningTicket = try {
-        WinningNumber().winningNumberToLottoTicket(lastWinningNumbers)
+        winningNumber.winningNumberToLottoTicket(lastWinningNumbers)
     } catch (e: IllegalArgumentException) {
         print(Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_WINNING_NUMBER_ERROR_MSG)
         return
     }
 
     val bonusNumber = inputView.getBonusNumber()
+    winningNumber.validBonusNumber(bonusNumber, lastWinningTicket)
 
     // 당첨통계
     val lottoScore = LottoScore()
