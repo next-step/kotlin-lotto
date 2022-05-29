@@ -10,9 +10,5 @@ class NumberGenerator(range: IntRange) {
     constructor() : this(LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER)
     constructor(start: Int, end: Int) : this(start..end)
 
-    fun randomTake(count: Int): List<Int> {
-        return numbers
-            .shuffled()
-            .take(count)
-    }
+    fun randomTake(count: Int): List<Int> = numbers.shuffled().take(count)
 }
