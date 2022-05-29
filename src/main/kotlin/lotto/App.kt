@@ -13,7 +13,9 @@ fun main() {
 
     val bonusNumber = InputView.getBonusNumber()
 
-    lottoMachine.checkResult(winningNumbers, bonusNumber)
+    lottoMachine.checkResult(
+        WinningLotto(winningNumbers, bonusNumber)
+    )
 
     val statistics = Statistics().apply {
         this.run(lottoMachine.winningPrizes, purchaseMoney)
