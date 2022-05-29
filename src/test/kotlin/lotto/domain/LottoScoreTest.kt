@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 internal class LottoScoreTest {
     @Test
@@ -46,15 +48,14 @@ internal class LottoScoreTest {
             "210000, 0.285"
         ]
     )
-    internal fun `당첨 결과에 따라 수익률을 반환한다`(price: Int, expected: Double) {
+    internal fun `당첨 결과에 따라 수익률을 반환한다`(price: Int, expected: BigDecimal) {
         // 총 상금: 60,000
         val lottoResult = listOf(
             LottoResult(LottoPrize.THREE_MATCH, 2),
             LottoResult(LottoPrize.FOUR_MATCH, 1)
         )
         val result = LottoScore().rateOfResult(LottoPrice(price), lottoResult)
-        val stringTemplate = "%.2f"
-        assertThat(stringTemplate.format(result)).isEqualTo(stringTemplate.format(expected))
+        assertThat(result).isEqualTo(expected.setScale(2, RoundingMode.HALF_UP))
     }
 
     private fun LottoTicket(vararg numbers: Int) =
