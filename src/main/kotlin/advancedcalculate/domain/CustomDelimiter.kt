@@ -8,7 +8,9 @@ class CustomDelimiter(calculateInput: String) : Delimiter() {
     }
 
     override fun extractOperands(calculateInput: String): List<Operand> {
-        return calculateInput.split(customDelimiter)
+        val rawOperands = OPERANDS_PARSE_REGEX.replace(calculateInput, "")
+
+        return rawOperands.split(customDelimiter)
             .map { mapOperand(it) }
             .toList()
     }
@@ -25,5 +27,6 @@ class CustomDelimiter(calculateInput: String) : Delimiter() {
     companion object {
         val CUSTOM_DELIMITER_REGEX = Regex("""//.\n.*""")
         private val CUSTOM_DELIMITER_PARSE_REGEX = Regex("""//|\n.*""")
+        private val OPERANDS_PARSE_REGEX = Regex("""//.\n""")
     }
 }
