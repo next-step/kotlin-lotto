@@ -29,7 +29,7 @@ object BuyLottoOutputView {
     }
 
     private fun showWiningStat(winningStatDto: WinningStatDto): String {
-        return "${winningStatDto.lottoPrizePolicy.wonMatchedCount}개 일치 (${winningStatDto.lottoPrizePolicy.wonPrize.value})-${winningStatDto.totalWinningCount}개"
+        return "${winningStatDto.lottoPrizePolicy.winningNumberMatchCount}개 일치 (${winningStatDto.lottoPrizePolicy.wonPrize.value})-${winningStatDto.totalWinningCount}개"
     }
 
     fun showEarningsRate(boughtTicketTotalMoney: Money, winningStatDTOs: List<WinningStatDto>): String {

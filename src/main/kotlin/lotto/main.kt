@@ -4,6 +4,7 @@ import lotto.domain.LottoPrizeManager
 import lotto.domain.LottoPrizePolicy
 import lotto.domain.Money
 import lotto.domain.TicketSeller
+import lotto.domain.WinningLottoNumbers
 import lotto.dto.UserMoneyInputDto
 import lotto.dto.WinningNumbersInputDto
 import lotto.util.KotlinRandomGenerate
@@ -31,8 +32,12 @@ fun main() {
 
     println(BuyLottoOutputView.showWinningStartLabel())
 
+    // TODO 아래 변경
     val winningStats =
-        lottoPrizeManager.getWinningStats(boughtLottoTickets, winningNumbersInputDto.winningLottoTicketNumbers)
+        lottoPrizeManager.getWinningStats(
+            boughtLottoTickets,
+            WinningLottoNumbers.ofInt(winningNumbersInputDto.winningLottoTicketNumbers.value.map { it.value }, 45)
+        )
     println(BuyLottoOutputView.showAllWinningStat(winningStats))
     println(BuyLottoOutputView.showEarningsRate(Money(boughtLottoTickets.size * lottoTicketPrice.value), winningStats))
 }
