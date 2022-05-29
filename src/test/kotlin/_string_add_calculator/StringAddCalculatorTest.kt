@@ -45,5 +45,18 @@ internal class StringAddCalculatorTest : ExpectSpec({
                 result shouldBe expect
             }
         }
+
+        expect("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.") {
+            forAll(
+                row("1:2", 3),
+                row("1:2:3", 6),
+                row("1,2:3", 6),
+            ) {
+                text, expect ->
+                val result = calculator.add(text)
+
+                result shouldBe expect
+            }
+        }
     }
 })
