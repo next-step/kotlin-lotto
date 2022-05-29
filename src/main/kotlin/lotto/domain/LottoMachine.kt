@@ -1,10 +1,9 @@
-package lotto
+package lotto.domain
 
 class LottoMachine {
-    fun buy(money: Int): List<Lotto> {
-        require(money >= 1000) { ERROR_NOT_ENOUGH_MONEY }
+    fun buy(money: Money): List<Lotto> {
 
-        val ticketCount: Int = money / TICKET_PRICE
+        val ticketCount: Int = money.price / TICKET_PRICE
         val tickets = mutableListOf<Lotto>()
 
         repeat(ticketCount) {
@@ -23,9 +22,7 @@ class LottoMachine {
     }
 
     companion object {
-        private const val TICKET_PRICE = 1_000
+        const val TICKET_PRICE = 1_000
         private const val LOTTO_NUMBER_COUNT = 6
-
-        private const val ERROR_NOT_ENOUGH_MONEY = "로또를 구입하기 위해서는 최소 1000원 이상 입력해야 한다."
     }
 }
