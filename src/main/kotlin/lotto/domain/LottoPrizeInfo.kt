@@ -11,5 +11,7 @@ enum class LottoPrizeInfo(val matchCount: Int, val money: Money, val isBonus: Bo
         fun getPrizeInfo(matchCount: Int, isBonus: Boolean): LottoPrizeInfo? {
             return values().firstOrNull { it.matchCount == matchCount && it.isBonus == isBonus }
         }
+
+        fun getEmptyResult() = values().map { LottoResult(it) }
     }
 }

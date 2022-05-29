@@ -24,11 +24,11 @@ class LottoStore(
     }
 
     fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
-        val lottoResult = LottoPrizeInfo.values().map { LottoResult(it) }
+        val lottoResult = LottoPrizeInfo.getEmptyResult()
 
         _boughtLottos.forEach {
             val matchCount = it.intersectCount(answer)
-            val matchBonus = isMatchBonus(bonus, answer)
+            val matchBonus = answer.hasNumber(bonus)
 
             val prizeInfo = LottoPrizeInfo.getPrizeInfo(matchCount, matchBonus) ?: return@forEach
             lottoResult.first { info -> info.prize == prizeInfo }.also { prize ->
@@ -43,9 +43,5 @@ class LottoStore(
 
     private fun addPrizeMoney(money: Money) {
         totalMoney += money
-    }
-
-    private fun isMatchBonus(bonusNumber: LottoNumber, answer: LottoNumbers): Boolean {
-        return answer.hasNumber(bonusNumber)
     }
 }
