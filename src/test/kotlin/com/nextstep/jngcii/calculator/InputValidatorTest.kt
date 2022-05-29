@@ -6,7 +6,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class InputParserTest {
+internal class InputValidatorTest {
     @Test
     fun `커스텀구분자테스트 - 구분자를 파싱했다면 listOf("구분자")를 만들어 반환`() {
         val input = "//*\\n2/1*5,3"
