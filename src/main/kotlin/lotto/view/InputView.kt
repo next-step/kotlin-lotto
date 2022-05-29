@@ -45,12 +45,11 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
         printInputManualLottoNumbers()
 
         val manualLottoNumbers = mutableListOf<LottoTicket>()
-        repeat(size) {
-            manualLottoNumbers.add(
-                LottoTicket.ManualLottoTicket(
-                    readLottoNumber().toLottoNumber()
-                )
-            )
+        while (manualLottoNumbers.size < size) {
+            kotlin
+                .runCatching { LottoTicket.ManualLottoTicket(readLottoNumber()) }
+                .onSuccess { manualLottoNumbers.add(it) }
+                .onFailure { printInputLottoNumberAgain() }
         }
         return manualLottoNumbers
     }
@@ -62,35 +61,50 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
     fun readLastLottoTicket(): LottoTicket.LastLottoTicket {
         printInputLastLottoNumbers()
 
-        return LottoTicket.LastLottoTicket(
-            readLottoNumber().toLottoNumber()
-        )
-    }
-
-    private fun readLottoNumber(): Set<Int> {
-        val value = reader()
-        requireNotNull(value)
-        require(value.isNotBlank())
-        return value
-            .tokenize()
-            .toInt()
-            .toSet()
+        var lastLottoTicket: LottoTicket.LastLottoTicket? = null
+        while (lastLottoTicket == null) {
+            lastLottoTicket = kotlin
+                .runCatching { LottoTicket.LastLottoTicket(readLottoNumber()) }
+                .getOrElse {
+                    printInputLottoNumberAgain()
+                    null
+                }
+        }
+        return lastLottoTicket
     }
 
     private fun printInputLastLottoNumbers() {
         writeLine("\n지난 주 당첨 번호를 입력해 주세요.")
     }
 
-    fun readBonusLottoNumber(): LottoNumber {
-        printInputBonusLottoNumber()
+    private fun readLottoNumber(): Set<LottoNumber> {
+        var lottoNumbers: Set<LottoNumber>? = null
+        while (lottoNumbers == null) {
+            val value = reader()
+            lottoNumbers = kotlin
+                .runCatching { value?.tokenize()?.toInt()?.toSet()?.toLottoNumber() }
+                .getOrElse {
+                    printInputLottoNumberAgain()
+                    null
+                }
+        }
+        return lottoNumbers
+    }
 
-        val value = reader()
-        requireNotNull(value)
-        require(value.isNotBlank())
-        return kotlin
-            .runCatching { value.toInt() }
-            .getOrIllegalArgumentException()
-            .toLottoNumber()
+    private fun printInputLottoNumberAgain() {
+        writeLine("6자리 번호를 다시 입력해주세요.")
+    }
+
+    fun readBonusLottoNumber(): LottoNumber {
+        var bonusLottoNumber: LottoNumber? = null
+        while (bonusLottoNumber == null) {
+            printInputBonusLottoNumber()
+            val value = reader()
+            bonusLottoNumber = kotlin
+                .runCatching { value?.toInt()?.toLottoNumber() }
+                .getOrNull()
+        }
+        return bonusLottoNumber
     }
 
     private fun printInputBonusLottoNumber() {
