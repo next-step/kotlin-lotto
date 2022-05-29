@@ -14,3 +14,6 @@ data class LottoNumber(val number: Int) {
         val RANGE_OF_LOTTO_NUMBER = MIN_RANGE_OF_NUMBER..MAX_RANGE_OF_NUMBER
     }
 }
+
+fun Int.toLottoNumber(): LottoNumber = LottoNumber(this)
+fun Set<Int>.toLottoNumber(): Set<LottoNumber> = map { it.toLottoNumber() }.toSet()
