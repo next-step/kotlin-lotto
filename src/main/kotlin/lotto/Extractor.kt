@@ -1,6 +1,8 @@
 package lotto
 
-import kotlin.random.Random
+import lotto.LottoRule.LOTTO_NUMBER_COUNT
+import lotto.LottoRule.MAX_NUMBER
+import lotto.LottoRule.MIN_NUMBER
 
 /**
  * 로또 번호 추출기
@@ -8,15 +10,9 @@ import kotlin.random.Random
 object Extractor {
 
     val randomNumberFunc = {
-        val list = mutableListOf<Int>()
-        while (list.size < LottoRule.LOTTO_NUMBER_COUNT) {
-            val random = Random.nextInt(LottoRule.MIN_NUMBER, LottoRule.MAX_NUMBER)
-
-            if (!list.contains(random)) {
-                list.add(random)
-            }
-        }
-
-        list.sorted().map { LottoNumber(it) }
+        (MIN_NUMBER..MAX_NUMBER)
+            .shuffled()
+            .take(LOTTO_NUMBER_COUNT)
+            .map { LottoNumber(it) }
     }
 }
