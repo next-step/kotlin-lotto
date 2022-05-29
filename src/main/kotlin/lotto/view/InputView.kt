@@ -20,6 +20,20 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
         writeLine("구입금액을 입력해 주세요.")
     }
 
+    fun readCountOfManualLotto(): Int {
+        printInputCountOfManualLotto()
+
+        val value = reader()
+        requireNotNull(value)
+        require(value.isNotBlank())
+        return kotlin
+            .runCatching { value.toInt() }
+            .getOrIllegalArgumentException()
+    }
+
+    private fun printInputCountOfManualLotto() {
+        writeLine("\n수동으로 구매할 로또 수를 입력해 주세요.")
+    }
     fun readLastLottoNumbers(): Set<Int> {
         printInputLastLottoNumbers()
 
