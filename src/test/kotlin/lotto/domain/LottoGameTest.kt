@@ -1,7 +1,6 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
@@ -16,8 +15,9 @@ class LottoGameTest {
     fun beforeEachTest() {
         lottoGame = LottoGame()
     }
+
     @ParameterizedTest
-    @CsvSource(value = ["14000|14", "1000|1", "2500|2"], delimiter = '|')
+    @CsvSource(value = ["14000|14", "1000|1", "2000|2"], delimiter = '|')
     fun `로또 구입 금액에 해당하는 로또 수를 계산할 수 있다`(money: Long, expected: Long) {
         assertThat(lottoGame.initGame(money)).isEqualTo(expected)
     }
@@ -25,6 +25,14 @@ class LottoGameTest {
     @ParameterizedTest
     @ValueSource(strings = ["900", "0"])
     fun `로또 구입 금액이 1천원 미만이면 IllegalArgumentException 예외가 발생한다`(money: Long) {
+        assertThrows(IllegalArgumentException::class.java) {
+            lottoGame.initGame(money)
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1900", "2001"])
+    fun `로또 구입 금액이 1천원 이상인데, 천단위가 아니면 IllegalArgumentException 예외가 발생한다`(money: Long) {
         assertThrows(IllegalArgumentException::class.java) {
             lottoGame.initGame(money)
         }
