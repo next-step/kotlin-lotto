@@ -98,11 +98,7 @@ internal class LottoTest : BehaviorSpec({
     }
 })
 
-class StubNumberGenerator(private val actualNumbers: List<Int>) : NumberGenerator {
+class StubNumberGenerator(private val actualNumbers: List<Int>) : NumberGenerator<List<Int>> {
 
-    private var index = 0
-    override fun getNumber(): Int {
-        index = index++ % actualNumbers.size
-        return actualNumbers[index]
-    }
+    override fun generate(): List<Int> = actualNumbers
 }

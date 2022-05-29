@@ -1,6 +1,6 @@
 import lotto.domain.LotteryStore
 import lotto.infra.DefaultIOSystem
-import lotto.infra.RandomNumberGenerator
+import lotto.infra.LottoNumberGenerator
 import lotto.view.BuyResultView
 import lotto.view.InputLastWeekLottoView
 import lotto.view.InputMoneyView
@@ -8,8 +8,8 @@ import lotto.view.LottoResultView
 
 fun main() {
     val ioSystem = DefaultIOSystem()
-    val randomNumberGenerator = RandomNumberGenerator(1, 45)
-    val lotteryStore = LotteryStore(randomNumberGenerator)
+    val lottoNumberGenerator = LottoNumberGenerator()
+    val lotteryStore = LotteryStore(lottoNumberGenerator)
 
     val inputMoneyView = InputMoneyView(ioSystem)
 

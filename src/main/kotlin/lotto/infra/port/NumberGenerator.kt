@@ -1,6 +1,6 @@
 package lotto.infra.port
 
-interface NumberGenerator {
+interface NumberGenerator<T> {
 
-    fun getNumber(): Int
+    fun generate(): T
 }
