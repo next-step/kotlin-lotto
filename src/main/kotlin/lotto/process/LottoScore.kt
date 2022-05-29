@@ -8,9 +8,7 @@ import lotto.model.LottoTicket
 class LottoScore {
     fun compareNumber(winningTicket: LottoTicket, lottoTickets: List<LottoTicket>): List<LottoResult> {
         val matchCounts = lottoTickets.map { lottoTicket ->
-            lottoTicket.get().mapNotNull { lottoNumber ->
-                winningTicket.get().find { it == lottoNumber }
-            }.size
+            lottoTicket.compareEqualCount(winningTicket)
         }
 
         val compareResult = matchCounts.groupingBy { it }.eachCount()

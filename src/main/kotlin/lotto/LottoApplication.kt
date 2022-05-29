@@ -19,7 +19,7 @@ fun main() {
     val lottoPurchase = LottoPurchase()
     val lottoPrice = lottoPurchase.getMoney(price)
 
-    if (lottoPrice.get() < LOTTO_PRICE) {
+    if (lottoPrice < LOTTO_PRICE) {
         outputView.cannotPurchaseLotto()
         return
     }

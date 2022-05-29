@@ -9,9 +9,14 @@ class LottoNumber(
         require(value in MIN_LOTTO_NUM..MAX_LOTTO_NUM) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
     }
 
-    fun get() = value
+    override fun toString(): String = value.toString()
 
-    override fun equals(other: Any?): Boolean = (value == (other as? LottoNumber)?.value)
+    override fun equals(other: Any?): Boolean =
+        when (other) {
+            is LottoNumber -> value == other.value
+            is Int -> value == other
+            else -> false
+        }
 
     override fun hashCode(): Int {
         return value.hashCode()

@@ -3,21 +3,23 @@ package lotto.model
 import lotto.Const
 
 class LottoTicket(
-    private val lottoTicket: Set<LottoNumber>
+    private val value: Set<LottoNumber>
 ) {
     init {
-        require(lottoTicket.size == LOTTO_NUMBER_COUNT) { Const.ErrorMsg.LOTTO_TICKET_NUMBER_IS_NOT_6_ERROR_MSG }
+        require(value.size == LOTTO_NUMBER_COUNT) { Const.ErrorMsg.LOTTO_TICKET_NUMBER_IS_NOT_6_ERROR_MSG }
     }
 
-    fun get() = lottoTicket.sortedBy { it.get() }.toSet()
+    fun compareEqualCount(other: LottoTicket): Int =
+        this.value.mapNotNull { lottoNumber ->
+            other.value.find { it == lottoNumber }
+        }.size
 
     override fun toString() = buildString {
         append("[")
-        get().forEachIndexed { index, lottoNumber ->
-            if (index == LOTTO_NUMBER_COUNT - 1) {
-                append("${lottoNumber.get()}")
-            } else {
-                append("${lottoNumber.get()}, ")
+        value.forEachIndexed { index, lottoNumber ->
+            append(lottoNumber)
+            if (index != LOTTO_NUMBER_COUNT - 1) {
+                append(", ")
             }
         }
         append("]")

@@ -12,7 +12,7 @@ internal class LottoNumberTest {
     @ValueSource(ints = [1, 45, 15, 29, 32])
     internal fun `로또 번호는 1 ~ 45 사이로 생성해야 한다`(num: Int) {
         val actual = LottoNumber(num)
-        assertThat(actual.get()).isEqualTo(num)
+        assertThat(actual).isEqualTo(num)
     }
 
     @ParameterizedTest(name = "`{0}`인 경우 IllegalArgumentException 에러 발생")
@@ -24,7 +24,7 @@ internal class LottoNumberTest {
     @Test
     internal fun `random 함수를 사용하여 로또 번호를 생성하면 1 ~ 45 사이의 값으로 생성된다`() {
         val actual = LottoNumber.random()
-        assertThat(actual.get()).isIn(1..45)
+        assertThat(actual).isIn(1..45)
     }
     @Test
     internal fun `같은 값의 LottoNumber를 set에 넣으면 중복이다`() {
