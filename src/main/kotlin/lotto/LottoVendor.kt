@@ -6,7 +6,7 @@ class LottoVendor {
         return LottoBuilder().create(number)
     }
 
-    private fun getNumberOfLotto(price: Price): Int {
+    fun getNumberOfLotto(price: Price): Int {
         return price.amount / LOTTO_PRICE
     }
 }

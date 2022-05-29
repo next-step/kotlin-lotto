@@ -14,4 +14,9 @@ value class Lotto(val numbers: Set<Int>) {
     fun getMatchNumberCount(lotto: Lotto): Int {
         return lotto.numbers.filter { this.contains(it) }.size
     }
+
+    @Override
+    override fun toString(): String {
+        return numbers.sorted().toString()
+    }
 }

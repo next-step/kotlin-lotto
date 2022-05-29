@@ -3,6 +3,7 @@ package lotto
 object Statistics {
     fun getWinningResult(results: List<Winning>): Map<Winning, Int> {
         return Winning.values()
+            .filter { it != Winning.FAIL }
             .associateWith { winning -> results.count { it == winning } }
             .toSortedMap { w1, w2 -> w1.winningAmount - w2.winningAmount }
     }
