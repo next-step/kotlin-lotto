@@ -13,8 +13,7 @@ class InboundView {
             throw IllegalArgumentException("입력 값을 확인해주세요.")
         }
 
-        return kotlin
-            .runCatching { purchaseAmount.toInt() }
+        return runCatching { purchaseAmount.toInt() }
             .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
     }
 
@@ -53,7 +52,7 @@ class InboundView {
     }
 
     private fun List<String>.toMapInt(): List<Int> {
-        return kotlin.runCatching { map { it.toInt() } }
+        return runCatching { map { it.toInt() } }
             .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
     }
 }
