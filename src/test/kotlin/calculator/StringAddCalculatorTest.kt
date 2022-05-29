@@ -1,11 +1,13 @@
 package calculator
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import java.lang.RuntimeException
 
 class StringAddCalculatorTest {
     @ParameterizedTest
@@ -50,10 +52,13 @@ class StringAddCalculatorTest {
         val actual = sut.calculate(inputStr.replace("\\n", "\n"))
         assertEquals(expected, actual)
     }
+
     @ParameterizedTest
-    @ValueSource(strings = [""])
-    fun `음수를 전달하는 경우 RuntimeException 예외가 발생해야 한다`(inputStr: String?) {
-        // TODO
+    @ValueSource(strings = ["-1", "-1,2,3", "1,-2,3"])
+    fun `음수를 전달하는 경우 RuntimeException 예외가 발생해야 한다`(inputStr: String) {
+        assertThrows(RuntimeException::class.java) {
+            StringAddCalculator().calculate(inputStr)
+        }
     }
 
     @Test
