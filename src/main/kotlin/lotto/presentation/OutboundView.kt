@@ -12,7 +12,7 @@ class OutboundView {
 
         lottoTickets.getLottoTickets()
             .forEach { ticket ->
-                println(ticket.numbers.joinToString(prefix = "[", postfix = "]\n"))
+                println(ticket.numbers.joinToString(prefix = "[", postfix = "]"))
             }
     }
 
