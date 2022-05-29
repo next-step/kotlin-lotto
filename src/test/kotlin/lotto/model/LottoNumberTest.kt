@@ -26,22 +26,12 @@ internal class LottoNumberTest {
         val actual = LottoNumber.random()
         assertThat(actual.get()).isIn(1..45)
     }
-
-    @Test
-    internal fun `LottoNumber의 값을 비교하면 같다`() {
-        val lottoNumber1 = LottoNumber(4)
-        val lottoNumber2 = LottoNumber(4)
-
-        assertThat(lottoNumber1.get()).isEqualTo(lottoNumber2.get())
-        assertThat(lottoNumber1).isEqualTo(lottoNumber2)
-    }
-
     @Test
     internal fun `같은 값의 LottoNumber를 set에 넣으면 중복이다`() {
         val lottoNumber1 = LottoNumber(4)
         val lottoNumber2 = LottoNumber(4)
 
         val lottoNumbers = setOf(lottoNumber1, lottoNumber2)
-        assertThat(lottoNumbers.size).isEqualTo(1)
+        assertThat(lottoNumbers).hasSize(1)
     }
 }

@@ -29,7 +29,7 @@ internal class LottoScoreTest {
             LottoPrize.SIX_MATCH to 1
         )
 
-        assertThat(lottoResults.size).isEqualTo(expected.size)
+        assertThat(lottoResults).hasSize(expected.size)
         assertAll(
             {
                 expected.forEach { (prize, lottoCount) ->
