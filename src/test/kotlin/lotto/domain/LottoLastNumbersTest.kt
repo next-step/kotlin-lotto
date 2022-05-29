@@ -9,7 +9,7 @@ class LottoLastNumbersTest : StringSpec({
     "지난주 당첨번호는 6개의 숫자와 1개의 보너스 숫자를 가지고 있다" {
         val lastNumbers = LottoLastNumbers(numbers = setOf(1, 2, 3, 4, 5, 6), bonus = 7)
         lastNumbers.size shouldBe 6
-        lastNumbers.bonus shouldBe 7
+        lastNumbers.bonus.number shouldBe 7
     }
 
     "지난주 당첨번호는 1~45 범위의 숫자를 입력하지 않은 경우 IllegalArgumentException을 발생한다" {

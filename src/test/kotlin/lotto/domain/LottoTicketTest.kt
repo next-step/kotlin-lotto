@@ -35,27 +35,27 @@ class LottoTicketTest : StringSpec({
         val ticket = LottoTicket.of(1, 2, 3, 4, 5, 6)
         forAll(
             row(
-                LottoLastNumbers(LottoTicket.of(1, 2, 3, 4, 5, 6), 7),
+                LottoLastNumbers(setOf(1, 2, 3, 4, 5, 6), 7),
                 LottoMatch.SIX
             ),
             row(
-                LottoLastNumbers(LottoTicket.of(1, 2, 3, 4, 5, 7), 6),
+                LottoLastNumbers(setOf(1, 2, 3, 4, 5, 7), 6),
                 LottoMatch.FIVE_WITH_BONUS
             ),
             row(
-                LottoLastNumbers(LottoTicket.of(1, 2, 3, 4, 5, 7), 8),
+                LottoLastNumbers(setOf(1, 2, 3, 4, 5, 7), 8),
                 LottoMatch.FIVE
             ),
             row(
-                LottoLastNumbers(LottoTicket.of(1, 2, 3, 4, 7, 8), 9),
+                LottoLastNumbers(setOf(1, 2, 3, 4, 7, 8), 9),
                 LottoMatch.FOUR
             ),
             row(
-                LottoLastNumbers(LottoTicket.of(1, 2, 3, 7, 8, 9), 10),
+                LottoLastNumbers(setOf(1, 2, 3, 7, 8, 9), 10),
                 LottoMatch.THREE
             ),
             row(
-                LottoLastNumbers(LottoTicket.of(11, 12, 13, 14, 15, 16), 17),
+                LottoLastNumbers(setOf(11, 12, 13, 14, 15, 16), 17),
                 LottoMatch.ZERO
             )
         ) { lastNumbers, expectedMatch ->
