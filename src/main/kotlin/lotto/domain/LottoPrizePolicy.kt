@@ -11,9 +11,17 @@ class LottoPrizePolicy(
     }
 
     fun won(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): Money? {
-        if (winningLottoNumbers.getMatchedCountOfWinning(lottoTicket.lottoTicketNumbers) == winningNumberMatchCount &&
-            includeBonusNumber == winningLottoNumbers.hasBonusNumber(lottoTicket.lottoTicketNumbers)
-        ) return wonPrize
+        if (includeBonusNumber &&
+            winningLottoNumbers.hasBonusNumber(lottoTicket.lottoTicketNumbers) &&
+            winningLottoNumbers.getMatchedCountOfWinning(lottoTicket.lottoTicketNumbers) == winningNumberMatchCount
+        ) {
+            return wonPrize
+        }
+        if (!includeBonusNumber &&
+            winningLottoNumbers.getMatchedCountOfWinning(lottoTicket.lottoTicketNumbers) == winningNumberMatchCount
+        ) {
+            return wonPrize
+        }
         return null
     }
 }
