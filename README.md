@@ -138,7 +138,7 @@
 ### 체크 리스트
 
 * [ ] 원시타입 Wrapping 하기
-    * [ ] 번호 : LottoNumber
+    * [x] 번호 : LottoNumber
     * [ ] 입력 금액: PurchaseMoney
 * [ ] 수동 번호 입력 기능
     * [ ] 수동 횟수 입력

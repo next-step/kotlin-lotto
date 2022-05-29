@@ -6,10 +6,11 @@ object LottoTicketMachine {
 
     private fun generateTicket(): LottoTicket =
         LottoTicket(
-            LottoTicket.RANGE_OF_LOTTO_NUMBER
+            LottoNumber.RANGE_OF_LOTTO_NUMBER
                 .shuffled()
                 .take(LottoTicket.SIZE_OF_LOTTO_NUMBER)
                 .sorted()
+                .map { LottoNumber(it) }
                 .toSet()
         )
 }

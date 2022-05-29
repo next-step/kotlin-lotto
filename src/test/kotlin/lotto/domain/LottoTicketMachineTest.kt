@@ -2,11 +2,8 @@ package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
-import io.kotest.matchers.collections.shouldBeSorted
+import io.kotest.matchers.collections.shouldBeSortedWith
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.property.Arb
-import io.kotest.property.arbitrary.int
-import io.kotest.property.arbitrary.next
 
 class LottoTicketMachineTest : BehaviorSpec({
 
@@ -28,30 +25,34 @@ class LottoTicketMachineTest : BehaviorSpec({
             }
 
             Then("생성된 번호는 오름차순으로 정렬되어 있다") {
-                actual.shouldBeSorted()
+                actual.shouldBeSortedWith { left, right ->
+                    left.number.compareTo(right.number)
+                }
             }
         }
 
         And("무작위 번호로된 티켓을 n개 생성하고") {
-            val numberOfTicket = Arb.int(1..10).next()
+            val numberOfTicket = 5
             val tickets = LottoTicketMachine.generate(numberOfTicket)
 
             Then("생성된 티켓의 개수는 요청 개수와 동일하다") {
                 tickets shouldHaveSize numberOfTicket
             }
 
-            tickets.forAll { numbers ->
-                val actualName = numbers.joinToString()
+            tickets.forAll { ticket ->
+                val actualName = ticket.joinToString()
                 Then("생성된 번호는 6개이다 ($actualName)") {
-                    numbers shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
+                    ticket shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
                 }
 
                 Then("생성된 번호는 모두 다른 번호이다 ($actualName)") {
-                    numbers.distinct() shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
+                    ticket.distinct() shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
                 }
 
                 Then("생성된 번호는 오름차순으로 정렬되어 있다 ($actualName)") {
-                    numbers.shouldBeSorted()
+                    ticket.shouldBeSortedWith { left, right ->
+                        left.number.compareTo(right.number)
+                    }
                 }
             }
         }
