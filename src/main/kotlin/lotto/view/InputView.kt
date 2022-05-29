@@ -9,14 +9,15 @@ import lotto.domain.toPurchaseMoney
 class InputView(private val reader: () -> String?, private val writer: (String) -> Unit) {
 
     fun readPurchaseMoney(): PurchaseMoney {
-        printInputPurchaseMoney()
+        var purchaseMoney: PurchaseMoney? = null
+        while (purchaseMoney == null) {
+            printInputPurchaseMoney()
 
-        val value = reader()
-        requireNotNull(value)
-        require(value.isNotBlank())
-        return kotlin
-            .runCatching { value.toInt().toPurchaseMoney() }
-            .getOrIllegalArgumentException()
+            purchaseMoney = kotlin
+                .runCatching { reader()?.toInt()?.toPurchaseMoney() }
+                .getOrNull()
+        }
+        return purchaseMoney
     }
 
     private fun printInputPurchaseMoney() {
