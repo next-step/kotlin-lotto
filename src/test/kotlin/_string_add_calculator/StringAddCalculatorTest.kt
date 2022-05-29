@@ -1,5 +1,6 @@
 package _string_add_calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -69,6 +70,16 @@ internal class StringAddCalculatorTest : ExpectSpec({
                 val result = calculator.add(text)
 
                 result shouldBe expect
+            }
+        }
+
+        expect("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다") {
+            forAll(
+                row("-1,2,3"),
+                row("//^\n2^4^-1"),
+            ) {
+                text ->
+                shouldThrow<RuntimeException> { calculator.add(text) }
             }
         }
     }
