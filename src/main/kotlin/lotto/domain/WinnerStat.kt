@@ -1,6 +1,9 @@
 package lotto.domain
 
-class WinnerStat(private val purchaseRecord: PurchaseRecord, private val winnerNumbers: List<Int>) {
+class WinnerStat(
+    private val purchaseRecord: PurchaseRecord,
+    private val winnerNumbers: List<LottoNumber>
+) {
     val winnerMap: Map<Winner, Int>
 
     init {
@@ -18,12 +21,12 @@ class WinnerStat(private val purchaseRecord: PurchaseRecord, private val winnerN
         return earning / price.toDouble()
     }
 
-    private fun getWinner(lotto: Lotto, winnerNumbers: List<Int>): Winner? {
+    private fun getWinner(lotto: Lotto, winnerNumbers: List<LottoNumber>): Winner? {
         return Winner.values()
             .find { it.matchedNumbers == getMatchedNumbers(lotto, winnerNumbers) }
     }
 
-    private fun getMatchedNumbers(lotto: Lotto, winnerNumbers: List<Int>): Int {
+    private fun getMatchedNumbers(lotto: Lotto, winnerNumbers: List<LottoNumber>): Int {
         return winnerNumbers
             .filter { lotto.contains(it) }
             .count()

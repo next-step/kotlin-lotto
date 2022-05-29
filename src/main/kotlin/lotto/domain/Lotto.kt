@@ -1,18 +1,20 @@
 package lotto.domain
 
 class Lotto {
-    private val numbers: List<Int>
+    private val lottoNumbers: List<LottoNumber>
 
     constructor(randomNumberGenerator: RandomNumberGenerator) {
-        numbers = randomNumberGenerator.getRandomNumbers(LOTTO_NUMBER_RANGE, LOTTO_NUMBER_COUNT)
+        lottoNumbers = randomNumberGenerator
+            .getRandomNumbers(LOTTO_NUMBER_RANGE, LOTTO_NUMBER_COUNT)
+            .map { LottoNumber(it) }
     }
 
-    constructor(numbers: List<Int>) {
-        this.numbers = numbers
+    constructor(numbers: List<LottoNumber>) {
+        this.lottoNumbers = numbers
     }
 
-    fun contains(number: Int): Boolean {
-        return numbers.contains(number)
+    fun contains(number: LottoNumber): Boolean {
+        return lottoNumbers.contains(number)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -21,17 +23,17 @@ class Lotto {
 
         other as Lotto
 
-        if (numbers != other.numbers) return false
+        if (lottoNumbers != other.lottoNumbers) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return numbers.hashCode()
+        return lottoNumbers.hashCode()
     }
 
     fun toString(delimiter: String, prefix: String = "", postfix: String = ""): String {
-        return numbers.joinToString(delimiter, prefix, postfix)
+        return lottoNumbers.joinToString(delimiter, prefix, postfix)
     }
 
     companion object {

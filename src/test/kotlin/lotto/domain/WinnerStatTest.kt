@@ -7,16 +7,16 @@ import org.junit.jupiter.api.Test
 class WinnerStatTest {
     val purchaseRecord = PurchaseRecord(
         listOf(
-            Lotto(listOf(1, 2, 3, 4, 5, 6)),
-            Lotto(listOf(2, 3, 4, 5, 6, 7)),
-            Lotto(listOf(3, 4, 5, 6, 7, 8)),
-            Lotto(listOf(4, 5, 6, 7, 8, 9)),
-            Lotto(listOf(5, 6, 7, 8, 9, 10)),
-            Lotto(listOf(9, 10, 11, 12, 13, 14)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
+            Lotto(listOf(2, 3, 4, 5, 6, 7).map { LottoNumber(it) }),
+            Lotto(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber(it) }),
+            Lotto(listOf(4, 5, 6, 7, 8, 9).map { LottoNumber(it) }),
+            Lotto(listOf(5, 6, 7, 8, 9, 10).map { LottoNumber(it) }),
+            Lotto(listOf(9, 10, 11, 12, 13, 14).map { LottoNumber(it) }),
         )
     )
 
-    val winner = listOf(3, 4, 5, 6, 7, 8)
+    val winner = listOf(3, 4, 5, 6, 7, 8).map { LottoNumber(it) }
 
     val stat = WinnerStat(purchaseRecord, winner)
 
