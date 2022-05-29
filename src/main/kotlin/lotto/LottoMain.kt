@@ -2,8 +2,6 @@ package lotto
 
 import lotto.domain.LottoLastNumbers
 import lotto.domain.LottoStore
-import lotto.domain.LottoTicket
-import lotto.domain.toLottoNumber
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -45,10 +43,7 @@ fun main() {
 
     val purchaseMoney = inputView.readPurchaseMoney()
     val countOfManual = inputView.readCountOfManualLotto()
-    val manualLottoTickets =
-        inputView
-            .readManualLottoNumbers(countOfManual)
-            .map { LottoTicket.ManualLottoTicket(it.toLottoNumber()) }
+    val manualLottoTickets = inputView.readManualLottoTicket(countOfManual)
 
     val lottoTickets = LottoStore.buy(purchaseMoney, manualLottoTickets)
     resultView.printLottoTickets(lottoTickets)
