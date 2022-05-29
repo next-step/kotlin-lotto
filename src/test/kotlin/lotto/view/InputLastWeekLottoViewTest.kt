@@ -1,9 +1,9 @@
-package lotto.auto.view
+package lotto.view
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.auto.domain.Lotto
-import lotto.auto.vo.LottoScore
+import lotto.domain.Lotto
+import lotto.vo.LottoScore
 
 internal class InputLastWeekLottoViewTest : BehaviorSpec({
 

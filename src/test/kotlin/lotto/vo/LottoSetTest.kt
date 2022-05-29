@@ -1,8 +1,8 @@
-package lotto.auto.vo
+package lotto.vo
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.auto.domain.Lotto
+import lotto.domain.Lotto
 
 internal class LottoSetTest : BehaviorSpec({
 

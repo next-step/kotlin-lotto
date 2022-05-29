@@ -1,7 +1,7 @@
-package lotto.auto.domain
+package lotto.domain
 
-import lotto.auto.infra.port.NumberGenerator
-import lotto.auto.vo.LottoScore
+import lotto.infra.port.NumberGenerator
+import lotto.vo.LottoScore
 
 @JvmInline
 value class Lotto(private val numbers: List<Int>) {

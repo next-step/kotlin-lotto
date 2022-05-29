@@ -1,8 +1,8 @@
-package lotto.auto.view
+package lotto.view
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.auto.infra.port.IOSystem
+import lotto.infra.port.IOSystem
 
 internal class InputMoneyViewTest : BehaviorSpec({
 

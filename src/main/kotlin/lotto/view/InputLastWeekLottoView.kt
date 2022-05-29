@@ -1,7 +1,7 @@
-package lotto.auto.view
+package lotto.view
 
-import lotto.auto.domain.Lotto
-import lotto.auto.infra.port.IOSystem
+import lotto.domain.Lotto
+import lotto.infra.port.IOSystem
 
 class InputLastWeekLottoView(private val ioSystem: IOSystem) {
 

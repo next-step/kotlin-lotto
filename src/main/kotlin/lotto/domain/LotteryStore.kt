@@ -1,7 +1,7 @@
-package lotto.auto.domain
+package lotto.domain
 
-import lotto.auto.infra.port.NumberGenerator
-import lotto.auto.vo.LottoSet
+import lotto.infra.port.NumberGenerator
+import lotto.vo.LottoSet
 
 class LotteryStore(private val numberGenerator: NumberGenerator) {
 

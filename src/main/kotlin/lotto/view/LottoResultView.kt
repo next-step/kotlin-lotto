@@ -1,9 +1,9 @@
-package lotto.auto.view
+package lotto.view
 
-import lotto.auto.domain.Lotto
-import lotto.auto.infra.port.OutputSystem
-import lotto.auto.vo.LottoScore
-import lotto.auto.vo.LottoSet
+import lotto.domain.Lotto
+import lotto.infra.port.OutputSystem
+import lotto.vo.LottoScore
+import lotto.vo.LottoSet
 
 class LottoResultView(private val outputSystem: OutputSystem) {
 

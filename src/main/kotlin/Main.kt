@@ -1,10 +1,10 @@
-import lotto.auto.domain.LotteryStore
-import lotto.auto.infra.DefaultIOSystem
-import lotto.auto.infra.RandomNumberGenerator
-import lotto.auto.view.BuyResultView
-import lotto.auto.view.InputLastWeekLottoView
-import lotto.auto.view.InputMoneyView
-import lotto.auto.view.LottoResultView
+import lotto.domain.LotteryStore
+import lotto.infra.DefaultIOSystem
+import lotto.infra.RandomNumberGenerator
+import lotto.view.BuyResultView
+import lotto.view.InputLastWeekLottoView
+import lotto.view.InputMoneyView
+import lotto.view.LottoResultView
 
 fun main() {
     val ioSystem = DefaultIOSystem()

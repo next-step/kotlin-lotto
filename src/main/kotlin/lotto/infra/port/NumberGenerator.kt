@@ -1,4 +1,4 @@
-package lotto.auto.infra.port
+package lotto.infra.port
 
 interface NumberGenerator {
 

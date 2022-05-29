@@ -1,10 +1,10 @@
-package lotto.auto.domain
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.auto.infra.port.NumberGenerator
-import lotto.auto.vo.LottoScore
+import lotto.infra.port.NumberGenerator
+import lotto.vo.LottoScore
 
 internal class LottoTest : BehaviorSpec({
 

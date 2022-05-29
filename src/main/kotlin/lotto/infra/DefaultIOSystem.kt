@@ -1,6 +1,6 @@
-package lotto.auto.infra
+package lotto.infra
 
-import lotto.auto.infra.port.IOSystem
+import lotto.infra.port.IOSystem
 
 class DefaultIOSystem : IOSystem {
 

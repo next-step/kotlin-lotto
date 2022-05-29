@@ -1,4 +1,4 @@
-package lotto.auto.vo
+package lotto.vo
 
 enum class LottoScore(val matchCount: Int, val rewardMoney: Int) {
 

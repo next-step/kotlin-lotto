@@ -1,7 +1,7 @@
-package lotto.auto.view
+package lotto.view
 
-import lotto.auto.domain.Lotto
-import lotto.auto.infra.port.OutputSystem
+import lotto.domain.Lotto
+import lotto.infra.port.OutputSystem
 
 class BuyResultView(private val outputSystem: OutputSystem, private val lottos: List<Lotto>) {
 

@@ -1,6 +1,6 @@
-package lotto.auto.vo
+package lotto.vo
 
-import lotto.auto.domain.Lotto
+import lotto.domain.Lotto
 
 class LottoSet(private val lottos: List<Lotto>) : List<Lotto> by lottos {
 

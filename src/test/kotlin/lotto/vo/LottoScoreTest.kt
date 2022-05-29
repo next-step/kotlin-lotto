@@ -1,4 +1,4 @@
-package lotto.auto.vo
+package lotto.vo
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe

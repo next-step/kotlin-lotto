@@ -1,4 +1,4 @@
-package lotto.auto.infra.port
+package lotto.infra.port
 
 interface OutputSystem {
     fun write(content: String)
