@@ -9,4 +9,8 @@ class Operand(value: Double = 0.0) {
         }
         this.value = value
     }
+
+    operator fun plus(target: Operand): Operand {
+        return Operand(value + target.value)
+    }
 }
