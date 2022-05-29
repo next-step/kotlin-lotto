@@ -14,7 +14,7 @@ class WinNumberView(private val io: IO) {
 
         io.print("보너스 볼을 입력해 주세요.")
 
-        val bonus = readBonus()
+        val bonus = readBonus(winNumbers)
 
         io.print("")
 
@@ -35,12 +35,17 @@ class WinNumberView(private val io: IO) {
         return result.map(::LottoNumber)
     }
 
-    private tailrec fun readBonus(): LottoNumber {
+    private tailrec fun readBonus(winNumbers: List<LottoNumber>): LottoNumber {
         val result = io.read().toIntOrNull()
 
         if (result == null) {
             io.print("유효한 보너스 볼을 입력해주세요.")
-            return readBonus()
+            return readBonus(winNumbers)
+        }
+
+        if (winNumbers.contains(LottoNumber(result))) {
+            io.print("당첨 번호와 중복되지 않는 보너스 볼을 입력해주세요.")
+            return readBonus(winNumbers)
         }
 
         return LottoNumber(result)
