@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.Const
-import java.util.Collections
 
 class LottoPurchase {
     fun getMoney(money: String?): LottoPrice {
@@ -17,7 +16,7 @@ class LottoPurchase {
         repeat(count) {
             lottoTickets.add(LottoTicket.new())
         }
-        return Collections.unmodifiableList(lottoTickets)
+        return lottoTickets.toList()
     }
 
     companion object {
