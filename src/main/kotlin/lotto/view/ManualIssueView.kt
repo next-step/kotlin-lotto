@@ -31,23 +31,16 @@ class ManualIssueView(private val io: IO) {
         return result
     }
 
-    private tailrec fun readManualLotto(): Lotto {
-        val line = io.read()
-
-        if (line.isBlank()) {
-            return readManualLotto()
-        }
-
-        val result = line
+    private tailrec fun readManualLotto(): Lotto = runCatching {
+        val result = io.read()
             .replace(" ", "")
             .split(',')
             .mapNotNull { it.toIntOrNull() }
 
-        if (result.size != Lotto.NUMBER_COUNT) {
-            io.print("유효한 로또번호를 입력해주세요.")
+        Lotto.manualOf(result)
+    }
+        .getOrElse {
+            io.print(it.message ?: "유효한 로또번호를 입력해주세요.")
             return readManualLotto()
         }
-
-        return Lotto.manualOf(result)
-    }
 }

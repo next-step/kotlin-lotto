@@ -10,11 +10,14 @@ class MoneyView(private val io: IO) {
         return read()
     }
 
-    private tailrec fun read(): Money {
-        io.read().toIntOrNull()?.let {
-            return Money(it)
-        }
-        io.print("숫자만 입력해 주세요.")
+    private tailrec fun read(): Money = runCatching {
+        val value = io.read().toIntOrNull()
+
+        requireNotNull(value) { "숫자만 입력해 주세요." }
+
+        Money(value)
+    }.getOrElse {
+        io.print(it.message ?: "잘못 입력하셨습니다.")
 
         return read()
     }
