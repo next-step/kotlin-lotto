@@ -10,7 +10,7 @@ class LottoTicketTest {
     @Test
     fun `구매한 로또 티켓과 당첨 티켓의 숫자 일치 갯수 확인`() {
         val purchasedLottoTicket = LottoTicket(
-            listOf(
+            setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
@@ -20,7 +20,7 @@ class LottoTicketTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            listOf(
+            setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),

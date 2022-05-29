@@ -19,7 +19,7 @@ class InputView {
 
         val inputText1 = readln().trim().split(",")
         inputText1.map { validateNotString(it) }
-        val wonLottoNumbers = inputText1.map { it.toInt() }.map { LottoNumber(it) }
+        val wonLottoNumbers = inputText1.map { it.toInt() }.map { LottoNumber(it) }.toSet()
 
         println("보너스 볼을 입력해 주세요.")
         val inputText2 = readln()
@@ -36,7 +36,7 @@ class InputView {
         }
     }
 
-    private fun validateBonus(wonLottoNumber: List<LottoNumber>, bonus: LottoNumber) {
+    private fun validateBonus(wonLottoNumber: Set<LottoNumber>, bonus: LottoNumber) {
         if (wonLottoNumber.contains(bonus)) {
             throw AlreadySelectedNumberException("입력한 보너스 번호는 이미 선택된 번호입니다.")
         }

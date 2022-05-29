@@ -1,12 +1,12 @@
 package lotto.agency
 
 class LottoNumberGenerator {
-    fun getRandomLottoNumbers(): List<LottoNumber> {
+    fun getRandomLottoNumbers(): Set<LottoNumber> {
         return LOTTO_NUMBER_RANGE
             .shuffled()
             .slice(LOTTO_NUMBER_COUNT)
             .map { LottoNumber(it) }
-            .toList()
+            .toSet()
     }
 
     companion object {

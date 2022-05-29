@@ -14,7 +14,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -26,7 +26,7 @@ class LottoJudgeTest {
         )
         val wonLottoTicket =
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(2),
                     LottoNumber(4),
                     LottoNumber(3),
@@ -48,7 +48,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -59,7 +59,7 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            numbers = listOf(
+            numbers = setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
@@ -81,7 +81,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -92,7 +92,7 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            numbers = listOf(
+            numbers = setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
@@ -114,7 +114,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -125,7 +125,7 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            numbers = listOf(
+            numbers = setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
@@ -147,7 +147,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -158,7 +158,7 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            numbers = listOf(
+            numbers = setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(23),
@@ -180,7 +180,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -191,7 +191,7 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            numbers = listOf(
+            numbers = setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
@@ -213,7 +213,7 @@ class LottoJudgeTest {
 
         val lottoTickets = listOf(
             LottoTicket(
-                numbers = listOf(
+                numbers = setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -224,7 +224,7 @@ class LottoJudgeTest {
             )
         )
         val wonLottoTicket = LottoTicket(
-            numbers = listOf(
+            numbers = setOf(
                 LottoNumber(10),
                 LottoNumber(1),
                 LottoNumber(27),
