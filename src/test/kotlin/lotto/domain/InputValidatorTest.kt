@@ -42,7 +42,7 @@ class InputValidatorTest {
     @Test
     fun `max값 넘게 입력했을때 에러발생하는지 테스트`() {
         assertThrows<IllegalArgumentException> {
-            InputValidator.checkCountWithMax("3", 1)
+            InputValidator.checkNaturalNumber("3", 1)
         }
     }
 }

@@ -64,11 +64,11 @@ object InputView {
         return lottoBonusInput.toInt()
     }
 
-    fun getLottoCount(max: Int = Int.MAX_VALUE): Int {
+    fun getLottoCount(): Int {
         var lottoCount: String
         do {
             lottoCount = getUserInputWithMessage(LOTTO_COUNT_MESSAGE)
-        } while (isValidNatualNumberWithMax(lottoCount, max).not())
+        } while (isValidNatualNumber(lottoCount).not())
 
         return lottoCount.toInt()
     }
@@ -83,9 +83,9 @@ object InputView {
         }
     }
 
-    private fun isValidNatualNumberWithMax(lotto: String, max: Int): Boolean {
+    private fun isValidNatualNumber(lotto: String): Boolean {
         return try {
-            InputValidator.checkCountWithMax(lotto, max)
+            InputValidator.checkNaturalNumber(lotto)
             true
         } catch (e: IllegalArgumentException) {
             println(e.message)
