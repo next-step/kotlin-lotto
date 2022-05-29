@@ -10,7 +10,7 @@ class ResultView(
 ) {
 
     fun printLottoTickets(tickets: LottoTickets) {
-        writeLine("${tickets.size}개를 구매했습니다.")
+        writeLine("\n수동으로 ${tickets.countOfManualTicket}장, 자동으로 ${tickets.countOfAutoTicket}개를 구매했습니다.")
         tickets.forEach { ticket ->
             writer(ticket.joinToString(prefix = PREFIX_LOTTO_NUMBERS, postfix = POSTFIX_LOTTO_NUMBERS))
         }
