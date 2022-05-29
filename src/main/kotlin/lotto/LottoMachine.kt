@@ -18,10 +18,10 @@ class LottoMachine {
         )
     }
 
-    fun checkResult(winningLottoTicket: LottoTicket, bonusLottoNumber: LottoNumber) {
+    fun checkResult(winningLottoTicket: List<LottoNumber>, bonusLottoNumber: LottoNumber) {
         winningPrizes = WinningPrizes(
             lottoTickets.lottery.map {
-                val matchCount = winningLottoTicket.numbers.intersect(it.numbers.toSet()).size
+                val matchCount = winningLottoTicket.intersect(it.numbers.toSet()).size
                 val matchBonus = matchCount == BONUS_LOTTO_NUMBER_COUNT && it.hasBonusNumber(bonusLottoNumber)
 
                 LottoResult().check(

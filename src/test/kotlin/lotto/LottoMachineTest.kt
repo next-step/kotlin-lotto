@@ -13,7 +13,7 @@ internal class LottoMachineTest {
                 randomNumberFunc = { lottoNumbers }
             )
             this.checkResult(
-                winningLottoTicket = LottoTicket(lottoNumbers),
+                winningLottoTicket = lottoNumbers,
                 bonusLottoNumber = LottoNumber(7)
             )
         }
@@ -30,7 +30,7 @@ internal class LottoMachineTest {
                 randomNumberFunc = { (1..6).map { LottoNumber(it) } }
             )
             this.checkResult(
-                winningLottoTicket = LottoTicket((2..7).map { LottoNumber(it) }),
+                winningLottoTicket = (2..7).map { LottoNumber(it) },
                 bonusLottoNumber = LottoNumber(1)
             )
         }
@@ -47,7 +47,7 @@ internal class LottoMachineTest {
                 randomNumberFunc = { (1..6).map { LottoNumber(it) } }
             )
             this.checkResult(
-                winningLottoTicket = LottoTicket((4..9).map { LottoNumber(it) }),
+                winningLottoTicket = (4..9).map { LottoNumber(it) },
                 bonusLottoNumber = LottoNumber(1)
             )
         }

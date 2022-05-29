@@ -14,7 +14,7 @@ object InputView {
         return PurchaseMoney(money)
     }
 
-    fun getWinningNumbers(): WinningLottoTicket {
+    fun getWinningNumbers(): List<LottoNumber> {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
         val winningValue = readLine()
@@ -25,7 +25,7 @@ object InputView {
 
         requireNotNull(winningValue) { NULL_MESSAGE }
 
-        return WinningLottoTicket(winningValue)
+        return winningValue
     }
 
     fun getBonusNumber(): LottoNumber {

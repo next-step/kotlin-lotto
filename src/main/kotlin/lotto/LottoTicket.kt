@@ -3,8 +3,6 @@ package lotto
 import lotto.LottoRule.LOTTO_NUMBER_COUNT
 
 class LottoTickets(val lottery: List<LottoTicket> = emptyList())
-class WinningLottoTicket(numbers: List<LottoNumber>) : LottoTicket(numbers)
-
 open class LottoTicket(val numbers: List<LottoNumber>) {
     init {
 
