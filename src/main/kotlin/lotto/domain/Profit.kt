@@ -8,5 +8,5 @@ data class Profit(
         get() = priceTotal / purchaseAmount.amount
 
     private val priceTotal: Double
-        get() = lottoMatchResults.sumOf { it.winCount * it.price.amount }.toDouble()
+        get() = lottoMatchResults.sumOf { it.winCount * it.price.amount.toDouble() }
 }
