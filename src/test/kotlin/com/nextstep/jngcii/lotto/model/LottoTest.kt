@@ -31,7 +31,7 @@ class LottoTest {
     fun `Lotto 생성시 전달받은 리스트 정렬`(numbers: List<Int>) {
         val lotto: Lotto = Lotto(numbers)
 
-        val expected = listOf(1, 2, 3, 4, 5, 6)
+        val expected = setOf(1, 2, 3, 4, 5, 6)
         assertThat(lotto.numbers).isEqualTo(expected)
     }
 
