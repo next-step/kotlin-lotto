@@ -1,9 +1,9 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.Lottery
 import lotto.infra.port.OutputSystem
 
-class BuyResultView(private val outputSystem: OutputSystem, private val lottos: List<Lotto>) {
+class BuyResultView(private val outputSystem: OutputSystem, private val lotteries: List<Lottery>) {
 
     fun printLottos() {
         printLottoCount()
@@ -11,12 +11,12 @@ class BuyResultView(private val outputSystem: OutputSystem, private val lottos: 
     }
 
     private fun printLottoCount() {
-        outputSystem.write("${lottos.size}개를 구매했습니다.\n")
+        outputSystem.write("${lotteries.size}개를 구매했습니다.\n")
     }
 
     private fun printAllLotto() {
-        lottos.forEach(::printLotto)
+        lotteries.forEach(::printLotto)
     }
 
-    private fun printLotto(lotto: Lotto) = outputSystem.write("${lotto}\n")
+    private fun printLotto(lottery: Lottery) = outputSystem.write("${lottery}\n")
 }

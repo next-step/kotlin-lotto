@@ -2,24 +2,24 @@ package lotto.view
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
+import lotto.domain.Lottery
 import lotto.vo.LottoSet
 
 internal class LottoResultViewTest : BehaviorSpec({
 
     given("주어진 로또 세트와, 지난주 로또 번호를 입력으로") {
-        val lottoSet = LottoSet(
+        val lotterySet = LottoSet(
             listOf(
-                Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto(listOf(1, 2, 3, 4, 5, 7)),
+                Lottery(listOf(1, 2, 3, 4, 5, 6)),
+                Lottery(listOf(1, 2, 3, 4, 5, 7)),
             )
         )
-        val lastWeekLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val lastWeekLottery = Lottery(listOf(1, 2, 3, 4, 5, 6))
         val stubIOSystem = StubIOSystem("")
         val lottoResultView = LottoResultView(stubIOSystem)
 
         `when`("결과를 출력 시") {
-            lottoResultView.printResult(lottoSet, lastWeekLotto)
+            lottoResultView.printResult(lotterySet, lastWeekLottery)
 
             then("각 등수의 당첨수와 이익률을 출력한다.") {
                 val expected = """

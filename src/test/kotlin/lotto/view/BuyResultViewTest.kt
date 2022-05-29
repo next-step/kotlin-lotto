@@ -2,16 +2,16 @@ package lotto.view
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
+import lotto.domain.Lottery
 import lotto.infra.port.OutputSystem
 
 internal class BuyResultViewTest : BehaviorSpec({
 
     given("구매 결과 뷰는") {
-        val lottos =
-            listOf(Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 6)), Lotto(listOf(1, 2, 3, 4, 5, 6)))
+        val lotteries =
+            listOf(Lottery(listOf(1, 2, 3, 4, 5, 6)), Lottery(listOf(1, 2, 3, 4, 5, 6)), Lottery(listOf(1, 2, 3, 4, 5, 6)))
         val stubOutputSystem = StubOutputSystem()
-        val buyResultView = BuyResultView(stubOutputSystem, lottos)
+        val buyResultView = BuyResultView(stubOutputSystem, lotteries)
 
         `when`("출력시") {
             buyResultView.printLottos()

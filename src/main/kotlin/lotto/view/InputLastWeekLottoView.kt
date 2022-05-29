@@ -1,11 +1,11 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.Lottery
 import lotto.infra.port.IOSystem
 
 class InputLastWeekLottoView(private val ioSystem: IOSystem) {
 
-    fun getLastWeekLotto(): Lotto {
+    fun getLastWeekLotto(): Lottery {
         printInputLastWeekMessage()
         return inputLastWeekLotto()
     }
@@ -14,7 +14,7 @@ class InputLastWeekLottoView(private val ioSystem: IOSystem) {
         ioSystem.write("지난 주 당첨 번호를 입력해 주세요.\n")
     }
 
-    private fun inputLastWeekLotto() = Lotto(convertToNumbers(ioSystem.read()))
+    private fun inputLastWeekLotto() = Lottery(convertToNumbers(ioSystem.read()))
 
     private fun convertToNumbers(inputLottoNumbers: String): List<Int> =
         inputLottoNumbers

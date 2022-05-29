@@ -4,7 +4,7 @@ import lotto.infra.port.NumberGenerator
 import lotto.vo.LottoScore
 
 @JvmInline
-value class Lotto(private val numbers: List<Int>) {
+value class Lottery(private val numbers: List<Int>) {
 
     init {
         require(numbers.distinct().count() == LOTTO_NUMBER_LENGTH)
@@ -13,9 +13,9 @@ value class Lotto(private val numbers: List<Int>) {
 
     override fun toString(): String = numbers.toString()
 
-    fun match(other: Lotto): LottoScore = LottoScore.matchCountOf(countingMatchNumber(other))
+    fun match(other: Lottery): LottoScore = LottoScore.of(countingMatchNumber(other))
 
-    private fun countingMatchNumber(other: Lotto): Int = numbers.count(other.numbers::contains)
+    private fun countingMatchNumber(other: Lottery): Int = numbers.count(other.numbers::contains)
 
     private fun isValidNumber(number: Int) = number in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER
 
@@ -26,8 +26,8 @@ value class Lotto(private val numbers: List<Int>) {
         const val MAX_LOTTO_NUMBER = 45
         const val LOTTO_NUMBER_LENGTH = 6
 
-        fun createRandomNumbers(numberGenerator: NumberGenerator<List<Int>>): Lotto {
-            return Lotto(numberGenerator.generate())
+        fun createRandomNumbers(numberGenerator: NumberGenerator<List<Int>>): Lottery {
+            return Lottery(numberGenerator.generate())
         }
     }
 }

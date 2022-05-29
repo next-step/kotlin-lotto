@@ -1,23 +1,26 @@
 package lotto.vo
 
-import lotto.domain.Lotto
+import lotto.domain.Lottery
+import kotlin.math.roundToInt
 
-class LottoSet(private val lottos: List<Lotto>) : List<Lotto> by lottos {
+class LottoSet(private val lotteries: List<Lottery>) : List<Lottery> by lotteries {
 
-    fun countPlace(winningLottery: Lotto, place: LottoScore): Int =
-        lottos.count { it.match(winningLottery) == place }
+    fun countPlace(winningLottery: Lottery, place: LottoScore): Int =
+        lotteries.count { it.match(winningLottery) == place }
 
-    fun groupPlace(winningLottery: Lotto): Map<LottoScore, Int> =
-        lottos.map { it.match(winningLottery) }.groupingBy { it }.eachCount()
+    fun groupPlace(winningLottery: Lottery): Map<LottoScore, Int> =
+        lotteries.map { it.match(winningLottery) }.groupingBy { it }.eachCount()
 
-    fun rate(winningLottery: Lotto): Double =
+    fun rate(winningLottery: Lottery): Double =
         totalRewardMoney(winningLottery)
-            .div(totalCost())
-            .toDouble()
+            .div(totalCost().toDouble())
+            .times(100)
+            .roundToInt()
+            .div(100.0)
 
-    private fun totalCost(): Int = lottos.size * Lotto.PRICE
+    private fun totalCost(): Int = lotteries.size * Lottery.PRICE
 
-    private fun totalRewardMoney(winningLottery: Lotto): Int =
+    private fun totalRewardMoney(winningLottery: Lottery): Int =
         groupPlace(winningLottery)
             .entries
             .sumOf { (rank, count) ->

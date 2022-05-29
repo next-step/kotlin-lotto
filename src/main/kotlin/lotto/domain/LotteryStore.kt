@@ -6,7 +6,7 @@ import lotto.vo.LottoSet
 class LotteryStore(private val numberGenerator: NumberGenerator<List<Int>>) {
 
     fun sell(amount: Int): LottoSet {
-        val count = amount / Lotto.PRICE
-        return LottoSet(List(count) { Lotto.createRandomNumbers(numberGenerator) })
+        val count = amount / Lottery.PRICE
+        return LottoSet(List(count) { Lottery.createRandomNumbers(numberGenerator) })
     }
 }
