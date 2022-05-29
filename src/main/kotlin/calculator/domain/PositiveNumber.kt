@@ -4,7 +4,7 @@ data class PositiveNumber(
     val value: Int,
 ) {
     init {
-        require(0 <= value) {
+        if (value < 0) {
             throw RuntimeException("덧셈 피연산자 값은 음수일 수 없습니다. ($value)")
         }
     }
