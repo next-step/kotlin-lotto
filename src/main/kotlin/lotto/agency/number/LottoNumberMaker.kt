@@ -1,6 +1,6 @@
 package lotto.agency.number
 
-class LottoNumberMaker: LottoNumberStrategy {
+class LottoNumberMaker : LottoNumberStrategy {
     override fun makeLottoNumbers(): Set<Int> {
         return LottoNumber.LOTTO_NUMBER_RANGE
             .shuffled()
