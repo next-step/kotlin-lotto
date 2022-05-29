@@ -23,7 +23,7 @@ class OutboundView {
         LottoMatchType.values().forEach {
             println(
                 "${it.matchCount}개 일치 (${it.reward}원) - " +
-                    "${lottoTickets.getMatchCount(it.matchCount, winningNumber.numbers)}개"
+                    "${lottoTickets.getMatchCount(it.matchCount, winningNumber)}개"
             )
         }
     }

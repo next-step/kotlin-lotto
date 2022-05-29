@@ -1,6 +1,7 @@
 package lotto.domain.collection
 
 import lotto.domain.LottoTicket
+import lotto.domain.LottoWinningNumber
 
 data class LottoTickets(
     private val lottoTickets: List<LottoTicket>
@@ -15,7 +16,7 @@ data class LottoTickets(
         return lottoTickets
     }
 
-    fun getMatchCount(matchCount: Int, numbers: Set<Int>): Int {
-        return lottoTickets.count() { it.numbers.intersect(numbers).size == matchCount }
+    fun getMatchCount(matchCount: Int, winningNumbers: LottoWinningNumber): Int {
+        return lottoTickets.count() { lottoTicket -> lottoTicket.isMatch(matchCount, winningNumbers.numbers) }
     }
 }

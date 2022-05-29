@@ -17,7 +17,7 @@ class LottoRewardCalculator(
 
     private fun calculateReward(): Double {
         return LottoMatchType.values()
-            .sumOf { lottoTickets.getMatchCount(it.matchCount, winningNumbers.numbers) * it.reward }
+            .sumOf { lottoTickets.getMatchCount(it.matchCount, winningNumbers) * it.reward }
             .toDouble()
     }
 }

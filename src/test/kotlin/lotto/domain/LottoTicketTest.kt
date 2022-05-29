@@ -35,4 +35,23 @@ class LottoTicketTest : DescribeSpec({
             }
         }
     }
+
+    describe("isMatch 메서드") {
+        val givenWinningNumber: Set<Int> = setOf(1, 2, 3, 4, 5, 6)
+        val givenLottoTicket = LottoTicket(setOf(1, 2, 3, 11, 22, 33))
+
+        context("매치 카윤트가 일치하면") {
+            it("true 를 반환한다.") {
+                val givenMatchCount: Int = 3
+                givenLottoTicket.isMatch(givenMatchCount, givenWinningNumber) shouldBe true
+            }
+        }
+
+        context("매치 카윤트가 불일치하면") {
+            it("false 를 반환한다.") {
+                val givenMatchCount: Int = 2
+                givenLottoTicket.isMatch(givenMatchCount, givenWinningNumber) shouldBe false
+            }
+        }
+    }
 })
