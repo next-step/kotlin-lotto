@@ -1,9 +1,13 @@
 package lotto.domain
 
 class LottoGame {
-    fun generateLotto(money: Long): Int {
+    fun generateLotto(money: Long): List<Lotto> {
         val numOfLotto = getNumOfLotto(money)
-        return numOfLotto
+        var lottos = emptyList<Lotto>()
+        repeat(numOfLotto) {
+            lottos = lottos.plus(Lotto())
+        }
+        return lottos
     }
 
     private fun getNumOfLotto(money: Long): Int {
