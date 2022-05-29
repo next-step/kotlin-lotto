@@ -25,8 +25,8 @@ class CustomDelimiter(calculateInput: String) : Delimiter() {
     private fun extractCustomDelimiter(calculateInput: String): String = CUSTOM_DELIMITER_PARSE_REGEX.replace(calculateInput, "")
 
     companion object {
-        val CUSTOM_DELIMITER_REGEX = Regex("""//.\n.*""")
-        private val CUSTOM_DELIMITER_PARSE_REGEX = Regex("""//|\n.*""")
-        private val OPERANDS_PARSE_REGEX = Regex("""//.\n""")
+        val CUSTOM_DELIMITER_REGEX = Regex("""//.\\n.*""")
+        private val CUSTOM_DELIMITER_PARSE_REGEX = Regex("""//|\\n.*""")
+        private val OPERANDS_PARSE_REGEX = Regex("""//.\\n""")
     }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource
 
 internal class AdvancedCalculatorTest {
     @ParameterizedTest
-    @ValueSource(strings = ["1,2,3", "//;\n1;2;3"])
+    @ValueSource(strings = ["1,2,3", "//;\\n1;2;3"])
     fun `어그리거트 루트로 계산기 수행을 담당한다`(input: String) {
         val advancedCalculator = AdvancedCalculator(input)
 
