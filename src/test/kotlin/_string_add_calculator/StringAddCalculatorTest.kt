@@ -11,12 +11,26 @@ internal class StringAddCalculatorTest : ExpectSpec({
 
         expect("빈 문자열 또는 null을 입력할 경우 0을 반환한다.") {
             forAll(
+                row(null),
                 row(""),
-                row(null)
+                row(" "),
             ) { text ->
                 val result = calculator.add(text)
 
                 result shouldBe 0
+            }
+        }
+
+        expect("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환") {
+            forAll(
+                row("1", 1),
+                row("2", 2),
+                row("3", 3),
+            ) {
+                text, expect ->
+                val result = calculator.add(text)
+
+                result shouldBe expect
             }
         }
     }
