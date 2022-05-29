@@ -8,7 +8,7 @@ class StringAddCalculator {
         if (inputStr.length == 1) {
             return inputStr.toLong()
         }
-        val numbers = inputStr.split(",").map { it.toLong() }
+        val numbers = inputStr.split(",|:".toRegex()).map { it.toLong() }
         return numbers.sum()
     }
 }
