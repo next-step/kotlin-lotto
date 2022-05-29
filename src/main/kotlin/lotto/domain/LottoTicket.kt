@@ -1,6 +1,9 @@
 package lotto.domain
 
-data class LottoTicket(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
+data class LottoTicket(
+    private val numbers: Set<LottoNumber>,
+    val isManual: Boolean = false
+) : Set<LottoNumber> by numbers {
 
     init {
         require(size == SIZE_OF_LOTTO_NUMBER)
