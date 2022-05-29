@@ -5,10 +5,9 @@ import kotlin.math.floor
 object Calculator {
     private const val LOTTO_PRICE = 1_000
 
-    fun calculateYield(count: Int, ranks: List<Rank>): Double {
+    fun calculateYield(count: Int, ranks: Ranks): Double {
         val purchaseAmount = (count * LOTTO_PRICE).toDouble()
-        val reward = ranks.sumOf { it.price }.toDouble()
 
-        return floor(reward / purchaseAmount * 100) / 100f
+        return floor(ranks.sumOfPrice / purchaseAmount * 100) / 100f
     }
 }

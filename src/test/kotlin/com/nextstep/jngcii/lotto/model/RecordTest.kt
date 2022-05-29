@@ -16,13 +16,12 @@ class RecordTest {
     @Test
     fun `당첨번호를 입력받아 이번 Lotto들에 대한 결과를 반환한다`() {
         val lastWeekLotto = Lotto(LAST_WEEK_NUMBERS)
-        val result: List<Rank> = record.getResult(lastWeekLotto)
+        val result: Ranks = record.getResult(lastWeekLotto)
 
-        assertThat(result.size).isEqualTo(4)
-        assertThat(result.count { it == Rank.FIRST }).isEqualTo(1)
-        assertThat(result.count { it == Rank.SECOND }).isEqualTo(1)
-        assertThat(result.count { it == Rank.THIRD }).isEqualTo(1)
-        assertThat(result.count { it == Rank.FOURTH }).isEqualTo(1)
+        assertThat(result.countOf(Rank.FIRST)).isEqualTo(1)
+        assertThat(result.countOf(Rank.SECOND)).isEqualTo(1)
+        assertThat(result.countOf(Rank.THIRD)).isEqualTo(1)
+        assertThat(result.countOf(Rank.FOURTH)).isEqualTo(1)
     }
 
     companion object {

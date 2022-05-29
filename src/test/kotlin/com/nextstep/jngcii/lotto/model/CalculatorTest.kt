@@ -14,7 +14,7 @@ class CalculatorTest {
         ranks: List<Rank>,
         expected: Double
     ) {
-        val actual: Double = Calculator.calculateYield(count, ranks)
+        val actual: Double = Calculator.calculateYield(count, Ranks(ranks))
 
         assertThat(actual).isEqualTo(expected)
     }

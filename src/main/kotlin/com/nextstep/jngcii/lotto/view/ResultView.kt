@@ -4,6 +4,7 @@ import com.nextstep.jngcii.lotto.model.Calculator
 import com.nextstep.jngcii.lotto.model.Lotto
 import com.nextstep.jngcii.lotto.model.ProfitState
 import com.nextstep.jngcii.lotto.model.Rank
+import com.nextstep.jngcii.lotto.model.Ranks
 
 object ResultView {
     fun printList(lottos: List<Lotto>) {
@@ -14,12 +15,12 @@ object ResultView {
         println()
     }
 
-    fun printResult(count: Int, ranks: List<Rank>) {
+    fun printResult(count: Int, ranks: Ranks) {
         println("당첨 통계")
         println("---------")
 
         Rank.values().forEach {
-            val match = ranks.count(it)
+            val match = ranks.countOf(it)
             println("${it.count}개 일치 (${it.price}원)- ${match}개")
         }
 
@@ -27,8 +28,6 @@ object ResultView {
         val state = ProfitState.of(rate)
         println("총 수익률은 ${rate}입니다.(기준이 ${ProfitState.ORIGIN_POINT}이기 때문에 결과적으로 ${state.phaseOfPrint} 의미임)")
     }
-
-    private fun List<Rank>.count(rank: Rank) = this.count { rank == it }
 
     private val ProfitState.phaseOfPrint
         get() = when (this) {
