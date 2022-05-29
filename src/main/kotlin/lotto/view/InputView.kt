@@ -34,9 +34,28 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
     private fun printInputCountOfManualLotto() {
         writeLine("\n수동으로 구매할 로또 수를 입력해 주세요.")
     }
+
+    fun readManualLottoNumbers(size: Int): List<Set<Int>> {
+        printInputManualLottoNumbers()
+
+        val manualLottoNumbers = mutableListOf<Set<Int>>()
+        repeat(size) {
+            manualLottoNumbers.add(readLottoNumber())
+        }
+        return manualLottoNumbers
+    }
+
+    private fun printInputManualLottoNumbers() {
+        writeLine("\n수동으로 구매할 번호를 입력해 주세요.")
+    }
+
     fun readLastLottoNumbers(): Set<Int> {
         printInputLastLottoNumbers()
 
+        return readLottoNumber()
+    }
+
+    private fun readLottoNumber(): Set<Int> {
         val value = reader()
         requireNotNull(value)
         require(value.isNotBlank())
