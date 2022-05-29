@@ -9,12 +9,12 @@ object LottoStore {
      *
      * @return 구매한 로또 티켓 목록
      */
-    fun buy(money: Int): LottoTickets {
+    fun buy(money: PurchaseMoney): LottoTickets {
         require(money >= PRICE_OF_ONE_LOTTO_TICKET)
         require(money <= PRICE_OF_ONE_LOTTO_TICKET * MAXIMUM_SIZE_OF_TICKET)
 
-        return LottoTicketMachine.generate(getTicketCountByMoney(money))
+        return LottoTicketMachine.generate(getTicketCountByMoney(money.amount))
     }
 
-    private fun getTicketCountByMoney(money: Int): Int = money / PRICE_OF_ONE_LOTTO_TICKET
+    private fun getTicketCountByMoney(amount: Int): Int = amount / PRICE_OF_ONE_LOTTO_TICKET
 }
