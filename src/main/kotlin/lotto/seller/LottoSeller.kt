@@ -1,7 +1,7 @@
 package lotto.seller
 
-import lotto.agency.LottoNumberGenerator
 import lotto.agency.LottoTicket
+import lotto.agency.number.LottoNumberStrategy
 import lotto.exception.MinimumPurchaseMoneyException
 
 class LottoSeller {
@@ -11,9 +11,9 @@ class LottoSeller {
         return money / LOTTO_PURCHASE_PRICE_PER_PIECE
     }
 
-    fun buy(amount: Int): List<LottoTicket> {
+    fun buy(amount: Int, lottoNumberStrategy: LottoNumberStrategy): List<LottoTicket> {
         return List(amount) {
-            LottoTicket(LottoNumberGenerator().getRandomLottoNumbers())
+            LottoTicket(lottoNumberStrategy.makeLottoNumbers())
         }
     }
 

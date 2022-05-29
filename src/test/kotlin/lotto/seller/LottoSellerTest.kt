@@ -1,5 +1,6 @@
 package lotto.seller
 
+import lotto.agency.number.LottoNumberMaker
 import lotto.exception.MinimumPurchaseMoneyException
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
@@ -12,7 +13,8 @@ class LottoSellerTest {
         val money = 13500
         val lottoSeller = LottoSeller()
         val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
-        val purchaseLottoTickets = lottoSeller.buy(lottoPurchaseAmount)
+        val lottoNumberMaker = LottoNumberMaker()
+        val purchaseLottoTickets = lottoSeller.buy(lottoPurchaseAmount, lottoNumberMaker)
 
         assertThat(purchaseLottoTickets.size).isEqualTo(lottoPurchaseAmount)
     }
