@@ -1,12 +1,9 @@
 package lotto
 
 object ResultView {
-
-    fun printTicketCount(lottoTicketCount: Int) {
-        println("${lottoTicketCount}개를 구매했습니다.")
-    }
-
     fun printTickets(lottoTickets: LottoTickets) {
+        println("${lottoTickets.lottery.size}개를 구매했습니다.")
+
         lottoTickets.lottery.forEach { lottoTicket ->
             println(lottoTicket.numbers.map { it.number })
         }

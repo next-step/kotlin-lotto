@@ -18,7 +18,7 @@ internal class LottoMachineTest {
             )
         }
 
-        assertThat(lottoMachine.lottoTicketCount).isEqualTo(1)
+        assertThat(lottoMachine.lottoTickets.lottery.size).isEqualTo(1)
         assertThat(lottoMachine.winningPrizes.prizes).isEqualTo(listOf(LottoResult.Prize.SIXTH))
     }
 
@@ -35,7 +35,7 @@ internal class LottoMachineTest {
             )
         }
 
-        assertThat(lottoMachine.lottoTicketCount).isEqualTo(1)
+        assertThat(lottoMachine.lottoTickets.lottery.size).isEqualTo(1)
         assertThat(lottoMachine.winningPrizes.prizes).isEqualTo(listOf(LottoResult.Prize.FIFTH_BONUS))
     }
 
@@ -52,7 +52,7 @@ internal class LottoMachineTest {
             )
         }
 
-        assertThat(lottoMachine.lottoTicketCount).isEqualTo(1)
+        assertThat(lottoMachine.lottoTickets.lottery.size).isEqualTo(1)
         assertThat(lottoMachine.winningPrizes.prizes).isEqualTo(listOf(LottoResult.Prize.THIRD))
     }
 }

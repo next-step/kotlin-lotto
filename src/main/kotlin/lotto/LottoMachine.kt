@@ -1,8 +1,6 @@
 package lotto
 
 class LottoMachine {
-    var lottoTicketCount = 0
-        private set
 
     var lottoTickets = LottoTickets()
         private set
@@ -11,7 +9,7 @@ class LottoMachine {
         private set
 
     fun purchase(purchaseMoney: PurchaseMoney, randomNumberFunc: () -> List<LottoNumber>) {
-        lottoTicketCount = purchaseMoney.money / LOTTO_PRICE
+        val lottoTicketCount = purchaseMoney.money / LOTTO_PRICE
 
         lottoTickets = LottoTickets(
             (1..lottoTicketCount).toList().map {

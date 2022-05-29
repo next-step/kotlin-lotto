@@ -7,8 +7,6 @@ fun main() {
 
     lottoMachine.purchase(purchaseMoney, Extractor.randomNumberFunc)
 
-    ResultView.printTicketCount(lottoMachine.lottoTicketCount)
-
     ResultView.printTickets(lottoMachine.lottoTickets)
 
     val winningNumbers = InputView.getWinningNumbers()
