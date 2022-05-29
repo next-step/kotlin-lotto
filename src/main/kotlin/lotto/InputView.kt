@@ -20,7 +20,7 @@ object InputView {
         val winningValue = readLine()
             ?.replace(" ", "")
             ?.split(",")
-            ?.map { it.toIntOrNull() ?: throw IllegalArgumentException(NEGATIVE_NUMBER_MESSAGE) }
+            ?.mapNotNull { it.toIntOrNull() }
             ?.map { LottoNumber(it) }
 
         requireNotNull(winningValue) { NULL_MESSAGE }
