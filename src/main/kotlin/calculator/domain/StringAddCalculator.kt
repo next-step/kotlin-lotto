@@ -8,7 +8,7 @@ class StringAddCalculator {
         }
 
         val positiveNumbers = PositiveNumbers.of(splitTextByPattern(text))
-        return positiveNumbers.addAll().value
+        return positiveNumbers.sum().value
     }
 
     private fun splitTextByPattern(text: String): List<String> =

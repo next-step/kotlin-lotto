@@ -14,7 +14,7 @@ internal class PositiveNumbersTest : FreeSpec({
         ).forEach { (numbers, result) ->
             "'$numbers'의 총합은 '$result'다." {
                 val positiveNumbers = PositiveNumbers(numbers.map { PositiveNumber(it) })
-                positiveNumbers.addAll() shouldBe PositiveNumber(result)
+                positiveNumbers.sum() shouldBe PositiveNumber(result)
             }
         }
     }
