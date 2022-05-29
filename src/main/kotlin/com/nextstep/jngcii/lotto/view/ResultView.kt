@@ -6,14 +6,6 @@ import com.nextstep.jngcii.lotto.model.ProfitState
 import com.nextstep.jngcii.lotto.model.Rank
 
 object ResultView {
-    fun printBeforeGetCount() {
-        println("구입금액을 입력해 주세요.")
-    }
-
-    fun printBeforeGetNumbers() {
-        println("지난 주 당첨 번호를 입력해 주세요.")
-    }
-
     fun printList(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
         lottos.forEach {
