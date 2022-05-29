@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.LottoDraw
 import lotto.domain.LottoValidator
 import lotto.domain.dto.LottoNumber
+import lotto.domain.dto.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -26,7 +27,7 @@ class LottoValidatorTest {
         val draw = LottoDraw(lottoValidator.getLuckyNumbers, lottoValidator.getBonusNumber)
         draw.draw(lottoList)
 
-        assertThat(draw.six).isEqualTo(1)
+        assertThat(draw.winningRanks.count { it == Rank.FIRST }).isEqualTo(1)
     }
 
     @ParameterizedTest
@@ -37,7 +38,7 @@ class LottoValidatorTest {
         val draw = LottoDraw(lottoValidator.getLuckyNumbers, lottoValidator.getBonusNumber)
         draw.draw(lottoList)
 
-        assertThat(draw.fiveWithBonus).isEqualTo(1)
+        assertThat(draw.winningRanks.count { it == Rank.SECOND }).isEqualTo(1)
     }
 
     @ParameterizedTest
