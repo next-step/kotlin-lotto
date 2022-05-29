@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.int
 import io.kotest.property.checkAll
@@ -37,6 +38,24 @@ class LottoStoreTest : BehaviorSpec({
                         }
                     }
                 }
+            }
+        }
+
+        When("3000원의 돈으로 수동 2장을 함께 구매하면") {
+            val money = PurchaseMoney(3000)
+            val manualTickets = listOf(
+                LottoTicket(setOf(1, 2, 3, 4, 5, 6).toLottoNumber(), true),
+                LottoTicket(setOf(2, 3, 4, 5, 6, 7).toLottoNumber(), true)
+            )
+            val lottoTickets = LottoStore.buy(money = money, manualTickets = manualTickets)
+
+            Then("로또 티켓은 총 3장 구매한다") {
+                lottoTickets shouldHaveSize 3
+            }
+
+            Then("수동 2장과 자동 1장을 구매한다") {
+                lottoTickets.countOfManualTicket shouldBe 2
+                lottoTickets.countOfAutoTicket shouldBe 1
             }
         }
     }
