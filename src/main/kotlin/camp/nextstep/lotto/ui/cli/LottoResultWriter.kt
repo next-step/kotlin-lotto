@@ -13,7 +13,8 @@ object LottoResultWriter {
         println("당첨 통계")
         println("---------")
         for ((winnings, tickets) in winningsTicketMap) {
-            println("${winnings.matchedCount}개 일치 (${winnings.winnings}원) - ${tickets.size}개")
+            val matchedBonus = if (winnings.matchedBonus) ", 보너스 볼 일치" else ""
+            println("${winnings.matchedCount}개 일치$matchedBonus (${winnings.winnings}원) - ${tickets.size}개")
         }
 
         val earningRate = result.totalEarn / result.seed
