@@ -1,7 +1,6 @@
-package lotto
+package lotto.seller
 
 import lotto.exception.MinimumPurchaseMoneyException
-import lotto.seller.LottoSeller
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

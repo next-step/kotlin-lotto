@@ -1,9 +1,5 @@
-package lotto
+package lotto.agency
 
-import lotto.agency.LottoJudge
-import lotto.agency.LottoNumber
-import lotto.agency.LottoTicket
-import lotto.agency.LottoWinning
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
