@@ -36,6 +36,8 @@ fun main() {
         return
     }
 
+    val bonusNumber = inputView.getBonusNumber()
+
     // 당첨통계
     val lottoScore = LottoScore()
     val lottoResults = lottoScore.compareNumber(lastWinningTicket, lottoTickets)
