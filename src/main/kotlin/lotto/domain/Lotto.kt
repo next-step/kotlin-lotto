@@ -21,9 +21,7 @@ data class Lotto(
     companion object {
         const val NUMBER_COUNT = 6
 
-        fun manualOf(vararg numbers: Int): Lotto = of(LottoType.MANUAL, numbers.toList())
         fun manualOf(numbers: List<Int>): Lotto = of(LottoType.MANUAL, numbers)
-        fun autoOf(vararg numbers: Int): Lotto = of(LottoType.AUTO, numbers.toList())
         fun autoOf(numbers: List<Int>): Lotto = of(LottoType.AUTO, numbers)
 
         private fun of(type: LottoType, numbers: List<Int>): Lotto = Lotto(type, numbers.map(::LottoNumber))

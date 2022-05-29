@@ -5,6 +5,8 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import lotto.extension.autoOf
+import lotto.extension.manualOf
 
 internal class StoreTest : FreeSpec({
     val autoLotto = Lotto.autoOf(1, 2, 3, 4, 5, 6)

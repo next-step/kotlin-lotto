@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.extension.autoOf
 
 internal class WinNumberTest : FreeSpec({
 

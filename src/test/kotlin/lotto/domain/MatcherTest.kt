@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
+import lotto.extension.autoOf
 
 internal class MatcherTest : FreeSpec({
     val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)

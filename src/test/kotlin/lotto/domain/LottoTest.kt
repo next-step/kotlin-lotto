@@ -5,6 +5,8 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
+import lotto.extension.autoOf
+import lotto.extension.manualOf
 
 internal class LottoTest : FreeSpec({
 
