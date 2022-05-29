@@ -1,9 +1,5 @@
-package lotto.process
+package lotto.domain
 
-import lotto.model.LottoNumber
-import lotto.model.LottoPrice
-import lotto.model.LottoPrize
-import lotto.model.LottoResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -61,5 +57,5 @@ internal class LottoScoreTest {
     }
 
     private fun LottoTicket(vararg numbers: Int) =
-        lotto.model.LottoTicket(numbers.map { LottoNumber(it) }.toSet())
+        LottoTicket(numbers.map { LottoNumber(it) }.toSet())
 }

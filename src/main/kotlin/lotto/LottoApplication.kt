@@ -1,9 +1,9 @@
 package lotto
 
-import lotto.process.LottoPurchase
-import lotto.process.LottoPurchase.Companion.LOTTO_PRICE
-import lotto.process.LottoScore
-import lotto.process.WinningNumber
+import lotto.domain.LottoPurchase
+import lotto.domain.LottoPurchase.Companion.LOTTO_PRICE
+import lotto.domain.LottoScore
+import lotto.domain.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
 import java.lang.IllegalArgumentException

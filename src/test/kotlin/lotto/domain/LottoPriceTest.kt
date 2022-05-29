@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.domain
 
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows

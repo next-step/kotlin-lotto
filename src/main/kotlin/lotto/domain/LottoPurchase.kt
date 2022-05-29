@@ -1,8 +1,6 @@
-package lotto.process
+package lotto.domain
 
 import lotto.Const
-import lotto.model.LottoPrice
-import lotto.model.LottoTicket
 import java.util.Collections
 
 class LottoPurchase {

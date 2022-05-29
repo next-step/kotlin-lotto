@@ -1,8 +1,6 @@
-package lotto.process
+package lotto.domain
 
 import lotto.Const
-import lotto.model.LottoNumber
-import lotto.model.LottoTicket
 
 class WinningNumber {
     fun winningNumberToLottoTicket(winningNumber: String?): LottoTicket {

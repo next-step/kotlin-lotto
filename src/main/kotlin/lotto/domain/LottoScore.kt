@@ -1,9 +1,4 @@
-package lotto.process
-
-import lotto.model.LottoPrice
-import lotto.model.LottoPrize
-import lotto.model.LottoResult
-import lotto.model.LottoTicket
+package lotto.domain
 
 class LottoScore {
     fun compareNumber(winningTicket: LottoTicket, lottoTickets: List<LottoTicket>): List<LottoResult> {
