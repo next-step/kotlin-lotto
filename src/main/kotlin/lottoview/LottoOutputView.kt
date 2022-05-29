@@ -6,6 +6,12 @@ import lotto.getPrice
 
 object LottoOutputView {
 
+    fun displayIssuedLottos(issuedLottos: List<List<Int>>) {
+        issuedLottos.forEach {
+            println(it)
+        }
+    }
+
     fun resultForWinning(issuedLottos: List<List<Int>>, winningInfo: LottoWinningInfo): Int {
         println(WINNING_STATISTICS_MESSAGE)
         println(SEPARATOR_MESSAGE)
