@@ -32,7 +32,13 @@ class ManualIssueView(private val io: IO) {
     }
 
     private tailrec fun readManualLotto(): Lotto {
-        val result = io.read()
+        val line = io.read()
+
+        if (line.isBlank()) {
+            return readManualLotto()
+        }
+
+        val result = line
             .replace(" ", "")
             .split(',')
             .mapNotNull { it.toIntOrNull() }
