@@ -16,7 +16,7 @@ fun main() {
     val amount = inputMoneyView.getMoney()
     val lotteries = lotteryStore.sell(amount)
     val buyResultView = BuyResultView(ioSystem, lotteries)
-    buyResultView.printLottos()
+    buyResultView.printLotteries()
 
     val lastWeekLottoView = InputLastWeekLottoView(ioSystem)
     val winningLottery = lastWeekLottoView.getLastWeekLotto()

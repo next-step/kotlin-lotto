@@ -3,16 +3,16 @@ package lotto.vo
 import lotto.domain.Lottery
 import kotlin.math.roundToInt
 
-class LottoSet(private val lotteries: List<Lottery>) : List<Lottery> by lotteries {
+class LottoSet<T>(private val lotteries: List<Lottery<T>>) : List<Lottery<T>> by lotteries {
 
-    fun countPlace(winningLottery: Lottery, place: LottoScore): Int =
-        lotteries.count { it.match(winningLottery) == place }
+    fun countPlace(winningNormalLottery: T, place: LottoScore): Int =
+        lotteries.count { it.match(winningNormalLottery) == place }
 
-    fun groupPlace(winningLottery: Lottery): Map<LottoScore, Int> =
-        lotteries.map { it.match(winningLottery) }.groupingBy { it }.eachCount()
+    fun groupPlace(winningNormalLottery: T): Map<LottoScore, Int> =
+        lotteries.map { it.match(winningNormalLottery) }.groupingBy { it }.eachCount()
 
-    fun rate(winningLottery: Lottery): Double =
-        totalRewardMoney(winningLottery)
+    fun rate(winningNormalLottery: T): Double =
+        totalRewardMoney(winningNormalLottery)
             .div(totalCost().toDouble())
             .times(100)
             .roundToInt()
@@ -20,8 +20,8 @@ class LottoSet(private val lotteries: List<Lottery>) : List<Lottery> by lotterie
 
     private fun totalCost(): Int = lotteries.size * Lottery.PRICE
 
-    private fun totalRewardMoney(winningLottery: Lottery): Int =
-        groupPlace(winningLottery)
+    private fun totalRewardMoney(winningNormalLottery: T): Int =
+        groupPlace(winningNormalLottery)
             .entries
             .sumOf { (rank, count) ->
                 rank.rewardMoney * count
