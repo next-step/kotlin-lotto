@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.vo.LottoScore
+import lotto.vo.LotteryRank
 
 abstract class Lottery<T>(protected val numbers: List<Int>) {
 
@@ -11,7 +11,7 @@ abstract class Lottery<T>(protected val numbers: List<Int>) {
 
     protected fun isValidNumber(number: Int) = number in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER
 
-    abstract fun match(other: T): LottoScore
+    abstract fun match(other: T): LotteryRank
 
     companion object {
 

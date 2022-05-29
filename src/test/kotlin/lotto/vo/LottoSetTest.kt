@@ -33,7 +33,7 @@ internal class LottoSetTest : BehaviorSpec({
         val lastWeekNormalLottery = NormalLottery(listOf(1, 2, 3, 4, 5, 6))
 
         `when`("1등 당첨자 조회시") {
-            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LottoScore.ONE_PLACE)
+            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.ONE_PLACE)
 
             then("1등 당첨자 수를 반환한다.") {
                 result shouldBe 1
@@ -41,7 +41,7 @@ internal class LottoSetTest : BehaviorSpec({
         }
 
         `when`("2등 당첨자 조회시") {
-            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LottoScore.TWO_PLACE)
+            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.TWO_PLACE)
 
             then("2등 당첨자 수를 반환한다.") {
                 result shouldBe 2
@@ -49,7 +49,7 @@ internal class LottoSetTest : BehaviorSpec({
         }
 
         `when`("3등 당첨자 조회시") {
-            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LottoScore.THIRD_PLACE)
+            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.THIRD_PLACE)
 
             then("3등 당첨자 수를 반환한다.") {
                 result shouldBe 3
@@ -57,7 +57,7 @@ internal class LottoSetTest : BehaviorSpec({
         }
 
         `when`("4등 당첨자 조회시") {
-            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LottoScore.FOUR_PLACE)
+            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.FOUR_PLACE)
 
             then("4등 당첨자 수를 반환한다.") {
                 result shouldBe 4
@@ -65,7 +65,7 @@ internal class LottoSetTest : BehaviorSpec({
         }
 
         `when`("꽝 조회시") {
-            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LottoScore.NONE)
+            val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.NONE)
 
             then("꽝 수를 반환한다.") {
                 result shouldBe 5
@@ -76,11 +76,11 @@ internal class LottoSetTest : BehaviorSpec({
             val result = normalLotterySet.groupPlace(lastWeekNormalLottery)
 
             then("각 등수의 당첨자 수를 Map으로 반환한다.") {
-                result[LottoScore.ONE_PLACE] shouldBe 1
-                result[LottoScore.TWO_PLACE] shouldBe 2
-                result[LottoScore.THIRD_PLACE] shouldBe 3
-                result[LottoScore.FOUR_PLACE] shouldBe 4
-                result[LottoScore.NONE] shouldBe 5
+                result[LotteryRank.ONE_PLACE] shouldBe 1
+                result[LotteryRank.TWO_PLACE] shouldBe 2
+                result[LotteryRank.THIRD_PLACE] shouldBe 3
+                result[LotteryRank.FOUR_PLACE] shouldBe 4
+                result[LotteryRank.NONE] shouldBe 5
             }
         }
 

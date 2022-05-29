@@ -8,50 +8,50 @@ internal class LottoScoreTest : BehaviorSpec({
     given("일치하는 숫자가") {
 
         `when`("1개인 경우") {
-            val result = LottoScore.of(1)
+            val result = LotteryRank.of(1)
 
             then("결과는 꽝") {
-                result shouldBe LottoScore.NONE
+                result shouldBe LotteryRank.NONE
             }
         }
 
         `when`("2개인 경우") {
-            val result = LottoScore.of(2)
+            val result = LotteryRank.of(2)
 
             then("결과는 꽝") {
-                result shouldBe LottoScore.NONE
+                result shouldBe LotteryRank.NONE
             }
         }
 
         `when`("3개인 경우") {
-            val result = LottoScore.of(3)
+            val result = LotteryRank.of(3)
 
             then("결과는 4등") {
-                result shouldBe LottoScore.FOUR_PLACE
+                result shouldBe LotteryRank.FOUR_PLACE
             }
         }
 
         `when`("4개인 경우") {
-            val result = LottoScore.of(4)
+            val result = LotteryRank.of(4)
 
             then("결과는 3등") {
-                result shouldBe LottoScore.THIRD_PLACE
+                result shouldBe LotteryRank.THIRD_PLACE
             }
         }
 
         `when`("5개인 경우") {
-            val result = LottoScore.of(5)
+            val result = LotteryRank.of(5)
 
             then("결과는 2등") {
-                result shouldBe LottoScore.TWO_PLACE
+                result shouldBe LotteryRank.TWO_PLACE
             }
         }
 
         `when`("6개인 경우") {
-            val result = LottoScore.of(6)
+            val result = LotteryRank.of(6)
 
             then("결과는 1등") {
-                result shouldBe LottoScore.ONE_PLACE
+                result shouldBe LotteryRank.ONE_PLACE
             }
         }
     }

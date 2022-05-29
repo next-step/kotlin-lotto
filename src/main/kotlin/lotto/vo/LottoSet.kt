@@ -5,10 +5,10 @@ import kotlin.math.roundToInt
 
 class LottoSet<T>(private val lotteries: List<Lottery<T>>) : List<Lottery<T>> by lotteries {
 
-    fun countPlace(winningNormalLottery: T, place: LottoScore): Int =
+    fun countPlace(winningNormalLottery: T, place: LotteryRank): Int =
         lotteries.count { it.match(winningNormalLottery) == place }
 
-    fun groupPlace(winningNormalLottery: T): Map<LottoScore, Int> =
+    fun groupPlace(winningNormalLottery: T): Map<LotteryRank, Int> =
         lotteries.map { it.match(winningNormalLottery) }.groupingBy { it }.eachCount()
 
     fun rate(winningNormalLottery: T): Double =

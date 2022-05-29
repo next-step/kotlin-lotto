@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.infra.port.NumberGenerator
-import lotto.vo.LottoScore
+import lotto.vo.LotteryRank
 
 internal class LottoTest : BehaviorSpec({
 
@@ -15,7 +15,7 @@ internal class LottoTest : BehaviorSpec({
         `when`("1개 맞을 경우") {
             val result = normalLottery.match(lastWeekNormalLottery)
             then("꽝") {
-                result shouldBe LottoScore.NONE
+                result shouldBe LotteryRank.NONE
             }
         }
 
@@ -23,7 +23,7 @@ internal class LottoTest : BehaviorSpec({
         `when`("2개 맞을 경우") {
             val result = normalLottery.match(lastWeekNormalLottery)
             then("꽝") {
-                result shouldBe LottoScore.NONE
+                result shouldBe LotteryRank.NONE
             }
         }
 
@@ -31,7 +31,7 @@ internal class LottoTest : BehaviorSpec({
         `when`("3개 맞을 경우") {
             val result = normalLottery.match(lastWeekNormalLottery)
             then("4등") {
-                result shouldBe LottoScore.FOUR_PLACE
+                result shouldBe LotteryRank.FOUR_PLACE
             }
         }
 
@@ -39,7 +39,7 @@ internal class LottoTest : BehaviorSpec({
         `when`("4개 맞을 경우") {
             val result = normalLottery.match(lastWeekNormalLottery)
             then("3등") {
-                result shouldBe LottoScore.THIRD_PLACE
+                result shouldBe LotteryRank.THIRD_PLACE
             }
         }
 
@@ -47,7 +47,7 @@ internal class LottoTest : BehaviorSpec({
         `when`("5개 맞을 경우") {
             val result = normalLottery.match(lastWeekNormalLottery)
             then("2등") {
-                result shouldBe LottoScore.TWO_PLACE
+                result shouldBe LotteryRank.TWO_PLACE
             }
         }
 
@@ -55,7 +55,7 @@ internal class LottoTest : BehaviorSpec({
         `when`("6개 맞을 경우") {
             val result = normalLottery.match(lastWeekNormalLottery)
             then("1등") {
-                result shouldBe LottoScore.ONE_PLACE
+                result shouldBe LotteryRank.ONE_PLACE
             }
         }
     }
@@ -92,7 +92,7 @@ internal class LottoTest : BehaviorSpec({
             val randomNumber = listOf(6, 5, 4, 3, 2, 1)
             val result = NormalLottery.createRandomNumbers(StubNumberGenerator(randomNumber))
             then("숫자 생성기에 의해 생성된 숫자를 가진 로또를 발행한다.") {
-                result.match(NormalLottery(randomNumber)) shouldBe LottoScore.ONE_PLACE
+                result.match(NormalLottery(randomNumber)) shouldBe LotteryRank.ONE_PLACE
             }
         }
     }

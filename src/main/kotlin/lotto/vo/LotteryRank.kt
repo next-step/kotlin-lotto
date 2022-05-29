@@ -1,6 +1,6 @@
 package lotto.vo
 
-enum class LottoScore(val matchCount: Int, val rewardMoney: Int) {
+enum class LotteryRank(val matchCount: Int, val rewardMoney: Int) {
 
     NONE(0, 0),
     FOUR_PLACE(3, 5_000),
@@ -10,6 +10,6 @@ enum class LottoScore(val matchCount: Int, val rewardMoney: Int) {
 
     companion object {
 
-        fun of(count: Int): LottoScore = LottoScore.values().find { it.matchCount == count } ?: NONE
+        fun of(count: Int): LotteryRank = LotteryRank.values().find { it.matchCount == count } ?: NONE
     }
 }
