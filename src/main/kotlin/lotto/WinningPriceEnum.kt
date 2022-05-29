@@ -1,5 +1,7 @@
 package lotto
 
+import java.lang.Exception
+
 enum class WinningPriceEnum(val number: Int, val price: Int) {
     ONE(1, 0),
     TWO(2, 0),
@@ -10,6 +12,10 @@ enum class WinningPriceEnum(val number: Int, val price: Int) {
 }
 
 fun getPrice(number: Int): Int {
-    return WinningPriceEnum.values().filter { it.number.equals(number) }
-        .map { return it.price }.first()
+    return try {
+        WinningPriceEnum.values().filter { it.number.equals(number) }
+            .map { return it.price }.first()
+    } catch (e: Exception) {
+        throw IllegalArgumentException("일치하지 않는 숫자입니다")
+    }
 }
