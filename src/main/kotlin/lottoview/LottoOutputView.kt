@@ -1,8 +1,6 @@
 package lottoview
 
-import lotto.LottoWinningHandler.matchCount
 import lotto.LottoWinningInfo
-import lotto.getPrice
 
 object LottoOutputView {
 
@@ -12,18 +10,13 @@ object LottoOutputView {
         }
     }
 
-    fun resultForWinning(issuedLottos: List<List<Int>>, winningInfo: LottoWinningInfo): Int {
+    fun resultForWinning(winningInfo: LottoWinningInfo) {
         println(WINNING_STATISTICS_MESSAGE)
         println(SEPARATOR_MESSAGE)
 
-        var revenue = 0
-        matchCount(issuedLottos, winningInfo).filter { it.value > 0 }.forEach {
-            val price = getPrice(it.key)
-            println(CONTAIN_MESSAGE.format(it.key, price, it.value))
-            revenue = revenue + price
+        winningInfo.scoreInfos.forEach {
+            println(CONTAIN_MESSAGE.format(it.match, it.price, it.count))
         }
-
-        return revenue
     }
 
     fun displayRevenue(amount: Int, revenue: Int) {

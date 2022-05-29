@@ -3,7 +3,7 @@ package lotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class LottoWinningHandlerTest {
+class LottoWinningHandlerTest {
 
     @Test
     fun `발급된 로또와 일치하는 숫자만큼의 결과를 출력해야 한다`() {
@@ -14,7 +14,7 @@ internal class LottoWinningHandlerTest {
         )
         val winningInfo = LottoWinningInfo("1,2,3,4,5,6")
 
-        val result = LottoWinningHandler.matchCount(issuedLottos, winningInfo)
+        val result = LottoWinningHandler.matchCount(issuedLottos, winningInfo.winningNumbers)
         assertThat(result.get(3)).isEqualTo(1)
         assertThat(result.get(4)).isEqualTo(2)
     }

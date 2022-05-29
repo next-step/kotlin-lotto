@@ -1,13 +1,24 @@
 package lotto
 
-class LottoWinningInfo(val winningNumberInfo: String) {
+import lotto.LottoWinningHandler.matchCount
 
-    fun getWinningNumbers(): List<Int> {
-        require(winningNumberInfo.contains(","))
+class LottoWinningInfo(winningNumberInput: String) {
+    var winningNumbers = mutableListOf<Int>()
+    lateinit var scoreInfos: List<ScoreInfo>
+    var revenue: Int = 0
 
-        val splitted = winningNumberInfo.split(",")
-        require(splitted.size == 6)
+    init {
+        require(winningNumberInput.contains(","))
+        winningNumbers = winningNumberInput.split(",").map { it.toInt() }.toMutableList()
 
-        return splitted.map { it.toInt() }
+        require(winningNumbers.size == 6)
+    }
+
+    fun setScore(issuedLottos: List<List<Int>>) {
+        scoreInfos = matchCount(issuedLottos, winningNumbers).filter { it.value > 0 }.map {
+            ScoreInfo(it.key, getPrice(it.key), it.value)
+        }
     }
 }
+
+class ScoreInfo(val match: Int, val price: Int, val count: Int)
