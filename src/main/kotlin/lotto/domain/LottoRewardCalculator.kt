@@ -8,14 +8,14 @@ class LottoRewardCalculator(
     private val winningNumbers: LottoWinningNumber
 ) {
 
-    fun getRewardRate(purchaseAmount: Int, lottoTicketPrice: Int): Double {
+    fun calculateRewardRate(purchaseAmount: Int, lottoTicketPrice: Int): Double {
         require(purchaseAmount > lottoTicketPrice) {
             "구입 금액은 로또 티켓 가격 보다 커야 합니다."
         }
-        return getReward() / purchaseAmount.toDouble()
+        return calculateReward() / purchaseAmount.toDouble()
     }
 
-    private fun getReward(): Double {
+    private fun calculateReward(): Double {
         return LottoMatchType.values()
             .sumOf { lottoTickets.getMatchCount(it.matchCount, winningNumbers.numbers) * it.reward }
             .toDouble()
