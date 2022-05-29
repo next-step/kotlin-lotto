@@ -18,15 +18,15 @@ class LottoGameTest {
 
     @ParameterizedTest
     @CsvSource(value = ["14000|14", "1000|1", "2000|2"], delimiter = '|')
-    fun `로또 구입 금액에 해당하는 로또 수를 계산할 수 있다`(money: Long, expected: Long) {
-        assertThat(lottoGame.initGame(money)).isEqualTo(expected)
+    fun `로또 구입 금액에 해당하는 로또 수를 계산할 수 있다`(money: Long, expected: Int) {
+        assertThat(lottoGame.generateLotto(money)).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["900", "0"])
     fun `로또 구입 금액이 1천원 미만이면 IllegalArgumentException 예외가 발생한다`(money: Long) {
         assertThrows(IllegalArgumentException::class.java) {
-            lottoGame.initGame(money)
+            lottoGame.generateLotto(money)
         }
     }
 
@@ -34,7 +34,7 @@ class LottoGameTest {
     @ValueSource(strings = ["1900", "2001"])
     fun `로또 구입 금액이 1천원 이상인데, 천단위가 아니면 IllegalArgumentException 예외가 발생한다`(money: Long) {
         assertThrows(IllegalArgumentException::class.java) {
-            lottoGame.initGame(money)
+            lottoGame.generateLotto(money)
         }
     }
 }
