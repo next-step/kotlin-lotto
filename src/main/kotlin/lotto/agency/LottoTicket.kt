@@ -27,11 +27,6 @@ class LottoTicket(numbers: List<LottoNumber>, bonus: LottoNumber? = null) {
         return numbers.map { it.number }.contains(bonus.number)
     }
 
-    fun validateDuplicate(number: LottoNumber) {
-        if (numbers.contains(number))
-            throw AlreadySelectedNumberException("입력한 번호는 이미 선택된 번호입니다.")
-    }
-
     private fun validateLottoCount(numbers: List<LottoNumber>) {
         if (numbers.size != LOTTO_COUNT_POLICY) {
             throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 ${LOTTO_COUNT_POLICY}개를 입력해야합니다.")
