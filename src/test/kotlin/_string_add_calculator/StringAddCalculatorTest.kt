@@ -33,5 +33,17 @@ internal class StringAddCalculatorTest : ExpectSpec({
                 result shouldBe expect
             }
         }
+
+        expect("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.") {
+            forAll(
+                row("1,2", 3),
+                row("1,2,3", 6),
+            ) {
+                text, expect ->
+                val result = calculator.add(text)
+
+                result shouldBe expect
+            }
+        }
     }
 })

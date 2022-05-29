@@ -9,6 +9,7 @@ class StringAddCalculator {
         if (text.toIntOrNull() != null) {
             return text.toInt()
         }
-        return 0
+        val numbers = text.split(",").map { it.toInt() }
+        return numbers.sum()
     }
 }
