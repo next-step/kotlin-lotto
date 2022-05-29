@@ -7,13 +7,21 @@ class LottoStore(
 ) {
     val autoLottoCount = money.getLottoCount() - manualCount
 
-    private val _boughtLottos = MutableList(autoLottoCount) { lottoMaker.makeLottoNumbers() }
+    private val _boughtLottos = mutableListOf<LottoNumbers>()
+
     val boughtMoney
         get() = _boughtLottos.toList()
 
     val totalYieldRatio
         get() = totalMoney.money.toDouble() / money.money
     private var totalMoney = Money()
+
+    init {
+        _boughtLottos.addAll(lottoMaker.manualLotto)
+        repeat(autoLottoCount) {
+            _boughtLottos.add(lottoMaker.makeLottoNumbers())
+        }
+    }
 
     fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
         val lottoResult = LottoPrizeInfo.values().map { LottoResult(it) }
@@ -31,10 +39,6 @@ class LottoStore(
         }
 
         return lottoResult
-    }
-
-    fun buyManualLottos(lottoNumbers: List<LottoNumbers>) {
-        _boughtLottos.addAll(lottoNumbers)
     }
 
     private fun addPrizeMoney(money: Money) {

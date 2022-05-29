@@ -1,7 +1,7 @@
 package lotto
 
+import lotto.domain.KoreanLottoNumberMaker
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
 import lotto.domain.Money
 import lotto.domain.toLottoNumbers
@@ -17,15 +17,11 @@ fun main() {
         manualLottoCount = InputView.getLottoCount()
     } while (manualLottoCount > userMoney.getLottoCount())
 
-    val lottoStore = LottoStore(userMoney, manualLottoCount)
-
+    val lottoMaker = KoreanLottoNumberMaker()
     val manualLottoNumbers = InputView.getLottoNumbers(manualLottoCount)
+    lottoMaker.buyManualLotto(manualLottoNumbers)
 
-    lottoStore.buyManualLottos(
-        manualLottoNumbers.map {
-            LottoNumbers.of(it)
-        }
-    )
+    val lottoStore = LottoStore(userMoney, manualLottoCount, lottoMaker)
 
     PrintView.printLottoCount(manualLottoCount, lottoStore.autoLottoCount)
     PrintView.printBoughtLottoList(lottoStore.boughtMoney)

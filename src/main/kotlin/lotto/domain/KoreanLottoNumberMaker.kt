@@ -2,10 +2,21 @@ package lotto.domain
 
 class KoreanLottoNumberMaker : LottoMaker {
     private val lottoNumberCandidate = List(LOTTO_COUNT) { LottoNumber(it + LOTTO_START_OFFSET) }
+    private val _manualLotto = mutableListOf<LottoNumbers>()
+    override val manualLotto
+        get() = _manualLotto.toList()
 
     override fun makeLottoNumbers(): LottoNumbers {
         val shuffled = lottoNumberCandidate.shuffled()
         return LottoNumbers(shuffled.subList(LOTTO_START, LOTTO_END))
+    }
+
+    override fun buyManualLotto(numbers: List<List<Int>>) {
+        _manualLotto.addAll(
+            numbers.map {
+                LottoNumbers.of(it)
+            }
+        )
     }
 
     companion object {
