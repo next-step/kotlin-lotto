@@ -28,7 +28,7 @@ class OutboundView {
         }
     }
 
-    fun getRewardRate(lottoRewardCalculator: LottoRewardCalculator, purchaseAmount: Int, lottoTicketPrice: Int) {
+    fun printRewardRate(lottoRewardCalculator: LottoRewardCalculator, purchaseAmount: Int, lottoTicketPrice: Int) {
         val profit = String.format("%.02f", lottoRewardCalculator.getRewardRate(purchaseAmount, lottoTicketPrice))
         println("총 수익률은 ${profit}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
