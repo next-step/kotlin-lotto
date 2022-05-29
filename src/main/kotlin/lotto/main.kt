@@ -16,12 +16,14 @@ fun main() {
 
     val manualLottoNumbers = InputView.getLottoNumbers(manualLottoCount)
 
-    lottoStore.buyManualLottos(manualLottoNumbers.map {
-        LottoNumbers.of(it)
-    })
+    lottoStore.buyManualLottos(
+        manualLottoNumbers.map {
+            LottoNumbers.of(it)
+        }
+    )
 
     PrintView.printLottoCount(manualLottoCount, lottoStore.autoLottoCount)
-    PrintView.printBoughtLottoList(lottoStore.boughtLottos)
+    PrintView.printBoughtLottoList(lottoStore.boughtMoney)
 
     val answer = InputView.getLottoNumbers(InputView.LOTTO_ANSWER_INPUT_MESSAGE)
     val bonusBall = InputView.getBonusBall()
