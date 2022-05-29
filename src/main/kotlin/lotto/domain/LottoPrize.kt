@@ -7,6 +7,6 @@ enum class LottoPrize(val matchCount: Int, val prizeMoney: Int) {
     SIX_MATCH(6, 2_000_000_000);
 
     companion object {
-        fun find(matchCount: Int) = values().find { it.matchCount == matchCount }
+        fun find(matchCount: Int): LottoPrize? = values().find { it.matchCount == matchCount }
     }
 }

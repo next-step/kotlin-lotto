@@ -22,8 +22,16 @@ data class LottoNumber(
         return value.hashCode()
     }
 
+    operator fun compareTo(other: LottoNumber): Int = this.value.compareTo(other.value)
+
     companion object {
         const val MIN_LOTTO_NUM = 1
         const val MAX_LOTTO_NUM = 45
+    }
+}
+
+class CompareLottoNumbers {
+    companion object : Comparator<LottoNumber> {
+        override fun compare(a: LottoNumber, b: LottoNumber): Int = a.compareTo(b)
     }
 }

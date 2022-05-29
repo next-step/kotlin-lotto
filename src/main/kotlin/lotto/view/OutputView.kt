@@ -10,23 +10,36 @@ class OutputView {
     }
 
     fun resultLottoTickets(lottoTickets: List<LottoTicket>) {
-        lottoTickets.forEach(::println)
+        val result = buildString {
+            lottoTickets.forEach {
+                appendLine(lottoTicketToString(it))
+            }
+        }
+        print(result)
     }
 
-    fun winningResult(lottoResults: List<LottoResult>) {
+    private fun lottoTicketToString(lottoTicket: LottoTicket): String = buildString {
+        append("[")
+        lottoTicket.toSortedList().forEachIndexed { index, lottoNumber ->
+            append(lottoNumber)
+            if (index != LottoTicket.LOTTO_NUMBER_COUNT - 1) {
+                append(", ")
+            }
+        }
+        append("]")
+    }
+
+    fun winningResult(lottoResults: List<LottoResult>, rateResult: BigDecimal) {
         val result = buildString {
             appendLine("\n당첨 통계")
             appendLine("---------")
             append(winningLottoResults(lottoResults))
+            appendLine("총 수익률은 ${rateResult}입니다.")
         }
-        println(result)
+        print(result)
     }
 
-    fun winningRate(rateResult: BigDecimal) {
-        println("총 수익률은 ${rateResult}입니다.")
-    }
-
-    private fun winningLottoResults(lottoResults: List<LottoResult>) = buildString {
+    private fun winningLottoResults(lottoResults: List<LottoResult>): String = buildString {
         lottoResults.sortedBy { it.lottoPrize.matchCount }
             .forEach {
                 appendLine("${it.lottoPrize.matchCount}개 일치 (${it.lottoPrize.prizeMoney}원) - ${it.lottoCount}개")

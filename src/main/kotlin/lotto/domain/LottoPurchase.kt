@@ -9,7 +9,7 @@ class LottoPurchase {
         return LottoPrice(moneyToInt)
     }
 
-    fun getLotto(price: LottoPrice) = price / 1000
+    fun getLottoCount(price: LottoPrice): Int = price / 1000
 
     fun getLottoTickets(count: Int): List<LottoTicket> {
         val lottoTickets = mutableListOf<LottoTicket>()

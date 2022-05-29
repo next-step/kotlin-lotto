@@ -15,5 +15,5 @@ class LottoPrice(
 
     operator fun div(other: Int): Int = this.price / other
 
-    operator fun compareTo(other: Int) = this.price.compareTo(other)
+    operator fun compareTo(other: Int): Int = this.price.compareTo(other)
 }

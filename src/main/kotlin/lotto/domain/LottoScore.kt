@@ -22,7 +22,7 @@ class LottoScore {
         return BigDecimal(sumOfResult(lottoResults).toDouble()).divide(BigDecimal(realLottoPrice), 2, RoundingMode.HALF_UP)
     }
 
-    private fun sumOfResult(lottoResults: List<LottoResult>) = lottoResults.sumOf {
+    private fun sumOfResult(lottoResults: List<LottoResult>): Int = lottoResults.sumOf {
         it.lottoPrize.prizeMoney * it.lottoCount
     }
 }

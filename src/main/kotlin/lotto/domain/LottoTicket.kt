@@ -14,16 +14,8 @@ class LottoTicket(
             other.value.find { it == lottoNumber }
         }.size
 
-    override fun toString() = buildString {
-        append("[")
-        value.forEachIndexed { index, lottoNumber ->
-            append(lottoNumber)
-            if (index != LOTTO_NUMBER_COUNT - 1) {
-                append(", ")
-            }
-        }
-        append("]")
-    }
+    fun toSortedList(): List<LottoNumber> =
+        value.sortedWith(CompareLottoNumbers)
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
