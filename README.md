@@ -105,6 +105,6 @@
   [x] empty이거나 숫자가 아니면 IllegalArgumentException 발생
   [x] 1 ~ 45 사이의 번호가 아니면 IllegalArgumentException 발생
   [x] 당첨 번호와 중복되면 IllegalArgumentException 발생
-[] 2등을 추가한다.
+[x] 2등을 추가한다.
   [x] 5개가 일치하고, 보너스 볼이 일치하는 경우 2등이다.
-  [] 당첨통계 출력시에도 추가한다.
+  [x] 당첨통계 출력시에도 추가한다.

@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoPrize
 import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
 import java.math.BigDecimal
@@ -40,9 +41,13 @@ class OutputView {
     }
 
     private fun winningLottoResults(lottoResults: List<LottoResult>): String = buildString {
-        lottoResults.sortedBy { it.lottoPrize.matchCount }
+        lottoResults.sortedBy { it.lottoPrize.rank }
             .forEach {
-                appendLine("${it.lottoPrize.matchCount}개 일치 (${it.lottoPrize.prizeMoney}원) - ${it.lottoCount}개")
+                if (it.lottoPrize == LottoPrize.SECOND) {
+                    appendLine("${it.lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${it.lottoPrize.prizeMoney}원) - ${it.lottoCount}개")
+                } else {
+                    appendLine("${it.lottoPrize.matchCount}개 일치 (${it.lottoPrize.prizeMoney}원) - ${it.lottoCount}개")
+                }
             }
     }
 }
