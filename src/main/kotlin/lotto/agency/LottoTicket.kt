@@ -3,7 +3,7 @@ package lotto.agency
 import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.WonLottoNumberCountInconsistencyException
 
-class LottoTicket(numbers: Set<LottoNumber>, bonus: LottoNumber? = null) {
+class LottoTicket(numbers: Set<Int>, bonus: Int? = null) {
 
     var numbers: Set<LottoNumber>
         private set
@@ -12,8 +12,8 @@ class LottoTicket(numbers: Set<LottoNumber>, bonus: LottoNumber? = null) {
 
     init {
         validateLottoCount(numbers)
-        this.numbers = numbers
-        this.bonus = bonus
+        this.numbers = numbers.map { LottoNumber(it) }.toSet()
+        this.bonus = bonus?.let { LottoNumber(it) }
     }
 
     fun countMatchWonLottoTicket(wonLottoTicket: LottoTicket): Int {
@@ -27,12 +27,12 @@ class LottoTicket(numbers: Set<LottoNumber>, bonus: LottoNumber? = null) {
         return numbers.map { it.number }.contains(bonus.number)
     }
 
-    private fun validateLottoCount(numbers: Set<LottoNumber>) {
+    private fun validateLottoCount(numbers: Set<Int>) {
         if (numbers.size != LOTTO_COUNT_POLICY) {
             throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 ${LOTTO_COUNT_POLICY}개를 입력해야합니다.")
         }
 
-        if (numbers.map { it.number }.distinct().size != LOTTO_COUNT_POLICY) {
+        if (numbers.map { it }.distinct().size != LOTTO_COUNT_POLICY) {
             throw AlreadySelectedNumberException("이미 선택된 번호가 있습니다.")
         }
     }

@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.agency.LottoNumber
 import lotto.agency.LottoTicket
 import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.NotNumericException
@@ -19,12 +18,12 @@ class InputView {
 
         val inputText1 = readln().trim().split(",")
         inputText1.map { validateNotString(it) }
-        val wonLottoNumbers = inputText1.map { it.toInt() }.map { LottoNumber(it) }.toSet()
+        val wonLottoNumbers = inputText1.map { it.toInt() }.toSet()
 
         println("보너스 볼을 입력해 주세요.")
         val inputText2 = readln()
         validateNotString(inputText2)
-        val bonus = LottoNumber(inputText2.toInt())
+        val bonus = inputText2.toInt()
 
         validateBonus(wonLottoNumbers, bonus)
         return LottoTicket(wonLottoNumbers, bonus)
@@ -36,7 +35,7 @@ class InputView {
         }
     }
 
-    private fun validateBonus(wonLottoNumber: Set<LottoNumber>, bonus: LottoNumber) {
+    private fun validateBonus(wonLottoNumber: Set<Int>, bonus: Int) {
         if (wonLottoNumber.contains(bonus)) {
             throw AlreadySelectedNumberException("입력한 보너스 번호는 이미 선택된 번호입니다.")
         }
