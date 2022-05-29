@@ -9,7 +9,7 @@ object ResultView {
     fun printList(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
         lottos.forEach {
-            println(it.prettier)
+            println("[${it.numbers.joinToString(", ")}]")
         }
         println()
     }
@@ -27,9 +27,6 @@ object ResultView {
         val state = ProfitState.of(rate)
         println("총 수익률은 ${rate}입니다.(기준이 ${ProfitState.ORIGIN_POINT}이기 때문에 결과적으로 ${state.phaseOfPrint} 의미임)")
     }
-
-    private val Lotto.prettier
-        get() = "[${this.numbers.joinToString(", ")}]"
 
     private fun List<Rank>.count(rank: Rank) = this.count { rank == it }
 
