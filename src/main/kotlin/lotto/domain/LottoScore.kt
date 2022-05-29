@@ -15,7 +15,8 @@ class LottoScore {
     }
 
     fun rateOfResult(lottoPrice: LottoPrice, lottoResults: List<LottoResult>): Double {
-        return sumOfResult(lottoResults).toDouble() / lottoPrice.get()
+        val realLottoPrice = lottoPrice / LottoPurchase.LOTTO_PRICE * LottoPurchase.LOTTO_PRICE
+        return sumOfResult(lottoResults).toDouble() / realLottoPrice
     }
 
     private fun sumOfResult(lottoResults: List<LottoResult>) = lottoResults.sumOf {

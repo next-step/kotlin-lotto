@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.Const
 
-class LottoNumber(
+data class LottoNumber(
     private val value: Int
 ) {
     init {
@@ -17,10 +17,6 @@ class LottoNumber(
             is Int -> value == other
             else -> false
         }
-
-    override fun hashCode(): Int {
-        return value.hashCode()
-    }
 
     companion object {
         const val MIN_LOTTO_NUM = 1

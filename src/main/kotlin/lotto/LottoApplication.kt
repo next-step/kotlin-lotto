@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.LottoPurchase
-import lotto.domain.LottoPurchase.Companion.LOTTO_PRICE
 import lotto.domain.LottoScore
 import lotto.domain.WinningNumber
 import lotto.view.InputView
@@ -18,11 +17,6 @@ fun main() {
     // 구입금액 validation
     val lottoPurchase = LottoPurchase()
     val lottoPrice = lottoPurchase.getMoney(price)
-
-    if (lottoPrice < LOTTO_PRICE) {
-        outputView.cannotPurchaseLotto()
-        return
-    }
 
     // 구입금액에 따른 로또 개수 반환
     val lottoCount = lottoPurchase.getLotto(lottoPrice)
