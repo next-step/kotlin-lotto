@@ -30,7 +30,11 @@ class LottoMachine(
             .reduce { acc, amount -> acc + amount }
             .value
             .div(purchase.amount.value.toDouble())
-        return LottoResult(winningRate, winningResults.groupingBy { it }.eachCount())
+        return LottoResult(
+            winningRate = winningRate,
+            winningResults = winningResults.groupingBy { it }
+                .eachCount()
+        )
     }
 
     companion object {
