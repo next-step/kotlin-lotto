@@ -23,7 +23,7 @@ internal class MoneyViewTest : StringSpec({
         money.amount shouldBe 14000
     }
 
-    "유요한 금액을 입력하지 않으면 다시 입력을 요구한다" {
+    "유효한 금액을 입력하지 않으면 다시 입력을 요구한다" {
         val io = StubIO(listOf("invalid", "2000"))
         val moneyView = MoneyView(io)
 

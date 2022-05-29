@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.extension.autoOf
 
 internal class WinPolicyTest : FreeSpec({
 
@@ -35,10 +36,10 @@ internal class WinPolicyTest : FreeSpec({
         val winPolicy = WinPolicy(4, Money(1000))
         val winNumbers = WinNumbers.of(listOf(3, 4, 5, 6, 7, 8), 9)
 
-        val matched = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+        val matched = Lotto.autoOf(1, 2, 3, 4, 5, 6)
         winPolicy.isMatch(winNumbers, matched) shouldBe true
 
-        val notMatched = Lotto.of(listOf(1, 2, 3, 4, 5, 9))
+        val notMatched = Lotto.autoOf(1, 2, 3, 4, 5, 9)
         winPolicy.isMatch(winNumbers, notMatched) shouldBe false
     }
 
@@ -46,10 +47,10 @@ internal class WinPolicyTest : FreeSpec({
         val winPolicy = WinPolicy(3, Money(1000), true)
         val winNumbers = WinNumbers.of(listOf(3, 4, 5, 6, 7, 8), 9)
 
-        val matched = Lotto.of(listOf(1, 2, 3, 4, 5, 9))
+        val matched = Lotto.autoOf(1, 2, 3, 4, 5, 9)
         winPolicy.isMatch(winNumbers, matched) shouldBe true
 
-        val notMatched = Lotto.of(listOf(1, 2, 3, 4, 5, 10))
+        val notMatched = Lotto.autoOf(1, 2, 3, 4, 5, 10)
         winPolicy.isMatch(winNumbers, notMatched) shouldBe false
     }
 })

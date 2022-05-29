@@ -8,6 +8,5 @@ object Issuer : Issuable {
             .shuffled()
             .take(Lotto.NUMBER_COUNT)
             .sorted()
-            .map(::LottoNumber)
-            .let(::Lotto)
+            .let(Lotto::autoOf)
 }

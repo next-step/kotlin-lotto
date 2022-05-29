@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.extension.autoOf
 
 internal class WinNumberTest : FreeSpec({
 
@@ -29,13 +30,13 @@ internal class WinNumberTest : FreeSpec({
         val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
 
         listOf(
-            Lotto.of(listOf(1, 2, 3, 4, 5, 6)) to 6,
-            Lotto.of(listOf(1, 2, 3, 4, 5, 7)) to 5,
-            Lotto.of(listOf(1, 2, 3, 4, 7, 8)) to 4,
-            Lotto.of(listOf(1, 2, 3, 7, 8, 9)) to 3,
-            Lotto.of(listOf(5, 6, 7, 8, 9, 10)) to 2,
-            Lotto.of(listOf(6, 7, 8, 9, 10, 11)) to 1,
-            Lotto.of(listOf(45, 7, 8, 9, 10, 11)) to 0,
+            Lotto.autoOf(1, 2, 3, 4, 5, 6) to 6,
+            Lotto.autoOf(1, 2, 3, 4, 5, 7) to 5,
+            Lotto.autoOf(1, 2, 3, 4, 7, 8) to 4,
+            Lotto.autoOf(1, 2, 3, 7, 8, 9) to 3,
+            Lotto.autoOf(5, 6, 7, 8, 9, 10) to 2,
+            Lotto.autoOf(6, 7, 8, 9, 10, 11) to 1,
+            Lotto.autoOf(45, 7, 8, 9, 10, 11) to 0,
         ).forEach { (lotto, count) ->
             "$count 개 일치하는 경우" {
                 winNumbers.matchCount(lotto) shouldBe count
@@ -46,7 +47,7 @@ internal class WinNumberTest : FreeSpec({
     "보너스 일치 여부를 반환한다" {
         val winNumbers = WinNumbers.of(listOf(1, 2, 3, 4, 5, 6), 7)
 
-        winNumbers.hasBonus(Lotto.of(listOf(1, 2, 3, 4, 5, 6))) shouldBe false
-        winNumbers.hasBonus(Lotto.of(listOf(1, 2, 3, 4, 5, 7))) shouldBe true
+        winNumbers.hasBonus(Lotto.autoOf(1, 2, 3, 4, 5, 6)) shouldBe false
+        winNumbers.hasBonus(Lotto.autoOf(1, 2, 3, 4, 5, 7)) shouldBe true
     }
 })
