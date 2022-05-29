@@ -44,9 +44,15 @@ class LottoStoreTest {
             )
 
             private var idx = 0
+            override val manualLotto: List<LottoNumbers>
+                get() = emptyList()
 
             override fun makeLottoNumbers(): LottoNumbers {
                 return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
+            }
+
+            override fun buyManualLotto(numbers: List<List<Int>>) {
+
             }
         }
         val manualCount = 0
@@ -82,9 +88,14 @@ class LottoStoreTest {
             )
 
             private var idx = 0
+            override val manualLotto: List<LottoNumbers>
+                get() = emptyList()
 
             override fun makeLottoNumbers(): LottoNumbers {
                 return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
+            }
+
+            override fun buyManualLotto(numbers: List<List<Int>>) {
             }
         }
         val manualCount = 0

@@ -1,6 +1,5 @@
 package lotto.domain
 
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -36,13 +35,6 @@ class InputValidatorTest {
     fun `로또번호가 1~45가 아닐때 에러인지 테스트`(input: String) {
         assertThrows<IllegalArgumentException> {
             InputValidator.checkValidLotto(input)
-        }
-    }
-
-    @Test
-    fun `max값 넘게 입력했을때 에러발생하는지 테스트`() {
-        assertThrows<IllegalArgumentException> {
-            InputValidator.checkNaturalNumber("3", 1)
         }
     }
 }
