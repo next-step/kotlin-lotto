@@ -7,13 +7,19 @@ object LottoStore {
     /**
      * 로도 티켓 구매하기
      *
-     * @return 구매한 로또 티켓 목록
+     * @param money 구매 금액
+     * @param manualTickets 수동 구입 로또 티켓
+     * @return [LottoTickets] 구매한 로또 티켓 목록
      */
-    fun buy(money: PurchaseMoney): LottoTickets {
+    fun buy(money: PurchaseMoney, manualTickets: List<LottoTicket> = emptyList()): LottoTickets {
         require(money >= PRICE_OF_ONE_LOTTO_TICKET)
         require(money <= PRICE_OF_ONE_LOTTO_TICKET * MAXIMUM_SIZE_OF_TICKET)
 
-        return LottoTicketMachine.generate(getTicketCountByMoney(money.amount))
+        val countOfAutoLotto = getTicketCountByMoney(money.amount) - manualTickets.size
+        require(countOfAutoLotto >= 0)
+
+        val autoTickets = LottoTicketMachine.generate(countOfAutoLotto)
+        return LottoTickets(manualTickets + autoTickets)
     }
 
     private fun getTicketCountByMoney(amount: Int): Int = amount / PRICE_OF_ONE_LOTTO_TICKET
