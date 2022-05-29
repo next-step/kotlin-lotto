@@ -9,10 +9,17 @@ class StringAddCalculator {
         if (text.toIntOrNull() != null) {
             return text.toInt()
         }
-        val numbers = text.split(DELIMITER_REGEX).map { it.toInt() }
-        return numbers.sum()
+
+        val customMatchResult = CUSTOM_DELIMITER_REGEX.find(text)
+        if (customMatchResult !== null) {
+            val (delimiter, matchText) = customMatchResult.destructured
+            return matchText.split(delimiter).sumOf { it.toInt() }
+        }
+
+        return text.split(DELIMITER_REGEX).sumOf { it.toInt() }
     }
     companion object {
         private val DELIMITER_REGEX = ",|:".toRegex()
+        private val CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)".toRegex()
     }
 }
