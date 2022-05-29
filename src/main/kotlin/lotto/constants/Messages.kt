@@ -9,6 +9,7 @@ object Messages {
     const val WRITE_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요."
     const val LOTTO_RESULT = "당첨 통계\n----------"
     const val CORRECT_OUTPUT = "%s개 일치 (%s원)- %s개"
+    const val CORRECT_OUTPUT_FOR_SECOND = "5개 일치, 보너스볼 일치(30000000원)- %s개"
     const val PRINT_YIELD = "총 수익률은 %.2f입니다."
     const val WRITE_BONUS_NUMBER = "보너스 볼을 입력해 주세요."
 }

@@ -20,7 +20,8 @@ class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int)
 
     private fun findCorrectLotto(ticket: LottoTicket): Prize {
         val matchCounts = ticket.numbers.intersect(winningTicket.numbers.toSet()).size
-        return Prize.of(matchCounts)
+        val isCorrectBonus = ticket.numbers.contains(bonusNumber)
+        return Prize.of(matchCounts, isCorrectBonus)
     }
 
     private fun convertPrizeToLottoResult(prizes: List<Prize>): List<LottoResult> {

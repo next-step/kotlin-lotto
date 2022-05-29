@@ -23,15 +23,29 @@ object OutputView {
         println(Messages.LOTTO_RESULT)
 
         enumValues<Prize>().map { prize ->
-            if (prize == Prize.LOSER_PLACE) return@map
-            println(
-                Messages.CORRECT_OUTPUT.format(
-                    prize.matchCount,
-                    prize.reward,
-                    lottoResults.find { it.prize == prize }?.count ?: NOT_HAVE_TICKET_COUNT
-                )
-            )
+            val count = lottoResults.find { it.prize == prize }?.count ?: NOT_HAVE_TICKET_COUNT
+            when (prize) {
+                Prize.LOSER -> return@map
+                Prize.SECOND -> printSecondPrize(count)
+                else -> printPrize(prize, count)
+            }
         }
+    }
+
+    private fun printSecondPrize(count: Int) {
+        println(
+            Messages.CORRECT_OUTPUT_FOR_SECOND.format(count)
+        )
+    }
+
+    private fun printPrize(prize: Prize, count: Int) {
+        println(
+            Messages.CORRECT_OUTPUT.format(
+                prize.matchCount,
+                prize.reward,
+                count
+            )
+        )
     }
 
     fun printYield(yields: Double) {

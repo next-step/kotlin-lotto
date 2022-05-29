@@ -6,15 +6,19 @@ package lotto.model
  */
 
 enum class Prize(val matchCount: Int, val reward: Int) {
-    LOSER_PLACE(0, 0),
-    FOURTH_PLACE(3, 5000),
-    THIRD_PLACE(4, 500000),
-    SECOND_PLACE(5, 1500000),
-    FIRST_PLACE(6, 2000000000)
+    LOSER(0, 0),
+    FIFTH(3, 5000),
+    FOURTH(4, 500000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
+    FIRST(6, 2000000000)
     ;
 
     companion object {
-        fun of(matchCount: Int): Prize =
-            values().find { it.matchCount == matchCount } ?: LOSER_PLACE
+        fun of(matchCount: Int, isCorrectBonus: Boolean): Prize {
+            if (isCorrectBonus && matchCount == SECOND.matchCount)
+                return SECOND
+            return values().find { it.matchCount == matchCount } ?: LOSER
+        }
     }
 }
