@@ -1,9 +1,9 @@
 package lotto
 
-class Lotto(private val _lotto: List<LottoNumber>) {
+class Lotto(private val _lotto: Set<LottoNumber>) {
 
     init {
-        validate(_lotto.toSet())
+        validate(_lotto)
     }
 
     val numbers: Set<LottoNumber>

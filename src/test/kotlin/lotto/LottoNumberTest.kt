@@ -15,7 +15,7 @@ internal class LottoNumberTest {
     }
 
     @Test
-    fun `유효성 검증`() {
+    fun `1에서 45 사이의 숫자가 아니면 예외처리르 한다`() {
         assertThatIllegalArgumentException().isThrownBy { LottoNumber(0) }
     }
 }

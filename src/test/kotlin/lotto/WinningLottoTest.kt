@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 internal class WinningLottoTest {
     @Test
-    fun `객체 생성`() {
+    fun `1에서 45 사이의 숫자가 있는 로또 하나를 생성`() {
         val lottoNumbers = setOf(
             LottoNumber(2),
             LottoNumber(3),
@@ -32,7 +32,7 @@ internal class WinningLottoTest {
     }
 
     @Test
-    fun `유효성 검사`() {
+    fun `6자리가 아닐 시 예외처리`() {
         val lottoNumbers = setOf(
             LottoNumber(2),
             LottoNumber(3)
@@ -43,7 +43,7 @@ internal class WinningLottoTest {
     }
 
     @Test
-    fun `match `() {
+    fun `로또 번호와 당첨 번호의 갯수 확인`() {
         val lottoNumbers = setOf(
             LottoNumber(2),
             LottoNumber(3),

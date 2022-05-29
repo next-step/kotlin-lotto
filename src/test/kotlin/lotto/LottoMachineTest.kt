@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 internal class LottoMachineTest {
 
     @Test
-    fun `로또생성테스트`() {
+    fun `1에서 45 숫자를 갖는 로또 객체 생성`() {
         val lottoMaker = object : LottoMaker {
             override fun make(): Lotto {
-                val lottoNumbers = listOf(
+                val lottoNumbers = setOf(
                     LottoNumber(2),
                     LottoNumber(3),
                     LottoNumber(1),

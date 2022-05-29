@@ -14,13 +14,13 @@ internal class MoneyTest {
     }
 
     @Test
-    fun `Money 객체 유효성 검사`() {
+    fun `Money 의 값이 음수인 경우 예외처리`() {
         assertThatIllegalArgumentException()
             .isThrownBy { Money(BigDecimal(-1)) }
     }
 
     @Test
-    fun `나누기`() {
+    fun `Money 값 나누기`() {
         val money = Money(BigDecimal(1000))
         val divideMoney = money.divide(1000)
         assertThat(divideMoney.get).isEqualTo(1)

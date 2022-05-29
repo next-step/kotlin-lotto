@@ -26,7 +26,9 @@ class LottoRanks {
     }
 
     fun getWinPrice(): BigDecimal {
-        return lottoRanks.entries.filter { it.value > ZERO }.sumOf { BigDecimal(it.key.price * it.value) }
+        return lottoRanks.entries
+            .filter { it.value > ZERO }
+            .sumOf { BigDecimal(it.key.price * it.value) }
     }
 
     companion object {

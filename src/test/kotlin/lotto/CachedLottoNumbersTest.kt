@@ -15,7 +15,7 @@ internal class CachedLottoNumbersTest {
     }
 
     @Test
-    fun `유효성검사`() {
+    fun `1에서 45 사이의 숫자가 아니면 예외처리르 한다`() {
         assertThatIllegalArgumentException()
             .isThrownBy { CachedLottoNumbers.getLottoNumber(0) }
     }

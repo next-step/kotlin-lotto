@@ -9,7 +9,7 @@ class AutoLottoMaker : LottoMaker {
     }
 
     override fun make(): Lotto {
-        return Lotto(get())
+        return Lotto(get().toSet())
     }
 
     private fun get(): List<LottoNumber> {
@@ -23,6 +23,5 @@ class AutoLottoMaker : LottoMaker {
         private const val LOTTO_NUMBER_START = 1
         private const val LOTTO_NUMBER_END = 45
         private const val LOTTO_SIZE = 6
-
     }
 }

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test
 internal class LottosTest {
 
     @Test
-    fun `로또객체생성`() {
-        val lottoNumbers = listOf(
+    fun `1에서 45 사이의 숫자가의 로또 객체들을 생성`() {
+        val lottoNumbers = setOf(
             LottoNumber(2),
             LottoNumber(3),
             LottoNumber(1),
