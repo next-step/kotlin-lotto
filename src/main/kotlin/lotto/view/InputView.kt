@@ -78,13 +78,16 @@ class InputView(private val reader: () -> String?, private val writer: (String) 
         writeLine("\n지난 주 당첨 번호를 입력해 주세요.")
     }
 
-    fun readBonusLottoNumber(): Int {
+    fun readBonusLottoNumber(): LottoNumber {
         printInputBonusLottoNumber()
 
         val value = reader()
         requireNotNull(value)
         require(value.isNotBlank())
-        return runCatching { value.toInt() }.getOrIllegalArgumentException()
+        return kotlin
+            .runCatching { value.toInt() }
+            .getOrIllegalArgumentException()
+            .toLottoNumber()
     }
 
     private fun printInputBonusLottoNumber() {
