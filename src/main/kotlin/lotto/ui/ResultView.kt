@@ -16,7 +16,8 @@ object ResultView {
     }
 
     fun printLottoCount(purchase: Purchase) {
-        println("${purchase.lottoPurchaseCount}개를 구매했습니다.")
+        println("수동으로 ${purchase.purchaseCounts.manualLottoCount.count}장, " +
+            "자동으로 ${purchase.purchaseCounts.autoLottoCount.count}개를 구매했습니다.")
     }
 
     fun printWinningResult(lottoResult: LottoResult) {

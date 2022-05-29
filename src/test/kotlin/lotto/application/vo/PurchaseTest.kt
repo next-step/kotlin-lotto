@@ -6,10 +6,14 @@ import io.kotest.matchers.shouldBe
 
 class PurchaseTest : StringSpec({
     "구입 객체를 생성할 수 있다" {
-        shouldNotThrow<Throwable> { Purchase(Amount(1_000)) }
+        shouldNotThrow<Throwable> { Purchase(10_000, 3) }
     }
 
-    "로또 구매 갯수를 조회할 수 있다" {
-        Purchase(Amount(1_000)).lottoPurchaseCount shouldBe 1
+    "수동 로또 구매 갯수를 조회할 수 있다" {
+        Purchase(10_000, 3).purchaseCounts.manualLottoCount shouldBe PurchaseCount(3)
+    }
+
+    "자동 로또 구매 갯수를 조회할 수 있다" {
+        Purchase(10_000, 3).purchaseCounts.autoLottoCount shouldBe PurchaseCount(7)
     }
 })
