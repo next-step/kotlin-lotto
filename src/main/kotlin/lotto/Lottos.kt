@@ -1,7 +1,7 @@
 package lotto
 
-class Lottos(private val _lottos: List<Lotto>) {
-
+class Lottos(lottos: List<Lotto>) {
+    private val _lottos: MutableList<Lotto> = lottos.toMutableList()
     val lottos: List<Lotto>
         get() = _lottos.toList()
 }

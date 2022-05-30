@@ -22,7 +22,7 @@ class LottoRanks {
     }
 
     fun getRanks(): Map<LottoRank, Int> {
-        return lottoRanks.filterNot { it.key == LottoRank.LOSE }
+        return lottoRanks.toMap()
     }
 
     fun getWinPrice(): BigDecimal {

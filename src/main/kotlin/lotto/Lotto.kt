@@ -1,12 +1,13 @@
 package lotto
 
-class Lotto(private val _lotto: Set<LottoNumber>) {
+class Lotto(lotto: Set<LottoNumber> = emptySet()) {
 
     init {
-        validate(_lotto)
+        validate(lotto)
     }
 
-    val numbers: Set<LottoNumber>
+    private val _lotto: MutableSet<LottoNumber> = lotto.toMutableSet()
+    val lotto: Set<LottoNumber>
         get() = _lotto.toSet()
 
     private fun validate(lotto: Set<LottoNumber>) {

@@ -2,7 +2,6 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 import java.math.BigDecimal
 
 internal class LottoRanksTest {
@@ -18,11 +17,16 @@ internal class LottoRanksTest {
     }
 
     @Test
-    fun `통계 확인하기 LOSE 상태는 제외`() {
-        assertAll("lotto ranks 값 확인", {
-            assertThat(lottoRanks.getRanks().keys.size).isEqualTo(4)
-            assertThat(lottoRanks.getRanks().keys).doesNotContain(LottoRank.LOSE)
-        })
+    fun `당첨에 대한 랭크가 존재하는지 확인`() {
+        assertThat(lottoRanks.getRanks().keys).containsAll(
+            listOf(
+                LottoRank.LOSE,
+                LottoRank.THREE_MATCH,
+                LottoRank.FOUR_MATCH,
+                LottoRank.FIVE_MATCH,
+                LottoRank.SIX_MATCH
+            )
+        )
     }
 
     @Test
