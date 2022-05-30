@@ -4,6 +4,6 @@ object StringCalculator {
 
     fun calculate(inputs: String?): Int {
         if (inputs.isNullOrEmpty()) return 0
-        return Numbers(Parser.parse(inputs)).sum
+        return Numbers.fromStrings(Parser.parse(inputs)).sum
     }
 }

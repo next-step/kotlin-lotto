@@ -16,7 +16,7 @@ class NumbersTest {
     @Test
     fun `숫자가 아닌 값이 들어오면 RuntimeException 가 발생한다`() {
         assertThrows<RuntimeException> {
-            Numbers(listOf("a", "b", "c"))
+            Numbers.fromStrings(listOf("a", "b", "c"))
         }
     }
 

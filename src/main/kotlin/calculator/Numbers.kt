@@ -1,8 +1,7 @@
 package calculator
 
-fun Numbers(strings: List<String>) = Numbers(strings.map(String::toInt))
-
 class Numbers(private val numbers: List<Int>) {
+
     val sum by lazy { numbers.sum() }
 
     init {
@@ -11,5 +10,9 @@ class Numbers(private val numbers: List<Int>) {
 
     private fun checkIsNotNegative(numbers: List<Int>) {
         require(numbers.none { it < 0 }) { "음수값은 허용하지 않습니다." }
+    }
+
+    companion object {
+        fun fromStrings(strings: List<String>) = Numbers(strings.map(String::toInt))
     }
 }
