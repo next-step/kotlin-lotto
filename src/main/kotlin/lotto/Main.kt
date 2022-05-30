@@ -5,7 +5,7 @@ import lotto.view.LottoResultView
 
 fun main() {
     val purchasePrice = LottoInputView.purchaseInputView()
-    val myLottos = MyLottoTickets(LottoShop().buyLotto(purchasePrice))
+    val myLottos = MyLottoTickets(LottoShop(purchasePrice).buyLotto())
 
     LottoResultView.printPurchasedLottoInfo(myLottos.lottoTickets)
 

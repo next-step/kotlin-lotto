@@ -1,13 +1,15 @@
 package lotto
 
-import java.lang.RuntimeException
+class LottoShop(
+    private val money: Int
+) {
 
-class LottoShop {
-
-    fun buyLotto(money: Int): List<LottoTicket> {
+    init {
         moneyValidate(money)
-        val numberOfBuy = money / LottoPolicy.LOTTO_PRICE
+    }
 
+    fun buyLotto(): List<LottoTicket> {
+        val numberOfBuy = money / LottoPolicy.LOTTO_PRICE
         return List(numberOfBuy) { LottoCreator.autoCreate() }
     }
 
