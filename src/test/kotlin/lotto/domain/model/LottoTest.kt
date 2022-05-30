@@ -8,12 +8,12 @@ class LottoTest {
     @Test
     fun `Lotto는 발급받은 로또의 번호들을 보관한다`() {
         val lottoNumbers = setOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6),
+            LottoNumber[1],
+            LottoNumber[2],
+            LottoNumber[3],
+            LottoNumber[4],
+            LottoNumber[5],
+            LottoNumber[6],
         )
         val lotto = Lotto(lottoNumbers)
 
@@ -39,12 +39,12 @@ class LottoTest {
     fun `default를 통해 테스트 등에서 쓰일 기본 Lotto 객체를 얻을 수 있다`() {
         val expected = Lotto(
             setOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6)
+                LottoNumber[1],
+                LottoNumber[2],
+                LottoNumber[3],
+                LottoNumber[4],
+                LottoNumber[5],
+                LottoNumber[6]
             )
         )
 

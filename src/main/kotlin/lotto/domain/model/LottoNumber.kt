@@ -1,7 +1,7 @@
 package lotto.domain.model
 
 @JvmInline
-value class LottoNumber(val value: Int) {
+value class LottoNumber private constructor(val value: Int) {
     init {
         require(value in LOTTO_NUMBER_RANGE) {
             "$MESSAGE_INVALID_NUMBER$value"

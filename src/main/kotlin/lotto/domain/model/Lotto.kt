@@ -21,18 +21,22 @@ value class Lotto(val numbers: Set<LottoNumber>) {
         private const val MESSAGE_INVALID_LOTTO_NUMBERS_SIZE = "로또 번호는 6개의 숫자로 이루어져야 합니다.\n입력된 숫자 수 : "
 
         fun from(numbers: List<Int>): Lotto {
-            return Lotto(numbers.map { LottoNumber(it) }.toSet())
+            return Lotto(
+                numbers.map { number ->
+                    LottoNumber[number]
+                }.toSet()
+            )
         }
 
         fun default(): Lotto {
             return Lotto(
                 setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6)
+                    LottoNumber[1],
+                    LottoNumber[2],
+                    LottoNumber[3],
+                    LottoNumber[4],
+                    LottoNumber[5],
+                    LottoNumber[6]
                 )
             )
         }

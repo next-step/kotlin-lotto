@@ -10,7 +10,7 @@ object WinningNumbersConverter : InputConverter<WinningNumbers> {
         val numbers = input
             .split(DELIMITER)
             .map { stringNumber ->
-                LottoNumber(stringNumber.toInt())
+                LottoNumber[stringNumber.toInt()]
             }.toSet()
 
         return WinningNumbers(numbers)

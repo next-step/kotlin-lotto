@@ -8,12 +8,12 @@ class WinningNumbersTest {
     @Test
     fun `WinningNumbers는 당첨 번호 목록을 보관한다`() {
         val numbers = setOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6),
+            LottoNumber[1],
+            LottoNumber[2],
+            LottoNumber[3],
+            LottoNumber[4],
+            LottoNumber[5],
+            LottoNumber[6],
         )
         val winningNumbers = WinningNumbers(numbers)
 
@@ -31,12 +31,12 @@ class WinningNumbersTest {
     fun `default를 통해 테스트 등에서 쓰일 기본 WinningNumbers 객체를 얻을 수 있다`() {
         val expected = WinningNumbers(
             setOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6)
+                LottoNumber[1],
+                LottoNumber[2],
+                LottoNumber[3],
+                LottoNumber[4],
+                LottoNumber[5],
+                LottoNumber[6]
             )
         )
 
