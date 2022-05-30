@@ -2,7 +2,7 @@ package lotto.domain
 
 data class Lotteries(val elements: List<Lotto>) {
 
-    constructor(numberOfTickets: Int, generatingFunction: () -> List<Int>) : this(
+    constructor(numberOfTickets: Int, generatingFunction: () -> Set<Int>) : this(
         List(numberOfTickets) { Lotto(generatingFunction()) }
     )
 

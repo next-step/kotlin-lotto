@@ -19,7 +19,7 @@ class LotteryAnnouncerTest {
             )
         )
 
-        val winner = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winner = Lotto(setOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = 7
 
         val result = LotteryAnnouncer.announce(winner, bonusNumber, lotteries)
@@ -38,7 +38,7 @@ class LotteryAnnouncerTest {
             )
         )
 
-        val winner = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winner = Lotto(setOf(1, 2, 3, 4, 5, 6))
 
         val bonusNumber = 7
 
@@ -58,7 +58,7 @@ class LotteryAnnouncerTest {
             )
         )
 
-        val winner = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winner = Lotto(setOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = 8
         val expected = 10000f
 
