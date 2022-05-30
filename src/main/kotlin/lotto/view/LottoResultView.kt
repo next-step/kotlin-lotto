@@ -6,9 +6,12 @@ import lotto.MyLottoResult
 
 object LottoResultView {
 
-    fun printPurchasedLottoInfo(lottos: List<LottoTicket>) {
-        println("${lottos.size}개를 구매했습니다.")
-        for (lotto in lottos) {
+    fun printPurchasedLottoInfo(manualLottery: List<LottoTicket>, autoLottery: List<LottoTicket>) {
+        println("수동으로 ${manualLottery.size}장, 자동으로 ${autoLottery.size}개를 구매했습니다.")
+        for (lotto in manualLottery) {
+            println(lotto.numbers)
+        }
+        for (lotto in autoLottery) {
             println(lotto.numbers)
         }
     }

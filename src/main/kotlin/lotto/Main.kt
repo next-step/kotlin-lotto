@@ -11,14 +11,14 @@ fun main() {
     val manualPurchase = LottoShop(purchasePrice).manualPurchase(manualNumbers)
     val autoPurchase = LottoShop(purchasePrice).autoPurchase()
 
-    val myLottos = MyLottoTickets(manualPurchase + autoPurchase)
+    val myLottery = MyLottoTickets(manualPurchase, autoPurchase)
 
-    LottoResultView.printPurchasedLottoInfo(myLottos.lottoTickets)
+    LottoResultView.printPurchasedLottoInfo(myLottery.manualLottery, myLottery.autoLottery)
 
     val lastLottoWinnerNumbers = LottoInputView.lastWinnerLotteryInputView()
     val bonusNumber = LottoInputView.bonusNumberInputView()
     val lottoJudgment = LottoJudgment(LottoTicket(lastLottoWinnerNumbers), bonusNumber)
-    val myLottoResult = myLottos.getMyLottoResult(lottoJudgment)
+    val myLottoResult = myLottery.getMyLottoResult(lottoJudgment)
     val profit = myLottoResult.getProfit()
 
     LottoResultView.printLottoResult(myLottoResult)
