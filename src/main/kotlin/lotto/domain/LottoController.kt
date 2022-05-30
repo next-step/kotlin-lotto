@@ -1,7 +1,5 @@
-package lotto
+package lotto.domain
 
-import lotto.domain.NumberGenerator
-import lotto.domain.TicketMachine
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -20,9 +18,4 @@ class LottoController(
         outputView.printStat(winningInfo)
         outputView.printRevenue(inputView.amount(), winningInfo.entries.sumOf { it.key.money * it.value })
     }
-}
-
-fun main() {
-    val lottoController = LottoController(InputView(), OutputView())
-    lottoController.run()
 }
