@@ -1,17 +1,17 @@
 package lotto.domain
 
 class LottoTicket(private val seeds: List<Int>) {
+    val numbers: List<Int>
+
     init {
         validate(seeds)
+        this.numbers = seeds.subList(MIN_LOTTO_INDEX, MAX_LOTTO_INDEX).sorted()
     }
-
-    val numbers: List<Int>
-        get() = seeds.subList(MIN_LOTTO_INDEX, MAX_LOTTO_INDEX).sorted()
 
     private fun validate(seeds: List<Int>) {
-        require(seeds.size >= LOTTO_NUMBER_SIZE)
-        seeds.forEach { require(it in LOTTO_NUMBER_RANGE) }
-    }
+        require(seeds.size >= LOTTO_NUMBER_SIZE) { "로또 번호는 최소 6자 입니다."}
+        seeds.forEach { require(it in LOTTO_NUMBER_RANGE) { "로또 번호가 유효 범위내에 있지 않습니다."} }
+   }
 
     companion object {
         private val LOTTO_NUMBER_RANGE = 1..45
