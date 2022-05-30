@@ -30,25 +30,25 @@ internal class WinningLottoTest {
 
     @Test
     fun `일치하는 숫자가 3개인 로또가 한개인 경우 결과값 확인`() {
-        assertThat(WinningPrizes(listOf(LottoResult.Prize.THIRD)).prizeResult).isEqualTo(
+        assertThat(WinningPrizes(listOf(LottoPrize.THIRD)).prizeResult).isEqualTo(
             listOf(
-                Pair(LottoResult.Prize.THIRD, 1),
-                Pair(LottoResult.Prize.FORTH, 0),
-                Pair(LottoResult.Prize.FIFTH, 0),
-                Pair(LottoResult.Prize.FIFTH_BONUS, 0),
-                Pair(LottoResult.Prize.SIXTH, 0),
+                Pair(LottoPrize.THIRD, 1),
+                Pair(LottoPrize.FORTH, 0),
+                Pair(LottoPrize.FIFTH, 0),
+                Pair(LottoPrize.FIFTH_BONUS, 0),
+                Pair(LottoPrize.SIXTH, 0),
             )
         )
     }
     @Test
     fun `일치하는 숫자가 6개인 로또가 한개인 경우 통계데이터 확인`() {
-        assertThat(WinningPrizes(listOf(LottoResult.Prize.SIXTH)).prizeResult).isEqualTo(
+        assertThat(WinningPrizes(listOf(LottoPrize.SIXTH)).prizeResult).isEqualTo(
             listOf(
-                Pair(LottoResult.Prize.THIRD, 0),
-                Pair(LottoResult.Prize.FORTH, 0),
-                Pair(LottoResult.Prize.FIFTH, 0),
-                Pair(LottoResult.Prize.FIFTH_BONUS, 0),
-                Pair(LottoResult.Prize.SIXTH, 1),
+                Pair(LottoPrize.THIRD, 0),
+                Pair(LottoPrize.FORTH, 0),
+                Pair(LottoPrize.FIFTH, 0),
+                Pair(LottoPrize.FIFTH_BONUS, 0),
+                Pair(LottoPrize.SIXTH, 1),
             )
         )
     }

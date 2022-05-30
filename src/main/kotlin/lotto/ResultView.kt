@@ -9,12 +9,12 @@ object ResultView {
         }
     }
 
-    fun printResult(prizeResult: List<Pair<LottoResult.Prize, Int>>, earnings: Double) {
+    fun printResult(prizeResult: List<Pair<LottoPrize, Int>>, earnings: Double) {
         println("당첨 통계")
         prizeResult.forEach {
             val (prize, count) = it
 
-            val bonusText = if (prize == LottoResult.Prize.FIFTH_BONUS) {
+            val bonusText = if (prize == LottoPrize.FIFTH_BONUS) {
                 ", 보너스 볼 일치"
             } else {
                 ""
