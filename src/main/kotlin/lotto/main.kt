@@ -11,8 +11,8 @@ fun main() {
         val lottos = LottoMarket.buy(price)
 
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumbers = LottoCommittee.createWinningNumbers(readln())
-        val statistics = LottoCommittee.calculateStatistics(lottos, winningNumbers)
+        val winningTicket = LottoCommittee.createWinningTicket(readln())
+        val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
 
         Screen.display(
             statistics,

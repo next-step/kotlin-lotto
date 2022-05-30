@@ -5,9 +5,7 @@ enum class Priority(val matchCount: Int, val price: Int) {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
-    FIFTH(2, 0),
-    SIXTH(1, 0),
-    SEVENTH(0, 0);
+    MISS(0, 0);
 
     companion object {
         fun getPrice(matchCount: Int): Int =
