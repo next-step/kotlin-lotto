@@ -6,7 +6,7 @@ import lotto.domain.numbers.CustomNumbersGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class LottoPrizeCalculatorTest {
+class LottoPrizeResultTest {
     @Test
     fun `3, 4, 5, 6개 일치하는 로또 갯수를 계산할 수 있다`() {
         val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
@@ -20,7 +20,7 @@ class LottoPrizeCalculatorTest {
         val fiveMatchingLotto2 = Lotto(numbersGenerator = CustomNumbersGenerator(listOf(1, 2, 3, 4, 5, 44)))
         val sixMatchingLotto2 = Lotto(numbersGenerator = CustomNumbersGenerator(listOf(6, 5, 4, 3, 2, 1)))
 
-        val prizeCalculator = LottoPrizeCalculator(
+        val prizeResult = LottoPrizeResult(
             winningLotto,
             listOf(
                 noMatchingLotto,
@@ -45,9 +45,9 @@ class LottoPrizeCalculatorTest {
             LottoPrize.FIRST
         )
 
-        assertThat(prizeCalculator.prizes).isEqualTo(expectedPrizes)
-        assertThat(prizeCalculator.numberOf(LottoPrize.FIRST)).isEqualTo(1)
-        assertThat(prizeCalculator.numberOf(LottoPrize.SECOND)).isEqualTo(2)
+        assertThat(prizeResult.prizes).isEqualTo(expectedPrizes)
+        assertThat(prizeResult.numberOf(LottoPrize.FIRST)).isEqualTo(1)
+        assertThat(prizeResult.numberOf(LottoPrize.SECOND)).isEqualTo(2)
     }
 
     @Test
@@ -63,7 +63,7 @@ class LottoPrizeCalculatorTest {
         val fiveMatchingLotto2 = Lotto(numbersGenerator = CustomNumbersGenerator(listOf(1, 2, 3, 4, 5, 44)))
         val sixMatchingLotto2 = Lotto(numbersGenerator = CustomNumbersGenerator(listOf(6, 5, 4, 3, 2, 1)))
 
-        val prizeCalculator = LottoPrizeCalculator(
+        val prizeResult = LottoPrizeResult(
             winningLotto,
             listOf(
                 noMatchingLotto,
@@ -90,6 +90,6 @@ class LottoPrizeCalculatorTest {
 
         val expectedTotalPrize = expectedPrizes.sumOf { it.prizeAmount }
 
-        assertThat(prizeCalculator.totalPrizeAmount).isEqualTo(expectedTotalPrize)
+        assertThat(prizeResult.totalPrizeAmount).isEqualTo(expectedTotalPrize)
     }
 }

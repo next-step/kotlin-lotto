@@ -3,7 +3,7 @@ package lotto.domain.prize
 import lotto.domain.Lotto
 import lotto.domain.WinningLotto
 
-class LottoPrizeCalculator(winningLotto: WinningLotto, lottoBought: List<Lotto>) {
+class LottoPrizeResult(winningLotto: WinningLotto, lottoBought: List<Lotto>) {
     val prizes: List<LottoPrize> = lottoBought
         .map { winningLotto.getNumberOfMatchingNumbers(it) }
         .map { LottoPrize.of(it) }
