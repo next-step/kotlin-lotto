@@ -15,7 +15,7 @@ object LottoStore {
         OutputView.printLottoNumbers(provider.lottos)
 
         if (provider.numberOfLottos > 0) {
-            val winningLotto = WinningLotto(InputView.readWinningNumbers())
+            val winningLotto = WinningLotto(InputView.readWinningNumbers(), InputView.readBonusBallNumber())
 
             val prizeResult = LottoPrizeResult(winningLotto, provider.lottos)
 

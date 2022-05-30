@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class LottoPrizeResultTest {
     @Test
     fun `3, 4, 5, 6개 일치하는 로또 갯수를 계산할 수 있다`() {
-        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
 
         val noMatchingLotto = Lotto(listOf(45, 44, 43, 42, 41, 40))
         val oneMatchingLotto = Lotto(listOf(45, 44, 43, 42, 41, 1))
@@ -51,7 +51,7 @@ class LottoPrizeResultTest {
 
     @Test
     fun `당첨 번호와 일치하는 로또의 총 수익을 계산할 수 있다`() {
-        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
 
         val noMatchingLotto = Lotto(listOf(45, 44, 43, 42, 41, 40))
         val oneMatchingLotto = Lotto(listOf(45, 44, 43, 42, 41, 1))
