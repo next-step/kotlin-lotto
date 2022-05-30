@@ -23,6 +23,7 @@ internal class StringAddCalculatorTest {
         @JvmStatic
         fun expressionArguments(): Stream<Arguments> {
             return Stream.of(
+                Arguments.of(Expression(listOf(0)), 0),
                 Arguments.of(Expression(listOf(1)), 1),
                 Arguments.of(Expression(listOf(1, 2)), 3),
                 Arguments.of(Expression(listOf(1, 2, 3)), 6),
