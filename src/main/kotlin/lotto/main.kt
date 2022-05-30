@@ -17,7 +17,8 @@ fun main() {
     val lottoPrizeManager = LottoPrizeManager()
     lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(3, Money(5000)))
     lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(4, Money(50000)))
-    lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(5, Money(1500000)))
+    lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(5, Money(1500000), false))
+    lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(5, Money(30000000), true))
     lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(6, Money(2000000000)))
 
     println(BuyLottoInputView.showUserMoneyInputGuide())
