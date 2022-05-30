@@ -20,4 +20,5 @@ object ErrorMessages {
     const val WINNING_NUMBER_IS_OVER_BASE = "로또 번호 갯수가 6개를 초과합니다."
     const val INPUT_IS_NULL_OR_BLANK = "입력은 빈칸이거나 NULL일 수 없습니다."
     const val INPUT_IS_NOT_NUMBER = "숫자가 아닙니다."
+    const val BONUS_IS_DUPLICATE_WITH_WINNINGS = "보너스 숫자가 당첨숫자와 중복됩니다."
 }

@@ -12,6 +12,7 @@ import lotto.model.Prize
 class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int) {
     init {
         require(bonusNumber in LottoTicketFactory.LOTTO_NUMBER_RANGE) { ErrorMessages.NUMBER_IS_OVER_OR_UNDER_BASE }
+        require(!winningTicket.numbers.contains(bonusNumber)) { ErrorMessages.BONUS_IS_DUPLICATE_WITH_WINNINGS }
     }
 
     fun convertTicketsToLottoResults(tickets: List<LottoTicket>): List<LottoResult> {

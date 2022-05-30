@@ -67,4 +67,12 @@ class LottoCompanyTest {
         val tickets = listOf(LottoTicket.of(listOf(1, 2, 3, 4, 5, 6)), LottoTicket.of(listOf(1, 2, 3, 4, 5, 7)))
         assertThat(company.convertTicketsToLottoResults(tickets).size).isEqualTo(2)
     }
+
+    @ParameterizedTest
+    @CsvSource("'1, 2, 3, 4, 5, 6', 6")
+    internal fun `보너스 번호와 당첨번호는 중복될 수 없다`(winningNumbers: String, bonusNumber: Int) {
+        assertThrows<IllegalArgumentException> {
+            LottoCompany.of(winningNumbers, bonusNumber)
+        }
+    }
 }
