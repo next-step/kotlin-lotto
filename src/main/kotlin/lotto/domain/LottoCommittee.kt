@@ -12,12 +12,12 @@ object LottoCommittee {
     }
 
     fun calculateStatistics(
-        lottos: List<LottoTicket>,
+        lottos: Lottos,
         winningTicket: LottoTicket
     ): Map<Int, Int> {
         val statistics = initStatistics()
-        for (lotto in lottos) {
-            statistics.merge(lotto.matchCount(winningTicket), 1, Int::plus)
+        for (ticket in lottos.tickets) {
+            statistics.merge(ticket.matchCount(winningTicket), 1, Int::plus)
         }
         return statistics
     }

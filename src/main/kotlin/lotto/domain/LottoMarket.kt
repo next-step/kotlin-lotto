@@ -3,7 +3,7 @@ package lotto.domain
 object LottoMarket {
     private const val lottoPrice = 1_000
 
-    fun buy(price: Int): List<LottoTicket> {
+    fun buy(price: Int): Lottos {
         return createLottos(lottoAmount(price))
     }
 
@@ -11,7 +11,7 @@ object LottoMarket {
         return price / lottoPrice
     }
 
-    private fun createLottos(amount: Int): List<LottoTicket> {
+    private fun createLottos(amount: Int): Lottos {
         println("${amount}개를 구매했습니다.")
 
         val lottos = mutableListOf<LottoTicket>()
@@ -19,6 +19,6 @@ object LottoMarket {
             lottos.add(LottoTicket(LottoNumber()))
         }
 
-        return lottos
+        return Lottos(lottos.toList())
     }
 }

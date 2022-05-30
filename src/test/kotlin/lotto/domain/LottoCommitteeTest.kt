@@ -37,7 +37,7 @@ class LottoCommitteeTest {
     @Test
     fun `3개를 맞춘 통계를 구할 수 있다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
-        val lottos = listOf(LottoTicket(LottoNumber(listOf(4, 5, 6, 7, 8, 9))))
+        val lottos = Lottos(listOf(LottoTicket(LottoNumber(listOf(4, 5, 6, 7, 8, 9)))))
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
         assertThat(statistics[3]).isEqualTo(1)
     }
@@ -45,7 +45,7 @@ class LottoCommitteeTest {
     @Test
     fun `6개를 맞춘 통계를 구할 수 있다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
-        val lottos = listOf(LottoTicket(LottoNumber(winningTicket.numbers.toList())))
+        val lottos = Lottos(listOf(LottoTicket(LottoNumber(winningTicket.numbers.toList()))))
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
         assertThat(statistics[6]).isEqualTo(1)
     }
