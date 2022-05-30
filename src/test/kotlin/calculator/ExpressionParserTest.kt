@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.NullSource
-import java.lang.IllegalArgumentException
 import java.util.stream.Stream
 
 internal class ExpressionParserTest {
@@ -58,6 +57,9 @@ internal class ExpressionParserTest {
                 Arguments.of("a"),
                 Arguments.of("a:1"),
                 Arguments.of("1:a"),
+                Arguments.of("-1"),
+                Arguments.of("-1:2"),
+                Arguments.of("1;-2"),
             )
         }
     }
