@@ -11,7 +11,7 @@ import lotto.domain.LottoTicketFactory.LOTTO_SIZE
 data class LottoTicket(val numbers: Set<Int>) {
     init {
         require(numbers.none { it !in LottoTicketFactory.LOTTO_NUMBER_RANGE }) { ErrorMessages.NUMBER_IS_OVER_OR_UNDER_BASE }
-        require(numbers.size == LOTTO_SIZE) { ErrorMessages.CANNOT_DUPLICATE_NUMBER }
+        require(numbers.size == LOTTO_SIZE) { ErrorMessages.NUMBER_SIZE_IS_INVALID }
     }
 
     companion object {

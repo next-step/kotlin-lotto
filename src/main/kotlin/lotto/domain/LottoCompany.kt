@@ -31,7 +31,6 @@ class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int)
     }
 
     companion object {
-        private const val LOTTO_COUNT_LIMITS = 6
         fun of(stringWinningNumber: String, bonusNumber: Int): LottoCompany {
             val winningNumbers = stringWinningNumber.split(",").map {
                 it.trim().toInt()
@@ -40,7 +39,6 @@ class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int)
         }
 
         fun of(numberList: List<Int>, bonusNumber: Int): LottoCompany {
-            require(numberList.size == LOTTO_COUNT_LIMITS) { ErrorMessages.WINNING_NUMBER_IS_OVER_BASE }
             return LottoCompany(LottoTicket.of(numberList), bonusNumber)
         }
     }
