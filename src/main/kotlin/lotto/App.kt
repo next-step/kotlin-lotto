@@ -13,17 +13,14 @@ fun main() {
 
     val bonusNumber = InputView.getBonusNumber()
 
-    val winningPrizes = WinningPrizes(
-        lottoTickets.lottery.map {
-            val matchCount = winningNumbers.intersect(it.numbers.toSet()).size
-            val matchBonus = matchCount == 5 && it.hasBonusNumber(bonusNumber)
-
+    val lottoPrizes = LottoPrizes(
+        lottoTickets.lottoTickets.map {
             LottoPrize.of(
-                matchCount = matchCount,
-                matchBonus = matchBonus,
+                matchCount = it.matchCount(winningNumbers),
+                matchBonus = it.isMatchBonus(bonusNumber),
             )
         }
     )
 
-    ResultView.printResult(winningPrizes.prizeResult, winningPrizes.earnings(purchaseMoney))
+    ResultView.printResult(lottoPrizes.prizeResult, lottoPrizes.earnings(purchaseMoney))
 }

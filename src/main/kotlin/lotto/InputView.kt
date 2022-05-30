@@ -2,7 +2,6 @@ package lotto
 
 object InputView {
     private const val NULL_MESSAGE = "입력값은 null일 수 없습니다."
-    private const val NEGATIVE_NUMBER_MESSAGE = "입력값은 음수일 수 없습니다."
 
     fun getPurchaseMoney(): PurchaseMoney {
         println("구입 금액을 입력해 주세요.")

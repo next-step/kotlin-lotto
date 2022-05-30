@@ -12,7 +12,7 @@ internal class LottoMachineTest {
             randomNumberFunc = { lottoNumbers }
         )
 
-        assertThat(lottoTickets.lottery.size).isEqualTo(1)
+        assertThat(lottoTickets.lottoTickets.size).isEqualTo(1)
     }
 
     @Test
@@ -22,7 +22,7 @@ internal class LottoMachineTest {
             randomNumberFunc = { (1..6).map { LottoNumber(it) } }
         )
 
-        assertThat(lottoTickets.lottery.size).isEqualTo(1)
+        assertThat(lottoTickets.lottoTickets.size).isEqualTo(1)
     }
 
     @Test
@@ -32,6 +32,6 @@ internal class LottoMachineTest {
             randomNumberFunc = { (1..6).map { LottoNumber(it) } }
         )
 
-        assertThat(lottoTickets.lottery.size).isEqualTo(1)
+        assertThat(lottoTickets.lottoTickets.size).isEqualTo(1)
     }
 }
