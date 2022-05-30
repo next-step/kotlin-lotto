@@ -5,7 +5,7 @@ import lotto.domain.TicketMachine
 import lotto.view.InputView
 import lotto.view.OutputView
 
-class LottoSimulator(
+class LottoController(
     private val inputView: InputView,
     private val outputView: OutputView,
 ) {
@@ -23,6 +23,6 @@ class LottoSimulator(
 }
 
 fun main() {
-    val lottoSimulator = LottoSimulator(InputView(), OutputView())
-    lottoSimulator.run()
+    val lottoController = LottoController(InputView(), OutputView())
+    lottoController.run()
 }
