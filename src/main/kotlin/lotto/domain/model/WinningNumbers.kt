@@ -14,5 +14,18 @@ value class WinningNumbers(val value: Set<LottoNumber>) {
         fun from(numbers: List<Int>): WinningNumbers {
             return WinningNumbers(numbers.map { LottoNumber(it) }.toSet())
         }
+
+        fun default(): WinningNumbers {
+            return WinningNumbers(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            )
+        }
     }
 }

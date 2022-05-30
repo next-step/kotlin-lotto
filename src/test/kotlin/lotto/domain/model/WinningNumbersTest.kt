@@ -26,4 +26,20 @@ class WinningNumbersTest {
             WinningNumbers.from(listOf(1, 2, 3, 4, 5))
         }
     }
+
+    @Test
+    fun `default를 통해 테스트 등에서 쓰일 기본 WinningNumbers 객체를 얻을 수 있다`() {
+        val expected = WinningNumbers(
+            setOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6)
+            )
+        )
+
+        assertThat(WinningNumbers.default()).isEqualTo(expected)
+    }
 }
