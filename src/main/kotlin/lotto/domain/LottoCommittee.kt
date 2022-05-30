@@ -3,12 +3,8 @@ package lotto.domain
 import lotto.domain.enum.Priority
 
 object LottoCommittee {
-    private const val LOTTO_NUMBER_COUNT = 6
-    private val MATCHING_NUMBER_RANGE = 3..6
-    private val LOTTO_VALID_RANGE = 1..45
-
     fun createWinningTicket(input: String): LottoTicket {
-        return LottoTicket(input.split(",").map { it.toInt() })
+        return LottoTicket(LottoNumber(input.split(",").map { it.toInt() }))
     }
 
     fun calculateStatistics(
@@ -17,8 +13,7 @@ object LottoCommittee {
     ): Map<Int, Int> {
         val statistics = initStatistics()
         for (lotto in lottos) {
-            val matchCount = lotto.matchCount(winningTicket)
-            statistics.merge(matchCount, 1, Int::plus)
+            statistics.merge(lotto.matchCount(winningTicket), 1, Int::plus)
         }
         return statistics
     }
@@ -28,7 +23,6 @@ object LottoCommittee {
         for (priority in Priority.values()) {
             statistics[priority.matchCount] = 0
         }
-        println(statistics)
         return statistics
     }
 

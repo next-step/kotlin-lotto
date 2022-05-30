@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.generator.NumbersGenerator
-
 object LottoMarket {
     private const val lottoPrice = 1_000
 
@@ -18,7 +16,7 @@ object LottoMarket {
 
         val lottos = mutableListOf<LottoTicket>()
         repeat(amount) {
-            lottos.add(LottoTicket(NumbersGenerator.create()))
+            lottos.add(LottoTicket(LottoNumber()))
         }
 
         return lottos
