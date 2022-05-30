@@ -13,11 +13,11 @@ enum class LottoPrize(val matchCount: Int, val price: Int) {
     companion object {
 
         fun of(matchCount: Int, matchBonus: Boolean): LottoPrize {
-            return if (matchBonus) {
-                FIFTH_BONUS
-            } else {
-                values().filter { it != FIFTH_BONUS }.firstOrNull { it.matchCount == matchCount }
-            } ?: NONE
+            return when {
+                matchCount == FIFTH.matchCount && matchBonus -> FIFTH_BONUS
+
+                else -> values().firstOrNull { it.matchCount == matchCount } ?: NONE
+            }
         }
     }
 }
