@@ -45,7 +45,7 @@ class LottoStoreTest {
             override val manualLotto: List<LottoNumbers>
                 get() = emptyList()
 
-            override fun makeLottoNumbers(): LottoNumbers {
+            override fun buyAutoLotto(): LottoNumbers {
                 return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
 
@@ -86,7 +86,7 @@ class LottoStoreTest {
             override val manualLotto: List<LottoNumbers>
                 get() = listOf(LottoNumbers.of(listOf(1, 2, 3, 5, 44, 45)))
 
-            override fun makeLottoNumbers(): LottoNumbers {
+            override fun buyAutoLotto(): LottoNumbers {
                 return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
 
