@@ -37,16 +37,16 @@ class LottoPrizeResultTest {
             LottoPrize.MISS,
             LottoPrize.MISS,
             LottoPrize.MISS,
+            LottoPrize.FIFTH,
             LottoPrize.FOURTH,
             LottoPrize.THIRD,
-            LottoPrize.SECOND,
-            LottoPrize.SECOND,
+            LottoPrize.THIRD,
             LottoPrize.FIRST
         )
 
         assertThat(prizeResult.prizes).isEqualTo(expectedPrizes)
         assertThat(prizeResult.numberOf(LottoPrize.FIRST)).isEqualTo(1)
-        assertThat(prizeResult.numberOf(LottoPrize.SECOND)).isEqualTo(2)
+        assertThat(prizeResult.numberOf(LottoPrize.THIRD)).isEqualTo(2)
     }
 
     @Test
@@ -80,10 +80,10 @@ class LottoPrizeResultTest {
             LottoPrize.MISS,
             LottoPrize.MISS,
             LottoPrize.MISS,
+            LottoPrize.FIFTH,
             LottoPrize.FOURTH,
             LottoPrize.THIRD,
-            LottoPrize.SECOND,
-            LottoPrize.SECOND,
+            LottoPrize.THIRD,
             LottoPrize.FIRST
         )
 

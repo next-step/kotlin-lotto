@@ -8,5 +8,8 @@ class WinningLotto(winningNumbers: List<Int>, val bonusNumber: Int) {
     init {
         require(!winningNumbers.contains(bonusNumber))
     }
+
     fun getNumberOfMatchingNumbers(lotto: Lotto): Int = winningNumbers.list.intersect(lotto.numbers.list.toSet()).size
+
+    fun matchesBonus(lotto: Lotto): Boolean = lotto.numbers.list.contains(bonusNumber)
 }

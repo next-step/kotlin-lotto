@@ -2,6 +2,8 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class WinningLottoTest {
@@ -28,6 +30,19 @@ class WinningLottoTest {
         val bonusBallNumber = 10
 
         assertThatIllegalArgumentException().isThrownBy { WinningLotto(winningNumbers, bonusBallNumber) }
+    }
+
+    @Test
+    fun `보너스 볼 번호와 겹치는지 알 수 있다`() {
+        val winningNumbers = listOf(10, 20, 30, 35, 40, 45)
+        val bonusBallNumber = 1
+        val winningLotto = WinningLotto(winningNumbers, bonusBallNumber)
+
+        val lottoWithBonusNumber = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val lottoWithoutBonusNumber = Lotto(listOf(2, 3, 4, 5, 6, 7))
+
+        assertTrue(winningLotto.matchesBonus(lottoWithBonusNumber))
+        assertFalse(winningLotto.matchesBonus(lottoWithoutBonusNumber))
     }
 
     @Test
