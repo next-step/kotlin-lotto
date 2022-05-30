@@ -10,7 +10,7 @@ class ResultView {
 
     fun printLottos(lottos: List<Lotto>) {
         lottos.forEach {
-            println(it)
+            println(it.numbers.sorted())
         }
         println()
     }

@@ -35,7 +35,7 @@ class LottoTest {
     @MethodSource("lottoMatchCountTest")
     fun `일치하는 로또 번호가 몇 개 있는지 테스트`(numbers: Set<Int>, expect: Int) {
         val winningLotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
-        assertThat(winningLotto.getMatchNumberCount(Lotto(numbers))).isEqualTo(expect)
+        assertThat(winningLotto.countMatchedNumber(Lotto(numbers))).isEqualTo(expect)
     }
 
     companion object {
