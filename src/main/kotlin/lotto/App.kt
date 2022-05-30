@@ -7,21 +7,29 @@ fun main() {
 
     val lottoMachine = LottoMachine()
 
-    lottoMachine.purchase(purchaseMoney, Extractor.randomNumberFunc)
+    val lottoTickets = lottoMachine.purchase(purchaseMoney, Extractor.randomNumberFunc)
 
-    ResultView.printTickets(lottoMachine.lottoTickets)
+    ResultView.printTickets(lottoTickets)
 
     val winningNumbers = InputView.getWinningNumbers()
 
     val bonusNumber = InputView.getBonusNumber()
 
-    lottoMachine.checkResult(
-        WinningLotto(winningNumbers, bonusNumber)
+    val winningPrizes = WinningPrizes(
+        lottoTickets.lottery.map {
+            val matchCount = winningNumbers.intersect(it.numbers.toSet()).size
+            val matchBonus = matchCount == 5 && it.hasBonusNumber(bonusNumber)
+
+            LottoPrize.of(
+                matchCount = matchCount,
+                matchBonus = matchBonus,
+            )
+        }
     )
 
-    val earnings = lottoMachine.winningPrizes.prizes.sumOf { it.price }.let {
+    val earnings = winningPrizes.prizes.sumOf { it.price }.let {
         floor(it.toDouble() / purchaseMoney.money.toDouble() * 100) / 100
     }
 
-    ResultView.printResult(lottoMachine.winningPrizes.prizeResult, earnings)
+    ResultView.printResult(winningPrizes.prizeResult, earnings)
 }

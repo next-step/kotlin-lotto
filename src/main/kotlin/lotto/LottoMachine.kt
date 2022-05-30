@@ -2,13 +2,10 @@ package lotto
 
 class LottoMachine {
 
-    var lottoTickets = LottoTickets()
-        private set
-
-    fun purchase(purchaseMoney: PurchaseMoney, randomNumberFunc: () -> List<LottoNumber>) {
+    fun purchase(purchaseMoney: PurchaseMoney, randomNumberFunc: () -> List<LottoNumber>): LottoTickets {
         val lottoTicketCount = purchaseMoney.money / LOTTO_PRICE
 
-        lottoTickets = LottoTickets(
+        return LottoTickets(
             (1..lottoTicketCount).toList().map {
                 LottoTicket(randomNumberFunc())
             }
