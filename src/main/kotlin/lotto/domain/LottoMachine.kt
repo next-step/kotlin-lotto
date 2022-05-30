@@ -3,10 +3,10 @@ package lotto.domain
 object LottoMachine {
     private const val LOTTO_COST = 1000
 
-    fun buy(money: Int): List<LottoNumbers> {
+    fun buy(money: Int): LottoList {
         validation(money)
         val count = calculateCount(money)
-        return (1..count).map { LottoNumbers.random() }
+        return LottoList(List(count) { LottoNumbers.random() })
     }
 
     private fun calculateCount(money: Int): Int {

@@ -13,6 +13,10 @@ class LottoNumbers(numbers: List<Int>) {
         }
     }
 
+    override fun toString(): String {
+        return numbers.joinToString(", ") { it.number.toString() }
+    }
+
     companion object {
         private val LottoNumberRange = (1..45)
 

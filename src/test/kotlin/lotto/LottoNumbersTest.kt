@@ -31,8 +31,8 @@ class LottoNumbersTest {
 
     @Test
     fun `당첨번호가 주어질 때, 해당번호의 개수를 리턴한다`() {
-        val lottoNumbers = LottoNumbers(listOf(1,2,3,4,5,6))
-        val winningNumbers = listOf(1,2,3,4,5,6).map(::LottoNumber)
+        val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)
         Assertions.assertThat(lottoNumbers.calculateWinningCount(winningNumbers.take(6))).isEqualTo(6)
         Assertions.assertThat(lottoNumbers.calculateWinningCount(winningNumbers.take(3))).isEqualTo(3)
         Assertions.assertThat(lottoNumbers.calculateWinningCount(winningNumbers.take(0))).isEqualTo(0)

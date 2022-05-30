@@ -7,9 +7,14 @@ import lotto.ui.OutputUI
 fun main() {
     val amount = InputUI.receivePurchaseAmount()
 
-    val lotto = LottoMachine.buy(amount)
-    OutputUI.drawPurchaseMessage(lotto.size)
-    OutputUI.drawLotto(lotto)
+    val lottoList = LottoMachine.buy(amount)
+    OutputUI.drawPurchaseMessage(lottoList.size)
+    OutputUI.drawLotto(lottoList)
 
     val winningNumbers = InputUI.receiveWinningNumbers()
+
+    OutputUI.drawWinningResult(lottoList.calculateGrade(winningNumbers))
 }
+
+
+
