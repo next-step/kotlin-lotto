@@ -1,9 +1,9 @@
 package lotto.view
 
 import lotto.constants.Messages
-import lotto.model.LottoResults
-import lotto.model.LottoTicket
-import lotto.model.Prize
+import lotto.domain.LottoResults
+import lotto.domain.LottoTicket
+import lotto.domain.Prize
 
 /**
  * 출력을 위한 클래스

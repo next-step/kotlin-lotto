@@ -1,10 +1,6 @@
 package lotto.domain
 
 import lotto.constants.ErrorMessages
-import lotto.model.LottoResult
-import lotto.model.LottoResults
-import lotto.model.LottoTicket
-import lotto.model.Prize
 
 /**
  * 당첨 번호를 갖고, 당첨 여부를 알려주는 클래스.

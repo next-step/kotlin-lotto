@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.model.LottoTicket
-
 /**
  * 로또 번호를 자동으로 발급해주는 클래스
  * Created by Jaesungchi on 2022.05.24..

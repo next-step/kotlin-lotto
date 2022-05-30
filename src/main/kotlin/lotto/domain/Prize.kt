@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.domain
 
 /**
  * 클래스에 대한 설명을 적어주세요.

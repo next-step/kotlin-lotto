@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.model.LottoResults
-
 /**
  * 수익률을 계산하는 클래스
  * Created by Jaesungchi on 2022.05.25..

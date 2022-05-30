@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.domain
 
 /**
  * 로또 결과 값을 저장하는 데이터 클래스.

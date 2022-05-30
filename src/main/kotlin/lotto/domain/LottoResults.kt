@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.domain
 
 /**
  * 로또 결과를 담고 있는 일급 컬렉션.

@@ -1,7 +1,6 @@
-package lotto.model
+package lotto.domain
 
 import lotto.constants.ErrorMessages
-import lotto.domain.LottoTicketFactory
 import lotto.domain.LottoTicketFactory.LOTTO_SIZE
 
 /**

@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.model.LottoTicket
-
 /**
  * Created by Jaesungchi on 2022.05.24..
  */
