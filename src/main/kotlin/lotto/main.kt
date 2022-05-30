@@ -1,14 +1,18 @@
 package lotto
 
-import lotto.domain.KoreanLottoNumberMaker
-import lotto.domain.LottoNumber
-import lotto.domain.LottoStore
-import lotto.domain.Money
-import lotto.domain.toLottoNumbers
+import lotto.domain.*
 import lotto.view.InputView
 import lotto.view.PrintView
 
 fun main() {
+    val lottoStore = makeLottoStore()
+
+    getLottoAnswerMeta(lottoStore)
+
+    printLottoResultInfo(lottoStore)
+}
+
+fun makeLottoStore(): LottoStore {
     val userMoneyInput = InputView.getUserMoney()
     val userMoney = Money(userMoneyInput)
 
@@ -21,16 +25,20 @@ fun main() {
     val manualLottoNumbers = InputView.getLottoNumbers(manualLottoCount)
     lottoMaker.buyManualLotto(manualLottoNumbers)
 
-    val lottoStore = LottoStore(userMoney, manualLottoCount, lottoMaker)
+    return LottoStore(userMoney, manualLottoCount, lottoMaker).apply {
+        PrintView.printLottoCount(manualLottoCount, autoLottoCount)
+        PrintView.printBoughtLottoList(boughtMoney)
+    }
+}
 
-    PrintView.printLottoCount(manualLottoCount, lottoStore.autoLottoCount)
-    PrintView.printBoughtLottoList(lottoStore.boughtMoney)
-
+fun getLottoAnswerMeta(lottoStore: LottoStore) {
     val answer = InputView.getLottoNumbers(InputView.LOTTO_ANSWER_INPUT_MESSAGE)
     val bonusBall = InputView.getBonusBall()
     val winnerInfos = lottoStore.getLottoResult(answer.toLottoNumbers(), LottoNumber(bonusBall))
     PrintView.printWinnerInfos(winnerInfos)
+}
 
+fun printLottoResultInfo(lottoStore: LottoStore) {
     val yieldRatio = lottoStore.totalYieldRatio
     PrintView.printYield(yieldRatio)
 }
