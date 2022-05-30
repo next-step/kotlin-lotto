@@ -38,16 +38,16 @@ class LottoPrizeCalculatorTest {
             LottoPrize.MISS,
             LottoPrize.MISS,
             LottoPrize.MISS,
-            LottoPrize.THREE_MATCHES,
-            LottoPrize.FOUR_MATCHES,
-            LottoPrize.FIVE_MATCHES,
-            LottoPrize.FIVE_MATCHES,
-            LottoPrize.SIX_MATCHES
+            LottoPrize.FOURTH,
+            LottoPrize.THIRD,
+            LottoPrize.SECOND,
+            LottoPrize.SECOND,
+            LottoPrize.FIRST
         )
 
         assertThat(prizeCalculator.prizes).isEqualTo(expectedPrizes)
-        assertThat(prizeCalculator.numberOf(LottoPrize.SIX_MATCHES)).isEqualTo(1)
-        assertThat(prizeCalculator.numberOf(LottoPrize.FIVE_MATCHES)).isEqualTo(2)
+        assertThat(prizeCalculator.numberOf(LottoPrize.FIRST)).isEqualTo(1)
+        assertThat(prizeCalculator.numberOf(LottoPrize.SECOND)).isEqualTo(2)
     }
 
     @Test
@@ -81,11 +81,11 @@ class LottoPrizeCalculatorTest {
             LottoPrize.MISS,
             LottoPrize.MISS,
             LottoPrize.MISS,
-            LottoPrize.THREE_MATCHES,
-            LottoPrize.FOUR_MATCHES,
-            LottoPrize.FIVE_MATCHES,
-            LottoPrize.FIVE_MATCHES,
-            LottoPrize.SIX_MATCHES
+            LottoPrize.FOURTH,
+            LottoPrize.THIRD,
+            LottoPrize.SECOND,
+            LottoPrize.SECOND,
+            LottoPrize.FIRST
         )
 
         val expectedTotalPrize = expectedPrizes.sumOf { it.prizeAmount }

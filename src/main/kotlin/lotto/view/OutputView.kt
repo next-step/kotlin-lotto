@@ -22,7 +22,7 @@ object OutputView {
     }
 
     private fun printHitLottoPrizes(prizeCalculator: LottoPrizeCalculator) {
-        listOf(LottoPrize.THREE_MATCHES, LottoPrize.FOUR_MATCHES, LottoPrize.FIVE_MATCHES, LottoPrize.SIX_MATCHES)
+        listOf(LottoPrize.FOURTH, LottoPrize.THIRD, LottoPrize.SECOND, LottoPrize.FIRST)
             .forEach { it.printStatistics(prizeCalculator.numberOf(it)) }
     }
 
