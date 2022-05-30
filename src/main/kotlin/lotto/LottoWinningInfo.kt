@@ -4,8 +4,7 @@ import lotto.LottoWinningHandler.matchCount
 
 class LottoWinningInfo(winningNumberInput: String) {
     var winningNumbers = mutableListOf<Int>()
-    lateinit var scoreInfos: List<ScoreInfo>
-    var revenue: Int = 0
+    var scoreInfos: List<ScoreInfo> = mutableListOf()
 
     init {
         require(winningNumberInput.contains(","))
@@ -15,7 +14,7 @@ class LottoWinningInfo(winningNumberInput: String) {
     }
 
     fun setScore(issuedLottos: List<List<Int>>) {
-        scoreInfos = matchCount(issuedLottos, winningNumbers).filter { it.value > 0 }.map {
+        scoreInfos = matchCount(issuedLottos, winningNumbers).filter { it.key > 0 }.map {
             ScoreInfo(it.key, getPrice(it.key), it.value)
         }
     }
