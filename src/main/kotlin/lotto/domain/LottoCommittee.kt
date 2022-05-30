@@ -7,6 +7,10 @@ object LottoCommittee {
         return LottoTicket(LottoNumber(input.split(",").map { it.toInt() }))
     }
 
+    fun chooseBonusNumber(input: String, winningTicket: LottoTicket) {
+        winningTicket.addBonusNumber(input.toInt())
+    }
+
     fun calculateStatistics(
         lottos: List<LottoTicket>,
         winningTicket: LottoTicket

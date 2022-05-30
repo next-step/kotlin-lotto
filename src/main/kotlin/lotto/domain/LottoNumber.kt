@@ -16,6 +16,10 @@ class LottoNumber(private val seeds: List<Int>? = null) {
             .toMutableSet()
     }
 
+    fun addBonusNumber(number: Int) {
+        numbers.add(number)
+    }
+
     private fun validate(numbers: List<Int>) {
         require(numbers.size >= LOTTO_NUMBER_SIZE) { "로또 번호는 최소 6자 입니다." }
         numbers.forEach { require(it in LOTTO_NUMBER_RANGE) { "로또 번호가 유효 범위내에 있지 않습니다." } }
