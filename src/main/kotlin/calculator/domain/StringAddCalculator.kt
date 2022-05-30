@@ -1,19 +1,16 @@
 package calculator.domain
 
-class StringAddCalculator {
+class StringAddCalculator(
+    private val separators: Separators = Separators()
+) {
 
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
             return 0
         }
 
-        val positiveNumbers = PositiveNumbers.of(splitTextByPattern(text))
+        val texts = separators.splitText(text = text)
+        val positiveNumbers = PositiveNumbers.of(texts = texts)
         return positiveNumbers.sum().value
     }
-
-    private fun splitTextByPattern(text: String): List<String> =
-        when (Separator.matchByCustomSeparator(text)) {
-            true -> Separator.CUSTOM.split(text)
-            false -> Separator.DEFAULT.split(text)
-        }
 }
