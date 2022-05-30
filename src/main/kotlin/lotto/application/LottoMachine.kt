@@ -7,8 +7,7 @@ import lotto.domain.LottoBundle
 import lotto.domain.WinningLotto
 import lotto.domain.vo.LottoNumber
 
-private const val START_INDEX = 0
-private const val END_INDEX = 6
+private const val LOTTO_NUMBER_COUNT = 6
 private const val MIN_NUMBER = 1
 private const val MAX_NUMBER = 45
 private const val DELIMITER = ","
@@ -31,7 +30,12 @@ class LottoMachine(
 
     fun buyAuto(): List<Lotto> =
         List(purchase.purchaseCounts.autoLottoCount.count) {
-            Lotto(LOTTO_NUMBERS.shuffled().subList(START_INDEX, END_INDEX).sorted().toSet())
+            Lotto(
+                LOTTO_NUMBERS.shuffled()
+                    .take(LOTTO_NUMBER_COUNT)
+                    .sorted()
+                    .toSet()
+            )
         }
 
     fun drawLottoBundle(
