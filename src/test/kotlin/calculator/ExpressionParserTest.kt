@@ -27,6 +27,8 @@ internal class ExpressionParserTest {
                 Arguments.of("1,2,3", Expression(listOf(1, 2, 3))),
                 Arguments.of("100,200", Expression(listOf(100, 200))),
                 Arguments.of("4,3,2,1", Expression(listOf(4, 3, 2, 1))),
+                Arguments.of("//;\n1;2;3", Expression(listOf(1, 2, 3))),
+                Arguments.of("//$\n1$2$3", Expression(listOf(1, 2, 3))),
             )
         }
     }
