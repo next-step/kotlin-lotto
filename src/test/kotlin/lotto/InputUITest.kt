@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoNumber
 import lotto.ui.InputUI
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.assertThrows
 class InputUITest {
 
     @Test
-    fun `사용자의 금액을 입력하면, 금액을 리턴한다`() {
+    fun `사용자가 금액을 입력하면, 금액을 리턴한다`() {
         System.setIn("14000".byteInputStream())
         assertThat(InputUI.receivePurchaseAmount()).isEqualTo(14000)
     }
@@ -18,6 +19,28 @@ class InputUITest {
         assertThrows<NumberFormatException> {
             System.setIn("money".byteInputStream())
             assertThat(InputUI.receivePurchaseAmount()).isEqualTo(14000)
+        }
+    }
+
+    @Test
+    fun `사용자가 당첨번호를 입력하면, 당첨번호를 리턴한다`() {
+        System.setIn("1,2,3,4,5,6".byteInputStream())
+        assertThat(InputUI.receiveWinningNumbers().numbers).isEqualTo(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+    }
+
+    @Test
+    fun `사용자가 수가 아닌 번호를 입력하면, NumberFormatException 예외가 발생한다`() {
+        assertThrows<NumberFormatException> {
+            System.setIn("money,money,money,money,money,money".byteInputStream())
+            InputUI.receivePurchaseAmount()
+        }
+    }
+
+    @Test
+    fun `사용자가 잘못된 당첨번호를 입력하면, IllegalArgumentException 예외가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            System.setIn("1,2,2,3,3,3".byteInputStream())
+            InputUI.receiveWinningNumbers()
         }
     }
 }

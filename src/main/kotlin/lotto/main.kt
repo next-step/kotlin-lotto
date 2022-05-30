@@ -10,4 +10,6 @@ fun main() {
     val lotto = LottoMachine.buy(amount)
     OutputUI.drawPurchaseMessage(lotto.size)
     OutputUI.drawLotto(lotto)
+
+    val winningNumbers = InputUI.receiveWinningNumbers()
 }
