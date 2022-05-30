@@ -1,6 +1,5 @@
 package lotto.ui
 
-import lotto.InputParser
 import lotto.Lotto
 
 class InputView {
