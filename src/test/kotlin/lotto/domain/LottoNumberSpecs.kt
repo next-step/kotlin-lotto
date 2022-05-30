@@ -11,7 +11,7 @@ class LottoNumberSpecs : DescribeSpec({
             it("예외를 발생시킨다") {
                 numbers.forAll {
                     shouldThrowExactly<IllegalArgumentException> {
-                        LottoNumber(it)
+                        LottoNumber.of(it)
                     }
                 }
             }

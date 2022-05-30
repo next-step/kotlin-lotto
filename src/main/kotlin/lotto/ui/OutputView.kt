@@ -9,8 +9,8 @@ import lotto.domain.WinningResult
 
 object OutputView {
 
-    fun showPurchasedLottoBundle(lottoBundle: LottoBundle) {
-        println("${lottoBundle.size}개를 구매했습니다")
+    fun showPurchasedLottoBundle(numberOfManualLotto: Int, lottoBundle: LottoBundle) {
+        println("수동으로 ${numberOfManualLotto}장, 자동으로 ${lottoBundle.size - numberOfManualLotto}장을 구매했습니다")
         println(lottoBundle)
     }
 
@@ -25,7 +25,7 @@ object OutputView {
         values().filter { it != BLANK }
             .sortedBy { it.reward }
             .forEach {
-                println("${it.requiredMatchingCount}개 일치${if (isSecondPlace(it)) ", 보너스 볼 일치" else ""}(${it.reward}원) - ${winningResult[it]}")
+                println("${it.requiredMatchingCount}개 일치${if (isSecondPlace(it)) ", 보너스 볼 일치" else ""}(${it.reward}원) - ${winningResult[it]}개")
             }
     }
 

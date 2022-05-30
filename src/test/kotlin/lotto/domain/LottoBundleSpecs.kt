@@ -18,7 +18,7 @@ class LottoBundleSpecs : DescribeSpec({
         }
 
         context("당첨 번호가 주어지면") {
-            val winning = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
+            val winning = WinningLotto(lotto(1, 2, 3, 4, 5, 6), LottoNumber.of(7))
             it("가지고 있는 모든 로또의 당첨 등수를 알 수 있다") {
                 val lottoBundle = LottoBundle(
                     listOf(
