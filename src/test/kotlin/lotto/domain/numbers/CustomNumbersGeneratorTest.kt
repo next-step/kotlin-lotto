@@ -20,14 +20,22 @@ class CustomNumbersGeneratorTest {
         val moreThanSix = listOf(1, 2, 3, 4, 5, 6, 7)
         val generator = CustomNumbersGenerator(moreThanSix)
 
+        val lessThanSix = listOf(1, 2, 3, 4, 5)
+        val generator2 = CustomNumbersGenerator(lessThanSix)
+
         assertThatIllegalArgumentException().isThrownBy { generator.generate() }
+        assertThatIllegalArgumentException().isThrownBy { generator2.generate() }
     }
 
     @Test
     fun `1 과 45 사이의 숫자가 아닐 경우 IllegalArgumentException 을 반환한다`() {
-        val listWithInvalidLottoNumber = listOf(-1, 2, 3, 4, 5, 6)
-        val generator = CustomNumbersGenerator(listWithInvalidLottoNumber)
+        val lessThanOneLottoNumber = listOf(0, 2, 3, 4, 5, 6)
+        val generator = CustomNumbersGenerator(lessThanOneLottoNumber)
+
+        val greaterThanFourtyFiveLottoNumber = listOf(1, 2, 3, 4, 5, 46)
+        val generator2 = CustomNumbersGenerator(greaterThanFourtyFiveLottoNumber)
 
         assertThatIllegalArgumentException().isThrownBy { generator.generate() }
+        assertThatIllegalArgumentException().isThrownBy { generator2.generate() }
     }
 }
