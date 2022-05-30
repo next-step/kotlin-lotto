@@ -10,7 +10,7 @@ object ExpressionParser {
         .toIntNumbers()
 
     private fun Expression.toStringNumbers(delimiter: Delimiter): List<String> = if (value.isBlank()) {
-        listOf()
+        emptyList()
     } else {
         value.split(delimiter.value)
     }
