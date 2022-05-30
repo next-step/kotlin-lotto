@@ -2,6 +2,7 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -34,9 +35,7 @@ internal class TicketMachineTest {
         val ticketMachine = TicketMachine(NumberGenerator(1, 45))
 
         // when
-        val tickets = ticketMachine.buy(amount)
-
         // then
-        assertThat(tickets).hasSize(0)
+        assertThrows<RuntimeException> { ticketMachine.buy(amount) }
     }
 }

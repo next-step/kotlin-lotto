@@ -12,6 +12,11 @@ class WinningNumbers(numbers: List<Int>, bonus: Int) {
     }
 
     fun compare(tickets: List<LottoTicket>): Map<LottoPrize, Int> = tickets
-        .map { it.lottoNumbers.count { number -> winningNumbers.contains(number) } }
-        .groupingBy { LottoPrize.getPrize(it) }.eachCount()
+        .groupingBy {
+            LottoPrize.getPrize(
+                it.lottoNumbers.count { number -> winningNumbers.contains(number) },
+                it.contains(bonusNumber)
+            )
+        }
+        .eachCount()
 }

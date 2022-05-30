@@ -11,6 +11,8 @@ enum class LottoPrize(val matchedCount: Int, val money: Int, val matchedBonus: B
     ;
 
     companion object {
-        fun getPrize(matchedCount: Int): LottoPrize = values().firstOrNull { matchedCount == it.matchedCount } ?: MISS
+        fun getPrize(matchedCount: Int, bonus: Boolean): LottoPrize =
+            values().filter { bonus == it.matchedBonus }
+                .firstOrNull { matchedCount == it.matchedCount } ?: MISS
     }
 }
