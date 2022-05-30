@@ -1,24 +1,24 @@
 package calculator.domain
 
-enum class Separator(
-    private val regex: Regex,
-    val split: (String) -> List<String>,
-) {
-    DEFAULT(
-        Regex("[,:]"),
-        { text -> text.split(DEFAULT.regex) }
-    ),
-    CUSTOM(
-        Regex("//(.)\n(.*)"),
-        { text ->
-            val matchResult = CUSTOM.regex.matchEntire(text)!!
-            matchResult.groupValues[2].split(matchResult.groupValues[1])
-        }),
-    ;
+sealed interface Separator {
+    fun split(text: String): List<String>
 
-    companion object {
-        fun matchByCustomSeparator(text: String): Boolean {
-            return CUSTOM.regex.matches(text)
-        }
+    fun isMatchWithText(text: String): Boolean
+}
+
+object Default : Separator {
+    override fun split(text: String): List<String> = text.split(Regex(pattern = "[,:]"))
+
+    override fun isMatchWithText(text: String): Boolean = false
+}
+
+object Custom : Separator {
+    private val regex: Regex = Regex(pattern = "//(.)\n(.*)")
+
+    override fun split(text: String): List<String> {
+        val matchResult = regex.matchEntire(text)!!
+        return matchResult.groupValues[2].split(matchResult.groupValues[1])
     }
+
+    override fun isMatchWithText(text: String): Boolean = regex.matches(text)
 }
