@@ -7,15 +7,17 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class LottoShopTest {
     @ParameterizedTest
-    @CsvSource("0,0", "1000,1", "10000,10")
+    @CsvSource("1000,1", "10000,10")
     fun `금액을 입력하면 PurchaseRecord를 반환한다`(cash: Int, numberOfLottos: Int) {
-        Assertions.assertThat(LottoShop().purchase(cash).lottoList.size).isEqualTo(numberOfLottos)
+        Assertions.assertThat(LottoShop().purchase(Payment(cash)).lottoList.size)
+            .isEqualTo(numberOfLottos)
     }
 
     @ParameterizedTest
-    @CsvSource("999,0", "1001,1", "1999,1", "2001,2")
+    @CsvSource("1001,1", "1999,1", "2001,2")
     fun `천원단위로 떨어지지 않으면? 천원단위 내림하여 계산한다`(cash: Int, numberOfLottos: Int) {
-        Assertions.assertThat(LottoShop().purchase(cash).lottoList.size).isEqualTo(numberOfLottos)
+        Assertions.assertThat(LottoShop().purchase(Payment(cash)).lottoList.size)
+            .isEqualTo(numberOfLottos)
     }
 
     @Test
