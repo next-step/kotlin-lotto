@@ -4,7 +4,6 @@ import lotto.domain.LottoPrizeManager
 import lotto.domain.LottoPrizePolicy
 import lotto.domain.Money
 import lotto.domain.TicketSeller
-import lotto.domain.WinningLottoNumbers
 import lotto.util.InputModule
 import lotto.util.OutPutModule
 import lotto.util.RandomGenerate
@@ -33,7 +32,7 @@ class LottoApplication(
             Money(boughtLottoTickets.size * lottoTicketPrice.value),
             lottoPrizeManager.getWinningStats(
                 boughtLottoTickets,
-                WinningLottoNumbers.ofInt(winningNumbersInputDto.winningLottoTicketNumbers.value.map { it.value }, 45)
+                winningNumbersInputDto.winningLottoTicketNumbers
             )
         )
     }

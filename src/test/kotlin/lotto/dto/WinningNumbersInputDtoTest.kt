@@ -8,13 +8,13 @@ class WinningNumbersInputDtoTest : DescribeSpec({
     it(", 로 나누어서 로또 번호로 저장합니다") {
         // given
         val winningNumbersString = "1, 2, 3, 4, 5, 6"
+        val bonusBallString = "7"
 
         // when
-        val winningNumbersInputDto = WinningNumbersInputDto(winningNumbersString)
+        val winningNumbersInputDto = WinningNumbersInputDto(winningNumbersString, bonusBallString)
 
         // then
-        winningNumbersInputDto.winningLottoTicketNumbers.value.size shouldBe 6
-        winningNumbersInputDto.winningLottoTicketNumbers.value.map { it.value } shouldContainAll listOf(
+        winningNumbersInputDto.winningLottoTicketNumbers.winningLottoNumbers.value.map { it.value } shouldContainAll listOf(
             1,
             2,
             3,
@@ -22,5 +22,6 @@ class WinningNumbersInputDtoTest : DescribeSpec({
             5,
             6
         )
+        winningNumbersInputDto.winningLottoTicketNumbers.bonusLottoNumber.value shouldBe 7
     }
 })

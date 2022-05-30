@@ -28,15 +28,24 @@ class BuyLottoInputViewTest : DescribeSpec({
 
     it("당첨 번호 입력을 위한 View String 을 내보낸다") {
         // given
-        every { stubInputModule.read() } returns "1, 2, 3, 4 ,5 ,6"
+        every { stubInputModule.read() } returnsMany listOf("1, 2, 3, 4 ,5 ,6", "7")
         val buyLottoInputView = BuyLottoInputView(stubInputModule, stubOutputModule)
 
         // when
         val winningNumbersInputDto = buyLottoInputView.readWinningLottoNumbers()
 
         // then
-        winningNumbersInputDto.winningLottoTicketNumbers.value.map { it.value } shouldBe listOf(1, 2, 3, 4, 5, 6)
+        winningNumbersInputDto.winningLottoTicketNumbers.winningLottoNumbers.value.map { it.value } shouldBe listOf(
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+        )
+        winningNumbersInputDto.winningLottoTicketNumbers.bonusLottoNumber.value shouldBe 7
         verify { stubOutputModule.write("지난 주 당첨 번호를 입력해 주세요.") }
+        verify { stubOutputModule.write("보너스 볼을 입력해 주세요.") }
         verify { stubOutputModule.write("") }
     }
 })

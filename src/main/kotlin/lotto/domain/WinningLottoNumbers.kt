@@ -23,5 +23,12 @@ class WinningLottoNumbers private constructor(
                 LottoTicketNumber(bonusLottoNumber)
             )
         }
+
+        fun ofString(winningLottoNumbers: String, delimiters: String, bonusLottoNumber: String): WinningLottoNumbers {
+            return WinningLottoNumbers(
+                LottoTicketNumbers.ofString(winningLottoNumbers, delimiters),
+                LottoTicketNumber.ofString(bonusLottoNumber)
+            )
+        }
     }
 }

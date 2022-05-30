@@ -32,10 +32,11 @@ class LottoTicketNumbers private constructor(val value: List<LottoTicketNumber>)
             "로또 티켓은 $LOTTO_TICKET_NUMBER_SIZE 개수의 로또 번호를 가지고 있어야 됩니다"
 
         fun ofString(lottoNumbersString: String, delimiters: String): LottoTicketNumbers {
-            val lottoNumbersByInt = lottoNumbersString
-                .split(delimiters)
-                .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("숫자 데이터를 입력해주세요(입력값: $it)") }
-            return ofInts(lottoNumbersByInt)
+            return LottoTicketNumbers(
+                lottoNumbersString
+                    .split(delimiters)
+                    .map { LottoTicketNumber.ofString(it) }
+            )
         }
 
         fun ofInts(lottoNumbersByInt: List<Int>): LottoTicketNumbers {

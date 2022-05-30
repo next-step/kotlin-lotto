@@ -16,9 +16,11 @@ class BuyLottoInputView(private val inputModule: InputModule, private val outPut
 
     fun readWinningLottoNumbers(): WinningNumbersInputDto {
         showWinningLottoNumbersInputGuide()
-        val winningNumbersInputDto = WinningNumbersInputDto(inputModule.read())
+        val winningNumbersString = inputModule.read()
+        showBonusBallInputGuide()
+        val bonusBallString = inputModule.read()
         showDivision()
-        return winningNumbersInputDto
+        return WinningNumbersInputDto(winningNumbersString, bonusBallString)
     }
 
     private fun showUserMoneyInputGuide() {
@@ -27,6 +29,10 @@ class BuyLottoInputView(private val inputModule: InputModule, private val outPut
 
     private fun showWinningLottoNumbersInputGuide() {
         outPutModule.write("지난 주 당첨 번호를 입력해 주세요.")
+    }
+
+    private fun showBonusBallInputGuide() {
+        outPutModule.write("보너스 볼을 입력해 주세요.")
     }
 
     private fun showDivision() {
