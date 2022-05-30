@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoNumbers(numbers: List<Int>) {
-    val numbers = numbers.map(::LottoNumber)
+    val numbers = numbers.sorted().map(::LottoNumber)
 
     init {
         require(numbers.size == 6 && numbers.toSet().size == 6) { "로또당 중복되지 않는 6개의 숫자가 있어야합니다." }
