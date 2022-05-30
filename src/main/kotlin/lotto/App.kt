@@ -1,5 +1,7 @@
 package lotto
 
+import kotlin.math.floor
+
 fun main() {
     val purchaseMoney = InputView.getPurchaseMoney()
 
@@ -17,11 +19,9 @@ fun main() {
         WinningLotto(winningNumbers, bonusNumber)
     )
 
-    val statistics = Statistics().apply {
-        this.run(lottoMachine.winningPrizes, purchaseMoney)
+    val earnings = lottoMachine.winningPrizes.prizes.sumOf { it.price }.let {
+        floor(it.toDouble() / purchaseMoney.money.toDouble() * 100) / 100
     }
 
-    ResultView.printStatistics(statistics.statisticsRows)
-
-    ResultView.printEarnings(statistics.earnings)
+    ResultView.printResult(lottoMachine.winningPrizes.prizeResult, earnings)
 }

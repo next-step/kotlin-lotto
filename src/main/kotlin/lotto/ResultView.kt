@@ -9,20 +9,20 @@ object ResultView {
         }
     }
 
-    fun printStatistics(statisticsRows: StatisticsRows) {
+    fun printResult(prizeResult: List<Pair<LottoResult.Prize, Int>>, earnings: Double) {
         println("당첨 통계")
-        statisticsRows.rows.forEach {
-            val bonusText = if (it.prize == LottoResult.Prize.FIFTH_BONUS) {
+        prizeResult.forEach {
+            val (prize, count) = it
+
+            val bonusText = if (prize == LottoResult.Prize.FIFTH_BONUS) {
                 ", 보너스 볼 일치"
             } else {
                 ""
             }
 
-            println("${it.prize.matchCount}개 일치$bonusText ${it.standardPrize}원 (${it.matchLottoCount})개")
+            println("${prize.matchCount}개 일치$bonusText ${prize.price}원 ($count)개")
         }
-    }
 
-    fun printEarnings(earnings: Double) {
         println("총 수익률은 ${earnings}입니다")
     }
 }
