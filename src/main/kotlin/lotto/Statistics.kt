@@ -8,7 +8,14 @@ class Statistics(winningLotto: WinningLotto, lottos: List<Lotto>) {
     private val totalMoney = lottos.size * LottoSeller.LOTTO_PRICE
 
     init {
-        lottos.map { lottoRanks.add(LottoRank.selectRank(winningLotto.matchCount(it.lotto), false)) }
+        lottos.map {
+            lottoRanks.add(
+                LottoRank.selectRank(
+                    winningLotto.matchCount(it.lotto),
+                    winningLotto.matchBonus(it.lotto)
+                )
+            )
+        }
     }
 
     fun getWinningResult(): Map<LottoRank, Int> {

@@ -13,7 +13,5 @@ enum class LottoRank(val matchCount: Int, val price: Long, val isBonus: Boolean)
         fun selectRank(matchCount: Int, matchBonus: Boolean): LottoRank {
             return values().find { it.matchCount == matchCount && it.isBonus == matchBonus } ?: LOSE
         }
-
-
     }
 }
