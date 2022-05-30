@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.agency.LottoTicket
+import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.NotNumericException
-import lotto.exception.WonLottoNumberCountInconsistencyException
 
 class InputView {
     fun enterMoney(): Int {
@@ -16,12 +16,17 @@ class InputView {
     fun enterWonLottoTicket(): LottoTicket {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        val text = readln().trim().split(",")
-        text.map { validateNotString(it) }
-        val wonLottoNumbers = text.map { it.toInt() }
-        validateWonLottoNumberCount(wonLottoNumbers)
+        val inputText1 = readln().trim().split(",")
+        inputText1.map { validateNotString(it) }
+        val wonLottoNumbers = inputText1.map { it.toInt() }.toSet()
 
-        return LottoTicket(wonLottoNumbers)
+        println("보너스 볼을 입력해 주세요.")
+        val inputText2 = readln()
+        validateNotString(inputText2)
+        val bonus = inputText2.toInt()
+
+        validateBonus(wonLottoNumbers, bonus)
+        return LottoTicket(wonLottoNumbers, bonus)
     }
 
     private fun validateNotString(toCheck: String) {
@@ -30,13 +35,9 @@ class InputView {
         }
     }
 
-    private fun validateWonLottoNumberCount(toCheck: List<Int>) {
-        if (toCheck.size != WON_LOTTO_NUMBER_COUNT) {
-            throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 ${WON_LOTTO_NUMBER_COUNT}개를 입력해야합니다.")
+    private fun validateBonus(wonLottoNumber: Set<Int>, bonus: Int) {
+        if (wonLottoNumber.contains(bonus)) {
+            throw AlreadySelectedNumberException("입력한 보너스 번호는 이미 선택된 번호입니다.")
         }
-    }
-
-    companion object {
-        const val WON_LOTTO_NUMBER_COUNT = 6
     }
 }

@@ -1,34 +1,44 @@
 package lotto.agency
 
-class LottoTicket() {
+import lotto.agency.number.LottoNumber
+import lotto.exception.AlreadySelectedNumberException
+import lotto.exception.WonLottoNumberCountInconsistencyException
 
-    private var _numbers: List<Int>
+class LottoTicket(numbers: Set<Int>, bonus: Int? = null) {
+
+    var numbers: Set<LottoNumber>
+        private set
+    var bonus: LottoNumber?
+        private set
 
     init {
-        this._numbers = takeLottoNumbers()
+        validateLottoCount(numbers)
+        this.numbers = numbers.map { LottoNumber(it) }.toSet()
+        this.bonus = bonus?.let { LottoNumber(it) }
     }
-
-    constructor(numbers: List<Int>) : this() {
-        this._numbers = numbers
-    }
-
-    val numbers: List<Int>
-        get() {
-            return _numbers
-        }
 
     fun countMatchWonLottoTicket(wonLottoTicket: LottoTicket): Int {
-        return _numbers
+        return numbers
+            .map { lottoTicket -> lottoTicket.number }
             .sorted()
-            .count { wonLottoTicket._numbers.contains(it) }
+            .count { wonLottoTicket.numbers.map { wonLottoNumber -> wonLottoNumber.number }.contains(it) }
     }
 
-    private fun takeLottoNumbers(): List<Int> {
-        val grabs = mutableSetOf<Int>()
-        while (grabs.size < 6) {
-            grabs.add(LottoNumber.getRandomOne())
+    fun isMatchedBonus(bonus: LottoNumber): Boolean {
+        return numbers.map { it.number }.contains(bonus.number)
+    }
+
+    private fun validateLottoCount(numbers: Set<Int>) {
+        if (numbers.size != LOTTO_COUNT_POLICY) {
+            throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 ${LOTTO_COUNT_POLICY}개를 입력해야합니다.")
         }
 
-        return grabs.toList()
+        if (numbers.map { it }.distinct().size != LOTTO_COUNT_POLICY) {
+            throw AlreadySelectedNumberException("이미 선택된 번호가 있습니다.")
+        }
+    }
+
+    companion object {
+        const val LOTTO_COUNT_POLICY = 6
     }
 }

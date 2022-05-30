@@ -10,8 +10,8 @@ class ResultView {
     }
 
     fun printPurchaseLottoTickets(lottoTickets: List<LottoTicket>) {
-        lottoTickets.map {
-            println(it.numbers)
+        lottoTickets.map { lottoTicket ->
+            println(lottoTicket.numbers.map { it.number })
         }
     }
 
@@ -23,9 +23,15 @@ class ResultView {
     private fun printMatchedCount(winnings: Map<LottoWinning, Int>) {
         winnings
             .filter { it.key != LottoWinning.LOSE }
-            .map {
-                println("${it.key.matchCount}개 일치 (${it.key.winningMoney}원) : ${it.value}개")
-            }
+            .map { println(getLottoWinningSentence(it)) }
+    }
+
+    private fun getLottoWinningSentence(winnings: Map.Entry<LottoWinning, Int>): String {
+        return if (winnings.key == LottoWinning.SECOND_PLACE) {
+            "${winnings.key.matchCount}개 일치, 보너스 볼 일치 (${winnings.key.winningMoney}원) : ${winnings.value}개"
+        } else {
+            "${winnings.key.matchCount}개 일치 (${winnings.key.winningMoney}원) : ${winnings.value}개"
+        }
     }
 
     private fun printProfitRate(winnings: Map<LottoWinning, Int>, money: Int) {

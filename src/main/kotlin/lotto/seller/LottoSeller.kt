@@ -1,6 +1,7 @@
 package lotto.seller
 
 import lotto.agency.LottoTicket
+import lotto.agency.number.LottoNumberStrategy
 import lotto.exception.MinimumPurchaseMoneyException
 
 class LottoSeller {
@@ -10,13 +11,10 @@ class LottoSeller {
         return money / LOTTO_PURCHASE_PRICE_PER_PIECE
     }
 
-    fun sell(amount: Int): List<LottoTicket> {
-        val purchaseLottoTickets = mutableListOf<LottoTicket>()
-        repeat(amount) {
-            purchaseLottoTickets.add(LottoTicket())
+    fun buy(amount: Int, lottoNumberStrategy: LottoNumberStrategy): List<LottoTicket> {
+        return List(amount) {
+            LottoTicket(lottoNumberStrategy.makeLottoNumbers())
         }
-
-        return purchaseLottoTickets
     }
 
     private fun validatePurchaseMoney(money: Int) {

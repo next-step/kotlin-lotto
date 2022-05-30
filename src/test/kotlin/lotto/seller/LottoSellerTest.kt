@@ -1,19 +1,20 @@
-package lotto
+package lotto.seller
 
+import lotto.agency.number.LottoNumberMaker
 import lotto.exception.MinimumPurchaseMoneyException
-import lotto.seller.LottoSeller
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class LottoPurchaseTest {
+class LottoSellerTest {
 
     @Test
     fun `입력된 구입 금액만큼 로또를 n개 구입`() {
         val money = 13500
         val lottoSeller = LottoSeller()
         val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
-        val purchaseLottoTickets = lottoSeller.sell(lottoPurchaseAmount)
+        val lottoNumberMaker = LottoNumberMaker()
+        val purchaseLottoTickets = lottoSeller.buy(lottoPurchaseAmount, lottoNumberMaker)
 
         assertThat(purchaseLottoTickets.size).isEqualTo(lottoPurchaseAmount)
     }

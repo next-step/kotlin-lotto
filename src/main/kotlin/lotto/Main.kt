@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.agency.LottoJudge
+import lotto.agency.number.LottoNumberMaker
 import lotto.seller.LottoSeller
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -11,7 +12,8 @@ fun main() {
 
     val lottoSeller = LottoSeller()
     val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
-    val lottoTickets = lottoSeller.sell(lottoPurchaseAmount)
+    val lottoNumberMaker = LottoNumberMaker()
+    val lottoTickets = lottoSeller.buy(lottoPurchaseAmount, lottoNumberMaker)
 
     val wonLottoTicket = inputView.enterWonLottoTicket()
     val lottoJudge = LottoJudge()
