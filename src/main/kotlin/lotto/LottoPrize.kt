@@ -29,8 +29,11 @@ enum class LottoPrize(val matchCount: Int, val price: Int) {
         fun of(matchCount: Int, matchBonus: Boolean): LottoPrize {
             return when {
                 matchCount == FIFTH.matchCount && matchBonus -> FIFTH_BONUS
-
-                else -> values().firstOrNull { it.matchCount == matchCount } ?: NONE
+                matchCount == THIRD.matchCount -> THIRD
+                matchCount == FORTH.matchCount -> FORTH
+                matchCount == FIFTH.matchCount -> FIFTH
+                matchCount == SIXTH.matchCount -> SIXTH
+                else -> NONE
             }
         }
     }
