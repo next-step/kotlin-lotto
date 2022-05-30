@@ -8,8 +8,8 @@ object LottoPolicy {
     const val LOTTO_PRICE = 1_000
 
     fun validateBonusNumber(bonusNumber: Int) {
-        if (bonusNumber < FIRST_LOTTO_NUMBER || bonusNumber > LAST_LOTTO_NUMBER) {
-            throw IllegalArgumentException("보너스 번호는 ${FIRST_LOTTO_NUMBER}이상, $LAST_LOTTO_NUMBER 이하 숫자 입니다 - `$bonusNumber")
+        require(bonusNumber in LOTTO_NUMBER_RANGE) {
+            throw IllegalArgumentException("로또 번호는 ${FIRST_LOTTO_NUMBER}이상, $LAST_LOTTO_NUMBER 이하 숫자 입니다 - `$bonusNumber")
         }
     }
 }
