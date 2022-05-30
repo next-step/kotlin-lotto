@@ -20,9 +20,9 @@ class LottoListTest {
 
         val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
 
-        val grades = lottoList.calculateGrade(winningNumbers)
+        val result = lottoList.calculateLottoResult(winningNumbers)
 
-        grades.forEach { grade, count ->
+        result.forEach { grade, count ->
             Assertions.assertThat(count).isEqualTo(1)
         }
     }

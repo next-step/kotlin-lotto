@@ -8,13 +8,14 @@ fun main() {
     val amount = InputUI.receivePurchaseAmount()
 
     val lottoList = LottoMachine.buy(amount)
+
     OutputUI.drawPurchaseMessage(lottoList.size)
     OutputUI.drawLotto(lottoList)
 
     val winningNumbers = InputUI.receiveWinningNumbers()
 
-    OutputUI.drawWinningResult(lottoList.calculateGrade(winningNumbers))
+    val lottoResult = lottoList.calculateLottoResult(winningNumbers)
+
+    OutputUI.drawWinningResult(lottoResult)
+    OutputUI.drawWinningRevenueRate(lottoResult.revenueRate)
 }
-
-
-

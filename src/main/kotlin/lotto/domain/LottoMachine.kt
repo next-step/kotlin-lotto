@@ -1,7 +1,7 @@
 package lotto.domain
 
 object LottoMachine {
-    private const val LOTTO_COST = 1000
+    const val LottoCost = 1000
 
     fun buy(money: Int): LottoList {
         validation(money)
@@ -10,7 +10,7 @@ object LottoMachine {
     }
 
     private fun calculateCount(money: Int): Int {
-        return money / LOTTO_COST
+        return money / LottoCost
     }
 
     private fun validation(money: Int) {
