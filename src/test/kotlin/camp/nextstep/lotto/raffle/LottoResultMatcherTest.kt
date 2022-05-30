@@ -12,26 +12,31 @@ import org.junit.jupiter.params.provider.CsvSource
 
 internal class LottoResultMatcherTest {
 
-    @DisplayName("당첨 번호가 [1, 2, 3, 4, 5, 6] 일 때,")
-    @ParameterizedTest(name = "로또 티켓이 {0} 이면 {1} 개가 일치한다.")
+    @DisplayName("당첨 번호가 [1, 2, 3, 4, 5, 6]이고 보너스 번호가 7일 때,")
+    @ParameterizedTest(name = "로또 티켓이 {0} 이면 {1} 개가 일치하고 보너스 번호 일치 여부는 {2} 이다.")
     @CsvSource(
         delimiter = '|',
         value = [
-            "1, 2, 3, 4, 5, 6|6",
-            "1, 2, 3, 4, 5, 10|5",
-            "11, 22, 3, 4, 5, 6|4",
-            "11, 2, 3, 4, 41, 43|3",
-            "11, 12, 13, 14, 5, 6|2",
-            "11, 12, 13, 14, 15, 6|1",
-            "11, 12, 13, 14, 15, 16|0"
+            "1, 2, 3, 4, 5, 6|6|false",
+            "1, 2, 3, 4, 5, 10|5|false",
+            "1, 2, 3, 4, 5, 7|5|true",
+            "11, 22, 3, 4, 5, 6|4|false",
+            "11, 2, 3, 4, 41, 43|3|false",
+            "11, 2, 3, 4, 7, 43|3|true",
+            "11, 12, 13, 14, 5, 6|2|false",
+            "11, 12, 13, 14, 15, 6|1|false",
+            "11, 12, 7, 14, 15, 6|1|true",
+            "11, 12, 13, 14, 15, 16|0|false"
         ]
     )
-    fun matchedLottoNumbers(@ConvertWith(IntArrayConverter::class) ticketNumbers: IntArray, expectedMatchCount: Int) {
+    fun matchedLottoNumbers(@ConvertWith(IntArrayConverter::class) ticketNumbers: IntArray, expectedMatchCount: Int, expectedMatchedBonus: Boolean) {
+        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val bonusNumber = 7
         val lottoTicket = LottoTicket(ticketNumbers.toList())
 
-        val matchedCount = LottoResultMatcher.count(lottoTicket, listOf(1, 2, 3, 4, 5, 6))
+        val matchResult = LottoResultMatcher.count(lottoTicket, winnerNumbers, bonusNumber)
 
-        assertEquals(expectedMatchCount, matchedCount)
+        assertEquals(expectedMatchCount, matchResult.matchedCount)
     }
 
     @DisplayName("여러 개의 티켓에 대하여 일치하는 개수를 기준으로 계산할 수 있다.")
@@ -39,6 +44,8 @@ internal class LottoResultMatcherTest {
     fun calculateLottoTickets() {
         val tickets = listOf(
             LottoTicket(listOf(1, 2, 3, 4, 5, 6)), // 6
+            LottoTicket(listOf(1, 2, 3, 4, 7, 6)), // 5 + bonus
+            LottoTicket(listOf(1, 2, 3, 7, 5, 6)), // 5 + bonus
             LottoTicket(listOf(10, 2, 3, 4, 5, 6)), // 5
             LottoTicket(listOf(1, 2, 3, 41, 5, 6)), // 5
             LottoTicket(listOf(12, 22, 31, 4, 5, 6)), // 3
@@ -50,12 +57,14 @@ internal class LottoResultMatcherTest {
             LottoTicket(listOf(15, 25, 34, 41, 44, 45)), // 0
         )
         val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val bonusNumber = 7
 
-        val winningTickets = LottoResultMatcher.winningTickets(tickets, winnerNumbers)
+        val winningTickets = LottoResultMatcher.winningTickets(tickets, winnerNumbers, bonusNumber)
 
-        assertThat(winningTickets.filter { it.winnings == Winnings.SIX }).hasSize(1)
-        assertThat(winningTickets.filter { it.winnings == Winnings.FIVE }).hasSize(2)
-        assertThat(winningTickets.filter { it.winnings == Winnings.FOUR }).hasSize(0)
-        assertThat(winningTickets.filter { it.winnings == Winnings.THREE }).hasSize(2)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FIRST }).hasSize(1)
+        assertThat(winningTickets.filter { it.winnings == Winnings.SECOND }).hasSize(2)
+        assertThat(winningTickets.filter { it.winnings == Winnings.THIRD }).hasSize(2)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FOURTH }).hasSize(0)
+        assertThat(winningTickets.filter { it.winnings == Winnings.FIFTH }).hasSize(2)
     }
 }
