@@ -1,11 +1,17 @@
 package lotto
 
+import lotto.domain.Extractor
+import lotto.domain.LottoMachine
+import lotto.domain.LottoWinning
+import lotto.view.InputView
+import lotto.view.ResultView
+
 fun main() {
-    val purchaseMoney = InputView.getPurchaseMoney()
+    val money = InputView.getMoney()
 
     val lottoMachine = LottoMachine()
 
-    val lottoTickets = lottoMachine.purchase(purchaseMoney, Extractor.randomNumberFunc)
+    val lottoTickets = lottoMachine.purchase(money, Extractor.randomNumberFunc)
 
     ResultView.printTickets(lottoTickets)
 
@@ -16,5 +22,5 @@ fun main() {
 
     val lottoPrizes = lottoWinning.getPrizes(lottoTickets)
 
-    ResultView.printResult(lottoPrizes.prizeResult, lottoPrizes.earnings(purchaseMoney))
+    ResultView.printResult(lottoPrizes.prizeResult, lottoPrizes.earnings(money))
 }

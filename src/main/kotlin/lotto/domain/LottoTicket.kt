@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
-import lotto.LottoRule.LOTTO_NUMBER_COUNT
+import lotto.domain.LottoRule.LOTTO_NUMBER_COUNT
 
 class LottoTickets(val lottoTickets: List<LottoTicket> = emptyList())
 open class LottoTicket(val numbers: List<LottoNumber>) {

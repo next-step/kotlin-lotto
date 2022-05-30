@@ -1,9 +1,8 @@
-package lotto
+package lotto.domain
 
-class PurchaseMoney(val money: Int) {
-
+data class Money(val amount: Int) {
     init {
-        require(money > 0) {
+        require(amount >= 0) {
             NEGATIVE_VALUE_MESSAGE
         }
     }

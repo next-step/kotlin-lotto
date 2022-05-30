@@ -1,16 +1,19 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoNumber
+import lotto.domain.Money
 
 object InputView {
     private const val NULL_MESSAGE = "입력값은 null일 수 없습니다."
 
-    fun getPurchaseMoney(): PurchaseMoney {
+    fun getMoney(): Money {
         println("구입 금액을 입력해 주세요.")
 
         val money = readLine()?.toInt()
 
         requireNotNull(money) { NULL_MESSAGE }
 
-        return PurchaseMoney(money)
+        return Money(money)
     }
 
     fun getWinningNumbers(): List<LottoNumber> {

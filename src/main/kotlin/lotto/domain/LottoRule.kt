@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object LottoRule {
     const val MIN_NUMBER = 1

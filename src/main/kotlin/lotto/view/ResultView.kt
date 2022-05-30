@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoPrize
+import lotto.domain.LottoTickets
 
 object ResultView {
     fun printTickets(lottoTickets: LottoTickets) {
@@ -13,16 +16,11 @@ object ResultView {
         println("당첨 통계")
         prizeResult.forEach {
             val (prize, count) = it
-
-            val bonusText = if (prize == LottoPrize.FIFTH_BONUS) {
-                ", 보너스 볼 일치"
-            } else {
-                ""
-            }
-
-            println("${prize.matchCount}개 일치$bonusText ${prize.price}원 ($count)개")
+            println("${prize.matchCount}개 일치${getBonusText(prize)} ${prize.price}원 ($count)개")
         }
 
         println("총 수익률은 ${earnings}입니다")
     }
+
+    private fun getBonusText(prize: LottoPrize) = if (prize == LottoPrize.FIFTH_BONUS) ", 보너스 볼 일치" else ""
 }
