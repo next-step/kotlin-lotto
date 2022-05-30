@@ -1,6 +1,5 @@
 package lotto.view.inputconverter
 
-import lotto.domain.model.LottoNumber
 import lotto.domain.model.WinningNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -10,16 +9,7 @@ class WinningNumbersConverterTest {
     @Test
     fun `WinningNumbersConverter는 string Input을 WinningNumbers로 변환한다`() {
         val winningNumbers = WinningNumbersConverter.convert("1, 2, 3, 4, 5, 6")
-        val expected = WinningNumbers(
-            setOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6)
-            )
-        )
+        val expected = WinningNumbers.default()
 
         assertThat(winningNumbers).isEqualTo(expected)
     }
