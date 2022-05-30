@@ -10,14 +10,6 @@ open class LottoTicket(val numbers: List<LottoNumber>) {
         }
     }
 
-    fun matchCount(winningNumbers: List<LottoNumber>): Int {
-        return winningNumbers.intersect(numbers.toSet()).size
-    }
-
-    fun isMatchBonus(bonusNumber: LottoNumber): Boolean {
-        return bonusNumber in this.numbers
-    }
-
     companion object {
         private const val NOT_MATCH_NUMBER_COUNT = "로또 번호는 $LOTTO_NUMBER_COUNT 개의 숫자로 구성되어야 합니다"
     }

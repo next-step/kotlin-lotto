@@ -9,18 +9,12 @@ fun main() {
 
     ResultView.printTickets(lottoTickets)
 
-    val winningNumbers = InputView.getWinningNumbers()
-
-    val bonusNumber = InputView.getBonusNumber()
-
-    val lottoPrizes = LottoPrizes(
-        lottoTickets.lottoTickets.map {
-            LottoPrize.of(
-                matchCount = it.matchCount(winningNumbers),
-                matchBonus = it.isMatchBonus(bonusNumber),
-            )
-        }
+    val lottoWinning = LottoWinning(
+        numbers = InputView.getWinningNumbers(),
+        bonusNumber = InputView.getBonusNumber()
     )
+
+    val lottoPrizes = lottoWinning.getPrizes(lottoTickets)
 
     ResultView.printResult(lottoPrizes.prizeResult, lottoPrizes.earnings(purchaseMoney))
 }
