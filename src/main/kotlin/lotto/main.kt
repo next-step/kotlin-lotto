@@ -1,7 +1,13 @@
 package lotto
 
+import lotto.domain.LottoMachine
 import lotto.ui.InputUI
+import lotto.ui.OutputUI
 
 fun main() {
-    InputUI.receivePurchaseAmount()
+    val amount = InputUI.receivePurchaseAmount()
+
+    val lotto = LottoMachine.buy(amount)
+    OutputUI.drawPurchaseMessage(lotto.size)
+    OutputUI.drawLotto(lotto)
 }
