@@ -1,14 +1,14 @@
 package lotto
 
 import lotto.application.LottoMachine
-import lotto.application.vo.Purchase
+import lotto.application.PurchaseFactory
 import lotto.domain.LottoBundle
 import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
 fun main() {
-    val purchase = Purchase(InputView.inputAmount(), InputView.inputManualLottoCount())
+    val purchase = PurchaseFactory.create(InputView.inputAmount(), InputView.inputManualLottoCount())
     val manualLottoNumbers = InputView.inputManualLottoNumbers(purchase.purchaseCounts.manualLottoCount.count)
     ResultView.printLottoCount(purchase)
 
