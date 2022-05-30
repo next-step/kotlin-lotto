@@ -26,7 +26,7 @@ class LottoPrizeManager {
 
     private fun validateUniqueItem(prizePolicy: LottoPrizePolicy) {
         lottoPrizePolices.forEach {
-            require(it.winningNumberMatchCount != prizePolicy.winningNumberMatchCount) { "동일한 당첨 정책이 존재합니다" }
+            require(it != prizePolicy) { "동일한 당첨 정책이 존재합니다" }
         }
     }
 }
