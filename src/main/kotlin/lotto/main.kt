@@ -25,7 +25,10 @@ fun makeLottoStore(): LottoStore {
     val manualLottoNumbers = InputView.getLottoNumbers(manualLottoCount)
     lottoMaker.buyManualLotto(manualLottoNumbers)
 
-    return LottoStore(userMoney, manualLottoCount, lottoMaker).apply {
+    val autoLottoCount = userMoney.getLottoCount() - manualLottoCount
+    val autoLottoNumbers = List(autoLottoCount) { lottoMaker.buyAutoLotto() }
+
+    return LottoStore(userMoney, lottoMaker.manualLotto, autoLottoNumbers).apply {
         PrintView.printLottoCount(manualLottoCount, autoLottoCount)
         PrintView.printBoughtLottoList(boughtMoney)
     }

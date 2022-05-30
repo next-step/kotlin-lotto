@@ -9,26 +9,12 @@ class LottoStoreTest {
     @ValueSource(ints = [14000, 23000])
     @ParameterizedTest
     fun `로또가 하나당 1000원으로 맞게 계산되는지 테스트`(money: Int) {
-        val manualCount = 0
-        val lottoStore = LottoStore(Money(money), manualCount)
+        val userMoney = Money(money)
 
-        val answer = lottoStore.autoLottoCount
+        val answer = userMoney.getLottoCount()
         val expect = money / 1000
 
         assertThat(answer).isEqualTo(expect)
-    }
-
-    @Test
-    fun `자동, 수동의 개수가 총금액내에서 일치하는지 테스트`() {
-        val manualCount = 3
-        val money = 5000
-        val totalCount = 5
-        val lottoStore = LottoStore(Money(money), manualCount)
-
-        val autoCount = lottoStore.autoLottoCount
-        val answer = manualCount + autoCount
-
-        assertThat(answer).isEqualTo(totalCount)
     }
 
     @Test
@@ -51,8 +37,8 @@ class LottoStoreTest {
 
             override fun buyManualLotto(numbers: List<List<Int>>) {}
         }
-        val manualCount = 0
-        val lottoStore = LottoStore(Money(myMoney), manualCount, lottoMaker)
+        val autoLottoNumbers = List(3) { lottoMaker.buyAutoLotto() }
+        val lottoStore = LottoStore(Money(myMoney), lottoMaker.manualLotto, autoLottoNumbers)
         val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 
         val answer3prize = lottoResult.first { it.prize == LottoPrizeInfo.WIN3 }.count
@@ -92,8 +78,9 @@ class LottoStoreTest {
 
             override fun buyManualLotto(numbers: List<List<Int>>) {}
         }
-        val manualCount = 1
-        val lottoStore = LottoStore(Money(myMoney), manualCount, lottoMaker)
+
+        val autoLottoNumbers = List(2) { lottoMaker.buyAutoLotto() }
+        val lottoStore = LottoStore(Money(myMoney), lottoMaker.manualLotto, autoLottoNumbers)
 
         val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 

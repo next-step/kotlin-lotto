@@ -2,11 +2,9 @@ package lotto.domain
 
 class LottoStore(
     private val money: Money,
-    manualCount: Int,
-    private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()
+    manualLottos: List<LottoNumbers>,
+    autoLottos: List<LottoNumbers>
 ) {
-    val autoLottoCount = money.getLottoCount() - manualCount
-
     private val _boughtLottos = mutableListOf<LottoNumbers>()
 
     val boughtMoney
@@ -17,10 +15,9 @@ class LottoStore(
     private var totalMoney = Money()
 
     init {
-        _boughtLottos.addAll(lottoMaker.manualLotto)
-        repeat(autoLottoCount) {
-            _boughtLottos.add(lottoMaker.buyAutoLotto())
-        }
+        _boughtLottos.addAll(manualLottos)
+
+        _boughtLottos.addAll(autoLottos)
     }
 
     fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
