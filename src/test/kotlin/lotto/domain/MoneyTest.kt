@@ -1,5 +1,6 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -9,5 +10,15 @@ class MoneyTest {
         assertThrows<IllegalArgumentException> {
             Money(-1)
         }
+    }
+
+    @Test
+    fun `머니 객체의 더하기연산 테스트`() {
+        val sumResultMoney = Money(3) + Money(5)
+
+        val answer = sumResultMoney.money
+        val expect = 8
+
+        assertThat(answer).isEqualTo(expect)
     }
 }
