@@ -8,8 +8,9 @@ fun main() {
     val manualPurchaseCount = LottoInputView.manualPurchaseCountInputView()
     val manualNumbers = LottoInputView.manualLottoNumberInputView(manualPurchaseCount)
 
-    val manualPurchase = LottoShop(purchasePrice).manualPurchase(manualNumbers)
-    val autoPurchase = LottoShop(purchasePrice).autoPurchase()
+    val lottoShop = LottoShop(purchasePrice)
+    val manualPurchase = lottoShop.manualPurchase(manualNumbers)
+    val autoPurchase = lottoShop.autoPurchase()
 
     val myLottery = MyLottoTickets(manualPurchase, autoPurchase)
 
