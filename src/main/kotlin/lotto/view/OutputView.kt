@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.constants.Messages
-import lotto.model.LottoResult
+import lotto.model.LottoResults
 import lotto.model.LottoTicket
 import lotto.model.Prize
 
@@ -10,8 +10,6 @@ import lotto.model.Prize
  * Created by Jaesungchi on 2022.05.25..
  */
 object OutputView {
-    private const val NOT_HAVE_TICKET_COUNT = 0
-
     fun printTicket(tickets: List<LottoTicket>) {
         println("${tickets.size}${Messages.BUY_AMOUNT_LOTTO}")
         tickets.forEach {
@@ -19,11 +17,11 @@ object OutputView {
         }
     }
 
-    fun printLottoResult(lottoResults: List<LottoResult>) {
+    fun printLottoResult(lottoResults: LottoResults) {
         println(Messages.LOTTO_RESULT)
 
         enumValues<Prize>().map { prize ->
-            val count = lottoResults.find { it.prize == prize }?.count ?: NOT_HAVE_TICKET_COUNT
+            val count = lottoResults.getPrizeCount(prize)
             when (prize) {
                 Prize.LOSER -> return@map
                 Prize.SECOND -> printSecondPrize(count)

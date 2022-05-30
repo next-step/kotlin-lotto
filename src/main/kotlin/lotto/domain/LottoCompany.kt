@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.constants.ErrorMessages
 import lotto.model.LottoResult
+import lotto.model.LottoResults
 import lotto.model.LottoTicket
 import lotto.model.Prize
 
@@ -15,7 +16,7 @@ class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int)
         require(!winningTicket.numbers.contains(bonusNumber)) { ErrorMessages.BONUS_IS_DUPLICATE_WITH_WINNINGS }
     }
 
-    fun convertTicketsToLottoResults(tickets: List<LottoTicket>): List<LottoResult> {
+    fun convertTicketsToLottoResults(tickets: List<LottoTicket>): LottoResults {
         return convertPrizeToLottoResult(tickets.map { findCorrectLotto(it) })
     }
 
@@ -25,8 +26,8 @@ class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int)
         return Prize.of(matchCounts, isCorrectBonus)
     }
 
-    private fun convertPrizeToLottoResult(prizes: List<Prize>): List<LottoResult> {
-        return prizes.groupBy { it }.map { LottoResult(it.key, it.value.size) }
+    private fun convertPrizeToLottoResult(prizes: List<Prize>): LottoResults {
+        return LottoResults(prizes.groupBy { it }.map { LottoResult(it.key, it.value.size) })
     }
 
     companion object {
