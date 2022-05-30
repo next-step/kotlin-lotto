@@ -5,8 +5,8 @@ import advancedcalculate.service.AdvancedCalculatorService
 
 fun main() {
 
-    val input = readLine()!!
-    
     val advancedCalculatorController = AdvancedCalculatorController(AdvancedCalculatorService())
+
+    val input = readln()
     println(advancedCalculatorController.run(input))
 }

@@ -6,9 +6,9 @@ class AdvancedCalculator(calculateInput: String) {
 
     init {
         delimiter = Delimiter.from(calculateInput)
-        operands = delimiter.extractOperands(calculateInput)
+        operands = delimiter.extractOperands()
     }
-    
+
     fun calculate(): Double {
         if (operands.isEmpty()) {
             return 0.0

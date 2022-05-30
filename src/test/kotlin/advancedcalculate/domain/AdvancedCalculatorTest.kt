@@ -18,7 +18,7 @@ internal class AdvancedCalculatorTest {
 
     @ParameterizedTest
     @EmptySource
-    internal fun `빈 문자열 테스트`(input: String) {
+    internal fun `빈 문자열이 들어오면 0을 반환한다`(input: String) {
         val advancedCalculator = AdvancedCalculator(input)
 
         val result = advancedCalculator.calculate()

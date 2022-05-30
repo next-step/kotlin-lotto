@@ -1,13 +1,13 @@
 package advancedcalculate.domain
 
-class CustomDelimiter(calculateInput: String) : Delimiter() {
+class CustomDelimiter(private val calculateInput: String) : Delimiter() {
     val customDelimiter: String
 
     init {
-        customDelimiter = extractCustomDelimiter(calculateInput)
+        customDelimiter = extractCustomDelimiter()
     }
 
-    override fun extractOperands(calculateInput: String): List<Operand> {
+    override fun extractOperands(): List<Operand> {
         val rawOperands = OPERANDS_PARSE_REGEX.replace(calculateInput, "")
 
         return rawOperands.split(customDelimiter)
@@ -22,7 +22,7 @@ class CustomDelimiter(calculateInput: String) : Delimiter() {
         return Operand(input.toDouble())
     }
 
-    private fun extractCustomDelimiter(calculateInput: String): String = CUSTOM_DELIMITER_PARSE_REGEX.replace(calculateInput, "")
+    private fun extractCustomDelimiter(): String = CUSTOM_DELIMITER_PARSE_REGEX.replace(calculateInput, "")
 
     companion object {
         val CUSTOM_DELIMITER_REGEX = Regex("""//.\\n.*""")

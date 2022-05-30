@@ -1,7 +1,7 @@
 package advancedcalculate.domain
 
-class DefaultDelimiter : Delimiter() {
-    override fun extractOperands(calculateInput: String): List<Operand> {
+class DefaultDelimiter(private val calculateInput: String) : Delimiter() {
+    override fun extractOperands(): List<Operand> {
         if (calculateInput.isBlank()) {
             return emptyList()
         }
