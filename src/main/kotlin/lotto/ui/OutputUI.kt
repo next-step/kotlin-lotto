@@ -1,7 +1,7 @@
 package lotto.ui
 
-import lotto.domain.LottoResult
 import lotto.domain.LottoList
+import lotto.domain.LottoResult
 
 object OutputUI {
 
@@ -19,7 +19,7 @@ object OutputUI {
         println("당첨 통계")
         println("---------")
         result.forEach { grade, count ->
-            "${grade.matchCount}개 일치 (${grade.reward})- ${count}개"
+            println("${grade.matchCount}개 일치 (${grade.reward})- ${count}개")
         }
     }
 
