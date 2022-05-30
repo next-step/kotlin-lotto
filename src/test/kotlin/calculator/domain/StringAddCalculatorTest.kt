@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 
 internal class StringAddCalculatorTest : FreeSpec({
 
-    val  stringAddCalculator = StringAddCalculator()
+    val stringAddCalculator = StringAddCalculator()
 
     "문자열로 주어진 숫자의 합을 반환한다." - {
         listOf(

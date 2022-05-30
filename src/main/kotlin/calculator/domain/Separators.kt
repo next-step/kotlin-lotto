@@ -4,7 +4,7 @@ class Separators(
     private val values: List<Separator> = listOf(
         Default,
         Custom,
-    )
+    ),
 ) {
     fun splitText(text: String): List<String> {
         val separator = getMatchSeparator(text = text)

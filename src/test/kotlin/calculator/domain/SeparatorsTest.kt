@@ -16,7 +16,7 @@ internal class SeparatorsTest : FreeSpec({
             row("//a\n1a1a1", listOf("1", "1", "1")),
             row("//!\n3!5!2", listOf("3", "5", "2")),
             row("// \n3 5 2", listOf("3", "5", "2")),
-        ).forEach{(text, result) ->
+        ).forEach { (text, result) ->
             "'$text'를 나눈 결과는 '$result' 다." {
                 Separators().splitText(text = text).shouldContainExactly(result)
             }

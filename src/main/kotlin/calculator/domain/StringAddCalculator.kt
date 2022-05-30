@@ -1,7 +1,7 @@
 package calculator.domain
 
 class StringAddCalculator(
-    private val separators: Separators = Separators()
+    private val separators: Separators = Separators(),
 ) {
 
     fun add(text: String?): Int {

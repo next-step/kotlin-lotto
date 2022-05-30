@@ -8,7 +8,7 @@ internal class PositiveNumbersTest : FreeSpec({
 
     "주어진 정수의 총합을 반환한다." - {
         listOf(
-            row(listOf(1,2,3,4,5), 15),
+            row(listOf(1, 2, 3, 4, 5), 15),
             row(listOf(1), 1),
             row(listOf(10, 20), 30),
         ).forEach { (numbers, result) ->
