@@ -12,6 +12,7 @@ internal class NumberGeneratorTest {
     @CsvSource(
         "1,45,6",
         "1,45,3",
+        "1,45,45",
         "-999,-1,10",
         "0,9999,100",
     )
