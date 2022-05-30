@@ -6,7 +6,7 @@ class KoreanLottoNumberMaker : LottoMaker {
     override val manualLotto
         get() = _manualLotto.toList()
 
-    override fun makeLottoNumbers(): LottoNumbers {
+    override fun buyAutoLotto(): LottoNumbers {
         val shuffled = lottoNumberCandidate.shuffled()
         return LottoNumbers(shuffled.subList(LOTTO_START, LOTTO_END))
     }

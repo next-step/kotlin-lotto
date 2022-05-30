@@ -19,7 +19,7 @@ class LottoStore(
     init {
         _boughtLottos.addAll(lottoMaker.manualLotto)
         repeat(autoLottoCount) {
-            _boughtLottos.add(lottoMaker.makeLottoNumbers())
+            _boughtLottos.add(lottoMaker.buyAutoLotto())
         }
     }
 
