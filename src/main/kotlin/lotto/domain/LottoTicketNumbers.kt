@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoTicketNumbers private constructor(val value: List<LottoTicketNumber>) {
     init {
-        require(value.size == VALIDATED_LOTTO_TICKET_NUMBER_SIZE) { ERROR_MESSAGE_BY_LOTTO_NUMBER_SIZE }
+        require(value.size == LOTTO_TICKET_NUMBER_SIZE) { ERROR_MESSAGE_BY_LOTTO_NUMBER_SIZE }
         validateDuplicateLottoNumber()
     }
 
@@ -27,9 +27,9 @@ class LottoTicketNumbers private constructor(val value: List<LottoTicketNumber>)
     }
 
     companion object {
-        private const val VALIDATED_LOTTO_TICKET_NUMBER_SIZE = 6
+        const val LOTTO_TICKET_NUMBER_SIZE = 6
         private const val ERROR_MESSAGE_BY_LOTTO_NUMBER_SIZE =
-            "로또 티켓은 $VALIDATED_LOTTO_TICKET_NUMBER_SIZE 개수의 로또 번호를 가지고 있어야 됩니다"
+            "로또 티켓은 $LOTTO_TICKET_NUMBER_SIZE 개수의 로또 번호를 가지고 있어야 됩니다"
 
         fun ofString(lottoNumbersString: String, delimiters: String): LottoTicketNumbers {
             val lottoNumbersByInt = lottoNumbersString
