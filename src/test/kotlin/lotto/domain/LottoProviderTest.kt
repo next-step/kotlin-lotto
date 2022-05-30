@@ -5,6 +5,13 @@ import org.junit.jupiter.api.Test
 
 class LottoProviderTest {
     @Test
+    fun `로또 1장의 가격은 1000원이다`() {
+        val price = LottoProvider.LOTTO_PRICE
+
+        assertThat(price).isEqualTo(1000)
+    }
+
+    @Test
     fun `구입금액으로 살 수 있는 로또 개수를 계산할 수 있다`() {
         val payment = 14300
 
