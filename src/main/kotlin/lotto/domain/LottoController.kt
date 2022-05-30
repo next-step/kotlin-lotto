@@ -9,10 +9,10 @@ class LottoController(
 ) {
     fun run() {
         val ticketMachine = TicketMachine(NumberGenerator())
-        val tickets = ticketMachine.buy(inputView.amount())
+        val tickets = ticketMachine.buy(inputView.readAmount())
         outputView.printTickets(tickets)
 
-        val winningNumbers = inputView.winningNumbers()
+        val winningNumbers = inputView.readWinningNumbers()
         val winningInfo = winningNumbers.compare(tickets)
 
         outputView.printStat(winningInfo)
