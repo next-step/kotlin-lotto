@@ -1,8 +1,7 @@
 package lotto.domain
 
-import lotto.domain.numbers.LottoNumbersGenerator
-import lotto.domain.numbers.RandomNumbersGenerator
+import lotto.domain.numbers.LottoNumbers
 
-class Lotto(numbersGenerator: LottoNumbersGenerator = RandomNumbersGenerator) {
-    val numbers: List<Int> = numbersGenerator.generate()
+class Lotto(val numbers: LottoNumbers = LottoNumbers()) {
+    constructor(lottoNumbers: List<Int>) : this(LottoNumbers(lottoNumbers))
 }

@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.domain.numbers.CustomNumbersGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,7 +9,7 @@ class WinningLottoTest {
         val winningNumbers = listOf(10, 20, 30, 35, 40, 45)
         val winningLotto = WinningLotto(winningNumbers)
 
-        assertThat(winningLotto.winningNumbers).isEqualTo(winningNumbers)
+        assertThat(winningLotto.winningNumbers.list).isEqualTo(winningNumbers)
     }
 
     @Test
@@ -19,7 +18,7 @@ class WinningLottoTest {
         val winningLotto = WinningLotto(winningNumbers)
 
         val threeMatchingNumbers = listOf(10, 20, 30, 1, 2, 3)
-        val candidateLotto1 = Lotto(numbersGenerator = CustomNumbersGenerator(threeMatchingNumbers))
+        val candidateLotto1 = Lotto(threeMatchingNumbers)
 
         assertThat(winningLotto.getNumberOfMatchingNumbers(candidateLotto1)).isEqualTo(3)
     }
@@ -30,7 +29,7 @@ class WinningLottoTest {
         val winningLotto = WinningLotto(winningNumbers)
 
         val sixMatchingNumbers = listOf(40, 35, 10, 45, 20, 30)
-        val candidateLotto2 = Lotto(numbersGenerator = CustomNumbersGenerator(sixMatchingNumbers))
+        val candidateLotto2 = Lotto(sixMatchingNumbers)
 
         assertThat(winningLotto.getNumberOfMatchingNumbers(candidateLotto2)).isEqualTo(6)
     }

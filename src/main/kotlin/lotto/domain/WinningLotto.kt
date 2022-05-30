@@ -1,10 +1,8 @@
 package lotto.domain
 
-import lotto.domain.numbers.CustomNumbersGenerator
-import lotto.domain.numbers.LottoNumbersGenerator
+import lotto.domain.numbers.LottoNumbers
 
-class WinningLotto(winningNumbers: List<Int>, generator: LottoNumbersGenerator = CustomNumbersGenerator(winningNumbers)) {
-    val winningNumbers = generator.generate()
-
-    fun getNumberOfMatchingNumbers(lotto: Lotto): Int = winningNumbers.intersect(lotto.numbers.toSet()).size
+class WinningLotto(winningNumbers: List<Int>) {
+    val winningNumbers = LottoNumbers(winningNumbers)
+    fun getNumberOfMatchingNumbers(lotto: Lotto): Int = winningNumbers.list.intersect(lotto.numbers.list.toSet()).size
 }
