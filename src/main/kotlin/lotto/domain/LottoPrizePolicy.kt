@@ -5,6 +5,11 @@ class LottoPrizePolicy(
     val wonPrize: Money,
     private val includeBonusNumber: Boolean? = null,
 ) {
+
+    fun includeBonusNumber(): Boolean {
+        return includeBonusNumber == true
+    }
+
     fun isWon(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): Boolean {
         return won(lottoTicket, winningLottoNumbers) != null
     }
