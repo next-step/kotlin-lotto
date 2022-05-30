@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.agency.LottoTicket
+import lotto.agency.number.LottoNumber
 import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.NotNumericException
 
@@ -26,7 +27,9 @@ class InputView {
         val bonus = inputText2.toInt()
 
         validateBonus(wonLottoNumbers, bonus)
-        return LottoTicket(wonLottoNumbers, bonus)
+        val wonLottoTicket = LottoTicket(wonLottoNumbers)
+        wonLottoTicket.bonus = LottoNumber(bonus)
+        return wonLottoTicket
     }
 
     private fun validateNotString(toCheck: String) {
