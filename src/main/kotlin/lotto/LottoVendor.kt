@@ -9,4 +9,8 @@ class LottoVendor {
     fun getNumberOfLotto(price: Price): Int {
         return price.amount / LOTTO_PRICE
     }
+
+    companion object {
+        private const val LOTTO_PRICE = 1000
+    }
 }

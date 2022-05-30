@@ -14,4 +14,10 @@ value class Lotto(val numbers: Set<Int>) {
     fun countMatchedNumber(lotto: Lotto): Int {
         return lotto.numbers.filter { this.contains(it) }.size
     }
+
+    companion object {
+        private const val LOTTO_COUNT = 6
+        private const val LOTTO_MIN_NUMBER = 1
+        private const val LOTTO_MAX_NUMBER = 45
+    }
 }
