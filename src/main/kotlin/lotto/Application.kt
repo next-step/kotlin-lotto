@@ -2,6 +2,7 @@ package lotto
 
 import lotto.application.LottoMachine
 import lotto.application.vo.Purchase
+import lotto.domain.LottoBundle
 import lotto.domain.WinningLotto
 import lotto.ui.InputView
 import lotto.ui.ResultView
@@ -12,7 +13,10 @@ fun main() {
     ResultView.printLottoCount(purchase)
 
     val lottoMachine = LottoMachine(purchase)
-    val lottoBundle = lottoMachine.buy(manualLottoNumbers)
+    val lottoBundle = buildList {
+        addAll(lottoMachine.buyManual(manualLottoNumbers))
+        addAll(lottoMachine.buyAuto())
+    }.let(::LottoBundle)
     ResultView.printLottoBundle(lottoBundle)
 
     val winningLotto = WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber())

@@ -17,24 +17,19 @@ class LottoMachine(
     private val purchase: Purchase
 ) {
 
-    fun buy(manualLottoNumbers: List<String>): LottoBundle {
+    fun buyManual(manualLottoNumbers: List<String>): List<Lotto> {
         require(purchase.purchaseCounts.manualLottoCount.count == manualLottoNumbers.size) {
             "수동로또 구입 갯수와 입력한 수동 로또 갯수가 일치 해야합니다."
         }
-        return buildList {
-            addAll(buyManual(manualLottoNumbers))
-            addAll(buyAuto())
-        }.let(::LottoBundle)
+        return manualLottoNumbers.map { lottoNumber ->
+            lottoNumber.split(DELIMITER)
+                .map { it.toIntOrNull() ?: throw IllegalArgumentException("로또 번호는 숫자만 가능합니다.") }
+                .map(::LottoNumber)
+                .toSet()
+        }.map(::Lotto)
     }
 
-    private fun buyManual(manualLottoNumbers: List<String>): List<Lotto> = manualLottoNumbers.map { lottoNumber ->
-        lottoNumber.split(DELIMITER)
-            .map { it.toIntOrNull() ?: throw IllegalArgumentException("로또 번호는 숫자만 가능합니다.") }
-            .map(::LottoNumber)
-            .toSet()
-    }.map(::Lotto)
-
-    private fun buyAuto(): List<Lotto> =
+    fun buyAuto(): List<Lotto> =
         List(purchase.purchaseCounts.autoLottoCount.count) {
             Lotto(LOTTO_NUMBERS.shuffled().subList(START_INDEX, END_INDEX).sorted().toSet())
         }
