@@ -12,8 +12,8 @@ class LottoNumbers(val lottoNumbers: List<LottoNumber>) {
     }
 
     companion object {
-        fun of(lottoNumbersList: List<Int>): LottoNumbers {
-            return LottoNumbers(lottoNumbersList.map { LottoNumber(it) })
+        fun of(lottoNumbers: List<Int>): LottoNumbers {
+            return LottoNumbers(lottoNumbers.map { LottoNumber(it) })
         }
     }
 }
