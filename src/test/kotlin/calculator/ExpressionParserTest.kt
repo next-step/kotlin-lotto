@@ -1,10 +1,12 @@
 package calculator
 
 import calculator.domain.Expression
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.NullSource
 import java.util.stream.Stream
 
 internal class ExpressionParserTest {
@@ -13,9 +15,17 @@ internal class ExpressionParserTest {
 
     @ParameterizedTest
     @MethodSource("expressionArguments")
-    fun `Expression을 파싱할 수 있다`(expression: String, expected: Expression) {
-        val result = expressionParser.parse(expression)
-        Assertions.assertThat(result).isEqualTo(expected)
+    fun `Expression을 파싱할 수 있다`(input: String, expected: Expression) {
+        val result = expressionParser.parse(input)
+        assertThat(result).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    @NullSource
+    fun `빈 문자열이나 null은 0을 반환한다`(input: String?) {
+        val result = expressionParser.parse(input)
+        assertThat(result).isEqualTo(Expression(listOf(0)))
     }
 
     companion object {

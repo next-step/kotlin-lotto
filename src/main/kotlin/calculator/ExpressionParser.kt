@@ -13,7 +13,9 @@ class ExpressionParser {
         return Expression(tokens.map(::Operand))
     }
 
-    fun parse(input: String): Expression {
+    fun parse(input: String?): Expression {
+        if (input.isNullOrEmpty()) return Expression(listOf(0))
+
         findCustomDelimiter(input)?.let {
             val customDelimiter = it.groupValues[1]
             val tokens = it.groupValues[2].split(customDelimiter)
