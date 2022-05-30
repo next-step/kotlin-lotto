@@ -2,6 +2,8 @@ package lotto
 
 data class LottoTicket(val numbers: List<Int>) {
     init {
+        LottoPolicy.validateDuplicatedNumber(numbers)
+        LottoPolicy.validateLottoNumberCount(numbers.size)
         numbers.forEach(LottoPolicy::validateBonusNumber)
     }
 
