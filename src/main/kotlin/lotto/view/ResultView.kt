@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.LottoStatistics
+import lotto.domain.LottoMatch
 
 object ResultView {
     private const val PRINT_BUY_LOTTO_COUNT = "개를 구매했습니다."
@@ -15,16 +15,13 @@ object ResultView {
         println()
     }
 
-    fun printWinningStatistics(lottoNumbers: List<Lotto>, winningLottoNumbers: List<Int>, earningRate: Double) {
+    fun printWinningStatistics(resultMap: Map<LottoMatch, Int>, earningRate: Double) {
         println()
         println("당첨 통계")
         println("---------")
 
-        val countToMoneyMap = mapOf(3 to 5000, 4 to 50000, 5 to 150000, 6 to 2000000000)
-
-        countToMoneyMap.forEach { countToMoney ->
-            val countSize = LottoStatistics.getLottoWinningCountOfLottoRank(lottoNumbers, winningLottoNumbers, countToMoney.key)
-            println("${countToMoney.key}개 일치 (${countToMoney.value}원)- ${countSize}개")
+        resultMap.toSortedMap().forEach { result ->
+            println("${result.key.count}개 일치 (${result.key.prize}원)- ${result.value}개")
         }
         println("총 수익률은 ${earningRate}입니다.")
     }
