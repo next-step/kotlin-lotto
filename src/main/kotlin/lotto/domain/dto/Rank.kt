@@ -10,7 +10,7 @@ enum class Rank(val count: Int, val amount: Long) {
 
     companion object {
         fun of(matchResult: LottoMatchResult): Rank {
-            return if (matchResult.matchCount == SECOND_OR_THIRD_MATCHING_COUNT) {
+            return if (matchResult.matchCount == THIRD.count) {
                 getSecondOrThird(matchResult.isBonusMatch)
             } else
                 Rank.values().find { it.count == matchResult.matchCount } ?: NONE
@@ -19,7 +19,5 @@ enum class Rank(val count: Int, val amount: Long) {
         private fun getSecondOrThird(isBonusMatch: Boolean): Rank {
             return if (isBonusMatch) SECOND else THIRD
         }
-
-        private const val SECOND_OR_THIRD_MATCHING_COUNT = 5
     }
 }

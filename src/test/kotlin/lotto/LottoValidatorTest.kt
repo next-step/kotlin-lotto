@@ -15,8 +15,8 @@ class LottoValidatorTest {
     @CsvSource(value = ["1, 2, 3, 4, 5, 6:7"], delimiter = ':')
     fun `당첨번호 숫자로 만들기`(input: String, bonusNumber: String) {
         val luckyDrawNumber = LottoValidator(input, bonusNumber)
-        assertThat(luckyDrawNumber.getLuckyNumbers).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(luckyDrawNumber.getBonusNumber).isEqualTo(7)
+        assertThat(luckyDrawNumber.luckyNumbers).isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(luckyDrawNumber.bonusNumber).isEqualTo(7)
     }
 
     @ParameterizedTest
@@ -24,7 +24,7 @@ class LottoValidatorTest {
     internal fun `당첨 테스트`(input: String, bonusNumber: String) {
         val lottoList = listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 6)))
         val lottoValidator = LottoValidator(input, bonusNumber)
-        val draw = LottoDraw(lottoValidator.getLuckyNumbers, lottoValidator.getBonusNumber)
+        val draw = LottoDraw(lottoValidator.luckyNumbers, lottoValidator.bonusNumber)
         draw.draw(lottoList)
 
         assertThat(draw.winningRanks.count { it == Rank.FIRST }).isEqualTo(1)
@@ -35,7 +35,7 @@ class LottoValidatorTest {
     internal fun `2등 당첨 테스트`(input: String, bonusNumber: String) {
         val lottoList = listOf(LottoNumber(listOf(1, 2, 3, 4, 5, 7)))
         val lottoValidator = LottoValidator(input, bonusNumber)
-        val draw = LottoDraw(lottoValidator.getLuckyNumbers, lottoValidator.getBonusNumber)
+        val draw = LottoDraw(lottoValidator.luckyNumbers, lottoValidator.bonusNumber)
         draw.draw(lottoList)
 
         assertThat(draw.winningRanks.count { it == Rank.SECOND }).isEqualTo(1)
