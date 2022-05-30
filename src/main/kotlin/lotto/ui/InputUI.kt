@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.domain.LottoNumbers
+import lotto.domain.WinningNumbers
 
 object InputUI {
 
@@ -9,9 +9,9 @@ object InputUI {
         return requireNotNull(readLine()).toInt()
     }
 
-    fun receiveWinningNumbers(): LottoNumbers {
+    fun receiveWinningNumbers(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val input = requireNotNull(readLine())
-        return LottoNumbers(input.replace(" ", "").split(",").map(String::toInt))
+        return WinningNumbers.fromCSV(input)
     }
 }
