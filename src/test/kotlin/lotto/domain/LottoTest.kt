@@ -22,4 +22,13 @@ class LottoTest {
             Assertions.assertThat(lotto.contains(it)).isEqualTo(numbers.contains(it))
         }
     }
+
+    @Test
+    fun `로또 범위를 벗어나는 입력이 들어오면 예외를 반환한다`() {
+        Assertions.assertThatThrownBy { Lotto(listOf(-1, 5, 7, 11, 25, 45)) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+
+        Assertions.assertThatThrownBy { Lotto(listOf(0, 5, 7, 11, 25, 46)) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+    }
 }

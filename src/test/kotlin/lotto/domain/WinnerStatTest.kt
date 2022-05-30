@@ -16,7 +16,7 @@ class WinnerStatTest {
         )
     )
 
-    val winner = listOf(3, 4, 5, 6, 7, 8)
+    val winner = WinnerNumbers(listOf(3, 4, 5, 6, 7, 8))
 
     val stat = WinnerStat(purchaseRecord, winner)
 
@@ -32,12 +32,6 @@ class WinnerStatTest {
 
     @Test
     fun `총 수익률을 반환한다`() {
-        Assertions.assertThat(stat.per()).isEqualTo(
-            (
-                Winner.MATCHED_SIX_NUMBERS.prizeMonery * 1 +
-                    Winner.MATCHED_FIVE_NUMBERS.prizeMonery * 2 +
-                    Winner.MATCHED_FOUR_NUMBERS.prizeMonery * 2
-                ) / (purchaseRecord.lottoList.size.toDouble() * 1000)
-        )
+        Assertions.assertThat(stat.per()).isEqualTo(333_850.0)
     }
 }

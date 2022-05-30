@@ -1,14 +1,12 @@
 package lotto.domain
 
-class Lotto {
-    private val numbers: List<Int>
+class Lotto(val numbers: List<Int>) {
 
-    constructor(randomNumberGenerator: RandomNumberGenerator) {
-        numbers = randomNumberGenerator.getRandomNumbers(LOTTO_NUMBER_RANGE, LOTTO_NUMBER_COUNT)
-    }
+    constructor(randomNumberGenerator: RandomNumberGenerator) :
+        this(randomNumberGenerator.getRandomNumbers(LOTTO_NUMBER_RANGE, LOTTO_NUMBER_COUNT))
 
-    constructor(numbers: List<Int>) {
-        this.numbers = numbers
+    init {
+        require(numbers.all { LOTTO_NUMBER_RANGE.contains(it) })
     }
 
     fun contains(number: Int): Boolean {
