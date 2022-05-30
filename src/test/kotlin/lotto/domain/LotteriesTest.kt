@@ -1,14 +1,10 @@
-package lotto.application
+package lotto.domain
 
-import lotto.domain.Lotteries
-import lotto.domain.Lotto
-import lotto.domain.Price
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.MapAssert
 import org.junit.jupiter.api.Test
 
-class LotteryAnnouncerTest {
-
+class LotteriesTest {
     @Test
     fun `winning doesn't depend on the order of numbers`() {
         val lotteries = Lotteries(
@@ -22,7 +18,7 @@ class LotteryAnnouncerTest {
         val winner = Lotto(setOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = 7
 
-        val result = LotteryAnnouncer.announce(winner, bonusNumber, lotteries)
+        val result = lotteries.getPriceGroupedLotteries(winner, bonusNumber)
 
         MapAssert(result).extractingByKey(Price.FIRST).isNotNull
     }
@@ -42,7 +38,7 @@ class LotteryAnnouncerTest {
 
         val bonusNumber = 7
 
-        val result = LotteryAnnouncer.announce(winner, bonusNumber, lotteries)
+        val result = lotteries.getPriceGroupedLotteries(winner, bonusNumber)
 
         MapAssert(result).extractingByKey(Price.SECOND).isNotNull
     }
@@ -62,9 +58,8 @@ class LotteryAnnouncerTest {
         val bonusNumber = 8
         val expected = 10000f
 
-        val priceGroupedLotteries = LotteryAnnouncer.announce(winner, bonusNumber, lotteries)
-        val result = LotteryAnnouncer.getEarningRate(investment, priceGroupedLotteries)
+        val (_, earningRate) = lotteries.getProfit(investment, winner, bonusNumber)
 
-        assertThat(result).isEqualTo(expected)
+        Assertions.assertThat(earningRate).isEqualTo(expected)
     }
 }
