@@ -1,6 +1,9 @@
 package lotto
 
 data class LottoTicket(val numbers: List<Int>) {
+    init {
+        numbers.forEach(LottoPolicy::validateBonusNumber)
+    }
 
     fun matchCountWith(other: LottoTicket): Int {
         return numbers.intersect(other.numbers).size

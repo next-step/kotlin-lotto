@@ -21,4 +21,10 @@ class LottoCreatorTest {
             autoCreatedLottoNumbers[number] == sortedList[number]
         }
     }
+
+    @Test
+    fun `수동으로 입력한 번호로 로또를 생성한다`() {
+        val manualLotto = listOf(1, 2, 3, 4, 5, 6)
+        LottoCreator.manualCreate(manualLotto)
+    }
 }
