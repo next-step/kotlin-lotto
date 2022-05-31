@@ -9,10 +9,8 @@ class LottoTicket(
         require(value.size == LOTTO_NUMBER_COUNT) { Const.ErrorMsg.LOTTO_TICKET_NUMBER_IS_NOT_6_ERROR_MSG }
     }
 
-    fun countIntersect(other: LottoTicket): Int =
-        this.value.mapNotNull { lottoNumber ->
-            other.value.find { it == lottoNumber }
-        }.size
+    fun countIntersection(other: LottoTicket): Int =
+        this.value.intersect(other.value).size
 
     fun toSortedList(): List<LottoNumber> =
         value.sortedWith(CompareLottoNumbers)

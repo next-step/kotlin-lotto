@@ -24,7 +24,7 @@ internal class LottoTicketTest {
         val lottoTicket1 = LottoTicket(1, 2, 3, 4, 5, 6)
         val lottoTicket2 = LottoTicket(1, 2, 3, 8, 9, 10)
 
-        val actualResult = lottoTicket1.countIntersect(lottoTicket2)
+        val actualResult = lottoTicket1.countIntersection(lottoTicket2)
         assertThat(actualResult).isEqualTo(3)
     }
 
