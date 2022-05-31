@@ -7,6 +7,11 @@ class InputView {
         return readlnOrNull() ?: throw IllegalArgumentException()
     }
 
+    fun manualLottoCount(): String {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readlnOrNull() ?: throw IllegalArgumentException()
+    }
+
     fun winningNumber(): List<String> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val lastWeekWinningNumber = readlnOrNull() ?: throw IllegalArgumentException()

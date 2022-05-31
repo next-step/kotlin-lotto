@@ -3,8 +3,8 @@ package lotto
 import lotto.domin.LottoMachine
 import lotto.domin.LottoNumberSet
 import lotto.domin.WinningStatics
+import lotto.dto.InputLottoMachineRequestDto
 import lotto.dto.InputLottoNumberDto
-import lotto.dto.InputPaymentRequestDto
 import lotto.util.LottoNumberGenerator
 import lotto.util.LottoNumberRandomGenerator
 import lotto.view.InputView
@@ -15,15 +15,16 @@ fun main() {
     val resultView = ResultView()
 
     val payment: String = inputView.payment()
-    val paymentRequestDto = InputPaymentRequestDto.convertPayment(payment)
+    val manualLottoCount: String = inputView.manualLottoCount()
+    val lottoMachineRequestDto = InputLottoMachineRequestDto.of(payment, manualLottoCount)
 
-    val lottoRecord = buyLotto(resultView, paymentRequestDto)
-    lottoStatics(inputView, resultView, paymentRequestDto, lottoRecord)
+    val lottoRecord = buyLotto(resultView, lottoMachineRequestDto)
+    lottoStatics(inputView, resultView, lottoMachineRequestDto, lottoRecord)
 }
 
-fun buyLotto(resultView: ResultView, paymentRequestDto: InputPaymentRequestDto): List<LottoNumberSet> {
+fun buyLotto(resultView: ResultView, lottoMachineRequestDto: InputLottoMachineRequestDto): List<LottoNumberSet> {
     val lottoNumberGenerator: LottoNumberGenerator = LottoNumberRandomGenerator()
-    val lottoMachine = LottoMachine(paymentRequestDto, lottoNumberGenerator)
+    val lottoMachine = LottoMachine(lottoMachineRequestDto, lottoNumberGenerator)
 
     lottoMachine.sellLotto()
     val issuanceLottoCount = lottoMachine.issuanceLottoCount
@@ -35,7 +36,7 @@ fun buyLotto(resultView: ResultView, paymentRequestDto: InputPaymentRequestDto):
 fun lottoStatics(
     inputView: InputView,
     resultView: ResultView,
-    paymentRequestDto: InputPaymentRequestDto,
+    paymentRequestDto: InputLottoMachineRequestDto,
     lottoRecord: List<LottoNumberSet>
 ) {
     val lastWeekWinningLotto: List<String> = inputView.winningNumber()

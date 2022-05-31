@@ -1,13 +1,14 @@
 package lotto.domin
 
-import lotto.dto.InputPaymentRequestDto
+import lotto.dto.InputLottoMachineRequestDto
 import lotto.util.LottoNumberGenerator
 
 class LottoMachine(
-    dto: InputPaymentRequestDto,
+    dto: InputLottoMachineRequestDto,
     lottoNumberGenerator: LottoNumberGenerator,
 ) {
     private val inputPayment: Int = dto.payment
+    private val inputManualLottoCount: Int = dto.manualLottoCount
     private val lotto: Lotto = Lotto(inputPayment, lottoNumberGenerator)
 
     private val _lottoRecord: MutableList<LottoNumberSet> = mutableListOf()
@@ -23,6 +24,7 @@ class LottoMachine(
 
     fun sellLotto() {
         issuanceLottoCount = lotto.issuanceCount()
+
         repeat(issuanceLottoCount) {
             _lottoRecord.add(
                 LottoNumberSet(lotto.issuance())

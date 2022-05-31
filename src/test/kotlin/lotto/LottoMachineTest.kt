@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import lotto.domin.LottoMachine
-import lotto.dto.InputPaymentRequestDto
+import lotto.dto.InputLottoMachineRequestDto
 import lotto.util.LottoNumberGenerator
 
 class LottoMachineTest : FreeSpec({
@@ -13,7 +13,8 @@ class LottoMachineTest : FreeSpec({
 
         "주어진 금액이 1000원 미만일 경우 IllegalArgumentException" {
             val payment = "100"
-            val dto = InputPaymentRequestDto.convertPayment(payment)
+            val lottoNumberCount = "2"
+            val dto = InputLottoMachineRequestDto.of(payment, lottoNumberCount)
             val lottoNumberGenerator = LottoNumberGenerator.Fake(listOf(1, 2, 3, 4, 5, 6))
             val exception = shouldThrow<IllegalArgumentException> {
                 LottoMachine(dto, lottoNumberGenerator)
@@ -23,7 +24,8 @@ class LottoMachineTest : FreeSpec({
 
         "주어진 금액이 로또 가격으로 나누어 떨어지지 않을 경우 IllegalArgumentException" {
             val payment = "1100"
-            val dto = InputPaymentRequestDto.convertPayment(payment)
+            val lottoNumberCount = "2"
+            val dto = InputLottoMachineRequestDto.of(payment, lottoNumberCount)
             val lottoNumberGenerator = LottoNumberGenerator.Fake(listOf(1, 2, 3, 4, 5, 6))
             val exception = shouldThrow<IllegalArgumentException> {
                 LottoMachine(dto, lottoNumberGenerator)
@@ -36,7 +38,8 @@ class LottoMachineTest : FreeSpec({
 
         "입력한 금액에 맞는 로또의 수가 나와야한다." {
             val payment = "2000"
-            val dto = InputPaymentRequestDto.convertPayment(payment)
+            val lottoNumberCount = "2"
+            val dto = InputLottoMachineRequestDto.of(payment, lottoNumberCount)
             val fakeNumber = listOf(1, 2, 3, 4, 5, 6)
             val lottoNumberGenerator = LottoNumberGenerator.Fake(fakeNumber)
             val lottoMachine = LottoMachine(dto, lottoNumberGenerator)
