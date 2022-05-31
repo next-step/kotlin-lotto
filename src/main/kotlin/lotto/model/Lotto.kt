@@ -11,8 +11,11 @@ class Lotto(
     }
 
     companion object {
+        const val LOTTO_NUMBER_COUNT = 6
+
         fun from(numbers: List<Int>): Lotto {
             validateUnique(numbers)
+            validateNumberCount(numbers)
 
             val lottoNumbers = numbers.map { LottoNumber.valueOf(it) }
             return Lotto(lottoNumbers)
@@ -20,5 +23,8 @@ class Lotto(
 
         private fun validateUnique(numbers: List<Int>) =
             require(numbers.size == numbers.toSet().size) { "로또에 중복되는 번호가 있을 수 없습니다." }
+
+        private fun validateNumberCount(numbers: List<Int>) =
+            require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호 개수는 ${LOTTO_NUMBER_COUNT}개 이어야 합니다." }
     }
 }

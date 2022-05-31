@@ -24,4 +24,11 @@ class LottoTest {
         val exception = assertThrows<IllegalArgumentException> { Lotto.from(listOf(1, 1, 2, 3, 4, 5)) }
         assertEquals("로또에 중복되는 번호가 있을 수 없습니다.", exception.message)
     }
+
+    @Test
+    fun `로또 번호 개수가 6개가 아니면 예외 발생`() {
+        // given, when, then
+        val exception = assertThrows<IllegalArgumentException> { Lotto.from(listOf(1, 2, 3, 4, 5)) }
+        assertEquals("로또 번호 개수는 6개 이어야 합니다.", exception.message)
+    }
 }
