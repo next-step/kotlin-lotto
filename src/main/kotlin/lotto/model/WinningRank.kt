@@ -5,10 +5,10 @@ enum class WinningRank(
     prizeMoney: Int
 ) {
 
-    FIRST_PRIZE(6, 2000000000),
-    SECOND_PRIZE(5, 1500000),
-    THIRD_PRIZE(4, 50000),
-    FOURTH_PRIZE(3, 5000),
+    FIRST_PRIZE(6, 2_000_000_000),
+    SECOND_PRIZE(5, 1_500_000),
+    THIRD_PRIZE(4, 50_000),
+    FOURTH_PRIZE(3, 5_000),
     NONE(0, 0);
 
     companion object {
