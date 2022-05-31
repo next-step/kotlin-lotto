@@ -4,13 +4,20 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.NormalLottery
 import lotto.infra.port.OutputSystem
+import lotto.vo.LotteryNumber
 import lotto.vo.LottoSet
 
 internal class BuyResultViewTest : BehaviorSpec({
 
     given("구매 결과 뷰는") {
         val lotteries =
-            LottoSet(listOf(NormalLottery(listOf(1, 2, 3, 4, 5, 6)), NormalLottery(listOf(1, 2, 3, 4, 5, 6)), NormalLottery(listOf(1, 2, 3, 4, 5, 6))))
+            LottoSet(
+                listOf(
+                    NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of)),
+                    NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of)),
+                    NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of))
+                )
+            )
         val stubOutputSystem = StubOutputSystem()
         val buyResultView = BuyResultView(stubOutputSystem, lotteries)
 

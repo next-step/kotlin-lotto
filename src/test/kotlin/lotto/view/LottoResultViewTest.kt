@@ -3,6 +3,7 @@ package lotto.view
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.NormalLottery
+import lotto.vo.LotteryNumber
 import lotto.vo.LottoSet
 
 internal class LottoResultViewTest : BehaviorSpec({
@@ -10,11 +11,11 @@ internal class LottoResultViewTest : BehaviorSpec({
     given("주어진 로또 세트와, 지난주 로또 번호를 입력으로") {
         val normalLotterySet = LottoSet(
             listOf(
-                NormalLottery(listOf(1, 2, 3, 4, 5, 6)),
-                NormalLottery(listOf(1, 2, 3, 4, 5, 7)),
+                NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of)),
+                NormalLottery(listOf(1, 2, 3, 4, 5, 7).map(LotteryNumber::of)),
             )
         )
-        val lastWeekNormalLottery = NormalLottery(listOf(1, 2, 3, 4, 5, 6))
+        val lastWeekNormalLottery = NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of))
         val stubIOSystem = StubIOSystem("")
         val lottoResultView = LottoResultView(stubIOSystem)
 
