@@ -5,6 +5,7 @@ import lotto.domain.Money
 
 object InputView {
     private const val NULL_MESSAGE = "입력값은 null일 수 없습니다."
+    private const val NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE = "0보다 작은 값은 입력할 수 없습니다."
 
     fun getMoney(): Money {
         println("구입 금액을 입력해 주세요.")
@@ -40,6 +41,12 @@ object InputView {
     }
 
     fun getManualTicketCount(): Int {
-        return readLine()?.toInt() ?: 0
+        val manualCount = readLine()?.toInt()
+
+        requireNotNull(manualCount) { NULL_MESSAGE }
+
+        require(manualCount > 0) { NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE }
+
+        return manualCount
     }
 }
