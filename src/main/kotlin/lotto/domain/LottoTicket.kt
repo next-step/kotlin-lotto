@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.domain.LottoRule.LOTTO_NUMBER_COUNT
 
-class LottoTickets(val lottoTickets: List<LottoTicket> = emptyList())
+class LottoTickets(val lottoTickets: List<List<LottoNumber>> = emptyList())
 open class LottoTicket(val numbers: List<LottoNumber>) {
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) {
