@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions
 import org.assertj.core.data.MapEntry
 import org.junit.jupiter.api.Test
 
-class WinnerStatTest {
+class WinnerTypeStatTest {
     val purchaseRecord = PurchaseRecord(
         listOf(
             Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
@@ -16,7 +16,7 @@ class WinnerStatTest {
         )
     )
 
-    val winner = Winner(Lotto(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber(it) }), LottoNumber(9))
+    val winner = Winner(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber(it) }, LottoNumber(9))
 
     val stat = WinnerStat(purchaseRecord, winner)
 
@@ -33,6 +33,13 @@ class WinnerStatTest {
 
     @Test
     fun `총 수익률을 반환한다`() {
-        Assertions.assertThat(stat.per()).isEqualTo(338_600.0)
+        Assertions.assertThat(stat.per()).isEqualTo(
+            (
+                WinnerType.MATCHED_SIX_NUMBERS.prizeMonery * 1 +
+                    WinnerType.MATCHED_FIVE_NUMBERS_WITH_BONUS.prizeMonery * 1 +
+                    WinnerType.MATCHED_FIVE_NUMBERS.prizeMonery * 1 +
+                    WinnerType.MATCHED_FOUR_NUMBERS.prizeMonery * 2
+                ) / (purchaseRecord.lottoList.size.toDouble() * 1000)
+        )
     }
 }

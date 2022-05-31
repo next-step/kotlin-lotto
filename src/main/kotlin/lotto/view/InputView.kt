@@ -1,6 +1,7 @@
 package lotto.view
 
-import lotto.domain.WinnerNumbers
+import lotto.domain.LottoNumber
+import lotto.domain.Winner
 
 object InputView {
     const val WINER_TEXT_DELIMITER = ","
@@ -19,19 +20,27 @@ object InputView {
         return str.toInt()
     }
 
-    fun getWinner(): WinnerNumbers {
+    fun getWinner(): Winner {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readWinner()
+        val lottoNumbers = readWinner()
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readBonusNumber()
+
+        return Winner(lottoNumbers, bonusNumber)
     }
 
-    private fun readWinner(): WinnerNumbers {
+    private fun readBonusNumber(): LottoNumber {
+        return LottoNumber(readPositiveNumber())
+    }
+
+    private fun readWinner(): List<LottoNumber> {
         val str = readLine()
         if (isInvalidWinnerString(str)) {
             println("잘못된 입력입니다. 다시 입력해주세요.")
             return readWinner()
         }
 
-        return WinnerNumbers(str!!.split(WINER_TEXT_DELIMITER).map { it.trim().toInt() })
+        return str!!.split(WINER_TEXT_DELIMITER).map { LottoNumber(it.trim().toInt()) }
     }
 
     private fun isInvalidWinnerString(str: String?): Boolean {

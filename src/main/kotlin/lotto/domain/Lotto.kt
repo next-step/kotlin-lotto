@@ -1,35 +1,21 @@
 package lotto.domain
 
-class Lotto(val numbers: List<Int>) {
+@JvmInline
+value class Lotto(val lottoNumbers: List<LottoNumber>) {
 
     constructor(randomNumberGenerator: RandomNumberGenerator) :
-        this(randomNumberGenerator.getRandomNumbers(LOTTO_NUMBER_RANGE, LOTTO_NUMBER_COUNT))
+        this(randomNumberGenerator.getRandomNumbers(LOTTO_NUMBER_RANGE, LOTTO_NUMBER_COUNT).map { LottoNumber(it) })
 
-    init {
-        require(numbers.all { LOTTO_NUMBER_RANGE.contains(it) })
+    fun contains(number: LottoNumber): Boolean {
+        return lottoNumbers.contains(number)
     }
 
-    fun contains(number: Int): Boolean {
-        return numbers.contains(number)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Lotto
-
-        if (numbers != other.numbers) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return numbers.hashCode()
+    fun countMatchedNumbers(other: Lotto): Int {
+        return lottoNumbers.count { other.contains(it) }
     }
 
     fun toString(delimiter: String, prefix: String = "", postfix: String = ""): String {
-        return numbers.joinToString(delimiter, prefix, postfix)
+        return lottoNumbers.joinToString(delimiter, prefix, postfix)
     }
 
     companion object {
