@@ -14,7 +14,7 @@ class Params(text: String?) {
 
     fun fold(operation: (Int, Int) -> Int): Param {
         return paramList.fold(Param.EMPTY_PARAM) {
-                acc: Param, param: Param ->
+            acc: Param, param: Param ->
             acc.operation(param, operation)
         }
     }

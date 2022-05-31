@@ -15,7 +15,7 @@ class LottoShopTest {
 
     @ParameterizedTest
     @CsvSource("1001,1", "1999,1", "2001,2")
-    fun `천원단위로 떨어지지 않으면? 천원단위 내림하여 계산한다`(cash: Int, numberOfLottos: Int) {
+    fun `천원단위로 떨어지지 않으면 천원단위 내림하여 계산한다`(cash: Int, numberOfLottos: Int) {
         Assertions.assertThat(LottoShop().purchase(Payment(cash)).lottoList.size)
             .isEqualTo(numberOfLottos)
     }

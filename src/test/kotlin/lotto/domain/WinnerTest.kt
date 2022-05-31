@@ -10,14 +10,14 @@ class WinnerTest {
     fun `여섯개의 당첨번호와 하나의 보너스 점수를 갖는다`() {
         Assertions.assertThat(
             Winner(
-                listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) },
+                Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
                 LottoNumber(7)
             )
         ).isNotNull
 
         Assertions.assertThatThrownBy {
             Winner(
-                listOf(1, 2, 3, 4, 5, 6, 7).map { LottoNumber(it) },
+                Lotto(listOf(1, 2, 3, 4, 5, 6, 7).map { LottoNumber(it) }),
                 LottoNumber(7)
             )
         }.isInstanceOf(IllegalArgumentException::class.java)

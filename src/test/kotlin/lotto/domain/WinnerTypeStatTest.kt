@@ -16,7 +16,7 @@ class WinnerTypeStatTest {
         )
     )
 
-    val winner = Winner(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber(it) }, LottoNumber(9))
+    val winner = Winner(Lotto(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber(it) }), LottoNumber(9))
 
     val stat = WinnerStat(purchaseRecord, winner)
 

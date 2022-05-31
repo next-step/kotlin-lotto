@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.Winner
 
@@ -26,7 +27,7 @@ object InputView {
         println("보너스 볼을 입력해 주세요.")
         val bonusNumber = readBonusNumber()
 
-        return Winner(lottoNumbers, bonusNumber)
+        return Winner(Lotto(lottoNumbers), bonusNumber)
     }
 
     private fun readBonusNumber(): LottoNumber {
