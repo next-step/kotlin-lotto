@@ -1,8 +1,7 @@
 package lotto.domain
 
 data class Lotto(
-    val numbers: List<Int>,
-    val price: Price = Price.NONE
+    val numbers: Set<Int>
 ) {
 
     init {
@@ -11,11 +10,25 @@ data class Lotto(
         }
     }
 
-    constructor(vararg numbers: Int) : this(numbers.toList())
+    constructor(vararg numbers: Int) : this(numbers.toSet())
 
-    fun winnerPrize(): Int = price.winningPrize
+    fun checkResult(winner: Lotto, bonusNumber: Int): Price {
+        return when (correctNumberCounts(winner.numbers)) {
+            6 -> Price.FIRST
+            5 -> checkSecondOrThirdPrice(winner, bonusNumber)
+            4 -> Price.FOURTH
+            3 -> Price.FIFTH
+            else -> Price.NONE
+        }
+    }
 
-    fun sortedNumbers(): List<Int> = numbers.sorted()
+    private fun checkSecondOrThirdPrice(winner: Lotto, bonusNumber: Int): Price {
+        return if ((winner.numbers + bonusNumber).containsAll(this.numbers)) Price.SECOND
+        else Price.THIRD
+    }
+
+    private fun correctNumberCounts(numbers: Set<Int>): Int =
+        this.numbers.intersect(numbers).count()
 
     private fun isInRange(number: Int): Boolean {
         return number in LOTTO_NUMBER_RANGE

@@ -8,7 +8,7 @@ class WinningNumberParserTest {
     @Test
     fun `winning numbers are parsed by comma`() {
         val inputNumbers = "1,2,3,45,7,6"
-        val expected = listOf(1, 2, 3, 45, 7, 6)
+        val expected = setOf(1, 2, 3, 45, 7, 6)
 
         val result = WinningNumberParser.parse(inputNumbers)
 
@@ -18,7 +18,7 @@ class WinningNumberParserTest {
     @Test
     fun `non-digit inputs are removed from result`() {
         val inputNumbers = "1,2,3,this,7,6"
-        val expected = listOf(1, 2, 3, 7, 6)
+        val expected = setOf(1, 2, 3, 7, 6)
 
         val result = WinningNumberParser.parse(inputNumbers)
 

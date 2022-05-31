@@ -1,9 +1,10 @@
 package lotto.domain
 
 enum class Price(val winningPrize: Int) {
-    FIRST(2000000000),
-    SECOND(1500000),
-    THIRD(50000),
-    FOURTH(5000),
+    FIRST(2_000_000_000),
+    SECOND(30_000_000),
+    THIRD(1_500_000),
+    FOURTH(50_000),
+    FIFTH(5_000),
     NONE(0)
 }
