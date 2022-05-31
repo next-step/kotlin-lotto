@@ -25,7 +25,13 @@ value class Lotto(private val lottoNumbers: List<LottoNumber>) {
     }
 
     companion object {
-        val LOTTO_NUMBER_RANGE = 1..45
+        const val LOTTO_PRICE = 1_000
         const val LOTTO_NUMBER_COUNT = 6
+        val LOTTO_NUMBER_RANGE = 1..45
+        val randomNumberGenerator: RandomNumberGenerator = RandomNumberGenerator()
+
+        fun getAutoLotto(count: Int): List<Lotto> {
+            return (1..count).map { Lotto(randomNumberGenerator) }
+        }
     }
 }

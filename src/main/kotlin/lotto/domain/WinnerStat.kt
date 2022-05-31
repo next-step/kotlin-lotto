@@ -10,7 +10,7 @@ class WinnerStat(
         .eachCount()
 
     fun per(): Double {
-        val price = purchaseRecord.lottoList.size * LottoShop.LOTTO_PRICE
+        val price = purchaseRecord.lottoList.size * Lotto.LOTTO_PRICE
         val earning = winnerTypeMap.map { e -> e.key.prizeMonery * e.value }.sum()
         return earning / price.toDouble()
     }

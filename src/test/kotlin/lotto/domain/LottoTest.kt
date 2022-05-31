@@ -51,6 +51,13 @@ class LottoTest {
             .isEqualTo(1)
     }
 
+    @Test
+    fun `Lotto에서 자동번호를 부여해 발급 가능하다`() {
+        Assertions.assertThat(Lotto.getAutoLotto(0)).isEmpty()
+        Assertions.assertThat(Lotto.getAutoLotto(1).size).isEqualTo(1)
+        Assertions.assertThat(Lotto.getAutoLotto(100).size).isEqualTo(100)
+    }
+
     fun getLotto(vararg i: Int): Lotto {
         return Lotto(i.asList().map { LottoNumber(it) })
     }
