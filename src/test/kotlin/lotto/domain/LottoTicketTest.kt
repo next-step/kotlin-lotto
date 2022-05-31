@@ -1,4 +1,4 @@
-package lotto.model
+package lotto.domain
 
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,7 +12,7 @@ class LottoTicketTest {
     @ValueSource(strings = ["0, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 46"])
     internal fun `로또에 숫자가 1보다 작거나 45보다 크다면 IllegalArgumentException을 던진다`(source: String) {
         assertThrows<IllegalArgumentException> {
-            LottoTicket(source.split(", ").map { it.toInt() })
+            LottoTicket.of(source.split(", ").map { it.toInt() })
         }
     }
 
@@ -20,7 +20,7 @@ class LottoTicketTest {
     @ValueSource(strings = ["2, 2, 3, 4, 5, 6"])
     internal fun `로또번호는 중복이 되면 IllegalArgumentException을 던진다`(source: String) {
         assertThrows<IllegalArgumentException> {
-            LottoTicket(source.split(", ").map { it.toInt() })
+            LottoTicket.of(source.split(", ").map { it.toInt() })
         }
     }
 }
