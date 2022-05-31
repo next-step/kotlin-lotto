@@ -5,7 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 class LottoPrizeTest {
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}개 일치하고 보너스 번호 일치여부가 {1}라면 당첨금액은 {2} 이다.")
     @CsvSource(
         "0, false, 0",
         "1, false, 0",
