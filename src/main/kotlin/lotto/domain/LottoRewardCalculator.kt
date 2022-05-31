@@ -1,8 +1,5 @@
 package lotto.domain
 
-import lotto.domain.collection.LottoTickets
-import lotto.domain.type.LottoMatchType
-
 class LottoRewardCalculator(
     private val lottoTickets: LottoTickets,
     private val winningNumbers: LottoWinningNumber

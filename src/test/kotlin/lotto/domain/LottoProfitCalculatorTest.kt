@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.collection.LottoTickets
 
 class LottoProfitCalculatorTest : DescribeSpec({
     describe("calculateRewardRate 메서드") {
@@ -33,7 +32,7 @@ class LottoProfitCalculatorTest : DescribeSpec({
             it("수익률을 계산한다.") {
                 val givenPurchaseAmount: Int = 14000
                 val rewardRate = lottoRewardCalculator
-                    .calculateRewardRate(givenPurchaseAmount, LottoStore.getLottoTicketPrice())
+                    .calculateRewardRate(givenPurchaseAmount, LottoStore.LOTTO_TICKET_PRICE)
 
                 rewardRate shouldBe 0.35714285714285715
             }
@@ -43,7 +42,7 @@ class LottoProfitCalculatorTest : DescribeSpec({
             it("예외를 던진다.") {
                 val exception = shouldThrow<IllegalArgumentException> {
                     val givenPurchaseAmount: Int = 0
-                    lottoRewardCalculator.calculateRewardRate(givenPurchaseAmount, LottoStore.getLottoTicketPrice())
+                    lottoRewardCalculator.calculateRewardRate(givenPurchaseAmount, LottoStore.LOTTO_TICKET_PRICE)
                 }
                 exception.message shouldBe "구입 금액은 로또 티켓 가격 보다 커야 합니다."
             }

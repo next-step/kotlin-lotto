@@ -1,7 +1,4 @@
-package lotto.domain.collection
-
-import lotto.domain.LottoTicket
-import lotto.domain.LottoWinningNumber
+package lotto.domain
 
 data class LottoTickets(
     private val lottoTickets: List<LottoTicket>

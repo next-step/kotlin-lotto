@@ -1,4 +1,4 @@
-package lotto.domain.type
+package lotto.domain
 
 enum class LottoMatchType(val matchCount: Int, val reward: Long) {
     THREE(3, 5000),

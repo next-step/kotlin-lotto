@@ -1,9 +1,9 @@
 package lotto.presentation
 
+import lotto.domain.LottoMatchType
 import lotto.domain.LottoRewardCalculator
+import lotto.domain.LottoTickets
 import lotto.domain.LottoWinningNumber
-import lotto.domain.collection.LottoTickets
-import lotto.domain.type.LottoMatchType
 
 class OutboundView {
 

@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.collection.LottoTickets
-
 object LottoTicketMachine {
 
     private val RANGE_OF_NUMBER = 1..45
