@@ -94,3 +94,10 @@
 - [x] 로또 번호를 wrapping 하는 일급컬렉션 생성 (LottoNumbers)
 - [x] 당첨 번호와 보너스 볼 번호를 저장하고 있어야 한다 (WinningLotto)
 - [x] 당첨 통계에 2등도 추가해야 한다 (OutputView)
+
+## 리뷰 반영
+1. bonusBall 도 1~45 사이의 숫자로 제한되도록 수정
+2. LottoNumber 클래스에서 로또 번호에 대한 검증 로직이 들어가도록 수정
+3. WinningLotto 에서 LottoPrize 를 계산하도록 변경
+4. InputView 에 검증 로직 추가
+5. 테스트 의미가 더 명확해 지도록 이름 추가

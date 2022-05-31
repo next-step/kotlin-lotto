@@ -10,7 +10,7 @@ object OutputView {
     }
 
     fun printLottoNumbers(lottos: List<Lotto>) {
-        lottos.forEach { println(it.numbers.list.map { lottoNumber ->  lottoNumber.toInt() }) }
+        lottos.forEach { println(it.numbers.list.map { lottoNumber -> lottoNumber.toInt() }) }
     }
 
     fun printLottoPrizeStatistics(payment: Int, prizeResult: LottoPrizeResult) {

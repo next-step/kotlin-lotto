@@ -36,5 +36,4 @@ object InputView {
         ?: throw IllegalArgumentException("${what.toSubjectString()}총 6개의 숫자로 이루어져야 합니다.")
 
     private fun String?.toSubjectString(): String = if (this == null) "" else "${this}은(는) "
-
 }
