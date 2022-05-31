@@ -11,6 +11,6 @@ data class LottoLastNumbers(
 
     constructor(numbers: Set<Int>, bonus: Int) : this(
         LottoTicket.LastLottoTicket(numbers.toLottoNumber()),
-        LottoNumber(bonus)
+        LottoNumber.from(bonus)
     )
 }
