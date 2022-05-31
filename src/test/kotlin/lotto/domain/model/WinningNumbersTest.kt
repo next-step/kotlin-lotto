@@ -42,4 +42,12 @@ class WinningNumbersTest {
 
         assertThat(WinningNumbers.default()).isEqualTo(expected)
     }
+
+    @Test
+    fun `in 키워드를 통해 LottoNumber가 WinningNumbers에 포함되는지 확인할 수 있다`() {
+        val winningNumbers = WinningNumbers.default()
+
+        assertThat(LottoNumber[1] in winningNumbers).isEqualTo(true)
+        assertThat(LottoNumber[8] in winningNumbers).isEqualTo(false)
+    }
 }

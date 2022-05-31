@@ -8,6 +8,8 @@ value class WinningNumbers(val value: Set<LottoNumber>) {
         }
     }
 
+    operator fun contains(lottoNumber: LottoNumber): Boolean = lottoNumber in value
+
     companion object {
         private const val MESSAGE_INVALID_WINNING_NUMBERS_SIZE = "당첨 번호는 6개가 입력되어야 합니다."
 
