@@ -7,7 +7,7 @@ class LottoStore(
 ) {
     private val _boughtLottos = manualLottos + autoLottos
 
-    val boughtMoney
+    val boughtLottos
         get() = _boughtLottos.toList()
 
     val totalYieldRatio

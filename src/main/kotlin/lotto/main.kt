@@ -30,7 +30,7 @@ fun makeLottoStore(): LottoStore {
 
     return LottoStore(userMoney, lottoMaker.manualLotto, autoLottoNumbers).apply {
         PrintView.printLottoCount(manualLottoCount, autoLottoCount)
-        PrintView.printBoughtLottoList(boughtMoney)
+        PrintView.printBoughtLottoList(boughtLottos)
     }
 }
 

@@ -145,4 +145,4 @@
 ### 4차 todo list
 - [x] Money 클래스 자체를 활용한 테스트
 - [x] 복권리스트 직접 더하지않고 init 시점에 합쳐서 추가
-- [ ] boughtLottos 네이밍 체크 
+- [x] boughtLottos 네이밍 체크 
