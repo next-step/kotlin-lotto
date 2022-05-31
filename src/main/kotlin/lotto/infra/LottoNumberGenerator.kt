@@ -2,14 +2,16 @@ package lotto.infra
 
 import lotto.domain.Lottery
 import lotto.infra.port.NumberGenerator
+import lotto.vo.LotteryNumber
 
-class LottoNumberGenerator : NumberGenerator<List<Int>> {
+class LottoNumberGenerator : NumberGenerator<List<LotteryNumber>> {
 
-    override fun generate(): List<Int> =
-        NormalLottery_NUMBER_RANGE.shuffled().take(Lottery.LOTTO_NUMBER_LENGTH)
+    override fun generate(): List<LotteryNumber> =
+        LOTTERY_NUMBER_RANGE.shuffled().take(Lottery.LOTTO_NUMBER_LENGTH).map { LotteryNumber(it) }
 
     companion object {
 
-        private val NormalLottery_NUMBER_RANGE = (Lottery.MIN_LOTTO_NUMBER..Lottery.MAX_LOTTO_NUMBER)
+        private val LOTTERY_NUMBER_RANGE =
+            (LotteryNumber.MIN_LOTTO_NUMBER..LotteryNumber.MAX_LOTTO_NUMBER)
     }
 }
