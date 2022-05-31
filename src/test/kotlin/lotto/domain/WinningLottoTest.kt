@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.numbers.LottoNumber
+import lotto.domain.prize.LottoPrize
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -66,5 +67,16 @@ class WinningLottoTest {
         val candidateLotto2 = Lotto(sixMatchingNumbers)
 
         assertThat(winningLotto.getNumberOfMatchingNumbers(candidateLotto2)).isEqualTo(6)
+    }
+
+    @Test
+    fun `당첨 번호와 보너스 번호가 겹치는지에 따라 그에 맞는 LottoPrize 를 반환할 수 있다`() {
+        val winningNumbers = listOf(10, 20, 30, 35, 40, 45)
+        val bonusBallNumber = 1
+        val winningLotto = WinningLotto(winningNumbers, bonusBallNumber)
+
+        val lottoWithSecondPrize = Lotto(listOf(10, 20, 30, 35, 40, 1))
+
+        assertThat(winningLotto.getLottoPrizeOf(lottoWithSecondPrize)).isEqualTo(LottoPrize.SECOND)
     }
 }
