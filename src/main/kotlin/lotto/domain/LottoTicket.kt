@@ -13,7 +13,7 @@ class LottoTicket(
         this.value.intersect(other.value).size
 
     fun toSortedList(): List<LottoNumber> =
-        value.sortedWith(CompareLottoNumbers)
+        value.sortedBy { it }
 
     fun hasNumber(number: LottoNumber) = value.any { it == number }
 
