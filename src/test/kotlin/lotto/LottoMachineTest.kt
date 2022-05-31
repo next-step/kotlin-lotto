@@ -25,6 +25,6 @@ internal class LottoMachineTest {
         val buyLotto = lottoMachine.buyLotto(1)
         val lotto = buyLotto.lottos[0]
 
-        assertThat(lotto.numbers.size).isEqualTo(6)
+        assertThat(lotto.lotto.size).isEqualTo(6)
     }
 }

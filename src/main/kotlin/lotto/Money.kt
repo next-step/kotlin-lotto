@@ -2,20 +2,24 @@ package lotto
 
 import java.math.BigDecimal
 
-class Money(private val _value: BigDecimal) {
+class Money(private val value: BigDecimal) {
 
     init {
-        validate(_value.intValueExact())
+        validate(value.intValueExact())
     }
 
-    val get: Int
-        get() = _value.intValueExact()
+    val won: Int
+        get() = value.intValueExact()
 
-    fun divide(value: Int): Money = Money(_value.divide(BigDecimal(value)))
+    fun divide(value: Int): Money = Money(this.value.divide(BigDecimal(value)))
 
     private fun validate(value: Int) {
-        if (value <= 0) {
+        if (value <= ZERO) {
             throw IllegalArgumentException()
         }
+    }
+
+    companion object {
+        private const val ZERO = 0
     }
 }

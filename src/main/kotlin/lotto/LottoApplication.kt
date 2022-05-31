@@ -15,7 +15,12 @@ fun main() {
     LottoResponse.responseLottos(buyLottos.lottos)
 
     LottoInputTitle.requestWinningLotto()
-    val winningLotto = WinningLotto(convertWinningLotto(readln()))
+    val inputWinningLottoNumber = readln()
+
+    LottoInputTitle.requestWinningLottoBonusNumber()
+    val inputWinningBonusNumber = readln()
+
+    val winningLotto = WinningLotto(convertWinningLotto(inputWinningLottoNumber), LottoNumber(inputWinningBonusNumber.toInt()))
 
     LottoResponse.responseStatisticTitle()
     val statistics = Statistics(winningLotto, buyLottos.lottos)

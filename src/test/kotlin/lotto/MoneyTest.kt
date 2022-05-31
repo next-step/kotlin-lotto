@@ -10,7 +10,7 @@ internal class MoneyTest {
     @Test
     fun `Money 객체 생성`() {
         val money = Money(BigDecimal(1000))
-        assertThat(money.get).isEqualTo(1000)
+        assertThat(money.won).isEqualTo(1000)
     }
 
     @Test
@@ -23,6 +23,6 @@ internal class MoneyTest {
     fun `Money 값 나누기`() {
         val money = Money(BigDecimal(1000))
         val divideMoney = money.divide(1000)
-        assertThat(divideMoney.get).isEqualTo(1)
+        assertThat(divideMoney.won).isEqualTo(1)
     }
 }

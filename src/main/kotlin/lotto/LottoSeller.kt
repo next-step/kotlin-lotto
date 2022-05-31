@@ -7,11 +7,11 @@ class LottoSeller(private val money: Money) {
     }
 
     private fun validate() {
-        require(money.get % LOTTO_PRICE == 0) { "최소 단위는 1000원 입니다" }
+        require(money.won % LOTTO_PRICE == 0) { "최소 단위는 1000원 입니다" }
     }
 
     fun getLottoCount(): Int {
-        return money.divide(LOTTO_PRICE).get
+        return money.divide(LOTTO_PRICE).won
     }
 
     companion object {

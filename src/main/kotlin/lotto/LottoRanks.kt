@@ -10,6 +10,7 @@ class LottoRanks {
         lottoRanks[LottoRank.THREE_MATCH] = ZERO
         lottoRanks[LottoRank.FOUR_MATCH] = ZERO
         lottoRanks[LottoRank.FIVE_MATCH] = ZERO
+        lottoRanks[LottoRank.FIVE_MATCH_WITH_BONUS] = ZERO
         lottoRanks[LottoRank.SIX_MATCH] = ZERO
     }
 
@@ -22,7 +23,7 @@ class LottoRanks {
     }
 
     fun getRanks(): Map<LottoRank, Int> {
-        return lottoRanks.filterNot { it.key == LottoRank.LOSE }
+        return lottoRanks.toMap()
     }
 
     fun getWinPrice(): BigDecimal {

@@ -14,7 +14,7 @@ internal class LottoSellerTest {
     }
 
     @Test
-    fun `돈의 단위가 1000이 아닌 경우 예외처리`() {
+    fun `돈의 단위가 1000이 아닌 경우 예외처리를 한다`() {
         assertThatIllegalArgumentException()
             .isThrownBy { LottoSeller(Money(BigDecimal(1_250))) }
     }

@@ -1,13 +1,10 @@
 package lotto
 
-class Lotto(private val _lotto: Set<LottoNumber>) {
+class Lotto(val lotto: Set<LottoNumber> = emptySet()) {
 
     init {
-        validate(_lotto)
+        validate(lotto)
     }
-
-    val numbers: Set<LottoNumber>
-        get() = _lotto.toSet()
 
     private fun validate(lotto: Set<LottoNumber>) {
         if (lotto.size != MIN_SIZE) {
