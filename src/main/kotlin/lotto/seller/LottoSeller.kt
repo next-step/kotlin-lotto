@@ -6,9 +6,11 @@ import lotto.exception.MinimumPurchaseMoneyException
 
 class LottoSeller {
 
-    fun calculateLottoPurchaseAmount(money: Int): Int {
+    fun calculateAutoLottoPurchaseAmount(money: Int, manualAmount: Int): Int {
         validatePurchaseMoney(money)
-        return money / LOTTO_PURCHASE_PRICE_PER_PIECE
+
+        val moneyForAutoLotto = money - (manualAmount * LOTTO_PURCHASE_PRICE_PER_PIECE)
+        return moneyForAutoLotto / LOTTO_PURCHASE_PRICE_PER_PIECE
     }
 
     fun buy(amount: Int, lottoNumberStrategy: LottoNumberStrategy): List<LottoTicket> {

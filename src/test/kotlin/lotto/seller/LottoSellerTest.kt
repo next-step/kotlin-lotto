@@ -11,10 +11,11 @@ import org.junit.jupiter.api.Test
 class LottoSellerTest {
 
     @Test
-    fun `입력된 구입 금액만큼 로또를 n개 구입`() {
+    fun `입력된 구입 금액만큼 로또를 자동 n개 구입`() {
         val money = 13500
+        val manualAmount = 0
         val lottoSeller = LottoSeller()
-        val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
+        val lottoPurchaseAmount = lottoSeller.calculateAutoLottoPurchaseAmount(money, manualAmount)
         val lottoNumberMaker = LottoNumberMaker()
         val purchaseLottoTickets = lottoSeller.buy(lottoPurchaseAmount, lottoNumberMaker)
 
@@ -24,9 +25,10 @@ class LottoSellerTest {
     @Test
     fun `입력된 구입 금액이 1개를 구매할 수 있는 최소 금액이 넘지 않으면 에러처리`() {
         val money = 500
+        val manualAmount = 0
         val lottoSeller = LottoSeller()
 
-        assertThatThrownBy { lottoSeller.calculateLottoPurchaseAmount(money) }
+        assertThatThrownBy { lottoSeller.calculateAutoLottoPurchaseAmount(money, manualAmount) }
             .isInstanceOf(MinimumPurchaseMoneyException::class.java)
     }
 

@@ -14,6 +14,27 @@ class InputView {
         return text.toInt()
     }
 
+    fun enterManualLottoPurchaseAmount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+
+        val text = readln()
+        validateNotString(text)
+        return text.toInt()
+    }
+
+    fun enterManualLottoTicket(amount: Int): List<LottoTicket> {
+
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        val lottoTickets: MutableList<LottoTicket> = mutableListOf()
+        repeat(amount) {
+            val inputText = readln().trim().split(",")
+            lottoTickets.add(LottoTicket(inputText.map { it.toInt() }.toSet()))
+        }
+
+        return lottoTickets
+    }
+
     fun enterWonLottoTicket(): LottoTicket {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
