@@ -9,21 +9,17 @@ import lotto.constants.ErrorMessages
 class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int) {
     init {
         require(bonusNumber in LottoTicketFactory.LOTTO_NUMBER_RANGE) { ErrorMessages.NUMBER_IS_OVER_OR_UNDER_BASE }
-        require(!winningTicket.numbers.contains(bonusNumber)) { ErrorMessages.BONUS_IS_DUPLICATE_WITH_WINNINGS }
+        require(!winningTicket.isContains(bonusNumber)) { ErrorMessages.BONUS_IS_DUPLICATE_WITH_WINNINGS }
     }
 
-    fun convertTicketsToLottoResults(tickets: List<LottoTicket>): LottoResults {
-        return convertPrizeToLottoResult(tickets.map { findCorrectLotto(it) })
+    fun convertTicketsToLottoResults(lottoTickets: LottoTickets): LottoResults {
+        return LottoResults.of(lottoTickets.tickets.map { findCorrectLotto(it) })
     }
 
     private fun findCorrectLotto(ticket: LottoTicket): Prize {
         val matchCounts = ticket.numbers.intersect(winningTicket.numbers.toSet()).size
         val isCorrectBonus = ticket.numbers.contains(bonusNumber)
         return Prize.of(matchCounts, isCorrectBonus)
-    }
-
-    private fun convertPrizeToLottoResult(prizes: List<Prize>): LottoResults {
-        return LottoResults(prizes.groupBy { it }.map { LottoResult(it.key, it.value.size) })
     }
 
     companion object {

@@ -7,18 +7,20 @@ package lotto.domain
 
 enum class Prize(val matchCount: Int, val reward: Int) {
     LOSER(0, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 500000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000)
+    FIFTH(3, 5_000),
+    FOURTH(4, 500_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000)
     ;
 
     companion object {
         fun of(matchCount: Int, isCorrectBonus: Boolean): Prize {
-            if (isCorrectBonus && matchCount == SECOND.matchCount)
-                return SECOND
-            return values().find { it.matchCount == matchCount } ?: LOSER
+            return values().find {
+                if (isCorrectBonus && matchCount == SECOND.matchCount)
+                    return SECOND
+                it.matchCount == matchCount
+            } ?: LOSER
         }
     }
 }

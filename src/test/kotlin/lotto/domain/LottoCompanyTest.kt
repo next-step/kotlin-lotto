@@ -29,7 +29,7 @@ class LottoCompanyTest {
         val ticket = LottoTicket.of(winningNumbers.split(", ").map { it.toInt() })
         assertThat(
             LottoCompany.of(winningNumbers, bonusNumber)
-                .convertTicketsToLottoResults(listOf(ticket)).results.last().count
+                .convertTicketsToLottoResults(LottoTickets(listOf(ticket))).results.last().count
         ).isEqualTo(1)
     }
 
@@ -64,7 +64,8 @@ class LottoCompanyTest {
     @CsvSource("'1, 2, 3, 4, 5, 6', 8")
     internal fun `로또티켓들을 당첨 결과로 잘 변경한다`(winningNumbers: String, bonusNumber: Int) {
         val company = LottoCompany.of(winningNumbers, bonusNumber)
-        val tickets = listOf(LottoTicket.of(listOf(1, 2, 3, 4, 5, 6)), LottoTicket.of(listOf(1, 2, 3, 4, 5, 7)))
+        val tickets =
+            LottoTickets(listOf(LottoTicket.of(listOf(1, 2, 3, 4, 5, 6)), LottoTicket.of(listOf(1, 2, 3, 4, 5, 7))))
         assertThat(company.convertTicketsToLottoResults(tickets).results.size).isEqualTo(2)
     }
 

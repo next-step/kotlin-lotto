@@ -11,6 +11,6 @@ class LottoStoreTest {
     @ParameterizedTest
     @ValueSource(ints = [3000])
     internal fun `구매금액에 맞게 로또를 구매한다`(source: Int) {
-        assertThat(LottoStore().buyLotto(source).size).isEqualTo(3)
+        assertThat(LottoStore().buyLotto(source).getSize()).isEqualTo(3)
     }
 }

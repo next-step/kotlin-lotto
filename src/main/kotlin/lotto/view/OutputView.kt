@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.constants.Messages
 import lotto.domain.LottoResults
-import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import lotto.domain.Prize
 
 /**
@@ -10,9 +10,9 @@ import lotto.domain.Prize
  * Created by Jaesungchi on 2022.05.25..
  */
 object OutputView {
-    fun printTicket(tickets: List<LottoTicket>) {
-        println("${tickets.size}${Messages.BUY_AMOUNT_LOTTO}")
-        tickets.forEach {
+    fun printTicket(lottoTickets: LottoTickets) {
+        println("${lottoTickets.getSize()}${Messages.BUY_AMOUNT_LOTTO}")
+        lottoTickets.tickets.forEach {
             println(it.numbers.toString())
         }
     }

@@ -13,6 +13,10 @@ data class LottoTicket(val numbers: Set<Int>) {
         require(numbers.size == LOTTO_SIZE) { ErrorMessages.NUMBER_SIZE_IS_INVALID }
     }
 
+    fun isContains(number: Int): Boolean {
+        return numbers.contains(number)
+    }
+
     companion object {
         fun of(numberList: List<Int>): LottoTicket {
             return LottoTicket(numberList.toSet())

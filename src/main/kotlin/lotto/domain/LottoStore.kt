@@ -4,9 +4,9 @@ package lotto.domain
  * Created by Jaesungchi on 2022.05.24..
  */
 class LottoStore {
-    fun buyLotto(money: Int): List<LottoTicket> {
+    fun buyLotto(money: Int): LottoTickets {
         val ticketCount: Int = money / LOTTO_PRICE
-        return List(ticketCount) { LottoTicketFactory.getRandomLottoTicket() }
+        return LottoTickets(List(ticketCount) { LottoTicketFactory.getRandomLottoTicket() })
     }
 
     companion object {

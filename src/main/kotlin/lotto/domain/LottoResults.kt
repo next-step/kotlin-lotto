@@ -15,5 +15,9 @@ class LottoResults(val results: List<LottoResult>) {
 
     companion object {
         private const val NOT_HAVE_TICKET_COUNT = 0
+
+        fun of(prizes: List<Prize>): LottoResults {
+            return LottoResults(prizes.groupBy { it }.map { LottoResult(it.key, it.value.size) })
+        }
     }
 }
