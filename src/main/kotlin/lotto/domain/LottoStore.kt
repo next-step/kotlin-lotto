@@ -5,7 +5,7 @@ class LottoStore(
     manualLottos: List<LottoNumbers>,
     autoLottos: List<LottoNumbers>
 ) {
-    private val _boughtLottos = mutableListOf<LottoNumbers>()
+    private val _boughtLottos = manualLottos + autoLottos
 
     val boughtMoney
         get() = _boughtLottos.toList()
@@ -13,12 +13,6 @@ class LottoStore(
     val totalYieldRatio
         get() = totalMoney.money.toDouble() / money.money
     private var totalMoney = Money()
-
-    init {
-        _boughtLottos.addAll(manualLottos)
-
-        _boughtLottos.addAll(autoLottos)
-    }
 
     fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
         val lottoResult = LottoPrizeInfo.getEmptyResult()
