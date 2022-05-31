@@ -1,7 +1,10 @@
 package camp.nextstep.lotto.ticket
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -23,8 +26,37 @@ internal class LottoStoreTest {
         val lottoPrice = 1000
         val lottoStore = LottoStore(lottoTicketPrice = lottoPrice, lottoTicketMachine = LottoTicketMachine())
 
-        val (tickets, balance) = lottoStore.exchange(money)
+        val (tickets, balance) = lottoStore.exchangeAll(money)
         assertEquals(expectedTicketCount, tickets.size)
         assertEquals(expectedBalance, balance)
+    }
+
+    @DisplayName("주어진 번호에 대한 로또 티켓을 교환할 수 있다.")
+    @Test
+    fun exchangeLottoManually() {
+        val lottoPrice = 1000
+        val lottoStore = LottoStore(lottoTicketPrice = lottoPrice, lottoTicketMachine = LottoTicketMachine())
+
+        val seedMoney = 1000
+        val numbers = listOf(listOf(1, 2, 3, 4, 5, 6))
+
+        val (tickets, balance) = lottoStore.exchange(seedMoney, numbers)
+        assertEquals(1, tickets.size)
+        assertThat(tickets[0].numbers).containsExactly(1, 2, 3, 4, 5, 6)
+        assertEquals(0, balance)
+    }
+
+    @DisplayName("구입 금액보다 더 많은 로또 티켓을 교환할 수 없다.")
+    @Test
+    fun shouldFailExchangeMoreThanMoney() {
+        val lottoPrice = 1000
+        val lottoStore = LottoStore(lottoTicketPrice = lottoPrice, lottoTicketMachine = LottoTicketMachine())
+
+        val seedMoney = 1000
+        val numbers = listOf(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6))
+
+        assertThrows<IllegalArgumentException> {
+            lottoStore.exchange(seedMoney, numbers)
+        }
     }
 }

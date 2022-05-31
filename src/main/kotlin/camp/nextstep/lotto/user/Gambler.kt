@@ -8,7 +8,7 @@ class Gambler(var balance: Int = 0) {
     val tickets = mutableListOf<LottoTicket>()
 
     fun exchangeAll(store: LottoStore) {
-        val (tickets, balance) = store.exchange(balance)
+        val (tickets, balance) = store.exchangeAll(balance)
         this.tickets.addAll(tickets)
         this.balance = balance
     }

@@ -5,6 +5,10 @@ import kotlin.random.Random
 
 class LottoTicketMachine(private val numbersGenerator: NumbersGenerator = RandomNumbersGenerator(LottoNumbers.LOTTO_NUMBER_RANGE, LottoNumbers.LOTTO_NUMBERS)) {
 
+    fun issueTicket(numbers: List<Int>): LottoTicket {
+        return LottoTicket(numbers)
+    }
+
     fun issueTicket(): LottoTicket {
         val numbers = numbersGenerator.numbers()
 
