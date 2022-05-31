@@ -1,4 +1,9 @@
+package calculator
+
 object StringAddCalculator {
+
+    private val customDelimiterRule: Regex = Regex("//(.)\n(.*)")
+
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
             return 0
@@ -14,7 +19,7 @@ object StringAddCalculator {
         (getTokenWithCustomDelimiter(text) ?: getToken(text)).map { it.toInt() }
 
     private fun getTokenWithCustomDelimiter(text: String): List<String>? =
-        Regex("//(.)\n(.*)").find(text)?.let {
+        customDelimiterRule.find(text)?.let {
             it.groupValues[2].split(it.groupValues[1])
         }
 
