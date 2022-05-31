@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 @DisplayName("로또 컬렉션 테스트")
 class LottosTest {
@@ -19,5 +20,15 @@ class LottosTest {
 
         // then
         assertEquals(lottos.size, lottoSize)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [-1000, -100, 0])
+    fun `지불 금액이 0원 이하면 로또 구입 불가`(paymentPrice: Int) {
+        // given, when
+        val lottos = Lottos.generateLottos(paymentPrice).lottos
+
+        // then
+        assertEquals(lottos.size, 0)
     }
 }
