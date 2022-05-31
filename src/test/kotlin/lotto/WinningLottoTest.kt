@@ -25,7 +25,7 @@ internal class WinningLottoTest {
     @Test
     fun `1에서 45 사이의 숫자가 있는 로또 하나를 생성 하고 당첨 번호를 동일한 조건으로 생성한다`() {
         val winningLotto = WinningLotto(winningLotto, LottoNumber(7))
-        val containsAll = winningLotto.lottoNumber.containsAll(
+        val containsAll = winningLotto.lottoNumbers.containsAll(
             setOf(
                 LottoNumber(2),
                 LottoNumber(3),

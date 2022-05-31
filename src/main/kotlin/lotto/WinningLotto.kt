@@ -1,6 +1,6 @@
 package lotto
 
-class WinningLotto(private val lottoNumbers: Set<LottoNumber> = emptySet(), private val bonusNumber: LottoNumber) {
+class WinningLotto(val lottoNumbers: Set<LottoNumber>, private val bonusNumber: LottoNumber) {
 
     init {
         validate(lottoNumbers, bonusNumber)

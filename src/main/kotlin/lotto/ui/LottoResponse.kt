@@ -29,7 +29,7 @@ object LottoResponse {
 
     fun responseStatistics(ranks: Map<LottoRank, Int>, result: Double) {
         ranks.entries.forEach {
-            if (it.key.isBonus) println(RESPONSE_STATISTIC_BODY_WITH_BONUS.format(it.key.price, it.value))
+            if (it.key == LottoRank.FIVE_MATCH_WITH_BONUS) println(RESPONSE_STATISTIC_BODY_WITH_BONUS.format(it.key.price, it.value))
             else println(RESPONSE_STATISTIC_BODY.format(it.key.matchCount, it.key.price, it.value))
         }
 
