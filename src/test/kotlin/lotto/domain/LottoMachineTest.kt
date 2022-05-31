@@ -43,4 +43,16 @@ internal class LottoMachineTest {
             randomNumberFunc = { (1..6).map { LottoNumber(it) } }
         )
     }
+
+    @Test
+    fun `로또 기계는 티켓 구매시 수동 티켓을 제외한 차액만큼 자동 티켓을 생성한다`() {
+        val purchase = LottoMachine().purchase(
+            money = Money(3000),
+            manualTickets = LottoTickets(listOf(LottoTicket(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }))),
+            randomNumberFunc = { (1..6).map { LottoNumber(it) } }
+        )
+
+        assertThat(purchase.manualTickets.lottoTickets.size).isEqualTo(1)
+        assertThat(purchase.autoTickets.lottoTickets.size).isEqualTo(2)
+    }
 }
