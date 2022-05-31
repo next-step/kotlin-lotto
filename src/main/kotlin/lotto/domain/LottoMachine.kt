@@ -2,13 +2,20 @@ package lotto.domain
 
 class LottoMachine {
 
-    fun purchase(money: Money, manualTickets: LottoTickets, randomNumberFunc: () -> List<LottoNumber>): LottoTickets {
-        val lottoTicketCount = money.amount / LOTTO_PRICE
+    fun purchase(money: Money, manualTickets: LottoTickets, randomNumberFunc: () -> List<LottoNumber>): Purchase {
+        val manualTicketPrice = manualTickets.lottoTickets.size * LOTTO_PRICE
+        val autoTicketPrice = money.amount - manualTicketPrice
 
-        return LottoTickets(
-            (1..lottoTicketCount).toList().map {
+        val autoTickets = if (autoTicketPrice > 0) {
+            val autoTicketCount = (money.amount - manualTicketPrice) / LOTTO_PRICE
+            (1..autoTicketCount).toList().map {
                 LottoTicket(randomNumberFunc())
             }
+        } else emptyList()
+
+        return Purchase(
+            manualTickets = manualTickets,
+            autoTickets = LottoTickets(autoTickets)
         )
     }
 
