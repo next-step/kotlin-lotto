@@ -11,10 +11,10 @@ class Lotto(
     }
 
     companion object {
-        fun of(numbers: List<Int>): Lotto {
+        fun from(numbers: List<Int>): Lotto {
             validateUnique(numbers)
 
-            val lottoNumbers = numbers.map { LottoNumber.from(it) }
+            val lottoNumbers = numbers.map { LottoNumber.valueOf(it) }
             return Lotto(lottoNumbers)
         }
 

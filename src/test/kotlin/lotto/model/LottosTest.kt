@@ -16,7 +16,7 @@ class LottosTest {
     )
     fun `개당 1000원에 로또를 구입 가능`(paymentPrice: Int, lottoSize: Int) {
         // given, when
-        val lottos = Lottos.generateLottos(paymentPrice).lottos
+        val lottos = Lottos.from(paymentPrice).lottos
 
         // then
         assertEquals(lottos.size, lottoSize)
@@ -26,7 +26,7 @@ class LottosTest {
     @ValueSource(ints = [-1000, -100, 0])
     fun `지불 금액이 0원 이하면 로또 구입 불가`(paymentPrice: Int) {
         // given, when
-        val lottos = Lottos.generateLottos(paymentPrice).lottos
+        val lottos = Lottos.from(paymentPrice).lottos
 
         // then
         assertEquals(lottos.size, 0)

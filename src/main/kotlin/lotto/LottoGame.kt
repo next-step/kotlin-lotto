@@ -10,12 +10,12 @@ fun main() {
     InputView.printPaymentPriceInputMessage()
     val paymentPrice = InputView.inputPaymentPrice()
 
-    val purchasedLottos = Lottos.generateLottos(paymentPrice)
+    val purchasedLottos = Lottos.from(paymentPrice)
     ResultView.printPurchasedLottoCount(purchasedLottos.size)
     ResultView.printPurchasedLottos(purchasedLottos)
 
     InputView.printWinningNumbersInputMessage()
-    val winningNumbers = Lotto.of(InputView.inputWinningNumbers())
+    val winningNumbers = Lotto.from(InputView.inputWinningNumbers())
 
     val winningRanks = WinningRank.findRanks(purchasedLottos, winningNumbers)
     ResultView.printWinningStatistics(paymentPrice, winningRanks)

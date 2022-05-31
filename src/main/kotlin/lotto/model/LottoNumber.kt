@@ -21,7 +21,7 @@ value class LottoNumber private constructor(
             LottoNumber(it + MIN_LOTTO_NUMBER)
         }
 
-        fun from(number: Int): LottoNumber {
+        fun valueOf(number: Int): LottoNumber {
             validateNumberRange(number)
 
             return LOTTO_NUMBERS[number - 1]
