@@ -8,6 +8,6 @@ data class LottoNumber(val number: Int) {
     companion object {
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
-        val RANGE = MIN_NUMBER..MAX_NUMBER
+        fun randomGenerator() = NumberGenerator(MIN_NUMBER, MAX_NUMBER)
     }
 }

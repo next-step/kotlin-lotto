@@ -8,7 +8,7 @@ class LottoController(
     private val outputView: OutputView,
 ) {
     fun run() {
-        val ticketMachine = TicketMachine(NumberGenerator())
+        val ticketMachine = TicketMachine(LottoNumber.randomGenerator())
         val tickets = ticketMachine.buy(inputView.readAmount())
         outputView.printTickets(tickets)
 

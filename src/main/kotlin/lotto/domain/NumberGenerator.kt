@@ -7,7 +7,6 @@ class NumberGenerator(range: IntRange) {
         numbers = range.toList()
     }
 
-    constructor() : this(LottoNumber.RANGE)
     constructor(start: Int, end: Int) : this(start..end)
 
     fun randomTake(count: Int): List<Int> = numbers.shuffled().take(count)

@@ -19,7 +19,7 @@ internal class TicketMachineTest {
     )
     fun `정상 구매`(amount: Int, expected: Int) {
         // given
-        val ticketMachine = TicketMachine(NumberGenerator())
+        val ticketMachine = TicketMachine(LottoNumber.randomGenerator())
 
         // when
         val tickets = ticketMachine.buy(amount)
