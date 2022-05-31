@@ -17,13 +17,13 @@ class WinningNumbersTest {
         )
         val winningNumbers = WinningNumbers(numbers)
 
-        assertThat(winningNumbers.numbers).isEqualTo(numbers)
+        assertThat(winningNumbers.value).isEqualTo(numbers)
     }
 
     @Test
     fun `WinningNumbers의 숫자가 6개가 아니면 IllegalArgumentException이 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            WinningNumbers.of(listOf(1, 2, 3, 4, 5))
+            WinningNumbers.from(listOf(1, 2, 3, 4, 5))
         }
     }
 
@@ -41,12 +41,5 @@ class WinningNumbersTest {
         )
 
         assertThat(WinningNumbers.default()).isEqualTo(expected)
-    }
-
-    @Test
-    fun `당첨 번호와 보너스 볼 번호가 중복되면 IllegalArgumentException이 발생한다`() {
-        assertThrows<IllegalArgumentException> {
-            WinningNumbers.of(listOf(1, 2, 3, 4, 5, 6), LottoNumber[6])
-        }
     }
 }
