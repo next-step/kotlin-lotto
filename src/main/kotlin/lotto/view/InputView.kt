@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.model.LottoNumber
+
 object InputView {
 
     private const val WINNING_NUMBER_DELIMITER = ","
@@ -12,5 +14,5 @@ object InputView {
 
     fun inputWinningNumbers() =
         readln().split(WINNING_NUMBER_DELIMITER)
-            .map { it.trim().toInt() }
+            .map { LottoNumber.valueOf(it.trim().toInt()) }
 }

@@ -12,7 +12,7 @@ class Lottos(
 
         fun from(paymentPrice: Int): Lottos {
             val lottos = List(paymentPrice.coerceAtLeast(MIN_PAYMENT_PRICE) / LOTTO_PRICE) {
-                Lotto(RandomLottoGenerator.generate())
+                Lotto.from(RandomLottoGenerator.generate())
             }
             return Lottos(lottos)
         }
