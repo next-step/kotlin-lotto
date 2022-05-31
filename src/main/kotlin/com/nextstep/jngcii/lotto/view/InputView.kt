@@ -16,4 +16,12 @@ object InputView {
 
         return getNumbers { readLine() }
     }
+
+    fun getNumber(read: () -> String?): Int {
+        println("보너스 볼을 입력해 주세요.")
+
+        while (true) {
+            InputValidator.validateInputNumber(read())?.let { return it }
+        }
+    }
 }
