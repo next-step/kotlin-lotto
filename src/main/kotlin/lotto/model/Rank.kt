@@ -1,4 +1,6 @@
-package lotto.domain.dto
+package lotto.model
+
+import lotto.domain.dto.LottoMatchResult
 
 enum class Rank(val count: Int, val amount: Long) {
     FIFTH(3, 5000),

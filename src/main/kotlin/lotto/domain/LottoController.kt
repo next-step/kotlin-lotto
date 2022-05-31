@@ -13,8 +13,7 @@ class LottoController() {
 
         val luckyNumber = View.getLuckyDrawNumber()
         val bonusNumber = View.getBonusNumber()
-        val lottoValidator = LottoValidator(luckyNumber, bonusNumber)
-        val lottoDraw = LottoDraw(lottoValidator.luckyNumbers, lottoValidator.bonusNumber)
+        val lottoDraw = LottoDraw(luckyNumber, bonusNumber)
 
         lottoDraw.draw(purchasedLotto)
         ResultView.getReport(lottoDraw)

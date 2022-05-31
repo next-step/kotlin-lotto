@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoDraw
-import lotto.domain.dto.Rank
+import lotto.model.Rank
 
 object ResultView {
     fun getReport(lottoDraw: LottoDraw) {
