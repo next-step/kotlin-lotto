@@ -1,6 +1,10 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.KoreanLottoNumberMaker
+import lotto.domain.LottoNumber
+import lotto.domain.LottoStore
+import lotto.domain.Money
+import lotto.domain.toLottoNumbers
 import lotto.view.InputView
 import lotto.view.PrintView
 

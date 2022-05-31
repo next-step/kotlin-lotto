@@ -14,7 +14,7 @@ object PrintView {
     private const val LOTTO_WIN_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개"
     private const val LOTTO_YIELD_RATIO_FORMAT = "총 수익률은 %.2f입니다."
 
-    fun printLottoCount(manual:Int, auto: Int) {
+    fun printLottoCount(manual: Int, auto: Int) {
         println(LOTTO_COUNT_FORMAT.format(manual, auto))
     }
 
