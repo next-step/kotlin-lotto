@@ -30,6 +30,18 @@ class InputValidatorTest {
         assertThat(InputValidator.validateInputNumbers(input)).isNull()
     }
 
+    @ParameterizedTest
+    @MethodSource("validNumberString")
+    fun `적절 보너스번호 체크`(input: String?, result: Int) {
+        assertThat(InputValidator.validateInputNumber(input)).isEqualTo(result)
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidNumberString")
+    fun `부적절 보너스번호 체크`(input: String?) {
+        assertThat(InputValidator.validateInputNumber(input)).isNull()
+    }
+
     companion object {
         @JvmStatic
         fun validCountString() = listOf(
@@ -73,6 +85,22 @@ class InputValidatorTest {
             Arguments.of("1, d, 3"),
             Arguments.of("1, 2, 3, "),
             Arguments.of(";, !, @, n, "),
+        )
+
+        @JvmStatic
+        fun validNumberString() = listOf(
+            Arguments.of("1", 1),
+            Arguments.of("10", 10),
+            Arguments.of("100", 100),
+        )
+
+        @JvmStatic
+        fun invalidNumberString() = listOf(
+            Arguments.of(null),
+            Arguments.of(""),
+            Arguments.of("  "),
+            Arguments.of("d"),
+            Arguments.of("1, d, 3"),
         )
     }
 }

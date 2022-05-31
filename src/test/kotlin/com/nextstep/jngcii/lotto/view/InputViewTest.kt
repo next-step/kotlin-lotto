@@ -25,4 +25,16 @@ internal class InputViewTest {
         val expected = (1..8).toList()
         assertThat(numbers).isEqualTo(expected)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "1, 1",
+        "2, 2",
+        "10, 10",
+        "100, 100",
+    )
+    fun `(보너스볼 파싱) 정수 반환`(input: String, expected: Int) {
+        val number: Int = InputView.getNumber { input }
+        assertThat(number).isEqualTo(expected)
+    }
 }
