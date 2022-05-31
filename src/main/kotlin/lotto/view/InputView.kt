@@ -23,28 +23,28 @@ object InputView {
 
     fun getWinner(): Winner {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val lottoNumbers = readWinner()
+        val lotto = readLotto()
         println("보너스 볼을 입력해 주세요.")
         val bonusNumber = readBonusNumber()
 
-        return Winner(Lotto(lottoNumbers), bonusNumber)
+        return Winner(lotto, bonusNumber)
     }
 
     private fun readBonusNumber(): LottoNumber {
         return LottoNumber(readPositiveNumber())
     }
 
-    private fun readWinner(): List<LottoNumber> {
+    private fun readLotto(): Lotto {
         val str = readLine()
-        if (isInvalidWinnerString(str)) {
+        if (isInvalidLottoString(str)) {
             println("잘못된 입력입니다. 다시 입력해주세요.")
-            return readWinner()
+            return readLotto()
         }
 
-        return str!!.split(WINER_TEXT_DELIMITER).map { LottoNumber(it.trim().toInt()) }
+        return Lotto(str!!.split(WINER_TEXT_DELIMITER).map { LottoNumber(it.trim().toInt()) })
     }
 
-    private fun isInvalidWinnerString(str: String?): Boolean {
+    private fun isInvalidLottoString(str: String?): Boolean {
         return str.isNullOrEmpty() ||
             str.split(WINER_TEXT_DELIMITER).size != 6 ||
             !str.split(WINER_TEXT_DELIMITER).map { it.trim() }.all { isPositiveNumber(it) }
@@ -52,5 +52,20 @@ object InputView {
 
     private fun isPositiveNumber(str: String): Boolean {
         return str.all { it.isDigit() }
+    }
+
+    fun getNumberOfManual(limit: Int): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val number = readPositiveNumber()
+        if (number > limit) {
+            println("최대 $limit 개의 로또만 구입 가능합니다.")
+            return getNumberOfManual(limit)
+        }
+        return number
+    }
+
+    fun getManualLotto(count: Int): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (1..count).map { readLotto() }
     }
 }
