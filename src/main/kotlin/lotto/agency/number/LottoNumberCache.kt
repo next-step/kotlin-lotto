@@ -1,6 +1,5 @@
 package lotto.agency.number
 
-
 object LottoNumberCache {
     private val CACHE_LOTTO_NUMBER: MutableList<LottoNumber> = ArrayList()
 

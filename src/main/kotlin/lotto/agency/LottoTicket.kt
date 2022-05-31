@@ -1,7 +1,7 @@
 package lotto.agency
 
-import lotto.agency.number.LottoNumberCache
 import lotto.agency.number.LottoNumber
+import lotto.agency.number.LottoNumberCache
 import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.WonLottoNumberCountInconsistencyException
 
