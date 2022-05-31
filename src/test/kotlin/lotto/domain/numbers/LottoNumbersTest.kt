@@ -13,12 +13,6 @@ class LottoNumbersTest {
             val lottoNumbers = LottoNumbers().list
             assertThat(lottoNumbers).hasSize(6)
         }
-
-        @Test
-        fun `생성된 숫자는 1과 45 사이의 번호로 이루어져 있다`() {
-            val lottoNumbers = LottoNumbers().list
-            assertThat(lottoNumbers).allMatch { it in (1..45) }
-        }
     }
 
     @Nested
@@ -30,7 +24,7 @@ class LottoNumbersTest {
 
             assertThat(lottoNumbers.list)
                 .hasSize(6)
-                .isEqualTo(customLottoNumbers)
+                .isEqualTo(customLottoNumbers.map { LottoNumber(it) })
         }
 
         @Test
@@ -40,15 +34,6 @@ class LottoNumbersTest {
 
             assertThatIllegalArgumentException().isThrownBy { LottoNumbers(moreThanSix) }
             assertThatIllegalArgumentException().isThrownBy { LottoNumbers(lessThanSix) }
-        }
-
-        @Test
-        fun `1 과 45 사이의 숫자가 아닐 경우 IllegalArgumentException 을 반환한다`() {
-            val lessThanOneLottoNumber = listOf(0, 2, 3, 4, 5, 6)
-            val greaterThanFortyFiveLottoNumber = listOf(1, 2, 3, 4, 5, 46)
-
-            assertThatIllegalArgumentException().isThrownBy { LottoNumbers(lessThanOneLottoNumber) }
-            assertThatIllegalArgumentException().isThrownBy { LottoNumbers(greaterThanFortyFiveLottoNumber) }
         }
     }
 }

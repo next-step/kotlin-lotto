@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.numbers.LottoNumber
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -12,7 +13,7 @@ class WinningLottoTest {
         val winningNumbers = listOf(10, 20, 30, 35, 40, 45)
         val winningLotto = WinningLotto(winningNumbers, 7)
 
-        assertThat(winningLotto.winningNumbers.list).isEqualTo(winningNumbers)
+        assertThat(winningLotto.winningNumbers.list).isEqualTo(winningNumbers.map { LottoNumber(it) })
     }
 
     @Test
@@ -21,7 +22,7 @@ class WinningLottoTest {
         val bonusBallNumber = 7
         val winningLotto = WinningLotto(winningNumbers, bonusBallNumber)
 
-        assertThat(winningLotto.bonusNumber).isEqualTo(bonusBallNumber)
+        assertThat(winningLotto.bonusNumber).isEqualTo(LottoNumber(bonusBallNumber))
     }
 
     @Test
