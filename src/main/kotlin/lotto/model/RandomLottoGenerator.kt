@@ -7,4 +7,5 @@ object RandomLottoGenerator {
     fun generate(): List<LottoNumber> =
         LottoNumber.LOTTO_NUMBERS.shuffled()
             .subList(0, LOTTO_NUMBER_COUNT)
+            .sortedBy { it.number }
 }
