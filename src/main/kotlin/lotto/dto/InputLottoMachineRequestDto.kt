@@ -19,7 +19,7 @@ data class InputLottoMachineRequestDto(
         }
 
         private fun checkNegative(number: Int) {
-            if (number < 0) throw IllegalArgumentException(InputLottoNumberDto.NEGATIVE_ERROR)
+            if (number < 0) throw IllegalArgumentException(NEGATIVE_ERROR)
         }
     }
 }

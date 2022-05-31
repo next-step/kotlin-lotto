@@ -5,6 +5,7 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import lotto.dto.InputLottoMachineRequestDto
 import lotto.dto.InputLottoMachineRequestDto.Companion.CANNOT_CONVERT_INT
+import lotto.dto.InputLottoMachineRequestDto.Companion.NEGATIVE_ERROR
 
 class InputLottoMachineRequestDtoTest : FreeSpec({
 
@@ -36,7 +37,7 @@ class InputLottoMachineRequestDtoTest : FreeSpec({
             val exception = shouldThrow<IllegalArgumentException> {
                 InputLottoMachineRequestDto.of(inputPayment, inputManualLottoCount)
             }
-            exception.message shouldBe CANNOT_CONVERT_INT
+            exception.message shouldBe NEGATIVE_ERROR
         }
     }
 })
