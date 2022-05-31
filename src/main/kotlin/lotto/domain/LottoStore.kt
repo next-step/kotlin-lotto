@@ -15,11 +15,11 @@ object LottoStore {
         require(money >= PRICE_OF_ONE_LOTTO_TICKET)
         require(money <= PRICE_OF_ONE_LOTTO_TICKET * MAXIMUM_SIZE_OF_TICKET)
 
-        val countOfAutoLotto = getTicketCountByMoney(money.amount) - manualTickets.size
+        val countOfAutoLotto = getTicketCountByMoney(money) - manualTickets.size
         val autoTickets = LottoTicketMachine.generate(countOfAutoLotto)
 
         return LottoTickets(manualTickets + autoTickets)
     }
 
-    private fun getTicketCountByMoney(amount: Int): Int = amount / PRICE_OF_ONE_LOTTO_TICKET
+    private fun getTicketCountByMoney(money: PurchaseMoney): Int = money / PRICE_OF_ONE_LOTTO_TICKET
 }
