@@ -17,13 +17,13 @@ class WinningNumbersTest {
         )
         val winningNumbers = WinningNumbers(numbers)
 
-        assertThat(winningNumbers.value).isEqualTo(numbers)
+        assertThat(winningNumbers.numbers).isEqualTo(numbers)
     }
 
     @Test
     fun `WinningNumbers의 숫자가 6개가 아니면 IllegalArgumentException이 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            WinningNumbers.from(listOf(1, 2, 3, 4, 5))
+            WinningNumbers.of(listOf(1, 2, 3, 4, 5))
         }
     }
 

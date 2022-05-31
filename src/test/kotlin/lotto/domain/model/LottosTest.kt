@@ -30,7 +30,7 @@ class LottosTest {
             )
         )
 
-        val winningNumbers = WinningNumbers.from(listOf(8, 21, 23, 41, 42, 43))
+        val winningNumbers = WinningNumbers.of(listOf(8, 21, 23, 41, 42, 43))
 
         val lottoResult = lottos.checkWith(winningNumbers)
 
