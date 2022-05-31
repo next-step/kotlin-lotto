@@ -1,7 +1,6 @@
 package lotto
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class LottoWinningHandlerTest {
@@ -47,8 +46,6 @@ class LottoWinningHandlerTest {
 
         LottoWinningHandler.matchCount(issuedLottos, winningInfo.winningNumbers)
 
-        assertThrows(IllegalArgumentException::class.java) {
-            winningInfo.setScore(issuedLottos)
-        }
+        assertThat(winningInfo.scoreInfos.size).isEqualTo(0)
     }
 }

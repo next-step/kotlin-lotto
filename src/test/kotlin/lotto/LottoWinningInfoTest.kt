@@ -1,7 +1,7 @@
 package lotto
 
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LottoWinningInfoTest {
 
@@ -16,7 +16,7 @@ class LottoWinningInfoTest {
     @Test
     fun `입력된 문자열을 리스트로 만들었을 때 길이는 항상 6이어야 한다`() {
         val winningNumberInput = "1,2,3,4,5,6,7"
-        assertThrows(IllegalArgumentException::class.java) {
+        assertThrows<IllegalArgumentException> {
             val winningInfo = LottoWinningInfo(winningNumberInput)
         }
     }
@@ -24,7 +24,7 @@ class LottoWinningInfoTest {
     @Test
     fun `, 가 아닌 구분자는 허용할 수 없다`() {
         val winningNumberInput = "1*2*3*4*5*6"
-        assertThrows(IllegalArgumentException::class.java) {
+        assertThrows<IllegalArgumentException> {
             val winningInfo = LottoWinningInfo(winningNumberInput)
         }
     }

@@ -1,11 +1,10 @@
 package lotto
 
-import racing.domain.gamerule.IssueStrategy
+import IssueStrategy
 
 object LottoCreator {
 
-    fun issue(count: Int, strategy: IssueStrategy): List<List<Int>> {
-        require(count > 0)
+    fun issue(strategy: IssueStrategy): List<List<Int>> {
         return strategy.issue()
     }
 }

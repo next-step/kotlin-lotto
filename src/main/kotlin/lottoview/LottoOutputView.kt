@@ -19,8 +19,7 @@ object LottoOutputView {
         }
     }
 
-    fun displayRevenue(amount: Int, revenue: Int) {
-        val revenuePercentage: Double = (revenue / amount).toDouble()
+    fun displayRevenue(revenuePercentage: Double) {
         println(REVENUE_MESSAGE.format(revenuePercentage))
     }
 

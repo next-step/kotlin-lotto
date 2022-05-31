@@ -2,7 +2,7 @@ package lotto
 
 object LottoWinningHandler {
 
-    fun matchCount(issuedLottos: List<List<Int>>, numbers: List<Int>): MutableMap<Int, Int> {
+    fun matchCount(issuedLottos: List<List<Int>>, numbers: List<Int>): Map<Int, Int> {
         val result = mutableMapOf<Int, Int>()
 
         for (ticket in issuedLottos) {
@@ -10,7 +10,7 @@ object LottoWinningHandler {
             result[c] = result[c]?.plus(1) ?: 1
         }
 
-        return result
+        return result.toMap()
     }
 
     fun calculateRevenue(scoreInfos: List<ScoreInfo>): Int {

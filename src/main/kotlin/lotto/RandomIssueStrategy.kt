@@ -1,5 +1,3 @@
-package racing.domain.gamerule
-
 import kotlin.random.Random
 
 class RandomIssueStrategy(val count: Int) : IssueStrategy {
