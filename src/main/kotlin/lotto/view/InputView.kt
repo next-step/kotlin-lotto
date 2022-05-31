@@ -49,7 +49,7 @@ object InputView {
 
         requireNotNull(manualCount) { NULL_MESSAGE }
 
-        require(manualCount > 0) { NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE }
+        require(manualCount >= 0) { NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE }
 
         return manualCount
     }
