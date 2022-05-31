@@ -23,7 +23,7 @@ class LottoStoreTest : BehaviorSpec({
             And("로또 티켓을 100개 넘개 구매하면") {
                 Then("IllegalArgumentException 예외 발생") {
                     shouldThrowExactly<IllegalArgumentException> {
-                        LottoStore.buy(101_000.toPurchaseMoney())
+                        LottoStore.buy(PurchaseMoney(101_000))
                     }
                 }
             }
@@ -34,7 +34,7 @@ class LottoStoreTest : BehaviorSpec({
                 Then("IllegalArgumentException 예외 발생") {
                     checkAll(Arb.int(0..999)) { money ->
                         shouldThrowExactly<IllegalArgumentException> {
-                            LottoStore.buy(money.toPurchaseMoney())
+                            LottoStore.buy(PurchaseMoney(money))
                         }
                     }
                 }
