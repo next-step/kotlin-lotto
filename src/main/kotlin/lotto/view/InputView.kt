@@ -23,8 +23,9 @@ class InputView {
     }
 
     fun enterManualLottoTicket(amount: Int): List<Set<Int>> {
-
-        println("수동으로 구매할 번호를 입력해 주세요.")
+        if (amount > 0) {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+        }
 
         val numbers: MutableList<Set<Int>> = mutableListOf()
         repeat(amount) {
