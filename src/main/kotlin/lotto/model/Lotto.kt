@@ -18,8 +18,7 @@ class Lotto(
             return Lotto(lottoNumbers)
         }
 
-        private fun validateUnique(numbers: List<Int>) {
+        private fun validateUnique(numbers: List<Int>) =
             require(numbers.size == numbers.toSet().size) { "로또에 중복되는 번호가 있을 수 없습니다." }
-        }
     }
 }
