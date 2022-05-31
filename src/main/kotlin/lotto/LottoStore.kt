@@ -2,7 +2,7 @@ package lotto
 
 import lotto.domain.LottoProvider
 import lotto.domain.WinningLotto
-import lotto.domain.prize.LottoPrizeCalculator
+import lotto.domain.prize.LottoPrizeResult
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -15,11 +15,11 @@ object LottoStore {
         OutputView.printLottoNumbers(provider.lottos)
 
         if (provider.numberOfLottos > 0) {
-            val winningLotto = WinningLotto(InputView.readWinningNumbers())
+            val winningLotto = WinningLotto(InputView.readWinningNumbers(), InputView.readBonusBallNumber())
 
-            val prizeCalculator = LottoPrizeCalculator(winningLotto, provider.lottos)
+            val prizeResult = LottoPrizeResult(winningLotto, provider.lottos)
 
-            OutputView.printLottoPrizeStatistics(payment, prizeCalculator)
+            OutputView.printLottoPrizeStatistics(payment, prizeResult)
         }
     }
 }

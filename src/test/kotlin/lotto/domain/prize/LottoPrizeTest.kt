@@ -2,29 +2,21 @@ package lotto.domain.prize
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
+import org.junit.jupiter.params.provider.CsvSource
 
 class LottoPrizeTest {
-    @ParameterizedTest
-    @MethodSource("provideLottoPrizes")
-    fun `일치하는 번호 수에 따라 당첨 금액이 달라진다`(numberOfMatches: Int, expected: Int) {
-        Assertions.assertThat(LottoPrize.of(numberOfMatches).prizeAmount).isEqualTo(expected)
-    }
-
-    companion object {
-        @JvmStatic
-        private fun provideLottoPrizes(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of(0, 0),
-                Arguments.of(1, 0),
-                Arguments.of(2, 0),
-                Arguments.of(3, 5000),
-                Arguments.of(4, 50000),
-                Arguments.of(5, 1500000),
-                Arguments.of(6, 2000000000)
-            )
-        }
+    @ParameterizedTest(name = "{0}개 일치하고 보너스 번호 일치여부가 {1}라면 당첨금액은 {2} 이다.")
+    @CsvSource(
+        "0, false, 0",
+        "1, false, 0",
+        "2, false, 0",
+        "3, false, 5000",
+        "4, false, 50000",
+        "5, false, 1500000",
+        "5, true, 30000000",
+        "6, false, 2000000000"
+    )
+    fun `일치하는 번호 수에 따라 당첨 금액이 달라진다`(numberOfMatches: Int, matchesBonus: Boolean, expected: Int) {
+        Assertions.assertThat(LottoPrize.of(numberOfMatches, matchesBonus).prizeAmount).isEqualTo(expected)
     }
 }

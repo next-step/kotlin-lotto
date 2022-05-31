@@ -5,15 +5,15 @@ import org.junit.jupiter.api.Test
 
 class LottoTest {
     @Test
-    fun `로또 1장의 가격은 1000원이다`() {
-        val price = Lotto.PRICE
+    fun `총 6개의 랜덤한 숫자로 된 로또를 생성할 수 있다`() {
+        val lottoNumbers = Lotto().numbers.list
 
-        assertThat(price).isEqualTo(1000)
+        assertThat(lottoNumbers).hasSize(6)
     }
 
     @Test
-    fun `총 6개의 랜덤한 숫자로 된 로또를 생성할 수 있다`() {
-        val lottoNumbers = Lotto().numbers
+    fun `총 6개의 커스텀 숫자로 된 로또를 생성할 수 있다`() {
+        val lottoNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6)).numbers.list
 
         assertThat(lottoNumbers).hasSize(6)
     }
