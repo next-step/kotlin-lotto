@@ -1,21 +1,15 @@
 package com.nextstep.jngcii.calculator
 
-class InputView(
-    private val inputParser: InputParser
-) {
-    fun getNumbers(read: () -> String?): List<Int> {
-        val input = read()
+object InputView {
+    private const val ZERO = 0
 
+    fun getNumbers(input: String?): List<Int> {
         if (input.isNullOrBlank()) {
             return listOf(ZERO)
         }
 
-        val (expression, delimiter) = inputParser.parseDelimiter(input)
+        val (expression, delimiter) = InputParser.parseDelimiter(input)
 
-        return inputParser.parseExpression(expression, delimiter)
-    }
-
-    companion object {
-        private const val ZERO = 0
+        return InputParser.parseExpression(expression, delimiter)
     }
 }

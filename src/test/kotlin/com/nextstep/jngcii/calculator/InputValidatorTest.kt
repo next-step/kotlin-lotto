@@ -6,10 +6,10 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class InputParserTest {
+internal class InputValidatorTest {
     @Test
     fun `커스텀구분자테스트 - 구분자를 파싱했다면 listOf("구분자")를 만들어 반환`() {
-        val input = "//*\n2/1*5,3"
+        val input = "//*\\n2/1*5,3"
 
         val (expression, delimiter) = InputParser.parseDelimiter(input)
 
@@ -19,7 +19,7 @@ internal class InputParserTest {
 
     @Test
     fun `커스텀구분자테스트 - 구분자를 파싱하지 못했다면 null 반환`() {
-        val input = "/d\n2/1*5,3"
+        val input = "/d\\n2/1*5,3"
 
         val (expression, delimiter) = InputParser.parseDelimiter(input)
 
@@ -29,7 +29,7 @@ internal class InputParserTest {
 
     @Test
     fun `커스텀구분자테스트 - 구분자 파싱 위치에 알파벳이 존재하면 listOf(알파벳)를 반환`() {
-        val input = "//a\n2/1*5,3"
+        val input = "//a\\n2/1*5,3"
 
         val (expression, delimiter) = InputParser.parseDelimiter(input)
 
@@ -39,7 +39,7 @@ internal class InputParserTest {
 
     @Test
     fun `커스텀구분자테스트 - 구분자 파싱 위치에 숫자가 존재하면 null 반환`() {
-        val input = "//3\n2/1*5,3"
+        val input = "//3\\n2/1*5,3"
 
         val (expression, delimiter) = InputParser.parseDelimiter(input)
 
@@ -89,7 +89,7 @@ internal class InputParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1,2:3", "//a\n1a2a3"])
+    @ValueSource(strings = ["1,2:3", "//a\\n1a2a3"])
     fun `파싱 통합테스트 - 파싱성공 테스트`(input: String) {
         val (expression, delimiter) = InputParser.parseDelimiter(input)
         val actual = InputParser.parseExpression(expression, delimiter)
@@ -98,7 +98,7 @@ internal class InputParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1,2.3", "//a\n1b2*3"])
+    @ValueSource(strings = ["1,2.3", "//a\\n1b2*3"])
     fun `파싱 통합테스트 - 파싱실패 테스트`() {
         val input = "1,2.3"
 
