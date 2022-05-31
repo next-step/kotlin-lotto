@@ -5,8 +5,8 @@ import lotto.agency.LottoWinning
 
 class ResultView {
 
-    fun printPurchaseAmount(amount: Int) {
-        println("${amount}개를 구입했습니다.")
+    fun printPurchaseAmount(manualLottoPurchaseAmount: Int, autoLottoPurchaseAmount: Int) {
+        println("수동으로 ${manualLottoPurchaseAmount}장, 자동으로 ${autoLottoPurchaseAmount}장을 구매했습니다.")
     }
 
     fun printPurchaseLottoTickets(lottoTickets: List<LottoTicket>) {
@@ -21,6 +21,8 @@ class ResultView {
     }
 
     private fun printMatchedCount(winnings: Map<LottoWinning, Int>) {
+        println("")
+        println("--- 당첨 통계 ---")
         winnings
             .filter { it.key != LottoWinning.LOSE }
             .map { println(getLottoWinningSentence(it)) }
@@ -36,6 +38,7 @@ class ResultView {
 
     private fun printProfitRate(winnings: Map<LottoWinning, Int>, money: Int) {
         val profitRate = winnings.map { it.key.winningMoney.times(it.value) }.sumOf { it.toDouble() } / money.toDouble()
+        println("")
         println("총 수익률은 " + String.format("%.2f", profitRate) + "입니다.")
     }
 }

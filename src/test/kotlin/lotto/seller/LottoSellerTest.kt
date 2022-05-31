@@ -15,11 +15,11 @@ class LottoSellerTest {
         val money = 13500
         val manualAmount = 0
         val lottoSeller = LottoSeller()
-        val lottoPurchaseAmount = lottoSeller.calculateAutoLottoPurchaseAmount(money, manualAmount)
-        val lottoNumberMaker = LottoNumberMaker()
-        val purchaseLottoTickets = lottoSeller.buy(lottoPurchaseAmount, lottoNumberMaker)
+        val autoLottoPurchaseAmount = lottoSeller.calculateAutoLottoPurchaseAmount(money, manualAmount)
+        val autoLottoNumberMaker = LottoNumberMaker()
+        val purchaseLottoTickets = lottoSeller.buy(autoLottoPurchaseAmount, emptyList(), autoLottoNumberMaker)
 
-        assertThat(purchaseLottoTickets.size).isEqualTo(lottoPurchaseAmount)
+        assertThat(purchaseLottoTickets.size).isEqualTo(autoLottoPurchaseAmount)
     }
 
     @Test
@@ -33,18 +33,33 @@ class LottoSellerTest {
     }
 
     @Test
-    fun `원하는 로또 티켓이 생성되었는지에 대한 테스트`() {
+    fun `원하는 랜덤 로또 티켓이 생성되었는지에 대한 테스트`() {
         class LottoNumberForTest : LottoNumberStrategy {
             override fun makeLottoNumbers(): Set<Int> {
                 return setOf(1, 6, 23, 5, 2, 7)
             }
         }
 
-        val lottoPurchaseAmount = 1
+        val autoLottoPurchaseAmount = 1
         val lottoSeller = LottoSeller()
         val lottoNumberForTest = LottoNumberForTest()
-        val lottoTicket = lottoSeller.buy(lottoPurchaseAmount, lottoNumberForTest)
+        val lottoTicket = lottoSeller.buy(autoLottoPurchaseAmount, emptyList(), lottoNumberForTest)
         val lottoNumbers = lottoNumberForTest.makeLottoNumbers().map { LottoNumberCache.valueOf(it) }.toSet()
+
+        lottoNumbers.forEach {
+            assertThat(lottoTicket[0].numbers).contains(it)
+        }
+    }
+
+    @Test
+    fun `원하는 수동 로또 티켓이 생성되었는지에 대한 테스트`() {
+
+        val autoLottoPurchaseAmount = 0
+        val manualLottoNumbers = listOf(setOf(4, 5, 6, 7, 8, 9))
+        val lottoSeller = LottoSeller()
+        val lottoNumberForTest = LottoNumberMaker()
+        val lottoTicket = lottoSeller.buy(autoLottoPurchaseAmount, manualLottoNumbers, lottoNumberForTest)
+        val lottoNumbers = manualLottoNumbers[0].map { LottoNumberCache.valueOf(it) }.toSet()
 
         lottoNumbers.forEach {
             assertThat(lottoTicket[0].numbers).contains(it)

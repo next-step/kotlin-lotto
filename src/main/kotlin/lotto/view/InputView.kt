@@ -22,17 +22,17 @@ class InputView {
         return text.toInt()
     }
 
-    fun enterManualLottoTicket(amount: Int): List<LottoTicket> {
+    fun enterManualLottoTicket(amount: Int): List<Set<Int>> {
 
         println("수동으로 구매할 번호를 입력해 주세요.")
 
-        val lottoTickets: MutableList<LottoTicket> = mutableListOf()
+        val numbers: MutableList<Set<Int>> = mutableListOf()
         repeat(amount) {
             val inputText = readln().trim().split(",")
-            lottoTickets.add(LottoTicket(inputText.map { it.toInt() }.toSet()))
+            numbers.add(inputText.map { it.toInt() }.toSet())
         }
 
-        return lottoTickets
+        return numbers
     }
 
     fun enterWonLottoTicket(): LottoTicket {
