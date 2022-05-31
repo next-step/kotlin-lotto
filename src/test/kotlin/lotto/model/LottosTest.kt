@@ -15,7 +15,7 @@ class LottosTest {
     )
     fun `개당 1000원에 로또를 구입 가능`(paymentPrice: Int, lottoSize: Int) {
         // given, when
-        val lottos = Lottos.from(paymentPrice).lottos
+        val lottos = Lottos.generateLottos(paymentPrice).lottos
 
         // then
         assertEquals(lottos.size, lottoSize)
