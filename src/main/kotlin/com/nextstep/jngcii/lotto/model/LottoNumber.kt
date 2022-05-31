@@ -1,6 +1,6 @@
 package com.nextstep.jngcii.lotto.model
 
-class LottoNumber(val value: Int) {
+open class LottoNumber(val value: Int) {
     init {
         require(value in MINIMAL_NUMBER..MAXIMAL_NUMBER) {
             "$MINIMAL_NUMBER~${MAXIMAL_NUMBER}에 해당하는 숫자로 이루어진 숫자가 아닙니다."
