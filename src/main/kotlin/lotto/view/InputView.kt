@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.Money
 
@@ -56,7 +57,7 @@ object InputView {
 
         return LottoTickets(
             List(manualTicketCount) { readln() }
-                .map { it.splitToLottoNumber() }
+                .map { LottoTicket(it.splitToLottoNumber()) }
         )
     }
 }
