@@ -15,16 +15,16 @@ fun main() {
 
     val lottoMachine = LottoMachine()
 
-    val lottoTickets = lottoMachine.purchase(money, Extractor.randomNumberFunc)
+    val purchase = lottoMachine.purchase(money, manualNumbers, Extractor.randomNumberFunc)
 
-    ResultView.printTickets(lottoTickets)
+    ResultView.printTickets(purchase)
 
     val lottoWinning = LottoWinning(
         numbers = InputView.getWinningNumbers(),
         bonusNumber = InputView.getBonusNumber()
     )
 
-    val lottoPrizes = lottoWinning.getPrizes(lottoTickets)
+    val lottoPrizes = lottoWinning.getPrizes(purchase.totalTickets)
 
     ResultView.printResult(lottoPrizes.prizeResult, lottoPrizes.earnings(money))
 }

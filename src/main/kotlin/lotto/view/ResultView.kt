@@ -1,13 +1,13 @@
 package lotto.view
 
 import lotto.domain.LottoPrize
-import lotto.domain.LottoTickets
+import lotto.domain.Purchase
 
 object ResultView {
-    fun printTickets(lottoTickets: LottoTickets) {
-        println("${lottoTickets.lottoTickets.size}개를 구매했습니다.")
+    fun printTickets(purchase: Purchase) {
+        println("수동으로 ${purchase.manualTickets.lottoTickets.size}장, 자동으로 ${purchase.autoTickets.lottoTickets.size}개를 구매했습니다.")
 
-        lottoTickets.lottoTickets.forEach { lottoTicket ->
+        purchase.totalTickets.lottoTickets.forEach { lottoTicket ->
             println(lottoTicket.numbers.map { it.number })
         }
     }
