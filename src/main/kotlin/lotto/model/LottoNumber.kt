@@ -22,4 +22,8 @@ value class LottoNumber(
                 "로또 숫자는 $MIN_LOTTO_NUMBER 이상 $MAX_LOTTO_NUMBER 이하이어야 합니다. (number: $number)"
             }
     }
+
+    override fun toString(): String {
+        return "$number"
+    }
 }

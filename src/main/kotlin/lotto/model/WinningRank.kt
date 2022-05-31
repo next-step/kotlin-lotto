@@ -1,8 +1,8 @@
 package lotto.model
 
 enum class WinningRank(
-    private val matchedNumberCount: Int,
-    prizeMoney: Int
+    val matchedNumberCount: Int,
+    val prizeMoney: Int
 ) {
 
     FIRST_PRIZE(6, 2_000_000_000),

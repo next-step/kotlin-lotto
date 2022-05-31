@@ -4,6 +4,8 @@ class Lottos(
     val lottos: List<Lotto>
 ) {
 
+    val size = lottos.size
+
     companion object {
         private const val MIN_PAYMENT_PRICE = 0
         private const val LOTTO_PRICE = 1000

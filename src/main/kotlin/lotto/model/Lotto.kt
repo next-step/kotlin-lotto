@@ -8,6 +8,10 @@ class Lotto(
 
     fun findMatchedNumberCount(other: Lotto) = other.lotto.count { lotto.contains(it) }
 
+    override fun toString(): String {
+        return "$lotto"
+    }
+
     companion object {
         fun of(numbers: List<Int>): Lotto {
             val lottoNumbers = numbers.map { LOTTO_NUMBERS[it - 1] }
