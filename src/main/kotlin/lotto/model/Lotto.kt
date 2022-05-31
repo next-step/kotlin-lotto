@@ -1,7 +1,5 @@
 package lotto.model
 
-import lotto.model.LottoNumber.Companion.LOTTO_NUMBERS
-
 class Lotto(
     private val lotto: List<LottoNumber>
 ) {
@@ -16,7 +14,7 @@ class Lotto(
         fun of(numbers: List<Int>): Lotto {
             validateUnique(numbers)
 
-            val lottoNumbers = numbers.map { LOTTO_NUMBERS[it - 1] }
+            val lottoNumbers = numbers.map { LottoNumber.from(it) }
             return Lotto(lottoNumbers)
         }
 

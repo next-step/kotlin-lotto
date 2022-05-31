@@ -1,7 +1,7 @@
 package lotto.model
 
 @JvmInline
-value class LottoNumber(
+value class LottoNumber private constructor(
     val number: Int
 ) {
 
@@ -19,6 +19,12 @@ value class LottoNumber(
 
         val LOTTO_NUMBERS = List(MAX_LOTTO_NUMBER) {
             LottoNumber(it + MIN_LOTTO_NUMBER)
+        }
+
+        fun from(number: Int): LottoNumber {
+            validateNumberRange(number)
+
+            return LOTTO_NUMBERS[number - 1]
         }
 
         private fun validateNumberRange(number: Int) =

@@ -13,7 +13,7 @@ class LottoNumberTest {
     @ValueSource(ints = [0, 46])
     fun `로또 숫자가 1 미만 또는 45 초과이면 예외 발생`(number: Int) {
         // when, then
-        val exception = assertThrows<IllegalArgumentException> { LottoNumber(number) }
+        val exception = assertThrows<IllegalArgumentException> { LottoNumber.from(number) }
         assertEquals("로또 숫자는 1 이상 45 이하이어야 합니다. (number: $number)", exception.message)
     }
 
@@ -21,7 +21,7 @@ class LottoNumberTest {
     @ValueSource(ints = [1, 45])
     fun `로또 숫자 정상 생성`(number: Int) {
         // when
-        val lottoNumber = LottoNumber(number)
+        val lottoNumber = LottoNumber.from(number)
 
         // then
         assertEquals(lottoNumber.number, number)
