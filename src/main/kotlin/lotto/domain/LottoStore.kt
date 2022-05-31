@@ -11,7 +11,7 @@ object LottoStore {
      * @param manualTickets 수동 구입 로또 티켓
      * @return [LottoTickets] 구매한 로또 티켓 목록
      */
-    fun buy(money: PurchaseMoney, manualTickets: List<LottoTicket> = emptyList()): LottoTickets {
+    fun buy(money: Money, manualTickets: List<LottoTicket> = emptyList()): LottoTickets {
         require(money >= PRICE_OF_ONE_LOTTO_TICKET)
         require(money <= PRICE_OF_ONE_LOTTO_TICKET * MAXIMUM_SIZE_OF_TICKET)
 
@@ -21,5 +21,5 @@ object LottoStore {
         return LottoTickets(manualTickets + autoTickets)
     }
 
-    private fun getTicketCountByMoney(money: PurchaseMoney): Int = money / PRICE_OF_ONE_LOTTO_TICKET
+    private fun getTicketCountByMoney(money: Money): Int = money / PRICE_OF_ONE_LOTTO_TICKET
 }

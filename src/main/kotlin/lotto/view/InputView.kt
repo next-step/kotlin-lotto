@@ -2,22 +2,22 @@ package lotto.view
 
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
-import lotto.domain.PurchaseMoney
+import lotto.domain.Money
 import lotto.domain.toLottoNumber
-import lotto.domain.toPurchaseMoney
+import lotto.domain.toMoney
 
 class InputView(private val reader: () -> String?, private val writer: (String) -> Unit) {
 
-    fun readPurchaseMoney(): PurchaseMoney {
-        var purchaseMoney: PurchaseMoney? = null
-        while (purchaseMoney == null) {
+    fun readPurchaseMoney(): Money {
+        var money: Money? = null
+        while (money == null) {
             printInputPurchaseMoney()
 
-            purchaseMoney = kotlin
-                .runCatching { reader()?.toInt()?.toPurchaseMoney() }
+            money = kotlin
+                .runCatching { reader()?.toInt()?.toMoney() }
                 .getOrNull()
         }
-        return purchaseMoney
+        return money
     }
 
     private fun printInputPurchaseMoney() {

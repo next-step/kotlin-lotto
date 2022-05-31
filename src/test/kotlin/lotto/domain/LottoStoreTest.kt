@@ -11,7 +11,7 @@ import io.kotest.property.checkAll
 class LottoStoreTest : BehaviorSpec({
     Given("로또 판매점에서") {
         When("1000원 이상의 돈으로") {
-            val money = PurchaseMoney(34_567)
+            val money = Money(34_567)
             val expectedTickets = 34
 
             And("로또 티켓을 구매하면") {
@@ -23,7 +23,7 @@ class LottoStoreTest : BehaviorSpec({
             And("로또 티켓을 100개 넘개 구매하면") {
                 Then("IllegalArgumentException 예외 발생") {
                     shouldThrowExactly<IllegalArgumentException> {
-                        LottoStore.buy(PurchaseMoney(101_000))
+                        LottoStore.buy(Money(101_000))
                     }
                 }
             }
@@ -34,7 +34,7 @@ class LottoStoreTest : BehaviorSpec({
                 Then("IllegalArgumentException 예외 발생") {
                     checkAll(Arb.int(0..999)) { money ->
                         shouldThrowExactly<IllegalArgumentException> {
-                            LottoStore.buy(PurchaseMoney(money))
+                            LottoStore.buy(Money(money))
                         }
                     }
                 }
@@ -42,7 +42,7 @@ class LottoStoreTest : BehaviorSpec({
         }
 
         When("3000원의 돈으로 수동 2장을 함께 구매하면") {
-            val money = PurchaseMoney(3000)
+            val money = Money(3000)
             val manualTickets = listOf(
                 LottoTicket.ManualLottoTicket(1, 2, 3, 4, 5, 6),
                 LottoTicket.ManualLottoTicket(2, 3, 4, 5, 6, 7)
