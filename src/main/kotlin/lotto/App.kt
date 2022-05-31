@@ -13,8 +13,6 @@ fun main() {
 
     val manualNumbers = InputView.getManualNumbers(manualTicketCount)
 
-    require(manualTicketCount == manualNumbers.lottoTickets.size)
-
     val lottoMachine = LottoMachine()
 
     val lottoTickets = lottoMachine.purchase(money, Extractor.randomNumberFunc)
