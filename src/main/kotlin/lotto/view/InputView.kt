@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.domain.Money
 
 object InputView {
@@ -48,5 +49,18 @@ object InputView {
         require(manualCount > 0) { NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE }
 
         return manualCount
+    }
+
+    fun getManualNumbers(manualTicketCount: Int): Any {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        return List(manualTicketCount) { readln() }
+            .map { input ->
+                LottoTicket(
+                    input.replace(" ", "")
+                        .split(",")
+                        .map { LottoNumber(it.toInt()) }
+                )
+            }
     }
 }

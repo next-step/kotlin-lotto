@@ -11,6 +11,8 @@ fun main() {
 
     val manualTicketCount = InputView.getManualTicketCount()
 
+    val manualNumbers = InputView.getManualNumbers(manualTicketCount)
+
     val lottoMachine = LottoMachine()
 
     val lottoTickets = lottoMachine.purchase(money, Extractor.randomNumberFunc)
