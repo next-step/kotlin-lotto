@@ -1,7 +1,6 @@
 package lotto.agency
 
 import lotto.agency.number.LottoNumber
-import lotto.agency.number.LottoNumberCache
 import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.WonLottoNumberCountInconsistencyException
 
@@ -15,7 +14,7 @@ class LottoTicket(numbers: Set<Int>) {
 
     init {
         validateLottoCount(numbers)
-        this.numbers = numbers.map { LottoNumberCache.valueOf(it) }.toSet()
+        this.numbers = numbers.map { LottoNumber.valueOf(it) }.toSet()
     }
 
     fun countMatchWonLottoTicket(wonLottoTicket: LottoTicket): Int {

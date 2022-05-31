@@ -1,6 +1,6 @@
 package lotto.seller
 
-import lotto.agency.number.LottoNumberCache
+import lotto.agency.number.LottoNumber
 import lotto.agency.number.LottoNumberMaker
 import lotto.agency.number.LottoNumberStrategy
 import lotto.exception.MinimumPurchaseMoneyException
@@ -44,7 +44,7 @@ class LottoSellerTest {
         val lottoSeller = LottoSeller()
         val lottoNumberForTest = LottoNumberForTest()
         val lottoTicket = lottoSeller.buy(autoLottoPurchaseAmount, emptyList(), lottoNumberForTest)
-        val lottoNumbers = lottoNumberForTest.makeLottoNumbers().map { LottoNumberCache.valueOf(it) }.toSet()
+        val lottoNumbers = lottoNumberForTest.makeLottoNumbers().map { LottoNumber.valueOf(it) }.toSet()
 
         lottoNumbers.forEach {
             assertThat(lottoTicket[0].numbers).contains(it)
@@ -59,7 +59,7 @@ class LottoSellerTest {
         val lottoSeller = LottoSeller()
         val lottoNumberForTest = LottoNumberMaker()
         val lottoTicket = lottoSeller.buy(autoLottoPurchaseAmount, manualLottoNumbers, lottoNumberForTest)
-        val lottoNumbers = manualLottoNumbers[0].map { LottoNumberCache.valueOf(it) }.toSet()
+        val lottoNumbers = manualLottoNumbers[0].map { LottoNumber.valueOf(it) }.toSet()
 
         lottoNumbers.forEach {
             assertThat(lottoTicket[0].numbers).contains(it)
