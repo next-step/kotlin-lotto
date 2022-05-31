@@ -13,9 +13,9 @@ enum class LottoRank(
     FIRST(NumberOfMatches(6), false, 2_000_000_000);
 
     companion object {
-        fun from(numberOfMatches: NumberOfMatches): LottoRank {
-            return values().find { lottoRank ->
-                lottoRank.numberOfMatches == numberOfMatches
+        fun of(numberOfMatches: NumberOfMatches, isBonusBallMatched: Boolean): LottoRank {
+            return values().findLast { lottoRank ->
+                lottoRank.numberOfMatches == numberOfMatches && (!lottoRank.needToMatchBonusBall || isBonusBallMatched)
             } ?: NOTHING
         }
 
