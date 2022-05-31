@@ -44,8 +44,8 @@ class LottoStoreTest : BehaviorSpec({
         When("3000원의 돈으로 수동 2장을 함께 구매하면") {
             val money = PurchaseMoney(3000)
             val manualTickets = listOf(
-                LottoTicket.ManualLottoTicket(setOf(1, 2, 3, 4, 5, 6).toLottoNumber()),
-                LottoTicket.ManualLottoTicket(setOf(2, 3, 4, 5, 6, 7).toLottoNumber())
+                LottoTicket.ManualLottoTicket(1, 2, 3, 4, 5, 6),
+                LottoTicket.ManualLottoTicket(2, 3, 4, 5, 6, 7)
             )
             val lottoTickets = LottoStore.buy(money = money, manualTickets = manualTickets)
 
