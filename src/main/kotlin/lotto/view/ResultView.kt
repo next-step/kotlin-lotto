@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoMatch
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTickets
 import java.math.BigDecimal
@@ -9,31 +10,33 @@ class ResultView(
 ) {
 
     fun printLottoTickets(tickets: LottoTickets) {
-        writeLine("${tickets.size}개를 구매했습니다.")
+        writeLine("\n수동으로 ${tickets.countOfManualTicket}장, 자동으로 ${tickets.countOfAutoTicket}개를 구매했습니다.")
         tickets.forEach { ticket ->
-            writer(ticket.numbers.joinToString(prefix = PREFIX_LOTTO_NUMBERS, postfix = POSTFIX_LOTTO_NUMBERS))
+            writer(ticket.sorted().joinToString(prefix = PREFIX_LOTTO_NUMBERS, postfix = POSTFIX_LOTTO_NUMBERS))
         }
     }
 
     fun printLottoStatistics(statistics: LottoStatistics) {
         printStatisticsHeader()
         printStatisticsMatch(statistics)
+        printStatisticsProfit(statistics)
     }
 
     private fun printStatisticsHeader() {
-        writeLine("\n당첨 동계")
+        writeLine("\n당첨 통계")
         writeLine("-".repeat(10))
     }
 
     private fun printStatisticsMatch(statistics: LottoStatistics) {
-        statistics.entries.forEach { (lottoMatch, matchCount) ->
-            val extraPolicy = if (lottoMatch.withBonus) ", 보너스 볼 일치" else " "
-            writeLine("${lottoMatch.count}개 일치$extraPolicy(${lottoMatch.reward}원)- ${matchCount}개")
+        LottoMatch.valuesWithReward().forEach { match ->
+            val count = statistics[match] ?: 0
+            val extraPolicy = if (match.withBonus) ", 보너스 볼 일치" else " "
+            writeLine("${match.count}개 일치$extraPolicy(${match.reward}원)- ${count}개")
         }
     }
 
-    fun printStatisticsProfit(statistics: LottoStatistics, purchase: Int) {
-        val profit = statistics.getProfit(purchase)
+    private fun printStatisticsProfit(statistics: LottoStatistics) {
+        val profit = statistics.getProfit()
         writeLine(
             "총 수익률은 ${getFormattedProfit(profit)}입니다.(기준이 1이기 때문에 결과적으로 ${getProfitStatus(profit)}라는 의미임)"
         )

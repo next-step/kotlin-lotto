@@ -1,11 +1,16 @@
 package lotto.domain
 
-data class LottoLastNumbers(private val tickets: LottoTicket, val bonus: Int) : Set<Int> by tickets.numbers {
-
-    constructor(numbers: Set<Int>, bonus: Int) : this(LottoTicket(numbers), bonus)
+data class LottoLastNumbers(
+    private val tickets: LottoTicket.LastLottoTicket,
+    val bonus: LottoNumber
+) : Set<LottoNumber> by tickets {
 
     init {
-        require(bonus in LottoTicket.RANGE_OF_LOTTO_NUMBER)
-        require(tickets.numbers.contains(bonus).not())
+        require(contains(bonus).not())
     }
+
+    constructor(numbers: Set<Int>, bonus: Int) : this(
+        LottoTicket.LastLottoTicket(numbers.toLottoNumber()),
+        LottoNumber.from(bonus)
+    )
 }

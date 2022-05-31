@@ -5,11 +5,16 @@ import java.math.MathContext
 
 typealias MatchCount = Int
 
-class LottoStatistics(private val statistics: Map<LottoMatch, MatchCount>) : Map<LottoMatch, Int> by statistics {
+data class LottoStatistics(
+    private val statistics: Map<LottoMatch, MatchCount>
+) : Map<LottoMatch, MatchCount> by statistics {
 
-    fun getProfit(purchase: Int): BigDecimal {
-        require(purchase > 0)
-        return getRewards().divide(purchase.toBigDecimal(), MathContext.DECIMAL128)
+    private val ticketCount: Int = values.sum()
+
+    fun getProfit(): BigDecimal {
+        require(ticketCount > 0)
+        val purchase = ticketCount * LottoStore.PRICE_OF_ONE_LOTTO_TICKET
+        return getRewards().divide(purchase.toBigDecimal(), MathContext.DECIMAL32)
     }
 
     private fun getRewards(): BigDecimal {
