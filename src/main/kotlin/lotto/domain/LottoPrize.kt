@@ -6,8 +6,4 @@ enum class LottoPrize(val rank: Int, val matchCount: Int, val prizeMoney: Int) {
     THIRD(3, 5, 1_500_000),
     FOURTH(4, 4, 50_000),
     FIFTH(5, 3, 5_000);
-
-    companion object {
-        fun find(matchCount: Int): LottoPrize? = values().find { it.matchCount == matchCount }
-    }
 }

@@ -4,7 +4,11 @@ import lotto.Const
 import lotto.domain.LottoNumber
 
 class InputView {
-    fun getPrice(): String? = printMsgAndReadValue(Const.OutputMsg.GET_PRICE_MSG)
+    fun getPrice(): Int {
+        val inputStr = printMsgAndReadValue(Const.OutputMsg.GET_PRICE_MSG)
+        require(!inputStr.isNullOrBlank()) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
+        return requireNotNull(inputStr.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR_MSG }
+    }
 
     fun getLastWinningNumbers(): List<Int> {
         val inputStr = printMsgAndReadValue("\n${Const.OutputMsg.LOTTO_NUM_MSG}")

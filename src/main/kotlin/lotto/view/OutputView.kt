@@ -6,11 +6,12 @@ import lotto.domain.LottoTicket
 import java.math.BigDecimal
 
 class OutputView {
-    fun resultPurchaseLotto(lottoCount: Int) {
+    fun resultPurchaseLotto(lottoCount: Int, lottoTickets: List<LottoTicket>) {
         println("${lottoCount}개를 구매했습니다.")
+        resultLottoTickets(lottoTickets = lottoTickets)
     }
 
-    fun resultLottoTickets(lottoTickets: List<LottoTicket>) {
+    private fun resultLottoTickets(lottoTickets: List<LottoTicket>) {
         val result = buildString {
             lottoTickets.forEach {
                 appendLine(lottoTicketToString(it))
