@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoMachine {
 
-    fun purchase(money: Money, randomNumberFunc: () -> List<LottoNumber>): LottoTickets {
+    fun purchase(money: Money, manualTickets: LottoTickets, randomNumberFunc: () -> List<LottoNumber>): LottoTickets {
         val lottoTicketCount = money.amount / LOTTO_PRICE
 
         return LottoTickets(
