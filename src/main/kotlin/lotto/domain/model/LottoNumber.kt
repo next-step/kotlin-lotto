@@ -8,6 +8,10 @@ value class LottoNumber private constructor(val value: Int) {
         }
     }
 
+    override fun toString(): String {
+        return value.toString()
+    }
+
     companion object {
         private const val MESSAGE_INVALID_NUMBER = "로또 번호는 1에서 45까지의 숫자 중 하나로 이루어져야 합니다.\n현재 입력된 번호 : "
 
