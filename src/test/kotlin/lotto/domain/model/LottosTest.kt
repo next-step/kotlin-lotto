@@ -30,14 +30,14 @@ class LottosTest {
             )
         )
 
-        val winningNumbers = WinningNumbers.of(listOf(8, 21, 23, 41, 42, 43))
+        val winningNumbers = WinningNumbers.from(listOf(8, 21, 23, 41, 42, 43))
 
         val lottoResult = lottos.checkWith(winningNumbers)
 
         assertAll(
+            { assertThat(lottoResult[LottoRank.FIFTH].count).isEqualTo(1) },
             { assertThat(lottoResult[LottoRank.FOURTH].count).isEqualTo(1) },
-            { assertThat(lottoResult[LottoRank.THIRD].count).isEqualTo(1) },
-            { assertThat(lottoResult[LottoRank.SECOND].count).isEqualTo(2) },
+            { assertThat(lottoResult[LottoRank.THIRD].count).isEqualTo(2) },
             { assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1) }
         )
     }
