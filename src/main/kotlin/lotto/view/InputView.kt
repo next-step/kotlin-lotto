@@ -38,4 +38,8 @@ object InputView {
 
         return LottoNumber(bonusNumber)
     }
+
+    fun getManualTicketCount(): Int {
+        return readLine()?.toInt() ?: 0
+    }
 }
