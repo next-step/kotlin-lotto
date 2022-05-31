@@ -9,9 +9,9 @@ class LottoStoreTest {
     @ValueSource(ints = [14000, 23000])
     @ParameterizedTest
     fun `로또가 하나당 1000원으로 맞게 계산되는지 테스트`(money: Int) {
-        val lottoStore = LottoStore(UserMoney(money))
+        val userMoney = Money(money)
 
-        val answer = lottoStore.lottoCount
+        val answer = userMoney.getLottoCount()
         val expect = money / 1000
 
         assertThat(answer).isEqualTo(expect)
@@ -24,19 +24,21 @@ class LottoStoreTest {
         val myMoney = 3000
         val lottoMaker = object : LottoMaker {
             private val lottoList = listOf(
-                listOf(1, 2, 3, 43, 44, 45),
-                listOf(1, 2, 3, 4, 5, 6),
-                listOf(1, 2, 3, 5, 44, 45)
+                listOf(1, 2, 3, 43, 44, 45), listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 5, 44, 45)
             )
 
             private var idx = 0
+            override val manualLotto: List<LottoNumbers>
+                get() = emptyList()
 
-            override fun makeLottoNumbers(): LottoNumbers {
+            override fun buyAutoLotto(): LottoNumbers {
                 return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
-        }
 
-        val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
+            override fun buyManualLotto(numbers: List<List<Int>>) {}
+        }
+        val autoLottoNumbers = List(3) { lottoMaker.buyAutoLotto() }
+        val lottoStore = LottoStore(Money(myMoney), lottoMaker.manualLotto, autoLottoNumbers)
         val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 
         val answer3prize = lottoResult.first { it.prize == LottoPrizeInfo.WIN3 }.count
@@ -64,17 +66,21 @@ class LottoStoreTest {
             private val lottoList = listOf(
                 listOf(1, 2, 3, 43, 44, 45),
                 listOf(1, 2, 3, 4, 5, 6),
-                listOf(1, 2, 3, 5, 44, 45)
             )
 
             private var idx = 0
+            override val manualLotto: List<LottoNumbers>
+                get() = listOf(LottoNumbers.of(listOf(1, 2, 3, 5, 44, 45)))
 
-            override fun makeLottoNumbers(): LottoNumbers {
+            override fun buyAutoLotto(): LottoNumbers {
                 return LottoNumbers(lottoList[idx++].map { LottoNumber(it) })
             }
+
+            override fun buyManualLotto(numbers: List<List<Int>>) {}
         }
 
-        val lottoStore = LottoStore(UserMoney(myMoney), lottoMaker)
+        val autoLottoNumbers = List(2) { lottoMaker.buyAutoLotto() }
+        val lottoStore = LottoStore(Money(myMoney), lottoMaker.manualLotto, autoLottoNumbers)
 
         val lottoResult = lottoStore.getLottoResult(lottoAnswer, bonusBall)
 

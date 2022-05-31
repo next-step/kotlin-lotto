@@ -1,5 +1,8 @@
 package lotto.domain
 
 interface LottoMaker {
-    fun makeLottoNumbers(): LottoNumbers
+    val manualLotto: List<LottoNumbers>
+
+    fun buyAutoLotto(): LottoNumbers
+    fun buyManualLotto(numbers: List<List<Int>>)
 }

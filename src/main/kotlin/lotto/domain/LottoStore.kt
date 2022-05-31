@@ -1,18 +1,25 @@
 package lotto.domain
 
-class LottoStore(private val userMoney: UserMoney, private val lottoMaker: LottoMaker = KoreanLottoNumberMaker()) {
-    val lottoCount = userMoney.getLottoCount()
-    val boughtLottos = List(lottoCount) { lottoMaker.makeLottoNumbers() }
+class LottoStore(
+    private val money: Money,
+    manualLottos: List<LottoNumbers>,
+    autoLottos: List<LottoNumbers>
+) {
+    private val _boughtLottos = manualLottos + autoLottos
+
+    val boughtLottos
+        get() = _boughtLottos.toList()
+
     val totalYieldRatio
-        get() = totalMoney.money.toDouble() / userMoney.money
-    private var totalMoney = UserMoney()
+        get() = totalMoney.money.toDouble() / money.money
+    private var totalMoney = Money()
 
     fun getLottoResult(answer: LottoNumbers, bonus: LottoNumber): List<LottoResult> {
-        val lottoResult = LottoPrizeInfo.values().map { LottoResult(it) }
+        val lottoResult = LottoPrizeInfo.getEmptyResult()
 
-        boughtLottos.forEach {
+        _boughtLottos.forEach {
             val matchCount = it.intersectCount(answer)
-            val matchBonus = isMatchBonus(bonus, answer)
+            val matchBonus = answer.hasNumber(bonus)
 
             val prizeInfo = LottoPrizeInfo.getPrizeInfo(matchCount, matchBonus) ?: return@forEach
             lottoResult.first { info -> info.prize == prizeInfo }.also { prize ->
@@ -25,11 +32,7 @@ class LottoStore(private val userMoney: UserMoney, private val lottoMaker: Lotto
         return lottoResult
     }
 
-    private fun addPrizeMoney(money: UserMoney) {
+    private fun addPrizeMoney(money: Money) {
         totalMoney += money
-    }
-
-    private fun isMatchBonus(bonusNumber: LottoNumber, answer: LottoNumbers): Boolean {
-        return answer.hasNumber(bonusNumber)
     }
 }
