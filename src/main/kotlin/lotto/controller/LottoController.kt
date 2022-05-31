@@ -5,9 +5,11 @@ import lotto.domain.LottoYieldCalculator
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.RangeLottoFactory
 import lotto.domain.model.UserInputRequest
+import lotto.domain.model.WinningLottoInfo
 import lotto.domain.model.WinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
+import lotto.view.inputconverter.LottoNumberConverter
 import lotto.view.inputconverter.StringToIntConverter
 import lotto.view.inputconverter.WinningNumbersConverter
 import lotto.view.outputconverter.LottoResultConverter
@@ -17,6 +19,7 @@ import lotto.view.outputconverter.LottosConverter
 object LottoController {
     private const val GUIDANCE_MESSAGE_PURCHASE_AMOUNT = "구입 금액을 입력해 주세요."
     private const val GUIDANCE_MESSAGE_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요."
+    private const val GUIDANCE_MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요."
 
     fun execute() {
         val purchaseAmount = getPurchaseAmount()
@@ -27,7 +30,8 @@ object LottoController {
         )
 
         val winningNumbers = getWinningNumbers()
-        val lottoResult = lottos.checkWith(winningNumbers)
+        val bonusBall = getBonusBall()
+        val lottoResult = lottos.checkWith(WinningLottoInfo(winningNumbers, bonusBall))
         OutputView.print(
             printable = lottoResult,
             outputConverter = LottoResultConverter
@@ -53,6 +57,15 @@ object LottoController {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_WINNING_NUMBERS,
             inputConverter = WinningNumbersConverter
+        )
+
+        return InputView.receiveUserInput(userInputRequest)
+    }
+
+    private fun getBonusBall(): LottoNumber {
+        val userInputRequest = UserInputRequest(
+            message = GUIDANCE_MESSAGE_BONUS_BALL,
+            inputConverter = LottoNumberConverter
         )
 
         return InputView.receiveUserInput(userInputRequest)

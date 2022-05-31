@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.EnumSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoRankTest {
@@ -30,5 +31,11 @@ class LottoRankTest {
         val lottoRanks = LottoRank.winnerPlace()
 
         assertThat(lottoRanks).doesNotContainSequence(LottoRank.NOTHING)
+    }
+
+    @ParameterizedTest
+    @EnumSource(LottoRank::class)
+    fun `isWin을 통해 당첨금을 받을 수 있는 Rank인지 확인할 수 있다`(lottoRank: LottoRank) {
+        assertThat(lottoRank.isWin()).isEqualTo(lottoRank != LottoRank.NOTHING)
     }
 }

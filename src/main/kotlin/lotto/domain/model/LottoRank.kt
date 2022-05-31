@@ -12,6 +12,8 @@ enum class LottoRank(
     SECOND(NumberOfMatches(5), true, 1_500_000),
     FIRST(NumberOfMatches(6), false, 2_000_000_000);
 
+    fun isWin(): Boolean = this != NOTHING
+
     companion object {
         fun of(numberOfMatches: NumberOfMatches, isBonusBallMatched: Boolean): LottoRank {
             return values().findLast { lottoRank ->

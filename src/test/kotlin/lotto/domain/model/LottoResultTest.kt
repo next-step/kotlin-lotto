@@ -69,11 +69,11 @@ class LottoResultTest {
     }
 
     @Test
-    fun `Int, Int를 key-value로 하는 Map을 넘겨서 LottoResult를 만들 수 있다`() {
+    fun `LottoRank, Int를 key-value로 하는 Map을 넘겨서 LottoResult를 만들 수 있다`() {
         val lottoWinningMap = mapOf(
-            NumberOfMatches(3) to 3,
-            NumberOfMatches(4) to 1,
-            NumberOfMatches(6) to 1
+            LottoRank.FIFTH to 3,
+            LottoRank.FOURTH to 1,
+            LottoRank.FIRST to 1
         )
         val lottoResult = LottoResult.from(lottoWinningMap)
 
