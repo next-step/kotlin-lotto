@@ -1,6 +1,5 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
@@ -32,14 +31,6 @@ class LottoTicketsTest : BehaviorSpec({
             Then("번호 6개가 일치하는 티켓 개수는 1를 반환한다") {
                 val statistics = lottoTickets.getLottoStatistics(lottoLastNumbers)
                 statistics[LottoMatch.SIX] shouldBe 1
-            }
-        }
-
-        When("0개의 로도 티켓 목록이 입력되면") {
-            Then("IllegalArgumentException 예외 발생") {
-                shouldThrowExactly<IllegalArgumentException> {
-                    LottoTickets(emptyList())
-                }
             }
         }
     }
