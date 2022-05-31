@@ -34,4 +34,13 @@ internal class LottoMachineTest {
 
         assertThat(lottoTickets.lottoTickets.size).isEqualTo(1)
     }
+
+    @Test
+    fun `로또 기계는 티켓 구매를 위해 금액, 수동 번호, 랜덤 숫자 생성 로직을 전달 받는다`() {
+        LottoMachine().purchase(
+            money = Money(1),
+            manualTicket = LottoTickets(),
+            randomNumberFunc = { (1..6).map { LottoNumber(it) } }
+        )
+    }
 }
