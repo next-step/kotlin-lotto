@@ -11,11 +11,12 @@ class LottoController() {
         val purchasedLotto = lottoStore.purchase()
         View.printPurchasedLottoList(purchasedLotto)
 
-        val lottoLuckyDraw = LottoLuckyDraw(View.getLuckyDrawNumber())
-        val lottoDrawResult = LottoDrawResult(lottoLuckyDraw.luckyNumber)
+        val luckyNumber = View.getLuckyDrawNumber()
+        val bonusNumber = View.getBonusNumber()
+        val lottoDraw = LottoDraw(luckyNumber, bonusNumber)
 
-        lottoDrawResult.draw(purchasedLotto)
-        ResultView.getReport(lottoDrawResult)
-        ResultView.getResult(lottoDrawResult, insertAmount)
+        lottoDraw.draw(purchasedLotto)
+        ResultView.getReport(lottoDraw)
+        ResultView.getResult(lottoDraw, insertAmount)
     }
 }
