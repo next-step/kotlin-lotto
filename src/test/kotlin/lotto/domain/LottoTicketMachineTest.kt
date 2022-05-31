@@ -2,7 +2,6 @@ package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
-import io.kotest.matchers.collections.shouldBeSortedWith
 import io.kotest.matchers.collections.shouldHaveSize
 
 class LottoTicketMachineTest : BehaviorSpec({
@@ -23,12 +22,6 @@ class LottoTicketMachineTest : BehaviorSpec({
             Then("생성된 번호는 모두 다른 번호이다") {
                 actual.distinct() shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
             }
-
-            Then("생성된 번호는 오름차순으로 정렬되어 있다") {
-                actual.shouldBeSortedWith { left, right ->
-                    left.number.compareTo(right.number)
-                }
-            }
         }
 
         And("무작위 번호로된 티켓을 n개 생성하고") {
@@ -47,12 +40,6 @@ class LottoTicketMachineTest : BehaviorSpec({
 
                 Then("생성된 번호는 모두 다른 번호이다 ($actualName)") {
                     ticket.distinct() shouldHaveSize LottoTicket.SIZE_OF_LOTTO_NUMBER
-                }
-
-                Then("생성된 번호는 오름차순으로 정렬되어 있다 ($actualName)") {
-                    ticket.shouldBeSortedWith { left, right ->
-                        left.number.compareTo(right.number)
-                    }
                 }
             }
         }

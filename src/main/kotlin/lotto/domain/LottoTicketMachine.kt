@@ -9,7 +9,6 @@ object LottoTicketMachine {
             LottoNumber
                 .shuffled()
                 .take(LottoTicket.SIZE_OF_LOTTO_NUMBER)
-                .sorted()
                 .toSet()
         )
 }
