@@ -1,17 +1,13 @@
 package lotto
 
-class WinningLotto(lottoNumbers: Set<LottoNumber> = emptySet(), private val bonusNumber: LottoNumber) {
+class WinningLotto(private val lottoNumbers: Set<LottoNumber> = emptySet(), private val bonusNumber: LottoNumber) {
 
     init {
         validate(lottoNumbers, bonusNumber)
     }
 
-    private val _lottoNumbers: MutableSet<LottoNumber> = lottoNumbers.toMutableSet()
-    val lottoNumber: Set<LottoNumber>
-        get() = _lottoNumbers.toSet()
-
     fun matchCount(lottos: Set<LottoNumber>): Int {
-        return lottos.count { _lottoNumbers.contains(it) }
+        return lottos.count { lottoNumbers.contains(it) }
     }
 
     fun matchBonus(lottos: Set<LottoNumber>): Boolean = matchCount(lottos) == 5 && lottos.contains(bonusNumber)

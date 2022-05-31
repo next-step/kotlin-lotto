@@ -42,7 +42,7 @@ internal class LottoRankTest {
     }
 
     @Test
-    fun `5개의 번호가 일치하면하고 보너스 번호가 맞으면 3000만원을 받습니다`() {
+    fun `5개의 번호가 일치하고 보너스 번호가 맞으면 3000만원을 받습니다`() {
         val selectRank = LottoRank.selectRank(5, true)
         assertThat(selectRank == LottoRank.FIVE_MATCH_WITH_BONUS).isTrue
         assertThat(selectRank.price).isEqualTo(30_000_000L)

@@ -8,7 +8,7 @@ class Money(private val value: BigDecimal) {
         validate(value.intValueExact())
     }
 
-    val get: Int
+    val won: Int
         get() = value.intValueExact()
 
     fun divide(value: Int): Money = Money(this.value.divide(BigDecimal(value)))
