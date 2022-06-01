@@ -7,12 +7,12 @@ object LottoCreator {
         val lottoNumbers = LottoPolicy.LOTTO_NUMBER_RANGE
             .shuffled()
             .take(PICK_LOTTO_NUMBER_SIZE)
-            .sorted()
+            .map(LottoNumber::of)
 
-        return LottoTicket(lottoNumbers)
+        return LottoTicket.of(lottoNumbers)
     }
 
-    fun manualCreate(numbers: List<Int>): LottoTicket {
-        return LottoTicket(numbers.sorted())
+    fun manualCreate(numbers: Collection<LottoNumber>): LottoTicket {
+        return LottoTicket.of(numbers)
     }
 }

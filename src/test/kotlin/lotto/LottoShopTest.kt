@@ -26,10 +26,11 @@ class LottoShopTest {
     fun `수동으로 입력한 번호로 로또를 구매한다`() {
         val money = 1000
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::of)
         val manualNumber = ManualPurchaseNumbers(listOf(lottoNumbers))
 
         val manualLottoTickets = LottoShop(money).manualPurchase(manualNumber)
-        val compareLottoTickets = listOf(LottoTicket(lottoNumbers))
+        val compareLottoTickets = listOf(LottoTicket.of(lottoNumbers))
 
         assertThat(manualLottoTickets).isEqualTo(compareLottoTickets)
     }

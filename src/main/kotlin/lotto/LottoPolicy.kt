@@ -20,13 +20,6 @@ object LottoPolicy {
         }
     }
 
-    fun validateDuplicatedNumber(numbers: List<Int>) {
-        require(isDistinctNumber(numbers)) {
-            val duplicatedNumbers = getDuplicatedNumbers(numbers)
-            throw IllegalArgumentException("중복된 번호가 입력됐습니다. $duplicatedNumbers")
-        }
-    }
-
     private fun isDistinctNumber(numbers: List<Int>): Boolean {
         return numbers.size == numbers.toSet().size
     }

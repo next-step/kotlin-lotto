@@ -12,8 +12,26 @@ class LottoTicketTest {
 
     @Test
     fun `로또번호 매칭된 갯수를 확인한다`() {
-        val lottoTicket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
-        val otherTicket = LottoTicket(listOf(4, 5, 6, 7, 8, 9))
+        val lottoTicket = LottoTicket.of(
+            listOf(
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1)
+            )
+        )
+        val otherTicket = LottoTicket.of(
+            listOf(
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1),
+                LottoNumber.of(1)
+            )
+        )
 
         val matchCount = lottoTicket.matchCountWith(otherTicket)
         val expectedCount = 3
@@ -23,20 +41,20 @@ class LottoTicketTest {
 
     @ParameterizedTest
     @MethodSource("invalidRangeLottoNumbers")
-    fun `로또 티켓의 번호가 1이상 45이하 숫자인지 검증한다`(numbers: List<Int>) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers) }
+    fun `로또 티켓의 번호가 1이상 45이하 숫자인지 검증한다`(numbers: Set<LottoNumber>) {
+        assertThrows<IllegalArgumentException> { LottoTicket.of(numbers) }
     }
 
     @ParameterizedTest
     @MethodSource("invalidSizeLottoNumbers")
-    fun `로또 티켓의 번호 갯수가 6개인지 검증한다`(numbers: List<Int>) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers) }
+    fun `로또 티켓의 번호 갯수가 6개인지 검증한다`(numbers: Set<LottoNumber>) {
+        assertThrows<IllegalArgumentException> { LottoTicket.of(numbers) }
     }
 
     @ParameterizedTest
     @MethodSource("duplicatedLottoNumbers")
-    fun `로또에 중복된 번호가 있는지 확인한다`(numbers: List<Int>) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers) }
+    fun `로또에 중복된 번호가 있는지 확인한다`(numbers: Set<LottoNumber>) {
+        assertThrows<IllegalArgumentException> { LottoTicket.of(numbers) }
     }
 
     companion object {

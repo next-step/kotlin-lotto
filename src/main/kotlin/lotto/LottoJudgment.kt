@@ -2,13 +2,12 @@ package lotto
 
 class LottoJudgment(
     private val lastLottoWinnerTicket: LottoTicket,
-    private val bonusNumber: Int
+    private val bonusNumber: LottoNumber
 ) {
     init {
         require(!lastLottoWinnerTicket.hasNumber(bonusNumber)) {
             "보너스 숫자는 지난 당첨번호에 포함될 수 없습니다."
         }
-        LottoPolicy.validateBonusNumber(bonusNumber)
     }
 
     fun getRanking(ticket: LottoTicket): LottoWinnerRank {

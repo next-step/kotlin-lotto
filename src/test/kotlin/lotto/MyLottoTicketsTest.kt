@@ -7,9 +7,9 @@ class MyLottoTicketsTest {
 
     @Test
     fun `구매한 로또의 당첨 결과를 확인한다`() {
-        val myLotto = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
-        val lastWinLotto = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
-        val bonusNumber = 45
+        val myLotto = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
+        val lastWinLotto = LottoTicket.of(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
+        val bonusNumber = LottoNumber.of(45)
 
         val myLottoTickets = MyLottoTickets(
             listOf(

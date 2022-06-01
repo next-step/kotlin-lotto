@@ -12,8 +12,17 @@ import java.util.stream.Stream
 
 class LottoJudgmentTest {
 
-    private val lastLottoTicket = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
-    private val bonusNumber = 10
+    private val lastLottoTicket = LottoTicket.of(
+        listOf(
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)
+        )
+    )
+    private val bonusNumber = LottoNumber.of(10)
 
     @Test
     fun `지난주 당첨 로또로 로또 판단기를 생성한다`() {
@@ -22,19 +31,36 @@ class LottoJudgmentTest {
 
     @ParameterizedTest
     @MethodSource("lottoNumbersAndRank")
-    fun `로또 티켓을 전달하면, 등수를 반환한다`(ticketNumbers: List<Int>, rank: LottoWinnerRank) {
+    fun `로또 티켓을 전달하면, 등수를 반환한다`(ticketNumbers: Set<LottoNumber>, rank: LottoWinnerRank) {
         val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)
-        val compareLotto = LottoTicket(ticketNumbers)
+        val compareLotto = LottoTicket.of(ticketNumbers)
         assertThat(lottoJudgment.getRanking(compareLotto)).isEqualTo(rank)
     }
 
     @Test
     fun `로또 등수 계산 할 때 보너스 번호 유무에 따라서 2,3등을 구분한다`() {
-        val bonusNumber = 10
         val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)
 
-        val expectSecond = LottoTicket(listOf(1, 2, 3, 4, 5, 10))
-        val expectThird = LottoTicket(listOf(1, 2, 3, 4, 5, 11))
+        val expectSecond = LottoTicket.of(
+            listOf(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+            )
+        )
+        val expectThird = LottoTicket.of(
+            listOf(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+            )
+        )
 
         assertAll(
             { Assertions.assertEquals(lottoJudgment.getRanking(expectSecond), LottoWinnerRank.SECOND_PRICE) },
