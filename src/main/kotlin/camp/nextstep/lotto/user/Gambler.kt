@@ -12,4 +12,10 @@ class Gambler(var balance: Int = 0) {
         this.tickets.addAll(tickets)
         this.balance = balance
     }
+
+    fun exchange(store: LottoStore, gamblerNumbers: List<List<Int>>) {
+        val (tickets, balance) = store.exchange(balance, gamblerNumbers)
+        this.tickets.addAll(tickets)
+        this.balance = balance
+    }
 }

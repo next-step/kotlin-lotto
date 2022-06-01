@@ -5,6 +5,7 @@ import camp.nextstep.lotto.ticket.LottoStore
 import camp.nextstep.lotto.ticket.LottoTicketMachine
 import camp.nextstep.lotto.ui.LottoResult
 import camp.nextstep.lotto.ui.cli.BonusNumberReader
+import camp.nextstep.lotto.ui.cli.GamblerNumbersReader
 import camp.nextstep.lotto.ui.cli.GamblerReader
 import camp.nextstep.lotto.ui.cli.GamblerWriter
 import camp.nextstep.lotto.ui.cli.LottoResultWriter
@@ -18,6 +19,9 @@ fun main() {
     val gambler = GamblerReader.read()
     val seedMoney = gambler.balance
 
+    val gamblerNumbers = GamblerNumbersReader.read()
+
+    gambler.exchange(lottoStore, gamblerNumbers.numbers)
     gambler.exchangeAll(lottoStore)
 
     GamblerWriter.write(gambler)
