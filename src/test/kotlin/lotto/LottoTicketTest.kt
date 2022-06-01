@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
@@ -24,6 +25,16 @@ class LottoTicketTest {
         val expectedCount = 3
 
         Assertions.assertThat(matchCount).isEqualTo(expectedCount)
+    }
+
+    @ParameterizedTest
+    @CsvSource("10, true", "45, false")
+    fun `로또 티켓에 번호가포함돼 있는지 확인한다`(number: Int, contains: Boolean) {
+        val ticket = listOf(1, 2, 3, 4, 5, 10)
+            .map(LottoNumber::of)
+            .let(LottoTicket::of)
+
+        Assertions.assertThat(ticket.hasNumber(LottoNumber.of(number))).isEqualTo(contains)
     }
 
     @ParameterizedTest
