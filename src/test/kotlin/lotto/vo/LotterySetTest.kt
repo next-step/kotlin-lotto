@@ -2,35 +2,23 @@ package lotto.vo
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.NormalLottery
+import lotto.domain.Lottery
+import lotto.domain.toLotteryNumberSet
+import lotto.policy.NormalLotteryPolice
 
-internal class LottoSetTest : BehaviorSpec({
+internal class LotterySetTest : BehaviorSpec({
 
     given("로또 번호들 중") {
-        val normalLotterySet = LottoSet(
+        val normalLotterySet = LotterySet(
             listOf(
-                NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of)),
-
-                NormalLottery(listOf(1, 2, 3, 4, 5, 7).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 3, 4, 5, 7).map(LotteryNumber::of)),
-
-                NormalLottery(listOf(1, 2, 3, 4, 9, 8).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 3, 4, 9, 8).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 3, 4, 9, 8).map(LotteryNumber::of)),
-
-                NormalLottery(listOf(1, 2, 3, 12, 11, 10).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 3, 12, 11, 10).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 3, 12, 11, 10).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 3, 12, 11, 10).map(LotteryNumber::of)),
-
-                NormalLottery(listOf(1, 2, 16, 15, 14, 13).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 16, 15, 14, 13).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 16, 15, 14, 13).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 16, 15, 14, 13).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 16, 15, 14, 13).map(LotteryNumber::of)),
+                Lottery(listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet()),
+                Lottery(listOf(1, 2, 3, 4, 5, 7).toLotteryNumberSet()),
+                Lottery(listOf(1, 2, 3, 4, 9, 8).toLotteryNumberSet()),
+                Lottery(listOf(1, 2, 3, 12, 11, 10).toLotteryNumberSet()),
+                Lottery(listOf(1, 2, 16, 15, 14, 13).toLotteryNumberSet()),
             )
         )
-        val lastWeekNormalLottery = NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of))
+        val lastWeekNormalLottery = NormalLotteryPolice(listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet())
 
         `when`("1등 당첨자 조회시") {
             val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.ONE_PLACE)
@@ -77,10 +65,10 @@ internal class LottoSetTest : BehaviorSpec({
 
             then("각 등수의 당첨자 수를 Map으로 반환한다.") {
                 result[LotteryRank.ONE_PLACE] shouldBe 1
-                result[LotteryRank.TWO_PLACE] shouldBe 2
-                result[LotteryRank.THIRD_PLACE] shouldBe 3
-                result[LotteryRank.FOUR_PLACE] shouldBe 4
-                result[LotteryRank.NONE] shouldBe 5
+                result[LotteryRank.TWO_PLACE] shouldBe 1
+                result[LotteryRank.THIRD_PLACE] shouldBe 1
+                result[LotteryRank.FOUR_PLACE] shouldBe 1
+                result[LotteryRank.NONE] shouldBe 1
             }
         }
 

@@ -1,15 +1,16 @@
 package lotto.view
 
-import lotto.domain.NormalLottery
 import lotto.infra.port.OutputSystem
+import lotto.policy.BonusLotteryPolicy
+import lotto.policy.LotteryPolicy
 import lotto.vo.LotteryRank
-import lotto.vo.LottoSet
+import lotto.vo.LotterySet
 
 class LottoResultView(private val outputSystem: OutputSystem) {
 
-    fun printResult(lottoSet: LottoSet<NormalLottery>, winningNormalLottery: NormalLottery) {
+    fun printResult(lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) {
         printHeadLine()
-        staticalLottery(lottoSet, winningNormalLottery)
+        staticalLottery(lotterySet, winningNormalLottery)
     }
 
     private fun printHeadLine() {
@@ -17,19 +18,19 @@ class LottoResultView(private val outputSystem: OutputSystem) {
         outputSystem.write("-------\n")
     }
 
-    private fun staticalLottery(lottoSet: LottoSet<NormalLottery>, winningNormalLottery: NormalLottery) {
-        val curriedPrintLottery = { rank: LotteryRank -> { printLottery(rank, lottoSet, winningNormalLottery) } }
+    private fun staticalLottery(lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) {
+        val curriedPrintLottery = { rank: LotteryRank -> { printLottery(rank, lotterySet, winningNormalLottery) } }
 
         curriedPrintLottery(LotteryRank.FOUR_PLACE)()
         curriedPrintLottery(LotteryRank.THIRD_PLACE)()
         curriedPrintLottery(LotteryRank.TWO_PLACE)()
         curriedPrintLottery(LotteryRank.ONE_PLACE)()
 
-        outputSystem.write("총 수익률은 ${lottoSet.rate(winningNormalLottery)}입니다.")
+        outputSystem.write("총 수익률은 ${lotterySet.rate(winningNormalLottery)}입니다.")
     }
 
-    private fun printLottery(lotteryRank: LotteryRank, lottoSet: LottoSet<NormalLottery>, winningNormalLottery: NormalLottery) {
-        val count = lottoSet.countPlace(winningNormalLottery, lotteryRank)
+    private fun printLottery(lotteryRank: LotteryRank, lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) {
+        val count = lotterySet.countPlace(winningNormalLottery, lotteryRank)
         outputSystem.write("${lotteryRank.matchCount}개 일치(${lotteryRank.rewardMoney}원)-${count}개\n")
     }
 }

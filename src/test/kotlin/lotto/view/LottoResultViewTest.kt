@@ -2,20 +2,21 @@ package lotto.view
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.NormalLottery
-import lotto.vo.LotteryNumber
-import lotto.vo.LottoSet
+import lotto.domain.Lottery
+import lotto.domain.toLotteryNumberSet
+import lotto.policy.NormalLotteryPolice
+import lotto.vo.LotterySet
 
 internal class LottoResultViewTest : BehaviorSpec({
 
     given("주어진 로또 세트와, 지난주 로또 번호를 입력으로") {
-        val normalLotterySet = LottoSet(
+        val normalLotterySet = LotterySet(
             listOf(
-                NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of)),
-                NormalLottery(listOf(1, 2, 3, 4, 5, 7).map(LotteryNumber::of)),
+                Lottery(listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet()),
+                Lottery(listOf(1, 2, 3, 4, 5, 7).toLotteryNumberSet()),
             )
         )
-        val lastWeekNormalLottery = NormalLottery(listOf(1, 2, 3, 4, 5, 6).map(LotteryNumber::of))
+        val lastWeekNormalLottery = NormalLotteryPolice(listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet())
         val stubIOSystem = StubIOSystem("")
         val lottoResultView = LottoResultView(stubIOSystem)
 
