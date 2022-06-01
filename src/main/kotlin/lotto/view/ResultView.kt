@@ -1,12 +1,12 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.LottoTickets
 
 object ResultView {
-    fun showLottos(lottos: List<Lotto>) {
-        val lottoCount = lottos.size
+    fun showLottoInfo(lottoTickets: LottoTickets) {
+        val lottoCount = lottoTickets.lottoCount
         println("${lottoCount}개를 구매했습니다.")
-        lottos.map { lotto ->
+        lottoTickets.lottos.map { lotto ->
             println(lotto.lottoNumbers.map { it })
         }
     }
