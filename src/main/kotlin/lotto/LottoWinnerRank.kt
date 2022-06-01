@@ -10,7 +10,7 @@ enum class LottoWinnerRank(val price: Int, val matchCount: Int, private val need
     ;
 
     companion object {
-        fun getRank(matchNumberCount: Int, existBonus: Boolean): LottoWinnerRank {
+        fun of(matchNumberCount: Int, existBonus: Boolean): LottoWinnerRank {
             return values()
                 .filter { checkBonusNumberCondition(it, existBonus) }
                 .firstOrNull() { it.matchCount == matchNumberCount }
