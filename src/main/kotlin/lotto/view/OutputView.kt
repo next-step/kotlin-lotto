@@ -4,8 +4,8 @@ import lotto.domain.LottoPrize
 import lotto.domain.LottoTicket
 
 class OutputView {
-    fun printTickets(tickets: List<LottoTicket>) {
-        println("${tickets.size}개를 구매했습니다.")
+    fun printTickets(tickets: List<LottoTicket>, manualCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${tickets.size - manualCount}개를 구매했습니다.")
         tickets.forEach {
             println(it.lottoNumbers.map { lottoNumber -> lottoNumber.number }.joinToString(", ", "[", "]"))
         }
