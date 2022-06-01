@@ -17,15 +17,17 @@ class InboundView {
     fun inputWinningNumber(): LottoWinningNumber {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
 
-        val winningNumber: String = readln()
-        require(winningNumber.isNotBlank()) { "공백을 입력하셨습니다." }
+        val inputWinningNumber: String = readln()
+        require(inputWinningNumber.isNotBlank()) { "공백을 입력하셨습니다." }
 
-        return LottoWinningNumber(
-            winningNumber.toTokenize()
-                .checkUniqueToken()
-                .toMapInt()
-                .toSet()
-        )
+        val winningNumbers = inputWinningNumber.toTokenize()
+            .checkUniqueToken()
+            .toMapInt()
+            .toSet()
+
+        val mockBonusNumber: Int = 1
+
+        return LottoWinningNumber(winningNumbers, mockBonusNumber)
     }
 
     private fun String.toTokenize(): List<String> {

@@ -20,12 +20,10 @@ class OutboundView {
         println("\n당첨 동계")
         println("---------")
 
-        LottoMatchType.values().forEach {
-            println(
-                "${it.matchCount}개 일치 (${it.reward}원) - " +
-                    "${lottoTickets.getMatchCount(it.matchCount, winningNumber)}개"
-            )
-        }
+        LottoMatchType.values()
+            .forEach {
+                println("${it.matchCount}개 일치 (${it.reward}원) - ${lottoTickets.getMatchCount(it, winningNumber)}개")
+            }
     }
 
     fun printRewardRate(lottoRewardCalculator: LottoRewardCalculator, purchaseAmount: Int, lottoTicketPrice: Int) {

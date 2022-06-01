@@ -1,5 +1,8 @@
 package lotto.domain
 
-class LottoWinningNumber(val numbers: Set<Int>) {
-    private val winningNumber: LottoTicket = LottoTicket(numbers)
+class LottoWinningNumber(
+    numbers: Set<Int>,
+    val bonusNumber: Int
+) {
+    val winningNumber: LottoTicket = LottoTicket(numbers)
 }
