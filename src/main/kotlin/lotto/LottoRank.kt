@@ -10,10 +10,9 @@ enum class LottoRank(val matchCount: Int, val price: Long) {
 
     companion object {
         fun selectRank(matchCount: Int, matchBonus: Boolean): LottoRank = when {
-            matchCount == 5 && matchBonus -> FIVE_MATCH_WITH_BONUS
-            matchCount == 5 && !matchBonus -> FIVE_MATCH
+            matchCount == FIVE_MATCH_WITH_BONUS.matchCount && matchBonus -> FIVE_MATCH_WITH_BONUS
+            matchCount == FIVE_MATCH.matchCount && !matchBonus -> FIVE_MATCH
             else -> values()
-                .filter { it.matchCount != 5 }
                 .find { it.matchCount == matchCount } ?: LOSE
         }
     }

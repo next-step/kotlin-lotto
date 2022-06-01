@@ -19,7 +19,8 @@ class Statistics(winningLotto: WinningLotto, lottos: List<Lotto>) {
     }
 
     fun getWinningResult(): Map<LottoRank, Int> {
-        return lottoRanks.getRanks().filterNot { it.key == LottoRank.LOSE }
+        return lottoRanks.getRanks()
+            .filterNot { it.key == LottoRank.LOSE }
     }
 
     fun getYield(): Double {

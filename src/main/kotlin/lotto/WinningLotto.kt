@@ -10,7 +10,7 @@ class WinningLotto(val lottoNumbers: Set<LottoNumber>, private val bonusNumber: 
         return lottos.count { lottoNumbers.contains(it) }
     }
 
-    fun matchBonus(lottos: Set<LottoNumber>): Boolean = matchCount(lottos) == 5 && lottos.contains(bonusNumber)
+    fun matchBonus(lottos: Set<LottoNumber>): Boolean = matchCount(lottos) == MATCH_COUNT_FOR_BONUS && lottos.contains(bonusNumber)
 
     private fun validate(lottoNumbers: Set<LottoNumber>, bonusNumber: LottoNumber) {
         require(lottoNumbers.size == MIN_SIZE) { "당첨 번호의 갯수가 잘못 되었습니다." }
@@ -20,5 +20,6 @@ class WinningLotto(val lottoNumbers: Set<LottoNumber>, private val bonusNumber: 
 
     companion object {
         private const val MIN_SIZE = 6
+        private const val MATCH_COUNT_FOR_BONUS = 5
     }
 }
