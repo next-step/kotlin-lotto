@@ -1,6 +1,6 @@
 package lotto
 
-class LottoJudgment(
+class LastWinningLotto(
     private val lastLottoWinnerTicket: LottoTicket,
     private val bonusNumber: LottoNumber
 ) {

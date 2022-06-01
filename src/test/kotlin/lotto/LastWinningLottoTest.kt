@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-class LottoJudgmentTest {
+class LastWinningLottoTest {
 
     private val lastLottoTicket = listOf(1, 2, 3, 4, 5, 6)
         .map(LottoNumber::of)
@@ -19,21 +19,21 @@ class LottoJudgmentTest {
     private val bonusNumber = LottoNumber.of(10)
 
     @Test
-    fun `지난주 당첨 로또로 로또 판단기를 생성한다`() {
-        LottoJudgment(lastLottoTicket, bonusNumber)
+    fun `지난주 당첨로또를 생성한다`() {
+        LastWinningLotto(lastLottoTicket, bonusNumber)
     }
 
     @ParameterizedTest
     @MethodSource("lottoNumbersAndRank")
     fun `로또 티켓을 전달하면, 등수를 반환한다`(ticketNumbers: List<LottoNumber>, rank: LottoWinnerRank) {
-        val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)
+        val lottoJudgment = LastWinningLotto(lastLottoTicket, bonusNumber)
         val compareLotto = LottoTicket.of(ticketNumbers)
         assertThat(lottoJudgment.getRanking(compareLotto)).isEqualTo(rank)
     }
 
     @Test
     fun `로또 등수 계산 할 때 보너스 번호 유무에 따라서 2,3등을 구분한다`() {
-        val lottoJudgment = LottoJudgment(lastLottoTicket, bonusNumber)
+        val lottoJudgment = LastWinningLotto(lastLottoTicket, bonusNumber)
 
         val expectSecond = listOf(1, 2, 3, 4, 5, 10)
             .map(LottoNumber::of)
@@ -51,7 +51,7 @@ class LottoJudgmentTest {
 
     @Test
     fun ` 2등 보너스 번호에 지난당첨 번호가 있으면 익셉션을 발생시킨다`() {
-        assertThrows<IllegalArgumentException> { LottoJudgment(lastLottoTicket, lastLottoTicket.numbers.first()) }
+        assertThrows<IllegalArgumentException> { LastWinningLotto(lastLottoTicket, lastLottoTicket.numbers.first()) }
     }
 
     companion object {

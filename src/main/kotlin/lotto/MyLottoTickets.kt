@@ -6,9 +6,9 @@ class MyLottoTickets(
 ) {
     private val lottoTickets: List<LottoTicket> = manualLottery + autoLottery
 
-    fun getMyLottoResult(lottoJudgment: LottoJudgment): MyLottoResult {
+    fun getMyLottoResult(lastWinningLotto: LastWinningLotto): MyLottoResult {
         val eachCount: Map<LottoWinnerRank, Int> = lottoTickets
-            .map(lottoJudgment::getRanking)
+            .map(lastWinningLotto::getRanking)
             .groupingBy { it }
             .eachCount()
 

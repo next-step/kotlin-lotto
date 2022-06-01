@@ -16,7 +16,7 @@ class MyLottoTicketsTest {
                 myLotto
             )
         )
-        val lottoJudgment = LottoJudgment(lastWinLotto, bonusNumber)
+        val lottoJudgment = LastWinningLotto(lastWinLotto, bonusNumber)
         val myLottoResult: MyLottoResult = myLottoTickets.getMyLottoResult(lottoJudgment)
 
         val expectedLottoResult = MyLottoResult(mapOf(LottoWinnerRank.FIRST_PRICE to 1))
