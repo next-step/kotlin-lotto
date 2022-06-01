@@ -10,7 +10,7 @@ object WinnerNumbersReader {
         val readLine = requireNotNull(readLine())
         val winnerNumbers = readLine.split(",").map { it.trim().toInt() }
         require(winnerNumbers.size == LottoNumbers.LOTTO_NUMBERS) { "${LottoNumbers.LOTTO_NUMBERS} 개의 당첨 번호를 입력해주세요." }
-        check(winnerNumbers.all { it in LottoNumbers.LOTTO_NUMBER_RANGE }) { "로또 번호는 ${LottoNumbers.LOTTO_NUMBER_RANGE.first} 이상 ${LottoNumbers.LOTTO_NUMBER_RANGE.last} 이하의 숫자여야 합니다." }
+        check(winnerNumbers.all { it in LottoNumber.LOTTO_NUMBER_RANGE }) { "로또 번호는 ${LottoNumber.LOTTO_NUMBER_RANGE.first} 이상 ${LottoNumber.LOTTO_NUMBER_RANGE.last} 이하의 숫자여야 합니다." }
         return winnerNumbers.map { LottoNumber.of(it) }
     }
 }
