@@ -12,4 +12,6 @@ object LottoInputTitle {
     fun requestPurchaseLotto() = println(INPUT_PURCHASE_PRICE)
     fun requestWinningLotto() = println(INPUT_WINNING_LOTTO)
     fun requestWinningLottoBonusNumber() = println(INPUT_WINNING_BONUS_NUMBER)
+    fun requestBuyManualLottoCount() = println(INPUT_MANUAL_LOTTO_COUNT)
+    fun requestBuyManualLotto() = println(INPUT_MANUAL_LOTTO)
 }

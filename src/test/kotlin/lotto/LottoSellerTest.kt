@@ -25,4 +25,11 @@ internal class LottoSellerTest {
         lottoSeller.buyManual(4)
         assertThat(lottoSeller.getLottoCount()).isEqualTo(10)
     }
+
+    @Test
+    fun `가지고 있는 금액보다 초과된 수동 로또 갯수를 입력 시 예외 처리를 한다`() {
+        val lottoSeller = LottoSeller(Money(BigDecimal(14_000)))
+        assertThatIllegalArgumentException()
+            .isThrownBy { lottoSeller.buyManual(15) }
+    }
 }

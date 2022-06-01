@@ -8,6 +8,10 @@ fun main() {
 
     LottoInputTitle.requestPurchaseLotto()
     val lottoSeller = LottoSeller(Money(BigDecimal(readln().toInt())))
+
+    LottoInputTitle.requestBuyManualLottoCount()
+    lottoSeller.buyManual(readln().toInt())
+
     LottoResponse.responsePurchase(lottoSeller.getLottoCount())
 
     val lottoMachine = LottoMachine(AutoLottoMaker(), ManualLottoMaker())

@@ -15,6 +15,7 @@ class LottoSeller(private var money: Money) {
     }
 
     fun buyManual(count: Int) {
+        require(getLottoCount() >= count) {"해당 금액보다 초과된 로또 갯수입니다."}
         this.money = money.minus(count * LOTTO_PRICE)
     }
 
