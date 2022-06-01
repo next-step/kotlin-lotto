@@ -3,7 +3,7 @@ package com.nextstep.jngcii.lotto.model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class RecordTest {
+class LottosTest {
     private val lottos: List<Lotto> = listOf(
         Lotto(FIRST_RANK_NUMBERS),
         Lotto(SECOND_RANK_NUMBERS),
@@ -11,7 +11,7 @@ class RecordTest {
         Lotto(FOURTH_RANK_NUMBERS),
         Lotto(NONE_RANK_NUMBERS),
     )
-    private val record: Record = Record(lottos)
+    private val record: Lottos = Lottos(lottos)
 
     @Test
     fun `당첨번호를 입력받아 이번 Lotto들에 대한 결과를 반환한다`() {
