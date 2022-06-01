@@ -18,8 +18,8 @@ data class IntNumber(private val value: Int) {
         private fun convertToInt(value: String): Int = if (value.isEmpty()) 0 else value.toInt()
 
         private fun validate(value: String) {
-            if (!value.matches(NUMBER_REGX)) {
-                throw IllegalArgumentException(value)
+            require(value.matches(NUMBER_REGX)) {
+                "숫자 형식의 값을 입력해주세요. : $value"
             }
         }
 
