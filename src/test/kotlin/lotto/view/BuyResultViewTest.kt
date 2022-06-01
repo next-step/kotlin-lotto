@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
 import lotto.domain.toLotteryNumberSet
 import lotto.infra.port.OutputSystem
-import lotto.vo.LotteryNumber
 import lotto.vo.LotterySet
 
 internal class BuyResultViewTest : BehaviorSpec({
@@ -20,10 +19,10 @@ internal class BuyResultViewTest : BehaviorSpec({
                 )
             )
         val stubOutputSystem = StubOutputSystem()
-        val buyResultView = BuyResultView(stubOutputSystem, lotteries)
+        val buyResultView = BuyResultView(stubOutputSystem)
 
         `when`("출력시") {
-            buyResultView.printLotteries()
+            buyResultView.printLotteries(lotteries)
 
             then("구매한 모든 로또의 리스트를 출력한다.") {
                 val expected = """

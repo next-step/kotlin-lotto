@@ -24,11 +24,11 @@ internal class BonusLotteryPolicyTest : BehaviorSpec({
         }
     }
 
-    given("모든 번호가 두개 다르고 보너스 번호가 같은 경우") {
+    given("모든 번호 중 두 개 다르고 보너스 번호가 같은 경우") {
         val lotteryNumberSet = listOf(1, 2, 3, 4, 11, 10).toLotteryNumberSet()
         val lottery = Lottery(lotteryNumberSet)
 
-        val winningLotteryNumbers = listOf(1, 2, 3, 4, 44, 45).toLotteryNumberSet()
+        val winningLotteryNumbers = listOf(1, 2, 3, 4, 10, 11).toLotteryNumberSet()
         val bonusLotteryPolicy = BonusLotteryPolicy(winningLotteryNumbers, LotteryNumber.of(10))
 
         `when`("비교하면") {

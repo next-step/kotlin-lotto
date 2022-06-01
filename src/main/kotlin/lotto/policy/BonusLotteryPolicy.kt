@@ -23,7 +23,7 @@ class BonusLotteryPolicy(winningLotteryNumbers: LotteryNumberSet, private val bo
     private fun isBonusPlace(lottery: Lottery): Boolean {
         val count = LotteryRank.of(matchCount(lottery))
 
-        if (LotteryRank.FOUR_PLACE == count && isMatchBonusNumber(lottery)) {
+        if (LotteryRank.THIRD_PLACE == count && isMatchBonusNumber(lottery)) {
             return true
         }
         return false
