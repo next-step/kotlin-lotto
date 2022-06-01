@@ -8,10 +8,16 @@ class MyLottoTickets(
 
     fun getMyLottoResult(lastWinningLotto: LastWinningLotto): MyLottoResult {
         val eachCount: Map<LottoWinnerRank, Int> = lottoTickets
-            .map(lastWinningLotto::getRanking)
+            .map { lottoTicket -> getRanking(lottoTicket, lastWinningLotto) }
             .groupingBy { it }
             .eachCount()
 
         return MyLottoResult(eachCount)
+    }
+
+    fun getRanking(targetLotto: LottoTicket, winningLotto: LastWinningLotto): LottoWinnerRank {
+        val matchNumberCount = winningLotto.matchCount(targetLotto)
+        val hasBonusNumber = targetLotto.hasNumber(winningLotto.bonusNumber)
+        return LottoWinnerRank.getRank(matchNumberCount, hasBonusNumber)
     }
 }

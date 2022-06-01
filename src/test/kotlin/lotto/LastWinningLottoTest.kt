@@ -1,14 +1,7 @@
 package lotto
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
 
 class LastWinningLottoTest {
 
@@ -22,63 +15,8 @@ class LastWinningLottoTest {
     fun `지난주 당첨로또를 생성한다`() {
         LastWinningLotto(lastLottoTicket, bonusNumber)
     }
-
-    @ParameterizedTest
-    @MethodSource("lottoNumbersAndRank")
-    fun `로또 티켓을 전달하면, 등수를 반환한다`(ticketNumbers: List<LottoNumber>, rank: LottoWinnerRank) {
-        val lottoJudgment = LastWinningLotto(lastLottoTicket, bonusNumber)
-        val compareLotto = LottoTicket.of(ticketNumbers)
-        assertThat(lottoJudgment.getRanking(compareLotto)).isEqualTo(rank)
-    }
-
-    @Test
-    fun `로또 등수 계산 할 때 보너스 번호 유무에 따라서 2,3등을 구분한다`() {
-        val lottoJudgment = LastWinningLotto(lastLottoTicket, bonusNumber)
-
-        val expectSecond = listOf(1, 2, 3, 4, 5, 10)
-            .map(LottoNumber::of)
-            .let(LottoTicket::of)
-
-        val expectThird = listOf(1, 2, 3, 4, 5, 11)
-            .map(LottoNumber::of)
-            .let(LottoTicket::of)
-
-        assertAll(
-            { Assertions.assertEquals(lottoJudgment.getRanking(expectSecond), LottoWinnerRank.SECOND_PRICE) },
-            { Assertions.assertEquals(lottoJudgment.getRanking(expectThird), LottoWinnerRank.THIRD_PRICE) },
-        )
-    }
-
     @Test
     fun ` 2등 보너스 번호에 지난당첨 번호가 있으면 익셉션을 발생시킨다`() {
         assertThrows<IllegalArgumentException> { LastWinningLotto(lastLottoTicket, lastLottoTicket.numbers.first()) }
-    }
-
-    companion object {
-        @JvmStatic
-        fun lottoNumbersAndRank(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6).map(LottoNumber::of), LottoWinnerRank.FIRST_PRICE),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 40).map(LottoNumber::of), LottoWinnerRank.THIRD_PRICE),
-                Arguments.of(listOf(30, 2, 3, 4, 5, 40).map(LottoNumber::of), LottoWinnerRank.FOURTH_PRICE),
-                Arguments.of(listOf(30, 2, 3, 4, 15, 40).map(LottoNumber::of), LottoWinnerRank.FIFTH_PRICE),
-                Arguments.of(listOf(30, 7, 3, 4, 15, 40).map(LottoNumber::of), LottoWinnerRank.NONE),
-                Arguments.of(listOf(30, 7, 10, 4, 15, 40).map(LottoNumber::of), LottoWinnerRank.NONE),
-                Arguments.of(listOf(30, 7, 10, 11, 15, 40).map(LottoNumber::of), LottoWinnerRank.NONE),
-            )
-        }
-
-        @JvmStatic
-        fun lottoNumbersAndMatchCount(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6).map(LottoNumber::of), 6),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 40).map(LottoNumber::of), 5),
-                Arguments.of(listOf(30, 2, 3, 4, 5, 40).map(LottoNumber::of), 4),
-                Arguments.of(listOf(30, 2, 3, 4, 15, 40).map(LottoNumber::of), 3),
-                Arguments.of(listOf(30, 7, 3, 4, 15, 40).map(LottoNumber::of), 2),
-                Arguments.of(listOf(30, 7, 10, 4, 15, 40).map(LottoNumber::of), 1),
-                Arguments.of(listOf(30, 7, 10, 11, 15, 40).map(LottoNumber::of), 0),
-            )
-        }
     }
 }

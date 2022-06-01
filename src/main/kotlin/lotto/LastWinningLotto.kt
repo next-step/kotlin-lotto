@@ -2,7 +2,7 @@ package lotto
 
 class LastWinningLotto(
     private val lastLottoWinnerTicket: LottoTicket,
-    private val bonusNumber: LottoNumber
+    val bonusNumber: LottoNumber
 ) {
     init {
         require(!lastLottoWinnerTicket.hasNumber(bonusNumber)) {
@@ -10,16 +10,7 @@ class LastWinningLotto(
         }
     }
 
-    fun getRanking(ticket: LottoTicket): LottoWinnerRank {
-        val matchNumberCount = matchNumberCount(ticket)
-        return getRanking(matchNumberCount, ticket.hasNumber(bonusNumber))
-    }
-
-    private fun matchNumberCount(ticket: LottoTicket): Int {
-        return lastLottoWinnerTicket.matchCountWith(ticket)
-    }
-
-    private fun getRanking(matchNumberCount: Int, hasBonusNumber: Boolean): LottoWinnerRank {
-        return LottoWinnerRank.getRank(matchNumberCount, hasBonusNumber)
+    fun matchCount(targetLotto: LottoTicket): Int {
+        return lastLottoWinnerTicket.matchCountWith(targetLotto)
     }
 }
