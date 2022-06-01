@@ -4,7 +4,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
 import lotto.domain.toLotteryNumberSet
-import lotto.policy.NormalLotteryPolice
+import lotto.policy.BonusLotteryPolicy
+import lotto.vo.LotteryNumber
 import lotto.vo.LotterySet
 
 internal class LottoResultViewTest : BehaviorSpec({
@@ -16,7 +17,7 @@ internal class LottoResultViewTest : BehaviorSpec({
                 Lottery(listOf(1, 2, 3, 4, 5, 7).toLotteryNumberSet()),
             )
         )
-        val lastWeekNormalLottery = NormalLotteryPolice(listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet())
+        val lastWeekNormalLottery = BonusLotteryPolicy(listOf(1, 2, 3, 4, 45, 44).toLotteryNumberSet(), LotteryNumber.of(5))
         val stubIOSystem = StubIOSystem("")
         val lottoResultView = LottoResultView(stubIOSystem)
 
@@ -29,9 +30,10 @@ internal class LottoResultViewTest : BehaviorSpec({
                 |-------
                 |3개 일치(5000원)-0개
                 |4개 일치(50000원)-0개
-                |5개 일치(1500000원)-1개
-                |6개 일치(2000000000원)-1개
-                |총 수익률은 1000750.0입니다.
+                |5개 일치(1500000원)-0개
+                |5개, 보너스 볼 일치(30000000원)-2개
+                |6개 일치(2000000000원)-0개
+                |총 수익률은 30000.0입니다.
                 """.trimMargin()
                 stubIOSystem.screenBuffer.joinToString("") shouldBe expected
             }

@@ -28,7 +28,7 @@ internal class BonusLotteryPolicyTest : BehaviorSpec({
         val lotteryNumberSet = listOf(1, 2, 3, 4, 11, 10).toLotteryNumberSet()
         val lottery = Lottery(lotteryNumberSet)
 
-        val winningLotteryNumbers = listOf(1, 2, 3, 4, 10, 11).toLotteryNumberSet()
+        val winningLotteryNumbers = listOf(1, 2, 3, 4, 12, 13).toLotteryNumberSet()
         val bonusLotteryPolicy = BonusLotteryPolicy(winningLotteryNumbers, LotteryNumber.of(10))
 
         `when`("비교하면") {

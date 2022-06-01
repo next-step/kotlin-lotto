@@ -30,8 +30,14 @@ class LottoResultView(private val outputSystem: OutputSystem) {
         outputSystem.write("총 수익률은 ${lotterySet.rate(winningNormalLottery)}입니다.")
     }
 
-    private fun printLottery(lotteryRank: LotteryRank, lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) {
-        val count = lotterySet.countPlace(winningNormalLottery, lotteryRank)
-        outputSystem.write("${lotteryRank.matchCount}개 일치(${lotteryRank.rewardMoney}원)-${count}개\n")
-    }
+    private fun printLottery(lotteryRank: LotteryRank, lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) =
+        // TODO: Builder pattern 으로 수정
+        outputSystem
+            .write("${lotteryRank.matchCount}개${specialRankInfix(lotteryRank)}일치(${lotteryRank.rewardMoney}원)-${getRankerNumber(lotteryRank, lotterySet, winningNormalLottery)}개\n")
+
+    private fun getRankerNumber(lotteryRank: LotteryRank, lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) =
+        lotterySet.countPlace(winningNormalLottery, lotteryRank)
+
+    private fun specialRankInfix(lotteryRank: LotteryRank) =
+        if (lotteryRank == LotteryRank.BONUS_TWO_PLACE) ", 보너스 볼 " else " "
 }

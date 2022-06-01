@@ -32,7 +32,7 @@ internal class LotterySetTest : BehaviorSpec({
             val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.TWO_PLACE)
 
             then("2등 당첨자 수를 반환한다.") {
-                result shouldBe 2
+                result shouldBe 1
             }
         }
 
@@ -40,7 +40,7 @@ internal class LotterySetTest : BehaviorSpec({
             val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.THIRD_PLACE)
 
             then("3등 당첨자 수를 반환한다.") {
-                result shouldBe 3
+                result shouldBe 1
             }
         }
 
@@ -48,7 +48,7 @@ internal class LotterySetTest : BehaviorSpec({
             val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.FOUR_PLACE)
 
             then("4등 당첨자 수를 반환한다.") {
-                result shouldBe 4
+                result shouldBe 1
             }
         }
 
@@ -56,7 +56,7 @@ internal class LotterySetTest : BehaviorSpec({
             val result = normalLotterySet.countPlace(lastWeekNormalLottery, LotteryRank.NONE)
 
             then("꽝 수를 반환한다.") {
-                result shouldBe 5
+                result shouldBe 1
             }
         }
 
@@ -76,7 +76,7 @@ internal class LotterySetTest : BehaviorSpec({
             val result = normalLotterySet.rate(lastWeekNormalLottery)
 
             then("구매비용 대비 당첨금의 수익률을 반환한다.") {
-                result shouldBe 133544.67
+                result shouldBe 400311.0
             }
         }
     }
