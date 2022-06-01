@@ -8,7 +8,7 @@ internal class LottoMachineTest {
     @Test
     fun `1에서 45 숫자를 갖는 로또 객체 생성`() {
         val lottoMaker = object : LottoMaker {
-            override fun make(): Lotto {
+            override fun make(lottos: List<LottoNumber>): Lotto {
                 val lottoNumbers = setOf(
                     LottoNumber(2),
                     LottoNumber(3),
@@ -20,11 +20,11 @@ internal class LottoMachineTest {
                 return Lotto(lottoNumbers)
             }
         }
-        val lottoMachine = LottoMachine(lottoMaker)
 
-        val buyLotto = lottoMachine.buyLotto(1)
-        val lotto = buyLotto.lottos[0]
+        val lottoMachine = LottoMachine(lottoMaker, lottoMaker)
 
-        assertThat(lotto.lotto.size).isEqualTo(6)
+        lottoMachine.buyLotto(1)
+
+        assertThat(lottoMachine.lottos.lotto).isEqualTo(6)
     }
 }

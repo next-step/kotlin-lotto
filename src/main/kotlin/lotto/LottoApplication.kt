@@ -10,9 +10,11 @@ fun main() {
     val lottoSeller = LottoSeller(Money(BigDecimal(readln().toInt())))
     LottoResponse.responsePurchase(lottoSeller.getLottoCount())
 
-    val lottoMachine = LottoMachine(AutoLottoMaker())
-    val buyLottos = lottoMachine.buyLotto(lottoSeller.getLottoCount())
-    LottoResponse.responseLottos(buyLottos.lottos)
+    val lottoMachine = LottoMachine(AutoLottoMaker(), ManualLottoMaker())
+
+    lottoMachine.buyLotto(lottoSeller.getLottoCount())
+
+    LottoResponse.responseLottos(lottoMachine.lottos.lotto)
 
     LottoInputTitle.requestWinningLotto()
     val inputWinningLottoNumber = readln()
@@ -23,7 +25,7 @@ fun main() {
     val winningLotto = WinningLotto(convertWinningLotto(inputWinningLottoNumber), LottoNumber(inputWinningBonusNumber.toInt()))
 
     LottoResponse.responseStatisticTitle()
-    val statistics = Statistics(winningLotto, buyLottos.lottos)
+    val statistics = Statistics(winningLotto, lottoMachine.lottos.lotto)
     LottoResponse.responseStatistics(statistics.getWinningResult(), statistics.getYield())
 }
 

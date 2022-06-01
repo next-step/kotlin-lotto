@@ -2,5 +2,5 @@ package lotto
 
 interface LottoMaker {
 
-    fun make(): Lotto
+    fun make(lottos: List<LottoNumber>): Lotto
 }

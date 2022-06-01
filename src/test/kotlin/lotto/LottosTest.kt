@@ -18,8 +18,9 @@ internal class LottosTest {
 
         val lotto = Lotto(lottoNumbers)
 
-        val lottos = Lottos(listOf(lotto))
+        val lottos = Lottos()
+        lottos.add(lotto)
 
-        assertThat(lottos.lottos.size).isEqualTo(1)
+        assertThat(lottos.lotto.size).isEqualTo(1)
     }
 }
