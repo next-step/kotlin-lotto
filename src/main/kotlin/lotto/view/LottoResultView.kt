@@ -20,10 +20,12 @@ class LottoResultView(private val outputSystem: OutputSystem) {
     private fun staticalLottery(lottoSet: LottoSet, winningLottery: Lottery) {
         val curriedPrintLottery = { rank: LottoScore -> { printLottery(rank, lottoSet, winningLottery) } }
 
-        curriedPrintLottery(LottoScore.FOUR_PLACE)()
-        curriedPrintLottery(LottoScore.THIRD_PLACE)()
-        curriedPrintLottery(LottoScore.TWO_PLACE)()
-        curriedPrintLottery(LottoScore.ONE_PLACE)()
+        LottoScore
+            .values()
+            .drop(1)
+            .map {
+                curriedPrintLottery(it)()
+            }
 
         outputSystem.write("총 수익률은 ${lottoSet.rate(winningLottery)}입니다.")
     }

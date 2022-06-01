@@ -88,7 +88,7 @@ internal class LottoSetTest : BehaviorSpec({
             val result = lotterySet.rate(lastWeekLottery)
 
             then("구매비용 대비 당첨금의 수익률을 반환한다.") {
-                result shouldBe 133544.0
+                result shouldBe 133544.67
             }
         }
     }
