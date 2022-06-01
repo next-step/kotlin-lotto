@@ -6,18 +6,23 @@ import java.math.BigDecimal
 
 fun main() {
 
+    val lottoMachine = LottoMachine(AutoLottoMaker(), ManualLottoMaker())
+
     LottoInputTitle.requestPurchaseLotto()
     val lottoSeller = LottoSeller(Money(BigDecimal(readln().toInt())))
 
     LottoInputTitle.requestBuyManualLottoCount()
-    lottoSeller.buyManual(readln().toInt())
+    val inputManualLottoCount = readln().toInt()
+    lottoSeller.buyManual(inputManualLottoCount)
 
-    LottoResponse.responsePurchase(lottoSeller.getLottoCount())
+    LottoInputTitle.requestBuyManualLotto()
+    repeat(inputManualLottoCount) {
+        lottoMachine.buyManualLotto(convertWinningLotto(readln()).toList())
+    }
 
-    val lottoMachine = LottoMachine(AutoLottoMaker(), ManualLottoMaker())
+    LottoResponse.responsePurchase(inputManualLottoCount, lottoSeller.getLottoCount())
 
     lottoMachine.buyLotto(lottoSeller.getLottoCount())
-
     LottoResponse.responseLottos(lottoMachine.lottos.lotto)
 
     LottoInputTitle.requestWinningLotto()
