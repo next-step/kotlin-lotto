@@ -1,6 +1,6 @@
 package lotto
 
-class LottoSeller(private val money: Money) {
+class LottoSeller(private var money: Money) {
 
     init {
         validate()
@@ -12,6 +12,10 @@ class LottoSeller(private val money: Money) {
 
     fun getLottoCount(): Int {
         return money.divide(LOTTO_PRICE).won
+    }
+
+    fun buyManual(count: Int) {
+        this.money = money.minus(count * LOTTO_PRICE)
     }
 
     companion object {

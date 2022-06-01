@@ -18,4 +18,11 @@ internal class LottoSellerTest {
         assertThatIllegalArgumentException()
             .isThrownBy { LottoSeller(Money(BigDecimal(1_250))) }
     }
+
+    @Test
+    fun `수동으로 로또를 구매후 남은 잔금 확인`() {
+        val lottoSeller = LottoSeller(Money(BigDecimal(14_000)))
+        lottoSeller.buyManual(4)
+        assertThat(lottoSeller.getLottoCount()).isEqualTo(10)
+    }
 }

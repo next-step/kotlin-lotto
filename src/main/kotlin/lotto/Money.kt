@@ -13,6 +13,8 @@ class Money(private val value: BigDecimal) {
 
     fun divide(value: Int): Money = Money(this.value.divide(BigDecimal(value)))
 
+    fun minus(value: Int): Money = Money(this.value.minus(BigDecimal(value)))
+
     private fun validate(value: Int) {
         if (value <= ZERO) {
             throw IllegalArgumentException()
