@@ -14,7 +14,7 @@ data class LottoNumber private constructor(
                 ?: throw IllegalArgumentException("로또 숫자의 범위는 $MINIMUM_VALUE ~ $MAXIMUM_VALUE 입니다.")
         }
 
-        fun lottoNumbers(): List<LottoNumber> {
+        fun toLottoNumberList(): List<LottoNumber> {
             return LOTTO_NUMBERS.values
                 .toList()
         }

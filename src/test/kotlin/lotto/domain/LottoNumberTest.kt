@@ -50,7 +50,7 @@ internal class LottoNumberTest : FreeSpec({
         val expectedLottoNumbers = (1..45).map { LottoNumber.from(value = it) }
 
         // when
-        val lottoNumbers = LottoNumber.lottoNumbers()
+        val lottoNumbers = LottoNumber.toLottoNumberList()
 
         // then
         lottoNumbers.shouldContainExactly(expectedLottoNumbers)
