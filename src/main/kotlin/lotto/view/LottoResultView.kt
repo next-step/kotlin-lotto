@@ -9,10 +9,10 @@ object LottoResultView {
     fun printPurchasedLottoInfo(manualLottery: List<LottoTicket>, autoLottery: List<LottoTicket>) {
         println("수동으로 ${manualLottery.size}장, 자동으로 ${autoLottery.size}개를 구매했습니다.")
         for (lotto in manualLottery) {
-            println(lotto.numbers)
+            println(lotto.numbers.map { it.number })
         }
         for (lotto in autoLottery) {
-            println(lotto.numbers)
+            println(lotto.numbers.map { it.number })
         }
     }
 
