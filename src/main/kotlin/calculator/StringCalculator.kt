@@ -11,9 +11,9 @@ class StringCalculator {
         }
 
         return text
-            .split(",")
+            .split("[,:]".toRegex())
             .sumOf {
-                it.toIntOrNull() ?: throw IllegalArgumentException("구분자로 계산할 값은 정수로 입력해야합니다. text: $text")
+                it.toIntOrNull() ?: throw IllegalArgumentException("계산할 값은 정수로 입력해야합니다. text: $text")
             }
     }
 }
