@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoNumber private constructor(
-    private val value: Int
+    val value: Int
 ) {
     companion object {
         private const val MINIMUM_VALUE = 1
@@ -12,6 +12,11 @@ data class LottoNumber private constructor(
         fun from(value: Int): LottoNumber {
             return LOTTO_NUMBERS[value]
                 ?: throw IllegalArgumentException("로또 숫자의 범위는 $MINIMUM_VALUE ~ $MAXIMUM_VALUE 입니다.")
+        }
+
+        fun lottoNumbers(): List<LottoNumber> {
+            return LOTTO_NUMBERS.values
+                .toList()
         }
     }
 }

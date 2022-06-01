@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.row
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 
 internal class LottoNumberTest : FreeSpec({
@@ -42,5 +43,16 @@ internal class LottoNumberTest : FreeSpec({
                     .hashCode()
             }
         }
+    }
+
+    "1~45 까지의 로또번호가 담긴 리스트를 반환한다." {
+        // given
+        val expectedLottoNumbers = (1..45).map { LottoNumber.from(value = it) }
+
+        // when
+        val lottoNumbers = LottoNumber.lottoNumbers()
+
+        // then
+        lottoNumbers.shouldContainExactly(expectedLottoNumbers)
     }
 })
