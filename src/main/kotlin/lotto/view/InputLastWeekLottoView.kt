@@ -7,23 +7,29 @@ import lotto.vo.LotteryNumberSet
 
 class InputLastWeekLottoView(private val ioSystem: IOSystem) {
 
-    fun getLastWeekLotto(): BonusLotteryPolicy {
-        printInputLastWeekMessage()
-        return inputLastWeekLotto()
-    }
+    fun getLastWeekLotto() = BonusLotteryPolicy(inputLastWeekMessage(), inputBonusNumber())
 
-    private fun printInputLastWeekMessage() {
+    private fun inputLastWeekMessage(): LotteryNumberSet {
         ioSystem.write("지난 주 당첨 번호를 입력해 주세요.\n")
+        return getLastWeekLotteryNumberSet()
     }
 
-    private fun inputLastWeekLotto() =
-        BonusLotteryPolicy(convertToNumbers(ioSystem.read()), LotteryNumber.of(10))
+    private fun inputBonusNumber(): LotteryNumber {
+        ioSystem.write("보너스 번호를 입력해 주세요.\n")
+        return getBonusLotteryNumber()
+    }
 
-    private fun convertToNumbers(inputLottoNumbers: String) =
-        inputLottoNumbers
+    private fun getLastWeekLotteryNumberSet() =
+        ioSystem.read()
             .split(",")
             .map(String::trim)
             .map(String::toInt)
             .map(LotteryNumber::of)
             .let(::LotteryNumberSet)
+
+    private fun getBonusLotteryNumber() =
+        ioSystem.read()
+            .trim()
+            .let(String::toInt)
+            .let(LotteryNumber::of)
 }
