@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
@@ -46,6 +47,13 @@ class StringCalculatorTest : FunSpec({
 
             // then
             result shouldBe 6
+        }
+
+        test("문자열 계산기에 음수를 전달하는 경우 예외 처리를 한다.") {
+            // when then
+            shouldThrow<IllegalArgumentException> {
+                stringCalculator.add("1,-1")
+            }
         }
     }
 })
