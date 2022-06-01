@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 
 class StringCalculatorTest : FunSpec({
 
-    context("문자열 계산기를 사용하여") {
+    context("문자열 계산기를 사용하여 계산을 실행할 때") {
         val stringCalculator = StringCalculator()
 
         test("빈 문자열을 입력하면 0을 반환한다.") {
@@ -53,6 +53,13 @@ class StringCalculatorTest : FunSpec({
             // when then
             shouldThrow<IllegalArgumentException> {
                 stringCalculator.add("1,-1")
+            }
+        }
+
+        test("커스텀 구분자에는 숫자를 포함할 수 없다.") {
+            // when then
+            shouldThrow<IllegalArgumentException> {
+                stringCalculator.add("//1;\n1")
             }
         }
     }

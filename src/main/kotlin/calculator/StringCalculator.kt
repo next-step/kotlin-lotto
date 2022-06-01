@@ -10,19 +10,20 @@ class StringCalculator {
             return text.toInt()
         }
 
-        var delimeter = "[,:]"
+        var delimiter = "[,:]"
         var _text = text
 
         if (text.startsWith("//")) {
             val result = Regex("//(.)\n(.*)").find(text)
             result?.let { it ->
-                delimeter = it.groupValues[1]
+                require(it.groupValues[1].toIntOrNull() == null) { "구분자는 숫자로 지정할 수 없습니다." }
+                delimiter = it.groupValues[1]
                 _text = it.groupValues[2]
             }
         }
 
         return _text
-            .split(delimeter.toRegex())
+            .split(delimiter.toRegex())
             .sumOf {
                 val number = it.toIntOrNull()
                     ?: throw IllegalArgumentException("계산할 값은 정수로 입력해야합니다. text: $text")
