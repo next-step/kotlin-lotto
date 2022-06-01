@@ -22,8 +22,8 @@ class CalculatorTest {
     companion object {
         @JvmStatic
         fun operands() = listOf(
-            Arguments.of(14, listOf(Rank.FOURTH), 0.35),
-            Arguments.of(10, listOf(Rank.THIRD, Rank.THIRD), 10.0),
+            Arguments.of(14, listOf(Rank.FIFTH), 0.35),
+            Arguments.of(10, listOf(Rank.FOURTH, Rank.FOURTH), 10.0),
         )
     }
 }

@@ -22,15 +22,15 @@ class RanksTest {
         @JvmStatic
         fun sumOfPrice() = listOf(
             Arguments.of(
-                listOf(Rank.THIRD, Rank.THIRD),
+                listOf(Rank.FOURTH, Rank.FOURTH),
                 100_000
             ),
             Arguments.of(
-                listOf(Rank.FIRST, Rank.THIRD),
+                listOf(Rank.FIRST, Rank.FOURTH),
                 2_000_050_000
             ),
             Arguments.of(
-                listOf(Rank.THIRD, Rank.SECOND, Rank.SECOND, Rank.FOURTH),
+                listOf(Rank.FOURTH, Rank.THIRD, Rank.THIRD, Rank.FIFTH),
                 3_055_000
             )
         )
@@ -38,17 +38,17 @@ class RanksTest {
         @JvmStatic
         fun countOf() = listOf(
             Arguments.of(
-                listOf(Rank.THIRD, Rank.THIRD),
-                Rank.THIRD,
+                listOf(Rank.FOURTH, Rank.FOURTH),
+                Rank.FOURTH,
                 2
             ),
             Arguments.of(
-                listOf(Rank.FIRST, Rank.THIRD),
-                Rank.THIRD,
+                listOf(Rank.FIRST, Rank.FOURTH),
+                Rank.FOURTH,
                 1
             ),
             Arguments.of(
-                listOf(Rank.THIRD, Rank.SECOND, Rank.SECOND, Rank.FOURTH),
+                listOf(Rank.FOURTH, Rank.THIRD, Rank.THIRD, Rank.FIFTH),
                 Rank.FIRST,
                 0
             )

@@ -13,6 +13,8 @@ class Lotto(lottoNumbers: List<LottoNumber>) {
         return numbers.intersect(comparison.numbers).count()
     }
 
+    fun contains(bonusNumber: BonusNumber) = numbers.contains(bonusNumber.value)
+
     companion object {
         private const val LOTTO_SIZE = 6
     }
