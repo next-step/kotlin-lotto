@@ -6,6 +6,10 @@ class StringCalculator {
             return 0
         }
 
+        if (text.toIntOrNull() != null) {
+            return text.toInt()
+        }
+
         return 0
     }
 }

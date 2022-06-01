@@ -17,6 +17,11 @@ class StringCalculatorTest : FunSpec({
         }
 
         test("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.") {
+            // when
+            val result = stringCalculator.add("12")
+
+            // then
+            result shouldBe 12
         }
     }
 })
