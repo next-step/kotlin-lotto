@@ -8,33 +8,33 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 import java.lang.IllegalArgumentException
 
-class LottoGameTest {
-    private lateinit var lottoGame: LottoGame
+class LottoShopTest {
+    private lateinit var lottoShop: LottoShop
 
     @BeforeEach
     fun beforeEachTest() {
-        lottoGame = LottoGame()
+        lottoShop = LottoShop()
     }
 
     @ParameterizedTest
     @CsvSource(value = ["14000|14", "1000|1", "2000|2"], delimiter = '|')
-    fun `로또 구입 금액에 해당하는 로또 수를 계산할 수 있다`(money: Long, expected: Int) {
-        assertThat(lottoGame.generateLotto(money).size).isEqualTo(expected)
+    fun `구입 금액만큼 로또를 구입할 수 있다`(money: Int, expected: Int) {
+        assertThat(lottoShop.buyLotto(money).lottoCount).isEqualTo(expected)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["900", "0"])
-    fun `로또 구입 금액이 1천원 미만이면 IllegalArgumentException 예외가 발생한다`(money: Long) {
+    fun `로또 구입 금액이 1천원 미만이면 IllegalArgumentException 예외가 발생한다`(money: Int) {
         assertThrows(IllegalArgumentException::class.java) {
-            lottoGame.generateLotto(money)
+            lottoShop.buyLotto(money)
         }
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["1900", "2001"])
-    fun `로또 구입 금액이 1천원 이상인데, 천단위가 아니면 IllegalArgumentException 예외가 발생한다`(money: Long) {
+    fun `로또 구입 금액이 1천원 이상인데, 천단위가 아니면 IllegalArgumentException 예외가 발생한다`(money: Int) {
         assertThrows(IllegalArgumentException::class.java) {
-            lottoGame.generateLotto(money)
+            lottoShop.buyLotto(money)
         }
     }
 }

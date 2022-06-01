@@ -26,6 +26,9 @@
     * [X] Lotto, LottoTickets 정의
         - [X] Lotto: 1~45범위 숫자 중 중복되지 않은 랜덤한 숫자 6개로 이뤄진 로또 1장
         - [x] LottoTickets: 구입한 로또 티켓 수와 로또 티켓 정보를 가진 로또 티켓 컬렉션
+    * [X] LottoShop, LottoVendor 정의
+        - [X] LottoShop: 로또 파는 상점, 구매 금액 만큼 로또 티켓을 생성한다.
+        - [X] LottoVendor: 로또 번호를 생성기이며, 로또 티켓 수 만큼 로또를 생성한다.
 
 ## 실행 결과
 ```
