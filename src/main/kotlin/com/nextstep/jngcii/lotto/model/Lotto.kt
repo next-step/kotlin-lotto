@@ -1,7 +1,6 @@
 package com.nextstep.jngcii.lotto.model
 
-class Lotto(_numbers: List<Int>) {
-    private val lottoNumbers = _numbers.map { LottoNumber(it) }
+class Lotto(lottoNumbers: List<LottoNumber>) {
     val numbers = lottoNumbers
         .map { it.value }
         .toSortedSet()

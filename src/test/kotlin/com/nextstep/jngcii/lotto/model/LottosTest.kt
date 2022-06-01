@@ -25,12 +25,12 @@ class LottosTest {
     }
 
     companion object {
-        private val LAST_WEEK_NUMBERS = listOf(1, 2, 3, 4, 5, 6)
+        private val LAST_WEEK_NUMBERS = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
 
-        private val FIRST_RANK_NUMBERS = listOf(1, 2, 3, 4, 5, 6)
-        private val SECOND_RANK_NUMBERS = listOf(2, 3, 4, 5, 6, 7)
-        private val THIRD_RANK_NUMBERS = listOf(3, 4, 5, 6, 7, 8)
-        private val FOURTH_RANK_NUMBERS = listOf(4, 5, 6, 7, 8, 9)
-        private val NONE_RANK_NUMBERS = listOf(5, 6, 7, 8, 9, 10)
+        private val FIRST_RANK_NUMBERS = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
+        private val SECOND_RANK_NUMBERS = listOf(2, 3, 4, 5, 6, 7).map { LottoNumber(it) }
+        private val THIRD_RANK_NUMBERS = listOf(3, 4, 5, 6, 7, 8).map { LottoNumber(it) }
+        private val FOURTH_RANK_NUMBERS = listOf(4, 5, 6, 7, 8, 9).map { LottoNumber(it) }
+        private val NONE_RANK_NUMBERS = listOf(5, 6, 7, 8, 9, 10).map { LottoNumber(it) }
     }
 }
