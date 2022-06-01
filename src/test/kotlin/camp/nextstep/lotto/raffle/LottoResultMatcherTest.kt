@@ -1,6 +1,7 @@
 package camp.nextstep.lotto.raffle
 
 import camp.nextstep.lotto.IntArrayConverter
+import camp.nextstep.lotto.number.LottoNumber
 import camp.nextstep.lotto.ticket.LottoTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -30,9 +31,9 @@ internal class LottoResultMatcherTest {
         ]
     )
     fun matchedLottoNumbers(@ConvertWith(IntArrayConverter::class) ticketNumbers: IntArray, expectedMatchCount: Int, expectedMatchedBonus: Boolean) {
-        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val bonusNumber = 7
-        val lottoTicket = LottoTicket(ticketNumbers.toList())
+        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }
+        val bonusNumber = LottoNumber.of(7)
+        val lottoTicket = LottoTicket(ticketNumbers.map { LottoNumber.of(it) }.toList())
 
         val matchResult = LottoResultMatcher.count(lottoTicket, winnerNumbers, bonusNumber)
 
@@ -43,21 +44,21 @@ internal class LottoResultMatcherTest {
     @Test
     fun calculateLottoTickets() {
         val tickets = listOf(
-            LottoTicket(listOf(1, 2, 3, 4, 5, 6)), // 6
-            LottoTicket(listOf(1, 2, 3, 4, 7, 6)), // 5 + bonus
-            LottoTicket(listOf(1, 2, 3, 7, 5, 6)), // 5 + bonus
-            LottoTicket(listOf(10, 2, 3, 4, 5, 6)), // 5
-            LottoTicket(listOf(1, 2, 3, 41, 5, 6)), // 5
-            LottoTicket(listOf(12, 22, 31, 4, 5, 6)), // 3
-            LottoTicket(listOf(16, 26, 35, 4, 5, 6)), // 3
-            LottoTicket(listOf(13, 23, 32, 41, 5, 6)), // 2
-            LottoTicket(listOf(17, 27, 36, 41, 5, 6)), // 2
-            LottoTicket(listOf(18, 28, 37, 41, 5, 6)), // 2
-            LottoTicket(listOf(14, 24, 33, 41, 45, 6)), // 1
-            LottoTicket(listOf(15, 25, 34, 41, 44, 45)), // 0
+            LottoTicket.of(1, 2, 3, 4, 5, 6), // 6
+            LottoTicket.of(1, 2, 3, 4, 7, 6), // 5 + bonus
+            LottoTicket.of(1, 2, 3, 7, 5, 6), // 5 + bonus
+            LottoTicket.of(10, 2, 3, 4, 5, 6), // 5
+            LottoTicket.of(1, 2, 3, 41, 5, 6), // 5
+            LottoTicket.of(12, 22, 31, 4, 5, 6), // 3
+            LottoTicket.of(16, 26, 35, 4, 5, 6), // 3
+            LottoTicket.of(13, 23, 32, 41, 5, 6), // 2
+            LottoTicket.of(17, 27, 36, 41, 5, 6), // 2
+            LottoTicket.of(18, 28, 37, 41, 5, 6), // 2
+            LottoTicket.of(14, 24, 33, 41, 45, 6), // 1
+            LottoTicket.of(15, 25, 34, 41, 44, 45), // 0
         )
-        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val bonusNumber = 7
+        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }
+        val bonusNumber = LottoNumber.of(7)
 
         val winningTickets = LottoResultMatcher.winningTickets(tickets, winnerNumbers, bonusNumber)
 

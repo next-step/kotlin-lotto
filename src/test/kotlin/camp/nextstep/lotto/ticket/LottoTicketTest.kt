@@ -1,6 +1,7 @@
 package camp.nextstep.lotto.ticket
 
 import camp.nextstep.lotto.IntArrayConverter
+import camp.nextstep.lotto.number.LottoNumber
 import camp.nextstep.lotto.number.LottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -16,23 +17,21 @@ internal class LottoTicketTest {
     @DisplayName("로또 티켓은 6개의 숫자를 가진다.")
     @Test
     fun sixNumbersTest() {
-        val numbers = listOf(1, 2, 3, 4, 5, 6)
-        val ticket = LottoTicket(numbers)
+        val ticket = LottoTicket.of(1, 2, 3, 4, 5, 6)
 
         assertEquals(6, ticket.numbers.size)
-        assertThat(ticket.numbers).containsExactly(1, 2, 3, 4, 5, 6)
+        assertThat(ticket.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
     }
 
     @DisplayName("로또 티켓은 6개의 숫자를 오름차순으로 가진다.")
     @Test
     fun sortNumbersTest() {
-        val numbers = listOf(6, 4, 2, 3, 1, 5)
-        val ticket = LottoTicket(numbers)
+        val ticket = LottoTicket.of(6, 4, 2, 3, 1, 5)
 
-        val sortedNumbers = numbers.sorted()
+        val sortedNumbers = listOf(6, 4, 2, 3, 1, 5).sorted()
 
         for (i in 0 until LottoNumbers.LOTTO_NUMBERS) {
-            assertEquals(sortedNumbers[i], ticket.numbers[i])
+            assertEquals(LottoNumber.of(sortedNumbers[i]), ticket.numbers[i])
         }
     }
 
@@ -47,7 +46,7 @@ internal class LottoTicketTest {
         ]
     )
     fun moreThanSixNumbersTest(@ConvertWith(IntArrayConverter::class) numbers: IntArray) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers.toList()) }
+        assertThrows<IllegalArgumentException> { LottoTicket(numbers.map { LottoNumber.of(it) }.toList()) }
     }
 
     @DisplayName("로또 티켓은 같은 숫자를 여러 개 가질 수 없다.")
@@ -65,7 +64,7 @@ internal class LottoTicketTest {
         ]
     )
     fun ticketDuplicatedNumberTest(@ConvertWith(IntArrayConverter::class) numbers: IntArray) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers.toList()) }
+        assertThrows<IllegalArgumentException> { LottoTicket(numbers.map { LottoNumber.of(it) }.toList()) }
     }
 
     @DisplayName("로또 티켓은 1보다 작거나 45보다 큰 숫자로 이루어질 수 없다.")
@@ -79,6 +78,6 @@ internal class LottoTicketTest {
         ]
     )
     fun ticketNumberRangeTest(@ConvertWith(IntArrayConverter::class) numbers: IntArray) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers.asList()) }
+        assertThrows<IllegalArgumentException> { LottoTicket(numbers.map { LottoNumber.of(it) }.toList()) }
     }
 }
