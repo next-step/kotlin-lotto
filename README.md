@@ -51,7 +51,7 @@
 - [x] 로또 앱 구현
 - 코드리뷰 반영
   - 테스트 코드 정리
-    - [ ] 좋은 단위테스트는 결과가 올바른지 알 수 있어야 하고 경계조건이 설정되어 있어야 한다 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882665191))
+    - [x] 좋은 단위테스트는 결과가 올바른지 알 수 있어야 하고 경계조건이 설정되어 있어야 한다 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882665191))
     - [ ] 테스트명을 명확하게 작성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882693619))
     - [ ] 꽝인 경우 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882750160))
     - [ ] 자주 사용하는 변수를 test fixture 로 생성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882701463))
