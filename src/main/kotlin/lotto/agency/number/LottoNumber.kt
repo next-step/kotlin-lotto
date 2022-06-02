@@ -16,6 +16,7 @@ data class LottoNumber(val number: Int) {
 
     companion object {
         val LOTTO_NUMBER_RANGE = IntRange(1, 45)
+        
         private val NUMBERS: Map<Int, LottoNumber> = LOTTO_NUMBER_RANGE.associateWith(::LottoNumber)
 
         fun valueOf(value: Int): LottoNumber {

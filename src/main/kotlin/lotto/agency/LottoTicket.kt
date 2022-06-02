@@ -26,14 +26,13 @@ class LottoTicket(numbers: Set<Int>, bonus: Int? = null) {
             .map { lottoTicket -> lottoTicket.number }
             .sorted()
             .count { wonLottoTicket.numbers.map { wonLottoNumber -> wonLottoNumber.number }.contains(it) }
-    }
 
     fun isMatchedBonus(bonus: LottoNumber?): Boolean {
         return bonus
             ?.let { numbers.map { it.number }.contains(bonus.number) }
             ?: false
     }
-
+    
     private fun validateLottoCount(numbers: Set<Int>) {
         if (numbers.size != LOTTO_COUNT_POLICY) {
             throw WonLottoNumberCountInconsistencyException("로또 당첨 번호는 ${LOTTO_COUNT_POLICY}개를 입력해야합니다.")
