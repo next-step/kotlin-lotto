@@ -9,6 +9,6 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [0, 46])
     fun `로또 번호는 1 이상 45 이하 숫자이다`(invalidNumber: Int) {
-        assertThrows<IllegalArgumentException> { LottoNumber.of(invalidNumber) }
+        assertThrows<IllegalArgumentException> { LottoNumber(invalidNumber) }
     }
 }

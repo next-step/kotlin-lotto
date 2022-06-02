@@ -22,7 +22,7 @@ object LottoInputView {
         val bunchOfNumbers = List(manualPurchaseCount) {
             StringParser.getNumberStrings(readln())
                 .map(::parseToInt)
-                .map(LottoNumber::of)
+                .map(::LottoNumber)
         }
         return ManualPurchaseNumbers(bunchOfNumbers)
     }

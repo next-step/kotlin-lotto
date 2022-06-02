@@ -6,10 +6,10 @@ import org.junit.jupiter.api.assertThrows
 class LastWinningLottoTest {
 
     private val lastLottoTicket = listOf(1, 2, 3, 4, 5, 6)
-        .map(LottoNumber::of)
+        .map(::LottoNumber)
         .let(LottoTicket::of)
 
-    private val bonusNumber = LottoNumber.of(10)
+    private val bonusNumber = LottoNumber(10)
 
     @Test
     fun `지난주 당첨로또를 생성한다`() {

@@ -14,11 +14,11 @@ class LottoTicketTest {
     @Test
     fun `로또번호 매칭된 갯수를 확인한다`() {
         val lottoTicket = listOf(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::of)
+            .map(::LottoNumber)
             .let(LottoTicket::of)
 
         val otherTicket = listOf(4, 5, 6, 7, 8, 9)
-            .map(LottoNumber::of)
+            .map(::LottoNumber)
             .let(LottoTicket::of)
 
         val matchCount = lottoTicket.matchCountWith(otherTicket)
@@ -31,10 +31,10 @@ class LottoTicketTest {
     @CsvSource("10, true", "45, false")
     fun `로또 티켓에 번호가포함돼 있는지 확인한다`(number: Int, contains: Boolean) {
         val ticket = listOf(1, 2, 3, 4, 5, 10)
-            .map(LottoNumber::of)
+            .map(::LottoNumber)
             .let(LottoTicket::of)
 
-        Assertions.assertThat(ticket.hasNumber(LottoNumber.of(number))).isEqualTo(contains)
+        Assertions.assertThat(ticket.hasNumber(LottoNumber(number))).isEqualTo(contains)
     }
 
     @ParameterizedTest
@@ -53,16 +53,16 @@ class LottoTicketTest {
         @JvmStatic
         fun invalidSizeLottoNumbers(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf(1, 2, 3, 4, 5).map(LottoNumber::of)), // less than 6
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7).map(LottoNumber::of)), // more than 6
+                Arguments.of(listOf(1, 2, 3, 4, 5).map(::LottoNumber)), // less than 6
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7).map(::LottoNumber)), // more than 6
             )
         }
 
         @JvmStatic
         fun duplicatedLottoNumbers(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf(1, 2, 3, 4, 5, 5).map(LottoNumber::of)), // 5 numbers
-                Arguments.of(listOf(1, 1, 1, 1, 1, 1).map(LottoNumber::of)), // 1 numbers
+                Arguments.of(listOf(1, 2, 3, 4, 5, 5).map(::LottoNumber)), // 5 numbers
+                Arguments.of(listOf(1, 1, 1, 1, 1, 1).map(::LottoNumber)), // 1 numbers
             )
         }
     }

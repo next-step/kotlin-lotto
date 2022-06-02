@@ -7,7 +7,7 @@ object LottoCreator {
         val lottoNumbers = LottoPolicy.LOTTO_NUMBER_RANGE
             .shuffled()
             .take(PICK_LOTTO_NUMBER_SIZE)
-            .map(LottoNumber::of)
+            .map(::LottoNumber)
 
         return LottoTicket.of(lottoNumbers)
     }
