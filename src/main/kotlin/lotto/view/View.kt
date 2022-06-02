@@ -31,4 +31,20 @@ object View {
         println("보너스 볼을 입력해 주세요.")
         return readln().toInt()
     }
+
+    fun getManualLotto(): List<LottoNumber> {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        readln().toInt().let {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+            return getLottoNumber(it)
+        }
+    }
+
+    private fun getLottoNumber(input: Int): List<LottoNumber> {
+        return List(input) {
+            LottoNumber(
+                readln().replace(" ", "").split(",").map { lottoNumber -> lottoNumber.toInt() }
+            )
+        }
+    }
 }
