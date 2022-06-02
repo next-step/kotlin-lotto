@@ -15,7 +15,10 @@ class WinningStaticsTest : FreeSpec({
         "당첨된 로또가 없는 경우 결과를 반환한다." {
             val lottoNumberSet = LottoNumberSet(listOf(13, 14, 15, 16, 17, 18))
             val lottoRecord = listOf(lottoNumberSet)
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "2")
+
+            val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
+            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
 
@@ -30,7 +33,10 @@ class WinningStaticsTest : FreeSpec({
         "당첨 로또가 3개인 경우 5등입니다." {
             val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 4, 5, 6))
             val lottoRecord = listOf(lottoNumberSet)
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "2")
+
+            val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
+            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
 
@@ -43,7 +49,10 @@ class WinningStaticsTest : FreeSpec({
         "당첨 로또가 4개인 경우 4등입니다." {
             val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 10, 5, 6))
             val lottoRecord = listOf(lottoNumberSet)
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "2")
+
+            val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
+            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
 
@@ -56,7 +65,10 @@ class WinningStaticsTest : FreeSpec({
         "당첨 로또가 보너스는 일치하지 않는 5개인 경우 3등입니다." {
             val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 10, 11, 6))
             val lottoRecord = listOf(lottoNumberSet)
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "2")
+
+            val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
+            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "20")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
 
@@ -69,7 +81,10 @@ class WinningStaticsTest : FreeSpec({
         "당첨 로또가 보너스가 일치하는 5개인 경우 2등입니다." {
             val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 10, 11, 6))
             val lottoRecord = listOf(lottoNumberSet)
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "2")
+
+            val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
+            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "6")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
 
@@ -82,7 +97,10 @@ class WinningStaticsTest : FreeSpec({
         "당첨 로또가 6개인 경우 1등입니다." {
             val lottoNumberSet = LottoNumberSet(listOf(1, 2, 3, 10, 11, 12))
             val lottoRecord = listOf(lottoNumberSet)
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "2")
+
+            val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
+            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
 
