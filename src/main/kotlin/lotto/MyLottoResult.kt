@@ -9,7 +9,7 @@ data class MyLottoResult(private val result: Map<LottoWinnerRank, Int>) {
 
     fun getProfit(): Double {
         val totalEarningByLotto = this.totalEarning
-        return totalEarningByLotto.toDouble() / (totalLottoCount * LottoPolicy.LOTTO_PRICE).toDouble()
+        return totalEarningByLotto.toDouble() / (totalLottoCount * LottoShop.LOTTO_PRICE).toDouble()
     }
 
     fun getCount(ranking: LottoWinnerRank): Int {

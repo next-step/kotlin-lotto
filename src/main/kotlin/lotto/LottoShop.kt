@@ -11,7 +11,7 @@ class LottoShop(money: Int) {
     fun autoPurchase(purchaseCount: Int = purchasableCount): List<LottoTicket> {
         isPurchasable(purchaseCount)
             .also { decreasePurchasableCount(purchaseCount) }
-        return List(purchaseCount) { LottoCreator.autoCreate() }
+        return LottoCreator.autoCreate(purchaseCount)
     }
 
     fun manualPurchase(manualNumbers: ManualPurchaseNumbers): List<LottoTicket> {
@@ -38,6 +38,6 @@ class LottoShop(money: Int) {
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1_000
+        const val LOTTO_PRICE = 1_000
     }
 }
