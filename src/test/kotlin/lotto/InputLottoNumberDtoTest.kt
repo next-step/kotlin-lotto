@@ -36,4 +36,28 @@ class InputLottoNumberDtoTest : FreeSpec({
             exception.message shouldBe NEGATIVE_ERROR
         }
     }
+
+    "convertToLottoNumber" - {
+
+        "문자열 리스트가 숫자형으로 변환되어야한다." {
+            val inputLotto = listOf("1", "2", "3", "4", "5", "6")
+            InputLottoNumberDto.convertToLottoNumber(inputLotto) shouldBe listOf(1, 2, 3, 4, 5, 6)
+        }
+
+        "음수가 들어올 경우 IllegalArgumentException" {
+            val inputLotto = listOf("1", "2", "-1", "4", "5", "6")
+            val exception = shouldThrow<IllegalArgumentException> {
+                InputLottoNumberDto.convertToLottoNumber(inputLotto)
+            }
+            exception.message shouldBe NEGATIVE_ERROR
+        }
+
+        "중복된 수가 들어올 경우 IllegalArgumentException" {
+            val inputLotto = listOf("1", "2", "1", "4", "5", "6")
+            val exception = shouldThrow<IllegalArgumentException> {
+                InputLottoNumberDto.convertToLottoNumber(inputLotto)
+            }
+            exception.message shouldBe InputLottoNumberDto.CANNOT_DUPLICATION
+        }
+    }
 })
