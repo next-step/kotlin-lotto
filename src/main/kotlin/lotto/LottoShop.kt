@@ -5,7 +5,7 @@ class LottoShop(money: Int) {
 
     init {
         moneyValidate(money)
-        purchasableCount = money / LottoPolicy.LOTTO_PRICE
+        purchasableCount = money / LOTTO_PRICE
     }
 
     fun autoPurchase(purchaseCount: Int = purchasableCount): List<LottoTicket> {
@@ -32,8 +32,12 @@ class LottoShop(money: Int) {
     }
 
     private fun moneyValidate(money: Int) {
-        if (money < LottoPolicy.LOTTO_PRICE) {
-            throw RuntimeException("로또 구매 비용이 부족합니다. - `$money` (최소`${LottoPolicy.LOTTO_PRICE}` 이상 필요)")
+        if (money < LOTTO_PRICE) {
+            throw RuntimeException("로또 구매 비용이 부족합니다. - `$money` (최소`$LOTTO_PRICE` 이상 필요)")
         }
+    }
+
+    companion object {
+        private const val LOTTO_PRICE = 1_000
     }
 }
