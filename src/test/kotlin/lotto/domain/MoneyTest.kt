@@ -9,6 +9,7 @@ internal class MoneyTest : FreeSpec({
 
     "돈은 0보다 작을 수 없다." - {
         listOf(
+            0,
             -1,
             -10,
             -999
