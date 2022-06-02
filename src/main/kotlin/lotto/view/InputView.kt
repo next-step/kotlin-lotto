@@ -6,24 +6,22 @@ import lotto.domain.LottoNumber
 class InputView {
     fun getMoney(): Int {
         println(INPUT_MONEY)
-        return getValidNumber(readln())
+        return readln().toInt()
     }
 
     fun getPastWinner(): Lotto {
         println(INPUT_LAST_WINNER)
         val numbers = readln()
             .split(LOTTO_SPLIT_DELIMITER)
-            .map { getValidNumber(it) }
+            .map { it.toInt() }
             .toSet()
         return Lotto.of(numbers)
     }
 
     fun getBonusNumber(): LottoNumber {
         println(INPUT_BONUS_NUMBER)
-        return LottoNumber(getValidNumber(readln()))
+        return LottoNumber(readln().toInt())
     }
-
-    private fun getValidNumber(input: String) = input.toIntOrNull() ?: throw IllegalArgumentException()
 
     companion object {
         private const val INPUT_MONEY = "구입금액을 입력해 주세요."
