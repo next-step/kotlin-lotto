@@ -17,7 +17,7 @@ class MyLottoTickets(
 
     private fun getRanking(targetLotto: LottoTicket, winningLotto: LastWinningLotto): LottoWinnerRank {
         val matchNumberCount = winningLotto.matchCount(targetLotto)
-        val hasBonusNumber = targetLotto.hasNumber(winningLotto.bonusNumber)
+        val hasBonusNumber = winningLotto.hasBonusNumber(targetLotto)
         return LottoWinnerRank.of(matchNumberCount, hasBonusNumber)
     }
 }
