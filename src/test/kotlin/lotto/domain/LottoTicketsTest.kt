@@ -7,7 +7,7 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import java.math.BigDecimal
 
-internal class LottosTest : FreeSpec({
+internal class LottoTicketsTest : FreeSpec({
 
     "입력된 총 금액에 구입가능 금액만큼 나눠서 로또를 구매한다." - {
         listOf(
@@ -18,9 +18,9 @@ internal class LottosTest : FreeSpec({
         ).forEach { (moneyValue, lottoCount) ->
             "'$moneyValue' 로는 '$lottoCount' 만큼 구매할 수 있다." {
                 val money = Money(BigDecimal.valueOf(moneyValue.toLong()))
-                val lottos = Lottos.buyLottos(money = money)
+                val lottoTickets = LottoTickets.buyLottos(money = money)
 
-                lottos.values shouldHaveSize lottoCount
+                lottoTickets.values shouldHaveSize lottoCount
             }
         }
     }
@@ -33,7 +33,7 @@ internal class LottosTest : FreeSpec({
         ).forEach { moneyValue ->
             "'$moneyValue' 로는 로또를 구매할 수 없다." {
                 val money = Money(BigDecimal.valueOf(moneyValue.toLong()))
-                val exception = shouldThrowExactly<IllegalArgumentException> { Lottos.buyLottos(money = money) }
+                val exception = shouldThrowExactly<IllegalArgumentException> { LottoTickets.buyLottos(money = money) }
                 exception.message shouldBe "로또 구입을 위한 최소 금액은 1000 입니다."
             }
         }
@@ -41,17 +41,17 @@ internal class LottosTest : FreeSpec({
 
     "로또들을 당첨 등수별로 나누어서 반환한다." {
         // given
-        val winning = Winning.of(listOf(1, 2, 3, 4, 5, 6))
+        val winningTicket = WinningTicket.of(listOf(1, 2, 3, 4, 5, 6))
 
-        val lotto1 = Lotto(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 6)))
-        val lotto2 = Lotto(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 9)))
-        val lotto3 = Lotto(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 9, 10)))
-        val lotto4 = Lotto(LottoNumbersFixture.of(setOf(1, 12, 5, 9, 45, 7)))
+        val lottoTicket1 = LottoTicket(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 6)))
+        val lottoTicket2 = LottoTicket(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 9)))
+        val lottoTicket3 = LottoTicket(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 9, 10)))
+        val lottoTicket4 = LottoTicket(LottoNumbersFixture.of(setOf(1, 12, 5, 9, 45, 7)))
 
-        val lottos = Lottos(listOf(lotto1, lotto2, lotto3, lotto4))
+        val lottoTickets = LottoTickets(listOf(lottoTicket1, lottoTicket2, lottoTicket3, lottoTicket4))
 
         // when
-        val results = lottos.totalMatchResults(winning = winning)
+        val results = lottoTickets.totalMatchResults(winningTicket = winningTicket)
 
         // then
         results[WinningAmount.MISS] shouldBe 1
