@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.Lotto
+import lotto.Lottos
 import lotto.Winning
 
 class ResultView {
@@ -8,8 +8,8 @@ class ResultView {
         println("${number}개를 구매했습니다.")
     }
 
-    fun printLottos(lottos: List<Lotto>) {
-        lottos.forEach {
+    fun printLottos(lottos: Lottos) {
+        lottos.lottos.forEach {
             println(it.numbers.sorted())
         }
         println()

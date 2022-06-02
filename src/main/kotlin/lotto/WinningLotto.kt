@@ -6,7 +6,7 @@ class WinningLotto(private val winningLotto: Lotto) {
         return Winning.of(count)
     }
 
-    fun evaluate(lottos: List<Lotto>): List<Winning> {
-        return lottos.map { evaluate(it) }
+    fun evaluate(lottos: Lottos): List<Winning> {
+        return lottos.lottos.map { evaluate(it) }
     }
 }

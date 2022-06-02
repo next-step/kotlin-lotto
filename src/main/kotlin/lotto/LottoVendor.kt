@@ -1,13 +1,18 @@
 package lotto
 
 class LottoVendor {
-    fun sellLotto(price: Price): List<Lotto> {
-        val number = getNumberOfLotto(price)
-        return LottoBuilder().create(number)
+    fun sellLotto(price: Price): Lottos {
+        val count = getCountOfLotto(price)
+        val lottos = (1..count).map {
+            Lotto.generator().generate(RandomGenerater())
+        }
+        return Lottos(lottos)
     }
 
-    fun getNumberOfLotto(price: Price): Int {
-        return price.amount / LOTTO_PRICE
+    fun getCountOfLotto(price: Price): Int {
+        val count = price.amount / LOTTO_PRICE
+        require(count > 0)
+        return count
     }
 
     companion object {

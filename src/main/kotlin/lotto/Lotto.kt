@@ -19,5 +19,9 @@ value class Lotto(val numbers: Set<Int>) {
         private const val LOTTO_COUNT = 6
         private const val LOTTO_MIN_NUMBER = 1
         private const val LOTTO_MAX_NUMBER = 45
+
+        fun generator(): LottoGenerator {
+            return LottoGenerator(LOTTO_COUNT, LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+        }
     }
 }
