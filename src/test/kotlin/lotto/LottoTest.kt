@@ -16,24 +16,21 @@ class LottoTest : FreeSpec({
         }
         "LottoNumber가 중복되면 예외가 발생한다." {
             val numbers = listOf(1, 2, 3, 4, 5, 5).map(::LottoNumber).toSet()
-            val exception = shouldThrow<IllegalArgumentException> {
+            shouldThrow<IllegalArgumentException> {
                 Lotto(numbers)
             }
-            println(exception.message)
         }
         "LottoNumber가 6개 미만이면 예외가 발생한다." {
             val numbers = listOf(1, 2, 3, 4, 5).map(::LottoNumber).toSet()
-            val exception = shouldThrow<IllegalArgumentException> {
+            shouldThrow<IllegalArgumentException> {
                 Lotto(numbers)
             }
-            println(exception.message)
         }
         "LottoNumber가 6개 초과이면 예외가 발생한다." {
             val numbers = listOf(1, 2, 3, 4, 5, 6, 7).map(::LottoNumber).toSet()
-            val exception = shouldThrow<IllegalArgumentException> {
+            shouldThrow<IllegalArgumentException> {
                 Lotto(numbers)
             }
-            println(exception.message)
         }
     }
 })

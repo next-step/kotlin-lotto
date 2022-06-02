@@ -11,9 +11,8 @@ class LottoNumberTest : FreeSpec({
     }
 
     "1~45 범위 외의 로또숫자는 생성하지 못한다." {
-        val exception = shouldThrow<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             listOf(1, 2, 3, 4, 5, 66).map(::LottoNumber).toSet()
         }
-        println(exception.message)
     }
 })

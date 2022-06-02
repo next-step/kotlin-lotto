@@ -14,9 +14,8 @@ class LottoMachineTest : FreeSpec({
     }
 
     "입력된 금액이 1000원 미만이면 예외가 발생한다." {
-        val exception = shouldThrow<IllegalArgumentException> {
+        shouldThrow<IllegalArgumentException> {
             LottoMachine().buy(Money(999))
         }
-        println(exception.message)
     }
 })
