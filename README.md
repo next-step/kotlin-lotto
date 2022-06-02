@@ -15,7 +15,7 @@
   - [ ] 디미터의 법칙, 역할을 수행할 객체에서 함수를 생성하자 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244509))
   - [ ] 예외처리 코드 정리 (NumberFormatException < IllegalArgumentException) ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267378))
   - [x] 각 객체에 맞는 테스트코드 작성 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244836))
-  - [ ] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244997))
+  - [x] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244997))
   - [x] contains -> in 으로 사용하면 조금 더 간결해진다. ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267747))
   - [ ] 2등의 당첨규칙이 잘못되었다... ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884269255))
   - 일급컬렉션을 사용하여 코드 개선

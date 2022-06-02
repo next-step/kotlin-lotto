@@ -3,7 +3,7 @@ package lotto.domain
 class LottoMachine {
     fun buy(money: Money): List<Lotto> {
 
-        val ticketCount: Int = money.price / TICKET_PRICE
+        val ticketCount: Int = money / TICKET_PRICE
         val tickets = mutableListOf<Lotto>()
 
         repeat(ticketCount) {
