@@ -1,5 +1,7 @@
-package lotto.domain
+package lotto.controller
 
+import lotto.domain.LottoNumber
+import lotto.domain.TicketMachine
 import lotto.view.InputView
 import lotto.view.OutputView
 
