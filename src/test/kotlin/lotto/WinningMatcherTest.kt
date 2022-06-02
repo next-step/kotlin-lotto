@@ -11,7 +11,10 @@ class WinningMatcherTest : FreeSpec({
     "지난주 당첨번호와 입력한 로또번호가" - {
         val pastWinner = Lotto.of(setOf(1, 2, 3, 4, 5, 6))
         val bonus = LottoNumber(10)
-
+        "2개 이하로 일치하면 꽝이다" {
+            val lotto = Lotto.of(setOf(1, 2, 7, 8, 9, 10))
+            WinningMatcher(pastWinner, bonus).getPlace(lotto) shouldBe Winning.LOSE
+        }
         "3개 일치하면 5등이다" {
             val lotto = Lotto.of(setOf(1, 2, 3, 7, 8, 9))
             WinningMatcher(pastWinner, bonus).getPlace(lotto) shouldBe Winning.FIFTH_PLACE
