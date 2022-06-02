@@ -38,4 +38,26 @@ internal class LottosTest : FreeSpec({
             }
         }
     }
+
+    "로또들을 당첨 등수별로 나누어서 반환한다." {
+        // given
+        val winning = Winning.of(listOf(1, 2, 3, 4, 5, 6))
+
+        val lotto1 = Lotto(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 6)))
+        val lotto2 = Lotto(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 9)))
+        val lotto3 = Lotto(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 9, 10)))
+        val lotto4 = Lotto(LottoNumbersFixture.of(setOf(1, 12, 5, 9, 45, 7)))
+
+        val lottos = Lottos(listOf(lotto1, lotto2, lotto3, lotto4))
+
+        // when
+        val results = lottos.totalMatchResults(winning = winning)
+
+        // then
+        results[WinningAmount.MISS] shouldBe 1
+        results[WinningAmount.FOURTH] shouldBe 0
+        results[WinningAmount.THIRD] shouldBe 1
+        results[WinningAmount.SECOND] shouldBe 1
+        results[WinningAmount.FIRST] shouldBe 1
+    }
 })

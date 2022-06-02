@@ -49,16 +49,16 @@ internal class LottoNumbersTest : FreeSpec({
     }
 
     "서로 일치하는 번호의 개수를 반환한다." - {
-        val winningNumbers = lottoNumbersFixture(setOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 6))
 
         listOf(
-            row(lottoNumbersFixture(setOf(11, 12, 13, 14, 15, 16)), 0),
-            row(lottoNumbersFixture(setOf(1, 12, 13, 14, 15, 16)), 1),
-            row(lottoNumbersFixture(setOf(1, 2, 13, 14, 15, 16)), 2),
-            row(lottoNumbersFixture(setOf(1, 2, 3, 14, 15, 16)), 3),
-            row(lottoNumbersFixture(setOf(1, 2, 3, 4, 15, 16)), 4),
-            row(lottoNumbersFixture(setOf(1, 2, 3, 4, 5, 16)), 5),
-            row(lottoNumbersFixture(setOf(1, 2, 3, 4, 5, 6)), 6),
+            row(LottoNumbersFixture.of(setOf(11, 12, 13, 14, 15, 16)), 0),
+            row(LottoNumbersFixture.of(setOf(1, 12, 13, 14, 15, 16)), 1),
+            row(LottoNumbersFixture.of(setOf(1, 2, 13, 14, 15, 16)), 2),
+            row(LottoNumbersFixture.of(setOf(1, 2, 3, 14, 15, 16)), 3),
+            row(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 15, 16)), 4),
+            row(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 16)), 5),
+            row(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 6)), 6),
         ).forEach { (lottoNumbers, result) ->
             "'${lottoNumbers.values}' 는 $result 개가 일치한다." {
                 winningNumbers.matchedNumberCount(other = lottoNumbers) shouldBe result
@@ -66,8 +66,3 @@ internal class LottoNumbersTest : FreeSpec({
         }
     }
 })
-
-private fun lottoNumbersFixture(numberSet: Set<Int>): LottoNumbers = LottoNumbers(
-    numberSet.map(LottoNumber.Companion::from)
-        .toSet()
-)

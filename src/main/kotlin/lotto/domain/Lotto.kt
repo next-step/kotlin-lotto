@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Lotto private constructor(
+class Lotto constructor(
     val lottoNumbers: LottoNumbers,
 ) {
     companion object {

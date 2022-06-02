@@ -2,13 +2,25 @@ package lotto.domain
 
 import java.math.BigDecimal
 
-class Lottos private constructor(
+class Lottos constructor(
     val values: List<Lotto>,
 ) {
     init {
         require(values.isNotEmpty()) {
             "로또 구입을 위한 최소 금액은 ${LOTTO_PRICE.value} 입니다."
         }
+    }
+
+    fun totalMatchResults(winning: Winning): Map<WinningAmount, Int> {
+        val winningAmountMap = WinningAmount.values()
+            .associateWith { 0 }.toMutableMap()
+
+        values.forEach {
+            val winningAmount = winning.matchResult(it)
+            winningAmountMap[winningAmount] = winningAmountMap[winningAmount]!!.inc()
+        }
+
+        return winningAmountMap
     }
 
     companion object {
