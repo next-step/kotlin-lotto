@@ -2,15 +2,15 @@ package stringAddCalculator
 
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculateTest {
-    @Test
-    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`() {
-        assertThat(stringAddCalculate("") == 0).isTrue
-        assertThat(stringAddCalculate(null) == 0).isTrue
+    @ParameterizedTest
+    @NullAndEmptySource
+    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(text: String?) {
+        assertThat(stringAddCalculate(text)).isEqualTo(0)
     }
 
     @ParameterizedTest
