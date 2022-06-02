@@ -21,7 +21,7 @@ object ResultView {
 
         Rank.values().forEach {
             val match = ranks.countOf(it)
-            val secondPhase = if (it == Rank.SECOND) ", 보너스 볼 일치" else ""
+            val secondPhase = if (it.isSecond) ", 보너스 볼 일치" else ""
             println("${it.count}개 일치$secondPhase (${it.price}원)- ${match}개")
         }
 

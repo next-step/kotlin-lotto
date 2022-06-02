@@ -7,6 +7,8 @@ enum class Rank(val count: Int, val price: Int) {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
+    val isSecond get() = this == SECOND
+
     companion object {
         private const val EXCEED_COUNT = 7
 
