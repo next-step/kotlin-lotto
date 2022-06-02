@@ -20,16 +20,17 @@ class ResultView {
         println(PRINT_WINNING_STATISTICS)
         println(PRINT_LINE)
 
-        Winning.values().forEach { winning ->
-            if (winning == Winning.LOSE) return@forEach
-            val winningCount = result[winning] ?: 0
-            val matchCount = winning.matchCount
-            val amount = winning.winningAmount
+        Winning.values()
+            .filter { it != Winning.LOSE }
+            .forEach { winning ->
+                val winningCount = result[winning] ?: 0
+                val matchCount = winning.matchCount
+                val amount = winning.winningAmount
 
-            val withBonusView = if (winning == Winning.SECOND_PLACE) ", 보너스 볼 일치" else ""
+                val withBonusView = if (winning == Winning.SECOND_PLACE) ", 보너스 볼 일치" else ""
 
-            println("$matchCount 개 일치$withBonusView ($amount 원) - $winningCount 개")
-        }
+                println("$matchCount 개 일치$withBonusView ($amount 원) - $winningCount 개")
+            }
     }
 
     fun printWinningStatistics(statistics: LottoStatistics) {
