@@ -1,6 +1,6 @@
 package lotto
 
-data class LottoTicket private constructor(val numbers: Set<LottoNumber>) {
+class LottoTicket private constructor(val numbers: Set<LottoNumber>) {
     init {
         val lottoTicketSize = numbers.size
         require(lottoTicketSize == LOTTO_TICKET_SIZE) {
