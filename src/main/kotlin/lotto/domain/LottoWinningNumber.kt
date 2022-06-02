@@ -1,8 +1,8 @@
 package lotto.domain
 
 class LottoWinningNumber(
-    numbers: Set<Int>,
+    val winningNumber: LottoTicket,
     val bonusNumber: Int
 ) {
-    val winningNumber: LottoTicket = LottoTicket(numbers)
+    constructor(numbers: Set<Int>, bonusNumber: Int) : this(LottoTicket(numbers), bonusNumber)
 }
