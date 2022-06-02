@@ -1,7 +1,7 @@
 package addingCalculator.entity
 
 class ColonParserImpl : Parser {
-  override fun parse(notation: String): List<Int> {
-    return notation.split(':').map { it:String -> it.toInt() }
+  override fun parse(notation: String): List<String> {
+    return notation.split(':')
   }
 }
