@@ -5,6 +5,8 @@ class Lotto(val numbers: Set<LottoNumber>) {
         require(numbers.size == 6) { ERROR_LOTTO_NUMBER_COUNT }
     }
 
+    fun countMatches(lotto: Lotto): Int = numbers.count { lotto.contains(it) }
+
     operator fun contains(lottoNumbers: LottoNumber): Boolean = numbers.contains(lottoNumbers)
 
     companion object {

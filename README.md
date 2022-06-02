@@ -58,7 +58,7 @@
     - [x] 테스트는 스스로 검증할 수 있어야 한다. 에러에 대해 검증이 필요하면 단언문으로! ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r884148664))
   - 객체의 역할에 맞게 기능 구현 
     - [x] 정렬 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882666093))
-    - [ ] 맞는 개수 비교 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882746666))
+    - [x] matchCount 조회 시 Lotto의 내부에 의존하지 않도록 수정 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882746666))
     - [x] 수익률 표시 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882754116))
     - [ ] LottoResult 객체 생성해서 테스트해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
     - [x] Money 객체 분리하기
