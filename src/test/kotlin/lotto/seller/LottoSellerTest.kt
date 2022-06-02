@@ -1,8 +1,8 @@
 package lotto.seller
 
+import lotto.FixtureBuilder.Companion.RandomNumberFixture
 import lotto.agency.number.LottoNumber
 import lotto.agency.number.LottoNumberMaker
-import lotto.agency.number.LottoNumberStrategy
 import lotto.exception.MinimumPurchaseMoneyException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -34,17 +34,12 @@ class LottoSellerTest {
 
     @Test
     fun `원하는 랜덤 로또 티켓이 생성되었는지에 대한 테스트`() {
-        class LottoNumberForTest : LottoNumberStrategy {
-            override fun makeLottoNumbers(): Set<Int> {
-                return setOf(1, 6, 23, 5, 2, 7)
-            }
-        }
 
         val autoLottoPurchaseAmount = 1
         val lottoSeller = LottoSeller()
-        val lottoNumberForTest = LottoNumberForTest()
-        val lottoTicket = lottoSeller.buy(autoLottoPurchaseAmount, emptyList(), lottoNumberForTest)
-        val lottoNumbers = lottoNumberForTest.makeLottoNumbers().map { LottoNumber.valueOf(it) }.toSet()
+        val randomNumbers = RandomNumberFixture(setOf(1, 6, 23, 5, 2, 7))
+        val lottoTicket = lottoSeller.buy(autoLottoPurchaseAmount, emptyList(), randomNumbers)
+        val lottoNumbers = randomNumbers.makeLottoNumbers().map { LottoNumber.valueOf(it) }.toSet()
 
         lottoNumbers.forEach {
             assertThat(lottoTicket[0].numbers).contains(it)
