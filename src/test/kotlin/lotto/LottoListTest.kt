@@ -1,29 +1,37 @@
 package lotto
 
+import lotto.domain.Grade
 import lotto.domain.LottoList
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
-import lotto.domain.WinningNumbers
+import lotto.domain.Money
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class LottoListTest {
 
     @Test
-    fun `전체 로또의 등수를 리턴한다`() {
-        val lotto1 = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
-        val lotto2 = LottoNumbers(listOf(1, 2, 3, 4, 5, 45))
-        val lotto3 = LottoNumbers(listOf(1, 2, 3, 4, 44, 45))
-        val lotto4 = LottoNumbers(listOf(1, 2, 3, 43, 44, 45))
-        val lotto5 = LottoNumbers(listOf(1, 2, 42, 43, 44, 45))
+    fun `전체 로또의 결과 정보를 리턴한다`() {
+        val firstGrade = LottoNumbers(1, 2, 3, 4, 5, 6)
+        val secondGrade1 = LottoNumbers(1, 2, 3, 4, 5, 45)
+        val secondGrade2 = LottoNumbers(1, 2, 3, 4, 6, 45)
+        val thirdGrade = LottoNumbers(1, 2, 3, 4, 44, 45)
+        val fourthGrade = LottoNumbers(1, 2, 3, 43, 44, 45)
+        val noneGrade = LottoNumbers(1, 2, 42, 43, 44, 45)
 
-        val lottoList = LottoList(listOf(lotto1, lotto2, lotto3, lotto4, lotto5))
+        val lottoList =
+            LottoList(listOf(firstGrade, secondGrade1, secondGrade2, thirdGrade, fourthGrade, noneGrade), Money(0))
 
-        val winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = WinningNumbers(1, 2, 3, 4, 5, 6)
 
-        val result = lottoList.calculateLottoResult(winningNumbers)
+        val result = lottoList.match(winningNumbers)
 
-        result.forEach { grade, count ->
-            Assertions.assertThat(count).isEqualTo(1)
-        }
+        Assertions.assertThat(result.getMatchedCount(Grade.First)).isEqualTo(1)
+        Assertions.assertThat(result.getMatchedCount(Grade.Second)).isEqualTo(2)
+        Assertions.assertThat(result.getMatchedCount(Grade.Third)).isEqualTo(1)
+        Assertions.assertThat(result.getMatchedCount(Grade.Fourth)).isEqualTo(1)
     }
+
+    private fun LottoNumbers(vararg numbers: Int) = LottoNumbers(numbers.map(::LottoNumber))
+    private fun WinningNumbers(vararg numbers: Int) = LottoNumbers(numbers.map(::LottoNumber))
 }

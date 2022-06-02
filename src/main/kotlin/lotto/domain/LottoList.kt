@@ -1,13 +1,14 @@
 package lotto.domain
 
-class LottoList(private val lottoList: List<LottoNumbers>) {
+class LottoList(private val lottoList: List<LottoNumbers>, private val usedMoney: Money) {
     val size = lottoList.size
+    fun match(winningNumbers: LottoNumbers): LottoResult {
+        val matcher = WinningMatcher(winningNumbers)
 
-    fun calculateLottoResult(winningNumbers: WinningNumbers): LottoResult {
         return LottoResult(
+            usedMoney,
             lottoList.map {
-                val count = it.calculateWinningCount(winningNumbers.numbers)
-                Grade.valueOf(count)
+                matcher.getMatchGrade(it)
             }
         )
     }

@@ -1,17 +1,19 @@
 package lotto.ui
 
-import lotto.domain.WinningNumbers
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
+import lotto.domain.Money
 
 object InputUI {
 
-    fun receivePurchaseAmount(): Int {
+    fun receivePurchaseAmount(): Money {
         println("구입금액을 입력해 주세요.")
-        return requireNotNull(readLine()).toInt()
+        return Money(readln().toInt())
     }
 
-    fun receiveWinningNumbers(): WinningNumbers {
+    fun receiveWinningNumbers(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val input = requireNotNull(readLine())
-        return WinningNumbers.fromCSV(input)
+        val numbers = readln().replace(" ", "").split(",").map(String::toInt).map(::LottoNumber)
+        return LottoNumbers(numbers)
     }
 }

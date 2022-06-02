@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.Grade
 import lotto.domain.LottoList
 import lotto.domain.LottoResult
 
@@ -18,8 +19,9 @@ object OutputUI {
     fun drawWinningResult(result: LottoResult) {
         println("당첨 통계")
         println("---------")
-        result.forEach { grade, count ->
-            println("${grade.matchCount}개 일치 (${grade.reward})- ${count}개")
+        listOf(Grade.Fourth, Grade.Third, Grade.Second, Grade.First).forEach {
+            val matchedCount = result.getMatchedCount(it)
+            println("${it.matchCount}개 일치 (${it.reward})- ${matchedCount}개")
         }
     }
 
