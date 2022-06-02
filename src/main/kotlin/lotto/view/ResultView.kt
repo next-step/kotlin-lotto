@@ -9,7 +9,9 @@ class ResultView {
     fun printTickets(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
         lottos.forEach { lotto ->
-            println(lotto.numbers.map { it.number }.sorted())
+            println(
+                lotto.numbers.map { it.number }.sorted().joinToString(prefix = PREFIX_LOTTO, postfix = POSTFIX_LOTTO)
+            )
         }
         println()
     }
@@ -40,6 +42,9 @@ class ResultView {
         private const val PRINT_LINE = "---------"
         private const val PRINT_IS_LOSE = "기준이 1이기 때문에 결과적으로 손해이다."
         private const val PRINT_IS_GAIN = "기준이 1이기 때문에 결과적으로 이득이다."
+
+        private const val PREFIX_LOTTO = "["
+        private const val POSTFIX_LOTTO = "]"
 
         private const val DISPLAY_SECOND_DIGIT = 100
     }
