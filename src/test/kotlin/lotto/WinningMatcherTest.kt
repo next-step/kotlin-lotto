@@ -8,7 +8,7 @@ import lotto.domain.Winning
 import lotto.domain.WinningMatcher
 
 class WinningMatcherTest : FreeSpec({
-    "지난주 당첨번호와" - {
+    "지난주 당첨번호와 입력한 로또번호가" - {
         val pastWinner = Lotto.of(setOf(1, 2, 3, 4, 5, 6))
         val bonus = LottoNumber(10)
 
