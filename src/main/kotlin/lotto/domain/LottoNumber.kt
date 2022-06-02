@@ -6,6 +6,8 @@ value class LottoNumber(val number: Int) {
         require(number in MIN_NUMBER..MAX_NUMBER) { ERROR_LOTTO_NUMBER_RANGE }
     }
 
+    operator fun rangeTo(end: LottoNumber): IntRange = this.number..end.number
+
     companion object {
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45

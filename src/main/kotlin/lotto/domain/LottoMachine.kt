@@ -13,7 +13,7 @@ class LottoMachine {
     }
 
     private fun issueTicket(): Lotto {
-        val numbers = (LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER)
+        val numbers = (LottoNumber(LottoNumber.MIN_NUMBER)..LottoNumber(LottoNumber.MAX_NUMBER))
             .shuffled()
             .take(LOTTO_NUMBER_COUNT)
             .toSet()
