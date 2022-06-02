@@ -16,7 +16,7 @@
   - [ ] 예외처리 코드 정리 (NumberFormatException < IllegalArgumentException) ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267378))
   - [x] 각 객체에 맞는 테스트코드 작성 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244836))
   - [ ] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244997))
-  - [ ] contains -> in 으로 사용하면 조금 더 간결해진다. ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267747))
+  - [x] contains -> in 으로 사용하면 조금 더 간결해진다. ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267747))
   - [ ] 2등의 당첨규칙이 잘못되었다... ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884269255))
   - 일급컬렉션을 사용하여 코드 개선
     - [ ] Lotto(일급컬렉션)의 변수에 직접적으로 접근하지 말고 멤버함수 활용 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884270190))

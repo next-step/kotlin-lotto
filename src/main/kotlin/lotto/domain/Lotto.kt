@@ -5,9 +5,9 @@ class Lotto(val numbers: Set<LottoNumber>) {
         require(numbers.size == 6) { ERROR_LOTTO_NUMBER_COUNT }
     }
 
-    fun countMatches(lotto: Lotto): Int = numbers.count { lotto.contains(it) }
+    fun countMatches(lotto: Lotto): Int = numbers.count { it in lotto }
 
-    operator fun contains(lottoNumbers: LottoNumber): Boolean = numbers.contains(lottoNumbers)
+    operator fun contains(lottoNumbers: LottoNumber): Boolean = lottoNumbers in numbers
 
     companion object {
         private const val ERROR_LOTTO_NUMBER_COUNT = "로또는 랜덤한 6개의 숫자를 가져야 한다."
