@@ -4,17 +4,21 @@ import lotto.agency.number.LottoNumber
 import lotto.exception.AlreadySelectedNumberException
 import lotto.exception.WonLottoNumberCountInconsistencyException
 
-class LottoTicket(numbers: Set<Int>) {
+class LottoTicket(numbers: Set<Int>, bonus: Int? = null) {
 
     var numbers: Set<LottoNumber>
         private set
-    lateinit var bonus: LottoNumber
+    var bonus: LottoNumber?
+        private set
 
     constructor(vararg numbers: Int) : this(numbers.toSet())
+
+    constructor(vararg numbers: Int, bonus: Int) : this(numbers.toSet(), bonus)
 
     init {
         validateLottoCount(numbers)
         this.numbers = numbers.map { LottoNumber.valueOf(it) }.toSet()
+        this.bonus = bonus?.let { LottoNumber(it) }
     }
 
     fun countMatchWonLottoTicket(wonLottoTicket: LottoTicket): Int {
@@ -24,8 +28,10 @@ class LottoTicket(numbers: Set<Int>) {
             .count { wonLottoTicket.numbers.map { wonLottoNumber -> wonLottoNumber.number }.contains(it) }
     }
 
-    fun isMatchedBonus(bonus: LottoNumber): Boolean {
-        return numbers.map { it.number }.contains(bonus.number)
+    fun isMatchedBonus(bonus: LottoNumber?): Boolean {
+        return bonus
+            ?.let { numbers.map { it.number }.contains(bonus.number) }
+            ?: false
     }
 
     private fun validateLottoCount(numbers: Set<Int>) {
