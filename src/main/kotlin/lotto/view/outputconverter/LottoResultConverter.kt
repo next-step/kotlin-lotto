@@ -20,6 +20,6 @@ object LottoResultConverter : OutputConverter<LottoResult> {
     }
 
     private fun LottoRank.bonusBallText(): String {
-        return if (needToMatchBonusBall) ", 보너스 볼 일치" else " "
+        return if (this == LottoRank.SECOND) ", 보너스 볼 일치" else " "
     }
 }

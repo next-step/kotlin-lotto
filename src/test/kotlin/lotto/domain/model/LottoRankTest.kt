@@ -13,9 +13,15 @@ class LottoRankTest {
     fun `of를 통해 맞춘 개수에 맞는 LottoRank를 얻을 수 있다`(matchNumber: Int, isBonusBallMatched: Boolean) {
         val numberOfMatches = NumberOfMatches(matchNumber)
         val lottoRank = LottoRank.of(numberOfMatches, isBonusBallMatched)
+        val expected = when (matchNumber) {
+            3 -> LottoRank.FIFTH
+            4 -> LottoRank.FOURTH
+            5 -> if (isBonusBallMatched) LottoRank.SECOND else LottoRank.THIRD
+            6 -> LottoRank.FIRST
+            else -> LottoRank.NOTHING
+        }
 
-        assertThat(lottoRank.numberOfMatches).isEqualTo(numberOfMatches)
-        assertThat(lottoRank.needToMatchBonusBall).isEqualTo(matchNumber == 5 && isBonusBallMatched)
+        assertThat(lottoRank).isEqualTo(expected)
     }
 
     @ParameterizedTest
