@@ -15,13 +15,15 @@ object LottoStore {
         if (!LottoProvider.isAffordable(payment, numberOfCustomLotto))
             throw IllegalArgumentException(LottoProvider.TOO_MANY_LOTTO_REQUESTED)
 
-        val customLottos = InputView.readCustomLottoNumbers(numberOfCustomLotto)
+        val customLottoNumbers = InputView.readCustomLottoNumbers(numberOfCustomLotto)
             .map { LottoNumbers(it) }
 
-        val provider = LottoProvider(payment, customLottos)
+        val provider = LottoProvider(payment, customLottoNumbers)
+
+        OutputView.printNumberOfLottosBought(provider.numberOfCustomLottos, provider.numberOfAutomaticLottos)
         OutputView.printLottoNumbers(provider.lottos)
 
-        if (provider.numberOfLottos > 0) {
+        if (provider.lottos.isNotEmpty()) {
             val winningLotto = WinningLotto(InputView.readWinningNumbers(), InputView.readBonusBallNumber())
 
             val prizeResult = LottoPrizeResult(winningLotto, provider.lottos)

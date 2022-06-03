@@ -5,8 +5,8 @@ import lotto.domain.prize.LottoPrize
 import lotto.domain.prize.LottoPrizeResult
 
 object OutputView {
-    fun printNumberOfLottosBought(number: Int) {
-        println("${number}개를 구매했습니다.")
+    fun printNumberOfLottosBought(customLottoNumber: Int, automaticLottoNumber: Int) {
+        println("수동으로 ${customLottoNumber}장, 자동으로 ${automaticLottoNumber}개를 구매했습니다.")
     }
 
     fun printLottoNumbers(lottos: List<Lotto>) {
