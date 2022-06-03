@@ -16,11 +16,9 @@ class LottoStore(insertAmount: Int, manualLottoList: List<LottoNumber>) {
 
     private val manualLottoNumbers = manualLottoList
 
-    fun purchase(): List<LottoNumber> {
-        val lottoList = mutableListOf<LottoNumber>()
-        lottoList.addAll(manualLottoNumbers)
-        repeat(this.autoPurchasableCount) { lottoList.add(LottoNumberGenerator.autoGenerate()) }
-        return lottoList.toList()
+    private val autoPurchasedLottoNumbers = List(autoPurchasableCount) { LottoNumberGenerator.autoGenerate() }
+    fun purchased(): List<LottoNumber> {
+        return manualLottoNumbers + autoPurchasedLottoNumbers
     }
 
     companion object {
