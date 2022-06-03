@@ -30,13 +30,9 @@ class LottoTest {
     @Test
     fun `checkWith를 통해 WinningNumbers를 받아 당첨 순위를 확인할 수 있다`() {
         val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 7))
-        val winningNumbers = WinningNumbers.from(listOf(1, 2, 3, 4, 5, 6))
-        val winningLottoInfo = WinningLottoInfo(
-            winningNumbers,
-            LottoNumber[7]
-        )
+        val winningNumbers = WinningNumbers.from(listOf(1, 2, 3, 4, 5, 6), LottoNumber[7])
 
-        assertThat(lotto.checkWith(winningLottoInfo)).isEqualTo(LottoRank.SECOND)
+        assertThat(lotto.checkWith(winningNumbers)).isEqualTo(LottoRank.SECOND)
     }
 
     @Test

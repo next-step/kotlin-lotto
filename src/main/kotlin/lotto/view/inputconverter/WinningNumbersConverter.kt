@@ -1,18 +1,17 @@
 package lotto.view.inputconverter
 
 import lotto.domain.model.LottoNumber
-import lotto.domain.model.WinningNumbers
 
-object WinningNumbersConverter : InputConverter<WinningNumbers> {
+object WinningNumbersConverter : InputConverter<Set<LottoNumber>> {
     private const val DELIMITER = ", "
 
-    override fun convert(input: String): WinningNumbers {
+    override fun convert(input: String): Set<LottoNumber> {
         val numbers = input
             .split(DELIMITER)
             .map { stringNumber ->
                 LottoNumber[stringNumber.toInt()]
             }.toSet()
 
-        return WinningNumbers(numbers)
+        return numbers
     }
 }

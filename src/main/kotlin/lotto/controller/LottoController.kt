@@ -5,7 +5,6 @@ import lotto.domain.LottoYieldCalculator
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.RangeLottoFactory
 import lotto.domain.model.UserInputRequest
-import lotto.domain.model.WinningLottoInfo
 import lotto.domain.model.WinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -31,7 +30,7 @@ object LottoController {
 
         val winningNumbers = getWinningNumbers()
         val bonusBall = getBonusBall()
-        val lottoResult = lottos.checkWith(WinningLottoInfo(winningNumbers, bonusBall))
+        val lottoResult = lottos.checkWith(WinningNumbers(winningNumbers, bonusBall))
         OutputView.print(
             printable = lottoResult,
             outputConverter = LottoResultConverter
@@ -53,7 +52,7 @@ object LottoController {
         return InputView.receiveUserInput(userInputRequest)
     }
 
-    private fun getWinningNumbers(): WinningNumbers {
+    private fun getWinningNumbers(): Set<LottoNumber> {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_WINNING_NUMBERS,
             inputConverter = WinningNumbersConverter

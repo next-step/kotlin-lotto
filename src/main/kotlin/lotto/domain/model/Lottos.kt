@@ -2,13 +2,13 @@ package lotto.domain.model
 
 @JvmInline
 value class Lottos(val value: List<Lotto>) {
-    fun checkWith(winningLottoInfo: WinningLottoInfo): LottoResult {
-        return LottoResult.from(getLottoWinningMap(winningLottoInfo))
+    fun checkWith(winningNumbers: WinningNumbers): LottoResult {
+        return LottoResult.from(getLottoWinningMap(winningNumbers))
     }
 
-    private fun getLottoWinningMap(winningLottoInfo: WinningLottoInfo): Map<LottoRank, Int> {
+    private fun getLottoWinningMap(winningNumbers: WinningNumbers): Map<LottoRank, Int> {
         return value.map { lotto ->
-            lotto.checkWith(winningLottoInfo)
+            lotto.checkWith(winningNumbers)
         }.groupingBy { lottoRank ->
             lottoRank
         }.eachCount().filter { (lottoRank, _) ->

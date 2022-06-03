@@ -8,16 +8,16 @@ value class Lotto(val numbers: Set<LottoNumber>) {
         }
     }
 
-    fun checkWith(winningLottoInfo: WinningLottoInfo): LottoRank {
-        val (matchedNumbers, notMatchedNumbers) = matchNumberGroup(winningLottoInfo.numbers)
+    fun checkWith(winningNumbers: WinningNumbers): LottoRank {
+        val (matchedNumbers, notMatchedNumbers) = matchNumberGroup(winningNumbers.numbers)
 
         val numberOfMatches = NumberOfMatches(matchedNumbers.size)
-        val isBonusBallMatched = winningLottoInfo.bonusBall in notMatchedNumbers
+        val isBonusBallMatched = winningNumbers.bonusBall in notMatchedNumbers
 
         return LottoRank.of(numberOfMatches, isBonusBallMatched)
     }
 
-    private fun matchNumberGroup(winningNumbers: WinningNumbers): Pair<List<LottoNumber>, List<LottoNumber>> {
+    private fun matchNumberGroup(winningNumbers: Set<LottoNumber>): Pair<List<LottoNumber>, List<LottoNumber>> {
         fun Map<Boolean, List<LottoNumber>>.getNumbers(isMatched: Boolean): List<LottoNumber> {
             return get(isMatched) ?: listOf()
         }
