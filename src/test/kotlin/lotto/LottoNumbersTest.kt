@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.Fixtures.createSixLottoNumber
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -10,8 +11,8 @@ class LottoNumbersTest {
         assertThrows<IllegalArgumentException> { LottoNumbers(createSixLottoNumber(listOf(2, 10, 15, 22, 27, 36, 9))) }
     }
 
-    private fun createSixLottoNumber(numbers: List<Int>): List<LottoNumber> {
-        return numbers.map { LottoNumber.from(it) }
-            .toList()
+    @Test
+    fun `로또 번호 6자리가 중복되면 IllegalArgument 에러가 발생한다`() {
+        assertThrows<IllegalArgumentException> { LottoNumbers(createSixLottoNumber(listOf(2, 10, 3, 11, 5, 5))) }
     }
 }
