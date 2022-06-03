@@ -8,7 +8,7 @@ value class Lotto(val numbers: Set<LottoNumber>) {
         }
     }
 
-    fun intersectCount(other: Lotto): Int = (numbers intersect other.numbers).count()
+    fun getNumberOfMatches(other: Lotto): NumberOfMatches = NumberOfMatches((numbers intersect other.numbers).count())
 
     operator fun contains(lottoNumber: LottoNumber): Boolean = lottoNumber in numbers
 
