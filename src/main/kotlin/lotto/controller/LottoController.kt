@@ -9,9 +9,9 @@ import lotto.domain.model.UserInputRequest
 import lotto.domain.model.WinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
+import lotto.view.inputconverter.LottoConverter
 import lotto.view.inputconverter.LottoNumberConverter
 import lotto.view.inputconverter.StringToIntConverter
-import lotto.view.inputconverter.WinningNumbersConverter
 import lotto.view.outputconverter.LottoResultConverter
 import lotto.view.outputconverter.LottoYieldConverter
 import lotto.view.outputconverter.LottosConverter
@@ -56,7 +56,7 @@ object LottoController {
     private fun getWinningNumbers(): Lotto {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_WINNING_NUMBERS,
-            inputConverter = WinningNumbersConverter
+            inputConverter = LottoConverter
         )
 
         return InputView.receiveUserInput(userInputRequest)

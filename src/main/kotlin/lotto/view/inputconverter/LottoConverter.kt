@@ -3,7 +3,7 @@ package lotto.view.inputconverter
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
 
-object WinningNumbersConverter : InputConverter<Lotto> {
+object LottoConverter : InputConverter<Lotto> {
     private const val DELIMITER = ", "
 
     override fun convert(input: String): Lotto {
