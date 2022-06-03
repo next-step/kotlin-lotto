@@ -22,9 +22,13 @@ object InputView {
     }
 
     fun readCustomLottoNumbers(numberOfCustomLotto: Int): List<List<Int>> {
-        println(CUSTOM_LOTTO_NUMBERS_QUESTION)
+        if (numberOfCustomLotto > 0) {
+            println(CUSTOM_LOTTO_NUMBERS_QUESTION)
 
-        return (1..numberOfCustomLotto).map { readLottoNumbers("로또 번호") }
+            return (1..numberOfCustomLotto).map { readLottoNumbers("로또 번호") }
+        }
+
+        return emptyList()
     }
 
     fun readWinningNumbers(): List<Int> {
