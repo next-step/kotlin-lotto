@@ -11,19 +11,19 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("invalidCountNumbers")
     fun `Lotto 생성시 6개의 숫자가 오지 않으면 예외를 발생`(numbers: List<Int>) {
-        assertThrows<IllegalArgumentException>("중복없는 6개의 숫자가 아닙니다.") { Lotto(numbers) }
+        assertThrows<IllegalArgumentException>("중복없는 6개의 숫자가 아닙니다.") { Lotto(numbers.map { LottoNumber(it) }) }
     }
 
     @Test
     fun `Lotto 생성시 내부에 같은 숫자가 있다면 예외를 발생`() {
         val numbers: List<Int> = listOf(1, 2, 3, 4, 5, 5)
-        assertThrows<IllegalArgumentException>("중복없는 6개의 숫자가 아닙니다.") { Lotto(numbers) }
+        assertThrows<IllegalArgumentException>("중복없는 6개의 숫자가 아닙니다.") { Lotto(numbers.map { LottoNumber(it) }) }
     }
 
     @ParameterizedTest
     @MethodSource("validNumbers")
     fun `Lotto 생성시 전달받은 리스트 정렬`(numbers: List<Int>) {
-        val lotto: Lotto = Lotto(numbers)
+        val lotto: Lotto = Lotto(numbers.map { LottoNumber(it) })
 
         val expected = setOf(1, 2, 3, 4, 5, 6)
         assertThat(lotto.numbers).isEqualTo(expected)
@@ -32,8 +32,8 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("comparisons")
     fun `인자로 전달받은 comparison(lotto)와 자신을 비교해 일치하는 갯수를 반환`(comparison: List<Int>, expected: Int) {
-        val lotto: Lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val target: Lotto = Lotto(comparison)
+        val lotto: Lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val target: Lotto = Lotto(comparison.map { LottoNumber(it) })
         val actual: Int = lotto.getSameCount(target)
 
         assertThat(actual).isEqualTo(expected)

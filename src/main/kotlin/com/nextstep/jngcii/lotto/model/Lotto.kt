@@ -1,7 +1,6 @@
 package com.nextstep.jngcii.lotto.model
 
-class Lotto(_numbers: List<Int>) {
-    private val lottoNumbers = _numbers.map { LottoNumber(it) }
+class Lotto(lottoNumbers: List<LottoNumber>) {
     val numbers = lottoNumbers
         .map { it.value }
         .toSortedSet()
@@ -13,6 +12,8 @@ class Lotto(_numbers: List<Int>) {
     fun getSameCount(comparison: Lotto): Int {
         return numbers.intersect(comparison.numbers).count()
     }
+
+    fun contains(bonusNumber: BonusNumber) = numbers.contains(bonusNumber.value)
 
     companion object {
         private const val LOTTO_SIZE = 6

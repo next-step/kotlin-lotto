@@ -17,6 +17,11 @@ object InputValidator {
         }
     }
 
+    fun validateInputNumber(input: String?): Int? {
+        val value = input.checkIsNull() ?: return null
+        return value.checkIsIntAndTransform()
+    }
+
     private fun String.checkIsIntAndTransform() =
         runCatching {
             this.trim().toInt()

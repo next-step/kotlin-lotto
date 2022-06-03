@@ -9,7 +9,10 @@ object LottoMachine {
 
     fun get(count: Int): List<Lotto> {
         return List(count) {
-            val numbers = lottoBox.shuffled().take(LOTTO_COUNT)
+            val numbers = lottoBox
+                .shuffled()
+                .take(LOTTO_COUNT)
+                .map { LottoNumber(it) }
             Lotto(numbers)
         }
     }
