@@ -10,8 +10,6 @@ data class WinningNumbers(
         }
     }
 
-    operator fun contains(lottoNumber: LottoNumber): Boolean = lottoNumber in numbers.numbers
-
     fun checkWith(lotto: Lotto): LottoRank {
         val numberOfMatches = lotto.getNumberOfMatches(numbers)
         val isBonusBallMatched = isBonusBallMatched(lotto)

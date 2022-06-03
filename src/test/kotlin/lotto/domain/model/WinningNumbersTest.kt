@@ -24,14 +24,6 @@ class WinningNumbersTest {
     }
 
     @Test
-    fun `in 키워드를 통해 LottoNumber가 WinningNumbers에 포함되는지 확인할 수 있다`() {
-        val winningNumbers = WinningNumbers.from(Lotto.from(1, 2, 3, 4, 5, 6), LottoNumber[7])
-
-        assertThat(LottoNumber[1] in winningNumbers).isEqualTo(true)
-        assertThat(LottoNumber[8] in winningNumbers).isEqualTo(false)
-    }
-
-    @Test
     fun `당첨 번호와 보너스볼 번호가 중복될 시 IllegalArgumentException이 발생한다`() {
         assertThrows<IllegalArgumentException> {
             val lotto = Lotto.from(1, 2, 3, 4, 5, 6)
