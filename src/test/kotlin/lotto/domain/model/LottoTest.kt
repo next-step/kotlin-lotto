@@ -36,22 +36,6 @@ class LottoTest {
     }
 
     @Test
-    fun `default를 통해 테스트 등에서 쓰일 기본 Lotto 객체를 얻을 수 있다`() {
-        val expected = Lotto(
-            setOf(
-                LottoNumber[1],
-                LottoNumber[2],
-                LottoNumber[3],
-                LottoNumber[4],
-                LottoNumber[5],
-                LottoNumber[6]
-            )
-        )
-
-        assertThat(Lotto.default()).isEqualTo(expected)
-    }
-
-    @Test
     fun `intersectCount를 통해 두 로또가 몇 개의 번호가 겹치는지 확인할 수 있다`() {
         val lotto1 = Lotto.from(1, 2, 3, 4, 5, 7)
         val lotto2 = Lotto.from(1, 2, 3, 4, 5, 6)
