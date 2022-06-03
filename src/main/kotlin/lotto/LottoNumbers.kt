@@ -1,6 +1,6 @@
 package lotto
 
-class LottoNumbers(
+data class LottoNumbers(
     private val lottoNumbers: List<LottoNumber>
 ) {
 
