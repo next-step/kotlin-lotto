@@ -2,18 +2,25 @@ package lotto.domain
 
 import lotto.domain.dto.LottoNumber
 
-class LottoStore(insertAmount: Int, manualCount: Int) {
+class LottoStore(insertAmount: Int, manualLottoList: List<LottoNumber>) {
 
     init {
-        require(insertAmount / LOTTO_UNIT_PRICE >= manualCount) {
+        require(insertAmount / LOTTO_UNIT_PRICE >= manualLottoList.count()) {
             "로또 구매 가능 갯수보다 수동 구매 갯수가 더 많습니다."
         }
     }
 
-    val purchasable = insertAmount / LOTTO_UNIT_PRICE - manualCount
+    val autoPurchasableCount = insertAmount / LOTTO_UNIT_PRICE - manualLottoList.count()
+
+    val manualPurchasedCount = manualLottoList.count()
+
+    private val manualLottoNumbers = manualLottoList
 
     fun purchase(): List<LottoNumber> {
-        return List(this.purchasable) { LottoNumberGenerator.autoGenerate() }
+        val lottoList = mutableListOf<LottoNumber>()
+        lottoList.addAll(manualLottoNumbers)
+        repeat(this.autoPurchasableCount) { lottoList.add(LottoNumberGenerator.autoGenerate()) }
+        return lottoList.toList()
     }
 
     companion object {

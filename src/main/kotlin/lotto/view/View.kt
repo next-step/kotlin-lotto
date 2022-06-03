@@ -11,8 +11,8 @@ object View {
     }
 
     fun purchasableLottoCount(lottoStore: LottoStore) {
-        lottoStore.purchasable.also {
-            println("${it}개를 구매했습니다.")
+        lottoStore.also {
+            println("수동으로 ${it.manualPurchasedCount}장, 자동으로 ${it.autoPurchasableCount}개 를 구매했습니다.")
         }
     }
 
