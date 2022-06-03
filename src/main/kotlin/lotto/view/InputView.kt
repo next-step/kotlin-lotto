@@ -2,6 +2,7 @@ package lotto.view
 
 object InputView {
     private const val TOTAL_PAYMENT_QUESTION = "구입금액을 입력해 주세요."
+    private const val NUMBER_OF_CUSTOM_LOTTO_QUESTION = "수동으로 구매할 로또 수를 입력해 주세요."
     private const val WINNING_NUMBERS_QUESTION = "지난 주 당첨 번호를 입력해 주세요."
     private const val BONUS_BALL_NUMBER_QUESTION = "보너스 볼을 입력해 주세요."
 
@@ -10,6 +11,13 @@ object InputView {
 
         return readln()
             .getPositiveNumber("구입금액")
+    }
+
+    fun readNumberOfCustomLotto(): Int {
+        println(NUMBER_OF_CUSTOM_LOTTO_QUESTION)
+
+        return readln()
+            .getPositiveNumber("수동으로 구매할 로또 수")
     }
 
     fun readWinningNumbers(): List<Int> {
