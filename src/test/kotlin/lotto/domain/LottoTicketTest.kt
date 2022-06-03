@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.enum.Priority
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -29,5 +30,13 @@ class LottoTicketTest {
             LottoTicket(LottoNumber(listOf(1, 2, 3, 4, 5, -1)))
         }
             .isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @Test
+    fun `로또는 당첨번호와 몇 개 일치하는지 정보를 알 수 있다`() {
+        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
+        val lotto = LottoTicket(LottoNumber(listOf(4, 5, 6, 7, 8, 9)))
+        lotto.contains(10)
+        assertThat(lotto.priority(winningTicket)).isEqualTo(Priority.FIFTH)
     }
 }

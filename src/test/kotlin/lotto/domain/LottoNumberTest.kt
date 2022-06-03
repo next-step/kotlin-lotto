@@ -18,4 +18,18 @@ class LottoNumberTest {
     fun `로또 번호는 정렬되어 있다`() {
         assertThat(LottoNumber(listOf(6, 5, 1, 3, 2, 4)).numbers).isEqualTo(setOf(1, 2, 3, 4, 5, 6))
     }
+
+    @Test
+    fun `보너스 볼을 추가할 수 있다`() {
+        val lottoNumber = LottoNumber(listOf(6, 5, 1, 3, 2, 4))
+        lottoNumber.contains(10)
+        assertThat(lottoNumber.bonusNumber).isEqualTo(10)
+    }
+
+    @Test
+    fun `로또 번호는 보너스 볼을 포함하는지 알 수 있다`() {
+        val lottoNumber = LottoNumber(listOf(6, 5, 1, 3, 2, 4))
+        lottoNumber.contains(15)
+        assertThat(lottoNumber.hasBonusNumber(15)).isEqualTo(true)
+    }
 }

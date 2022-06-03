@@ -38,25 +38,30 @@ class LottoCommitteeTest {
     fun `3개를 맞춘 통계를 구할 수 있다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
         val lottos = Lottos(listOf(LottoTicket(LottoNumber(listOf(4, 5, 6, 7, 8, 9)))))
+
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
-        assertThat(statistics[3]).isEqualTo(1)
+
+        assertThat(statistics[Priority.FIFTH]).isEqualTo(1)
     }
 
     @Test
     fun `6개를 맞춘 통계를 구할 수 있다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
         val lottos = Lottos(listOf(LottoTicket(LottoNumber(winningTicket.numbers.toList()))))
+
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
-        assertThat(statistics[6]).isEqualTo(1)
+
+        assertThat(statistics[Priority.FIRST]).isEqualTo(1)
     }
 
     @Test
     fun `3개를 맞춘 수익률을 구할 수 있다`() {
         val matchCount = 5
         val price = 15_000
-
-        val returnRate = LottoCommittee.calculateReturnRate(price, mapOf(3 to matchCount, 4 to 0, 5 to 0, 6 to 0))
+        val priorities = mapOf(Priority.FIFTH to matchCount, Priority.FOURTH to 0, Priority.THIRD to 0, Priority.FIRST to 0)
         val expect = (Priority.getPrice(3)) * matchCount
+
+        val returnRate = LottoCommittee.calculateReturnRate(price, priorities)
 
         assertThat(returnRate).isEqualTo(expect / price.toDouble())
     }
@@ -65,9 +70,21 @@ class LottoCommitteeTest {
     fun `6개를 맞춘 수익률을 구할 수 있다`() {
         val matchCount = 1
         val price = 1_000
-
-        val returnRate = LottoCommittee.calculateReturnRate(price, mapOf(3 to 0, 4 to 0, 5 to 0, 6 to matchCount))
+        val priorities = mapOf(Priority.FOURTH to 0, Priority.THIRD to 0, Priority.SECOND to 0, Priority.FIRST to matchCount)
         val expect = Priority.getPrice(6) * matchCount
+
+        val returnRate = LottoCommittee.calculateReturnRate(price, priorities)
+
         assertThat(returnRate).isEqualTo(expect / 1000.toDouble())
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1", "a"])
+    fun `보너스 번호에 양의 정수가 아닌 값이 들어가면 예외가 발생한다`(input: String) {
+        assertThatThrownBy {
+            LottoCommittee.chooseBonusNumber(input, LottoTicket(LottoNumber()))
+        }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("로또 번호가 유효 범위내에 있지 않습니다.")
     }
 }

@@ -8,37 +8,37 @@ object LottoCommittee {
     }
 
     fun chooseBonusNumber(input: String, winningTicket: LottoTicket) {
-        winningTicket.addBonusNumber(input.toInt())
+        winningTicket.contains(input.toIntOrNull())
     }
 
     fun calculateStatistics(
         lottos: Lottos,
         winningTicket: LottoTicket
-    ): Map<Int, Int> {
+    ): Map<Priority, Int> {
         val statistics = initStatistics()
         for (ticket in lottos.tickets) {
-            statistics.merge(ticket.matchCount(winningTicket), 1, Int::plus)
+            statistics.merge(ticket.priority(winningTicket), 1, Int::plus)
         }
         return statistics
     }
 
-    private fun initStatistics(): MutableMap<Int, Int> {
-        val statistics = mutableMapOf<Int, Int>()
+    private fun initStatistics(): MutableMap<Priority, Int> {
+        val statistics = mutableMapOf<Priority, Int>()
         for (priority in Priority.values()) {
-            statistics[priority.matchCount] = 0
+            statistics[priority] = 0
         }
         return statistics
     }
 
-    fun calculateReturnRate(price: Int, statistics: Map<Int, Int>): Double {
+    fun calculateReturnRate(price: Int, statistics: Map<Priority, Int>): Double {
         return (calculateReturnPrice(statistics) / price.toDouble())
     }
 
-    private fun calculateReturnPrice(statistics: Map<Int, Int>): Int {
+    private fun calculateReturnPrice(statistics: Map<Priority, Int>): Int {
         var returnPrice = 0
 
-        for ((matchNumber, matchCount) in statistics) {
-            returnPrice += matchCount * Priority.getPrice(matchNumber)
+        for ((priority, matchCount) in statistics) {
+            returnPrice += matchCount * Priority.getPrice(priority.matchCount)
         }
 
         return returnPrice

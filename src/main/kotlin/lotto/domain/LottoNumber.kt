@@ -2,6 +2,8 @@ package lotto.domain
 
 class LottoNumber(private val seeds: List<Int>? = null) {
     val numbers: MutableSet<Int>
+    var bonusNumber: Int = 0
+        private set
 
     init {
         if (seeds != null) {
@@ -16,8 +18,13 @@ class LottoNumber(private val seeds: List<Int>? = null) {
             .toMutableSet()
     }
 
-    fun addBonusNumber(number: Int) {
-        numbers.add(number)
+    fun hasBonusNumber(_bonusNumber: Int): Boolean {
+        return bonusNumber == _bonusNumber
+    }
+
+    fun contains(number: Int?) {
+        require(number != null && number in LOTTO_NUMBER_RANGE) { "로또 번호가 유효 범위내에 있지 않습니다." }
+        bonusNumber = number
     }
 
     private fun validate(numbers: List<Int>) {

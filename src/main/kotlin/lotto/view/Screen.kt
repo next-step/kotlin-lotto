@@ -4,24 +4,24 @@ import lotto.domain.enum.Priority
 
 object Screen {
     fun display(
-        statistics: Map<Int, Int>,
+        statistics: Map<Priority, Int>,
         returnRate: Double
     ) {
         displayStatistics(statistics)
         displayReturnRate(returnRate)
     }
 
-    private fun displayStatistics(statistics: Map<Int, Int>) {
+    private fun displayStatistics(statistics: Map<Priority, Int>) {
         println("당첨 통계")
         println("---------")
 
-        for ((matchNumber, matchCount) in statistics) {
-            displayStatistic(matchNumber, matchCount)
+        for ((priority, count) in statistics) {
+            displayStatistic(priority.matchCount, count)
         }
     }
 
-    private fun displayStatistic(matchNumber: Int, matchCount: Int) {
-        println("${matchNumber}개 일치 (${Priority.getPrice(matchNumber)}원)- ${matchCount}개")
+    private fun displayStatistic(matchNumber: Int, count: Int) {
+        println("${matchNumber}개 일치 (${Priority.getPrice(matchNumber)}원)- ${count}개")
     }
 
     private fun displayReturnRate(returnRate: Double) {
