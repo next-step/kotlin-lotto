@@ -16,4 +16,12 @@ data class LottoNumbers(
             throw IllegalArgumentException("중복된 숫자가 존재합니다.")
         }
     }
+
+    fun matches(otherNumbers: LottoNumbers): Int {
+        return lottoNumbers.count { otherNumbers.match(it) }
+    }
+
+    private fun match(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(lottoNumber)
+    }
 }

@@ -17,7 +17,7 @@ class LottoMachine {
         while (numbers.size < 6) {
             numbers.add((MINIMUM_NUMBER..MAXIMUM_NUMBER).random())
         }
-        return numbers.toList()
+        return numbers.shuffled().toList()
     }
 
     companion object {

@@ -27,7 +27,7 @@ class LottoStoreTest {
     )
     fun `로또 구입 금액은 1장에 1000원으로 계산된 만큼의 로또가 발급된다`(amount: Int, count: Int) {
         val resultCount = lottoStore.buy(amount)
-        assertThat(resultCount).isEqualTo(count)
+        assertThat(resultCount.size).isEqualTo(count)
     }
 
     @ParameterizedTest(name = "구입 금액이 {0} 인 음수일 경우 IllegalArgumentException 예외가 발생한다.")
