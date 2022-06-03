@@ -8,7 +8,7 @@ value class Lottos(val value: List<Lotto>) {
 
     private fun getLottoWinningMap(winningNumbers: WinningNumbers): Map<LottoRank, Int> {
         return value.map { lotto ->
-            lotto.checkWith(winningNumbers)
+            winningNumbers.checkWith(lotto)
         }.groupingBy { lottoRank ->
             lottoRank
         }.eachCount().filter { (lottoRank, _) ->

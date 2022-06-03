@@ -28,19 +28,11 @@ class LottoTest {
     }
 
     @Test
-    fun `checkWith를 통해 WinningNumbers를 받아 당첨 순위를 확인할 수 있다`() {
-        val lotto = Lotto.from(1, 2, 3, 4, 5, 7)
-        val winningNumbers = WinningNumbers.from(Lotto.from(1, 2, 3, 4, 5, 6), LottoNumber[7])
-
-        assertThat(lotto.checkWith(winningNumbers)).isEqualTo(LottoRank.SECOND)
-    }
-
-    @Test
     fun `getNumberOfMatches를 통해 두 로또가 몇 개의 번호가 겹치는지 확인할 수 있다`() {
         val lotto1 = Lotto.from(1, 2, 3, 4, 5, 7)
         val lotto2 = Lotto.from(1, 2, 3, 4, 5, 6)
 
-        assertThat(lotto1.getNumberOfMatches(lotto2)).isEqualTo(5)
+        assertThat(lotto1.getNumberOfMatches(lotto2)).isEqualTo(NumberOfMatches(5))
     }
 
     @Test
