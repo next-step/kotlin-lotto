@@ -5,7 +5,10 @@ class PurchaseRecord(val lottoList: List<Lotto>) {
         return lottoList.mapNotNull { winner.check(it) }
     }
 
-    fun concat(that: PurchaseRecord): PurchaseRecord {
-        return PurchaseRecord(lottoList + that.lottoList)
+    companion object {
+        fun purchase(manualLottos: List<Lotto>, totalLottoCount: Int): PurchaseRecord {
+            val autoCount = totalLottoCount - manualLottos.size
+            return PurchaseRecord(Lotto.getAutoLotto(autoCount) + manualLottos)
+        }
     }
 }

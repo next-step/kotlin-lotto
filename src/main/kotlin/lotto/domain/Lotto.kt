@@ -6,6 +6,9 @@ value class Lotto(private val lottoNumbers: List<LottoNumber>) {
     constructor(randomNumberGenerator: RandomNumberGenerator) :
         this(randomNumberGenerator.getRandomNumbers(LOTTO_NUMBER_RANGE, LOTTO_NUMBER_COUNT).map { LottoNumber(it) })
 
+    constructor(vararg i: Int) :
+        this(i.asList().map { LottoNumber(it) })
+
     init {
         require(lottoNumbers.distinct().size == LOTTO_NUMBER_COUNT) {
             "로또는 여섯개의 번호를 가져야 합니다."

@@ -11,9 +11,7 @@ class LottoController {
     fun run() {
         val numberOfLotto = getNumberOfLotto()
         val manualPurchaseRecord = getManualLottos(numberOfLotto)
-        val autoPurchaseRecord = getAutoLottos(numberOfLotto - manualPurchaseRecord.lottoList.size)
-
-        val purchaseRecord = manualPurchaseRecord.concat(autoPurchaseRecord)
+        val purchaseRecord = PurchaseRecord.purchase(manualPurchaseRecord, numberOfLotto)
         ResultView.printPurchaseRecord(purchaseRecord)
 
         val winnerNumbers = InputView.getWinner()
@@ -21,13 +19,9 @@ class LottoController {
         ResultView.printWinnerStat(winnerStat)
     }
 
-    private fun getAutoLottos(count: Int): PurchaseRecord {
-        return PurchaseRecord(Lotto.getAutoLotto(count))
-    }
-
-    private fun getManualLottos(limit: Int): PurchaseRecord {
+    private fun getManualLottos(limit: Int): List<Lotto> {
         val numOfManual = InputView.getNumberOfManual(limit)
-        return PurchaseRecord(InputView.getManualLotto(numOfManual))
+        return InputView.getManualLotto(numOfManual)
     }
 
     private fun getNumberOfLotto(): Int {

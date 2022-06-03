@@ -1,8 +1,8 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class PaymentTest {
@@ -19,9 +19,9 @@ class PaymentTest {
             .isInstanceOf(IllegalArgumentException::class.java)
     }
 
-    @Test
-    fun `구입 가능 로또 수를 반화한다`() {
-        Assertions.assertThat(Payment(1000).getAvailableNumberOfLotto()).isEqualTo(1)
-        Assertions.assertThat(Payment(9999).getAvailableNumberOfLotto()).isEqualTo(9)
+    @ParameterizedTest
+    @CsvSource("1000,1", "9999,9", "999999,999",)
+    fun `구입 가능 로또 수를 반화한다`(cash: Int, numOfLottos: Int) {
+        Assertions.assertThat(Payment(cash).getAvailableNumberOfLotto()).isEqualTo(numOfLottos)
     }
 }
