@@ -8,9 +8,9 @@ class LottosTest {
     @Test
     fun `Lottos는 발급받은 로또 번호들을 보관한다`() {
         val lottoList = listOf(
-            Lotto.from(listOf(1, 2, 3, 4, 5, 6)),
-            Lotto.from(listOf(11, 12, 13, 14, 15, 16)),
-            Lotto.from(listOf(12, 22, 32, 24, 25, 26))
+            Lotto.from(1, 2, 3, 4, 5, 6),
+            Lotto.from(11, 12, 13, 14, 15, 16),
+            Lotto.from(12, 22, 32, 24, 25, 26)
         )
 
         val lottos = Lottos(lottoList)
@@ -22,11 +22,11 @@ class LottosTest {
     fun `checkWith를 통해 당첨 번호를 받아 LottoResult를 반환한다`() {
         val lottos = Lottos(
             listOf(
-                Lotto.from(listOf(8, 21, 23, 41, 42, 43)),
-                Lotto.from(listOf(8, 21, 23, 41, 42, 44)),
-                Lotto.from(listOf(8, 21, 23, 41, 43, 44)),
-                Lotto.from(listOf(8, 21, 23, 41, 1, 2)),
-                Lotto.from(listOf(8, 21, 23, 1, 2, 3))
+                Lotto.from(8, 21, 23, 41, 42, 43),
+                Lotto.from(8, 21, 23, 41, 42, 44),
+                Lotto.from(8, 21, 23, 41, 43, 44),
+                Lotto.from(8, 21, 23, 41, 1, 2),
+                Lotto.from(8, 21, 23, 1, 2, 3)
             )
         )
 
@@ -48,7 +48,7 @@ class LottosTest {
             2,
             object : LottoFactory {
                 override fun create(): Lotto {
-                    return Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+                    return Lotto.from(1, 2, 3, 4, 5, 6)
                 }
             }
         )

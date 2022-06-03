@@ -12,7 +12,7 @@ class LottoBendingMachineTest {
             13500,
             object : LottoFactory {
                 override fun create(): Lotto {
-                    return Lotto.from(listOf(1, 2, 3, 4, 5, 6))
+                    return Lotto.from(1, 2, 3, 4, 5, 6)
                 }
             }
         )
