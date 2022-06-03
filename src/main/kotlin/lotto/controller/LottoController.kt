@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.LottoBendingMachine
 import lotto.domain.LottoYieldCalculator
+import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.RangeLottoFactory
 import lotto.domain.model.UserInputRequest
@@ -52,7 +53,7 @@ object LottoController {
         return InputView.receiveUserInput(userInputRequest)
     }
 
-    private fun getWinningNumbers(): Set<LottoNumber> {
+    private fun getWinningNumbers(): Lotto {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_WINNING_NUMBERS,
             inputConverter = WinningNumbersConverter

@@ -19,13 +19,13 @@ value class Lotto(val numbers: Set<LottoNumber>) {
         return LottoRank.of(numberOfMatches, isBonusBallMatched)
     }
 
-    private fun matchNumberGroup(winningNumbers: Set<LottoNumber>): Pair<List<LottoNumber>, List<LottoNumber>> {
+    private fun matchNumberGroup(winningNumbers: Lotto): Pair<List<LottoNumber>, List<LottoNumber>> {
         fun Map<Boolean, List<LottoNumber>>.getNumbers(isMatched: Boolean): List<LottoNumber> {
             return get(isMatched) ?: listOf()
         }
 
         val matchNumberGroup = numbers.groupBy { lottoNumber ->
-            lottoNumber in winningNumbers
+            lottoNumber in winningNumbers.numbers
         }
 
         return matchNumberGroup.getNumbers(true) to matchNumberGroup.getNumbers(false)
