@@ -36,20 +36,32 @@ class LottoTicketTest : DescribeSpec({
     }
 
     describe("isMatch 메서드") {
-        val givenWinningNumber: Set<Int> = setOf(1, 2, 3, 4, 5, 6)
-        val givenLottoTicket = LottoTicket(setOf(1, 2, 3, 11, 22, 33))
+        context("보너스 매치 타입일 때, ") {
+            val givenLottoTicket = LottoTicket(setOf(1, 2, 3, 4, 5, 33))
 
-        context("매치 카윤트가 일치하면") {
-            it("true 를 반환한다.") {
-                val givenMatchCount: Int = 3
-                givenLottoTicket.isMatch(givenMatchCount, givenWinningNumber) shouldBe true
+            it("매치 카운트가 일치하면 true 를 반환한다.") {
+                val givenBonusNumber: Int = 33
+                val givenWinningNumber = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), givenBonusNumber)
+                givenLottoTicket.isMatch(LottoMatchType.FIVE_BONUS, givenWinningNumber) shouldBe true
+            }
+
+            it(" 매치 카운트가 불일치하면 false 를 반환한다.") {
+                val givenBonusNumber: Int = 7
+                val givenWinningNumber = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), givenBonusNumber)
+                givenLottoTicket.isMatch(LottoMatchType.FIVE_BONUS, givenWinningNumber) shouldBe false
             }
         }
 
-        context("매치 카윤트가 불일치하면") {
-            it("false 를 반환한다.") {
-                val givenMatchCount: Int = 2
-                givenLottoTicket.isMatch(givenMatchCount, givenWinningNumber) shouldBe false
+        context("보너스 매치 타입이 아닐 때") {
+            val givenLottoTicket = LottoTicket(setOf(1, 2, 3, 11, 22, 33))
+            val givenWinningNumber = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), 1)
+
+            it("매치 카운트가 일치하면 true 를 반환한다.") {
+                givenLottoTicket.isMatch(LottoMatchType.THREE, givenWinningNumber) shouldBe true
+            }
+
+            it("매치 카운트가 불일치하면 false 를 반환한다.") {
+                givenLottoTicket.isMatch(LottoMatchType.SIX, givenWinningNumber) shouldBe false
             }
         }
     }

@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.collection.LottoTickets
 
 class LottoStoreTest : DescribeSpec({
     describe("buyLotto 메서드 테스트") {

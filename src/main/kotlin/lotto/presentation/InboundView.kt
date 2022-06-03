@@ -17,15 +17,27 @@ class InboundView {
     fun inputWinningNumber(): LottoWinningNumber {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
 
-        val winningNumber: String = readln()
-        require(winningNumber.isNotBlank()) { "공백을 입력하셨습니다." }
+        val inputWinningNumber: String = readln()
+        require(inputWinningNumber.isNotBlank()) { "공백을 입력하셨습니다." }
 
-        return LottoWinningNumber(
-            winningNumber.toTokenize()
-                .checkUniqueToken()
-                .toMapInt()
-                .toSet()
-        )
+        val winningNumbers = inputWinningNumber.toTokenize()
+            .checkUniqueToken()
+            .toMapInt()
+            .toSet()
+
+        val bonusNumber: Int = inputBonusLottoNumber()
+
+        return LottoWinningNumber(winningNumbers, bonusNumber)
+    }
+
+    private fun inputBonusLottoNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+
+        val inputBonusNumber: String = readln()
+        require(inputBonusNumber.isNotBlank()) { "공백을 입력하셨습니다." }
+
+        return runCatching { inputBonusNumber.toInt() }
+            .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
     }
 
     private fun String.toTokenize(): List<String> {

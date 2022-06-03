@@ -2,8 +2,8 @@ package lotto
 
 import lotto.domain.LottoRewardCalculator
 import lotto.domain.LottoStore
+import lotto.domain.LottoTickets
 import lotto.domain.LottoWinningNumber
-import lotto.domain.collection.LottoTickets
 import lotto.presentation.InboundView
 import lotto.presentation.OutboundView
 
@@ -20,5 +20,5 @@ fun main() {
     val lottoRewardCalculator = LottoRewardCalculator(lottoTickets, winningNumber)
 
     outboundView.printLottoMatchCount(lottoTickets, winningNumber)
-    outboundView.printRewardRate(lottoRewardCalculator, purchaseAmount, LottoStore.getLottoTicketPrice())
+    outboundView.printRewardRate(lottoRewardCalculator, purchaseAmount, LottoStore.LOTTO_TICKET_PRICE)
 }

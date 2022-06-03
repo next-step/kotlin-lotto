@@ -1,8 +1,5 @@
 package lotto.domain
 
-import lotto.domain.collection.LottoTickets
-import lotto.domain.type.LottoMatchType
-
 class LottoRewardCalculator(
     private val lottoTickets: LottoTickets,
     private val winningNumbers: LottoWinningNumber
@@ -17,7 +14,7 @@ class LottoRewardCalculator(
 
     private fun calculateReward(): Double {
         return LottoMatchType.values()
-            .sumOf { lottoTickets.getMatchCount(it.matchCount, winningNumbers) * it.reward }
+            .sumOf { lottoTickets.getMatchCount(it, winningNumbers) * it.reward }
             .toDouble()
     }
 }

@@ -9,8 +9,20 @@ class LottoTicket(val numbers: Set<Int>) {
         }
     }
 
-    fun isMatch(matchCount: Int, winningNumber: Set<Int>): Boolean {
+    fun isMatch(matchType: LottoMatchType, winningNumber: LottoWinningNumber): Boolean {
+        if (matchType.isBonus) {
+            return compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers) &&
+                isContainBonusNumber(winningNumber.bonusNumber)
+        }
+        return compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers)
+    }
+
+    private fun compareMatchCount(matchCount: Int, winningNumber: Set<Int>): Boolean {
         return numbers.intersect(winningNumber).size == matchCount
+    }
+
+    private fun isContainBonusNumber(bonusNumber: Int): Boolean {
+        return numbers.contains(bonusNumber)
     }
 
     companion object {

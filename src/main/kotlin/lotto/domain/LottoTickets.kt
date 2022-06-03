@@ -1,7 +1,4 @@
-package lotto.domain.collection
-
-import lotto.domain.LottoTicket
-import lotto.domain.LottoWinningNumber
+package lotto.domain
 
 data class LottoTickets(
     private val lottoTickets: List<LottoTicket>
@@ -16,7 +13,7 @@ data class LottoTickets(
         return lottoTickets
     }
 
-    fun getMatchCount(matchCount: Int, winningNumbers: LottoWinningNumber): Int {
-        return lottoTickets.count() { lottoTicket -> lottoTicket.isMatch(matchCount, winningNumbers.numbers) }
+    fun getMatchCount(matchType: LottoMatchType, winningNumbers: LottoWinningNumber): Int {
+        return lottoTickets.count() { lottoTicket -> lottoTicket.isMatch(matchType, winningNumbers) }
     }
 }

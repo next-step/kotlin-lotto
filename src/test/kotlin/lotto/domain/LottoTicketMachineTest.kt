@@ -4,7 +4,6 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldBeSorted
 import io.kotest.matchers.shouldBe
-import lotto.domain.collection.LottoTickets
 
 class LottoTicketMachineTest : DescribeSpec({
     describe("generate 메서드 테스트") {
