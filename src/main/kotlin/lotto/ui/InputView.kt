@@ -13,7 +13,7 @@ class InputView {
         return InputParser.parse(readln())
     }
 
-    fun getBonusLottoNumber():Int{
+    fun getBonusLottoNumber(): Int {
         println(MESSAGE_REQUIRE_BONUS_LOTTO_NUMBER)
         return requireNotNull(readln().toIntOrNull())
     }

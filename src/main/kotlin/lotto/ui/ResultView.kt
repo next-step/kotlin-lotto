@@ -23,8 +23,15 @@ class ResultView {
 
     fun printWinningStatistics(result: Map<Winning, Int>) {
         result.forEach { (winning, count) ->
-            println("${winning.matchCount}개 일치 (${winning.winningAmount}원) - ${count}개")
+            println("${winning.print()} (${winning.winningAmount}원)- ${count}개")
         }
+    }
+
+    private fun Winning.print(): String {
+        if (this.isMatchBonusNumber) {
+            return "${matchCount}개 일치, 보너스 볼 일치"
+        }
+        return "${matchCount}개 일치"
     }
 
     fun printYield(yieldRate: Double) {
