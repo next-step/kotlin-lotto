@@ -11,7 +11,7 @@ class YieldCalculatorTest {
     @ParameterizedTest
     @CsvSource("1000, 5.0", "2000, 2.5", "4000, 1.25")
     internal fun `수익률 계산이 정확하게 동작한다`(money: Int, resultYield: Double) {
-        val lists = LottoResults(listOf(LottoResult(Prize.FIFTH, 1)))
+        val lists = LottoResults(listOf(Prize.FIFTH))
         assertThat(YieldCalculator.calculateYield(money, lists)).isEqualTo(resultYield)
     }
 }

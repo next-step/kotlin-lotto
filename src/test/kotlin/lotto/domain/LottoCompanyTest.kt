@@ -29,7 +29,7 @@ class LottoCompanyTest {
         val ticket = LottoTicket.of(winningNumbers.split(", ").map { it.toInt() })
         assertThat(
             LottoCompany.of(winningNumbers, bonusNumber)
-                .convertTicketsToLottoResults(LottoTickets(listOf(ticket))).results.last().count
+                .convertTicketsToLottoResults(LottoTickets(listOf(ticket))).getPrizeCount(Prize.FIRST)
         ).isEqualTo(1)
     }
 

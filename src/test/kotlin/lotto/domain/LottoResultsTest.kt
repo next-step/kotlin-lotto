@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test
 class LottoResultsTest {
     @Test
     internal fun `5등이 2장 당첨된 로또 결과에서 상금을 잘 뽑아낸다`() {
-        val lottoResults = LottoResults(listOf(LottoResult(Prize.FIFTH, 2)))
+        val lottoResults = LottoResults(listOf(Prize.FIFTH, Prize.FIFTH))
         assertThat(lottoResults.getReward()).isEqualTo(10000)
     }
 
     @Test
     internal fun `5등이 2장 당첨된 로또 결과에서 당첨갯수를 잘 뽑아낸다`() {
-        val lottoResults = LottoResults(listOf(LottoResult(Prize.FIFTH, 2)))
+        val lottoResults = LottoResults(listOf(Prize.FIFTH, Prize.FIFTH))
         assertThat(lottoResults.getPrizeCount(Prize.FIFTH)).isEqualTo(2)
     }
 }

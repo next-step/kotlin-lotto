@@ -1,5 +1,6 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -22,5 +23,12 @@ class LottoTicketTest {
         assertThrows<IllegalArgumentException> {
             LottoTicket.of(source.split(", ").map { it.toInt() })
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1, 2, 3, 4, 5, 6"])
+    internal fun `로또번호와 당첨번호가 같을경우 6을 반환한다`(source: String) {
+        val ticketNumbers = LottoTicket.of(source.split(", ").map { it.toInt() })
+        assertThat(ticketNumbers.getMatchCount(ticketNumbers)).isEqualTo(6)
     }
 }
