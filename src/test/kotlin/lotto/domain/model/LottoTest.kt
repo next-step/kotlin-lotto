@@ -42,4 +42,12 @@ class LottoTest {
 
         assertThat(lotto1.intersectCount(lotto2)).isEqualTo(5)
     }
+
+    @Test
+    fun `in 키워드를 통해 LottoNumber가 Lotto에 포함되는지 확인할 수 있다`() {
+        val winningNumbers = Lotto.from(1, 2, 3, 4, 5, 6)
+
+        assertThat(LottoNumber[1] in winningNumbers).isEqualTo(true)
+        assertThat(LottoNumber[8] in winningNumbers).isEqualTo(false)
+    }
 }

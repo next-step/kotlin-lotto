@@ -10,6 +10,8 @@ value class Lotto(val numbers: Set<LottoNumber>) {
 
     fun intersectCount(other: Lotto): Int = (numbers intersect other.numbers).count()
 
+    operator fun contains(lottoNumber: LottoNumber): Boolean = lottoNumber in numbers
+
     fun checkWith(winningNumbers: WinningNumbers): LottoRank {
         val (matchedNumbers, notMatchedNumbers) = matchNumberGroup(winningNumbers.numbers)
 
