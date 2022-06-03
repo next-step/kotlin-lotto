@@ -24,7 +24,7 @@ class LottoNumbersTest {
 
             assertThat(lottoNumbers.list)
                 .hasSize(6)
-                .isEqualTo(customLottoNumbers.map { LottoNumber(it) })
+                .isEqualTo(customLottoNumbers.map { LottoNumber.from(it) })
         }
 
         @Test

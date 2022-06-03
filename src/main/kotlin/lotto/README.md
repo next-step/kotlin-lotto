@@ -161,3 +161,6 @@
 - [x] 수동으로 구매할 로또 수만큼 로또를 생성한 후 나머지는 자동생성한다 (LottoProvider)
 - [x] 사용자가 입력한 번호로 수동 로또를 생성한다 (LottoProvider)
 - [x] 수동으로 몇장, 자동으로 몇장 구매했는지 프린트한다 (OutputView)
+
+## 리뷰 반영
+1. 총 45개의 LottoNumber 만 생성되도록 수정 (LottoNumber)

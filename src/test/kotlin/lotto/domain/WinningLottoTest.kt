@@ -14,7 +14,7 @@ class WinningLottoTest {
         val winningNumbers = listOf(10, 20, 30, 35, 40, 45)
         val winningLotto = WinningLotto(winningNumbers, 7)
 
-        assertThat(winningLotto.winningNumbers.list).isEqualTo(winningNumbers.map { LottoNumber(it) })
+        assertThat(winningLotto.winningNumbers.list).isEqualTo(winningNumbers.map { LottoNumber.from(it) })
     }
 
     @Test
@@ -23,7 +23,7 @@ class WinningLottoTest {
         val bonusBallNumber = 7
         val winningLotto = WinningLotto(winningNumbers, bonusBallNumber)
 
-        assertThat(winningLotto.bonusNumber).isEqualTo(LottoNumber(bonusBallNumber))
+        assertThat(winningLotto.bonusNumber).isEqualTo(LottoNumber.from(bonusBallNumber))
     }
 
     @Test
