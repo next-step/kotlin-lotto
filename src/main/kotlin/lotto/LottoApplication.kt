@@ -13,7 +13,7 @@ fun main() {
     val lottos = lottoVendor.sellLotto(price)
     resultView.printLottos(lottos)
     val winningLotto = inputView.getWinningLotto()
-    val winnings = WinningLotto(winningLotto).evaluate(lottos)
+    val winnings = WinningLotto(winningLotto, inputView.getBonusLottoNumber()).evaluate(lottos)
     val result = Statistics.getWinningResult(winnings)
     resultView.printResult()
     resultView.printWinningStatistics(result)

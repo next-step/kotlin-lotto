@@ -1,6 +1,10 @@
 package lotto
 
-class WinningLotto(private val winningLotto: Lotto) {
+class WinningLotto(private val winningLotto: Lotto, bonusNumber: Int) {
+    init {
+        require(!winningLotto.numbers.contains(bonusNumber))
+    }
+
     private fun evaluate(lotto: Lotto): Winning {
         val count = winningLotto.countMatchedNumber(lotto)
         return Winning.of(count)

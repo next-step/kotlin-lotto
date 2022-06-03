@@ -46,5 +46,5 @@
 - [X] 구입 금액이 1000원 미만이면 RuntimeException 예외가 발생한다.
 - [X] 당첨 번호에 1~45숫자 이외의 값을 전달하는 경우 RuntimeException 예외가 발생한다.
 - [X] 당첨 번호에 6개의 숫자를 전달하지 않는 경우 RuntimeException 예외가 발생한다.
-- [ ] 보너스 번호를 하나 더 추첨한다.
-- [ ] 보너스 번호와 당첨 번호가 중복되면 RuntimeException 예외가 발생한다.
+- [X] 보너스 번호를 하나 더 추첨한다.
+- [X] 보너스 번호와 당첨 번호가 중복되면 RuntimeException 예외가 발생한다.
