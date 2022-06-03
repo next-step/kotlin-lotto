@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class LottoProviderTest {
     @Nested
@@ -83,6 +85,12 @@ class LottoProviderTest {
             )
 
             assertThatIllegalArgumentException().isThrownBy { LottoProvider(totalPayment, customLottoNumbers) }
+        }
+
+        @ParameterizedTest
+        @CsvSource("1000, 0, true", "1000, 1, true", "1000, 2, false")
+        fun `구매 금액으로 원하는 만큼 로또를 살 수 있는지 알 수 있다`(payment: Int, numberOfLottoRequested: Int, result: Boolean) {
+            assertThat(LottoProvider.isAffordable(payment, numberOfLottoRequested)).isEqualTo(result)
         }
     }
 }

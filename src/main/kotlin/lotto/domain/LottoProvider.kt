@@ -9,13 +9,12 @@ class LottoProvider(payment: Int, customLottoNumbers: List<LottoNumbers> = empty
     val lottos: List<Lotto>
 
     init {
-        val totalNumberOfLottos = payment / LOTTO_PRICE
+        numberOfCustomLottos = when (isAffordable(payment, customLottoNumbers.size)) {
+            true -> customLottoNumbers.size
+            false -> throw IllegalArgumentException(TOO_MANY_LOTTO_REQUESTED)
+        }
 
-        numberOfCustomLottos = customLottoNumbers.size
-            .takeUnless { it > totalNumberOfLottos }
-            ?: throw IllegalArgumentException(TOO_MANY_LOTTO_REQUESTED)
-
-        numberOfAutomaticLottos = totalNumberOfLottos - numberOfCustomLottos
+        numberOfAutomaticLottos = payment.getNumberOfAffordableLotto() - numberOfCustomLottos
 
         lottos = generateCustomLottos(customLottoNumbers) + generateAutomaticLottos(numberOfAutomaticLottos)
     }
@@ -26,6 +25,10 @@ class LottoProvider(payment: Int, customLottoNumbers: List<LottoNumbers> = empty
 
     companion object {
         const val LOTTO_PRICE: Int = 1000
-        const val TOO_MANY_LOTTO_REQUESTED: String = "구매 금액을 초과하는 로또를 요청했습니다"
+        const val TOO_MANY_LOTTO_REQUESTED: String = "구매 금액으로 원하는 수의 로또를 구매할 수 없습니다"
+
+        fun isAffordable(payment: Int, numberOfLottoRequested: Int): Boolean = payment.getNumberOfAffordableLotto() >= numberOfLottoRequested
+
+        private fun Int.getNumberOfAffordableLotto(): Int = this / LOTTO_PRICE
     }
 }
