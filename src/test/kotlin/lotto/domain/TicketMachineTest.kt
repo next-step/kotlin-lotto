@@ -38,4 +38,42 @@ internal class TicketMachineTest {
         // then
         assertThrows<RuntimeException> { ticketMachine.buy(amount) }
     }
+
+    @ParameterizedTest(name = "구매 금액={0}, 수동 구매 개수={1}, 전체 개수={2}")
+    @CsvSource(
+        "1000,0,1",
+        "2222,1,2",
+        "3333,2,3",
+        "4999,1,4",
+    )
+    fun `수동 구매`(amount: Int, manual: Int, expected: Int) {
+        // given
+        val ticketMachine = TicketMachine(LottoNumber.randomGenerator())
+
+        // when
+        val tickets = ticketMachine.buy(amount, List(manual) { LottoTicket(listOf(1, 2, 3, 4, 5, 6)) })
+
+        // then
+        assertThat(tickets).hasSize(expected)
+    }
+
+    @ParameterizedTest(name = "구매 금액={0}, 수동 구매 개수={1}")
+    @CsvSource(
+        "1000,2",
+        "2222,3",
+        "3333,4",
+        "4999,5",
+    )
+    fun `구매 금액보다 수동구매 개수가 많은 경우`(amount: Int, manual: Int) {
+        // given
+        val ticketMachine = TicketMachine(NumberGenerator(1, 45))
+
+        // when
+        // then
+        assertThrows<RuntimeException> {
+            ticketMachine.buy(
+                amount,
+                List(manual) { LottoTicket(listOf(1, 2, 3, 4, 5, 6)) })
+        }
+    }
 }

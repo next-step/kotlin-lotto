@@ -1,5 +1,7 @@
-package lotto.domain
+package lotto.controller
 
+import lotto.domain.LottoNumber
+import lotto.domain.TicketMachine
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -9,8 +11,12 @@ class LottoController(
 ) {
     fun run() {
         val ticketMachine = TicketMachine(LottoNumber.randomGenerator())
-        val tickets = ticketMachine.buy(inputView.readAmount())
-        outputView.printTickets(tickets)
+
+        val amount = inputView.readAmount()
+        val manualTickets = inputView.readManual()
+
+        val tickets = ticketMachine.buy(amount, manualTickets)
+        outputView.printTickets(tickets, manualTickets.size)
 
         val winningNumbers = inputView.readWinningNumbers()
         val winningInfo = winningNumbers.compare(tickets)
