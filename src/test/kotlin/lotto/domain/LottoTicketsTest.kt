@@ -17,7 +17,7 @@ internal class LottoTicketsTest : FreeSpec({
             row(4_999, 4),
         ).forEach { (moneyValue, lottoCount) ->
             "'$moneyValue' 로는 '$lottoCount' 만큼 구매할 수 있다." {
-                val money = Money(BigDecimal.valueOf(moneyValue.toLong()))
+                val money = Money(moneyValue.toBigDecimal())
                 val lottoTickets = LottoTickets.buyLottos(money = money)
 
                 lottoTickets.values shouldHaveSize lottoCount
@@ -54,10 +54,10 @@ internal class LottoTicketsTest : FreeSpec({
         val results = lottoTickets.totalMatchResults(winningTicket = winningTicket)
 
         // then
-        results[WinningAmount.MISS] shouldBe 1
-        results[WinningAmount.FOURTH] shouldBe 0
-        results[WinningAmount.THIRD] shouldBe 1
-        results[WinningAmount.SECOND] shouldBe 1
-        results[WinningAmount.FIRST] shouldBe 1
+        results.values[WinningAmount.MISS] shouldBe 1
+        results.values[WinningAmount.FOURTH] shouldBe 0
+        results.values[WinningAmount.THIRD] shouldBe 1
+        results.values[WinningAmount.SECOND] shouldBe 1
+        results.values[WinningAmount.FIRST] shouldBe 1
     }
 })
