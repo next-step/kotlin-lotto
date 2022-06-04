@@ -17,11 +17,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(wonLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(wonLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe Money(3000)
+            isWon shouldBe true
         }
 
         it("당첨 번호, 보너스 번호 일치하는 경우 우승") {
@@ -33,11 +33,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(wonLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(wonLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe Money(3000)
+            isWon shouldBe true
         }
 
         it("우승하지 못한 경우 상품을 주지 않는다") {
@@ -49,11 +49,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(defeatedLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(defeatedLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe null
+            isWon shouldBe false
         }
     }
     describe("보너스 번호는 일치하지 않고 당첨 번호만 일치하는 우승 정책") {
@@ -66,11 +66,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(wonLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(wonLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe Money(3000)
+            isWon shouldBe true
         }
 
         it("보너스 번호까지 일치하는 경우 패배") {
@@ -82,11 +82,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(wonLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(wonLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe null
+            isWon shouldBe false
         }
 
         it("당첨 번호, 보너스 번호 일치하지 않는 경우 패배") {
@@ -98,11 +98,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(defeatedLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(defeatedLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe null
+            isWon shouldBe false
         }
     }
 
@@ -116,11 +116,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(wonLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(wonLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe Money(3000)
+            isWon shouldBe true
         }
         it("당첨 번호만 일치하는 경우 패배로 우승 상품을 받지 않는다") {
             // given
@@ -131,11 +131,11 @@ class LottoPrizePolicyTest : DescribeSpec({
             val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
 
             // when
-            val prize =
-                lottoPrizePolicy.won(wonLottoTicket, winningLottoNumbers)
+            val isWon =
+                lottoPrizePolicy.isWon(wonLottoTicket, winningLottoNumbers)
 
             // then
-            prize shouldBe null
+            isWon shouldBe false
         }
     }
 

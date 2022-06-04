@@ -11,22 +11,18 @@ class LottoPrizePolicy(
     }
 
     fun isWon(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): Boolean {
-        return won(lottoTicket, winningLottoNumbers) != null
-    }
-
-    fun won(lottoTicket: LottoTicket, winningLottoNumbers: WinningLottoNumbers): Money? {
         if (includeBonusNumber != null &&
             winningLottoNumbers.hasBonusNumber(lottoTicket.lottoTicketNumbers) == includeBonusNumber &&
             winningLottoNumbers.getMatchedCountOfWinning(lottoTicket.lottoTicketNumbers) == winningNumberMatchCount
         ) {
-            return wonPrize
+            return true
         }
         if (includeBonusNumber == null &&
             winningLottoNumbers.getMatchedCountOfWinning(lottoTicket.lottoTicketNumbers) == winningNumberMatchCount
         ) {
-            return wonPrize
+            return true
         }
-        return null
+        return false
     }
 
     override fun equals(other: Any?): Boolean {
