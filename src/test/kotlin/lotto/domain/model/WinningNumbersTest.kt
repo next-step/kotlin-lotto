@@ -20,7 +20,7 @@ class WinningNumbersTest {
     @Test
     fun `WinningNumbers의 숫자가 6개가 아니면 IllegalArgumentException이 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            WinningNumbers.from(Lotto.from(1, 2, 3, 4, 5), LottoNumber[7])
+            WinningNumbers(Lotto.from(1, 2, 3, 4, 5), LottoNumber[7])
         }
     }
 
@@ -46,7 +46,7 @@ class WinningNumbersTest {
             )
         )
 
-        val winningNumbers = WinningNumbers.from(Lotto.from(8, 21, 23, 41, 42, 43), LottoNumber[4])
+        val winningNumbers = WinningNumbers(Lotto.from(8, 21, 23, 41, 42, 43), LottoNumber[4])
 
         val lottoResult = winningNumbers.checkWith(lottos)
 
