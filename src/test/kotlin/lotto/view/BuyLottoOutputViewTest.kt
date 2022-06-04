@@ -1,8 +1,7 @@
 package lotto.view
 
 import io.kotest.core.spec.style.DescribeSpec
-import io.mockk.mockk
-import io.mockk.verify
+import io.kotest.matchers.shouldBe
 import lotto.domain.LottoPrizePolicy
 import lotto.domain.LottoTicket
 import lotto.domain.Money
@@ -10,7 +9,21 @@ import lotto.dto.WinningStatDto
 import lotto.util.OutPutModule
 
 class BuyLottoOutputViewTest : DescribeSpec({
-    val stubOutputModule: OutPutModule = mockk<OutPutModule>(relaxed = true)
+    var outputStore: MutableList<String> = mutableListOf()
+    var stubOutputModule: OutPutModule = object : OutPutModule {
+        override fun write(outputValue: String) {
+            outputStore.add(outputValue)
+        }
+    }
+
+    beforeEach {
+        outputStore = mutableListOf()
+        stubOutputModule = object : OutPutModule {
+            override fun write(outputValue: String) {
+                outputStore.add(outputValue)
+            }
+        }
+    }
 
     it("구매한 티켓을 보여준다") {
         // given
@@ -25,11 +38,7 @@ class BuyLottoOutputViewTest : DescribeSpec({
         buyLottoOutputView.showAllBoughtTickets(lottoTickets)
 
         // then
-        verify {
-            stubOutputModule.write(
-                "3를 구매했습니다\n" + "[1, 2, 3, 4, 5, 6]\n" + "[11, 12, 13, 14, 15, 16]\n" + "[21, 22, 23, 24, 25, 26]\n"
-            )
-        }
+        outputStore[0] shouldBe "3를 구매했습니다\n" + "[1, 2, 3, 4, 5, 6]\n" + "[11, 12, 13, 14, 15, 16]\n" + "[21, 22, 23, 24, 25, 26]\n"
     }
 
     it("당첨 통계 전체를 보여준다") {
@@ -47,15 +56,11 @@ class BuyLottoOutputViewTest : DescribeSpec({
         buyLottoOutputView.showTotalWinningInformation(boughtTicketTotalMoney, winingStats)
 
         // then
-        verify { stubOutputModule.write("당첨통계\n" + "---------") }
-        verify {
-            stubOutputModule.write(
-                "3개 일치 (3000원)- 30개\n" +
-                    "4개 일치 (4000원)- 40개\n" +
-                    "5개 일치 (5000원)- 50개\n" +
-                    "5개 일치, 보너스 볼 일치 (8000원)- 50개"
-            )
-        }
-        verify { stubOutputModule.write("총 수익률은 900.0입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)") }
+        outputStore[0] shouldBe "당첨통계\n" + "---------"
+        outputStore[1] shouldBe "3개 일치 (3000원)- 30개\n" +
+            "4개 일치 (4000원)- 40개\n" +
+            "5개 일치 (5000원)- 50개\n" +
+            "5개 일치, 보너스 볼 일치 (8000원)- 50개"
+        outputStore[2] shouldBe "총 수익률은 900.0입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
     }
 })
