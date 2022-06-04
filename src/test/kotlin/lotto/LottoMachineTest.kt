@@ -22,9 +22,7 @@ internal class LottoMachineTest {
         }
 
         val lottoMachine = LottoMachine(lottoMaker, lottoMaker)
-
-        lottoMachine.buyLotto(1)
-
-        assertThat(lottoMachine.lottos.lotto).isEqualTo(6)
+        val buyLotto = lottoMachine.buyLotto(1)
+        assertThat(buyLotto[0].lotto.size).isEqualTo(6)
     }
 }

@@ -18,9 +18,14 @@ internal class LottosTest {
 
         val lotto = Lotto(lottoNumbers)
 
-        val lottos = Lottos()
-        lottos.add(lotto)
+        val lottos = Lottos(listOf(lotto))
 
-        assertThat(lottos.lotto.size).isEqualTo(1)
+        assertThat(lottos.lottos.size).isEqualTo(1)
+    }
+
+    @Test
+    fun `로또 값이 없을 경우 빈 리스트를 반환`() {
+        val lottos = Lottos()
+        assertThat(lottos.lottos).isEmpty()
     }
 }
