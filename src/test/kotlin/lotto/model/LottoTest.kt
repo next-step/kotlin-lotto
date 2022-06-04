@@ -10,6 +10,7 @@ class LottoTest {
 
     private val winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
     private val bonusNumber = LottoNumber.valueOf(45)
+    private val drawNumbers = DrawNumbers(winningNumbers, bonusNumber)
 
     @Test
     fun `당첨 번호 6개가 일치하면 1등`() {
@@ -17,7 +18,7 @@ class LottoTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.FIRST_PRIZE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.FIRST_PRIZE)
     }
 
     @Test
@@ -26,7 +27,7 @@ class LottoTest {
         val lotto = Lotto(listOf(2, 3, 4, 5, 6, 45).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.SECOND_PRIZE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.SECOND_PRIZE)
     }
 
     @Test
@@ -35,7 +36,7 @@ class LottoTest {
         val lotto = Lotto(listOf(2, 3, 4, 5, 6, 7).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.THIRD_PRIZE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.THIRD_PRIZE)
     }
 
     @Test
@@ -44,7 +45,7 @@ class LottoTest {
         val lotto = Lotto(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.FOURTH_PRIZE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.FOURTH_PRIZE)
     }
 
     @Test
@@ -53,7 +54,7 @@ class LottoTest {
         val lotto = Lotto(listOf(4, 5, 6, 7, 8, 9).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.FIFTH_PRIZE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.FIFTH_PRIZE)
     }
 
     @Test
@@ -62,7 +63,7 @@ class LottoTest {
         val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.NONE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.NONE)
     }
 
     @Test
@@ -71,7 +72,7 @@ class LottoTest {
         val lotto = Lotto(listOf(6, 7, 8, 9, 10, 11).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.NONE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.NONE)
     }
 
     @Test
@@ -80,7 +81,7 @@ class LottoTest {
         val lotto = Lotto(listOf(7, 8, 9, 10, 11, 12).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findRank(winningNumbers, bonusNumber), WinningRank.NONE)
+        assertEquals(lotto.findRank(drawNumbers), WinningRank.NONE)
     }
 
     @Test

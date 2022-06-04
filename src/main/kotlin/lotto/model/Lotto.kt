@@ -9,8 +9,8 @@ class Lotto(
         validateNumberCount(lotto)
     }
 
-    fun findRank(winningNumbers: Lotto, bonusNumber: LottoNumber) =
-        WinningRank.of(findMatchedNumberCount(winningNumbers), contains(bonusNumber))
+    fun findRank(drawNumbers: DrawNumbers) =
+        WinningRank.of(findMatchedNumberCount(drawNumbers.winningNumbers), contains(drawNumbers.bonusNumber))
 
     private fun findMatchedNumberCount(other: Lotto) = other.lotto.count { lotto.contains(it) }
 

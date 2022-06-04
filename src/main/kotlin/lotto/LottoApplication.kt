@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.DrawNumbers
 import lotto.model.Lotto
 import lotto.model.LottoNumber
 import lotto.model.RandomLottoGenerator
@@ -18,7 +19,7 @@ object LottoApplication {
         InputView.printWinningNumbersInputMessage()
         val winningNumbers = Lotto(InputView.inputWinningNumbers())
 
-        val winningRanks = purchasedLottos.findRanks(winningNumbers, LottoNumber.valueOf(45))
+        val winningRanks = purchasedLottos.findRanks(DrawNumbers(winningNumbers, LottoNumber.valueOf(45)))
         ResultView.printWinningStatistics(paymentPrice, winningRanks)
     }
 }
