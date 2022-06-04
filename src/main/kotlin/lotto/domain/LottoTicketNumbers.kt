@@ -6,7 +6,7 @@ class LottoTicketNumbers private constructor(val value: List<LottoTicketNumber>)
         validateDuplicateLottoNumber()
     }
 
-    fun notHasLottoNumber(lottoTicketNumber: LottoTicketNumber): Boolean {
+    fun hasNotLottoNumber(lottoTicketNumber: LottoTicketNumber): Boolean {
         return !hasLottoNumber(lottoTicketNumber)
     }
 

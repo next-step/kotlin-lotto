@@ -5,7 +5,7 @@ class WinningLottoNumbers private constructor(
     val bonusLottoNumber: LottoTicketNumber
 ) {
     init {
-        require(winningLottoNumbers.notHasLottoNumber(bonusLottoNumber)) { "보너스 번호(${bonusLottoNumber.value})는 당첨번호 와 중복 될 수 없습니다" }
+        require(winningLottoNumbers.hasNotLottoNumber(bonusLottoNumber)) { "보너스 번호(${bonusLottoNumber.value})는 당첨번호 와 중복 될 수 없습니다" }
     }
 
     fun getMatchedCountOfWinning(lottoTicketNumbers: LottoTicketNumbers): Int {
