@@ -9,14 +9,14 @@ import com.nextstep.jngcii.lotto.view.InputView
 import com.nextstep.jngcii.lotto.view.ResultView
 
 fun main() {
-    val count = InputView.getCount { readLine() }
+    val count = InputView.getCount()
 
     val lottos = LottoMachine.get(count)
     ResultView.printList(lottos)
 
-    val lastWeekNumbers = InputView.getNumbers { readLine() }
+    val lastWeekNumbers = InputView.getNumbers()
     val lastWeekLotto = Lotto(lastWeekNumbers.map { LottoNumber(it) })
-    val number = InputView.getNumber { readLine() }
+    val number = InputView.getNumber()
     val bonus = BonusNumber(number, lastWeekLotto)
 
     val ranks = Ranks(lottos, lastWeekLotto, bonus)

@@ -3,28 +3,30 @@ package com.nextstep.jngcii.lotto.view
 import com.nextstep.jngcii.lotto.model.Calculator
 
 object InputView {
-    tailrec fun getCount(read: () -> String?): Int {
+    tailrec fun getCount(): Int {
         println("구입금액을 입력해 주세요.")
 
-        InputValidator.validateInt(read())
+        InputValidator.validateInt(readLine())
             ?.let { return Calculator.calculateLottoCount(it) }
 
-        return getCount { readLine() }
+        return getCount()
     }
 
-    tailrec fun getNumbers(read: () -> String?): List<Int> {
+    tailrec fun getNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        InputValidator.validateInputNumbers(read())?.let { return it }
+        InputValidator.validateInputNumbers(readLine())
+            ?.let { return it }
 
-        return getNumbers { readLine() }
+        return getNumbers()
     }
 
-    fun getNumber(read: () -> String?): Int {
+    fun getNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
 
-        while (true) {
-            InputValidator.validateInputNumber(read())?.let { return it }
-        }
+        InputValidator.validateInputNumber(readLine())
+            ?.let { return it }
+
+        return getNumber()
     }
 }
