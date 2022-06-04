@@ -6,4 +6,14 @@ package lotto.domain
  */
 class LottoTickets(val tickets: List<LottoTicket>) {
     fun getSize() = tickets.size
+
+    operator fun plus(tickets: LottoTickets): LottoTickets {
+        return LottoTickets(this.tickets + tickets.tickets)
+    }
+
+    companion object {
+        fun of(lists: List<String>): LottoTickets {
+            return LottoTickets(lists.map { LottoTicket.of(it) })
+        }
+    }
 }

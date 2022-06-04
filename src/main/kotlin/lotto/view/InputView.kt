@@ -25,6 +25,22 @@ object InputView {
         return input
     }
 
+    fun getManualCount(readStringValue: () -> String? = { readlnOrNull() }): Int {
+        println(Messages.WRITE_MANUAL_COUNT)
+        return changeStringToInt(readStringValue())
+    }
+
+    fun getLottoNumbers(readStringValue: () -> String? = { readlnOrNull() }, count: Int): List<String> {
+        println(Messages.WRITE_MANUAL_LOTTO_NUMBER)
+        val output = mutableListOf<String>()
+        repeat(count) {
+            val input = readStringValue()
+            require(!input.isNullOrBlank()) { ErrorMessages.INPUT_IS_NULL_OR_BLANK }
+            output.add(input)
+        }
+        return output
+    }
+
     private fun changeStringToInt(input: String?): Int {
         return input?.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessages.INPUT_IS_NOT_NUMBER)
     }

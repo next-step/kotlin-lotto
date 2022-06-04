@@ -25,5 +25,13 @@ data class LottoTicket(val numbers: Set<Int>) {
         fun of(numberList: List<Int>): LottoTicket {
             return LottoTicket(numberList.toSet())
         }
+
+        fun of(numberStringList: String): LottoTicket {
+            return of(
+                numberStringList.split(",").map {
+                    it.trim().toIntOrNull() ?: throw IllegalArgumentException()
+                }
+            )
+        }
     }
 }

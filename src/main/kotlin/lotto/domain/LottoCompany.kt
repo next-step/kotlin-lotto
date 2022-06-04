@@ -24,14 +24,8 @@ class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: Int)
 
     companion object {
         fun of(stringWinningNumber: String, bonusNumber: Int): LottoCompany {
-            val winningNumbers = stringWinningNumber.split(",").map {
-                it.trim().toInt()
-            }
-            return of(winningNumbers, bonusNumber)
-        }
-
-        fun of(numberList: List<Int>, bonusNumber: Int): LottoCompany {
-            return LottoCompany(LottoTicket.of(numberList), bonusNumber)
+            val winningNumbers = LottoTicket.of(stringWinningNumber)
+            return LottoCompany(winningNumbers, bonusNumber)
         }
     }
 }

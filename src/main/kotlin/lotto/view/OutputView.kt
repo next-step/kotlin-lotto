@@ -10,8 +10,8 @@ import lotto.domain.Prize
  * Created by Jaesungchi on 2022.05.25..
  */
 object OutputView {
-    fun printTicket(lottoTickets: LottoTickets) {
-        println("${lottoTickets.getSize()}${Messages.BUY_AMOUNT_LOTTO}")
+    fun printTicket(lottoTickets: LottoTickets, manualCount: Int) {
+        println(Messages.BUY_AMOUNT_LOTTO.format(manualCount, lottoTickets.getSize() - manualCount))
         lottoTickets.tickets.forEach {
             println(it.numbers.toString())
         }
