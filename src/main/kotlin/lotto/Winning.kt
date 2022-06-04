@@ -10,9 +10,11 @@ enum class Winning(val matchCount: Int, val winningAmount: Int, val isMatchBonus
 
     companion object {
         fun of(count: Int, isMatchBonusNumber: Boolean): Winning {
-            return Winning.values().find {
-                it.matchCount == count && it.isMatchBonusNumber == isMatchBonusNumber
-            } ?: FAIL
+            if (count == 5)
+                return Winning.values().find {
+                    it.matchCount == count && it.isMatchBonusNumber == isMatchBonusNumber
+                } ?: FAIL
+            return Winning.values().find { it.matchCount == count } ?: FAIL
         }
     }
 }

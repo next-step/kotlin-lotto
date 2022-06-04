@@ -7,11 +7,11 @@ class WinningLotto(private val winningLotto: Lotto, private val bonusNumber: Int
 
     private fun evaluate(lotto: Lotto): Winning {
         val count = winningLotto.countMatchedNumber(lotto)
-        val isMatchBonusNumber = winningLotto.contains(bonusNumber)
+        val isMatchBonusNumber = lotto.contains(bonusNumber)
         return Winning.of(count, isMatchBonusNumber)
     }
 
     fun evaluate(lottos: Lottos): List<Winning> {
-        return lottos.lottos.map { evaluate(it) }
+        return lottos.lottos.map(::evaluate)
     }
 }
