@@ -5,5 +5,6 @@ class Lottos(
 ) {
     val size = lottos.size
 
-    fun findRanks(winningNumbers: Lotto) = lottos.map { it.findRank(winningNumbers) }
+    fun findRanks(winningNumbers: Lotto, bonusNumber: LottoNumber) =
+        lottos.map { it.findRank(winningNumbers, bonusNumber) }
 }
