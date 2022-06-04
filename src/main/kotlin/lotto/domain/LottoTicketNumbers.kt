@@ -1,8 +1,14 @@
 package lotto.domain
 
-class LottoTicketNumbers private constructor(val value: List<LottoTicketNumber>) {
+class LottoTicketNumbers private constructor(lottoNumbers: List<LottoTicketNumber>) {
+    var value: List<LottoTicketNumber> = emptyList()
+        private set(value) {
+            field = value
+            require(value.size == LOTTO_TICKET_NUMBER_SIZE) { ERROR_MESSAGE_BY_LOTTO_NUMBER_SIZE }
+        }
+
     init {
-        require(value.size == LOTTO_TICKET_NUMBER_SIZE) { ERROR_MESSAGE_BY_LOTTO_NUMBER_SIZE }
+        value = lottoNumbers
         validateDuplicateLottoNumber()
     }
 
