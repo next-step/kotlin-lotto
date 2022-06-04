@@ -8,7 +8,7 @@ import io.kotest.matchers.throwable.shouldHaveMessage
 class WinningLottoNumbersTest : DescribeSpec({
     it("당첨 번호, 보너스 번호를 포함하여 생성자를 가지고 있다") {
         // given
-        val winningNumbers = listOf<Int>(1, 2, 3, 4, 5, 6)
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
 
         // when
@@ -21,7 +21,7 @@ class WinningLottoNumbersTest : DescribeSpec({
 
     it("로또 티켓 번호가 당첨 번호와 몇개 일치 하였는지 알 수 있다") {
         // given
-        val winningNumbers = listOf<Int>(1, 2, 3, 4, 5, 6)
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
         val winningLottoNumbers = WinningLottoNumbers.ofInt(winningNumbers, bonusNumber)
         val threeMatchedNumbers = mutableListOf<Int>(10, 11, 12)
@@ -36,7 +36,7 @@ class WinningLottoNumbersTest : DescribeSpec({
     }
     it("로또 티켓 번호에 보너스 번호가 포함 되었는지 알 수 있다") {
         // given
-        val winningNumbers = listOf<Int>(1, 2, 3, 4, 5, 6)
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
         val bonusNumber = 7
         val winningLottoNumbers = WinningLottoNumbers.ofInt(winningNumbers, bonusNumber)
         val lottoNumbersWithBonusBall = mutableListOf<Int>()
@@ -50,7 +50,7 @@ class WinningLottoNumbersTest : DescribeSpec({
     describe("validate") {
         it("보너스 번호가 당첨 번호와 같은 경우 에러 발생") {
             // given
-            val winningNumbers = listOf<Int>(1, 2, 3, 4, 5, 6)
+            val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
             val bonusNumber = winningNumbers[0]
 
             // then
