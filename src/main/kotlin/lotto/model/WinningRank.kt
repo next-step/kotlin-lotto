@@ -10,4 +10,9 @@ enum class WinningRank(
     THIRD_PRIZE(4, 50_000),
     FOURTH_PRIZE(3, 5_000),
     NONE(0, 0);
+
+    companion object {
+        fun from(matchedNumberCount: Int) =
+            values().find { it.matchedNumberCount == matchedNumberCount } ?: NONE
+    }
 }
