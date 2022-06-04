@@ -15,7 +15,7 @@ fun main() {
     ResultView.printPurchasedLottos(purchasedLottos)
 
     InputView.printWinningNumbersInputMessage()
-    val winningNumbers = Lotto.from(InputView.inputWinningNumbers())
+    val winningNumbers = Lotto(InputView.inputWinningNumbers())
 
     val winningRanks = WinningRank.findRanks(purchasedLottos, winningNumbers)
     ResultView.printWinningStatistics(paymentPrice, winningRanks)

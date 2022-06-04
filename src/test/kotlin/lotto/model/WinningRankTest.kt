@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test
 @DisplayName("당첨 순위 테스트")
 class WinningRankTest {
 
-    private val winningNumbers = Lotto.from(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
+    private val winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
 
     @Test
     fun `당첨 번호 6개가 일치하면 1등`() {
         // given
-        val lotto = Lotto.from(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
         val lottos = Lottos(listOf(lotto))
 
         // when, then
@@ -27,7 +27,7 @@ class WinningRankTest {
     @Test
     fun `당첨 번호 5개가 일치하면 2등`() {
         // given
-        val lotto = Lotto.from(listOf(2, 3, 4, 5, 6, 7).map { LottoNumber.valueOf(it) })
+        val lotto = Lotto(listOf(2, 3, 4, 5, 6, 7).map { LottoNumber.valueOf(it) })
         val lottos = Lottos(listOf(lotto))
 
         // when, then
@@ -37,7 +37,7 @@ class WinningRankTest {
     @Test
     fun `당첨 번호 4개가 일치하면 3등`() {
         // given
-        val lotto = Lotto.from(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber.valueOf(it) })
+        val lotto = Lotto(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber.valueOf(it) })
         val lottos = Lottos(listOf(lotto))
 
         // when, then
@@ -47,7 +47,7 @@ class WinningRankTest {
     @Test
     fun `당첨 번호 3개가 일치하면 4등`() {
         // given
-        val lotto = Lotto.from(listOf(4, 5, 6, 7, 8, 9).map { LottoNumber.valueOf(it) })
+        val lotto = Lotto(listOf(4, 5, 6, 7, 8, 9).map { LottoNumber.valueOf(it) })
         val lottos = Lottos(listOf(lotto))
 
         // when, then
@@ -57,7 +57,7 @@ class WinningRankTest {
     @Test
     fun `일치하는 당첨 번호가 2개 이하면 꽝`() {
         // given
-        val lotto = Lotto.from(listOf(5, 6, 7, 8, 9, 10).map { LottoNumber.valueOf(it) })
+        val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10).map { LottoNumber.valueOf(it) })
         val lottos = Lottos(listOf(lotto))
 
         // when, then
