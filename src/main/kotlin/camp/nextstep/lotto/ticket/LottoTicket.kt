@@ -1,6 +1,5 @@
 package camp.nextstep.lotto.ticket
 
-import camp.nextstep.lotto.number.LottoNumber
 import camp.nextstep.lotto.number.LottoNumbers
 
 class LottoTicket private constructor(val numbers: LottoNumbers) {
@@ -10,8 +9,8 @@ class LottoTicket private constructor(val numbers: LottoNumbers) {
             return LottoTicket(LottoNumbers.of(*numbers))
         }
 
-        fun of(numbers: List<LottoNumber>): LottoTicket {
-            return LottoTicket(LottoNumbers.of(*numbers.map { it.value }.toIntArray()))
+        fun of(numbers: LottoNumbers): LottoTicket {
+            return LottoTicket(numbers)
         }
     }
 }

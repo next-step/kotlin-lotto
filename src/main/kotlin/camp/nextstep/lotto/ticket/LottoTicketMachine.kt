@@ -6,7 +6,7 @@ import kotlin.random.Random
 
 class LottoTicketMachine(private val numbersGenerator: NumbersGenerator = RandomNumbersGenerator(LottoNumber.LOTTO_NUMBER_RANGE, LottoNumbers.LOTTO_NUMBERS)) {
 
-    fun issueTicket(numbers: List<LottoNumber>): LottoTicket {
+    fun issueTicket(numbers: LottoNumbers): LottoTicket {
         return LottoTicket.of(numbers)
     }
 
@@ -17,17 +17,17 @@ class LottoTicketMachine(private val numbersGenerator: NumbersGenerator = Random
     }
 
     interface NumbersGenerator {
-        fun numbers(): List<LottoNumber>
+        fun numbers(): LottoNumbers
     }
 
     private class RandomNumbersGenerator(private val range: IntRange, private val n: Int) : NumbersGenerator {
 
-        override fun numbers() =
+        override fun numbers() = LottoNumbers.of(
             generateSequence { Random(Random.Default.nextInt()).nextInt(range.first, range.last) }
                 .distinct()
                 .take(n)
                 .sorted()
-                .map { LottoNumber.of(it) }
                 .toList()
+        )
     }
 }

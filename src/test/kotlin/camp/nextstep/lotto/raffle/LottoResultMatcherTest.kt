@@ -35,7 +35,7 @@ internal class LottoResultMatcherTest {
     fun matchedLottoNumbers(@ConvertWith(IntArrayConverter::class) ticketNumbers: IntArray, expectedMatchCount: Int, expectedMatchedBonus: Boolean) {
         val winnerNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
         val bonusNumber = LottoNumber.of(7)
-        val lottoTicket = LottoTicket.of(ticketNumbers.map { LottoNumber.of(it) }.toList())
+        val lottoTicket = LottoTicket.of(LottoNumbers.of(*ticketNumbers))
 
         val matchResult = LottoResultMatcher.count(lottoTicket, WinnerNumbers(winnerNumbers, bonusNumber))
 

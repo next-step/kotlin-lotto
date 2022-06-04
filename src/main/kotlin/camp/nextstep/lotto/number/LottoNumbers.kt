@@ -20,5 +20,9 @@ class LottoNumbers private constructor(numbers: List<LottoNumber>) {
         fun of(vararg numbers: Int): LottoNumbers {
             return LottoNumbers(numbers.map { LottoNumber.of(it) })
         }
+
+        fun of(numbers: List<Int>): LottoNumbers {
+            return LottoNumbers(numbers.map { LottoNumber.of(it) })
+        }
     }
 }
