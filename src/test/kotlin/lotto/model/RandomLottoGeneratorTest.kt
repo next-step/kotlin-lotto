@@ -6,8 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
-@DisplayName("로또 컬렉션 테스트")
-class LottosTest {
+@DisplayName("자동 로또 생성기 테스트")
+class RandomLottoGeneratorTest {
 
     @ParameterizedTest
     @CsvSource(
@@ -16,7 +16,7 @@ class LottosTest {
     )
     fun `개당 1000원에 로또를 구입 가능`(paymentPrice: Int, lottoSize: Int) {
         // given, when
-        val lottos = Lottos.from(paymentPrice).lottos
+        val lottos = RandomLottoGenerator.generateLottos(paymentPrice)
 
         // then
         assertEquals(lottos.size, lottoSize)
@@ -26,7 +26,7 @@ class LottosTest {
     @ValueSource(ints = [-1000, -100, 0])
     fun `지불 금액이 0원 이하면 로또 구입 불가`(paymentPrice: Int) {
         // given, when
-        val lottos = Lottos.from(paymentPrice).lottos
+        val lottos = RandomLottoGenerator.generateLottos(paymentPrice)
 
         // then
         assertEquals(lottos.size, 0)
