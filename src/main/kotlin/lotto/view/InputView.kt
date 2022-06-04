@@ -10,9 +10,13 @@ object InputView {
 
     fun printWinningNumbersInputMessage() = println("지난 주 당첨 번호를 입력해 주세요.")
 
+    fun printBonusNumberInputMessage() = println("보너스 볼을 입력해 주세요.")
+
     fun inputPaymentPrice() = readln().toInt()
 
     fun inputWinningNumbers() =
         readln().split(WINNING_NUMBER_DELIMITER)
             .map { LottoNumber.valueOf(it.trim().toInt()) }
+
+    fun inputBonusNumber() = readln().toInt()
 }

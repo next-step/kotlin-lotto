@@ -19,7 +19,10 @@ object LottoApplication {
         InputView.printWinningNumbersInputMessage()
         val winningNumbers = Lotto(InputView.inputWinningNumbers())
 
-        val winningRanks = purchasedLottos.findRanks(DrawNumbers(winningNumbers, LottoNumber.valueOf(45)))
+        InputView.printBonusNumberInputMessage()
+        val bonusNumber = LottoNumber.valueOf(InputView.inputBonusNumber())
+
+        val winningRanks = purchasedLottos.findRanks(DrawNumbers(winningNumbers, bonusNumber))
         ResultView.printWinningStatistics(paymentPrice, winningRanks)
     }
 }
