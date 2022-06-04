@@ -9,7 +9,11 @@ class Lotto(
         validateNumberCount(lotto)
     }
 
-    fun findMatchedNumberCount(other: Lotto) = other.lotto.count { lotto.contains(it) }
+    fun findRank(winningNumbers: Lotto) = WinningRank.values().find {
+        it.matchedNumberCount == findMatchedNumberCount(winningNumbers)
+    } ?: WinningRank.NONE
+
+    private fun findMatchedNumberCount(other: Lotto) = other.lotto.count { lotto.contains(it) }
 
     override fun toString(): String {
         return "$lotto"

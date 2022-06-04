@@ -8,14 +8,51 @@ import org.junit.jupiter.api.assertThrows
 @DisplayName("로또 테스트")
 class LottoTest {
 
+    private val winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
+
     @Test
-    fun `동일한 로또 번호 개수 찾는 기능이 정상 동작`() {
+    fun `당첨 번호 6개가 일치하면 1등`() {
         // given
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.valueOf(it) })
-        val other = Lotto(listOf(4, 5, 6, 7, 8, 9).map { LottoNumber.valueOf(it) })
 
         // when, then
-        assertEquals(lotto.findMatchedNumberCount(other), 3)
+        assertEquals(lotto.findRank(winningNumbers), WinningRank.FIRST_PRIZE)
+    }
+
+    @Test
+    fun `당첨 번호 5개가 일치하면 2등`() {
+        // given
+        val lotto = Lotto(listOf(2, 3, 4, 5, 6, 7).map { LottoNumber.valueOf(it) })
+
+        // when, then
+        assertEquals(lotto.findRank(winningNumbers), WinningRank.SECOND_PRIZE)
+    }
+
+    @Test
+    fun `당첨 번호 4개가 일치하면 3등`() {
+        // given
+        val lotto = Lotto(listOf(3, 4, 5, 6, 7, 8).map { LottoNumber.valueOf(it) })
+
+        // when, then
+        assertEquals(lotto.findRank(winningNumbers), WinningRank.THIRD_PRIZE)
+    }
+
+    @Test
+    fun `당첨 번호 3개가 일치하면 4등`() {
+        // given
+        val lotto = Lotto(listOf(4, 5, 6, 7, 8, 9).map { LottoNumber.valueOf(it) })
+
+        // when, then
+        assertEquals(lotto.findRank(winningNumbers), WinningRank.FOURTH_PRIZE)
+    }
+
+    @Test
+    fun `일치하는 당첨 번호가 2개 이하면 꽝`() {
+        // given
+        val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10).map { LottoNumber.valueOf(it) })
+
+        // when, then
+        assertEquals(lotto.findRank(winningNumbers), WinningRank.NONE)
     }
 
     @Test
