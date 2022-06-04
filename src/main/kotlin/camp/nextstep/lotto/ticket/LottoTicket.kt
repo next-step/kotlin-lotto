@@ -15,9 +15,5 @@ class LottoTicket private constructor(numbers: LottoNumbers) {
         fun of(numbers: List<LottoNumber>): LottoTicket {
             return LottoTicket(LottoNumbers.of(*numbers.map { it.value }.toIntArray()))
         }
-
-        fun of(numbers: LottoNumbers): LottoTicket {
-            return LottoTicket(numbers)
-        }
     }
 }
