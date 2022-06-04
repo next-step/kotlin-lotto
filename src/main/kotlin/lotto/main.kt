@@ -15,6 +15,15 @@ fun main() {
     val resultView = ResultView()
 
     val payment: String = inputView.payment()
+    val manualLotto = buyManualLotto(inputView)
+
+    val lottoMachineRequestDto = InputLottoMachineRequestDto.of(payment, manualLotto)
+
+    val lottoRecord = buyLotto(resultView, lottoMachineRequestDto)
+    lottoStatics(inputView, resultView, lottoMachineRequestDto, lottoRecord)
+}
+
+fun buyManualLotto(inputView: InputView): List<LottoNumberSet> {
     val manualLottoCount: String = inputView.manualLottoCount()
 
     inputView.manualLottoNumberTitle()
@@ -24,10 +33,7 @@ fun main() {
         )
     }
 
-    val lottoMachineRequestDto = InputLottoMachineRequestDto.of(payment, manualLottoCount, manualLotto)
-
-    val lottoRecord = buyLotto(resultView, lottoMachineRequestDto)
-    lottoStatics(inputView, resultView, lottoMachineRequestDto, lottoRecord)
+    return manualLotto
 }
 
 fun buyLotto(resultView: ResultView, lottoMachineRequestDto: InputLottoMachineRequestDto): List<LottoNumberSet> {

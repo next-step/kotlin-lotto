@@ -17,7 +17,7 @@ class WinningStaticsTest : FreeSpec({
             val lottoRecord = listOf(lottoNumberSet)
 
             val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+            val paymentDto = InputLottoMachineRequestDto.of("14000", inputManualLotto)
 
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
@@ -35,7 +35,7 @@ class WinningStaticsTest : FreeSpec({
             val lottoRecord = listOf(lottoNumberSet)
 
             val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+            val paymentDto = InputLottoMachineRequestDto.of("14000", inputManualLotto)
 
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
@@ -51,7 +51,7 @@ class WinningStaticsTest : FreeSpec({
             val lottoRecord = listOf(lottoNumberSet)
 
             val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+            val paymentDto = InputLottoMachineRequestDto.of("14000", inputManualLotto)
 
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
@@ -67,7 +67,7 @@ class WinningStaticsTest : FreeSpec({
             val lottoRecord = listOf(lottoNumberSet)
 
             val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+            val paymentDto = InputLottoMachineRequestDto.of("14000", inputManualLotto)
 
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "20")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
@@ -83,7 +83,7 @@ class WinningStaticsTest : FreeSpec({
             val lottoRecord = listOf(lottoNumberSet)
 
             val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+            val paymentDto = InputLottoMachineRequestDto.of("14000", inputManualLotto)
 
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "6")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)
@@ -99,7 +99,7 @@ class WinningStaticsTest : FreeSpec({
             val lottoRecord = listOf(lottoNumberSet)
 
             val inputManualLotto = listOf(LottoNumberSet(listOf(44, 43, 42, 41, 40, 39)))
-            val paymentDto = InputLottoMachineRequestDto.of("14000", "1", inputManualLotto)
+            val paymentDto = InputLottoMachineRequestDto.of("14000", inputManualLotto)
 
             val winningLotto = InputLottoNumberDto.of(listOf("1", "2", "3", "10", "11", "12"), "13")
             val winningStat = WinningStatics(paymentDto, winningLotto, lottoRecord)

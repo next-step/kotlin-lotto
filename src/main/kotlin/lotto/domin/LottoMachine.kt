@@ -11,7 +11,7 @@ class LottoMachine(
     private val inputPayment: Int = dto.payment
     private val lotto: Lotto = Lotto(inputPayment, lottoNumberGenerator)
 
-    val inputManualLottoCount: Int = dto.manualLottoCount
+    val inputManualLottoCount: Int = dto.manualLotto.size
     val issuanceLottoCount: Int = lotto.issuanceCount()
 
     init {
