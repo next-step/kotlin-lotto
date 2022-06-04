@@ -6,9 +6,10 @@ import lotto.view.View
 class LottoController() {
     fun play() {
         val insertAmount = View.insertAmount()
-        val lottoStore = LottoStore(insertAmount)
+        val manualLotto = View.getManualLotto()
+        val lottoStore = LottoStore(insertAmount, manualLotto)
         View.purchasableLottoCount(lottoStore)
-        val purchasedLotto = lottoStore.purchase()
+        val purchasedLotto = lottoStore.purchased()
         View.printPurchasedLottoList(purchasedLotto)
 
         val luckyNumber = View.getLuckyDrawNumber()
