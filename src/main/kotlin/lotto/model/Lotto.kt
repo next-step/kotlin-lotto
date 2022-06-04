@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 data class Lotto(
     private val lottoNumbers: LottoNumbers
