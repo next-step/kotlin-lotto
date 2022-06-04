@@ -7,13 +7,13 @@ import kotlin.random.Random
 class LottoTicketMachine(private val numbersGenerator: NumbersGenerator = RandomNumbersGenerator(LottoNumber.LOTTO_NUMBER_RANGE, LottoNumbers.LOTTO_NUMBERS)) {
 
     fun issueTicket(numbers: List<LottoNumber>): LottoTicket {
-        return LottoTicket(numbers)
+        return LottoTicket.of(numbers)
     }
 
     fun issueTicket(): LottoTicket {
         val numbers = numbersGenerator.numbers()
 
-        return LottoTicket(numbers)
+        return LottoTicket.of(numbers)
     }
 
     interface NumbersGenerator {

@@ -46,7 +46,7 @@ internal class LottoTicketTest {
         ]
     )
     fun moreThanSixNumbersTest(@ConvertWith(IntArrayConverter::class) numbers: IntArray) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers.map { LottoNumber.of(it) }.toList()) }
+        assertThrows<IllegalArgumentException> { LottoTicket.of(numbers.map { LottoNumber.of(it) }.toList()) }
     }
 
     @DisplayName("로또 티켓은 같은 숫자를 여러 개 가질 수 없다.")
@@ -64,7 +64,7 @@ internal class LottoTicketTest {
         ]
     )
     fun ticketDuplicatedNumberTest(@ConvertWith(IntArrayConverter::class) numbers: IntArray) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers.map { LottoNumber.of(it) }.toList()) }
+        assertThrows<IllegalArgumentException> { LottoTicket.of(numbers.map { LottoNumber.of(it) }.toList()) }
     }
 
     @DisplayName("로또 티켓은 1보다 작거나 45보다 큰 숫자로 이루어질 수 없다.")
@@ -78,6 +78,6 @@ internal class LottoTicketTest {
         ]
     )
     fun ticketNumberRangeTest(@ConvertWith(IntArrayConverter::class) numbers: IntArray) {
-        assertThrows<IllegalArgumentException> { LottoTicket(numbers.map { LottoNumber.of(it) }.toList()) }
+        assertThrows<IllegalArgumentException> { LottoTicket.of(numbers.map { LottoNumber.of(it) }.toList()) }
     }
 }

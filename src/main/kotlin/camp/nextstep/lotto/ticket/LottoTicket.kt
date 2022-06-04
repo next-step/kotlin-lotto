@@ -3,17 +3,21 @@ package camp.nextstep.lotto.ticket
 import camp.nextstep.lotto.number.LottoNumber
 import camp.nextstep.lotto.number.LottoNumbers
 
-class LottoTicket(numbers: List<LottoNumber>) {
+class LottoTicket private constructor(numbers: LottoNumbers) {
 
-    val numbers = numbers.sortedBy { it.value }
-
-    init {
-        require(numbers.toSet().size == LottoNumbers.LOTTO_NUMBERS) { "로또 티켓은 서로 다른 ${LottoNumbers.LOTTO_NUMBERS}개의 숫자를 가질 수 있습니다. numbers=$numbers" }
-    }
+    val numbers = numbers.numbers
 
     companion object {
         fun of(vararg numbers: Int): LottoTicket {
-            return LottoTicket(numbers.map { LottoNumber.of(it) }.toList())
+            return LottoTicket(LottoNumbers.of(*numbers))
+        }
+
+        fun of(numbers: List<LottoNumber>): LottoTicket {
+            return LottoTicket(LottoNumbers.of(*numbers.map { it.value }.toIntArray()))
+        }
+
+        fun of(numbers: LottoNumbers): LottoTicket {
+            return LottoTicket(numbers)
         }
     }
 }
