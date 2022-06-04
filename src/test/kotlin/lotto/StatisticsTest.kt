@@ -21,7 +21,8 @@ class StatisticsTest {
             Winning.FIRST to 0,
             Winning.SECOND to 0,
             Winning.THIRD to 0,
-            Winning.FOURTH to 1,
+            Winning.FOURTH to 0,
+            Winning.FIFTH to 1,
             Winning.FAIL to 13
         )
 
@@ -42,7 +43,8 @@ class StatisticsTest {
                         Winning.FIRST to 1,
                         Winning.SECOND to 1,
                         Winning.THIRD to 0,
-                        Winning.FOURTH to 0
+                        Winning.FOURTH to 0,
+                        Winning.FIFTH to 0
                     )
                 ),
                 Arguments.of(
@@ -51,7 +53,8 @@ class StatisticsTest {
                         Winning.FIRST to 2,
                         Winning.SECOND to 0,
                         Winning.THIRD to 0,
-                        Winning.FOURTH to 0
+                        Winning.FOURTH to 0,
+                        Winning.FIFTH to 0
                     )
                 )
             )

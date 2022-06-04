@@ -6,8 +6,8 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class PriceTest {
     @ParameterizedTest
-    @ValueSource(ints = [999, 0, -1])
-    fun `금액이 1000원 미만이면 RuntimeException 발생`(money: Int) {
+    @ValueSource(ints = [0, -100])
+    fun `금액이 0원 이하이면 RuntimeException 발생`(money: Int) {
         assertThatIllegalArgumentException().isThrownBy {
             Price(money)
         }
