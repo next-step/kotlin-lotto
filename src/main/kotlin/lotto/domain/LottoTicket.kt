@@ -29,7 +29,7 @@ data class LottoTicket(val numbers: Set<Int>) {
         fun of(numberStringList: String): LottoTicket {
             return of(
                 numberStringList.split(",").map {
-                    it.trim().toIntOrNull() ?: throw IllegalArgumentException()
+                    it.trim().toIntOrNull() ?: throw IllegalArgumentException(ErrorMessages.INPUT_IS_NOT_NUMBER)
                 }
             )
         }
