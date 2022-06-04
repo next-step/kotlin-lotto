@@ -26,4 +26,15 @@ class LottoResultTest {
 
         assertThat(result.lottoRankList.count { it?.matches == 5 }).isEqualTo(1)
     }
+
+    @Test
+    fun `수익률을 정상적으로 구하는지 확인한다`() {
+        val lotto = Lotto(LottoNumbers(createSixLottoNumber(listOf(1, 2, 3, 4, 5, 6))))
+        val lotto2 = Lotto(LottoNumbers(createSixLottoNumber(listOf(40, 41, 42, 43, 44, 45))))
+        val winLottoNumbers = LottoNumbers(createSixLottoNumber(listOf(1, 2, 3, 43, 44, 45)))
+        val result = LottoResult.of(listOf(lotto, lotto2), winLottoNumbers)
+
+        val expectedProfitRate = "5.00"
+        assertThat(result.profitRate).isEqualTo(expectedProfitRate)
+    }
 }
