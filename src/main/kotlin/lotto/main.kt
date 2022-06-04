@@ -3,8 +3,8 @@ package lotto
 import lotto.domin.LottoMachine
 import lotto.domin.LottoNumberSet
 import lotto.domin.WinningStatics
+import lotto.dto.InputLottoMachineRequestDto
 import lotto.dto.InputLottoNumberDto
-import lotto.dto.InputPaymentRequestDto
 import lotto.util.LottoNumberGenerator
 import lotto.util.LottoNumberRandomGenerator
 import lotto.view.InputView
@@ -15,27 +15,40 @@ fun main() {
     val resultView = ResultView()
 
     val payment: String = inputView.payment()
-    val paymentRequestDto = InputPaymentRequestDto.convertPayment(payment)
+    val manualLotto = buyManualLotto(inputView)
 
-    val lottoRecord = buyLotto(resultView, paymentRequestDto)
-    lottoStatics(inputView, resultView, paymentRequestDto, lottoRecord)
+    val lottoMachineRequestDto = InputLottoMachineRequestDto.of(payment, manualLotto)
+
+    val lottoRecord = buyLotto(resultView, lottoMachineRequestDto)
+    lottoStatics(inputView, resultView, lottoMachineRequestDto, lottoRecord)
 }
 
-fun buyLotto(resultView: ResultView, paymentRequestDto: InputPaymentRequestDto): List<LottoNumberSet> {
-    val lottoNumberGenerator: LottoNumberGenerator = LottoNumberRandomGenerator()
-    val lottoMachine = LottoMachine(paymentRequestDto, lottoNumberGenerator)
+fun buyManualLotto(inputView: InputView): List<LottoNumberSet> {
+    val manualLottoCount: String = inputView.manualLottoCount()
 
-    lottoMachine.sellLotto()
-    val issuanceLottoCount = lottoMachine.issuanceLottoCount
+    inputView.manualLottoNumberTitle()
+    val manualLotto = List(InputLottoMachineRequestDto.convertToCount(manualLottoCount)) {
+        LottoNumberSet(
+            InputLottoNumberDto.convertToLottoNumber(inputView.manualLottoNumberNumber())
+        )
+    }
+
+    return manualLotto
+}
+
+fun buyLotto(resultView: ResultView, lottoMachineRequestDto: InputLottoMachineRequestDto): List<LottoNumberSet> {
+    val lottoNumberGenerator: LottoNumberGenerator = LottoNumberRandomGenerator()
+    val lottoMachine = LottoMachine(lottoMachineRequestDto, lottoNumberGenerator)
+
     val lottoRecord = lottoMachine.lottoRecord
-    resultView.purchaseLotto(issuanceLottoCount, lottoRecord)
+    resultView.purchaseLotto(lottoMachine.issuanceLottoCount, lottoMachine.inputManualLottoCount, lottoRecord)
     return lottoRecord
 }
 
 fun lottoStatics(
     inputView: InputView,
     resultView: ResultView,
-    paymentRequestDto: InputPaymentRequestDto,
+    paymentRequestDto: InputLottoMachineRequestDto,
     lottoRecord: List<LottoNumberSet>
 ) {
     val lastWeekWinningLotto: List<String> = inputView.winningNumber()

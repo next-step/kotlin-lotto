@@ -2,12 +2,12 @@ package lotto.domin
 
 import lotto.domin.LottoWinningAmount.Companion.matchWinningLotto
 import lotto.dto.InputLottoNumberDto
-import lotto.dto.InputPaymentRequestDto
+import lotto.dto.InputLottoMachineRequestDto
 import lotto.dto.WinningStaticsResponseDto
 import kotlin.math.floor
 
 class WinningStatics(
-    paymentDto: InputPaymentRequestDto,
+    paymentDto: InputLottoMachineRequestDto,
     lastWeekWinningLottoDto: InputLottoNumberDto,
     private val lottoRecord: List<LottoNumberSet>
 ) {

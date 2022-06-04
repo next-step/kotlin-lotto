@@ -5,8 +5,8 @@ import lotto.dto.WinningStaticsResponseDto
 
 class ResultView() {
 
-    fun purchaseLotto(issuanceLottoCount: Int, lottoRecord: List<LottoNumberSet>) {
-        println("${issuanceLottoCount}개를 구매했습니다.")
+    fun purchaseLotto(issuanceLottoCount: Int, manualLottoCount: Int, lottoRecord: List<LottoNumberSet>) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${issuanceLottoCount}개를 구매했습니다.")
         lottoRecord.forEach {
             println(it.lotto)
         }
