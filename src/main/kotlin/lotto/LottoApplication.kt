@@ -8,9 +8,32 @@ fun main() {
 
     val lottoMachine = LottoMachine(AutoLottoMaker(), ManualLottoMaker())
 
-    LottoInputTitle.requestPurchaseLotto()
-    val lottoSeller = LottoSeller(Money(BigDecimal(readln().toInt())))
+    val lottoSeller = paidMoneyToLottoSeller()
 
+    buyLottos(lottoSeller, lottoMachine)
+
+    val winningLotto = selectWinningLotto()
+
+    showStatistics(winningLotto, lottoMachine)
+}
+
+private fun showStatistics(winningLotto: WinningLotto, lottoMachine: LottoMachine) {
+    LottoResponse.responseStatisticTitle()
+    val statistics = Statistics(winningLotto, lottoMachine.lottos.lotto)
+    LottoResponse.responseStatistics(statistics.getWinningResult(), statistics.getYield())
+}
+
+private fun selectWinningLotto(): WinningLotto {
+    LottoInputTitle.requestWinningLotto()
+    val inputWinningLottoNumber = readln()
+
+    LottoInputTitle.requestWinningLottoBonusNumber()
+    val inputWinningBonusNumber = readln()
+
+    return WinningLotto(convertWinningLotto(inputWinningLottoNumber), LottoNumber(inputWinningBonusNumber.toInt()))
+}
+
+private fun buyLottos(lottoSeller: LottoSeller, lottoMachine: LottoMachine) {
     LottoInputTitle.requestBuyManualLottoCount()
     val inputManualLottoCount = readln().toInt()
     lottoSeller.buyManual(inputManualLottoCount)
@@ -24,18 +47,11 @@ fun main() {
 
     lottoMachine.buyLotto(lottoSeller.getLottoCount())
     LottoResponse.responseLottos(lottoMachine.lottos.lotto)
+}
 
-    LottoInputTitle.requestWinningLotto()
-    val inputWinningLottoNumber = readln()
-
-    LottoInputTitle.requestWinningLottoBonusNumber()
-    val inputWinningBonusNumber = readln()
-
-    val winningLotto = WinningLotto(convertWinningLotto(inputWinningLottoNumber), LottoNumber(inputWinningBonusNumber.toInt()))
-
-    LottoResponse.responseStatisticTitle()
-    val statistics = Statistics(winningLotto, lottoMachine.lottos.lotto)
-    LottoResponse.responseStatistics(statistics.getWinningResult(), statistics.getYield())
+private fun paidMoneyToLottoSeller(): LottoSeller {
+    LottoInputTitle.requestPurchaseLotto()
+    return LottoSeller(Money(BigDecimal(readln().toInt())))
 }
 
 fun convertWinningLotto(lottoString: String): HashSet<LottoNumber> {
