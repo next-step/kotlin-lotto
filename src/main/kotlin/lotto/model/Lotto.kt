@@ -14,7 +14,7 @@ class Lotto(
 
     private fun findMatchedNumberCount(other: Lotto) = other.lotto.count { lotto.contains(it) }
 
-    private fun contains(number: LottoNumber) = lotto.contains(number)
+    fun contains(number: LottoNumber) = lotto.contains(number)
 
     override fun toString(): String {
         return "$lotto"
