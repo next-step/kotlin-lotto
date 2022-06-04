@@ -21,18 +21,18 @@ class LottoApplication(
         val buyLottoOutputView = BuyLottoOutputView(outPutModule)
         val buyLottoInputView = BuyLottoInputView(inputModule, outPutModule)
 
-        val userMoneyInputDto = buyLottoInputView.readUserMoneyInput()
-        val boughtLottoTickets = ticketSeller.buyPossibleLottoTicket(userMoneyInputDto.userMoney)
+        val userMoney = buyLottoInputView.readUserMoneyInput()
+        val boughtLottoTickets = ticketSeller.buyPossibleLottoTicket(userMoney)
 
         buyLottoOutputView.showAllBoughtTickets(boughtLottoTickets)
 
-        val winningNumbersInputDto = buyLottoInputView.readWinningLottoNumbers()
+        val winningLottoTicketNumbers = buyLottoInputView.readWinningLottoNumbers()
 
         buyLottoOutputView.showTotalWinningInformation(
             Money(boughtLottoTickets.size * lottoTicketPrice.value),
             lottoPrizeManager.getWinningStats(
                 boughtLottoTickets,
-                winningNumbersInputDto.winningLottoTicketNumbers
+                winningLottoTicketNumbers
             )
         )
     }

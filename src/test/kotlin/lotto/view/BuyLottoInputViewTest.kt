@@ -3,6 +3,7 @@ package lotto.view
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoTicketNumber
+import lotto.domain.Money
 import lotto.util.InputModule
 import lotto.util.OutPutModule
 
@@ -24,10 +25,10 @@ class BuyLottoInputViewTest : DescribeSpec({
         val buyLottoInputView = BuyLottoInputView(stubInputModule, stubOutputModule)
 
         // when
-        val readUserMoneyInput = buyLottoInputView.readUserMoneyInput()
+        val userMoney = buyLottoInputView.readUserMoneyInput()
 
         // then
-        readUserMoneyInput.userMoney.value shouldBe 14000
+        userMoney shouldBe Money(14000)
         outputStore[0] shouldBe "구입금액을 입력해 주세요."
         outputStore[1] shouldBe ""
     }
@@ -49,10 +50,10 @@ class BuyLottoInputViewTest : DescribeSpec({
         val buyLottoInputView = BuyLottoInputView(stubInputModule, stubOutputModule)
 
         // when
-        val winningNumbersInputDto = buyLottoInputView.readWinningLottoNumbers()
+        val winningLottoTicketNumbers = buyLottoInputView.readWinningLottoNumbers()
 
         // then
-        winningNumbersInputDto.winningLottoTicketNumbers.winningLottoNumbers.value.map { it.value } shouldBe listOf(
+        winningLottoTicketNumbers.winningLottoNumbers.value.map { it.value } shouldBe listOf(
             1,
             2,
             3,
@@ -60,7 +61,7 @@ class BuyLottoInputViewTest : DescribeSpec({
             5,
             6
         )
-        winningNumbersInputDto.winningLottoTicketNumbers.bonusLottoNumber shouldBe LottoTicketNumber(7)
+        winningLottoTicketNumbers.bonusLottoNumber shouldBe LottoTicketNumber(7)
         outputStore[0] shouldBe "지난 주 당첨 번호를 입력해 주세요."
         outputStore[1] shouldBe "보너스 볼을 입력해 주세요."
         outputStore[2] shouldBe ""

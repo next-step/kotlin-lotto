@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.domain.Money
+import lotto.domain.WinningLottoNumbers
 import lotto.dto.UserMoneyInputDto
 import lotto.dto.WinningNumbersInputDto
 import lotto.util.InputModule
@@ -7,20 +9,20 @@ import lotto.util.OutPutModule
 
 class BuyLottoInputView(private val inputModule: InputModule, private val outPutModule: OutPutModule) {
 
-    fun readUserMoneyInput(): UserMoneyInputDto {
+    fun readUserMoneyInput(): Money {
         showUserMoneyInputGuide()
         val userMoneyInputDto = UserMoneyInputDto(inputModule.read())
         showDivision()
-        return userMoneyInputDto
+        return userMoneyInputDto.userMoney
     }
 
-    fun readWinningLottoNumbers(): WinningNumbersInputDto {
+    fun readWinningLottoNumbers(): WinningLottoNumbers {
         showWinningLottoNumbersInputGuide()
         val winningNumbersString = inputModule.read()
         showBonusBallInputGuide()
         val bonusBallString = inputModule.read()
         showDivision()
-        return WinningNumbersInputDto(winningNumbersString, bonusBallString)
+        return WinningNumbersInputDto(winningNumbersString, bonusBallString).winningLottoTicketNumbers
     }
 
     private fun showUserMoneyInputGuide() {
