@@ -1,7 +1,7 @@
 package lotto.model
 
 data class Lotto(
-    private val lottoNumbers: LottoNumbers
+    val lottoNumbers: LottoNumbers
 ) {
 
     fun matches(otherNumbers: LottoNumbers): Int {
