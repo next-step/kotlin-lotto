@@ -10,6 +10,20 @@ data class WinningNumbers(
         }
     }
 
+    fun checkWith(lottos: Lottos): LottoResult {
+        return LottoResult.from(getLottoWinningMap(lottos))
+    }
+
+    private fun getLottoWinningMap(lottos: Lottos): Map<LottoRank, Int> {
+        return lottos.value.map { lotto ->
+            checkWith(lotto)
+        }.groupingBy { lottoRank ->
+            lottoRank
+        }.eachCount().filter { (lottoRank, _) ->
+            lottoRank.isWin()
+        }
+    }
+
     fun checkWith(lotto: Lotto): LottoRank {
         val numberOfMatches = lotto.getNumberOfMatches(numbers)
         val isBonusBallMatched = isBonusBallMatched(lotto)
