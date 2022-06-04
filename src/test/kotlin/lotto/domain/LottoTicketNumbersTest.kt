@@ -54,6 +54,27 @@ class LottoTicketNumbersTest : DescribeSpec({
         }
     }
 
+    describe("로또 번호가 안포함 되었는지  알수 있다") {
+        it("로또 번호가 포함 되면 false") {
+            // given
+            val lottoNumbersByInt = listOf(1, 2, 3, 4, 5, 6)
+            val lottoTicketNumbers = LottoTicketNumbers.ofInts(lottoNumbersByInt)
+            val includedLottoNumber = LottoTicketNumber(lottoNumbersByInt[0])
+
+            // then
+            lottoTicketNumbers.hasNotLottoNumber(includedLottoNumber) shouldBe false
+        }
+        it("로또 번호가 포함 돠지 않으면 true") {
+            // given
+            val lottoNumbersByInt = listOf(1, 2, 3, 4, 5, 6)
+            val lottoTicketNumbers = LottoTicketNumbers.ofInts(lottoNumbersByInt)
+            val notIncludedLottoNumber = LottoTicketNumber(10)
+
+            // then
+            lottoTicketNumbers.hasNotLottoNumber(notIncludedLottoNumber) shouldBe true
+        }
+    }
+
     it("로또 숫자로 일치하는 번호 갯수를 알수 있다") {
         // given
         val lottoTicketNumbers = LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6))
