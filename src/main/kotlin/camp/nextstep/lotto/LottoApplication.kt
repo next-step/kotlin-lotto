@@ -4,7 +4,6 @@ import camp.nextstep.lotto.raffle.LottoResultMatcher
 import camp.nextstep.lotto.ticket.LottoStore
 import camp.nextstep.lotto.ticket.LottoTicketMachine
 import camp.nextstep.lotto.ui.LottoResult
-import camp.nextstep.lotto.ui.cli.BonusNumberReader
 import camp.nextstep.lotto.ui.cli.GamblerNumbersReader
 import camp.nextstep.lotto.ui.cli.GamblerReader
 import camp.nextstep.lotto.ui.cli.GamblerWriter
@@ -26,9 +25,8 @@ fun main() {
 
     GamblerWriter.write(gambler)
 
-    val winnerNumbers = WinnerNumbersReader.read()
-    val bonusNumber = BonusNumberReader.read()
-    val winningTickets = LottoResultMatcher.winningTickets(gambler.tickets, winnerNumbers, bonusNumber)
+    val (winnerNumbers, bonusNumber) = WinnerNumbersReader.read()
+    val winningTickets = LottoResultMatcher.winningTickets(gambler.tickets, winnerNumbers.numbers, bonusNumber)
     val totalEarning = winningTickets.sumOf { it.winnings.winnings }
     val lottoResult = LottoResult(winningTickets, seedMoney, totalEarning)
 
