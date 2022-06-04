@@ -1,6 +1,6 @@
 package camp.nextstep.lotto.number
 
-data class LottoNumber(val value: Int) {
+class LottoNumber private constructor(val value: Int) {
 
     companion object {
         val LOTTO_NUMBER_RANGE = 1..45
