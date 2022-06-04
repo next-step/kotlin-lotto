@@ -16,7 +16,7 @@ class WinningLottoNumbersTest : DescribeSpec({
 
         // then
         winningLottoNumbers.winningLottoNumbers.value.map { it.value } shouldBe winningNumbers
-        winningLottoNumbers.bonusLottoNumber.value shouldBe bonusNumber
+        winningLottoNumbers.bonusLottoNumber shouldBe LottoTicketNumber(bonusNumber)
     }
 
     it("로또 티켓 번호가 당첨 번호와 몇개 일치 하였는지 알 수 있다") {
