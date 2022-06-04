@@ -10,16 +10,16 @@ fun main() {
 
     val lottoSeller = paidMoneyToLottoSeller()
 
-    buyLottos(lottoSeller, lottoMachine)
+    val lottos = buyLottos(lottoSeller, lottoMachine)
 
     val winningLotto = selectWinningLotto()
 
-    showStatistics(winningLotto, lottoMachine)
+    showStatistics(winningLotto, lottos)
 }
 
-private fun showStatistics(winningLotto: WinningLotto, lottoMachine: LottoMachine) {
+private fun showStatistics(winningLotto: WinningLotto, lottos: Lottos) {
     LottoResponse.responseStatisticTitle()
-    val statistics = Statistics(winningLotto, lottoMachine.lottos.lotto)
+    val statistics = Statistics(winningLotto, lottos.lottos)
     LottoResponse.responseStatistics(statistics.getWinningResult(), statistics.getYield())
 }
 
@@ -30,23 +30,35 @@ private fun selectWinningLotto(): WinningLotto {
     LottoInputTitle.requestWinningLottoBonusNumber()
     val inputWinningBonusNumber = readln()
 
-    return WinningLotto(convertWinningLotto(inputWinningLottoNumber), LottoNumber(inputWinningBonusNumber.toInt()))
+    return WinningLotto(convertLotto(inputWinningLottoNumber), LottoNumber(inputWinningBonusNumber.toInt()))
 }
 
-private fun buyLottos(lottoSeller: LottoSeller, lottoMachine: LottoMachine) {
+private fun buyLottos(lottoSeller: LottoSeller, lottoMachine: LottoMachine) : Lottos {
     LottoInputTitle.requestBuyManualLottoCount()
     val inputManualLottoCount = readln().toInt()
     lottoSeller.buyManual(inputManualLottoCount)
 
-    LottoInputTitle.requestBuyManualLotto()
-    repeat(inputManualLottoCount) {
-        lottoMachine.buyManualLotto(convertWinningLotto(readln()).toList())
-    }
+    val manualLottos = buyManualLottos(inputManualLottoCount, lottoMachine)
+    val autoLottos = buyAutoLottos(inputManualLottoCount, lottoSeller, lottoMachine)
+    manualLottos.addAll(autoLottos.toList())
 
+    val lottos = Lottos(manualLottos.toList())
+    LottoResponse.responseLottos(lottos.lottos)
+    return lottos
+}
+
+private fun buyAutoLottos(inputManualLottoCount: Int, lottoSeller: LottoSeller, lottoMachine: LottoMachine) : List<Lotto> {
     LottoResponse.responsePurchase(inputManualLottoCount, lottoSeller.getLottoCount())
+    return lottoMachine.buyLotto(lottoSeller.getLottoCount())
+}
 
-    lottoMachine.buyLotto(lottoSeller.getLottoCount())
-    LottoResponse.responseLottos(lottoMachine.lottos.lotto)
+private fun buyManualLottos(inputManualLottoCount: Int, lottoMachine: LottoMachine): MutableList<Lotto> {
+    LottoInputTitle.requestBuyManualLotto()
+    val manualLottos: MutableList<Lotto> = mutableListOf()
+    repeat(inputManualLottoCount) {
+        manualLottos.add(lottoMachine.buyManualLotto(convertLotto(readln()).toList()))
+    }
+    return manualLottos
 }
 
 private fun paidMoneyToLottoSeller(): LottoSeller {
@@ -54,7 +66,7 @@ private fun paidMoneyToLottoSeller(): LottoSeller {
     return LottoSeller(Money(BigDecimal(readln().toInt())))
 }
 
-fun convertWinningLotto(lottoString: String): HashSet<LottoNumber> {
+fun convertLotto(lottoString: String): HashSet<LottoNumber> {
     val lottoStrings = lottoString.split(", ")
     return lottoStrings.map { CachedLottoNumbers.getLottoNumber(it.toInt()) }
         .toHashSet()
