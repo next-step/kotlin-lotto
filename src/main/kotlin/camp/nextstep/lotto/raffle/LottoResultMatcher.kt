@@ -20,6 +20,6 @@ object LottoResultMatcher {
     }
 
     fun count(ticket: LottoTicket, winnerNumbers: WinnerNumbers): LottoMatchResult {
-        return LottoMatchResult(winnerNumbers.count(ticket.numbers), ticket.numbers.numbers.contains(winnerNumbers.bonusNumber))
+        return LottoMatchResult(winnerNumbers.count(ticket.numbers), ticket.numbers.contains(winnerNumbers.bonusNumber))
     }
 }

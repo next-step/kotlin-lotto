@@ -7,6 +7,6 @@ data class WinnerNumbers(val winnerNumbers: LottoNumbers, val bonusNumber: Lotto
     }
 
     fun count(numbers: LottoNumbers): Int {
-        return numbers.numbers.count { winnerNumbers.numbers.contains(it) }
+        return numbers.numbers.count { winnerNumbers.contains(it) }
     }
 }

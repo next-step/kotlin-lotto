@@ -19,7 +19,7 @@ internal class LottoTicketTest {
     fun sixNumbersTest() {
         val ticket = LottoTicket.of(1, 2, 3, 4, 5, 6)
 
-        assertEquals(6, ticket.numbers.numbers.size)
+        assertEquals(6, ticket.numbers.size)
         assertThat(ticket.numbers.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
     }
 

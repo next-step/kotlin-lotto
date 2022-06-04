@@ -4,8 +4,14 @@ class LottoNumbers private constructor(numbers: List<LottoNumber>) {
 
     val numbers = numbers.sortedBy { it.value }
 
+    val size = numbers.size
+
     init {
         require(numbers.toSet().size == LOTTO_NUMBERS) { "로또 티켓은 서로 다른 ${LOTTO_NUMBERS}개의 숫자를 가질 수 있습니다. numbers=$numbers" }
+    }
+
+    operator fun contains(element: LottoNumber): Boolean {
+        return numbers.contains(element)
     }
 
     companion object {
