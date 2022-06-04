@@ -57,12 +57,4 @@ class WinningNumbersTest {
             { assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1) }
         )
     }
-
-    @Test
-    fun `checkWith를 통해 Lotto를 받아 당첨 순위를 확인할 수 있다`() {
-        val lotto = Lotto.from(1, 2, 3, 4, 5, 7)
-        val winningNumbers = WinningNumbers.from(Lotto.from(1, 2, 3, 4, 5, 6), LottoNumber[7])
-
-        assertThat(winningNumbers.checkWith(lotto)).isEqualTo(LottoRank.SECOND)
-    }
 }

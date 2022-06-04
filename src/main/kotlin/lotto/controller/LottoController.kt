@@ -29,9 +29,8 @@ object LottoController {
             outputConverter = LottosConverter
         )
 
-        val winningNumbers = getWinningNumbers()
-        val bonusBall = getBonusBall()
-        val lottoResult = lottos.checkWith(WinningNumbers(winningNumbers, bonusBall))
+        val winningNumbers = WinningNumbers(getWinningNumbers(), getBonusBall())
+        val lottoResult = winningNumbers.checkWith(lottos)
         OutputView.print(
             printable = lottoResult,
             outputConverter = LottoResultConverter

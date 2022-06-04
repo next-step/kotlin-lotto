@@ -2,7 +2,6 @@ package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
 
 class LottosTest {
     @Test
@@ -16,30 +15,6 @@ class LottosTest {
         val lottos = Lottos(lottoList)
 
         assertThat(lottos.value).isEqualTo(lottoList)
-    }
-
-    @Test
-    fun `checkWith를 통해 당첨 번호를 받아 LottoResult를 반환한다`() {
-        val lottos = Lottos(
-            listOf(
-                Lotto.from(8, 21, 23, 41, 42, 43),
-                Lotto.from(8, 21, 23, 41, 42, 44),
-                Lotto.from(8, 21, 23, 41, 43, 44),
-                Lotto.from(8, 21, 23, 41, 1, 2),
-                Lotto.from(8, 21, 23, 1, 2, 3)
-            )
-        )
-
-        val winningNumbers = WinningNumbers.from(Lotto.from(8, 21, 23, 41, 42, 43), LottoNumber[4])
-
-        val lottoResult = lottos.checkWith(winningNumbers)
-
-        assertAll(
-            { assertThat(lottoResult[LottoRank.FIFTH].count).isEqualTo(1) },
-            { assertThat(lottoResult[LottoRank.FOURTH].count).isEqualTo(1) },
-            { assertThat(lottoResult[LottoRank.THIRD].count).isEqualTo(2) },
-            { assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1) }
-        )
     }
 
     @Test
