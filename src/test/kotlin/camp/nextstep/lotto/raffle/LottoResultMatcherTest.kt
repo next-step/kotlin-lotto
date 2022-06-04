@@ -2,6 +2,8 @@ package camp.nextstep.lotto.raffle
 
 import camp.nextstep.lotto.IntArrayConverter
 import camp.nextstep.lotto.number.LottoNumber
+import camp.nextstep.lotto.number.LottoNumbers
+import camp.nextstep.lotto.number.WinnerNumbers
 import camp.nextstep.lotto.ticket.LottoTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -31,11 +33,11 @@ internal class LottoResultMatcherTest {
         ]
     )
     fun matchedLottoNumbers(@ConvertWith(IntArrayConverter::class) ticketNumbers: IntArray, expectedMatchCount: Int, expectedMatchedBonus: Boolean) {
-        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }
+        val winnerNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
         val bonusNumber = LottoNumber.of(7)
         val lottoTicket = LottoTicket.of(ticketNumbers.map { LottoNumber.of(it) }.toList())
 
-        val matchResult = LottoResultMatcher.count(lottoTicket, winnerNumbers, bonusNumber)
+        val matchResult = LottoResultMatcher.count(lottoTicket, WinnerNumbers(winnerNumbers, bonusNumber))
 
         assertEquals(expectedMatchCount, matchResult.matchedCount)
     }
@@ -57,10 +59,10 @@ internal class LottoResultMatcherTest {
             LottoTicket.of(14, 24, 33, 41, 45, 6), // 1
             LottoTicket.of(15, 25, 34, 41, 44, 45), // 0
         )
-        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }
+        val winnerNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
         val bonusNumber = LottoNumber.of(7)
 
-        val winningTickets = LottoResultMatcher.winningTickets(tickets, winnerNumbers, bonusNumber)
+        val winningTickets = LottoResultMatcher.winningTickets(tickets, WinnerNumbers(winnerNumbers, bonusNumber))
 
         assertThat(winningTickets.filter { it.winnings == Winnings.FIRST }).hasSize(1)
         assertThat(winningTickets.filter { it.winnings == Winnings.SECOND }).hasSize(2)

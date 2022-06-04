@@ -43,7 +43,7 @@ internal class LottoStoreTest {
 
         val (tickets, balance) = lottoStore.exchange(seedMoney, numbers)
         assertEquals(1, tickets.size)
-        assertThat(tickets[0].numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
+        assertThat(tickets[0].numbers.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
         assertEquals(0, balance)
     }
 

@@ -3,9 +3,7 @@ package camp.nextstep.lotto.ticket
 import camp.nextstep.lotto.number.LottoNumber
 import camp.nextstep.lotto.number.LottoNumbers
 
-class LottoTicket private constructor(numbers: LottoNumbers) {
-
-    val numbers = numbers.numbers
+class LottoTicket private constructor(val numbers: LottoNumbers) {
 
     companion object {
         fun of(vararg numbers: Int): LottoTicket {

@@ -25,8 +25,8 @@ fun main() {
 
     GamblerWriter.write(gambler)
 
-    val (winnerNumbers, bonusNumber) = WinnerNumbersReader.read()
-    val winningTickets = LottoResultMatcher.winningTickets(gambler.tickets, winnerNumbers.numbers, bonusNumber)
+    val winnerNumbers = WinnerNumbersReader.read()
+    val winningTickets = LottoResultMatcher.winningTickets(gambler.tickets, winnerNumbers)
     val totalEarning = winningTickets.sumOf { it.winnings.winnings }
     val lottoResult = LottoResult(winningTickets, seedMoney, totalEarning)
 

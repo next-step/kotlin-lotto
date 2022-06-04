@@ -19,8 +19,8 @@ internal class LottoTicketTest {
     fun sixNumbersTest() {
         val ticket = LottoTicket.of(1, 2, 3, 4, 5, 6)
 
-        assertEquals(6, ticket.numbers.size)
-        assertThat(ticket.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
+        assertEquals(6, ticket.numbers.numbers.size)
+        assertThat(ticket.numbers.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
     }
 
     @DisplayName("로또 티켓은 6개의 숫자를 오름차순으로 가진다.")
@@ -31,7 +31,7 @@ internal class LottoTicketTest {
         val sortedNumbers = listOf(6, 4, 2, 3, 1, 5).sorted()
 
         for (i in 0 until LottoNumbers.LOTTO_NUMBERS) {
-            assertEquals(LottoNumber.of(sortedNumbers[i]), ticket.numbers[i])
+            assertEquals(LottoNumber.of(sortedNumbers[i]), ticket.numbers.numbers[i])
         }
     }
 
