@@ -26,8 +26,17 @@ object ResultView {
     private fun printWinningStatus(winningRanks: List<WinningRank>) {
         WinningRank.values().filter { it != NONE }
             .reversed()
-            .map { println("${it.matchedNumberCount}개 일치 (${it.prizeMoney}원)- ${winningRanks.count { rank -> it == rank }}개") }
+            .map { println(winningStatusMessage(it, winningRanks)) }
     }
+
+    private fun winningStatusMessage(winningRank: WinningRank, winningRanks: List<WinningRank>) =
+        "${winningRank.matchedNumberCount}개 일치${
+            if (winningRank.isBonusNumberNecessary) {
+                ", 보너스 볼 일치"
+            } else {
+                ""
+            }
+        } (${winningRank.prizeMoney}원)- ${winningRanks.count { rank -> winningRank == rank }}개"
 
     private fun printEarningsRatio(paymentPrice: Int, winningRanks: List<WinningRank>) {
         val earnings = winningRanks.sumOf { it.prizeMoney }

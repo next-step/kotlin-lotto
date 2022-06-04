@@ -3,7 +3,7 @@ package lotto.model
 enum class WinningRank(
     val matchedNumberCount: Int,
     val prizeMoney: Int,
-    private val isBonusNumberNecessary: Boolean
+    val isBonusNumberNecessary: Boolean
 ) {
 
     FIRST_PRIZE(6, 2_000_000_000, false),
