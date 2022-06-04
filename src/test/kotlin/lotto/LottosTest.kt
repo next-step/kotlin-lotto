@@ -22,4 +22,10 @@ internal class LottosTest {
 
         assertThat(lottos.lottos.size).isEqualTo(1)
     }
+
+    @Test
+    fun `로또 값이 없을 경우 빈 리스트를 반환`() {
+        val lottos = Lottos()
+        assertThat(lottos.lottos).isEmpty()
+    }
 }

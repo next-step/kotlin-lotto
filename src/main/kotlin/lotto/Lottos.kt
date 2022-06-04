@@ -1,3 +1,3 @@
 package lotto
 
-class Lottos(val lottos: List<Lotto>)
+class Lottos(val lottos: List<Lotto> = emptyList())

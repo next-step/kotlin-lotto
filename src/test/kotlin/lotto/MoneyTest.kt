@@ -21,8 +21,15 @@ internal class MoneyTest {
 
     @Test
     fun `Money 값 나누기`() {
-        val money = Money(BigDecimal(1000))
-        val divideMoney = money.divide(1000)
+        val money = Money(BigDecimal(1_000))
+        val divideMoney = money.divide(1_000)
         assertThat(divideMoney.won).isEqualTo(1)
+    }
+
+    @Test
+    fun `Money 값 빼기`() {
+        val money = Money(BigDecimal(10_000))
+        val minusMoney = money.minus(1_000)
+        assertThat(minusMoney.won).isEqualTo(9_000)
     }
 }

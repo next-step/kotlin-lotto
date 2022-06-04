@@ -1,6 +1,6 @@
 package lotto
 
-class LottoSeller(private val money: Money) {
+class LottoSeller(private var money: Money) {
 
     init {
         validate()
@@ -12,6 +12,11 @@ class LottoSeller(private val money: Money) {
 
     fun getLottoCount(): Int {
         return money.divide(LOTTO_PRICE).won
+    }
+
+    fun buyManual(count: Int) {
+        require(getLottoCount() >= count) { "해당 금액보다 초과된 로또 갯수입니다." }
+        this.money = money.minus(count * LOTTO_PRICE)
     }
 
     companion object {
