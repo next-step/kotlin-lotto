@@ -8,14 +8,14 @@ import org.junit.jupiter.params.provider.MethodSource
 class InputValidatorTest {
     @ParameterizedTest
     @MethodSource("validCountString")
-    fun `적절 로또 갯수 체크`(input: String?, result: Int) {
-        assertThat(InputValidator.validateInputCount(input)).isEqualTo(result)
+    fun `적절한 정수 체크`(input: String?, result: Int) {
+        assertThat(InputValidator.validateInt(input)).isEqualTo(result)
     }
 
     @ParameterizedTest
     @MethodSource("invalidCountString")
-    fun `부적절 로또 갯수 체크`(input: String?) {
-        assertThat(InputValidator.validateInputCount(input)).isNull()
+    fun `부적절 정수 체크`(input: String?) {
+        assertThat(InputValidator.validateInt(input)).isNull()
     }
 
     @ParameterizedTest
@@ -46,9 +46,9 @@ class InputValidatorTest {
         @JvmStatic
         fun validCountString() = listOf(
             Arguments.of("0", 0),
-            Arguments.of("1", 0),
-            Arguments.of("1000", 1),
-            Arguments.of("1111", 1),
+            Arguments.of("1", 1),
+            Arguments.of("1000", 1000),
+            Arguments.of("1111", 1111),
         )
 
         @JvmStatic
@@ -57,7 +57,6 @@ class InputValidatorTest {
             Arguments.of(""),
             Arguments.of("  "),
             Arguments.of("abc"),
-            Arguments.of("-10"),
             Arguments.of("!@#$%^"),
         )
 

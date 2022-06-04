@@ -1,13 +1,10 @@
 package com.nextstep.jngcii.lotto.view
 
 object InputValidator {
-    private const val LOTTO_PRICE = 1_000
-
-    fun validateInputCount(input: String?): Int? {
+    fun validateInt(input: String?): Int? {
         val value = input.checkIsNull() ?: return null
         val count = value.checkIsIntAndTransform() ?: return null
-        val positiveCount = count.checkNegative() ?: return null
-        return positiveCount / LOTTO_PRICE
+        return count.checkNegative()
     }
 
     fun validateInputNumbers(input: String?): List<Int>? {

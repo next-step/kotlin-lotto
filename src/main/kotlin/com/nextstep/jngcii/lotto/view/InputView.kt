@@ -1,10 +1,13 @@
 package com.nextstep.jngcii.lotto.view
 
+import com.nextstep.jngcii.lotto.model.Calculator
+
 object InputView {
     tailrec fun getCount(read: () -> String?): Int {
         println("구입금액을 입력해 주세요.")
 
-        InputValidator.validateInputCount(read())?.let { return it }
+        InputValidator.validateInt(read())
+            ?.let { return Calculator.calculateLottoCount(it) }
 
         return getCount { readLine() }
     }
