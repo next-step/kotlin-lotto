@@ -14,6 +14,10 @@ class LottoNumbers private constructor(numbers: List<LottoNumber>) {
         return numbers.contains(element)
     }
 
+    override fun toString(): String {
+        return numbers.toString()
+    }
+
     companion object {
         const val LOTTO_NUMBERS = 6
 
