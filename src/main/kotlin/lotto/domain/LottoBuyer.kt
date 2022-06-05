@@ -1,9 +1,7 @@
 package lotto.domain
 
-class LottoBuyer(lottoNumbers: ArrayList<Lotto>) {
-    private val _lottoNumbers = lottoNumbers
-    val lottoNumbers
-        get() = _lottoNumbers
+class LottoBuyer(lottoNumbers: List<Lotto>) {
+    val lottoNumbers = lottoNumbers.toList()
 
     companion object {
         const val PRICE = 1000

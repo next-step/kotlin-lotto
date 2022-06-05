@@ -23,7 +23,7 @@ class LottoStatistics(
         require(winningLottoNumbers.size == WINNING_LOTTO_NUMBER_SIZE) { WINNING_LOTTO_NUMBER_SIZE_MESSAGE }
         return lottoNumbers.sumOf { lotto ->
             val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers)
-            lotto.exchangeCountToMoney(count)
+            LottoMatch.findLottoMatch(count).prize
         }
     }
 

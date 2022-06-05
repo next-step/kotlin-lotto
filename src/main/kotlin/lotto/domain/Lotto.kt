@@ -1,28 +1,17 @@
 package lotto.domain
 
 class Lotto(lottoNumber: List<Int>) {
-    private val _lottoNumber = lottoNumber
-    val lottoNumber
-        get() = _lottoNumber
+    val lottoNumber = lottoNumber.toList()
 
     init {
         require(lottoNumber.size == LOTTO_NUMBER_SIZE) { LOTTO_NUMBER_SIZE_MESSAGE }
         require(lottoNumber.toSet().size == LOTTO_NUMBER_SIZE) { LOTTO_DUPLICATE_MESSAGE }
+        require(lottoNumber.all { number -> number in LOTTO_START_NUMBER..LOTTO_END_NUMBER }) { LOTTO_RANGE_MESSAGE }
     }
 
     fun getCountWithWinningLottoNumber(winningLottoNumbers: List<Int>): Int {
         return winningLottoNumbers
-            .filter { number -> _lottoNumber.contains(number) }.size
-    }
-
-    fun exchangeCountToMoney(count: Int): Int {
-        return when (count) {
-            LottoMatch.THREE.count -> LottoMatch.THREE.prize
-            LottoMatch.FOUR.count -> LottoMatch.FOUR.prize
-            LottoMatch.FIVE.count -> LottoMatch.FIVE.prize
-            LottoMatch.SIX.count -> LottoMatch.SIX.prize
-            else -> ELSE_COUNT_MONEY
-        }
+            .filter { number -> lottoNumber.contains(number) }.size
     }
 
     companion object {
@@ -33,6 +22,8 @@ class Lotto(lottoNumber: List<Int>) {
         private const val LOTTO_NUMBER_SIZE = 6
         private const val LOTTO_NUMBER_SIZE_MESSAGE = "로또 번호를 생성시 6개의 숫자가 생성되어야 합니다."
         private const val LOTTO_DUPLICATE_MESSAGE = "로또 번호를 생성시 중복된 숫자가 존재합니다."
+        private const val LOTTO_RANGE_MESSAGE = "로또 번호는 1 ~ 45 사이의 숫자이어야 합니다."
+
         fun random(): Lotto {
             val lottoNumber = (LOTTO_START_NUMBER..LOTTO_END_NUMBER).shuffled().take(LOTTO_SIZE).sorted()
             return Lotto(lottoNumber)
