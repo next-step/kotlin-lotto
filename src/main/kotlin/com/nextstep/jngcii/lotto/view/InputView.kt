@@ -1,32 +1,55 @@
 package com.nextstep.jngcii.lotto.view
 
 import com.nextstep.jngcii.lotto.model.Calculator
+import com.nextstep.jngcii.lotto.service.InputValidator
 
 object InputView {
     tailrec fun getCount(): Int {
         println("구입금액을 입력해 주세요.")
 
-        InputValidator.validateInt(readLine())
-            ?.let { return Calculator.calculateLottoCount(it) }
-
-        return getCount()
+        return runCatching {
+            Calculator.calculateLottoCount(readLine().toPositiveInt)
+        }.getOrElse {
+            println("${it.message} 다시 입력해주세요.")
+            return getCount()
+        }
     }
 
     tailrec fun getNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        InputValidator.validateInputNumbers(readLine())
-            ?.let { return it }
-
-        return getNumbers()
+        return runCatching {
+            readLine().splitToPositiveIntList
+        }.getOrElse {
+            println("${it.message} 다시 입력해주세요.")
+            return getNumbers()
+        }
     }
 
-    fun getNumber(): Int {
+    tailrec fun getNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
 
-        InputValidator.validateInputNumber(readLine())
-            ?.let { return it }
-
-        return getNumber()
+        return runCatching {
+            readLine().toPositiveInt
+        }.getOrElse {
+            println("${it.message} 다시 입력해주세요.")
+            return getNumber()
+        }
     }
+
+    private val String?.splitToPositiveIntList
+        get(): List<Int> {
+            val notNullValue = InputValidator.validateNotNull(this)
+            return notNullValue.split(",").map {
+                val intValue = InputValidator.validateInt(it)
+                InputValidator.validatePositive(intValue)
+            }
+        }
+
+    private val String?.toPositiveInt
+        get(): Int {
+            val notNullValue = InputValidator.validateNotNull(this)
+            val intValue = InputValidator.validateInt(notNullValue)
+            return InputValidator.validatePositive(intValue)
+        }
 }
