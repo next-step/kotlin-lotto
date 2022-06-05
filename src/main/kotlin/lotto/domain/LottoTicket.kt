@@ -10,11 +10,24 @@ class LottoTicket(val numbers: Set<Int>) {
     }
 
     fun isMatch(matchType: LottoMatchType, winningNumber: LottoWinningNumber): Boolean {
+        if (matchType.matchCount == BONUS_MATCH_COUNT) {
+            return compareBonusMatchCount(matchType, winningNumber)
+        }
+
+        return compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers)
+    }
+
+    private fun compareBonusMatchCount(
+        matchType: LottoMatchType,
+        winningNumber: LottoWinningNumber
+    ): Boolean {
         if (matchType.isBonus) {
             return compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers) &&
                 isContainBonusNumber(winningNumber.bonusNumber)
         }
-        return compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers)
+
+        return !compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers) &&
+            isContainBonusNumber(winningNumber.bonusNumber)
     }
 
     private fun compareMatchCount(matchCount: Int, winningNumber: Set<Int>): Boolean {
@@ -27,5 +40,6 @@ class LottoTicket(val numbers: Set<Int>) {
 
     companion object {
         private const val LOTTO_SIZE = 6
+        private const val BONUS_MATCH_COUNT = 5
     }
 }
