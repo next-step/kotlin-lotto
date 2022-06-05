@@ -21,12 +21,12 @@ class LottoTicketTest {
         @JvmStatic
         fun lottoMatches() = listOf(
             Arguments.of(listOf(1,2,3,4,5,6), listOf(1,2,3,4,5,6), 6),
-            Arguments.of(listOf(1,2,3,4,5,26), listOf(1,2,3,4,5,6), 5),
-            Arguments.of(listOf(1,2,3,4,25,26), listOf(1,2,3,4,5,6), 4),
-            Arguments.of(listOf(1,2,3,24,25,26), listOf(1,2,3,4,5,6), 3),
-            Arguments.of(listOf(1,2,23,24,25,26), listOf(1,2,3,4,5,6), 2),
-            Arguments.of(listOf(1,22,23,24,25,26), listOf(1,2,3,4,5,6), 1),
-            Arguments.of(listOf(21,22,23,24,25,26), listOf(1,2,3,4,5,6), 0),
+            Arguments.of(listOf(1,2,3,4,5,36), listOf(1,2,3,4,5,6), 5),
+            Arguments.of(listOf(1,2,3,4,25,36), listOf(1,2,3,4,5,6), 4),
+            Arguments.of(listOf(1,2,3,34,35,36), listOf(1,2,3,4,5,6), 3),
+            Arguments.of(listOf(1,2,33,34,35,36), listOf(1,2,3,4,5,6), 2),
+            Arguments.of(listOf(1,32,33,34,35,36), listOf(1,2,3,4,5,6), 1),
+            Arguments.of(listOf(31,32,33,34,35,36), listOf(1,2,3,4,5,6), 0),
         )
     }
 }
