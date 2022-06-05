@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoMatch
+import lotto.domain.LottoNumbers
 
 object ResultView {
     private const val PRINT_BUY_LOTTO_COUNT = "개를 구매했습니다."
@@ -10,8 +10,8 @@ object ResultView {
         println("$count" + PRINT_BUY_LOTTO_COUNT)
     }
 
-    fun printBuyLottoNumber(lottoNumbers: List<Lotto>) {
-        lottoNumbers.forEach { lotto -> println(lotto.lottoNumber) }
+    fun printBuyLottoNumber(lottoNumbers: List<LottoNumbers>) {
+        lottoNumbers.forEach { lotto -> println(lotto.lottoNumbers) }
         println()
     }
 

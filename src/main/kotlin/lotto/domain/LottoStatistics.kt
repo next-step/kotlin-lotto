@@ -4,8 +4,8 @@ import kotlin.math.round
 
 class LottoStatistics(
     private val money: Int,
-    private val lottoNumbers: List<Lotto>,
-    private val winningLottoNumbers: List<Int>
+    private val lottoNumbers: List<LottoNumbers>,
+    private val winningLottoNumbers: List<LottoNumber>
 ) {
     val earningRate: Double
     val resultMap: Map<LottoMatch, Int>
@@ -19,7 +19,7 @@ class LottoStatistics(
         }
     }
 
-    private fun calculateWinningTotalMoney(lottoNumbers: List<Lotto>, winningLottoNumbers: List<Int>): Int {
+    private fun calculateWinningTotalMoney(lottoNumbers: List<LottoNumbers>, winningLottoNumbers: List<LottoNumber>): Int {
         require(winningLottoNumbers.size == WINNING_LOTTO_NUMBER_SIZE) { WINNING_LOTTO_NUMBER_SIZE_MESSAGE }
         return lottoNumbers.sumOf { lotto ->
             val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers)
@@ -31,7 +31,7 @@ class LottoStatistics(
         return round(winningTotalMoney / money.toDouble() * 100) / 100
     }
 
-    private fun getLottoWinningCountOfLottoRank(lottoNumbers: List<Lotto>, winningLottoNumbers: List<Int>, count: Int): Int {
+    private fun getLottoWinningCountOfLottoRank(lottoNumbers: List<LottoNumbers>, winningLottoNumbers: List<LottoNumber>, count: Int): Int {
         return lottoNumbers.filter { lotto ->
             lotto.getCountWithWinningLottoNumber(winningLottoNumbers) == count
         }.size

@@ -9,6 +9,6 @@ class LottoBuyerTest {
     @ParameterizedTest
     @ValueSource(ints = [5000, 20000, 100000])
     fun `1) 입력한 금액만큼 로또 구매하기`(money: Int) {
-        Assertions.assertThat(LottoBuyer.buyer(money).lottoNumbers.size).isEqualTo(money / LottoBuyer.PRICE)
+        Assertions.assertThat(LottoBuyer.buyer(money).lottoBuyList.size).isEqualTo(money / LottoBuyer.PRICE)
     }
 }
