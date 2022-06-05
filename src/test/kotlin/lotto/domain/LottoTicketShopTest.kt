@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 import java.lang.IllegalArgumentException
 
-class LottoShopTest {
+class LottoTicketShopTest {
     private lateinit var lottoShop: LottoShop
 
     @BeforeEach

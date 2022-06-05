@@ -8,8 +8,8 @@ class LottoVendor {
         private const val MAXIMUM_NUMBER = 45
         private const val SIZE = 6
 
-        fun generate(lottoCount: Int): List<Lotto> {
-            return List(lottoCount) { Lotto(generateNumbers()) }
+        fun generate(lottoCount: Int): List<LottoTicket> {
+            return List(lottoCount) { LottoTicket(generateNumbers()) }
         }
 
         private fun generateNumbers() = RandomUtil.numbersInRange(MINIMUM_NUMBER..MAXIMUM_NUMBER, SIZE)
