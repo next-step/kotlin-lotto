@@ -24,15 +24,15 @@ value class LottoResult(val value: List<LottoWinning>) {
     }
 
     companion object {
-        private const val MESSAGE_INVALID_LOTTO_RESULT = "LottoResult는 1, 2, 3, 4등 당첨 결과를 모두 포함하고 있어야 합니다."
+        private const val MESSAGE_INVALID_LOTTO_RESULT = "LottoResult는 1, 2, 3, 4, 5등 당첨 결과를 모두 포함하고 있어야 합니다."
 
-        fun from(lottoWinningMap: Map<NumberOfMatches, Int>): LottoResult {
-            fun getCount(numberOfMatches: NumberOfMatches): Int {
-                return lottoWinningMap[numberOfMatches] ?: 0
+        fun from(lottoWinningMap: Map<LottoRank, Int>): LottoResult {
+            fun getCount(lottoRank: LottoRank): Int {
+                return lottoWinningMap[lottoRank] ?: 0
             }
 
             val lottoWinnings = LottoRank.winnerPlace().map { lottoRank ->
-                LottoWinning(lottoRank, getCount(lottoRank.numberOfMatches))
+                LottoWinning(lottoRank, getCount(lottoRank))
             }
 
             return LottoResult(lottoWinnings)

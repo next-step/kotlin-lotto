@@ -5,10 +5,11 @@ class RangeLottoFactory(
 ) : LottoFactory {
     override fun create(): Lotto {
         val numbers = lottoRange
+            .asSequence()
             .shuffled()
             .take(Lotto.LOTTO_NUMBER_COUNT)
             .map { number ->
-                LottoNumber(number)
+                LottoNumber[number]
             }.toSet()
 
         return Lotto(numbers)

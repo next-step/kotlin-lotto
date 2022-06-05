@@ -7,8 +7,9 @@ import org.junit.jupiter.api.assertThrows
 
 class LottoResultTest {
     @Test
-    fun `LottoResult는 1등부터 4등까지의 당첨 결과를 모두 보관한다`() {
+    fun `LottoResult는 1등부터 5등까지의 당첨 결과를 모두 보관한다`() {
         val lottoWinningList = listOf(
+            LottoWinning(LottoRank.FIFTH, 2),
             LottoWinning(LottoRank.FOURTH, 2),
             LottoWinning(LottoRank.THIRD, 1),
             LottoWinning(LottoRank.SECOND, 1),
@@ -54,6 +55,7 @@ class LottoResultTest {
     @Test
     fun `get operator를 통해 적절한 LottoWinning을 가져올 수 있다`() {
         val lottoWinningList = listOf(
+            LottoWinning(LottoRank.FIFTH, 2),
             LottoWinning(LottoRank.FOURTH, 2),
             LottoWinning(LottoRank.THIRD, 1),
             LottoWinning(LottoRank.SECOND, 1),
@@ -67,18 +69,18 @@ class LottoResultTest {
     }
 
     @Test
-    fun `Int, Int를 key-value로 하는 Map을 넘겨서 LottoResult를 만들 수 있다`() {
+    fun `LottoRank, Int를 key-value로 하는 Map을 넘겨서 LottoResult를 만들 수 있다`() {
         val lottoWinningMap = mapOf(
-            NumberOfMatches(3) to 3,
-            NumberOfMatches(4) to 1,
-            NumberOfMatches(6) to 1
+            LottoRank.FIFTH to 3,
+            LottoRank.FOURTH to 1,
+            LottoRank.FIRST to 1
         )
         val lottoResult = LottoResult.from(lottoWinningMap)
 
         assertAll(
-            { assertThat(lottoResult[LottoRank.FOURTH].count).isEqualTo(3) },
-            { assertThat(lottoResult[LottoRank.THIRD].count).isEqualTo(1) },
-            { assertThat(lottoResult[LottoRank.SECOND].count).isEqualTo(0) },
+            { assertThat(lottoResult[LottoRank.FIFTH].count).isEqualTo(3) },
+            { assertThat(lottoResult[LottoRank.FOURTH].count).isEqualTo(1) },
+            { assertThat(lottoResult[LottoRank.THIRD].count).isEqualTo(0) },
             { assertThat(lottoResult[LottoRank.FIRST].count).isEqualTo(1) }
         )
     }
@@ -86,6 +88,7 @@ class LottoResultTest {
     @Test
     fun `getTotalEarns를 통해 총 복권 당첨금을 구할 수 있다`() {
         val lottoWinningList = listOf(
+            LottoWinning(LottoRank.FIFTH, 2),
             LottoWinning(LottoRank.FOURTH, 2),
             LottoWinning(LottoRank.THIRD, 1),
             LottoWinning(LottoRank.SECOND, 1),

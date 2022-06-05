@@ -1,5 +1,6 @@
 package lotto.view.outputconverter
 
+import lotto.domain.model.LottoRank
 import lotto.domain.model.LottoResult
 import lotto.domain.model.LottoWinning
 
@@ -15,6 +16,10 @@ object LottoResultConverter : OutputConverter<LottoResult> {
     }
 
     private fun LottoWinning.toPrintableText(): String {
-        return "${rank.numberOfMatches}개 일치 (${rank.winnings}원) - ${count}개"
+        return "${rank.numberOfMatches}개 일치${rank.bonusBallText()}(${rank.winnings}원) - ${count}개"
+    }
+
+    private fun LottoRank.bonusBallText(): String {
+        return if (this == LottoRank.SECOND) ", 보너스 볼 일치" else " "
     }
 }

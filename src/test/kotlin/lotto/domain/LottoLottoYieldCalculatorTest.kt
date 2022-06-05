@@ -11,6 +11,7 @@ class LottoLottoYieldCalculatorTest {
     fun `calculate를 통해 lottoResult와 구입 금액을 받아 수익률을 계산할 수 있다`() {
         val lottoResult = LottoResult(
             listOf(
+                LottoWinning(LottoRank.FIFTH, 2),
                 LottoWinning(LottoRank.FOURTH, 2),
                 LottoWinning(LottoRank.THIRD, 1),
                 LottoWinning(LottoRank.SECOND, 0),

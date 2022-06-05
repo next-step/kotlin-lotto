@@ -12,14 +12,4 @@ class NumberOfMatchesTest {
 
         assertThat(numberOfMatches.value).isEqualTo(input)
     }
-
-    @ParameterizedTest
-    @ValueSource(ints = [1, 2, 3, 4, 5, 6, 0])
-    fun `isWin을 통해 당첨금을 받을 수 있는 일치수인지 확인한다`(input: Int) {
-        val numberOfMatches = NumberOfMatches(input)
-
-        val expected = input in NumberOfMatches.WIN_NUMBER_RANGE
-
-        assertThat(numberOfMatches.isWin()).isEqualTo(expected)
-    }
 }
