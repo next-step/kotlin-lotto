@@ -42,13 +42,13 @@ class LottoTicketTest : DescribeSpec({
             it("매치 카운트가 일치하면 true 를 반환한다.") {
                 val givenBonusNumber: Int = 33
                 val givenWinningNumber = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), givenBonusNumber)
-                givenLottoTicket.isMatch(LottoMatchType.FIVE_BONUS, givenWinningNumber) shouldBe true
+                givenLottoTicket.isMatch(LottoRank.SECOND, givenWinningNumber) shouldBe true
             }
 
             it(" 매치 카운트가 불일치하면 false 를 반환한다.") {
                 val givenBonusNumber: Int = 7
                 val givenWinningNumber = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), givenBonusNumber)
-                givenLottoTicket.isMatch(LottoMatchType.FIVE_BONUS, givenWinningNumber) shouldBe false
+                givenLottoTicket.isMatch(LottoRank.SECOND, givenWinningNumber) shouldBe false
             }
         }
 
@@ -57,11 +57,11 @@ class LottoTicketTest : DescribeSpec({
             val givenWinningNumber = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), 1)
 
             it("매치 카운트가 일치하면 true 를 반환한다.") {
-                givenLottoTicket.isMatch(LottoMatchType.THREE, givenWinningNumber) shouldBe true
+                givenLottoTicket.isMatch(LottoRank.FIFTH, givenWinningNumber) shouldBe true
             }
 
             it("매치 카운트가 불일치하면 false 를 반환한다.") {
-                givenLottoTicket.isMatch(LottoMatchType.SIX, givenWinningNumber) shouldBe false
+                givenLottoTicket.isMatch(LottoRank.FIRST, givenWinningNumber) shouldBe false
             }
         }
     }

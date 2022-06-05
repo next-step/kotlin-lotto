@@ -9,24 +9,24 @@ class LottoTicket(val numbers: Set<Int>) {
         }
     }
 
-    fun isMatch(matchType: LottoMatchType, winningNumber: LottoWinningNumber): Boolean {
-        if (matchType.matchCount == BONUS_MATCH_COUNT) {
-            return compareBonusMatchCount(matchType, winningNumber)
+    fun isMatch(lottoRank: LottoRank, winningNumber: LottoWinningNumber): Boolean {
+        if (lottoRank.matchCount == BONUS_MATCH_COUNT) {
+            return compareBonusMatchCount(lottoRank, winningNumber)
         }
 
-        return compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers)
+        return compareMatchCount(lottoRank.matchCount, winningNumber.winningNumber.numbers)
     }
 
     private fun compareBonusMatchCount(
-        matchType: LottoMatchType,
+        lottoRank: LottoRank,
         winningNumber: LottoWinningNumber
     ): Boolean {
-        if (matchType.isBonus) {
-            return compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers) &&
+        if (lottoRank.isBonus) {
+            return compareMatchCount(lottoRank.matchCount, winningNumber.winningNumber.numbers) &&
                 isContainBonusNumber(winningNumber.bonusNumber)
         }
 
-        return !compareMatchCount(matchType.matchCount, winningNumber.winningNumber.numbers) &&
+        return !compareMatchCount(lottoRank.matchCount, winningNumber.winningNumber.numbers) &&
             isContainBonusNumber(winningNumber.bonusNumber)
     }
 

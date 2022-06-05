@@ -13,7 +13,7 @@ data class LottoTickets(
         return lottoTickets
     }
 
-    fun getMatchCount(matchType: LottoMatchType, winningNumbers: LottoWinningNumber): Int {
-        return lottoTickets.count() { lottoTicket -> lottoTicket.isMatch(matchType, winningNumbers) }
+    fun getMatchCount(lottoRank: LottoRank, winningNumbers: LottoWinningNumber): Int {
+        return lottoTickets.count() { lottoTicket -> lottoTicket.isMatch(lottoRank, winningNumbers) }
     }
 }
