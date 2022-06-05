@@ -26,6 +26,7 @@ class LottoTicket(numbers: Set<Int>, bonus: Int? = null) {
             .map { lottoTicket -> lottoTicket.number }
             .sorted()
             .count { wonLottoTicket.numbers.map { wonLottoNumber -> wonLottoNumber.number }.contains(it) }
+    }
 
     fun isMatchedBonus(bonus: LottoNumber?): Boolean {
         return bonus
