@@ -41,9 +41,7 @@ class LottoSellerTest {
         val lottoTicket = lottoSeller.buy(autoLottoPurchaseAmount, emptyList(), randomNumbers)
         val lottoNumbers = randomNumbers.makeLottoNumbers().map { LottoNumber.valueOf(it) }.toSet()
 
-        lottoNumbers.forEach {
-            assertThat(lottoTicket[0].numbers).contains(it)
-        }
+        assertThat(lottoTicket[0].numbers).containsAll(lottoNumbers)
     }
 
     @Test
