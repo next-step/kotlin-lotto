@@ -11,7 +11,7 @@ class LottoStoreTest : DescribeSpec({
                 val givenMoney: Int = 14000
                 val lottoTickets: LottoTickets = LottoStore.buyLottoTicket(givenMoney)
 
-                lottoTickets.getLottoTickets().size shouldBe 14
+                lottoTickets.lottoTickets.size shouldBe 14
             }
         }
 

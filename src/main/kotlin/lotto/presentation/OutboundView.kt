@@ -8,9 +8,9 @@ import lotto.domain.LottoWinningNumber
 class OutboundView {
 
     fun printLottoTickets(lottoTickets: LottoTickets) {
-        println("${lottoTickets.getLottoTickets().size} 개를 구매했습니다.")
+        println("${lottoTickets.lottoTickets.size} 개를 구매했습니다.")
 
-        lottoTickets.getLottoTickets()
+        lottoTickets.lottoTickets
             .forEach { println(it.numbers.joinToString(prefix = "[", postfix = "]")) }
     }
 
