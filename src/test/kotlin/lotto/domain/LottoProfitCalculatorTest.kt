@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 
 class LottoProfitCalculatorTest : DescribeSpec({
     describe("calculateRewardRate 메서드") {
-        val givenWinningNumbers = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), 45)
+        val givenWinningNumbers = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), 7)
         val givenLottoTickets = LottoTickets(
             listOf(
                 LottoTicket(setOf(8, 21, 23, 41, 42, 43)),

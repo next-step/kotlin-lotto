@@ -26,8 +26,8 @@ class LottoTicket(val numbers: Set<Int>) {
                 isContainBonusNumber(winningNumber.bonusNumber)
         }
 
-        return !compareMatchCount(lottoRank.matchCount, winningNumber.winningNumber.numbers) &&
-            isContainBonusNumber(winningNumber.bonusNumber)
+        return compareMatchCount(lottoRank.matchCount, winningNumber.winningNumber.numbers) &&
+            !isContainBonusNumber(winningNumber.bonusNumber)
     }
 
     private fun compareMatchCount(matchCount: Int, winningNumber: Set<Int>): Boolean {
