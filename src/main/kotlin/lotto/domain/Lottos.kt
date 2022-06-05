@@ -12,5 +12,15 @@ data class LottoTicket(
 
 data class LottoTickets(
     val lottoCount: Int,
-    val lottos: List<Lotto>
-)
+    val lottoTickets: List<LottoTicket>
+) {
+    private val listMatchCount = mutableListOf<Int>()
+
+    fun match(winningNumbers: WinningNumber): List<Int> {
+         lottoTickets.map { lottoTicket ->
+            val matchCount = lottoTicket.matchCount(winningNumbers)
+             listMatchCount.plus(matchCount)
+        }
+        return listMatchCount.sorted()
+    }
+}
