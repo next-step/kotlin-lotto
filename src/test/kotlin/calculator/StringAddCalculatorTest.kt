@@ -1,8 +1,8 @@
 package calculator
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -56,7 +56,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["-1", "-1,2,3", "1,-2,3"])
     fun `음수를 전달하는 경우 RuntimeException 예외가 발생해야 한다`(inputStr: String) {
-        assertThrows(RuntimeException::class.java) {
+        assertThrows<RuntimeException> {
             StringAddCalculator().calculate(inputStr)
         }
     }
@@ -64,7 +64,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["a,2", "2,#"])
     fun `숫자 이외의 값을 전달하는 경우 RuntimeException 예외가 발생해야 한다`(inputStr: String) {
-        assertThrows(RuntimeException::class.java) {
+        assertThrows<RuntimeException> {
             StringAddCalculator().calculate(inputStr)
         }
     }
@@ -72,7 +72,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,", "1,,2", "1$,2,3", "//;\n1;2;"])
     fun `올바르지 않은 연산식이면 RuntimeException 예외가 발생해야 한다`(inputStr: String) {
-        assertThrows(RuntimeException::class.java) {
+        assertThrows<RuntimeException> {
             StringAddCalculator().calculate(inputStr)
         }
     }
