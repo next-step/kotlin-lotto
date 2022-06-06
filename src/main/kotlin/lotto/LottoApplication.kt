@@ -8,21 +8,21 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 object LottoApplication {
-    fun run() {
-        InputView.printPaymentPriceInputMessage()
-        val paymentPrice = InputView.inputPaymentPrice()
+    fun run(inputView: InputView, resultView: ResultView) {
+        inputView.printPaymentPriceInputMessage()
+        val paymentPrice = inputView.inputPaymentPrice()
 
         val purchasedLottos = RandomLottoGenerator.generateLottos(paymentPrice)
-        ResultView.printPurchasedLottoCount(purchasedLottos.size)
-        ResultView.printPurchasedLottos(purchasedLottos)
+        resultView.printPurchasedLottoCount(purchasedLottos.size)
+        resultView.printPurchasedLottos(purchasedLottos)
 
-        InputView.printWinningNumbersInputMessage()
-        val winningNumbers = Lotto(InputView.inputWinningNumbers())
+        inputView.printWinningNumbersInputMessage()
+        val winningNumbers = Lotto(inputView.inputWinningNumbers())
 
-        InputView.printBonusNumberInputMessage()
-        val bonusNumber = LottoNumber.valueOf(InputView.inputBonusNumber())
+        inputView.printBonusNumberInputMessage()
+        val bonusNumber = LottoNumber.valueOf(inputView.inputBonusNumber())
 
         val winningRanks = purchasedLottos.findRanks(DrawNumbers(winningNumbers, bonusNumber))
-        ResultView.printWinningStatistics(paymentPrice, winningRanks)
+        resultView.printWinningStatistics(paymentPrice, winningRanks)
     }
 }

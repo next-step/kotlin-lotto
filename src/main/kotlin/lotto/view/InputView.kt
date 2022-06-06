@@ -2,21 +2,17 @@ package lotto.view
 
 import lotto.model.LottoNumber
 
-object InputView {
+interface InputView {
 
-    private const val WINNING_NUMBER_DELIMITER = ","
+    fun printPaymentPriceInputMessage()
 
-    fun printPaymentPriceInputMessage() = println("구매금액을 입력해 주세요.")
+    fun printWinningNumbersInputMessage()
 
-    fun printWinningNumbersInputMessage() = println("지난 주 당첨 번호를 입력해 주세요.")
+    fun printBonusNumberInputMessage()
 
-    fun printBonusNumberInputMessage() = println("보너스 볼을 입력해 주세요.")
+    fun inputPaymentPrice(): Int
 
-    fun inputPaymentPrice() = readln().toInt()
+    fun inputWinningNumbers(): List<LottoNumber>
 
-    fun inputWinningNumbers() =
-        readln().split(WINNING_NUMBER_DELIMITER)
-            .map { LottoNumber.valueOf(it.trim().toInt()) }
-
-    fun inputBonusNumber() = readln().toInt()
+    fun inputBonusNumber(): Int
 }
