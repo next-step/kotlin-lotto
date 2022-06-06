@@ -13,13 +13,13 @@ class StringAddCalculator {
             ?.let {
                 val customDelimiter = it.groupValues[1]
                 it.groupValues[2].split(customDelimiter)
-                    .sumOf { numberStr -> Numbers.toNumericLong(numberStr) }
+                    .sumOf { numberStr -> numberStr.toNumericLong() }
             }
     }
 
     private fun sumWhenDefaultDelimiterExist(inputStr: String): Long {
         return inputStr.split(",|:".toRegex())
-            .sumOf { numberStr -> Numbers.toNumericLong(numberStr) }
+            .sumOf { numberStr -> numberStr.toNumericLong() }
     }
 
     companion object {
