@@ -12,19 +12,7 @@ object LottoCommittee {
         lottos: Lottos,
         winningTicket: WinningTicket
     ): Map<Priority, Int> {
-        val statistics = initStatistics()
-        for (ticket in lottos.tickets) {
-            statistics.merge(ticket.priority(winningTicket), 1, Int::plus)
-        }
-        return statistics
-    }
-
-    private fun initStatistics(): MutableMap<Priority, Int> {
-        val statistics = mutableMapOf<Priority, Int>()
-        for (priority in Priority.values()) {
-            statistics[priority] = 0
-        }
-        return statistics
+        return lottos.calculatePriorities(winningTicket)
     }
 
     fun calculateReturnRate(price: Int, statistics: Map<Priority, Int>): Double {

@@ -12,7 +12,7 @@ enum class Priority(val matchCount: Int, val price: Int) {
         fun getPrice(matchCount: Int): Int =
             values().find { priority -> priority.matchCount == matchCount }?.price ?: MISS.price
 
-        fun value(matchCount: Int): Priority =
+        fun find(matchCount: Int): Priority =
             values().find { priority -> priority.matchCount == matchCount } ?: MISS
     }
 }

@@ -1,10 +1,18 @@
 package lotto.domain
 
+import lotto.domain.`interface`.LottoRandomNumbers
+
 object LottoMarket {
     private const val lottoPrice = 1_000
 
     fun buy(price: Int): Lottos {
-        return Lottos.of(lottoAmount(price))
+        val lottoNumbers = mutableListOf<Set<LottoNumber>>()
+
+        repeat(lottoAmount(price)) {
+            lottoNumbers.add(LottoRandomNumbers().createNumbers())
+        }
+
+        return Lottos.of(lottoNumbers)
     }
 
     private fun lottoAmount(price: Int): Int {

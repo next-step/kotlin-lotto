@@ -7,7 +7,7 @@ class LottoFixedNumbers : LottoNumbers {
         require(inputs != null)
 
         val lottoNumbers = mutableSetOf<LottoNumber>()
-        for (input in inputs) {
+        for (input in inputs.toSortedSet()) {
             lottoNumbers.add(LottoNumber(input))
         }
 
