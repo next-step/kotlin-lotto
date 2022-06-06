@@ -21,7 +21,11 @@ object ResultView {
         println("---------")
 
         resultMap.toSortedMap().forEach { result ->
-            println("${result.key.count}개 일치 (${result.key.prize}원)- ${result.value}개")
+            if (result.key.name.equals(LottoMatch.SECOND)) {
+                println("${result.key.count}개 일치, 보너스 볼 일치(${result.key.prize}원)- ${result.value}개")
+            } else {
+                println("${result.key.count}개 일치 (${result.key.prize}원)- ${result.value}개")
+            }
         }
         println("총 수익률은 ${earningRate}입니다.")
     }

@@ -13,6 +13,10 @@ class LottoNumbers(lottoNumbers: List<LottoNumber>) {
             .filter { winningLottoNumber -> lottoNumbers.contains(winningLottoNumber) }.size
     }
 
+    fun hasBonusNumber(winningLottoBonusNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(winningLottoBonusNumber)
+    }
+
     companion object {
         private const val LOTTO_NUMBER_SIZE = 6
         private const val LOTTO_NUMBER_SIZE_MESSAGE = "로또 번호를 생성시 6개의 숫자가 생성되어야 합니다."

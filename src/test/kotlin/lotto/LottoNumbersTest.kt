@@ -17,52 +17,86 @@ class LottoNumbersTest {
     @Test
     fun `2) 구매한 로또가 5개로 이루어진 경우 예외를 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            LottoNumbers(listOf(LottoNumber.from(5),
-                         LottoNumber.from(10),
-                         LottoNumber.from(15),
-                         LottoNumber.from(20),
-                         LottoNumber.from(25)))
+            LottoNumbers(
+                listOf(
+                    LottoNumber.from(5),
+                    LottoNumber.from(10),
+                    LottoNumber.from(15),
+                    LottoNumber.from(20),
+                    LottoNumber.from(25)
+                )
+            )
         }
     }
 
     @Test
     fun `3) 구매한 로또가 중복된 번호가 있는 경우 예외를 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            LottoNumbers(listOf(LottoNumber.from(5),
-                         LottoNumber.from(10),
-                         LottoNumber.from(15),
-                         LottoNumber.from(20),
-                         LottoNumber.from(25),
-                         LottoNumber.from(25)))
+            LottoNumbers(
+                listOf(
+                    LottoNumber.from(5),
+                    LottoNumber.from(10),
+                    LottoNumber.from(15),
+                    LottoNumber.from(20),
+                    LottoNumber.from(20),
+                    LottoNumber.from(25)
+                )
+            )
         }
     }
 
     @Test
     fun `4) 구매한 로또가 1 ~ 45 사이에 있지 않는 경우 예외를 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            LottoNumbers(listOf(LottoNumber.from(5),
-                         LottoNumber.from(10),
-                         LottoNumber.from(15),
-                         LottoNumber.from(20),
-                         LottoNumber.from(25),
-                         LottoNumber.from(46)))
+            LottoNumbers(
+                listOf(
+                    LottoNumber.from(5),
+                    LottoNumber.from(10),
+                    LottoNumber.from(15),
+                    LottoNumber.from(20),
+                    LottoNumber.from(20),
+                    LottoNumber.from(46)
+                )
+            )
         }
     }
 
     @Test
     fun `5) 로또를 구매한 번호와 당첨 번호가 일치하는 경우 개수를 반환한다`() {
-        val count = LottoNumbers(listOf(LottoNumber.from(5),
-                                 LottoNumber.from(10),
-                                 LottoNumber.from(15),
-                                 LottoNumber.from(20),
-                                 LottoNumber.from(25),
-                                 LottoNumber.from(45)))
-                    .getCountWithWinningLottoNumber(listOf(LottoNumber.from(5),
-                                                           LottoNumber.from(10),
-                                                           LottoNumber.from(15),
-                                                           LottoNumber.from(20),
-                                                           LottoNumber.from(25),
-                                                           LottoNumber.from(45)))
+        val count = LottoNumbers(
+            listOf(
+                LottoNumber.from(5),
+                LottoNumber.from(10),
+                LottoNumber.from(15),
+                LottoNumber.from(20),
+                LottoNumber.from(25),
+                LottoNumber.from(45)
+            )
+        ).getCountWithWinningLottoNumber(
+            listOf(
+                LottoNumber.from(5),
+                LottoNumber.from(10),
+                LottoNumber.from(15),
+                LottoNumber.from(20),
+                LottoNumber.from(25),
+                LottoNumber.from(45)
+            )
+        )
         Assertions.assertThat(count).isEqualTo(6)
+    }
+
+    @Test
+    fun `6) 보너스 번호가 있는 경우 true를 반환한다`() {
+        val hasBonusNumber = LottoNumbers(
+            listOf(
+                LottoNumber.from(5),
+                LottoNumber.from(10),
+                LottoNumber.from(15),
+                LottoNumber.from(20),
+                LottoNumber.from(25),
+                LottoNumber.from(45)
+            )
+        ).hasBonusNumber(LottoNumber.from(5))
+        Assertions.assertThat(hasBonusNumber).isEqualTo(true)
     }
 }

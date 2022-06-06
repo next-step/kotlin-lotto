@@ -13,10 +13,11 @@ fun main() {
     val lottoBuyer = LottoBuyer.buyer(money)
     ResultView.printBuyLottoNumber(lottoBuyer.lottoBuyList)
 
-    // 당첨번호 관련
-    val printWinningLottoNumber = InputView.askWinningLottoNumbers()
+    // 당첨번호(보너스 번호 포함) 관련
+    val winningLottoNumber = InputView.askWinningLottoNumbers()
+    val winningLottoBonusNumber = InputView.askWinningLottoBonusNumber()
 
     // 통계관련
-    val lottoStatistics = LottoStatistics(money, lottoBuyer.lottoBuyList, printWinningLottoNumber)
+    val lottoStatistics = LottoStatistics(money, lottoBuyer.lottoBuyList, winningLottoNumber, winningLottoBonusNumber)
     ResultView.printWinningStatistics(lottoStatistics.resultMap, lottoStatistics.earningRate)
 }
