@@ -4,11 +4,14 @@ class LottoMachine {
 
     fun createLottos(count: Int): List<Lotto> {
         return List(count) {
-            Lotto(
-                lottoNumbers = createDistinctSixNumbers().map { LottoNumber.from(it) }.toList()
-            )
+            createLotto()
         }
     }
+    private fun createLotto() = Lotto(
+        lottoNumbers = createDistinctSixNumbers()
+            .map { LottoNumber.from(it) }
+            .toList()
+    )
 
     private fun createDistinctSixNumbers(): List<Int> {
         return buildSet(LOTTO_SIZE) {
