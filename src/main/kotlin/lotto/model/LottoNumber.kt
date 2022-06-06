@@ -1,6 +1,7 @@
 package lotto.model
 
-class LottoNumber private constructor(private val value: Int) {
+@JvmInline
+value class LottoNumber private constructor(private val value: Int) {
 
     override fun toString(): String {
         return value.toString()
