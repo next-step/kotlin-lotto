@@ -8,4 +8,8 @@ class LottoTicket(val lottoNums: List<LottoNum>) {
 
         return LottoTicket(result)
     }
+
+    companion object {
+        const val TICKET_PRICE = 1_000
+    }
 }
