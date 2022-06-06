@@ -7,8 +7,11 @@ import lotto.domain.LottoWinningNumber
 
 class OutboundView {
 
-    fun printLottoTickets(lottoTickets: LottoTickets) {
-        println("${lottoTickets.lottoTickets.size} 개를 구매했습니다.")
+    fun printLottoTickets(lottoTickets: LottoTickets, manualPurchaseCount: Int) {
+        println(
+            "수동으로 ${manualPurchaseCount}장, " +
+                "자동으로 11개를 ${lottoTickets.lottoTickets.size - manualPurchaseCount} 개를 구매했습니다."
+        )
 
         lottoTickets.lottoTickets
             .forEach { println(it.numbers.joinToString(prefix = "[", postfix = "]")) }

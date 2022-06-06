@@ -1,6 +1,8 @@
 package lotto.presentation
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import lotto.domain.LottoWinningNumber
 
 class InboundView {
@@ -13,6 +15,42 @@ class InboundView {
 
         return runCatching { purchaseAmount.toInt() }
             .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
+    }
+
+    fun inputManualPurchaseCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+
+        val manualPurchaseCount: String = readln()
+        require(manualPurchaseCount.isNotBlank()) { "공백을 입력하셨습니다." }
+
+        return runCatching { manualPurchaseCount.toInt() }
+            .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
+    }
+
+    fun inputManualLottoNumber(manualPurchaseCount: Int): LottoTickets {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        var inputCount = 0
+        val inputNumbers: MutableList<Set<LottoNumber>> = mutableListOf()
+
+        while (inputCount < manualPurchaseCount) {
+            val inputManualNumber: String = readln()
+            require(inputManualNumber.isNotBlank()) { "공백을 입력하셨습니다." }
+
+            val manualNumber = inputManualNumber.toTokenize()
+                .checkUniqueToken()
+                .toMapInt()
+                .toLottoNumber()
+                .toSet()
+
+            inputNumbers.add(manualNumber)
+            inputCount ++
+        }
+
+        return LottoTickets(
+            inputNumbers.map { LottoTicket(it) }
+                .toList()
+        )
     }
 
     fun inputWinningNumber(): LottoWinningNumber {
