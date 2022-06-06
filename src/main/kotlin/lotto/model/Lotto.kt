@@ -10,13 +10,13 @@ class Lotto(
     }
 
     fun findRank(drawNumbers: DrawNumbers) =
-        WinningRank.of(findMatchedNumberCount(drawNumbers.winningNumbers), contains(drawNumbers.bonusNumber))
+        WinningRank.of(lotto.findMatchedNumberCount(drawNumbers.winningNumbers), contains(drawNumbers.bonusNumber))
 
     fun contains(number: LottoNumber) = lotto.contains(number)
 
     override fun toString() = "$lotto"
 
-    private fun findMatchedNumberCount(other: Lotto) = other.lotto.count { lotto.contains(it) }
+    private fun List<LottoNumber>.findMatchedNumberCount(other: Lotto) = other.lotto.count { this.contains(it) }
 
     private fun validateUnique(numbers: List<LottoNumber>) =
         require(numbers.size == numbers.toSet().size) { "로또에 중복되는 번호가 있을 수 없습니다." }
