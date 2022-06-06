@@ -14,7 +14,7 @@ fun main() {
         val winningTicket = LottoCommittee.createWinningTicket(readln())
 
         println("보너스 볼을 입력해 주세요.")
-        LottoCommittee.chooseBonusNumber(readln(), winningTicket)
+        winningTicket.chooseBonusBall(readln())
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
 
         Screen.display(

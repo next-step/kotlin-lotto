@@ -1,19 +1,16 @@
 package lotto.domain
 
 import lotto.domain.enum.Priority
+import lotto.domain.`interface`.LottoFixedNumbers
 
 object LottoCommittee {
-    fun createWinningTicket(input: String): LottoTicket {
-        return LottoTicket(LottoNumber(input.split(",").map { it.toInt() }))
-    }
-
-    fun chooseBonusNumber(input: String, winningTicket: LottoTicket) {
-        winningTicket.contains(input.toIntOrNull())
+    fun createWinningTicket(input: String): WinningTicket {
+        return WinningTicket(LottoTicket(LottoFixedNumbers().createNumbers(input.split(",").map { it.toInt() })))
     }
 
     fun calculateStatistics(
         lottos: Lottos,
-        winningTicket: LottoTicket
+        winningTicket: WinningTicket
     ): Map<Priority, Int> {
         val statistics = initStatistics()
         for (ticket in lottos.tickets) {
@@ -34,8 +31,8 @@ object LottoCommittee {
         return (calculateReturnPrice(statistics) / price.toDouble())
     }
 
-    private fun calculateReturnPrice(statistics: Map<Priority, Int>): Int {
-        var returnPrice = 0
+    private fun calculateReturnPrice(statistics: Map<Priority, Int>): Long {
+        var returnPrice: Long = 0
 
         for ((priority, matchCount) in statistics) {
             returnPrice += matchCount * Priority.getPrice(priority.matchCount)
