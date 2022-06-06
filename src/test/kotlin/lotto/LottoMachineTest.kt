@@ -18,7 +18,7 @@ class LottoMachineTest {
     @ParameterizedTest(name = "발급 매수만큼의 로또를 생성한다.")
     @ValueSource(strings = ["1", "5", "10"])
     fun `발급 매수만큼의 로또를 생성한다`(count: Int) {
-        val lottos = lottoMachine.createLotto(count)
+        val lottos = lottoMachine.createLottos(count)
         assertThat(lottos.size).isEqualTo(count)
     }
 }

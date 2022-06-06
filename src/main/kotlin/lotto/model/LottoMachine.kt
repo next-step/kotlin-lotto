@@ -2,7 +2,7 @@ package lotto.model
 
 class LottoMachine {
 
-    fun createLotto(count: Int): List<Lotto> {
+    fun createLottos(count: Int): List<Lotto> {
         return List(count) {
             Lotto(
                 lottoNumbers = createDistinctSixNumbers().map { LottoNumber.from(it) }.toList()
