@@ -24,6 +24,5 @@ data class Lotto(
     private fun match(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.contains(lottoNumber)
     }
-
-    override fun toString(): String = lottoNumbers.joinToString(separator = ", ", prefix = "[", postfix = "]")
+    fun toList() = lottoNumbers
 }
