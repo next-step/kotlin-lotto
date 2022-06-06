@@ -14,6 +14,8 @@ fun main() {
     val purchaseAmount: Int = inboundView.inputPurchaseAmount()
     val manualPurchaseCount: Int = inboundView.inputManualPurchaseCount()
 
+    LottoStore.isBuyAutoLotto(purchaseAmount, manualPurchaseCount)
+
     val manualPurchaseLottoTicket = inboundView.inputManualLottoNumber(manualPurchaseCount)
     val autoPurchaseLottoTicket = LottoStore.buyAutoLottoTicket(purchaseAmount, manualPurchaseCount)
 

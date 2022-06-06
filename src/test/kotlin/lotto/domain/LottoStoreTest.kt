@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class LottoStoreTest : DescribeSpec({
-    describe("buyLotto 메서드 테스트") {
+    describe("buyAutoLottoTicket 메서드 테스트") {
         context("구입 금액이 1000원 이상일 때") {
             it("수동 구매하지 않는다면, 자동 구매 횟수는 동일하다.") {
                 val givenMoney = 14000
@@ -29,9 +29,30 @@ class LottoStoreTest : DescribeSpec({
                 val exception = shouldThrow<IllegalArgumentException> {
                     val givenMoney: Int = 100
                     val givenManualCount = 0
-                    LottoStore.buyAutoLottoTicket(givenMoney, 0)
+                    LottoStore.buyAutoLottoTicket(givenMoney, givenManualCount)
                 }
                 exception.message shouldBe "금액이 부족합니다."
+            }
+        }
+    }
+
+    describe("isBuyAutoLotto 메서드 테스트") {
+        context("전체 구매 금액이 수동 구매 금액 보다 크다면") {
+            it("검증에 성공한다.") {
+                val givenMoney: Int = 10000
+                val givenManualCount = 5
+
+                LottoStore.isBuyAutoLotto(givenMoney, givenManualCount)
+            }
+        }
+
+        context("전체 구매 금액이 수동 구매 금액 보다 작다면") {
+            it("예외를 던진다.") {
+                val exception = shouldThrow<IllegalArgumentException> {
+                    val givenMoney: Int = 10000
+                    val givenManualCount = 11
+                    LottoStore.isBuyAutoLotto(givenMoney, givenManualCount)
+                }
             }
         }
     }

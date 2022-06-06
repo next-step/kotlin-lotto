@@ -68,6 +68,6 @@
 
 ### 체크 리스트
 * [ ] 원시타입 Wrapping 하기
-  * [x] LottoNumber 
+  * [x] LottoNumber
 * [x] 수동 번호 입력 기능 구현
 * [x] 수동 번호 입력 UI 구현
