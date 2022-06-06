@@ -23,15 +23,24 @@ class LottoMatcherTest {
     }
 
     @Test
+    fun `로또 당첨 결과기는 총 당첨 금액을 계산 할 수 있다`() {
+        val matchResult = LottoMatchResult(
+            mapOf(
+                WinningInfo.THREE to 1,
+                WinningInfo.FOUR to 0,
+                WinningInfo.FIVE to 0,
+                WinningInfo.SIX to 0,
+            )
+        )
+        val earnedMoney = LottoMatcher().getEarnedMoney(matchResult)
+        assertEquals(5000L, earnedMoney.money)
+    }
+
+    @Test
     fun `로또 당첨 결과기는 수익률 계산을 할 수 있다`() {
         val paidMoney = 14000
-        val matchResult = LottoMatchResult(mapOf(
-            WinningInfo.THREE to 1,
-            WinningInfo.FOUR to 0,
-            WinningInfo.FIVE to 0,
-            WinningInfo.SIX to 0,
-        ))
-        val earnedRate = LottoMatcher().getEarnedRate(paidMoney, matchResult)
-        assertEquals("0.35", earnedRate.earnedRate)
+        val earnedMoney = EarnedMoney(5000L)
+        val earnedRate = LottoMatcher().getEarnedRate(paidMoney, earnedMoney)
+        assertEquals("0.35", earnedRate.rate)
     }
 }

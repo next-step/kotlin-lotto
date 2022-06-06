@@ -19,6 +19,6 @@ object ResultView {
         lottoMatchResult.matchResult.onEach { (winningInfo, count) ->
             println("${winningInfo.winningCount}개 일치 (${winningInfo.winningMoney}원) - ${count}개")
         }
-        println("총 수익률은 ${earnedRate.earnedRate}입니다.")
+        println("총 수익률은 ${earnedRate.rate}입니다.")
     }
 }
