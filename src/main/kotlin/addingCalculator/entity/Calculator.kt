@@ -1,6 +1,6 @@
 package addingCalculator.entity
 
 interface Calculator {
-  val parser: Parser
-  fun evaluator(notation: String): Int?
+    val parser: Parser
+    fun evaluate(notation: String): Int?
 }

@@ -1,5 +1,5 @@
 package addingCalculator.entity
 
 interface Parser {
-  fun parse(notation: String): List<String>
+    fun parse(notation: String): List<String>
 }
