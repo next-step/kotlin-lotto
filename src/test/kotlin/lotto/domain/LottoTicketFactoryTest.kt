@@ -15,7 +15,7 @@ class LottoTicketFactoryTest {
     @Test
     internal fun `로또번호 발행은 번호 순으로 출력한다`() {
         val ticket = LottoTicketFactory.getRandomLottoTicket()
-        val sortTicketNumbers = ticket.numbers.sorted().toSet()
+        val sortTicketNumbers = ticket.numbers.sortedBy { it.value }.toSet()
         assertThat(ticket.numbers).isEqualTo(sortTicketNumbers)
     }
 
