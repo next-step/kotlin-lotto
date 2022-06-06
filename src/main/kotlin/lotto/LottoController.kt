@@ -12,13 +12,13 @@ class LottoController(
     fun startGame() {
         val price = inputView.getBuyingPrice()
         val lottoStore = LottoStore()
-        val lottoList = lottoStore.buy(price)
-        outputView.showBuyingHistory(lottoList)
+        val lottos = lottoStore.buy(price)
+        outputView.showBuyingHistory(lottos)
 
         val winningNumbers = inputView.inputLastWinningNumbers()
 
         outputView.showMatchStatistics(
-            lottoResult = LottoResult.of(lottoList, winningNumbers)
+            lottoResult = LottoResult.of(lottos, winningNumbers)
         )
     }
 }
