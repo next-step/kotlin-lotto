@@ -12,8 +12,8 @@ import lotto.domain.Prize
 object OutputView {
     fun printTicket(lottoTickets: LottoTickets, manualCount: Int) {
         println(Messages.BUY_AMOUNT_LOTTO.format(manualCount, lottoTickets.getSize() - manualCount))
-        lottoTickets.tickets.forEach {
-            println(it.numbers.toString())
+        lottoTickets.tickets.forEach { ticket ->
+            println(ticket.numbers.map { it.value }.toString())
         }
     }
 
