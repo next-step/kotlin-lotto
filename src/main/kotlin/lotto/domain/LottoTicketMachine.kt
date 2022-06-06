@@ -1,5 +1,13 @@
 package lotto.domain
 
-interface LottoTicketMachine {
-    fun issue(nums: List<Int>): LottoTicket
+class LottoTicketMachine(private val lottoBox: LottoBox) {
+
+    fun issue(nums: List<Int>): LottoTicket {
+
+        val lottoNums = nums.map {
+            lottoBox.getLottoNum(it)
+        }.toList()
+
+        return LottoTicket(lottoNums)
+    }
 }
