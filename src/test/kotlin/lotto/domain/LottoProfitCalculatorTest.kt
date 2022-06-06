@@ -6,23 +6,23 @@ import io.kotest.matchers.shouldBe
 
 class LottoProfitCalculatorTest : DescribeSpec({
     describe("calculateRewardRate 메서드") {
-        val givenWinningNumbers = LottoWinningNumber(setOf(1, 2, 3, 4, 5, 6), 7)
+        val givenWinningNumbers = LottoWinningNumber(LottoTicket.of(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.of(7))
         val givenLottoTickets = LottoTickets(
             listOf(
-                LottoTicket(setOf(8, 21, 23, 41, 42, 43)),
-                LottoTicket(setOf(3, 5, 11, 16, 32, 38)),
-                LottoTicket(setOf(7, 11, 16, 35, 36, 44)),
-                LottoTicket(setOf(1, 8, 11, 31, 41, 42)),
-                LottoTicket(setOf(13, 14, 16, 38, 42, 45)),
-                LottoTicket(setOf(7, 11, 30, 40, 42, 43)),
-                LottoTicket(setOf(2, 13, 22, 32, 38, 45)),
-                LottoTicket(setOf(23, 25, 33, 36, 39, 41)),
-                LottoTicket(setOf(1, 3, 5, 14, 22, 45)),
-                LottoTicket(setOf(5, 9, 38, 41, 43, 44)),
-                LottoTicket(setOf(2, 8, 9, 18, 19, 21)),
-                LottoTicket(setOf(13, 14, 18, 21, 23, 35)),
-                LottoTicket(setOf(17, 21, 29, 37, 42, 45)),
-                LottoTicket(setOf(3, 8, 27, 30, 35, 44))
+                LottoTicket.of(setOf(8, 21, 23, 41, 42, 43)),
+                LottoTicket.of(setOf(3, 5, 11, 16, 32, 38)),
+                LottoTicket.of(setOf(7, 11, 16, 35, 36, 44)),
+                LottoTicket.of(setOf(1, 8, 11, 31, 41, 42)),
+                LottoTicket.of(setOf(13, 14, 16, 38, 42, 45)),
+                LottoTicket.of(setOf(7, 11, 30, 40, 42, 43)),
+                LottoTicket.of(setOf(2, 13, 22, 32, 38, 45)),
+                LottoTicket.of(setOf(23, 25, 33, 36, 39, 41)),
+                LottoTicket.of(setOf(1, 3, 5, 14, 22, 45)),
+                LottoTicket.of(setOf(5, 9, 38, 41, 43, 44)),
+                LottoTicket.of(setOf(2, 8, 9, 18, 19, 21)),
+                LottoTicket.of(setOf(13, 14, 18, 21, 23, 35)),
+                LottoTicket.of(setOf(17, 21, 29, 37, 42, 45)),
+                LottoTicket.of(setOf(3, 8, 27, 30, 35, 44))
             )
         )
 

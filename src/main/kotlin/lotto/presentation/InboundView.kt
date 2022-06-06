@@ -1,5 +1,6 @@
 package lotto.presentation
 
+import lotto.domain.LottoNumber
 import lotto.domain.LottoWinningNumber
 
 class InboundView {
@@ -23,9 +24,10 @@ class InboundView {
         val winningNumbers = inputWinningNumber.toTokenize()
             .checkUniqueToken()
             .toMapInt()
+            .toLottoNumber()
             .toSet()
 
-        val bonusNumber: Int = inputBonusLottoNumber()
+        val bonusNumber: LottoNumber = LottoNumber.of(inputBonusLottoNumber())
 
         return LottoWinningNumber(winningNumbers, bonusNumber)
     }
@@ -60,5 +62,10 @@ class InboundView {
     private fun List<String>.toMapInt(): List<Int> {
         return runCatching { map { it.toInt() } }
             .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
+    }
+
+    private fun List<Int>.toLottoNumber(): List<LottoNumber> {
+        return runCatching { map { LottoNumber.of(it) } }
+            .getOrElse { e -> throw IllegalArgumentException(e.message) }
     }
 }
