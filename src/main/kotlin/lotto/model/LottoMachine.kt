@@ -13,7 +13,7 @@ class LottoMachine {
 
     private fun createDistinctSixNumbers(): List<Int> {
         val numbers = mutableSetOf<Int>()
-        while (numbers.size < 6) {
+        while (numbers.size < LOTTO_SIZE) {
             numbers.add((MINIMUM_NUMBER..MAXIMUM_NUMBER).random())
         }
         return numbers.shuffled().toList()
