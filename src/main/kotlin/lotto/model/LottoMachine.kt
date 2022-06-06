@@ -7,6 +7,7 @@ class LottoMachine {
             createLotto()
         }
     }
+
     private fun createLotto() = Lotto(
         lottoNumbers = createDistinctSixNumbers()
             .map { LottoNumber.from(it) }
@@ -15,12 +16,14 @@ class LottoMachine {
 
     private fun createDistinctSixNumbers(): List<Int> {
         return buildSet(LOTTO_SIZE) {
-            while (this.size != LOTTO_SIZE) {
-                add((MINIMUM_NUMBER..MAXIMUM_NUMBER).random())
-            }
+            putUntilSixLottoNumbers()
         }.shuffled().toList()
     }
-
+    private fun MutableSet<Int>.putUntilSixLottoNumbers() {
+        while (this.size != LOTTO_SIZE) {
+            this.add((MINIMUM_NUMBER..MAXIMUM_NUMBER).random())
+        }
+    }
     companion object {
         private const val LOTTO_SIZE = 6
         private const val MINIMUM_NUMBER = 1
