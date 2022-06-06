@@ -3,6 +3,8 @@ package lotto.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoGameTest {
 
@@ -24,5 +26,13 @@ internal class LottoGameTest {
         val game = lottoGame.buy()
 
         assertThat(game).hasSize(6)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [2, 3, 100])
+    fun `Buy N Lotto Games`(n: Int) {
+        val games = lottoGame.buy(n)
+
+        assertThat(games).hasSize(n)
     }
 }
