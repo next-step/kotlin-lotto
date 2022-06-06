@@ -22,10 +22,10 @@ internal class LottoGameTest {
     }
 
     @Test
-    fun `Buy 1 Lotto Game`() {
-        val game = lottoGame.buy()
+    fun `Buy 1 Lotto`() {
+        val lotto = lottoGame.buy()
 
-        assertThat(game).hasSize(6)
+        assertThat(lotto.numbers).hasSize(6)
     }
 
     @ParameterizedTest
