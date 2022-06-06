@@ -16,5 +16,11 @@ data class LottoNumber(val number: Int) {
 
     companion object {
         val LOTTO_NUMBER_RANGE = IntRange(1, 45)
+        
+        private val NUMBERS: Map<Int, LottoNumber> = LOTTO_NUMBER_RANGE.associateWith(::LottoNumber)
+
+        fun valueOf(value: Int): LottoNumber {
+            return NUMBERS[value] ?: throw IllegalArgumentException("로또 범위에 없는 숫자입니다.")
+        }
     }
 }

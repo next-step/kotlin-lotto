@@ -9,18 +9,20 @@ import lotto.view.ResultView
 fun main() {
     val inputView = InputView()
     val money = inputView.enterMoney()
+    val manualLottoPurchaseAmount = inputView.enterManualLottoPurchaseAmount()
+    val manualLottoNumbers = inputView.enterManualLottoTicket(manualLottoPurchaseAmount)
 
     val lottoSeller = LottoSeller()
-    val lottoPurchaseAmount = lottoSeller.calculateLottoPurchaseAmount(money)
-    val lottoNumberMaker = LottoNumberMaker()
-    val lottoTickets = lottoSeller.buy(lottoPurchaseAmount, lottoNumberMaker)
+    val autoLottoPurchaseAmount = lottoSeller.calculateAutoLottoPurchaseAmount(money, manualLottoPurchaseAmount)
+    val autoLottoNumberMaker = LottoNumberMaker()
+    val purchasedLottoTickets = lottoSeller.buy(autoLottoPurchaseAmount, manualLottoNumbers, autoLottoNumberMaker)
 
     val wonLottoTicket = inputView.enterWonLottoTicket()
     val lottoJudge = LottoJudge()
-    val determinedLottoTicket = lottoJudge.determineLottoWinnings(lottoTickets, wonLottoTicket)
+    val determinedLottoTicket = lottoJudge.determineLottoWinnings(purchasedLottoTickets, wonLottoTicket)
 
     val resultView = ResultView()
-    resultView.printPurchaseAmount(lottoPurchaseAmount)
-    resultView.printPurchaseLottoTickets(lottoTickets)
+    resultView.printPurchaseAmount(manualLottoPurchaseAmount, autoLottoPurchaseAmount)
+    resultView.printPurchaseLottoTickets(purchasedLottoTickets)
     resultView.printWinningStatistics(determinedLottoTicket, money)
 }

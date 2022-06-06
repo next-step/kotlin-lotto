@@ -8,7 +8,8 @@ class LottoJudge {
             .toMutableMap()
 
         val determinedLottoWinnings = lottoTickets
-            .map { LottoWinning.of(it.countMatchWonLottoTicket(wonLottoTicket), it.isMatchedBonus(wonLottoTicket.bonus!!)) }
+            .asSequence()
+            .map { LottoWinning.of(it.countMatchWonLottoTicket(wonLottoTicket), it.isMatchedBonus(wonLottoTicket.bonus)) }
             .groupingBy { it }
             .eachCount()
             .toMutableMap()
