@@ -8,7 +8,7 @@ class OutputView {
     fun showBuyingHistory(lottoList: List<Lotto>) {
         println("${lottoList.size}개를 구매했습니다.")
         lottoList.forEach {
-            println(it.lottoNumbers)
+            println(it)
         }
     }
 

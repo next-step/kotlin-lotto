@@ -5,9 +5,8 @@ class LottoMachine {
     fun createLotto(count: Int): List<Lotto> {
         return List(count) {
             Lotto(
-                lottoNumbers = LottoNumbers(
-                    createDistinctSixNumbers().map { LottoNumber.from(it) }.toList()
-                )
+                lottoNumbers = createDistinctSixNumbers().map { LottoNumber.from(it) }.toList()
+
             )
         }
     }
