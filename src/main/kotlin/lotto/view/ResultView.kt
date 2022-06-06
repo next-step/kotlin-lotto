@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.model.Lottos
-import lotto.model.WinningRank
+import lotto.model.WinningStatistics
 
 interface ResultView {
 
@@ -9,5 +9,5 @@ interface ResultView {
 
     fun printPurchasedLottos(lottos: Lottos)
 
-    fun printWinningStatistics(paymentPrice: Int, winningRanks: List<WinningRank>)
+    fun printWinningStatistics(paymentPrice: Int, statistics: WinningStatistics)
 }

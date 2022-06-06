@@ -4,6 +4,7 @@ import lotto.model.DrawNumbers
 import lotto.model.Lotto
 import lotto.model.LottoNumber
 import lotto.model.RandomLottoGenerator
+import lotto.model.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -23,6 +24,6 @@ object LottoApplication {
         val bonusNumber = LottoNumber.valueOf(inputView.inputBonusNumber())
 
         val winningRanks = purchasedLottos.findRanks(DrawNumbers(winningNumbers, bonusNumber))
-        resultView.printWinningStatistics(paymentPrice, winningRanks)
+        resultView.printWinningStatistics(paymentPrice, WinningStatistics.from(winningRanks))
     }
 }

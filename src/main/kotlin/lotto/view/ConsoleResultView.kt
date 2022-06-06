@@ -2,8 +2,7 @@ package lotto.view
 
 import lotto.model.Lottos
 import lotto.model.WinningRank
-import lotto.model.WinningRank.NONE
-import kotlin.math.floor
+import lotto.model.WinningStatistics
 
 object ConsoleResultView : ResultView {
 
@@ -14,34 +13,27 @@ object ConsoleResultView : ResultView {
         println()
     }
 
-    override fun printWinningStatistics(paymentPrice: Int, winningRanks: List<WinningRank>) {
+    override fun printWinningStatistics(paymentPrice: Int, statistics: WinningStatistics) {
         println()
         println("당첨 통계")
         println("---------")
 
-        printWinningStatus(winningRanks)
-        printEarningsRatio(paymentPrice, winningRanks)
+        printWinningStatus(statistics)
+        printEarningsRatio(statistics.calculateEarningRatio(paymentPrice))
     }
 
-    private fun printWinningStatus(winningRanks: List<WinningRank>) {
-        WinningRank.values().filter { it != NONE }
-            .reversed()
-            .map { println(winningStatusMessage(it, winningRanks)) }
+    private fun printWinningStatus(statistics: WinningStatistics) =
+        statistics.winningStatistics.forEach { (winningRank, count) ->
+            println("${winningRank.matchedNumberCount}개 일치${bonusBallMessage(winningRank)} (${winningRank.prizeMoney}원)- ${count}개")
+        }
+
+    private fun bonusBallMessage(winningRank: WinningRank): String {
+        if (winningRank.isBonusNumberNecessary) {
+            return ", 보너스 볼 일치"
+        }
+        return ""
     }
 
-    private fun winningStatusMessage(winningRank: WinningRank, winningRanks: List<WinningRank>) =
-        "${winningRank.matchedNumberCount}개 일치${
-            if (winningRank.isBonusNumberNecessary) {
-                ", 보너스 볼 일치"
-            } else {
-                ""
-            }
-        } (${winningRank.prizeMoney}원)- ${winningRanks.count { rank -> winningRank == rank }}개"
-
-    private fun printEarningsRatio(paymentPrice: Int, winningRanks: List<WinningRank>) {
-        val earnings = winningRanks.sumOf { it.prizeMoney }
-        val earningsRatio = earnings / paymentPrice.toDouble()
-
-        println("총 수익률은 ${floor(earningsRatio * 100) / 100}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
-    }
+    private fun printEarningsRatio(earningRatio: Double) =
+        println("총 수익률은 ${earningRatio}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
 }
