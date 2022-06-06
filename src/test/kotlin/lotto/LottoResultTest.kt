@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class LottoResultTest {
 
     @Test
-    fun `"같은 번호가 6개 일치하면 1등 로또가 당첨 된다`() {
+    fun `같은 번호가 6개 일치하면 1등 로또가 당첨 된다`() {
         val lotto = Lotto(createSixLottoNumber(listOf(1, 2, 3, 4, 5, 6)))
         val winLottoNumbers = Lotto(createSixLottoNumber(listOf(1, 2, 3, 4, 5, 6)))
         val result = LottoResult.of(listOf(lotto), winLottoNumbers)
