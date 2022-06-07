@@ -14,7 +14,7 @@ object LottoApplication {
         val paymentPrice = inputView.inputPaymentPrice()
 
         val purchasedLottos = RandomLottoGenerator.generateLottos(paymentPrice)
-        resultView.printPurchasedLottoCount(purchasedLottos.size)
+        resultView.printPurchasedLottoCount(purchasedLottos.count)
         resultView.printPurchasedLottos(purchasedLottos)
 
         inputView.printWinningNumbersInputMessage()
