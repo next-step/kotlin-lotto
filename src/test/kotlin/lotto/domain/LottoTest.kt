@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
+import io.kotest.matchers.shouldBe
 
 class LottoTest : StringSpec({
     "로또 객체를 생성한다" {
@@ -78,5 +79,35 @@ class LottoTest : StringSpec({
         ).forAll {
             shouldThrowExactly<IllegalArgumentException> { LottoNumber(it) }
         }
+    }
+
+    "두 로또가 서로 같은 로또 숫자가 몇개인지 찾는다" {
+        // given
+        val lotto = Lotto(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+            )
+        )
+        val otherLotto = Lotto(
+            listOf(
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+                LottoNumber(7),
+            )
+        )
+
+        // when
+        val actual = lotto.countSameLottoNumbers(otherLotto)
+
+        // then
+        actual shouldBe 5
     }
 })
