@@ -13,6 +13,8 @@ fun main() {
     val manualTickets = InputView().getManualTickets(money, manualTicketCount)
     val tickets = LottoMachine().buy(money, manualTickets)
 
+    ResultView().printTickets(tickets, manualTicketCount)
+
     val winner = InputView().getPastWinner()
     val bonus = InputView().getBonusNumber()
 

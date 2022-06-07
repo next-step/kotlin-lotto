@@ -7,8 +7,8 @@ import lotto.domain.Winning
 import java.math.BigDecimal
 
 class ResultView {
-    fun printTickets(tickets: Tickets) {
-        println("${tickets.count()}개를 구매했습니다.")
+    fun printTickets(tickets: Tickets, manualTicketCount: Int) {
+        println("수동으로 $manualTicketCount 장, 자동으로 ${tickets.count() - manualTicketCount}장을 구매했습니다.")
         tickets.formatToPrint().forEach(::println)
         println()
     }
