@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoResult
 import lotto.domain.LottoStatistics
 import lotto.domain.Tickets
 import lotto.domain.Winning
@@ -12,14 +13,14 @@ class ResultView {
         println()
     }
 
-    fun printLottoResult(result: Map<Winning, Int>) {
+    fun printLottoResult(result: LottoResult) {
         println(PRINT_WINNING_STATISTICS)
         println(PRINT_LINE)
 
         Winning.values()
             .filter { it != Winning.LOSE }
             .forEach { winning ->
-                val winningCount = result[winning] ?: 0
+                val winningCount = result.getWinningCount(winning)
                 val matchCount = winning.matchCount
                 val amount = winning.winningAmount
 

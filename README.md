@@ -21,7 +21,7 @@
   - 일급컬렉션을 사용하여 코드 개선
     - [x] Lotto(일급컬렉션)의 변수에 직접적으로 접근하지 말고 멤버함수 활용 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884270190))
     - [x] List<Lotto> -> Tickets ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271739))
-    - [ ] mutableMapOf<Winning, Int> -> LottoResults ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271932))
+    - [x] mutableMapOf<Winning, Int> -> LottoResults ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271932))
   - [x] Tickets 테스트 코드 작성
 
 ## Step2 : 로또(자동)
@@ -72,7 +72,7 @@
     - [x] 정렬 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882666093))
     - [x] matchCount 조회 시 Lotto의 내부에 의존하지 않도록 수정 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882746666))
     - [x] 수익률 표시 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882754116))
-    - [ ] LottoResult 객체 생성해서 테스트해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
+    - [x] LottoResult 객체 생성해서 테스트해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
     - [x] Money 객체 분리하기
   - [x] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882728105))
   - [x] List Builder 사용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882735688))

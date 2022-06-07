@@ -22,22 +22,22 @@ class TicketsTest : FreeSpec({
         val winner = WinnerLotto(pastWinner, bonus)
 
         "2개 이하로 일치하는 꽝의 개수를 출력한다." {
-            tickets.getResult(winner)[Winning.LOSE] shouldBe 1
+            tickets.getResult(winner).getWinningCount(Winning.LOSE) shouldBe 1
         }
         "3개 일치하는 5등의 개수를 출력한다." {
-            tickets.getResult(winner)[Winning.FIFTH_PLACE] shouldBe 1
+            tickets.getResult(winner).getWinningCount(Winning.FIFTH_PLACE) shouldBe 1
         }
         "4개 일치하는 4등의 개수를 출력한다." {
-            tickets.getResult(winner)[Winning.FOURTH_PLACE] shouldBe 2
+            tickets.getResult(winner).getWinningCount(Winning.FOURTH_PLACE) shouldBe 2
         }
         "5개 일치하는 3등의 개수를 출력한다." {
-            tickets.getResult(winner)[Winning.THIRD_PLACE] shouldBe 1
+            tickets.getResult(winner).getWinningCount(Winning.THIRD_PLACE) shouldBe 1
         }
         "5개 일치하고 보너스 번호도 일치하는 2등의 개수를 출력한다." {
-            tickets.getResult(winner)[Winning.SECOND_PLACE] shouldBe 1
+            tickets.getResult(winner).getWinningCount(Winning.SECOND_PLACE) shouldBe 1
         }
         "6개 일치하는 1등의 개수를 출력한다." {
-            tickets.getResult(winner)[Winning.FIRST_PLACE] shouldBe 1
+            tickets.getResult(winner).getWinningCount(Winning.FIRST_PLACE) shouldBe 1
         }
     }
 })
