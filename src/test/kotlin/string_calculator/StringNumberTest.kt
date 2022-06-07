@@ -21,6 +21,6 @@ class StringNumberTest : StringSpec({
         val value = -1
 
         // when // then
-        shouldThrowExactly<RuntimeException> { StringNumber(value) }
+        shouldThrowExactly<IllegalArgumentException> { StringNumber(value) }
     }
 })
