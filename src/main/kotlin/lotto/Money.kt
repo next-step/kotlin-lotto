@@ -1,5 +1,7 @@
 package lotto
 
+private val LOTTO_PRICE: Money = Money(1_000)
+
 @JvmInline
 value class Money(private val value: Int) {
 
