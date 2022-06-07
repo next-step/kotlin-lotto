@@ -81,7 +81,7 @@
   - [x] BigDecimal 적용 (Double은 소수점 정밀도에 있어 한계가 있어 값이 유실될 수 있다.) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882767934))
   - [x] 익셉션 정리 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882770530))
   - [x] 패키지 분리 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882810460))
-  - [ ] 수익률 계산시 잔돈도 계산하기
+  - [x] 수익률 계산시 잔돈도 계산하기
   - [x] 출력 시 요구사항에 맞게 출력하기(toString으로 동일하게 표현되고 있지만, 의도해서 표현하는 방식으로 개선해보자) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882791720))
   - [x] 당첨이 되지 않은 등수도 표시되어야 한다.([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882797294))
   - [x] 중간에 리턴하는 foreEach문을 간결하게 표현해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882797729))

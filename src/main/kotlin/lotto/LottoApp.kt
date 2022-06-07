@@ -19,6 +19,6 @@ fun main() {
 
     ResultView().printLottoResult(lottoResults)
 
-    val statistics = LottoStatistics(money, lottoResults)
+    val statistics = LottoStatistics(lottoResults)
     ResultView().printWinningStatistics(statistics)
 }

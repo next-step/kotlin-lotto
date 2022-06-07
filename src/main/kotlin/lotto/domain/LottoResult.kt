@@ -10,4 +10,6 @@ class LottoResult(private val result: Map<Winning, Int>) {
             (winning.winningAmount * getWinningCount(winning)).toBigDecimal()
         }
     }
+
+    fun getTotalCount(): Int = result.values.sum()
 }
