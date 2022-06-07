@@ -21,18 +21,12 @@ internal class LottoGameTest {
         assertThat(lottoGame.lottoNumbers).hasSize(45)
     }
 
-    @Test
-    fun `Buy 1 Lotto`() {
-        val lotto = lottoGame.buy()
-
-        assertThat(lotto.numbers).hasSize(6)
-    }
-
     @ParameterizedTest
-    @ValueSource(ints = [2, 3, 100])
+    @ValueSource(ints = [1, 2, 3, 100])
     fun `Buy N Lotto Games`(n: Int) {
         val games = lottoGame.buy(n)
 
         assertThat(games).hasSize(n)
+        assertThat(games[0].numbers).hasSize(6)
     }
 }
