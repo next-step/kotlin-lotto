@@ -13,6 +13,8 @@ enum class Priority(val matchCount: Int, val price: Int) {
             values().find { priority -> priority.matchCount == matchCount }?.price ?: MISS.price
 
         fun find(matchCount: Int): Priority =
-            values().find { priority -> priority.matchCount == matchCount } ?: MISS
+            normalPriorities().find { priority -> priority.matchCount == matchCount } ?: MISS
+
+        private fun normalPriorities(): List<Priority> = values().filter { it != SECOND }
     }
 }

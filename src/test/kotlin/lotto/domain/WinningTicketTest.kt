@@ -10,13 +10,23 @@ class WinningTicketTest {
     @Test
     fun `당첨티켓의 번호는 6 자리다`() {
         val winningTicket = WinningTicket(LottoTicket(LottoRandomNumbers().createNumbers()), 7)
-        assertThat(winningTicket.numbers.size).isEqualTo(6)
+        assertThat(winningTicket.lottoTicket.lottoNumbers.size).isEqualTo(6)
     }
 
     @Test
     fun `당첨티켓은 보너스 번호를 가질 수 있다`() {
         val winningTicket = WinningTicket(LottoTicket(LottoRandomNumbers().createNumbers()), 7)
         assertThat(winningTicket.bonusNumber).isEqualTo(7)
+    }
+
+    @Test
+    fun `당첨티켓은 보너스 티켓인지 알 수 있다`() {
+        val lottoTicket = LottoTicket(LottoFixedNumbers().createNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        val winningTicket = WinningTicket(
+            LottoTicket(LottoFixedNumbers().createNumbers(listOf(3, 4, 5, 6, 7, 8))),
+            1
+        )
+        assertThat(winningTicket.isBonusTicket(lottoTicket, 4)).isEqualTo(true)
     }
 
     @Test

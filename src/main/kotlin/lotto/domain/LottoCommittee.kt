@@ -13,7 +13,29 @@ object LottoCommittee {
         lottos: Lottos,
         winningTicket: WinningTicket
     ): Map<Priority, Int> {
-        return lottos.calculatePriorities(winningTicket)
+        val priorities = initializePriorities()
+        for (ticket in lottos.tickets) {
+            val countOfMatch = winningTicket.calculateMatch(ticket)
+
+            if (winningTicket.isBonusTicket(ticket, countOfMatch)) {
+                priorities.merge(Priority.SECOND, 1, Int::plus)
+                continue
+            }
+
+            priorities.merge(Priority.find(countOfMatch), 1, Int::plus)
+        }
+
+        return priorities
+    }
+
+    private fun initializePriorities(): MutableMap<Priority, Int> {
+        val priorities = mutableMapOf<Priority, Int>()
+
+        for (priority in Priority.values()) {
+            priorities[priority] = 0
+        }
+
+        return priorities
     }
 
     fun calculateReturnRate(price: Int, statistics: Map<Priority, Int>): Double {

@@ -13,7 +13,7 @@ class LottoCommitteeTest {
     @Test
     fun `당첨번호는 6 자리다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
-        assertThat(winningTicket.numbers.size).isEqualTo(6)
+        assertThat(winningTicket.lottoTicket.lottoNumbers.size).isEqualTo(6)
     }
 
     @ParameterizedTest
@@ -48,7 +48,8 @@ class LottoCommitteeTest {
     @Test
     fun `6개를 맞춘 통계를 구할 수 있다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
-        val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers().createNumbers(winningTicket.numbers.toList()))))
+        val winningNumbers = winningTicket.lottoTicket.lottoNumbers.map { it.number }
+        val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers().createNumbers(winningNumbers))))
 
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
 
