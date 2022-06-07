@@ -1,9 +1,7 @@
 package lotto.domain.numbers
 
 @JvmInline
-value class LottoNumber private constructor(private val number: Int) {
-    fun toInt(): Int = number
-
+value class LottoNumber private constructor(val number: Int) {
     companion object {
         val LOTTO_NUMBER_POOL = (1..45).associateWith { LottoNumber(it) }
 
