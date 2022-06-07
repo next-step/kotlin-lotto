@@ -22,6 +22,7 @@
     - [x] Lotto(일급컬렉션)의 변수에 직접적으로 접근하지 말고 멤버함수 활용 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884270190))
     - [x] List<Lotto> -> Tickets ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271739))
     - [ ] mutableMapOf<Winning, Int> -> LottoResults ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271932))
+  - [x] Tickets 테스트 코드 작성
 
 ## Step2 : 로또(자동)
 ### 요구사항
