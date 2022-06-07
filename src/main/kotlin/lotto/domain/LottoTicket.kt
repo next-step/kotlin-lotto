@@ -23,19 +23,15 @@ class LottoTicket(val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
     ): Boolean {
         if (lottoRank.isBonus) {
             return compareMatchCount(lottoRank.matchCount, winningNumber.winningNumber) &&
-                isContainBonusNumber(winningNumber.bonusNumber)
+                numbers.contains(winningNumber.bonusNumber)
         }
 
         return compareMatchCount(lottoRank.matchCount, winningNumber.winningNumber) &&
-            !isContainBonusNumber(winningNumber.bonusNumber)
+            !numbers.contains(winningNumber.bonusNumber)
     }
 
     private fun compareMatchCount(matchCount: Int, winningNumber: LottoTicket): Boolean {
         return numbers.intersect(winningNumber.numbers).size == matchCount
-    }
-
-    private fun isContainBonusNumber(bonusNumber: LottoNumber): Boolean {
-        return numbers.contains(bonusNumber)
     }
 
     companion object {
