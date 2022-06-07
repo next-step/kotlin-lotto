@@ -38,7 +38,7 @@ class LottoTicketTest {
     fun `로또는 당첨번호와 몇 개 일치하는지 정보를 알 수 있다`() {
         val lottoNumbers = LottoFixedNumbers().createNumbers(listOf(4, 5, 6, 7, 8, 9))
         val lotto = LottoTicket(lottoNumbers)
-        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
+        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
 
         assertThat(lotto.priority(winningTicket)).isEqualTo(Priority.FIFTH)
     }

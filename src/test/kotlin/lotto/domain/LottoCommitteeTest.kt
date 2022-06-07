@@ -12,7 +12,7 @@ import java.lang.NumberFormatException
 class LottoCommitteeTest {
     @Test
     fun `당첨번호는 6 자리다`() {
-        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
+        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
         assertThat(winningTicket.numbers.size).isEqualTo(6)
     }
 
@@ -20,7 +20,7 @@ class LottoCommitteeTest {
     @ValueSource(strings = ["a,b,1,2,3,4", "1,10,33,a,36,5", ", ,1,2,3,4", ])
     fun `당첨번호에 공백 혹은 숫자가 아닌 값이 입력되면 예외가 발생한다`(input: String) {
         assertThatThrownBy {
-            LottoCommittee.createWinningTicket(input)
+            LottoCommittee.createWinningTicket(input, "45")
         }
             .isInstanceOf(NumberFormatException::class.java)
     }
@@ -29,7 +29,7 @@ class LottoCommitteeTest {
     @ValueSource(strings = ["-1,0,1,2,3,4", "1,2,3,4,5,46"])
     fun `당첨번호에 1 미만 45 초과 값이 들어가면 예외가 발생한다`(input: String) {
         assertThatThrownBy {
-            LottoCommittee.createWinningTicket(input)
+            LottoCommittee.createWinningTicket(input, "10")
         }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("로또 번호가 유효 범위내에 있지 않습니다.")
@@ -37,7 +37,7 @@ class LottoCommitteeTest {
 
     @Test
     fun `3개를 맞춘 통계를 구할 수 있다`() {
-        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
+        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
         val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers().createNumbers(listOf(4, 5, 6, 7, 8, 9)))))
 
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
@@ -47,7 +47,7 @@ class LottoCommitteeTest {
 
     @Test
     fun `6개를 맞춘 통계를 구할 수 있다`() {
-        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6")
+        val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
         val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers().createNumbers(winningTicket.numbers.toList()))))
 
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)

@@ -16,7 +16,7 @@ class LottoNumberTest {
     @ValueSource(strings = ["-1,0,1,2,3,4", "1,2,3,4,5,46"])
     fun `당첨번호에 1 미만 45 초과 값이 들어가면 예외가 발생한다`(input: String) {
         Assertions.assertThatThrownBy {
-            LottoCommittee.createWinningTicket(input)
+            LottoCommittee.createWinningTicket(input, "7")
         }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("로또 번호가 유효 범위내에 있지 않습니다.")

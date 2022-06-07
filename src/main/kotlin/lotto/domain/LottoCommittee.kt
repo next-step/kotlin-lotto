@@ -4,8 +4,9 @@ import lotto.domain.enum.Priority
 import lotto.domain.`interface`.LottoFixedNumbers
 
 object LottoCommittee {
-    fun createWinningTicket(input: String): WinningTicket {
-        return WinningTicket(LottoTicket(LottoFixedNumbers().createNumbers(input.split(",").map { it.toInt() })))
+    fun createWinningTicket(input: String, bonusBall: String): WinningTicket {
+        val lottoTicket = LottoTicket(LottoFixedNumbers().createNumbers(input.split(",").map { it.toInt() }))
+        return WinningTicket(lottoTicket, bonusBall.toInt())
     }
 
     fun calculateStatistics(
