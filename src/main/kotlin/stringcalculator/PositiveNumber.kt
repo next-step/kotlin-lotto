@@ -14,5 +14,5 @@ class PositiveNumber(
         private const val ZERO = 0
     }
 
-    fun value(): Int = number.toInt()
+    fun toInt(): Int = number.toInt()
 }

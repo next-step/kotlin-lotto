@@ -10,7 +10,7 @@ class StringAddCalculator {
         return CustomSplitter.splitStrings(text)
             .ifEmpty { DefaultSplitter.splitStrings(text) }
             .map(::PositiveNumber)
-            .map { it.value() }
+            .map { it.toInt() }
             .reduce { a, b -> a + b }
     }
 
