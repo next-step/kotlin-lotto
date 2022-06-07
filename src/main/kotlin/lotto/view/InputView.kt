@@ -11,14 +11,14 @@ object InputView {
         println(TOTAL_PAYMENT_QUESTION)
 
         return readln()
-            .getPositiveNumber("구입금액")
+            .toPositiveNumber("구입금액")
     }
 
     fun readNumberOfCustomLotto(): Int {
         println(NUMBER_OF_CUSTOM_LOTTO_QUESTION)
 
         return readln()
-            .getPositiveNumber("수동으로 구매할 로또 수")
+            .toPositiveNumber("수동으로 구매할 로또 수")
     }
 
     fun readCustomLottoNumbers(numberOfCustomLotto: Int): List<List<Int>> {
@@ -40,17 +40,17 @@ object InputView {
     fun readBonusBallNumber(): Int {
         println(BONUS_BALL_NUMBER_QUESTION)
 
-        return readln().getPositiveNumber("보너스 볼 번호")
+        return readln().toPositiveNumber("보너스 볼 번호")
     }
 
     private fun readLottoNumbers(what: String? = null): List<Int> {
         return readln()
             .split(",")
-            .map { it.getPositiveNumber(what) }
+            .map { it.toPositiveNumber(what) }
             .takeIfIntListHasSizeOfSix(what)
     }
 
-    private fun String.getPositiveNumber(what: String? = null): Int = trim()
+    private fun String.toPositiveNumber(what: String? = null): Int = trim()
         .toIntOrNull()
         ?.takeIf { it >= 0 }
         ?: throw IllegalArgumentException("${what.toSubjectString()}0 이상의 정수이여야 합니다.")
