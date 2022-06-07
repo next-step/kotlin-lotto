@@ -27,8 +27,8 @@ class WinningMatcherTest : FreeSpec({
             val lotto = Lotto.of(setOf(1, 2, 3, 4, 5, 9))
             WinningMatcher(pastWinner, bonus).getPlace(lotto) shouldBe Winning.THIRD_PLACE
         }
-        "4개 일치하고 보너스 번호가 일치하면 2등이다" {
-            val lotto = Lotto.of(setOf(1, 2, 3, 4, 9, 10))
+        "5개 일치하고 보너스 번호도 일치하면 2등이다" {
+            val lotto = Lotto.of(setOf(1, 2, 3, 4, 5, 10))
             WinningMatcher(pastWinner, bonus).getPlace(lotto) shouldBe Winning.SECOND_PLACE
         }
         "6개 일치하면 1등이다" {
