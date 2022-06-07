@@ -1,7 +1,12 @@
-package lotto.domain
+package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.Tickets
+import lotto.domain.WinnerLotto
+import lotto.domain.Winning
 
 class TicketsTest : FreeSpec({
     "로또티켓들은" - {
