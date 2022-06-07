@@ -13,7 +13,7 @@ class StringSeparatorTest : StringSpec({
 
         // then
         delimiters.size shouldBe 3
-        delimiters shouldBe listOf(",", ":", ";")
+        delimiters shouldBe Delimiters.instanceOf(";")
         expression shouldBe "1;2;3"
     }
 
@@ -26,7 +26,7 @@ class StringSeparatorTest : StringSpec({
 
         // then
         delimiters.size shouldBe 2
-        delimiters shouldBe listOf(",", ":")
+        delimiters shouldBe Delimiters.default()
         expression shouldBe "1,2,3"
     }
 })
