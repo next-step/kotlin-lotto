@@ -3,21 +3,14 @@ package lotto.domain
 import lotto.domain.numbers.LottoNumbers
 
 class LottoProvider(payment: Int, customLottoNumbers: List<LottoNumbers> = emptyList()) {
-    val numberOfCustomLottos: Int
-    val numberOfAutomaticLottos: Int
-
-    val lottos: List<Lotto>
-
-    init {
-        numberOfCustomLottos = when (isAffordable(payment, customLottoNumbers.size)) {
-            true -> customLottoNumbers.size
-            false -> throw IllegalArgumentException(TOO_MANY_LOTTO_REQUESTED)
-        }
-
-        numberOfAutomaticLottos = payment.getNumberOfAffordableLotto() - numberOfCustomLottos
-
-        lottos = generateCustomLottos(customLottoNumbers) + generateAutomaticLottos(numberOfAutomaticLottos)
+    val numberOfCustomLottos: Int = when (isAffordable(payment, customLottoNumbers.size)) {
+        true -> customLottoNumbers.size
+        false -> throw IllegalArgumentException(TOO_MANY_LOTTO_REQUESTED)
     }
+
+    val numberOfAutomaticLottos: Int = payment.getNumberOfAffordableLotto() - numberOfCustomLottos
+
+    val lottos: List<Lotto> = generateCustomLottos(customLottoNumbers) + generateAutomaticLottos(numberOfAutomaticLottos)
 
     private fun generateCustomLottos(customLottoNumbers: List<LottoNumbers>) = customLottoNumbers.map { Lotto(it) }
 
