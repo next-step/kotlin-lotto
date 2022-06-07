@@ -20,7 +20,7 @@
   - [x] 2등의 당첨규칙이 잘못되었다... ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884269255))
   - 일급컬렉션을 사용하여 코드 개선
     - [x] Lotto(일급컬렉션)의 변수에 직접적으로 접근하지 말고 멤버함수 활용 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884270190))
-    - [ ] List<Lotto> -> Tickets ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271739))
+    - [x] List<Lotto> -> Tickets ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271739))
     - [ ] mutableMapOf<Winning, Int> -> LottoResults ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271932))
 
 ## Step2 : 로또(자동)
@@ -75,7 +75,7 @@
     - [x] Money 객체 분리하기
   - [x] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882728105))
   - [x] List Builder 사용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882735688))
-  - [ ] Map과 관련된 코드 개선 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
+  - [x] Map과 관련된 코드 개선 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
   - [x] 상수는 선언해서 사용하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882736373))
   - [x] BigDecimal 적용 (Double은 소수점 정밀도에 있어 한계가 있어 값이 유실될 수 있다.) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882767934))
   - [x] 익셉션 정리 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882770530))

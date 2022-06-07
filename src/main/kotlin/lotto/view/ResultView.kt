@@ -1,18 +1,14 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
+import lotto.domain.Tickets
 import lotto.domain.Winning
 import java.math.BigDecimal
 
 class ResultView {
-    fun printTickets(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { lotto ->
-            println(
-                lotto.numbers.map { it.number }.sorted().joinToString(prefix = PREFIX_LOTTO, postfix = POSTFIX_LOTTO)
-            )
-        }
+    fun printTickets(tickets: Tickets) {
+        println("${tickets.count()}개를 구매했습니다.")
+        tickets.formatToPrint().forEach(::println)
         println()
     }
 

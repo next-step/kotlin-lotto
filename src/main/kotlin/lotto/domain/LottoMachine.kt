@@ -1,11 +1,9 @@
 package lotto.domain
 
 class LottoMachine {
-    fun buy(money: Money): List<Lotto> {
-
+    fun buy(money: Money): Tickets {
         val ticketCount: Int = money / TICKET_PRICE
-
-        return List(ticketCount) { issueTicket() }
+        return Tickets(List(ticketCount) { issueTicket() })
     }
 
     private fun issueTicket(): Lotto {
