@@ -2,27 +2,27 @@ package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.Tickets
 import lotto.domain.WinnerLotto
 import lotto.domain.Winning
+import lotto.util.lottoOf
 
 class TicketsTest : FreeSpec({
     "로또티켓들은" - {
         val tickets = Tickets(
             listOf(
-                Lotto.of(setOf(1, 2, 7, 8, 9, 10)),
-                Lotto.of(setOf(1, 2, 3, 7, 8, 9)),
-                Lotto.of(setOf(1, 2, 3, 4, 8, 9)),
-                Lotto.of(setOf(1, 2, 3, 6, 8, 9)),
-                Lotto.of(setOf(1, 2, 3, 4, 5, 9)),
-                Lotto.of(setOf(1, 2, 3, 4, 5, 10)),
-                Lotto.of(setOf(1, 2, 3, 4, 5, 6)),
+                lottoOf(1, 2, 7, 8, 9, 10),
+                lottoOf(1, 2, 3, 7, 8, 9),
+                lottoOf(1, 2, 3, 4, 8, 9),
+                lottoOf(1, 2, 3, 6, 8, 9),
+                lottoOf(1, 2, 3, 4, 5, 9),
+                lottoOf(1, 2, 3, 4, 5, 10),
+                lottoOf(1, 2, 3, 4, 5, 6),
             )
         )
 
-        val pastWinner = Lotto.of(setOf(1, 2, 3, 4, 5, 6))
+        val pastWinner = lottoOf(1, 2, 3, 4, 5, 6)
         val bonus = LottoNumber(10)
         val winner = WinnerLotto(pastWinner, bonus)
 

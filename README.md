@@ -66,7 +66,7 @@
     - [x] 좋은 단위테스트는 결과가 올바른지 알 수 있어야 하고 경계조건이 설정되어 있어야 한다 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882665191))
     - [x] 테스트명을 명확하게 작성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882693619))
     - [x] 꽝인 경우 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882750160))
-    - [ ] 자주 사용하는 변수를 test fixture 로 생성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882701463))
+    - [x] 테스트 시 생성되는 반복되는 코드들을 test fixture로 개선 ([review 1](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882701463), [review 2](https://github.com/next-step/kotlin-lotto/pull/324/files/0c799ffcb407947f97fee5623a1ec78274172cf1#r882701463))
     - [x] 테스트는 스스로 검증할 수 있어야 한다. 에러에 대해 검증이 필요하면 단언문으로! ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r884148664))
   - 객체의 역할에 맞게 기능 구현 
     - [x] 정렬 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882666093))
