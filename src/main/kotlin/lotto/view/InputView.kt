@@ -30,7 +30,7 @@ object InputView {
         return changeStringToInt(readStringValue())
     }
 
-    fun getLottoNumbers(readStringValue: () -> String? = { readlnOrNull() }, count: Int): List<String> {
+    fun getLottoNumbers(count: Int, readStringValue: () -> String? = { readlnOrNull() }): List<String> {
         println(Messages.WRITE_MANUAL_LOTTO_NUMBER)
         val output = mutableListOf<String>()
         repeat(count) {

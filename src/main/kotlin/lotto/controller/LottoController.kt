@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.LottoCompany
 import lotto.domain.LottoStore
+import lotto.domain.Money
 import lotto.domain.YieldCalculator
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -11,9 +12,9 @@ import lotto.view.OutputView
  */
 object LottoController {
     fun playLotto() {
-        val money = InputView.getPrice()
+        val money = Money(InputView.getPrice())
         val store = LottoStore(money)
-        val manualTickets = store.buyManualLotto(InputView::getManualCount) { InputView.getLottoNumbers(count = it) }
+        val manualTickets = store.buyManualLotto(InputView::getManualCount) { InputView.getLottoNumbers(it) }
         val tickets = manualTickets + store.buyAutoLotto()
         OutputView.printTicket(tickets, manualTickets.getSize())
 

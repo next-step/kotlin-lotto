@@ -7,7 +7,11 @@ package lotto.domain
 object LottoTicketFactory {
     const val LOTTO_SIZE = 6
 
-    fun getRandomLottoTicket(): LottoTicket {
+    fun getRandomLottoTickets(count: Int): LottoTickets {
+        return LottoTickets(List(count) { getRandomLottoTicket() })
+    }
+
+    private fun getRandomLottoTicket(): LottoTicket {
         val numbers = LottoNumber.LOTTO_NUMBER_RANGE
             .shuffled()
             .take(LOTTO_SIZE)

@@ -6,7 +6,7 @@ import lotto.constants.ErrorMessages
  * 당첨 번호를 갖고, 당첨 여부를 알려주는 클래스.
  * Created by Jaesungchi on 2022.05.25..
  */
-class LottoCompany(val winningTicket: LottoTicket, private val bonusNumber: LottoNumber) {
+class LottoCompany(private val winningTicket: LottoTicket, private val bonusNumber: LottoNumber) {
     init {
         require(bonusNumber !in winningTicket) { ErrorMessages.BONUS_IS_DUPLICATE_WITH_WINNINGS }
     }

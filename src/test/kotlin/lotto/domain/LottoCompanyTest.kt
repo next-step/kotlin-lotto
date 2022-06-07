@@ -10,12 +10,6 @@ import org.junit.jupiter.params.provider.CsvSource
  */
 class LottoCompanyTest {
     @ParameterizedTest
-    @CsvSource("'1, 2, 3, 4, 5, 6', 8")
-    internal fun `지난 주 당첨 번호 입력 받은걸 ','로 나눈다`(winningNumbers: String, bonusNumber: Int) {
-        assertThat(LottoCompany.of({ winningNumbers }, { bonusNumber }).winningTicket).isNotNull
-    }
-
-    @ParameterizedTest
     @CsvSource("'1, 2, 3, 4, 5', 8")
     internal fun `지난 주 당첨 번호는 6개가 아니라면 IllegalArgumentException을 던진다`(winningNumbers: String, bonusNumber: Int) {
         assertThrows<IllegalArgumentException> {

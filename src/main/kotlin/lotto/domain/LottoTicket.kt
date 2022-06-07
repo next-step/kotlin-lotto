@@ -17,7 +17,7 @@ data class LottoTicket(val numbers: Set<LottoNumber>) {
     }
 
     fun getMatchCount(winningTicket: LottoTicket): Int {
-        return numbers.intersect(winningTicket.numbers.toSet()).size
+        return numbers.intersect(winningTicket.numbers).size
     }
 
     companion object {
