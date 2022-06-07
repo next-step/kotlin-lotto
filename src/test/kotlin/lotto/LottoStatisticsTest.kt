@@ -1,7 +1,7 @@
 package lotto
 
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.doubles.shouldBeGreaterThan
+import io.kotest.matchers.bigdecimal.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoStatistics
 import lotto.domain.Money
@@ -16,7 +16,11 @@ class LottoStatisticsTest : FreeSpec({
         )
 
         val statistics = LottoStatistics(money, lottoResult)
-        statistics.totalAmount shouldBe 60_000
-        statistics.getYield() shouldBeGreaterThan 1.0
+
+        val expectedTotal = 60_000
+        val expectedYield = 1
+
+        statistics.totalAmount shouldBe expectedTotal.toBigDecimal()
+        statistics.getYield() shouldBeGreaterThan expectedYield.toBigDecimal()
     }
 })
