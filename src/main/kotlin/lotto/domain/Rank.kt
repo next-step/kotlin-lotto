@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Rank(val prize: Long, private val matchCount: Int) {
+enum class Rank(val prize: Long, val matchCount: Int) {
     FIRST(2_000_000_000, 6),
     SECOND(1_500_000, 5),
     THIRD(50_000, 4),
@@ -8,17 +8,10 @@ enum class Rank(val prize: Long, private val matchCount: Int) {
     FAIL(0, -1);
 
     companion object {
-        fun determineLottoTicket(winLottoTicket: LottoTicket, lottoTickets: List<LottoTicket>): List<Rank> {
-            val matchCounts = lottoTickets.map { lottoTicket ->
-                (lottoTicket + winLottoTicket).lottoNums
-                    .groupBy { it }
-                    .filter { it.value.size > 1 }
-                    .flatMap { it.value }
-                    .distinct()
-                    .count()
-            }
+        fun determineLottoTicket(winNums: LottoTicket, lottoTicket: LottoTicket): Rank {
+            val matchingCount = lottoTicket.matchingCount(winNums)
 
-            return matchCounts.map { getInstance(it) }
+            return getInstance(matchingCount)
         }
 
         private fun getInstance(matchCount: Int): Rank {

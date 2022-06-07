@@ -1,12 +1,14 @@
 package lotto.domain
 
 class LottoTicket(val lottoNums: List<LottoNum>) {
-    operator fun plus(lottoTicket: LottoTicket): LottoTicket {
-        val result = ArrayList<LottoNum>(this.lottoNums.size + lottoTicket.lottoNums.size)
-        result.addAll(this.lottoNums)
-        result.addAll(lottoTicket.lottoNums)
 
-        return LottoTicket(result)
+    fun matchingCount(winNums: LottoTicket): Int {
+        return (lottoNums + winNums.lottoNums)
+            .groupBy { it }
+            .filter { it.value.size > 1 }
+            .flatMap { it.value }
+            .distinct()
+            .count()
     }
 
     companion object {

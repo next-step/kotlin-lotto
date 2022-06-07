@@ -9,8 +9,8 @@ class RankTest {
         val winLottoTicket = LottoTicketMachine.issue(listOf(1, 2, 3, 4, 5, 6))
         val lottoTicket = LottoTicketMachine.issue(listOf(1, 2, 7, 9, 8, 16))
 
-        val determineLottoTicket = Rank.determineLottoTicket(winLottoTicket, listOf(lottoTicket))
+        val determineLottoTicket = Rank.determineLottoTicket(winLottoTicket, lottoTicket)
 
-        assertThat(determineLottoTicket[0]).isEqualTo(Rank.FAIL)
+        assertThat(determineLottoTicket).isEqualTo(Rank.FAIL)
     }
 }
