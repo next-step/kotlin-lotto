@@ -15,6 +15,8 @@ class LottoMachine {
         return Lotto.of(numbers)
     }
 
+    fun canBuyTicketCount(money: Money) = money / TICKET_PRICE
+
     companion object {
         const val TICKET_PRICE = 1_000
         private const val LOTTO_NUMBER_COUNT = 6

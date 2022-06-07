@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.Money
 import lotto.domain.Tickets
@@ -25,6 +26,7 @@ class InputView {
         println(INPUT_MANUAL_TICKET_COUNT)
         val count = readln().toInt()
 
+        if (LottoMachine().canBuyTicketCount(money) < count) throw IllegalArgumentException()
         if (count == 0) return null
 
         println(INPUT_MANUAL_TICKET_NUMBER)
