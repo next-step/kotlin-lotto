@@ -1,6 +1,8 @@
 package lotto.vo
 
-data class LotteryNumberSet(private val lotteryNumbers: List<LotteryNumber>) : List<LotteryNumber> by lotteryNumbers {
+data class LotteryNumberSet(
+    private val lotteryNumbers: List<LotteryNumber>
+) : List<LotteryNumber> by lotteryNumbers {
 
     init {
         require(lotteryNumbers.size == LOTTO_NUMBER_SIZE)

@@ -5,8 +5,10 @@ import lotto.vo.LotteryNumber
 import lotto.vo.LotteryNumberSet
 import lotto.vo.LotteryRank
 
-class BonusLotteryPolicy(winningLotteryNumbers: LotteryNumberSet, private val bonus: LotteryNumber) :
-    LotteryPolicy(winningLotteryNumbers) {
+class LotteryWithBonusPolicy(
+    winningLotteryNumbers: LotteryNumberSet,
+    private val bonus: LotteryNumber,
+) : LotteryPolicy(winningLotteryNumbers) {
 
     init {
         require(!winningLotteryNumbers.contains(bonus)) { "보너스 번호가 중첩될 수 없습니다." }
@@ -22,11 +24,7 @@ class BonusLotteryPolicy(winningLotteryNumbers: LotteryNumberSet, private val bo
 
     private fun isBonusPlace(lottery: Lottery): Boolean {
         val count = LotteryRank.of(matchCount(lottery))
-
-        if (LotteryRank.THIRD_PLACE == count && isMatchBonusNumber(lottery)) {
-            return true
-        }
-        return false
+        return (LotteryRank.THIRD_PLACE == count) && isMatchBonusNumber(lottery)
     }
 
     private fun isOnePlace(lottery: Lottery): Boolean =

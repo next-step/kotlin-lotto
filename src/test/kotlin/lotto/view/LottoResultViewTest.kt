@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
 import lotto.domain.toLotteryNumberSet
-import lotto.policy.BonusLotteryPolicy
+import lotto.policy.LotteryWithBonusPolicy
 import lotto.vo.LotteryNumber
 import lotto.vo.LotterySet
 
@@ -17,7 +17,7 @@ internal class LottoResultViewTest : BehaviorSpec({
                 Lottery(listOf(1, 2, 3, 4, 5, 7).toLotteryNumberSet()),
             )
         )
-        val lastWeekNormalLottery = BonusLotteryPolicy(listOf(1, 2, 3, 4, 45, 44).toLotteryNumberSet(), LotteryNumber.of(5))
+        val lastWeekNormalLottery = LotteryWithBonusPolicy(listOf(1, 2, 3, 4, 45, 44).toLotteryNumberSet(), LotteryNumber.of(5))
         val stubIOSystem = StubIOSystem("")
         val lottoResultView = LottoResultView(stubIOSystem)
 

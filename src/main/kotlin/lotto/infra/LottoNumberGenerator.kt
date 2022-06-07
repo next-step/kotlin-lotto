@@ -8,9 +8,11 @@ class LottoNumberGenerator : NumberGenerator<LotteryNumberSet> {
 
     override fun generate(): LotteryNumberSet =
         LOTTERY_NUMBER_RANGE
+            .asSequence()
             .shuffled()
             .take(LotteryNumberSet.LOTTO_NUMBER_SIZE)
             .map(LotteryNumber::of)
+            .toList()
             .let(::LotteryNumberSet)
 
     companion object {

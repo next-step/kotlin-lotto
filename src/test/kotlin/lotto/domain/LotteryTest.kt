@@ -1,32 +1,29 @@
 package lotto.domain
 
-import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.infra.port.NumberGenerator
 import lotto.vo.LotteryNumber
 import lotto.vo.LotteryNumberSet
 
-internal class LotteryTest : BehaviorSpec({
+internal class LotteryTest : StringSpec({
 
-    given("주어진 번호가") {
+    "주어진 번호가 로또 번호에 포함된 경우 참을 반환한다." {
         val lotteryNumberSet = listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet()
         val lottery = Lottery(lotteryNumberSet)
 
-        `when`("포함된 경우") {
-            val result = lottery.contains(LotteryNumber.of(1))
+        val result = lottery.contains(LotteryNumber.of(1))
 
-            then("true") {
-                result shouldBe true
-            }
-        }
+        result shouldBe true
+    }
 
-        `when`("포함되지 않은 경우") {
-            val result = lottery.contains(LotteryNumber.of(7))
+    "주어진 번호가 로또 번호에 포함되지 않은 경우 거짓을 반환한다." {
+        val lotteryNumberSet = listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet()
+        val lottery = Lottery(lotteryNumberSet)
 
-            then("false") {
-                result shouldBe false
-            }
-        }
+        val result = lottery.contains(LotteryNumber.of(7))
+
+        result shouldBe false
     }
 })
 
