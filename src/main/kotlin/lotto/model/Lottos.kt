@@ -6,4 +6,6 @@ class Lottos(
     val count = lottos.size
 
     fun findRanks(drawNumbers: DrawNumbers) = lottos.map { it.findRank(drawNumbers) }
+
+    fun plus(other: Lottos) = Lottos(lottos.plus(other.lottos))
 }

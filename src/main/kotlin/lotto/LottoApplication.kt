@@ -2,8 +2,10 @@ package lotto
 
 import lotto.model.DrawNumbers
 import lotto.model.Lotto
+import lotto.model.LottoGenerator
 import lotto.model.LottoNumber
-import lotto.model.RandomLottoGenerator
+import lotto.model.Lottos
+import lotto.model.RandomLottoGenerating
 import lotto.model.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -13,7 +15,11 @@ object LottoApplication {
         inputView.printPaymentPriceInputMessage()
         val paymentPrice = inputView.inputPaymentPrice()
 
-        val purchasedLottos = RandomLottoGenerator.generateLottos(paymentPrice)
+        val purchasedLottos =
+            LottoGenerator.generateLottos(
+                paymentPrice, Lottos(listOf(Lotto(LottoNumber.LOTTO_NUMBERS.subList(0, 6)))),
+                RandomLottoGenerating
+            )
         resultView.printPurchasedLottoCount(purchasedLottos.count)
         resultView.printPurchasedLottos(purchasedLottos)
 
