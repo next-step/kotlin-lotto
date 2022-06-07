@@ -1,9 +1,10 @@
 package lotto.domain
 
 class LottoMachine {
-    fun buy(money: Money): Tickets {
-        val ticketCount: Int = money / TICKET_PRICE
-        return Tickets(List(ticketCount) { issueTicket() })
+    fun buy(money: Money, manualTickets: Tickets?): Tickets {
+        val autoTicketCount = canBuyTicketCount(money) - (manualTickets?.count() ?: 0)
+        val autoTickets = Tickets(List(autoTicketCount) { issueTicket() })
+        return manualTickets?.merge(autoTickets) ?: autoTickets
     }
 
     private fun issueTicket(): Lotto {

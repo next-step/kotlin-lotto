@@ -1,6 +1,7 @@
 package lotto.domain
 
-class Tickets(private val tickets: List<Lotto>) {
+class Tickets(private val _tickets: List<Lotto>) {
+    private val tickets = _tickets.toMutableList()
 
     fun count(): Int = tickets.size
 
@@ -9,4 +10,9 @@ class Tickets(private val tickets: List<Lotto>) {
     }
 
     fun formatToPrint(): List<String> = tickets.map { it.formatToTickets() }
+
+    fun merge(otherTickets: Tickets): Tickets {
+        tickets.addAll(otherTickets.tickets)
+        return this
+    }
 }

@@ -22,9 +22,12 @@ class InputView {
         return LottoNumber(readln().toInt())
     }
 
-    fun getManualTickets(money: Money): Tickets? {
+    fun getManualTicketCount(): Int {
         println(INPUT_MANUAL_TICKET_COUNT)
-        val count = readln().toInt()
+        return readln().toInt()
+    }
+
+    fun getManualTickets(money: Money, count: Int): Tickets? {
 
         if (LottoMachine().canBuyTicketCount(money) < count) throw IllegalArgumentException()
         if (count == 0) return null
