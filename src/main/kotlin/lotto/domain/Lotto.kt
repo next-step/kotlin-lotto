@@ -1,11 +1,13 @@
 package lotto.domain
 
-class Lotto(val numbers: Set<LottoNumber>) {
+class Lotto(private val numbers: Set<LottoNumber>) {
     init {
         require(numbers.size == 6) { ERROR_LOTTO_NUMBER_COUNT }
     }
 
     fun countMatches(lotto: Lotto): Int = numbers.count { it in lotto }
+
+    fun count(): Int = numbers.size
 
     operator fun contains(lottoNumbers: LottoNumber): Boolean = lottoNumbers in numbers
 

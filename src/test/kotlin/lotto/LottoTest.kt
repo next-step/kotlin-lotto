@@ -12,7 +12,7 @@ class LottoTest : FreeSpec({
         "6개의 중복되지 않는 LottoNumber를 가진다" {
             val numbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).toSet()
             val lotto = Lotto(numbers)
-            lotto.numbers.size shouldBe 6
+            lotto.count() shouldBe 6
         }
         "LottoNumber가 중복되면 예외가 발생한다." {
             val numbers = listOf(1, 2, 3, 4, 5, 5).map(::LottoNumber).toSet()
