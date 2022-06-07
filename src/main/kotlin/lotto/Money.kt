@@ -9,9 +9,7 @@ value class Money(private val value: Int) {
         require(value >= 0) { "금액은 0이상의 정수여야 합니다." }
     }
 
-    operator fun div(other: Money) = this.value / other.value
-
     fun lottoTicketCount(): Int {
-        return this / LOTTO_PRICE
+        return this.value / LOTTO_PRICE.value
     }
 }
