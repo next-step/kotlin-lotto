@@ -10,11 +10,11 @@ class LottoProvider(payment: Int, customLottoNumbers: List<LottoNumbers> = empty
 
     val numberOfAutomaticLottos: Int = payment.getNumberOfAffordableLotto() - numberOfCustomLottos
 
-    val lottos: List<Lotto> = generateCustomLottos(customLottoNumbers) + generateAutomaticLottos(numberOfAutomaticLottos)
+    val lottos: List<Lotto> = customLottoNumbers.generateCustomLottos() + numberOfAutomaticLottos.generateAutomaticLottos()
 
-    private fun generateCustomLottos(customLottoNumbers: List<LottoNumbers>) = customLottoNumbers.map { Lotto(it) }
+    private fun List<LottoNumbers>.generateCustomLottos(): List<Lotto> = map { Lotto(it) }
 
-    private fun generateAutomaticLottos(numberOfAutomaticLottos: Int) = (1..numberOfAutomaticLottos).map { Lotto() }
+    private fun Int.generateAutomaticLottos(): List<Lotto> = (1..this).map { Lotto() }
 
     companion object {
         const val LOTTO_PRICE: Int = 1000
