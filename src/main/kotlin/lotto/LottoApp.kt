@@ -10,6 +10,7 @@ import lotto.view.ResultView
 fun main() {
     val money = Money(InputView().getMoney())
     val tickets = LottoMachine().buy(money)
+    val manualTickets = InputView().getManualTickets(money)
     ResultView().printTickets(tickets)
 
     val winner = InputView().getPastWinner()
