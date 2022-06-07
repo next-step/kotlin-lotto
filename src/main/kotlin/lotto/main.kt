@@ -1,12 +1,13 @@
 package lotto
 
 import lotto.controller.LottoController
+import lotto.service.LottoService
 
 fun main() {
 
-    val lottoGameService = LottoGameService()
+    val lottoService = LottoService()
 
-    val lottoController = LottoController(lottoGameService)
+    val lottoController = LottoController(lottoService)
 
     lottoController.start()
 }
