@@ -9,13 +9,15 @@ import org.junit.jupiter.api.Test
 class WinningTicketTest {
     @Test
     fun `당첨티켓의 번호는 6 자리다`() {
-        val winningTicket = WinningTicket(LottoTicket(LottoRandomNumbers().createNumbers()), 7)
+        val lottoTicket = LottoTicket(LottoFixedNumbers().createNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        val winningTicket = WinningTicket(lottoTicket, 7)
         assertThat(winningTicket.lottoTicket.lottoNumbers.size).isEqualTo(6)
     }
 
     @Test
     fun `당첨티켓은 보너스 번호를 가질 수 있다`() {
-        val winningTicket = WinningTicket(LottoTicket(LottoRandomNumbers().createNumbers()), 7)
+        val lottoTicket = LottoTicket(LottoFixedNumbers().createNumbers(listOf(1, 2, 3, 4, 5, 6)))
+        val winningTicket = WinningTicket(lottoTicket, 7)
         assertThat(winningTicket.bonusNumber).isEqualTo(7)
     }
 
