@@ -15,7 +15,7 @@ class LottoRandomNumbers : LottoNumbers {
         val lottoNumbers = mutableSetOf<LottoNumber>()
 
         for (index in randomNumbers.indices) {
-            lottoNumbers.add(LottoNumber(randomNumbers[index]))
+            lottoNumbers.add(LottoNumber.of(randomNumbers[index]))
         }
 
         return lottoNumbers

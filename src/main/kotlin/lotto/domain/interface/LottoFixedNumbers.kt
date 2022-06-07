@@ -8,7 +8,7 @@ class LottoFixedNumbers : LottoNumbers {
 
         val lottoNumbers = mutableSetOf<LottoNumber>()
         for (input in inputs.toSortedSet()) {
-            lottoNumbers.add(LottoNumber(input))
+            lottoNumbers.add(LottoNumber.of(input))
         }
 
         return lottoNumbers

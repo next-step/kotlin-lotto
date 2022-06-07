@@ -9,7 +9,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = ["1", "2", "45"])
     fun `로또 번호는 1 이상 45 이하이다`(input: String) {
-        assertThat(LottoNumber(input.toInt()).number).isEqualTo(input.toInt())
+        assertThat(LottoNumber.of(input.toInt()).number).isEqualTo(input.toInt())
     }
 
     @ParameterizedTest

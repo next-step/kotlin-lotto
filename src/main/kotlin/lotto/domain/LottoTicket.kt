@@ -2,9 +2,7 @@ package lotto.domain
 
 import lotto.domain.enum.Priority
 
-class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
-    val numbers: Set<Int> = lottoNumbers.map { it.number }.toSet()
-
+class LottoTicket(val lottoNumbers: Set<LottoNumber>) {
     init {
         require(lottoNumbers.size == LOTTO_NUMBERS_LENGTH) { "로또 번호는 6자리여야 합니다." }
     }
@@ -15,11 +13,11 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
     }
 
     private fun calculateMatch(winningTicket: WinningTicket): Int {
-        return numbers.filter { winningTicket.numbers.contains(it) }.size
+        return lottoNumbers.map { it.number }.filter { winningTicket.numbers.contains(it) }.size
     }
 
     private fun isBonusTicket(matchCount: Int, bonusNumber: Int): Boolean {
-        return numbers.contains(bonusNumber) && matchCount == BONUS_CANDIDATE_COUNT
+        return lottoNumbers.map { it.number }.contains(bonusNumber) && matchCount == BONUS_CANDIDATE_COUNT
     }
 
     companion object {
