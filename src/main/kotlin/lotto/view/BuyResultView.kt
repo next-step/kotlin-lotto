@@ -2,21 +2,22 @@ package lotto.view
 
 import lotto.domain.Lottery
 import lotto.infra.port.OutputSystem
+import lotto.vo.LotterySet
 
-class BuyResultView(private val outputSystem: OutputSystem, private val lotteries: List<Lottery>) {
+class BuyResultView(private val outputSystem: OutputSystem) {
 
-    fun printLottos() {
-        printLottoCount()
-        printAllLotto()
+    fun printLotteries(lotteries: LotterySet) {
+        printLottoCount(lotteries)
+        printAllLotto(lotteries)
     }
 
-    private fun printLottoCount() {
+    private fun printLottoCount(lotteries: LotterySet) {
         outputSystem.write("${lotteries.size}개를 구매했습니다.\n")
     }
 
-    private fun printAllLotto() {
+    private fun printAllLotto(lotteries: LotterySet) {
         lotteries.forEach(::printLotto)
     }
 
-    private fun printLotto(lottery: Lottery) = outputSystem.write("${lottery}\n")
+    private fun printLotto(normalLottery: Lottery) = outputSystem.write("${normalLottery}\n")
 }

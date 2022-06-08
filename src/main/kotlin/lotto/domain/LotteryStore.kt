@@ -1,12 +1,13 @@
 package lotto.domain
 
 import lotto.infra.port.NumberGenerator
-import lotto.vo.LottoSet
+import lotto.vo.LotteryNumberSet
+import lotto.vo.LotterySet
 
-class LotteryStore(private val numberGenerator: NumberGenerator<List<Int>>) {
+class LotteryStore(private val numberGenerator: NumberGenerator<LotteryNumberSet>) {
 
-    fun sell(amount: Int): LottoSet {
+    fun sell(amount: Int): LotterySet {
         val count = amount / Lottery.PRICE
-        return LottoSet(List(count) { Lottery.createRandomNumbers(numberGenerator) })
+        return LotterySet(List(count) { Lottery(LotteryNumberSet(numberGenerator.generate())) })
     }
 }
