@@ -9,10 +9,10 @@ class LottoResult(
     fun calculateEarningRate(purchasedMoney: PurchasedMoney): Double {
         val totalWinningPrice = statistics.asSequence()
             .sumOf {
-                it.key.winningMoney.multiply(BigDecimal.valueOf(it.value.toLong()))
+                it.key.winningMoney.multiply(BigDecimal(it.value))
             }
 
-        return totalWinningPrice.divide(BigDecimal.valueOf(purchasedMoney.value.toLong()), 2, RoundingMode.HALF_UP)
+        return totalWinningPrice.divide(BigDecimal(purchasedMoney.value), 2, RoundingMode.HALF_UP)
             .toDouble()
     }
 }
