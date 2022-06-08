@@ -5,7 +5,6 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.WinningMatcher
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
@@ -27,18 +26,17 @@ class WinningMatcherTest {
         Assertions.assertThat(matcher.getMatchGrade(lotto)).isEqualTo(testCase.expected)
     }
 
-    class TestCases : ArgumentsProvider {
+    private class TestCases : ArgumentsProvider by ArgumentsProvider({
+        val testCases = listOf(
+            TestCase(listOf(1, 2, 3, 4, 5, 6), Grade.First),
+            TestCase(listOf(1, 2, 3, 4, 5, 7), Grade.Second),
+            TestCase(listOf(1, 2, 3, 4, 5, 11), Grade.Third),
+            TestCase(listOf(1, 2, 3, 4, 11, 12), Grade.Fourth),
+            TestCase(listOf(1, 2, 3, 11, 12, 13), Grade.Five)
+        )
 
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments>? {
-            return Stream.of(
-                Arguments.of(TestCase(listOf(1, 2, 3, 4, 5, 6), Grade.First)),
-                Arguments.of(TestCase(listOf(1, 2, 3, 4, 5, 7), Grade.Second)),
-                Arguments.of(TestCase(listOf(1, 2, 3, 4, 5, 11), Grade.Third)),
-                Arguments.of(TestCase(listOf(1, 2, 3, 4, 11, 12), Grade.Fourth)),
-                Arguments.of(TestCase(listOf(1, 2, 3, 11, 12, 13), Grade.Five)),
-            )
-        }
-    }
+        Stream.of(*testCases.toTypedArray()).map { Arguments.of(it) }
+    })
 
     private fun WinningNumbers(vararg numbers: Int) = LottoNumbers(numbers.map(::LottoNumber))
     private fun LottoNumbers(numbers: List<Int>) = LottoNumbers(numbers.map(::LottoNumber))
