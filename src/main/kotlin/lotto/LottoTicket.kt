@@ -17,7 +17,7 @@ class LottoTicket private constructor(val numbers: Set<LottoNumber>) {
     }
 
     companion object {
-        fun of(numbers: Collection<LottoNumber>): LottoTicket {
+        fun of(numbers: Set<LottoNumber>): LottoTicket {
             return LottoTicket(numbers.toSortedSet(compareBy { it.number }))
         }
 
