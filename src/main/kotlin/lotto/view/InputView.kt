@@ -8,4 +8,13 @@ object InputView {
             requireNotNull(it.toIntOrNull()) { "구입금액은 숫자만 허용됩니다. " }
         }!!.toInt()
     }
+
+    fun inputWinningLotto(): List<Int> {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        val input = readLine() ?: throw IllegalStateException("당첨 번호는 null 값은 허용하지 않습니다.")
+        return input.split(",").asSequence()
+            .map { it.trim() }
+            .map { it.toInt() }
+            .toList()
+    }
 }
