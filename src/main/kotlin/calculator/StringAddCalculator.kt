@@ -18,11 +18,12 @@ class StringAddCalculator {
     }
 
     private fun sumWhenDefaultDelimiterExist(inputStr: String): Long {
-        return inputStr.split(",|:".toRegex())
+        return inputStr.split(REGEX_DELIMITER)
             .sumOf { numberStr -> numberStr.toNumericLong() }
     }
 
     companion object {
         private val REGEX_CUSTOM_DELIMITER = Regex("//(.)\n(.*)")
+        private val REGEX_DELIMITER = Regex(",|:")
     }
 }
