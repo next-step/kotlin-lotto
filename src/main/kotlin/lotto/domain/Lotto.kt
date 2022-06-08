@@ -3,7 +3,7 @@ package lotto.domain
 private const val LOTTO_LENGTH = 6
 
 class Lotto(
-    private val lottoNumbers: List<LottoNumber>
+    val lottoNumbers: List<LottoNumber>,
 ) {
     init {
         val distinctLottoNumbers = lottoNumbers.distinct()
@@ -21,9 +21,16 @@ private const val MAX_LOTTO_NUMBER = 45
 
 @JvmInline
 value class LottoNumber(
-    private val value: Int,
+    val value: Int,
 ) {
     init {
         require(value in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { "로또 숫자를 1 ~ 45 사이의 숫자만 허용됩니다." }
+    }
+
+    companion object {
+        val ALL = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).map { LottoNumber(it) }
+
+        fun valueOf(lottoNumber: Int) = ALL.getOrNull(lottoNumber)
+            ?: throw IllegalArgumentException("허용되지 않은 로또 숫자입니다.")
     }
 }
