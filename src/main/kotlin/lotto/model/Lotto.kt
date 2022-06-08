@@ -1,7 +1,7 @@
 package lotto.model
 
 class Lotto(
-    private val lotto: List<LottoNumber>
+    val lotto: List<LottoNumber>
 ) {
 
     init {

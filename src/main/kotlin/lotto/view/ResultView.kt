@@ -5,9 +5,9 @@ import lotto.model.WinningStatistics
 
 interface ResultView {
 
-    fun printPurchasedLottoCount(lottoCount: Int)
+    fun printLottoCount(customLottoCount: Int, randomLottoCount: Int)
 
-    fun printPurchasedLottos(lottos: Lottos)
+    fun printTotalLottos(lottos: Lottos)
 
     fun printWinningStatistics(paymentPrice: Int, statistics: WinningStatistics)
 }

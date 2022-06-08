@@ -6,12 +6,14 @@ import lotto.model.WinningStatistics
 
 object ConsoleResultView : ResultView {
 
-    override fun printPurchasedLottoCount(lottoCount: Int) = println("${lottoCount}개를 구매했습니다.")
+    private const val principalRatio = 1
 
-    override fun printPurchasedLottos(lottos: Lottos) {
-        lottos.lottos.forEach { println(it) }
+    override fun printLottoCount(customLottoCount: Int, randomLottoCount: Int) {
         println()
+        println("수동으로 ${customLottoCount}장, 자동으로 ${randomLottoCount}개를 구매했습니다.")
     }
+
+    override fun printTotalLottos(lottos: Lottos) = lottos.lottos.forEach { println(it) }
 
     override fun printWinningStatistics(paymentPrice: Int, statistics: WinningStatistics) {
         println()
@@ -35,5 +37,12 @@ object ConsoleResultView : ResultView {
     }
 
     private fun printEarningsRatio(earningRatio: Double) =
-        println("총 수익률은 ${earningRatio}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        println("총 수익률은 ${earningRatio}입니다.${lossMessage(earningRatio)}")
+
+    private fun lossMessage(earningRatio: Double): String {
+        if (earningRatio < principalRatio) {
+            return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+        }
+        return ""
+    }
 }

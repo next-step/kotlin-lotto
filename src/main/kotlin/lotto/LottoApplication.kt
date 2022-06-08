@@ -15,13 +15,21 @@ object LottoApplication {
         inputView.printPaymentPriceInputMessage()
         val paymentPrice = inputView.inputPaymentPrice()
 
-        val purchasedLottos =
-            LottoGenerator.generateLottos(
-                paymentPrice, Lottos(listOf(Lotto(LottoNumber.LOTTO_NUMBERS.subList(0, 6)))),
-                RandomLottoGenerating
-            )
-        resultView.printPurchasedLottoCount(purchasedLottos.count)
-        resultView.printPurchasedLottos(purchasedLottos)
+        inputView.printCustomLottoCountInputMessage()
+        val customLottoCount = inputView.inputCustomLottoCount()
+
+        inputView.printCustomLottoInputMessage()
+        val customLottos = mutableListOf<Lotto>()
+        repeat(customLottoCount) {
+            customLottos.add(inputView.inputCustomLotto())
+        }
+
+        val totalLottos = LottoGenerator.generateLottos(
+            paymentPrice, Lottos(customLottos),
+            RandomLottoGenerating
+        )
+        resultView.printLottoCount(customLottoCount, totalLottos.count - customLottoCount)
+        resultView.printTotalLottos(totalLottos)
 
         inputView.printWinningNumbersInputMessage()
         val winningNumbers = Lotto(inputView.inputWinningNumbers())
@@ -29,7 +37,7 @@ object LottoApplication {
         inputView.printBonusNumberInputMessage()
         val bonusNumber = LottoNumber.valueOf(inputView.inputBonusNumber())
 
-        val winningRanks = purchasedLottos.findRanks(DrawNumbers(winningNumbers, bonusNumber))
+        val winningRanks = totalLottos.findRanks(DrawNumbers(winningNumbers, bonusNumber))
         resultView.printWinningStatistics(paymentPrice, WinningStatistics.from(winningRanks))
     }
 }
