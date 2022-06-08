@@ -19,9 +19,13 @@ object OutputUI {
     fun drawWinningResult(result: LottoResult) {
         println("당첨 통계")
         println("---------")
-        listOf(Grade.Fourth, Grade.Third, Grade.Second, Grade.First).forEach {
+        listOf(Grade.Five, Grade.Fourth, Grade.Third, Grade.Second, Grade.First).forEach {
             val matchedCount = result.getMatchedCount(it)
-            println("${it.matchCount}개 일치 (${it.reward})- ${matchedCount}개")
+
+            var resultMessage = "${it.matchCount}개 일치"
+            if (it.matchBonus) resultMessage += ", 보너스 볼 일치"
+
+            println("$resultMessage (${it.reward}원)- ${matchedCount}개")
         }
     }
 
