@@ -9,10 +9,9 @@ enum class Winning(val winningAmount: Int, val matchCount: Int) {
     LOSE(0, 0);
 
     companion object {
-        private const val CHECK_BONUS_WINNER_COUNT = 4
         fun of(count: Int, matchBonus: Boolean): Winning {
-            return if (count == CHECK_BONUS_WINNER_COUNT) {
-                if (matchBonus) SECOND_PLACE else FOURTH_PLACE
+            return if (count == SECOND_PLACE.matchCount) {
+                if (matchBonus) SECOND_PLACE else THIRD_PLACE
             } else {
                 values().find { count == it.matchCount } ?: LOSE
             }

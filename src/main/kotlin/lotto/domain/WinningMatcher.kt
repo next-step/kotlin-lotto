@@ -1,11 +1,9 @@
 package lotto.domain
 
-class WinningMatcher(private val winner: Lotto, private val bonus: LottoNumber) {
+class WinningMatcher(private val winnerLotto: WinnerLotto) {
 
     fun getPlace(lotto: Lotto): Winning {
-        val matchBonus = lotto.contains(bonus)
-        return Winning.of(getMatchCount(lotto), matchBonus)
+        val matchBonus = winnerLotto.bonus in lotto
+        return Winning.of(winnerLotto.winner.countMatches(lotto), matchBonus)
     }
-
-    private fun getMatchCount(lotto: Lotto): Int = winner.numbers.count { lotto.contains(it) }
 }

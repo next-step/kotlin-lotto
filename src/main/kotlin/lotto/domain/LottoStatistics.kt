@@ -1,13 +1,10 @@
 package lotto.domain
 
-class LottoStatistics(private val money: Money, results: Map<Winning, Int>) {
-    var totalAmount: Double = 0.0
+import java.math.BigDecimal
 
-    init {
-        results.forEach { (winning, winningCount) ->
-            totalAmount += winning.winningAmount * winningCount
-        }
-    }
+class LottoStatistics(private val results: LottoResult) {
 
-    fun getYield(): Double = totalAmount / money.price
+    fun getTotalAmount(): BigDecimal = results.getTotalAmount()
+
+    fun getYield(): BigDecimal = getTotalAmount() / (results.getTotalCount() * LottoMachine.TICKET_PRICE).toBigDecimal()
 }

@@ -1,4 +1,17 @@
 # 2주차 : kotlin-lotto
+## Step4 : 로또(수동)
+### 요구사항
+- 사용자가 수동으로 추첨 번호를 입력하여 로또를 구매할 수 있다.
+- 모든 원시값과 문자열을 포장한다.
+- 예외 처리를 통해 에러가 발생하지 않도록 한다.
+
+### 할일
+- [x] 수동으로 구매할 개수를 입력받는다.
+- [x] 구매가능한 개수를 초과해서 수동으로 구매할 개수를 입력하면 IllegalArgumentException를 리턴한다.
+- [x] 수동으로 구매할 번호를 입력받는다(콤마로 구분)
+- [x] 입력된 개수만큼 수동/자동으로 티켓을 구매한다
+- [x] 수동/자동 구매 개수를 출력한다.
+
 ## Step3 : 로또(2등)
 ### 요구사항
 - 2등을 위해 추가번호를 하나 더 추첨한다.
@@ -11,6 +24,18 @@
 - [x] 입력된 보너스번호를 추가해 당첨결과를 조회한다.
 - [x] 2등의 당첨금액을 추가해 통계에 포함하여 출력한다.
 - [x] 2등 당첨이 포함된 테스트코드를 추가한다.
+- 코드리뷰 반영
+  - [x] 디미터의 법칙, 역할을 수행할 객체에서 함수를 생성하자 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244509))
+  - [x] 예외처리 코드 정리 (NumberFormatException < IllegalArgumentException) ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267378))
+  - [x] 각 객체에 맞는 테스트코드 작성 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244836))
+  - [x] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244997))
+  - [x] contains -> in 으로 사용하면 조금 더 간결해진다. ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267747))
+  - [x] 2등의 당첨규칙이 잘못되었다... ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884269255))
+  - 일급컬렉션을 사용하여 코드 개선
+    - [x] Lotto(일급컬렉션)의 변수에 직접적으로 접근하지 말고 멤버함수 활용 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884270190))
+    - [x] List<Lotto> -> Tickets ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271739))
+    - [x] mutableMapOf<Winning, Int> -> LottoResults ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884271932))
+  - [x] Tickets 테스트 코드 작성
 
 ## Step2 : 로또(자동)
 ### 요구사항
@@ -51,26 +76,28 @@
 - [x] 로또 앱 구현
 - 코드리뷰 반영
   - 테스트 코드 정리
-    - [ ] 좋은 단위테스트는 결과가 올바른지 알 수 있어야 하고 경계조건이 설정되어 있어야 한다 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882665191))
-    - [ ] 테스트명을 명확하게 작성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882693619))
-    - [ ] 꽝인 경우 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882750160))
-    - [ ] 자주 사용하는 변수를 test fixture 로 생성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882701463))
+    - [x] 좋은 단위테스트는 결과가 올바른지 알 수 있어야 하고 경계조건이 설정되어 있어야 한다 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882665191))
+    - [x] 테스트명을 명확하게 작성하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882693619))
+    - [x] 꽝인 경우 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882750160))
+    - [x] 테스트 시 생성되는 반복되는 코드들을 test fixture로 개선 ([review 1](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882701463), [review 2](https://github.com/next-step/kotlin-lotto/pull/324/files/0c799ffcb407947f97fee5623a1ec78274172cf1#r882701463))
+    - [x] 테스트는 스스로 검증할 수 있어야 한다. 에러에 대해 검증이 필요하면 단언문으로! ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r884148664))
   - 객체의 역할에 맞게 기능 구현 
     - [x] 정렬 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882666093))
-    - [ ] 맞는 개수 비교 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882746666))
+    - [x] matchCount 조회 시 Lotto의 내부에 의존하지 않도록 수정 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882746666))
     - [x] 수익률 표시 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882754116))
-    - [ ] LottoResult 객체 생성해서 테스트해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
+    - [x] LottoResult 객체 생성해서 테스트해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
     - [x] Money 객체 분리하기
-  - [ ] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882728105))
-  - [ ] List Builder 사용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882735688))
-  - [ ] Map과 관련된 코드 개선 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
+  - [x] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882728105))
+  - [x] List Builder 사용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882735688))
+  - [x] Map과 관련된 코드 개선 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882799343))
   - [x] 상수는 선언해서 사용하기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882736373))
-  - [ ] BigDecimal 적용 (Double은 소수점 정밀도에 있어 한계가 있어 값이 유실될 수 있다.) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882767934))
+  - [x] BigDecimal 적용 (Double은 소수점 정밀도에 있어 한계가 있어 값이 유실될 수 있다.) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882767934))
   - [x] 익셉션 정리 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882770530))
   - [x] 패키지 분리 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882810460))
-  - [ ] 수익률 계산시 잔돈도 계산하기
-  - [ ] 출력 시 요구사항에 맞게 출력하기(toString으로 동일하게 표현되고 있지만, 의도해서 표현하는 방식으로 개선해보자) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882791720))
+  - [x] 수익률 계산시 잔돈도 계산하기
+  - [x] 출력 시 요구사항에 맞게 출력하기(toString으로 동일하게 표현되고 있지만, 의도해서 표현하는 방식으로 개선해보자) ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882791720))
   - [x] 당첨이 되지 않은 등수도 표시되어야 한다.([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882797294))
+  - [x] 중간에 리턴하는 foreEach문을 간결하게 표현해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/324#discussion_r882797729))
 
 
 ## Step1 : 문자열 덧셈

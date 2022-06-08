@@ -3,28 +3,25 @@ package lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoStatistics
 import lotto.domain.Money
-import lotto.domain.Winning
-import lotto.domain.WinningMatcher
+import lotto.domain.WinnerLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
     val money = Money(InputView().getMoney())
-    val tickets = LottoMachine().buy(money)
-    ResultView().printTickets(tickets)
+    val manualTicketCount = InputView().getManualTicketCount()
+    val manualTickets = InputView().getManualTickets(money, manualTicketCount)
+    val tickets = LottoMachine().buy(money, manualTickets)
+
+    ResultView().printTickets(tickets, manualTicketCount)
 
     val winner = InputView().getPastWinner()
     val bonus = InputView().getBonusNumber()
 
-    val lottoResults = mutableMapOf<Winning, Int>()
-
-    tickets.forEach { lotto ->
-        val winning = WinningMatcher(winner, bonus).getPlace(lotto)
-        lottoResults[winning] = lottoResults.getOrDefault(winning, 0) + 1
-    }
+    val lottoResults = tickets.getResult(WinnerLotto(winner, bonus))
 
     ResultView().printLottoResult(lottoResults)
 
-    val statistics = LottoStatistics(money, lottoResults)
+    val statistics = LottoStatistics(lottoResults)
     ResultView().printWinningStatistics(statistics)
 }
