@@ -18,8 +18,9 @@ class WinningLottoNumbers(
 
     companion object {
         fun ofString(winningLottoNumbers: String, delimiters: String, bonusLottoNumber: String): WinningLottoNumbers {
+            val delimiter = Delimiter(delimiters)
             return WinningLottoNumbers(
-                LottoTicketNumbers.ofString(winningLottoNumbers, delimiters),
+                LottoTicketNumbers.ofInts(delimiter.parseNumbers(winningLottoNumbers)),
                 LottoTicketNumber.ofString(bonusLottoNumber)
             )
         }

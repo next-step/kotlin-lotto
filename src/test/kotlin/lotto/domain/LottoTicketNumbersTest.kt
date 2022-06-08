@@ -126,7 +126,7 @@ class LottoTicketNumbersTest : DescribeSpec({
             // then
             shouldThrowExactly<IllegalArgumentException> {
                 LottoTicketNumbers.ofString(lottoNumbersByString, delimiter)
-            }.shouldHaveMessage("숫자 데이터를 입력해주세요(입력값: test1 )")
+            }.shouldHaveMessage("숫자가 아닌 문자(test1 )가 포함되어 있습니다")
         }
     }
 })
