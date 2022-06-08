@@ -27,7 +27,9 @@ class LottoPrizeManagerTest : DescribeSpec({
         val allMatchedWinningLottoInts = listOf(1, 2, 3, 4, 5, 6)
         val threeMatchedWinningLottoInts = mutableListOf(21, 22, 23)
         threeMatchedWinningLottoInts.addAll(allMatchedWinningLottoInts.take(3))
-        val winningLottoNumbers = WinningLottoNumbers.ofInt(allMatchedWinningLottoInts, 7)
+        val bonusLottoNumber = LottoTicketNumber(7)
+        val winningLottoNumbers =
+            WinningLottoNumbers(LottoTicketNumbers.ofInts(allMatchedWinningLottoInts), bonusLottoNumber)
         val lottoTickets: List<LottoTicket> = listOf<LottoTicket>(
             LottoTicket.ofInts(allMatchedWinningLottoInts),
             LottoTicket.ofInts(allMatchedWinningLottoInts),
