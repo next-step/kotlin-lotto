@@ -13,7 +13,7 @@ class LottoTicket private constructor(val numbers: Set<LottoNumber>) {
     }
 
     fun hasNumber(number: LottoNumber): Boolean {
-        return numbers.contains(number)
+        return number in numbers
     }
 
     companion object {
