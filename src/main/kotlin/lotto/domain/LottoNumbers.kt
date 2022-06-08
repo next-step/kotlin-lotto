@@ -7,6 +7,8 @@ data class LottoNumbers(private val numbers: List<LottoNumber>) {
 
     fun matchCount(lotto: LottoNumbers) = lotto.numbers.count { it in numbers }
 
+    fun isContain(lotto: LottoNumber) = lotto in numbers
+
     override fun toString(): String {
         return numbers.joinToString(", ") { it.number.toString() }
     }

@@ -2,8 +2,8 @@ package lotto.domain
 
 class LottoList(private val lottoList: List<LottoNumbers>, private val usedMoney: Money) {
     val size = lottoList.size
-    fun match(winningNumbers: LottoNumbers): LottoResult {
-        val matcher = WinningMatcher(winningNumbers)
+    fun match(winningNumbers: LottoNumbers, bonus: LottoNumber): LottoResult {
+        val matcher = WinningMatcher(winningNumbers, bonus)
 
         return LottoResult(
             usedMoney,

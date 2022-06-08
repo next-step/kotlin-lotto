@@ -49,7 +49,7 @@ class InputUITest {
     @Test
     fun `사용자가 잘못된 보너스 번호를 입력하면, IllegalArgumentException 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            System.setIn("1".byteInputStream())
+            System.setIn("1,2,".byteInputStream())
             InputUI.receiveBonusNumber()
         }
     }

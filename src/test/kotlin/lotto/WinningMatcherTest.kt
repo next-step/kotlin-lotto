@@ -20,7 +20,7 @@ class WinningMatcherTest {
     @ArgumentsSource(TestCases::class)
     fun `당첨번호와 같은 번호의 개수에 따라 등수를 리턴한다`(testCase: TestCase) {
         val winningNumbers = WinningNumbers(1, 2, 3, 4, 5, 6)
-        val matcher = WinningMatcher(winningNumbers)
+        val matcher = WinningMatcher(winningNumbers, LottoNumber(7))
 
         val lotto = LottoNumbers(testCase.numbers)
 
@@ -32,9 +32,10 @@ class WinningMatcherTest {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments>? {
             return Stream.of(
                 Arguments.of(TestCase(listOf(1, 2, 3, 4, 5, 6), Grade.First)),
-                Arguments.of(TestCase(listOf(1, 2, 3, 4, 5, 11), Grade.Second)),
-                Arguments.of(TestCase(listOf(1, 2, 3, 4, 11, 12), Grade.Third)),
-                Arguments.of(TestCase(listOf(1, 2, 3, 11, 12, 13), Grade.Fourth)),
+                Arguments.of(TestCase(listOf(1, 2, 3, 4, 5, 7), Grade.Second)),
+                Arguments.of(TestCase(listOf(1, 2, 3, 4, 5, 11), Grade.Third)),
+                Arguments.of(TestCase(listOf(1, 2, 3, 4, 11, 12), Grade.Fourth)),
+                Arguments.of(TestCase(listOf(1, 2, 3, 11, 12, 13), Grade.Five)),
             )
         }
     }

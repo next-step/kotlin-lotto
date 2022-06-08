@@ -17,9 +17,9 @@ class LottoResultTest {
 
     @Test
     fun `당첨된 로또의 수익률을 구한다`() {
-        val result = LottoResult(Money(5000), listOf(Grade.Fourth, Grade.Fourth))
+        val result = LottoResult(Money(5000), listOf(Grade.Five, Grade.Five))
 
-        // 4등의 상금은 5_000 이다
+        // 5등의 상금은 5_000 이다
         // 기대 수익률은 5000 * 2 / 5000 => 2f 이다.
         val expect = 2f
         Assertions.assertThat(result.revenueRate).isEqualTo(expect)
