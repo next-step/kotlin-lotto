@@ -8,7 +8,7 @@ class MyLottoTickets(
 
     fun getMyLottoResult(lastWinningLotto: LastWinningLotto): MyLottoResult {
         val eachCount: Map<LottoWinnerRank, Int> = lottoTickets
-            .map { lottoTicket -> getRanking(lottoTicket, lastWinningLotto) }
+            .map { getRanking(it, lastWinningLotto) }
             .groupingBy { it }
             .eachCount()
 
