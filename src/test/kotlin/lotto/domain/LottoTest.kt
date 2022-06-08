@@ -110,4 +110,24 @@ class LottoTest : StringSpec({
         // then
         actual shouldBe 5
     }
+
+    "캐싱된 로또 숫자를 가져온다" {
+        listOf(
+            1,
+            45,
+        ).forAll {
+            // when // then
+            shouldNotThrowAny { LottoNumber.valueOf(it) }
+        }
+    }
+
+    "캐싱되지 않은 로또 숫자를 가져오면 예외를 발생시킨다" {
+        listOf(
+            0,
+            46,
+        ).forAll {
+            // when // then
+            shouldThrowExactly<IllegalArgumentException> { LottoNumber.valueOf(it) }
+        }
+    }
 })
