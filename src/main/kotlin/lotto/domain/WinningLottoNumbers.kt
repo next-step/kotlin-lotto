@@ -17,7 +17,6 @@ class WinningLottoNumbers(
     }
 
     companion object {
-        // TODO 테스트 코드 추가
         fun ofString(winningLottoNumbers: String, winningLottoNumberDelimiter: Delimiter, bonusLottoNumber: String): WinningLottoNumbers {
             return WinningLottoNumbers(
                 LottoTicketNumbers.ofInts(winningLottoNumberDelimiter.parseNumbers(winningLottoNumbers)),
