@@ -9,7 +9,7 @@ class Tickets(private val _tickets: List<Lotto>) {
         return LottoResult(tickets.groupingBy { WinningMatcher(winner).getPlace(it) }.eachCount())
     }
 
-    fun formatToPrint(): List<String> = tickets.map { it.formatToTickets() }
+    fun values(): List<List<Int>> = tickets.map { it.values() }
 
     fun merge(otherTickets: Tickets): Tickets {
         tickets.addAll(otherTickets.tickets)

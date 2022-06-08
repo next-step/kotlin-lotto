@@ -25,7 +25,7 @@
 - [x] 2등의 당첨금액을 추가해 통계에 포함하여 출력한다.
 - [x] 2등 당첨이 포함된 테스트코드를 추가한다.
 - 코드리뷰 반영
-  - [ ] 디미터의 법칙, 역할을 수행할 객체에서 함수를 생성하자 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244509))
+  - [x] 디미터의 법칙, 역할을 수행할 객체에서 함수를 생성하자 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244509))
   - [x] 예외처리 코드 정리 (NumberFormatException < IllegalArgumentException) ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884267378))
   - [x] 각 객체에 맞는 테스트코드 작성 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244836))
   - [x] [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html) 적용해보기 ([review](https://github.com/next-step/kotlin-lotto/pull/348#discussion_r884244997))

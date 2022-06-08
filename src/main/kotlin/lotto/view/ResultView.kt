@@ -9,7 +9,9 @@ import java.math.BigDecimal
 class ResultView {
     fun printTickets(tickets: Tickets, manualTicketCount: Int) {
         println("수동으로 $manualTicketCount 장, 자동으로 ${tickets.count() - manualTicketCount}장을 구매했습니다.")
-        tickets.formatToPrint().forEach(::println)
+        tickets.values().forEach { lotto ->
+            println(lotto.sorted().joinToString(prefix = PREFIX_LOTTO, postfix = POSTFIX_LOTTO))
+        }
         println()
     }
 
