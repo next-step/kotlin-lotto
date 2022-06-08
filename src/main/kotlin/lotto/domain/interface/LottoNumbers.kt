@@ -3,8 +3,7 @@ package lotto.domain.`interface`
 import lotto.domain.LottoNumber
 
 interface LottoNumbers {
-    fun createNumbers(inputs: List<Int>? = null): Set<LottoNumber>
-
+    fun createNumbers(): Set<LottoNumber>
     companion object {
         const val MIN_LOTTO_INDEX = 0
         const val MAX_LOTTO_INDEX = 6

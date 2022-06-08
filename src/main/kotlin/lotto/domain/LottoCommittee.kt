@@ -5,7 +5,7 @@ import lotto.domain.`interface`.LottoFixedNumbers
 
 object LottoCommittee {
     fun createWinningTicket(input: String, bonusBall: String): WinningTicket {
-        val lottoTicket = LottoTicket(LottoFixedNumbers().createNumbers(input.split(",").map { it.toInt() }))
+        val lottoTicket = LottoTicket(LottoFixedNumbers(input.split(",").map { it.toInt() }).createNumbers())
         return WinningTicket(lottoTicket, bonusBall.toInt())
     }
 

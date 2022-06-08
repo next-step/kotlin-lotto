@@ -22,7 +22,7 @@ object LottoMarket {
     }
 
     private fun manualLottoNumbers(input: String): Set<LottoNumber> {
-        return LottoFixedNumbers().createNumbers(input.filter { !it.isWhitespace() }.split(",").map { it.toInt() })
+        return LottoFixedNumbers(input.filter { !it.isWhitespace() }.split(",").map { it.toInt() }).createNumbers()
     }
 
     private fun authLottoNumbers(): Set<LottoNumber> {

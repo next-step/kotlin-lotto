@@ -11,7 +11,7 @@ class LottoRandomNumbers : LottoNumbers {
         .subList(MIN_LOTTO_INDEX, MAX_LOTTO_INDEX)
         .sorted()
 
-    override fun createNumbers(inputs: List<Int>?): Set<LottoNumber> {
+    override fun createNumbers(): Set<LottoNumber> {
         val lottoNumbers = mutableSetOf<LottoNumber>()
 
         for (index in randomNumbers.indices) {

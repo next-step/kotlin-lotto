@@ -14,7 +14,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또 번호는 정렬되어 있다`() {
-        val lottoNumbers = LottoFixedNumbers().createNumbers(listOf(6, 5, 4, 3, 2, 1))
+        val lottoNumbers = LottoFixedNumbers(listOf(6, 5, 4, 3, 2, 1)).createNumbers()
         assertThat(LottoTicket(lottoNumbers).lottoNumbers.map { it.number }.toSet()).isEqualTo(setOf(1, 2, 3, 4, 5, 6))
     }
 
@@ -35,7 +35,7 @@ class LottoTicketTest {
 
     @Test
     fun `로또는 당첨번호와 몇 개 일치하는지 알 수 있다`() {
-        val lottoNumbers = LottoFixedNumbers().createNumbers(listOf(4, 5, 6, 7, 8, 9))
+        val lottoNumbers = LottoFixedNumbers(listOf(4, 5, 6, 7, 8, 9)).createNumbers()
         val lotto = LottoTicket(lottoNumbers)
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
 
