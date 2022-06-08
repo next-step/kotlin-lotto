@@ -13,6 +13,7 @@ fun main() {
     OutputUI.drawLotto(lottoList)
 
     val winningNumbers = InputUI.receiveWinningNumbers()
+    val bonusNumber = InputUI.receiveBonusNumber()
 
     val lottoResult = lottoList.match(winningNumbers)
 
