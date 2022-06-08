@@ -5,7 +5,7 @@ package lotto.domain
  * Created by Jaesungchi on 2022.05.25..
  */
 object YieldCalculator {
-    fun calculateYield(money: Int, lottoResults: LottoResults): Double {
-        return lottoResults.getReward().toDouble() / money.toDouble()
+    fun calculateYield(money: Money, lottoResults: LottoResults): Double {
+        return lottoResults.getReward().toDouble() / money.value.toDouble()
     }
 }

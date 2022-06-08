@@ -5,13 +5,14 @@ package lotto.domain
  * Created by Jaesungchi on 2022.05.24..
  */
 object LottoTicketFactory {
-    private const val MIN_LOTTO_NUMBER = 1
-    private const val MAX_LOTTO_NUMBER = 45
-    val LOTTO_NUMBER_RANGE = MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER
     const val LOTTO_SIZE = 6
 
-    fun getRandomLottoTicket(): LottoTicket {
-        val numbers = LOTTO_NUMBER_RANGE
+    fun getRandomLottoTickets(count: Int): LottoTickets {
+        return LottoTickets(List(count) { getRandomLottoTicket() })
+    }
+
+    private fun getRandomLottoTicket(): LottoTicket {
+        val numbers = LottoNumber.LOTTO_NUMBER_RANGE
             .shuffled()
             .take(LOTTO_SIZE)
             .sorted()
