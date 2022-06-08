@@ -17,10 +17,10 @@ class WinningLottoNumbers(
     }
 
     companion object {
-        fun ofString(winningLottoNumbers: String, delimiters: String, bonusLottoNumber: String): WinningLottoNumbers {
-            val delimiter = Delimiter(delimiters)
+        // TODO 테스트 코드 추가
+        fun ofString(winningLottoNumbers: String, winningLottoNumberDelimiter: Delimiter, bonusLottoNumber: String): WinningLottoNumbers {
             return WinningLottoNumbers(
-                LottoTicketNumbers.ofInts(delimiter.parseNumbers(winningLottoNumbers)),
+                LottoTicketNumbers.ofInts(winningLottoNumberDelimiter.parseNumbers(winningLottoNumbers)),
                 LottoTicketNumber.ofString(bonusLottoNumber)
             )
         }
