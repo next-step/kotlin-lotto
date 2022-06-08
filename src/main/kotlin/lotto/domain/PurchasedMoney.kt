@@ -5,11 +5,14 @@ private const val LOTTO_UNIT_PRICE = 1_000
 
 @JvmInline
 value class PurchasedMoney(
-    private val value: Int,
+    private val _value: Int,
 ) {
+    val value: Int
+        get() = _value - (_value % LOTTO_UNIT_PRICE)
+
     init {
-        require(value >= MIN_PURCHASED_MONEY) { "구입 금액은 음수가 될 수 없습니다." }
+        require(_value >= MIN_PURCHASED_MONEY) { "구입 금액은 음수가 될 수 없습니다." }
     }
 
-    fun calculateLottoNumber() = value / LOTTO_UNIT_PRICE
+    fun calculateLottoNumber() = _value / LOTTO_UNIT_PRICE
 }

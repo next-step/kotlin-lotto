@@ -11,7 +11,7 @@ class WinningLottoTest : StringSpec({
             row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6), Rank.FIRST),
             row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 7), Rank.SECOND),
             row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 7, 8), Rank.THIRD),
-            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 7, 8, 9), Rank.FORTH),
+            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 7, 8, 9), Rank.FOURTH),
         ).forAll { (winningLottoNumbers, targetLottoNumbers, expected) ->
             // given
             val winningLotto = WinningLotto(

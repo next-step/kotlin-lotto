@@ -17,6 +17,10 @@ class LottoController {
         val lottos = Lottos.generateAutoLottos(lottoNumber) { getAutoLotto() }
             .also { ResultView.printLottos(it.toLottoDatas()) }
         val winningLotto = InputView.inputWinningLotto().toWinningLotto()
+        lottos.getStatistics(winningLotto).also {
+            ResultView.printStatistics(it.statistics)
+            ResultView.printEarningRate(it.calculateEarningRate(purchasedMoney))
+        }
     }
 }
 
