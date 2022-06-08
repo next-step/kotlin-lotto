@@ -29,4 +29,19 @@ class LottosTest : StringSpec({
         actual.statistics[Rank.THIRD] shouldBe 1
         actual.statistics[Rank.FOURTH] shouldBe 1
     }
+
+    "자동 로또를 발급한다" {
+        // given
+        val lottoNumber = 3
+        val expectedLotto = LottoFixture.createLotto(listOf(1, 2, 3, 4, 5, 6))
+
+        // when
+        val actual = Lottos.generateAutoLottos(lottoNumber) { expectedLotto }
+
+        // then
+        actual.lottos.size shouldBe lottoNumber
+        actual.lottos[0].lottoNumbers shouldBe expectedLotto.lottoNumbers
+        actual.lottos[1].lottoNumbers shouldBe expectedLotto.lottoNumbers
+        actual.lottos[2].lottoNumbers shouldBe expectedLotto.lottoNumbers
+    }
 })
