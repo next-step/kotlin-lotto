@@ -3,7 +3,7 @@ package lotto.view
 import lotto.domain.model.UserInputRequest
 
 object InputView {
-    fun println(message: String) {
+    fun printGuidanceMessage(message: String) {
         println(message)
     }
 

@@ -94,7 +94,7 @@ object LottoController {
     private fun getManualLottos(purchaseCount: PurchaseCount): Lottos {
         if (purchaseCount.value == 0) return Lottos.empty()
 
-        InputView.println(GUIDANCE_MESSAGE_MANUAL_LOTTO_NUMBERS)
+        InputView.printGuidanceMessage(GUIDANCE_MESSAGE_MANUAL_LOTTO_NUMBERS)
 
         val userInputRequest = UserInputRequest(
             message = "",
