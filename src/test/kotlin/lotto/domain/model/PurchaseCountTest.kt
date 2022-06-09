@@ -34,4 +34,14 @@ class PurchaseCountTest {
 
         assertThat(purchaseCount.value).isEqualTo(expected)
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [1, 100, 30])
+    fun `coerceAtMost를 통해 특정 최댓값을 넘지 못하도록 제한할 수 있다`(input: Int) {
+        val maximum = 20
+        val expected = if (input > maximum) maximum else input
+        val purchaseCount = PurchaseCount.from(input).coerceAtMost(PurchaseCount.from(maximum))
+
+        assertThat(purchaseCount.value).isEqualTo(expected)
+    }
 }
