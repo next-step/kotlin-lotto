@@ -4,6 +4,7 @@ import lotto.domain.LottoBendingMachine
 import lotto.domain.LottoYieldCalculator
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
+import lotto.domain.model.Money
 import lotto.domain.model.RangeLottoFactory
 import lotto.domain.model.UserInputRequest
 import lotto.domain.model.WinningNumbers
@@ -11,7 +12,7 @@ import lotto.view.InputView
 import lotto.view.OutputView
 import lotto.view.inputconverter.LottoConverter
 import lotto.view.inputconverter.LottoNumberConverter
-import lotto.view.inputconverter.StringToIntConverter
+import lotto.view.inputconverter.MoneyConverter
 import lotto.view.outputconverter.LottoResultConverter
 import lotto.view.outputconverter.LottoYieldConverter
 import lotto.view.outputconverter.LottosConverter
@@ -43,10 +44,10 @@ object LottoController {
         )
     }
 
-    private fun getPurchaseAmount(): Int {
+    private fun getPurchaseAmount(): Money {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_PURCHASE_AMOUNT,
-            inputConverter = StringToIntConverter
+            inputConverter = MoneyConverter
         )
 
         return InputView.receiveUserInput(userInputRequest)

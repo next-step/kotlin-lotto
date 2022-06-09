@@ -3,6 +3,7 @@ package lotto.domain
 import lotto.domain.model.LottoRank
 import lotto.domain.model.LottoResult
 import lotto.domain.model.LottoWinning
+import lotto.domain.model.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -18,9 +19,9 @@ class LottoLottoYieldCalculatorTest {
                 LottoWinning(LottoRank.FIRST, 0)
             )
         )
-        val purchaseAmount = 13000
+        val purchaseAmount = Money.from(13000)
 
-        val expected = lottoResult.getTotalEarns().toDouble() / purchaseAmount.toDouble()
+        val expected = lottoResult.getTotalEarns().toDouble() / purchaseAmount.value.toDouble()
 
         assertThat(LottoYieldCalculator.calculate(lottoResult, purchaseAmount).value).isEqualTo(expected)
     }
