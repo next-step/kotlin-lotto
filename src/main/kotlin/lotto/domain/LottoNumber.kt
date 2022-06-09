@@ -11,10 +11,6 @@ class LottoNumber private constructor(
     }
 
     companion object {
-        private val RANGE_OF_LOTTO_NUMBER = 1..45
-        private val cache: Map<Int, LottoNumber> = RANGE_OF_LOTTO_NUMBER.map { it }
-            .associateWith(::LottoNumber)
-
         fun of(number: Int): LottoNumber {
             require(number in RANGE_OF_LOTTO_NUMBER) {
                 "1부터 45까지 숫자만 입력할 수 있습니다."
@@ -23,5 +19,9 @@ class LottoNumber private constructor(
         }
 
         fun shuffled(): List<LottoNumber> = cache.values.shuffled()
+
+        private val RANGE_OF_LOTTO_NUMBER = 1..45
+        private val cache: Map<Int, LottoNumber> = RANGE_OF_LOTTO_NUMBER.map { it }
+            .associateWith(::LottoNumber)
     }
 }
