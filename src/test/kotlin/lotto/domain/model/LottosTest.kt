@@ -2,6 +2,7 @@ package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 class LottosTest {
     @Test
@@ -29,5 +30,19 @@ class LottosTest {
         )
 
         assertThat(lottos.value.size).isEqualTo(2)
+    }
+
+    @Test
+    fun `더하기 연산자를 통해 두 Lottos를 합칠 수 있다`() {
+        val lottoFactory = RangeLottoFactory()
+        val lottos1 = Lottos.of(PurchaseCount.from(3), lottoFactory)
+        val lottos2 = Lottos.of(PurchaseCount.from(4), lottoFactory)
+
+        val lottos = lottos1 + lottos2
+        assertAll(
+            { assertThat(lottos.value.size).isEqualTo(7) },
+            { assertThat(lottos.value).containsAll(lottos1.value) },
+            { assertThat(lottos.value).containsAll(lottos2.value) }
+        )
     }
 }
