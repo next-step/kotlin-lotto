@@ -1,4 +1,4 @@
-package lotto.domain.enum
+package lotto.domain.enums
 
 enum class Priority(val matchCount: Int, val price: Int) {
     FIRST(6, 2_000_000_000),

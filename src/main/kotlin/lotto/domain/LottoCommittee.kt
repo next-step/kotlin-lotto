@@ -1,11 +1,12 @@
 package lotto.domain
 
-import lotto.domain.enum.Priority
-import lotto.domain.`interface`.LottoFixedNumbers
+import lotto.domain.enums.Priority
+import lotto.domain.interfaces.LottoFixedNumbers
 
 object LottoCommittee {
     fun createWinningTicket(input: String, bonusBall: String): WinningTicket {
-        val lottoTicket = LottoTicket(LottoFixedNumbers(input.split(",").map { it.toInt() }).createNumbers())
+        val lottoNumbers = LottoFixedNumbers.getInstance().convertLottoNumbers(input.split(",").map { it.toInt() })
+        val lottoTicket = LottoTicket(lottoNumbers)
         return WinningTicket(lottoTicket, bonusBall.toInt())
     }
 
@@ -14,16 +15,17 @@ object LottoCommittee {
         winningTicket: WinningTicket
     ): Map<Priority, Int> {
         val priorities = initializePriorities()
-        for (ticket in lottos.tickets) {
-            val countOfMatch = winningTicket.calculateMatch(ticket)
 
-            if (winningTicket.isBonusTicket(ticket, countOfMatch)) {
-                priorities.merge(Priority.SECOND, 1, Int::plus)
-                continue
-            }
+        val ticketCounts: Map<LottoTicket, Int> =
+            lottos.tickets.associateWith { ticket -> winningTicket.calculateMatch(ticket) }
 
-            priorities.merge(Priority.find(countOfMatch), 1, Int::plus)
-        }
+        ticketCounts
+            .filter { winningTicket.isBonusTicket(it.key, it.value) }
+            .map { priorities.merge(Priority.SECOND, 1, Int::plus) }
+
+        ticketCounts
+            .filter { !winningTicket.isBonusTicket(it.key, it.value) }
+            .map { priorities.merge(Priority.find(it.value), 1, Int::plus) }
 
         return priorities
     }

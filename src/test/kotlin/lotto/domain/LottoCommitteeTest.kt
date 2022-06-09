@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.enum.Priority
-import lotto.domain.`interface`.LottoFixedNumbers
+import lotto.domain.enums.Priority
+import lotto.domain.interfaces.LottoFixedNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -38,7 +38,7 @@ class LottoCommitteeTest {
     @Test
     fun `3개를 맞춘 통계를 구할 수 있다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
-        val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers(listOf(4, 5, 6, 7, 8, 9)).createNumbers())))
+        val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers.getInstance().convertLottoNumbers(listOf(4, 5, 6, 7, 8, 9)))))
 
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
 
@@ -49,7 +49,7 @@ class LottoCommitteeTest {
     fun `6개를 맞춘 통계를 구할 수 있다`() {
         val winningTicket = LottoCommittee.createWinningTicket("1,2,3,4,5,6", "7")
         val winningNumbers = winningTicket.lottoTicket.lottoNumbers.map { it.number }
-        val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers(winningNumbers).createNumbers())))
+        val lottos = Lottos(listOf(LottoTicket(LottoFixedNumbers.getInstance().convertLottoNumbers(winningNumbers))))
 
         val statistics = LottoCommittee.calculateStatistics(lottos, winningTicket)
 

@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lottos
-import lotto.domain.enum.Priority
+import lotto.domain.enums.Priority
 
 object Screen {
     fun displayTicketInfo(lottos: Lottos, manualLottoAmount: Int) {

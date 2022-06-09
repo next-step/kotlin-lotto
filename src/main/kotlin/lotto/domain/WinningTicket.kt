@@ -2,12 +2,11 @@ package lotto.domain
 
 class WinningTicket(val lottoTicket: LottoTicket, val bonusNumber: Int) {
     init {
-        require(!lottoTicket.lottoNumbers.map { it.number }.contains(bonusNumber)) { "보너스 번호가 로또 번호와 중복됩니다." }
+        require(!lottoTicket.hasBonusNumber(bonusNumber)) { "보너스 번호가 로또 번호와 중복됩니다." }
     }
 
     fun calculateMatch(ticket: LottoTicket): Int {
-        val winningNumbers = lottoTicket.lottoNumbers.map { it.number }
-        return ticket.lottoNumbers.map { it.number }.filter { winningNumbers.contains(it) }.size
+        return ticket.matchCount(lottoTicket)
     }
 
     fun isBonusTicket(ticket: LottoTicket, matchCount: Int): Boolean {
