@@ -30,11 +30,10 @@ class InboundView {
     fun inputManualLottoNumber(manualPurchaseCount: Int): LottoTickets {
         println("수동으로 구매할 번호를 입력해 주세요.")
 
-        var inputCount = 0
-        val inputNumbers: MutableList<Set<LottoNumber>> = mutableListOf()
+        val tickets: MutableList<LottoTicket> = mutableListOf()
 
-        while (inputCount < manualPurchaseCount) {
-            val inputManualNumber: String = readln()
+        while (tickets.size < manualPurchaseCount) {
+            val inputManualNumber = readln()
             require(inputManualNumber.isNotBlank()) { "공백을 입력하셨습니다." }
 
             val manualNumber = inputManualNumber.toTokenize()
@@ -43,14 +42,10 @@ class InboundView {
                 .toLottoNumber()
                 .toSet()
 
-            inputNumbers.add(manualNumber)
-            inputCount ++
+            tickets.add(LottoTicket(manualNumber))
         }
 
-        return LottoTickets(
-            inputNumbers.map { LottoTicket(it) }
-                .toList()
-        )
+        return LottoTickets(tickets)
     }
 
     fun inputWinningNumber(): LottoWinningNumber {
