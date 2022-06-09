@@ -6,7 +6,7 @@ import lotto.domain.model.Money
 import lotto.domain.model.PurchaseCount
 
 object LottoBendingMachine {
-    private val LOTTO_PRICE = Money.from(1_000)
+    val LOTTO_PRICE = Money.from(1_000)
 
     fun purchase(purchaseAmount: Money, lottoFactory: LottoFactory): Lottos {
         return Lottos.of(

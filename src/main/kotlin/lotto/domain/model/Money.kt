@@ -10,5 +10,9 @@ value class Money private constructor(val value: Int) {
         fun from(value: Int): Money {
             return Money(value.coerceAtLeast(0))
         }
+
+        fun of(purchaseCount: PurchaseCount, price: Money): Money {
+            return Money(purchaseCount.value * price.value)
+        }
     }
 }
