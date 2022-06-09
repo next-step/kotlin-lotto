@@ -37,6 +37,11 @@ class PurchaseCountTest {
     }
 
     @Test
+    fun `zero를 통해서 값이 0인 PurchaseCount를 얻을 수 있다`() {
+        assertThat(PurchaseCount.zero()).isEqualTo(PurchaseCount.from(0))
+    }
+
+    @Test
     fun `빼기 연산자를 사용해 빼기 연산을 수행할 수 있다`() {
         val count1 = PurchaseCount.from(10)
         val count2 = PurchaseCount.from(5)

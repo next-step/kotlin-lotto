@@ -18,5 +18,9 @@ value class PurchaseCount private constructor(val value: Int) {
         fun of(purchaseAmount: Money, price: Money): PurchaseCount {
             return PurchaseCount((purchaseAmount.value / price.value).coerceAtLeast(0))
         }
+
+        fun zero(): PurchaseCount {
+            return PurchaseCount(0)
+        }
     }
 }
