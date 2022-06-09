@@ -38,17 +38,18 @@ object LottoController {
             totalPurchaseAmount = purchaseAmount
         )
 
-        val lottos = LottoBendingMachine.purchaseAutomaticLottos(
+        val automaticLottoReceipt = LottoBendingMachine.purchaseAutomaticLottos(
             purchaseAmount = automaticLottoPurchaseAmount,
             lottoFactory = RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE)
         )
+        val lottoReceipt = manualLottoReceipt + automaticLottoReceipt
         OutputView.println(
-            printable = lottos,
+            printable = lottoReceipt.lottos,
             outputConverter = LottosConverter
         )
 
         val winningNumbers = WinningNumbers(getWinningNumbers(), getBonusBall())
-        val lottoResult = winningNumbers.checkWith(lottos)
+        val lottoResult = winningNumbers.checkWith(lottoReceipt.lottos)
         OutputView.print(
             printable = lottoResult,
             outputConverter = LottoResultConverter
