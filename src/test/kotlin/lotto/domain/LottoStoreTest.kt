@@ -36,13 +36,13 @@ class LottoStoreTest : DescribeSpec({
         }
     }
 
-    describe("isBuyAutoLotto 메서드 테스트") {
+    describe("checkBuyAutoLotto 메서드 테스트") {
         context("전체 구매 금액이 수동 구매 금액 보다 크다면") {
             it("검증에 성공한다.") {
                 val givenMoney: Int = 10000
                 val givenManualCount = 5
 
-                LottoStore.isBuyAutoLotto(givenMoney, givenManualCount)
+                LottoStore.checkBuyAutoLotto(givenMoney, givenManualCount)
             }
         }
 
@@ -51,7 +51,7 @@ class LottoStoreTest : DescribeSpec({
                 val exception = shouldThrow<IllegalArgumentException> {
                     val givenMoney: Int = 10000
                     val givenManualCount = 11
-                    LottoStore.isBuyAutoLotto(givenMoney, givenManualCount)
+                    LottoStore.checkBuyAutoLotto(givenMoney, givenManualCount)
                 }
             }
         }
