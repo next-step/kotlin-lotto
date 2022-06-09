@@ -20,7 +20,7 @@ class LottosTest {
     @Test
     fun `발급할 로또 개수와 LottoFactory를 받아 Lottos를 만들 수 있다`() {
         val lottos = Lottos.of(
-            2,
+            PurchaseCount.from(2),
             object : LottoFactory {
                 override fun create(): Lotto {
                     return Lotto.from(1, 2, 3, 4, 5, 6)
