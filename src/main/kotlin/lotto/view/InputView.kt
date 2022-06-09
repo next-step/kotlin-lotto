@@ -12,12 +12,12 @@ object InputView {
     }
 
     private fun convertToInt(moneyString: String?): Int {
-        isNullOrBlank(moneyString)
+        checkNullOrBlank(moneyString)
         return toInt(moneyString!!)
     }
 
     private fun convertToListInt(winningNumberStr: String?): List<Int> {
-        isNullOrBlank(winningNumberStr)
+        checkNullOrBlank(winningNumberStr)
         return winningNumberStr!!.split(",").map { numberStr -> toInt(numberStr) }
     }
 
@@ -29,5 +29,5 @@ object InputView {
         return number
     }
 
-    private fun isNullOrBlank(inputString: String?) = require(!inputString.isNullOrBlank()) { "입력값이 비어있어요." }
+    private fun checkNullOrBlank(inputString: String?) = require(!inputString.isNullOrBlank()) { "입력값이 비어있어요." }
 }

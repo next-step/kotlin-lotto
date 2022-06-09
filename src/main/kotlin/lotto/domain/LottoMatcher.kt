@@ -1,38 +1,37 @@
 package lotto.domain
 
-import lotto.constant.WinningInfo
-
-@JvmInline value class EarnedRate(val rate: String)
+@JvmInline value class EarnedRate(val rate: Float)
 @JvmInline value class EarnedMoney(val money: Long)
 
 data class LottoMatchResult(
     val matchResult: Map<WinningInfo, Int>,
+    val earnedMoney: EarnedMoney,
 )
 
 class LottoMatcher() {
     fun matchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): LottoMatchResult {
-        val mapMatchCount = lottoTickets.match(winningNumbers)
-        val mapMatchResult = generateMatchResult(mapMatchCount)
-        return LottoMatchResult(mapMatchResult)
+        val matchedResult = getMatchedResult(lottoTickets, winningNumbers)
+        val earnedMoney = getEarnedMoney(matchedResult)
+        return LottoMatchResult(matchedResult, earnedMoney)
     }
 
-    fun getEarnedMoney(matchResult: LottoMatchResult): EarnedMoney {
-        val earnedMoney = matchResult.matchResult
-            .map { (winningInfo, winningCount) -> winningInfo.winningMoney * winningCount }
-            .sum()
-        return EarnedMoney(earnedMoney)
-    }
-
-    fun getEarnedRate(paidMoney: Int, earnedMoney: EarnedMoney): EarnedRate {
-        val earnedRate = String.format("%.3f", earnedMoney.money / paidMoney.toFloat()).dropLast(1)
+    fun calculateEarnedRate(earnedMoney: EarnedMoney, paidMoney: Int): EarnedRate {
+        val earnedRate = earnedMoney.money.toFloat() / paidMoney
         return EarnedRate(earnedRate)
     }
 
-    private fun generateMatchResult(mapMatchCount: Map<WinningInfo, Int>): Map<WinningInfo, Int> {
-        val matchResult = mutableMapOf<WinningInfo, Int>()
-        WinningInfo.values().map { winningInfo ->
-            matchResult.put(winningInfo, mapMatchCount.getOrDefault(winningInfo, 0))
-        }
-        return matchResult
+    private fun getMatchedResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): Map<WinningInfo, Int> {
+        return generateMatchResult(lottoTickets.match(winningNumbers))
+    }
+
+    private fun generateMatchResult(winningCountMap: Map<WinningInfo, Int>): Map<WinningInfo, Int> {
+        return WinningInfo.values().associateWith { winningInfo -> winningCountMap.getOrDefault(winningInfo, 0) }
+    }
+
+    private fun getEarnedMoney(matchedResult: Map<WinningInfo, Int>): EarnedMoney {
+        val earnedMoney = matchedResult
+            .map { (winningInfo, winningCount) -> winningInfo.winningMoney * winningCount }
+            .sum()
+        return EarnedMoney(earnedMoney)
     }
 }

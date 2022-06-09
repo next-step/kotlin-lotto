@@ -21,6 +21,8 @@
     * [X] 모든 로또 티켓에 대해 일치하는 당첨번호 개수 목록을 구할 수 있다.
     * [X] 당첨 결과를 입력하면 당첨금 총액을 반환한다.
     * [X] 당첨 금액과 구입 금액을 입력하면 수익률을 반환한다.
+    * [X] LottoTicket은 당첨 번호 개수를 카운트 할 수 있다.
+    * [X] WinningNumber는 로또 번호가 당첨 번호와 일치하는지 알 수 있다.
   
 * REFAC
     * [X] LottoTicket, LottoTickets 정의
@@ -34,6 +36,7 @@
         - [X] LottoVendor: 로또 번호를 생성기이며, 로또 티켓 수 만큼 로또를 생성한다.
     * [X] WinningNumbers 정의
         - [X] WinningNumbers: 로또 당첨 번호
+        - [X] 로또 번호가 당첨 번호와 일치하는지 확인
     * [X] LottoMatcher, LottoMatchResult 정의
         - [X] LottoMatcher: 로또 당첨 금액과 수익률 계산하는 로또 당첨 결과기 
         - [X] LottoMatchResult: 당첨 결과를 출력하기 위한 DTO

@@ -1,13 +1,13 @@
 package lotto.domain
 
-import lotto.constant.WinningInfo
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class LottoMatcherTest {
 
+    // 같이? 따로 분리?
     @Test
-    fun `로또 당첨 결과기는 당첨 수에 따른 실제 당첨 개수 정보를 알 수 있다`() {
+    fun `로또 당첨 결과기는 당첨 개수와 당첨금액을 반환한다`() {
         val lottoTickets = LottoTickets(
             3,
             listOf(
@@ -18,32 +18,20 @@ class LottoMatcherTest {
         )
         val winningNumbers = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
         val lottoMatchResult = LottoMatcher().matchResult(lottoTickets, winningNumbers)
-        val matchResultMap = lottoMatchResult.matchResult
-        assertEquals(1, matchResultMap[WinningInfo.THREE])
-        assertEquals(1, matchResultMap[WinningInfo.FOUR])
-        assertEquals(0, matchResultMap[WinningInfo.FIVE])
-        assertEquals(0, matchResultMap[WinningInfo.SIX])
-    }
-
-    @Test
-    fun `로또 당첨 결과기는 총 당첨 금액을 계산 할 수 있다`() {
-        val matchResult = LottoMatchResult(
-            mapOf(
-                WinningInfo.THREE to 1,
-                WinningInfo.FOUR to 0,
-                WinningInfo.FIVE to 0,
-                WinningInfo.SIX to 0,
-            )
-        )
-        val earnedMoney = LottoMatcher().getEarnedMoney(matchResult)
-        assertEquals(5000L, earnedMoney.money)
+        val matchResult = lottoMatchResult.matchResult
+        val earnedMoney = lottoMatchResult.earnedMoney
+        assertEquals(1, matchResult[WinningInfo.THREE])
+        assertEquals(1, matchResult[WinningInfo.FOUR])
+        assertEquals(0, matchResult[WinningInfo.FIVE])
+        assertEquals(0, matchResult[WinningInfo.SIX])
+        assertEquals(55000L, earnedMoney.money)
     }
 
     @Test
     fun `로또 당첨 결과기는 수익률 계산을 할 수 있다`() {
         val paidMoney = 14000
-        val earnedMoney = EarnedMoney(5000L)
-        val earnedRate = LottoMatcher().getEarnedRate(paidMoney, earnedMoney)
-        assertEquals("0.35", earnedRate.rate)
+        val earnedMoney = 5000L
+        val earnedRate = LottoMatcher().calculateEarnedRate(EarnedMoney(earnedMoney), paidMoney)
+        assertEquals(0.35714287f, earnedRate.rate)
     }
 }
