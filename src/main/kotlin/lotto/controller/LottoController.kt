@@ -20,7 +20,7 @@ import lotto.view.inputconverter.MoneyConverter
 import lotto.view.inputconverter.PurchaseCountConverter
 import lotto.view.outputconverter.LottoResultConverter
 import lotto.view.outputconverter.LottoYieldConverter
-import lotto.view.outputconverter.LottosConverter
+import lotto.view.outputconverter.TotalLottoReceiptConverter
 
 object LottoController {
     private const val GUIDANCE_MESSAGE_PURCHASE_AMOUNT = "구입 금액을 입력해 주세요."
@@ -46,8 +46,8 @@ object LottoController {
 
         val totalLottoReceipt = TotalLottoReceipt(manualLottoReceipt, automaticLottoReceipt)
         OutputView.println(
-            printable = totalLottoReceipt.lottos,
-            outputConverter = LottosConverter
+            printable = totalLottoReceipt,
+            outputConverter = TotalLottoReceiptConverter
         )
 
         val winningNumbers = WinningNumbers(getWinningNumbers(), getBonusBall())
