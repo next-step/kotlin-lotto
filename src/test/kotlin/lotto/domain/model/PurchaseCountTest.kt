@@ -42,6 +42,14 @@ class PurchaseCountTest {
     }
 
     @Test
+    fun `더하기 연산자를 사용해 더하기 연산을 수행할 수 있다`() {
+        val count1 = PurchaseCount.from(10)
+        val count2 = PurchaseCount.from(5)
+
+        assertThat(count1 + count2).isEqualTo(PurchaseCount.from(15))
+    }
+
+    @Test
     fun `빼기 연산자를 사용해 빼기 연산을 수행할 수 있다`() {
         val count1 = PurchaseCount.from(10)
         val count2 = PurchaseCount.from(5)

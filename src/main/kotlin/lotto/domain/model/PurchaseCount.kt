@@ -6,6 +6,10 @@ value class PurchaseCount private constructor(val value: Int) {
         return PurchaseCount(value.coerceAtMost(maximumValue.value))
     }
 
+    operator fun plus(other: PurchaseCount): PurchaseCount {
+        return from(value + other.value)
+    }
+
     operator fun minus(other: PurchaseCount): PurchaseCount {
         return from(value - other.value)
     }
