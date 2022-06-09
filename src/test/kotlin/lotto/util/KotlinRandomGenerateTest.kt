@@ -1,10 +1,12 @@
 package lotto.util
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
 
 class KotlinRandomGenerateTest : DescribeSpec({
-    it("ListSize 와 동일한 갯수를 내보낸다") {
+    it("유니크한 랜덤 숫자 리스트 를 가져옵니다") {
         // given
         val randomRange = 1..100
         val listSize = 10
@@ -16,15 +18,14 @@ class KotlinRandomGenerateTest : DescribeSpec({
         makeRandomUniqueIntList.size shouldBe listSize
     }
 
-    it("List Size 가 Range 보다 클 경우 Range 사이즈 만큼에 List 를 내보낸다") {
+    it("가져올 리스트 갯수가 랜덤 숫자 범위 보다 큰 경우 IllegalArgumentException 발생") {
         // given
         val randomRange = 1..4
         val listSize = 10
 
-        // when
-        val makeRandomUniqueIntList = KotlinRandomGenerate.makeRandomUniqueIntList(listSize, randomRange)
-
         // then
-        makeRandomUniqueIntList.size shouldBe randomRange.last
+        shouldThrowExactly<IllegalArgumentException> {
+            KotlinRandomGenerate.makeRandomUniqueIntList(listSize, randomRange)
+        }.shouldHaveMessage("랜덤범위(1..4)가 가져올 리스트 갯수(10) 보다 큽니다")
     }
 })

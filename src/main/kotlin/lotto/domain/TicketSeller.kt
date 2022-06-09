@@ -8,8 +8,8 @@ class TicketSeller(private val ticketPrice: Money, private val randomGenerate: R
         return List(userMoney.value / ticketPrice.value) {
             LottoTicket.ofInts(
                 randomGenerate.makeRandomUniqueIntList(
-                    6,
-                    1..45
+                    LottoTicketNumbers.LOTTO_TICKET_NUMBER_SIZE,
+                    LottoTicketNumber.LOTTO_NUMBER_RANGE
                 )
             )
         }

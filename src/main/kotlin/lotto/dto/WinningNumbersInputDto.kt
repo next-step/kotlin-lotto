@@ -1,11 +1,13 @@
 package lotto.dto
 
-import lotto.domain.LottoTicketNumbers
+import lotto.domain.Delimiter
+import lotto.domain.WinningLottoNumbers
 
-class WinningNumbersInputDto(winningNumbersString: String) {
-    val winningLottoTicketNumbers: LottoTicketNumbers = LottoTicketNumbers.ofString(winningNumbersString, DELIMITERS)
+class WinningNumbersInputDto(winningNumbersString: String, bonusBallString: String) {
+    val winningLottoTicketNumbers: WinningLottoNumbers =
+        WinningLottoNumbers.ofString(winningNumbersString, DELIMITER, bonusBallString)
 
     companion object {
-        private const val DELIMITERS = ","
+        private val DELIMITER = Delimiter(",")
     }
 }
