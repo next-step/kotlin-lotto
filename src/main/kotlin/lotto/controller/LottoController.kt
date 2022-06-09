@@ -31,9 +31,17 @@ object LottoController {
     fun execute() {
         val purchaseAmount = getPurchaseAmount()
         val maximumPurchaseCount = PurchaseCount.of(purchaseAmount, LottoBendingMachine.LOTTO_PRICE)
-        val manualLottoReceipt = getManualLottoReceipt(purchaseAmount, maximumPurchaseCount)
+        val manualLottoReceipt = getManualLottoReceipt(maximumPurchaseCount)
 
-        val lottos = LottoBendingMachine.purchase(purchaseAmount, RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE))
+        val automaticLottoPurchaseAmount = getAutomaticLottoPurchaseAmount(
+            manualLottoPurchaseCount = manualLottoReceipt.manualLottoCount,
+            totalPurchaseAmount = purchaseAmount
+        )
+
+        val lottos = LottoBendingMachine.purchase(
+            automaticLottoPurchaseAmount,
+            RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE)
+        )
         OutputView.println(
             printable = lottos,
             outputConverter = LottosConverter
@@ -62,17 +70,14 @@ object LottoController {
         return InputView.receiveUserInput(userInputRequest)
     }
 
-    private fun getManualLottoReceipt(purchaseAmount: Money, maximumPurchaseCount: PurchaseCount): LottoReceipt {
+    private fun getManualLottoReceipt(maximumPurchaseCount: PurchaseCount): LottoReceipt {
         val manualLottoPurchaseCount = getManualLottoPurchaseCount(maximumPurchaseCount)
         val manualLottos = getManualLottos(manualLottoPurchaseCount)
-        val manualLottosPrice = Money.of(manualLottoPurchaseCount, LottoBendingMachine.LOTTO_PRICE)
-        val changes = purchaseAmount - manualLottosPrice
 
         return LottoReceipt(
             manualLottoCount = manualLottoPurchaseCount,
             automaticLottoCount = PurchaseCount.zero(),
-            lottos = manualLottos,
-            changes = changes
+            lottos = manualLottos
         )
     }
 
@@ -102,6 +107,14 @@ object LottoController {
         }
 
         return Lottos(lottos)
+    }
+
+    private fun getAutomaticLottoPurchaseAmount(
+        manualLottoPurchaseCount: PurchaseCount,
+        totalPurchaseAmount: Money
+    ): Money {
+        val manualLottosPrice = Money.of(manualLottoPurchaseCount, LottoBendingMachine.LOTTO_PRICE)
+        return totalPurchaseAmount - manualLottosPrice
     }
 
     private fun getWinningNumbers(): Lotto {
