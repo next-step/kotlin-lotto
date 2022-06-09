@@ -1,6 +1,4 @@
-package lotto.constant
-
-import java.lang.IllegalArgumentException
+package lotto.domain
 
 enum class WinningInfo(val winningCount: Int, val winningMoney: Long) {
     THREE(3, 5000L),
@@ -14,7 +12,7 @@ enum class WinningInfo(val winningCount: Int, val winningMoney: Long) {
         }
 
         fun findBy(winningCount: Int): WinningInfo {
-            return values().find { it.winningCount == winningCount } ?: throw IllegalArgumentException("없는 정보입니다. $winningCount")
+            return values().first { it.winningCount == winningCount }
         }
     }
 }
