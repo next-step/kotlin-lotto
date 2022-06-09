@@ -11,6 +11,6 @@ internal class LottoGameTest {
         val winningNumbers = Lotto((1..6).map { LottoNumber.of(it) })
 
         val lottoGame = LottoGame(lottos, winningNumbers)
-        assertThat(lottoGame.match(6)).isEqualTo(1)
+        assertThat(lottoGame.rank(6)).isEqualTo(1)
     }
 }

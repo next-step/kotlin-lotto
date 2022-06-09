@@ -11,7 +11,7 @@ class LottoController(private val lottoService: LottoService) {
 
     fun start() {
         val purchaseAmount = getPurchaseAmount()
-        val n = purchaseAmount / 1000
+        val n = purchaseAmount / LOTTO_PRICE
 
         LottoGameView.printBuyAmount(n)
 
@@ -35,5 +35,9 @@ class LottoController(private val lottoService: LottoService) {
         LottoGameView.printLastWinningNumbers()
 
         return Lotto(InputParser.parseWinningNumbers(readLine()!!))
+    }
+
+    companion object {
+        private const val LOTTO_PRICE = 1_000
     }
 }

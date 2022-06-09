@@ -19,7 +19,7 @@ internal class LottoTest {
     @ParameterizedTest
     @MethodSource("lottoArguments")
     fun `Lotto 당첨 번호가 몇개가 맞았는지 알 수 있다`(lotto: Lotto, winningLotto: Lotto, matched: Int) {
-        val result = lotto.match(winningLotto)
+        val result = lotto.matchedNumber(winningLotto)
 
         assertThat(result).isEqualTo(matched)
     }

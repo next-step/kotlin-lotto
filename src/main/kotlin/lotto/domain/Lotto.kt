@@ -10,10 +10,8 @@ class Lotto(val numbers: List<LottoNumber>) {
         return numbers.toString()
     }
 
-    fun match(lotto: Lotto): Int {
-        return this.numbers.filter {
-            lotto.numbers.contains(it)
-        }.size
+    fun matchedNumber(lotto: Lotto): Int {
+        return this.numbers.intersect(lotto.numbers.toSet()).size
     }
 
     companion object {
