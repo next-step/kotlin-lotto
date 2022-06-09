@@ -20,8 +20,7 @@ class LottoBendingMachineTest {
         )
 
         assertAll(
-            { assertThat(lottoReceipt.manualLottoCount.value).isZero },
-            { assertThat(lottoReceipt.automaticLottoCount.value).isEqualTo(13) },
+            { assertThat(lottoReceipt.purchaseCount.value).isEqualTo(13) },
             { assertThat(lottoReceipt.lottos.value).hasSize(13) }
         )
     }

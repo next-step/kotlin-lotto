@@ -9,6 +9,7 @@ import lotto.domain.model.Lottos
 import lotto.domain.model.Money
 import lotto.domain.model.PurchaseCount
 import lotto.domain.model.RangeLottoFactory
+import lotto.domain.model.TotalLottoReceipt
 import lotto.domain.model.UserInputRequest
 import lotto.domain.model.WinningNumbers
 import lotto.view.InputView
@@ -34,7 +35,7 @@ object LottoController {
         val manualLottoReceipt = getManualLottoReceipt(maximumPurchaseCount)
 
         val automaticLottoPurchaseAmount = getAutomaticLottoPurchaseAmount(
-            manualLottoPurchaseCount = manualLottoReceipt.manualLottoCount,
+            manualLottoPurchaseCount = manualLottoReceipt.purchaseCount,
             totalPurchaseAmount = purchaseAmount
         )
 
@@ -42,14 +43,15 @@ object LottoController {
             purchaseAmount = automaticLottoPurchaseAmount,
             lottoFactory = RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE)
         )
-        val lottoReceipt = manualLottoReceipt + automaticLottoReceipt
+
+        val totalLottoReceipt = TotalLottoReceipt(manualLottoReceipt, automaticLottoReceipt)
         OutputView.println(
-            printable = lottoReceipt.lottos,
+            printable = totalLottoReceipt.lottos,
             outputConverter = LottosConverter
         )
 
         val winningNumbers = WinningNumbers(getWinningNumbers(), getBonusBall())
-        val lottoResult = winningNumbers.checkWith(lottoReceipt.lottos)
+        val lottoResult = winningNumbers.checkWith(totalLottoReceipt.lottos)
         OutputView.print(
             printable = lottoResult,
             outputConverter = LottoResultConverter
@@ -72,14 +74,10 @@ object LottoController {
     }
 
     private fun getManualLottoReceipt(maximumPurchaseCount: PurchaseCount): LottoReceipt {
-        val manualLottoPurchaseCount = getManualLottoPurchaseCount(maximumPurchaseCount)
-        val manualLottos = getManualLottos(manualLottoPurchaseCount)
+        val purchaseCount = getManualLottoPurchaseCount(maximumPurchaseCount)
+        val lottos = getManualLottos(purchaseCount)
 
-        return LottoReceipt(
-            manualLottoCount = manualLottoPurchaseCount,
-            automaticLottoCount = PurchaseCount.zero(),
-            lottos = manualLottos
-        )
+        return LottoReceipt(purchaseCount, lottos)
     }
 
     private fun getManualLottoPurchaseCount(maximum: PurchaseCount): PurchaseCount {

@@ -15,10 +15,6 @@ object LottoBendingMachine {
             price = LOTTO_PRICE
         )
         val lottos = Lottos.of(purchaseCount, lottoFactory)
-        return LottoReceipt(
-            manualLottoCount = PurchaseCount.zero(),
-            automaticLottoCount = purchaseCount,
-            lottos = lottos
-        )
+        return LottoReceipt(purchaseCount, lottos)
     }
 }

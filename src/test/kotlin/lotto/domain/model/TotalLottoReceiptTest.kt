@@ -8,8 +8,7 @@ class TotalLottoReceiptTest {
     @Test
     fun `TotalLottoReceipt은 수동 로또 결과와 자동 로또 결과를 같이 보관한다`() {
         val lottoReceipt = LottoReceipt(
-            PurchaseCount.from(1),
-            PurchaseCount.from(1),
+            PurchaseCount.from(2),
             Lottos.of(PurchaseCount.from(2), RangeLottoFactory())
         )
 
