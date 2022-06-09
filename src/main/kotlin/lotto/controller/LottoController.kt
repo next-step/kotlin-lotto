@@ -38,9 +38,9 @@ object LottoController {
             totalPurchaseAmount = purchaseAmount
         )
 
-        val lottos = LottoBendingMachine.purchase(
-            automaticLottoPurchaseAmount,
-            RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE)
+        val lottos = LottoBendingMachine.purchaseAutomaticLottos(
+            purchaseAmount = automaticLottoPurchaseAmount,
+            lottoFactory = RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE)
         )
         OutputView.println(
             printable = lottos,

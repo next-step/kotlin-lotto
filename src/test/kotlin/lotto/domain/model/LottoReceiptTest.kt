@@ -10,15 +10,13 @@ class LottoReceiptTest {
         val manualLottoCount = PurchaseCount.from(1)
         val automaticLottoCount = PurchaseCount.from(3)
         val lottos = Lottos.of(PurchaseCount.from(4), RangeLottoFactory(LottoNumber.LOTTO_NUMBER_RANGE))
-        val changes = Money.from(500)
 
-        val lottoReceipt = LottoReceipt(manualLottoCount, automaticLottoCount, lottos, changes)
+        val lottoReceipt = LottoReceipt(manualLottoCount, automaticLottoCount, lottos)
 
         assertAll(
             { assertThat(lottoReceipt.manualLottoCount).isEqualTo(manualLottoCount) },
             { assertThat(lottoReceipt.automaticLottoCount).isEqualTo(automaticLottoCount) },
-            { assertThat(lottoReceipt.lottos).isEqualTo(lottos) },
-            { assertThat(lottoReceipt.changes).isEqualTo(changes) }
+            { assertThat(lottoReceipt.lottos).isEqualTo(lottos) }
         )
     }
 }
