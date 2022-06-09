@@ -14,7 +14,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, null)
             val wonLottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 10, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =
@@ -30,7 +30,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, null)
             val wonLottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 7, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =
@@ -46,7 +46,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, null)
             val defeatedLottoTicket = LottoTicket.ofInts(listOf(1, 2, 40, 10, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =
@@ -63,7 +63,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, false)
             val wonLottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 10, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =
@@ -79,7 +79,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, false)
             val wonLottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 7, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =
@@ -95,7 +95,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, false)
             val defeatedLottoTicket = LottoTicket.ofInts(listOf(1, 2, 40, 10, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =
@@ -113,7 +113,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, true)
             val wonLottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 7, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =
@@ -128,7 +128,7 @@ class LottoPrizePolicyTest : DescribeSpec({
             val wonPrize = Money(3000)
             val lottoPrizePolicy = LottoPrizePolicy(wonMatchedCount, wonPrize, true)
             val wonLottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 10, 20, 30))
-            val winningLottoNumbers = WinningLottoNumbers.ofInt(listOf(1, 2, 3, 4, 5, 6), 7)
+            val winningLottoNumbers = WinningLottoNumbers(LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6)), LottoTicketNumber(7))
 
             // when
             val isWon =

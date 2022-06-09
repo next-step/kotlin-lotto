@@ -1,33 +1,19 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.throwable.shouldHaveMessage
 
 class LottoPrizeManagerTest : DescribeSpec({
-
-    it("담청 정책을 추가 할 수 있다") {
-        // given
-        val lottoPrizeManager = LottoPrizeManager()
-        val addPrizePolicy = LottoPrizePolicy(3, Money(10000))
-
-        // when
-        lottoPrizeManager.addUniquePolicy(addPrizePolicy)
-
-        // then
-        lottoPrizeManager.polices[0].winningNumberMatchCount shouldBe addPrizePolicy.winningNumberMatchCount
-    }
 
     it("당첨 통계를 알수 있습니다") {
         // given
         val lottoPrizeManager = LottoPrizeManager()
-        lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(6, Money(60000)))
-        lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(3, Money(30000)))
         val allMatchedWinningLottoInts = listOf(1, 2, 3, 4, 5, 6)
         val threeMatchedWinningLottoInts = mutableListOf(21, 22, 23)
         threeMatchedWinningLottoInts.addAll(allMatchedWinningLottoInts.take(3))
-        val winningLottoNumbers = WinningLottoNumbers.ofInt(allMatchedWinningLottoInts, 7)
+        val bonusLottoNumber = LottoTicketNumber(7)
+        val winningLottoNumbers =
+            WinningLottoNumbers(LottoTicketNumbers.ofInts(allMatchedWinningLottoInts), bonusLottoNumber)
         val lottoTickets: List<LottoTicket> = listOf<LottoTicket>(
             LottoTicket.ofInts(allMatchedWinningLottoInts),
             LottoTicket.ofInts(allMatchedWinningLottoInts),
@@ -52,20 +38,5 @@ class LottoPrizeManagerTest : DescribeSpec({
         winningStats[1].lottoPrizePolicy.wonPrize shouldBe Money(30000)
         winningStats[1].totalWinningCount shouldBe 2
         winningStats[1].totalWinningPrize shouldBe Money(2 * 30000)
-    }
-
-    describe("validate") {
-        it("중복된 당첨 정책을 추가한 경우 에러 발생") {
-            // given
-            val lottoPrizeManager = LottoPrizeManager()
-            val addPrizePolicy = LottoPrizePolicy(3, Money(10000))
-            val duplicatedPolicy = LottoPrizePolicy(3, Money(10000))
-
-            // then
-            shouldThrowExactly<IllegalArgumentException> {
-                lottoPrizeManager.addUniquePolicy(addPrizePolicy)
-                lottoPrizeManager.addUniquePolicy(duplicatedPolicy)
-            }.shouldHaveMessage("동일한 당첨 정책이 존재합니다")
-        }
     }
 })

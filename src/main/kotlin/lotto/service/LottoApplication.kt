@@ -1,7 +1,6 @@
 package lotto.service
 
 import lotto.domain.LottoPrizeManager
-import lotto.domain.LottoPrizePolicy
 import lotto.domain.Money
 import lotto.domain.TicketSeller
 import lotto.util.InputModule
@@ -39,16 +38,6 @@ class LottoApplication(
 
     companion object {
         private val lottoTicketPrice = Money(1000)
-        private val lottoPrizeManager = getDefaultLottoPrizeManager()
-
-        private fun getDefaultLottoPrizeManager(): LottoPrizeManager {
-            val lottoPrizeManager = LottoPrizeManager()
-            lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(3, Money(5000)))
-            lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(4, Money(50000)))
-            lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(5, Money(1500000), false))
-            lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(5, Money(30000000), true))
-            lottoPrizeManager.addUniquePolicy(LottoPrizePolicy(6, Money(2000000000)))
-            return lottoPrizeManager
-        }
+        private val lottoPrizeManager = LottoPrizeManager()
     }
 }

@@ -19,20 +19,6 @@ class LottoTicketNumbersTest : DescribeSpec({
         lottoTicketNumbers.value.map { it.value } shouldContainAll lottoNumbersByInt
     }
 
-    it("숫자 모임이 쓰여 있는 String 으로 생성할수 있다") {
-        // given
-        val delimiter = ","
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
-        val lottoNumbersByString = lottoNumbers.joinToString(separator = delimiter)
-
-        // when
-        val lottoTicketNumbers = LottoTicketNumbers.ofString(lottoNumbersByString, delimiter)
-
-        // then
-        lottoTicketNumbers.value.size shouldBe lottoNumbers.size
-        lottoTicketNumbers.value.map { it.value } shouldContainAll lottoNumbers
-    }
-
     describe("로또 번호가 포함 되었는지 알수 있다") {
         it("로또 번호가 포함 되면 True") {
             // given
@@ -116,17 +102,6 @@ class LottoTicketNumbersTest : DescribeSpec({
             shouldThrowExactly<IllegalArgumentException> {
                 LottoTicketNumbers.ofInts(lottoNumbersByInt)
             }.shouldHaveMessage("중복된 로또 번호가 있습니다")
-        }
-
-        it("숫자가 아닌 문자를 입력한 경우 에러가 발생한다") {
-            // given
-            val delimiter = ","
-            val lottoNumbersByString = "test1 , test2, test3"
-
-            // then
-            shouldThrowExactly<IllegalArgumentException> {
-                LottoTicketNumbers.ofString(lottoNumbersByString, delimiter)
-            }.shouldHaveMessage("숫자 데이터를 입력해주세요(입력값: test1 )")
         }
     }
 })

@@ -1,6 +1,6 @@
 package lotto.domain
 
-class WinningLottoNumbers private constructor(
+class WinningLottoNumbers(
     val winningLottoNumbers: LottoTicketNumbers,
     val bonusLottoNumber: LottoTicketNumber
 ) {
@@ -17,16 +17,9 @@ class WinningLottoNumbers private constructor(
     }
 
     companion object {
-        fun ofInt(winningLottoNumbers: List<Int>, bonusLottoNumber: Int): WinningLottoNumbers {
+        fun ofString(winningLottoNumbers: String, winningLottoNumberDelimiter: Delimiter, bonusLottoNumber: String): WinningLottoNumbers {
             return WinningLottoNumbers(
-                LottoTicketNumbers.ofInts(winningLottoNumbers),
-                LottoTicketNumber(bonusLottoNumber)
-            )
-        }
-
-        fun ofString(winningLottoNumbers: String, delimiters: String, bonusLottoNumber: String): WinningLottoNumbers {
-            return WinningLottoNumbers(
-                LottoTicketNumbers.ofString(winningLottoNumbers, delimiters),
+                LottoTicketNumbers.ofInts(winningLottoNumberDelimiter.parseNumbers(winningLottoNumbers)),
                 LottoTicketNumber.ofString(bonusLottoNumber)
             )
         }
