@@ -1,6 +1,7 @@
 package lotto.domain.model
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -33,6 +34,14 @@ class PurchaseCountTest {
         )
 
         assertThat(purchaseCount.value).isEqualTo(expected)
+    }
+
+    @Test
+    fun `빼기 연산자를 사용해 빼기 연산을 수행할 수 있다`() {
+        val count1 = PurchaseCount.from(10)
+        val count2 = PurchaseCount.from(5)
+
+        assertThat(count1 - count2).isEqualTo(PurchaseCount.from(5))
     }
 
     @ParameterizedTest
