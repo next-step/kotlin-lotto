@@ -11,4 +11,8 @@ object InputView {
         println(userInputRequest.message)
         return userInputRequest.inputConverter.convert(readln())
     }
+
+    fun <T> receiveUserInputWithoutMessage(userInputRequest: UserInputRequest<T>): T {
+        return userInputRequest.inputConverter.convert(readln())
+    }
 }
