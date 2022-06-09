@@ -3,6 +3,7 @@ package lotto.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -25,7 +26,7 @@ class LottoTicketShopTest {
     @ParameterizedTest
     @ValueSource(strings = ["900", "0"])
     fun `로또 구입 금액이 1천원 미만이면 IllegalArgumentException 예외가 발생한다`(money: Int) {
-        assertThrows(IllegalArgumentException::class.java) {
+        assertThrows<IllegalArgumentException> {
             lottoShop.buyLotto(money)
         }
     }
@@ -33,7 +34,7 @@ class LottoTicketShopTest {
     @ParameterizedTest
     @ValueSource(strings = ["1900", "2001"])
     fun `로또 구입 금액이 1천원 이상인데, 천단위가 아니면 IllegalArgumentException 예외가 발생한다`(money: Int) {
-        assertThrows(IllegalArgumentException::class.java) {
+        assertThrows<IllegalArgumentException> {
             lottoShop.buyLotto(money)
         }
     }

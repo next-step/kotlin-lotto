@@ -1,13 +1,12 @@
 package lotto.domain
 
-import lotto.constant.WinningInfo
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class LottoTicketsTest {
     @Test
-    fun `구입한 로또 티켓에 대해 일치하는 당첨번호 개수 목록을 구할 수 있다`() {
+    fun `LottoTickets는 당첨 번호 개수를 카운트 할 수 있다`() {
         val lottoTickets = LottoTickets(
             4,
             listOf(
