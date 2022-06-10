@@ -6,5 +6,5 @@ fun stringAddCalculate(text: String?): Int {
     }
     val strings: List<String> = split(text)
     val numbers: List<Int> = toNumbers(strings)
-    return sumBy(numbers)
+    return numbers.sum()
 }
