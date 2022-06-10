@@ -1,4 +1,4 @@
-package stringAddCalculator
+package stringcalculator
 
 fun stringAddCalculate(text: String?): Int {
     if (text.isNullOrBlank()) {

@@ -1,4 +1,4 @@
-package stringAddCalculator
+package stringcalculator
 
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat

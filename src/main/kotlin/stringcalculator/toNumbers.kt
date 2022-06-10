@@ -1,4 +1,4 @@
-package stringAddCalculator
+package stringcalculator
 
 internal fun toNumbers(strings: List<String>): List<Int> = strings.map { toNumber(it) }
 

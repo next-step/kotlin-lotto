@@ -1,4 +1,4 @@
-package stringAddCalculator
+package stringcalculator
 
 private const val BASE_DELIMITER = ","
 private val DELIMITER_GROUP = "[$BASE_DELIMITER:]".toRegex()
