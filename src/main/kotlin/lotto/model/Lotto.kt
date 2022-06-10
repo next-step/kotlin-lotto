@@ -31,5 +31,5 @@ data class Lotto(
     private fun match(lottoNumber: LottoNumber): Boolean {
         return lottoNumbers.contains(lottoNumber)
     }
-    fun toList() = lottoNumbers
+    fun toList() = lottoNumbers.toList()
 }
