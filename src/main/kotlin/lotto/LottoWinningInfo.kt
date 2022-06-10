@@ -31,7 +31,6 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
                 scoreInfos.add(ScoreInfo(7, getPrice(7), it.value))
             }
         }
-
         revenue = LottoWinningHandler.calculateRevenue(scoreInfos)
     }
 
