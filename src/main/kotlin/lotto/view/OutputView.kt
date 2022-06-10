@@ -8,9 +8,11 @@ class OutputView {
     fun showBuyingHistory(lottoList: List<Lotto>) {
         println("${lottoList.size}개를 구매했습니다.")
         lottoList.forEach {
-            println(it.toList().joinToString(separator = ", ", prefix = "[", postfix = "]"))
+            println(showLotto(it))
         }
     }
+
+    private fun showLotto(lotto: Lotto) = lotto.toList().joinToString(separator = ", ", prefix = "[", postfix = "]")
 
     fun showMatchStatistics(lottoResult: LottoResult) {
         println("당첨 통계")
