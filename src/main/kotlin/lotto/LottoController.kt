@@ -2,6 +2,7 @@ package lotto
 
 import lotto.model.LottoResult
 import lotto.model.LottoStore
+import lotto.model.WinningLotto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -16,9 +17,11 @@ class LottoController(
         outputView.showBuyingHistory(lottos)
 
         val winningNumbers = inputView.inputLastWinningNumbers()
+        val bonusNumber = inputView.inputBonusNumber()
+        val winningLotto = WinningLotto(winningNumbers, bonusNumber)
 
         outputView.showMatchStatistics(
-            lottoResult = LottoResult.of(lottos, winningNumbers)
+            lottoResult = LottoResult.of(lottos, winningLotto)
         )
     }
 }

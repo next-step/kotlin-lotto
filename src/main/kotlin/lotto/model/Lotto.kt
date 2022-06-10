@@ -17,6 +17,13 @@ data class Lotto(
         }
     }
 
+    fun matches(otherNumbers: WinningLotto): Pair<Int, Boolean> {
+        return lottoNumbers.count { otherNumbers.lotto.match(it) } to isBonusMatch(otherNumbers.bonus)
+    }
+    fun isBonusMatch(bonus: LottoNumber): Boolean {
+        return bonus in lottoNumbers
+    }
+
     fun matches(otherNumbers: Lotto): Int {
         return lottoNumbers.count { otherNumbers.match(it) }
     }
