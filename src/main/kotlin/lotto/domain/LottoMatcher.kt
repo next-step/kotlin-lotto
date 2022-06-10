@@ -15,8 +15,8 @@ class LottoMatcher() {
         return LottoMatchResult(matchedResult, earnedMoney)
     }
 
-    fun calculateEarnedRate(earnedMoney: EarnedMoney, paidMoney: Int): EarnedRate {
-        val earnedRate = earnedMoney.money.toFloat() / paidMoney
+    fun calculateEarnedRate(earnedMoney: EarnedMoney, paidMoney: Long): EarnedRate {
+        val earnedRate = earnedMoney.money / paidMoney.toFloat()
         return EarnedRate(earnedRate)
     }
 

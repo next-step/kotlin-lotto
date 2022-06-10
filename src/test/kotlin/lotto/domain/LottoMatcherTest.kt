@@ -29,7 +29,7 @@ class LottoMatcherTest {
 
     @Test
     fun `로또 당첨 결과기는 수익률 계산을 할 수 있다`() {
-        val paidMoney = 14000
+        val paidMoney = 14000L
         val earnedMoney = 5000L
         val earnedRate = LottoMatcher().calculateEarnedRate(EarnedMoney(earnedMoney), paidMoney)
         assertEquals(0.35714287f, earnedRate.rate)

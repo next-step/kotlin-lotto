@@ -1,9 +1,9 @@
 package lotto.view
 
 object InputView {
-    fun getPurchaseAmount(): Int {
+    fun getPurchaseAmount(): Long {
         println("구입금액을 입력해 주세요.")
-        return convertToInt(readLine())
+        return convertToLong(readLine())
     }
 
     fun getWinningNumbers(): List<Int> {
@@ -11,23 +11,27 @@ object InputView {
         return convertToListInt(readLine())
     }
 
-    private fun convertToInt(moneyString: String?): Int {
-        checkNullOrBlank(moneyString)
-        return toInt(moneyString!!)
+    private fun convertToLong(moneyString: String?): Long {
+        moneyString.checkNullOrBlank()
+        return moneyString!!.toNumericLong()
     }
 
     private fun convertToListInt(winningNumberStr: String?): List<Int> {
-        checkNullOrBlank(winningNumberStr)
-        return winningNumberStr!!.split(",").map { numberStr -> toInt(numberStr) }
+        winningNumberStr.checkNullOrBlank()
+        return winningNumberStr!!.split(",").map { it.toNumericInt() }
     }
+}
 
-    private fun toInt(numberStr: String): Int {
-        val number = numberStr.trim().toIntOrNull()
-        if (number == null || number < 0) {
-            throw RuntimeException("0보다 큰 숫자만 입력해 주세요. numberStr: $numberStr")
-        }
-        return number
-    }
+fun String?.checkNullOrBlank() = require(!this.isNullOrBlank()) { "입력값이 비어있어요." }
 
-    private fun checkNullOrBlank(inputString: String?) = require(!inputString.isNullOrBlank()) { "입력값이 비어있어요." }
+fun String.toNumericInt(): Int {
+    val number = this.trim().toIntOrNull()
+    require(null != number && number > 0) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
+    return number!!
+}
+
+fun String.toNumericLong(): Long {
+    val number = this.trim().toLongOrNull()
+    require(null != number && number > 0L) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
+    return number!!
 }
