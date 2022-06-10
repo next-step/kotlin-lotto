@@ -8,6 +8,6 @@ class InputView {
 
     fun getWinningNumbers(): List<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        return listOf(readLine()!!.toInt())
+        return readLine()!!.split(',').map { str -> str.trim().toInt() }
     }
 }
