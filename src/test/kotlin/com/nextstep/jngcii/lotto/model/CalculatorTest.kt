@@ -37,11 +37,10 @@ class CalculatorTest {
     @ParameterizedTest
     @MethodSource("operands")
     fun `구입한 로또의 갯수에 대하여 총 수익률을 계산`(
-        count: Int,
         ranks: List<Rank>,
         expected: Double
     ) {
-        val actual: Double = Calculator.calculateYield(count, Ranks(ranks))
+        val actual: Double = Calculator.calculateYield(Ranks(ranks))
 
         assertThat(actual).isEqualTo(expected)
     }
@@ -49,8 +48,8 @@ class CalculatorTest {
     companion object {
         @JvmStatic
         fun operands() = listOf(
-            Arguments.of(14, listOf(Rank.FIFTH), 0.35),
-            Arguments.of(10, listOf(Rank.FOURTH, Rank.FOURTH), 10.0),
+            Arguments.of(List(13) { Rank.NONE } + listOf(Rank.FIFTH), 0.35),
+            Arguments.of(List(8) { Rank.NONE } + listOf(Rank.FOURTH, Rank.FOURTH), 10.0),
         )
     }
 }

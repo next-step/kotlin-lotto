@@ -20,17 +20,17 @@ object ResultView {
         println()
     }
 
-    fun printResult(count: Int, ranks: Ranks) {
+    fun printResult(ranks: Ranks) {
         println("당첨 통계")
         println("---------")
 
-        Rank.values().forEach {
+        Rank.firstToFifth.forEach {
             val match = ranks.countOf(it)
             val secondPhase = if (it.isSecond) ", 보너스 볼 일치" else ""
             println("${it.count}개 일치$secondPhase (${it.price}원)- ${match}개")
         }
 
-        val rate = Calculator.calculateYield(count, ranks)
+        val rate = Calculator.calculateYield(ranks)
         val state = ProfitState.of(rate)
         println("총 수익률은 ${rate}입니다.(기준이 ${ProfitState.ORIGIN_POINT}이기 때문에 결과적으로 ${state.phaseOfPrint} 의미임)")
     }

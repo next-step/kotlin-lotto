@@ -29,8 +29,8 @@ class RankTest {
 
     @ParameterizedTest
     @ValueSource(ints = [0, 1, 2])
-    fun `입력받은 수가 2 이하일 경우 null을 반환`(count: Int) {
-        assertThat(Rank.of(count, true)).isNull()
+    fun `입력받은 수가 2 이하일 경우 NONE을 반환`(count: Int) {
+        assertThat(Rank.of(count, true)).isEqualTo(Rank.NONE)
     }
 
     companion object {

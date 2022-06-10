@@ -22,5 +22,5 @@ fun main() {
     val bonus = BonusNumber(number, lastWeekLotto)
 
     val ranks = Ranks(lottos, lastWeekLotto, bonus)
-    ResultView.printResult(total, ranks)
+    ResultView.printResult(ranks)
 }

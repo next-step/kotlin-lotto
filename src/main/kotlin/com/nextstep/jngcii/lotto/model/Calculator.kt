@@ -12,8 +12,8 @@ object Calculator {
         return payment / LOTTO_PRICE
     }
 
-    fun calculateYield(count: Int, ranks: Ranks): Double {
-        val purchaseAmount = (count * LOTTO_PRICE).toDouble()
+    fun calculateYield(ranks: Ranks): Double {
+        val purchaseAmount = (ranks.size * LOTTO_PRICE).toDouble()
 
         return floor(ranks.sumOfPrice / purchaseAmount * 100) / 100f
     }
