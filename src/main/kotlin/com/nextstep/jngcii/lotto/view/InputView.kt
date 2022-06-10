@@ -15,6 +15,17 @@ object InputView {
         }
     }
 
+    tailrec fun getPassiveCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+
+        return runCatching {
+            readLine().toPositiveInt
+        }.getOrElse {
+            println("${it.message} 다시 입력해주세요.")
+            return getPassiveCount()
+        }
+    }
+
     tailrec fun getNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
