@@ -7,11 +7,16 @@ import com.nextstep.jngcii.lotto.model.Rank
 import com.nextstep.jngcii.lotto.model.Ranks
 
 object ResultView {
-    fun printList(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach {
+    fun printList(passiveLottos: List<Lotto>, autoLottos: List<Lotto>) {
+        println("수동으로 ${passiveLottos.size}개, 자동으로 ${autoLottos.size}를 구매했습니다.")
+
+        passiveLottos.forEach {
             println("[${it.numbers.joinToString(", ")}]")
         }
+        autoLottos.forEach {
+            println("[${it.numbers.joinToString(", ")}]")
+        }
+
         println()
     }
 

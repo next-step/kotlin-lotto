@@ -1,6 +1,8 @@
 package com.nextstep.jngcii.lotto.view
 
 import com.nextstep.jngcii.lotto.model.Calculator
+import com.nextstep.jngcii.lotto.model.Lotto
+import com.nextstep.jngcii.lotto.model.LottoNumber
 import com.nextstep.jngcii.lotto.service.InputValidator
 
 object InputView {
@@ -30,15 +32,18 @@ object InputView {
         }
     }
 
-    tailrec fun getNumbers(): List<Int> {
+    fun getPassiveLottos(passiveCount: Int): List<Lotto> {
+        val result = mutableListOf<Lotto>()
+
+        repeat(passiveCount) { result.add(getSingleLotto()) }
+
+        return result
+    }
+
+    fun getLastWeekLotto(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        return runCatching {
-            readLine().splitToPositiveIntList
-        }.getOrElse {
-            println("${it.message} 다시 입력해주세요.")
-            return getNumbers()
-        }
+        return getSingleLotto()
     }
 
     tailrec fun getNumber(): Int {
@@ -50,6 +55,16 @@ object InputView {
             println("${it.message} 다시 입력해주세요.")
             return getNumber()
         }
+    }
+
+    private tailrec fun getSingleLotto(): Lotto = runCatching {
+        val lottoNumbers = readLine()
+            .splitToPositiveIntList
+            .map { LottoNumber(it) }
+        Lotto(lottoNumbers)
+    }.getOrElse {
+        println("${it.message} 다시 입력해주세요.")
+        return getSingleLotto()
     }
 
     private val String?.splitToPositiveIntList
