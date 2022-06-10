@@ -15,14 +15,18 @@ object InputView {
         }
     }
 
-    tailrec fun getPassiveCount(): Int {
+    tailrec fun getPassiveCount(total: Int): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
 
         return runCatching {
-            readLine().toPositiveInt
+            val passiveCount = readLine().toPositiveInt
+
+            require(passiveCount <= total) { "전체 로또보다 적어야 합니다." }
+
+            passiveCount
         }.getOrElse {
             println("${it.message} 다시 입력해주세요.")
-            return getPassiveCount()
+            return getPassiveCount(total)
         }
     }
 

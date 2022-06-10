@@ -9,9 +9,12 @@ import com.nextstep.jngcii.lotto.view.InputView
 import com.nextstep.jngcii.lotto.view.ResultView
 
 fun main() {
-    val count = InputView.getCount()
+    val total = InputView.getCount()
 
-    val lottos = LottoMachine.get(count)
+    val passiveCount = InputView.getPassiveCount(total)
+    val autoCount = total - passiveCount
+
+    val lottos = LottoMachine.get(autoCount)
     ResultView.printList(lottos)
 
     val lastWeekNumbers = InputView.getNumbers()
@@ -20,5 +23,5 @@ fun main() {
     val bonus = BonusNumber(number, lastWeekLotto)
 
     val ranks = Ranks(lottos, lastWeekLotto, bonus)
-    ResultView.printResult(count, ranks)
+    ResultView.printResult(total, ranks)
 }
