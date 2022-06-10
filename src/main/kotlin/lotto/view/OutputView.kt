@@ -19,7 +19,7 @@ class OutputView {
         println("---------")
 
         LottoRank.values().forEach { rank ->
-            println("${rank.matches}개 일치 (${rank.price}) : ${lottoResult.lottoRankList.count { it?.matches == rank.matches }} 개")
+            println("${rank.matches}개 일치 (${rank.price}) : ${lottoResult.lottoRankList.count { it?.matches == rank.matches && it.bonusMatches == rank.bonusMatches }} 개")
         }
 
         println("총 수익률은 ${lottoResult.profitRate} 입니다.")
