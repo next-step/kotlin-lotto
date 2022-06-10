@@ -17,12 +17,16 @@ object LottoGameView {
     }
 
     fun printWinningStats(lottoGame: LottoGame) {
-        println(WINNING_STAT_MESSAGE)
-        println(create4thMessage(lottoGame.rank(3)))
-        println(create3rdMessage(lottoGame.rank(4)))
-        println(create2ndMessage(lottoGame.rank(5)))
-        println(create1stMessage(lottoGame.rank(6)))
-        println(createProfitMessage(lottoGame.profit))
+        println(
+            """
+            |$WINNING_STAT_MESSAGE
+            |${create4thMessage(lottoGame.rank(3))}
+            |${create3rdMessage(lottoGame.rank(4))}
+            |${create2ndMessage(lottoGame.rank(5))}
+            |${create1stMessage(lottoGame.rank(6))}
+            |${createProfitMessage(lottoGame.profit)}
+            """.trimMargin()
+        )
     }
 
     private const val PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
