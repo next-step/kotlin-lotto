@@ -14,7 +14,7 @@ object InputView {
 
     fun askWinningLottoNumbers(): List<LottoNumber> {
         println(ASK_WINNING_LOTTO_NUMBERS)
-        return readln().split(",").map { it.trim().toInt() }.sorted().map { LottoNumber.from(it) }
+        return readln().split(",").map { it.trim().toInt() }.map { LottoNumber.from(it) }
     }
 
     fun askWinningLottoBonusNumber(): LottoNumber {

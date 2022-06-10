@@ -5,6 +5,8 @@ import lotto.domain.LottoNumbers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoNumbersTest {
 
@@ -14,17 +16,17 @@ class LottoNumbersTest {
         Assertions.assertThat(LottoNumbers.random().lottoNumbers.size).isEqualTo(6)
     }
 
-    @Test
-    fun `2) 구매한 로또가 5개로 이루어진 경우 예외를 발생한다`() {
+    @ParameterizedTest
+    @ValueSource(ints = [5, 7])
+    fun `2) 구매한 로또가 5개로 이루어진 경우 예외를 발생한다`(value: Int) {
+        val lottoNumberList = mutableListOf<LottoNumber>()
+        for (i in 1..value) {
+            lottoNumberList.add(LottoNumber.from(i))
+        }
+
         assertThrows<IllegalArgumentException> {
             LottoNumbers(
-                listOf(
-                    LottoNumber.from(5),
-                    LottoNumber.from(10),
-                    LottoNumber.from(15),
-                    LottoNumber.from(20),
-                    LottoNumber.from(25)
-                )
+                lottoNumberList
             )
         }
     }

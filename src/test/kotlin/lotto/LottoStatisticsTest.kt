@@ -43,8 +43,8 @@ class LottoStatisticsTest {
 
         val lottoBonusNumber = LottoNumber.from(31)
 
-        assertThrows<IllegalArgumentException> { LottoStatistics(1000, lottoNumber, erroredLottoNumberFive, lottoBonusNumber) }
-        assertThrows<IllegalArgumentException> { LottoStatistics(1000, lottoNumber, erroredLottoNumberSeven, lottoBonusNumber) }
+        assertThrows<IllegalArgumentException> { LottoStatistics(1000, lottoNumber, LottoNumbers(erroredLottoNumberFive), lottoBonusNumber) }
+        assertThrows<IllegalArgumentException> { LottoStatistics(1000, lottoNumber, LottoNumbers(erroredLottoNumberSeven), lottoBonusNumber) }
     }
 
     @Test
@@ -71,7 +71,7 @@ class LottoStatisticsTest {
         )
         val lottoBonusNumber = LottoNumber.from(31)
 
-        Assertions.assertThat(LottoStatistics(1000, lottoNumber, prizedFive, lottoBonusNumber).earningRate).isEqualTo(5.0)
+        Assertions.assertThat(LottoStatistics(1000, lottoNumber, LottoNumbers(prizedFive), lottoBonusNumber).earningRate).isEqualTo(5.0)
     }
 
     @Test
@@ -99,6 +99,6 @@ class LottoStatisticsTest {
 
         val lottoBonusNumber = LottoNumber.from(32)
 
-        Assertions.assertThat(LottoStatistics(1000, lottoNumber, prizedFive, lottoBonusNumber).resultMap[LottoMatch.FIFTH]).isEqualTo(1)
+        Assertions.assertThat(LottoStatistics(1000, lottoNumber, LottoNumbers(prizedFive), lottoBonusNumber).resultMap[LottoMatch.FIFTH]).isEqualTo(1)
     }
 }
