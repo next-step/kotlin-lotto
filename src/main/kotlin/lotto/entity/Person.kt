@@ -1,5 +1,6 @@
 package lotto.entity
 
 interface Person {
-    fun purchase(money: Int): List<LottoTicket>
+    val wallet: Wallet
+    fun purchase(): MutableList<LottoTicket>
 }
