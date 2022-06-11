@@ -9,10 +9,9 @@ data class LottoPrizes(val prizes: List<LottoPrize> = emptyList()) {
     val prizeResult = LottoPrize.values()
         .map { Pair(it, prizeEachCountMap.getOrDefault(it, 0)) }
 
-    fun earnings(money: Money): Double {
+    fun earnings(money: Money): BigDecimal {
         return BigDecimal(prizes.sumOf { it.price.amount })
             .divide(BigDecimal(money.amount), 2, RoundingMode.FLOOR)
-            .toDouble()
     }
 }
 

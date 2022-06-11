@@ -7,6 +7,8 @@ internal class LottoPrizesTest {
 
     @Test
     fun `14000원으로 3개의 당첨번호가 있는 경우 수익률 계산`() {
-        assertThat(LottoPrizes(listOf(LottoPrize.THIRD)).earnings(Money(14000))).isEqualTo(0.35)
+        assertThat(LottoPrizes(listOf(LottoPrize.THIRD)).earnings(Money(14000))).isEqualTo(
+            0.35.toBigDecimal()
+        )
     }
 }

@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.LottoPrize
 import lotto.domain.Purchase
+import java.math.BigDecimal
 
 object ResultView {
     fun printTickets(purchase: Purchase) {
@@ -12,7 +13,7 @@ object ResultView {
         }
     }
 
-    fun printResult(prizeResult: List<Pair<LottoPrize, Int>>, earnings: Double) {
+    fun printResult(prizeResult: List<Pair<LottoPrize, Int>>, earnings: BigDecimal) {
         println("당첨 통계")
         prizeResult.forEach {
             val (prize, count) = it
