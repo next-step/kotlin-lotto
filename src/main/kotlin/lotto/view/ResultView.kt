@@ -9,7 +9,7 @@ object ResultView {
         println("수동으로 ${purchase.manualTicketSize}장, 자동으로 ${purchase.autoTicketSize}개를 구매했습니다.")
 
         purchase.totalTickets.lottoTickets.forEach { lottoTicket ->
-            println(lottoTicket.numbers.map { it.number })
+            println(lottoTicket.numbers.sortedBy { it.number }.map { it.number })
         }
     }
 
