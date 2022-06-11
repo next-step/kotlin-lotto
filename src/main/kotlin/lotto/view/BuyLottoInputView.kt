@@ -16,6 +16,12 @@ class BuyLottoInputView(private val inputModule: InputModule, private val outPut
         return userMoneyInputDto.userMoney
     }
 
+    fun readPassiveTickets() {
+        outPutModule.write("수동으로 구매할 로또 수를 입력해 주세요.")
+        val ticketCount = inputModule.read()
+        outPutModule.write("")
+    }
+
     fun readWinningLottoNumbers(): WinningLottoNumbers {
         showWinningLottoNumbersInputGuide()
         val winningNumbersString = inputModule.read()

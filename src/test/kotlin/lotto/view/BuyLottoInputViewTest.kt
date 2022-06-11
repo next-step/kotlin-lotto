@@ -42,6 +42,24 @@ class BuyLottoInputViewTest : DescribeSpec({
         outputStore[1] shouldBe ""
     }
 
+    it("수동으로 구매한 로또를 입력할수 있습니다") {
+        // given
+        val stubInputModule: InputModule = object : InputModule {
+            val readStore = mutableListOf("3")
+            override fun read(): String {
+                return readStore.removeFirst()
+            }
+        }
+        val buyLottoInputView = BuyLottoInputView(stubInputModule, stubOutputModule)
+
+        // when
+        buyLottoInputView.readPassiveTickets()
+
+        // then
+        outputStore[0] shouldBe "수동으로 구매할 로또 수를 입력해 주세요."
+        outputStore[1] shouldBe ""
+    }
+
     it("당첨 번호 입력을 위한 View String 을 내보낸다") {
         // given
         val stubInputModule: InputModule = object : InputModule {
