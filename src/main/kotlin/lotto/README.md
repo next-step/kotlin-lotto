@@ -2,23 +2,32 @@
 [ ] 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 [ ] 로또 1장의 가격은 1000원이다.
 
+[ 클래스 다이어그램 ]
+
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/91591854/173190669-6fea0bc0-57ae-48fd-b634-3930c3b7666b.png)
+
 ## 구현할 기능 목록
+
 [X] Lotto: play(): 로또를 구매하고 매칭해 결과를 반환받는다.
-[X] InputView 생성
-[X] ResultView 생성
+[X] InputView : 유저에게 입력받는 객체
+[X] ResultView: 결과를 보여주는 객체
 [X] Wallet: input으로 들어온 돈을 가지고 있다.
-[X] Player:
-- [X] purchase(): 티켓을 구매한다.
+[X] Person ```<<Interface>>```
+- [x] purchase(): 티켓을 구매한다.
 - [X] wallet: 플레이어는 wallet 을 가지고 있다.
-[ ] LottoTicketMachine: Player가 티켓을 구매하면 티켓을 생성한다. interface (전략 패턴)
-- [X] AutoMachine(Impl): 자동으로 6자리의 값을 생성한다.
-- [ ] ManualMachine(Impl): 수동으로 6자리 값을 생성한다.
-[X] LottoTicket: 숫자를 6자리 가지고 있는 티켓
-[ ] Matcher: 지난 주 당첨번호를 입력받아 Person이 가진 tickets와 매칭한다. MatchingReuslt 객체를 리턴한다. interface
-- [X] 보너스 공이 없는 매칭
-- [ ] 단일 원칙 책임으로 수정
-[ ] MatcherResult: 매칭 결과를 가지고 있는 data class
-[ ] Rank: 등수, 상금의 정보를 가지고 있는 enum class
+- [X] PersonImpl: 자동으로 구매하는 사람
+- [ ] ManualPersonImpl: 수동으로 구매한 사람
+  [X] LottoTicketMachine: Player가 티켓을 구매하면 자동으로 티켓을 생성한다.
+- [X] print(): 로또 티켓을 만든다.
+- [X] getRandomNumber(): 무작위의 6자리 숫자를 만든다
+- [X] printMaxTicket(money: Int): 구매가능한 최대로 로또티켓을 출력한다.
+  [X] LottoTicket: 숫자를 6자리 가지고 있는 티켓
+  [ ] Matcher: 지난 주 당첨번호를 입력받아 Person이 가진 tickets와 매칭한다.
+- [X] winningNumber: 당첨번호 나열을 property로 갖는다.
+- [X] matchOneTicket(): 당첨번호와 한 장의 티켓을 매칭해 결과를 리턴한다.
+- [X] matchAllTickers(): 구매한 모든 티켓에 대한 결과를 매칭한다.
+  [X] Rank: 등수, 상금의 정보를 가지고 있는 enum class
+
 
 ## 프로그래밍 요구 사항
 [ ] 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
