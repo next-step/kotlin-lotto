@@ -4,10 +4,10 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 data class LottoPrizes(val prizes: List<LottoPrize> = emptyList()) {
-    private val prizeEachCountMap = prizes.groupingBy { it.name }.eachCount()
+    private val prizeEachCountMap = prizes.groupingBy { it }.eachCount()
 
     val prizeResult = LottoPrize.values().filter { it.price.amount > 0 }
-        .map { Pair(it, prizeEachCountMap.getOrDefault(it.name, 0)) }
+        .map { Pair(it, prizeEachCountMap.getOrDefault(it, 0)) }
 
     fun earnings(money: Money): Double {
         return BigDecimal(prizes.sumOf { it.price.amount })
