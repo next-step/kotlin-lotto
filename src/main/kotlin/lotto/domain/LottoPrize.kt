@@ -1,7 +1,6 @@
 package lotto.domain
 
 import java.math.BigDecimal
-import java.math.RoundingMode
 
 data class LottoPrizes(val prizes: List<LottoPrize> = emptyList()) {
     private val prizeEachCountMap = prizes.groupingBy { it }.eachCount()
@@ -9,9 +8,9 @@ data class LottoPrizes(val prizes: List<LottoPrize> = emptyList()) {
     val prizeResult = LottoPrize.values()
         .map { Pair(it, prizeEachCountMap.getOrDefault(it, 0)) }
 
-    fun earnings(money: Money): BigDecimal {
-        return BigDecimal(prizes.sumOf { it.price.amount })
-            .divide(BigDecimal(money.amount), 2, RoundingMode.FLOOR)
+    fun earnings(purchaseMoney: Money): BigDecimal {
+        return (prizes.map { it.price }
+            .reduce { total, lottoPrize -> total + lottoPrize }) / purchaseMoney
     }
 }
 

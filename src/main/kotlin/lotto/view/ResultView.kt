@@ -17,7 +17,7 @@ object ResultView {
         println("당첨 통계")
         prizeResult.forEach {
             val (prize, count) = it
-            println("${prize.matchCount}개 일치${getBonusText(prize)} ${prize.price.amount}원 ($count)개")
+            println("${prize.matchCount}개 일치${getBonusText(prize)} ${prize.price.currency} ($count)개")
         }
 
         println("총 수익률은 ${earnings}입니다")

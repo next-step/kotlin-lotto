@@ -1,8 +1,12 @@
 package lotto.domain
 
 import lotto.domain.LottoRule.LOTTO_NUMBER_COUNT
+import lotto.domain.LottoRule.LOTTO_PRICE
 
-class LottoTickets(val lottoTickets: List<LottoTicket> = emptyList())
+class LottoTickets(val lottoTickets: List<LottoTicket> = emptyList()) {
+    val money = Money(lottoTickets.size * LOTTO_PRICE)
+}
+
 open class LottoTicket(val numbers: List<LottoNumber>) {
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) {
