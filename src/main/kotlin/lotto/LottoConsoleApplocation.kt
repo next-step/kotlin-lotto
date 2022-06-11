@@ -19,10 +19,12 @@ fun main() {
             .map { LottoNumber.of(it.toIntOrNull() ?: throw IllegalArgumentException("")) }.toSet()
     )
     val lottoPrizes: LottoResults = LottoManager.winningConfirmation(lottoTickets, winningTicket)
+    println()
     println("당첨 통계")
     println("---------")
     println("3개 일치 (5000원)- ${lottoPrizes.fourthPlaceCount}개")
     println("4개 일치 (50000원)- ${lottoPrizes.thirdPlaceCount}개")
     println("5개 일치 (1500000원)- ${lottoPrizes.secondPlaceCount}개")
     println("6개 일치 (2000000000원)- ${lottoPrizes.firstPlaceCount}개")
+    println(String.format("총 수익률은 %.2f입니다.", lottoPrizes.totalPrize.toFloat() / lottoPurchaseAmount.value.toFloat()))
 }

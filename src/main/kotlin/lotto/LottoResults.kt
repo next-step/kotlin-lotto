@@ -5,6 +5,7 @@ data class LottoResults private constructor(
     val secondPlaceCount: Int,
     val thirdPlaceCount: Int,
     val fourthPlaceCount: Int,
+    val totalPrize: Int,
 ) {
 
     companion object {
@@ -14,6 +15,7 @@ data class LottoResults private constructor(
                 secondPlaceCount = prizes.secondPlaceCount(),
                 thirdPlaceCount = prizes.thirdPlaceCount(),
                 fourthPlaceCount = prizes.fourthPlaceCount(),
+                totalPrize = prizes.totalPrize(),
             )
         }
     }
