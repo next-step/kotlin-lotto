@@ -10,5 +10,7 @@ class LotteryStore(private val numberGenerator: NumberGenerator<LotteryNumberSet
         LotterySet(List(quantity) { Lottery(numberGenerator.generate()) })
 
     fun getManualLotteries(manualNumberSet: List<LotteryNumberSet>) =
-        manualNumberSet.map(::Lottery)
+        manualNumberSet
+            .map(::Lottery)
+            .let(::LotterySet)
 }
