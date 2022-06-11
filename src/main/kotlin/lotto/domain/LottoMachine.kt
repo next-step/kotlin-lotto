@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoMachine {
 
-    fun purchase(money: Money, manualTickets: LottoTickets, randomNumberFunc: () -> List<LottoNumber>): Purchase {
+    fun purchase(money: Money, manualTickets: LottoTickets, randomNumberFunc: () -> List<LottoNumber> = DEFAULT_RANDOM_FUNC): Purchase {
         val autoTicketCount = (money - manualTickets.money).lottoCount
         val autoTickets = makeAutoTickets(autoTicketCount, randomNumberFunc)
 
@@ -20,5 +20,9 @@ class LottoMachine {
                 LottoTicket(randomNumberFunc())
             }
         )
+    }
+
+    companion object {
+        private val DEFAULT_RANDOM_FUNC = Extractor.randomNumberFunc
     }
 }
