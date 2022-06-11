@@ -6,50 +6,62 @@ import io.kotest.matchers.shouldBe
 internal class LottoManagerTest : FunSpec({
     test("로또 티켓과 당첨 번호를 비교하여, 3개가 매칭되는 경우 4등이 반환된다.") {
         // given
-        val purchaseLottoTicket = LottoTicketFixture.simpleLottoTicket()
+        val purchaseLottoTicket = LottoTickets(listOf(LottoTicketFixture.simpleLottoTicket()))
         val winningNumbersTicket = LottoTicketFixture.simpleLottoTicket(number1 = 10, number2 = 11, number3 = 12)
 
         // when
-        val result: LottoPrize = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
+        val result: LottoResults = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
 
         // then
-        result shouldBe LottoPrize.FOURTH_PLACE
+        result.fourthPlaceCount shouldBe 1
+        result.thirdPlaceCount shouldBe 0
+        result.secondPlaceCount shouldBe 0
+        result.firstPlaceCount shouldBe 0
     }
 
     test("로또 티켓과 당첨 번호를 비교하여, 4개가 매칭되는 경우 3등이 반환된다.") {
         // given
-        val purchaseLottoTicket = LottoTicketFixture.simpleLottoTicket()
+        val purchaseLottoTicket = LottoTickets(listOf(LottoTicketFixture.simpleLottoTicket()))
         val winningNumbersTicket = LottoTicketFixture.simpleLottoTicket(number1 = 10, number2 = 11)
 
         // when
-        val result: LottoPrize = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
+        val result: LottoResults = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
 
         // then
-        result shouldBe LottoPrize.THIRD_PLACE
+        result.fourthPlaceCount shouldBe 0
+        result.thirdPlaceCount shouldBe 1
+        result.secondPlaceCount shouldBe 0
+        result.firstPlaceCount shouldBe 0
     }
 
     test("로또 티켓과 당첨 번호를 비교하여, 5개가 매칭되는 경우 2등이 반환된다.") {
         // given
-        val purchaseLottoTicket = LottoTicketFixture.simpleLottoTicket()
+        val purchaseLottoTicket = LottoTickets(listOf(LottoTicketFixture.simpleLottoTicket()))
         val winningNumbersTicket = LottoTicketFixture.simpleLottoTicket(number1 = 10)
 
         // when
-        val result: LottoPrize = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
+        val result: LottoResults = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
 
         // then
-        result shouldBe LottoPrize.SECOND_PLACE
+        result.fourthPlaceCount shouldBe 0
+        result.thirdPlaceCount shouldBe 0
+        result.secondPlaceCount shouldBe 1
+        result.firstPlaceCount shouldBe 0
     }
 
     test("로또 티켓과 당첨 번호를 비교하여, 6개가 모두 매칭되는 경우 1등이 반환된다.") {
         // given
-        val purchaseLottoTicket = LottoTicketFixture.simpleLottoTicket()
+        val purchaseLottoTicket = LottoTickets(listOf(LottoTicketFixture.simpleLottoTicket()))
         val winningNumbersTicket = LottoTicketFixture.simpleLottoTicket()
 
         // when
-        val result: LottoPrize = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
+        val result: LottoResults = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
 
         // then
-        result shouldBe LottoPrize.FIRST_PLACE
+        result.fourthPlaceCount shouldBe 0
+        result.thirdPlaceCount shouldBe 0
+        result.secondPlaceCount shouldBe 0
+        result.firstPlaceCount shouldBe 1
     }
 })
 

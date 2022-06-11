@@ -1,7 +1,7 @@
 package lotto
 
 @JvmInline
-value class LottoNumber private constructor(private val value: Int) {
+value class LottoNumber private constructor(val value: Int) {
 
     companion object {
 

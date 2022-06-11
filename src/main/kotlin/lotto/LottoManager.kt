@@ -1,8 +1,9 @@
 package lotto
 
 object LottoManager {
-    fun winningConfirmation(purchaseLottoTicket: LottoTicket, winningNumbersTicket: LottoTicket): LottoPrize {
-        val matchCount = purchaseLottoTicket.matchNumbers(winningNumbersTicket)
-        return LottoPrize.of(matchCount)
+    fun winningConfirmation(purchaseLottoTickets: LottoTickets, winningNumbersTicket: LottoTicket): LottoResults {
+        val matchNumbersInfo = purchaseLottoTickets.matchNumbers(winningNumbersTicket)
+        val prizes = LottoPrizes(matchNumbersInfo.map { LottoPrize.of(it) })
+        return LottoResults.of(prizes)
     }
 }
