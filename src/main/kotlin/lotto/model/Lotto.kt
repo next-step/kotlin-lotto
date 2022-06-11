@@ -14,8 +14,6 @@ class Lotto(
 
     fun contains(number: LottoNumber) = lotto.contains(number)
 
-    override fun toString() = "$lotto"
-
     private fun List<LottoNumber>.findMatchedNumberCount(other: Lotto) = other.lotto.count { this.contains(it) }
 
     private fun validateUnique(numbers: List<LottoNumber>) =
@@ -23,6 +21,8 @@ class Lotto(
 
     private fun validateNumberCount(numbers: List<LottoNumber>) =
         require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호 개수는 ${LOTTO_NUMBER_COUNT}개 이어야 합니다." }
+
+    override fun toString() = "$lotto"
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
