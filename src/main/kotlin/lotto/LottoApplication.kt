@@ -25,10 +25,14 @@ object LottoApplication {
         }
 
         val totalLottos = LottoGenerator.generateLottos(
-            paymentPrice, Lottos(customLottos),
-            RandomLottoGenerating
+            paymentPrice = paymentPrice,
+            customLottos = Lottos(customLottos),
+            lottoGeneratingStrategy = RandomLottoGenerating,
         )
-        resultView.printLottoCount(customLottoCount, totalLottos.count - customLottoCount)
+        resultView.printLottoCount(
+            customLottoCount = customLottoCount,
+            randomLottoCount = totalLottos.count - customLottoCount,
+        )
         resultView.printTotalLottos(totalLottos)
 
         inputView.printWinningNumbersInputMessage()
