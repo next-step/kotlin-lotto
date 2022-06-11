@@ -19,9 +19,7 @@ object InputView {
     fun getMoney(): Money {
         println("구입 금액을 입력해 주세요.")
 
-        val money = readLine()?.toInt()
-
-        requireNotNull(money) { NULL_MESSAGE }
+        val money =  readln().toInt()
 
         return Money(money)
     }
