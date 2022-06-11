@@ -1,7 +1,9 @@
 package lotto.model
+
 enum class LottoRank(
     val price: Long,
-    val matches: Int
+    val matches: Int,
+    val bonusMatches: Boolean = false
 ) {
 
     FIRST(
@@ -10,21 +12,28 @@ enum class LottoRank(
     ),
 
     SECOND(
+        price = 30_000_000,
+        matches = 5,
+        bonusMatches = true
+    ),
+
+    THIRD(
         price = 1_500_000,
         matches = 5
     ),
 
-    THIRD(
+    FOURTH(
         price = 50_000,
         matches = 4
     ),
 
-    FOURTH(
+    FIFTH(
         price = 5_000,
         matches = 3
     );
 
     companion object {
-        fun find(matchCount: Int): LottoRank? = values().find { it.matches == matchCount }
+        fun find(matchCount: Pair<Int, Boolean>): LottoRank? =
+            values().find { it.matches == matchCount.first && it.bonusMatches == matchCount.second }
     }
 }

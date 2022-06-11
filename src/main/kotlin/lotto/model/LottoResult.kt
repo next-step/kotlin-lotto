@@ -6,8 +6,8 @@ class LottoResult(
 ) {
 
     companion object {
-        fun of(lottoList: List<Lotto>, winLottoNumbers: Lotto): LottoResult {
-            val lottoRankList = lottoList.map { it.matches(winLottoNumbers) }.map { LottoRank.find(it) }
+        fun of(lottoList: List<Lotto>, winningLotto: WinningLotto): LottoResult {
+            val lottoRankList = lottoList.map { it.matches(winningLotto) }.map { LottoRank.find(it) }
             val profitRate = calculateProfitRate(lottoRankList)
             return LottoResult(
                 lottoRankList = lottoRankList,
