@@ -19,7 +19,7 @@ internal class MoneyTest : StringSpec({
     "금액 객체는 차액을 가진다." {
         val money = Money(1000)
 
-        val result = money.sub(Money(500))
+        val result = money - Money(500)
 
         result shouldBe Money(500)
     }
@@ -28,7 +28,7 @@ internal class MoneyTest : StringSpec({
         val money = Money(100)
 
         val throwableAction = {
-            money.sub(Money(101))
+            money - Money(101)
         }
 
         shouldThrow<IllegalArgumentException>(throwableAction)
