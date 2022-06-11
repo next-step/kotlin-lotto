@@ -8,7 +8,6 @@ import lotto.domain.Money
 object InputView {
     private const val NULL_MESSAGE = "입력값은 null일 수 없습니다."
     private const val NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE = "0보다 작은 값은 입력할 수 없습니다."
-    private const val NOT_VALID_NUMBER_MESSAGE = "유효한 로또 번호셋이 아닙니다. 로또 번호는 ,을 구분으로 입력되어야합니다."
 
     private fun String.splitToLottoNumber(): List<LottoNumber> {
         return this.replace(" ", "")
