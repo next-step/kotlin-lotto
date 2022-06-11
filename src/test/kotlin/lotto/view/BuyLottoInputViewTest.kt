@@ -8,18 +8,27 @@ import lotto.util.InputModule
 import lotto.util.OutPutModule
 
 class BuyLottoInputViewTest : DescribeSpec({
+    var outputStore = mutableListOf<String>()
+    var stubOutputModule: OutPutModule = object : OutPutModule {
+        override fun write(outputValue: String) {
+            outputStore.add(outputValue)
+        }
+    }
+
+    beforeEach {
+        outputStore = mutableListOf<String>()
+        stubOutputModule = object : OutPutModule {
+            override fun write(outputValue: String) {
+                outputStore.add(outputValue)
+            }
+        }
+    }
 
     it("금액 입력을 위한 View String 을 내보낸다") {
         // given
         val stubInputModule: InputModule = object : InputModule {
             override fun read(): String {
                 return "14000"
-            }
-        }
-        val outputStore = mutableListOf<String>()
-        val stubOutputModule = object : OutPutModule {
-            override fun write(outputValue: String) {
-                outputStore.add(outputValue)
             }
         }
         val buyLottoInputView = BuyLottoInputView(stubInputModule, stubOutputModule)
@@ -39,12 +48,6 @@ class BuyLottoInputViewTest : DescribeSpec({
             val readStore = mutableListOf("1, 2, 3, 4 ,5 ,6", "7")
             override fun read(): String {
                 return readStore.removeFirst()
-            }
-        }
-        val outputStore = mutableListOf<String>()
-        val stubOutputModule = object : OutPutModule {
-            override fun write(outputValue: String) {
-                outputStore.add(outputValue)
             }
         }
         val buyLottoInputView = BuyLottoInputView(stubInputModule, stubOutputModule)
