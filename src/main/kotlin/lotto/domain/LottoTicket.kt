@@ -6,6 +6,10 @@ class LottoTicket private constructor(val lottoTicketNumbers: LottoTicketNumbers
     }
 
     companion object {
+        fun ofString(lottoNumbersString: String, delimiter: Delimiter): LottoTicket {
+            return ofInts(delimiter.parseNumbers(lottoNumbersString))
+        }
+
         fun ofInts(lottoNumbers: List<Int>): LottoTicket {
             return LottoTicket(LottoTicketNumbers.ofInts(lottoNumbers))
         }

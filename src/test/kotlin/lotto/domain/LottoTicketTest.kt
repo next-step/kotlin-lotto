@@ -18,6 +18,18 @@ class LottoTicketTest : DescribeSpec({
         lottoTicket.lottoTicketNumbers.value.map { it.value } shouldContainAll lottoNumbersByInt
     }
 
+    it("로또 번호 문자열 과 구분자로 생성하는 팩토리 메소드를 지원하다") {
+        // given
+        val lottoNumbersByString = "1, 2, 3, 4, 5 ,6"
+        val delimiter = Delimiter(",")
+
+        // when
+        val lottoTicket = LottoTicket.ofString(lottoNumbersByString, delimiter)
+
+        // then
+        lottoTicket.lottoTicketNumbers.value.map { it.value } shouldBe listOf(1, 2, 3, 4, 5, 6)
+    }
+
     it("로또 숫자로 일치하는 번호 갯수를 알수 있다") {
         // given
         val lottoTicket = LottoTicket.ofInts(listOf(1, 2, 3, 4, 5, 6))
