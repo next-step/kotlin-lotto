@@ -6,7 +6,7 @@ import java.math.RoundingMode
 data class LottoPrizes(val prizes: List<LottoPrize> = emptyList()) {
     private val prizeEachCountMap = prizes.groupingBy { it }.eachCount()
 
-    val prizeResult = LottoPrize.values().filter { it.price.amount > 0 }
+    val prizeResult = LottoPrize.values()
         .map { Pair(it, prizeEachCountMap.getOrDefault(it, 0)) }
 
     fun earnings(money: Money): Double {
@@ -17,9 +17,6 @@ data class LottoPrizes(val prizes: List<LottoPrize> = emptyList()) {
 }
 
 enum class LottoPrize(val matchCount: Int, val price: Money) {
-    NONE(0, Money(0)),
-    FIRST(1, Money(0)),
-    SECOND(2, Money(0)),
     THIRD(3, Money(5_000)),
     FORTH(4, Money(50_000)),
     FIFTH(5, Money(1_500_000)),
@@ -28,13 +25,13 @@ enum class LottoPrize(val matchCount: Int, val price: Money) {
 
     companion object {
 
-        fun of(matchCount: Int, matchBonus: Boolean): LottoPrize {
+        fun of(matchCount: Int, matchBonus: Boolean): LottoPrize? {
             return when (matchCount) {
                 FIFTH.matchCount -> if (matchBonus) FIFTH_BONUS else FIFTH
                 THIRD.matchCount -> THIRD
                 FORTH.matchCount -> FORTH
                 SIXTH.matchCount -> SIXTH
-                else -> NONE
+                else -> null
             }
         }
     }

@@ -13,7 +13,7 @@ class LottoWinning(
         return bonusNumber in ticket.numbers
     }
 
-    private fun getPrize(ticket: LottoTicket): LottoPrize {
+    private fun getPrize(ticket: LottoTicket): LottoPrize? {
         return LottoPrize.of(
             matchCount = matchCount(ticket),
             matchBonus = isMatchBonus(ticket, bonusNumber),
@@ -22,7 +22,7 @@ class LottoWinning(
 
     fun getPrizes(lottoTickets: LottoTickets): LottoPrizes {
         return LottoPrizes(
-            lottoTickets.lottoTickets.map {
+            lottoTickets.lottoTickets.mapNotNull {
                 getPrize(it)
             }
         )
