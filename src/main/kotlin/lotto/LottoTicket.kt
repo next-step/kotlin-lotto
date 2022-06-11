@@ -8,6 +8,10 @@ value class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
         }
     }
 
+    fun matchNumbers(target: LottoTicket): Int {
+        return this.lottoNumbers.count() { target.lottoNumbers.contains(it) }
+    }
+
     companion object {
         const val LOTTO_NUMBERS_SIZE = 6
     }
