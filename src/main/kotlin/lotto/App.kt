@@ -32,5 +32,5 @@ fun main() {
 
     val lottoPrizes = lottoWinning.getPrizes(purchase.totalTickets)
 
-    ResultView.printResult(lottoPrizes.prizeResult, lottoPrizes.earnings(money))
+    ResultView.printResult(lottoPrizes.prizeCountInfo, lottoPrizes.earnings(money))
 }

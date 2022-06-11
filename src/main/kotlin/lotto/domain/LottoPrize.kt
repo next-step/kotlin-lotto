@@ -5,13 +5,20 @@ import java.math.BigDecimal
 data class LottoPrizes(val prizes: List<LottoPrize> = emptyList()) {
     private val prizeEachCountMap = prizes.groupingBy { it }.eachCount()
 
-    val prizeResult = LottoPrize.values()
-        .map { Pair(it, prizeEachCountMap.getOrDefault(it, 0)) }
+    val prizeCountInfo = LottoPrize.values()
+        .map {
+            CountInfo(lottoPrize = it, count = prizeEachCountMap.getOrDefault(it, 0))
+        }
 
     fun earnings(purchaseMoney: Money): BigDecimal {
         return (prizes.map { it.price }
             .reduce { total, lottoPrize -> total + lottoPrize }) / purchaseMoney
     }
+
+    data class CountInfo(
+        val lottoPrize: LottoPrize,
+        val count: Int,
+    )
 }
 
 enum class LottoPrize(val matchCount: Int, val price: Money) {
