@@ -6,7 +6,6 @@ import lotto.domain.LottoTickets
 import lotto.domain.Money
 
 object InputView {
-    private const val NULL_MESSAGE = "입력값은 null일 수 없습니다."
     private const val NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE = "0보다 작은 값은 입력할 수 없습니다."
 
     private fun String.splitToLottoNumber(): List<LottoNumber> {
@@ -19,7 +18,7 @@ object InputView {
     fun getMoney(): Money {
         println("구입 금액을 입력해 주세요.")
 
-        val money =  readln().toInt()
+        val money = readln().toInt()
 
         return Money(money)
     }
@@ -32,19 +31,16 @@ object InputView {
 
     fun getBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
-        val bonusNumber = readLine()?.toInt()
 
-        requireNotNull(bonusNumber) { NULL_MESSAGE }
-
-        return LottoNumber(bonusNumber)
+        return LottoNumber(
+            readln().toInt()
+        )
     }
 
     fun getManualTicketCount(): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
 
-        val manualCount = readLine()?.toInt()
-
-        requireNotNull(manualCount) { NULL_MESSAGE }
+        val manualCount = readln().toInt()
 
         require(manualCount >= 0) { NOT_GREATER_OR_EQUAL_NUMBER_MESSAGE }
 
