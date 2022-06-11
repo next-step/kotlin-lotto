@@ -9,18 +9,21 @@ class StringAddCalculator {
     }
 
     private fun sumWhenCustomDelimiterExist(inputStr: String): Long? {
-        return Regex("//(.)\n(.*)").find(inputStr)
+        return REGEX_CUSTOM_DELIMITER.find(inputStr)
             ?.let {
                 val customDelimiter = it.groupValues[1]
-                val numbers = it.groupValues[2].split(customDelimiter)
-                    .map { numberStr -> Numbers.isNumericLong(numberStr) }
-                numbers.sum()
+                it.groupValues[2].split(customDelimiter)
+                    .sumOf { numberStr -> numberStr.toNumericLong() }
             }
     }
 
     private fun sumWhenDefaultDelimiterExist(inputStr: String): Long {
-        val numbers = inputStr.split(",|:".toRegex())
-            .map { numberStr -> Numbers.isNumericLong(numberStr) }
-        return numbers.sum()
+        return inputStr.split(REGEX_DELIMITER)
+            .sumOf { numberStr -> numberStr.toNumericLong() }
+    }
+
+    companion object {
+        private val REGEX_CUSTOM_DELIMITER = Regex("//(.)\n(.*)")
+        private val REGEX_DELIMITER = Regex(",|:")
     }
 }
