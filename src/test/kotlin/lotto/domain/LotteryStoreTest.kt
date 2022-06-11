@@ -1,21 +1,28 @@
 package lotto.domain
 
-import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-internal class LotteryStoreTest : BehaviorSpec({
+internal class LotteryStoreTest : StringSpec({
 
-    given("구입 금액을 입력으로") {
-        val money = 14_000
-        val stubNumberGenerator = StubNumberGenerator(listOf(1, 2, 3, 4, 5, 6))
-        val lotteryStore = LotteryStore(stubNumberGenerator)
+    "주어진 개수만큼 복권을 반환한다." {
+        val store = LotteryStore(StubNumberGenerator(listOf(1, 2, 3, 4, 5, 6)))
+        val number = 5
 
-        `when`("구매 시") {
-            val result = lotteryStore.sell(money)
+        val lotteries = store.getLotteries(number)
 
-            then("개수만큼 복권이 포함된 복권 세트를 반환한다.") {
-                result.size shouldBe 14
-            }
-        }
+        lotteries.size shouldBe 5
+    }
+
+    "주어진 복권 번호를 통해 복권을 생성한다." {
+        val store = LotteryStore(StubNumberGenerator(listOf(1, 2, 3, 4, 5, 6)))
+        val numbers = listOf(
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(7, 8, 9, 10, 11, 12)
+        ).map { it.toLotteryNumberSet() }
+
+        val manualLotteries = store.getManualLotteries(numbers)
+
+        manualLotteries.size shouldBe 2
     }
 })
