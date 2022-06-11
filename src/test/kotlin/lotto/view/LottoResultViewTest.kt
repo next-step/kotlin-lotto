@@ -18,7 +18,7 @@ internal class LottoResultViewTest : BehaviorSpec({
             )
         )
         val lastWeekNormalLottery = LotteryWithBonusPolicy(listOf(1, 2, 3, 4, 45, 44).toLotteryNumberSet(), LotteryNumber.of(5))
-        val stubIOSystem = StubIOSystem("")
+        val stubIOSystem = StubIOSystem(listOf(""))
         val lottoResultView = LottoResultView(stubIOSystem)
 
         `when`("결과를 출력 시") {

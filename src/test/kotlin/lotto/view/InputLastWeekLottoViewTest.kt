@@ -9,7 +9,7 @@ import lotto.vo.LotteryRank
 internal class InputLastWeekLottoViewTest : BehaviorSpec({
 
     given("InputLastWeekLottoView는") {
-        val stubIOSystem = StubIOSystem("1, 2, 3, 4, 5, 6")
+        val stubIOSystem = StubIOSystem(listOf("1, 2, 3, 4, 5, 6"))
         val inputLastWeekLottoView = InputLastWeekLottoView(stubIOSystem)
 
         `when`("호출시") {
