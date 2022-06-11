@@ -1,6 +1,6 @@
 package string_calculator
 
-class StringAddCalculator {
+object StringAddCalculator {
     fun add(text: String?): StringNumber {
         if (text.isNullOrBlank()) {
             return StringNumber.ZERO
@@ -8,7 +8,7 @@ class StringAddCalculator {
 
         val stringNumbers = StringSeparator.splitToDelimitersAndNumbers(text)
             .let { (delimiters, expression) ->
-                Delimiters(delimiters).split(expression)
+                expression.splitBy(delimiters)
             }
 
         return stringNumbers.addAll()

@@ -8,11 +8,11 @@ import io.kotest.matchers.shouldBe
 class DelimitersTest : FunSpec({
     test("구분자로 숫자들을 구분한다.") {
         listOf(
-            row(Delimiters(listOf(",", ":")), "1,2,3"),
-            row(Delimiters(listOf(",", ":", ";")), "1,2;3"),
+            row(Delimiters.default(), "1,2,3"),
+            row(Delimiters.instanceOf(";"), "1,2;3"),
         ).forAll { (delimiters, expression) ->
             // when
-            val actual = delimiters.split(expression)
+            val actual = expression.splitBy(delimiters)
 
             // then
             actual.size shouldBe 3

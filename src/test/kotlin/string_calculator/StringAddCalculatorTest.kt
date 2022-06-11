@@ -11,11 +11,8 @@ class StringAddCalculatorTest : StringSpec({
             null,
             ""
         ).forAll {
-            // given
-            val calculator = StringAddCalculator()
-
             // when
-            val actual = calculator.add(it)
+            val actual = StringAddCalculator.add(it)
 
             // then
             actual shouldBe StringNumber(0)
@@ -25,10 +22,9 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
         // given
         val text = "1"
-        val calculator = StringAddCalculator()
 
         // when
-        val actual = calculator.add(text)
+        val actual = StringAddCalculator.add(text)
 
         // then
         actual shouldBe StringNumber(1)
@@ -37,10 +33,9 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다." {
         // given
         val text = "1,2"
-        val calculator = StringAddCalculator()
 
         // when
-        val actual = calculator.add(text)
+        val actual = StringAddCalculator.add(text)
 
         // then
         actual shouldBe StringNumber(3)
@@ -49,10 +44,9 @@ class StringAddCalculatorTest : StringSpec({
     "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다." {
         // given
         val text = "1,2:3"
-        val calculator = StringAddCalculator()
 
         // when
-        val actual = calculator.add(text)
+        val actual = StringAddCalculator.add(text)
 
         // then
         actual shouldBe StringNumber(6)
@@ -61,21 +55,19 @@ class StringAddCalculatorTest : StringSpec({
     "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다." {
         // given
         val text = "//;\n1;2;3"
-        val calculator = StringAddCalculator()
 
         // when
-        val actual = calculator.add(text)
+        val actual = StringAddCalculator.add(text)
 
         // then
         actual shouldBe StringNumber(6)
     }
 
-    "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다." {
+    "문자열 계산기에 음수를 전달하는 경우 예외 처리를 한다." {
         // given
         val text = "-1"
-        val calculator = StringAddCalculator()
 
         // when // then
-        shouldThrowExactly<RuntimeException> { calculator.add(text) }
+        shouldThrowExactly<IllegalArgumentException> { StringAddCalculator.add(text) }
     }
 })
