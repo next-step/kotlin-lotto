@@ -1,6 +1,9 @@
 package lotto.domain
 
-data class Money(val amount: Int) {
+data class Money(private val _amount: Int) {
+    val amount: Int
+        get() = _amount
+
     init {
         require(amount >= 0) {
             NEGATIVE_VALUE_MESSAGE
