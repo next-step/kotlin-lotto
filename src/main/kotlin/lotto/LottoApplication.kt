@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoBuyer
 import lotto.domain.LottoMoney
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -11,12 +12,13 @@ fun main() {
     val money = InputView.askLottoMoney()
     ResultView.printBuyLottoCount(LottoMoney().getLottoCount(money))
     val lottoBuyer = LottoBuyer.buyer(money)
-    ResultView.printBuyLottoNumber(lottoBuyer.lottoNumbers)
+    ResultView.printBuyLottoNumber(lottoBuyer.lottoBuyList)
 
-    // 당첨번호 관련
-    val printWinningLottoNumber = InputView.askWinningLottoNumbers()
+    // 당첨번호(보너스 번호 포함) 관련
+    val winningLottoNumber = LottoNumbers(InputView.askWinningLottoNumbers())
+    val winningLottoBonusNumber = InputView.askWinningLottoBonusNumber()
 
     // 통계관련
-    val lottoStatistics = LottoStatistics(money, lottoBuyer.lottoNumbers, printWinningLottoNumber)
+    val lottoStatistics = LottoStatistics(money, lottoBuyer.lottoBuyList, winningLottoNumber, winningLottoBonusNumber)
     ResultView.printWinningStatistics(lottoStatistics.resultMap, lottoStatistics.earningRate)
 }

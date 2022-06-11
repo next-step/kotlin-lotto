@@ -1,44 +1,61 @@
 package lotto.domain
 
+import java.util.EnumMap
 import kotlin.math.round
 
 class LottoStatistics(
-    private val money: Int,
-    private val lottoNumbers: List<Lotto>,
-    private val winningLottoNumbers: List<Int>
+    money: Int,
+    private val lottoNumbers: List<LottoNumbers>,
+    private val winningLottoNumbers: LottoNumbers,
+    private val winningLottoBonusNumber: LottoNumber
 ) {
     val earningRate: Double
     val resultMap: Map<LottoMatch, Int>
 
     init {
-        earningRate = calculateEarningRate(money, calculateWinningTotalMoney(lottoNumbers, winningLottoNumbers))
-        resultMap = HashMap<LottoMatch, Int>()
+        require(!winningLottoNumbers.lottoNumbers.contains(winningLottoBonusNumber)) { LOTTO_BONUS_NUMBER_DUPLICATE }
+
+        earningRate = calculateEarningRate(money, calculateWinningTotalMoney(lottoNumbers, winningLottoNumbers, winningLottoBonusNumber))
+        resultMap = EnumMap(LottoMatch::class.java)
         LottoMatch.values().forEach {
-            val countSize = getLottoWinningCountOfLottoRank(lottoNumbers, winningLottoNumbers, it.count)
+            val countSize = getLottoWinningCountOfLottoRank(lottoNumbers, winningLottoNumbers, winningLottoBonusNumber, it)
             resultMap.put(it, countSize)
         }
     }
 
-    private fun calculateWinningTotalMoney(lottoNumbers: List<Lotto>, winningLottoNumbers: List<Int>): Int {
-        require(winningLottoNumbers.size == WINNING_LOTTO_NUMBER_SIZE) { WINNING_LOTTO_NUMBER_SIZE_MESSAGE }
+    private fun calculateWinningTotalMoney(
+        lottoNumbers: List<LottoNumbers>,
+        winningLottoNumbers: LottoNumbers,
+        winningLottoBonusNumber: LottoNumber
+    ): Int {
         return lottoNumbers.sumOf { lotto ->
-            val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers)
-            lotto.exchangeCountToMoney(count)
+            val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers.lottoNumbers)
+            val hasBonusNumber = lotto.hasBonusNumber(winningLottoBonusNumber)
+            LottoMatch.findLottoMatch(count, hasBonusNumber).prize
         }
     }
 
-    private fun calculateEarningRate(money: Int, winningTotalMoney: Int): Double {
+    private fun calculateEarningRate(
+        money: Int,
+        winningTotalMoney: Int
+    ): Double {
         return round(winningTotalMoney / money.toDouble() * 100) / 100
     }
 
-    private fun getLottoWinningCountOfLottoRank(lottoNumbers: List<Lotto>, winningLottoNumbers: List<Int>, count: Int): Int {
+    private fun getLottoWinningCountOfLottoRank(
+        lottoNumbers: List<LottoNumbers>,
+        winningLottoNumbers: LottoNumbers,
+        winningLottoBonusNumber: LottoNumber,
+        lottoMatch: LottoMatch
+    ): Int {
         return lottoNumbers.filter { lotto ->
-            lotto.getCountWithWinningLottoNumber(winningLottoNumbers) == count
+            val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers.lottoNumbers)
+            val hasBonusNumber = lotto.hasBonusNumber(winningLottoBonusNumber)
+            LottoMatch.findLottoMatch(count, hasBonusNumber) == lottoMatch
         }.size
     }
 
     companion object {
-        const val WINNING_LOTTO_NUMBER_SIZE = 6
-        const val WINNING_LOTTO_NUMBER_SIZE_MESSAGE = "당첨 번호 입력시 6개의 숫자를 입력해주셔야 합니다."
+        private const val LOTTO_BONUS_NUMBER_DUPLICATE = "보너스 번호가 당첨 번호 내 번호와 중복됩니다."
     }
 }
