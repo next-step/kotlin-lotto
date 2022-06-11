@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Money
 import lotto.domain.WinningLottoNumbers
+import lotto.dto.TicketCountDto
 import lotto.dto.UserMoneyInputDto
 import lotto.dto.WinningNumbersInputDto
 import lotto.util.InputModule
@@ -18,7 +19,7 @@ class BuyLottoInputView(private val inputModule: InputModule, private val outPut
 
     fun readPassiveTickets() {
         outPutModule.write("수동으로 구매할 로또 수를 입력해 주세요.")
-        val ticketCount = inputModule.read()
+        val ticketCountDto = TicketCountDto(inputModule.read())
         outPutModule.write("")
     }
 
