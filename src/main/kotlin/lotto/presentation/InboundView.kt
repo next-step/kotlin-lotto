@@ -1,5 +1,8 @@
 package lotto.presentation
 
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import lotto.domain.LottoWinningNumber
 
 class InboundView {
@@ -14,6 +17,37 @@ class InboundView {
             .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
     }
 
+    fun inputManualPurchaseCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+
+        val manualPurchaseCount: String = readln()
+        require(manualPurchaseCount.isNotBlank()) { "공백을 입력하셨습니다." }
+
+        return runCatching { manualPurchaseCount.toInt() }
+            .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
+    }
+
+    fun inputManualLottoNumber(manualPurchaseCount: Int): LottoTickets {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        val tickets: MutableList<LottoTicket> = mutableListOf()
+
+        while (tickets.size < manualPurchaseCount) {
+            val inputManualNumber = readln()
+            require(inputManualNumber.isNotBlank()) { "공백을 입력하셨습니다." }
+
+            val manualNumber = inputManualNumber.toTokenize()
+                .checkUniqueToken()
+                .toMapInt()
+                .toLottoNumber()
+                .toSet()
+
+            tickets.add(LottoTicket(manualNumber))
+        }
+
+        return LottoTickets(tickets)
+    }
+
     fun inputWinningNumber(): LottoWinningNumber {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
 
@@ -23,9 +57,10 @@ class InboundView {
         val winningNumbers = inputWinningNumber.toTokenize()
             .checkUniqueToken()
             .toMapInt()
+            .toLottoNumber()
             .toSet()
 
-        val bonusNumber: Int = inputBonusLottoNumber()
+        val bonusNumber: LottoNumber = LottoNumber.of(inputBonusLottoNumber())
 
         return LottoWinningNumber(winningNumbers, bonusNumber)
     }
@@ -60,5 +95,10 @@ class InboundView {
     private fun List<String>.toMapInt(): List<Int> {
         return runCatching { map { it.toInt() } }
             .getOrElse { throw IllegalArgumentException("숫자를 입력해주세요.") }
+    }
+
+    private fun List<Int>.toLottoNumber(): List<LottoNumber> {
+        return runCatching { map { LottoNumber.of(it) } }
+            .getOrElse { e -> throw IllegalArgumentException(e.message) }
     }
 }

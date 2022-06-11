@@ -1,16 +1,19 @@
 package lotto.presentation
 
-import lotto.domain.LottoMatchType
+import lotto.domain.LottoRank
 import lotto.domain.LottoRewardCalculator
 import lotto.domain.LottoTickets
 import lotto.domain.LottoWinningNumber
 
 class OutboundView {
 
-    fun printLottoTickets(lottoTickets: LottoTickets) {
-        println("${lottoTickets.getLottoTickets().size} 개를 구매했습니다.")
+    fun printLottoTickets(lottoTickets: LottoTickets, manualPurchaseCount: Int) {
+        println(
+            "수동으로 ${manualPurchaseCount}장, " +
+                "자동으로 11개를 ${lottoTickets.lottoTickets.size - manualPurchaseCount} 개를 구매했습니다."
+        )
 
-        lottoTickets.getLottoTickets()
+        lottoTickets.lottoTickets
             .forEach { println(it.numbers.joinToString(prefix = "[", postfix = "]")) }
     }
 
@@ -18,7 +21,7 @@ class OutboundView {
         println("\n당첨 동계")
         println("---------")
 
-        LottoMatchType.values()
+        LottoRank.values()
             .forEach { printMatchCountResult(it, lottoTickets, winningNumber) }
     }
 
@@ -28,21 +31,21 @@ class OutboundView {
     }
 
     private fun printMatchCountResult(
-        lottoMatchType: LottoMatchType,
+        lottoRank: LottoRank,
         lottoTickets: LottoTickets,
         winningNumber: LottoWinningNumber
     ) {
-        if (lottoMatchType.isBonus) {
+        if (lottoRank.isBonus) {
             println(
-                "${lottoMatchType.matchCount}개 일치, 보너스 볼 일치(${lottoMatchType.reward}원) - " +
-                    "${lottoTickets.getMatchCount(lottoMatchType, winningNumber)}개"
+                "${lottoRank.matchCount}개 일치, 보너스 볼 일치(${lottoRank.reward}원) - " +
+                    "${lottoTickets.getMatchCount(lottoRank, winningNumber)}개"
             )
             return
         }
 
         println(
-            "${lottoMatchType.matchCount}개 일치 (${lottoMatchType.reward}원) - " +
-                "${lottoTickets.getMatchCount(lottoMatchType, winningNumber)}개"
+            "${lottoRank.matchCount}개 일치 (${lottoRank.reward}원) - " +
+                "${lottoTickets.getMatchCount(lottoRank, winningNumber)}개"
         )
     }
 }

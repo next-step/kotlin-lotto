@@ -13,7 +13,7 @@ class LottoRewardCalculator(
     }
 
     private fun calculateReward(): Double {
-        return LottoMatchType.values()
+        return LottoRank.values()
             .sumOf { lottoTickets.getMatchCount(it, winningNumbers) * it.reward }
             .toDouble()
     }
