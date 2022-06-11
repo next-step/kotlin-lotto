@@ -13,7 +13,7 @@ class WinningStatistics private constructor(
 
     companion object {
         fun from(winningRanks: List<WinningRank>): WinningStatistics {
-            val statistics = WinningRank.values().filter { it != WinningRank.NONE }
+            val statistics = WinningRank.values().filter { it.isNotPrize() }
                 .reversed()
                 .associateWith { rank -> winningRanks.count { rank == it } }
 
