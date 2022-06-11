@@ -6,7 +6,7 @@ import lotto.domain.prize.LottoPrize
 
 class WinningLotto(winningNumbers: List<Int>, bonusNumber: Int) {
     val winningNumbers = LottoNumbers(winningNumbers)
-    val bonusNumber = LottoNumber(bonusNumber)
+    val bonusNumber = LottoNumber.from(bonusNumber)
 
     init {
         require(!winningNumbers.contains(bonusNumber)) { "당첨번호와 보너스번호는 겹칠 수 없습니다." }

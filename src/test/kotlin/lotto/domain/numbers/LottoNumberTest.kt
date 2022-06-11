@@ -1,6 +1,7 @@
 package lotto.domain.numbers
 
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class LottoNumberTest {
@@ -8,7 +9,7 @@ class LottoNumberTest {
     fun `로또 번호는 1과 45 사이의 번호로 이루어져 있다`() {
         val lottoNumbers = (1..45).map { it }
 
-        Assertions.assertThatNoException().isThrownBy { lottoNumbers.map { LottoNumber(it) } }
+        Assertions.assertThatNoException().isThrownBy { lottoNumbers.map { LottoNumber.from(it) } }
     }
 
     @Test
@@ -16,7 +17,15 @@ class LottoNumberTest {
         val lessThanOneLottoNumber = 0
         val greaterThanFortyFiveLottoNumber = 46
 
-        Assertions.assertThatIllegalArgumentException().isThrownBy { LottoNumber(lessThanOneLottoNumber) }
-        Assertions.assertThatIllegalArgumentException().isThrownBy { LottoNumber(greaterThanFortyFiveLottoNumber) }
+        Assertions.assertThatIllegalArgumentException().isThrownBy { LottoNumber.from(lessThanOneLottoNumber) }
+        Assertions.assertThatIllegalArgumentException().isThrownBy { LottoNumber.from(greaterThanFortyFiveLottoNumber) }
+    }
+
+    @Test
+    fun `각 로또 번호당 하나의 LottoNumber 가 생성되어 있다`() {
+        val lottoNumber1 = LottoNumber.from(2)
+        val lottoNumber2 = LottoNumber.from(2)
+
+        assertThat(lottoNumber1).isEqualTo(lottoNumber2)
     }
 }
