@@ -21,15 +21,23 @@ class InputMoneyView(private val ioSystem: IOSystem) {
         return OrderLotteryRequestDTO(money, lotteryNumberSets)
     }
 
-    private fun printInputMessage() = ioSystem.write("구입 금액을 입력해 주세요.\n")
+    private fun printInputMessage() =
+        ioSystem.write("구입 금액을 입력해 주세요.\n")
 
-    private fun printInputManualLotteryNumber() = ioSystem.write("수동으로 구매할 로또 수를 입력해 주세요.\n")
+    private fun printInputManualLotteryNumber() =
+        ioSystem.write("수동으로 구매할 로또 수를 입력해 주세요.\n")
 
-    private fun printInputLotteryNumbers() = ioSystem.write("수동으로 구매할 번호를 입력해 주세요.\n")
+    private fun printInputLotteryNumbers() =
+        ioSystem.write("수동으로 구매할 번호를 입력해 주세요.\n")
 
-    private fun inputMoney(): Money = ioSystem.read().toInt().let(::Money)
+    private fun inputMoney(): Money =
+        ioSystem
+            .read()
+            .toInt()
+            .let(::Money)
 
-    private fun inputManualLotteryNumber() = ioSystem.read().toInt()
+    private fun inputManualLotteryNumber() =
+        ioSystem.read().toInt()
 
     private fun inputNumbers() =
         ioSystem

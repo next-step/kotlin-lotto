@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.dto.LotteryResultDTO
 import lotto.infra.port.OutputSystem
 import lotto.policy.LotteryPolicy
 import lotto.vo.LotteryRank
@@ -7,9 +8,9 @@ import lotto.vo.LotterySet
 
 class LottoResultView(private val outputSystem: OutputSystem) {
 
-    fun printResult(lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) {
+    fun printResult(lotteryResultDTO: LotteryResultDTO) {
         printHeadLine()
-        staticalLottery(lotterySet, winningNormalLottery)
+        staticalLottery(lotteryResultDTO.lotteries, lotteryResultDTO.LotteryPolicy)
     }
 
     private fun printHeadLine() {

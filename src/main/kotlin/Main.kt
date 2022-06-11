@@ -1,4 +1,8 @@
+import lotto.domain.LotterySeller
 import lotto.domain.LotteryStore
+import lotto.domain.Wallet
+import lotto.dto.BuyLotteriesDTO
+import lotto.dto.LotteryResultDTO
 import lotto.infra.DefaultIOSystem
 import lotto.infra.LottoNumberGenerator
 import lotto.view.BuyResultView
@@ -9,17 +13,23 @@ import lotto.view.LottoResultView
 fun main() {
     val ioSystem = DefaultIOSystem()
     val lottoNumberGenerator = LottoNumberGenerator()
-    val lotteryStore = LotteryStore(lottoNumberGenerator)
 
     val inputMoneyView = InputMoneyView(ioSystem)
+    val orderLotteryRequestDTO = inputMoneyView.getMoney()
 
-    val amount = inputMoneyView.getMoney()
-    val lotteries = lotteryStore.sell(amount)
+    val lotterySeller = LotterySeller(LotteryStore(lottoNumberGenerator))
+
+    val wallet = Wallet(orderLotteryRequestDTO.money)
+    val autoLotteries = lotterySeller.sell(wallet, 3)
+    val manualLotteries = lotterySeller.sellManually(wallet, orderLotteryRequestDTO.manualLotteryNumbers)
+    val buyLotteriesDTO = BuyLotteriesDTO(autoLotteries, manualLotteries)
+
     val buyResultView = BuyResultView(ioSystem)
-    buyResultView.printLotteries(lotteries)
+    buyResultView.printLotteries(buyLotteriesDTO)
 
     val lastWeekLottoView = InputLastWeekLottoView(ioSystem)
     val winningLottery = lastWeekLottoView.getLastWeekLotto()
     val lottoResultView = LottoResultView(ioSystem)
-    lottoResultView.printResult(lotteries, winningLottery)
+    val lotteryResultDTO = LotteryResultDTO(buyLotteriesDTO.autoLotteries, buyLotteriesDTO.manualLotteries, winningLottery)
+    lottoResultView.printResult(lotteryResultDTO)
 }
