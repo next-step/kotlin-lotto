@@ -7,11 +7,11 @@ internal class LottoTicketTest : FunSpec({
     test("6자리의 숫자가 아닌 경우 예외가 발생한다.") {
         // given
         val lottoNumbers: Set<LottoNumber> = setOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
         )
 
         // when then
@@ -23,12 +23,12 @@ internal class LottoTicketTest : FunSpec({
     test("6자리 숫자는 중복을 허용하지 않는다.") {
         // given
         val lottoNumbers: Set<LottoNumber> = setOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(5),
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(5),
         )
 
         // when then

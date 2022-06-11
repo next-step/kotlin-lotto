@@ -43,7 +43,7 @@ internal class LottoManagerTest : FunSpec({
     test("로또 티켓과 당첨 번호를 비교하여, 6개가 모두 매칭되는 경우 1등이 반환된다.") {
         // given
         val purchaseLottoTicket = LottoTicketFixture.simpleLottoTicket()
-        val winningNumbersTicket = LottoTicketFixture.simpleLottoTicket(number1 = 10)
+        val winningNumbersTicket = LottoTicketFixture.simpleLottoTicket()
 
         // when
         val result: LottoPrize = LottoManager.winningConfirmation(purchaseLottoTicket, winningNumbersTicket)
@@ -65,12 +65,12 @@ object LottoTicketFixture {
     ): LottoTicket {
         return LottoTicket(
             setOf(
-                LottoNumber(number1),
-                LottoNumber(number2),
-                LottoNumber(number3),
-                LottoNumber(number4),
-                LottoNumber(number5),
-                LottoNumber(number6),
+                LottoNumber.of(number1),
+                LottoNumber.of(number2),
+                LottoNumber.of(number3),
+                LottoNumber.of(number4),
+                LottoNumber.of(number5),
+                LottoNumber.of(number6),
             )
         )
     }

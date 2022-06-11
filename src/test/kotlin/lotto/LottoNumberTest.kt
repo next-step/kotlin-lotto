@@ -11,7 +11,7 @@ internal class LottoNumberTest : FunSpec({
         listOf(1, 45).forEach() {
             // when then
             shouldNotThrowAny {
-                LottoNumber(it)
+                LottoNumber.of(it)
             }
         }
     }
@@ -21,7 +21,7 @@ internal class LottoNumberTest : FunSpec({
         listOf(-1, 0, 46).forEach() {
             // when then
             shouldThrow<IllegalArgumentException> {
-                LottoNumber(it)
+                LottoNumber.of(it)
             }
         }
     }
