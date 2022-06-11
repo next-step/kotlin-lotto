@@ -6,7 +6,7 @@ import java.math.BigDecimal
 
 object ResultView {
     fun printTickets(purchase: Purchase) {
-        println("수동으로 ${purchase.manualTickets.lottoTickets.size}장, 자동으로 ${purchase.autoTickets.lottoTickets.size}개를 구매했습니다.")
+        println("수동으로 ${purchase.manualTicketSize}장, 자동으로 ${purchase.autoTicketSize}개를 구매했습니다.")
 
         purchase.totalTickets.lottoTickets.forEach { lottoTicket ->
             println(lottoTicket.numbers.map { it.number })

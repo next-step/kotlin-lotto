@@ -5,4 +5,6 @@ data class Purchase(
     val manualTickets: LottoTickets
 ) {
     val totalTickets = LottoTickets(manualTickets.lottoTickets + autoTickets.lottoTickets)
+    val manualTicketSize = manualTickets.lottoTickets.size
+    val autoTicketSize = autoTickets.lottoTickets.size
 }
