@@ -33,4 +33,12 @@ internal class MoneyTest : StringSpec({
 
         shouldThrow<IllegalArgumentException>(throwableAction)
     }
+
+    "금액의 경우 비교될 수 있다." {
+        val money = Money(1000)
+
+        val result = money.isGreaterThan(Money(999))
+
+        result shouldBe true
+    }
 })
