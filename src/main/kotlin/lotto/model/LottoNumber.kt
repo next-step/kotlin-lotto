@@ -9,9 +9,7 @@ value class LottoNumber private constructor(
         validateNumberRange(number)
     }
 
-    override fun toString(): String {
-        return "$number"
-    }
+    override fun toString() = "$number"
 
     companion object {
         private const val MIN_LOTTO_NUMBER = 1
