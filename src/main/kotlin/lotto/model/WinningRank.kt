@@ -13,7 +13,7 @@ enum class WinningRank(
     FIFTH_PRIZE(3, 5_000, false),
     NONE(0, 0, false);
 
-    fun isNotPrize() = this == NONE
+    fun isPrize() = this != NONE
 
     companion object {
         fun of(matchedNumberCount: Int, matchBonusNumber: Boolean): WinningRank {

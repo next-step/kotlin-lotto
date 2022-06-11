@@ -1,9 +1,10 @@
 package lotto.model
 
+import java.util.EnumMap
 import kotlin.math.floor
 
 class WinningStatistics private constructor(
-    val winningStatistics: LinkedHashMap<WinningRank, Int>
+    val winningStatistics: EnumMap<WinningRank, Int>
 ) {
 
     fun calculateEarningRatio(paymentPrice: Int): Double {
@@ -13,11 +14,11 @@ class WinningStatistics private constructor(
 
     companion object {
         fun from(winningRanks: List<WinningRank>): WinningStatistics {
-            val statistics = WinningRank.values().filter { it.isNotPrize() }
+            return WinningRank.values().filter { it.isPrize() }
                 .reversed()
                 .associateWith { rank -> winningRanks.count { rank == it } }
-
-            return WinningStatistics(statistics as LinkedHashMap<WinningRank, Int>)
+                .toMap(EnumMap(WinningRank::class.java))
+                .let(::WinningStatistics)
         }
     }
 }
