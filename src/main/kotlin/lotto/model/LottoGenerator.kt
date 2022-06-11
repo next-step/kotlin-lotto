@@ -6,7 +6,7 @@ object LottoGenerator {
     fun generateLottos(
         paymentPrice: Int,
         customLottos: Lottos,
-        lottoGeneratingStrategy: LottoGeneratingStrategy
+        lottoGeneratingStrategy: LottoGeneratingStrategy = RandomLottoGenerating
     ): Lottos {
         val customLottoPrice = customLottos.count * LOTTO_PRICE
 

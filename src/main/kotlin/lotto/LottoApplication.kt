@@ -5,7 +5,6 @@ import lotto.model.Lotto
 import lotto.model.LottoGenerator
 import lotto.model.LottoNumber
 import lotto.model.Lottos
-import lotto.model.RandomLottoGenerating
 import lotto.model.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -26,8 +25,7 @@ object LottoApplication {
 
         val totalLottos = LottoGenerator.generateLottos(
             paymentPrice = paymentPrice,
-            customLottos = Lottos(customLottos),
-            lottoGeneratingStrategy = RandomLottoGenerating,
+            customLottos = Lottos(customLottos)
         )
         resultView.printLottoCount(
             customLottoCount = customLottoCount,

@@ -17,7 +17,7 @@ class LottoGeneratorTest {
 
         // when, then
         val exception = assertThrows<IllegalArgumentException> {
-            LottoGenerator.generateLottos(paymentPrice, customLottos, RandomLottoGenerating)
+            LottoGenerator.generateLottos(paymentPrice, customLottos)
         }
         assertEquals("구입금액은 최소 1000원 이상이어야 합니다.", exception.message)
     }
