@@ -6,11 +6,11 @@ class LottoWinning(
 ) {
 
     private fun matchCount(ticket: LottoTicket): Int {
-        return numbers.intersect(ticket.numbers.toSet()).size
+        return numbers.intersect(ticket.set).size
     }
 
     private fun isMatchBonus(ticket: LottoTicket, bonusNumber: LottoNumber): Boolean {
-        return bonusNumber in ticket.numbers
+        return ticket.contain(bonusNumber)
     }
 
     private fun getPrize(ticket: LottoTicket): LottoPrize? {
@@ -22,9 +22,7 @@ class LottoWinning(
 
     fun getPrizes(lottoTickets: LottoTickets): LottoPrizes {
         return LottoPrizes(
-            lottoTickets.lottoTickets.mapNotNull {
-                getPrize(it)
-            }
+            lottoTickets.toMap { getPrize(it) }.filterNotNull()
         )
     }
 }

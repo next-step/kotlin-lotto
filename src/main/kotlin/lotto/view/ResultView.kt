@@ -8,9 +8,9 @@ object ResultView {
     fun printTickets(purchase: Purchase) {
         println("수동으로 ${purchase.manualTicketSize}장, 자동으로 ${purchase.autoTicketSize}개를 구매했습니다.")
 
-        purchase.totalTickets.lottoTickets.forEach { lottoTicket ->
-            println(lottoTicket.numbers.sortedBy { it.number }.map { it.number })
-        }
+        purchase.totalTickets.toMap { lottoTicket ->
+            lottoTicket.sortedNumbers.map { it.number }
+        }.forEach(::println)
     }
 
     fun printResult(prizeResult: List<Pair<LottoPrize, Int>>, earnings: BigDecimal) {

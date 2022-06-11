@@ -17,7 +17,7 @@ internal class LottoMachineTest {
             randomNumberFunc = randomNumberFunc
         )
 
-        assertThat(lottoTickets.autoTickets.lottoTickets.size).isEqualTo(1)
+        assertThat(lottoTickets.autoTickets.ticketSize).isEqualTo(1)
     }
 
     @Test
@@ -28,7 +28,7 @@ internal class LottoMachineTest {
             randomNumberFunc = randomNumberFunc
         )
 
-        assertThat(lottoTickets.autoTickets.lottoTickets.size).isEqualTo(1)
+        assertThat(lottoTickets.autoTickets.ticketSize).isEqualTo(1)
     }
 
     @Test
@@ -39,7 +39,7 @@ internal class LottoMachineTest {
             randomNumberFunc = randomNumberFunc
         )
 
-        assertThat(lottoTickets.autoTickets.lottoTickets.size).isEqualTo(1)
+        assertThat(lottoTickets.autoTickets.ticketSize).isEqualTo(1)
     }
 
     @Test
@@ -52,8 +52,8 @@ internal class LottoMachineTest {
             randomNumberFunc = randomNumberFunc
         )
 
-        assertThat(purchase.manualTickets.lottoTickets.size).isEqualTo(1)
-        assertThat(purchase.autoTickets.lottoTickets.size).isEqualTo(2)
+        assertThat(purchase.manualTickets.ticketSize).isEqualTo(1)
+        assertThat(purchase.autoTickets.ticketSize).isEqualTo(2)
     }
 
     @Test
@@ -70,7 +70,7 @@ internal class LottoMachineTest {
             randomNumberFunc = randomNumberFunc
         )
 
-        assertThat(purchase.manualTickets.lottoTickets.size).isEqualTo(3)
-        assertThat(purchase.autoTickets.lottoTickets.size).isEqualTo(0)
+        assertThat(purchase.manualTickets.ticketSize).isEqualTo(3)
+        assertThat(purchase.autoTickets.ticketSize).isEqualTo(0)
     }
 }
