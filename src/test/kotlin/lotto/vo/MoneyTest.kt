@@ -37,7 +37,7 @@ internal class MoneyTest : StringSpec({
     "금액의 경우 비교될 수 있다." {
         val money = Money(1000)
 
-        val result = money.isGreaterThan(Money(999))
+        val result = money.isGreaterOrEqualThan(Money(999))
 
         result shouldBe true
     }
