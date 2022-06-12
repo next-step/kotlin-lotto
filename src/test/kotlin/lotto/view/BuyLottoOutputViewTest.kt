@@ -111,11 +111,16 @@ class BuyLottoOutputViewTest : DescribeSpec({
         buyLottoOutputView.showTotalWinningInformation(boughtTicketTotalMoney, winingStats)
 
         // then
-        outputStore[0] shouldBe "당첨통계\n" + "---------"
-        outputStore[1] shouldBe "3개 일치 (3000원)- 30개\n" +
-            "4개 일치 (4000원)- 40개\n" +
-            "5개 일치 (5000원)- 50개\n" +
-            "5개 일치, 보너스 볼 일치 (8000원)- 50개"
+        outputStore[0] shouldBe """
+            당첨통계
+            ---------
+        """.trimIndent()
+        outputStore[1] shouldBe """
+            3개 일치 (3000원)- 30개
+            4개 일치 (4000원)- 40개
+            5개 일치 (5000원)- 50개
+            5개 일치, 보너스 볼 일치 (8000원)- 50개
+        """.trimIndent()
         outputStore[2] shouldBe "총 수익률은 900.0입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
     }
 })
