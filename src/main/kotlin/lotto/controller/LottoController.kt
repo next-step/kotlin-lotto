@@ -105,7 +105,7 @@ object LottoController {
             InputView.receiveUserInputWithoutMessage(userInputRequest)
         }
 
-        return Lottos(lottos)
+        return Lottos.from(lottos)
     }
 
     private fun getAutomaticLottoPurchaseAmount(

@@ -36,7 +36,7 @@ class WinningNumbersTest {
 
     @Test
     fun `checkWith를 통해 Lottos를 받아 LottoResult를 반환한다`() {
-        val lottos = Lottos(
+        val lottos = Lottos.from(
             listOf(
                 Lotto.from(8, 21, 23, 41, 42, 43),
                 Lotto.from(8, 21, 23, 41, 42, 44),

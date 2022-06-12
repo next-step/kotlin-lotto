@@ -13,7 +13,7 @@ class LottosTest {
             Lotto.from(12, 22, 32, 24, 25, 26)
         )
 
-        val lottos = Lottos(lottoList)
+        val lottos = Lottos.from(lottoList)
 
         assertThat(lottos.value).isEqualTo(lottoList)
     }
