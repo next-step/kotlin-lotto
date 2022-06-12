@@ -24,23 +24,4 @@ class LottoPrizePolicy(
         }
         return false
     }
-
-    override fun equals(other: Any?): Boolean {
-        if (other !is LottoPrizePolicy) {
-            return false
-        }
-        if ((other.includeBonusNumber == null || this.includeBonusNumber == null) &&
-            other.winningNumberMatchCount == this.winningNumberMatchCount
-        ) {
-            return true
-        }
-        if ((other.includeBonusNumber != null && this.includeBonusNumber != null) &&
-            (other.includeBonusNumber == this.includeBonusNumber) &&
-            (other.winningNumberMatchCount == this.winningNumberMatchCount)
-        ) {
-            return true
-        }
-
-        return false
-    }
 }
