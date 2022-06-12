@@ -1,6 +1,7 @@
 package lottoview
 
 import lotto.LottoWinningInfo
+import lotto.WinningPriceEnum
 
 object LottoOutputView {
 
@@ -17,7 +18,7 @@ object LottoOutputView {
         winningInfo.scoreInfos.sortBy { it.match }
         winningInfo.scoreInfos.forEach {
             var message = CONTAIN_MESSAGE.format(it.match, it.price, it.count)
-            if (it.match == 7) {
+            if (it.match == WinningPriceEnum.FIVE_BONUS.number) {
                 message = BONUS_CONTAIN_MESSAGE.format(5, it.price, it.count)
             }
             println(message)

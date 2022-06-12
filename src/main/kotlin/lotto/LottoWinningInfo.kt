@@ -22,20 +22,25 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
         val matchNumberMap = matchCount(issuedLottos, winningNumbers)
         val matchedFiveNumber = matchNumberMap.any { it.key == 5 && it.value > 0 }
 
-        scoreInfos = matchNumberMap.filter { it.key > 0 }.map {
-            ScoreInfo(it.key, getPrice(it.key), it.value)
-        }.toMutableList()
+        val filtered = matchNumberMap.filter { it.key > 0 }
+        scoreInfos = setScoreInfos(filtered, null)
 
         if (matchedFiveNumber) {
-            matchCount(issuedLottos, listOf(bonusNumber)).filter { it.key > 0 && it.value > 0 }.map {
-                scoreInfos.add(ScoreInfo(7, getPrice(7), it.value))
-            }
+            val bonusFiltered = matchCount(issuedLottos, listOf(bonusNumber)).filter { it.key > 0 && it.value > 0 }
+            val bonusList = setScoreInfos(bonusFiltered, WinningPriceEnum.FIVE_BONUS.number)
+            scoreInfos.addAll(bonusList)
         }
         revenue = LottoWinningHandler.calculateRevenue(scoreInfos)
     }
 
     fun getRevenuePercentage(amount: Int, revenue: Int): Double {
         return (revenue / amount).toDouble()
+    }
+
+    private fun setScoreInfos(filtered: Map<Int, Int>, magicNumber: Int?): MutableList<ScoreInfo> {
+        return filtered.map {
+            ScoreInfo(magicNumber ?: it.key, getPrice(magicNumber ?: it.key), it.value)
+        }.toMutableList()
     }
 
     companion object {

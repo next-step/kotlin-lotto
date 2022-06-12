@@ -15,7 +15,7 @@ object LottoInputView {
 
         return priceInfo
     }
-    
+
     fun inputWinningNumbersAndBonusNumber(): LottoWinningInfo {
         println(INPUT_WINNING_NUMBER_MESSAGE)
         val winningNumbers = readln()
