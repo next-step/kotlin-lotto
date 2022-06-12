@@ -4,8 +4,8 @@ object EquationParser {
 
     fun parse(input: String): List<Operand> {
         if (input.isBlank()) {
-            return listOf(Operand(0))
+            return listOf(Operand.DEFAULT)
         }
-        return input.split(",", ":").map { Operand(it.toInt()) }
+        return input.split(",", ":").map { Operand.from(it) }
     }
 }
