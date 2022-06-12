@@ -6,6 +6,10 @@ object EquationParser {
         if (input.isBlank()) {
             return listOf(Operand.DEFAULT)
         }
-        return input.split(",", ":").map { Operand.from(it) }
+        val matchResult = Regex("//(.)\n(.*)").find(input) ?: return input.split(",", ":").map { Operand.from(it) }
+
+        val customDelimiter = matchResult.groupValues[1]
+
+        return matchResult.groupValues[2].split(customDelimiter).map { Operand.from(it) }
     }
 }

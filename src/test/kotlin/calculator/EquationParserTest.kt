@@ -41,6 +41,14 @@ internal class EquationParserTest {
             .isEqualTo(expectedResult)
     }
 
+    @ParameterizedTest
+    @MethodSource("customDelimiter")
+    fun `커스텀 구분자 사용`(input: String, expectedResult: List<Int>) {
+        assertThat(EquationParser.parse(input))
+            .flatExtracting(Operand::operand)
+            .isEqualTo(expectedResult)
+    }
+
     companion object {
         @JvmStatic
         fun `oneNumber`(): Stream<Arguments> {
@@ -66,6 +74,15 @@ internal class EquationParserTest {
                 Arguments.of("1, 5:10", listOf(1, 5, 10)),
                 Arguments.of("99, 2:111", listOf(99, 2, 111)),
                 Arguments.of("0, 7:6", listOf(0, 7, 6)),
+            )
+        }
+
+        @JvmStatic
+        fun `customDelimiter`(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of("//a\n1a 5a10", listOf(1, 5, 10)),
+                Arguments.of("//;\n99; 2;111", listOf(99, 2, 111)),
+                Arguments.of("//ㅎ\n0ㅎ 7ㅎ6", listOf(0, 7, 6)),
             )
         }
     }
