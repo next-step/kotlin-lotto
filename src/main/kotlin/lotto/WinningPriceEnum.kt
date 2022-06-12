@@ -11,10 +11,6 @@ enum class WinningPriceEnum(val number: Int, val price: Int) {
     FIVE(5, 1500000),
     SIX(6, 2000000000),
     FIVE_BONUS(7, 30000000);
-
-    fun getMatchedCountForNumber(): Map<WinningPriceEnum, Int> {
-        return mapOf()
-    }
 }
 
 fun getPrice(number: Int): Int {
