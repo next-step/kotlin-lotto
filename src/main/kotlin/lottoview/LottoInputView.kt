@@ -23,6 +23,8 @@ object LottoInputView {
         println(INPUT_BONUS_NUMBER_MESSAGE)
         val bonusNumber = readln()
 
+        require(winningNumbers.contains(","))
+
         return LottoWinningInfo(winningNumbers, bonusNumber)
     }
 

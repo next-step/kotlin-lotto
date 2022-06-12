@@ -1,13 +1,14 @@
 package lottoview
 
+import lotto.LottoTicket
 import lotto.LottoWinningInfo
 import lotto.WinningPriceEnum
 
 object LottoOutputView {
 
-    fun displayIssuedLottos(issuedLottos: List<List<Int>>) {
+    fun displayIssuedLottos(issuedLottos: List<LottoTicket>) {
         issuedLottos.forEach {
-            println(it)
+            println(it.ticket)
         }
     }
 

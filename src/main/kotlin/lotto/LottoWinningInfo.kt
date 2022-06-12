@@ -9,8 +9,6 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
     var revenue = 0
 
     init {
-        require(winningNumberInput.contains(","))
-
         winningNumbers = winningNumberInput.split(",").map { it.replace(" ", "").toInt() }.toMutableList()
         bonusNumber = bonusNumberInput.toInt()
 
@@ -18,15 +16,15 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
         require(LOTTO_NUMBER_RANGE.contains(bonusNumber) && !winningNumbers.contains(bonusNumber))
     }
 
-    fun setScore(issuedLottos: List<List<Int>>) {
+    fun setScore(issuedLottos: List<LottoTicket>) {
         val matchNumberMap = matchCount(issuedLottos, winningNumbers)
-        val matchedFiveNumber = matchNumberMap.any { it.key == WinningPriceEnum.FIVE.number && it.value > 0 }
+        val matchedFiveNumber = matchNumberMap.any { (winningNumber, count) -> winningNumber.number == WinningPriceEnum.FIVE.number && count > 0 }
 
-        val filtered = matchNumberMap.filter { it.key > 0 }
+        val filtered = matchNumberMap.filter { (winningNumber, count) -> winningNumber.number > 0 }
         scoreInfos = setScoreInfos(filtered, null)
 
         if (matchedFiveNumber) {
-            val bonusFiltered = matchCount(issuedLottos, listOf(bonusNumber)).filter { it.key > 0 && it.value > 0 }
+            val bonusFiltered = matchCount(issuedLottos, listOf(bonusNumber)).filter { (winningNumber, count) -> winningNumber.number > 0 && count > 0 }
             val bonusList = setScoreInfos(bonusFiltered, WinningPriceEnum.FIVE_BONUS.number)
             scoreInfos.addAll(bonusList)
         }
@@ -37,9 +35,9 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
         return (revenue / amount).toDouble()
     }
 
-    private fun setScoreInfos(filtered: Map<Int, Int>, magicNumber: Int?): MutableList<ScoreInfo> {
-        return filtered.map {
-            ScoreInfo(magicNumber ?: it.key, getPrice(magicNumber ?: it.key), it.value)
+    private fun setScoreInfos(filtered: Map<WinningPriceEnum, Int>, magicNumber: Int?): MutableList<ScoreInfo> {
+        return filtered.filter { (winningNumber, count) -> winningNumber != WinningPriceEnum.ZERO }.map { (winningNumber, count) ->
+            ScoreInfo(magicNumber ?: winningNumber.number, getPrice(magicNumber ?: winningNumber.number), count)
         }.toMutableList()
     }
 
