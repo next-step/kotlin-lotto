@@ -21,6 +21,7 @@ class LottoApplication(
         val buyLottoInputView = BuyLottoInputView(inputModule, outPutModule)
 
         val userMoney = buyLottoInputView.readUserMoneyInput()
+        val passiveLottoTickets = buyLottoInputView.readPassiveTickets()
         val boughtLottoTickets = ticketSeller.buyPossibleLottoTicket(userMoney)
 
         buyLottoOutputView.showAllBoughtTickets(boughtLottoTickets)

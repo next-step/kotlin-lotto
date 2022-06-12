@@ -24,8 +24,21 @@ class LottoApplicationTest : DescribeSpec({
         val stubInputModule: InputModule = object : InputModule {
             val MONEY_STRING = (buyLottoNumbers.size * 1000).toString()
             val WINNING_NUMBER_STRING = "1, 2, 3, 4, 5, 6"
+            val PASSIVE_TICKETS = listOf(
+                "1, 2, 3 ,4 ,5, 6",
+                "1, 2, 3 ,4 ,5, 10",
+                "15, 14, 13 ,12 ,11, 10",
+            )
             val BONUS_NUMBER_STRING = "7"
-            val inputStore = mutableListOf(MONEY_STRING, WINNING_NUMBER_STRING, BONUS_NUMBER_STRING)
+            val inputStore = mutableListOf(
+                MONEY_STRING,
+                PASSIVE_TICKETS.size.toString(),
+                PASSIVE_TICKETS[0],
+                PASSIVE_TICKETS[1],
+                PASSIVE_TICKETS[2],
+                WINNING_NUMBER_STRING,
+                BONUS_NUMBER_STRING
+            )
             override fun read(): String {
                 return inputStore.removeFirst()
             }
