@@ -23,13 +23,5 @@ value class Lotto(val numbers: Set<LottoNumber>) {
                 }.toSet()
             )
         }
-
-        fun from(numbers: List<Int>): Lotto {
-            return Lotto(
-                numbers.map { number ->
-                    LottoNumber[number]
-                }.toSet()
-            )
-        }
     }
 }
