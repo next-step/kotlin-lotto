@@ -1,8 +1,6 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.data.forAll
-import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class LottoPrizePolicyTest : DescribeSpec({
@@ -136,49 +134,6 @@ class LottoPrizePolicyTest : DescribeSpec({
 
             // then
             isWon shouldBe false
-        }
-    }
-
-    describe("같은 정책인지 확인할수 있다") {
-        forAll(
-            row(
-                "당첨번호 횟수가 일치하지 않은 경우",
-                LottoPrizePolicy(3, Money(1000)),
-                LottoPrizePolicy(4, Money(1000))
-            ),
-            row(
-                "당첨번호 횟수가 일치 하지만 보너스 볼 포함 여부가 다른 경우",
-                LottoPrizePolicy(3, Money(1000), true),
-                LottoPrizePolicy(3, Money(1000), false)
-            )
-        ) { label, aPolicy, bPolicy ->
-            it("$label 서로 다른 정책으로 본다") {
-                // then
-                (aPolicy == bPolicy) shouldBe false
-            }
-        }
-
-        forAll(
-            row(
-                "당첨번호 횟수가 일치하는 경우",
-                LottoPrizePolicy(3, Money(1000)),
-                LottoPrizePolicy(3, Money(1000))
-            ),
-            row(
-                "당첨번호 횟수, 보너스 볼 포함 여부가 일치하는 경우",
-                LottoPrizePolicy(3, Money(1000), true),
-                LottoPrizePolicy(3, Money(1000), true)
-            ),
-            row(
-                "한쪽만 보너스 볼 포함을 설정하고 당첨번호 횟수 일치 경우",
-                LottoPrizePolicy(3, Money(1000), true),
-                LottoPrizePolicy(3, Money(1000))
-            ),
-        ) { label, aPolicy, bPolicy ->
-            it("$label 서로 같은 정책으로 본다") {
-                // then
-                (aPolicy == bPolicy) shouldBe true
-            }
         }
     }
 })

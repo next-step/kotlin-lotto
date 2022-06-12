@@ -81,9 +81,8 @@ class LottoApplicationTest : DescribeSpec({
             5개 일치, 보너스 볼 일치 (30000000원)- 1개
             5개 일치 (1500000원)- 2개
             4개 일치 (50000원)- 1개
-            5개 일치 (1500000원)- 2개
             3개 일치 (5000원)- 1개
         """.trimIndent()
-        stubOutPutModule.writeStore shouldContain "총 수익률은 366914.09입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+        stubOutPutModule.writeStore shouldContain "총 수익률은 366641.36입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
     }
 })
