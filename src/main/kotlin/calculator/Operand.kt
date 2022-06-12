@@ -4,6 +4,10 @@ private fun Int.isNegativeNumber(): Boolean {
     return this < 0
 }
 
+fun List<Operand>.sum(): Int {
+    return this.sumOf { it.operand }
+}
+
 @JvmInline
 value class Operand private constructor(
     val operand: Int
@@ -22,3 +26,4 @@ value class Operand private constructor(
         }
     }
 }
+
