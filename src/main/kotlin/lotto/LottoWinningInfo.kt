@@ -20,7 +20,7 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
 
     fun setScore(issuedLottos: List<List<Int>>) {
         val matchNumberMap = matchCount(issuedLottos, winningNumbers)
-        val matchedFiveNumber = matchNumberMap.any { it.key == 5 && it.value > 0 }
+        val matchedFiveNumber = matchNumberMap.any { it.key == WinningPriceEnum.FIVE.number && it.value > 0 }
 
         val filtered = matchNumberMap.filter { it.key > 0 }
         scoreInfos = setScoreInfos(filtered, null)
