@@ -1,11 +1,11 @@
 package lotto.domain
 
 import lotto.domain.enums.Priority
-import lotto.domain.interfaces.LottoFixedNumbers
+import lotto.domain.interfaces.LottoNumberGenerator
 
 object LottoCommittee {
     fun createWinningTicket(input: String, bonusBall: String): WinningTicket {
-        val lottoNumbers = LottoFixedNumbers.getInstance().convertLottoNumbers(input.split(",").map { it.toInt() })
+        val lottoNumbers = LottoNumberGenerator().convertLottoNumbers(input.split(",").map { it.toInt() })
         val lottoTicket = LottoTicket(lottoNumbers)
         return WinningTicket(lottoTicket, bonusBall.toInt())
     }

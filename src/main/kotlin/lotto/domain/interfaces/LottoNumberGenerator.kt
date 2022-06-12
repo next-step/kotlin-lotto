@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.interfaces.LottoNumbers.Companion.MAX_LOTTO_INDEX
 import lotto.domain.interfaces.LottoNumbers.Companion.MIN_LOTTO_INDEX
 
-class LottoRandomNumbers private constructor() : LottoNumbers {
+class LottoNumberGenerator : LottoNumbers {
     private val randomNumbers
         get() = LottoNumber
             .LOTTO_NUMBER_RANGE
@@ -14,19 +14,10 @@ class LottoRandomNumbers private constructor() : LottoNumbers {
             .sorted()
 
     override fun createNumbers(): Set<LottoNumber> {
-        val lottoNumbers = mutableSetOf<LottoNumber>()
-        for (number in randomNumbers) {
-            lottoNumbers.add(LottoNumber.of(number))
-        }
-
-        return lottoNumbers
+        return randomNumbers.map { number -> LottoNumber.of(number) }.toSet()
     }
 
-    companion object {
-        private val instance = LottoRandomNumbers()
-
-        fun getInstance(): LottoRandomNumbers {
-            return instance
-        }
+    override fun convertLottoNumbers(inputs: List<Int>): Set<LottoNumber> {
+        return inputs.toSortedSet().map { input -> LottoNumber.of(input) }.toSet()
     }
 }

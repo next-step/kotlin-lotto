@@ -1,10 +1,10 @@
 package lotto.domain
 
-import lotto.domain.interfaces.LottoFixedNumbers
-import lotto.domain.interfaces.LottoRandomNumbers
+import lotto.domain.interfaces.LottoNumberGenerator
 
 object LottoMarket {
     private const val lottoPrice = 1_000
+    private val generator = LottoNumberGenerator()
 
     fun buy(price: Int, manualInputs: List<String>): Lottos {
         println("${price / lottoPrice}개를 구매했습니다.")
@@ -15,11 +15,11 @@ object LottoMarket {
     }
 
     private fun manualLottoNumbers(input: String): Set<LottoNumber> {
-        return LottoFixedNumbers.getInstance().convertLottoNumbers(input.filter { !it.isWhitespace() }.split(",").map { it.toInt() })
+        return generator.convertLottoNumbers(input.filter { !it.isWhitespace() }.split(",").map { it.toInt() })
     }
 
     private fun autoLottoNumbers(): Set<LottoNumber> {
-        return LottoRandomNumbers.getInstance().createNumbers()
+        return generator.createNumbers()
     }
 
     private fun lottoAmount(price: Int): Int {
