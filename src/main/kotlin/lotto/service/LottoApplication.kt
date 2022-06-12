@@ -1,6 +1,7 @@
 package lotto.service
 
 import lotto.domain.LottoPrizeManager
+import lotto.domain.LottoTicket
 import lotto.domain.Money
 import lotto.domain.TicketSeller
 import lotto.util.InputModule
@@ -24,14 +25,17 @@ class LottoApplication(
         val passiveLottoTickets = buyLottoInputView.readPassiveTickets()
         val boughtLottoTickets = ticketSeller.buyPossibleLottoTicket(userMoney)
 
-        buyLottoOutputView.showAllBoughtTickets(boughtLottoTickets)
+        buyLottoOutputView.showAllBoughtTickets(boughtLottoTickets, passiveLottoTickets)
 
         val winningLottoTicketNumbers = buyLottoInputView.readWinningLottoNumbers()
+        val totalBoughtTickets: MutableList<LottoTicket> = mutableListOf()
+        totalBoughtTickets.addAll(boughtLottoTickets)
+        totalBoughtTickets.addAll(passiveLottoTickets)
 
         buyLottoOutputView.showTotalWinningInformation(
-            Money(boughtLottoTickets.size * lottoTicketPrice.value),
+            Money(totalBoughtTickets.size * lottoTicketPrice.value),
             lottoPrizeManager.getWinningStats(
-                boughtLottoTickets,
+                totalBoughtTickets,
                 winningLottoTicketNumbers
             )
         )

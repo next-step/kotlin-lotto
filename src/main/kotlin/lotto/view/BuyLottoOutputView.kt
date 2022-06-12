@@ -8,14 +8,11 @@ import kotlin.math.floor
 
 class BuyLottoOutputView(private val outPutModule: OutPutModule) {
 
-    fun showAllBoughtTickets(boughtTickets: List<LottoTicket>) {
+    fun showAllBoughtTickets(boughtTickets: List<LottoTicket>, passiveBoughtTicket: List<LottoTicket>) {
         var result = ""
-        result += "${boughtTickets.size}를 구매했습니다" + DIVIDING
-        boughtTickets.forEach { lottoTicket ->
-            result += lottoTicket
-                .lottoTicketNumbers.value.map { it.value }.sorted()
-                .joinToString(prefix = "[", postfix = "]") + DIVIDING
-        }
+        result += "수동으로 ${passiveBoughtTicket.size}장, 자동으로 ${boughtTickets.size}장을 구매했습니다." + DIVIDING
+        result += getTicketsNumberFormat(passiveBoughtTicket)
+        result += getTicketsNumberFormat(boughtTickets)
         outPutModule.write(result)
     }
 
@@ -23,6 +20,21 @@ class BuyLottoOutputView(private val outPutModule: OutPutModule) {
         this.showWinningStartLabel()
         this.showAllWinningStat(winningStatDTOs)
         this.showEarningsRate(boughtTicketTotalMoney, winningStatDTOs)
+    }
+
+    private fun getTicketsNumberFormat(lottoTickets: List<LottoTicket>): String {
+        var result = lottoTickets.map { lottoTicket ->
+            lottoTicket.lottoTicketNumbers.value
+                .map { it.value }
+                .sorted()
+                .joinToString(prefix = "[", postfix = "]")
+        }.joinToString(separator = DIVIDING)
+
+        if (result.isNotEmpty()) {
+            result += DIVIDING
+        }
+
+        return result
     }
 
     private fun showWinningStartLabel() {
@@ -51,7 +63,7 @@ class BuyLottoOutputView(private val outPutModule: OutPutModule) {
     }
 
     private fun showEarningsRate(boughtTicketTotalMoney: Money, winningStatDTOs: List<WinningStatDto>) {
-        var totalPrizeInt = 0
+        var totalPrizeInt: Long = 0
         winningStatDTOs.forEach { winningStatDto -> totalPrizeInt += winningStatDto.totalWinningPrize.value }
         val earningsRate = floor((totalPrizeInt.toDouble() / boughtTicketTotalMoney.value) * 100) / 100
         outPutModule.write("총 수익률은 ${earningsRate}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")

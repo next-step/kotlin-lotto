@@ -9,18 +9,18 @@ class LottoPrizeManagerTest : DescribeSpec({
         // given
         val lottoPrizeManager = LottoPrizeManager()
         val allMatchedWinningLottoInts = listOf(1, 2, 3, 4, 5, 6)
-        val threeMatchedWinningLottoInts = mutableListOf(21, 22, 23)
-        threeMatchedWinningLottoInts.addAll(allMatchedWinningLottoInts.take(3))
         val bonusLottoNumber = LottoTicketNumber(7)
+
+        val oneRankLottoNumber = allMatchedWinningLottoInts.toList()
+        val twoRankLottoNumber = mutableListOf<Int>()
+        twoRankLottoNumber.addAll(allMatchedWinningLottoInts.take(5))
+        twoRankLottoNumber.add(bonusLottoNumber.value)
+
         val winningLottoNumbers =
             WinningLottoNumbers(LottoTicketNumbers.ofInts(allMatchedWinningLottoInts), bonusLottoNumber)
-        val lottoTickets: List<LottoTicket> = listOf<LottoTicket>(
-            LottoTicket.ofInts(allMatchedWinningLottoInts),
-            LottoTicket.ofInts(allMatchedWinningLottoInts),
-            LottoTicket.ofInts(allMatchedWinningLottoInts),
-            LottoTicket.ofInts(threeMatchedWinningLottoInts),
-            LottoTicket.ofInts(threeMatchedWinningLottoInts),
-            LottoTicket.ofInts(listOf(1, 2, 20, 21, 22, 23)),
+        val lottoTickets: List<LottoTicket> = listOf(
+            LottoTicket.ofInts(oneRankLottoNumber),
+            LottoTicket.ofInts(twoRankLottoNumber)
         )
 
         // when
@@ -29,14 +29,12 @@ class LottoPrizeManagerTest : DescribeSpec({
         // then
         // 6개 번호 일치한 당첨 정책 확인
         winningStats[0].lottoPrizePolicy.winningNumberMatchCount shouldBe 6
-        winningStats[0].lottoPrizePolicy.wonPrize shouldBe Money(60000)
-        winningStats[0].totalWinningCount shouldBe 3
-        winningStats[0].totalWinningPrize shouldBe Money(3 * 60000)
+        winningStats[0].totalWinningCount shouldBe 1
+        winningStats[0].totalWinningPrize shouldBe Money(1 * winningStats[0].lottoPrizePolicy.wonPrize.value)
 
-        // 3개 일치한 당첨 정책 확인
-        winningStats[1].lottoPrizePolicy.winningNumberMatchCount shouldBe 3
-        winningStats[1].lottoPrizePolicy.wonPrize shouldBe Money(30000)
-        winningStats[1].totalWinningCount shouldBe 2
-        winningStats[1].totalWinningPrize shouldBe Money(2 * 30000)
+        // 5개 일치한 당첨 정책 확인
+        winningStats[1].lottoPrizePolicy.winningNumberMatchCount shouldBe 5
+        winningStats[1].totalWinningCount shouldBe 1
+        winningStats[1].totalWinningPrize shouldBe Money(1 * winningStats[1].lottoPrizePolicy.wonPrize.value)
     }
 })

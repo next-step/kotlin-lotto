@@ -25,20 +25,75 @@ class BuyLottoOutputViewTest : DescribeSpec({
         }
     }
 
-    it("구매한 티켓을 보여준다") {
-        // given
-        val buyLottoOutputView = BuyLottoOutputView(stubOutputModule)
-        val lottoTickets: List<LottoTicket> = listOf(
-            LottoTicket.ofInts(listOf(1, 2, 3, 4, 5, 6)),
-            LottoTicket.ofInts(listOf(11, 12, 13, 14, 15, 16)),
-            LottoTicket.ofInts(listOf(21, 22, 23, 24, 25, 26)),
-        )
+    describe("구매한 티켓을 보여준다") {
+        it("수동, 자동으로 구매한 티켓을 보여준다") {
+            // given
+            val buyLottoOutputView = BuyLottoOutputView(stubOutputModule)
+            val lottoTickets: List<LottoTicket> = listOf(
+                LottoTicket.ofInts(listOf(1, 2, 3, 4, 5, 6)),
+                LottoTicket.ofInts(listOf(11, 12, 13, 14, 15, 16)),
+                LottoTicket.ofInts(listOf(21, 22, 23, 24, 25, 26)),
+            )
+            val passiveLottoTicket: List<LottoTicket> = listOf(
+                LottoTicket.ofInts(listOf(21, 22, 23, 24, 25, 26)),
+                LottoTicket.ofInts(listOf(31, 32, 33, 34, 35, 36))
+            )
 
-        // when
-        buyLottoOutputView.showAllBoughtTickets(lottoTickets)
+            // when
+            buyLottoOutputView.showAllBoughtTickets(lottoTickets, passiveLottoTicket)
 
-        // then
-        outputStore[0] shouldBe "3를 구매했습니다\n" + "[1, 2, 3, 4, 5, 6]\n" + "[11, 12, 13, 14, 15, 16]\n" + "[21, 22, 23, 24, 25, 26]\n"
+            // then
+            outputStore[0] shouldBe """
+            수동으로 2장, 자동으로 3장을 구매했습니다.
+            [21, 22, 23, 24, 25, 26]
+            [31, 32, 33, 34, 35, 36]
+            [1, 2, 3, 4, 5, 6]
+            [11, 12, 13, 14, 15, 16]
+            [21, 22, 23, 24, 25, 26]
+            """.trimIndent() + "\n"
+        }
+
+        it("수동으로 구매한 티켓이 없는 경우 자동으로 구매한 티켓만 보여준다") {
+            // given
+            val buyLottoOutputView = BuyLottoOutputView(stubOutputModule)
+            val lottoTickets: List<LottoTicket> = emptyList()
+            val passiveLottoTicket: List<LottoTicket> = listOf(
+                LottoTicket.ofInts(listOf(21, 22, 23, 24, 25, 26)),
+                LottoTicket.ofInts(listOf(31, 32, 33, 34, 35, 36))
+            )
+
+            // when
+            buyLottoOutputView.showAllBoughtTickets(lottoTickets, passiveLottoTicket)
+
+            // then
+            outputStore[0] shouldBe """
+            수동으로 2장, 자동으로 0장을 구매했습니다.
+            [21, 22, 23, 24, 25, 26]
+            [31, 32, 33, 34, 35, 36]
+            """.trimIndent() + "\n"
+        }
+
+        it("자동으로 구매한 티켓이 없는 경우 수동으로 구매한 티켓만 보여준다") {
+            // given
+            val buyLottoOutputView = BuyLottoOutputView(stubOutputModule)
+            val lottoTickets: List<LottoTicket> = listOf(
+                LottoTicket.ofInts(listOf(1, 2, 3, 4, 5, 6)),
+                LottoTicket.ofInts(listOf(11, 12, 13, 14, 15, 16)),
+                LottoTicket.ofInts(listOf(21, 22, 23, 24, 25, 26)),
+            )
+            val passiveLottoTicket: List<LottoTicket> = emptyList()
+
+            // when
+            buyLottoOutputView.showAllBoughtTickets(lottoTickets, passiveLottoTicket)
+
+            // then
+            outputStore[0] shouldBe """
+            수동으로 0장, 자동으로 3장을 구매했습니다.
+            [1, 2, 3, 4, 5, 6]
+            [11, 12, 13, 14, 15, 16]
+            [21, 22, 23, 24, 25, 26]
+            """.trimIndent() + "\n"
+        }
     }
 
     it("당첨 통계 전체를 보여준다") {
