@@ -12,6 +12,14 @@ class LottoTicketNumbers private constructor(lottoNumbers: List<LottoTicketNumbe
         validateDuplicateLottoNumber()
     }
 
+    private fun validateDuplicateLottoNumber() {
+        val sortedLottoTicketNumbers = value.sortedBy { lottoTicketNumber -> lottoTicketNumber.value }
+        sortedLottoTicketNumbers.forEachIndexed { index, lottoTicketNumber ->
+            if (index + 1 == sortedLottoTicketNumbers.size) return@forEachIndexed
+            require(sortedLottoTicketNumbers[index + 1] != lottoTicketNumber) { "중복된 로또 번호가 있습니다" }
+        }
+    }
+
     fun hasNotLottoNumber(lottoTicketNumber: LottoTicketNumber): Boolean {
         return !hasLottoNumber(lottoTicketNumber)
     }
@@ -22,14 +30,6 @@ class LottoTicketNumbers private constructor(lottoNumbers: List<LottoTicketNumbe
 
     fun findMatchedCount(compareLottoNumbers: LottoTicketNumbers): Int {
         return value.count { lottoTicketNumber -> compareLottoNumbers.value.contains(lottoTicketNumber) }
-    }
-
-    private fun validateDuplicateLottoNumber() {
-        val sortedLottoTicketNumbers = value.sortedBy { lottoTicketNumber -> lottoTicketNumber.value }
-        sortedLottoTicketNumbers.forEachIndexed { index, lottoTicketNumber ->
-            if (index + 1 == sortedLottoTicketNumbers.size) return@forEachIndexed
-            require(sortedLottoTicketNumbers[index + 1] != lottoTicketNumber) { "중복된 로또 번호가 있습니다" }
-        }
     }
 
     companion object {

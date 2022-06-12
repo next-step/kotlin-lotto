@@ -18,12 +18,12 @@ class CustomExpressionParser(private val expression: String, defaultSeparators: 
         stringNumberParser = CustomNumbersStringParser(getNumbersExpressionString(), separators)
     }
 
-    private fun getNumbersExpressionString(): String {
-        return CustomSeparatorParser.REGEX_CUSTOM_SEPARATOR_EXPRESSION.replace(expression, "")
-    }
-
     private fun getCustomExpressionString(): String? {
         val matchResult = CustomSeparatorParser.REGEX_CUSTOM_SEPARATOR_EXPRESSION.find(expression)
         return matchResult?.groups?.get(0)?.value
+    }
+
+    private fun getNumbersExpressionString(): String {
+        return CustomSeparatorParser.REGEX_CUSTOM_SEPARATOR_EXPRESSION.replace(expression, "")
     }
 }
