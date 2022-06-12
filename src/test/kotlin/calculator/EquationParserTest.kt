@@ -1,12 +1,13 @@
 package calculator
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
-import java.lang.RuntimeException
+import java.util.stream.Stream
 
-class EquationParserTest {
+internal class EquationParserTest {
 
     @ValueSource(strings = [" ", ""])
     @ParameterizedTest
@@ -17,10 +18,38 @@ class EquationParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1", "99", "0"])
-    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환`(input: String) {
+    @MethodSource("oneNumber")
+    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환`(input: String, expectedResult: Int) {
         assertThat(EquationParser.parse(input))
             .flatExtracting(Operand::operand)
-            .containsExactly(input.toInt())
+            .containsExactly(expectedResult)
+    }
+
+    @ParameterizedTest
+    @MethodSource("commaDelimiter")
+    fun `숫자 두개를 컴마(,) 구분자로 구분`(input: String, expectedResult: List<Int>) {
+        assertThat(EquationParser.parse(input))
+            .flatExtracting(Operand::operand)
+            .isEqualTo(expectedResult)
+    }
+
+    companion object {
+        @JvmStatic
+        fun `oneNumber`(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of("1", 1),
+                Arguments.of("99", 99),
+                Arguments.of("0", 0),
+            )
+        }
+
+        @JvmStatic
+        fun `commaDelimiter`(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of("1, 10", listOf(1, 10)),
+                Arguments.of("99, 2", listOf(99, 2)),
+                Arguments.of("0, 7", listOf(0, 7)),
+            )
+        }
     }
 }
