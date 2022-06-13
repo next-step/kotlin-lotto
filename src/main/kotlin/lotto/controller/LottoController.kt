@@ -24,10 +24,19 @@ import lotto.view.outputconverter.TotalLottoReceiptConverter
 
 object LottoController {
     private const val GUIDANCE_MESSAGE_PURCHASE_AMOUNT = "구입 금액을 입력해 주세요."
+    private const val RETRY_MESSAGE_PURCHASE_AMOUNT = "다시 입력해 주세요. 구입 금액은 0을 초과하는 숫자로만 입력될 수 있습니다."
+
     private const val GUIDANCE_MESSAGE_MANUAL_LOTTO_PURCHASE_COUNT = "수동으로 구매할 로또 수를 입력해 주세요."
+    private const val RETRY_MESSAGE_MANUAL_LOTTO_PURCHASE_COUNT = "다시 입력해 주세요. 수동 발급 로또 수는 0 이상의 숫자로만 입력될 수 있습니다."
+
     private const val GUIDANCE_MESSAGE_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요."
+    private const val RETRY_MESSAGE_MANUAL_LOTTO_NUMBERS = "다시 입력해 주세요. 로또 번호는 1에서 45까지의 번호 6개로 이루어져야 합니다."
+
     private const val GUIDANCE_MESSAGE_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요."
+    private const val RETRY_MESSAGE_WINNING_NUMBERS = "다시 입력해 주세요. 당첨 번호는 1에서 45까지의 번호 6개로 이루어져야 합니다."
+
     private const val GUIDANCE_MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요."
+    private const val RETRY_MESSAGE_BONUS_BALL = "다시 입력해 주세요. 보너스 볼은 1에서 45까지의 번호 하나만 입력될 수 있습니다."
 
     fun execute() {
         val purchaseAmount = getPurchaseAmount()
@@ -67,7 +76,8 @@ object LottoController {
     private fun getPurchaseAmount(): Money {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_PURCHASE_AMOUNT,
-            inputConverter = MoneyConverter
+            inputConverter = MoneyConverter,
+            retryMessage = RETRY_MESSAGE_PURCHASE_AMOUNT
         )
 
         return InputView.receiveUserInput(userInputRequest)
@@ -83,7 +93,8 @@ object LottoController {
     private fun getManualLottoPurchaseCount(maximum: PurchaseCount): PurchaseCount {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_MANUAL_LOTTO_PURCHASE_COUNT,
-            inputConverter = PurchaseCountConverter
+            inputConverter = PurchaseCountConverter,
+            retryMessage = RETRY_MESSAGE_MANUAL_LOTTO_PURCHASE_COUNT
         )
 
         val receivedPurchaseCount = InputView.receiveUserInput(userInputRequest)
@@ -98,7 +109,8 @@ object LottoController {
 
         val userInputRequest = UserInputRequest(
             message = "",
-            inputConverter = LottoConverter
+            inputConverter = LottoConverter,
+            retryMessage = RETRY_MESSAGE_MANUAL_LOTTO_NUMBERS
         )
 
         val lottos = List(purchaseCount.value) {
@@ -119,7 +131,8 @@ object LottoController {
     private fun getWinningNumbers(): Lotto {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_WINNING_NUMBERS,
-            inputConverter = LottoConverter
+            inputConverter = LottoConverter,
+            retryMessage = RETRY_MESSAGE_WINNING_NUMBERS
         )
 
         return InputView.receiveUserInput(userInputRequest)
@@ -128,7 +141,8 @@ object LottoController {
     private fun getBonusBall(): LottoNumber {
         val userInputRequest = UserInputRequest(
             message = GUIDANCE_MESSAGE_BONUS_BALL,
-            inputConverter = LottoNumberConverter
+            inputConverter = LottoNumberConverter,
+            retryMessage = RETRY_MESSAGE_BONUS_BALL
         )
 
         return InputView.receiveUserInput(userInputRequest)

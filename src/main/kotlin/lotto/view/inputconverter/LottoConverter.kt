@@ -24,8 +24,6 @@ object LottoConverter : InputConverter<Lotto> {
     }
 
     private fun String.toLottoNumber(): LottoNumber? {
-        return this.toIntOrNull()?.let { number ->
-            LottoNumber[number]
-        }
+        return (LottoNumberConverter.convert(this) as? UserInputResult.Success)?.result
     }
 }
