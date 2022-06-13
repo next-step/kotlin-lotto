@@ -1,6 +1,6 @@
 package lotto.domain.model
 
-sealed interface UserInputResult<T> {
-    data class Success<T>(val value: T) : UserInputResult<T>
+sealed interface UserInputResult<out T> {
+    data class Success<out T>(val value: T) : UserInputResult<T>
     object Failed : UserInputResult<Nothing>
 }
