@@ -10,12 +10,12 @@ class LottoTest : StringSpec({
     "로또 객체를 생성한다" {
         // given
         val lottoNumbers = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6),
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(6),
         )
 
         // when // then
@@ -26,20 +26,20 @@ class LottoTest : StringSpec({
         // given
         listOf(
             listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
             ),
             listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6),
-                LottoNumber(7),
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6),
+                LottoNumber.valueOf(7),
             )
         ).forAll {
             // when // then
@@ -50,12 +50,12 @@ class LottoTest : StringSpec({
     "중복된 로또 숫자를 가진 로또 객체를 생성하면 예외를 발생시킨다" {
         // given
         val lottoNumbers = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(5),
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(5),
         )
 
         // when // then
@@ -67,7 +67,7 @@ class LottoTest : StringSpec({
             1,
             45,
         ).forAll {
-            shouldNotThrowAny { LottoNumber(it) }
+            shouldNotThrowAny { LottoNumber.valueOf(it) }
         }
     }
 
@@ -77,7 +77,7 @@ class LottoTest : StringSpec({
             0,
             46,
         ).forAll {
-            shouldThrowExactly<IllegalArgumentException> { LottoNumber(it) }
+            shouldThrowExactly<IllegalArgumentException> { LottoNumber.valueOf(it) }
         }
     }
 
@@ -85,22 +85,22 @@ class LottoTest : StringSpec({
         // given
         val lotto = Lotto(
             listOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6),
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6),
             )
         )
         val otherLotto = Lotto(
             listOf(
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6),
-                LottoNumber(7),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6),
+                LottoNumber.valueOf(7),
             )
         )
 
