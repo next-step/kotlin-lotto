@@ -5,6 +5,8 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.WinningMatcher
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
@@ -14,6 +16,14 @@ import java.util.stream.Stream
 class WinningMatcherTest {
 
     data class TestCase(val numbers: List<Int>, val expected: Grade)
+
+    @Test
+    fun `당첨번호와 보너스 번호가 중복될 경우 IllegalArgumentException 예외를 리턴한다`() {
+        assertThrows<IllegalArgumentException> {
+            val winningNumbers = WinningNumbers(1, 2, 3, 4, 5, 6)
+            WinningMatcher(winningNumbers, LottoNumber(6))
+        }
+    }
 
     @ParameterizedTest
     @ArgumentsSource(TestCases::class)
