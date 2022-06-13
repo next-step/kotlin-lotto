@@ -21,7 +21,8 @@ class UserInputRequestTest {
 
         assertAll(
             { assertThat(userInputRequest.message).isEqualTo(message) },
-            { assertThat(userInputRequest.inputConverter).isEqualTo(inputConverter) }
+            { assertThat(userInputRequest.inputConverter).isEqualTo(inputConverter) },
+            { assertThat(userInputRequest.inputValidationChecker).isNull() }
         )
     }
 }
