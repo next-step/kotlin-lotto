@@ -11,8 +11,8 @@ class LottoResultTest : StringSpec({
             mapOf(
                 Rank.FIRST to 0,
                 Rank.SECOND to 0,
-                Rank.THIRD to 1,
                 Rank.FOURTH to 1,
+                Rank.FIFTH to 1,
             )
         )
 

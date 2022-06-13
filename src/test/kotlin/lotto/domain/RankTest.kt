@@ -8,16 +8,17 @@ import io.kotest.matchers.shouldBe
 class RankTest : StringSpec({
     "일치하는 갯수와 일치하는 등수를 찾는다" {
         listOf(
-            row(6, Rank.FIRST),
-            row(5, Rank.SECOND),
-            row(4, Rank.THIRD),
-            row(3, Rank.FOURTH),
-            row(2, Rank.NONE),
-            row(1, Rank.NONE),
-            row(0, Rank.NONE),
-        ).forAll { (correctNumber, expected) ->
+            row(6, false, Rank.FIRST),
+            row(5, true, Rank.SECOND),
+            row(5, false, Rank.THIRD),
+            row(4, false, Rank.FOURTH),
+            row(3, false, Rank.FIFTH),
+            row(2, false, Rank.NONE),
+            row(1, false, Rank.NONE),
+            row(0, false, Rank.NONE),
+        ).forAll { (correctNumber, isMatchedBonusBall, expected) ->
             // when
-            val actual = Rank.of(correctNumber)
+            val actual = Rank.of(correctNumber, isMatchedBonusBall)
 
             // then
             actual shouldBe expected

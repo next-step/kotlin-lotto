@@ -32,9 +32,9 @@ class Lotto(
         )
     )
 
-    fun countSameLottoNumbers(other: Lotto): Int = lottoNumbers.count { lottoNumber -> other.contains(lottoNumber) }
+    fun countSameLottoNumbers(other: Lotto): Int = lottoNumbers.count { lottoNumber -> other.containsLottoNumber(lottoNumber) }
 
-    private fun contains(lottoNumber: LottoNumber) = lottoNumbers.any { it == lottoNumber }
+    fun containsLottoNumber(lottoNumber: LottoNumber) = lottoNumbers.any { it == lottoNumber }
 
     companion object {
         const val PRICE = 1_000

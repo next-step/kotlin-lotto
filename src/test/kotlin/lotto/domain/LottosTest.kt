@@ -9,6 +9,7 @@ class LottosTest : StringSpec({
         val lottos = Lottos(
             listOf(
                 Lotto(1, 2, 3, 4, 5, 6),
+                Lotto(1, 2, 3, 4, 5, 7),
                 Lotto(1, 2, 3, 4, 5, 10),
                 Lotto(1, 2, 3, 4, 9, 10),
                 Lotto(1, 2, 3, 8, 9, 10),
@@ -16,7 +17,8 @@ class LottosTest : StringSpec({
             )
         )
         val winningLotto = WinningLotto(
-            Lotto(1, 2, 3, 4, 5, 6)
+            Lotto(1, 2, 3, 4, 5, 6),
+            LottoNumber.valueOf(7),
         )
 
         // when
@@ -27,6 +29,7 @@ class LottosTest : StringSpec({
         actual.statistics[Rank.SECOND] shouldBe 1
         actual.statistics[Rank.THIRD] shouldBe 1
         actual.statistics[Rank.FOURTH] shouldBe 1
+        actual.statistics[Rank.FIFTH] shouldBe 1
     }
 
     "자동 로또를 발급한다" {

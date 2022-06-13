@@ -17,16 +17,18 @@ class WinningLottoTest : StringSpec({
 
     "당첨 로또와 로또를 비교하여 결과를 얻는다" {
         listOf(
-            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6), Rank.FIRST),
-            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 7), Rank.SECOND),
-            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 7, 8), Rank.THIRD),
-            row(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 7, 8, 9), Rank.FOURTH),
-        ).forAll { (winningLottoNumbers, targetLottoNumbers, expected) ->
+            row(listOf(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7), listOf(1, 2, 3, 4, 5, 6), Rank.FIRST),
+            row(listOf(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7), listOf(1, 2, 3, 4, 5, 7), Rank.SECOND),
+            row(listOf(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7), listOf(1, 2, 3, 4, 5, 8), Rank.THIRD),
+            row(listOf(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7), listOf(1, 2, 3, 4, 8, 9), Rank.FOURTH),
+            row(listOf(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7), listOf(1, 2, 3, 8, 9, 10), Rank.FIFTH),
+        ).forAll { (winningLottoNumbers, bonusBall, targetLottoNumbers, expected) ->
             // given
             val winningLotto = WinningLotto(
                 Lotto(
                     winningLottoNumbers.map { LottoNumber.valueOf(it) }
-                )
+                ),
+                bonusBall,
             )
             val targetLotto = Lotto(targetLottoNumbers.map { LottoNumber.valueOf(it) })
 

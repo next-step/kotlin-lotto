@@ -28,5 +28,6 @@ fun Lottos.toLottoDatas(): List<LottoData> = this.lottos.map { LottoData.of(it) 
 
 fun List<Int>.toWinningLotto(): WinningLotto {
     val lotto = Lotto(this.map { LottoNumber.valueOf(it) })
-    return WinningLotto(lotto)
+    val bonusBall = LottoNumber.valueOf(InputView.inputBonusBall())
+    return WinningLotto(lotto, bonusBall)
 }

@@ -16,7 +16,16 @@ object ResultView {
     fun printStatistics(statics: Map<Rank, Int>) {
         println("당첨 통계")
         println("---------")
-        statics.forEach { println("${it.key.correctNumber}개 일치 (${it.key.winningMoney}원)- ${it.value}개") }
+        statics.forEach { printStatisticsByRank(it) }
+    }
+
+    private fun printStatisticsByRank(it: Map.Entry<Rank, Int>) {
+        if (it.key !== Rank.SECOND) {
+            println("${it.key.correctNumber}개 일치 (${it.key.winningMoney}원)- ${it.value}개")
+            return
+        }
+
+        println("${it.key.correctNumber}개 일치, 보너스 볼 일치(${it.key.winningMoney}원)- ${it.value}개")
     }
 
     fun printEarningRate(earningRate: Double) {

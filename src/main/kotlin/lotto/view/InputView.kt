@@ -17,4 +17,10 @@ object InputView {
             .map { it.toInt() }
             .toList()
     }
+
+    fun inputBonusBall(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val input = readLine() ?: throw IllegalStateException("당첨 번호는 null 값은 허용하지 않습니다.")
+        return input.toInt()
+    }
 }
