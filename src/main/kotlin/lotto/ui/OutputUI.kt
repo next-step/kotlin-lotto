@@ -17,16 +17,18 @@ object OutputUI {
     }
 
     fun drawWinningResult(result: LottoResult) {
-        println("당첨 통계")
-        println("---------")
-        listOf(Grade.Five, Grade.Fourth, Grade.Third, Grade.Second, Grade.First).forEach {
-            val matchedCount = result.getMatchedCount(it)
-
-            var resultMessage = "${it.matchCount}개 일치"
-            if (it.matchBonus) resultMessage += ", 보너스 볼 일치"
-
-            println("$resultMessage (${it.reward}원)- ${matchedCount}개")
+        val message = buildString {
+            append("당첨 통계\n")
+            append("---------\n")
+            listOf(Grade.Five, Grade.Fourth, Grade.Third, Grade.Second, Grade.First).forEach {
+                append("${it.matchCount}개 일치")
+                if (it.matchBonus) append(", 보너스 볼 일치")
+                append(" (${it.reward}원)- ")
+                append("${result.getMatchedCount(it)}개\n")
+            }
         }
+
+        println(message)
     }
 
     fun drawWinningRevenueRate(rate: Float) {
