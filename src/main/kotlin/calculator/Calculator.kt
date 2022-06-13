@@ -1,7 +1,7 @@
 package calculator
 
 class Calculator(
-    private val equationParser:EquationParser = EquationParser
+    private val equationParser: EquationParser = EquationParser
 ) {
 
     fun calculate(input: String?): Int {

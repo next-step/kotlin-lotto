@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-internal class CalculatorTest{
+internal class CalculatorTest {
     @ParameterizedTest
     @MethodSource("equations")
     fun `식의 합을 구한다`(input: String?, expectedResult: Int) {
@@ -16,7 +16,7 @@ internal class CalculatorTest{
             .isEqualTo(expectedResult)
     }
 
-    companion object{
+    companion object {
         @JvmStatic
         fun equations(): Stream<Arguments> {
             return Stream.of(

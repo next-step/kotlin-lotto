@@ -4,7 +4,7 @@ package calculator
 value class Delimiter(
     val delimiter: String
 ) {
-    companion object{
+    companion object {
         val DEFAULT = listOf(Delimiter(","), Delimiter(":"))
     }
 }

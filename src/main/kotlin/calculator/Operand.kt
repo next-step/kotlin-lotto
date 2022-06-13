@@ -26,4 +26,3 @@ value class Operand private constructor(
         }
     }
 }
-
