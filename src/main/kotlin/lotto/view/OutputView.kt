@@ -5,8 +5,8 @@ import lotto.model.LottoRank
 import lotto.model.LottoResult
 
 class OutputView {
-    fun showBuyingHistory(lottoList: List<Lotto>) {
-        println("${lottoList.size}개를 구매했습니다.")
+    fun showBuyingHistory(manualLottoCount: Int, lottoList: List<Lotto>) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${lottoList.size - manualLottoCount}개를 구매했습니다.")
         lottoList.forEach {
             println(showLotto(it))
         }

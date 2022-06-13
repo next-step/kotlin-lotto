@@ -1,17 +1,13 @@
 package lotto.model
 
 class LottoStore {
-
     fun buy(money: Int): List<Lotto> {
-        checkNegativeMoney(money)
-
         val lottoMachine = LottoMachine()
         return lottoMachine.createLottos(money / LOTTO_PRICE)
     }
 
     fun buy(remainMoney: Int, manualLottos: List<Lotto>): List<Lotto> {
         checkNegativeMoney(remainMoney)
-
         return manualLottos + buy(remainMoney)
     }
 

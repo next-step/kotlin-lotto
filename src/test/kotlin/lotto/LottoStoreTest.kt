@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.Fixtures.createManualLottos
 import lotto.model.Lotto
 import lotto.model.LottoStore
 import org.assertj.core.api.Assertions.assertThat
@@ -41,9 +42,27 @@ class LottoStoreTest {
 
     @Test
     fun `수동으로 구매하는 로또 개수는 구입 금액을 초과한다면 IllegalArgumentException 예외가 발생한다`() {
-        val amount = -1_000
+        val remainMoney = -1_000
         val manualLotto1 = Lotto(Fixtures.createSixLottoNumber(listOf(1, 2, 3, 4, 5, 6)))
 
-        assertThrows<IllegalArgumentException> { lottoStore.buy(amount, listOf(manualLotto1)) }
+        assertThrows<IllegalArgumentException> { lottoStore.buy(remainMoney, listOf(manualLotto1)) }
+    }
+
+    @ParameterizedTest(name = "수동으로 구매하는 로또를 제외한 나머지는 자동으로 발급한다. 수동 {0} 장, 총 {1} 장")
+    @CsvSource(
+        value = [
+            "3|14",
+            "2|5",
+            "3|9"
+        ],
+        delimiter = '|'
+    )
+    fun `수동으로 구매하는 로또를 제외한 나머지는 자동으로 발급한다`(manualCount: Int, totalCount: Int) {
+        val remainMoney = (totalCount - manualCount) * 1000
+        val manualLottos = createManualLottos(manualCount)
+
+        val totalLottos = lottoStore.buy(remainMoney, manualLottos)
+
+        assertThat(totalLottos.size).isEqualTo(totalCount)
     }
 }
