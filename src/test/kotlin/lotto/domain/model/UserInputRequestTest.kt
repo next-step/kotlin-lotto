@@ -14,11 +14,12 @@ class UserInputRequestTest {
                 return UserInputResult.Success(input ?: "")
             }
         }
-        val userInputRequest = UserInputRequest(
-            message = message,
-            inputConverter = inputConverter
-        )
         val retryMessage = "입력이 잘못됐습니다. 다시 입력해 주세요"
+        val userInputRequest = UserInputRequest(
+            message,
+            inputConverter,
+            retryMessage
+        )
 
         assertAll(
             { assertThat(userInputRequest.message).isEqualTo(message) },
