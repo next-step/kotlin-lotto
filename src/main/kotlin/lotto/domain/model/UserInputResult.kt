@@ -5,6 +5,5 @@ sealed interface UserInputResult<out T> {
     object Failed : UserInputResult<Nothing>
 }
 
-fun <T> UserInputResult<T>.value(): T {
-    return (this as UserInputResult.Success).value
-}
+val <T> UserInputResult<T>.value: T
+    get() = (this as UserInputResult.Success).value
