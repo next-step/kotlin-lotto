@@ -12,6 +12,6 @@ class RangeLottoFactory(
                 LottoNumber[number]
             }.toSet()
 
-        return Lotto(numbers)
+        return Lotto.from(numbers)!!
     }
 }
