@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.row
 import io.kotest.inspectors.forAll
@@ -8,11 +9,11 @@ import io.kotest.matchers.shouldBe
 class WinningLottoTest : StringSpec({
     "당첨 번호와 보너스볼이 중복되면 예외를 발생시킨다" {
         // given
-        // val winningLotto = Lotto()
+        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
+        val bonusBall = LottoNumber.valueOf(6)
 
-        // when
-
-        // then
+        // when // then
+        shouldThrowExactly<IllegalArgumentException> { WinningLotto(winningLotto, bonusBall) }
     }
 
     "당첨 로또와 로또를 비교하여 결과를 얻는다" {
