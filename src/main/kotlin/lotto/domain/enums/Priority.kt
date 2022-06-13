@@ -1,4 +1,4 @@
-package lotto.domain.enum
+package lotto.domain.enums
 
 enum class Priority(val matchCount: Int, val price: Int) {
     FIRST(6, 2_000_000_000),
@@ -13,6 +13,8 @@ enum class Priority(val matchCount: Int, val price: Int) {
             values().find { priority -> priority.matchCount == matchCount }?.price ?: MISS.price
 
         fun find(matchCount: Int): Priority =
-            values().find { priority -> priority.matchCount == matchCount } ?: MISS
+            normalPriorities().find { priority -> priority.matchCount == matchCount } ?: MISS
+
+        private fun normalPriorities(): List<Priority> = values().filter { it != SECOND }
     }
 }

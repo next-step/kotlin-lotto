@@ -1,9 +1,10 @@
-package lotto.domain.`interface`
+package lotto.domain.interfaces
 
 import lotto.domain.LottoNumber
 
 interface LottoNumbers {
-    open fun createNumbers(inputs: List<Int>? = null): Set<LottoNumber>
+    fun createNumbers(): Set<LottoNumber>
+    fun convertLottoNumbers(numbers: List<Int>): Set<LottoNumber>
 
     companion object {
         const val MIN_LOTTO_INDEX = 0
