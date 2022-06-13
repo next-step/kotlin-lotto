@@ -1,7 +1,5 @@
 package lotto.domain
 
-private const val LOTTO_LENGTH = 6
-
 class Lotto(
     lottoNumbers: List<LottoNumber>,
 ) {
@@ -38,5 +36,6 @@ class Lotto(
 
     companion object {
         const val PRICE = 1_000
+        const val LOTTO_LENGTH = 6
     }
 }

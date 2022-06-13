@@ -10,12 +10,4 @@ class Lottos(
             remove(Rank.NONE)
         }.let { LottoResult(it) }
     }
-
-    companion object {
-        fun generateAutoLottos(lottoNumber: Int, autoLottoPublishStrategy: () -> Lotto): Lottos {
-            return mutableListOf<Lotto>().apply {
-                repeat(lottoNumber) { add(autoLottoPublishStrategy.invoke()) }
-            }.let { Lottos(it.toList()) }
-        }
-    }
 }
