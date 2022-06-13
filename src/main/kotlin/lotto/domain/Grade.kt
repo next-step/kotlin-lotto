@@ -11,7 +11,7 @@ enum class Grade(val matchCount: Int, val matchBonus: Boolean, val reward: Int) 
     companion object {
         fun find(matchCount: Int, matchBonus: Boolean): Grade {
             return when {
-                matchCount == 5 -> if (matchBonus) Second else Third
+                matchCount == Second.matchCount -> if (matchBonus) Second else Third
                 else -> Grade.values().find { it.matchCount == matchCount } ?: None
             }
         }
