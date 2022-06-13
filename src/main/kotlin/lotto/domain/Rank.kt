@@ -26,6 +26,7 @@ enum class Rank(
                 ?: NONE
         }
 
-        fun toResult(): MutableMap<Rank, Int> = values().associateWith { INITIAL_COUNT_NUMBER } as MutableMap<Rank, Int>
+        fun toResult(): MutableMap<Rank, Int> = values().reversed()
+            .associateWith { INITIAL_COUNT_NUMBER } as MutableMap<Rank, Int>
     }
 }
