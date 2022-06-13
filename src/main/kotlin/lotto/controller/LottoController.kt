@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoGame
+import lotto.domain.LottoNumber
 import lotto.service.InputParser
 import lotto.service.LottoService
 import lotto.view.LottoGameView
@@ -20,7 +21,8 @@ class LottoController(private val lottoService: LottoService) {
         lottos.map { LottoView(it).print() }
 
         val winningLotto = getLastWinningLotto()
-        val lottoGame = LottoGame(lottos, winningLotto)
+        val bonusNumber = getBonusNumber()
+        val lottoGame = LottoGame(lottos, winningLotto, bonusNumber)
 
         LottoGameView.printWinningStats(lottoGame)
     }
@@ -35,6 +37,10 @@ class LottoController(private val lottoService: LottoService) {
         LottoGameView.printLastWinningNumbers()
 
         return Lotto(InputParser.parseWinningNumbers(readLine()!!))
+    }
+
+    private fun getBonusNumber(): LottoNumber {
+        return InputParser.parseBonusNumber(readLine()!!)
     }
 
     companion object {

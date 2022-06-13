@@ -21,7 +21,7 @@ object LottoGameView {
         println(
             """
             |$WINNING_STAT_MESSAGE
-            |${(3..6).joinToString("\n") { prizeMessageTemplate(lottoGame.rank(it), Rank.of(it)) }}
+            |${(3..6).joinToString("\n") { prizeMessageTemplate(lottoGame.rank(it), Rank.of(it, false)) }}
             |${createProfitMessage(lottoGame.profit)}
             """.trimMargin()
         )
@@ -31,7 +31,8 @@ object LottoGameView {
     private const val BUY_AMOUNT_MESSAGE = "개를 구매했습니다."
     private const val LAST_WINNING_NUMBER_MESSAGE = "지난 주 당첩 번호를 입력해 주세요."
     private const val WINNING_STAT_MESSAGE = "당첨 통계\n---------"
-    private val prizeMessageTemplate = { n:Int, rank: Rank -> "${rank.matched}개 일치 (${rank.prize.toInt()}원) - ${n}개"}
+    private val prizeMessageTemplate =
+        { n: Int, rank: Rank -> "${rank.countOfMatch}개 일치 (${rank.prize.toInt()}원) - ${n}개" }
     private val createProfitMessage = { profit: Double ->
         "총 수익률은 ${profit}입니다." + getProfitResultMessage(profit)
     }

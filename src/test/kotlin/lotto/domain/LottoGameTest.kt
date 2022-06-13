@@ -9,8 +9,9 @@ internal class LottoGameTest {
     fun `LottoGame should be get matched number`() {
         val lottos = listOf(Lotto((1..6).map { LottoNumber.of(it) }))
         val winningNumbers = Lotto((1..6).map { LottoNumber.of(it) })
+        val bonusNumber = LottoNumber.of(10)
 
-        val lottoGame = LottoGame(lottos, winningNumbers)
+        val lottoGame = LottoGame(lottos, winningNumbers, bonusNumber)
         assertThat(lottoGame.rank(6)).isEqualTo(1)
     }
 }

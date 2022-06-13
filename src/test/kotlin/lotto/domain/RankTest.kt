@@ -10,22 +10,23 @@ internal class RankTest {
 
     @ParameterizedTest
     @MethodSource("rankArguments")
-    fun `get Rank from matched`(matched: Int, rank: Rank) {
+    fun `get Rank from matched`(countOfMatch: Int, matchedBonus: Boolean, rank: Rank) {
 
-        assertThat(Rank.of(matched)).isEqualTo(rank)
+        assertThat(Rank.of(countOfMatch, matchedBonus)).isEqualTo(rank)
     }
 
     companion object {
         @JvmStatic
         fun rankArguments(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(6, Rank.FIRST),
-                Arguments.of(5, Rank.SECOND),
-                Arguments.of(4, Rank.THIRD),
-                Arguments.of(3, Rank.FOURTH),
-                Arguments.of(2, Rank.LOSE),
-                Arguments.of(1, Rank.LOSE),
-                Arguments.of(0, Rank.LOSE),
+                Arguments.of(6, false, Rank.FIRST),
+                Arguments.of(5, true, Rank.SECOND),
+                Arguments.of(5, false, Rank.THIRD),
+                Arguments.of(4, false, Rank.FOURTH),
+                Arguments.of(3, false, Rank.FIFTH),
+                Arguments.of(2, false, Rank.LOSE),
+                Arguments.of(1, false, Rank.LOSE),
+                Arguments.of(0, false, Rank.LOSE),
             )
         }
     }
