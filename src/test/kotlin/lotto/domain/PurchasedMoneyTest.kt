@@ -27,7 +27,7 @@ class PurchasedMoneyTest : StringSpec({
         val money = Money(1_000)
 
         // when
-        val result = money.calculateLottoNumber()
+        val result = money.divide(1_000)
 
         // then
         result shouldBe 1

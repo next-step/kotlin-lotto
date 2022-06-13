@@ -13,7 +13,7 @@ import lotto.view.ResultView
 class LottoController {
     fun handle() {
         val money = Money(InputView.inputPurchasedMoney())
-        val lottoNumber = money.calculateLottoNumber().also { ResultView.printPurchasedLottoNumber(it) }
+        val lottoNumber = money.divide(Lotto.PRICE).also { ResultView.printPurchasedLottoNumber(it) }
         val lottos = Lottos.generateAutoLottos(lottoNumber) { getAutoLotto() }
             .also { ResultView.printLottos(it.toLottoDatas()) }
         val winningLotto = InputView.inputWinningLotto().toWinningLotto()
