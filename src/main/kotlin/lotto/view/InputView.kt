@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.model.UserInputRequest
+import lotto.domain.model.UserInputResult
 import lotto.domain.model.result
 
 object InputView {
@@ -10,10 +11,16 @@ object InputView {
 
     fun <T> receiveUserInput(userInputRequest: UserInputRequest<T>): T {
         println(userInputRequest.message)
-        return userInputRequest.inputConverter.convert(readlnOrNull()).result
+        return receiveUserInputWithoutMessage(userInputRequest)
     }
 
     fun <T> receiveUserInputWithoutMessage(userInputRequest: UserInputRequest<T>): T {
-        return userInputRequest.inputConverter.convert(readlnOrNull()).result
+        var userInputResult: UserInputResult<T> = userInputRequest.inputConverter.convert(readlnOrNull())
+        while (userInputResult is UserInputResult.Failed) {
+            println(userInputRequest.retryMessage)
+            userInputResult = userInputRequest.inputConverter.convert(readlnOrNull())
+        }
+
+        return userInputResult.result
     }
 }
