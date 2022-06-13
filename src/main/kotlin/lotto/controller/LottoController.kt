@@ -40,6 +40,8 @@ class LottoController(private val lottoService: LottoService) {
     }
 
     private fun getBonusNumber(): LottoNumber {
+        LottoGameView.printBonusNumber()
+
         return InputParser.parseBonusNumber(readLine()!!)
     }
 

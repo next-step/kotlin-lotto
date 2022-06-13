@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test
 internal class LottoGameTest {
 
     @Test
-    fun `LottoGame should be get matched number`() {
+    fun `LottoGame should be count rank`() {
         val lottos = listOf(Lotto((1..6).map { LottoNumber.of(it) }))
         val winningNumbers = Lotto((1..6).map { LottoNumber.of(it) })
         val bonusNumber = LottoNumber.of(10)
 
         val lottoGame = LottoGame(lottos, winningNumbers, bonusNumber)
-        assertThat(lottoGame.rank(6)).isEqualTo(1)
+
+        assertThat(lottoGame.countOfRank(Rank.FIRST)).isEqualTo(1)
     }
 }

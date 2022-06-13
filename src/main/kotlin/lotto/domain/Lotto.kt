@@ -6,7 +6,7 @@ class Lotto(val numbers: List<LottoNumber>) {
         require(numbers.size == LOTTO_NUMBERS) { "Lotto must have 6 numbers. Input: [${numbers.size}] numbers" }
     }
 
-    fun matchedNumber(lotto: Lotto): Int {
+    fun countOfMatch(lotto: Lotto): Int {
         return this.numbers.intersect(lotto.numbers.toSet()).size
     }
 

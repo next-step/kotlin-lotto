@@ -6,16 +6,16 @@ class LottoGame(
     private val bonusNumber: LottoNumber
 ) {
 
-    private val prize = lottos.sumOf { lotto ->
-        Rank.of(lotto.matchedNumber(winningLotto), bonusNumber in lotto.numbers).prize
-    }.toString()
+    private val ranks = lottos.map {
+        Rank.of(it.countOfMatch(winningLotto), bonusNumber in it.numbers)
+    }
 
-    val profit: Double = prize.toDouble() / (lottos.size * LOTTO_PRICE)
+    private val prize = ranks.sumOf { it.prize }
 
-    fun rank(i: Int): Int {
-        return lottos.filter { lotto ->
-            lotto.matchedNumber(winningLotto) == i
-        }.size
+    val profit: Double = prize / (lottos.size * LOTTO_PRICE)
+
+    fun countOfRank(rank: Rank): Int {
+        return ranks.count { it == rank }
     }
 
     companion object {
