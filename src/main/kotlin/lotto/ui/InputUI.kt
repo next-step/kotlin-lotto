@@ -16,4 +16,9 @@ object InputUI {
         val numbers = readln().replace(" ", "").split(",").map(String::toInt).map(::LottoNumber)
         return LottoNumbers(numbers)
     }
+
+    fun receiveBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        return LottoNumber(readln().toInt())
+    }
 }

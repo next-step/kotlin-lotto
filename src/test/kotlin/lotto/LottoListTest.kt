@@ -6,32 +6,41 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.Money
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
+import java.util.stream.Stream
 
 class LottoListTest {
 
-    @Test
-    fun `전체 로또의 결과 정보를 리턴한다`() {
-        val firstGrade = LottoNumbers(1, 2, 3, 4, 5, 6)
-        val secondGrade1 = LottoNumbers(1, 2, 3, 4, 5, 45)
-        val secondGrade2 = LottoNumbers(1, 2, 3, 4, 6, 45)
-        val thirdGrade = LottoNumbers(1, 2, 3, 4, 44, 45)
-        val fourthGrade = LottoNumbers(1, 2, 3, 43, 44, 45)
-        val noneGrade = LottoNumbers(1, 2, 42, 43, 44, 45)
+    data class TestCase(val numbers: List<Int>, val expectedGrade: Grade)
 
-        val lottoList =
-            LottoList(listOf(firstGrade, secondGrade1, secondGrade2, thirdGrade, fourthGrade, noneGrade), Money(0))
+    @ParameterizedTest
+    @ArgumentsSource(TestCases::class)
+    fun `전체 로또의 결과 정보를 리턴한다`(testCase: TestCase) {
+        val lottoNumbers = LottoNumbers(testCase.numbers)
+        val lottoList = LottoList(listOf(lottoNumbers), Money(0))
 
         val winningNumbers = WinningNumbers(1, 2, 3, 4, 5, 6)
 
-        val result = lottoList.match(winningNumbers)
+        val result = lottoList.match(winningNumbers, LottoNumber(7))
 
-        Assertions.assertThat(result.getMatchedCount(Grade.First)).isEqualTo(1)
-        Assertions.assertThat(result.getMatchedCount(Grade.Second)).isEqualTo(2)
-        Assertions.assertThat(result.getMatchedCount(Grade.Third)).isEqualTo(1)
-        Assertions.assertThat(result.getMatchedCount(Grade.Fourth)).isEqualTo(1)
+        Assertions.assertThat(result.getMatchedCount(testCase.expectedGrade)).isEqualTo(1)
     }
 
-    private fun LottoNumbers(vararg numbers: Int) = LottoNumbers(numbers.map(::LottoNumber))
+    private class TestCases : ArgumentsProvider by ArgumentsProvider({
+        val testCases = listOf(
+            TestCase(listOf(1, 2, 3, 4, 5, 6), Grade.First),
+            TestCase(listOf(1, 2, 3, 4, 5, 7), Grade.Second),
+            TestCase(listOf(1, 2, 3, 4, 5, 11), Grade.Third),
+            TestCase(listOf(1, 2, 3, 4, 11, 12), Grade.Fourth),
+            TestCase(listOf(1, 2, 3, 11, 12, 13), Grade.Five)
+        )
+
+        Stream.of(*testCases.toTypedArray()).map { Arguments.of(it) }
+    })
+
+    private fun LottoNumbers(numbers: List<Int>) = LottoNumbers(numbers.map(::LottoNumber))
     private fun WinningNumbers(vararg numbers: Int) = LottoNumbers(numbers.map(::LottoNumber))
 }
