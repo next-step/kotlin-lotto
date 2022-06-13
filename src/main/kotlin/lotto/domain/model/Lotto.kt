@@ -23,5 +23,9 @@ value class Lotto(val numbers: Set<LottoNumber>) {
                 }.toSet()
             )
         }
+
+        fun from(numbers: Set<LottoNumber>?): Lotto? {
+            return if (numbers?.size == LOTTO_NUMBER_COUNT) Lotto(numbers) else null
+        }
     }
 }
