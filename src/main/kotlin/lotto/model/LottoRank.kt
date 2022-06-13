@@ -33,7 +33,7 @@ enum class LottoRank(
     );
 
     companion object {
-        fun find(matchCount: Pair<Int, Boolean>): LottoRank? =
-            values().find { it.matches == matchCount.first && it.bonusMatches == matchCount.second }
+        fun find(matchResult: MatchResult): LottoRank? =
+            values().find { it.matches == matchResult.match && it.bonusMatches == matchResult.bonusMatch }
     }
 }
