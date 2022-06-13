@@ -3,7 +3,6 @@ package lotto.domain
 class Lottos(
     val lottos: List<Lotto>,
 ) {
-
     fun getStatistics(winningLotto: WinningLotto): LottoResult {
         return Rank.toResult().apply {
             val result = lottos.map { winningLotto.match(it) }

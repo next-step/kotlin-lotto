@@ -14,6 +14,24 @@ class Lotto(
         this.lottoNumbers = lottoNumbers.sortedBy { it.value }
     }
 
+    constructor(
+        firstLottoNumber: Int,
+        secondLottoNumber: Int,
+        thirdLottoNumber: Int,
+        fourthLottoNumber: Int,
+        fifthLottoNumber: Int,
+        sixthLottoNumber: Int,
+    ) : this(
+        listOf(
+            LottoNumber.valueOf(firstLottoNumber),
+            LottoNumber.valueOf(secondLottoNumber),
+            LottoNumber.valueOf(thirdLottoNumber),
+            LottoNumber.valueOf(fourthLottoNumber),
+            LottoNumber.valueOf(fifthLottoNumber),
+            LottoNumber.valueOf(sixthLottoNumber),
+        )
+    )
+
     fun countSameLottoNumbers(other: Lotto): Int = lottoNumbers.count { lottoNumber -> other.contains(lottoNumber) }
 
     private fun contains(lottoNumber: LottoNumber) = lottoNumbers.any { it == lottoNumber }
