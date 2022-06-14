@@ -11,7 +11,7 @@ class PurchasedMoneyTest : StringSpec({
         val money = 1_000
 
         // when // then
-        shouldNotThrowAny { PurchasedMoney(money) }
+        shouldNotThrowAny { Money(money) }
     }
 
     "음수의 값을 가진 구입 금액 객체를 생성하면 예외를 발생시킨다" {
@@ -19,15 +19,15 @@ class PurchasedMoneyTest : StringSpec({
         val money = -1_000
 
         // when // then
-        shouldThrowExactly<IllegalArgumentException> { PurchasedMoney(money) }
+        shouldThrowExactly<IllegalArgumentException> { Money(money) }
     }
 
     "구입 금액에 맞는 로또 갯수를 반환한다" {
         // given
-        val purchasedMoney = PurchasedMoney(1_000)
+        val money = Money(1_000)
 
         // when
-        val result = purchasedMoney.calculateLottoNumber()
+        val result = money.divide(1_000)
 
         // then
         result shouldBe 1
