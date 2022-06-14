@@ -4,10 +4,10 @@ class LottoBuyer(lottoBuyList: List<LottoNumbers>) {
     val lottoBuyList = lottoBuyList.toList()
 
     companion object {
-        const val PRICE = 1000
-        fun buyer(money: Int): LottoBuyer {
+        fun buyer(manualLottoNumbers: List<LottoNumbers>, autoLottoCount: Int): LottoBuyer {
             val lottoBuyList = ArrayList<LottoNumbers>()
-            repeat(money / PRICE) {
+            lottoBuyList.addAll(manualLottoNumbers)
+            repeat(autoLottoCount) {
                 lottoBuyList.add(LottoNumbers.random())
             }
             return LottoBuyer(lottoBuyList)
