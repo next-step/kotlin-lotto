@@ -30,7 +30,7 @@ internal class LottoTicketTest {
 
         val sortedNumbers = listOf(6, 4, 2, 3, 1, 5).sorted()
 
-        for (i in 0 until LottoNumbers.LOTTO_NUMBERS) {
+        for (i in 0 until LottoTicket.LOTTO_NUMBERS) {
             assertEquals(LottoNumber.of(sortedNumbers[i]), ticket.numbers.numbers[i])
         }
     }

@@ -1,25 +1,22 @@
 package camp.nextstep.lotto.number
 
-class LottoNumbers private constructor(numbers: List<LottoNumber>) {
+class LottoNumbers private constructor(private val _numbers: List<LottoNumber>) {
 
-    val numbers = numbers.sortedBy { it.value }
+    val numbers
+        get() = _numbers.sortedBy { it.value }
 
-    val size = numbers.size
-
-    init {
-        require(numbers.toSet().size == LOTTO_NUMBERS) { "로또 티켓은 서로 다른 ${LOTTO_NUMBERS}개의 숫자를 가질 수 있습니다. numbers=$numbers" }
-    }
+    val size
+        get() = _numbers.size
 
     operator fun contains(element: LottoNumber): Boolean {
-        return numbers.contains(element)
+        return _numbers.contains(element)
     }
 
-    override fun toString(): String {
-        return numbers.toString()
+    fun toSet(): Set<LottoNumber> {
+        return _numbers.toSet()
     }
 
     companion object {
-        const val LOTTO_NUMBERS = 6
 
         fun of(vararg numbers: Int): LottoNumbers {
             return LottoNumbers(numbers.map { LottoNumber.of(it) })
