@@ -4,7 +4,7 @@ import IssueStrategy
 
 object LottoCreator {
 
-    fun issue(strategy: IssueStrategy): List<List<Int>> {
+    fun issue(strategy: IssueStrategy): List<LottoTicket> {
         return strategy.issue()
     }
 }

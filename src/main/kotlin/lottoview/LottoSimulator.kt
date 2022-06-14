@@ -12,7 +12,7 @@ fun main() {
     val issuedLottos = LottoCreator.issue(RandomIssueStrategy(priceRule.count))
     LottoOutputView.displayIssuedLottos(issuedLottos)
 
-    val winningInfo = LottoInputView.inputWinningNumbers()
+    val winningInfo = LottoInputView.inputWinningNumbersAndBonusNumber()
     winningInfo.setScore(issuedLottos)
     val revenuePercentage = winningInfo.getRevenuePercentage(priceRule.amount, winningInfo.revenue)
 

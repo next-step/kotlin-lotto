@@ -1,3 +1,5 @@
+import lotto.LottoTicket
+
 fun interface IssueStrategy {
-    fun issue(): List<List<Int>>
+    fun issue(): List<LottoTicket>
 }
