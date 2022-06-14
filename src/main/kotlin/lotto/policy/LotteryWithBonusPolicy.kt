@@ -1,8 +1,8 @@
 package lotto.policy
 
 import lotto.domain.Lottery
+import lotto.domain.LotteryNumberSet
 import lotto.vo.LotteryNumber
-import lotto.vo.LotteryNumberSet
 import lotto.vo.LotteryRank
 
 class LotteryWithBonusPolicy(

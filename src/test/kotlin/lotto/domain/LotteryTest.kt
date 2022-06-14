@@ -4,7 +4,6 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.infra.port.NumberGenerator
 import lotto.vo.LotteryNumber
-import lotto.vo.LotteryNumberSet
 
 internal class LotteryTest : StringSpec({
 

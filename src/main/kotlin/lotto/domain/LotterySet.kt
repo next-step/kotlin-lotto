@@ -1,7 +1,7 @@
-package lotto.vo
+package lotto.domain
 
-import lotto.domain.Lottery
 import lotto.policy.LotteryPolicy
+import lotto.vo.LotteryRank
 import kotlin.math.roundToInt
 
 class LotterySet(private val lotteries: List<Lottery>) : List<Lottery> by lotteries {

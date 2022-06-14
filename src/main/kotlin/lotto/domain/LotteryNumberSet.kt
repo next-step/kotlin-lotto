@@ -1,4 +1,6 @@
-package lotto.vo
+package lotto.domain
+
+import lotto.vo.LotteryNumber
 
 data class LotteryNumberSet(
     private val lotteryNumbers: List<LotteryNumber>
@@ -8,7 +10,7 @@ data class LotteryNumberSet(
         require(lotteryNumbers.size == LOTTO_NUMBER_SIZE)
     }
 
-    override fun toString() = "$lotteryNumbers"
+    override fun toString() = "${lotteryNumbers.sortedBy { it }}"
 
     companion object {
 

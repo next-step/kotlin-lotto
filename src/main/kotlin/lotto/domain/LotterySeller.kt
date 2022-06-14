@@ -1,19 +1,16 @@
 package lotto.domain
 
-import lotto.vo.LotteryNumberSet
-import lotto.vo.LotterySet
+import lotto.dto.BuyLotteriesDTO
+import lotto.dto.LotterySellDTO
 import lotto.vo.Money
 
-class LotterySeller(private val lotteryStore: LotteryStore) {
+class LotterySeller(private val lotteryMachine: LotteryMachine) {
 
-    fun sell(wallet: Wallet, count: Int): LotterySet {
-        wallet.withdraw(calculateLotteryAmount(count))
-        return lotteryStore.getLotteries(count)
-    }
-
-    fun sellManually(wallet: Wallet, lotteryNumberSets: List<LotteryNumberSet>): LotterySet {
-        wallet.withdraw(calculateLotteryAmount(lotteryNumberSets.size))
-        return lotteryStore.getManualLotteries(lotteryNumberSets)
+    fun sell(wallet: Wallet, lotterySellDTO: LotterySellDTO): BuyLotteriesDTO {
+        wallet.withdraw(calculateLotteryAmount(lotterySellDTO.autoLotteryCount + lotterySellDTO.manualLotteryNumberSet.size))
+        val autoLotteries = lotteryMachine.getLotteries(lotterySellDTO.autoLotteryCount)
+        val manualLotteries = lotteryMachine.getManualLotteries(lotterySellDTO.manualLotteryNumberSet)
+        return BuyLotteriesDTO(autoLotteries, manualLotteries)
     }
 
     private fun calculateLotteryAmount(count: Int) = Money(Lottery.PRICE * count)

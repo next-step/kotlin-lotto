@@ -1,10 +1,10 @@
 package lotto.view
 
+import lotto.domain.LotterySet
 import lotto.dto.LotteryResultDTO
 import lotto.infra.port.OutputSystem
 import lotto.policy.LotteryPolicy
 import lotto.vo.LotteryRank
-import lotto.vo.LotterySet
 
 class LottoResultView(private val outputSystem: OutputSystem) {
 
@@ -30,9 +30,21 @@ class LottoResultView(private val outputSystem: OutputSystem) {
     }
 
     private fun printLottery(lotteryRank: LotteryRank, lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) =
-        // TODO: Builder pattern 으로 수정
         outputSystem
-            .write("${lotteryRank.matchCount}개${specialRankInfix(lotteryRank)}일치(${lotteryRank.rewardMoney}원)-${getRankerNumber(lotteryRank, lotterySet, winningNormalLottery)}개\n")
+            .write(toTemplateString(lotteryRank, lotterySet, winningNormalLottery))
+
+    private fun toTemplateString(
+        lotteryRank: LotteryRank,
+        lotterySet: LotterySet,
+        winningNormalLottery: LotteryPolicy
+    ) =
+        "${lotteryRank.matchCount}개${specialRankInfix(lotteryRank)}일치(${lotteryRank.rewardMoney}원)-${
+        getRankerNumber(
+            lotteryRank,
+            lotterySet,
+            winningNormalLottery
+        )
+        }개\n"
 
     private fun getRankerNumber(lotteryRank: LotteryRank, lotterySet: LotterySet, winningNormalLottery: LotteryPolicy) =
         lotterySet.countPlace(winningNormalLottery, lotteryRank)

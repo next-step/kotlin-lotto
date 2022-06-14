@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.vo.LotteryNumber
-import lotto.vo.LotteryNumberSet
 
 class Lottery(private val numbers: LotteryNumberSet) {
 

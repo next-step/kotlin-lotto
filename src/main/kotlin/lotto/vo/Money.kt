@@ -1,6 +1,7 @@
 package lotto.vo
 
-data class Money(private val value: Int) {
+@JvmInline
+value class Money(private val value: Int) {
 
     init {
         require(0 <= value) { "금액은 음수를 가질 수 없다." }

@@ -3,9 +3,9 @@ package lotto.policy
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
+import lotto.domain.LotteryNumberSet
 import lotto.domain.toLotteryNumberSet
 import lotto.vo.LotteryNumber
-import lotto.vo.LotteryNumberSet
 import lotto.vo.LotteryRank
 
 internal class BonusLotteryPolicyTest : BehaviorSpec({

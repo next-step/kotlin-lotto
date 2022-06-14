@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
+import lotto.domain.LotterySet
 import lotto.domain.toLotteryNumberSet
 import lotto.policy.LotteryWithBonusPolicy
 

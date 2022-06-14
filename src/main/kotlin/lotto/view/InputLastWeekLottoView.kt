@@ -1,9 +1,9 @@
 package lotto.view
 
+import lotto.domain.LotteryNumberSet
 import lotto.infra.port.IOSystem
 import lotto.policy.LotteryWithBonusPolicy
 import lotto.vo.LotteryNumber
-import lotto.vo.LotteryNumberSet
 
 class InputLastWeekLottoView(private val ioSystem: IOSystem) {
 
@@ -19,17 +19,27 @@ class InputLastWeekLottoView(private val ioSystem: IOSystem) {
         return getBonusLotteryNumber()
     }
 
-    private fun getLastWeekLotteryNumberSet() =
-        ioSystem.read()
-            .split(",")
-            .map(String::trim)
-            .map(String::toInt)
-            .map(LotteryNumber::of)
-            .let(::LotteryNumberSet)
+    private fun getLastWeekLotteryNumberSet(): LotteryNumberSet =
+        try {
+            ioSystem.read()
+                .split(",")
+                .map(String::trim)
+                .map(String::toInt)
+                .map(LotteryNumber::of)
+                .let(::LotteryNumberSet)
+        } catch (exception: Exception) {
+            ioSystem.write("잘못된 번호 목록을 입력하셨습니다. 다시 입력해주세요.")
+            getLastWeekLotteryNumberSet()
+        }
 
-    private fun getBonusLotteryNumber() =
-        ioSystem.read()
-            .trim()
-            .let(String::toInt)
-            .let(LotteryNumber::of)
+    private fun getBonusLotteryNumber(): LotteryNumber =
+        try {
+            ioSystem.read()
+                .trim()
+                .let(String::toInt)
+                .let(LotteryNumber::of)
+        } catch (exception: Exception) {
+            ioSystem.write("잘못된 번호 입력하셨습니다. 다시 입력해주세요.")
+            getBonusLotteryNumber()
+        }
 }
