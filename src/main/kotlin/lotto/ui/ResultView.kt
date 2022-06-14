@@ -14,18 +14,11 @@ class ResultView {
         println()
     }
 
-    fun showMatchResult(money: Int, result: List<Int>) {
-        val matchingMap = mutableMapOf(3 to 0, 4 to 0, 5 to 0, 6 to 0)
-        result.map { it -> if (it < 3) 0 else it }
-            .groupingBy { it }
-            .eachCount()
-            .filter { it.key != 0 }
-            .forEach { it -> matchingMap.put(it.key, it.value) }
-
+    fun showMatchResult(money: Int, winningRanks: Map<Int, Int>) {
         println("\n당첨 통계")
         println("---------")
         var sum = 0
-        matchingMap.onEach { it ->
+        winningRanks.onEach { it ->
             println("${it.key}개 일치 (${Rank.find(it.key)?.winningMoney}원) - ${it.value}개")
             sum += it.value * Rank.find(it.key)?.winningMoney!!
         }

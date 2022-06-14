@@ -40,4 +40,17 @@ internal class PersonImplTest {
         // then
         Assertions.assertThat(tickets.size).isEqualTo(3)
     }
+
+    @Test
+    fun `3700원으로 4장의 로또 티켓을 구매할 수 없다`() {
+        // given
+        val wallet = Wallet(3700)
+        val player = PersonImpl(wallet)
+
+        // when
+        val tickets = player.purchase()
+
+        // then
+        Assertions.assertThat(tickets.size).isNotEqualTo(4)
+    }
 }
