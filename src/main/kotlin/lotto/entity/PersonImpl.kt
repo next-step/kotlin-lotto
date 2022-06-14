@@ -5,4 +5,8 @@ class PersonImpl(override val wallet: Wallet) : Person {
         val money = wallet.money
         return LottoTicketMachine.printMaxTicket(money)
     }
+
+    override fun money(): Int {
+        return wallet.money
+    }
 }

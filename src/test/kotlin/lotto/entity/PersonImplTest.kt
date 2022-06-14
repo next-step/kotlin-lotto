@@ -4,9 +4,8 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 internal class PersonImplTest {
-
     @Test
-    fun `지갑을 가지고 있다`() {
+    fun `사람은 지갑을 가지고 있다`() {
         // given
         val testWallet = Wallet(10000)
         val person = PersonImpl(testWallet)
@@ -52,5 +51,18 @@ internal class PersonImplTest {
 
         // then
         Assertions.assertThat(tickets.size).isNotEqualTo(4)
+    }
+
+    @Test
+    fun `3400원이 든 지갑을 가진 사람은 3400원을 꺼낼 수 있다`() {
+        // given
+        val wallet = Wallet(3400)
+        val player = PersonImpl(wallet)
+
+        // when
+        val playerMoney = player.money()
+
+        // then
+        Assertions.assertThat(playerMoney).isEqualTo(wallet.money)
     }
 }

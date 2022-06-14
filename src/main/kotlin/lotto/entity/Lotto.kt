@@ -5,11 +5,10 @@ import lotto.ui.ResultView
 
 class Lotto {
     fun play() {
-        val wallet = Wallet(InputView().getPurchaseAmount())
-        val player: Person = PersonImpl(wallet)
+        val player: Person = PersonImpl(Wallet(InputView().getPurchaseAmount()))
         val tickets = player.purchase()
         ResultView().showLottoTickets(tickets)
         val ranks = MatcherImpl(InputView().getWinningNumbers()).matchTicketsToRanks(tickets)
-        ResultView().showMatchResult(wallet.money, ranks)
+        ResultView().showMatchResult(player.money(), ranks)
     }
 }
