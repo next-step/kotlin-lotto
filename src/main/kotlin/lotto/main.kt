@@ -6,6 +6,11 @@ import lotto.ui.OutputUI
 
 fun main() {
     val money = InputUI.receivePurchaseAmount()
+    val manualPurchaseCount = InputUI.receiveManualPurchaseCount()
+
+    val manualNumbers = (0 until manualPurchaseCount).map {
+        InputUI.receiveManualNumbers()
+    }
 
     val lottoList = LottoSeller.buy(money)
 
