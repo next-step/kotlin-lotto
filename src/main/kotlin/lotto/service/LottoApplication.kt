@@ -15,7 +15,7 @@ class LottoApplication(
     private val outPutModule: OutPutModule,
     randomGenerate: RandomGenerate
 ) {
-    private val ticketSeller = TicketSeller(lottoTicketPrice, randomGenerate)
+    private val ticketSeller = TicketSeller(randomGenerate)
 
     fun run() {
         val buyLottoOutputView = BuyLottoOutputView(outPutModule)
@@ -33,7 +33,7 @@ class LottoApplication(
         totalBoughtTickets.addAll(passiveLottoTickets)
 
         buyLottoOutputView.showTotalWinningInformation(
-            Money(totalBoughtTickets.size * lottoTicketPrice.value),
+            Money(totalBoughtTickets.size * ticketSeller.ticketPrice.value),
             lottoPrizeManager.getWinningStats(
                 totalBoughtTickets,
                 winningLottoTicketNumbers
@@ -42,7 +42,6 @@ class LottoApplication(
     }
 
     companion object {
-        private val lottoTicketPrice = Money(1000)
         private val lottoPrizeManager = LottoPrizeManager()
     }
 }

@@ -8,7 +8,7 @@ class TicketSellerTest : DescribeSpec({
     it("티켓 판매자는 금액으로 가능한 만큼 티켓을 구매할수 있다") {
         // given
         val ticketPrice = Money(1000)
-        val ticketSeller = TicketSeller(ticketPrice, KotlinRandomGenerate)
+        val ticketSeller = TicketSeller(KotlinRandomGenerate, ticketPrice)
         val userMoney = Money(20000)
 
         // when
