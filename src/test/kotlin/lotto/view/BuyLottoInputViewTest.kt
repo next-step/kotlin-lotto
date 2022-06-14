@@ -8,7 +8,7 @@ import lotto.util.InputModule
 import lotto.util.OutPutModule
 
 class BuyLottoInputViewTest : DescribeSpec({
-    var outputStore = mutableListOf<String>()
+    var outputStore: MutableList<String> = mutableListOf()
     var stubOutputModule: OutPutModule = object : OutPutModule {
         override fun write(outputValue: String) {
             outputStore.add(outputValue)
@@ -16,7 +16,7 @@ class BuyLottoInputViewTest : DescribeSpec({
     }
 
     beforeEach {
-        outputStore = mutableListOf<String>()
+        outputStore = mutableListOf()
         stubOutputModule = object : OutPutModule {
             override fun write(outputValue: String) {
                 outputStore.add(outputValue)

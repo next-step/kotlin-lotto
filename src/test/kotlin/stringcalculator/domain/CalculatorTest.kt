@@ -7,7 +7,7 @@ class CalculatorTest : DescribeSpec({
 
     it("숫자를 받고 총합 값을 내보낸다 ") {
         // given
-        val numbers = listOf<Int>(1, 2, 3)
+        val numbers = listOf(1, 2, 3)
 
         // when
         val totalSum = Calculator.getTotal(numbers)

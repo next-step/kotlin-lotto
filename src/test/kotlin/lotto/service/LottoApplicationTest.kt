@@ -10,7 +10,7 @@ class LottoApplicationTest : DescribeSpec({
 
     it("로또를 구매하고 당첨 금액을 통계로 알 수 있다") {
         // given
-        val buyLottoNumbers = listOf<List<Int>>(
+        val buyLottoNumbers = listOf(
             listOf(1, 2, 3, 4, 5, 6),
             listOf(1, 2, 3, 4, 5, 7),
             listOf(1, 2, 3, 4, 5, 8),
@@ -45,7 +45,7 @@ class LottoApplicationTest : DescribeSpec({
             }
         }
         val stubOutPutModule = object : OutPutModule {
-            val writeStore = mutableListOf<String>()
+            val writeStore: MutableList<String> = mutableListOf()
             override fun write(outputValue: String) {
                 writeStore.add(outputValue)
             }

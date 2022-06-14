@@ -25,7 +25,7 @@ class WinningLottoNumbersTest : DescribeSpec({
         val winningNumbers = LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoTicketNumber(7)
         val winningLottoNumbers = WinningLottoNumbers(winningNumbers, bonusNumber)
-        val threeMatchedNumbers = mutableListOf<Int>(10, 11, 12)
+        val threeMatchedNumbers = mutableListOf(10, 11, 12)
         threeMatchedNumbers.addAll(winningNumbers.value.take(3).map { it.value })
 
         // when
@@ -40,7 +40,7 @@ class WinningLottoNumbersTest : DescribeSpec({
         val winningNumbers = LottoTicketNumbers.ofInts(listOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoTicketNumber(7)
         val winningLottoNumbers = WinningLottoNumbers(winningNumbers, bonusNumber)
-        val lottoNumbersWithBonusBall = mutableListOf<Int>()
+        val lottoNumbersWithBonusBall: MutableList<Int> = mutableListOf()
         lottoNumbersWithBonusBall.addAll(winningNumbers.value.take(5).map { it.value })
         lottoNumbersWithBonusBall.add(bonusNumber.value)
 

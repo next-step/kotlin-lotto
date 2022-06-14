@@ -29,7 +29,7 @@ class BuyLottoInputView(private val inputModule: InputModule, private val outPut
         }
 
         outPutModule.write("수동으로 구매할 번호를 입력해 주세요.")
-        val lottoTicketStrings = mutableListOf<String>()
+        val lottoTicketStrings: MutableList<String> = mutableListOf()
         repeat(ticketCountDto.tickCount) { lottoTicketStrings.add(inputModule.read()) }
         outPutModule.write("")
 

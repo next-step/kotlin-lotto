@@ -21,7 +21,7 @@ class ParserSeparatorsTest : DescribeSpec({
     describe("validation") {
         it("ParserSeparators`(구분자들)가 없는 경우 IllegalArgumentException 가 발생한다") {
             // given
-            val parserSeparators = listOf<ParserSeparator>()
+            val parserSeparators = emptyList<ParserSeparator>()
 
             // then
             parserSeparators.size shouldBe 0

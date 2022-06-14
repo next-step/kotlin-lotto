@@ -12,7 +12,7 @@ class LottoPrizeManagerTest : DescribeSpec({
         val bonusLottoNumber = LottoTicketNumber(7)
 
         val oneRankLottoNumber = allMatchedWinningLottoInts.toList()
-        val twoRankLottoNumber = mutableListOf<Int>()
+        val twoRankLottoNumber: MutableList<Int> = mutableListOf()
         twoRankLottoNumber.addAll(allMatchedWinningLottoInts.take(5))
         twoRankLottoNumber.add(bonusLottoNumber.value)
 
