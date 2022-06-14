@@ -1,10 +1,16 @@
 package lotto.entity
 
-class LottoTicketMachine() {
-    fun printMaxTicket(money: Int): MutableList<LottoTicket> {
+import lotto.entity.LottoTicket.Companion.LOTTO_NUMBER_LENGTH
+import lotto.entity.LottoTicket.Companion.LOTTO_PRICE
+
+object LottoTicketMachine {
+    private const val minimumLottoNumber = 1
+    private const val maximumLottoNumber = 45
+
+    fun printMaxTicket(money: Int): List<LottoTicket> {
         return mutableListOf<LottoTicket>().apply {
-            repeat(money / 1000) { this.add(print()) }
-        }
+            repeat(money / LOTTO_PRICE) { this.add(print()) }
+        }.toList()
     }
 
     fun print(numbers: List<Int> = getRandomNumber()): LottoTicket {
@@ -12,6 +18,6 @@ class LottoTicketMachine() {
     }
 
     fun getRandomNumber(): List<Int> {
-        return (1..45).toList().shuffled().take(6)
+        return (minimumLottoNumber..maximumLottoNumber).toList().shuffled().take(LOTTO_NUMBER_LENGTH)
     }
 }
