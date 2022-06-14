@@ -3,11 +3,12 @@ package lotto.ui
 import lotto.domain.Grade
 import lotto.domain.LottoList
 import lotto.domain.LottoResult
+import lotto.domain.OrderSheet
 
 object OutputUI {
 
-    fun drawPurchaseMessage(count: Int) {
-        println("${count}개를 구매했습니다.")
+    fun drawPurchaseMessage(orderSheet: OrderSheet) {
+        println("수동으로 ${orderSheet.manual}장, 자동으로 ${orderSheet.auto}개를 구매했습니다.")
     }
 
     fun drawManualInputRequest() {

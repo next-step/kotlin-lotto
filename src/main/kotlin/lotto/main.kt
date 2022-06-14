@@ -8,15 +8,17 @@ fun main() {
     val money = InputUI.receivePurchaseAmount()
     val manualPurchaseCount = InputUI.receiveManualPurchaseCount()
 
-    if (LottoSeller.canPurchase(money, manualPurchaseCount)) {
+    val order = LottoSeller.order(money, manualPurchaseCount)
+
+    if (order.isValid()) {
         OutputUI.drawManualInputRequest()
         val manualLotto = (0 until manualPurchaseCount).map {
             InputUI.receiveManualNumbers()
         }
 
-        val lottoList = LottoSeller.buy(money, manualLotto)
+        val lottoList = LottoSeller.take(order, manualLotto)
 
-        OutputUI.drawPurchaseMessage(lottoList.size)
+        OutputUI.drawPurchaseMessage(order)
         OutputUI.drawLotto(lottoList)
 
         val winningNumbers = InputUI.receiveWinningNumbers()
