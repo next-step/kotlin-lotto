@@ -11,11 +11,12 @@ class LottoTickets constructor(
 
     fun totalMatchResults(winningTicket: WinningTicket): WinningResult {
         val winningAmountMap = WinningAmount.values()
-            .associateWith { 0 }.toMutableMap()
+            .associateWith { 0 }
+            .toMutableMap()
 
         values.forEach {
             val winningAmount = winningTicket.matchResult(it)
-            winningAmountMap[winningAmount] = winningAmountMap[winningAmount]!!.inc()
+            winningAmountMap.computeIfPresent(winningAmount) { _, amount -> amount.inc() }
         }
 
         return WinningResult(winningAmountMap)
