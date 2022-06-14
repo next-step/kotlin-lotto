@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.row
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 
@@ -21,10 +22,10 @@ internal class LottoNumberTest : FreeSpec({
             0,
             46,
             1000
-        ).forEach { number ->
+        ).forAll { number ->
             "'$number' 는 예외가 발생한다." {
                 val exception =
-                    shouldThrowExactly<java.lang.IllegalArgumentException> { LottoNumber.from(value = number) }
+                    shouldThrowExactly<IllegalArgumentException> { LottoNumber.from(value = number) }
                 exception.message shouldBe "로또 숫자의 범위는 1 ~ 45 입니다."
             }
         }

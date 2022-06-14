@@ -16,7 +16,7 @@ internal class MoneyTest : FreeSpec({
         ).forEach { value ->
             "Money 값 '$value'는 예외가 발생한다." {
                 val exception =
-                    shouldThrowExactly<java.lang.IllegalArgumentException> { Money(value = BigDecimal.valueOf(value.toLong())) }
+                    shouldThrowExactly<IllegalArgumentException> { Money(value = BigDecimal.valueOf(value.toLong())) }
 
                 exception.message shouldBe "돈은 0 보다 작을 수 없습니다."
             }

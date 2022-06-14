@@ -19,7 +19,7 @@ internal class LottoNumbersTest : FreeSpec({
 
     "로또 번호가 중복되는 경우 예외가 발생한다." {
         // when, then
-        val exception = shouldThrowExactly<java.lang.IllegalArgumentException> {
+        val exception = shouldThrowExactly<IllegalArgumentException> {
             LottoNumbers(
                 setOf(
                     LottoNumber.from(1),
