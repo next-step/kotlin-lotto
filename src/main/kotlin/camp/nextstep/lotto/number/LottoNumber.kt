@@ -1,10 +1,7 @@
 package camp.nextstep.lotto.number
 
-class LottoNumber private constructor(val value: Int) {
-
-    override fun toString(): String {
-        return value.toString()
-    }
+@JvmInline
+value class LottoNumber private constructor(val value: Int) {
 
     companion object {
         val LOTTO_NUMBER_RANGE = 1..45
