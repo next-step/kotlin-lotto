@@ -13,7 +13,7 @@ class LottoGame(
 
         val winningTicket = WinningTicket.of(inputView.inputWinning())
         val matchResults = lottoTickets.totalMatchResults(winningTicket)
-        outputView.printWinningResult(matchResults.values)
+        outputView.printWinningResult(matchResults.amountWithWinnings)
         outputView.printYield(matchResults.calculateYield())
     }
 }

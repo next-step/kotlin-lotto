@@ -54,10 +54,10 @@ internal class LottoTicketsTest : FreeSpec({
         val results = lottoTickets.totalMatchResults(winningTicket = winningTicket)
 
         // then
-        results.values[WinningAmount.MISS] shouldBe 1
-        results.values[WinningAmount.FOURTH] shouldBe 0
-        results.values[WinningAmount.THIRD] shouldBe 1
-        results.values[WinningAmount.SECOND] shouldBe 1
-        results.values[WinningAmount.FIRST] shouldBe 1
+        results.amountWithWinnings[WinningAmount.MISS] shouldBe 1
+        results.amountWithWinnings[WinningAmount.FOURTH] shouldBe 0
+        results.amountWithWinnings[WinningAmount.THIRD] shouldBe 1
+        results.amountWithWinnings[WinningAmount.SECOND] shouldBe 1
+        results.amountWithWinnings[WinningAmount.FIRST] shouldBe 1
     }
 })

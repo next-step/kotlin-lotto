@@ -14,7 +14,7 @@ internal class WinningResultTest : StringSpec({
         winningAmountMap[FOURTH] = winningAmountMap[FOURTH]!! + 1
         winningAmountMap[MISS] = winningAmountMap[MISS]!! + 13
 
-        val winningResult = WinningResult(values = winningAmountMap)
+        val winningResult = WinningResult(amountWithWinnings = winningAmountMap)
 
         // when
         val yield = winningResult.calculateYield()
