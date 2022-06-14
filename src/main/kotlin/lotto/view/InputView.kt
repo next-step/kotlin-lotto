@@ -11,11 +11,11 @@ class InputView {
 
     fun inputWinning(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readln().split(REGEX)
+        return readln().split(DELIMITER)
             .map { it.toInt() }
     }
 
     companion object {
-        private const val REGEX = ", "
+        private const val DELIMITER = ", "
     }
 }
