@@ -2,7 +2,7 @@ package camp.nextstep.lotto.user
 
 import camp.nextstep.lotto.ticket.LottoStore
 import camp.nextstep.lotto.ticket.LottoTicketMachine
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -16,7 +16,7 @@ internal class GamblerTest {
 
         user.exchangeAll(store)
 
-        assertEquals(10, user.tickets.size)
-        assertEquals(0, user.balance)
+        assertThat(user.tickets.size).isEqualTo(10)
+        assertThat(user.balance).isEqualTo(0)
     }
 }

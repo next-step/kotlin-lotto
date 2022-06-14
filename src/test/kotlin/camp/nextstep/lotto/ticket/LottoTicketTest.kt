@@ -4,7 +4,6 @@ import camp.nextstep.lotto.IntArrayConverter
 import camp.nextstep.lotto.number.LottoNumber
 import camp.nextstep.lotto.number.LottoNumber.Companion.toLottoNumbers
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -19,7 +18,7 @@ internal class LottoTicketTest {
     fun sixNumbersTest() {
         val ticket = LottoTicket.of(1, 2, 3, 4, 5, 6)
 
-        assertEquals(6, ticket.numbers.size)
+        assertThat(ticket.numbers.size).isEqualTo(6)
         assertThat(ticket.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
     }
 
@@ -31,7 +30,7 @@ internal class LottoTicketTest {
         val sortedNumbers = listOf(6, 4, 2, 3, 1, 5).sorted()
 
         for (i in 0 until LottoTicket.LOTTO_NUMBERS) {
-            assertEquals(LottoNumber.of(sortedNumbers[i]), ticket.numbers[i])
+            assertThat(ticket.numbers[i]).isEqualTo(LottoNumber.of(sortedNumbers[i]))
         }
     }
 

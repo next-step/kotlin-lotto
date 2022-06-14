@@ -6,7 +6,6 @@ import camp.nextstep.lotto.number.LottoNumber.Companion.toLottoNumbers
 import camp.nextstep.lotto.number.WinnerNumbers
 import camp.nextstep.lotto.ticket.LottoTicket
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -39,7 +38,7 @@ internal class LottoResultMatcherTest {
 
         val matchResult = LottoResultMatcher.count(lottoTicket, WinnerNumbers(winnerNumbers, bonusNumber))
 
-        assertEquals(expectedMatchCount, matchResult.matchedCount)
+        assertThat(matchResult.matchedCount).isEqualTo(expectedMatchCount)
     }
 
     @DisplayName("여러 개의 티켓에 대하여 일치하는 개수를 기준으로 계산할 수 있다.")
