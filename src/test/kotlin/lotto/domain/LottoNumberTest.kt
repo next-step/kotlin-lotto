@@ -7,6 +7,7 @@ import io.kotest.data.row
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 internal class LottoNumberTest : FreeSpec({
     "로또 숫자는 1~45 사이의 정수로만 이루어진다." {
@@ -40,8 +41,7 @@ internal class LottoNumberTest : FreeSpec({
         ).forEach { (firstNumber, secondNumber) ->
             "'$firstNumber'와 '$secondNumber'의 인스턴스는 같다." {
                 LottoNumber.from(value = firstNumber) shouldBe LottoNumber.from(value = secondNumber)
-                LottoNumber.from(value = firstNumber).hashCode() shouldBe LottoNumber.from(value = secondNumber)
-                    .hashCode()
+                LottoNumber.from(value = firstNumber) shouldBeSameInstanceAs LottoNumber.from(value = secondNumber)
             }
         }
     }

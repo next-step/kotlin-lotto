@@ -41,10 +41,8 @@ internal class LottoNumbersTest : FreeSpec({
         val lottoNumbers = LottoNumbers.random()
 
         // then
-        for (i in (0..4)) {
-            val frontNumber = lottoNumbers.values.elementAt(index = i)
-            val secondNumber = lottoNumbers.values.elementAt(index = i + 1)
-            frontNumber.value.shouldBeLessThan(secondNumber.value)
+        lottoNumbers.values.zipWithNext { currentNumber, nextNumber ->
+            currentNumber.value.shouldBeLessThan(nextNumber.value)
         }
     }
 
