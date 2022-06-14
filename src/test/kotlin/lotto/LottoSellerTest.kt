@@ -6,6 +6,8 @@ import lotto.domain.LottoSeller
 import lotto.domain.Money
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class LottoSellerTest {
 
@@ -26,6 +28,14 @@ class LottoSellerTest {
         lotto.forEach {
             Assertions.assertThat(it.matchCount(numbers)).isEqualTo(expected)
         }
+    }
+
+    @ParameterizedTest
+    @CsvSource("1100, 1, true", "900, 1, false")
+    fun `수동 구매에 필요한 금액보다 구매 금액이 작을 경우 실패를 알려준다`(money: Int, count: Int, expected: Boolean) {
+        val result = LottoSeller.canPurchase(Money(money), count)
+
+        Assertions.assertThat(result).isEqualTo(expected)
     }
 
     private fun LottoNumbers(vararg numbers: Int) = LottoNumbers(numbers.map(::LottoNumber))

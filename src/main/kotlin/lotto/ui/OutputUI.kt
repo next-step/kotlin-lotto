@@ -10,6 +10,14 @@ object OutputUI {
         println("${count}개를 구매했습니다.")
     }
 
+    fun drawManualInputRequest() {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+    }
+
+    fun drawErrorMessage(message: String) {
+        println(message)
+    }
+
     fun drawLotto(lottoList: LottoList) {
         lottoList.forEach {
             println("[$it]")
