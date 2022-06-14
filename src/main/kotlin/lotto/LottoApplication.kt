@@ -10,6 +10,9 @@ import lotto.view.ResultView
 fun main() {
     // 구매관련
     val money = InputView.askLottoMoney()
+    val manualLottoCount = InputView.askManualLottoCount()
+    val manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount)
+
     ResultView.printBuyLottoCount(LottoMoney().getLottoCount(money))
     val lottoBuyer = LottoBuyer.buyer(money)
     ResultView.printBuyLottoNumber(lottoBuyer.lottoBuyList)
