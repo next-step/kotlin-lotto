@@ -33,7 +33,9 @@ class BuyLottoInputView(private val inputModule: InputModule, private val outPut
         repeat(ticketCountDto.tickCount) { lottoTicketStrings.add(inputModule.read()) }
         outPutModule.write("")
 
-        return lottoTicketStrings.map { lottoNumbersString -> LottoTicket.ofString(lottoNumbersString, PASSIVE_LOTTO_DELIMITER) }
+        return lottoTicketStrings
+            .map { lottoTicketString -> PASSIVE_LOTTO_DELIMITER.parseNumbers(lottoTicketString) }
+            .map { LottoTicket.ofInts(it) }
     }
 
     fun readWinningLottoNumbers(): WinningLottoNumbers {
