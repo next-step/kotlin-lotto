@@ -15,7 +15,7 @@ data class LottoNumber private constructor(
             }
         }
 
-        fun toLottoNumberList(): List<LottoNumber> {
+        fun cachedLottoNumbers(): List<LottoNumber> {
             return LOTTO_NUMBERS.values
                 .toList()
         }

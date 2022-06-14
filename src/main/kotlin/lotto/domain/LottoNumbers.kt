@@ -18,7 +18,7 @@ class LottoNumbers constructor(
         private const val NUMBERS_COUNT = 6
 
         fun random(): LottoNumbers = LottoNumbers(
-            LottoNumber.toLottoNumberList()
+            LottoNumber.cachedLottoNumbers()
                 .asSequence()
                 .shuffled()
                 .take(NUMBERS_COUNT)
