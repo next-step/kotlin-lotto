@@ -8,7 +8,7 @@ import lotto.domain.OrderSheet
 object OutputUI {
 
     fun drawPurchaseMessage(orderSheet: OrderSheet) {
-        println("수동으로 ${orderSheet.manual}장, 자동으로 ${orderSheet.auto}개를 구매했습니다.")
+        println("수동으로 ${orderSheet.manualCount}장, 자동으로 ${orderSheet.autoCount}개를 구매했습니다.")
     }
 
     fun drawManualInputRequest() {

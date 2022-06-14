@@ -21,6 +21,6 @@ class OrderTest {
     fun `수동 구매를 제외한 금액만큼 자동구매한다`(money: Int, manualCount: Int, autoCount: Int) {
         val result = OrderSheet(Money(money), manualCount, Money(1000))
 
-        Assertions.assertThat(result.auto).isEqualTo(autoCount)
+        Assertions.assertThat(result.autoCount).isEqualTo(autoCount)
     }
 }

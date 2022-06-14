@@ -10,7 +10,7 @@ object LottoSeller {
     }
 
     fun take(orderSheet: OrderSheet, manualLotto: List<LottoNumbers> = emptyList()): LottoList {
-        val autoLotto = LottoMachine.make(orderSheet.auto, RandomLottoNumberGenerator)
+        val autoLotto = LottoMachine.make(orderSheet.autoCount, RandomLottoNumberGenerator)
         return LottoList(manualLotto + autoLotto, orderSheet.totalCost)
     }
 }
