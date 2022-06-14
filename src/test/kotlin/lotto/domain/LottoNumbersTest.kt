@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
+import io.kotest.data.Row2
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.ints.shouldBeLessThan
@@ -50,13 +51,13 @@ internal class LottoNumbersTest : FreeSpec({
         val winningNumbers = LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 6))
 
         listOf(
-            row(LottoNumbersFixture.of(setOf(11, 12, 13, 14, 15, 16)), 0),
-            row(LottoNumbersFixture.of(setOf(1, 12, 13, 14, 15, 16)), 1),
-            row(LottoNumbersFixture.of(setOf(1, 2, 13, 14, 15, 16)), 2),
-            row(LottoNumbersFixture.of(setOf(1, 2, 3, 14, 15, 16)), 3),
-            row(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 15, 16)), 4),
-            row(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 16)), 5),
-            row(LottoNumbersFixture.of(setOf(1, 2, 3, 4, 5, 6)), 6),
+            lottoNumbersAndResult(11, 12, 13, 14, 15, 16, result = 0),
+            lottoNumbersAndResult(1, 12, 13, 14, 15, 16, result = 1),
+            lottoNumbersAndResult(1, 2, 13, 14, 15, 16, result = 2),
+            lottoNumbersAndResult(1, 2, 3, 14, 15, 16, result = 3),
+            lottoNumbersAndResult(1, 2, 3, 4, 15, 16, result = 4),
+            lottoNumbersAndResult(1, 2, 3, 4, 5, 16, result = 5),
+            lottoNumbersAndResult(1, 2, 3, 4, 5, 6, result = 6),
         ).forEach { (lottoNumbers, result) ->
             "'${lottoNumbers.values}' 는 $result 개가 일치한다." {
                 winningNumbers.matchedNumberCount(other = lottoNumbers) shouldBe result
@@ -64,3 +65,6 @@ internal class LottoNumbersTest : FreeSpec({
         }
     }
 })
+
+fun lottoNumbersAndResult(n1: Int, n2: Int, n3: Int, n4: Int, n5: Int, n6: Int, result: Int): Row2<LottoNumbers, Int> =
+    row(LottoNumbersFixture.of(setOf(n1, n2, n3, n4, n5, n6)), result)
