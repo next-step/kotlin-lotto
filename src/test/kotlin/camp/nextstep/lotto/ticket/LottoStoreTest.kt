@@ -5,6 +5,7 @@ import camp.nextstep.lotto.number.LottoNumber.Companion.toLottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -28,8 +29,11 @@ internal class LottoStoreTest {
         val lottoStore = LottoStore(lottoTicketPrice = lottoPrice, lottoTicketMachine = LottoTicketMachine())
 
         val (tickets, balance) = lottoStore.exchangeAll(money)
-        assertThat(tickets.size).isEqualTo(expectedTicketCount)
-        assertThat(balance).isEqualTo(expectedBalance)
+
+        assertAll(
+            { assertThat(tickets.size).isEqualTo(expectedTicketCount) },
+            { assertThat(balance).isEqualTo(expectedBalance) }
+        )
     }
 
     @DisplayName("주어진 번호에 대한 로또 티켓을 교환할 수 있다.")
@@ -42,9 +46,12 @@ internal class LottoStoreTest {
         val numbers = listOf(listOf(1, 2, 3, 4, 5, 6).toLottoNumbers())
 
         val (tickets, balance) = lottoStore.exchange(seedMoney, numbers)
-        assertThat(tickets.size).isEqualTo(1)
-        assertThat(tickets[0].numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
-        assertThat(balance).isEqualTo(0)
+
+        assertAll(
+            { assertThat(tickets.size).isEqualTo(1) },
+            { assertThat(tickets[0].numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }) },
+            { assertThat(balance).isEqualTo(0) }
+        )
     }
 
     @DisplayName("구입 금액보다 더 많은 로또 티켓을 교환할 수 없다.")

@@ -8,6 +8,7 @@ import camp.nextstep.lotto.ticket.LottoTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.converter.ConvertWith
 import org.junit.jupiter.params.provider.CsvSource
@@ -63,10 +64,12 @@ internal class LottoResultMatcherTest {
 
         val winningTickets = LottoResultMatcher.winningTickets(tickets, WinnerNumbers(winnerNumbers, bonusNumber))
 
-        assertThat(winningTickets.filter { it.winnings == Winnings.FIRST }).hasSize(1)
-        assertThat(winningTickets.filter { it.winnings == Winnings.SECOND }).hasSize(2)
-        assertThat(winningTickets.filter { it.winnings == Winnings.THIRD }).hasSize(2)
-        assertThat(winningTickets.filter { it.winnings == Winnings.FOURTH }).hasSize(0)
-        assertThat(winningTickets.filter { it.winnings == Winnings.FIFTH }).hasSize(2)
+        assertAll(
+            { assertThat(winningTickets.filter { it.winnings == Winnings.FIRST }).hasSize(1) },
+            { assertThat(winningTickets.filter { it.winnings == Winnings.SECOND }).hasSize(2) },
+            { assertThat(winningTickets.filter { it.winnings == Winnings.THIRD }).hasSize(2) },
+            { assertThat(winningTickets.filter { it.winnings == Winnings.FOURTH }).hasSize(0) },
+            { assertThat(winningTickets.filter { it.winnings == Winnings.FIFTH }).hasSize(2) }
+        )
     }
 }

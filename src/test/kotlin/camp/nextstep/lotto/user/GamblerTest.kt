@@ -5,6 +5,7 @@ import camp.nextstep.lotto.ticket.LottoTicketMachine
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 internal class GamblerTest {
 
@@ -16,7 +17,9 @@ internal class GamblerTest {
 
         user.exchangeAll(store)
 
-        assertThat(user.tickets.size).isEqualTo(10)
-        assertThat(user.balance).isEqualTo(0)
+        assertAll(
+            { assertThat(user.tickets.size).isEqualTo(10) },
+            { assertThat(user.balance).isEqualTo(0) }
+        )
     }
 }
