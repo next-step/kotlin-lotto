@@ -1,6 +1,7 @@
 package camp.nextstep.lotto.ui.cli
 
-import camp.nextstep.lotto.number.LottoNumbers
+import camp.nextstep.lotto.number.LottoNumber
+import camp.nextstep.lotto.number.LottoNumber.Companion.toLottoNumbers
 import camp.nextstep.lotto.ui.GamblerNumbers
 
 object GamblerNumbersReader {
@@ -10,9 +11,9 @@ object GamblerNumbersReader {
         val n = requireNotNull(readLine()).toInt()
 
         println("수동으로 구매할 번호를 입력해 주세요.")
-        val lottoNumbersList = mutableListOf<LottoNumbers>()
+        val lottoNumbersList = mutableListOf<List<LottoNumber>>()
         repeat(n) {
-            lottoNumbersList += LottoNumbers.of(requireNotNull(readLine()).split(',').map { it.trim().toInt() })
+            lottoNumbersList += requireNotNull(readLine()).split(',').map { it.trim().toInt() }.toLottoNumbers()
         }
 
         return GamblerNumbers(lottoNumbersList)

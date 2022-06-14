@@ -2,7 +2,7 @@ package camp.nextstep.lotto.raffle
 
 import camp.nextstep.lotto.IntArrayConverter
 import camp.nextstep.lotto.number.LottoNumber
-import camp.nextstep.lotto.number.LottoNumbers
+import camp.nextstep.lotto.number.LottoNumber.Companion.toLottoNumbers
 import camp.nextstep.lotto.number.WinnerNumbers
 import camp.nextstep.lotto.ticket.LottoTicket
 import org.assertj.core.api.Assertions.assertThat
@@ -33,9 +33,9 @@ internal class LottoResultMatcherTest {
         ]
     )
     fun matchedLottoNumbers(@ConvertWith(IntArrayConverter::class) ticketNumbers: IntArray, expectedMatchCount: Int, expectedMatchedBonus: Boolean) {
-        val winnerNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
+        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6).toLottoNumbers()
         val bonusNumber = LottoNumber.of(7)
-        val lottoTicket = LottoTicket.of(LottoNumbers.of(*ticketNumbers))
+        val lottoTicket = LottoTicket.of(ticketNumbers.toList().toLottoNumbers())
 
         val matchResult = LottoResultMatcher.count(lottoTicket, WinnerNumbers(winnerNumbers, bonusNumber))
 
@@ -59,7 +59,7 @@ internal class LottoResultMatcherTest {
             LottoTicket.of(14, 24, 33, 41, 45, 6), // 1
             LottoTicket.of(15, 25, 34, 41, 44, 45), // 0
         )
-        val winnerNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6)
+        val winnerNumbers = listOf(1, 2, 3, 4, 5, 6).toLottoNumbers()
         val bonusNumber = LottoNumber.of(7)
 
         val winningTickets = LottoResultMatcher.winningTickets(tickets, WinnerNumbers(winnerNumbers, bonusNumber))

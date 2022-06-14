@@ -1,7 +1,7 @@
 package camp.nextstep.lotto.ticket
 
 import camp.nextstep.lotto.number.LottoNumber
-import camp.nextstep.lotto.number.LottoNumbers
+import camp.nextstep.lotto.number.LottoNumber.Companion.toLottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
@@ -40,11 +40,11 @@ internal class LottoStoreTest {
         val lottoStore = LottoStore(lottoTicketPrice = lottoPrice, lottoTicketMachine = LottoTicketMachine())
 
         val seedMoney = 1000
-        val numbers = listOf(LottoNumbers.of(1, 2, 3, 4, 5, 6))
+        val numbers = listOf(listOf(1, 2, 3, 4, 5, 6).toLottoNumbers())
 
         val (tickets, balance) = lottoStore.exchange(seedMoney, numbers)
         assertEquals(1, tickets.size)
-        assertThat(tickets[0].numbers.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
+        assertThat(tickets[0].numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
         assertEquals(0, balance)
     }
 
@@ -56,8 +56,8 @@ internal class LottoStoreTest {
 
         val seedMoney = 1000
         val numbers = listOf(
-            LottoNumbers.of(1, 2, 3, 4, 5, 6),
-            LottoNumbers.of(1, 2, 3, 4, 5, 6),
+            listOf(1, 2, 3, 4, 5, 6).toLottoNumbers(),
+            listOf(1, 2, 3, 4, 5, 6).toLottoNumbers(),
         )
 
         assertThrows<IllegalArgumentException> {

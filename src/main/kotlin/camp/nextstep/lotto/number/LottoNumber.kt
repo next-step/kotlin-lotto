@@ -13,5 +13,7 @@ value class LottoNumber private constructor(val value: Int) {
 
             return requireNotNull(LOTTO_NUMBERS[value])
         }
+
+        fun List<Int>.toLottoNumbers() = map { of(it) }
     }
 }

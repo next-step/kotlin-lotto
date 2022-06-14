@@ -1,6 +1,6 @@
 package camp.nextstep.lotto.ticket
 
-import camp.nextstep.lotto.number.LottoNumbers
+import camp.nextstep.lotto.number.LottoNumber
 
 class LottoStore(private val lottoTicketPrice: Int, private val lottoTicketMachine: LottoTicketMachine) {
 
@@ -16,7 +16,7 @@ class LottoStore(private val lottoTicketPrice: Int, private val lottoTicketMachi
         return LottoStoreReceipt(tickets, balance)
     }
 
-    fun exchange(money: Int, numbers: List<LottoNumbers>): LottoStoreReceipt {
+    fun exchange(money: Int, numbers: List<List<LottoNumber>>): LottoStoreReceipt {
         require(money >= numbers.size * lottoTicketPrice) { "구입금액을 초과하였습니다. (구입금액=$money, 구입개수=${numbers.size})" }
 
         val tickets = numbers.map { lottoTicketMachine.issueTicket(it) }
