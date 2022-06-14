@@ -8,8 +8,8 @@ class LottoNumbers(lottoNumbers: List<LottoNumber>) {
         require(lottoNumbers.toSet().size == LOTTO_NUMBER_SIZE) { LOTTO_DUPLICATE_MESSAGE }
     }
 
-    fun getCountWithWinningLottoNumber(winningLottoNumbers: List<LottoNumber>): Int {
-        return winningLottoNumbers
+    fun getCountWithWinningLottoNumber(winningLottoNumbers: LottoNumbers): Int {
+        return winningLottoNumbers.lottoNumbers
             .filter { winningLottoNumber -> lottoNumbers.contains(winningLottoNumber) }.size
     }
 

@@ -29,7 +29,7 @@ class LottoStatistics(
         winningLottoBonusNumber: LottoNumber
     ): Int {
         return lottoNumbers.sumOf { lotto ->
-            val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers.lottoNumbers)
+            val count = lotto.getCountWithWinningLottoNumber(LottoNumbers(winningLottoNumbers.lottoNumbers))
             val hasBonusNumber = lotto.hasBonusNumber(winningLottoBonusNumber)
             LottoMatch.findLottoMatch(count, hasBonusNumber).prize
         }
@@ -49,7 +49,7 @@ class LottoStatistics(
         lottoMatch: LottoMatch
     ): Int {
         return lottoNumbers.filter { lotto ->
-            val count = lotto.getCountWithWinningLottoNumber(winningLottoNumbers.lottoNumbers)
+            val count = lotto.getCountWithWinningLottoNumber(LottoNumbers(winningLottoNumbers.lottoNumbers))
             val hasBonusNumber = lotto.hasBonusNumber(winningLottoBonusNumber)
             LottoMatch.findLottoMatch(count, hasBonusNumber) == lottoMatch
         }.size

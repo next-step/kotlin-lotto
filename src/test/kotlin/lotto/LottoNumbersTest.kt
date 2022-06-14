@@ -75,13 +75,15 @@ class LottoNumbersTest {
                 LottoNumber.from(45)
             )
         ).getCountWithWinningLottoNumber(
-            listOf(
-                LottoNumber.from(5),
-                LottoNumber.from(10),
-                LottoNumber.from(15),
-                LottoNumber.from(20),
-                LottoNumber.from(25),
-                LottoNumber.from(45)
+            LottoNumbers(
+                listOf(
+                    LottoNumber.from(5),
+                    LottoNumber.from(10),
+                    LottoNumber.from(15),
+                    LottoNumber.from(20),
+                    LottoNumber.from(25),
+                    LottoNumber.from(45)
+                )
             )
         )
         Assertions.assertThat(count).isEqualTo(6)
