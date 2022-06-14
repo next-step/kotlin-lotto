@@ -2,7 +2,6 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 
@@ -46,26 +45,6 @@ class WinningLottoNumbersTest : DescribeSpec({
 
         // then
         winningLottoNumbers.hasBonusNumber(LottoTicketNumbers.ofInts(lottoNumbersWithBonusBall)) shouldBe true
-    }
-
-    describe("팩토리 메소드") {
-        it("String Type 에 팩토리 메소드를 지원하다") {
-            // given
-            val winningNumber = listOf(1, 2, 3, 4, 5, 6)
-            val winningNumberString = "1, 2, 3 ,4, 5, 6"
-            val winningNumberDelimiter = Delimiter(",")
-            val bonusLottoNumber = 7
-            val bonusLottoNumberString = bonusLottoNumber.toString()
-
-            // when
-            val winningLottoNumbers = WinningLottoNumbers.ofString(
-                winningNumberString, winningNumberDelimiter, bonusLottoNumberString
-            )
-
-            // then
-            winningLottoNumbers.winningLottoNumbers.value.map { it.value } shouldContainAll winningNumber
-            winningLottoNumbers.bonusLottoNumber.value shouldBe bonusLottoNumber
-        }
     }
 
     describe("validate") {
