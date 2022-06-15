@@ -31,19 +31,25 @@ class InputView {
 
     fun createManualLotto(manualLottoCount: Int): List<Lotto> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return buildList(manualLottoCount) {
-            putManualLottoNumber(manualLottoCount)
+        var lottos = listOf<Lotto>()
+        repeat(manualLottoCount) {
+            val input = readLottoInput()
+            lottos = lottos.plus(input)
         }
+        return lottos
     }
 
-    private fun MutableList<Lotto>.putManualLottoNumber(manualLottoCount: Int) {
-        repeat(manualLottoCount) {
-            add(
-                readln().split(DEFAULT_DELIMITER)
-                    .map { LottoNumber.from(it.toInt()) }
-                    .let(::Lotto)
-            )
-        }
+    private fun readLottoInput(): Lotto {
+        return readln().split(DEFAULT_DELIMITER)
+            .map { LottoNumber.from(it.toInt()) }
+            .let(::Lotto)
+    }
+
+    private fun List<Lotto>.plus(lotto: Lotto): List<Lotto> {
+        val lottos = ArrayList<Lotto>(this.size + 1)
+        lottos.addAll(this)
+        lottos.add(lotto)
+        return lottos
     }
 
     companion object {
