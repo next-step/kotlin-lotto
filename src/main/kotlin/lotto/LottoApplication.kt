@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.LottoBuyer
-import lotto.domain.LottoMoney
+import lotto.domain.LottoBuyerCount
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoStatistics
 import lotto.view.InputView
@@ -10,8 +10,11 @@ import lotto.view.ResultView
 fun main() {
     // 구매관련
     val money = InputView.askLottoMoney()
-    ResultView.printBuyLottoCount(LottoMoney().getLottoCount(money))
-    val lottoBuyer = LottoBuyer.buyer(money)
+    val lottoBuyerCount = LottoBuyerCount(money, InputView.askManualLottoCount())
+    val manualLottoNumbers = InputView.askManualLottoNumbers(lottoBuyerCount.manualLottoCount)
+    ResultView.printBuyLottoCount(lottoBuyerCount)
+
+    val lottoBuyer = LottoBuyer.buyer(manualLottoNumbers, lottoBuyerCount.autoLottoCount)
     ResultView.printBuyLottoNumber(lottoBuyer.lottoBuyList)
 
     // 당첨번호(보너스 번호 포함) 관련

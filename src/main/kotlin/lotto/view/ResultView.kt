@@ -1,13 +1,14 @@
 package lotto.view
 
+import lotto.domain.LottoBuyerCount
 import lotto.domain.LottoMatch
 import lotto.domain.LottoNumbers
 
 object ResultView {
     private const val PRINT_BUY_LOTTO_COUNT = "개를 구매했습니다."
 
-    fun printBuyLottoCount(count: Int) {
-        println("$count" + PRINT_BUY_LOTTO_COUNT)
+    fun printBuyLottoCount(lottoBuyerCount: LottoBuyerCount) {
+        println("수동으로 ${lottoBuyerCount.manualLottoCount}장, 자동으로 ${lottoBuyerCount.autoLottoCount}" + PRINT_BUY_LOTTO_COUNT)
     }
 
     fun printBuyLottoNumber(lottoNumbers: List<LottoNumbers>) {
