@@ -1,8 +1,8 @@
 package lotto.dto
 
-import lotto.domain.LottoPrizePolicy
+import lotto.domain.LottoRank
 import lotto.domain.Money
 
-data class WinningStatDto(val lottoPrizePolicy: LottoPrizePolicy, val totalWinningCount: Int) {
-    val totalWinningPrize: Money = Money(lottoPrizePolicy.wonPrize.value * totalWinningCount)
+data class WinningStatDto(val lottoRank: LottoRank, val totalWinningCount: Int) {
+    val totalWinningPrize: Money = Money(lottoRank.wonPrize.value * totalWinningCount)
 }

@@ -56,10 +56,10 @@ class BuyLottoOutputView(private val outPutModule: OutPutModule) {
 
     private fun getWiningStatTemplate(winningStatDto: WinningStatDto): String {
         var bonusBallFormat = ""
-        if (winningStatDto.lottoPrizePolicy.includeBonusNumber()) {
+        if (winningStatDto.lottoRank.includeBonusNumber()) {
             bonusBallFormat = ", 보너스 볼 일치"
         }
-        return "${winningStatDto.lottoPrizePolicy.winningNumberMatchCount}개 일치$bonusBallFormat (${winningStatDto.lottoPrizePolicy.wonPrize.value}원)- ${winningStatDto.totalWinningCount}개"
+        return "${winningStatDto.lottoRank.winningNumberMatchCount}개 일치$bonusBallFormat (${winningStatDto.lottoRank.wonPrize.value}원)- ${winningStatDto.totalWinningCount}개"
     }
 
     private fun showEarningsRate(boughtTicketTotalMoney: Money, winningStatDTOs: List<WinningStatDto>) {

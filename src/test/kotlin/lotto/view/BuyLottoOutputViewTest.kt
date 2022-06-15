@@ -2,7 +2,7 @@ package lotto.view
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoPrizePolicy
+import lotto.domain.LottoRank
 import lotto.domain.LottoTicket
 import lotto.domain.Money
 import lotto.dto.WinningStatDto
@@ -100,10 +100,9 @@ class BuyLottoOutputViewTest : DescribeSpec({
         // given
         val buyLottoOutputView = BuyLottoOutputView(stubOutputModule)
         val winingStats = listOf(
-            WinningStatDto(LottoPrizePolicy(3, Money(3000)), 30),
-            WinningStatDto(LottoPrizePolicy(4, Money(4000)), 40),
-            WinningStatDto(LottoPrizePolicy(5, Money(5000), false), 50),
-            WinningStatDto(LottoPrizePolicy(5, Money(8000), true), 50),
+            WinningStatDto(LottoRank.ONE, 10),
+            WinningStatDto(LottoRank.TWO, 20),
+            WinningStatDto(LottoRank.THREE, 30),
         )
         val boughtTicketTotalMoney = Money(1000)
 
@@ -116,11 +115,10 @@ class BuyLottoOutputViewTest : DescribeSpec({
             ---------
         """.trimIndent()
         outputStore[1] shouldBe """
-            3개 일치 (3000원)- 30개
-            4개 일치 (4000원)- 40개
-            5개 일치 (5000원)- 50개
-            5개 일치, 보너스 볼 일치 (8000원)- 50개
+            6개 일치 (2000000000원)- 10개
+            5개 일치, 보너스 볼 일치 (30000000원)- 20개
+            5개 일치 (1500000원)- 30개
         """.trimIndent()
-        outputStore[2] shouldBe "총 수익률은 900.0입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+        outputStore[2] shouldBe "총 수익률은 2.0645E7입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
     }
 })

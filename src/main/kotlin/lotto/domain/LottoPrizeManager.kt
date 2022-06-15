@@ -11,8 +11,8 @@ class LottoPrizeManager {
     ): List<WinningStatDto> {
         return lottoRanks.map { lottoRank ->
             WinningStatDto(
-                lottoRank.prizePolicy,
-                lottoTickets.count { lottoTicket -> lottoRank.prizePolicy.isWon(lottoTicket, winningLottoNumbers) }
+                lottoRank,
+                lottoTickets.count { lottoTicket -> lottoRank.isWon(lottoTicket, winningLottoNumbers) }
             )
         }
     }

@@ -28,13 +28,13 @@ class LottoPrizeManagerTest : DescribeSpec({
 
         // then
         // 6개 번호 일치한 당첨 정책 확인
-        winningStats[0].lottoPrizePolicy.winningNumberMatchCount shouldBe 6
+        winningStats[0].lottoRank.winningNumberMatchCount shouldBe 6
         winningStats[0].totalWinningCount shouldBe 1
-        winningStats[0].totalWinningPrize shouldBe Money(1 * winningStats[0].lottoPrizePolicy.wonPrize.value)
+        winningStats[0].totalWinningPrize shouldBe Money(1 * winningStats[0].lottoRank.wonPrize.value)
 
         // 5개 일치한 당첨 정책 확인
-        winningStats[1].lottoPrizePolicy.winningNumberMatchCount shouldBe 5
+        winningStats[1].lottoRank.winningNumberMatchCount shouldBe 5
         winningStats[1].totalWinningCount shouldBe 1
-        winningStats[1].totalWinningPrize shouldBe Money(1 * winningStats[1].lottoPrizePolicy.wonPrize.value)
+        winningStats[1].totalWinningPrize shouldBe Money(1 * winningStats[1].lottoRank.wonPrize.value)
     }
 })
