@@ -33,7 +33,7 @@ class LottoResultTest {
 
         val result = LottoResult.of(listOf(lotto), winningLotto)
 
-        assertThat(result.lottoRankList.contains(LottoRank.SECOND))
+        assertThat(result.lottoRankList).contains(LottoRank.SECOND)
     }
 
     @Test
@@ -46,7 +46,7 @@ class LottoResultTest {
 
         val result = LottoResult.of(listOf(lotto), winningLotto)
 
-        assertThat(result.lottoRankList.contains(LottoRank.THIRD))
+        assertThat(result.lottoRankList).contains(LottoRank.THIRD)
     }
 
     @Test
