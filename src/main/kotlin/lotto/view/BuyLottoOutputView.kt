@@ -22,19 +22,15 @@ class BuyLottoOutputView(private val outPutModule: OutPutModule) {
         this.showEarningsRate(boughtTicketTotalMoney, winningStatDTOs)
     }
 
-    private fun getTicketsNumberFormat(lottoTickets: List<LottoTicket>): String {
-        var result = lottoTickets.map { lottoTicket ->
+    private fun getTicketsNumberFormat(lottoTickets: List<LottoTicket>): String = with(StringBuilder()) {
+        lottoTickets.forEach { lottoTicket ->
             lottoTicket.lottoTicketNumbers.value
                 .map { it.value }
                 .sorted()
                 .joinToString(prefix = "[", postfix = "]")
-        }.joinToString(separator = DIVIDING)
-
-        if (result.isNotEmpty()) {
-            result += DIVIDING
+                .let(this::appendLine)
         }
-
-        return result
+        return this.toString()
     }
 
     private fun showWinningStartLabel() {
