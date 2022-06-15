@@ -13,6 +13,10 @@ fun main() {
     LottoOutputView.displayIssuedLottos(issuedLottos)
 
     val winningInfo = LottoInputView.inputWinningNumbersAndBonusNumber()
+    issuedLottos.forEach {
+        it.validate(winningInfo.winningNumbers, winningInfo.bonusNumber)
+    }
+
     winningInfo.setScore(issuedLottos)
     val revenuePercentage = winningInfo.getRevenuePercentage(priceRule.amount, winningInfo.revenue)
 

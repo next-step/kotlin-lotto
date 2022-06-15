@@ -12,8 +12,7 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
         winningNumbers = winningNumberInput.split(",").map { it.replace(" ", "").toInt() }.toMutableList()
         bonusNumber = bonusNumberInput.toInt()
 
-        require(winningNumbers.size == LOTTO_NUMBER_COUNT)
-        require(LOTTO_NUMBER_RANGE.contains(bonusNumber) && !winningNumbers.contains(bonusNumber))
+        // todo keira. validate ticket
     }
 
     fun setScore(issuedLottos: List<LottoTicket>) {

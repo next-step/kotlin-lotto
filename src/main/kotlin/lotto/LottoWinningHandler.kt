@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.WinningPriceEnum.Companion.find
+
 object LottoWinningHandler {
 
     fun matchCount(issuedLottos: List<LottoTicket>, numbers: List<Int>): Map<WinningPriceEnum, Int> {
@@ -10,7 +12,7 @@ object LottoWinningHandler {
             result[c] = result[c]?.plus(1) ?: 1
         }
 
-        return setMatchedLottoNumber(result)
+        return createMatchedLottoNumber(result)
     }
 
     fun calculateRevenue(scoreInfos: List<ScoreInfo>): Int {
@@ -21,7 +23,7 @@ object LottoWinningHandler {
         return winnerNumbers.count { ticket.contains(it) }
     }
 
-    private fun setMatchedLottoNumber(matchedMap: Map<Int, Int>): Map<WinningPriceEnum, Int> {
+    private fun createMatchedLottoNumber(matchedMap: Map<Int, Int>): Map<WinningPriceEnum, Int> {
         return matchedMap.entries.associate { find(it.key) to it.value }
     }
 }
