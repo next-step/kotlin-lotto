@@ -1,7 +1,7 @@
-package controller
+package stringCalculator.controller
 
-import domain.Calculator
-import view.InputView
+import stringCalculator.domain.Calculator
+import stringCalculator.view.InputView
 
 class StringCalculator {
     fun calculate() : Int{

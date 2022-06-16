@@ -1,4 +1,4 @@
-package domain
+package stringCalculator.domain
 
 class Expression(text: String) {
     var numbers: List<Int>
