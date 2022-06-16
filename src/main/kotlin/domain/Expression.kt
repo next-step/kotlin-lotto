@@ -5,10 +5,10 @@ class Expression(text: String) {
         private set
 
     init {
-        numbers = text.parseExpression().checkValid()
+        numbers = text.parse().checkValid()
     }
 
-    private fun String.parseExpression(): List<String> {
+    private fun String.parse(): List<String> {
         return Regex("//(.)\n(.*)").find(this)?.let {
             it.groupValues[2].split(it.groupValues[1])
         } ?: this.split(DELIMITER_COLON, DELIMITER_COMMA)
