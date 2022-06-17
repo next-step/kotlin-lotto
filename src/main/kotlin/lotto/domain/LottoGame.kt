@@ -1,18 +1,20 @@
 package lotto.domain
 
 class LottoGame(
-    private val lottos: List<Lotto>,
+    lottos: List<Lotto>,
     private val winningLotto: Lotto,
     private val bonusNumber: LottoNumber
 ) {
 
     private val ranks = lottos.map {
-        Rank.of(it.countOfMatch(winningLotto), bonusNumber in it.numbers)
+        Rank.of(countOfMatch = it.countOfMatch(winningLotto), matchedBonus = bonusNumber in it.numbers)
     }
 
     private val prize = ranks.sumOf { it.prize }
 
     val profit: Double = prize / (lottos.size * LOTTO_PRICE)
+
+    val result = LottoGameResult(ranks, profit)
 
     fun countOfRank(rank: Rank): Int {
         return ranks.count { it == rank }

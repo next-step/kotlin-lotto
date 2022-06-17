@@ -5,6 +5,6 @@ import lotto.domain.Lotto
 data class LottoView(val lotto: Lotto) {
 
     fun print() {
-        println(lotto)
+        println("[${lotto.numbers.joinToString { it.value.toString() }}]")
     }
 }

@@ -24,25 +24,25 @@ class LottoController(private val lottoService: LottoService) {
         val bonusNumber = getBonusNumber()
         val lottoGame = LottoGame(lottos, winningLotto, bonusNumber)
 
-        LottoGameView.printWinningStats(lottoGame)
+        LottoGameView.printWinningStats(lottoGame.result)
     }
 
     private fun getPurchaseAmount(): Int {
         LottoGameView.printPurchaseAmountInput()
 
-        return InputParser.parsePurchaseAmount(readLine()!!)
+        return InputParser.parsePurchaseAmount(requireNotNull(readLine()))
     }
 
     private fun getLastWinningLotto(): Lotto {
         LottoGameView.printLastWinningNumbers()
 
-        return Lotto(InputParser.parseWinningNumbers(readLine()!!))
+        return Lotto(InputParser.parseWinningNumbers(requireNotNull(readLine())))
     }
 
     private fun getBonusNumber(): LottoNumber {
         LottoGameView.printBonusNumber()
 
-        return InputParser.parseBonusNumber(readLine()!!)
+        return InputParser.parseBonusNumber(requireNotNull(readLine()))
     }
 
     companion object {
