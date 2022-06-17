@@ -1,27 +1,17 @@
 package lotto.domain
 
-enum class Rank(val prize: Double) {
-    FIRST(Rank.PRIZE_1ST),
-    SECOND(Rank.PRIZE_2ND),
-    THIRD(Rank.PRIZE_3RD),
-    FOURTH(Rank.PRIZE_4TH),
-    LOSE(Rank.PRIZE_LOSER);
+enum class Rank(val countOfMatch: Int, val matchedBonus: Boolean = false, val prize: Double) {
+    FIRST(countOfMatch = 6, prize = 2_000_000_000.0),
+    SECOND(countOfMatch = 5, matchedBonus = true, prize = 30_000_000.0),
+    THIRD(countOfMatch = 5, prize = 1_500_000.0),
+    FOURTH(countOfMatch = 4, prize = 50_000.0),
+    FIFTH(countOfMatch = 3, prize = 5_000.0),
+    LOSE(countOfMatch = 0, prize = 0.0)
+    ;
 
     companion object {
-        fun of(matched: Int): Rank {
-            return when (matched) {
-                6 -> FIRST
-                5 -> SECOND
-                4 -> THIRD
-                3 -> FOURTH
-                else -> LOSE
-            }
+        fun of(countOfMatch: Int, matchedBonus: Boolean): Rank {
+            return values().firstOrNull { it.countOfMatch == countOfMatch && it.matchedBonus == matchedBonus } ?: LOSE
         }
-
-        private const val PRIZE_1ST = 2_000_000_000.0
-        private const val PRIZE_2ND = 1_500_000.0
-        private const val PRIZE_3RD = 50_000.0
-        private const val PRIZE_4TH = 5_000.0
-        private const val PRIZE_LOSER = 0.0
     }
 }

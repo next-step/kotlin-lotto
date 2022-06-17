@@ -28,4 +28,11 @@ internal class InputParserTest {
             )
         )
     }
+
+    @Test
+    fun `보너스 번호를 파싱할 수 있다`() {
+        val result = InputParser.parseBonusNumber("1")
+
+        assertThat(result).isEqualTo(LottoNumber.of(1))
+    }
 }

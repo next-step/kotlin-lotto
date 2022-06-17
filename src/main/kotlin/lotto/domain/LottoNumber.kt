@@ -1,6 +1,7 @@
 package lotto.domain
 
-class LottoNumber private constructor(val value: Int) {
+@JvmInline
+value class LottoNumber private constructor(val value: Int) {
 
     override fun toString(): String {
         return "$value"

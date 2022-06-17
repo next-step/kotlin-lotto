@@ -1,6 +1,7 @@
 package lotto.view
 
-import lotto.domain.LottoGame
+import lotto.domain.LottoGameResult
+import lotto.domain.Rank
 
 object LottoGameView {
 
@@ -16,25 +17,38 @@ object LottoGameView {
         println(LAST_WINNING_NUMBER_MESSAGE)
     }
 
-    fun printWinningStats(lottoGame: LottoGame) {
-        println(WINNING_STAT_MESSAGE)
-        println(create4thMessage(lottoGame.rank(3)))
-        println(create3rdMessage(lottoGame.rank(4)))
-        println(create2ndMessage(lottoGame.rank(5)))
-        println(create1stMessage(lottoGame.rank(6)))
-        println(createProfitMessage(lottoGame.profit))
+    fun printBonusNumber() {
+        println(BONUS_NUMBER_MESSAGE)
     }
 
+    fun printWinningStats(result: LottoGameResult) {
+        println(
+            """
+            |$WINNING_STAT_MESSAGE
+            |${Rank.values().take(MAX_RANK).reversed().joinToString("\n") { prizeMessageTemplate(result.ranks, it) }}
+            |${createProfitMessage(result.profit)}
+            """.trimMargin()
+        )
+    }
+
+    private const val MAX_RANK = 5
     private const val PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
     private const val BUY_AMOUNT_MESSAGE = "개를 구매했습니다."
     private const val LAST_WINNING_NUMBER_MESSAGE = "지난 주 당첩 번호를 입력해 주세요."
+    private const val BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요."
     private const val WINNING_STAT_MESSAGE = "당첨 통계\n---------"
-    private val create4thMessage = { n: Int -> "3개 일치 (5000원)- ${n}개" }
-    private val create3rdMessage = { n: Int -> "4개 일치 (50000원)- ${n}개" }
-    private val create2ndMessage = { n: Int -> "5개 일치 (1500000원)- ${n}개" }
-    private val create1stMessage = { n: Int -> "6개 일치 (2000000000원)- ${n}개" }
+    private val prizeMessageTemplate = { ranks: List<Rank>, rank: Rank ->
+        "${getRankMessage(rank)} - ${ranks.count { it == rank }}개"
+    }
+    private const val BONUS_MESSAGE = ", 보너스 볼 일치"
     private val createProfitMessage = { profit: Double ->
         "총 수익률은 ${profit}입니다." + getProfitResultMessage(profit)
+    }
+
+    private fun getRankMessage(rank: Rank): String {
+        var matchMessage = "${rank.countOfMatch}개 일치"
+        if (rank.matchedBonus) matchMessage += BONUS_MESSAGE
+        return matchMessage + " (${rank.prize.toInt()}원)"
     }
 
     private fun getProfitResultMessage(profit: Double): String {

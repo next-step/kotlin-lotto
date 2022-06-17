@@ -3,14 +3,10 @@ package lotto.domain
 class Lotto(val numbers: List<LottoNumber>) {
 
     init {
-        require(numbers.size == LOTTO_NUMBERS) { "Lotto must have 6 numbers" }
+        require(numbers.size == LOTTO_NUMBERS) { "Lotto must have 6 numbers. Input: [${numbers.size}] numbers" }
     }
 
-    override fun toString(): String {
-        return numbers.toString()
-    }
-
-    fun matchedNumber(lotto: Lotto): Int {
+    fun countOfMatch(lotto: Lotto): Int {
         return this.numbers.intersect(lotto.numbers.toSet()).size
     }
 

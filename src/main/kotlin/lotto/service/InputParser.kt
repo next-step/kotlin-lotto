@@ -13,4 +13,10 @@ object InputParser {
 
         return numbers.map { it.toInt() }.map(LottoNumber::of)
     }
+
+    fun parseBonusNumber(input: String): LottoNumber {
+        val bonusNumber = input.toInt()
+
+        return LottoNumber.of(bonusNumber)
+    }
 }
