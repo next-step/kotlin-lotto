@@ -27,3 +27,7 @@ fun getPrice(number: Int): Int {
         throw IllegalArgumentException("일치하지 않는 숫자입니다")
     }
 }
+
+fun find(number: Int): WinningPriceEnum {
+    return WinningPriceEnum.values().find { it.number == number }!!
+}

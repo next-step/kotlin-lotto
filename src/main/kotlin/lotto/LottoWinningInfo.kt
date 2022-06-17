@@ -11,8 +11,6 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
     init {
         winningNumbers = winningNumberInput.split(",").map { it.replace(" ", "").toInt() }.toMutableList()
         bonusNumber = bonusNumberInput.toInt()
-
-        // todo keira. validate ticket
     }
 
     fun setScore(issuedLottos: List<LottoTicket>) {
