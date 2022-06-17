@@ -19,7 +19,7 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
         val matchNumberMap = matchCount(issuedLottos, winningNumbers)
         val matchedFiveNumber = matchNumberMap.any { (winningNumber, count) -> winningNumber.number == WinningPriceEnum.FIVE.number && count > 0 }
 
-        val filtered = matchNumberMap.filter { (winningNumber, count) -> winningNumber.number > 0 }
+        val filtered = matchNumberMap.filter { (winningNumber) -> winningNumber.number > 0 }
         scoreInfos = setScoreInfos(filtered, null)
 
         if (matchedFiveNumber) {
@@ -35,14 +35,9 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
     }
 
     private fun setScoreInfos(filtered: Map<WinningPriceEnum, Int>, magicNumber: Int?): MutableList<ScoreInfo> {
-        return filtered.filter { (winningNumber, count) -> winningNumber != WinningPriceEnum.ZERO }.map { (winningNumber, count) ->
+        return filtered.filter { (winningNumber) -> winningNumber != WinningPriceEnum.ZERO }.map { (winningNumber, count) ->
             ScoreInfo(magicNumber ?: winningNumber.number, getPrice(magicNumber ?: winningNumber.number), count)
         }.toMutableList()
-    }
-
-    companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
-        private val LOTTO_NUMBER_RANGE = (1..45)
     }
 }
 

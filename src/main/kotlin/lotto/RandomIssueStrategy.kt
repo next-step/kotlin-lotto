@@ -6,9 +6,4 @@ class RandomIssueStrategy(val count: Int) : IssueStrategy {
     override fun issue(): List<LottoTicket> {
         return ISSUE_RANGE.map { LottoTicket() }
     }
-
-    companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
-        private val LOTTO_NUMBER_RANGE = (1..45)
-    }
 }

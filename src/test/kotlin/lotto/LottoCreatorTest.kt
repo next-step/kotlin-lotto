@@ -2,6 +2,7 @@ package lotto
 
 import IssueStrategy
 import RandomIssueStrategy
+import lotto.LottoCreator.createLottoTickets
 import lotto.LottoCreator.issue
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -22,5 +23,14 @@ class LottoCreatorTest {
 
         val randomIssuedList = issue(strategy)
         assertThat(randomIssuedList.distinct().size).isEqualTo(randomIssuedList.size)
+    }
+
+    @Test
+    fun `사용자가 수동으로 입력한 로또를 발급할 때 공백을 제거해야한다`() {
+        val list = listOf("1,2, 3,4,5, 6")
+        val lottoTickets = createLottoTickets(list)
+
+        assertThat(lottoTickets.size).isEqualTo(1)
+        assertThat(lottoTickets.get(0).ticket.get(2)).isEqualTo(3)
     }
 }

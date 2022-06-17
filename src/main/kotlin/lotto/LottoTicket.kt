@@ -4,7 +4,6 @@ import kotlin.random.Random
 
 class LottoTicket constructor() {
     var ticket: List<Int>
-    var count: Int = 0
 
     constructor(ticketList: List<Int>) : this() {
         ticket = ticketList
