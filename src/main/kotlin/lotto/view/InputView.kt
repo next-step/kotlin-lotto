@@ -24,6 +24,22 @@ class InputView {
         return LottoNumber.from(readln().toInt())
     }
 
+    fun getManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun createManualLotto(manualLottoCount: Int): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (1..manualLottoCount)
+            .map { readLottoInput() }
+    }
+
+    private fun readLottoInput(): Lotto {
+        return readln().split(DEFAULT_DELIMITER)
+            .map { LottoNumber.from(it.toInt()) }
+            .let(::Lotto)
+    }
     companion object {
         private const val DEFAULT_DELIMITER = ","
     }
