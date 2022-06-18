@@ -15,8 +15,8 @@ object LottoGameView {
     private val buyAmountMessageTemplate = { manualAmount: Int, autoAmount: Int ->
         "수동으로 ${manualAmount}장, 자동으로 ${autoAmount}개를 구매했습니다."
     }
-    private val prizeMessageTemplate = { ranks: List<Rank>, rank: Rank ->
-        "${getRankMessage(rank)} - ${ranks.count { it == rank }}개"
+    private val prizeMessageTemplate = { rankMap: Map<Rank, Int>, rank: Rank ->
+        "${getRankMessage(rank)} - ${rankMap.getOrDefault(rank, 0)}개"
     }
     private const val BONUS_MESSAGE = ", 보너스 볼 일치"
     private val createProfitMessage = { profit: Double ->
@@ -51,7 +51,7 @@ object LottoGameView {
         println(
             """
             |$WINNING_STAT_MESSAGE
-            |${Rank.values().take(MAX_RANK).reversed().joinToString("\n") { prizeMessageTemplate(result.ranks, it) }}
+            |${Rank.values().take(MAX_RANK).reversed().joinToString("\n") { prizeMessageTemplate(result.rankMap, it) }}
             |${createProfitMessage(result.profit)}
             """.trimMargin()
         )
