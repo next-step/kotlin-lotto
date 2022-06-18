@@ -14,7 +14,7 @@ object GamblerWriter {
 
     private fun writeTickets(tickets: List<LottoTicket>) {
         for (ticket in tickets) {
-            println(ticket.numbers)
+            LottoTicketWriter.write(ticket)
         }
     }
 }
