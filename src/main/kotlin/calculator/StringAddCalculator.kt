@@ -5,6 +5,7 @@ class StringAddCalculator {
         if (source.isNullOrEmpty()) {
             return 0
         }
-        return 0
+        return source.split("[,:]".toRegex())
+            .sumOf { it.toLong() }
     }
 }
