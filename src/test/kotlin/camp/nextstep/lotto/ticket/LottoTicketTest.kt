@@ -19,7 +19,7 @@ internal class LottoTicketTest {
         val ticket = LottoTicket.of(1, 2, 3, 4, 5, 6)
 
         assertThat(ticket.numbers.size).isEqualTo(6)
-        assertThat(ticket.numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
+        assertThat(ticket.numbers.lottoNumbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) })
     }
 
     @DisplayName("로또 티켓은 6개의 숫자를 오름차순으로 가진다.")
@@ -34,7 +34,7 @@ internal class LottoTicketTest {
         }
     }
 
-    @DisplayName("로또 티켓은 6개보다 적거나 많은 숫자를 가질 수 없다.")
+    @DisplayName("로또 티켓은 같은 숫자를 여러 개 가질 수 없다.")
     @ParameterizedTest
     @CsvSource(
         delimiter = '_',
@@ -48,7 +48,7 @@ internal class LottoTicketTest {
         assertThrows<IllegalArgumentException> { LottoTicket.of(numbers.toList().toLottoNumbers()) }
     }
 
-    @DisplayName("로또 티켓은 같은 숫자를 여러 개 가질 수 없다.")
+    @DisplayName("로또 티켓은 6개보다 적거나 많은 숫자를 가질 수 없다.")
     @ParameterizedTest
     @CsvSource(
         delimiter = '_',

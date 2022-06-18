@@ -49,7 +49,7 @@ internal class LottoStoreTest {
 
         assertAll(
             { assertThat(tickets.size).isEqualTo(1) },
-            { assertThat(tickets[0].numbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }) },
+            { assertThat(tickets[0].numbers.lottoNumbers).hasSameElementsAs(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }) },
             { assertThat(balance).isEqualTo(0) }
         )
     }
