@@ -6,6 +6,10 @@ class LottoGame(
     private val bonusNumber: LottoNumber
 ) {
 
+    init {
+        require(bonusNumber !in winningLotto.numbers) { "Bonus number[$bonusNumber] must not be in winning numbers." }
+    }
+
     private val ranks = lottos.map {
         Rank.of(countOfMatch = it.countOfMatch(winningLotto), matchedBonus = bonusNumber in it.numbers)
     }
