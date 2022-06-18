@@ -10,8 +10,8 @@ class LottoNumbers(val lottoNumbers: List<LottoNumber>) {
         return lottoNumbers[index]
     }
 
-    fun none(predicate: Predicate<LottoNumber>): Boolean {
-        return lottoNumbers.none { predicate.test(it) }
+    fun none(predicate: (LottoNumber) -> Boolean): Boolean {
+        return lottoNumbers.none(predicate)
     }
 
     fun contains(number: LottoNumber): Boolean {
