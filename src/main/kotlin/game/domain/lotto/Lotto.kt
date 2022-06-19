@@ -3,16 +3,20 @@ package game.domain.lotto
 private val LOTTO_NUMBER_RANGE = 1..45
 private const val LOTTO_TICKET_SIZE = 6
 
-class Lotto(val tickets: List<LottoTicket>) {
+class Lotto(tickets: List<LottoTicket>) {
     init {
         require(tickets.isNotEmpty()) { "로또는 1장 이상의 티켓으로 구성됩니다." }
     }
+
+    val tickets = tickets.toList()
 }
 
-class LottoTicket(val numbers: Set<LottoNumber>) {
+class LottoTicket(numbers: Set<LottoNumber>) {
     init {
         require(numbers.size == LOTTO_TICKET_SIZE) { "로또는 한 장에 ${LOTTO_TICKET_SIZE}개의 중복되지 않은 숫자로 이루어져 있습니다." }
     }
+
+    val numbers = numbers.toList()
 
     companion object {
         fun from(numbers: Collection<Int>): LottoTicket {
