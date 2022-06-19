@@ -8,7 +8,6 @@ class LottoTicketsTest {
     @Test
     fun `LottoTickets는 당첨 번호 개수를 카운트 할 수 있다`() {
         val lottoTickets = LottoTickets(
-            4,
             listOf(
                 LottoTicket(listOf(1, 2, 3, 24, 25, 26)),
                 LottoTicket(listOf(1, 2, 3, 34, 35, 36)),

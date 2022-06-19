@@ -6,7 +6,7 @@ import lotto.domain.LottoTickets
 
 object ResultView {
     fun showLottoInfo(lottoTickets: LottoTickets) {
-        val lottoCount = lottoTickets.lottoCount
+        val lottoCount = lottoTickets.lottoTickets.size
         println("${lottoCount}개를 구매했습니다.")
         lottoTickets.lottoTickets.forEach { lotto ->
             println(lotto.lottoNumbers.joinToString(prefix = "[", postfix = "]"))

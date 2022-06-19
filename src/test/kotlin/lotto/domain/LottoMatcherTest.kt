@@ -5,11 +5,9 @@ import org.junit.jupiter.api.Test
 
 class LottoMatcherTest {
 
-    // 같이? 따로 분리?
     @Test
     fun `로또 당첨 결과기는 당첨 개수와 당첨금액을 반환한다`() {
         val lottoTickets = LottoTickets(
-            3,
             listOf(
                 LottoTicket(listOf(1, 2, 33, 34, 35, 36)),
                 LottoTicket(listOf(1, 2, 3, 34, 35, 36)),

@@ -20,7 +20,8 @@ class LottoTicketShopTest {
     @ParameterizedTest
     @CsvSource(value = ["14000|14", "1000|1", "2000|2"], delimiter = '|')
     fun `구입 금액만큼 로또를 구입할 수 있다`(money: Long, expected: Int) {
-        assertThat(lottoShop.buyLotto(money).lottoCount).isEqualTo(expected)
+        val lottoTickets = lottoShop.buyLotto(money)
+        assertThat(lottoTickets.lottoTickets.size).isEqualTo(expected)
     }
 
     @ParameterizedTest

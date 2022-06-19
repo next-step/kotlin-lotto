@@ -4,7 +4,7 @@ class LottoShop {
     fun buyLotto(money: Long): LottoTickets {
         val lottoCount = numOfPurchases(money)
         val lottos = LottoVendor.generate(lottoCount)
-        return LottoTickets(lottoCount, lottos)
+        return LottoTickets(lottos)
     }
 
     private fun numOfPurchases(money: Long): Int {
