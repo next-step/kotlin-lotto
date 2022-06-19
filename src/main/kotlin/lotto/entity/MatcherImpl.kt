@@ -9,15 +9,15 @@ class MatcherImpl(private val winningNumbers: List<Int>) : Matcher {
         return tickets.map { ticket -> matchOneTicket(ticket) }
     }
 
-    override fun matchTicketsToRanks(tickets: List<LottoTicket>): Map<Int, Int> {
+    override fun countTicketRanks(tickets: List<LottoTicket>): WinningInfo {
         val ranks = matchAllTickets(tickets)
-        val winningRanks = mutableMapOf(3 to 0, 4 to 0, 5 to 0, 6 to 0)
-        ranks.map { it -> if (it < MINIMUM_VALID_WINNING_RANK) 0 else it }
+        val countOfRanks = mutableMapOf(3 to 0, 4 to 0, 5 to 0, 6 to 0)
+        ranks.map { if (it < MINIMUM_VALID_WINNING_RANK) 0 else it }
             .groupingBy { it }
             .eachCount()
             .filter { it.key != 0 }
-            .forEach { it -> winningRanks[it.key] = it.value }
-        return winningRanks
+            .forEach { countOfRanks[it.key] = it.value }
+        return WinningInfo(countOfRanks)
     }
 
     companion object {

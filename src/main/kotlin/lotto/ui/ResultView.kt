@@ -2,6 +2,7 @@ package lotto.ui
 
 import lotto.entity.LottoTicket
 import lotto.entity.Rank
+import lotto.entity.WinningInfo
 
 class ResultView {
     fun showLottoTickets(tickets: List<LottoTicket>) {
@@ -14,11 +15,11 @@ class ResultView {
         println()
     }
 
-    fun showMatchResult(money: Int, winningRanks: Map<Int, Int>) {
+    fun showMatchResult(money: Int, winnings: WinningInfo) {
         println("\n당첨 통계")
         println("---------")
         var sum = 0
-        winningRanks.onEach { it ->
+        winnings.countOfRanks.onEach { it ->
             println("${it.key}개 일치 (${Rank.find(it.key).winningMoney}원) - ${it.value}개")
             sum += it.value * Rank.find(it.key).winningMoney!!
         }

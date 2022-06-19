@@ -52,7 +52,7 @@ internal class MatcherImplTest {
         val expectedRanks = mapOf(3 to 0, 4 to 1, 5 to 1, 6 to 0)
 
         // when
-        val winningRanks = MatcherImpl(winningNumbers).matchTicketsToRanks(tickets)
+        val winningRanks = MatcherImpl(winningNumbers).countTicketRanks(tickets).countOfRanks
 
         // then
         Assertions.assertThat(winningRanks).isEqualTo(expectedRanks)
