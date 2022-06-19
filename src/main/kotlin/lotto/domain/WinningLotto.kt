@@ -22,10 +22,10 @@ class WinningLotto private constructor(
 
         for (count in matchCounts) {
             prize += when (count) {
-                3 -> FOURTH_PRIZE
-                4 -> THIRD_PRIZE
-                5 -> SECOND_PRIZE
-                6 -> FIRST_PRIZE
+                FOURTH_MATCH_COUNT -> FOURTH_PRIZE
+                THIRD_MATCH_COUNT -> THIRD_PRIZE
+                SECOND_MATCH_COUNT -> SECOND_PRIZE
+                FIRST_MATCH_COUNT -> FIRST_PRIZE
                 else -> 0
             }
         }
@@ -35,6 +35,10 @@ class WinningLotto private constructor(
 
     companion object {
         const val COUNT_OF_NUMBER = 6
+        const val FOURTH_MATCH_COUNT = 3
+        const val THIRD_MATCH_COUNT = 4
+        const val SECOND_MATCH_COUNT = 5
+        const val FIRST_MATCH_COUNT = 6
         const val FOURTH_PRIZE = 5000
         const val THIRD_PRIZE = 50000
         const val SECOND_PRIZE = 1500000
