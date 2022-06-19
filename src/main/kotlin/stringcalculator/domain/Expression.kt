@@ -14,12 +14,9 @@ class Expression(text: String) {
     }
 
     private fun List<String>.checkNotNumber(): List<Int> {
-        try {
-            this.map { it.toInt() }
-        } catch (e: NumberFormatException) {
-            throw RuntimeException("숫자가 아닌 값이 포함됨 : 숫자만 입력해주세요")
-        }
-        return this.map { it.toInt() }
+        val numbers = this.map { it.toIntOrNull() }
+        require(!numbers.contains(null)) { "숫자가 아닌 값이 포함됨 : 숫자를 입력해주세요" }
+        return numbers.filterNotNull()
     }
 
     private fun List<Int>.checkNegative(): List<Int> {
