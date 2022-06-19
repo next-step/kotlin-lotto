@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoMatcher() {
     fun matchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): LottoMatchResult {
-        val matchedResult = getMatchedResult(lottoTickets, winningNumbers)
+        val matchedResult = getMatchResult(lottoTickets, winningNumbers)
         val earnedMoney = getEarnedMoney(matchedResult)
         return LottoMatchResult(matchedResult, earnedMoney)
     }
@@ -12,12 +12,12 @@ class LottoMatcher() {
         return EarnedRate(earnedRate)
     }
 
-    private fun getMatchedResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): Map<WinningInfo, Int> {
+    private fun getMatchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): Map<WinningInfo, Int> {
         return generateMatchResult(lottoTickets.match(winningNumbers))
     }
 
     private fun generateMatchResult(winningCountMap: Map<WinningInfo, Int>): Map<WinningInfo, Int> {
-        return WinningInfo.values().associateWith { winningInfo -> winningCountMap.getOrDefault(winningInfo, 0) }
+        return WinningInfo.values().associateWith { winningCountMap.getOrDefault(it, 0) }
     }
 
     private fun getEarnedMoney(matchedResult: Map<WinningInfo, Int>): EarnedMoney {

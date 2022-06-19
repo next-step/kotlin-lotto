@@ -26,20 +26,22 @@
   
 * REFAC
     * [X] LottoTicket, LottoTickets 정의
-        - [X] LottoTicket: 
-            - [X] 1~45범위 숫자 중 중복되지 않은 랜덤한 숫자 6개로 이뤄진 로또 1장
-            - [X] 당첨번호와 일치하는 개수 계산
-        - [x] LottoTickets: 구입한 로또 티켓 수와 로또 티켓 정보를 가진 로또 티켓 컬렉션
-            - [X] 구입한 로또 티켓 묶음에 대해 당첨 번호와 일치하는 정보 목록을 구할 수 있다
+        - [X] LottoTicket: 로또 티켓 1장
+            - [X] 1~45범위 숫자 중 중복되지 않은 랜덤한 숫자 6개로 이뤄진다.
+            - [X] 당첨번호에 일치하는 로또 번호 개수를 알려준다  
+        - [x] LottoTickets: 로또 티켓 N장으로 이뤄진 일급 컬렉션 
+            - [X] 당첨 번호와 일치하는 로또 번호 개수를 모든 로또 티켓에 대하여 계산한다. 
     * [X] LottoShop, LottoVendor 정의
-        - [X] LottoShop: 로또 파는 상점, 구매 금액 만큼 로또 티켓을 생성한다.
-        - [X] LottoVendor: 로또 번호를 생성기이며, 로또 티켓 수 만큼 로또를 생성한다.
+        - [X] LottoShop: 로또 파는 상점
+            - [X] 전달받은 돈으로 구매가능한 로또 수를 계산한다. 
+            - [X] LottoTickets 제공한다.
+        - [X] LottoVendor: LottoTicket 생성기, 로또 티켓 수 만큼 LottoTickets 생성한다.
     * [X] WinningNumbers 정의
         - [X] WinningNumbers: 로또 당첨 번호
-        - [X] 로또 번호가 당첨 번호와 일치하는지 확인
+        - [X] 로또 번호가 당첨 번호와 일치하는지 알려준다
     * [X] LottoMatcher, LottoMatchResult 정의
-        - [X] LottoMatcher: 로또 당첨 금액과 수익률 계산하는 로또 당첨 결과기 
-        - [X] LottoMatchResult: 당첨 결과를 출력하기 위한 DTO
+        - [X] LottoMatcher: 로또 티켓과 당첨 번호를 비교해  로또 당첨 결과기. 로또 당첨 금액과 수익률 계산하는 로또 당첨 결과기 
+        - [X] LottoMatchResult: 당첨 결과 출력용 DTO. 당첨 결과와 당첨금 총액 정보
 
 ## 실행 결과
 ```

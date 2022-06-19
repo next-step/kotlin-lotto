@@ -8,7 +8,7 @@ data class LottoTicket(
     }
 
     fun matchCount(winningNumber: WinningNumber): Int {
-        return lottoNumbers.count { lottoNumber -> winningNumber.hasNumber(lottoNumber) }
+        return lottoNumbers.count(winningNumber::hasNumber)
     }
 
     companion object {
