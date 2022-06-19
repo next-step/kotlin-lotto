@@ -18,7 +18,7 @@ class ConsoleInput: Input {
     override fun askWinningNumber(): WinningNumber {
         return try {
             println("지난주 당첨 번호를 입력해주세요")
-            val numbers = readln().split(",").map { it.toInt() }
+            val numbers = readln().split(",").map { it.trim().toInt() }
             WinningNumber(LottoTicket.from(numbers))
         } catch (e: RuntimeException) {
             println(e.message)

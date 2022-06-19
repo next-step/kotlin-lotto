@@ -9,7 +9,7 @@ class ConsoleOutput : Output {
         println()
         println("${lotto.tickets.size}개를 구매했습니다.")
         lotto.tickets.forEach { ticket ->
-            println(ticket.numbers.sortedBy { it.value })
+            println(ticket.numbers.map { it.value }.sortedBy { it })
         }
     }
 
@@ -17,9 +17,9 @@ class ConsoleOutput : Output {
         println()
         println("당첨 통계")
         println("-------------")
-        result.value
-            .filter { it.key != Rank.NONE }
-            .forEach { println("${it.key.matchCount}개 일치 (${it.key.amount})원 - ${it.value}개") }
+        Rank.values()
+            .filter { it != Rank.NONE }
+            .forEach { println("${it.matchCount}개 일치 (${it.amount})원 - ${result.value[it] ?: 0}개") }
         println("총 수익률은 ${result.profit()}입니다. (1이 넘는 경우 이익입니다.)")
     }
 }

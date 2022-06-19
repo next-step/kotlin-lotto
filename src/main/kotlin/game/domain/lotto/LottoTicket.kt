@@ -11,5 +11,17 @@ class LottoTicket(val numbers: Set<LottoNumber>) {
         fun from(numbers: Collection<Int>): LottoTicket {
             return LottoTicket(numbers.map { LottoNumber.from(it) }.toSet())
         }
+
+        fun random(): LottoTicket {
+            val numbers = LottoNumber.LOTTO_NUMBER_CACHE.values
+                .shuffled()
+                .subList(0, LOTTO_TICKET_SIZE)
+                .toSet()
+            return LottoTicket(numbers)
+        }
+
+        fun random(count: Long): List<LottoTicket> {
+            return (count..1).map { random() }
+        }
     }
 }
