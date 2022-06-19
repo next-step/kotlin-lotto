@@ -14,6 +14,6 @@ class LottoShop {
     }
 
     companion object {
-        const val LOTTO_PRICE = 1000L
+        private const val LOTTO_PRICE = 1000L
     }
 }

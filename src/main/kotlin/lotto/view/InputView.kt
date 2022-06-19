@@ -1,5 +1,7 @@
 package lotto.view
 
+import java.lang.IllegalArgumentException
+
 object InputView {
     fun getPurchaseAmount(): Long {
         println("구입금액을 입력해 주세요.")
@@ -25,13 +27,13 @@ object InputView {
 fun String?.checkNullOrBlank() = require(!this.isNullOrBlank()) { "입력값이 비어있어요." }
 
 fun String.toNumericInt(): Int {
-    val number = this.trim().toIntOrNull()
-    require(null != number && number > 0) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
-    return number!!
+    val number = this.trim().toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다.")
+    require(number > 0) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
+    return number
 }
 
 fun String.toNumericLong(): Long {
-    val number = this.trim().toLongOrNull()
-    require(null != number && number > 0L) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
-    return number!!
+    val number = this.trim().toLongOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다.")
+    require(number > 0L) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
+    return number
 }

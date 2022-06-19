@@ -1,13 +1,5 @@
 package lotto.domain
 
-@JvmInline value class EarnedRate(val rate: Float)
-@JvmInline value class EarnedMoney(val money: Long)
-
-data class LottoMatchResult(
-    val matchResult: Map<WinningInfo, Int>,
-    val earnedMoney: EarnedMoney,
-)
-
 class LottoMatcher() {
     fun matchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): LottoMatchResult {
         val matchedResult = getMatchedResult(lottoTickets, winningNumbers)
