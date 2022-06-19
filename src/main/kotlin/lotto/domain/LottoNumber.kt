@@ -2,7 +2,7 @@ package lotto.domain
 
 
 
-private fun Int.isValidLottoNumber() = this in LottoNumber.START_LOTTO_NUMBER..LottoNumber.LAST_LOTTO_NUMBER
+private fun Int.isValidLottoNumber() = this in LottoNumber.START_LOTTO_NUMBER..LottoNumber.END_LOTTO_NUMBER
 
 @JvmInline
 value class LottoNumber private constructor(
@@ -11,7 +11,7 @@ value class LottoNumber private constructor(
 
     companion object {
         const val START_LOTTO_NUMBER = 1
-        const val LAST_LOTTO_NUMBER = 45
+        const val END_LOTTO_NUMBER = 45
 
         fun from(number: Int): LottoNumber {
             if (!number.isValidLottoNumber()) {
