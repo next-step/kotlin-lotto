@@ -2,10 +2,11 @@ package stringcalculator.controller
 
 import stringcalculator.domain.Calculator
 import stringcalculator.view.InputView
+import stringcalculator.view.OutputView
 
 class StringCalculator {
-    fun calculate(): Int {
+    fun calculate() {
         val input = InputView.inputExpression()
-        return Calculator().add(input)
+        OutputView.printResult(Calculator().add(input))
     }
 }
