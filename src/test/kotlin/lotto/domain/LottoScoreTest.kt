@@ -20,10 +20,13 @@ internal class LottoScoreTest {
             LottoTicket(1, 2, 3, 4, 5, 7), // 5match - bonus
             LottoTicket(1, 2, 3, 4, 5, 6), // 6match
         )
-        val winningTicket = LottoTicket(1, 2, 3, 4, 5, 6)
-        val bonusNumber = LottoNumber(7)
 
-        val lottoResults = LottoScore().compareNumber(winningTicket, bonusNumber, lottoTickets)
+        val winningLotto = WinningLotto(
+            LottoTicket(1, 2, 3, 4, 5, 6),
+            LottoNumber(7)
+        )
+
+        val lottoResults = LottoScore().compareNumber(winningLotto, lottoTickets)
         val expected = mapOf(
             LottoPrize.FIRST to 1,
             LottoPrize.SECOND to 1,

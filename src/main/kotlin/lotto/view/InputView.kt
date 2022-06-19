@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.Const
-import lotto.domain.LottoNumber
 
 class InputView {
     fun getPrice(): Int {
@@ -18,11 +17,10 @@ class InputView {
         }
     }
 
-    fun getBonusNumber(): LottoNumber {
+    fun getBonusNumber(): Int {
         val inputStr = printMsgAndReadValue("\n${Const.OutputMsg.BONUS_NUM_MSG}")
         requireNotNull(inputStr) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
-        val number = requireNotNull(inputStr.trim().toIntOrNull()) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
-        return LottoNumber(number)
+        return requireNotNull(inputStr.trim().toIntOrNull()) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
     }
 
     private fun printMsgAndReadValue(message: String): String? {

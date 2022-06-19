@@ -4,7 +4,10 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class LottoScore {
-    fun compareNumber(winningTicket: LottoTicket, bonusNumber: LottoNumber, lottoTickets: List<LottoTicket>): List<LottoResult> {
+    fun compareNumber(winningLotto: WinningLotto, lottoTickets: List<LottoTicket>): List<LottoResult> {
+        val winningTicket = winningLotto.winningTicket
+        val bonusNumber = winningLotto.bonusNumber
+
         val matchResults = lottoTickets.map { lottoTicket ->
             lottoTicket.countIntersection(winningTicket) to lottoTicket
         }
@@ -26,7 +29,7 @@ class LottoScore {
     }
 
     private fun isSecond(lottoTickets: List<LottoTicket>, bonusNumber: LottoNumber): Int =
-        lottoTickets.filter { it.hasNumber(bonusNumber) }.size
+        lottoTickets.filter { bonusNumber in it }.size
 
     fun rateOfResult(lottoPrice: LottoPrice, lottoResults: List<LottoResult>): BigDecimal {
         val realLottoPrice = lottoPrice / LottoPurchase.LOTTO_PRICE * LottoPurchase.LOTTO_PRICE

@@ -16,6 +16,7 @@ class LottoTicket(
         value.sortedBy { it }
 
     fun hasNumber(number: LottoNumber) = value.any { it == number }
+    operator fun contains(number: LottoNumber) = value.any { it == number }
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
@@ -30,3 +31,6 @@ class LottoTicket(
         }
     }
 }
+
+infix fun LottoNumber.iin(other: LottoTicket) =
+    other.hasNumber(this)
