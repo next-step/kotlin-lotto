@@ -6,8 +6,8 @@ class WinningNumber(private val _value: LottoTicket) {
     val numbers
         get() = _value.numbers
 
-    fun match(lottoTicket: LottoTicket): MatchResult {
+    fun match(lottoTicket: LottoTicket): LottoTicketMatchResult {
         val matchCount = lottoTicket.numbers.count { numbers.contains(it) }
-        return MatchResult(matchCount)
+        return LottoTicketMatchResult(matchCount)
     }
 }
