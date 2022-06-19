@@ -1,4 +1,4 @@
-package stringCalculator.view
+package stringcalculator.view
 
 object OutputView {
     fun printResult(result: Int) {

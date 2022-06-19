@@ -1,4 +1,4 @@
-package stringCalculator.domain
+package stringcalculator.domain
 
 class Expression(text: String) {
     val numbers: List<Int>
@@ -18,12 +18,12 @@ class Expression(text: String) {
             val numbers = this.map { it.toInt() }
             return if (numbers.any { it < 0 }) throw RuntimeException() else numbers
         } catch (e: NumberFormatException) {
-            throw RuntimeException()
+            throw RuntimeException("sdfsdf")
         }
     }
 
     companion object {
-        const val DELIMITER_COMMA = ","
-        const val DELIMITER_COLON = ":"
+        private const val DELIMITER_COMMA = ","
+        private const val DELIMITER_COLON = ":"
     }
 }

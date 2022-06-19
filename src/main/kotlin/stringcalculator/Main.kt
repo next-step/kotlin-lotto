@@ -1,6 +1,6 @@
-package stringCalculator
+package stringcalculator
 
-import stringCalculator.controller.StringCalculator
+import stringcalculator.controller.StringCalculator
 
 fun main() {
     val stringCalculator = StringCalculator()

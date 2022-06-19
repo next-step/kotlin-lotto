@@ -1,4 +1,4 @@
-package stringCalculator.domain
+package stringcalculator.domain
 
 class Calculator {
     fun add(text: String): Int =
