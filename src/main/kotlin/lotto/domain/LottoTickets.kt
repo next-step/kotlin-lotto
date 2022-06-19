@@ -5,8 +5,7 @@ data class LottoTickets(
 ) {
     fun match(winningNumbers: WinningNumber): Map<WinningInfo, Int> {
         return lottoTickets
-            .map { lottoTicket -> lottoTicket.matchCount(winningNumbers) }
-            .filter { WinningInfo.winningCounts().contains(it) }
+            .map { lottoTicket -> lottoTicket.count(winningNumbers) }
             .groupingBy { count -> WinningInfo.findBy(count) }
             .eachCount()
     }
