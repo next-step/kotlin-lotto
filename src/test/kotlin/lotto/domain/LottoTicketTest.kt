@@ -9,9 +9,12 @@ class LottoTicketTest {
     @ParameterizedTest
     @MethodSource("lottoMatches")
     fun `LottoTicket은 당첨번호와 일치하는 번호 개수를 구할 수 있다`(lottoNumbers: List<Int>, winningNumbers: List<Int>, matchResult: Int) {
+        // given
         val lottoTicket = LottoTicket(lottoNumbers)
         val winningNumber = WinningNumber(winningNumbers)
-        assertThat(lottoTicket.matchCount(winningNumber)).isEqualTo(matchResult.toInt())
+        // when
+        // then
+        assertThat(lottoTicket.matchCount(winningNumber)).isEqualTo(matchResult)
     }
 
     companion object {

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test
 class LottoTicketsTest {
     @Test
     fun `LottoTickets는 당첨 번호 개수를 카운트 할 수 있다`() {
+        // given
         val lottoTickets = LottoTickets(
             listOf(
                 LottoTicket(listOf(1, 2, 3, 24, 25, 26)),
@@ -16,7 +17,9 @@ class LottoTicketsTest {
             )
         )
         val winningNumbers = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
+        // when
         val mapMatchCount = lottoTickets.match(winningNumbers)
+        // then
         assertEquals(mapMatchCount[WinningInfo.THREE], 2)
         assertEquals(mapMatchCount[WinningInfo.FOUR], 1)
         assertNull(mapMatchCount[WinningInfo.FIVE])

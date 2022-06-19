@@ -7,6 +7,7 @@ class LottoMatcherTest {
 
     @Test
     fun `로또 당첨 결과기는 당첨 개수와 당첨금액을 반환한다`() {
+        // given
         val lottoTickets = LottoTickets(
             listOf(
                 LottoTicket(listOf(1, 2, 33, 34, 35, 36)),
@@ -15,7 +16,9 @@ class LottoMatcherTest {
             )
         )
         val winningNumbers = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
+        // when
         val lottoMatchResult = LottoMatcher().matchResult(lottoTickets, winningNumbers)
+        // then
         val matchResult = lottoMatchResult.matchResult
         val earnedMoney = lottoMatchResult.earnedMoney
         assertEquals(1, matchResult[WinningInfo.THREE])
@@ -27,9 +30,12 @@ class LottoMatcherTest {
 
     @Test
     fun `로또 당첨 결과기는 수익률 계산을 할 수 있다`() {
+        // given
         val paidMoney = 14000L
         val earnedMoney = 5000L
+        // when
         val earnedRate = LottoMatcher().calculateEarnedRate(EarnedMoney(earnedMoney), paidMoney)
+        // then
         assertEquals(0.35714287f, earnedRate.rate)
     }
 }
