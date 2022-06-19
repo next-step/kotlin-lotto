@@ -1,14 +1,11 @@
 package lotto.domain
 
-
-
 private fun Int.isValidLottoNumber() = this in LottoNumber.START_LOTTO_NUMBER..LottoNumber.END_LOTTO_NUMBER
 
 @JvmInline
 value class LottoNumber private constructor(
     val number: Int
 ) {
-
     companion object {
         const val START_LOTTO_NUMBER = 1
         const val END_LOTTO_NUMBER = 45
