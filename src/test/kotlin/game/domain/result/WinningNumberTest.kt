@@ -23,8 +23,7 @@ class WinningNumberTest {
         val winningNumber = WinningNumber(LottoTicket.from(listOf(1, 2, 3, 4, 5, 6)))
         assertAll({
             assertThat(winningNumber.match(lotto)).isNotNull
-            assertThat(winningNumber.match(lotto).results).hasSize(1)
-            assertThat(winningNumber.match(lotto).results[0]).isEqualTo(result)
+            assertThat(winningNumber.match(lotto).value[result.rank]).isEqualTo(1)
         })
     }
 

@@ -1,11 +1,17 @@
 package game.domain.result
 
-class LottoResult(val results: List<LottoTicketMatchResult>) {
+class LottoResult(_values: List<LottoTicketMatchResult>) {
     init {
-        require(results.isNotEmpty()) { "로또 결과는 빈 값일 수 없습니다." }
+        require(_values.isNotEmpty()) { "로또 결과는 빈 값일 수 없습니다." }
     }
 
+    val value = _values.groupingBy { it.rank }.eachCount()
+
     fun profit(): Double {
-        return results.sumOf { it.rank.amount }.toDouble() / (results.size * 1000)
+        return sumOfAmount() / (value.size * 1000)
+    }
+
+    private fun sumOfAmount(): Double {
+        return value.map { it.key.amount * it.value }.sumOf { it.toDouble() }
     }
 }
