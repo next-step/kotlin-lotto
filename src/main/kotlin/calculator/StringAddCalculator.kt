@@ -19,14 +19,14 @@ class StringAddCalculator {
 
 private fun String.toPositiveValue(): Long {
     val convertedNumber = this.toLong()
-    if (convertedNumber < POSITIVE_VALUE_THRESHOLD) throw RuntimeException()
+    require(convertedNumber >= POSITIVE_VALUE_THRESHOLD) { "음수는 입력할 수 없습니다." }
     return convertedNumber
 }
 
 private fun String.toDelimiterRegex(): Regex {
     val customDelimiter = this.substringAfter(CUSTOM_DELIMITER_PREFIX, "")
         .substringBefore(CUSTOM_DELIMITER_SUFFIX, "")
-    return "[${BASIC_DELIMITER.plus(customDelimiter)}]".toRegex()
+    return "[${BASIC_DELIMITER + customDelimiter}]".toRegex()
 }
 
 private fun String.convertToCandidatesToAdd(): String {
