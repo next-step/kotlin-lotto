@@ -1,4 +1,4 @@
-package lotto.component
+package lotto.domain
 
 import io.kotest.matchers.throwable.shouldHaveMessage
 import org.junit.jupiter.api.assertThrows
