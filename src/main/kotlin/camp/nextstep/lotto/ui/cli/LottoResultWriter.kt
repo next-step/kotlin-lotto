@@ -18,7 +18,14 @@ object LottoResultWriter {
         }
 
         val earningRate = result.totalEarn / result.seed
-        val explainRate = "기준이 1이기 때문에 결과적으로 " + if (earningRate > 1) "이익을 보았다는 의미" else if (earningRate == 0) "본전이라는 의미" else "손해라는 의미"
-        println("총 수익률은 ${earningRate}입니다. ($explainRate)")
+        println("총 수익률은 ${earningRate}입니다. (${explainEarningRate(earningRate)})")
+    }
+
+    private fun explainEarningRate(earningRate: Int): String {
+        return when {
+            (earningRate > 1) -> "기준은 1이기 때문에 결과적으로 이익을 보았다는 의미"
+            (earningRate < 1) -> "기준은 1이기 때문에 결과적으로 손해를 보았다는 의미"
+            else -> "기준은 1이기 때문에 결과적으로 본전이라는 의미"
+        }
     }
 }

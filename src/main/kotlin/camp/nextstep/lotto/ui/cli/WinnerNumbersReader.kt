@@ -1,15 +1,28 @@
 package camp.nextstep.lotto.ui.cli
 
+import camp.nextstep.lotto.number.LottoNumber
+import camp.nextstep.lotto.number.LottoNumber.Companion.toLottoNumbers
 import camp.nextstep.lotto.number.LottoNumbers
+import camp.nextstep.lotto.number.WinnerNumbers
 
 object WinnerNumbersReader {
 
-    fun read(): List<Int> {
+    fun read(): WinnerNumbers {
+        val winnerNumbers = readWinnerNumbers()
+        val bonusNumber = readBonusNumber()
+        return WinnerNumbers(winnerNumbers, bonusNumber)
+    }
+
+    private fun readWinnerNumbers(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val readLine = requireNotNull(readLine())
-        val winnerNumbers = readLine.split(",").map { it.trim().toInt() }
-        require(winnerNumbers.size == LottoNumbers.LOTTO_NUMBERS) { "${LottoNumbers.LOTTO_NUMBERS} 개의 당첨 번호를 입력해주세요." }
-        check(winnerNumbers.all { it in LottoNumbers.LOTTO_NUMBER_RANGE }) { "로또 번호는 ${LottoNumbers.LOTTO_NUMBER_RANGE.first} 이상 ${LottoNumbers.LOTTO_NUMBER_RANGE.last} 이하의 숫자여야 합니다." }
-        return winnerNumbers
+        return readLine.split(",").map { it.trim().toInt() }.toLottoNumbers()
+    }
+
+    private fun readBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val readLine = requireNotNull(readLine())
+        val bonusNumber = readLine.toInt()
+        return LottoNumber.of(bonusNumber)
     }
 }
