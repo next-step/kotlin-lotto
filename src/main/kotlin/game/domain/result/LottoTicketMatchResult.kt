@@ -1,4 +1,4 @@
-package lotto.domain.result
+package game.domain.result
 
 private val MATCH_COUNT_RANGE = 0..6
 

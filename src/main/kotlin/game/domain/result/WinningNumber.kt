@@ -1,6 +1,7 @@
-package lotto.domain.result
+package game.domain.result
 
-import lotto.domain.number.LottoTicket
+import game.domain.lotto.Lotto
+import game.domain.lotto.LottoTicket
 
 class WinningNumber(private val _value: LottoTicket) {
     val numbers
@@ -9,5 +10,10 @@ class WinningNumber(private val _value: LottoTicket) {
     fun match(lottoTicket: LottoTicket): LottoTicketMatchResult {
         val matchCount = lottoTicket.numbers.count { numbers.contains(it) }
         return LottoTicketMatchResult(matchCount)
+    }
+
+    fun match(lotto: Lotto): LottoResult {
+        val ticketResults = lotto.tickets.map { match(it) }
+        return LottoResult(ticketResults)
     }
 }

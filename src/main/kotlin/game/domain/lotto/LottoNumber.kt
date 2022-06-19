@@ -1,4 +1,4 @@
-package lotto.domain.number
+package game.domain.lotto
 
 private val LOTTO_NUMBER_RANGE = 1..45
 

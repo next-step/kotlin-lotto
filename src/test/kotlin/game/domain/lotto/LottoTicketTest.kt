@@ -1,4 +1,4 @@
-package lotto.domain.number
+package game.domain.lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType

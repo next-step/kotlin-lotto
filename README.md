@@ -1,4 +1,4 @@
-# kotlin-lotto
+# kotlin-game
 
 ## 문자열 덧셈 계산기
 

@@ -1,4 +1,4 @@
-package lotto.domain.number
+package game.domain.lotto
 
 private const val LOTTO_TICKET_SIZE = 6
 
