@@ -1,8 +1,10 @@
 package lotto.domain.number
 
+private const val LOTTO_TICKET_SIZE = 6
+
 class LottoTicket(val numbers: Set<LottoNumber>) {
     init {
-        if (numbers.size != 6) throw IllegalArgumentException("로또는 한 장에 6개의 중복되지 않은 숫자로 이루어져 있습니다.")
+        require(numbers.size == LOTTO_TICKET_SIZE) { "로또는 한 장에 ${LOTTO_TICKET_SIZE}개의 중복되지 않은 숫자로 이루어져 있습니다." }
     }
 
     companion object {
