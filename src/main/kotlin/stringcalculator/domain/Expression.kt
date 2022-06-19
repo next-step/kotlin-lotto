@@ -1,10 +1,10 @@
 package stringcalculator.domain
 
 class Expression(text: String) {
-    val numbers: List<Int>
+    val positiveNumbers: List<Int>
 
     init {
-        numbers = text.parse().checkValid()
+        positiveNumbers = text.parse().checkNotNumber().checkNegative()
     }
 
     private fun String.parse(): List<String> {
@@ -13,13 +13,17 @@ class Expression(text: String) {
         } ?: this.split(DELIMITER_COLON, DELIMITER_COMMA)
     }
 
-    private fun List<String>.checkValid(): List<Int> {
+    private fun List<String>.checkNotNumber(): List<Int> {
         try {
-            val numbers = this.map { it.toInt() }
-            return if (numbers.any { it < 0 }) throw RuntimeException() else numbers
+            this.map { it.toInt() }
         } catch (e: NumberFormatException) {
-            throw RuntimeException("sdfsdf")
+            throw RuntimeException("숫자가 아닌 값이 포함됨 : 숫자만 입력해주세요")
         }
+        return this.map { it.toInt() }
+    }
+
+    private fun List<Int>.checkNegative(): List<Int> {
+        return if (this.any { it < 0 }) throw RuntimeException("음수가 포함됨 : 양수만 입력해주세요") else this
     }
 
     companion object {
