@@ -1,8 +1,7 @@
 package stringCalculator.domain
 
 class Expression(text: String) {
-    var numbers: List<Int>
-        private set
+    val numbers: List<Int>
 
     init {
         numbers = text.parse().checkValid()
