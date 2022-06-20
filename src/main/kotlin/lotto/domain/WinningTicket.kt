@@ -12,7 +12,7 @@ class WinningTicket private constructor(
 
     fun matchResult(lottoTicket: LottoTicket): WinningAmount {
         val matchCount = lottoNumbers.matchedNumberCount(other = lottoTicket.lottoNumbers)
-        val matchBonus = bonusNumber == lottoTicket.bonusNumber
+        val matchBonus = lottoTicket.lottoNumbers.contain(lottoNumber = bonusNumber)
 
         return when {
             matchCount == 5 && matchBonus -> WinningAmount.SECOND

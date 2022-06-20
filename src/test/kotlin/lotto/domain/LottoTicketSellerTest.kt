@@ -4,13 +4,12 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.shouldBe
 import java.math.BigDecimal
 
 internal class LottoTicketSellerTest : FreeSpec({
 
-    "중복되지 않는 6개의 번호와 1개의 보너스 번호를 가진 로또티켓을 자동으로 발급한다." {
+    "중복되지 않는 6개의 번호를 가진 로또티켓을 발급한다." {
         // when
         val ticketSeller = LottoTicketSeller()
         val lottoTickets = ticketSeller.buyLottoTickets(money = LottoTicket.PRICE)
@@ -18,7 +17,6 @@ internal class LottoTicketSellerTest : FreeSpec({
 
         // then
         lottoTicket.lottoNumbers.values.shouldHaveSize(6)
-        lottoTicket.lottoNumbers.values.shouldNotContain(lottoTicket.bonusNumber)
     }
 
     "입력된 총 금액에 구입가능 금액만큼 나눠서 로또를 구매한다." - {

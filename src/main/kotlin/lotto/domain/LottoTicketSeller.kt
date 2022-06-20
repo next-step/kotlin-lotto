@@ -11,16 +11,9 @@ class LottoTicketSeller {
         val lottoNumbers = LottoNumber.cachedLottoNumbers()
             .asSequence()
             .shuffled()
-            .take(LottoNumbers.NUMBERS_COUNT + BONUS_NUMBER_COUNT)
-            .toMutableList()
+            .take(LottoNumbers.NUMBERS_COUNT)
+            .toSet()
 
-        return LottoTicket(
-            bonusNumber = lottoNumbers.removeFirst(),
-            lottoNumbers = LottoNumbers.createWithSort(lottoNumbers.toSet()),
-        )
-    }
-
-    companion object {
-        private const val BONUS_NUMBER_COUNT = 1
+        return LottoTicket(lottoNumbers = LottoNumbers.createWithSort(lottoNumbers))
     }
 }

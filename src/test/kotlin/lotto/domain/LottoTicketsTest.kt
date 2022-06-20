@@ -10,10 +10,10 @@ internal class LottoTicketsTest : FreeSpec({
         // given
         val winningTicket = WinningTicket.of(listOf(1, 2, 3, 4, 5, 6), bonusNumber = 7)
 
-        val lottoTicket1 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), bonusNumber = LottoNumber.from(13))
-        val lottoTicket2 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 5, 9)), bonusNumber = LottoNumber.from(13))
-        val lottoTicket3 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 9, 10)), bonusNumber = LottoNumber.from(13))
-        val lottoTicket4 = LottoTicket(LottoNumbers(setOf(1, 12, 5, 9, 45, 7)), bonusNumber = LottoNumber.from(13))
+        val lottoTicket1 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)))
+        val lottoTicket2 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 5, 9)))
+        val lottoTicket3 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 9, 10)))
+        val lottoTicket4 = LottoTicket(LottoNumbers(setOf(1, 12, 5, 9, 45, 7)))
 
         val lottoTickets = LottoTickets(listOf(lottoTicket1, lottoTicket2, lottoTicket3, lottoTicket4))
 

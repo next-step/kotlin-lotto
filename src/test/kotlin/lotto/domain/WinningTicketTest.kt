@@ -28,17 +28,17 @@ internal class WinningTicketTest : FreeSpec({
         )
 
         listOf(
-            row(LottoTicket(1, 2, 3, 4, 5, 6, bonusNumber = 7), WinningAmount.FIRST),
-            row(LottoTicket(1, 2, 3, 4, 5, 6, bonusNumber = 45), WinningAmount.FIRST),
-            row(LottoTicket(1, 2, 3, 4, 5, 44, bonusNumber = 7), WinningAmount.SECOND),
-            row(LottoTicket(1, 2, 3, 4, 5, 44, bonusNumber = 45), WinningAmount.THIRD),
-            row(LottoTicket(1, 2, 3, 4, 43, 44, bonusNumber = 7), WinningAmount.FOURTH),
-            row(LottoTicket(1, 2, 3, 4, 43, 44, bonusNumber = 45), WinningAmount.FOURTH),
-            row(LottoTicket(1, 2, 3, 42, 43, 44, bonusNumber = 7), WinningAmount.FIFTH),
-            row(LottoTicket(1, 2, 3, 42, 43, 44, bonusNumber = 45), WinningAmount.FIFTH),
-            row(LottoTicket(1, 2, 41, 42, 43, 44, bonusNumber = 7), WinningAmount.MISS),
+            row(LottoTicket(1, 2, 3, 4, 5, 6), WinningAmount.FIRST),
+            row(LottoTicket(1, 2, 3, 4, 5, 6), WinningAmount.FIRST),
+            row(LottoTicket(1, 2, 3, 4, 5, 7), WinningAmount.SECOND),
+            row(LottoTicket(1, 2, 3, 4, 5, 44), WinningAmount.THIRD),
+            row(LottoTicket(1, 2, 3, 4, 43, 7), WinningAmount.FOURTH),
+            row(LottoTicket(1, 2, 3, 4, 43, 44), WinningAmount.FOURTH),
+            row(LottoTicket(1, 2, 3, 42, 43, 7), WinningAmount.FIFTH),
+            row(LottoTicket(1, 2, 3, 42, 43, 44), WinningAmount.FIFTH),
+            row(LottoTicket(1, 2, 41, 42, 43, 7), WinningAmount.MISS),
         ).forEach { (lottoTicket, winningAmount) ->
-            "${lottoTicket.lottoNumbers.values.map { it.value }} + ${lottoTicket.bonusNumber.value} 의 당첨 결과는 $winningAmount 이다." {
+            "${lottoTicket.lottoNumbers.values.map { it.value }} 의 당첨 결과는 $winningAmount 이다." {
                 winningTicket.matchResult(lottoTicket = lottoTicket) shouldBe winningAmount
             }
         }
