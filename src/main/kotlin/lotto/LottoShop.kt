@@ -18,7 +18,7 @@ class LottoShop(money: Int) {
         isPurchasable(manualNumbers.count)
             .also { decreasePurchasableCount(manualNumbers.count) }
         return manualNumbers.bunchOfNumbers
-            .map(LottoCreator::manualCreate)
+            .map { it }
     }
 
     private fun decreasePurchasableCount(count: Int) {

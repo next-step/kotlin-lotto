@@ -1,7 +1,7 @@
 package lotto
 
 data class ManualPurchaseNumbers(
-    val bunchOfNumbers: List<List<LottoNumber>>
+    val bunchOfNumbers: LottoBundle
 ) {
-    val count = bunchOfNumbers.size
+    val count = bunchOfNumbers.count()
 }

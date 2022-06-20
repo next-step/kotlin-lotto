@@ -2,7 +2,9 @@ package lotto.view
 
 import calculator.StringParser
 import calculator.parseToInt
+import lotto.LottoBundle
 import lotto.LottoNumber
+import lotto.LottoTicket
 import lotto.ManualPurchaseNumbers
 
 object LottoInputView {
@@ -23,7 +25,8 @@ object LottoInputView {
             StringParser.getNumberStrings(readln())
                 .map(::parseToInt)
                 .map(::LottoNumber)
-        }
+                .let { LottoTicket.of(it) }
+        }.let(::LottoBundle)
         return ManualPurchaseNumbers(bunchOfNumbers)
     }
 

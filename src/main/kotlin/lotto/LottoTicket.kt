@@ -1,8 +1,8 @@
 package lotto
 
-class LottoTicket private constructor(val numbers: Set<LottoNumber>) {
+class LottoTicket private constructor(val numbers: List<LottoNumber>) {
     init {
-        val lottoTicketSize = numbers.size
+        val lottoTicketSize = numbers.distinct().size
         require(lottoTicketSize == LOTTO_TICKET_SIZE) {
             "로또의 번호 개수는 ${LOTTO_TICKET_SIZE}개 입니다. (현재 : $lottoTicketSize)"
         }
@@ -17,8 +17,8 @@ class LottoTicket private constructor(val numbers: Set<LottoNumber>) {
     }
 
     companion object {
-        fun of(numbers: Set<LottoNumber>): LottoTicket {
-            return LottoTicket(numbers.toSortedSet(compareBy { it.number }))
+        fun of(numbers: List<LottoNumber>): LottoTicket {
+            return LottoTicket(numbers.sortedBy { it.number })
         }
 
         const val LOTTO_TICKET_SIZE = 6

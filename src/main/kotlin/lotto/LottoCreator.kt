@@ -14,8 +14,4 @@ object LottoCreator {
             .map(::LottoNumber)
         return LottoTicket.of(lottoNumbers)
     }
-
-    fun manualCreate(numbers: Collection<LottoNumber>): LottoTicket {
-        return LottoTicket.of(numbers)
-    }
 }
