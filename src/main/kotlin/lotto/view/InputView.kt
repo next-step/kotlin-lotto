@@ -14,7 +14,7 @@ object InputView {
     }
 
     fun getBonusNumber(): Int {
-        println("\n지난 주 당첨 번호를 입력해 주세요.")
+        println("\n보너스 볼을 입력해 주세요.")
         return convertToInt(readLine())
     }
 

@@ -19,8 +19,11 @@ object ResultView {
         println("---------")
         lottoMatchResult.matchResult
             .filter { it.key != Rank.MISS }
-            .forEach { (winningInfo, count) ->
-                println("${winningInfo.numOfMatch}개 일치 (${winningInfo.winningMoney}원) - ${count}개")
+            .forEach { (rank, count) ->
+                when (rank) {
+                    Rank.SECOND -> println("${rank.numOfMatch}개 일치, 보너스 볼 일치(${rank.winningMoney}원) - ${count.count}개")
+                    else -> println("${rank.numOfMatch}개 일치 (${rank.winningMoney}원) - ${count.count}개")
+                }
             }
         println("총 수익률은 ${String.format("%.3f", earnedRate.rate).dropLast(1)}입니다.")
     }
