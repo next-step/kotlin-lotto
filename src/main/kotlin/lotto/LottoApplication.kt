@@ -8,11 +8,8 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val inputView = InputView()
-    val outputView = OutputView()
-
     // 구입금액 입력받기
-    val price = inputView.getPrice()
+    val price = InputView.getPrice()
 
     // 구입금액 validation
     val lottoPurchase = LottoPurchase()
@@ -22,11 +19,11 @@ fun main() {
     val lottoCount = lottoPurchase.getLottoCount(lottoPrice)
     // 로또 개수에 맞추어 로또 번호 반환
     val lottoTickets = lottoPurchase.getLottoTickets(lottoCount)
-    outputView.resultPurchaseLotto(lottoCount, lottoTickets)
+    OutputView.resultPurchaseLotto(lottoCount, lottoTickets)
 
     // 지난주 로또 당첨번호 받기
-    val lastWinningNumbers = inputView.getLastWinningNumbers()
-    val bonusNumber = inputView.getBonusNumber()
+    val lastWinningNumbers = InputView.getLastWinningNumbers()
+    val bonusNumber = InputView.getBonusNumber()
 
     val winningLotto = WinningLotto(lastWinningNumbers, bonusNumber)
 
@@ -36,5 +33,5 @@ fun main() {
     // 수익률
     val rateResult = lottoScore.rateOfResult(lottoPrice, lottoResults)
 
-    outputView.winningResult(lottoResults, rateResult)
+    OutputView.winningResult(lottoResults, rateResult)
 }

@@ -5,7 +5,7 @@ import lotto.domain.LottoResult
 import lotto.domain.LottoTicket
 import java.math.BigDecimal
 
-class OutputView {
+object OutputView {
     fun resultPurchaseLotto(lottoCount: Int, lottoTickets: List<LottoTicket>) {
         println("${lottoCount}개를 구매했습니다.")
         resultLottoTickets(lottoTickets = lottoTickets)
