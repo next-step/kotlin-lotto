@@ -5,15 +5,14 @@ import io.kotest.matchers.shouldBe
 
 internal class LottoTicketsTest : FreeSpec({
 
-    // TODO: 2022/06/20 리팩터링 대상
     "로또들을 당첨 등수별로 나누어서 반환한다." {
         // given
         val winningTicket = WinningTicket.of(listOf(1, 2, 3, 4, 5, 6), bonusNumber = 7)
 
-        val lottoTicket1 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)))
-        val lottoTicket2 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 5, 9)))
-        val lottoTicket3 = LottoTicket(LottoNumbers(setOf(1, 2, 3, 4, 9, 10)))
-        val lottoTicket4 = LottoTicket(LottoNumbers(setOf(1, 12, 5, 9, 45, 7)))
+        val lottoTicket1 = LottoTicket(1, 2, 3, 4, 5, 6)
+        val lottoTicket2 = LottoTicket(1, 2, 3, 4, 5, 9)
+        val lottoTicket3 = LottoTicket(1, 2, 3, 4, 9, 10)
+        val lottoTicket4 = LottoTicket(1, 12, 5, 9, 45, 7)
 
         val lottoTickets = LottoTickets(listOf(lottoTicket1, lottoTicket2, lottoTicket3, lottoTicket4))
 
