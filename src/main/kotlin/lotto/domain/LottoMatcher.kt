@@ -1,14 +1,12 @@
 package lotto.domain
 
 class LottoMatcher() {
-    fun matchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): LottoMatchResult {
-        val matchedResult = getMatchResult(lottoTickets, winningNumbers)
-        val earnedMoney = getEarnedMoney(matchedResult)
-        return LottoMatchResult(matchedResult, earnedMoney)
-    }
-
-    private fun getMatchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber): Map<Rank, Int> {
-        return generateMatchResult(lottoTickets.match(winningNumbers))
+    fun matchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber, bonusNumber: BonusNumber): LottoMatchResult {
+        val matchResult = formatMatchResult(
+            lottoTickets.match(winningNumbers, bonusNumber)
+        )
+        val earnedMoney = getEarnedMoney(matchResult)
+        return LottoMatchResult(matchResult, earnedMoney)
     }
 
     fun calculateEarnedRate(earnedMoney: EarnedMoney, paidMoney: Long): EarnedRate {
@@ -16,14 +14,14 @@ class LottoMatcher() {
         return EarnedRate(earnedRate)
     }
 
-    private fun generateMatchResult(rankCountMap: Map<Rank, Int>): Map<Rank, Int> {
-        return Rank.values().associateWith { rankCountMap.getOrDefault(it, 0) }
-    }
+    private fun formatMatchResult(resultMap: Map<Rank, Count>) =
+        Rank.values().associateWith { resultMap.getOrDefault(it, Count(0)) }
 
-    private fun getEarnedMoney(matchedResult: Map<Rank, Int>): EarnedMoney {
-        val earnedMoney = matchedResult
-            .map { (winningInfo, winningCount) -> winningInfo.winningMoney * winningCount }
-            .sum()
-        return EarnedMoney(earnedMoney)
+    private fun getEarnedMoney(matchResult: Map<Rank, Count>): EarnedMoney {
+        return EarnedMoney(
+            matchResult
+                .map { (rank, count) -> rank.winningMoney * count.count }
+                .sum()
+        )
     }
 }

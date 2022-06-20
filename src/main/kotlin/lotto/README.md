@@ -49,6 +49,7 @@
     * [X] LottoMatcher: 당첨 결과 계산기
       - [X] N장의 LottoTicket에 대한 당첨 결과(당첨 등수별 당첨 갯수)를 제공한다 
       - [X] N장의 LottoTicket에 대한 당첨 금액을 알고 있다
+      - [X] N장의 LottoTicket에 대한 수익률을 알고 있다.
     
 ## 실행 결과
 ```

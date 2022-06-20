@@ -10,8 +10,9 @@ package lotto.domain
         require(money >= 0L) { "금액은 항상 0이상이에요. given money: $money" }
     }
 }
+@JvmInline value class Count(val count: Int)
 
 data class LottoMatchResult(
-    val matchResult: Map<Rank, Int>,
+    val matchResult: Map<Rank, Count>,
     val earnedMoney: EarnedMoney,
 )
