@@ -30,7 +30,7 @@ internal class LottoNumbersTest : FreeSpec({
 
     "각각의 번호는 오름차순으로 정렬되어 있다." {
         // given
-        val numberSet = setOf(5, 12, 7, 3, 1, 9)
+        val numberSet = listOf(5, 12, 7, 3, 1, 9)
             .map { LottoNumber.from(it) }
             .toSet()
 
