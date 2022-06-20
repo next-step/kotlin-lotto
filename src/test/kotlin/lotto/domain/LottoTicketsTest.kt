@@ -6,23 +6,32 @@ import org.junit.jupiter.api.Test
 
 class LottoTicketsTest {
     @Test
-    fun `LottoTickets는 당첨 번호 개수를 카운트 할 수 있다`() {
+    fun `LottoTicket N장에 대한 당첨 결과(당첨 등수, 당첨 갯수)를 알 수 있다`() {
         // given
-        val lottoTickets = LottoTickets(
-            listOf(
-                LottoTicket(listOf(1, 2, 3, 24, 25, 26)),
-                LottoTicket(listOf(1, 2, 3, 34, 35, 36)),
-                LottoTicket(listOf(1, 2, 3, 4, 35, 36)),
-                LottoTicket(listOf(11, 12, 13, 14, 15, 16))
-            )
+        val lottoTickets = lottoTickets(
+            lotto(1, 2, 3, 4, 5, 26),
+            lotto(1, 2, 3, 4, 5, 36),
+            lotto(1, 2, 3, 4, 35, 36),
+            lotto(1, 2, 3, 34, 35, 36),
+            lotto(1, 2, 33, 34, 35, 36),
+            lotto(1, 32, 33, 34, 35, 36),
+            lotto(31, 32, 33, 34, 35, 36),
         )
-        val winningNumbers = WinningNumber(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = winningLotto(1, 2, 3, 4, 5, 6)
+        val bonusNumber = BonusNumber(26)
         // when
-        val mapMatchCount = lottoTickets.match(winningNumbers)
+        val matchResult: Map<Rank, Count> = lottoTickets.match(winningLotto, bonusNumber)
         // then
-        assertEquals(mapMatchCount[Rank.FIFTH], 2)
-        assertEquals(mapMatchCount[Rank.FOURTH], 1)
-        assertNull(mapMatchCount[Rank.THIRD])
-        assertNull(mapMatchCount[Rank.FIRST])
+        assertNull(matchResult[Rank.FIRST])
+        assertEquals(1, matchResult[Rank.SECOND]!!.count)
+        assertEquals(1, matchResult[Rank.THIRD]!!.count)
+        assertEquals(1, matchResult[Rank.FOURTH]!!.count)
+        assertEquals(1, matchResult[Rank.FIFTH]!!.count)
+        assertEquals(3, matchResult[Rank.MISS]!!.count)
+    }
+    companion object {
+        fun lotto(vararg numbers: Int): LottoTicket = LottoTicket(numbers.toList())
+        fun lottoTickets(vararg lotto: LottoTicket) = LottoTickets(lotto.toList())
+        fun winningLotto(vararg numbers: Int): WinningNumber = WinningNumber(numbers.toList())
     }
 }
