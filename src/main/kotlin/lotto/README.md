@@ -13,36 +13,41 @@
     * [X] 당첨 통계 결과를 출력한다.
     
 * DOMAIN
-    * [X] 로또 구입 금액에 해당하는 로또 수를 계산할 수 있다. (ex: 14000원 => 14장, 0원 => 0장)
-    * [X] 로또 구입 금액이 1천원 미만이면 IllegalArgumentException 예외가 발생한다. (ex: 900원 => "구입 가능한 로또가 없어요")
-    * [X] 로또 구입 금액이 1천원 이상인데, 천단위 아니면 IllegalArgumentException 예외가 발생한다 (ex: 11000원 => "1000원 단위로 입력해주세요.")
-    * [X] 로또는 1~45범위 숫자 중 중복되지 않은 랜덤한 숫자 6개로 이뤄져야 한다.
-    * [X] 로또 티켓 한장에 대해 일치하는 당첨 번호 개수를 구할 수 있다.
-    * [X] 모든 로또 티켓에 대해 일치하는 당첨번호 개수 목록을 구할 수 있다.
-    * [X] 당첨 결과를 입력하면 당첨금 총액을 반환한다.
-    * [X] 당첨 금액과 구입 금액을 입력하면 수익률을 반환한다.
-    * [X] LottoTicket은 당첨 번호 개수를 카운트 할 수 있다.
-    * [X] WinningNumber는 로또 번호가 당첨 번호와 일치하는지 알 수 있다.
-  
-* REFAC
-    * [X] LottoTicket, LottoTickets 정의
-        - [X] LottoTicket: 로또 티켓 1장
-            - [X] 1~45범위 숫자 중 중복되지 않은 랜덤한 숫자 6개로 이뤄진다.
-            - [X] 당첨번호에 일치하는 로또 번호 개수를 알려준다  
-        - [x] LottoTickets: 로또 티켓 N장으로 이뤄진 일급 컬렉션 
-            - [X] 당첨 번호와 일치하는 로또 번호 개수를 모든 로또 티켓에 대하여 계산한다. 
-    * [X] LottoShop, LottoVendor 정의
-        - [X] LottoShop: 로또 파는 상점
-            - [X] 전달받은 돈으로 구매가능한 로또 수를 계산한다. 
-            - [X] LottoTickets 제공한다.
-        - [X] LottoVendor: LottoTicket 생성기, 로또 티켓 수 만큼 LottoTickets 생성한다.
-    * [X] WinningNumbers 정의
-        - [X] WinningNumbers: 로또 당첨 번호
-        - [X] 로또 번호가 당첨 번호와 일치하는지 알려준다
-    * [X] LottoMatcher, LottoMatchResult 정의
-        - [X] LottoMatcher: 로또 티켓과 당첨 번호를 비교해  로또 당첨 결과기. 로또 당첨 금액과 수익률 계산하는 로또 당첨 결과기 
-        - [X] LottoMatchResult: 당첨 결과 출력용 DTO. 당첨 결과와 당첨금 총액 정보
-
+    * [X] 구매 가능한 LottoTicket 수 구하기
+        * 14000원 -> 14장 
+        * 1000원 -> 1장
+        * 1500원 -> IllegalArgumentException ("1000원 단위로 입력해주세요.")
+        * 1000원 미만 -> IllegalArgumentException ("구입 가능한 로또가 없어요")
+    * [X] LottoTicket 생성
+        * 로또 번호는 1~45범위 숫자 중 중복되지 않은 랜덤 숫자 6개로 구성
+    * [X] WinningNumber 당첨 번호 생성
+        * 6개 숫자로 입력
+        * 1~45범위 숫자 중 중복되지 않는다
+    * [X] 1장의 LottoTicket에 대해 당첨 결과 구하기 
+    * [X] N장의 LottoTicket에 대해 당첨 결과 구하기
+    * [X] Lotto 결과에 따른 당첨 금액 구하기
+    * [X] Lotto 결과에 따른 수익률 구하기
+    
+* DOMAIN Detail
+    * [X] Rank
+      - 로또 당첨 등수와 당첨 금액 정보를 알고 있다.
+    * [X] LottoTicket: 로또 티켓 1장
+        - [X] 1 ~ 45 범위의 중복되지 않는 숫자 6개로 이뤄진다.
+        - [X] 당첨번호와 일치하는 LottoNumber 개수를 알고 있다
+    * [x] LottoTickets: 로또 티켓 N장 (일급 컬렉션)
+        - [X] LottoTicket N장에 대한 당첨 결과(당첨 등수, 당첨 갯수)를 알고 있다. 
+    * [X] LottoShop: 로또 상점
+        - [X] 구입 가능한 로또 수를 알고 있다.
+        - [X] LottoVendor로 생성된 LottoTickets을 제공한다.
+    * [X] LottoVendor
+        - [X] N개의 LottoTickets 생성한다.
+    * [X] WinningNumbers: 로또 당첨 번호 
+        - [X] 1 ~ 45 범위의 중복되지 않는 숫자 6개로 이뤄진다.
+        - [X] LottoNumber가 당첨번호인지 알고 있다.
+    * [X] LottoMatcher: 당첨 결과 계산기
+      - [X] N장의 LottoTicket에 대한 당첨 결과(당첨 등수별 당첨 갯수)를 제공한다 
+      - [X] N장의 LottoTicket에 대한 당첨 금액을 알고 있다
+    
 ## 실행 결과
 ```
 구입금액을 입력해 주세요.
