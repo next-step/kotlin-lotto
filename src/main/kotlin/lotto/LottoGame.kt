@@ -12,18 +12,14 @@ object LottoGame {
         val money = InputUI.receivePurchaseAmount()
         val manualPurchaseCount = InputUI.receiveManualPurchaseCount()
 
-        val order = LottoSeller.order(money, manualPurchaseCount)
-
-        if (order.isValid()) {
-            proceed(manualPurchaseCount, order)
-        } else {
-            OutputUI.drawErrorMessage("구매 금액보다 많은 양은 구매할 수 없습니다.")
+        when (val order = LottoSeller.order(money, manualPurchaseCount)) {
+            is OrderSheet.Valid -> proceed(order)
+            else -> OutputUI.drawErrorMessage("구매 금액보다 많은 양은 구매할 수 없습니다.")
         }
     }
 
-    private fun proceed(manualPurchaseCount: Int, order: OrderSheet) {
-        val manualLotto = receiveManual(manualPurchaseCount)
-        val lottoList = LottoSeller.take(order, manualLotto)
+    private fun proceed(order: OrderSheet.Valid) {
+        val lottoList = LottoSeller.take(order, ::receiveManual)
 
         OutputUI.drawPurchaseMessage(order)
         OutputUI.drawLotto(lottoList)
@@ -41,9 +37,7 @@ object LottoGame {
         if (manualPurchaseCount <= 0) return emptyList()
 
         OutputUI.drawManualInputRequest()
-        return (0 until manualPurchaseCount).map {
-            InputUI.receiveManualNumbers()
-        }
+        return List(manualPurchaseCount) { InputUI.receiveManualNumbers() }
     }
 }
 

@@ -1,10 +1,17 @@
 package lotto.domain
 
-class OrderSheet(money: Money, val manualCount: Int, cost: Money) {
-    private val totalCount = money / cost
+sealed class OrderSheet {
+    object Invalid : OrderSheet()
+    data class Valid(val autoCount: Int, val manualCount: Int, val totalCost: Money) : OrderSheet()
 
-    val autoCount = totalCount - manualCount
-    val totalCost = cost * totalCount
+    companion object {
+        fun order(money: Money, manualCount: Int, cost: Money): OrderSheet {
+            val totalCount = money / cost
+            val autoCount = totalCount - manualCount
+            val totalCost = cost * totalCount
 
-    fun isValid() = autoCount >= 0
+            return if (autoCount >= 0) Valid(autoCount, manualCount, totalCost)
+            else Invalid
+        }
+    }
 }
