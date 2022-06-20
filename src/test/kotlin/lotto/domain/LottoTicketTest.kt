@@ -18,7 +18,7 @@ class LottoTicketTest {
 
     @ParameterizedTest
     @MethodSource("lottoMatches")
-    fun `LottoTicket은 당첨번호와 일치하는 로또 번호 개수를 알고 있다`(lotto: LottoTicket, winningLotto: WinningNumber, bonusNumber: Int, expectedRank: Rank) {
+    fun `LottoTicket은 당첨번호와 일치하는 로또 번호 개수를 알고 있다`(lotto: LottoTicket, winningLotto: WinningLotto, bonusNumber: Int, expectedRank: Rank) {
         // given
         // when
         val matchResult = lotto.match(winningLotto, BonusNumber(bonusNumber))
@@ -39,6 +39,6 @@ class LottoTicketTest {
             Arguments.of(lotto(31, 32, 33, 34, 35, 36), winningLotto(1, 2, 3, 4, 5, 6), 26, Rank.MISS),
         )
         private fun lotto(vararg numbers: Int): LottoTicket = LottoTicket(numbers.toList())
-        private fun winningLotto(vararg numbers: Int): WinningNumber = WinningNumber(numbers.toList())
+        private fun winningLotto(vararg numbers: Int): WinningLotto = WinningLotto(numbers.toList())
     }
 }

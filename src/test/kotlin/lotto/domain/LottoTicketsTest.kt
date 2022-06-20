@@ -32,6 +32,6 @@ class LottoTicketsTest {
     companion object {
         fun lotto(vararg numbers: Int): LottoTicket = LottoTicket(numbers.toList())
         fun lottoTickets(vararg lotto: LottoTicket) = LottoTickets(lotto.toList())
-        fun winningLotto(vararg numbers: Int): WinningNumber = WinningNumber(numbers.toList())
+        fun winningLotto(vararg numbers: Int): WinningLotto = WinningLotto(numbers.toList())
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class WinningNumber(
+data class WinningLotto(
     val winningNumbers: List<Int>
 ) {
     fun hasNumber(lottoNumber: Int): Boolean {

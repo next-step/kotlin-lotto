@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoMatcher() {
-    fun matchResult(lottoTickets: LottoTickets, winningNumbers: WinningNumber, bonusNumber: BonusNumber): LottoMatchResult {
+    fun matchResult(lottoTickets: LottoTickets, winningNumbers: WinningLotto, bonusNumber: BonusNumber): LottoMatchResult {
         val matchResult = formatMatchResult(
             lottoTickets.match(winningNumbers, bonusNumber)
         )

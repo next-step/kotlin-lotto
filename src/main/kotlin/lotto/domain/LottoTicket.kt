@@ -7,8 +7,8 @@ data class LottoTicket(
         require(lottoNumbers.size == LOTTO_SIZE) { "로또 번호는 6개로 구성되어야 해요" }
     }
 
-    fun match(winningLotto: WinningNumber, bonusNumber: BonusNumber): Rank {
-        val matchCount = count(winningLotto)
+    fun match(winningNumbers: WinningLotto, bonusNumber: BonusNumber): Rank {
+        val matchCount = count(winningNumbers)
         val matchBonus = contains(bonusNumber)
         return rank(matchCount, matchBonus)
     }
@@ -23,8 +23,8 @@ data class LottoTicket(
         }
     }
 
-    private fun count(winningNumber: WinningNumber): Int {
-        return lottoNumbers.count(winningNumber::hasNumber)
+    private fun count(winningNumbers: WinningLotto): Int {
+        return lottoNumbers.count(winningNumbers::hasNumber)
     }
 
     private fun contains(bonusNumber: BonusNumber): Boolean {
