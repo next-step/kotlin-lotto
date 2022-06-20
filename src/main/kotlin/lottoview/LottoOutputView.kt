@@ -8,7 +8,7 @@ object LottoOutputView {
 
     fun displayIssuedLottos(issuedLottos: List<LottoTicket>) {
         issuedLottos.forEach {
-            println(it.ticketList)
+            println(it.ticketList.map { it.number })
         }
     }
 
@@ -18,8 +18,8 @@ object LottoOutputView {
 
         winningInfo.scoreInfos.sortBy { it.match }
         winningInfo.scoreInfos.forEach {
-            var message = CONTAIN_MESSAGE.format(it.match, it.price, it.count)
-            if (it.match == WinningPriceEnum.FIVE_BONUS.number) {
+            var message = CONTAIN_MESSAGE.format(it.match.number, it.price, it.count)
+            if (it.match == WinningPriceEnum.FIVE_BONUS) {
                 message = BONUS_CONTAIN_MESSAGE.format(5, it.price, it.count)
             }
             println(message)

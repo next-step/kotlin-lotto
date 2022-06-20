@@ -10,7 +10,7 @@ class LottoWinningInfoTest {
         val winningNumberInput = "1,2,3,4,5,6"
         val winningInfo = LottoWinningInfo(winningNumberInput, "7")
 
-        winningInfo.winningNumbers.all { it is LottoNumber }
+        winningInfo.winningLottoTicket.numbers.all { it is LottoNumber }
     }
 
     @Test

@@ -32,7 +32,7 @@ class LottoWinningHandlerTest {
         )
         val winningInfo = LottoWinningInfo("1,2,3,4,5,6", "7")
 
-        val result = LottoWinningHandler.matchCount(issuedLottos, winningInfo.winningNumbers)
+        val result = winningInfo.winningLottoTicket.matchCount(issuedLottos)
         assertThat(result.get(WinningPriceEnum.THREE)).isEqualTo(1)
         assertThat(result.get(WinningPriceEnum.FOUR)).isEqualTo(2)
     }
@@ -65,9 +65,9 @@ class LottoWinningHandlerTest {
 
         val winningInfo = LottoWinningInfo("1,2,3,4,5,6", "7")
 
-        LottoWinningHandler.matchCount(issuedLottos, winningInfo.winningNumbers)
+        winningInfo.winningLottoTicket.matchCount(issuedLottos)
         winningInfo.setScore(issuedLottos)
-        val sum = LottoWinningHandler.calculateRevenue(winningInfo.scoreInfos)
+        val sum = winningInfo.winningLottoTicket.calculateRevenue(winningInfo.scoreInfos)
 
         assertThat(sum).isEqualTo(55000)
     }
@@ -100,7 +100,7 @@ class LottoWinningHandlerTest {
         val winningInfo = LottoWinningInfo("1,2,3,4,5,6", "7")
 
         winningInfo.setScore(issuedLottos)
-        val sum = LottoWinningHandler.calculateRevenue(winningInfo.scoreInfos)
+        val sum = winningInfo.winningLottoTicket.calculateRevenue(winningInfo.scoreInfos)
 
         assertThat(sum).isEqualTo(31550000)
     }
@@ -132,7 +132,7 @@ class LottoWinningHandlerTest {
         )
         val winningInfo = LottoWinningInfo("41,42,43,44,45,40", "7")
 
-        LottoWinningHandler.matchCount(issuedLottos, winningInfo.winningNumbers)
+        winningInfo.winningLottoTicket.matchCount(issuedLottos)
 
         assertThat(winningInfo.scoreInfos.size).isEqualTo(0)
     }

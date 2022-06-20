@@ -2,13 +2,24 @@ package lotto
 
 import lotto.WinningPriceEnum.Companion.find
 
-object LottoWinningHandler {
+class WinningLottoTicket(val numbers: List<LottoNumber>, val bonusNumber: LottoNumber) {
 
-    fun matchCount(issuedLottos: List<LottoTicket>, numbers: List<LottoNumber>): Map<WinningPriceEnum, Int> {
+    fun matchCount(issuedLottos: List<LottoTicket>): Map<WinningPriceEnum, Int> {
         val result = mutableMapOf<Int, Int>()
 
         for (i in issuedLottos) {
             val c = count(i.ticketList, numbers)
+            result[c] = result[c]?.plus(1) ?: 1
+        }
+
+        return createMatchedLottoNumber(result)
+    }
+
+    fun matchBonus(issuedLottos: List<LottoTicket>): Map<WinningPriceEnum, Int> {
+        val result = mutableMapOf<Int, Int>()
+
+        for (i in issuedLottos) {
+            val c = count(i.ticketList, listOf(bonusNumber))
             result[c] = result[c]?.plus(1) ?: 1
         }
 

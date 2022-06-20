@@ -2,15 +2,15 @@ package lotto
 
 import java.lang.Exception
 
-enum class WinningPriceEnum(val number: Int, val price: Int) {
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000),
-    FIVE_BONUS(7, 30000000);
+enum class WinningPriceEnum(val number: Int, val price: Int, val bonusMatched: Boolean) {
+    ZERO(0, 0, false),
+    ONE(1, 0, false),
+    TWO(2, 0, false),
+    THREE(3, 5000, false),
+    FOUR(4, 50000, false),
+    FIVE(5, 1500000, false),
+    SIX(6, 2000000000, false),
+    FIVE_BONUS(5, 30000000, true);
 
     companion object {
         fun find(number: Int): WinningPriceEnum {
@@ -19,15 +19,11 @@ enum class WinningPriceEnum(val number: Int, val price: Int) {
     }
 }
 
-fun getPrice(number: Int): Int {
+fun getPrice(number: WinningPriceEnum): Int {
     return try {
-        WinningPriceEnum.values().filter { it.number.equals(number) }
+        WinningPriceEnum.values().filter { it.equals(number) }
             .map { return it.price }.first()
     } catch (e: Exception) {
         throw IllegalArgumentException("일치하지 않는 숫자입니다")
     }
-}
-
-fun find(number: Int): WinningPriceEnum {
-    return WinningPriceEnum.values().find { it.number == number }!!
 }

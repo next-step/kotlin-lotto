@@ -18,9 +18,9 @@ class LottoTicket constructor() {
             .map(::LottoNumber)
     }
 
-    fun validate(winningNumbers: List<LottoNumber>, bonusNumber: LottoNumber) {
-        require(winningNumbers.size == LOTTO_NUMBER_COUNT)
-        require(LOTTO_NUMBER_RANGE.contains(bonusNumber.number) && !winningNumbers.contains(bonusNumber))
+    fun validate(winningNumbers: WinningLottoTicket) {
+        require(winningNumbers.numbers.size == LOTTO_NUMBER_COUNT)
+        require(LOTTO_NUMBER_RANGE.contains(winningNumbers.bonusNumber.number) && !winningNumbers.numbers.contains(winningNumbers.bonusNumber))
     }
 
     companion object {

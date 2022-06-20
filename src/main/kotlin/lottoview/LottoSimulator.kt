@@ -19,11 +19,11 @@ fun main() {
     LottoOutputView.displayIssuedLottos(allLottos)
 
     val winningInfo = LottoInputView.inputWinningNumbersAndBonusNumber()
-    autoIssuedLottos.forEach {
-        it.validate(winningInfo.winningNumbers, LottoNumber(winningInfo.bonusNumber))
+    allLottos.forEach {
+        it.validate(winningInfo.winningLottoTicket)
     }
 
-    winningInfo.setScore(autoIssuedLottos)
+    winningInfo.setScore(allLottos)
     val revenuePercentage = winningInfo.getRevenuePercentage(priceRule.amount, winningInfo.revenue)
 
     println()
