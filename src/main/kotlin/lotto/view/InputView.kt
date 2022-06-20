@@ -13,6 +13,16 @@ object InputView {
         return convertToListInt(readLine())
     }
 
+    fun getBonusNumber(): Int {
+        println("\n지난 주 당첨 번호를 입력해 주세요.")
+        return convertToInt(readLine())
+    }
+
+    private fun convertToInt(bonusNumber: String?): Int {
+        bonusNumber.checkNullOrBlank()
+        return bonusNumber!!.toNumericInt()
+    }
+
     private fun convertToLong(moneyString: String?): Long {
         moneyString.checkNullOrBlank()
         return moneyString!!.toNumericLong()
