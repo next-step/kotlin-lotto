@@ -20,7 +20,7 @@ fun main() {
 
     val winningInfo = LottoInputView.inputWinningNumbersAndBonusNumber()
     autoIssuedLottos.forEach {
-        it.validate(winningInfo.winningNumbers, winningInfo.bonusNumber)
+        it.validate(winningInfo.winningNumbers, LottoNumber(winningInfo.bonusNumber))
     }
 
     winningInfo.setScore(autoIssuedLottos)

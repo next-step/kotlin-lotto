@@ -3,23 +3,24 @@ package lotto
 import kotlin.random.Random
 
 class LottoTicket constructor() {
-    var ticket: List<Int>
+    var ticketList: List<LottoNumber>
 
-    constructor(ticketList: List<Int>) : this() {
-        ticket = ticketList
+    constructor(tickets: List<LottoNumber>) : this() {
+        ticketList = tickets
     }
 
     init {
-        ticket = generateSequence { Random(Random.nextInt()).nextInt(LOTTO_NUMBER_RANGE.first, LOTTO_NUMBER_RANGE.last) }
+        ticketList = generateSequence { Random(Random.nextInt()).nextInt(LOTTO_NUMBER_RANGE.first, LOTTO_NUMBER_RANGE.last) }
             .distinct()
             .take(LOTTO_NUMBER_COUNT)
             .sorted()
             .toList()
+            .map(::LottoNumber)
     }
 
-    fun validate(winningNumbers: List<Int>, bonusNumber: Int) {
+    fun validate(winningNumbers: List<LottoNumber>, bonusNumber: LottoNumber) {
         require(winningNumbers.size == LOTTO_NUMBER_COUNT)
-        require(LOTTO_NUMBER_RANGE.contains(bonusNumber) && !winningNumbers.contains(bonusNumber))
+        require(LOTTO_NUMBER_RANGE.contains(bonusNumber.number) && !winningNumbers.contains(bonusNumber))
     }
 
     companion object {

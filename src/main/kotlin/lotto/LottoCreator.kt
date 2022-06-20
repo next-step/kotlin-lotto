@@ -14,9 +14,9 @@ object LottoCreator {
         }
     }
 
-    private fun formattedNumbers(list: String): List<Int> {
+    private fun formattedNumbers(list: String): List<LottoNumber> {
         return list.replace(SPACE_STRING, EMPTY_STRING).split(DELEMETER).map {
-            it.toInt()
+            LottoNumber(it.toInt())
         }
     }
 

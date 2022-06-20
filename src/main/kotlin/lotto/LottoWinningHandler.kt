@@ -4,11 +4,11 @@ import lotto.WinningPriceEnum.Companion.find
 
 object LottoWinningHandler {
 
-    fun matchCount(issuedLottos: List<LottoTicket>, numbers: List<Int>): Map<WinningPriceEnum, Int> {
+    fun matchCount(issuedLottos: List<LottoTicket>, numbers: List<LottoNumber>): Map<WinningPriceEnum, Int> {
         val result = mutableMapOf<Int, Int>()
 
         for (i in issuedLottos) {
-            val c = count(i.ticket, numbers)
+            val c = count(i.ticketList, numbers)
             result[c] = result[c]?.plus(1) ?: 1
         }
 
@@ -19,8 +19,8 @@ object LottoWinningHandler {
         return scoreInfos.sumOf { it.price }
     }
 
-    private fun count(ticket: List<Int>, winnerNumbers: List<Int>): Int {
-        return winnerNumbers.count { ticket.contains(it) }
+    private fun count(tickets: List<LottoNumber>, winnerNumbers: List<LottoNumber>): Int {
+        return winnerNumbers.count { tickets.contains(it) }
     }
 
     private fun createMatchedLottoNumber(matchedMap: Map<Int, Int>): Map<WinningPriceEnum, Int> {

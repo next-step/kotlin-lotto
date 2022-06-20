@@ -8,7 +8,7 @@ object LottoOutputView {
 
     fun displayIssuedLottos(issuedLottos: List<LottoTicket>) {
         issuedLottos.forEach {
-            println(it.ticket)
+            println(it.ticketList)
         }
     }
 

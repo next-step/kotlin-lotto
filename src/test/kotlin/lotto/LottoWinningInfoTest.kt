@@ -10,14 +10,14 @@ class LottoWinningInfoTest {
         val winningNumberInput = "1,2,3,4,5,6"
         val winningInfo = LottoWinningInfo(winningNumberInput, "7")
 
-        winningInfo.winningNumbers.all { it is Int }
+        winningInfo.winningNumbers.all { it is LottoNumber }
     }
 
     @Test
     fun `, 가 아닌 구분자는 허용할 수 없다`() {
         val winningNumberInput = "1*2*3*4*5*6"
         assertThrows<IllegalArgumentException> {
-            val winningInfo = LottoWinningInfo(winningNumberInput, "7")
+            LottoWinningInfo(winningNumberInput, "7")
         }
     }
 }
