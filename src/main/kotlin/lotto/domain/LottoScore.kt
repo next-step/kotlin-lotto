@@ -4,32 +4,23 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class LottoScore {
-    fun compareNumber(winningLotto: WinningLotto, lottoTickets: List<LottoTicket>): List<LottoResult> {
-        val winningTicket = winningLotto.winningTicket
-        val bonusNumber = winningLotto.bonusNumber
+    fun compareNumber(winningLotto: WinningLotto, lottoTickets: List<LottoTicket>): List<LottoResult> =
+        lottoTickets.asSequence()
+            .mapNotNull { lottoTicket ->
+                val count = lottoTicket.countIntersection(winningLotto.winningTicket)
+                val bonusMatch = winningLotto.bonusNumber in lottoTicket
 
-        val matchResults = lottoTickets.map { lottoTicket ->
-            lottoTicket.countIntersection(winningTicket) to lottoTicket
-        }
-
-        val thirdResults = matchResults.filter { it.first == LottoPrize.THIRD.matchCount }.map { it.second }
-        val secondCount = isSecond(thirdResults, bonusNumber)
-
-        val matchGroupingResults = matchResults.groupingBy { it.first }.eachCount()
-
-        return LottoPrize.values().map { lottoPrize ->
-            val lottoCount = matchGroupingResults.getOrDefault(lottoPrize.matchCount, 0)
-            val count = when (lottoPrize) {
-                LottoPrize.SECOND -> secondCount
-                LottoPrize.THIRD -> lottoCount - secondCount
-                else -> lottoCount
-            }
-            LottoResult(lottoPrize, count)
-        }
-    }
-
-    private fun isSecond(lottoTickets: List<LottoTicket>, bonusNumber: LottoNumber): Int =
-        lottoTickets.filter { bonusNumber in it }.size
+                when (count) {
+                    LottoPrize.THIRD.matchCount -> {
+                        if (bonusMatch) LottoPrize.SECOND
+                        else LottoPrize.THIRD
+                    }
+                    else -> {
+                        LottoPrize.values().firstOrNull() { it.matchCount == count }
+                    }
+                }
+            }.groupingBy { it }.eachCount()
+            .map { (LottoPrize, count) -> LottoResult(LottoPrize, count) }
 
     fun rateOfResult(lottoPrice: LottoPrice, lottoResults: List<LottoResult>): BigDecimal {
         val realLottoPrice = lottoPrice / LottoPurchase.LOTTO_PRICE * LottoPurchase.LOTTO_PRICE
