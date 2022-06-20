@@ -18,6 +18,21 @@ class LottoTicket(
     fun hasNumber(number: LottoNumber) = value.any { it == number }
     operator fun contains(number: LottoNumber) = value.any { it == number }
 
+    fun toLottoPrize(winningLotto: WinningLotto): LottoPrize? {
+        val count = countIntersection(winningLotto.winningTicket)
+        val bonusMatch = winningLotto.bonusNumber in this
+
+        return when (count) {
+            LottoPrize.THIRD.matchCount -> {
+                if (bonusMatch) LottoPrize.SECOND
+                else LottoPrize.THIRD
+            }
+            else -> {
+                LottoPrize.values().firstOrNull() { it.matchCount == count }
+            }
+        }
+    }
+
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
 

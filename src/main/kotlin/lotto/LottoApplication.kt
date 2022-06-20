@@ -2,7 +2,6 @@ package lotto
 
 import lotto.domain.LottoPrice
 import lotto.domain.LottoPurchase
-import lotto.domain.LottoScore
 import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -28,10 +27,9 @@ fun main() {
     val winningLotto = WinningLotto(lastWinningNumbers, bonusNumber)
 
     // 당첨통계
-    val lottoScore = LottoScore()
-    val lottoResults = lottoScore.compareNumber(winningLotto, lottoTickets)
+    val lottoResults = lottoTickets.compareNumber(winningLotto)
     // 수익률
-    val rateResult = lottoScore.rateOfResult(lottoPrice, lottoResults)
+    val rateResult = lottoResults.rateOfResult(lottoPrice)
 
     OutputView.winningResult(lottoResults, rateResult)
 }
