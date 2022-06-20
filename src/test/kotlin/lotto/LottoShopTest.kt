@@ -40,17 +40,8 @@ class LottoShopTest {
     }
 
     @Test
-    fun `구매 가능 로또 갯수 안에서 수동 로또 갯수를 설정할 수 있게 한다`() {
+    fun `구매가능 갯수 이상을 요청하면 에러를 발생시킨다`() {
         val lottoShop = LottoShop(1000)
         assertThrows<RuntimeException> { lottoShop.autoPurchase(2) }
-    }
-
-    @Test
-    fun `로또 구매하면, 구매가능한 숫자가 감소한다`() {
-        val lottoShop = LottoShop(5000)
-        lottoShop.autoPurchase(3)
-
-        // invalid call
-        assertThrows<RuntimeException> { lottoShop.autoPurchase(3) }
     }
 }
