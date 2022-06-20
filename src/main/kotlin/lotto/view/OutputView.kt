@@ -1,19 +1,20 @@
 package lotto.view
 
 import lotto.domain.LottoPrize
-import lotto.domain.LottoResult
+import lotto.domain.LottoResults
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 import java.math.BigDecimal
 
 object OutputView {
-    fun resultPurchaseLotto(lottoCount: Int, lottoTickets: List<LottoTicket>) {
+    fun resultPurchaseLotto(lottoCount: Int, lottoTickets: LottoTickets) {
         println("${lottoCount}개를 구매했습니다.")
         resultLottoTickets(lottoTickets = lottoTickets)
     }
 
-    private fun resultLottoTickets(lottoTickets: List<LottoTicket>) {
+    private fun resultLottoTickets(lottoTickets: LottoTickets) {
         val result = buildString {
-            lottoTickets.forEach {
+            lottoTickets.get().forEach {
                 appendLine(lottoTicketToString(it))
             }
         }
@@ -31,7 +32,7 @@ object OutputView {
         append("]")
     }
 
-    fun winningResult(lottoResults: List<LottoResult>, rateResult: BigDecimal) {
+    fun winningResult(lottoResults: LottoResults, rateResult: BigDecimal) {
         val result = buildString {
             appendLine("\n당첨 통계")
             appendLine("---------")
@@ -41,8 +42,8 @@ object OutputView {
         print(result)
     }
 
-    private fun winningLottoResults(lottoResults: List<LottoResult>): String = buildString {
-        lottoResults.sortedBy { it.lottoPrize.rank }
+    private fun winningLottoResults(lottoResults: LottoResults): String = buildString {
+        lottoResults.get().sortedBy { it.lottoPrize.rank }
             .forEach {
                 if (it.lottoPrize == LottoPrize.SECOND) {
                     appendLine("${it.lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${it.lottoPrize.prizeMoney}원) - ${it.lottoCount}개")

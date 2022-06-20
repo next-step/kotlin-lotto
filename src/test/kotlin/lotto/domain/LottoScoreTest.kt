@@ -26,7 +26,7 @@ internal class LottoScoreTest {
             LottoNumber(7)
         )
 
-        val lottoResults = LottoScore().compareNumber(winningLotto, lottoTickets)
+        val lottoResults = LottoScore().compareNumber(winningLotto, LottoTickets(lottoTickets))
         val expected = mapOf(
             LottoPrize.FIRST to 1,
             LottoPrize.SECOND to 1,
@@ -35,11 +35,11 @@ internal class LottoScoreTest {
             LottoPrize.FIFTH to 2
         )
 
-        assertThat(lottoResults).hasSize(expected.size)
+        assertThat(lottoResults.get()).hasSize(expected.size)
         assertAll(
             {
                 expected.forEach { (prize, lottoCount) ->
-                    val lottoResult = lottoResults.find { it.lottoPrize == prize }
+                    val lottoResult = lottoResults.get().find { it.lottoPrize == prize }
                     assertThat(lottoResult?.lottoCount).isEqualTo(lottoCount)
                 }
             }
@@ -61,7 +61,7 @@ internal class LottoScoreTest {
         val lottoResult = listOf(
             LottoResult(LottoPrize.FOURTH, 1),
             LottoResult(LottoPrize.FIFTH, 2)
-        )
+        ).toLottoResults()
         val result = LottoScore().rateOfResult(LottoPrice(price), lottoResult)
         assertThat(result).isEqualTo(expected.setScale(2, RoundingMode.HALF_UP))
     }

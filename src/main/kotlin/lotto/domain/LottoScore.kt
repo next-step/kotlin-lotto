@@ -4,8 +4,8 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class LottoScore {
-    fun compareNumber(winningLotto: WinningLotto, lottoTickets: List<LottoTicket>): List<LottoResult> =
-        lottoTickets.asSequence()
+    fun compareNumber(winningLotto: WinningLotto, lottoTickets: LottoTickets): LottoResults =
+        lottoTickets.get().asSequence()
             .mapNotNull { lottoTicket ->
                 val count = lottoTicket.countIntersection(winningLotto.winningTicket)
                 val bonusMatch = winningLotto.bonusNumber in lottoTicket
@@ -21,13 +21,14 @@ class LottoScore {
                 }
             }.groupingBy { it }.eachCount()
             .map { (LottoPrize, count) -> LottoResult(LottoPrize, count) }
+            .toLottoResults()
 
-    fun rateOfResult(lottoPrice: LottoPrice, lottoResults: List<LottoResult>): BigDecimal {
+    fun rateOfResult(lottoPrice: LottoPrice, lottoResults: LottoResults): BigDecimal {
         val realLottoPrice = lottoPrice / LottoPurchase.LOTTO_PRICE * LottoPurchase.LOTTO_PRICE
         return BigDecimal(sumOfResult(lottoResults)).divide(BigDecimal(realLottoPrice), 2, RoundingMode.HALF_UP)
     }
 
-    private fun sumOfResult(lottoResults: List<LottoResult>): Int = lottoResults.sumOf {
+    private fun sumOfResult(lottoResults: LottoResults): Int = lottoResults.get().sumOf {
         it.lottoPrize.prizeMoney * it.lottoCount
     }
 }

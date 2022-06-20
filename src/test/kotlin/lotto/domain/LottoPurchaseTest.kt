@@ -33,6 +33,6 @@ internal class LottoPurchaseTest {
     internal fun `입력한 개수에 맞추어 로또티켓을 준다`() {
         val expected = 5
         val lottoTickets = lottoPurchase.getLottoTickets(expected)
-        assertThat(lottoTickets).hasSize(expected)
+        assertThat(lottoTickets.get()).hasSize(expected)
     }
 }
