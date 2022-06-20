@@ -17,14 +17,19 @@ class LottoResultTest {
         @JvmStatic
         private fun lottoResultToProfit(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(LottoResult(listOf(LottoTicketMatchResult(3))), 5.0),
-                Arguments.of(LottoResult(listOf(LottoTicketMatchResult(3), LottoTicketMatchResult(2))), 2.5),
-                Arguments.of(LottoResult(listOf(LottoTicketMatchResult(3), LottoTicketMatchResult(2), LottoTicketMatchResult(1), LottoTicketMatchResult(0))), 1.25),
-                Arguments.of(LottoResult(listOf(LottoTicketMatchResult(3), LottoTicketMatchResult(2), LottoTicketMatchResult(1), LottoTicketMatchResult(0), LottoTicketMatchResult(0))), 1.0),
-                Arguments.of(LottoResult(listOf(LottoTicketMatchResult(2))), 0.0),
-                Arguments.of(LottoResult(listOf(LottoTicketMatchResult(1))), 0.0),
-                Arguments.of(LottoResult(listOf(LottoTicketMatchResult(0))), 0.0)
+                Arguments.of(createLottoResult(listOf(3)), 5.0),
+                Arguments.of(createLottoResult(listOf(3, 2)), 2.5),
+                Arguments.of(createLottoResult(listOf(3, 2, 1, 0)), 1.25),
+                Arguments.of(createLottoResult(listOf(3, 2, 1, 0, 0)), 1.0),
+                Arguments.of(createLottoResult(listOf(2)), 0.0),
+                Arguments.of(createLottoResult(listOf(1)), 0.0),
+                Arguments.of(createLottoResult(listOf(0)), 0.0)
             )
+        }
+
+        @JvmStatic
+        private fun createLottoResult(results: List<Int>): LottoResult {
+            return LottoResult(results.map { LottoTicketMatchResult(it) }.toList())
         }
     }
 }

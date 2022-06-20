@@ -32,7 +32,7 @@ class LottoTicket(numbers: Set<LottoNumber>) {
         }
 
         fun random(count: Long): List<LottoTicket> {
-            return (count..1).map { random() }
+            return List(count.toInt()) { random() }
         }
     }
 }

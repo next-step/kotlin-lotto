@@ -1,7 +1,6 @@
 package game
 
 import game.domain.lotto.machine.LottoMachine
-import game.domain.result.LottoResult
 import game.view.ConsoleInput
 import game.view.ConsoleOutput
 import game.view.Input
