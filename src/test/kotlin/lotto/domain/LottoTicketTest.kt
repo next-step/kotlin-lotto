@@ -31,8 +31,8 @@ internal class LottoTicketTest {
     @Test
     internal fun `로또 티켓에 해당 번호가 있는지 조회한다`() {
         val lottoTicket = LottoTicket(1, 2, 3, 4, 5, 6)
-        assertThat(lottoTicket.hasNumber(LottoNumber(1))).isTrue
-        assertThat(lottoTicket.hasNumber(LottoNumber(7))).isFalse
+        assertThat(lottoTicket.contains(LottoNumber(1))).isTrue
+        assertThat(lottoTicket.contains(LottoNumber(7))).isFalse
     }
 
     private fun LottoTicket(vararg numbers: Int) =

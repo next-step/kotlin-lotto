@@ -15,7 +15,6 @@ class LottoTicket(
     fun toSortedList(): List<LottoNumber> =
         value.sortedBy { it }
 
-    fun hasNumber(number: LottoNumber) = value.any { it == number }
     operator fun contains(number: LottoNumber) = value.any { it == number }
 
     fun toLottoPrize(winningLotto: WinningLotto): LottoPrize? {
@@ -46,6 +45,3 @@ class LottoTicket(
         }
     }
 }
-
-infix fun LottoNumber.iin(other: LottoTicket) =
-    other.hasNumber(this)
