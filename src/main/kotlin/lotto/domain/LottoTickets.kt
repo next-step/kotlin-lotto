@@ -21,12 +21,4 @@ class LottoTickets constructor(
 
         return WinningResult(winningAmountMap)
     }
-
-    companion object {
-        fun buyLottos(money: Money): LottoTickets {
-            val lottoTickets = mutableListOf<LottoTicket>()
-            repeat(money.divideInt(LottoTicket.PRICE)) { lottoTickets.add(LottoTicket.autoCreate()) }
-            return LottoTickets(values = lottoTickets)
-        }
-    }
 }

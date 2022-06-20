@@ -4,24 +4,15 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.Row2
 import io.kotest.data.row
-import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.shouldBe
 
 internal class LottoNumbersTest : FreeSpec({
 
-    "중복되지 않는 6개의 번호를 가진 로또를 자동으로 생성한다." {
-        // when
-        val lottoNumbers = LottoNumbers.random()
-
-        // then
-        lottoNumbers.values.shouldHaveSize(6)
-    }
-
     "로또 번호가 중복되는 경우 예외가 발생한다." {
         // when, then
         val exception = shouldThrowExactly<IllegalArgumentException> {
-            LottoNumbers(
+            LottoNumbers.createWithSort(
                 setOf(
                     LottoNumber.from(1),
                     LottoNumber.from(2),
@@ -38,8 +29,13 @@ internal class LottoNumbersTest : FreeSpec({
     }
 
     "각각의 번호는 오름차순으로 정렬되어 있다." {
+        // given
+        val numberSet = setOf(5, 12, 7, 3, 1, 9)
+            .map { LottoNumber.from(it) }
+            .toSet()
+
         // when
-        val lottoNumbers = LottoNumbers.random()
+        val lottoNumbers = LottoNumbers.createWithSort(numberSet)
 
         // then
         lottoNumbers.values.zipWithNext { currentNumber, nextNumber ->

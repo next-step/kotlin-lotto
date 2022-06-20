@@ -10,7 +10,7 @@ class WinningTicket private constructor(
     }
 
     companion object {
-        fun of(numbers: List<Int>): WinningTicket = WinningTicket(LottoNumbers(convertToLottoNumberSet(numbers)))
+        fun of(numbers: List<Int>): WinningTicket = WinningTicket(LottoNumbers.createWithSort(convertToLottoNumberSet(numbers)))
 
         private fun convertToLottoNumberSet(numbers: List<Int>) =
             numbers.map { LottoNumber.from(it) }

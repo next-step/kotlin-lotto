@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumbers constructor(
+class LottoNumbers private constructor(
     val values: Set<LottoNumber>,
 ) {
     init {
@@ -15,15 +15,9 @@ class LottoNumbers constructor(
     }
 
     companion object {
-        private const val NUMBERS_COUNT = 6
+        const val NUMBERS_COUNT = 6
 
-        fun random(): LottoNumbers = LottoNumbers(
-            LottoNumber.cachedLottoNumbers()
-                .asSequence()
-                .shuffled()
-                .take(NUMBERS_COUNT)
-                .sortedBy { it.value }
-                .toSet()
-        )
+        fun createWithSort(values: Set<LottoNumber>): LottoNumbers =
+            LottoNumbers(values = values.sortedBy { it.value }.toSet())
     }
 }
