@@ -12,7 +12,7 @@ class LottoGame(
         val lottoTickets = lottoTicketSeller.buyLottoTickets(Money(inputView.inputBigDecimal()))
         outputView.printLottos(lottoTickets.values)
 
-        val winningTicket = WinningTicket.of(inputView.inputWinning())
+        val winningTicket = WinningTicket.of(inputView.inputWinning(), bonusNumber = 1)
         val matchResults = lottoTickets.totalMatchResults(winningTicket)
         outputView.printWinningResult(matchResults.amountWithWinnings)
         outputView.printYield(matchResults.calculateYield())

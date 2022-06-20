@@ -3,11 +3,11 @@ package lotto.domain
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.domain.WinningAmount.FIFTH
 import lotto.domain.WinningAmount.FIRST
 import lotto.domain.WinningAmount.FOURTH
 import lotto.domain.WinningAmount.MISS
 import lotto.domain.WinningAmount.SECOND
-import lotto.domain.WinningAmount.THIRD
 
 internal class WinningAmountTest : FreeSpec({
 
@@ -15,8 +15,8 @@ internal class WinningAmountTest : FreeSpec({
         listOf(
             row(6, FIRST),
             row(5, SECOND),
-            row(4, THIRD),
-            row(3, FOURTH),
+            row(4, FOURTH),
+            row(3, FIFTH),
             row(2, MISS),
             row(1, MISS),
             row(0, MISS),

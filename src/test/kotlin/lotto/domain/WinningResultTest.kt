@@ -2,8 +2,8 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.WinningAmount.FIFTH
 import lotto.domain.WinningAmount.FIRST
-import lotto.domain.WinningAmount.FOURTH
 import lotto.domain.WinningAmount.MISS
 import lotto.domain.WinningAmount.SECOND
 import lotto.domain.WinningAmount.THIRD
@@ -18,7 +18,7 @@ internal class WinningResultTest : StringSpec({
                 Pair(FIRST, 0),
                 Pair(SECOND, 0),
                 Pair(THIRD, 0),
-                Pair(FOURTH, 1),
+                Pair(FIFTH, 1),
                 Pair(MISS, 13),
             )
         )
