@@ -3,7 +3,7 @@ package lotto.view
 import lotto.domain.EarnedRate
 import lotto.domain.LottoMatchResult
 import lotto.domain.LottoTickets
-import lotto.domain.WinningInfo
+import lotto.domain.Rank
 
 object ResultView {
     fun showLottoInfo(lottoTickets: LottoTickets) {
@@ -18,10 +18,10 @@ object ResultView {
         println("\n당첨 통계")
         println("---------")
         lottoMatchResult.matchResult
-            .filter { it.key != WinningInfo.MISS }
+            .filter { it.key != Rank.MISS }
             .forEach { (winningInfo, count) ->
-                println("${winningInfo.winningCount}개 일치 (${winningInfo.winningMoney}원) - ${count}개")
-        }
+                println("${winningInfo.numOfMatch}개 일치 (${winningInfo.winningMoney}원) - ${count}개")
+            }
         println("총 수익률은 ${String.format("%.3f", earnedRate.rate).dropLast(1)}입니다.")
     }
 }

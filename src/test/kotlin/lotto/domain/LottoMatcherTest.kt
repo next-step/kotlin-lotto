@@ -21,10 +21,10 @@ class LottoMatcherTest {
         // then
         val matchResult = lottoMatchResult.matchResult
         val earnedMoney = lottoMatchResult.earnedMoney
-        assertEquals(1, matchResult[WinningInfo.THREE])
-        assertEquals(1, matchResult[WinningInfo.FOUR])
-        assertEquals(0, matchResult[WinningInfo.FIVE])
-        assertEquals(0, matchResult[WinningInfo.SIX])
+        assertEquals(1, matchResult[Rank.FIFTH])
+        assertEquals(1, matchResult[Rank.FOURTH])
+        assertEquals(0, matchResult[Rank.THIRD])
+        assertEquals(0, matchResult[Rank.FIRST])
         assertEquals(55000L, earnedMoney.money)
     }
 

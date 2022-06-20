@@ -14,7 +14,7 @@ class LottoTicketTest {
         val winningNumber = WinningNumber(winningNumbers)
         // when
         // then
-        assertThat(lottoTicket.matchCount(winningNumber)).isEqualTo(matchResult)
+        assertThat(lottoTicket.count(winningNumber)).isEqualTo(matchResult)
     }
 
     companion object {

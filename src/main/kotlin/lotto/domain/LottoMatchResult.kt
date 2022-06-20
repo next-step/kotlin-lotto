@@ -12,6 +12,6 @@ package lotto.domain
 }
 
 data class LottoMatchResult(
-    val matchResult: Map<WinningInfo, Int>,
+    val matchResult: Map<Rank, Int>,
     val earnedMoney: EarnedMoney,
 )

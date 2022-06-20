@@ -20,9 +20,9 @@ class LottoTicketsTest {
         // when
         val mapMatchCount = lottoTickets.match(winningNumbers)
         // then
-        assertEquals(mapMatchCount[WinningInfo.THREE], 2)
-        assertEquals(mapMatchCount[WinningInfo.FOUR], 1)
-        assertNull(mapMatchCount[WinningInfo.FIVE])
-        assertNull(mapMatchCount[WinningInfo.SIX])
+        assertEquals(mapMatchCount[Rank.FIFTH], 2)
+        assertEquals(mapMatchCount[Rank.FOURTH], 1)
+        assertNull(mapMatchCount[Rank.THIRD])
+        assertNull(mapMatchCount[Rank.FIRST])
     }
 }
