@@ -23,8 +23,7 @@ value class PositiveNumber(
         PositiveNumber(number.minus(lottoCount.number))
 
     companion object {
-        fun of(value: String?): PositiveNumber {
-            require(!value.isNullOrBlank()) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
+        fun of(value: String): PositiveNumber {
             val result = requireNotNull(value.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR_MSG }
             return PositiveNumber(result)
         }

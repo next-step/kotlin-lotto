@@ -5,6 +5,9 @@ data class LottoTickets(
 ) {
     fun get() = lottoTickets.toList()
 
+    operator fun plus(value: LottoTickets): LottoTickets =
+        LottoTickets(lottoTickets + value.lottoTickets)
+
     fun compareNumber(winningLotto: WinningLotto): LottoResults =
         lottoTickets.asSequence()
             .mapNotNull { lottoTicket ->
