@@ -12,7 +12,7 @@ fun main() {
 
     // 구입금액 validation
     val lottoPurchase = LottoPurchase()
-    val lottoPrice = LottoPrice(price)
+    val lottoPrice = LottoPrice.of(price)
 
     // 구입금액에 따른 로또 개수 반환
     val lottoCount = lottoPurchase.getLottoCount(lottoPrice)

@@ -36,7 +36,7 @@ internal class LottoTicketsTest {
             {
                 expected.forEach { (prize, lottoCount) ->
                     val lottoResult = lottoResults.get().find { it.lottoPrize == prize }
-                    assertThat(lottoResult?.matchedLottoCount).isEqualTo(lottoCount)
+                    assertThat(lottoResult?.matchedLottoCount?.toInt()).isEqualTo(lottoCount)
                 }
             }
         )

@@ -21,10 +21,10 @@ internal class LottoResultsTest {
     internal fun `당첨 결과에 따라 수익률을 반환한다`(price: Int, expected: BigDecimal) {
         // 총 상금: 60,000
         val lottoResult = listOf(
-            LottoResult(LottoPrize.FOURTH, 1),
-            LottoResult(LottoPrize.FIFTH, 2)
+            LottoResult(LottoPrize.FOURTH, PositiveNumber(1)),
+            LottoResult(LottoPrize.FIFTH, PositiveNumber(2))
         ).toLottoResults()
-        val result = lottoResult.rateOfResult(LottoPrice(price))
+        val result = lottoResult.rateOfResult(LottoPrice.of(price))
         assertThat(result).isEqualTo(expected.setScale(2, RoundingMode.HALF_UP))
     }
 }

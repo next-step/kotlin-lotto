@@ -10,6 +10,6 @@ data class LottoTickets(
             .mapNotNull { lottoTicket ->
                 lottoTicket.toLottoPrize(winningLotto)
             }.groupingBy { it }.eachCount()
-            .map { (LottoPrize, count) -> LottoResult(LottoPrize, count) }
+            .map { (LottoPrize, count) -> LottoResult(LottoPrize, PositiveNumber(count)) }
             .toLottoResults()
 }

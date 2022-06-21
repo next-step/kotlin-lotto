@@ -25,7 +25,7 @@ internal class LottoPurchaseTest {
         ]
     )
     internal fun `가격에 따라 구입할 로또의 개수를 구한다`(price: Int, lottoCount: Int) {
-        val lottoPrice = LottoPrice(price)
+        val lottoPrice = LottoPrice.of(price)
         assertThat(lottoPurchase.getLottoCount(lottoPrice)).isEqualTo(lottoCount)
     }
 
