@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.domain.Money.EarnedMoney
 import lotto.domain.Money.PaidMoney
 
-class LottoMatcher() {
+object LottoMatcher {
     fun matchResult(
         lottoTickets: LottoTickets,
         winningNumbers: WinningLotto,

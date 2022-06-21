@@ -25,7 +25,7 @@ class LottoMatcherTest {
         val winningLotto = winningLotto(1, 2, 3, 4, 5, 6)
         val bonusNumber = bonusNumber(26)
         // when
-        val lottoMatchResult = LottoMatcher().matchResult(lottoTickets, winningLotto, bonusNumber)
+        val lottoMatchResult = LottoMatcher.matchResult(lottoTickets, winningLotto, bonusNumber)
         // then
         val matchResult = lottoMatchResult.matchResult.matchResult
         val earnedMoney = lottoMatchResult.earnedMoney.money
@@ -44,7 +44,7 @@ class LottoMatcherTest {
         val paidMoney = PaidMoney(14_000L)
         val earnedMoney = EarnedMoney(5_000L)
         // when
-        val earnedRate = LottoMatcher().calculateEarnedRate(earnedMoney, paidMoney)
+        val earnedRate = LottoMatcher.calculateEarnedRate(earnedMoney, paidMoney)
         // then
         assertEquals(0.35714287f, earnedRate.rate)
     }
