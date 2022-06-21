@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.domain.Money.EarnedMoney
+import lotto.domain.Money.PaidMoney
+
 class LottoMatcher() {
     fun matchResult(
         lottoTickets: LottoTickets,
@@ -12,8 +15,10 @@ class LottoMatcher() {
         return LottoMatchResult(matchResult, getEarnedMoney(matchResult))
     }
 
-    fun calculateEarnedRate(earnedMoney: EarnedMoney, paidMoney: Long) =
-        EarnedRate(earnedMoney.money / paidMoney.toFloat())
+    fun calculateEarnedRate(earnedMoney: EarnedMoney, paidMoney: PaidMoney) =
+        EarnedRate(
+            earnedMoney.money / paidMoney.money.toFloat()
+        )
 
     private fun formatMatchResult(matchResult: MatchResult) =
         MatchResult(

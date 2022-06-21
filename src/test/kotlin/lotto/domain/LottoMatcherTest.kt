@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.Money.EarnedMoney
+import lotto.domain.Money.PaidMoney
 import lotto.fixture.lotto
 import lotto.fixture.lottoTickets
 import lotto.fixture.winningLotto
@@ -38,10 +40,10 @@ class LottoMatcherTest {
     @Test
     fun `로또 당첨 결과기는 수익률 계산을 할 수 있다`() {
         // given
-        val paidMoney = 14_000L
-        val earnedMoney = 5_000L
+        val paidMoney = PaidMoney(14_000L)
+        val earnedMoney = EarnedMoney(5_000L)
         // when
-        val earnedRate = LottoMatcher().calculateEarnedRate(EarnedMoney(earnedMoney), paidMoney)
+        val earnedRate = LottoMatcher().calculateEarnedRate(earnedMoney, paidMoney)
         // then
         assertEquals(0.35714287f, earnedRate.rate)
     }

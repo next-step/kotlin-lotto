@@ -3,12 +3,13 @@ package lotto
 import lotto.domain.BonusNumber
 import lotto.domain.LottoMatcher
 import lotto.domain.LottoShop
+import lotto.domain.Money.PaidMoney
 import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val paidMoney = InputView.getPurchaseAmount()
+    val paidMoney = PaidMoney(InputView.getPurchaseAmount())
     val lottoTickets = LottoShop().buyLotto(paidMoney)
     ResultView.showLottoInfo(lottoTickets)
 
