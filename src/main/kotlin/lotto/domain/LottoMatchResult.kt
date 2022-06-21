@@ -1,13 +1,14 @@
 package lotto.domain
 
-import lotto.domain.Money.EarnedMoney
-
-@JvmInline value class EarnedRate(val rate: Float) {
+@JvmInline
+value class EarnedRate(val rate: Float) {
     init {
         require(rate >= 0.0f) { "수익률은 항상 0이상이에요. given rate: $rate" }
     }
 }
-@JvmInline value class Count(val count: Int)
+
+@JvmInline
+value class Count(val count: Int)
 
 data class LottoMatchResult(
     val matchResult: MatchResult,

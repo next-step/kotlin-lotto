@@ -1,8 +1,5 @@
 package lotto.domain
 
-import lotto.domain.Money.EarnedMoney
-import lotto.domain.Money.PaidMoney
-
 object LottoMatcher {
     fun matchResult(
         lottoTickets: LottoTickets,

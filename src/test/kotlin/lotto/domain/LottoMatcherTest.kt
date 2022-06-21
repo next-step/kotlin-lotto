@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.Money.EarnedMoney
-import lotto.domain.Money.PaidMoney
 import lotto.fixture.bonusNumber
 import lotto.fixture.lotto
 import lotto.fixture.lottoTickets

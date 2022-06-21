@@ -3,7 +3,7 @@ package lotto
 import lotto.domain.BonusNumber
 import lotto.domain.LottoMatcher
 import lotto.domain.LottoShop
-import lotto.domain.Money.PaidMoney
+import lotto.domain.PaidMoney
 import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
