@@ -7,5 +7,6 @@ class LottoShop {
         LottoVendor.generate(
             numOfPurchases(money)
         )
+
     private fun numOfPurchases(paidMoney: PaidMoney) = (paidMoney.money / LOTTO_PRICE).toInt()
 }
