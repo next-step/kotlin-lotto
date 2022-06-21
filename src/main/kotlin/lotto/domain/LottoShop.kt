@@ -3,8 +3,7 @@ package lotto.domain
 class LottoShop {
     fun buyLotto(money: Long): LottoTickets {
         val lottoCount = numOfPurchases(money)
-        val lottos = LottoVendor.generate(lottoCount)
-        return LottoTickets(lottos)
+        return LottoVendor.generate(lottoCount)
     }
 
     private fun numOfPurchases(money: Long): Int {
