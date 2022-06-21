@@ -13,8 +13,8 @@ fun main() {
     val lottoTickets = LottoShop().buyLotto(paidMoney)
     ResultView.showLottoInfo(lottoTickets)
 
-    val winningLotto = WinningLotto(InputView.getWinningNumbers())
-    val bonusNumber = BonusNumber(InputView.getBonusNumber())
+    val winningLotto = WinningLotto.from(InputView.getWinningNumbers())
+    val bonusNumber = BonusNumber.from(InputView.getBonusNumber())
     LottoMatcher().also { matcher ->
         val matchResult = matcher.matchResult(lottoTickets, winningLotto, bonusNumber)
         val earnedRate = matcher.calculateEarnedRate(matchResult.earnedMoney, paidMoney)

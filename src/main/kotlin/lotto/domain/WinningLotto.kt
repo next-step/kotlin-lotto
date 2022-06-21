@@ -1,9 +1,15 @@
 package lotto.domain
 
 data class WinningLotto(
-    val winningNumbers: List<Int>
+    val winningNumbers: LottoNumbers
 ) {
-    fun hasNumber(lottoNumber: Int): Boolean {
-        return winningNumbers.contains(lottoNumber)
+    fun hasNumber(lottoNumber: LottoNumber): Boolean =
+        winningNumbers.lottoNumbers.contains(lottoNumber)
+
+    companion object {
+        fun from(numbers: List<Int>): WinningLotto =
+            WinningLotto(
+                LottoNumbers.from(numbers)
+            )
     }
 }

@@ -10,7 +10,7 @@ object ResultView {
         val lottoCount = lottoTickets.lottoTickets.size
         println("${lottoCount}개를 구매했습니다.")
         lottoTickets.lottoTickets.forEach { lotto ->
-            println(lotto.lottoNumbers.joinToString(prefix = "[", postfix = "]"))
+            println(lotto.lottoNumbers.lottoNumbers.joinToString(prefix = "[", postfix = "]"))
         }
     }
 

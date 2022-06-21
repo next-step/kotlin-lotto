@@ -1,3 +1,10 @@
 package lotto.domain
 
-@JvmInline value class BonusNumber(val bonusNumber: Int)
+class BonusNumber(val bonusNumber: LottoNumber) {
+    companion object {
+        fun from(number: Int): BonusNumber =
+            BonusNumber(
+                LottoNumber.from(number)
+            )
+    }
+}
