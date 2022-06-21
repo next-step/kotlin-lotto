@@ -14,7 +14,7 @@ class LottoController {
     fun handle() {
         val money = Money(InputView.inputPurchasedMoney())
         val lottoNumber = money.divide(Lotto.PRICE).also { ResultView.printPurchasedLottoNumber(it) }
-        val lottos = LottoFactory.auto(lottoNumber)
+        val lottos = LottoFactory.generateAutoLottos(lottoNumber)
             .also { ResultView.printLottos(it.toLottoDatas()) }
         val winningLotto = InputView.inputWinningLotto().toWinningLotto()
         lottos.getStatistics(winningLotto).also {

@@ -1,13 +1,12 @@
 package lotto.domain
 
 object LottoFactory {
-    fun auto(lottoNumber: Int): Lottos {
-        return mutableListOf<Lotto>().apply {
-            repeat(lottoNumber) {
-                add(LottoNumber.ALL.shuffled().toLotto())
-            }
-        }.let { Lottos(it.toList()) }
+    fun generateAutoLottos(amountOfLotto: Int): Lottos {
+        val lottos = List(amountOfLotto) { generateAutoLotto() }.toList()
+        return Lottos(lottos)
     }
+
+    private fun generateAutoLotto() = LottoNumber.ALL.shuffled().toLotto()
 }
 
 private fun List<LottoNumber>.toLotto() = Lotto(this.take(Lotto.LOTTO_LENGTH).toSet())

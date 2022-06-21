@@ -9,7 +9,7 @@ class LottoFactoryKtTest : StringSpec({
         val lottoNumber = 3
 
         // when
-        val actual = LottoFactory.auto(lottoNumber)
+        val actual = LottoFactory.generateAutoLottos(lottoNumber)
 
         // then
         actual.lottos.size shouldBe lottoNumber
