@@ -3,13 +3,14 @@ package lotto.view
 import lotto.domain.LottoPrize
 import lotto.domain.LottoResults
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTicketCount
 import lotto.domain.LottoTickets
 import java.math.BigDecimal
 
 object OutputView {
-    fun resultPurchaseLotto(lottoCount: Int, lottoTickets: LottoTickets) {
-        println("${lottoCount}개를 구매했습니다.")
-        resultLottoTickets(lottoTickets = lottoTickets)
+    fun resultPurchaseLotto(lottoTicketCount: LottoTicketCount, lottoTickets: LottoTickets) {
+        println("수동으로 ${lottoTicketCount.manualTicketCount}장, 자동으로 ${lottoTicketCount.autoTicketCount}장을 구매했습니다.")
+        resultLottoTickets(lottoTickets)
     }
 
     private fun resultLottoTickets(lottoTickets: LottoTickets) {

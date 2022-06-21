@@ -1,11 +1,11 @@
 package lotto.domain
 
 class LottoPurchase {
-    fun getLottoCount(price: LottoPrice): Int = price / LOTTO_PRICE
+    fun getLottoCount(price: LottoPrice): PositiveNumber = PositiveNumber(price / LOTTO_PRICE)
 
-    fun getLottoTickets(count: Int): LottoTickets {
+    fun getLottoTickets(count: PositiveNumber): LottoTickets {
         val lottoTickets = mutableListOf<LottoTicket>()
-        repeat(count) {
+        repeat(count.toInt()) {
             lottoTickets.add(LottoTicket.new())
         }
         return LottoTickets(lottoTickets.toList())

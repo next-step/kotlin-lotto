@@ -26,13 +26,13 @@ internal class LottoPurchaseTest {
     )
     internal fun `가격에 따라 구입할 로또의 개수를 구한다`(price: Int, lottoCount: Int) {
         val lottoPrice = LottoPrice.of(price)
-        assertThat(lottoPurchase.getLottoCount(lottoPrice)).isEqualTo(lottoCount)
+        assertThat(lottoPurchase.getLottoCount(lottoPrice).toInt()).isEqualTo(lottoCount)
     }
 
     @Test
     internal fun `입력한 개수에 맞추어 로또티켓을 준다`() {
         val expected = 5
-        val lottoTickets = lottoPurchase.getLottoTickets(expected)
+        val lottoTickets = lottoPurchase.getLottoTickets(PositiveNumber(expected))
         assertThat(lottoTickets.get()).hasSize(expected)
     }
 }
