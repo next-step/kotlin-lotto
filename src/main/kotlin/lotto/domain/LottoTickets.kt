@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoTickets(
+class LottoTickets(
     val lottoTickets: List<LottoTicket>
 ) {
     fun match(winningNumbers: WinningLotto, bonusNumber: BonusNumber): MatchResult =
