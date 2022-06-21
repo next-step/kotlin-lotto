@@ -7,6 +7,10 @@ object LottoFactory {
     }
 
     private fun generateAutoLotto() = LottoNumber.ALL.shuffled().toLotto()
+
+    fun generateManualLottos(lottos: List<Lotto>): Lottos {
+        return Lottos(lottos)
+    }
 }
 
 private fun List<LottoNumber>.toLotto() = Lotto(this.take(Lotto.LOTTO_LENGTH).toSet())

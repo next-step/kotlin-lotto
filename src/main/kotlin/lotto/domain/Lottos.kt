@@ -9,4 +9,8 @@ class Lottos(
             .eachCount()
             .let { LottoResult(it) }
     }
+
+    operator fun plus(otherLottos: Lottos): Lottos {
+        return Lottos(lottos.plus(otherLottos.lottos))
+    }
 }

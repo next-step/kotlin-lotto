@@ -32,4 +32,18 @@ object InputView {
             requireNotNull(it.toIntOrNull()) { "구입금액은 숫자만 허용됩니다. " }
         }!!.toInt()
     }
+
+    fun inputManualLottos(amountOfManualLotto: Int): List<IntArray> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(amountOfManualLotto) { inputManualLotto() }
+    }
+
+    private fun inputManualLotto(): IntArray {
+        val input = readLine() ?: throw IllegalStateException("당첨 번호는 null 값은 허용하지 않습니다.")
+        return input.split(",").asSequence()
+            .map { it.trim() }
+            .map { it.toInt() }
+            .toList()
+            .toIntArray()
+    }
 }

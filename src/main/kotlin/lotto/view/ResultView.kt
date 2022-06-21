@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.controller.dto.LottoData
+import lotto.domain.LottoAmount
 import lotto.domain.Rank
 
 object ResultView {
@@ -8,7 +9,8 @@ object ResultView {
         println("${lottoNumber}개를 구매했습니다.")
     }
 
-    fun printLottos(lottoDatas: List<LottoData>) {
+    fun printLottos(lottoAmount: LottoAmount, lottoDatas: List<LottoData>) {
+        println("수동으로 ${lottoAmount.amountOfManualLotto}장, 자동으로 ${lottoAmount.amountOfAutoLotto}를 구매했습니다.")
         lottoDatas.forEach { println(it.lottoNumbers) }
         println()
     }
