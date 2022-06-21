@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.fixture.lotto
+import lotto.fixture.lottoTickets
+import lotto.fixture.winningLotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
@@ -28,10 +31,5 @@ class LottoTicketsTest {
         assertEquals(1, matchResult[Rank.FOURTH]!!.count)
         assertEquals(1, matchResult[Rank.FIFTH]!!.count)
         assertEquals(3, matchResult[Rank.MISS]!!.count)
-    }
-    companion object {
-        fun lotto(vararg numbers: Int): LottoTicket = LottoTicket(numbers.toList())
-        fun lottoTickets(vararg lotto: LottoTicket) = LottoTickets(lotto.toList())
-        fun winningLotto(vararg numbers: Int): WinningLotto = WinningLotto(numbers.toList())
     }
 }

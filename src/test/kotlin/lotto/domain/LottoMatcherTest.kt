@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.fixture.lotto
+import lotto.fixture.lottoTickets
+import lotto.fixture.winningLotto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -41,11 +44,5 @@ class LottoMatcherTest {
         val earnedRate = LottoMatcher().calculateEarnedRate(EarnedMoney(earnedMoney), paidMoney)
         // then
         assertEquals(0.35714287f, earnedRate.rate)
-    }
-
-    companion object {
-        fun lotto(vararg numbers: Int): LottoTicket = LottoTicket(numbers.toList())
-        fun lottoTickets(vararg lotto: LottoTicket) = LottoTickets(lotto.toList())
-        fun winningLotto(vararg numbers: Int): WinningLotto = WinningLotto(numbers.toList())
     }
 }

@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.fixture.lotto
+import lotto.fixture.winningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -38,7 +40,5 @@ class LottoTicketTest {
             Arguments.of(lotto(1, 32, 33, 34, 35, 36), winningLotto(1, 2, 3, 4, 5, 6), 26, Rank.MISS),
             Arguments.of(lotto(31, 32, 33, 34, 35, 36), winningLotto(1, 2, 3, 4, 5, 6), 26, Rank.MISS),
         )
-        private fun lotto(vararg numbers: Int): LottoTicket = LottoTicket(numbers.toList())
-        private fun winningLotto(vararg numbers: Int): WinningLotto = WinningLotto(numbers.toList())
     }
 }
