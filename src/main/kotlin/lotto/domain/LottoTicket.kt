@@ -10,17 +10,7 @@ data class LottoTicket(
     fun match(winningNumbers: WinningLotto, bonusNumber: BonusNumber): Rank {
         val matchCount = count(winningNumbers)
         val matchBonus = contains(bonusNumber)
-        return rank(matchCount, matchBonus)
-    }
-
-    private fun rank(matchCount: Int, matchBonus: Boolean): Rank {
-        return if (matchCount == 5 && matchBonus) {
-            Rank.SECOND
-        } else if (matchCount == 5) {
-            Rank.THIRD
-        } else {
-            Rank.of(matchCount)
-        }
+        return Rank.of(matchCount, matchBonus)
     }
 
     private fun count(winningNumbers: WinningLotto): Int {

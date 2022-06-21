@@ -9,8 +9,14 @@ enum class Rank(val numOfMatch: Int, val winningMoney: Long) {
     MISS(0, 0);
 
     companion object {
-        fun of(numOfMatch: Int): Rank {
-            return values().find { it.numOfMatch == numOfMatch } ?: MISS
+        fun of(numOfMatch: Int, matchBonus: Boolean): Rank {
+            return if (numOfMatch == 5 && matchBonus) {
+                SECOND
+            } else if (numOfMatch == 5) {
+                THIRD
+            } else {
+                values().find { it.numOfMatch == numOfMatch } ?: MISS
+            }
         }
     }
 }
