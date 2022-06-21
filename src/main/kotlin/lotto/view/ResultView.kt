@@ -3,7 +3,8 @@ package lotto.view
 import lotto.domain.EarnedRate
 import lotto.domain.LottoMatchResult
 import lotto.domain.LottoTickets
-import lotto.domain.Rank
+import lotto.domain.Rank.MISS
+import lotto.domain.Rank.SECOND
 
 object ResultView {
     fun showLottoInfo(lottoTickets: LottoTickets) {
@@ -17,11 +18,11 @@ object ResultView {
     fun showMatchResult(lottoMatchResult: LottoMatchResult, earnedRate: EarnedRate) {
         println("\n당첨 통계")
         println("---------")
-        lottoMatchResult.matchResult
-            .filter { it.key != Rank.MISS }
+        lottoMatchResult.matchResult.matchResult
+            .filterNot { it.key == MISS }
             .forEach { (rank, count) ->
                 when (rank) {
-                    Rank.SECOND -> println("${rank.numOfMatch}개 일치, 보너스 볼 일치(${rank.winningMoney}원) - ${count.count}개")
+                    SECOND -> println("${rank.numOfMatch}개 일치, 보너스 볼 일치(${rank.winningMoney}원) - ${count.count}개")
                     else -> println("${rank.numOfMatch}개 일치 (${rank.winningMoney}원) - ${count.count}개")
                 }
             }

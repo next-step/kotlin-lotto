@@ -24,15 +24,15 @@ class LottoMatcherTest {
         // when
         val lottoMatchResult = LottoMatcher().matchResult(lottoTickets, winningLotto, bonusNumber)
         // then
-        val matchResult: Map<Rank, Count> = lottoMatchResult.matchResult
-        val earnedMoney: EarnedMoney = lottoMatchResult.earnedMoney
+        val matchResult = lottoMatchResult.matchResult.matchResult
+        val earnedMoney = lottoMatchResult.earnedMoney.money
         assertEquals(0, matchResult[Rank.FIRST]!!.count)
         assertEquals(1, matchResult[Rank.SECOND]!!.count)
         assertEquals(1, matchResult[Rank.THIRD]!!.count)
         assertEquals(1, matchResult[Rank.FOURTH]!!.count)
         assertEquals(1, matchResult[Rank.FIFTH]!!.count)
         assertEquals(3, matchResult[Rank.MISS]!!.count)
-        assertEquals(31_555_000L, earnedMoney.money)
+        assertEquals(31_555_000L, earnedMoney)
     }
 
     @Test

@@ -15,12 +15,16 @@ class LottoMatcher() {
     fun calculateEarnedRate(earnedMoney: EarnedMoney, paidMoney: Long) =
         EarnedRate(earnedMoney.money / paidMoney.toFloat())
 
-    private fun formatMatchResult(resultMap: Map<Rank, Count>) =
-        Rank.values().associateWith { resultMap.getOrDefault(it, Count(0)) }
+    private fun formatMatchResult(matchResult: MatchResult) =
+        MatchResult(
+            Rank.values().associateWith {
+                matchResult.matchResult.getOrDefault(it, Count(0))
+            }
+        )
 
-    private fun getEarnedMoney(matchResult: Map<Rank, Count>) =
+    private fun getEarnedMoney(matchResult: MatchResult) =
         EarnedMoney(
-            matchResult
+            matchResult.matchResult
                 .map { (rank, count) -> rank.winningMoney * count.count }
                 .sum()
         )

@@ -13,6 +13,10 @@ package lotto.domain
 @JvmInline value class Count(val count: Int)
 
 data class LottoMatchResult(
-    val matchResult: Map<Rank, Count>,
+    val matchResult: MatchResult,
     val earnedMoney: EarnedMoney,
+)
+
+data class MatchResult(
+    val matchResult: Map<Rank, Count>
 )

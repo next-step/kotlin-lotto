@@ -23,7 +23,7 @@ class LottoTicketsTest {
         val winningLotto = winningLotto(1, 2, 3, 4, 5, 6)
         val bonusNumber = BonusNumber(26)
         // when
-        val matchResult: Map<Rank, Count> = lottoTickets.match(winningLotto, bonusNumber)
+        val matchResult = lottoTickets.match(winningLotto, bonusNumber).matchResult
         // then
         assertNull(matchResult[Rank.FIRST])
         assertEquals(1, matchResult[Rank.SECOND]!!.count)
