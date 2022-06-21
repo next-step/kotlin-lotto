@@ -1,7 +1,5 @@
 package lotto.view
 
-import java.lang.IllegalArgumentException
-
 object InputView {
     fun getPurchaseAmount(): Long {
         println("구입금액을 입력해 주세요.")
