@@ -14,5 +14,9 @@ class LottoNumbers(
             LottoNumbers(
                 numbers.map(LottoNumber::from)
             )
+
+        fun toInts(lottoNumbers: LottoNumbers): List<Int> {
+            return lottoNumbers.lottoNumbers.map(LottoNumber::of)
+        }
     }
 }
