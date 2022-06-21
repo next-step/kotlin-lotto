@@ -35,7 +35,7 @@ object LottoInputView {
     fun displayPurchaseCount(autoCount: Int, directCount: Int) {
         println(INPUT_PURCHASE_NUMBER_MESSAGE.format(autoCount, directCount))
     }
-    
+
     fun inputWinningNumbersAndBonusNumber(): LottoWinningInfo {
         println(INPUT_WINNING_NUMBER_MESSAGE)
         val winningNumbers = readln()

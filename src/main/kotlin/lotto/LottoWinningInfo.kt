@@ -25,7 +25,6 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
             scoreInfos.addAll(bonusList)
         }
 
-
         revenue = winningLottoTicket.calculateRevenue(scoreInfos)
     }
 

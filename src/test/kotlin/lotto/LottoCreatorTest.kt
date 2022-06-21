@@ -19,13 +19,15 @@ class LottoCreatorTest {
 
     @Test
     fun `발급된 숫자에 중복이 없어야 한다`() {
-        var strategy = IssueStrategy { listOf(LottoTicket(listOf(LottoNumber(1)
-            , LottoNumber(2)
-            , LottoNumber(3)
-            , LottoNumber(4)
-            , LottoNumber(5)
-            , LottoNumber(6)
-        ))) }
+        var strategy = IssueStrategy {
+            listOf(
+                LottoTicket(
+                    listOf(
+                        LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)
+                    )
+                )
+            )
+        }
 
         val randomIssuedList = issue(strategy)
         assertThat(randomIssuedList.distinct().size).isEqualTo(randomIssuedList.size)

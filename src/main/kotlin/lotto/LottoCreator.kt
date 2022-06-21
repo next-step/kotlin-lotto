@@ -9,8 +9,9 @@ object LottoCreator {
     }
 
     fun createLottoTickets(userInputNumber: List<String>): List<LottoTicket> {
+        val factory = LottoTicketFactory()
         return userInputNumber.map {
-            LottoTicket(formattedNumbers(it))
+            factory.createDirectLottoTicket(formattedNumbers(it))
         }
     }
 

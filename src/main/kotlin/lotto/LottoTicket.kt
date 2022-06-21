@@ -1,22 +1,8 @@
 package lotto
 
-import kotlin.random.Random
+import lotto.LottoNumber.Companion.LOTTO_NUMBER_RANGE
 
-class LottoTicket constructor() {
-    var ticketList: List<LottoNumber>
-
-    constructor(tickets: List<LottoNumber>) : this() {
-        ticketList = tickets
-    }
-
-    init {
-        ticketList = generateSequence { Random(Random.nextInt()).nextInt(LOTTO_NUMBER_RANGE.first, LOTTO_NUMBER_RANGE.last) }
-            .distinct()
-            .take(LOTTO_NUMBER_COUNT)
-            .sorted()
-            .toList()
-            .map(::LottoNumber)
-    }
+class LottoTicket(var ticketList: List<LottoNumber>) {
 
     fun validate(winningNumbers: WinningLottoTicket) {
         require(winningNumbers.numbers.size == LOTTO_NUMBER_COUNT)
@@ -24,7 +10,6 @@ class LottoTicket constructor() {
     }
 
     companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
-        private val LOTTO_NUMBER_RANGE = (1..45)
+        const val LOTTO_NUMBER_COUNT = 6
     }
 }
