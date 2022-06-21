@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.domain.Money.EarnedMoney
 import lotto.domain.Money.PaidMoney
+import lotto.fixture.bonusNumber
 import lotto.fixture.lotto
 import lotto.fixture.lottoTickets
 import lotto.fixture.winningLotto
@@ -22,7 +23,7 @@ class LottoMatcherTest {
             lotto(31, 32, 33, 34, 35, 36),
         )
         val winningLotto = winningLotto(1, 2, 3, 4, 5, 6)
-        val bonusNumber = BonusNumber(26)
+        val bonusNumber = bonusNumber(26)
         // when
         val lottoMatchResult = LottoMatcher().matchResult(lottoTickets, winningLotto, bonusNumber)
         // then
