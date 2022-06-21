@@ -2,8 +2,6 @@ package lotto.domain
 
 import java.math.BigDecimal
 
-private const val INITIAL_COUNT_NUMBER = 0
-
 enum class Rank(
     val correctNumber: Int,
     val winningMoney: BigDecimal,
@@ -25,8 +23,5 @@ enum class Rank(
             return values().find { it.correctNumber == correctNumber }
                 ?: NONE
         }
-
-        fun toResult(): MutableMap<Rank, Int> = values().reversed()
-            .associateWith { INITIAL_COUNT_NUMBER } as MutableMap<Rank, Int>
     }
 }
