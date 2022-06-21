@@ -16,7 +16,11 @@ class LottoController {
         val lottoNumber = money.divide(Lotto.PRICE).also { ResultView.printPurchasedLottoNumber(it) }
         val lottos = LottoFactory.generateAutoLottos(lottoNumber)
             .also { ResultView.printLottos(it.toLottoDatas()) }
-        val winningLotto = InputView.inputWinningLotto().toWinningLotto()
+        val winningLotto = WinningLotto(
+            lotto = Lotto.of(*InputView.inputWinningLotto()),
+            bonusBall = LottoNumber.valueOf(InputView.inputBonusBall()),
+        )
+
         lottos.getStatistics(winningLotto).also {
             ResultView.printStatistics(it.statistics)
             ResultView.printEarningRate(it.calculateEarningRate(money))
@@ -25,9 +29,3 @@ class LottoController {
 }
 
 fun Lottos.toLottoDatas(): List<LottoData> = this.lottos.map { LottoData.of(it) }
-
-fun List<Int>.toWinningLotto(): WinningLotto {
-    val lotto = Lotto(this.map { LottoNumber.valueOf(it) }.toSet())
-    val bonusBall = LottoNumber.valueOf(InputView.inputBonusBall())
-    return WinningLotto(lotto, bonusBall)
-}
