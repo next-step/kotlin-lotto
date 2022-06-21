@@ -11,7 +11,7 @@ fun main() {
     ResultView.printPurchaseLottos(purchaseLottos)
 
     val inputWinningLottoNumbers = InputView.inputWinningLotto()
-    val calculateResult = LottoService.calculateResult(purchaseLottos, inputWinningLottoNumbers)
+    val calculateResult = LottoService.calculateResult(inputWinningLottoNumbers)
 
     ResultView.printResult(calculateResult)
 }

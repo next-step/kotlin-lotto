@@ -1,7 +1,10 @@
 package lotto.component
 
+import lotto.domain.LottoFactory
 import lotto.domain.LottoMoney
 import lotto.domain.LottoNumber
+import lotto.domain.LottoNumberGenerator
+import lotto.domain.RandomLottoNumberGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -9,7 +12,7 @@ internal class LottoFactoryTest {
 
     @Test
     fun `로또 번호 생성 규칙에 맞게 생성`() {
-        val lottoList = LottoFactory.createLottoList(LottoMoney.from(1000), Only6LottoNumberGenerator)
+        val lottoList = LottoFactory.createLottoList(LottoMoney(1000), Only6LottoNumberGenerator)
         assertThat(lottoList).hasSize(1)
         assertThat(lottoList.flatMap { it.lottoNumbers.map { lottoNumber -> lottoNumber.number } })
             .containsExactly(1, 2, 3, 4, 5, 6)
@@ -17,7 +20,7 @@ internal class LottoFactoryTest {
 
     @Test
     fun `원하는 로또 개수만큼 생성`() {
-        val lottoList = LottoFactory.createLottoList(LottoMoney.from(10000), RandomLottoNumberGenerator)
+        val lottoList = LottoFactory.createLottoList(LottoMoney(10000), RandomLottoNumberGenerator)
 
         assertThat(lottoList).hasSize(10)
         assertThat(lottoList.flatMap { it.lottoNumbers }.map { it.number })
@@ -25,6 +28,6 @@ internal class LottoFactoryTest {
     }
 
     private object Only6LottoNumberGenerator : LottoNumberGenerator {
-        override fun generate(): List<LottoNumber> = (1..6).map { LottoNumber.from(it) }
+        override fun generate(): List<LottoNumber> = (1..6).map { LottoNumber(it) }
     }
 }

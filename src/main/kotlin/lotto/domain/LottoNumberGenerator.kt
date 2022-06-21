@@ -1,6 +1,4 @@
-package lotto.component
-
-import lotto.domain.LottoNumber
+package lotto.domain
 
 interface LottoNumberGenerator {
     fun generate(): List<LottoNumber>

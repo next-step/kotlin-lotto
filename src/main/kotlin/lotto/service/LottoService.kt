@@ -1,30 +1,27 @@
 package lotto.service
 
-import lotto.component.LottoFactory
-import lotto.component.RandomLottoNumberGenerator
-import lotto.domain.Lotto
+import lotto.domain.LottoFactory
 import lotto.domain.LottoMoney
-import lotto.domain.LottoNumber
-import lotto.view.LottoResponse
-import lotto.view.LottoResponses
-import lotto.view.LottoResultResponse
+import lotto.domain.LottoRepository
+import lotto.domain.RandomLottoNumberGenerator
 
 object LottoService {
 
     fun purchase(inputMoney: Int): LottoResponses {
-        val money = LottoMoney.from(inputMoney)
-        val purchaseLottoList = LottoFactory.createLottoList(money, RandomLottoNumberGenerator)
+        val money = LottoMoney(inputMoney)
+        val purchaseLottos = LottoFactory.createLottoList(money, RandomLottoNumberGenerator)
 
-        return LottoResponses(purchaseLottoList.map { LottoResponse(it.lottoNumbers.map { lottoNumber -> lottoNumber.number }) })
+        LottoRepository.saveAll(purchaseLottos)
+
+        return LottoResponses(purchaseLottos.map { LottoResponse(it.lottoNumbers.map { lottoNumber -> lottoNumber.number }) })
     }
 
-    fun calculateResult(purchaseLottos: LottoResponses, winningLottoNumbers: List<Int>): LottoResultResponse {
+    fun calculateResult(winningLottoNumbers: List<Int>): LottoResultResponse {
         val winningLotto = LottoFactory.createWinningLotto(winningLottoNumbers)
-        val purchaseLottos =
-            purchaseLottos.lottos.map { Lotto.create(it.numbers.map { number -> LottoNumber.from(number) }) }
+        val purchaseLottos = LottoRepository.findAll()
 
-        val (matchCounts, profit) = winningLotto.calculateProfit(purchaseLottos)
+        val (ranks, profit) = winningLotto.calculateProfit(purchaseLottos)
 
-        return LottoResultResponse(matchCounts, profit)
+        return LottoResultResponse(ranks, profit)
     }
 }

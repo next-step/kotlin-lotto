@@ -1,4 +1,4 @@
-package lotto.view
+package lotto.service
 
 data class LottoResponses(
     val lottos: List<LottoResponse>

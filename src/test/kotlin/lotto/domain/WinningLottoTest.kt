@@ -14,76 +14,76 @@ internal class WinningLottoTest {
     @ParameterizedTest
     @MethodSource
     fun `숫자가 6개가 아닌 로또는 생성불가`(lottoNumbers: List<LottoNumber>) {
-        assertThrows<IllegalArgumentException> { WinningLotto.create(lottoNumbers) }
+        assertThrows<IllegalArgumentException> { WinningLotto(lottoNumbers) }
             .shouldHaveMessage("로또 숫자가 6개가 아닌 로또는 생성할 수 없습니다.")
     }
 
     @ParameterizedTest
     @MethodSource
     fun `중복된 숫자를 가진 로또는 생성 불가`(lottoNumbers: List<LottoNumber>) {
-        assertThrows<IllegalArgumentException> { WinningLotto.create(lottoNumbers) }
+        assertThrows<IllegalArgumentException> { WinningLotto(lottoNumbers) }
             .shouldHaveMessage("로또 숫자는 중복될 수 없습니다.")
     }
 
     @Test
     fun `로또 결과 및 수익률 계산`() {
-        val winningLotto = WinningLotto.create(
+        val winningLotto = WinningLotto(
             listOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6),
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
             )
         )
 
         val firstLotto = Lotto.create(
             listOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6),
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
             )
         )
 
         val secondLotto = Lotto.create(
             listOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(7),
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(7),
             )
         )
 
         val fourthLotto = Lotto.create(
             listOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(7),
-                LottoNumber.from(8),
-                LottoNumber.from(9),
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(7),
+                LottoNumber(8),
+                LottoNumber(9),
             )
         )
 
         val noPrizeLotto = Lotto.create(
             listOf(
-                LottoNumber.from(10),
-                LottoNumber.from(11),
-                LottoNumber.from(12),
-                LottoNumber.from(7),
-                LottoNumber.from(8),
-                LottoNumber.from(9),
+                LottoNumber(10),
+                LottoNumber(11),
+                LottoNumber(12),
+                LottoNumber(7),
+                LottoNumber(8),
+                LottoNumber(9),
             )
         )
 
         val result = winningLotto.calculateProfit(listOf(firstLotto, secondLotto, fourthLotto, noPrizeLotto))
-        assertThat(result.first).containsExactly(6, 5, 3, 0)
+        assertThat(result.first).containsExactly(LottoRank.FIRTH, LottoRank.SECOND, LottoRank.FOURTH, LottoRank.DEFAULT)
         assertThat(result.second).isEqualTo(500376.25)
     }
 
@@ -93,20 +93,20 @@ internal class WinningLottoTest {
             return Stream.of(
                 Arguments.arguments(
                     listOf(
-                        LottoNumber.from(1),
-                        LottoNumber.from(2),
-                        LottoNumber.from(3),
-                        LottoNumber.from(4),
-                        LottoNumber.from(5),
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
                     ),
                     listOf(
-                        LottoNumber.from(1),
-                        LottoNumber.from(2),
-                        LottoNumber.from(3),
-                        LottoNumber.from(4),
-                        LottoNumber.from(5),
-                        LottoNumber.from(6),
-                        LottoNumber.from(7),
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
+                        LottoNumber(7),
                     )
                 )
             )
@@ -117,20 +117,20 @@ internal class WinningLottoTest {
             return Stream.of(
                 Arguments.arguments(
                     listOf(
-                        LottoNumber.from(1),
-                        LottoNumber.from(1),
-                        LottoNumber.from(3),
-                        LottoNumber.from(4),
-                        LottoNumber.from(5),
-                        LottoNumber.from(6),
+                        LottoNumber(1),
+                        LottoNumber(1),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
+                        LottoNumber(6),
                     ),
                     listOf(
-                        LottoNumber.from(6),
-                        LottoNumber.from(6),
-                        LottoNumber.from(6),
-                        LottoNumber.from(6),
-                        LottoNumber.from(6),
-                        LottoNumber.from(6),
+                        LottoNumber(6),
+                        LottoNumber(6),
+                        LottoNumber(6),
+                        LottoNumber(6),
+                        LottoNumber(6),
+                        LottoNumber(6),
                     )
                 )
             )
