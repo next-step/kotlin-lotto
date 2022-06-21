@@ -46,7 +46,7 @@ object OutputView {
         LottoPrize.values().sortedByDescending { it.rank }.forEach { lottoPrize ->
             val lottoCount = lottoResults.get()
                 .firstOrNull { it.lottoPrize == lottoPrize }
-                ?.lottoCount ?: 0
+                ?.matchedLottoCount ?: 0
             if (lottoPrize == LottoPrize.SECOND) {
                 appendLine("${lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${lottoPrize.prizeMoney}원) - ${lottoCount}개")
             } else {

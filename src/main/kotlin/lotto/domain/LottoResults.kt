@@ -14,7 +14,7 @@ data class LottoResults(
     }
 
     private fun sumOfResult(): Int = lottoResults.sumOf {
-        it.lottoPrize.prizeMoney * it.lottoCount
+        it.lottoPrize.prizeMoney * it.matchedLottoCount
     }
 }
 
