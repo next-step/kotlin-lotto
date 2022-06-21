@@ -10,4 +10,4 @@ object LottoFactory {
     }
 }
 
-private fun List<LottoNumber>.toLotto() = Lotto(this.take(Lotto.LOTTO_LENGTH))
+private fun List<LottoNumber>.toLotto() = Lotto(this.take(Lotto.LOTTO_LENGTH).toSet())

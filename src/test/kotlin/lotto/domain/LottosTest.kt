@@ -8,16 +8,16 @@ class LottosTest : StringSpec({
         // given
         val lottos = Lottos(
             listOf(
-                Lotto(1, 2, 3, 4, 5, 6),
-                Lotto(1, 2, 3, 4, 5, 7),
-                Lotto(1, 2, 3, 4, 5, 10),
-                Lotto(1, 2, 3, 4, 9, 10),
-                Lotto(1, 2, 3, 8, 9, 10),
-                Lotto(1, 2, 7, 8, 9, 10),
+                Lotto.of(1, 2, 3, 4, 5, 6),
+                Lotto.of(1, 2, 3, 4, 5, 7),
+                Lotto.of(1, 2, 3, 4, 5, 10),
+                Lotto.of(1, 2, 3, 4, 9, 10),
+                Lotto.of(1, 2, 3, 8, 9, 10),
+                Lotto.of(1, 2, 7, 8, 9, 10),
             )
         )
         val winningLotto = WinningLotto(
-            Lotto(1, 2, 3, 4, 5, 6),
+            Lotto.of(1, 2, 3, 4, 5, 6),
             LottoNumber.valueOf(7),
         )
 

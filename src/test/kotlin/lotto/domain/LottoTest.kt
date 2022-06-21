@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class LottoTest : StringSpec({
     "로또 객체를 생성한다" {
         // given
-        val lottoNumbers = listOf(
+        val lottoNumbers = setOf(
             LottoNumber.valueOf(1),
             LottoNumber.valueOf(2),
             LottoNumber.valueOf(3),
@@ -25,14 +25,14 @@ class LottoTest : StringSpec({
     "로또가 가질 수 있는 로또 숫자와 다른 로또 숫자를 가진 로또 객체를 생성하면 예외를 발생시킨다" {
         // given
         listOf(
-            listOf(
+            setOf(
                 LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
             ),
-            listOf(
+            setOf(
                 LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
@@ -49,7 +49,7 @@ class LottoTest : StringSpec({
 
     "중복된 로또 숫자를 가진 로또 객체를 생성하면 예외를 발생시킨다" {
         // given
-        val lottoNumbers = listOf(
+        val lottoNumbers = setOf(
             LottoNumber.valueOf(1),
             LottoNumber.valueOf(2),
             LottoNumber.valueOf(3),
@@ -83,8 +83,8 @@ class LottoTest : StringSpec({
 
     "두 로또가 서로 같은 로또 숫자가 몇개인지 찾는다" {
         // given
-        val lotto = Lotto(1, 2, 3, 4, 5, 6)
-        val otherLotto = Lotto(2, 3, 4, 5, 6, 7)
+        val lotto = Lotto.of(1, 2, 3, 4, 5, 6)
+        val otherLotto = Lotto.of(2, 3, 4, 5, 6, 7)
 
         // when
         val actual = lotto.countSameLottoNumbers(otherLotto)
