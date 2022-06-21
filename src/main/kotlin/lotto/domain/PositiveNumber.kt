@@ -9,4 +9,8 @@ value class PositiveNumber(
     }
 
     fun toInt() = number
+
+    override fun toString(): String {
+        return number.toString()
+    }
 }
