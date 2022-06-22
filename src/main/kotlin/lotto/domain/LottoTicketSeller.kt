@@ -6,11 +6,8 @@ import lotto.domain.lottoticket.LottoTicket
 import lotto.domain.lottoticket.LottoTickets
 
 class LottoTicketSeller {
-    fun buyLottoTickets(money: Money): LottoTickets {
-        val lottoTickets = mutableListOf<LottoTicket>()
-        repeat(money.divideInt(LottoTicket.PRICE)) { lottoTickets.add(issueLottoTicket()) }
-        return LottoTickets(values = lottoTickets)
-    }
+    fun buyLottoTickets(money: Money): LottoTickets =
+        LottoTickets(values = List(size = money.divideInt(LottoTicket.PRICE)) { issueLottoTicket() })
 
     private fun issueLottoTicket(): LottoTicket {
         val lottoNumbers = LottoNumber.cachedLottoNumbers()
