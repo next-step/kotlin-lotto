@@ -15,9 +15,12 @@ enum class WinningAmount(
     ;
 
     companion object {
-        fun findByMatchCount(matchCount: Int): WinningAmount {
-            return values().find { it.matchCount == matchCount }
-                ?: MISS
+        fun findByMatchCount(matchCount: Int, matchBonus: Boolean): WinningAmount = when (matchCount) {
+            FIRST.matchCount -> FIRST
+            SECOND.matchCount -> if (matchBonus) SECOND else THIRD
+            FOURTH.matchCount -> FOURTH
+            FIFTH.matchCount -> FIFTH
+            else -> MISS
         }
     }
 }

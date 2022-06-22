@@ -14,16 +14,10 @@ class WinningTicket private constructor(
         }
     }
 
-    fun matchResult(lottoTicket: LottoTicket): WinningAmount {
-        val matchCount = lottoNumbers.matchedNumberCount(other = lottoTicket.lottoNumbers)
-        val matchBonus = bonusNumber in lottoTicket.lottoNumbers
-
-        return when {
-            matchCount == 5 && matchBonus -> WinningAmount.SECOND
-            matchCount == 5 && !matchBonus -> WinningAmount.THIRD
-            else -> WinningAmount.findByMatchCount(matchCount = matchCount)
-        }
-    }
+    fun matchResult(lottoTicket: LottoTicket): WinningAmount = WinningAmount.findByMatchCount(
+        matchCount = lottoNumbers.matchedNumberCount(other = lottoTicket.lottoNumbers),
+        matchBonus = bonusNumber in lottoTicket.lottoNumbers
+    )
 
     companion object {
         fun of(lottoNumbers: List<Int>, bonusNumber: Int): WinningTicket = WinningTicket(
