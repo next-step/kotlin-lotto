@@ -14,9 +14,9 @@ class LottoNumbers private constructor(
             .size
     }
 
-    fun contain(lottoNumber: LottoNumber): Boolean = values.contains(lottoNumber)
+    operator fun contains(lottoNumber: LottoNumber): Boolean = values.contains(lottoNumber)
 
-    fun notContain(lottoNumber: LottoNumber): Boolean = !contain(lottoNumber)
+    fun notContains(lottoNumber: LottoNumber): Boolean = !contains(lottoNumber)
 
     companion object {
         const val NUMBERS_COUNT = 6

@@ -5,14 +5,14 @@ class WinningTicket private constructor(
     private val bonusNumber: LottoNumber,
 ) {
     init {
-        require(lottoNumbers.notContain(bonusNumber)) {
+        require(lottoNumbers.notContains(bonusNumber)) {
             "보너스 번호는 당첨 번호들과 중복될 수 없습니다."
         }
     }
 
     fun matchResult(lottoTicket: LottoTicket): WinningAmount {
         val matchCount = lottoNumbers.matchedNumberCount(other = lottoTicket.lottoNumbers)
-        val matchBonus = lottoTicket.lottoNumbers.contain(lottoNumber = bonusNumber)
+        val matchBonus = bonusNumber in lottoTicket.lottoNumbers
 
         return when {
             matchCount == 5 && matchBonus -> WinningAmount.SECOND
