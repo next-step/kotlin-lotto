@@ -1,17 +1,24 @@
 package lotto.domain
 
-data class LottoTicket(
-    val lottoNumbers: List<Int>
+class LottoTicket(
+    val lottoNumbers: LottoNumbers
 ) {
-    init {
-        require(lottoNumbers.size == LOTTO_SIZE) { "로또 번호는 6개로 구성되어야 해요" }
+    fun match(winningNumbers: WinningLotto, bonusNumber: BonusNumber): Rank {
+        val matchCount = count(winningNumbers)
+        val matchBonus = contains(bonusNumber)
+        return Rank.of(matchCount, matchBonus)
     }
 
-    fun matchCount(winningNumber: WinningNumber): Int {
-        return lottoNumbers.count { lottoNumber -> winningNumber.hasNumber(lottoNumber) }
-    }
+    private fun count(winningNumbers: WinningLotto): Int =
+        lottoNumbers.lottoNumbers.count(winningNumbers::hasNumber)
+
+    private fun contains(bonusNumber: BonusNumber): Boolean =
+        lottoNumbers.lottoNumbers.contains(bonusNumber.bonusNumber)
 
     companion object {
-        const val LOTTO_SIZE = 6
+        fun from(numbers: List<Int>): LottoTicket =
+            LottoTicket(
+                LottoNumbers.from(numbers)
+            )
     }
 }
