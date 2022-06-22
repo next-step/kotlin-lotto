@@ -16,7 +16,7 @@ class LottoShop(money: Int) {
 
     fun manualPurchase(manualNumbers: ManualPurchaseNumbers): List<LottoTicket> {
         isPurchasable(manualNumbers.count)
-            .also { decreasePurchasableCount(manualNumbers.count) }
+        decreasePurchasableCount(manualNumbers.count)
         return manualNumbers.bunchOfNumbers
             .map { it }
     }
