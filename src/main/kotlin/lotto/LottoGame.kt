@@ -14,7 +14,7 @@ object LottoGame {
 
         when (val order = LottoSeller.order(money, manualPurchaseCount)) {
             is OrderSheet.Valid -> proceed(order)
-            else -> OutputUI.drawErrorMessage("구매 금액보다 많은 양은 구매할 수 없습니다.")
+            OrderSheet.Invalid -> OutputUI.drawErrorMessage("구매 금액보다 많은 양은 구매할 수 없습니다.")
         }
     }
 

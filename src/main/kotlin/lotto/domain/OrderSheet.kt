@@ -10,8 +10,11 @@ sealed class OrderSheet {
             val autoCount = totalCount - manualCount
             val totalCost = cost * totalCount
 
-            return if (autoCount >= 0) Valid(autoCount, manualCount, totalCost)
-            else Invalid
+            return if (autoCount >= 0) {
+                Valid(autoCount, manualCount, totalCost)
+            } else {
+                Invalid
+            }
         }
     }
 }
