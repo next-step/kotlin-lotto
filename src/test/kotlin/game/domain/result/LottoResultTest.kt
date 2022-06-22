@@ -29,7 +29,7 @@ class LottoResultTest {
 
         @JvmStatic
         private fun createLottoResult(results: List<Int>): LottoResult {
-            return LottoResult(results.map { LottoTicketMatchResult(it) }.toList())
+            return LottoResult(results.map { LottoTicketMatchResult(it, false) }.toList())
         }
     }
 }
