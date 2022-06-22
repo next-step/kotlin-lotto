@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.lottoticket
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowExactly

@@ -1,5 +1,6 @@
-package lotto.domain
+package lotto.domain.lottoticket
 
+import lotto.domain.Money
 import java.math.BigDecimal
 
 class LottoTicket constructor(

@@ -1,5 +1,10 @@
 package lotto.domain
 
+import lotto.domain.lottoticket.LottoNumber
+import lotto.domain.lottoticket.LottoNumbers
+import lotto.domain.lottoticket.LottoTicket
+import lotto.domain.lottoticket.LottoTickets
+
 class LottoTicketSeller {
     fun buyLottoTickets(money: Money): LottoTickets {
         val lottoTickets = mutableListOf<LottoTicket>()

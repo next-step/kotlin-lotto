@@ -12,7 +12,7 @@ internal class LottoTicketSellerTest : FreeSpec({
     "중복되지 않는 6개의 번호를 가진 로또티켓을 발급한다." {
         // when
         val ticketSeller = LottoTicketSeller()
-        val lottoTickets = ticketSeller.buyLottoTickets(money = LottoTicket.PRICE)
+        val lottoTickets = ticketSeller.buyLottoTickets(money = lotto.domain.lottoticket.LottoTicket.PRICE)
         val lottoTicket = lottoTickets.values.first()
 
         // then

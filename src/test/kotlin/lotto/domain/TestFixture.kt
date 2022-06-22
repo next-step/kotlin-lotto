@@ -1,5 +1,9 @@
 package lotto.domain
 
+import lotto.domain.lottoticket.LottoNumber
+import lotto.domain.lottoticket.LottoNumbers
+import lotto.domain.lottoticket.LottoTicket
+
 fun LottoNumbers(numberSet: Set<Int>): LottoNumbers = LottoNumbers.createWithSort(
     numberSet.map(LottoNumber.Companion::from)
         .toSet()

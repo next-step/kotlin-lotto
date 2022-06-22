@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.lottoticket
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
@@ -6,6 +6,7 @@ import io.kotest.data.Row2
 import io.kotest.data.row
 import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoNumbers
 
 internal class LottoNumbersTest : FreeSpec({
 

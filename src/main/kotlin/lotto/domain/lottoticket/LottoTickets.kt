@@ -1,4 +1,8 @@
-package lotto.domain
+package lotto.domain.lottoticket
+
+import lotto.domain.WinningAmount
+import lotto.domain.WinningResult
+import lotto.domain.WinningTicket
 
 class LottoTickets constructor(
     val values: List<LottoTicket>,

@@ -1,7 +1,10 @@
-package lotto.domain
+package lotto.domain.lottoticket
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoTicket
+import lotto.domain.WinningAmount
+import lotto.domain.WinningTicket
 
 internal class LottoTicketsTest : FreeSpec({
 

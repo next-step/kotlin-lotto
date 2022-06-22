@@ -1,12 +1,12 @@
 package lotto.view
 
-import lotto.domain.LottoTicket
 import lotto.domain.WinningAmount
 import lotto.domain.WinningAmount.FIFTH
 import lotto.domain.WinningAmount.FIRST
 import lotto.domain.WinningAmount.FOURTH
 import lotto.domain.WinningAmount.SECOND
 import lotto.domain.WinningAmount.THIRD
+import lotto.domain.lottoticket.LottoTicket
 import java.math.BigDecimal
 
 class OutputView {

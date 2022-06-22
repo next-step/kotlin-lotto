@@ -1,5 +1,9 @@
 package lotto.domain
 
+import lotto.domain.lottoticket.LottoNumber
+import lotto.domain.lottoticket.LottoNumbers
+import lotto.domain.lottoticket.LottoTicket
+
 class WinningTicket private constructor(
     private val lottoNumbers: LottoNumbers,
     private val bonusNumber: LottoNumber,
