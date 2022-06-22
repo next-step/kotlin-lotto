@@ -5,12 +5,13 @@ import lotto.domain.generator.RandomLottoNumberGenerator
 object LottoSeller {
     private val LOTTO_COST = Money(1000)
 
-    fun buy(money: Money): LottoList {
-        val count = calculateCount(money)
-        return LottoList(LottoMachine.make(count, RandomLottoNumberGenerator), LOTTO_COST * count)
+    fun order(money: Money, manualCount: Int): OrderSheet {
+        return OrderSheet.order(money, manualCount, LOTTO_COST)
     }
 
-    private fun calculateCount(money: Money): Int {
-        return money / LOTTO_COST
+    fun take(orderSheet: OrderSheet.Valid, onManual: (count: Int) -> List<LottoNumbers>): LottoList {
+        val autoLotto = LottoMachine.make(orderSheet.autoCount, RandomLottoNumberGenerator)
+        val manualLotto = onManual(orderSheet.manualCount)
+        return LottoList(manualLotto + autoLotto, orderSheet.totalCost)
     }
 }

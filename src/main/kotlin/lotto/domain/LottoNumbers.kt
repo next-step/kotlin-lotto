@@ -11,6 +11,6 @@ value class LottoNumbers(private val numbers: List<LottoNumber>) {
     operator fun contains(lotto: LottoNumber): Boolean = lotto in numbers
 
     override fun toString(): String {
-        return numbers.joinToString(", ") { it.number.toString() }
+        return numbers.sortedBy { it.number }.joinToString(", ") { it.number.toString() }
     }
 }

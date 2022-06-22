@@ -3,11 +3,24 @@ package lotto.ui
 import lotto.domain.Grade
 import lotto.domain.LottoList
 import lotto.domain.LottoResult
+import lotto.domain.OrderSheet
 
 object OutputUI {
 
-    fun drawPurchaseMessage(count: Int) {
-        println("${count}개를 구매했습니다.")
+    fun drawPurchaseMessage(orderSheet: OrderSheet.Valid) {
+        val message = buildString {
+            if (orderSheet.manualCount > 0) append("수동으로 ${orderSheet.manualCount}장, ")
+            append("자동으로 ${orderSheet.autoCount}개를 구매했습니다.")
+        }
+        println(message)
+    }
+
+    fun drawManualInputRequest() {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+    }
+
+    fun drawErrorMessage(message: String) {
+        println(message)
     }
 
     fun drawLotto(lottoList: LottoList) {
