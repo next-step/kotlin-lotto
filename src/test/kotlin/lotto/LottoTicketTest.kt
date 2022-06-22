@@ -34,7 +34,7 @@ class LottoTicketTest {
             .map(::LottoNumber)
             .let(LottoTicket::of)
 
-        Assertions.assertThat(ticket.hasNumber(LottoNumber(number))).isEqualTo(contains)
+        Assertions.assertThat(LottoNumber(number) in ticket).isEqualTo(contains)
     }
 
     @ParameterizedTest

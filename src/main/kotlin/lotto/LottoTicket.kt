@@ -12,7 +12,7 @@ class LottoTicket private constructor(val numbers: List<LottoNumber>) {
         return numbers.intersect(other.numbers).size
     }
 
-    fun hasNumber(number: LottoNumber): Boolean {
+    operator fun contains(number: LottoNumber): Boolean {
         return number in numbers
     }
 

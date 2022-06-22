@@ -5,7 +5,7 @@ class LastWinningLotto(
     private val bonusNumber: LottoNumber
 ) {
     init {
-        require(!lottoTicket.hasNumber(bonusNumber)) {
+        require(bonusNumber in lottoTicket) {
             "보너스 숫자는 지난 당첨번호에 포함될 수 없습니다."
         }
     }
@@ -15,6 +15,6 @@ class LastWinningLotto(
     }
 
     fun hasBonusNumber(targetLotto: LottoTicket): Boolean {
-        return targetLotto.hasNumber(bonusNumber)
+        return bonusNumber in targetLotto
     }
 }
