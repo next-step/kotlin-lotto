@@ -27,8 +27,8 @@ class LottoWinningHandlerTest {
         val winningInfo = LottoWinningInfo("1,2,3,4,5,6", "7")
 
         val result = winningInfo.winningLottoTicket.matchCount(issuedLottos)
-        assertThat(result.get(WinningPriceEnum.THREE)).isEqualTo(1)
-        assertThat(result.get(WinningPriceEnum.FOUR)).isEqualTo(2)
+        assertThat(result.countMap.get(WinningPriceEnum.THREE)).isEqualTo(1)
+        assertThat(result.countMap.get(WinningPriceEnum.FOUR)).isEqualTo(2)
     }
 
     @Test

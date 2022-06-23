@@ -4,15 +4,17 @@ import IssueStrategy
 
 object LottoCreator {
 
-    fun issue(strategy: IssueStrategy): List<LottoTicket> {
+    fun issue(strategy: IssueStrategy): LottoTickets {
         return strategy.issue()
     }
 
-    fun createLottoTickets(userInputNumber: List<String>): List<LottoTicket> {
+    fun createLottoTickets(userInputNumber: List<String>): LottoTickets {
         val factory = LottoTicketFactory()
-        return userInputNumber.map {
-            factory.createDirectLottoTicket(formattedNumbers(it))
-        }
+        return LottoTickets(
+            userInputNumber.map {
+                factory.createDirectLottoTicket(formattedNumbers(it))
+            }
+        )
     }
 
     private fun formattedNumbers(list: String): List<LottoNumber> {

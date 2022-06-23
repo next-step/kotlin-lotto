@@ -12,16 +12,13 @@ fun main() {
     val autoIssuedCount = priceRule.count
     val autoIssuedLottos = LottoCreator.issue(RandomIssueStrategy(autoIssuedCount))
 
-    displayPurchaseCount(autoIssuedCount, userInputLottos.size)
+    displayPurchaseCount(autoIssuedCount, userInputLottos.lotto.size)
     println()
 
-    val allLottos = autoIssuedLottos + userInputLottos
-    LottoOutputView.displayIssuedLottos(allLottos)
+    val allLottos = autoIssuedLottos.lotto + userInputLottos
+    LottoOutputView.displayIssuedLottos(LottoTickets(allLottos as List<LottoTicket>))
 
     val winningInfo = LottoInputView.inputWinningNumbersAndBonusNumber()
-    allLottos.forEach {
-        it.validate(winningInfo.winningLottoTicket)
-    }
 
     winningInfo.setScore(allLottos)
     val revenuePercentage = winningInfo.getRevenuePercentage(priceRule.amount, winningInfo.revenue)

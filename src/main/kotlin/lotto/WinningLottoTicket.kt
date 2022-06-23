@@ -4,7 +4,12 @@ import lotto.WinningPriceEnum.Companion.find
 
 class WinningLottoTicket(val numbers: List<LottoNumber>, val bonusNumber: LottoNumber) {
 
-    fun matchCount(issuedLottos: List<LottoTicket>): Map<WinningPriceEnum, Int> {
+    init {
+        require(numbers.size == LottoTicket.LOTTO_NUMBER_COUNT)
+        require(LottoNumber.LOTTO_NUMBER_RANGE.contains(bonusNumber.number) && !numbers.contains(bonusNumber))
+    }
+
+    fun matchCount(issuedLottos: List<LottoTicket>): WinningLottoCounter {
         val result = mutableMapOf<Int, Int>()
 
         for (i in issuedLottos) {
@@ -15,7 +20,7 @@ class WinningLottoTicket(val numbers: List<LottoNumber>, val bonusNumber: LottoN
         return createMatchedLottoNumber(result)
     }
 
-    fun matchBonus(issuedLottos: List<LottoTicket>): Map<WinningPriceEnum, Int> {
+    fun matchBonus(issuedLottos: List<LottoTicket>): WinningLottoCounter {
         val result = mutableMapOf<Int, Int>()
 
         for (i in issuedLottos) {
@@ -34,7 +39,7 @@ class WinningLottoTicket(val numbers: List<LottoNumber>, val bonusNumber: LottoN
         return winnerNumbers.count { tickets.contains(it) }
     }
 
-    private fun createMatchedLottoNumber(matchedMap: Map<Int, Int>): Map<WinningPriceEnum, Int> {
-        return matchedMap.entries.associate { find(it.key) to it.value }
+    private fun createMatchedLottoNumber(matchedMap: Map<Int, Int>): WinningLottoCounter {
+        return WinningLottoCounter(matchedMap.entries.associate { find(it.key) to it.value })
     }
 }

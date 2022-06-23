@@ -14,13 +14,13 @@ class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
     fun setScore(issuedLottos: List<LottoTicket>) {
         val matchNumberMap = winningLottoTicket.matchCount(issuedLottos)
 
-        val filtered = matchNumberMap.filter { (winningNumber) -> winningNumber.number > 0 }
+        val filtered = matchNumberMap.countMap.filter { (winningNumber) -> winningNumber.number > 0 }
         scoreInfos = setScoreInfos(filtered, null)
 
-        val enableBonus = matchNumberMap.any { (winningNumber, count) -> winningNumber.number == WinningPriceEnum.FIVE.number && count > 0 }
+        val enableBonus = matchNumberMap.countMap.any { (winningNumber, count) -> winningNumber.number == WinningPriceEnum.FIVE.number && count > 0 }
 
         if (enableBonus) {
-            val bonusFiltered = winningLottoTicket.matchBonus(issuedLottos).filter { (winningNumber, count) -> winningNumber.number > 0 && count > 0 }
+            val bonusFiltered = winningLottoTicket.matchBonus(issuedLottos).countMap.filter { (winningNumber, count) -> winningNumber.number > 0 && count > 0 }
             val bonusList = setScoreInfos(bonusFiltered, WinningPriceEnum.FIVE_BONUS)
             scoreInfos.addAll(bonusList)
         }
