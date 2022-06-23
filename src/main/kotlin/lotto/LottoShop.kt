@@ -10,7 +10,7 @@ class LottoShop(money: Int) {
 
     fun autoPurchase(purchaseCount: Int = purchasableCount): List<LottoTicket> {
         isPurchasable(purchaseCount)
-            .also { decreasePurchasableCount(purchaseCount) }
+        decreasePurchasableCount(purchaseCount)
         return LottoCreator.autoCreate(purchaseCount)
     }
 
