@@ -14,10 +14,10 @@ class LottoShop(money: Int) {
         return LottoCreator.autoCreate(purchaseCount)
     }
 
-    fun manualPurchase(manualNumbers: ManualPurchaseNumbers): List<LottoTicket> {
+    fun manualPurchase(manualNumbers: ManualLottoTickets): List<LottoTicket> {
         isPurchasable(manualNumbers.count)
         decreasePurchasableCount(manualNumbers.count)
-        return manualNumbers.bunchOfNumbers
+        return manualNumbers.lottoTicket
             .map { it }
     }
 

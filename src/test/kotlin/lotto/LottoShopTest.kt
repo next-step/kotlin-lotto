@@ -29,9 +29,7 @@ class LottoShopTest {
             .map(::LottoNumber)
             .let { LottoTicket.of(it) }
 
-        val lottoBundle = LottoBundle(listOf(lottoTicket))
-
-        val manualNumber = ManualPurchaseNumbers(lottoBundle)
+        val manualNumber = ManualLottoTickets(listOf(lottoTicket))
 
         val manualLottoTickets = LottoShop(money).manualPurchase(manualNumber)
         val compareLottoTickets = listOf(lottoTicket)
