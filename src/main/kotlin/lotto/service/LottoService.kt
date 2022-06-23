@@ -16,8 +16,8 @@ object LottoService {
         return LottoResponses(purchaseLottos.map { LottoResponse(it.lottoNumbers.map { lottoNumber -> lottoNumber.number }) })
     }
 
-    fun calculateResult(winningLottoNumbers: List<Int>): LottoResultResponse {
-        val winningLotto = LottoFactory.createWinningLotto(winningLottoNumbers)
+    fun calculateResult(winningLottoNumbers: List<Int>, bonusNumber: Int): LottoResultResponse {
+        val winningLotto = LottoFactory.createWinningLotto(winningLottoNumbers, bonusNumber)
         val purchaseLottos = LottoRepository.findAll()
 
         val (ranks, profit) = winningLotto.calculateProfit(purchaseLottos)

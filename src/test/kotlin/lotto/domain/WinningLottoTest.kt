@@ -13,15 +13,15 @@ internal class WinningLottoTest {
 
     @ParameterizedTest
     @MethodSource
-    fun `숫자가 6개가 아닌 로또는 생성불가`(lottoNumbers: List<LottoNumber>) {
-        assertThrows<IllegalArgumentException> { WinningLotto(lottoNumbers) }
+    fun `숫자가 6개가 아닌 로또는 생성불가`(lottoNumbers: List<LottoNumber>, bonusNumber: LottoNumber) {
+        assertThrows<IllegalArgumentException> { WinningLotto(lottoNumbers, bonusNumber) }
             .shouldHaveMessage("로또 숫자가 6개가 아닌 로또는 생성할 수 없습니다.")
     }
 
     @ParameterizedTest
     @MethodSource
-    fun `중복된 숫자를 가진 로또는 생성 불가`(lottoNumbers: List<LottoNumber>) {
-        assertThrows<IllegalArgumentException> { WinningLotto(lottoNumbers) }
+    fun `중복된 숫자를 가진 로또는 생성 불가`(lottoNumbers: List<LottoNumber>, bonusNumber: LottoNumber) {
+        assertThrows<IllegalArgumentException> { WinningLotto(lottoNumbers, bonusNumber) }
             .shouldHaveMessage("로또 숫자는 중복될 수 없습니다.")
     }
 
@@ -35,7 +35,8 @@ internal class WinningLottoTest {
                 LottoNumber(4),
                 LottoNumber(5),
                 LottoNumber(6),
-            )
+            ),
+            LottoNumber(7)
         )
 
         val firstLotto = Lotto.create(
@@ -49,7 +50,7 @@ internal class WinningLottoTest {
             )
         )
 
-        val secondLotto = Lotto.create(
+        val bonusLotto = Lotto.create(
             listOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -82,9 +83,9 @@ internal class WinningLottoTest {
             )
         )
 
-        val result = winningLotto.calculateProfit(listOf(firstLotto, secondLotto, fourthLotto, noPrizeLotto))
-        assertThat(result.first).containsExactly(LottoRank.FIRTH, LottoRank.SECOND, LottoRank.FOURTH, LottoRank.DEFAULT)
-        assertThat(result.second).isEqualTo(500376.25)
+        val result = winningLotto.calculateProfit(listOf(firstLotto, bonusLotto, fourthLotto, noPrizeLotto))
+        assertThat(result.first).containsExactly(LottoRank.FIRTH, LottoRank.BONUS, LottoRank.FOURTH, LottoRank.DEFAULT)
+        assertThat(result.second).isEqualTo(507501.25)
     }
 
     companion object {
@@ -124,14 +125,18 @@ internal class WinningLottoTest {
                         LottoNumber(5),
                         LottoNumber(6),
                     ),
+                    LottoNumber(7),
+                ),
+                Arguments.arguments(
                     listOf(
+                        LottoNumber(1),
+                        LottoNumber(2),
+                        LottoNumber(3),
+                        LottoNumber(4),
+                        LottoNumber(5),
                         LottoNumber(6),
-                        LottoNumber(6),
-                        LottoNumber(6),
-                        LottoNumber(6),
-                        LottoNumber(6),
-                        LottoNumber(6),
-                    )
+                    ),
+                    LottoNumber(6),
                 )
             )
         }
