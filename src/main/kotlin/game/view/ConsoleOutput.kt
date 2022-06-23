@@ -8,9 +8,9 @@ class ConsoleOutput : Output {
     override fun printPurchaseList(lotto: Lotto) {
         println()
         println("${lotto.tickets.size}개를 구매했습니다.")
-        lotto.tickets.forEach { ticket ->
-            println(ticket.numbers.map { it.value }.sortedBy { it })
-        }
+        println()
+        lotto.tickets
+            .forEach { ticket -> println(ticket.numbers.map { it.value }.sortedBy { it }) }
     }
 
     override fun printStatistics(result: LottoResult) {
@@ -19,7 +19,12 @@ class ConsoleOutput : Output {
         println("-------------")
         Rank.values()
             .filter { it != Rank.NONE }
-            .forEach { println("${it.matchCount}개 일치 (${it.amount})원 - ${result.value[it] ?: 0}개") }
+            .forEach { println(makeResultSentence(it, result)) }
         println("총 수익률은 ${result.profit()}입니다. (1이 넘는 경우 이익입니다.)")
+    }
+
+    private fun makeResultSentence(it: Rank, result: LottoResult): String {
+        val bonusMatchPhrase = if (it.requiredMatchBonus == true) ", 보너스 볼 일치" else ""
+        return "${it.requiredMatchCount}개 일치${bonusMatchPhrase} (${it.amount})원 - ${result.value[it] ?: 0}개"
     }
 }
