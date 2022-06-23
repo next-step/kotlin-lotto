@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.lottoticket
 
 data class LottoNumber private constructor(
     val value: Int

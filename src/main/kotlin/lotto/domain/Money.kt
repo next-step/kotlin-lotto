@@ -7,13 +7,16 @@ data class Money(
     val value: BigDecimal
 ) {
     init {
-        require(value > BigDecimal.ZERO) {
+        require(value >= BigDecimal.ZERO) {
             "돈은 0 보다 작을 수 없습니다."
         }
     }
 
     fun divideInt(other: Money): Int {
-        return value.divide(other.value, RoundingMode.DOWN)
-            .toInt()
+        return (this / other).value.toInt()
+    }
+
+    private operator fun div(other: Money): Money {
+        return Money(value.divide(other.value, RoundingMode.DOWN))
     }
 }

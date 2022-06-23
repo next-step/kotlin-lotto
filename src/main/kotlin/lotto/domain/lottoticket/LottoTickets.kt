@@ -1,4 +1,8 @@
-package lotto.domain
+package lotto.domain.lottoticket
+
+import lotto.domain.WinningAmount
+import lotto.domain.WinningResult
+import lotto.domain.WinningTicket
 
 class LottoTickets constructor(
     val values: List<LottoTicket>,
@@ -20,13 +24,5 @@ class LottoTickets constructor(
         }
 
         return WinningResult(winningAmountMap)
-    }
-
-    companion object {
-        fun buyLottos(money: Money): LottoTickets {
-            val lottoTickets = mutableListOf<LottoTicket>()
-            repeat(money.divideInt(LottoTicket.PRICE)) { lottoTickets.add(LottoTicket.autoCreate()) }
-            return LottoTickets(values = lottoTickets)
-        }
     }
 }
