@@ -3,13 +3,15 @@ package lotto
 object LottoCreator {
     private const val PICK_LOTTO_NUMBER_SIZE = 6
 
-    fun autoCreate(): LottoTicket {
+    fun autoCreate(count: Int): List<LottoTicket> {
+        return List(count) { autoCreate() }
+    }
 
-        val lottoNumbers = LottoPolicy.LOTTO_NUMBER_RANGE
+    private fun autoCreate(): LottoTicket {
+        val lottoNumbers = LottoNumber.LOTTO_NUMBER_RANGE
             .shuffled()
             .take(PICK_LOTTO_NUMBER_SIZE)
-            .sorted()
-
-        return LottoTicket(lottoNumbers)
+            .map(::LottoNumber)
+        return LottoTicket.of(lottoNumbers)
     }
 }

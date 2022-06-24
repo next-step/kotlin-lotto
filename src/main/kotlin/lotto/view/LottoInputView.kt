@@ -2,12 +2,31 @@ package lotto.view
 
 import calculator.StringParser
 import calculator.parseToInt
+import lotto.LottoNumber
+import lotto.LottoTicket
+import lotto.ManualLottoTickets
 
 object LottoInputView {
 
     fun purchaseInputView(): Int {
         println("구입 금액을 입력해 주세요")
         return parseToInt(readln())
+    }
+
+    fun manualPurchaseCountInputView(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요")
+        return parseToInt(readln())
+    }
+
+    fun manualLottoNumberInputView(manualPurchaseCount: Int): ManualLottoTickets {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val bunchOfNumbers = List(manualPurchaseCount) {
+            StringParser.getNumberStrings(readln())
+                .map(::parseToInt)
+                .map(::LottoNumber)
+                .let { LottoTicket.of(it) }
+        }
+        return ManualLottoTickets(bunchOfNumbers)
     }
 
     fun lastWinnerLotteryInputView(): List<Int> {

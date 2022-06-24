@@ -5,14 +5,22 @@ import lotto.view.LottoResultView
 
 fun main() {
     val purchasePrice = LottoInputView.purchaseInputView()
-    val myLottos = MyLottoTickets(LottoShop().buyLotto(purchasePrice))
+    val manualPurchaseCount = LottoInputView.manualPurchaseCountInputView()
+    val manualNumbers = LottoInputView.manualLottoNumberInputView(manualPurchaseCount)
 
-    LottoResultView.printPurchasedLottoInfo(myLottos.lottoTickets)
+    val lottoShop = LottoShop(purchasePrice)
+    val manualPurchase = lottoShop.manualPurchase(manualNumbers)
+    val autoPurchase = lottoShop.autoPurchase()
+
+    val myLottery = MyLottoTickets(manualPurchase, autoPurchase)
+
+    LottoResultView.printPurchasedLottoInfo(myLottery.manualLottery, myLottery.autoLottery)
 
     val lastLottoWinnerNumbers = LottoInputView.lastWinnerLotteryInputView()
     val bonusNumber = LottoInputView.bonusNumberInputView()
-    val lottoJudgment = LottoJudgment(LottoTicket(lastLottoWinnerNumbers), bonusNumber)
-    val myLottoResult = myLottos.getMyLottoResult(lottoJudgment)
+    val lottoJudgment =
+        LastWinningLotto(LottoTicket.of(lastLottoWinnerNumbers.map(::LottoNumber)), LottoNumber(bonusNumber))
+    val myLottoResult = myLottery.getMyLottoResult(lottoJudgment)
     val profit = myLottoResult.getProfit()
 
     LottoResultView.printLottoResult(myLottoResult)

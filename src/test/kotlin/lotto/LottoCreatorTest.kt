@@ -1,24 +1,15 @@
 package lotto
 
-import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoCreatorTest {
 
-    @Test
-    fun `로또 번호는 중복되지 않는 1-45 숫자 6개를 선택한다`() {
-        val autoCreatedLotto = LottoCreator.autoCreate()
-        Assertions.assertThat(autoCreatedLotto.numbers.size).isEqualTo(6)
-    }
-
-    @Test
-    fun `생성한 로또번호는 오름차순으로 받는다`() {
-        val autoCreatedLottoNumbers = LottoCreator.autoCreate().numbers
-
-        val sortedList = autoCreatedLottoNumbers.sorted()
-
-        for (number in autoCreatedLottoNumbers.indices) {
-            autoCreatedLottoNumbers[number] == sortedList[number]
-        }
+    @ParameterizedTest
+    @ValueSource(ints = [5, 6, 7, 10])
+    fun `요청 갯수 만큼 로또티켓을 생성한다`(requestCount: Int) {
+        val autoCreate = LottoCreator.autoCreate(requestCount)
+        assertThat(autoCreate.size).isEqualTo(requestCount)
     }
 }

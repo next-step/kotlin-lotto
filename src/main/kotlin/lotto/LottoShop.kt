@@ -1,19 +1,43 @@
 package lotto
 
-import java.lang.RuntimeException
+class LottoShop(money: Int) {
+    private var purchasableCount: Int
 
-class LottoShop {
-
-    fun buyLotto(money: Int): List<LottoTicket> {
+    init {
         moneyValidate(money)
-        val numberOfBuy = money / LottoPolicy.LOTTO_PRICE
+        purchasableCount = money / LOTTO_PRICE
+    }
 
-        return List(numberOfBuy) { LottoCreator.autoCreate() }
+    fun autoPurchase(purchaseCount: Int = purchasableCount): List<LottoTicket> {
+        isPurchasable(purchaseCount)
+        decreasePurchasableCount(purchaseCount)
+        return LottoCreator.autoCreate(purchaseCount)
+    }
+
+    fun manualPurchase(manualNumbers: ManualLottoTickets): List<LottoTicket> {
+        isPurchasable(manualNumbers.count)
+        decreasePurchasableCount(manualNumbers.count)
+        return manualNumbers.lottoTicket
+            .map { it }
+    }
+
+    private fun decreasePurchasableCount(count: Int) {
+        purchasableCount -= count
+    }
+
+    private fun isPurchasable(count: Int) {
+        if (purchasableCount < count) {
+            throw RuntimeException("구매할 수 있는 이상의 숫자 구매를 요청했습니다. (구매가눙수: $purchasableCount, 요청수:$count")
+        }
     }
 
     private fun moneyValidate(money: Int) {
-        if (money < LottoPolicy.LOTTO_PRICE) {
-            throw RuntimeException("로또 구매 비용이 부족합니다. - `$money` (최소`${LottoPolicy.LOTTO_PRICE}` 이상 필요)")
+        if (money < LOTTO_PRICE) {
+            throw RuntimeException("로또 구매 비용이 부족합니다. - `$money` (최소`$LOTTO_PRICE` 이상 필요)")
         }
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1_000
     }
 }
