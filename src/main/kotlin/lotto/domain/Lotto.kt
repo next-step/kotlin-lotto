@@ -10,6 +10,8 @@ class Lotto(
         this.lottoNumbers = lottoNumbers.toSortedSet(compareBy(LottoNumber::value))
     }
 
+    constructor(vararg numbers: Int) : this(numbers.map { LottoNumber.valueOf(it) }.toSet())
+
     fun countSameLottoNumbers(other: Lotto): Int =
         lottoNumbers.count { lottoNumber -> other.containsLottoNumber(lottoNumber) }
 
@@ -18,12 +20,5 @@ class Lotto(
     companion object {
         const val PRICE = 1_000
         const val LOTTO_LENGTH = 6
-
-        fun of(
-            vararg numbers: Int,
-        ): Lotto {
-            val lottoNumbers = numbers.map { LottoNumber.valueOf(it) }.toSet()
-            return Lotto(lottoNumbers)
-        }
     }
 }

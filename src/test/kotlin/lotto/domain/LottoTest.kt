@@ -83,8 +83,8 @@ class LottoTest : StringSpec({
 
     "두 로또가 서로 같은 로또 숫자가 몇개인지 찾는다" {
         // given
-        val lotto = Lotto.of(1, 2, 3, 4, 5, 6)
-        val otherLotto = Lotto.of(2, 3, 4, 5, 6, 7)
+        val lotto = Lotto(1, 2, 3, 4, 5, 6)
+        val otherLotto = Lotto(2, 3, 4, 5, 6, 7)
 
         // when
         val actual = lotto.countSameLottoNumbers(otherLotto)

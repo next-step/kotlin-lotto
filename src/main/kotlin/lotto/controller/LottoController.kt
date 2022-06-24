@@ -8,6 +8,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.Lottos
 import lotto.domain.Money
 import lotto.domain.WinningLotto
+import lotto.domain.generateAutoLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -22,7 +23,7 @@ class LottoController {
 
         val allLottos = createAllLotto(lottoAmount)
         val winningLotto = WinningLotto(
-            lotto = Lotto.of(*InputView.inputWinningLotto()),
+            lotto = Lotto(*InputView.inputWinningLotto()),
             bonusBall = LottoNumber.valueOf(InputView.inputBonusBall()),
         )
 
@@ -34,10 +35,10 @@ class LottoController {
 
     private fun createAllLotto(lottoAmount: LottoAmount): Lottos {
         val manualLottos = LottoFactory.generateManualLottos(
-            lottos = InputView.inputManualLottos(lottoAmount.amountOfManualLotto).map { Lotto.of(*it) }
+            lottos = InputView.inputManualLottos(lottoAmount.amountOfManualLotto).map { Lotto(*it) }
         )
 
-        val autoLottos = LottoFactory.generateAutoLottos(lottoAmount.amountOfAutoLotto)
+        val autoLottos = LottoFactory.generateAutoLottos(lottoAmount.amountOfAutoLotto) { generateAutoLotto() }
 
         return (manualLottos + autoLottos)
             .also { ResultView.printLottos(lottoAmount, it.toLottoDatas()) }

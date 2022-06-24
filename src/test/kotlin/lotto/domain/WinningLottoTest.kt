@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class WinningLottoTest : StringSpec({
     "당첨 번호와 보너스볼이 중복되면 예외를 발생시킨다" {
         // given
-        val winningLotto = Lotto.of(1, 2, 3, 4, 5, 6)
+        val winningLotto = Lotto(1, 2, 3, 4, 5, 6)
         val bonusBall = LottoNumber.valueOf(6)
 
         // when // then
