@@ -23,4 +23,8 @@ data class Money(
     operator fun compareTo(other: Money): Int {
         return this.value.compareTo(other.value)
     }
+
+    operator fun minus(other: Money): Money {
+        return Money(this.value - other.value)
+    }
 }
