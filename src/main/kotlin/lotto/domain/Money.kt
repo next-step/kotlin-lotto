@@ -19,4 +19,8 @@ data class Money(
     private operator fun div(other: Money): Money {
         return Money(value.divide(other.value, RoundingMode.DOWN))
     }
+
+    operator fun compareTo(other: Money): Int {
+        return this.value.compareTo(other.value)
+    }
 }

@@ -5,7 +5,15 @@ import lotto.domain.lottoticket.LottoNumbers
 import lotto.domain.lottoticket.LottoTicket
 import lotto.domain.lottoticket.LottoTickets
 
-class LottoTicketSeller {
+class LottoTicketMachine(
+    private var money: Money = LottoTicket.PRICE
+) {
+    init {
+        require(money >= LottoTicket.PRICE) {
+            "로또 구입을 위한 최소 금액은 ${LottoTicket.PRICE.value} 입니다."
+        }
+    }
+
     fun buyLottoTickets(money: Money): LottoTickets =
         LottoTickets(values = List(size = money.divideInt(LottoTicket.PRICE)) { issueLottoTicket() })
 

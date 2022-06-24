@@ -6,10 +6,11 @@ import lotto.view.OutputView
 class LottoGame(
     private val inputView: InputView = InputView(),
     private val outputView: OutputView = OutputView(),
-    private val lottoTicketSeller: LottoTicketSeller = LottoTicketSeller(),
 ) {
     fun play() {
-        val lottoTickets = lottoTicketSeller.buyLottoTickets(Money(inputView.inputBigDecimal()))
+        val money = Money(inputView.inputBigDecimal())
+        val lottoTicketMachine = LottoTicketMachine(money)
+        val lottoTickets = lottoTicketMachine.buyLottoTickets(money)
         outputView.printLottos(lottoTickets.values)
 
         val inputWinningNumbers = inputView.inputWinningNumbers()

@@ -7,12 +7,6 @@ import lotto.domain.WinningTicket
 class LottoTickets constructor(
     val values: List<LottoTicket>,
 ) {
-    init {
-        require(values.isNotEmpty()) {
-            "로또 구입을 위한 최소 금액은 ${LottoTicket.PRICE.value} 입니다."
-        }
-    }
-
     fun totalMatchResults(winningTicket: WinningTicket): WinningResult {
         val winningAmountMap = WinningAmount.values()
             .associateWith { 0 }
