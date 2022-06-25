@@ -4,7 +4,7 @@ import lotto.domain.WinningAmount
 import lotto.domain.WinningResult
 import lotto.domain.WinningTicket
 
-class LottoTickets constructor(
+class LottoTickets(
     val values: List<LottoTicket>,
 ) {
     fun totalMatchResults(winningTicket: WinningTicket): WinningResult {
@@ -19,4 +19,6 @@ class LottoTickets constructor(
 
         return WinningResult(winningAmountMap)
     }
+
+    fun getCount(): Int = values.size
 }

@@ -3,6 +3,7 @@ package lotto.domain
 import lotto.domain.lottoticket.LottoNumber
 import lotto.domain.lottoticket.LottoNumbers
 import lotto.domain.lottoticket.LottoTicket
+import lotto.domain.lottoticket.LottoTickets
 
 class LottoTicketMachine(
     private var money: Money = LottoTicket.PRICE
@@ -20,7 +21,19 @@ class LottoTicketMachine(
         return LottoTicket(lottoNumbers = lottoNumbers)
     }
 
-    fun buyAutoLottoTicket(): LottoTicket {
+    fun buyAutoLottoTicketsUntilSpendAllMoney(): LottoTickets {
+        if (money.divideInt(LottoTicket.PRICE) < 1) {
+            throw IllegalStateException("남은 금액 ${this.money.value} 으로 로또 티켓을 구입할 수 없습니다.")
+        }
+
+        return LottoTickets(
+            List(money.divideInt(LottoTicket.PRICE)) {
+                buyAutoLottoTicket()
+            }
+        )
+    }
+
+    private fun buyAutoLottoTicket(): LottoTicket {
         val lottoNumbers = LottoNumber.cachedLottoNumbers()
             .asSequence()
             .shuffled()
