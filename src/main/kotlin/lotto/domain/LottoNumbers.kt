@@ -1,10 +1,10 @@
 package lotto.domain
 
 class LottoNumbers(
-    val lottoNumbers: List<LottoNumber>
+    val lottoNumbers: Set<LottoNumber>
 ) {
     init {
-        require(lottoNumbers.distinct().size == LOTTO_SIZE) { "로또 번호는 중복 없는 6개 숫자로 구성되어야 해요" }
+        require(lottoNumbers.size == LOTTO_SIZE) { "로또 번호는 중복 없는 6개 숫자로 구성되어야 해요" }
     }
 
     companion object {
