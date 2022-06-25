@@ -14,12 +14,12 @@ internal class RankTest {
     }
 
     @Test
-    fun `4개를 맞추면 3등이다`() {
+    fun `4개를 맞추면 4등이다`() {
         // when
         val firstPlace = Rank.find(4)
 
         // then
-        Assertions.assertThat(firstPlace).isEqualTo(Rank.THIRD)
+        Assertions.assertThat(firstPlace).isEqualTo(Rank.FOURTH)
     }
 
     @Test

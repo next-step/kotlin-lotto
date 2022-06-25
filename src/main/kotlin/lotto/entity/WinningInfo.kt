@@ -1,3 +1,3 @@
 package lotto.entity
 
-data class WinningInfo(val countOfRanks: Map<Int, Int>)
+data class WinningInfo(val countOfRanks: Map<Rank, Int>)

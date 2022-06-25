@@ -8,7 +8,7 @@ class Lotto {
         val player: Person = PersonImpl(Wallet(InputView().getPurchaseAmount()))
         val tickets = player.purchase()
         ResultView().showLottoTickets(tickets)
-        val ranks = MatcherImpl(InputView().getWinningNumbers()).countTicketRanks(tickets)
+        val ranks = MatcherImpl(InputView().getWinningNumbers(), InputView().getBonusNumber()).countTicketRanks(tickets)
         ResultView().showMatchResult(player.money(), ranks)
     }
 }
