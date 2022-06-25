@@ -1,50 +1,42 @@
 package lotto
 
-import lotto.LottoWinningHandler.matchCount
-
 class LottoWinningInfo(winningNumberInput: String, bonusNumberInput: String) {
-    var winningNumbers = mutableListOf<Int>()
+    var winningLottoTicket: WinningLottoTicket
     var bonusNumber: Int = 0
     var scoreInfos = mutableListOf<ScoreInfo>()
     var revenue = 0
 
     init {
-        winningNumbers = winningNumberInput.split(",").map { it.replace(" ", "").toInt() }.toMutableList()
-        bonusNumber = bonusNumberInput.toInt()
-
-        require(winningNumbers.size == LOTTO_NUMBER_COUNT)
-        require(LOTTO_NUMBER_RANGE.contains(bonusNumber) && !winningNumbers.contains(bonusNumber))
+        val winningNumbers = winningNumberInput.split(",").map { it.replace(" ", "").toInt() }.map(::LottoNumber)
+        winningLottoTicket = WinningLottoTicket(winningNumbers, LottoNumber(bonusNumberInput.toInt()))
     }
 
     fun setScore(issuedLottos: List<LottoTicket>) {
-        val matchNumberMap = matchCount(issuedLottos, winningNumbers)
-        val matchedFiveNumber = matchNumberMap.any { (winningNumber, count) -> winningNumber.number == WinningPriceEnum.FIVE.number && count > 0 }
+        val matchNumberMap = winningLottoTicket.matchCount(issuedLottos)
 
-        val filtered = matchNumberMap.filter { (winningNumber, count) -> winningNumber.number > 0 }
+        val filtered = matchNumberMap.countMap.filter { (winningNumber) -> winningNumber.number > 0 }
         scoreInfos = setScoreInfos(filtered, null)
 
-        if (matchedFiveNumber) {
-            val bonusFiltered = matchCount(issuedLottos, listOf(bonusNumber)).filter { (winningNumber, count) -> winningNumber.number > 0 && count > 0 }
-            val bonusList = setScoreInfos(bonusFiltered, WinningPriceEnum.FIVE_BONUS.number)
+        val enableBonus = matchNumberMap.countMap.any { (winningNumber, count) -> winningNumber.number == WinningPriceEnum.FIVE.number && count > 0 }
+
+        if (enableBonus) {
+            val bonusFiltered = winningLottoTicket.matchBonus(issuedLottos).countMap.filter { (winningNumber, count) -> winningNumber.number > 0 && count > 0 }
+            val bonusList = setScoreInfos(bonusFiltered, WinningPriceEnum.FIVE_BONUS)
             scoreInfos.addAll(bonusList)
         }
-        revenue = LottoWinningHandler.calculateRevenue(scoreInfos)
+
+        revenue = winningLottoTicket.calculateRevenue(scoreInfos)
     }
 
     fun getRevenuePercentage(amount: Int, revenue: Int): Double {
         return (revenue / amount).toDouble()
     }
 
-    private fun setScoreInfos(filtered: Map<WinningPriceEnum, Int>, magicNumber: Int?): MutableList<ScoreInfo> {
-        return filtered.filter { (winningNumber, count) -> winningNumber != WinningPriceEnum.ZERO }.map { (winningNumber, count) ->
-            ScoreInfo(magicNumber ?: winningNumber.number, getPrice(magicNumber ?: winningNumber.number), count)
+    private fun setScoreInfos(filtered: Map<WinningPriceEnum, Int>, magicNumber: WinningPriceEnum?): MutableList<ScoreInfo> {
+        return filtered.filter { (winningNumber) -> winningNumber != WinningPriceEnum.ZERO }.map { (winningNumber, count) ->
+            ScoreInfo(magicNumber ?: winningNumber, getPrice(magicNumber ?: winningNumber), count)
         }.toMutableList()
-    }
-
-    companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
-        private val LOTTO_NUMBER_RANGE = (1..45)
     }
 }
 
-class ScoreInfo(val match: Int, val price: Int, val count: Int)
+class ScoreInfo(val match: WinningPriceEnum, val price: Int, val count: Int)
