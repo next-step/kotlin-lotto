@@ -4,8 +4,9 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
+import lotto.domain.LotterySet
 import lotto.domain.toLotteryNumberSet
-import lotto.policy.NormalLotteryPolicy
+import lotto.policy.LotteryWithBonusPolicy
 
 internal class LotterySetTest : StringSpec({
 
@@ -18,7 +19,7 @@ internal class LotterySetTest : StringSpec({
             Lottery(listOf(1, 2, 16, 15, 14, 13).toLotteryNumberSet()),
         )
     )
-    val lastWeekNormalLottery = NormalLotteryPolicy(listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet())
+    val lastWeekNormalLottery = LotteryWithBonusPolicy(listOf(1, 2, 3, 4, 5, 6).toLotteryNumberSet(), LotteryNumber(10))
 
     "각 등수에 포함된 당첨자 수를 반환한다." {
         listOf(

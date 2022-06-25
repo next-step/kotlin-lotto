@@ -1,7 +1,7 @@
-package lotto.vo
+package lotto.domain
 
-import lotto.domain.Lottery
 import lotto.policy.LotteryPolicy
+import lotto.vo.LotteryRank
 import kotlin.math.roundToInt
 
 class LotterySet(private val lotteries: List<Lottery>) : List<Lottery> by lotteries {
@@ -10,18 +10,18 @@ class LotterySet(private val lotteries: List<Lottery>) : List<Lottery> by lotter
         lotteries
             .count { lotteryPolicy.match(it) == place }
 
-    fun groupPlace(lotteryPolicy: LotteryPolicy): Map<LotteryRank, Int> =
-        lotteries
-            .map { lotteryPolicy.match(it) }
-            .groupingBy { it }
-            .eachCount()
-
     fun rate(lotteryPolicy: LotteryPolicy): Double =
         totalRewardMoney(lotteryPolicy)
             .div(totalCost().toDouble())
             .times(100)
             .roundToInt()
             .div(100.0)
+
+    private fun groupPlace(lotteryPolicy: LotteryPolicy): Map<LotteryRank, Int> =
+        lotteries
+            .map(lotteryPolicy::match)
+            .groupingBy { it }
+            .eachCount()
 
     private fun totalCost(): Int = lotteries.size * Lottery.PRICE
 

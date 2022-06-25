@@ -3,10 +3,11 @@ package lotto.view
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
+import lotto.domain.LotterySet
 import lotto.domain.toLotteryNumberSet
+import lotto.dto.LotteryResultDTO
 import lotto.policy.LotteryWithBonusPolicy
 import lotto.vo.LotteryNumber
-import lotto.vo.LotterySet
 
 internal class LottoResultViewTest : BehaviorSpec({
 
@@ -17,12 +18,18 @@ internal class LottoResultViewTest : BehaviorSpec({
                 Lottery(listOf(1, 2, 3, 4, 5, 7).toLotteryNumberSet()),
             )
         )
-        val lastWeekNormalLottery = LotteryWithBonusPolicy(listOf(1, 2, 3, 4, 45, 44).toLotteryNumberSet(), LotteryNumber.of(5))
-        val stubIOSystem = StubIOSystem("")
+        val lastWeekNormalLottery =
+            LotteryWithBonusPolicy(listOf(1, 2, 3, 4, 45, 44).toLotteryNumberSet(), LotteryNumber.of(5))
+        val stubIOSystem = StubIOSystem(listOf(""))
         val lottoResultView = LottoResultView(stubIOSystem)
 
         `when`("결과를 출력 시") {
-            lottoResultView.printResult(normalLotterySet, lastWeekNormalLottery)
+            val lotteryResultDTO = LotteryResultDTO(
+                normalLotterySet,
+                normalLotterySet,
+                lastWeekNormalLottery
+            )
+            lottoResultView.printResult(lotteryResultDTO)
 
             then("각 등수의 당첨수와 이익률을 출력한다.") {
                 val expected = """
@@ -31,7 +38,7 @@ internal class LottoResultViewTest : BehaviorSpec({
                 |3개 일치(5000원)-0개
                 |4개 일치(50000원)-0개
                 |5개 일치(1500000원)-0개
-                |5개, 보너스 볼 일치(30000000원)-2개
+                |5개, 보너스 볼 일치(30000000원)-4개
                 |6개 일치(2000000000원)-0개
                 |총 수익률은 30000.0입니다.
                 """.trimMargin()

@@ -3,9 +3,10 @@ package lotto.view
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lottery
+import lotto.domain.LotterySet
 import lotto.domain.toLotteryNumberSet
+import lotto.dto.BuyLotteriesDTO
 import lotto.infra.port.OutputSystem
-import lotto.vo.LotterySet
 
 internal class BuyResultViewTest : BehaviorSpec({
 
@@ -22,11 +23,16 @@ internal class BuyResultViewTest : BehaviorSpec({
         val buyResultView = BuyResultView(stubOutputSystem)
 
         `when`("출력시") {
-            buyResultView.printLotteries(lotteries)
+            val dto = BuyLotteriesDTO(lotteries, lotteries)
+
+            buyResultView.printLotteries(dto)
 
             then("구매한 모든 로또의 리스트를 출력한다.") {
                 val expected = """
-                |3개를 구매했습니다.
+                |수동 3개, 자동 3개를 구매했습니다.
+                |[1, 2, 3, 4, 5, 6]
+                |[1, 2, 3, 4, 5, 6]
+                |[1, 2, 3, 4, 5, 6]
                 |[1, 2, 3, 4, 5, 6]
                 |[1, 2, 3, 4, 5, 6]
                 |[1, 2, 3, 4, 5, 6]

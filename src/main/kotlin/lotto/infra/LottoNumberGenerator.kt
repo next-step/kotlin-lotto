@@ -1,8 +1,8 @@
 package lotto.infra
 
+import lotto.domain.LotteryNumberSet
 import lotto.infra.port.NumberGenerator
 import lotto.vo.LotteryNumber
-import lotto.vo.LotteryNumberSet
 
 class LottoNumberGenerator : NumberGenerator<LotteryNumberSet> {
 
