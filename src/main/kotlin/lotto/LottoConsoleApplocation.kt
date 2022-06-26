@@ -8,8 +8,12 @@ fun main() {
     LottoOutputView.outputPurchaseLottoTickerInfos(lottoTickets)
 
     val inputWinningLottoNumbers = LottoInputView.inputWinningLottoNumbers()
-    val winningTicket = LottoTicket(inputWinningLottoNumbers.map { LottoNumber.of(it) }.toSet())
+    val inputBonusNumber = LottoInputView.inputBonusNumber()
+    val winningNumbers = WinningNumbers(
+        numbers = LottoTicket(inputWinningLottoNumbers.map { LottoNumber.of(it) }.toSet()),
+        bonusNumber = LottoNumber.of(inputBonusNumber)
+    )
 
-    val lottoPrizes: LottoResults = LottoManager.winningConfirmation(lottoTickets, winningTicket)
+    val lottoPrizes: LottoResults = LottoManager.winningConfirmation(lottoTickets, winningNumbers)
     LottoOutputView.outputLottoResults(lottoPrizes, lottoPurchaseAmount)
 }
