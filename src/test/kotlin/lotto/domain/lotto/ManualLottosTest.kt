@@ -5,6 +5,17 @@ import org.junit.jupiter.api.Test
 
 class ManualLottosTest {
     @Test
+    fun `ManualLottos 생성자는 전달 받은 수동 번호가 없으면 빈 로또 티켓을 생성한다`() {
+        // given
+
+        // when
+        val manualLottos = ManualLottos(emptyList())
+
+        // then
+        assertThat(manualLottos.lottos.lottoTickets.size).isEqualTo(0)
+    }
+
+    @Test
     fun `ManualLottos 생성자는 전달 받은 수동 번호를 로또 번호로 변환시킨다`() {
         // given
         val manualNumbers = listOf(
