@@ -1,4 +1,7 @@
-package lotto.domain
+package lotto.domain.lotto
+
+import lotto.domain.lottonumber.LottoNumbers
+import lotto.domain.rank.Rank
 
 class LottoTicket(
     val lottoNumbers: LottoNumbers

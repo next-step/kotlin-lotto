@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.vendor
 
 import lotto.fixture.manualLotto
 import org.assertj.core.api.Assertions.assertThat

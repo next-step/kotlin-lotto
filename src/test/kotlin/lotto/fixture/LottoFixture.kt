@@ -1,11 +1,11 @@
 package lotto.fixture
 
-import lotto.domain.BonusNumber
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
-import lotto.domain.LottoTickets
-import lotto.domain.ManualLottos
-import lotto.domain.WinningLotto
+import lotto.domain.lotto.BonusNumber
+import lotto.domain.lotto.LottoTicket
+import lotto.domain.lotto.LottoTickets
+import lotto.domain.lotto.ManualLottos
+import lotto.domain.lotto.WinningLotto
+import lotto.domain.lottonumber.LottoNumber
 
 fun bonusNumber(number: Int): BonusNumber = BonusNumber(number)
 fun lotto(vararg numbers: Int): LottoTicket = LottoTicket(numbers.toList())

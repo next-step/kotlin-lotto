@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.lotto
 
 import lotto.fixture.lottoNumber
 import lotto.fixture.winningLotto

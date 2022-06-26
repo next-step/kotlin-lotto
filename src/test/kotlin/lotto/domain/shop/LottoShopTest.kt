@@ -1,5 +1,7 @@
-package lotto.domain
+package lotto.domain.shop
 
+import lotto.domain.lotto.LottoTickets
+import lotto.domain.money.PaidMoney
 import lotto.fixture.manualLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach

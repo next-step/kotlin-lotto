@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.money
 
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest

@@ -1,5 +1,10 @@
-package lotto.domain
+package lotto.domain.vendor
 
+import lotto.domain.lotto.LottoTicket
+import lotto.domain.lotto.LottoTickets
+import lotto.domain.lotto.ManualLottos
+import lotto.domain.lottonumber.LottoNumber
+import lotto.domain.lottonumber.LottoNumbers
 import lotto.util.RandomUtil
 
 object LottoVendor {

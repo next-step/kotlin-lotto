@@ -1,4 +1,10 @@
-package lotto.domain
+package lotto.domain.shop
+
+import lotto.domain.lotto.LottoTickets
+import lotto.domain.lotto.ManualLottos
+import lotto.domain.money.LOTTO_PRICE
+import lotto.domain.money.PaidMoney
+import lotto.domain.vendor.LottoVendor
 
 class LottoShop {
     fun buyLotto(money: PaidMoney, manualLottos: ManualLottos): LottoTickets =

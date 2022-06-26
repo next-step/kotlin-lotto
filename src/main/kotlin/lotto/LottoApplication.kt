@@ -1,12 +1,12 @@
 package lotto
 
-import lotto.domain.BonusNumber
-import lotto.domain.LottoMatcher
-import lotto.domain.LottoShop
-import lotto.domain.ManualLottoTotal
-import lotto.domain.ManualLottos
-import lotto.domain.PaidMoney
-import lotto.domain.WinningLotto
+import lotto.domain.lotto.BonusNumber
+import lotto.domain.lotto.ManualLottoTotal
+import lotto.domain.lotto.ManualLottos
+import lotto.domain.lotto.WinningLotto
+import lotto.domain.matcher.LottoMatcher
+import lotto.domain.money.PaidMoney
+import lotto.domain.shop.LottoShop
 import lotto.view.InputView
 import lotto.view.ResultView
 

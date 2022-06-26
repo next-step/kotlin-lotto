@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.lotto
 
 @JvmInline
 value class ManualLottoTotal(val value: Int) {

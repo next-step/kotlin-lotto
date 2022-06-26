@@ -1,10 +1,10 @@
 package lotto.view
 
-import lotto.domain.EarnedRate
-import lotto.domain.LottoMatchResult
-import lotto.domain.LottoTickets
-import lotto.domain.ManualLottoTotal
-import lotto.domain.Rank.SECOND
+import lotto.domain.lotto.LottoTickets
+import lotto.domain.lotto.ManualLottoTotal
+import lotto.domain.matcher.EarnedRate
+import lotto.domain.matcher.LottoMatchResult
+import lotto.domain.rank.Rank.SECOND
 
 object ResultView {
     fun showLottoInfo(lottoTickets: LottoTickets, manualLottoTotal: ManualLottoTotal) {

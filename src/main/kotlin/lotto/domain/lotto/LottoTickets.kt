@@ -1,4 +1,8 @@
-package lotto.domain
+package lotto.domain.lotto
+
+import lotto.domain.matcher.Count
+import lotto.domain.matcher.MatchResult
+import lotto.domain.rank.Rank
 
 class LottoTickets(
     val lottoTickets: List<LottoTicket>

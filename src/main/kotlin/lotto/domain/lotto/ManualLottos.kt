@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.lotto
 
 class ManualLottos(val lottos: LottoTickets) {
     constructor(manualNumbers: List<List<Int>>) : this(

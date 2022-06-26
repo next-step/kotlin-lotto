@@ -1,4 +1,11 @@
-package lotto.domain
+package lotto.domain.matcher
+
+import lotto.domain.lotto.BonusNumber
+import lotto.domain.lotto.LottoTickets
+import lotto.domain.lotto.WinningLotto
+import lotto.domain.money.EarnedMoney
+import lotto.domain.money.PaidMoney
+import lotto.domain.rank.Rank
 
 object LottoMatcher {
     fun matchResult(

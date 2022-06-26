@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.money
 
 const val LOTTO_PRICE = 1_000L
 
