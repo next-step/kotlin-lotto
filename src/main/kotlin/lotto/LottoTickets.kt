@@ -1,13 +1,18 @@
 package lotto
 
 @JvmInline
-value class LottoTickets(val values: List<LottoTicket>) {
+value class LottoTickets(private val values: List<LottoTicket>) {
     fun size(): Int {
         return this.values.size
     }
 
-    fun matchNumbers(target: LottoTicket): List<Int> {
-        return values.map { it.matchNumbers(target) }
+    fun matchNumbers(winningNumbers: WinningNumbers): List<LottoMatchResult> {
+        return values.map {
+            LottoMatchResult(
+                matchCount = it.matchNumbers(winningNumbers.numbers),
+                isBonusMatch = it.contains(winningNumbers.bonusNumber),
+            )
+        }
     }
 
     fun forEach(action: (LottoTicket) -> Unit) {

@@ -14,8 +14,12 @@ value class LottoPrizes(private val values: List<LottoPrize>) {
         return this.values.count { it == LottoPrize.THIRD_PLACE }
     }
 
-    fun fourthPlaceCount(): Int {
-        return this.values.count { it == LottoPrize.FOURTH_PLACE }
+    fun forthPlaceCount(): Int {
+        return this.values.count { it == LottoPrize.FORTH_PLACE }
+    }
+
+    fun fifthPlaceCount(): Int {
+        return this.values.count { it == LottoPrize.FIFTH_PLACE }
     }
 
     fun totalPrize(): Int {

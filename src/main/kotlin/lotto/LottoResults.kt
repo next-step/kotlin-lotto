@@ -4,7 +4,8 @@ data class LottoResults private constructor(
     val firstPlaceCount: Int,
     val secondPlaceCount: Int,
     val thirdPlaceCount: Int,
-    val fourthPlaceCount: Int,
+    val forthPlaceCount: Int,
+    val fifthPlaceCount: Int,
     val totalPrize: Int,
 ) {
 
@@ -14,7 +15,8 @@ data class LottoResults private constructor(
                 firstPlaceCount = prizes.firstPlaceCount(),
                 secondPlaceCount = prizes.secondPlaceCount(),
                 thirdPlaceCount = prizes.thirdPlaceCount(),
-                fourthPlaceCount = prizes.fourthPlaceCount(),
+                forthPlaceCount = prizes.forthPlaceCount(),
+                fifthPlaceCount = prizes.fifthPlaceCount(),
                 totalPrize = prizes.totalPrize(),
             )
         }

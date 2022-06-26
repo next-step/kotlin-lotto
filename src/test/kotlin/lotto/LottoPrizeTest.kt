@@ -6,11 +6,10 @@ import io.kotest.matchers.shouldBe
 internal class LottoPrizeTest : FunSpec({
     test("번호가 5개 일치하고 보너스 번호가 일치하면 2등이다.") {
         // given
-        val matchCount = 5
-        val bonusMatch = true
+        val matchResult = LottoMatchResult(matchCount = 5, isBonusMatch = true)
 
         // when
-        val result = LottoPrize.of(matchCount, bonusMatch)
+        val result = LottoPrize.of(matchResult)
 
         // then
         result shouldBe LottoPrize.SECOND_PLACE
