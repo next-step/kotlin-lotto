@@ -78,6 +78,8 @@
     - 에러 케이스: 구매 가능 로또 수(LottoTotal) < 수동 로또 수(manualLottoCount)
   - [ ] LottoTicket을 Vendor 통해 제공한다
     
+- [X] LottoTickets: 로또 티켓 그룹
+ - [X] 2개의 LottoTickets를 1개의 LottoTickets로 합쳐준다
 ## 실행 결과
 ```
 구입금액을 입력해 주세요.

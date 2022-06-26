@@ -11,4 +11,9 @@ class LottoTickets(
                 .eachCount()
                 .mapValues { Count(it.value) }
         )
+
+    fun merge(other: LottoTickets): LottoTickets =
+        LottoTickets(
+            lottoTickets.plus(other.lottoTickets)
+        )
 }
