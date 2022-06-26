@@ -2,15 +2,15 @@ package lotto.view
 
 import lotto.domain.EarnedRate
 import lotto.domain.LottoMatchResult
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoTickets
 import lotto.domain.ManualLottoTotal
 import lotto.domain.Rank.SECOND
 
 object ResultView {
-    fun showLottoInfo(lottoTickets: LottoTickets) {
+    fun showLottoInfo(lottoTickets: LottoTickets, manualLottoTotal: ManualLottoTotal) {
         val lottoCount = lottoTickets.lottoTickets.size
-        println("${lottoCount}개를 구매했습니다.")
+        val manualCount = manualLottoTotal.value
+        println("수동으로 ${manualCount}장, 자동으로 ${lottoCount - manualCount}개를 구매했습니다.")
         lottoTickets.lottoTickets.forEach { lotto ->
             println(lotto.lottoNumbers.toInts())
         }
