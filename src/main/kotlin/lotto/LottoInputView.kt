@@ -20,7 +20,6 @@ object LottoInputView {
         val inputBonusNumber = readln()
         val bonusNumber = inputBonusNumber.toIntOrNull()
         require(bonusNumber != null) { "보너스 볼은 정수 값을 입력해야 합니다." }
-        require(bonusNumber in 1..45) { "보너스 볼은 1~45 사이의 숫자 값이어야 합니다.." }
         return bonusNumber
     }
 }
