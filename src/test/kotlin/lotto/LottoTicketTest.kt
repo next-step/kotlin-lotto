@@ -41,7 +41,7 @@ internal class LottoTicketTest : FunSpec({
 
     test("contains 함수를 호출해서, LottoTicket 내에 로또 번호가 있으면 true를 반환한다.") {
         // given
-        val lottoTicket: LottoTicket = LottoTicketFixture.simpleLottoTicket()
+        val lottoTicket: LottoTicket = LottoTicketFixture.simpleLottoTicket(1, 2, 3, 4, 5, 6)
 
         // when
         val result: Boolean = lottoTicket.contains(LottoNumber.of(1))

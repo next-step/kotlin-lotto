@@ -9,10 +9,10 @@ value class LottoTicket(val lottoNumbers: Set<LottoNumber>) {
     }
 
     fun matchNumbers(target: LottoTicket): Int {
-        return this.lottoNumbers.count() { target.contains(it) }
+        return this.lottoNumbers.count() { it in target }
     }
 
-    fun contains(lottoNumber: LottoNumber): Boolean {
+    operator fun contains(lottoNumber: LottoNumber): Boolean {
         return this.lottoNumbers.contains(lottoNumber)
     }
 

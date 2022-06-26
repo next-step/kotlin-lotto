@@ -10,7 +10,7 @@ value class LottoTickets(private val values: List<LottoTicket>) {
         return values.map {
             LottoMatchResult(
                 matchCount = it.matchNumbers(winningNumbers.numbers),
-                isBonusMatch = it.contains(winningNumbers.bonusNumber),
+                isBonusMatch = winningNumbers.bonusNumber in it,
             )
         }
     }
