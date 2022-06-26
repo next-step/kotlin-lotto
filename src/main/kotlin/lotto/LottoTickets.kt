@@ -7,10 +7,10 @@ value class LottoTickets(private val values: List<LottoTicket>) {
     }
 
     fun matchNumbers(winningNumbers: WinningNumbers): List<LottoMatchResult> {
-        return values.map {
+        return values.map { lottoTicket ->
             LottoMatchResult(
-                matchCount = it.matchNumbers(winningNumbers.numbers),
-                isBonusMatch = winningNumbers.bonusNumber in it,
+                matchCount = lottoTicket.matchNumbers(winningNumbers.numbers),
+                isBonusMatch = winningNumbers.bonusNumber in lottoTicket,
             )
         }
     }
