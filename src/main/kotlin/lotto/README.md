@@ -66,8 +66,8 @@
 
 ### DOMAIN
 * 추가
-- [ ] ManualLottos: 수동 로또 티켓 일급컬렉션
-- [ ] ManualLottoTotal: 수동 로또 수
+- [X] ManualLottos: 수동 로또 티켓 일급컬렉션
+- [X] ManualLottoTotal: 수동 로또 수
 
 * 변경사항
 - [ ] LottoVendor: 로또 생성기
