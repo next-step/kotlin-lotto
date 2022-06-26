@@ -70,8 +70,8 @@
 - [X] ManualLottoTotal: 수동 로또 수
 
 * 변경사항
-- [ ] LottoVendor: 로또 생성기
-  - [ ] N개의 LottoTickets을 생성한다. (자동과 수동이 합쳐진)
+- [X] LottoVendor: 로또 생성기
+  - [X] 자동과 수동이 합쳐진 LottoTickets을 발급한다.
 - [ ] LottoShop: 로또 상점
   - [ ] 구입 가능한 로또 수를 확인한다
     - 정상 케이스: 구매 가능 로또 수(LottoTotal) >= 수동 로또 수(manualLottoCount)

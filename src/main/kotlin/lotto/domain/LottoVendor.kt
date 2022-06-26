@@ -8,13 +8,18 @@ object LottoVendor {
     private const val SIZE = 6
     private val NUMBER_RANGE = MINIMUM_NUMBER..MAXIMUM_NUMBER
 
-    fun generate(lottoCount: Int): LottoTickets =
+    fun generate(autoLottoCount: Int, manualLottos: ManualLottos): LottoTickets =
         LottoTickets(
-            List(lottoCount) { LottoTicket(generateNumbers()) }
+            autoLottos(autoLottoCount)
+        ).merge(
+            manualLottos.lottos
         )
+
+    private fun autoLottos(autoLottoCount: Int) =
+        List(autoLottoCount) { LottoTicket(generateNumbers()) }
 
     private fun generateNumbers(): LottoNumbers =
         LottoNumbers(
-            RandomUtil.getShuffledNumbers(NUMBER_RANGE, SIZE).map(LottoNumber::from)
+            RandomUtil.getShuffledNumbers(NUMBER_RANGE, SIZE).map(LottoNumber::from).toSet()
         )
 }
