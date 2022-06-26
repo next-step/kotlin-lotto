@@ -46,14 +46,8 @@ object InputView {
 
 fun String?.checkNullOrBlank() = require(!this.isNullOrBlank()) { "입력값이 비어있어요." }
 
-fun String.toNumericInt(): Int {
-    val number = this.trim().toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다.")
-    require(number >= 0) { "0이상의 숫자만 입력해 주세요. given: $this" }
-    return number
-}
+fun String.toNumericInt(): Int =
+    this.trim().toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다. given: $this")
 
-fun String.toNumericLong(): Long {
-    val number = this.trim().toLongOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다.")
-    require(number >= 0L) { "0이상의 숫자만 입력해 주세요. given: $this" }
-    return number
-}
+fun String.toNumericLong(): Long =
+    this.trim().toLongOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다. given: $this")
