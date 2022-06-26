@@ -11,11 +11,11 @@ class LottoNumbers(
         numbers.map(LottoNumber::from).toSet()
     )
 
+    fun toInts(): List<Int> {
+        return lottoNumbers.map(LottoNumber::of)
+    }
+
     companion object {
         const val LOTTO_SIZE = 6
-
-        fun toInts(lottoNumbers: LottoNumbers): List<Int> {
-            return lottoNumbers.lottoNumbers.map(LottoNumber::of)
-        }
     }
 }

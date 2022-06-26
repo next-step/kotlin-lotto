@@ -17,6 +17,7 @@ class ManualLottosTest {
 
         // then
         assertThat(manualLottos.lottos.lottoTickets.size).isEqualTo(2)
+        assertThat(manualLottos.lottos.toInts()).isEqualTo(manualNumbers)
     }
 
     @Test

@@ -16,4 +16,10 @@ class LottoTickets(
         LottoTickets(
             lottoTickets.plus(other.lottoTickets)
         )
+
+    fun toInts(): List<List<Int>> {
+        return lottoTickets.map { lottoTicket ->
+            lottoTicket.lottoNumbers.toInts()
+        }
+    }
 }

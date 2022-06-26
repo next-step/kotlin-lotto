@@ -4,6 +4,7 @@ import lotto.domain.EarnedRate
 import lotto.domain.LottoMatchResult
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoTickets
+import lotto.domain.ManualLottoTotal
 import lotto.domain.Rank.SECOND
 
 object ResultView {
@@ -11,7 +12,7 @@ object ResultView {
         val lottoCount = lottoTickets.lottoTickets.size
         println("${lottoCount}개를 구매했습니다.")
         lottoTickets.lottoTickets.forEach { lotto ->
-            println(LottoNumbers.toInts(lotto.lottoNumbers))
+            println(lotto.lottoNumbers.toInts())
         }
     }
 
