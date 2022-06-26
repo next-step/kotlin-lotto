@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.controller.dto.LottoData
+import lotto.domain.LottoAmount
 import lotto.domain.Rank
 
 object ResultView {
@@ -8,7 +9,8 @@ object ResultView {
         println("${lottoNumber}개를 구매했습니다.")
     }
 
-    fun printLottos(lottoDatas: List<LottoData>) {
+    fun printLottos(lottoAmount: LottoAmount, lottoDatas: List<LottoData>) {
+        println("수동으로 ${lottoAmount.amountOfManualLotto}장, 자동으로 ${lottoAmount.amountOfAutoLotto}를 구매했습니다.")
         lottoDatas.forEach { println(it.lottoNumbers) }
         println()
     }
@@ -16,16 +18,21 @@ object ResultView {
     fun printStatistics(statics: Map<Rank, Int>) {
         println("당첨 통계")
         println("---------")
-        statics.forEach { printStatisticsByRank(it) }
+        Rank.values().sortedDescending()
+            .forEach { printStatisticsByRank(it, statics) }
     }
 
-    private fun printStatisticsByRank(it: Map.Entry<Rank, Int>) {
-        if (it.key !== Rank.SECOND) {
-            println("${it.key.correctNumber}개 일치 (${it.key.winningMoney}원)- ${it.value}개")
+    private fun printStatisticsByRank(rank: Rank, static: Map<Rank, Int>) {
+        if (rank === Rank.NONE) {
             return
         }
 
-        println("${it.key.correctNumber}개 일치, 보너스 볼 일치(${it.key.winningMoney}원)- ${it.value}개")
+        if (rank !== Rank.SECOND) {
+            println("${rank.correctNumber}개 일치 (${rank.winningMoney}원)- ${static[rank] ?: 0}개")
+            return
+        }
+
+        println("${rank.correctNumber}개 일치, 보너스 볼 일치(${rank.winningMoney}원)- ${static[rank] ?: 0}개")
     }
 
     fun printEarningRate(earningRate: Double) {

@@ -27,11 +27,11 @@ class WinningLottoTest : StringSpec({
             // given
             val winningLotto = WinningLotto(
                 Lotto(
-                    winningLottoNumbers.map { LottoNumber.valueOf(it) }
+                    winningLottoNumbers.map { LottoNumber.valueOf(it) }.toSet()
                 ),
                 bonusBall,
             )
-            val targetLotto = Lotto(targetLottoNumbers.map { LottoNumber.valueOf(it) })
+            val targetLotto = Lotto(targetLottoNumbers.map { LottoNumber.valueOf(it) }.toSet())
 
             // when
             val actual = winningLotto.match(targetLotto)
