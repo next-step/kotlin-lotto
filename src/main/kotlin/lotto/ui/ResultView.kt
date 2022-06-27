@@ -1,6 +1,7 @@
 package lotto.ui
 
 import lotto.entity.LottoTicket
+import lotto.entity.Rank
 import lotto.entity.WinningInfo
 
 class ResultView {
@@ -19,8 +20,8 @@ class ResultView {
         println("---------")
         var sum = 0
         winnings.countOfRanks.onEach { it ->
-            when (it.key.name) {
-                "SECOND" -> println("${it.key.countOfMatch}개 일치, 보너스 볼 일치 (${it.key.winningMoney}원) - ${it.value}개")
+            when (it.key) {
+                Rank.SECOND -> println("${it.key.countOfMatch}개 일치, 보너스 볼 일치 (${it.key.winningMoney}원) - ${it.value}개")
                 else -> println("${it.key.countOfMatch}개 일치 (${it.key.winningMoney}원) - ${it.value}개")
             }
             sum += it.value * it.key.winningMoney
