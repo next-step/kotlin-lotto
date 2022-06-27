@@ -14,4 +14,12 @@ object LottoInputView {
         return inputWinningNumbers.split(", ").toList()
             .map { it.toIntOrNull() ?: throw IllegalArgumentException("") }
     }
+
+    fun inputBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val inputBonusNumber = readln()
+        val bonusNumber = inputBonusNumber.toIntOrNull()
+        require(bonusNumber != null) { "보너스 볼은 정수 값을 입력해야 합니다." }
+        return bonusNumber
+    }
 }
