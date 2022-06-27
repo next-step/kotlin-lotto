@@ -1,10 +1,10 @@
 package lotto.entity
 
-class MatcherImpl(private val winningNumbers: List<Int>, private val bonusNumber: Int) : Matcher {
+class MatcherImpl(private val lottoNumber: LottoNumber) : Matcher {
     override fun matchOneTicket(ticket: LottoTicket): Rank {
-        val matches = ticket.numbers.intersect(this.winningNumbers.toSet()).count()
-        if (matches == 5) {
-            if (ticket.numbers.contains(bonusNumber)) return Rank.SECOND
+        val matches = ticket.getWinningNumbersMatch(lottoNumber)
+        if (matches == CHECK_BONUS_NUMBER) {
+            if (ticket.numbers.contains(lottoNumber.bonusNumber)) return Rank.SECOND
             return Rank.THIRD
         }
         return Rank.find(matches)
@@ -29,5 +29,9 @@ class MatcherImpl(private val winningNumbers: List<Int>, private val bonusNumber
             .filter { it.key != Rank.MISS }
             .forEach { countOfRanks[it.key] = it.value }
         return WinningInfo(countOfRanks)
+    }
+
+    companion object {
+        const val CHECK_BONUS_NUMBER = 5
     }
 }
