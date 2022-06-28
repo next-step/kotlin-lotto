@@ -22,27 +22,28 @@ object InputView {
     }
 
     fun getManualLottoTicketCount(lottoTicketCount: PositiveNumber): PositiveNumber {
-        val inputStr = printMsgAndReadValue(GET_MANUAL_LOTTO_COUNT)
-        val manualLottoCount = PositiveNumber.of(inputStr)
-        require(manualLottoCount <= lottoTicketCount) { MANUAL_LOTTO_COUNT_IS_OVER_PRICE }
-        return manualLottoCount
+        while (true) {
+            kotlin.runCatching {
+                val inputStr = printMsgAndReadValue(GET_MANUAL_LOTTO_COUNT)
+                val manualLottoCount = PositiveNumber.of(inputStr)
+                require(manualLottoCount <= lottoTicketCount) { MANUAL_LOTTO_COUNT_IS_OVER_PRICE }
+                return manualLottoCount
+            }.onFailure {
+                println("다시 입력해주세요.")
+            }
+        }
     }
 
     fun getManualLottoNumbers(lottoTicketCount: PositiveNumber): LottoTickets {
         println(GET_MANUAL_LOTTO_NUMBER)
         val lottoTickets = mutableListOf<LottoTicket>()
-        // val lottoTickets = mutableListOf<String>()
         repeat(lottoTicketCount.toInt()) {
             val inputStr = requireNotNull(readlnOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
             println()
             val lottoTicket = LottoTicket(
                 inputStr.split(",")
                     .map {
-                        LottoNumber(
-                            requireNotNull(
-                                it.trim().toIntOrNull()
-                            ) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
-                        )
+                        LottoNumber(requireNotNull(it.trim().toIntOrNull()) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG })
                     }.toSet()
             )
             lottoTickets.add(lottoTicket)
