@@ -12,7 +12,7 @@ import java.math.BigDecimal
 
 class OutputView {
     fun printTotalTicketCount(manualTickets: LottoTickets, autoTickets: LottoTickets) {
-        println("수동으로 ${manualTickets.getCount()}장, 자동으로 ${autoTickets.getCount()}개를 구매했습니다.")
+        println("수동으로 ${manualTickets.count}장, 자동으로 ${autoTickets.count}개를 구매했습니다.")
         autoTickets.values.forEach { printLotto(lottoTicket = it) }
         println()
     }

@@ -22,5 +22,5 @@ class LottoTickets(
 
     fun combine(other: LottoTickets): LottoTickets = LottoTickets(this.values + other.values)
 
-    fun getCount(): Int = values.size
+    val count: Int = values.size
 }

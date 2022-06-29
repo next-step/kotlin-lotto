@@ -33,6 +33,6 @@ internal class LottoTicketMachineTest : FreeSpec({
         val lottoTickets = lottoTicketMachine.createAutoTickets(5)
 
         // then
-        lottoTickets.getCount() shouldBe 5
+        lottoTickets.count shouldBe 5
     }
 })

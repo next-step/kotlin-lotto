@@ -14,7 +14,7 @@ class LottoShop(
         require(totalTicketCount >= manualNumbersList.count()) { "주어진 금액으로는 입력한 만큼의 수동 로또를 구매할 수 없습니다." }
 
         val manalLottoTickets = LottoTickets(manualNumbersList.map { lottoTicketMachine.createManualTicket(it) })
-        val autoLottoTickets = lottoTicketMachine.createAutoTickets(totalTicketCount - manalLottoTickets.getCount())
+        val autoLottoTickets = lottoTicketMachine.createAutoTickets(totalTicketCount - manalLottoTickets.count)
 
         return manalLottoTickets.combine(autoLottoTickets)
     }
