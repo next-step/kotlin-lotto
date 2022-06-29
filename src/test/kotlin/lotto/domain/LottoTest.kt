@@ -9,23 +9,23 @@ import java.util.stream.Stream
 
 internal class LottoTest {
 
-    @ParameterizedTest
     @MethodSource
-    fun `숫자가 6개가 아닌 로또는 생성불가`(lottoNumbers: List<LottoNumber>) {
+    @ParameterizedTest
+    fun notSixNumberLottos(lottoNumbers: List<LottoNumber>) {
         assertThrows<IllegalArgumentException> { Lotto.create(lottoNumbers) }
             .shouldHaveMessage("로또 숫자가 6개가 아닌 로또는 생성할 수 없습니다.")
     }
 
-    @ParameterizedTest
     @MethodSource
-    fun `중복된 숫자를 가진 로또는 생성 불가`(lottoNumbers: List<LottoNumber>) {
+    @ParameterizedTest
+    fun duplicatedNumberLottos(lottoNumbers: List<LottoNumber>) {
         assertThrows<IllegalArgumentException> { Lotto.create(lottoNumbers) }
             .shouldHaveMessage("로또 숫자는 중복될 수 없습니다.")
     }
 
     companion object {
         @JvmStatic
-        fun `숫자가 6개가 아닌 로또는 생성불가`(): Stream<Arguments> {
+        fun notSixNumberLottos(): Stream<Arguments> {
             return Stream.of(
                 Arguments.arguments(
                     listOf(
@@ -34,7 +34,9 @@ internal class LottoTest {
                         LottoNumber(3),
                         LottoNumber(4),
                         LottoNumber(5),
-                    ),
+                    )
+                ),
+                Arguments.arguments(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -49,7 +51,7 @@ internal class LottoTest {
         }
 
         @JvmStatic
-        fun `중복된 숫자를 가진 로또는 생성 불가`(): Stream<Arguments> {
+        fun duplicatedNumberLottos(): Stream<Arguments> {
             return Stream.of(
                 Arguments.arguments(
                     listOf(
@@ -59,7 +61,9 @@ internal class LottoTest {
                         LottoNumber(4),
                         LottoNumber(5),
                         LottoNumber(6),
-                    ),
+                    )
+                ),
+                Arguments.arguments(
                     listOf(
                         LottoNumber(6),
                         LottoNumber(6),
