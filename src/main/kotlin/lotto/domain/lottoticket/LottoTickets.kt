@@ -22,5 +22,11 @@ class LottoTickets(
 
     fun combine(other: LottoTickets): LottoTickets = LottoTickets(this.values + other.values)
 
-    val count: Int = values.size
+    val autoTickets: List<LottoTicket> = values.filter { it.isAuto }
+
+    val totalCount: Int = values.size
+
+    val manualCount: Int = values.count { it.isManual }
+
+    val autoCount: Int = values.count { it.isAuto }
 }

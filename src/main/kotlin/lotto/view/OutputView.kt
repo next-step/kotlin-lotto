@@ -11,9 +11,9 @@ import lotto.domain.lottoticket.LottoTickets
 import java.math.BigDecimal
 
 class OutputView {
-    fun printTotalTicketCount(manualTickets: LottoTickets, autoTickets: LottoTickets) {
-        println("수동으로 ${manualTickets.count}장, 자동으로 ${autoTickets.count}개를 구매했습니다.")
-        autoTickets.values.forEach { printLotto(lottoTicket = it) }
+    fun printTotalTicketCount(lottoTickets: LottoTickets) {
+        println("수동으로 ${lottoTickets.manualCount}장, 자동으로 ${lottoTickets.autoCount}개를 구매했습니다.")
+        lottoTickets.autoTickets.forEach { printLotto(lottoTicket = it) }
         println()
     }
 

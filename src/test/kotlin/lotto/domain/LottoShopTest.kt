@@ -22,7 +22,7 @@ internal class LottoShopTest : FreeSpec({
             "수동을 $manualTicketCount 개 사면 자동을 $autoTicketCount 개 사서 총 $totalTicketCount 개가 된다." {
                 val manualNumbersList = List(manualTicketCount) { listOf(1, 2, 3, 4, 5, 6) }
                 val lottoTickets = lottoShop.sellLottoTickets(money, manualNumbersList)
-                lottoTickets.count shouldBe totalTicketCount
+                lottoTickets.totalCount shouldBe totalTicketCount
             }
         }
     }

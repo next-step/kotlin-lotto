@@ -10,6 +10,7 @@ class LottoGame(
 ) {
     fun play() {
         val totalTickets = lottoTickets()
+        outputView.printTotalTicketCount(totalTickets)
         val winningTicket = winningTicket()
         val matchResults = totalTickets.totalMatchResults(winningTicket)
         outputView.printWinningResult(matchResults.amountWithWinnings)
