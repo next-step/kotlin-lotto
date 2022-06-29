@@ -20,8 +20,11 @@ class ResultView {
         println("---------")
         var sum = 0
         winnings.countOfRanks.onEach { it ->
-            println("${it.key}개 일치 (${Rank.find(it.key).winningMoney}원) - ${it.value}개")
-            sum += it.value * Rank.find(it.key).winningMoney!!
+            when (it.key) {
+                Rank.SECOND -> println("${it.key.countOfMatch}개 일치, 보너스 볼 일치 (${it.key.winningMoney}원) - ${it.value}개")
+                else -> println("${it.key.countOfMatch}개 일치 (${it.key.winningMoney}원) - ${it.value}개")
+            }
+            sum += it.value * it.key.winningMoney
         }
         println(String.format("총 수익률은 %.2f 입니다.", sum.toDouble() / money))
     }
