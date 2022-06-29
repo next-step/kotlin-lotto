@@ -4,7 +4,7 @@ import java.math.BigDecimal
 
 class InputView {
 
-    fun inputBigDecimal(): BigDecimal {
+    fun inputMoney(): BigDecimal {
         println("구입금액을 입력해 주세요.")
         return readln().toBigDecimal()
     }
@@ -14,13 +14,9 @@ class InputView {
         return readln().toInt()
     }
 
-    fun noticeInputManualLottoTicketNumbers() {
+    fun inputManualLottoTicketNumbers(count: Int): List<List<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-    }
-
-    fun inputManualLottoTicketNumbers(): List<Int> {
-        return readln().split(DELIMITER)
-            .map { it.toInt() }
+        return List(count) { readln().split(DELIMITER).map { it.toInt() } }
     }
 
     fun inputWinningNumbers(): List<Int> {
