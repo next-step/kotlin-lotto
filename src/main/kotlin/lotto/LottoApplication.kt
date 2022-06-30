@@ -1,17 +1,16 @@
 package lotto
 
-import lotto.domain.LottoPrice
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoTicketCount
 import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val lottoPrice = inputErrorCatch { LottoPrice(InputView.getPrice()) }
+    val money = inputErrorCatch { InputView.getPrice() }
 
     // 구입금액에 따른 로또 개수 반환
     val lottoPurchase = LottoPurchase()
-    val allLottoCount = lottoPurchase.getLottoCount(lottoPrice)
+    val allLottoCount = lottoPurchase.getLottoCount(money)
 
     // 수동 로또 장수 입력받기
     val manualLottoCount = inputErrorCatch { InputView.getManualLottoTicketCount(allLottoCount) }
@@ -30,7 +29,7 @@ fun main() {
     // 당첨통계
     val lottoResults = lottoTickets.compareNumber(winningLotto)
     // 수익률
-    val rateResult = lottoResults.rateOfResult(lottoPrice)
+    val rateResult = lottoResults.rateOfResult(money)
 
     OutputView.winningResult(lottoResults, rateResult)
 }

@@ -25,7 +25,7 @@ internal class LottoResultsTest {
             LottoResult(LottoPrize.FOURTH, PositiveNumber(1)),
             LottoResult(LottoPrize.FIFTH, PositiveNumber(2))
         ).toLottoResults()
-        val result = lottoResult.rateOfResult(LottoPrice.of(price))
+        val result = lottoResult.rateOfResult(Money(price))
         assertThat(result).isEqualTo(expected.setScale(2, RoundingMode.HALF_UP))
     }
 

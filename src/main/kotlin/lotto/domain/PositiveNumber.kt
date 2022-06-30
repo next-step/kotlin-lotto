@@ -6,6 +6,7 @@ import lotto.Const
 value class PositiveNumber(
     private val number: Int
 ) {
+    constructor(value: String) : this(requireNotNull(value.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR_MSG })
     init {
         require(number >= 0) { "0이상이 아닌 값이 들어있습니다." }
     }
@@ -17,13 +18,6 @@ value class PositiveNumber(
 
     operator fun minus(lottoCount: PositiveNumber): PositiveNumber =
         PositiveNumber(number.minus(lottoCount.number))
-
-    companion object {
-        fun of(value: String): PositiveNumber {
-            val result = requireNotNull(value.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR_MSG }
-            return PositiveNumber(result)
-        }
-    }
 
     infix fun <T> times(action: () -> T): List<T> =
         (1..number).map { action() }

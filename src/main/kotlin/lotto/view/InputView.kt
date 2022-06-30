@@ -2,8 +2,10 @@ package lotto.view
 
 import lotto.Const
 import lotto.domain.LottoNumber
+import lotto.domain.LottoPurchase
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
+import lotto.domain.Money
 import lotto.domain.PositiveNumber
 import lotto.domain.WinningLotto
 
@@ -16,14 +18,16 @@ object InputView {
 
     private const val MANUAL_LOTTO_COUNT_IS_OVER_PRICE = "구매할 수 있는 장수를 초과했습니다."
 
-    fun getPrice(): PositiveNumber {
+    fun getPrice(): Money {
         val inputStr = printMsgAndReadValue(GET_PRICE_MSG)
-        return PositiveNumber.of(inputStr)
+        val money = Money(inputStr)
+        require(money >= LottoPurchase.LOTTO_PRICE) { Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_PRICE_ERROR_MSG }
+        return money
     }
 
     fun getManualLottoTicketCount(lottoTicketCount: PositiveNumber): PositiveNumber {
         val inputStr = printMsgAndReadValue(GET_MANUAL_LOTTO_COUNT)
-        val manualLottoCount = PositiveNumber.of(inputStr)
+        val manualLottoCount = PositiveNumber(inputStr)
         require(manualLottoCount <= lottoTicketCount) { MANUAL_LOTTO_COUNT_IS_OVER_PRICE }
         return manualLottoCount
     }

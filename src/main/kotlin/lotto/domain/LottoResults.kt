@@ -8,8 +8,8 @@ data class LottoResults(
 ) {
     fun get() = lottoResults.toList()
 
-    fun rateOfResult(lottoPrice: LottoPrice): BigDecimal {
-        val realLottoPrice = lottoPrice / LottoPurchase.LOTTO_PRICE * LottoPurchase.LOTTO_PRICE
+    fun rateOfResult(money: Money): BigDecimal {
+        val realLottoPrice = money / LottoPurchase.LOTTO_PRICE * LottoPurchase.LOTTO_PRICE
         return BigDecimal(sumOfResult()).divide(BigDecimal(realLottoPrice), 2, RoundingMode.HALF_UP)
     }
 

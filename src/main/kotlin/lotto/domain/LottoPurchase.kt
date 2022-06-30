@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoPurchase {
-    fun getLottoCount(price: LottoPrice): PositiveNumber = PositiveNumber(price / LOTTO_PRICE)
+    fun getLottoCount(money: Money): PositiveNumber = PositiveNumber(money / LOTTO_PRICE)
 
     fun getLottoTickets(count: PositiveNumber): LottoTickets {
         val lottoTickets = count.times {
