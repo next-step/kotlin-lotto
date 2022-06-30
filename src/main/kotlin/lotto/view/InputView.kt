@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.Const
-import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.PositiveNumber
@@ -43,8 +42,8 @@ object InputView {
             val lottoTicket = LottoTicket(
                 inputStr.split(",")
                     .map {
-                        LottoNumber(requireNotNull(it.trim().toIntOrNull()) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG })
-                    }.toSet()
+                        requireNotNull(it.trim().toIntOrNull()) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
+                    }
             )
             lottoTickets.add(lottoTicket)
         }

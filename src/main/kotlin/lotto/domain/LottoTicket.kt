@@ -5,6 +5,8 @@ import lotto.Const
 class LottoTicket(
     private val value: Set<LottoNumber>
 ) {
+    constructor(lottoNumbers: List<Int>) : this(lottoNumbers.map { LottoNumber(it) }.toSet())
+
     init {
         require(value.size == LOTTO_NUMBER_COUNT) { Const.ErrorMsg.LOTTO_TICKET_NUMBER_IS_NOT_6_ERROR_MSG }
     }
@@ -39,8 +41,6 @@ class LottoTicket(
             val lottoNumbers = (LottoNumber.MIN_LOTTO_NUM..LottoNumber.MAX_LOTTO_NUM)
                 .shuffled()
                 .take(6)
-                .map(::LottoNumber)
-                .toSet()
             return LottoTicket(lottoNumbers)
         }
     }

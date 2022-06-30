@@ -43,5 +43,5 @@ internal class LottoTicketsTest {
     }
 
     private fun LottoTicket(vararg numbers: Int) =
-        LottoTicket(numbers.map { LottoNumber(it) }.toSet())
+        LottoTicket(numbers.toList())
 }

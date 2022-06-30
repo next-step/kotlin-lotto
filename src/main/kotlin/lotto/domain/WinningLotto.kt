@@ -12,7 +12,7 @@ data class WinningLotto(
     }
 
     constructor(winningNumbers: List<Int>, bonusNumber: Int) : this(
-        LottoTicket(winningNumbers.map { LottoNumber(it) }.toSet()),
+        LottoTicket(winningNumbers),
         LottoNumber(bonusNumber)
     )
 }

@@ -10,9 +10,9 @@ data class LottoTickets(
 
     fun compareNumber(winningLotto: WinningLotto): LottoResults =
         lottoTickets.asSequence()
-            .mapNotNull { lottoTicket ->
-                lottoTicket.toLottoPrize(winningLotto)
-            }.groupingBy { it }.eachCount()
-            .map { (LottoPrize, count) -> LottoResult(LottoPrize, PositiveNumber(count)) }
+            .mapNotNull { it.toLottoPrize(winningLotto) }
+            .groupingBy { it }
+            .eachCount()
+            .map(::LottoResult)
             .toLottoResults()
 }
