@@ -21,13 +21,6 @@ internal class PositiveNumberTest {
     }
 
     @Test
-    internal fun `toString()을 하면 Int 값의 toString()과 같다`() {
-        val expect = 1
-        val actual = PositiveNumber(expect)
-        assertThat(actual.toString()).isEqualTo(expect.toString())
-    }
-
-    @Test
     internal fun `Int처럼 두 수의 비교가 가능하다`() {
         val actual = PositiveNumber(3) < PositiveNumber(5)
         assertThat(actual).isTrue

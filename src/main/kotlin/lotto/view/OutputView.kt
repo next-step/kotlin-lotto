@@ -44,15 +44,19 @@ object OutputView {
     }
 
     private fun winningLottoResults(lottoResults: LottoResults): String = buildString {
-        LottoPrize.values().sortedByDescending { it.rank }.forEach { lottoPrize ->
-            val lottoCount = lottoResults.get()
-                .firstOrNull { it.lottoPrize == lottoPrize }
-                ?.matchedLottoCount ?: 0
-            if (lottoPrize == LottoPrize.SECOND) {
-                appendLine("${lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${lottoPrize.prizeMoney}원) - ${lottoCount}개")
-            } else {
-                appendLine("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney}원) - ${lottoCount}개")
+        LottoPrize.values()
+            .sortedByDescending { it.rank }
+            .forEach { lottoPrize ->
+                val matchedCount = lottoResults.winningLottoCount(lottoPrize)
+                appendLine(resultToString(lottoPrize, matchedCount))
             }
+    }
+
+    private fun resultToString(lottoPrize: LottoPrize, matchedCount: Int) = buildString {
+        if (lottoPrize == LottoPrize.SECOND) {
+            appendLine("${lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
+        } else {
+            appendLine("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
         }
     }
 }

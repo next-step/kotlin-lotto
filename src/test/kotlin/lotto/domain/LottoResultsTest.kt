@@ -1,6 +1,7 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.math.BigDecimal
@@ -26,5 +27,20 @@ internal class LottoResultsTest {
         ).toLottoResults()
         val result = lottoResult.rateOfResult(LottoPrice.of(price))
         assertThat(result).isEqualTo(expected.setScale(2, RoundingMode.HALF_UP))
+    }
+
+    @Test
+    internal fun `등수에 일치하는 로또티켓의 개수 반환`() {
+        val lottoResult = listOf(
+            LottoResult(LottoPrize.FOURTH, PositiveNumber(1)),
+            LottoResult(LottoPrize.FIFTH, PositiveNumber(2)),
+            LottoResult(LottoPrize.SECOND, PositiveNumber(1))
+        ).toLottoResults()
+
+        assertThat(lottoResult.winningLottoCount(LottoPrize.FIRST)).isEqualTo(0)
+        assertThat(lottoResult.winningLottoCount(LottoPrize.SECOND)).isEqualTo(1)
+        assertThat(lottoResult.winningLottoCount(LottoPrize.THIRD)).isEqualTo(0)
+        assertThat(lottoResult.winningLottoCount(LottoPrize.FOURTH)).isEqualTo(1)
+        assertThat(lottoResult.winningLottoCount(LottoPrize.FIFTH)).isEqualTo(2)
     }
 }

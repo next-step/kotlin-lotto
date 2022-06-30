@@ -12,10 +12,6 @@ value class PositiveNumber(
 
     fun toInt() = number
 
-    override fun toString(): String {
-        return number.toString()
-    }
-
     operator fun compareTo(lottoCount: PositiveNumber): Int =
         number.compareTo(lottoCount.number)
 
