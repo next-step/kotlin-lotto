@@ -7,15 +7,15 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val lottoPrice = LottoPrice(InputView.getPrice())
+    val lottoPrice = inputErrorCatch { LottoPrice(InputView.getPrice()) }
 
     // 구입금액에 따른 로또 개수 반환
     val lottoPurchase = LottoPurchase()
     val allLottoCount = lottoPurchase.getLottoCount(lottoPrice)
 
     // 수동 로또 장수 입력받기
-    val manualLottoCount = InputView.getManualLottoTicketCount(allLottoCount)
-    val manualLottoTickets = InputView.getManualLottoNumbers(manualLottoCount)
+    val manualLottoCount = inputErrorCatch { InputView.getManualLottoTicketCount(allLottoCount) }
+    val manualLottoTickets = inputErrorCatch { InputView.getManualLottoNumbers(manualLottoCount) }
 
     val lottoTicketCount = LottoTicketCount(manualLottoCount, allLottoCount - manualLottoCount)
 
@@ -25,7 +25,7 @@ fun main() {
     OutputView.resultPurchaseLotto(lottoTicketCount, lottoTickets)
 
     // 지난주 로또 당첨번호 받기
-    val winningLotto = InputView.getLstWinningLotto()
+    val winningLotto = inputErrorCatch { InputView.getLstWinningLotto() }
 
     // 당첨통계
     val lottoResults = lottoTickets.compareNumber(winningLotto)
@@ -33,4 +33,11 @@ fun main() {
     val rateResult = lottoResults.rateOfResult(lottoPrice)
 
     OutputView.winningResult(lottoResults, rateResult)
+}
+
+fun <T> inputErrorCatch(action: () -> T): T {
+    while (true) {
+        runCatching { return action() }
+            .onFailure { println("다시 입력해주세요.") }
+    }
 }

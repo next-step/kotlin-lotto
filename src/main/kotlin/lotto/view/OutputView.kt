@@ -9,7 +9,7 @@ import java.math.BigDecimal
 
 object OutputView {
     fun resultPurchaseLotto(lottoTicketCount: LottoTicketCount, lottoTickets: LottoTickets) {
-        println("수동으로 ${lottoTicketCount.manualTicketCount}장, 자동으로 ${lottoTicketCount.autoTicketCount}장을 구매했습니다.")
+        println("수동으로 ${lottoTicketCount.manualTicketCount.toInt()}장, 자동으로 ${lottoTicketCount.autoTicketCount.toInt()}장을 구매했습니다.")
         resultLottoTickets(lottoTickets)
     }
 
@@ -54,9 +54,9 @@ object OutputView {
 
     private fun resultToString(lottoPrize: LottoPrize, matchedCount: Int) = buildString {
         if (lottoPrize == LottoPrize.SECOND) {
-            appendLine("${lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
+            append("${lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
         } else {
-            appendLine("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
+            append("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
         }
     }
 }

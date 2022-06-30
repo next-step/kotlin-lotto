@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.Const
+import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
 import lotto.domain.PositiveNumber
@@ -21,16 +22,10 @@ object InputView {
     }
 
     fun getManualLottoTicketCount(lottoTicketCount: PositiveNumber): PositiveNumber {
-        while (true) {
-            kotlin.runCatching {
-                val inputStr = printMsgAndReadValue(GET_MANUAL_LOTTO_COUNT)
-                val manualLottoCount = PositiveNumber.of(inputStr)
-                require(manualLottoCount <= lottoTicketCount) { MANUAL_LOTTO_COUNT_IS_OVER_PRICE }
-                return manualLottoCount
-            }.onFailure {
-                println("다시 입력해주세요.")
-            }
-        }
+        val inputStr = printMsgAndReadValue(GET_MANUAL_LOTTO_COUNT)
+        val manualLottoCount = PositiveNumber.of(inputStr)
+        require(manualLottoCount <= lottoTicketCount) { MANUAL_LOTTO_COUNT_IS_OVER_PRICE }
+        return manualLottoCount
     }
 
     fun getManualLottoNumbers(lottoTicketCount: PositiveNumber): LottoTickets {
@@ -52,10 +47,10 @@ object InputView {
     }
 
     fun getLstWinningLotto(): WinningLotto {
-        val lastWinningNumbers = getLastWinningNumbers()
-        val bonusNumber = getBonusNumber()
+        val lottoTicket = LottoTicket(getLastWinningNumbers())
+        val bonusNumber = LottoNumber(getBonusNumber())
 
-        return WinningLotto(lastWinningNumbers, bonusNumber)
+        return WinningLotto(lottoTicket, bonusNumber)
     }
 
     private fun getLastWinningNumbers(): List<Int> {
