@@ -2,8 +2,11 @@ package lotto.domain
 
 class Lotto(val numbers: List<LottoNumber>) {
 
+    constructor(vararg numbers: Int) : this(numbers.map(LottoNumber::of).toList())
+
     init {
-        require(numbers.size == LOTTO_NUMBERS) { "Lotto must have 6 numbers. Input: [${numbers.size}] numbers" }
+        require(numbers.size == LOTTO_NUMBERS) { "Lotto must have $LOTTO_NUMBERS numbers. Input: [${numbers.size}] numbers" }
+        require(numbers.toSet().size == 6) { "Duplicate number exists. $numbers" }
     }
 
     fun countOfMatch(lotto: Lotto): Int {
