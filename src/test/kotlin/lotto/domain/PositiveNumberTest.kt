@@ -31,4 +31,14 @@ internal class PositiveNumberTest {
         val actual = PositiveNumber(5) - PositiveNumber(3)
         assertThat(actual).isEqualTo(PositiveNumber(2))
     }
+
+    @Test
+    internal fun `action을 positiveNumber만큼 반복하여 수행한 뒤 리스트로 반환한다`() {
+        val lottoTickets = PositiveNumber(3).times {
+            LottoTicket.new()
+        }
+
+        assertThat(lottoTickets).hasSize(3)
+        assertThat(lottoTickets.first()).isInstanceOf(LottoTicket::class.java)
+    }
 }

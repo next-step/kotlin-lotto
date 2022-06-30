@@ -4,11 +4,10 @@ class LottoPurchase {
     fun getLottoCount(price: LottoPrice): PositiveNumber = PositiveNumber(price / LOTTO_PRICE)
 
     fun getLottoTickets(count: PositiveNumber): LottoTickets {
-        val lottoTickets = mutableListOf<LottoTicket>()
-        repeat(count.toInt()) {
-            lottoTickets.add(LottoTicket.new())
+        val lottoTickets = count.times {
+            LottoTicket.new()
         }
-        return LottoTickets(lottoTickets.toList())
+        return LottoTickets(lottoTickets)
     }
 
     companion object {

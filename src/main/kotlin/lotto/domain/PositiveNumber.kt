@@ -24,4 +24,7 @@ value class PositiveNumber(
             return PositiveNumber(result)
         }
     }
+
+    infix fun <T> times(action: () -> T): List<T> =
+        (1..number).map { action() }
 }
