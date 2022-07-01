@@ -1,50 +1,42 @@
 package lotto
 
-import lotto.domain.LottoPrice
 import lotto.domain.LottoPurchase
-import lotto.domain.LottoScore
-import lotto.domain.WinningNumber
+import lotto.domain.LottoTicketCount
 import lotto.view.InputView
 import lotto.view.OutputView
-import java.lang.IllegalArgumentException
 
 fun main() {
-    val inputView = InputView()
-    val outputView = OutputView()
-
-    // 구입금액 입력받기
-    val price = inputView.getPrice()
-
-    // 구입금액 validation
-    val lottoPurchase = LottoPurchase()
-    val lottoPrice = LottoPrice(price)
+    val money = inputErrorCatch { InputView.getPrice() }
 
     // 구입금액에 따른 로또 개수 반환
-    val lottoCount = lottoPurchase.getLottoCount(lottoPrice)
-    outputView.resultPurchaseLotto(lottoCount)
+    val lottoPurchase = LottoPurchase()
+    val allLottoCount = lottoPurchase.getLottoCount(money)
+
+    // 수동 로또 장수 입력받기
+    val manualLottoCount = inputErrorCatch { InputView.getManualLottoTicketCount(allLottoCount) }
+    val manualLottoTickets = inputErrorCatch { InputView.getManualLottoNumbers(manualLottoCount) }
+
+    val lottoTicketCount = LottoTicketCount(manualLottoCount, allLottoCount - manualLottoCount)
 
     // 로또 개수에 맞추어 로또 번호 반환
-    val lottoTickets = lottoPurchase.getLottoTickets(lottoCount)
-    outputView.resultLottoTickets(lottoTickets)
+    val autoLottoTickets = lottoPurchase.getLottoTickets(lottoTicketCount.autoTicketCount)
+    val lottoTickets = manualLottoTickets + autoLottoTickets
+    OutputView.resultPurchaseLotto(lottoTicketCount, lottoTickets)
 
     // 지난주 로또 당첨번호 받기
-    val winningNumber = WinningNumber()
-    val lastWinningNumbers = inputView.getLastWinningNumbers()
-    val lastWinningTicket = try {
-        winningNumber.winningNumberToLottoTicket(lastWinningNumbers)
-    } catch (e: IllegalArgumentException) {
-        print(Const.ErrorMsg.INPUT_VALUE_CANNOT_CONVERSE_LOTTO_WINNING_NUMBER_ERROR_MSG)
-        return
-    }
-
-    val bonusNumber = inputView.getBonusNumber()
-    winningNumber.validBonusNumber(bonusNumber, lastWinningTicket)
+    val winningLotto = inputErrorCatch { InputView.getLstWinningLotto() }
 
     // 당첨통계
-    val lottoScore = LottoScore()
-    val lottoResults = lottoScore.compareNumber(lastWinningTicket, bonusNumber, lottoTickets)
+    val lottoResults = lottoTickets.compareNumber(winningLotto)
     // 수익률
-    val rateResult = lottoScore.rateOfResult(lottoPrice, lottoResults)
+    val rateResult = lottoResults.rateOfResult(money)
 
-    outputView.winningResult(lottoResults, rateResult)
+    OutputView.winningResult(lottoResults, rateResult)
+}
+
+fun <T> inputErrorCatch(action: () -> T): T {
+    while (true) {
+        runCatching { return action() }
+            .onFailure { println("다시 입력해주세요.") }
+    }
 }

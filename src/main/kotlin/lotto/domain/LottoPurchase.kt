@@ -1,22 +1,13 @@
 package lotto.domain
 
-import lotto.Const
-
 class LottoPurchase {
-    fun getMoney(money: String?): LottoPrice {
-        require(!money.isNullOrBlank()) { Const.ErrorMsg.INPUT_VALUE_IS_NULL_ERROR_MSG }
-        val moneyToInt = requireNotNull(money.toIntOrNull()) { Const.ErrorMsg.INPUT_VALUE_IS_NOT_INT_ERROR_MSG }
-        return LottoPrice(moneyToInt)
-    }
+    fun getLottoCount(money: Money): PositiveNumber = PositiveNumber(money / LOTTO_PRICE)
 
-    fun getLottoCount(price: LottoPrice): Int = price / 1000
-
-    fun getLottoTickets(count: Int): List<LottoTicket> {
-        val lottoTickets = mutableListOf<LottoTicket>()
-        repeat(count) {
-            lottoTickets.add(LottoTicket.new())
+    fun getLottoTickets(count: PositiveNumber): LottoTickets {
+        val lottoTickets = count.times {
+            LottoTicket.new()
         }
-        return lottoTickets.toList()
+        return LottoTickets(lottoTickets)
     }
 
     companion object {

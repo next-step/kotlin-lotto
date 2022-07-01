@@ -1,18 +1,21 @@
 package lotto.view
 
 import lotto.domain.LottoPrize
-import lotto.domain.LottoResult
+import lotto.domain.LottoResults
 import lotto.domain.LottoTicket
+import lotto.domain.LottoTicketCount
+import lotto.domain.LottoTickets
 import java.math.BigDecimal
 
-class OutputView {
-    fun resultPurchaseLotto(lottoCount: Int) {
-        println("${lottoCount}개를 구매했습니다.")
+object OutputView {
+    fun resultPurchaseLotto(lottoTicketCount: LottoTicketCount, lottoTickets: LottoTickets) {
+        println("수동으로 ${lottoTicketCount.manualTicketCount.toInt()}장, 자동으로 ${lottoTicketCount.autoTicketCount.toInt()}장을 구매했습니다.")
+        resultLottoTickets(lottoTickets)
     }
 
-    fun resultLottoTickets(lottoTickets: List<LottoTicket>) {
+    private fun resultLottoTickets(lottoTickets: LottoTickets) {
         val result = buildString {
-            lottoTickets.forEach {
+            lottoTickets.get().forEach {
                 appendLine(lottoTicketToString(it))
             }
         }
@@ -30,7 +33,7 @@ class OutputView {
         append("]")
     }
 
-    fun winningResult(lottoResults: List<LottoResult>, rateResult: BigDecimal) {
+    fun winningResult(lottoResults: LottoResults, rateResult: BigDecimal) {
         val result = buildString {
             appendLine("\n당첨 통계")
             appendLine("---------")
@@ -40,14 +43,20 @@ class OutputView {
         print(result)
     }
 
-    private fun winningLottoResults(lottoResults: List<LottoResult>): String = buildString {
-        lottoResults.sortedBy { it.lottoPrize.rank }
-            .forEach {
-                if (it.lottoPrize == LottoPrize.SECOND) {
-                    appendLine("${it.lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${it.lottoPrize.prizeMoney}원) - ${it.lottoCount}개")
-                } else {
-                    appendLine("${it.lottoPrize.matchCount}개 일치 (${it.lottoPrize.prizeMoney}원) - ${it.lottoCount}개")
-                }
+    private fun winningLottoResults(lottoResults: LottoResults): String = buildString {
+        LottoPrize.values()
+            .sortedByDescending { it.rank }
+            .forEach { lottoPrize ->
+                val matchedCount = lottoResults.winningLottoCount(lottoPrize)
+                appendLine(resultToString(lottoPrize, matchedCount))
             }
+    }
+
+    private fun resultToString(lottoPrize: LottoPrize, matchedCount: Int) = buildString {
+        if (lottoPrize == LottoPrize.SECOND) {
+            append("${lottoPrize.matchCount}개 일치, 보너스 볼 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
+        } else {
+            append("${lottoPrize.matchCount}개 일치 (${lottoPrize.prizeMoney}원) - ${matchedCount}개")
+        }
     }
 }

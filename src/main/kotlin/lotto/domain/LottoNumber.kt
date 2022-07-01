@@ -4,7 +4,7 @@ import lotto.Const
 
 data class LottoNumber(
     private val value: Int
-) {
+) : Comparable<LottoNumber> {
     init {
         require(value in MIN_LOTTO_NUM..MAX_LOTTO_NUM) { Const.ErrorMsg.CANNOT_CONVERSE_LOTTO_NUMBER_ERROR_MSG }
     }
@@ -22,16 +22,10 @@ data class LottoNumber(
         return value.hashCode()
     }
 
-    operator fun compareTo(other: LottoNumber): Int = this.value.compareTo(other.value)
+    override operator fun compareTo(other: LottoNumber): Int = this.value.compareTo(other.value)
 
     companion object {
         const val MIN_LOTTO_NUM = 1
         const val MAX_LOTTO_NUM = 45
-    }
-}
-
-class CompareLottoNumbers {
-    companion object : Comparator<LottoNumber> {
-        override fun compare(a: LottoNumber, b: LottoNumber): Int = a.compareTo(b)
     }
 }
