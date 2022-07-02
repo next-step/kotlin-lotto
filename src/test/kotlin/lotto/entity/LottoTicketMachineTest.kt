@@ -10,7 +10,7 @@ internal class LottoTicketMachineTest {
     @Test
     fun `3200원을 넣으면 티켓이 3장 나온다`() {
         // when
-        val tickets = LottoTicketMachine.printMaxTicket(3200)
+        val tickets = LottoTicketMachine.printMaxTicket(Wallet(3200)).tickets
 
         // then
         Assertions.assertThat(tickets.size).isEqualTo(3)
@@ -19,7 +19,7 @@ internal class LottoTicketMachineTest {
     @Test
     fun `3200원을 넣으면 티켓이 4장 나오지 않는다`() {
         // when
-        val tickets = LottoTicketMachine.printMaxTicket(3200)
+        val tickets = LottoTicketMachine.printMaxTicket(Wallet(3200)).tickets
 
         // then
         Assertions.assertThat(tickets.size).isNotEqualTo(4)
