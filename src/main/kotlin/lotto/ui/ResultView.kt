@@ -1,12 +1,13 @@
 package lotto.ui
 
-import lotto.entity.LottoTicket
 import lotto.entity.Rank
+import lotto.entity.Wallet
 import lotto.entity.WinningInfo
 
 class ResultView {
-    fun showLottoTickets(tickets: List<LottoTicket>) {
-        println("${tickets.size}개를 구매했습니다.")
+    fun showLottoTickets(wallet: Wallet, numberOfManualTicket: Int) {
+        val tickets = wallet.tickets
+        println("수동으로 $numberOfManualTicket 장, 자동으로 ${tickets.size - numberOfManualTicket}개를 구매했습니다.")
         tickets.forEach { ticket ->
             println(
                 ticket.numbers
