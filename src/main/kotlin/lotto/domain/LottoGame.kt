@@ -19,10 +19,17 @@ class LottoGame(
     }
 
     private fun lottoTickets(): LottoTickets {
-        val money = Money(inputView.inputMoney())
+        val lottoShop = LottoShop()
+        var money = Money(inputView.inputMoney())
         val buyManualLottoTicketCount = inputView.inputManualLottoTicketCount()
-        val manualNumbersList = LottoNumbers.createWithSortByNumbersList(inputView.inputManualLottoTicketNumbers(buyManualLottoTicketCount))
-        return LottoShop().sellLottoTickets(money, manualNumbersList)
+        val manualNumbersList =
+            LottoNumbers.createWithSortByNumbersList(inputView.inputManualLottoTicketNumbers(buyManualLottoTicketCount))
+
+        while (lottoShop.canNotPurchasedManualLottoTicketsMoney(money, manualNumbersList.count())) {
+            money += Money(inputView.inputAdditionalMoney())
+        }
+
+        return lottoShop.sellLottoTickets(money, manualNumbersList)
     }
 
     private fun winningTicket(): WinningTicket {

@@ -5,7 +5,7 @@ import lotto.domain.WinningResult
 import lotto.domain.WinningTicket
 
 class LottoTickets(
-    val values: List<LottoTicket>,
+    private val values: List<LottoTicket>,
 ) {
     fun totalMatchResults(winningTicket: WinningTicket): WinningResult {
         val winningAmountMap = WinningAmount.values()
@@ -20,7 +20,7 @@ class LottoTickets(
         return WinningResult(winningAmountMap)
     }
 
-    fun combine(other: LottoTickets): LottoTickets = LottoTickets(this.values + other.values)
+    operator fun plus(other: LottoTickets): LottoTickets = LottoTickets(this.values + other.values)
 
     val autoTickets: List<LottoTicket> = values.filter { it.isAuto }
 

@@ -24,6 +24,10 @@ data class Money(
         return this.value.compareTo(other.value)
     }
 
+    operator fun plus(other: Money): Money {
+        return Money(this.value + other.value)
+    }
+
     operator fun minus(other: Money): Money {
         return Money(this.value - other.value)
     }

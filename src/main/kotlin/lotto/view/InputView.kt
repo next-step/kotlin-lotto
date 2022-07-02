@@ -30,6 +30,11 @@ class InputView {
         return readln().toInt()
     }
 
+    fun inputAdditionalMoney(): BigDecimal {
+        println("수동 로또 구매 가능 금액이 부족합니다. 금액을 더 입력해주세요.")
+        return readln().toBigDecimal()
+    }
+
     companion object {
         private const val DELIMITER = ", "
     }
