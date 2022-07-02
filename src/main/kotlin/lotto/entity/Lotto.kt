@@ -5,10 +5,14 @@ import lotto.ui.ResultView
 
 class Lotto {
     fun play() {
-        val player: Person = PersonImpl(Wallet(InputView().getPurchaseAmount()))
-        val tickets = player.purchase()
-        ResultView().showLottoTickets(tickets)
-        val ranks = MatcherImpl(LottoNumber(InputView().getWinningNumbers(), InputView().getBonusNumber())).countTicketRanks(tickets)
+        val player = PersonImpl(Wallet(InputView().getPurchaseAmount()))
+        val numberOfManualTicket = InputView().getNumberOfManualTickets()
+        val manualMarkedTickets = InputView().getManualTicketNumbers(numberOfManualTicket)
+        val markedWallet = player.mark(numberOfManualTicket, manualMarkedTickets)
+        val manualPlayer = PersonImpl(markedWallet)
+        val autoMarkedPlayer = PersonImpl(manualPlayer.purchase())
+        ResultView().showLottoTickets(autoMarkedPlayer.wallet, numberOfManualTicket)
+        val ranks = MatcherImpl(LottoNumber(InputView().getWinningNumbers(), InputView().getBonusNumber())).countTicketRanks(autoMarkedPlayer.wallet)
         ResultView().showMatchResult(player.money(), ranks)
     }
 }

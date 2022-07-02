@@ -6,10 +6,12 @@ import lotto.entity.LottoTicket.Companion.MAXIMUM_LOTTO_NUMBER
 import lotto.entity.LottoTicket.Companion.MINIMUM_LOTTO_NUMBER
 
 object LottoTicketMachine {
-    fun printMaxTicket(money: Int): List<LottoTicket> {
-        return mutableListOf<LottoTicket>().apply {
-            repeat(money / LOTTO_PRICE) { this.add(print()) }
-        }.toList()
+    fun printMaxTicket(wallet: Wallet): Wallet {
+        val tickets = wallet.tickets.toMutableList()
+        repeat(wallet.money / LOTTO_PRICE) {
+            tickets.add(print())
+        }
+        return Wallet(wallet.money % LOTTO_PRICE, tickets.toList())
     }
 
     fun print(numbers: List<Int> = getRandomNumber()): LottoTicket {
