@@ -3,7 +3,7 @@ package lotto.domain.lottoticket
 import lotto.domain.Money
 import java.math.BigDecimal
 
-class LottoTicket constructor(
+class LottoTicket private constructor(
     val lottoNumbers: LottoNumbers,
     val isAuto: Boolean
 ) {
