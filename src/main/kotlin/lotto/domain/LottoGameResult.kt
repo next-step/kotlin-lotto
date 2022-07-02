@@ -1,8 +1,8 @@
 package lotto.domain
 
 data class LottoGameResult(
-    val ranks: List<Rank>,
+    val rankMap: Map<Rank, Int>,
     val profit: Double
 ) {
-    val rankMap: Map<Rank, Int> = ranks.groupingBy { it }.eachCount()
+    constructor(ranks: List<Rank>, profit: Double) : this(ranks.groupingBy { it }.eachCount(), profit)
 }

@@ -1,22 +1,26 @@
 package lotto.domain
 
 class LottoGame(
-    lottos: List<Lotto>,
-    private val winningLotto: Lotto,
-    private val bonusNumber: LottoNumber
+    private val lottoPaper: LottoPaper,
+    private val winningLotto: WinningLotto
 ) {
 
-    init {
-        require(bonusNumber !in winningLotto.numbers) { "Bonus number[$bonusNumber] must not be in winning numbers." }
-    }
+    constructor(
+        manualLottoPaper: LottoPaper,
+        autoLottoPaper: LottoPaper,
+        winningLotto: WinningLotto
+    ) : this(
+        lottoPaper = LottoPaper(manualLottoPaper.lottos + autoLottoPaper.lottos),
+        winningLotto = winningLotto
+    )
 
-    private val ranks = lottos.map {
-        Rank.of(countOfMatch = it.countOfMatch(winningLotto), matchedBonus = bonusNumber in it.numbers)
+    private val ranks = lottoPaper.lottos.map {
+        Rank.of(countOfMatch = it.countOfMatch(winningLotto.lotto), matchedBonus = winningLotto.matchedBonus(it))
     }
 
     private val prize = ranks.sumOf { it.prize }
 
-    val profit: Double = prize / (lottos.size * LOTTO_PRICE)
+    val profit: Double = prize / (lottoPaper.size * LOTTO_PRICE)
 
     val result = LottoGameResult(ranks, profit)
 

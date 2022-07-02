@@ -15,5 +15,9 @@ class Lotto(val numbers: List<LottoNumber>) {
 
     companion object {
         const val LOTTO_NUMBERS = 6
+
+        fun random(): Lotto {
+            return Lotto(LottoNumber.numbers.shuffled().take(Lotto.LOTTO_NUMBERS).sortedBy { it.value })
+        }
     }
 }

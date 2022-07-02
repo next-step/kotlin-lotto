@@ -2,9 +2,9 @@ package lotto.view
 
 import lotto.domain.Lotto
 
-data class LottoView(val lotto: Lotto) {
+object LottoView {
 
-    fun print() {
+    fun print(lotto: Lotto) {
         println("[${lotto.numbers.joinToString { it.value.toString() }}]")
     }
 }
