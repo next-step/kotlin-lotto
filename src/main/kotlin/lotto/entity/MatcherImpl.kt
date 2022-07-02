@@ -14,7 +14,8 @@ class MatcherImpl(private val lottoNumber: LottoNumber) : Matcher {
         return tickets.map { ticket -> matchOneTicket(ticket) }
     }
 
-    override fun countTicketRanks(tickets: List<LottoTicket>): WinningInfo {
+    override fun countTicketRanks(wallet: Wallet): WinningInfo {
+        val tickets = wallet.tickets
         val ranks = matchAllTickets(tickets)
         val countOfRanks = mutableMapOf(
             Rank.FIFTH to 0,
