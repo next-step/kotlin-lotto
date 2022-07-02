@@ -1,7 +1,7 @@
 package lotto.domain
 
 object LottoRepository {
-    val lottos = mutableListOf<Lotto>()
+    private val lottos = mutableListOf<Lotto>()
 
     fun saveAll(lottos: List<Lotto>) = this.lottos.addAll(lottos)
 

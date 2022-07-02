@@ -10,8 +10,8 @@ fun main() {
 
     ResultView.printPurchaseLottos(purchaseLottos)
 
-    val inputWinningLottoNumbers = InputView.inputWinningLotto()
-    val calculateResult = LottoService.calculateResult(inputWinningLottoNumbers)
+    val (winningNumbers, bonusNumber) = InputView.inputWinningLotto()
+    val calculateResult = LottoService.calculateResult(winningNumbers, bonusNumber)
 
     ResultView.printResult(calculateResult)
 }

@@ -7,7 +7,7 @@ object LottoFactory {
         return List(lottoCount) { Lotto.create(lottoNumberGenerator.generate()) }
     }
 
-    fun createWinningLotto(winningLottoNumbers: List<Int>): WinningLotto {
-        return WinningLotto(winningLottoNumbers.map { LottoNumber(it) })
+    fun createWinningLotto(winningLottoNumbers: List<Int>, bonusNumber: Int): WinningLotto {
+        return WinningLotto(winningLottoNumbers.map { LottoNumber(it) }, LottoNumber(bonusNumber))
     }
 }

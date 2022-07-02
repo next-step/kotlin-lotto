@@ -3,7 +3,7 @@ package lotto.domain
 private fun Int.isValidLottoNumber() = this in LottoNumber.START_LOTTO_NUMBER..LottoNumber.END_LOTTO_NUMBER
 
 @JvmInline
-value class LottoNumber constructor(
+value class LottoNumber(
     val number: Int
 ) {
     init {

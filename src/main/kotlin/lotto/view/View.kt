@@ -14,11 +14,18 @@ object InputView {
         return inputMoney.toIntOrNull() ?: throw IllegalArgumentException("올바른 금액을 입력해 주세요. 입력: $inputMoney")
     }
 
-    fun inputWinningLotto(): List<Int> {
+    fun inputWinningLotto(): Pair<List<Int>, Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-
-        return readln().split(WINNING_LOTTO_DELIMITER)
+        val winningNumbers = readln().split(WINNING_LOTTO_DELIMITER)
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("당첨 번호는 숫자만 입력하실 수 있습니다. 입력: $it") }
+
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readln()
+        return Pair(
+            winningNumbers,
+            bonusNumber.trim().toIntOrNull()
+                ?: throw IllegalArgumentException("당첨 번호는 숫자만 입력하실 수 있습니다. 입력: $bonusNumber")
+        )
     }
 }
 
@@ -32,10 +39,12 @@ object ResultView {
     fun printResult(calculateResult: LottoResultResponse) {
         println("당첨 통계")
         println("---------")
-        (3..6).forEach {
-            println("${it}개 일치 (${LottoRank.of(it).prize}원) - ${calculateResult.ranks.count { rank -> rank.matchCount == it }}개")
+        LottoRank.values().forEach {
+            if (it != LottoRank.DEFAULT) {
+                println("${it.matchCount}개 일치${if (it.needBonusMatch) ", 보너스 볼 일치" else ""} (${it.prize}원) - ${calculateResult.ranks.count { rank -> rank.matchCount == it.matchCount && rank.needBonusMatch == it.needBonusMatch }}개")
+            }
         }
 
-        println("총 수익률은 ${calculateResult.profit}입니다. (기준이 1 이기 때문에 결과적으로 ${ if (calculateResult.profit >= 1) "이득이" else "손해" } 라는 의미임)")
+        println("총 수익률은 ${calculateResult.profit}입니다. (기준이 1 이기 때문에 결과적으로 ${if (calculateResult.profit >= 1) "이득이" else "손해"} 라는 의미임)")
     }
 }
