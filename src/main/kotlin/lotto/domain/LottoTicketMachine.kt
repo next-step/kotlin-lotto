@@ -6,11 +6,7 @@ import lotto.domain.lottoticket.LottoTicket
 import lotto.domain.lottoticket.LottoTickets
 
 class LottoTicketMachine {
-    fun createManualTicket(manualNumbers: List<Int>): LottoTicket {
-        val lottoNumberSet = manualNumbers.map { LottoNumber.from(it) }.toSet()
-        val lottoNumbers = LottoNumbers.createWithSort(values = lottoNumberSet)
-        return LottoTicket.manual(lottoNumbers)
-    }
+    fun createManualTicket(manualNumbers: LottoNumbers): LottoTicket = LottoTicket.manual(manualNumbers)
 
     fun createAutoTickets(count: Int): LottoTickets = LottoTickets(List(count) { createAutoTicket() })
 

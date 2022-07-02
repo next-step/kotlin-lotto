@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.lottoticket.LottoNumbers
 import lotto.domain.lottoticket.LottoTickets
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -20,7 +21,7 @@ class LottoGame(
     private fun lottoTickets(): LottoTickets {
         val money = Money(inputView.inputMoney())
         val buyManualLottoTicketCount = inputView.inputManualLottoTicketCount()
-        val manualNumbersList = inputView.inputManualLottoTicketNumbers(buyManualLottoTicketCount)
+        val manualNumbersList = LottoNumbers.createWithSortByNumbersList(inputView.inputManualLottoTicketNumbers(buyManualLottoTicketCount))
         return LottoShop().sellLottoTickets(money, manualNumbersList)
     }
 

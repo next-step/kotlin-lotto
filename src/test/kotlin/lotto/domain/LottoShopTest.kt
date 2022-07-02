@@ -21,7 +21,9 @@ internal class LottoShopTest : FreeSpec({
         ).forEach { (manualTicketCount, autoTicketCount, totalTicketCount) ->
             "수동을 $manualTicketCount 개 사면 자동을 $autoTicketCount 개 사서 총 $totalTicketCount 개가 된다." {
                 val manualNumbersList = List(manualTicketCount) { listOf(1, 2, 3, 4, 5, 6) }
-                val lottoTickets = lottoShop.sellLottoTickets(money, manualNumbersList)
+                val lottoNumbersList =
+                    lotto.domain.lottoticket.LottoNumbers.createWithSortByNumbersList(manualNumbersList)
+                val lottoTickets = lottoShop.sellLottoTickets(money, lottoNumbersList)
                 lottoTickets.totalCount shouldBe totalTicketCount
             }
         }
@@ -33,9 +35,12 @@ internal class LottoShopTest : FreeSpec({
         val manualNumbersList = List(6) { listOf(1, 2, 3, 4, 5, 6) }
         val lottoShop = LottoShop()
 
+        val lottoNumbersList =
+            lotto.domain.lottoticket.LottoNumbers.createWithSortByNumbersList(manualNumbersList)
+
         // when
         val exception =
-            shouldThrowExactly<IllegalArgumentException> { lottoShop.sellLottoTickets(money, manualNumbersList) }
+            shouldThrowExactly<IllegalArgumentException> { lottoShop.sellLottoTickets(money, lottoNumbersList) }
 
         // then
         exception.message shouldBe "주어진 금액으로는 입력한 만큼의 수동 로또를 구매할 수 없습니다."
