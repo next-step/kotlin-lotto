@@ -1,23 +1,27 @@
 package lotto.service
 
-import lotto.domain.LottoFactory
 import lotto.domain.LottoMoney
 import lotto.domain.LottoRepository
+import lotto.domain.LottoStore
 import lotto.domain.RandomLottoNumberGenerator
 
 object LottoService {
 
-    fun purchase(inputMoney: Int): LottoResponses {
+    fun purchase(inputManualLottos: List<List<Int>>, inputMoney: Int): LottoResponses {
         val money = LottoMoney(inputMoney)
-        val purchaseLottos = LottoFactory.createLottoList(money, RandomLottoNumberGenerator)
+        val (remainMoney, manualLottos) = LottoStore.buyManualLottos(money, inputManualLottos)
+        val purchaseLottos = LottoStore.buyLottos(remainMoney, RandomLottoNumberGenerator)
 
-        LottoRepository.saveAll(purchaseLottos)
+        LottoRepository.saveAll(manualLottos + purchaseLottos)
 
-        return LottoResponses(purchaseLottos.map { LottoResponse(it.lottoNumbers.map { lottoNumber -> lottoNumber.number }) })
+        return LottoResponses(
+            manualLottos.map { LottoResponse(it.lottoNumbers.map { lottoNumber -> lottoNumber.number }) },
+            purchaseLottos.map { LottoResponse(it.lottoNumbers.map { lottoNumber -> lottoNumber.number }) }
+        )
     }
 
     fun calculateResult(winningLottoNumbers: List<Int>, bonusNumber: Int): LottoResultResponse {
-        val winningLotto = LottoFactory.createWinningLotto(winningLottoNumbers, bonusNumber)
+        val winningLotto = LottoStore.createWinningLotto(winningLottoNumbers, bonusNumber)
         val purchaseLottos = LottoRepository.findAll()
 
         val (ranks, profit) = winningLotto.calculateProfit(purchaseLottos)

@@ -1,7 +1,8 @@
 package lotto.service
 
 data class LottoResponses(
-    val lottos: List<LottoResponse>
+    val manualLottos: List<LottoResponse>,
+    val autoLottos: List<LottoResponse>
 )
 
 data class LottoResponse(
