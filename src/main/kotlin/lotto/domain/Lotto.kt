@@ -1,8 +1,8 @@
 package lotto.domain
 
-private fun List<LottoNumber>.isValidNumberCount() = this.size != Lotto.COUNT_OF_NUMBER
+private fun List<LottoNumber>.isValidNumberCount() = this.size == Lotto.COUNT_OF_NUMBER
 
-private fun List<LottoNumber>.isDuplicatedWith() = this.size != this.distinct().size
+private fun List<LottoNumber>.isNotDuplicated() = this.size == this.distinct().size
 
 class Lotto private constructor(
     val lottoNumbers: List<LottoNumber>
@@ -19,13 +19,8 @@ class Lotto private constructor(
         }
 
         private fun validateNumbers(lottoNumbers: List<LottoNumber>) {
-            if (lottoNumbers.isValidNumberCount()) {
-                throw IllegalArgumentException("로또 숫자가 6개가 아닌 로또는 생성할 수 없습니다.")
-            }
-
-            if (lottoNumbers.isDuplicatedWith()) {
-                throw IllegalArgumentException("로또 숫자는 중복될 수 없습니다.")
-            }
+            require(lottoNumbers.isValidNumberCount()) { "로또 숫자가 6개가 아닌 로또는 생성할 수 없습니다." }
+            require(lottoNumbers.isNotDuplicated()) { "로또 숫자는 중복될 수 없습니다." }
         }
     }
 }
