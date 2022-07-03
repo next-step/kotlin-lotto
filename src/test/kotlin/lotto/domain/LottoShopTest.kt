@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.domain.lottoticket.LottoNumbers
 import java.math.BigDecimal
 
 internal class LottoShopTest : FreeSpec({
@@ -21,8 +22,7 @@ internal class LottoShopTest : FreeSpec({
         ).forEach { (manualTicketCount, autoTicketCount, totalTicketCount) ->
             "수동을 $manualTicketCount 개 사면 자동을 $autoTicketCount 개 사서 총 $totalTicketCount 개가 된다." {
                 val manualNumbersList = List(manualTicketCount) { listOf(1, 2, 3, 4, 5, 6) }
-                val lottoNumbersList =
-                    lotto.domain.lottoticket.LottoNumbers.createWithSortByNumbersList(manualNumbersList)
+                val lottoNumbersList = LottoNumbers.createWithSortByNumbersList(manualNumbersList)
                 val lottoTickets = lottoShop.sellLottoTickets(money, lottoNumbersList)
                 lottoTickets.totalCount shouldBe totalTicketCount
             }
@@ -35,8 +35,7 @@ internal class LottoShopTest : FreeSpec({
         val manualNumbersList = List(6) { listOf(1, 2, 3, 4, 5, 6) }
         val lottoShop = LottoShop()
 
-        val lottoNumbersList =
-            lotto.domain.lottoticket.LottoNumbers.createWithSortByNumbersList(manualNumbersList)
+        val lottoNumbersList = LottoNumbers.createWithSortByNumbersList(manualNumbersList)
 
         // when
         val exception =
