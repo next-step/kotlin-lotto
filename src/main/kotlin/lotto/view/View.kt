@@ -4,19 +4,34 @@ import lotto.domain.LottoRank
 import lotto.service.LottoResponses
 import lotto.service.LottoResultResponse
 
-private const val WINNING_LOTTO_DELIMITER = ","
+private const val LOTTO_NUMBER_DELIMITER = ","
 
 object InputView {
     fun inputMoney(): Int {
         println("구입금액을 입력해 주세요.")
-        val inputMoney = readln()
+        val inputMoney = readln().trim()
 
         return inputMoney.toIntOrNull() ?: throw IllegalArgumentException("올바른 금액을 입력해 주세요. 입력: $inputMoney")
     }
 
+    fun inputManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val inputCount = readln().trim()
+
+        return inputCount.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다. 입력: $inputCount")
+    }
+
+    fun inputManualLottoNumbers(count: Int): List<List<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(count) {
+            readln().split(LOTTO_NUMBER_DELIMITER)
+                .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("당첨 번호는 숫자만 입력하실 수 있습니다. 입력: $it") }
+        }
+    }
+
     fun inputWinningLotto(): Pair<List<Int>, Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumbers = readln().split(WINNING_LOTTO_DELIMITER)
+        val winningNumbers = readln().split(LOTTO_NUMBER_DELIMITER)
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("당첨 번호는 숫자만 입력하실 수 있습니다. 입력: $it") }
 
         println("보너스 볼을 입력해 주세요.")
@@ -31,7 +46,12 @@ object InputView {
 
 object ResultView {
     fun printPurchaseLottos(purchaseLottos: LottoResponses) {
-        purchaseLottos.lottos.forEach {
+        println("수동으로 ${purchaseLottos.manualLottos.size}장, 자동으로 ${purchaseLottos.autoLottos.size}개를 구매했습니다.")
+
+        purchaseLottos.manualLottos.forEach {
+            println(it.numbers.joinToString(prefix = "[", postfix = "]"))
+        }
+        purchaseLottos.autoLottos.forEach {
             println(it.numbers.joinToString(prefix = "[", postfix = "]"))
         }
     }
