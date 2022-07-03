@@ -1,5 +1,14 @@
 package lotto.domain
 
+operator fun LottoMoney.minus(other: LottoMoney): LottoMoney {
+    val difference = this.money - other.money
+    require(difference > 0) { "구입금액보다 더 많은 수동 로또를 구매하실 수 없습니다" }
+
+    return LottoMoney(difference)
+}
+
+operator fun LottoMoney.compareTo(other: LottoMoney) = this.money.compareTo(other.money)
+
 @JvmInline
 value class LottoMoney(val money: Int = 0) {
     init {

@@ -7,9 +7,7 @@ value class LottoNumber(
     val number: Int
 ) {
     init {
-        if (!number.isValidLottoNumber()) {
-            throw IllegalArgumentException("로또 숫자는 1 부터 45 사이여야 합니다.")
-        }
+        require(number.isValidLottoNumber()) { "로또 숫자는 1 부터 45 사이여야 합니다." }
     }
 
     companion object {
