@@ -21,15 +21,20 @@ class LottoGame(
     private fun lottoTickets(): LottoTickets {
         val lottoShop = LottoShop()
         var money = Money(inputView.inputMoney())
-        val buyManualLottoTicketCount = inputView.inputManualLottoTicketCount()
-        val manualNumbersList =
-            LottoNumbers.createWithSortByNumbersList(inputView.inputManualLottoTicketNumbers(buyManualLottoTicketCount))
+        val manualNumbersList = lottoNumbersList()
 
         while (lottoShop.canNotPurchasableBy(money, manualNumbersList.count())) {
             money += Money(inputView.inputAdditionalMoney())
         }
 
         return lottoShop.sellLottoTickets(money, manualNumbersList)
+    }
+
+    private fun lottoNumbersList(): List<LottoNumbers> {
+        val buyManualLottoTicketCount = inputView.inputManualLottoTicketCount()
+        return List(buyManualLottoTicketCount) {
+            LottoNumbers.createWithSortByList(inputView.inputManualLottoTicketNumbers())
+        }
     }
 
     private fun winningTicket(): WinningTicket {

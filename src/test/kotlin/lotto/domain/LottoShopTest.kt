@@ -1,6 +1,5 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
@@ -21,27 +20,20 @@ internal class LottoShopTest : FreeSpec({
             row(0, 5, 5),
         ).forEach { (manualTicketCount, autoTicketCount, totalTicketCount) ->
             "수동을 $manualTicketCount 개 사면 자동을 $autoTicketCount 개 사서 총 $totalTicketCount 개가 된다." {
-                val manualNumbersList = List(manualTicketCount) { listOf(1, 2, 3, 4, 5, 6) }
-                val lottoNumbersList = LottoNumbers.createWithSortByNumbersList(manualNumbersList)
-                val lottoTickets = lottoShop.sellLottoTickets(money, lottoNumbersList)
+                val manualNumbersList =
+                    List(manualTicketCount) { LottoNumbers.createWithSortByList(listOf(1, 2, 3, 4, 5, 6)) }
+                val lottoTickets = lottoShop.sellLottoTickets(money, manualNumbersList)
                 lottoTickets.totalCount shouldBe totalTicketCount
             }
         }
     }
 
-    "수동 로또티켓을 살 수 없는 금액이 주어지면 예외가 발생한다." {
+    "현재 입력금액에 따라 원하는 만큼의 로또 티켓을 구매할 수 있는지 없는지 알 수 있다." {
         // given
-        val money = Money(BigDecimal.valueOf(5_500))
-        val manualNumbersList = List(6) { listOf(1, 2, 3, 4, 5, 6) }
         val lottoShop = LottoShop()
 
-        val lottoNumbersList = LottoNumbers.createWithSortByNumbersList(manualNumbersList)
-
-        // when
-        val exception =
-            shouldThrowExactly<IllegalArgumentException> { lottoShop.sellLottoTickets(money, lottoNumbersList) }
-
-        // then
-        exception.message shouldBe "주어진 금액으로는 입력한 만큼의 수동 로또를 구매할 수 없습니다."
+        // when, then
+        lottoShop.canNotPurchasableBy(money = Money(BigDecimal.valueOf(5_999)), 6) shouldBe false
+        lottoShop.canNotPurchasableBy(money = Money(BigDecimal.valueOf(6_000)), 6) shouldBe true
     }
 })
