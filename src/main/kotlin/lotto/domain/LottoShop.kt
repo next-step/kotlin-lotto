@@ -7,7 +7,8 @@ import lotto.domain.lottoticket.LottoTickets
 class LottoShop(
     private val lottoTicketMachine: LottoTicketMachine = LottoTicketMachine()
 ) {
-    fun canNotPurchasedManualLottoTicketsMoney(money: Money, lottoNumbersCount: Int): Boolean {
+
+    fun canNotPurchasableBy(money: Money, lottoNumbersCount: Int): Boolean {
         val ticketCount = money.divideInt(LottoTicket.PRICE)
         return ticketCount >= lottoNumbersCount
     }

@@ -25,7 +25,7 @@ class LottoGame(
         val manualNumbersList =
             LottoNumbers.createWithSortByNumbersList(inputView.inputManualLottoTicketNumbers(buyManualLottoTicketCount))
 
-        while (lottoShop.canNotPurchasedManualLottoTicketsMoney(money, manualNumbersList.count())) {
+        while (lottoShop.canNotPurchasableBy(money, manualNumbersList.count())) {
             money += Money(inputView.inputAdditionalMoney())
         }
 
