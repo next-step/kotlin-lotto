@@ -62,7 +62,7 @@ internal class PersonImplTest {
         val markedTicket1 = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
         val markedTicket2 = LottoTicket(listOf(7, 8, 9, 10, 11, 12))
         val markedList = listOf<LottoTicket>(markedTicket1, markedTicket2)
-        val markedWallet = player.mark(2, markedList)
+        val markedWallet = player.markLottoTicket(2, markedList)
         val makredPlayer = PersonImpl(markedWallet)
 
         // when
