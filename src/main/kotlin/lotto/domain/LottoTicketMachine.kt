@@ -5,17 +5,17 @@ import lotto.domain.lottoticket.LottoNumbers
 import lotto.domain.lottoticket.LottoTicket
 import lotto.domain.lottoticket.LottoTickets
 
-class LottoTicketSeller {
-    fun buyLottoTickets(money: Money): LottoTickets =
-        LottoTickets(values = List(size = money.divideInt(LottoTicket.PRICE)) { issueLottoTicket() })
+class LottoTicketMachine {
+    fun createManualTicket(manualNumbers: LottoNumbers): LottoTicket = LottoTicket.manual(manualNumbers)
 
-    private fun issueLottoTicket(): LottoTicket {
+    fun createAutoTickets(count: Int): LottoTickets = LottoTickets(List(count) { createAutoTicket() })
+
+    private fun createAutoTicket(): LottoTicket {
         val lottoNumbers = LottoNumber.cachedLottoNumbers()
             .asSequence()
             .shuffled()
             .take(LottoNumbers.NUMBERS_COUNT)
             .toSet()
-
-        return LottoTicket(lottoNumbers = LottoNumbers.createWithSort(lottoNumbers))
+        return LottoTicket.auto(lottoNumbers = LottoNumbers.createWithSort(lottoNumbers))
     }
 }

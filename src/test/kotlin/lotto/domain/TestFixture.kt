@@ -21,7 +21,7 @@ fun LottoTicket(
         .map { LottoNumber.from(it) }
         .toSet()
 
-    return LottoTicket(
+    return LottoTicket.manual(
         lottoNumbers = LottoNumbers.createWithSort(lottoNumberSet)
     )
 }

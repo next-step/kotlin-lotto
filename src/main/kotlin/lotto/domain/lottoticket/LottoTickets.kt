@@ -4,15 +4,9 @@ import lotto.domain.WinningAmount
 import lotto.domain.WinningResult
 import lotto.domain.WinningTicket
 
-class LottoTickets constructor(
-    val values: List<LottoTicket>,
+class LottoTickets(
+    private val values: List<LottoTicket>,
 ) {
-    init {
-        require(values.isNotEmpty()) {
-            "로또 구입을 위한 최소 금액은 ${LottoTicket.PRICE.value} 입니다."
-        }
-    }
-
     fun totalMatchResults(winningTicket: WinningTicket): WinningResult {
         val winningAmountMap = WinningAmount.values()
             .associateWith { 0 }
@@ -25,4 +19,14 @@ class LottoTickets constructor(
 
         return WinningResult(winningAmountMap)
     }
+
+    operator fun plus(other: LottoTickets): LottoTickets = LottoTickets(this.values + other.values)
+
+    val autoTickets: List<LottoTicket> = values.filter { it.isAuto }
+
+    val totalCount: Int = values.size
+
+    val manualCount: Int = values.count { it.isManual }
+
+    val autoCount: Int = values.count { it.isAuto }
 }

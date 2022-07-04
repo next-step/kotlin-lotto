@@ -21,6 +21,9 @@ class LottoNumbers private constructor(
     companion object {
         const val NUMBERS_COUNT = 6
 
+        fun createWithSortByList(numberList: List<Int>): LottoNumbers =
+            createWithSort(numberList.map { LottoNumber.from(it) }.toSet())
+
         fun createWithSort(values: Set<LottoNumber>): LottoNumbers =
             LottoNumbers(values = values.sortedBy { it.value }.toSet())
     }
