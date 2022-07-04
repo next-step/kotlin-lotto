@@ -1,7 +1,9 @@
 package lotto
 
 import lotto.entity.Lotto
+import lotto.ui.ResultView
 
 fun main() {
-    Lotto().play()
+    val resultView = ResultView()
+    Lotto(resultView).play()
 }

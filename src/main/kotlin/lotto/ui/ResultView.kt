@@ -4,7 +4,7 @@ import lotto.entity.Rank
 import lotto.entity.Wallet
 import lotto.entity.WinningInfo
 
-object ResultView {
+class ResultView {
     fun showLottoTickets(wallet: Wallet, numberOfManualTicket: Int) {
         val tickets = wallet.tickets
         println("수동으로 $numberOfManualTicket 장, 자동으로 ${tickets.size - numberOfManualTicket}개를 구매했습니다.")
