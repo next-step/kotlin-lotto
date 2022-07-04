@@ -29,7 +29,7 @@
 [X] ResultView: 결과를 보여주는 객체
 [X] Wallet: input으로 들어온 돈을 가지고 있다.
 [X] Person ```<<Interface>>```
-- [x] purchase(): 티켓을 구매한다.
+- [x] purchaseLottoTicket: 티켓을 구매한다.
 - [X] wallet: 플레이어는 wallet 을 가지고 있다.
 - [X] PersonImpl: 자동으로 구매하는 사람
 - [ ] ManualPersonImpl: 수동으로 구매한 사람

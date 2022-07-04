@@ -21,7 +21,7 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val tickets = player.purchase().tickets
+        val tickets = player.purchaseLottoTicket().getTickets()
 
         // then
         Assertions.assertThat(tickets.size).isEqualTo(10)
@@ -34,7 +34,7 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val tickets = player.purchase().tickets
+        val tickets = player.purchaseLottoTicket().getTickets()
 
         // then
         Assertions.assertThat(tickets.size).isEqualTo(3)
@@ -47,7 +47,7 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val tickets = player.purchase().tickets
+        val tickets = player.purchaseLottoTicket().getTickets()
 
         // then
         Assertions.assertThat(tickets.size).isNotEqualTo(4)
@@ -62,11 +62,10 @@ internal class PersonImplTest {
         val markedTicket1 = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
         val markedTicket2 = LottoTicket(listOf(7, 8, 9, 10, 11, 12))
         val markedList = listOf<LottoTicket>(markedTicket1, markedTicket2)
-        val markedWallet = player.markLottoTicket(2, markedList)
-        val makredPlayer = PersonImpl(markedWallet)
+        val makredPlayer = player.markLottoTicket(2, markedList)
 
         // when
-        val tickets = makredPlayer.purchase().tickets
+        val tickets = makredPlayer.purchaseLottoTicket().getTickets()
 
         // then
         Assertions.assertThat(tickets.size).isNotEqualTo(1)
@@ -79,7 +78,7 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val playerMoney = player.money()
+        val playerMoney = player.getMoney()
 
         // then
         Assertions.assertThat(playerMoney).isEqualTo(wallet.money)
