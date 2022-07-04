@@ -1,7 +1,9 @@
-package lotto.entity
+package lotto.ui
 
-import lotto.ui.InputView
-import lotto.ui.ResultView
+import lotto.entity.LottoNumber
+import lotto.entity.MatcherImpl
+import lotto.entity.PersonImpl
+import lotto.entity.Wallet
 
 class Lotto(private val resultView: ResultView) {
 

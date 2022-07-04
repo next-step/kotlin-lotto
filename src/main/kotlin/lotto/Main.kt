@@ -1,6 +1,6 @@
 package lotto
 
-import lotto.entity.Lotto
+import lotto.ui.Lotto
 import lotto.ui.ResultView
 
 fun main() {
