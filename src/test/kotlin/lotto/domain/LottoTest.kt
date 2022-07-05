@@ -12,7 +12,7 @@ internal class LottoTest {
 
     @Test
     fun `로또는 6개의 로또 넘버를 가진다`() {
-        val lotto = createLotto(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto(1, 2, 3, 4, 5, 6)
         assertThat(lotto.numbers).hasSize(6)
     }
 
@@ -25,34 +25,23 @@ internal class LottoTest {
     }
 
     @Test
+    fun `중복된 숫자가 입력되면 exception`() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(1, 1, 1, 1, 1, 1)
+        }
+    }
+
+    @Test
     fun `로또 숫자가 6개보다 부족하면 exception`() {
         assertThrows<IllegalArgumentException> {
-            Lotto(
-                listOf(
-                    LottoNumber.of(1),
-                    LottoNumber.of(2),
-                    LottoNumber.of(3),
-                    LottoNumber.of(4),
-                    LottoNumber.of(5),
-                )
-            )
+            Lotto(1, 2, 3, 4, 5)
         }
     }
 
     @Test
     fun `로또 숫자가 6개보다 많으면 exception`() {
         assertThrows<IllegalArgumentException> {
-            Lotto(
-                listOf(
-                    LottoNumber.of(1),
-                    LottoNumber.of(2),
-                    LottoNumber.of(3),
-                    LottoNumber.of(4),
-                    LottoNumber.of(5),
-                    LottoNumber.of(6),
-                    LottoNumber.of(7),
-                )
-            )
+            Lotto(1, 2, 3, 4, 5, 6, 7)
         }
     }
 
@@ -60,18 +49,15 @@ internal class LottoTest {
         @JvmStatic
         fun lottoArguments(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(createLotto(listOf(1, 2, 3, 4, 5, 6)), createLotto(listOf(7, 8, 9, 10, 11, 12)), 0),
-                Arguments.of(createLotto(listOf(1, 2, 3, 4, 5, 6)), createLotto(listOf(1, 8, 9, 10, 11, 12)), 1),
-                Arguments.of(createLotto(listOf(1, 2, 3, 4, 5, 6)), createLotto(listOf(1, 2, 9, 10, 11, 12)), 2),
-                Arguments.of(createLotto(listOf(1, 2, 3, 4, 5, 6)), createLotto(listOf(1, 2, 3, 10, 11, 12)), 3),
-                Arguments.of(createLotto(listOf(1, 2, 3, 4, 5, 6)), createLotto(listOf(1, 2, 3, 4, 11, 12)), 4),
-                Arguments.of(createLotto(listOf(1, 2, 3, 4, 5, 6)), createLotto(listOf(1, 2, 3, 4, 5, 12)), 5),
-                Arguments.of(createLotto(listOf(1, 2, 3, 4, 5, 6)), createLotto(listOf(1, 2, 3, 4, 5, 6)), 6),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(7, 8, 9, 10, 11, 12), 0),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(7, 8, 9, 10, 11, 12), 0),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 8, 9, 10, 11, 12), 1),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 9, 10, 11, 12), 2),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 10, 11, 12), 3),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 11, 12), 4),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 12), 5),
+                Arguments.of(Lotto(1, 2, 3, 4, 5, 6), Lotto(1, 2, 3, 4, 5, 6), 6),
             )
-        }
-
-        private fun createLotto(ints: List<Int>): Lotto {
-            return Lotto(ints.map { LottoNumber.of(it) })
         }
     }
 }

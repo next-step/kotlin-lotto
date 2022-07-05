@@ -8,10 +8,16 @@ object InputParser {
         return input.toInt()
     }
 
-    fun parseWinningNumbers(input: String): List<LottoNumber> {
+    fun parseManualAmount(input: String): Int {
+        return input.toInt()
+    }
+
+    fun parseLottoNumbers(input: String): List<LottoNumber> {
         val numbers = input.split(", ")
 
-        return numbers.map { it.toInt() }.map(LottoNumber::of)
+        val lottoNumbers = numbers.map { it.toInt() }.map(LottoNumber::of)
+
+        return lottoNumbers
     }
 
     fun parseBonusNumber(input: String): LottoNumber {

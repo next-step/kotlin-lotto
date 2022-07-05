@@ -15,7 +15,7 @@ internal class InputParserTest {
 
     @Test
     fun `당첨 번호를 파싱할 수 있다`() {
-        val result = InputParser.parseWinningNumbers("1, 2, 3, 4, 5, 6")
+        val result = InputParser.parseLottoNumbers("1, 2, 3, 4, 5, 6")
 
         assertThat(result).isEqualTo(
             listOf(

@@ -2,29 +2,43 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoGame
-import lotto.domain.LottoNumber
+import lotto.domain.LottoMarket
+import lotto.domain.Money
+import lotto.domain.User
+import lotto.domain.WinningLotto
 import lotto.service.InputParser
-import lotto.service.LottoService
 import lotto.view.LottoGameView
-import lotto.view.LottoView
+import lotto.view.LottoPaperView
 
-class LottoController(private val lottoService: LottoService) {
+class LottoController {
 
     fun start() {
-        val purchaseAmount = getPurchaseAmount()
-        val n = purchaseAmount / LOTTO_PRICE
+        val user = getUser()
 
-        LottoGameView.printBuyAmount(n)
+        LottoGameView.printManualNumberInput()
+        val manualLottos = (1..user.manualAmount).map { Lotto(InputParser.parseLottoNumbers(readln())) }
+        val manualLottoPaper = LottoMarket.buyManual(user = user, lottos = manualLottos)
+        val autoLottoPaper = LottoMarket.buyMaxAutomation(user = user)
 
-        val lottos = lottoService.buy(n)
-
-        lottos.map { LottoView(it).print() }
+        LottoGameView.printBuyAmount(manualAmount = manualLottoPaper.size, autoAmount = autoLottoPaper.size)
+        LottoPaperView.print(lottoPaper1 = manualLottoPaper, lottoPaper2 = autoLottoPaper)
 
         val winningLotto = getLastWinningLotto()
-        val bonusNumber = getBonusNumber()
-        val lottoGame = LottoGame(lottos, winningLotto, bonusNumber)
 
-        LottoGameView.printWinningStats(lottoGame.result)
+        val lottoGame = LottoGame(
+            manualLottoPaper = manualLottoPaper,
+            autoLottoPaper = autoLottoPaper,
+            winningLotto = winningLotto
+        )
+
+        LottoGameView.printWinningStats(result = lottoGame.result)
+    }
+
+    private fun getUser(): User {
+        val purchaseAmount = getPurchaseAmount()
+        val manualAmount = getManualAmount()
+
+        return User(money = Money(purchaseAmount), manualAmount = manualAmount)
     }
 
     private fun getPurchaseAmount(): Int {
@@ -33,19 +47,19 @@ class LottoController(private val lottoService: LottoService) {
         return InputParser.parsePurchaseAmount(requireNotNull(readLine()))
     }
 
-    private fun getLastWinningLotto(): Lotto {
+    private fun getManualAmount(): Int {
+        LottoGameView.printManualAmountInput()
+
+        return InputParser.parseManualAmount(readln())
+    }
+
+    private fun getLastWinningLotto(): WinningLotto {
         LottoGameView.printLastWinningNumbers()
+        val lotto = Lotto(InputParser.parseLottoNumbers(readln()))
 
-        return Lotto(InputParser.parseWinningNumbers(requireNotNull(readLine())))
-    }
-
-    private fun getBonusNumber(): LottoNumber {
         LottoGameView.printBonusNumber()
+        val bonusNumber = InputParser.parseBonusNumber(readln())
 
-        return InputParser.parseBonusNumber(requireNotNull(readLine()))
-    }
-
-    companion object {
-        private const val LOTTO_PRICE = 1_000
+        return WinningLotto(lotto = lotto, bonusNumber = bonusNumber)
     }
 }
