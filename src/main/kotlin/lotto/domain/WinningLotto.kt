@@ -9,4 +9,8 @@ class WinningLotto(
     }
 
     fun matchedBonus(lotto: Lotto) = bonusNumber in lotto.numbers
+
+    fun rank(other: Lotto): Rank {
+        return Rank.of(countOfMatch = lotto.countOfMatch(other), matchedBonus = matchedBonus(other))
+    }
 }

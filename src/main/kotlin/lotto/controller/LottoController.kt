@@ -13,17 +13,15 @@ import lotto.view.LottoPaperView
 class LottoController {
 
     fun start() {
-        val market = LottoMarket()
         val user = getUser()
 
         LottoGameView.printManualNumberInput()
         val manualLottos = (1..user.manualAmount).map { Lotto(InputParser.parseLottoNumbers(readln())) }
-        val manualLottoPaper = market.buyManual(user = user, lottos = manualLottos)
-        val autoLottoPaper = market.buyMaxAutomation(user = user)
+        val manualLottoPaper = LottoMarket.buyManual(user = user, lottos = manualLottos)
+        val autoLottoPaper = LottoMarket.buyMaxAutomation(user = user)
 
         LottoGameView.printBuyAmount(manualAmount = manualLottoPaper.size, autoAmount = autoLottoPaper.size)
-        LottoPaperView.print(lottoPaper = manualLottoPaper)
-        LottoPaperView.print(lottoPaper = autoLottoPaper)
+        LottoPaperView.print(lottoPaper1 = manualLottoPaper, lottoPaper2 = autoLottoPaper)
 
         val winningLotto = getLastWinningLotto()
 

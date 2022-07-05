@@ -1,6 +1,14 @@
 package lotto.domain
 
 class User(
-    val money: Money,
+    money: Money,
     val manualAmount: Int
-)
+) {
+
+    var money = money
+        private set
+
+    fun pay(amount: Money) {
+        money = money.sub(amount)
+    }
+}

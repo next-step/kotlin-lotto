@@ -9,7 +9,7 @@ class Money(value: Int) {
         require(value >= 0) { "[$value] is less than zero" }
     }
 
-    fun sub(amount: Int) {
-        value -= amount
+    fun sub(amount: Money): Money {
+        return Money(value - amount.value)
     }
 }

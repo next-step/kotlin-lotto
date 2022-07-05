@@ -11,7 +11,10 @@ enum class Rank(val countOfMatch: Int, val matchedBonus: Boolean = false, val pr
 
     companion object {
         fun of(countOfMatch: Int, matchedBonus: Boolean): Rank {
-            return values().firstOrNull { it.countOfMatch == countOfMatch && it.matchedBonus == matchedBonus } ?: LOSE
+            return when (matchedBonus) {
+                true -> values().firstOrNull { it.countOfMatch == countOfMatch } ?: LOSE
+                false -> values().lastOrNull { it.countOfMatch == countOfMatch } ?: LOSE
+            }
         }
     }
 }
