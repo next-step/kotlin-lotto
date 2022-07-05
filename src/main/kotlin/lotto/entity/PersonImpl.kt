@@ -1,12 +1,21 @@
 package lotto.entity
 
+import lotto.entity.LottoTicket.Companion.LOTTO_PRICE
+
 class PersonImpl(override val wallet: Wallet) : Person {
-    override fun purchase(): List<LottoTicket> {
-        val money = wallet.money
-        return LottoTicketMachine.printMaxTicket(money)
+    override fun markLottoTicket(numberOfManualTicket: Int, manualMarkedTickets: List<LottoTicket>): PersonImpl {
+        return PersonImpl(Wallet(wallet.money - LOTTO_PRICE * numberOfManualTicket, manualMarkedTickets))
     }
 
-    override fun money(): Int {
+    override fun purchaseLottoTicket(): PersonImpl {
+        return PersonImpl(LottoTicketMachine.printMaxTicket(wallet))
+    }
+
+    fun getMoney(): Int {
         return wallet.money
+    }
+
+    fun getTickets(): List<LottoTicket> {
+        return wallet.tickets
     }
 }

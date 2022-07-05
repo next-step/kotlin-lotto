@@ -1,6 +1,8 @@
 package lotto.ui
 
-class InputView {
+import lotto.entity.LottoTicket
+
+object InputView {
     fun getPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
         return readLine()!!.toInt()
@@ -14,5 +16,19 @@ class InputView {
     fun getBonusNumber(): Int {
         println("\n보너스 볼을 입력해 주세요.")
         return readLine()!!.toInt()
+    }
+
+    fun getNumberOfManualTickets(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readLine()!!.toInt()
+    }
+
+    fun getManualTicketNumbers(numberOfManualTicket: Int): List<LottoTicket> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val tickets = mutableListOf<LottoTicket>()
+        repeat(numberOfManualTicket) {
+            tickets.add(LottoTicket(readLine()!!.split(",").map { number: String -> number.toInt() }))
+        }
+        return tickets
     }
 }

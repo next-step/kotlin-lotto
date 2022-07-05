@@ -109,10 +109,11 @@ internal class MatcherImplTest {
         val thirdTicket = LottoTicket(thirdLottoNumbers)
 
         val tickets = listOf<LottoTicket>(firstTicket, secondTicket, thirdTicket)
+        val wallet = Wallet(0, tickets)
         val expectedRanks = mapOf(Rank.FIFTH to 0, Rank.FOURTH to 1, Rank.THIRD to 1, Rank.SECOND to 0, Rank.FIRST to 0)
 
         // when
-        val winningRanks = MatcherImpl(lottoNumber).countTicketRanks(tickets).countOfRanks
+        val winningRanks = MatcherImpl(lottoNumber).countTicketRanks(wallet).countOfRanks
 
         // then
         Assertions.assertThat(winningRanks).isEqualTo(expectedRanks)

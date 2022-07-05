@@ -21,7 +21,7 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val tickets = player.purchase()
+        val tickets = player.purchaseLottoTicket().getTickets()
 
         // then
         Assertions.assertThat(tickets.size).isEqualTo(10)
@@ -34,7 +34,7 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val tickets = player.purchase()
+        val tickets = player.purchaseLottoTicket().getTickets()
 
         // then
         Assertions.assertThat(tickets.size).isEqualTo(3)
@@ -47,10 +47,28 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val tickets = player.purchase()
+        val tickets = player.purchaseLottoTicket().getTickets()
 
         // then
         Assertions.assertThat(tickets.size).isNotEqualTo(4)
+    }
+
+    @Test
+    fun `3700원으로 2장의 로또 티켓을 수동으로 입력한 경우 1장의 티켓을 구매한다`() {
+        // given
+        val wallet = Wallet(3700)
+        val player = PersonImpl(wallet)
+
+        val markedTicket1 = LottoTicket(listOf(1, 2, 3, 4, 5, 6))
+        val markedTicket2 = LottoTicket(listOf(7, 8, 9, 10, 11, 12))
+        val markedList = listOf<LottoTicket>(markedTicket1, markedTicket2)
+        val makredPlayer = player.markLottoTicket(2, markedList)
+
+        // when
+        val tickets = makredPlayer.purchaseLottoTicket().getTickets()
+
+        // then
+        Assertions.assertThat(tickets.size).isNotEqualTo(1)
     }
 
     @Test
@@ -60,7 +78,7 @@ internal class PersonImplTest {
         val player = PersonImpl(wallet)
 
         // when
-        val playerMoney = player.money()
+        val playerMoney = player.getMoney()
 
         // then
         Assertions.assertThat(playerMoney).isEqualTo(wallet.money)
