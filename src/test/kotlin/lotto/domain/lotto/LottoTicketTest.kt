@@ -1,5 +1,6 @@
-package lotto.domain
+package lotto.domain.lotto
 
+import lotto.domain.rank.Rank
 import lotto.fixture.bonusNumber
 import lotto.fixture.lotto
 import lotto.fixture.winningLotto

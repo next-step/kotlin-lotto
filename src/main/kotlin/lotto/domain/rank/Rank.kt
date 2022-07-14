@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.rank
 
 enum class Rank(val numOfMatch: Int, val winningMoney: Long) {
     FIFTH(3, 5_000L),

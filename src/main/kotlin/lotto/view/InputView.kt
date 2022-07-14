@@ -6,6 +6,18 @@ object InputView {
         return convertToLong(readLine())
     }
 
+    fun getManualLottoCount(): Int {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
+        return convertToInt(readLine())
+    }
+
+    fun getManualLottoNumbers(count: Int): List<List<Int>> {
+        println("\n수동으로 구매할 번호를 입력해 주세요.")
+        return (0 until count).map {
+            convertToListInt(readLine())
+        }
+    }
+
     fun getWinningNumbers(): List<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         return convertToListInt(readLine())
@@ -16,32 +28,26 @@ object InputView {
         return convertToInt(readLine())
     }
 
-    private fun convertToInt(bonusNumber: String?): Int {
-        bonusNumber.checkNullOrBlank()
-        return bonusNumber!!.toNumericInt()
+    private fun convertToInt(numberStr: String?): Int {
+        numberStr.checkNullOrBlank()
+        return numberStr!!.toNumericInt()
     }
 
-    private fun convertToLong(moneyString: String?): Long {
-        moneyString.checkNullOrBlank()
-        return moneyString!!.toNumericLong()
+    private fun convertToLong(numberStr: String?): Long {
+        numberStr.checkNullOrBlank()
+        return numberStr!!.toNumericLong()
     }
 
-    private fun convertToListInt(winningNumberStr: String?): List<Int> {
-        winningNumberStr.checkNullOrBlank()
-        return winningNumberStr!!.split(",").map { it.toNumericInt() }
+    private fun convertToListInt(numberStr: String?): List<Int> {
+        numberStr.checkNullOrBlank()
+        return numberStr!!.split(",").map { it.toNumericInt() }
     }
 }
 
 fun String?.checkNullOrBlank() = require(!this.isNullOrBlank()) { "입력값이 비어있어요." }
 
-fun String.toNumericInt(): Int {
-    val number = this.trim().toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다.")
-    require(number > 0) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
-    return number
-}
+fun String.toNumericInt(): Int =
+    this.trim().toIntOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다. given: $this")
 
-fun String.toNumericLong(): Long {
-    val number = this.trim().toLongOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다.")
-    require(number > 0L) { "0보다 큰 숫자만 입력해 주세요. inputMoney: $this" }
-    return number
-}
+fun String.toNumericLong(): Long =
+    this.trim().toLongOrNull() ?: throw IllegalArgumentException("잘못된 숫자 입력입니다. given: $this")

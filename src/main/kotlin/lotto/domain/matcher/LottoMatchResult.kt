@@ -1,4 +1,7 @@
-package lotto.domain
+package lotto.domain.matcher
+
+import lotto.domain.money.EarnedMoney
+import lotto.domain.rank.Rank
 
 @JvmInline
 value class EarnedRate(val rate: Float) {

@@ -1,20 +1,24 @@
 package lotto
 
-import lotto.domain.BonusNumber
-import lotto.domain.LottoMatcher
-import lotto.domain.LottoShop
-import lotto.domain.PaidMoney
-import lotto.domain.WinningLotto
+import lotto.domain.lotto.BonusNumber
+import lotto.domain.lotto.ManualLottoTotal
+import lotto.domain.lotto.ManualLottos
+import lotto.domain.lotto.WinningLotto
+import lotto.domain.matcher.LottoMatcher
+import lotto.domain.money.PaidMoney
+import lotto.domain.shop.LottoShop
 import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
     val paidMoney = PaidMoney(InputView.getPurchaseAmount())
-    val lottoTickets = LottoShop().buyLotto(paidMoney)
-    ResultView.showLottoInfo(lottoTickets)
+    val manualLottoCount = ManualLottoTotal(InputView.getManualLottoCount())
+    val manualLottos = ManualLottos(InputView.getManualLottoNumbers(manualLottoCount.value))
+    val lottoTickets = LottoShop().buyLotto(paidMoney, manualLottos)
+    ResultView.showLottoInfo(lottoTickets, manualLottoCount)
 
-    val winningLotto = WinningLotto.from(InputView.getWinningNumbers())
-    val bonusNumber = BonusNumber.from(InputView.getBonusNumber())
+    val winningLotto = WinningLotto(InputView.getWinningNumbers())
+    val bonusNumber = BonusNumber(InputView.getBonusNumber())
     LottoMatcher.also { matcher ->
         val matchResult = matcher.matchResult(lottoTickets, winningLotto, bonusNumber)
         val earnedRate = matcher.calculateEarnedRate(matchResult.earnedMoney, paidMoney)

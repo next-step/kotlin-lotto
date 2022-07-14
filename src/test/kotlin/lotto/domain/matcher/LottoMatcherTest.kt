@@ -1,5 +1,8 @@
-package lotto.domain
+package lotto.domain.matcher
 
+import lotto.domain.money.EarnedMoney
+import lotto.domain.money.PaidMoney
+import lotto.domain.rank.Rank
 import lotto.fixture.bonusNumber
 import lotto.fixture.lotto
 import lotto.fixture.lottoTickets

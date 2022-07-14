@@ -1,8 +1,15 @@
-package lotto.domain
+package lotto.domain.lotto
+
+import lotto.domain.lottonumber.LottoNumbers
+import lotto.domain.rank.Rank
 
 class LottoTicket(
     val lottoNumbers: LottoNumbers
 ) {
+    constructor(numbers: List<Int>) : this(
+        LottoNumbers(numbers)
+    )
+
     fun match(winningNumbers: WinningLotto, bonusNumber: BonusNumber): Rank {
         val matchCount = count(winningNumbers)
         val matchBonus = contains(bonusNumber)
@@ -14,11 +21,4 @@ class LottoTicket(
 
     private fun contains(bonusNumber: BonusNumber): Boolean =
         lottoNumbers.lottoNumbers.contains(bonusNumber.bonusNumber)
-
-    companion object {
-        fun from(numbers: List<Int>): LottoTicket =
-            LottoTicket(
-                LottoNumbers.from(numbers)
-            )
-    }
 }
