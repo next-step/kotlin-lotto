@@ -10,7 +10,7 @@ internal class StringCalculatorTest{
     fun `빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다`(){
         assertAll(
             {assertThat(StringCalculator.calculate("")).isEqualTo(0)},
-            {assertThat(StringCalculator.calculate("null")).isEqualTo(0)}
+            {assertThat(StringCalculator.calculate(null)).isEqualTo(0)}
         )
     }
 }
