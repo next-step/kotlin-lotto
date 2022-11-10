@@ -22,4 +22,8 @@ internal class StringCalculatorTest{
         assertThat(StringCalculator.calculate(input)).isEqualTo(input.toInt())
     }
 
+    @Test
+    fun `기본 구분자를 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 숫자의 합을 계산한다`() {
+        assertThat(StringCalculator.calculate("1,2:3")).isEqualTo(6)
+    }
 }
