@@ -1,19 +1,16 @@
 package step1
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
 
-internal class StringCalculatorTest {
+internal class StringCalculatorTest{
 
     @Test
-    fun `빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다`() {
+    fun `빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다`(){
         assertAll(
-            { assertThat(StringCalculator.calculate("")).isEqualTo(0) },
-            { assertThat(StringCalculator.calculate(null)).isEqualTo(0) }
+            {assertThat(StringCalculator.calculate("")).isEqualTo(0)},
+            {assertThat(StringCalculator.calculate(null)).isEqualTo(0)}
         )
     }
 
