@@ -20,29 +20,31 @@ class StringAddCalculatorTest : BehaviorSpec({
     }
 
     given("숫자 하나를 문자열로 입력할 경우") {
-        (0..100).asSequence()
-            .forEach { singleNumberInput ->
-                val inputText = singleNumberInput.toString()
+        InputDataSet.testValidNumberDataList().asSequence()
+            .forEach { inputNumber ->
+                val inputText = inputNumber.toString()
                 `when`("StringAddCalculator.calculate(\"$inputText)\"") {
                     val result = stringAddCalculator.calculate(inputText)
 
-                    then("should return $singleNumberInput") {
-                        result shouldBe singleNumberInput
+                    then("should return $inputNumber") {
+                        result shouldBe inputNumber
                     }
                 }
             }
     }
 
-    xgiven("숫자 두개를 , 구분자로 입력할 경우 두 숫자의 합을 반환한다.") {
-        val firstNumber = 0
-        val secondNumber = 1
-        val inputText = "$firstNumber${StringAddCalculator.DEFAULT_DELIMITER}$secondNumber"
+    given("숫자 두개를 , 구분자로 입력할 경우 두 숫자의 합을 반환한다.") {
+        InputDataSet.testValidNumberPairDataList().forEach { pair ->
+            val firstNumber = pair.first
+            val secondNumber = pair.second
+            val inputText = "$firstNumber${StringAddCalculator.DEFAULT_DELIMITER}$secondNumber"
 
-        `when`("StringAddCalculator.calculate(\"$inputText\")") {
-            val result = stringAddCalculator.calculate(inputText)
+            `when`("StringAddCalculator.calculate(\"$inputText\")") {
+                val result = StringAddCalculator().calculate(inputText)
 
-            then("should return $inputText") {
-                result shouldBe firstNumber + secondNumber
+                then("should return $inputText") {
+                    result shouldBe firstNumber + secondNumber
+                }
             }
         }
     }

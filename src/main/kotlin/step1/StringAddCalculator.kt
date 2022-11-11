@@ -11,6 +11,8 @@ class StringAddCalculator {
             return 0
         }
 
-        return input.toInt()
+        val inputNumberList = input.trim().split(DEFAULT_DELIMITER).asSequence().map { it.toInt() }
+
+        return inputNumberList.sum()
     }
 }
