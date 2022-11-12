@@ -7,8 +7,8 @@ import org.junit.jupiter.api.assertThrows
 class LottoTicketTest : StringSpec({
     "LottoTicket의 LottoNumber의 개수가 6개가 아니면 IllegalArgumentException이 발생한다." {
         assertAll(
-            {assertThrows<IllegalArgumentException> { LottoTicket(listOf()) }},
-            {assertThrows<IllegalArgumentException> { LottoTicket(listOf(
+            {assertThrows<IllegalArgumentException> { LottoTicket(setOf()) }},
+            {assertThrows<IllegalArgumentException> { LottoTicket(setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),

@@ -1,7 +1,7 @@
 package lotto
 
 class LottoTicket(
-    val lottoNumbers: List<LottoNumber>
+    val lottoNumbers: Set<LottoNumber>
 ) {
     init {
         require(lottoNumbers.size == 6)
