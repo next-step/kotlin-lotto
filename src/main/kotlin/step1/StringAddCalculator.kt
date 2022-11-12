@@ -37,6 +37,10 @@ class StringAddCalculator(
             .map { it.toInt() }
             .toList()
 
+        require(inputNumberList.none { it < 0 }) {
+            "Negative number is not supported [$input]"
+        }
+
         // 4. add all numbers
         return inputNumberList.sum()
     }
