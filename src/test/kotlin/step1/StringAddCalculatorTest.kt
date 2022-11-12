@@ -37,15 +37,35 @@ class StringAddCalculatorTest : BehaviorSpec({
         InputDataSet.testValidNumberPairDataList().forEach { pair ->
             val firstNumber = pair.first
             val secondNumber = pair.second
-            val inputText = "$firstNumber${StringAddCalculator.DEFAULT_DELIMITER}$secondNumber"
+            val inputText = "$firstNumber,$secondNumber"
 
             `when`("StringAddCalculator.calculate(\"$inputText\")") {
-                val result = StringAddCalculator().calculate(inputText)
+                val result = stringAddCalculator.calculate(inputText)
 
                 then("should return $inputText") {
                     result shouldBe firstNumber + secondNumber
                 }
             }
         }
+    }
+
+    given("구분자를 `,` 이외에 `:`을 사용할 수 있다.") {
+        fun randomDelimiter() = listOf(",", ":").random()
+
+        InputDataSet.testValidNumberTuple3DataList()
+            .shuffled()
+            .take(100)
+            .forEach { tuple ->
+                val inputText = "${tuple.a}${randomDelimiter()}${tuple.b}${randomDelimiter()}${tuple.c}"
+                val expected = tuple.a + tuple.b + tuple.c
+
+                `when`("StringAddCalculator.calculate(\"$inputText\")") {
+                    val result = stringAddCalculator.calculate(inputText)
+
+                    then("should return $expected") {
+                        result shouldBe expected
+                    }
+                }
+            }
     }
 })
