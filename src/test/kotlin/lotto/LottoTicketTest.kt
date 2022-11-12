@@ -12,16 +12,4 @@ class LottoTicketTest : StringSpec({
             { assertThrows<IllegalArgumentException> { LottoTicket.of(setOf(1, 2, 3, 4, 5, 6, 7)) } }
         )
     }
-
-    "WinnerTicket.countMatchNumbers(LottoTicket)는 당첨번호와 몇 개가 일치하는지 반환한다." {
-        //given
-        val winnerTicket = WinnerTicket.of(setOf(1, 2, 3, 4, 5, 6))
-        val lottoTicket = LottoTicket.of(setOf(1, 2, 3, 4, 5, 6))
-
-        //when
-        val matchCount = winnerTicket.countMatchNumbers(lottoTicket)
-
-        //then
-        assertThat(matchCount).isEqualTo(6)
-    }
 })
