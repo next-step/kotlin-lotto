@@ -4,11 +4,11 @@ class StringAddCalculator(
     vararg delimiter: String = DEFAULT_DELIMITERS
 ) {
     companion object {
-        val DEFAULT_DELIMITERS = arrayOf(",", ":")
-        const val REGEX_DELIMITER = "|"
-        const val REGEX_PREFIX = "("
-        const val REGEX_POSTFIX = ")"
-        const val REGEX_INPUT_PARSING = "//(.*)\n(.*)"
+        private val DEFAULT_DELIMITERS = arrayOf(",", ":")
+        private const val REGEX_DELIMITER = "|"
+        private const val REGEX_PREFIX = "("
+        private const val REGEX_POSTFIX = ")"
+        private const val REGEX_INPUT_PARSING = "//(.*)\n(.*)"
     }
 
     private val delimiterRegex: Regex
