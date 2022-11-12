@@ -76,23 +76,24 @@ class StringAddCalculatorTest : BehaviorSpec({
     }
 
     given("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.") {
-        fun randomDelimiter() = listOf(",", ":", "-", "~", "/", "%", "+", "-", "|", "?", "*").random()
+        listOf(",", ":", "-", "~", "/", "%", "+", "-", "|", "?", "*")
+            .forEach { givenCustomDelimiter ->
+                InputDataSet.testValidNumberTuple3DataList()
+                    .asSequence()
+                    .shuffled()
+                    .take(10)
+                    .forEach { tuple ->
+                        val inputText = "//$givenCustomDelimiter\n${tuple.a}$givenCustomDelimiter${tuple.b}$givenCustomDelimiter${tuple.c}"
+                        val expected = tuple.a + tuple.b + tuple.c
 
-        InputDataSet.testValidNumberTuple3DataList()
-            .shuffled()
-            .take(100)
-            .forEach { tuple ->
-                val givenCustomDelimiter = randomDelimiter()
-                val inputText = "//$givenCustomDelimiter\n${tuple.a}$givenCustomDelimiter${tuple.b}$givenCustomDelimiter${tuple.c}"
-                val expected = tuple.a + tuple.b + tuple.c
+                        `when`("커스텀 구분자를 지정한 경우, \"$inputText\"") {
+                            val result = stringAddCalculator.calculate(inputText)
 
-                `when`("커스텀 구분자를 지정한 경우, \"$inputText\"") {
-                    val result = stringAddCalculator.calculate(inputText)
-
-                    then("stringAddCalculator.calculate(\"$inputText\") should return $expected") {
-                        result shouldBe expected
+                            then("stringAddCalculator.calculate(\"$inputText\") should return $expected") {
+                                result shouldBe expected
+                            }
+                        }
                     }
-                }
             }
     }
 })
