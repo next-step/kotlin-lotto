@@ -4,7 +4,7 @@ import io.kotest.core.Tuple3
 
 class InputDataSet {
     companion object {
-        private val NUMBER_LIST = (0..25)
+        private val NUMBER_LIST = (0..100)
 
         fun testValidNumberDataList(): List<Int> = NUMBER_LIST.toList()
 
