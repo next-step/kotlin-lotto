@@ -1,10 +1,14 @@
-package lotto
+package lotto.domain
+
+import lotto.dto.LottoResult
+
+private const val WINNER_TICKET_SIZE = 6
 
 class WinnerTicket(
     private val winnerNumbers: Set<LottoNumber>
 ) {
     init {
-        require(winnerNumbers.size == 6)
+        require(winnerNumbers.size == WINNER_TICKET_SIZE)
     }
 
     fun drawResult(lottoTicket: LottoTicket): LottoResult {

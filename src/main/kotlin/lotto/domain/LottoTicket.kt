@@ -1,10 +1,12 @@
-package lotto
+package lotto.domain
+
+private const val LOTTO_TICKET_SIZE = 6
 
 class LottoTicket(
     private val lottoNumbers: Set<LottoNumber>
 ) {
     init {
-        require(lottoNumbers.size == 6)
+        require(lottoNumbers.size == LOTTO_TICKET_SIZE)
     }
 
     fun countMatchNumbers(predicate: (LottoNumber) -> Boolean): Int {
