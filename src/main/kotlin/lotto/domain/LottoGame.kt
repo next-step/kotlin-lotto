@@ -1,4 +1,6 @@
-package lotto
+package lotto.domain
+
+import lotto.dto.LottoResults
 
 
 class LottoGame(
@@ -8,7 +10,7 @@ class LottoGame(
     fun pickWinnerTickets(): LottoResults {
         return LottoResults(
             winnings = lottoTickets.map { winnerTicket.drawResult(it) }
-                .filter { it.matchCount >= 3 },
+                .filter { it.isWinning() },
             purchaseCount = lottoTickets.size
         )
     }
