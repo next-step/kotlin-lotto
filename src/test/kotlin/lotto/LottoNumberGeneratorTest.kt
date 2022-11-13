@@ -8,7 +8,7 @@ import lotto.util.LottoNumberGenerator
 class LottoNumberGeneratorTest : StringSpec({
     "1~45 사이의 랜덤 숫자 6개를 반환한다."{
         //when
-        val lottoNumbers = LottoNumberGenerator.generateNumbers().toList()
+        val lottoNumbers = LottoNumberGenerator.generate(1)[0].toList()
         //then
         lottoNumbers.size shouldBe 6
         lottoNumbers[0] shouldBeInRange 1..45
