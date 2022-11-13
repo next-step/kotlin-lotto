@@ -1,6 +1,7 @@
 package lotto
 
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.shouldBe
 
 class LottoGameTest : BehaviorSpec({
 
@@ -10,9 +11,9 @@ class LottoGameTest : BehaviorSpec({
             WinnerTicket.of(setOf(1,2,3,4,5,6))
         )
         When("수익률은"){
-            val yield = lottoGame.calculateYield()
+            val profitRate = lottoGame.calculateProfitRate()
             Then("2000000000/1000 이다."){
-                yield shouldBe 2000000000/1000
+                profitRate shouldBe 2000000000/1000
             }
         }
     }
