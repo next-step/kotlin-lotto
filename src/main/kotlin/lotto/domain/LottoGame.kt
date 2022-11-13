@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.dto.LottoResults
 
+private const val TICKET_PRICE = 1000
 
 class LottoGame(
     val lottoTickets: List<LottoTicket>,
@@ -15,5 +16,11 @@ class LottoGame(
         )
     }
 
-
+    companion object {
+        fun purchaseTicket(amount: Int): Int {
+            val purchaseCount = amount / TICKET_PRICE
+            require(purchaseCount > 0)
+            return purchaseCount
+        }
+    }
 }
