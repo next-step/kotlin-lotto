@@ -1,7 +1,7 @@
 package lotto
 
 import io.kotest.core.spec.style.StringSpec
-import org.assertj.core.api.Assertions.assertThat
+import lotto.domain.LottoTicket
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 

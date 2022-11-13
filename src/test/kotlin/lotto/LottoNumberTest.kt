@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import lotto.domain.LottoNumber
 import org.junit.jupiter.api.assertAll
 import kotlin.IllegalArgumentException
 
