@@ -10,10 +10,10 @@ class LottoGameTest : BehaviorSpec({
             listOf(LottoTicket.of(setOf(1, 2, 3, 4, 5, 6))),
             WinnerTicket.of(setOf(1, 2, 3, 4, 5, 6))
         )
-        When("수익률은") {
-            val profitRate = lottoGame.calculateProfitRate()
-            Then("2000000000/1000 이다.") {
-                profitRate shouldBe 2000000000.0 / 1000
+        When("당첨된 티켓을 확인하면") {
+            val winnerTicket = lottoGame.pickWinnerTickets()
+            Then("수익률은 2000000000/1000 이다.") {
+                winnerTicket.calculateProfitRate() shouldBe 2000000000.0 / 1000
             }
         }
     }
