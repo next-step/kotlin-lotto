@@ -9,8 +9,8 @@ class StringCalculator {
             if (input.isNullOrEmpty()) return DEFAULT_RETURN_VALUE
 
             return StringParser.splitBySeparator(input)
-                .map { stringNumber -> PositiveInt.of(stringNumber) }
-                .reduce(PositiveInt::plus)
+                .map { stringNumber -> Positive.of(stringNumber) }
+                .reduce(Positive::plus)
                 .value
         }
 
