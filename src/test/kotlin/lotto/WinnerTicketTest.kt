@@ -12,7 +12,7 @@ class WinnerTicketTest : BehaviorSpec({
         When("매칭된 번호를 확인하는 countMatchNumbers를 호출하면") {
             val matchCount = winnerTicket.countMatchNumbers(lottoTicket)
 
-            Then("일치하는 숫자 6을 반환한다.") {
+            Then("일치하는 숫자의 갯수 6을 반환한다.") {
                 matchCount shouldBe 6
             }
         }
