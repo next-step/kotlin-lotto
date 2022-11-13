@@ -2,6 +2,9 @@ package lotto
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoGame
+import lotto.domain.LottoTicket
+import lotto.domain.WinnerTicket
 
 class LottoGameTest : BehaviorSpec({
 

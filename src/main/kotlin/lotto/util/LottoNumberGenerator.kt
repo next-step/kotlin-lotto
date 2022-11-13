@@ -1,10 +1,10 @@
-package lotto
+package lotto.util
 
 class LottoNumberGenerator {
     companion object{
-        fun generateNumbers(): List<Int> {
+        fun generateNumbers(): Set<Int> {
             return (1..45).shuffled()
-                .subList(0, 6)
+                .subList(0, 6).toSet()
         }
     }
 }
