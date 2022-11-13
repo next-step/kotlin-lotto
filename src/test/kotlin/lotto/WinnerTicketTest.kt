@@ -11,11 +11,11 @@ class WinnerTicketTest : BehaviorSpec({
         val winnerTicket = WinnerTicket.of(setOf(1, 2, 3, 4, 5, 6))
         val lottoTicket = LottoTicket.of(setOf(1, 2, 3, 4, 5, 6))
 
-        When("매칭된 번호를 확인하는 countMatchNumbers를 호출하면") {
-            val matchCount = winnerTicket.drawResult(lottoTicket)
+        When("매칭된 로또의 결과를 확인하는 drawResult를 호출하면") {
+            val lottoResult = winnerTicket.drawResult(lottoTicket)
 
             Then("일치하는 숫자의 갯수 6을 반환한다.") {
-                matchCount shouldBe 6
+                lottoResult.matchCount shouldBe 6
             }
         }
     }
