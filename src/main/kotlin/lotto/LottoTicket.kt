@@ -7,7 +7,7 @@ class LottoTicket(
         require(lottoNumbers.size == 6)
     }
 
-    fun count(predicate: (LottoNumber) -> Boolean): Int {
+    fun countMatchNumbers(predicate: (LottoNumber) -> Boolean): Int {
         return lottoNumbers.count { predicate(it) }
     }
 

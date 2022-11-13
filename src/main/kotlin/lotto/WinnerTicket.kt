@@ -7,8 +7,10 @@ class WinnerTicket(
         require(winnerNumbers.size == 6)
     }
 
-    fun countMatchNumbers(lottoTicket: LottoTicket): Int {
-        return lottoTicket.count(winnerNumbers::contains)
+    fun drawResult(lottoTicket: LottoTicket): LottoResult {
+        return LottoResult.fromMatchCount(
+            lottoTicket.countMatchNumbers(winnerNumbers::contains)
+        )
     }
 
     companion object {
