@@ -1,7 +1,9 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
 import lotto.domain.LottoGame
 import lotto.domain.LottoTicket
 import lotto.domain.WinnerTicket
@@ -17,6 +19,16 @@ class LottoGameTest : BehaviorSpec({
             val winnerTicket = lottoGame.pickWinnerTickets()
             Then("수익률은 2000000000/1000 이다.") {
                 winnerTicket.calculateProfitRate() shouldBe 2000000000.0 / 1000
+            }
+        }
+    }
+
+    given("로또 구입 금액 999원으로") {
+        val amount = 999
+        When("티켓을 구매하면") {
+            Then("로또는 최소 1장 이상 구매할 수 있습니다. 메시지의 IllegalArgumentException이 발생한다.") {
+                shouldThrow<IllegalArgumentException>{LottoGame.purchaseTicket(amount)}
+                    .shouldHaveMessage("로또는 최소 1장 이상 구매할 수 있습니다.")
             }
         }
     }
