@@ -14,13 +14,13 @@ fun main() {
     val amount = InputView.askPurchaseAmount()
     val purchaseCount = LottoGame.purchaseTicket(amount)
     OutputView.printPurchase(purchaseCount)
-    val lottoNumberList = LottoNumberGenerator.generate(purchaseCount)
-    OutputView.printLottoNumbers(lottoNumberList)
+    val lottoNumbers = LottoNumberGenerator.generate(purchaseCount)
+    OutputView.printLottoNumbers(lottoNumbers)
 
     val winnerNumber = InputView.askWinnerNumber()
 
     val lottoGame = LottoGame(
-        lottoTickets = lottoNumberList.map { LottoTicket.of(it) },
+        lottoTickets = lottoNumbers.map { LottoTicket.of(it) },
         winnerTicket = WinnerTicket.of(winnerNumber)
     )
     val winnerTickets = lottoGame.pickWinnerTickets()
