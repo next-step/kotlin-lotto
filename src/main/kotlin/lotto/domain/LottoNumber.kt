@@ -21,5 +21,4 @@ class LottoNumber(
     override fun hashCode(): Int {
         return value
     }
-
 }

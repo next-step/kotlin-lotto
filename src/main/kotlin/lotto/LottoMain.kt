@@ -26,3 +26,4 @@ fun main() {
     val winnerTickets = lottoGame.pickWinnerTickets()
     OutputView.printStatistics(winnerTickets.statistics(), winnerTickets.calculateProfitRate())
 }
+
