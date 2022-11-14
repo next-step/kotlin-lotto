@@ -7,14 +7,13 @@ private const val TICKET_PRICE = 1000
 private const val MINIMUM_PURCHASE_COUNT = 1
 
 class LottoGame(
-    val lottoTickets: List<LottoTicket>,
+    val lottoTicketBulk: LottoTicketBulk,
     val winnerTicket: WinnerTicket
 ) {
-    fun pickWinnerTickets(): LottoResults {
+    fun result(): LottoResults {
         return LottoResults(
-            winnings = lottoTickets.map { winnerTicket.drawResult(it) }
-                .filter { it.isWinning() },
-            purchaseCount = lottoTickets.size
+            winnings = lottoTicketBulk.pickWinnerTickets(winnerTicket),
+            purchaseCount = lottoTicketBulk.size()
         )
     }
 

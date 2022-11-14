@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.LottoGame
-import lotto.domain.LottoTicket
+import lotto.domain.LottoTicketBulk
 import lotto.domain.WinnerTicket
 import lotto.util.LottoNumberGenerator
 import lotto.view.InputView
@@ -20,10 +20,10 @@ fun main() {
     val winnerNumber = InputView.askWinnerNumber()
 
     val lottoGame = LottoGame(
-        lottoTickets = lottoNumbers.map { LottoTicket.of(it) },
+        lottoTicketBulk = LottoTicketBulk.of(lottoNumbers),
         winnerTicket = WinnerTicket.of(winnerNumber)
     )
-    val winnerTickets = lottoGame.pickWinnerTickets()
+    val winnerTickets = lottoGame.result()
     OutputView.printStatistics(winnerTickets.statistics(), winnerTickets.calculateProfitRate())
 }
 
