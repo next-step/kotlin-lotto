@@ -1,6 +1,7 @@
 package lotto
 
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import lotto.util.LottoNumberGenerator
@@ -11,12 +12,7 @@ class LottoNumberGeneratorTest : StringSpec({
         val lottoNumbers = LottoNumberGenerator.generate(1)[0].toList()
         //then
         lottoNumbers.size shouldBe 6
-        lottoNumbers[0] shouldBeInRange 1..45
-        lottoNumbers[1] shouldBeInRange 1..45
-        lottoNumbers[2] shouldBeInRange 1..45
-        lottoNumbers[3] shouldBeInRange 1..45
-        lottoNumbers[4] shouldBeInRange 1..45
-        lottoNumbers[5] shouldBeInRange 1..45
+        lottoNumbers.forAll { it shouldBeInRange 1..45 }
     }
 
 })
