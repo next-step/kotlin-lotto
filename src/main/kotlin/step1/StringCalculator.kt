@@ -8,11 +8,10 @@ class StringCalculator {
         fun calculate(input: String?): Int {
             if (input.isNullOrEmpty()) return DEFAULT_RETURN_VALUE
 
-            val numberList = StringParser.splitBySeparator(input)
-                .map { stringNumber -> PositiveInt.of(stringNumber) }
-                .map { it.value }
-
-            return numberList.sum()
+            return StringParser.splitBySeparator(input)
+                .map { stringNumber -> Positive.of(stringNumber) }
+                .reduce(Positive::plus)
+                .value
         }
 
 
