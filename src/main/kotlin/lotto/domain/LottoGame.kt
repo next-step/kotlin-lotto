@@ -12,7 +12,7 @@ class LottoGame(
 ) {
     fun result(): LottoResults {
         return LottoResults(
-            winnings = lottoTicketBulk.pickWinnerTickets(winnerTicket),
+            winnings = lottoTicketBulk.checkResult(winnerTicket),
             purchaseCount = lottoTicketBulk.size()
         )
     }
