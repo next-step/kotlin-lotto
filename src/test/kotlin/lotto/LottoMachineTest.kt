@@ -11,10 +11,10 @@ class LottoMachineTest : StringSpec({
         //given
         val lottoMachine = LottoMachine()
         //when
-        val lottoNumbers = lottoMachine.generate(1)[0].toList()
+        val lottoNumbers = lottoMachine.purchase(1).lottoTickets[0]
         //then
-        lottoNumbers.size shouldBe 6
-        lottoNumbers.forAll { it shouldBeInRange 1..45 }
+        lottoNumbers.lottoNumbers.size shouldBe 6
+        lottoNumbers.lottoNumbers.forAll { it.value shouldBeInRange 1..45 }
     }
 
 })

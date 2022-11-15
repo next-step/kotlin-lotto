@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.LottoGame
-import lotto.domain.LottoTicketBulk
 import lotto.domain.WinnerTicket
 import lotto.domain.LottoMachine
 import lotto.view.InputView
@@ -15,13 +14,13 @@ fun main() {
     val purchaseCount = LottoGame.purchaseTicket(amount)
     OutputView.printPurchase(purchaseCount)
     val lottoMachine = LottoMachine()
-    val lottoNumbers = lottoMachine.generate(purchaseCount)
-    OutputView.printLottoNumbers(lottoNumbers)
+    val lottoTicketBulk = lottoMachine.purchase(purchaseCount)
+    OutputView.printLottoNumbers(lottoTicketBulk)
 
     val winnerNumber = InputView.askWinnerNumber()
 
     val lottoGame = LottoGame(
-        lottoTicketBulk = LottoTicketBulk.of(lottoNumbers),
+        lottoTicketBulk = lottoTicketBulk,
         winnerTicket = WinnerTicket.of(winnerNumber)
     )
     val winnerTickets = lottoGame.result()
