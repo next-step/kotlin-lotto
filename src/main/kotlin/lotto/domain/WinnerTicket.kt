@@ -9,7 +9,8 @@ class WinnerTicket(
     private val bonus: LottoNumber
 ) {
     init {
-        require(winnerNumbers.size == WINNER_TICKET_SIZE)
+        require(winnerNumbers.size == WINNER_TICKET_SIZE) { "당첨 티켓의 당첨번호는 6개의 숫자로 이루어져야 합니다." }
+        require(!winnerNumbers.contains(bonus)) { "보너스 번호는 당첨번호와 중복되면 안됩니다." }
     }
 
     fun drawResult(lottoTicket: LottoTicket): LottoResult {
