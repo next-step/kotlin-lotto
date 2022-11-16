@@ -9,8 +9,8 @@ class LottoTicket(
         require(lottoNumbers.size == LOTTO_TICKET_SIZE) {"로또 티켓의 번호는 6개의 숫자로 이루어져야 합니다."}
     }
 
-    fun countMatchNumbers(predicate: (LottoNumber) -> Boolean): Int {
-        return lottoNumbers.count { predicate(it) }
+    fun hasNumber(number: LottoNumber): Boolean {
+        return lottoNumbers.contains(number)
     }
 
     companion object {
