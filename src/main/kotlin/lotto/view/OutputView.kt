@@ -22,7 +22,10 @@ class OutputView {
             println("당첨 통계")
             println("---------")
             statistics.forEach {
-                println("${it.lottoResult.matchCount}개 일치 (${it.lottoResult.winningMoney}원)- ${it.count}개")
+                print("${it.lottoResult.matchCount}개 일치")
+                if (it.lottoResult.matchBonus)
+                    print(", 보너스 볼 일치 ")
+                println("(${it.lottoResult.winningMoney}원)- ${it.count}개")
             }
             println("총 수익률은 ${profitRate}입니다.")
         }
