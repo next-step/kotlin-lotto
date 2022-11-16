@@ -18,10 +18,11 @@ fun main() {
     OutputView.printLottoNumbers(lottoTicketBulk)
 
     val winnerNumber = InputView.askWinnerNumber()
+    val bonusNumber = InputView.askBonusNumber()
 
     val lottoGame = LottoGame(
         lottoTicketBulk = lottoTicketBulk,
-        winnerTicket = WinnerTicket.of(winnerNumber)
+        winnerTicket = WinnerTicket.of(winnerNumber, bonusNumber)
     )
     val winnerTickets = lottoGame.result()
     OutputView.printStatistics(winnerTickets.statistics(), winnerTickets.calculateProfitRate())
