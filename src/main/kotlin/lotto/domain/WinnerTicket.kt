@@ -5,7 +5,8 @@ import lotto.dto.LottoResult
 private const val WINNER_TICKET_SIZE = 6
 
 class WinnerTicket(
-    private val winnerNumbers: Set<LottoNumber>
+    private val winnerNumbers: Set<LottoNumber>,
+    private val bonus: LottoNumber
 ) {
     init {
         require(winnerNumbers.size == WINNER_TICKET_SIZE)
@@ -13,14 +14,15 @@ class WinnerTicket(
 
     fun drawResult(lottoTicket: LottoTicket): LottoResult {
         return LottoResult.fromMatchCount(
-            lottoTicket.countMatchNumbers(winnerNumbers::contains)
+            winnerNumbers.count { lottoTicket.hasNumber(it) },
+            lottoTicket.hasNumber(bonus)
         )
     }
 
     companion object {
-        fun of(numbers: Set<Int>): WinnerTicket {
+        fun of(numbers: Set<Int>, bonusNumber: Int): WinnerTicket {
             return WinnerTicket(numbers.map { LottoNumber(it) }
-                .toSet())
+                .toSet(), LottoNumber(bonusNumber))
         }
     }
 }
