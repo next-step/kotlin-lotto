@@ -16,10 +16,10 @@ class LottoResults(
 
     fun statistics(): List<StatisticResult> {
         return LottoResult.winningValues()
-            .map { StatisticResult(it, countFromWinnings(it.matchCount)) }
+            .map { StatisticResult(it, countFromWinnings(it.matchCount, it.matchBonus)) }
     }
 
-    private fun countFromWinnings(matchNumber: Int): Int {
-        return winnings.count { it.matchCount == matchNumber }
+    private fun countFromWinnings(matchNumber: Int, matchBonus: Boolean): Int {
+        return winnings.count { it.matchCount == matchNumber && it.matchBonus == matchBonus}
     }
 }
