@@ -1,16 +1,9 @@
 package nextstep.mission.calculator
 
-class StringCalculator {
+object StringCalculator {
 
-    fun calculate(expression: String?): Int {
-        if (expression.isNullOrBlank()) {
-            return 0
-        }
-
-        if (expression.toInt() < 0) {
-            throw RuntimeException()
-        }
-
-        return -1
+    fun calculate(acc: Int = 0, expression: MutableList<Int> = mutableListOf()): Int = when {
+        expression.isEmpty() -> acc
+        else -> -1
     }
 }
