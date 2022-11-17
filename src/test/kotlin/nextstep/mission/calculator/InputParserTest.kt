@@ -12,4 +12,8 @@ class InputParserTest : StringSpec({
     """//와 \n 사이에 위치하는 문자를 커스텀 구분자로 사용하여 분리한 숫자 리스트를 반환한다.""" {
         InputParser.parse("//;\n1;2;3") shouldBe listOf(1, 2, 3)
     }
+
+    "null이 들어오면 빈 리스트를 반환한다." {
+        InputParser.parse(null) shouldBe emptyList()
+    }
 })
