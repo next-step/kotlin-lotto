@@ -2,8 +2,8 @@ package nextstep.mission.calculator
 
 class StringCalculator {
 
-    fun calculate(expression: String): Int {
-        if (expression.isEmpty()) {
+    fun calculate(expression: String?): Int {
+        if (expression.isNullOrBlank()) {
             return 0
         }
 
