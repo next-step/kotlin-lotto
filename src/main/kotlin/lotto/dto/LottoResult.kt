@@ -1,5 +1,7 @@
 package lotto.dto
 
+import java.lang.IllegalArgumentException
+
 private const val MINIMUM_WINNING_COUNT = 3
 
 private const val SECOND_PRIZE_CANDIDATE = 5
@@ -28,7 +30,7 @@ enum class LottoResult(
             if(isSecondPrize(count, matchBonus)){
                 return MATCH_FIVE_NUMBERS_WITH_BONUS
             }
-            return values().first { it.matchCount == count }
+            return values().firstOrNull { it.matchCount == count } ?: throw IllegalArgumentException("당첨된 개수는 3~6개 중 하나입니다.")
         }
 
         private fun isSecondPrize(count: Int, matchBonus: Boolean) = count == SECOND_PRIZE_CANDIDATE && matchBonus
