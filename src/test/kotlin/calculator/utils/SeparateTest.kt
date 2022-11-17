@@ -1,4 +1,4 @@
-package calculator
+package calculator.utils
 
 import calculator.utils.Separate
 import org.assertj.core.api.Assertions.assertThat
