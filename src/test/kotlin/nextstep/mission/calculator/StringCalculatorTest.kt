@@ -15,4 +15,8 @@ class StringCalculatorTest : StringSpec({
             StringCalculator.calculate(expression = mutableListOf(-3))
         }
     }
+
+    "빈 문자열, 음수가 없으면 숫자의 합을 반환한다." {
+        StringCalculator.calculate(expression = mutableListOf(1, 2, 3)) shouldBe 6
+    }
 })
