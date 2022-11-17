@@ -13,8 +13,8 @@
 
 ### 문자 입력
 
-- [ ] 문자 입력 중 숫자 이외의 값이 포함된 경우 RuntimeException 오류
-- [ ] 문자 입력 중 음수 값이 포함된 경우 RuntimeException 오류
+- [x] 문자 입력 중 숫자 이외의 값이 포함된 경우 RuntimeException 오류
+- [x] 문자 입력 중 음수 값이 포함된 경우 RuntimeException 오류
 
 ### 문자열 분리
 
