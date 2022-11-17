@@ -1,8 +1,8 @@
 package calculator.utils
 
-object Separate {
+object Separator {
 
-    fun findSeparator(str: String) =
+    fun findInString(str: String) =
         Regex("(?<=//)(.*?)(?=\n)").find(str)?.value ?: ""
 
     fun divideBySeparator(separator: String, text: String): List<String> {
