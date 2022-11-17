@@ -6,6 +6,11 @@ class StringCalculator {
         if (expression.isEmpty()) {
             return 0
         }
+
+        if (expression.toInt() < 0) {
+            throw RuntimeException()
+        }
+
         return -1
     }
 }
