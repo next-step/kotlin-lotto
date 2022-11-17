@@ -4,9 +4,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
-import stringcalculator.StringNumbers.Companion.REGEX_CUSTOM_DELIMITER
 
 class StringNumbersTest {
     @ParameterizedTest
@@ -46,10 +46,9 @@ class StringNumbersTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3", "//#\n2#4#5"])
+    @CsvSource(value = ["'//;\n1;2;3', 1:2:3", "'//#\n2#4#5', 2:4:5"])
     @DisplayName("'//'와 '\n' 사이에 위치하는 문자를 커스텀 구분자로 분리하여 리스트로 반환한다")
-    fun `커스텀 구분자를 사용한다`(text: String) {
-        val numbers = Regex(REGEX_CUSTOM_DELIMITER).find(text)?.let { it.groupValues[2].split(it.groupValues[1]) }
-        assertThat(StringNumbers(text).list).isEqualTo(numbers?.map { it.toInt() })
+    fun `커스텀 구분자를 사용한다`(text: String, numbersText: String) {
+        assertThat(StringNumbers(text).list).isEqualTo(numbersText.split(":").map { it.toInt() })
     }
 }
