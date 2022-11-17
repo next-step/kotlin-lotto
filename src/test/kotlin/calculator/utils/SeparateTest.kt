@@ -28,9 +28,16 @@ internal class SeparateTest {
     }
 
     @Test
-    @DisplayName("//;\n1;2;3 문자열이 입력된 경우 세미콜론(;)으로 구분하여 배열 {'1', '2', '3'}을 만듬")
+    @DisplayName("1;2;3 문자열이 입력된 경우 세미콜론(;)으로 구분하여 배열 {'1', '2', '3'}을 만듬")
     fun `Create an array {'1', '2', '3'} separated by semicolons if a string is entered`() {
-        val strings = Separate.divideBySeparator(";", "//;\n1;2;3")
+        val strings = Separate.divideBySeparator(";", "1;2;3")
         assertThat(strings).isEqualTo(listOf("1", "2", "3"))
+    }
+
+    @Test
+    @DisplayName("//;\n1;2;3 문자열이 입력된 경우 \n뒤에 따라오는 1;2;3문자만 꺼냄")
+    fun `Just the text at the end`() {
+        val strings = Separate.getNextValue("//;\n1;2;3")
+        assertThat(strings).isEqualTo("1;2;3")
     }
 }
