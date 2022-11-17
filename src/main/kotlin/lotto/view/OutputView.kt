@@ -6,8 +6,8 @@ import lotto.dto.StatisticResult
 class OutputView {
 
     companion object {
-        fun printPurchase(purchaseCount: Int) {
-            println("${purchaseCount}개를 구매했습니다.")
+        fun printPurchase(autoPurchaseCount: Int, manualPurchaseCount: Int) {
+            println("수동으로 ${autoPurchaseCount}장, 자동으로 ${manualPurchaseCount}개를 구매했습니다.")
         }
 
         fun printLottoNumbers(lottoTicketBulkDto: LottoTicketBulkDto) {

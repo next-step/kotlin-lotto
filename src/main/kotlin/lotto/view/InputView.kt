@@ -1,7 +1,5 @@
 package lotto.view
 
-import java.lang.IllegalArgumentException
-
 class InputView {
     companion object {
         fun askPurchaseAmount(): Int {
@@ -15,9 +13,24 @@ class InputView {
                 .map { it.toInt() }
                 .toSet()
         }
+
         fun askBonusNumber(): Int {
             println("보너스 볼을 입력해 주세요.")
             return readln().toInt()
+        }
+
+        fun askManualPurchaseCount(): Int {
+            println("수동으로 구매할 로또 수를 입력해 주세요.")
+            return readln().toInt()
+        }
+
+        fun askManualLottoTicketNumbers(manualCount: Int): List<Set<Int>> {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+            return (1..manualCount).map {
+                readln().split(", ")
+                    .map { it.toInt() }
+                    .toSet()
+            }
         }
     }
 }
