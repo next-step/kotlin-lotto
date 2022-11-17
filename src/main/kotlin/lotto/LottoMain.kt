@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.LottoGame
 import lotto.domain.WinnerTicket
 import lotto.domain.LottoMachine
+import lotto.dto.LottoTicketBulkDto
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -15,7 +16,7 @@ fun main() {
     OutputView.printPurchase(purchaseCount)
     val lottoMachine = LottoMachine()
     val lottoTicketBulk = lottoMachine.purchase(purchaseCount)
-    OutputView.printLottoNumbers(lottoTicketBulk)
+    OutputView.printLottoNumbers(LottoTicketBulkDto(lottoTicketBulk))
 
     val winnerNumber = InputView.askWinnerNumber()
     val bonusNumber = InputView.askBonusNumber()

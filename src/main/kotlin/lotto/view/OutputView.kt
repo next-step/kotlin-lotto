@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.domain.LottoTicketBulk
+import lotto.dto.LottoTicketBulkDto
 import lotto.dto.StatisticResult
 
 class OutputView {
@@ -10,10 +10,9 @@ class OutputView {
             println("${purchaseCount}개를 구매했습니다.")
         }
 
-        fun printLottoNumbers(lottoTicketBulk: LottoTicketBulk) {
-            lottoTicketBulk.lottoTickets.forEach {
-                println(it.lottoNumbers.map { lottoNumber -> lottoNumber.value }
-                    .joinToString(separator = ", ", prefix = "[", postfix = "]"))
+        fun printLottoNumbers(lottoTicketBulkDto: LottoTicketBulkDto) {
+            lottoTicketBulkDto.tickets.forEach {
+                println(it.joinToString(separator = ", ", prefix = "[", postfix = "]"))
             }
             println()
         }
