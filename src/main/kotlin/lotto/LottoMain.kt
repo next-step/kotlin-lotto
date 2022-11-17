@@ -22,7 +22,7 @@ fun main() {
 
     val lottoGame = LottoGame(
         lottoTicketBulk = lottoTicketBulk,
-        winnerTicket = WinnerTicket.of(winnerNumber, bonusNumber)
+        winnerTicket = WinnerTicket(winnerNumber, bonusNumber)
     )
     val winnerTickets = lottoGame.result()
     OutputView.printStatistics(winnerTickets.statistics(), winnerTickets.calculateProfitRate())

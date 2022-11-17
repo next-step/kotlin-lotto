@@ -13,17 +13,15 @@ class WinnerTicket(
         require(!winnerNumbers.contains(bonus)) { "보너스 번호는 당첨번호와 중복되면 안됩니다." }
     }
 
+    constructor(numbers: Set<Int>, bonusNumber: Int) : this(
+        numbers.map { LottoNumber(it) }.toSet(),
+        LottoNumber(bonusNumber)
+    )
+
     fun drawResult(lottoTicket: LottoTicket): LottoResult {
         return LottoResult.fromMatchCount(
             winnerNumbers.count { lottoTicket.hasNumber(it) },
             lottoTicket.hasNumber(bonus)
         )
-    }
-
-    companion object {
-        fun of(numbers: Set<Int>, bonusNumber: Int): WinnerTicket {
-            return WinnerTicket(numbers.map { LottoNumber(it) }
-                .toSet(), LottoNumber(bonusNumber))
-        }
     }
 }
