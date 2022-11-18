@@ -12,7 +12,7 @@ object Separator {
         return text.split(separator)
     }
 
-    fun getNextValue(text: String): String {
+    fun getStringToAdd(text: String): String {
         return text.substringAfter("\n")
     }
 }

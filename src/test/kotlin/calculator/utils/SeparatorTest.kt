@@ -37,7 +37,7 @@ internal class SeparatorTest {
     @Test
     @DisplayName("//;\n1;2;3 문자열이 입력된 경우 \n뒤에 따라오는 1;2;3문자만 꺼냄")
     fun `Just the text at the end`() {
-        val strings = Separator.getNextValue("//;\n1;2;3")
+        val strings = Separator.getStringToAdd("//;\n1;2;3")
         assertThat(strings).isEqualTo("1;2;3")
     }
 }
