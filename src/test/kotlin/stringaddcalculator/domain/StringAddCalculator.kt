@@ -4,6 +4,6 @@ class StringAddCalculator {
 
     fun add(text: String?): Int {
         val stringNumbers = StringNumbers(text)
-        return 0
+        return stringNumbers.sum()
     }
 }
