@@ -2,7 +2,7 @@ package lotto.domain
 
 
 class Lotto {
-    var numbers: List<Int> = createLottoNumbers().sorted()
+    var numbers: Set<Int> = createLottoNumbers()
         private set
 
     companion object {
@@ -10,6 +10,6 @@ class Lotto {
         const val LOTTO_NUMBER_RANGE_END = 45
         const val LOTTO_NUMBER_COUNT = 6
         fun createLottoNumbers() =
-            (LOTTO_NUMBER_RANGE_START..LOTTO_NUMBER_RANGE_END).shuffled().subList(0, LOTTO_NUMBER_COUNT)
+            (LOTTO_NUMBER_RANGE_START..LOTTO_NUMBER_RANGE_END).shuffled().subList(0, LOTTO_NUMBER_COUNT).toSet()
     }
 }
