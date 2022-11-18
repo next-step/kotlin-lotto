@@ -21,12 +21,7 @@ class WinningNumbersTest : StringSpec() {
 
         "번호가 당첨되었는지 확인할 수 있다" {
             val winningNumbers = WinningNumbers("1,2,3,4,5,6")
-            val lotto = Lotto(listOf(LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6)))
+            val lotto = Lotto("1,2,3,4,5,6")
 
             val matchCount = winningNumbers.rank(lotto)
              matchCount shouldBe 6
