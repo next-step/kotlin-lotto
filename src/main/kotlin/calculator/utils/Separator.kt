@@ -2,7 +2,7 @@ package calculator.utils
 
 object Separator {
 
-    fun findInString(str: String) =
+    fun findSeparatorInString(str: String) =
         Regex("(?<=//)(.*?)(?=\n)").find(str)?.value ?: ""
 
     fun divideBySeparator(separator: String, text: String): List<String> {

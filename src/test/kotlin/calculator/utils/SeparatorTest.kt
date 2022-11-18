@@ -23,7 +23,7 @@ internal class SeparatorTest {
     @Test
     @DisplayName("//;\n1;2;3 문자열이 입력된 경우 구분자는 세미콜론(;)")
     fun `If a string containing a semicolon is entered, the separator is a semicolon`() {
-        val separator = Separator.findInString("//;\n1;2;3")
+        val separator = Separator.findSeparatorInString("//;\n1;2;3")
         assertThat(separator).isEqualTo(";")
     }
 
