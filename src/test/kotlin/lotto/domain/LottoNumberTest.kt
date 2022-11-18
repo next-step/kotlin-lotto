@@ -9,14 +9,14 @@ class LottoNumberTest : StringSpec() {
         "로또 넘버는 1~45만 가질 수 있다" {
             shouldNotThrowAny {
                 for (i in 1..45) {
-                    LottoNumber(i)
+                    LottoNumber.from(i)
                 }
             }
         }
 
         "그 외의 숫자에 대해서 예외가 발생한다" {
             shouldThrow<IllegalArgumentException> {
-                LottoNumber(0)
+                LottoNumber.from(0)
             }
         }
     }
