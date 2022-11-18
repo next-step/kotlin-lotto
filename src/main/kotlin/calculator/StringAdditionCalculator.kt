@@ -1,7 +1,9 @@
 package calculator
 
 import calculator.utils.Calculation
+import calculator.utils.Conversion
 import calculator.utils.Separator
+import calculator.utils.Validation
 
 class StringAdditionCalculator {
 
@@ -10,6 +12,11 @@ class StringAdditionCalculator {
         val separator = Separator.findSeparatorInString(text)
         val stringToAdd = Separator.getStringToAdd(text)
         val strings = Separator.divideBySeparator(separator, stringToAdd)
-        return Calculation.stringArraySum(strings)
+
+        Validation.isNumericAndNegativeNumber(strings)
+
+        val ints = Conversion.stringArrayToIntArray(strings)
+
+        return Calculation.intArraySum(ints)
     }
 }
