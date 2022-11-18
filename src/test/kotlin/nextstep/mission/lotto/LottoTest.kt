@@ -19,4 +19,11 @@ class LottoTest : StringSpec({
         }
         exception.message shouldBe "로또 숫자는 중복이 허용되지 않습니다."
     }
+
+    "로또의 숫자 범위는 1에서 45 사이다." {
+        val exception = shouldThrowExactly<IllegalArgumentException> {
+            Lotto(listOf(1, 3, 10, 33, 23, 46))
+        }
+        exception.message shouldBe "로또 숫자는 1에서 45사이어야 합니다."
+    }
 })
