@@ -8,7 +8,7 @@ class Lottos(val lottoList: List<Lotto>) {
         fun from(money: Money): Lottos {
             val buyCount = money.buy(Lotto.PRICE)
             val lottoList = buildList {
-                repeat((0..buyCount).count()) {
+                repeat((1..buyCount).count()) {
                     add(Lotto())
                 }
             }
