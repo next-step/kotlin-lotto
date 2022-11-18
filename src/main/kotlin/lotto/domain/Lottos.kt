@@ -1,16 +1,18 @@
 package lotto.domain
 
-class Lottos(money: Money) {
-    val lottoList: List<Lotto>
+class Lottos(val lottoList: List<Lotto>) {
     val buyCount: Long
+        get() = lottoList.size.toLong()
 
-    init {
-        buyCount = money.buy(Lotto.PRICE)
-        lottoList = buildList {
-            repeat((0 .. 2).count()) {
-                add(Lotto())
+    companion object {
+        fun from(money: Money): Lottos {
+            val buyCount = money.buy(Lotto.PRICE)
+            val lottoList = buildList {
+                repeat((0..buyCount).count()) {
+                    add(Lotto())
+                }
             }
+            return Lottos(lottoList)
         }
     }
-
 }

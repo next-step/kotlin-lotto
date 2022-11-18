@@ -16,17 +16,18 @@ class LottoNumber private constructor(number: Int) : Comparable<LottoNumber> {
         const val MINIMUM_VALUE = 1
         const val MAXIMUM_VALUE = 45
 
-        private val lottoNumbers: MutableMap<Int, LottoNumber> = init()
+        private val lottoNumbers: MutableMap<Int, LottoNumber> = mutableMapOf()
 
         fun from(number: Int): LottoNumber {
             require(number in MINIMUM_VALUE..MAXIMUM_VALUE)
-            return lottoNumbers[number]!!
-        }
+            if (lottoNumbers.containsKey(number)) {
+                return lottoNumbers[number]!!
+            }
 
-        private fun init(): MutableMap<Int, LottoNumber> {
-            val mutableMap = mutableMapOf<Int, LottoNumber>()
-            (MINIMUM_VALUE..MAXIMUM_VALUE).forEach { mutableMap[it] = LottoNumber(it) }
-            return mutableMap
+            val lottoNumber = LottoNumber(number)
+            lottoNumbers[number] = lottoNumber
+
+            return lottoNumber
         }
     }
 }
