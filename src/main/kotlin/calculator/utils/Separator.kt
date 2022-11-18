@@ -2,8 +2,10 @@ package calculator.utils
 
 object Separator {
 
+    private val REGEX_FOR_SEPARATOR_EXTRACTION = Regex("(?<=//)(.*?)(?=\n)")
+
     fun findSeparatorInString(str: String) =
-        Regex("(?<=//)(.*?)(?=\n)").find(str)?.value ?: ""
+        REGEX_FOR_SEPARATOR_EXTRACTION.find(str)?.value ?: ""
 
     fun divideBySeparator(separator: String, text: String): List<String> {
         if (separator.isBlank()) return text.split(Regex("[,:]"))
