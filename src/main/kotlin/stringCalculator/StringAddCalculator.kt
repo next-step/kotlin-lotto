@@ -5,15 +5,18 @@ class StringAddCalculator {
         if (inputValue.isNullOrBlank()) {
             return DEFAULT_VALUE
         }
+
         val stringList = split(inputValue)
         validateNumber(stringList)
 
-        TODO("구현예정")
+        return sum(stringList)
     }
 
     private fun split(string: String): List<String> {
         return string.split(DEFAULT_DELIMITER_REGEX)
     }
+
+    private fun sum(stringList: List<String>) = stringList.sumOf { it.toInt() }
 
     companion object {
         private const val DEFAULT_VALUE = 0
