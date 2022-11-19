@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.*
 
 internal class StringAddCalculatorTest {
     private lateinit var calculator: StringAddCalculator
@@ -40,16 +39,16 @@ internal class StringAddCalculatorTest {
 
     @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = ["1,2:3"])
-    fun colons(text: String) {
-        assertThat(calculator.add(text)).isSameAs(6)
+    @MethodSource
+    fun colons(text: String, result: Int) {
+        assertThat(calculator.add(text)).isSameAs(result)
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
-    fun customDelimiter(text: String) {
-        assertThat(calculator.add(text)).isSameAs(6)
+    @MethodSource
+    fun customDelimiter(text: String, result: Int) {
+        assertThat(calculator.add(text)).isSameAs(result)
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
@@ -57,5 +56,21 @@ internal class StringAddCalculatorTest {
     fun negative() {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.add("-1") }
+    }
+
+    companion object {
+        @JvmStatic
+        fun colons() = listOf(
+            Arguments.of("1,2:3", 6),
+            Arguments.of("1,2:3,4", 10),
+            Arguments.of("1,2:3,4,5", 15),
+        )
+
+        @JvmStatic
+        fun customDelimiter() = listOf(
+            Arguments.of("//;\n1;2;3", 6),
+            Arguments.of("//;\n2;2;3", 7),
+            Arguments.of("//;\n9;1;3", 13)
+        )
     }
 }
