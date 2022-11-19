@@ -8,10 +8,10 @@ class StringAddCalculator {
 
         val (delimiter, expression) = getDelimiterAndExpression(text)
 
-        val stringNumbers = expression.split(delimiter.toRegex())
-        stringNumbers.forEach { require(it.toInt() >= MINIMUM_NUMBER) }
+        val numbers = expression.split(delimiter.toRegex()).map {it.toInt()}
+        numbers.forEach { require(it >= MINIMUM_NUMBER) }
 
-        return stringNumbers.sumOf { it.toInt() }
+        return numbers.sumOf { it }
     }
 
     private fun getDelimiterAndExpression(text: String): Pair<String, String> {
