@@ -12,6 +12,14 @@ class Calculator {
     }
 
     private fun parse(text: String): List<String> {
+        val result = Regex("//(.)\n(.*)").find(text)
+        result?.let {
+            val customDelimiter = it.groupValues[1]
+
+            return it.groupValues[2]
+                .split(customDelimiter)
+        }
+
         return text.split("[,:]".toRegex())
     }
 }

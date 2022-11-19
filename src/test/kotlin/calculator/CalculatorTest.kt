@@ -48,4 +48,11 @@ internal class CalculatorTest {
 
         assertThat(actual).isEqualTo(5)
     }
+
+    @Test
+    fun `커스텀 구분자를 지정할 수 있다`(){
+        val actual = calculator.calculate("//;\n2;3;4")
+
+        assertThat(actual).isEqualTo(9)
+    }
 }
