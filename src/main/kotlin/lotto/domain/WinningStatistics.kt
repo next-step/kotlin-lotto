@@ -1,7 +1,7 @@
 package lotto.domain
 
 class WinningStatistics(private val winningNumbers: WinningNumbers) {
-    private val matchCounter: Array<Int> = Array(7) { 0 }
+    private val matchCounter: Array<Int> = Array(LottoNumbers.LOTTO_NUMBER_COUNT + 1) { 0 }
     private var moneyUsed: Long = 0
     val profit: Float
         get() {

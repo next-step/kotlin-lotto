@@ -4,7 +4,9 @@ class WinningNumbers(winningNumbersText: String) {
     private val winningNumbers: Set<LottoNumber>
 
     init {
-        winningNumbers = winningNumbersText.split(",").map { LottoNumber.from(it.toInt()) }.toSet()
+        winningNumbers = winningNumbersText.split(TEXT_WINNING_NUMBERS_DELIMITER)
+            .map { LottoNumber.from(it.toInt()) }
+            .toSet()
         require(winningNumbers.size == LottoNumbers.LOTTO_NUMBER_COUNT)
     }
 
@@ -18,4 +20,7 @@ class WinningNumbers(winningNumbersText: String) {
         return matchCount
     }
 
+    companion object {
+        private const val TEXT_WINNING_NUMBERS_DELIMITER = ","
+    }
 }
