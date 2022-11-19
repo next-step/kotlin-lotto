@@ -9,6 +9,7 @@ class Lotto(val numbers: List<Int>) {
 
     private tailrec fun requireRange(numbers: MutableList<Int>) {
         when {
+            numbers.isEmpty() -> return
             isInvalidRange(numbers.removeFirst()) -> throw IllegalArgumentException("로또 숫자는 1에서 45사이어야 합니다.")
             else -> requireRange(numbers)
         }
