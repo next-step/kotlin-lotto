@@ -6,9 +6,7 @@ class StringAddCalculator {
             return MINIMUM_NUMBER
         }
 
-        val result = getDelimiterAndExpression(text)
-        val delimiter = result.first
-        val expression = result.second
+        val (delimiter, expression) = getDelimiterAndExpression(text)
 
         val stringNumbers = expression.split(delimiter.toRegex())
         stringNumbers.forEach { require(it.toInt() >= MINIMUM_NUMBER) }
