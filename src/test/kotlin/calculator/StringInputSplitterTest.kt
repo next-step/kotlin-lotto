@@ -25,17 +25,26 @@ internal class StringInputSplitterTest {
     fun `stringToBigDecimalList with null or empty should be zero`(stringNumber: String?) {
         val result = StringInputSplitter.stringToBigDecimalList(stringNumber)
 
-        result?.first() shouldBe BigDecimal.ZERO
+        result.first() shouldBe BigDecimal.ZERO
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1,2,3", "1,2:3", "//;\\n1;2;3"])
+    @ValueSource(strings = ["1,2,3", "1,2:3", "//;\n1;2;3"])
     fun stringToBigDecimalList(stringNumber: String) {
         val result = StringInputSplitter.stringToBigDecimalList(stringNumber)
 
         val resultNumber = listOf(1, 2, 3)
-        result?.forEachIndexed { index, number ->
+        result.forEachIndexed { index, number ->
             number shouldBe resultNumber[index].toBigDecimal()
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;;\n1;2;3", "//1,2:3", "//;\\n1;2;3"])
+    fun `stringToBigDecimalList throw InputFormatException`(text: String) {
+        val exception = assertThrows<RuntimeException> {
+            StringInputSplitter.stringToBigDecimalList(text)
+        }
+        assertThat(exception.message).isEqualTo(MessageCode.InputFormatException.message)
     }
 }
