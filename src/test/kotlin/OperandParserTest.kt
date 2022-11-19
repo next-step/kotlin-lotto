@@ -10,9 +10,9 @@ internal class OperandParserTest : FunSpec({
         )
 
         withData(
-            OperandParserTestData("//;\n1;2;3", ";") to listOf("1", "2", "3"),
-            OperandParserTestData("//!\n1!2!3", "!") to listOf("1", "2", "3"),
-            OperandParserTestData("//@\n1@2@3", "@") to listOf("1", "2", "3"),
+            OperandParserTestData("//;\n1;2;3", ";") to listOf(1, 2, 3),
+            OperandParserTestData("//!\n1!2!3", "!") to listOf(1, 2, 3),
+            OperandParserTestData("//@\n1@2@3", "@") to listOf(1, 2, 3),
         ) { (data, result) ->
             OperandParser.run(data.expression, data.delimiter) shouldBe result
         }
@@ -25,9 +25,9 @@ internal class OperandParserTest : FunSpec({
         )
 
         withData(
-            OperandParserTestData("1,2,3", null) to listOf("1", "2", "3"),
-            OperandParserTestData("1:2:3", null) to listOf("1", "2", "3"),
-            OperandParserTestData("1,2:3", null) to listOf("1", "2", "3"),
+            OperandParserTestData("1,2,3", null) to listOf(1, 2, 3),
+            OperandParserTestData("1:2:3", null) to listOf(1, 2, 3),
+            OperandParserTestData("1,2:3", null) to listOf(1, 2, 3),
         ) { (data, result) ->
             OperandParser.run(data.expression, data.delimiter) shouldBe result
         }
