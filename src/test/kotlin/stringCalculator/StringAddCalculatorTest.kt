@@ -1,5 +1,6 @@
 package stringCalculator
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -25,4 +26,21 @@ class StringAddCalculatorTest : StringSpec({
         val result = stringAddCalculator.sum("   ")
         result shouldBe expectedResult
     }
+
+    "숫자가 아닌 값를 입력하면 IllegalArgumentException이 발생한다." {
+        val stringAddCalculator = StringAddCalculator()
+        val exception = shouldThrowExactly<IllegalArgumentException> {
+            stringAddCalculator.sum("1,!")
+        }
+        exception.message shouldBe "숫자가 아닌 값 혹은 음수를 입력하였습니다. (입력값:!)"
+    }
+
+    "음수를 입력하면 IllegalArgumentException이 발생한다." {
+        val stringAddCalculator = StringAddCalculator()
+        val exception = shouldThrowExactly<IllegalArgumentException> {
+            stringAddCalculator.sum("1,-1")
+        }
+        exception.message shouldBe "숫자가 아닌 값 혹은 음수를 입력하였습니다. (입력값:-1)"
+    }
+
 })
