@@ -67,8 +67,8 @@ internal class CalculatorTest {
 
     @Test
     fun `숫자가 아닌 값을 전달할 경우 RuntimeException 예외가 발생해야 한다`() {
-        val actual = calculator.calculate("//;\n-2;3;4")
-
-        assertThat(actual).isEqualTo(9)
+        assertThrows<RuntimeException> {
+            calculator.calculate("안녕하세요")
+        }.shouldHaveMessage("계산기에 숫자가 아닌 값은 입력할 수 없습니다")
     }
 }
