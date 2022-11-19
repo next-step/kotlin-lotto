@@ -1,5 +1,7 @@
 package lotto.model
 
+import lotto.model.LottoNumberValidator.validNumber
+
 private const val LOTTO_PER_AMOUNT = 1000
 
 class LottoGame(
@@ -15,23 +17,15 @@ class LottoGame(
 
     private fun createLotto(lottoNumberGenerator: LottoNumberGenerator) {
         repeat(lottoAmount / LOTTO_PER_AMOUNT) {
-            lottos.add(Lotto(lottoNumberGenerator))
+            lottos.add(Lotto(lottoNumberGenerator.pick()))
         }
     }
 
-    fun draw(winningNumber: List<Int>) {
-        lottos.forEach {
-            it.scratch(winningNumber)
-        }
+    fun draw(winningNumber: List<Int>): List<LottoGrade> {
+        validNumber(winningNumber)
+        return lottos.map { it.scratch(winningNumber) }.toList()
     }
 
-    fun winningRate(): Double {
-        val sumLottoReward = lottos.sumOf {
-            it.grade.reward
-        }
-
-        return sumLottoReward.toDouble() / lottoAmount
-    }
 
     fun getLottos() = lottos.toList()
 }

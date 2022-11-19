@@ -1,6 +1,6 @@
 package lotto.model
 
-enum class LottoGrade(private val correctNumber: Int, val reward: Long) {
+enum class LottoGrade(val correctNumber: Int, val reward: Long) {
     BOOM(0, 0),
     BAD_GRADE(1, 0),
     UNLUCKY_GRADE(2, 0),
