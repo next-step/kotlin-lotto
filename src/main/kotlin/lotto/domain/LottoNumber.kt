@@ -12,6 +12,10 @@ class LottoNumber private constructor(number: Int) : Comparable<LottoNumber> {
         return this.number - other.number
     }
 
+    override fun toString(): String {
+        return "$number"
+    }
+
     companion object {
         const val MINIMUM_VALUE = 1
         const val MAXIMUM_VALUE = 45
