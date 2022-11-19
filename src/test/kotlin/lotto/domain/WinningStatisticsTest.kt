@@ -22,5 +22,14 @@ class WinningStatisticsTest : StringSpec() {
             winningStatistics.countOfMatchCount(3) shouldBe 1
         }
 
+        "로또 수익률을 알 수 있다" {
+            val winningStatistics = WinningStatistics(WinningNumbers("1,2,3,4,5,6"))
+            val lottos = Lottos(listOf(Lotto("1,2,3,7,8,9")))
+
+            winningStatistics.rank(lottos)
+
+            winningStatistics.profit shouldBe 5.0f
+        }
+
     }
 }
