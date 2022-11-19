@@ -4,10 +4,11 @@ import java.math.BigDecimal
 
 object StringInputSplitter {
     private const val START_LINE = "//"
-    private const val DEFAULT_REGEX = "[,:]"
     private const val CUSTOM_REGEX = "//(.)\\n(.*)"
     private const val CUSTOM_SEPARATOR_INDEX = 1
     private const val CUSTOM_TOKENS_INDEX = 2
+
+    private val defaultRegex = "[,:]".toRegex()
 
     fun stringToBigDecimalList(stringNumbers: String?): List<BigDecimal>? =
         if (stringNumbers.isNullOrBlank()) {
@@ -24,7 +25,7 @@ object StringInputSplitter {
         }
 
     private fun splitToDefaultText(text: String): List<BigDecimal> =
-        text.split(DEFAULT_REGEX.toRegex()).map { textToBigDecimal(it.trim()) }
+        text.split(defaultRegex).map { textToBigDecimal(it.trim()) }
 
     private fun splitToCustom(text: String, customSeparator: String): List<BigDecimal> =
         text.split(customSeparator).map { textToBigDecimal(it.trim()) }
