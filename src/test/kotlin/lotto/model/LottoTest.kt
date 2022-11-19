@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -13,13 +13,14 @@ class LottoTest : StringSpec({
         // then
         number.size shouldBe 6
     }
-    "로또 객채는 당첨번호와 비교해서 당첨등급을 조회할 수 있다" {
+
+    "로또 객채는 당첨번호와 비교해서 당첨등급을 평가할 수 있다" {
         // given
         val lotto = Lotto(StaticLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)))
         val winningNumber: List<Int> = listOf(1, 2, 3, 4, 5, 6)
         // when
-        val grade = lotto.grade(winningNumber)
+        lotto.scratch(winningNumber)
         // then
-        grade shouldBe LottoGrade.FIST_GRADE
+        lotto.grade shouldBe LottoGrade.FIST_GRADE
     }
 })

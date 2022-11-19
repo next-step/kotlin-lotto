@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 enum class LottoGrade(private val correctNumber: Int, val reward: Long) {
     BOOM(0, 0),
@@ -12,5 +12,6 @@ enum class LottoGrade(private val correctNumber: Int, val reward: Long) {
     companion object {
         fun find(correctNumber: Int) =
             LottoGrade.values().find { it.correctNumber == correctNumber }
+                ?: throw IllegalArgumentException("로또 등급을 찾을 수 없습니다")
     }
 }

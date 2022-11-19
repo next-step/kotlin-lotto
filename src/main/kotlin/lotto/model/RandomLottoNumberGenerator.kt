@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 private val LOTTO_ALL_NUMBER = (1..45).toList()
 

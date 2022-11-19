@@ -1,11 +1,13 @@
-package lotto
+package lotto.model
 
 class Lotto(lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator()) {
 
     val number: List<Int> = lottoNumberGenerator.pick()
+    lateinit var grade: LottoGrade
+        private set
 
-    fun grade(winningNumber: List<Int>): LottoGrade {
+    fun scratch(winningNumber: List<Int>) {
         val intersect = number.intersect(winningNumber.toSet())
-        return LottoGrade.find(intersect.size) ?: throw IllegalArgumentException("당첨등급을 찾을 수 없습니다")
+        grade = LottoGrade.find(intersect.size)
     }
 }
