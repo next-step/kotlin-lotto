@@ -1,9 +1,20 @@
 package calculator.util
 
-import java.lang.Exception
+import calculator.const.IllegalExpressionException
+import calculator.extension.isPositiveNumeric
 
 object Parser {
     fun parse(delimiter: List<String>, expression: String): List<Int> {
-        throw Exception()
+        val numbers = expression.split(*delimiter.toTypedArray())
+        validateExpression(numbers)
+        return numbers.map { number -> number.toInt() }
+    }
+
+    private fun validateExpression(numbers: List<String>) {
+        numbers.forEach { number ->
+            if (!number.isPositiveNumeric()) {
+                throw IllegalExpressionException()
+            }
+        }
     }
 }
