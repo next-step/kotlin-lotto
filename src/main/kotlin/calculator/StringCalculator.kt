@@ -13,27 +13,24 @@ class StringCalculator {
             val tokens = it.groupValues[2].split(customDelimiter)
 
             return tokens.map { token -> token.toPositiveNumber() }
-                .fold(0) { sum, number -> sum + number }
+                .reduce() { sum, number -> sum + number }
+                .toInt()
         }
 
 
         val tokens = text.split(",|:".toRegex())
 
         if (tokens.size == 1) {
-            return tokens[0].toPositiveNumber()
+            return tokens[0].toPositiveNumber().toInt()
         }
 
         return tokens.map { token -> token.toPositiveNumber() }
-            .fold(0) { sum, number -> sum + number }
+            .reduce() { sum, number -> sum + number }
+            .toInt()
     }
 
 
-    private fun String.toPositiveNumber(): Int {
-        val value = this.toInt()
-        if (value < 0) {
-            throw RuntimeException("음수는 올 수 없어요")
-        }
-
-        return value
+    private fun String.toPositiveNumber(): PositiveNumber {
+        return PositiveNumber.of(this)
     }
 }
