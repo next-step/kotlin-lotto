@@ -1,9 +1,16 @@
 package calculator
 
-import java.lang.Exception
+import calculator.util.DelimiterExtractor
+import calculator.util.Parser
 
 object Calculator {
     fun calculate(rawString: String?): Int {
-        throw Exception()
+        if (rawString.isNullOrBlank()) {
+            return 0
+        }
+
+        val calculationInfo = DelimiterExtractor.extract(rawString)
+        val numbers = Parser.parse(calculationInfo.delimiter, calculationInfo.expression)
+        return numbers.sum()
     }
 }
