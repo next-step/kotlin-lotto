@@ -2,7 +2,7 @@ package calculator
 
 import java.math.BigDecimal
 
-object StringInput {
+object StringInputSplitter {
     private const val START_LINE = "//"
     private const val DEFAULT_REGEX = "[,:]"
     private const val CUSTOM_REGEX = "//(.)\\n(.*)"
