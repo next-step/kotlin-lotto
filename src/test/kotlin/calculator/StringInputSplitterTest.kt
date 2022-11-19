@@ -1,6 +1,5 @@
 package calculator
 
-import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -25,7 +24,7 @@ internal class StringInputSplitterTest {
     fun `stringToBigDecimalList with null or empty should be zero`(stringNumber: String?) {
         val result = StringInputSplitter.stringToBigDecimalList(stringNumber)
 
-        result.first() shouldBe BigDecimal.ZERO
+        assertThat(result.first()).isEqualTo(BigDecimal.ZERO)
     }
 
     @ParameterizedTest
@@ -35,7 +34,7 @@ internal class StringInputSplitterTest {
 
         val resultNumber = listOf(1, 2, 3)
         result.forEachIndexed { index, number ->
-            number shouldBe resultNumber[index].toBigDecimal()
+            assertThat(number).isEqualTo(resultNumber[index].toBigDecimal())
         }
     }
 
