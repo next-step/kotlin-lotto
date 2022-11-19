@@ -6,7 +6,10 @@ class StringAddCalculator {
             return DEFAULT_VALUE
         }
 
-        val stringList = split(inputValue)
+        val matchedCustomDelimiter = CUSTOM_DELIMITER_REGEX.find(inputValue)
+
+        val stringList = matchedCustomDelimiter?.let { split(it.groupValues[1], it.groupValues[2]) } ?: split(inputValue)
+
         validateNumber(stringList)
 
         return sum(stringList)
@@ -14,6 +17,13 @@ class StringAddCalculator {
 
     private fun split(string: String): List<String> {
         return string.split(DEFAULT_DELIMITER_REGEX)
+    }
+
+    private fun split(delimiter: String, string: String): List<String> {
+        if (delimiter.isEmpty()) {
+            return split(string)
+        }
+        return string.split(delimiter)
     }
 
     private fun sum(stringList: List<String>) = stringList.sumOf { it.toInt() }
@@ -24,6 +34,8 @@ class StringAddCalculator {
         private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
 
         private val POSITIVE_INTEGER_REGEX = Regex("\\+?[0-9]+")
+
+        val CUSTOM_DELIMITER_REGEX = Regex("//(.*)\n(.*)")
 
         private fun validateNumber(strings: List<String>) {
             strings.forEach {

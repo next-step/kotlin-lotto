@@ -59,4 +59,25 @@ class StringAddCalculatorTest : StringSpec({
         }
     }
 
+    "커스텀 구분자 기호가 있는데 구분자가 없을때 예외처리" {
+        val stringAddCalculator = StringAddCalculator()
+        val exception = shouldThrowExactly<IllegalArgumentException> {
+            stringAddCalculator.sum("//\n1;1")
+        }
+        exception.message shouldBe "숫자가 아닌 값 혹은 음수를 입력하였습니다. (입력값:1;1)"
+    }
+
+    "커스텀 구분자" {
+        val stringAddCalculator = StringAddCalculator()
+        forAll(
+            row("//\n1,2,3", 6),
+            row("// \n1 2 3", 6),
+            row("//;\n1;2;3", 6),
+            row("//plus\n1plus2plus3", 6),
+            row("//더하기\n1더하기2더하기3", 6)
+        ) { input, expectedOutput ->
+            val actual = stringAddCalculator.sum(input)
+            actual shouldBe expectedOutput
+        }
+    }
 })
