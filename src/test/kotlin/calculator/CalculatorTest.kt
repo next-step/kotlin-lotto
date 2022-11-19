@@ -34,4 +34,18 @@ internal class CalculatorTest {
 
         assertThat(actual).isEqualTo(5)
     }
+
+    @Test
+    fun `쉼표(,)를 가지는 문자열을 받아서 구분자를 기준으로 분리한 숫자의 합을 반환한다`(){
+        val actual = calculator.calculate("2,3")
+
+        assertThat(actual).isEqualTo(5)
+    }
+
+    @Test
+    fun `콜론을 가지는 문자열을 받아서 구분자를 기준으로 분리한 숫자의 합을 반환한다`() {
+        val actual = calculator.calculate("2:3")
+
+        assertThat(actual).isEqualTo(5)
+    }
 }

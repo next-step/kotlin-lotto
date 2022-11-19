@@ -6,6 +6,12 @@ class Calculator {
             return 0
         }
 
-        return text.toInt()
+        val numbers = parse(text)
+
+        return numbers.sumOf { number -> number.toInt() }
+    }
+
+    private fun parse(text: String): List<String> {
+        return text.split("[,:]".toRegex())
     }
 }
