@@ -12,8 +12,8 @@ class Separators {
         separators.add(separator)
     }
 
-    fun toRegexString(): String {
-        return separators.joinToString(VERTICAL_BAR)
+    fun toRegex(): Regex {
+        return separators.joinToString(VERTICAL_BAR).toRegex()
     }
 
     private fun validate(value: Char) {
