@@ -29,4 +29,10 @@ internal class StringAddCalculatorTest {
         assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text))
     }
 
+    @DisplayName(value = "숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2"])
+    fun comma(text: String) {
+        assertThat(calculator.add(text)).isSameAs(3)
+    }
 }
