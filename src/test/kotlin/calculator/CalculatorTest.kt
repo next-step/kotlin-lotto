@@ -62,13 +62,17 @@ internal class CalculatorTest {
     fun `음수를 전달할 경우 RuntimeException 예외가 발생해야 한다`() {
         assertThrows<RuntimeException> {
             calculator.calculate("//;\n-2;3;4")
-        }.shouldHaveMessage("계산기에 음수는 입력할 수 없습니다.")
+        }.shouldHaveMessage("음수는 입력할 수 없습니다.")
+
+        assertThrows<RuntimeException> {
+            calculator.calculate("-3")
+        }.shouldHaveMessage("음수는 입력할 수 없습니다.")
     }
 
     @Test
     fun `숫자가 아닌 값을 전달할 경우 RuntimeException 예외가 발생해야 한다`() {
         assertThrows<RuntimeException> {
             calculator.calculate("안녕하세요")
-        }.shouldHaveMessage("계산기에 숫자가 아닌 값은 입력할 수 없습니다")
+        }.shouldHaveMessage("숫자가 아닌 값은 입력될 수 없습니다.")
     }
 }
