@@ -6,7 +6,7 @@ class StringAddCalculator {
         if (text.isNullOrBlank()) return 0
         if (text.length == 1) return text.toIntOrNull()
 
-        val numbers: List<String> = text.split(",")
+        val numbers: List<String> = text.split("[,:]".toRegex())
 
         return add(numbers)
     }

@@ -35,4 +35,11 @@ internal class StringAddCalculatorTest {
     fun comma(text: String) {
         assertThat(calculator.add(text)).isSameAs(3)
     }
+
+    @DisplayName(value = "구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2:3"])
+    fun colon(text: String) {
+        assertThat(calculator.add(text)).isSameAs(6)
+    }
 }
