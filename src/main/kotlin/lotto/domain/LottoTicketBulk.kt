@@ -17,7 +17,7 @@ class LottoTicketBulk(
         return LottoTicketBulk(lottoTickets + lottoTicketBulk.lottoTickets)
     }
     companion object {
-        fun of(lottoTickets: List<Set<Int>>): LottoTicketBulk {
+        fun manual(lottoTickets: List<Set<Int>>): LottoTicketBulk {
             return LottoTicketBulk(lottoTickets.map { LottoTicket.of(it) })
         }
     }
