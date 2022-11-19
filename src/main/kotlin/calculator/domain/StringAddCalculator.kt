@@ -26,4 +26,3 @@ class StringAddCalculator {
         val CUSTOM_DELIMITER_CHECK_REGEX = Regex("//(.)\n(.*)")
     }
 }
-
