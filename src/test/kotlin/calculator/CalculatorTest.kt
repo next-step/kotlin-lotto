@@ -1,7 +1,6 @@
 package calculator
 
 import io.kotest.matchers.shouldBe
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -23,9 +22,8 @@ internal class CalculatorTest {
     fun `sum throw RuntimeException when number include zero`(numberList: String) {
         val numbers = numberList.split(",").map { it.toBigDecimal() }
 
-        val exception = assertThrows<RuntimeException> {
+        assertThrows<RuntimeException> {
             Calculator.sum(numbers)
         }
-        assertThat(exception.message).isEqualTo(MessageCode.NegativeException.message)
     }
 }
