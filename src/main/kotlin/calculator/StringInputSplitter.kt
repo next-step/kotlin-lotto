@@ -29,10 +29,12 @@ object StringInputSplitter {
         } ?: throw IllegalArgumentException(MessageCode.InputFormatException.message)
 
     private fun splitToDefaultText(text: String): List<BigDecimal> =
-        text.split(defaultRegex).map { textToBigDecimal(it.trim()) }
+        text.split(defaultRegex)
+            .map { textToBigDecimal(it.trim()) }
 
     private fun splitToCustom(text: String, customSeparator: String): List<BigDecimal> =
-        text.split(customSeparator).map { textToBigDecimal(it.trim()) }
+        text.split(customSeparator)
+            .map { textToBigDecimal(it.trim()) }
 
     private fun textToBigDecimal(text: String): BigDecimal =
         text.toBigDecimalOrNull() ?: throw RuntimeException(MessageCode.NotNumber.message)
