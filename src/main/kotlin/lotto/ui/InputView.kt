@@ -17,7 +17,7 @@ object InputView {
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다") }
             .toList()
 
-        require(result.size == 6){"당첨번호는 6개이어야 합니다"}
+        require(result.size == 6) { "당첨번호는 6개이어야 합니다" }
         return result
     }
 }
