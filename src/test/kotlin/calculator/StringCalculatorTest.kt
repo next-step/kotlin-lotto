@@ -55,16 +55,16 @@ internal class StringCalculatorTest {
     }
 
 
-    @CsvSource(value = ["//;\\n1;2;3=6", "//.\\n2.5.5=12"], delimiter = '=')
-    @ParameterizedTest(name = "[{arguments}]  `\\` 와 `\n` 사이에 커스텀 구분자로 입력한 값의 합을 반환한다.")
-    internal fun inputCustomDelimiterTest(input: String, expected: Int) {
+    @ValueSource(strings = ["//;\n1;2;3", "//.\n1.2.3"])
+    @ParameterizedTest(name = "[{arguments}]  `\\` 와 `\\n` 사이에 커스텀 구분자로 입력한 값의 합을 반환한다.")
+    internal fun inputCustomDelimiterTest(input: String) {
         // given
 
         // when
         val result = calculator.calculate(input)
 
         // then
-        assertThat(result).isEqualTo(expected)
+        assertThat(result).isEqualTo(6)
     }
 
     @ValueSource(strings = ["-1", "-1,5"])
