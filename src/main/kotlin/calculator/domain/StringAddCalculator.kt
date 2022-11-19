@@ -15,7 +15,7 @@ class StringAddCalculator {
     }
 
     private fun getDelimiterAndExpression(text: String): Pair<String, String> {
-        val matchResult = Regex("//(.)\n(.*)").find(text) ?: return Pair(DEFAULT_DELIMITER, text)
+        val matchResult = CUSTOM_DELIMITER_CHECK_REGEX.find(text) ?: return Pair(DEFAULT_DELIMITER, text)
 
         return Pair(matchResult.groupValues[1], matchResult.groupValues[2])
     }
@@ -23,6 +23,7 @@ class StringAddCalculator {
     companion object {
         const val MINIMUM_NUMBER = 0
         const val DEFAULT_DELIMITER = ",|:"
+        val CUSTOM_DELIMITER_CHECK_REGEX = Regex("//(.)\n(.*)")
     }
 }
 
