@@ -6,7 +6,12 @@ class LottoMachine {
             .subList(0, 6).toSet()
     }
 
-    fun purchase(count: Int): LottoTicketBulk {
+    fun autoPurchase(count: Int): LottoTicketBulk {
         return LottoTicketBulk((1..count).map { LottoTicket.of(generateNumbers()) })
     }
+
+    fun manualPurchase(manualLottoTicketNumbers: List<Set<Int>>): LottoTicketBulk {
+        return LottoTicketBulk.manual(manualLottoTicketNumbers)
+    }
+
 }
