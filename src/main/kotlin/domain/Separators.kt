@@ -17,12 +17,13 @@ class Separators {
     }
 
     private fun validate(value: Char) {
-        if (Character.getNumericValue(value) != -1) {
+        if (Character.getNumericValue(value) != INVALID_RESULT_NUMBER) {
             throw IllegalArgumentException(ERROR_MESSAGE)
         }
     }
 
     companion object {
+        private const val INVALID_RESULT_NUMBER = -1
         private const val COMMA = ','
         private const val COLON = ':'
         private const val VERTICAL_BAR = "|"
