@@ -1,5 +1,10 @@
 package nextstep.mission.lotto
 
+private fun Int.increaseIf(predicate: () -> Boolean) = when {
+    predicate() -> this.inc()
+    else -> this
+}
+
 class Lotto(val numbers: List<Int>) {
     init {
         require(numbers.size == 6) { "로또 숫자는 6개여야 합니다." }
@@ -16,4 +21,19 @@ class Lotto(val numbers: List<Int>) {
     }
 
     private fun isInvalidRange(number: Int): Boolean = (number < 1).or(number > 45)
+
+    tailrec fun checkWinningNumbers(
+        winningCount: Int = 0,
+        numbers: MutableList<Int> = this.numbers.toMutableList(),
+        winningNumbers: List<Int>,
+    ): Int = when {
+        numbers.isEmpty() -> winningCount
+        else -> {
+            checkWinningNumbers(
+                winningCount.increaseIf { winningNumbers.contains(numbers.removeFirst()) },
+                numbers,
+                winningNumbers
+            )
+        }
+    }
 }

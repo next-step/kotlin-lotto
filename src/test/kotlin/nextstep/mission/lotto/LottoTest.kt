@@ -33,4 +33,9 @@ class LottoTest : StringSpec({
             Lotto(listOf(1, 2, 3, 4, 5, 6))
         }
     }
+
+    "로또는 당첨번호를 입력받아 몇개의 숫자가 일치하는지 반환한다." {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        lotto.checkWinningNumbers(winningNumbers = listOf(1, 2, 3, 4, 5, 6)) shouldBe 6
+    }
 })
