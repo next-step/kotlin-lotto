@@ -2,6 +2,10 @@ import java.lang.IllegalArgumentException
 
 class Parser() {
     fun parse(input: String): List<Int> {
+        if (input.isNullOrEmpty()) {
+            return listOf(0)
+        }
+
         if (input.first() != '/') {
             return convertTo(input.split(",|:".toRegex()))
         }
