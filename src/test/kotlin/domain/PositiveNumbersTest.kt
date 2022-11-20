@@ -8,11 +8,11 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
 import java.lang.RuntimeException
 
-class NumbersTest : BehaviorSpec({
+class PositiveNumbersTest : BehaviorSpec({
     given("아무 element 도 없는 숫자 리스트에서") {
-        val numbers = Numbers()
+        val positiveNumbers = PositiveNumbers()
         `when`("합계를 내면") {
-            val sum = numbers.sum()
+            val sum = positiveNumbers.sum()
             then("0 을 반환한다") {
                 sum shouldBe ZERO
             }
@@ -20,7 +20,7 @@ class NumbersTest : BehaviorSpec({
     }
 
     given("하나의 element 가 있는 숫자 리스트에서") {
-        val numbers = Numbers(listOf(TEN))
+        val numbers = PositiveNumbers(listOf(TEN))
         `when`("합계를 내면") {
             val sum = numbers.sum()
             then("하나의 element 를 반환한다.") {
@@ -30,7 +30,7 @@ class NumbersTest : BehaviorSpec({
     }
 
     given("여러 element 가 있는 숫자 리스트에서") {
-        val numbers = Numbers(multipleNumbers)
+        val numbers = PositiveNumbers(multipleNumbers)
         `when`("합계를 내면") {
             val sum = numbers.sum()
             then("올바른 합을 반환한다.") {
@@ -45,7 +45,7 @@ class NumbersTest : BehaviorSpec({
                 invalidStringList.forAll {
                     then("IllegalArgumentException 을 반환한다.") {
                         val exception = shouldThrow<IllegalArgumentException> {
-                            Numbers.from(it)
+                            PositiveNumbers.from(it)
                         }
                         exception.message should startWith("유효하지 않은 숫자입니다.")
                     }
@@ -55,7 +55,7 @@ class NumbersTest : BehaviorSpec({
             and("음수가 있다면") {
                 then("RuntimeException 을 반환한다.") {
                     val exception = shouldThrow<RuntimeException> {
-                        Numbers.from(listOf("-2", "10", "-55", "24"))
+                        PositiveNumbers.from(listOf("-2", "10", "-55", "24"))
                     }
                     exception.message should startWith("숫자는 음수일 수 없습니다.")
                 }
