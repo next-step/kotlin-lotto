@@ -1,7 +1,5 @@
 package lotto.util
 
-import java.lang.Exception
-
 object RandomNumberGenerator {
-    fun generate(range: IntRange): Int = throw Exception()
+    fun generate(range: IntRange): Int = range.random()
 }
