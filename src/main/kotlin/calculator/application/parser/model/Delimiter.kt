@@ -1,4 +1,4 @@
-package calculator.domain
+package calculator.application.parser.model
 
 enum class Delimiter(
     val value: String

@@ -1,6 +1,6 @@
 package calculator
 
-import calculator.domain.Delimiter
+import calculator.application.parser.model.Delimiter
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe

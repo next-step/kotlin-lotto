@@ -1,6 +1,6 @@
 package calculator.application.calculator
 
-import calculator.application.model.PositiveInteger
+import calculator.common.PositiveInteger
 
 interface Calculator : MultiplePlusOperation
 

@@ -2,7 +2,7 @@ package calculator
 
 import calculator.application.calculator.Calculator
 import calculator.application.calculator.impl.StandardCalculator
-import calculator.application.model.PositiveInteger
+import calculator.common.PositiveInteger
 import calculator.domain.operation.AdditionBinaryOperation
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe

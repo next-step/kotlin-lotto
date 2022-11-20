@@ -1,4 +1,4 @@
-package calculator.application.model
+package calculator.common
 
 @JvmInline
 value class PositiveInteger(
