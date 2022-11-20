@@ -1,11 +1,8 @@
 package lotto.domain
 
-class Money(money: Long) {
-    val value: Long = validateMoney(money)
-
-    private fun validateMoney(money: Long): Long {
-        require(money >= MINIMUM_MONEY)
-        return money
+class Money(val value: Long) {
+    init {
+        require(value >= MINIMUM_MONEY)
     }
 
     fun buy(price: Money): Long {
