@@ -2,7 +2,7 @@ package domain
 
 class PositiveNumbers(private val numbers: List<Int> = listOf()) {
     fun sum(): Int {
-        return if (this.numbers.size == ZERO) {
+        return if (this.numbers.isEmpty()) {
             ZERO
         } else {
             numbers.sum()
