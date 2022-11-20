@@ -7,5 +7,6 @@ enum class Delimiter(
 
     companion object {
         fun find(literalValue: String): Delimiter = values().find { it.value == literalValue } ?: throw IllegalArgumentException("존재하지 않는 구분자입니다.")
+        fun valuesStringArray() = values().map { it.value }.toTypedArray()
     }
 }
