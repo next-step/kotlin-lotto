@@ -1,5 +1,6 @@
 package calculator.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -35,6 +36,17 @@ class StringSplitTest : FreeSpec({
             val stringsplit = StringSplit("//;\n1;2;3")
 
             stringsplit.splitString() shouldBe listOf("1", "2", "3")
+        }
+    }
+
+    "String.toPositiveInt" - {
+
+        "음수가 있으면 에러를 반환한다." {
+            val stringSplit = StringAddCalculator("-1")
+
+            shouldThrow<RuntimeException> {
+                stringSplit.calculate()
+            }
         }
     }
 })
