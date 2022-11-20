@@ -1,31 +1,16 @@
 package lotto.domain
 
-import lotto.domain.Lotto.Companion.LOTTO_NUMBER_RANGE_END
-import org.junit.jupiter.api.assertThrows
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.CsvSource
 
 class WinningLottoTest {
-    @ParameterizedTest
-    @ValueSource(ints = [0, 3, 5, 7])
-    fun `당첨 숫자가 6개가 아니면 예외 발생`(size: Int) {
-        val numbers = (Lotto.LOTTO_NUMBER_RANGE_START..LOTTO_NUMBER_RANGE_END).shuffled().subList(0, size).toSet()
-        assertThrows<IllegalArgumentException> { WinningLotto(numbers) }
-    }
 
     @ParameterizedTest
-    @ValueSource(ints = [-1, 0, 46])
-    fun `잘못된 범위의 로또 당첨 번호 입력시 예외 발생`(number: Int) {
-        val numbers = mutableSetOf(1, 2, 3, 4, 5)
-        numbers.add(number)
-        assertThrows<IllegalArgumentException> { WinningLotto(numbers) }
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = [1, 3, 5])
-    fun `중복된 숫자 포함 6개 입력시 예외 발생`(number: Int) {
-        val numbers = mutableSetOf(1, 2, 3, 4, 5)
-        numbers.add(number)
-        assertThrows<IllegalArgumentException> { WinningLotto(numbers) }
+    @CsvSource("1 2 3 4 5 6, 6", "1 2 3 4 5 16, 5", "1 2 3 4 25 16, 4", "1 2 3 44 25 16, 3", "11 22 33 44 25 16, 0")
+    fun `당첨 로또와 비교하여 일치하는 번호의 갯수를 가져온다`(numbers: String, matchesCount: Int) {
+        val winningLotto = WinningLotto(Lotto(mutableSetOf(1, 2, 3, 4, 5, 6)))
+        val myLottoNumbers = Lotto(numbers.split(" ").map { num -> num.toInt() }.toSet())
+        assertThat(winningLotto.getMatchesCount(myLottoNumbers)).isEqualTo(matchesCount)
     }
 }
