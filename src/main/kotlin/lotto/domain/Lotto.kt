@@ -2,6 +2,9 @@ package lotto.domain
 
 class Lotto(numbers: List<LottoNumber> = LottoNumbers.getNumbers()) {
     val numbers: List<LottoNumber> = numbers
+    init {
+        require(numbers.distinct().size == LottoNumbers.LOTTO_NUMBER_COUNT)
+    }
 
     constructor(text: String) : this(
         text.filter { !it.isWhitespace() }
