@@ -17,7 +17,7 @@ class CalculatorTest : BehaviorSpec({
 
                 then("기대한 값을 반환한다.") {
                     val result = calculator.calculate(customSeparatorString + numbersString)
-                    result shouldBe numbers.sumOf { it }
+                    result shouldBe numbers.sum()
                 }
             }
 
