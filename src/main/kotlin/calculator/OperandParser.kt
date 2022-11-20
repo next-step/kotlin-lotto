@@ -1,4 +1,6 @@
-import utils.findByPattern
+package calculator
+
+import calculator.utils.findByPattern
 
 object OperandParser {
     fun run(expression: String, delimiter: String?): List<Int> {

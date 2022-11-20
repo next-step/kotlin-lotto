@@ -1,5 +1,7 @@
-import view.InputView
-import view.OutputView
+package calculator
+
+import calculator.view.InputView
+import calculator.view.OutputView
 
 fun main() {
     val expression = InputView.getExpression()

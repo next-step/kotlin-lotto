@@ -1,4 +1,4 @@
-package utils
+package calculator.utils
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData

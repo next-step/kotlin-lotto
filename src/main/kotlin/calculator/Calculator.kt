@@ -1,3 +1,5 @@
+package calculator
+
 class Calculator {
     fun execute(expression: String): Int {
         val delimiter = DelimiterExtractor.run(expression)
