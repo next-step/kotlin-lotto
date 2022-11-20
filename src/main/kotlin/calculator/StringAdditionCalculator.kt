@@ -11,12 +11,12 @@ class StringAdditionCalculator {
         if (text.isNullOrBlank()) return 0
         val separator = Separator.findSeparatorInString(text)
         val stringToAdd = Separator.getStringToAdd(text)
-        val strings = Separator.divideBySeparator(separator, stringToAdd)
+        val stringSeparatedBySeparator = Separator.divideBySeparator(separator, stringToAdd)
 
-        Validation.isNumericAndNegativeNumber(strings)
+        Validation.isNumericAndNegativeNumber(stringSeparatedBySeparator)
 
-        val ints = Conversion.stringArrayToIntArray(strings)
+        val convertedIntArray = Conversion.stringArrayToIntArray(stringSeparatedBySeparator)
 
-        return Calculation.intArraySum(ints)
+        return Calculation.intArraySum(convertedIntArray)
     }
 }
