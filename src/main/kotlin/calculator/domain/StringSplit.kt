@@ -5,14 +5,14 @@ class StringSplit(
 ) {
 
     fun splitString(): List<String> {
-        return splitCustomDelimiter(input) ?: splitDelimeter(input)
+        return splitCustomDelimiterOrNull(input) ?: splitDelimeter(input)
     }
 
     private fun splitDelimeter(input: String): List<String> {
         return input.split(DEFAULT_DELIMITER_REGEX)
     }
 
-    private fun splitCustomDelimiter(input: String): List<String>? {
+    private fun splitCustomDelimiterOrNull(input: String): List<String>? {
         val result = CUSTOM_DELIMITER_REGEX.find(input) ?: return null
         val delimiter = result.groupValues[1]
         val splitStringList = result.groupValues[2]
