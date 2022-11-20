@@ -10,13 +10,14 @@ class CalculatorTest : StringSpec({
 
     lateinit var calculator: Calculator
 
-    "숫자 2개를 더하기 연산할 수 있다" {
+    "숫자 여러개를 더할 수 있다" {
         val firstNumber = 1
         val secondNumber = 3
+        val thirdNumber = 42
 
         calculator = StandardCalculator(AdditionBinaryOperation)
 
-        val result = calculator.plus(firstNumber, secondNumber)
-        result shouldBe firstNumber + secondNumber
+        val result = calculator.multiplePlus(firstNumber, secondNumber, thirdNumber)
+        result shouldBe firstNumber + secondNumber + thirdNumber
     }
 })

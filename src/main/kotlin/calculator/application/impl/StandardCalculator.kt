@@ -8,7 +8,15 @@ class StandardCalculator(
     private val additionOperation: BinaryOperation
 ) : Calculator {
 
-    override fun plus(firstNumber: Int, secondNumber: Int): Int {
+    override fun multiplePlus(vararg numbers: Int): Int {
+        var result = 0
+        for (number in numbers) {
+            result = plus(result, number)
+        }
+        return result
+    }
+
+    private fun plus(firstNumber: Int, secondNumber: Int): Int {
         val command = BinaryOperationCommand(leftArgument = firstNumber, rightArgument = secondNumber)
         return additionOperation.operate(command)
     }

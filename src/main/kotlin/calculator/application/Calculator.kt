@@ -1,7 +1,7 @@
 package calculator.application
 
-interface Calculator : PlusOperation
+interface Calculator : MultiplePlusOperation
 
-sealed interface PlusOperation {
-    fun plus(firstNumber: Int, secondNumber: Int): Int
+sealed interface MultiplePlusOperation {
+    fun multiplePlus(vararg numbers: Int): Int
 }
