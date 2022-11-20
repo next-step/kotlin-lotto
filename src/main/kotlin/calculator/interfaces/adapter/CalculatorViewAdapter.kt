@@ -2,8 +2,8 @@ package calculator.interfaces.adapter
 
 import calculator.application.calculator.Calculator
 import calculator.application.parser.Parser
-import calculator.application.parser.ParsingException
-import calculator.common.PositiveInteger
+import calculator.application.parser.impl.ParsingException
+import calculator.common.model.PositiveInteger
 import calculator.interfaces.input.InputPlugin
 import calculator.interfaces.output.OutputPlugin
 

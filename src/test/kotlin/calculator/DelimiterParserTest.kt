@@ -1,7 +1,7 @@
-package parser
+package calculator
 
-import calculator.application.parser.DelimiterParser
-import calculator.application.parser.ParsingException
+import calculator.application.parser.impl.DelimiterParser
+import calculator.application.parser.impl.ParsingException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe

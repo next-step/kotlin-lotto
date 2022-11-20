@@ -1,7 +1,8 @@
-package calculator.application.parser
+package calculator.application.parser.impl
 
+import calculator.application.parser.Parser
 import calculator.application.parser.model.Delimiter
-import calculator.common.PositiveInteger
+import calculator.common.model.PositiveInteger
 
 object DelimiterParser : Parser {
     override fun parse(inputString: String): List<PositiveInteger> {

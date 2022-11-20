@@ -2,8 +2,8 @@ package calculator.assemble
 
 import calculator.application.calculator.Calculator
 import calculator.application.calculator.factory.CalculatorFactory
-import calculator.application.parser.DelimiterParser
 import calculator.application.parser.Parser
+import calculator.application.parser.impl.DelimiterParser
 import calculator.interfaces.adapter.CalculatorViewAdapter
 import calculator.interfaces.adapter.ViewAdapter
 import calculator.interfaces.input.InputConsole

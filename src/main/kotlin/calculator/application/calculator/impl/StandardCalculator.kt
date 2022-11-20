@@ -1,7 +1,7 @@
 package calculator.application.calculator.impl
 
 import calculator.application.calculator.Calculator
-import calculator.common.PositiveInteger
+import calculator.common.model.PositiveInteger
 import calculator.domain.operation.BinaryOperation
 import calculator.domain.operation.BinaryOperationCommand
 
