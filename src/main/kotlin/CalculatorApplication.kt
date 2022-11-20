@@ -2,5 +2,5 @@ import domain.Calculator
 
 fun main() {
     val input = readLine()
-    println(Calculator().calculate(input))
+    println(Calculator().run(input))
 }

@@ -1,14 +1,14 @@
 package domain
 
 class Calculator {
-    private var numbers = PositiveNumbers()
-    private val separators = Separators()
+    fun run(input: String?): Int {
+        val separators = Separators()
 
-    fun calculate(input: String?): Int {
         if (input.isNullOrBlank()) return ZERO
         val tokens = separators.separate(input)
-        numbers = PositiveNumbers.from(tokens)
-        return numbers.sum()
+
+        val positiveNumbers = PositiveNumbers.from(tokens)
+        return positiveNumbers.sum()
     }
 
     companion object {
