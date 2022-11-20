@@ -10,7 +10,7 @@ object AdditionBinaryOperation : BinaryOperation {
     }
 }
 
-data class BinaryOperationCommand(
+class BinaryOperationCommand(
     val leftArgument: Int,
     val rightArgument: Int
 ) : OperationCommand
