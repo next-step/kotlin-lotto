@@ -1,9 +1,15 @@
 package lotto.view
 
+import lotto.domain.Lotto
+
 class ResultView {
 
-    fun printLotto() {
-        TODO("로또 번호 출력")
+    fun printLotto(lottoList: List<Lotto>) {
+        println("${lottoList.size}개를 구매했습니다.")
+        lottoList.forEach {
+            println(it.numbers)
+        }
+        println()
     }
 
     fun printLottoStatistics() {

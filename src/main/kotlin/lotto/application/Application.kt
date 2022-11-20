@@ -1,18 +1,23 @@
 package lotto.application
 
 import lotto.domain.Lotto
+import lotto.domain.LottoGenerator
+import lotto.domain.NumberGenerator
 import lotto.view.InputView
+import lotto.view.ResultView
 
 class Application {
 
     private val inputView = InputView()
+    private val resultView = ResultView()
+    private val lottoGenerator = LottoGenerator(NumberGenerator())
 
     fun run() {
         val inputPayment = inputView.inputPayment()
-        println(inputPayment)
         val lottoCount = Lotto.calculateLottoCount(inputPayment)
-        // todo 로또 생성
-        // todo 로또 출력
+        val lottoList = lottoGenerator.generate(lottoCount)
+
+        resultView.printLotto(lottoList)
 
         val inputLuckyNumbers = inputView.inputLuckyNumbers()
         println(inputLuckyNumbers)
