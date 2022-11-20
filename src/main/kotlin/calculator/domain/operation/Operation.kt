@@ -4,4 +4,4 @@ sealed interface Operation<in T : OperationCommand> {
     fun operate(command: T): Int
 }
 
-interface OperationCommand
+sealed interface OperationCommand
