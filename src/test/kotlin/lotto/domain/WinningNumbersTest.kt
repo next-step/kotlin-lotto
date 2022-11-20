@@ -25,5 +25,4 @@ class WinningNumbersTest : StringSpec({
         val matchCount = winningNumbers.rank(lotto)
         matchCount shouldBe 6
     }
-
 })

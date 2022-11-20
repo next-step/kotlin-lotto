@@ -22,5 +22,4 @@ fun main() {
     winningStatistics.rank(lottos)
 
     Output.printWinningStatistics(winningStatistics)
-
 }

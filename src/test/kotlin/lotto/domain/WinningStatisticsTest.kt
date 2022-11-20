@@ -7,11 +7,14 @@ class WinningStatisticsTest : StringSpec({
     "로또의 3개, 4개, 5개 6개 일치 수를 알 수 있다" {
         val winningStatistics = WinningStatistics(WinningNumbers("1,2,3,4,5,6"))
 
-        val lottos = Lottos(listOf(
-            Lotto("1,2,3,4,5,6"),
-            Lotto("1,2,3,4,5,7"),
-            Lotto("1,2,3,4,7,8"),
-            Lotto("1,2,3,7,8,9")))
+        val lottos = Lottos(
+            listOf(
+                Lotto("1,2,3,4,5,6"),
+                Lotto("1,2,3,4,5,7"),
+                Lotto("1,2,3,4,7,8"),
+                Lotto("1,2,3,7,8,9")
+            )
+        )
 
         winningStatistics.rank(lottos)
 
@@ -29,5 +32,4 @@ class WinningStatisticsTest : StringSpec({
 
         winningStatistics.profit shouldBe 5.0f
     }
-
 })

@@ -27,5 +27,4 @@ class WinningStatistics(private val winningNumbers: WinningNumbers) {
     fun prizeOfMatchCount(matchCount: Int): Int {
         return Prize.prizeOfMatchCount(matchCount)
     }
-
 }

@@ -10,5 +10,4 @@ class PrizeTest : StringSpec({
         Prize.prizeOfMatchCount(4) shouldBe Prize.THIRD.prize
         Prize.prizeOfMatchCount(3) shouldBe Prize.FOURTH.prize
     }
-
 })
