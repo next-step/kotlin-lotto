@@ -3,8 +3,8 @@ package calculator.application.parser
 import calculator.application.model.PositiveInteger
 import calculator.domain.Delimiter
 
-object DelimiterParser {
-    fun parse(inputString: String): List<PositiveInteger> {
+object DelimiterParser : Parser {
+    override fun parse(inputString: String): List<PositiveInteger> {
         val delimiters = Delimiter.valuesStringArray()
         val delimiterArray = inputString.split(*delimiters)
         return delimiterArray.map { it.toPositiveInteger() }.toList()
