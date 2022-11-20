@@ -1,3 +1,3 @@
 package utils
 
-fun String.findPattern(): MatchResult? = Regex("//(.)\n(.*)").find(this)
+fun String.findByPattern(): MatchResult? = Regex("//(.)\n(.*)").find(this)

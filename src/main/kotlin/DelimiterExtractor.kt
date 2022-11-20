@@ -1,8 +1,8 @@
-import utils.findPattern
+import utils.findByPattern
 
 object DelimiterExtractor {
     fun run(expression: String): String? {
-        val result = expression.findPattern()
+        val result = expression.findByPattern()
         return result?.let { it.groupValues[1] }
     }
 }

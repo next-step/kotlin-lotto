@@ -12,7 +12,7 @@ internal class RegexExtensionTest : FunSpec({
             "//!\n1:2;3",
             "//*\n1;2;3",
         ) { data ->
-            data.findPattern() shouldNotBe null
+            data.findByPattern() shouldNotBe null
         }
     }
 
@@ -22,7 +22,7 @@ internal class RegexExtensionTest : FunSpec({
             "1;2:3",
             "@#\n1;2;3",
         ) { data ->
-            data.findPattern() shouldBe null
+            data.findByPattern() shouldBe null
         }
     }
 })
