@@ -2,8 +2,6 @@ package calculator
 
 import calculator.domain.operation.AdditionBinaryOperation
 import calculator.domain.operation.BinaryOperationCommand
-import calculator.domain.operation.Operation
-import calculator.domain.operation.OperationCommand
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
