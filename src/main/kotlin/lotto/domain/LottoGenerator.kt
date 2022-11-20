@@ -8,12 +8,6 @@ class LottoGenerator(
     }
 
     private fun randomNumber(): List<Int> {
-        return numberGenerator.random(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_SIZE)
-    }
-
-    companion object {
-        private const val LOTTO_START_NUMBER = 1
-        private const val LOTTO_END_NUMBER = 45
-        private const val LOTTO_SIZE = 6
+        return numberGenerator.random(Lotto.LOTTO_START_NUMBER, Lotto.LOTTO_END_NUMBER, Lotto.LOTTO_NUMBERS_SIZE)
     }
 }

@@ -1,5 +1,6 @@
 package lotto.application
 
+import lotto.domain.Lotto
 import lotto.view.InputView
 
 class Application {
@@ -9,6 +10,7 @@ class Application {
     fun run() {
         val inputPayment = inputView.inputPayment()
         println(inputPayment)
+        val lottoCount = Lotto.calculateLottoCount(inputPayment)
         // todo 로또 생성
         // todo 로또 출력
 
