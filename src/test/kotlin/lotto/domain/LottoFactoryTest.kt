@@ -8,9 +8,8 @@ class LottoFactoryTest {
     @ParameterizedTest
     @ValueSource(ints = [1000, 3000, 10000])
     fun `주어진 금액만큼 로또 번호가 담긴 리켓을 생성한다`(amount: Int) {
-        val lottoCount: Int = LottoFactory.LOTTE_PRICE / amount
-        val lottoTicket = LottoFactory.purchaseLotto(amount)
-        assertThat(lottoTicket.lottoList.size).isEqualTo(lottoCount)
+        val lottoCount: Int = amount / LottoFactory.LOTTE_PRICE
+        val lottos = LottoFactory.purchaseLotto(amount)
+        assertThat(lottos.size).isEqualTo(lottoCount)
     }
 }
-
