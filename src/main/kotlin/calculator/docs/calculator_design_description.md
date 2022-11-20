@@ -3,7 +3,7 @@
 
 ## 구조
 - 패키지 구조
-![](../../../../../../Downloads/design_diagram.png)
+![img.png](img/design_diagram.png)
 ### interface
 - adapter
   - 값을 입력받아 애플리케이션을 실행
