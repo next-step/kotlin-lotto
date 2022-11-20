@@ -3,8 +3,8 @@ package calculator
 import calculator.utils.findByPattern
 
 object DelimiterExtractor {
-    fun run(expression: String): String? {
+    fun run(expression: String): List<String> {
         val result = expression.findByPattern()
-        return result?.let { it.groupValues[1] }
+        return result?.let { listOf(it.groupValues[1]) } ?: run { listOf(",", ":") }
     }
 }
