@@ -1,10 +1,7 @@
 package calculator
 
-class StringAddCalculator {
-    fun add(operand: String?): Int {
-        if (operand.isNullOrEmpty()) {
-            return 0
-        }
-        return -1
-    }
+import calculator.controller.Controller
+
+fun main() {
+    Controller().start()
 }
