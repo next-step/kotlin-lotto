@@ -19,7 +19,7 @@ class DelimiterParserTest : FreeSpec({
         }
     }
 
-    "숫자가 아닌 값 혹은 음수가 들어가면 파싱 예외가 발생한다" - {
+    "숫자가 아닌 값 혹은 음수가 들어가면 파싱 예외(RuntimeException)가 발생한다" - {
         listOf(
             "23:42,11!@",
             "144,-2",
