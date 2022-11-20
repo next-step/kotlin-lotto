@@ -1,8 +1,9 @@
 import view.InputView
+import view.OutputView
 
 fun main() {
     val expression = InputView.getExpression()
     val result = Calculator().execute(expression)
 
-    println(result)
+    OutputView.printResult(result)
 }
