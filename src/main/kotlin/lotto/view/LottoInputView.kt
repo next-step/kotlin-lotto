@@ -1,12 +1,15 @@
 package lotto.view
 
-import lotto.domain.Lotto.Companion.LOTTO_NUMBER_RANGE_END
+import lotto.domain.Lotto
 import lotto.domain.LottoFactory.LOTTE_PRICE
 
 object LottoInputView {
 
     const val NUMBER_SEPARATOR = " "
 
+    /**
+     * 로또 구입 금액을 입력 받는다.
+     */
     fun inputPurchaseAmount(): Int {
         println("구입 금액을 입력해 주세요.")
         val amount = readln().toInt()
@@ -14,20 +17,14 @@ object LottoInputView {
         return amount
     }
 
-    fun inputWinningNumbersOfLastWeek(): Set<Int> {
+    /**
+     * 로또 지난 주 당첨 번호를 입력 받는다.
+     */
+    fun inputWinningNumbersOfLastWeek(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val numbers = readln()
-        require(!numbers.isNullOrBlank()) { "지난 주 당첨 번호 6개를 입력해주세요." }
-
-        return getWinningNumbers(numbers)
-    }
-
-    fun getWinningNumbers(value: String): Set<Int> {
-        val numbers = splitNumbers(getOnlyNumbers(value))
-        numbers.map { number ->
-            require(number in 1 until LOTTO_NUMBER_RANGE_END + 1) { "로또 번호는 1부터 ${LOTTO_NUMBER_RANGE_END}까지 입니다." }
-        }
-        return numbers.toSet()
+        require(!numbers.isNullOrBlank()) { "지난 주 당첨 번호를 입력해주세요." }
+        return Lotto(splitNumbers(getOnlyNumbers(numbers)).toSet())
     }
 
     private fun getOnlyNumbers(value: String) = value.replace("[^\\d]".toRegex(), NUMBER_SEPARATOR)
