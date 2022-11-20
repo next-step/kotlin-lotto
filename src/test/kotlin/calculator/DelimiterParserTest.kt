@@ -30,4 +30,15 @@ class DelimiterParserTest : FreeSpec({
             }
         }
     }
+
+    "커스텀 구분자를 추가할 수 있다." - {
+        listOf(
+            "//;\n1;3;5" to 3,
+            "//!!\n1!!34!!5!!432!!4341" to 5
+        ).forEach { (number: String, size: Int) ->
+            "\"${number}\"의 숫자 리스트 원소의 개수는 ${size}개 입니다." {
+                DelimiterParser.parse(number).size shouldBe size
+            }
+        }
+    }
 })
