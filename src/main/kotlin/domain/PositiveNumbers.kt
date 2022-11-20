@@ -13,7 +13,6 @@ class PositiveNumbers(private val numbers: List<Int> = listOf()) {
         private const val ZERO = 0
         private const val ILLEGAL_ARGUMENT_EXCEPTION_ERROR_MESSAGE = "유효하지 않은 숫자입니다."
 
-        @JvmStatic
         fun from(tokens: List<String>): PositiveNumbers {
             return PositiveNumbers(
                 tokens.map {
