@@ -49,5 +49,13 @@ internal class ManualWinnerLottoTicketTest : BehaviorSpec({
                 }
             }
         }
+
+        When("로또 번호를 넘겨주면, 당첨된 숫자의 개수를 ") {
+            val lottoNumbers = listOf(1, 2, 8, 9, 10, 23).map { LottoNumber(it) }.toSet()
+            every { Reader.read() } returns "1, 2, 3, 4, 5, 6"
+            Then("반환할 수 있다.") {
+                ManualWinnerLottoTicket().countMatchNumber(lottoNumbers) shouldBe 2
+            }
+        }
     }
 })
