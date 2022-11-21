@@ -2,7 +2,9 @@ package lotto.application
 
 import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
-import lotto.domain.NumberGenerator
+import lotto.domain.LottoResultService
+import lotto.domain.LottoStatistics
+import lotto.util.NumberGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -20,8 +22,9 @@ class Application {
         resultView.printLotto(lottoList)
 
         val inputLuckyNumbers = inputView.inputLuckyNumbers()
-        println(inputLuckyNumbers)
-        // todo 당첨 집계
-        // todo 통계 출력
+        val lottoResult = LottoResultService.inquireResult(inputLuckyNumbers, lottoList)
+        val statisticsResult = LottoStatistics.statistics(inputPayment, lottoResult)
+
+        resultView.printLottoStatistics(statisticsResult)
     }
 }
