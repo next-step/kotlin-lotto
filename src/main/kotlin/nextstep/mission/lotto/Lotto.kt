@@ -22,18 +22,21 @@ class Lotto(val numbers: List<Int>) {
 
     private fun isInvalidRange(number: Int): Boolean = (number < 1) or (number > 45)
 
-    tailrec fun checkWinningNumbers(
-        winningCount: Int = 0,
-        numbers: MutableList<Int> = this.numbers.toMutableList(),
-        winningNumbers: List<Int>,
-    ): Int = when {
-        numbers.isEmpty() -> winningCount
-        else -> {
-            checkWinningNumbers(
-                winningCount.increaseIf { winningNumbers.contains(numbers.removeFirst()) },
-                numbers,
-                winningNumbers
-            )
+    fun checkWinningNumbers(winningNumbers: List<Int>): Int {
+        tailrec fun checkWinningNumbers(
+            winningCount: Int,
+            numbers: MutableList<Int>,
+            winningNumbers: List<Int>,
+        ): Int = when {
+            numbers.isEmpty() -> winningCount
+            else -> {
+                checkWinningNumbers(
+                    winningCount.increaseIf { winningNumbers.contains(numbers.removeFirst()) },
+                    numbers,
+                    winningNumbers
+                )
+            }
         }
+        return checkWinningNumbers(0, this.numbers.toMutableList(), winningNumbers)
     }
 }
