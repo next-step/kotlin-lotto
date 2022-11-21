@@ -1,6 +1,6 @@
 package calculator.domain
 
-private const val DELIMITER = ",|:"
+private const val DEFAULT_DELIMITER_INDICATOR = ",|:"
 private const val CUSTOM_DELIMITER_INDICATOR = "//(.)\n(.*)"
 
 class InputParser {
@@ -20,6 +20,6 @@ class InputParser {
             val (customDelimiter, tokens) = CUSTOM_DELIMITER_INDICATOR.toRegex().find(input)!!.destructured
             return tokens.split(customDelimiter).map { it.toInt() }.toTypedArray()
         }
-        return input.split(DELIMITER.toRegex()).map { it.toInt() }.toTypedArray()
+        return input.split(DEFAULT_DELIMITER_INDICATOR.toRegex()).map { it.toInt() }.toTypedArray()
     }
 }
