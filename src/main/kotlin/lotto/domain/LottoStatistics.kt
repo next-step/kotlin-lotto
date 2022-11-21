@@ -38,8 +38,23 @@ class LottoStatistics(
         return lottoMatchResult.getMatchResult()
     }
 
+    fun getProfit(totalPrice: Long, lottMatchList: List<LottoMatch>): Double {
+        // 총 이득
+        val totalReward = lottMatchList.sumOf { lottoMatch ->
+            lottoMatch.matchCount * lottoMatch.reward
+        }
+
+        val profit = totalReward / totalPrice.toDouble()
+
+        return (profit * DIGIT_NUMBER).toInt() / DIGIT_NUMBER
+    }
+
+    fun isProfitable(profit: Double) = profit >= STANDARD_PROFIT_RATIO
+
     companion object {
         private val winningLottoNumbersRegex = """^[0-9,\s]*$""".toRegex()
         private const val SEPARATOR = ","
+        private const val DIGIT_NUMBER = 100.0
+        const val STANDARD_PROFIT_RATIO = 1
     }
 }

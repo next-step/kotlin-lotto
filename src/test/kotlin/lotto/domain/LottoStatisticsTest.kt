@@ -49,4 +49,42 @@ internal class LottoStatisticsTest {
         assertThat(lottoMatch.matchCount).isEqualTo(lottoCount)
         assertThat(lottoMatch.matchNumber).isEqualTo(matchNumber)
     }
+
+    @Test
+    fun getProfit() {
+        val lottoStatistics = LottoStatistics("1,2,3,4,5,6")
+
+        val lottoMatchList = mutableListOf<LottoMatch>()
+        val forthPlaceMatch = LottoMatch(
+            matchNumber = 3,
+            reward = 5000,
+            matchCount = 1
+        )
+        lottoMatchList.add(forthPlaceMatch)
+
+        val lottoCount = 14
+        val totalPrice = lottoCount * LottoPurchase.LOTTO_PRICE
+
+        val resultProfit = lottoStatistics.getProfit(totalPrice, lottoMatchList)
+
+        assertThat(resultProfit).isEqualTo(0.35)
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = [1.0, 1.1, 2.2])
+    fun `isProfitable should be ture when profit greater and equal than 1`(profit: Double) {
+        val lottoStatistics = LottoStatistics("1,2,3,4,5,6")
+        val result = lottoStatistics.isProfitable(profit)
+
+        assertThat(result).isTrue
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = [0.0, 0.2, 0.99])
+    fun `isProfitable should be false when profit less than 1`(profit: Double) {
+        val lottoStatistics = LottoStatistics("1,2,3,4,5,6")
+        val result = lottoStatistics.isProfitable(profit)
+
+        assertThat(result).isFalse
+    }
 }
