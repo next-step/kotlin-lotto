@@ -16,8 +16,8 @@ internal class LottoMachineTest {
     @Test
     fun `1000원 마다 로또를 하나씩 발급한다`() {
         val money = 10000
-        val lotties = machine.create(money)
+        val lottos = machine.create(money)
 
-        assertThat(lotties.count()).isEqualTo(10)
+        assertThat(lottos.count()).isEqualTo(10)
     }
 }

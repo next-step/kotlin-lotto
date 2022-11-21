@@ -19,6 +19,14 @@ class Lotto(numbers: Set<Int>) {
         this.numbers = numbers.toSortedSet()
     }
 
+    fun match(lotto: Lotto): Int {
+        var matches = 0
+        lotto.numbers.forEach{
+            if (numbers.contains(it)) matches++
+        }
+        return matches
+    }
+
     companion object {
         private const val MIN_NUMBER = 1
         private const val MAX_NUMBER = 45
