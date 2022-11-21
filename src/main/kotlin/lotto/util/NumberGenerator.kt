@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.util
 
 class NumberGenerator {
     fun random(start: Int, end: Int, size: Int): List<Int> {

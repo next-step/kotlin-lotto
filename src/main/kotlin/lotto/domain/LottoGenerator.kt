@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.util.NumberGenerator
+
 class LottoGenerator(
     private val numberGenerator: NumberGenerator
 ) {
