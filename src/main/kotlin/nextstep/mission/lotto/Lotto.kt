@@ -20,7 +20,7 @@ class Lotto(val numbers: List<Int>) {
         }
     }
 
-    private fun isInvalidRange(number: Int): Boolean = (number < 1).or(number > 45)
+    private fun isInvalidRange(number: Int): Boolean = (number < 1) or (number > 45)
 
     tailrec fun checkWinningNumbers(
         winningCount: Int = 0,
