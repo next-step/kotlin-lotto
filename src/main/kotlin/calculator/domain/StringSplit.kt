@@ -5,18 +5,17 @@ class StringSplit(
 ) {
 
     fun splitString(): List<String> {
-        return splitCustomDelimiterOrNull(input) ?: splitDelimeter(input)
+        val isMatcher = CUSTOM_DELIMITER_REGEX.matches(input)
+        return if (isMatcher) splitCustomDelimiter(input) else splitDelimiter(input)
     }
 
-    private fun splitDelimeter(input: String): List<String> {
+    private fun splitDelimiter(input: String): List<String> {
         return input.split(DEFAULT_DELIMITER_REGEX)
     }
 
-    private fun splitCustomDelimiterOrNull(input: String): List<String>? {
-        val result = CUSTOM_DELIMITER_REGEX.find(input) ?: return null
-        val delimiter = result.groupValues[1]
-        val splitStringList = result.groupValues[2]
-        return splitStringList.split(delimiter)
+    private fun splitCustomDelimiter(input: String): List<String> {
+        val result = CUSTOM_DELIMITER_REGEX.matchEntire(input)!!
+        return result.groupValues[2].split(result.groupValues[1])
     }
 
     companion object {
