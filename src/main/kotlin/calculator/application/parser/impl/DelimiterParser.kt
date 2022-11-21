@@ -12,7 +12,7 @@ object DelimiterParser : Parser {
     private const val CUSTOM_DELIMITER_SUFFIX = "\n"
     private const val EMPTY_STRING = ""
 
-    override fun parse(inputString: String): List<PositiveInteger> {
+    override fun parseToPositiveIntegerList(inputString: String): List<PositiveInteger> {
         var input = inputString
         var delimiters = DelimiterEnum.valuesStringArray()
 

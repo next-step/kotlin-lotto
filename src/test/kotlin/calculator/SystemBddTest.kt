@@ -14,7 +14,7 @@ class SystemBddTest : BehaviorSpec({
     given("\"//;\\n1;2;3\"이 입력되었을 때") {
 
         val inputString = "//;\n1;2;3"
-        val numberList = parser.parse(inputString)
+        val numberList = parser.parseToPositiveIntegerList(inputString)
 
         `when`("계산기가 연산을 하면") {
 

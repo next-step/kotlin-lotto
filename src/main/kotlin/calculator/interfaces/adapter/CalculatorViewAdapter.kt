@@ -23,7 +23,7 @@ class CalculatorViewAdapter(
     private fun queryNumber(): List<PositiveInteger> =
         try {
             val input = inputPlugin.inputPositiveInteger()
-            parser.parse(input)
+            parser.parseToPositiveIntegerList(input)
         } catch (e: ParsingException) {
             outputPlugin.output(e.message)
             queryNumber()

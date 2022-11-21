@@ -14,7 +14,7 @@ class DelimiterParserTest : FreeSpec({
             "1,444:6666:61,2" to 5
         ).forEach { (number: String, size: Int) ->
             "\"${number}\"의 숫자 리스트 원소의 개수는 ${size}개 입니다." {
-                DelimiterParser.parse(number).size shouldBe size
+                DelimiterParser.parseToPositiveIntegerList(number).size shouldBe size
             }
         }
     }
@@ -26,7 +26,7 @@ class DelimiterParserTest : FreeSpec({
             "1,0:66이피66:61,2"
         ).forEach { number: String ->
             "\"${number}\"는 파싱할 수 없는 값입니다." {
-                shouldThrow<ParsingException> { DelimiterParser.parse(number) }
+                shouldThrow<ParsingException> { DelimiterParser.parseToPositiveIntegerList(number) }
             }
         }
     }
@@ -37,7 +37,7 @@ class DelimiterParserTest : FreeSpec({
             "//!!\n1!!34!!5!!432!!4341" to 5
         ).forEach { (number: String, size: Int) ->
             "\"${number}\"의 숫자 리스트 원소의 개수는 ${size}개 입니다." {
-                DelimiterParser.parse(number).size shouldBe size
+                DelimiterParser.parseToPositiveIntegerList(number).size shouldBe size
             }
         }
     }
