@@ -31,7 +31,7 @@ object LottoOutputView {
     fun printWinningStatistics(lottoStatistics: LottoStatistics) {
         println("당첨 통계")
         println("---------")
-        lottoStatistics.matchesResult.toSortedMap().map { result ->
+        lottoStatistics.matchesResult.toSortedMap(compareBy { it.matchesCount }).map { result ->
             printLottoRuleResult(result.key, result.value)
         }
         print("총 수익률은 ${lottoStatistics.rateOfReward}입니다.")
