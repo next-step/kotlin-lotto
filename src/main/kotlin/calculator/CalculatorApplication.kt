@@ -5,10 +5,8 @@ import calculator.view.InputView
 import calculator.view.ResultView
 
 fun main() {
-    val inputView = InputView()
-    val resultView = ResultView()
-
-    val stringAddCalculator = StringAddCalculator(inputView.inputString())
+    val stringAddCalculator = StringAddCalculator(InputView.inputString())
     val result = stringAddCalculator.calculate()
-    resultView.printResult(result)
+
+    ResultView.printResult(result)
 }
