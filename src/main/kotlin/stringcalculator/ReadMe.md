@@ -113,4 +113,4 @@ class StringAddCalculatorTest {
 ### 설계 순서
 - [x] `입력 숫자` 구현
 - [x] `입력 숫자들` 구현
-- [ ] `계산기` 구현
+- [x] `계산기` 구현
