@@ -17,4 +17,9 @@ object OutputView {
             println("${lottoMatch.matchNumber}개 일치 (${lottoMatch.reward}원)- ${lottoMatch.matchCount}개")
         }
     }
+
+    fun outputLottoProfit(profit: Double, isShow: Boolean) {
+        print("총 수익률은 ${profit}입니다.")
+        if (isShow)println(MessageCode.RESULT_STANDARD_PROFIT_RATIO.message)
+    }
 }

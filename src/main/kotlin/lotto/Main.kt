@@ -1,7 +1,14 @@
 package lotto
 
 import lotto.controller.LottoController
+import lotto.uI.InputView
 
 fun main() {
-    LottoController().purchase()
+    val lottoController = LottoController()
+
+    val money = InputView.inputMoney()
+
+    val lottoList = lottoController.purchase(money)
+
+    lottoController.showStatistic(money, lottoList)
 }
