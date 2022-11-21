@@ -7,9 +7,7 @@ data class PositiveNumber(
 ) {
 
     init {
-        if (value < MIN_NUMBER) {
-            throw RuntimeException("음수는 올 수 없어요.")
-        }
+        require(value >= MIN_NUMBER) { "$value 는 음수일 수 없어요." }
     }
 
     operator fun plus(number: PositiveNumber): PositiveNumber {
