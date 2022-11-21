@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
-object LottoNumbers {
+object CandidateNumbers {
     private const val MIN_NUMBER = 1
     private const val MAX_NUMBER = 45
 
