@@ -1,14 +1,14 @@
 package calculator.view
 
-class InputView {
+object InputView {
 
     fun inputString(): String {
         print("연산할 문자를 입력해주세요: ")
         val input = readln()
-        return toifBlankZero(input)
+        return input.toZeroIfBlank()
     }
 
-    fun toifBlankZero(input: String): String {
-        return input.ifBlank { "0" }
+    private fun String.toZeroIfBlank(): String {
+        return this.ifBlank { "0" }
     }
 }
