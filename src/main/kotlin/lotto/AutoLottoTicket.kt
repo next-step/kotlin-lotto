@@ -13,11 +13,13 @@ class AutoLottoTicket : LottoTicket {
             lottoNumbers.add(lottoNumber)
         }
         this.lottoNumbers = lottoNumbers
+        println("[${lottoNumbers.map { it.number }.joinToString(DELIMITER)}]")
     }
 
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
         private const val START_NUMBER = 1
         private const val END_NUMBER = 45
+        private const val DELIMITER = ", "
     }
 }
