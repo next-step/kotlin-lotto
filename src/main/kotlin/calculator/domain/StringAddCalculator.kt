@@ -11,6 +11,10 @@ class StringAddCalculator {
             return input.toInt()
         }
 
+        if (hasCustomDelimiter(input)) {
+            return calculateCustomDelimiter(input)
+        }
+
         return calculateDefaultDelimiter(input)
     }
 
@@ -34,5 +38,16 @@ class StringAddCalculator {
             total += number.toInt()
         }
         return total
+    }
+
+    private fun hasCustomDelimiter(input: String): Boolean {
+        return Regex("//(.)\n(.*)").find(input) != null
+    }
+
+    private fun calculateCustomDelimiter(input: String): Int {
+        val result = Regex("//(.)\n(.*)").find(input)
+        val customDelimiter = result!!.groupValues[1]
+        val numbers = result.groupValues[2].split(customDelimiter)
+        return calculateTotal(numbers)
     }
 }
