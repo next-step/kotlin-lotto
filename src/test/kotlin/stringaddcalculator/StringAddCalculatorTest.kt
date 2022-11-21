@@ -1,6 +1,7 @@
 package stringaddcalculator
 
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
+import org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
@@ -48,5 +49,25 @@ internal class StringAddCalculatorTest {
     @ValueSource(strings = ["//#\n1#2#3"])
     fun custom(text: String) {
         assertThat(calculator.add(text)).isSameAs(6)
+    }
+
+    @DisplayName(value = "음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.")
+    @ParameterizedTest
+    @ValueSource(
+        strings = ["-1", "1,2,-3"]
+    )
+    fun negativeNumber(text: String) {
+        assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
+            calculator.add(text)
+        }
+    }
+
+    @DisplayName(value = "숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생해야 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["a", "1,a,3", "1,2,a"])
+    fun nonNumber(text: String) {
+        assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
+            calculator.add(text)
+        }
     }
 }
