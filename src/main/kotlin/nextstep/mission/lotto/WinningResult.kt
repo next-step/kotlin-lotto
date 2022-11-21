@@ -17,10 +17,10 @@ data class WinningResult(
     }
 
     fun rateOfReturn(totalPrice: Int): Double {
-        val totalPrize = WinningPrize.findPrize(3) * threeMatch +
+        val totalPrize: Int = WinningPrize.findPrize(3) * threeMatch +
             WinningPrize.findPrize(4) * fourMatch +
             WinningPrize.findPrize(5) * fiveMatch +
             WinningPrize.findPrize(6) * sixMatch
-        return (totalPrize / totalPrice).toDouble()
+        return totalPrize.toDouble() / totalPrice.toDouble()
     }
 }
