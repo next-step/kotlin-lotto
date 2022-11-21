@@ -38,7 +38,7 @@ internal class LottoTest {
 
         val lottoNumbers2 = setOf(1,2,3,4,5,6)
         val lotto2 = Lotto(lottoNumbers2)
-        
+
 
         assertThat(lotto1.match(lotto2)).isEqualTo(6)
     }

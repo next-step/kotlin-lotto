@@ -1,13 +1,9 @@
 package simulator.lotto
 
 class LottoMachine {
-    fun create(money: Int): List<Lotto> {
-        return List(money / LOTTO_PRICE){
+    fun create(times: Int): List<Lotto> {
+        return List(times){
             Lotto.generate()
         }
-    }
-
-    companion object{
-        private const val LOTTO_PRICE = 1000
     }
 }
