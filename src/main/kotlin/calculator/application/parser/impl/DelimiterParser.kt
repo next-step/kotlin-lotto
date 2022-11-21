@@ -16,7 +16,7 @@ object DelimiterParser : Parser {
         var input = inputString
         var delimiters = DelimiterEnum.valuesStringArray()
 
-        if (checkCustomDelimiter(input)) {
+        if (hasCustomDelimiter(input)) {
             val customDelimiter = findCustomDelimiters(input)
             input = cleanDelimiter(input, customDelimiter.value)
             delimiters = delimiters.plus(customDelimiter.value)
@@ -26,7 +26,7 @@ object DelimiterParser : Parser {
         return numberArray.map { it.toPositiveInteger() }.toList()
     }
 
-    private fun checkCustomDelimiter(inputString: String) =
+    private fun hasCustomDelimiter(inputString: String) =
         inputString.contains(CUSTOM_DELIMITER_PREFIX) && inputString.contains(CUSTOM_DELIMITER_SUFFIX)
 
     private fun findCustomDelimiters(inputString: String): Delimiter {
