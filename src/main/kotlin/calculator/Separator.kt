@@ -5,17 +5,20 @@ class Separator {
         private const val DEFAULT_SEPARATOR_REGEX = ",|:"
         private const val CUSTOM_SEPARATOR_REGEX = "//(.)\n(.*)"
 
+        private val customSeparatorRegex = Regex(CUSTOM_SEPARATOR_REGEX)
+        private val defaultSeparatorRegex = Regex(DEFAULT_SEPARATOR_REGEX)
+
         fun separate(expression: String) =
-            Regex(CUSTOM_SEPARATOR_REGEX).find(expression)
+            customSeparatorRegex.find(expression)
                 ?.let { customSeparator(it.groupValues[2], getCustomSeparatorRegex(it.groupValues[1])) }
                 ?: defaultSeparate(expression)
 
         private fun defaultSeparate(expression: String) =
-            expression.split(Regex("[$DEFAULT_SEPARATOR_REGEX]"))
+            expression.split(defaultSeparatorRegex)
 
-        private fun customSeparator(expression: String, customSeparatorRegex: String) =
-            expression.split(Regex("[$customSeparatorRegex]"))
+        private fun customSeparator(expression: String, customSeparatorRegex: Regex) =
+            expression.split(customSeparatorRegex)
 
-        private fun getCustomSeparatorRegex(customSeparator: String) = DEFAULT_SEPARATOR_REGEX + customSeparator
+        private fun getCustomSeparatorRegex(customSeparator: String) = Regex("[$DEFAULT_SEPARATOR_REGEX$customSeparator]")
     }
 }
