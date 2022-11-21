@@ -18,8 +18,8 @@ internal class StringCalculatorTest {
     }
 
     @NullAndEmptySource
-    @ParameterizedTest(name = "null 혹은 빈 문자열이 들어가면, 0이 나와야 한다.")
-    internal fun inputNullOrEmptyTest(input: String?) {
+    @ParameterizedTest
+    internal fun `null 혹은 빈 문자열이 들어가면, 0이 나온다`(input: String?) {
         // given
 
         // when
@@ -29,9 +29,22 @@ internal class StringCalculatorTest {
         assertThat(result).isEqualTo(0)
     }
 
+    @ValueSource(strings = ["\n", "\t"])
+    @ParameterizedTest
+    internal fun `공백 문자열이 들어가면 0이 나온다`(input: String?) {
+        // given
+
+        // when
+        val result = calculator.calculate(input)
+
+        // then
+        assertThat(result).isEqualTo(0)
+    }
+
+
     @ValueSource(strings = ["1", "2", "3", "10"])
-    @ParameterizedTest(name = "숫자 하나`{arguments}` 를 입력받으면, 해당 숫자를 반환한다.")
-    internal fun inputSingleNumberTest(input: String) {
+    @ParameterizedTest
+    internal fun `입력받은 숫자가 한개면 해당 숫자를 반환한다`(input: String) {
         // given
 
         // when
@@ -43,8 +56,8 @@ internal class StringCalculatorTest {
 
 
     @CsvSource(value = ["1,2,3=6", "2,5,5=12", "2,5:5=12", "2:3:4=9"], delimiter = '=')
-    @ParameterizedTest(name = "[{arguments}] `,` 또는 `:` 을 구분자로 입력한 값의 합을 반환한다.")
-    internal fun inputDelimiterTest(input: String, expected: Int) {
+    @ParameterizedTest
+    internal fun `기본 구분자로 입력한 값의 합을 반환한다`(input: String, expected: Int) {
         // given
 
         // when
@@ -56,8 +69,8 @@ internal class StringCalculatorTest {
 
 
     @ValueSource(strings = ["//;\n1;2;3", "//.\n1.2.3"])
-    @ParameterizedTest(name = "[{arguments}]  `\\` 와 `\\n` 사이에 커스텀 구분자로 입력한 값의 합을 반환한다.")
-    internal fun inputCustomDelimiterTest(input: String) {
+    @ParameterizedTest
+    internal fun `커스텀 구분자로 입력한 값의 합을 반환한다`(input: String) {
         // given
 
         // when
@@ -68,8 +81,8 @@ internal class StringCalculatorTest {
     }
 
     @ValueSource(strings = ["-1", "-1,5"])
-    @ParameterizedTest(name = "[{arguments}] 음수를 입력받으면 RuntimeException 이 발생한다.")
-    internal fun inputNegativeNumberExceptionTest(input: String) {
+    @ParameterizedTest
+    internal fun `음수를 입력받으면 RuntimeException 이 발생한다`(input: String) {
         // given
 
         // when, then
