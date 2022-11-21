@@ -7,4 +7,8 @@ object LottoNumbers {
     private val numbers: List<Int> = (MIN_NUMBER..MAX_NUMBER).toList()
 
     fun getNumbers() = numbers
+
+    fun pick(): List<Int> {
+        return numbers.shuffled().subList(0, 6)
+    }
 }
