@@ -1,16 +1,12 @@
 package calculator.domain
 
-import java.lang.RuntimeException
-
 @JvmInline
 value class PositiveNumber(private val number: Int) {
     val value: Int
         get() = number
 
     init {
-        if (number < ZERO) {
-            throw RuntimeException(RUNTIME_EXCEPTION_ERROR_MESSAGE)
-        }
+        require(number > ZERO) { RUNTIME_EXCEPTION_ERROR_MESSAGE }
     }
 
     companion object {
