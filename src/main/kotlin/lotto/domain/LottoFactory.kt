@@ -6,7 +6,7 @@ interface LottoFactory {
         get() = 1..45
 
     val DRAWING_QUANTITY: Int
-        get() = 5
+        get() = 6
 
     fun create(): List<Int>
 }
