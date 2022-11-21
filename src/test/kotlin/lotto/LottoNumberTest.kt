@@ -7,6 +7,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.int
 import io.kotest.property.checkAll
+import lotto.domain.LottoNumber
 import lotto.util.ExceptionMessage
 
 internal class LottoNumberTest : StringSpec({

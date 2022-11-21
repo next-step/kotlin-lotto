@@ -6,6 +6,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
+import lotto.domain.LottoNumber
+import lotto.domain.ManualWinnerLottoTicket
 import lotto.util.ExceptionMessage
 import lotto.util.Reader
 import java.lang.IllegalArgumentException

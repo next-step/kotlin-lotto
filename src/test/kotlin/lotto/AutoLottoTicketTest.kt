@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.AutoLottoTicket
 
 internal class AutoLottoTicketTest : BehaviorSpec({
     Given("사용자가 ") {

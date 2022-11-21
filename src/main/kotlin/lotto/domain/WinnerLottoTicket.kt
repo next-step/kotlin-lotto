@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 interface WinnerLottoTicket {
     val winnerLottoNumbers: Set<LottoNumber>

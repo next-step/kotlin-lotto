@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class LottoResult(
     val lottoInfo: LottoInfo,

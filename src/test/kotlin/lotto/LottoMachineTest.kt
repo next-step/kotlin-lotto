@@ -5,6 +5,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
+import lotto.domain.LottoMachine
 import lotto.util.RandomNumberGenerator
 import lotto.util.Reader
 
