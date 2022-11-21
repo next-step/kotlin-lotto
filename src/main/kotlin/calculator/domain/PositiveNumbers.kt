@@ -1,4 +1,4 @@
-package domain
+package calculator.domain
 
 class PositiveNumbers(private val numbers: List<Int> = listOf()) {
     fun sum(): Int {

@@ -1,4 +1,4 @@
-import domain.Calculator
+import calculator.domain.Calculator
 
 fun main() {
     val input = readLine()

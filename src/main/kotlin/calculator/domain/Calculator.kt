@@ -1,4 +1,4 @@
-package domain
+package calculator.domain
 
 class Calculator {
     fun run(input: String?): Int {
