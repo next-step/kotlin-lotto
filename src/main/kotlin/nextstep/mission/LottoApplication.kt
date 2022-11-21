@@ -11,5 +11,5 @@ fun main() {
     ConsoleOutput.printLottos(lottos.lottos)
     val winningNumbers: List<Int> = ConsoleInput.inputWinningNumbers()
     val winningResult: WinningResult = lottos.checkWinningNumbers(winningNumbers)
-    ConsoleOutput.printWinningResult(winningResult)
+    ConsoleOutput.printWinningResult(winningResult, winningResult.rateOfReturn(inputPrice))
 }
