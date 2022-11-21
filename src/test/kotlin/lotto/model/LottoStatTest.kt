@@ -13,7 +13,12 @@ class LottoStatTest : StringSpec({
         // when
         val gradeStat = lottoStat.gradeStat
         // then
-        gradeStat shouldBe mapOf(LottoGrade.FIST_GRADE to 1, LottoGrade.BOOM to 1, LottoGrade.BASIC_GRADE to 2)
+        gradeStat shouldBe mapOf(
+            LottoGrade.BASIC_GRADE to 2,
+            LottoGrade.THIRD_GRADE to 0,
+            LottoGrade.SECOND_GRADE to 0,
+            LottoGrade.FIST_GRADE to 1
+        )
     }
 
     "로또 통계는 수익률을 계산한다" {

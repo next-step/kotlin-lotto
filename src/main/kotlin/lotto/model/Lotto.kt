@@ -1,16 +1,9 @@
 package lotto.model
 
-import lotto.model.LottoNumberValidator.validNumber
-
-
-class Lotto(val number: List<Int>) {
-    init {
-        validNumber(number)
-    }
-
-
-    fun scratch(winningNumber: List<Int>): LottoGrade {
-        val intersect = number intersect winningNumber.toSet()
+class Lotto constructor(val lottoNumber: LottoNumber) {
+    fun scratch(winningNumber: LottoNumber): LottoGrade {
+        winningNumber.number
+        val intersect = lottoNumber.number intersect winningNumber.number.toSet()
         return LottoGrade.find(intersect.size)
     }
 }

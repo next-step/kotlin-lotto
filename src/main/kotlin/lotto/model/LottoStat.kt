@@ -3,14 +3,17 @@ package lotto.model
 import java.math.BigDecimal
 import java.math.RoundingMode
 
+private const val LOTTO_STAT_BASE_CORRECT_NUMBER = 3
+
 class LottoStat(private val lottoGrades: List<LottoGrade>, private val amount: Int) {
     val winningRate = winningRate()
     val gradeStat: Map<LottoGrade, Int> = gradeStat()
 
     private fun gradeStat() =
-        lottoGrades.groupBy { it }
-            .map { (key, value) -> key to value.size }
-            .toMap()
+        LottoGrade.values()
+            .filter { it.correctNumber >= LOTTO_STAT_BASE_CORRECT_NUMBER }
+            .associateWith { lottoGrades.count { it2 -> it === it2 } }
+            .toSortedMap(compareBy { it.correctNumber })
 
     private fun winningRate(): BigDecimal {
         val sumLottoReward = lottoGrades.sumOf {
