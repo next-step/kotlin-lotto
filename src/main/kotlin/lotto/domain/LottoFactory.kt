@@ -9,5 +9,4 @@ interface LottoFactory {
         get() = 5
 
     fun create(): List<Int>
-
 }
