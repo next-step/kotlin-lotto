@@ -1,19 +1,18 @@
 package lotto.view
 
-import lotto.domain.LottoTicketBulk
+import lotto.dto.LottoTicketBulkDto
 import lotto.dto.StatisticResult
 
 class OutputView {
 
     companion object {
-        fun printPurchase(purchaseCount: Int) {
-            println("${purchaseCount}개를 구매했습니다.")
+        fun printPurchase(autoPurchaseCount: Int, manualPurchaseCount: Int) {
+            println("수동으로 ${autoPurchaseCount}장, 자동으로 ${manualPurchaseCount}개를 구매했습니다.")
         }
 
-        fun printLottoNumbers(lottoTicketBulk: LottoTicketBulk) {
-            lottoTicketBulk.lottoTickets.forEach {
-                println(it.lottoNumbers.map { lottoNumber -> lottoNumber.value }
-                    .joinToString(separator = ", ", prefix = "[", postfix = "]"))
+        fun printLottoNumbers(lottoTicketBulkDto: LottoTicketBulkDto) {
+            lottoTicketBulkDto.tickets.forEach {
+                println(it.joinToString(separator = ", ", prefix = "[", postfix = "]"))
             }
             println()
         }
