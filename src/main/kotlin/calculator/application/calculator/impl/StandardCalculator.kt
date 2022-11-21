@@ -18,7 +18,7 @@ class StandardCalculator(
     }
 
     private fun plus(firstNumber: Int, secondNumber: Int): Int {
-        val command = BinaryOperationCommand(leftArgument = firstNumber, rightArgument = secondNumber)
+        val command = BinaryOperationCommand(leftArgument = PositiveInteger(firstNumber), rightArgument = PositiveInteger(secondNumber))
         return additionOperation.operate(command)
     }
 }

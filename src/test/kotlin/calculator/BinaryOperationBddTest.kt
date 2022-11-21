@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.common.model.PositiveInteger
 import calculator.domain.operation.AdditionBinaryOperation
 import calculator.domain.operation.BinaryOperationCommand
 import io.kotest.core.spec.style.BehaviorSpec
@@ -13,7 +14,7 @@ class BinaryOperationBddTest : BehaviorSpec({
 
         `when`("이항식 더하기 연산을 하면") {
             val binaryOperation = AdditionBinaryOperation
-            val binaryOperationCommand = BinaryOperationCommand(leftArgument = firstNumber, rightArgument = secondNumber)
+            val binaryOperationCommand = BinaryOperationCommand(leftArgument = PositiveInteger(firstNumber), rightArgument = PositiveInteger(secondNumber))
             val result = binaryOperation.operate(binaryOperationCommand)
 
             then("연산이 된다") {
