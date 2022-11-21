@@ -12,13 +12,11 @@ object DelimiterExtractor {
     }
 
     private fun extractTokens(input: String): List<String> {
-        val result = CUSTOM_DELIMITER_EXTRACT_REGEX.find(input)
-        result?.let {
+        return CUSTOM_DELIMITER_EXTRACT_REGEX.find(input)?.let {
             val customDelimiter = it.groupValues[1]
             return it.groupValues[2].split(customDelimiter)
-        }
+        } ?: input.split(DEFAULT_DELIMITER_REGEX)
 
-        return input.split(DEFAULT_DELIMITER_REGEX)
     }
 
 }
