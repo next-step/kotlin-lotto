@@ -7,5 +7,8 @@ enum class LottoRule(val matchesCount: Int, val reward: Int) {
     LAST_PLACE(3, 5000);
 
     fun getTotalReward(count: Int): Int = count * reward
-    fun printRule(count: Int): String = "${matchesCount}개 일치 (${reward}원)- ${count}개"
+
+    companion object {
+        fun ofMatchesCount(matchesCount: Int): LottoRule = values().first { rule -> rule.matchesCount == matchesCount }
+    }
 }
