@@ -11,7 +11,7 @@ class Lotto(val numbers: Set<Int> = createLottoNumbers()) {
     private fun checkRangeLottoNumber(numbers: Set<Int>): Boolean {
         return numbers
             .filterNot { num -> num in LOTTO_NUMBER_RANGE_START until LOTTO_NUMBER_RANGE_END + 1 }
-            .isNullOrEmpty()
+            .isEmpty()
     }
 
     companion object {
