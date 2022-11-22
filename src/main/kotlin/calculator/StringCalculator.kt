@@ -2,36 +2,34 @@ package calculator
 
 class StringCalculator(private val str: String?) {
 
-    fun calculate(): Int {
-        return if (str.isNullOrBlank()) {
-            RESULT_EMPTY_VALUE
-        } else {
-            val isCustomDivider = isCustomDivider()
-            val divider = getDivider(isCustomDivider)
+    fun calculate(): Int = when (str.isNullOrBlank()) {
+        true -> { RESULT_EMPTY_VALUE }
+        false -> {
+            val matchResult: MatchResult? = Regex(REGEX_DIVIDER).find(str)
+            val divider = getDivider(matchResult)
 
             require(!divider.isNullOrEmpty()) { "divider" }
 
-            add(splitToNumbers(splitStr(divider, isCustomDivider)))
+            val splitStr = splitStr(divider, matchResult)
+            val numbers = splitToNumbers(splitStr)
+            add(numbers)
         }
     }
 
-    private fun getDivider(isCustomDivider: Boolean) = when (isCustomDivider) {
-        true -> getCustomDivider()
-        false -> DEFAULT_DIVIDER
+    private fun getDivider(matchResult: MatchResult?): String = when (matchResult) {
+        null -> DEFAULT_DIVIDER
+        else -> getCustomDivider(matchResult)
     }
 
-    private fun isCustomDivider(): Boolean = str!!.startsWith("//")
-
-    private fun getCustomDivider(): String? =
-        Regex(REGEX_DIVIDER).find(str!!)?.let {
+    private fun getCustomDivider(matchResult: MatchResult): String =
+        matchResult.let {
             it.groupValues[1]
         }
 
-    private fun splitStr(divider: String, isCustomDivider: Boolean): List<String> {
-        val convertString = if (isCustomDivider) {
-            str!!.substring(str.lastIndexOf("\n") + 1)
-        } else {
-            str!!
+    private fun splitStr(divider: String, matchResult: MatchResult?): List<String> {
+        val convertString: String = when (matchResult) {
+            null -> str!!
+            else -> matchResult.let { it.groupValues[2] }
         }
 
         return convertString.split(divider.toRegex())
