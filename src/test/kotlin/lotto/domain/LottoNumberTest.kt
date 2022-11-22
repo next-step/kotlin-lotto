@@ -1,11 +1,10 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumber
 
 class LottoNumberTest : StringSpec({
     "로또 숫자의 최소 수는 0이다." {

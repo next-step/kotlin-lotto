@@ -24,12 +24,11 @@
 ### 도메인 목록 
 * Lotto
 * LottoNumber
-* LottoStore
-* Cash
+* LottoMachine
 * Reward
 
 ### 기능 목록
 - [x] 입출력 담당
-- [ ] 로또 구매 기능
-- [ ] 로또 자동 생성
+- [x] 로또 구매 기능
+- [x] 로또 자동 생성
 - [ ] 로또 당첨 결과
