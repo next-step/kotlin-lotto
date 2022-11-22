@@ -1,10 +1,10 @@
 package stringcalculator.model
 
 class PositiveNumbers(
-    private val numbers: List<PositiveNumber>
+    val value: List<PositiveNumber>
 ) {
     fun reduceAdd(): PositiveNumber {
-        return numbers.reduce(PositiveNumber::add)
+        return value.reduce(PositiveNumber::add)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -13,13 +13,13 @@ class PositiveNumbers(
 
         other as PositiveNumbers
 
-        if (numbers != other.numbers) return false
+        if (value != other.value) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return numbers.hashCode()
+        return value.hashCode()
     }
 
     companion object {

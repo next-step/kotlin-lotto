@@ -1,10 +1,11 @@
 package stringcalculator
 
 import stringcalculator.model.PositiveNumber
-import stringcalculator.service.StringParser
+import stringcalculator.model.PositiveNumbers
+import stringcalculator.service.StringParser.convertToList
 
 object StringAddCalculator {
     fun calculate(input: String): PositiveNumber {
-        return StringParser.convertToList(input).reduceAdd()
+        return PositiveNumbers.of(convertToList(input)).reduceAdd()
     }
 }
