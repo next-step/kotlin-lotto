@@ -27,4 +27,11 @@ internal class ValidationTest {
         val isSame = Validation.isSameNumberOfArraysAndReferenceValue(list.size, 1)
         assertThat(isSame).isTrue
     }
+
+    @Test
+    @DisplayName("공백일 경우 false를 반환")
+    fun `Returns false if blank`() {
+        val isNotBlank = Validation.isNotBlank("")
+        assertThat(isNotBlank).isFalse
+    }
 }

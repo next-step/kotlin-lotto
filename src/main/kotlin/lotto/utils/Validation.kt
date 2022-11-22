@@ -10,4 +10,7 @@ object Validation {
 
     fun isSameNumberOfArraysAndReferenceValue(numberOfArrays: Int, referenceValue: Int) =
         numberOfArrays == referenceValue
+
+    fun isNotBlank(str: String) =
+        str.isNotBlank()
 }
