@@ -2,7 +2,8 @@ package calculator.domain
 
 private const val ZERO = 0
 
-data class PositiveOperand(val value: Int) {
+@JvmInline
+value class PositiveOperand(val value: Int) {
     init {
         if (value < ZERO) {
             throw RuntimeException("음수는 입력할 수 없습니다.")
