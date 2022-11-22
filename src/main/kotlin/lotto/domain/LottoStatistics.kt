@@ -11,11 +11,11 @@ class LottoStatistics(private val matchesCountResult: List<Int>, private val amo
         }
     }
 
-    var rateOfReward: Double = calculateTotalPofit()
+    var rateOfReward: Double = calculateTotalProfit()
         private set
 
-    private fun calculateTotalPofit(): Double {
-        var reward = matchesResult.map { result -> result.key.getTotalReward(result.value) }.sum().toDouble()
+    private fun calculateTotalProfit(): Double {
+        val reward = matchesResult.map { result -> result.key.getTotalReward(result.value) }.sum().toDouble()
         return floor(reward / amount * 100) / 100
     }
 }

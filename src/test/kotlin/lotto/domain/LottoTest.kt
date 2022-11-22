@@ -15,7 +15,7 @@ class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = [0, 3, 5, 7])
     fun `숫자가 6개가 아니면 예외 발생한다`(size: Int) {
-        val numbers = (Lotto.LOTTO_NUMBER_RANGE_START..Lotto.LOTTO_NUMBER_RANGE_END).shuffled().subList(0, size).toSet()
+        val numbers = (1..45).shuffled().subList(0, size).toSet()
         assertThrows<IllegalArgumentException> { Lotto(numbers) }
     }
 
