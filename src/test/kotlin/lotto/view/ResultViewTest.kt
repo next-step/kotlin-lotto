@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
+import java.math.BigDecimal
 
 internal class ResultViewTest {
 
@@ -24,9 +25,18 @@ internal class ResultViewTest {
     }
 
     @Test
-    @DisplayName("게임의 로또 번호가 1,2,3,4,5,6일 경우 [1, 2, 3, 4, 5, 6]를 반환")
+    @DisplayName("게임의 로또 번호가 1,2,3,4,5,6일 경우 [1, 2, 3, 4, 5, 6]를 출력")
     fun `Print the purchased number`() {
-        val purchasedNumber = ResultView.purchasedNumber(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(purchasedNumber).isEqualTo("[1, 2, 3, 4, 5, 6]")
+        ResultView.printChosenNumber(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(outputStreamCaptor.toString().trim { it <= ' ' }).isEqualTo("[1, 2, 3, 4, 5, 6]")
+    }
+
+    @Test
+    @DisplayName("비율이 0.5일 경우 손해를 출력")
+    fun `Print the purchased number2`() {
+        ResultView.printRate(BigDecimal(0.5))
+        assertThat(
+            outputStreamCaptor.toString().trim { it <= ' ' }
+        ).isEqualTo("총 수익률은 0.5입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 }
