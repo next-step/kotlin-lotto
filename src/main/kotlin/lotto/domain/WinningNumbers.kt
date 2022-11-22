@@ -11,13 +11,9 @@ class WinningNumbers(winningNumbersText: String) {
     }
 
     fun rank(lotto: Lotto): Int {
-        var matchCount = 0
-        lotto.numbers.forEach {
-            if (winningNumbers.contains(it)) {
-                matchCount++
-            }
+        return lotto.numbers.count {
+            winningNumbers.contains(it)
         }
-        return matchCount
     }
 
     companion object {
