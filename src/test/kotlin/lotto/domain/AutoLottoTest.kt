@@ -9,8 +9,8 @@ internal class AutoLottoTest {
     @Test
     @DisplayName("6개의 숫자를 뽑음")
     fun `Pick six numbers`() {
-        val number = AutoLotto.create()
+        val lotto = AutoLotto.create()
 
-        assertThat(number.size).isEqualTo(6)
+        assertThat(lotto.numbers.size).isEqualTo(6)
     }
 }
