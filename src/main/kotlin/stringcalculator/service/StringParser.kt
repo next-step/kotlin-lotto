@@ -6,7 +6,7 @@ import kotlin.text.RegexOption.DOT_MATCHES_ALL
 object StringParser {
     val DEFAULT_DELIMITER = Regex("""[,:]""")
 
-    val CUSTOM_DELIMITED_TEXT_REGEX = Regex("""^//(.+)\n(.*)$""", DOT_MATCHES_ALL)
+    val CUSTOM_DELIMITED_TEXT_REGEX = Regex("""^//(.+)\\n(.*)$""", DOT_MATCHES_ALL)
 
     fun convertToList(input: String): List<PositiveNumber> {
         if (input.matches(CUSTOM_DELIMITED_TEXT_REGEX)) {
