@@ -3,12 +3,11 @@ package lotto.domain
 class LottoMachine(
     money: Int
 ) {
-    private val lottoTickets: LottoTickets
+    val lottoTickets: LottoTickets
     private lateinit var lottoSummary: LottoSummary
 
     init {
         val ticketCount = money / TICKET_AMOUNT
-        println("${ticketCount}개를 구매했습니다.")
         lottoTickets = LottoTickets(ticketCount)
     }
 
