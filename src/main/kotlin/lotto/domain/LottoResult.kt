@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoResult(
+data class LottoResult(
     val lottoInfo: LottoInfo,
     val count: Int
 )
