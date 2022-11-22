@@ -12,17 +12,18 @@ class LottoMachine(
         lottoTickets = LottoTickets(ticketCount)
     }
 
-    fun execute() {
-        val winnerLottoTicket: WinnerLottoTicket = ManualWinnerLottoTicket()
+    fun getSummary(): LottoSummary {
+        execute()
+        return lottoSummary
+    }
+
+    private fun execute() {
+        val winnerLottoTicket = WinnerLottoTicket(LottoManualGenerateStrategy())
         val lottoInfos = lottoTickets.tickets.map { ticket ->
             val matchNumber = winnerLottoTicket.countMatchNumber(ticket.lottoNumbers)
             LottoInfo.of(matchNumber)
         }
         lottoSummary = LottoSummary(lottoInfos)
-    }
-
-    fun getSummary(): LottoSummary {
-        return lottoSummary
     }
 
     companion object {
