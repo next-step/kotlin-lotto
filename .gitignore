@@ -1,7 +1,7 @@
 HELP.md
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/**
 !**/src/main/**
 !**/src/test/**
 
@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Gradle
+gradlew
