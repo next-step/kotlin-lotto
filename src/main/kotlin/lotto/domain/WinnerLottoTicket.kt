@@ -1,6 +1,8 @@
 package lotto.domain
 
-interface WinnerLottoTicket {
-    val winnerLottoNumbers: Set<LottoNumber>
+class WinnerLottoTicket(
+    lottoGenerateStrategy: LottoGenerateStrategy
+) {
+    private val winnerLottoNumbers: Set<LottoNumber> = lottoGenerateStrategy.generate()
     fun countMatchNumber(lottoNumber: Set<LottoNumber>): Int = lottoNumber.intersect(winnerLottoNumbers).size
 }
