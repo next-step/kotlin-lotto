@@ -1,20 +1,24 @@
 package stringcalculator.service
 
-import stringcalculator.model.PositiveNumber
-import kotlin.text.RegexOption.DOT_MATCHES_ALL
+import stringcalculator.model.PositiveNumbers
 
 object StringParser {
     val DEFAULT_DELIMITER = Regex("""[,:]""")
+    val CUSTOM_DELIMITED_TEXT_REGEX = Regex("""^//(.+)\\n(.*)$""")
 
-    val CUSTOM_DELIMITED_TEXT_REGEX = Regex("""^//(.+)\\n(.*)$""", DOT_MATCHES_ALL)
+    fun convertToList(input: String): PositiveNumbers {
+        val strings = CUSTOM_DELIMITED_TEXT_REGEX.find(input)
+            ?.destructured?.run { split(component1(), component2()) }
+            ?: split(DEFAULT_DELIMITER, input)
 
-    fun convertToList(input: String): List<PositiveNumber> {
-        if (input.matches(CUSTOM_DELIMITED_TEXT_REGEX)) {
-            val matchResult = CUSTOM_DELIMITED_TEXT_REGEX.find(input)!!
-            val (delimiter, delimitedBody) = matchResult.destructured
-            return delimitedBody.split(delimiter).map { PositiveNumber.of(it) }
-        }
+        return PositiveNumbers.of(strings)
+    }
 
-        return input.split(DEFAULT_DELIMITER).map { PositiveNumber.of(it) }
+    private fun split(delimiter: Regex, delimitedBody: String): List<String> {
+        return delimitedBody.split(delimiter)
+    }
+
+    private fun split(delimiter: String, delimitedBody: String): List<String> {
+        return delimitedBody.split(delimiter)
     }
 }

@@ -5,6 +5,6 @@ import stringcalculator.service.StringParser
 
 object StringAddCalculator {
     fun calculate(input: String): PositiveNumber {
-        return StringParser.convertToList(input).reduce(PositiveNumber::add)
+        return StringParser.convertToList(input).reduceAdd()
     }
 }
