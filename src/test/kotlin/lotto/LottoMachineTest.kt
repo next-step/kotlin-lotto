@@ -4,9 +4,7 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockkObject
-import io.mockk.unmockkObject
 import lotto.domain.LottoMachine
-import lotto.util.RandomNumberGenerator
 import lotto.util.Reader
 
 internal class LottoMachineTest : BehaviorSpec({
@@ -23,6 +21,5 @@ internal class LottoMachineTest : BehaviorSpec({
                 }
             }
         }
-        unmockkObject(RandomNumberGenerator, Reader)
     }
 })
