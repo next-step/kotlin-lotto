@@ -15,38 +15,59 @@ class InputParserTest {
 
     @BeforeEach
     fun setUp() {
+        // given
         inputParser = InputParser()
     }
 
     @DisplayName("쉼표(,) 구분자 테스트")
     @Test
     fun `쉼표 구분자 테스트`() {
-        assertThat(inputParser.parseWithDelimiter("1,2,3")).isEqualTo(expected)
+        // when
+        val actualResult = inputParser.parseWithDelimiter("1,2,3")
+
+        // then
+        assertThat(actualResult).isEqualTo(expected)
     }
 
     @DisplayName("쉼표(,) 콜론(:) 구분자 테스트")
     @Test
     fun `쉼표,콜론 구분자 테스트`() {
-        assertThat(inputParser.parseWithDelimiter("1,2:3")).isEqualTo(expected)
+        // when
+        val actualResult = inputParser.parseWithDelimiter("1,2:3")
+
+        // then
+        assertThat(actualResult).isEqualTo(expected)
     }
 
     @DisplayName("//와 \n 문자 사이에 커스텀 구분자 지정 테스트")
     @Test
     fun `커스텀 구분자 테스트`() {
-        assertThat(inputParser.parseWithDelimiter("//;\n1;2;3")).isEqualTo(expected)
+        // when
+        val actualResult = inputParser.parseWithDelimiter("//;\n1;2;3")
+
+        // then
+        assertThat(actualResult).isEqualTo(expected)
     }
 
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0 반환 테스트")
     @ParameterizedTest
     @NullAndEmptySource
-    fun `빈 문자열 또는 null 값을 입력할 경우 0 반환 테스트`(text: String?) {
-        assertThat(inputParser.parseWithDelimiter(text)).isEqualTo(arrayOf(0))
+    fun `빈 문자열 또는 null 값을 입력할 경우 0 반환 테스트`(given: String?) {
+        // when
+        val actualResult = inputParser.parseWithDelimiter(given)
+
+        // then
+        assertThat(actualResult).isEqualTo(arrayOf(0))
     }
 
     @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자 반환 테스트")
     @Test
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자 반환 테스트`() {
-        assertThat(inputParser.parseWithDelimiter("1")).isEqualTo(arrayOf(1))
+        // when
+        val actualResult = inputParser.parseWithDelimiter("1")
+
+        // then
+        assertThat(actualResult).isEqualTo(arrayOf(1))
     }
 
     @DisplayName("입력된 값이 숫자인지 확인하는 테스트")

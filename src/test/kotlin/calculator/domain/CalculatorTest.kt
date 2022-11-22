@@ -8,9 +8,14 @@ class CalculatorTest {
     @DisplayName("덧셈 테스트")
     @Test
     fun `덧셈 테스트`() {
+        // given
         val calculator = Calculator()
-        val given = calculator.add(arrayOf(PositiveOperand(1), PositiveOperand(2), PositiveOperand(3)))
         val expected = PositiveOperand(6)
+
+        // when
+        val given = calculator.add(arrayOf(PositiveOperand(1), PositiveOperand(2), PositiveOperand(3)))
+
+        // then
         assertThat(given).isEqualTo(expected)
     }
 }
