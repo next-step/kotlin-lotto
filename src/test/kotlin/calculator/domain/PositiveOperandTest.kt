@@ -1,5 +1,6 @@
 package calculator.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -7,6 +8,32 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class PositiveOperandTest {
+    @DisplayName("PositiveOperand 생성 테스트")
+    @Test
+    fun `PositiveOperand 생성 테스트`() {
+        // given
+        val expected = PositiveOperand(0)
+
+        // when
+        val actual = PositiveOperand(0)
+
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @DisplayName("PositiveOperand 부생성 테스트")
+    @Test
+    fun `PositiveOperand 부생성 테스트`() {
+        // given
+        val expected = PositiveOperand("0")
+
+        // when
+        val actual = PositiveOperand("0")
+
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
+
     @DisplayName("음수 피연산자에 대한 예외처리 테스트")
     @Test
     fun `음수 피연산자에 대한 예외처리 테스트`() {
