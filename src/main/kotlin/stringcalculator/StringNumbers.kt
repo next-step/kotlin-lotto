@@ -1,16 +1,14 @@
 package stringcalculator
 
-data class StringNumbers(private val text: String?) {
+class StringNumbers(text: String?) {
     var list: List<Int>
         private set
 
     init {
         list = when {
             text.isNullOrBlank() -> listOf(0)
-            Regex(REGEX_CUSTOM_DELIMITER).matches(text) -> parserInt(splitCustomDelimiter(text))
-            else -> {
-                parserInt(splitDefaultDelimiter(text))
-            }
+            matchesCustomDelimiter(text) -> parserInt(splitCustomDelimiter(text))
+            else -> parserInt(splitDefaultDelimiter(text))
         }
     }
 
@@ -25,10 +23,10 @@ data class StringNumbers(private val text: String?) {
     }
 
     private fun splitCustomDelimiter(text: String): List<String> {
-        val result = Regex(REGEX_CUSTOM_DELIMITER).find(text) ?: throw IllegalArgumentException("검증된 패턴입니다.")
+        val result = findCustomDelimiter(text) ?: throw IllegalArgumentException("구분자가 포함되어 있지 않습니다.")
         return result.let {
-            val customDelimiter = it.groupValues[1]
-            it.groupValues[2].split(customDelimiter)
+            val (customDelimiter, numberText) = it.destructured
+            numberText.split(customDelimiter)
         }
     }
 
@@ -37,5 +35,7 @@ data class StringNumbers(private val text: String?) {
     companion object {
         const val REGEX_DEFAULT_DELIMITERS = "[,:]"
         const val REGEX_CUSTOM_DELIMITER = "//(.)\n(.*)"
+        fun matchesCustomDelimiter(text: String) = Regex(REGEX_CUSTOM_DELIMITER).matches(text)
+        fun findCustomDelimiter(text: String) = Regex(REGEX_CUSTOM_DELIMITER).find(text)
     }
 }
