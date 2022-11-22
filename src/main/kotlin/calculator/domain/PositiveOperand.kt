@@ -5,9 +5,7 @@ private const val ZERO = 0
 @JvmInline
 value class PositiveOperand(val value: Int) {
     init {
-        if (value < ZERO) {
-            throw RuntimeException("음수는 입력할 수 없습니다.")
-        }
+        require(value >= ZERO) { "음수는 입력할 수 없습니다." }
     }
 
     constructor(value: String) : this(

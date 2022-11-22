@@ -11,7 +11,7 @@ class PositiveOperandTest {
     @Test
     fun `음수 피연산자에 대한 예외처리 테스트`() {
         assertThatThrownBy { PositiveOperand(-1) }
-            .isInstanceOf(RuntimeException::class.java)
+            .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("음수는 입력할 수 없습니다.")
     }
 
