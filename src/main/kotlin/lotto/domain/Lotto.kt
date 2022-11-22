@@ -1,7 +1,6 @@
 package lotto.domain
 
-class Lotto(numbers: List<LottoNumber> = LottoNumbers.getNumbers()) {
-    val numbers: List<LottoNumber> = numbers
+class Lotto(val numbers: List<LottoNumber> = LottoNumbers.getNumbers()) {
     init {
         require(numbers.distinct().size == LottoNumbers.LOTTO_NUMBER_COUNT)
     }

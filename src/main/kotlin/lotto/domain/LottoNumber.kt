@@ -1,11 +1,8 @@
 package lotto.domain
 
-class LottoNumber private constructor(number: Int) : Comparable<LottoNumber> {
-    private val number: Int
-
+class LottoNumber private constructor(private val number: Int) : Comparable<LottoNumber> {
     init {
         require(number in MINIMUM_VALUE..MAXIMUM_VALUE)
-        this.number = number
     }
 
     override fun compareTo(other: LottoNumber): Int {
