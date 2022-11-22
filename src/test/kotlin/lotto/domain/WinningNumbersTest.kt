@@ -22,7 +22,7 @@ class WinningNumbersTest : StringSpec({
         val winningNumbers = WinningNumbers("1,2,3,4,5,6")
         val lotto = Lotto("1,2,3,4,5,6")
 
-        val matchCount = winningNumbers.rank(lotto)
-        matchCount shouldBe 6
+        val rank = winningNumbers.rank(lotto)
+        rank shouldBe Rank.FIRST
     }
 })

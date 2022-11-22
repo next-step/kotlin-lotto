@@ -1,27 +1,26 @@
 package lotto.domain
 
 class WinningStatistics(private val winningNumbers: WinningNumbers) {
-    private val matchCounter: Array<Int> = Array(LottoNumbers.LOTTO_NUMBER_COUNT + 1) { 0 }
-    private var moneyUsed: Long = 0
+    private val ranks: MutableList<Rank> = mutableListOf()
+    private val moneyUsed: Long
+        get() = ranks.size * Lotto.PRICE.value
     val profit: Float
         get() {
             var prizeTotal = 0f
-            Rank.values().forEach {
-                prizeTotal += it.prize * matchCounter[it.matchCount]
+            Rank.values().forEach { rank ->
+                prizeTotal += rank.prize * ranks.count { it == rank }
             }
             return prizeTotal / moneyUsed
         }
 
     fun rank(lottos: Lottos) {
         lottos.lottoList.forEach {
-            matchCounter[winningNumbers.rank(it)]++
-            moneyUsed += Lotto.PRICE.value
+            ranks.add(winningNumbers.rank(it))
         }
     }
 
     fun countOfMatchCount(matchCount: Int): Int {
-        require(matchCount in matchCounter.indices)
-        return matchCounter[matchCount]
+        return ranks.count { it == Rank.from(matchCount) }
     }
 
     fun prizeOfMatchCount(matchCount: Int): Int {

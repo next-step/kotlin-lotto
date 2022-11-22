@@ -10,5 +10,9 @@ enum class Rank(val matchCount: Int, val prize: Int) {
         fun prizeOfMatchCount(matchCount: Int): Int {
             return values().first { it.matchCount == matchCount }.prize
         }
+
+        fun from(matchCount: Int): Rank {
+            return values().first { it.matchCount == matchCount }
+        }
     }
 }

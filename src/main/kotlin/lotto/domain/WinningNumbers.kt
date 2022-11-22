@@ -10,10 +10,10 @@ class WinningNumbers(winningNumbersText: String) {
         require(winningNumbers.size == LottoNumbers.LOTTO_NUMBER_COUNT)
     }
 
-    fun rank(lotto: Lotto): Int {
-        return lotto.numbers.count {
+    fun rank(lotto: Lotto): Rank {
+        return Rank.from(lotto.numbers.count {
             winningNumbers.contains(it)
-        }
+        })
     }
 
     companion object {
