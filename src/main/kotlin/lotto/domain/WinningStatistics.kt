@@ -6,7 +6,7 @@ class WinningStatistics(private val winningNumbers: WinningNumbers) {
     val profit: Float
         get() {
             var prizeTotal = 0f
-            Prize.values().forEach {
+            Rank.values().forEach {
                 prizeTotal += it.prize * matchCounter[it.matchCount]
             }
             return prizeTotal / moneyUsed
@@ -25,6 +25,6 @@ class WinningStatistics(private val winningNumbers: WinningNumbers) {
     }
 
     fun prizeOfMatchCount(matchCount: Int): Int {
-        return Prize.prizeOfMatchCount(matchCount)
+        return Rank.prizeOfMatchCount(matchCount)
     }
 }
