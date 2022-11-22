@@ -17,13 +17,13 @@ class StringCalculator(private val str: String?) {
 
     private fun getDivider(isCustomDivider: Boolean) = when (isCustomDivider) {
         true -> getCustomDivider()
-        false -> DEFAULT_DIVER
+        false -> DEFAULT_DIVIDER
     }
 
     private fun isCustomDivider(): Boolean = str!!.startsWith("//")
 
     private fun getCustomDivider(): String? =
-        Regex(REGEX_DIVER).find(str!!)?.let {
+        Regex(REGEX_DIVIDER).find(str!!)?.let {
             it.groupValues[1]
         }
 
@@ -64,8 +64,8 @@ class StringCalculator(private val str: String?) {
     }
 
     companion object {
-        private const val DEFAULT_DIVER = ",|:"
-        private const val REGEX_DIVER = "//(.)\n(.*)"
+        private const val DEFAULT_DIVIDER = ",|:"
+        private const val REGEX_DIVIDER = "//(.)\n(.*)"
         private const val RESULT_EMPTY_VALUE = 0
     }
 }
