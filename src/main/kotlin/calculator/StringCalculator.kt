@@ -38,9 +38,8 @@ class StringCalculator(private val str: String?) {
     private fun splitToNumbers(splitStr: List<String>): List<Int> {
         val result = ArrayList<Int>()
         splitStr.forEach { str ->
-            val number = str.toInt()
-            minusCheck(number >= 0) { "minus number" }
-            result.add(number)
+            val number: UInt = str.toUInt()
+            result.add(number.toInt())
         }
 
         return result
@@ -52,13 +51,6 @@ class StringCalculator(private val str: String?) {
             sum += num
         }
         return sum
-    }
-
-    private inline fun minusCheck(value: Boolean, lazyMessage: () -> Any) {
-        if (!value) {
-            val message = lazyMessage()
-            throw java.lang.RuntimeException(message.toString())
-        }
     }
 
     companion object {
