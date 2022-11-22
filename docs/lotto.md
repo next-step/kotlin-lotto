@@ -39,3 +39,11 @@
 - [x] 숫자 1이 기준 범위 1에서 45까지 포함된 경우 true를 반환
 - [x] [1] 배열의 길이가 기준 길이 1과 같을 경우 true를 반환
 - [x] 공백일 경우 false를 반환
+- 
+### 당첨번호
+
+- [x] 지난주 당첨번호 수가 로또번호 보다 적을 경우 IllegalArgumentException 오류
+- [x] 지난주 당첨번호 수가 로또번호 보다 많을 경우 IllegalArgumentException 오류
+- [x] 지난주 당첨번호 수가 1,2,3,4,5,6 경우 배열 [1,2,3,4,5,6]을 반환
+- [x] 지난주 당첨번호 입력이 숫자와 쉼표(,)가 아닌 다른 문자로 이루어져있을 경우 IllegalArgumentException 오류
+- [x] 지난주 당첨번호 입력이 공백일 경우 IllegalArgumentException 오류
