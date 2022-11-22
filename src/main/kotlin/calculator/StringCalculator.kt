@@ -1,20 +1,17 @@
 package calculator
 
-private const val DEFAULT_DIVER = ",|:"
-private const val REGEX_DIVER = "//(.)\n(.*)"
-
 class StringCalculator(private val str: String?) {
 
     fun calculate(): Int {
         return if (str.isNullOrBlank()) {
-            0
+            RESULT_EMPTY_VALUE
         } else {
             val isCustomDivider = isCustomDivider()
             val divider = getDivider(isCustomDivider)
 
             require(!divider.isNullOrEmpty()) { "divider" }
 
-            add(splitToNumbers(splitStr(divider!!, isCustomDivider)))
+            add(splitToNumbers(splitStr(divider, isCustomDivider)))
         }
     }
 
@@ -64,5 +61,11 @@ class StringCalculator(private val str: String?) {
             val message = lazyMessage()
             throw java.lang.RuntimeException(message.toString())
         }
+    }
+
+    companion object {
+        private const val DEFAULT_DIVER = ",|:"
+        private const val REGEX_DIVER = "//(.)\n(.*)"
+        private const val RESULT_EMPTY_VALUE = 0
     }
 }
