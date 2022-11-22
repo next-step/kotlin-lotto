@@ -1,13 +1,26 @@
 package lotto.domain
 
+import lotto.util.ErrorCode
+
 data class Lotto(
-    val numbers: List<Int>
+    val numbers: List<LottoNumber>
 ) {
-    fun getMatchCount(otherLotto: Lotto): Int {
-        var count = 0
-        otherLotto.numbers.forEach { number ->
-            if (numbers.contains(number)) count++
+    init {
+        require(numbers.distinct().count() == LOTTO_NUMBER_COUNT) {
+            ErrorCode.LOTTO_NUMBERS_COUNT_EXCEPTION.errorMessage
         }
-        return count
+    }
+
+    override fun toString(): String {
+        return numbers.toString()
+    }
+
+    fun getMatchCount(otherLotto: Lotto): Int =
+        otherLotto.numbers.toMutableSet()
+            .intersect(numbers.toMutableSet())
+            .count()
+
+    companion object {
+        const val LOTTO_NUMBER_COUNT = 6
     }
 }

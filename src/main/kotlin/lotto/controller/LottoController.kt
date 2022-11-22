@@ -12,17 +12,16 @@ class LottoController {
     fun purchase(money: Long): List<Lotto> {
         val lottoCount = LottoPurchase(price = money).getLottoCount()
 
-        val lottoList: List<Lotto> =
-            (1..lottoCount).map {
-                Lotto(LottoGenerator.generateLottoNumbers())
-            }
+        val lottoList = LottoGenerator.generateLottoList(lottoCount)
 
         OutputView.outputLottoList(lottoList)
         return lottoList
     }
 
     fun showStatistic(money: Long, lottoList: List<Lotto>) {
-        val lastWeekLotto = InputView.inputLastWeekLottoNumbers()
+        val lastWeekLottoNumber = InputView.inputLastWeekLottoNumbers()
+
+        val lastWeekLotto = LottoGenerator.generateLotto(lastWeekLottoNumber)
 
         val lottoStatistics = LottoStatistics(lastWeekLotto)
 

@@ -1,33 +1,8 @@
 package lotto.domain
 
-import lotto.util.ErrorCode
-
 class LottoStatistics(
-    winningLottoNumbers: String
+    private val winningLotto: Lotto
 ) {
-    private var winningLotto: Lotto
-
-    init {
-        val numbers = validateWinningLottoNumbers(winningLottoNumbers)
-
-        require(numbers.distinct().count() == LottoGenerator.LOTTO_NUMBER_COUNT) {
-            ErrorCode.LOTTO_NUMBERS_COUNT_EXCEPTION.errorMessage
-        }
-
-        winningLotto = Lotto(numbers)
-    }
-
-    private fun validateWinningLottoNumbers(number: String): List<Int> {
-        require(number.matches(winningLottoNumbersRegex)) {
-            ErrorCode.LOTTO_NUMBERS_INPUT_FORMAT_EXCEPTION.errorMessage
-        }
-        return number
-            .split(SEPARATOR)
-            .mapNotNull {
-                it.trim()
-                    .toIntOrNull()
-            }
-    }
 
     fun getWinningStatistics(lottoList: List<Lotto>): List<LottoMatch> {
         val lottoMatchResult = LottoMatchResult()
@@ -52,8 +27,6 @@ class LottoStatistics(
     fun isProfitable(profit: Double) = profit >= STANDARD_PROFIT_RATIO
 
     companion object {
-        private val winningLottoNumbersRegex = """^[0-9,\s]*$""".toRegex()
-        private const val SEPARATOR = ","
         private const val DIGIT_NUMBER = 100.0
         const val STANDARD_PROFIT_RATIO = 1
     }
