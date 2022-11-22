@@ -19,31 +19,12 @@ class InputParserTest {
         inputParser = InputParser()
     }
 
-    @DisplayName("쉼표(,) 구분자 테스트")
-    @Test
-    fun `쉼표 구분자 테스트`() {
+    @DisplayName("기본 구분자 및 커스텀 구분자 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2,3", "1,2:3", "//;\n1;2;3"])
+    fun `쉼표 구분자 테스트`(given: String) {
         // when
-        val actualResult = inputParser.parseWithDelimiter("1,2,3")
-
-        // then
-        assertThat(actualResult).isEqualTo(expected)
-    }
-
-    @DisplayName("쉼표(,) 콜론(:) 구분자 테스트")
-    @Test
-    fun `쉼표,콜론 구분자 테스트`() {
-        // when
-        val actualResult = inputParser.parseWithDelimiter("1,2:3")
-
-        // then
-        assertThat(actualResult).isEqualTo(expected)
-    }
-
-    @DisplayName("//와 \n 문자 사이에 커스텀 구분자 지정 테스트")
-    @Test
-    fun `커스텀 구분자 테스트`() {
-        // when
-        val actualResult = inputParser.parseWithDelimiter("//;\n1;2;3")
+        val actualResult = inputParser.parseWithDelimiter(given)
 
         // then
         assertThat(actualResult).isEqualTo(expected)
