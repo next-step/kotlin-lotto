@@ -27,10 +27,8 @@ class StringAddCalculator {
 
     private fun customsDelimiterSplit(text: String): List<String> {
         val result = Regex(REGEX_CUSTOM_DELIMITER).find(text)
-        requireNotNull(result) { "패턴이 검증되어 필수 값 입니다" }
-        result.let {
-            return it.groupValues[2].split(it.groupValues[1])
-        }
+            ?: throw IllegalArgumentException("패턴이 검증되어 필수 값 입니다")
+        return result.groupValues[2].split(result.groupValues[1])
     }
 
     private fun regularDelimiterSplit(text: String): List<String> =
@@ -38,8 +36,7 @@ class StringAddCalculator {
 
     private fun toSum(intStrList: List<String>): Int =
         intStrList.sumOf { str ->
-            require(str.isInt()) { "숫자 이외의 값을 입력할 수 없습니다" }
-            str.toInt()
+            str.toIntOrNull() ?: throw IllegalArgumentException("숫자 이외의 값을 입력할 수 없습니다")
         }
 }
 
