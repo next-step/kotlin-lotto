@@ -27,4 +27,8 @@ class StringNumber(private val value: String) : Number {
     override fun hashCode(): Int {
         return value.hashCode()
     }
+
+    companion object {
+        val ZERO = StringNumber("0")
+    }
 }
