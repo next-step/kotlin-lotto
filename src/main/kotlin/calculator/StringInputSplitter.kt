@@ -12,15 +12,9 @@ object StringInputSplitter {
 
     fun stringToBigDecimalList(stringNumbers: String?): List<BigDecimal> =
         when {
-            stringNumbers.isNullOrBlank() -> {
-                listOf(BigDecimal.ZERO)
-            }
-            stringNumbers.contains(START_LINE) -> {
-                splitToCustomText(stringNumbers)
-            }
-            else -> {
-                splitToDefaultText(stringNumbers)
-            }
+            stringNumbers.isNullOrBlank() -> listOf(BigDecimal.ZERO)
+            stringNumbers.contains(START_LINE) -> splitToCustomText(stringNumbers)
+            else -> splitToDefaultText(stringNumbers)
         }
 
     private fun splitToCustomText(text: String): List<BigDecimal> =
