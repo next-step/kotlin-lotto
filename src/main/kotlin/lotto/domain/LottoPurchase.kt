@@ -21,7 +21,7 @@ class LottoPurchase(
     fun getLottoCount(): Long = lottoCount
 
     companion object {
-        const val LOTTO_PRICE: Long = 1000
-        const val LONG_ZERO: Long = 0
+        const val LOTTO_PRICE = 1000L
+        const val LONG_ZERO = 0L
     }
 }

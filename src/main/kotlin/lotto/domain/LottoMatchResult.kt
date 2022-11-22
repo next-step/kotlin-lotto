@@ -35,15 +35,15 @@ class LottoMatchResult {
         lottoMatchMap.values.toList()
 
     companion object {
-        private const val DEFAULT_MATCH_COUNT: Long = 0
-        private const val DEFAULT_REWARD: Long = 0
+        private const val DEFAULT_MATCH_COUNT = 0L
+        private const val DEFAULT_REWARD = 0L
         private const val MATCH_THREE = 3
         private const val MATCH_FOUR = 4
         private const val MATCH_FIVE = 5
         private const val MATCH_SIX = 6
-        private const val FOURTH_PLACE_REWARD: Long = 5000
-        private const val THIRD_PLACE_REWARD: Long = 50000
-        private const val SECOND_PLACE_REWARD: Long = 1500000
-        private const val FIRST_PLACE_REWARD: Long = 2000000000
+        private const val FOURTH_PLACE_REWARD = 5000L
+        private const val THIRD_PLACE_REWARD = 50000L
+        private const val SECOND_PLACE_REWARD = 1500000L
+        private const val FIRST_PLACE_REWARD = 2000000000L
     }
 }
