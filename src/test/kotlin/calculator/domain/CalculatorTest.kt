@@ -9,8 +9,8 @@ class CalculatorTest {
     @Test
     fun `덧셈 테스트`() {
         val calculator = Calculator()
-        val given = calculator.add(arrayOf(Operand(1), Operand(2), Operand(3)))
-        val expected = Operand(6)
+        val given = calculator.add(arrayOf(PositiveOperand(1), PositiveOperand(2), PositiveOperand(3)))
+        val expected = PositiveOperand(6)
         assertThat(given).isEqualTo(expected)
     }
 }

@@ -2,7 +2,7 @@ package calculator.domain
 
 private const val ZERO = 0
 
-data class Operand(val value: Int) {
+data class PositiveOperand(val value: Int) {
     init {
         if (value < ZERO) {
             throw RuntimeException("음수는 입력할 수 없습니다.")
