@@ -1,5 +1,7 @@
 package lotto.domain
 
-interface LottoTicket {
-    val lottoNumbers: Set<LottoNumber>
+class LottoTicket(
+    lottoGenerateStrategy: LottoGenerateStrategy
+) {
+    val lottoNumbers: Set<LottoNumber> = lottoGenerateStrategy.generate()
 }
