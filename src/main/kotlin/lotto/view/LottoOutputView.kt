@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.LottoRule
 import lotto.domain.LottoStatistics
+import lotto.domain.Rank
 
 object LottoOutputView {
     /**
@@ -31,7 +31,7 @@ object LottoOutputView {
     fun printWinningStatistics(lottoStatistics: LottoStatistics) {
         println("당첨 통계")
         println("---------")
-        lottoStatistics.matchesResult.toSortedMap(compareBy { it.matchesCount }).map { result ->
+        lottoStatistics.matchesResult.toSortedMap(compareBy { it.countOfMatch }).map { result ->
             printLottoRuleResult(result.key, result.value)
         }
         print("총 수익률은 ${lottoStatistics.rateOfReward}입니다.")
@@ -41,8 +41,8 @@ object LottoOutputView {
     /**
      * 로또 당첨 규칙에 따른 결과를 출력한다.
      */
-    fun printLottoRuleResult(lottoRule: LottoRule, count: Int) =
-        println("${lottoRule.matchesCount}개 일치 (${lottoRule.reward}원)- ${count}개")
+    fun printLottoRuleResult(rank: Rank, count: Int) =
+        println("${rank.countOfMatch}개 일치 (${rank.winningMoney}원)- ${count}개")
 
     private fun getStringRateOfReward(rateOfReward: Double) = if (rateOfReward >= 1) "이익" else "손해"
 }
