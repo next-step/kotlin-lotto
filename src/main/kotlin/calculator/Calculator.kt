@@ -5,11 +5,9 @@ class Calculator {
         if (text.isNullOrBlank()) {
             return 0
         }
-        val numbers = PositiveNumbers.parse(
-            Separates.parse(text)
-                .toIntList()
-        )
 
-        return numbers.sum()
+        return Separators.parse(text)
+            .toPositiveNumbers()
+            .sum()
     }
 }
