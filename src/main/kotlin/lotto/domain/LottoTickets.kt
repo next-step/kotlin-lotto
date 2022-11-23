@@ -1,8 +1,21 @@
 package lotto.domain
 
-class LottoTickets private constructor(
-    val tickets: List<LottoTicket>
+class LottoTickets(
+    val items: List<LottoTicket>
 ) {
+    fun count(): Int = items.size
+
+    fun benefitPrice(winningTicket: LottoTicket): Int {
+        return getResult(winningTicket).map { it.key.prize * it.value }.sum()
+    }
+
+    fun getResult(winningTicket: LottoTicket): Map<Award, Int> {
+        return items.map {
+            it.matchScratch(winningTicket)
+        }.groupingBy { it }.eachCount()
+    }
+
+
     companion object {
 
         fun randomTickets(count: Int): LottoTickets {

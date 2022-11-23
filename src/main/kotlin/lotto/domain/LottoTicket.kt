@@ -3,7 +3,7 @@ package lotto.domain
 private const val NUMBER_SIZE = 6
 
 class LottoTicket(
-    private val numbers: List<LottoNumber>
+    val numbers: List<LottoNumber>
 ) {
 
     constructor(vararg values: Int) : this(List(values.size) { idx -> LottoNumber(values[idx]) })
