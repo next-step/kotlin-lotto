@@ -18,8 +18,8 @@ class Lotto {
         return list.toString()
     }
 
-    fun win(input: String) {
-        val numbers: List<Int> = Tokenizer.tokenize(input).map {
+    fun win(winningNumbers: String) {
+        val numbers: List<Int> = Tokenizer.tokenize(winningNumbers).map {
             it.toInt()
         }
 
