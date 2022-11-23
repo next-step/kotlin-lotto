@@ -7,11 +7,7 @@ value class PositiveOperand(val value: Int) {
     }
 
     constructor(value: String) : this(
-        if (!value.matches(REG_EXP)) {
-            throw RuntimeException("숫자 이외의 값 또는 음수는 입력할 수 없습니다.")
-        } else {
-            value.toInt()
-        }
+        value.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값은 입력할 수 없습니다.")
     )
 
     companion object {

@@ -44,10 +44,10 @@ class PositiveOperandTest {
 
     @DisplayName("입력된 값이 숫자인지 확인하는 테스트")
     @ParameterizedTest
-    @ValueSource(strings = ["-1", "", " ", "a", "1a", "a1", "1 1", " 1", "1 "])
+    @ValueSource(strings = ["", " ", "a", "1a", "a1", "1 1", " 1", "1 "])
     fun `입력된 값이 숫자인지 확인하는 테스트`(input: String) {
         assertThatThrownBy { PositiveOperand(input) }
             .isInstanceOf(RuntimeException::class.java)
-            .hasMessageContaining("숫자 이외의 값 또는 음수는 입력할 수 없습니다.")
+            .hasMessageContaining("숫자 이외의 값은 입력할 수 없습니다.")
     }
 }
