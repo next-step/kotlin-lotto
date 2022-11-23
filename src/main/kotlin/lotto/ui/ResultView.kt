@@ -11,7 +11,7 @@ object ResultView {
         println("${lottos.size}개를 구매했습니다 ")
 
         lottos.forEach {
-            println(it.lottoNumber.number)
+            println(it.lottoNumbers.numbers.toString())
         }
     }
 

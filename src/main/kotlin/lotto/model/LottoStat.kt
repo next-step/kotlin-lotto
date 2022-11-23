@@ -12,7 +12,7 @@ class LottoStat(private val lottoGrades: List<LottoGrade>, private val amount: I
     private fun gradeStat() =
         LottoGrade.values()
             .filter { it.correctNumber >= LOTTO_STAT_BASE_CORRECT_NUMBER }
-            .associateWith { lottoGrades.count { it2 -> it === it2 } }
+            .associateWith { lottoGrades.count { grade -> it === grade } }
             .toSortedMap(compareBy { it.correctNumber })
 
     private fun winningRate(): BigDecimal {

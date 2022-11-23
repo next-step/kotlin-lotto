@@ -15,12 +15,12 @@ class LottoGame(
 
     private fun createLotto(lottoNumberGenerator: LottoNumberGenerator) {
         repeat(lottoAmount / LOTTO_PER_AMOUNT) {
-            lottos.add(Lotto(LottoNumber(lottoNumberGenerator.pick())))
+            lottos.add(Lotto(LottoNumbers(lottoNumberGenerator.pick())))
         }
     }
 
-    fun draw(winningNumber: List<Int>): List<LottoGrade> {
-        return lottos.map { it.scratch(LottoNumber(winningNumber)) }.toList()
+    fun draw(winningNumber: LottoNumbers): List<LottoGrade> {
+        return lottos.map { it.scratch(winningNumber) }.toList()
     }
 
     fun getLottos() = lottos.toList()

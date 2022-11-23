@@ -1,6 +1,8 @@
 package lotto
 
 import lotto.model.LottoGame
+import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
 import lotto.model.LottoStat
 import lotto.ui.InputView.inputLottoAmount
 import lotto.ui.InputView.inputWinningNumber
@@ -14,7 +16,9 @@ class LottoGameController {
         resultLottoList(lottoGame.getLottos())
 
         val winningNumber: List<Int> = inputWinningNumber()
-        val drawResult = lottoGame.draw(winningNumber)
+
+        lottoGame.getLottos()
+        val drawResult = lottoGame.draw(LottoNumbers(winningNumber.map { LottoNumber(it) }))
 
         resultLottoWinner(LottoStat(drawResult, lottoAmount))
     }
