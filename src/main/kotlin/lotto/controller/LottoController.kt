@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoStatistics
 import lotto.uI.InputView
@@ -12,7 +13,7 @@ class LottoController {
     fun purchase(money: Long): List<Lotto> {
         val lottoCount = LottoPurchase(price = money).getLottoCount()
 
-        val lottoList = LottoGenerator.generateLottoList(lottoCount)
+        val lottoList = LottoGenerator.generateLottoList(lottoCount, LottoNumberGenerator)
 
         OutputView.outputLottoList(lottoList)
         return lottoList

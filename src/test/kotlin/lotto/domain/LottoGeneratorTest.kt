@@ -32,7 +32,8 @@ internal class LottoGeneratorTest {
     @Test
     fun generateLottoList() {
         val lottoCount = 7L
-        val resultLottoList = LottoGenerator.generateLottoList(lottoCount)
+        val numberGenerator: NumberGenerator = ManualNumberGenerator()
+        val resultLottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
 
         assertThat(resultLottoList.count()).isEqualTo(lottoCount)
         resultLottoList.forEach { lotto ->

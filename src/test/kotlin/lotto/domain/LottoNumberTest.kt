@@ -29,15 +29,4 @@ internal class LottoNumberTest {
 
         assertThat(result).isTrue
     }
-
-    @Test
-    fun generateLottoNumbers() {
-        val lottoCount = 6
-        val resultLotto = LottoNumber.generateLottoNumbers(lottoCount)
-
-        assertThat(resultLotto.count()).isEqualTo(lottoCount)
-        resultLotto.forEach { lottoNumber ->
-            assertThat(lottoNumber.number).isBetween(1, 45)
-        }
-    }
 }
