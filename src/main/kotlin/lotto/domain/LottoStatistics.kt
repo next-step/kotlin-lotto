@@ -2,12 +2,12 @@ package lotto.domain
 
 import kotlin.math.floor
 
-class LottoStatistics(private val matchesCountResult: List<Int>, private val amount: Int) {
-    val matchesResult: Map<LottoRule, Int> = initMatchesResult()
+class LottoStatistics(private val countOfMatchResult: List<Int>, private val amount: Int) {
+    val matchesResult: Map<Rank, Int> = initMatchesResult()
 
-    private fun initMatchesResult(): Map<LottoRule, Int> {
-        return LottoRule.values().associateWith { rule ->
-            matchesCountResult.count { matchesCount -> matchesCount == rule.matchesCount }
+    private fun initMatchesResult(): Map<Rank, Int> {
+        return Rank.values().associateWith { rule ->
+            countOfMatchResult.count { it == rule.countOfMatch }
         }
     }
 
@@ -15,7 +15,7 @@ class LottoStatistics(private val matchesCountResult: List<Int>, private val amo
         private set
 
     private fun calculateTotalProfit(): Double {
-        val reward = matchesResult.map { result -> result.key.getTotalReward(result.value) }.sum().toDouble()
+        val reward = matchesResult.map { it.key.getTotalWinningMoney(it.value) }.sum().toDouble()
         return floor(reward / amount * 100) / 100
     }
 }
