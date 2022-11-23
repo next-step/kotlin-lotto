@@ -2,6 +2,7 @@ package stringcalculator
 
 import java.lang.RuntimeException
 
+
 class Calculator(private val input: String) {
 
     private fun numberValidate(str: String): Int {
