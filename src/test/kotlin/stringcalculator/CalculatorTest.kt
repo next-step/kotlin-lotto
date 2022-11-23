@@ -4,9 +4,17 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 
 class CalculatorTest {
+
+    @ParameterizedTest
+    @CsvSource("1,1", "2,2", "5,5")
+    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(str: String, expected: Int) {
+        val number = str.toIntOrNull()
+        assertThat(number).isEqualTo(expected)
+    }
 
     @Test
     fun `입력값이 없을 경우 0 반환`() {
