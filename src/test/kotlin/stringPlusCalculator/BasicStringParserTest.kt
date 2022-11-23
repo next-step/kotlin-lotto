@@ -15,14 +15,14 @@ class BasicStringParserTest : DescribeSpec ({
         }
 
         it("콜론을 통해서 문자열을 파싱할 수 있다.") {
-            val expressionInput = "1;2"
+            val expressionInput = "1:2"
             val parsedInput = basicStringParser.parse(expressionInput)
 
             parsedInput shouldBe listOf("1", "2")
         }
 
         it("쉼표와 콜론을 통해서 문자열을 파싱할 수 있다.") {
-            val expressionInput = "1,2;3"
+            val expressionInput = "1,2:3"
             val parsedInput = basicStringParser.parse(expressionInput)
 
             parsedInput shouldBe listOf("1", "2", "3")

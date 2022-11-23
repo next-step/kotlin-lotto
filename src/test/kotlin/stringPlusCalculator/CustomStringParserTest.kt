@@ -27,5 +27,12 @@ class CustomStringParserTest : DescribeSpec({
 
             parsedInput shouldBe listOf("1-;-2")
         }
+
+        it("커스텀 문자가 존재하지 않을 경우 문자열을 파싱할 수 없다.") {
+            val expressionInput = "//---1-;-2"
+            val parsedInput = customStringParser.parse(expressionInput)
+
+            parsedInput shouldBe listOf("//---1-;-2")
+        }
     }
 })
