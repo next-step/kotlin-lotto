@@ -16,7 +16,7 @@ internal class LottoRewardTest {
         ints = [3, 4, 5, 6]
     )
     fun reward(input: Int) {
-        val reward = LottoReward.reward(count = input)
+        val reward = LottoReward.reward(matchCount = input)
         reward shouldBeGreaterThanOrEqual FOURTH_WIN_PRICE
     }
 
@@ -26,7 +26,7 @@ internal class LottoRewardTest {
         ints = [0, 1, 2]
     )
     fun zero(input: Int) {
-        val reward = LottoReward.reward(count = input)
+        val reward = LottoReward.reward(matchCount = input)
         reward shouldBe 0
     }
 
@@ -37,7 +37,7 @@ internal class LottoRewardTest {
     )
     fun minusOrOverCount(input: Int) {
         shouldThrowExactly<IllegalStateException> {
-            LottoReward.reward(count = input)
+            LottoReward.reward(matchCount = input)
         }
     }
 }
