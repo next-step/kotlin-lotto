@@ -7,11 +7,19 @@ enum class Rank {
         override fun prize(): Int {
             return FIRST_PRIZE
         }
+
+        override fun matches(): Int {
+           return LOTTO_FIRST_RANK_MATCHES
+        }
     },
 
     SECOND {
         override fun prize(): Int {
             return SECOND_PRIZE
+        }
+
+        override fun matches(): Int {
+            return LOTTO_SECOND_RANK_MATCHES
         }
     },
 
@@ -19,15 +27,25 @@ enum class Rank {
         override fun prize(): Int {
             return THIRD_PRIZE
         }
+
+        override fun matches(): Int {
+            return LOTTO_THIRD_RANK_MATCHES
+        }
     },
 
     FOURTH {
         override fun prize(): Int {
             return FOURTH_PRIZE
         }
+
+        override fun matches(): Int {
+            return LOTTO_FOURTH_RANK_MATCHES
+        }
     };
 
     abstract fun prize(): Int
+
+    abstract fun matches(): Int
 
     companion object {
         private const val FIRST_PRIZE = 2_000_000_000

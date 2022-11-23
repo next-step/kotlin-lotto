@@ -5,6 +5,7 @@ import simulator.io.Output
 import simulator.lotto.Lotto
 import simulator.lotto.LottoMachine
 import simulator.lotto.LottoResult
+import simulator.lotto.Rank
 
 fun main() {
     val input = Input()
@@ -21,10 +22,13 @@ fun main() {
     output.printLottos(lottos)
 
     val winningLotto = Lotto(input.getLotto().toSet())
-    val lottoResult = LottoResult(lottos, winningLotto)
+    val lottoResult = LottoResult.aggregate(lottos, winningLotto)
 
-    output.printLottoResult(lottoResult)
-    output.printYield(money, lottoResult.money())
+    output.printLottoResultHeader()
+    Rank.values()
+        .reversed()
+        .forEach { output.printLottoResult(it.matches(), it.prize(), lottoResult.rankCount(it)) }
+    output.printYield(lottoResult.yield(money))
 }
 
 const val LOTTO_PRICE = 1000

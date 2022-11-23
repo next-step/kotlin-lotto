@@ -1,39 +1,24 @@
 package simulator.lotto
 
-class LottoResult(lottos: List<Lotto>, winningLotto: Lotto) {
-    var first: Int = 0
-        private set
-    var second: Int = 0
-        private set
-    var third: Int = 0
-        private set
-    var fourth: Int = 0
-        private set
-
-    init {
-        lottos.forEach {
-            ranking(it, winningLotto)
-        }
+class LottoResult(private val ranks: List<Rank>) {
+    fun rankCount(rank: Rank): Int {
+        return ranks.count{ it == rank }
     }
 
-
-    fun money(): Int {
-        return FIRST_PRIZE * first + SECOND_PRIZE * second + THIRD_PRIZE * third + FOURTH_PRIZE * fourth
+    fun totalMoney(): Int {
+        return ranks.sumOf { it.prize() }
     }
 
-    private fun ranking(lotto: Lotto, winningLotto: Lotto) {
-        when (lotto.match(winningLotto)) {
-            6 -> this.first++
-            5 -> this.second++
-            4 -> this.third++
-            3 -> this.fourth++
-        }
+    fun yield(money:Int):Double{
+        return totalMoney() / money.toDouble()
     }
 
     companion object {
-        const val FIRST_PRIZE = 2000000000
-        const val SECOND_PRIZE = 1500000
-        const val THIRD_PRIZE = 50000
-        const val FOURTH_PRIZE = 5000
+        fun aggregate(lottos: List<Lotto>, winningLotto: Lotto): LottoResult {
+            val ranks = lottos.map { it.match(winningLotto) }
+                .mapNotNull { Rank.match(it) }
+
+            return LottoResult(ranks)
+        }
     }
 }

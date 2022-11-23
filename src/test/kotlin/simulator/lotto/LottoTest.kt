@@ -23,6 +23,20 @@ internal class LottoTest {
     }
 
     @Test
+    fun `랜덤으로 로또를 생성할 수 있다`() {
+        val lotto = Lotto.generate()
+
+        assertThat(lotto).isInstanceOf(Lotto::class.java)
+    }
+
+    @Test
+    fun `로또번호를 String타입으로 변환할 수 있다`() {
+        val lotto = Lotto(setOf(1,2,3,4,5,6))
+
+        assertThat(lotto.toString()).isEqualTo("1,2,3,4,5,6")
+    }
+
+    @Test
     fun `로또번호는 오름차순 정렬되어 있다`() {
         val lottoNumbers = setOf(1,5,2,3,4,6)
         val lotto = Lotto(lottoNumbers)
