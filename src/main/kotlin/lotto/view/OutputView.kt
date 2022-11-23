@@ -18,11 +18,11 @@ class OutputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
     }
 
-    fun printStatistics(rewardCount: Map<Reward, Int>){
+    fun printStatistics(rewardCount: Map<Reward, Int>) {
         println()
         println("당첨 통계")
         println("---------")
-        rewardCount.forEach{
+        rewardCount.forEach {
             println("${it.key.count}개 일치 (${it.key.name}원) - ${it.value}개")
         }
     }
