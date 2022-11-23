@@ -23,8 +23,15 @@ class LottoTicketTest {
         // when, then
         assertThatIllegalArgumentException().isThrownBy { LottoTicket(1, 2, 3, 4, 5) }
         assertThatIllegalArgumentException().isThrownBy { LottoTicket(1, 2, 3, 4, 5, 6, 7) }
-
     }
+
+    @Test
+    internal fun `로또 티켓 번호중 중복된 번호가 있으면 에외가 발생한다`() {
+        // given
+        // when, then
+        assertThatIllegalArgumentException().isThrownBy { LottoTicket(1, 1, 3, 4, 5, 6) }
+    }
+
 
     @ParameterizedTest
     @ValueSource(strings = ["10,11,12,13,14,15", "1,10,11,12,13,14", "1,2,10,11,12,13"])
