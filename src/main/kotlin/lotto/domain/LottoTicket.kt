@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 private const val NUMBER_SIZE = 6
 

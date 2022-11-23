@@ -1,5 +1,6 @@
-package lotto
+package lotto.domain
 
+import lotto.domain.LottoNumber
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.params.ParameterizedTest

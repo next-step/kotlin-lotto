@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 
 private const val TICKET_PRICE = 1000
