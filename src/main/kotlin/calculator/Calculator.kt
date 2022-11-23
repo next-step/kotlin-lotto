@@ -20,9 +20,8 @@ class Calculator {
     }
 
     @Throws(RuntimeException::class)
-    private fun transform(numberString: String): Int {
-        val number = numberString.toIntOrNull() ?: throw RuntimeException("not number type !!")
-        if (number < 0) throw RuntimeException("negative number !!")
-        return number
+    private fun transform(number: String): Int {
+        Validator.validate(number)
+        return number.toInt()
     }
 }
