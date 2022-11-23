@@ -12,12 +12,11 @@ class Calculator {
 
     @Throws(RuntimeException::class)
     private fun addNumbers(numbers: List<String>): Int {
-        var result = 0
-        numbers.forEach { numberString ->
-            val number: Int = transform(numberString)
-            result += number
+        return numbers.map { numberString ->
+            transform(numberString)
+        }.reduce { acc: Int, number: Int ->
+            acc + number
         }
-        return result
     }
 
     @Throws(RuntimeException::class)
