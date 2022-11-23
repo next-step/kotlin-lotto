@@ -2,6 +2,9 @@ package calculator
 
 object Tokenizer {
 
+    private val tokenRegex = "[,:]".toRegex()
+    private val customRegex = Regex("//(.)\n(.*)")
+
     fun tokenize(input: String): List<String> {
         return internalTokenize(input).map { it.trim() }
     }
@@ -12,11 +15,11 @@ object Tokenizer {
             return result
         }
 
-        return input.split("[,:]".toRegex())
+        return input.split(tokenRegex)
     }
 
     private fun customTokenize(text: String): List<String>? {
-        val result: MatchResult = Regex("//(.)\n(.*)").find(text) ?: return null
+        val result: MatchResult = customRegex.find(text) ?: return null
         val customDelimiter: String = result.groupValues[1]
         return result.groupValues[2].split(customDelimiter)
     }
