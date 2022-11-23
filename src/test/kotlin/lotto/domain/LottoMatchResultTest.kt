@@ -6,21 +6,6 @@ import org.junit.jupiter.api.Test
 internal class LottoMatchResultTest {
 
     @Test
-    fun initTest() {
-        val lottoMatchResult = LottoMatchResult()
-        val resultMatchList = lottoMatchResult.getMatchResult()
-        val matchNumberList = listOf<Int>(3, 4, 5, 6)
-
-        resultMatchList.forEach { lottoMatch ->
-            val reward = LottoRank.getReward(lottoMatch.matchNumber)
-
-            assertThat(lottoMatch.matchNumber).isIn(matchNumberList)
-            assertThat(lottoMatch.matchCount).isEqualTo(0L)
-            assertThat(lottoMatch.reward).isEqualTo(reward)
-        }
-    }
-
-    @Test
     fun getMatchResult() {
         val lottoMatchMap = mutableMapOf<Int, LottoMatch>()
         val matchNumber = 3

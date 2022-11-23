@@ -3,9 +3,22 @@ package lotto.domain
 class LottoStatistics(
     private val winningLotto: Lotto
 ) {
+    private fun initLottoMatchMap(): Map<Int, LottoMatch> {
+        val lottoMatchMap = mutableMapOf<Int, LottoMatch>()
+        LottoRank.getMatchCountList().forEach { matchCount ->
+            lottoMatchMap[matchCount] =
+                LottoMatch(
+                    matchCount,
+                    LottoRank.getReward(matchCount)
+                )
+        }
+        return lottoMatchMap
+    }
 
     fun getWinningStatistics(lottoList: List<Lotto>): List<LottoMatch> {
-        val lottoMatchResult = LottoMatchResult()
+        val lottoMatchMap = initLottoMatchMap()
+
+        val lottoMatchResult = LottoMatchResult(lottoMatchMap)
         lottoList.forEach { lotto ->
             val matchCount = winningLotto.getMatchCount(lotto)
             lottoMatchResult.setMatchResult(matchCount)
