@@ -9,14 +9,14 @@ class TicketTest : StringSpec({
     val ticket = Ticket()
 
     "티켓의 번호는 총 6개여야 한다" {
-        ticket.numbers.size shouldBe 6
+        ticket.getNumbers().size shouldBe 6
     }
 
     "티켓의 번호는 1부터 45 사이의 숫자여야 한다" {
-        ticket.numbers.filter { it in NumberPolicy.LOTTO_RANGE }.size shouldBe 6
+        ticket.getNumbers().filter { it in Policy.LOTTO_RANGE }.size shouldBe 6
     }
 
     "티켓은 정렬되어 있어야 한다" {
-        ticket.numbers.shouldBeSorted()
+        ticket.getNumbers().shouldBeSorted()
     }
 })
