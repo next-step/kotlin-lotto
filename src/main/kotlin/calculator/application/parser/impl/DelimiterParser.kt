@@ -10,6 +10,7 @@ object DelimiterParser : Parser {
 
     private const val CUSTOM_DELIMITER_PREFIX = "//"
     private const val CUSTOM_DELIMITER_SUFFIX = "\n"
+    private const val REGEX_PATTERN = "$CUSTOM_DELIMITER_PREFIX(.*)$CUSTOM_DELIMITER_SUFFIX(.*)"
     private const val EMPTY_STRING = ""
 
     override fun parseToPositiveIntegerList(inputString: String): List<PositiveInteger> {
@@ -26,12 +27,11 @@ object DelimiterParser : Parser {
         return numberArray.map { it.toPositiveInteger() }.toList()
     }
 
-    private fun hasCustomDelimiter(inputString: String) =
-        inputString.contains(CUSTOM_DELIMITER_PREFIX) && inputString.contains(CUSTOM_DELIMITER_SUFFIX)
+    private fun hasCustomDelimiter(inputString: String) = Regex(REGEX_PATTERN).find(inputString) != null
 
     private fun findCustomDelimiters(inputString: String): Delimiter {
-        val customDelimiterValue = inputString.substringAfter(CUSTOM_DELIMITER_PREFIX).substringBefore(CUSTOM_DELIMITER_SUFFIX)
-        return CustomDelimiter(customDelimiterValue)
+        val delimiter = Regex(REGEX_PATTERN).find(inputString)?.groupValues?.get(1) ?: throw RuntimeException("")
+        return CustomDelimiter(delimiter)
     }
 
     private fun cleanDelimiter(inputString: String, customDelimiterValue: String) = inputString
