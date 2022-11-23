@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 
 class LottoTest : StringSpec({
 
-    "로또는 숫자 여섯자리를 관리한다." {
+    "로또는 숫자 여섯개를 가진다." {
         val exception = shouldThrowExactly<IllegalArgumentException> {
             Lotto(listOf(1, 3, 10, 33, 11))
         }
