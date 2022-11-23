@@ -1,8 +1,8 @@
 package add_calculator
 
-class InputParser() {
+class InputParser {
 
-    fun parse(input: String? = readLine()): List<Operand> {
+    fun parse(input: String?): List<Operand> {
 
         if (input.isNullOrBlank()) {
             return listOf(Operand("0"))
