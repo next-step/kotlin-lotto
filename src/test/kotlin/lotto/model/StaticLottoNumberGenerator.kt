@@ -1,5 +1,5 @@
 package lotto.model
 
 class StaticLottoNumberGenerator(private val number: List<Int>) : LottoNumberGenerator {
-    override fun pick(): List<LottoNumber> = number.map { LottoNumber(it) }
+    override fun pick(): LottoNumbers = LottoNumbers(number.map { LottoNumber(it) })
 }

@@ -11,7 +11,6 @@ class RandomLottoNumberGeneratorTest : StringSpec({
         // when
         val number = lottNumberGenerator.pick()
         // then
-        number.size shouldBe 6
-        number.distinct().size shouldBe 6
+        number.size() shouldBe 6
     }
 })

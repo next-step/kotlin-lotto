@@ -7,7 +7,7 @@ class LottoTest : StringSpec({
 
     "로또 객채는 당첨번호와 비교해서 당첨등급을 평가할 수 있다" {
         // given
-        val lotto = Lotto(LottoNumbers(StaticLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)).pick()))
+        val lotto = Lotto(StaticLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)).pick())
         val winningNumber: List<LottoNumber> = listOf(
             LottoNumber(1),
             LottoNumber(2),

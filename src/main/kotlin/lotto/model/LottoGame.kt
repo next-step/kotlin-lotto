@@ -15,7 +15,7 @@ class LottoGame(
 
     private fun createLotto(lottoNumberGenerator: LottoNumberGenerator) {
         repeat(lottoAmount / LOTTO_PER_AMOUNT) {
-            lottos.add(Lotto(LottoNumbers(lottoNumberGenerator.pick())))
+            lottos.add(Lotto(lottoNumberGenerator.pick()))
         }
     }
 

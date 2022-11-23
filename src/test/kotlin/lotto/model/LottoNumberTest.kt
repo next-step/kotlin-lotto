@@ -10,9 +10,7 @@ class LottoNumberTest : StringSpec({
 
     "로또넘버 객채를 생성하면, 중복없는 숫자 6개를 같는다" {
         // given
-        val lottoNumbers = LottoNumbers(
-            StaticLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)).pick()
-        )
+        val lottoNumbers = StaticLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)).pick()
         // expect
         lottoNumbers.numbers.distinct().size shouldBe 6
     }
@@ -23,14 +21,14 @@ class LottoNumberTest : StringSpec({
             listOf(1, 2, 3, 4, 5, 1)
         ).forAll {
             shouldThrow<IllegalArgumentException> {
-                LottoNumbers(StaticLottoNumberGenerator(it).pick())
+                StaticLottoNumberGenerator(it).pick()
             }.shouldHaveMessage("중복없는 숫자는 6개가 존재해야 합니다")
         }
     }
 
     "숫자범위를 넘기는 경우 예외를 발생한다" {
         shouldThrow<IllegalArgumentException> {
-            LottoNumbers(StaticLottoNumberGenerator(listOf(51, 2, 3, 4, 5, 6)).pick())
+            StaticLottoNumberGenerator(listOf(51, 2, 3, 4, 5, 6)).pick()
         }.shouldHaveMessage("로또 번호 범위에 맞지 않는 숫자가 존재 합니다")
     }
 })
