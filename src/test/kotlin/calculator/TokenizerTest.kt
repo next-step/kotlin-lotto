@@ -15,7 +15,7 @@ internal class TokenizerTest {
     )
     fun tokenize(input: String) {
         val list = listOf("1", "2", "3", "4", "5", "6")
-        val result = Tokenizer().tokenize(input)
+        val result = Tokenizer.tokenize(input)
 
         assertThat(result).isEqualTo(list)
     }

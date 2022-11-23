@@ -1,6 +1,6 @@
 package calculator
 
-class Tokenizer {
+object Tokenizer {
 
     fun tokenize(input: String): List<String> {
         return internalTokenize(input).map { it.trim() }

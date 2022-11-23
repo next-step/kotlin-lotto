@@ -6,7 +6,7 @@ class Calculator {
         if (text.isNullOrBlank()) return 0
         if (text.length == 1) return validate(text)
 
-        val numbers: List<String> = Tokenizer().tokenize(text)
+        val numbers: List<String> = Tokenizer.tokenize(text)
         return addNumbers(numbers)
     }
 
