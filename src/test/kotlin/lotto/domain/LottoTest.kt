@@ -1,0 +1,19 @@
+package lotto.domain
+
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
+
+class LottoTest : StringSpec({
+
+    val lotto = Lotto()
+
+    "구입비에 따른 티켓 발권" {
+        lotto.setCountByPurchaseFee(10000)
+        lotto.purchaseTicket().size shouldBe 10
+    }
+
+    "구입비가 없을 경우 티켓이 발권 안 됨" {
+        lotto.setCountByPurchaseFee(900)
+        lotto.purchaseTicket().size shouldBe 0
+    }
+})
