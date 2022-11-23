@@ -1,9 +1,5 @@
 package calculator.domain
 
-private const val ZERO = 0
-
-private val REG_EXP = Regex("\\d+")
-
 @JvmInline
 value class PositiveOperand(val value: Int) {
     init {
@@ -17,4 +13,9 @@ value class PositiveOperand(val value: Int) {
             value.toInt()
         }
     )
+
+    companion object {
+        private const val ZERO = 0
+        private val REG_EXP = Regex("\\d+")
+    }
 }
