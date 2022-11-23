@@ -6,5 +6,7 @@ class Lotto(private var count: Int = 0) {
         count = fee / TicketPolicy.PURCHASE_FEE
     }
 
+    fun getCount() = this.count
+
     fun purchaseTicket() = buildList { repeat(count) { add(Ticket()) } }
 }
