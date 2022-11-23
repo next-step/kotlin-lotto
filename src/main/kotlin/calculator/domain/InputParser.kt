@@ -17,9 +17,20 @@ class InputParser {
 
     private fun parse(input: String): Array<Int> {
         if (input.startsWith("//")) {
-            val (customDelimiter, tokens) = CUSTOM_DELIMITER_INDICATOR.toRegex().find(input)!!.destructured
+            return parseWithCustomDelimiter(input)
+        }
+        return parseWithDefaultDelimiter(input)
+    }
+
+    private fun parseWithCustomDelimiter(input: String): Array<Int> {
+        val findResult = CUSTOM_DELIMITER_INDICATOR.toRegex().find(input)
+        if (findResult != null) {
+            val (customDelimiter, tokens) = findResult.destructured
             return tokens.split(customDelimiter).map { it.toInt() }.toTypedArray()
         }
-        return input.split(DEFAULT_DELIMITER_INDICATOR.toRegex()).map { it.toInt() }.toTypedArray()
+        return arrayOf(0)
     }
+
+    private fun parseWithDefaultDelimiter(input: String) =
+        input.split(DEFAULT_DELIMITER_INDICATOR.toRegex()).map { it.toInt() }.toTypedArray()
 }
