@@ -12,7 +12,7 @@ internal class LottoMatchResultTest {
         val matchNumberList = listOf<Int>(3, 4, 5, 6)
 
         resultMatchList.forEach { lottoMatch ->
-            val reward = lottoMatchResult.getReward(lottoMatch.matchNumber)
+            val reward = LottoRank.getReward(lottoMatch.matchNumber)
 
             assertThat(lottoMatch.matchNumber).isIn(matchNumberList)
             assertThat(lottoMatch.matchCount).isEqualTo(0L)
