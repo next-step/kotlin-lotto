@@ -29,7 +29,7 @@ internal class LottoTest {
 
     @DisplayName("로또 숫자들은 오름차순으로 정렬된다")
     @Test
-    internal fun orderASC() {
+    fun orderASC() {
         val lotto = Lotto()
         val first = lotto.list[0]
         val second = lotto.list[1]
