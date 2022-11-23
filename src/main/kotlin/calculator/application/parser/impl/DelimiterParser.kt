@@ -18,18 +18,8 @@ object DelimiterParser : Parser {
         }
 
         val numberArray = input.split(*delimiters)
-        return numberArray.map { it.toPositiveInteger() }.toList()
+        return numberArray.map { PositiveInteger.parsing(it) }.toList()
     }
-
-    private fun String.toPositiveInteger(): PositiveInteger =
-        try {
-            val number = this.toInt()
-            PositiveInteger(number)
-        } catch (e: NumberFormatException) {
-            throw ParsingException("숫자만 입력을 할 수 있습니다.")
-        } catch (e: IllegalArgumentException) {
-            throw ParsingException("0과 같거나 큰 숫자만 가능합니다")
-        }
 }
 
 data class ParsingException(
