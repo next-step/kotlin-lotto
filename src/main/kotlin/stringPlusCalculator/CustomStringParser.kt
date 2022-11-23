@@ -1,26 +1,25 @@
 package stringPlusCalculator
 
 class CustomStringParser {
-    fun parse(expressionInput: String): List<String> {
-        val stringExpression = findStringExpression(expressionInput)
+    companion object {
+        fun parse(expressionInput: String): List<String> {
+            val stringExpression = findStringExpression(expressionInput)
+            val customStringParser = findCustomStringParser(expressionInput)
 
-        return try {
-            val customStringParser = findCustomStringParse(expressionInput)
-            if(customStringParser.isNullOrBlank()) throw IllegalArgumentException("커스텀 구분자가 존재하지 않습니다.")
-
-            stringExpression.split(customStringParser)
-        } catch (e: IllegalArgumentException) {
-            listOf(stringExpression)
+            return when {
+                customStringParser.isNullOrBlank() -> listOf(stringExpression)
+                else -> stringExpression.split(customStringParser)
+            }
         }
-    }
 
-    private fun findCustomStringParse(expressionInput: String): String {
-        val customStringParserFinder = CustomStringParserFinder()
+        private fun findCustomStringParser(expressionInput: String): String {
+            val customStringParserFinder = CustomStringParserFinder()
 
-        return customStringParserFinder.find(expressionInput)
-    }
+            return customStringParserFinder.find(expressionInput)
+        }
 
-    private fun findStringExpression(expressionInput: String): String {
-        return expressionInput.substringAfter("\n")
+        private fun findStringExpression(expressionInput: String): String {
+            return expressionInput.substringAfter("\n")
+        }
     }
 }

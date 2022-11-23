@@ -1,16 +1,16 @@
 package stringPlusCalculator
 
+import stringPlusCalculator.exception.CustomParserNotExistsException
+
 class CustomStringParserFinder {
     fun find(expressionInput: String): String {
-        val customStringParser = try {
-            if(!hasCustomStringParser(expressionInput)) throw IllegalArgumentException("커스텀 구분자가 존재하지 않습니다.")
+        return try {
+            if (!hasCustomStringParser(expressionInput)) throw CustomParserNotExistsException()
 
             expressionInput.substringAfter("//").substringBefore("\n")
-        } catch (e: IllegalArgumentException) {
+        } catch (e: CustomParserNotExistsException) {
             ""
         }
-
-        return customStringParser
     }
 
     private fun hasCustomStringParser(expressionInput: String): Boolean {

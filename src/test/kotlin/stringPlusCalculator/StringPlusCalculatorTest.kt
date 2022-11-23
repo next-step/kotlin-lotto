@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class StringPlusCalculatorTest  : DescribeSpec({
+class StringPlusCalculatorTest : DescribeSpec({
     describe("문자열 덧셈 계산기 테스트") {
         it("빈문자열을 입력할 경우 0을 리턴한다.") {
             val expressionInput = ""
@@ -34,6 +34,12 @@ class StringPlusCalculatorTest  : DescribeSpec({
             val expressionInput = "//-\n1-2-3"
 
             StringPlusCalculator.calculate(expressionInput) shouldBe 6
+        }
+
+        it("네개의 숫자를 커스텀 문자열과 콤마, 콜론으로 구분하여 문자열을 입력할 경우 해당 숫자의 합을 리턴한다.") {
+            val expressionInput = "//-\n1-2:3,4"
+
+            StringPlusCalculator.calculate(expressionInput) shouldBe 10
         }
 
         it("음수를 포함한 문자열을 입력할 경우 RuntimeException 에러를 throw 한다.") {

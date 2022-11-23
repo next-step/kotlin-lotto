@@ -1,10 +1,8 @@
 package stringPlusCalculator
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-
-class CustomStringParserFinderTest  : DescribeSpec({
+class CustomStringParserFinderTest : DescribeSpec({
     describe("커스텀 문자열 파서 파인더 테스트") {
         val customStringParserFinder = CustomStringParserFinder()
 
