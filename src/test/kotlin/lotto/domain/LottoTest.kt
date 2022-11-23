@@ -22,7 +22,18 @@ internal class LottoTest {
     @Test
     fun numberSize() {
         val lotto = Lotto()
+        val listSize = lotto.list.size
 
-        assertThat(lotto.list.size).isEqualTo(6)
+        assertThat(listSize).isEqualTo(6)
+    }
+
+    @DisplayName("로또 숫자들은 오름차순으로 정렬된다")
+    @Test
+    internal fun orderASC() {
+        val lotto = Lotto()
+        val first = lotto.list[0]
+        val second = lotto.list[1]
+
+        assertThat(first).isLessThan(second)
     }
 }
