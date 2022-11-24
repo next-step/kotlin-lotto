@@ -12,10 +12,10 @@ value class LottoNumbers(val numbers: List<LottoNumber>) {
         require(numbers.toSet().size == 6) { "로또 숫자는 중복이 허용되지 않습니다." }
     }
 
-    fun match(otherNumbers: List<LottoNumber>): Int {
+    fun match(otherNumbers: LottoNumbers): Int {
         tailrec fun match(
             matchedCount: Int,
-            otherNumbers: List<LottoNumber>,
+            otherNumbers: LottoNumbers,
             numbers: MutableList<LottoNumber>
         ): Int = when {
             numbers.isEmpty() -> matchedCount
@@ -26,4 +26,6 @@ value class LottoNumbers(val numbers: List<LottoNumber>) {
         }
         return match(0, otherNumbers, this.numbers.toMutableList())
     }
+
+    private fun contains(lottoNumber: LottoNumber) = this.numbers.contains(lottoNumber)
 }

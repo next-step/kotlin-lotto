@@ -30,7 +30,7 @@ class LottoNumbersTest : StringSpec({
     "로또는 당첨번호를 입력받아 몇개의 숫자가 일치하는지 반환한다." {
         val lottoNumbers = LottoNumbers(lottoNumbersOf(1, 2, 3, 4, 5, 6))
 
-        val result: Int = lottoNumbers.match(lottoNumbersOf(1, 2, 3, 4, 5, 6))
+        val result: Int = lottoNumbers.match(LottoNumbers(lottoNumbersOf(1, 2, 3, 4, 5, 6)))
 
         result shouldBe 6
     }
