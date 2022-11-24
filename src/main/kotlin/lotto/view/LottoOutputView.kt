@@ -23,7 +23,7 @@ object LottoOutputView {
      * 로또들의 번호들을 출력한다.
      */
     fun printLottos(lottos: List<Lotto>) =
-        lottos.map { lotto -> println("${lotto.numbers.toList()}") }
+        lottos.map { lotto -> println("${lotto.numbers.map { it.number }}") }
 
     /**
      * 로또 당첨 통계를 출력한다.
@@ -31,7 +31,7 @@ object LottoOutputView {
     fun printWinningStatistics(lottoStatistics: LottoStatistics) {
         println("당첨 통계")
         println("---------")
-        lottoStatistics.matchesResult.toSortedMap(compareBy { it.countOfMatch }).map { result ->
+        lottoStatistics.matchResult.toSortedMap(compareByDescending { it.ordinal }).map { result ->
             printLottoRuleResult(result.key, result.value)
         }
         print("총 수익률은 ${lottoStatistics.rateOfReward}입니다.")
@@ -41,8 +41,14 @@ object LottoOutputView {
     /**
      * 로또 당첨 규칙에 따른 결과를 출력한다.
      */
-    fun printLottoRuleResult(rank: Rank, count: Int) =
-        println("${rank.countOfMatch}개 일치 (${rank.winningMoney}원)- ${count}개")
+    fun printLottoRuleResult(rank: Rank, count: Int) {
+        when (rank) {
+            Rank.SECOND -> println("${rank.countOfMatch}개 일치, 보너스 볼 일치 (${rank.winningMoney}원) - ${count}개")
+            Rank.MISS -> return
+            else -> println("${rank.countOfMatch}개 일치 (${rank.winningMoney}원) - ${count}개")
+        }
+    }
+
 
     private fun getStringRateOfReward(rateOfReward: Double) = if (rateOfReward >= 1) "이익" else "손해"
 }
