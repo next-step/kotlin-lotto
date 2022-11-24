@@ -10,13 +10,11 @@ class InputParser {
 
         val result = CUSTOM_DELEGATE_REGEXP.find(input)
 
-        result?.let {
+        val texts: List<String> = result?.let {
             val customDelimiter = it.groupValues[1]
-            val texts = it.groupValues[2].split(customDelimiter)
-            return toOperands(texts)
-        }
+            it.groupValues[2].split(customDelimiter)
+        } ?: input.split(DEFAULT_DELEGATE_REGEXP)
 
-        val texts = input.split(",|:".toRegex())
         return toOperands(texts)
     }
 
@@ -28,6 +26,8 @@ class InputParser {
 
     companion object {
         private val DEFAULT_OPERANDS = listOf(Operand("0"))
+        private const val DEFAULT_DELEGATE_PATTERN = ",|:"
+        private val DEFAULT_DELEGATE_REGEXP = Regex(DEFAULT_DELEGATE_PATTERN)
 
         private const val CUSTOM_DELEGATE_PATTERN = "//(.)\n(.*)"
         private val CUSTOM_DELEGATE_REGEXP = Regex(CUSTOM_DELEGATE_PATTERN)
