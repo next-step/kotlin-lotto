@@ -13,9 +13,9 @@ class CalculatorTest {
         val expected = PositiveOperand(6)
 
         // when
-        val given = calculator.add(arrayOf(PositiveOperand(1), PositiveOperand(2), PositiveOperand(3)))
+        val result = calculator.add(arrayOf(PositiveOperand(1), PositiveOperand(2), PositiveOperand(3)))
 
         // then
-        assertThat(given).isEqualTo(expected)
+        assertThat(result).isEqualTo(expected)
     }
 }
