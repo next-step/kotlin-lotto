@@ -21,7 +21,7 @@ class LottoGameController {
         }
 
         val winnerNumber = InputView.winningNumberOfLastWeek()
-        val gameResults = gameBoard.map { LottoGame.checkAnswer(it, winnerNumber.winnerNumber) }
+        val gameResults = gameBoard.map { LottoGame.getResultOfGame(it, winnerNumber.winnerNumber) }
 
         ResultView.noticeOfPrize()
         LottoGameResult.winningStatistics(gameResults) {

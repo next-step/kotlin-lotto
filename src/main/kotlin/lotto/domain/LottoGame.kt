@@ -6,7 +6,7 @@ object LottoGame {
 
     fun start(lottoFactory: LottoFactory): Lotto = lottoFactory.create()
 
-    fun checkAnswer(lotto: Lotto, winnerLotto: Lotto): LottoGameResult {
+    fun getResultOfGame(lotto: Lotto, winnerLotto: Lotto): LottoGameResult {
         val matches = numberOfMatches(lotto, winnerLotto)
         return LottoGameResult.getResultOfWinning(matches)
     }
