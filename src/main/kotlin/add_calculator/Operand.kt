@@ -3,10 +3,11 @@ package add_calculator
 import java.lang.RuntimeException
 
 class Operand(text: String) {
-    val value: UInt
+    val value: PositiveNumber
 
     init {
-        value = text.toUIntOrNull() ?: throw RuntimeException()
+        val number = text.toIntOrNull() ?: throw RuntimeException()
+        value = PositiveNumber(number)
     }
 
     override fun equals(other: Any?): Boolean {
