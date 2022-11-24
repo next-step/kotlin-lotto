@@ -29,9 +29,9 @@ class LottoTest {
 
     @ParameterizedTest
     @ValueSource(ints = [1, 3, 5])
-    fun `중복된 숫자 포함 6개 입력시 예외 발생한다`(number: Int) {
-        val numbers = mutableListOf(1, 2, 3, 4, 5)
+    fun `중복된 숫자를 갖지 않는다`(number: Int) {
+        val numbers = mutableListOf(1, 2, 3, 4, 5, 6)
         numbers.add(number)
-        assertThrows<IllegalArgumentException> { Lotto(numbers.map { LottoNumber(it) }.toSet()) }
+        assertThat(Lotto(numbers.map { LottoNumber(it) }.toSet()).numbers.size).isEqualTo(Lotto.LOTTO_NUMBER_COUNT)
     }
 }
