@@ -48,5 +48,16 @@ internal class WinningNumbersTest : BehaviorSpec({
                 }
             }
         }
+
+        `when`("6개의 숫자가 아니라면") {
+            val input = "1, 2, 3, 4, 5, 6, 7"
+
+            then("IllegalArgumentException 을 반환한다.") {
+                val exception = shouldThrow<IllegalArgumentException> {
+                    WinningNumbers.from(input)
+                }
+                exception.message should startWith("당첨 번호는 6개의 숫자여야 합니다.")
+            }
+        }
     }
 })
