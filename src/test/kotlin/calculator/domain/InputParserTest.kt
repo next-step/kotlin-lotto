@@ -55,6 +55,7 @@ class InputParserTest {
     @ParameterizedTest
     @ValueSource(strings = [" ", "a", "1a", "a1", "1 1", " 1", "1 "])
     fun `입력된 값이 숫자인지 확인하는 테스트`(input: String) {
+        // when, then
         assertThatThrownBy { inputParser.parseWithDelimiter(input) }
             .isInstanceOf(RuntimeException::class.java)
             .hasMessageContaining("숫자 이외의 값은 입력할 수 없습니다.")
