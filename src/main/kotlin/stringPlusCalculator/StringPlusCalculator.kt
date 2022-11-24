@@ -10,11 +10,9 @@ class StringPlusCalculator {
             return try {
                 validateBlankExpressionInput(expressionInput)
 
-                CustomStringParser.parse(expressionInput)
-                    .map { operand -> operand }
-                    .map { operand -> parsedOperands.addAll(BasicStringParser.parse(operand)) }
+                CustomStringParser.parse(expressionInput).map { operand -> parsedOperands.addAll(BasicStringParser.parse(operand)) }
 
-                return StringInputConverter.convert(parsedOperands).sum()
+                StringInputConverter.convert(parsedOperands).sum()
             } catch (e: BlankExpressionInputException) {
                 0
             }

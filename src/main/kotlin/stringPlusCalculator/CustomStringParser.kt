@@ -13,9 +13,7 @@ class CustomStringParser {
         }
 
         private fun findCustomStringParser(expressionInput: String): String {
-            val customStringParserFinder = CustomStringParserFinder()
-
-            return customStringParserFinder.find(expressionInput)
+            return CustomStringParserFinder.find(expressionInput)
         }
 
         private fun findStringExpression(expressionInput: String): String {
