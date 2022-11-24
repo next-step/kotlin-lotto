@@ -10,5 +10,6 @@ class Lotto(val lottoNumbers: Set<LottoNumber>) {
 
     companion object {
         const val COUNT = 6
+        const val PRICE = 1_000
     }
 }

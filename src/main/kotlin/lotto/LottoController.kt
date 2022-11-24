@@ -5,6 +5,7 @@ import lotto.domain.LottoGenerator
 import lotto.domain.LottoMachine
 import lotto.domain.LottoStore
 import lotto.domain.Reward
+import lotto.domain.Winner
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -18,10 +19,10 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
 
     private fun checkWinningLotto(lottoList: List<Lotto>) {
         val winningLotto = getWinningLotto()
-        val matchReward = lottoStore.match(lottoList, winningLotto)
+        val matchReward = Winner.match(lottoList, winningLotto)
         printResult(matchReward)
 
-        val incomeRate = lottoStore.getIncomeRate(purchaseCount = lottoList.size, matchReward = matchReward)
+        val incomeRate = Winner.getIncomeRate(purchaseCount = lottoList.size, matchReward = matchReward)
         ResultView.printIncomeRate(incomeRate)
     }
 
