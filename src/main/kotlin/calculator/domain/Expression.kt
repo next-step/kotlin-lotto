@@ -1,26 +1,21 @@
 package calculator.domain
 
 class Expression(input: String) {
-    var values = listOf<String>()
-        private set
+    val values = generateValues(input)
 
-    init {
-        values = if (hasCustomDelimiter(input)) {
+    private fun generateValues(input: String): List<String> {
+        return if (hasCustomDelimiter(input)) {
             customDelimiter(input)
         } else {
             defaultDelimiter(input)
         }
-
-        if (!isNullOrBlank()) {
-            checkNegative()
-        }
     }
 
-    private fun checkNegative() {
-        for (value in values) {
-            println("${value.toInt()}")
-            require(value.toInt() >= 1) { "음수 입력 불가" }
+    fun checkNegative() {
+        val isPositive = values.all {
+            it.toInt() >= 0
         }
+        require(isPositive) { "음수 입력 불가" }
     }
 
     fun isNullOrBlank(): Boolean {

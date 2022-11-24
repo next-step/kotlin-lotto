@@ -6,18 +6,18 @@ class StringAddCalculator {
             return 0
         }
 
+        if (!input.isNullOrBlank()) {
+            input.checkNegative()
+        }
+
         if (input.isOneNumber()) {
             return input.getOneNumber()
         }
 
-        return calculateTotal(input.values)
+        return calculateTotal(input.values.map { it.toInt() }.toList())
     }
 
-    private fun calculateTotal(numbers: List<String>): Int {
-        var total = 0
-        for (number in numbers) {
-            total += number.toInt()
-        }
-        return total
+    private fun calculateTotal(numbers: List<Int>): Int {
+        return numbers.sum()
     }
 }
