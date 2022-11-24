@@ -3,11 +3,15 @@ package add_calculator
 import java.lang.RuntimeException
 
 class Operand(text: String) {
-    val value: PositiveNumber
+    val positiveNumber: PositiveNumber
 
     init {
         val number = text.toIntOrNull() ?: throw RuntimeException()
-        value = PositiveNumber(number)
+        positiveNumber = PositiveNumber(number)
+    }
+
+    fun add(acc: Int): Int {
+        return positiveNumber.value + acc
     }
 
     override fun equals(other: Any?): Boolean {
@@ -16,12 +20,12 @@ class Operand(text: String) {
 
         other as Operand
 
-        if (value != other.value) return false
+        if (positiveNumber != other.positiveNumber) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return value.hashCode()
+        return positiveNumber.hashCode()
     }
 }
