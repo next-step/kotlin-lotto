@@ -12,6 +12,5 @@ value class PositiveOperand(val value: Int) {
 
     companion object {
         private const val ZERO = 0
-        private val REG_EXP = Regex("\\d+")
     }
 }
