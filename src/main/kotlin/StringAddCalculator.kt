@@ -30,7 +30,6 @@ class StringAddCalculator(strExpression: String?) {
         strExpressionSizeCheck(arrNumber)
     }
 
-
     fun strExpressionSizeCheck(arrNumber: List<String>) {
         if (arrNumber.size == 1) {
             result = checkNagative(arrNumber.get(0).toInt())
