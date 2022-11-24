@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LottoStatisticsTest {
 
-    val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()))
+    val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()), LottoNumber(45))
     var lottos: MutableList<Lotto> = mutableListOf()
     lateinit var lottoStatistics: LottoStatistics
 
@@ -32,7 +32,7 @@ class LottoStatisticsTest {
         lottos.add(Lotto(listOf(17, 21, 29, 37, 42, 45).map { LottoNumber(it) }.toSet()))
         lottos.add(Lotto(listOf(3, 8, 27, 30, 35, 44).map { LottoNumber(it) }.toSet()))
         lottoStatistics =
-            LottoStatistics(winningLotto.getCountOfMatch(lottos), lottos.size * LottoFactory.LOTTE_PRICE)
+            LottoStatistics(winningLotto.getMatchResult(lottos), lottos.size * LottoFactory.LOTTE_PRICE)
     }
 
     @ParameterizedTest
@@ -40,8 +40,8 @@ class LottoStatisticsTest {
     fun `당첨 번호와 로또 티켓을 비교하여 등수 결과를 생성한다`(numbers: String, countOfMatch: Int) {
         var lottos: List<Lotto> = listOf(Lotto(numbers.split(" ").map { LottoNumber(it.toInt()) }.toSet()))
         var lottoStatistics =
-            LottoStatistics(winningLotto.getCountOfMatch(lottos), lottos.size * LottoFactory.LOTTE_PRICE)
-        assertThat(lottoStatistics.matchesResult.getValue(Rank.valueOf(countOfMatch, false))).isEqualTo(1)
+            LottoStatistics(winningLotto.getMatchResult(lottos), lottos.size * LottoFactory.LOTTE_PRICE)
+        assertThat(lottoStatistics.matchResult.getValue(Rank.valueOf(countOfMatch, false))).isEqualTo(1)
     }
 
     @Test
