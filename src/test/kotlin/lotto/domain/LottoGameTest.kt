@@ -20,8 +20,8 @@ internal class LottoGameTest {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winnerLotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
 
-        val result = LottoGame.getResultOfGame(lotto, winnerLotto)
+        val result = LottoGame.getResultOfGames(arrayListOf(lotto), winnerLotto)
 
-        assertThat(result).isEqualTo(LottoGameResult.FOUR)
+        assertThat(result.first()).isEqualTo(LottoGameResult.FOUR)
     }
 }
