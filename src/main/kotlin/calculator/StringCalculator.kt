@@ -2,9 +2,10 @@ package calculator
 
 class StringCalculator(private val str: String?) {
 
-    fun calculate(): Int = when (str.isNullOrBlank()) {
-        true -> { RESULT_EMPTY_VALUE }
-        false -> {
+    fun calculate(): Int {
+        return if (str.isNullOrBlank()) {
+            RESULT_EMPTY_VALUE
+        } else {
             val matchResult: MatchResult? = Regex(REGEX_DIVIDER).find(str)
             val divider = getDivider(matchResult)
 
