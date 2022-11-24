@@ -5,10 +5,10 @@ import java.math.RoundingMode
 
 enum class LottoGameResult(val criteriaForWinning: Int, val prize: BigDecimal) {
 
-    FIRST(6, BigDecimal(2000000000)),
-    SECOND(5, BigDecimal(1500000)),
-    THIRD(4, BigDecimal(50000)),
-    FOUR(3, BigDecimal(5000)),
+    FIRST(6, BigDecimal(20_00_000_000)),
+    SECOND(5, BigDecimal(1_500_000)),
+    THIRD(4, BigDecimal(50_000)),
+    FOUR(3, BigDecimal(5_000)),
     FAIL(2, BigDecimal(0));
 
     companion object {
