@@ -1,16 +1,15 @@
 package lotto.domain
 
-@JvmInline
-value class LottoVendingMachine(private val lottoNumbers: List<LottoNumber>) {
+class LottoVendingMachine {
     companion object {
-        private const val LOTTO_PRICE = 1000
+        private const val LOTTO_PRICE = 1000.00
 
-        fun buy(purchaseAmount: Int): List<LottoNumber> {
+        fun buy(purchaseAmount: PurchaseAmount): List<LottoNumber> {
             return List(getNumberOfLotto(purchaseAmount)) { LottoNumber() }
         }
 
-        private fun getNumberOfLotto(purchaseAmount: Int): Int {
-            return purchaseAmount / LOTTO_PRICE
+        private fun getNumberOfLotto(purchaseAmount: PurchaseAmount): Int {
+            return (purchaseAmount.amount / LOTTO_PRICE).toInt()
         }
     }
 }

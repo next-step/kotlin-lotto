@@ -2,7 +2,7 @@ package lotto.domain
 
 @JvmInline
 value class PurchaseAmount(private val _amount: Double) {
-    private val amount: Double
+    val amount: Double
         get() = _amount
 
     init {
