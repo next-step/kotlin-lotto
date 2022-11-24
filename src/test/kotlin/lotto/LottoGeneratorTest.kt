@@ -12,9 +12,9 @@ class LottoGeneratorTest {
     }
 
     @Test
-    fun `서로 같지않은 길이 6의 정수 배열을 반환하는 generatorLotto 메소드 생성`() {
-        var lottoNumbers = LottoGenerator().generate()
-        assertThat(lottoNumbers.size).isEqualTo(6)
-        assertThat(lottoNumbers.toSet().size).isEqualTo(6)
+    fun `로또 클래스를 반환하는 generato 메소드 생성`() {
+        var lotto = LottoGenerator().generate()
+
+        assertThat(lotto).isExactlyInstanceOf(Lotto::class.java)
     }
 }
