@@ -6,7 +6,7 @@ value class PurchaseAmount(private val _amount: Double) {
         get() = _amount
 
     init {
-        require(_amount % LOTTO_PRICE == ZERO)  { INVALID_VALUE_ERROR_MESSAGE }
+        require(_amount % LOTTO_PRICE == ZERO) { INVALID_VALUE_ERROR_MESSAGE }
     }
 
     companion object {

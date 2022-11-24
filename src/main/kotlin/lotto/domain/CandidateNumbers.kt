@@ -11,4 +11,6 @@ object CandidateNumbers {
     fun pick(): List<Int> {
         return numbers.shuffled().subList(0, 6)
     }
+
+    fun isCandidateNumbers(value: Int) = numbers.contains(value)
 }
