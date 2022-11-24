@@ -1,11 +1,13 @@
 package add_calculator
 
+private val DEFAULT_OPERANDS = listOf(Operand("0"))
+
 class InputParser {
 
     fun parse(input: String?): List<Operand> {
 
         if (input.isNullOrBlank()) {
-            return listOf(Operand("0"))
+            return DEFAULT_OPERANDS
         }
 
         val result = Regex("//(.)\n(.*)").find(input)
