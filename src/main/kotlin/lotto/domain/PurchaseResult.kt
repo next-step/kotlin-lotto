@@ -16,9 +16,11 @@ class PurchaseResult(cost: String) {
     init {
         require(Validation.isNotBlank(cost)) { "공백 값이 들어왔습니다." }
         require(Validation.isNumeric(cost)) { "숫자가 아닌 문자가 들어왔습니다." }
-        require(cost.toInt() >= LOTTO_PRICE) { "최소 주문 금액보다 적습니다." }
-        numberOfGames = cost.toInt() / LOTTO_PRICE
-        change = cost.toInt() % LOTTO_PRICE
-        purchaseCost = cost.toBigDecimal()
+
+        val costConvertedToNumbers = cost.toInt()
+        require(costConvertedToNumbers >= LOTTO_PRICE) { "최소 주문 금액보다 적습니다." }
+        numberOfGames = costConvertedToNumbers / LOTTO_PRICE
+        change = costConvertedToNumbers % LOTTO_PRICE
+        purchaseCost = costConvertedToNumbers.toBigDecimal()
     }
 }
