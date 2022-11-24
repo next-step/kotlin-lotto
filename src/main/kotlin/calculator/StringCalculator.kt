@@ -11,8 +11,8 @@ class StringCalculator(private val inputString: String?) {
 
             require(divider.isNotEmpty()) { "구분자를 찾지 못 했습니다" }
 
-            val splitStr = splitInputStr(divider, matchResult)
-            val numbers = splitToNumbers(splitStr)
+            val numberStrings = splitNumberStrings(divider, matchResult)
+            val numbers = stringsToNumbers(numberStrings)
             add(numbers)
         }
     }
@@ -27,7 +27,7 @@ class StringCalculator(private val inputString: String?) {
             it.groupValues[1]
         }
 
-    private fun splitInputStr(divider: String, matchResult: MatchResult?): List<String> {
+    private fun splitNumberStrings(divider: String, matchResult: MatchResult?): List<String> {
         val convertString: String = when (matchResult) {
             null -> inputString!!
             else -> matchResult.let { it.groupValues[2] }
@@ -36,10 +36,10 @@ class StringCalculator(private val inputString: String?) {
         return convertString.split(divider.toRegex())
     }
 
-    private fun splitToNumbers(splitStr: List<String>): List<Int> {
+    private fun stringsToNumbers(numberStrings: List<String>): List<Int> {
         val result = ArrayList<Int>()
-        splitStr.forEach { str ->
-            val number: UInt = str.toUInt()
+        numberStrings.forEach { numberString ->
+            val number: UInt = numberString.toUInt()
             result.add(number.toInt())
         }
 
