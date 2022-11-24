@@ -19,12 +19,14 @@ data class WinningNumbers(private val numbers: LottoNumber = LottoNumber()) {
         private const val INVALID_INPUT_ERROR_MESSAGE = "당첨 번호는 숫자만 입력할 수 있습니다."
         private const val INVALID_VALUE_ERROR_MESSAGE = "당첨 번호는 1 ~ 45 사이의 숫자여야 합니다."
         private const val INVALID_LOTTO_SIZE_ERROR_MESSAGE = "당첨 번호는 6개의 숫자여야 합니다."
+        private const val DUPLICATED_NUMBER_ERROR_MESSAGE = "당첨 번호는 중복될 수 없습니다."
 
         fun from(input: String): WinningNumbers {
             val strings = input.split(", ")
             val numbers = strings.map { verifyValue(it) }
 
             verifySize(numbers)
+            verifyDuplicate(numbers)
 
             return WinningNumbers(LottoNumber(numbers))
         }
@@ -39,6 +41,11 @@ data class WinningNumbers(private val numbers: LottoNumber = LottoNumber()) {
         private fun verifySize(numbers: List<Int>) {
             if (numbers.size != LOTTO_NUMBERS_SIZE)
                 throw IllegalArgumentException(INVALID_LOTTO_SIZE_ERROR_MESSAGE)
+        }
+
+        private fun verifyDuplicate(numbers: List<Int>) {
+            if (numbers.distinct().size != numbers.size)
+                throw IllegalArgumentException(DUPLICATED_NUMBER_ERROR_MESSAGE)
         }
     }
 }

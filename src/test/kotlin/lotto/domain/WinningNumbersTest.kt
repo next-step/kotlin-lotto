@@ -59,5 +59,16 @@ internal class WinningNumbersTest : BehaviorSpec({
                 exception.message should startWith("당첨 번호는 6개의 숫자여야 합니다.")
             }
         }
+
+        `when`("중복된 수가 존재한다면") {
+            val input = "1, 2, 2, 4, 2, 2"
+
+            then("IllegalArgumentException 을 반환한다.") {
+                val exception = shouldThrow<IllegalArgumentException> {
+                    WinningNumbers.from(input)
+                }
+                exception.message should startWith("당첨 번호는 중복될 수 없습니다.")
+            }
+        }
     }
 })
