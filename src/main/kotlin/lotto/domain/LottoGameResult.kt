@@ -22,14 +22,13 @@ enum class LottoGameResult(val criteriaForWinning: Int, val prize: BigDecimal) {
             gameResult: List<LottoGameResult>,
             onStatistics: (map: Map.Entry<LottoGameResult, Int>) -> Unit
         ) {
-            mapOf(
-                FOUR to gameResult.count { it == FOUR },
-                THIRD to gameResult.count { it == THIRD },
-                SECOND to gameResult.count { it == SECOND },
-                FIRST to gameResult.count { it == FIRST }
-            ).forEach {
-                onStatistics(it)
+            LottoGameResult.values().associateWith {
+                gameResult.count { result -> result == it }
             }
+                .filter { it.key != FAIL }
+                .forEach {
+                    onStatistics(it)
+                }
         }
 
         fun rate(gameResult: List<LottoGameResult>, purchasingCost: BigDecimal): BigDecimal {
