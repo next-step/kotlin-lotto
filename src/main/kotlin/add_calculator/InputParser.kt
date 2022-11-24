@@ -1,7 +1,5 @@
 package add_calculator
 
-private val DEFAULT_OPERANDS = listOf(Operand("0"))
-
 class InputParser {
 
     fun parse(input: String?): List<Operand> {
@@ -10,7 +8,7 @@ class InputParser {
             return DEFAULT_OPERANDS
         }
 
-        val result = Regex("//(.)\n(.*)").find(input)
+        val result = CUSTOM_DELEGATE_REGEXP.find(input)
 
         result?.let {
             val customDelimiter = it.groupValues[1]
@@ -26,5 +24,12 @@ class InputParser {
         return texts.map { text ->
             Operand(text)
         }
+    }
+
+    companion object {
+        private val DEFAULT_OPERANDS = listOf(Operand("0"))
+
+        private const val CUSTOM_DELEGATE_PATTERN = "//(.)\n(.*)"
+        private val CUSTOM_DELEGATE_REGEXP = Regex(CUSTOM_DELEGATE_PATTERN)
     }
 }
