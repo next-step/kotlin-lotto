@@ -1,6 +1,7 @@
 package lotto.domain
 
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 enum class LottoGameResult(val criteriaForWinning: Int, val prize: BigDecimal) {
 
@@ -33,7 +34,7 @@ enum class LottoGameResult(val criteriaForWinning: Int, val prize: BigDecimal) {
 
         fun rate(gameResult: List<LottoGameResult>, purchasingCost: BigDecimal): BigDecimal {
             val totalPrize = gameResult.sumOf { it.prize }
-            return totalPrize.divide(purchasingCost)
+            return totalPrize.divide(purchasingCost, 2, RoundingMode.CEILING).stripTrailingZeros()
         }
     }
 }

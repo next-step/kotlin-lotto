@@ -24,4 +24,16 @@ internal class LottoGameResultTest {
 
         assertThat(rate).isEqualTo(BigDecimal(0.5))
     }
+
+    @Test
+    @DisplayName("구매 가격이 3000이고 1등이 당첨되었다면 수익률은 666666.67")
+    fun `If the purchase price is 3000 and the winner wins, the yield is 666666 dot 67`() {
+        val gameResult = listOf(LottoGameResult.FIRST)
+        val purchasingCost = BigDecimal(3000)
+
+        val rate = LottoGameResult.rate(gameResult, purchasingCost)
+        val expectedValue = 666666.67.toBigDecimal()
+
+        assertThat(rate).isEqualTo(expectedValue)
+    }
 }
