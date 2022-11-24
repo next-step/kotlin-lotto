@@ -23,14 +23,12 @@ class StringCalculator(private val inputString: String?) {
     }
 
     private fun extractionCustomDivider(matchResult: MatchResult): String =
-        matchResult.let {
-            it.groupValues[1]
-        }
+        matchResult.groupValues[1]
 
     private fun splitNumberStrings(divider: String, matchResult: MatchResult?): List<String> {
         val convertString: String = when (matchResult) {
             null -> inputString!!
-            else -> matchResult.let { it.groupValues[2] }
+            else -> matchResult.groupValues[2]
         }
 
         return convertString.split(divider.toRegex())
