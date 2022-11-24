@@ -35,13 +35,7 @@ class StringCalculator(private val inputString: String?) {
     }
 
     private fun stringsToNumbers(numberStrings: List<String>): List<Int> {
-        val result = ArrayList<Int>()
-        numberStrings.forEach { numberString ->
-            val number: UInt = numberString.toUInt()
-            result.add(number.toInt())
-        }
-
-        return result
+        return numberStrings.map { it.toUInt().toInt() }
     }
 
     private fun add(numberList: List<Int>): Int {
