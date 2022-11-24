@@ -8,7 +8,7 @@ class StringCalculator(private val str: String?) {
             val matchResult: MatchResult? = Regex(REGEX_DIVIDER).find(str)
             val divider = getDivider(matchResult)
 
-            require(!divider.isNullOrEmpty()) { "divider" }
+            require(divider.isNotEmpty()) { "구분자를 찾지 못 했습니다" }
 
             val splitStr = splitStr(divider, matchResult)
             val numbers = splitToNumbers(splitStr)
