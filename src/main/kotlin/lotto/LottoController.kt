@@ -19,10 +19,11 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
 
     private fun checkWinningLotto(lottoList: List<Lotto>) {
         val winningLotto = getWinningLotto()
-        val matchReward = Winner.match(lottoList, winningLotto)
+        val winner = Winner(winningLotto)
+        val matchReward = winner.match(lottoList)
         printResult(matchReward)
 
-        val incomeRate = Winner.getIncomeRate(purchaseCount = lottoList.size, matchReward = matchReward)
+        val incomeRate = winner.getIncomeRate(purchaseCount = lottoList.size, matchReward = matchReward)
         ResultView.printIncomeRate(incomeRate)
     }
 

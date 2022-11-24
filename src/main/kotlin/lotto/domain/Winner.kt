@@ -1,10 +1,10 @@
 package lotto.domain
 
-object Winner {
+class Winner(private val winningLotto: Lotto) {
 
-    fun match(lottoList: List<Lotto>, winningLotto: Lotto): Map<Reward, Int> {
+    fun match(lottoList: List<Lotto>): Map<Reward, Int> {
         val matchToCount: Map<Int, Int> = lottoList
-            .groupingBy { lotto -> winningLotto.match(lotto).size }
+            .groupingBy { lotto -> this.winningLotto.match(lotto).size }
             .eachCount()
 
         return Reward.values().associateWith { reward ->
