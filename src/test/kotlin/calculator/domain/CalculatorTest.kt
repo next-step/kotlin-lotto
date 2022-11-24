@@ -9,7 +9,7 @@ class CalculatorTest {
     @Test
     fun `덧셈 테스트`() {
         // given
-        val calculator = Calculator()
+        val calculator = Calculator
         val expected = PositiveOperand(6)
 
         // when
