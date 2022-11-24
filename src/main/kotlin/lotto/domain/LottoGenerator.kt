@@ -1,5 +1,6 @@
 package lotto.domain
 
-fun interface LottoGenerator {
+interface LottoGenerator {
     fun generateLotto(numbers: List<Int>): Lotto
+    fun generateLotto(): Lotto
 }

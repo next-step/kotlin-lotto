@@ -1,23 +1,36 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoGenerator
 import lotto.domain.LottoMachine
+import lotto.domain.LottoStore
 import lotto.domain.Reward
 import lotto.view.InputView
 import lotto.view.ResultView
 
-class LottoController {
-    fun play() {
-        val amount = getAmount()
-        val lottoList = LottoMachine.getLottoList(amount)
-        printLotto(lottoList)
+class LottoController(private val lottoGenerator: LottoGenerator) {
+    private val lottoStore = LottoStore(lottoGenerator)
 
+    fun play() {
+        val lottoList = buyLotto()
+        checkWinningLotto(lottoList)
+    }
+
+    private fun checkWinningLotto(lottoList: List<Lotto>) {
         val winningLotto = getWinningLotto()
-        val matchReward = LottoMachine.match(lottoList, winningLotto)
+        val matchReward = lottoStore.match(lottoList, winningLotto)
         printResult(matchReward)
 
-        val incomeRate = LottoMachine.getIncomeRate(purchaseCount = lottoList.size, matchReward = matchReward)
+        val incomeRate = lottoStore.getIncomeRate(purchaseCount = lottoList.size, matchReward = matchReward)
         ResultView.printIncomeRate(incomeRate)
+    }
+
+    private fun buyLotto(): List<Lotto> {
+        val amount = getAmount()
+        val lottoList = lottoStore.buyLotto(amount)
+        printLotto(lottoList)
+
+        return lottoList
     }
 
     private fun printResult(matchReward: Map<Reward, Int>) {
@@ -39,7 +52,7 @@ class LottoController {
         ResultView.printMessage(ResultView.Message.REQUEST_LOTTO_NUMBERS)
         val numbers: List<Int> = InputView.requestPositiveNumbers()
 
-        return LottoMachine.generateLotto(numbers)
+        return lottoGenerator.generateLotto(numbers)
     }
 
     private fun printLotto(lottoList: List<Lotto>) {
@@ -60,5 +73,5 @@ class LottoController {
 }
 
 fun main() {
-    LottoController().play()
+    LottoController(LottoMachine).play()
 }

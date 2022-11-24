@@ -28,7 +28,7 @@ class LottoTest : StringSpec({
         }
     }
 
-    "두개의 로또의 교집합을 구한다." {
+    "두개의 로또의 당첨갯수를 구한다." {
         val winningLotto = Lotto(
             setOf(
                 LottoNumber.from(1),

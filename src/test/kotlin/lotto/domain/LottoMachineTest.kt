@@ -10,7 +10,7 @@ import io.kotest.matchers.shouldBe
 class LottoMachineTest : StringSpec({
     "6숫자를 입력하면 로또를 생성한다." {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
-        val lotto = LottoMachine.generateLotto(numbers)
+        val lotto = LottoStore.generateLotto(numbers)
 
         lotto.lottoNumbers shouldHaveSize 6
     }
@@ -19,7 +19,7 @@ class LottoMachineTest : StringSpec({
         val amount = 10
 
         shouldThrow<IllegalArgumentException> {
-            LottoMachine.getLottoList(amount)
+            LottoStore.getLottoList(amount)
         }
     }
 
@@ -29,23 +29,23 @@ class LottoMachineTest : StringSpec({
             row(12_000, 12),
             row(14_000, 14),
         ) { amount, lottoCount ->
-            LottoMachine.getLottoList(amount) shouldHaveSize lottoCount
+            LottoStore.getLottoList(amount) shouldHaveSize lottoCount
         }
     }
 
     "일치 갯수에 따라 수익률 계산 하다." {
         val matchReward = mapOf(
-            Reward.MATCH_THREE to 1,
-            Reward.MATCH_FOUR to 0,
-            Reward.MATCH_FIV to 0,
-            Reward.MATCH_SIX to 0,
+            Reward.FORTH_PLACE to 1,
+            Reward.THIRD_PLACE to 0,
+            Reward.SECOND_PLACE to 0,
+            Reward.FIST_PLACE to 0,
         )
 
         forAll(
             row(14, 0.36),
             row(10, 0.5),
         ) { purchaseCount, incomeRate ->
-            val actualIncomeRate = LottoMachine.getIncomeRate(purchaseCount, matchReward)
+            val actualIncomeRate = LottoStore.getIncomeRate(purchaseCount, matchReward)
 
             val formattedActual = String.format("%.2f", actualIncomeRate)
             val formattedExpect = String.format("%.2f", incomeRate)
