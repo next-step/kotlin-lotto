@@ -8,7 +8,7 @@ import calculator.view.ResultView
 
 class Controller {
     fun start() {
-        val numbers = InputParser().parseWithDelimiter(InputView.inputFormula())
+        val numbers = InputParser.parseWithDelimiter(InputView.inputFormula())
         val positiveOperands = numbers.map { PositiveOperand(it) }.toTypedArray()
         val result = Calculator().add(positiveOperands).value
         ResultView.printResult(result)

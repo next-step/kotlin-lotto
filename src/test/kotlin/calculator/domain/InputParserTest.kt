@@ -16,7 +16,7 @@ class InputParserTest {
     @BeforeEach
     fun setUp() {
         // given
-        inputParser = InputParser()
+        inputParser = InputParser
     }
 
     @DisplayName("기본 구분자 및 커스텀 구분자 테스트")
