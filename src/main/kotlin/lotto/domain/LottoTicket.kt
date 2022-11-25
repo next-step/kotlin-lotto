@@ -16,9 +16,11 @@ class LottoTicket(
 
 
     fun matchScratch(lottoTicket: LottoTicket): Award {
-        val matchCount = numbers.count { lottoTicket.numbers.contains(it) }
+        val matchCount = numbers.count { lottoTicket.containNumber(it) }
         return Award.of(matchCount)
     }
+
+    private fun containNumber(lottoNumber: LottoNumber): Boolean = numbers.contains(lottoNumber)
 
     private fun hasNotEqualNumber() = numbers.toSet().size == numbers.size
 
