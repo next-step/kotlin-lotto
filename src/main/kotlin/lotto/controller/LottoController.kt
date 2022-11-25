@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoStatistics
@@ -24,7 +25,9 @@ class LottoController {
 
         val lastWeekLotto = LottoGenerator.generateLotto(lastWeekLottoNumber)
 
-        val lottoStatistics = LottoStatistics(lastWeekLotto)
+        val bonusLottoNumber = LottoNumber(InputView.inputBonusLottoNumber())
+
+        val lottoStatistics = LottoStatistics(lastWeekLotto, bonusLottoNumber)
 
         val lottoMatchList = lottoStatistics.getWinningStatistics(lottoList)
         OutputView.outputLottoStatistics(lottoMatchList)

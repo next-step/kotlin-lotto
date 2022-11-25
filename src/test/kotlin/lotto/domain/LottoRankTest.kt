@@ -8,31 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource
 internal class LottoRankTest {
 
     @ParameterizedTest
-    @ValueSource(ints = [Int.MIN_VALUE, 0, 1, 2, 7, Int.MAX_VALUE])
-    fun `getReward should be zero when matchCount is not in 3~6`(matchCount: Int) {
-        val resultReward = LottoRank.getReward(matchCount)
-
-        assertThat(resultReward).isEqualTo(0L)
-    }
-
-    @Test
-    fun getRewardTest() {
-        val resultReward = LottoRank.getReward(6)
-
-        assertThat(resultReward).isEqualTo(2000000000)
-    }
-
-    @Test
-    fun getMatchCountList() {
-        val matchCountList = listOf(6, 5, 4, 3)
-        val resultMatchCountList = LottoRank.getMatchCountList()
-        assertThat(resultMatchCountList).isEqualTo(matchCountList)
-    }
-
-    @ParameterizedTest
     @ValueSource(ints = [3, 4, 5, 6])
     fun `valueOf return LottoRank`(matchCount: Int) {
-        val lottoRank = LottoRank.valueOf(matchCount)
+        val isBonus = false
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
 
         assertThat(lottoRank?.matchCount).isEqualTo(matchCount)
     }
@@ -40,8 +19,27 @@ internal class LottoRankTest {
     @ParameterizedTest
     @ValueSource(ints = [0, 1, 2, Int.MAX_VALUE])
     fun `valueOf return null when matchCount not in 3~6`(matchCount: Int) {
-        val lottoRank = LottoRank.valueOf(matchCount)
+        val isBonus = false
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
 
         assertThat(lottoRank).isNull()
+    }
+
+    @Test
+    fun `valueOf return THIRD_PLACE when matchCount 6 and isBonus is false`() {
+        val isBonus = false
+        val matchCount = 5
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
+
+        assertThat(lottoRank).isEqualTo(LottoRank.THIRD_PLACE)
+    }
+
+    @Test
+    fun `valueOf return SECOND_PLACE when matchCount 6 and isBonus is true`() {
+        val isBonus = true
+        val matchCount = 5
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
+
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND_PLACE)
     }
 }

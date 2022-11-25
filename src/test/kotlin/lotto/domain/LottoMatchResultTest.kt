@@ -2,6 +2,8 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoMatchResultTest {
 
@@ -21,20 +23,42 @@ internal class LottoMatchResultTest {
         }
     }
 
-    @Test
-    fun `setMatchResult should matchCount + 1`() {
+    @ParameterizedTest
+    @ValueSource(longs = [-1, 1, 2, 4, 100])
+    fun `setMatchResult should matchCount + 1 when matchCount and isBonus matches LottoRank`(matchTotalCount: Long) {
         val lottoMatchMap = mutableMapOf<LottoRank, LottoMatch>()
-        val matchCount = 6
-        val matchTotalCount = 2L
         val lottoRank = LottoRank.FIRST_PLACE
         lottoMatchMap[lottoRank] = LottoMatch(lottoRank, matchTotalCount)
 
         val lottoMatchResult = LottoMatchResult(lottoMatchMap)
-        lottoMatchResult.setMatchResult(matchCount)
+        val matchCount = lottoRank.matchCount
+        val isBonus = lottoRank.isBonus
+        lottoMatchResult.setMatchResult(matchCount, isBonus)
 
         lottoMatchResult.getMatchResult().forEach { lottoMatch ->
-            assertThat(lottoMatch.lottoRank.matchCount).isEqualTo(matchCount)
+            assertThat(lottoMatch.lottoRank).isEqualTo(lottoRank)
+            assertThat(lottoMatch.isBonusNumber).isEqualTo(isBonus)
             assertThat(lottoMatch.matchTotalCount).isEqualTo(matchTotalCount + 1)
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(longs = [-1, 1, 2, 4, 100])
+    fun `matchCount does not change when matchCount and isBonus not match LottoRank`(matchTotalCount: Long) {
+        val lottoMatchMap = mutableMapOf<LottoRank, LottoMatch>()
+        val lottoRank = LottoRank.FIRST_PLACE
+        lottoMatchMap[lottoRank] = LottoMatch(lottoRank, matchTotalCount)
+
+        val lottoMatchResult = LottoMatchResult(lottoMatchMap)
+        val otherLottRank = LottoRank.SECOND_PLACE
+        val matchCount = otherLottRank.matchCount
+        val isBonus = otherLottRank.isBonus
+        lottoMatchResult.setMatchResult(matchCount, isBonus)
+
+        lottoMatchResult.getMatchResult().forEach { lottoMatch ->
+            assertThat(lottoMatch.lottoRank).isEqualTo(lottoRank)
+            assertThat(lottoMatch.isBonusNumber).isEqualTo(false)
+            assertThat(lottoMatch.matchTotalCount).isEqualTo(matchTotalCount)
         }
     }
 }

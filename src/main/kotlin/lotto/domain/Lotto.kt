@@ -20,6 +20,9 @@ data class Lotto(
             .intersect(numbers.toMutableSet())
             .count()
 
+    fun containLottoNumber(lottoNumber: LottoNumber): Boolean =
+        numbers.contains(lottoNumber)
+
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
     }

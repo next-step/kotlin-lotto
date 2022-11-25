@@ -1,8 +1,17 @@
 package lotto.domain
 
+import lotto.util.ErrorCode
+
 class LottoStatistics(
-    private val winningLotto: Lotto
+    private val winningLotto: Lotto,
+    private val bonusLottoNumber: LottoNumber
 ) {
+    init {
+        require(!winningLotto.containLottoNumber(bonusLottoNumber)) {
+            ErrorCode.BONUS_LOTTO_NUMBER_EXCEPTION.errorMessage
+        }
+    }
+
     private fun initLottoMatchMap(): Map<LottoRank, LottoMatch> {
         val lottoMatchMap = mutableMapOf<LottoRank, LottoMatch>()
         LottoRank.values().forEach { lottoRank ->
@@ -20,7 +29,8 @@ class LottoStatistics(
         val lottoMatchResult = LottoMatchResult(lottoMatchMap)
         lottoList.forEach { lotto ->
             val matchCount = winningLotto.getMatchCount(lotto)
-            lottoMatchResult.setMatchResult(matchCount)
+            val isBonus = lotto.containLottoNumber(bonusLottoNumber)
+            lottoMatchResult.setMatchResult(matchCount, isBonus)
         }
         return lottoMatchResult.getMatchResult()
     }

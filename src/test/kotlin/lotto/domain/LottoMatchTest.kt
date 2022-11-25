@@ -8,8 +8,7 @@ internal class LottoMatchTest {
 
     @ParameterizedTest
     @ValueSource(longs = [-1, 1, 2, 4, 100])
-    fun getProfit() {
-        val matchTotalCount = 3L
+    fun getProfit(matchTotalCount: Long) {
         val lottoRank = LottoRank.FIRST_PLACE
         val lottoMatch = LottoMatch(lottoRank, matchTotalCount)
 
