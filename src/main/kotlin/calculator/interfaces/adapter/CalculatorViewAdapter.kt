@@ -15,8 +15,8 @@ class CalculatorViewAdapter(
 ) : ViewAdapter {
 
     override fun start() {
-        val numberList = queryNumber()
-        val result = calculator.multiplePlus(numberList)
+        val positiveIntegers = queryNumber()
+        val result = calculator.multiplePlus(positiveIntegers)
         outputPlugin.output("결과: $result")
     }
 

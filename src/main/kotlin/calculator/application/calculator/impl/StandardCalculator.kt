@@ -12,13 +12,13 @@ class StandardCalculator(
     override fun multiplePlus(numbers: List<PositiveInteger>): Int {
         var result = 0
         for (number in numbers) {
-            result = plus(result, number.value)
+            result = plus(PositiveInteger(result), number)
         }
         return result
     }
 
-    private fun plus(firstNumber: Int, secondNumber: Int): Int {
-        val command = BinaryOperationCommand(leftArgument = PositiveInteger(firstNumber), rightArgument = PositiveInteger(secondNumber))
+    private fun plus(firstNumber: PositiveInteger, secondNumber: PositiveInteger): Int {
+        val command = BinaryOperationCommand(leftArgument = firstNumber, rightArgument = secondNumber)
         return additionOperation.operate(command)
     }
 }
