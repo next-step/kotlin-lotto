@@ -3,10 +3,11 @@ package lotto.domain
 private const val NUMBER_SIZE = 6
 
 class LottoTicket(
-    val numbers: List<LottoNumber>
+    val numbers: Set<LottoNumber>
 ) {
 
     constructor(vararg values: Int) : this(List(values.size) { idx -> LottoNumber.of(values[idx]) })
+    constructor(values: List<LottoNumber>) : this(values.toSet())
 
     init {
         require(numbers.size == NUMBER_SIZE) { "로또 번호의 갯수는 ${numbers.size} 일 수 없으며 6 개만 가능합니다." }
