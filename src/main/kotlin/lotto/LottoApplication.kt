@@ -9,6 +9,6 @@ fun main() {
     val lottoMachine = LottoMachine(money)
     OutputView.printPurchaseTicketResult(lottoMachine.lottoTickets)
     OutputView.printWinnerTicket()
-    val lottoSummary = lottoMachine.getSummary()
+    val lottoSummary = lottoMachine.execute()
     OutputView.printSummary(lottoSummary)
 }
