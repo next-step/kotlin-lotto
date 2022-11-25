@@ -40,4 +40,11 @@ internal class SeparatorTest {
         val strings = Separator.getStringToAdd("//;\n1;2;3")
         assertThat(strings).isEqualTo("1;2;3")
     }
+
+    @Test
+    @DisplayName("공백 문자열이 입력된 경우 구분자는 공백")
+    fun `If a string is blank string, the separator is blank`() {
+        val separator = Separator.findSeparatorInString("       ")
+        assertThat(separator).isEqualTo("")
+    }
 }
