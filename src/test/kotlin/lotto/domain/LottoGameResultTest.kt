@@ -41,8 +41,8 @@ internal class LottoGameResultTest {
     @DisplayName("1등이 3번 당첨되었을 경우 당첨 횟수는 3번")
     fun `If the winner wins 3 times, the number of wins will be 3 times`() {
         val gameResult = listOf(LottoGameResult.FIRST, LottoGameResult.FIRST, LottoGameResult.FIRST)
-        var count = 0
-        LottoGameResult.winningStatistics(gameResult) { count = it.value }
+        val statistics = LottoGameResult.winningStatistics(gameResult)
+        val count = statistics[LottoGameResult.FIRST]
         assertThat(count).isEqualTo(3)
     }
 }

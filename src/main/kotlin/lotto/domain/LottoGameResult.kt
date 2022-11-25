@@ -18,18 +18,10 @@ enum class LottoGameResult(val criteriaForWinning: Int, val prize: BigDecimal) {
             return values().first { it.criteriaForWinning == number }
         }
 
-        fun winningStatistics(
-            gameResult: List<LottoGameResult>,
-            onStatistics: (map: Map.Entry<LottoGameResult, Int>) -> Unit
-        ) {
-            LottoGameResult.values().associateWith {
+        fun winningStatistics(gameResult: List<LottoGameResult>) =
+            values().associateWith {
                 gameResult.count { result -> result == it }
-            }
-                .filter { it.key != FAIL }
-                .forEach {
-                    onStatistics(it)
-                }
-        }
+            }.filter { it.key != FAIL }
 
         fun rate(gameResult: List<LottoGameResult>, purchasingCost: BigDecimal): BigDecimal {
             val totalPrize = gameResult.sumOf { it.prize }
