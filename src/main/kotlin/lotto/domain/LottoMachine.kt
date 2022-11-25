@@ -3,26 +3,15 @@ package lotto.domain
 class LottoMachine(
     money: Int
 ) {
-    val lottoTickets: LottoTickets
-    private lateinit var lottoSummary: LottoSummary
+    val lottoTickets = LottoTickets(money / TICKET_AMOUNT)
 
-    init {
-        val ticketCount = money / TICKET_AMOUNT
-        lottoTickets = LottoTickets(ticketCount)
-    }
-
-    fun getSummary(): LottoSummary {
-        execute()
-        return lottoSummary
-    }
-
-    private fun execute() {
-        val winnerLottoTicket = WinnerLottoTicket(LottoManualGenerateStrategy())
+    fun execute(): LottoSummary {
+        val winnerLottoTicket = WinnerLottoTicket(LottoManualGenerateStrategy(), BonusManualGenerateStrategy())
         val lottoInfos = lottoTickets.tickets.map { ticket ->
-            val matchNumber = winnerLottoTicket.countMatchNumber(ticket.lottoNumbers)
-            LottoInfo.of(matchNumber)
+            val countMatchResult = winnerLottoTicket.countMatchNumber(ticket.lottoNumbers)
+            LottoInfo.of(countMatchResult.count, countMatchResult.isBonusNumberMatched)
         }
-        lottoSummary = LottoSummary(lottoInfos)
+        return LottoSummary(lottoInfos)
     }
 
     companion object {
