@@ -11,14 +11,14 @@ object LottoGenerator {
                 numberGenerator.generateLottoNumbers(
                     LottoNumber.possibleNumbers,
                     Lotto.LOTTO_NUMBER_COUNT
-                )
+                ).toMutableSet()
             )
         }
 
     fun generateLotto(lottoNumbers: String): Lotto {
-        val lottoNumberList = validateLottoNumbers(lottoNumbers)
+        val lottoNumberSet = validateLottoNumbers(lottoNumbers).toMutableSet()
 
-        return Lotto(lottoNumberList)
+        return Lotto(lottoNumberSet)
     }
 
     private fun validateLottoNumbers(number: String): List<LottoNumber> {

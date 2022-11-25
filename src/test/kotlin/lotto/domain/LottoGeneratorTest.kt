@@ -48,7 +48,8 @@ internal class LottoGeneratorTest {
 
         val lottoNumbers = (1..lottoNumberCount).map {
             LottoNumber(it)
-        }
+        }.toMutableSet()
+
         val lotto = Lotto(lottoNumbers)
 
         val resultLotto = LottoGenerator.generateLotto(lottoNumber)

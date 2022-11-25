@@ -12,7 +12,7 @@ internal class LottoTest {
     @Test
     fun `lotto init throw exception when lottoNumber count is over 6`() {
         val lottoNumberCount = 7
-        val lottoNumberList = (1..lottoNumberCount).map { LottoNumber(it) }
+        val lottoNumberList = (1..lottoNumberCount).map { LottoNumber(it) }.toMutableSet()
 
         val exception = assertThrows<IllegalArgumentException> {
             Lotto(lottoNumberList)
@@ -27,7 +27,7 @@ internal class LottoTest {
         val lottoNumber = 2
         val lottoNumberList = (1..lottoNumberCount).map {
             LottoNumber(lottoNumber)
-        }
+        }.toMutableSet()
 
         val exception = assertThrows<IllegalArgumentException> {
             Lotto(lottoNumberList)
