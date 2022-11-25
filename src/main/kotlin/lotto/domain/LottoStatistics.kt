@@ -12,27 +12,24 @@ class LottoStatistics(
         }
     }
 
-    private fun initLottoMatchMap(): Map<LottoRank, LottoMatch> {
-        val lottoMatchMap = mutableMapOf<LottoRank, LottoMatch>()
-        LottoRank.values().forEach { lottoRank ->
-            lottoMatchMap[lottoRank] =
-                LottoMatch(
-                    lottoRank
-                )
-        }
-        return lottoMatchMap
-    }
+    fun getWinningStatistics(lottoList: LottoList): List<LottoMatch> =
+        lottoList.compare(winningLotto, bonusLottoNumber)
+            .groupBy { it }
+            .let { map ->
+                val missingMap = getMissingMap(map.keys)
+                map.plus(missingMap)
+            }
+            .map { lottoMap ->
+                LottoMatch(lottoMap.key, lottoMap.value.count().toLong())
+            }.sortedBy { it.lottoRank }
 
-    fun getWinningStatistics(lottoList: List<Lotto>): List<LottoMatch> {
-        val lottoMatchMap = initLottoMatchMap()
-
-        val lottoMatchResult = LottoMatchResult(lottoMatchMap)
-        lottoList.forEach { lotto ->
-            val matchCount = winningLotto.getMatchCount(lotto)
-            val isBonus = lotto.containLottoNumber(bonusLottoNumber)
-            lottoMatchResult.setMatchResult(matchCount, isBonus)
+    private fun getMissingMap(lottoRanks: Set<LottoRank>): Map<LottoRank, List<LottoRank>> {
+        val missingMap = mutableMapOf<LottoRank, List<LottoRank>>()
+        val missing = LottoRank.getMissing(lottoRanks)
+        missing.map { lottoRank ->
+            missingMap[lottoRank] = listOf()
         }
-        return lottoMatchResult.getMatchResult()
+        return missingMap
     }
 
     fun getProfit(totalPrice: Long, lottMatchList: List<LottoMatch>): Double {

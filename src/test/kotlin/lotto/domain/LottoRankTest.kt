@@ -51,4 +51,13 @@ internal class LottoRankTest {
 
         assertThat(lottoRank).isEqualTo(LottoRank.SECOND_PLACE)
     }
+
+    @Test
+    fun getMissing() {
+        val lottoRankList = setOf(LottoRank.THIRD_PLACE, LottoRank.SECOND_PLACE)
+        val missingResult = LottoRank.getMissing(lottoRankList)
+
+        val result = setOf(LottoRank.FOURTH_PLACE, LottoRank.FIRST_PLACE, LottoRank.FIFTH_PLACE)
+        assertThat(missingResult).isEqualTo(result)
+    }
 }

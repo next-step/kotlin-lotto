@@ -38,13 +38,14 @@ internal class LottoStatisticsTest {
             LottoGenerator.generateLotto(numbers)
         }
 
-        val lottoMatchList = lottoStatistics.getWinningStatistics(lottoList)
+        val list = LottoList(lottoList)
+
+        val lottoMatchList = lottoStatistics.getWinningStatistics(list)
 
         // 2등
         val lottoMatch = lottoMatchList.first { it.lottoRank == LottoRank.SECOND_PLACE }
 
         assertThat(lottoMatch.matchTotalCount).isEqualTo(lottoCount)
-        assertThat(lottoMatch.isBonusNumber).isTrue
         assertThat(lottoMatch.lottoRank.matchCount).isEqualTo(matchNumber)
     }
 
