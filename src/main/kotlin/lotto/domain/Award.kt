@@ -1,7 +1,7 @@
 package lotto.domain
 
 enum class Award(
-    val prize: Int,
+    val prize: Long,
     val matchCount: Int,
 ) {
     NON_PLACE(0, 0),

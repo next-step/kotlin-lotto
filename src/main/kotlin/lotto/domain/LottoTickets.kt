@@ -5,7 +5,7 @@ class LottoTickets(
 ) {
     fun count(): Int = items.size
 
-    fun benefitPrice(winningTicket: LottoTicket): Int {
+    fun benefitPrice(winningTicket: LottoTicket): Long {
         return getResult(winningTicket).map { it.key.prize * it.value }.sum()
     }
 
