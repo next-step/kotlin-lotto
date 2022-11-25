@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.assertThrows
@@ -32,6 +33,6 @@ class LottoTest {
     fun `중복된 숫자를 갖지 않는다`(number: Int) {
         val numbers = mutableListOf(1, 2, 3, 4, 5, 6)
         numbers.add(number)
-        assertThat(Lotto(numbers.map { LottoNumber(it) }.toSet()).numbers.size).isEqualTo(Lotto.LOTTO_NUMBER_COUNT)
+        assertThat(Lotto(numbers.map { LottoNumber(it) }.toSet()).numbers.size).isEqualTo(LOTTO_NUMBER_COUNT)
     }
 }
