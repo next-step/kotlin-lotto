@@ -6,11 +6,14 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
+    val inputView = InputView()
+    val outputView = OutputView()
     val lotto = Lotto()
-    lotto.setCountByPurchaseFee(InputView.getPurchaseFee())
+    lotto.setCountByPurchaseFee(inputView.getPurchaseFee())
     val tickets = lotto.purchaseTicket()
-    OutputView.printTicketPurchaseCount(lotto.getCount())
-    OutputView.printTicketsInfo(tickets)
-    val winner = Winner(InputView.getWinNumbers())
-    OutputView.printStatistics(winner.checkNumberMatch(tickets))
+    outputView.printTicketPurchaseCount(lotto.getCount())
+    outputView.printTicketsInfo(tickets)
+    outputView.printWinner()
+    val winner = Winner(inputView.getWinNumbers())
+    outputView.printStatistics(winner.checkNumberMatch(tickets))
 }
