@@ -9,6 +9,7 @@ class StringAddCalculator(
         private const val REGEX_PREFIX = "("
         private const val REGEX_POSTFIX = ")"
         private const val REGEX_INPUT_PARSING = "//(.*)\n(.*)"
+        private const val ESCAPE_CHARACTER = '\\'
     }
 
     private val delimiterRegex: Regex
@@ -72,7 +73,7 @@ class StringAddCalculator(
     private fun delimiterRegex(delimiterList: List<String>): Regex =
         Regex(
             delimiterList.joinToString(REGEX_DELIMITER, REGEX_PREFIX, REGEX_POSTFIX) {
-                "\\$it"
+                "$ESCAPE_CHARACTER$it"
             }
         )
 }
