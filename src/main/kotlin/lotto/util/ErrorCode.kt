@@ -12,5 +12,7 @@ enum class ErrorCode(val errorMessage: String) {
     LOTTO_NUMBERS_COUNT_EXCEPTION("로또 숫자 개수가 ${Lotto.LOTTO_NUMBER_COUNT}개가 아닙니다"),
     LOTTO_NUMBER_EXEPTION(
         "로또의 숫자는 ${LottoNumber.LOTTO_START_NUMBER} ~ ${LottoNumber.LOTTO_END_NUMBER} 사이 숫자만 가능합니다."
-    )
+    ),
+    NUMBER_EXCEPTION("숫자만 입력 가능합니다."),
+    BONUS_LOTTO_NUMBER_EXCEPTION("보너스 볼은 당첨번호와 같을 수 없습니다.")
 }
