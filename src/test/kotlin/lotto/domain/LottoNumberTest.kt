@@ -6,10 +6,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoNumberTest {
-    @DisplayName("로또 번호는 1부터 45까지의 숫자만 가능하다.")
+    @DisplayName("로또 번호 생성 예외처리 테스트 - 범위 초과")
     @ParameterizedTest
     @ValueSource(ints = [0, 46])
-    fun `로또 번호는 1부터 45까지의 숫자만 가능하다`(number: Int) {
+    fun `로또 번호 생성 예외처리 테스트 - 범위 초과`(number: Int) {
         // when, then
         assertThatThrownBy { LottoNumber(number) }
             .isInstanceOf(IllegalArgumentException::class.java)
