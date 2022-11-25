@@ -9,9 +9,8 @@ internal class LottoGameTest {
     @Test
     @DisplayName("로또 게임 실행 시 로또 6자리번호 생성")
     fun `Create a 6-digit Lotto number when playing Lotto Game`() {
-        val lotto = LottoGame.start(AutoLotto)
-
-        assertThat(lotto.numbers.size).isEqualTo(6)
+        val lotto = LottoGame.start(1, AutoLotto)
+        assertThat(lotto.first().numbers.size).isEqualTo(6)
     }
 
     @Test

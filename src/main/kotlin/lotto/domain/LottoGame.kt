@@ -4,9 +4,10 @@ object LottoGame {
 
     const val LOTTO_PRICE = 1000
 
-    fun start(lottoFactory: LottoFactory): Lotto = lottoFactory.create()
+    fun start(numberOfGames: Int, lottoFactory: LottoFactory): MutableList<Lotto> =
+        MutableList(numberOfGames) { lottoFactory.create() }
 
-    fun getResultOfGames(gameBoard: ArrayList<Lotto>, winnerLotto: Lotto): List<LottoGameResult> {
+    fun getResultOfGames(gameBoard: MutableList<Lotto>, winnerLotto: Lotto): List<LottoGameResult> {
         return gameBoard.map { numberOfMatches(it, winnerLotto) }
             .map { LottoGameResult.getResultOfWinning(it) }
     }
