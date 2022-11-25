@@ -10,7 +10,7 @@ class WinnerTest : StringSpec({
         winner.getWinnerNumbers() shouldBe listOf(1, 2, 3, 4)
     }
 
-    "매칟되는 숫자의 갯수를 반환한다" {
+    "매칭되는 숫자의 갯수를 반환한다" {
         val winner = Winner((1..45).toList())
         val lotto = Lotto(1)
         val tickets = lotto.purchaseTicket()

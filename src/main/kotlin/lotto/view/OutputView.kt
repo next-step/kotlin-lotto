@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.Money
 import lotto.domain.Reward
 import lotto.domain.Ticket
 
@@ -18,5 +19,9 @@ object OutputView {
         rewardCount.forEach {
             println("${it.key.count}개 일치 (${it.key.name}원) - ${it.value}개")
         }
+    }
+
+    fun printRevenueRate(money: Money) {
+        println("총 수익률은 ${money.getRevenueRate()}입니다.")
     }
 }
