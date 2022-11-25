@@ -7,7 +7,8 @@ object ResultView {
     enum class Message(val context: String) {
         REQUEST_AMOUNT("구입금액을 입력해 주세요."),
         NUMBER_OF_PURCHASES("개를 구매했습니다."),
-        REQUEST_LOTTO_NUMBERS("지난 주 당첨 번호를 입력해 주세요"),
+        REQUEST_LOTTO_NUMBERS("지난 주 당첨 번호를 입력해 주세요."),
+        REQUEST_BONUS_NUMBERS("보너스 볼을 입력해 주세요."),
         RESULT("당첨 통계");
     }
 
@@ -17,8 +18,11 @@ object ResultView {
 
     fun printLotto(numbers: List<Int>) = println(numbers)
 
-    fun printResult(matchCount: Int, price: Int, resultCount: Int) =
-        println("${matchCount}개 일치  (${price}원)- $resultCount")
+    fun printResult(matchCount: Int, price: Int, matchBonus: Boolean, resultCount: Int) {
+        val bonusMessage: String = if (matchBonus) ", 보너스 볼 일치" else " "
+
+        println("${matchCount}개 일치$bonusMessage(${price}원)- $resultCount")
+    }
 
     fun printIncomeRate(rate: Double) {
         val formattedRate = String.format(RATE_FORMAT, rate)

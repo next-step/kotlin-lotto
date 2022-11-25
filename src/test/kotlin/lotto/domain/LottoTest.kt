@@ -28,45 +28,56 @@ class LottoTest : StringSpec({
         }
     }
 
+    val winningLotto = Lotto(
+        setOf(
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
+        )
+    )
+
+    val lotto1 = Lotto(
+        setOf(
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6),
+            LottoNumber.from(7),
+            LottoNumber.from(8),
+            LottoNumber.from(9)
+        )
+    )
+
+    val lotto2 = Lotto(
+        setOf(
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(7),
+            LottoNumber.from(8),
+            LottoNumber.from(9),
+            LottoNumber.from(10)
+        )
+    )
+
     "두개의 로또의 당첨갯수를 구한다." {
-        val winningLotto = Lotto(
-            setOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(3),
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6)
-            )
-        )
-
-        val lotto1 = Lotto(
-            setOf(
-                LottoNumber.from(4),
-                LottoNumber.from(5),
-                LottoNumber.from(6),
-                LottoNumber.from(7),
-                LottoNumber.from(8),
-                LottoNumber.from(9)
-            )
-        )
-
-        val lotto2 = Lotto(
-            setOf(
-                LottoNumber.from(1),
-                LottoNumber.from(2),
-                LottoNumber.from(7),
-                LottoNumber.from(8),
-                LottoNumber.from(9),
-                LottoNumber.from(10)
-            )
-        )
-
         forAll(
             row(lotto1, 3),
             row(lotto2, 2),
         ) { lotto, resultCount ->
             winningLotto.match(lotto) shouldHaveSize resultCount
+        }
+    }
+
+    "보너스를 추가한 로또의 당첨갯수를 구한다." {
+        val bonusLottoNumber = LottoNumber.from(7)
+
+        forAll(
+            row(lotto1, 4),
+            row(lotto2, 3),
+        ) { lotto, resultCount ->
+            winningLotto.match(lotto, bonusLottoNumber) shouldHaveSize resultCount
         }
     }
 })

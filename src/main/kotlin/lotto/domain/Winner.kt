@@ -1,16 +1,31 @@
 package lotto.domain
 
-object Winner {
+class Winner(
+    private val winningLotto: Lotto,
+    private val bonusLottoNumber: LottoNumber
+) {
+    init {
+        require(!winningLotto.contains(bonusLottoNumber)) { "지난 주 당첨 번호를 제외한 숫자를 입력해주세요." }
+    }
 
-    fun match(lottoList: List<Lotto>, winningLotto: Lotto): Map<Reward, Int> {
-        val matchToCount: Map<Int, Int> = lottoList
-            .groupingBy { lotto -> winningLotto.match(lotto).size }
+    private data class MatchResult(
+        val matchCount: Int,
+        val matchBonus: Boolean
+    )
+
+    fun match(lottoList: List<Lotto>): Map<Reward, Int> {
+        val matchStore: Map<MatchResult, Int> = lottoList
+            .groupingBy { lotto ->
+                val matchCount = this.winningLotto.match(lotto, bonusLottoNumber).size
+                val matchBonus = lotto.contains(bonusLottoNumber)
+
+                MatchResult(matchCount, matchBonus)
+            }
             .eachCount()
 
         return Reward.values().associateWith { reward ->
-            val resultCount = matchToCount[reward.matchCount] ?: 0
-
-            resultCount
+            val matchResult = MatchResult(reward.matchCount, reward.hasBonus())
+            matchStore[matchResult] ?: 0
         }
     }
 
