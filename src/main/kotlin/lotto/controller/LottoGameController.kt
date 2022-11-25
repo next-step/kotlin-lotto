@@ -19,13 +19,7 @@ class LottoGameController {
         val gameResults = LottoGame.getResultOfGames(gameBoard, winnerNumber.winnerNumber)
         ResultView.noticeOfPrize()
         val statistics = LottoGameResult.winningStatistics(gameResults)
-        statistics.forEach {
-            ResultView.printWinningStatistics(
-                it.key.criteriaForWinning,
-                it.key.prize,
-                it.value
-            )
-        }
+        ResultView.printWinningStatistics(statistics)
         val rate = LottoGameResult.rate(gameResults, purchaseResult.purchaseCost)
         ResultView.printRate(rate)
     }

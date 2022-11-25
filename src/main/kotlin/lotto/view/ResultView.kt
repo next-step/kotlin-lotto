@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoGameResult
 import java.math.BigDecimal
 
 object ResultView {
@@ -13,8 +14,8 @@ object ResultView {
         println("---------")
     }
 
-    fun printWinningStatistics(criteriaForWinning: Int, prize: BigDecimal, count: Int) {
-        println("${criteriaForWinning}개 일치 (${prize}원)- ${count}개")
+    fun printWinningStatistics(statistics: Map<LottoGameResult, Int>) {
+        statistics .forEach { println("${it.key.criteriaForWinning}개 일치 (${it.key.prize}원)- ${it.value}개") }
     }
 
     fun printRate(rate: BigDecimal) {
