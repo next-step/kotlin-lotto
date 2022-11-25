@@ -17,7 +17,7 @@ object InputView {
         val tokens = readln().split(", ")
 
         return LottoTicket(
-            tokens.map { LottoNumber(it.toInt()) }
+            tokens.map { LottoNumber.of(it.toInt()) }
         )
     }
 }

@@ -6,7 +6,7 @@ class LottoTicket(
     val numbers: List<LottoNumber>
 ) {
 
-    constructor(vararg values: Int) : this(List(values.size) { idx -> LottoNumber(values[idx]) })
+    constructor(vararg values: Int) : this(List(values.size) { idx -> LottoNumber.of(values[idx]) })
 
     init {
         require(numbers.size == NUMBER_SIZE) { "로또 번호의 갯수는 ${numbers.size} 일 수 없으며 6 개만 가능합니다." }
@@ -25,7 +25,7 @@ class LottoTicket(
         fun randomTicket(): LottoTicket {
             return LottoTicket(
                 (LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER).shuffled().subList(0, NUMBER_SIZE)
-                    .map { LottoNumber(it) }
+                    .map { LottoNumber.of(it) }
             )
         }
     }

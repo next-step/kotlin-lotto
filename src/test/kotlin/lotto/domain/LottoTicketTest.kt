@@ -37,7 +37,7 @@ class LottoTicketTest {
     @ValueSource(strings = ["10,11,12,13,14,15", "1,10,11,12,13,14", "1,2,10,11,12,13"])
     internal fun `번호가 2개 이하로 일치하면 NON_PLACE 이다`(input: String) {
         // given
-        val lottoNumbers = input.split(",").map { LottoNumber(it.toInt()) }
+        val lottoNumbers = input.split(",").map { LottoNumber.of(it.toInt()) }
         val lottoTicket = LottoTicket(lottoNumbers)
 
         // when
