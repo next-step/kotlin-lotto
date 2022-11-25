@@ -7,34 +7,34 @@ internal class LottoMatchResultTest {
 
     @Test
     fun getMatchResult() {
-        val lottoMatchMap = mutableMapOf<Int, LottoMatch>()
-        val matchNumber = 3
-        val matchCount: Long = 2
-        val reward: Long = 100
-        lottoMatchMap[matchNumber] = LottoMatch(matchNumber, reward, matchCount)
+        val lottoMatchMap = mutableMapOf<LottoRank, LottoMatch>()
+        val matchCount = 3L
+        val lottoRank = LottoRank.FOURTH_PLACE
+        lottoMatchMap[lottoRank] = LottoMatch(lottoRank, matchCount)
 
         val lottoMatchList =
             LottoMatchResult(lottoMatchMap).getMatchResult()
 
         lottoMatchList.forEach { lottoMatch ->
-            assertThat(lottoMatch.matchNumber).isEqualTo(matchNumber)
-            assertThat(lottoMatch.matchCount).isEqualTo(matchCount)
-            assertThat(lottoMatch.reward).isEqualTo(reward)
+            assertThat(lottoMatch.lottoRank).isEqualTo(lottoRank)
+            assertThat(lottoMatch.matchTotalCount).isEqualTo(matchCount)
         }
     }
 
     @Test
     fun `setMatchResult should matchCount + 1`() {
-        val lottoMatchMap = mutableMapOf<Int, LottoMatch>()
-        val matchNumber = 3
-        lottoMatchMap[matchNumber] = LottoMatch(matchNumber, 2, 0)
+        val lottoMatchMap = mutableMapOf<LottoRank, LottoMatch>()
+        val matchCount = 6
+        val matchTotalCount = 2L
+        val lottoRank = LottoRank.FIRST_PLACE
+        lottoMatchMap[lottoRank] = LottoMatch(lottoRank, matchTotalCount)
 
         val lottoMatchResult = LottoMatchResult(lottoMatchMap)
-        lottoMatchResult.setMatchResult(matchNumber)
+        lottoMatchResult.setMatchResult(matchCount)
 
         lottoMatchResult.getMatchResult().forEach { lottoMatch ->
-            assertThat(lottoMatch.matchNumber).isEqualTo(matchNumber)
-            assertThat(lottoMatch.matchCount).isEqualTo(1)
+            assertThat(lottoMatch.lottoRank.matchCount).isEqualTo(matchCount)
+            assertThat(lottoMatch.matchTotalCount).isEqualTo(matchTotalCount + 1)
         }
     }
 }

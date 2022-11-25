@@ -3,13 +3,12 @@ package lotto.domain
 class LottoStatistics(
     private val winningLotto: Lotto
 ) {
-    private fun initLottoMatchMap(): Map<Int, LottoMatch> {
-        val lottoMatchMap = mutableMapOf<Int, LottoMatch>()
-        LottoRank.getMatchCountList().forEach { matchCount ->
-            lottoMatchMap[matchCount] =
+    private fun initLottoMatchMap(): Map<LottoRank, LottoMatch> {
+        val lottoMatchMap = mutableMapOf<LottoRank, LottoMatch>()
+        LottoRank.values().forEach { lottoRank ->
+            lottoMatchMap[lottoRank] =
                 LottoMatch(
-                    matchCount,
-                    LottoRank.getReward(matchCount)
+                    lottoRank
                 )
         }
         return lottoMatchMap
@@ -29,7 +28,7 @@ class LottoStatistics(
     fun getProfit(totalPrice: Long, lottMatchList: List<LottoMatch>): Double {
         // 총 이득
         val totalReward = lottMatchList.sumOf { lottoMatch ->
-            lottoMatch.matchCount * lottoMatch.reward
+            lottoMatch.getProfit()
         }
 
         val profit = totalReward / totalPrice.toDouble()

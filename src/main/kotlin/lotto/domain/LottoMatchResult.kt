@@ -1,14 +1,15 @@
 package lotto.domain
 
 class LottoMatchResult(
-    private val lottoMatchMap: Map<Int, LottoMatch>
+    private val lottoMatchMap: Map<LottoRank, LottoMatch>
 ) {
 
     fun setMatchResult(matchNumber: Int) {
-        val lottoMatch = lottoMatchMap[matchNumber]
-        lottoMatch?.let {
-            it.matchCount++
-            it
+        LottoRank.valueOf(matchNumber)?.let { lottoRank ->
+            lottoMatchMap[lottoRank]?.let {
+                it.matchTotalCount++
+                it
+            }
         }
     }
 

@@ -14,7 +14,7 @@ object OutputView {
     fun outputLottoStatistics(lottMatchList: List<LottoMatch>) {
         println(MessageCode.RESULT_STATISTICS.message)
         lottMatchList.forEach { lottoMatch ->
-            println("${lottoMatch.matchNumber}개 일치 (${lottoMatch.reward}원)- ${lottoMatch.matchCount}개")
+            println("${lottoMatch.lottoRank.matchCount}개 일치 (${lottoMatch.lottoRank.reward}원)- ${lottoMatch.matchTotalCount}개")
         }
     }
 

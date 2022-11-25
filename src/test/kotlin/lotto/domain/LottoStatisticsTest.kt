@@ -23,10 +23,10 @@ internal class LottoStatisticsTest {
 
         val lottoMatchList = lottoStatistics.getWinningStatistics(lottoList)
 
-        val lottoMatch = lottoMatchList.first { it.matchNumber == matchNumber }
+        val lottoMatch = lottoMatchList.first { it.lottoRank.matchCount == matchNumber }
 
-        assertThat(lottoMatch.matchCount).isEqualTo(lottoCount)
-        assertThat(lottoMatch.matchNumber).isEqualTo(matchNumber)
+        assertThat(lottoMatch.matchTotalCount).isEqualTo(lottoCount)
+        assertThat(lottoMatch.lottoRank.matchCount).isEqualTo(matchNumber)
     }
 
     @Test
@@ -36,9 +36,8 @@ internal class LottoStatisticsTest {
 
         val lottoMatchList = mutableListOf<LottoMatch>()
         val forthPlaceMatch = LottoMatch(
-            matchNumber = 3,
-            reward = 5000,
-            matchCount = 1
+            lottoRank = LottoRank.FOURTH_PLACE,
+            matchTotalCount = 1
         )
         lottoMatchList.add(forthPlaceMatch)
 
