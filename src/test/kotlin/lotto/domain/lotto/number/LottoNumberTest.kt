@@ -2,6 +2,7 @@ package lotto.domain.lotto.number
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
+import io.kotest.matchers.collections.shouldBeSortedWith
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldNotBe
@@ -42,7 +43,7 @@ class LottoNumberTest : FunSpec({
         ) { lottoNumberCount ->
             val lottoNumberList = LottoNumber.randomShuffle(lottoNumberCount)
 
-            lottoNumberList shouldContainInOrder lottoNumberList.sorted()
+            lottoNumberList shouldBeSortedWith Comparator.naturalOrder()
             lottoNumberList shouldHaveSize lottoNumberCount
             lottoNumberList.map { it.number }.toSet() shouldHaveSize lottoNumberCount
         }

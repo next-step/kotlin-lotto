@@ -15,7 +15,7 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
         private fun intRange(): IntRange = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
 
-        fun values(): List<LottoNumber> = intRange().map { LottoNumber(it) }
+        private fun values(): List<LottoNumber> = intRange().map { LottoNumber(it) }
 
         fun randomShuffle(count: Int): List<LottoNumber> {
             require(count > 0) { "count must be greater than 0 [$count]" }

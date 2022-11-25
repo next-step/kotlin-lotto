@@ -28,4 +28,6 @@ class Lotto(
     private fun addLottoTicket() {
         lottoTicketList.addLottoTicket()
     }
+
+//    fun setLottoResult(lotto)
 }
