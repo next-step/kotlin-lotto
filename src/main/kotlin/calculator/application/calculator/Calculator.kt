@@ -1,9 +1,9 @@
 package calculator.application.calculator
 
-import calculator.common.model.PositiveInteger
+import calculator.common.model.PositiveIntegers
 
 interface Calculator : MultiplePlusOperation
 
 sealed interface MultiplePlusOperation {
-    fun multiplePlus(numbers: List<PositiveInteger>): Int
+    fun multiplePlus(numbers: PositiveIntegers): Int
 }
