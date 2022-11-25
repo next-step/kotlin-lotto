@@ -9,7 +9,7 @@ import lotto.view.ResultView
 
 class LottoGameController {
 
-    fun main() {
+    fun start() {
         val purchaseResult = InputView.purchaseCost()
         InputView.numberOfPurchase(purchaseResult.numberOfGames)
         val gameBoard: ArrayList<Lotto> = ArrayList()
