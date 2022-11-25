@@ -11,7 +11,7 @@ value class PositiveInteger(
     }
 
     companion object {
-        fun parsing(numberString: String) =
+        fun parse(numberString: String) =
             try {
                 val number = numberString.toInt()
                 PositiveInteger(number)

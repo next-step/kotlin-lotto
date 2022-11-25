@@ -18,7 +18,7 @@ object DelimiterParser : Parser {
         }
 
         val numberArray = input.split(*delimiters)
-        return numberArray.map { PositiveInteger.parsing(it) }.toList()
+        return numberArray.map { PositiveInteger.parse(it) }.toList()
     }
 }
 
