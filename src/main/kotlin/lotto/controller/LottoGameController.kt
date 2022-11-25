@@ -12,7 +12,7 @@ class LottoGameController {
         val purchaseResult = InputView.purchaseCost()
         InputView.numberOfPurchase(purchaseResult.numberOfGames)
 
-        val gameBoard = LottoGame.start(purchaseResult.numberOfGames, AutoLotto)
+        val gameBoard = LottoGame.pick(purchaseResult.numberOfGames, AutoLotto)
         gameBoard.forEach { ResultView.printChosenNumber(it.numbers) }
 
         val winnerNumber = InputView.winningNumberOfLastWeek()
