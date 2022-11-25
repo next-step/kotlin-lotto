@@ -17,4 +17,8 @@ object TicketStore {
         return (benefitPrice.toDouble() / (TICKET_PRICE * lottoTickets.count()))
     }
 
+    fun createWinningTicket(numbers: List<Int>): LottoTicket {
+        return LottoTicket(numbers.map { LottoNumber.of(it) })
+    }
+
 }

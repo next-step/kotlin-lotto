@@ -10,8 +10,10 @@ fun main() {
     val tickets = TicketStore.buyTickets(money)
     ResultView.printTickets(tickets)
 
-    val winningTicket = InputView.inputWinningNumber()
+    val numbers = InputView.inputWinningNumber()
 
+
+    val winningTicket = TicketStore.createWinningTicket(numbers);
     ResultView.printResults(tickets, winningTicket)
 
 }

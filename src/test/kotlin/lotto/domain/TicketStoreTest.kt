@@ -47,4 +47,21 @@ internal class TicketStoreTest {
         assertThat(profitability).isEqualTo(5.0)
 
     }
+
+    @Test
+    internal fun `입력받은 번호대로 로또 티켓이 생성된다`() {
+        // given
+        val numbers = listOf(1, 2, 3, 4, 5, 6)
+        // when
+        val winningTicket = TicketStore.createWinningTicket(numbers)
+
+        // then
+        assertThat(
+            winningTicket.numbers
+        ).containsExactly(
+            LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+            LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
+        )
+
+    }
 }
