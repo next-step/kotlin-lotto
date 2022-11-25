@@ -28,4 +28,20 @@ internal class LottoRankTest {
         val resultMatchCountList = LottoRank.getMatchCountList()
         assertThat(resultMatchCountList).isEqualTo(matchCountList)
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [3, 4, 5, 6])
+    fun `valueOf return LottoRank`(matchCount: Int) {
+        val lottoRank = LottoRank.valueOf(matchCount)
+
+        assertThat(lottoRank?.matchCount).isEqualTo(matchCount)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [0, 1, 2, Int.MAX_VALUE])
+    fun `valueOf return null when matchCount not in 3~6`(matchCount: Int) {
+        val lottoRank = LottoRank.valueOf(matchCount)
+
+        assertThat(lottoRank).isNull()
+    }
 }
