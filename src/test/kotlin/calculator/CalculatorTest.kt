@@ -1,31 +1,32 @@
 package calculator
 
-import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import java.lang.RuntimeException
+import java.math.BigDecimal
 
 internal class CalculatorTest {
 
-    @ParameterizedTest
-    @ValueSource(strings = ["1,2,3,4", "1.2,1.5,3,100", "0,1,3,1.3,20"])
-    fun sum(numberList: String) {
-        val numbers = numberList.split(",").map { it.toBigDecimal() }
+    @Test
+    fun sum() {
+        val numberOne = 2
+        val numberTwo = 2.5
+        val numbers = listOf(numberOne.toBigDecimal(), numberTwo.toBigDecimal())
 
         val result = Calculator.sum(numbers)
-        numbers.reduce { total, number -> total + number } shouldBe result
+        assertThat(result).isEqualTo(BigDecimal.valueOf(numberOne + numberTwo))
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["1,2,3,-4", "1.2,1.5,-3,100", "-1,2,3", "-2.2"])
-    fun `sum throw RuntimeException when number include zero`(numberList: String) {
-        val numbers = numberList.split(",").map { it.toBigDecimal() }
+    @ValueSource(ints = [-1, -3, Int.MIN_VALUE])
+    fun `sum throw RuntimeException when number include negative number`(number: Int) {
+        val numbers = listOf<BigDecimal>(BigDecimal.ONE, number.toBigDecimal())
 
-        val exception = assertThrows<RuntimeException> {
+        assertThrows<RuntimeException> {
             Calculator.sum(numbers)
         }
-        assertThat(exception.message).isEqualTo(MessageCode.NegativeException.message)
     }
 }
