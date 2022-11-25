@@ -25,6 +25,15 @@ internal class LottoRankTest {
         assertThat(lottoRank).isNull()
     }
 
+    @ParameterizedTest
+    @ValueSource(booleans = [true, false])
+    fun `valueOf return FOURTH_PLACE when matchCount 4`(isBonus: Boolean) {
+        val matchCount = 4
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
+
+        assertThat(lottoRank).isEqualTo(LottoRank.FOURTH_PLACE)
+    }
+
     @Test
     fun `valueOf return THIRD_PLACE when matchCount 6 and isBonus is false`() {
         val isBonus = false

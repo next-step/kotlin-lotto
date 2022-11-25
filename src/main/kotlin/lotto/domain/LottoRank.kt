@@ -12,9 +12,15 @@ enum class LottoRank(
     FIRST_PLACE(6, 2_000_000_000L, false);
 
     companion object {
+        private const val CHECK_MATCH_COUNT = 5
+
         fun valueOf(matchCount: Int, isBonus: Boolean): LottoRank? =
             values().find {
-                it.matchCount == matchCount && it.isBonus == isBonus
+                checkLottoRank(it, matchCount, isBonus)
             }
+
+        private fun checkLottoRank(lottoRank: LottoRank, matchCount: Int, isBonus: Boolean): Boolean =
+            if (matchCount == CHECK_MATCH_COUNT) lottoRank.matchCount == matchCount && lottoRank.isBonus == isBonus
+            else lottoRank.matchCount == matchCount
     }
 }
