@@ -8,8 +8,5 @@ interface LottoFactory {
     val DRAWING_QUANTITY: Int
         get() = 6
 
-    val EXTRACTION_POINT: Int
-        get() = 0
-
     fun create(): Lotto
 }
