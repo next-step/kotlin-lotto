@@ -2,8 +2,8 @@ package calculator
 
 data class Separators(val value: List<String>) {
     fun toPositiveNumbers(): PositiveNumbers {
-        if (hasValidNumber()) {
-            throw RuntimeException("숫자가 아닌 값은 입력될 수 없습니다.")
+        require(hasValidNumber()) {
+            "숫자가 아닌 값은 입력될 수 없습니다."
         }
 
         return PositiveNumbers(value.map { it.toInt() })
