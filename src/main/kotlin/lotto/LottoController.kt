@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Cash
 import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoMachine
@@ -31,9 +32,11 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
     }
 
     private fun buyLotto(): List<Lotto> {
-        val amount = getAmount()
-        val lottoList = lottoStore.buyLotto(amount)
-        printLotto(lottoList)
+        val cash = inputCash()
+        val (purchaseCount, changes) = payManualLotto(cash)
+        val manualLottoList = getManualLottoList(purchaseCount)
+        val lottoList = lottoStore.buyLotto(changes)
+        printLotto(manualLottoList, lottoList)
 
         return lottoList
     }
@@ -69,9 +72,12 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
         return lottoGenerator.generateLotto(numbers)
     }
 
-    private fun printLotto(lottoList: List<Lotto>) {
-        ResultView.printMessage(lottoList.size.toString(), ResultView.Message.NUMBER_OF_PURCHASES)
-        lottoList.forEach { lotto ->
+    private fun printLotto(manualLottoList: List<Lotto>, lottoList: List<Lotto>) {
+        ResultView.printPurchasedLottoCount(manualLottoList.size, lottoList.size)
+
+        val totalLottoList = manualLottoList.plus(lottoList)
+
+        totalLottoList.forEach { lotto ->
             val rawLottoNumbers = lotto.lottoNumbers
                 .map { it.number }
                 .sorted()
@@ -80,9 +86,27 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
         }
     }
 
-    private fun getAmount(): Int {
+    private fun getManualLottoList(purchasesCount: Int): List<Lotto> {
+        ResultView.printMessage(ResultView.Message.REQUEST_MANUAL_LOTTO_NUMBERS)
+
+        return (1..purchasesCount).map {
+            val numbers: List<Int> = InputView.requestPositiveNumbers()
+            LottoMachine.generateLotto(numbers)
+        }
+    }
+
+    private fun payManualLotto(cash: Cash): Pair<Int, Cash> {
+        ResultView.printMessage(ResultView.Message.NUMBER_OF_MANUAL_PURCHASES)
+        val purchasesCount = InputView.requestPositiveNumber()
+
+        return LottoMachine.pay(cash, purchasesCount)
+    }
+
+    private fun inputCash(): Cash {
         ResultView.printMessage(ResultView.Message.REQUEST_AMOUNT)
-        return InputView.requestPositiveNumber()
+        val amount = InputView.requestPositiveNumber()
+
+        return Cash(amount)
     }
 }
 
