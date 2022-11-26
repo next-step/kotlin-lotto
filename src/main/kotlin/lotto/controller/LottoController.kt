@@ -19,21 +19,14 @@ class LottoController(
         lottoCostInputView.printLottoCostInputView()
 
         val lottoCost = lottoInputReader.readLottoCost()
-
-        val lotto = Lotto(lottoCost.cost)
+        val lotto = Lotto(lottoCost.inputCost)
 
         lottoView.printLottoView(lotto)
 
-        println()
-
         lottoAnswerInputView.printLottoAnswerInputView()
-
         val lottoAnswer = lottoInputReader.readLottoAnswer()
 
         val lottoResult = lotto.result(lottoAnswer)
-
-        println()
-
         lottoResultView.printLottoResultView(lottoResult)
     }
 }

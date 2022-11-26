@@ -1,7 +1,7 @@
 package lotto.infra.io
 
-import lotto.domain.lotto.LottoAnswer
 import lotto.domain.lotto.price.LottoCost
+import lotto.domain.lotto.ticket.LottoAnswerTicket
 
 class LottoInputReader {
 
@@ -9,8 +9,8 @@ class LottoInputReader {
         return LottoCost(readLine().toInt())
     }
 
-    fun readLottoAnswer(): LottoAnswer {
-        return LottoAnswer(readLine().split(",").map { it.trim().toInt() })
+    fun readLottoAnswer(): LottoAnswerTicket {
+        return LottoAnswerTicket(*readLine().split(",").map { it.trim().toInt() }.toIntArray())
     }
 
     private fun readLine(): String = readln().trim()

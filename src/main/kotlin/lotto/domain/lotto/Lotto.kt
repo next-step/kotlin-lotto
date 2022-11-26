@@ -5,35 +5,36 @@ import lotto.domain.lotto.benefit.LottoBenefitPolicy
 import lotto.domain.lotto.price.LottoCost
 import lotto.domain.lotto.price.LottoTicketPrice
 import lotto.domain.lotto.result.LottoResult
+import lotto.domain.lotto.result.LottoResultMatchCountMap
+import lotto.domain.lotto.ticket.LottoAnswerTicket
 import lotto.domain.lotto.ticket.LottoTicketContainer
-
 
 class Lotto(
     cost: Int,
     price: Int = LottoTicketPrice.DEFAULT_LOTTO_TICKET_PRICE
 ) {
+    val lottoTicketContainer: LottoTicketContainer
+    val lottoTicketPrice: LottoTicketPrice
+    private val lottoCost: LottoCost
     private val lottoBenefitPolicy: LottoBenefitPolicy = LottoBenefitPolicy()
-    private val lottoCost: LottoCost = LottoCost(cost)
-    val lottoTicketPrice: LottoTicketPrice = LottoTicketPrice(price)
-    val lottoTicketList = LottoTicketContainer()
 
     init {
-        require(cost >= price) { "Cost is less than price [$price]" }
+        lottoTicketPrice = LottoTicketPrice(price)
+        lottoCost = LottoCost(cost, lottoTicketPrice)
 
-        val totalLottoTicketCount = cost.div(lottoTicketPrice.price)
-
-        repeat(totalLottoTicketCount) {
-            addLottoTicket()
-        }
+        lottoTicketContainer = LottoTicketContainer(lottoCost.ticketCount)
     }
 
-    fun benefit(lottoAnswer: LottoAnswer): LottoBenefit {
-        val resultCountMap = lottoAnswer.calculate(this)
+    fun result(lottoAnswerTicket: LottoAnswerTicket): LottoResult =
+        LottoResult(benefit(lottoAnswerTicket), resultMatchCountMap(lottoAnswerTicket))
 
-        return lottoBenefitPolicy.benefit(resultCountMap, lottoCost)
+    fun benefit(lottoAnswerTicket: LottoAnswerTicket): LottoBenefit {
+        val lottoResultCountMap = resultMatchCountMap(lottoAnswerTicket)
+
+        return lottoBenefitPolicy.benefit(lottoResultCountMap, lottoCost)
     }
 
-    fun result(lottoAnswer: LottoAnswer): LottoResult = LottoResult(this, lottoAnswer)
-
-    private fun addLottoTicket(): Unit = lottoTicketList.addLottoTicket()
+    private fun resultMatchCountMap(lottoAnswerTicket: LottoAnswerTicket): LottoResultMatchCountMap {
+        return lottoTicketContainer.resultCountMap(lottoAnswerTicket)
+    }
 }

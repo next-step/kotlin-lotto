@@ -1,24 +1,23 @@
 package lotto.domain.lotto.ticket
 
-import java.util.stream.Stream
+import lotto.domain.lotto.result.LottoResultMatchCountMap
 
 class LottoTicketContainer(
-    private val _list: MutableList<LottoTicket> = mutableListOf()
-): List<LottoTicket> by _list {
+    private val lottoTicketList: List<LottoTicket>
+) : List<LottoTicket> by lottoTicketList {
 
-//    val list: List<LottoTicket>
-//        get() = _list
-//
-//    val size: Int
-//        get() = _list.size
-
-    fun addLottoTicket() {
-        _list.add(generateLottoTicket())
+    init {
+        require(lottoTicketList.distinct().size == lottoTicketList.size) {
+            "LottoTickets should be all distinct"
+        }
     }
 
-    private fun generateLottoTicket(): LottoTicket =
-        Stream.generate { LottoTicket.randomGenerate() }
-            .filter { !_list.contains(it) }
-            .findFirst()
-            .get()
+    constructor(ticketCount: Int) : this(LottoTicket.randomGenerate(ticketCount)) {
+        require(ticketCount > 0) { "Ticket count must be > 0 [$ticketCount]" }
+    }
+
+    fun resultCountMap(lottoAnswerTicket: LottoAnswerTicket): LottoResultMatchCountMap =
+        LottoResultMatchCountMap(
+            lottoTicketList.groupingBy { lottoAnswerTicket.calculateMatchCount(it) }.eachCount()
+        )
 }

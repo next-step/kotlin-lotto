@@ -1,4 +1,4 @@
-package lotto.domain.lotto
+package lotto.domain.lotto.ticket
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
@@ -7,13 +7,13 @@ import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import lotto.domain.lotto.Lotto
 import lotto.domain.lotto.number.LottoNumber
 import lotto.domain.lotto.number.toInt
 import lotto.domain.lotto.number.toLottoNumber
-import lotto.domain.lotto.ticket.LottoTicket
 import org.junit.jupiter.api.assertThrows
 
-class LottoAnswerTest : FunSpec({
+class LottoAnswerTicketTest : FunSpec({
     context("로또 결과를 정상적으로 랜덤하게 생성한다") {
         withData(
             nameFn = { "$it" },
@@ -22,12 +22,12 @@ class LottoAnswerTest : FunSpec({
                     .map { it.number }
             }
         ) { lottoResultNumberList ->
-            val lottoAnswer = LottoAnswer(lottoResultNumberList)
+            val lottoAnswerTicket = LottoAnswerTicket(*lottoResultNumberList.toIntArray())
 
-            lottoAnswer shouldNotBe null
-            lottoAnswer.lottoNumberList shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
-            lottoAnswer.lottoNumberList shouldBeSortedWith Comparator.naturalOrder()
-            lottoAnswer.lottoNumberList.map { it.number } shouldContainExactly lottoResultNumberList
+            lottoAnswerTicket shouldNotBe null
+            lottoAnswerTicket.lottoNumberList shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
+            lottoAnswerTicket.lottoNumberList shouldBeSortedWith Comparator.naturalOrder()
+            lottoAnswerTicket.lottoNumberList.map { it.number } shouldContainExactly lottoResultNumberList
         }
     }
 
@@ -40,7 +40,7 @@ class LottoAnswerTest : FunSpec({
                 listOf(1, 2, 3, 4, 5, 5)
             )
         ) { invalidInput ->
-            assertThrows<IllegalArgumentException> { LottoAnswer(invalidInput) }
+            assertThrows<IllegalArgumentException> { LottoAnswerTicket(*invalidInput.toIntArray()) }
         }
     }
 
@@ -52,7 +52,7 @@ class LottoAnswerTest : FunSpec({
                     .map { it.number }
             }
         ) { invalidInput ->
-            assertThrows<IllegalArgumentException> { LottoAnswer(invalidInput) }
+            assertThrows<IllegalArgumentException> { LottoAnswerTicket(*invalidInput.toIntArray()) }
         }
     }
 
@@ -69,26 +69,27 @@ class LottoAnswerTest : FunSpec({
                 listOf(1, 2, 3, 4, 5, 6) to listOf(1, 2, 3, 4, 5, 6),
             )
         ) { (lottoResultNumberList, lottoNumberList) ->
-            val lottoAnswer = LottoAnswer(lottoResultNumberList)
+            val lottoAnswerTicket = LottoAnswerTicket(*lottoResultNumberList.toIntArray())
 
             val lottoTicket = LottoTicket(lottoNumberList.toLottoNumber())
 
-            val result = lottoAnswer.calculate(lottoTicket)
+            val result = lottoAnswerTicket.calculateMatchCount(lottoTicket)
 
             result shouldBe lottoResultNumberList.intersect(lottoNumberList.toSet()).size
         }
     }
 
     test("로또의 결과를 정확하게 계산한다") {
-        val lottoAnswer = LottoAnswer(listOf(1, 2, 3, 4, 5, 6))
+        val lottoAnswerTicket = LottoAnswerTicket(1, 2, 3, 4, 5, 6)
         val lotto = Lotto(14000, 1000)
 
-        val expected = lotto.lottoTicketList.map { lottoTicket ->
+        val expected = lotto.lottoTicketContainer.map { lottoTicket ->
             lottoTicket.lottoNumberList.toInt()
-                .intersect(lottoAnswer.lottoNumberList.toInt().toSet())
+                .intersect(lottoAnswerTicket.lottoNumberList.toInt().toSet())
                 .size
         }.groupingBy { it }.eachCount()
 
-        lottoAnswer.calculate(lotto) shouldBe expected
+        val lottoResult = lotto.result(lottoAnswerTicket)
+        lottoResult.lottoResultMatchCountMap shouldBe expected
     }
 })

@@ -7,7 +7,8 @@ import io.kotest.matchers.doubles.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import lotto.domain.lotto.benefit.LottoBenefitPolicy
+import lotto.domain.lotto.benefit.LottoBenefitLevel
+import lotto.domain.lotto.ticket.LottoAnswerTicket
 import lotto.domain.lotto.ticket.LottoTicket
 import org.junit.jupiter.api.assertThrows
 
@@ -26,17 +27,17 @@ class LottoTest : FunSpec({
             val lotto = Lotto(cost)
 
             val expectedTicketCount = cost.div(lotto.lottoTicketPrice.price)
-            lotto.lottoTicketList shouldHaveSize expectedTicketCount
+            lotto.lottoTicketContainer shouldHaveSize expectedTicketCount
 
-            lotto.lottoTicketList.toSet() shouldHaveSize expectedTicketCount
+            lotto.lottoTicketContainer.toSet() shouldHaveSize expectedTicketCount
 
-            lotto.lottoTicketList.map { lottoTicket ->
+            lotto.lottoTicketContainer.map { lottoTicket ->
                 lottoTicket.lottoNumberList.map { lottoNumber ->
                     lottoNumber.number
                 }
             }.toSet() shouldHaveSize expectedTicketCount
 
-            lotto.lottoTicketList.forEach { lottoTicket ->
+            lotto.lottoTicketContainer.forEach { lottoTicket ->
                 lottoTicket.lottoNumberList.map { lottoNumber ->
                     lottoNumber.number
                 }.toSet() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
@@ -58,17 +59,17 @@ class LottoTest : FunSpec({
             val lotto = Lotto(cost, price)
 
             val expectedTicketCount = cost.div(price)
-            lotto.lottoTicketList shouldHaveSize expectedTicketCount
+            lotto.lottoTicketContainer shouldHaveSize expectedTicketCount
 
-            lotto.lottoTicketList.toSet() shouldHaveSize expectedTicketCount
+            lotto.lottoTicketContainer.toSet() shouldHaveSize expectedTicketCount
 
-            lotto.lottoTicketList.map { lottoTicket ->
+            lotto.lottoTicketContainer.map { lottoTicket ->
                 lottoTicket.lottoNumberList.map { lottoNumber ->
                     lottoNumber.number
                 }
             }.toSet() shouldHaveSize expectedTicketCount
 
-            lotto.lottoTicketList.forEach { lottoTicket ->
+            lotto.lottoTicketContainer.forEach { lottoTicket ->
                 lottoTicket.lottoNumberList.map { lottoNumber ->
                     lottoNumber.number
                 }.toSet() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
@@ -109,13 +110,13 @@ class LottoTest : FunSpec({
     test("LottoBenefit이 정상적으로 생성된다") {
         val givenLottoCost = 1400000
         val givenLottoTicketPrice = 1000
-        val givenLottoAnswer = LottoAnswer(listOf(1, 2, 3, 4, 5, 6))
+        val givenLottoAnswerTicket = LottoAnswerTicket(1, 2, 3, 4, 5, 6)
         val lotto = Lotto(givenLottoCost, givenLottoTicketPrice)
 
-        val lottoBenefit = lotto.benefit(givenLottoAnswer)
+        val lottoBenefit = lotto.benefit(givenLottoAnswerTicket)
 
         lottoBenefit shouldNotBe null
-        lottoBenefit.lottoCost.cost shouldBe givenLottoCost
+        lottoBenefit.lottoCost.inputCost shouldBe givenLottoCost
         lottoBenefit.benefit shouldBeGreaterThanOrEqual 0
         lottoBenefit.profit shouldBeGreaterThanOrEqual 0.0
     }
@@ -123,26 +124,26 @@ class LottoTest : FunSpec({
     test("LottoResult가 정상적으로 생성된다") {
         val givenLottoCost = 1400000
         val givenLottoTicketPrice = 1000
-        val givenLottoAnswer = LottoAnswer(listOf(1, 2, 3, 4, 5, 6))
+        val givenLottoAnswerTicket = LottoAnswerTicket(1, 2, 3, 4, 5, 6)
         val lotto = Lotto(givenLottoCost, givenLottoTicketPrice)
 
-        val lottoResult = lotto.result(givenLottoAnswer)
+        val lottoResult = lotto.result(givenLottoAnswerTicket)
 
         lottoResult shouldNotBe null
 
         lottoResult.lottoBenefit shouldNotBe null
-        lottoResult.lottoBenefit.lottoCost.cost shouldBe givenLottoCost
+        lottoResult.lottoBenefit.lottoCost.inputCost shouldBe givenLottoCost
         lottoResult.lottoBenefit.benefit shouldBeGreaterThanOrEqual 0
         lottoResult.lottoBenefit.profit shouldBeGreaterThanOrEqual 0.0
 
-        LottoBenefitPolicy.benefitPolicy.keys.forEach {
-            lottoResult.lottoResultCountMap[it] shouldBeGreaterThanOrEqual 0
+        LottoBenefitLevel.values().map(LottoBenefitLevel::matchCount).forEach {
+            lottoResult.lottoResultMatchCountMap[it] shouldBeGreaterThanOrEqual 0
         }
 
-        lottoResult.lottoResultCountMap.values.forEach { count ->
+        lottoResult.lottoResultMatchCountMap.values.forEach { count ->
             count shouldBeGreaterThanOrEqual 0
         }
 
-        lottoResult.lottoResultCountMap.values.sum() shouldBe lotto.lottoTicketList.size
+        lottoResult.lottoResultMatchCountMap.values.sum() shouldBe lotto.lottoTicketContainer.size
     }
 })

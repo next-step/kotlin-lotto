@@ -1,22 +1,23 @@
 package lotto.view
 
 import lotto.domain.lotto.benefit.LottoBenefit
-import lotto.domain.lotto.benefit.LottoBenefitPolicy
+import lotto.domain.lotto.benefit.LottoBenefitLevel
 import lotto.domain.lotto.result.LottoResult
+import lotto.domain.lotto.result.LottoResultMatchCountMap
 import kotlin.math.round
 
 class LottoResultView {
     fun printLottoResultView(lottoResult: LottoResult) {
-        println("당첨 통계")
+        println("\n당첨 통계")
         println("---------")
 
-        printLottoResultCountMap(lottoResult.lottoResultCountMap)
+        printLottoResultMatchCountMap(lottoResult.lottoResultMatchCountMap)
         printLottoBenefit(lottoResult.lottoBenefit)
     }
 
-    private fun printLottoResultCountMap(resultCountMap: Map<Int, Int>) {
-        for ((benefitKey, benefitValue) in LottoBenefitPolicy.benefitPolicy) {
-            println("${benefitKey}개 일치 (${benefitValue}원)- ${resultCountMap.getOrDefault(benefitKey, 0)}개")
+    private fun printLottoResultMatchCountMap(lottoResultMatchCountMap: LottoResultMatchCountMap) {
+        for (lottoBenefitLevel in LottoBenefitLevel.values().sortedBy { it.matchCount }) {
+            println("${lottoBenefitLevel.description()}- ${lottoResultMatchCountMap[lottoBenefitLevel.matchCount]}개")
         }
     }
 
