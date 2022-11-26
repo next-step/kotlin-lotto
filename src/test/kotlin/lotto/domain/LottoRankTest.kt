@@ -15,14 +15,14 @@ class LottoRankTest {
         assertThat(lottoRank).isEqualTo(LottoRank.FIRST)
     }
 
-    @DisplayName("2등 당첨")
+    @DisplayName("3등 당첨")
     @Test
     fun `2등 당첨`() {
         // given
         val lottoRank = LottoRank.valueOf(5)
 
         // when, then
-        assertThat(lottoRank).isEqualTo(LottoRank.SECOND)
+        assertThat(lottoRank).isEqualTo(LottoRank.THIRD)
     }
 
     @DisplayName("낙첨")
