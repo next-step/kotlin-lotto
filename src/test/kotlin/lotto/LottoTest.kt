@@ -15,19 +15,19 @@ class LottoTest : StringSpec({
 
     "1-45 사이의 난수 6개 생성" {
         val lottoMachine = LottoMachine(1000)
+        val lottoList = lottoMachine.publishLotto()
 
-        lottoMachine.createNumbers().size shouldBe 6
-        lottoMachine.createNumbers().forEach { num ->
+        lottoList[0].publishNumbers.size shouldBe 6
+        lottoList[0].publishNumbers.forEach { num ->
             num shouldBeInRange IntRange(1, 45)
         }
     }
 
     "생성한 난수 6개는 중복이 없어야 한다." {
         val lottoMachine = LottoMachine(1000)
+        val lottoList = lottoMachine.publishLotto()
 
-        val numbers = lottoMachine.createNumbers()
-
-        numbers.size shouldBe numbers.distinct().size
+        lottoList.size shouldBe lottoList.distinct().size
     }
 
     "로또 n장에 따라 난수 6개씩 n개 생성" {
@@ -39,11 +39,9 @@ class LottoTest : StringSpec({
     }
 
     "입력 받은 문자열을 , 구분자를 통해 6개의 당첨 숫자로 반환한다" {
-        val lottoMachine = LottoMachine(1000)
+        val winningMachine = WinningMachine("1, 2, 3, 4, 5, 6")
 
-        lottoMachine.setWinningString("1, 2, 3, 4, 5, 6")
-
-        lottoMachine.winningNumbers.size shouldBe 6
+        winningMachine.winningNumbers.size shouldBe 6
     }
 
     "발행한 로또에 대해서 당첨 통계: 3개 일치된 경우가 몇 장인지와 금액을 반환 한다." {

@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.LottoMachine.Companion.LOTTO_BASE_PRICE
 import kotlin.math.floor
 
 class WinningStatistics(private val lottoList: List<Lotto>, private val winningNumbers: List<Int>) {
@@ -42,7 +41,7 @@ class WinningStatistics(private val lottoList: List<Lotto>, private val winningN
     }
 
     fun rateOfReturn(): Float {
-        val purchasePrice = lottoList.size * LOTTO_BASE_PRICE
+        val purchasePrice = lottoList.size * Const.LOTTO_BASE_PRICE
         return floor(getWinningPrice().toFloat() / purchasePrice.toFloat() * 100) / 100
     }
 

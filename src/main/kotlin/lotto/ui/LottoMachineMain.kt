@@ -1,6 +1,7 @@
 package lotto.ui
 
 import lotto.LottoMachine
+import lotto.WinningMachine
 import lotto.WinningStatistics
 
 fun main() {
@@ -14,9 +15,9 @@ fun main() {
     resultView.printPurchaseLotteNumbers(lottoList)
 
     val winningNumbersString = inputView.inputLastWeekNumbers()
-    lottoMachine.setWinningString(winningNumbersString)
+    val winningMachine = WinningMachine(winningNumbersString)
 
-    val winningStatistics = WinningStatistics(lottoList, lottoMachine.winningNumbers)
+    val winningStatistics = WinningStatistics(lottoList, winningMachine.winningNumbers)
     val resultStatistics = winningStatistics.winningCheck()
 
     resultView.printWinningStatisticsStart()
