@@ -32,3 +32,11 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
         return number.toString()
     }
 }
+
+fun List<Int>.toLottoNumber(): List<LottoNumber> {
+    return this.map { LottoNumber(it) }
+}
+
+fun List<LottoNumber>.toInt(): List<Int> {
+    return this.map { it.number }
+}
