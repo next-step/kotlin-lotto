@@ -1,24 +1,21 @@
 package calculator
 
-class Expression(list: List<String>) {
-
-    var list = list
-        private set
+class Expression(private val list: List<String>) {
 
     fun compute(): Long {
-        return list.stream().mapToLong{ s -> verifyStringToLong(s) }.sum()
+        if(list.isEmpty()) return 0
+        return list.sumOf { s -> verifyStringToLong(s) }
     }
 
     private fun verifyStringToLong(input: String): Long {
-        var toLong: Long
 
-        try {
-            toLong = input.toLong()
+        val toLong = try {
+            input.toLong()
         } catch (e : NumberFormatException) {
             throw IllegalArgumentException("수식에 문자(${input})가 들어올 수 없습니다.")
         }
 
-        if(toLong < NEGATIVE_STANDARD) throw IllegalArgumentException("수식에 음수(${toLong})가 들어올 수 없습니다.")
+        require(toLong >= NEGATIVE_STANDARD) { "수식에 음수(${toLong})가 들어올 수 없습니다." }
         return toLong
     }
 
@@ -28,13 +25,15 @@ class Expression(list: List<String>) {
         const val NEGATIVE_STANDARD = 0
 
         fun of(mathematical: String): Expression {
+            println("mathematical: ${mathematical}")
+            if(mathematical.isNullOrBlank()) return Expression(listOf())
             val separator = findSeparator(mathematical)
-            var text = findMathematical(mathematical)
+            val text = findMathematical(mathematical)
             return Expression(text.split(separator.toRegex()))
         }
 
         private fun findSeparator(mathematical: String): String {
-            var pattern = Regex(CUSTOM_REGEX).find(mathematical)
+            val pattern = Regex(CUSTOM_REGEX).find(mathematical)
             return pattern?.let{
                 it.groupValues[1]
             } ?: PRIMARY_REGEX
@@ -42,7 +41,7 @@ class Expression(list: List<String>) {
 
         private fun findMathematical(mathematical: String): String {
             if(!mathematical.contains(PRIMARY_REGEX.toRegex())) {
-                var pattern = Regex(CUSTOM_REGEX).find(mathematical)
+                val pattern = CUSTOM_REGEX.toRegex().find(mathematical)
                 val text = pattern?.let {
                     it.groupValues[2]
                 }
@@ -52,4 +51,5 @@ class Expression(list: List<String>) {
             return mathematical
         }
     }
+
 }

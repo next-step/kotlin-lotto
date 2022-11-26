@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
@@ -25,7 +26,7 @@ class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("stringToResults")
+    @CsvSource(value = ["1,2,3|6", "4:5:1|10", "4:2,3|9"], delimiter = '|')
     fun `기본 구분자일 때 문자열을 Split하여 계산한다` (mathematical: String, expect: Long) {
 
         val calculator = StringCalculator()
@@ -34,10 +35,10 @@ class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("customSeparatorStringToResults")
-    fun `커스텀 구분자일 때 문자열을 Split하여 계산한다`(mathematical: String, expect: Long) {
+    @CsvSource(value = [";|1;2;3|6", "!|1!1!4|6", "#|2#0#1|3"], delimiter = '|')
+    fun `커스텀 구분자일 때 문자열을 Split하여 계산한다`(delimiter: String, mathematical: String, expect: Long) {
         val calculator = StringCalculator()
-        val result = calculator.calculate(mathematical)
+        val result = calculator.calculate("//${delimiter}\n${mathematical}")
         assertThat(result).isEqualTo(expect)
     }
 
@@ -59,23 +60,4 @@ class StringCalculatorTest {
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun stringToResults(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.arguments("1,2,3", 6L),
-                Arguments.arguments("4:5:1", 10L),
-                Arguments.arguments("4:2,3", 9L)
-            )
-        }
-
-        @JvmStatic
-        fun customSeparatorStringToResults(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.arguments("//;\n1;2;3", 6L),
-                Arguments.arguments("//!\n1!1!4", 6L),
-                Arguments.arguments("//#\n2#0#1", 3L),
-            )
-        }
-    }
 }
