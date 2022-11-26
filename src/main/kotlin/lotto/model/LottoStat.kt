@@ -13,7 +13,7 @@ class LottoStat(private val lottoGrades: List<LottoGrade>, private val amount: I
         LottoGrade.values()
             .filter { it.correctNumber >= LOTTO_STAT_BASE_CORRECT_NUMBER }
             .associateWith { lottoGrades.count { grade -> it === grade } }
-            .toSortedMap(compareBy { it.correctNumber })
+            .toSortedMap(compareBy { it.reward })
 
     private fun winningRate(): BigDecimal {
         val sumLottoReward = lottoGrades.sumOf {

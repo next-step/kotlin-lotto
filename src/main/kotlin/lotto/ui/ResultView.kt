@@ -24,7 +24,11 @@ object ResultView {
         println("당첨 통계 ")
         println("---------")
         gradeStat.forEach { (grade, count) ->
-            println("${grade.correctNumber}개 일치 (${grade.reward}원)- ${count}개")
+            print("${grade.correctNumber}개 일치")
+            if (grade.matchPlus) {
+                print(", 보너스 볼 일치")
+            }
+            println("(${grade.reward}원) - ${count}개")
         }
     }
 
