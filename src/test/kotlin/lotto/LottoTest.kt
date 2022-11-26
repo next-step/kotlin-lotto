@@ -29,4 +29,12 @@ class LottoTest : StringSpec({
 
         numbers.size shouldBe numbers.distinct().size
     }
+
+    "로또 n장에 따라 난수 6개씩 n개 생성" {
+        val lotto = Lotto(14000)
+
+        val lottoList = lotto.getLottoList(lotto.purchaseCount)
+
+        lottoList.size shouldBe lotto.purchaseCount
+    }
 })

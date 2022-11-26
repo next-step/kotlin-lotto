@@ -4,8 +4,15 @@ import java.security.SecureRandom
 
 class Lotto(val price: Int) {
 
+    val purchaseCount: Int
+
     init {
         require(price % BASE_PRICE == 0) { "input incorrectly price" }
+        purchaseCount = price / BASE_PRICE
+    }
+
+    fun getLottoList(purchaseCount: Int): List<List<Int>> {
+        return (0 until purchaseCount).map { createNumbers() }
     }
 
     fun createNumbers(): List<Int> {
