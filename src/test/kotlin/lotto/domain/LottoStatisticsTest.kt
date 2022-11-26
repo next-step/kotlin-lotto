@@ -7,33 +7,13 @@ import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
 
 class LottoStatisticsTest : StringSpec({
-    "수익률 테스트 " {
-        // given
-        val payment = 15000
-        val lottoResult = LottoResult(3, 5000)
-
-        val expectedResult = 0.33
-        // when
-        val actualResult = LottoStatistics.statistics(payment, listOf(lottoResult))
-        // then
-        actualResult.earningRate shouldBe expectedResult
-    }
 
     "당첨자 통계 결과 테스트" {
         // given
         val payment = 15000
         forAll(
             row(
-                LottoResult(2, 0),
-                listOf(
-                    LottoStatisticsResult(WinLottoPrize.FIRST, 0),
-                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
-                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
-                    LottoStatisticsResult(WinLottoPrize.FOURTH, 0),
-                )
-            ),
-            row(
-                LottoResult(3, 5000),
+                WinLottoPrize.FOURTH,
                 listOf(
                     LottoStatisticsResult(WinLottoPrize.FIRST, 0),
                     LottoStatisticsResult(WinLottoPrize.SECOND, 0),
@@ -42,7 +22,7 @@ class LottoStatisticsTest : StringSpec({
                 )
             ),
             row(
-                LottoResult(6, 2000000000),
+                WinLottoPrize.FIRST,
                 listOf(
                     LottoStatisticsResult(WinLottoPrize.FIRST, 1),
                     LottoStatisticsResult(WinLottoPrize.SECOND, 0),
