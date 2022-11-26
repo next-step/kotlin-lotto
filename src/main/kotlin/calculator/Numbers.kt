@@ -1,3 +1,5 @@
+package calculator
+
 class Numbers(private val numbers: List<Int>) {
 
     fun sum(): Int {

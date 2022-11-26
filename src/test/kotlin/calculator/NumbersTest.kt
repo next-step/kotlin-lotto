@@ -1,3 +1,6 @@
+package calculator
+
+import calculator.Numbers
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
