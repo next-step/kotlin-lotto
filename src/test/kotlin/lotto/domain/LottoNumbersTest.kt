@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
@@ -10,6 +11,25 @@ internal class LottoNumbersTest : BehaviorSpec({
 
             then("중복없는 6개의 로또 번호를 생성한다.") {
                 result.getLottoNumbers().distinct().size shouldBe 6
+            }
+        }
+
+        `when`("6개가 아니라면") {
+            val lottoNumbers = (
+                listOf(
+                    LottoNumber(2),
+                    LottoNumber(33),
+                    LottoNumber(34),
+                    LottoNumber(35),
+                    LottoNumber(36),
+                    LottoNumber(37),
+                    LottoNumber(38),
+                )
+                )
+            then("IllegalArgumentException 이 발생한다.") {
+                shouldThrow<IllegalArgumentException> {
+                    LottoNumbers(lottoNumbers)
+                }
             }
         }
     }
