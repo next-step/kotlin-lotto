@@ -48,4 +48,16 @@ class WinningPrizeTest : StringSpec({
             WinningPrize.findPrize(matchedCount) shouldBe prize
         }
     }
+
+    "당첨 조건에 맞는 당첨 상금을 조회할 수 있다. 당첨 상금을 찾지 못하면 null을 반환한다." {
+        listOf(
+            6 to WinningPrize.FIRST,
+            5 to WinningPrize.SECOND,
+            4 to WinningPrize.THIRD,
+            3 to WinningPrize.FOURTH,
+            -1 to null
+        ).forEach { (matchedCount, winningPrize) ->
+            WinningPrize.find(matchedCount) shouldBe winningPrize
+        }
+    }
 })
