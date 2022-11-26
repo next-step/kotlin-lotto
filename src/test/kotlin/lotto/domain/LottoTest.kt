@@ -1,13 +1,20 @@
 package lotto.domain
 
-import org.junit.jupiter.api.Test
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.matchers.shouldBe
 
-import org.junit.jupiter.api.Assertions.*
+class LottoTest : StringSpec({
 
-class LottoTest {
-
-    @Test
-    fun countHitNumbers() {
-
+    "로또 Hit Count 계산 테스트" {
+        forAll(
+            row("0개 일치하는 로또", Lotto(listOf(1, 3, 5, 7, 9, 11)), listOf(2, 4, 6, 8, 10, 12), 0),
+            row("3개 일치하는 로또", Lotto(listOf(1, 3, 5, 7, 9, 11)), listOf(7, 8, 9, 10, 11, 12), 3),
+            row("6개 일치하는 로또", Lotto(listOf(1, 3, 5, 7, 9, 11)), listOf(1, 3, 5, 7, 9, 11), 6)
+        ) { title, lotto, luckyNumbers, expectedHitCount ->
+            val actual = lotto.countHitNumbers(luckyNumbers)
+            actual shouldBe expectedHitCount
+        }
     }
-}
+})
