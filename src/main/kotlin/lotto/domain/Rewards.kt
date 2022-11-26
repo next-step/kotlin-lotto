@@ -11,6 +11,6 @@ data class Rewards(private val _rewards: MutableList<Rank> = mutableListOf()) {
     }
 
     fun calculateRateOfReturn(purchaseAmount: PurchaseAmount): Double {
-        return _rewards.sumOf { it.getMoney() } / purchaseAmount.amount
+        return _rewards.sumOf { it.money } / purchaseAmount.amount
     }
 }
