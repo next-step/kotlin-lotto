@@ -22,7 +22,7 @@ class LottoMachine(val price: Int) {
         require(this.winningNumbers.size == 6) { "input string numbers range" }
     }
 
-    fun publishLotto(purchaseCount: Int): List<Lotto> {
+    fun publishLotto(): List<Lotto> {
         return (0 until purchaseCount).map { Lotto(createNumbers()) }
     }
 

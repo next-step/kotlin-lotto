@@ -33,7 +33,7 @@ class LottoTest : StringSpec({
     "로또 n장에 따라 난수 6개씩 n개 생성" {
         val lottoMachine = LottoMachine(14000)
 
-        val lottoList = lottoMachine.publishLotto(lottoMachine.purchaseCount)
+        val lottoList = lottoMachine.publishLotto()
 
         lottoList.size shouldBe lottoMachine.purchaseCount
     }
@@ -49,7 +49,7 @@ class LottoTest : StringSpec({
     "발행한 로또에 대해서 당첨 통계: 3개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
         val lottoMachine = LottoMachine(1000)
 
-        val lottoList = lottoMachine.publishLotto(1)
+        val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(3))
 
         winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.FOUR_PLACE) shouldBe true
@@ -59,7 +59,7 @@ class LottoTest : StringSpec({
     "발행한 로또에 대해서 당첨 통계: 4개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
         val lottoMachine = LottoMachine(1000)
 
-        val lottoList = lottoMachine.publishLotto(1)
+        val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(4))
 
         winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.THREE_PLACE) shouldBe true
@@ -69,7 +69,7 @@ class LottoTest : StringSpec({
     "발행한 로또에 대해서 당첨 통계: 5개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
         val lottoMachine = LottoMachine(1000)
 
-        val lottoList = lottoMachine.publishLotto(1)
+        val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(5))
 
         winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.TWO_PLACE) shouldBe true
@@ -79,7 +79,7 @@ class LottoTest : StringSpec({
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
         val lottoMachine = LottoMachine(1000)
 
-        val lottoList = lottoMachine.publishLotto(1)
+        val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(6))
 
         winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.ONE_PLACE) shouldBe true
@@ -89,7 +89,7 @@ class LottoTest : StringSpec({
     "발행한 금액과 당첨 금액을 통해 수익률을 반환한다." {
         val lottoMachine = LottoMachine(1000)
 
-        val lottoList = lottoMachine.publishLotto(1)
+        val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(3))
         winningStatistics.winningCheck()
 
@@ -99,7 +99,7 @@ class LottoTest : StringSpec({
     "수익율을 통해 손익에 대한 결과를 반환 한다." {
         val lottoMachine = LottoMachine(1000)
 
-        val lottoList = lottoMachine.publishLotto(1)
+        val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(3))
         winningStatistics.winningCheck()
 
