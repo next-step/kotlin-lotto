@@ -24,4 +24,16 @@ internal class WinningStatisticsTest : BehaviorSpec({
             }
         }
     }
+
+    given("로또를 14장 구매했을 때") {
+        val purchaseAmount = PurchaseAmount(14000)
+
+        `when`("4등 1장만 당첨 됐으면") {
+            val result = winningStatistics.add(listOf(3))
+
+            then("수익률은 0.35 이다. (소수점 두자리까지 표시)") {
+                result.calculateRateOfReturn(purchaseAmount).toString() shouldBe 0.35.toString()
+            }
+        }
+    }
 })

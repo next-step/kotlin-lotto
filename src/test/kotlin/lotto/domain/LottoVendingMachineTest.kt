@@ -9,7 +9,7 @@ internal class LottoVendingMachineTest : BehaviorSpec({
             val money = PurchaseAmount(14000)
 
             then("로또가 발급된다.") {
-                LottoVendingMachine.buy(money).size shouldBe money.getAmount() / 1000.00
+                LottoVendingMachine.buy(money).size shouldBe money.getAmount() / 1000
             }
         }
     }
