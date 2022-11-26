@@ -7,6 +7,7 @@ value class PurchaseAmount(private val amount: Int) {
     }
 
     fun getAmount() = amount
+    fun getNumberOfLotto() = amount / LOTTO_PRICE
 
     companion object {
         private const val LOTTO_PRICE = 1000

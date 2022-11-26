@@ -8,9 +8,9 @@ import lotto.view.ResultView
 class LottoController {
     fun run() {
         val purchaseAmount = InputView.getPurchaseAmount()
+        ResultView.printNumberOfPurchases(purchaseAmount.getNumberOfLotto())
 
         val myLotto = LottoVendingMachine.buy(purchaseAmount)
-        ResultView.printNumberOfPurchases(myLotto.size)
         ResultView.printPurchasedLotto(myLotto)
 
         val winningNumbers = InputView.getWinningNumbers()
