@@ -68,7 +68,7 @@ class LottoTest : StringSpec({
         val winningResult = winningMachine.winningResult(lottoList)
         val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
 
-        winningStatistics.rateOfReturn() shouldBe 2000000f
+        winningStatistics.rateOfReturn() shouldBe Const.RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
     }
 
     "수익율을 통해 손익에 대한 결과를 반환 한다." {

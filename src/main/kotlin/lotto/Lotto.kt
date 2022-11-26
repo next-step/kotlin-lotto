@@ -1,3 +1,3 @@
 package lotto
 
-class Lotto(val publishNumbers: List<Int>)
+data class Lotto(val publishNumbers: List<Int>)

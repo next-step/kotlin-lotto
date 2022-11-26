@@ -11,9 +11,9 @@ class WinningStatistics(private val price: Int, private val winningResult: HashM
     private fun getWinningPrice(): Int {
         var winningPrice = 0
 
-        Const.RANKING.values().forEach { place ->
-            val winningCount: Int = winningResult[place] ?: 0
-            winningPrice += place.winningPrice * winningCount
+        Const.RANKING.values().forEach { ranking ->
+            val winningCount: Int = winningResult[ranking] ?: 0
+            winningPrice += ranking.winningPrice * winningCount
         }
 
         return winningPrice
