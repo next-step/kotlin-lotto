@@ -15,16 +15,25 @@ class WinningLottoTest {
 
     @BeforeAll
     fun setup() {
-        winningNumber = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet())
+        winningNumber = getLotto("1 2 3 4 5 6")
     }
 
     @ParameterizedTest
-    @CsvSource("1 2 3 4 5 6, 6", "1 2 3 4 5 16, 5", "1 2 3 4 25 16, 4", "1 2 3 44 25 16, 3", "11 22 33 44 25 16, 0")
-    fun `당첨 로또와 비교하여 일치하는 번호의 갯수를 가져온다`(numbers: String, countOfMatch: Int) {
+    @CsvSource(
+        "1 2 3 4 5 6, FIRST, 1",
+        "1 2 3 4 5 45, SECOND, 1",
+        "1 2 3 4 5 16, THIRD, 2",
+        "1 2 3 4 25 16, FOURTH, 1",
+        "1 2 3 44 25 16, FIFTH, 1",
+        "11 22 33 44 25 16, MISS, 3"
+    )
+    fun `당첨 로또와 비교하여 일치하는 등수와 갯수를 가져온다`(numbers: String, nameOfRank: String, count: Int) {
         val winningLotto = WinningLotto(winningNumber, LottoNumber(45))
-        val myLottoNumbers = Lotto(numbers.split(" ").map { LottoNumber(it.toInt()) }.toSet())
-        val matchResult = winningLotto.getMatchResult(myLottoNumbers)
-        assertThat(matchResult.countOfMatch).isEqualTo(countOfMatch)
+        val numberList = mutableListOf("1 3 4 5 32 6", "11 12 13 14 6 7", "13 14 15 16 17 45")
+        numberList.add(numbers)
+        val myLottos = numberList.map { getLotto(it) }
+        val matchResult = winningLotto.getMatchResult(myLottos)
+        assertThat(matchResult[Rank.valueOf(nameOfRank)]).isEqualTo(count)
     }
 
     @ParameterizedTest
@@ -33,11 +42,6 @@ class WinningLottoTest {
         assertThrows<IllegalArgumentException> { WinningLotto(winningNumber, LottoNumber(bonusNumber)) }
     }
 
-    @ParameterizedTest
-    @CsvSource("11,true", "23,true", "36,true", "44,false", "21,false", "35,false")
-    fun `보너스 볼의 일치 여부 값을 가진다`(bonusNumber: Int, matchBonus: Boolean) {
-        val myLotto = Lotto(listOf(11, 12, 23, 14, 15, 36).map { LottoNumber(it) }.toSet())
-        val matchResult = WinningLotto(winningNumber, LottoNumber(bonusNumber)).getMatchResult(myLotto)
-        assertThat(matchResult.matchBonus).isEqualTo(matchBonus)
-    }
+    private fun getLotto(numbers: String): Lotto = Lotto(numbers.split(" ").map { LottoNumber(it.toInt()) }.toSet())
+    private fun getLottos(numbers: String): List<Lotto> = listOf(getLotto(numbers))
 }
