@@ -21,4 +21,12 @@ class LottoTest : StringSpec({
             num shouldBeInRange IntRange(1, 45)
         }
     }
+
+    "생성한 난수 6개는 중복이 없어야 한다." {
+        val lotto = Lotto(1000)
+
+        val numbers = lotto.createNumbers()
+
+        numbers.size shouldBe numbers.distinct().size
+    }
 })
