@@ -6,7 +6,7 @@ import nextstep.mission.lotto.WinningPrize.*
 import nextstep.mission.lotto.fixture.lottoNumberListOf
 import nextstep.mission.lotto.fixture.lottoNumbersListOf
 import nextstep.mission.lotto.vo.LottoNumbers
-import nextstep.mission.lotto.vo.WinningResult2
+import nextstep.mission.lotto.vo.WinningResult
 
 class Lotto2Test : StringSpec({
 
@@ -18,9 +18,9 @@ class Lotto2Test : StringSpec({
             listOf(1, 2, 3, 14, 15, 16), // 3 matched
             listOf(11, 12, 13, 14, 15, 16), // no matched
         )
-        val lottos = Lotto2(lottoNumbersList)
+        val lottos = Lotto(lottoNumbersList)
 
-        lottos.matchWinningNumbers(LottoNumbers(lottoNumberListOf(1, 2, 3, 4, 5, 6))) shouldBe WinningResult2(
+        lottos.matchWinningNumbers(LottoNumbers(lottoNumberListOf(1, 2, 3, 4, 5, 6))) shouldBe WinningResult(
             mapOf(
                 FIRST to 1,
                 SECOND to 1,

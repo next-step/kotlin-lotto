@@ -1,42 +1,23 @@
 package nextstep.mission.lotto
 
-private fun Int.increaseIf(predicate: () -> Boolean) = when {
-    predicate() -> this.inc()
-    else -> this
-}
+import nextstep.mission.lotto.vo.LottoNumbers
+import nextstep.mission.lotto.vo.WinningResult
 
-class Lotto(val numbers: List<Int>) {
-    init {
-        require(numbers.size == 6) { "로또 숫자는 6개여야 합니다." }
-        require(numbers.toSet().size == 6) { "로또 숫자는 중복이 허용되지 않습니다." }
-        requireRange(numbers.toMutableList())
-    }
+class Lotto(val lottoNumbers: List<LottoNumbers>) {
 
-    private tailrec fun requireRange(numbers: MutableList<Int>) {
-        when {
-            numbers.isEmpty() -> return
-            isInvalidRange(numbers.removeFirst()) -> throw IllegalArgumentException("로또 숫자는 1에서 45사이어야 합니다.")
-            else -> requireRange(numbers)
-        }
-    }
-
-    private fun isInvalidRange(number: Int): Boolean = (number < 1) or (number > 45)
-
-    fun checkWinningNumbers(winningNumbers: List<Int>): Int {
-        tailrec fun checkWinningNumbers(
-            winningCount: Int,
-            numbers: MutableList<Int>,
-            winningNumbers: List<Int>,
-        ): Int = when {
-            numbers.isEmpty() -> winningCount
+    fun matchWinningNumbers(winningNumbers: LottoNumbers): WinningResult {
+        tailrec fun match(
+            winningNumbers: LottoNumbers,
+            lottoNumbers: MutableList<LottoNumbers> = this.lottoNumbers.toMutableList(),
+            result: MutableMap<WinningPrize, Int> = WinningPrize.values().associateWith { 0 }.toMutableMap()
+        ): WinningResult = when {
+            lottoNumbers.isEmpty() -> WinningResult(result.toMap())
             else -> {
-                checkWinningNumbers(
-                    winningCount.increaseIf { winningNumbers.contains(numbers.removeFirst()) },
-                    numbers,
-                    winningNumbers
-                )
+                val matchedCount: Int = lottoNumbers.removeFirst().match(winningNumbers)
+                WinningPrize.find(matchedCount)?.also { result[it] = result[it]!! + 1 }
+                match(winningNumbers, lottoNumbers, result)
             }
         }
-        return checkWinningNumbers(0, this.numbers.toMutableList(), winningNumbers)
+        return match(winningNumbers = winningNumbers)
     }
 }

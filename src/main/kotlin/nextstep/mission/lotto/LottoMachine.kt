@@ -9,7 +9,7 @@ object LottoMachine {
 
     private val totalLottoNumbers: List<LottoNumber> = (1..45).map { LottoNumber(it) }
 
-    fun create(totalPrice: Int): Lotto2 = (1..totalPrice / LOTTO_PRICE)
+    fun create(totalPrice: Int): Lotto = (1..totalPrice / LOTTO_PRICE)
         .map { LottoNumbers(totalLottoNumbers.shuffled().take(6)) }
-        .let { Lotto2(it) }
+        .let { Lotto(it) }
 }
