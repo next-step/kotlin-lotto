@@ -31,7 +31,7 @@ class LottoMachine(val price: Int) {
     }
 
     companion object {
-        private const val LOTTO_BASE_PRICE = 1000
+        const val LOTTO_BASE_PRICE = 1000
         private const val LOTTO_NUMBERS_COUNT = 6
         private const val MIN_RANDOM_VALUE = 1
         private const val MAX_RANDOM_VALUE = 45

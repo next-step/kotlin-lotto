@@ -85,4 +85,14 @@ class LottoTest : StringSpec({
         winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.ONE_PLACE) shouldBe true
         winningStatistics.winningCheck()[WinningStatistics.PLACING.ONE_PLACE] shouldBe 1
     }
+
+    "발행한 금액과 당첨 금액을 통해 수익률을 반환한다." {
+        val lottoMachine = LottoMachine(1000)
+
+        val lottoList = lottoMachine.publishLotto(1)
+        val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(3))
+        winningStatistics.winningCheck()
+
+        winningStatistics.rateOfReturn() shouldBe 5f
+    }
 })
