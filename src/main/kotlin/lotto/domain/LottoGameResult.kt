@@ -9,7 +9,8 @@ enum class LottoGameResult(val criteriaForWinning: Int, val prize: BigDecimal) {
     FOUR(3, BigDecimal(5_000)),
     THIRD(4, BigDecimal(50_000)),
     SECOND(5, BigDecimal(1_500_000)),
-    FIRST(6, BigDecimal(20_00_000_000));
+    SECOND_BONUS(5, BigDecimal(30_000_000)),
+    FIRST(6, BigDecimal(2_000_000_000));
 
     companion object {
 
