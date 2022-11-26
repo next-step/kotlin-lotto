@@ -27,13 +27,10 @@ object LottoStatistics {
     private fun winLottoStatistics(winLottoList: List<LottoResult>): List<LottoStatisticsResult> {
         val hitCountMap = winLottoList.groupBy { lottoResult: LottoResult -> lottoResult.hitCount }
 
-        return Lotto.PRIZE_MONEY_PER_HIT_COUNT.map { entry ->
-            val hitCount = entry.key
-            val prizeMoney = entry.value
+        return WinLottoPrize.values().map {
             LottoStatisticsResult(
-                hitCount = hitCount,
-                prizeMoney = prizeMoney,
-                winLottoCount = hitCountMap.getOrDefault(hitCount, emptyList()).size
+                winLottoPrize = it,
+                winLottoCount = hitCountMap.getOrDefault(it.hitCount, emptyList()).size
             )
         }
     }

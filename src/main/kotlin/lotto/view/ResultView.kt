@@ -24,8 +24,8 @@ class ResultView {
 
     private fun printWinStatisticsResult(winLottoStatisticsResult: List<LottoStatisticsResult>) {
         winLottoStatisticsResult.forEach {
-            val hitCount = it.hitCount
-            val prizeMoney = it.prizeMoney
+            val hitCount = it.winLottoPrize.hitCount
+            val prizeMoney = it.winLottoPrize.money
             val winLottoCount = it.winLottoCount
             println("${hitCount}개 일치 (${prizeMoney}원) - ${winLottoCount}개")
         }
