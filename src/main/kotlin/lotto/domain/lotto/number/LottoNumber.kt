@@ -15,13 +15,7 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
         private fun intRange(): IntRange = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
 
-        private fun values(): List<LottoNumber> = intRange().map { LottoNumber(it) }
-
-        fun randomShuffle(count: Int): List<LottoNumber> {
-            require(count > 0) { "count must be greater than 0 [$count]" }
-
-            return values().shuffled().take(count).sorted()
-        }
+        fun values(): List<LottoNumber> = intRange().map { LottoNumber(it) }
     }
 
     override fun compareTo(other: LottoNumber): Int {
@@ -31,12 +25,4 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
     override fun toString(): String {
         return number.toString()
     }
-}
-
-fun List<Int>.toLottoNumber(): List<LottoNumber> {
-    return this.map { LottoNumber(it) }
-}
-
-fun List<LottoNumber>.toInt(): List<Int> {
-    return this.map { it.number }
 }

@@ -9,8 +9,6 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import lotto.domain.lotto.Lotto
 import lotto.domain.lotto.number.LottoNumber
-import lotto.domain.lotto.number.toInt
-import lotto.domain.lotto.number.toLottoNumber
 import org.junit.jupiter.api.assertThrows
 
 class LottoAnswerTicketTest : FunSpec({
@@ -18,7 +16,7 @@ class LottoAnswerTicketTest : FunSpec({
         withData(
             nameFn = { "$it" },
             (0..100).map {
-                LottoNumber.randomShuffle(LottoTicket.TOTAL_COUNT_LOTTO_NUMBER)
+                LottoTicket.randomShuffle()
                     .map { it.number }
             }
         ) { lottoResultNumberList ->
@@ -48,7 +46,7 @@ class LottoAnswerTicketTest : FunSpec({
         withData(
             nameFn = { "${it.size}개일 경우" },
             ((1..5) + (7..10)).map { lottoResultNumberCount ->
-                LottoNumber.randomShuffle(lottoResultNumberCount)
+                randomShuffle(lottoResultNumberCount)
                     .map { it.number }
             }
         ) { invalidInput ->
@@ -93,3 +91,20 @@ class LottoAnswerTicketTest : FunSpec({
         lottoResult.lottoResultMatchCountMap shouldBe expected
     }
 })
+
+fun List<Int>.toLottoNumber(): List<LottoNumber> {
+    return this.map { LottoNumber(it) }
+}
+
+fun List<LottoNumber>.toInt(): List<Int> {
+    return this.map { it.number }
+}
+
+fun randomShuffle(count: Int): List<LottoNumber> {
+    require(count > 0)
+    
+    return LottoNumber.values()
+        .shuffled()
+        .take(count)
+        .sorted()
+}
