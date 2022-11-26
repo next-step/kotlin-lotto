@@ -95,4 +95,14 @@ class LottoTest : StringSpec({
 
         winningStatistics.rateOfReturn() shouldBe 5f
     }
+
+    "수익율을 통해 손익에 대한 결과를 반환 한다." {
+        val lottoMachine = LottoMachine(1000)
+
+        val lottoList = lottoMachine.publishLotto(1)
+        val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(3))
+        winningStatistics.winningCheck()
+
+        if (winningStatistics.rateOfReturn() < 1) "손해" else "이익" shouldBe "이익"
+    }
 })
