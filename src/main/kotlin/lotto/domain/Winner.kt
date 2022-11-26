@@ -8,7 +8,7 @@ class Winner(
         require(!winningLotto.contains(bonusLottoNumber)) { "지난 주 당첨 번호를 제외한 숫자를 입력해주세요." }
     }
 
-    fun match(lottoList: List<Lotto>): Map<Reward, Int> {
+    fun match(lottoList: List<Lotto>): Rank {
         val matchStore: Map<Pair<Int, Boolean>, Int> = lottoList
             .groupingBy { lotto ->
                 val matchCount = this.winningLotto.match(lotto, bonusLottoNumber).size
@@ -18,15 +18,11 @@ class Winner(
             }
             .eachCount()
 
-        return Reward.values().associateWith { reward ->
+        val matchReward: Map<Reward, Int> = Reward.values().associateWith { reward ->
             val matchResult = reward.matchCount to reward.hasBonus
             matchStore[matchResult] ?: 0
         }
-    }
 
-    fun getIncomeRate(purchaseCount: Int, matchReward: Map<Reward, Int>): Double =
-        matchReward.map { (reward, resultCount) -> reward.amount * resultCount }
-            .sum()
-            .toDouble()
-            .div(purchaseCount * Lotto.PRICE)
+        return Rank(matchReward)
+    }
 }

@@ -27,12 +27,13 @@ class WinnerTest : StringSpec({
             Reward.THIRD_PLACE to 0,
             Reward.FIST_PLACE to 0,
         )
+        val rank = Rank(matchReward)
 
         forAll(
             row(14, 0.36),
             row(10, 0.5),
         ) { purchaseCount, incomeRate ->
-            val actualIncomeRate = winner.getIncomeRate(purchaseCount, matchReward)
+            val actualIncomeRate = rank.getIncomeRate(purchaseCount)
 
             val formattedActual = String.format("%.2f", actualIncomeRate)
             val formattedExpect = String.format("%.2f", incomeRate)
@@ -47,8 +48,8 @@ class WinnerTest : StringSpec({
             row(listOf(LottoMachine.generateLotto(listOf(3, 4, 5, 6, 7, 20))), true),
             row(listOf(LottoMachine.generateLotto(listOf(11, 12, 13, 14, 15, 16))), false),
         ) { lottoList, matchBonus ->
-            val matchResult: Map<Reward, Int> = winner.match(lottoList)
-            val hasBonus: Boolean = matchResult.any { (reward, matchCount) ->
+            val rank: Rank = winner.match(lottoList)
+            val hasBonus: Boolean = rank.matchReward.any { (reward, matchCount) ->
                 reward.hasBonus && reward.matchCount == 5 && matchCount > 0
             }
 
