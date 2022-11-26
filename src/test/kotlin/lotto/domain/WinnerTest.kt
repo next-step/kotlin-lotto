@@ -22,9 +22,9 @@ class WinnerTest : StringSpec({
 
     "일치 갯수에 따라 수익률 계산 하다." {
         val matchReward = mapOf(
-            Reward.FORTH_PLACE to 1,
+            Reward.FIVE_PLACE to 1,
+            Reward.FOURTH_PLACE to 0,
             Reward.THIRD_PLACE to 0,
-            Reward.SECOND_PLACE to 0,
             Reward.FIST_PLACE to 0,
         )
 
@@ -49,7 +49,7 @@ class WinnerTest : StringSpec({
         ) { lottoList, matchBonus ->
             val matchResult: Map<Reward, Int> = winner.match(lottoList)
             val hasBonus: Boolean = matchResult.any { (reward, matchCount) ->
-                reward.hasBonus() && reward.matchCount == 5 && matchCount > 0
+                reward.hasBonus && reward.matchCount == 5 && matchCount > 0
             }
 
             hasBonus shouldBe matchBonus

@@ -48,7 +48,7 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
                 ResultView.printResult(
                     matchCount = reward.matchCount,
                     price = reward.amount,
-                    matchBonus = reward.hasBonus(),
+                    matchBonus = reward.hasBonus,
                     resultCount = resultCount
                 )
             }
