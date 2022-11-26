@@ -40,6 +40,15 @@ class LottoTicketTest {
         assertThat(result).isEqualTo(Award.NON_PLACE)
     }
 
+    @Test
+    internal fun `값이 포함되어 있지 않으면 true를 반환한다`() {
+        // given
+        val lottoTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+
+        // when, then
+        assertThat(lottoTicket.notContainNumber(LottoNumber.of(7))).isTrue
+        assertThat(lottoTicket.notContainNumber(LottoNumber.of(6))).isFalse
+    }
 
     @Test
     internal fun `번호 3개가 일치하면 FIFTH_PLACE 이다`() {

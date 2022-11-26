@@ -19,6 +19,8 @@ class LottoTicket(
         return Award.of(matchCount, false)
     }
 
+    fun notContainNumber(bonusNumber: LottoNumber): Boolean = !containNumber(bonusNumber)
+
     private fun containNumber(lottoNumber: LottoNumber): Boolean = numbers.contains(lottoNumber)
 
     private fun hasNotEqualNumber() = numbers.toSet().size == numbers.size
