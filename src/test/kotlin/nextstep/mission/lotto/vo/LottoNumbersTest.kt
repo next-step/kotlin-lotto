@@ -1,5 +1,6 @@
 package nextstep.mission.lotto.vo
 
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -25,6 +26,10 @@ class LottoNumbersTest : StringSpec({
         }
 
         exception.message shouldBe "로또 숫자는 중복이 허용되지 않습니다."
+    }
+
+    "로또 숫자 리스트가 중복도 아니면서 6자리면 정상 생성한다." {
+        shouldNotThrowAny { LottoNumbers(lottoNumbersOf(1, 2, 3, 4, 5, 6)) }
     }
 
     "로또는 당첨번호를 입력받아 몇개의 숫자가 일치하는지 반환한다." {
