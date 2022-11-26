@@ -1,6 +1,6 @@
 package lotto
 
-class WinningStatistics(private val lottoNumbersList: List<List<Int>>, private val winningNumbers: List<Int>) {
+class WinningStatistics(private val lottoList: List<Lotto>, private val winningNumbers: List<Int>) {
 
     enum class PLACING(val winningCount: Int, val winningPrice: Int) {
         FOUR_PLACE(3, 5000), THREE_PLACE(4, 50000), TWO_PLACE(5, 1500000), ONE_PLACE(6, 2000000000)
@@ -9,8 +9,8 @@ class WinningStatistics(private val lottoNumbersList: List<List<Int>>, private v
     fun winningCheck(): HashMap<PLACING, Int> {
         val winningResult = HashMap<PLACING, Int>()
 
-        lottoNumbersList.forEach { lottoNumbers ->
-            val union = lottoNumbers + winningNumbers
+        lottoList.forEach { lotto ->
+            val union = lotto.publishNumbers + winningNumbers
 
             when (union.size - union.distinct().size) {
                 PLACING.FOUR_PLACE.winningCount -> {
