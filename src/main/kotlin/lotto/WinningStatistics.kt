@@ -31,7 +31,7 @@ class WinningStatistics(private val lottoNumbersList: List<List<Int>>, private v
         return winningResult
     }
 
-    fun setWinningPlaceValue(place: PLACING, winningResult: HashMap<PLACING, Int>) {
+    private fun setWinningPlaceValue(place: PLACING, winningResult: HashMap<PLACING, Int>) {
         var winningCount: Int = winningResult[place] ?: 0
         winningResult[place] = ++ winningCount
     }

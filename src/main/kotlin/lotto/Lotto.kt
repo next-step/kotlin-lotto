@@ -1,7 +1,5 @@
 package lotto
 
-import java.security.SecureRandom
-
 class Lotto(val price: Int) {
 
     val purchaseCount: Int
@@ -29,26 +27,13 @@ class Lotto(val price: Int) {
     }
 
     fun createNumbers(): List<Int> {
-        val randomNumbers = ArrayList<Int>()
-
-        (0 until NUMBERS_COUNT).map { addRandomNumber(randomNumbers) }
-
-        return randomNumbers
-    }
-
-    private fun addRandomNumber(randomNumbers: ArrayList<Int>) {
-        var randomNumber: Int
-
-        do {
-            randomNumber = SecureRandom.getInstanceStrong().nextInt(MAX_RANDOM_VALUE)
-        } while (randomNumbers.contains(randomNumber))
-
-        randomNumbers.add(randomNumber)
+        return (MIN_RANDOM_VALUE..MAX_RANDOM_VALUE).shuffled().take(6).sorted()
     }
 
     companion object {
         private const val BASE_PRICE = 1000
         private const val NUMBERS_COUNT = 6
+        private const val MIN_RANDOM_VALUE = 1
         private const val MAX_RANDOM_VALUE = 45
     }
 }
