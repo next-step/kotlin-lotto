@@ -34,8 +34,9 @@ object LottoOutputView {
         lottoStatistics.matchResult.toSortedMap(compareByDescending { it.ordinal }).map { result ->
             printLottoRuleResult(result.key, result.value)
         }
-        print("총 수익률은 ${lottoStatistics.rateOfReward}입니다.")
-        println("(기준이 1이기 때문에 결과적으로 ${getStringRateOfReward(lottoStatistics.rateOfReward)}라는 의미임)")
+        val rateOfReward = lottoStatistics.getRateOfReward()
+        print("총 수익률은 ${rateOfReward}입니다.")
+        println("(기준이 1이기 때문에 결과적으로 ${getStringRateOfReward(rateOfReward)}라는 의미임)")
     }
 
     /**
@@ -48,7 +49,6 @@ object LottoOutputView {
             else -> println("${rank.countOfMatch}개 일치 (${rank.winningMoney}원) - ${count}개")
         }
     }
-
 
     private fun getStringRateOfReward(rateOfReward: Double) = if (rateOfReward >= 1) "이익" else "손해"
 }
