@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.LottoFactory.LOTTE_PRICE
+import lotto.domain.LottoConstants.LOTTE_PRICE
 import lotto.domain.LottoNumber
 
 object LottoInputView {
