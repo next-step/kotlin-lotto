@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.Const
 import lotto.LottoMachine
 import lotto.WinningMachine
 import lotto.WinningStatistics
@@ -16,13 +17,13 @@ fun main() {
 
     val winningNumbersString = inputView.inputLastWeekNumbers()
     val winningMachine = WinningMachine(winningNumbersString)
+    val winningResult = winningMachine.winningResult(lottoList)
 
-    val winningStatistics = WinningStatistics(lottoList, winningMachine.winningNumbers)
-    val resultStatistics = winningStatistics.winningCheck()
+    val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
 
     resultView.printWinningStatisticsStart()
-    for (place in WinningStatistics.RANKING.values()) {
-        resultView.printWinningStatistics(place, resultStatistics[place] ?: 0)
+    for (rank in Const.RANKING.values()) {
+        resultView.printWinningStatistics(rank, winningResult[rank] ?: 0)
     }
     resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn())
 }
