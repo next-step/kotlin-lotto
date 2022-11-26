@@ -17,7 +17,7 @@ class LottoTest : StringSpec({
             LottoNumber(6)
         )
         // when
-        val grade = lotto.scratch(LottoNumbers(winningNumber))
+        val grade = lotto.scratch(LottoNumbers(winningNumber), LottoNumber(10))
         // then
         grade shouldBe LottoGrade.FIST_GRADE
     }

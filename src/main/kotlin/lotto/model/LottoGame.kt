@@ -19,8 +19,8 @@ class LottoGame(
         }
     }
 
-    fun draw(winningNumber: LottoNumbers): List<LottoGrade> {
-        return lottos.map { it.scratch(winningNumber) }.toList()
+    fun draw(winningNumber: LottoNumbers, plusNumber: LottoNumber): List<LottoGrade> {
+        return lottos.map { it.scratch(winningNumber, plusNumber) }.toList()
     }
 
     fun getLottos() = lottos.toList()

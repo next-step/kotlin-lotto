@@ -19,13 +19,13 @@ class LottoGradeTest : StringSpec({
             6 to LottoGrade.FIST_GRADE
         ).forAll() {
             val (correctNumber, grade) = it
-            LottoGrade.find(correctNumber) shouldBe grade
+            LottoGrade.find(correctNumber, false) shouldBe grade
         }
     }
 
-    "로또 등급은 맞춘 갯수가 없는경우 에러를 반환한다"{
+    "로또 등급은 맞춘 갯수가 없는경우 에러를 반환한다" {
         shouldThrow<IllegalArgumentException> {
-            LottoGrade.find(10)
+            LottoGrade.find(10, false)
         }.shouldHaveMessage("로또 등급을 찾을 수 없습니다")
     }
 })

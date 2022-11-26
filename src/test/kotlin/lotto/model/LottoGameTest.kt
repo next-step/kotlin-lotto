@@ -29,7 +29,8 @@ class LottoGameTest : StringSpec({
                     LottoNumber(5),
                     LottoNumber(6)
                 )
-            )
+            ),
+            LottoNumber(10)
         )
         // then
         drawResult.forEach {

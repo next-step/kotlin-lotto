@@ -18,7 +18,7 @@ class LottoGameController {
         val winningNumber: List<Int> = inputWinningNumber()
 
         lottoGame.getLottos()
-        val drawResult = lottoGame.draw(LottoNumbers(winningNumber.map { LottoNumber(it) }))
+        val drawResult = lottoGame.draw(LottoNumbers(winningNumber.map { LottoNumber(it) }), LottoNumber(1))
 
         resultLottoWinner(LottoStat(drawResult, lottoAmount))
     }
