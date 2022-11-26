@@ -23,4 +23,9 @@ class WinningResultTest : StringSpec({
             winningResult.getCount(winningPrize) shouldBe count
         }
     }
+
+    "당첨 결과값에 따라 구매 비용 대비 수익률을 계산한다." {
+        val winningResult = WinningResult(mapOf(WinningPrize.THIRD to 1))
+        winningResult.rateOfReturn(10_000) shouldBe 5
+    }
 })
