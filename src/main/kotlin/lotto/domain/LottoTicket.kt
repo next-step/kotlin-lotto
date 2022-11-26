@@ -1,6 +1,5 @@
 package lotto.domain
 
-private const val NUMBER_SIZE = 6
 
 class LottoTicket(
     val numbers: Set<LottoNumber>
@@ -25,11 +24,6 @@ class LottoTicket(
     private fun hasNotEqualNumber() = numbers.toSet().size == numbers.size
 
     companion object {
-        fun randomTicket(): LottoTicket {
-            return LottoTicket(
-                (LottoNumber.MIN_NUMBER..LottoNumber.MAX_NUMBER).shuffled().subList(0, NUMBER_SIZE)
-                    .map { LottoNumber.of(it) }
-            )
-        }
+        const val NUMBER_SIZE = 6
     }
 }

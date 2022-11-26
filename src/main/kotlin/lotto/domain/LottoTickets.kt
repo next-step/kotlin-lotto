@@ -18,14 +18,4 @@ class LottoTickets(
             it.matchScratch(winningTicket)
         }.groupingBy { it }.eachCount()
     }
-
-    companion object {
-        fun randomTickets(count: Int): LottoTickets {
-            require(count > 0) { "$count 는 양수만 올 수 있어요." }
-
-            return LottoTickets(
-                (0 until count).map { LottoTicket.randomTicket() }
-            )
-        }
-    }
 }

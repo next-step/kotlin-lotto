@@ -12,6 +12,7 @@ class AwardResults(
     }
 
     fun matchCount(award: Award): Int {
-        return items.count { it.award == award }
+        return items.filter { it.award == award }
+            .sumOf { it.matchCount }
     }
 }
