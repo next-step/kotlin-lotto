@@ -2,11 +2,11 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
-import lotto.util.NumberGenerator
+import lotto.util.RandomNumberGenerator
 
 class LottoGeneratorTest : StringSpec({
 
-    val lottoGenerator = LottoGenerator(NumberGenerator())
+    val lottoGenerator = LottoGenerator(RandomNumberGenerator())
 
     "로또 생성 개수 확인 테스트" {
         val inputSize = 24

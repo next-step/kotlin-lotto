@@ -9,8 +9,7 @@ import io.kotest.matchers.shouldBe
 class LottoStatisticsTest : StringSpec({
     "수익률 테스트 " {
         val payment = 15000
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val lottoResult = LottoResult(lotto, 3, 5000)
+        val lottoResult = LottoResult(3, 5000)
 
         val expectedResult = 0.33
 
@@ -20,34 +19,33 @@ class LottoStatisticsTest : StringSpec({
 
     "당첨자 통계 결과 테스트" {
         val payment = 15000
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         forAll(
             row(
-                LottoResult(lotto, 2, 0),
+                LottoResult(2, 0),
                 listOf(
-                    LottoStatisticsResult(3, 5000, 0),
-                    LottoStatisticsResult(4, 50000, 0),
-                    LottoStatisticsResult(5, 1500000, 0),
-                    LottoStatisticsResult(6, 2000000000, 0),
+                    LottoStatisticsResult(WinLottoPrize.FIRST, 0),
+                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
+                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
+                    LottoStatisticsResult(WinLottoPrize.FOURTH, 0),
                 )
             ),
             row(
-                LottoResult(lotto, 3, 5000),
+                LottoResult(3, 5000),
                 listOf(
-                    LottoStatisticsResult(3, 5000, 1),
-                    LottoStatisticsResult(4, 50000, 0),
-                    LottoStatisticsResult(5, 1500000, 0),
-                    LottoStatisticsResult(6, 2000000000, 0),
+                    LottoStatisticsResult(WinLottoPrize.FIRST, 0),
+                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
+                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
+                    LottoStatisticsResult(WinLottoPrize.FOURTH, 1),
                 )
             ),
             row(
-                LottoResult(lotto, 6, 2000000000),
+                LottoResult(6, 2000000000),
                 listOf(
-                    LottoStatisticsResult(3, 5000, 0),
-                    LottoStatisticsResult(4, 50000, 0),
-                    LottoStatisticsResult(5, 1500000, 0),
-                    LottoStatisticsResult(6, 2000000000, 1),
+                    LottoStatisticsResult(WinLottoPrize.FIRST, 1),
+                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
+                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
+                    LottoStatisticsResult(WinLottoPrize.FOURTH, 0),
                 )
             )
         ) { lottoResult, expected ->
