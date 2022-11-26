@@ -1,8 +1,6 @@
-import calculator.domain.Expression
-import calculator.domain.StringAddCalculator
-import calculator.view.InputView
+import lotto.model.LottoTicket
 
 fun main() {
-    val calculator = StringAddCalculator()
-    println(calculator.add(Expression(InputView().getUserInput())))
+    val lottoTicket = LottoTicket().make()
+    println(lottoTicket.size)
 }
