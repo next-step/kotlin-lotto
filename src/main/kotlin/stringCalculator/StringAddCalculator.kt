@@ -19,7 +19,7 @@ class StringAddCalculator {
         if (matchedCustomDelimiter == null) {
             return split(inputValue)
         }
-        val (numberString: String, delimiter: String) = matchedCustomDelimiter.destructured
+        val (delimiter: String, numberString: String) = matchedCustomDelimiter.destructured
         return split(numberString, delimiter)
     }
 
