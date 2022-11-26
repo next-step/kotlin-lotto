@@ -19,9 +19,8 @@ class StringAddCalculator {
         if (matchedCustomDelimiter == null) {
             return split(inputValue)
         }
-        val string = matchedCustomDelimiter.groupValues[2]
-        val delimiter = matchedCustomDelimiter.groupValues[1]
-        return split(string, delimiter)
+        val (numberString: String, delimiter: String) = matchedCustomDelimiter.destructured
+        return split(numberString, delimiter)
     }
 
     private fun split(string: String, delimiter: Regex = DEFAULT_DELIMITER_REGEX): List<String> = string.split(delimiter)
