@@ -24,7 +24,7 @@ internal class PurchaseAmountTest : BehaviorSpec({
         purchaseAmounts.forAll {
             val purchaseAmount = PurchaseAmount(it)
 
-            `when` ("구입 금액을 로또 1장의 가격으로 나눈 값과 구입할 수 있는 로또의 갯수가 같다면") {
+            `when`("구입 금액을 로또 1장의 가격으로 나눈 값과 구입할 수 있는 로또의 갯수가 같다면") {
                 val result = purchaseAmount.getNumberOfLotto()
                 val expectedResult = purchaseAmount.getAmount() / 1000
 
