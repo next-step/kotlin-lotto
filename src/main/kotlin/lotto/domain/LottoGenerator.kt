@@ -10,6 +10,6 @@ class LottoGenerator(
     }
 
     private fun randomNumber(): List<Int> {
-        return numberGenerator.random(Lotto.LOTTO_START_NUMBER, Lotto.LOTTO_END_NUMBER, Lotto.LOTTO_NUMBERS_SIZE)
+        return numberGenerator.generate(Lotto.LOTTO_START_NUMBER, Lotto.LOTTO_END_NUMBER, Lotto.LOTTO_NUMBERS_SIZE)
     }
 }
