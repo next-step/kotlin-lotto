@@ -11,6 +11,7 @@ fun main() {
     val inputPrice: Int = ConsoleInput.inputPrice()
     val lotto: Lotto = LottoMachine.create(inputPrice)
     ConsoleOutput.printLotto(lotto)
-    val winningNumbers: LottoNumbers = ConsoleInput.inputWinningNumbers2()
+    val winningNumbers: LottoNumbers = ConsoleInput.inputWinningNumbers()
     val result: WinningResult = lotto.matchWinningNumbers(winningNumbers)
+    ConsoleOutput.printWinningResult(result, result.rateOfReturn(inputPrice))
 }
