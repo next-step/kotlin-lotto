@@ -16,10 +16,12 @@ class LottoGradeTest : StringSpec({
             3 to LottoGrade.BASIC_GRADE,
             4 to LottoGrade.THIRD_GRADE,
             5 to LottoGrade.SECOND_GRADE,
+            5 to LottoGrade.SECOND_PLUS_GRADE,
             6 to LottoGrade.FIST_GRADE
         ).forAll() {
             val (correctNumber, grade) = it
-            LottoGrade.find(correctNumber, false) shouldBe grade
+            val matchPlus = grade == LottoGrade.SECOND_PLUS_GRADE
+            LottoGrade.find(correctNumber, matchPlus) shouldBe grade
         }
     }
 
