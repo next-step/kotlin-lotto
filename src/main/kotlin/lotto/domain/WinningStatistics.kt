@@ -22,6 +22,7 @@ data class WinningStatistics(
 
     fun calculateRateOfReturn(amount: PurchaseAmount): BigDecimal {
         val bigDecimalAmount = BigDecimal(amount.getAmount())
+        // TODO: decimal point place
         return getRewards().divide(bigDecimalAmount, 2, RATE_OF_RETURN_ROUNDING_MODE)
     }
 
