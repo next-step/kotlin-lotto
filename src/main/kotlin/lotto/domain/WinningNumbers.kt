@@ -2,8 +2,8 @@ package lotto.domain
 
 import lotto.LottoConstants.LOTTO_NUMBERS_SIZE
 
-data class WinningNumbers(private val numbers: LottoNumber = LottoNumber()) {
-    fun getSumMatchingNumbers(lotto: LottoNumber): Int {
+data class WinningNumbers(private val numbers: LottoNumbers = LottoNumbers()) {
+    fun getSumMatchingNumbers(lotto: LottoNumbers): Int {
         var sum = 0
         lotto.value.forEach {
             if (isContain(it)) sum++
@@ -28,7 +28,7 @@ data class WinningNumbers(private val numbers: LottoNumber = LottoNumber()) {
             verifySize(numbers)
             verifyDuplicate(numbers)
 
-            return WinningNumbers(LottoNumber(numbers))
+            return WinningNumbers(LottoNumbers(numbers))
         }
 
         private fun verifyValue(value: String): Int {

@@ -1,12 +1,12 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.Rank
 import lotto.domain.Rewards
 import kotlin.math.floor
 
 object ResultView {
-    fun printPurchasedLotto(myLotto: List<LottoNumber>) {
+    fun printPurchasedLotto(myLotto: List<LottoNumbers>) {
         myLotto.forEach {
             val sortedValue = it.value.sorted()
             println("[${sortedValue.joinToString(", ")}]")
