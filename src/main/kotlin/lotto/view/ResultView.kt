@@ -1,9 +1,6 @@
 package lotto.view
 
-import lotto.domain.Award
-import lotto.domain.LottoTicket
-import lotto.domain.LottoTickets
-import lotto.domain.TicketStore
+import lotto.domain.*
 
 object ResultView {
 
@@ -15,20 +12,18 @@ object ResultView {
         }
     }
 
-    fun printResults(tickets: LottoTickets, winningNumber: LottoTicket) {
+    fun printResults(awardResults: AwardResults) {
         println("당첨 통계")
         println("---------")
 
-        val awardCount = tickets.getResult(winningNumber)
 
         Award.values()
             .filter { it != Award.NON_PLACE }
             .forEach {
-                println("${it.matchCount}개 일치 (${it.prize}원)- ${awardCount[it] ?: 0}개")
+                println("${it.matchCount}개 일치 (${it.prize}원)- ${awardResults.matchCount(it)}개")
             }
 
-
-        print("총 수익률은 ${TicketStore.profitability(tickets, winningNumber)}입니다.")
+        print("총 수익률은 ${TicketStore.profitability(awardResults)}입니다.")
     }
 
     private fun ticketNumberToString(it: LottoTicket) = it.numbers.joinToString(prefix = "[", postfix = "]") { number -> number.value.toString() }

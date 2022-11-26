@@ -5,19 +5,21 @@ class LottoTickets(
 ) {
     fun count(): Int = items.size
 
-    fun benefitPrice(winningTicket: LottoTicket): Long {
-        return getResult(winningTicket).map { it.key.prize * it.value }.sum()
+    fun awardResults(winningTicket: LottoTicket): AwardResults {
+        return AwardResults(
+            Award.values().map {
+                AwardResult(it, groupByAward(winningTicket).getOrDefault(it, 0))
+            }
+        )
     }
 
-    fun getResult(winningTicket: LottoTicket): Map<Award, Int> {
+    private fun groupByAward(winningTicket: LottoTicket): Map<Award, Int> {
         return items.map {
             it.matchScratch(winningTicket)
         }.groupingBy { it }.eachCount()
     }
 
-
     companion object {
-
         fun randomTickets(count: Int): LottoTickets {
             require(count > 0) { "$count 는 양수만 올 수 있어요." }
 

@@ -12,9 +12,8 @@ object TicketStore {
         return LottoTickets.randomTickets(money / TICKET_PRICE)
     }
 
-    fun profitability(lottoTickets: LottoTickets, winningTicket: LottoTicket): Double {
-        val benefitPrice = lottoTickets.benefitPrice(winningTicket)
-        return (benefitPrice.toDouble() / (TICKET_PRICE * lottoTickets.count()))
+    fun profitability(awardResults: AwardResults): Double {
+        return awardResults.profitability(TICKET_PRICE)
     }
 
     fun createWinningTicket(numbers: List<Int>): LottoTicket {

@@ -14,7 +14,9 @@ fun main() {
 
 
     val winningTicket = TicketStore.createWinningTicket(numbers);
-    ResultView.printResults(tickets, winningTicket)
+
+    val awardResults = tickets.awardResults(winningTicket);
+    ResultView.printResults(awardResults)
 
 }
 

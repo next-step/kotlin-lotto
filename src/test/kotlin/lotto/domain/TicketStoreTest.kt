@@ -40,9 +40,10 @@ internal class TicketStoreTest {
             )
         )
         val winningTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val awardResults = lottoTickets.awardResults(winningTicket)
 
         // when
-        val profitability = TicketStore.profitability(lottoTickets, winningTicket);
+        val profitability = TicketStore.profitability(awardResults)
         // then
         assertThat(profitability).isEqualTo(5.0)
 
