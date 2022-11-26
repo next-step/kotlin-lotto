@@ -5,7 +5,7 @@ data class Rewards(private val _rewards: MutableList<Rank> = mutableListOf()) {
         get() = _rewards
 
     fun add(matches: Int) {
-        Rank.fromOrNull(matches)?.let {
+        Rank.valueOf(matches)?.let {
             _rewards.add(it)
         }
     }

@@ -7,7 +7,7 @@ internal class RankTest : BehaviorSpec({
     given("fromOfNull() 함수에") {
         `when`("numberOfMatch 에 있는 수를 인자로 넣으면") {
             val numberOfMatch = 3
-            val result = Rank.fromOrNull(numberOfMatch)
+            val result = Rank.valueOf(numberOfMatch)
 
             then("랭크(등수) 정보를 반환한다.") {
                 result shouldBe Rank.FOURTH
@@ -16,7 +16,7 @@ internal class RankTest : BehaviorSpec({
 
         `when`("numberOfMatch 에 없는 수를 인자로 넣으면") {
             val numberOfMatch = 1
-            val result = Rank.fromOrNull(numberOfMatch)
+            val result = Rank.valueOf(numberOfMatch)
 
             then("Null 을 반환한다.") {
                 result shouldBe null
