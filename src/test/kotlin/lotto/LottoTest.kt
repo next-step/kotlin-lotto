@@ -52,8 +52,8 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(3))
 
-        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.FOUR_PLACE) shouldBe true
-        winningStatistics.winningCheck()[WinningStatistics.PLACING.FOUR_PLACE] shouldBe 1
+        winningStatistics.winningCheck().containsKey(WinningStatistics.RANKING.FOURTH) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.RANKING.FOURTH] shouldBe 1
     }
 
     "발행한 로또에 대해서 당첨 통계: 4개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
@@ -62,8 +62,8 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(4))
 
-        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.THREE_PLACE) shouldBe true
-        winningStatistics.winningCheck()[WinningStatistics.PLACING.THREE_PLACE] shouldBe 1
+        winningStatistics.winningCheck().containsKey(WinningStatistics.RANKING.THIRD) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.RANKING.THIRD] shouldBe 1
     }
 
     "발행한 로또에 대해서 당첨 통계: 5개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
@@ -72,8 +72,8 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(5))
 
-        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.TWO_PLACE) shouldBe true
-        winningStatistics.winningCheck()[WinningStatistics.PLACING.TWO_PLACE] shouldBe 1
+        winningStatistics.winningCheck().containsKey(WinningStatistics.RANKING.SECOND) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.RANKING.SECOND] shouldBe 1
     }
 
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
@@ -82,8 +82,8 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
         val winningStatistics = WinningStatistics(lottoList, lottoList[0].publishNumbers.take(6))
 
-        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.ONE_PLACE) shouldBe true
-        winningStatistics.winningCheck()[WinningStatistics.PLACING.ONE_PLACE] shouldBe 1
+        winningStatistics.winningCheck().containsKey(WinningStatistics.RANKING.FIRST) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.RANKING.FIRST] shouldBe 1
     }
 
     "발행한 금액과 당첨 금액을 통해 수익률을 반환한다." {

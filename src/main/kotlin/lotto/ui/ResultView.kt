@@ -20,7 +20,7 @@ class ResultView {
         println("---------")
     }
 
-    fun printWinningStatistics(place: WinningStatistics.PLACING, winningCount: Int) {
+    fun printWinningStatistics(place: WinningStatistics.RANKING, winningCount: Int) {
         println("${ place.winningCount }개 일치 (${ place.winningPrice }원) - ${ winningCount }개")
     }
 

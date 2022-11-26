@@ -5,30 +5,30 @@ import kotlin.math.floor
 
 class WinningStatistics(private val lottoList: List<Lotto>, private val winningNumbers: List<Int>) {
 
-    private val winningResult = HashMap<PLACING, Int>()
+    private val winningResult = HashMap<RANKING, Int>()
 
-    enum class PLACING(val winningCount: Int, val winningPrice: Int) {
-        FOUR_PLACE(3, 5000), THREE_PLACE(4, 50000), TWO_PLACE(5, 1500000), ONE_PLACE(6, 2000000000)
+    enum class RANKING(val winningCount: Int, val winningPrice: Int) {
+        FOURTH(3, 5000), THIRD(4, 50000), SECOND(5, 1500000), FIRST(6, 2000000000)
     }
 
-    fun winningCheck(): HashMap<PLACING, Int> {
+    fun winningCheck(): HashMap<RANKING, Int> {
         winningResult.clear()
 
         lottoList.forEach { lotto ->
             val union = lotto.publishNumbers + winningNumbers
 
             when (union.size - union.distinct().size) {
-                PLACING.FOUR_PLACE.winningCount -> {
-                    setWinningPlaceValue(PLACING.FOUR_PLACE)
+                RANKING.FOURTH.winningCount -> {
+                    setWinningPlaceValue(RANKING.FOURTH)
                 }
-                PLACING.THREE_PLACE.winningCount -> {
-                    setWinningPlaceValue(PLACING.THREE_PLACE)
+                RANKING.THIRD.winningCount -> {
+                    setWinningPlaceValue(RANKING.THIRD)
                 }
-                PLACING.TWO_PLACE.winningCount -> {
-                    setWinningPlaceValue(PLACING.TWO_PLACE)
+                RANKING.SECOND.winningCount -> {
+                    setWinningPlaceValue(RANKING.SECOND)
                 }
-                PLACING.ONE_PLACE.winningCount -> {
-                    setWinningPlaceValue(PLACING.ONE_PLACE)
+                RANKING.FIRST.winningCount -> {
+                    setWinningPlaceValue(RANKING.FIRST)
                 }
             }
         }
@@ -36,7 +36,7 @@ class WinningStatistics(private val lottoList: List<Lotto>, private val winningN
         return winningResult
     }
 
-    private fun setWinningPlaceValue(place: PLACING) {
+    private fun setWinningPlaceValue(place: RANKING) {
         var winningCount: Int = winningResult[place] ?: 0
         winningResult[place] = ++ winningCount
     }
@@ -49,7 +49,7 @@ class WinningStatistics(private val lottoList: List<Lotto>, private val winningN
     private fun getWinningPrice(): Int {
         var winningPrice = 0
 
-        PLACING.values().forEach { place ->
+        RANKING.values().forEach { place ->
             val winningCount: Int = winningResult[place] ?: 0
             winningPrice += place.winningPrice * winningCount
         }

@@ -20,7 +20,7 @@ fun main() {
     val resultStatistics = winningStatistics.winningCheck()
 
     resultView.printWinningStatisticsStart()
-    for (place in WinningStatistics.PLACING.values()) {
+    for (place in WinningStatistics.RANKING.values()) {
         resultView.printWinningStatistics(place, resultStatistics[place] ?: 0)
     }
     resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn())

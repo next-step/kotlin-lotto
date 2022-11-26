@@ -1,6 +1,6 @@
 package lotto
 
-class LottoMachine(val price: Int) {
+class LottoMachine(price: Int) {
 
     val purchaseCount: Int
     lateinit var winningNumbers: List<Int>
