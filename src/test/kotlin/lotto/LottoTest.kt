@@ -45,4 +45,44 @@ class LottoTest : StringSpec({
 
         lotto.winningNumbers.size shouldBe 6
     }
+
+    "발행한 로또에 대해서 당첨 통계: 3개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
+        val lotto = Lotto(1000)
+
+        val lottoNumbers = lotto.getLottoList(1)
+        val winningStatistics = WinningStatistics(lottoNumbers, lottoNumbers[0].take(3))
+
+        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.FOUR_PLACE) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.PLACING.FOUR_PLACE] shouldBe 1
+    }
+
+    "발행한 로또에 대해서 당첨 통계: 4개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
+        val lotto = Lotto(1000)
+
+        val lottoNumbers = lotto.getLottoList(1)
+        val winningStatistics = WinningStatistics(lottoNumbers, lottoNumbers[0].take(4))
+
+        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.THREE_PLACE) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.PLACING.THREE_PLACE] shouldBe 1
+    }
+
+    "발행한 로또에 대해서 당첨 통계: 5개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
+        val lotto = Lotto(1000)
+
+        val lottoNumbers = lotto.getLottoList(1)
+        val winningStatistics = WinningStatistics(lottoNumbers, lottoNumbers[0].take(5))
+
+        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.TWO_PLACE) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.PLACING.TWO_PLACE] shouldBe 1
+    }
+
+    "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
+        val lotto = Lotto(1000)
+
+        val lottoNumbers = lotto.getLottoList(1)
+        val winningStatistics = WinningStatistics(lottoNumbers, lottoNumbers[0].take(6))
+
+        winningStatistics.winningCheck().containsKey(WinningStatistics.PLACING.ONE_PLACE) shouldBe true
+        winningStatistics.winningCheck()[WinningStatistics.PLACING.ONE_PLACE] shouldBe 1
+    }
 })
