@@ -33,16 +33,17 @@ internal class LottoNumbersTest : BehaviorSpec({
             }
         }
 
-
         `when`("중복이 있다면") {
-            val lottoNumbers = (listOf(
-                LottoNumber(2),
-                LottoNumber(33),
-                LottoNumber(33),
-                LottoNumber(33),
-                LottoNumber(33),
-                LottoNumber(33),
-            ))
+            val lottoNumbers = (
+                listOf(
+                    LottoNumber(2),
+                    LottoNumber(33),
+                    LottoNumber(33),
+                    LottoNumber(33),
+                    LottoNumber(33),
+                    LottoNumber(33),
+                )
+                )
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
                     LottoNumbers(lottoNumbers)
