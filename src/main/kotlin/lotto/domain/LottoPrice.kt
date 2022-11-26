@@ -3,9 +3,9 @@ package lotto.domain
 import lotto.domain.LottoBuyingStrategy.Companion.LOTTO_PRICE
 
 @JvmInline
-value class LottoPrice(private val amount: Int) : LottoBuyingStrategy {
+value class LottoPrice(internal val value: Int) : LottoBuyingStrategy {
     init {
-        require(amount >= LOTTO_PRICE) { "로또 구입 금액은 ${LOTTO_PRICE}원 이상이어야 합니다." }
+        require(value >= LOTTO_PRICE) { "로또 구입 금액은 ${LOTTO_PRICE}원 이상이어야 합니다." }
     }
 
     constructor(amount: String) : this(
@@ -13,6 +13,6 @@ value class LottoPrice(private val amount: Int) : LottoBuyingStrategy {
     )
 
     override fun count(): Int {
-        return amount / LOTTO_PRICE
+        return value / LOTTO_PRICE
     }
 }
