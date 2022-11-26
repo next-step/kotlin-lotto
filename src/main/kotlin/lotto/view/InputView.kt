@@ -6,7 +6,7 @@ import lotto.domain.WinningNumbers
 object InputView {
     fun getPurchaseAmount(): PurchaseAmount {
         println("구입 금액을 입력해 주세요.")
-        return PurchaseAmount.from(readln())
+        return PurchaseAmount(readln().toInt())
     }
 
     fun getWinningNumbers(): WinningNumbers {
