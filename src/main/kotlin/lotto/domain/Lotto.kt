@@ -9,7 +9,9 @@ class Lotto(val numbers: Set<LottoNumber> = createLottoNumbers()) {
         require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 당첨 번호는 ${LOTTO_NUMBER_COUNT}개입니다." }
     }
 
-    fun matchingCount(lottoNumbers: Lotto): Int = numbers.count { lottoNumbers.numbers.contains(it) }
+    fun matchingCount(lottoNumbers: Lotto): Int = numbers.count { lottoNumbers.contains(it) }
+
+    fun contains(lottoNumber: LottoNumber): Boolean = this.numbers.contains(lottoNumber)
 
     companion object {
         fun createLottoNumbers(): Set<LottoNumber> =
