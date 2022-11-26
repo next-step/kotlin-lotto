@@ -10,20 +10,20 @@ class LottoStoreTest : StringSpec({
     val lottoStore = LottoStore(LottoMachine)
 
     "1,000 미만으로 로또 구입할땐 예외가 발생한다." {
-        val amount = 10
+        val cash = Cash(10)
 
         shouldThrow<IllegalArgumentException> {
-            lottoStore.buyLotto(amount)
+            lottoStore.buyLotto(cash)
         }
     }
 
     "로또 한장의 가격은 1,000 원이다." {
         forAll(
-            row(1_000, 1),
-            row(12_000, 12),
-            row(14_000, 14),
-        ) { amount, lottoCount ->
-            lottoStore.buyLotto(amount) shouldHaveSize lottoCount
+            row(Cash(1_000), 1),
+            row(Cash(12_000), 12),
+            row(Cash(14_000), 14),
+        ) { cash, lottoCount ->
+            lottoStore.buyLotto(cash) shouldHaveSize lottoCount
         }
     }
 })

@@ -16,4 +16,7 @@ object LottoMachine : LottoGenerator {
 
         return Lotto(lottoNumbers)
     }
+
+    fun pay(cash: Cash, purchasesCount: Int): Pair<Int, Cash> =
+        purchasesCount to cash.play(Lotto.PRICE * purchasesCount)
 }
