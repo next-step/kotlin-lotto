@@ -4,6 +4,8 @@ import lotto.util.NumberUtil
 
 object LottoStatistics {
 
+    private const val EARNING_RATE_DECIMAL_PLACE = 2
+
     fun statistics(inputPayment: Int, lottoResults: List<LottoResult>): LottoStatisticsTotal {
         val winLottoList = lottoResults.filter { hasPrizeMoney(it) }
         val earningRate = earningRate(inputPayment, winLottoList)
@@ -19,7 +21,7 @@ object LottoStatistics {
     private fun earningRate(inputPayment: Int, winLottoList: List<LottoResult>): Double {
         val totalPrizeMoney = calculatePrizeMoney(winLottoList)
         val earningRate = totalPrizeMoney.toDouble() / inputPayment.toDouble()
-        return NumberUtil.floor(earningRate, 2)
+        return NumberUtil.floor(earningRate, EARNING_RATE_DECIMAL_PLACE)
     }
 
     private fun calculatePrizeMoney(winLottoList: List<LottoResult>) = winLottoList.sumOf { it.prizeMoney }
