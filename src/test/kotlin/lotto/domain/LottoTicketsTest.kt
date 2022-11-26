@@ -1,5 +1,6 @@
 package lotto.domain
 
+import fixture.WinningTicketFixture.winningTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -29,7 +30,7 @@ internal class LottoTicketsTest {
             )
         )
 
-        val winningTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val winningTicket = winningTicket(1, 2, 3, 4, 5, 6)
 
         // when
         val result = lottoTickets.awardResults(winningTicket)

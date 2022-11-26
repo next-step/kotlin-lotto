@@ -14,8 +14,4 @@ object TicketStore {
         return awardResults.profitability(TICKET_PRICE)
     }
 
-    fun createWinningTicket(numbers: List<Int>): LottoTicket {
-        return LottoTicket(numbers.map { LottoNumber.of(it) })
-    }
-
 }

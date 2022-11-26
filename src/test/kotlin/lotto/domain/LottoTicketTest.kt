@@ -1,5 +1,6 @@
 package lotto.domain
 
+import fixture.WinningTicketFixture.winningTicket
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
@@ -31,10 +32,10 @@ class LottoTicketTest {
         // given
         val lottoNumbers = input.split(",").map { LottoNumber.of(it.toInt()) }
         val lottoTicket = LottoTicket(lottoNumbers)
-        val resultTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val winningTicket = winningTicket(1, 2, 3, 4, 5, 6)
 
         // when
-        val result = lottoTicket.matchScratch(resultTicket)
+        val result = lottoTicket.matchScratch(winningTicket)
 
         // then
         assertThat(result).isEqualTo(Award.NON_PLACE)
@@ -54,10 +55,10 @@ class LottoTicketTest {
     internal fun `번호 3개가 일치하면 FIFTH_PLACE 이다`() {
         // given
         val lottoTicket = LottoTicket(1, 2, 3, 10, 11, 12)
-        val resultTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val winningTicket = winningTicket(1, 2, 3, 4, 5, 6)
 
         // when
-        val result = lottoTicket.matchScratch(resultTicket)
+        val result = lottoTicket.matchScratch(winningTicket)
 
         // then
         assertThat(result).isEqualTo(Award.FIFTH_PLACE)
@@ -67,10 +68,10 @@ class LottoTicketTest {
     internal fun `번호 4개가 일치하면 FOURTH_PLACE 이다`() {
         // given
         val lottoTicket = LottoTicket(1, 2, 3, 4, 11, 12)
-        val resultTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val winningTicket = winningTicket(1, 2, 3, 4, 5, 6)
 
         // when
-        val result = lottoTicket.matchScratch(resultTicket)
+        val result = lottoTicket.matchScratch(winningTicket)
 
         // then
         assertThat(result).isEqualTo(Award.FOURTH_PLACE)
@@ -78,26 +79,40 @@ class LottoTicketTest {
 
 
     @Test
-    internal fun `번호 5개가 일치하면 THIRD_PLACE 이다`() {
+    internal fun `번호 5개가 일치하고 보너스 번호가 일치하지 않으면 THIRD_PLACE 이다`() {
         // given
         val lottoTicket = LottoTicket(1, 2, 3, 4, 5, 12)
-        val resultTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val winningTicket = winningTicket(listOf(1, 2, 3, 4, 5, 6), 45)
 
         // when
-        val result = lottoTicket.matchScratch(resultTicket)
+        val result = lottoTicket.matchScratch(winningTicket)
 
         // then
         assertThat(result).isEqualTo(Award.THIRD_PLACE)
     }
 
     @Test
+    internal fun `번호 5개가 일치하고 보너스 번호가 일치 하면 SECOND_PLACE 이다`() {
+        // given
+        val lottoTicket = LottoTicket(1, 2, 3, 4, 5, 12)
+        val winningTicket = winningTicket(listOf(1, 2, 3, 4, 5, 6), 12)
+
+        // when
+        val result = lottoTicket.matchScratch(winningTicket)
+
+        // then
+        assertThat(result).isEqualTo(Award.SECOND_PLACE)
+    }
+
+
+    @Test
     internal fun `번호 6개가 일치하면 FIRST_PLACE 이다`() {
         // given
         val lottoTicket = LottoTicket(1, 2, 3, 4, 5, 6)
-        val resultTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+        val winningTicket = winningTicket(1, 2, 3, 4, 5, 6)
 
         // when
-        val result = lottoTicket.matchScratch(resultTicket)
+        val result = lottoTicket.matchScratch(winningTicket)
 
         // then
         assertThat(result).isEqualTo(Award.FIRST_PLACE)
