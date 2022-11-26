@@ -16,7 +16,7 @@ class LottoTicket(
 
     fun matchScratch(lottoTicket: LottoTicket): Award {
         val matchCount = numbers.count { lottoTicket.containNumber(it) }
-        return Award.of(matchCount)
+        return Award.of(matchCount, false)
     }
 
     private fun containNumber(lottoNumber: LottoNumber): Boolean = numbers.contains(lottoNumber)
