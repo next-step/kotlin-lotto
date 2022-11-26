@@ -37,4 +37,12 @@ class LottoTest : StringSpec({
 
         lottoList.size shouldBe lotto.purchaseCount
     }
+
+    "입력 받은 문자열을 , 구분자를 통해 6개의 당첨 숫자로 반환한다" {
+        val lotto = Lotto(1000)
+
+        lotto.setWinningString("1, 2, 3, 4, 5, 6")
+
+        lotto.winningNumbers.size shouldBe 6
+    }
 })

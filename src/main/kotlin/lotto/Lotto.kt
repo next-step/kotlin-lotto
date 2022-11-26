@@ -5,10 +5,23 @@ import java.security.SecureRandom
 class Lotto(val price: Int) {
 
     val purchaseCount: Int
+    lateinit var winningNumbers: List<Int>
+        private set
 
     init {
         require(price % BASE_PRICE == 0) { "input incorrectly price" }
         purchaseCount = price / BASE_PRICE
+    }
+
+    fun setWinningString(winningString: String) {
+        val stringNumbers = winningString.split(",")
+        require(stringNumbers.isNotEmpty()) { "input string delimiter" }
+        require(stringNumbers.size == NUMBERS_COUNT) { "input string delimiter count" }
+
+        this.winningNumbers = stringNumbers.map { numberString -> numberString.trim().toInt() }
+            .filterNot { number -> number > MAX_RANDOM_VALUE || number <= 0 }
+
+        require(this.winningNumbers.size == 6) { "input string numbers range" }
     }
 
     fun getLottoList(purchaseCount: Int): List<List<Int>> {
