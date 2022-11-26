@@ -9,11 +9,14 @@ class NumberUtilTest : StringSpec({
 
     "소숫점 지정 자리수 이하 버림 테스트" {
         forAll(
+            // given
             row(1.2345, 0, 1.0),
             row(1.2345, 3, 1.234),
             row(1.2345, -1, 1.2345)
         ) { number, decimalPlace, expectedResult ->
+            // when
             val actualResult = NumberUtil.floor(number, decimalPlace)
+            // then
             actualResult shouldBe expectedResult
         }
     }
