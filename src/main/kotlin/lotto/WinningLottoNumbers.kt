@@ -1,6 +1,6 @@
 package lotto
 
-class WinningLottoNumbers(private var winningLottoNumbers: MutableList<LottoNumber>) {
+class WinningLottoNumbers(private val winningLottoNumbers: List<LottoNumber>) {
 
     fun win(inputLottoNumbers: LottoNumbers): Int {
         return inputLottoNumbers.contains(winningLottoNumbers = winningLottoNumbers)
