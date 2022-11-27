@@ -8,9 +8,11 @@ object NumbersExtractor {
     fun run(text: String?): List<Number> = if (text.isNullOrBlank()) {
         listOf(Number.zero())
     } else {
-        extractDelimiter(text).map { char ->
-            Number.of(char)
-        }
+        extractNumber(text)
+    }
+
+    private fun extractNumber(text: String): List<Number> = removeDelimiter(text).map { char ->
+        Number.of(char)
     }
 
     private fun removeDelimiter(text: String): List<String> {
