@@ -40,6 +40,11 @@ class LottoTest {
         }
     }
 
+    @Test
+    fun `toString()은 로또의 numbers 배열을 출력한다`() {
+        assertThat(Lotto(listOf(1, 2, 3, 4, 5, 6)).toString()).isEqualTo(listOf(1, 2, 3, 4, 5, 6).toString())
+    }
+
     companion object {
         @JvmStatic
         fun generateUnder6Source(): List<Arguments> {
