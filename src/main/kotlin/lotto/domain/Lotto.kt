@@ -16,6 +16,7 @@ data class Lotto(val lottoNumbers: Set<LottoNumber>) {
     companion object {
         private const val MAXIMUM_LOTTO_SIZE = 6
         private const val INVALID_LOTTO_SIZE_ERROR_MESSAGE = "로또 번호는 6개의 숫자여야 합니다."
+
         fun createRandom(): Lotto {
             return Lotto(LottoNumbers.makeRandomLottoNumbers())
         }
