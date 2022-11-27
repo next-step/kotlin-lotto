@@ -3,6 +3,7 @@ package lotto
 import lotto.controller.LottoGame
 import lotto.model.LottoTicket
 import lotto.model.Quantity
+import lotto.model.WinnerNumber
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -39,6 +40,13 @@ internal class LottoTest {
     @Test
     fun `구입 금액에 맞는 수량만큼 발행한다`() {
         assertEquals(10, LottoGame().purchaseLottoTicket(10).size)
+    }
+
+    @Test
+    fun `지난 주 당첨 번호 숫자가 아니면 예외가 발생한다`() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            WinnerNumber("A")
+        }
     }
 
     companion object {
