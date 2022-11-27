@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.controller.LottoGame
 import lotto.model.LottoTicket
 import lotto.model.Quantity
 import org.junit.jupiter.api.Assertions
@@ -11,7 +12,7 @@ internal class LottoTest {
     @Test
     fun `임의의 6개 숫자를 중복없이 생성한다`() {
         val testTicket = LottoTicket().make()
-        assertEquals(LOTTO_NUMBER_SIZE, testTicket.toSet().size)
+        assertEquals(LOTTO_NUMBER_SIZE, testTicket.getLottoTicketNumbers().toSet().size)
     }
 
     @Test
@@ -33,6 +34,11 @@ internal class LottoTest {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             Quantity("1200")
         }
+    }
+
+    @Test
+    fun `구입 금액에 맞는 수량만큼 발행한다`() {
+        assertEquals(10, LottoGame().purchaseLottoTicket(10).size)
     }
 
     companion object {

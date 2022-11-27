@@ -1,8 +1,12 @@
 package lotto.view
 
 class ResultView {
-    fun showResult(amount: String) {
-        println("${amount}개를 구매했습니다.")
+    fun showQuantity(quantity: Int) {
+        println("${quantity}개를 구매했습니다.")
+    }
+
+    fun showLottoTicket(lottoTicketNumber: List<Int>) {
+        println(lottoTicketNumber)
     }
 
     fun showWinningStatistics() {

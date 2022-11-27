@@ -3,14 +3,15 @@ package lotto.model
 import java.lang.IllegalArgumentException
 import java.lang.NumberFormatException
 
-class Quantity(amount: String) {
+class Quantity(money: String) {
     var quantity = 0
 
     init {
-        checkValidNumber(amount)
-        quantity = amount.toInt()
+        checkValidNumber(money)
+        quantity = money.toInt()
         checkMinimumAmount()
         checkUnit()
+        quantity = money.toInt() / 1000
     }
 
     private fun checkValidNumber(amount: String) {

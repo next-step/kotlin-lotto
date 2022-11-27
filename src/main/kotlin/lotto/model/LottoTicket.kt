@@ -3,11 +3,18 @@ package lotto.model
 class LottoTicket {
     private val lottoNumbers = mutableListOf<Int>()
 
-    fun make(): List<Int> {
+    init {
         while (isContinuable()) {
             selectNumbers()
         }
-        return lottoNumbers
+    }
+
+    fun make(): LottoTicket {
+        return LottoTicket()
+    }
+
+    fun getLottoTicketNumbers(): List<Int> {
+        return lottoNumbers.sorted()
     }
 
     private fun isContinuable(): Boolean {

@@ -1,7 +1,5 @@
-import lotto.model.Quantity
-import lotto.view.InputView
+import lotto.controller.LottoGame
 
 fun main() {
-    val quantity = Quantity(InputView().getAmountOfMoney()).quantity
-    println(quantity)
+    LottoGame().start()
 }
