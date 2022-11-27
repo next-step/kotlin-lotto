@@ -9,20 +9,16 @@ class Winner(
     }
 
     fun match(lottoList: List<Lotto>): Rank {
-        val matchStore: Map<Pair<Int, Boolean>, Int> = lottoList
-            .groupingBy { lotto ->
+        val rewards = lottoList
+            .mapNotNull { lotto ->
                 val matchCount = this.winningLotto.match(lotto, bonusLottoNumber).size
-                val matchBonus = lotto.contains(bonusLottoNumber)
+                val hasBonus = lotto.contains(bonusLottoNumber)
 
-                matchCount to matchBonus
+                Reward.from(matchCount = matchCount, hasBonus = hasBonus)
             }
+            .groupingBy { it }
             .eachCount()
 
-        val matchReward: Map<Reward, Int> = Reward.values().associateWith { reward ->
-            val matchResult = reward.matchCount to reward.hasBonus
-            matchStore[matchResult] ?: 0
-        }
-
-        return Rank(matchReward)
+        return Rank(rewards)
     }
 }
