@@ -1,11 +1,12 @@
 package lotto
 
-class LottoNumbers(var lottoNumbers: List<LottoNumber>) {
+import java.util.*
+
+class LottoNumbers(private val lottoNumbers: SortedSet<LottoNumber>) {
     init {
         check (lottoNumbers.size == LOTTO_NUMBER) {
             throw IllegalStateException("로또 숫자는 ${LOTTO_NUMBER}개 입니다.")
         }
-        lottoNumbers = lottoNumbers.sorted()
     }
 
     fun contains(winningLottoNumbers: List<LottoNumber>): Int {

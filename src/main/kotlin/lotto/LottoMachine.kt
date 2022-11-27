@@ -7,7 +7,7 @@ class LottoMachine {
         while (result.size < LOTTO_NUMBER_SIZE) {
             result.add(LottoNumber())
         }
-        return LottoNumbers(result.toList())
+        return LottoNumbers(result.toSortedSet())
     }
 
     companion object {
