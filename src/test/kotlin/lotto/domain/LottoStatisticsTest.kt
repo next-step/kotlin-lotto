@@ -8,9 +8,9 @@ import io.kotest.matchers.shouldBe
 class LottoStatisticsTest : StringSpec({
     "로또 수익률 계산 테스트" {
         forAll(
-            row(listOf(WinLottoPrize.FOURTH, WinLottoPrize.THIRD), 100000, 0.55),
-            row(listOf(WinLottoPrize.FOURTH), 5000, 1.0),
-            row(listOf(WinLottoPrize.THIRD), 5000, 10),
+            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), 100000, 0.55),
+            row(listOf(LottoRank.FIFTH), 5000, 1.0),
+            row(listOf(LottoRank.FOURTH), 5000, 10),
         ) { prizeList, payment, expectedEarningRate ->
             // given
             val lottoStatistics = LottoStatistics(prizeList)
@@ -24,17 +24,21 @@ class LottoStatisticsTest : StringSpec({
     "로또 당첨 통계 테스트" {
         // given
         val winLottoList = listOf(
-            WinLottoPrize.THIRD,
-            WinLottoPrize.THIRD,
-            WinLottoPrize.FIRST,
+            LottoRank.FIRST,
+            LottoRank.THIRD,
+            LottoRank.THIRD,
+            LottoRank.FIFTH,
+            LottoRank.FIFTH,
+            LottoRank.FIFTH,
         )
         val lottoStatistics = LottoStatistics(winLottoList)
 
         val expected = listOf(
-            LottoStatisticsResult(WinLottoPrize.FIRST, 1),
-            LottoStatisticsResult(WinLottoPrize.SECOND, 0),
-            LottoStatisticsResult(WinLottoPrize.THIRD, 2),
-            LottoStatisticsResult(WinLottoPrize.FOURTH, 0)
+            LottoStatisticsResult(LottoRank.FIRST, 1),
+            LottoStatisticsResult(LottoRank.SECOND, 0),
+            LottoStatisticsResult(LottoRank.THIRD, 2),
+            LottoStatisticsResult(LottoRank.FOURTH, 0),
+            LottoStatisticsResult(LottoRank.FIFTH, 3)
         )
 
         // when
@@ -44,7 +48,7 @@ class LottoStatisticsTest : StringSpec({
         actual.size shouldBe expected.size
         actual.forEachIndexed { index, result ->
             result.winLottoCount shouldBe expected[index].winLottoCount
-            result.winLottoPrize shouldBe expected[index].winLottoPrize
+            result.lottoRank shouldBe expected[index].lottoRank
         }
     }
 })

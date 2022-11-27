@@ -8,26 +8,28 @@ import io.kotest.matchers.shouldBe
 
 class LottoStatisticsServiceTest : StringSpec({
 
-    "당첨자 통계 결과 테스트" {
+    "당첨자 통계 통합 결과 테스트" {
         // given
         val payment = 15000
         forAll(
             row(
-                WinLottoPrize.FOURTH,
+                LottoRank.FOURTH,
                 listOf(
-                    LottoStatisticsResult(WinLottoPrize.FIRST, 0),
-                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
-                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
-                    LottoStatisticsResult(WinLottoPrize.FOURTH, 1),
+                    LottoStatisticsResult(LottoRank.FIRST, 0),
+                    LottoStatisticsResult(LottoRank.SECOND, 0),
+                    LottoStatisticsResult(LottoRank.THIRD, 0),
+                    LottoStatisticsResult(LottoRank.FOURTH, 1),
+                    LottoStatisticsResult(LottoRank.FIFTH, 0),
                 )
             ),
             row(
-                WinLottoPrize.FIRST,
+                LottoRank.FIRST,
                 listOf(
-                    LottoStatisticsResult(WinLottoPrize.FIRST, 1),
-                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
-                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
-                    LottoStatisticsResult(WinLottoPrize.FOURTH, 0),
+                    LottoStatisticsResult(LottoRank.FIRST, 1),
+                    LottoStatisticsResult(LottoRank.SECOND, 0),
+                    LottoStatisticsResult(LottoRank.THIRD, 0),
+                    LottoStatisticsResult(LottoRank.FOURTH, 0),
+                    LottoStatisticsResult(LottoRank.FIFTH, 0),
                 )
             )
         ) { lottoResult, expected ->
