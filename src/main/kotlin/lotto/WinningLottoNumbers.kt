@@ -6,7 +6,6 @@ class WinningLottoNumbers(private val winningLottoNumbers: List<LottoNumber>) {
         return inputLottoNumbers.contains(winningLottoNumbers = winningLottoNumbers)
     }
 
-
     override fun toString(): String {
         return "$winningLottoNumbers"
     }
