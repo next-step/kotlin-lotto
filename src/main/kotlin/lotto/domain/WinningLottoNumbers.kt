@@ -7,10 +7,12 @@ data class WinningLottoNumbers(
     init {
         require(!lottoNumbers.lottoNumbers.contains(bonusLottoNumbers)) { INVALID_BONUS_BALL_ERROR_MESSAGE }
     }
-    fun getAllNumberOfMatches(lotteries: List<LottoNumbers>): List<Int> {
-        return lotteries.map {
-            lottoNumbers.getNumberOfMatch(it)
+    fun getMatchResult(lotteries: List<LottoNumbers>): Map<Int, Boolean> {
+        val matchResult: MutableMap<Int, Boolean> = mutableMapOf()
+        lotteries.forEach {
+            matchResult[lottoNumbers.getNumberOfMatch(it)] = it.isMatchBonusLottoNumber(bonusLottoNumbers)
         }
+        return matchResult.toMap()
     }
 
     companion object {

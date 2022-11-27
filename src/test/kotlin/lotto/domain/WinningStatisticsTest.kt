@@ -31,20 +31,20 @@ internal class WinningStatisticsTest : BehaviorSpec({
                     LottoNumber(31),
                     LottoNumber(32),
                 )
-            )
+            ),
+            LottoNumber(5)
         )
         `when`("4장이 3개의 수가 일치하는 로또들의 통계를 내면") {
             val result = WinningStatistics.create(purchasedLottos, winningLottoNumbers)
 
             then("당첨 통계의 4등의 카운트는 4이다.") {
-                result.getNumberOfMatchCount(Rank.FOURTH) shouldBe 4
+                result.getNumberOfMatchCount(Rank.FIFTH) shouldBe 4
             }
 
             then("당첨금이 없는 수의 개수는 무시하므로 전체 카운트는 4다.") {
-                var sum = result.getNumberOfMatchCount(Rank.FOURTH)
-                sum += result.getNumberOfMatchCount(Rank.THIRD)
-                sum += result.getNumberOfMatchCount(Rank.SECOND)
-                sum += result.getNumberOfMatchCount(Rank.FIRST)
+                val sum = result.statistics
+                    .filter { it.key != Rank.MISS }
+                    .values.sum()
                 sum shouldBe 4
             }
         }
@@ -75,7 +75,8 @@ internal class WinningStatisticsTest : BehaviorSpec({
                     LottoNumber(31),
                     LottoNumber(32),
                 )
-            )
+            ),
+            LottoNumber(5)
         )
 
         `when`("4등 1장만 당첨 됐으면") {

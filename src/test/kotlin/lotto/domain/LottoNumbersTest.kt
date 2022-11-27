@@ -80,4 +80,24 @@ internal class LottoNumbersTest : BehaviorSpec({
             }
         }
     }
+
+    given("로또 번호들과 당첨 번호를 비교할 때") {
+        val lottoNumbers = LottoNumbers(listOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6),
+        ))
+
+        `when`("보너스 볼의 숫자와 일치한다면") {
+            val bonusBall = LottoNumber(1)
+            val result = lottoNumbers.isMatchBonusLottoNumber(bonusBall)
+
+            then("true 를 반환한다.") {
+                result shouldBe true
+            }
+        }
+    }
 })
