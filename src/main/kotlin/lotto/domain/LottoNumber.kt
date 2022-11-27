@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class LottoNumber(private val number: Int) {
+value class LottoNumber(val number: Int) {
     init {
         require(number in MIN_NUMBER..MAX_NUMBER) { INVALID_VALUE_ERROR_MESSAGE }
     }

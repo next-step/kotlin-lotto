@@ -25,7 +25,7 @@ object ResultView {
 
     fun printPurchasedLotto(myLotteries: List<LottoNumbers>) {
         myLotteries.forEach { lotto ->
-            val sortedValue = lotto.lottoNumbers.sortedWith(compareBy { it.toString() })
+            val sortedValue = lotto.lottoNumbers.sortedWith(compareBy { it.number })
             println("[${sortedValue.joinToString(", ")}]")
         }
     }
