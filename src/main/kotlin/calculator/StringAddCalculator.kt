@@ -29,6 +29,6 @@ class StringAddCalculator {
     }
 
     companion object {
-        const val DEFAULT_RESULT_VALUE = 0
+        private const val DEFAULT_RESULT_VALUE = 0
     }
 }
