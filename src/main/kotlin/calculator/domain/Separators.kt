@@ -1,4 +1,4 @@
-package domain
+package calculator.domain
 
 class Separators(private val separators: MutableList<Char> = DEFAULT_SEPARATORS) {
     val value: List<Char>

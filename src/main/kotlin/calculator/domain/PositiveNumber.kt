@@ -1,6 +1,4 @@
-package domain
-
-import java.lang.RuntimeException
+package calculator.domain
 
 @JvmInline
 value class PositiveNumber(private val number: Int) {
@@ -8,9 +6,7 @@ value class PositiveNumber(private val number: Int) {
         get() = number
 
     init {
-        if (number < ZERO) {
-            throw RuntimeException(RUNTIME_EXCEPTION_ERROR_MESSAGE)
-        }
+        require(number > ZERO) { RUNTIME_EXCEPTION_ERROR_MESSAGE }
     }
 
     companion object {
