@@ -1,4 +1,6 @@
-package lotto
+package lotto.views
+
+import lotto.domain.Lotto
 
 class ResultView {
 

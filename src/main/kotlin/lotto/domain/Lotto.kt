@@ -1,8 +1,8 @@
-package lotto
+package lotto.domain
 
 data class Lotto(val numbers: List<Int>) {
 
-    val value = Lotto.value
+    val value = Companion.value
 
     init {
         require(numbers.size == 6)
