@@ -3,7 +3,7 @@ package calculator.interfaces.adapter
 import calculator.application.calculator.Calculator
 import calculator.application.parser.Parser
 import calculator.application.parser.impl.ParsingException
-import calculator.common.model.PositiveInteger
+import calculator.common.model.PositiveIntegers
 import calculator.interfaces.input.InputPlugin
 import calculator.interfaces.output.OutputPlugin
 
@@ -20,10 +20,10 @@ class CalculatorViewAdapter(
         outputPlugin.output("결과: $result")
     }
 
-    private fun queryNumber(): List<PositiveInteger> =
+    private fun queryNumber(): PositiveIntegers =
         try {
             val input = inputPlugin.inputPositiveInteger()
-            parser.parseToPositiveIntegerList(input)
+            PositiveIntegers(parser.parseToPositiveIntegerList(input))
         } catch (e: ParsingException) {
             outputPlugin.output(e.message)
             queryNumber()

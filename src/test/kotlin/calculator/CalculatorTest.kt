@@ -3,6 +3,7 @@ package calculator
 import calculator.application.calculator.Calculator
 import calculator.application.calculator.impl.StandardCalculator
 import calculator.common.model.PositiveInteger
+import calculator.common.model.PositiveIntegers
 import calculator.domain.operation.AdditionBinaryOperation
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -16,7 +17,7 @@ class CalculatorTest : StringSpec({
 
         calculator = StandardCalculator(AdditionBinaryOperation)
 
-        val result = calculator.multiplePlus(numberList)
+        val result = calculator.multiplePlus(PositiveIntegers(numberList))
         result shouldBe numberList.sumOf { positiveInteger -> positiveInteger.value }
     }
 })

@@ -2,6 +2,7 @@ package calculator
 
 import calculator.application.calculator.impl.StandardCalculator
 import calculator.application.parser.impl.DelimiterParser
+import calculator.common.model.PositiveIntegers
 import calculator.domain.operation.AdditionBinaryOperation
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
@@ -14,7 +15,7 @@ class SystemBddTest : BehaviorSpec({
     given("\"//;\\n1;2;3\"이 입력되었을 때") {
 
         val inputString = "//;\n1;2;3"
-        val numberList = parser.parseToPositiveIntegerList(inputString)
+        val numberList = PositiveIntegers(parser.parseToPositiveIntegerList(inputString))
 
         `when`("계산기가 연산을 하면") {
 
