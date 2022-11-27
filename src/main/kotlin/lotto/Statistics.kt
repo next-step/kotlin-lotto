@@ -18,7 +18,7 @@ class Statistics(val statistic: MutableMap<Int, Int?> = mutableMapOf()) {
     }
 
     fun statistic(allPrice: Int): Double {
-        return allPrice / sum()
+        return sum() / allPrice
     }
 
     private fun sum(): Double {
