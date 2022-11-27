@@ -10,7 +10,6 @@ class SplitTerms(
                 groupValues[1]
             }
 
-            println("create $terms")
             return if (terms != null) {
                 SplitTerms(listOf(TERMS_COMMA, TERMS_COLONS) + terms)
             } else {
