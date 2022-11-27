@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.view.ResultView.floorPowerOfTwo
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -32,10 +33,11 @@ class LottoResultTest {
     fun `수익률 계산 테스트`() {
         // given
         val amount = 14_000
-        val expected = LottoRank.FIFTH.winningMoney.toFloat() / amount
+        val expected = 0.35f
 
         // when
-        val actual = lottoResult.calculateProfitRate(amount)
+        val result = lottoResult.calculateProfitRate(amount)
+        val actual = floorPowerOfTwo(result)
 
         // then
         assertThat(actual).isEqualTo(expected)

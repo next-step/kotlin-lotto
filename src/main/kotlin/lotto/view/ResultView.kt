@@ -1,5 +1,7 @@
 package lotto.view
 
+import kotlin.math.floor
+
 object ResultView {
     private const val LOTTO_COUNT_MESSAGE = "개를 구매했습니다."
     private const val LOTTO_NUMBER_DELIMITER = ", "
@@ -33,6 +35,8 @@ object ResultView {
     }
 
     fun printProfitRate(profitRate: Float) {
-        println(LOTTO_RESULT_REVENUE_MESSAGE_PREFIX + String.format("%.2f", profitRate) + LOTTO_RESULT_REVENUE_MESSAGE_SUFFIX + if (profitRate < 1) LOTTO_RESULT_REVENUE_LOSS_MESSAGE else "")
+        println(LOTTO_RESULT_REVENUE_MESSAGE_PREFIX + floorPowerOfTwo(profitRate) + LOTTO_RESULT_REVENUE_MESSAGE_SUFFIX + if (profitRate < 1) LOTTO_RESULT_REVENUE_LOSS_MESSAGE else "")
     }
+
+    fun floorPowerOfTwo(result: Float) = floor(result * 100) / 100
 }
