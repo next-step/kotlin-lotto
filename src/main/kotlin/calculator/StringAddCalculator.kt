@@ -1,32 +1,34 @@
 package calculator
 
-object StringAddCalculator {
+class StringAddCalculator {
 
-    private const val DEFAULT_DELIMITER = ",:"
-
-    private const val CUSTOM_DELIMITER = "//(.)\n(.*)"
+    private val splitterFactory = SplitterFactory()
     fun add(text: String?): Int {
         if (text.isNullOrBlank()) {
-            return 0
+            return DEFAULT_RESULT_VALUE
         }
-        val result = Regex(CUSTOM_DELIMITER).find(text)
-        result?.let {
-            val customDelimiter = it.groupValues[1]
-            return sum(it.groupValues[2].split(customDelimiter))
-        }
-        return sum(text.split("[$DEFAULT_DELIMITER]".toRegex()))
+        val splitter = splitterFactory.getSplitter(text)
+        return sum(splitter.split(text))
     }
 
     private fun sum(tokens: List<String>): Int = tokens.sumOf { toInt(it) }
     private fun toInt(text: String): Int {
         try {
             val result = text.toInt()
-            if (result < 0) {
-                throw RuntimeException("입력값은 음수가 나올 수 없습니다.")
-            }
+            validatePlus(result)
             return result
         } catch (e: NumberFormatException) {
             throw RuntimeException("입력값은 숫자만 가능합니다.", e)
         }
+    }
+
+    private fun validatePlus(input: Int) {
+        if (input < 0) {
+            throw RuntimeException("입력값은 음수가 올수 없습니다.")
+        }
+    }
+
+    companion object {
+        const val DEFAULT_RESULT_VALUE = 0
     }
 }
