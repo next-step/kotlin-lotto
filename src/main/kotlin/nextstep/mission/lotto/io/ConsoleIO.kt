@@ -1,12 +1,12 @@
 package nextstep.mission.lotto.io
 
+import nextstep.mission.lotto.io.dto.LottoDto
+import nextstep.mission.lotto.vo.LottoNumber
+import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningPrize.FIRST
 import nextstep.mission.lotto.vo.WinningPrize.FOURTH
 import nextstep.mission.lotto.vo.WinningPrize.SECOND
 import nextstep.mission.lotto.vo.WinningPrize.THIRD
-import nextstep.mission.lotto.io.dto.LottoDto
-import nextstep.mission.lotto.vo.LottoNumber
-import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningResult
 
 object ConsoleInput {

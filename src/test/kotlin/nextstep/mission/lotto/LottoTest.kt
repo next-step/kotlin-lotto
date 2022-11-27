@@ -8,7 +8,7 @@ import nextstep.mission.lotto.fixture.lottoNumbersListOf
 import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningResult
 
-class Lotto2Test : StringSpec({
+class LottoTest : StringSpec({
 
     "당첨번호를 입력받아 통계를 반환한다." {
         val lottoNumbersList: List<LottoNumbers> = lottoNumbersListOf(
