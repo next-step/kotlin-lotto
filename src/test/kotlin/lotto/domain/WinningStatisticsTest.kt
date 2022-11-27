@@ -21,7 +21,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
                 )
             )
         )
-        val winningLottoNumbers = WinningLottoNumbers(
+        val winningLottoNumbers = WinningLotto(
             Lotto(
                 setOf(
                     LottoNumber(1),
@@ -65,7 +65,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
                 )
             )
         )
-        val winningLottoNumbers = WinningLottoNumbers(
+        val winningLottoNumbers = WinningLotto(
             Lotto(
                 setOf(
                     LottoNumber(21),

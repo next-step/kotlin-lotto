@@ -17,7 +17,7 @@ object ResultView {
         val result = Rank.values().filter { it != Rank.MISS }.sortedDescending()
         result.forEach {
             print("${it.numberOfMatch}개 일치")
-            if(it == Rank.SECOND) print(", 보너스 볼 일치")
+            if (it == Rank.SECOND) print(", 보너스 볼 일치")
             print(" (${it.winningMoney}원)- ${winningStatistics.getNumberOfMatchCount(it)}개\n")
         }
     }

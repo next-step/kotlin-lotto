@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 
-internal class WinningLottoNumbersTest : BehaviorSpec({
+internal class WinningLottoTest : BehaviorSpec({
     given("입력된 보너스 볼의 숫자가") {
         val bonusBall = LottoNumber(3)
 
@@ -20,7 +20,7 @@ internal class WinningLottoNumbersTest : BehaviorSpec({
             )
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    WinningLottoNumbers(lottoNumbers = winningLottoNumbers, bonusLottoNumbers = bonusBall)
+                    WinningLotto(lottoNumbers = winningLottoNumbers, bonusLottoNumbers = bonusBall)
                 }
             }
         }

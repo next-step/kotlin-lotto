@@ -3,7 +3,7 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.PurchaseAmount
-import lotto.domain.WinningLottoNumbers
+import lotto.domain.WinningLotto
 
 object InputView {
     private const val INVALID_INPUT_ERROR_MESSAGE = "로또 번호는 숫자만 입력할 수 있습니다."
@@ -12,7 +12,7 @@ object InputView {
         return PurchaseAmount(readln().toInt())
     }
 
-    fun getWinningLottoNumbers(): WinningLottoNumbers {
+    fun getWinningLottoNumbers(): WinningLotto {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val inputLottoNumbers = readln()
         val lottoNumbers = validateLottoNumbers(inputLottoNumbers)
@@ -20,7 +20,7 @@ object InputView {
         println("보너스 볼을 입력해 주세요.")
         val inputBonusBall = LottoNumber(readln().toInt())
 
-        return WinningLottoNumbers(lottoNumbers = lottoNumbers, bonusLottoNumbers = inputBonusBall)
+        return WinningLotto(lottoNumbers = lottoNumbers, bonusLottoNumbers = inputBonusBall)
     }
 
     private fun validateLottoNumbers(input: String): Lotto {
