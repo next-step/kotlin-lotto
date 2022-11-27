@@ -6,8 +6,8 @@ data class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
     }
     fun getLottoNumbers() = lottoNumbers
 
-    fun getNumberOfMatch(purchasedLottoNumbers: LottoNumbers): Int {
-        return purchasedLottoNumbers.lottoNumbers.count {
+    fun getNumberOfMatch(targetLottoNumbers: LottoNumbers): Int {
+        return targetLottoNumbers.lottoNumbers.count {
             this.lottoNumbers.contains(it)
         }
     }
