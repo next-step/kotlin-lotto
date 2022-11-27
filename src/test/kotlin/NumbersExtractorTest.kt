@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
-class OperandExtractorTest : BehaviorSpec({
+class NumbersExtractorTest : BehaviorSpec({
 
     val textForZero = listOf(null, "", " ")
     Given("빈 문자열 또는 null을 입력할 경우") {
