@@ -10,7 +10,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
             DEFAULT_LOTTO_NUMBERS,
             DEFAULT_LOTTO_NUMBERS,
             DEFAULT_LOTTO_NUMBERS,
-            LottoNumbers(
+            Lotto(
                 listOf(
                     LottoNumber(10),
                     LottoNumber(11),
@@ -22,7 +22,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
             )
         )
         val winningLottoNumbers = WinningLottoNumbers(
-            LottoNumbers(
+            Lotto(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -54,7 +54,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
         val purchaseAmount = PurchaseAmount(14000)
         val purchasedLotteries = MutableList(purchaseAmount.getNumberOfLotto() - 1) { DEFAULT_LOTTO_NUMBERS }
         purchasedLotteries.add(
-            LottoNumbers(
+            Lotto(
                 listOf(
                     LottoNumber(21),
                     LottoNumber(22),
@@ -66,7 +66,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
             )
         )
         val winningLottoNumbers = WinningLottoNumbers(
-            LottoNumbers(
+            Lotto(
                 listOf(
                     LottoNumber(21),
                     LottoNumber(22),
@@ -90,7 +90,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
 }) {
     companion object {
         private val DEFAULT_LOTTO_NUMBERS =
-            LottoNumbers(
+            Lotto(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),

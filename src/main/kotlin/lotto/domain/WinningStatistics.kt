@@ -25,9 +25,9 @@ data class WinningStatistics(
         private val INITIAL_STATISTICS = Rank.values().associateWith { INITIAL_COUNT }
         private val RATE_OF_RETURN_ROUNDING_MODE = RoundingMode.FLOOR
 
-        fun create(lottoNumbersList: List<LottoNumbers>, winningLottoNumbers: WinningLottoNumbers): WinningStatistics {
+        fun create(lottoNumbersList: List<Lotto>, winningLottoNumbers: WinningLottoNumbers): WinningStatistics {
             val matchResult = winningLottoNumbers.getMatchResult(lottoNumbersList)
-            val ranks = matchResult.map { Rank.valueOf(it.key, it.value) }
+            val ranks = matchResult.map { Rank.valueOf(it.first, it.second) }
 
             return WinningStatistics(statistics = makeStatistics(ranks))
         }
