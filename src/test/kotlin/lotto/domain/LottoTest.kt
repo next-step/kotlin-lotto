@@ -4,10 +4,10 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
-internal class LottoNumbersTest : BehaviorSpec({
+internal class LottoTest : BehaviorSpec({
     given("로또 번호를 생성할 때") {
         `when`("자동으로 생성되도록 한다면") {
-            val result = LottoNumbers.createRandom()
+            val result = Lotto.createRandom()
 
             then("중복없는 6개의 로또 번호를 생성한다.") {
                 result.lottoNumbers.distinct().size shouldBe 6
@@ -28,7 +28,7 @@ internal class LottoNumbersTest : BehaviorSpec({
                 )
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    LottoNumbers(lottoNumbers)
+                    Lotto(lottoNumbers)
                 }
             }
         }
@@ -46,14 +46,14 @@ internal class LottoNumbersTest : BehaviorSpec({
                 )
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    LottoNumbers(lottoNumbers)
+                    Lotto(lottoNumbers)
                 }
             }
         }
     }
 
     given("당첨 번호와 구입한 로또의 일치하는 수의 개수를 구할 때") {
-        val winningLottoNumbers = LottoNumbers(
+        val winningLottoNumbers = Lotto(
             listOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -64,7 +64,7 @@ internal class LottoNumbersTest : BehaviorSpec({
             )
         )
         `when`("3개가 일치한다면") {
-            val purchasedLottoNumbers = LottoNumbers(
+            val purchasedLottoNumbers = Lotto(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -82,14 +82,16 @@ internal class LottoNumbersTest : BehaviorSpec({
     }
 
     given("로또 번호들과 당첨 번호를 비교할 때") {
-        val lottoNumbers = LottoNumbers(listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6),
-        ))
+        val lottoNumbers = Lotto(
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+            )
+        )
 
         `when`("보너스 볼의 숫자와 일치한다면") {
             val bonusBall = LottoNumber(1)

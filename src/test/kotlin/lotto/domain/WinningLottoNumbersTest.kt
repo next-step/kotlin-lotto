@@ -8,7 +8,7 @@ internal class WinningLottoNumbersTest : BehaviorSpec({
         val bonusBall = LottoNumber(3)
 
         `when`("당첨 번호와 중복될 때") {
-            val winningLottoNumbers = LottoNumbers(
+            val winningLottoNumbers = Lotto(
                 listOf(
                     LottoNumber(3),
                     LottoNumber(4),

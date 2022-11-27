@@ -1,7 +1,7 @@
 package lotto.domain
 
 object LottoVendingMachine {
-    fun buy(numberOfLotto: Int): List<LottoNumbers> {
-        return List(numberOfLotto) { LottoNumbers.createRandom() }
+    fun buy(numberOfLotto: Int): List<Lotto> {
+        return List(numberOfLotto) { Lotto.createRandom() }
     }
 }
