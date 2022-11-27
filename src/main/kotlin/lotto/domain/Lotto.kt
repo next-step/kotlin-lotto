@@ -8,7 +8,7 @@ class Lotto(private val lotto:List<LottoBall>) {
     }
 
     companion object {
-        private const val LOTTO_SIZE = 6
+        const val LOTTO_SIZE = 6
     }
 
 }
