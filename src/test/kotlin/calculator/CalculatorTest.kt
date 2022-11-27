@@ -18,6 +18,6 @@ class CalculatorTest : StringSpec({
         calculator = StandardCalculator(AdditionBinaryOperation)
 
         val result = calculator.multiplePlus(PositiveIntegers(numberList))
-        result shouldBe numberList.sumOf { positiveInteger -> positiveInteger.value }
+        result shouldBe 46
     }
 })

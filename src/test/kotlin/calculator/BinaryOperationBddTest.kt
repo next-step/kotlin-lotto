@@ -18,7 +18,7 @@ class BinaryOperationBddTest : BehaviorSpec({
             val result = binaryOperation.operate(binaryOperationCommand)
 
             then("연산이 된다") {
-                result shouldBe firstNumber + secondNumber
+                result shouldBe 4
             }
         }
     }
