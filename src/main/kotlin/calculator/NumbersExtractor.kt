@@ -5,7 +5,7 @@ object NumbersExtractor {
     private val DEFAULT_DELIMITER = Regex("[,:]")
     private val CUSTOM_DELIMITER_SPECIFIER = Regex("//(.)\n(.*)")
 
-    fun extract(text: String?): List<Number> = if (text.isNullOrBlank()) {
+    fun run(text: String?): List<Number> = if (text.isNullOrBlank()) {
         listOf(Number.zero())
     } else {
         extractDelimiter(text).map { char ->
@@ -13,7 +13,7 @@ object NumbersExtractor {
         }
     }
 
-    private fun extractDelimiter(text: String): List<String> {
+    private fun removeDelimiter(text: String): List<String> {
         return CUSTOM_DELIMITER_SPECIFIER.find(text)
             ?.let {
                 val customDelimiter = it.groupValues[1]
