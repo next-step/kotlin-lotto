@@ -9,22 +9,22 @@ import io.kotest.matchers.shouldBe
 class InputNumbersTest : ExpectSpec({
 
     context("객체 생성") {
-        expect("커스텀 구분자가 있으면 해당 구분자로 구분한다.") {
-            val input = "//;\n1;2;3"
+        val input = listOf("15", "57")
+
+        expect("문자로 된 숫자 리스트를 입력하면 각각 InputNumber 객체로 만들고 해당 리스트를 가진다.") {
             val inputNumbers = InputNumbers.from(input)
 
             inputNumbers.values.map { inputNumber ->
                 inputNumber.value
-            } shouldBe listOf(1, 2, 3)
+            } shouldBe listOf(15, 57)
         }
+    }
 
-        expect("커스텀 구분자가 없으면 기본 구분자로 구분한다.") {
-            val input = "1,2:3,4:5"
-            val inputNumbers = InputNumbers.from(input)
-
-            inputNumbers.values.map { inputNumber ->
-                inputNumber.value
-            } shouldBe listOf(1, 2, 3, 4, 5)
+    context("fun addAll()") {
+        val input = listOf("15", "57")
+        val inputNumbers = InputNumbers.from(input)
+        expect("모든 값을 더해서 반환한다") {
+            inputNumbers.addAll() shouldBe 72
         }
     }
 })
