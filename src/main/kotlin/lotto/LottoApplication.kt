@@ -9,4 +9,6 @@ fun main() {
         println(drawList)
     }
 
+    inputView.inputLastWeekWinningNumbers()
+
 }
