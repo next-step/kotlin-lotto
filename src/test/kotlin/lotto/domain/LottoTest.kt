@@ -28,7 +28,7 @@ internal class LottoTest : BehaviorSpec({
                 )
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    Lotto(lottoNumbers)
+                    Lotto(lottoNumbers.toSet())
                 }
             }
         }
@@ -46,7 +46,7 @@ internal class LottoTest : BehaviorSpec({
                 )
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    Lotto(lottoNumbers)
+                    Lotto(lottoNumbers.toSet())
                 }
             }
         }
@@ -54,7 +54,7 @@ internal class LottoTest : BehaviorSpec({
 
     given("당첨 번호와 구입한 로또의 일치하는 수의 개수를 구할 때") {
         val winningLottoNumbers = Lotto(
-            listOf(
+            setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),
@@ -65,7 +65,7 @@ internal class LottoTest : BehaviorSpec({
         )
         `when`("3개가 일치한다면") {
             val purchasedLottoNumbers = Lotto(
-                listOf(
+                setOf(
                     LottoNumber(1),
                     LottoNumber(2),
                     LottoNumber(3),
@@ -83,7 +83,7 @@ internal class LottoTest : BehaviorSpec({
 
     given("로또 번호들과 당첨 번호를 비교할 때") {
         val lottoNumbers = Lotto(
-            listOf(
+            setOf(
                 LottoNumber(1),
                 LottoNumber(2),
                 LottoNumber(3),

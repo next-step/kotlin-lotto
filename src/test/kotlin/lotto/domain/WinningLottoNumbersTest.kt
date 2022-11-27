@@ -9,7 +9,7 @@ internal class WinningLottoNumbersTest : BehaviorSpec({
 
         `when`("당첨 번호와 중복될 때") {
             val winningLottoNumbers = Lotto(
-                listOf(
+                setOf(
                     LottoNumber(3),
                     LottoNumber(4),
                     LottoNumber(5),

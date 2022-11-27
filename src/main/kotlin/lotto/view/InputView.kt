@@ -26,7 +26,7 @@ object InputView {
     private fun validateLottoNumbers(input: String): Lotto {
         val strings = input.replace(" ", "").split(",")
         val lottoNumbers = strings.map { convertStringToLottoNumber(it) }
-        return Lotto(lottoNumbers)
+        return Lotto(lottoNumbers.toSet())
     }
 
     private fun convertStringToLottoNumber(value: String): LottoNumber {
