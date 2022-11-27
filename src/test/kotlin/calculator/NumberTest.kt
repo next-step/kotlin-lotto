@@ -1,6 +1,5 @@
 package calculator
 
-import calculator.Number
 import org.junit.jupiter.api.Test
 
 class NumberTest {

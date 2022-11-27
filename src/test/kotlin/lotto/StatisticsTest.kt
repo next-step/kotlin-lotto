@@ -1,7 +1,6 @@
 package lotto
 
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class StatisticsTest {

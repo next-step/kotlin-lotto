@@ -1,9 +1,9 @@
 package lotto
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class LottoNumberTest{
+class LottoNumberTest {
     @Test
     fun `데이터 대소 비교 확인`() {
         assertTrue(LottoNumber(3) < LottoNumber(4))
