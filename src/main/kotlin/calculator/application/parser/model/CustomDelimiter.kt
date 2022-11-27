@@ -6,10 +6,10 @@ class CustomDelimiter(
 
     companion object {
 
-        fun hasCustomDelimiter(inputString: String) = Regex(REGEX_PATTERN).find(inputString) != null
+        fun hasCustomDelimiter(inputString: String) = regex.find(inputString) != null
 
         fun findCustomDelimiters(inputString: String): Delimiter {
-            val delimiter = REGEX.find(inputString)?.groupValues?.get(1) ?: throw RuntimeException("구분자 조회 중 에러가 발생했습니다")
+            val delimiter = regex.find(inputString)?.groupValues?.get(1) ?: throw RuntimeException("구분자 조회 중 에러가 발생했습니다")
             return CustomDelimiter(delimiter)
         }
 
@@ -21,6 +21,6 @@ class CustomDelimiter(
         private const val CUSTOM_DELIMITER_SUFFIX = "\n"
         private const val REGEX_PATTERN = "$CUSTOM_DELIMITER_PREFIX(.*)$CUSTOM_DELIMITER_SUFFIX(.*)"
         private const val EMPTY_STRING = ""
-        private val REGEX = REGEX_PATTERN.toRegex()
+        private val regex = REGEX_PATTERN.toRegex()
     }
 }
