@@ -1,17 +1,19 @@
 package lotto.domain
 
-object LottoStatistics {
+import lotto.util.NumberUtil
 
-    fun statistics(inputPayment: Int, winLottoList: List<WinLottoPrize>): LottoStatisticsTotal {
-        val winLottoStatisticsResult = winLottoStatistics(winLottoList)
-        val lottoReward = LottoReward(winLottoList)
-        return LottoStatisticsTotal(
-            earningRate = lottoReward.earningRate(inputPayment),
-            winLottoStatisticsResult = winLottoStatisticsResult
-        )
+class LottoStatistics(
+    private val winLottoList: List<WinLottoPrize>
+) {
+    private val prizeList: List<Int> = winLottoList.map { it.prizeMoney }
+    private val totalPrize: Int = prizeList.sum()
+
+    fun earningRate(inputPayment: Int): Double {
+        val earningRate = totalPrize.toDouble() / inputPayment.toDouble()
+        return NumberUtil.floor(earningRate, EARNING_RATE_DECIMAL_PLACE)
     }
 
-    private fun winLottoStatistics(winLottoList: List<WinLottoPrize>): List<LottoStatisticsResult> {
+    fun winLottoStatistics(): List<LottoStatisticsResult> {
         val hitCountMap = winLottoList.groupBy { winLottoPrize: WinLottoPrize -> winLottoPrize.hitCount }
 
         return WinLottoPrize.values().map {
@@ -20,5 +22,9 @@ object LottoStatistics {
                 winLottoCount = hitCountMap.getOrDefault(it.hitCount, emptyList()).size
             )
         }
+    }
+
+    companion object {
+        private const val EARNING_RATE_DECIMAL_PLACE = 2
     }
 }

@@ -6,6 +6,7 @@ class LottoResultService(
     fun inquireStatistics(payment: Int, lottoList: List<Lotto>): LottoStatisticsTotal {
         val lottoWinner = LottoWinner(luckyNumbers)
         val winLottoList = lottoWinner.findWinLottoList(lottoList)
-        return LottoStatistics.statistics(payment, winLottoList)
+        val lottoStatisticsService = LottoStatisticsService(payment, winLottoList)
+        return lottoStatisticsService.statistics()
     }
 }
