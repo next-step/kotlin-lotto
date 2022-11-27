@@ -1,9 +1,7 @@
 package lotto.domain
 
-import lotto.domain.LottoBuyingStrategy.Companion.LOTTO_PRICE
-
 @JvmInline
-value class LottoPrice(internal val value: Int) : LottoBuyingStrategy {
+value class LottoPrice(internal val value: Int) {
     init {
         require(value >= LOTTO_PRICE) { "로또 구입 금액은 ${LOTTO_PRICE}원 이상이어야 합니다." }
     }
@@ -12,7 +10,11 @@ value class LottoPrice(internal val value: Int) : LottoBuyingStrategy {
         amount.toIntOrNull() ?: throw IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.")
     )
 
-    override fun count(): Int {
+    fun count(): Int {
         return value / LOTTO_PRICE
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
     }
 }

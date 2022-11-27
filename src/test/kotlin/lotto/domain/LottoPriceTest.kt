@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.domain.LottoBuyingStrategy.Companion.LOTTO_PRICE
+import lotto.domain.LottoPrice.Companion.LOTTO_PRICE
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
