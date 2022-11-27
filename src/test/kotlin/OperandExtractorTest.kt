@@ -18,62 +18,38 @@ class OperandExtractorTest : BehaviorSpec({
         }
     }
 
-    val textWithOneNumbers = listOf(
-        "1" to listOf(1),
-        "3" to listOf(3),
-        "7" to listOf(7)
-    )
+    val textWithOneNum = "1"
     Given("숫자 하나를 문자열로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자가 담긴 리스트가 반환한다.") {
-                textWithOneNumbers.forAll { (text, result) ->
-                    OperandExtractor.extractOperand(text) shouldBe result
-                }
+                OperandExtractor.extractOperand(textWithOneNum) shouldBe listOf(1)
             }
         }
     }
 
-    val textWithOneDelimiters = listOf(
-        "1,2" to listOf(1, 2),
-        "3,7,10" to listOf(3, 7, 10),
-        "100,200,300,400,500" to listOf(100, 200, 300, 400, 500)
-    )
+    val textWithComma = "1,2"
     Given("여러 숫자를 쉼표(,) 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                textWithOneDelimiters.forAll { (text, result) ->
-                    OperandExtractor.extractOperand(text) shouldBe result
-                }
+                OperandExtractor.extractOperand(textWithComma) shouldBe listOf(1, 2)
             }
         }
     }
 
-    val textWithTwoDelimiters = listOf(
-        "1,2:3" to listOf(1, 2, 3),
-        "3:7:10" to listOf(3, 7, 10),
-        "100:200,300:400,500" to listOf(100, 200, 300, 400, 500)
-    )
+    val textWithDefaultDelimiter = "1,2:3"
     Given("여러 숫자를 쉼표(,) 이외에 콜론(:)도 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                textWithTwoDelimiters.forAll { (text, result) ->
-                    OperandExtractor.extractOperand(text) shouldBe result
-                }
+                OperandExtractor.extractOperand(textWithDefaultDelimiter) shouldBe listOf(1, 2, 3)
             }
         }
     }
 
-    val textWithCustomDelimiters = listOf(
-        "//;\n1;2;3" to listOf(1, 2, 3),
-        "//@\n3@7@10" to listOf(3, 7, 10),
-        "//&\n100&200&300&400&500" to listOf(100, 200, 300, 400, 500)
-    )
+    val textWithCustomDelimiter = "//;\n1;2;3"
     Given("여러 숫자를 커스텀 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                textWithCustomDelimiters.forAll { (text, result) ->
-                    OperandExtractor.extractOperand(text) shouldBe result
-                }
+                OperandExtractor.extractOperand(textWithCustomDelimiter) shouldBe listOf(1, 2, 3)
             }
         }
     }
