@@ -5,11 +5,11 @@ object OperandExtractor {
     private val DEFAULT_DELIMITER = Regex("[,:]")
     private val CUSTOM_DELIMITER_SPECIFIER = Regex("//(.)\n(.*)")
 
-    fun extractOperand(text: String?): List<Int> = if (text.isNullOrBlank()) {
-        listOf(0)
+    fun extractOperand(text: String?): List<Number> = if (text.isNullOrBlank()) {
+        listOf(Number.zero())
     } else {
         extractDelimiter(text).map { char ->
-            char.toInt()
+            Number.of(char)
         }
     }
 

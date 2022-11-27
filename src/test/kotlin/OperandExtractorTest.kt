@@ -1,3 +1,4 @@
+import calculator.Number
 import calculator.OperandExtractor
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
@@ -8,11 +9,11 @@ class OperandExtractorTest : BehaviorSpec({
     val textForZero = listOf(null, "", " ")
     Given("빈 문자열 또는 null을 입력할 경우") {
         When("피연산자를 추출하면") {
-            Then("0이 담긴 리스트가 반환된다.") {
+            Then("숫자 0이 담긴 리스트가 반환된다.") {
                 textForZero.map {
                     OperandExtractor.extractOperand(it)
                 }.forAll {
-                    it shouldBe listOf(0)
+                    it shouldBe listOf(Number(0))
                 }
             }
         }
@@ -22,7 +23,7 @@ class OperandExtractorTest : BehaviorSpec({
     Given("숫자 하나를 문자열로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자가 담긴 리스트가 반환한다.") {
-                OperandExtractor.extractOperand(textWithOneNum) shouldBe listOf(1)
+                OperandExtractor.extractOperand(textWithOneNum) shouldBe listOf(Number(1))
             }
         }
     }
@@ -31,7 +32,7 @@ class OperandExtractorTest : BehaviorSpec({
     Given("여러 숫자를 쉼표(,) 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                OperandExtractor.extractOperand(textWithComma) shouldBe listOf(1, 2)
+                OperandExtractor.extractOperand(textWithComma) shouldBe listOf(Number(1), Number(2))
             }
         }
     }
@@ -40,7 +41,11 @@ class OperandExtractorTest : BehaviorSpec({
     Given("여러 숫자를 쉼표(,) 이외에 콜론(:)도 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                OperandExtractor.extractOperand(textWithDefaultDelimiter) shouldBe listOf(1, 2, 3)
+                OperandExtractor.extractOperand(textWithDefaultDelimiter) shouldBe listOf(
+                    Number(1),
+                    Number(2),
+                    Number(3)
+                )
             }
         }
     }
@@ -49,7 +54,11 @@ class OperandExtractorTest : BehaviorSpec({
     Given("여러 숫자를 커스텀 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                OperandExtractor.extractOperand(textWithCustomDelimiter) shouldBe listOf(1, 2, 3)
+                OperandExtractor.extractOperand(textWithCustomDelimiter) shouldBe listOf(
+                    Number(1),
+                    Number(2),
+                    Number(3)
+                )
             }
         }
     }
