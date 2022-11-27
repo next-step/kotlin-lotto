@@ -4,10 +4,10 @@ class PositiveIntegers(
     private val positiveIntegerList: List<PositiveInteger>
 ) {
 
-    fun multiplePlus(plusFunction: (PositiveInteger, PositiveInteger) -> PositiveInteger): PositiveInteger {
-        var result = PositiveInteger(0)
+    fun multipleOperation(operateFunction: (PositiveInteger, PositiveInteger) -> PositiveInteger, initValue: PositiveInteger): PositiveInteger {
+        var result = initValue
         for (number in positiveIntegerList) {
-            result = plusFunction(result, number)
+            result = operateFunction(result, number)
         }
         return result
     }

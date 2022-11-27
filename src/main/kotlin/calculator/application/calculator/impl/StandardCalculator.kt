@@ -11,7 +11,7 @@ class StandardCalculator(
 ) : Calculator {
 
     override fun multiplePlus(numbers: PositiveIntegers): Int {
-        return numbers.multiplePlus(plusFunction).value
+        return numbers.multipleOperation(operateFunction = plusFunction, initValue = PositiveInteger(PLUS_OPERATION_INIT_VALUE)).value
     }
 
     private val plusFunction: (PositiveInteger, PositiveInteger) -> PositiveInteger =
@@ -19,4 +19,8 @@ class StandardCalculator(
             val command = BinaryOperationCommand(leftArgument = firstNumber, rightArgument = secondNumber)
             return PositiveInteger(additionOperation.operate(command))
         }
+
+    companion object {
+        private const val PLUS_OPERATION_INIT_VALUE = 1
+    }
 }
