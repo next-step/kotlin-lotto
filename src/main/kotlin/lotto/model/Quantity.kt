@@ -10,6 +10,7 @@ class Quantity(amount: String) {
         checkValidNumber(amount)
         quantity = amount.toInt()
         checkMinimumAmount()
+        checkUnit()
     }
 
     private fun checkValidNumber(amount: String) {
@@ -22,5 +23,9 @@ class Quantity(amount: String) {
 
     private fun checkMinimumAmount() {
         require(quantity >= 1000) { "1000원 이상을 결제해주세요." }
+    }
+
+    private fun checkUnit() {
+        require(quantity % 1000 == 0) { "1000원 단위로 결제해주세요." }
     }
 }

@@ -28,6 +28,13 @@ internal class LottoTest {
         }
     }
 
+    @Test
+    fun `구입 금액이 1000원 단위가 아닐 경우 예외가 발생한다`() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            Quantity("1200")
+        }
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
     }
