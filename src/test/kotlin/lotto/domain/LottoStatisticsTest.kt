@@ -1,11 +1,27 @@
 package lotto.domain
 
+import lotto.util.ErrorCode
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoStatisticsTest {
+
+    @ParameterizedTest
+    @ValueSource(ints = [1, 2, 3, 4, 5, 6])
+    fun `init throw exception when winningLotto does not include bonusLottoNumber`(number: Int) {
+        val winningLottoNumbers = "1,2,3,4,5,6"
+        val winningLotto = LottoGenerator.generateLotto(winningLottoNumbers)
+        val bonusLottoNumber = LottoNumber(number)
+
+        val exception = assertThrows<IllegalArgumentException> {
+            LottoStatistics(winningLotto = winningLotto, bonusLottoNumber = bonusLottoNumber)
+        }
+
+        assertThat(exception.message).isEqualTo(ErrorCode.BONUS_LOTTO_NUMBER_EXCEPTION.errorMessage)
+    }
 
     @Test
     fun getWinningStatistics() {
@@ -13,32 +29,36 @@ internal class LottoStatisticsTest {
 
         val winningLottoNumbers = "1,2,3,4,5,6"
         val winningLotto = LottoGenerator.generateLotto(winningLottoNumbers)
-        val lottoStatistics = LottoStatistics(winningLotto)
+        val bonusLottoNumber = LottoNumber(7)
+        val lottoStatistics = LottoStatistics(winningLotto, bonusLottoNumber)
 
         val numbers = "1, 2, 3, 4, 5, 7"
-        val lottoCount: Long = 3
+        val lottoCount = 3L
         val lottoList = (1..lottoCount).map {
             LottoGenerator.generateLotto(numbers)
         }
 
-        val lottoMatchList = lottoStatistics.getWinningStatistics(lottoList)
+        val list = LottoList(lottoList)
 
-        val lottoMatch = lottoMatchList.first { it.matchNumber == matchNumber }
+        val lottoMatchList = lottoStatistics.getWinningStatistics(list)
 
-        assertThat(lottoMatch.matchCount).isEqualTo(lottoCount)
-        assertThat(lottoMatch.matchNumber).isEqualTo(matchNumber)
+        // 2등
+        val lottoMatch = lottoMatchList.first { it.lottoRank == LottoRank.SECOND_PLACE }
+
+        assertThat(lottoMatch.matchTotalCount).isEqualTo(lottoCount)
+        assertThat(lottoMatch.lottoRank.matchCount).isEqualTo(matchNumber)
     }
 
     @Test
     fun getProfit() {
         val winningLotto = LottoGenerator.generateLotto("1,2,3,4,5,6")
-        val lottoStatistics = LottoStatistics(winningLotto)
+        val bonusLottoNumber = LottoNumber(7)
+        val lottoStatistics = LottoStatistics(winningLotto, bonusLottoNumber)
 
         val lottoMatchList = mutableListOf<LottoMatch>()
         val forthPlaceMatch = LottoMatch(
-            matchNumber = 3,
-            reward = 5000,
-            matchCount = 1
+            lottoRank = LottoRank.FIFTH_PLACE,
+            matchTotalCount = 1
         )
         lottoMatchList.add(forthPlaceMatch)
 
@@ -54,7 +74,9 @@ internal class LottoStatisticsTest {
     @ValueSource(doubles = [1.0, 1.1, 2.2])
     fun `isProfitable should be ture when profit greater and equal than 1`(profit: Double) {
         val winningLotto = LottoGenerator.generateLotto("1,2,3,4,5,6")
-        val lottoStatistics = LottoStatistics(winningLotto)
+        val bonusLottoNumber = LottoNumber(7)
+        val lottoStatistics = LottoStatistics(winningLotto, bonusLottoNumber)
+
         val result = lottoStatistics.isProfitable(profit)
 
         assertThat(result).isTrue
@@ -64,7 +86,9 @@ internal class LottoStatisticsTest {
     @ValueSource(doubles = [0.0, 0.2, 0.99])
     fun `isProfitable should be false when profit less than 1`(profit: Double) {
         val winningLotto = LottoGenerator.generateLotto("1,2,3,4,5,6")
-        val lottoStatistics = LottoStatistics(winningLotto)
+        val bonusLottoNumber = LottoNumber(7)
+        val lottoStatistics = LottoStatistics(winningLotto, bonusLottoNumber)
+
         val result = lottoStatistics.isProfitable(profit)
 
         assertThat(result).isFalse

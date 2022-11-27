@@ -8,24 +8,56 @@ import org.junit.jupiter.params.provider.ValueSource
 internal class LottoRankTest {
 
     @ParameterizedTest
-    @ValueSource(ints = [Int.MIN_VALUE, 0, 1, 2, 7, Int.MAX_VALUE])
-    fun `getReward should be zero when matchCount is not in 3~6`(matchCount: Int) {
-        val resultReward = LottoRank.getReward(matchCount)
+    @ValueSource(ints = [3, 4, 5, 6])
+    fun `valueOf return LottoRank`(matchCount: Int) {
+        val isBonus = false
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
 
-        assertThat(resultReward).isEqualTo(0L)
+        assertThat(lottoRank?.matchCount).isEqualTo(matchCount)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [0, 1, 2, Int.MAX_VALUE])
+    fun `valueOf return null when matchCount not in 3~6`(matchCount: Int) {
+        val isBonus = false
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
+
+        assertThat(lottoRank).isNull()
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = [true, false])
+    fun `valueOf return FOURTH_PLACE when matchCount 4`(isBonus: Boolean) {
+        val matchCount = 4
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
+
+        assertThat(lottoRank).isEqualTo(LottoRank.FOURTH_PLACE)
     }
 
     @Test
-    fun getRewardTest() {
-        val resultReward = LottoRank.getReward(6)
+    fun `valueOf return THIRD_PLACE when matchCount 6 and isBonus is false`() {
+        val isBonus = false
+        val matchCount = 5
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
 
-        assertThat(resultReward).isEqualTo(2000000000)
+        assertThat(lottoRank).isEqualTo(LottoRank.THIRD_PLACE)
     }
 
     @Test
-    fun getMatchCountList() {
-        val matchCountList = listOf(6, 5, 4, 3)
-        val resultMatchCountList = LottoRank.getMatchCountList()
-        assertThat(resultMatchCountList).isEqualTo(matchCountList)
+    fun `valueOf return SECOND_PLACE when matchCount 6 and isBonus is true`() {
+        val isBonus = true
+        val matchCount = 5
+        val lottoRank = LottoRank.valueOf(matchCount, isBonus)
+
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND_PLACE)
+    }
+
+    @Test
+    fun getMissing() {
+        val lottoRankList = setOf(LottoRank.THIRD_PLACE, LottoRank.SECOND_PLACE)
+        val missingResult = LottoRank.getMissing(lottoRankList)
+
+        val result = setOf(LottoRank.FOURTH_PLACE, LottoRank.FIRST_PLACE, LottoRank.FIFTH_PLACE)
+        assertThat(missingResult).isEqualTo(result)
     }
 }

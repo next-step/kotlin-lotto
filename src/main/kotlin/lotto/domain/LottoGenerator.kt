@@ -5,20 +5,18 @@ import lotto.util.ErrorCode
 object LottoGenerator {
     private val lottoNumbersRegex = """^[0-9,\s]*$""".toRegex()
     private const val SEPARATOR = ","
+
     fun generateLottoList(lottoCount: Long, numberGenerator: NumberGenerator): List<Lotto> =
         (1..lottoCount).map {
-            Lotto(
-                numberGenerator.generateLottoNumbers(
-                    LottoNumber.possibleNumbers,
-                    Lotto.LOTTO_NUMBER_COUNT
-                )
+            numberGenerator.generateLottoFromNumbers(
+                LottoNumber.possibleNumbers
             )
         }
 
     fun generateLotto(lottoNumbers: String): Lotto {
-        val lottoNumberList = validateLottoNumbers(lottoNumbers)
+        val lottoNumberSet = validateLottoNumbers(lottoNumbers).toMutableSet()
 
-        return Lotto(lottoNumberList)
+        return Lotto(lottoNumberSet)
     }
 
     private fun validateLottoNumbers(number: String): List<LottoNumber> {
