@@ -12,15 +12,19 @@ object InputView {
         return PurchaseAmount(readln().toInt())
     }
 
-    fun getWinningNumbers(): WinningLottoNumbers {
+    fun getWinningLottoNumbers(): WinningLottoNumbers {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        val input = readln()
+        val inputLottoNumbers = readln()
+        val lottoNumbers = validateLottoNumbers(inputLottoNumbers)
 
-        return WinningLottoNumbers(validateLottoNumbers(input))
+        println("보너스 볼을 입력해 주세요.")
+        val inputBonusBall = LottoNumber(readln().toInt())
+
+        return WinningLottoNumbers(lottoNumbers = lottoNumbers, bonusLottoNumbers = inputBonusBall)
     }
 
     private fun validateLottoNumbers(input: String): LottoNumbers {
-        val strings = input.split(", ")
+        val strings = input.replace(" ", "").split(",")
         val lottoNumbers = strings.map { convertStringToLottoNumber(it) }
         return LottoNumbers(lottoNumbers)
     }

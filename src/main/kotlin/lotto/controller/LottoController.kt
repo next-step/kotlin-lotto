@@ -14,7 +14,7 @@ class LottoController {
         val myLotteries = LottoVendingMachine.buy(purchaseCount)
         ResultView.printPurchasedLotto(myLotteries)
 
-        val winningLottoNumbers = InputView.getWinningNumbers()
+        val winningLottoNumbers = InputView.getWinningLottoNumbers()
         val winningStatistics = WinningStatistics.create(myLotteries, winningLottoNumbers)
         ResultView.printRewardsStatistics(winningStatistics)
 
