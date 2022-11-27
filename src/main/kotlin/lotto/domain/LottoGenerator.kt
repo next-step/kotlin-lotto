@@ -3,7 +3,7 @@ package lotto.domain
 class LottoGenerator {
 
     fun generate(): Lotto {
-        return Lotto(DEFAULT_RANGE.shuffled().subList(0, 6))
+        return Lotto(DEFAULT_RANGE.shuffled().subList(0, 6).sorted())
     }
 
     companion object {
