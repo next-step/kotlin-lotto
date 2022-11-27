@@ -1,9 +1,12 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.PurchaseAmount
 import lotto.domain.WinningLottoNumbers
 
 object InputView {
+    private const val INVALID_INPUT_ERROR_MESSAGE = "로또 번호는 숫자만 입력할 수 있습니다."
     fun getPurchaseAmount(): PurchaseAmount {
         println("구입 금액을 입력해 주세요.")
         return PurchaseAmount(readln().toInt())
@@ -11,6 +14,19 @@ object InputView {
 
     fun getWinningNumbers(): WinningLottoNumbers {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        return WinningLottoNumbers.from(readln())
+        val input = readln()
+
+        return WinningLottoNumbers(validateLottoNumbers(input))
+    }
+
+    private fun validateLottoNumbers(input: String): LottoNumbers {
+        val strings = input.split(", ")
+        val lottoNumbers = strings.map { convertStringToLottoNumber(it) }
+        return LottoNumbers(lottoNumbers)
+    }
+
+    private fun convertStringToLottoNumber(value: String): LottoNumber {
+        val number = value.toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_ERROR_MESSAGE)
+        return LottoNumber(number)
     }
 }
