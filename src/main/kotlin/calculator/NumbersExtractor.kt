@@ -1,6 +1,6 @@
 package calculator
 
-object OperandExtractor {
+object NumbersExtractor {
 
     private val DEFAULT_DELIMITER = Regex("[,:]")
     private val CUSTOM_DELIMITER_SPECIFIER = Regex("//(.)\n(.*)")

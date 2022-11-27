@@ -1,5 +1,5 @@
 import calculator.Number
-import calculator.OperandExtractor
+import calculator.NumbersExtractor
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
@@ -11,7 +11,7 @@ class OperandExtractorTest : BehaviorSpec({
         When("피연산자를 추출하면") {
             Then("숫자 0이 담긴 리스트가 반환된다.") {
                 textForZero.map {
-                    OperandExtractor.extractOperand(it)
+                    NumbersExtractor.extractOperand(it)
                 }.forAll {
                     it shouldBe listOf(Number(0))
                 }
@@ -23,7 +23,7 @@ class OperandExtractorTest : BehaviorSpec({
     Given("숫자 하나를 문자열로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자가 담긴 리스트가 반환한다.") {
-                OperandExtractor.extractOperand(textWithOneNum) shouldBe listOf(Number(1))
+                NumbersExtractor.extractOperand(textWithOneNum) shouldBe listOf(Number(1))
             }
         }
     }
@@ -32,7 +32,7 @@ class OperandExtractorTest : BehaviorSpec({
     Given("여러 숫자를 쉼표(,) 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                OperandExtractor.extractOperand(textWithComma) shouldBe listOf(Number(1), Number(2))
+                NumbersExtractor.extractOperand(textWithComma) shouldBe listOf(Number(1), Number(2))
             }
         }
     }
@@ -41,7 +41,7 @@ class OperandExtractorTest : BehaviorSpec({
     Given("여러 숫자를 쉼표(,) 이외에 콜론(:)도 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                OperandExtractor.extractOperand(textWithDefaultDelimiter) shouldBe listOf(
+                NumbersExtractor.extractOperand(textWithDefaultDelimiter) shouldBe listOf(
                     Number(1),
                     Number(2),
                     Number(3)
@@ -54,7 +54,7 @@ class OperandExtractorTest : BehaviorSpec({
     Given("여러 숫자를 커스텀 구분자로 입력할 경우") {
         When("피연산자를 추출하면") {
             Then("해당 숫자들이 담긴 리스트가 반환된다.") {
-                OperandExtractor.extractOperand(textWithCustomDelimiter) shouldBe listOf(
+                NumbersExtractor.extractOperand(textWithCustomDelimiter) shouldBe listOf(
                     Number(1),
                     Number(2),
                     Number(3)
