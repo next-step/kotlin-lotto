@@ -16,11 +16,12 @@ class CustomDelimiterExtractor : DelimiterExtractor {
     }
 
     override fun isValidExpression(expression: String): Boolean {
-        return CUSTOM_SEPARATOR_REGEX.matches(expression)
+        return EXPRESSION_VALID_REGEX.matches(expression)
     }
 
     companion object {
         private val CUSTOM_SEPARATOR_REGEX = Regex("//(.)\n(.*)")
+        private val EXPRESSION_VALID_REGEX = Regex("//.\n.*")
         private const val SEPARATOR_INDEX = 1
         private const val EXPRESSION_INDEX = 2
     }

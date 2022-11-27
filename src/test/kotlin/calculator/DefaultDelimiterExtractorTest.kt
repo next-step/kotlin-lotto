@@ -1,6 +1,5 @@
 package calculator
 
-import calculator.domain.CustomDelimiterExtractor
 import calculator.domain.DefaultDelimiterExtractor
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
@@ -9,7 +8,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import java.lang.IllegalArgumentException
 
-class DefaultDelimiterExtractorTest: StringSpec({
+class DefaultDelimiterExtractorTest : StringSpec({
 
     "기본 구분자는 : 또는 ,가 들어갈 수 있어요" {
         forAll(

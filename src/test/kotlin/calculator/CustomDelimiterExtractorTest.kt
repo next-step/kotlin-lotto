@@ -10,14 +10,14 @@ import java.lang.IllegalArgumentException
 
 class CustomDelimiterExtractorTest : StringSpec({
 
-    "커스텀 구분자는 문자열 앞부분 //와 \n가 포함되어야 해요." {
+    "커스텀 구분자는 문자열 앞부분에 //와 \n가 포함되어야 해요." {
         val extractor = CustomDelimiterExtractor()
         val result = extractor.isValidExpression("//;\n")
 
         result shouldBe true
     }
 
-    "커스텀 구분자는 문자열 앞부분 //와 \n 사이의 값이에요." {
+    "커스텀 구분자로 값을 구분해요." {
         val extractor = CustomDelimiterExtractor()
         val result = extractor.extract("//;\n1;2")
 
