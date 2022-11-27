@@ -1,10 +1,10 @@
 package nextstep.mission.lotto.io
 
-import nextstep.mission.lotto.Lotto
 import nextstep.mission.lotto.WinningPrize.FIRST
 import nextstep.mission.lotto.WinningPrize.FOURTH
 import nextstep.mission.lotto.WinningPrize.SECOND
 import nextstep.mission.lotto.WinningPrize.THIRD
+import nextstep.mission.lotto.io.dto.LottoDto
 import nextstep.mission.lotto.vo.LottoNumber
 import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningResult
@@ -22,9 +22,9 @@ object ConsoleInput {
 }
 
 object ConsoleOutput {
-    fun printLotto(lotto: Lotto) {
+    fun printLotto(lotto: LottoDto) {
         println("${lotto.lottoNumbers.size}개를 구매했습니다.")
-        lotto.lottoNumbers.forEach { println(it.numbers) }
+        lotto.lottoNumbers.forEach { println(it) }
     }
 
     fun printWinningResult(winningResult: WinningResult, rateOfReturn: Double) {
