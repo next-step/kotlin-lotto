@@ -1,21 +1,14 @@
 package lotto.domain
 
+import lotto.domain.LottoConstants.LOTTE_PRICE
 import kotlin.math.floor
 
-class LottoStatistics(private val matchesCountResult: List<Int>, private val amount: Int) {
-    val matchesResult: Map<LottoRule, Int> = initMatchesResult()
-
-    private fun initMatchesResult(): Map<LottoRule, Int> {
-        return LottoRule.values().associateWith { rule ->
-            matchesCountResult.count { matchesCount -> matchesCount == rule.matchesCount }
-        }
-    }
-
-    var rateOfReward: Double = calculateTotalPofit()
-        private set
-
-    private fun calculateTotalPofit(): Double {
-        var reward = matchesResult.map { result -> result.key.getTotalReward(result.value) }.sum().toDouble()
+class LottoStatistics(val matchResult: Map<Rank, Int>) {
+    fun getRateOfReward(): Double {
+        val amount = getCountOfLotto() * LOTTE_PRICE
+        val reward = matchResult.map { it.key.getTotalWinningMoney(it.value) }.sum().toDouble()
         return floor(reward / amount * 100) / 100
     }
+
+    private fun getCountOfLotto(): Int = matchResult.values.sum()
 }

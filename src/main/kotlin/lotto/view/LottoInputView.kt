@@ -1,7 +1,8 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.LottoFactory.LOTTE_PRICE
+import lotto.domain.LottoConstants.LOTTE_PRICE
+import lotto.domain.LottoNumber
 
 object LottoInputView {
 
@@ -24,8 +25,21 @@ object LottoInputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val numbers = readln()
         require(!numbers.isNullOrBlank()) { "지난 주 당첨 번호를 입력해주세요." }
-        return Lotto(splitNumbers(getOnlyNumbers(numbers)).toSet())
+        return Lotto(getLottoNumbers(numbers))
     }
+
+    /**
+     * 로또 지난 주 보너스볼 번호를 입력 받는다.
+     */
+    fun inputBonusNumberOfLastWeek(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val number = readln()
+        require(!number.isNullOrBlank()) { "지난 주 당첨 번호를 입력해주세요." }
+        return LottoNumber(number.toInt())
+    }
+
+    private fun getLottoNumbers(value: String): Set<LottoNumber> =
+        splitNumbers(getOnlyNumbers(value)).map { LottoNumber(it) }.toSet()
 
     private fun getOnlyNumbers(value: String) = value.replace("[^\\d]".toRegex(), NUMBER_SEPARATOR)
 
