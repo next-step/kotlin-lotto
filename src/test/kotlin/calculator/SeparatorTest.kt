@@ -28,6 +28,5 @@ class SeparatorTest : StringSpec({
 
             separator.separate(expression) shouldBe separatedNumber
         }
-
     }
 })
