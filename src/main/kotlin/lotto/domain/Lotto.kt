@@ -3,6 +3,10 @@ package lotto.domain
 class Lotto(
     val numbers: List<Int>
 ) {
+    init {
+        require(numbers.size <= LOTTO_NUMBERS_SIZE) { "로또의 숫자는 6개를 넘을 수 없습니다." }
+    }
+
     fun countHitNumbers(luckyNumbers: List<Int>): Int {
         return numbers.count { number -> luckyNumbers.contains(number) }
     }

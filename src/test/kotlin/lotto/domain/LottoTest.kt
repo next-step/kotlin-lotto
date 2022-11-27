@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -19,5 +20,13 @@ class LottoTest : StringSpec({
             // then
             actual shouldBe expectedHitCount
         }
+    }
+
+    "로또 번호가 6개를 넘으면 에러 발생 테스트" {
+        val numbers = listOf(1, 2, 3, 4, 5, 6, 7)
+        val exception = shouldThrowExactly<IllegalArgumentException> {
+            Lotto(numbers)
+        }
+        exception.message shouldBe "로또의 숫자는 6개를 넘을 수 없습니다."
     }
 })
