@@ -12,6 +12,8 @@ class WinnerNumber(input: String) {
             it.toInt()
         }.toList()
 
+        checkNegative(numbers)
+
         return numbers
     }
 
@@ -29,6 +31,13 @@ class WinnerNumber(input: String) {
 
     private fun checkValidRange(number: String) {
         require(number.toInt() in LOTTO_WINNER_NUMBER_RANGE) { "1에서 45 사이의 값을 입력하세요." }
+    }
+
+    private fun checkNegative(numbers: List<Int>) {
+        val isPositive = numbers.all {
+            it >= 0
+        }
+        require(isPositive) { "음수 입력 불가" }
     }
 
     companion object {
