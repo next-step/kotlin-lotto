@@ -49,6 +49,13 @@ internal class LottoTest {
         }
     }
 
+    @Test
+    fun `지난 주 당첨 번호 범위가 1에서 45가 아니면 예외가 발생한다`() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            WinnerNumber("1, 2, 3, 4, 5, 46")
+        }
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
     }
