@@ -4,22 +4,14 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
 internal class RankTest : BehaviorSpec({
-    given("일치하는 개수가") {
-        `when`("3개라면") {
-            val numberOfMatch = 3
-            val result = Rank.valueOf(numberOfMatch)
+    given("로또를 구매했을 때") {
+        `when`("5개의 수가 일치하고 보너스 숫자까지 일치한다면") {
+            val numberOfMatch = 5
+            val isBonusMatch = true
+            val result = Rank.valueOf(numberOfMatch, isBonusMatch)
 
-            then("4등을 반환한다.") {
-                result shouldBe Rank.FOURTH
-            }
-        }
-
-        `when`("등수에 없는 수라면") {
-            val numberOfMatch = 1
-            val result = Rank.valueOf(numberOfMatch)
-
-            then("Null 을 반환한다.") {
-                result shouldBe null
+            then("2등 당첨이다.") {
+                result shouldBe Rank.SECOND
             }
         }
     }
