@@ -1,9 +1,9 @@
 package simulator.lotto
 
-class LottoMachine {
-    fun create(times: Int): List<Lotto> {
-        return List(times){
-            Lotto.generate()
-        }
+class LottoMachine(private val generator: NumberGenerator) {
+    fun create(times: Int): Lottos {
+        return Lottos(List(times) {
+            Lotto(generator.generate().toSet())
+        })
     }
 }

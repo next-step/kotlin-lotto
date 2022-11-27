@@ -1,10 +1,12 @@
 package simulator.io
 
-import simulator.lotto.Lotto
+import simulator.lotto.Lottos
+import simulator.lotto.Rank
+import simulator.lotto.Ranks
 
 class Output {
-    fun printLottos(lottos: List<Lotto>) {
-        lottos.forEach {
+    fun printLottos(lottos: Lottos) {
+        lottos.values.forEach {
             println("[$it]")
         }
     }
@@ -13,13 +15,13 @@ class Output {
         println("${times}개를 구매했습니다.")
     }
 
-    fun printLottoResultHeader(){
+    fun printResultHeader() {
         println("당첨 통계")
         println("----------")
     }
 
-    fun printLottoResult(matchesNumber: Int, prize:Int, count:Int) {
-        println("${matchesNumber}개 일치 (${prize}원)- ${count}개")
+    fun printResult(ranks: Ranks, rank: Rank) {
+        println("${rank.match()}개 일치 (${rank.prize()}원)- ${ranks.rankCount(rank)}개")
     }
 
     fun printYield(yield: Double) {
