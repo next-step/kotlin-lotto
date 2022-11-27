@@ -13,6 +13,7 @@ class WinnerNumber(input: String) {
         }.toList()
 
         checkNegative(numbers)
+        checkNumberSize(numbers)
 
         return numbers
     }
@@ -38,6 +39,10 @@ class WinnerNumber(input: String) {
             it >= 0
         }
         require(isPositive) { "음수 입력 불가" }
+    }
+
+    private fun checkNumberSize(numbers: List<Int>) {
+        require(numbers.size == 6) { "당첨 번호는 6개여야 합니다." }
     }
 
     companion object {
