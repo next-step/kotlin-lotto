@@ -80,6 +80,13 @@ internal class LottoTest {
         )
     }
 
+    @Test
+    fun `지난 주 당첨 번호 중복 시 예외가 발생한다`() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            WinnerNumber("1, 2, 2, 4, 5, 6")
+        }
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
     }

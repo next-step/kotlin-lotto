@@ -14,6 +14,7 @@ class WinnerNumber(input: String) {
 
         checkNegative(numbers)
         checkNumberSize(numbers)
+        checkDuplication(numbers)
 
         return numbers
     }
@@ -45,8 +46,13 @@ class WinnerNumber(input: String) {
         require(numbers.size == 6) { "당첨 번호는 6개여야 합니다." }
     }
 
+    private fun checkDuplication(numbers: List<Int>) {
+        require(numbers.toSet().size == LOTTO_NUMBER_SIZE) { "중복 불가" }
+    }
+
     companion object {
         const val INPUT_VALUE_DELIMITER = ", "
+        const val LOTTO_NUMBER_SIZE = 6
         val LOTTO_WINNER_NUMBER_RANGE = 1..45
     }
 }
