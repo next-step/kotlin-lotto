@@ -13,8 +13,12 @@ object ResultView {
     fun printRewardsStatistics(winningStatistics: WinningStatistics) {
         println("\n당첨 통계")
         println("---------")
-        Rank.values().forEach {
-            println("${it.numberOfMatch}개 일치 (${it.winningMoney}원)- ${winningStatistics.getNumberOfMatchCount(it)}개")
+
+        val result = Rank.values().filter { it != Rank.MISS }.sortedDescending()
+        result.forEach {
+            print("${it.numberOfMatch}개 일치")
+            if(it == Rank.SECOND) print(", 보너스 볼 일치")
+            print(" (${it.winningMoney}원)- ${winningStatistics.getNumberOfMatchCount(it)}개\n")
         }
     }
 
