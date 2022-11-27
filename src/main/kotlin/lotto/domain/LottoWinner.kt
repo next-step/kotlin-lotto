@@ -1,8 +1,9 @@
 package lotto.domain
 
-object LottoWinner {
-
-    fun findWinLottoList(luckyNumbers: List<Int>, lottoList: List<Lotto>): List<WinLottoPrize> {
+class LottoWinner(
+    private val luckyNumbers: List<Int>
+) {
+    fun findWinLottoList(lottoList: List<Lotto>): List<WinLottoPrize> {
         return lottoList
             .map { it.countHitNumbers(luckyNumbers) }
             .filter { hasPrize(it) }
