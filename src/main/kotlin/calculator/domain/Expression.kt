@@ -1,6 +1,6 @@
 package calculator.domain
 
-class Expression (
+class Expression(
     val value: String = DEFAULT_EXPRESSION_VALUE
 ) {
 
