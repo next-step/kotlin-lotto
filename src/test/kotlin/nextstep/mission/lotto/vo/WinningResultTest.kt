@@ -2,7 +2,6 @@ package nextstep.mission.lotto.vo
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import nextstep.mission.lotto.WinningPrize
 
 class WinningResultTest : StringSpec({
 

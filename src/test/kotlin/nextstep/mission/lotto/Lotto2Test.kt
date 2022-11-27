@@ -2,7 +2,7 @@ package nextstep.mission.lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import nextstep.mission.lotto.WinningPrize.*
+import nextstep.mission.lotto.vo.WinningPrize.*
 import nextstep.mission.lotto.fixture.lottoNumberListOf
 import nextstep.mission.lotto.fixture.lottoNumbersListOf
 import nextstep.mission.lotto.vo.LottoNumbers

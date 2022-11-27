@@ -1,4 +1,4 @@
-package nextstep.mission.lotto
+package nextstep.mission.lotto.vo
 
 enum class WinningPrize(val matchedCount: Int, val prize: Int) {
     FIRST(6, 2_000_000_000),

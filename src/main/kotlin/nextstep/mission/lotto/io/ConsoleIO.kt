@@ -1,9 +1,9 @@
 package nextstep.mission.lotto.io
 
-import nextstep.mission.lotto.WinningPrize.FIRST
-import nextstep.mission.lotto.WinningPrize.FOURTH
-import nextstep.mission.lotto.WinningPrize.SECOND
-import nextstep.mission.lotto.WinningPrize.THIRD
+import nextstep.mission.lotto.vo.WinningPrize.FIRST
+import nextstep.mission.lotto.vo.WinningPrize.FOURTH
+import nextstep.mission.lotto.vo.WinningPrize.SECOND
+import nextstep.mission.lotto.vo.WinningPrize.THIRD
 import nextstep.mission.lotto.io.dto.LottoDto
 import nextstep.mission.lotto.vo.LottoNumber
 import nextstep.mission.lotto.vo.LottoNumbers

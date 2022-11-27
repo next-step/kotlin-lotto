@@ -1,6 +1,7 @@
 package nextstep.mission.lotto
 
 import nextstep.mission.lotto.vo.LottoNumbers
+import nextstep.mission.lotto.vo.WinningPrize
 import nextstep.mission.lotto.vo.WinningResult
 
 class Lotto(val lottoNumbers: List<LottoNumbers>) {

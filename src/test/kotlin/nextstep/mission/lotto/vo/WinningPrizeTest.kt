@@ -1,4 +1,4 @@
-package nextstep.mission.lotto
+package nextstep.mission.lotto.vo
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
