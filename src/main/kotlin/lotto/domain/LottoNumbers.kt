@@ -1,10 +1,9 @@
 package lotto.domain
 
-data class LottoNumbers(private val lottoNumbers: List<LottoNumber>) {
+data class LottoNumbers(val lottoNumbers: List<LottoNumber>) {
     init {
         require(lottoNumbers.distinct().size == MAXIMUM_LOTTO_SIZE) { INVALID_LOTTO_SIZE_ERROR_MESSAGE }
     }
-    fun getLottoNumbers() = lottoNumbers
 
     fun getNumberOfMatch(targetLottoNumbers: LottoNumbers): Int {
         return targetLottoNumbers.lottoNumbers.count {

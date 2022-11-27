@@ -2,7 +2,6 @@ package lotto.domain
 
 @JvmInline
 value class LottoNumber(private val number: Int) {
-    fun getNumber() = number
     init {
         require(number in MIN_NUMBER..MAX_NUMBER) { INVALID_VALUE_ERROR_MESSAGE }
     }

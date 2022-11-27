@@ -10,7 +10,7 @@ internal class LottoNumbersTest : BehaviorSpec({
             val result = LottoNumbers.createRandom()
 
             then("중복없는 6개의 로또 번호를 생성한다.") {
-                result.getLottoNumbers().distinct().size shouldBe 6
+                result.lottoNumbers.distinct().size shouldBe 6
             }
         }
 
