@@ -8,14 +8,14 @@ import io.kotest.matchers.shouldBe
 class LottoPrizeTest : StringSpec({
     "로또 수익률 계산 테스트" {
         forAll(
-            row(listOf(123), 1000, 0.12),
-            row(listOf(500, 500), 10000, 0.1),
-            row(listOf(10000, 10000, 10000), 8000, 3.75),
+            row(listOf(WinLottoPrize.FOURTH, WinLottoPrize.THIRD), 100000, 0.55),
+            row(listOf(WinLottoPrize.FOURTH), 5000, 1.0),
+            row(listOf(WinLottoPrize.THIRD), 5000, 10),
         ) { prizeList, payment, expectedEarningRate ->
             // given
-            val lottoPrize = LottoPrize(prizeList)
+            val lottoReward = LottoReward(prizeList)
             // when
-            val actualEarningRate = lottoPrize.earningRate(payment)
+            val actualEarningRate = lottoReward.earningRate(payment)
             // then
             actualEarningRate shouldBe expectedEarningRate
         }

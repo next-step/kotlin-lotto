@@ -2,9 +2,10 @@ package lotto.domain
 
 import lotto.util.NumberUtil
 
-class LottoPrize(
-    prizeList: List<Int>
+class LottoReward(
+    winLottoList: List<WinLottoPrize>
 ) {
+    private val prizeList: List<Int> = winLottoList.map { it.prizeMoney }
     private val totalPrize: Int = prizeList.sum()
 
     fun earningRate(inputPayment: Int): Double {

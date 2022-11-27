@@ -4,9 +4,9 @@ object LottoStatistics {
 
     fun statistics(inputPayment: Int, winLottoList: List<WinLottoPrize>): LottoStatisticsTotal {
         val winLottoStatisticsResult = winLottoStatistics(winLottoList)
-        val lottoPrize = LottoPrize(winLottoList.map { it.prizeMoney })
+        val lottoReward = LottoReward(winLottoList)
         return LottoStatisticsTotal(
-            earningRate = lottoPrize.earningRate(inputPayment),
+            earningRate = lottoReward.earningRate(inputPayment),
             winLottoStatisticsResult = winLottoStatisticsResult
         )
     }
