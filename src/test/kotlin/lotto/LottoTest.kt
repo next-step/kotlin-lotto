@@ -17,7 +17,14 @@ internal class LottoTest {
     @Test
     fun `구입 금액 입력 값이 숫자가 아니면 예외가 발생한다`() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            Quantity("A").quantity
+            Quantity("A")
+        }
+    }
+
+    @Test
+    fun `구입 금액이 최소 1000원 미만이면 예외가 발생한다`() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            Quantity("999")
         }
     }
 

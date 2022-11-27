@@ -9,6 +9,7 @@ class Quantity(amount: String) {
     init {
         checkValidNumber(amount)
         quantity = amount.toInt()
+        checkMinimumAmount()
     }
 
     private fun checkValidNumber(amount: String) {
@@ -17,5 +18,9 @@ class Quantity(amount: String) {
         } catch (error: NumberFormatException) {
             throw IllegalArgumentException("Invalid Number")
         }
+    }
+
+    private fun checkMinimumAmount() {
+        require(quantity >= 1000) { "1000원 이상을 결제해주세요." }
     }
 }
