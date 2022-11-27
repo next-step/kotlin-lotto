@@ -13,7 +13,7 @@ internal class LottoNumberTest {
     internal fun `LottoNumber이 정상 생성된다`(value: Int) {
         // given
         // when, then
-        assertThatNoException().isThrownBy { LottoNumber(value) }
+        assertThatNoException().isThrownBy { LottoNumber.of(value) }
     }
 
     @ValueSource(ints = [-1, 0, 46, 100])
@@ -21,7 +21,7 @@ internal class LottoNumberTest {
     internal fun `LottoNumber 값이 1보다 작거나 45보다 크면 IllegalArgumentException 이 발생한다`(value: Int) {
         // given
         // when, then
-        assertThatIllegalArgumentException().isThrownBy { LottoNumber(value) }
+        assertThatIllegalArgumentException().isThrownBy { LottoNumber.of(value) }
     }
 
 
