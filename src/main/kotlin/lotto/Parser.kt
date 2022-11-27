@@ -2,7 +2,7 @@ package lotto
 
 class Parser {
     fun parse(value: String): List<LottoNumber> {
-        val splitStr = value.split(",")
+        val splitStr = value.replace(" ", "").split(",")
         return toLottoNumbers(splitStr)
     }
 
