@@ -13,7 +13,7 @@ class LottoStoreTest : StringSpec({
         val cash = Cash(10)
 
         shouldThrow<IllegalArgumentException> {
-            lottoStore.buyLotto(cash)
+            lottoStore.pay(cash)
         }
     }
 
@@ -23,7 +23,8 @@ class LottoStoreTest : StringSpec({
             row(Cash(12_000), 12),
             row(Cash(14_000), 14),
         ) { cash, lottoCount ->
-            lottoStore.buyLotto(cash) shouldHaveSize lottoCount
+            val (lottos, _) = lottoStore.pay(cash)
+            lottos.lottoList shouldHaveSize lottoCount
         }
     }
 })

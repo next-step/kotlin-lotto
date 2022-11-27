@@ -1,14 +1,12 @@
 package lotto.domain
 
 object LottoMachine : LottoGenerator {
-    override fun generateLotto(): Lotto {
-        val lottoNumbers = LottoNumber.NUMBERS
-            .keys
+    override fun generateLottoNumbers(): Set<LottoNumber> =
+        LottoNumber.NUMBERS
+            .values
             .shuffled()
             .take(Lotto.COUNT)
-
-        return generateLotto(lottoNumbers)
-    }
+            .toSet()
 
     override fun generateLotto(numbers: List<Int>): Lotto {
         val lottoNumbers = numbers.map { number -> LottoNumber.from(number) }
@@ -16,7 +14,4 @@ object LottoMachine : LottoGenerator {
 
         return Lotto(lottoNumbers)
     }
-
-    fun pay(cash: Cash, purchasesCount: Int): Pair<Int, Cash> =
-        purchasesCount to cash.play(Lotto.PRICE * purchasesCount)
 }

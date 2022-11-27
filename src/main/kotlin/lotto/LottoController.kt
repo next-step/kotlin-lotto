@@ -6,6 +6,7 @@ import lotto.domain.LottoGenerator
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
+import lotto.domain.Lottos
 import lotto.domain.Rank
 import lotto.domain.Winner
 import lotto.view.InputView
@@ -19,26 +20,25 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
         checkWinningLotto(lottoList)
     }
 
-    private fun checkWinningLotto(lottoList: List<Lotto>) {
+    private fun checkWinningLotto(lottos: Lottos) {
         val winningLotto = getWinningLotto()
         val bonusLottoNumber = getBonusLottoNumber()
         val winner = Winner(winningLotto, bonusLottoNumber)
 
-        val rank = winner.match(lottoList)
+        val rank = winner.match(lottos.lottoList)
         printResult(rank)
 
-        val incomeRate = rank.getIncomeRate(purchaseCount = lottoList.size)
+        val incomeRate = rank.getIncomeRate(purchaseCount = lottos.count)
         ResultView.printIncomeRate(incomeRate)
     }
 
-    private fun buyLotto(): List<Lotto> {
+    private fun buyLotto(): Lottos {
         val cash = inputCash()
-        val (purchaseCount, changes) = payManualLotto(cash)
-        val manualLottoList = getManualLottoList(purchaseCount)
-        val lottoList = lottoStore.buyLotto(changes)
-        printLotto(manualLottoList, lottoList)
+        val (manualLottos, changes) = payManualLotto(cash)
+        val (autoLottos, _) = lottoStore.pay(changes)
+        printLotto(manualLottos, autoLottos)
 
-        return lottoList
+        return autoLottos
     }
 
     private fun printResult(rank: Rank) {
@@ -72,10 +72,10 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
         return lottoGenerator.generateLotto(numbers)
     }
 
-    private fun printLotto(manualLottoList: List<Lotto>, lottoList: List<Lotto>) {
-        ResultView.printPurchasedLottoCount(manualLottoList.size, lottoList.size)
+    private fun printLotto(manualLottos: Lottos, autoLottos: Lottos) {
+        ResultView.printPurchasedLottoCount(manualLottos.count, autoLottos.count)
 
-        val totalLottoList = manualLottoList.plus(lottoList)
+        val totalLottoList = manualLottos.lottoList.plus(autoLottos.lottoList)
 
         totalLottoList.forEach { lotto ->
             val rawLottoNumbers = lotto.lottoNumbers
@@ -86,21 +86,23 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
         }
     }
 
-    private fun getManualLottoList(purchasesCount: Int): List<Lotto> {
-        ResultView.printMessage(ResultView.Message.REQUEST_MANUAL_LOTTO_NUMBERS)
-
-        return (1..purchasesCount).map {
-            val numbers: List<Int> = InputView.requestPositiveNumbers()
-            LottoMachine.generateLotto(numbers)
-        }
-    }
-
-    private fun payManualLotto(cash: Cash): Pair<Int, Cash> {
+    private fun payManualLotto(cash: Cash): Pair<Lottos, Cash> {
         ResultView.printMessage(ResultView.Message.NUMBER_OF_MANUAL_PURCHASES)
         val purchasesCount = InputView.requestPositiveNumber()
 
-        return LottoMachine.pay(cash, purchasesCount)
+        ResultView.printMessage(ResultView.Message.REQUEST_MANUAL_LOTTO_NUMBERS)
+        val lottoNumbers: List<Set<LottoNumber>> = getLottoNumbers(purchasesCount)
+
+        return lottoStore.pay(cash, lottoNumbers)
     }
+
+    private fun getLottoNumbers(purchasesCount: Int): List<Set<LottoNumber>> =
+        (1..purchasesCount).map {
+            val numbers: List<Int> = InputView.requestPositiveNumbers()
+
+            numbers.map { number -> LottoNumber.from(number) }
+                .toSet()
+        }
 
     private fun inputCash(): Cash {
         ResultView.printMessage(ResultView.Message.REQUEST_AMOUNT)
