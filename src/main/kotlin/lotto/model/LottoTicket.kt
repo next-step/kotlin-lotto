@@ -1,6 +1,6 @@
 package lotto.model
 
-class LottoTicket {
+class LottoTicket : TicketStrategy {
     private val lottoNumbers = mutableListOf<Int>()
 
     init {
@@ -9,11 +9,7 @@ class LottoTicket {
         }
     }
 
-    fun make(): LottoTicket {
-        return LottoTicket()
-    }
-
-    fun getLottoTicketNumbers(): List<Int> {
+    override fun getLottoTicketNumbers(): List<Int> {
         return lottoNumbers.sorted()
     }
 

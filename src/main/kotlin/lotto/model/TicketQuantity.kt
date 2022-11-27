@@ -3,7 +3,7 @@ package lotto.model
 import java.lang.IllegalArgumentException
 import java.lang.NumberFormatException
 
-class Quantity(money: String) {
+class TicketQuantity(money: String) {
     var quantity = 0
 
     init {

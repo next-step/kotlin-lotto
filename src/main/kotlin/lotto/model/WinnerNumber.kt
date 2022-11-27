@@ -16,7 +16,7 @@ class WinnerNumber(input: String) {
         checkNumberSize(numbers)
         checkDuplication(numbers)
 
-        return numbers
+        return numbers.sorted()
     }
 
     private fun splitInputValue(input: String): List<String> {

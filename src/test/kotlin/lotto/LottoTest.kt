@@ -2,8 +2,10 @@ package lotto
 
 import lotto.controller.LottoGame
 import lotto.model.LottoTicket
-import lotto.model.Quantity
+import lotto.model.TicketQuantity
+import lotto.model.TicketStrategy
 import lotto.model.WinnerNumber
+import lotto.model.WinningCalculator
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -13,28 +15,28 @@ import java.lang.IllegalArgumentException
 internal class LottoTest {
     @Test
     fun `임의의 6개 숫자를 중복없이 생성한다`() {
-        val testTicket = LottoTicket().make()
+        val testTicket = LottoTicket()
         assertEquals(LOTTO_NUMBER_SIZE, testTicket.getLottoTicketNumbers().toSet().size)
     }
 
     @Test
     fun `구입 금액 입력 값이 숫자가 아니면 예외가 발생한다`() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            Quantity("A")
+            TicketQuantity("A")
         }
     }
 
     @Test
     fun `구입 금액이 최소 1000원 미만이면 예외가 발생한다`() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            Quantity("999")
+            TicketQuantity("999")
         }
     }
 
     @Test
     fun `구입 금액이 1000원 단위가 아닐 경우 예외가 발생한다`() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            Quantity("1200")
+            TicketQuantity("1200")
         }
     }
 
@@ -85,6 +87,28 @@ internal class LottoTest {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             WinnerNumber("1, 2, 2, 4, 5, 6")
         }
+    }
+
+    @Test
+    fun `당첨 통계를 계산한다`() {
+        var testTicket1 = MockTicket()
+        testTicket1.setTicketNumber(listOf(1, 2, 3, 4, 5, 6))
+
+        var testTicket2 = MockTicket()
+        testTicket2.setTicketNumber(listOf(11, 12, 13, 14, 15, 16))
+
+        val testTickets = listOf<TicketStrategy>(testTicket1, testTicket2)
+
+        assertAll(
+            {
+                val testCalculator = WinningCalculator(testTickets, WinnerNumber("1, 2, 3, 7, 8, 9"))
+                assertEquals(2.5, testCalculator.calculateRate(testTickets.size))
+            },
+            {
+                val testCalculator = WinningCalculator(testTickets, WinnerNumber("1, 2, 3, 7, 5, 9"))
+                assertEquals(25.0, testCalculator.calculateRate(testTickets.size))
+            },
+        )
     }
 
     companion object {
