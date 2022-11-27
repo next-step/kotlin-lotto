@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoStore(val lottoGenerator: LottoGenerator) {
+class LottoStore(private val lottoGenerator: LottoGenerator) {
 
     fun buy(money :Int) :List<Lotto>{
         val lottoNumber = money / LOTTO_PRICE
