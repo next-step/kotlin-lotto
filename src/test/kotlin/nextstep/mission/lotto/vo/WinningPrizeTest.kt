@@ -37,18 +37,6 @@ class WinningPrizeTest : StringSpec({
         WinningPrize.FOURTH.prize shouldBe 5_000
     }
 
-    "당첨 조건에 맞는 당첨 상금을 조회할 수 있다. 당첨 상금을 찾지 못하면 0을 반환한다." {
-        listOf(
-            6 to 2_000_000_000,
-            5 to 1_500_000,
-            4 to 50_000,
-            3 to 5_000,
-            -1 to 0
-        ).forEach { (matchedCount, prize) ->
-            WinningPrize.findPrize(matchedCount) shouldBe prize
-        }
-    }
-
     "당첨 조건에 맞는 당첨 상금을 조회할 수 있다. 당첨 상금을 찾지 못하면 null을 반환한다." {
         listOf(
             6 to WinningPrize.FIRST,
