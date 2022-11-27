@@ -8,18 +8,24 @@ class StringAddCalculator {
 
         val matchedCustomDelimiter = CUSTOM_DELIMITER_REGEX.find(inputValue)
 
-        val stringList = matchedCustomDelimiter?.let { split(it.groupValues[1], it.groupValues[2]) } ?: split(inputValue)
+        val numberStrings = extractNumberStrings(inputValue, matchedCustomDelimiter)
 
-        validateNumber(stringList)
+        validateNumber(numberStrings)
 
-        return sum(stringList)
+        return sum(numberStrings)
     }
 
-    private fun split(string: String): List<String> {
-        return string.split(DEFAULT_DELIMITER_REGEX)
+    private fun extractNumberStrings(inputValue: String, matchedCustomDelimiter: MatchResult?): List<String> {
+        if (matchedCustomDelimiter == null) {
+            return split(inputValue)
+        }
+        val (delimiter: String, numberString: String) = matchedCustomDelimiter.destructured
+        return split(numberString, delimiter)
     }
 
-    private fun split(delimiter: String, string: String): List<String> {
+    private fun split(string: String, delimiter: Regex = DEFAULT_DELIMITER_REGEX): List<String> = string.split(delimiter)
+
+    private fun split(string: String, delimiter: String): List<String> {
         if (delimiter.isEmpty()) {
             return split(string)
         }
@@ -27,6 +33,12 @@ class StringAddCalculator {
     }
 
     private fun sum(stringList: List<String>) = stringList.sumOf { it.toInt() }
+
+    private fun validateNumber(numbers: List<String>) {
+        numbers.forEach {
+            require(it.matches(POSITIVE_INTEGER_REGEX)) { "숫자가 아닌 값 혹은 음수를 입력하였습니다. (입력값:$it)" }
+        }
+    }
 
     companion object {
         private const val DEFAULT_VALUE = 0
@@ -36,11 +48,5 @@ class StringAddCalculator {
         private val POSITIVE_INTEGER_REGEX = Regex("\\+?[0-9]+")
 
         val CUSTOM_DELIMITER_REGEX = Regex("//(.*)\n(.*)")
-
-        private fun validateNumber(strings: List<String>) {
-            strings.forEach {
-                require(it.matches(POSITIVE_INTEGER_REGEX)) { "숫자가 아닌 값 혹은 음수를 입력하였습니다. (입력값:$it)" }
-            }
-        }
     }
 }

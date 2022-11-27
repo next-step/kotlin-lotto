@@ -8,29 +8,27 @@ import io.kotest.matchers.shouldBe
 
 class StringAddCalculatorTest : StringSpec({
 
+    val stringAddCalculator = StringAddCalculator()
+
     "빈 문자열을 입력하면 0을 반환한다." {
-        val stringAddCalculator = StringAddCalculator()
         val expectedResult = 0
         val result = stringAddCalculator.sum("")
         result shouldBe expectedResult
     }
 
     "공백 문자열을 입력하면 0을 반환한다." {
-        val stringAddCalculator = StringAddCalculator()
         val expectedResult = 0
         val result = stringAddCalculator.sum("   ")
         result shouldBe expectedResult
     }
 
     "null을 입력하면 0을 반환한다." {
-        val stringAddCalculator = StringAddCalculator()
         val expectedResult = 0
         val result = stringAddCalculator.sum("   ")
         result shouldBe expectedResult
     }
 
     "숫자가 아닌 값를 입력하면 IllegalArgumentException이 발생한다." {
-        val stringAddCalculator = StringAddCalculator()
         val exception = shouldThrowExactly<IllegalArgumentException> {
             stringAddCalculator.sum("1,!")
         }
@@ -38,7 +36,6 @@ class StringAddCalculatorTest : StringSpec({
     }
 
     "음수를 입력하면 IllegalArgumentException이 발생한다." {
-        val stringAddCalculator = StringAddCalculator()
         val exception = shouldThrowExactly<IllegalArgumentException> {
             stringAddCalculator.sum("1,-1")
         }
@@ -46,7 +43,6 @@ class StringAddCalculatorTest : StringSpec({
     }
 
     "숫자 더하기 테스트" {
-        val stringAddCalculator = StringAddCalculator()
         forAll(
             row("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.", "1", 1),
             row("양수 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.", "+33", 33),
@@ -60,7 +56,6 @@ class StringAddCalculatorTest : StringSpec({
     }
 
     "커스텀 구분자 기호가 있는데 구분자가 없을때 예외처리" {
-        val stringAddCalculator = StringAddCalculator()
         val exception = shouldThrowExactly<IllegalArgumentException> {
             stringAddCalculator.sum("//\n1;1")
         }
@@ -68,7 +63,6 @@ class StringAddCalculatorTest : StringSpec({
     }
 
     "커스텀 구분자" {
-        val stringAddCalculator = StringAddCalculator()
         forAll(
             row("//\n1,2,3", 6),
             row("// \n1 2 3", 6),
