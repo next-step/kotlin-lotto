@@ -2,13 +2,14 @@ package calculator.stranegy
 
 import calculator.domain.Expression
 import calculator.domain.SplitTerms
+import calculator.extensions.removeCustomRegex
 
-enum class ExpressionReplaceStrategy(
-    val split: (Expression, SplitTerms) -> Expression
+enum class ExpressionCreateStrategy(
+    val create: (String, SplitTerms) -> Expression
 ) {
 
-    CALCULATOR_PLUS({ expression, splitTerms ->
-        var expressionReplace = expression.value
+    CALCULATOR_PLUS({ input, splitTerms ->
+        var expressionReplace = input.removeCustomRegex()
 
         splitTerms.value.forEach { terms ->
             expressionReplace = expressionReplace.replace(terms, SPLIT_RESULT)
