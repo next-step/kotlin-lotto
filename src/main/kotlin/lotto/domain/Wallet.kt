@@ -19,7 +19,11 @@ class Wallet(var value: Value = DEFAULT_VALUE) {
         return lottos
     }
 
-    fun indicateLottoStatistics() {}
+    fun indicateLottoStatistics(winningLotto: WinningLotto): WalletResult {
+        return WalletResult(lottos.map {
+            winningLotto.compareWith(it)
+        }.toList())
+    }
 
     companion object {
         private const val DEFAULT_MONEY = 0
