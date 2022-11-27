@@ -11,10 +11,9 @@ enum class Rank(val countOfMatch: Int, val matchBonus: Boolean, val winningMoney
     fun getTotalWinningMoney(count: Int): Int = count * winningMoney
 
     companion object {
-        private const val SECOND_RANK_MATCH_COUNT = 5
         fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
             return values().find {
-                if (countOfMatch == SECOND_RANK_MATCH_COUNT && it.countOfMatch == SECOND_RANK_MATCH_COUNT) {
+                if (SECOND.countOfMatch == countOfMatch && SECOND.countOfMatch == it.countOfMatch) {
                     it.matchBonus == matchBonus
                 } else it.countOfMatch == countOfMatch
             } ?: MISS
