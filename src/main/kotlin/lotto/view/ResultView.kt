@@ -17,7 +17,7 @@ object ResultView {
     private const val LOTTO_RESULT_REVENUE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
 
     fun printLottoCount(count: Int) {
-        println(count.toString() + LOTTO_COUNT_MESSAGE)
+        println("$count$LOTTO_COUNT_MESSAGE")
     }
 
     fun printLottoNumbers(numbers: List<Int>) {
