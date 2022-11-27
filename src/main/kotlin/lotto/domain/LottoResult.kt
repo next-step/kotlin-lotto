@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class CompareResult(value: Value) {
+enum class LottoResult(val value: Value) {
     NotWin(Value(0)),
     FourthWin(Value(5000)),
     ThirdWin(Value(50000)),
