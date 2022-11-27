@@ -13,7 +13,7 @@ class LottoNumbers(var lottoNumbers: List<LottoNumber>) {
         return count
     }
 
-    fun MutableList<LottoNumber>.contain(lottoNumber: LottoNumber): Int {
+    private fun MutableList<LottoNumber>.contain(lottoNumber: LottoNumber): Int {
         if (this.contains(lottoNumber)) return 1
         return 0
     }
