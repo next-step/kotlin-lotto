@@ -1,5 +1,7 @@
 package lotto
 
+import kotlin.math.floor
+
 class Statistics(val statistic: MutableMap<Int, Int?> = mutableMapOf()) {
     init {
         for (i in 1..6) {
@@ -18,7 +20,8 @@ class Statistics(val statistic: MutableMap<Int, Int?> = mutableMapOf()) {
     }
 
     fun statistic(allPrice: Int): Double {
-        return sum() / allPrice
+        val result = sum() / allPrice
+        return floor(result * 100) /100
     }
 
     private fun sum(): Double {

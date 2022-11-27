@@ -2,8 +2,8 @@ package lotto
 
 class LottoNumbers(var lottoNumbers: List<LottoNumber>) {
     init {
-        if (lottoNumbers.size != 6) {
-            throw IllegalStateException("로또 숫자는 6개 입니다.")
+        check (lottoNumbers.size == LOTTO_NUMBER) {
+            throw IllegalStateException("로또 숫자는 ${LOTTO_NUMBER}개 입니다.")
         }
         lottoNumbers = lottoNumbers.sorted()
     }
@@ -23,5 +23,9 @@ class LottoNumbers(var lottoNumbers: List<LottoNumber>) {
 
     override fun toString(): String {
         return "$lottoNumbers"
+    }
+
+    companion object {
+        private const val LOTTO_NUMBER = 6
     }
 }
