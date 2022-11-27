@@ -7,7 +7,7 @@ class RewardTest {
 
     @Test
     fun `매치된 숫자개수에 맞는 상금금액이 반한됩니다`() {
-        assertThat(Reward.getReward(3)).isEqualTo(5000)
-        assertThat(Reward.getReward(0)).isEqualTo(0)
+        assertThat(Reward.getReward(3)).isEqualTo(Reward.FOURTH_RANK)
+        assertThat(Reward.getReward(0)).isEqualTo(Reward.NO_RANK)
     }
 }
