@@ -10,15 +10,15 @@ class RandomLottoGenerator : LottoGenerator {
         return Lotto(lottoBalls)
     }
 
-    private fun generateLottoBall() :LottoBall{
+    private fun generateLottoBall(): LottoBall {
         val number = RANDOM.nextInt(49)
-        if(number == 0){
+        if (number == 0) {
             return LottoBall(1)
         }
         return LottoBall(number)
     }
 
     companion object {
-        private val RANDOM = Random();
+        private val RANDOM = Random()
     }
 }
