@@ -1,12 +1,12 @@
 package lotto
 
 class LottoMachine {
-    fun draw(): MutableList<LottoNumber> {
-        val result = mutableListOf<LottoNumber>()
-        for(i in 1..6) {
+    fun draw(): LottoNumbers {
+        var result = mutableSetOf<LottoNumber>()
+
+        while(result.size < 6) {
             result.add(LottoNumber())
         }
-        result.sort()
-        return result
+        return LottoNumbers(result.toMutableList())
     }
 }

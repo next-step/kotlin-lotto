@@ -10,9 +10,10 @@ class InputView {
         return price
     }
 
-    fun inputLastWeekWinningNumbers(): List<LottoNumber> {
+    fun inputLastWeekWinningNumbers(): WinningLottoNumbers {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val inputLastWeekWinningNumbers = readln()
-        return Parser().parse(inputLastWeekWinningNumbers)
+        val parse = Parser().parse(inputLastWeekWinningNumbers).toMutableList()
+        return WinningLottoNumbers(parse)
     }
 }

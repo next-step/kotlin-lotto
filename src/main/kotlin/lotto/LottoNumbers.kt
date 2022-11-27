@@ -1,10 +1,14 @@
 package lotto
 
-class LottoNumbers(private var lottoNumbers: MutableList<LottoNumber>) {
+class LottoNumbers(var lottoNumbers: List<LottoNumber>) {
 
     init {
         val shuffled = lottoNumbers.shuffled()
         lottoNumbers = shuffled as MutableList<LottoNumber>
-        lottoNumbers.sort()
+        lottoNumbers = lottoNumbers.sorted()
+    }
+
+    override fun toString(): String {
+        return "$lottoNumbers"
     }
 }

@@ -2,13 +2,22 @@ package lotto
 
 fun main() {
     val inputView = InputView()
-    val number = inputView.inputPrice()
+    val count = inputView.inputPrice()
 
-    for (i in 1..number) {
-        val drawList = LottoMachine().draw()
-        println(drawList)
+    val lottoNumbersList = mutableListOf<LottoNumbers>()
+    for (i in 1..count) {
+        val drawSet = LottoMachine().draw()
+        println(drawSet)
+        lottoNumbersList.add(drawSet)
     }
 
-    inputView.inputLastWeekWinningNumbers()
+    val lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers()
 
+    val statistics = Statistics()
+    for (lottoNumbers in lottoNumbersList) {
+        val win = lastWeekWinningNumbers.win(lottoNumbers)
+        statistics.add(win)
+    }
+
+    OutputView().resultPrint(statistics)
 }
