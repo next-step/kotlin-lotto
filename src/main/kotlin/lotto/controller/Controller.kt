@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoPrice
 import lotto.domain.LottoRank
@@ -42,7 +43,7 @@ object Controller {
     private fun generateLottoNumbers(lottoCount: Int, lottoNumbersList: ArrayList<LottoNumbers>) {
         ResultView.printLottoCount(lottoCount)
         repeat(lottoCount) {
-            val lottoNumbers = LottoNumbers()
+            val lottoNumbers = LottoGenerator.generate()
             lottoNumbersList.add(lottoNumbers)
             ResultView.printLottoNumbers(lottoNumbers.value.map { it.value })
         }

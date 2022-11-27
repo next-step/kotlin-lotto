@@ -49,8 +49,8 @@ class WinningNumbersTest {
     @Test
     fun `당첨 번호와 로또 번호가 일치하는 개수를 반환하는 테스트`() {
         // given
-        val winningNumbers = WinningNumbers("1, 2, 3, 4, 5, 6")
-        val lottoNumbers = LottoNumbers("1, 2, 3, 7, 8, 9")
+        val winningNumbers = WinningNumbers(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
+        val lottoNumbers = LottoNumbers(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(7), LottoNumber(8), LottoNumber(9)))
 
         // when
         val count = winningNumbers.contains(lottoNumbers)
