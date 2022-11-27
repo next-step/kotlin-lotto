@@ -1,6 +1,7 @@
-import lotto.model.LottoTicket
+import lotto.model.Quantity
+import lotto.view.InputView
 
 fun main() {
-    val lottoTicket = LottoTicket().make()
-    println(lottoTicket.size)
+    val quantity = Quantity(InputView().getAmountOfMoney()).quantity
+    println(quantity)
 }
