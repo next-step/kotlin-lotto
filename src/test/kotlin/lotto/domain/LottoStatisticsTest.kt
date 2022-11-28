@@ -34,11 +34,11 @@ class LottoStatisticsTest : StringSpec({
         val lottoStatistics = LottoStatistics(winLottoList)
 
         val expected = listOf(
-            LottoStatisticsResult(LottoRank.FIRST, 1),
-            LottoStatisticsResult(LottoRank.SECOND, 0),
-            LottoStatisticsResult(LottoRank.THIRD, 2),
+            LottoStatisticsResult(LottoRank.FIFTH, 3),
             LottoStatisticsResult(LottoRank.FOURTH, 0),
-            LottoStatisticsResult(LottoRank.FIFTH, 3)
+            LottoStatisticsResult(LottoRank.THIRD, 2),
+            LottoStatisticsResult(LottoRank.SECOND, 0),
+            LottoStatisticsResult(LottoRank.FIRST, 1),
         )
 
         // when

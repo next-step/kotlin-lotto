@@ -15,21 +15,21 @@ class LottoStatisticsServiceTest : StringSpec({
             row(
                 LottoRank.FOURTH,
                 listOf(
-                    LottoStatisticsResult(LottoRank.FIRST, 0),
-                    LottoStatisticsResult(LottoRank.SECOND, 0),
-                    LottoStatisticsResult(LottoRank.THIRD, 0),
-                    LottoStatisticsResult(LottoRank.FOURTH, 1),
                     LottoStatisticsResult(LottoRank.FIFTH, 0),
+                    LottoStatisticsResult(LottoRank.FOURTH, 1),
+                    LottoStatisticsResult(LottoRank.THIRD, 0),
+                    LottoStatisticsResult(LottoRank.SECOND, 0),
+                    LottoStatisticsResult(LottoRank.FIRST, 0),
                 )
             ),
             row(
                 LottoRank.FIRST,
                 listOf(
-                    LottoStatisticsResult(LottoRank.FIRST, 1),
-                    LottoStatisticsResult(LottoRank.SECOND, 0),
-                    LottoStatisticsResult(LottoRank.THIRD, 0),
-                    LottoStatisticsResult(LottoRank.FOURTH, 0),
                     LottoStatisticsResult(LottoRank.FIFTH, 0),
+                    LottoStatisticsResult(LottoRank.FOURTH, 0),
+                    LottoStatisticsResult(LottoRank.THIRD, 0),
+                    LottoStatisticsResult(LottoRank.SECOND, 0),
+                    LottoStatisticsResult(LottoRank.FIRST, 1),
                 )
             )
         ) { lottoResult, expected ->

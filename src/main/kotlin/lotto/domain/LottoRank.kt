@@ -25,7 +25,7 @@ enum class LottoRank(
         }
 
         fun winRanks(): List<LottoRank> {
-            return values().filter { it.prizeMoney > 0 }
+            return values().filter { it.prizeMoney > 0 }.reversed()
         }
     }
 }
