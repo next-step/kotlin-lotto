@@ -3,8 +3,8 @@ package stringsumcalculator
 private val DEFAULT_DELIMITERS = listOf(",", ":")
 private val CUSTOM_DELIMITER_PATTERN = Regex("//(.)\n(.*)")
 
-class StringSplitNumbers(private val text: String) : Numbers {
-    override fun toList(): List<Number> {
+class StringNumbers(private val text: String) : Numbers {
+    override fun toList(): List<INumber> {
         val (delimiters, input) = split(text)
 
         val splitStrings = input.split(delimiters.joinToString("|").toRegex())
