@@ -1,3 +1,5 @@
+package calculator
+
 fun main() {
     val inputView = InputView()
     val input = inputView.input()

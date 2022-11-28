@@ -1,4 +1,6 @@
-import org.junit.jupiter.api.Assertions.*
+package calculator
+
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class NumbersTest {
