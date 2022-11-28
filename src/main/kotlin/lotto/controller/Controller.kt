@@ -25,22 +25,12 @@ object Controller {
 
         val winningNumbers = inputWinningNumber()
         val lottoResult = makeLottoResult(winningNumbers)
-        printLottoResult(lottoResult, amount)
-    }
-
-    private fun printLottoResult(lottoResult: LottoResult, amount: LottoPrice) {
         ResultView.printLottoResultTitle()
         lottoResult.value.forEach {
-            addLottoResult(it)
+            ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value)
         }
         val profitRate = lottoResult.calculateProfitRate(amount.value)
         ResultView.printProfitRate(profitRate)
-    }
-
-    private fun addLottoResult(it: Map.Entry<LottoRank, Int>) {
-        if (it.key != LottoRank.MISS) {
-            ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value)
-        }
     }
 
     private fun makeLottoResult(winningNumbers: LottoNumbers): LottoResult {
@@ -50,6 +40,7 @@ object Controller {
             val lottoRank = winningNumbers.getLottoRank(lottoNumbers)
             lottoResult[lottoRank] = lottoResult.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREASE_COUNT
         }
+        lottoResult.remove(LottoRank.MISS)
         return LottoResult(lottoResult)
     }
 
