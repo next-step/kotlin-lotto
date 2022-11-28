@@ -35,7 +35,7 @@ class LottoPriceTest {
         val lottoPrice = LottoPrice(given)
 
         // when
-        val actual = lottoPrice.count()
+        val actual = lottoPrice.calculateNumberOfLotto()
 
         // then
         assertThat(actual).isEqualTo(expected)

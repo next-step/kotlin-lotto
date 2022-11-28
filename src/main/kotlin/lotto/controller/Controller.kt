@@ -14,9 +14,9 @@ import lotto.view.ResultView
 object Controller {
     fun start() {
         val amount = inputAmount()
-        val lottoCount = amount.count()
-        ResultView.printLottoCount(lottoCount)
-        generateLottoNumbers(lottoCount)
+        val numberOfLotto = amount.calculateNumberOfLotto()
+        ResultView.printNumberOfLotto(numberOfLotto)
+        generateLottoNumbers(numberOfLotto)
         ResultView.printLottoNumbersList(LottoNumbersList.getList())
 
         val winningNumbers = inputWinningNumber()

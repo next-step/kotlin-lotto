@@ -10,7 +10,7 @@ value class LottoPrice(internal val value: Int) {
         amount.toIntOrNull() ?: throw IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.")
     )
 
-    fun count(): Int {
+    fun calculateNumberOfLotto(): Int {
         return value / LOTTO_PRICE
     }
 
