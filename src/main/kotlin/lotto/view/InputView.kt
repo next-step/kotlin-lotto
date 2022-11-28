@@ -37,8 +37,15 @@ class InputView {
         return split.map { it.toInt() }
     }
 
+    fun inputBonusNumber(): Int {
+        println(INPUT_BONUS_BALL)
+        val bonusBallNumberString = readln()
+        return bonusBallNumberString.toInt()
+    }
+
     private companion object {
         const val INPUT_PAYMENT_GUIDE = "# 구입금액을 입력해주세요."
         const val INPUT_LUCKY_NUMBERS_GUIDE = "# 지난 주 당첨 번호를 입력해 주세요."
+        const val INPUT_BONUS_BALL = "# 보너스 볼을 입력해 주세요."
     }
 }

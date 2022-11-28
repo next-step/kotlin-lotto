@@ -3,6 +3,7 @@ package lotto.application
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoResultService
 import lotto.domain.LottoShop
+import lotto.domain.LuckyNumbers
 import lotto.util.RandomNumberGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -18,7 +19,9 @@ class Application {
         resultView.printLotto(lottoList)
 
         val inputLuckyNumbers = inputView.inputLuckyNumbers()
-        val lottoResultService = LottoResultService(inputLuckyNumbers)
+        val inputBonusNumber = inputView.inputBonusNumber()
+
+        val lottoResultService = LottoResultService(LuckyNumbers(inputLuckyNumbers, inputBonusNumber))
         val statistics = lottoResultService.inquireStatistics(inputPayment, lottoList)
         resultView.printLottoStatistics(statistics)
     }

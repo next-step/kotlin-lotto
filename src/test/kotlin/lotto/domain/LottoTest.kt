@@ -27,6 +27,6 @@ class LottoTest : StringSpec({
         val exception = shouldThrowExactly<IllegalArgumentException> {
             Lotto(numbers)
         }
-        exception.message shouldBe "로또의 숫자는 6개를 넘을 수 없습니다."
+        exception.message shouldBe "로또 번호는 6개가 필요합니다."
     }
 })
