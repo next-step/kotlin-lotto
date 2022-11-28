@@ -7,7 +7,8 @@ object ResultView {
     private const val LOTTO_NUMBER_DELIMITER = ", "
     private const val LOTTO_NUMBER_PREFIX = "["
     private const val LOTTO_NUMBER_SUFFIX = "]"
-    private const val LOTTO_RESULT_MESSAGE = "당첨 통계"
+    private const val LOTTO_RESULT_MESSAGE_TITLE = "당첨 통계"
+    private const val LOTTO_RESULT_MESSAGE_DELIMITER = "---------"
     private const val LOTTO_RESULT_DELIMITER = " - "
     private const val LOTTO_RESULT_MATCH_MESSAGE = "개 일치"
     private const val LOTTO_RESULT_WINNING_MONEY_TERMS = "원"
@@ -31,15 +32,37 @@ object ResultView {
     }
 
     fun printLottoResultTitle() {
-        println("\n" + LOTTO_RESULT_MESSAGE)
+        println("\n" + LOTTO_RESULT_MESSAGE_TITLE + "\n" + LOTTO_RESULT_MESSAGE_DELIMITER)
     }
 
     fun printLottoResult(countOfMatch: Int, winningMoney: Int, count: Int) {
-        println(countOfMatch.toString() + LOTTO_RESULT_MATCH_MESSAGE + LOTTO_RESULT_DELIMITER + winningMoney.toString() + LOTTO_RESULT_WINNING_MONEY_TERMS + LOTTO_RESULT_WINNING_MONEY_PREFIX + count.toString() + LOTTO_RESULT_COUNT_MESSAGE + LOTTO_RESULT_WINNING_MONEY_SUFFIX)
+        println(
+            countOfMatch.toString() +
+                LOTTO_RESULT_MATCH_MESSAGE +
+                LOTTO_RESULT_DELIMITER +
+                winningMoney.toString() +
+                LOTTO_RESULT_WINNING_MONEY_TERMS +
+                LOTTO_RESULT_WINNING_MONEY_PREFIX +
+                count.toString() +
+                LOTTO_RESULT_COUNT_MESSAGE +
+                LOTTO_RESULT_WINNING_MONEY_SUFFIX
+        )
     }
 
     fun printProfitRate(profitRate: Float) {
-        println(LOTTO_RESULT_REVENUE_MESSAGE_PREFIX + floorPowerOfTwo(profitRate) + LOTTO_RESULT_REVENUE_MESSAGE_SUFFIX + if (profitRate < 1) LOTTO_RESULT_REVENUE_LOSS_MESSAGE else "")
+        println(
+            LOTTO_RESULT_REVENUE_MESSAGE_PREFIX +
+                floorPowerOfTwo(profitRate) +
+                LOTTO_RESULT_REVENUE_MESSAGE_SUFFIX +
+                printResultRevenueLossMessage(profitRate)
+        )
+    }
+
+    private fun printResultRevenueLossMessage(profitRate: Float): String {
+        if (profitRate < 1) {
+            return LOTTO_RESULT_REVENUE_LOSS_MESSAGE
+        }
+        return ""
     }
 
     fun floorPowerOfTwo(result: Float) = floor(result * 100) / 100
