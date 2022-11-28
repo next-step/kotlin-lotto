@@ -10,16 +10,13 @@ import org.junit.jupiter.params.provider.ValueSource
 
 internal class LottoTest {
 
-    @DisplayName("로또 숫자는 랜덤하게 생성된다")
+    @DisplayName("주어진 숫자로 로또가 생성된다")
     @Test
-    fun randomNumber() {
-        val firstLotto = Lotto()
-        val secondLotto = Lotto()
+    fun createLotto() {
+        val list = listOf(1, 2, 3, 4, 5, 6)
+        val lotto = Lotto(list)
 
-        val firstSum = firstLotto.numbers.sum()
-        val secondSum = secondLotto.numbers.sum()
-
-        assertThat(firstSum).isNotEqualTo(secondSum)
+        assertThat(lotto.numbers).asList().isEqualTo(list)
     }
 
     @DisplayName("로또 숫자는 6개이다")
