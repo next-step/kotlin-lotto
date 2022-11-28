@@ -51,7 +51,7 @@ internal class StringAddCalculatorTest {
         assertThat(calculator.add(text)).isSameAs(6)
     }
 
-    @DisplayName(value = "문자열 계산기에  숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @DisplayName(value = "문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @ParameterizedTest
     @ValueSource(strings = ["-1", "a", "//;\n^;2;3"])
     fun invalidOrNegativeNumbers(text: String) {
