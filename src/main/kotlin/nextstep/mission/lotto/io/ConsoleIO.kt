@@ -1,6 +1,6 @@
 package nextstep.mission.lotto.io
 
-import nextstep.mission.lotto.io.dto.LottoDto
+import nextstep.mission.lotto.dto.LottoDto
 import nextstep.mission.lotto.vo.LottoNumber
 import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningPrize.FIRST

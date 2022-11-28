@@ -2,10 +2,13 @@ package nextstep.mission.lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import nextstep.mission.lotto.vo.WinningPrize.*
 import nextstep.mission.lotto.fixture.lottoNumberListOf
 import nextstep.mission.lotto.fixture.lottoNumbersListOf
 import nextstep.mission.lotto.vo.LottoNumbers
+import nextstep.mission.lotto.vo.WinningPrize.FIRST
+import nextstep.mission.lotto.vo.WinningPrize.FOURTH
+import nextstep.mission.lotto.vo.WinningPrize.SECOND
+import nextstep.mission.lotto.vo.WinningPrize.THIRD
 import nextstep.mission.lotto.vo.WinningResult
 
 class LottoTest : StringSpec({
