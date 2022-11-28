@@ -2,18 +2,18 @@ package lotto.domain
 
 import lotto.util.ErrorCode
 
-class LottoStatistics(
-    private val winningLotto: Lotto,
+class WinningLottoStatistics(
+    private val previousWinningLotto: Lotto,
     private val bonusLottoNumber: LottoNumber
 ) {
     init {
-        require(!winningLotto.containLottoNumber(bonusLottoNumber)) {
+        require(!previousWinningLotto.containLottoNumber(bonusLottoNumber)) {
             ErrorCode.BONUS_LOTTO_NUMBER_EXCEPTION.errorMessage
         }
     }
 
     fun getWinningStatistics(lottoList: LottoList): List<LottoMatch> =
-        lottoList.compare(winningLotto, bonusLottoNumber)
+        lottoList.compare(previousWinningLotto, bonusLottoNumber)
             .groupBy { it }
             .let { map ->
                 val missingMap = getMissingMap(map.keys)

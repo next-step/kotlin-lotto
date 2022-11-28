@@ -5,7 +5,7 @@ import lotto.domain.LottoList
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoPurchase
-import lotto.domain.LottoStatistics
+import lotto.domain.WinningLottoStatistics
 import lotto.uI.InputView
 import lotto.uI.OutputView
 
@@ -31,17 +31,17 @@ class LottoController {
     fun showStatistic(money: Long, lottoList: LottoList) {
         val lastWeekLottoNumber = InputView.inputLastWeekLottoNumbers()
 
-        val lastWeekLotto = LottoGenerator.generateLotto(lastWeekLottoNumber)
+        val lastWeekWinningLotto = LottoGenerator.generateLotto(lastWeekLottoNumber)
 
         val bonusLottoNumber = LottoNumber(InputView.inputBonusLottoNumber())
 
-        val lottoStatistics = LottoStatistics(lastWeekLotto, bonusLottoNumber)
+        val winningLottoStatistics = WinningLottoStatistics(lastWeekWinningLotto, bonusLottoNumber)
 
-        val lottoMatchList = lottoStatistics.getWinningStatistics(lottoList)
+        val lottoMatchList = winningLottoStatistics.getWinningStatistics(lottoList)
         OutputView.outputLottoStatistics(lottoMatchList)
 
-        val profit = lottoStatistics.getProfit(money, lottoMatchList)
-        val isProfitable = lottoStatistics.isProfitable(profit)
+        val profit = winningLottoStatistics.getProfit(money, lottoMatchList)
+        val isProfitable = winningLottoStatistics.isProfitable(profit)
         OutputView.outputLottoProfit(profit, !isProfitable)
     }
 }
