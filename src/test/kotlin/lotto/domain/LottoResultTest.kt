@@ -2,20 +2,18 @@ package lotto.domain
 
 import lotto.view.ResultView.floorPowerOfTwo
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottoResultTest {
     // given
-    private val lottoResult = LottoResult(
-        hashMapOf(
-            LottoRank.FIRST to 0,
-            LottoRank.THIRD to 0,
-            LottoRank.FOURTH to 0,
-            LottoRank.FIFTH to 1,
-            LottoRank.MISS to 0
-        )
-    )
+    private val lottoResult = LottoResult()
+
+    @BeforeEach
+    fun setUp() {
+        lottoResult.add(LottoRank.FIFTH)
+    }
 
     @DisplayName("로또 결과 확인 테스트")
     @Test

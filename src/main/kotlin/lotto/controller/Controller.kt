@@ -27,14 +27,20 @@ object Controller {
     private fun printLottoResult(lottoResult: LottoResult, amount: LottoPrice) {
         ResultView.printLottoResultTitle()
         lottoResult.value.forEach {
-            ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, lottoResult.getLottoRankCount(it.key))
+            addLottoResult(it, lottoResult)
         }
         val profitRate = lottoResult.calculateProfitRate(amount.value)
         ResultView.printProfitRate(profitRate)
     }
 
+    private fun addLottoResult(it: Map.Entry<LottoRank, Int>, lottoResult: LottoResult) {
+        if (it.key != LottoRank.MISS) {
+            ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, lottoResult.getLottoRankCount(it.key))
+        }
+    }
+
     private fun makeLottoResult(winningNumbers: LottoNumbers): LottoResult {
-        val lottoResult = LottoResult(hashMapOf(LottoRank.FIFTH to 0, LottoRank.FOURTH to 0, LottoRank.THIRD to 0, LottoRank.FIRST to 0))
+        val lottoResult = LottoResult()
         LottoNumbersList.getLottoNumbers().forEach {
             val lottoNumbers = LottoNumbers(it.value)
             val lottoRank = lottoNumbers.getLottoRank(winningNumbers)
