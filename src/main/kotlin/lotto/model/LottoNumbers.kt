@@ -1,7 +1,6 @@
 package lotto.model
 
-@JvmInline
-value class LottoNumbers(val numbers: List<LottoNumber>) {
+class LottoNumbers(val numbers: List<LottoNumber>) {
     init {
         validLottoNumberSize(numbers)
     }
@@ -11,4 +10,10 @@ value class LottoNumbers(val numbers: List<LottoNumber>) {
     }
 
     fun size() = numbers.distinct().size
+
+    fun scratch(winningNumber: LottoNumbers, plusNumber: LottoNumber): LottoGrade {
+        val matchCount = numbers intersect winningNumber.numbers.toSet()
+        val matchPlus =  plusNumber in numbers
+        return LottoGrade.find(matchCount.size, matchPlus)
+    }
 }

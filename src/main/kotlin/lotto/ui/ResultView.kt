@@ -1,17 +1,17 @@
 package lotto.ui
 
-import lotto.model.Lotto
 import lotto.model.LottoGrade
+import lotto.model.LottoNumbers
 import lotto.model.LottoStat
 import java.math.BigDecimal
 
 object ResultView {
 
-    fun resultLottoList(lottos: List<Lotto>) {
+    fun resultLottoList(lottos: List<LottoNumbers>) {
         println("${lottos.size}개를 구매했습니다 ")
 
         lottos.forEach {
-            println(it.lottoNumbers.numbers.toString())
+            println(it.numbers.toString())
         }
     }
 
