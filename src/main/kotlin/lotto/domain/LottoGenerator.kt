@@ -6,12 +6,14 @@ object LottoGenerator {
     private val lottoNumbersRegex = """^[0-9,\s]*$""".toRegex()
     private const val SEPARATOR = ","
 
-    fun generateLottoList(lottoCount: Long, numberGenerator: NumberGenerator): List<Lotto> =
-        (1..lottoCount).map {
+    fun generateLottoList(lottoCount: Long, numberGenerator: NumberGenerator): LottoList {
+        val lottoList = (1..lottoCount).map {
             numberGenerator.generateLottoFromNumbers(
                 LottoNumber.possibleNumbers
             )
         }
+        return LottoList(lottoList)
+    }
 
     fun generateLotto(lottoNumbers: String): Lotto {
         val lottoNumberSet = validateLottoNumbers(lottoNumbers).toMutableSet()

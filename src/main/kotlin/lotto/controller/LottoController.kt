@@ -11,13 +11,21 @@ import lotto.uI.OutputView
 
 class LottoController {
 
-    fun purchase(money: Long): LottoList {
-        val lottoCount = LottoPurchase(price = money).getLottoCount()
+    fun purchase(money: Long, manualLottoCount: Long): LottoList {
+        val autoLottoCount = LottoPurchase(price = money, manualLottoCount = manualLottoCount).getAutoLottoCount()
 
-        val lottoList = LottoGenerator.generateLottoList(lottoCount, LottoNumberGenerator)
+        val manualLottoList = InputView.inputManualLottoList(manualLottoCount)
 
-        OutputView.outputLottoList(lottoList)
-        return LottoList(lottoList)
+        val autoLottoList = LottoGenerator.generateLottoList(autoLottoCount, LottoNumberGenerator)
+
+        val lottoList = manualLottoList.addLottoList(autoLottoList)
+
+        OutputView.outputLottoList(
+            manualLottoCount = manualLottoCount,
+            autoLottoCount = autoLottoCount,
+            lottoList = lottoList
+        )
+        return lottoList
     }
 
     fun showStatistic(money: Long, lottoList: LottoList) {

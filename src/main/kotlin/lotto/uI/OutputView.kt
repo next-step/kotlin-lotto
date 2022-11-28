@@ -1,17 +1,15 @@
 package lotto.uI
 
-import lotto.domain.Lotto
+import lotto.domain.LottoList
 import lotto.domain.LottoMatch
 import lotto.domain.LottoRank
 
 object OutputView {
     private const val BLANK = " "
 
-    fun outputLottoList(lottoList: List<Lotto>) {
-        println("${lottoList.count()}${MessageCode.PURCHASE_COUNT_RESULT.message}")
-        lottoList.forEach { lotto ->
-            println(lotto.numbers)
-        }
+    fun outputLottoList(manualLottoCount: Long, autoLottoCount: Long, lottoList: LottoList) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${autoLottoCount}개를 구매했습니다.")
+        lottoList.printLottoList()
     }
 
     fun outputLottoStatistics(lottMatchList: List<LottoMatch>) {

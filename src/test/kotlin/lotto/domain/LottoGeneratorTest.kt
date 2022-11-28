@@ -36,7 +36,7 @@ internal class LottoGeneratorTest {
         val resultLottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
 
         assertThat(resultLottoList.count()).isEqualTo(lottoCount)
-        resultLottoList.forEach { lotto ->
+        resultLottoList.lottoList.forEach { lotto ->
             assertThat(lotto.numbers.count()).isEqualTo(6)
         }
     }
