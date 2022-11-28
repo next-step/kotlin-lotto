@@ -19,7 +19,19 @@ class LottoGameTest : StringSpec({
         // given
         val lottoGame = LottoGame(14000)
         // when
-        val drawResult = lottoGame.draw(listOf(1, 2, 3, 4, 5, 6))
+        val drawResult = lottoGame.draw(
+            LottoNumbers(
+                listOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            ),
+            LottoNumber(10)
+        )
         // then
         drawResult.forEach {
             it shouldBeIn LottoGrade.values().toList()

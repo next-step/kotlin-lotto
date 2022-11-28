@@ -20,4 +20,11 @@ object InputView {
         require(result.size == 6) { "당첨번호는 6개이어야 합니다" }
         return result
     }
+
+    fun inputPlusWinningNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val plusNumber: String = readLine() ?: throw IllegalArgumentException("보너스 번호는 숫자를 입력해야 합니다")
+
+        return plusNumber.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다")
+    }
 }

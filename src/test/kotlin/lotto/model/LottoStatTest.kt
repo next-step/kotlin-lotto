@@ -17,6 +17,7 @@ class LottoStatTest : StringSpec({
             LottoGrade.BASIC_GRADE to 2,
             LottoGrade.THIRD_GRADE to 0,
             LottoGrade.SECOND_GRADE to 0,
+            LottoGrade.SECOND_PLUS_GRADE to 0,
             LottoGrade.FIST_GRADE to 1
         )
     }

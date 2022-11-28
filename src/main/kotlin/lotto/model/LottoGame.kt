@@ -7,7 +7,7 @@ class LottoGame(
     lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator()
 ) {
 
-    private var lottos: MutableList<Lotto> = mutableListOf()
+    private var lottos: MutableList<LottoNumbers> = mutableListOf()
 
     init {
         createLotto(lottoNumberGenerator)
@@ -15,12 +15,12 @@ class LottoGame(
 
     private fun createLotto(lottoNumberGenerator: LottoNumberGenerator) {
         repeat(lottoAmount / LOTTO_PER_AMOUNT) {
-            lottos.add(Lotto(LottoNumber(lottoNumberGenerator.pick())))
+            lottos.add(lottoNumberGenerator.pick())
         }
     }
 
-    fun draw(winningNumber: List<Int>): List<LottoGrade> {
-        return lottos.map { it.scratch(LottoNumber(winningNumber)) }.toList()
+    fun draw(winningNumber: LottoNumbers, plusNumber: LottoNumber): List<LottoGrade> {
+        return lottos.map { it.scratch(winningNumber, plusNumber) }.toList()
     }
 
     fun getLottos() = lottos.toList()

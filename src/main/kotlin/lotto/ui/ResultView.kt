@@ -1,17 +1,17 @@
 package lotto.ui
 
-import lotto.model.Lotto
 import lotto.model.LottoGrade
+import lotto.model.LottoNumbers
 import lotto.model.LottoStat
 import java.math.BigDecimal
 
 object ResultView {
 
-    fun resultLottoList(lottos: List<Lotto>) {
+    fun resultLottoList(lottos: List<LottoNumbers>) {
         println("${lottos.size}개를 구매했습니다 ")
 
         lottos.forEach {
-            println(it.lottoNumber.number)
+            println(it.numbers.toString())
         }
     }
 
@@ -24,7 +24,11 @@ object ResultView {
         println("당첨 통계 ")
         println("---------")
         gradeStat.forEach { (grade, count) ->
-            println("${grade.correctNumber}개 일치 (${grade.reward}원)- ${count}개")
+            print("${grade.correctNumber}개 일치")
+            if (grade.matchPlus) {
+                print(", 보너스 볼 일치")
+            }
+            println("(${grade.reward}원) - ${count}개")
         }
     }
 
