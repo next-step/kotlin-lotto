@@ -9,11 +9,12 @@ import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringCalculatorTest {
-    @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
+    @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 예외가 발생한다.")
     @ParameterizedTest
     @NullAndEmptySource
     fun emptyOrNull(text: String?) {
-        assertThat(StringCalculator.calculateDelimiters(text)).isZero()
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { StringCalculator.calculateDelimiters(text) }
     }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
