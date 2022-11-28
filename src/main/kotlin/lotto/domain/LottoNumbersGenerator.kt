@@ -5,6 +5,6 @@ object LottoNumbersGenerator {
     private const val LOTTO_NUMBER_SIZE = 6
 
     fun generate(): List<Int> {
-        return LOTTO_NUMBER_RANGE.shuffled().take(LOTTO_NUMBER_SIZE)
+        return LOTTO_NUMBER_RANGE.toList().shuffled().take(LOTTO_NUMBER_SIZE)
     }
 }
