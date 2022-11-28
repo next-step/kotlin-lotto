@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticsResult
 import lotto.domain.LottoStatisticsTotal
 
@@ -27,8 +28,15 @@ class ResultView {
             val hitCount = it.lottoRank.hitCount
             val prizeMoney = it.lottoRank.prizeMoney
             val winLottoCount = it.winLottoCount
-            println("${hitCount}개 일치 (${prizeMoney}원) - ${winLottoCount}개")
+            println("${hitCount}개 일치${printIfSecondPrize(it.lottoRank)} (${prizeMoney}원) - ${winLottoCount}개")
         }
+    }
+
+    private fun printIfSecondPrize(lottoRank: LottoRank): String {
+        if (lottoRank.hasBonusNumber) {
+            return ", 보너스 볼 일치"
+        }
+        return ""
     }
 
     private fun printEarningRate(earningRate: Double) {
