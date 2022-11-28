@@ -1,5 +1,10 @@
 package lotto.domain
 
+import lotto.domain.Reward.Companion.FIRST_WIN_PRICE
+import lotto.domain.Reward.Companion.FOURTH_WIN_PRICE
+import lotto.domain.Reward.Companion.SECOND_WIN_PRICE
+import lotto.domain.Reward.Companion.THIRD_WIN_PRICE
+
 object LottoRewardCalculator {
 
     fun reward(matchCount: Int): Int {
