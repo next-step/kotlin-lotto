@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.util.NumberUtil
 
 class LottoStatistics(
-    private val winLottoList: List<WinLottoPrize>
+    private val winLottoList: List<LottoRank>
 ) {
     private val prizeList: List<Int> = winLottoList.map { it.prizeMoney }
     private val totalPrize: Int = prizeList.sum()
@@ -14,12 +14,12 @@ class LottoStatistics(
     }
 
     fun winLottoStatistics(): List<LottoStatisticsResult> {
-        val hitCountMap = winLottoList.groupBy { winLottoPrize: WinLottoPrize -> winLottoPrize.hitCount }
+        val hitCountMap = winLottoList.groupBy { lottoRank: LottoRank -> lottoRank }
 
-        return WinLottoPrize.values().map {
+        return LottoRank.winRanks().map {
             LottoStatisticsResult(
-                winLottoPrize = it,
-                winLottoCount = hitCountMap.getOrDefault(it.hitCount, emptyList()).size
+                lottoRank = it,
+                winLottoCount = hitCountMap.getOrDefault(it, emptyList()).size
             )
         }
     }

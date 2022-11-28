@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoResultService(
-    private val luckyNumbers: List<Int>
+    private val luckyNumbers: LuckyNumbers,
 ) {
     fun inquireStatistics(payment: Int, lottoList: List<Lotto>): LottoStatisticsTotal {
         val lottoWinner = LottoWinner(luckyNumbers)
