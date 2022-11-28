@@ -6,9 +6,14 @@ import lotto.domain.WinningGrade
 
 class ResultView {
 
-    fun inputWinningNumber(): String {
+    fun checkWinningNumber(lottoList: List<Lotto>) {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        return readLine() ?: ""
+        val winningNumbers = readLine() ?: ""
+        checkWinningLotto(lottoList, winningNumbers)
+    }
+
+    private fun checkWinningLotto(lottoList: List<Lotto>, winningNumbers: String) {
+        lottoList.forEach { it.win(winningNumbers) }
     }
 
     fun showResult(amount: Int, lottoList: List<Lotto>) {
