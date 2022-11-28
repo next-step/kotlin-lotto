@@ -2,9 +2,8 @@ package stringcalculator
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Assertions.*
 
-class CalculatorTest: BehaviorSpec({
+class CalculatorTest : BehaviorSpec({
     given("기본 구분자로 구분된 문자열을 입력한다.") {
         val expressionString = "10,1:2"
         val expectedResult = 13

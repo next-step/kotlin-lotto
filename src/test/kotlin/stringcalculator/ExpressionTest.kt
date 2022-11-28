@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
-class ExpressionTest: BehaviorSpec({
+class ExpressionTest : BehaviorSpec({
     given("기본 구분자로 구분된 문자열을 받아온다.") {
         val expressionString = "1,2:3"
         val expectedResult = Expression(listOf(1, 2, 3))
@@ -21,7 +21,7 @@ class ExpressionTest: BehaviorSpec({
         val expectedResult = Expression(listOf(1, 1, 2, 3))
         `when`("문자열로 Expression을 생성하면") {
             val result = Expression.from(expressionString)
-            then( "구분자로 구분된 리스트를 갖는 Expression을 반환한다.") {
+            then("구분자로 구분된 리스트를 갖는 Expression을 반환한다.") {
                 result shouldBe expectedResult
             }
         }
