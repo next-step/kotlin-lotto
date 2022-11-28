@@ -14,12 +14,12 @@ fun main() {
     val lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers()
 
     val statistics = Statistics()
-    prickWinningNumber(lottoNumbersList, lastWeekWinningNumbers, statistics)
+    pickWinningNumber(lottoNumbersList, lastWeekWinningNumbers, statistics)
 
     OutputView.resultPrint(statistics, Price(number).price())
 }
 
-private fun prickWinningNumber(
+private fun pickWinningNumber(
     lottoNumbersList: MutableList<LottoNumbers>,
     lastWeekWinningNumbers: WinningLottoNumbers,
     statistics: Statistics
