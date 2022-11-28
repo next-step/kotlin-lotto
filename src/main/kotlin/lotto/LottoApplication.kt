@@ -3,9 +3,11 @@ package lotto
 fun main() {
     val inputView = InputView()
     val price = inputView.inputPrice()
+    val number = Purchase(price).count()
+    inputView.printNumber(number);
 
     val lottoNumbersList = mutableListOf<LottoNumbers>()
-    for (i in 1..price) {
+    for (i in 1..number) {
         val drawSet = LottoMachine().draw()
         println(drawSet)
         lottoNumbersList.add(drawSet)
@@ -19,5 +21,5 @@ fun main() {
         statistics.add(win)
     }
 
-    OutputView().resultPrint(statistics, price * 1000)
+    OutputView().resultPrint(statistics, number * 1000)
 }
