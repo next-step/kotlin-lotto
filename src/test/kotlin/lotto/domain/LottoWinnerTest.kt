@@ -12,10 +12,10 @@ class LottoWinnerTest : StringSpec({
         val bonusNumber = 13
         val lottoWinner = LottoWinner(LuckyNumbers(luckyNumbers, bonusNumber))
 
-        val fourthWinLotto = Lotto(listOf(7, 9, 11, 12, 13, 14))
+        val fourthWinLotto = Lotto(listOf(5, 7, 9, 11, 12, 13))
         val secondWinLotto = Lotto(listOf(3, 5, 7, 9, 11, 13))
-        val thirdWinLotto = Lotto(listOf(5, 7, 9, 11, 12, 13))
-        val notWintLotto = Lotto(listOf(2, 4, 6, 8, 10, 12))
+        val thirdWinLotto = Lotto(listOf(3, 5, 7, 9, 11, 15))
+        val notWintLotto = Lotto(listOf(2, 4, 6, 8, 10, 13))
         // when
         val result = lottoWinner.findWinLottoList(listOf(fourthWinLotto, notWintLotto, secondWinLotto, thirdWinLotto))
         // then
