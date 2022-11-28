@@ -1,5 +1,9 @@
 package lotto.domain
 
 object LotteryTicketMachine {
-    fun ticketing(purchasePrice: Int) {}
+    private const val LOTTERY_TICKET_PRICE = 1000
+
+    fun ticketing(purchasePrice: Int): Int {
+        return purchasePrice / LOTTERY_TICKET_PRICE
+    }
 }
