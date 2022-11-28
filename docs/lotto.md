@@ -57,3 +57,10 @@
 - [x] 지난주 당첨번호 수가 1,2,3,4,5,6 경우 배열 [1,2,3,4,5,6]을 반환
 - [x] 지난주 당첨번호 입력이 숫자와 쉼표(,)가 아닌 다른 문자로 이루어져있을 경우 IllegalArgumentException 오류
 - [x] 지난주 당첨번호 입력이 공백일 경우 IllegalArgumentException 오류
+
+### 보너스번호
+
+- [x] 보너스번호 입력이 지난주 당첨번호에 포함되어있을 경우 이루어져있을 경우 IllegalArgumentException 오류
+- [x] 보너스번호 입력이 숫자가 아닌 다른 문자로 이루어져있을 경우 IllegalArgumentException 오류
+- [x] 보너스번호 입력이 공백일 경우 IllegalArgumentException 오류
+- [x] 보너스번호 입력이 공백문자열일 경우 IllegalArgumentException 오류
