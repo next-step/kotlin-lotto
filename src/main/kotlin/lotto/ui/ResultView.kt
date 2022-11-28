@@ -9,19 +9,19 @@ class ResultView {
         return readLine() ?: ""
     }
 
-    fun checkWinningLottoList(winningNumbers: String, lottoList: List<Lotto>): List<WinningResult> {
+    fun checkWinningLottoList(winningNumbers: String, lottoList: List<Lotto>): List<Winner> {
         return lottoList
             .map { lotto ->
                 WinningChecker.win(winningNumbers, lotto.list)
             }
     }
 
-    fun showResult(amount: Int, winningResults: List<WinningResult>) {
+    fun showResult(amount: Int, winners: List<Winner>) {
         println("\n당첨 통계")
         println("---------")
 
         val statics = LottoStatics()
-        val (grade: WinningGrade, earningRate: Float) = statics.makeStatics(amount, winningResults)
+        val (grade: WinningGrade, earningRate: Float) = statics.makeStatics(amount, winners)
 
         println("3개 일치 (5000원)- ${grade.three}개")
         println("4개 일치 (50000원)- ${grade.four}개")

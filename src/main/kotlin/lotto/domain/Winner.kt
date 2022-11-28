@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Winner(val count: Int, val prize: Int, private val calculateReward: (Int, Int) -> Int) {
+enum class Winner(val matchingCount: Int, val prize: Int, private val calculateReward: (Int, Int) -> Int) {
     FIRST_GRADE(6, FIRST_WIN_PRICE, { a, b -> a * b }),
     SECOND_GRADE(5, SECOND_WIN_PRICE, { a, b -> a * b }),
     THIRD_GRADE(4, THIRD_WIN_PRICE, { a, b -> a * b }),
@@ -13,8 +13,8 @@ enum class Winner(val count: Int, val prize: Int, private val calculateReward: (
 
     companion object {
 
-        fun safeValueOf(count: Int): Winner {
-            return Winner.values().find { it.count == count } ?: NO_MATCH
+        fun safeValueOf(matchingCount: Int): Winner {
+            return Winner.values().find { it.matchingCount == matchingCount } ?: NO_MATCH
         }
     }
 }
