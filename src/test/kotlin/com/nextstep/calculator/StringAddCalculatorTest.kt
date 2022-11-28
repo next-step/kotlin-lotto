@@ -14,4 +14,8 @@ class StringAddCalculatorTest : StringSpec({
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다" {
         calculator.calculate("5") shouldBe 5
     }
+
+    "연산자와 숫자를 파싱한다" {
+        calculator.calculate("1,3") shouldBe 4
+    }
 })
