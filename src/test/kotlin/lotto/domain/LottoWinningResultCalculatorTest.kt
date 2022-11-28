@@ -46,7 +46,7 @@ internal class LottoWinningResultCalculatorTest {
     )
     fun zero(input: Int) {
         val reward = LottoRewardCalculator.calculate(matchingCount = input)
-        reward shouldBe 0
+        reward.prize shouldBe NONE_WIN_PRICE
     }
 
     @DisplayName("맞춘 번호 개수는 음수 또는 6개를 초과 할 수 없다.")

@@ -9,10 +9,10 @@ internal class LottoStaticsTest {
     @DisplayName("구매 금액과 당첨금을 비교해서 수익률을 계산한다")
     @Test
     fun bep() {
-        val amount = 14000f
-        val prize = 5000f
+        val amount = 14_000
+        val prize = 5_000
 
-        val result: Float = LottoStatics().makeEarningRate(prize, amount)
+        val result: Float = LottoStatics().calculateEarningRate(prize, amount)
 
         result shouldBe 0.35f
     }
