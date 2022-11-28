@@ -18,4 +18,8 @@ class StringAddCalculatorTest : StringSpec({
     "연산자와 숫자를 파싱한다" {
         calculator.calculate("1,3") shouldBe 4
     }
+
+    "//와 \n 문자 사이에 커스텀 연산자를 받을 수 있다" {
+        calculator.calculate("//;\n1;2;3") shouldBe 6
+    }
 })
