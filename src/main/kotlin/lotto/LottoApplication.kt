@@ -1,11 +1,9 @@
 package lotto
 
 fun main() {
-    val inputView = InputView()
-    val outputView = OutputView()
-    val price = inputView.inputPrice()
+    val price = InputView.inputPrice()
     val number = Purchase(price).count()
-    outputView.printNumber(number)
+    OutputView.printNumber(number)
 
     val lottoNumbersList = mutableListOf<LottoNumbers>()
     for (i in 1..number) {
@@ -14,10 +12,10 @@ fun main() {
     }
 
     for (lottoNumbers in lottoNumbersList) {
-        outputView.print(lottoNumbers)
+        OutputView.print(lottoNumbers)
     }
 
-    val lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers()
+    val lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers()
 
     val statistics = Statistics()
     for (lottoNumbers in lottoNumbersList) {
@@ -25,5 +23,5 @@ fun main() {
         statistics.add(win)
     }
 
-    OutputView().resultPrint(statistics, number * 1000)
+    OutputView.resultPrint(statistics, number * 1000)
 }
