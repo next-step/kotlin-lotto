@@ -1,12 +1,11 @@
 package lotto.domain
 
-data class Lotto(val numbers: List<Int>) {
+data class Lotto(val numbers: Set<Int>) {
 
     val value = Companion.value
 
     init {
         require(numbers.size == 6)
-        require(numbers.toSet().size == 6)
     }
 
     companion object {

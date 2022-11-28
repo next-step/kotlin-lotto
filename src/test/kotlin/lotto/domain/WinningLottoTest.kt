@@ -22,25 +22,25 @@ class WinningLottoTest {
     @Test
     fun `전부(6개) 같으면 CompareResult FirstWin을 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(winNumber.compareWith(Lotto(listOf(1, 2, 3, 4, 5, 6)))).isEqualTo(LottoResult.FirstWin)
+        assertThat(winNumber.compareWith(Lotto(setOf(1, 2, 3, 4, 5, 6)))).isEqualTo(LottoResult.FirstWin)
     }
 
     @Test
     fun `5개가 같으면 CompareResult SecondWin 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(winNumber.compareWith(Lotto(listOf(1, 2, 3, 4, 5, 7)))).isEqualTo(LottoResult.SecondWin)
+        assertThat(winNumber.compareWith(Lotto(setOf(1, 2, 3, 4, 5, 7)))).isEqualTo(LottoResult.SecondWin)
     }
 
     @Test
     fun `4개가 같으면 CompareResult SecondWin 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(winNumber.compareWith(Lotto(listOf(1, 2, 3, 4, 7, 8)))).isEqualTo(LottoResult.ThirdWin)
+        assertThat(winNumber.compareWith(Lotto(setOf(1, 2, 3, 4, 7, 8)))).isEqualTo(LottoResult.ThirdWin)
     }
 
     @Test
     fun `3개가 같으면 CompareResult SecondWin 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(winNumber.compareWith(Lotto(listOf(1, 2, 3, 7, 8, 9)))).isEqualTo(LottoResult.FourthWin)
+        assertThat(winNumber.compareWith(Lotto(setOf(1, 2, 3, 7, 8, 9)))).isEqualTo(LottoResult.FourthWin)
     }
 
     @DisplayName("로또 비교 테스트")
@@ -55,9 +55,9 @@ class WinningLottoTest {
         @JvmStatic
         fun valueSource(): List<Arguments> {
             return listOf(
-                Arguments.of(Lotto(listOf(1, 2, 7, 8, 9, 10))),
-                Arguments.of(Lotto(listOf(1, 7, 8, 9, 10, 11))),
-                Arguments.of(Lotto(listOf(7, 8, 9, 10, 11, 12))),
+                Arguments.of(Lotto(setOf(1, 2, 7, 8, 9, 10))),
+                Arguments.of(Lotto(setOf(1, 7, 8, 9, 10, 11))),
+                Arguments.of(Lotto(setOf(7, 8, 9, 10, 11, 12))),
             )
         }
     }

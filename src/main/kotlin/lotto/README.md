@@ -45,3 +45,4 @@
 
 ## 2단계 피드백 목록
 - [x] InputView, ResultView Object class 로 선언하기
+- [ ] 로또 처음부터 Set Collection 으로 생성
