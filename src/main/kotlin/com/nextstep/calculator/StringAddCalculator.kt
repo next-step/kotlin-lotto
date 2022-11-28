@@ -1,24 +1,27 @@
 package com.nextstep.calculator
 
 class StringAddCalculator {
+    private val defaultDelimiters = arrayOf(":", ",")
+    private val customDelimiterPattern = "//(.)\n(.*)"
 
     fun calculate(input: String?): Int {
         if (input.isNullOrBlank()) return 0
 
-        var delimiters = arrayOf(":", ",")
-        var expression = input
+        val (delimiters, expression) = parse(input)
 
-        val matches = Regex("//(.)\n(.*)").find(input)
-        matches?.let {
-            delimiters = arrayOf(it.groupValues[1])
-            expression = it.groupValues[2]
-        }
-
-        return expression!!.split(delimiters = delimiters)
+        return expression.split(delimiters = delimiters)
             .stream()
             .mapToInt { toInt(it) }
             .map { validate(it) }
             .sum()
+    }
+
+    private fun parse(input: String): Pair<Array<String>, String> {
+        val matches = Regex(customDelimiterPattern).find(input)
+        matches?.run {
+            return Pair(arrayOf(groupValues[1]), groupValues[2])
+        }
+        return Pair(defaultDelimiters, input)
     }
 
     private fun toInt(num: String): Int {
