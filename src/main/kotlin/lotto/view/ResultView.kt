@@ -22,7 +22,11 @@ object ResultView {
         println("$count$LOTTO_COUNT_MESSAGE")
     }
 
-    fun printLottoNumbers(numbers: List<Int>) {
+    fun printLottoNumbersList(lottoNumbersList: List<List<Int>>) {
+        lottoNumbersList.forEach { printLottoNumbers(it) }
+    }
+
+    private fun printLottoNumbers(numbers: List<Int>) {
         println(LOTTO_NUMBER_PREFIX + numbers.joinToString(LOTTO_NUMBER_DELIMITER) + LOTTO_NUMBER_SUFFIX)
     }
 

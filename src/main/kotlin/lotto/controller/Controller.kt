@@ -4,6 +4,7 @@ import lotto.domain.InputParser
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
+import lotto.domain.LottoNumbersList
 import lotto.domain.LottoPrice
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
@@ -14,12 +15,12 @@ object Controller {
     fun start() {
         val amount = inputAmount()
         val lottoCount = amount.count()
-        val lottoNumbersList = arrayListOf<LottoNumbers>()
-        generateLottoNumbers(lottoCount, lottoNumbersList)
+        ResultView.printLottoCount(lottoCount)
+        generateLottoNumbers(lottoCount)
+        ResultView.printLottoNumbersList(LottoNumbersList.getList())
 
         val winningNumbers = inputWinningNumber()
-        val lottoResult = makeLottoResult(lottoNumbersList, winningNumbers)
-
+        val lottoResult = makeLottoResult(winningNumbers)
         printLottoResult(lottoResult, amount)
     }
 
@@ -32,21 +33,20 @@ object Controller {
         ResultView.printProfitRate(profitRate)
     }
 
-    private fun makeLottoResult(lottoNumbersList: ArrayList<LottoNumbers>, winningNumbers: LottoNumbers): LottoResult {
+    private fun makeLottoResult(winningNumbers: LottoNumbers): LottoResult {
         val lottoResult = LottoResult(hashMapOf(LottoRank.FIFTH to 0, LottoRank.FOURTH to 0, LottoRank.THIRD to 0, LottoRank.FIRST to 0))
-        for (lottoNumbers in lottoNumbersList) {
-            val lottoRank = winningNumbers.getLottoRank(lottoNumbers)
+        LottoNumbersList.getLottoNumbers().forEach {
+            val lottoNumbers = LottoNumbers(it.value)
+            val lottoRank = lottoNumbers.getLottoRank(winningNumbers)
             lottoResult.add(lottoRank)
         }
         return lottoResult
     }
 
-    private fun generateLottoNumbers(lottoCount: Int, lottoNumbersList: ArrayList<LottoNumbers>) {
-        ResultView.printLottoCount(lottoCount)
+    private fun generateLottoNumbers(lottoCount: Int) {
         repeat(lottoCount) {
             val lottoNumbers = LottoGenerator.generate()
-            lottoNumbersList.add(lottoNumbers)
-            ResultView.printLottoNumbers(lottoNumbers.value.map { it.value })
+            LottoNumbersList.setLottoNumbers(lottoNumbers)
         }
     }
 
