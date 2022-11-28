@@ -15,7 +15,10 @@ object ResultView {
     }
 
     fun printWinningStatistics(statistics: Map<LottoGameResult, Int>) {
-        statistics.forEach { println("${it.key.criteriaForWinning}개 일치 (${it.key.prize}원)- ${it.value}개") }
+        statistics.forEach {
+            val bonus = if (it.key == LottoGameResult.SECOND_BONUS) ", 보너스 볼 일치" else ""
+            println("${it.key.criteriaForWinning}개 일치$bonus (${it.key.prize}원)- ${it.value}개")
+        }
     }
 
     fun printRate(rate: BigDecimal) {
