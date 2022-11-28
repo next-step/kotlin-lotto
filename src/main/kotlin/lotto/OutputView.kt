@@ -5,6 +5,10 @@ class OutputView {
         println("${number}개를 구매했습니다.")
     }
 
+    fun print(any: Any) {
+        println(any)
+    }
+
     fun resultPrint(statistics: Statistics, allPrice: Int) {
         println(
             """

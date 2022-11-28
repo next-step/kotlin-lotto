@@ -5,13 +5,16 @@ fun main() {
     val outputView = OutputView()
     val price = inputView.inputPrice()
     val number = Purchase(price).count()
-    outputView.printNumber(number);
+    outputView.printNumber(number)
 
     val lottoNumbersList = mutableListOf<LottoNumbers>()
     for (i in 1..number) {
         val drawSet = LottoMachine().draw()
-        println(drawSet)
         lottoNumbersList.add(drawSet)
+    }
+
+    for (lottoNumbers in lottoNumbersList) {
+        outputView.print(lottoNumbers)
     }
 
     val lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers()
