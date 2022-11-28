@@ -16,8 +16,8 @@ internal class LottoTest {
         val firstLotto = Lotto()
         val secondLotto = Lotto()
 
-        val firstSum = firstLotto.list.sum()
-        val secondSum = secondLotto.list.sum()
+        val firstSum = firstLotto.numbers.sum()
+        val secondSum = secondLotto.numbers.sum()
 
         assertThat(firstSum).isNotEqualTo(secondSum)
     }
@@ -26,7 +26,7 @@ internal class LottoTest {
     @Test
     fun numberSize() {
         val lotto = Lotto()
-        val listSize = lotto.list.size
+        val listSize = lotto.numbers.size
 
         assertThat(listSize).isEqualTo(6)
     }
@@ -35,8 +35,8 @@ internal class LottoTest {
     @Test
     fun orderASC() {
         val lotto = Lotto()
-        val first = lotto.list[0]
-        val second = lotto.list[1]
+        val first = lotto.numbers[0]
+        val second = lotto.numbers[1]
 
         assertThat(first).isLessThan(second)
     }
@@ -50,8 +50,8 @@ internal class LottoTest {
         val lotto = Lotto()
         val numbers: List<Int> = Tokenizer.tokenize(input).map { it.toInt() }
 
-        val matchingCount = LottoMatcher.countMatchNumber(numbers, lotto.list)
-        val reward = WinningChecker.win(winningNumberStrings = input, lottoNumbers = lotto.list)
+        val matchingCount = LottoMatcher.countMatchNumber(numbers, lotto.numbers)
+        val reward = WinningChecker.win(winningNumberStrings = input, lottoNumbers = lotto.numbers)
 
         reward.matchingCount shouldBe matchingCount
     }

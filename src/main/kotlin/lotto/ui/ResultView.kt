@@ -15,7 +15,7 @@ class ResultView {
     fun checkWinningLottoList(winningNumbers: String, lottoList: List<Lotto>): List<Winner> {
         return lottoList
             .map { lotto ->
-                WinningChecker.win(winningNumbers, lotto.list)
+                WinningChecker.win(winningNumbers, lotto.numbers)
             }
     }
 

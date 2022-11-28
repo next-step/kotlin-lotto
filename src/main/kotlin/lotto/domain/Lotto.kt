@@ -1,9 +1,9 @@
 package lotto.domain
 
-class Lotto(val list: List<Int> = initList()) {
+class Lotto(val numbers: List<Int> = initList()) {
 
     override fun toString(): String {
-        return list.toString()
+        return numbers.toString()
     }
 
     companion object {

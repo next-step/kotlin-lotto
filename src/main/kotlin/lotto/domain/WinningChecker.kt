@@ -9,7 +9,7 @@ object WinningChecker {
             it.toInt()
         }
 
-        val matchingCount = LottoMatcher.countMatchNumber(winningNumbers, lottoNumbers)
-        return LottoRewardCalculator.calculate(matchingCount)
+        val matchNumberCount = LottoMatcher.countMatchNumber(winningNumbers, lottoNumbers)
+        return LottoMatcher.matchingWinner(matchNumberCount)
     }
 }
