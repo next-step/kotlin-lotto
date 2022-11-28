@@ -15,13 +15,14 @@ class Output {
         println("${times}개를 구매했습니다.")
     }
 
-    fun printResultHeader() {
+    fun printResult(ranks: Ranks) {
         println("당첨 통계")
         println("----------")
-    }
-
-    fun printResult(ranks: Ranks, rank: Rank) {
-        println("${rank.match()}개 일치 (${rank.prize()}원)- ${ranks.rankCount(rank)}개")
+        println("${Rank.FIFTH.countOfMatch}개 일치 (${Rank.FIFTH.winningMoney}원)- ${ranks.rankCount(Rank.FIFTH)}개")
+        println("${Rank.FOURTH.countOfMatch}개 일치 (${Rank.FOURTH.winningMoney}원)- ${ranks.rankCount(Rank.FOURTH)}개")
+        println("${Rank.THIRD.countOfMatch}개 일치 (${Rank.THIRD.winningMoney}원)- ${ranks.rankCount(Rank.THIRD)}개")
+        println("${Rank.SECOND.countOfMatch}개 일치, 보너스 볼 일치 (${Rank.SECOND.winningMoney}원)- ${ranks.rankCount(Rank.FIFTH)}개")
+        println("${Rank.FIRST.countOfMatch}개 일치 (${Rank.FIRST.winningMoney}원)- ${ranks.rankCount(Rank.FIRST)}개")
     }
 
     fun printYield(yield: Double) {

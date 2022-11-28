@@ -14,11 +14,9 @@ fun main() {
     output.printLottos(lottos)
 
     val winningLotto = Lotto(input.getWinningNumbers())
-    val ranks = Ranks.aggregate(lottos.matches(winningLotto))
+    val bonusNumber = input.getBonusNumber()
+    val ranks = lottos.ranks(winningLotto,bonusNumber)
 
-    output.printResultHeader()
-    Rank.values()
-        .sortedDescending()
-        .forEach { output.printResult(ranks, it) }
+    output.printResult(ranks)
     output.printYield(ranks.yield(money))
 }
