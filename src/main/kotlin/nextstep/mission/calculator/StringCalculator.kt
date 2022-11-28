@@ -2,9 +2,12 @@ package nextstep.mission.calculator
 
 object StringCalculator {
 
-    tailrec fun calculate(acc: Int = 0, expression: MutableList<Int> = mutableListOf()): Int = when {
-        expression.isEmpty() -> acc
-        expression.first() < 0 -> throw RuntimeException()
-        else -> calculate(acc + expression.removeFirst(), expression)
+    fun calculate(expression: List<Int>): Int {
+        tailrec fun calculate(acc: Int, expression: MutableList<Int>): Int = when {
+            expression.isEmpty() -> acc
+            expression.first() < 0 -> throw RuntimeException()
+            else -> calculate(acc + expression.removeFirst(), expression)
+        }
+        return calculate(0, expression.toMutableList())
     }
 }
