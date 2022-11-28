@@ -1,7 +1,7 @@
 package simulator.lotto
 
 data class Lottos(val values: List<Lotto>) {
-    fun matches(winningLotto: Lotto): List<Int> {
-        return values.map { it.match(winningLotto) }
+    fun ranks(winningLotto: Lotto, bonusNumber: Int): Ranks {
+        return Ranks(values.map { it.rank(winningLotto, bonusNumber) })
     }
 }
