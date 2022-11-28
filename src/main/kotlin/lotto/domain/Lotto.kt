@@ -2,17 +2,13 @@ package lotto.domain
 
 import calculator.Tokenizer
 
-class Lotto {
-
-    val list: List<Int> = initList()
+class Lotto(val list: List<Int> = initList()) {
 
     var matchingCount: Int = 0
         private set
 
     var reward: Int = 0
         private set
-
-    private fun initList(): List<Int> = (1..45).shuffled().subList(0, 6).sorted()
 
     override fun toString(): String {
         return list.toString()
@@ -25,5 +21,15 @@ class Lotto {
 
         matchingCount = LottoMatcher.match(numbers, list)
         reward = LottoReward.reward(matchingCount)
+    }
+
+    companion object {
+        const val START_LOTTO_INDEX = 0
+        const val LAST_LOTTO_INDEX = 6
+        private val LOTTO_NUMBER_RANGE = (1..45)
+
+        fun initList(): List<Int> {
+            return LOTTO_NUMBER_RANGE.shuffled().subList(START_LOTTO_INDEX, LAST_LOTTO_INDEX).sorted()
+        }
     }
 }
