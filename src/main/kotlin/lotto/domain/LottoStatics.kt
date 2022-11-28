@@ -11,10 +11,10 @@ class LottoStatics {
     private val winningGrade: WinningGrade = WinningGrade()
     private var earningRate: Float = 0f
 
-    fun makeStatics(amount: Int, rewards: List<Reward>): Pair<WinningGrade, Float> {
+    fun makeStatics(amount: Int, winningResults: List<WinningResult>): Pair<WinningGrade, Float> {
         var totalReward = 0
 
-        rewards.forEach { reward ->
+        winningResults.forEach { reward ->
             totalReward += reward.reward
             makeWinningGrade(winningGrade, reward)
         }
@@ -28,8 +28,8 @@ class LottoStatics {
         return earningRateFormat.format(reward.div(amount)).toFloat()
     }
 
-    private fun makeWinningGrade(grade: WinningGrade, reward: Reward) {
-        when (reward.matchingCount) {
+    private fun makeWinningGrade(grade: WinningGrade, winningResult: WinningResult) {
+        when (winningResult.matchingCount) {
             3 -> grade.three++
             4 -> grade.four++
             5 -> grade.five++
