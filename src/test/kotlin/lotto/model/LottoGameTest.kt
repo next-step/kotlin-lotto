@@ -22,12 +22,12 @@ class LottoGameTest : StringSpec({
         val drawResult = lottoGame.draw(
             LottoNumbers(
                 listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6)
+                    LottoNumber.valueOf(1),
+                    LottoNumber.valueOf(2),
+                    LottoNumber.valueOf(3),
+                    LottoNumber.valueOf(4),
+                    LottoNumber.valueOf(5),
+                    LottoNumber.valueOf(6)
                 )
             ),
             LottoNumber(10)

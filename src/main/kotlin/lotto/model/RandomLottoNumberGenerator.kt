@@ -1,12 +1,11 @@
 package lotto.model
 
-private val LOTTO_ALL_NUMBER = (1..45).map { LottoNumber(it) }.toList()
+private const val LOTTO_SIZE = 6
 
 class RandomLottoNumberGenerator : LottoNumberGenerator {
 
-    override fun pick(): LottoNumbers =
-        LottoNumbers(
-            LOTTO_ALL_NUMBER.shuffled().subList(0, 6)
-                .sortedBy { it.number }
-        )
+    override fun pick(): LottoNumbers = LottoNumbers(
+        LottoNumber.LOTTO_NUMBER_CACHE.shuffled().subList(0, LOTTO_SIZE)
+            .sortedBy { it.number }
+    )
 }
