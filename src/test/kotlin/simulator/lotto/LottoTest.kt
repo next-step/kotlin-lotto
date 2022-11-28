@@ -31,15 +31,12 @@ internal class LottoTest {
     }
 
     @Test
-    fun `당첨번호와 얼마나 일치하는지 알 수 있다`() {
-        val lottoNumbers1 = setOf(1, 2, 3, 4, 5, 6)
-        val lotto1 = Lotto(lottoNumbers1)
+    fun `당첨번호와 보너스 번호를 통해 결과를 알 수 있다`() {
+        val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = Lotto(setOf(1,2,3,4,5,7))
+        val bonusNumber = 6
 
-        val lottoNumbers2 = setOf(1, 2, 3, 4, 5, 6)
-        val lotto2 = Lotto(lottoNumbers2)
-
-
-        assertThat(lotto1.match(lotto2)).isEqualTo(6)
+        assertThat(lotto.rank(winningNumbers, bonusNumber)).isEqualTo(Rank.SECOND)
     }
 
     @Test

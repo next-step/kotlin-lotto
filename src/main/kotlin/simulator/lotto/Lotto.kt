@@ -19,16 +19,20 @@ class Lotto(numbers: Set<Int>) {
         this.numbers = numbers.toSortedSet()
     }
 
-    fun match(lotto: Lotto): Int {
+    override fun toString(): String {
+        return numbers.joinToString(",")
+    }
+
+    fun rank(winningNumber: Lotto, bonusNumber: Int): Rank {
+        return Rank.valueOf(match(winningNumber), numbers.contains(bonusNumber))
+    }
+
+    private fun match(lotto: Lotto): Int {
         var matches = 0
         lotto.numbers.forEach {
             if (numbers.contains(it)) matches++
         }
         return matches
-    }
-
-    override fun toString(): String {
-        return numbers.joinToString(",")
     }
 
     companion object {
