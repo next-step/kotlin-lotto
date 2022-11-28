@@ -8,7 +8,7 @@ internal class LottoListTest {
     private val lottoGenerator: LottoGenerator = LottoManualGenerator()
 
     @Test
-    fun compare() {
+    fun `로또 리스트와 당첨 로또를 비교하여 등수 반환(당첨된 경우)`() {
         val lottoNumbers = "1,2,3,4,5,6"
         val winningLotto = LottoCustomGenerator.generateLotto(lottoNumbers)
         val lottoNumber = 7
@@ -26,7 +26,7 @@ internal class LottoListTest {
     }
 
     @Test
-    fun `compare return MISS`() {
+    fun `로또 리스트와 당첨 로또를 비교하여 등수 반환(당첨되지 못한 경우)`() {
         val lottoNumbers = "4,5,9,10,11,12"
         val winningLotto = LottoCustomGenerator.generateLotto(lottoNumbers)
         val lottoNumber = 6
@@ -43,7 +43,7 @@ internal class LottoListTest {
     }
 
     @Test
-    fun count() {
+    fun `로또 리스트에서 로또 수량`() {
         val lottoCount = 4L
         val lottoList = LottoListGenerator.generateLottoList(lottoCount, lottoGenerator)
 
@@ -53,7 +53,7 @@ internal class LottoListTest {
     }
 
     @Test
-    fun addLottoList() {
+    fun `addLottoList()는 로또 리스트와 다른 로또 리스트를 추가하도록 한다`() {
         val lotto1 = LottoCustomGenerator.generateLotto("1,2,3,4,5,6")
         val lottoList1 = listOf(lotto1)
 
