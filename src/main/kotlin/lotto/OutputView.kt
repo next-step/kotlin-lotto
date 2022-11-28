@@ -1,8 +1,10 @@
 package lotto
 
-import kotlin.math.floor
-
 class OutputView {
+    fun printNumber(number: Int) {
+        println("${number}개를 구매했습니다.")
+    }
+
     fun resultPrint(statistics: Statistics, allPrice: Int) {
         println(
             """

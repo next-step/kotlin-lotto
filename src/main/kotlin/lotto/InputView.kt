@@ -12,8 +12,4 @@ class InputView {
         val parse = Parser().parse(inputLastWeekWinningNumbers).toMutableList()
         return WinningLottoNumbers(parse)
     }
-
-    fun printNumber(number: Int) {
-        println("${number}개를 구매했습니다.")
-    }
 }
