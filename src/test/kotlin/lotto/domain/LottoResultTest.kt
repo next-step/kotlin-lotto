@@ -2,34 +2,30 @@ package lotto.domain
 
 import lotto.view.ResultView.floorPowerOfTwo
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import java.util.EnumMap
 
 class LottoResultTest {
-    // given
-    private val lottoResult = LottoResult()
-
-    @BeforeEach
-    fun setUp() {
-        lottoResult.add(LottoRank.FIFTH)
-    }
-
     @DisplayName("로또 결과 확인 테스트")
     @Test
     fun `로또 결과 확인 테스트`() {
+        // given
+        val lottoResult = initLottoResult()
+
         // when, then
-        assertThat(lottoResult.getLottoRankCount(LottoRank.FIRST)).isEqualTo(0)
-        assertThat(lottoResult.getLottoRankCount(LottoRank.THIRD)).isEqualTo(0)
-        assertThat(lottoResult.getLottoRankCount(LottoRank.FOURTH)).isEqualTo(0)
-        assertThat(lottoResult.getLottoRankCount(LottoRank.FIFTH)).isEqualTo(1)
-        assertThat(lottoResult.getLottoRankCount(LottoRank.MISS)).isEqualTo(0)
+        assertThat(lottoResult.value[LottoRank.FIRST]).isEqualTo(0)
+        assertThat(lottoResult.value[LottoRank.THIRD]).isEqualTo(0)
+        assertThat(lottoResult.value[LottoRank.FOURTH]).isEqualTo(0)
+        assertThat(lottoResult.value[LottoRank.FIFTH]).isEqualTo(1)
+        assertThat(lottoResult.value[LottoRank.MISS]).isEqualTo(0)
     }
 
     @DisplayName("수익률 계산 테스트")
     @Test
     fun `수익률 계산 테스트`() {
         // given
+        val lottoResult = initLottoResult()
         val amount = 14_000
         val expected = 0.35f
 
@@ -41,16 +37,13 @@ class LottoResultTest {
         assertThat(actual).isEqualTo(expected)
     }
 
-    @DisplayName("당첨 결과 계산 테스트")
-    @Test
-    fun `당첨 결과 계산 테스트`() {
-        // given
-        lottoResult.add(LottoRank.FIFTH)
-
-        // when
-        val actual = lottoResult.getLottoRankCount(LottoRank.FIFTH)
-
-        // then
-        assertThat(actual).isEqualTo(2)
+    private fun initLottoResult(): LottoResult {
+        val lottoResult: EnumMap<LottoRank, Int> = EnumMap(LottoRank::class.java)
+        lottoResult[LottoRank.FIRST] = 0
+        lottoResult[LottoRank.THIRD] = 0
+        lottoResult[LottoRank.FOURTH] = 0
+        lottoResult[LottoRank.FIFTH] = 1
+        lottoResult[LottoRank.MISS] = 0
+        return LottoResult(lottoResult)
     }
 }

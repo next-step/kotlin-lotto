@@ -10,8 +10,12 @@ import lotto.domain.LottoRank
 import lotto.domain.LottoResult
 import lotto.view.InputView
 import lotto.view.ResultView
+import java.util.EnumMap
 
 object Controller {
+    private const val DEFAULT_COUNT = 0
+    private const val INCREASE_COUNT = 1
+
     fun start() {
         val amount = inputAmount()
         val numberOfLotto = amount.calculateNumberOfLotto()
@@ -27,24 +31,32 @@ object Controller {
     private fun printLottoResult(lottoResult: LottoResult, amount: LottoPrice) {
         ResultView.printLottoResultTitle()
         lottoResult.value.forEach {
-            addLottoResult(it, lottoResult)
+            addLottoResult(it)
         }
         val profitRate = lottoResult.calculateProfitRate(amount.value)
         ResultView.printProfitRate(profitRate)
     }
 
-    private fun addLottoResult(it: Map.Entry<LottoRank, Int>, lottoResult: LottoResult) {
+    private fun addLottoResult(it: Map.Entry<LottoRank, Int>) {
         if (it.key != LottoRank.MISS) {
-            ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, lottoResult.getLottoRankCount(it.key))
+            ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value)
         }
     }
 
     private fun makeLottoResult(winningNumbers: LottoNumbers): LottoResult {
-        val lottoResult = LottoResult()
+        val lottoResult: EnumMap<LottoRank, Int> = initLottoResult()
         LottoNumbersList.getLottoNumbers().forEach {
             val lottoNumbers = LottoNumbers(it.value)
-            val lottoRank = lottoNumbers.getLottoRank(winningNumbers)
-            lottoResult.add(lottoRank)
+            val lottoRank = winningNumbers.getLottoRank(lottoNumbers)
+            lottoResult[lottoRank] = lottoResult.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREASE_COUNT
+        }
+        return LottoResult(lottoResult)
+    }
+
+    private fun initLottoResult(): EnumMap<LottoRank, Int> {
+        val lottoResult: EnumMap<LottoRank, Int> = EnumMap(LottoRank::class.java)
+        LottoRank.values().forEach {
+            lottoResult[it] = DEFAULT_COUNT
         }
         return lottoResult
     }
