@@ -4,7 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.WalletResult
 
-class ResultView {
+object ResultView {
 
     fun printLottos(lottos: List<Lotto>) {
         lottos.forEach {

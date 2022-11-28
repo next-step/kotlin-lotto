@@ -6,19 +6,15 @@ import lotto.views.InputView
 import lotto.views.ResultView
 
 fun main() {
-
-    val inputView = InputView()
-    val resultView = ResultView()
-
     val wallet = Wallet()
 
-    val money = inputView.insertMoney()
+    val money = InputView.insertMoney()
     wallet.insertMoney(money)
 
     val lottos = wallet.buyLottos()
-    resultView.printLottos(lottos)
+    ResultView.printLottos(lottos)
 
-    val winningLotto = inputView.getWinningLotto()
+    val winningLotto = InputView.getWinningLotto()
     val result = wallet.indicateLottoStatistics(WinningLotto.byInput(winningLotto))
-    resultView.printResult(result)
+    ResultView.printResult(result)
 }

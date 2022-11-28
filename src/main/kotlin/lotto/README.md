@@ -42,3 +42,6 @@
     - [x] 비교 걸과 클래스 생성
 - [x] 수익률 비교
   -  [x] 지갑 결과 클래스 생성
+
+## 2단계 피드백 목록
+- [x] InputView, ResultView Object class 로 선언하기
