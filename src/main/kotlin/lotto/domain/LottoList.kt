@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoList(
-    private val lottoList: List<Lotto>
+    val lottoList: List<Lotto>
 ) {
     fun compare(winningLotto: Lotto, bonusLottoNumber: LottoNumber): List<LottoRank> =
         lottoList.mapNotNull { lotto: Lotto ->
@@ -9,4 +9,15 @@ data class LottoList(
             val isBonusMatch = lotto.containLottoNumber(bonusLottoNumber)
             LottoRank.valueOf(matchCount, isBonusMatch)
         }
+
+    fun count(): Int = lottoList.count()
+
+    fun addLottoList(otherLottoList: LottoList): LottoList =
+        LottoList(lottoList.plus(otherLottoList.lottoList))
+
+    fun printLottoList() {
+        lottoList.forEach { lotto ->
+            println(lotto.numbers)
+        }
+    }
 }

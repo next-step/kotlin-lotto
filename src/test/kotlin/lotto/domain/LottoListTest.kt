@@ -1,16 +1,11 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class LottoListTest {
 
     private val numberGenerator: NumberGenerator = ManualNumberGenerator()
-
-    @BeforeEach
-    fun setUp() {
-    }
 
     @Test
     fun compare() {
@@ -22,7 +17,7 @@ internal class LottoListTest {
         val lottoCount = 4L
         val lottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
 
-        val lottoRankList = LottoList(lottoList).compare(winningLotto, bonusLottoNumber)
+        val lottoRankList = lottoList.compare(winningLotto, bonusLottoNumber)
 
         assertThat(lottoRankList.count().toLong()).isEqualTo(lottoCount)
         lottoRankList.forEach { lottoRank ->
@@ -40,8 +35,34 @@ internal class LottoListTest {
         val lottoCount = 4L
         val lottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
 
-        val lottoRankList = LottoList(lottoList).compare(winningLotto, bonusLottoNumber)
+        val lottoRankList = lottoList.compare(winningLotto, bonusLottoNumber)
 
         assertThat(lottoRankList).isEmpty()
+    }
+
+    @Test
+    fun count() {
+        val lottoCount = 4L
+        val lottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
+
+        val lottoCountResult = lottoList.count().toLong()
+
+        assertThat(lottoCountResult).isEqualTo(lottoCount)
+    }
+
+    @Test
+    fun addLottoList() {
+        val lotto1 = LottoGenerator.generateLotto("1,2,3,4,5,6")
+        val lottoList1 = listOf(lotto1)
+
+        val lotto2 = LottoGenerator.generateLotto("2,3,4,5,6,7")
+        val lottoList2 = listOf(lotto2)
+
+        val addLottoList = LottoList(listOf(lotto1, lotto2))
+
+        val resultLottoList = LottoList(lottoList1).addLottoList(LottoList(lottoList2))
+
+        assertThat(resultLottoList.count()).isEqualTo(addLottoList.count())
+        assertThat(resultLottoList).isEqualTo(addLottoList)
     }
 }
