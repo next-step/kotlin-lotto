@@ -5,6 +5,7 @@ enum class LottoRank(
     val reward: Long,
     val isBonus: Boolean
 ) {
+    MISS(0, 0L, false),
     FIFTH_PLACE(3, 5_000L, false),
     FOURTH_PLACE(4, 50_000L, false),
     THIRD_PLACE(5, 1_500_000L, false),
@@ -14,10 +15,10 @@ enum class LottoRank(
     companion object {
         private const val CHECK_MATCH_COUNT = 5
 
-        fun valueOf(matchCount: Int, isBonus: Boolean): LottoRank? =
+        fun valueOf(matchCount: Int, isBonus: Boolean): LottoRank =
             values().find {
                 checkLottoRank(it, matchCount, isBonus)
-            }
+            } ?: MISS
 
         fun getMissing(lottoRankList: Set<LottoRank>): Set<LottoRank> =
             values().toMutableSet()

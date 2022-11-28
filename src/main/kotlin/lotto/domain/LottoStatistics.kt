@@ -17,7 +17,7 @@ class LottoStatistics(
             .groupBy { it }
             .let { map ->
                 val missingMap = getMissingMap(map.keys)
-                map.plus(missingMap)
+                map.plus(missingMap).minus(LottoRank.MISS)
             }
             .map { lottoMap ->
                 LottoMatch(lottoMap.key, lottoMap.value.count().toLong())
