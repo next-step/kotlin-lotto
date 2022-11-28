@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoReward {
+object LottoRewardCalculator {
 
     fun reward(matchCount: Int): Int {
         check((Lotto.START_LOTTO_INDEX..Lotto.LAST_LOTTO_INDEX).contains(matchCount)) { "당첨 개수는 최대 6개 최소 0개 입니다" }

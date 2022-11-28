@@ -1,26 +1,9 @@
 package lotto.domain
 
-import calculator.Tokenizer
-
 class Lotto(val list: List<Int> = initList()) {
-
-    var matchingCount: Int = 0
-        private set
-
-    var reward: Int = 0
-        private set
 
     override fun toString(): String {
         return list.toString()
-    }
-
-    fun win(winningNumbers: String) {
-        val numbers: List<Int> = Tokenizer.tokenize(winningNumbers).map {
-            it.toInt()
-        }
-
-        matchingCount = LottoMatcher.countMatchNumber(numbers, list)
-        reward = LottoReward.reward(matchingCount)
     }
 
     companion object {

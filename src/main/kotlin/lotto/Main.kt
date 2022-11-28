@@ -13,7 +13,8 @@ fun main() {
 
     val resultView = ResultView()
     // 지난 주 당첨 번호 입력
-    resultView.checkWinningNumber(lottoList)
+    val winningNumbers = resultView.inputWinningNumbers()
+    val rewards = resultView.checkWinningLottoList(winningNumbers, lottoList)
     // 당첨 통계 출력
-    resultView.showResult(amount, lottoList)
+    resultView.showResult(amount, rewards)
 }

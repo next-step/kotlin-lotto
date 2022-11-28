@@ -1,27 +1,27 @@
 package lotto.ui
 
-import lotto.domain.Lotto
-import lotto.domain.LottoStatics
-import lotto.domain.WinningGrade
+import lotto.domain.*
 
 class ResultView {
 
-    fun checkWinningNumber(lottoList: List<Lotto>) {
+    fun inputWinningNumbers(): String {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        val winningNumbers = readLine() ?: ""
-        checkWinningLotto(lottoList, winningNumbers)
+        return readLine() ?: ""
     }
 
-    private fun checkWinningLotto(lottoList: List<Lotto>, winningNumbers: String) {
-        lottoList.forEach { it.win(winningNumbers) }
+    fun checkWinningLottoList(winningNumbers: String, lottoList: List<Lotto>): List<Reward> {
+        return lottoList
+            .map { lotto ->
+                WinningChecker.win(winningNumbers, lotto.list)
+            }
     }
 
-    fun showResult(amount: Int, lottoList: List<Lotto>) {
+    fun showResult(amount: Int, rewards: List<Reward>) {
         println("\n당첨 통계")
         println("---------")
 
         val statics = LottoStatics()
-        val (grade: WinningGrade, earningRate: Float) = statics.makeStatics(amount, lottoList)
+        val (grade: WinningGrade, earningRate: Float) = statics.makeStatics(amount, rewards)
 
         println("3개 일치 (5000원)- ${grade.three}개")
         println("4개 일치 (50000원)- ${grade.four}개")

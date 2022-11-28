@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class LottoRewardTest {
+internal class LottoRewardCalculatorTest {
 
     @DisplayName("맞춘 번호 개수가 3개 이상이면 당첨 금액이 계산된다")
     @ParameterizedTest
@@ -16,7 +16,7 @@ internal class LottoRewardTest {
         ints = [3, 4, 5, 6]
     )
     fun reward(input: Int) {
-        val reward = LottoReward.reward(matchCount = input)
+        val reward = LottoRewardCalculator.reward(matchCount = input)
         reward shouldBeGreaterThanOrEqual FOURTH_WIN_PRICE
     }
 
@@ -26,7 +26,7 @@ internal class LottoRewardTest {
         ints = [0, 1, 2]
     )
     fun zero(input: Int) {
-        val reward = LottoReward.reward(matchCount = input)
+        val reward = LottoRewardCalculator.reward(matchCount = input)
         reward shouldBe 0
     }
 
@@ -37,7 +37,7 @@ internal class LottoRewardTest {
     )
     fun minusOrOverCount(input: Int) {
         shouldThrowExactly<IllegalStateException> {
-            LottoReward.reward(matchCount = input)
+            LottoRewardCalculator.reward(matchCount = input)
         }
     }
 }
