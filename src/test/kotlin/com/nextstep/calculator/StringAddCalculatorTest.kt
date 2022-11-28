@@ -1,6 +1,9 @@
 package com.nextstep.calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class StringAddCalculatorTest : StringSpec({
@@ -21,5 +24,16 @@ class StringAddCalculatorTest : StringSpec({
 
     "//와 \n 문자 사이에 커스텀 연산자를 받을 수 있다" {
         calculator.calculate("//;\n1;2;3") shouldBe 6
+    }
+
+    "숫자 이외의 값 혹은 음수를 전달하면 throw RuntimeException" {
+        forAll(
+            row("-1"),
+            row("1,-1,6"),
+            row("-1,;,3"),
+            row("//;\n1;3a5")
+        ) { expression ->
+            shouldThrow<IllegalArgumentException> { calculator.calculate(expression) }
+        }
     }
 })

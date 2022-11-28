@@ -2,21 +2,35 @@ package com.nextstep.calculator
 
 class StringAddCalculator {
 
-    fun calculate(expression: String?): Int {
-        if (expression.isNullOrBlank()) return 0
+    fun calculate(input: String?): Int {
+        if (input.isNullOrBlank()) return 0
 
-        val matches = Regex("//(.)\n(.*)").find(expression)
+        var delimiters = arrayOf(":", ",")
+        var expression = input
+
+        val matches = Regex("//(.)\n(.*)").find(input)
         matches?.let {
-            val delimiter = it.groupValues[1]
-            return it.groupValues[2].split(delimiter)
-                .stream()
-                .mapToInt { it -> it.toInt() }
-                .sum()
+            delimiters = arrayOf(it.groupValues[1])
+            expression = it.groupValues[2]
         }
 
-        return expression.split(":", ",")
+        return expression!!.split(delimiters = delimiters)
             .stream()
-            .mapToInt { it.toInt() }
+            .mapToInt { toInt(it) }
+            .map { validate(it) }
             .sum()
+    }
+
+    private fun toInt(num: String): Int {
+        try {
+            return num.toInt()
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException()
+        }
+    }
+
+    private fun validate(number: Int): Int {
+        require(number >= 0) { throw IllegalArgumentException() }
+        return number
     }
 }
