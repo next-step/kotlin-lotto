@@ -16,7 +16,8 @@ class LottoGameController {
         gameBoard.forEach { ResultView.printChosenNumber(it.numbers) }
 
         val winnerNumber = InputView.winningNumberOfLastWeek()
-        val gameResults = LottoGame.getResultOfGames(gameBoard, winnerNumber.winnerNumber)
+        val bonusNumber = InputView.bonusNumberOfLastWeek(winnerNumber)
+        val gameResults = LottoGame.getResultOfGames(gameBoard, winnerNumber.winnerNumber, bonusNumber.bonusNumber)
         ResultView.noticeOfPrize()
         val statistics = LottoGameResult.winningStatistics(gameResults)
         ResultView.printWinningStatistics(statistics)
