@@ -2,15 +2,15 @@ package lotto.domain
 
 object LottoMatcher {
 
-    fun match(numbers: List<Int>, list: List<Int>): Int {
+    fun countMatchNumber(winningNumbers: List<Int>, lottoNumbers: List<Int>): Int {
         var count = 0
-        numbers.forEach { number ->
-            count += checkNumber(number, list)
+        winningNumbers.forEach { winningNumber ->
+            count += checkContainWinningNumber(winningNumber = winningNumber, lottoNumbers = lottoNumbers)
         }
         return count
     }
 
-    private fun checkNumber(number: Int, list: List<Int>): Int {
-        return if (list.contains(number)) 1 else 0
+    private fun checkContainWinningNumber(winningNumber: Int, lottoNumbers: List<Int>): Int {
+        return if (lottoNumbers.contains(winningNumber)) 1 else 0
     }
 }

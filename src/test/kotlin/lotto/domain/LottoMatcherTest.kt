@@ -12,6 +12,6 @@ internal class LottoMatcherTest {
         val numbers: List<Int> = listOf(8, 21, 23, 41, 42, 43)
         val list: List<Int> = listOf(9, 21, 27, 41, 42, 45)
 
-        assertThat(LottoMatcher.match(numbers = numbers, list = list)).isEqualTo(3)
+        assertThat(LottoMatcher.countMatchNumber(winningNumbers = numbers, lottoNumbers = list)).isEqualTo(3)
     }
 }

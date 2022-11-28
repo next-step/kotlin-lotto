@@ -19,7 +19,7 @@ class Lotto(val list: List<Int> = initList()) {
             it.toInt()
         }
 
-        matchingCount = LottoMatcher.match(numbers, list)
+        matchingCount = LottoMatcher.countMatchNumber(numbers, list)
         reward = LottoReward.reward(matchingCount)
     }
 

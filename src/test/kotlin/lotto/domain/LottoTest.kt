@@ -50,7 +50,7 @@ internal class LottoTest {
         val lotto = Lotto()
         val numbers: List<Int> = Tokenizer.tokenize(input).map { it.toInt() }
 
-        val expectedResult = LottoMatcher.match(numbers, lotto.list)
+        val expectedResult = LottoMatcher.countMatchNumber(numbers, lotto.list)
         lotto.win(input)
 
         lotto.matchingCount shouldBe expectedResult
