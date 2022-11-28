@@ -4,7 +4,11 @@ class Lotto(
     val numbers: List<Int>
 ) {
     init {
-        require(numbers.size <= LOTTO_NUMBERS_SIZE) { "로또의 숫자는 6개를 넘을 수 없습니다." }
+        require(numbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 ${LOTTO_NUMBERS_SIZE}개가 필요합니다." }
+    }
+
+    fun rank(luckyNumbers: LuckyNumbers): LottoRank {
+        return luckyNumbers.rank(numbers)
     }
 
     fun countHitNumbers(luckyNumbers: List<Int>): Int {

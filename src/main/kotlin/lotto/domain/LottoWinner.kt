@@ -1,14 +1,13 @@
 package lotto.domain
 
 class LottoWinner(
-    private val luckyNumbers: List<Int>
+    private val luckyNumbers: LuckyNumbers
 ) {
-    fun findWinLottoList(lottoList: List<Lotto>): List<WinLottoPrize> {
+    fun findWinLottoList(lottoList: List<Lotto>): List<LottoRank> {
         return lottoList
-            .map { it.countHitNumbers(luckyNumbers) }
+            .map { it.rank(luckyNumbers) }
             .filter { hasPrize(it) }
-            .map { WinLottoPrize.from(it) }
     }
 
-    private fun hasPrize(count: Int) = count >= WinLottoPrize.MINIMUM_HIT_COUNT
+    private fun hasPrize(lottoRank: LottoRank) = lottoRank.prizeMoney > 0
 }
