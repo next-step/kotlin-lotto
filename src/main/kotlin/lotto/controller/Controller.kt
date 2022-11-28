@@ -1,11 +1,12 @@
 package lotto.controller
 
+import lotto.domain.InputParser
 import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoPrice
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
-import lotto.domain.WinningNumbers
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -31,10 +32,10 @@ object Controller {
         ResultView.printProfitRate(profitRate)
     }
 
-    private fun makeLottoResult(lottoNumbersList: ArrayList<LottoNumbers>, winningNumbers: WinningNumbers): LottoResult {
-        val lottoResult = LottoResult(hashMapOf(LottoRank.FIFTH to 0, LottoRank.FOURTH to 0, LottoRank.THIRD to 0, LottoRank.FIRST to 0,))
+    private fun makeLottoResult(lottoNumbersList: ArrayList<LottoNumbers>, winningNumbers: LottoNumbers): LottoResult {
+        val lottoResult = LottoResult(hashMapOf(LottoRank.FIFTH to 0, LottoRank.FOURTH to 0, LottoRank.THIRD to 0, LottoRank.FIRST to 0))
         for (lottoNumbers in lottoNumbersList) {
-            val countOfMatch = winningNumbers.contains(lottoNumbers)
+            val countOfMatch = winningNumbers.getNumberOfMatches(lottoNumbers)
             lottoResult.add(LottoRank.valueOf(countOfMatch))
         }
         return lottoResult
@@ -58,9 +59,10 @@ object Controller {
         }
     }
 
-    private fun inputWinningNumber(): WinningNumbers {
+    private fun inputWinningNumber(): LottoNumbers {
         return try {
-            WinningNumbers(InputView.inputWinningNumber())
+            val parsedInput = InputParser.parseWithDelimiter(InputView.inputWinningNumber())
+            LottoNumbers(parsedInput.map { LottoNumber(it) })
         } catch (e: Exception) {
             InputView.printError(e.message!!)
             inputWinningNumber()
