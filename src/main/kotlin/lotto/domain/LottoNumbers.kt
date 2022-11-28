@@ -8,8 +8,8 @@ value class LottoNumbers(val value: List<LottoNumber>) {
         require(value.sortedBy { it.value } == value) { "로또 번호는 오름차순으로 정렬되어야 합니다." }
     }
 
-    fun getNumberOfMatches(lottoNumbers: LottoNumbers): Int {
-        return value.count { lottoNumbers.value.contains(it) }
+    fun getLottoRank(lottoNumbers: LottoNumbers): LottoRank {
+        return LottoRank.valueOf(value.count { lottoNumbers.value.contains(it) })
     }
 
     companion object {

@@ -35,8 +35,8 @@ object Controller {
     private fun makeLottoResult(lottoNumbersList: ArrayList<LottoNumbers>, winningNumbers: LottoNumbers): LottoResult {
         val lottoResult = LottoResult(hashMapOf(LottoRank.FIFTH to 0, LottoRank.FOURTH to 0, LottoRank.THIRD to 0, LottoRank.FIRST to 0))
         for (lottoNumbers in lottoNumbersList) {
-            val countOfMatch = winningNumbers.getNumberOfMatches(lottoNumbers)
-            lottoResult.add(LottoRank.valueOf(countOfMatch))
+            val lottoRank = winningNumbers.getLottoRank(lottoNumbers)
+            lottoResult.add(lottoRank)
         }
         return lottoResult
     }
