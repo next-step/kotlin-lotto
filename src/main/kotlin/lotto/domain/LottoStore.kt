@@ -3,9 +3,10 @@ package lotto.domain
 class LottoStore(private val generator: LottoGenerator = LottoGenerator()) {
 
     fun sell(money: KRW): List<Lotto> {
-        val lottos = mutableListOf<Lotto>()
-        repeat(money.availableLottoQuantity) {
-            lottos.add(generator.generate())
+        val lottos = buildList {
+            repeat(money.availableLottoQuantity) {
+                add(generator.generate())
+            }
         }
         return lottos
     }
