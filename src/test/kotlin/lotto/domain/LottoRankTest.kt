@@ -17,7 +17,7 @@ class LottoRankTest {
 
     @DisplayName("3등 당첨")
     @Test
-    fun `2등 당첨`() {
+    fun `3등 당첨`() {
         // given
         val lottoRank = LottoRank.valueOf(5)
 
