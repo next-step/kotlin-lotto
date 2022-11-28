@@ -13,13 +13,9 @@ class StringAddCalculator {
 
     private fun sum(tokens: List<String>): Int = tokens.sumOf { toInt(it) }
     private fun toInt(text: String): Int {
-        try {
-            val result = text.toInt()
-            validatePlus(result)
-            return result
-        } catch (e: NumberFormatException) {
-            throw RuntimeException("입력값은 숫자만 가능합니다.", e)
-        }
+        val result = text.toIntOrNull() ?: throw throw RuntimeException("입력값은 숫자만 가능합니다.")
+        validatePlus(result)
+        return result
     }
 
     private fun validatePlus(input: Int) {
