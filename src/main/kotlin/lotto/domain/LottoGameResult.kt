@@ -14,9 +14,11 @@ enum class LottoGameResult(val criteriaForWinning: Int, val prize: BigDecimal) {
 
     companion object {
 
-        fun getResultOfWinning(number: Int): LottoGameResult {
+        fun getResultOfWinning(number: Int, bonus: Boolean): LottoGameResult {
             if (number <= FAIL.criteriaForWinning) return FAIL
             return values().first { it.criteriaForWinning == number }
+                .also { if (it == SECOND_BONUS) return SECOND }
+                .also { if (it == THIRD && bonus) return SECOND_BONUS }
         }
 
         fun winningStatistics(gameResult: List<LottoGameResult>) =

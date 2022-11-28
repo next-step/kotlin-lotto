@@ -10,7 +10,7 @@ internal class LottoGameResultTest {
     @Test
     @DisplayName("일치하는 숫자가 3개일 경우 총 상금은 5000")
     fun `If there are three matching numbers, the total prize money is 5000`() {
-        val resultOfWinning = LottoGameResult.getResultOfWinning(3)
+        val resultOfWinning = LottoGameResult.getResultOfWinning(3, false)
         assertThat(resultOfWinning.prize).isEqualTo(BigDecimal(5000))
     }
 
@@ -44,5 +44,26 @@ internal class LottoGameResultTest {
         val statistics = LottoGameResult.winningStatistics(gameResult)
         val count = statistics[LottoGameResult.FIRST]
         assertThat(count).isEqualTo(3)
+    }
+
+    @Test
+    @DisplayName("일치하는 숫자가 4개고 보너스 번호를 맞춘경우 2등 보너스 번호 당첨")
+    fun `If there are 4 matching numbers and the bonus number is matched, the second prize is the bonus number`() {
+        val gameResult = LottoGameResult.getResultOfWinning(4, true)
+        assertThat(gameResult).isEqualTo(LottoGameResult.SECOND_BONUS)
+    }
+
+    @Test
+    @DisplayName("일치하는 숫자가 3개고 보너스 번호를 맞춘경우 4등")
+    fun `If there are 3 matching numbers and you get the bonus number, you're in 4th place`() {
+        val gameResult = LottoGameResult.getResultOfWinning(3, true)
+        assertThat(gameResult).isEqualTo(LottoGameResult.FOUR)
+    }
+
+    @Test
+    @DisplayName("일치하는 숫자가 5개고 보너스 번호를 맞춘경우 2등")
+    fun `If there are 5 matching numbers and you get a bonus number, you get 2nd place`() {
+        val gameResult = LottoGameResult.getResultOfWinning(5, true)
+        assertThat(gameResult).isEqualTo(LottoGameResult.SECOND)
     }
 }
