@@ -11,9 +11,9 @@ class LottoMachineTest : StringSpec({
         lotto.lottoNumbers shouldHaveSize 6
     }
 
-    "자동으로 생성된 로또는 6자리 숫자다." {
-        val lotto = LottoMachine.generateLotto()
+    "자동으로 생성된 로또숫자는 6자리 숫자다." {
+        val lottoNumbers = LottoMachine.generateLottoNumbers()
 
-        lotto.lottoNumbers shouldHaveSize 6
+        lottoNumbers shouldHaveSize 6
     }
 })

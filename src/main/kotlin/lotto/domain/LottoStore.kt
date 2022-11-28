@@ -2,11 +2,19 @@ package lotto.domain
 
 class LottoStore(private val lottoGenerator: LottoGenerator) {
 
-    fun buyLotto(amount: Int): List<Lotto> {
-        require(amount >= Lotto.PRICE)
+    fun pay(cash: Cash): Pair<Lottos, Cash> {
+        val lottoCount = cash.amount / Lotto.PRICE
+        val totalLottoNumbers = (1..lottoCount).map { lottoGenerator.generateLottoNumbers() }
 
-        val lottoCount = amount / Lotto.PRICE
+        return pay(cash, totalLottoNumbers)
+    }
 
-        return (1..lottoCount).map { lottoGenerator.generateLotto() }
+    fun pay(cash: Cash, lottoNumbers: List<Set<LottoNumber>>): Pair<Lottos, Cash> {
+        require(cash.amount >= Lotto.PRICE)
+
+        val lottoList = Lottos.of(lottoNumbers)
+        val changes = cash.play(Lotto.PRICE * lottoList.lottoList.size)
+
+        return lottoList to changes
     }
 }
