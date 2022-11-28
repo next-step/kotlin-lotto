@@ -1,9 +1,9 @@
 package lotto.controller
 
-import lotto.domain.LottoGenerator
+import lotto.domain.LottoCustomGenerator
 import lotto.domain.LottoList
+import lotto.domain.LottoListGenerator
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoPurchase
 import lotto.domain.WinningLottoStatistics
 import lotto.uI.InputView
@@ -16,7 +16,7 @@ class LottoController {
 
         val manualLottoList = InputView.inputManualLottoList(manualLottoCount)
 
-        val autoLottoList = LottoGenerator.generateLottoList(autoLottoCount, LottoNumberGenerator)
+        val autoLottoList = LottoListGenerator.generateLottoList(autoLottoCount, LottoCustomGenerator)
 
         val lottoList = manualLottoList.addLottoList(autoLottoList)
 
@@ -31,7 +31,7 @@ class LottoController {
     fun showStatistic(money: Long, lottoList: LottoList) {
         val lastWeekLottoNumber = InputView.inputLastWeekLottoNumbers()
 
-        val lastWeekWinningLotto = LottoGenerator.generateLotto(lastWeekLottoNumber)
+        val lastWeekWinningLotto = LottoCustomGenerator.generateLotto(lastWeekLottoNumber)
 
         val bonusLottoNumber = LottoNumber(InputView.inputBonusLottoNumber())
 

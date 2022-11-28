@@ -13,7 +13,7 @@ internal class WinningLottoStatisticsTest {
     @ValueSource(ints = [1, 2, 3, 4, 5, 6])
     fun `init throw exception when winningLotto does not include bonusLottoNumber`(number: Int) {
         val previousWinningLottoNumbers = "1,2,3,4,5,6"
-        val previousWinningLotto = LottoGenerator.generateLotto(previousWinningLottoNumbers)
+        val previousWinningLotto = LottoCustomGenerator.generateLotto(previousWinningLottoNumbers)
         val bonusLottoNumber = LottoNumber(number)
 
         val exception = assertThrows<IllegalArgumentException> {
@@ -28,14 +28,14 @@ internal class WinningLottoStatisticsTest {
         val matchNumber = 5
 
         val winningLottoNumbers = "1,2,3,4,5,6"
-        val winningLotto = LottoGenerator.generateLotto(winningLottoNumbers)
+        val previousWinningLotto = LottoCustomGenerator.generateLotto(winningLottoNumbers)
         val bonusLottoNumber = LottoNumber(7)
-        val winningLottoStatistics = WinningLottoStatistics(winningLotto, bonusLottoNumber)
+        val winningLottoStatistics = WinningLottoStatistics(previousWinningLotto, bonusLottoNumber)
 
         val numbers = "1, 2, 3, 4, 5, 7"
         val lottoCount = 3L
         val lottoList = (1..lottoCount).map {
-            LottoGenerator.generateLotto(numbers)
+            LottoCustomGenerator.generateLotto(numbers)
         }
 
         val list = LottoList(lottoList)
@@ -51,9 +51,9 @@ internal class WinningLottoStatisticsTest {
 
     @Test
     fun getProfit() {
-        val winningLotto = LottoGenerator.generateLotto("1,2,3,4,5,6")
+        val previousWinningLotto = LottoCustomGenerator.generateLotto("1,2,3,4,5,6")
         val bonusLottoNumber = LottoNumber(7)
-        val winningLottoStatistics = WinningLottoStatistics(winningLotto, bonusLottoNumber)
+        val winningLottoStatistics = WinningLottoStatistics(previousWinningLotto, bonusLottoNumber)
 
         val lottoMatchList = mutableListOf<LottoMatch>()
         val forthPlaceMatch = LottoMatch(
@@ -73,9 +73,9 @@ internal class WinningLottoStatisticsTest {
     @ParameterizedTest
     @ValueSource(doubles = [1.0, 1.1, 2.2])
     fun `isProfitable should be ture when profit greater and equal than 1`(profit: Double) {
-        val winningLotto = LottoGenerator.generateLotto("1,2,3,4,5,6")
+        val previousWinningLotto = LottoCustomGenerator.generateLotto("1,2,3,4,5,6")
         val bonusLottoNumber = LottoNumber(7)
-        val winningLottoStatistics = WinningLottoStatistics(winningLotto, bonusLottoNumber)
+        val winningLottoStatistics = WinningLottoStatistics(previousWinningLotto, bonusLottoNumber)
 
         val result = winningLottoStatistics.isProfitable(profit)
 
@@ -85,9 +85,9 @@ internal class WinningLottoStatisticsTest {
     @ParameterizedTest
     @ValueSource(doubles = [0.0, 0.2, 0.99])
     fun `isProfitable should be false when profit less than 1`(profit: Double) {
-        val winningLotto = LottoGenerator.generateLotto("1,2,3,4,5,6")
+        val previousWinningLotto = LottoCustomGenerator.generateLotto("1,2,3,4,5,6")
         val bonusLottoNumber = LottoNumber(7)
-        val winningLottoStatistics = WinningLottoStatistics(winningLotto, bonusLottoNumber)
+        val winningLottoStatistics = WinningLottoStatistics(previousWinningLotto, bonusLottoNumber)
 
         val result = winningLottoStatistics.isProfitable(profit)
 

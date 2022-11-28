@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test
 
 internal class LottoListTest {
 
-    private val numberGenerator: NumberGenerator = ManualNumberGenerator()
+    private val lottoGenerator: LottoGenerator = LottoManualGenerator()
 
     @Test
     fun compare() {
         val lottoNumbers = "1,2,3,4,5,6"
-        val winningLotto = LottoGenerator.generateLotto(lottoNumbers)
+        val winningLotto = LottoCustomGenerator.generateLotto(lottoNumbers)
         val lottoNumber = 7
         val bonusLottoNumber = LottoNumber(lottoNumber)
 
         val lottoCount = 4L
-        val lottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
+        val lottoList = LottoListGenerator.generateLottoList(lottoCount, lottoGenerator)
 
         val lottoRankList = lottoList.compare(winningLotto, bonusLottoNumber)
 
@@ -26,24 +26,26 @@ internal class LottoListTest {
     }
 
     @Test
-    fun `compare return empty`() {
+    fun `compare return MISS`() {
         val lottoNumbers = "4,5,9,10,11,12"
-        val winningLotto = LottoGenerator.generateLotto(lottoNumbers)
+        val winningLotto = LottoCustomGenerator.generateLotto(lottoNumbers)
         val lottoNumber = 6
         val bonusLottoNumber = LottoNumber(lottoNumber)
 
         val lottoCount = 4L
-        val lottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
+        val lottoList = LottoListGenerator.generateLottoList(lottoCount, lottoGenerator)
 
         val lottoRankList = lottoList.compare(winningLotto, bonusLottoNumber)
 
-        assertThat(lottoRankList).isEmpty()
+        lottoRankList.forEach { lottoRank ->
+            assertThat(lottoRank).isEqualTo(LottoRank.MISS)
+        }
     }
 
     @Test
     fun count() {
         val lottoCount = 4L
-        val lottoList = LottoGenerator.generateLottoList(lottoCount, numberGenerator)
+        val lottoList = LottoListGenerator.generateLottoList(lottoCount, lottoGenerator)
 
         val lottoCountResult = lottoList.count().toLong()
 
@@ -52,10 +54,10 @@ internal class LottoListTest {
 
     @Test
     fun addLottoList() {
-        val lotto1 = LottoGenerator.generateLotto("1,2,3,4,5,6")
+        val lotto1 = LottoCustomGenerator.generateLotto("1,2,3,4,5,6")
         val lottoList1 = listOf(lotto1)
 
-        val lotto2 = LottoGenerator.generateLotto("2,3,4,5,6,7")
+        val lotto2 = LottoCustomGenerator.generateLotto("2,3,4,5,6,7")
         val lottoList2 = listOf(lotto2)
 
         val addLottoList = LottoList(listOf(lotto1, lotto2))

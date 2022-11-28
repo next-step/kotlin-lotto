@@ -1,6 +1,6 @@
 package lotto.uI
 
-import lotto.domain.LottoGenerator
+import lotto.domain.LottoCustomGenerator
 import lotto.domain.LottoList
 import lotto.util.ErrorCode
 
@@ -30,7 +30,7 @@ object InputView {
     fun inputManualLottoList(manualLottoCount: Long): LottoList {
         println(MessageCode.INPUT_MANUAL_LOTTO_NUMBERS.message)
         val lottoList = (INIT_LOTTO_COUNT..manualLottoCount).map {
-            LottoGenerator.generateLotto(inputManualLotto())
+            LottoCustomGenerator.generateLotto(inputManualLotto())
         }
         return LottoList(lottoList)
     }

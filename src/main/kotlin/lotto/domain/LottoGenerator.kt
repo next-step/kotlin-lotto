@@ -1,36 +1,9 @@
 package lotto.domain
 
-import lotto.util.ErrorCode
+interface LottoGenerator {
+    fun generateLottoFromNumbers(
+        possibleNumbers: List<LottoNumber>
+    ): Lotto
 
-object LottoGenerator {
-    private val lottoNumbersRegex = """^[0-9,\s]*$""".toRegex()
-    private const val SEPARATOR = ","
-
-    fun generateLottoList(lottoCount: Long, numberGenerator: NumberGenerator): LottoList {
-        val lottoList = (1..lottoCount).map {
-            numberGenerator.generateLottoFromNumbers(
-                LottoNumber.possibleNumbers
-            )
-        }
-        return LottoList(lottoList)
-    }
-
-    fun generateLotto(lottoNumbers: String): Lotto {
-        val lottoNumberSet = validateLottoNumbers(lottoNumbers).toMutableSet()
-
-        return Lotto(lottoNumberSet)
-    }
-
-    private fun validateLottoNumbers(number: String): List<LottoNumber> {
-        require(number.matches(lottoNumbersRegex)) {
-            ErrorCode.LOTTO_NUMBERS_INPUT_FORMAT_EXCEPTION.errorMessage
-        }
-
-        return number
-            .split(SEPARATOR)
-            .mapNotNull {
-                it.trim()
-                    .toIntOrNull()
-            }.map { LottoNumber(it) }
-    }
+    fun generateLotto(lottoNumbers: String): Lotto
 }
