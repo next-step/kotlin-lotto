@@ -21,7 +21,7 @@ class WalletResult(private val lottoResults: List<LottoResult>) {
 
     fun getRateOfReturn(): Double {
         val prize =
-            getFirstWinCount() * LottoResult.FirstWin.value.money + getSecondWinCount() * LottoResult.SecondWin.value.money + getThirdWinCount() * LottoResult.ThirdWin.value.money + getFourthWinCount() * LottoResult.FourthWin.value.money
+            getFirstWinCount() * LottoResult.FirstWin.KRW.money + getSecondWinCount() * LottoResult.SecondWin.KRW.money + getThirdWinCount() * LottoResult.ThirdWin.KRW.money + getFourthWinCount() * LottoResult.FourthWin.KRW.money
 
         return (prize / (lottoResults.size * 1000.0) * 100).roundToInt() / 100.0
     }
@@ -33,7 +33,7 @@ class WalletResult(private val lottoResults: List<LottoResult>) {
         val fourthWinCounter = lottoResults.filter { it == LottoResult.FourthWin }.size
 
         val prize =
-            firstWinCounter * LottoResult.FirstWin.value.money + secondWinCounter * LottoResult.SecondWin.value.money + thirdWinCounter * LottoResult.ThirdWin.value.money + fourthWinCounter * LottoResult.FourthWin.value.money
+            firstWinCounter * LottoResult.FirstWin.KRW.money + secondWinCounter * LottoResult.SecondWin.KRW.money + thirdWinCounter * LottoResult.ThirdWin.KRW.money + fourthWinCounter * LottoResult.FourthWin.KRW.money
 
         var string = "3개 일치 (5000원)- ${fourthWinCounter}개\n"
         string += "4개 일치 (50000원)- ${thirdWinCounter}개\n"

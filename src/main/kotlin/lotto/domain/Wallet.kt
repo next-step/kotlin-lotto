@@ -1,21 +1,21 @@
 package lotto.domain
 
-class Wallet(var value: Value = DEFAULT_VALUE) {
+class Wallet(var krw: KRW = DEFAULT_KRW) {
 
     var lottos: MutableList<Lotto> = mutableListOf()
         private set
 
     val money
-        get() = value.money
+        get() = krw.money
 
     fun insertMoney(input: String) {
-        val additionValue = Value.byInput(input)
-        value = value.add(additionValue)
+        val additionKRW = KRW.byInput(input)
+        krw = krw.add(additionKRW)
     }
 
     fun buyLottos(): List<Lotto> {
-        lottos.addAll(LottoStore().sell(value))
-        value = Value(0)
+        lottos.addAll(LottoStore().sell(krw))
+        krw = KRW(0)
         return lottos
     }
 
@@ -27,6 +27,6 @@ class Wallet(var value: Value = DEFAULT_VALUE) {
 
     companion object {
         private const val DEFAULT_MONEY = 0
-        val DEFAULT_VALUE = Value(DEFAULT_MONEY)
+        val DEFAULT_KRW = KRW(DEFAULT_MONEY)
     }
 }

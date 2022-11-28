@@ -19,7 +19,7 @@ class WalletTest {
 
     @Test
     fun `지갑에 3000원이 있으면 로또를 3개를 구매하고 0원이 된다`() {
-        val wallet = Wallet(Value(3000))
+        val wallet = Wallet(KRW(3000))
         wallet.buyLottos()
 
         assertThat(wallet.money).isEqualTo(0)

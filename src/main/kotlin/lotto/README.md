@@ -45,4 +45,6 @@
 
 ## 2단계 피드백 목록
 - [x] InputView, ResultView Object class 로 선언하기
-- [ ] 로또 처음부터 Set Collection 으로 생성
+- [x] 로또 처음부터 Set Collection 으로 생성
+- [x] Value 클래스 명을 화폐단위로 변경
+- [x] 몇장의 로또 구매할 수 있는지 정보 제공

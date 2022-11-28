@@ -1,9 +1,9 @@
 package lotto.domain
 
-enum class LottoResult(val value: Value) {
-    NotWin(Value(0)),
-    FourthWin(Value(5000)),
-    ThirdWin(Value(50000)),
-    SecondWin(Value(150000)),
-    FirstWin(Value(2000000000))
+enum class LottoResult(val KRW: KRW) {
+    NotWin(KRW(0)),
+    FourthWin(KRW(5000)),
+    ThirdWin(KRW(50000)),
+    SecondWin(KRW(150000)),
+    FirstWin(KRW(2000000000))
 }
