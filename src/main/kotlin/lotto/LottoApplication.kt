@@ -23,5 +23,5 @@ fun main() {
         statistics.add(win)
     }
 
-    OutputView.resultPrint(statistics, number * 1000)
+    OutputView.resultPrint(statistics, Price(number).price())
 }
