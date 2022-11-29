@@ -22,7 +22,7 @@ object OutputView {
         countByLottoMatch.keys
             .filter { it != LottoMatch.NONE }
             .sortedBy { it.matchCount }
-            .forEach { println("${it.matchCount}개 일치 ${Winning.of(it).money}원 - ${countByLottoMatch[it]}") }
+            .forEach { println("${it.matchCount}개 일치 (${Winning.of(it).money}원)- ${countByLottoMatch[it]}개") }
         println("총 수익률은 ${profit}입니다.")
     }
 }
