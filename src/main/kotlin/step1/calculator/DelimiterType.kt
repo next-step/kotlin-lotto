@@ -1,5 +1,9 @@
 package step1.calculator
 
+import step1.calculator.extractor.CustomExpressionParser
+import step1.calculator.extractor.DefaultExpressionParser
+import step1.calculator.extractor.ExpressionParser
+
 enum class DelimiterType(private val pattern: String) {
     COMMA(","),
     COLON(":"),
@@ -20,6 +24,13 @@ enum class DelimiterType(private val pattern: String) {
             return extractCustomDelimiter(expression)
         }
         return pattern
+    }
+
+    fun getExtractor(): ExpressionParser {
+        if (isCustom()) {
+            return CustomExpressionParser()
+        }
+        return DefaultExpressionParser()
     }
 
     private fun isCustom(): Boolean = this == CUSTOM
