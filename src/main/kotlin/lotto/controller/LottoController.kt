@@ -1,7 +1,6 @@
 package lotto.controller
 
 import lotto.domain.LottoVendingMachine
-import lotto.domain.WinningStatistics
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -15,7 +14,7 @@ class LottoController {
         ResultView.printPurchasedLotto(myLotteries)
 
         val winningLottoNumbers = InputView.getWinningLottoNumbers()
-        val winningStatistics = WinningStatistics.create(myLotteries, winningLottoNumbers)
+        val winningStatistics = winningLottoNumbers.makeStatistics(myLotteries)
         ResultView.printRewardsStatistics(winningStatistics)
 
         val rateOfReturn = winningStatistics.calculateRateOfReturn(purchaseAmount)

@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 data class WinningStatistics(
-    val statistics: Map<Rank, Int> = INITIAL_STATISTICS
+    val statistics: Map<Rank, Int> = mapOf()
 ) {
     fun getNumberOfMatchCount(rank: Rank): Int {
         return statistics[rank]!!
@@ -20,26 +20,7 @@ data class WinningStatistics(
     }
 
     companion object {
-        private const val INITIAL_COUNT = 0
         private const val DECIMAL_POINT_PLACE = 2
-        private val INITIAL_STATISTICS = Rank.values().associateWith { INITIAL_COUNT }
         private val RATE_OF_RETURN_ROUNDING_MODE = RoundingMode.FLOOR
-
-        fun create(lottoNumbersNumbersList: List<LottoNumbers>, winningLottoNumbers: WinningLottoNumbers): WinningStatistics {
-            val matchResult = winningLottoNumbers.getMatchResult(lottoNumbersNumbersList)
-            val ranks = matchResult.map { Rank.valueOf(it.first, it.second) }
-
-            return WinningStatistics(statistics = makeStatistics(ranks))
-        }
-
-        private fun makeStatistics(ranks: List<Rank>): Map<Rank, Int> {
-            val statistics = INITIAL_STATISTICS.toMutableMap()
-
-            ranks.forEach {
-                statistics[it] = statistics[it]!! + 1
-            }
-
-            return statistics.toMap()
-        }
     }
 }
