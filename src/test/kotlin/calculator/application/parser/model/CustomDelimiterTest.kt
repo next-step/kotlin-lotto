@@ -33,7 +33,7 @@ class CustomDelimiterTest : FreeSpec({
         }
 
         listOf(
-            "$ delimiterPrefix-${delimiterSuffix}3,4-,6" to "-",
+            "$delimiterPrefix-${delimiterSuffix}3,4-,6" to "-",
             "$delimiterPrefix!${delimiterSuffix}4!4,6" to "!",
             "$delimiterPrefix%${delimiterSuffix}8:4" to "%"
         ).forEach { (delimiterString: String, customDelimiterValue: String) ->
