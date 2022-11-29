@@ -4,9 +4,9 @@ import nextstep.mission.lotto.dto.LottoDto
 import nextstep.mission.lotto.vo.LottoNumber
 import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningPrize.FIRST
-import nextstep.mission.lotto.vo.WinningPrize.FOURTH
-import nextstep.mission.lotto.vo.WinningPrize.SECOND
+import nextstep.mission.lotto.vo.WinningPrize.FIFTH
 import nextstep.mission.lotto.vo.WinningPrize.THIRD
+import nextstep.mission.lotto.vo.WinningPrize.FOURTH
 import nextstep.mission.lotto.vo.WinningResult
 
 object ConsoleInput {
@@ -29,9 +29,9 @@ object ConsoleOutput {
 
     fun printWinningResult(winningResult: WinningResult, rateOfReturn: Double) {
         println("==========")
-        println("3개 일치 (5000원) - ${winningResult.getCount(FOURTH)}개")
-        println("4개 일치 (50000원) - ${winningResult.getCount(THIRD)}개")
-        println("5개 일치 (1500000원) - ${winningResult.getCount(SECOND)}개")
+        println("3개 일치 (5000원) - ${winningResult.getCount(FIFTH)}개")
+        println("4개 일치 (50000원) - ${winningResult.getCount(FOURTH)}개")
+        println("5개 일치 (1500000원) - ${winningResult.getCount(THIRD)}개")
         println("6개 일치 (2000000000원) - ${winningResult.getCount(FIRST)}개")
         println("총 수익률은 ${String.format("%.2f", rateOfReturn)} 입니다.")
     }
