@@ -4,6 +4,7 @@ private const val LOTTO_PER_AMOUNT = 1000
 
 class LottoGame(
     private val lottoAmount: Int,
+    private val directNumbers: List<LottoNumbers> = listOf(),
     lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator()
 ) {
 
@@ -14,7 +15,8 @@ class LottoGame(
     }
 
     private fun createLotto(lottoNumberGenerator: LottoNumberGenerator) {
-        repeat(lottoAmount / LOTTO_PER_AMOUNT) {
+        lottos.addAll(directNumbers)
+        repeat(lottoAmount / LOTTO_PER_AMOUNT - directNumbers.size) {
             lottos.add(lottoNumberGenerator.pick())
         }
     }
@@ -24,4 +26,5 @@ class LottoGame(
     }
 
     fun getLottos() = lottos.toList()
+    fun getDirectLottoCount() = directNumbers.size
 }

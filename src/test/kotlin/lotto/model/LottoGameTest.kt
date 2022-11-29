@@ -37,4 +37,25 @@ class LottoGameTest : StringSpec({
             it shouldBeIn LottoGrade.values().toList()
         }
     }
+
+    "로또 게임은, 수동으로 번호를 입력 받아서 로또를 생성할 수 있다." {
+        // given
+        val directLottoNumber = listOf(
+            LottoNumbers(
+                listOf(
+                    LottoNumber.valueOf(1),
+                    LottoNumber.valueOf(2),
+                    LottoNumber.valueOf(3),
+                    LottoNumber.valueOf(4),
+                    LottoNumber.valueOf(5),
+                    LottoNumber.valueOf(6)
+                )
+            )
+        )
+        // when
+        val lottoGame = LottoGame(14000, directLottoNumber)
+        // then
+        lottoGame.getLottos().size shouldBe 14
+        lottoGame.getDirectLottoCount() shouldBe 1
+    }
 })

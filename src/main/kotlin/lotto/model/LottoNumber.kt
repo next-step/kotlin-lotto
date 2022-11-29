@@ -18,7 +18,7 @@ value class LottoNumber(val number: Int) {
         val LOTTO_NUMBER_CACHE = LOTTO_NUMBER_RANGE.map { LottoNumber(it) }.toList()
         fun valueOf(number: Int): LottoNumber {
             if (number in LOTTO_NUMBER_RANGE) {
-                return LOTTO_NUMBER_CACHE[number + 1]
+                return LOTTO_NUMBER_CACHE[number - 1]
             }
             return LottoNumber(number)
         }

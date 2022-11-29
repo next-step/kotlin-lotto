@@ -1,14 +1,16 @@
 package lotto.ui
 
+import lotto.model.LottoGame
 import lotto.model.LottoGrade
-import lotto.model.LottoNumbers
 import lotto.model.LottoStat
 import java.math.BigDecimal
 
 object ResultView {
 
-    fun resultLottoList(lottos: List<LottoNumbers>) {
-        println("${lottos.size}개를 구매했습니다 ")
+    fun resultLottoList(lottoGame: LottoGame) {
+        val lottos = lottoGame.getLottos()
+        val directLottoCount = lottoGame.getDirectLottoCount()
+        println("수동으로 ${directLottoCount}장, 자동으로 ${lottos.size - directLottoCount}개를 구매했습니다.")
 
         lottos.forEach {
             println(it.numbers.toString())

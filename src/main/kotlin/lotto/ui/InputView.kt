@@ -1,5 +1,8 @@
 package lotto.ui
 
+import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
+
 object InputView {
 
     fun inputLottoAmount(): Int {
@@ -9,16 +12,11 @@ object InputView {
         return amount.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다")
     }
 
-    fun inputWinningNumber(): List<Int> {
+    fun inputWinningNumber(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumber: String = readLine() ?: throw IllegalArgumentException("당첨 번호는 필수 입력해야 합니다")
 
-        val result = winningNumber.split(",")
-            .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다") }
-            .toList()
-
-        require(result.size == 6) { "당첨번호는 6개이어야 합니다" }
-        return result
+        return lottoNumbers(winningNumber)
     }
 
     fun inputPlusWinningNumber(): Int {
@@ -26,5 +24,31 @@ object InputView {
         val plusNumber: String = readLine() ?: throw IllegalArgumentException("보너스 번호는 숫자를 입력해야 합니다")
 
         return plusNumber.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다")
+    }
+
+    fun inputDirectCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val directCount: String = readLine() ?: throw IllegalArgumentException("수동 로또 구매 수는 숫자를 입력해야 합니다")
+
+        return directCount.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다")
+    }
+
+    fun inputDirectNumber(directCount: Int): List<LottoNumbers> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val totalDirectNumber = mutableListOf<LottoNumbers>()
+        repeat(directCount) {
+            val directNumber: String = readLine() ?: throw IllegalArgumentException("수동 로또 번는 를 입력해야 합니다")
+            val lootNumbers = lottoNumbers(directNumber)
+            totalDirectNumber.add(lootNumbers)
+        }
+        return totalDirectNumber.toList()
+    }
+
+    private fun lottoNumbers(directNumber: String): LottoNumbers {
+        val result = directNumber.split(",")
+            .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다") }
+            .map { LottoNumber.valueOf(it) }
+            .toList()
+        return LottoNumbers(result)
     }
 }
