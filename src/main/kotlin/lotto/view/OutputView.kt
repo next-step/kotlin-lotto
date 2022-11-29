@@ -27,10 +27,28 @@ object OutputView {
 
     fun printRewards(rewards: List<Reward>, profit: Float) {
         println("당첨 통계\n ---------")
-        rewards.groupBy { it }
+        val totalResult = addEmptyReward(rewards.groupBy { it })
+        totalResult.toList()
+            .sortedBy { (key, _) -> key.reward }
+            .toMap()
             .filter { it.key != Reward.NO_RANK }
-            .forEach { println("${it.key.matchNumber}개 일치 (${it.key.reward}) - ${it.value.size}개") }
-
+            .forEach { printRank(it) }
         println("총 수익률은 $profit 입니다.")
+    }
+
+    private fun addEmptyReward(existReward: Map<Reward, List<Reward>>): Map<Reward, List<Reward>> {
+        val existReward = existReward.toMutableMap()
+        Reward.values()
+            .subtract(existReward.keys)
+            .forEach { existReward[it] = listOf() }
+        return existReward.toMap()
+    }
+
+    private fun printRank(rank: Map.Entry<Reward, List<Reward>>) {
+        if (rank.key == Reward.SECOND_RANK) {
+            println("${rank.key.matchNumber - 1}개 일치,보너스 볼 일치(${rank.key.reward}) - ${rank.value.size}개")
+            return
+        }
+        println("${rank.key.matchNumber}개 일치 (${rank.key.reward}) - ${rank.value.size}개")
     }
 }

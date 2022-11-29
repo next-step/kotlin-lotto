@@ -7,6 +7,7 @@ data class Lotto(val lotto: Set<LottoBall>) {
     }
 
     fun matchNumberWith(winningLotto: Lotto): Int = this.lotto.intersect(winningLotto.lotto.toSet()).size
+    fun containsBall(lottoBall: LottoBall) = this.lotto.contains(lottoBall)
 
     companion object {
         private const val LOTTO_SIZE = 6

@@ -15,6 +15,6 @@ class LottosTest {
         )
         val winnigLotto = Lotto.of(listOf(1, 2, 3, 4, 5, 49))
 
-        assertThat(lottos.matchNumbers(winnigLotto)).containsExactly(Reward.SECOND_RANK, Reward.FIRST_RANK)
+        assertThat(lottos.matchNumbers(winnigLotto,LottoBall(28))).containsExactly(Reward.SECOND_RANK, Reward.FIRST_RANK)
     }
 }
