@@ -1,3 +1,7 @@
 package calculator.view
 
-class ConsoleOutput
+class ConsoleOutput {
+    fun printResult(expression: String, result: Int) {
+        println("\"$expression\" => $result")
+    }
+}
