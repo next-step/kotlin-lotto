@@ -9,11 +9,11 @@ class LottosTest {
     fun `상금 리스트를 반환합니다`() {
         val lottos = Lottos(
             listOf(
-                Lotto.with(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto.with(listOf(1, 2, 3, 4, 5, 49))
+                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
+                Lotto.of(listOf(1, 2, 3, 4, 5, 49))
             )
         )
-        val winnigLotto = Lotto.with(listOf(1, 2, 3, 4, 5, 49))
+        val winnigLotto = Lotto.of(listOf(1, 2, 3, 4, 5, 49))
 
         assertThat(lottos.matchNumbers(winnigLotto)).containsExactly(Reward.SECOND_RANK, Reward.FIRST_RANK)
     }

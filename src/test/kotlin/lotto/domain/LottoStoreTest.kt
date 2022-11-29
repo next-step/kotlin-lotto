@@ -7,9 +7,11 @@ class LottoStoreTest {
 
     @Test
     fun `로또를 판매합니다`() {
-        val store = LottoStore { Lotto.with(listOf(1, 2, 3, 4, 5, 6)) }
+        val store = LottoStore { Lotto.of(listOf(1, 2, 3, 4, 5, 6)) }
 
-        assertThat(store.buy(14000).lottos).containsOnly(Lotto.with(listOf(1, 2, 3, 4, 5, 6)))
-        assertThat(store.buy(14000).lottos.size).isEqualTo(14)
+        val lottos = store.buy(14000).lottos
+
+        assertThat(lottos).containsOnly(Lotto.of(listOf(1, 2, 3, 4, 5, 6)))
+        assertThat(lottos.size).isEqualTo(14)
     }
 }

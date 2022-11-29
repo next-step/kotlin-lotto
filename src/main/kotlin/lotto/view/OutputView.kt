@@ -6,7 +6,6 @@ import lotto.domain.Reward
 
 object OutputView {
 
-
     fun printLottos(lottos: Lottos) {
         printLottoNumber(lottos.lottos.size)
         lottos.lottos.forEach {
@@ -19,9 +18,11 @@ object OutputView {
     private fun printLottoNumber(lottoNumber: Int) = println("$lottoNumber 개를 구매하였습니다")
 
     private fun printLotto(lotto: Lotto) {
-        print(lotto.lotto.joinToString {
-            "${it.lottoBall}"
-        })
+        print(
+            lotto.lotto.joinToString {
+                "${it.lottoBall}"
+            }
+        )
     }
 
     fun printRewards(rewards: List<Reward>, profit: Float) {
@@ -32,7 +33,4 @@ object OutputView {
 
         println("총 수익률은 $profit 입니다.")
     }
-
-
-
 }
