@@ -53,6 +53,6 @@ class LottoResultTest : StringSpec({
             createWinningNumber(1, 2, 3, 4, 5, 6)
         )
 
-        lottoResult.profit(14000) shouldBe BigDecimal.valueOf(0.35)
+        lottoResult.profit(Payment(14000)) shouldBe BigDecimal.valueOf(0.35)
     }
 })

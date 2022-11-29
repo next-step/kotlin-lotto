@@ -1,12 +1,13 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.Payment
 import lotto.domain.WinningNumber
 
 object InputView {
-    fun readPayment(): Int {
+    fun readPayment(): Payment {
         println("구입금액을 입력해 주세요.")
-        return readln().toInt()
+        return Payment(readln().toInt())
     }
 
     fun readWinningNumber(): WinningNumber {

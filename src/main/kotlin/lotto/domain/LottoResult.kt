@@ -15,7 +15,7 @@ class LottoResult(
             .eachCount()
     }
 
-    fun profit(payment: Int): BigDecimal {
+    fun profit(payment: Payment): BigDecimal {
         val winning = lottos.map { Winning.of(winningNumber.match(it)) }
             .sumOf { it.money }
 
