@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class Winning(
     private val lottoMatch: LottoMatch,

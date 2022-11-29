@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowAny
@@ -7,10 +7,10 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class WinningNumberTest : StringSpec({
-    "당첨 번호는 중복 없이 6개의 로또 번호를 가진다" {
+class LottoTest : StringSpec({
+    "로또는 중복 없이 6개의 로또 번호를 가진다" {
         shouldNotThrowAny {
-            WinningNumber(
+            Lotto(
                 setOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -23,7 +23,7 @@ class WinningNumberTest : StringSpec({
         }
     }
 
-    "범위를 벗어난 당첨 번호를 생성할 시 예외를 던진다" {
+    "범위를 벗어난 로또를 생성할 시 예외를 던진다" {
         forAll(
             row(
                 setOf(
@@ -47,13 +47,13 @@ class WinningNumberTest : StringSpec({
             )
         ) {
             shouldThrowAny {
-                WinningNumber(it)
+                Lotto(it)
             }
         }
     }
 
-    "로또 번호 매칭 결과를 반환한다" {
-        val winningNumber = WinningNumber(
+    "로또에 특정 로또 번호가 존재하는지 확인한다" {
+        val lotto = Lotto(
             setOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -65,12 +65,12 @@ class WinningNumberTest : StringSpec({
         )
 
         forAll(
-            row(createLotto(1, 2, 3, 7, 8, 9), LottoMatch.THREE),
-            row(createLotto(1, 2, 3, 4, 7, 8), LottoMatch.FOUR),
-            row(createLotto(1, 2, 3, 4, 5, 7), LottoMatch.FIVE),
-            row(createLotto(1, 2, 3, 4, 5, 6), LottoMatch.SIX)
-        ) { lotto, expected ->
-            winningNumber.match(lotto) shouldBe expected
+            row(LottoNumber(1), true),
+            row(LottoNumber(6), true),
+            row(LottoNumber(7), false),
+            row(LottoNumber(8), false)
+        ) { number, expected ->
+            lotto.contains(number) shouldBe expected
         }
     }
 })

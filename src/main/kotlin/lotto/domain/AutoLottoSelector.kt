@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 object AutoLottoSelector : LottoSelector {
     override fun select(): Lotto {

@@ -1,9 +1,11 @@
-package lotto
+package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.createLotto
+import lotto.createWinningNumber
 import java.math.BigDecimal
 
 class LottoResultTest : StringSpec({

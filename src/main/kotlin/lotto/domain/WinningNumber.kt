@@ -1,6 +1,4 @@
-package lotto
-
-private const val SIZE = 6
+package lotto.domain
 
 class WinningNumber(private val numbers: Set<LottoNumber>) {
     init {
@@ -11,5 +9,9 @@ class WinningNumber(private val numbers: Set<LottoNumber>) {
         val matchCount = numbers.count { lotto.contains(it) }
 
         return LottoMatch.of(matchCount)
+    }
+
+    companion object {
+        const val SIZE = 6
     }
 }
