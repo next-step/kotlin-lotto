@@ -1,13 +1,14 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.LottoMatch
 import lotto.domain.Winning
 import java.math.BigDecimal
 
 object OutputView {
-    fun writeLottos(lottos: List<List<Int>>) {
+    fun writeLottos(lottos: List<Lotto>) {
         lottos.forEach {
-            println(it)
+            println(it.numbers.map { number -> number.value })
         }
     }
 
