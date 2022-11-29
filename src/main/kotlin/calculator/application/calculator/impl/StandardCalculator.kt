@@ -21,6 +21,6 @@ class StandardCalculator(
         }
 
     companion object {
-        private const val PLUS_OPERATION_INIT_VALUE = 1
+        private const val PLUS_OPERATION_INIT_VALUE = 0
     }
 }
