@@ -1,13 +1,24 @@
 package lotto.domain
 
-object LottoNumbers {
-    private const val LOTTO_SIZE = 6
-    private val LOTTO_NUMBER_RANGE = 1..45
-    private val numbers = (LOTTO_NUMBER_RANGE).toSet()
+data class LottoNumbers(val lottoNumbers: Set<LottoNumber>) {
+    init {
+        require(lottoNumbers.size == MAXIMUM_LOTTO_SIZE) { INVALID_LOTTO_SIZE_ERROR_MESSAGE }
+    }
 
-    private val lottoNumbers = numbers.map { LottoNumber(it) }.toSet()
+    fun getNumberOfMatch(targetLottoNumbersNumbers: LottoNumbers): Int {
+        return targetLottoNumbersNumbers.lottoNumbers.count {
+            this.lottoNumbers.contains(it)
+        }
+    }
 
-    fun makeRandomLottoNumbers(): Set<LottoNumber> {
-        return lottoNumbers.shuffled().take(LOTTO_SIZE).toSet()
+    fun isMatchBonusLottoNumber(bonusBall: LottoNumber) = lottoNumbers.contains(bonusBall)
+
+    companion object {
+        private const val MAXIMUM_LOTTO_SIZE = 6
+        private const val INVALID_LOTTO_SIZE_ERROR_MESSAGE = "로또 번호는 6개의 숫자여야 합니다."
+
+        fun createRandom(): LottoNumbers {
+            return LottoNumbers(LottoVendingMachine.makeRandomLottoNumbers())
+        }
     }
 }

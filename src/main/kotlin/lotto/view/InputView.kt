@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 import lotto.domain.PurchaseAmount
 import lotto.domain.WinningLotto
 
@@ -23,10 +23,10 @@ object InputView {
         return WinningLotto(lottoNumbers = lottoNumbers, bonusLottoNumbers = inputBonusBall)
     }
 
-    private fun validateLottoNumbers(input: String): Lotto {
+    private fun validateLottoNumbers(input: String): LottoNumbers {
         val strings = input.replace(" ", "").split(",")
         val lottoNumbers = strings.map { convertStringToLottoNumber(it) }
-        return Lotto(lottoNumbers.toSet())
+        return LottoNumbers(lottoNumbers.toSet())
     }
 
     private fun convertStringToLottoNumber(value: String): LottoNumber {
