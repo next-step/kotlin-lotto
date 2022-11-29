@@ -1,7 +1,7 @@
 package lotto.model
 
 @JvmInline
-value class LottoNumber(val number: Int) {
+value class LottoNumber private constructor(val number: Int) {
 
     init {
         validLottoNumberRange(number)

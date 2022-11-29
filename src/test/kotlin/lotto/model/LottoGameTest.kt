@@ -30,7 +30,7 @@ class LottoGameTest : StringSpec({
                     LottoNumber.valueOf(6)
                 )
             ),
-            LottoNumber(10)
+            LottoNumber.valueOf(10)
         )
         // then
         drawResult.forEach {
