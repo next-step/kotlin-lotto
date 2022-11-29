@@ -13,7 +13,7 @@ object InputView {
         return readln().split(LOTTO_BALL_DELIMITER)
     }
 
-    fun askBonusBall() :Int{
+    fun askBonusBall(): Int {
         println("보너스 볼을 입력해 주세요.")
         return readln().toInt()
     }

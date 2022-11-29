@@ -21,10 +21,10 @@ fun main() {
         }.toSet()
     )
     val bonusBall = LottoBall(InputView.askBonusBall())
-    if (winningLotto.containsBall(bonusBall)){
+    if (winningLotto.containsBall(bonusBall)) {
         throw IllegalArgumentException("보너스볼은 이미 추첨된 번호가 될 수 없습니다.")
     }
-    val rewards = lottos.matchNumbers(winningLotto,bonusBall)
+    val rewards = lottos.matchNumbers(winningLotto, bonusBall)
     val profit = profitCalculator.calculateProfit(rewards, money)
     OutputView.printRewards(rewards, profit)
 }

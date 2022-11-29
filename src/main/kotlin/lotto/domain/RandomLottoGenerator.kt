@@ -11,8 +11,10 @@ class RandomLottoGenerator : LottoGenerator {
         }
         return Lotto(lottoBalls)
     }
+
     companion object {
         private val RANDOM = Random()
     }
 }
+
 private fun Random.lottoBall(min: Int, max: Int): LottoBall = LottoBall(this.nextInt(max - min) + min)
