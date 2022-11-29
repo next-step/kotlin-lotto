@@ -13,6 +13,6 @@ enum class Rank(val matchCount: Int, val winningMoney: Long) {
     companion object {
         private val map = Rank.values().associateBy { it.matchCount }
 
-        fun from(value: Int): Rank = map[value] ?: throw IllegalArgumentException()
+        fun from(value: Int): Rank = map[value] ?: MISS
     }
 }

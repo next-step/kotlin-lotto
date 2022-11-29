@@ -1,3 +1,7 @@
 package com.nextstep.lotto.view
 
-class InputView
+object InputView {
+    fun inputMessage(): String {
+        return readLine()!!
+    }
+}
