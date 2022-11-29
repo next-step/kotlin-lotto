@@ -7,9 +7,9 @@ import io.kotest.matchers.shouldBe
 
 class ExpressionTest : FunSpec({
     context("split()") {
-        test("빈 문자열 또는 null일 경우, '0'을 담은 리스트를 반환한다.") {
+        test("빈 문자열 또는 null일 경우, 빈 리스트를 반환한다.") {
             listOf(null, "", " ").forAll {
-                Expression.split(it) shouldBe listOf("0")
+                Expression.split(it) shouldBe emptyList()
             }
         }
 

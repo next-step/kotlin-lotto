@@ -7,7 +7,7 @@ private val customRegex = Regex("//(.)\n(.*)")
 object Expression {
     fun split(text: String?): List<String> {
         if (text.isNullOrBlank()) {
-            return listOf(EMPTY_VALUE)
+            return emptyList()
         }
 
         val result = customRegex.find(text)
