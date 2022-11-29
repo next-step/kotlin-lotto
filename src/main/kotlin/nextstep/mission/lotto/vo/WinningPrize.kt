@@ -8,8 +8,6 @@ enum class WinningPrize(val matchedCount: Int, val prize: Int) {
     FIFTH(3, 5_000);
 
     companion object {
-        fun find(matchedCount: Int): WinningPrize? = values().find { it.matchedCount == matchedCount }
-
         fun find(matchedCount: Int, bonusMatched: Boolean): WinningPrize? =
             values().find { it.matchedCount == matchedCount }
                 ?.let {
