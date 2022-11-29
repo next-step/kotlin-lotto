@@ -1,14 +1,14 @@
 package com.nextstep.lotto.domain
 
+import com.nextstep.lotto.domain.LottoTicket.Companion.LOTTO_TICKET_COUNT
+
 object LottoMachine {
     fun issue(count: Long): LottoTickets {
-        val list = mutableListOf<LottoTicket>()
-        for (i in 1..count) {
-            val numbers = LottoNumber.getAvailableNumbers().shuffled().take(6)
-            val lottoTicket = LottoTicket(numbers)
-            list.add(lottoTicket)
+        val lottoTickets = (1..count).map {
+            val numbers = LottoNumber.getAvailableNumbers().shuffled().take(LOTTO_TICKET_COUNT)
+            LottoTicket(numbers)
         }
 
-        return LottoTickets(list)
+        return LottoTickets(lottoTickets)
     }
 }
