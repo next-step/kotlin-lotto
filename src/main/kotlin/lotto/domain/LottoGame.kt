@@ -19,5 +19,5 @@ object LottoGame {
         lotto.numbers.filter { winnerLotto.numbers.contains(it) }.size
 
     private fun bonusOfMatches(lotto: Lotto, bonus: Int) =
-        lotto.numbers.contains(bonus)
+        lotto.numbers.filter { bonus == it }.size
 }

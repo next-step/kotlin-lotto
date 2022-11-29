@@ -16,7 +16,7 @@ object ResultView {
 
     fun printWinningStatistics(statistics: Map<LottoGameResult, Int>) {
         statistics.forEach {
-            val bonus = if (it.key == LottoGameResult.SECOND_BONUS) ", 보너스 볼 일치" else ""
+            val bonus = if (it.key == LottoGameResult.SECOND) ", 보너스 볼 일치" else ""
             println("${it.key.criteriaForWinning}개 일치$bonus (${it.key.prize}원)- ${it.value}개")
         }
     }

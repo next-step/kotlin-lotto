@@ -14,25 +14,25 @@ internal class LottoGameTest {
     }
 
     @Test
-    @DisplayName("로또 번호가 1,2,3,4,5,6면서 당첨번호가 1,2,3,7,8,9 보너스 번호가 10일 경우 4등")
-    fun `Lotto number is 1,2,3,4,5,6 and the winning number is 1,2,3,7,8,9 bonus number is 10, 4th place`() {
+    @DisplayName("로또 번호가 1,2,3,4,5,6면서 당첨번호가 1,2,3,7,8,9 보너스 번호가 10일 경우 5등")
+    fun `Lotto number is 1,2,3,4,5,6 and the winning number is 1,2,3,7,8,9 bonus number is 10, 5th place`() {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         val winnerLotto = Lotto(listOf(1, 2, 3, 7, 8, 9))
         val bonusNumber = 10
 
         val result = LottoGame.getResultOfGames(arrayListOf(lotto), winnerLotto, bonusNumber)
 
-        assertThat(result.first()).isEqualTo(LottoGameResult.FOUR)
+        assertThat(result.first()).isEqualTo(LottoGameResult.FIFTH)
     }
     @Test
-    @DisplayName("로또 번호가 1,2,3,4,5,6면서 당첨번호가 1,2,3,4,8,9 보너스 번호가 6일 경우 2등 보너스")
-    fun `Lotto number 1,2,3,4,5,6 and winning number 1,2,3,4,8,9 bonus, If the winning number is 6, second place bonus`() {
+    @DisplayName("로또 번호가 1,2,3,4,5,6면서 당첨번호가 1,2,3,4,5,9 보너스 번호가 6일 경우 2등")
+    fun `Lotto number 1,2,3,4,5,6 and winning number 1,2,3,4,5,9 bonus, If the winning number is 6, second place`() {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        val winnerLotto = Lotto(listOf(1, 2, 3, 4, 8, 9))
+        val winnerLotto = Lotto(listOf(1, 2, 3, 4, 5, 9))
         val bonusNumber = 6
 
         val result = LottoGame.getResultOfGames(arrayListOf(lotto), winnerLotto, bonusNumber)
 
-        assertThat(result.first()).isEqualTo(LottoGameResult.SECOND_BONUS)
+        assertThat(result.first()).isEqualTo(LottoGameResult.SECOND)
     }
 }
