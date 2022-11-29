@@ -24,18 +24,15 @@ object OutputView {
         })
     }
 
-    fun printRewards(rewards: List<Reward>, money: Int) {
+    fun printRewards(rewards: List<Reward>, profit: Float) {
         println("당첨 통계\n ---------")
         rewards.groupBy { it }
             .filter { it.key != Reward.NO_RANK }
             .forEach { println("${it.key.matchNumber}개 일치 (${it.key.reward}) - ${it.value.size}개") }
 
-        println("총 수익률은 ${calculateProfit(rewards, money)}입니다.")
+        println("총 수익률은 $profit 입니다.")
     }
 
-    private fun calculateProfit(rewards: List<Reward>, money: Int): Float {
-        val reward = rewards.sumOf { it.reward }
-        return (reward - money) / money.toFloat()
-    }
+
 
 }
