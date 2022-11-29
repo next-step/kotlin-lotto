@@ -12,7 +12,7 @@ enum class Winning(
 
     companion object {
         fun of(lottoMatch: LottoMatch): Winning {
-            return values().firstOrNull() { it.lottoMatch == lottoMatch } ?: NONE
+            return values().firstOrNull { it.lottoMatch == lottoMatch } ?: NONE
         }
     }
 }

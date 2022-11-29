@@ -9,7 +9,7 @@ enum class LottoMatch(val matchCount: Int) {
 
     companion object {
         fun of(matchCount: Int): LottoMatch {
-            return values().firstOrNull() { it.matchCount == matchCount } ?: NONE
+            return values().firstOrNull { it.matchCount == matchCount } ?: NONE
         }
     }
 }
