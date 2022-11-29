@@ -1,6 +1,9 @@
 package calculator.domain
 
-class InputParser {
+object InputParser {
+    private const val DEFAULT_DELIMITER_INDICATOR = ",|:"
+    private const val CUSTOM_DELIMITER_INDICATOR = "//(.)\n(.*)"
+
     fun parseWithDelimiter(input: String?): Array<Int> {
         if (input.isNullOrEmpty()) {
             return arrayOf(0)
@@ -30,9 +33,4 @@ class InputParser {
 
     private fun parseWithDefaultDelimiter(input: String) =
         input.split(DEFAULT_DELIMITER_INDICATOR.toRegex()).map { it.toInt() }.toTypedArray()
-
-    companion object {
-        private const val DEFAULT_DELIMITER_INDICATOR = ",|:"
-        private const val CUSTOM_DELIMITER_INDICATOR = "//(.)\n(.*)"
-    }
 }
