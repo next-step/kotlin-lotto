@@ -11,6 +11,6 @@ class ProfitCalculatorTest {
 
         val result = profitCalculator.calculateProfit(listOf(Reward.FOURTH_RANK), 1000)
 
-        assertThat(result).isEqualTo((5000 - 1000) / 1000.toFloat())
+        assertThat(result).isEqualTo((Reward.FOURTH_RANK.reward - 1000) / 1000.toFloat())
     }
 }
