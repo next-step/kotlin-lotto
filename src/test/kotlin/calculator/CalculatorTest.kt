@@ -1,4 +1,4 @@
-package stringaddcalculator
+package calculator
 
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType
@@ -8,12 +8,12 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class StringAddCalculatorTest {
-    private lateinit var calculator: StringAddCalculator
+internal class CalculatorTest {
+    private lateinit var calculator: Calculator
 
     @BeforeEach
     fun setUp() {
-        calculator = StringAddCalculator()
+        calculator = Calculator()
     }
 
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
