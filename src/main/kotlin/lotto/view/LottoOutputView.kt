@@ -1,15 +1,15 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
+import lotto.domain.Lottos
 import lotto.domain.Rank
 
 object LottoOutputView {
     /**
      * 구입한 로또의 결과를 출력한다.
      */
-    fun printPurchaseLottoResult(lottos: List<Lotto>) {
-        printPurchaseLottoCount(lottos)
+    fun printPurchaseLottoResult(lottos: Lottos, manualLottos: Lottos) {
+        printPurchaseLottoCount(lottos, manualLottos)
         printLottos(lottos)
         println()
     }
@@ -17,13 +17,15 @@ object LottoOutputView {
     /**
      * 구입한 로또의 수를 출력한다.
      */
-    fun printPurchaseLottoCount(lottos: List<Lotto>) = println("${lottos.size}개를 구매했습니다.")
+    fun printPurchaseLottoCount(lottos: Lottos, manualLottos: Lottos) {
+        println("수동으로 ${manualLottos.count}장, 자등으로 ${lottos.count - manualLottos.count}장을 구매했습니다.")
+    }
 
     /**
      * 로또들의 번호들을 출력한다.
      */
-    fun printLottos(lottos: List<Lotto>) =
-        lottos.map { lotto -> println("${lotto.numbers.map { it.number }}") }
+    fun printLottos(lottos: Lottos) =
+        lottos.lottoList.map { lotto -> println("${lotto.numbers.map { it.number }}") }
 
     /**
      * 로또 당첨 통계를 출력한다.
