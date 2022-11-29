@@ -1,7 +1,5 @@
 package lotto
 
-private const val SIZE = 6
-
 @JvmInline
 value class Lotto(val numbers: Set<LottoNumber>) {
     init {
@@ -10,5 +8,9 @@ value class Lotto(val numbers: Set<LottoNumber>) {
 
     fun contains(number: LottoNumber): Boolean {
         return numbers.contains(number)
+    }
+
+    companion object {
+        const val SIZE = 6
     }
 }
