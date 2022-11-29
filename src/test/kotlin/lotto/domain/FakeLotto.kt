@@ -18,9 +18,9 @@ fun lottoNumberOf(vararg elements: Int): LottoNumbers {
     return LottoNumbers(elements.map { LottoNumber(it) }.toSet())
 }
 
-fun winningLottoNumberOf(vararg elements: Int, bonus: Int = 0): WinningLottoNumbers {
+fun winningLottoNumberOf(vararg elements: Int): WinningLottoNumbers {
     return WinningLottoNumbers(
-        lottoNumbers = LottoNumbers(elements.map { LottoNumber(it) }.toSet()),
-        bonusLottoNumber = LottoNumber(bonus)
+        lottoNumbers = LottoNumbers(elements.take(6).map { LottoNumber(it) }.toSet()),
+        bonusLottoNumber = LottoNumber(elements.last())
     )
 }

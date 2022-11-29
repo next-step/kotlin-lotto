@@ -8,16 +8,8 @@ internal class WinningLottoNumbersTest : BehaviorSpec({
         val bonusBall = LottoNumber(3)
 
         `when`("당첨 번호와 중복될 때") {
-            val winningLottoNumbersNumbers = LottoNumbers(
-                setOf(
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6),
-                    LottoNumber(7),
-                    LottoNumber(8),
-                )
-            )
+            val winningLottoNumbersNumbers = lottoNumberOf(3, 4, 5, 6, 7, 8)
+
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
                     WinningLottoNumbers(lottoNumbers = winningLottoNumbersNumbers, bonusLottoNumber = bonusBall)
