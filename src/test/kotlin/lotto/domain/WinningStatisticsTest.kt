@@ -21,7 +21,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
                 )
             )
         )
-        val winningLottoNumbersNumbers = WinningLotto(
+        val winningLottoNumbersNumbersNumbers = WinningLottoNumbers(
             LottoNumbers(
                 setOf(
                     LottoNumber(1),
@@ -35,7 +35,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
             LottoNumber(5)
         )
         `when`("4장이 3개의 수가 일치하는 로또들의 통계를 내면") {
-            val result = WinningStatistics.create(purchasedLottoNumbers, winningLottoNumbersNumbers)
+            val result = WinningStatistics.create(purchasedLottoNumbers, winningLottoNumbersNumbersNumbers)
 
             then("당첨 통계의 4등의 카운트는 4이다.") {
                 result.getNumberOfMatchCount(Rank.FIFTH) shouldBe 4
@@ -65,7 +65,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
                 )
             )
         )
-        val winningLottoNumbersNumbers = WinningLotto(
+        val winningLottoNumbersNumbersNumbers = WinningLottoNumbers(
             LottoNumbers(
                 setOf(
                     LottoNumber(21),
@@ -80,7 +80,7 @@ internal class WinningStatisticsTest : BehaviorSpec({
         )
 
         `when`("4등 1장만 당첨 됐으면") {
-            val result = WinningStatistics.create(purchasedLotteries, winningLottoNumbersNumbers)
+            val result = WinningStatistics.create(purchasedLotteries, winningLottoNumbersNumbersNumbers)
 
             then("수익률은 0.35 이다. (소수점 두자리까지 표시)") {
                 result.calculateRateOfReturn(purchaseAmount).toString() shouldBe 0.35.toString()

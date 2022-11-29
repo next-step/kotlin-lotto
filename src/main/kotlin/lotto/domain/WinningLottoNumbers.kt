@@ -1,15 +1,15 @@
 package lotto.domain
 
-data class WinningLotto(
+data class WinningLottoNumbers(
     private val lottoNumbers: LottoNumbers,
-    private val bonusLottoNumbers: LottoNumber
+    private val bonusLottoNumber: LottoNumber
 ) {
     init {
-        require(!lottoNumbers.lottoNumbers.contains(bonusLottoNumbers)) { INVALID_BONUS_BALL_ERROR_MESSAGE }
+        require(!lottoNumbers.lottoNumbers.contains(bonusLottoNumber)) { INVALID_BONUS_BALL_ERROR_MESSAGE }
     }
     fun getMatchResult(lotteries: List<LottoNumbers>): List<Pair<Int, Boolean>> {
         return lotteries.map {
-            Pair(lottoNumbers.getNumberOfMatch(it), it.isMatchBonusLottoNumber(bonusLottoNumbers))
+            Pair(lottoNumbers.getNumberOfMatch(it), it.isMatchBonusLottoNumber(bonusLottoNumber))
         }
     }
 
