@@ -2,7 +2,7 @@ package com.nextstep.lotto.domain
 
 import java.lang.IllegalArgumentException
 
-class LottoNumber(private val number: Int) {
+data class LottoNumber(private val number: Int) {
 
     companion object {
         private const val LOTTO_MIN_NUMBER = 1
