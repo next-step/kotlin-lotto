@@ -8,7 +8,11 @@ import java.math.BigDecimal
 object OutputView {
     fun writeLottos(lottos: List<Lotto>) {
         lottos.forEach {
-            println(it.numbers.map { number -> number.value })
+            println(
+                it.numbers
+                    .map { number -> number.value }
+                    .sorted()
+            )
         }
     }
 
