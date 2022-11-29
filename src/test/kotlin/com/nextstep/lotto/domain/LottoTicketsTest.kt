@@ -34,7 +34,7 @@ class LottoTicketsTest : FunSpec({
                 )
             )
 
-            calculateResult.keys.first() shouldBe Rank.FOURTH
+            calculateResult.result.keys.first() shouldBe Rank.FOURTH
         }
     }
 })

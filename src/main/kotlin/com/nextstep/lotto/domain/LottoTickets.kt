@@ -9,7 +9,8 @@ class LottoTickets(private val lottoTickets: List<LottoTicket>) {
         return lottoTickets.toList()
     }
 
-    fun calculateResult(winningNumber: WinningNumber): Map<Rank, Int> {
-        return lottoTickets.map { it.matchCount(winningNumber.winningNumbers) }.groupingBy { Rank.from(it) }.eachCount()
+    fun calculateResult(winningNumber: WinningNumber): LottoResult {
+        val eachCount = lottoTickets.map { it.matchCount(winningNumber.winningNumbers) }.groupingBy { Rank.from(it) }.eachCount()
+        return LottoResult(eachCount)
     }
 }
