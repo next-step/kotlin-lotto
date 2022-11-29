@@ -13,16 +13,18 @@ class Wallet(var krw: KRW = DEFAULT_KRW) {
         krw = krw.add(additionKRW)
     }
 
-    fun buyLottos(): List<Lotto> {
-        lottos.addAll(LottoStore().sell(krw))
+    fun buyLottos(lottoStore: LottoStore = LottoStore()): List<Lotto> {
+        lottos.addAll(lottoStore.sell(krw))
         krw = KRW(0)
         return lottos
     }
 
     fun indicateLottoStatistics(winningLotto: WinningLotto): WalletResult {
-        return WalletResult(lottos.map {
+        val lottoResults = lottos.map {
             winningLotto.compareWith(it)
-        }.toList())
+        }.toList()
+
+        return WalletResult(lottoResults)
     }
 
     companion object {
