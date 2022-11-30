@@ -1,8 +1,5 @@
 package lotto.domain
 
-import java.lang.IllegalArgumentException
-
-
 data class LottoNumber private constructor(
     val value: Int
 ) {
