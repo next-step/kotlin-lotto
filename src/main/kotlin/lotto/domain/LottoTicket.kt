@@ -1,6 +1,5 @@
 package lotto.domain
 
-
 class LottoTicket(
     val numbers: Set<LottoNumber>
 ) {
@@ -13,10 +12,8 @@ class LottoTicket(
         require(hasNotEqualNumber()) { "같은 로또 번호는 올 수 없어요" }
     }
 
-
-    fun matchScratch(winningTicket: WinningTicket): Award {
-        val matchCount = numbers.count { winningTicket.containNumber(it) }
-        return Award.of(matchCount, winningTicket.containBonusNumber(numbers))
+    fun matchCount(lottoTicket: LottoTicket): Int {
+        return numbers.count { lottoTicket.containNumber(it) }
     }
 
     fun notContainNumber(bonusNumber: LottoNumber): Boolean = !containNumber(bonusNumber)

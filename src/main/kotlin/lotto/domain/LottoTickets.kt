@@ -15,7 +15,7 @@ class LottoTickets(
 
     private fun groupByAward(winningTicket: WinningTicket): Map<Award, Int> {
         return items.map {
-            it.matchScratch(winningTicket)
+            winningTicket.match(it)
         }.groupingBy { it }.eachCount()
     }
 }
