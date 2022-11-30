@@ -5,14 +5,23 @@ import lotto.domain.LottoDispenser
 
 class InputView {
 
-    fun input(): Pair<Int, List<Lotto>> {
+    var lottoList: List<Lotto> = emptyList()
+        private set
+    var amount: Int = 0
+        private set
+
+    fun inputPurchasingAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        val amount = readLine()?.toIntOrNull() ?: 0
-        val lottoList = LottoDispenser(amount).list
-        return amount to lottoList
+        amount = readLine()?.toIntOrNull() ?: 0
+        return if (amount < 1000) {
+            inputPurchasingAmount()
+        } else {
+            amount
+        }
     }
 
-    fun showLottoList(lottoList: List<Lotto>) {
+    fun showPurchaseResult() {
+        lottoList = LottoDispenser(amount).list
         println("${lottoList.size}개를 구매했습니다.")
         lottoList.forEach { println(it) }
     }

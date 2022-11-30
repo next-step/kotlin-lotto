@@ -7,19 +7,21 @@ import lotto.domain.WinningChecker
 
 class ResultView {
 
-    fun inputWinningNumbers(): String {
+    private lateinit var winners: List<Winner>
+    private var winningNumbers: String = ""
+
+    fun inputWinningNumbers() {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        return readLine() ?: ""
+        winningNumbers = readLine() ?: ""
     }
 
-    fun checkWinningLottoList(winningNumbers: String, lottoList: List<Lotto>): List<Winner> {
-        return lottoList
-            .map { lotto ->
-                WinningChecker.win(winningNumbers, lotto.numbers)
-            }
+    fun checkWinningLottoList(lottoList: List<Lotto>) {
+        winners = lottoList.map { lotto ->
+            WinningChecker.win(winningNumbers, lotto.numbers)
+        }
     }
 
-    fun showResult(amount: Int, winners: List<Winner>) {
+    fun showResult(amount: Int) {
         println("\n당첨 통계")
         println("---------")
 
