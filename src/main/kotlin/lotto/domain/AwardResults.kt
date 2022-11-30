@@ -1,13 +1,14 @@
 package lotto.domain
 
 class AwardResults(
-    private val items: List<AwardResult>
+    private val items: List<AwardResult>,
+    private val ticketPrice: Int
 ) {
     private val ticketCount
         get() = items.sumOf { it.matchCount }
 
 
-    fun profitability(ticketPrice: Int): Double {
+    fun profitability(): Double {
         return (items.sumOf { it.sumOfPrize }.toDouble() / (ticketPrice * ticketCount))
     }
 

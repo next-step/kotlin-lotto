@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.TicketStore
 import lotto.domain.WinningTicket
 import lotto.domain.machine.RandomLottoMachine
 import lotto.view.InputView
@@ -9,7 +8,8 @@ import lotto.view.ResultView
 fun main() {
     val money = InputView.inputMoney()
 
-    val tickets = TicketStore.buyTickets(RandomLottoMachine(money))
+    val machine = RandomLottoMachine(money)
+    val tickets = machine.publish()
     ResultView.printTickets(tickets)
 
     val numbers = InputView.inputWinningNumber()

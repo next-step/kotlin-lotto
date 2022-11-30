@@ -24,5 +24,6 @@ class LottoTicket(
 
     companion object {
         const val NUMBER_SIZE = 6
+        const val PRICE = 1000
     }
 }

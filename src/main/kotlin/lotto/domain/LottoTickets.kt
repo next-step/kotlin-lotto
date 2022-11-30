@@ -9,7 +9,8 @@ class LottoTickets(
         return AwardResults(
             Award.values().map {
                 AwardResult(it, groupByAward(winningTicket).getOrDefault(it, 0))
-            }
+            },
+            LottoTicket.PRICE
         )
     }
 

@@ -23,7 +23,7 @@ object ResultView {
                 println("${printPrefix(it)}- ${awardResults.matchCount(it)}개")
             }
 
-        print("총 수익률은 ${TicketStore.profitability(awardResults)}입니다.")
+        print("총 수익률은 ${awardResults.profitability()}입니다.")
     }
 
     private fun printPrefix(it: Award): String {
