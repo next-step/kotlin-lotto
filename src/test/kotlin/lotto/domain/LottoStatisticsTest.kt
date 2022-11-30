@@ -3,42 +3,52 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
-import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
 
 class LottoStatisticsTest : StringSpec({
-
-    "당첨자 통계 결과 테스트" {
-        // given
-        val payment = 15000
+    "로또 수익률 계산 테스트" {
         forAll(
-            row(
-                WinLottoPrize.FOURTH,
-                listOf(
-                    LottoStatisticsResult(WinLottoPrize.FIRST, 0),
-                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
-                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
-                    LottoStatisticsResult(WinLottoPrize.FOURTH, 1),
-                )
-            ),
-            row(
-                WinLottoPrize.FIRST,
-                listOf(
-                    LottoStatisticsResult(WinLottoPrize.FIRST, 1),
-                    LottoStatisticsResult(WinLottoPrize.SECOND, 0),
-                    LottoStatisticsResult(WinLottoPrize.THIRD, 0),
-                    LottoStatisticsResult(WinLottoPrize.FOURTH, 0),
-                )
-            )
-        ) { lottoResult, expected ->
-            val result = LottoStatistics.statistics(payment, listOf(lottoResult))
-            val actualWinLottoStatisticsResult = result.winLottoStatisticsResult
+            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), 100000, 0.55),
+            row(listOf(LottoRank.FIFTH), 5000, 1.0),
+            row(listOf(LottoRank.FOURTH), 5000, 10),
+        ) { prizeList, payment, expectedEarningRate ->
+            // given
+            val lottoStatistics = LottoStatistics(prizeList)
             // when
-            actualWinLottoStatisticsResult.size shouldBe expected.size
+            val actualEarningRate = lottoStatistics.earningRate(payment)
             // then
-            actualWinLottoStatisticsResult.forEachIndexed { index, lottoStatisticsResult ->
-                lottoStatisticsResult shouldBeEqualToComparingFields expected[index]
-            }
+            actualEarningRate shouldBe expectedEarningRate
+        }
+    }
+
+    "로또 당첨 통계 테스트" {
+        // given
+        val winLottoList = listOf(
+            LottoRank.FIRST,
+            LottoRank.THIRD,
+            LottoRank.THIRD,
+            LottoRank.FIFTH,
+            LottoRank.FIFTH,
+            LottoRank.FIFTH,
+        )
+        val lottoStatistics = LottoStatistics(winLottoList)
+
+        val expected = listOf(
+            LottoStatisticsResult(LottoRank.FIFTH, 3),
+            LottoStatisticsResult(LottoRank.FOURTH, 0),
+            LottoStatisticsResult(LottoRank.THIRD, 2),
+            LottoStatisticsResult(LottoRank.SECOND, 0),
+            LottoStatisticsResult(LottoRank.FIRST, 1),
+        )
+
+        // when
+        val actual = lottoStatistics.winLottoStatistics()
+
+        // then
+        actual.size shouldBe expected.size
+        actual.forEachIndexed { index, result ->
+            result.winLottoCount shouldBe expected[index].winLottoCount
+            result.lottoRank shouldBe expected[index].lottoRank
         }
     }
 })

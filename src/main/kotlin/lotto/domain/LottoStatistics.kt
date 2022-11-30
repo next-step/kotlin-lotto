@@ -1,24 +1,30 @@
 package lotto.domain
 
-object LottoStatistics {
+import lotto.util.NumberUtil
 
-    fun statistics(inputPayment: Int, winLottoList: List<WinLottoPrize>): LottoStatisticsTotal {
-        val winLottoStatisticsResult = winLottoStatistics(winLottoList)
-        val lottoPrize = LottoPrize(winLottoList.map { it.prizeMoney })
-        return LottoStatisticsTotal(
-            earningRate = lottoPrize.earningRate(inputPayment),
-            winLottoStatisticsResult = winLottoStatisticsResult
-        )
+class LottoStatistics(
+    private val winLottoList: List<LottoRank>
+) {
+    private val prizeList: List<Int> = winLottoList.map { it.prizeMoney }
+    private val totalPrize: Int = prizeList.sum()
+
+    fun earningRate(inputPayment: Int): Double {
+        val earningRate = totalPrize.toDouble() / inputPayment.toDouble()
+        return NumberUtil.floor(earningRate, EARNING_RATE_DECIMAL_PLACE)
     }
 
-    private fun winLottoStatistics(winLottoList: List<WinLottoPrize>): List<LottoStatisticsResult> {
-        val hitCountMap = winLottoList.groupBy { winLottoPrize: WinLottoPrize -> winLottoPrize.hitCount }
+    fun winLottoStatistics(): List<LottoStatisticsResult> {
+        val hitCountMap = winLottoList.groupBy { lottoRank: LottoRank -> lottoRank }
 
-        return WinLottoPrize.values().map {
+        return LottoRank.winRanks().map {
             LottoStatisticsResult(
-                winLottoPrize = it,
-                winLottoCount = hitCountMap.getOrDefault(it.hitCount, emptyList()).size
+                lottoRank = it,
+                winLottoCount = hitCountMap.getOrDefault(it, emptyList()).size
             )
         }
+    }
+
+    companion object {
+        private const val EARNING_RATE_DECIMAL_PLACE = 2
     }
 }

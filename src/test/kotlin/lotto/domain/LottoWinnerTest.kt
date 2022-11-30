@@ -5,16 +5,21 @@ import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
 
 class LottoWinnerTest : StringSpec({
+
     "당첨 로또 선택 테스트" {
         // given
         val luckyNumbers = listOf(1, 3, 5, 7, 9, 11)
-        val fourthWinLotto = Lotto(listOf(7, 9, 11, 12, 13, 14))
-        val thirdWinLotto = Lotto(listOf(5, 7, 9, 11, 12, 13))
-        val notWintLotto = Lotto(listOf(2, 4, 6, 8, 10, 12))
+        val bonusNumber = 13
+        val lottoWinner = LottoWinner(LuckyNumbers(luckyNumbers, bonusNumber))
+
+        val fourthWinLotto = Lotto(listOf(5, 7, 9, 11, 12, 13))
+        val secondWinLotto = Lotto(listOf(3, 5, 7, 9, 11, 13))
+        val thirdWinLotto = Lotto(listOf(3, 5, 7, 9, 11, 15))
+        val notWintLotto = Lotto(listOf(2, 4, 6, 8, 10, 13))
         // when
-        val result = LottoWinner.findWinLottoList(luckyNumbers, listOf(fourthWinLotto, notWintLotto, thirdWinLotto))
+        val result = lottoWinner.findWinLottoList(listOf(fourthWinLotto, notWintLotto, secondWinLotto, thirdWinLotto))
         // then
-        result.size shouldBe 2
-        result shouldContainInOrder listOf(WinLottoPrize.FOURTH, WinLottoPrize.THIRD)
+        result.size shouldBe 3
+        result shouldContainInOrder listOf(LottoRank.FOURTH, LottoRank.SECOND, LottoRank.THIRD)
     }
 })

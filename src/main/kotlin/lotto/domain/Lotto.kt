@@ -3,8 +3,8 @@ package lotto.domain
 class Lotto(
     val numbers: List<Int>
 ) {
-    fun countHitNumbers(luckyNumbers: List<Int>): Int {
-        return numbers.count { number -> luckyNumbers.contains(number) }
+    init {
+        require(numbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 ${LOTTO_NUMBERS_SIZE}개가 필요합니다." }
     }
 
     companion object {

@@ -1,6 +1,6 @@
 package lotto.domain
 
 class LottoStatisticsResult(
-    val winLottoPrize: WinLottoPrize,
+    val lottoRank: LottoRank,
     val winLottoCount: Int
 )
