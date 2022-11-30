@@ -14,7 +14,7 @@ internal class LottoDispenserTest {
         ints = [1000, 14000, 14500]
     )
     fun createLotto(amount: Int) {
-        val expectedValue = amount / BASIC_PRICE
+        val expectedValue = amount / MINIMUM_PRICE
         val dispenser = LottoDispenser(amount)
 
         dispenser.list.size shouldBe expectedValue

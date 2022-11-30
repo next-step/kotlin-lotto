@@ -1,5 +1,6 @@
 package lotto.ui
 
+import lotto.domain.MINIMUM_PRICE
 import lotto.domain.Lotto
 import lotto.domain.LottoDispenser
 
@@ -13,7 +14,7 @@ class InputView {
     fun inputPurchasingAmount(): Int {
         println("구입금액을 입력해 주세요.")
         amount = readLine()?.toIntOrNull() ?: 0
-        return if (amount < 1000) {
+        return if (amount < MINIMUM_PRICE) {
             inputPurchasingAmount()
         } else {
             amount
