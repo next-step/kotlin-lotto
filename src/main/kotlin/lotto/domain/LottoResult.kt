@@ -1,5 +1,5 @@
 package lotto.domain
 
-class LottoResult(val purchasePrice: Int, val winningAmountList: List<Map<String, Int>>) {
+class LottoResult(val purchasePrice: Int, val winningAmountList: Map<Int, Int>) {
     fun calculateReturnRate() {}
 }
