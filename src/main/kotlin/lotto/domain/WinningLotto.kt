@@ -2,16 +2,16 @@ package lotto.domain
 
 class WinningLotto(winningNumbers: List<Int>) {
 
-    private val numbers: Set<Int>
+    private val numbers: Set<LottoNumber>
 
     init {
         require(winningNumbers.size == 6)
-        numbers = winningNumbers.toSet()
+        numbers = winningNumbers.map { LottoNumber(it) }.toSet()
         require(numbers.size == 6)
     }
 
     fun compareWith(lotto: Lotto): LottoResult {
-        return when (numbers.intersect(lotto.numbers.toSet()).size) {
+        return when (numbers.intersect(lotto.numbers).size) {
             6 -> LottoResult.FirstWin
             5 -> LottoResult.SecondWin
             4 -> LottoResult.ThirdWin

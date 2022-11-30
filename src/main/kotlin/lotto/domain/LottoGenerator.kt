@@ -3,7 +3,8 @@ package lotto.domain
 class LottoGenerator {
 
     fun generate(): Lotto {
-        return Lotto(DEFAULT_RANGE.shuffled().subList(0, 6).sorted().toSet())
+        val lottoNumbers = DEFAULT_RANGE.shuffled().subList(0, 6).sorted().map { LottoNumber(it) }.toSet()
+        return Lotto(lottoNumbers)
     }
 
     companion object {

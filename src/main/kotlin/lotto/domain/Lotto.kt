@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class Lotto(val numbers: Set<Int>) {
+data class Lotto(val numbers: Set<LottoNumber>) {
 
     val value = krw
 
