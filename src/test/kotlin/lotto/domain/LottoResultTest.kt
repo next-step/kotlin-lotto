@@ -16,7 +16,7 @@ class LottoResultTest : DescribeSpec ({
 
             val lottoResult = LottoResult(purchasePrice, matchesResult)
 
-            lottoResult.calculateReturnRate() shouldBe 0.35
+            lottoResult.calculateReturnRate() shouldBe 0.36
         }
     }
 })

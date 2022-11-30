@@ -15,8 +15,9 @@ class LottoController {
        val winningLotto = Lotto(winningLottoNumbers)
 
        val winningAmountList = calculateWinningAmount(ticketingLottoList, winningLotto)
+       val lottoResult = getLottoResult(purchasePrice, winningAmountList)
 
-       printLottoResult()
+       printLottoResult(lottoResult)
    }
 
    private fun chargePaymentAmount(): Int {
@@ -54,14 +55,11 @@ class LottoController {
        ticketingLottoList.forEach { ticketingLotto ->
            val matchCount = LottoNumbersMatcher.calculateMatchCount(ticketingLotto, winningLotto)
 
-           var lottoReward = try {
-               LottoReward.find(matchCount)
-           } catch (e: RuntimeException) {
-               null
-           }
+           var lottoReward = LottoReward.find(matchCount)
+
 
            var rewardPrice = lottoReward?.rewardPrice
-           if (rewardPrice != null) {
+           if (rewardPrice != 0) {
                winningAmountList[rewardPrice] = (winningAmountList[rewardPrice] ?: 0) + 1
            }
        }
@@ -69,7 +67,11 @@ class LottoController {
        return winningAmountList
    }
 
-   private fun printLottoResult() {
-       ResultView.printLottoResult()
+   private fun getLottoResult(purchasePrice: Int, winningAmountList: Map<Int, Int>): LottoResult {
+        return LottoResult(purchasePrice, winningAmountList)
+   }
+
+   private fun printLottoResult(lottoResult: LottoResult) {
+       ResultView.printLottoResult(lottoResult)
    }
 }
