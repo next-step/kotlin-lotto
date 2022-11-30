@@ -2,8 +2,10 @@ package lotto.domain
 
 class Wallet(var krw: KRW = DEFAULT_KRW) {
 
-    var lottos: MutableList<Lotto> = mutableListOf()
-        private set
+    private var _lottos: MutableList<Lotto> = mutableListOf()
+
+    val lottos: List<Lotto>
+        get() = _lottos.toList()
 
     fun insertMoney(input: String) {
         val additionKRW = KRW.byInput(input)
@@ -11,13 +13,13 @@ class Wallet(var krw: KRW = DEFAULT_KRW) {
     }
 
     fun buyLottos(lottoStore: LottoStore = LottoStore()): List<Lotto> {
-        lottos.addAll(lottoStore.sell(krw))
+        _lottos.addAll(lottoStore.sell(krw))
         krw = KRW(0)
         return lottos
     }
 
     fun indicateLottoStatistics(winningLotto: WinningLotto): WalletResult {
-        val lottoResults = lottos.map {
+        val lottoResults = _lottos.map {
             winningLotto.compareWith(it)
         }.toList()
 
