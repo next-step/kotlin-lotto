@@ -25,18 +25,14 @@
 
 ### 테스트할 대상과 케이스 선택
 
-- LottoNumbers 클래스
-   - 로또 번호를 정렬할 수 있다.
-- LotteryWinningNumbers 데이터 클래스
-   - 테스트 케이스 없음
-- LottoPurchaseHistory 데이터 클래스
-   - 테스트 케이스 없음
-- LottoDrawResult 데이터 클래스
-   - 테스트 케이스 없음
+- Lotto 데이터 클래스
+- LottoResult 클래스
+   - 로또 당첨 결과를 기반으로 수익률을 계산할 수 있다.
+- LottoReward enum 클래스
+  - 로또 당첨의 조건을 제공해준다.
 - LottoNumbersMatcher
-   - 로또 번호와 당첨 번호 사이의 일치율을 계산할 수 있다.
    - 로또 번호와 당첨 번호 사이의 일치하는 숫자 갯수를 계산할 수 있다.
-- LotteryTicketMachine
+- LottoSaleMachine
    - 결제한 금액에 대해 발권해줄 로또의 갯수를 계산할 수 있다.
 - LottoNumbersValidator
    - 입력된 번호가 6개일 경우 로또 객체를 생성할 수 있다.
