@@ -1,4 +1,4 @@
-package nextstep.mission.lotto.io.dto
+package nextstep.mission.lotto.dto
 
 import nextstep.mission.lotto.Lotto
 

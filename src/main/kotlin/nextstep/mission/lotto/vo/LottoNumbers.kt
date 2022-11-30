@@ -27,5 +27,5 @@ value class LottoNumbers(val numbers: List<LottoNumber>) {
         return match(0, otherNumbers, this.numbers.toMutableList())
     }
 
-    private fun contains(lottoNumber: LottoNumber) = this.numbers.contains(lottoNumber)
+    fun contains(lottoNumber: LottoNumber) = this.numbers.contains(lottoNumber)
 }

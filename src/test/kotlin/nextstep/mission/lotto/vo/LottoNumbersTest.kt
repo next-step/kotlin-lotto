@@ -40,4 +40,15 @@ class LottoNumbersTest : StringSpec({
 
         result shouldBe 6
     }
+
+    "로또 숫자를 포함하고 있는지 여부를 반환한다." {
+        listOf(
+            LottoNumber(1) to true,
+            LottoNumber(45) to false
+        ).forEach { (lottoNumber: LottoNumber, expected: Boolean) ->
+            val lottoNumbers = LottoNumbers(lottoNumberListOf(1, 2, 3, 4, 5, 6))
+
+            lottoNumbers.contains(lottoNumber) shouldBe expected
+        }
+    }
 })
