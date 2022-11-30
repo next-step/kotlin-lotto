@@ -5,9 +5,6 @@ class Wallet(var krw: KRW = DEFAULT_KRW) {
     var lottos: MutableList<Lotto> = mutableListOf()
         private set
 
-    val money
-        get() = krw.money
-
     fun insertMoney(input: String) {
         val additionKRW = KRW.byInput(input)
         krw = krw.add(additionKRW)
