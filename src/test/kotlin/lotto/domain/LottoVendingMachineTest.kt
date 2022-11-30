@@ -17,4 +17,13 @@ internal class LottoVendingMachineTest : BehaviorSpec({
             }
         }
     }
+
+    given("로또 자판기에서는") {
+        `when`("랜덤으로 로또 번호를 생성했을 때") {
+            val lottoNumbers = LottoVendingMachine.makeRandomLottoNumbers()
+            then("중복없는 6개의 숫자를 만든다.") {
+                lottoNumbers.distinct().size shouldBe 6
+            }
+        }
+    }
 })

@@ -2,16 +2,17 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
-import java.lang.IllegalArgumentException
 
 internal class WinningLottoNumbersTest : BehaviorSpec({
-    given("당첨 번호를 입력했을 때") {
-        `when`("숫자가 아닌 문자가 있다면") {
-            val input = "df, d, 1, f, ff, yoon"
+    given("입력된 보너스 볼의 숫자가") {
+        val bonusBall = LottoNumber(3)
+
+        `when`("당첨 번호와 중복될 때") {
+            val winningLottoNumbersNumbers = lottoNumberOf(3, 4, 5, 6, 7, 8)
 
             then("IllegalArgumentException 이 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
-                    WinningLottoNumbers.from(input)
+                    WinningLottoNumbers(lottoNumbers = winningLottoNumbersNumbers, bonusLottoNumber = bonusBall)
                 }
             }
         }
