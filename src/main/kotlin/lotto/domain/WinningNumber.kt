@@ -11,6 +11,7 @@ class WinningNumber(numberOfLastWeek: String) {
         require(Validation.isNotBlank(numberOfLastWeek)) { "공백 값이 들어왔습니다." }
 
         val number = numberOfLastWeek.split(",")
+            .map { it.trim() }
         require(Validation.isSameNumberOfArraysAndReferenceValue(number.size, 6)) { "당첨번호의 수가 적거나 많습니다." }
 
         number.forEach {
