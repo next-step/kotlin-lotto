@@ -53,7 +53,7 @@ class LottoGameTest : StringSpec({
             )
         )
         // when
-        val lottoGame = LottoGame(14000, directLottoNumber)
+        val lottoGame = LottoGame(PurchaseAmount(14000), directLottoNumber)
         // then
         lottoGame.getLottos().size shouldBe 14
         lottoGame.getDirectLottoCount() shouldBe 1

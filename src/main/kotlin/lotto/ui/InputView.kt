@@ -2,14 +2,15 @@ package lotto.ui
 
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
+import lotto.model.PurchaseAmount
 
 object InputView {
 
-    fun inputLottoAmount(): Int {
+    fun inputLottoAmount(): PurchaseAmount {
         println("구입금액을 입력해 주세요.")
         val amount: String = readLine() ?: throw IllegalArgumentException("구매금액을 숫자를 입력해야 합니다")
 
-        return amount.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다")
+        return PurchaseAmount(amount.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다"))
     }
 
     fun inputWinningNumber(): LottoNumbers {

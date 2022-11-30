@@ -3,22 +3,25 @@ package lotto.model
 private const val LOTTO_PER_AMOUNT = 1000
 
 class LottoGame(
-    private val lottoAmount: Int,
+    private val lottoAmount: PurchaseAmount,
     private val directNumbers: List<LottoNumbers> = listOf(),
     lottoNumberGenerator: LottoNumberGenerator = RandomLottoNumberGenerator()
 ) {
+    constructor(lottoAmount: Int) : this(PurchaseAmount(lottoAmount))
 
-    private var lottos: MutableList<LottoNumbers> = mutableListOf()
+    private lateinit var lottos: List<LottoNumbers>
 
     init {
         createLotto(lottoNumberGenerator)
     }
 
     private fun createLotto(lottoNumberGenerator: LottoNumberGenerator) {
-        lottos.addAll(directNumbers)
-        repeat(lottoAmount / LOTTO_PER_AMOUNT - directNumbers.size) {
-            lottos.add(lottoNumberGenerator.pick())
+        var result = mutableListOf<LottoNumbers>()
+        repeat(lottoAmount.amount / LOTTO_PER_AMOUNT - directNumbers.size) {
+            result.add(lottoNumberGenerator.pick())
         }
+
+        lottos = directNumbers + result
     }
 
     fun draw(winningNumber: LottoNumbers, plusNumber: LottoNumber): List<LottoGrade> {

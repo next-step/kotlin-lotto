@@ -1,6 +1,6 @@
 package lotto.model
 
-private const val LOTTO_SIZE = 6
+const val LOTTO_SIZE = 6
 
 class LottoNumbers(val numbers: List<LottoNumber>) {
     init {

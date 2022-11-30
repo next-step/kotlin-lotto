@@ -5,7 +5,7 @@ import java.math.RoundingMode
 
 private const val LOTTO_STAT_BASE_CORRECT_NUMBER = 3
 
-class LottoStat(private val lottoGrades: List<LottoGrade>, private val amount: Int) {
+class LottoStat(private val lottoGrades: List<LottoGrade>, private val purchaseAmount: PurchaseAmount) {
     val winningRate = winningRate()
     val gradeStat: Map<LottoGrade, Int> = gradeStat()
 
@@ -19,7 +19,7 @@ class LottoStat(private val lottoGrades: List<LottoGrade>, private val amount: I
         val sumLottoReward = lottoGrades.sumOf {
             it.reward
         }
-        val calc = sumLottoReward.toDouble() / amount
+        val calc = sumLottoReward.toDouble() / purchaseAmount.amount
         return BigDecimal(calc).setScale(2, RoundingMode.DOWN)
     }
 
