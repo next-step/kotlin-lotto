@@ -1,4 +1,4 @@
-package step1.calculator
+package step1.calculator.domain
 
 import step1.calculator.extractor.CustomTermsExtractor
 import step1.calculator.extractor.DefaultTermsExtractor

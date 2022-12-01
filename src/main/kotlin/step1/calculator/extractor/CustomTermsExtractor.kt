@@ -1,7 +1,7 @@
 package step1.calculator.extractor
 
-import step1.calculator.DelimiterType
-import step1.calculator.Terms
+import step1.calculator.domain.DelimiterType
+import step1.calculator.domain.Terms
 
 class CustomTermsExtractor : TermsExtractable {
     override fun extractTerms(delimiterType: DelimiterType, expression: String): Terms {

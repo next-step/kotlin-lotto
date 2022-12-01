@@ -1,4 +1,4 @@
-package step1.calculator
+package step1.calculator.domain
 
 class Terms private constructor(private val elements: List<Int>) {
     operator fun get(index: Int) = elements[index]

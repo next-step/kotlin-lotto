@@ -3,8 +3,8 @@ package step1.calculator.extractor
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import step1.calculator.DelimiterType
-import step1.calculator.Terms
+import step1.calculator.domain.DelimiterType
+import step1.calculator.domain.Terms
 
 internal class DefaultTermsExtractorTest : BehaviorSpec({
     given("기본 구분자로 구분된 숫자 추출") {
