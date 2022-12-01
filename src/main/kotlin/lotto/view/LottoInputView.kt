@@ -8,7 +8,8 @@ import lotto.domain.Lottos
 
 object LottoInputView {
 
-    const val NUMBER_SEPARATOR = " "
+    private const val NUMBER_SEPARATOR = " "
+    private val REGEX_NOT_DIGIT = Regex("\\D")
 
     /**
      * 로또 구입 금액을 입력 받는다.
@@ -67,20 +68,20 @@ object LottoInputView {
         }
         println("수동으로 구매할 번호를 입력해 주세요.")
 
-        val numberList = mutableListOf<Set<LottoNumber>>()
-        repeat(countOfLotto) {
+        val manualLotto = List(countOfLotto) {
             val numbers = readln()
             require(numbers.isNotBlank()) { "잘못된 입력입니다." }
-            numberList.add(getLottoNumbers(numbers))
+            Lotto(getLottoNumbers(numbers))
         }
+
         println()
-        return Lottos.of(numberList)
+        return Lottos(manualLotto)
     }
 
     private fun getLottoNumbers(value: String): Set<LottoNumber> =
         splitNumbers(getOnlyNumbers(value)).map { LottoNumber(it) }.toSet()
 
-    private fun getOnlyNumbers(value: String) = value.replace("[^\\d]".toRegex(), NUMBER_SEPARATOR)
+    private fun getOnlyNumbers(value: String) = value.replace(REGEX_NOT_DIGIT, NUMBER_SEPARATOR)
 
     private fun splitNumbers(value: String) =
         value.split(NUMBER_SEPARATOR).filter { s -> s.isNotBlank() }.map { number -> number.toInt() }
