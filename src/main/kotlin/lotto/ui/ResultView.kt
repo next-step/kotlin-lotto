@@ -26,7 +26,7 @@ class ResultView {
         println("---------")
 
         val statics = LottoStatics(winners)
-        val earningRate: Float = statics.calculateEarningRate(statics.totalReward, amount)
+        val earningRate = statics.calculateEarningRate(statics.totalReward, amount)
         val winningResult = statics.winningResult
 
         println("3개 일치 (5000원)- ${winningResult.numberOfFourthGrade}개")

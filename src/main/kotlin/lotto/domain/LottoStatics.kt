@@ -1,13 +1,9 @@
 package lotto.domain
 
-import java.math.RoundingMode
-import java.text.DecimalFormat
+import kotlin.math.ceil
+import kotlin.math.round
 
 class LottoStatics(private val winners: List<Winner> = emptyList()) {
-
-    private val earningRateFormat = DecimalFormat("#.##").apply {
-        roundingMode = RoundingMode.DOWN
-    }
 
     val totalReward: Int = calculateTotalReward()
 
@@ -38,7 +34,7 @@ class LottoStatics(private val winners: List<Winner> = emptyList()) {
     }
 
     fun calculateEarningRate(prize: Int, amount: Int): Float {
-        val quotient = prize.toFloat().div(amount.toFloat())
-        return earningRateFormat.format(quotient).toFloat()
+        val quotient: Float = prize.toFloat().div(amount.toFloat())
+        return quotient
     }
 }
