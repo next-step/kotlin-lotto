@@ -15,6 +15,6 @@ class Lotto {
     companion object {
         const val START_LOTTO_INDEX = 0
         const val LAST_LOTTO_INDEX = 6
-        private val LOTTO_NUMBER_RANGE = (1..45)
+        val LOTTO_NUMBER_RANGE = (1..45)
     }
 }
