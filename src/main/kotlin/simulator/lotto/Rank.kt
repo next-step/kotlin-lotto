@@ -13,7 +13,7 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
     },
     THIRD(5, 1_500_000) {
         override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
-            return countOfMatch == this.countOfMatch
+            return countOfMatch == this.countOfMatch && matchBonus == false
         }
     },
     FOURTH(4, 50_000) {
@@ -28,7 +28,7 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
     },
     MISS(0, 0) {
         override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
-            return true
+            return countOfMatch == this.countOfMatch
         }
     };
 
@@ -38,7 +38,7 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
         fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
             return values().find {
                 it.matches(countOfMatch, matchBonus)
-            }!!
+            } ?: MISS
         }
     }
 }
