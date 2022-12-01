@@ -1,53 +1,55 @@
 package simulator.lotto
 
-enum class Rank {
-    FIRST {
-        override fun prize(): Int {
-            return 2_000_000_000
-        }
-
-        override fun match(): Int {
-           return 6
+enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
+    FIRST(6, 2_000_000_000) {
+        override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
+            return countOfMatch == this.countOfMatch
         }
     },
-
-    SECOND {
-        override fun prize(): Int {
-            return 1_500_000
-        }
-
-        override fun match(): Int {
-            return 5
+    SECOND(5, 30_000_000) {
+        override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
+            return countOfMatch == this.countOfMatch && matchBonus
         }
     },
-
-    THIRD {
-        override fun prize(): Int {
-            return 50_000
-        }
-
-        override fun match(): Int {
-            return 4
+    THIRD(5, 1_500_000) {
+        override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
+            return countOfMatch == this.countOfMatch && matchBonus == false
         }
     },
-
-    FOURTH {
-        override fun prize(): Int {
-            return 5_000
+    FOURTH(4, 50_000) {
+        override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
+            return countOfMatch == this.countOfMatch
         }
-
-        override fun match(): Int {
-            return 3
+    },
+    FIFTH(3, 5_000) {
+        override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
+            return countOfMatch == this.countOfMatch
+        }
+    },
+    MISS(0, 0) {
+        override fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean {
+            return countOfMatch == this.countOfMatch
         }
     };
 
-    abstract fun prize(): Int
-
-    abstract fun match(): Int
+    abstract fun matches(countOfMatch: Int, matchBonus: Boolean): Boolean
 
     companion object {
-        fun aggregate(matches: Int): Rank? {
-            return values().find{it.match() == matches}
+        fun valueOf(countOfMatch: Int, matchBonus: Boolean): Rank {
+            return values().find {
+                it.matches(countOfMatch, matchBonus)
+            } ?: MISS
+        }
+
+        fun match(lotto: Lotto, winningNumber: WinningNumber): Rank {
+            val countOfMatch = lotto.number
+                .countOfMatch(winningNumber.number)
+
+            val matchBonus = lotto.number
+                .values
+                .contains(winningNumber.bonusNumber)
+
+            return valueOf(countOfMatch, matchBonus)
         }
     }
 }

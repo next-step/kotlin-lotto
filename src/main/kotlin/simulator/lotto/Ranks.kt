@@ -1,12 +1,12 @@
 package simulator.lotto
 
-data class Ranks(private val values: List<Rank>) {
+data class Ranks(val values: List<Rank>) {
     fun rankCount(rank: Rank): Int {
         return values.count { it == rank }
     }
 
     fun totalMoney(): Int {
-        return values.sumOf { it.prize() }
+        return values.sumOf { it.winningMoney }
     }
 
     fun yield(money: Int): Double {
@@ -14,8 +14,11 @@ data class Ranks(private val values: List<Rank>) {
     }
 
     companion object {
-        fun aggregate(matches: List<Int>): Ranks {
-            return Ranks(matches.mapNotNull { Rank.aggregate(it) })
+        fun match(lottoList: List<Lotto>, winningNumber: WinningNumber): Ranks {
+            val rankList = lottoList
+                .map { Rank.match(it, winningNumber) }
+
+            return Ranks(rankList)
         }
     }
 }

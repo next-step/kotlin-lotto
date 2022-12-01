@@ -3,22 +3,22 @@ package simulator
 import simulator.io.Input
 import simulator.io.Output
 import simulator.lotto.*
+import simulator.lotto.Number
 
 fun main() {
     val input = Input()
     val output = Output()
-    val generator = NumberGenerator(Lotto.MIN_NUMBER, Lotto.MAX_NUMBER, Lotto.NUMBERS_COUNT)
+    val generator = NumberGenerator(Number.MIN_NUMBER, Number.MAX_NUMBER, Number.NUMBERS_COUNT)
     val money = input.getMoney()
-    val lottos = LottoMachine(generator).create(money / Lotto.PRICE)
+    val lottoList = LottoMachine(generator).create(money / Lotto.PRICE)
 
-    output.printLottos(lottos)
+    output.printLottoList(lottoList)
 
-    val winningLotto = Lotto(input.getWinningNumbers())
-    val ranks = Ranks.aggregate(lottos.matches(winningLotto))
+    val number = Number(input.getWinningNumbers())
+    val bonusNumber = input.getBonusNumber()
 
-    output.printResultHeader()
-    Rank.values()
-        .sortedDescending()
-        .forEach { output.printResult(ranks, it) }
+    val ranks = Ranks.match(lottoList, WinningNumber(number, bonusNumber))
+
+    output.printResult(ranks)
     output.printYield(ranks.yield(money))
 }
