@@ -2,9 +2,6 @@ package lotto.view
 
 object ResultView {
     private const val LOTTO_COUNT_MESSAGE = "개를 구매했습니다."
-    private const val LOTTO_NUMBER_DELIMITER = ", "
-    private const val LOTTO_NUMBER_PREFIX = "["
-    private const val LOTTO_NUMBER_SUFFIX = "]"
     private const val LOTTO_RESULT_MESSAGE_TITLE = "당첨 통계"
     private const val LOTTO_RESULT_MESSAGE_DELIMITER = "---------"
     private const val LOTTO_RESULT_DELIMITER = " - "
@@ -22,11 +19,7 @@ object ResultView {
     }
 
     fun printLottoNumbersList(lottoNumbersList: List<List<Int>>) {
-        lottoNumbersList.forEach { printLottoNumbers(it) }
-    }
-
-    private fun printLottoNumbers(numbers: List<Int>) {
-        println(LOTTO_NUMBER_PREFIX + numbers.joinToString(LOTTO_NUMBER_DELIMITER) + LOTTO_NUMBER_SUFFIX)
+        lottoNumbersList.forEach { println(it) }
     }
 
     fun printLottoResultTitle() {
