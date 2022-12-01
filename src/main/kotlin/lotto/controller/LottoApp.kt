@@ -10,21 +10,21 @@ import lotto.view.OutputView
 
 fun main() {
     val lottoStore = LottoStore(RandomLottoGenerator())
-    val profitCalculator = ProfitCalculator()
 
     val money = InputView.askLottoBuyMoney()
     val lottos = lottoStore.buy(money)
     OutputView.printLottos(lottos)
-    val winningLotto = Lotto(
+    val winningLotto = Lotto.of(
         InputView.askWinningLottoBall().map {
-            LottoBall(it.trim().toInt())
-        }.toSet()
+            it.trim().toInt()
+        }
     )
+
     val bonusBall = LottoBall(InputView.askBonusBall())
     if (winningLotto.containsBall(bonusBall)) {
         throw IllegalArgumentException("보너스볼은 이미 추첨된 번호가 될 수 없습니다.")
     }
     val rewards = lottos.matchNumbers(winningLotto, bonusBall)
-    val profit = profitCalculator.calculateProfit(rewards, money)
+    val profit = ProfitCalculator().calculateProfit(rewards, money)
     OutputView.printRewards(rewards, profit)
 }

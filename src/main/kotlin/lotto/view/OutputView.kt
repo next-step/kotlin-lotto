@@ -3,6 +3,7 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.Reward
+import lotto.domain.Rewards
 
 object OutputView {
 
@@ -25,9 +26,9 @@ object OutputView {
         )
     }
 
-    fun printRewards(rewards: List<Reward>, profit: Float) {
+    fun printRewards(rewards: Rewards, profit: Float) {
         println("당첨 통계\n ---------")
-        val totalResult = addEmptyReward(rewards.groupBy { it })
+        val totalResult = addEmptyReward(rewards.reward.groupBy { it })
         totalResult.toList()
             .sortedBy { (key, _) -> key.reward }
             .toMap()
@@ -46,7 +47,7 @@ object OutputView {
 
     private fun printRank(rank: Map.Entry<Reward, List<Reward>>) {
         if (rank.key == Reward.SECOND_RANK) {
-            println("${rank.key.matchNumber - 1}개 일치,보너스 볼 일치(${rank.key.reward}) - ${rank.value.size}개")
+            println("${rank.key.matchNumber}개 일치,보너스 볼 일치(${rank.key.reward}) - ${rank.value.size}개")
             return
         }
         println("${rank.key.matchNumber}개 일치 (${rank.key.reward}) - ${rank.value.size}개")

@@ -15,9 +15,9 @@ class LottosTest {
         )
         val winnigLotto = Lotto.of(listOf(1, 2, 3, 4, 5, 49))
 
-        assertThat(lottos.matchNumbers(winnigLotto, LottoBall(28)))
+        assertThat(lottos.matchNumbers(winnigLotto, LottoBall(28)).reward)
             .containsExactlyInAnyOrder(Reward.FIRST_RANK, Reward.THIRD_RANK)
-        assertThat(lottos.matchNumbers(winnigLotto, LottoBall(6)))
+        assertThat(lottos.matchNumbers(winnigLotto, LottoBall(6)).reward)
             .containsExactlyInAnyOrder(Reward.FIRST_RANK, Reward.SECOND_RANK)
     }
 }

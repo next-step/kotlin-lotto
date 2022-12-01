@@ -6,11 +6,11 @@ data class Lotto(val lotto: Set<LottoBall>) {
         require(lotto.size == LOTTO_SIZE) { "비정상적인 로또입니다." }
     }
 
-    fun matchNumberWith(winningLotto: Lotto): Int = this.lotto.intersect(winningLotto.lotto.toSet()).size
+    fun matchNumberWith(winningLotto: Lotto): Int = this.lotto.intersect(winningLotto.lotto).size
     fun containsBall(lottoBall: LottoBall) = this.lotto.contains(lottoBall)
 
     companion object {
-        private const val LOTTO_SIZE = 6
+        const val LOTTO_SIZE = 6
         fun of(lotto: List<Int>): Lotto {
             return Lotto(
                 lotto.map {
@@ -18,7 +18,5 @@ data class Lotto(val lotto: Set<LottoBall>) {
                 }.toSet()
             )
         }
-
-        fun isLottoSize(size: Int): Boolean = LOTTO_SIZE == size
     }
 }
