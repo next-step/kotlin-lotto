@@ -30,7 +30,7 @@ internal class LottoTicketsTest {
             )
         )
 
-        val winningTicket = winningTicket(1, 2, 3, 4, 5, 6)
+        val winningTicket = winningTicket(listOf(1, 2, 3, 4, 5, 6), 45)
 
         // when
         val result = lottoTickets.awardResults(winningTicket)
