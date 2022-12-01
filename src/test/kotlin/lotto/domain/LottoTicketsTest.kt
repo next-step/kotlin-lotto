@@ -2,6 +2,7 @@ package lotto.domain
 
 import fixture.WinningTicketFixture.winningTicket
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 
 internal class LottoTicketsTest {
@@ -36,8 +37,10 @@ internal class LottoTicketsTest {
         val result = lottoTickets.awardResults(winningTicket)
 
         // then
-        assertThat(result.matchCount(Award.FIFTH_PLACE)).isEqualTo(2)
-        assertThat(result.matchCount(Award.FOURTH_PLACE)).isEqualTo(1)
-        assertThat(result.matchCount(Award.FIRST_PLACE)).isEqualTo(0)
+        assertAll(
+            { assertThat(result.matchCount(Award.FIFTH_PLACE)).isEqualTo(2) },
+            { assertThat(result.matchCount(Award.FOURTH_PLACE)).isEqualTo(1) },
+            { assertThat(result.matchCount(Award.FIRST_PLACE)).isEqualTo(0) }
+        )
     }
 }
