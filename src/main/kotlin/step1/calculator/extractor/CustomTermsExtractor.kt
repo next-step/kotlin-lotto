@@ -2,7 +2,7 @@ package step1.calculator.extractor
 
 import step1.calculator.DelimiterType
 
-class CustomExpressionParser : ExpressionParser {
+class CustomTermsExtractor : TermsExtractable {
     override fun extractTerms(delimiterType: DelimiterType, expression: String): List<String> {
         val matchResult = extractMatchResult(delimiterType, expression)
         val customDelimiter = extractGroupValues(matchResult, DELIMITER_INDEX)

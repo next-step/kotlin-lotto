@@ -5,7 +5,7 @@ import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import step1.calculator.DelimiterType
 
-internal class CustomExpressionParserTest : BehaviorSpec({
+internal class CustomTermsExtractorTest : BehaviorSpec({
     given("커스텀 구분자로 구분된 숫자 추출") {
         `when`("커스텀 구분자로 구분된 문자열과 구분자 타입을 입력하면") {
             expressions.forAll { (expression: String, expected: Array<String>) ->

@@ -1,8 +1,8 @@
 package step1.calculator
 
-import step1.calculator.extractor.CustomExpressionParser
-import step1.calculator.extractor.DefaultExpressionParser
-import step1.calculator.extractor.ExpressionParser
+import step1.calculator.extractor.CustomTermsExtractor
+import step1.calculator.extractor.DefaultTermsExtractor
+import step1.calculator.extractor.TermsExtractable
 
 enum class DelimiterType(private val pattern: String) {
     COMMA(","),
@@ -26,11 +26,11 @@ enum class DelimiterType(private val pattern: String) {
         return pattern
     }
 
-    fun getExtractor(): ExpressionParser {
+    fun getExtractor(): TermsExtractable {
         if (isCustom()) {
-            return CustomExpressionParser()
+            return CustomTermsExtractor()
         }
-        return DefaultExpressionParser()
+        return DefaultTermsExtractor()
     }
 
     private fun isCustom(): Boolean = this == CUSTOM
