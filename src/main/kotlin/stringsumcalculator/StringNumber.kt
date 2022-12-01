@@ -2,7 +2,7 @@ package stringsumcalculator
 
 private val NUMBER_REGEX = Regex("^[0-9]+$")
 
-class StringNumber(private val value: String) : Number {
+data class StringNumber(private val value: String) : INumber {
     init {
         if (value.matches(NUMBER_REGEX).not()) {
             throw RuntimeException()
@@ -11,21 +11,6 @@ class StringNumber(private val value: String) : Number {
 
     override fun toInt(): Int {
         return value.toInt()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as StringNumber
-
-        if (value != other.value) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return value.hashCode()
     }
 
     companion object {

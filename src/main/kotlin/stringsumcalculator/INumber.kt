@@ -1,5 +1,5 @@
 package stringsumcalculator
 
-interface Number {
+interface INumber {
     fun toInt(): Int
 }
