@@ -1,8 +1,8 @@
 package lotto.ui
 
-import lotto.domain.MINIMUM_PRICE
 import lotto.domain.Lotto
 import lotto.domain.LottoDispenser
+import lotto.domain.MINIMUM_PRICE
 
 class InputView {
 
