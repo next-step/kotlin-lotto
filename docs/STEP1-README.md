@@ -48,12 +48,12 @@
       * [x] `DefaultTermsExtractor` : 기본 구분자인 경우 구분자 패턴을 기준으로 split()을 이용하여 연산 대상 목록 추출
       * [x] `CustomTermsExtractor` : 커스텀 구분자인 경우 패턴에 일치하는 문자열 그룹 추출 및 split()을 이용한 숫자 문자열 분리
 
-* Terms(class) : 추출된 숫자 문자열 합 연산
-  * 구분자를 기준으로 분리된 List<String>을 입력받아 연산 대상인 숫자 목록으로 변환 
-  * Terms 객체 생성 시 List<String>으로 입력된 각 항에 대한 유효성 검증 처리
-    * [ ] 해당 원소가 빈값 혹은 null인 경우 예외 처리
-    * [ ] 해당 원소가 숫자가 아니거나, 음수인 경우 예외 처리
-  * Terms 객체의 각 항을 합산하여 결과를 반환
+* Terms(class) : 추출된 각 항의 합 연산
+  * [x] 구분자를 기준으로 분리된 List<String>을 입력받아 연산 대상인 숫자 목록으로 변환하여 Terms를 생성하는 정적 팩토리 메소드 작성 
+    * Terms 객체 생성 시 List<String>으로 입력된 각 항에 대한 유효성 검증
+      * [x] 빈값 혹은 null인 원소가 포함된 경우 예외 처리
+      * [x] 숫자가 아니거나 음수인 원소가 포함된 경우 예외 처리
+  * [x] Terms 객체의 각 항을 합산하여 결과를 반환
 
 ## 참조 URL
 - [정규표현식의 개념과 기초 문법](https://soooprmx.com/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-%EA%B8%B0%EC%B4%88-%EB%AC%B8%EB%B2%95/)
