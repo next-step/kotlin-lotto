@@ -25,7 +25,6 @@ class LottoStatics(private val winners: List<Winner> = emptyList()) {
                 Winner.THIRD_GRADE -> result.copy(numberOfThirdGrade = result.numberOfThirdGrade + 1)
                 Winner.FOURTH_GRADE -> result.copy(numberOfFourthGrade = result.numberOfFourthGrade + 1)
                 Winner.FIVE_GRADE -> result.copy(numberOfFifthGrade = result.numberOfFifthGrade + 1)
-                Winner.SIX_GRADE,
                 Winner.NO_MATCH -> result
             }
         }
