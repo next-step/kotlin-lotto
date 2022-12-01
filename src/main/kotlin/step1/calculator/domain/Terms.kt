@@ -35,10 +35,9 @@ class Terms private constructor(private val elements: List<Int>) {
         private fun toInt(str: String): Int = str.toIntOrNull()
             ?: throw IllegalArgumentException(NUMBER_FORMAT_ERROR_MESSAGE.format(str))
 
-        private fun validateTerm(term: Int) {
+        private fun validateTerm(term: Int) =
             require(isPositive(term)) { NEGATIVE_NUMBER_ERROR_MESSAGE.format(term) }
-        }
 
-        private fun isPositive(term: Int) = term >= 0
+        private fun isPositive(term: Int): Boolean = term >= 0
     }
 }
