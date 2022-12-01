@@ -1,7 +1,6 @@
 package lotto.domain
 
-import kotlin.math.ceil
-import kotlin.math.round
+import kotlin.math.floor
 
 class LottoStatics(private val winners: List<Winner> = emptyList()) {
 
@@ -34,7 +33,7 @@ class LottoStatics(private val winners: List<Winner> = emptyList()) {
     }
 
     fun calculateEarningRate(prize: Int, amount: Int): Float {
-        val quotient: Float = prize.toFloat().div(amount.toFloat())
-        return quotient
+        val result: Float = prize.toFloat().div(amount.toFloat())
+        return floor(result * 100).div(100f)
     }
 }
