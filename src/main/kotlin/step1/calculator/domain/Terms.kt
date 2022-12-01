@@ -24,6 +24,13 @@ class Terms private constructor(private val elements: List<Int>) {
         private const val NUMBER_FORMAT_ERROR_MESSAGE = "숫자만 입력하세요 : [%s]"
         private const val NEGATIVE_NUMBER_ERROR_MESSAGE = "양수만 입력하세요. : [%s]"
 
+        fun zeroTerms(): Terms = Terms(listOf(0))
+
+        fun singleNumberTerms(singleNumberStr: String): Terms {
+            val toTerm = toTerm(singleNumberStr)
+            return Terms(listOf(toTerm))
+        }
+
         fun of(target: List<String>): Terms = Terms(target.map { toTerm(it) })
 
         private fun toTerm(str: String): Int {

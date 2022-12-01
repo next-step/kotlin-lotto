@@ -17,7 +17,7 @@ class TermsTest : StringSpec({
     }
 
     "항의 값이 유효하지 못한 경우 예외가 발생한다." {
-        strings.forAll { (description: String, given: List<String>) ->
+        invalidInputs.forAll { (description: String, given: List<String>) ->
             shouldThrow<IllegalArgumentException> { Terms.of(given) }
         }
     }
@@ -28,7 +28,7 @@ class TermsTest : StringSpec({
     }
 }) {
     companion object {
-        val strings = listOf(
+        val invalidInputs = listOf(
             "빈값 혹은 null이 포함된 경우" to arrayListOf("1", "", "3"),
             "숫자가 아닌 값이 포함된 경우" to arrayListOf("1", "이", "3"),
             "음수인 값이 포함된 경우" to arrayListOf("1", "-2", "3"),

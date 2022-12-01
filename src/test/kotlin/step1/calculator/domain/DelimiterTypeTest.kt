@@ -9,6 +9,8 @@ import io.kotest.matchers.shouldBe
 class DelimiterTypeTest : StringSpec({
     "주어진 문자열의 구분자 타입을 판별한다." {
         forAll(
+            row("빈값", "", DelimiterType.EMPTY),
+            row("단일 양수", "1", DelimiterType.SINGLE_POSITIVE_NUMBER),
             row("콤마", "1,2,3", DelimiterType.COMMA),
             row("콜론", "1:2:3", DelimiterType.COLON),
             row("혼합형", "1,2:3", DelimiterType.MIXED),
@@ -20,7 +22,7 @@ class DelimiterTypeTest : StringSpec({
 
     "구분자가 포함되지 않거나, 올바른 형식이 아닌 경우 예외가 발생한다." {
         forAll(
-            row("구분자가 포함되지 않은 경우", "123"),
+            row("구분자가 포함되지 않은 경우", "-123"),
             row("올바른 형식이 아닌 경우", "1|2|3")
         ) { description: String, given: String ->
             shouldThrowExactly<IllegalArgumentException> { DelimiterType.match(given) }

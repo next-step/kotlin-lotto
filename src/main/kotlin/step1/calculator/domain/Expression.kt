@@ -9,7 +9,7 @@ class Expression private constructor(
     companion object {
         fun of(input: String): Expression {
             val delimiterType = DelimiterType.match(input)
-            val extractor = delimiterType.getExtractor()
+            val extractor = delimiterType.extractor()
             val terms = extractor.extractTerms(delimiterType, input)
             return Expression(terms, delimiterType)
         }

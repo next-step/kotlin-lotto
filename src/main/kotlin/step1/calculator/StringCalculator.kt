@@ -4,6 +4,8 @@ import step1.calculator.domain.Expression
 
 class StringCalculator {
     companion object {
-        fun calculate(input: String): Int = Expression.of(input).sum()
+        fun calculate(input: String): Int {
+            return Expression.of(input).sum()
+        }
     }
 }

@@ -2,13 +2,17 @@ package step1.calculator.domain
 
 import step1.calculator.extractor.CustomTermsExtractor
 import step1.calculator.extractor.DefaultTermsExtractor
+import step1.calculator.extractor.EmptyTermsExtractor
+import step1.calculator.extractor.SinglePositiveTermsExtractor
 import step1.calculator.extractor.TermsExtractable
 
-enum class DelimiterType(private val pattern: String) {
-    COMMA(","),
-    COLON(":"),
-    MIXED("[,:]"),
-    CUSTOM("""//(.)\n(.*)""");
+enum class DelimiterType(private val pattern: String, private val extractor: TermsExtractable) {
+    EMPTY("""^\s*$""", EmptyTermsExtractor()),
+    SINGLE_POSITIVE_NUMBER("^[0-9]*\$", SinglePositiveTermsExtractor()),
+    COMMA(",", DefaultTermsExtractor()),
+    COLON(":", DefaultTermsExtractor()),
+    MIXED("[,:]", DefaultTermsExtractor()),
+    CUSTOM("""//(.)\n(.*)""", CustomTermsExtractor());
 
     private fun contains(expression: String): Boolean =
         toRegex().containsMatchIn(expression)
@@ -26,12 +30,7 @@ enum class DelimiterType(private val pattern: String) {
         return pattern
     }
 
-    fun getExtractor(): TermsExtractable {
-        if (isCustom()) {
-            return CustomTermsExtractor()
-        }
-        return DefaultTermsExtractor()
-    }
+    fun extractor(): TermsExtractable = extractor
 
     private fun isCustom(): Boolean = this == CUSTOM
 
@@ -42,7 +41,7 @@ enum class DelimiterType(private val pattern: String) {
     }
 
     companion object {
-        private const val DELIMITER_NOT_FOUND_ERROR_MESSAGE = """입력된 문자열 [%s]에서 구분자를 찾을 수 없습니다. 기본 구분자는 콤마 혹은 콜론을, 사용자 정의 구분자는 '//'와 '\n'사이에 입력하세요"""
+        private const val DELIMITER_NOT_FOUND_ERROR_MESSAGE = """입력된 문자열 [%s]에서 구분자를 찾을 수 없습니다. 빈값 혹은 단일 양수를 입력하시거나, 기본 구분자 타입의 콤마 혹은 콜론을, 사용자 정의 구분자 타입은 '//'와 '\n' 사이에 입력하세요"""
         private const val NOT_MATCHED_PATTERN_ERROR_MESSAGE = "입력된 문자열 [%s]와 패턴 [%s]이 일치하지 않습니다."
 
         fun match(expression: String): DelimiterType {
