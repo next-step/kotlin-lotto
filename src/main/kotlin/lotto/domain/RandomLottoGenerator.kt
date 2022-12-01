@@ -13,4 +13,3 @@ class RandomLottoGenerator : LottoGenerator {
         private val LOTTO_BALL = (LottoBall.LOTTOBALL_MIN..LottoBall.LOTTOBALL_MAX).map { LottoBall(it) }
     }
 }
-

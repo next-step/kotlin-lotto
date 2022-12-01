@@ -16,6 +16,5 @@ enum class Reward(
         fun getReward(matchNumber: Int, hasBonusBall: Boolean): Reward {
             return values().find { it.matchNumber == matchNumber && it.requireBonusBall == hasBonusBall } ?: NO_RANK
         }
-
     }
 }
