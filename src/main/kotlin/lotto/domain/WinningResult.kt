@@ -1,8 +1,8 @@
 package lotto.domain
 
-class WinningResult {
-    var numberOfFourthGrade: Int = 0
-    var numberOfThirdGrade: Int = 0
-    var numberOfSecondGrade: Int = 0
-    var numberOfFirstGrade: Int = 0
-}
+data class WinningResult(
+    val numberOfFourthGrade: Int = 0,
+    val numberOfThirdGrade: Int = 0,
+    val numberOfSecondGrade: Int = 0,
+    val numberOfFirstGrade: Int = 0
+)
