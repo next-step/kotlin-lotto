@@ -25,6 +25,6 @@ object OutputView {
     }
 
     private fun outputBonus(lottoRank: LottoRank): String =
-        if (lottoRank.isBonus) MessageCode.BONUS_BALL_MATCH.message
+        if (lottoRank == LottoRank.SECOND_PLACE) MessageCode.BONUS_BALL_MATCH.message
         else BLANK
 }
