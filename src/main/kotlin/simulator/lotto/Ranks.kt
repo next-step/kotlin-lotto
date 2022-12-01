@@ -12,4 +12,13 @@ data class Ranks(val values: List<Rank>) {
     fun yield(money: Int): Double {
         return totalMoney() / money.toDouble()
     }
+
+    companion object {
+        fun match(lottoList: List<Lotto>, winningNumber: WinningNumber): Ranks {
+            val rankList = lottoList
+                .map { Rank.match(it, winningNumber) }
+
+            return Ranks(rankList)
+        }
+    }
 }

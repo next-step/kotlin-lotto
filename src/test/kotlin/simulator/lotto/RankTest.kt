@@ -55,10 +55,18 @@ internal class RankTest {
         assertThat(Rank.valueOf(0, false)).isEqualTo(Rank.MISS)
     }
 
-
     @Test
     fun `맞는 로또 갯수가 존재하지 않는다면 MISS를 반환한다`() {
         assertThat(Rank.valueOf(2, false)).isEqualTo(Rank.MISS)
         assertThat(Rank.valueOf(1, false)).isEqualTo(Rank.MISS)
+    }
+
+    @Test
+    fun `로또와 당첨 번호를 통해 등수를 구분할 수 있다`() {
+        val number = Number(sortedSetOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = 7
+
+        val actual = Rank.match(Lotto(number), WinningNumber(number, bonusNumber))
+        assertThat(actual).isEqualTo(Rank.FIRST)
     }
 }

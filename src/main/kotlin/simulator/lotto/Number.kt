@@ -17,6 +17,12 @@ data class Number(val values: SortedSet<Int>) {
         }
     }
 
+    fun countOfMatch(number: Number): Int {
+        var countOfMatch = 0
+        number.values.forEach { if (values.contains(it)) countOfMatch++ }
+        return countOfMatch
+    }
+
     companion object {
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
