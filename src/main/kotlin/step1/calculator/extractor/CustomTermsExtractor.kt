@@ -1,14 +1,15 @@
 package step1.calculator.extractor
 
 import step1.calculator.DelimiterType
+import step1.calculator.Terms
 
 class CustomTermsExtractor : TermsExtractable {
-    override fun extractTerms(delimiterType: DelimiterType, expression: String): List<String> {
+    override fun extractTerms(delimiterType: DelimiterType, expression: String): Terms {
         val matchResult = extractMatchResult(delimiterType, expression)
         val customDelimiter = extractGroupValues(matchResult, DELIMITER_INDEX)
         val terms = extractGroupValues(matchResult, TERMS_INDEX)
 
-        return terms.split(customDelimiter)
+        return Terms.of(terms.split(customDelimiter))
     }
 
     private fun extractMatchResult(delimiterType: DelimiterType, expression: String): MatchResult =
