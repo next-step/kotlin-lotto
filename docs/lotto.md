@@ -15,7 +15,10 @@
 
 - [x] 숫자가 아닌 문자를 입력 받았을 경우 IllegalArgumentException 오류
 - [x] 최소 구매 비용이 1000이고 최소 구매 비용보다 낮은 값을 입력 받았을 경우 IllegalArgumentException 오류
-- [ ] 수동으로 구매할 로또의 수가 숫자가 아닌 문자를 입력 받았을 경우 IllegalArgumentException 오류
+- [x] 수동 게임 횟수의 입력이 숫자가 아닌 문자가 들어올 경우 IllegalArgumentException 오류
+- [x] 수동 게임 횟수의 입력이 공백 열이 들어올 경우 IllegalArgumentException 오류
+- [x] 수동 게임 횟수의 입력이 0이 들어올 경우 IllegalArgumentException 오류
+- [x] 수동 게임 횟수의 입력이 10이 들어올 경우 수동 게임 횟수는 10
 
 ### 입력 결과
 

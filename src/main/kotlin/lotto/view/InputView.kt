@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.BonusNumber
+import lotto.domain.ManualPurchaseResult
 import lotto.domain.PurchaseResult
 import lotto.domain.WinningNumber
 
@@ -28,5 +29,12 @@ object InputView {
         println("보너스 볼을 입력해 주세요.")
         val bonusNumberOfLastWeek = readln()
         return BonusNumber(bonusNumberOfLastWeek, winnerNumber)
+    }
+
+    fun numberOfManualPurchase(): ManualPurchaseResult {
+        println()
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val number = readln()
+        return ManualPurchaseResult(number)
     }
 }
