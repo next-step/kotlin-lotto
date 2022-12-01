@@ -22,9 +22,9 @@ internal class ManualPurchaseResultTest {
     }
 
     @Test
-    @DisplayName("수동 게임 횟수의 입력이 0이 들어올 경우 IllegalArgumentException 오류")
-    fun `IllegalArgumentException error if input of number of manual games is 0`() {
-        val number = "0"
+    @DisplayName("수동 게임 횟수의 입력이 -1이 들어올 경우 IllegalArgumentException 오류")
+    fun `IllegalArgumentException error if input of number of manual games is -1`() {
+        val number = "-1"
         assertThrows<IllegalArgumentException> { ManualPurchaseResult(number) }
     }
 
