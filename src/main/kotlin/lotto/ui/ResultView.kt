@@ -5,7 +5,7 @@ import lotto.domain.*
 class ResultView {
 
     private lateinit var winners: List<Winner>
-    private var bonusNumber: String = ""
+    private var bonusNumber: Int = 0
     private var winningNumbers: String = ""
 
     fun inputWinningNumbers() {
@@ -22,19 +22,19 @@ class ResultView {
 
     private fun inputBonusNumber() {
         println("보너스 볼을 입력해 주세요.")
-        bonusNumber = readLine() ?: ""
-        val isBonusNumber = LottoNumberValidator.validateBonus(bonusNumber)
+        val bonusNumberString = readLine() ?: ""
+        val isBonusNumber = LottoNumberValidator.validateBonus(bonusNumberString)
         return if (isBonusNumber) {
+            bonusNumber = bonusNumberString.toInt()
             return
         } else {
-            bonusNumber = ""
             inputBonusNumber()
         }
     }
 
     fun checkWinningLottoList(lottoList: List<Lotto>) {
         winners = lottoList.map { lotto ->
-            WinningChecker.win(winningNumbers, lotto.numbers)
+            WinningChecker.win(winningNumbers, lotto.numbers, bonusNumber)
         }
     }
 
