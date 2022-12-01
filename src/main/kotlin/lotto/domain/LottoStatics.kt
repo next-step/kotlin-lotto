@@ -17,16 +17,16 @@ class LottoStatics(private val winners: List<Winner> = emptyList()) {
     }
 
     private fun calculateWinningCount(): WinningResult {
-        val result = WinningResult()
+        var result = WinningResult()
         winners.forEach { winner ->
-            when (winner) {
-                Winner.FIRST_GRADE -> result.numberOfFirstGrade++
-                Winner.SECOND_GRADE -> result.numberOfSecondGrade++
-                Winner.THIRD_GRADE -> result.numberOfThirdGrade++
-                Winner.FOURTH_GRADE -> result.numberOfFourthGrade++
+            result = when (winner) {
+                Winner.FIRST_GRADE -> result.copy(numberOfFirstGrade = result.numberOfFirstGrade + 1)
+                Winner.SECOND_GRADE -> result.copy(numberOfSecondGrade = result.numberOfSecondGrade + 1)
+                Winner.THIRD_GRADE -> result.copy(numberOfThirdGrade = result.numberOfThirdGrade + 1)
+                Winner.FOURTH_GRADE -> result.copy(numberOfFourthGrade = result.numberOfFourthGrade + 1)
                 Winner.FIVE_GRADE,
                 Winner.SIX_GRADE,
-                Winner.NO_MATCH -> Unit
+                Winner.NO_MATCH -> result
             }
         }
         return result
