@@ -32,7 +32,7 @@ class WinningLottoTest {
         val numberList = mutableListOf("1 3 4 5 32 6", "11 12 13 14 6 7", "13 14 15 16 17 45")
         numberList.add(numbers)
         val myLottos = numberList.map { getLotto(it) }
-        val matchResult = winningLotto.getMatchResult(myLottos)
+        val matchResult = winningLotto.getMatchResult(Lottos(myLottos))
         assertThat(matchResult[Rank.valueOf(nameOfRank)]).isEqualTo(count)
     }
 
@@ -43,5 +43,4 @@ class WinningLottoTest {
     }
 
     private fun getLotto(numbers: String): Lotto = Lotto(numbers.split(" ").map { LottoNumber(it.toInt()) }.toSet())
-    private fun getLottos(numbers: String): List<Lotto> = listOf(getLotto(numbers))
 }
