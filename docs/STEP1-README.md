@@ -30,6 +30,8 @@
   * [x] 판별된 구분자 타입을 기준으로 분리된 연산 대상 목록(List<String>) 추출
     * 기본/커스텀 구분자일 때 항을 추출하는 역할을 수행해야하지만, 그 구현 방식이 다르므로 TermsExtractable `항 추출기`를 추상화 한 후 입력된 문자열의 구분자 타입에 따라 구현체를 선택   
     * `TermsExtractable.extract` : 구분자 타입에 따라 입력된 문자열을 분리한 후 연산 대상인 Terms 객체를 반환 
+      * [x] `EmptyTermsExtractor` : 빈값만 입력된 경우 항에 0을 저장
+      * [x] `SingleNumberTermsExtractor` : 숫자만 입력된 경우 항에 해당 숫자를 저장
       * [x] `DefaultTermsExtractor` : 기본 구분자인 경우 구분자 패턴을 기준으로 split()을 이용하여 연산 대상 목록 추출
       * [x] `CustomTermsExtractor` : 커스텀 구분자인 경우 패턴에 일치하는 문자열 그룹 추출 및 split()을 이용한 숫자 문자열 분리
 
