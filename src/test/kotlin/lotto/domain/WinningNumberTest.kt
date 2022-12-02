@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.lotto.LottoNumber
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -26,7 +27,7 @@ internal class WinningNumberTest {
     fun `If the number of winning numbers from last week is 1 2 3 4 5 6  return the array 1 2 3 4 5 6`() {
         val number = "1,2,3,4,5,6"
         val winningNumber = WinningNumber(number)
-        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         Assertions.assertThat(winningNumber.winnerNumber).isEqualTo(winningLotto)
     }
 

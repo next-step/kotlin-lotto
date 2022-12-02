@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.lotto.LottoNumber
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -27,7 +28,7 @@ internal class ResultViewTest {
     @Test
     @DisplayName("게임의 로또 번호가 1,2,3,4,5,6일 경우 [1, 2, 3, 4, 5, 6]를 출력")
     fun `Print the purchased number`() {
-        ResultView.printChosenNumber(listOf(1, 2, 3, 4, 5, 6))
+        ResultView.printChosenNumber(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
         assertThat(outputStreamCaptor.toString().trim { it <= ' ' }).isEqualTo("[1, 2, 3, 4, 5, 6]")
     }
 

@@ -16,7 +16,7 @@ internal class ValidationTest {
     @Test
     @DisplayName("숫자 1이 기준 범위 1에서 45까지 포함된 경우 true를 반환")
     fun `Returns true if the number 1 contains a reference range from 1 to 45`() {
-        val isWithInRange = Validation.isWithInRange(1, 1..45)
+        val isWithInRange = Validation.isWithInRange("1", 1..45)
         assertThat(isWithInRange).isTrue
     }
 

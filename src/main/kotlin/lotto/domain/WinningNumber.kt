@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.domain.lotto.LottoNumber
 import lotto.utils.Validation
 
 class WinningNumber(numberOfLastWeek: String) {
@@ -16,12 +17,12 @@ class WinningNumber(numberOfLastWeek: String) {
 
         number.forEach {
             require(Validation.isNumeric(it)) { "숫자이외의 값이 입력되었습니다." }
-            require(Validation.isWithInRange(it.toInt(), 1..45)) { "범위를 벗어난 숫자입니다." }
+            require(Validation.isWithInRange(it, 1..45)) { "범위를 벗어난 숫자입니다." }
         }
 
         winnerNumber = stringArrayToLotto(number)
     }
 
     private fun stringArrayToLotto(numbers: List<String>) =
-        Lotto(numbers.map { it.toInt() })
+        Lotto(numbers.map { LottoNumber(it.toInt()) })
 }

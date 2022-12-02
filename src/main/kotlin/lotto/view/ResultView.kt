@@ -1,11 +1,13 @@
 package lotto.view
 
 import lotto.domain.LottoGameResult
+import lotto.domain.lotto.LottoNumber
 import java.math.BigDecimal
 
 object ResultView {
-    fun printChosenNumber(numbers: List<Int>) {
-        println(numbers.toString())
+    fun printChosenNumber(numbers: List<LottoNumber>) {
+        val numberToInt = numbers.map { it.number }
+        println(numberToInt.toString())
     }
 
     fun noticeOfPrize() {

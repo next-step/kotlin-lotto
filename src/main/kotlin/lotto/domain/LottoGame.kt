@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.lotto.LottoNumber
+
 object LottoGame {
 
     const val LOTTO_PRICE = 1000
@@ -7,7 +9,7 @@ object LottoGame {
     fun pick(numberOfGames: Int, lottoFactory: LottoFactory) =
         List(numberOfGames) { lottoFactory.create() }
 
-    fun getResultOfGames(gameBoard: List<Lotto>, winnerLotto: Lotto, bonusNumber: Int) =
+    fun getResultOfGames(gameBoard: List<Lotto>, winnerLotto: Lotto, bonusNumber: LottoNumber) =
         gameBoard.map {
             LottoGameResult.getResultOfWinning(
                 numberOfMatches(it, winnerLotto),
@@ -18,7 +20,7 @@ object LottoGame {
     private fun numberOfMatches(lotto: Lotto, winnerLotto: Lotto) =
         lotto.numbers.filter { winnerLotto.numbers.contains(it) }.size
 
-    private fun bonusOfMatches(lotto: Lotto, bonus: Int) =
+    private fun bonusOfMatches(lotto: Lotto, bonus: LottoNumber) =
         lotto.numbers.filter { bonus == it }.size
 
     fun calculateNumberOfAutoGames(numberOfTotal: Int, numberOfManual: Int) =
