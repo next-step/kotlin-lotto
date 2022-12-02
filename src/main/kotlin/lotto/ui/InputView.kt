@@ -20,11 +20,11 @@ object InputView {
         return lottoNumbers(winningNumber)
     }
 
-    fun inputPlusWinningNumber(): Int {
+    fun inputPlusWinningNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         val plusNumber: String = readLine() ?: throw IllegalArgumentException("보너스 번호는 숫자를 입력해야 합니다")
 
-        return plusNumber.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다")
+        return LottoNumber.valueOf(plusNumber.toIntOrNull() ?: throw IllegalArgumentException("숫자만 입력 가능합니다"))
     }
 
     fun inputDirectCount(): Int {

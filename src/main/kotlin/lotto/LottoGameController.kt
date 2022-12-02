@@ -25,11 +25,10 @@ class LottoGameController {
         resultLottoList(lottoGame)
 
         val winningNumber: LottoNumbers = inputWinningNumber()
-        val plusNumber: Int = inputPlusWinningNumber()
+        val plusNumber: LottoNumber = inputPlusWinningNumber()
 
-        lottoGame.getLottos()
         val drawResult =
-            lottoGame.draw(winningNumber, LottoNumber.valueOf(plusNumber))
+            lottoGame.draw(winningNumber, plusNumber)
 
         resultLottoWinner(LottoStat(drawResult, lottoAmount))
     }
