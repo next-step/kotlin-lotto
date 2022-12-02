@@ -19,6 +19,7 @@
 - [x] 수동 게임 횟수의 입력이 공백 열이 들어올 경우 IllegalArgumentException 오류
 - [x] 수동 게임 횟수의 입력이 -1이 들어올 경우 IllegalArgumentException 오류
 - [x] 수동 게임 횟수의 입력이 10이 들어올 경우 수동 게임 횟수는 10
+- [x] 게임을 진행할 수 있는 횟수가 9회이고 수동 게임 횟수의 입력이 10이 들어올 경우 IllegalArgumentException 오류
 
 ### 입력 결과
 
