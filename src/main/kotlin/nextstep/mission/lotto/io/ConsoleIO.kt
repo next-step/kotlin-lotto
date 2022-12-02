@@ -13,17 +13,17 @@ import nextstep.mission.lotto.vo.WinningResult
 object ConsoleInput {
     fun inputPrice(): Int {
         println("구입금액을 입력해 주세요.")
-        return readLine()?.toInt() ?: 0
+        return readln().toInt()
     }
 
     fun inputWinningNumbers(): LottoNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readLine()?.split(",")?.map { LottoNumber(it.toInt()) }.let { LottoNumbers(it!!) }
+        return readln().split(",").map { LottoNumber(it.toInt()) }.let { LottoNumbers(it) }
     }
 
     fun inputBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
-        return readLine()?.let { LottoNumber(it.toInt()) }!!
+        return LottoNumber(readln().toInt())
     }
 }
 
