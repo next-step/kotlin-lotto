@@ -20,12 +20,12 @@ value class LottoNumbers(val numbers: List<LottoNumber>) {
         ): Int = when {
             numbers.isEmpty() -> matchedCount
             else -> {
-                val currentCount: Int = matchedCount.increaseIf { otherNumbers.contains(numbers.removeFirst()) }
+                val currentCount: Int = matchedCount.increaseIf { numbers.removeFirst() in otherNumbers }
                 match(currentCount, otherNumbers, numbers)
             }
         }
         return match(0, otherNumbers, this.numbers.toMutableList())
     }
 
-    fun contains(lottoNumber: LottoNumber) = this.numbers.contains(lottoNumber)
+    operator fun contains(lottoNumber: LottoNumber): Boolean = this.numbers.contains(lottoNumber)
 }

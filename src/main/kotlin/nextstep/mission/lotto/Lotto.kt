@@ -19,7 +19,7 @@ class Lotto(val lottoNumbers: List<LottoNumbers>) {
                 val currentLottoNumbers: LottoNumbers = lottoNumbers.removeFirst()
                 WinningPrize.find(
                     currentLottoNumbers.match(winningNumbers),
-                    currentLottoNumbers.contains(bonusNumber)
+                    bonusNumber in currentLottoNumbers
                 )?.also { result[it] = result[it]!! + 1 }
                 match(winningNumbers, bonusNumber, lottoNumbers, result)
             }
