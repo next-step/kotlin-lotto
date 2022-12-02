@@ -11,10 +11,9 @@ enum class WinningPrize(val matchedCount: Int, val prize: Int) {
         fun find(matchedCount: Int, bonusMatched: Boolean): WinningPrize? =
             values().find { it.matchedCount == matchedCount }
                 ?.let {
-                    if (matchedCount == 5) {
-                        return if (bonusMatched) SECOND else THIRD
-                    } else {
-                        return it
+                    when (matchedCount) {
+                        SECOND.matchedCount -> if (bonusMatched) SECOND else THIRD
+                        else -> it
                     }
                 }
     }
