@@ -6,7 +6,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class DelimiterTypeTest : StringSpec({
+class ExpressionTypeTest : StringSpec({
     "주어진 문자열의 구분자 타입을 판별한다." {
         forAll(
             row("빈값", "", ExpressionType.EMPTY),
@@ -14,7 +14,8 @@ class DelimiterTypeTest : StringSpec({
             row("콤마", "1,2,3", ExpressionType.COMMA),
             row("콜론", "1:2:3", ExpressionType.COLON),
             row("혼합형", "1,2:3", ExpressionType.MIXED),
-            row("커스텀 구분자", "//;\n4;5", ExpressionType.CUSTOM)
+            row("커스텀 구분자", "//;\n4;5", ExpressionType.CUSTOM),
+            row("커스텀 구분자가 콤마", "//,\n4,5", ExpressionType.CUSTOM)
         ) { description: String, given: String, actual: ExpressionType ->
             ExpressionType.match(given) shouldBe actual
         }

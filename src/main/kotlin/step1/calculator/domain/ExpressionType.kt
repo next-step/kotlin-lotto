@@ -30,7 +30,7 @@ enum class ExpressionType(private val pattern: String, private val extractor: Te
         return pattern
     }
 
-    fun extractor(): TermsExtractable = extractor
+    fun termExtractor(): TermsExtractable = extractor
 
     private fun isCustom(): Boolean = this == CUSTOM
 
@@ -45,6 +45,9 @@ enum class ExpressionType(private val pattern: String, private val extractor: Te
         private const val NOT_MATCHED_PATTERN_ERROR_MESSAGE = "입력된 문자열 [%s]와 패턴 [%s]이 일치하지 않습니다."
 
         fun match(expression: String): ExpressionType {
+            if (containsCustom(expression)) {
+                return CUSTOM
+            }
             if (containsMixed(expression)) {
                 return MIXED
             }
@@ -57,6 +60,8 @@ enum class ExpressionType(private val pattern: String, private val extractor: Te
 
         private fun containsColon(expression: String): Boolean = COLON.contains(expression)
 
+        private fun containsCustom(expression: String): Boolean = CUSTOM.contains(expression)
+
         private fun findDelimiterType(expression: String): ExpressionType {
             val matches: MutableSet<ExpressionType> = mutableSetOf()
 
@@ -65,7 +70,6 @@ enum class ExpressionType(private val pattern: String, private val extractor: Te
                     matches.add(it)
                 }
             }
-
             return matches.firstOrNull() ?: throw IllegalArgumentException(DELIMITER_NOT_FOUND_ERROR_MESSAGE.format(expression))
         }
     }
