@@ -5,5 +5,6 @@ class Rewards(val reward: List<Reward>) {
         val reward = sum()
         return (reward - money) / money
     }
+
     private fun sum(): Float = reward.sumOf { it.reward }.toFloat()
 }

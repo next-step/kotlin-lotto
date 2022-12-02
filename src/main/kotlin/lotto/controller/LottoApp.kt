@@ -1,6 +1,10 @@
 package lotto.controller
 
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoBall
+import lotto.domain.LottoStore
+import lotto.domain.Lottos
+import lotto.domain.RandomLottoGenerator
 import lotto.view.InputView
 import lotto.view.OutputView
 

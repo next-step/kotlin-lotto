@@ -29,6 +29,7 @@ object InputView {
             askLottoNumber()
         }
     }
+
     private fun askLottoNumber(): List<Int> {
         return readln().split(LOTTO_BALL_DELIMITER).map { it.trim().toInt() }
     }
