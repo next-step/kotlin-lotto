@@ -44,4 +44,11 @@ internal class WinningNumberTest {
         val number = ""
         assertThrows<IllegalArgumentException> { WinningNumber(number) }
     }
+
+    @Test
+    @DisplayName("당첨 번호가 중복으로 입력됬을 경우 IllegalArgumentException 오류")
+    fun `IllegalArgumentException error if the winning number is entered in duplicate`() {
+        val number = "1,2,3,4,5,5"
+        assertThrows<IllegalArgumentException> { WinningNumber(number) }
+    }
 }

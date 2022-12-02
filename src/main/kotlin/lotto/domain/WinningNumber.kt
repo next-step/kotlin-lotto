@@ -20,9 +20,14 @@ class WinningNumber(numberOfLastWeek: String) {
             require(Validation.isWithInRange(it, 1..45)) { "범위를 벗어난 숫자입니다." }
         }
 
+        require(!isDuplicatedNumber(number)) { "중복된 숫자가 포함되어있습니다." }
+
         winnerNumber = stringArrayToLotto(number)
     }
 
     private fun stringArrayToLotto(numbers: List<String>) =
         Lotto(numbers.map { LottoNumber(it.toInt()) })
+
+    private fun isDuplicatedNumber(numbers: List<String>) =
+        numbers.toSet().size < 6
 }
