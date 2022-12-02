@@ -5,13 +5,13 @@ import io.kotest.matchers.shouldBe
 
 class LottoShopTest : StringSpec({
 
-    "로또 가게는 입력받은 금액만큼의 로또 숫자 리스트를 구매할 수 있다." {
+    "로또 가게는 입력받은 금액만큼의 로또 숫자 리스트(자동 생성)를 구매할 수 있다." {
         listOf(
             10_000 to 10,
             14_900 to 14,
             900 to 0,
         ).forEach { (purchasePrice: Int, expected: Int) ->
-            val result: Lotto = LottoShop.purchaseBy(purchasePrice)
+            val result: Lotto = LottoShop.purchaseAutoLottoBy(purchasePrice)
 
             result.lottoNumbers.size shouldBe expected
         }
