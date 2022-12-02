@@ -6,43 +6,43 @@ import io.kotest.matchers.shouldBe
 
 class WinningPrizeTest : StringSpec({
 
-    "FIRST: 당첨 조건 6이다." {
+    "FIRST: 6개가 일치하면 일등이다." {
         WinningPrize.FIRST.matchedCount shouldBe 6
     }
 
-    "FIRST: 당첨 금액은 20억이다." {
+    "FIRST: 일등의 당첨 금액은 20억이다." {
         WinningPrize.FIRST.prize shouldBe 2_000_000_000
     }
 
-    "SECOND: 당첨 조건 5이다." {
+    "SECOND: 5개가 일치하면 이등이다. (보너스 매치 여부 확인 필요)" {
         WinningPrize.SECOND.matchedCount shouldBe 5
     }
 
-    "SECOND: 당첨 금액은 3000만이다." {
+    "SECOND: 이등의 당첨 금액은 3000만이다." {
         WinningPrize.SECOND.prize shouldBe 30_000_000
     }
 
-    "THIRD: 당첨 조건 5이다." {
+    "THIRD: 5개가 일치하면 삼등이다. (보너스 매치 여부 확인 필요)" {
         WinningPrize.THIRD.matchedCount shouldBe 5
     }
 
-    "THIRD: 당첨 금액은 150만이다." {
+    "THIRD: 삼등의 당첨 금액은 150만이다." {
         WinningPrize.THIRD.prize shouldBe 1_500_000
     }
 
-    "THIRD: 당첨 조건 4이다." {
+    "THIRD: 4개가 일치하면 사등이다." {
         WinningPrize.FOURTH.matchedCount shouldBe 4
     }
 
-    "THIRD: 당첨 금액은 5만이다." {
+    "THIRD: 사등의 당첨 금액은 5만이다." {
         WinningPrize.FOURTH.prize shouldBe 50_000
     }
 
-    "FOURTH: 당첨 조건 3이다." {
+    "FOURTH: 3개가 일치하면 오등이다." {
         WinningPrize.FIFTH.matchedCount shouldBe 3
     }
 
-    "FOURTH: 당첨 금액은 5만이다." {
+    "FOURTH: 5등의 당첨 금액은 5만이다." {
         WinningPrize.FIFTH.prize shouldBe 5_000
     }
 
