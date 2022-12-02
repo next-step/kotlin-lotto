@@ -1,6 +1,5 @@
 package lotto.controller
 
-import lotto.domain.AutoLotto
 import lotto.domain.LottoGame
 import lotto.domain.LottoGameResult
 import lotto.view.InputView
@@ -10,9 +9,15 @@ class LottoGameController {
 
     fun start() {
         val purchaseResult = InputView.purchaseCost()
-        InputView.numberOfPurchase(purchaseResult.numberOfGames)
+        val numberOfManual =
+            InputView.numberOfManualPurchase(purchaseResult.numberOfGames)
+        val numberOfAuto =
+            LottoGame.calculateNumberOfAutoGames(purchaseResult.numberOfGames, numberOfManual.numberOfGames)
+        ResultView.buyResult(numberOfManual.numberOfGames, numberOfAuto)
 
-        val gameBoard = LottoGame.pick(purchaseResult.numberOfGames, AutoLotto)
+        val manualLotto = InputView.pickManualLottoNumber(numberOfManual.numberOfGames)
+        val gameBoard = LottoGame.setGameBoard(manualLotto, numberOfAuto)
+
         gameBoard.forEach { ResultView.printChosenNumber(it.numbers) }
 
         val winnerNumber = InputView.winningNumberOfLastWeek()
