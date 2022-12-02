@@ -20,4 +20,16 @@ object LottoGame {
 
     private fun bonusOfMatches(lotto: Lotto, bonus: Int) =
         lotto.numbers.filter { bonus == it }.size
+
+    fun calculateNumberOfAutoGames(numberOfTotal: Int, numberOfManual: Int) =
+        numberOfTotal - numberOfManual
+
+    fun setGameBoard(numberOfManual: List<Lotto>, numberOfAuto: Int): List<Lotto> {
+        val gameBoard = mutableListOf<Lotto>()
+        gameBoard.addAll(numberOfManual)
+
+        val autoLotto = pick(numberOfAuto, AutoLotto)
+        gameBoard.addAll(autoLotto)
+        return gameBoard
+    }
 }

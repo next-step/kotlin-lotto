@@ -24,6 +24,7 @@ internal class LottoGameTest {
 
         assertThat(result.first()).isEqualTo(LottoGameResult.FIFTH)
     }
+
     @Test
     @DisplayName("로또 번호가 1,2,3,4,5,6면서 당첨번호가 1,2,3,4,5,9 보너스 번호가 6일 경우 2등")
     fun `Lotto number 1,2,3,4,5,6 and winning number 1,2,3,4,5,9 bonus, If the winning number is 6, second place`() {
@@ -34,5 +35,12 @@ internal class LottoGameTest {
         val result = LottoGame.getResultOfGames(arrayListOf(lotto), winnerLotto, bonusNumber)
 
         assertThat(result.first()).isEqualTo(LottoGameResult.SECOND)
+    }
+
+    @Test
+    @DisplayName("로또 번호가 1,2,3,4,5,6면서 당첨번호가 1,2,3,4,5,9 보너스 번호가 6일 경우 2등")
+    fun `Lotto number 1,2,3,4,5,6 and winning number 1,2,3,4,5,9 bonus, If the winning number is 6, second 1place`() {
+        val numberOfAuto = LottoGame.calculateNumberOfAutoGames(10, 2)
+        assertThat(numberOfAuto).isEqualTo(8)
     }
 }
