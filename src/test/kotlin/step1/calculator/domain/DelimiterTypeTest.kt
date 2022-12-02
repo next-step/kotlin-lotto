@@ -9,14 +9,14 @@ import io.kotest.matchers.shouldBe
 class DelimiterTypeTest : StringSpec({
     "주어진 문자열의 구분자 타입을 판별한다." {
         forAll(
-            row("빈값", "", DelimiterType.EMPTY),
-            row("단일 양수", "1", DelimiterType.SINGLE_POSITIVE_NUMBER),
-            row("콤마", "1,2,3", DelimiterType.COMMA),
-            row("콜론", "1:2:3", DelimiterType.COLON),
-            row("혼합형", "1,2:3", DelimiterType.MIXED),
-            row("커스텀 구분자", "//;\n4;5", DelimiterType.CUSTOM)
-        ) { description: String, given: String, actual: DelimiterType ->
-            DelimiterType.match(given) shouldBe actual
+            row("빈값", "", ExpressionType.EMPTY),
+            row("단일 양수", "1", ExpressionType.SINGLE_POSITIVE_NUMBER),
+            row("콤마", "1,2,3", ExpressionType.COMMA),
+            row("콜론", "1:2:3", ExpressionType.COLON),
+            row("혼합형", "1,2:3", ExpressionType.MIXED),
+            row("커스텀 구분자", "//;\n4;5", ExpressionType.CUSTOM)
+        ) { description: String, given: String, actual: ExpressionType ->
+            ExpressionType.match(given) shouldBe actual
         }
     }
 
@@ -25,7 +25,7 @@ class DelimiterTypeTest : StringSpec({
             row("구분자가 포함되지 않은 경우", "-123"),
             row("올바른 형식이 아닌 경우", "1|2|3")
         ) { description: String, given: String ->
-            shouldThrowExactly<IllegalArgumentException> { DelimiterType.match(given) }
+            shouldThrowExactly<IllegalArgumentException> { ExpressionType.match(given) }
         }
     }
 
@@ -36,7 +36,7 @@ class DelimiterTypeTest : StringSpec({
             row("혼합형", "1,2:3", "[,:]"),
             row("커스텀 구분자", "//|\n1|2|3", "|")
         ) { description: String, given: String, actual: String ->
-            val match = DelimiterType.match(given)
+            val match = ExpressionType.match(given)
             match.extractDelimiter(given) shouldBe actual
         }
     }

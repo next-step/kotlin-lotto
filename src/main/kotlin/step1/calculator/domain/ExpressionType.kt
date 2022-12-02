@@ -6,7 +6,7 @@ import step1.calculator.extractor.EmptyTermsExtractor
 import step1.calculator.extractor.SinglePositiveTermsExtractor
 import step1.calculator.extractor.TermsExtractable
 
-enum class DelimiterType(private val pattern: String, private val extractor: TermsExtractable) {
+enum class ExpressionType(private val pattern: String, private val extractor: TermsExtractable) {
     EMPTY("""^\s*$""", EmptyTermsExtractor()),
     SINGLE_POSITIVE_NUMBER("^[0-9]*\$", SinglePositiveTermsExtractor()),
     COMMA(",", DefaultTermsExtractor()),
@@ -44,7 +44,7 @@ enum class DelimiterType(private val pattern: String, private val extractor: Ter
         private const val DELIMITER_NOT_FOUND_ERROR_MESSAGE = """입력된 문자열 [%s]에서 구분자를 찾을 수 없습니다. 빈값 혹은 단일 양수를 입력하시거나, 기본 구분자 타입의 콤마 혹은 콜론을, 사용자 정의 구분자 타입은 '//'와 '\n' 사이에 입력하세요"""
         private const val NOT_MATCHED_PATTERN_ERROR_MESSAGE = "입력된 문자열 [%s]와 패턴 [%s]이 일치하지 않습니다."
 
-        fun match(expression: String): DelimiterType {
+        fun match(expression: String): ExpressionType {
             if (containsMixed(expression)) {
                 return MIXED
             }
@@ -57,8 +57,8 @@ enum class DelimiterType(private val pattern: String, private val extractor: Ter
 
         private fun containsColon(expression: String): Boolean = COLON.contains(expression)
 
-        private fun findDelimiterType(expression: String): DelimiterType {
-            val matches: MutableSet<DelimiterType> = mutableSetOf()
+        private fun findDelimiterType(expression: String): ExpressionType {
+            val matches: MutableSet<ExpressionType> = mutableSetOf()
 
             values().map {
                 if (it.contains(expression)) {
