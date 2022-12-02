@@ -12,7 +12,6 @@ class RandomLottoMachine(
         get() = money / LottoTicket.PRICE
 
     init {
-        require(money >= LottoTicket.PRICE) { "$money 는 티켓 가격보다 낮을 수 없어요." }
         require(money % LottoTicket.PRICE == 0) { "잔돈 ${money % LottoTicket.PRICE} 이 남을 수 없어요." }
     }
 

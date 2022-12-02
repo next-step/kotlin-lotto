@@ -19,4 +19,8 @@ class LottoTickets(
             winningTicket.match(it)
         }.groupingBy { it }.eachCount()
     }
+
+    fun addAll(target: LottoTickets): LottoTickets {
+        return LottoTickets(items.plus(target.items))
+    }
 }

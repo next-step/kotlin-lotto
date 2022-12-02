@@ -43,4 +43,25 @@ internal class LottoTicketsTest {
             { assertThat(result.matchCount(Award.FIRST_PLACE)).isEqualTo(0) }
         )
     }
+
+    @Test
+    internal fun `로또 티켓이 합쳐진 값이 반환된다`() {
+        // given
+        val lottoTickets = LottoTickets(
+            listOf(
+                LottoTicket(1, 2, 3, 10, 11, 12)
+            )
+        )
+        val addLottoTickets = LottoTickets(
+            listOf(
+                LottoTicket(1, 2, 3, 6, 10, 12)
+            )
+        )
+
+        // when
+        val addLottoTicket = lottoTickets.addAll(addLottoTickets)
+
+        // then
+        assertThat(addLottoTicket.count()).isEqualTo(2)
+    }
 }

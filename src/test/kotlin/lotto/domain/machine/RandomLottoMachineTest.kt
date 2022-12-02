@@ -2,6 +2,7 @@ package lotto.domain.machine
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
@@ -21,12 +22,21 @@ internal class RandomLottoMachineTest {
         assertThat(lottoTickets.items).hasSize(expectedSize)
     }
 
+    @Test
+    internal fun `금액이 0원이면 0개가 발행된다`() {
+        // given
+        val money = 0
+        // when, then
+        assertThat(RandomLottoMachine(money).publish().count()).isEqualTo(0)
+    }
+
     @ValueSource(ints = [900, 12100])
     @ParameterizedTest
-    internal fun `로또 티켓 가격보다 낮거나, 잔금이 남으면 기계 생성에 실패한다`(inputMoney: Int) {
+    internal fun `잔금이 남으면 예외가 발행된다`(inputMoney: Int) {
         // given
+        val money = 12100
         // when, then
-        assertThatIllegalArgumentException().isThrownBy { RandomLottoMachine(inputMoney) }
+        assertThatIllegalArgumentException().isThrownBy { RandomLottoMachine(money) }
     }
 
 }
