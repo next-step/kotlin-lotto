@@ -3,9 +3,9 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.Reward
+import lotto.domain.Rewards
 
 object OutputView {
-
 
     fun printLottos(lottos: Lottos) {
         printLottoNumber(lottos.lottos.size)
@@ -19,23 +19,37 @@ object OutputView {
     private fun printLottoNumber(lottoNumber: Int) = println("$lottoNumber 개를 구매하였습니다")
 
     private fun printLotto(lotto: Lotto) {
-        print(lotto.lotto.joinToString {
-            "${it.lottoBall}"
-        })
+        print(
+            lotto.lotto.joinToString {
+                "${it.lottoBall}"
+            }
+        )
     }
 
-    fun printRewards(rewards: List<Reward>, money: Int) {
+    fun printRewards(rewards: Rewards, profit: Float) {
         println("당첨 통계\n ---------")
-        rewards.groupBy { it }
+        val totalResult = addEmptyReward(rewards.reward.groupBy { it })
+        totalResult.toList()
+            .sortedBy { (key, _) -> key.reward }
+            .toMap()
             .filter { it.key != Reward.NO_RANK }
-            .forEach { println("${it.key.matchNumber}개 일치 (${it.key.reward}) - ${it.value.size}개") }
-
-        println("총 수익률은 ${calculateProfit(rewards, money)}입니다.")
+            .forEach { printRank(it) }
+        println("총 수익률은 $profit 입니다.")
     }
 
-    private fun calculateProfit(rewards: List<Reward>, money: Int): Float {
-        val reward = rewards.sumOf { it.reward }
-        return (reward - money) / money.toFloat()
+    private fun addEmptyReward(existReward: Map<Reward, List<Reward>>): Map<Reward, List<Reward>> {
+        val existReward = existReward.toMutableMap()
+        Reward.values()
+            .subtract(existReward.keys)
+            .forEach { existReward[it] = listOf() }
+        return existReward.toMap()
     }
 
+    private fun printRank(rank: Map.Entry<Reward, List<Reward>>) {
+        if (rank.key == Reward.SECOND_RANK) {
+            println("${rank.key.matchNumber}개 일치,보너스 볼 일치(${rank.key.reward}) - ${rank.value.size}개")
+            return
+        }
+        println("${rank.key.matchNumber}개 일치 (${rank.key.reward}) - ${rank.value.size}개")
+    }
 }

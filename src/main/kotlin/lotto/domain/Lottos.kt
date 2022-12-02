@@ -2,10 +2,12 @@ package lotto.domain
 
 class Lottos(val lottos: List<Lotto>) {
 
-    fun matchNumbers(winningLotto: Lotto): List<Reward> {
-        return lottos.map {
-            val matchNumber = it.matchNumberWith(winningLotto)
-            Reward.getReward(matchNumber)
-        }
+    fun matchNumbers(lotto: Lotto, bonusBall: LottoBall): Rewards {
+        return Rewards(
+            lottos.map {
+                val matchNumber = it.matchNumberWith(lotto)
+                Reward.getReward(matchNumber, it.containsBall(bonusBall))
+            }
+        )
     }
 }
