@@ -30,4 +30,9 @@ object ResultView {
         if (rate > BigDecimal.ONE) "이득"
         else if (rate == BigDecimal.ONE) "본전"
         else "손해"
+
+    fun buyResult(manual: Int, auto: Int) {
+        println()
+        println("수동으로 ${manual}장, 자동으로 ${auto}개를 구매했습니다.")
+    }
 }
