@@ -36,7 +36,8 @@ enum class ExpressionType(private val pattern: String, private val extractor: Te
 
     private fun extractCustomDelimiter(expression: String): String {
         val customDelimiterRegexPattern = CUSTOM.pattern.toRegex()
-        val findMatchGroup: MatchResult = customDelimiterRegexPattern.find(expression) ?: throw IllegalArgumentException("")
+        val findMatchGroup: MatchResult = customDelimiterRegexPattern.find(expression)
+            ?: throw IllegalArgumentException(NOT_MATCHED_PATTERN_ERROR_MESSAGE.format(pattern, expression))
         return findMatchGroup.groupValues[1]
     }
 
