@@ -5,7 +5,8 @@ import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningPrize
 import nextstep.mission.lotto.vo.WinningResult
 
-class Lotto(val lottoNumbers: List<LottoNumbers>) {
+@JvmInline
+value class Lotto(val lottoNumbers: List<LottoNumbers>) {
 
     fun matchWinningNumbers(winningNumbers: LottoNumbers, bonusNumber: LottoNumber): WinningResult {
         tailrec fun match(
@@ -26,4 +27,6 @@ class Lotto(val lottoNumbers: List<LottoNumbers>) {
         }
         return match(winningNumbers = winningNumbers, bonusNumber = bonusNumber)
     }
+
+    operator fun plus(other: Lotto): Lotto = Lotto(this.lottoNumbers + other.lottoNumbers)
 }
