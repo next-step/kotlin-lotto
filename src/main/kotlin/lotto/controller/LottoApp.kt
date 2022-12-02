@@ -1,9 +1,6 @@
 package lotto.controller
 
-import lotto.domain.Lotto
-import lotto.domain.LottoBall
-import lotto.domain.LottoStore
-import lotto.domain.RandomLottoGenerator
+import lotto.domain.*
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -11,12 +8,18 @@ fun main() {
     val lottoStore = LottoStore(RandomLottoGenerator())
 
     val money = InputView.askLottoBuyMoney()
-    val lottos = lottoStore.buy(money)
+    val manualLottoBuyNumber = InputView.askManualLottoBuyNumber()
+    val manualLottos = Lottos(
+        InputView.askManualLotto(manualLottoBuyNumber)
+            .map { Lotto.of(it) }
+    )
+    val lottos = lottoStore.buy(money, manualLottoBuyNumber)
+        .combine(manualLottos)
+
+    OutputView.printLottoBuyStatus(manualLottoBuyNumber, lottos.size() - manualLottoBuyNumber)
     OutputView.printLottos(lottos)
     val winningLotto = Lotto.of(
-        InputView.askWinningLottoBall().map {
-            it.trim().toInt()
-        }
+        InputView.askWinningLottoBall()
     )
 
     val bonusBall = LottoBall(InputView.askBonusBall())

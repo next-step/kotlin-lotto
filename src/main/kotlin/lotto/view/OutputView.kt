@@ -52,4 +52,8 @@ object OutputView {
         }
         println("${rank.key.matchNumber}개 일치 (${rank.key.reward}) - ${rank.value.size}개")
     }
+
+    fun printLottoBuyStatus(manualLottoBuyNumber: Int, autoLottoBuyNumber: Int) {
+        println("수동으로 ${manualLottoBuyNumber}장, 자동으로 ${autoLottoBuyNumber}개를 구매했습니다.")
+    }
 }

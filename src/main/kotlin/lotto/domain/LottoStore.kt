@@ -2,8 +2,9 @@ package lotto.domain
 
 class LottoStore(private val lottoGenerator: LottoGenerator) {
 
-    fun buy(money: Int): Lottos {
-        val lottoNumber = money / LOTTO_PRICE
+    fun buy(money: Int, manualLottoNumber: Int): Lottos {
+        val lottoNumber = money / LOTTO_PRICE - manualLottoNumber
+        require(lottoNumber > 0)
         return Lottos(List(lottoNumber) { lottoGenerator.generate() })
     }
 
