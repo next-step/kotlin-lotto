@@ -4,8 +4,9 @@ import lotto.domain.*
 
 object ResultView {
 
-    fun printTickets(tickets: LottoTickets) {
-        println("${tickets.count()} 개를 구매했습니다.")
+    fun printTickets(manualCount: Int, tickets: LottoTickets) {
+        println()
+        println("수동으로 $manualCount 장, 자동으로 ${tickets.count() - manualCount} 개를 구매했습니다.")
 
         tickets.items.forEach {
             println(ticketNumberToString(it))
