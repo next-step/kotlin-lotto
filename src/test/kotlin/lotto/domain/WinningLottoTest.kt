@@ -44,4 +44,24 @@ internal class WinningLottoTest {
 
         assertThat(resultLottoRank).isEqualTo(LottoRank.FIFTH_PLACE)
     }
+
+    @Test
+    fun `당첨 로또와 다른 로또를 비교하였을 때, 로또 개수에 따른 다른 등수(MISS) 반환`() {
+        val previousWinningLotto =
+            listOf(1, 2, 3, 4, 5, 6)
+                .map { LottoNumber(it) }.toMutableSet()
+                .let { Lotto(it) }
+
+        val bonusLottoNumber = LottoNumber(7)
+
+        val lotto = listOf(7, 8, 9, 10, 11, 12)
+            .map { LottoNumber(it) }.toMutableSet()
+            .let { Lotto(it) }
+
+        val resultLottoRank =
+            WinningLotto(winningLotto = previousWinningLotto, bonusLottoNumber = bonusLottoNumber)
+                .compare(lotto)
+
+        assertThat(resultLottoRank).isEqualTo(LottoRank.MISS)
+    }
 }
