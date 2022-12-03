@@ -36,7 +36,7 @@ object InputView {
     }
 
     fun pickManualLottoNumber(numberOfManual: Int): List<Lotto> {
-        if (numberOfManual == 0) return mutableListOf()
+        if (numberOfManual == 0) return listOf()
         println()
         println("수동으로 구매할 번호를 입력해 주세요.")
         return List(numberOfManual) {
