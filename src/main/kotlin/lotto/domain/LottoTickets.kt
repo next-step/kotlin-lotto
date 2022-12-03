@@ -1,7 +1,5 @@
 package lotto.domain
 
-class LottoTickets(ticketCount: Int) {
-    val tickets: List<LottoTicket> = List(ticketCount) {
-        LottoTicket(LottoAutoGenerateStrategy())
-    }
-}
+class LottoTickets(
+    val tickets: List<LottoTicket>
+) : List<LottoTicket> by tickets

@@ -12,13 +12,21 @@ import java.lang.IllegalArgumentException
 internal class WinnerLottoTicketTest : BehaviorSpec({
     Given("보너스 볼에 ") {
         mockkObject(Reader)
+        val lottoNumbers = setOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(4),
+            LottoNumber(5),
+            LottoNumber(6)
+        )
         When("당첨 티켓에 있는 번호가 들어온다면 ") {
             every { Reader.read() } returnsMany(listOf("1, 2, 3, 4, 5, 6", "1"))
             Then("예외를 던진다.") {
                 val exception = shouldThrow<IllegalArgumentException> {
                     WinnerLottoTicket(
-                        LottoManualGenerateStrategy(),
-                        BonusManualGenerateStrategy()
+                        winnerBonusNumber = LottoNumber(1),
+                        winnerLottoNumbers = LottoTicket(lottoNumbers)
                     )
                 }
                 exception.message shouldBe ExceptionMessage.BONUS_NUMBER_NOT_DUPLICATE_ERROR
@@ -29,8 +37,8 @@ internal class WinnerLottoTicketTest : BehaviorSpec({
             every { Reader.read() } returnsMany(listOf("1, 2, 3, 4, 5, 6", "7"))
             Then("정상적으로 생성한다.") {
                 WinnerLottoTicket(
-                    LottoManualGenerateStrategy(),
-                    BonusManualGenerateStrategy()
+                    winnerBonusNumber = LottoNumber(7),
+                    winnerLottoNumbers = LottoTicket(lottoNumbers)
                 )
             }
         }

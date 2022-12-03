@@ -5,11 +5,11 @@ import lotto.util.Parser
 import lotto.util.Reader
 
 class LottoManualGenerateStrategy : LottoGenerateStrategy {
-    override fun generate(): Set<LottoNumber> {
+    override fun generate(): LottoTicket {
         val winnerLottoNumbersStr = Reader.read()
         val lottoNumbers = Parser.parse(winnerLottoNumbersStr)
         validateLottoNumbers(lottoNumbers)
-        return lottoNumbers.map { LottoNumber(it) }.toSet()
+        return LottoTicket(lottoNumbers.map { LottoNumber(it) }.toSet())
     }
 
     private fun validateLottoNumbers(lottoNumbers: List<Int>) {

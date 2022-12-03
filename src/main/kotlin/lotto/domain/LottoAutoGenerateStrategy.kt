@@ -1,11 +1,13 @@
 package lotto.domain
 
 class LottoAutoGenerateStrategy : LottoGenerateStrategy {
-    override fun generate(): Set<LottoNumber> {
-        return (START_NUMBER..END_NUMBER).shuffled()
-            .take(LOTTO_NUMBER_COUNT)
-            .map { LottoNumber(it) }
-            .toSet()
+    override fun generate(): LottoTicket {
+        return LottoTicket(
+            (START_NUMBER..END_NUMBER).shuffled()
+                .take(LOTTO_NUMBER_COUNT)
+                .map { LottoNumber(it) }
+                .toSet()
+        )
     }
 
     companion object {
