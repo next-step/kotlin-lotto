@@ -10,7 +10,8 @@ import lotto.view.ResultView
 class LottoGameController {
 
     fun start() {
-        val (purchaseResult, numberOfManual, numberOfAuto) = buyLottoGame()
+        val (purchaseResult, numberOfManual, numberOfAuto) =
+            getPurchaseResultsAndNumberOfPurchases()
 
         val manualLotto = InputView.pickManualLottoNumber(numberOfManual)
 
@@ -24,7 +25,7 @@ class LottoGameController {
         statistics(gameResults, purchaseResult)
     }
 
-    private fun buyLottoGame(): Triple<PurchaseResult, Int, Int> {
+    private fun getPurchaseResultsAndNumberOfPurchases(): Triple<PurchaseResult, Int, Int> {
         val purchaseResult = InputView.purchaseCost()
         val numberOfManual =
             InputView.numberOfManualPurchase(purchaseResult.numberOfGames)
