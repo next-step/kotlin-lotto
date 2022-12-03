@@ -13,6 +13,7 @@ object ResultView {
     private const val LOTTO_RESULT_REVENUE_MESSAGE_PREFIX = "총 수익률은 "
     private const val LOTTO_RESULT_REVENUE_MESSAGE_SUFFIX = "입니다."
     private const val LOTTO_RESULT_REVENUE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+    private const val REFERENCE_VALUE = 1
 
     fun printNumberOfLotto(numberOfLotto: Int) {
         println("$numberOfLotto$LOTTO_COUNT_MESSAGE")
@@ -50,7 +51,7 @@ object ResultView {
     }
 
     private fun printResultRevenueLossMessage(profitRate: Float): String {
-        if (profitRate < 1) {
+        if (profitRate < REFERENCE_VALUE) {
             return LOTTO_RESULT_REVENUE_LOSS_MESSAGE
         }
         return ""
