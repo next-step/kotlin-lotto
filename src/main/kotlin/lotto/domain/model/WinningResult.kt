@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.model
 
 data class WinningResult(
     val numberOfFirstGrade: Int = 0,

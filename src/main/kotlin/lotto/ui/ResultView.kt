@@ -1,6 +1,8 @@
 package lotto.ui
 
 import lotto.domain.*
+import lotto.domain.model.Lotto
+import lotto.domain.model.Rank
 
 class ResultView {
 

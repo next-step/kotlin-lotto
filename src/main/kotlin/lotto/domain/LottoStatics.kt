@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.model.Rank
+import lotto.domain.model.WinningResult
 import kotlin.math.floor
 
 class LottoStatics(private val ranks: List<Rank> = emptyList()) {

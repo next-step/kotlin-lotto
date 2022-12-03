@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.domain.model.Lotto
+
 class LottoDispenser(private val amount: Int) {
 
     val list: List<Lotto> = makeLottoList()

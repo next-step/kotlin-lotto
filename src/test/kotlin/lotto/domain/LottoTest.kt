@@ -2,6 +2,7 @@ package lotto.domain
 
 import calculator.Tokenizer
 import io.kotest.matchers.shouldBe
+import lotto.domain.model.Lotto
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

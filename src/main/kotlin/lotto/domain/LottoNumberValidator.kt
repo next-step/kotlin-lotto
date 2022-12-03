@@ -1,6 +1,7 @@
 package lotto.domain
 
 import calculator.Tokenizer
+import lotto.domain.model.Lotto
 
 object LottoNumberValidator {
     private const val LOTTO_NUMBER_COUNT = 6

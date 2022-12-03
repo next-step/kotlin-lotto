@@ -1,6 +1,7 @@
 package lotto.domain
 
 import calculator.Tokenizer
+import lotto.domain.model.Rank
 
 object WinningChecker {
 

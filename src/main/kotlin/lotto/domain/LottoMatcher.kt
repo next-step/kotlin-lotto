@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.domain.model.Lotto
+import lotto.domain.model.Rank
+
 object LottoMatcher {
 
     fun matchingWinner(matchCount: Int, matchBonus: Boolean): Rank {
