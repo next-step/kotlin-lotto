@@ -22,7 +22,7 @@ class LottoGameController {
         gameBoard.forEach { ResultView.printChosenNumber(it.numbers) }
 
         val gameResults = checkAnswers(gameBoard)
-        statistics(gameResults, purchaseResult)
+        printStatistics(gameResults, purchaseResult)
     }
 
     private fun getPurchaseResultsAndNumberOfPurchases(): Triple<PurchaseResult, Int, Int> {
@@ -40,7 +40,7 @@ class LottoGameController {
         return LottoGame.getResultOfGames(gameBoard, winnerNumber.winnerNumber, bonusNumber.bonusNumber)
     }
 
-    private fun statistics(gameResults: List<LottoGameResult>, purchaseResult: PurchaseResult) {
+    private fun printStatistics(gameResults: List<LottoGameResult>, purchaseResult: PurchaseResult) {
         ResultView.noticeOfPrize()
         val statistics = LottoGameResult.winningStatistics(gameResults)
         ResultView.printWinningStatistics(statistics)
