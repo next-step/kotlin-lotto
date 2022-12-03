@@ -14,7 +14,7 @@ class BonusNumber(bonusNumberOfLastWeek: String, winnerNumber: WinningNumber) {
 
         val bonusNumberToInt = LottoNumber(bonusNumberOfLastWeek.toInt())
         require(!winnerNumber.winnerNumber.numbers.contains(bonusNumberToInt)) { "보너스 번호가 지난 주 당첨번호에 포함되어 있습니다." }
-        require(Validation.isWithInRange(bonusNumberOfLastWeek, 1..45)) { "보너스 번호가 범위를 벗어난 숫자입니다." }
+        require(Validation.isWithInRange(bonusNumberOfLastWeek.toInt(), 1..45)) { "보너스 번호가 범위를 벗어난 숫자입니다." }
 
         bonusNumber = bonusNumberToInt
     }

@@ -17,7 +17,7 @@ class WinningNumber(numberOfLastWeek: String) {
 
         number.forEach {
             require(Validation.isNumeric(it)) { "숫자이외의 값이 입력되었습니다." }
-            require(Validation.isWithInRange(it, 1..45)) { "범위를 벗어난 숫자입니다." }
+            require(Validation.isWithInRange(it.toInt(), 1..45)) { "범위를 벗어난 숫자입니다." }
         }
 
         require(!isDuplicatedNumber(number)) { "중복된 숫자가 포함되어있습니다." }
