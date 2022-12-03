@@ -12,9 +12,9 @@ class WinnerTest : StringSpec({
 
     "매칭되는 숫자의 갯수를 반환한다" {
         val winner = Winner((1..45).toList())
-        val lotto = Lotto(1)
+        val lotto = Lotto(1000)
         val tickets = lotto.purchaseTicket()
         val matchingInfo = winner.checkNumberMatch(tickets)
-        matchingInfo[Reward.`2000000000`] shouldBe 1
+        matchingInfo[Reward.FIRST] shouldBe 1
     }
 })

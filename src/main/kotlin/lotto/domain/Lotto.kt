@@ -1,10 +1,8 @@
 package lotto.domain
 
-class Lotto(private var count: Int = 0) {
+class Lotto(private var count: Int = 0, val fee: Int) {
 
-    fun setCountByPurchaseFee(fee: Int) {
-        count = fee / PURCHASE_STANDARD_FEE
-    }
+    constructor(fee: Int) : this(fee / PURCHASE_STANDARD_FEE, fee)
 
     fun getCount() = this.count
 
