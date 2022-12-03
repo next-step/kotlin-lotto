@@ -13,6 +13,9 @@ class LottoGameController {
         val (purchaseResult, numberOfManual, numberOfAuto) = buyLottoGame()
 
         val manualLotto = InputView.pickManualLottoNumber(numberOfManual)
+
+        ResultView.buyResult(numberOfManual, numberOfAuto)
+
         val gameBoard = LottoGame.setGameBoard(manualLotto, numberOfAuto)
 
         gameBoard.forEach { ResultView.printChosenNumber(it.numbers) }
@@ -27,7 +30,6 @@ class LottoGameController {
             InputView.numberOfManualPurchase(purchaseResult.numberOfGames)
         val numberOfAuto =
             LottoGame.calculateNumberOfAutoGames(purchaseResult.numberOfGames, numberOfManual.numberOfGames)
-        ResultView.buyResult(numberOfManual.numberOfGames, numberOfAuto)
         return Triple(purchaseResult, numberOfManual.numberOfGames, numberOfAuto)
     }
 
