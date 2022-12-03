@@ -20,7 +20,7 @@ class WinningLottoTest {
     }
 
     @Test
-    fun `전부(6개) 같으면 CompareResult FirstWin을 반환한다`() {
+    fun `전부(6개) 같으면 FirstWin이 1인 리포트를 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
         assertThat(
             winNumber.compareWith(
@@ -33,9 +33,10 @@ class WinningLottoTest {
                         LottoNumber(5),
                         LottoNumber(6)
                     )
-                )
+                ),
+                Report()
             )
-        ).isEqualTo(LottoResult.FirstWin)
+        ).isEqualTo(Report(firstWin = FirstWin(1)))
     }
 
     @Test
@@ -52,9 +53,10 @@ class WinningLottoTest {
                         LottoNumber(5),
                         LottoNumber(7)
                     )
-                )
+                ),
+                Report()
             )
-        ).isEqualTo(LottoResult.SecondWin)
+        ).isEqualTo(Report(secondWin = SecondWin(1)))
     }
 
     @Test
@@ -71,9 +73,10 @@ class WinningLottoTest {
                         LottoNumber(7),
                         LottoNumber(8)
                     )
-                )
-            )
-        ).isEqualTo(LottoResult.ThirdWin)
+                ),
+                Report()
+            ),
+        ).isEqualTo(Report(thirdWin = ThirdWin(1)))
     }
 
     @Test
@@ -90,9 +93,10 @@ class WinningLottoTest {
                         LottoNumber(8),
                         LottoNumber(9)
                     )
-                )
+                ),
+                Report()
             )
-        ).isEqualTo(LottoResult.FourthWin)
+        ).isEqualTo(Report(fourthWin = FourthWin(1)))
     }
 
     @DisplayName("로또 비교 테스트")
@@ -100,7 +104,7 @@ class WinningLottoTest {
     @MethodSource("valueSource")
     fun `2장 이하가 같으면 NotWin을 반환한다`(lotto: Lotto) {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(winNumber.compareWith(lotto)).isEqualTo(LottoResult.NotWin)
+        assertThat(winNumber.compareWith(lotto, Report())).isEqualTo(Report(notWin = NotWin(1)))
     }
 
     companion object {

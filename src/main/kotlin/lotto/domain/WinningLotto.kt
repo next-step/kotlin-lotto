@@ -5,19 +5,21 @@ class WinningLotto(winningNumbers: List<Int>) {
     private val numbers: Set<LottoNumber>
 
     init {
-        require(winningNumbers.size == 6)
         numbers = winningNumbers.map { LottoNumber(it) }.toSet()
-        require(numbers.size == 6)
+        require(numbers.size == 6) {
+            "로또 번호의 수는 6개여야 합니다"
+        }
     }
 
-    fun compareWith(lotto: Lotto): LottoResult {
-        return when (numbers.intersect(lotto.numbers).size) {
-            6 -> LottoResult.FirstWin
-            5 -> LottoResult.SecondWin
-            4 -> LottoResult.ThirdWin
-            3 -> LottoResult.FourthWin
-            else -> LottoResult.NotWin
+    fun compareWith(lotto: Lotto, report: Report): Report {
+        when (numbers.intersect(lotto.numbers).size) {
+            6 -> report.increaseFirstWin()
+            5 -> report.increaseSecondWin()
+            4 -> report.increaseThirdWin()
+            3 -> report.increaseFourthWin()
+            else -> report.increaseNotWin()
         }
+        return report.copy()
     }
 
     override fun equals(other: Any?): Boolean {

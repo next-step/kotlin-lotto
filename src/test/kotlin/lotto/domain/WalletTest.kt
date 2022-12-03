@@ -8,8 +8,8 @@ class WalletTest {
     @Test
     fun `지갑에 3000원이 있으면 로또를 3개를 구매한다`() {
         val wallet = Wallet(KRW(3000))
-        wallet.buyLottos()
+        val lottos = wallet.buyLottos()
 
-        assertThat(wallet.lottos.size).isEqualTo(3)
+        assertThat(lottos.size).isEqualTo(3)
     }
 }
