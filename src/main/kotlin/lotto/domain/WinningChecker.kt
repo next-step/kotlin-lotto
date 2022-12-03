@@ -9,8 +9,8 @@ object WinningChecker {
             it.toInt()
         }
 
-        val matchNumberCount: Int = LottoMatcher.countMatchNumber(winningNumbers, lottoNumbers)
-        val bonus: Boolean = LottoMatcher.matchBonus(matchNumberCount, lottoNumbers, bonusNumber)
-        return LottoMatcher.matchingWinner(matchNumberCount, bonus)
+        val matchCount: Int = LottoMatcher.countMatchNumber(winningNumbers, lottoNumbers)
+        val matchBonus: Boolean = LottoMatcher.matchBonus(matchCount, lottoNumbers, bonusNumber)
+        return LottoMatcher.matchingWinner(matchCount, matchBonus)
     }
 }

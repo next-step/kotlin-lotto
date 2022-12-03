@@ -23,28 +23,28 @@ internal class LottoMatcherTest {
     @DisplayName("맞춘 번호 개수가 3개인 경우 상금은 ${50_000}")
     @Test
     fun correctThreeNumbers() {
-        val reward = LottoMatcher.matchingWinner(matchNumberCount = 3)
+        val reward = LottoMatcher.matchingWinner(matchCount = 3, matchBonus = false)
         reward.prize shouldBeGreaterThanOrEqual 50_000
     }
 
     @DisplayName("맞춘 번호 개수가 4개인 경우 상금은 ${1_500_000}")
     @Test
     fun correctFourNumbers() {
-        val reward = LottoMatcher.matchingWinner(matchNumberCount = 4)
+        val reward = LottoMatcher.matchingWinner(matchCount = 4, matchBonus = false)
         reward.prize shouldBeGreaterThanOrEqual 1_500_000
     }
 
     @DisplayName("맞춘 번호 개수가 5개인 경우 상금은 ${30_000_000}")
     @Test
     fun correctFiveNumbers() {
-        val reward = LottoMatcher.matchingWinner(matchNumberCount = 5)
+        val reward = LottoMatcher.matchingWinner(matchCount = 5, matchBonus = false)
         reward.prize shouldBeGreaterThanOrEqual 30_000_000
     }
 
     @DisplayName("맞춘 번호 개수가 6개인 경우 상금은 ${2_000_000_000}")
     @Test
     fun correctSixNumbers() {
-        val reward = LottoMatcher.matchingWinner(matchNumberCount = 6)
+        val reward = LottoMatcher.matchingWinner(matchCount = 6, matchBonus = false)
         reward.prize shouldBeGreaterThanOrEqual 2_000_000_000
     }
 
@@ -54,7 +54,7 @@ internal class LottoMatcherTest {
         ints = [0, 1, 2]
     )
     fun zero(input: Int) {
-        val reward = LottoMatcher.matchingWinner(matchNumberCount = input)
+        val reward = LottoMatcher.matchingWinner(matchCount = input, matchBonus = false)
         reward.prize shouldBe 0
     }
 
@@ -65,7 +65,7 @@ internal class LottoMatcherTest {
     )
     fun minusOrOverCount(input: Int) {
         shouldThrowExactly<IllegalStateException> {
-            LottoMatcher.matchingWinner(matchNumberCount = input)
+            LottoMatcher.matchingWinner(matchCount = input, matchBonus = false)
         }
     }
 }

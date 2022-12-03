@@ -41,6 +41,6 @@ internal class LottoTest {
         val matchingCount = LottoMatcher.countMatchNumber(numbers, lotto.numbers)
         val reward = WinningChecker.win(winningNumberStrings = input, lottoNumbers = lotto.numbers)
 
-        reward.matchingCount shouldBe matchingCount
+        reward.matchCount shouldBe matchingCount
     }
 }

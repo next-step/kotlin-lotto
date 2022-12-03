@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Rank(val matchingCount: Int, val prize: Int) {
+enum class Rank(val matchCount: Int, val prize: Int) {
     FIRST_GRADE(6, 2_000_000_000),
     SECOND_GRADE(5, 30_000_000),
     THIRD_GRADE(5, 1_500_000),
@@ -10,9 +10,13 @@ enum class Rank(val matchingCount: Int, val prize: Int) {
 
     companion object {
 
-        fun safeValueOf(matchingCount: Int): Rank {
+        fun safeValueOf(matchCount: Int, matchBonus: Boolean): Rank {
+            if (matchBonus.not() && matchCount == 5) {
+                return THIRD_GRADE
+            }
+
             return values().find { rank ->
-                rank.matchingCount == matchingCount
+                rank.matchCount == matchCount
             } ?: NO_MATCH
         }
     }
