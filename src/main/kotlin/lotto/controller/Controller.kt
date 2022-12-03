@@ -20,11 +20,11 @@ object Controller {
         val amount = inputAmount()
         val numberOfLotto = amount.calculateNumberOfLotto()
         ResultView.printNumberOfLotto(numberOfLotto)
-        generateLottoNumbers(numberOfLotto)
-        ResultView.printLottoNumbersList(LottoNumbersList.getList())
+        val lottoNumbersList = generateLottoNumbers(numberOfLotto)
+        ResultView.printLottoNumbersList(lottoNumbersList.getList())
 
         val winningNumbers = inputWinningNumber()
-        val lottoResult = makeLottoResult(winningNumbers)
+        val lottoResult = makeLottoResult(winningNumbers, lottoNumbersList)
         ResultView.printLottoResultTitle()
         lottoResult.value.forEach {
             ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value)
@@ -33,9 +33,9 @@ object Controller {
         ResultView.printProfitRate(profitRate)
     }
 
-    private fun makeLottoResult(winningNumbers: LottoNumbers): LottoResult {
+    private fun makeLottoResult(winningNumbers: LottoNumbers, lottoNumbersList: LottoNumbersList): LottoResult {
         val lottoResult: EnumMap<LottoRank, Int> = initLottoResult()
-        LottoNumbersList.getLottoNumbers().forEach {
+        lottoNumbersList.value.forEach {
             val lottoNumbers = LottoNumbers(it.value)
             val lottoRank = winningNumbers.getLottoRank(lottoNumbers)
             lottoResult[lottoRank] = lottoResult.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREASE_COUNT
@@ -52,11 +52,13 @@ object Controller {
         return lottoResult
     }
 
-    private fun generateLottoNumbers(lottoCount: Int) {
+    private fun generateLottoNumbers(lottoCount: Int): LottoNumbersList {
+        val lottoNumbersList = mutableListOf<LottoNumbers>()
         repeat(lottoCount) {
             val lottoNumbers = LottoGenerator.generate()
-            LottoNumbersList.setLottoNumbers(lottoNumbers)
+            lottoNumbersList.add(lottoNumbers)
         }
+        return LottoNumbersList(lottoNumbersList)
     }
 
     private fun inputAmount(): LottoPrice {
