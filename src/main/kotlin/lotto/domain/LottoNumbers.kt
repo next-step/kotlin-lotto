@@ -10,7 +10,7 @@ class LottoNumbers(numbers: List<Int>) {
     }
 
     fun countMatchedNumbers(otherLottoNumbers: LottoNumbers): Int {
-        return this.lottoNumbers.filter { otherLottoNumbers.lottoNumbers.contains(it) }.size
+        return this.lottoNumbers.count { otherLottoNumbers.lottoNumbers.contains(it) }
     }
 
     fun numbers(): List<Int> = lottoNumbers.map { it.number }
