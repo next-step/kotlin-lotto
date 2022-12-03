@@ -4,7 +4,7 @@ import lotto.domain.*
 
 class ResultView {
 
-    private lateinit var winners: List<Winner>
+    private lateinit var ranks: List<Rank>
     private var bonusNumber: Int = 0
     private var winningNumbers: String = ""
 
@@ -33,7 +33,7 @@ class ResultView {
     }
 
     fun checkWinningLottoList(lottoList: List<Lotto>) {
-        winners = lottoList.map { lotto ->
+        ranks = lottoList.map { lotto ->
             WinningChecker.win(winningNumbers, lotto.numbers, bonusNumber)
         }
     }
@@ -42,7 +42,7 @@ class ResultView {
         println("\n당첨 통계")
         println("---------")
 
-        val statics = LottoStatics(winners)
+        val statics = LottoStatics(ranks)
         val earningRate = statics.calculateEarningRate(statics.totalReward, amount)
         val winningResult = statics.winningResult
 

@@ -20,32 +20,32 @@ internal class LottoMatcherTest {
         assertThat(LottoMatcher.countMatchNumber(winningNumbers = numbers, lottoNumbers = list)).isEqualTo(3)
     }
 
-    @DisplayName("맞춘 번호 개수가 3개인 경우 상금은 $FOURTH_WIN_PRIZE")
+    @DisplayName("맞춘 번호 개수가 3개인 경우 상금은 ${50_000}")
     @Test
     fun correctThreeNumbers() {
         val reward = LottoMatcher.matchingWinner(matchNumberCount = 3)
-        reward.prize shouldBeGreaterThanOrEqual FOURTH_WIN_PRIZE
+        reward.prize shouldBeGreaterThanOrEqual 50_000
     }
 
-    @DisplayName("맞춘 번호 개수가 4개인 경우 상금은 $THIRD_WIN_PRIZE")
+    @DisplayName("맞춘 번호 개수가 4개인 경우 상금은 ${1_500_000}")
     @Test
     fun correctFourNumbers() {
         val reward = LottoMatcher.matchingWinner(matchNumberCount = 4)
-        reward.prize shouldBeGreaterThanOrEqual THIRD_WIN_PRIZE
+        reward.prize shouldBeGreaterThanOrEqual 1_500_000
     }
 
-    @DisplayName("맞춘 번호 개수가 5개인 경우 상금은 $SECOND_WIN_PRIZE")
+    @DisplayName("맞춘 번호 개수가 5개인 경우 상금은 ${30_000_000}")
     @Test
     fun correctFiveNumbers() {
         val reward = LottoMatcher.matchingWinner(matchNumberCount = 5)
-        reward.prize shouldBeGreaterThanOrEqual SECOND_WIN_PRIZE
+        reward.prize shouldBeGreaterThanOrEqual 30_000_000
     }
 
-    @DisplayName("맞춘 번호 개수가 6개인 경우 상금은 $FIRST_WIN_PRIZE")
+    @DisplayName("맞춘 번호 개수가 6개인 경우 상금은 ${2_000_000_000}")
     @Test
     fun correctSixNumbers() {
         val reward = LottoMatcher.matchingWinner(matchNumberCount = 6)
-        reward.prize shouldBeGreaterThanOrEqual FIRST_WIN_PRIZE
+        reward.prize shouldBeGreaterThanOrEqual 2_000_000_000
     }
 
     @DisplayName("맞춘 번호 개수가 2개 이하이면 당첨금이 없다")
@@ -55,7 +55,7 @@ internal class LottoMatcherTest {
     )
     fun zero(input: Int) {
         val reward = LottoMatcher.matchingWinner(matchNumberCount = input)
-        reward.prize shouldBe NONE_WIN_PRIZE
+        reward.prize shouldBe 0
     }
 
     @DisplayName("맞춘 번호 개수는 음수 또는 6개를 초과 할 수 없다.")

@@ -4,7 +4,7 @@ import calculator.Tokenizer
 
 object WinningChecker {
 
-    fun win(winningNumberStrings: String, lottoNumbers: List<Int>, bonusNumber: Int = 0): Winner {
+    fun win(winningNumberStrings: String, lottoNumbers: List<Int>, bonusNumber: Int = 0): Rank {
         val winningNumbers: List<Int> = Tokenizer.tokenize(winningNumberStrings).map {
             it.toInt()
         }

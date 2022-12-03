@@ -2,7 +2,7 @@ package lotto.domain
 
 import kotlin.math.floor
 
-class LottoStatics(private val winners: List<Winner> = emptyList()) {
+class LottoStatics(private val ranks: List<Rank> = emptyList()) {
 
     val totalReward: Int = calculateTotalReward()
 
@@ -10,7 +10,7 @@ class LottoStatics(private val winners: List<Winner> = emptyList()) {
 
     private fun calculateTotalReward(): Int {
         var total = 0
-        winners.forEach { winner ->
+        ranks.forEach { winner ->
             total += winner.prize
         }
         return total
@@ -18,14 +18,14 @@ class LottoStatics(private val winners: List<Winner> = emptyList()) {
 
     private fun calculateWinningCount(): WinningResult {
         var result = WinningResult()
-        winners.forEach { winner ->
+        ranks.forEach { winner ->
             result = when (winner) {
-                Winner.FIRST_GRADE -> result.copy(numberOfFirstGrade = result.numberOfFirstGrade + 1)
-                Winner.SECOND_GRADE -> result.copy(numberOfSecondGrade = result.numberOfSecondGrade + 1)
-                Winner.THIRD_GRADE -> result.copy(numberOfThirdGrade = result.numberOfThirdGrade + 1)
-                Winner.FOURTH_GRADE -> result.copy(numberOfFourthGrade = result.numberOfFourthGrade + 1)
-                Winner.FIVE_GRADE -> result.copy(numberOfFifthGrade = result.numberOfFifthGrade + 1)
-                Winner.NO_MATCH -> result
+                Rank.FIRST_GRADE -> result.copy(numberOfFirstGrade = result.numberOfFirstGrade + 1)
+                Rank.SECOND_GRADE -> result.copy(numberOfSecondGrade = result.numberOfSecondGrade + 1)
+                Rank.THIRD_GRADE -> result.copy(numberOfThirdGrade = result.numberOfThirdGrade + 1)
+                Rank.FOURTH_GRADE -> result.copy(numberOfFourthGrade = result.numberOfFourthGrade + 1)
+                Rank.FIFTH_GRADE -> result.copy(numberOfFifthGrade = result.numberOfFifthGrade + 1)
+                Rank.NO_MATCH -> result
             }
         }
         return result
