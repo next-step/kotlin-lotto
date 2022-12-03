@@ -2,7 +2,6 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottoNumbersListTest {
@@ -15,9 +14,8 @@ class LottoNumbersListTest {
         LottoNumbersList.setLottoNumbers(lottoNumbers)
     }
 
-    @DisplayName("getLottoNumbers() 메서드 테스트")
     @Test
-    fun `getLottoNumbers() 메서드 테스트`() {
+    fun `로또 번호 리스트 - 일급 콜렉션 반환 테스트`() {
         // when
         val actual = LottoNumbersList.getLottoNumbers()
 
@@ -25,9 +23,8 @@ class LottoNumbersListTest {
         assertThat(actual).contains(lottoNumbers)
     }
 
-    @DisplayName("getList() 메서드 테스트")
     @Test
-    fun `getList() 메서드 테스트`() {
+    fun `로또 번호 리스트 - 원시값 반환 테스트`() {
         // when
         val actual = LottoNumbersList.getList()
 

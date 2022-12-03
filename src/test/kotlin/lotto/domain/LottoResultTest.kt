@@ -1,14 +1,12 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.util.EnumMap
 
 class LottoResultTest {
-    @DisplayName("로또 결과 확인 테스트")
     @Test
-    fun `로또 결과 확인 테스트`() {
+    fun `로또 결과 - 순위별 당첨 개수 확인 테스트`() {
         // given
         val lottoResult = initLottoResult()
 
@@ -20,9 +18,8 @@ class LottoResultTest {
         assertThat(lottoResult.value[LottoRank.MISS]).isEqualTo(0)
     }
 
-    @DisplayName("수익률 계산 테스트")
     @Test
-    fun `수익률 계산 테스트`() {
+    fun `로또 결과 - 수익률 계산 테스트`() {
         // given
         val lottoResult = initLottoResult()
         val amount = 14_000
