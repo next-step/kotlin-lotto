@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.extension.isPositiveNumeric
-import lotto.util.ExceptionMessage
 import lotto.util.Reader
 
 class BonusManualGenerateStrategy : BonusGenerateStrategy {
@@ -12,6 +11,10 @@ class BonusManualGenerateStrategy : BonusGenerateStrategy {
     }
 
     private fun validateBonusNumber(bonusNumber: String) {
-        require(bonusNumber.isPositiveNumeric()) { ExceptionMessage.BONUS_NUMBER_ERROR }
+        require(bonusNumber.isPositiveNumeric()) { BONUS_NUMBER_ERROR }
+    }
+
+    companion object {
+        const val BONUS_NUMBER_ERROR = "보너스 번호는 숫자로 이루어져 있어야 해요."
     }
 }

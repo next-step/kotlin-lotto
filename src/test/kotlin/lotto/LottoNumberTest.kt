@@ -8,7 +8,7 @@ import io.kotest.property.Arb
 import io.kotest.property.arbitrary.int
 import io.kotest.property.checkAll
 import lotto.domain.LottoNumber
-import lotto.util.ExceptionMessage
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_ERROR
 
 internal class LottoNumberTest : StringSpec({
     "1번부터 45번 사이의 숫자는 정상적으로 로또 번호가 생성된다." {
@@ -24,7 +24,7 @@ internal class LottoNumberTest : StringSpec({
             val exception = shouldThrow<IllegalArgumentException> {
                 LottoNumber(number)
             }
-            exception.message shouldBe ExceptionMessage.LOTTO_NUMBER_ERROR
+            exception.message shouldBe LOTTO_NUMBER_ERROR
         }
     }
 })

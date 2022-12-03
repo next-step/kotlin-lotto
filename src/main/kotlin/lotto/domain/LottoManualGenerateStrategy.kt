@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.util.ExceptionMessage
 import lotto.util.Parser
 import lotto.util.Reader
 
@@ -13,6 +12,10 @@ class LottoManualGenerateStrategy : LottoGenerateStrategy {
     }
 
     private fun validateLottoNumbers(lottoNumbers: List<Int>) {
-        require(lottoNumbers.toSet().size == 6) { ExceptionMessage.LOTTO_NUMBER_SIZE_ERROR }
+        require(lottoNumbers.toSet().size == 6) { LOTTO_NUMBER_SIZE_ERROR }
+    }
+
+    companion object {
+        const val LOTTO_NUMBER_SIZE_ERROR = "로또 번호는 6개의 숫자로 이루어져 있어요. (중복 불가)"
     }
 }

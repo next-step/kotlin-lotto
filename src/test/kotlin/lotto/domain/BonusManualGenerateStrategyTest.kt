@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
-import lotto.util.ExceptionMessage
+import lotto.domain.BonusManualGenerateStrategy.Companion.BONUS_NUMBER_ERROR
 import lotto.util.Reader
 import java.lang.IllegalArgumentException
 
@@ -18,7 +18,7 @@ internal class BonusManualGenerateStrategyTest : BehaviorSpec({
                 val exception = shouldThrow<IllegalArgumentException> {
                     BonusManualGenerateStrategy().generate()
                 }
-                exception.message shouldBe ExceptionMessage.BONUS_NUMBER_ERROR
+                exception.message shouldBe BONUS_NUMBER_ERROR
             }
         }
 

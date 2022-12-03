@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
-import lotto.util.ExceptionMessage
+import lotto.domain.WinnerLottoTicket.Companion.BONUS_NUMBER_NOT_DUPLICATE_ERROR
 import lotto.util.Reader
 import java.lang.IllegalArgumentException
 
@@ -29,7 +29,7 @@ internal class WinnerLottoTicketTest : BehaviorSpec({
                         winnerLottoNumbers = LottoTicket(lottoNumbers)
                     )
                 }
-                exception.message shouldBe ExceptionMessage.BONUS_NUMBER_NOT_DUPLICATE_ERROR
+                exception.message shouldBe BONUS_NUMBER_NOT_DUPLICATE_ERROR
             }
         }
 

@@ -6,7 +6,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
-import lotto.util.ExceptionMessage
+import lotto.domain.LottoManualGenerateStrategy.Companion.LOTTO_NUMBER_SIZE_ERROR
 import lotto.util.Reader
 import java.lang.IllegalArgumentException
 
@@ -19,7 +19,7 @@ internal class LottoManualGenerateStrategyTest : BehaviorSpec({
                 val exception = shouldThrow<IllegalArgumentException> {
                     LottoManualGenerateStrategy().generate()
                 }
-                exception.message shouldBe ExceptionMessage.LOTTO_NUMBER_SIZE_ERROR
+                exception.message shouldBe LOTTO_NUMBER_SIZE_ERROR
             }
         }
 
@@ -29,7 +29,7 @@ internal class LottoManualGenerateStrategyTest : BehaviorSpec({
                 val exception = shouldThrow<IllegalArgumentException> {
                     LottoManualGenerateStrategy().generate()
                 }
-                exception.message shouldBe ExceptionMessage.LOTTO_NUMBER_SIZE_ERROR
+                exception.message shouldBe LOTTO_NUMBER_SIZE_ERROR
             }
 
             every { Reader.read() } returns "1, 2, 3, 4, 5"
@@ -37,7 +37,7 @@ internal class LottoManualGenerateStrategyTest : BehaviorSpec({
                 val exception = shouldThrow<IllegalArgumentException> {
                     LottoManualGenerateStrategy().generate()
                 }
-                exception.message shouldBe ExceptionMessage.LOTTO_NUMBER_SIZE_ERROR
+                exception.message shouldBe LOTTO_NUMBER_SIZE_ERROR
             }
         }
 
