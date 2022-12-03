@@ -3,6 +3,7 @@ package lotto.domain
 import lotto.util.ErrorCode
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -31,10 +32,9 @@ internal class LottoGeneratorTest {
 
     @Test
     fun generateLotto() {
-        val lottoNumberCount = 6
         val lottoNumber = "1,2,3,4,5,6"
 
-        val lottoNumbers = (1..lottoNumberCount).map {
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6).map {
             LottoNumber(it)
         }.toMutableSet()
 
@@ -42,18 +42,24 @@ internal class LottoGeneratorTest {
 
         val resultLotto = LottoCustomGenerator.generateLotto(lottoNumber)
 
-        assertThat(lotto).isEqualTo(resultLotto)
-        assertThat(resultLotto.numbers.count()).isEqualTo(6)
+        assertAll(
+            "generateLotto",
+            { assertThat(resultLotto).isEqualTo(lotto) },
+            { assertThat(resultLotto.numbers.count()).isEqualTo(6) }
+        )
     }
 
     @Test
     fun `generateLottoFromNumbers로 로또를 생성하면, possibleNumbers 리스트로 된 로또가 생성된다`() {
         val lottoCount = 6
-        val possibleNumbers = (1..lottoCount).map { LottoNumber(it) }
+        val possibleNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
         val lottoGenerator: LottoGenerator = LottoManualGenerator()
-        val resultLotto = lottoGenerator.generateLottoFromNumbers(possibleNumbers)
+        val resultLotto = lottoGenerator.generateLottoFromNumbers()
 
-        assertThat(resultLotto.numbers.count()).isEqualTo(lottoCount)
-        assertThat(resultLotto.numbers.toList()).isEqualTo(possibleNumbers)
+        assertAll(
+            " resultLotto numbers",
+            { assertThat(resultLotto.numbers.count()).isEqualTo(lottoCount) },
+            { assertThat(resultLotto.numbers.toList()).isEqualTo(possibleNumbers) }
+        )
     }
 }

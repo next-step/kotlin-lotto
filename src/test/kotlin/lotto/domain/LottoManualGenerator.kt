@@ -1,9 +1,9 @@
 package lotto.domain
 
 class LottoManualGenerator : LottoGenerator {
-    override fun generateLottoFromNumbers(possibleNumbers: List<LottoNumber>): Lotto {
+    override fun generateLottoFromNumbers(): Lotto {
         val numberList =
-            possibleNumbers
+            LottoNumber.possibleNumbers
                 .subList(0, Lotto.LOTTO_NUMBER_COUNT)
                 .toMutableSet()
 
@@ -20,5 +20,4 @@ class LottoManualGenerator : LottoGenerator {
                 }.map { LottoNumber(it) }
         return Lotto(lottoNumberSet.toMutableSet())
     }
-
 }
