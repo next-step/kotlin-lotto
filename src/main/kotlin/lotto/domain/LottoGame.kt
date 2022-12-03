@@ -26,11 +26,9 @@ object LottoGame {
     fun calculateNumberOfAutoGames(numberOfTotal: Int, numberOfManual: Int) =
         numberOfTotal - numberOfManual
 
-    fun setGameBoard(numberOfManual: List<Lotto>, numberOfAuto: Int): List<Lotto> {
+    fun setGameBoard(manualLotto: List<Lotto>, autoLotto: List<Lotto>): List<Lotto> {
         val gameBoard = mutableListOf<Lotto>()
-        gameBoard.addAll(numberOfManual)
-
-        val autoLotto = pick(numberOfAuto, AutoLotto)
+        gameBoard.addAll(manualLotto)
         gameBoard.addAll(autoLotto)
         return gameBoard
     }
