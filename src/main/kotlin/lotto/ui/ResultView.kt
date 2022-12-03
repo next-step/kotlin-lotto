@@ -1,24 +1,28 @@
 package lotto.ui
 
-import lotto.domain.*
+import lotto.domain.LottoNumberValidator
+import lotto.domain.LottoStatics
+import lotto.domain.WinningChecker
 import lotto.domain.model.Lotto
 import lotto.domain.model.Rank
+import lotto.domain.model.WinningNumbers
 
 class ResultView {
 
+    private lateinit var winningNumbers: WinningNumbers
     private lateinit var ranks: List<Rank>
     private var bonusNumber: Int = 0
-    private var winningNumbers: String = ""
 
     fun inputWinningNumbers() {
         println("")
         println("지난 주 당첨 번호를 입력해 주세요.")
-        winningNumbers = readLine() ?: ""
-        val isLottoNumbers = LottoNumberValidator.validate(winningNumbers)
-        return if (isLottoNumbers) {
+        val input = readLine() ?: ""
+
+        try {
+            winningNumbers = WinningNumbers(winningNumberString = input)
             inputBonusNumber()
-        } else {
-            inputWinningNumbers()
+        } catch (e: Exception) {
+            return inputWinningNumbers()
         }
     }
 

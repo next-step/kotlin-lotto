@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.domain.model.Lotto
 import lotto.domain.model.Rank
+import lotto.domain.model.WinningNumbers
 
 object LottoMatcher {
 
@@ -10,9 +11,9 @@ object LottoMatcher {
         return Rank.safeValueOf(matchCount = matchCount, matchBonus = matchBonus)
     }
 
-    fun countMatchNumber(winningNumbers: List<Int>, lottoNumbers: List<Int>): Int {
-        return winningNumbers.sumOf {
-            checkContainWinningNumber(winningNumber = it, lottoNumbers = lottoNumbers)
+    fun countMatchNumber(winningNumbers: WinningNumbers, lottoNumbers: List<Int>): Int {
+        return winningNumbers.numbers.sumOf { winningNumber ->
+            checkContainWinningNumber(winningNumber, lottoNumbers)
         }
     }
 

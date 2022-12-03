@@ -12,7 +12,7 @@ object LottoNumberValidator {
         val numbers: List<Int> = makeNumbers(lottoNumberString)
 
         if (numbers.isEmpty()) return false
-        if (numbers.size < LOTTO_NUMBER_COUNT) return false
+        if (numbers.size != LOTTO_NUMBER_COUNT) return false
 
         return true
     }
