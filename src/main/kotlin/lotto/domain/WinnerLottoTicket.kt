@@ -6,16 +6,16 @@ class WinnerLottoTicket(
     lottoGenerateStrategy: LottoGenerateStrategy,
     bonusGenerateStrategy: BonusGenerateStrategy,
 ) {
-    private val winnerLottoNumbers: Set<LottoNumber> = lottoGenerateStrategy.generate()
+    private val winnerLottoNumbers: LottoTicket = LottoTicket(lottoGenerateStrategy)
     private val winnerBonusNumber: LottoNumber = bonusGenerateStrategy.generate()
 
     init {
         require(winnerBonusNumber !in winnerLottoNumbers) { ExceptionMessage.BONUS_NUMBER_NOT_DUPLICATE_ERROR }
     }
 
-    fun countMatchNumber(lottoNumber: Set<LottoNumber>): CountMatchResult {
-        val count = lottoNumber.intersect(winnerLottoNumbers).size
-        val isBonusNumberMatched = winnerBonusNumber in lottoNumber
+    fun countMatchNumber(lottoTicket: LottoTicket): CountMatchResult {
+        val count = lottoTicket.intersect(winnerLottoNumbers).size
+        val isBonusNumberMatched = winnerBonusNumber in lottoTicket
         return CountMatchResult(count, isBonusNumberMatched)
     }
 }

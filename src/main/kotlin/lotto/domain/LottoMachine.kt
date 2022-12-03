@@ -8,7 +8,7 @@ class LottoMachine(
     fun execute(): LottoSummary {
         val winnerLottoTicket = WinnerLottoTicket(LottoManualGenerateStrategy(), BonusManualGenerateStrategy())
         val lottoInfos = lottoTickets.tickets.map { ticket ->
-            val countMatchResult = winnerLottoTicket.countMatchNumber(ticket.lottoNumbers)
+            val countMatchResult = winnerLottoTicket.countMatchNumber(ticket)
             LottoInfo.of(countMatchResult.count, countMatchResult.isBonusNumberMatched)
         }
         return LottoSummary(lottoInfos)
