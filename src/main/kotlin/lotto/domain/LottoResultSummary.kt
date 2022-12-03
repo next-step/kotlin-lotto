@@ -3,8 +3,8 @@ package lotto.domain
 class LottoResultSummary(
     matchResults: List<MatchResult>,
 ) {
-    val winners = MatchResult.winner().map { lottoInfo ->
-        LottoResult(lottoInfo, countWinner(matchResults, lottoInfo))
+    val winners = MatchResult.winner().map { winnerMatchResults ->
+        LottoResult(winnerMatchResults, countWinner(matchResults, winnerMatchResults))
     }
     val rateOfReturn: Double = matchResults.map { it.amount }.average() / TICKET_AMOUNT
 
