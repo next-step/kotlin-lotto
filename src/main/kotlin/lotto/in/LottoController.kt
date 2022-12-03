@@ -10,5 +10,6 @@ class LottoController(private val input: ConsoleInput, private val outPut: Conso
 
         outPut.printPurchasedLottoCount(lottoNumbers.size)
         lottoNumbers.forEach { outPut.printLottoNumbers(it.numbers()) }
+        val winnerNumbers = input.getWinnerNumbers()
     }
 }
