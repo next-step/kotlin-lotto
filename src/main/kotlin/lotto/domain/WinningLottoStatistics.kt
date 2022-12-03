@@ -1,42 +1,21 @@
 package lotto.domain
 
-import lotto.util.ErrorCode
-
 class WinningLottoStatistics(
-    private val previousWinningLotto: Lotto,
-    private val bonusLottoNumber: LottoNumber
+    private val winningLotto: WinningLotto
 ) {
-    init {
-        require(!previousWinningLotto.containLottoNumber(bonusLottoNumber)) {
-            ErrorCode.BONUS_LOTTO_NUMBER_EXCEPTION.errorMessage
-        }
-    }
 
-    fun getWinningStatistics(lottoList: LottoList): List<LottoMatch> =
-        lottoList.compare(previousWinningLotto, bonusLottoNumber)
+    fun getWinningStatistics(lottoList: LottoList): LottoMatchList {
+        val lottoMatchList = lottoList.compare(winningLotto)
             .groupBy { it }
-            .let { map ->
-                val missingMap = getMissingMap(map.keys)
-                map.plus(missingMap).minus(LottoRank.MISS)
-            }
             .map { lottoMap ->
                 LottoMatch(lottoMap.key, lottoMap.value.count().toLong())
-            }.sortedBy { it.lottoRank }
-
-    private fun getMissingMap(lottoRanks: Set<LottoRank>): Map<LottoRank, List<LottoRank>> {
-        val missingMap = mutableMapOf<LottoRank, List<LottoRank>>()
-        val missing = LottoRank.getMissing(lottoRanks)
-        missing.map { lottoRank ->
-            missingMap[lottoRank] = listOf()
-        }
-        return missingMap
+            }
+        return LottoMatchList(lottoMatchList.toMutableList())
     }
 
-    fun getProfit(totalPrice: Long, lottMatchList: List<LottoMatch>): Double {
+    fun getProfit(totalPrice: Long, lottMatchList: LottoMatchList): Double {
         // 총 이득
-        val totalReward = lottMatchList.sumOf { lottoMatch ->
-            lottoMatch.getProfit()
-        }
+        val totalReward = lottMatchList.sumLottoMatchProfit()
 
         val profit = totalReward / totalPrice.toDouble()
 

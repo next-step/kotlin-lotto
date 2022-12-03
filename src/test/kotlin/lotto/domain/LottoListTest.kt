@@ -2,43 +2,29 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 internal class LottoListTest {
 
     private val lottoGenerator: LottoGenerator = LottoManualGenerator()
 
     @Test
-    fun `로또 리스트와 당첨 로또를 비교하여 등수 반환(당첨된 경우)`() {
-        val lottoNumbers = "1,2,3,4,5,6"
-        val winningLotto = LottoCustomGenerator.generateLotto(lottoNumbers)
-        val lottoNumber = 7
-        val bonusLottoNumber = LottoNumber(lottoNumber)
+    fun `로또 리스트와 당첨 리스트를 비교하여 LottoLank리스트를 리턴한다`() {
+        val previousWinningLotto =
+            listOf(1, 2, 3, 4, 5, 6)
+                .map { LottoNumber(it) }.toMutableSet()
+                .let { Lotto(it) }
 
-        val lottoCount = 4L
-        val lottoList = LottoListGenerator.generateLottoList(lottoCount, lottoGenerator)
+        val bonusLottoNumber = LottoNumber(7)
+        val winningLotto = WinningLotto(previousWinningLotto, bonusLottoNumber)
 
-        val lottoRankList = lottoList.compare(winningLotto, bonusLottoNumber)
+        val lotto1 = Lotto(listOf(1, 2, 3, 7, 8, 29).map { LottoNumber(it) }.toMutableSet())
+        val lotto2 = Lotto(listOf(1, 2, 3, 15, 21, 28).map { LottoNumber(it) }.toMutableSet())
+        val lottoList = LottoList(listOf(lotto1, lotto2))
 
-        assertThat(lottoRankList.count().toLong()).isEqualTo(lottoCount)
-        lottoRankList.forEach { lottoRank ->
-            assertThat(lottoRank).isEqualTo(LottoRank.FIRST_PLACE)
-        }
-    }
-
-    @Test
-    fun `로또 리스트와 당첨 로또를 비교하여 등수 반환(당첨되지 못한 경우)`() {
-        val lottoNumbers = "4,5,9,10,11,12"
-        val winningLotto = LottoCustomGenerator.generateLotto(lottoNumbers)
-        val lottoNumber = 6
-        val bonusLottoNumber = LottoNumber(lottoNumber)
-
-        val lottoCount = 4L
-        val lottoList = LottoListGenerator.generateLottoList(lottoCount, lottoGenerator)
-
-        val lottoRankList = lottoList.compare(winningLotto, bonusLottoNumber)
-
-        lottoRankList.forEach { lottoRank ->
-            assertThat(lottoRank).isEqualTo(LottoRank.MISS)
+        val resultLottoRankList = lottoList.compare(winningLotto)
+        resultLottoRankList.forEach { lottoRank ->
+            assertThat(lottoRank).isEqualTo(LottoRank.FIFTH_PLACE)
         }
     }
 
@@ -64,7 +50,10 @@ internal class LottoListTest {
 
         val resultLottoList = LottoList(lottoList1).addLottoList(LottoList(lottoList2))
 
-        assertThat(resultLottoList.count()).isEqualTo(addLottoList.count())
-        assertThat(resultLottoList).isEqualTo(addLottoList)
+        assertAll(
+            "lottoList",
+            { assertThat(resultLottoList.count()).isEqualTo(addLottoList.count()) },
+            { assertThat(resultLottoList).isEqualTo(addLottoList) }
+        )
     }
 }

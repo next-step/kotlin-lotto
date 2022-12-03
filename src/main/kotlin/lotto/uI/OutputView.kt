@@ -1,7 +1,7 @@
 package lotto.uI
 
 import lotto.domain.LottoList
-import lotto.domain.LottoMatch
+import lotto.domain.LottoMatchList
 import lotto.domain.LottoRank
 
 object OutputView {
@@ -12,11 +12,13 @@ object OutputView {
         lottoList.printLottoList()
     }
 
-    fun outputLottoStatistics(lottMatchList: List<LottoMatch>) {
+    fun outputLottoStatistics(lottMatchList: LottoMatchList) {
         println(MessageCode.RESULT_STATISTICS.message)
-        lottMatchList.forEach { lottoMatch ->
-            println("${lottoMatch.lottoRank.matchCount}개 일치${outputBonus(lottoMatch.lottoRank)}(${lottoMatch.lottoRank.reward}원)- ${lottoMatch.matchTotalCount}개")
-        }
+        lottMatchList.lottoMatchList
+            .filterNot { it.lottoRank == LottoRank.MISS }
+            .forEach { lottoMatch ->
+                println("${lottoMatch.lottoRank.matchCount}개 일치${outputBonus(lottoMatch.lottoRank)}(${lottoMatch.lottoRank.reward}원)- ${lottoMatch.matchTotalCount}개")
+            }
     }
 
     fun outputLottoProfit(profit: Double, isShow: Boolean) {

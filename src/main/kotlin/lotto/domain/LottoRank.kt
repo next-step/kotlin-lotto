@@ -19,9 +19,13 @@ enum class LottoRank(
                 checkLottoRank(it, matchCount, isBonus)
             } ?: MISS
 
-        fun getMissing(lottoRankList: Set<LottoRank>): Set<LottoRank> =
-            values().toMutableSet()
+        fun getMissing(lottoRankList: Set<LottoRank>): List<LottoRank> =
+            getWinning().toMutableSet()
                 .minus(lottoRankList)
+                .toList()
+
+        fun getWinning(): List<LottoRank> =
+            values().filterNot { it == MISS }
 
         private fun checkLottoRank(lottoRank: LottoRank, matchCount: Int, isBonus: Boolean): Boolean =
             if (matchCount == CHECK_MATCH_COUNT && isBonus) {

@@ -57,7 +57,7 @@ internal class LottoRankTest {
         val lottoRankList = setOf(LottoRank.THIRD_PLACE, LottoRank.SECOND_PLACE)
         val missingResult = LottoRank.getMissing(lottoRankList)
 
-        val result = setOf(LottoRank.MISS, LottoRank.FOURTH_PLACE, LottoRank.FIRST_PLACE, LottoRank.FIFTH_PLACE)
+        val result = listOf(LottoRank.FIFTH_PLACE, LottoRank.FOURTH_PLACE, LottoRank.FIRST_PLACE)
         assertThat(missingResult).isEqualTo(result)
     }
 }
