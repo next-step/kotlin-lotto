@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class LottoInfo(
+enum class MatchResult(
     val matchCount: Int,
     val isBonusBallMatched: Boolean,
     val amount: Int,
@@ -25,14 +25,14 @@ enum class LottoInfo(
         private const val WINNER_MINIMUM_THRESH_HOLD = 3
         private const val SECOND_RANK_MATCH_COUNT = 5
 
-        fun of(matchCount: Int, isBonusBallMatched: Boolean): LottoInfo {
+        fun of(matchCount: Int, isBonusBallMatched: Boolean): MatchResult {
             if (matchCount == SECOND_RANK_MATCH_COUNT && isBonusBallMatched) {
                 return FIVE_MATCH_WITH_BONUS_BALL
             }
             return values().first { it.matchCount == matchCount }
         }
 
-        fun winner(): List<LottoInfo> {
+        fun winner(): List<MatchResult> {
             return values().filter { it.matchCount >= WINNER_MINIMUM_THRESH_HOLD }
         }
     }

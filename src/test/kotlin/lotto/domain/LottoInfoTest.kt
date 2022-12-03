@@ -8,18 +8,18 @@ internal class LottoInfoTest : BehaviorSpec({
         When("보너스 볼이 맞다면 ") {
             val matchNumber = 5
             val isBonusNumberMatched = true
-            val lottoInfo = LottoInfo.of(matchNumber, isBonusNumberMatched)
+            val matchResult = MatchResult.of(matchNumber, isBonusNumberMatched)
             Then("2등이다.") {
-                lottoInfo shouldBe LottoInfo.FIVE_MATCH_WITH_BONUS_BALL
+                matchResult shouldBe MatchResult.FIVE_MATCH_WITH_BONUS_BALL
             }
         }
 
         When("보너스 볼이 맞지 않다면 ") {
             val matchNumber = 5
             val isBonusNumberMatched = false
-            val lottoInfo = LottoInfo.of(matchNumber, isBonusNumberMatched)
+            val matchResult = MatchResult.of(matchNumber, isBonusNumberMatched)
             Then("3등이다.") {
-                lottoInfo shouldBe LottoInfo.FIVE_MATCH
+                matchResult shouldBe MatchResult.FIVE_MATCH
             }
         }
     }

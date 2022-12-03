@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.domain.LottoSummary
+import lotto.domain.LottoResultSummary
 import lotto.domain.LottoTickets
 
 object OutputView {
@@ -18,14 +18,14 @@ object OutputView {
         println(INPUT_MESSAGE)
     }
 
-    fun printSummary(lottoSummary: LottoSummary) {
+    fun printSummary(lottoResultSummary: LottoResultSummary) {
         println("당첨 통계")
         println("---------")
-        lottoSummary.winners.forEach { winner ->
-            print("${winner.lottoInfo.matchCount}개 일치 ")
-            if (winner.lottoInfo.isBonusBallMatched) print(", 보너스 볼 일치")
-            println("(${winner.lottoInfo.amount}원)- ${winner.count}개")
+        lottoResultSummary.winners.forEach { winner ->
+            print("${winner.matchResult.matchCount}개 일치 ")
+            if (winner.matchResult.isBonusBallMatched) print(", 보너스 볼 일치")
+            println("(${winner.matchResult.amount}원)- ${winner.count}개")
         }
-        println("총 수익률은 ${lottoSummary.rateOfReturn}입니다.")
+        println("총 수익률은 ${lottoResultSummary.rateOfReturn}입니다.")
     }
 }

@@ -10,13 +10,13 @@ class LottoMachine(
         List(money / TICKET_AMOUNT) { lottoGenerateStrategy.generate() }
     )
 
-    fun execute(): LottoSummary {
+    fun execute(): LottoResultSummary {
         val winnerLottoTicket = getWinnerTicket()
-        val lottoInfos = lottoTickets.map { ticket ->
+        val matchResults = lottoTickets.map { ticket ->
             val countMatchResult = winnerLottoTicket.countMatchNumber(ticket)
-            LottoInfo.of(countMatchResult.count, countMatchResult.isBonusNumberMatched)
+            MatchResult.of(countMatchResult.count, countMatchResult.isBonusNumberMatched)
         }
-        return LottoSummary(lottoInfos)
+        return LottoResultSummary(matchResults)
     }
 
     private fun getWinnerTicket(): WinnerLottoTicket {
