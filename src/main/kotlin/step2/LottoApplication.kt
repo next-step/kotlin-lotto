@@ -8,7 +8,7 @@ fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
     val lottoPurchaseCount = InputView.getPurchaseCount(purchaseAmount)
 
-    val lottoList = (1..lottoPurchaseCount).map {
+    val lottoList = List(lottoPurchaseCount) {
         Lotto(RandomGenerateStrategy().of())
     }
 
