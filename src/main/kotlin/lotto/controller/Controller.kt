@@ -24,6 +24,7 @@ object Controller {
         ResultView.printLottoNumbersList(lottoNumbersList.getList())
 
         val winningNumbers = inputWinningNumber()
+        val bonusNumber = inputBonusNumber()
         val lottoResult = makeLottoResult(winningNumbers, lottoNumbersList)
         ResultView.printLottoResultTitle()
         lottoResult.value.forEach {
@@ -77,6 +78,15 @@ object Controller {
         } catch (e: Exception) {
             InputView.printError(e.message!!)
             inputWinningNumber()
+        }
+    }
+
+    private fun inputBonusNumber(): LottoNumber {
+        return try {
+            LottoNumber(InputView.inputBonusNumber())
+        } catch (e: Exception) {
+            InputView.printError(e.message!!)
+            inputBonusNumber()
         }
     }
 }
