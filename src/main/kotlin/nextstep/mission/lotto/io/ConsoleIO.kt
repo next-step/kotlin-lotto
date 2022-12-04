@@ -1,6 +1,5 @@
 package nextstep.mission.lotto.io
 
-import nextstep.mission.lotto.Lotto
 import nextstep.mission.lotto.dto.LottoDto
 import nextstep.mission.lotto.vo.LottoNumber
 import nextstep.mission.lotto.vo.LottoNumbers
@@ -22,13 +21,12 @@ object ConsoleInput {
         return readln().toInt()
     }
 
-    fun inputManualLotto(count: Int): Lotto {
+    fun inputManualLotto(count: Int): List<List<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
         return (1..count).map {
             readln().split(",")
-                .map { LottoNumber(it.toInt()) }
-                .let { LottoNumbers(it) }
-        }.let { Lotto(it) }
+                .map { it.toInt() }
+        }
     }
 
     fun inputWinningNumbers(): LottoNumbers {
