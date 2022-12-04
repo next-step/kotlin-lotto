@@ -14,11 +14,14 @@ object InputView {
         return tickets
     }
 
-    fun getWinningNumber(): List<Int> {
+    fun getWinningNumber(): Set<Int> {
+        println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumber = readlnOrNull()
         require(!winningNumber.isNullOrEmpty()) { "당첨 번호를 입력해주세요." }
-        println("지난 주 당첨 번호를 입력해 주세요.")
 
-        return  winningNumber.split(", ").toList().map { it.toInt() }
+        val numbers = winningNumber.split(", ").map { it.toInt() }.toSet()
+        require(numbers.size == 6) {" 중복없는 6개의 숫자를 입력해주세요."}
+
+        return numbers
     }
 }
