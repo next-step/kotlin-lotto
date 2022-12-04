@@ -11,7 +11,7 @@ internal class LottoVendingMachineTest : BehaviorSpec({
             purchasedCount.forAll {
 
                 then("그만큼의 로또가 발급된다.") {
-                    val result = LottoVendingMachine.buy(it).size
+                    val result = LottoVendingMachine.buyRandomLottos(it).size
                     result shouldBe it
                 }
             }
