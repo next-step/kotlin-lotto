@@ -8,7 +8,6 @@ class Expression(private val list: List<String>) {
     }
 
     private fun verifyStringToLong(input: String): Long {
-
         val toLong = try {
             input.toLong()
         } catch (e : NumberFormatException) {
@@ -20,12 +19,11 @@ class Expression(private val list: List<String>) {
     }
 
     companion object {
-        private const val PRIMARY_REGEX = ",|:"
-        private const val CUSTOM_REGEX = "//(.)\\n(.*)"
+        private const val PRIMARY_DELIMITER = ",|:"
+        private val CUSTOM_REGEX = "//(.)\\n(.*)".toRegex()
         const val NEGATIVE_STANDARD = 0
 
         fun of(mathematical: String): Expression {
-            println("mathematical: ${mathematical}")
             if(mathematical.isNullOrBlank()) return Expression(listOf())
             val separator = findSeparator(mathematical)
             val text = findMathematical(mathematical)
@@ -33,15 +31,15 @@ class Expression(private val list: List<String>) {
         }
 
         private fun findSeparator(mathematical: String): String {
-            val pattern = Regex(CUSTOM_REGEX).find(mathematical)
+            val pattern = CUSTOM_REGEX.find(mathematical)
             return pattern?.let{
                 it.groupValues[1]
-            } ?: PRIMARY_REGEX
+            } ?: PRIMARY_DELIMITER
         }
 
         private fun findMathematical(mathematical: String): String {
-            if(!mathematical.contains(PRIMARY_REGEX.toRegex())) {
-                val pattern = CUSTOM_REGEX.toRegex().find(mathematical)
+            if(!mathematical.contains(PRIMARY_DELIMITER.toRegex())) {
+                val pattern = CUSTOM_REGEX.find(mathematical)
                 val text = pattern?.let {
                     it.groupValues[2]
                 }

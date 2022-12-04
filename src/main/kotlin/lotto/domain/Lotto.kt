@@ -1,8 +1,26 @@
 package lotto.domain
 
-import lotto.domain.generator.Generator
+class Lotto(list: List<Int>): Iterable<LottoNum> {
 
-class Lotto(generator: Generator) {
+    private val numbers: List<LottoNum>
+    init {
+        verifyLottoNumCount(list)
+        numbers = list.map {
+            LottoNum(it)
+        }.sorted()
+    }
 
-    val lottoNums = LottoNums(generator)
+    private fun verifyLottoNumCount(numbers: List<Int>) {
+        require(numbers.size <= 6) {"로또 번호 갯수는 $LOTTO_NUM_COUNT 이하여야 합니다."}
+    }
+
+    override fun iterator(): Iterator<LottoNum> = numbers.iterator()
+
+    override fun toString(): String {
+        return numbers.toString()
+    }
+
+    companion object {
+        private const val LOTTO_NUM_COUNT = 6
+    }
 }

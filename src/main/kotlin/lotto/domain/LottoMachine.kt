@@ -10,12 +10,23 @@ class LottoMachine(private val generator: Generator) {
         val count = amount / LOTTO_PRICE
 
         return IntStream.rangeClosed(1, count)
-            .mapToObj { Lotto(generator) }
+            .mapToObj { createLotto() }
             .toList()
+    }
+
+    private fun createLotto(): Lotto {
+        val numbers = mutableSetOf<Int>()
+
+        while(numbers.size < LOTTO_NUM_COUNT) {
+            numbers.add(generator.generate())
+        }
+
+        return Lotto(numbers.toList())
     }
 
     companion object {
         private const val LOTTO_PRICE = 1_000
+        private const val LOTTO_NUM_COUNT = 6
     }
 
 }
