@@ -1,6 +1,6 @@
 package calculator
 
-class StringPlusCalculator {
+class StringSumCalculator {
     fun calculate(input: String?): Int {
         val expression = Expression.from(expression = input)
         val operandGroup = OperandTokenizer.tokenize(expression = expression)

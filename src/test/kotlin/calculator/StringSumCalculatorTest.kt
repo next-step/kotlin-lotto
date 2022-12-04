@@ -5,12 +5,12 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 
-class StringPlusCalculatorTest : FunSpec({
+class StringSumCalculatorTest : FunSpec({
     context("문자열 덧셈 계산") {
         context("올바른 문자열을 전달하면") {
             test("문자열의 합을 구할 수 있다.") {
                 // given
-                val sut = StringPlusCalculator()
+                val sut = StringSumCalculator()
                 // when & then
                 listOf(
                     Pair("1,2", 3), Pair("1:2", 3), Pair("1,2:3", 6),
@@ -24,7 +24,7 @@ class StringPlusCalculatorTest : FunSpec({
             context("커스텀 구분자를 포함하면") {
                 test("커스텀 구분자를 기준으로 합을 구할 수 있다.") {
                     // given
-                    val sut = StringPlusCalculator()
+                    val sut = StringSumCalculator()
                     listOf(
                         Pair("//;\n1;2", 3), Pair("//.\n1.2", 3), Pair("//!\n1!2!3", 6),
                         Pair("//@\n1@5@9", 15), Pair("//h\n1h3h7", 11), Pair("//,\n1,5,7,8", 21)
@@ -40,7 +40,7 @@ class StringPlusCalculatorTest : FunSpec({
             test("예외가 발생한다.") {
                 // given
                 val expression = ""
-                val sut = StringPlusCalculator()
+                val sut = StringSumCalculator()
                 // when
                 val exception = assertThrows<IllegalArgumentException> { sut.calculate(input = expression) }
                 // then
@@ -51,7 +51,7 @@ class StringPlusCalculatorTest : FunSpec({
         context("null 을 전달하면") {
             test("예외가 발생한다.") {
                 // given & when
-                val sut = StringPlusCalculator()
+                val sut = StringSumCalculator()
                 val exception = assertThrows<IllegalArgumentException> { sut.calculate(null) }
                 // then
                 exception.message shouldBe "빈 문자열 또는 null 을 입력할 수 없습니다."
@@ -62,7 +62,7 @@ class StringPlusCalculatorTest : FunSpec({
             test("예외가 발생한다.") {
                 // given
                 val expression = "-3"
-                val sut = StringPlusCalculator()
+                val sut = StringSumCalculator()
                 // when
                 val exception = assertThrows<IllegalArgumentException> { sut.calculate(input = expression) }
                 // then
@@ -74,7 +74,7 @@ class StringPlusCalculatorTest : FunSpec({
             test("예외가 발생한다.") {
                 // given
                 val expression = "동구쓰"
-                val sut = StringPlusCalculator()
+                val sut = StringSumCalculator()
                 // when
                 val exception = assertThrows<IllegalArgumentException> { sut.calculate(input = expression) }
                 // then
