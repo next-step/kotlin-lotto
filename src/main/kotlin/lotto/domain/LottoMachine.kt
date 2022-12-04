@@ -1,5 +1,8 @@
 package lotto.domain
 
+import lotto.domain.strategy.bonus.BonusGenerateStrategy
+import lotto.domain.strategy.lotto.LottoGenerateStrategy
+
 class LottoMachine(
     money: Int,
     lottoGenerateStrategy: LottoGenerateStrategy,

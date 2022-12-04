@@ -6,7 +6,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
-import lotto.domain.LottoManualGenerateStrategy.Companion.LOTTO_NUMBER_SIZE_ERROR
+import lotto.domain.strategy.lotto.LottoManualGenerateStrategy
+import lotto.domain.strategy.lotto.LottoManualGenerateStrategy.Companion.LOTTO_NUMBER_SIZE_ERROR
 import lotto.util.Reader
 import java.lang.IllegalArgumentException
 

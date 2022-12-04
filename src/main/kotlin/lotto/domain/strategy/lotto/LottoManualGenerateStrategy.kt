@@ -1,5 +1,7 @@
-package lotto.domain
+package lotto.domain.strategy.lotto
 
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 import lotto.util.Parser
 import lotto.util.Reader
 

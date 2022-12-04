@@ -1,5 +1,6 @@
-package lotto.domain
+package lotto.domain.strategy.bonus
 
+import lotto.domain.LottoNumber
 import lotto.extension.isPositiveNumeric
 import lotto.util.Reader
 

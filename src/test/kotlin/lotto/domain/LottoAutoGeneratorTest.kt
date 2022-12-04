@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.strategy.lotto.LottoAutoGenerateStrategy
 
 internal class LottoAutoGeneratorTest : BehaviorSpec({
     Given("자동으로 생성하는 Generator로 ") {

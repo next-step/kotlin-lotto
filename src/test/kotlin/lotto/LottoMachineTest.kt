@@ -4,10 +4,10 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockkObject
-import lotto.domain.BonusManualGenerateStrategy
-import lotto.domain.LottoAutoGenerateStrategy
+import lotto.domain.strategy.bonus.BonusManualGenerateStrategy
+import lotto.domain.strategy.lotto.LottoAutoGenerateStrategy
 import lotto.domain.LottoMachine
-import lotto.domain.LottoManualGenerateStrategy
+import lotto.domain.strategy.lotto.LottoManualGenerateStrategy
 import lotto.util.Reader
 
 internal class LottoMachineTest : BehaviorSpec({

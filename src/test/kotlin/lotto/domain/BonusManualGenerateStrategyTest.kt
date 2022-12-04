@@ -5,7 +5,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
-import lotto.domain.BonusManualGenerateStrategy.Companion.BONUS_NUMBER_ERROR
+import lotto.domain.strategy.bonus.BonusManualGenerateStrategy
+import lotto.domain.strategy.bonus.BonusManualGenerateStrategy.Companion.BONUS_NUMBER_ERROR
 import lotto.util.Reader
 import java.lang.IllegalArgumentException
 
