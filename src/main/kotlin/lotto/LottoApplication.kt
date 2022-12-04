@@ -12,7 +12,7 @@ fun main() {
     printLottoNumbersList(lottoNumbersList)
 
     val lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers()
-    val bonusNumber = InputView.inputBonusNumber()
+    val bonusNumber = BonusNumber(lastWeekWinningNumbers, InputView.inputBonusNumber())
 
     val statistics = Statistics()
     val pickWinningNumber = pickWinningNumber(lottoNumbersList, lastWeekWinningNumbers, statistics, bonusNumber)
@@ -24,7 +24,7 @@ private fun pickWinningNumber(
     lottoNumbersList: MutableList<LottoNumbers>,
     lastWeekWinningNumbers: WinningLottoNumbers,
     statistics: Statistics,
-    bonusNumber: LottoNumber,
+    bonusNumber: BonusNumber,
 ): Statistics {
     for (lottoNumbers in lottoNumbersList) {
         val win = lastWeekWinningNumbers.win(lottoNumbers, bonusNumber)

@@ -8,7 +8,7 @@ internal class WinningLottoNumbersTest {
     fun `2등 당첨`() {
         val inputLottoNumbers = LottoNumbers(makeLottoNumbers(1, 2, 3, 4, 5, 45))
         val winningLottoNumbers = WinningLottoNumbers(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        val bonusNumber = LottoNumber(45)
+        val bonusNumber = BonusNumber(winningLottoNumbers, LottoNumber(45))
 
         val win = winningLottoNumbers.win(inputLottoNumbers, bonusNumber)
 
@@ -19,7 +19,7 @@ internal class WinningLottoNumbersTest {
     fun `3등 당첨`() {
         val inputLottoNumbers = LottoNumbers(makeLottoNumbers(1, 2, 3, 4, 5, 45))
         val winningLottoNumbers = WinningLottoNumbers(makeLottoNumbers(1, 2, 3, 4, 5, 6))
-        val bonusNumber = LottoNumber(7)
+        val bonusNumber = BonusNumber(winningLottoNumbers, LottoNumber(7))
 
         val win = winningLottoNumbers.win(inputLottoNumbers, bonusNumber)
 
