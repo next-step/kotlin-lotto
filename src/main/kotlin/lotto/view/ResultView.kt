@@ -1,13 +1,13 @@
 package lotto.view
 
-import lotto.domain.LottoNumbers
 import lotto.domain.Rank
+import lotto.domain.UserLottos
 import lotto.domain.WinningStatistics
 import java.math.BigDecimal
 
 object ResultView {
-    fun printNumberOfPurchases(amount: Int) {
-        println("$amount 개를 구매했습니다.")
+    fun printPurchaseStatus(byManual: Int, byRandom: Int) {
+        println("\n수동으로 $byManual 장, 자동으로 $byRandom 개를 구매했습니다.")
     }
 
     fun printRewardsStatistics(winningStatistics: WinningStatistics) {
@@ -27,8 +27,8 @@ object ResultView {
         if (rateOfReturn < BigDecimal(1)) println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
     }
 
-    fun printPurchasedLotto(myLotteries: List<LottoNumbers>) {
-        myLotteries.forEach { lotto ->
+    fun printPurchasedLotto(userLottos: UserLottos) {
+        userLottos.lottos.forEach { lotto ->
             val sortedValue = lotto.lottoNumbers.sortedWith(compareBy { it.number })
             println("[${sortedValue.joinToString(", ")}]")
         }
