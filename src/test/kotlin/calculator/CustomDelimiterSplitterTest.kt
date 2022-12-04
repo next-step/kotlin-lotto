@@ -6,12 +6,13 @@ import io.kotest.matchers.shouldBe
 import java.lang.IllegalArgumentException
 
 class CustomDelimiterSplitterTest : FunSpec({
+    val sut = CustomDelimiterSplitter
+
     context("문자열 분리") {
         context("커스텀 구분자를 포함한 문자열을 전달하면") {
             test("커스텀 구분자를 기준으로 문자열을 분리할 수 있다.") {
                 // given
                 val expression = Expression.from("//;\n1;2;3")
-                val sut = CustomDelimiterSplitter()
                 // when
                 val actual = sut.split(expression = expression)
                 // then
@@ -23,7 +24,6 @@ class CustomDelimiterSplitterTest : FunSpec({
             test("예외가 발생한다.") {
                 // given
                 val expression = Expression.from("1,2,3")
-                val sut = CustomDelimiterSplitter()
                 // when
                 val exception = shouldThrow<IllegalArgumentException> { sut.split(expression = expression) }
                 // then
