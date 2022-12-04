@@ -1,7 +1,7 @@
 package calculator
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.shouldBe
+import io.kotest.matchers.collections.shouldContainExactly
 
 class OperandTokenizerTest : FunSpec({
     context("Operand 토큰화") {
@@ -12,7 +12,7 @@ class OperandTokenizerTest : FunSpec({
                 // when
                 val actual = OperandTokenizer.tokenize(expression = expression)
                 // then
-                actual shouldBe listOf(
+                actual.operands shouldContainExactly listOf(
                     Operand.from("1"),
                     Operand.from("2"),
                     Operand.from("3"),
