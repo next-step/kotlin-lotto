@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.common.LottoTicketPolicy
+
 object InputView {
     fun getNumberOfPurchases(): Int {
         println("구매금액을 입력해 주세요.")
@@ -8,7 +10,7 @@ object InputView {
 
         println(amount)
 
-        val tickets = amount.toInt() / 1000
+        val tickets = amount.toInt() / LottoTicketPolicy.PRICE
         println("$tickets 개를 구매했습니다.")
 
         return tickets
