@@ -27,7 +27,16 @@ class StringPlusCalculatorTest : FunSpec({
                 // when
                 val exception = assertThrows<IllegalArgumentException> { sut.calculate(expression = expression) }
                 // then
-                exception.message shouldBe "빈 문자열을 입력할 수 없습니다."
+                exception.message shouldBe "빈 문자열 또는 null 을 입력할 수 없습니다."
+            }
+        }
+        context("null 을 전달하면") {
+            test("예외가 발생한다.") {
+                // given & when
+                val sut = StringPlusCalculator()
+                val exception = assertThrows<IllegalArgumentException> { sut.calculate(null) }
+                // then
+                exception.message shouldBe "빈 문자열 또는 null 을 입력할 수 없습니다."
             }
         }
     }
