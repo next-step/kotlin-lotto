@@ -9,9 +9,7 @@ object Parser {
     fun parse(rawString: String): List<Int> {
         val removeSpaceStr = rawString.replace(REPLACE_REGEX, EMPTY_STRING)
         val splitStr = removeSpaceStr.split(SPLIT_REGEX)
-        val result = splitStr.map { it.toInt() }
-        validateLottoNumber(result)
-        return result
+        return splitStr.map { it.toInt() }.apply { validateLottoNumber(this) }
     }
 
     private fun validateLottoNumber(result: List<Int>) {
