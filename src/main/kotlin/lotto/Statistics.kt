@@ -24,14 +24,6 @@ class Statistics(val statistic: MutableMap<Rank, Int?> = mutableMapOf()) {
         return floor(result * 100) /100
     }
 
-    fun count(): Int {
-        var result = 0
-        for (i in Rank.values()) {
-            result += this.statistic[i]!!
-        }
-        return result
-    }
-
     private fun sum(): Double {
         var result = 0.0
 
