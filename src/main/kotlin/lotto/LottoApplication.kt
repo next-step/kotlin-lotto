@@ -11,6 +11,7 @@ import lotto.view.OutputView
 fun main() {
     val money = InputView.readMoney()
     val manualTicketCount = InputView.readManualTicketCount()
+    OutputView.printManualTicketEnter()
     val lottoMachine = LottoMachine(
         money = money,
         manualTicketCount = manualTicketCount,
