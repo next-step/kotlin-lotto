@@ -2,7 +2,7 @@ package calculator.domain
 
 import calculator.util.RegexUtil.customRegex
 
-class Expression(
+class Expression private constructor(
     val value: List<ExpressionElement> = emptyList()
 ) {
 
