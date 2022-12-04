@@ -7,8 +7,8 @@ data class WinningLottoNumbers(
     init {
         require(!lottoNumbers.lottoNumbers.contains(bonusLottoNumber)) { INVALID_BONUS_BALL_ERROR_MESSAGE }
     }
-    fun makeStatistics(lotteries: List<LottoNumbers>): WinningStatistics {
-        val matchResult = lotteries.map {
+    fun makeStatistics(userLottos: UserLottos): WinningStatistics {
+        val matchResult = userLottos.lottos.map {
             lottoNumbers.getNumberOfMatch(it) to it.isMatchBonusLottoNumber(bonusLottoNumber)
         }
         val ranks = matchResult.map { (numberOfCount, isMatchedBonusNumber) ->
