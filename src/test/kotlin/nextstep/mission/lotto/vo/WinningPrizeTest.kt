@@ -14,7 +14,7 @@ class WinningPrizeTest : StringSpec({
         WinningPrize.FIRST.prize shouldBe 2_000_000_000
     }
 
-    "SECOND: 5개가 일치하면 이등이다. (보너스 매치 여부 확인 필요)" {
+    "SECOND: 5개가 일치하고 보너스 번호를 포함하고 있으면 이등이다." {
         WinningPrize.SECOND.matchedCount shouldBe 5
     }
 
@@ -22,7 +22,7 @@ class WinningPrizeTest : StringSpec({
         WinningPrize.SECOND.prize shouldBe 30_000_000
     }
 
-    "THIRD: 5개가 일치하면 삼등이다. (보너스 매치 여부 확인 필요)" {
+    "THIRD: 5개가 일치하면 보너스 번호를 포함하고 있지 않으면 삼등이다." {
         WinningPrize.THIRD.matchedCount shouldBe 5
     }
 
