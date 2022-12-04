@@ -40,7 +40,7 @@ class LottoTest : StringSpec({
         )
     }
 
-    "plus 함수 오버러딩은 로또와 로또를 합친다." {
+    "로또 두개를 합칠 수 있다." {
         val lottoNumbersList1: List<LottoNumbers> = lottoNumbersListOf(
             listOf(1, 2, 3, 4, 5, 6),
             listOf(1, 2, 3, 4, 5, 45),
