@@ -36,5 +36,4 @@ object InputView {
     private const val SPLIT_DELIMITER = ","
     private fun printTotalPurchaseCount(purchaseCount: Int) = "총 구매 개수는 $purchaseCount 입니다."
     private fun printIllegalMessage() = "${LOTTO_AMOUNT}원 단위의 금액을 입력해주세요."
-
 }
