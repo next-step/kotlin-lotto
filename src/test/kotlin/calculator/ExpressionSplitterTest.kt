@@ -8,7 +8,7 @@ class ExpressionSplitterTest : FunSpec({
         context("문자열을 전달하면") {
             test("콤마(,) 를 기준으로 문자열을 분리할 수 있다.") {
                 // given
-                val expression = "1,2,3"
+                val expression = Expression.from("1,2,3")
                 val sut = ExpressionSplitter()
                 // when
                 val actual = sut.split(expression)
@@ -18,7 +18,7 @@ class ExpressionSplitterTest : FunSpec({
 
             test("콜론(:) 을 기준으로 문자열을 분리할 수 있다.") {
                 // given
-                val expression = "2:3:4"
+                val expression = Expression.from("2:3:4")
                 val sut = ExpressionSplitter()
                 // when
                 val actual = sut.split(expression)
@@ -28,7 +28,7 @@ class ExpressionSplitterTest : FunSpec({
 
             test("콤마(,) 또는 콜론(:) 을 기준으로 문자열을 분리할 수 있다.") {
                 // given
-                val expression = "3,4:5"
+                val expression = Expression.from("3,4:5")
                 val sut = ExpressionSplitter()
                 // when
                 val actual = sut.split(expression)

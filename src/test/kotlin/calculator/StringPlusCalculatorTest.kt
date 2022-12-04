@@ -16,7 +16,7 @@ class StringPlusCalculatorTest : FunSpec({
                     Pair("1,2", 3), Pair("1:2", 3), Pair("1,2:3", 6),
                     Pair("1,5,9", 15), Pair("1:3:7", 11), Pair("1,5:7,8", 21)
                 ).forEach { (expression, expected) ->
-                    val actual = sut.calculate(expression = expression)
+                    val actual = sut.calculate(input = expression)
                     actual shouldBe expected
                 }
             }
@@ -28,7 +28,7 @@ class StringPlusCalculatorTest : FunSpec({
                 val expression = ""
                 val sut = StringPlusCalculator()
                 // when
-                val exception = assertThrows<IllegalArgumentException> { sut.calculate(expression = expression) }
+                val exception = assertThrows<IllegalArgumentException> { sut.calculate(input = expression) }
                 // then
                 exception.message shouldBe "빈 문자열 또는 null 을 입력할 수 없습니다."
             }
@@ -50,7 +50,7 @@ class StringPlusCalculatorTest : FunSpec({
                 val expression = "-3"
                 val sut = StringPlusCalculator()
                 // when
-                val exception = assertThrows<IllegalArgumentException> { sut.calculate(expression = expression) }
+                val exception = assertThrows<IllegalArgumentException> { sut.calculate(input = expression) }
                 // then
                 exception.message shouldBe "음수 또는 숫자가 아닌 값을 입력할 수 없습니다."
             }
@@ -62,7 +62,7 @@ class StringPlusCalculatorTest : FunSpec({
                 val expression = "동구쓰"
                 val sut = StringPlusCalculator()
                 // when
-                val exception = assertThrows<IllegalArgumentException> { sut.calculate(expression = expression) }
+                val exception = assertThrows<IllegalArgumentException> { sut.calculate(input = expression) }
                 // then
                 exception.message shouldBe "음수 또는 숫자가 아닌 값을 입력할 수 없습니다."
             }

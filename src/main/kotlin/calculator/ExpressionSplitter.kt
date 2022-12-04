@@ -1,7 +1,7 @@
 package calculator
 
 class ExpressionSplitter {
-    fun split(expression: String): List<String> {
-        return expression.split(",|:".toRegex())
+    fun split(expression: Expression): List<String> {
+        return expression.value.split(",|:".toRegex())
     }
 }
