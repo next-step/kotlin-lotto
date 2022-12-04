@@ -13,8 +13,8 @@ import lotto.view.ResultView
 
 object Controller {
     fun start() {
-        val amount = inputAmount()
-        val numberOfLotto = amount.calculateNumberOfLotto()
+        val amountOfPurchase = inputAmountOfPurchase()
+        val numberOfLotto = amountOfPurchase.calculateNumberOfLotto()
         ResultView.printNumberOfLotto(numberOfLotto)
         val lottoNumbersList = LottoGenerator.generateLottoNumbers(numberOfLotto)
         ResultView.printLottoNumbersList(lottoNumbersList.getList())
@@ -27,12 +27,12 @@ object Controller {
         ResultView.printFinalResult(LottoResultDto(lottoResult))
     }
 
-    private fun inputAmount(): LottoPrice {
+    private fun inputAmountOfPurchase(): LottoPrice {
         return try {
             LottoPrice(InputView.inputAmount())
         } catch (e: Exception) {
             InputView.printError(e.message!!)
-            inputAmount()
+            inputAmountOfPurchase()
         }
     }
 

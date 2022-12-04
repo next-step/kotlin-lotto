@@ -16,7 +16,10 @@ object ResultView {
     private const val LOTTO_RESULT_REVENUE_MESSAGE_PREFIX = "총 수익률은 "
     private const val LOTTO_RESULT_REVENUE_MESSAGE_SUFFIX = "입니다."
     private const val LOTTO_RESULT_REVENUE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+    private const val LOTTO_RESULT_EMPTY_STRING = ""
     private const val REFERENCE_VALUE = 1
+    private const val LOTTO_RANK_MISS = 0
+    private const val SECOND_PLACE_WINNING_MONEY = 30000000
 
     fun printNumberOfLotto(numberOfLotto: Int) {
         println("$numberOfLotto$LOTTO_COUNT_MESSAGE")
@@ -29,6 +32,7 @@ object ResultView {
     fun printFinalResult(lottoResultDto: LottoResultDto) {
         printLottoResultTitle()
         lottoResultDto.getResult().forEach { printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value) }
+        printProfitRate(lottoResultDto.getProfitRate())
     }
 
     private fun printLottoResultTitle() {
@@ -36,10 +40,13 @@ object ResultView {
     }
 
     private fun printLottoResult(countOfMatch: Int, winningMoney: Int, count: Int) {
+        if (countOfMatch == LOTTO_RANK_MISS) {
+            return
+        }
         println(
             countOfMatch.toString() +
                 LOTTO_RESULT_MATCH_MESSAGE +
-                privatePrintMatchBonusNumber(winningMoney.toString()) +
+                privatePrintMatchBonusNumber(winningMoney) +
                 LOTTO_RESULT_WINNING_MONEY_PREFIX +
                 winningMoney.toString() +
                 LOTTO_RESULT_WINNING_MONEY_TERMS +
@@ -63,13 +70,13 @@ object ResultView {
         if (profitRate < REFERENCE_VALUE) {
             return LOTTO_RESULT_REVENUE_LOSS_MESSAGE
         }
-        return ""
+        return LOTTO_RESULT_EMPTY_STRING
     }
 
-    private fun privatePrintMatchBonusNumber(toString: String): String {
-        if (toString == "30000000") {
+    private fun privatePrintMatchBonusNumber(winningMoney: Int): String {
+        if (winningMoney == SECOND_PLACE_WINNING_MONEY) {
             return LOTTO_RESULT_MATCH_BONUS_NUMBER_MESSAGE
         }
-        return ""
+        return LOTTO_RESULT_EMPTY_STRING
     }
 }

@@ -16,18 +16,17 @@ class LottoResultTest {
         assertThat(lottoResult.value[LottoRank.THIRD]).isEqualTo(0)
         assertThat(lottoResult.value[LottoRank.FOURTH]).isEqualTo(0)
         assertThat(lottoResult.value[LottoRank.FIFTH]).isEqualTo(1)
-        assertThat(lottoResult.value[LottoRank.MISS]).isEqualTo(0)
+        assertThat(lottoResult.value[LottoRank.MISS]).isEqualTo(13)
     }
 
     @Test
     fun `로또 결과 - 수익률 계산 테스트`() {
         // given
         val lottoResult = initLottoResult()
-        val amount = 14_000
         val expected = 0.35f
 
         // when
-        val actual = lottoResult.calculateProfitRate(amount)
+        val actual = lottoResult.calculateProfitRate()
 
         // then
         assertThat(actual).isEqualTo(expected)
@@ -40,7 +39,7 @@ class LottoResultTest {
         lottoResult[LottoRank.THIRD] = 0
         lottoResult[LottoRank.FOURTH] = 0
         lottoResult[LottoRank.FIFTH] = 1
-        lottoResult[LottoRank.MISS] = 0
+        lottoResult[LottoRank.MISS] = 13
         return LottoResult(lottoResult)
     }
 }

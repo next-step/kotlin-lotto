@@ -15,7 +15,6 @@ data class LottoResultGenerator(private val winningNumbers: WinningNumbers, priv
             val lottoRank = winningNumbers.getLottoRank(lottoNumbers)
             lottoResult[lottoRank] = lottoResult.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREASE_COUNT
         }
-        lottoResult.remove(LottoRank.MISS)
         return LottoResult(lottoResult)
     }
 
