@@ -1,6 +1,7 @@
 package calculator
 
-class Operand private constructor(val value: Int) {
+@JvmInline
+value class Operand private constructor(val value: Int) {
     companion object {
         fun from(expression: String): Operand {
             val number = expression.toIntOrNull()
