@@ -16,6 +16,11 @@ class InputView {
             }
         }
 
+        fun requireWinBonusNum(): Int {
+            println("보너스 볼을 입력해주세요.")
+            return consoleInputInt()
+        }
+
         private fun stringToInt(value: String): Int {
             return try {
                 value.toInt()

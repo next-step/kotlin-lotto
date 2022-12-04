@@ -1,39 +1,45 @@
 package lotto.domain
 
-class WinningMachine(private val winLotto: Lotto) {
+class WinningMachine(private val winLotto: WinLotto) {
 
-    fun match(lottos: List<Lotto>): Map<Int, MutableList<Lotto>> {
+    fun match(lottos: List<Lotto>): Map<Rank, MutableList<Lotto>> {
 
-        val statistic: Map<Int, MutableList<Lotto>> = initStatistic()
+        val statistic: Map<Rank, MutableList<Lotto>> = initStatistic()
 
         for(lotto in lottos) {
-            val count = judge(lotto, winLotto)
-            statistic[count]?.add(lotto)
+            val rank = matching(lotto, winLotto)
+            statistic[rank]?.add(lotto)
         }
 
-        return statistic.filter { (key, _) -> key >= WIN_LOTTO_NUM_COUNT }
+        return statistic
     }
 
-    private fun initStatistic(): Map<Int, MutableList<Lotto>> {
+    private fun initStatistic(): Map<Rank, MutableList<Lotto>> {
         return mutableMapOf(
-            1 to mutableListOf(),
-            2 to mutableListOf(),
-            3 to mutableListOf(),
-            4 to mutableListOf(),
-            5 to mutableListOf(),
-            6 to mutableListOf(),)
+            Rank.MISS to mutableListOf(),
+            Rank.FIFTH to mutableListOf(),
+            Rank.FOURTH to mutableListOf(),
+            Rank.THIRD to mutableListOf(),
+            Rank.SECOND to mutableListOf(),
+            Rank.FIRST to mutableListOf()
+        )
     }
 
-    private fun judge(lotto: Lotto, winLotto: Lotto): Int {
+    private fun matching(lotto: Lotto, winLotto: WinLotto): Rank {
         var count = 0
-        for(num in winLotto) {
-            count += judge(lotto, num)
+        for(num in winLotto.lotto) {
+            count += containsLottoCount(lotto, num)
         }
-        return count
+        val isBonus = containsBonusNumber(lotto, winLotto.bonus)
+        return Rank.match(count, isBonus)
     }
 
-    private fun judge(lotto: Lotto, num: LottoNum): Int {
+    private fun containsLottoCount(lotto: Lotto, num: LottoNum): Int {
         return if(lotto.contains(num)) 1 else 0
+    }
+
+    private fun containsBonusNumber(lotto: Lotto, bonus: LottoNum): Boolean {
+        return lotto.contains(bonus)
     }
 
     companion object {

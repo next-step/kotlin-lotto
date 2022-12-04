@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.WinAmount
+import lotto.domain.Rank
 
 class ResultView {
 
@@ -11,14 +11,15 @@ class ResultView {
             println(lottos.joinToString { "\n" })
         }
 
-        fun printStatistics(statistic: Map<Int, MutableList<Lotto>>, amount: Int)  {
+        fun printStatistics(statistic: Map<Rank, MutableList<Lotto>>, amount: Int)  {
             println("당첨 통계")
             println("---------")
 
             var totalWinAmount: Long = 0
-            for(count in statistic.keys) {
-                totalWinAmount += WinAmount.find(count)
-                println("${count}개 일치 (${WinAmount.find(count)}원) - ${statistic[count]?.size}개")
+            for(rank in statistic.keys) {
+                if(rank == Rank.MISS) continue
+                totalWinAmount += rank.amount
+                println("${rank.count}개 일치 (${rank.amount}원) - ${statistic[rank]?.size}개")
             }
 
             val rate = (totalWinAmount/amount) * 100
