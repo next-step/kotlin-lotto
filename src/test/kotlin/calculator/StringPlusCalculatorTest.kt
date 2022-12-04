@@ -33,6 +33,7 @@ class StringPlusCalculatorTest : FunSpec({
                 exception.message shouldBe "빈 문자열 또는 null 을 입력할 수 없습니다."
             }
         }
+
         context("null 을 전달하면") {
             test("예외가 발생한다.") {
                 // given & when
@@ -40,6 +41,30 @@ class StringPlusCalculatorTest : FunSpec({
                 val exception = assertThrows<IllegalArgumentException> { sut.calculate(null) }
                 // then
                 exception.message shouldBe "빈 문자열 또는 null 을 입력할 수 없습니다."
+            }
+        }
+
+        context("음수를 전달하면") {
+            test("예외가 발생한다.") {
+                // given
+                val expression = "-3"
+                val sut = StringPlusCalculator()
+                // when
+                val exception = assertThrows<IllegalArgumentException> { sut.calculate(expression = expression) }
+                // then
+                exception.message shouldBe "음수 또는 숫자가 아닌 값을 입력할 수 없습니다."
+            }
+        }
+
+        context("숫자가 아닌 값을 전달하면") {
+            test("예외가 발생한다.") {
+                // given
+                val expression = "동구쓰"
+                val sut = StringPlusCalculator()
+                // when
+                val exception = assertThrows<IllegalArgumentException> { sut.calculate(expression = expression) }
+                // then
+                exception.message shouldBe "음수 또는 숫자가 아닌 값을 입력할 수 없습니다."
             }
         }
     }
