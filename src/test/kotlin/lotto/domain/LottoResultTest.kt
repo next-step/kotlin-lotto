@@ -12,6 +12,7 @@ class LottoResultTest {
 
         // when, then
         assertThat(lottoResult.value[LottoRank.FIRST]).isEqualTo(0)
+        assertThat(lottoResult.value[LottoRank.SECOND]).isEqualTo(0)
         assertThat(lottoResult.value[LottoRank.THIRD]).isEqualTo(0)
         assertThat(lottoResult.value[LottoRank.FOURTH]).isEqualTo(0)
         assertThat(lottoResult.value[LottoRank.FIFTH]).isEqualTo(1)
@@ -35,6 +36,7 @@ class LottoResultTest {
     private fun initLottoResult(): LottoResult {
         val lottoResult: EnumMap<LottoRank, Int> = EnumMap(LottoRank::class.java)
         lottoResult[LottoRank.FIRST] = 0
+        lottoResult[LottoRank.SECOND] = 0
         lottoResult[LottoRank.THIRD] = 0
         lottoResult[LottoRank.FOURTH] = 0
         lottoResult[LottoRank.FIFTH] = 1

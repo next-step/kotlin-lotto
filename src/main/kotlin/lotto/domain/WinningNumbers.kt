@@ -6,8 +6,8 @@ data class WinningNumbers(val lottoNumbers: LottoNumbers, val bonusNumber: Lotto
     }
 
     fun getLottoRank(lottoNumbers: LottoNumbers): LottoRank {
-        val matchCount = lottoNumbers.value.count { lottoNumber -> this.lottoNumbers.value.contains(lottoNumber) }
+        val countOfMatch = lottoNumbers.value.count { lottoNumber -> this.lottoNumbers.value.contains(lottoNumber) }
         val matchBonus = lottoNumbers.value.contains(bonusNumber)
-        return LottoRank.valueOf(matchCount, matchBonus)
+        return LottoRank.valueOf(countOfMatch, matchBonus)
     }
 }
