@@ -10,12 +10,15 @@ class StringPlusCalculatorTest : FunSpec({
         context("올바른 문자열을 전달하면") {
             test("문자열의 합을 구할 수 있다.") {
                 // given
-                val expression = "1,2"
                 val sut = StringPlusCalculator()
-                // when
-                val actual = sut.calculate(expression = expression)
-                // then
-                actual shouldBe 3
+                // when & then
+                listOf(
+                    Pair("1,2", 3), Pair("1:2", 3), Pair("1,2:3", 6),
+                    Pair("1,5,9", 15), Pair("1:3:7", 11), Pair("1,5:7,8", 21)
+                ).forEach { (expression, expected) ->
+                    val actual = sut.calculate(expression = expression)
+                    actual shouldBe expected
+                }
             }
         }
 
