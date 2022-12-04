@@ -9,6 +9,8 @@ value class PurchaseAmount(private val amount: Int) {
     fun getAmount() = amount
     fun getNumberOfLotto() = amount / LOTTO_PRICE
 
+    fun canBuyNumberOfLotto(count: Int) = count < getNumberOfLotto()
+
     companion object {
         private const val LOTTO_PRICE = 1000
         private const val INVALID_VALUE_ERROR_MESSAGE = "구입 금액은 $LOTTO_PRICE 원 이상이어야 합니다."
