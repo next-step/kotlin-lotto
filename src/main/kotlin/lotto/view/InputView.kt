@@ -3,6 +3,7 @@ package lotto.view
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.PurchaseAmount
+import lotto.domain.UserLottos
 import lotto.domain.WinningLottoNumbers
 
 object InputView {
@@ -10,6 +11,29 @@ object InputView {
     fun getPurchaseAmount(): PurchaseAmount {
         println("구입 금액을 입력해 주세요.")
         return PurchaseAmount(readln().toInt())
+    }
+
+    fun getManualNumberOfLotto(purchaseAmount: PurchaseAmount): Int {
+        println("\n수동으로 구매할 로또 수를 입력해 주세요.")
+        val numberOfLottoByManual = readln().toInt()
+        if (!purchaseAmount.canBuyNumberOfLotto(numberOfLottoByManual)) {
+            throw IllegalArgumentException("구매할 수 없는 개수입니다.")
+        }
+        if (numberOfLottoByManual < 0) {
+            throw IllegalArgumentException("올바른 수를 입력해 주세요.")
+        }
+
+        return numberOfLottoByManual
+    }
+
+    fun getManualLottos(numberOfLottoByManual: Int): UserLottos {
+        println("\n수동으로 구매할 번호를 입력해 주세요.")
+        var userLottos = UserLottos()
+        repeat(numberOfLottoByManual) {
+            val inputLottoNumbers = readln()
+            userLottos = userLottos.add(validateLottoNumbers(inputLottoNumbers))
+        }
+        return userLottos
     }
 
     fun getWinningLottoNumbers(): WinningLottoNumbers {
