@@ -20,8 +20,8 @@ fun main() {
 
     ConsoleOutput.printLotto(LottoDto.from(manualLotto), LottoDto.from(autoLotto))
 
-    val winningNumbers: LottoNumbers = ConsoleInput.inputWinningNumbers()
-    val bonusNumber: LottoNumber = ConsoleInput.inputBonusNumber()
+    val winningNumbers = LottoNumbers(ConsoleInput.inputWinningNumbers().map { LottoNumber(it) })
+    val bonusNumber = LottoNumber(ConsoleInput.inputBonusNumber())
 
     val result: WinningResult = (manualLotto + autoLotto).matchWinningNumbers(winningNumbers, bonusNumber)
 
