@@ -1,12 +1,14 @@
 package lotto.domain.strategy.bonus
 
 import lotto.domain.LottoNumber
+import lotto.domain.input.ClientInput
 import lotto.extension.isPositiveNumeric
-import lotto.util.Reader
 
-class BonusManualGenerateStrategy : BonusGenerateStrategy {
+class BonusManualGenerateStrategy(
+    private val clientInput: ClientInput
+) : BonusGenerateStrategy {
     override fun generate(): LottoNumber {
-        val bonusNumber = Reader.read()
+        val bonusNumber = clientInput.read()
         validateBonusNumber(bonusNumber)
         return LottoNumber(bonusNumber.toInt())
     }

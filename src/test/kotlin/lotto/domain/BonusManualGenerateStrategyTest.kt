@@ -5,6 +5,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
+import lotto.domain.input.ConsoleInput
 import lotto.domain.strategy.bonus.BonusManualGenerateStrategy
 import lotto.domain.strategy.bonus.BonusManualGenerateStrategy.Companion.BONUS_NUMBER_ERROR
 import lotto.util.Reader
@@ -17,7 +18,7 @@ internal class BonusManualGenerateStrategyTest : BehaviorSpec({
             every { Reader.read() } returns "test"
             Then("에러를 발생해요.") {
                 val exception = shouldThrow<IllegalArgumentException> {
-                    BonusManualGenerateStrategy().generate()
+                    BonusManualGenerateStrategy(ConsoleInput()).generate()
                 }
                 exception.message shouldBe BONUS_NUMBER_ERROR
             }
@@ -25,7 +26,7 @@ internal class BonusManualGenerateStrategyTest : BehaviorSpec({
 
         When("숫자로 들어오면") {
             every { Reader.read() } returns "10"
-            val lottoNumber = BonusManualGenerateStrategy().generate()
+            val lottoNumber = BonusManualGenerateStrategy(ConsoleInput()).generate()
             Then("정상적으로 로또 넘버를 생성해요.") {
                 lottoNumber.number shouldBe 10
             }
