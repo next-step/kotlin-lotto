@@ -3,6 +3,10 @@ package calculator.domain
 class Calculator(private val expression: Expression) {
 
     fun calculate(): Int {
+        if (expression.value.isEmpty()) {
+            return 0
+        }
+
         val operands = expression.value.mapNotNull { it as? ExpressionElement.OperandElement }
         val operators = expression.value.mapNotNull { it as? ExpressionElement.OperatorElement }
 

@@ -18,4 +18,17 @@ internal class CalculatorTest {
         val expected = 8
         assertThat(actual).isEqualTo(expected)
     }
+
+    @Test
+    fun `빈 수식으로 계산결과가 0이된다`() {
+        // given
+        val expression = Expression.create("", Delimiters())
+
+        // when
+        val actual = Calculator(expression).calculate()
+
+        // then
+        val expected = 0
+        assertThat(actual).isEqualTo(expected)
+    }
 }
