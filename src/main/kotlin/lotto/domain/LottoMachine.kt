@@ -1,28 +1,28 @@
 package lotto.domain
 
 class LottoMachine(
-    money: Int
+    money: Int,
+    lottoGenerateStrategy: LottoGenerateStrategy,
+    private val winnerLottoGenerateStrategy: LottoGenerateStrategy,
+    private val bonusGenerateStrategy: BonusGenerateStrategy,
 ) {
-    val lottoTickets: LottoTickets
-    private lateinit var lottoSummary: LottoSummary
+    val lottoTickets: LottoTickets = LottoTickets(
+        List(money / TICKET_AMOUNT) { lottoGenerateStrategy.generate() }
+    )
 
-    init {
-        val ticketCount = money / TICKET_AMOUNT
-        lottoTickets = LottoTickets(ticketCount)
-    }
-
-    fun getSummary(): LottoSummary {
-        execute()
-        return lottoSummary
-    }
-
-    private fun execute() {
-        val winnerLottoTicket = WinnerLottoTicket(LottoManualGenerateStrategy())
-        val lottoInfos = lottoTickets.tickets.map { ticket ->
-            val matchNumber = winnerLottoTicket.countMatchNumber(ticket.lottoNumbers)
-            LottoInfo.of(matchNumber)
+    fun execute(): LottoResultSummary {
+        val winnerLottoTicket = getWinnerTicket()
+        val matchResults = lottoTickets.map { ticket ->
+            val countMatchResult = winnerLottoTicket.countMatchNumber(ticket)
+            MatchResult.of(countMatchResult.count, countMatchResult.isBonusNumberMatched)
         }
-        lottoSummary = LottoSummary(lottoInfos)
+        return LottoResultSummary(matchResults)
+    }
+
+    private fun getWinnerTicket(): WinnerLottoTicket {
+        val winnerLottoNumbers = winnerLottoGenerateStrategy.generate()
+        val bonusNumber = bonusGenerateStrategy.generate()
+        return WinnerLottoTicket(winnerLottoNumbers, bonusNumber)
     }
 
     companion object {
