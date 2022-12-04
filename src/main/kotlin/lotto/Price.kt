@@ -1,6 +1,6 @@
 package lotto
 
-class Price(val count: Int) {
+class Price(private val count: Int) {
     fun price(): Int{
         return count * LOTTO_PRICE
     }
