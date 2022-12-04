@@ -11,7 +11,7 @@ data class WinningLottoNumbers(
         val matchResult = lotteries.map {
             lottoNumbers.getNumberOfMatch(it) to it.isMatchBonusLottoNumber(bonusLottoNumber)
         }
-        val ranks = matchResult.map {(numberOfCount, isMatchedBonusNumber) ->
+        val ranks = matchResult.map { (numberOfCount, isMatchedBonusNumber) ->
             Rank.valueOf(numberOfCount, isMatchedBonusNumber)
         }
 
