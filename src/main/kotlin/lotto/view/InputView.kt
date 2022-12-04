@@ -22,7 +22,7 @@ object InputView {
         require(!winningNumber.isNullOrEmpty()) { "당첨 번호를 입력해주세요." }
 
         val numbers = winningNumber.split(", ").map { it.toInt() }.toSet()
-        require(numbers.size == 6) {" 중복없는 6개의 숫자를 입력해주세요."}
+        require(numbers.size == 6) { " 중복없는 6개의 숫자를 입력해주세요." }
 
         return numbers
     }
