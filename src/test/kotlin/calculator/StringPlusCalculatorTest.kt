@@ -20,6 +20,20 @@ class StringPlusCalculatorTest : FunSpec({
                     actual shouldBe expected
                 }
             }
+
+            context("커스텀 구분자를 포함하면") {
+                test("커스텀 구분자를 기준으로 합을 구할 수 있다.") {
+                    // given
+                    val sut = StringPlusCalculator()
+                    listOf(
+                        Pair("//;\n1;2", 3), Pair("//.\n1.2", 3), Pair("//!\n1!2!3", 6),
+                        Pair("//@\n1@5@9", 15), Pair("//h\n1h3h7", 11), Pair("//,\n1,5,7,8", 21)
+                    ).forEach { (expression, expected) ->
+                        val actual = sut.calculate(input = expression)
+                        actual shouldBe expected
+                    }
+                }
+            }
         }
 
         context("빈 문자열을 전달하면") {
