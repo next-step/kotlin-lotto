@@ -9,9 +9,11 @@ data class WinningLottoNumbers(
     }
     fun makeStatistics(lotteries: List<LottoNumbers>): WinningStatistics {
         val matchResult = lotteries.map {
-            Pair(lottoNumbers.getNumberOfMatch(it), it.isMatchBonusLottoNumber(bonusLottoNumber))
+            lottoNumbers.getNumberOfMatch(it) to it.isMatchBonusLottoNumber(bonusLottoNumber)
         }
-        val ranks = matchResult.map { Rank.valueOf(it.first, it.second) }
+        val ranks = matchResult.map {(numberOfCount, isMatchedBonusNumber) ->
+            Rank.valueOf(numberOfCount, isMatchedBonusNumber)
+        }
 
         return WinningStatistics(statistics = countRanks(ranks))
     }
