@@ -33,11 +33,11 @@ internal class PurchaseAmountTest : BehaviorSpec({
                 }
             }
 
-            `when`("수동으로 구매할 로또의 개수가 살 수 있는 로또의 개수보다 클 때"){
-                val numberOfLottoByManual =  15
+            `when`("수동으로 구매할 로또의 개수가 살 수 있는 로또의 개수보다 클 때") {
+                val numberOfLottoByManual = 15
                 val result = purchaseAmount.canBuyNumberOfLotto(numberOfLottoByManual)
 
-                then("로또를 구매할 수 없다."){
+                then("로또를 구매할 수 없다.") {
                     result shouldBe false
                 }
             }
