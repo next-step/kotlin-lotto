@@ -8,7 +8,7 @@ class LottoStatTest : StringSpec({
         // given
         val lottoStat = LottoStat(
             listOf(LottoGrade.FIST_GRADE, LottoGrade.BOOM, LottoGrade.BASIC_GRADE, LottoGrade.BASIC_GRADE),
-            14000
+            PurchaseAmount(14000)
         )
         // when
         val gradeStat = lottoStat.gradeStat
@@ -26,7 +26,7 @@ class LottoStatTest : StringSpec({
         // given
         val lottoStat = LottoStat(
             listOf(LottoGrade.BOOM, LottoGrade.BOOM, LottoGrade.BASIC_GRADE, LottoGrade.BOOM),
-            14000
+            PurchaseAmount(14000)
         )
         // when
         val winningRate = lottoStat.winningRate

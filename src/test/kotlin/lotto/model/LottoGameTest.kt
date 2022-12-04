@@ -22,19 +22,40 @@ class LottoGameTest : StringSpec({
         val drawResult = lottoGame.draw(
             LottoNumbers(
                 listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6)
+                    LottoNumber.valueOf(1),
+                    LottoNumber.valueOf(2),
+                    LottoNumber.valueOf(3),
+                    LottoNumber.valueOf(4),
+                    LottoNumber.valueOf(5),
+                    LottoNumber.valueOf(6)
                 )
             ),
-            LottoNumber(10)
+            LottoNumber.valueOf(10)
         )
         // then
         drawResult.forEach {
             it shouldBeIn LottoGrade.values().toList()
         }
+    }
+
+    "로또 게임은, 수동으로 번호를 입력 받아서 로또를 생성할 수 있다." {
+        // given
+        val directLottoNumber = listOf(
+            LottoNumbers(
+                listOf(
+                    LottoNumber.valueOf(1),
+                    LottoNumber.valueOf(2),
+                    LottoNumber.valueOf(3),
+                    LottoNumber.valueOf(4),
+                    LottoNumber.valueOf(5),
+                    LottoNumber.valueOf(6)
+                )
+            )
+        )
+        // when
+        val lottoGame = LottoGame(PurchaseAmount(14000), directLottoNumber)
+        // then
+        lottoGame.getLottos().size shouldBe 14
+        lottoGame.getDirectLottoCount() shouldBe 1
     }
 })

@@ -9,15 +9,15 @@ class LottoTest : StringSpec({
         // given
         val lotto = StaticLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)).pick()
         val winningNumber: List<LottoNumber> = listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5),
-            LottoNumber(6)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(6)
         )
         // when
-        val grade = lotto.scratch(LottoNumbers(winningNumber), LottoNumber(10))
+        val grade = lotto.scratch(LottoNumbers(winningNumber), LottoNumber.valueOf(10))
         // then
         grade shouldBe LottoGrade.FIST_GRADE
     }

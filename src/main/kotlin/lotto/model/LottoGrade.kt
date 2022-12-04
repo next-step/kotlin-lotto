@@ -1,7 +1,5 @@
 package lotto.model
 
-private const val PLUS_MATCH_COUNT = 5
-
 enum class LottoGrade(val correctNumber: Int, val matchPlus: Boolean, val reward: Long) {
     BOOM(0, false, 0),
     BAD_GRADE(1, false, 0),
@@ -13,10 +11,11 @@ enum class LottoGrade(val correctNumber: Int, val matchPlus: Boolean, val reward
     FIST_GRADE(6, false, 20_000_000_000);
 
     companion object {
-        fun find(correctNumber: Int, matchPlus: Boolean) =
-            LottoGrade.values().find {
-                it.correctNumber == correctNumber
-                        && it.matchPlus == (correctNumber == PLUS_MATCH_COUNT && matchPlus)
-            } ?: throw IllegalArgumentException("로또 등급을 찾을 수 없습니다")
+        fun find(correctNumber: Int, matchPlus: Boolean): LottoGrade {
+            if (correctNumber == SECOND_PLUS_GRADE.correctNumber && matchPlus) return SECOND_PLUS_GRADE
+
+            return LottoGrade.values().find { it.correctNumber == correctNumber }
+                ?: throw IllegalArgumentException("로또 등급을 찾을 수 없습니다")
+        }
     }
 }
