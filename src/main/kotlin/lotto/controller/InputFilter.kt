@@ -1,6 +1,5 @@
 package lotto.controller
 
-import lotto.domain.InputParser
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoPrice

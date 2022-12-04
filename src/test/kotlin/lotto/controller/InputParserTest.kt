@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.controller
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy

@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.controller
 
 object InputParser {
     private const val INPUT_DELIMITER = ", "
