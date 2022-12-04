@@ -40,4 +40,30 @@ class ExpressionTest : FunSpec({
             }
         }
     }
+
+    context("커스텀 구분자 포함 여부") {
+        context("커스텀 구분자를 포함하면") {
+            test("true 를 반환한다.") {
+                // given
+                val expression = "//;\n1;2;3"
+                val sut = Expression.from(expression = expression)
+                // when
+                val actual = sut.hasCustomDelimiter()
+                // then
+                actual shouldBe true
+            }
+        }
+
+        context("커스텀 구분자를 포함하지 않으면") {
+            test("false 를 반환한다.") {
+                // given
+                val expression = "1;2;3"
+                val sut = Expression.from(expression = expression)
+                // when
+                val actual = sut.hasCustomDelimiter()
+                // then
+                actual shouldBe false
+            }
+        }
+    }
 })
