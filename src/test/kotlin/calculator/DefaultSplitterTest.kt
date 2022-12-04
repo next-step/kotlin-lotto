@@ -3,13 +3,13 @@ package calculator
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
 
-class ExpressionSplitterTest : FunSpec({
+class DefaultSplitterTest : FunSpec({
     context("문자열 분리") {
         context("문자열을 전달하면") {
             test("콤마(,) 를 기준으로 문자열을 분리할 수 있다.") {
                 // given
                 val expression = Expression.from("1,2,3")
-                val sut = ExpressionSplitter()
+                val sut = DefaultSplitter()
                 // when
                 val actual = sut.split(expression)
                 // then
@@ -19,7 +19,7 @@ class ExpressionSplitterTest : FunSpec({
             test("콜론(:) 을 기준으로 문자열을 분리할 수 있다.") {
                 // given
                 val expression = Expression.from("2:3:4")
-                val sut = ExpressionSplitter()
+                val sut = DefaultSplitter()
                 // when
                 val actual = sut.split(expression)
                 // then
@@ -29,7 +29,7 @@ class ExpressionSplitterTest : FunSpec({
             test("콤마(,) 또는 콜론(:) 을 기준으로 문자열을 분리할 수 있다.") {
                 // given
                 val expression = Expression.from("3,4:5")
-                val sut = ExpressionSplitter()
+                val sut = DefaultSplitter()
                 // when
                 val actual = sut.split(expression)
                 // then
