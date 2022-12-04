@@ -27,10 +27,10 @@ class Statistics(val statistic: MutableMap<Int, Int?> = mutableMapOf()) {
     private fun sum(): Double {
         var result = 0.0
 
-        result += this.statistic[3]!!.times(5_000)
-        result += this.statistic[4]!!.times(50_000)
-        result += this.statistic[5]!!.times(1_500_000)
-        result += this.statistic[6]!!.times(2_000_000_000)
+        result += this.statistic[Rank.FOUR.rank]!!.times(Rank.FOUR.price)
+        result += this.statistic[Rank.THIRD.rank]!!.times(Rank.THIRD.price)
+        result += this.statistic[Rank.SECOND.rank]!!.times(Rank.SECOND.price)
+        result += this.statistic[Rank.FIRST.rank]!!.times(Rank.FIRST.price)
         return result
     }
 }
