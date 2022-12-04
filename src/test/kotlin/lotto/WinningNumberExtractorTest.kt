@@ -8,7 +8,7 @@ import io.mockk.unmockkAll
 import lotto.domain.LottoTicketBundle
 import lotto.utils.RandomNumberGenerator
 
-class WinningNumberExtractorTest : StringSpec({
+internal class WinningNumberExtractorTest : StringSpec({
     "로또 당첨 개수에 따른 티켓 개수를 추출할 수 있다." {
         val ticketSize = 1
         mockkObject(RandomNumberGenerator)
