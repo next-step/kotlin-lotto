@@ -1,22 +1,37 @@
 package calculator.domain
 
+import calculator.util.RegexUtil.customRegex
+
 class Expression(
-    val value: String = DEFAULT_EXPRESSION_VALUE
+    val value: List<ExpressionElement> = emptyList()
 ) {
 
-    init {
-        validateExpression()
-    }
+    companion object {
+        fun create(input: String, delimiters: Delimiters): Expression {
+            if (input.isEmpty()) {
+                return Expression(emptyList())
+            }
 
-    private fun validateExpression() {
-        value.forEach {
-            runCatching { it.digitToInt() }
-                .onFailure { throw IllegalArgumentException("숫자 외에 다른 문자는 들어올 수 없습니다.") }
+            val value = removeCustomRegex(input)
+                .asSequence()
+                .map { char ->
+                    if (char.isDigit()) {
+                        ExpressionElement.OperandElement(char.digitToInt())
+                    } else {
+                        ExpressionElement.OperatorElement(delimiters.toOperator(char.toString()))
+                    }
+                }.toList()
+
+            return Expression(value)
+        }
+
+        private fun removeCustomRegex(text: String): String {
+            if (customRegex.matches(text)) {
+                return customRegex.find(text)
+                    ?.run { groupValues[2] }
+                    .toString()
+            }
+            return text
         }
     }
-
-    companion object {
-        private const val DEFAULT_EXPRESSION_VALUE = ""
-    }
-
 }
