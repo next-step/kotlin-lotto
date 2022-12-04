@@ -8,6 +8,7 @@ import lotto.domain.LottoNumbersList
 import lotto.domain.LottoPrice
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
+import lotto.domain.WinningNumbers
 import lotto.view.InputView
 import lotto.view.ResultView
 import java.util.EnumMap
@@ -23,9 +24,10 @@ object Controller {
         val lottoNumbersList = generateLottoNumbers(numberOfLotto)
         ResultView.printLottoNumbersList(lottoNumbersList.getList())
 
-        val winningNumbers = inputWinningNumber()
+        val winningNumbers = inputWinningNumbers()
         val bonusNumber = inputBonusNumber()
-        val lottoResult = makeLottoResult(winningNumbers, lottoNumbersList)
+        val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, bonusNumber)
+        val lottoResult = makeLottoResult(winningNumbersWithBonusNumber, lottoNumbersList)
         ResultView.printLottoResultTitle()
         lottoResult.value.forEach {
             ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value)
@@ -34,7 +36,7 @@ object Controller {
         ResultView.printProfitRate(profitRate)
     }
 
-    private fun makeLottoResult(winningNumbers: LottoNumbers, lottoNumbersList: LottoNumbersList): LottoResult {
+    private fun makeLottoResult(winningNumbers: WinningNumbers, lottoNumbersList: LottoNumbersList): LottoResult {
         val lottoResult: EnumMap<LottoRank, Int> = initLottoResult()
         lottoNumbersList.value.forEach {
             val lottoNumbers = LottoNumbers(it.value)
@@ -71,13 +73,13 @@ object Controller {
         }
     }
 
-    private fun inputWinningNumber(): LottoNumbers {
+    private fun inputWinningNumbers(): LottoNumbers {
         return try {
             val parsedInput = InputParser.parseWithDelimiter(InputView.inputWinningNumber())
             LottoNumbers(parsedInput.map { LottoNumber(it) })
         } catch (e: Exception) {
             InputView.printError(e.message!!)
-            inputWinningNumber()
+            inputWinningNumbers()
         }
     }
 

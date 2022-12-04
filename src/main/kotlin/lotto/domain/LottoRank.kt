@@ -8,7 +8,7 @@ enum class LottoRank(val countOfMatch: Int, val winningMoney: Int) {
     FIRST(6, 2_000_000_000);
 
     companion object {
-        fun valueOf(countOfMatch: Int): LottoRank {
+        fun valueOf(countOfMatch: Int, matchBonus: Boolean): LottoRank {
             return values().find { it.countOfMatch == countOfMatch } ?: MISS
         }
     }
