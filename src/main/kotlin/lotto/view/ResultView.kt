@@ -4,12 +4,13 @@ object ResultView {
     private const val LOTTO_COUNT_MESSAGE = "개를 구매했습니다."
     private const val LOTTO_RESULT_MESSAGE_TITLE = "당첨 통계"
     private const val LOTTO_RESULT_MESSAGE_DELIMITER = "---------"
-    private const val LOTTO_RESULT_DELIMITER = " - "
+    private const val LOTTO_RESULT_DELIMITER = "- "
     private const val LOTTO_RESULT_MATCH_MESSAGE = "개 일치"
     private const val LOTTO_RESULT_WINNING_MONEY_TERMS = "원"
-    private const val LOTTO_RESULT_WINNING_MONEY_PREFIX = "("
+    private const val LOTTO_RESULT_WINNING_MONEY_PREFIX = " ("
     private const val LOTTO_RESULT_WINNING_MONEY_SUFFIX = ")"
     private const val LOTTO_RESULT_COUNT_MESSAGE = "개"
+    private const val LOTTO_RESULT_MATCH_BONUS_NUMBER_MESSAGE = ", 보너스 볼 일치"
     private const val LOTTO_RESULT_REVENUE_MESSAGE_PREFIX = "총 수익률은 "
     private const val LOTTO_RESULT_REVENUE_MESSAGE_SUFFIX = "입니다."
     private const val LOTTO_RESULT_REVENUE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
@@ -31,13 +32,14 @@ object ResultView {
         println(
             countOfMatch.toString() +
                 LOTTO_RESULT_MATCH_MESSAGE +
-                LOTTO_RESULT_DELIMITER +
+                privatePrintMatchBonusNumber(winningMoney.toString()) +
+                LOTTO_RESULT_WINNING_MONEY_PREFIX +
                 winningMoney.toString() +
                 LOTTO_RESULT_WINNING_MONEY_TERMS +
-                LOTTO_RESULT_WINNING_MONEY_PREFIX +
+                LOTTO_RESULT_WINNING_MONEY_SUFFIX +
+                LOTTO_RESULT_DELIMITER +
                 count.toString() +
-                LOTTO_RESULT_COUNT_MESSAGE +
-                LOTTO_RESULT_WINNING_MONEY_SUFFIX
+                LOTTO_RESULT_COUNT_MESSAGE
         )
     }
 
@@ -53,6 +55,13 @@ object ResultView {
     private fun printResultRevenueLossMessage(profitRate: Float): String {
         if (profitRate < REFERENCE_VALUE) {
             return LOTTO_RESULT_REVENUE_LOSS_MESSAGE
+        }
+        return ""
+    }
+
+    private fun privatePrintMatchBonusNumber(toString: String): String {
+        if (toString == "30000000") {
+            return LOTTO_RESULT_MATCH_BONUS_NUMBER_MESSAGE
         }
         return ""
     }
