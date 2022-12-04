@@ -15,7 +15,7 @@ internal class StatisticsTest {
     }
 
     @Test
-    fun `통계값을 계산한다`() {
+    fun `5등 통계값을 계산한다`() {
         // given
         val statistics = Statistics()
         statistics.statistic[Rank.FIVE] = 1 // 3개는 5000원
