@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.dto.LottoResultDto
+
 object ResultView {
     private const val LOTTO_COUNT_MESSAGE = "개를 구매했습니다."
     private const val LOTTO_RESULT_MESSAGE_TITLE = "당첨 통계"
@@ -24,11 +26,16 @@ object ResultView {
         lottoNumbersList.forEach { println(it) }
     }
 
-    fun printLottoResultTitle() {
+    fun printFinalResult(lottoResultDto: LottoResultDto) {
+        printLottoResultTitle()
+        lottoResultDto.getResult().forEach { printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value) }
+    }
+
+    private fun printLottoResultTitle() {
         println("\n" + LOTTO_RESULT_MESSAGE_TITLE + "\n" + LOTTO_RESULT_MESSAGE_DELIMITER)
     }
 
-    fun printLottoResult(countOfMatch: Int, winningMoney: Int, count: Int) {
+    private fun printLottoResult(countOfMatch: Int, winningMoney: Int, count: Int) {
         println(
             countOfMatch.toString() +
                 LOTTO_RESULT_MATCH_MESSAGE +
@@ -43,7 +50,7 @@ object ResultView {
         )
     }
 
-    fun printProfitRate(profitRate: Float) {
+    private fun printProfitRate(profitRate: Float) {
         println(
             LOTTO_RESULT_REVENUE_MESSAGE_PREFIX +
                 profitRate +

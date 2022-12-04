@@ -1,22 +1,18 @@
 package lotto.controller
 
+import lotto.application.LottoResultGenerator
 import lotto.domain.InputParser
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoNumbersList
 import lotto.domain.LottoPrice
-import lotto.domain.LottoRank
-import lotto.domain.LottoResult
 import lotto.domain.WinningNumbers
+import lotto.dto.LottoResultDto
 import lotto.view.InputView
 import lotto.view.ResultView
-import java.util.EnumMap
 
 object Controller {
-    private const val DEFAULT_COUNT = 0
-    private const val INCREASE_COUNT = 1
-
     fun start() {
         val amount = inputAmount()
         val numberOfLotto = amount.calculateNumberOfLotto()
@@ -27,32 +23,9 @@ object Controller {
         val winningNumbers = inputWinningNumbers()
         val bonusNumber = inputBonusNumber()
         val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, bonusNumber)
-        val lottoResult = makeLottoResult(winningNumbersWithBonusNumber, lottoNumbersList)
-        ResultView.printLottoResultTitle()
-        lottoResult.value.forEach {
-            ResultView.printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value)
-        }
-        val profitRate = lottoResult.calculateProfitRate(amount.value)
-        ResultView.printProfitRate(profitRate)
-    }
-
-    private fun makeLottoResult(winningNumbers: WinningNumbers, lottoNumbersList: LottoNumbersList): LottoResult {
-        val lottoResult: EnumMap<LottoRank, Int> = initLottoResult()
-        lottoNumbersList.value.forEach {
-            val lottoNumbers = LottoNumbers(it.value)
-            val lottoRank = winningNumbers.getLottoRank(lottoNumbers)
-            lottoResult[lottoRank] = lottoResult.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREASE_COUNT
-        }
-        lottoResult.remove(LottoRank.MISS)
-        return LottoResult(lottoResult)
-    }
-
-    private fun initLottoResult(): EnumMap<LottoRank, Int> {
-        val lottoResult: EnumMap<LottoRank, Int> = EnumMap(LottoRank::class.java)
-        LottoRank.values().forEach {
-            lottoResult[it] = DEFAULT_COUNT
-        }
-        return lottoResult
+        val lottoResultGenerator = LottoResultGenerator(winningNumbersWithBonusNumber, lottoNumbersList)
+        val lottoResult = lottoResultGenerator.getResult()
+        ResultView.printFinalResult(LottoResultDto(lottoResult))
     }
 
     private fun generateLottoNumbers(lottoCount: Int): LottoNumbersList {
