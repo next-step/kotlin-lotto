@@ -10,7 +10,7 @@ class InputView {
         fun inputLastWeekWinningNumbers(): WinningLottoNumbers {
             println("\n지난 주 당첨 번호를 입력해 주세요.")
             val inputLastWeekWinningNumbers = readln()
-            val parse = Parser().parse(inputLastWeekWinningNumbers).toMutableList()
+            val parse = Parser().parse(inputLastWeekWinningNumbers).toSet()
             return WinningLottoNumbers(parse)
         }
     }
