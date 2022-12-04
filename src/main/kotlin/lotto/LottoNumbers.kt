@@ -24,6 +24,10 @@ class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) {
         return "$lottoNumbers"
     }
 
+    fun contain(bonusLottoNumber: LottoNumber): Boolean {
+        return this.lottoNumbers.contains(bonusLottoNumber)
+    }
+
     companion object {
         private const val LOTTO_NUMBER = 6
     }

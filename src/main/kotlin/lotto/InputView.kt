@@ -11,4 +11,10 @@ object InputView {
         val parse = Parser().parse(inputLastWeekWinningNumbers).toSet()
         return WinningLottoNumbers(parse)
     }
+
+    fun inputBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val inputBonusNumber = readln().toInt()
+        return LottoNumber(inputBonusNumber)
+    }
 }

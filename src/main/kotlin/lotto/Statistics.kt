@@ -2,14 +2,14 @@ package lotto
 
 import kotlin.math.floor
 
-class Statistics(val statistic: MutableMap<Int, Int?> = mutableMapOf()) {
+class Statistics(val statistic: MutableMap<Rank, Int?> = mutableMapOf()) {
     init {
-        for (i in 1..6) {
-            statistic[i] = 0
+        for (value in Rank.values()) {
+            statistic[value] = 0
         }
     }
 
-    fun add(result: Int) {
+    fun add(result: Rank) {
         val i = statistic[result]?.plus(1)
         if (i != null) {
             statistic[result] = i
@@ -24,13 +24,22 @@ class Statistics(val statistic: MutableMap<Int, Int?> = mutableMapOf()) {
         return floor(result * 100) /100
     }
 
+    fun count(): Int {
+        var result = 0
+        for (i in Rank.values()) {
+            result += this.statistic[i]!!
+        }
+        return result
+    }
+
     private fun sum(): Double {
         var result = 0.0
 
-        result += this.statistic[Rank.FOUR.rank]!!.times(Rank.FOUR.price)
-        result += this.statistic[Rank.THIRD.rank]!!.times(Rank.THIRD.price)
-        result += this.statistic[Rank.SECOND.rank]!!.times(Rank.SECOND.price)
-        result += this.statistic[Rank.FIRST.rank]!!.times(Rank.FIRST.price)
+        result += this.statistic[Rank.FIVE]!!.times(Rank.FIVE.price)
+        result += this.statistic[Rank.FOUR]!!.times(Rank.FOUR.price)
+        result += this.statistic[Rank.THIRD]!!.times(Rank.THIRD.price)
+        result += this.statistic[Rank.SECOND]!!.times(Rank.SECOND.price)
+        result += this.statistic[Rank.FIRST]!!.times(Rank.FIRST.price)
         return result
     }
 }
