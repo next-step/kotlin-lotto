@@ -15,6 +15,6 @@ class WinningNumberExtractor {
             }
         }
 
-        return LottoWinning(resultMap)
+        return LottoWinning(resultMap.toSortedMap())
     }
 }
