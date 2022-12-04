@@ -1,11 +1,13 @@
 package lotto.view
 
 import lotto.domain.LottoGameResult
+import lotto.domain.lotto.LottoNumber
 import java.math.BigDecimal
 
 object ResultView {
-    fun printChosenNumber(numbers: List<Int>) {
-        println(numbers.toString())
+    fun printChosenNumber(numbers: List<LottoNumber>) {
+        val numberToInt = numbers.map { it.number }
+        println(numberToInt.toString())
     }
 
     fun noticeOfPrize() {
@@ -30,4 +32,9 @@ object ResultView {
         if (rate > BigDecimal.ONE) "이득"
         else if (rate == BigDecimal.ONE) "본전"
         else "손해"
+
+    fun buyResult(manual: Int, auto: Int) {
+        println()
+        println("수동으로 ${manual}장, 자동으로 ${auto}개를 구매했습니다.")
+    }
 }
