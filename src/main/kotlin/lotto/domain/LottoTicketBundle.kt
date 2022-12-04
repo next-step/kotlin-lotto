@@ -1,7 +1,7 @@
 package lotto.domain
 
-class LottoTicketBundle(size: Int) {
-    val lottoTickets: List<LottoTicket> = List(size) {
+class LottoTicketBundle(count: Int) {
+    val lottoTickets: List<LottoTicket> = List(count) {
         LottoTicket()
     }
 }
