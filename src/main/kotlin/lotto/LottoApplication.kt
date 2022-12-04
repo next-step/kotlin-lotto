@@ -9,10 +9,12 @@ import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main() {
-    val money = InputView.read()
+    val money = InputView.readMoney()
+    val manualTicketCount = InputView.readManualTicketCount()
     val lottoMachine = LottoMachine(
         money = money,
-        lottoGenerateStrategy = LottoAutoGenerateStrategy(),
+        manualTicketCount = manualTicketCount,
+        lottoGenerateStrategies = listOf(LottoAutoGenerateStrategy(), LottoManualGenerateStrategy(ConsoleInput())),
         winnerLottoGenerateStrategy = LottoManualGenerateStrategy(ConsoleInput()),
         bonusGenerateStrategy = BonusManualGenerateStrategy(ConsoleInput())
     )

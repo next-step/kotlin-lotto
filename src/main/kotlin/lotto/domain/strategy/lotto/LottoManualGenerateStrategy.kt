@@ -8,6 +8,7 @@ import lotto.util.Parser
 class LottoManualGenerateStrategy(
     private val clientInput: ClientInput,
 ) : LottoGenerateStrategy {
+    override val generateType = GenerateType.MANUAL
     override fun generate(): LottoTicket {
         val winnerLottoNumbersStr = clientInput.read()
         val lottoNumbers = Parser.parse(winnerLottoNumbersStr)

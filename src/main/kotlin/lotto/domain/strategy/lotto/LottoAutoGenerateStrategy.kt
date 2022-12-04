@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 
 class LottoAutoGenerateStrategy : LottoGenerateStrategy {
+    override val generateType = GenerateType.AUTO
     override fun generate(): LottoTicket {
         return LottoTicket(
             (START_NUMBER..END_NUMBER).shuffled()

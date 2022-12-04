@@ -14,11 +14,12 @@ import lotto.util.Reader
 internal class LottoMachineTest : BehaviorSpec({
     Given("로또 머신을 생성하고, ") {
         mockkObject(Reader)
-        val money = 1000
-        every { Reader.read() }.returnsMany(listOf("1, 2, 3, 4, 5, 6", "7"))
+        val money = 2000
+        every { Reader.read() }.returnsMany(listOf("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6", "7"))
         val lottoMachine = LottoMachine(
             money = money,
-            lottoGenerateStrategy = LottoAutoGenerateStrategy(),
+            manualTicketCount = 1,
+            lottoGenerateStrategies = listOf(LottoAutoGenerateStrategy(), LottoManualGenerateStrategy(ConsoleInput())),
             winnerLottoGenerateStrategy = LottoManualGenerateStrategy(ConsoleInput()),
             bonusGenerateStrategy = BonusManualGenerateStrategy(ConsoleInput()),
         )
