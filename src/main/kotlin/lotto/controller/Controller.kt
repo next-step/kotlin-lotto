@@ -1,11 +1,10 @@
 package lotto.controller
 
+import lotto.application.LottoGenerator
 import lotto.application.LottoResultGenerator
 import lotto.domain.InputParser
-import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
-import lotto.domain.LottoNumbersList
 import lotto.domain.LottoPrice
 import lotto.domain.WinningNumbers
 import lotto.dto.LottoResultDto
@@ -17,7 +16,7 @@ object Controller {
         val amount = inputAmount()
         val numberOfLotto = amount.calculateNumberOfLotto()
         ResultView.printNumberOfLotto(numberOfLotto)
-        val lottoNumbersList = generateLottoNumbers(numberOfLotto)
+        val lottoNumbersList = LottoGenerator.generateLottoNumbers(numberOfLotto)
         ResultView.printLottoNumbersList(lottoNumbersList.getList())
 
         val winningNumbers = inputWinningNumbers()
@@ -26,15 +25,6 @@ object Controller {
         val lottoResultGenerator = LottoResultGenerator(winningNumbersWithBonusNumber, lottoNumbersList)
         val lottoResult = lottoResultGenerator.getResult()
         ResultView.printFinalResult(LottoResultDto(lottoResult))
-    }
-
-    private fun generateLottoNumbers(lottoCount: Int): LottoNumbersList {
-        val lottoNumbersList = mutableListOf<LottoNumbers>()
-        repeat(lottoCount) {
-            val lottoNumbers = LottoGenerator.generate()
-            lottoNumbersList.add(lottoNumbers)
-        }
-        return LottoNumbersList(lottoNumbersList)
     }
 
     private fun inputAmount(): LottoPrice {
