@@ -16,7 +16,5 @@ object DelimiterExtractor {
             val customDelimiter = it.groupValues[1]
             return it.groupValues[2].split(customDelimiter)
         } ?: input.split(DEFAULT_DELIMITER_REGEX)
-
     }
-
 }

@@ -1,6 +1,5 @@
 package lotto.domain
 
-
 private const val MIN_MONEY = 0
 
 data class Money(val value: Int) {

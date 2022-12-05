@@ -1,6 +1,9 @@
 package lotto.view
 
-import lotto.domain.*
+import lotto.domain.Award
+import lotto.domain.AwardResults
+import lotto.domain.LottoTicket
+import lotto.domain.LottoTickets
 
 object ResultView {
 
@@ -16,7 +19,6 @@ object ResultView {
     fun printResults(awardResults: AwardResults) {
         println("당첨 통계")
         println("---------")
-
 
         Award.values()
             .filter { it != Award.NON_PLACE }

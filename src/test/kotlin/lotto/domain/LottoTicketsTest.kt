@@ -1,8 +1,6 @@
 package lotto.domain
 
-import fixture.WinningTicketFixture.winningTicket
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 
 internal class LottoTicketsTest {
@@ -35,7 +33,7 @@ internal class LottoTicketsTest {
         )
 
         // when
-        val addLottoTicket = lottoTickets.addAll(addLottoTickets)
+        val addLottoTicket = lottoTickets + addLottoTickets
 
         // then
         assertThat(addLottoTicket.count()).isEqualTo(2)

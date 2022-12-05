@@ -1,9 +1,8 @@
 package lotto.domain
 
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
-
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 internal class AwardResultsTest {
 
@@ -36,9 +35,10 @@ internal class AwardResultsTest {
             1000
         )
         // when, then
-        assertThat(awardResults.matchCount(Award.FIRST_PLACE)).isEqualTo(3)
-        assertThat(awardResults.matchCount(Award.THIRD_PLACE)).isEqualTo(2)
-        assertThat(awardResults.matchCount(Award.FOURTH_PLACE)).isEqualTo(1)
-
+        assertAll(
+            { assertThat(awardResults.matchCount(Award.FIRST_PLACE)).isEqualTo(3) },
+            { assertThat(awardResults.matchCount(Award.THIRD_PLACE)).isEqualTo(2) },
+            { assertThat(awardResults.matchCount(Award.FOURTH_PLACE)).isEqualTo(1) }
+        )
     }
 }

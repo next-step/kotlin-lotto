@@ -22,7 +22,6 @@ class LottoTicketTest {
         assertThatIllegalArgumentException().isThrownBy { LottoTicket(1, 1, 3, 4, 5, 6) }
     }
 
-
     @Test
     internal fun `값이 포함되어 있지 않으면 true를 반환한다`() {
         // given

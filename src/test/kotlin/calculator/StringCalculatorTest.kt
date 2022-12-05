@@ -1,12 +1,12 @@
 package calculator
 
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
-import kotlin.RuntimeException
 
 internal class StringCalculatorTest {
 
@@ -41,7 +41,6 @@ internal class StringCalculatorTest {
         assertThat(result).isEqualTo(0)
     }
 
-
     @ValueSource(strings = ["1", "2", "3", "10"])
     @ParameterizedTest
     internal fun `입력받은 숫자가 한개면 해당 숫자를 반환한다`(input: String) {
@@ -54,7 +53,6 @@ internal class StringCalculatorTest {
         assertThat(result).isEqualTo(input.toInt())
     }
 
-
     @CsvSource(value = ["1,2,3=6", "2,5,5=12", "2,5:5=12", "2:3:4=9"], delimiter = '=')
     @ParameterizedTest
     internal fun `기본 구분자로 입력한 값의 합을 반환한다`(input: String, expected: Int) {
@@ -66,7 +64,6 @@ internal class StringCalculatorTest {
         // then
         assertThat(result).isEqualTo(expected)
     }
-
 
     @ValueSource(strings = ["//;\n1;2;3", "//.\n1.2.3"])
     @ParameterizedTest
@@ -89,6 +86,4 @@ internal class StringCalculatorTest {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { calculator.calculate(input) }
     }
-
-
 }

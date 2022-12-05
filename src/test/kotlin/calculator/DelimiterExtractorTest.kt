@@ -1,7 +1,7 @@
 package calculator
 
-import org.assertj.core.api.Assertions.*
-
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -30,7 +30,6 @@ internal class DelimiterExtractorTest {
         assertThat(result).containsExactly(PositiveNumber(1), PositiveNumber(2), PositiveNumber(3))
     }
 
-
     @ValueSource(strings = ["//;\n1;2;3", "//.\n1.2.3"])
     @ParameterizedTest(name = "[{arguments}]  `\\` 와 `\\n` 사이에 커스텀 구분자로 구분된 PositiveNumber 리스트를 반환한다.")
     internal fun inputCustomDelimiterTest(input: String) {
@@ -42,5 +41,4 @@ internal class DelimiterExtractorTest {
         // then
         assertThat(result).containsExactly(PositiveNumber(1), PositiveNumber(2), PositiveNumber(3))
     }
-
 }

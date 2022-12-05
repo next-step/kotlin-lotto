@@ -1,9 +1,7 @@
 package lotto.domain
 
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.Assertions.*
-
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 
 internal class MoneyTest {
@@ -24,7 +22,8 @@ internal class MoneyTest {
         val money = Money.of(10000)
 
         // when, then
-        assertAll({ assertThat(money.isNotChangeLeft(300)).isFalse },
+        assertAll(
+            { assertThat(money.isNotChangeLeft(300)).isFalse },
             { assertThat(money.isNotChangeLeft(1500)).isFalse },
             { assertThat(money.isNotChangeLeft(1000)).isTrue },
             { assertThat(money.isNotChangeLeft(5000)).isTrue }

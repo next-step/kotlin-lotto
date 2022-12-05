@@ -1,10 +1,8 @@
 package lotto.domain
 
-import fixture.WinningTicketFixture
 import fixture.WinningTicketFixture.winningTicket
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -52,7 +50,6 @@ internal class WinningTicketTest {
         assertThat(result).isEqualTo(Award.FOURTH_PLACE)
     }
 
-
     @Test
     internal fun `번호 5개가 일치하고 보너스 번호가 일치하지 않으면 THIRD_PLACE 이다`() {
         // given
@@ -78,7 +75,6 @@ internal class WinningTicketTest {
         // then
         assertThat(result).isEqualTo(Award.SECOND_PLACE)
     }
-
 
     @Test
     internal fun `번호 6개가 일치하면 FIRST_PLACE 이다`() {
@@ -116,5 +112,4 @@ internal class WinningTicketTest {
             { assertThat(result.matchCount(Award.FIRST_PLACE)).isEqualTo(0) }
         )
     }
-
 }

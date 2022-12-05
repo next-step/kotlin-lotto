@@ -7,7 +7,6 @@ class AwardResults(
     private val ticketCount
         get() = items.sumOf { it.matchCount }
 
-
     fun profitability(): Double {
         return (items.sumOf { it.sumOfPrize }.toDouble() / (ticketPrice * ticketCount))
     }

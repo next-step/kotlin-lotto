@@ -30,7 +30,6 @@ class WinningTicket(
         }.groupingBy { it }.eachCount()
     }
 
-
     companion object {
         fun of(numbers: List<Int>, bonusNumber: Int): WinningTicket {
             return WinningTicket(

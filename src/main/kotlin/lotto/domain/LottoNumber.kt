@@ -12,6 +12,7 @@ data class LottoNumber private constructor(
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
 
+        val RANGE = (MIN_NUMBER..MAX_NUMBER)
 
         private val cache: Map<Int, LottoNumber> = mapOf(
             *(MIN_NUMBER..MAX_NUMBER).map { Pair(it, LottoNumber(it)) }.toTypedArray()
@@ -22,6 +23,5 @@ data class LottoNumber private constructor(
         }
 
         private fun errorMessage(value: Int) = "$value 값은 1 ~ 45 까지만 허용됩니다."
-
     }
 }
