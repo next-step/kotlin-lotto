@@ -23,7 +23,7 @@ internal class WinningLottoNumbersTest {
 
         val win = winningLottoNumbers.win(inputLottoNumbers, bonusNumber)
 
-        assertThat(win == Rank.SECOND)
+        assertThat(win == Rank.THIRD)
     }
 
     private fun makeLottoNumbers(vararg elements: Int): Set<LottoNumber> {
