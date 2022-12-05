@@ -1,20 +1,11 @@
 package lotto.domain
 
-class UserLottos(lottos: List<LottoNumbers> = emptyList()) {
-    private val _lottos: MutableList<LottoNumbers> = lottos.toMutableList()
-    val lottos: List<LottoNumbers>
-        get() = _lottos.toList()
-
+class UserLottos(val lottos: List<LottoNumbers> = emptyList()) {
     fun add(lottoNumbers: LottoNumbers): UserLottos {
-        _lottos.add(lottoNumbers)
-        return UserLottos(this.lottos)
+        return UserLottos(lottos + listOf(lottoNumbers))
     }
 
     fun addAll(lottos: List<LottoNumbers>): UserLottos {
-        var newUserLottos = UserLottos()
-        lottos.forEach {
-            newUserLottos = this.add(it)
-        }
-        return newUserLottos
+        return UserLottos(this.lottos + lottos)
     }
 }
