@@ -8,8 +8,12 @@ class LottoController {
     fun run() {
         val purchaseAmount = InputView.getPurchaseAmount()
         val purchaseCount = purchaseAmount.getNumberOfLotto()
+        if (purchaseCount == 0) {
+            ResultView.printNoLottoToBuy()
+            return
+        }
 
-        val manualNumberOfLotto = InputView.getManualNumberOfLotto(purchaseAmount)
+        val manualNumberOfLotto = InputView.getManualNumberOfLotto(purchaseCount)
         val inputManualNumbers = InputView.getManualLottos(manualNumberOfLotto)
 
         val userLottos = LottoVendingMachine.buyLottos(purchaseAmount, inputManualNumbers)

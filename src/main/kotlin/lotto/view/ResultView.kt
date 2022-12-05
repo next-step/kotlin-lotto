@@ -33,4 +33,8 @@ object ResultView {
             println("[${sortedValue.joinToString(", ")}]")
         }
     }
+
+    fun printNoLottoToBuy() {
+        println("구입할 수 있는 로또가 없습니다.")
+    }
 }

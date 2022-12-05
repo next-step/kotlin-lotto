@@ -5,21 +5,20 @@ import lotto.domain.PurchaseAmount
 object InputView {
     private const val INVALID_INPUT_ERROR_MESSAGE = "로또 번호는 숫자만 입력할 수 있습니다."
     fun getPurchaseAmount(): PurchaseAmount {
-        println("구입 금액을 입력해 주세요.")
+        println("구입 금액을 입력해 주세요. (1장 당 가격: 1000원)")
+
         return PurchaseAmount(readln().toInt())
     }
 
-    fun getManualNumberOfLotto(purchaseAmount: PurchaseAmount): Int {
+    fun getManualNumberOfLotto(numberOfLottoToBuy: Int): Int {
         println("\n수동으로 구매할 로또 수를 입력해 주세요.")
         val numberOfLottoByManual = readln().toInt()
-        if (!purchaseAmount.canBuyNumberOfLotto(numberOfLottoByManual)) {
-            throw IllegalArgumentException("구매할 수 없는 개수입니다.")
-        }
-        if (numberOfLottoByManual < 0) {
-            throw IllegalArgumentException("올바른 수를 입력해 주세요.")
-        }
 
-        return numberOfLottoByManual
+        if (numberOfLottoByManual > numberOfLottoToBuy) {
+            print("\n구매할 수 없는 개수입니다.")
+            return getManualNumberOfLotto(numberOfLottoToBuy)
+        }
+        return if (numberOfLottoByManual < 0) 0 else numberOfLottoByManual
     }
 
     fun getManualLottos(numberOfLottoByManual: Int): List<List<Int>> {
