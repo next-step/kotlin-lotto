@@ -7,18 +7,18 @@ internal class StatisticsTest {
     @Test
     fun `통계 값(3이상 6이하)이 존재하면 1을 더한다`() {
         val statistics = Statistics()
-        statistics.statistic[3] = 0
+        statistics.statistic[Rank.FIVE] = 0
 
-        statistics.add(3)
+        statistics.add(Rank.FIVE)
 
-        assertThat(statistics.statistic[3] == 1)
+        assertThat(statistics.statistic[Rank.FIVE] == 1)
     }
 
     @Test
-    fun `통계값을 계산한다`() {
+    fun `5등 통계값을 계산한다`() {
         // given
         val statistics = Statistics()
-        statistics.statistic[3] = 1 // 3개는 5000원
+        statistics.statistic[Rank.FIVE] = 1 // 3개는 5000원
 
         // when
         val result = statistics.statistic(3000)
