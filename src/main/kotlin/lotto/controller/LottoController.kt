@@ -10,15 +10,15 @@ class LottoController {
         val purchaseCount = purchaseAmount.getNumberOfLotto()
 
         val manualNumberOfLotto = InputView.getManualNumberOfLotto(purchaseAmount)
-        val manualUserLottos = InputView.getManualLottos(manualNumberOfLotto)
-        val randomNumberOfLotto = purchaseCount - manualNumberOfLotto
+        val inputManualNumbers = InputView.getManualLottos(manualNumberOfLotto)
 
-        val randomUserLottos = LottoVendingMachine.buyRandomLottos(randomNumberOfLotto)
-        val userLottos = manualUserLottos.addAll(randomUserLottos)
-        ResultView.printPurchaseStatus(manualNumberOfLotto, randomNumberOfLotto)
+        val userLottos = LottoVendingMachine.buyLottos(purchaseAmount, inputManualNumbers)
+        ResultView.printPurchaseStatus(manualNumberOfLotto, purchaseCount - manualNumberOfLotto)
         ResultView.printPurchasedLotto(userLottos)
 
-        val winningLottoNumbers = InputView.getWinningLottoNumbers()
+        val inputWinningNumbers = InputView.getWinningNumbers()
+        val inputBonusNumber = InputView.getBonusNumber()
+        val winningLottoNumbers = LottoVendingMachine.makeWinningLotto(inputWinningNumbers, inputBonusNumber)
         val winningStatistics = winningLottoNumbers.makeStatistics(userLottos)
         ResultView.printRewardsStatistics(winningStatistics)
 

@@ -1,10 +1,6 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
 import lotto.domain.PurchaseAmount
-import lotto.domain.UserLottos
-import lotto.domain.WinningLottoNumbers
 
 object InputView {
     private const val INVALID_INPUT_ERROR_MESSAGE = "로또 번호는 숫자만 입력할 수 있습니다."
@@ -26,35 +22,34 @@ object InputView {
         return numberOfLottoByManual
     }
 
-    fun getManualLottos(numberOfLottoByManual: Int): UserLottos {
+    fun getManualLottos(numberOfLottoByManual: Int): List<List<Int>> {
         println("\n수동으로 구매할 번호를 입력해 주세요.")
-        var userLottos = UserLottos()
+
+        val inputList: MutableList<List<Int>> = mutableListOf()
         repeat(numberOfLottoByManual) {
-            val inputLottoNumbers = readln()
-            userLottos = userLottos.add(validateLottoNumbers(inputLottoNumbers))
+            val inputNumbers = validateNumbers(readln())
+            inputList.add(inputNumbers)
         }
-        return userLottos
+        return inputList
     }
 
-    fun getWinningLottoNumbers(): WinningLottoNumbers {
+    fun getWinningNumbers(): List<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val inputLottoNumbers = readln()
-        val lottoNumbers = validateLottoNumbers(inputLottoNumbers)
+        return validateNumbers(inputLottoNumbers)
+    }
 
+    fun getBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        val inputBonusBall = LottoNumber(readln().toInt())
-
-        return WinningLottoNumbers(lottoNumbers = lottoNumbers, bonusLottoNumber = inputBonusBall)
+        return readln().toInt()
     }
 
-    private fun validateLottoNumbers(input: String): LottoNumbers {
+    private fun validateNumbers(input: String): List<Int> {
         val strings = input.replace(" ", "").split(",")
-        val lottoNumbers = strings.map { convertStringToLottoNumber(it) }
-        return LottoNumbers(lottoNumbers.toSet())
+        return strings.map { convertStringToInt(it) }
     }
 
-    private fun convertStringToLottoNumber(value: String): LottoNumber {
-        val number = value.toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_ERROR_MESSAGE)
-        return LottoNumber(number)
+    private fun convertStringToInt(value: String): Int {
+        return value.toIntOrNull() ?: throw IllegalArgumentException(INVALID_INPUT_ERROR_MESSAGE)
     }
 }
