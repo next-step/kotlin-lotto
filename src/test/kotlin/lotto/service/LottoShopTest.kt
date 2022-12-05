@@ -10,13 +10,13 @@ import java.math.BigDecimal
 class LottoShopTest {
     @Test
     internal fun `N*1000원을 입력하면 N개가 발급된다`() {
-        val lottos = LottoShop.buy(5999)
+        val lottos = LottoShop.buy(BigDecimal(5999))
         assertThat(lottos.size).isEqualTo(5)
     }
 
     @Test
     internal fun `1000원 미만 금액이 들어오면 RuntimeException`() {
-        assertThrows<IllegalArgumentException> { LottoShop.buy(999) }
+        assertThrows<IllegalArgumentException> { LottoShop.buy(BigDecimal(999)) }
     }
 
     @ParameterizedTest
@@ -37,7 +37,7 @@ class LottoShopTest {
     @Test
     internal fun `당첨 이후 총 수익률을 계산한다`() {
         val lottoCount = 7
-        val winningPrize = 1_234_567
+        val winningPrize = BigDecimal.valueOf(1_234_567)
         val returnRatio = LottoShop.returnRatioOf(lottoCount, winningPrize)
         assertThat(returnRatio).isEqualTo(BigDecimal("176366.71"))
     }

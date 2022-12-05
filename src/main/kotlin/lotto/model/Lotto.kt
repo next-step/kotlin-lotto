@@ -1,9 +1,13 @@
 package lotto.model
 
-class Lotto(val value: List<LottoNumber>) : List<LottoNumber> by value {
+class Lotto(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
+    init {
+        check(value.size == 6)
+    }
+
     companion object {
-        fun of(i: Int, i1: Int, i2: Int, i3: Int, i4: Int, i5: Int): Lotto {
-            return Lotto(listOf())
+        fun of(value: List<Int>): Lotto {
+            return Lotto(value.map { LottoNumber(it) }.toSet())
         }
     }
 }
