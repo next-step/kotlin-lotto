@@ -1,7 +1,8 @@
 package lotto.domain.machine
 
-import org.assertj.core.api.Assertions.*
-
+import lotto.domain.Money
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -14,23 +15,23 @@ internal class LottoFactoryTest {
     internal fun `로또 티켓 가격보다 낮거나, 잔금이 남으면 기계 생성에 실패한다`(inputMoney: Int) {
         // given
         // when, then
-        assertThatIllegalArgumentException().isThrownBy { LottoFactory(inputMoney) }
+        assertThatIllegalArgumentException().isThrownBy { LottoFactory(Money.of(inputMoney)) }
     }
 
-    @Test
-    fun `입력받은 금액 내에 구매 가능한지 확인한다`() {
-        // given
-        val lottoFactory = LottoFactory(2000)
-
-        // when, then
-        assertThat(lottoFactory.isBuyAble(3)).isFalse
-        assertThat(lottoFactory.isBuyAble(1)).isTrue
-    }
+//    @Test
+//    fun `입력받은 금액 내에 구매 가능한지 확인한다`() {
+//        // given
+//        val lottoFactory = LottoFactory(Money.of(2000))
+//
+//        // when, then
+//        assertThat(lottoFactory.isBuyAble(3)).isFalse
+//        assertThat(lottoFactory.isBuyAble(1)).isTrue
+//    }
 
     @Test
     fun `입력받은 티켓이 없어도 남은 금액으로 티켓 구매가 이뤄진다`() {
         // given
-        val lottoFactory = LottoFactory(14000)
+        val lottoFactory = LottoFactory(Money.of(14000))
 
         // when
         val tickets = lottoFactory.buyTickets(emptyList())
@@ -42,7 +43,7 @@ internal class LottoFactoryTest {
     @Test
     fun `수기로 모든 티켓을 입력받아도 티켓 구매가 이뤄진다`() {
         // given
-        val lottoFactory = LottoFactory(2000)
+        val lottoFactory = LottoFactory(Money.of(2000))
 
         // when
         val tickets = lottoFactory.buyTickets(
@@ -60,7 +61,7 @@ internal class LottoFactoryTest {
     @Test
     fun `입력받은 티켓을 제외하고 남은 금액으로 티켓 구매가 이뤄진다`() {
         // given
-        val lottoFactory = LottoFactory(3000)
+        val lottoFactory = LottoFactory(Money.of(3000))
 
         // when
         val tickets = lottoFactory.buyTickets(

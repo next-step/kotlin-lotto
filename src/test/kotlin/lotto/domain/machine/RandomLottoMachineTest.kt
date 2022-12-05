@@ -1,5 +1,6 @@
 package lotto.domain.machine
 
+import lotto.domain.Money
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
@@ -13,7 +14,7 @@ internal class RandomLottoMachineTest {
     @ParameterizedTest
     internal fun `로또 티켓이 발행 된다`(inputMoney: Int, expectedSize: Int) {
         // given
-        val randomLottoMachine = RandomLottoMachine(inputMoney)
+        val randomLottoMachine = RandomLottoMachine(Money.of(inputMoney))
 
         // when
         val lottoTickets = randomLottoMachine.publish()
@@ -27,7 +28,7 @@ internal class RandomLottoMachineTest {
         // given
         val money = 0
         // when, then
-        assertThat(RandomLottoMachine(money).publish().count()).isEqualTo(0)
+        assertThat(RandomLottoMachine(Money.of(money)).publish().count()).isEqualTo(0)
     }
 
     @ValueSource(ints = [900, 12100])
@@ -36,7 +37,7 @@ internal class RandomLottoMachineTest {
         // given
         val money = 12100
         // when, then
-        assertThatIllegalArgumentException().isThrownBy { RandomLottoMachine(money) }
+        assertThatIllegalArgumentException().isThrownBy { RandomLottoMachine(Money.of(money)) }
     }
 
 }

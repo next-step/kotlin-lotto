@@ -3,16 +3,17 @@ package lotto.domain.machine
 import lotto.domain.LottoNumber
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
+import lotto.domain.Money
 
 class RandomLottoMachine(
-    private val money: Int
+    private val money: Money
 ) : LottoMachine {
 
     private val count
-        get() = money / LottoTicket.PRICE
+        get() = money.value / LottoTicket.PRICE
 
     init {
-        require(money % LottoTicket.PRICE == 0) { "잔돈 ${money % LottoTicket.PRICE} 이 남을 수 없어요." }
+        require(money.isNotChangeLeft(LottoTicket.PRICE)) { "잔돈 ${money.value % LottoTicket.PRICE} 이 남을 수 없어요." }
     }
 
     override fun publish(): LottoTickets {

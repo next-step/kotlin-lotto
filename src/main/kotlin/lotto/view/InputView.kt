@@ -4,7 +4,7 @@ private const val DELIMITERS = ", "
 
 object InputView {
 
-    fun inputMoney(): Int {
+    fun inputMoneyValue(): Int {
         println("구입금액을 입력해 주세요.")
         return readln().toInt()
     }
