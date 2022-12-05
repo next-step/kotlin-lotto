@@ -9,7 +9,7 @@ import io.kotest.matchers.string.startWith
 
 class PurchaseAmountTest : FunSpec({
     context("객체 생성") {
-        test("자연수를 입력받아 객체를 생성한다.") {
+        test("1000의 배수를 입력받아 객체를 생성한다.") {
             shouldNotThrowAny {
                 PurchaseAmount(1000)
             }
