@@ -1,6 +1,6 @@
-package lotto.`in`
+package lotto.view
 
-import lotto.`in`.dto.WinningStatistic
+import lotto.controller.dto.WinningStatistic
 
 class ConsoleOutPut {
     fun printPurchasedLottoCount(lottoCount: Int) {

@@ -1,4 +1,4 @@
-package lotto.`in`
+package lotto.view
 
 class ConsoleInput {
     fun getPurchaseAmount(): Int {

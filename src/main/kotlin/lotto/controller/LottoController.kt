@@ -1,10 +1,12 @@
-package lotto.`in`
+package lotto.controller
 
+import lotto.controller.dto.WinningStatistic
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumbers
 import lotto.domain.WinningPrize
 import lotto.domain.vo.PurchaseAmount
-import lotto.`in`.dto.WinningStatistic
+import lotto.view.ConsoleInput
+import lotto.view.ConsoleOutPut
 
 class LottoController(private val input: ConsoleInput, private val outPut: ConsoleOutPut) {
     fun start() {

@@ -1,4 +1,4 @@
-package lotto.`in`.dto
+package lotto.controller.dto
 
 class WinningStatistic(winningPrizes: List<Pair<Int, Int>>, duplicateMatchedCount: Map<Int, Int>) {
     val winningStatistic: List<Triple<Int, Int, Int>>
