@@ -13,6 +13,23 @@ class WinningTicket(
         return Award.of(matchCount, lottoTicket.containNumber(bonusNumber))
     }
 
+    fun awardResults(tickets: LottoTickets): AwardResults {
+        val groupByAward = groupByAward(tickets)
+
+        return AwardResults(
+            Award.values().map {
+                AwardResult(it, groupByAward.getOrDefault(it, 0))
+            },
+            LottoTicket.PRICE
+        )
+    }
+
+    private fun groupByAward(tickets: LottoTickets): Map<Award, Int> {
+        return tickets.items.map {
+            match(it)
+        }.groupingBy { it }.eachCount()
+    }
+
 
     companion object {
         fun of(numbers: List<Int>, bonusNumber: Int): WinningTicket {

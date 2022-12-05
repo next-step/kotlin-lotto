@@ -21,30 +21,6 @@ internal class LottoTicketsTest {
     }
 
     @Test
-    internal fun `받을 수 있는 상금이 반환된다`() {
-        // given
-        val lottoTickets = LottoTickets(
-            listOf(
-                LottoTicket(1, 2, 3, 10, 11, 12),
-                LottoTicket(1, 2, 3, 10, 11, 12),
-                LottoTicket(1, 2, 3, 4, 11, 12)
-            )
-        )
-
-        val winningTicket = winningTicket(listOf(1, 2, 3, 4, 5, 6), 45)
-
-        // when
-        val result = lottoTickets.awardResults(winningTicket)
-
-        // then
-        assertAll(
-            { assertThat(result.matchCount(Award.FIFTH_PLACE)).isEqualTo(2) },
-            { assertThat(result.matchCount(Award.FOURTH_PLACE)).isEqualTo(1) },
-            { assertThat(result.matchCount(Award.FIRST_PLACE)).isEqualTo(0) }
-        )
-    }
-
-    @Test
     internal fun `로또 티켓이 합쳐진 값이 반환된다`() {
         // given
         val lottoTickets = LottoTickets(

@@ -3,6 +3,8 @@ package lotto.domain
 import fixture.WinningTicketFixture
 import fixture.WinningTicketFixture.winningTicket
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -89,6 +91,30 @@ internal class WinningTicketTest {
 
         // then
         assertThat(result).isEqualTo(Award.FIRST_PLACE)
+    }
+
+    @Test
+    internal fun `받을 수 있는 상금이 반환된다`() {
+        // given
+        val lottoTickets = LottoTickets(
+            listOf(
+                LottoTicket(1, 2, 3, 10, 11, 12),
+                LottoTicket(1, 2, 3, 10, 11, 12),
+                LottoTicket(1, 2, 3, 4, 11, 12)
+            )
+        )
+
+        val winningTicket = winningTicket(listOf(1, 2, 3, 4, 5, 6), 45)
+
+        // when
+        val result = winningTicket.awardResults(lottoTickets)
+
+        // then
+        assertAll(
+            { assertThat(result.matchCount(Award.FIFTH_PLACE)).isEqualTo(2) },
+            { assertThat(result.matchCount(Award.FOURTH_PLACE)).isEqualTo(1) },
+            { assertThat(result.matchCount(Award.FIRST_PLACE)).isEqualTo(0) }
+        )
     }
 
 }

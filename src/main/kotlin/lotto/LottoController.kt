@@ -25,7 +25,7 @@ fun main() {
 
     val winningTicket = WinningTicket.of(numbers, bonusNumber)
 
-    val awardResults = tickets.awardResults(winningTicket)
+    val awardResults = winningTicket.awardResults(tickets)
     ResultView.printResults(awardResults)
 
 }
