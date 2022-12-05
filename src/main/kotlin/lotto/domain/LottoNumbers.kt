@@ -2,12 +2,12 @@ package lotto.domain
 
 import lotto.domain.vo.LottoNumber
 
-class LottoNumbers(numbers: List<Int>) {
-    private val lottoNumbers: Set<LottoNumber> = numbers.map { LottoNumber(it) }.toSortedSet()
-
+class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) {
     init {
         require(lottoNumbers.size == SIZE) { "there is duplicate number" }
     }
+
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber(it) }.toSortedSet())
 
     fun countMatchedNumbers(otherLottoNumbers: LottoNumbers): Int {
         return this.lottoNumbers.count { otherLottoNumbers.lottoNumbers.contains(it) }
