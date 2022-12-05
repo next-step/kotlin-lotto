@@ -11,11 +11,5 @@ value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
         private const val MAX_VALUE = 45
     }
 
-    override fun compareTo(other: LottoNumber): Int {
-        return when {
-            this.number > other.number -> 1
-            this.number < other.number -> -1
-            else -> 0
-        }
-    }
+    override fun compareTo(other: LottoNumber): Int = number.compareTo(other.number)
 }
