@@ -14,7 +14,7 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [0, 47])
+    @ValueSource(ints = [-1, 0, 47, 48])
     internal fun `로또 숫자는 1-46 범위를 넘을 수 없다`(value: Int) {
         assertThrows<IllegalArgumentException> { LottoNumber(value) }
     }
