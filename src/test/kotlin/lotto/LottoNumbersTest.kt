@@ -27,10 +27,10 @@ internal class LottoNumbersTest {
         val lottoNumbers = LottoNumbers(lottoNumberList)
 
         // when
-        val contains = lottoNumbers.contains(winningLottoNumberList)
+        val contains = lottoNumbers.match(winningLottoNumberList)
 
         // then
-        assertTrue(contains == 6)
+        assertTrue(contains == Rank.FIRST)
     }
 
     private fun makeLottoNumber(vararg args: Int): Set<LottoNumber> {

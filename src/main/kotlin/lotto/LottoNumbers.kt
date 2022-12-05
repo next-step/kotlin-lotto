@@ -7,12 +7,12 @@ class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) {
         }
     }
 
-    fun contains(winningLottoNumbers: Set<LottoNumber>): Int {
+    fun match(winningLottoNumbers: Set<LottoNumber>): Rank {
         var count = 0
         for (lottoNumber in lottoNumbers) {
             count += winningLottoNumbers.contain(lottoNumber)
         }
-        return count
+        return Rank.findByFirst(count)
     }
 
     private fun Set<LottoNumber>.contain(lottoNumber: LottoNumber): Int {

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 internal class BonusNumberTest {
 
     @Test
-    fun `생성 제한 테스트`() {
+    fun `기존 로또 번호와 중복된 생성 제한 테스트`() {
         val winningLottoNumbers = WinningLottoNumbers(makeLottoNumbers(1, 2, 3, 4, 5, 6))
         org.junit.jupiter.api.assertThrows<IllegalArgumentException> {
             BonusNumber(winningLottoNumbers, LottoNumber(1))
