@@ -29,6 +29,14 @@ class LottoTicketTest {
 
         // when, then
         assertThat(lottoTicket.notContainNumber(LottoNumber.of(7))).isTrue
+    }
+
+    @Test
+    internal fun `값이 포함되어 있으면 false를 반환한다`() {
+        // given
+        val lottoTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+
+        // when, then
         assertThat(lottoTicket.notContainNumber(LottoNumber.of(6))).isFalse
     }
 }
