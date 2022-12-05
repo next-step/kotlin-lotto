@@ -1,50 +1,42 @@
 package lotto.ui
 
-import lotto.domain.*
-import lotto.ui.view.InputView
-import lotto.ui.view.ResultView
+import lotto.domain.Lotto
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbersMatcher
+import lotto.domain.LottoResult
+import lotto.domain.LottoReward
+import lotto.domain.LottoSaleMachine
+import lotto.domain.LottoWinningAmount
+import lotto.domain.Money
 
-class LottoController {
-   fun main(args: Array<String>) {
-       val purchasePrice = chargePaymentAmount()
-       val purchaseLotto = purchaseLotto(purchasePrice)
-       val ticketingLottoList = ticketingLotto(purchaseLotto)
+object LottoController {
+    fun apply(purchasePrice: Int): List<Lotto> {
+        val purchaseCount = purchaseLotto(purchasePrice)
 
-       val winningLottoNumbers = drawWinningLottoNumbers()
-       validateWinningLottoNumbersCondition(winningLottoNumbers)
-       val winningLotto = Lotto(winningLottoNumbers)
+        return MutableList(purchaseCount) {
+            LottoGenerator.generate()
+        }
+    }
 
-       val winningAmountList = calculateWinningAmount(ticketingLottoList, winningLotto)
-       val lottoResult = getLottoResult(purchasePrice, winningAmountList)
+    fun draw(purchaseLottoList: List<Lotto>, winningLottoNumbers: Set<LottoNumber>): LottoResult {
+        val winningLotto = Lotto(winningLottoNumbers)
+        val lottoWinningAmount = getLottoWinningAmount(purchaseLottoList, winningLotto)
 
-       printLottoResult(lottoResult)
-   }
+        return LottoResult(Money(purchaseLottoList.size * 1000), lottoWinningAmount)
+    }
 
-   private fun chargePaymentAmount(): Int {
-       return InputView.getPurchasePrice()
-   }
+    private fun purchaseLotto(purchasePrice: Int): Int {
+        return LottoSaleMachine.purchase(purchasePrice)
+    }
 
-   private fun purchaseLotto(purchasePrice: Int): Int {
-       return LottoSaleMachine.purchase(purchasePrice)
-   }
+    private fun getLottoWinningAmount(purchaseLottoList: List<Lotto>, winningLotto: Lotto): LottoWinningAmount {
+        val winningAmountList = calculateWinningAmount(purchaseLottoList, winningLotto)
 
-   private fun ticketingLotto(purchaseLotto: Int): List<Lotto> {
-       return MutableList(purchaseLotto) {
-           Lotto(LottoNumbersGenerator.generate())
-       }
-   }
+        return LottoWinningAmount(winningAmountList)
+    }
 
-   private fun drawWinningLottoNumbers(): List<Int> {
-       return InputView.getWinningLotto()
-   }
-
-   private fun validateWinningLottoNumbersCondition(winningLottoNumbers: List<Int>): Boolean {
-       if(!LottoNumbersValidator.validate(winningLottoNumbers)) throw IllegalArgumentException("유효하지 않은 로또 번호입니다.")
-
-       return true
-   }
-
-   private fun calculateWinningAmount(ticketingLottoList: List<Lotto>, winningLotto: Lotto): Map<Int, Int> {
+    private fun calculateWinningAmount(ticketingLottoList: List<Lotto>, winningLotto: Lotto): Map<Money, Int> {
         var winningAmountList = mutableMapOf(
             LottoReward.MATCH_THREE.rewardPrice to 0,
             LottoReward.MATCH_FOUR.rewardPrice to 0,
@@ -52,26 +44,13 @@ class LottoController {
             LottoReward.MATCH_SIX.rewardPrice to 0,
         )
 
-       ticketingLottoList.forEach { ticketingLotto ->
-           val matchCount = LottoNumbersMatcher.calculateMatchCount(ticketingLotto, winningLotto)
+        ticketingLottoList.forEach { ticketingLotto ->
+            val matchCount = LottoNumbersMatcher.calculateMatchCount(ticketingLotto, winningLotto)
+            var rewardPrice = LottoReward.of(matchCount).rewardPrice
 
-           var lottoReward = LottoReward.find(matchCount)
+            winningAmountList[rewardPrice] = (winningAmountList[rewardPrice] ?: 0) + 1
+        }
 
-
-           var rewardPrice = lottoReward?.rewardPrice
-           if (rewardPrice != 0) {
-               winningAmountList[rewardPrice] = (winningAmountList[rewardPrice] ?: 0) + 1
-           }
-       }
-
-       return winningAmountList
-   }
-
-   private fun getLottoResult(purchasePrice: Int, winningAmountList: Map<Int, Int>): LottoResult {
-        return LottoResult(purchasePrice, winningAmountList)
-   }
-
-   private fun printLottoResult(lottoResult: LottoResult) {
-       ResultView.printLottoResult(lottoResult)
-   }
+        return winningAmountList
+    }
 }
