@@ -40,10 +40,10 @@ internal class LottoTest {
     fun getMatchCountTest() {
         val sameCount = 3
         val numbers = "1,2,3,4,5,6"
-        val lotto = LottoGenerator.generateLotto(numbers)
+        val lotto = LottoCustomGenerator.generateLotto(numbers)
 
         val otherNumbers = "1,2,3,7,8,9"
-        val otherLotto = LottoGenerator.generateLotto(otherNumbers)
+        val otherLotto = LottoCustomGenerator.generateLotto(otherNumbers)
 
         val count = lotto.getMatchCount(otherLotto)
 
@@ -55,7 +55,7 @@ internal class LottoTest {
     fun `containLottoNumber should be true when Lotto has lottoNumber`(lottoNumbers: String) {
         val number = 3
         val lottoNumber = LottoNumber(number)
-        val lotto = LottoGenerator.generateLotto(lottoNumbers)
+        val lotto = LottoCustomGenerator.generateLotto(lottoNumbers)
 
         val result = lotto.containLottoNumber(lottoNumber)
 
@@ -67,7 +67,7 @@ internal class LottoTest {
     fun `containLottoNumber should be false when Lotto does not have lottoNumber`(lottoNumbers: String) {
         val number = 3
         val lottoNumber = LottoNumber(number)
-        val lotto = LottoGenerator.generateLotto(lottoNumbers)
+        val lotto = LottoCustomGenerator.generateLotto(lottoNumbers)
 
         val result = lotto.containLottoNumber(lottoNumber)
 

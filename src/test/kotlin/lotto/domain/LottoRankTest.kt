@@ -13,16 +13,16 @@ internal class LottoRankTest {
         val isBonus = false
         val lottoRank = LottoRank.valueOf(matchCount, isBonus)
 
-        assertThat(lottoRank?.matchCount).isEqualTo(matchCount)
+        assertThat(lottoRank.matchCount).isEqualTo(matchCount)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [0, 1, 2, Int.MAX_VALUE])
-    fun `valueOf return null when matchCount not in 3~6`(matchCount: Int) {
+    fun `valueOf return MISS when matchCount not in 3~6`(matchCount: Int) {
         val isBonus = false
         val lottoRank = LottoRank.valueOf(matchCount, isBonus)
 
-        assertThat(lottoRank).isNull()
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS)
     }
 
     @ParameterizedTest
@@ -57,7 +57,7 @@ internal class LottoRankTest {
         val lottoRankList = setOf(LottoRank.THIRD_PLACE, LottoRank.SECOND_PLACE)
         val missingResult = LottoRank.getMissing(lottoRankList)
 
-        val result = setOf(LottoRank.FOURTH_PLACE, LottoRank.FIRST_PLACE, LottoRank.FIFTH_PLACE)
+        val result = listOf(LottoRank.FIFTH_PLACE, LottoRank.FOURTH_PLACE, LottoRank.FIRST_PLACE)
         assertThat(missingResult).isEqualTo(result)
     }
 }

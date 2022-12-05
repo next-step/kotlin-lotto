@@ -8,7 +8,9 @@ fun main() {
 
     val money = InputView.inputMoney()
 
-    val lottoList = lottoController.purchase(money)
+    val manualLottoCount = InputView.inputManualLottoCount()
+
+    val lottoList = lottoController.purchase(money, manualLottoCount)
 
     lottoController.showStatistic(money, lottoList)
 }

@@ -1,39 +1,49 @@
 package lotto.controller
 
-import lotto.domain.LottoGenerator
+import lotto.domain.LottoCustomGenerator
 import lotto.domain.LottoList
+import lotto.domain.LottoListGenerator
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumberGenerator
 import lotto.domain.LottoPurchase
-import lotto.domain.LottoStatistics
+import lotto.domain.WinningLotto
+import lotto.domain.WinningLottoStatistics
 import lotto.uI.InputView
 import lotto.uI.OutputView
 
 class LottoController {
 
-    fun purchase(money: Long): LottoList {
-        val lottoCount = LottoPurchase(price = money).getLottoCount()
+    fun purchase(money: Long, manualLottoCount: Long): LottoList {
+        val autoLottoCount = LottoPurchase(price = money, manualLottoCount = manualLottoCount).getAutoLottoCount()
 
-        val lottoList = LottoGenerator.generateLottoList(lottoCount, LottoNumberGenerator)
+        val manualLottoList = InputView.inputManualLottoList(manualLottoCount)
 
-        OutputView.outputLottoList(lottoList)
-        return LottoList(lottoList)
+        val autoLottoList = LottoListGenerator.generateLottoList(autoLottoCount, LottoCustomGenerator)
+
+        val lottoList = manualLottoList.addLottoList(autoLottoList)
+
+        OutputView.outputLottoList(
+            manualLottoCount = manualLottoCount,
+            autoLottoCount = autoLottoCount,
+            lottoList = lottoList
+        )
+        return lottoList
     }
 
     fun showStatistic(money: Long, lottoList: LottoList) {
         val lastWeekLottoNumber = InputView.inputLastWeekLottoNumbers()
 
-        val lastWeekLotto = LottoGenerator.generateLotto(lastWeekLottoNumber)
+        val lastWeekWinningLotto = LottoCustomGenerator.generateLotto(lastWeekLottoNumber)
 
         val bonusLottoNumber = LottoNumber(InputView.inputBonusLottoNumber())
 
-        val lottoStatistics = LottoStatistics(lastWeekLotto, bonusLottoNumber)
+        val winningLotto = WinningLotto(lastWeekWinningLotto, bonusLottoNumber)
+        val winningLottoStatistics = WinningLottoStatistics(winningLotto)
 
-        val lottoMatchList = lottoStatistics.getWinningStatistics(lottoList)
+        val lottoMatchList = winningLottoStatistics.getWinningStatistics(lottoList)
         OutputView.outputLottoStatistics(lottoMatchList)
 
-        val profit = lottoStatistics.getProfit(money, lottoMatchList)
-        val isProfitable = lottoStatistics.isProfitable(profit)
+        val profit = winningLottoStatistics.getProfit(money, lottoMatchList)
+        val isProfitable = winningLottoStatistics.isProfitable(profit)
         OutputView.outputLottoProfit(profit, !isProfitable)
     }
 }
