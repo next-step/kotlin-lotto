@@ -8,6 +8,6 @@ object LottoMachine {
     private val LOTTO_NUMBERS = 1..45
 
     fun createLottoNumbers(purchaseAmount: PurchaseAmount): List<LottoNumbers> {
-        return List(purchaseAmount.amount.div(LOTTO_PRICE)) { LottoNumbers(LOTTO_NUMBERS.shuffled().subList(0, 6)) }
+        return List(purchaseAmount.div(LOTTO_PRICE)) { LottoNumbers(LOTTO_NUMBERS.shuffled().subList(0, 6)) }
     }
 }
