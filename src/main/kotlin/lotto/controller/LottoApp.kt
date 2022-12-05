@@ -17,11 +17,11 @@ fun main() {
         InputView.askManualLotto(manualLottoBuyNumber)
             .map { Lotto.of(it) }
     )
-    val lottos = lottoStore.buy(money, manualLottoBuyNumber)
-        .combine(manualLottos)
+    val randomLottos = lottoStore.buy(money, manualLottoBuyNumber)
+    val totalLottos = manualLottos + randomLottos
 
-    OutputView.printLottoBuyStatus(manualLottoBuyNumber, lottos.size() - manualLottoBuyNumber)
-    OutputView.printLottos(lottos)
+    OutputView.printLottoBuyStatus(manualLottoBuyNumber, totalLottos.size() - manualLottoBuyNumber)
+    OutputView.printLottos(totalLottos)
     val winningLotto = Lotto.of(
         InputView.askWinningLottoBall()
     )
@@ -30,6 +30,6 @@ fun main() {
     if (winningLotto.containsBall(bonusBall)) {
         throw IllegalArgumentException("보너스볼은 이미 추첨된 번호가 될 수 없습니다.")
     }
-    val rewards = lottos.matchNumbers(winningLotto, bonusBall)
+    val rewards = totalLottos.matchNumbers(winningLotto, bonusBall)
     OutputView.printRewards(rewards, rewards.calculateProfit(money))
 }

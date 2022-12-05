@@ -11,6 +11,6 @@ class Lottos(val lottos: List<Lotto>) {
         )
     }
 
-    fun combine(lottos: Lottos): Lottos = Lottos(this.lottos + lottos.lottos)
+    operator fun plus(lottos: Lottos) = Lottos(this.lottos + lottos.lottos)
     fun size(): Int = this.lottos.size
 }
