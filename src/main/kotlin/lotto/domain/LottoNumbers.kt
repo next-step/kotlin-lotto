@@ -10,7 +10,7 @@ class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) {
     constructor(numbers: List<Int>) : this(numbers.map { LottoNumber(it) }.toSortedSet())
 
     fun countMatchedNumbers(otherLottoNumbers: LottoNumbers): Int {
-        return this.lottoNumbers.count { otherLottoNumbers.lottoNumbers.contains(it) }
+        return this.lottoNumbers.count { it in otherLottoNumbers.lottoNumbers }
     }
 
     fun numbers(): List<Int> = lottoNumbers.map { it.number }
