@@ -12,15 +12,7 @@ class LottoMachine(
     private val bonusGenerateStrategy: BonusGenerateStrategy,
 ) {
     private val lottoGenerateStrategyMap = lottoGenerateStrategies.associateBy { it.generateType }
-    val lottoTickets: LottoTickets = run {
-        val autoTicketCount = (money / TICKET_AMOUNT) - manualTicketCount
-        val autoGenerateStrategy = lottoGenerateStrategyMap.getValue(GenerateType.AUTO)
-        val manualGenerateStrategy = lottoGenerateStrategyMap.getValue(GenerateType.MANUAL)
-        LottoTickets(
-            ticketCategoryCount = TicketCategoryCount(manualTicketCount, autoTicketCount),
-            tickets = List(manualTicketCount) { manualGenerateStrategy.generate() } + List(autoTicketCount) { autoGenerateStrategy.generate() }
-        )
-    }
+    val lottoTickets: LottoTickets = initializeLottoTickets(money, manualTicketCount)
 
     fun execute(): LottoResultSummary {
         val winnerLottoTicket = getWinnerTicket()
@@ -29,6 +21,16 @@ class LottoMachine(
             MatchResult.of(countMatchResult.count, countMatchResult.isBonusNumberMatched)
         }
         return LottoResultSummary(matchResults)
+    }
+
+    private fun initializeLottoTickets(money: Int, manualTicketCount: Int): LottoTickets {
+        val autoTicketCount = (money / TICKET_AMOUNT) - manualTicketCount
+        val autoGenerateStrategy = lottoGenerateStrategyMap.getValue(GenerateType.AUTO)
+        val manualGenerateStrategy = lottoGenerateStrategyMap.getValue(GenerateType.MANUAL)
+        return LottoTickets(
+            ticketCategoryCount = TicketCategoryCount(manualTicketCount, autoTicketCount),
+            tickets = List(manualTicketCount) { manualGenerateStrategy.generate() } + List(autoTicketCount) { autoGenerateStrategy.generate() }
+        )
     }
 
     private fun getWinnerTicket(): WinnerLottoTicket {
