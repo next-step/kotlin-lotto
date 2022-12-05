@@ -1,0 +1,28 @@
+package lotto.domain
+
+private const val MINIMUM_KRW_VALUE = 0
+
+private const val DIVISION_UNIT = 1000
+
+data class KRW(val money: Int) {
+
+    val availableLottoQuantity
+        get() = money / DIVISION_UNIT
+
+    init {
+        require(money >= MINIMUM_KRW_VALUE)
+        require(money % DIVISION_UNIT == 0)
+    }
+
+    fun add(krw: KRW): KRW {
+        return KRW(money + krw.money)
+    }
+
+    companion object {
+        fun byInput(input: String): KRW {
+            val money = input.toIntOrNull()
+            require(money != null)
+            return KRW(money)
+        }
+    }
+}
