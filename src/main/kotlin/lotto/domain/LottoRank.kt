@@ -12,16 +12,16 @@ enum class LottoRank(
     FIFTH(hitCount = 3, prizeMoney = 5000),
     MISS(hitCount = 0, prizeMoney = 0);
 
+    private fun isHitBonusNumber(it: LottoRank, hasBonusNumber: Boolean): Boolean {
+        if (it.hasBonusNumber) {
+            return hasBonusNumber
+        }
+        return true
+    }
+
     companion object {
         fun from(hitCount: Int, hasBonusNumber: Boolean): LottoRank {
-            return values().find { it.hitCount == hitCount && isHitBonusNumber(it, hasBonusNumber) } ?: return MISS
-        }
-
-        private fun isHitBonusNumber(it: LottoRank, hasBonusNumber: Boolean): Boolean {
-            if (it.hasBonusNumber) {
-                return hasBonusNumber
-            }
-            return true
+            return values().find { it.hitCount == hitCount && it.isHitBonusNumber(it, hasBonusNumber) } ?: return MISS
         }
 
         fun winRanks(): List<LottoRank> {
