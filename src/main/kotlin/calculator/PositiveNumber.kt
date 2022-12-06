@@ -23,5 +23,4 @@ data class PositiveNumber(
             return PositiveNumber(input.toInt())
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package calculator
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.DisplayName
@@ -17,7 +16,6 @@ internal class PositiveNumberTest {
         assertThatExceptionOfType(RuntimeException::class.java)
             .isThrownBy { PositiveNumber.of("-1") }
     }
-
 
     @Test
     @DisplayName("plus가 정상동작한다.")

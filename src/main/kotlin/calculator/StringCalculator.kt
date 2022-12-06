@@ -12,5 +12,4 @@ class StringCalculator {
 
         return numbers.reduce() { sum, number -> sum + number }.toInt()
     }
-
 }
