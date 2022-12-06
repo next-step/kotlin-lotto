@@ -26,7 +26,7 @@ internal class DelimitersTest {
             val input = "//;\n1;2;3"
 
             // when
-            val actual = Delimiters.create(input).toOperator(";")
+            val actual = Delimiters.create(input).toOperator("ㅇ")
         }
     }
 }
