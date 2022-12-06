@@ -16,6 +16,6 @@ class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) {
     fun numbers(): List<Int> = lottoNumbers.map { it.number }
 
     companion object {
-        private const val SIZE = 6
+        internal const val SIZE = 6
     }
 }

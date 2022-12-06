@@ -7,8 +7,8 @@ value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
     }
 
     companion object {
-        private const val MIN_VALUE = 1
-        private const val MAX_VALUE = 45
+        internal const val MIN_VALUE = 1
+        internal const val MAX_VALUE = 45
     }
 
     override fun compareTo(other: LottoNumber): Int = number.compareTo(other.number)
