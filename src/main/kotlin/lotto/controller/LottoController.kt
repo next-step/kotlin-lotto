@@ -20,9 +20,18 @@ class LottoController(private val input: ConsoleInput, private val outPut: Conso
 
         val winningNumbers = WinningNumbers(input.getWinnerNumbers(), input.getBonusBall())
         val winningPrizes = WinningPrizes(lottoNumbers.map { winningNumbers.matchPrize(it) })
-        val winningStatistic = WinningStatistic(WinningPrize.values().map { WinningPrizeInfo(it.matchedCount, it.prize) }, winningPrizes.extractStatisticOfMatchedCount())
+        val winningStatistic = createWinningStatistic(winningPrizes)
         val rateOfReturn = winningPrizes.calculateTotalRateOfReturn(purchaseAmount)
 
-        outPut.printResult(winningStatistic, rateOfReturn)
+        outPut.printWinningPrize(winningStatistic, rateOfReturn)
+    }
+
+    private fun createWinningStatistic(winningPrizes: WinningPrizes): WinningStatistic {
+        val winningPrizeInfos = WinningPrize.values().map { winningPrize ->
+            winningPrize.takeIf { it == WinningPrize.SECOND_PRIZE }?.let { WinningPrizeInfo(it.matchedCount, it.prize, true) }
+                ?: WinningPrizeInfo(winningPrize.matchedCount, winningPrize.prize)
+        }
+
+        return WinningStatistic(winningPrizeInfos, winningPrizes.extractStatisticOfMatchedCount())
     }
 }

@@ -10,6 +10,6 @@ class WinningStatistic(winningPrizeInfo: List<WinningPrizeInfo>, statisticOfMatc
     }
 }
 
-class WinningPrizeInfo(val matchedCount: Int, val prize: Int)
+class WinningPrizeInfo(val matchedCount: Int, val prize: Int, val hasBonus: Boolean = false)
 
 class WinningPrizeCount(val count: Int)
