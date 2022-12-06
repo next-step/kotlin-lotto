@@ -19,6 +19,7 @@ class LottoController(private val input: ConsoleInput, private val outPut: Conso
         lottoNumbers.forEach { outPut.printLottoNumbers(it.numbers()) }
 
         val winnerNumbers = LottoNumbers(input.getWinnerNumbers())
+        input.getBonusBall()
         val winningPrizes = lottoNumbers.map { winnerNumbers.countMatchedNumbers(it) }
             .map { WinningPrize.find(it) }
             .let { WinningPrizes(it) }

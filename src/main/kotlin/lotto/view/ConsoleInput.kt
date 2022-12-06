@@ -16,6 +16,12 @@ class ConsoleInput {
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("each winning number should be number") }
     }
 
+    fun getBonusBall(): Int {
+        println("보너스 볼을 입력해 주세요.")
+
+        return readNonBlankLn().toIntOrNull() ?: throw IllegalArgumentException("bonus ball should be number")
+    }
+
     private fun readNonBlankLn() = readln().ifBlank { throw IllegalArgumentException("empty string is not allowed") }
 
     companion object {
