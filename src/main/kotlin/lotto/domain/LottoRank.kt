@@ -2,15 +2,15 @@ package lotto.domain
 
 enum class LottoRank(
     val hitCount: Int,
-    val hasBonusNumber: Boolean,
-    val prizeMoney: Int
+    val prizeMoney: Int,
+    val hasBonusNumber: Boolean = false
 ) {
-    FIRST(6, false, 2000000000),
-    SECOND(5, true, 30000000),
-    THIRD(5, false, 1500000),
-    FOURTH(4, false, 50000),
-    FIFTH(3, false, 5000),
-    MISS(0, false, 0);
+    FIRST(hitCount = 6, prizeMoney = 2000000000),
+    SECOND(hitCount = 5, prizeMoney = 30000000, hasBonusNumber = true),
+    THIRD(hitCount = 5, prizeMoney = 1500000),
+    FOURTH(hitCount = 4, prizeMoney = 50000),
+    FIFTH(hitCount = 3, prizeMoney = 5000),
+    MISS(hitCount = 0, prizeMoney = 0);
 
     companion object {
         fun from(hitCount: Int, hasBonusNumber: Boolean): LottoRank {
