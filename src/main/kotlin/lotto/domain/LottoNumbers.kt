@@ -15,6 +15,10 @@ class LottoNumbers(private val lottoNumbers: Set<LottoNumber>) {
 
     fun numbers(): List<Int> = lottoNumbers.map { it.number }
 
+    fun contains(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(lottoNumber)
+    }
+
     companion object {
         internal const val SIZE = 6
     }

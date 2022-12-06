@@ -11,6 +11,7 @@ import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
+import lotto.domain.vo.LottoNumber
 
 class LottoNumbersTest : FunSpec({
     context("객체 생성") {
@@ -51,6 +52,18 @@ class LottoNumbersTest : FunSpec({
             val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
 
             lottoNumbers.numbers() shouldContainExactly listOf(1, 2, 3, 4, 5, 6)
+        }
+    }
+    context("contains()") {
+        test("입력받은 로또 번호 포함 여부를 반환한다.") {
+            val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+            table(
+                headers("lottoNumber", "expectedResult"),
+                row(LottoNumber(1), true),
+                row(LottoNumber(7), false)
+            ).forAll { lottoNumber, expectedResult ->
+                lottoNumbers.contains(lottoNumber) shouldBe expectedResult
+            }
         }
     }
 })
