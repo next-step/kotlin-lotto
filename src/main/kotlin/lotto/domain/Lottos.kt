@@ -10,4 +10,7 @@ class Lottos(val lottos: List<Lotto>) {
             }
         )
     }
+
+    operator fun plus(lottos: Lottos) = Lottos(this.lottos + lottos.lottos)
+    fun size(): Int = this.lottos.size
 }

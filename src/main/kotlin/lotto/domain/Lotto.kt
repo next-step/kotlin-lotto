@@ -11,9 +11,9 @@ data class Lotto(val lotto: Set<LottoBall>) {
 
     companion object {
         const val LOTTO_SIZE = 6
-        fun of(lotto: List<Int>): Lotto {
+        fun of(lottoNumbers: List<Int>): Lotto {
             return Lotto(
-                lotto.map {
+                lottoNumbers.map {
                     LottoBall(it)
                 }.toSet()
             )
