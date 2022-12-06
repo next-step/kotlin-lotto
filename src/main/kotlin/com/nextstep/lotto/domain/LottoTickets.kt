@@ -10,7 +10,7 @@ class LottoTickets(private val lottoTickets: List<LottoTicket>) {
     }
 
     fun calculateResult(winningNumber: WinningNumber): LottoResult {
-        val eachCount = lottoTickets.map { it.matchCount(winningNumber.winningNumbers) }.groupingBy { Rank.from(it) }.eachCount()
+        val eachCount = lottoTickets.map { it.matchCount(winningNumber) }.groupingBy { Rank.from(it) }.eachCount()
         return LottoResult(eachCount)
     }
 }
