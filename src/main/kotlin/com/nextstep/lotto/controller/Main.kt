@@ -18,7 +18,7 @@ fun main() {
 
     val lastWeekWinningNumbersInput = InputView.inputMessage()
     val winningNumber =
-        WinningNumber(InputView.splitWith(lastWeekWinningNumbersInput, ",").map { LottoNumber(it.toInt()) }.toSet())
+        WinningNumber(InputView.splitWith(lastWeekWinningNumbersInput, ",").map { LottoNumber.from(it.toInt()) }.toSet())
     val result = lottoTickets.calculateResult(winningNumber)
 
     OutputView.printWinningStatMessage()
