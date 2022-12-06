@@ -17,8 +17,4 @@ object LottoShop {
     fun prizeOf(matchCount: Int): BigDecimal {
         return LottoPrize.of(matchCount).prize
     }
-
-    fun returnRatioOf(lottoCount: Int, winningPrize: BigDecimal): BigDecimal {
-        return winningPrize.divide(BigDecimal(lottoCount), 2, RoundingMode.HALF_DOWN)
-    }
 }

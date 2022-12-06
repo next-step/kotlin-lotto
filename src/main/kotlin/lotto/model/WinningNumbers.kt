@@ -14,5 +14,4 @@ class WinningNumbers(input: Set<LottoNumber>) {
             return WinningNumbers(numbers.map { LottoNumber(it) }.toSet())
         }
     }
-
 }
