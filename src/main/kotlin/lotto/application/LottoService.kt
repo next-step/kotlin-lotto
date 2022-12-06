@@ -9,7 +9,7 @@ import lotto.view.ResultView
 
 class LottoService {
 
-    fun main() {
+    fun main(args: Array<String>) {
         val lottoMachine = LottoMachine(RandomGenerator())
         val purchaseAmount = InputView.requireAmountOfPurchaseLotto()
         val lottos = lottoMachine.issue(purchaseAmount)

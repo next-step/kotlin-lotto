@@ -2,26 +2,16 @@ package lotto.domain
 
 class WinningMachine(private val winLotto: Lotto) {
 
-    fun match(lottos: List<Lotto>): Map<Int, MutableList<Lotto>> {
+    fun match(lottos: List<Lotto>): Statistics {
 
-        val statistic: Map<Int, MutableList<Lotto>> = initStatistic()
+        val statistic = Statistics()
 
         for(lotto in lottos) {
             val count = judge(lotto, winLotto)
-            statistic[count]?.add(lotto)
+            statistic.add(count, lotto)
         }
 
-        return statistic.filter { (key, _) -> key >= WIN_LOTTO_NUM_COUNT }
-    }
-
-    private fun initStatistic(): Map<Int, MutableList<Lotto>> {
-        return mutableMapOf(
-            1 to mutableListOf(),
-            2 to mutableListOf(),
-            3 to mutableListOf(),
-            4 to mutableListOf(),
-            5 to mutableListOf(),
-            6 to mutableListOf(),)
+        return statistic
     }
 
     private fun judge(lotto: Lotto, winLotto: Lotto): Int {
@@ -36,7 +26,4 @@ class WinningMachine(private val winLotto: Lotto) {
         return if(lotto.contains(num)) 1 else 0
     }
 
-    companion object {
-        const val WIN_LOTTO_NUM_COUNT = 3
-    }
 }

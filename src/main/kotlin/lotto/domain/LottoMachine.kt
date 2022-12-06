@@ -15,18 +15,12 @@ class LottoMachine(private val generator: Generator) {
     }
 
     private fun createLotto(): Lotto {
-        val numbers = mutableSetOf<Int>()
-
-        while(numbers.size < LOTTO_NUM_COUNT) {
-            numbers.add(generator.generate())
-        }
-
-        return Lotto(numbers.toList())
+        val numbers = generator.generate()
+        return Lotto(numbers)
     }
 
     companion object {
         private const val LOTTO_PRICE = 1_000
-        private const val LOTTO_NUM_COUNT = 6
     }
 
 }

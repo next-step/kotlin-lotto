@@ -17,8 +17,7 @@ class WinningMachineTest {
         val lotto = Lotto(numbers)
         val winningMachine = WinningMachine(winLotto)
         val result = winningMachine.match(listOf(lotto))
-        println(count)
-        assertThat(result[count]).contains(lotto)
+        assertThat(result.from(count)).contains(lotto)
     }
 
     companion object {
