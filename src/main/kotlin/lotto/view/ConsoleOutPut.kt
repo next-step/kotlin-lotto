@@ -11,15 +11,15 @@ class ConsoleOutPut {
         println(lottoNumbers)
     }
 
-    fun printResult(winningStatistic: WinningStatistic, rateOfReturn: Double) {
+    fun printResult(winningStatisticsDto: WinningStatistic, rateOfReturn: Double) {
         println("당첨 통계")
         println("---------")
 
-        winningStatistic.winningStatistic.sortedBy { it.first }
+        winningStatisticsDto.winningStatistic.sortedBy { it.first.matchedCount }
             .asSequence()
-            .filter { it.first != 0 }
-            .forEach { (matchedCount, prize, duplicatedMatchedCount) ->
-                println("${matchedCount}개 일치 (${prize}원)- ${duplicatedMatchedCount}개")
+            .filter { it.first.matchedCount != 0 }
+            .forEach { (winningStatistic, winningPrizeCount) ->
+                println("${winningStatistic.matchedCount}개 일치 (${winningStatistic.prize}원)- ${winningPrizeCount.count}개")
             }
 
         println("총 수익률은 ${rateOfReturn}입니다.")

@@ -1,11 +1,15 @@
 package lotto.controller.dto
 
-class WinningStatistic(winningPrizes: List<Pair<Int, Int>>, duplicateMatchedCount: Map<Int, Int>) {
-    val winningStatistic: List<Triple<Int, Int, Int>>
+class WinningStatistic(winningPrizeInfo: List<WinningPrizeInfo>, statisticOfMatchedCount: Map<Int, Int>) {
+    val winningStatistic: List<Pair<WinningPrizeInfo, WinningPrizeCount>>
 
     init {
-        winningStatistic = winningPrizes.map { (matchedCount, prize) ->
-            Triple(matchedCount, prize, duplicateMatchedCount.getOrDefault(matchedCount, 0))
+        winningStatistic = winningPrizeInfo.map {
+            Pair(it, WinningPrizeCount(statisticOfMatchedCount.getOrDefault(it.matchedCount, 0)))
         }
     }
 }
+
+class WinningPrizeInfo(val matchedCount: Int, val prize: Int)
+
+class WinningPrizeCount(val count: Int)
