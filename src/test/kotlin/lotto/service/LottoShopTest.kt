@@ -27,7 +27,8 @@ class LottoShopTest {
             "4:50000",
             "5:1500000",
             "6:2000000000"
-        ], delimiter = ':'
+        ],
+        delimiter = ':'
     )
     internal fun `일치 갯수에 따라 당첨금액을 출력한다`(matchCount: Int, expectedPrize: BigDecimal) {
         val prize = LottoShop.prizeOf(matchCount)

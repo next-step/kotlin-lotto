@@ -13,6 +13,6 @@ class LottoTest {
 
     @Test
     internal fun `로또 숫자들은 중복이 될 수 없다`() {
-        assertThrows<IllegalStateException> { Lotto.of(listOf(1, 1, 3, 4, 5, 6)) }
+        assertThrows<IllegalArgumentException> { Lotto.of(listOf(1, 1, 3, 4, 5, 6)) }
     }
 }
