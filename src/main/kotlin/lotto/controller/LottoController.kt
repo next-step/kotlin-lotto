@@ -3,7 +3,7 @@ package lotto.controller
 import lotto.controller.dto.WinningPrizeInfo
 import lotto.controller.dto.WinningStatistic
 import lotto.domain.LottoMachine
-import lotto.domain.LottoNumbers
+import lotto.domain.WinningNumbers
 import lotto.domain.WinningPrize
 import lotto.domain.WinningPrizes
 import lotto.domain.vo.PurchaseAmount
@@ -18,11 +18,8 @@ class LottoController(private val input: ConsoleInput, private val outPut: Conso
         outPut.printPurchasedLottoCount(lottoNumbers.size)
         lottoNumbers.forEach { outPut.printLottoNumbers(it.numbers()) }
 
-        val winnerNumbers = LottoNumbers(input.getWinnerNumbers())
-        input.getBonusBall()
-        val winningPrizes = lottoNumbers.map { winnerNumbers.countMatchedNumbers(it) }
-            .map { WinningPrize.find(it) }
-            .let { WinningPrizes(it) }
+        val winningNumbers = WinningNumbers(input.getWinnerNumbers(), input.getBonusBall())
+        val winningPrizes = WinningPrizes(lottoNumbers.map { winningNumbers.matchPrize(it) })
         val winningStatistic = WinningStatistic(WinningPrize.values().map { WinningPrizeInfo(it.matchedCount, it.prize) }, winningPrizes.extractStatisticOfMatchedCount())
         val rateOfReturn = winningPrizes.calculateTotalRateOfReturn(purchaseAmount)
 

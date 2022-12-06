@@ -8,7 +8,7 @@ import io.kotest.matchers.should
 import io.kotest.matchers.string.startWith
 
 class LottoNumberTest : FunSpec({
-    context("of()") {
+    context("객체 생성") {
         test("로또 번호가 담긴 객체를 생성한다.") {
             shouldNotThrowAny {
                 LottoNumber(1)

@@ -26,12 +26,12 @@ class WinningPrizesTest : FunSpec({
     context("calculateTotalRateOfReturn()") {
         test("구매 금액을 입력받아 총 수익률을 계산하여 반환한다.") {
             val purchaseAmount = PurchaseAmount(1000)
-            val prizes = listOf(WinningPrize.FIRST_PRIZE, WinningPrize.SECOND_PRIZE, WinningPrize.THIRD_PRIZE, WinningPrize.FOURTH_PRIZE)
+            val prizes = listOf(WinningPrize.FIRST_PRIZE, WinningPrize.SECOND_PRIZE, WinningPrize.THIRD_PRIZE, WinningPrize.FOURTH_PRIZE, WinningPrize.FIFTH_PRIZE)
             val winningPrizes = WinningPrizes(prizes)
 
             val actual = winningPrizes.calculateTotalRateOfReturn(purchaseAmount)
 
-            actual shouldBe 2001555.0
+            actual shouldBe 2031555.0
         }
     }
 })

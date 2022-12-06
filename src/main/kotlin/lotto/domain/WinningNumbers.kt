@@ -2,10 +2,17 @@ package lotto.domain
 
 import lotto.domain.vo.LottoNumber
 
-class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
-    init {
-        require(!lottoNumbers.contains(bonusNumber)) { "bonus number should be different number out of winning numbers" }
+class WinningNumbers(private val winningNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
+    fun matchPrize(lottoNumbers: LottoNumbers): WinningPrize {
+        val hasBonusNumber = lottoNumbers.contains(bonusNumber)
+        val matchedCount = winningNumbers.countMatchedNumbers(lottoNumbers)
+
+        return WinningPrize.find(matchedCount, hasBonusNumber)
     }
 
-    constructor(lottoNumbers: List<Int>, bonusNumber: Int) : this(lottoNumbers = LottoNumbers(lottoNumbers), bonusNumber = LottoNumber(bonusNumber))
+    init {
+        require(!winningNumbers.contains(bonusNumber)) { "bonus number should be different number out of winning numbers" }
+    }
+
+    constructor(lottoNumbers: List<Int>, bonusNumber: Int) : this(winningNumbers = LottoNumbers(lottoNumbers), bonusNumber = LottoNumber(bonusNumber))
 }
