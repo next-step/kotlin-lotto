@@ -8,29 +8,13 @@ class LottoTicketsTest : FunSpec({
         test("로또 티켓 용지에서 결과를 직접 확인할 수 있다.") {
             val lottoTickets = LottoTickets(
                 listOf(
-                    LottoTicket(
-                        listOf(
-                            LottoNumber(1),
-                            LottoNumber(2),
-                            LottoNumber(3),
-                            LottoNumber(4),
-                            LottoNumber(5),
-                            LottoNumber(6)
-                        )
-                    )
+                    LottoTicket(LottoTicketTestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6))
                 )
             )
 
             val calculateResult = lottoTickets.calculateResult(
                 WinningNumber(
-                    listOf(
-                        LottoNumber(1),
-                        LottoNumber(2),
-                        LottoNumber(3),
-                        LottoNumber(4),
-                        LottoNumber(9),
-                        LottoNumber(10)
-                    )
+                    LottoTicketTestUtils.createLottoNumbers(1, 2, 3, 4, 9, 10)
                 )
             )
 

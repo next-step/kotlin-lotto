@@ -32,14 +32,11 @@ object OutputView {
 
     fun printResult(result: LottoResult) {
         val sb = StringBuilder()
-        Rank.values()
+        Rank.values().sortedDescending()
             .forEach {
-                sb.append(it.matchCount).append("개 일치(").append(it.winningMoney).append(")- ")
-                    .append(result.result[it] ?: 0)
-                    .append("개\n")
+                sb.append("${it.matchCount}개 일치 (${it.winningMoney}원) - ${result.result[it] ?: 0}개\n")
             }
-
-        println(sb)
+        print(sb)
     }
 
     fun printRatioResult(ratio: Double) {

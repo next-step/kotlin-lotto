@@ -12,44 +12,37 @@ class WinningNumberTest : FunSpec({
         test("당첨번호를 초기화한다.") {
             shouldNotThrow<RuntimeException> {
                 WinningNumber(
-                    listOf(
-                        LottoNumber.from(1),
-                        LottoNumber.from(2),
-                        LottoNumber.from(3),
-                        LottoNumber.from(4),
-                        LottoNumber.from(5),
-                        LottoNumber.from(6)
-                    )
+                    LottoTicketTestUtils.createLottoNumbers(1, 2, 3, 4, 5, 6)
                 )
             }
         }
 
         test("당첨번호는 ${LottoTicket.LOTTO_TICKET_COUNT} 개 가 아니면 생성할 수 없다.") {
             listOf(
-                listOf(LottoNumber.from(1)),
-                listOf(
+                setOf(LottoNumber.from(1)),
+                setOf(
                     LottoNumber.from(1),
                     LottoNumber.from(2)
                 ),
-                listOf(
+                setOf(
                     LottoNumber.from(1),
                     LottoNumber.from(2),
                     LottoNumber.from(3)
                 ),
-                listOf(
+                setOf(
                     LottoNumber.from(1),
                     LottoNumber.from(2),
                     LottoNumber.from(3),
                     LottoNumber.from(4)
                 ),
-                listOf(
+                setOf(
                     LottoNumber.from(1),
                     LottoNumber.from(2),
                     LottoNumber.from(3),
                     LottoNumber.from(4),
                     LottoNumber.from(5)
                 ),
-                listOf(
+                setOf(
                     LottoNumber.from(1),
                     LottoNumber.from(2),
                     LottoNumber.from(3),

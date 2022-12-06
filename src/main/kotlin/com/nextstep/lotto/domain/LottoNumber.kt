@@ -2,7 +2,7 @@ package com.nextstep.lotto.domain
 
 import java.lang.IllegalArgumentException
 
-data class LottoNumber(private val number: Int) {
+data class LottoNumber(private val number: Int) : Comparable<LottoNumber> {
 
     companion object {
         private const val LOTTO_MIN_NUMBER = 1
@@ -19,6 +19,10 @@ data class LottoNumber(private val number: Int) {
         fun getAvailableNumbers(): List<LottoNumber> {
             return NUMBERS.values.toList()
         }
+    }
+
+    override fun compareTo(other: LottoNumber): Int {
+        return number - other.number
     }
 
     override fun toString(): String {
