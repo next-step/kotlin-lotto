@@ -7,6 +7,12 @@ const val LOTTO_PRICE = 1000
 
 object LottoShop {
 
+    fun purchase(price: Int, manualLottoNumbers: List<List<Int>>): Lotto {
+        val manualLotto: Lotto = purchaseManualLotto(manualLottoNumbers)
+        val autoLotto: Lotto = purchaseAutoLotto(price - manualLottoNumbers.size * LOTTO_PRICE)
+        return manualLotto + autoLotto
+    }
+
     fun purchaseAutoLotto(price: Int): Lotto = (1..price / LOTTO_PRICE)
         .map { LottoMachine.create() }
         .let { Lotto(it) }
