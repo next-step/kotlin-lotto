@@ -1,10 +1,6 @@
 package lotto.domain
 
 object LottoVendingMachine {
-    fun buyRandomLottos(numberOfLotto: Int): List<LottoNumbers> {
-        return List(numberOfLotto) { LottoNumbers.createRandom() }
-    }
-
     fun makeWinningLotto(inputWinningNumbers: List<Int>, bonusNumber: Int): WinningLottoNumbers {
         val lottoNumbers = LottoNumbers(
             inputWinningNumbers.map {
