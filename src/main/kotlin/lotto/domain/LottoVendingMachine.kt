@@ -1,17 +1,6 @@
 package lotto.domain
 
 object LottoVendingMachine {
-    fun makeWinningLotto(inputWinningNumbers: List<Int>, bonusNumber: Int): WinningLottoNumbers {
-        val lottoNumbers = LottoNumbers(
-            inputWinningNumbers.map {
-                LottoNumber.from(it)
-            }.toSet()
-        )
-        val bonusLottoNumber = LottoNumber.from(bonusNumber)
-
-        return WinningLottoNumbers(lottoNumbers = lottoNumbers, bonusLottoNumber = bonusLottoNumber)
-    }
-
     fun buyLottos(purchaseAmount: PurchaseAmount, inputManualNumbers: List<List<Int>>): UserLottos {
         val numberOfLottoByRandom = purchaseAmount.getNumberOfLotto() - inputManualNumbers.size
         val randomLottos = makeRandomLottos(numberOfLotto = numberOfLottoByRandom)

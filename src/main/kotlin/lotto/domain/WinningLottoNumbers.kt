@@ -29,5 +29,12 @@ data class WinningLottoNumbers(
         private const val INVALID_BONUS_BALL_ERROR_MESSAGE = "보너스 볼은 당첨 번호와 중복되지 않는 수여야 합니다."
         private const val INITIAL_COUNT = 0
         private val INITIAL_STATISTICS = Rank.values().associateWith { INITIAL_COUNT }
+
+        fun from(inputWinningNumbers: List<Int>, bonusNumber: Int): WinningLottoNumbers {
+            val lottoNumbers = LottoNumbers.from(inputWinningNumbers)
+            val bonusLottoNumber = LottoNumber.from(bonusNumber)
+
+            return WinningLottoNumbers(lottoNumbers = lottoNumbers, bonusLottoNumber = bonusLottoNumber)
+        }
     }
 }

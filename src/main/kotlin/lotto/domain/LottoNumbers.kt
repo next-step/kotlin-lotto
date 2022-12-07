@@ -22,5 +22,12 @@ data class LottoNumbers(val lottoNumbers: Set<LottoNumber>) {
             val lottoNumbers = TOTAL_LOTTO_NUMBER.shuffled().take(LOTTO_SIZE).toSet()
             return LottoNumbers(lottoNumbers.map(LottoNumber::from).toSet())
         }
+
+        fun from(numbers: List<Int>) =
+            LottoNumbers(
+                numbers.map {
+                    LottoNumber.from(it)
+                }.toSet()
+            )
     }
 }
