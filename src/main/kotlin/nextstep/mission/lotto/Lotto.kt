@@ -5,7 +5,8 @@ import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningPrize
 import nextstep.mission.lotto.vo.WinningResult
 
-class Lotto(val lottoNumbers: List<LottoNumbers>) {
+@JvmInline
+value class Lotto(val lottoNumbers: List<LottoNumbers>) {
 
     fun matchWinningNumbers(winningNumbers: LottoNumbers, bonusNumber: LottoNumber): WinningResult {
         tailrec fun match(
@@ -19,11 +20,13 @@ class Lotto(val lottoNumbers: List<LottoNumbers>) {
                 val currentLottoNumbers: LottoNumbers = lottoNumbers.removeFirst()
                 WinningPrize.find(
                     currentLottoNumbers.match(winningNumbers),
-                    currentLottoNumbers.contains(bonusNumber)
+                    bonusNumber in currentLottoNumbers
                 )?.also { result[it] = result[it]!! + 1 }
                 match(winningNumbers, bonusNumber, lottoNumbers, result)
             }
         }
         return match(winningNumbers = winningNumbers, bonusNumber = bonusNumber)
     }
+
+    operator fun plus(other: Lotto): Lotto = Lotto(this.lottoNumbers + other.lottoNumbers)
 }

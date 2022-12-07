@@ -1,8 +1,6 @@
 package nextstep.mission.lotto.io
 
 import nextstep.mission.lotto.dto.LottoDto
-import nextstep.mission.lotto.vo.LottoNumber
-import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningPrize.FIFTH
 import nextstep.mission.lotto.vo.WinningPrize.FIRST
 import nextstep.mission.lotto.vo.WinningPrize.FOURTH
@@ -13,23 +11,36 @@ import nextstep.mission.lotto.vo.WinningResult
 object ConsoleInput {
     fun inputPrice(): Int {
         println("구입금액을 입력해 주세요.")
-        return readLine()?.toInt() ?: 0
+        return readln().toInt()
     }
 
-    fun inputWinningNumbers(): LottoNumbers {
+    fun inputManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun inputManualLotto(count: Int): List<List<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return (1..count).map {
+            readln().split(",")
+                .map { it.toInt() }
+        }
+    }
+
+    fun inputWinningNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readLine()?.split(",")?.map { LottoNumber(it.toInt()) }.let { LottoNumbers(it!!) }
+        return readln().split(",").map { it.toInt() }
     }
 
-    fun inputBonusNumber(): LottoNumber {
+    fun inputBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        return readLine()?.let { LottoNumber(it.toInt()) }!!
+        return readln().toInt()
     }
 }
 
 object ConsoleOutput {
-    fun printLotto(lotto: LottoDto) {
-        println("${lotto.lottoNumbers.size}개를 구매했습니다.")
+    fun printLotto(manualLottoCount: Int, lotto: LottoDto) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${lotto.lottoNumbers.size - manualLottoCount}장를 구매했습니다.")
         lotto.lottoNumbers.forEach { println(it) }
     }
 

@@ -10,11 +10,18 @@ import nextstep.mission.lotto.vo.LottoNumbers
 import nextstep.mission.lotto.vo.WinningResult
 
 fun main() {
-    val inputPrice: Int = ConsoleInput.inputPrice()
-    val lotto: Lotto = LottoShop.purchaseBy(inputPrice)
-    ConsoleOutput.printLotto(LottoDto.from(lotto))
-    val winningNumbers: LottoNumbers = ConsoleInput.inputWinningNumbers()
-    val bonusNumber: LottoNumber = ConsoleInput.inputBonusNumber()
+    val purchasePrice: Int = ConsoleInput.inputPrice()
+    val manualLottoCount: Int = ConsoleInput.inputManualLottoCount()
+    val manualLottoNumbers: List<List<Int>> = ConsoleInput.inputManualLotto(manualLottoCount)
+
+    val lotto: Lotto = LottoShop.purchase(purchasePrice, manualLottoNumbers)
+
+    ConsoleOutput.printLotto(manualLottoCount, LottoDto.from(lotto))
+
+    val winningNumbers = LottoNumbers(ConsoleInput.inputWinningNumbers().map { LottoNumber(it) })
+    val bonusNumber = LottoNumber(ConsoleInput.inputBonusNumber())
+
     val result: WinningResult = lotto.matchWinningNumbers(winningNumbers, bonusNumber)
-    ConsoleOutput.printWinningResult(result, result.rateOfReturn(inputPrice))
+
+    ConsoleOutput.printWinningResult(result, result.rateOfReturn(purchasePrice))
 }

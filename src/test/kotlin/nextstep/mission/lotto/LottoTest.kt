@@ -6,7 +6,11 @@ import nextstep.mission.lotto.fixture.lottoNumberListOf
 import nextstep.mission.lotto.fixture.lottoNumbersListOf
 import nextstep.mission.lotto.vo.LottoNumber
 import nextstep.mission.lotto.vo.LottoNumbers
-import nextstep.mission.lotto.vo.WinningPrize.*
+import nextstep.mission.lotto.vo.WinningPrize.FIFTH
+import nextstep.mission.lotto.vo.WinningPrize.FIRST
+import nextstep.mission.lotto.vo.WinningPrize.FOURTH
+import nextstep.mission.lotto.vo.WinningPrize.SECOND
+import nextstep.mission.lotto.vo.WinningPrize.THIRD
 import nextstep.mission.lotto.vo.WinningResult
 
 class LottoTest : StringSpec({
@@ -32,6 +36,33 @@ class LottoTest : StringSpec({
                 THIRD to 1,
                 FOURTH to 1,
                 FIFTH to 1,
+            )
+        )
+    }
+
+    "로또 두개를 합칠 수 있다." {
+        val lottoNumbersList1: List<LottoNumbers> = lottoNumbersListOf(
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(1, 2, 3, 4, 5, 45),
+            listOf(1, 2, 3, 4, 5, 44),
+        )
+        val lottos1 = Lotto(lottoNumbersList1)
+
+        val lottoNumbersList2: List<LottoNumbers> = lottoNumbersListOf(
+            listOf(1, 2, 3, 4, 15, 16),
+            listOf(1, 2, 3, 14, 15, 16),
+            listOf(11, 12, 13, 14, 15, 16)
+        )
+        val lottos2 = Lotto(lottoNumbersList2)
+
+        lottos1 + lottos2 shouldBe Lotto(
+            lottoNumbersListOf(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(1, 2, 3, 4, 5, 45),
+                listOf(1, 2, 3, 4, 5, 44),
+                listOf(1, 2, 3, 4, 15, 16),
+                listOf(1, 2, 3, 14, 15, 16),
+                listOf(11, 12, 13, 14, 15, 16)
             )
         )
     }
