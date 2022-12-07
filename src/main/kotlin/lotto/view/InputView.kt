@@ -10,14 +10,10 @@ object InputView {
         return PurchaseAmount(readln().toInt())
     }
 
-    fun getManualNumberOfLotto(numberOfLottoToBuy: Int): Int {
+    fun getManualNumberOfLotto(): Int {
         println("\n수동으로 구매할 로또 수를 입력해 주세요.")
         val numberOfLottoByManual = readln().toInt()
 
-        if (numberOfLottoByManual > numberOfLottoToBuy) {
-            print("\n구매할 수 없는 개수입니다.")
-            return getManualNumberOfLotto(numberOfLottoToBuy)
-        }
         return if (numberOfLottoByManual < 0) 0 else numberOfLottoByManual
     }
 

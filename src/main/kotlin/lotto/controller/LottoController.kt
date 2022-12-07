@@ -14,7 +14,7 @@ class LottoController {
             return
         }
 
-        val manualNumberOfLotto = InputView.getManualNumberOfLotto(purchaseCount)
+        val manualNumberOfLotto = InputView.getManualNumberOfLotto()
         val inputManualNumbers = InputView.getManualLottos(manualNumberOfLotto)
 
         val userLottos = LottoVendingMachine.buyLottos(purchaseAmount, inputManualNumbers)
