@@ -1,6 +1,5 @@
 package nextstep.mission
 
-import nextstep.mission.lotto.LOTTO_PRICE
 import nextstep.mission.lotto.Lotto
 import nextstep.mission.lotto.LottoShop
 import nextstep.mission.lotto.dto.LottoDto
@@ -12,18 +11,17 @@ import nextstep.mission.lotto.vo.WinningResult
 
 fun main() {
     val purchasePrice: Int = ConsoleInput.inputPrice()
-    val manualCount: Int = ConsoleInput.inputManualLottoCount()
-    val manualLottoNumbers: List<List<Int>> = ConsoleInput.inputManualLotto(manualCount)
+    val manualLottoCount: Int = ConsoleInput.inputManualLottoCount()
+    val manualLottoNumbers: List<List<Int>> = ConsoleInput.inputManualLotto(manualLottoCount)
 
-    val manualLotto: Lotto = LottoShop.purchaseManualLotto(manualLottoNumbers)
-    val autoLotto: Lotto = LottoShop.purchaseAutoLotto(purchasePrice - LOTTO_PRICE * manualCount)
+    val lotto: Lotto = LottoShop.purchase(purchasePrice, manualLottoNumbers)
 
-    ConsoleOutput.printLotto(LottoDto.from(manualLotto), LottoDto.from(autoLotto))
+    ConsoleOutput.printLotto(manualLottoCount, LottoDto.from(lotto))
 
     val winningNumbers = LottoNumbers(ConsoleInput.inputWinningNumbers().map { LottoNumber(it) })
     val bonusNumber = LottoNumber(ConsoleInput.inputBonusNumber())
 
-    val result: WinningResult = (manualLotto + autoLotto).matchWinningNumbers(winningNumbers, bonusNumber)
+    val result: WinningResult = lotto.matchWinningNumbers(winningNumbers, bonusNumber)
 
     ConsoleOutput.printWinningResult(result, result.rateOfReturn(purchasePrice))
 }

@@ -39,10 +39,9 @@ object ConsoleInput {
 }
 
 object ConsoleOutput {
-    fun printLotto(manualLotto: LottoDto, autoLotto: LottoDto) {
-        println("수동으로 ${manualLotto.lottoNumbers.size}장, 자동으로 ${autoLotto.lottoNumbers.size}장를 구매했습니다.")
-        manualLotto.lottoNumbers.forEach { println(it) }
-        autoLotto.lottoNumbers.forEach { println(it) }
+    fun printLotto(manualLottoCount: Int, lotto: LottoDto) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${lotto.lottoNumbers.size - manualLottoCount}장를 구매했습니다.")
+        lotto.lottoNumbers.forEach { println(it) }
     }
 
     fun printWinningResult(winningResult: WinningResult, rateOfReturn: Double) {

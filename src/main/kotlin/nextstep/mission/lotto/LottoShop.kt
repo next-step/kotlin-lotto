@@ -13,11 +13,11 @@ object LottoShop {
         return manualLotto + autoLotto
     }
 
-    fun purchaseAutoLotto(price: Int): Lotto = (1..price / LOTTO_PRICE)
+    private fun purchaseAutoLotto(price: Int): Lotto = (1..price / LOTTO_PRICE)
         .map { LottoMachine.create() }
         .let { Lotto(it) }
 
-    fun purchaseManualLotto(manualLottoNumbers: List<List<Int>>): Lotto = manualLottoNumbers
+    private fun purchaseManualLotto(manualLottoNumbers: List<List<Int>>): Lotto = manualLottoNumbers
         .map { LottoNumbers(it.map { number -> LottoNumber(number) }) }
         .let { Lotto(it) }
 }
