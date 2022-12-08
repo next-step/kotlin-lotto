@@ -13,9 +13,9 @@ class LottoShopTest : StringSpec({
     "로또 구매 테스트" {
         forAll(
             // given
-            row("0원을 내면 0개를 반환한다.", 0, 0),
-            row("5000원을 내면 5개를 반환한다.", 5000, 5),
-            row("5500원을 내면 5개를 반환한다.", 5500, 5)
+            row("0원을 내면 0개를 반환한다.", Payment(0), 0),
+            row("5000원을 내면 5개를 반환한다.", Payment(5000), 5),
+            row("5500원을 내면 5개를 반환한다.", Payment(5500), 5)
         ) { title, payment, expectedSize ->
             // when
             val actual = lottoShop.buyLotto(payment)

@@ -1,14 +1,15 @@
 package lotto.view
 
+import lotto.domain.Payment
 import lotto.util.StringValidator
 
 class InputView {
 
-    fun inputPayment(): Int {
+    fun inputPayment(): Payment {
         println(INPUT_PAYMENT_GUIDE)
         val payment = readln()
         validatePaymentInput(payment)
-        return payment.toInt()
+        return Payment(payment.toInt())
     }
 
     private fun validatePaymentInput(payment: String) {

@@ -10,7 +10,7 @@ class LottoStatisticsServiceTest : StringSpec({
 
     "당첨자 통계 통합 결과 테스트" {
         // given
-        val payment = 15000
+        val payment = Payment(15000)
         forAll(
             row(
                 LottoRank.FOURTH,

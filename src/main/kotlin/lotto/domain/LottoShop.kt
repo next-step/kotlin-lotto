@@ -3,13 +3,13 @@ package lotto.domain
 class LottoShop(
     private val lottoGenerator: LottoGenerator
 ) {
-    fun buyLotto(inputPayment: Int): List<Lotto> {
+    fun buyLotto(inputPayment: Payment): List<Lotto> {
         val lottoCount = calculateLottoCount(inputPayment)
         return lottoGenerator.generate(lottoCount)
     }
 
-    private fun calculateLottoCount(payment: Int): Int {
-        return payment / LOTTO_PRICE
+    private fun calculateLottoCount(payment: Payment): Int {
+        return payment.payment / LOTTO_PRICE
     }
 
     companion object {

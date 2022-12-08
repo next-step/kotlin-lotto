@@ -7,8 +7,8 @@ class LottoStatistics(
 ) {
     private val totalPrize: Int = winLottoList.sumOf { it.prizeMoney }
 
-    fun earningRate(inputPayment: Int): Double {
-        val earningRate = totalPrize.toDouble() / inputPayment.toDouble()
+    fun earningRate(inputPayment: Payment): Double {
+        val earningRate = totalPrize.toDouble() / inputPayment.payment.toDouble()
         return NumberUtil.floor(earningRate, EARNING_RATE_DECIMAL_PLACE)
     }
 
