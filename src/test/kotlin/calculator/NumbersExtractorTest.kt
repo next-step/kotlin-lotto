@@ -1,4 +1,5 @@
-import calculator.NumbersExtractor
+package calculator
+
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
@@ -6,15 +7,13 @@ import io.kotest.matchers.shouldBe
 class NumbersExtractorTest : BehaviorSpec({
 
     Given("빈 문자열 또는 null을 입력할 경우") {
-        val text = listOf(null, "", " ")
+        val texts = listOf(null, "", " ")
         When("피연산자를 추출하면") {
-            val result = text.map {
-                NumbersExtractor.run(it)
-            }
-            Then("숫자 0이 담긴 리스트가 반환된다.") {
-                val expected = listOf(0)
-                result.forAll { numbers ->
-                    numbers.map { number ->
+            texts.forAll {
+                val result = NumbersExtractor.run(it)
+                Then("숫자 0이 담긴 리스트가 반환된다.") {
+                    val expected = listOf(0)
+                    result.map { number ->
                         number.value
                     } shouldBe expected
                 }
