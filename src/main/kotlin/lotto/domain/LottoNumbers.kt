@@ -2,7 +2,7 @@ package lotto.domain
 
 data class LottoNumbers(val lottoNumbers: Set<LottoNumber>) {
     init {
-        require(lottoNumbers.size == MAXIMUM_LOTTO_SIZE) { INVALID_LOTTO_SIZE_ERROR_MESSAGE }
+        require(lottoNumbers.size == LOTTO_SIZE) { INVALID_LOTTO_SIZE_ERROR_MESSAGE }
     }
 
     fun getNumberOfMatch(targetLottoNumbersNumbers: LottoNumbers): Int {
@@ -14,11 +14,20 @@ data class LottoNumbers(val lottoNumbers: Set<LottoNumber>) {
     fun isMatchBonusLottoNumber(bonusBall: LottoNumber) = lottoNumbers.contains(bonusBall)
 
     companion object {
-        private const val MAXIMUM_LOTTO_SIZE = 6
+        private const val LOTTO_SIZE = 6
         private const val INVALID_LOTTO_SIZE_ERROR_MESSAGE = "로또 번호는 6개의 숫자여야 합니다."
+        private val TOTAL_LOTTO_NUMBER = (1..45).toList()
 
         fun createRandom(): LottoNumbers {
-            return LottoNumbers(LottoVendingMachine.makeRandomLottoNumbers())
+            val lottoNumbers = TOTAL_LOTTO_NUMBER.shuffled().take(LOTTO_SIZE).toSet()
+            return LottoNumbers(lottoNumbers.map(LottoNumber::from).toSet())
         }
+
+        fun from(numbers: List<Int>) =
+            LottoNumbers(
+                numbers.map {
+                    LottoNumber.from(it)
+                }.toSet()
+            )
     }
 }

@@ -1,13 +1,21 @@
 package lotto.domain
 
 object LottoVendingMachine {
-    private const val LOTTO_SIZE = 6
-    private val lottoNumbers = (1..45).map { LottoNumber(it) }.toSet()
+    fun buyLottos(purchaseAmount: PurchaseAmount, inputManualNumbers: List<List<Int>>): UserLottos {
+        val numberOfLottoByRandom = purchaseAmount.getNumberOfLotto() - inputManualNumbers.size
+        val randomLottos = makeRandomLottos(numberOfLotto = numberOfLottoByRandom)
+        val manualLottos = inputManualNumbers.map { lottoNumbers ->
+            LottoNumbers(
+                lottoNumbers.map {
+                    LottoNumber.from(it)
+                }.toSet()
+            )
+        }
 
-    fun makeRandomLottoNumbers(): Set<LottoNumber> {
-        return lottoNumbers.shuffled().take(LOTTO_SIZE).toSet()
+        return UserLottos(manualLottos + randomLottos)
     }
-    fun buy(numberOfLotto: Int): List<LottoNumbers> {
+
+    private fun makeRandomLottos(numberOfLotto: Int): List<LottoNumbers> {
         return List(numberOfLotto) { LottoNumbers.createRandom() }
     }
 }

@@ -7,11 +7,13 @@ data class WinningLottoNumbers(
     init {
         require(!lottoNumbers.lottoNumbers.contains(bonusLottoNumber)) { INVALID_BONUS_BALL_ERROR_MESSAGE }
     }
-    fun makeStatistics(lotteries: List<LottoNumbers>): WinningStatistics {
-        val matchResult = lotteries.map {
-            Pair(lottoNumbers.getNumberOfMatch(it), it.isMatchBonusLottoNumber(bonusLottoNumber))
+    fun makeStatistics(userLottos: UserLottos): WinningStatistics {
+        val matchResult = userLottos.lottos.map {
+            lottoNumbers.getNumberOfMatch(it) to it.isMatchBonusLottoNumber(bonusLottoNumber)
         }
-        val ranks = matchResult.map { Rank.valueOf(it.first, it.second) }
+        val ranks = matchResult.map { (numberOfCount, isMatchedBonusNumber) ->
+            Rank.valueOf(numberOfCount, isMatchedBonusNumber)
+        }
 
         return WinningStatistics(statistics = countRanks(ranks))
     }
@@ -27,5 +29,12 @@ data class WinningLottoNumbers(
         private const val INVALID_BONUS_BALL_ERROR_MESSAGE = "보너스 볼은 당첨 번호와 중복되지 않는 수여야 합니다."
         private const val INITIAL_COUNT = 0
         private val INITIAL_STATISTICS = Rank.values().associateWith { INITIAL_COUNT }
+
+        fun from(inputWinningNumbers: List<Int>, bonusNumber: Int): WinningLottoNumbers {
+            val lottoNumbers = LottoNumbers.from(inputWinningNumbers)
+            val bonusLottoNumber = LottoNumber.from(bonusNumber)
+
+            return WinningLottoNumbers(lottoNumbers = lottoNumbers, bonusLottoNumber = bonusLottoNumber)
+        }
     }
 }

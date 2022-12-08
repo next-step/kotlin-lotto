@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoVendingMachine
+import lotto.domain.WinningLottoNumbers
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -8,13 +9,22 @@ class LottoController {
     fun run() {
         val purchaseAmount = InputView.getPurchaseAmount()
         val purchaseCount = purchaseAmount.getNumberOfLotto()
-        ResultView.printNumberOfPurchases(purchaseCount)
+        if (purchaseCount == 0) {
+            ResultView.printNoLottoToBuy()
+            return
+        }
 
-        val myLotteries = LottoVendingMachine.buy(purchaseCount)
-        ResultView.printPurchasedLotto(myLotteries)
+        val manualNumberOfLotto = InputView.getManualNumberOfLotto()
+        val inputManualNumbers = InputView.getManualLottos(manualNumberOfLotto)
 
-        val winningLottoNumbers = InputView.getWinningLottoNumbers()
-        val winningStatistics = winningLottoNumbers.makeStatistics(myLotteries)
+        val userLottos = LottoVendingMachine.buyLottos(purchaseAmount, inputManualNumbers)
+        ResultView.printPurchaseStatus(manualNumberOfLotto, purchaseCount - manualNumberOfLotto)
+        ResultView.printPurchasedLotto(userLottos)
+
+        val inputWinningNumbers = InputView.getWinningNumbers()
+        val inputBonusNumber = InputView.getBonusNumber()
+        val winningLottoNumbers = WinningLottoNumbers.from(inputWinningNumbers, inputBonusNumber)
+        val winningStatistics = winningLottoNumbers.makeStatistics(userLottos)
         ResultView.printRewardsStatistics(winningStatistics)
 
         val rateOfReturn = winningStatistics.calculateRateOfReturn(purchaseAmount)

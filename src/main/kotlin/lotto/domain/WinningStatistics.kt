@@ -16,7 +16,11 @@ data class WinningStatistics(
     }
 
     private fun getRewards(): BigDecimal {
-        return BigDecimal(statistics.map { it.key.getTotalWinningMoney(it.value) }.sum())
+        return BigDecimal(
+            statistics.map { (rank, count) ->
+                rank.getTotalWinningMoney(count)
+            }.sum()
+        )
     }
 
     companion object {
