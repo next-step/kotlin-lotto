@@ -19,11 +19,9 @@ data class LottoResultGenerator(private val winningNumbers: WinningNumbers, priv
     }
 
     private fun initLottoResult(): EnumMap<LottoRank, Int> {
-        val lottoResult: EnumMap<LottoRank, Int> = EnumMap(LottoRank::class.java)
-        LottoRank.values().forEach {
-            lottoResult[it] = DEFAULT_COUNT
-        }
-        return lottoResult
+        return LottoRank.values()
+            .associateWith { DEFAULT_COUNT }
+            .toMap(EnumMap(LottoRank::class.java))
     }
 
     companion object {
