@@ -2,12 +2,11 @@ package lotto
 
 class WinningMachine(winningString: String) {
 
-    val winningNumbers: List<LottoNumber>
+    val winningLotto: Lotto
 
     init {
         val stringNumbers = getStringNumbers(winningString)
-        winningNumbers = getWinningNumbers(stringNumbers)
-        require(winningNumbers.size == winningNumbers.distinct().size) { "input string numbers duplicates" }
+        winningLotto = Lotto(getWinningNumbers(stringNumbers))
     }
 
     private fun getStringNumbers(winningString: String): List<String> {
@@ -20,14 +19,16 @@ class WinningMachine(winningString: String) {
     }
 
     private fun getWinningNumbers(stringNumbers: List<String>): List<LottoNumber> {
-        return stringNumbers.map { LottoNumber(it.trim()) }
+        val lottoNumbers = stringNumbers.map { LottoNumber(it.trim()) }
+        require(lottoNumbers.size == lottoNumbers.distinct().size) { "input string numbers duplicates" }
+        return lottoNumbers
     }
 
     fun winningResult(lottoList: List<Lotto>): HashMap<RANKING, Int> {
         val winningResult = HashMap<RANKING, Int>()
 
         lottoList.forEach { lotto ->
-            val union = lotto.publishNumbers + winningNumbers
+            val union = lotto.numbers + winningLotto.numbers
             setWinningResultValue(union, winningResult)
         }
 
