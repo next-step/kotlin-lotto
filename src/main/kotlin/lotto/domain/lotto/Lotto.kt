@@ -5,7 +5,7 @@ import lotto.domain.lotto.benefit.LottoBenefitPolicy
 import lotto.domain.lotto.price.LottoCost
 import lotto.domain.lotto.price.LottoTicketPrice
 import lotto.domain.lotto.result.LottoResult
-import lotto.domain.lotto.result.LottoResultMatchCountMap
+import lotto.domain.lotto.result.LottoResultMap
 import lotto.domain.lotto.ticket.LottoAnswerTicket
 import lotto.domain.lotto.ticket.LottoTicketContainer
 
@@ -25,16 +25,21 @@ class Lotto(
         lottoTicketContainer = LottoTicketContainer(lottoCost.ticketCount)
     }
 
-    fun result(lottoAnswerTicket: LottoAnswerTicket): LottoResult =
-        LottoResult(benefit(lottoAnswerTicket), resultMatchCountMap(lottoAnswerTicket))
+    fun result(lottoAnswerTicket: LottoAnswerTicket): LottoResult {
+        val lottoResultMap = resultMap(lottoAnswerTicket)
+
+        return LottoResult(benefit(lottoResultMap), lottoResultMap)
+    }
 
     fun benefit(lottoAnswerTicket: LottoAnswerTicket): LottoBenefit {
-        val lottoResultCountMap = resultMatchCountMap(lottoAnswerTicket)
+        val lottoResultMap = resultMap(lottoAnswerTicket)
 
-        return lottoBenefitPolicy.benefit(lottoResultCountMap, lottoCost)
+        return benefit(lottoResultMap)
     }
 
-    private fun resultMatchCountMap(lottoAnswerTicket: LottoAnswerTicket): LottoResultMatchCountMap {
-        return lottoTicketContainer.resultCountMap(lottoAnswerTicket)
-    }
+    private fun resultMap(lottoAnswerTicket: LottoAnswerTicket): LottoResultMap =
+        lottoAnswerTicket.result(lottoTicketContainer)
+
+    private fun benefit(lottoResultMap: LottoResultMap): LottoBenefit =
+        lottoBenefitPolicy.benefit(lottoResultMap, lottoCost)
 }

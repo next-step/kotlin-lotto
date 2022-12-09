@@ -110,7 +110,7 @@ class LottoTest : FunSpec({
     test("LottoBenefit이 정상적으로 생성된다") {
         val givenLottoCost = 1400000
         val givenLottoTicketPrice = 1000
-        val givenLottoAnswerTicket = LottoAnswerTicket(1, 2, 3, 4, 5, 6)
+        val givenLottoAnswerTicket = LottoAnswerTicket(LottoTicket(1, 2, 3, 4, 5, 6))
         val lotto = Lotto(givenLottoCost, givenLottoTicketPrice)
 
         val lottoBenefit = lotto.benefit(givenLottoAnswerTicket)
@@ -124,7 +124,7 @@ class LottoTest : FunSpec({
     test("LottoResult가 정상적으로 생성된다") {
         val givenLottoCost = 1400000
         val givenLottoTicketPrice = 1000
-        val givenLottoAnswerTicket = LottoAnswerTicket(1, 2, 3, 4, 5, 6)
+        val givenLottoAnswerTicket = LottoAnswerTicket(LottoTicket(1, 2, 3, 4, 5, 6))
         val lotto = Lotto(givenLottoCost, givenLottoTicketPrice)
 
         val lottoResult = lotto.result(givenLottoAnswerTicket)
@@ -136,14 +136,8 @@ class LottoTest : FunSpec({
         lottoResult.lottoBenefit.benefit shouldBeGreaterThanOrEqual 0
         lottoResult.lottoBenefit.profit shouldBeGreaterThanOrEqual 0.0
 
-        LottoBenefitLevel.values().map(LottoBenefitLevel::matchCount).forEach {
-            lottoResult.lottoResultMatchCountMap[it] shouldBeGreaterThanOrEqual 0
+        LottoBenefitLevel.values().forEach {
+            lottoResult.lottoResultMap.winningCount(it) shouldBeGreaterThanOrEqual 0
         }
-
-        lottoResult.lottoResultMatchCountMap.values.forEach { count ->
-            count shouldBeGreaterThanOrEqual 0
-        }
-
-        lottoResult.lottoResultMatchCountMap.values.sum() shouldBe lotto.lottoTicketContainer.size
     }
 })

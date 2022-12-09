@@ -1,6 +1,7 @@
 package lotto.domain.lotto.price
 
-data class LottoTicketPrice(val price: Int = DEFAULT_LOTTO_TICKET_PRICE) {
+@JvmInline
+value class LottoTicketPrice(val price: Int = DEFAULT_LOTTO_TICKET_PRICE) {
     init {
         require(price > 0) { "Price must be greater than zero" }
     }
