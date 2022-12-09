@@ -15,5 +15,9 @@ enum class LottoRank(val countOfMatch: Int, val winningMoney: Int) {
             }
             return values().find { it.countOfMatch == countOfMatch } ?: MISS
         }
+
+        fun valueOf(countOfMatch: Int, winningMoney: Int): LottoRank {
+            return values().find { it.countOfMatch == countOfMatch && it.winningMoney == winningMoney } ?: MISS
+        }
     }
 }

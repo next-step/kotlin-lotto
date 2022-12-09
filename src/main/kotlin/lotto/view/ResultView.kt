@@ -19,7 +19,6 @@ object ResultView {
     private const val LOTTO_RESULT_EMPTY_STRING = ""
     private const val REFERENCE_VALUE = 1
     private const val LOTTO_RANK_MISS = 0
-    private const val SECOND_PLACE_WINNING_MONEY = 30000000
 
     fun printNumberOfLotto(numberOfLotto: Int) {
         println("$numberOfLotto$LOTTO_COUNT_MESSAGE")
@@ -31,7 +30,7 @@ object ResultView {
 
     fun printFinalResult(lottoResultDto: LottoResultDto) {
         printLottoResultTitle()
-        lottoResultDto.getResult().forEach { printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value) }
+        lottoResultDto.getResult().forEach { printLottoResult(it.key.countOfMatch, it.key.winningMoney, it.value, it.key.isSecondPlace()) }
         printProfitRate(lottoResultDto.getProfitRate())
     }
 
@@ -39,14 +38,14 @@ object ResultView {
         println("\n" + LOTTO_RESULT_MESSAGE_TITLE + "\n" + LOTTO_RESULT_MESSAGE_DELIMITER)
     }
 
-    private fun printLottoResult(countOfMatch: Int, winningMoney: Int, count: Int) {
+    private fun printLottoResult(countOfMatch: Int, winningMoney: Int, count: Int, isSecondPlace: Boolean) {
         if (countOfMatch == LOTTO_RANK_MISS) {
             return
         }
         println(
             countOfMatch.toString() +
                 LOTTO_RESULT_MATCH_MESSAGE +
-                privatePrintMatchBonusNumber(winningMoney) +
+                printMatchBonusNumber(isSecondPlace) +
                 LOTTO_RESULT_WINNING_MONEY_PREFIX +
                 winningMoney.toString() +
                 LOTTO_RESULT_WINNING_MONEY_TERMS +
@@ -73,8 +72,8 @@ object ResultView {
         return LOTTO_RESULT_EMPTY_STRING
     }
 
-    private fun privatePrintMatchBonusNumber(winningMoney: Int): String {
-        if (winningMoney == SECOND_PLACE_WINNING_MONEY) {
+    private fun printMatchBonusNumber(isSecondPlace: Boolean): String {
+        if (isSecondPlace) {
             return LOTTO_RESULT_MATCH_BONUS_NUMBER_MESSAGE
         }
         return LOTTO_RESULT_EMPTY_STRING
