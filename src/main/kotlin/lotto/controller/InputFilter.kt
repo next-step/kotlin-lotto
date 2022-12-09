@@ -18,7 +18,7 @@ object InputFilter {
     fun inputWinningNumbers(): LottoNumbers {
         return try {
             val parsedInput = InputParser.parseWithDelimiter(InputView.inputWinningNumber())
-            LottoNumbers(parsedInput.map { LottoNumber(it) })
+            LottoNumbers(parsedInput.map { LottoNumber.from(it) })
         } catch (e: Exception) {
             InputView.printError(e.message!!)
             inputWinningNumbers()
@@ -27,7 +27,7 @@ object InputFilter {
 
     fun inputBonusNumber(): LottoNumber {
         return try {
-            LottoNumber(InputView.inputBonusNumber())
+            LottoNumber.from(InputView.inputBonusNumber())
         } catch (e: Exception) {
             InputView.printError(e.message!!)
             inputBonusNumber()

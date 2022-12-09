@@ -8,7 +8,7 @@ import lotto.domain.LottoNumbers.Companion.MAXIMUM_LOTTO_NUMBER_LENGTH
 import lotto.domain.LottoNumbersList
 
 object LottoGenerator {
-    private val lottoNumbers = List(MAXIMUM_LOTTO_NUMBER) { LottoNumber(it + MINIMUM_LOTTO_NUMBER) }
+    private val lottoNumbers = List(MAXIMUM_LOTTO_NUMBER) { LottoNumber.from(it + MINIMUM_LOTTO_NUMBER) }
 
     fun generateLottoNumbers(lottoCount: Int): LottoNumbersList {
         val lottoNumbersList = mutableListOf<LottoNumbers>()
