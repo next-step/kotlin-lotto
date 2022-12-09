@@ -4,6 +4,7 @@ import lotto.model.Lotto
 import lotto.model.LottoPrize
 import lotto.model.Lottos
 import lotto.model.WinningNumbers
+import lotto.service.LottoShop
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.Comparator.comparingInt
@@ -48,6 +49,7 @@ object OutputView {
     }
 
     private fun returnRatioOf(lottoCount: Int, winningPrize: BigDecimal): BigDecimal {
-        return winningPrize.divide(BigDecimal(lottoCount), 2, RoundingMode.HALF_DOWN)
+        val buyPrice = BigDecimal(lottoCount).multiply(LottoShop.LOTTO_PRICE)
+        return winningPrize.divide(buyPrice, 2, RoundingMode.HALF_DOWN)
     }
 }

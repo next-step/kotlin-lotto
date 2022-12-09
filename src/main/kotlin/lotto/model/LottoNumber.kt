@@ -6,6 +6,9 @@ data class LottoNumber(val value: Int) {
     }
 
     companion object {
+        private val LOTTO_NUMBER_POOL = (1..46).map { LottoNumber(it) }
+
+        fun random() = LOTTO_NUMBER_POOL.shuffled().first()
         fun of(input: String): LottoNumber {
             return LottoNumber(input.toInt())
         }

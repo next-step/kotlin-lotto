@@ -7,10 +7,12 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 object LottoShop {
+    val LOTTO_PRICE = BigDecimal(1000)
+
     fun buy(money: BigDecimal): Lottos {
-        require(money >= BigDecimal(1000))
-        val buyCount = money.divide(BigDecimal(1000), 0, RoundingMode.FLOOR).toInt()
-        val lottoList = List<Lotto>(buyCount) { Lotto.of(listOf(1, 2, 3, 4, 5, 6)) }
+        require(money >= LOTTO_PRICE)
+        val buyCount = money.divide(LOTTO_PRICE, 0, RoundingMode.FLOOR).toInt()
+        val lottoList = List(buyCount) { Lotto.randomLotto() }
         return Lottos(lottoList)
     }
 
