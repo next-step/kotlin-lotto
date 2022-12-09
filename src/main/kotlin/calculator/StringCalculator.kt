@@ -1,7 +1,5 @@
 package calculator
 
-import calculator.PositiveNumber.Companion.sum
-
 class StringCalculator(private val inputString: String?) {
 
     fun calculate(): Int {
@@ -15,8 +13,14 @@ class StringCalculator(private val inputString: String?) {
 
             val numberStrings = splitNumberStrings(divider, matchResult)
             val numbers = stringsToNumbers(numberStrings)
-            numbers.sum()
+            sumNumbers(numbers)
         }
+    }
+
+    private fun sumNumbers(numbers: List<PositiveNumber>): Int {
+        var sum = 0u
+        numbers.forEach { sum = it.sum(sum) }
+        return sum.toInt()
     }
 
     private fun extractionDivider(matchResult: MatchResult?): String = when (matchResult) {
