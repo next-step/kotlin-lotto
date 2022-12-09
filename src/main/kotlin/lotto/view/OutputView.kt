@@ -48,7 +48,7 @@ object OutputView {
         println("${target.matchCount}개 일치 (${target.prize}원) - ${count}개")
     }
 
-    private fun returnRatioOf(lottoCount: Int, winningPrize: BigDecimal): BigDecimal {
+    fun returnRatioOf(lottoCount: Int, winningPrize: BigDecimal): BigDecimal {
         val buyPrice = BigDecimal(lottoCount).multiply(LottoShop.LOTTO_PRICE)
         return winningPrize.divide(buyPrice, 2, RoundingMode.HALF_DOWN)
     }

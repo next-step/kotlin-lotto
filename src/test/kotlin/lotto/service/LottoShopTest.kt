@@ -1,5 +1,6 @@
 package lotto.service
 
+import lotto.view.OutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -36,10 +37,10 @@ class LottoShopTest {
     }
 
     @Test
-    internal fun `당첨 이후 총 수익률을 계산한다`() {
+    internal fun `당첨 이후 총 수익률을 계산한다`() { // TODO 로직을 어디다 옮길지 고민
         val lottoCount = 7
         val winningPrize = BigDecimal.valueOf(1_234_567)
-        val returnRatio = LottoShop.returnRatioOf(lottoCount, winningPrize)
-        assertThat(returnRatio).isEqualTo(BigDecimal("176366.71"))
+        val returnRatio = OutputView.returnRatioOf(lottoCount, winningPrize)
+        assertThat(returnRatio).isEqualTo(BigDecimal("176.37"))
     }
 }
