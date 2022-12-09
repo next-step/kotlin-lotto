@@ -6,23 +6,54 @@ import simulator.lotto.Ranks
 
 class Output {
     fun printLottoList(lottoList: List<Lotto>) {
+
         lottoList.forEach {
             println("[$it]")
         }
     }
 
-    fun printTimes(times: Int) {
-        println("${times}개를 구매했습니다.")
+    fun printTimes(manualCount: Int, autoCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 
     fun printResult(ranks: Ranks) {
         println("당첨 통계")
         println("----------")
-        println("${Rank.FIFTH.countOfMatch}개 일치 (${Rank.FIFTH.winningMoney}원)- ${ranks.rankCount(Rank.FIFTH)}개")
-        println("${Rank.FOURTH.countOfMatch}개 일치 (${Rank.FOURTH.winningMoney}원)- ${ranks.rankCount(Rank.FOURTH)}개")
-        println("${Rank.THIRD.countOfMatch}개 일치 (${Rank.THIRD.winningMoney}원)- ${ranks.rankCount(Rank.THIRD)}개")
-        println("${Rank.SECOND.countOfMatch}개 일치, 보너스 볼 일치 (${Rank.SECOND.winningMoney}원)- ${ranks.rankCount(Rank.SECOND)}개")
-        println("${Rank.FIRST.countOfMatch}개 일치 (${Rank.FIRST.winningMoney}원)- ${ranks.rankCount(Rank.FIRST)}개")
+        println(
+            "${Rank.FIFTH.countOfMatch}개 일치 (${Rank.FIFTH.winningMoney}원)- ${
+                ranks.rankCount(
+                    Rank.FIFTH
+                )
+            }개"
+        )
+        println(
+            "${Rank.FOURTH.countOfMatch}개 일치 (${Rank.FOURTH.winningMoney}원)- ${
+                ranks.rankCount(
+                    Rank.FOURTH
+                )
+            }개"
+        )
+        println(
+            "${Rank.THIRD.countOfMatch}개 일치 (${Rank.THIRD.winningMoney}원)- ${
+                ranks.rankCount(
+                    Rank.THIRD
+                )
+            }개"
+        )
+        println(
+            "${Rank.SECOND.countOfMatch}개 일치, 보너스 볼 일치 (${Rank.SECOND.winningMoney}원)- ${
+                ranks.rankCount(
+                    Rank.SECOND
+                )
+            }개"
+        )
+        println(
+            "${Rank.FIRST.countOfMatch}개 일치 (${Rank.FIRST.winningMoney}원)- ${
+                ranks.rankCount(
+                    Rank.FIRST
+                )
+            }개"
+        )
     }
 
     fun printYield(yield: Double) {

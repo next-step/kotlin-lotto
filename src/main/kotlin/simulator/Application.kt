@@ -10,14 +10,20 @@ fun main() {
     val output = Output()
     val generator = NumberGenerator(Number.MIN_NUMBER, Number.MAX_NUMBER, Numbers.NUMBERS_COUNT)
     val money = input.getMoney()
-    val lottoList = LottoMachine(generator).create(money / Lotto.PRICE)
+    val count = money / Lotto.PRICE
 
+    val manualCount = input.getManualCount()
+
+    var lottoList = input.getManualNumbers(manualCount)
+    lottoList = lottoList.plus(LottoMachine(generator).create(count))
+
+    output.printTimes(manualCount, count - manualCount)
     output.printLottoList(lottoList)
 
-    val numbers = input.getWinningNumbers()
+    val winningNumbers = input.getWinningNumbers()
     val bonusNumber = input.getBonusNumber()
 
-    val ranks = Ranks.match(lottoList, WinningNumber(numbers, bonusNumber))
+    val ranks = Ranks.match(lottoList, WinningNumber(winningNumbers, bonusNumber))
 
     output.printResult(ranks)
     output.printYield(ranks.yield(money))
