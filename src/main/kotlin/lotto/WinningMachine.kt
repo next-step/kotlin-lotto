@@ -36,20 +36,8 @@ class WinningMachine(winningString: String) {
     }
 
     private fun setWinningResultValue(unionNumbers: List<LottoNumber>, winningResult: HashMap<RANKING, Int>) {
-        when (unionNumbers.size - unionNumbers.distinct().size) {
-            RANKING.FOURTH.winningCount -> {
-                setWinningRankingValue(RANKING.FOURTH, winningResult)
-            }
-            RANKING.THIRD.winningCount -> {
-                setWinningRankingValue(RANKING.THIRD, winningResult)
-            }
-            RANKING.SECOND.winningCount -> {
-                setWinningRankingValue(RANKING.SECOND, winningResult)
-            }
-            RANKING.FIRST.winningCount -> {
-                setWinningRankingValue(RANKING.FIRST, winningResult)
-            }
-        }
+        val ranking = RANKING.countOf(unionNumbers.size - unionNumbers.distinct().size)
+        setWinningRankingValue(ranking, winningResult)
     }
 
     private fun setWinningRankingValue(rank: RANKING, winningResult: HashMap<RANKING, Int>) {

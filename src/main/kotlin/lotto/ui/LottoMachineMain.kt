@@ -23,7 +23,9 @@ fun main() {
 
     resultView.printWinningStatisticsStart()
     for (rank in RANKING.values()) {
-        resultView.printWinningStatistics(rank, winningResult[rank] ?: 0)
+        if (rank != RANKING.MISS) {
+            resultView.printWinningStatistics(rank, winningResult[rank] ?: 0)
+        }
     }
     resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn())
 }
