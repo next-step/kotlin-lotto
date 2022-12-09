@@ -28,15 +28,15 @@ class WinningMachine(winningString: String) {
         val winningResult = HashMap<RANKING, Int>()
 
         lottoList.forEach { lotto ->
-            val union = lotto.numbers + winningLotto.numbers
-            setWinningResultValue(union, winningResult)
+            val winningNumbers = winningLotto.numbers.filter { lotto.numbers.contains(it) }
+            setWinningResultValue(winningNumbers.size, winningResult)
         }
 
         return winningResult
     }
 
-    private fun setWinningResultValue(unionNumbers: List<LottoNumber>, winningResult: HashMap<RANKING, Int>) {
-        val ranking = RANKING.countOf(unionNumbers.size - unionNumbers.distinct().size)
+    private fun setWinningResultValue(winningCount: Int, winningResult: HashMap<RANKING, Int>) {
+        val ranking = RANKING.countOf(winningCount)
         setWinningRankingValue(ranking, winningResult)
     }
 
