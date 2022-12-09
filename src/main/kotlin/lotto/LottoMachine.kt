@@ -14,11 +14,12 @@ class LottoMachine(val price: Int) {
     }
 
     private fun createNumbers(): List<LottoNumber> {
-        val shuffledNumbers = (LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE).shuffled().take(6).sorted()
+        val shuffledNumbers = LOTTO_NUMBER.shuffled().take(6).sorted()
         return shuffledNumbers.map { LottoNumber(it) }
     }
 
     companion object {
+        private val LOTTO_NUMBER = (LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE)
         private const val LOTTO_BASE_PRICE = 1000
     }
 }
