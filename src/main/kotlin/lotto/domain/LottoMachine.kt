@@ -9,6 +9,6 @@ object LottoMachine {
     private val LOTTO_NUMBERS = LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE
 
     fun createLottoNumbers(purchaseAmount: PurchaseAmount): List<LottoNumbers> {
-        return List(purchaseAmount.div(LOTTO_PRICE)) { LottoNumbers(LOTTO_NUMBERS.shuffled().subList(0, LottoNumbers.SIZE)) }
+        return List(purchaseAmount.countTicket(LOTTO_PRICE)) { LottoNumbers(LOTTO_NUMBERS.shuffled().take(LottoNumbers.SIZE)) }
     }
 }

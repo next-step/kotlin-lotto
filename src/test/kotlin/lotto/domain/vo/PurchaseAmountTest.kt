@@ -31,11 +31,11 @@ class PurchaseAmountTest : FunSpec({
             actual.message should startWith("amount should be in units of")
         }
     }
-    context("div()") {
-        test("인자로 받은 숫자로 나눈 결과를 반환한다.") {
+    context("countTicket()") {
+        test("인자로 받은 금액으로 나눈 티켓 장수를 반환한다.") {
             val purchaseAmount = PurchaseAmount(1000)
 
-            val actual = purchaseAmount.div(10)
+            val actual = purchaseAmount.countTicket(10)
 
             actual shouldBe 100
         }
