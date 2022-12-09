@@ -46,7 +46,6 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
                 .countOfMatch(winningNumber.numbers)
 
             val matchBonus = lotto.numbers
-                .values
                 .contains(winningNumber.bonusNumber)
 
             return valueOf(countOfMatch, matchBonus)

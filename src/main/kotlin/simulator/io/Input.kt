@@ -1,6 +1,7 @@
 package simulator.io
 
-import java.util.*
+import simulator.lotto.Number
+import simulator.lotto.Numbers
 
 class Input {
     fun getMoney(): Int {
@@ -8,15 +9,14 @@ class Input {
         return readln().toInt()
     }
 
-    fun getBonusNumber(): Int {
+    fun getBonusNumber(): Number {
         println("보너스 볼을 입력해 주세요.")
-        return readln().toInt()
+        return Number(readln().toInt())
     }
 
-    fun getWinningNumbers(): SortedSet<Int> {
+    fun getWinningNumbers(): Numbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readln().split(",")
-            .map { it.toInt() }
-            .toSortedSet()
+        return Numbers(readln().split(",")
+            .map { Number(it.toInt()) })
     }
 }

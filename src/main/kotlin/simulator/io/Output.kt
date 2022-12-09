@@ -21,7 +21,7 @@ class Output {
         println("${Rank.FIFTH.countOfMatch}개 일치 (${Rank.FIFTH.winningMoney}원)- ${ranks.rankCount(Rank.FIFTH)}개")
         println("${Rank.FOURTH.countOfMatch}개 일치 (${Rank.FOURTH.winningMoney}원)- ${ranks.rankCount(Rank.FOURTH)}개")
         println("${Rank.THIRD.countOfMatch}개 일치 (${Rank.THIRD.winningMoney}원)- ${ranks.rankCount(Rank.THIRD)}개")
-        println("${Rank.SECOND.countOfMatch}개 일치, 보너스 볼 일치 (${Rank.SECOND.winningMoney}원)- ${ranks.rankCount(Rank.FIFTH)}개")
+        println("${Rank.SECOND.countOfMatch}개 일치, 보너스 볼 일치 (${Rank.SECOND.winningMoney}원)- ${ranks.rankCount(Rank.SECOND)}개")
         println("${Rank.FIRST.countOfMatch}개 일치 (${Rank.FIRST.winningMoney}원)- ${ranks.rankCount(Rank.FIRST)}개")
     }
 
