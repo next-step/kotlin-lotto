@@ -13,14 +13,14 @@ class WinningPrizesTest : FunSpec({
             }
         }
     }
-    context("extractStatisticOfMatchedCount()") {
-        test("당첨 번호 일치 개수의 통계를 추출한다.") {
+    context("extractStatisticOfWinningPrize()") {
+        test("당첨 상금의 통계를 추출한다.") {
             val winningPrizes = WinningPrizes(listOf(WinningPrize.FOURTH_PRIZE, WinningPrize.FOURTH_PRIZE, WinningPrize.THIRD_PRIZE))
 
-            val actual = winningPrizes.extractStatisticOfMatchedCount()
+            val actual = winningPrizes.extractStatisticOfWinningPrize()
 
-            actual[WinningPrize.FOURTH_PRIZE.matchedCount] shouldBe 2
-            actual[WinningPrize.THIRD_PRIZE.matchedCount] shouldBe 1
+            actual[WinningPrize.FOURTH_PRIZE] shouldBe 2
+            actual[WinningPrize.THIRD_PRIZE] shouldBe 1
         }
     }
     context("calculateTotalRateOfReturn()") {

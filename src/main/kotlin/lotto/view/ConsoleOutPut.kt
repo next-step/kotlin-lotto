@@ -17,9 +17,9 @@ class ConsoleOutPut {
         println("당첨 통계")
         println("---------")
 
-        winningStatisticsDto.winningStatistic.sortedWith(compareBy({ it.first.matchedCount }, { it.first.prize }))
+        winningStatisticsDto.winningStatistic.toSortedMap(compareBy({ it.matchedCount }, { it.prize }))
             .asSequence()
-            .filter { it.first.matchedCount != 0 }
+            .filter { it.key.matchedCount != 0 }
             .forEach { (winningStatistic, winningPrizeCount) -> printWinningPrize(winningStatistic, winningPrizeCount) }
 
         println("총 수익률은 ${rateOfReturn}입니다.")
