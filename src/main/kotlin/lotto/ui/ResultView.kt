@@ -1,7 +1,7 @@
 package lotto.ui
 
-import lotto.Const
 import lotto.Lotto
+import lotto.RANKING
 
 class ResultView {
     fun printPurchaseCount(count: Int) {
@@ -20,7 +20,7 @@ class ResultView {
         println("---------")
     }
 
-    fun printWinningStatistics(rank: Const.RANKING, winningCount: Int) {
+    fun printWinningStatistics(rank: RANKING, winningCount: Int) {
         println("${ rank.winningCount }개 일치 (${ rank.winningPrice }원) - ${ winningCount }개")
     }
 

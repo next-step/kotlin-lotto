@@ -19,7 +19,7 @@ class LottoTest : StringSpec({
 
         lottoList[0].publishNumbers.size shouldBe 6
         lottoList[0].publishNumbers.forEach { num ->
-            num shouldBeInRange IntRange(1, 45)
+            num.number shouldBeInRange IntRange(1, 45)
         }
     }
 
@@ -51,31 +51,34 @@ class LottoTest : StringSpec({
 
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
         val lottoMachine = LottoMachine(1000)
-
         val lottoList = lottoMachine.publishLotto()
-        val winningMachine = WinningMachine(lottoList[0].publishNumbers.take(6).toString().replace("[", "").replace("]", ""))
+
+        val firstLottoString = lottoList[0].publishNumbers.map { it.number }.take(6).toString()
+        val winningMachine = WinningMachine(firstLottoString.replace("[", "").replace("]", ""))
         val winningResult = winningMachine.winningResult(lottoList)
 
-        winningResult.containsKey(Const.RANKING.FIRST) shouldBe true
-        winningResult[Const.RANKING.FIRST] shouldBe 1
+        winningResult.containsKey(RANKING.FIRST) shouldBe true
+        winningResult[RANKING.FIRST] shouldBe 1
     }
 
     "발행한 금액과 당첨 금액을 통해 수익률을 반환한다." {
         val lottoMachine = LottoMachine(1000)
-
         val lottoList = lottoMachine.publishLotto()
-        val winningMachine = WinningMachine(lottoList[0].publishNumbers.take(6).toString().replace("[", "").replace("]", ""))
+
+        val firstLottoString = lottoList[0].publishNumbers.map { it.number }.take(6).toString()
+        val winningMachine = WinningMachine(firstLottoString.replace("[", "").replace("]", ""))
         val winningResult = winningMachine.winningResult(lottoList)
         val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
 
-        winningStatistics.rateOfReturn() shouldBe Const.RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
+        winningStatistics.rateOfReturn() shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
     }
 
     "수익율을 통해 손익에 대한 결과를 반환 한다." {
         val lottoMachine = LottoMachine(1000)
-
         val lottoList = lottoMachine.publishLotto()
-        val winningMachine = WinningMachine(lottoList[0].publishNumbers.take(6).toString().replace("[", "").replace("]", ""))
+
+        val firstLottoString = lottoList[0].publishNumbers.map { it.number }.take(6).toString()
+        val winningMachine = WinningMachine(firstLottoString.replace("[", "").replace("]", ""))
         val winningResult = winningMachine.winningResult(lottoList)
         val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
 

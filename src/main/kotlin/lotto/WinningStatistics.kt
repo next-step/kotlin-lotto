@@ -2,7 +2,7 @@ package lotto
 
 import kotlin.math.floor
 
-class WinningStatistics(private val price: Int, private val winningResult: HashMap<Const.RANKING, Int>) {
+class WinningStatistics(private val price: Int, private val winningResult: HashMap<RANKING, Int>) {
 
     fun rateOfReturn(): Float {
         return floor(getWinningPrice().toFloat() / price.toFloat() * 100) / 100
@@ -11,7 +11,7 @@ class WinningStatistics(private val price: Int, private val winningResult: HashM
     private fun getWinningPrice(): Int {
         var winningPrice = 0
 
-        Const.RANKING.values().forEach { ranking ->
+        RANKING.values().forEach { ranking ->
             val winningCount: Int = winningResult[ranking] ?: 0
             winningPrice += ranking.winningPrice * winningCount
         }

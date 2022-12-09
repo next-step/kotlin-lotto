@@ -1,7 +1,7 @@
 package lotto.ui
 
-import lotto.Const
 import lotto.LottoMachine
+import lotto.RANKING
 import lotto.WinningMachine
 import lotto.WinningStatistics
 
@@ -22,7 +22,7 @@ fun main() {
     val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
 
     resultView.printWinningStatisticsStart()
-    for (rank in Const.RANKING.values()) {
+    for (rank in RANKING.values()) {
         resultView.printWinningStatistics(rank, winningResult[rank] ?: 0)
     }
     resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn())
