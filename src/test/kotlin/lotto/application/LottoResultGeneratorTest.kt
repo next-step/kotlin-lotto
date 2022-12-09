@@ -3,27 +3,28 @@ package lotto.application
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoNumbersList
-import lotto.domain.LottoRank
 import lotto.domain.WinningNumbers
+import lotto.dto.LottoRankDto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 class LottoResultGeneratorTest {
     @ParameterizedTest
-    @CsvSource(value = ["1,2,3,4,5,6:45:FIRST", "1,2,3,4,5,45:45:SECOND", "1,2,3,4,5,7:45:THIRD", "1,2,3,4,7,8:45:FOURTH", "1,2,3,7,8,9:45:FIFTH", "1,2,3,4,7,45:45:FOURTH", "1,2,3,7,8,45:45:FIFTH"], delimiter = ':')
-    fun `로또 결과 생성 - 순위 확인 테스트`(given: String, bonusNumber: Int, expected: String) {
+    @CsvSource(value = ["1,2,3,4,5,6:6,2000000000", "1,2,3,4,5,45:5,30000000", "1,2,3,4,5,7:5,1500000", "1,2,3,4,7,8:4,50000", "1,2,3,7,8,9:3,5000", "1,2,3,7,8,45:3,5000"], delimiter = ':')
+    fun `로또 결과 생성 - 순위 확인 테스트`(given: String, result: String) {
         // given
         val lottoNumbers = LottoNumbers(given.split(",").map { LottoNumber(it.toInt()) })
         val winningNumbers = LottoNumbers(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
-        val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, LottoNumber(bonusNumber))
+        val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, LottoNumber(45))
         val lottoResultGenerator = LottoResultGenerator(winningNumbersWithBonusNumber, LottoNumbersList(listOf(lottoNumbers)))
         val lottoResult = lottoResultGenerator.getResult()
+        val expected = LottoRankDto(result.split(",").map { it.toInt() }.first(), result.split(",").map { it.toInt() }.last())
 
         // when
-        val actual = lottoResult.value.filter { it.value == 1 }.keys.first()
+        val actual = lottoResult.getResultAsDto().filter { it.value == 1 }.keys.first()
 
         // then
-        assertThat(actual).isEqualTo(LottoRank.valueOf(expected))
+        assertThat(actual).isEqualTo(expected)
     }
 }

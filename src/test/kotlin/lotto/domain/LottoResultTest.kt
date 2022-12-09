@@ -11,12 +11,12 @@ class LottoResultTest {
         val lottoResult = initLottoResult()
 
         // when, then
-        assertThat(lottoResult.value[LottoRank.FIRST]).isEqualTo(0)
-        assertThat(lottoResult.value[LottoRank.SECOND]).isEqualTo(0)
-        assertThat(lottoResult.value[LottoRank.THIRD]).isEqualTo(0)
-        assertThat(lottoResult.value[LottoRank.FOURTH]).isEqualTo(0)
-        assertThat(lottoResult.value[LottoRank.FIFTH]).isEqualTo(1)
-        assertThat(lottoResult.value[LottoRank.MISS]).isEqualTo(13)
+        assertThat(lottoResult.getNumberOfWinningsByRank(LottoRank.FIRST)).isEqualTo(0)
+        assertThat(lottoResult.getNumberOfWinningsByRank(LottoRank.SECOND)).isEqualTo(0)
+        assertThat(lottoResult.getNumberOfWinningsByRank(LottoRank.THIRD)).isEqualTo(0)
+        assertThat(lottoResult.getNumberOfWinningsByRank(LottoRank.FOURTH)).isEqualTo(0)
+        assertThat(lottoResult.getNumberOfWinningsByRank(LottoRank.FIFTH)).isEqualTo(1)
+        assertThat(lottoResult.getNumberOfWinningsByRank(LottoRank.MISS)).isEqualTo(13)
     }
 
     @Test
