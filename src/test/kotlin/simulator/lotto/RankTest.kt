@@ -53,10 +53,10 @@ internal class RankTest {
 
     @Test
     fun `로또와 당첨 번호를 통해 등수를 구분할 수 있다`() {
-        val number = Number(sortedSetOf(1, 2, 3, 4, 5, 6))
+        val numbers = Numbers(sortedSetOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = 7
 
-        val actual = Rank.match(Lotto(number), WinningNumber(number, bonusNumber))
+        val actual = Rank.match(Lotto(numbers), WinningNumber(numbers, bonusNumber))
         assertThat(actual).isEqualTo(Rank.FIRST)
     }
 }

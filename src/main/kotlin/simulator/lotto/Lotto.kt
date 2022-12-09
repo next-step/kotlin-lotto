@@ -1,8 +1,8 @@
 package simulator.lotto
 
-class Lotto(val number: Number) {
+class Lotto(val numbers: Numbers) {
     override fun toString(): String {
-        return number.values.joinToString(",")
+        return numbers.values.joinToString(",")
     }
 
     companion object {

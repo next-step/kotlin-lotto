@@ -27,19 +27,20 @@ internal class RanksTest {
 
     @Test
     fun `당첨번호를 통해 로또 목록으로 부터 등수 목록을 생성할 수 있다`() {
-        val firstLotto = Lotto(Number(sortedSetOf(1, 2, 3, 4, 5, 6)))
-        val secondLotto = Lotto(Number(sortedSetOf(1, 2, 3, 4, 5, 7)))
-        val thirdLotto = Lotto(Number(sortedSetOf(1, 2, 3, 4, 5, 8)))
+        val firstLotto = Lotto(Numbers(sortedSetOf(1, 2, 3, 4, 5, 6)))
+        val secondLotto = Lotto(Numbers(sortedSetOf(1, 2, 3, 4, 5, 7)))
+        val thirdLotto = Lotto(Numbers(sortedSetOf(1, 2, 3, 4, 5, 8)))
 
         val lottoList = listOf(firstLotto, secondLotto, thirdLotto)
-        val winningNumber = WinningNumber(Number(sortedSetOf(1, 2, 3, 4, 5, 6)), 7)
-        val rankList = Ranks.match(lottoList, winningNumber)
+        val winningNumbers = WinningNumber(Numbers(sortedSetOf(1, 2, 3, 4, 5, 6)), 7)
+        val rankList = Ranks.match(lottoList, winningNumbers)
 
         assertThat(rankList.rankCount(Rank.FIRST)).isEqualTo(1)
         assertThat(rankList.rankCount(Rank.SECOND)).isEqualTo(1)
         assertThat(rankList.rankCount(Rank.THIRD)).isEqualTo(1)
 
-        val totalMoney = Rank.FIRST.winningMoney + Rank.SECOND.winningMoney + Rank.THIRD.winningMoney
+        val totalMoney =
+            Rank.FIRST.winningMoney + Rank.SECOND.winningMoney + Rank.THIRD.winningMoney
 
         assertThat(rankList.totalMoney()).isEqualTo(totalMoney)
     }

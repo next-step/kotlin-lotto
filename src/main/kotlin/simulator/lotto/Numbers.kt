@@ -2,7 +2,7 @@ package simulator.lotto
 
 import java.util.*
 
-data class Number(val values: SortedSet<Int>) {
+data class Numbers(val values: SortedSet<Int>) {
     init {
         require(values.size == NUMBERS_COUNT) {
             "로또 번호는 ${NUMBERS_COUNT}개의 숫자로 구성되어야 합니다"
@@ -17,9 +17,9 @@ data class Number(val values: SortedSet<Int>) {
         }
     }
 
-    fun countOfMatch(number: Number): Int {
+    fun countOfMatch(numbers: Numbers): Int {
         var countOfMatch = 0
-        number.values.forEach { if (values.contains(it)) countOfMatch++ }
+        numbers.values.forEach { if (values.contains(it)) countOfMatch++ }
         return countOfMatch
     }
 

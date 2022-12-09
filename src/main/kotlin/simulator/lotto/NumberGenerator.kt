@@ -7,11 +7,11 @@ class NumberGenerator(private val minNumber: Int, private val maxNumber: Int, pr
         }
     }
 
-    fun generate(): Number {
+    fun generate(): Numbers {
         val numbers = (minNumber..maxNumber).shuffled()
             .slice(0 until count)
             .toSortedSet()
 
-        return Number(numbers)
+        return Numbers(numbers)
     }
 }
