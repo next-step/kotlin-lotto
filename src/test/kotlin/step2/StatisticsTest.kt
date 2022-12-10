@@ -4,8 +4,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import step2.domain.Lotto
+import step2.domain.Lottos
 import step2.domain.Statistics
-import step2.domain.getAnswerCountList
 
 class StatisticsTest {
 
@@ -18,7 +18,10 @@ class StatisticsTest {
         val lotto4 = Lotto(listOf(1, 13, 23, 33, 43, 45))
         val lotto5 = Lotto(listOf(1, 14, 24, 34, 44, 45))
         val answer = Lotto(listOf(1, 10, 20, 31, 41, 44))
-        val matchCount = listOf(lotto1, lotto2, lotto3, lotto4, lotto5).getAnswerCountList(answer)
+
+        val lottos = Lottos(listOf(lotto1, lotto2, lotto3, lotto4, lotto5))
+
+        val matchCount = lottos.getAnswerCountList(answer)
 
         Statistics().matchCount(matchCount)
         assertThat(Statistics.matchThreeCount).isEqualTo(2)
