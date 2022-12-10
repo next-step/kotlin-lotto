@@ -1,13 +1,14 @@
 package lotto.domain
 
 import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import lotto.domain.model.Rank
 import lotto.domain.model.WinningNumbers
 
 class LottoDispenser(val amount: Int) {
 
     lateinit var ranks: List<Rank>
-    var bonusNumber: Int = 0
+    lateinit var bonusNumber: LottoNumber
     lateinit var winningNumbers: WinningNumbers
     val lottoList: List<Lotto> = makeLottoList()
 

@@ -2,6 +2,7 @@ package lotto.ui
 
 import lotto.domain.LottoNumberValidator
 import lotto.domain.MINIMUM_PRICE
+import lotto.domain.model.LottoNumber
 import lotto.domain.model.WinningNumbers
 
 class InputView {
@@ -31,12 +32,12 @@ class InputView {
         return winningNumbers
     }
 
-    fun inputBonusNumber(): Int {
+    fun inputBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         val bonusNumberString = readlnOrNull() ?: ""
         val isBonusNumber = LottoNumberValidator.validateBonus(bonusNumberString)
         return if (isBonusNumber) {
-            bonusNumberString.toInt()
+            LottoNumber(bonusNumberString.toInt())
         } else {
             inputBonusNumber()
         }

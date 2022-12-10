@@ -31,14 +31,14 @@ enum class Rank(val matchCount: Int, val prize: Int) {
             return Rank.safeValueOf(matchCount = matchCount, matchBonus = matchBonus)
         }
 
-        fun win(winningNumbers: WinningNumbers, lotto: Lotto, bonusNumber: Int = 0): Rank {
+        fun win(winningNumbers: WinningNumbers, lotto: Lotto, bonusNumber: LottoNumber): Rank {
             val matchCount: Int = Rank.countMatchNumber(winningNumbers, lotto)
             val matchBonus: Boolean = matchBonus(matchCount, lotto, bonusNumber)
             return Rank.matchingWinner(matchCount, matchBonus)
         }
 
-        private fun matchBonus(matchCount: Int, lottoNumbers: Lotto, bonusNumber: Int): Boolean {
-            return matchCount == 5 && lottoNumbers.contains(bonusNumber)
+        private fun matchBonus(matchCount: Int, lottoNumbers: Lotto, bonusNumber: LottoNumber): Boolean {
+            return matchCount == 5 && lottoNumbers.contains(bonusNumber.number)
         }
 
         private fun checkContainWinningNumber(winningNumber: Int, lotto: Lotto): Int {
