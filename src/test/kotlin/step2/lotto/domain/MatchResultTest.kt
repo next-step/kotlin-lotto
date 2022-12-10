@@ -10,7 +10,7 @@ import step2.lotto.domain.MatchResult.SECOND_PLACE
 import step2.lotto.domain.MatchResult.THIRD_PLACE
 
 internal class MatchResultTest : StringSpec({
-    "일치하는 갯수를 이용하여 당첨 등수를 판별한다." {
+    "일치하는 개수를 이용하여 당첨 등수를 판별한다." {
         lotto.forAll { (matchCount: Int, expected: MatchResult) ->
             MatchResult.valueOf(matchCount) shouldBe expected
         }
