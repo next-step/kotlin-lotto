@@ -1,54 +1,24 @@
 package lotto.ui
 
-import lotto.domain.LottoNumberValidator
+import lotto.domain.LottoDispenser
 import lotto.domain.LottoStatics
 import lotto.domain.model.Lotto
-import lotto.domain.model.Rank
-import lotto.domain.model.WinningNumbers
 
 class ResultView {
 
-    private lateinit var winningNumbers: WinningNumbers
-    private lateinit var ranks: List<Rank>
-    private var bonusNumber: Int = 0
-
-    fun inputWinningNumbers() {
-        println("")
-        println("지난 주 당첨 번호를 입력해 주세요.")
-        val input = readLine() ?: ""
-
-        try {
-            winningNumbers = WinningNumbers(winningNumberText = input)
-            inputBonusNumber()
-        } catch (e: Exception) {
-            return inputWinningNumbers()
-        }
+    fun showPurchaseResult(lottoList: List<Lotto>) {
+        println("${lottoList.size}개를 구매했습니다.")
+        lottoList.forEach { println(it) }
     }
 
-    private fun inputBonusNumber() {
-        println("보너스 볼을 입력해 주세요.")
-        val bonusNumberString = readLine() ?: ""
-        val isBonusNumber = LottoNumberValidator.validateBonus(bonusNumberString)
-        return if (isBonusNumber) {
-            bonusNumber = bonusNumberString.toInt()
-            return
-        } else {
-            inputBonusNumber()
-        }
-    }
+    fun showResult(dispenser: LottoDispenser) {
+        dispenser.checkWinningLottoList()
 
-    fun checkWinningLottoList(lottoList: List<Lotto>) {
-        ranks = lottoList.map { lotto ->
-            Rank.win(winningNumbers, lotto.numbers, bonusNumber)
-        }
-    }
-
-    fun showResult(amount: Int) {
         println("\n당첨 통계")
         println("---------")
 
-        val statics = LottoStatics(ranks)
-        val earningRate = statics.calculateEarningRate(statics.totalReward, amount)
+        val statics = LottoStatics(dispenser.ranks)
+        val earningRate = statics.calculateEarningRate(statics.totalReward, dispenser.amount)
         val winningResult = statics.winningResult
 
         println("3개 일치 (5000원)- ${winningResult.numberOfFifthGrade}개")

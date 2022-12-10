@@ -1,13 +1,24 @@
 package lotto.domain
 
 import lotto.domain.model.Lotto
+import lotto.domain.model.Rank
+import lotto.domain.model.WinningNumbers
 
-class LottoDispenser(private val amount: Int) {
+class LottoDispenser(val amount: Int) {
 
-    val list: List<Lotto> = makeLottoList()
+    lateinit var ranks: List<Rank>
+    var bonusNumber: Int = 0
+    lateinit var winningNumbers: WinningNumbers
+    val lottoList: List<Lotto> = makeLottoList()
 
     init {
         require(amount >= MINIMUM_PRICE) { "구입 금액은 ${MINIMUM_PRICE}원 이하가 될 수 없습니다" }
+    }
+
+    fun checkWinningLottoList() {
+        ranks = lottoList.map { lotto ->
+            Rank.win(winningNumbers, lotto.numbers, bonusNumber)
+        }
     }
 
     private fun makeLottoList(): List<Lotto> {
