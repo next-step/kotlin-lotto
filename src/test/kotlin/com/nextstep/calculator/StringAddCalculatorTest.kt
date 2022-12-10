@@ -18,7 +18,7 @@ class StringAddCalculatorTest : StringSpec({
         calculator.calculate("5") shouldBe 5
     }
 
-    "연산자와 숫자를 파싱한다" {
+    "숫자를 파싱해서 더한다" {
         calculator.calculate("1,3") shouldBe 4
     }
 
@@ -26,7 +26,7 @@ class StringAddCalculatorTest : StringSpec({
         calculator.calculate("//;\n1;2;3") shouldBe 6
     }
 
-    "숫자 이외의 값 혹은 음수를 전달하면 throw RuntimeException" {
+    "숫자 이외의 값 혹은 음수를 전달하면 throw IllegalArgumentException" {
         forAll(
             row("-1"),
             row("1,-1,6"),
