@@ -6,8 +6,8 @@ data class Number(val value: Int) {
             "로또 번호는 ${MAX_NUMBER}이하이어야 합니다"
         }
 
-        require(value >= MIN_NUMBER) {
-            "로또 번호는 ${MIN_NUMBER}이상이어야 합니다"
+        require(this.value in MIN_NUMBER..MAX_NUMBER) {
+            "로또 번호는 $MIN_NUMBER - $MAX_NUMBER 까지의 숫자만 가능합니다"
         }
     }
 
