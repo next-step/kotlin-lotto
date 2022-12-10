@@ -16,7 +16,7 @@ object ResultView {
 
     private fun printEachLotto(playResults: PlayResults) {
         playResults.elements.forEach {
-            println(it.lotto)
+            println(it.lotto.sortedLotto())
         }
     }
 
