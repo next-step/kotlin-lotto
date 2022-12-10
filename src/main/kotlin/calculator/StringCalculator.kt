@@ -1,56 +1,47 @@
 package calculator
 
-class StringCalculator(private val str: String?) {
+class StringCalculator(private val inputString: String?) {
 
-    fun calculate(): Int = when (str.isNullOrBlank()) {
-        true -> { RESULT_EMPTY_VALUE }
-        false -> {
-            val matchResult: MatchResult? = Regex(REGEX_DIVIDER).find(str)
-            val divider = getDivider(matchResult)
+    fun calculate(): Int {
+        return if (inputString.isNullOrBlank()) {
+            RESULT_EMPTY_VALUE
+        } else {
+            val matchResult: MatchResult? = Regex(REGEX_DIVIDER).find(inputString)
+            val divider = extractionDivider(matchResult)
 
-            require(!divider.isNullOrEmpty()) { "divider" }
+            require(divider.isNotEmpty()) { "구분자를 찾지 못 했습니다" }
 
-            val splitStr = splitStr(divider, matchResult)
-            val numbers = splitToNumbers(splitStr)
-            add(numbers)
+            val numberStrings = splitNumberStrings(divider, matchResult)
+            val numbers = stringsToNumbers(numberStrings)
+            sumNumbers(numbers)
         }
     }
 
-    private fun getDivider(matchResult: MatchResult?): String = when (matchResult) {
+    private fun sumNumbers(numbers: List<PositiveNumber>): Int {
+        var sum = 0u
+        numbers.forEach { sum = it.sum(sum) }
+        return sum.toInt()
+    }
+
+    private fun extractionDivider(matchResult: MatchResult?): String = when (matchResult) {
         null -> DEFAULT_DIVIDER
-        else -> getCustomDivider(matchResult)
+        else -> extractionCustomDivider(matchResult)
     }
 
-    private fun getCustomDivider(matchResult: MatchResult): String =
-        matchResult.let {
-            it.groupValues[1]
-        }
+    private fun extractionCustomDivider(matchResult: MatchResult): String =
+        matchResult.groupValues[1]
 
-    private fun splitStr(divider: String, matchResult: MatchResult?): List<String> {
+    private fun splitNumberStrings(divider: String, matchResult: MatchResult?): List<String> {
         val convertString: String = when (matchResult) {
-            null -> str!!
-            else -> matchResult.let { it.groupValues[2] }
+            null -> inputString!!
+            else -> matchResult.groupValues[2]
         }
 
         return convertString.split(divider.toRegex())
     }
 
-    private fun splitToNumbers(splitStr: List<String>): List<Int> {
-        val result = ArrayList<Int>()
-        splitStr.forEach { str ->
-            val number: UInt = str.toUInt()
-            result.add(number.toInt())
-        }
-
-        return result
-    }
-
-    private fun add(numberList: List<Int>): Int {
-        var sum = 0
-        numberList.forEach { num ->
-            sum += num
-        }
-        return sum
+    private fun stringsToNumbers(numberStrings: List<String>): List<PositiveNumber> {
+        return numberStrings.map { PositiveNumber(it.toUInt()) }
     }
 
     companion object {
