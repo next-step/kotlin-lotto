@@ -18,8 +18,8 @@ object LottoNumberValidator {
     }
 
     private fun makeNumbers(numberText: String): List<Int> {
-        val numbers: List<Int> = Tokenizer.tokenize(numberText).map { numberText ->
-            val number = numberText.toIntOrNull()
+        val numbers: List<Int> = Tokenizer.tokenize(numberText).map { text ->
+            val number = text.toIntOrNull()
             check(number != null) { "입력된 값이 숫자가 아닙니다." }
             number
         }
