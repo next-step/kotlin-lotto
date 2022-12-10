@@ -2,7 +2,6 @@ package lotto.ui
 
 import lotto.domain.LottoNumberValidator
 import lotto.domain.LottoStatics
-import lotto.domain.WinningChecker
 import lotto.domain.model.Lotto
 import lotto.domain.model.Rank
 import lotto.domain.model.WinningNumbers
@@ -40,7 +39,7 @@ class ResultView {
 
     fun checkWinningLottoList(lottoList: List<Lotto>) {
         ranks = lottoList.map { lotto ->
-            WinningChecker.win(winningNumbers, lotto.numbers, bonusNumber)
+            Rank.win(winningNumbers, lotto.numbers, bonusNumber)
         }
     }
 
