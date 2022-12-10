@@ -1,8 +1,5 @@
 package simulator.io
 
-import simulator.lotto.Number
-import simulator.lotto.Numbers
-
 class Input {
     fun getMoney(): Int {
         println("구입금액을 입력해 주세요.")
@@ -14,25 +11,20 @@ class Input {
         return readln().toInt()
     }
 
-    fun getBonusNumber(): Number {
+    fun getBonusNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
-        return Number(readln().toInt())
+        return readln().toInt()
     }
 
-    fun getManualNumbers(manualCount:Int): List<Numbers> {
+    fun getManualNumbers(manualCount:Int): List<String> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        return List(manualCount) {
-            getNumbers()
+        return List(manualCount){
+            readln()
         }
     }
 
-    fun getWinningNumbers(): Numbers {
+    fun getLastMatchNumbers(): String {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return getNumbers()
-    }
-
-    private fun getNumbers(): Numbers {
-        return Numbers(readln().split(",")
-            .map { Number(it.toInt()) })
+        return readln()
     }
 }
