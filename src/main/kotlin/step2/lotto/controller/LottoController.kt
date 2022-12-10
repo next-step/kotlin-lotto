@@ -1,20 +1,23 @@
 package step2.lotto.controller
 
-import step2.lotto.domain.PlayInfo
+import step2.lotto.domain.PurchaseItem
 import step2.lotto.io.InputView
-import step2.lotto.io.ResultView.printResult
+import step2.lotto.io.ResultView.printPurchaseItem
+import step2.lotto.io.ResultView.printWinningStatistics
+import step2.lotto.service.LottoGenerator
 import step2.lotto.service.LottoService
-import step2.lotto.service.RandomLottoGenerator
 
-class LottoController {
-    private val lottoService: LottoService = LottoService(RandomLottoGenerator())
+class LottoController(private val lottoGenerator: LottoGenerator) {
+    private val lottoService: LottoService = LottoService()
 
     fun playLotto() {
         val buyAmount = InputView.inputBuyAmount()
-        val winningNumber = InputView.inputWinningNumber()
-        val playInfo = PlayInfo.of(buyAmount, winningNumber)
+        val lottos = lottoGenerator.generate(buyAmount)
+        val purchaseItem = PurchaseItem.of(buyAmount, lottos)
+        printPurchaseItem(purchaseItem)
 
-        val playResult = lottoService.play(playInfo)
-        printResult(playInfo, playResult)
+        val winningNumber = InputView.inputWinningNumber()
+        val playResult = lottoService.play(purchaseItem, winningNumber)
+        printWinningStatistics(purchaseItem, playResult)
     }
 }

@@ -1,7 +1,12 @@
 package step2.lotto.service
 
+import step2.lotto.domain.BuyAmount
+import step2.lotto.domain.Lotto
+import step2.lotto.domain.Lottos
+
 interface LottoGenerator {
-    fun generate(): Set<Int>
+    fun generateSingleLotto(): Lotto
+    fun generate(buyAmount: BuyAmount): Lottos
 
     companion object {
         const val LOTTO_SIZE = 6

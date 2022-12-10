@@ -1,16 +1,10 @@
 package step2.lotto.service
 
-import step2.lotto.domain.Lotto
-import step2.lotto.domain.Lottos
-import step2.lotto.domain.PlayInfo
+import step2.lotto.domain.PurchaseItem
 import step2.lotto.domain.PlayResults
+import step2.lotto.domain.WinningNumber
 
-class LottoService(private val lottoGenerator: LottoGenerator) {
-    fun play(playInfo: PlayInfo): PlayResults {
-        val randomLottos = List(playInfo.tryCount) {
-            Lotto.of(lottoGenerator.generate())
-        }
-        return Lottos.of(randomLottos)
-            .match(playInfo.winningNumber)
-    }
+class LottoService {
+    fun play(purchaseItem: PurchaseItem, winningNumber: WinningNumber): PlayResults =
+        purchaseItem.lottos.match(winningNumber)
 }

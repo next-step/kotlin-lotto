@@ -1,6 +1,6 @@
 package step2.lotto.domain
 
-class Lottos private constructor(private val elements: List<Lotto>) {
+class Lottos private constructor(val elements: List<Lotto>) {
     fun match(winningNumber: WinningNumber): PlayResults {
         val playResults = PlayResults()
         elements.map {
