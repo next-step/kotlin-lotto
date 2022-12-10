@@ -19,7 +19,7 @@ class ResultView {
         val input = readLine() ?: ""
 
         try {
-            winningNumbers = WinningNumbers(winningNumberString = input)
+            winningNumbers = WinningNumbers(winningNumberText = input)
             inputBonusNumber()
         } catch (e: Exception) {
             return inputWinningNumbers()
