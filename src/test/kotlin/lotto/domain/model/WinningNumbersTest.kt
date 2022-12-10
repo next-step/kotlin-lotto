@@ -14,7 +14,7 @@ internal class WinningNumbersTest {
     fun winningNumbers() {
         val winningNumbers = WinningNumbers(winningNumberText = "1,2,3,4,5,6")
 
-        winningNumbers.numbers shouldContainInOrder listOf(1, 2, 3, 4, 5, 6)
+        winningNumbers.numbers.map { it.number } shouldContainInOrder listOf(1, 2, 3, 4, 5, 6)
     }
 
     @DisplayName("잘못 입력 된 당첨 번호로 당첨 번호가 생성되지 않는다")
