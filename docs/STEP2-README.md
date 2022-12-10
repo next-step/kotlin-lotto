@@ -27,9 +27,9 @@
   * [x] 컨트롤러로 부터 넘겨받은 실행 정보를 이용하여 `로또를 발급`하고 `당첨 번호와 비교한 결과를 반환`한다.
     * [x] `난수 생성기`를 이용하여 로또 한게임에 필요한 `6개의 로또 번호 난수를 생성`한다.  
   * [x] `발급된 전체 로또`와 `당첨 번호`를 `판별부에 전달`하여 그 `당첨 결과를 반환` 컨트롤러에 반환한다.
-  * [x] NumberGenerator(Interface) : 난수 생성기
-    * [x] RandomNumberGenerator : `프로그램 실행 환경`에서 필요한 `난수를 생성`한다.
-    * [x] TestNumberGenerator : `테스트 실행 환경`에서 필요한 `정의된 수를 생성`한다.
+  * [x] LottoGenerator(Interface) : 난수 로또 생성기
+    * [x] RandomNumberGenerator : `프로그램 실행 환경`에서 필요한 `난수 로또를 생성`한다.
+    * [x] TestNumberGenerator : `테스트 실행 환경`에서 필요한 `정의된 수의 로또를 생성`한다.
 
 * Domain
   * [x] 로또 번호(LottoNumber, 원시 타입 포장 객체) : 1~45 범위의 로또 번호를 표현
