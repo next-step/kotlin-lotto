@@ -6,12 +6,12 @@ class Lotto(list: List<Int>): Iterable<LottoNum> {
     init {
         verifyLottoNumCount(list)
         numbers = list.map {
-            LottoNum(it)
+            LottoNum.of(it)
         }.sorted()
     }
 
     private fun verifyLottoNumCount(numbers: List<Int>) {
-        require(numbers.size <= 6) {"로또 번호 갯수는 $LOTTO_NUM_COUNT 이하여야 합니다."}
+        require(numbers.size == LOTTO_NUM_COUNT) {"로또 번호 갯수는 $LOTTO_NUM_COUNT 여야 합니다."}
     }
 
     override fun iterator(): Iterator<LottoNum> = numbers.iterator()

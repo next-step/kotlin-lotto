@@ -1,6 +1,8 @@
 package lotto
 
 import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.WinningMachine
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -12,11 +14,11 @@ class WinningMachineTest {
     @ParameterizedTest
     @MethodSource("lottoTestFixture")
     fun `로또 번호가 몇개 일치하는지 비교한다`(rank: Rank, numbers: List<Int>) {
-        val winLotto = WinLotto(Lotto(listOf(1, 2, 3, 7, 10, 41)), LottoNum(9))
+        val winLotto = WinLotto(Lotto(listOf(1, 2, 3, 7, 10, 41)), LottoNum.of(9))
         val lotto = Lotto(numbers)
         val winningMachine = WinningMachine(winLotto)
         val result = winningMachine.match(listOf(lotto))
-        assertThat(result[rank]).contains(lotto)
+        assertThat(result.from(rank)).contains(lotto)
     }
 
     companion object {

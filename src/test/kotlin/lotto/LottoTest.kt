@@ -37,19 +37,19 @@ class LottoTest {
 
         val machine = LottoMachine(
             object : Generator {
-                private var index = 0
                 private val list = listOf(10, 2, 7, 45, 41, 40)
 
-                override fun generate(): Int {
-                    if(index < list.size) return list[index++]
-                    else throw IllegalStateException()
+                override fun generate(): List<Int> {
+                    return list
                 }
             }
         )
         val lotto = machine.issue(1_000)[0]
 
-        assertThat(lotto).containsExactlyInAnyOrder(LottoNum(2), LottoNum(7), LottoNum(10),
-            LottoNum(40), LottoNum(41), LottoNum(45))
+        assertThat(lotto).containsExactlyInAnyOrder(
+            LottoNum.of(2), LottoNum.of(7), LottoNum.of(10),
+            LottoNum.of(40), LottoNum.of(41), LottoNum.of(45)
+        )
     }
 
 }

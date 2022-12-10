@@ -2,27 +2,17 @@ package lotto.domain
 
 class WinningMachine(private val winLotto: WinLotto) {
 
-    fun match(lottos: List<Lotto>): Map<Rank, MutableList<Lotto>> {
+    fun match(lottos: List<Lotto>): Statistics {
 
-        val statistic: Map<Rank, MutableList<Lotto>> = initStatistic()
+        val statistic = Statistics()
 
         for(lotto in lottos) {
             val rank = matching(lotto, winLotto)
-            statistic[rank]?.add(lotto)
+            statistic.add(rank, lotto)
+//            statistic.from(rank)?.add(lotto)
         }
 
         return statistic
-    }
-
-    private fun initStatistic(): Map<Rank, MutableList<Lotto>> {
-        return mutableMapOf(
-            Rank.MISS to mutableListOf(),
-            Rank.FIFTH to mutableListOf(),
-            Rank.FOURTH to mutableListOf(),
-            Rank.THIRD to mutableListOf(),
-            Rank.SECOND to mutableListOf(),
-            Rank.FIRST to mutableListOf()
-        )
     }
 
     private fun matching(lotto: Lotto, winLotto: WinLotto): Rank {
@@ -42,7 +32,4 @@ class WinningMachine(private val winLotto: WinLotto) {
         return lotto.contains(bonus)
     }
 
-    companion object {
-        const val WIN_LOTTO_NUM_COUNT = 3
-    }
 }

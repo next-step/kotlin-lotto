@@ -8,12 +8,7 @@ class Expression(private val list: List<String>) {
     }
 
     private fun verifyStringToLong(input: String): Long {
-        val toLong = try {
-            input.toLong()
-        } catch (e : NumberFormatException) {
-            throw IllegalArgumentException("수식에 문자(${input})가 들어올 수 없습니다.")
-        }
-
+        val toLong = input.toLongOrNull() ?: throw IllegalArgumentException("수식에 문자(${input})가 들어올 수 없습니다.")
         require(toLong >= NEGATIVE_STANDARD) { "수식에 음수(${toLong})가 들어올 수 없습니다." }
         return toLong
     }

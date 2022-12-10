@@ -2,5 +2,5 @@ package lotto.domain.generator
 
 interface Generator {
 
-    fun generate(): Int
+    fun generate(): List<Int>
 }
