@@ -14,7 +14,7 @@ fun main() {
 
     OutputView.generateLotto(lottoList)
 
-    val answerCount = lottoList.getAnswerCountList(InputView.answerLotto())
+    val answerCount = Lottos(lottoList).getAnswerCountList(InputView.answerLotto())
 
     val winningAmount = Statistics().matchCount(answerCount)
 
