@@ -9,7 +9,6 @@ class WinningMachine(private val winLotto: WinLotto) {
         for(lotto in lottos) {
             val rank = matching(lotto, winLotto)
             statistic.add(rank, lotto)
-//            statistic.from(rank)?.add(lotto)
         }
 
         return statistic

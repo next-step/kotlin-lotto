@@ -3,6 +3,7 @@ package lotto.domain
 class Lotto(list: List<Int>): Iterable<LottoNum> {
 
     private val numbers: List<LottoNum>
+
     init {
         verifyLottoNumCount(list)
         numbers = list.map {

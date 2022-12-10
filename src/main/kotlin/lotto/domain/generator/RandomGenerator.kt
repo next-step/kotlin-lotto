@@ -2,21 +2,14 @@ package lotto.domain.generator
 
 class RandomGenerator: Generator {
 
-    val nums : Array<Boolean> = Array(46) { false }
-
     override fun generate(): List<Int> {
-        val list: MutableList<Int> = mutableListOf()
+        val set: MutableSet<Int> = mutableSetOf()
 
-        while(list.size < 6) {
+        while(set.size < 6) {
             val random = (1..45).random()
-            if(!nums[random]) {
-                nums[random] = true
-                list.add(random)
-            }
+            set.add(random)
         }
 
-        nums.fill(false)
-
-        return list.toList()
+        return set.toList()
     }
 }
