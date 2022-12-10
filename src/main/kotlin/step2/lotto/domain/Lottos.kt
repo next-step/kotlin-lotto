@@ -1,13 +1,13 @@
 package step2.lotto.domain
 
 class Lottos private constructor(private val elements: List<Lotto>) {
-    fun match(winningNumber: WinningNumber): MatchResults {
-        val matchResults = MatchResults()
+    fun match(winningNumber: WinningNumber): PlayResults {
+        val playResults = PlayResults()
         elements.map {
             val matchResult = it.match(winningNumber)
-            matchResults.add(matchResult)
+            playResults.add(it, matchResult)
         }
-        return matchResults
+        return playResults
     }
 
     companion object {

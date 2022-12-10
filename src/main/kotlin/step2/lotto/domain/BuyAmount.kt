@@ -2,7 +2,8 @@ package step2.lotto.domain
 
 import step2.lotto.validator.NumberValidator.toInt
 
-class BuyAmount private constructor(value: Int) {
+class BuyAmount private constructor(val value: Int) {
+    val tryCount: Int = value / MINIMUM_PRICE
 
     companion object {
         private const val MINIMUM_PRICE: Int = 1_000
