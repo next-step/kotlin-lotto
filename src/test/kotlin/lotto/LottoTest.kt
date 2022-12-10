@@ -12,14 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class LottoTest {
 
-    @ParameterizedTest
-    @CsvSource(value = ["10000,10", "14000,14", "1000,1"], delimiter = ',')
-    fun `로또를 발행한다(금액 10000)`(amount: Int, count: Int) {
-        val machine = LottoMachine(RandomGenerator())
-        val lottos = machine.issue(amount)
-        assertThat(lottos.size).isEqualTo(count)
-    }
-
     @Test
     fun `로또 번호가 1~45 범위 내 무작위로 선택된다`() {
 

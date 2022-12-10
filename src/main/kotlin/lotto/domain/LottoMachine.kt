@@ -6,9 +6,12 @@ import kotlin.streams.toList
 
 class LottoMachine(private val generator: Generator) {
 
-    fun issue(amount: Int): List<Lotto> {
-        val count = amount / LOTTO_PRICE
+    fun issue(amount: Amount): List<Lotto> {
+        val count = amount.divide(LOTTO_PRICE)
+        return issue(count)
+    }
 
+    fun issue(count: Int): List<Lotto> {
         return IntStream.rangeClosed(1, count)
             .mapToObj { createLotto() }
             .toList()
@@ -20,7 +23,7 @@ class LottoMachine(private val generator: Generator) {
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1_000
+        const val LOTTO_PRICE = 1_000
     }
 
 }
