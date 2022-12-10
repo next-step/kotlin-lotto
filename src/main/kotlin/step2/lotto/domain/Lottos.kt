@@ -9,7 +9,7 @@ class Lottos private constructor(private val elements: List<Lotto>) {
         }
         return matchResults
     }
-    
+
     companion object {
         fun of(lottos: List<Lotto>): Lottos {
             return Lottos(lottos)
