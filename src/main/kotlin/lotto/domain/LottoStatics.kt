@@ -1,30 +1,30 @@
 package lotto.domain
 
 import lotto.domain.model.Rank
-import lotto.domain.model.WinningResult
 import kotlin.math.floor
 
 class LottoStatics(private val ranks: List<Rank> = emptyList()) {
 
     val totalReward: Int = calculateTotalReward()
 
-    val winningResult: WinningResult = calculateWinningCount()
+    val winningResult: Map<Int, Int>
+        get() = calculateWinningCount()
 
     private fun calculateTotalReward(): Int {
         return ranks.sumOf { rank -> rank.prize }
     }
 
-    private fun calculateWinningCount(): WinningResult {
-        var result = WinningResult()
-        ranks.forEach { winner ->
-            result = when (winner) {
-                Rank.FIRST_GRADE -> result.copy(numberOfFirstGrade = result.numberOfFirstGrade + 1)
-                Rank.SECOND_GRADE -> result.copy(numberOfSecondGrade = result.numberOfSecondGrade + 1)
-                Rank.THIRD_GRADE -> result.copy(numberOfThirdGrade = result.numberOfThirdGrade + 1)
-                Rank.FOURTH_GRADE -> result.copy(numberOfFourthGrade = result.numberOfFourthGrade + 1)
-                Rank.FIFTH_GRADE -> result.copy(numberOfFifthGrade = result.numberOfFifthGrade + 1)
-                Rank.NO_MATCH -> result
-            }
+    private fun calculateWinningCount(): Map<Int, Int> {
+        val result = mutableMapOf(
+            Rank.FIRST_GRADE.matchCount to 0,
+            Rank.SECOND_GRADE.matchCount to 0,
+            Rank.THIRD_GRADE.matchCount to 0,
+            Rank.FOURTH_GRADE.matchCount to 0,
+            Rank.FIFTH_GRADE.matchCount to 0,
+            Rank.NO_MATCH.matchCount to 0,
+        )
+        ranks.forEach { rank ->
+            result[rank.matchCount] = result[rank.matchCount]?.inc() ?: 0
         }
         return result
     }
