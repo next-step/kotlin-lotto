@@ -20,9 +20,9 @@ enum class Rank(val matchCount: Int, val prize: Int) {
             } ?: NO_MATCH
         }
 
-        fun countMatchNumber(winningNumbers: WinningNumbers, lottoNumbers: List<Int>): Int {
+        fun countMatchNumber(winningNumbers: WinningNumbers, lotto: Lotto): Int {
             return winningNumbers.numbers.sumOf { winningNumber ->
-                checkContainWinningNumber(winningNumber, lottoNumbers)
+                checkContainWinningNumber(winningNumber, lotto)
             }
         }
 
@@ -31,18 +31,18 @@ enum class Rank(val matchCount: Int, val prize: Int) {
             return Rank.safeValueOf(matchCount = matchCount, matchBonus = matchBonus)
         }
 
-        fun win(winningNumbers: WinningNumbers, lottoNumbers: List<Int>, bonusNumber: Int = 0): Rank {
-            val matchCount: Int = Rank.countMatchNumber(winningNumbers, lottoNumbers)
-            val matchBonus: Boolean = matchBonus(matchCount, lottoNumbers, bonusNumber)
+        fun win(winningNumbers: WinningNumbers, lotto: Lotto, bonusNumber: Int = 0): Rank {
+            val matchCount: Int = Rank.countMatchNumber(winningNumbers, lotto)
+            val matchBonus: Boolean = matchBonus(matchCount, lotto, bonusNumber)
             return Rank.matchingWinner(matchCount, matchBonus)
         }
 
-        private fun matchBonus(matchCount: Int, lottoNumbers: List<Int>, bonusNumber: Int): Boolean {
+        private fun matchBonus(matchCount: Int, lottoNumbers: Lotto, bonusNumber: Int): Boolean {
             return matchCount == 5 && lottoNumbers.contains(bonusNumber)
         }
 
-        private fun checkContainWinningNumber(winningNumber: Int, lottoNumbers: List<Int>): Int {
-            return if (lottoNumbers.contains(winningNumber)) 1 else 0
+        private fun checkContainWinningNumber(winningNumber: Int, lotto: Lotto): Int {
+            return if (lotto.contains(winningNumber)) 1 else 0
         }
     }
 }

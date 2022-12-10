@@ -2,6 +2,7 @@ package lotto.domain
 
 import calculator.Tokenizer
 import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 
 object LottoNumberValidator {
     private const val LOTTO_NUMBER_COUNT = 6
@@ -31,6 +32,6 @@ object LottoNumberValidator {
         val numbers: List<Int> = makeNumbers(bonusNumberText)
         if (numbers.isEmpty()) return false
         if (numbers.size != 1) return false
-        return Lotto.LOTTO_NUMBER_RANGE.contains(numbers[0])
+        return LottoNumber.LOTTO_NUMBER_RANGE.contains(numbers[0])
     }
 }

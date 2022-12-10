@@ -17,7 +17,7 @@ class LottoDispenser(val amount: Int) {
 
     fun checkWinningLottoList() {
         ranks = lottoList.map { lotto ->
-            Rank.win(winningNumbers, lotto.numbers, bonusNumber)
+            Rank.win(winningNumbers, lotto, bonusNumber)
         }
     }
 

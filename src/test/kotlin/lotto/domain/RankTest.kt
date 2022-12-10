@@ -2,6 +2,8 @@ package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.matchers.shouldBe
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import lotto.domain.model.Rank
 import lotto.domain.model.WinningNumbers
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
@@ -83,9 +85,9 @@ internal class RankTest {
     @Test
     fun matchingCount() {
         val winningNumbers = WinningNumbers("8, 21, 23, 41, 42, 43")
-        val lottoNumbers: List<Int> = listOf(9, 21, 27, 41, 42, 45)
+        val lotto = Lotto(listOf(9, 21, 27, 41, 42, 45).map { LottoNumber(it) })
 
-        assertThat(Rank.countMatchNumber(winningNumbers, lottoNumbers)).isEqualTo(3)
+        assertThat(Rank.countMatchNumber(winningNumbers, lotto)).isEqualTo(3)
     }
 
     @DisplayName("5등 당첨금 확인")

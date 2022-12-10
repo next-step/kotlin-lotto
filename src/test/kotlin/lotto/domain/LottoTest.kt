@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import org.assertj.core.api.AssertionsForClassTypes
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.DisplayName
@@ -14,27 +15,16 @@ internal class LottoTest {
         AssertionsForClassTypes
             .assertThatExceptionOfType(IllegalStateException::class.java)
             .isThrownBy {
-                Lotto(listOf(1, 2, 3, 4, 5, 6, 7))
+                Lotto(listOf(1, 2, 3, 4, 5, 6, 7).map { LottoNumber(it) })
             }
             .withMessageMatching("로또는 숫자 6개로 구성되어야 합니다")
 
         AssertionsForClassTypes
             .assertThatExceptionOfType(IllegalStateException::class.java)
             .isThrownBy {
-                Lotto(listOf(1, 2, 3, 4, 5))
+                Lotto(listOf(1, 2, 3, 4, 5).map { LottoNumber(it) })
             }
             .withMessageMatching("로또는 숫자 6개로 구성되어야 합니다")
-    }
-
-    @DisplayName("로또는 1부터 45 사이의 숫자로 구성되어야 합니다")
-    @Test
-    fun lottoNumberRange() {
-        AssertionsForClassTypes
-            .assertThatExceptionOfType(IllegalStateException::class.java)
-            .isThrownBy {
-                Lotto(listOf(1, 2, 3, 49, 5, 6))
-            }
-            .withMessageMatching("로또는 1부터 45 사이의 숫자로 구성되어야 합니다")
     }
 
     @DisplayName("로또는 중복되지 않는 숫자로 구성되어야 합니다")
@@ -43,7 +33,7 @@ internal class LottoTest {
         AssertionsForClassTypes
             .assertThatExceptionOfType(IllegalStateException::class.java)
             .isThrownBy {
-                Lotto(listOf(1, 2, 3, 3, 5, 6))
+                Lotto(listOf(1, 2, 3, 3, 5, 6).map { LottoNumber(it) })
             }
             .withMessageMatching("로또는 중복되지 않는 숫자로 구성되어야 합니다")
     }
@@ -55,6 +45,6 @@ internal class LottoTest {
         val first = lotto.numbers[0]
         val second = lotto.numbers[1]
 
-        assertThat(first).isLessThan(second)
+        assertThat(first.number).isLessThan(second.number)
     }
 }
