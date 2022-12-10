@@ -1,6 +1,6 @@
 package step2.lotto.domain
 
-class MatchResults() {
+class MatchResults {
     private var elements: MutableList<MatchResult> = mutableListOf()
     var firstPlaceCount = INITIAL_COUNT
         private set
@@ -12,13 +12,16 @@ class MatchResults() {
         private set
     var notWinningCount = INITIAL_COUNT
         private set
+    var totalReward: Long = INITIAL_COUNT.toLong()
+        private set
 
     fun add(matchResult: MatchResult) {
-        recordScore(matchResult)
         elements.add(matchResult)
+        recordRank(matchResult)
+        addReward(matchResult)
     }
 
-    private fun recordScore(matchResult: MatchResult) {
+    private fun recordRank(matchResult: MatchResult) {
         when (matchResult) {
             MatchResult.FIRST_PLACE -> firstPlaceCount++
             MatchResult.SECOND_PLACE -> secondPlaceCount++
@@ -28,10 +31,16 @@ class MatchResults() {
         }
     }
 
+    private fun addReward(matchResult: MatchResult) {
+        totalReward += matchResult.reward
+    }
+
     fun contains(matchResult: MatchResult): Boolean = elements.contains(matchResult)
 
     fun containsAll(vararg matchResult: MatchResult): Boolean =
         elements.containsAll(matchResult.toList())
+
+    fun calculateProfitRate(tryAmount: Int): Double = tryAmount.toDouble() / totalReward.toDouble()
 
     companion object {
         private const val INITIAL_COUNT: Int = 0
