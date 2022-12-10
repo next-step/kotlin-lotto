@@ -54,10 +54,30 @@ internal class RankTest {
 
     @Test
     fun `로또와 당첨 번호를 통해 등수를 구분할 수 있다`() {
-        val numbers = Numbers.of(listOf(1, 2, 3, 4, 5, 6))
-        val second = Numbers.of(listOf(1,2,3,4,5,7))
-        val actual = Rank.match(Lotto(numbers), WinningNumber(numbers, Number(7)))
-        actual shouldBe Rank.FIRST
-        second shouldBe Rank.SECOND
+        val bonusNumber = Number(7)
+        val winningNumbers = Numbers.of(listOf(1, 2, 3, 4, 5, 6))
+
+        val first = winningNumbers
+        val second = Numbers.of(listOf(1, 2, 3, 4, 5, 7))
+        val third = Numbers.of(listOf(1, 2, 3, 4, 5, 8))
+        val fourth = Numbers.of(listOf(1, 2, 3, 4, 10, 11))
+        val fifth = Numbers.of(listOf(1, 2, 3, 10, 11, 12))
+
+        val missMatchesTwo = Numbers.of(listOf(1, 2, 10, 11, 12, 13))
+        val missMatchesOne = Numbers.of(listOf(1, 10, 11, 12, 13, 14))
+        val missMatchesZero = Numbers.of(listOf(10, 11, 12, 13, 14, 15))
+
+        val actual = { numbers: Numbers ->
+            Rank.match(numbers, WinningNumber(winningNumbers, bonusNumber))
+        }
+
+        actual(first) shouldBe Rank.FIRST
+        actual(second) shouldBe Rank.SECOND
+        actual(third) shouldBe Rank.THIRD
+        actual(fourth) shouldBe Rank.FOURTH
+        actual(fifth) shouldBe Rank.FIFTH
+        actual(missMatchesTwo) shouldBe Rank.MISS
+        actual(missMatchesOne) shouldBe Rank.MISS
+        actual(missMatchesZero) shouldBe Rank.MISS
     }
 }

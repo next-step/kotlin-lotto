@@ -14,8 +14,8 @@ data class Ranks(val values: List<Rank>) {
     }
 
     companion object {
-        fun match(lottoList: List<Lotto>, winningNumber: WinningNumber): Ranks {
-            val rankList = lottoList
+        fun match(lottoNumbersList: List<Numbers>, winningNumber: WinningNumber): Ranks {
+            val rankList = lottoNumbersList
                 .map { Rank.match(it, winningNumber) }
 
             return Ranks(rankList)

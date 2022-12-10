@@ -1,9 +1,9 @@
 package simulator.lotto
 
 class NumberGenerator(
-    private val minNumber: Int,
-    private val maxNumber: Int,
-    private val count: Int
+    private val minNumber: Int = Number.MIN_NUMBER,
+    private val maxNumber: Int = Number.MAX_NUMBER,
+    private val count: Int = Numbers.NUMBERS_COUNT
 ) {
     init {
         require((minNumber..maxNumber).count() >= count) {

@@ -27,9 +27,9 @@ internal class RanksTest {
 
     @Test
     fun `당첨번호를 통해 로또 목록으로 부터 등수 목록을 생성할 수 있다`() {
-        val firstLotto = Lotto(Numbers.of(listOf(1, 2, 3, 4, 5, 6)))
-        val secondLotto = Lotto(Numbers.of(listOf(1, 2, 3, 4, 5, 7)))
-        val thirdLotto = Lotto(Numbers.of(listOf(1, 2, 3, 4, 5, 8)))
+        val firstLotto = Numbers.of(listOf(1, 2, 3, 4, 5, 6))
+        val secondLotto = Numbers.of(listOf(1, 2, 3, 4, 5, 7))
+        val thirdLotto = Numbers.of(listOf(1, 2, 3, 4, 5, 8))
 
         val lottoList = listOf(firstLotto, secondLotto, thirdLotto)
         val winningNumbers = WinningNumber(Numbers.of(listOf(1, 2, 3, 4, 5, 6)), Number(7))

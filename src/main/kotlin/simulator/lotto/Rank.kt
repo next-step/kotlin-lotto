@@ -41,11 +41,11 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
             } ?: MISS
         }
 
-        fun match(lotto: Lotto, winningNumber: WinningNumber): Rank {
-            val countOfMatch = lotto.numbers
+        fun match(numbers: Numbers, winningNumber: WinningNumber): Rank {
+            val countOfMatch = numbers
                 .countOfMatch(winningNumber.numbers)
 
-            val matchBonus = lotto.numbers
+            val matchBonus = numbers
                 .contains(winningNumber.bonusNumber)
 
             return valueOf(countOfMatch, matchBonus)

@@ -1,12 +1,11 @@
 package simulator.io
 
-import simulator.lotto.Lotto
+import simulator.lotto.Numbers
 import simulator.lotto.Rank
 import simulator.lotto.Ranks
 
 class Output {
-    fun printLottoList(lottoList: List<Lotto>) {
-
+    fun printLottoList(lottoList: List<Numbers>) {
         lottoList.forEach {
             println("[$it]")
         }

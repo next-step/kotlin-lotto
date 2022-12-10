@@ -1,6 +1,5 @@
 package simulator.io
 
-import simulator.lotto.Lotto
 import simulator.lotto.Number
 import simulator.lotto.Numbers
 
@@ -20,10 +19,10 @@ class Input {
         return Number(readln().toInt())
     }
 
-    fun getManualNumbers(manualCount:Int): List<Lotto> {
+    fun getManualNumbers(manualCount:Int): List<Numbers> {
         println("수동으로 구매할 번호를 입력해 주세요.")
         return List(manualCount) {
-            Lotto(getNumbers())
+            getNumbers()
         }
     }
 
