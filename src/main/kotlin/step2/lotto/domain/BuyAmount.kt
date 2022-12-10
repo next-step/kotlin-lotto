@@ -1,5 +1,7 @@
 package step2.lotto.domain
 
+import step2.lotto.validator.NumberValidator.toInt
+
 class BuyAmount private constructor(value: Int) {
 
     companion object {
@@ -7,7 +9,6 @@ class BuyAmount private constructor(value: Int) {
         private const val DEFAULT_INVALID_ERROR_MESSAGE = "잘못 입력하셨습니다. [%s]"
         private const val EMPTY_INPUT_ERROR_MESSAGE = "빈값은 입력할 수 없습니다."
         private const val BLANK_INPUT_ERROR_MESSAGE = "공백은 입력할 수 없습니다."
-        private const val NUMBER_FORMAT_ERROR_MESSAGE = "$DEFAULT_INVALID_ERROR_MESSAGE ${MINIMUM_PRICE}원 단위의 숫자만 입력하세요."
         private const val LESS_THAN_MINIMUM_PRICE_ERROR_MESSAGE = "$DEFAULT_INVALID_ERROR_MESSAGE ${MINIMUM_PRICE}원 이상의 금액을 입력하세요."
         private const val NOT_DIVIDE_MINIMUM_PRICE_ERROR_MESSAGE = "$DEFAULT_INVALID_ERROR_MESSAGE ${MINIMUM_PRICE}원 단위의 금액을 입력하세요."
 
@@ -23,7 +24,7 @@ class BuyAmount private constructor(value: Int) {
         }
 
         private fun toAmount(input: String): Int {
-            val amount = input.toIntOrNull() ?: throw IllegalArgumentException(NUMBER_FORMAT_ERROR_MESSAGE.format(input))
+            val amount = toInt(input)
             validateAmount(amount)
             return amount
         }
