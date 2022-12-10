@@ -1,35 +1,17 @@
 package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class LottoNumbersListTest {
-    // given
-    private val lottoNumbers = LottoNumbers(listOf(LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(6)))
-
-    @BeforeEach
-    fun setUp() {
-        // givens
-        LottoNumbersList.setLottoNumbers(lottoNumbers)
-    }
-
-    @DisplayName("getLottoNumbers() 메서드 테스트")
     @Test
-    fun `getLottoNumbers() 메서드 테스트`() {
-        // when
-        val actual = LottoNumbersList.getLottoNumbers()
+    fun `로또 번호 리스트 - 리스트 반환 테스트`() {
+        // given
+        val lottoNumbers = LottoNumbers(listOf(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))
+        val lottoNumbersList = LottoNumbersList(listOf(lottoNumbers))
 
-        // then
-        assertThat(actual).contains(lottoNumbers)
-    }
-
-    @DisplayName("getList() 메서드 테스트")
-    @Test
-    fun `getList() 메서드 테스트`() {
         // when
-        val actual = LottoNumbersList.getList()
+        val actual = lottoNumbersList.getList()
 
         // then
         assertThat(actual).contains(listOf(1, 2, 3, 4, 5, 6))

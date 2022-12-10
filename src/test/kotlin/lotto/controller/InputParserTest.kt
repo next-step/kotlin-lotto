@@ -1,16 +1,14 @@
-package lotto.domain
+package lotto.controller
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class InputParserTest {
-    @DisplayName("입력 파싱 테스트")
     @Test
-    fun `입력 파싱 테스트`() {
+    fun `로또 번호 입력 - 구분자 파싱 테스트`() {
         // given
         val expected = listOf(1, 2, 3, 4, 5, 6)
 
@@ -21,10 +19,9 @@ class InputParserTest {
         assertThat(actual).isEqualTo(expected)
     }
 
-    @DisplayName("입력 파싱 예외처리 테스트")
     @ParameterizedTest
     @ValueSource(strings = ["", " ", "Lotto"])
-    fun `입력 파싱 예외처리 테스트`(input: String) {
+    fun `로또 번호 입력 - 예외처리 테스트`(input: String) {
         // when, then
         assertThatThrownBy { InputParser.parseWithDelimiter(input) }
             .isInstanceOf(IllegalArgumentException::class.java)
