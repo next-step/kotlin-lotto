@@ -38,8 +38,8 @@ class Lotto(numbers: List<LottoNumber> = emptyList()) {
         return numbers
     }
 
-    fun contains(winningNumber: Int): Boolean {
-        return numbers.map { it.number }.contains(winningNumber)
+    fun contains(lottoNumber: LottoNumber): Boolean {
+        return numbers.map { it.number }.contains(lottoNumber.number)
     }
 
     companion object {

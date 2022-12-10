@@ -38,10 +38,10 @@ enum class Rank(val matchCount: Int, val prize: Int) {
         }
 
         private fun matchBonus(matchCount: Int, lottoNumbers: Lotto, bonusNumber: LottoNumber): Boolean {
-            return matchCount == 5 && lottoNumbers.contains(bonusNumber.number)
+            return matchCount == 5 && lottoNumbers.contains(bonusNumber)
         }
 
-        private fun checkContainWinningNumber(winningNumber: Int, lotto: Lotto): Int {
+        private fun checkContainWinningNumber(winningNumber: LottoNumber, lotto: Lotto): Int {
             return if (lotto.contains(winningNumber)) 1 else 0
         }
     }

@@ -5,10 +5,10 @@ import lotto.domain.LottoNumberValidator
 
 class WinningNumbers(winningNumberText: String) {
 
-    val numbers: List<Int> = initList(winningNumberText)
+    val numbers: List<LottoNumber> = initList(winningNumberText)
 
-    private fun initList(numberText: String): List<Int> {
-        check(LottoNumberValidator.validate(numberText)) { "유효하지 않은 당첨 번호 입니다" }
-        return Tokenizer.tokenize(numberText).map { it.toInt() }
+    private fun initList(winningNumberText: String): List<LottoNumber> {
+        check(LottoNumberValidator.validate(winningNumberText)) { "유효하지 않은 당첨 번호 입니다" }
+        return Tokenizer.tokenize(winningNumberText).map { LottoNumber(it.toInt()) }
     }
 }

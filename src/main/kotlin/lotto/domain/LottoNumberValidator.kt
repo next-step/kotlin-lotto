@@ -1,7 +1,6 @@
 package lotto.domain
 
 import calculator.Tokenizer
-import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
 
 object LottoNumberValidator {
