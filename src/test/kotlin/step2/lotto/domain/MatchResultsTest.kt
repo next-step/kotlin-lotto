@@ -11,6 +11,6 @@ internal class MatchResultsTest : StringSpec({
 
         given.totalReward shouldBe THIRD_PLACE.reward
         given.thirdPlaceCount shouldBe 1
-        given.calculateProfitRate(1_000) shouldBe 0.02
+        given.calculateProfitRate(1_000) shouldBe 50.0
     }
 })

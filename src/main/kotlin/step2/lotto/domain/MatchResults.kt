@@ -40,7 +40,7 @@ class MatchResults {
     fun containsAll(vararg matchResult: MatchResult): Boolean =
         elements.containsAll(matchResult.toList())
 
-    fun calculateProfitRate(tryAmount: Int): Double = tryAmount.toDouble() / totalReward.toDouble()
+    fun calculateProfitRate(buyAmount: Int): Double = totalReward / buyAmount.toDouble()
 
     companion object {
         private const val INITIAL_COUNT: Int = 0
