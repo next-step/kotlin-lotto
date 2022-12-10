@@ -11,11 +11,7 @@ class LottoStatics(private val ranks: List<Rank> = emptyList()) {
     val winningResult: WinningResult = calculateWinningCount()
 
     private fun calculateTotalReward(): Int {
-        var total = 0
-        ranks.forEach { winner ->
-            total += winner.prize
-        }
-        return total
+        return ranks.sumOf { rank -> rank.prize }
     }
 
     private fun calculateWinningCount(): WinningResult {
