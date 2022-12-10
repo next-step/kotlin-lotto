@@ -1,6 +1,6 @@
 package step2.lotto.domain
 
-import step2.lotto.domain.LottoValidator.validateLottoSize
+import step2.lotto.validator.LottoValidator.validateLottoSize
 import kotlin.streams.toList
 
 class Lotto private constructor(private val elements: Set<LottoNumber>) {

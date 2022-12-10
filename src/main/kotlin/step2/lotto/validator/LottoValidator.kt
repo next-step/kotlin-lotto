@@ -1,4 +1,6 @@
-package step2.lotto.domain
+package step2.lotto.validator
+
+import step2.lotto.domain.LottoNumber
 
 object LottoValidator {
     private const val NUMBER_OF_SINGLE_LOTTO_GAME: Int = 6

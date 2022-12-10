@@ -1,6 +1,6 @@
 package step2.lotto.domain
 
-import step2.lotto.domain.LottoValidator.validateLottoSize
+import step2.lotto.validator.LottoValidator.validateLottoSize
 import step2.lotto.validator.NumberValidator.toInt
 
 class WinningNumber private constructor(val element: Set<LottoNumber>) {
