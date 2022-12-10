@@ -10,7 +10,7 @@ class LottoNumber private constructor(value: Int) {
 
         private fun init(): Map<Int, LottoNumber> = mutableMapOf<Int, LottoNumber>().apply {
             repeat(END_RANGE) {
-                this[it] = LottoNumber(it)
+                this[it + 1] = LottoNumber(it + 1)
             }
         }
 

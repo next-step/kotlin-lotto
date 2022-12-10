@@ -8,7 +8,7 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 internal class LottoNumberTest : StringSpec({
     "같은 번호로 로또 객체를 생성하면 동일한 객체가 반환된다." {
-        val given = 1
+        val given = 45
         LottoNumber.of(given) shouldBeSameInstanceAs LottoNumber.of(given)
     }
 
