@@ -11,8 +11,8 @@ enum class Rank(val matchCount: Int, val prize: Int) {
     companion object {
 
         fun safeValueOf(matchCount: Int, matchBonus: Boolean): Rank {
-            if (matchBonus.not() && matchCount == 5) {
-                return THIRD_GRADE
+            if (matchBonus && matchCount == 5) {
+                return SECOND_GRADE
             }
 
             return values().find { rank ->
