@@ -4,12 +4,17 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
+import step2.lotto.domain.MatchResult.FIRST_PLACE
+import step2.lotto.domain.MatchResult.FOURTH_PLACE
+import step2.lotto.domain.MatchResult.NOT_WINNING
+import step2.lotto.domain.MatchResult.SECOND_PLACE
+import step2.lotto.domain.MatchResult.THIRD_PLACE
 
 internal class LottoTest : StringSpec({
-    "로또 한게임과 당첨번호를 비교하여 당첨 결과를 판별한다." {
+    "당첨 번호와 비교하여 당첨 결과를 반환한다." {
         val given = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
-        winningNumber.forAll { (winningNumber: List<Int>, expected: Int) ->
-            val actual = given.match(WinningNumber.of(winningNumber))
+        winningNumber.forAll { (winningNumber: WinningNumber, expected: MatchResult) ->
+            val actual = given.match(winningNumber)
             actual shouldBe expected
         }
     }
@@ -22,13 +27,13 @@ internal class LottoTest : StringSpec({
 }) {
     companion object {
         val winningNumber = listOf(
-            listOf(1, 2, 3, 4, 5, 6) to 6,
-            listOf(1, 2, 3, 4, 5, 7) to 5,
-            listOf(1, 2, 3, 4, 7, 8) to 4,
-            listOf(1, 2, 3, 7, 8, 9) to 3,
-            listOf(1, 2, 7, 8, 9, 10) to 2,
-            listOf(1, 7, 8, 9, 10, 11) to 1,
-            listOf(7, 8, 9, 10, 11, 12) to 0,
+            WinningNumber.of(listOf(1, 2, 3, 4, 5, 6)) to FIRST_PLACE,
+            WinningNumber.of(listOf(1, 2, 3, 4, 5, 7)) to SECOND_PLACE,
+            WinningNumber.of(listOf(1, 2, 3, 4, 7, 8)) to THIRD_PLACE,
+            WinningNumber.of(listOf(1, 2, 3, 7, 8, 9)) to FOURTH_PLACE,
+            WinningNumber.of(listOf(1, 2, 7, 8, 9, 10)) to NOT_WINNING,
+            WinningNumber.of(listOf(1, 7, 8, 9, 10, 11)) to NOT_WINNING,
+            WinningNumber.of(listOf(7, 8, 9, 10, 11, 12)) to NOT_WINNING,
         )
     }
 }
