@@ -12,7 +12,7 @@ class Lotto private constructor(private val elements: Set<LottoNumber>) {
         elements.intersect(winningNumber.element).size
 
     companion object {
-        fun of(inputNumbers: List<Int>): Lotto {
+        fun of(inputNumbers: Set<Int>): Lotto {
             val lottoNumbers = inputNumbers.map {
                 LottoNumber.of(it)
             }.toSet()

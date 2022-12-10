@@ -18,13 +18,13 @@ internal class LottosTest : StringSpec({
     companion object {
         val lottos = Lottos.of(
             listOf(
-                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto.of(listOf(1, 2, 3, 4, 5, 7)),
-                Lotto.of(listOf(1, 2, 3, 4, 7, 8)),
-                Lotto.of(listOf(1, 2, 3, 7, 8, 9)),
-                Lotto.of(listOf(1, 2, 7, 8, 9, 10)),
-                Lotto.of(listOf(1, 7, 8, 9, 10, 11)),
-                Lotto.of(listOf(7, 8, 9, 10, 11, 12)),
+                Lotto.of(setOf(1, 2, 3, 4, 5, 6)),
+                Lotto.of(setOf(1, 2, 3, 4, 5, 7)),
+                Lotto.of(setOf(1, 2, 3, 4, 7, 8)),
+                Lotto.of(setOf(1, 2, 3, 7, 8, 9)),
+                Lotto.of(setOf(1, 2, 7, 8, 9, 10)),
+                Lotto.of(setOf(1, 7, 8, 9, 10, 11)),
+                Lotto.of(setOf(7, 8, 9, 10, 11, 12)),
             )
         )
     }

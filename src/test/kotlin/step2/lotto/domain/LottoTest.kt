@@ -12,7 +12,7 @@ import step2.lotto.domain.MatchResult.THIRD_PLACE
 
 internal class LottoTest : StringSpec({
     "당첨 번호와 비교하여 당첨 결과를 반환한다." {
-        val given = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+        val given = Lotto.of(setOf(1, 2, 3, 4, 5, 6))
         winningNumber.forAll { (winningNumber: WinningNumber, expected: MatchResult) ->
             val actual = given.match(winningNumber)
             actual shouldBe expected
@@ -21,7 +21,7 @@ internal class LottoTest : StringSpec({
 
     "중복된 번호가 포함되는 경우 예외가 발생한다." {
         shouldThrow<IllegalArgumentException> {
-            Lotto.of(listOf(1, 1, 1, 1, 1, 1))
+            Lotto.of(setOf(1, 1, 1, 1, 1, 1))
         }
     }
 }) {

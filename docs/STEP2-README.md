@@ -69,13 +69,13 @@
   
 ---
 ## 잘못 구현된 로직 수정
-- [ ] 지난주 당첨 번호 입력 방식 오류
+- [x] 지난주 당첨 번호 입력 방식 오류
   - AS-IS : readLine()을 통해 6개의 당첨 번호를 한라인에 하나씩 입력
   - TO-BE : readLine()을 이용해 한라인에 ,를 구분자로 입력된 6개의 당첨 번호를 입력
-- [ ] 45번의 LottoNumber 객체 생성 시 NuSuchElementException 예외 발생 오류
-  - AS-IS : 1부터 45까지 LottoNumber 객체를 생성하기 위해 repeat()함수 조건에 45를 명시하여, 0부터 44까지의 LottoNumber 객체가 생성되어 캐싱된 Map에 숫자 45에 해당하는 LottoNumber 객체가 존재하지 않아 예외 발생 
+- [x] 45번에 해당하는 LottoNumber 객체 생성 시 NuSuchElementException 예외 발생 오류
+  - AS-IS : 1부터 45까지 LottoNumber 객체를 생성하기 위해 repeat()함수 조건에 45를 명시하여, 0을 Index로 시작하여 44까지의 LottoNumber 객체가 생성되어 캐싱된 Map에 숫자 45에 해당하는 LottoNumber 객체가 존재하지 않아 예외 발생 
   - TO-BE : 0부터 44까지 반복하여 LottoNumber 객체를 생성하는 조건을 1부터 45까지 반복하여 LottoNumber 객체를 생성 후 Map에 캐싱하도록 수정
-- [ ] 로또 객체 생성을 위한 난수 생성기의 중복으로 인한 예외 발생
+- [x] 난수 생성기의 중복된 난수 발생으로 인한 로또 객체 생성 오류 발생
   - AS-IS : 로또 객체 생성에 필요한 6개의 난수 발생 시, 난수 생성기의 중복된 난수 발생으로 인해 6개보다 적은 로또 번호 객체가 생성되어 유효성 검증 오류 발생 
   - TO-BE : Lotto 객체 생성 인자를 List<Int>에서 Set<Int>로 변경하여 중복 없는 6개의 난수를 입력 받도록 수정
 - [ ] 미 정렬 된 로또 출력 오류
