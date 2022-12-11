@@ -42,7 +42,7 @@ class WinningLottoTest {
     }
 
     @Test
-    fun `5개가 같으면 Rank SECOND 반환한다`() {
+    fun `5개가 같으면서 나머지 한개의 숫자가 보너스와 같으면 Rank SECOND 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
         assertThat(
             winNumber.compareWith(
@@ -56,13 +56,13 @@ class WinningLottoTest {
     }
 
     @Test
-    fun `4개가 같으면 Rank THIRD 반환한다`() {
+    fun `5개가 같으면서 나머지 한개의 숫자가 보너스와 같지않으면 Rank THIRD 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
         assertThat(
             winNumber.compareWith(
                 Lotto(
                     setOf(
-                        LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(7), LottoNumber(8)
+                        LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(5), LottoNumber(8)
                     )
                 ),
             ),
@@ -70,7 +70,21 @@ class WinningLottoTest {
     }
 
     @Test
-    fun `3개가 같으면 Rank FOURTH 반환한다`() {
+    fun `4개가 같으면 Rank FOURTH 반환한다`() {
+        val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
+        assertThat(
+            winNumber.compareWith(
+                Lotto(
+                    setOf(
+                        LottoNumber(1), LottoNumber(2), LottoNumber(3), LottoNumber(4), LottoNumber(8), LottoNumber(9)
+                    )
+                ),
+            )
+        ).isEqualTo(Rank.FOURTH)
+    }
+
+    @Test
+    fun `3개가 같으면 Rank FIFTH 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6), 7)
         assertThat(
             winNumber.compareWith(
@@ -80,7 +94,7 @@ class WinningLottoTest {
                     )
                 ),
             )
-        ).isEqualTo(Rank.FOURTH)
+        ).isEqualTo(Rank.FIFTH)
     }
 
     @DisplayName("로또 비교 테스트")
