@@ -24,10 +24,8 @@ object OutputView {
     fun printLottoTickets(lottoTickets: LottoTickets) {
         val sb = StringBuilder()
         lottoTickets.getLottoTickets().forEach {
-            val testLottoNumbers = it.testLottoNumbers()
             sb.append(it.getLottoNumbers().joinToString(separator = ", ", prefix = "[", postfix = "]")).append("\n")
         }
-
         println(sb)
     }
 

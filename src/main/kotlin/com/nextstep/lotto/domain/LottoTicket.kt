@@ -13,10 +13,6 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
         return lottoNumbers.sorted().toSet()
     }
 
-    fun testLottoNumbers(): List<Int> {
-        return listOf(1, 2, 3).toList()
-    }
-
     companion object {
         const val LOTTO_PRICE = 1000
         const val LOTTO_TICKET_COUNT = 6
