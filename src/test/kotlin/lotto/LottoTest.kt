@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Amount
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNum
@@ -16,7 +17,7 @@ class LottoTest {
     fun `로또 번호가 1~45 범위 내 무작위로 선택된다`() {
 
         val machine = LottoMachine(RandomGenerator())
-        val lotto = machine.issue(1_000)[0]
+        val lotto = machine.issue(Amount(1_000))[0]
 
         for(num in lotto) {
             assertThat(num.value).isGreaterThanOrEqualTo(1)
@@ -36,7 +37,7 @@ class LottoTest {
                 }
             }
         )
-        val lotto = machine.issue(1_000)[0]
+        val lotto = machine.issue(Amount(1_000))[0]
 
         assertThat(lotto).containsExactlyInAnyOrder(
             LottoNum.of(2), LottoNum.of(7), LottoNum.of(10),

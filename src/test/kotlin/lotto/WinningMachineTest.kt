@@ -17,7 +17,7 @@ class WinningMachineTest {
         val winLotto = WinLotto(Lotto(listOf(1, 2, 3, 7, 10, 41)), LottoNum.of(9))
         val lotto = Lotto(numbers)
         val winningMachine = WinningMachine(winLotto)
-        val result = winningMachine.match(listOf(lotto))
+        val result = winningMachine.match(LottoIssueResult(emptyList(), listOf(lotto)))
         assertThat(result.from(rank)).contains(lotto)
     }
 

@@ -3,13 +3,13 @@ package lotto.domain.generator
 class RandomGenerator: Generator {
 
     override fun generate(): List<Int> {
-        val set: MutableSet<Int> = mutableSetOf()
+        val numbers: MutableSet<Int> = mutableSetOf()
 
-        while(set.size < 6) {
+        while(numbers.size < 6) {
             val random = (1..45).random()
-            set.add(random)
+            numbers.add(random)
         }
 
-        return set.toList()
+        return numbers.toList()
     }
 }

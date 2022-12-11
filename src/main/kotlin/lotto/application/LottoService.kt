@@ -8,22 +8,24 @@ import lotto.domain.generator.RandomGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 
-class LottoService {
+fun main(args: Array<String>) {
+    val amount = InputView.requireAmountOfPurchaseLotto()
+    val lottoIssueResult = purchaseLottos(amount)
+    ResultView.printPurchaseLotto(lottoIssueResult)
+    val statistics = winningStatistic(lottoIssueResult)
+    ResultView.printStatistics(statistics, amount)
+}
 
-    fun main(args: Array<String>) {
-        val lottoMachine = LottoMachine(RandomGenerator())
-        val amountOfAutoLotto = InputView.requireAmountOfPurchaseLotto()
-        val manualCount = InputView.requireCountOfPurchaseManualLotto()
-        val amountOfManualLotto = Amount((LottoMachine.LOTTO_PRICE * manualCount))
-        val manualLottos = lottoMachine.issue(amountOfManualLotto)
-        val autoLottos = lottoMachine.issue(amountOfAutoLotto.sub(amountOfManualLotto))
+private fun purchaseLottos(amount: Amount): LottoIssueResult {
+    val lottoMachine = LottoMachine(RandomGenerator())
+    val manualCount = InputView.requireCountOfPurchaseManualLotto()
+    val manualLottos = InputView.requirePurchaseManualLottoNum(manualCount)
+    return lottoMachine.issue(amount, manualLottos)
+}
 
-        ResultView.printPurchaseLotto(manualLottos, autoLottos)
-
-        val winLottoNum = Lotto(InputView.requireWinLottoNum())
-        val bonusNum = LottoNum.of(InputView.requireWinBonusNum())
-        val winningMachine = WinningMachine(WinLotto(winLottoNum, bonusNum))
-        val statistics = winningMachine.match(autoLottos)
-        ResultView.printStatistics(statistics, amountOfAutoLotto)
-    }
+private fun winningStatistic(lottoIssueResult: LottoIssueResult): Statistics {
+    val winLottoNum = Lotto(InputView.requireWinLottoNum())
+    val bonusNum = LottoNum.of(InputView.requireWinBonusNum())
+    val winningMachine = WinningMachine(WinLotto(winLottoNum, bonusNum))
+    return winningMachine.match(lottoIssueResult)
 }

@@ -5,10 +5,10 @@ import lotto.domain.*
 class ResultView {
 
     companion object {
-        fun printPurchaseLotto(manualLottos: List<Lotto>, autoLottos: List<Lotto>) {
-            println("수동으로 ${manualLottos.size}장, 자동으로 ${autoLottos.size}장을 구매했습니다")
-            println(manualLottos.joinToString { "\n" })
-            println(autoLottos.joinToString { "\n" })
+        fun printPurchaseLotto(lottoIssueResult: LottoIssueResult) {
+            println("수동으로 ${lottoIssueResult.manualCount()}장, 자동으로 ${lottoIssueResult.autoCount()}장을 구매했습니다.")
+            println(lottoIssueResult.getAsLottos().joinToString(separator = "\n"))
+//            println(lottoIssueResult.getAsLottos().joinToString { "\n" })
         }
 
         fun printStatistics(statistic: Statistics, amount: Amount)  {
