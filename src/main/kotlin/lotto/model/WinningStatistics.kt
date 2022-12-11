@@ -1,3 +1,3 @@
 package lotto.model
 
-data class WinningStatistics(var matchThree: Int, var matchFour: Int, var matchFive: Int, var matchSix: Int, var rate: Double)
+data class WinningStatistics(var ranks: MutableMap<Rank, Int>, var rate: Double)

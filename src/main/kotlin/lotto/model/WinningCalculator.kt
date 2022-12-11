@@ -2,16 +2,22 @@ package lotto.model
 
 import kotlin.math.round
 
-class WinningCalculator(lottoTickets: List<TicketStrategy>, winnerNumber: WinnerNumber) {
-    private val resultWinningStatistics = WinningStatistics(0, 0, 0, 0, 0.0)
+class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber) {
+    private val resultWinningStatistics = WinningStatistics(
+        mutableMapOf(
+            Rank.FIRST to 0,
+            Rank.THIRD to 0, Rank.FOURTH to 0, Rank.FIFTH to 0, Rank.NO_LUCK to 0
+        ),
+        0.0
+    )
     val winningStatistics = generateWinningStatistics(lottoTickets, winnerNumber)
 
     private fun generateWinningStatistics(
-        lottoTickets: List<TicketStrategy>,
+        lottoTickets: List<LottoTicket>,
         winnerNumber: WinnerNumber
     ): WinningStatistics {
         for (lottoTicket in lottoTickets) {
-            setGrade(lottoTicket.getLottoTicketNumbers().toSet().intersect(winnerNumber.winnerNumbers.toSet()).size)
+            setGrade(lottoTicket.lottoNumbers.toSet().intersect(winnerNumber.winnerNumbers.toSet()).size)
         }
 
         calculateRate(lottoTickets.size)
@@ -20,33 +26,23 @@ class WinningCalculator(lottoTickets: List<TicketStrategy>, winnerNumber: Winner
     }
 
     private fun setGrade(count: Int) {
-        when (count) {
-            3 -> resultWinningStatistics.matchThree++
-            4 -> resultWinningStatistics.matchFour++
-            5 -> resultWinningStatistics.matchFive++
-            6 -> resultWinningStatistics.matchSix++
-        }
+        val rank = Rank.of(count)
+        resultWinningStatistics.ranks[rank] = resultWinningStatistics.ranks[rank]!! + 1
     }
 
     fun calculateRate(quantity: Int): Double {
+        var totalReward = 0.0
+        for (rank in resultWinningStatistics.ranks) {
+            totalReward += (rank.value * rank.key.reward).toDouble()
+        }
         resultWinningStatistics.rate = round(
-            (
-                (
-                    resultWinningStatistics.matchThree * MATCH_THREE +
-                        resultWinningStatistics.matchFour * MATCH_FOUR +
-                        resultWinningStatistics.matchFive * MATCH_FIVE +
-                        resultWinningStatistics.matchSix * MATCH_SIX
-                    ).toDouble() / (quantity * 1000)
-                ) * ROUND
+            totalReward / (quantity * 1000) * ROUND
         ) / ROUND
+
         return resultWinningStatistics.rate
     }
 
     companion object {
-        const val MATCH_THREE = 5000
-        const val MATCH_FOUR = 50000
-        const val MATCH_FIVE = 1500000
-        const val MATCH_SIX = 2000000000
         const val ROUND = 100
     }
 }

@@ -3,7 +3,6 @@ package lotto
 import lotto.controller.LottoGame
 import lotto.model.LottoTicket
 import lotto.model.TicketQuantity
-import lotto.model.TicketStrategy
 import lotto.model.WinnerNumber
 import lotto.model.WinningCalculator
 import org.junit.jupiter.api.Assertions
@@ -12,11 +11,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import java.lang.IllegalArgumentException
 
-internal class LottoTest {
+internal class LottoAllTest {
     @Test
     fun `임의의 6개 숫자를 중복없이 생성한다`() {
         val testTicket = LottoTicket()
-        assertEquals(LOTTO_NUMBER_SIZE, testTicket.getLottoTicketNumbers().toSet().size)
+        assertEquals(LOTTO_NUMBER_SIZE, testTicket.lottoNumbers.toSet().size)
     }
 
     @Test
@@ -91,27 +90,35 @@ internal class LottoTest {
 
     @Test
     fun `당첨 통계를 계산한다`() {
-        var testTicket1 = MockTicket()
-        testTicket1.setTicketNumber(listOf(1, 2, 3, 4, 5, 6))
+        var test1Ticket = LottoTicket()
+        val test1WinningNumber = test1Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
 
-        var testTicket2 = MockTicket()
-        testTicket2.setTicketNumber(listOf(11, 12, 13, 14, 15, 16))
+        var test2Ticket = LottoTicket()
+        var test2WinningNumber = test2Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
 
-        val testTickets = listOf<TicketStrategy>(testTicket1, testTicket2)
+        val testTickets = listOf(test1Ticket, test2Ticket)
 
         assertAll(
             {
-                val testCalculator = WinningCalculator(testTickets, WinnerNumber("1, 2, 3, 7, 8, 9"))
-                assertEquals(2.5, testCalculator.calculateRate(testTickets.size))
+                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test1WinningNumber))
+                assertEquals(
+                    (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
+                    testCalculator.calculateRate(testTickets.size)
+                )
             },
             {
-                val testCalculator = WinningCalculator(testTickets, WinnerNumber("1, 2, 3, 7, 5, 9"))
-                assertEquals(25.0, testCalculator.calculateRate(testTickets.size))
+                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test2WinningNumber))
+                assertEquals(
+                    (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
+                    testCalculator.calculateRate(testTickets.size)
+                )
             },
         )
     }
 
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
+        const val LOTTO_MAX_REWARD = 2000000000
+        const val LOTTO_TICKET_PRICE = 1000
     }
 }

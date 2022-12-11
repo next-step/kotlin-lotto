@@ -11,7 +11,6 @@ import lotto.view.ResultView
 class LottoGame {
     private val resultView = ResultView()
     private val inputView = InputView()
-    private val lottoTickets = mutableListOf<LottoTicket>()
 
     fun start() {
         val ticketQuantity = TicketQuantity(InputView().getAmountOfMoney()).quantity
@@ -22,11 +21,9 @@ class LottoGame {
     }
 
     fun purchaseLottoTicket(quantity: Int): List<LottoTicket> {
-        for (i in 0 until quantity) {
-            lottoTickets.add(LottoTicket())
-            resultView.showLottoTicket(lottoTickets[i].getLottoTicketNumbers())
+        return (0 until quantity).map {
+            LottoTicket()
         }
-        return lottoTickets
     }
 
     private fun drawWinnerNumber(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber): WinningStatistics {

@@ -1,35 +1,13 @@
 package lotto.model
 
-class LottoTicket : TicketStrategy {
-    private val lottoNumbers = mutableListOf<Int>()
+class LottoTicket {
+    val lottoNumbers = makeNumbers()
 
-    init {
-        while (isContinuable()) {
-            selectNumbers()
-        }
-    }
-
-    override fun getLottoTicketNumbers(): List<Int> {
-        return lottoNumbers.sorted()
-    }
-
-    private fun isContinuable(): Boolean {
-        return lottoNumbers.size < LOTTO_NUMBER_SIZE
-    }
-
-    private fun selectNumbers() {
-        var number = (LOTTO_WINNER_NUMBER_RANGE).random()
-        if (!isDuplicate(number)) {
-            lottoNumbers.add(number)
-        }
-    }
-
-    private fun isDuplicate(number: Int): Boolean {
-        return lottoNumbers.contains(number)
+    private fun makeNumbers(): List<Int> {
+        return (LOTTO_WINNER_NUMBER_RANGE).toList().shuffled().take(6).sorted()
     }
 
     companion object {
         val LOTTO_WINNER_NUMBER_RANGE = 1..45
-        const val LOTTO_NUMBER_SIZE = 6
     }
 }
