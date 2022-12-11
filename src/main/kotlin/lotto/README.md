@@ -61,3 +61,4 @@
 
 ## 2단계 추가 피드백 목록
 - [x] byInput이라고 만든 companion object 생성자를 부 생성자로 변경
+- [x] Enum 형식으로 되돌리기

@@ -11,15 +11,9 @@ class WinningLotto(winningNumbers: List<Int>) {
         }
     }
 
-    fun compareWith(lotto: Lotto, report: Report): Report {
-        when (numbers.intersect(lotto.numbers).size) {
-            6 -> report.increaseFirstWin()
-            5 -> report.increaseSecondWin()
-            4 -> report.increaseThirdWin()
-            3 -> report.increaseFourthWin()
-            else -> report.increaseNotWin()
-        }
-        return report.copy()
+    fun compareWith(lotto: Lotto): Rank {
+        val result = MatchResult(numbers.intersect(lotto.numbers).size)
+        return Rank.valueOf(matchResult = result)
     }
 
     override fun equals(other: Any?): Boolean {

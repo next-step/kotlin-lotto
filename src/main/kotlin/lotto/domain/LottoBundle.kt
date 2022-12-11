@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoBundle(private var _lottos: MutableList<Lotto> = mutableListOf(), private val report: Report = Report()) {
+class LottoBundle(private var _lottos: MutableList<Lotto> = mutableListOf()) {
 
     val lottos
         get() = _lottos.toList()
@@ -10,7 +10,18 @@ class LottoBundle(private var _lottos: MutableList<Lotto> = mutableListOf(), pri
     }
 
     fun matchWinningLotto(winningLotto: WinningLotto): Report {
-        lottos.map { winningLotto.compareWith(it, report) }
-        return report
+        val ranks = lottos.map { winningLotto.compareWith(it) }
+        val firstCount = ranks.count { it == Rank.FIRST }
+        val secondCount = ranks.count { it == Rank.SECOND }
+        val thirdCount = ranks.count { it == Rank.THIRD }
+        val fourthCount = ranks.count { it == Rank.FOURTH }
+        val missCount = ranks.count { it == Rank.MISS }
+        return Report(
+            firstCount = firstCount,
+            secondCount = secondCount,
+            thirdCount = thirdCount,
+            fourthCount = fourthCount,
+            missCount = missCount
+        )
     }
 }

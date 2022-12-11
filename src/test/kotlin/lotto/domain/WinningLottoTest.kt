@@ -20,7 +20,7 @@ class WinningLottoTest {
     }
 
     @Test
-    fun `전부(6개) 같으면 FirstWin이 1인 리포트를 반환한다`() {
+    fun `전부(6개) 같으면 Rank FIRST 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
         assertThat(
             winNumber.compareWith(
@@ -34,13 +34,12 @@ class WinningLottoTest {
                         LottoNumber(6)
                     )
                 ),
-                Report()
             )
-        ).isEqualTo(Report(firstWin = FirstWin(1)))
+        ).isEqualTo(Rank.FIRST)
     }
 
     @Test
-    fun `5개가 같으면 CompareResult SecondWin 반환한다`() {
+    fun `5개가 같으면 Rank SECOND 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
         assertThat(
             winNumber.compareWith(
@@ -54,13 +53,12 @@ class WinningLottoTest {
                         LottoNumber(7)
                     )
                 ),
-                Report()
             )
-        ).isEqualTo(Report(secondWin = SecondWin(1)))
+        ).isEqualTo(Rank.SECOND)
     }
 
     @Test
-    fun `4개가 같으면 CompareResult SecondWin 반환한다`() {
+    fun `4개가 같으면 Rank THIRD 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
         assertThat(
             winNumber.compareWith(
@@ -74,13 +72,12 @@ class WinningLottoTest {
                         LottoNumber(8)
                     )
                 ),
-                Report()
             ),
-        ).isEqualTo(Report(thirdWin = ThirdWin(1)))
+        ).isEqualTo(Rank.THIRD)
     }
 
     @Test
-    fun `3개가 같으면 CompareResult SecondWin 반환한다`() {
+    fun `3개가 같으면 Rank FOURTH 반환한다`() {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
         assertThat(
             winNumber.compareWith(
@@ -94,17 +91,16 @@ class WinningLottoTest {
                         LottoNumber(9)
                     )
                 ),
-                Report()
             )
-        ).isEqualTo(Report(fourthWin = FourthWin(1)))
+        ).isEqualTo(Rank.FOURTH)
     }
 
     @DisplayName("로또 비교 테스트")
     @ParameterizedTest(name = "2장 이하가 같으면 NotWin을 반환한다")
     @MethodSource("valueSource")
-    fun `2장 이하가 같으면 NotWin을 반환한다`(lotto: Lotto) {
+    fun `2장 이하가 같으면 MISS 반환한다`(lotto: Lotto) {
         val winNumber = WinningLotto(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(winNumber.compareWith(lotto, Report())).isEqualTo(Report(notWin = NotWin(1)))
+        assertThat(winNumber.compareWith(lotto)).isEqualTo(Rank.MISS)
     }
 
     companion object {
