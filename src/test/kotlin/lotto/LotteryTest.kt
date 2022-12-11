@@ -9,36 +9,37 @@ import lotto.domain.LotteryNumber
 
 class LotteryTest : BehaviorSpec({
 
-    Given("중복이 존재하는 당첨 번호이면") {
-        val nums = listOf(1, 1, 2, 3, 4, 5)
-            .map { num ->
-                LotteryNumber(num)
-            }
-
-        Then("IllegalArgumentException 예외가 발생한다.") {
-            shouldThrow<IllegalArgumentException> {
-                Lottery(nums)
-            }
-        }
-    }
-
-    Given("6개의 당첨 번호가 입력되지 않으면") {
-        val numsList = listOf(listOf(1, 2, 3, 4, 5, 6, 7), listOf(1, 2, 3, 4, 5))
-            .map { nums ->
-                nums.map { num ->
+    Given("로또 번호가") {
+        When("중복이 존재하면") {
+            val nums = listOf(1, 1, 2, 3, 4, 5)
+                .map { num ->
                     LotteryNumber(num)
                 }
-            }
 
-        numsList.forAll { nums ->
             Then("IllegalArgumentException 예외가 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
                     Lottery(nums)
                 }
             }
         }
-    }
 
+        When("6개가 아니면") {
+            val numsList = listOf(listOf(1, 2, 3, 4, 5, 6, 7), listOf(1, 2, 3, 4, 5))
+                .map { nums ->
+                    nums.map { num ->
+                        LotteryNumber(num)
+                    }
+                }
+
+            numsList.forAll { nums ->
+                Then("IllegalArgumentException 예외가 발생한다.") {
+                    shouldThrow<IllegalArgumentException> {
+                        Lottery(nums)
+                    }
+                }
+            }
+        }
+    }
 
     Given("로또가") {
         val nums = listOf(1, 3, 5, 14, 22, 45)
