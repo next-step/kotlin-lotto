@@ -22,7 +22,7 @@ class LotteryNumberTest : BehaviorSpec({
     Given("1미만 45초과의 수가 입력되면") {
         val nums = listOf(-1, 0, 46)
         nums.forAll { num ->
-            Then("IllegalStateException 예외가 발생한다.") {
+            Then("IllegalArgumentException 예외가 발생한다.") {
                 shouldThrow<IllegalArgumentException> {
                     LotteryNumber(num)
                 }
