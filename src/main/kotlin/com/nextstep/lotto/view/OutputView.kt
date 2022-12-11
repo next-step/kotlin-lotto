@@ -24,6 +24,7 @@ object OutputView {
     fun printLottoTickets(lottoTickets: LottoTickets) {
         val sb = StringBuilder()
         lottoTickets.getLottoTickets().forEach {
+            val testLottoNumbers = it.testLottoNumbers()
             sb.append(it.getLottoNumbers().joinToString(separator = ", ", prefix = "[", postfix = "]")).append("\n")
         }
 
@@ -32,7 +33,9 @@ object OutputView {
 
     fun printResult(result: LottoResult) {
         val sb = StringBuilder()
-        Rank.values().sortedDescending()
+        Rank.values()
+            .filter { it != Rank.MISS }
+            .sortedDescending()
             .forEach {
                 sb.append("${it.matchCount}개 일치 (${it.winningMoney}원) - ${result.result[it] ?: 0}개\n")
             }

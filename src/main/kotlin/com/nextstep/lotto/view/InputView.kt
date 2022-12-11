@@ -5,7 +5,7 @@ object InputView {
         return readln()
     }
 
-    fun splitWith(input: String, delimiter: String): List<String> {
-        return input.split(delimiter)
+    fun inputMessageSplitWithComma(): List<String> {
+        return readln().split(",")
     }
 }
