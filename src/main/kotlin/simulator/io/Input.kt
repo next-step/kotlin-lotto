@@ -1,10 +1,13 @@
 package simulator.io
 
-import java.util.*
-
 class Input {
     fun getMoney(): Int {
         println("구입금액을 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun getManualCount():Int{
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
         return readln().toInt()
     }
 
@@ -13,10 +16,15 @@ class Input {
         return readln().toInt()
     }
 
-    fun getWinningNumbers(): SortedSet<Int> {
+    fun getManualNumbers(manualCount:Int): List<String> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(manualCount){
+            readln()
+        }
+    }
+
+    fun getLastMatchNumbers(): String {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readln().split(",")
-            .map { it.toInt() }
-            .toSortedSet()
+        return readln()
     }
 }
