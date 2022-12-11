@@ -23,6 +23,11 @@ class KRWTest {
         }
     }
 
+    @Test
+    fun `문자열을 통해서도 KRW를 생성할 수 있다`() {
+        assertThat(KRW("1000")).isEqualTo(KRW(1000))
+    }
+
     @DisplayName("밸류 생성 테스트")
     @ParameterizedTest(name = "{0}는 생성된다")
     @ValueSource(ints = [0, 1000, 2000, 3000])

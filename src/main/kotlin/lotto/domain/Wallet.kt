@@ -5,7 +5,7 @@ class Wallet(var krw: KRW = DEFAULT_KRW) {
     private val lottoBundle: LottoBundle = LottoBundle()
 
     fun insertMoney(input: String) {
-        val additionKRW = KRW.byInput(input)
+        val additionKRW = KRW(input)
         krw = krw.add(additionKRW)
     }
 

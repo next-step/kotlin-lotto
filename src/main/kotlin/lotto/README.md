@@ -58,3 +58,6 @@
 - [x] Enum 을 이용해서 WalletResult 의 로직 단순화
 - [x] 로또 번호를 감싸는 일급객체 생성
 - [x] UI 로직은 UI에서 하도록 변경
+
+## 2단계 추가 피드백 목록
+- [x] byInput이라고 만든 companion object 생성자를 부 생성자로 변경
