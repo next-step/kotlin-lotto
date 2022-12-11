@@ -66,7 +66,7 @@
 - LottoWinTicket : 당첨 번호를 들고있는 로또 티켓
 
 ## 구현 순서
-- [ ] LottoNumber, LottoNumbers
+- [x] LottoNumber, LottoNumbers
 - [ ] Cash
 - [ ] LottoReward, LottoRewards
 - [ ] LottoWinTicket
