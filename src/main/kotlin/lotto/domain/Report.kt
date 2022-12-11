@@ -4,6 +4,7 @@ import kotlin.math.roundToInt
 
 data class Report(
     val missCount: Int = 0,
+    val fifthCount: Int = 0,
     val fourthCount: Int = 0,
     val thirdCount: Int = 0,
     val secondCount: Int = 0,
@@ -16,11 +17,12 @@ data class Report(
 
     private fun calculatePrize(): Int {
         return Rank.FOURTH.calculatePrize(fourthCount) + Rank.THIRD.calculatePrize(thirdCount) +
-            Rank.SECOND.calculatePrize(secondCount) + Rank.FIRST.calculatePrize(firstCount)
+            Rank.SECOND.calculatePrize(secondCount) + Rank.FIRST.calculatePrize(firstCount) +
+            Rank.FIFTH.calculatePrize(fifthCount)
     }
 
     private fun calculateLottoBundlePrice(): Int {
-        return (firstCount + secondCount + thirdCount + fourthCount + missCount) * Lotto.krw.money
+        return (firstCount + secondCount + thirdCount + fourthCount + fifthCount + missCount) * Lotto.krw.money
     }
 
     override fun equals(other: Any?): Boolean {
