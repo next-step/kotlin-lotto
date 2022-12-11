@@ -14,10 +14,10 @@ internal class LottoDispenserTest {
         ints = [1000, 14000, 14500]
     )
     fun createLotto(amount: Int) {
-        val expectedValue = amount / BASIC_PRICE
+        val expectedValue = amount / MINIMUM_PRICE
         val dispenser = LottoDispenser(amount)
 
-        dispenser.list.size shouldBe expectedValue
+        dispenser.lottoList.size shouldBe expectedValue
     }
 
     @DisplayName("금액이 0이거나 음수인 경우 로또는 생성되지 않는다")

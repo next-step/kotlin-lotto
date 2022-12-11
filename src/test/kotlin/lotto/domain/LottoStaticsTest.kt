@@ -12,7 +12,7 @@ internal class LottoStaticsTest {
         val amount = 14_000
         val prize = 5_000
 
-        val result: Float = LottoStatics().calculateEarningRate(prize, amount)
+        val result = LottoStatics().calculateEarningRate(prize, amount)
 
         result shouldBe 0.35f
     }

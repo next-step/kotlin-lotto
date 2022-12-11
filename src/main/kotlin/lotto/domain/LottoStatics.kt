@@ -1,44 +1,36 @@
 package lotto.domain
 
-import java.math.RoundingMode
-import java.text.DecimalFormat
+import lotto.domain.model.Rank
+import kotlin.math.floor
 
-class LottoStatics(private val winners: List<Winner> = emptyList()) {
-
-    private val earningRateFormat = DecimalFormat("#.##").apply {
-        roundingMode = RoundingMode.DOWN
-    }
+class LottoStatics(private val ranks: List<Rank> = emptyList()) {
 
     val totalReward: Int = calculateTotalReward()
 
-    val winningResult: WinningResult = calculateWinningCount()
+    val winningResult: Map<Int, Int>
+        get() = calculateWinningCount()
 
     private fun calculateTotalReward(): Int {
-        var total = 0
-        winners.forEach { winner ->
-            total += winner.prize
-        }
-        return total
+        return ranks.sumOf { rank -> rank.prize }
     }
 
-    private fun calculateWinningCount(): WinningResult {
-        val result = WinningResult()
-        winners.forEach { winner ->
-            when (winner) {
-                Winner.FIRST_GRADE -> result.numberOfFirstGrade++
-                Winner.SECOND_GRADE -> result.numberOfSecondGrade++
-                Winner.THIRD_GRADE -> result.numberOfThirdGrade++
-                Winner.FOURTH_GRADE -> result.numberOfFourthGrade++
-                Winner.FIVE_GRADE,
-                Winner.SIX_GRADE,
-                Winner.NO_MATCH -> Unit
-            }
+    private fun calculateWinningCount(): Map<Int, Int> {
+        val result = mutableMapOf(
+            Rank.FIRST_GRADE.matchCount to 0,
+            Rank.SECOND_GRADE.matchCount to 0,
+            Rank.THIRD_GRADE.matchCount to 0,
+            Rank.FOURTH_GRADE.matchCount to 0,
+            Rank.FIFTH_GRADE.matchCount to 0,
+            Rank.NO_MATCH.matchCount to 0,
+        )
+        ranks.forEach { rank ->
+            result[rank.matchCount] = result[rank.matchCount]?.inc() ?: 0
         }
         return result
     }
 
     fun calculateEarningRate(prize: Int, amount: Int): Float {
-        val quotient = prize.toFloat().div(amount.toFloat())
-        return earningRateFormat.format(quotient).toFloat()
+        val result: Float = prize.toFloat().div(amount.toFloat())
+        return floor(result * 100).div(100f)
     }
 }

@@ -1,3 +1,3 @@
 package lotto.domain
 
-const val BASIC_PRICE = 1000
+const val MINIMUM_PRICE = 1000

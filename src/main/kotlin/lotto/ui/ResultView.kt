@@ -1,36 +1,46 @@
 package lotto.ui
 
-import lotto.domain.Lotto
+import lotto.domain.LottoDispenser
 import lotto.domain.LottoStatics
-import lotto.domain.Winner
-import lotto.domain.WinningChecker
+import lotto.domain.model.Lotto
+import lotto.domain.model.Rank
 
 class ResultView {
 
-    fun inputWinningNumbers(): String {
-        println("\n지난 주 당첨 번호를 입력해 주세요.")
-        return readLine() ?: ""
+    fun showPurchaseResult(lottoList: List<Lotto>) {
+        println("${lottoList.size}개를 구매했습니다.")
+        lottoList.forEach { println(it) }
     }
 
-    fun checkWinningLottoList(winningNumbers: String, lottoList: List<Lotto>): List<Winner> {
-        return lottoList
-            .map { lotto ->
-                WinningChecker.win(winningNumbers, lotto.numbers)
-            }
-    }
+    fun showResult(dispenser: LottoDispenser) {
+        dispenser.checkWinningLottoList()
 
-    fun showResult(amount: Int, winners: List<Winner>) {
         println("\n당첨 통계")
         println("---------")
 
-        val statics = LottoStatics(winners)
-        val earningRate: Float = statics.calculateEarningRate(statics.totalReward, amount)
-        val winningResult = statics.winningResult
+        val statics = LottoStatics(dispenser.ranks)
+        val earningRate = statics.calculateEarningRate(statics.totalReward, dispenser.amount)
 
-        println("3개 일치 (5000원)- ${winningResult.numberOfFourthGrade}개")
-        println("4개 일치 (50000원)- ${winningResult.numberOfThirdGrade}개")
-        println("5개 일치 (1500000원)- ${winningResult.numberOfSecondGrade}개")
-        println("6개 일치 (2000000000원)- ${winningResult.numberOfFirstGrade}개")
+        printRankPrize(statics.winningResult)
+
         println("총 수익률은 ${earningRate}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+    }
+
+    private fun printRankPrize(winningResult: Map<Int, Int>) {
+        Rank.values().forEach { rank: Rank ->
+            if (rank == Rank.NO_MATCH) return@forEach
+
+            val matchCountString = "${rank.matchCount}개 일치"
+            val matchBonusString = ", 보너스 볼 일치"
+            val matchPrizeString = "(${rank.prize}원)- ${winningResult.getOrDefault(rank.matchCount, 0)}개"
+
+            val text = if (rank == Rank.SECOND_GRADE) {
+                "$matchCountString$matchBonusString$matchPrizeString"
+            } else {
+                "$matchCountString $matchPrizeString"
+            }
+
+            println(text)
+        }
     }
 }

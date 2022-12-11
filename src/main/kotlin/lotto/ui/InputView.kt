@@ -1,19 +1,45 @@
 package lotto.ui
 
-import lotto.domain.Lotto
-import lotto.domain.LottoDispenser
+import lotto.domain.LottoNumberValidator
+import lotto.domain.MINIMUM_PRICE
+import lotto.domain.model.LottoNumber
+import lotto.domain.model.WinningNumbers
 
 class InputView {
 
-    fun input(): Pair<Int, List<Lotto>> {
+    fun inputPurchasingAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        val amount = readLine()?.toIntOrNull() ?: 0
-        val lottoList = LottoDispenser(amount).list
-        return amount to lottoList
+        val amount = readlnOrNull()?.toIntOrNull() ?: 0
+        return if (amount < MINIMUM_PRICE) {
+            inputPurchasingAmount()
+        } else {
+            amount
+        }
     }
 
-    fun showLottoList(lottoList: List<Lotto>) {
-        println("${lottoList.size}개를 구매했습니다.")
-        lottoList.forEach { println(it) }
+    fun inputWinningNumbers(): WinningNumbers {
+        println("")
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        val input = readlnOrNull() ?: ""
+
+        val winningNumbers: WinningNumbers
+        try {
+            winningNumbers = WinningNumbers(winningNumberText = input)
+        } catch (e: Exception) {
+            return inputWinningNumbers()
+        }
+
+        return winningNumbers
+    }
+
+    fun inputBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumberString = readlnOrNull() ?: ""
+        val isBonusNumber = LottoNumberValidator.validateBonus(bonusNumberString)
+        return if (isBonusNumber) {
+            LottoNumber(bonusNumberString.toInt())
+        } else {
+            inputBonusNumber()
+        }
     }
 }
