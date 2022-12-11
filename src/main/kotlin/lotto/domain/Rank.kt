@@ -4,19 +4,19 @@ enum class Rank(
     val matches: Int,
     val prize: Int,
 ) {
-    FIRST(
+    FIFTH(
         matches = 3,
         prize = 5000,
     ),
-    THIRD(
+    FOURTH(
         matches = 4,
         prize = 50000,
     ),
-    FOURTH(
+    THIRD(
         matches = 5,
         prize = 1500000,
     ),
-    FIFTH(
+    FIRST(
         matches = 6,
         prize = 2000000000,
     );
