@@ -69,6 +69,6 @@
 - [x] LottoNumber, LottoNumbers
 - [x] Cash
 - [x] LottoReward, LottoRewards
-- [ ] LottoWinTicket
+- [x] LottoWinTicket
 - [ ] LottoUsedTicket, LottoUsedTickets
 - [ ] LottoUnusedTicket, LottoUnusedTickets
