@@ -72,7 +72,7 @@
 
 - [ ] 2등 구현을 위해 추가 번호를 하나 더 추첨한다.
   - [x] InputView 에서 하나의 값을 더 입력받는다. (반환을 한번에 할것인가?) -> Pair<String, String> 사용
-  - [ ] WinningLotto 에 Bonus 번호 추가
+  - [x] WinningLotto 에 Bonus 번호 추가
   - [ ] MatchResult 에 matchBonus 필드 추가
   - [ ] Rank Enum에 현실 세계의 2등 추가 및 나머지 필드 변경
   - [ ] ResultView 에 표기 방식 변경
