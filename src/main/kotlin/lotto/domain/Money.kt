@@ -5,6 +5,5 @@ class Money(
     private var revenueRate: Double = 0.0
 ) {
     fun getPurchaseFee() = purchaseFee
-    fun getRevenueRate(matchInfo: Map<Reward, Int>) =
-        matchInfo.map { it.key.reward * it.value }.sum() / purchaseFee.toDouble()
+    fun getRevenueRate(matchInfo: MatchInfo) = matchInfo.getRevenueFee() / purchaseFee.toDouble()
 }

@@ -1,17 +1,12 @@
 package lotto.domain
 
-class Winner(private val numbers: List<Int>) {
+class Winner(private val numbers: Numbers) {
 
-    constructor(expression: String) : this(expression.split(",").map { it.toInt() })
+    constructor(expression: String) : this(Numbers(expression.split(",").map { it.toInt() }))
 
     fun getWinnerNumbers() = this.numbers
 
-    fun checkNumberMatch(tickets: List<Ticket>) = initRewardMatching().also {
-        tickets.forEach { ticket ->
-            Reward.find(ticket.getMatchingNumbersCount(numbers))
-                ?.also { reward -> it[reward] = (it[reward] ?: 0) + 1 }
-        }
+    fun checkNumberMatch(tickets: IssuanceTickets) = MatchInfo().also {
+        tickets.checkWinner(numbers)
     }
-
-    private fun initRewardMatching() = Reward.values().associateWith { 0 }.toMutableMap()
 }

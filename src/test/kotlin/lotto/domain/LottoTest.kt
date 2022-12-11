@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldBe
 
 class LottoTest : StringSpec({
 
-
     "구입비에 따른 티켓 발권" {
         val lotto = Lotto(10000)
         lotto.purchaseTicket().size shouldBe 10

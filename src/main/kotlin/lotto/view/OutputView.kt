@@ -1,7 +1,7 @@
 package lotto.view
 
+import lotto.domain.MatchInfo
 import lotto.domain.Money
-import lotto.domain.Reward
 import lotto.domain.Ticket
 
 object OutputView {
@@ -17,21 +17,21 @@ object OutputView {
         println("[${ticket.getNumbers().joinToString(",")}]")
     }
 
-    fun printStatisticsAndRevenueRate(rewardCount: Map<Reward, Int>, money: Money, matchInfo: Map<Reward, Int>) {
-        printStatistics(rewardCount)
+    fun printStatisticsAndRevenueRate(matchInfo: MatchInfo, money: Money) {
+        printStatistics(matchInfo)
         printRevenueRate(money, matchInfo)
     }
 
-    private fun printStatistics(rewardCount: Map<Reward, Int>) {
+    private fun printStatistics(matchInfo: MatchInfo) {
         println()
         println("당첨 통계")
         println("---------")
-        rewardCount.forEach {
+        matchInfo.matchInfo.forEach {
             println("${it.key.match}개 일치 (${it.key.reward}원) - ${it.value}개")
         }
     }
 
-    private fun printRevenueRate(money: Money, matchInfo: Map<Reward, Int>) {
+    private fun printRevenueRate(money: Money, matchInfo: MatchInfo) {
         println("총 수익률은 ${money.getRevenueRate(matchInfo)}입니다.")
     }
 }
