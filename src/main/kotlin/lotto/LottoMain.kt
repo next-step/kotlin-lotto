@@ -15,6 +15,6 @@ fun main() {
     ResultView.printLottos(lottos)
 
     val winningLotto = InputView.getWinningLotto()
-    val result = wallet.indicateLottoStatistics(WinningLotto.byInput(winningLotto))
+    val result = wallet.indicateLottoStatistics(WinningLotto.byInput(winningLotto.first))
     ResultView.printResult(result)
 }
