@@ -68,7 +68,7 @@
 ## 구현 순서
 - [x] LottoNumber, LottoNumbers
 - [x] Cash
-- [ ] LottoReward, LottoRewards
+- [x] LottoReward, LottoRewards
 - [ ] LottoWinTicket
 - [ ] LottoUsedTicket, LottoUsedTickets
 - [ ] LottoUnusedTicket, LottoUnusedTickets
