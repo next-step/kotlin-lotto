@@ -17,7 +17,8 @@ class WinningLotto(winningNumbers: List<Int>, bonus: Int) {
     }
 
     fun compareWith(lotto: Lotto): Rank {
-        val result = MatchResult(numbers.intersect(lotto.numbers).size)
+        val result =
+            MatchResult(numbers.intersect(lotto.numbers).size, matchBonus = lotto.numbers.contains(bonusNumber))
         return Rank.valueOf(matchResult = result)
     }
 
