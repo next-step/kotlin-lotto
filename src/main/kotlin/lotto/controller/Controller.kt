@@ -10,6 +10,7 @@ object Controller {
     fun start() {
         val amountOfPurchase = InputFilter.inputAmountOfPurchase()
         val numberOfLotto = amountOfPurchase.calculateNumberOfLotto()
+        val numberOfManualLotto = InputFilter.inputNumberOfManualLotto(numberOfLotto)
         ResultView.printNumberOfLotto(numberOfLotto)
         val lottos = LottoGenerator.generateLottos(numberOfLotto)
         ResultView.printLottos(lottos.getList())

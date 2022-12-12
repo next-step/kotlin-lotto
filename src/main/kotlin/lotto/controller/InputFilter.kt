@@ -1,8 +1,9 @@
 package lotto.controller
 
-import lotto.domain.LottoNumber
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoPrice
+import lotto.domain.ManualLottoCount
 import lotto.view.InputView
 
 object InputFilter {
@@ -12,6 +13,15 @@ object InputFilter {
         } catch (e: Exception) {
             InputView.printError(e.message!!)
             inputAmountOfPurchase()
+        }
+    }
+
+    fun inputNumberOfManualLotto(numberOfLotto: Int): ManualLottoCount {
+        return try {
+            ManualLottoCount(InputParser.parseNumberOfManualLotto(InputView.inputNumberOfManualLotto()), numberOfLotto)
+        } catch (e: Exception) {
+            InputView.printError(e.message!!)
+            inputNumberOfManualLotto(numberOfLotto)
         }
     }
 
