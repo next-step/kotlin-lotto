@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.application.common.Number
+import lotto.common.Number
 
 class LottoShop(
     private val lottoGenerator: LottoGenerator

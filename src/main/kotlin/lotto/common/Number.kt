@@ -1,4 +1,4 @@
-package lotto.application.common
+package lotto.common
 
 data class Number(
     val number: Int

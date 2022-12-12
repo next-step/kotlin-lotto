@@ -5,7 +5,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
-import lotto.application.common.Number
+import lotto.common.Number
 
 class LottoStatisticsServiceTest : StringSpec({
 

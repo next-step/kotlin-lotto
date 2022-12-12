@@ -1,8 +1,8 @@
 package lotto.view
 
-import lotto.application.common.Number
-import lotto.application.common.NumberString
-import lotto.application.common.NumberStringList
+import lotto.common.Number
+import lotto.common.NumberString
+import lotto.common.NumberStringList
 import lotto.domain.Payment
 
 class InputView {

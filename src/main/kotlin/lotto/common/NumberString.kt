@@ -1,4 +1,4 @@
-package lotto.application.common
+package lotto.common
 
 class NumberString(
     private val string: String

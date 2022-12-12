@@ -2,7 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
-import lotto.application.common.Number
+import lotto.common.Number
 import lotto.util.RandomNumberGenerator
 
 class LottoGeneratorTest : StringSpec({

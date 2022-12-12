@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
-import lotto.application.common.Number
+import lotto.common.Number
 
 class LottoWinnerTest : StringSpec({
 

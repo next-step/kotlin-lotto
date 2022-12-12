@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.application.common.Number
+import lotto.common.Number
 
 class LottoStatisticsResult(
     val lottoRank: LottoRank,

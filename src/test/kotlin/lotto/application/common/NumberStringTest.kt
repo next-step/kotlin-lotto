@@ -3,6 +3,8 @@ package lotto.application.common
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.common.Number
+import lotto.common.NumberString
 
 class NumberStringTest : StringSpec({
 

@@ -1,6 +1,6 @@
 package lotto.util
 
-import lotto.application.common.Number
+import lotto.common.Number
 
 class RandomNumberGenerator: NumberGenerator {
     override fun generate(start: Int, end: Int, size: Int): List<Number> {
