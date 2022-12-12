@@ -24,7 +24,8 @@ class LottoResultTest : StringSpec({
         forAll(
             row(LottoRank.FIFTH, 0),
             row(LottoRank.FOURTH, 1),
-            row(LottoRank.THIRD, 1),
+            row(LottoRank.THIRD, 0),
+            row(LottoRank.SECOND, 1),
             row(LottoRank.FIRST, 2),
         ) { lottoMatch, expected ->
             actual[lottoMatch] shouldBe expected

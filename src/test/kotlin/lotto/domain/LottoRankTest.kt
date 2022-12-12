@@ -8,12 +8,13 @@ import io.kotest.matchers.shouldBe
 class LottoRankTest : StringSpec({
     "matchCount에 따른 LottoRank를 반환한다" {
         forAll(
-            row(3, LottoRank.FIFTH),
-            row(4, LottoRank.FOURTH),
-            row(5, LottoRank.THIRD),
-            row(6, LottoRank.FIRST),
-        ) { matchCount, expected ->
-            LottoRank.of(matchCount) shouldBe expected
+            row(3, false, LottoRank.FIFTH),
+            row(4, false, LottoRank.FOURTH),
+            row(5, false, LottoRank.THIRD),
+            row(5, true, LottoRank.SECOND),
+            row(6, false, LottoRank.FIRST),
+        ) { matchCount, bonus, expected ->
+            LottoRank.of(matchCount, bonus) shouldBe expected
         }
     }
 })

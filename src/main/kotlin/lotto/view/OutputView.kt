@@ -20,8 +20,8 @@ object OutputView {
         println("---------")
         countByLottoRank.keys
             .filter { it != LottoRank.NONE }
-            .sortedBy { it.matchCount }
-            .forEach { println("${it.matchCount}개 일치 (${it.winning}원)- ${countByLottoRank[it]}개") }
+            .sortedBy { it.winning }
+            .forEach { println("${it.matchCount}개 일치${if (it.matchBonus) ", 보너스 볼 일치" else " "}(${it.winning}원)- ${countByLottoRank[it]}개") }
         println("총 수익률은 ${profit}입니다.")
     }
 }

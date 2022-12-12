@@ -17,7 +17,7 @@ class WinningNumber(private val numbers: Set<LottoNumber>, private val bonusBall
     private fun match(lotto: Lotto): LottoRank {
         val matchCount = numbers.count { lotto.contains(it) }
 
-        return LottoRank.of(matchCount)
+        return LottoRank.of(matchCount, lotto.contains(bonusBall))
     }
 
     companion object {
