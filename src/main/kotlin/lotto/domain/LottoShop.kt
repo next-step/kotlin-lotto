@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.common.Number
+import lotto.common.IntegerNumber
 
 class LottoShop(
     private val lottoGenerator: LottoGenerator
@@ -10,11 +10,11 @@ class LottoShop(
         return lottoGenerator.generate(lottoCount)
     }
 
-    private fun calculateLottoCount(payment: Payment): Number {
-        return Number(payment.payment.number / LOTTO_PRICE)
+    private fun calculateLottoCount(payment: Payment): IntegerNumber {
+        return payment.payment.divide(LOTTO_PRICE)
     }
 
     companion object {
-        private const val LOTTO_PRICE = 1000
+        private val LOTTO_PRICE = IntegerNumber(1000)
     }
 }

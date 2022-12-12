@@ -1,10 +1,8 @@
-package lotto.application.common
+package lotto.common
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto.common.Number
-import lotto.common.NumberString
 
 class NumberStringTest : StringSpec({
 
@@ -31,7 +29,7 @@ class NumberStringTest : StringSpec({
 
     "양수 판단 테스트" {
         // given
-        val number = Number(1)
+        val number = IntegerNumber(1)
         // when
         val actual = number.isPositive()
         // then
@@ -40,7 +38,7 @@ class NumberStringTest : StringSpec({
 
     "음수 판단 테스트" {
         // given
-        val number = Number(-1)
+        val number = IntegerNumber(-1)
         // when
         val actual = number.isNegative()
         // then
@@ -49,7 +47,7 @@ class NumberStringTest : StringSpec({
 
     "double 타입으로 변환 테스트" {
         // given
-        val number = Number(1)
+        val number = IntegerNumber(1)
         // when
         val actual = number.toDouble()
         // then

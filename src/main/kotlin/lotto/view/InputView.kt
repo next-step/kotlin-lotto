@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.common.Number
+import lotto.common.IntegerNumber
 import lotto.common.NumberString
 import lotto.common.NumberStringList
 import lotto.domain.Payment
@@ -13,15 +13,15 @@ class InputView {
         return Payment(payment.toNumber())
     }
 
-    fun inputLuckyNumbers(): List<Number> {
+    fun inputLuckyNumbers(): List<IntegerNumber> {
         println(INPUT_LUCKY_NUMBERS_GUIDE)
         return NumberStringList(readln()).toNumberList()
     }
 
-    fun inputBonusNumber(): Number {
+    fun inputBonusNumber(): IntegerNumber {
         println(INPUT_BONUS_BALL)
         val bonusBallNumberString = readln()
-        return Number(bonusBallNumberString.toInt())
+        return IntegerNumber(bonusBallNumberString.toInt())
     }
 
     private companion object {

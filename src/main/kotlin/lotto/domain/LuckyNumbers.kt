@@ -1,10 +1,10 @@
 package lotto.domain
 
-import lotto.common.Number
+import lotto.common.IntegerNumber
 
 class LuckyNumbers(
-    luckyNumbers: List<Number>,
-    bonusNumber: Number
+    luckyNumbers: List<IntegerNumber>,
+    bonusNumber: IntegerNumber
 ) {
     private val _luckyNumbers: List<LottoNumber>
     private val _bonusNumber: LottoNumber
@@ -24,9 +24,9 @@ class LuckyNumbers(
         return LottoRank.from(hitCount, hasBonusNumber)
     }
 
-    private fun countHitNumbers(numbers: List<LottoNumber>): Number {
+    private fun countHitNumbers(numbers: List<LottoNumber>): IntegerNumber {
         val count = numbers.count { number -> _luckyNumbers.contains(number) }
-        return Number(count)
+        return IntegerNumber(count)
     }
 
     private fun containsBonusNumber(numbers: List<LottoNumber>): Boolean {

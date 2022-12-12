@@ -1,18 +1,18 @@
 package lotto.domain
 
-import lotto.common.Number
+import lotto.common.IntegerNumber
 
 enum class LottoRank(
-    val hitCount: Number,
-    val prizeMoney: Number,
+    val hitCount: IntegerNumber,
+    val prizeMoney: IntegerNumber,
     val hasBonusNumber: Boolean = false
 ) {
-    FIRST(hitCount = Number(6), prizeMoney = Number(2000000000)),
-    SECOND(hitCount = Number(5), prizeMoney = Number(30000000), hasBonusNumber = true),
-    THIRD(hitCount = Number(5), prizeMoney = Number(1500000)),
-    FOURTH(hitCount = Number(4), prizeMoney = Number(50000)),
-    FIFTH(hitCount = Number(3), prizeMoney = Number(5000)),
-    MISS(hitCount = Number(0), prizeMoney = Number(0));
+    FIRST(hitCount = IntegerNumber(6), prizeMoney = IntegerNumber(2000000000)),
+    SECOND(hitCount = IntegerNumber(5), prizeMoney = IntegerNumber(30000000), hasBonusNumber = true),
+    THIRD(hitCount = IntegerNumber(5), prizeMoney = IntegerNumber(1500000)),
+    FOURTH(hitCount = IntegerNumber(4), prizeMoney = IntegerNumber(50000)),
+    FIFTH(hitCount = IntegerNumber(3), prizeMoney = IntegerNumber(5000)),
+    MISS(hitCount = IntegerNumber(0), prizeMoney = IntegerNumber(0));
 
     private fun isHitBonusNumber(it: LottoRank, hasBonusNumber: Boolean): Boolean {
         if (it.hasBonusNumber) {
@@ -22,7 +22,7 @@ enum class LottoRank(
     }
 
     companion object {
-        fun from(hitCount: Number, hasBonusNumber: Boolean): LottoRank {
+        fun from(hitCount: IntegerNumber, hasBonusNumber: Boolean): LottoRank {
             return values().find { it.hitCount == hitCount && it.isHitBonusNumber(it, hasBonusNumber) } ?: return MISS
         }
 

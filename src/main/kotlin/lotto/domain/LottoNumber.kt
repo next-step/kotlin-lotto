@@ -1,9 +1,9 @@
 package lotto.domain
 
-import lotto.common.Number
+import lotto.common.IntegerNumber
 
 data class LottoNumber(
-    val number: Number
+    val number: IntegerNumber
 ) {
 
     init {

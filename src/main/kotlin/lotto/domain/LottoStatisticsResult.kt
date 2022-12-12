@@ -1,8 +1,8 @@
 package lotto.domain
 
-import lotto.common.Number
+import lotto.common.IntegerNumber
 
 class LottoStatisticsResult(
     val lottoRank: LottoRank,
-    val winLottoCount: Number
+    val winLottoCount: IntegerNumber
 )

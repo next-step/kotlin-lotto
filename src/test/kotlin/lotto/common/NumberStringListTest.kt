@@ -1,10 +1,8 @@
-package lotto.application.common
+package lotto.common
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import lotto.common.Number
-import lotto.common.NumberStringList
 
 class NumberStringListTest : StringSpec({
 
@@ -35,6 +33,6 @@ class NumberStringListTest : StringSpec({
         // when
         val numberList = numberStringList.toNumberList()
         // then
-        numberList shouldBe listOf(Number(1), Number(2), Number(3), Number(4), Number(5))
+        numberList shouldBe listOf(IntegerNumber(1), IntegerNumber(2), IntegerNumber(3), IntegerNumber(4), IntegerNumber(5))
     }
 })

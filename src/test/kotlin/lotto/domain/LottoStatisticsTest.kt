@@ -4,14 +4,14 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import lotto.common.Number
+import lotto.common.IntegerNumber
 
 class LottoStatisticsTest : StringSpec({
     "로또 수익률 계산 테스트" {
         forAll(
-            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), Payment(Number(100000)), 0.55),
-            row(listOf(LottoRank.FIFTH), Payment(Number(5000)), 1.0),
-            row(listOf(LottoRank.FOURTH), Payment(Number(5000)), 10),
+            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), Payment(IntegerNumber(100000)), 0.55),
+            row(listOf(LottoRank.FIFTH), Payment(IntegerNumber(5000)), 1.0),
+            row(listOf(LottoRank.FOURTH), Payment(IntegerNumber(5000)), 10),
         ) { prizeList, payment, expectedEarningRate ->
             // given
             val lottoStatistics = LottoStatistics(prizeList)
@@ -35,11 +35,11 @@ class LottoStatisticsTest : StringSpec({
         val lottoStatistics = LottoStatistics(winLottoList)
 
         val expected = listOf(
-            LottoStatisticsResult(LottoRank.FIFTH, Number(3)),
-            LottoStatisticsResult(LottoRank.FOURTH, Number(0)),
-            LottoStatisticsResult(LottoRank.THIRD, Number(2)),
-            LottoStatisticsResult(LottoRank.SECOND, Number(0)),
-            LottoStatisticsResult(LottoRank.FIRST, Number(1)),
+            LottoStatisticsResult(LottoRank.FIFTH, IntegerNumber(3)),
+            LottoStatisticsResult(LottoRank.FOURTH, IntegerNumber(0)),
+            LottoStatisticsResult(LottoRank.THIRD, IntegerNumber(2)),
+            LottoStatisticsResult(LottoRank.SECOND, IntegerNumber(0)),
+            LottoStatisticsResult(LottoRank.FIRST, IntegerNumber(1)),
         )
 
         // when

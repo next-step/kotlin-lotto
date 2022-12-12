@@ -1,6 +1,6 @@
 package lotto.common
 
-data class Number(
+data class IntegerNumber(
     val number: Int
 ) {
     fun isPositive(): Boolean {
@@ -13,5 +13,9 @@ data class Number(
 
     fun toDouble(): Double {
         return number.toDouble()
+    }
+
+    fun divide(other: IntegerNumber): IntegerNumber {
+        return IntegerNumber(number.div(other.number))
     }
 }
