@@ -1,11 +1,8 @@
 package lotto.domain
 
 import lotto.validator.LottoValidator.validateLottoSize
-import kotlin.streams.toList
 
 class Lotto private constructor(private val elements: Set<LottoNumber>) {
-    fun sortedLotto(): List<LottoNumber> = elements.stream().sorted().toList()
-
     override fun toString(): String {
         return "$elements"
     }
@@ -20,9 +17,10 @@ class Lotto private constructor(private val elements: Set<LottoNumber>) {
 
     companion object {
         fun of(inputNumbers: Set<Int>): Lotto {
-            val lottoNumbers = inputNumbers.map {
-                LottoNumber.of(it)
-            }.toSet()
+            val lottoNumbers = inputNumbers.sorted()
+                .map { LottoNumber.of(it) }
+                .toSet()
+
             validateLottoSize(lottoNumbers)
             return Lotto(lottoNumbers)
         }

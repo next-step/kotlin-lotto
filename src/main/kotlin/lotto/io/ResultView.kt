@@ -27,7 +27,7 @@ object ResultView {
 
     private fun formatPurchaseLotto(lottos: Lottos, stringBuilder: StringBuilder) {
         lottos.elements.forEach {
-            stringBuilder.append(it.sortedLotto())
+            stringBuilder.append(it)
             stringBuilder.appendLine()
         }
     }
