@@ -1,17 +1,15 @@
 package lotto.application
 
-import lotto.domain.Lotto
-import lotto.domain.Lottos
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
+import lotto.domain.Lottos
 import lotto.domain.WinningNumbers
 import java.util.EnumMap
 
 data class LottoResultGenerator(private val winningNumbers: WinningNumbers, private val lottos: Lottos) {
     fun getResult(): LottoResult {
         val lottoResult: EnumMap<LottoRank, Int> = initLottoResult()
-        lottos.value.forEach {
-            val lotto = Lotto(it.value)
+        lottos.value.forEach { lotto ->
             val lottoRank = winningNumbers.getLottoRank(lotto)
             lottoResult[lottoRank] = lottoResult.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREASE_COUNT
         }
