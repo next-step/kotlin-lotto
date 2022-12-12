@@ -4,22 +4,19 @@ class Calculator(private val expression: Expression) {
 
     fun calculate(): Int {
         if (expression.value.isEmpty()) {
-            return 0
+            return EMPTY_CALCULATE_RESULT
         }
 
-        val operands = expression.value.mapNotNull { it as? ExpressionElement.OperandElement }
-        val operators = expression.value.mapNotNull { it as? ExpressionElement.OperatorElement }
+        val operands = expression.fetchOperands()
+        val operators = expression.fetchOperators()
 
-        return operands.reduceIndexed { index, acc, operandElement ->
-            ExpressionElement.OperandElement(
-                operators[index - BUFFER_OPERATOR]
-                    .value
-                    .calculator(acc.value, operandElement.value)
-            )
-        }.value
+        return operands.reduceIndexed { index, acc, operand ->
+            operators[index - BUFFER_OPERATOR].calculator(acc, operand)
+        }
     }
 
     companion object {
         private const val BUFFER_OPERATOR = 1
+        private const val EMPTY_CALCULATE_RESULT = 0
     }
 }
