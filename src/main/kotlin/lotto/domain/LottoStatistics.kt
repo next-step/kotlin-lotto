@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.common.DoubleNumber
 import lotto.common.IntegerNumber
 import lotto.util.NumberUtil
 
@@ -8,8 +9,8 @@ class LottoStatistics(
 ) {
     private val totalPrize: IntegerNumber = IntegerNumber(winLottoList.sumOf { it.prizeMoney.number })
 
-    fun earningRate(inputPayment: Payment): Double {
-        val earningRate = totalPrize.toDouble() / inputPayment.payment.toDouble()
+    fun earningRate(inputPayment: Payment): DoubleNumber {
+        val earningRate = totalPrize.toDouble().divide(inputPayment.payment.toDouble())
         return NumberUtil.floor(earningRate, EARNING_RATE_DECIMAL_PLACE)
     }
 
@@ -25,6 +26,6 @@ class LottoStatistics(
     }
 
     companion object {
-        private const val EARNING_RATE_DECIMAL_PLACE = 2
+        private val EARNING_RATE_DECIMAL_PLACE = DoubleNumber(2.0)
     }
 }

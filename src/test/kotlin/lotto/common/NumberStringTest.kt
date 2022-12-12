@@ -51,6 +51,6 @@ class NumberStringTest : StringSpec({
         // when
         val actual = number.toDouble()
         // then
-        actual shouldBe 1.0
+        actual shouldBe DoubleNumber(1.0)
     }
 })

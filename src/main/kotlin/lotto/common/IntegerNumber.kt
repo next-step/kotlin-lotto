@@ -11,8 +11,8 @@ data class IntegerNumber(
         return number < 0
     }
 
-    fun toDouble(): Double {
-        return number.toDouble()
+    fun toDouble(): DoubleNumber {
+        return DoubleNumber(this)
     }
 
     fun divide(other: IntegerNumber): IntegerNumber {

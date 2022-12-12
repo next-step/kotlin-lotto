@@ -4,14 +4,15 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.common.DoubleNumber
 import lotto.common.IntegerNumber
 
 class LottoStatisticsTest : StringSpec({
     "로또 수익률 계산 테스트" {
         forAll(
-            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), Payment(IntegerNumber(100000)), 0.55),
-            row(listOf(LottoRank.FIFTH), Payment(IntegerNumber(5000)), 1.0),
-            row(listOf(LottoRank.FOURTH), Payment(IntegerNumber(5000)), 10),
+            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), Payment(IntegerNumber(100000)), DoubleNumber(0.55)),
+            row(listOf(LottoRank.FIFTH), Payment(IntegerNumber(5000)), DoubleNumber(1.0)),
+            row(listOf(LottoRank.FOURTH), Payment(IntegerNumber(5000)), DoubleNumber(10.0)),
         ) { prizeList, payment, expectedEarningRate ->
             // given
             val lottoStatistics = LottoStatistics(prizeList)
