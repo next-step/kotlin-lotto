@@ -5,10 +5,6 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.application.common.Number
-import lotto.domain.LottoRank
-import lotto.domain.LottoStatistics
-import lotto.domain.LottoStatisticsResult
-import lotto.domain.Payment
 
 class LottoStatisticsTest : StringSpec({
     "로또 수익률 계산 테스트" {

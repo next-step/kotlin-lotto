@@ -59,14 +59,16 @@ class LuckyNumbersTest : StringSpec({
             // given
             row(
                 "0개 일치하는 로또",
-                LuckyNumbers(luckyNumbers = listOf(
-                    Number(1),
-                    Number(3),
-                    Number(5),
-                    Number(7),
-                    Number(9),
-                    Number(11)
-                ), bonusNumber = Number(13)),
+                LuckyNumbers(
+                    luckyNumbers = listOf(
+                        Number(1),
+                        Number(3),
+                        Number(5),
+                        Number(7),
+                        Number(9),
+                        Number(11)
+                    ), bonusNumber = Number(13)
+                ),
                 listOf(
                     LottoNumber(Number(2)),
                     LottoNumber(Number(4)),
@@ -79,14 +81,16 @@ class LuckyNumbersTest : StringSpec({
             ),
             row(
                 "3개 일치하는 로또",
-                LuckyNumbers(luckyNumbers = listOf(
-                    Number(1),
-                    Number(3),
-                    Number(5),
-                    Number(7),
-                    Number(9),
-                    Number(11)
-                ), bonusNumber = Number(13)),
+                LuckyNumbers(
+                    luckyNumbers = listOf(
+                        Number(1),
+                        Number(3),
+                        Number(5),
+                        Number(7),
+                        Number(9),
+                        Number(11)
+                    ), bonusNumber = Number(13)
+                ),
                 listOf(
                     LottoNumber(Number(7)),
                     LottoNumber(Number(8)),
@@ -99,14 +103,16 @@ class LuckyNumbersTest : StringSpec({
             ),
             row(
                 "5개 일치+보너스번호 일치하는 로또",
-                LuckyNumbers(luckyNumbers = listOf(
-                    Number(1),
-                    Number(3),
-                    Number(5),
-                    Number(7),
-                    Number(9),
-                    Number(11)
-                ), bonusNumber = Number(13)),
+                LuckyNumbers(
+                    luckyNumbers = listOf(
+                        Number(1),
+                        Number(3),
+                        Number(5),
+                        Number(7),
+                        Number(9),
+                        Number(11)
+                    ), bonusNumber = Number(13)
+                ),
                 listOf(
                     LottoNumber(Number(1)),
                     LottoNumber(Number(3)),
