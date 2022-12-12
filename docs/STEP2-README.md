@@ -111,7 +111,7 @@
   - 1~45의 값을 가지는 List를 초기화 한 후, shuffled()와 subList()를 이용하여 중복없는 6개의 난수를 생성
 
 ### 가변 타입, var 사용 최소화
-* [ ] LottoNumber : 선언과 동시에 초기화 하여 LottoNumber 객체를 추가하기 위해 사용된 가변타입 MutableMap의 사용 개선
+* [x] LottoNumber : 선언과 동시에 초기화 하여 LottoNumber 객체를 추가하기 위해 사용된 가변타입 MutableMap의 사용 개선
   * associateWith()를 이용한 선언과 동시에 초기화
   * mapIndex()를 이용한 선언과 동시에 초기화
 * [ ] RandomLottoGenerator, TestLottoGenerator : 구매 금액만큼 발급된 로또를 추가하기 위해 사용된 MutableMap을 선언과 동시에 초기화 하여 가변타입 사용 개선
