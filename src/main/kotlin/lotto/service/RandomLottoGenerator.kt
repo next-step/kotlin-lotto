@@ -8,19 +8,20 @@ import lotto.service.LottoGenerator.Companion.RANGE_END
 import lotto.service.LottoGenerator.Companion.RANGE_START
 
 class RandomLottoGenerator : LottoGenerator {
-    override fun generateSingleLotto(): Lotto {
-        val randomNumbers = mutableSetOf<Int>()
-        while (randomNumbers.size != LOTTO_SIZE) {
-            randomNumbers.add((RANGE_START..RANGE_END).random())
+    override fun generate(buyAmount: BuyAmount): Lottos =
+        List(buyAmount.tryCount) {
+            generateSingleLotto()
+        }.run {
+            Lottos.of(this)
         }
-        return Lotto.of(randomNumbers)
-    }
 
-    override fun generate(buyAmount: BuyAmount): Lottos {
-        val elements = mutableListOf<Lotto>()
-        repeat(buyAmount.tryCount){
-            elements.add(generateSingleLotto())
-        }
-        return Lottos.of(elements)
+    override fun generateSingleLotto(): Lotto = Lotto.of(randomNumbers())
+
+    private fun randomNumbers(): Set<Int> = values.shuffled()
+        .subList(RANGE_START, LOTTO_SIZE.plus(1))
+        .toSet()
+
+    companion object {
+        private val values: List<Int> = (RANGE_START..RANGE_END).toList()
     }
 }

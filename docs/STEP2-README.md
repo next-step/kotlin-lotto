@@ -106,9 +106,9 @@
   - AS-IS : step2.lotto
   - TO-BE : lotto
 - [x] Lotto : 출력부를 위해 구현한 Lotto 객체의 원소를 정렬하는 함수를 제거하고, 팩토리 메서드에서 정렬된 원소를 가지는 Lotto 객체를 생성하도록 수정
-- [x] readLine()!!을 이용한 값 입력 대신 readln()을 이용한 null safe한 값 입력 처리
-- [ ] while문을 이용한 중복없는 난수 생성 개선
-  - 1~45의 값을 가지는 배열을 초기화 한 후, Index를 섞어 중복없는 6개의 난수를 생성
+- [x] InputView : readLine()!!을 이용한 값 입력 대신 readln()을 이용한 null safe한 값 입력 처리
+- [x] RandomLottoGenerator : while 문을 이용한 중복없는 난수 생성부 개선
+  - 1~45의 값을 가지는 List를 초기화 한 후, shuffled()와 subList()를 이용하여 중복없는 6개의 난수를 생성
 
 ### 가변 타입, var 사용 최소화
 * [ ] LottoNumber : 선언과 동시에 초기화 하여 LottoNumber 객체를 추가하기 위해 사용된 가변타입 MutableMap의 사용 개선
