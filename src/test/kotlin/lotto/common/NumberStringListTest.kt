@@ -31,7 +31,7 @@ class NumberStringListTest : StringSpec({
         // given
         val numberStringList = NumberStringList("1,2,3,4,5")
         // when
-        val numberList = numberStringList.toNumberList()
+        val numberList = numberStringList.toIntegerNumberList()
         // then
         numberList shouldBe listOf(IntegerNumber(1), IntegerNumber(2), IntegerNumber(3), IntegerNumber(4), IntegerNumber(5))
     }

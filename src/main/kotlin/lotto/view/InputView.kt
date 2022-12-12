@@ -10,18 +10,17 @@ class InputView {
     fun inputPayment(): Payment {
         println(INPUT_PAYMENT_GUIDE)
         val payment = NumberString(readln())
-        return Payment(payment.toNumber())
+        return Payment(payment.toIntegerNumber())
     }
 
     fun inputLuckyNumbers(): List<IntegerNumber> {
         println(INPUT_LUCKY_NUMBERS_GUIDE)
-        return NumberStringList(readln()).toNumberList()
+        return NumberStringList(readln()).toIntegerNumberList()
     }
 
     fun inputBonusNumber(): IntegerNumber {
         println(INPUT_BONUS_BALL)
-        val bonusBallNumberString = readln()
-        return IntegerNumber(bonusBallNumberString.toInt())
+        return NumberString(readln()).toIntegerNumber()
     }
 
     private companion object {
