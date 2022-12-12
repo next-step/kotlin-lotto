@@ -6,6 +6,8 @@ private const val DIVISION_UNIT = 1000
 
 data class KRW(val money: Int) {
 
+    constructor(input: String) : this(input.toIntOrNull() ?: 0)
+
     val availableLottoQuantity
         get() = money / DIVISION_UNIT
 
@@ -16,13 +18,5 @@ data class KRW(val money: Int) {
 
     fun add(krw: KRW): KRW {
         return KRW(money + krw.money)
-    }
-
-    companion object {
-        fun byInput(input: String): KRW {
-            val money = input.toIntOrNull()
-            require(money != null)
-            return KRW(money)
-        }
     }
 }
