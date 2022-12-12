@@ -102,7 +102,7 @@
 
 ---
 # 코드 리뷰 피드백 내용 정리
-- [ ] package 구조 변경
+- [x] package 구조 변경
   - AS-IS : step2.lotto
   - TO-BE : lotto
 - [ ] Lotto : 별도로 제공된 Lotto 객체의 원소를 정렬하는 함수를 제거하고 팩토리 메서드에서 정렬된 원소를 가지는 Lotto 객체를 생성하도록 수정
