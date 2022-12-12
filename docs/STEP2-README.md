@@ -114,8 +114,8 @@
 * [x] LottoNumber : 선언과 동시에 초기화 하여 LottoNumber 객체를 추가하기 위해 사용된 가변타입 MutableMap의 사용 개선
   * associateWith()를 이용한 선언과 동시에 초기화
   * mapIndex()를 이용한 선언과 동시에 초기화
-* [ ] RandomLottoGenerator, TestLottoGenerator : 구매 금액만큼 발급된 로또를 추가하기 위해 사용된 MutableMap을 선언과 동시에 초기화 하여 가변타입 사용 개선
-  * [ ] List 생성자를 이용한 선언과 동시에 초기화 
+* [x] RandomLottoGenerator, TestLottoGenerator : 구매 금액만큼 발급된 로또를 추가하기 위해 사용된 MutableMap을 선언과 동시에 초기화 하여 가변타입 사용 개선
+  * List 생성자를 이용한 선언과 동시에 초기화 
 * [ ] PlayResults : 
   * var로 선언된 MutableList의 변수 타입을 var에서 val로 변경
   * 외부 사용처가 없는  private 접근 제한자 추가 
