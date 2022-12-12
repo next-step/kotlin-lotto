@@ -58,4 +58,24 @@ class IntegerNumberTest : StringSpec({
         // then
         actual shouldBe IntegerNumber(3)
     }
+
+    "뺄셈 테스트" {
+        // given
+        val x = IntegerNumber(6)
+        val y = IntegerNumber(2)
+        // when
+        val actual = x.minus(y)
+        // then
+        actual shouldBe IntegerNumber(4)
+    }
+
+    "곱셈 테스트" {
+        // given
+        val x = IntegerNumber(6)
+        val y = IntegerNumber(2)
+        // when
+        val actual = x.multiply(y)
+        // then
+        actual shouldBe IntegerNumber(12)
+    }
 })
