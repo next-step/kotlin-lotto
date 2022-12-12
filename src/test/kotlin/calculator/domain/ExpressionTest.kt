@@ -23,7 +23,7 @@ internal class ExpressionTest {
 
     @Test
     fun `구분자 외에 다른 문자가 입력되어 수식 만들기 실패`() {
-        assertThrows<IllegalArgumentException> {
+        assertThrows<RuntimeException> {
             val input = "//;\n1;2;3ddd"
             val delimiters = Delimiters.create(input)
 
@@ -36,4 +36,6 @@ internal class ExpressionTest {
             assertThat(actual).isEqualTo(expected)
         }
     }
+
+
 }
