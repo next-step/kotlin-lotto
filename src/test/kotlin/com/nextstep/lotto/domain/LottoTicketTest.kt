@@ -5,6 +5,8 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
+import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.throwable.shouldHaveMessage
 
 class LottoTicketTest : BehaviorSpec({
@@ -43,6 +45,19 @@ class LottoTicketTest : BehaviorSpec({
                 val lottoBalls = listOf(1, 1, 2, 3, 4, 5).map { LottoBall(it) }
                 shouldThrow<IllegalArgumentException> { LottoTicket(lottoBalls) } shouldHaveMessage
                         "중복된 LottoBall 을 입력받을 수 없습니다. numbers: $lottoBalls"
+            }
+        }
+    }
+
+    Given("LottoTicket#getNumbers") {
+        When("getNumber 를 호출하면") {
+            Then("LottoTicket 이 가지고 있는 LottoBall 의 숫자들을 리턴한다") {
+                val lottoBalls = (1..6).map { LottoBall(it) }
+                val lottoTicket = LottoTicket(lottoBalls)
+                val numbers = lottoTicket.getNumbers()
+
+                numbers shouldHaveSize 6
+                numbers shouldContainExactly ((1..6))
             }
         }
     }
