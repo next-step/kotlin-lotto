@@ -27,6 +27,7 @@ object InputFilter {
     }
 
     fun inputLotto(): Lotto {
+        InputView.inputWinningNumber()
         return try {
             val parsedInput = InputParser.parseWithDelimiter(readln())
             Lotto(parsedInput.map { LottoNumber.from(it) })
@@ -37,6 +38,7 @@ object InputFilter {
     }
 
     fun inputLottos(count: Int): Lottos {
+        InputView.inputManualLottoNumber()
         return try {
             return Lottos(makeLottos(count))
         } catch (e: Exception) {

@@ -24,7 +24,7 @@ object InputView {
     }
 
     fun inputWinningNumber() {
-        println(INPUT_WINNING_NUMBER)
+        println(LINE_FEED + INPUT_WINNING_NUMBER)
     }
 
     fun inputBonusNumber(): String {
