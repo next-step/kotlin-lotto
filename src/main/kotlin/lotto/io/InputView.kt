@@ -13,7 +13,7 @@ object InputView {
         do {
             println(BUY_AMOUNT_INPUT_GUIDE_MESSAGE)
             try {
-                buyAmount = BuyAmount.of(readLine()!!)
+                buyAmount = BuyAmount.of(readln())
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
@@ -35,6 +35,6 @@ object InputView {
     }
 
     private fun inputWinningNumberSet(): List<String> {
-        return readLine()!!.split(COMMA)
+        return readln().split(COMMA)
     }
 }

@@ -74,8 +74,8 @@
 ---
 ## 잘못 구현된 로직 수정
 * [x] 지난주 당첨 번호 입력 방식 오류
-  * AS-IS : readLine()을 통해 6개의 당첨 번호를 한라인에 하나씩 입력
-  * TO-BE : readLine()을 이용해 한라인에 ,를 구분자로 입력된 6개의 당첨 번호를 입력
+  * AS-IS : readln()을 통해 6개의 당첨 번호를 한라인에 하나씩 입력
+  * TO-BE : readln()을 이용해 한라인에 ,를 구분자로 입력된 6개의 당첨 번호를 입력
 * [x] 45번에 해당하는 LottoNumber 객체 생성 시 NuSuchElementException 예외 발생 오류
   * AS-IS : 1부터 45까지 LottoNumber 객체를 생성하기 위해 repeat()함수 조건에 45를 명시하여, 0을 Index로 시작하여 44까지의 LottoNumber 객체가 생성되어 캐싱된 Map에 숫자 45에 해당하는 LottoNumber 객체가 존재하지 않아 예외 발생 
   * TO-BE : 0부터 44까지 반복하여 LottoNumber 객체를 생성하는 조건을 1부터 45까지 반복하여 LottoNumber 객체를 생성 후 Map에 캐싱하도록 수정
@@ -106,7 +106,7 @@
   - AS-IS : step2.lotto
   - TO-BE : lotto
 - [x] Lotto : 출력부를 위해 구현한 Lotto 객체의 원소를 정렬하는 함수를 제거하고, 팩토리 메서드에서 정렬된 원소를 가지는 Lotto 객체를 생성하도록 수정
-- [ ] readLine()!!을 이용한 값 입력 대신 readIn()을 이용한 null safe한 값 입력 처리
+- [x] readLine()!!을 이용한 값 입력 대신 readln()을 이용한 null safe한 값 입력 처리
 - [ ] while문을 이용한 중복없는 난수 생성 개선
   - 1~45의 값을 가지는 배열을 초기화 한 후, Index를 섞어 중복없는 6개의 난수를 생성
 
