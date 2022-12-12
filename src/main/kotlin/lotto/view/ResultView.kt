@@ -24,8 +24,8 @@ object ResultView {
         println("$numberOfLotto$LOTTO_COUNT_MESSAGE")
     }
 
-    fun printLottoNumbersList(lottoNumbersList: List<List<Int>>) {
-        lottoNumbersList.forEach { println(it) }
+    fun printLottos(lottos: List<List<Int>>) {
+        lottos.forEach { println(it) }
     }
 
     fun printFinalResult(lottoResultDto: LottoResultDto) {

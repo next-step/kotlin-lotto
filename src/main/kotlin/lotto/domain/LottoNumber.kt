@@ -10,16 +10,16 @@ value class LottoNumber private constructor(val value: Int) {
         const val MINIMUM_LOTTO_NUMBER = 1
         const val MAXIMUM_LOTTO_NUMBER = 45
 
-        private val lottoNumbers = MutableList(MAXIMUM_LOTTO_NUMBER) { LottoNumber(it + MINIMUM_LOTTO_NUMBER) }
+        private val lotto = MutableList(MAXIMUM_LOTTO_NUMBER) { LottoNumber(it + MINIMUM_LOTTO_NUMBER) }
 
         fun from(number: Int): LottoNumber {
-            val lottoNumber = lottoNumbers.find { it.value == number }
+            val lottoNumber = lotto.find { it.value == number }
             if (lottoNumber != null) {
                 return lottoNumber
             }
 
             val newLottoNumber = LottoNumber(number)
-            lottoNumbers.add(newLottoNumber)
+            lotto.add(newLottoNumber)
             return newLottoNumber
         }
 

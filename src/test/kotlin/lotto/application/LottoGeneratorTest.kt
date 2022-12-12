@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class LottoGeneratorTest {
     // given
-    private val lotto = LottoGenerator.generateLottoNumbers(GENERATE_ONLY_ONE_LOTTO_NUMBERS).value[FIRST_INDEX]
+    private val lotto = LottoGenerator.generateLottos(GENERATE_ONLY_ONE_LOTTO_NUMBERS).value[FIRST_INDEX]
 
     @Test
     fun `로또 번호 생성 - 개수(6개) 확인 테스트`() {

@@ -11,13 +11,13 @@ object Controller {
         val amountOfPurchase = InputFilter.inputAmountOfPurchase()
         val numberOfLotto = amountOfPurchase.calculateNumberOfLotto()
         ResultView.printNumberOfLotto(numberOfLotto)
-        val lottoNumbersList = LottoGenerator.generateLottoNumbers(numberOfLotto)
-        ResultView.printLottoNumbersList(lottoNumbersList.getList())
+        val lottos = LottoGenerator.generateLottos(numberOfLotto)
+        ResultView.printLottos(lottos.getList())
 
         val winningNumbers = InputFilter.inputWinningNumbers()
         val bonusNumber = InputFilter.inputBonusNumber()
         val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, bonusNumber)
-        val lottoResultGenerator = LottoResultGenerator(winningNumbersWithBonusNumber, lottoNumbersList)
+        val lottoResultGenerator = LottoResultGenerator(winningNumbersWithBonusNumber, lottos)
         val lottoResult = lottoResultGenerator.getResult()
         ResultView.printFinalResult(LottoResultDto(lottoResult))
     }
