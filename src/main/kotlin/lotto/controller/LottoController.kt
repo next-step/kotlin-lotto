@@ -18,6 +18,6 @@ class LottoController(private val lottoGenerator: LottoGenerator) {
 
         val winningNumber = InputView.inputWinningNumber()
         val playResult = lottoService.play(purchaseItem, winningNumber)
-        printWinningStatistics(purchaseItem, playResult)
+        printWinningStatistics(playResult)
     }
 }

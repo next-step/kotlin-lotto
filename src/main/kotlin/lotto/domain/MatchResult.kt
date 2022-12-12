@@ -7,6 +7,8 @@ enum class MatchResult(val matchCount: Int, val reward: Int) {
     FOURTH_PLACE(3, 5_000),
     NOT_WINNING(0, 0);
 
+    fun isNotNoting(): Boolean = this != NOT_WINNING
+
     companion object {
         private val MATCH_COUNT_RANGE = NOT_WINNING.matchCount..FIRST_PLACE.matchCount
         private const val NOT_FOUND_MATCH_RESULT_ERROR_MESSAGE = "[%d]개에 일치하는 당첨 등수를 찾을 수 없습니다."

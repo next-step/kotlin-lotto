@@ -32,11 +32,11 @@ object ResultView {
         }
     }
 
-    fun printWinningStatistics(purchaseItem: PurchaseItem, playResults: PlayResults) {
+    fun printWinningStatistics(playResults: PlayResults) {
         val stringBuilder = StringBuilder()
         formatWinningStatisticsTitle(stringBuilder)
         formatMatchedRankMessage(stringBuilder, playResults)
-        formatProfitRateMessage(stringBuilder, playResults, purchaseItem.buyAmount)
+        formatProfitRateMessage(stringBuilder, playResults)
 
         println(stringBuilder.toString())
     }
@@ -45,11 +45,9 @@ object ResultView {
         stringBuilder.append(WINNING_STATISTICS_TITLE)
 
     private fun formatMatchedRankMessage(stringBuilder: StringBuilder, playResults: PlayResults) {
-        formatMatchedRankMessageByRank(stringBuilder, MatchResult.FOURTH_PLACE, playResults.fourthPlaceCount)
-        formatMatchedRankMessageByRank(stringBuilder, MatchResult.THIRD_PLACE, playResults.thirdPlaceCount)
-        formatMatchedRankMessageByRank(stringBuilder, MatchResult.SECOND_PLACE, playResults.secondPlaceCount)
-        formatMatchedRankMessageByRank(stringBuilder, MatchResult.FIRST_PLACE, playResults.firstPlaceCount)
-
+        playResults.aggregations
+            .entries
+            .forEach { formatMatchedRankMessageByRank(stringBuilder, it.key, it.value) }
         stringBuilder.appendLine()
     }
 
@@ -58,8 +56,8 @@ object ResultView {
         stringBuilder.appendLine()
     }
 
-    private fun formatProfitRateMessage(stringBuilder: StringBuilder, playResults: PlayResults, buyAmount: Int) {
-        stringBuilder.append(FINAL_PROFIT_RATE_MESSAGE_FORMAT.format(playResults.calculateProfitRate(buyAmount)))
+    private fun formatProfitRateMessage(stringBuilder: StringBuilder, playResults: PlayResults) {
+        stringBuilder.append(FINAL_PROFIT_RATE_MESSAGE_FORMAT.format(playResults.profitRate))
         stringBuilder.appendLine()
     }
 }

@@ -1,14 +1,12 @@
 package lotto.domain
 
 class Lottos private constructor(val elements: List<Lotto>) {
-    fun match(winningNumber: WinningNumber): PlayResults {
-        val playResults = PlayResults()
+    fun match(winningNumber: WinningNumber): MatchResults =
         elements.map {
-            val matchResult = it.match(winningNumber)
-            playResults.add(it, matchResult)
+            it.match(winningNumber)
+        }.run {
+            MatchResults.of(this)
         }
-        return playResults
-    }
 
     companion object {
         fun of(lottos: List<Lotto>): Lottos {

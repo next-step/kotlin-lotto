@@ -6,12 +6,10 @@ import lotto.domain.MatchResult.THIRD_PLACE
 
 internal class PlayResultsTest : StringSpec({
     "등수별 당첨 수 및 수익률의 당첨 통계 정보를 산출한다." {
-        val given = PlayResults()
-        val lotto = Lotto.of(setOf(1, 2, 3, 4, 5, 6))
-        given.add(lotto, THIRD_PLACE)
+        val given = PlayResults.of(MatchResults.of(listOf(THIRD_PLACE)), 1_000)
 
         given.totalReward shouldBe THIRD_PLACE.reward
-        given.thirdPlaceCount shouldBe 1
-        given.calculateProfitRate(1_000) shouldBe 50.0
+        given[THIRD_PLACE] shouldBe 1
+        given.profitRate shouldBe 50.0
     }
 })
