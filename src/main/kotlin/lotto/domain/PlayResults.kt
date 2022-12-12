@@ -6,8 +6,7 @@ class PlayResults private constructor(matchResults: MatchResults, buyAmount: Int
     val aggregations: Map<MatchResult, Int>
         get() = _aggregations.toMap()
 
-    var totalReward: Long = INITIAL_COUNT.toLong()
-        private set
+    val totalReward: Int = matchResults.totalReward
 
     var profitRate: Double = 0.0
         private set
@@ -15,7 +14,6 @@ class PlayResults private constructor(matchResults: MatchResults, buyAmount: Int
     init {
         matchResults.elements.map {
             aggregateCount(it)
-            addReward(it)
         }
         aggregateProfitRate(buyAmount)
     }
@@ -27,10 +25,6 @@ class PlayResults private constructor(matchResults: MatchResults, buyAmount: Int
         if (matchResult.isNotNoting()) {
             _aggregations.merge(matchResult, ADDITIONAL_VALUE, Int::plus)
         }
-    }
-
-    private fun addReward(matchResult: MatchResult) {
-        totalReward += matchResult.reward
     }
 
     private fun aggregateProfitRate(buyAmount: Int) {
