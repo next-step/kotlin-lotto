@@ -1,7 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
+import lotto.domain.Lotto
 import lotto.domain.LottoPrice
 import lotto.view.InputView
 
@@ -15,10 +15,10 @@ object InputFilter {
         }
     }
 
-    fun inputWinningNumbers(): LottoNumbers {
+    fun inputWinningNumbers(): Lotto {
         return try {
             val parsedInput = InputParser.parseWithDelimiter(InputView.inputWinningNumber())
-            LottoNumbers(parsedInput.map { LottoNumber.from(it) })
+            Lotto(parsedInput.map { LottoNumber.from(it) })
         } catch (e: Exception) {
             InputView.printError(e.message!!)
             inputWinningNumbers()

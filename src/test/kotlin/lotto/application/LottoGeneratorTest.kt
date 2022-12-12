@@ -1,7 +1,7 @@
 package lotto.application
 
+import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -12,13 +12,13 @@ class LottoGeneratorTest {
     @Test
     fun `로또 번호 생성 - 개수(6개) 확인 테스트`() {
         // when, then
-        assertThat(lottoNumbers.value.size).isEqualTo(LottoNumbers.MAXIMUM_LOTTO_NUMBER_LENGTH)
+        assertThat(lottoNumbers.value.size).isEqualTo(Lotto.MAXIMUM_LOTTO_NUMBER_LENGTH)
     }
 
     @Test
     fun `로또 번호 생성 - 중복 번호 유무 확인 테스트`() {
         // when, then
-        assertThat(lottoNumbers.value.distinct().size).isEqualTo(LottoNumbers.MAXIMUM_LOTTO_NUMBER_LENGTH)
+        assertThat(lottoNumbers.value.distinct().size).isEqualTo(Lotto.MAXIMUM_LOTTO_NUMBER_LENGTH)
     }
 
     @Test

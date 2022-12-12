@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class LottoNumbersList(val value: List<LottoNumbers>) {
+value class Lottos(val value: List<Lotto>) {
     fun getList(): List<List<Int>> {
         return value.map { it.getLottoNumbers() }
     }
