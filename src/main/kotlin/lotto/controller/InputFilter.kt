@@ -5,6 +5,7 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoPrice
 import lotto.domain.Lottos
 import lotto.domain.ManualLottoCount
+import lotto.domain.WinningNumbers
 import lotto.view.InputView
 
 object InputFilter {
@@ -26,17 +27,6 @@ object InputFilter {
         }
     }
 
-    fun inputLotto(): Lotto {
-        InputView.inputWinningNumber()
-        return try {
-            val parsedInput = InputParser.parseWithDelimiter(readln())
-            Lotto(parsedInput.map { LottoNumber.from(it) })
-        } catch (e: Exception) {
-            InputView.printError(e.message!!)
-            inputLotto()
-        }
-    }
-
     fun inputLottos(count: Int): Lottos {
         InputView.inputManualLottoNumber()
         return try {
@@ -47,12 +37,14 @@ object InputFilter {
         }
     }
 
-    fun inputBonusNumber(): LottoNumber {
+    fun inputWinningNumbers(): WinningNumbers {
         return try {
-            LottoNumber.from(InputView.inputBonusNumber())
+            val winningNumbers = inputLotto()
+            val bonusNumber = inputBonusNumber()
+            return WinningNumbers(winningNumbers, bonusNumber)
         } catch (e: Exception) {
             InputView.printError(e.message!!)
-            inputBonusNumber()
+            inputWinningNumbers()
         }
     }
 
@@ -64,5 +56,25 @@ object InputFilter {
             lottos.add(lotto)
         }
         return lottos.toList()
+    }
+
+    private fun inputLotto(): Lotto {
+        InputView.inputWinningNumber()
+        return try {
+            val parsedInput = InputParser.parseWithDelimiter(readln())
+            Lotto(parsedInput.map { LottoNumber.from(it) })
+        } catch (e: Exception) {
+            InputView.printError(e.message!!)
+            inputLotto()
+        }
+    }
+
+    private fun inputBonusNumber(): LottoNumber {
+        return try {
+            LottoNumber.from(InputView.inputBonusNumber())
+        } catch (e: Exception) {
+            InputView.printError(e.message!!)
+            inputBonusNumber()
+        }
     }
 }

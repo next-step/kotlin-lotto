@@ -7,7 +7,7 @@ import lotto.domain.Lottos
 import lotto.view.InputView
 
 object LottoGenerator {
-    fun generateLottos(lottoCount: Int, manualLottos: Lottos?): Lottos {
+    fun generateLottos(lottoCount: Int, manualLottos: Lottos? = null): Lottos {
         return try {
             generateLottosWithManualLottos(manualLottos, lottoCount)
         } catch (e: Exception) {
