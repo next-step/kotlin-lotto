@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.ints.shouldBeInRange
 
-class NumberGeneratorTest : StringSpec({
+class RandomNumberGeneratorTest : StringSpec({
 
     val numberGenerator = RandomNumberGenerator()
 
@@ -18,7 +18,7 @@ class NumberGeneratorTest : StringSpec({
         // then
         randomNumbers shouldHaveSize inputSize
         randomNumbers.forEach {
-            it shouldBeInRange start..end
+            it.number shouldBeInRange start..end
         }
     }
 })

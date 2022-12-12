@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.application.common.Number
 import lotto.domain.Payment
 import lotto.util.StringValidator
 
@@ -9,7 +10,7 @@ class InputView {
         println(INPUT_PAYMENT_GUIDE)
         val payment = readln()
         validatePaymentInput(payment)
-        return Payment(payment.toInt())
+        return Payment(Number(payment.toInt()))
     }
 
     private fun validatePaymentInput(payment: String) {
@@ -17,7 +18,7 @@ class InputView {
         StringValidator.validateNumber(payment)
     }
 
-    fun inputLuckyNumbers(): List<Int> {
+    fun inputLuckyNumbers(): List<Number> {
         println(INPUT_LUCKY_NUMBERS_GUIDE)
         val luckyNumberString = readln()
         val luckyNumbers = splitNumbers(luckyNumberString)
@@ -34,14 +35,14 @@ class InputView {
         }
     }
 
-    private fun convert(split: List<String>): List<Int> {
-        return split.map { it.toInt() }
+    private fun convert(split: List<String>): List<Number> {
+        return split.map { Number(it.toInt()) }
     }
 
-    fun inputBonusNumber(): Int {
+    fun inputBonusNumber(): Number {
         println(INPUT_BONUS_BALL)
         val bonusBallNumberString = readln()
-        return bonusBallNumberString.toInt()
+        return Number(bonusBallNumberString.toInt())
     }
 
     private companion object {

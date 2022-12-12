@@ -5,31 +5,32 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 import io.kotest.matchers.shouldBe
+import lotto.application.common.Number
 
 class LottoStatisticsServiceTest : StringSpec({
 
     "당첨자 통계 통합 결과 테스트" {
         // given
-        val payment = Payment(15000)
+        val payment = Payment(Number(15000))
         forAll(
             row(
                 LottoRank.FOURTH,
                 listOf(
-                    LottoStatisticsResult(LottoRank.FIFTH, 0),
-                    LottoStatisticsResult(LottoRank.FOURTH, 1),
-                    LottoStatisticsResult(LottoRank.THIRD, 0),
-                    LottoStatisticsResult(LottoRank.SECOND, 0),
-                    LottoStatisticsResult(LottoRank.FIRST, 0),
+                    LottoStatisticsResult(LottoRank.FIFTH, Number(0)),
+                    LottoStatisticsResult(LottoRank.FOURTH, Number(1)),
+                    LottoStatisticsResult(LottoRank.THIRD, Number(0)),
+                    LottoStatisticsResult(LottoRank.SECOND, Number(0)),
+                    LottoStatisticsResult(LottoRank.FIRST, Number(0)),
                 )
             ),
             row(
                 LottoRank.FIRST,
                 listOf(
-                    LottoStatisticsResult(LottoRank.FIFTH, 0),
-                    LottoStatisticsResult(LottoRank.FOURTH, 0),
-                    LottoStatisticsResult(LottoRank.THIRD, 0),
-                    LottoStatisticsResult(LottoRank.SECOND, 0),
-                    LottoStatisticsResult(LottoRank.FIRST, 1),
+                    LottoStatisticsResult(LottoRank.FIFTH, Number(0)),
+                    LottoStatisticsResult(LottoRank.FOURTH, Number(0)),
+                    LottoStatisticsResult(LottoRank.THIRD, Number(0)),
+                    LottoStatisticsResult(LottoRank.SECOND, Number(0)),
+                    LottoStatisticsResult(LottoRank.FIRST, Number(1)),
                 )
             )
         ) { lottoResult, expected ->

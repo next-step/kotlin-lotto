@@ -1,9 +1,11 @@
 package lotto.domain
 
+import lotto.application.common.Number
+
 class Payment(
-    val payment: Int
+    val payment: Number
 ) {
     init {
-        require(payment >= 0) { "지불액은 음수가 될 수 없습니다." }
+        require(payment.isNegative().not()) { "지불액은 음수가 될 수 없습니다." }
     }
 }

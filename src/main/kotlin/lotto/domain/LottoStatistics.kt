@@ -1,11 +1,12 @@
 package lotto.domain
 
+import lotto.application.common.Number
 import lotto.util.NumberUtil
 
 class LottoStatistics(
     private val winLottoList: List<LottoRank>
 ) {
-    private val totalPrize: Int = winLottoList.sumOf { it.prizeMoney }
+    private val totalPrize: Number = Number(winLottoList.sumOf { it.prizeMoney.number })
 
     fun earningRate(inputPayment: Payment): Double {
         val earningRate = totalPrize.toDouble() / inputPayment.payment.toDouble()
@@ -18,7 +19,7 @@ class LottoStatistics(
         return LottoRank.winRanks().map {
             LottoStatisticsResult(
                 lottoRank = it,
-                winLottoCount = hitCountMap.getOrDefault(it, emptyList()).size
+                winLottoCount = Number(hitCountMap.getOrDefault(it, emptyList()).size)
             )
         }
     }

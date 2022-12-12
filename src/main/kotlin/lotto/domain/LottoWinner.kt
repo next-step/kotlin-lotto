@@ -9,5 +9,5 @@ class LottoWinner(
             .filter { hasPrize(it) }
     }
 
-    private fun hasPrize(lottoRank: LottoRank) = lottoRank.prizeMoney > 0
+    private fun hasPrize(lottoRank: LottoRank) = lottoRank.prizeMoney.isPositive()
 }

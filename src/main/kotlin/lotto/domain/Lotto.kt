@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lotto(
-    val numbers: List<Int>
+    val numbers: List<LottoNumber>
 ) {
     init {
         require(numbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 ${LOTTO_NUMBERS_SIZE}개가 필요합니다." }

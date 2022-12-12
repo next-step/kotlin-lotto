@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.application.common.Number
+
 class LottoShop(
     private val lottoGenerator: LottoGenerator
 ) {
@@ -8,8 +10,8 @@ class LottoShop(
         return lottoGenerator.generate(lottoCount)
     }
 
-    private fun calculateLottoCount(payment: Payment): Int {
-        return payment.payment / LOTTO_PRICE
+    private fun calculateLottoCount(payment: Payment): Number {
+        return Number(payment.payment.number / LOTTO_PRICE)
     }
 
     companion object {
