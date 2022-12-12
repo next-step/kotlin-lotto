@@ -12,12 +12,12 @@ class LottoTest : StringSpec({
         shouldNotThrowAny {
             Lotto(
                 setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6)
+                    LottoNumber.from(1),
+                    LottoNumber.from(2),
+                    LottoNumber.from(3),
+                    LottoNumber.from(4),
+                    LottoNumber.from(5),
+                    LottoNumber.from(6)
                 )
             )
         }
@@ -25,50 +25,23 @@ class LottoTest : StringSpec({
 
     "범위를 벗어난 로또를 생성할 시 예외를 던진다" {
         forAll(
-            row(
-                setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5)
-                )
-            ),
-            row(
-                setOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6),
-                    LottoNumber(7),
-                )
-            )
+            row(intArrayOf(1, 2, 3, 4, 5)),
+            row(intArrayOf(1, 2, 3, 4, 5, 6, 7))
         ) {
             shouldThrowAny {
-                Lotto(it)
+                Lotto(*it)
             }
         }
     }
 
     "로또에 특정 로또 번호가 존재하는지 확인한다" {
-        val lotto = Lotto(
-            setOf(
-                LottoNumber(1),
-                LottoNumber(2),
-                LottoNumber(3),
-                LottoNumber(4),
-                LottoNumber(5),
-                LottoNumber(6)
-            )
-        )
+        val lotto = Lotto(1, 2, 3, 4, 5, 6)
 
         forAll(
-            row(LottoNumber(1), true),
-            row(LottoNumber(6), true),
-            row(LottoNumber(7), false),
-            row(LottoNumber(8), false)
+            row(LottoNumber.from(1), true),
+            row(LottoNumber.from(6), true),
+            row(LottoNumber.from(7), false),
+            row(LottoNumber.from(8), false)
         ) { number, expected ->
             lotto.contains(number) shouldBe expected
         }

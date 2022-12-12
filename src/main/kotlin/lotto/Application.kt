@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.LottoResult
 import lotto.service.LottoPurchaseService
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -11,7 +10,8 @@ fun main() {
 
     OutputView.writeLottos(lottos)
 
-    val lottoResult = LottoResult(lottos, InputView.readWinningNumber())
+    val winningNumber = InputView.readWinningNumber()
+    val lottoResult = winningNumber.match(lottos)
 
-    OutputView.writeResult(lottoResult.countByLottoMatch(), lottoResult.profit(payment))
+    OutputView.writeResult(lottoResult.countByRank(), lottoResult.profit(payment))
 }

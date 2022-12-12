@@ -15,7 +15,7 @@ object InputView {
         return WinningNumber(
             readln().split(",")
                 .map { Integer.parseInt(it.trim()) }
-                .map { LottoNumber(it) }
+                .map { LottoNumber.from(it) }
                 .toSet()
         )
     }
