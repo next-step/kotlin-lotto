@@ -1,8 +1,7 @@
 package lotto.domain
 
 class PlayResults {
-    var elements: MutableList<PlayResult> = mutableListOf()
-        private set
+    private val elements: MutableList<PlayResult> = mutableListOf()
 
     var firstPlaceCount = INITIAL_COUNT
         private set
