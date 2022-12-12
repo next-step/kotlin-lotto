@@ -22,4 +22,12 @@ data class IntegerNumber(
     override fun toString(): String {
         return "$number"
     }
+
+    fun minus(other: IntegerNumber): IntegerNumber {
+        return IntegerNumber(number - other.number)
+    }
+
+    fun multiply(other: IntegerNumber): IntegerNumber {
+        return IntegerNumber(number * other.number)
+    }
 }

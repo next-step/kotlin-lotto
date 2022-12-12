@@ -16,13 +16,18 @@ class Application {
 
     fun run() {
         val inputPayment = inputView.inputPayment()
-        val lottoList = lottoShop.buyLotto(inputPayment)
+        val manualLottoCount = inputView.inputManualLottoCount()
+        val manualNumberList = inputView.inputManualLottoNumbers(manualLottoCount)
+
+        val manualLottoList = lottoShop.buyManualLotto(inputPayment, manualNumberList)
+        val autoLottoList = lottoShop.buyAutoLotto(inputPayment)
+        val lottoList = manualLottoList + autoLottoList
         resultView.printLottoList(lottoList)
 
         val inputLuckyNumbers = inputView.inputLuckyNumbers()
         val inputBonusNumber = inputView.inputBonusNumber()
 
-        val lottoResultService = LottoResultService(Lotto(inputLuckyNumbers.map { LottoNumber(it) }), LottoNumber(inputBonusNumber))
+        val lottoResultService = LottoResultService(Lotto(inputLuckyNumbers.integerNumberList.map { LottoNumber(it) }), LottoNumber(inputBonusNumber))
         val statistics = lottoResultService.inquireStatistics(inputPayment, lottoList)
         resultView.printLottoStatistics(statistics)
     }
