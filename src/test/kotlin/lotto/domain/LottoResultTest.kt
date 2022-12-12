@@ -8,7 +8,7 @@ import java.math.BigDecimal
 
 class LottoResultTest : StringSpec({
     "로또 당첨 통계를 반환한다" {
-        val winningNumber = WinningNumber(1, 2, 3, 4, 5, 6)
+        val winningNumber = WinningNumber(1, 2, 3, 4, 5, 6, bonusBall = 7)
 
         val lottoResult = winningNumber.match(
             listOf(
@@ -32,7 +32,7 @@ class LottoResultTest : StringSpec({
     }
 
     "로또 수익율을 반환한다" {
-        val winningNumber = WinningNumber(1, 2, 3, 4, 5, 6)
+        val winningNumber = WinningNumber(1, 2, 3, 4, 5, 6, bonusBall = 7)
 
         val lottoResult = winningNumber.match(
             listOf(
