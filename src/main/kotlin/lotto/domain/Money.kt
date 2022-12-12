@@ -1,6 +1,7 @@
 package lotto.domain
 
-data class Money(private val value: Int) {
+@JvmInline
+value class Money(private val value: Int) {
     init {
         require(value >= MINIMUM_MONEY_VALUE) { "금액은 0원 이상이어야 합니다." }
     }

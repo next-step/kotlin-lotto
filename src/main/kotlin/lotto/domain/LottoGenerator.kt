@@ -5,8 +5,12 @@ object LottoGenerator {
     private const val LOTTO_NUMBER_SIZE = 6
 
     fun generate(): Lotto {
-        val lottoNumbers = LOTTO_NUMBER_RANGE.shuffled().take(LOTTO_NUMBER_SIZE).map { LottoNumber.of(it) }.toSet()
-
-        return Lotto(lottoNumbers)
+        return Lotto(
+            LOTTO_NUMBER_RANGE
+                .shuffled()
+                .take(LOTTO_NUMBER_SIZE)
+                .map(LottoNumber::of)
+                .toSet()
+        )
     }
 }

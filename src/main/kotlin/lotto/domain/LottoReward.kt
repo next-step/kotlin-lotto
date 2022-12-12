@@ -9,6 +9,8 @@ enum class LottoReward(val matchCount: Int, val rewardPrice: Money) {
     ;
 
     companion object {
+        fun getRewardPriceOf(input: Int) = of(input).rewardPrice
+
         fun of(input: Int) = values().find { it.matchCount == input } ?: MATCH_MISS
     }
 }

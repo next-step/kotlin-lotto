@@ -6,10 +6,12 @@ import lotto.ui.view.ResultView
 
 fun main() {
     val purchasePrice = InputView.getPurchasePrice()
-    val purchaseLottoList = LottoController.apply(purchasePrice)
+    val purchaseLottos = LottoController.applyLotto(purchasePrice)
 
     val winningLottoNumbers = InputView.getWinningLotto()
-    val lottoResult = LottoController.draw(purchaseLottoList, winningLottoNumbers)
+    val winningLotto = LottoController.drawLotto(winningLottoNumbers)
+
+    val lottoResult = LottoController.announceLottoResult(purchaseLottos, winningLotto)
 
     ResultView.printLottoResult(lottoResult)
 }
