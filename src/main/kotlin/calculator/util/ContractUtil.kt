@@ -1,4 +1,4 @@
-package calculator.extensions
+package calculator.util
 
 
 inline fun validate(value: Boolean, lazyMessage: () -> Any) {

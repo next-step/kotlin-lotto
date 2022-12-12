@@ -1,7 +1,7 @@
 package calculator.domain
 
-sealed class ExpressionElement {
+sealed interface ExpressionElement {
 
-    class OperandElement(val value: Int) : ExpressionElement()
-    class OperatorElement(val value: Operator) : ExpressionElement()
+    class OperandElement(val value: Int) : ExpressionElement
+    class OperatorElement(val value: Operator) : ExpressionElement
 }
