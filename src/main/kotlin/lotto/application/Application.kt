@@ -21,9 +21,9 @@ class Application {
 
         val manualLottoList = lottoShop.buyManualLotto(inputPayment, manualNumberList)
         val autoLottoList = lottoShop.buyAutoLotto(inputPayment)
-        val lottoList = manualLottoList + autoLottoList
-        resultView.printLottoList(lottoList)
+        resultView.printLottoList(manualLottoList, autoLottoList)
 
+        val lottoList = manualLottoList + autoLottoList
         val inputLuckyNumbers = inputView.inputLuckyNumbers()
         val inputBonusNumber = inputView.inputBonusNumber()
 

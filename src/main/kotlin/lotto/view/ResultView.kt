@@ -8,9 +8,12 @@ import lotto.domain.LottoStatisticsTotal
 
 class ResultView {
 
-    fun printLottoList(lottoList: List<Lotto>) {
-        println("${lottoList.size}개를 구매했습니다.")
-        lottoList.forEach {
+    fun printLottoList(manualLottoList: List<Lotto>, autoLottoList: List<Lotto>) {
+        println("수동으로 ${manualLottoList.size}개, 자동으로 ${autoLottoList.size}개를 구매했습니다.")
+        manualLottoList.forEach {
+            printLotto(it)
+        }
+        autoLottoList.forEach {
             printLotto(it)
         }
         emptyLine()
