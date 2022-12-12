@@ -14,7 +14,10 @@ fun main() {
     val lottos = wallet.buyLottos()
     ResultView.printLottos(lottos)
 
-    val winningLotto = InputView.getWinningLotto()
-    val result = wallet.indicateLottoStatistics(WinningLotto.byInput(winningLotto.first, winningLotto.second))
+    val winningLottoNumbers = InputView.getWinningLottoNumbers()
+    val winningBonusNumber = InputView.getBonusNumber()
+
+    val result =
+        wallet.indicateLottoStatistics(WinningLotto.byInput(winningLottoNumbers, winningBonusNumber))
     ResultView.printResult(result)
 }
