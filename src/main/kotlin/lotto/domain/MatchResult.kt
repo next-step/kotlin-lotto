@@ -8,14 +8,18 @@ enum class MatchResult(val matchCount: Int, val reward: Int) {
     NOT_WINNING(0, 0);
 
     companion object {
+        private val MATCH_COUNT_RANGE = NOT_WINNING.matchCount..FIRST_PLACE.matchCount
+        private const val NOT_FOUND_MATCH_RESULT_ERROR_MESSAGE = "[%d]개에 일치하는 당첨 등수를 찾을 수 없습니다."
+
         fun valueOf(matchCount: Int): MatchResult {
-            return when (matchCount) {
-                6 -> FIRST_PLACE
-                5 -> SECOND_PLACE
-                4 -> THIRD_PLACE
-                3 -> FOURTH_PLACE
-                else -> NOT_WINNING
-            }
+            validateMatchCount(matchCount)
+            return values().find { it.matchCount == matchCount }
+                ?: NOT_WINNING
         }
+
+        private fun validateMatchCount(matchCount: Int) =
+            require(MATCH_COUNT_RANGE.contains(matchCount)) {
+                NOT_FOUND_MATCH_RESULT_ERROR_MESSAGE.format(matchCount)
+            }
     }
 }
