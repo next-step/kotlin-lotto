@@ -1,10 +1,10 @@
 package lotto.domain
 
 class Lotto(
-    val numbers: List<LottoNumber>
+    val lottoNumbers: List<LottoNumber>
 ) {
     init {
-        require(numbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 ${LOTTO_NUMBERS_SIZE}개가 필요합니다." }
+        require(lottoNumbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 ${LOTTO_NUMBERS_SIZE}개가 필요합니다." }
     }
 
     companion object {

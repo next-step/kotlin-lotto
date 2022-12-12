@@ -18,4 +18,8 @@ data class IntegerNumber(
     fun divide(other: IntegerNumber): IntegerNumber {
         return IntegerNumber(number.div(other.number))
     }
+
+    override fun toString(): String {
+        return "$number"
+    }
 }

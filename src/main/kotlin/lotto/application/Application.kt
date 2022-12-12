@@ -16,7 +16,7 @@ class Application {
     fun run() {
         val inputPayment = inputView.inputPayment()
         val lottoList = lottoShop.buyLotto(inputPayment)
-        resultView.printLotto(lottoList)
+        resultView.printLottoList(lottoList)
 
         val inputLuckyNumbers = inputView.inputLuckyNumbers()
         val inputBonusNumber = inputView.inputBonusNumber()

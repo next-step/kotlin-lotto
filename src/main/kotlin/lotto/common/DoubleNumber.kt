@@ -3,7 +3,7 @@ package lotto.common
 import kotlin.math.pow
 
 data class DoubleNumber(
-    val number: Double
+    private val number: Double
 ) {
     constructor(number: IntegerNumber) : this(number.number.toDouble())
 
@@ -29,5 +29,9 @@ data class DoubleNumber(
 
     fun isGreaterThanEquals(other: DoubleNumber): Boolean {
         return number >= other.number
+    }
+
+    override fun toString(): String {
+        return "$number"
     }
 }

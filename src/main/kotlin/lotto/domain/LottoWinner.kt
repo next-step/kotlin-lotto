@@ -5,7 +5,7 @@ class LottoWinner(
 ) {
     fun findWinLottoList(lottoList: List<Lotto>): List<LottoRank> {
         return lottoList
-            .map { luckyNumbers.rank(it.numbers) }
+            .map { luckyNumbers.rank(it.lottoNumbers) }
             .filter { hasPrize(it) }
     }
 
