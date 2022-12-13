@@ -12,23 +12,15 @@ class Lotto(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
     }
 
     companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
+        const val LOTTO_NUMBER_COUNT = 6
         val LOTTO_PRICE = BigDecimal(1000)
-
-        fun randomLotto(): Lotto {
-            val mutableSet = mutableSetOf<LottoNumber>()
-            while (mutableSet.size < LOTTO_NUMBER_COUNT) {
-                val lottoNumber = LottoNumber.random()
-                if (mutableSet.contains(lottoNumber)) {
-                    continue
-                }
-                mutableSet.add(lottoNumber)
-            }
-            return Lotto(mutableSet.toSet())
-        }
 
         fun of(value: List<Int>): Lotto {
             return Lotto(value.map { LottoNumber.of(it) }.toSet())
+        }
+
+        fun ofList(lottoNumbers: List<LottoNumber>): Lotto {
+            return Lotto(lottoNumbers.toSet())
         }
     }
 }

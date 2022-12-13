@@ -9,15 +9,16 @@ class LottoNumber private constructor(val value: Int) {
         private val LOTTO_NUMBER_RANGE = 1..46
         private val LOTTO_NUMBER_POOL = LOTTO_NUMBER_RANGE.associateWith(::LottoNumber)
 
-        fun random() = LOTTO_NUMBER_POOL[LOTTO_NUMBER_RANGE.random()]
-            ?: throw IllegalArgumentException()
+        fun getAllNumbers(): Collection<LottoNumber> {
+            return LOTTO_NUMBER_POOL.values
+        }
 
         fun of(value: Int): LottoNumber {
             return LOTTO_NUMBER_POOL[value] ?: throw IllegalArgumentException()
         }
 
         fun of(input: String): LottoNumber {
-            return LottoNumber(input.toInt())
+            return LOTTO_NUMBER_POOL[input.toInt()] ?: throw IllegalArgumentException()
         }
     }
 }

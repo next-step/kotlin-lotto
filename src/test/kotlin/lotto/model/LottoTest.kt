@@ -1,6 +1,6 @@
 package lotto.model
 
-import lotto.service.LottoStringParser
+import lotto.service.LottoGenerator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -39,8 +39,8 @@ class LottoTest {
         delimiter = ':'
     )
     internal fun `일치하는 번호 갯수`(input1: String, input2: String, expected: Int) {
-        val lotto1 = Lotto.of(LottoStringParser.parse(input1))
-        val lotto2 = Lotto.of(LottoStringParser.parse(input2))
+        val lotto1 = Lotto.of(LottoGenerator.parse(input1))
+        val lotto2 = Lotto.of(LottoGenerator.parse(input2))
 
         val matchCount = lotto1.getCountThatMatches(lotto2)
 
