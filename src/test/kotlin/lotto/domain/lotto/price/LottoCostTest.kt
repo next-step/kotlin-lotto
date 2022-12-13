@@ -22,13 +22,11 @@ class LottoCostTest : FunSpec({
             val expectedTicketCount = it.first / it.second
             val expectedTicketCost = it.second * expectedTicketCount
 
-            lottoCost shouldNotBe  null
+            lottoCost shouldNotBe null
             lottoCost.ticketCount shouldBe expectedTicketCount
             lottoCost.ticketCost shouldBe expectedTicketCost
         }
     }
-
-
 
     context("cost가 0보다 작으면, IllegalArgumentException") {
         withData(
@@ -45,5 +43,4 @@ class LottoCostTest : FunSpec({
             }
         }
     }
-
 })
