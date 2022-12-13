@@ -1,26 +1,28 @@
 package lotto.model
 
 import java.math.BigDecimal
-import java.math.RoundingMode
+import java.math.RoundingMode.HALF_DOWN
 
 class WinningResult(
-    val lottos: Lottos,
-    val winningNumbers: WinningNumbers
+    private val lottos: Lottos,
+    private val winningNumbers: WinningNumbers
 ) {
-    fun getReturnRatio(): BigDecimal {
-        val buyPrice = lottos.buyPrice
-        val winningPrize = getTotalPrize()
-        return winningPrize.divide(buyPrice, 2, RoundingMode.HALF_DOWN)
-    }
-
-    fun getCountOf(target: LottoPrize): Int {
-        return lottos.prizesFor(winningNumbers)
-            .count { it == target }
-    }
-
     fun getTotalPrize(): BigDecimal {
         return lottos.map { winningNumbers.prizeOf(it) }
             .map { it.prize }
             .reduce(BigDecimal::add)
+    }
+
+    fun getReturnRatio(): BigDecimal {
+        val winningPrize = getTotalPrize()
+        return winningPrize.divide(lottos.purchaseAmount, RETURN_RATIO_SCALE, HALF_DOWN)
+    }
+
+    fun getCountOf(target: LottoPrize): Int {
+        return lottos.map(winningNumbers::prizeOf).count { it == target }
+    }
+
+    companion object {
+        private const val RETURN_RATIO_SCALE = 2
     }
 }
