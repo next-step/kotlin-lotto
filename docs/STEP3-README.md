@@ -16,6 +16,7 @@
 
 ## 구현 기능 목록
 * Domain
+  * [ ] BonusNumber : 2등 추첨을 위한 보너스 볼을 표현한다.
   * [ ] WinningNumber : 보너스 볼을 포함한 당첨 번호를 표현한다. 
   * [ ] MatchResult : 2등에 대한 당첨 결과를 판별한다. 
   * [ ] PlayResult : 2등에 대한 당첨 통계를 산정한다. 
