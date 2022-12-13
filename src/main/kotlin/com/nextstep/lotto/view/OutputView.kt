@@ -1,11 +1,11 @@
 package com.nextstep.lotto.view
 
-import com.nextstep.lotto.domain.LottoTickets
+import com.nextstep.lotto.domain.Lottos
 
 class OutputView {
 
-    fun printLottoTicketCount(count: Int, lottoTickets: LottoTickets) {
+    fun printLottoTicketCount(count: Int, lottos: Lottos) {
         println("${count}개를 구매했습니다.")
-        lottoTickets.lottoTickets.forEach { println(it.getNumbers()) }
+        lottos.lottos.forEach { println(it.getNumbers()) }
     }
 }

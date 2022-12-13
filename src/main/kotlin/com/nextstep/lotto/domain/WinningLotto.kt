@@ -1,6 +1,6 @@
 package com.nextstep.lotto.domain
 
-class WinningLottoNumbers(private val numbers: List<Int>) {
+class WinningLotto(private val numbers: List<Int>) {
 
     init {
         require(numbers.size == 6) { "당첨 번호는 6개여야 합니다. size: ${numbers.size}" }

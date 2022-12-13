@@ -16,7 +16,7 @@ class LottoBallTest : BehaviorSpec({
                     row(1),
                     row(45)
                 ) { number ->
-                    shouldNotThrowAny { LottoBall(number) }
+                    shouldNotThrowAny { LottoNumber(number) }
                 }
             }
         }
@@ -27,7 +27,7 @@ class LottoBallTest : BehaviorSpec({
                     row(0),
                     row(46)
                 ) { number ->
-                    shouldThrow<IllegalArgumentException> { LottoBall(number) } shouldHaveMessage
+                    shouldThrow<IllegalArgumentException> { LottoNumber(number) } shouldHaveMessage
                             "로또 번호는 1에서 45 사이의 숫자여야 합니다. number: $number"
                 }
             }
