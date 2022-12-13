@@ -8,6 +8,7 @@ enum class MatchResult(val matchCount: Int, val reward: Int) : Comparable<MatchR
     FIFTH_PLACE(3, 5_000),
     NOT_WINNING(0, 0);
 
+    fun isSecondPlace(): Boolean = this == SECOND_PLACE
     fun isNotNoting(): Boolean = this != NOT_WINNING
 
     companion object {

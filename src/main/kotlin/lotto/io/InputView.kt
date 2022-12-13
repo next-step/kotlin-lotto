@@ -8,6 +8,8 @@ import lotto.extension.toIntSet
 object InputView {
     private const val BUY_AMOUNT_INPUT_GUIDE_MESSAGE = "구입 금액을 입력하세요"
     private const val WINNING_NUMBER_INPUT_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요."
+    private const val BONUS_NUMBER_INPUT_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요."
+
     private const val COMMA = ","
 
     fun inputBuyAmount(): BuyAmount {
@@ -40,5 +42,8 @@ object InputView {
 
     private fun inputWinningNumberSet(): Set<Int> = readln().split(COMMA).toIntSet()
 
-    private fun inputBonusNumber(): Int = readln().toInt()
+    private fun inputBonusNumber(): Int {
+        println(BONUS_NUMBER_INPUT_GUIDE_MESSAGE)
+        return readln().toInt()
+    }
 }
