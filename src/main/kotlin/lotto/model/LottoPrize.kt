@@ -6,7 +6,7 @@ import java.math.BigDecimal.valueOf
 
 enum class LottoPrize(
     val matchCount: Int,
-    val prize: BigDecimal
+    val winningAmount: BigDecimal
 ) {
     FIRST(6, valueOf(2_000_000_000)),
     SECOND(5, valueOf(1_500_000)),

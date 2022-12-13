@@ -16,7 +16,7 @@ class WinningResultTest {
 
     @Test
     internal fun `총 당청 금액을 계산한다`() {
-        assertThat(winningResult.getTotalPrize()).isEqualTo(BigDecimal(115000))
+        assertThat(winningResult.getTotalWinningAmount()).isEqualTo(BigDecimal(115000))
     }
 
     @Test

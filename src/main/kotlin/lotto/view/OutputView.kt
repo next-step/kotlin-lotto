@@ -48,6 +48,6 @@ object OutputView {
 
     private fun printPrizeCount(winningResult: WinningResult, target: LottoPrize) {
         val count = winningResult.getCountOf(target)
-        println("${target.matchCount}개 일치 (${target.prize}원) - ${count}개")
+        println("${target.matchCount}개 일치 (${target.winningAmount}원) - ${count}개")
     }
 }

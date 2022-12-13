@@ -7,19 +7,19 @@ class WinningResult(
     private val lottos: Lottos,
     private val winningNumbers: WinningNumbers
 ) {
-    fun getTotalPrize(): BigDecimal {
+    fun getTotalWinningAmount(): BigDecimal {
         return lottos.map { winningNumbers.prizeOf(it) }
-            .map { it.prize }
+            .map { it.winningAmount }
             .reduce(BigDecimal::add)
     }
 
     fun getReturnRatio(): BigDecimal {
-        val winningPrize = getTotalPrize()
-        return winningPrize.divide(lottos.purchaseAmount, RETURN_RATIO_SCALE, HALF_DOWN)
+        val amount = getTotalWinningAmount()
+        return amount.divide(lottos.purchaseAmount, RETURN_RATIO_SCALE, HALF_DOWN)
     }
 
-    fun getCountOf(target: LottoPrize): Int {
-        return lottos.map(winningNumbers::prizeOf).count { it == target }
+    fun getCountOf(prize: LottoPrize): Int {
+        return lottos.map(winningNumbers::prizeOf).count { it == prize }
     }
 
     companion object {

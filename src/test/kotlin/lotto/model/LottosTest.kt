@@ -21,7 +21,7 @@ class LottosTest {
         assertThat(winningResult.getCountOf(FIRST)).isEqualTo(1)
         assertThat(winningResult.getCountOf(FOURTH)).isEqualTo(3)
         assertThat(winningResult.getCountOf(NONE)).isEqualTo(2)
-        assertThat(winningResult.getTotalPrize()).isEqualTo(BigDecimal(2_000_015_000))
+        assertThat(winningResult.getTotalWinningAmount()).isEqualTo(BigDecimal(2_000_015_000))
         assertThat(winningResult.getReturnRatio()).isEqualTo(BigDecimal("333335.83"))
     }
 }
