@@ -4,10 +4,12 @@ import java.math.BigDecimal
 
 class Lotto private constructor(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
     init {
-        require(value.size == LOTTO_NUMBER_COUNT)
+        require(value.size == LOTTO_NUMBER_COUNT) {
+            "로또를 구성하는 숫자는 ${LOTTO_NUMBER_COUNT}개여야 합니다. value.size: ${value.size}"
+        }
     }
 
-    fun matchCount(other: Lotto): Int {
+    fun matchCountWith(other: Lotto): Int {
         return value.count(other::contains)
     }
 

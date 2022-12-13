@@ -2,7 +2,9 @@ package lotto.model
 
 class LottoNumber private constructor(val value: Int) {
     init {
-        require(value in LOTTO_NUMBER_RANGE)
+        require(value in LOTTO_NUMBER_RANGE) {
+            "로또 숫자는 ${LOTTO_NUMBER_RANGE} 범위를 벗어날 수 없습니다. value: ${value}"
+        }
     }
 
     companion object {
@@ -14,11 +16,11 @@ class LottoNumber private constructor(val value: Int) {
         }
 
         fun of(value: Int): LottoNumber {
-            return LOTTO_NUMBER_POOL[value] ?: throw IllegalArgumentException()
+            return LOTTO_NUMBER_POOL[value] ?: LottoNumber(value)
         }
 
         fun of(value: String): LottoNumber {
-            return LOTTO_NUMBER_POOL[value.toInt()] ?: throw IllegalArgumentException()
+            return LOTTO_NUMBER_POOL[value.toInt()] ?: LottoNumber(value.toInt())
         }
     }
 }
