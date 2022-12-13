@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.BuyAmount
 import lotto.domain.MatchResult.FIRST_PLACE
 import lotto.domain.PurchaseItem
-import lotto.fixture.LottoFixtureGenerator.winningNumberFixture
+import lotto.domain.WinningNumber
 
 internal class LottoServiceTest : BehaviorSpec({
     val lottoGenerator: LottoGenerator = TestLottoGenerator()
@@ -14,7 +14,7 @@ internal class LottoServiceTest : BehaviorSpec({
     given("구매 금액과 1등 당첨 번호와 1등 로또가 주어지고") {
         val buyAmount = BuyAmount.of("1000")
         val lottos = lottoGenerator.generate(buyAmount)
-        val winningNumber = winningNumberFixture(7, 1, 2, 3, 4, 5, 6)
+        val winningNumber = WinningNumber.of(setOf(1, 2, 3, 4, 5, 6), 7)
         val purchaseItem = PurchaseItem.of(buyAmount, lottos)
 
         `when`("당첨 여부를 확인하면") {

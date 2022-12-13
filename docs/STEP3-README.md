@@ -18,8 +18,8 @@
 * Domain
   * [x] WinningNumber : 2등 추첨을 위한 보너스 번호와 6개의 당첨 번호를 표현한다.
     * [x] 2등 추첨을 위한 WinningNumber 클래스 필드 수정
-      * AS-IS : Set<LottoNumber> 
-      * TO-BE : Lotto, LottoNumber
+      * AS-IS : WinningNumber.of(Set<LottoNumber>) 
+      * TO-BE : WinningNumber.of(Set<Int>, Int)
         * 문자열로 입력된 값을 도메인으로 변경하기 위해 비슷한 기능을 수행하는 함수가 각 도메인에 흩어져 관리 포인트가 증가하는 부분을 기존 설계된 객체를 재활용함으로써 개선 
     * 보너스 번호 유효성 검사
       * [x] `1~45 숫자 범위` 여부 확인

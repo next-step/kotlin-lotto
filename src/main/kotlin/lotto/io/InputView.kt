@@ -1,8 +1,6 @@
 package lotto.io
 
 import lotto.domain.BuyAmount
-import lotto.domain.Lotto
-import lotto.domain.LottoNumber
 import lotto.domain.WinningNumber
 import lotto.extension.toInt
 import lotto.extension.toIntSet
@@ -30,8 +28,8 @@ object InputView {
         do {
             println(WINNING_NUMBER_INPUT_GUIDE_MESSAGE)
             try {
-                val winningLotto = Lotto.of(inputWinningNumberSet())
-                val bonusNumber = LottoNumber.of(inputBonusNumber())
+                val winningLotto = inputWinningNumberSet()
+                val bonusNumber = inputBonusNumber()
                 winningNumber = WinningNumber.of(winningLotto, bonusNumber)
             } catch (e: IllegalArgumentException) {
                 println(e.message)
