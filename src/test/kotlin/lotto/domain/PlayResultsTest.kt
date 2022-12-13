@@ -10,6 +10,6 @@ internal class PlayResultsTest : StringSpec({
 
         given.totalReward shouldBe THIRD_PLACE.reward
         given[THIRD_PLACE] shouldBe 1
-        given.profitRate shouldBe 50.0
+        given.profitRate shouldBe 1500.0
     }
 })
