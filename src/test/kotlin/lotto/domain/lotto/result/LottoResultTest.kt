@@ -6,7 +6,6 @@ import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.shouldNotBe
 import lotto.domain.lotto.Lotto
 import lotto.domain.lotto.benefit.LottoBenefitLevel
-import lotto.domain.lotto.number.LottoNumber
 import lotto.domain.lotto.ticket.LottoAnswerTicket
 import lotto.domain.lotto.ticket.LottoTicket
 
@@ -15,9 +14,7 @@ class LottoResultTest : FunSpec({
         withData(
             (1..100).map { LottoTicket.randomGenerate() }
                 .map { randomLottoTicket ->
-                    LottoAnswerTicket(
-                        randomLottoTicket,
-                        LottoNumber.values().find { !randomLottoTicket.contains(it) })
+                    LottoAnswerTicket(randomLottoTicket)
                 }
         ) { givenLottoAnswerTicket ->
             val givenLottoCost = 1400000
@@ -36,5 +33,4 @@ class LottoResultTest : FunSpec({
             }
         }
     }
-
 })

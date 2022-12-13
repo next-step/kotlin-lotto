@@ -12,7 +12,7 @@ class LottoTicketContainerTest : FunSpec({
             nameFn = { "count=$it" },
             (1..100)
         ) { totalTicketCount ->
-            val lottoTicketContainer = LottoTicketContainer(totalTicketCount)
+            val lottoTicketContainer = LottoTicketContainer.havingSizeOf(totalTicketCount)
 
             lottoTicketContainer shouldNotBe null
             lottoTicketContainer shouldHaveSize totalTicketCount

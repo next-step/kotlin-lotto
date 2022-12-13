@@ -22,7 +22,7 @@ class Lotto(
         lottoTicketPrice = LottoTicketPrice(price)
         lottoCost = LottoCost(cost, lottoTicketPrice)
 
-        lottoTicketContainer = LottoTicketContainer(lottoCost.ticketCount)
+        lottoTicketContainer = LottoTicketContainer.havingSizeOf(lottoCost.ticketCount)
     }
 
     fun result(lottoAnswerTicket: LottoAnswerTicket): LottoResult {

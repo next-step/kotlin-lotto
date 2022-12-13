@@ -12,7 +12,7 @@ class LottoTicketResultTest : FunSpec({
     context("LottoTicketResult가 정상적으로 생성된다") {
         withData(
             nameFn = { "${it.first}개 일치, 보너스 번호 일치 여부: ${it.second}" },
-            (0..6).flatMap { listOf(it to true, it  to false) }
+            (0..6).flatMap { listOf(it to true, it to false) }
         ) { (matchCount, isBonus) ->
             val lottoTicketResult = LottoTicketResult(matchCount, isBonus)
 
@@ -25,7 +25,7 @@ class LottoTicketResultTest : FunSpec({
     context("matchCount가 (${0}..${LottoTicket.TOTAL_COUNT_LOTTO_NUMBER}) 안에 있지 않을 경우, IllegalArgumentException") {
         withData(
             nameFn = { "${it.first}개 일치, 보너스 번호 일치 여부: ${it.second}" },
-            ((-100..-1) + (7..100)).flatMap { listOf(it to true, it  to false) }
+            ((-100..-1) + (7..100)).flatMap { listOf(it to true, it to false) }
         ) { (matchCount, isBonus) ->
             assertThrows<IllegalArgumentException> {
                 LottoTicketResult(matchCount, isBonus)

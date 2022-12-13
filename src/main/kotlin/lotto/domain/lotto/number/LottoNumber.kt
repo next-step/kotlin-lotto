@@ -4,7 +4,7 @@ package lotto.domain.lotto.number
 value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
     init {
-        require(number in lottoNumberRange()) {
+        require(number in lottoNumberRange) {
             "Lotto number must be between $MIN_LOTTO_NUMBER and $MAX_LOTTO_NUMBER"
         }
     }
@@ -14,9 +14,9 @@ value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
         const val MAX_LOTTO_NUMBER = 45
 
-        private fun lottoNumberRange(): IntRange = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+        private val lottoNumberRange: IntRange = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
 
-        fun values(): List<LottoNumber> = lottoNumberRange().map { LottoNumber(it) }
+        fun values(): List<LottoNumber> = lottoNumberRange.map { LottoNumber(it) }
     }
 
     override fun compareTo(other: LottoNumber): Int {

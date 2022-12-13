@@ -31,7 +31,7 @@ class LottoBenefitTest : FunSpec({
 
                 Tuple4(benefit, cost, price, count)
             }
-        ) {(benefit, cost, price, count) ->
+        ) { (benefit, cost, price, count) ->
             val lottoBenefit = LottoBenefit(benefit, LottoCost(cost, LottoTicketPrice(price)))
 
             val expectedProfit = benefit.toDouble() / cost
@@ -42,17 +42,17 @@ class LottoBenefitTest : FunSpec({
             lottoBenefit.lottoCost.ticketCost shouldBe cost
             lottoBenefit.lottoCost.ticketCount shouldBe count
             lottoBenefit.profit shouldBeGreaterThan expectedProfit - 0.01
-            lottoBenefit.profit shouldBeLessThan  expectedProfit + 0.01
+            lottoBenefit.profit shouldBeLessThan expectedProfit + 0.01
         }
     }
 
     context("benefit이 0보다 작으면, IllegalArgumentException") {
         withData(
-            nameFn = { "benefit=${it}, cost=${it.b}, price=${it.c}" },
+            nameFn = { "benefit=${it.a}, cost=${it.b}, price=${it.c}" },
             (-1 downTo -10000 step 50).map {
                 Tuple3(it, 4500, 1000)
             }
-        ) {(benefit, cost, price) ->
+        ) { (benefit, cost, price) ->
             assertThrows<IllegalArgumentException> {
                 LottoBenefit(benefit, LottoCost(cost, LottoTicketPrice(price)))
             }

@@ -1,12 +1,13 @@
 package lotto.domain.lotto.ticket
 
 import lotto.domain.lotto.number.LottoNumber
-import lotto.domain.lotto.result.LottoTicketResult
 import lotto.domain.lotto.result.LottoResultMap
+import lotto.domain.lotto.result.LottoTicketResult
 
 class LottoAnswerTicket(
-    val answerLottoTicket: LottoTicket,
-    val bonusLottoNumber: LottoNumber? = null
+    private val answerLottoTicket: LottoTicket,
+    private val bonusLottoNumber: LottoNumber =
+        LottoNumber.values().first { !answerLottoTicket.contains(it) }
 ) {
     init {
         require(!answerLottoTicket.contains(bonusLottoNumber)) {

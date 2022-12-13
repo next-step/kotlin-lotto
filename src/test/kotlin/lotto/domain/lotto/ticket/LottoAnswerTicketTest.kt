@@ -2,9 +2,6 @@ package lotto.domain.lotto.ticket
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
-import io.kotest.matchers.collections.shouldBeSortedWith
-import io.kotest.matchers.collections.shouldContainExactly
-import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import lotto.domain.lotto.number.LottoNumber
@@ -17,12 +14,10 @@ class LottoAnswerTicketTest : FunSpec({
                 LottoTicket.randomGenerate()
             }
         ) { randomLottoTicket ->
-            val lottoAnswerTicket = LottoAnswerTicket(randomLottoTicket)
+            val bonusLottoNumber = LottoNumber.values().first { !randomLottoTicket.contains(it) }
+            val lottoAnswerTicket = LottoAnswerTicket(randomLottoTicket, bonusLottoNumber)
 
             lottoAnswerTicket shouldNotBe null
-            lottoAnswerTicket.answerLottoTicket shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
-            lottoAnswerTicket.answerLottoTicket shouldBeSortedWith Comparator.naturalOrder()
-            lottoAnswerTicket.answerLottoTicket shouldContainExactly randomLottoTicket
         }
     }
 
@@ -40,7 +35,8 @@ class LottoAnswerTicketTest : FunSpec({
             )
         ) { (lottoResultNumberList, lottoNumberList) ->
             val answerLottoTicket = LottoTicket(*lottoResultNumberList.toIntArray())
-            val lottoAnswerTicket = LottoAnswerTicket(answerLottoTicket)
+            val bonusLottoNumber = LottoNumber.values().first { !answerLottoTicket.contains(it) }
+            val lottoAnswerTicket = LottoAnswerTicket(answerLottoTicket, bonusLottoNumber)
 
             val lottoTicket = LottoTicket(lottoNumberList.toLottoNumber())
 

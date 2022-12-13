@@ -12,7 +12,7 @@ class LottoResultMapTest : FunSpec({
             nameFn = { "LottoTicketResult 갯수: ${it.size}" },
             (1..100).map { (0..it).map { randomGenerateLottoTicketResult() } }
         ) {
-           val lottoResultMap = LottoResultMap(it)
+            val lottoResultMap = LottoResultMap(it)
 
             lottoResultMap shouldNotBe null
         }
@@ -27,10 +27,9 @@ class LottoResultMapTest : FunSpec({
             lottoResultMap.winningCount(it) shouldBe 0
         }
     }
-
 })
 
 fun randomGenerateLottoTicketResult(): LottoTicketResult =
-    (0..6).flatMap { listOf(it to true, it  to false) }
-        .map{ LottoTicketResult(it.first, it.second) }
+    LottoBenefitLevel.values()
+        .map { LottoTicketResult(it.matchCount, it.isBonus) }
         .random()
