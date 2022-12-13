@@ -12,7 +12,12 @@ enum class Rank(val match: Int, val reward: Int) {
             mapOf(6 to FIRST, 5 to THIRD, 4 to FOURTH, 3 to FIFTH, 2 to NO_LUCK, 1 to NO_LUCK, 0 to NO_LUCK)
 
         fun of(number: Int): Rank {
-            return rank[number]!!
+            var selectedRank: Rank = NO_LUCK
+            try {
+                selectedRank = rank[number]!!
+            } catch (e: NullPointerException) {
+            }
+            return selectedRank
         }
     }
 }

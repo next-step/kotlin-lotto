@@ -1,5 +1,6 @@
 package lotto.model
 
+import java.lang.NullPointerException
 import kotlin.math.round
 
 class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber) {
@@ -10,6 +11,7 @@ class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNum
         ),
         0.0
     )
+
     val winningStatistics = generateWinningStatistics(lottoTickets, winnerNumber)
 
     private fun generateWinningStatistics(
@@ -27,7 +29,10 @@ class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNum
 
     private fun setGrade(count: Int) {
         val rank = Rank.of(count)
-        resultWinningStatistics.ranks[rank] = resultWinningStatistics.ranks[rank]!! + 1
+        try {
+            resultWinningStatistics.ranks[rank] = resultWinningStatistics.ranks[rank]!! + 1
+        } catch (e: NullPointerException) {
+        }
     }
 
     fun calculateRate(quantity: Int): Double {
