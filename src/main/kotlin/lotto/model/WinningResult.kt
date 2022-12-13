@@ -14,18 +14,13 @@ class WinningResult(
     }
 
     fun getCountOf(target: LottoPrize): Int {
-        return lottos.matchCounts(winningNumbers)
-            .map { LottoPrize.of(it) }
+        return lottos.prizesFor(winningNumbers)
             .count { it == target }
     }
 
     fun getTotalPrize(): BigDecimal {
-        return lottos.map { winningNumbers.matchCount(it) }
-            .map { prizeOf(it) }
+        return lottos.map { winningNumbers.prizeOf(it) }
+            .map { it.prize }
             .reduce(BigDecimal::add)
-    }
-
-    private fun prizeOf(matchCount: Int): BigDecimal {
-        return LottoPrize.of(matchCount).prize
     }
 }

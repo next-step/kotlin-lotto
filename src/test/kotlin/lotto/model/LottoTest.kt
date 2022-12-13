@@ -41,8 +41,7 @@ class LottoTest {
     internal fun `일치하는 번호 갯수`(input1: String, input2: String, expected: Int) {
         val lotto1 = LottoGenerator.fromString(input1)
         val lotto2 = LottoGenerator.fromString(input2)
-
-        val matchCount = lotto1.getCountThatMatches(lotto2)
+        val matchCount = lotto1.matchCount(lotto2)
 
         assertThat(matchCount).isEqualTo(expected)
     }

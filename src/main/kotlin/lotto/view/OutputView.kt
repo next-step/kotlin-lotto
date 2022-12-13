@@ -44,7 +44,7 @@ object OutputView {
         lottos: Lottos,
         winningNumbers: WinningNumbers
     ) {
-        val lottoPrizes = lottos.matchCounts(winningNumbers).map { LottoPrize.of(it) }
+        val lottoPrizes = lottos.prizesFor(winningNumbers)
 
         printPrizeCount(lottoPrizes, LottoPrize.FOURTH)
         printPrizeCount(lottoPrizes, LottoPrize.THIRD)

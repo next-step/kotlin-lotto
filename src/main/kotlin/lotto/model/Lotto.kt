@@ -7,8 +7,8 @@ class Lotto private constructor(val value: Set<LottoNumber>) : Set<LottoNumber> 
         require(value.size == LOTTO_NUMBER_COUNT)
     }
 
-    fun getCountThatMatches(other: Lotto): Int {
-        return value.count { other.contains(it) }
+    fun matchCount(other: Lotto): Int {
+        return value.count(other::contains)
     }
 
     companion object {

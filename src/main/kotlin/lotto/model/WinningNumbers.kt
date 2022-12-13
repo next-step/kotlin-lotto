@@ -1,7 +1,7 @@
 package lotto.model
 
-class WinningNumbers(private val numbers: Lotto) {
-    fun matchCount(lotto: Lotto): Int {
-        return numbers.getCountThatMatches(lotto)
+class WinningNumbers(private val winningLotto: Lotto) {
+    fun prizeOf(lotto: Lotto): LottoPrize {
+        return winningLotto.matchCount(lotto).let(LottoPrize::of)
     }
 }
