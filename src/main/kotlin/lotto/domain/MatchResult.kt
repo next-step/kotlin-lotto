@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class MatchResult(val matchCount: Int, val reward: Int) {
+enum class MatchResult(val matchCount: Int, val reward: Int) : Comparable<MatchResult> {
     FIRST_PLACE(6, 2_000_000_000),
     SECOND_PLACE(5, 1_500_000),
     THIRD_PLACE(4, 50_000),

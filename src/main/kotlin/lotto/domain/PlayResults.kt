@@ -31,6 +31,8 @@ class PlayResults private constructor(matchResults: MatchResults, buyAmount: Int
         private const val ADDITIONAL_VALUE: Int = 1
 
         private val INITIAL_AGGREGATIONS: MutableMap<MatchResult, Int> = MatchResult.values()
+            .asSequence()
+            .sortedBy { it.matchCount }
             .associateWith { INITIAL_COUNT }
             .run { this - MatchResult.NOT_WINNING }
             .toMutableMap()
