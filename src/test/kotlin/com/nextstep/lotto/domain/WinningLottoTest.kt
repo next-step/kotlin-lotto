@@ -25,8 +25,8 @@ class WinningLottoTest : BehaviorSpec({
 
         When("입력 받은 당첨 번호에 중복이 있다면") {
             Then("IllegalArgumentException 이 발생한다.") {
-                val numbers = intArrayOf(1, 1, 2, 3, 4, 5)
-                shouldThrow<IllegalArgumentException> { WinningLotto(*numbers) } shouldHaveMessage
+                val numbers = listOf(1, 1, 2, 3, 4, 5).map(::LottoNumber)
+                shouldThrow<IllegalArgumentException> { WinningLotto(numbers) } shouldHaveMessage
                         "당첨 번호에는 중복이 없어야 합니다. numbers: $numbers"
             }
         }
@@ -35,6 +35,26 @@ class WinningLottoTest : BehaviorSpec({
             Then("exception 발생 없이 WinningLottoNumbers 가 생성된다.") {
                 val numbers = intArrayOf(1, 2, 3, 4, 5, 6)
                 shouldNotThrowAny { WinningLotto(*numbers) }
+            }
+        }
+    }
+
+    Given("WinningLotto#match") {
+        When("Lotto를 받아서") {
+            Then("일치하는 숫자의 개수를 리턴한다") {
+                forAll(
+                    row(intArrayOf(1, 2, 3, 4, 5, 6), 6),
+                    row(intArrayOf(1, 2, 3, 4, 5, 7), 5),
+                    row(intArrayOf(1, 2, 3, 4, 8, 7), 4),
+                    row(intArrayOf(1, 2, 3, 9, 8, 7), 3),
+                    row(intArrayOf(1, 2, 10, 9, 8, 7), 2),
+                    row(intArrayOf(1, 11, 10, 9, 8, 7), 1),
+                    row(intArrayOf(12, 11, 10, 9, 8, 7), 0),
+                ) { winningNumbers, matchCount ->
+                    val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+                    val winningLotto = WinningLotto(*winningNumbers)
+                    winningLotto.match(lotto) shouldBe matchCount
+                }
             }
         }
     }

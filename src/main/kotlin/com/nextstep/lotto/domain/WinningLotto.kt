@@ -8,4 +8,8 @@ class WinningLotto(private val numbers: List<LottoNumber>) {
     }
 
     constructor(vararg numbers: Int): this(numbers.map(::LottoNumber))
+
+    fun match(lotto: Lotto): Int {
+        return numbers.count { lotto.contains(it) }
+    }
 }

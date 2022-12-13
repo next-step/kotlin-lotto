@@ -41,6 +41,21 @@ class LottoTest : BehaviorSpec({
         }
     }
 
+    Given("Lotto#contains") {
+        When("LottoNumber를 전달하면") {
+            Then("Lotto가 해당 LottoNumber를 가지고 있는지 확인한다") {
+                forAll(
+                    row(LottoNumber(1), true),
+                    row(LottoNumber(10), false),
+                ) {
+                    lottoNumber, expected ->
+                    val lotto = Lotto(1, 2, 3, 4, 5, 6)
+                    lotto.contains(lottoNumber) shouldBe expected
+                }
+            }
+        }
+    }
+
     Given("Lotto#getNumbers") {
         When("getNumber 를 호출하면") {
             Then("Lotto 가 가지고 있는 LottoBall 의 숫자들을 리턴한다") {
