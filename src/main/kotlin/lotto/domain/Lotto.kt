@@ -11,6 +11,8 @@ class Lotto private constructor(val elements: Set<LottoNumber>) {
     private fun matchCount(winningNumber: WinningNumber) =
         elements.intersect(winningNumber.lotto).size
 
+    fun contain(bonusNumber: LottoNumber): Boolean = elements.contains(bonusNumber)
+
     companion object {
         fun of(inputNumbers: Set<Int>): Lotto {
             val lottoNumbers = inputNumbers.sorted()

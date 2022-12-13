@@ -11,7 +11,7 @@ object LottoFixtureGenerator {
         return WinningNumber.of(lottoFixture, bonusNumberFixture)
     }
 
-    private fun lottoFixture(vararg inputs: Int): Lotto = Lotto.of(inputs.toSet())
+    fun lottoFixture(vararg inputs: Int): Lotto = Lotto.of(inputs.toSet())
 
     fun bonusNumberFixture(input: Int): LottoNumber = LottoNumber.of(input)
 }
