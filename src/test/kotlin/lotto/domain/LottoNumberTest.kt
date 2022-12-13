@@ -11,7 +11,7 @@ class LottoNumberTest : StringSpec({
     "로또 번호는 1~45 범위를 가진다" {
         (1..45).toList()
             .forAll {
-                shouldNotThrowAny { LottoNumber(it) }
+                shouldNotThrowAny { LottoNumber.from(it) }
             }
     }
 
@@ -20,7 +20,7 @@ class LottoNumberTest : StringSpec({
             row(0),
             row(46)
         ) {
-            shouldThrowAny { LottoNumber(it) }
+            shouldThrowAny { LottoNumber.from(it) }
         }
     }
 })
