@@ -9,13 +9,13 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 44, 45, 46])
     internal fun `로또 숫자가 생성된다`(value: Int) {
-        val lottoNumber = LottoNumber(value)
+        val lottoNumber = LottoNumber.of(value)
         assertThat(lottoNumber.value).isEqualTo(value)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [-1, 0, 47, 48])
     internal fun `로또 숫자는 1-46 범위를 넘을 수 없다`(value: Int) {
-        assertThrows<IllegalArgumentException> { LottoNumber(value) }
+        assertThrows<IllegalArgumentException> { LottoNumber.of(value) }
     }
 }

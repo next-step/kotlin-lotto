@@ -1,6 +1,6 @@
 package lotto.model
 
-data class LottoNumber(val value: Int) {
+class LottoNumber private constructor(val value: Int) {
     init {
         require(value in LOTTO_NUMBER_RANGE)
     }
@@ -11,6 +11,10 @@ data class LottoNumber(val value: Int) {
 
         fun random() = LOTTO_NUMBER_POOL[LOTTO_NUMBER_RANGE.random()]
             ?: throw IllegalArgumentException()
+
+        fun of(value: Int): LottoNumber {
+            return LOTTO_NUMBER_POOL[value] ?: throw IllegalArgumentException()
+        }
 
         fun of(input: String): LottoNumber {
             return LottoNumber(input.toInt())

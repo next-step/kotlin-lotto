@@ -9,7 +9,7 @@ class WinningNumbers(input: Set<LottoNumber>) {
 
     companion object {
         fun of(numbers: List<Int>): WinningNumbers {
-            return WinningNumbers(numbers.map { LottoNumber(it) }.toSet())
+            return WinningNumbers(numbers.map { LottoNumber.of(it) }.toSet())
         }
     }
 }

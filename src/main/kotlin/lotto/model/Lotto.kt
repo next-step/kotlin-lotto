@@ -28,7 +28,7 @@ class Lotto(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
         }
 
         fun of(value: List<Int>): Lotto {
-            return Lotto(value.map { LottoNumber(it) }.toSet())
+            return Lotto(value.map { LottoNumber.of(it) }.toSet())
         }
     }
 }
