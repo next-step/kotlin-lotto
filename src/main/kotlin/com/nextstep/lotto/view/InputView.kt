@@ -7,8 +7,8 @@ class InputView {
         return readLine()!!.toInt()
     }
 
-    fun inputWinningNumbers(): List<Int> {
+    fun inputWinningNumbers(): IntArray {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readLine()!!.split(",").map { it.toInt() }
+        return readLine()!!.split(",").map { it.toInt() }.toIntArray()
     }
 }

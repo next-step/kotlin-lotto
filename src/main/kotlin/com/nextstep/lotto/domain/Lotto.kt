@@ -10,5 +10,9 @@ class Lotto(private val numbers: List<LottoNumber>) {
         }
     }
 
+    constructor(vararg numbers: Int): this(numbers.map(::LottoNumber))
+
+    fun contains(number: LottoNumber): Boolean = numbers.contains(number)
+
     fun getNumbers(): List<Int> = numbers.map { it.value }
 }

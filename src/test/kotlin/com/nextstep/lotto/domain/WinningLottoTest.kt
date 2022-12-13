@@ -14,10 +14,10 @@ class WinningLottoTest : BehaviorSpec({
         When("입력 받은 당첨 번호가 6개가 아니면") {
             Then("IllegalArgumentException 이 발생한다.") {
                 forAll(
-                    row(listOf(1, 2, 3, 4, 5)),
-                    row(listOf(1, 2, 3, 4, 5, 6, 7))
+                    row(intArrayOf(1, 2, 3, 4, 5)),
+                    row(intArrayOf(1, 2, 3, 4, 5, 6, 7))
                 ) { numbers ->
-                    shouldThrow<IllegalArgumentException> { WinningLotto(numbers) } shouldHaveMessage
+                    shouldThrow<IllegalArgumentException> { WinningLotto(*numbers) } shouldHaveMessage
                             "당첨 번호는 6개여야 합니다. size: ${numbers.size}"
                 }
             }
@@ -25,16 +25,16 @@ class WinningLottoTest : BehaviorSpec({
 
         When("입력 받은 당첨 번호에 중복이 있다면") {
             Then("IllegalArgumentException 이 발생한다.") {
-                val numbers = listOf(1, 1, 2, 3, 4, 5)
-                shouldThrow<IllegalArgumentException> { WinningLotto(numbers) } shouldHaveMessage
+                val numbers = intArrayOf(1, 1, 2, 3, 4, 5)
+                shouldThrow<IllegalArgumentException> { WinningLotto(*numbers) } shouldHaveMessage
                         "당첨 번호에는 중복이 없어야 합니다. numbers: $numbers"
             }
         }
 
         When("서로 다른 6개의 당첨 번호가 입력되면") {
             Then("exception 발생 없이 WinningLottoNumbers 가 생성된다.") {
-                val numbers = listOf(1, 2, 3, 4, 5, 6)
-                shouldNotThrowAny { WinningLotto(numbers) }
+                val numbers = intArrayOf(1, 2, 3, 4, 5, 6)
+                shouldNotThrowAny { WinningLotto(*numbers) }
             }
         }
     }

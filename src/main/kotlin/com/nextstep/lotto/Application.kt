@@ -16,5 +16,5 @@ fun main() {
     outputView.printLottoTicketCount(lottoTickets.getCount(), lottoTickets)
 
     val winningNumbers = inputView.inputWinningNumbers()
-    val winningLotto = WinningLotto(winningNumbers)
+    val winningLotto = WinningLotto(*winningNumbers)
 }

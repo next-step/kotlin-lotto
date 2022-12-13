@@ -7,6 +7,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 
 class LottoTest : BehaviorSpec({
@@ -14,27 +15,18 @@ class LottoTest : BehaviorSpec({
     Given("Lotto 를 생성할 때") {
         When("서로 다른 6개의 LottoBall 을 전달받으면") {
             Then("exception 이 발생하지 않고 Lotto 이 생성된다.") {
-                val lottoNumbers = listOf(
-                    LottoNumber(1),
-                    LottoNumber(2),
-                    LottoNumber(3),
-                    LottoNumber(4),
-                    LottoNumber(5),
-                    LottoNumber(6)
-                )
-                shouldNotThrowAny{ Lotto(lottoNumbers) }
+                shouldNotThrowAny{ Lotto(1, 2, 3, 4, 5, 6) }
             }
         }
 
         When("전달 받은 LottoBall 이 6개가 아니면") {
             Then("IllegalArgumentException 이 발생한다.") {
                 forAll(
-                    row(listOf(1, 2, 3, 4, 5)),
-                    row(listOf(1, 2, 3, 4, 5, 6, 7))
+                    row(intArrayOf(1, 2, 3, 4, 5)),
+                    row(intArrayOf(1, 2, 3, 4, 5, 6, 7))
                 ) {
                     numbers ->
-                    val lottoNumbers = numbers.map { LottoNumber(it) }
-                    shouldThrow<IllegalArgumentException> { Lotto(lottoNumbers) } shouldHaveMessage
+                    shouldThrow<IllegalArgumentException> { Lotto(*numbers) } shouldHaveMessage
                             "6개의 LottoBall 을 입력받아야 합니다. size: ${numbers.size}"
                 }
             }
@@ -52,8 +44,7 @@ class LottoTest : BehaviorSpec({
     Given("Lotto#getNumbers") {
         When("getNumber 를 호출하면") {
             Then("Lotto 가 가지고 있는 LottoBall 의 숫자들을 리턴한다") {
-                val lottoNumbers = (1..6).map { LottoNumber(it) }
-                val lotto = Lotto(lottoNumbers)
+                val lotto = Lotto(1, 2, 3, 4, 5, 6)
                 val numbers = lotto.getNumbers()
 
                 numbers shouldHaveSize 6
