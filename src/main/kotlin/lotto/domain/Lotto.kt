@@ -9,7 +9,7 @@ class Lotto private constructor(val elements: Set<LottoNumber>) {
         }
 
     private fun matchCount(winningNumber: WinningNumber) =
-        elements.intersect(winningNumber.element).size
+        elements.intersect(winningNumber.lotto).size
 
     companion object {
         fun of(inputNumbers: Set<Int>): Lotto {

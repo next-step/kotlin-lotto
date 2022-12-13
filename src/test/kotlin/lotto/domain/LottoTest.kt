@@ -9,11 +9,12 @@ import lotto.domain.MatchResult.FOURTH_PLACE
 import lotto.domain.MatchResult.NOT_WINNING
 import lotto.domain.MatchResult.SECOND_PLACE
 import lotto.domain.MatchResult.THIRD_PLACE
+import lotto.fixture.LottoFixtureGenerator.winningNumberFixture
 
 internal class LottoTest : StringSpec({
     "당첨 번호와 비교하여 당첨 결과를 반환한다." {
         val given = Lotto.of(setOf(1, 2, 3, 4, 5, 6))
-        winningNumber.forAll { (winningNumber: WinningNumber, expected: MatchResult) ->
+        winningLotto.forAll { (winningNumber: WinningNumber, expected: MatchResult) ->
             val actual = given.match(winningNumber)
             actual shouldBe expected
         }
@@ -26,14 +27,16 @@ internal class LottoTest : StringSpec({
     }
 }) {
     companion object {
-        val winningNumber = listOf(
-            WinningNumber.of(listOf(1, 2, 3, 4, 5, 6)) to FIRST_PLACE,
-            WinningNumber.of(listOf(1, 2, 3, 4, 5, 7)) to SECOND_PLACE,
-            WinningNumber.of(listOf(1, 2, 3, 4, 7, 8)) to THIRD_PLACE,
-            WinningNumber.of(listOf(1, 2, 3, 7, 8, 9)) to FOURTH_PLACE,
-            WinningNumber.of(listOf(1, 2, 7, 8, 9, 10)) to NOT_WINNING,
-            WinningNumber.of(listOf(1, 7, 8, 9, 10, 11)) to NOT_WINNING,
-            WinningNumber.of(listOf(7, 8, 9, 10, 11, 12)) to NOT_WINNING,
+        private const val bonusNumber = 45
+        val winningLotto = listOf(
+            winningNumberFixture(bonusNumber, 1, 2, 3, 4, 5, 6) to FIRST_PLACE,
+            winningNumberFixture(bonusNumber, 1, 2, 3, 4, 5, 7) to SECOND_PLACE,
+            winningNumberFixture(bonusNumber, 1, 2, 3, 4, 7, 8) to THIRD_PLACE,
+            winningNumberFixture(bonusNumber, 1, 2, 3, 7, 8, 9) to FOURTH_PLACE,
+            winningNumberFixture(bonusNumber, 1, 2, 7, 8, 9, 10) to NOT_WINNING,
+            winningNumberFixture(bonusNumber, 1, 7, 8, 9, 10, 11) to NOT_WINNING,
+            winningNumberFixture(bonusNumber, 7, 8, 9, 10, 11, 12) to NOT_WINNING,
         )
     }
 }
+

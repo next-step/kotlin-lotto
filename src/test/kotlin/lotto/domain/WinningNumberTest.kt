@@ -5,22 +5,30 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 
 internal class WinningNumberTest : StringSpec({
-    "유효하지 못한 값인 경우 예외가 발생한다." {
-        val winningNumber = mutableListOf("1", "2", "3", "4", "5")
-        invalidLottoNumberString.forAll { (given: String) ->
+    "6개의 숫자로 구성된 당첨 번호가 유효하지 못한 경우 예외가 발생한다." {
+        val winningNumber = mutableListOf(1, 2, 3, 4, 5)
+        val bonusNumber = LottoNumber.of(7)
+
+        invalidLottoNumberString.forAll { (given: Int) ->
             winningNumber.add(given)
-            shouldThrow<IllegalArgumentException> { WinningNumber.ofStrings(winningNumber) }
+            val winningLotto = Lotto.of(winningNumber.toSet())
+
+            shouldThrow<IllegalArgumentException> { WinningNumber.of(winningLotto, bonusNumber) }
+        }
+    }
+
+    "보너스 번호가 유효하지 못한 경우 예외가 발생한다." {
+        val winningLotto = Lotto.of(setOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = LottoNumber.of(7)
+        shouldThrow<IllegalArgumentException> {
+            WinningNumber.of(winningLotto, bonusNumber)
         }
     }
 }) {
     companion object {
         val invalidLottoNumberString = listOf(
-            "" to "빈값",
-            " " to "공백",
-            "a" to "숫자가 아닌 값",
-            "-1" to "음수",
-            "0" to "1~45 범위를 벗어나는 수",
-            "46" to "1~45 범위를 벗어나는수",
+            0 to "1~45 범위를 벗어나는 수",
+            46 to "1~45 범위를 벗어나는수"
         )
     }
 }

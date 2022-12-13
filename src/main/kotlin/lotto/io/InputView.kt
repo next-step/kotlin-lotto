@@ -1,7 +1,11 @@
 package lotto.io
 
 import lotto.domain.BuyAmount
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.WinningNumber
+import lotto.extension.toInt
+import lotto.extension.toIntSet
 
 object InputView {
     private const val BUY_AMOUNT_INPUT_GUIDE_MESSAGE = "구입 금액을 입력하세요"
@@ -26,7 +30,9 @@ object InputView {
         do {
             println(WINNING_NUMBER_INPUT_GUIDE_MESSAGE)
             try {
-                winningNumber = WinningNumber.ofStrings(inputWinningNumberSet())
+                val winningLotto = Lotto.of(inputWinningNumberSet())
+                val bonusNumber = LottoNumber.of(inputBonusNumber())
+                winningNumber = WinningNumber.of(winningLotto, bonusNumber)
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
@@ -34,7 +40,7 @@ object InputView {
         return winningNumber
     }
 
-    private fun inputWinningNumberSet(): List<String> {
-        return readln().split(COMMA)
-    }
+    private fun inputWinningNumberSet(): Set<Int> = readln().split(COMMA).toIntSet()
+
+    private fun inputBonusNumber(): Int = readln().toInt()
 }
