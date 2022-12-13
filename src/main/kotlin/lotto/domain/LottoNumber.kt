@@ -1,11 +1,7 @@
 package lotto.domain
 
-class LottoNumber private constructor(private val value: Int) : Comparable<LottoNumber> {
+class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> {
     override fun compareTo(other: LottoNumber): Int = value.compareTo(other.value)
-
-    override fun toString(): String {
-        return "$value"
-    }
 
     companion object {
         private const val START_RANGE = 1

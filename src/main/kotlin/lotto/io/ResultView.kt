@@ -1,5 +1,6 @@
 package lotto.io
 
+import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.MatchResult
 import lotto.domain.PlayResults
@@ -15,7 +16,7 @@ object ResultView {
     fun printPurchaseItem(purchaseItem: PurchaseItem) {
         val stringBuilder = StringBuilder()
         formatPurchaseCount(purchaseItem.tryCount, stringBuilder)
-        formatPurchaseLotto(purchaseItem.lottos, stringBuilder)
+        formatPurchaseLottos(purchaseItem.lottos, stringBuilder)
 
         println(stringBuilder.toString())
     }
@@ -25,11 +26,17 @@ object ResultView {
         stringBuilder.append(purchaseLottoCountMessage)
     }
 
-    private fun formatPurchaseLotto(lottos: Lottos, stringBuilder: StringBuilder) {
+    private fun formatPurchaseLottos(lottos: Lottos, stringBuilder: StringBuilder) {
         lottos.elements.forEach {
-            stringBuilder.append(it)
-            stringBuilder.appendLine()
+            formatPurchaseEachLotto(it, stringBuilder)
         }
+    }
+
+    private fun formatPurchaseEachLotto(lotto: Lotto, stringBuilder: StringBuilder) {
+        val purchaseLotto = lotto.elements
+            .map { it.value }
+            .toList()
+        stringBuilder.appendLine(purchaseLotto)
     }
 
     fun printWinningStatistics(playResults: PlayResults) {

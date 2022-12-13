@@ -2,11 +2,7 @@ package lotto.domain
 
 import lotto.validator.LottoValidator.validateLottoSize
 
-class Lotto private constructor(private val elements: Set<LottoNumber>) {
-    override fun toString(): String {
-        return "$elements"
-    }
-
+class Lotto private constructor(val elements: Set<LottoNumber>) {
     fun match(winningNumber: WinningNumber): MatchResult =
         matchCount(winningNumber).let {
             MatchResult.valueOf(it)

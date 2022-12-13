@@ -130,3 +130,7 @@
     * `backing property`를 활용하여 내부에서만 가변 객체에 값을 변경하고, 외부 요청 시 불변 객체를 반환 하도록 설정 
     * `-`연산자를 이용하여 MatchResult.NOT_WINNING 항목의 집계 항목에서 제외 처리
     * get()를 operator로 정의하여 내부 값 접근 시 가독성 개선
+
+[x] Lotto, LottoNumber 도메인 로직의 뷰 로직 의존도 제거
+  * AS-IS : 구매한 로또 정보 출력을 위해 Lotto, LottoNumber에 toString을 구현함으로써 뷰 로직의 출력 형태 변경 시 출력을 위해 구현된 toString()의 내용이 변경되어야 하는 문제 발생
+  * TO-BE : 출력을 위해 구현된 toString을 제거하고, 출력되는 대상 도메인의 원소에 값을 출력하도록 수정
