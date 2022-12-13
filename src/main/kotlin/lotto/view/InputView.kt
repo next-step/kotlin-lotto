@@ -1,12 +1,26 @@
 package lotto.view
 
+import lotto.domain.Amount
+
 class InputView {
 
     companion object {
 
-        fun requireAmountOfPurchaseLotto(): Int {
+        fun requireAmountOfPurchaseLotto(): Amount {
             println("구입금액을 입력해주세요.")
+            return Amount(readInt())
+        }
+
+        fun requireCountOfPurchaseManualLotto(): Int {
+            println("수동으로 구매할 로또 수를 입력해 주세요.")
             return readInt()
+        }
+
+        fun requirePurchaseManualLottoNum(count: Int): List<String> {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+            val list: MutableList<String> = mutableListOf()
+            repeat((1..count).count()) { list.add(readString()) }
+            return list.toList()
         }
 
         fun requireWinLottoNum(): List<Int> {
@@ -14,6 +28,11 @@ class InputView {
             return readString().replace(" ", "").split(",").map {
                 stringToInt(it)
             }
+        }
+
+        fun requireWinBonusNum(): Int {
+            println("보너스 볼을 입력해주세요.")
+            return readInt()
         }
 
         private fun stringToInt(value: String): Int {

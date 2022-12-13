@@ -2,24 +2,20 @@ package lotto.domain
 
 class Statistics {
 
-    private val value: Map<Int, MutableList<Lotto>> = mutableMapOf(
-        3 to mutableListOf(),
-        4 to mutableListOf(),
-        5 to mutableListOf(),
-        6 to mutableListOf(),
-    )
+    private val value: MutableMap<Rank, MutableList<Lotto>> = mutableMapOf()
 
-    fun add(count: Int, lotto: Lotto) {
-        value[count]?.add(lotto) ?: mutableListOf(lotto)
+    fun add(rank: Rank, lotto: Lotto) {
+        value[rank]?.add(lotto) ?: init(rank).add(lotto)
     }
 
-    fun from(count: Int): List<Lotto> {
-        if(count <= 2) {
-            return emptyList()
-        }
-
-        return value[count]?.toList() ?: throw IllegalStateException()
+    fun from(rank: Rank): List<Lotto> {
+        return value[rank]?.toList() ?: init(rank).toList()
     }
 
-    fun keys(): List<Int> = listOf(3, 4, 5, 6)
+    private fun init(rank: Rank): MutableList<Lotto> {
+        val list = mutableListOf<Lotto>()
+        value[rank] = list
+        return list
+    }
+
 }

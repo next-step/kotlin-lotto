@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.*
 import lotto.domain.Lotto
 import lotto.domain.WinningMachine
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
@@ -12,12 +13,12 @@ class WinningMachineTest {
 
     @ParameterizedTest
     @MethodSource("lottoTestFixture")
-    fun `로또 번호가 몇개 일치하는지 비교한다`(count:Int, numbers: List<Int>) {
-        val winLotto = Lotto(listOf(1, 2, 3, 7, 10, 41))
+    fun `로또 번호가 몇개 일치하는지 비교한다`(rank: Rank, numbers: List<Int>) {
+        val winLotto = WinLotto(Lotto(listOf(1, 2, 3, 7, 10, 41)), LottoNum.of(9))
         val lotto = Lotto(numbers)
         val winningMachine = WinningMachine(winLotto)
-        val result = winningMachine.match(listOf(lotto))
-        assertThat(result.from(count)).contains(lotto)
+        val result = winningMachine.match(LottoIssueResult(emptyList(), listOf(lotto)))
+        assertThat(result.from(rank)).contains(lotto)
     }
 
     companion object {
@@ -25,10 +26,12 @@ class WinningMachineTest {
         @JvmStatic
         fun lottoTestFixture(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(3, listOf(1, 2, 3, 8, 11, 42)),
-                Arguments.of(4, listOf(1, 2, 3, 7, 11, 42)),
-                Arguments.of(5, listOf(1, 2, 3, 7, 11, 41)),
-                Arguments.of(6, listOf(1, 2, 3, 7, 10, 41))
+                Arguments.of(Rank.FIFTH, listOf(1, 2, 3, 8, 11, 42)),
+                Arguments.of(Rank.FOURTH, listOf(1, 2, 3, 7, 11, 42)),
+                Arguments.of(Rank.THIRD, listOf(1, 2, 3, 7, 11, 41)),
+                Arguments.of(Rank.THIRD, listOf(1, 2, 3, 7, 11, 41)),
+                Arguments.of(Rank.SECOND, listOf(1, 2, 3, 7, 9, 41)),
+                Arguments.of(Rank.FIRST, listOf(1, 2, 3, 7, 10, 41))
             )
         }
     }

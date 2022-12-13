@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Amount
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNum
@@ -12,19 +13,11 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class LottoTest {
 
-    @ParameterizedTest
-    @CsvSource(value = ["10000,10", "14000,14", "1000,1"], delimiter = ',')
-    fun `로또를 발행한다(금액 10000)`(amount: Int, count: Int) {
-        val machine = LottoMachine(RandomGenerator())
-        val lottos = machine.issue(amount)
-        assertThat(lottos.size).isEqualTo(count)
-    }
-
     @Test
     fun `로또 번호가 1~45 범위 내 무작위로 선택된다`() {
 
         val machine = LottoMachine(RandomGenerator())
-        val lotto = machine.issue(1_000)[0]
+        val lotto = machine.issue(Amount(1_000))[0]
 
         for(num in lotto) {
             assertThat(num.value).isGreaterThanOrEqualTo(1)
@@ -44,7 +37,7 @@ class LottoTest {
                 }
             }
         )
-        val lotto = machine.issue(1_000)[0]
+        val lotto = machine.issue(Amount(1_000))[0]
 
         assertThat(lotto).containsExactlyInAnyOrder(
             LottoNum.of(2), LottoNum.of(7), LottoNum.of(10),
