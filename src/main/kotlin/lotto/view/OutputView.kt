@@ -28,17 +28,28 @@ object OutputView {
         println("당첨 통계")
         println("---------")
 
+        printPrizeDetails(lottos, winningNumbers)
+        printReturnRatio(lottos, winningNumbers)
+    }
+
+    private fun printReturnRatio(
+        lottos: Lottos,
+        winningNumbers: WinningNumbers
+    ) {
+        val returnRatio = WinningResult(lottos, winningNumbers).getReturnRatio()
+        println("총 수익률은 ${returnRatio}입니다.")
+    }
+
+    private fun printPrizeDetails(
+        lottos: Lottos,
+        winningNumbers: WinningNumbers
+    ) {
         val lottoPrizes = lottos.matchCounts(winningNumbers).map { LottoPrize.of(it) }
 
         printPrizeCount(lottoPrizes, LottoPrize.FOURTH)
         printPrizeCount(lottoPrizes, LottoPrize.THIRD)
         printPrizeCount(lottoPrizes, LottoPrize.SECOND)
         printPrizeCount(lottoPrizes, LottoPrize.FIRST)
-
-        val winningResult = WinningResult(lottos, winningNumbers)
-        val returnRatio = winningResult.getReturnRatio()
-
-        println("총 수익률은 ${returnRatio}입니다.")
     }
 
     private fun printPrizeCount(lottoPrizes: List<LottoPrize>, target: LottoPrize) {
