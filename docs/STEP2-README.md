@@ -117,8 +117,8 @@
 * [x] RandomLottoGenerator, TestLottoGenerator : 구매 금액만큼 발급된 로또를 추가하기 위해 사용된 MutableMap을 선언과 동시에 초기화 하여 가변타입 사용 개선
   * List 생성자를 이용한 선언과 동시에 초기화 
 * [x] PlayResults : 
-  * var로 선언된 MutableList의 변수형 var에서 val로 변경
-  * 외부 사용처가 없는 private 접근 제한자 추가 
+  * var로 선언된 가변 객체 MutableList의 변수형을 val로 변경
+  * 외부 사용처가 없는 private 접근 제한자 추가
 
 ### 관리 포인트 최소화
 * [x] MatchResult : 일치하는 숫자 개수에 따른 당첨 등수 판별 부 수정

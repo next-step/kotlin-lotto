@@ -1,7 +1,7 @@
 package lotto.domain
 
 class PlayResults private constructor(matchResults: MatchResults, buyAmount: Int) {
-    private var _aggregations: MutableMap<MatchResult, Int> = INITIAL_AGGREGATIONS
+    private val _aggregations: MutableMap<MatchResult, Int> = INITIAL_AGGREGATIONS.toMutableMap()
 
     val aggregations: Map<MatchResult, Int>
         get() = _aggregations.toMap()
@@ -30,12 +30,12 @@ class PlayResults private constructor(matchResults: MatchResults, buyAmount: Int
         private const val INITIAL_COUNT: Int = 0
         private const val ADDITIONAL_VALUE: Int = 1
 
-        private val INITIAL_AGGREGATIONS: MutableMap<MatchResult, Int> = MatchResult.values()
+        private val INITIAL_AGGREGATIONS: Map<MatchResult, Int> = MatchResult.values()
             .asSequence()
             .sortedBy { it.matchCount }
             .associateWith { INITIAL_COUNT }
             .run { this - MatchResult.NOT_WINNING }
-            .toMutableMap()
+            .toMap()
 
         fun of(matchResults: MatchResults, buyAmount: Int): PlayResults =
             PlayResults(matchResults, buyAmount)
