@@ -1,7 +1,7 @@
 package calculator
 
 @JvmInline
-value class Number(
+value class Number private constructor(
     val value: Int,
 ) {
     companion object {
