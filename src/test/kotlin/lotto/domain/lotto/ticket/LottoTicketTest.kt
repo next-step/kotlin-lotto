@@ -11,27 +11,25 @@ import org.junit.jupiter.api.assertThrows
 class LottoTicketTest : FunSpec({
     test("로또 티켓 1장이 정상적으로 랜덤 생성된다") {
         val lottoTicket = LottoTicket.randomGenerate()
-        val lottoNumberList = lottoTicket.lottoNumberList
 
         lottoTicket shouldNotBe null
-        lottoNumberList shouldBeSortedWith Comparator.naturalOrder()
-        lottoNumberList.distinct() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
+        lottoTicket shouldBeSortedWith Comparator.naturalOrder()
+        lottoTicket.distinct() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
     }
 
     context("로또 티켓 1장이 정상적으로 생성된다") {
         withData(
             nameFn = { "LottoTicket($it)" },
-            (1..100).map { LottoTicket.randomGenerate() }
-                .map {
-                    it.lottoNumberList.map { lottoNumber ->
-                        lottoNumber.number
-                    }
-                }
+            (1..100).map {
+                LottoNumber.values()
+                    .shuffled()
+                    .take(LottoTicket.TOTAL_COUNT_LOTTO_NUMBER)
+            }
         ) { lottoNumberList ->
-            val lottoTicket = LottoTicket(1, 2, 3, 4, 5, 6)
+            val lottoTicket = LottoTicket(lottoNumberList)
             lottoTicket shouldNotBe null
-            lottoTicket.lottoNumberList shouldBeSortedWith Comparator.naturalOrder()
-            lottoTicket.lottoNumberList.distinct() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
+            lottoTicket shouldBeSortedWith Comparator.naturalOrder()
+            lottoTicket.distinct() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
         }
     }
 
@@ -39,11 +37,10 @@ class LottoTicketTest : FunSpec({
         val givenLottoNumberCount = LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
 
         val lottoTicket = LottoTicket.randomGenerate()
-        val lottoNumberList = lottoTicket.lottoNumberList
 
-        lottoNumberList shouldBeSortedWith Comparator.naturalOrder()
-        lottoNumberList shouldHaveSize givenLottoNumberCount
-        lottoNumberList.map { it.number }.distinct() shouldHaveSize givenLottoNumberCount
+        lottoTicket shouldBeSortedWith Comparator.naturalOrder()
+        lottoTicket shouldHaveSize givenLottoNumberCount
+        lottoTicket.map { it.number }.distinct() shouldHaveSize givenLottoNumberCount
     }
 
     context("로또 결과 번호 갯수가 6개가 아닐 경우, IllegalArgumentException") {

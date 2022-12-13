@@ -3,8 +3,8 @@ package lotto.domain.lotto.ticket
 import lotto.domain.lotto.number.LottoNumber
 
 data class LottoTicket(
-    val lottoNumberList: List<LottoNumber>
-) : List<LottoNumber> by lottoNumberList {
+    private val lottoNumberList: List<LottoNumber>
+) : List<LottoNumber> by lottoNumberList.sorted() {
 
     constructor(vararg lottoNumber: Int) : this(lottoNumber.toList().map { LottoNumber(it) })
 
@@ -20,7 +20,7 @@ data class LottoTicket(
         const val TOTAL_COUNT_LOTTO_NUMBER = 6
         fun randomGenerate(): LottoTicket = LottoTicket(randomShuffle())
 
-        fun randomShuffle(): List<LottoNumber> =
+        private fun randomShuffle(): List<LottoNumber> =
             LottoNumber.values()
                 .shuffled()
                 .take(TOTAL_COUNT_LOTTO_NUMBER)

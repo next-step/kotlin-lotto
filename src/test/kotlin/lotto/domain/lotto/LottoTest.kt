@@ -32,13 +32,13 @@ class LottoTest : FunSpec({
             lotto.lottoTicketContainer.toSet() shouldHaveSize expectedTicketCount
 
             lotto.lottoTicketContainer.map { lottoTicket ->
-                lottoTicket.lottoNumberList.map { lottoNumber ->
+                lottoTicket.map { lottoNumber ->
                     lottoNumber.number
                 }
             }.toSet() shouldHaveSize expectedTicketCount
 
             lotto.lottoTicketContainer.forEach { lottoTicket ->
-                lottoTicket.lottoNumberList.map { lottoNumber ->
+                lottoTicket.map { lottoNumber ->
                     lottoNumber.number
                 }.toSet() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
             }
@@ -64,13 +64,13 @@ class LottoTest : FunSpec({
             lotto.lottoTicketContainer.toSet() shouldHaveSize expectedTicketCount
 
             lotto.lottoTicketContainer.map { lottoTicket ->
-                lottoTicket.lottoNumberList.map { lottoNumber ->
+                lottoTicket.map { lottoNumber ->
                     lottoNumber.number
                 }
             }.toSet() shouldHaveSize expectedTicketCount
 
             lotto.lottoTicketContainer.forEach { lottoTicket ->
-                lottoTicket.lottoNumberList.map { lottoNumber ->
+                lottoTicket.map { lottoNumber ->
                     lottoNumber.number
                 }.toSet() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
             }
