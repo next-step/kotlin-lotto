@@ -1,8 +1,11 @@
 package lotto.model
 
+import lotto.service.LottoStringParser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class LottoTest {
     @Test
@@ -20,5 +23,27 @@ class LottoTest {
     @Test
     internal fun `로또 숫자들은 중복이 될 수 없다`() {
         assertThrows<IllegalArgumentException> { Lotto.of(listOf(1, 1, 3, 4, 5, 6)) }
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        value = [
+            "1,2,3,4,5,6 : 1,2,3,4,5,6 : 6",
+            "1,2,3,4,5,6 : 2,3,4,5,6,7 : 5",
+            "1,2,3,4,5,6 : 3,4,5,6,7,8 : 4",
+            "1,2,3,4,5,6 : 4,5,6,7,8,9 : 3",
+            "1,2,3,4,5,6 : 5,6,7,8,9,10 : 2",
+            "1,2,3,4,5,6 : 6,7,8,9,10,11 : 1",
+            "1,2,3,4,5,6 : 7,8,9,10,11,12 : 0",
+        ],
+        delimiter = ':'
+    )
+    internal fun `일치하는 번호 갯수`(input1: String, input2: String, expected: Int) {
+        val lotto1 = Lotto.of(LottoStringParser.parse(input1))
+        val lotto2 = Lotto.of(LottoStringParser.parse(input2))
+
+        val matchCount = lotto1.getCountThatMatches(lotto2)
+
+        assertThat(matchCount).isEqualTo(expected)
     }
 }

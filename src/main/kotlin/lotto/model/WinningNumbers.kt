@@ -1,12 +1,10 @@
 package lotto.model
 
 class WinningNumbers(input: Set<LottoNumber>) {
-    private val _numbers = Lotto(input)
-    val numbers: Lotto
-        get() = _numbers
+    private val numbers = Lotto(input)
 
     fun matchCount(lotto: Lotto): Int {
-        return lotto.count { _numbers.contains(it) }
+        return numbers.getCountThatMatches(lotto)
     }
 
     companion object {
