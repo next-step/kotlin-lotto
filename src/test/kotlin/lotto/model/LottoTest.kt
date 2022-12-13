@@ -10,19 +10,19 @@ import org.junit.jupiter.params.provider.CsvSource
 class LottoTest {
     @Test
     internal fun `로또 숫자들은 6개로 구성된다`() {
-        val lotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto.of(1, 2, 3, 4, 5, 6)
         assertThat(lotto.size).isEqualTo(6)
     }
 
     @Test
     internal fun `로또 숫자들이 6개가 아니면 생성되지 않는다`() {
-        assertThrows<IllegalArgumentException> { Lotto.of(listOf(1, 2, 3, 4, 5)) }
-        assertThrows<IllegalArgumentException> { Lotto.of(listOf(1, 2, 3, 4, 5, 6, 7)) }
+        assertThrows<IllegalArgumentException> { Lotto.of(1, 2, 3, 4, 5) }
+        assertThrows<IllegalArgumentException> { Lotto.of(1, 2, 3, 4, 5, 6, 7) }
     }
 
     @Test
     internal fun `로또 숫자들은 중복이 될 수 없다`() {
-        assertThrows<IllegalArgumentException> { Lotto.of(listOf(1, 1, 3, 4, 5, 6)) }
+        assertThrows<IllegalArgumentException> { Lotto.of(1, 1, 3, 4, 5, 6) }
     }
 
     @ParameterizedTest
@@ -39,8 +39,8 @@ class LottoTest {
         delimiter = ':'
     )
     internal fun `일치하는 번호 갯수`(input1: String, input2: String, expected: Int) {
-        val lotto1 = Lotto.of(LottoGenerator.parse(input1))
-        val lotto2 = Lotto.of(LottoGenerator.parse(input2))
+        val lotto1 = LottoGenerator.fromString(input1)
+        val lotto2 = LottoGenerator.fromString(input2)
 
         val matchCount = lotto1.getCountThatMatches(lotto2)
 

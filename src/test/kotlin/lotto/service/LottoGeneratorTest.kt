@@ -9,7 +9,7 @@ class LottoGeneratorTest {
     @Test
     internal fun `당첨번호는 숫자를 콤마(,)로 구분한 문자열을 받는다`() {
         val numbers = LottoGenerator.fromString("1,2,3,4,5,6")
-        val expected = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+        val expected = Lotto.of(1, 2, 3, 4, 5, 6)
         numbers shouldContainExactly expected
     }
 

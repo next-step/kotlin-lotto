@@ -17,8 +17,8 @@ class LottoNumber private constructor(val value: Int) {
             return LOTTO_NUMBER_POOL[value] ?: throw IllegalArgumentException()
         }
 
-        fun of(input: String): LottoNumber {
-            return LOTTO_NUMBER_POOL[input.toInt()] ?: throw IllegalArgumentException()
+        fun of(value: String): LottoNumber {
+            return LOTTO_NUMBER_POOL[value.toInt()] ?: throw IllegalArgumentException()
         }
     }
 }

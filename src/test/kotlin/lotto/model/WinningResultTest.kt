@@ -6,11 +6,11 @@ import java.math.BigDecimal
 
 class WinningResultTest {
     private val winningResult by lazy {
-        val none = Lotto.of(listOf(7, 8, 9, 10, 11, 12))
-        val third = Lotto.of(listOf(1, 2, 3, 4, 45, 46))
-        val fourth = Lotto.of(listOf(1, 2, 3, 44, 45, 46))
+        val none = Lotto.of(7, 8, 9, 10, 11, 12)
+        val third = Lotto.of(1, 2, 3, 4, 45, 46)
+        val fourth = Lotto.of(1, 2, 3, 44, 45, 46)
         val lottos = Lottos(listOf(none, fourth, fourth, fourth, third, third))
-        val winningNumbers = WinningNumbers.of(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = WinningNumbers(Lotto.of(1, 2, 3, 4, 5, 6))
         WinningResult(lottos, winningNumbers)
     }
 

@@ -13,6 +13,6 @@ object InputView {
     fun readWinningNumbers(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해주세요.")
         val input = readLine()!!
-        return WinningNumbers.of(LottoGenerator.parse(input))
+        return WinningNumbers(LottoGenerator.fromString(input))
     }
 }

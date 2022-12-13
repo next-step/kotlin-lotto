@@ -2,7 +2,7 @@ package lotto.model
 
 import java.math.BigDecimal
 
-class Lotto(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
+class Lotto private constructor(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
     init {
         require(value.size == LOTTO_NUMBER_COUNT)
     }
@@ -15,12 +15,16 @@ class Lotto(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
         const val LOTTO_NUMBER_COUNT = 6
         val LOTTO_PRICE = BigDecimal(1000)
 
-        fun of(value: List<Int>): Lotto {
-            return Lotto(value.map { LottoNumber.of(it) }.toSet())
+        fun of(vararg values: Int): Lotto {
+            return values.map(LottoNumber::of)
+                .toSet()
+                .let(::Lotto)
         }
 
-        fun ofList(lottoNumbers: List<LottoNumber>): Lotto {
-            return Lotto(lottoNumbers.toSet())
+        fun of(lottoNumbers: List<LottoNumber>): Lotto {
+            return lottoNumbers
+                .toSet()
+                .let(::Lotto)
         }
     }
 }
