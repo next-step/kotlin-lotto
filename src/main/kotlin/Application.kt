@@ -1,8 +1,5 @@
-import calculator.domain.Expression
-import calculator.domain.StringAddCalculator
-import calculator.view.InputView
+import lotto.controller.LottoGame
 
 fun main() {
-    val calculator = StringAddCalculator()
-    println(calculator.add(Expression(InputView().getUserInput())))
+    LottoGame().start()
 }
