@@ -2,7 +2,11 @@ package lotto.domain.lotto.ticket
 
 import lotto.domain.lotto.number.LottoNumber
 
-open class LottoTicket(val lottoNumberList: List<LottoNumber>) : List<LottoNumber> by lottoNumberList {
+data class LottoTicket(
+    private val lottoNumberList: List<LottoNumber>
+) : List<LottoNumber> by lottoNumberList.sorted() {
+
+    constructor(vararg lottoNumber: Int) : this(lottoNumber.toList().map { LottoNumber(it) })
 
     init {
         require(lottoNumberList.distinct().size == TOTAL_COUNT_LOTTO_NUMBER) {
@@ -10,11 +14,13 @@ open class LottoTicket(val lottoNumberList: List<LottoNumber>) : List<LottoNumbe
         }
     }
 
+    fun matchCount(other: LottoTicket): Int = this.intersect(other).size
+
     companion object {
         const val TOTAL_COUNT_LOTTO_NUMBER = 6
         fun randomGenerate(): LottoTicket = LottoTicket(randomShuffle())
 
-        fun randomShuffle(): List<LottoNumber> =
+        private fun randomShuffle(): List<LottoNumber> =
             LottoNumber.values()
                 .shuffled()
                 .take(TOTAL_COUNT_LOTTO_NUMBER)

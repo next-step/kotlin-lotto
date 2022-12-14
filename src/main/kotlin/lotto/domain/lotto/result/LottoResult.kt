@@ -4,5 +4,5 @@ import lotto.domain.lotto.benefit.LottoBenefit
 
 data class LottoResult(
     val lottoBenefit: LottoBenefit,
-    val lottoResultMatchCountMap: LottoResultMatchCountMap
+    val lottoResultMap: LottoResultMap
 )

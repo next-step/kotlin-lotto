@@ -1,15 +1,19 @@
 package lotto.domain.lotto.benefit
 
 import lotto.domain.lotto.price.LottoCost
-import lotto.domain.lotto.result.LottoResultMatchCountMap
+import lotto.domain.lotto.result.LottoResultMap
+import java.util.*
 
 class LottoBenefitPolicy {
 
-    fun benefit(resultCountMap: LottoResultMatchCountMap, lottoCost: LottoCost): LottoBenefit {
-        val result = resultCountMap.map { (matchCount, ticketCount) ->
-            LottoBenefitLevel.benefitPerTicketOf(matchCount) * ticketCount
-        }.sum()
+    fun benefit(resultMap: LottoResultMap, lottoCost: LottoCost): LottoBenefit {
+        val totalBenefit = positiveBenefitLevelSet().sumOf { lottoBenefitLevel ->
+            resultMap.winningCount(lottoBenefitLevel) * lottoBenefitLevel.benefitPerTicket
+        }
 
-        return LottoBenefit(result, lottoCost)
+        return LottoBenefit(totalBenefit, lottoCost)
     }
+
+    private fun positiveBenefitLevelSet(): EnumSet<LottoBenefitLevel> =
+        LottoBenefitLevel.positiveBenefitLevelSet()
 }
