@@ -14,7 +14,8 @@ class StringAddCalculatorTest {
             "111:222,333:444->1110",
             """//;\n1111;2222;3333;4444->11110""",
             """//E\n11111E22222E33333E44444->111110""",
-        ], delimiterString = "->"
+        ],
+        delimiterString = "->"
     )
     internal fun `문자열 덧셈 계산`(input: String, expected: String) {
         assertThat(StringAddCalculator.calculate(input)).isEqualTo(PositiveNumber.of(expected))
