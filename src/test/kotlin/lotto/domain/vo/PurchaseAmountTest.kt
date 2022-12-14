@@ -4,11 +4,12 @@ import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.startWith
 
 class PurchaseAmountTest : FunSpec({
     context("객체 생성") {
-        test("자연수를 입력받아 객체를 생성한다.") {
+        test("1000의 배수를 입력받아 객체를 생성한다.") {
             shouldNotThrowAny {
                 PurchaseAmount(1000)
             }
@@ -28,6 +29,15 @@ class PurchaseAmountTest : FunSpec({
             }
 
             actual.message should startWith("amount should be in units of")
+        }
+    }
+    context("countTicket()") {
+        test("인자로 받은 금액으로 나눈 티켓 장수를 반환한다.") {
+            val purchaseAmount = PurchaseAmount(1000)
+
+            val actual = purchaseAmount.countTicket(10)
+
+            actual shouldBe 100
         }
     }
 })

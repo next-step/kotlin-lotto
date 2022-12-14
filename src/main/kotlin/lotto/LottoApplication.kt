@@ -1,8 +1,8 @@
 package lotto
 
-import lotto.`in`.ConsoleInput
-import lotto.`in`.ConsoleOutPut
-import lotto.`in`.LottoController
+import lotto.controller.LottoController
+import lotto.view.ConsoleInput
+import lotto.view.ConsoleOutPut
 
 fun main() {
     val consoleInput = ConsoleInput()

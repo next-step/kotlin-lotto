@@ -7,6 +7,8 @@ value class PurchaseAmount(val amount: Int) {
         require(amount % MIN_VALUE == 0) { "amount should be in units of $MIN_VALUE" }
     }
 
+    fun countTicket(price: Int): Int = amount / price
+
     companion object {
         private const val MIN_VALUE: Int = 1000
     }
