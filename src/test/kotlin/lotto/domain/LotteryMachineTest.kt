@@ -1,10 +1,10 @@
 package lotto.domain
 
-import io.kotest.inspectors.shouldForAll
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 
 internal class LotteryMachineTest {
     lateinit var sut: LotteryMachine
@@ -27,10 +27,24 @@ internal class LotteryMachineTest {
                 val result = sut.buyLotteries(payAmount)
 
                 result.count() shouldBe howManyBought
-                result.lotteries.shouldForAll {
-                    it.numbers.size shouldBe 6
-                }
             }
         }
+    }
+
+    @Test
+    fun getResult() {
+
+        val result = sut.getResult(
+            Lotteries(
+                Lottery(1, 2, 13, 14, 15, 16),
+                Lottery(11, 12, 13, 4, 5, 6),
+                Lottery(1, 2, 3, 14, 15, 16)
+            ),
+            Lottery(1, 2, 3, 4, 5, 6)
+        )
+        assertAll(
+            { result.matchCount(2) shouldBe 1 },
+            { result.matchCount(3) shouldBe 2 }
+        )
     }
 }

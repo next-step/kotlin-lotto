@@ -9,8 +9,13 @@ class LotteryMachine {
     }
 
     fun getResult(lotteries: Lotteries, lastWinningLottery: Lottery): LotteryResult {
+        return LotteryResult(
+            lotteries.lotteries.map { it.countSameLottoNumbers(lastWinningLottery) }.toList()
+        )
+    }
 
-        return LotteryResult()
+    fun calculateReturnRate(payAmount: Int, lotteryResult: LotteryResult): Double {
+        return 0.1
     }
 
     companion object {

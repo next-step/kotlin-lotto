@@ -1,23 +1,35 @@
 package lotto.domain
 
 data class Lotteries(val lotteries: List<Lottery>) {
+    constructor(vararg lotteries: Lottery) : this(lotteries.toList())
+
     fun count(): Int {
         return lotteries.size
     }
 }
 
 class Lottery(numbers: List<LottoNumber>) {
-    val numbers: List<LottoNumber>
+    private val numbers: List<LottoNumber>
+
+    constructor(vararg inputNumbers: Int) : this(inputNumbers.map { LottoNumber.of(it) }.toList())
 
     init {
         require(numbers.size == 6)
         this.numbers = numbers.sorted()
     }
+
+    fun countSameLottoNumbers(other: Lottery): Int {
+        return this.numbers.count { other.numbers.contains(it) }
+    }
+
+    fun getLottoNumbers(): List<Int> {
+        return numbers.map { it.value }.toList()
+    }
 }
 
-class LottoNumber private constructor(val number: Int) : Comparable<LottoNumber> {
+class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> {
     init {
-        require(number in (1..45))
+        require(value in (1..45))
     }
 
     companion object {
@@ -27,7 +39,7 @@ class LottoNumber private constructor(val number: Int) : Comparable<LottoNumber>
             return NUMBERS
         }
 
-        fun getInstance(number: Int): LottoNumber {
+        fun of(number: Int): LottoNumber {
             require(number - 1 in (NUMBERS.indices))
 
             return NUMBERS[number - 1]
@@ -35,7 +47,7 @@ class LottoNumber private constructor(val number: Int) : Comparable<LottoNumber>
     }
 
     override fun toString(): String {
-        return "LottoNumber(number=$number)"
+        return "LottoNumber(number=$value)"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -44,16 +56,16 @@ class LottoNumber private constructor(val number: Int) : Comparable<LottoNumber>
 
         other as LottoNumber
 
-        if (number != other.number) return false
+        if (value != other.value) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return number
+        return value
     }
 
     override fun compareTo(other: LottoNumber): Int {
-        return this.number.compareTo(other.number)
+        return this.value.compareTo(other.value)
     }
 }

@@ -15,11 +15,11 @@ fun main() {
     println("${lotteries.count()}개를 구매했습니다.")
 
     for (it in lotteries.lotteries) {
-        println("[${it.numbers.joinToString(", ", transform = { t -> t.number.toString() })}]")
+        println("[${it.getLottoNumbers().joinToString(", ")}]")
     }
     println("지난 주 당첨 번호를 입력해 주세요.")
     val inputNumbers = readLine()?.split(",")?.map { it.toInt() }?.toList() ?: throw IllegalArgumentException()
-    val lastWinningLottery = Lottery(inputNumbers.map { LottoNumber.getInstance(it) }.toList())
+    val lastWinningLottery = Lottery(inputNumbers.map { LottoNumber.of(it) }.toList())
 
     val result = lotteryMachine.getResult(lotteries, lastWinningLottery)
     println(
@@ -30,7 +30,7 @@ fun main() {
         |4개 일치 (50000원)- ${result.matchCount(4)}개
         |5개 일치 (1500000원)- ${result.matchCount(5)}개
         |6개 일치 (2000000000원)- ${result.matchCount(6)}개
-        |총 수익률은 ${result.returnRate}입니다.
+        |총 수익률은 ${lotteryMachine.calculateReturnRate(payAmount, result)}입니다.
         """.trimIndent()
     )
 }
