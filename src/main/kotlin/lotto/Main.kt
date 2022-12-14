@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.domain.Lottery
 import lotto.domain.LotteryMachine
+import lotto.domain.LottoNumber
 
 fun main() {
     val lotteryMachine = LotteryMachine()
@@ -13,10 +15,11 @@ fun main() {
     println("${lotteries.count()}개를 구매했습니다.")
 
     for (it in lotteries.lotteries) {
-        println("$it")
+        println("[${it.numbers.joinToString(", ", transform = { t -> t.number.toString() })}]")
     }
     println("지난 주 당첨 번호를 입력해 주세요.")
-    val lastWinningLottery = readLine()?.split(",")?.map { it.toInt() }?.toList() ?: throw IllegalArgumentException()
+    val inputNumbers = readLine()?.split(",")?.map { it.toInt() }?.toList() ?: throw IllegalArgumentException()
+    val lastWinningLottery = Lottery(inputNumbers.map { LottoNumber.getInstance(it) }.toList())
 
     val result = lotteryMachine.getResult(lotteries, lastWinningLottery)
     println(
@@ -28,6 +31,6 @@ fun main() {
         |5개 일치 (1500000원)- ${result.matchCount(5)}개
         |6개 일치 (2000000000원)- ${result.matchCount(6)}개
         |총 수익률은 ${result.returnRate}입니다.
-        """
+        """.trimIndent()
     )
 }
