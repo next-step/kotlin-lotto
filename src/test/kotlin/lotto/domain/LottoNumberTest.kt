@@ -16,22 +16,22 @@ internal class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 4, 43, 44, 45])
     fun number(number: Int) {
-        LottoNumber.getInstance(number).number shouldBe number
+        LottoNumber.of(number).value shouldBe number
     }
 
     @DisplayName("로또 번호는 1-45 사이의 값이여야 한다")
     @ParameterizedTest
     @ValueSource(ints = [0, -1, 46, 50, 100])
     fun getInstanceFailIfNotLottoNumber(number: Int) {
-        shouldThrow<IllegalArgumentException> { LottoNumber.getInstance(number) }
+        shouldThrow<IllegalArgumentException> { LottoNumber.of(number) }
     }
 
     @DisplayName("값 객체이다")
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 4, 43, 44, 45])
     fun getInstance(number: Int) {
-        val sut = LottoNumber.getInstance(number)
-        val other = LottoNumber.getInstance(number)
+        val sut = LottoNumber.of(number)
+        val other = LottoNumber.of(number)
 
         assertAll(
             { sut shouldBe other },
@@ -49,8 +49,8 @@ internal class LottoNumberTest {
             3 to -1,
         ).map { (compareTo, compareResult) ->
             {
-                val sut = LottoNumber.getInstance(2)
-                val other = LottoNumber.getInstance(compareTo)
+                val sut = LottoNumber.of(2)
+                val other = LottoNumber.of(compareTo)
 
                 sut.compareTo(other) shouldBe compareResult
             }

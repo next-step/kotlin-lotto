@@ -1,8 +1,8 @@
 package lotto.domain
 
-class LotteryResult() {
-    val returnRate: Double = 0.1
+class LotteryResult(private val countSameLottoNumber: List<Int>) {
+
     fun matchCount(howMany: Int): Int {
-        return 0
+        return countSameLottoNumber.count { it == howMany }
     }
 }
