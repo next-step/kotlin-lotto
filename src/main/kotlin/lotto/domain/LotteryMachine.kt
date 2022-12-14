@@ -8,7 +8,7 @@ class LotteryMachine {
         return Lotteries(lotteryList)
     }
 
-    fun getResult(lotteries: Lotteries, lastWinningLottery: List<Int>): LotteryResult {
+    fun getResult(lotteries: Lotteries, lastWinningLottery: Lottery): LotteryResult {
 
         return LotteryResult()
     }
