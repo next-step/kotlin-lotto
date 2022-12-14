@@ -18,7 +18,10 @@ fun main() {
 
     val winningNumber =
         WinningNumber(InputView.inputMessageSplitWithComma().map { LottoNumber.from(it.toInt()) }.toSet())
-    val result = lottoTickets.calculateResult(winningNumber)
+
+    OutputView.printBonusBallMessage()
+    val bonusBallInput = InputView.inputMessage()
+    val result = lottoTickets.calculateResult(winningNumber, LottoNumber.from(bonusBallInput.toInt()))
 
     OutputView.printWinningStatMessage()
     OutputView.printResult(result)

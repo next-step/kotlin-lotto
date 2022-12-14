@@ -17,6 +17,10 @@ object OutputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
     }
 
+    fun printBonusBallMessage() {
+        println("보너스 볼을 입력해 주세요.")
+    }
+
     fun printWinningStatMessage() {
         println("당첨 통계\n" + "---------")
     }
@@ -35,7 +39,11 @@ object OutputView {
             .filter { it != Rank.MISS }
             .sortedDescending()
             .forEach {
-                sb.append("${it.matchCount}개 일치 (${it.winningMoney}원) - ${result.result[it] ?: 0}개\n")
+                sb.append("${it.matchCount}개 일치")
+                if (Rank.SECOND == it) {
+                    sb.append(", 보너스 볼 일치 ")
+                }
+                sb.append(" (${it.winningMoney}원) - ${result.result[it] ?: 0}개\n")
             }
         print(sb)
     }
