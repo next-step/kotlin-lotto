@@ -9,6 +9,10 @@ class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
         return LOTTO_TICKET_COUNT - lottoNumbers.subtract(winningNumber.winningNumbers).size
     }
 
+    fun containsBonus(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(lottoNumber)
+    }
+
     fun getLottoNumbers(): Set<LottoNumber> {
         return lottoNumbers.sorted().toSet()
     }
