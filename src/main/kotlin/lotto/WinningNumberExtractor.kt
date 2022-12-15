@@ -3,7 +3,7 @@ package lotto
 import lotto.domain.LottoTicket
 import lotto.domain.LottoWinning
 
-class WinningNumberExtractor {
+object WinningNumberExtractor {
     fun process(tickets: List<LottoTicket>, winningNumbers: Set<Int>): LottoWinning {
         val resultMap = mutableMapOf<Int, Int>()
         tickets.forEach { ticket ->

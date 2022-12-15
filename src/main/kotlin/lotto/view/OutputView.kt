@@ -1,14 +1,17 @@
 package lotto.view
 
-import lotto.StatisticalResultExtractor
+import lotto.domain.StatisticalResultExtractor
 import lotto.domain.WinningAmount
 
 object OutputView {
+    private const val OUTPUT_START_NUMBER = 3
+    private const val OUTPUT_END_NUMBER = 6
     fun printOutput(statisticalResultExtractor: StatisticalResultExtractor, ticketCount: Int) {
+
         println("당첨 통계")
         println("---------")
 
-        (3..6).forEach { key ->
+        (OUTPUT_START_NUMBER..OUTPUT_END_NUMBER).forEach { key ->
             val matchCount = statisticalResultExtractor.getMatchCount(key)
             println("$key 개 일치 (${WinningAmount.from(key).amount})- $matchCount")
         }

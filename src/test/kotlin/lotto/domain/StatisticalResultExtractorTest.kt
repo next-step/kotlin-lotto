@@ -1,8 +1,7 @@
-package lotto
+package lotto.domain
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoWinning
 
 internal class StatisticalResultExtractorTest : BehaviorSpec({
     Given("로또 당첨 개수가 ") {

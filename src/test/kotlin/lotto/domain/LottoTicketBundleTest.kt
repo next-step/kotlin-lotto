@@ -5,10 +5,10 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
 internal class LottoTicketBundleTest : StringSpec({
-    "로또 n장 묶음을 만들 수 있다." {
-        val ticketSize = 5
-        val lottoTicketBundle = LottoTicketBundle(ticketSize)
+    "로또 n개를 만들 수 있다." {
+        val amount = 5000
+        val lottoTicketBundle = LottoTicketBundle(amount)
         lottoTicketBundle shouldNotBe null
-        lottoTicketBundle.lottoTickets.size shouldBe ticketSize
+        lottoTicketBundle.lottoTickets.size shouldBe 5
     }
 })
