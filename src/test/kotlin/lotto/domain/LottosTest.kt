@@ -9,7 +9,8 @@ import lotto.domain.MatchResult.THIRD_PLACE
 
 internal class LottosTest : StringSpec({
     "전체 로또와 당첨 번호를 비교하여 당첨 결과 목록을 반환한다." {
-        val winningNumber: WinningNumber = WinningNumber.of(listOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = 7
+        val winningNumber: WinningNumber = WinningNumber.of(setOf(1, 2, 3, 4, 5, 6), bonusNumber)
         val actual = lottos.match(winningNumber)
 
         actual.elements.containsAll(listOf(FIRST_PLACE, SECOND_PLACE, THIRD_PLACE, FOURTH_PLACE, NOT_WINNING))

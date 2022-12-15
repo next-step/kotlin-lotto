@@ -117,8 +117,8 @@
 * [x] RandomLottoGenerator, TestLottoGenerator : 구매 금액만큼 발급된 로또를 추가하기 위해 사용된 MutableMap을 선언과 동시에 초기화 하여 가변타입 사용 개선
   * List 생성자를 이용한 선언과 동시에 초기화 
 * [x] PlayResults : 
-  * var로 선언된 MutableList의 변수형 var에서 val로 변경
-  * 외부 사용처가 없는 private 접근 제한자 추가 
+  * var로 선언된 가변 객체 MutableList의 변수형을 val로 변경
+  * 외부 사용처가 없는 private 접근 제한자 추가
 
 ### 관리 포인트 최소화
 * [x] MatchResult : 일치하는 숫자 개수에 따른 당첨 등수 판별 부 수정
@@ -130,3 +130,7 @@
     * `backing property`를 활용하여 내부에서만 가변 객체에 값을 변경하고, 외부 요청 시 불변 객체를 반환 하도록 설정 
     * `-`연산자를 이용하여 MatchResult.NOT_WINNING 항목의 집계 항목에서 제외 처리
     * get()를 operator로 정의하여 내부 값 접근 시 가독성 개선
+
+[x] Lotto, LottoNumber 도메인 로직의 뷰 로직 의존도 제거
+  * AS-IS : 구매한 로또 정보 출력을 위해 Lotto, LottoNumber에 toString을 구현함으로써 뷰 로직의 출력 형태 변경 시 출력을 위해 구현된 toString()의 내용이 변경되어야 하는 문제 발생
+  * TO-BE : 출력을 위해 구현된 toString을 제거하고, 출력되는 대상 도메인의 원소에 값을 출력하도록 수정

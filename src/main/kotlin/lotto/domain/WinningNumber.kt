@@ -1,21 +1,19 @@
 package lotto.domain
 
-import lotto.validator.LottoValidator.validateLottoSize
-import lotto.validator.NumberValidator.toInt
+class WinningNumber private constructor(winningLotto: Lotto, val bonusNumber: LottoNumber) {
+    val winningLotto = winningLotto.elements
 
-class WinningNumber private constructor(val element: Set<LottoNumber>) {
     companion object {
-        fun of(inputNumbers: List<Int>): WinningNumber {
-            val winningNumber = inputNumbers.map { LottoNumber.of(it) }.toSet()
-            validateLottoSize(winningNumber)
-            return WinningNumber(winningNumber)
+        private const val DUPLICATED_BONUS_NUMBER_ERROR_MESSAGE = "보너스 번호는 6개의 당첨 번호와 중복될 수 없습니다. : [%d]"
+
+        fun of(inputWinningLotto: Set<Int>, inputBonusNumber: Int): WinningNumber {
+            val winningLotto = Lotto.of(inputWinningLotto)
+            val bonusNumber = LottoNumber.of(inputBonusNumber)
+            validateBonusNumber(winningLotto, bonusNumber)
+            return WinningNumber(winningLotto, bonusNumber)
         }
 
-        fun ofStrings(inputStrings: List<String>): WinningNumber =
-            inputStrings.map {
-                toInt(it)
-            }.run {
-                of(this)
-            }
+        private fun validateBonusNumber(winningLotto: Lotto, bonusNumber: LottoNumber): Unit =
+            require(!winningLotto.contain(bonusNumber)) { DUPLICATED_BONUS_NUMBER_ERROR_MESSAGE.format(bonusNumber.value) }
     }
 }
