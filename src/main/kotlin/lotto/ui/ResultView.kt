@@ -30,12 +30,13 @@ class ResultView {
         Rank.values().forEach { rank: Rank ->
             if (rank == Rank.NO_MATCH) return@forEach
 
+            val count = winningResult.getOrDefault(rank, 0)
+
             val matchCountString = "${rank.matchCount}개 일치"
-            val matchBonusString = ", 보너스 볼 일치"
-            val matchPrizeString = "(${rank.prize}원)- ${winningResult.getOrDefault(rank, 0)}개"
+            val matchPrizeString = "(${rank.prize}원)- ${count}개"
 
             val text = if (rank == Rank.SECOND_GRADE) {
-                "$matchCountString$matchBonusString$matchPrizeString"
+                "$matchCountString, 보너스 볼 일치$matchPrizeString"
             } else {
                 "$matchCountString $matchPrizeString"
             }

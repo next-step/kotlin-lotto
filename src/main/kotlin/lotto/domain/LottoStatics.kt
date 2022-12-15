@@ -15,16 +15,9 @@ class LottoStatics(private val ranks: List<Rank> = emptyList()) {
     }
 
     private fun calculateWinningCount(): Map<Rank, Int> {
-        val result = mutableMapOf(
-            Rank.FIRST_GRADE to 0,
-            Rank.SECOND_GRADE to 0,
-            Rank.THIRD_GRADE to 0,
-            Rank.FOURTH_GRADE to 0,
-            Rank.FIFTH_GRADE to 0,
-            Rank.NO_MATCH to 0,
-        )
+        val result = mutableMapOf<Rank, Int>()
         ranks.forEach { rank ->
-            result[rank] = result[rank]?.inc() ?: 0
+            result[rank] = result[rank]?.inc() ?: 1
         }
         return result
     }
