@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.domain.lotto.Lotto
 import lotto.domain.lotto.ticket.LottoAnswerTicket
 import lotto.infra.io.LottoInputReader
+import lotto.view.CustomLottoTicketInputView
 import lotto.view.LottoAnswerInputView
 import lotto.view.LottoBonusNumberInputView
 import lotto.view.LottoCostInputView
@@ -15,6 +16,7 @@ class LottoController(
     private val lottoAnswerInputView: LottoAnswerInputView = LottoAnswerInputView(),
     private val lottoBonusNumberInputView: LottoBonusNumberInputView = LottoBonusNumberInputView(),
     private val lottoCostInputView: LottoCostInputView = LottoCostInputView(),
+    private val customLottoTicketInputView: CustomLottoTicketInputView = CustomLottoTicketInputView(),
     private val lottoInputReader: LottoInputReader = LottoInputReader()
 ) {
 
@@ -22,7 +24,21 @@ class LottoController(
         lottoCostInputView.printLottoCostInputView()
 
         val lottoCost = lottoInputReader.readLottoCost()
-        val lotto = Lotto(lottoCost.inputCost)
+
+        customLottoTicketInputView.printCustomLottoTicketCountInputView()
+        val customLottoTicketCount = lottoInputReader.readCustomLottoTicketCount()
+
+        if (customLottoTicketCount > 0) {
+            customLottoTicketInputView.printCustomLottoTicketInputView()
+        }
+
+        val customLottoTicketList =
+            lottoInputReader.readCustomLottoTicketList(customLottoTicketCount)
+
+        val lotto = Lotto(
+            cost = lottoCost.inputCost,
+            customLottoTicketList = customLottoTicketList
+        )
 
         lottoView.printLottoView(lotto)
 

@@ -18,5 +18,23 @@ class LottoInputReader {
         return LottoTicket(readLine().split(",").map { LottoNumber(it.trim().toInt()) })
     }
 
+    fun readCustomLottoTicketCount(): Int {
+        val count =  readln().trim().toInt()
+
+        require(count >= 0) {
+            "Custom Lotto Ticket Count should be greater or equal than 0 [$count]"
+        }
+
+        return count
+    }
+
+    fun readCustomLottoTicketList(count: Int): List<LottoTicket> {
+        require(count >= 0) {
+            "Custom Lotto Ticket Count should be greater or equal than 0 [$count]"
+        }
+
+        return (0 until count).map { readLottoTicket() }
+    }
+
     private fun readLine(): String = readln().trim()
 }
