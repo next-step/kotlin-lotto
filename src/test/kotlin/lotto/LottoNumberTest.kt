@@ -1,6 +1,7 @@
 package lotto
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldBeSortedWith
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.types.shouldBeInstanceOf
@@ -20,6 +21,11 @@ class LottoNumberTest : FunSpec({
                     value shouldBeInRange (1..45)
                 }
             }
+        }
+
+        test("번호는 오름차순으로 정렬되어 있다.") {
+            val sut = LottoNumber.generate()
+            sut.numbers shouldBeSortedWith { a, b -> a - b }
         }
     }
 })

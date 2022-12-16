@@ -7,6 +7,7 @@ class LottoNumber private constructor(val numbers: List<Int>) {
         fun generate(): LottoNumber {
             val randomNumbers = (1..LOTTO_NUMBER_SIZE)
                 .map { LOTTO_NUMBER_RANGE.random() }
+                .sorted()
             return LottoNumber(numbers = randomNumbers)
         }
     }
