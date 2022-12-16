@@ -5,6 +5,7 @@ import io.kotest.matchers.collections.shouldBeSortedWith
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.ints.shouldBeInRange
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
@@ -73,6 +74,17 @@ class LottoNumberTest : FunSpec({
                         actual.numbers shouldBeSortedWith { a, b -> a - b }
                     }
                 }
+            }
+        }
+    }
+
+    context("로또 번호 당첨 비교") {
+        context("당첨 번호를 전달하면") {
+            test("맞춘 갯수를 구할 수 있다.") {
+                val winningNumber = WinningNumber.from(listOf(10, 20, 30, 15, 25, 35))
+                val sut = LottoNumber.manualGenerate(listOf(10, 20, 30, 1, 2, 3))
+                val actual = sut.matchCount(winningNumber = winningNumber)
+                actual shouldBe 3
             }
         }
     }
