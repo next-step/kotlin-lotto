@@ -27,5 +27,12 @@ class LottoNumberTest : FunSpec({
             val sut = LottoNumber.generate()
             sut.numbers shouldBeSortedWith { a, b -> a - b }
         }
+
+        test("번호는 중복된 숫자를 가질 수 없다.") {
+            repeat(100) {
+                val sut = LottoNumber.generate()
+                sut.numbers.toSet() shouldHaveSize 6
+            }
+        }
     }
 })
