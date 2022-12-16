@@ -28,16 +28,13 @@ class LottoController(
         customLottoTicketInputView.printCustomLottoTicketCountInputView()
         val customLottoTicketCount = lottoInputReader.readCustomLottoTicketCount()
 
-        if (customLottoTicketCount > 0) {
-            customLottoTicketInputView.printCustomLottoTicketInputView()
-        }
-
+        customLottoTicketInputView.printCustomLottoTicketInputView()
         val customLottoTicketList =
             lottoInputReader.readCustomLottoTicketList(customLottoTicketCount)
 
         val lotto = Lotto(
             cost = lottoCost.inputCost,
-            customLottoTicketList = customLottoTicketList
+            customLottoTickets = customLottoTicketList
         )
 
         lottoView.printLottoView(lotto)

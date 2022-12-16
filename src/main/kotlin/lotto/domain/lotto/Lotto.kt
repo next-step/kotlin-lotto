@@ -13,14 +13,14 @@ import lotto.domain.lotto.ticket.LottoTicketContainer
 class Lotto(
     cost: Int,
     price: Int = LottoTicketPrice.DEFAULT_LOTTO_TICKET_PRICE,
-    customLottoTicketList: List<LottoTicket> = emptyList()
+    customLottoTickets: List<LottoTicket> = emptyList()
 ) {
     val lottoTicketContainer: LottoTicketContainer
     val lottoTicketPrice: LottoTicketPrice
     private val lottoCost: LottoCost
     private val lottoBenefitPolicy: LottoBenefitPolicy = LottoBenefitPolicy()
 
-    val customLottoTicketCount: Int = customLottoTicketList.size
+    val customLottoTicketCount: Int = customLottoTickets.size
 
     val randomGeneratedLottoTicketCount: Int
         get() = lottoTicketContainer.size - customLottoTicketCount
@@ -29,14 +29,14 @@ class Lotto(
         lottoTicketPrice = LottoTicketPrice(price)
         lottoCost = LottoCost(cost, lottoTicketPrice)
 
-        require(customLottoTicketList.size <= lottoCost.ticketCount) {
+        require(customLottoTickets.size <= lottoCost.ticketCount) {
             "Custom lotto ticket list size should be less or equal than total ticket count " +
-                    "[${customLottoTicketList.size} <= ${lottoCost.ticketCount}]"
+                    "[${customLottoTickets.size} <= ${lottoCost.ticketCount}]"
         }
 
         lottoTicketContainer = LottoTicketContainer.havingSizeOf(
             ticketCount = lottoCost.ticketCount,
-            customLottoTicketList = customLottoTicketList
+            customLottoTicketList = customLottoTickets
         )
     }
 
