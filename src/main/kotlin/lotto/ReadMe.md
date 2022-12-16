@@ -64,6 +64,7 @@
 - LottoUsedTicket : 번호가 정해진 로또 티켓
 - LottoUsedTickets : LottoUsedTicket의 일급 컬렉션
 - LottoWinTicket : 당첨 번호를 들고있는 로또 티켓
+- LottoStore : 로또 판매점. 현금을 받고 로또 티켓과 잔액을 돌려줌
 
 ## 구현 순서
 - [x] LottoNumber, LottoNumbers
@@ -72,3 +73,4 @@
 - [x] LottoWinTicket
 - [x] LottoUsedTicket, LottoUsedTickets
 - [x] LottoUnusedTicket, LottoUnusedTickets
+- [x] LottoStore

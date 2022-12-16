@@ -12,9 +12,9 @@ class LottoNumbers(
     }
 
     fun matches(inputNumbers: LottoNumbers): Int {
-        return numbers.filter { number ->
+        return numbers.count { number ->
             inputNumbers.numbers.contains(number)
-        }.size
+        }
     }
 
     override fun toString(): String {

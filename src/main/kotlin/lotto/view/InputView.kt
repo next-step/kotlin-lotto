@@ -3,11 +3,16 @@ package lotto.view
 import lotto.domain.Cash
 import lotto.domain.LottoWinTicket
 
-object InputViewImpl {
+object InputView {
 
     fun readCash(): Cash {
         println("구입금액을 입력해 주세요.")
-        return Cash(readln())
+        val input = try {
+            readln().toInt()
+        } catch (e: NumberFormatException) {
+            error("현금은 숫자여야합니다.")
+        }
+        return Cash(input)
     }
 
     fun readWinNumber(): LottoWinTicket {

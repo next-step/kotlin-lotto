@@ -1,27 +1,28 @@
 package lotto
 
-import lotto.view.InputViewImpl
-import lotto.view.OutputViewImpl
+import lotto.domain.LottoStore
+import lotto.view.InputView
+import lotto.view.OutputView
 
 class LottoController {
 
     fun buy() {
-        val inputCash = InputViewImpl.readCash()
+        val inputCash = InputView.readCash()
 
-        val (restCash, unusedTickets) = inputCash.buyTickets()
+        val (restCash, unusedTickets) = LottoStore.buyLotto(inputCash)
         val ticketCount = unusedTickets.getTicketCount()
-        OutputViewImpl.displayTicketCount(ticketCount)
+        OutputView.displayTicketCount(ticketCount)
 
         val (usedTickets, _) = unusedTickets.toAuto(ticketCount)
-        OutputViewImpl.displayTickets(usedTickets)
+        OutputView.displayTickets(usedTickets)
 
-        val winTicket = InputViewImpl.readWinNumber()
+        val winTicket = InputView.readWinNumber()
 
         val rewards = usedTickets.evaluate(winTicket)
-        OutputViewImpl.displayRewards(rewards)
+        OutputView.displayRewards(rewards)
 
         val rewardCash = rewards.exchange()
         val profitRate = rewardCash.divide(inputCash.subtract(restCash))
-        OutputViewImpl.displayProfitRate(profitRate)
+        OutputView.displayProfitRate(profitRate)
     }
 }

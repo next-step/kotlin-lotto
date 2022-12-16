@@ -11,11 +11,12 @@ class CashTest : FunSpec({
     context("Cash") {
         val cash = Cash(1000)
 
-        test("buyTickets") {
-            val (restCash, tickets) = cash.buyTickets()
+        test("fun buy()") {
+            val price = 1000
+            val (rest, count) = cash.buy(price)
 
-            restCash shouldBe Cash(0)
-            tickets.getTicketCount() shouldBe 1
+            rest shouldBe Cash(0)
+            count shouldBe 1
         }
 
         test("subtract") {
