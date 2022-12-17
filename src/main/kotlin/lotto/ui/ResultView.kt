@@ -2,14 +2,13 @@ package lotto.ui
 
 import lotto.domain.LottoDispenser
 import lotto.domain.LottoStatics
-import lotto.domain.model.Lotto
 import lotto.domain.model.Rank
 
 class ResultView {
 
-    fun showPurchaseResult(lottoList: List<Lotto>) {
-        println("${lottoList.size}개를 구매했습니다.")
-        lottoList.forEach { println(it) }
+    fun showPurchaseResult(lottoDispenser: LottoDispenser) {
+        println("수동으로 ${lottoDispenser.manualLottoList.size}장, 자동으로 ${lottoDispenser.autoLottoList.size}개를 구매했습니다.")
+        lottoDispenser.lottoList.forEach { println(it) }
     }
 
     fun showResult(dispenser: LottoDispenser) {

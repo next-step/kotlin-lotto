@@ -8,10 +8,13 @@ fun main() {
     val inputView = InputView()
 
     val amount = inputView.inputPurchasingAmount()
-    val dispenser = LottoDispenser(amount)
+    val manualLottoCount = inputView.inputManualLottoCount()
+    val manualLottoNumberText: List<String> = inputView.inputManualLottoNumbers(manualLottoCount)
+
+    val dispenser = LottoDispenser(amount, manualLottoNumberText)
 
     val resultView = ResultView()
-    resultView.showPurchaseResult(dispenser.lottoList)
+    resultView.showPurchaseResult(dispenser)
 
     dispenser.winningNumbers = inputView.inputWinningNumbers()
     dispenser.bonusNumber = inputView.inputBonusNumber()

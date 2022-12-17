@@ -42,4 +42,25 @@ class InputView {
             inputBonusNumber()
         }
     }
+
+    fun inputManualLottoCount(): Int {
+        println()
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readlnOrNull()?.toIntOrNull() ?: 0
+    }
+
+    fun inputManualLottoNumbers(manualCount: Int): List<String> {
+        println()
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(manualCount) {
+            inputManualLottoNumber()
+        }
+    }
+
+    private fun inputManualLottoNumber(): String {
+        val lottoNumbersText = readlnOrNull() ?: ""
+        return lottoNumbersText.ifBlank {
+            inputManualLottoNumber()
+        }
+    }
 }
