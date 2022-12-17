@@ -7,6 +7,12 @@ class LottoTicketBundle(private val tickets: List<LottoTicket>) {
 
     fun getTickets(): List<LottoTicket> = this.tickets
 
+    fun getWinningTickets(): List<WinningTicket> {
+        return this.tickets
+            .filter { it.status.isWinStatus() }
+            .map { WinningTicket.from(lottoTicket = it) }
+    }
+
     companion object {
         fun purchase(payment: Int): LottoTicketBundle {
             val amount = payment / LottoTicket.LOTTO_TICKET_PRICE

@@ -44,4 +44,20 @@ class LottoTicketBundleTest : FunSpec({
             }
         }
     }
+
+    context("당첨 티켓 조회") {
+        test("여러 개의 티켓에서 당첨 티켓만을 조회할 수 있다.") {
+            val winningNumber = WinningNumber.from(listOf(5, 10, 15, 20, 30, 40))
+            val manualNumbers = listOf(
+                LottoNumber.manualGenerate(listOf(5, 10, 15, 20, 25, 30)),
+                LottoNumber.manualGenerate(listOf(5, 10, 20, 30, 40, 45))
+            )
+
+            val sut = LottoTicketBundle.purchase(payment = 2000, manualNumbers)
+            sut.match(winningNumber = winningNumber)
+            val actual = sut.getWinningTickets()
+
+            actual shouldHaveSize 2
+        }
+    }
 })
