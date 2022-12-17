@@ -1,10 +1,9 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import lotto.domain.Ticket
 import lotto.domain.enums.TicketStatus
 import lotto.domain.policy.DefaultPricePolicy
 import lotto.domain.policy.LotteryNumberAutoGenerateStrategy

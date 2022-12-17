@@ -1,12 +1,11 @@
-package lotto
+package lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 import lotto.common.value.Money
 import lotto.common.value.Quantity
-import lotto.domain.Order
-import lotto.domain.Tickets
 import lotto.domain.enums.TicketType
 import lotto.domain.policy.DefaultPricePolicy
 
@@ -26,6 +25,17 @@ class OrderTest : FreeSpec({
         "주문이 완료되면 티켓의 상태가 발급으로 변경된다" {
             order.complete()
             shouldThrow<IllegalStateException> { tickets.issue() }
+        }
+
+        "티켓의 수량을 확인할 수 있다" {
+            val ticketCount = order.countTicket()
+            ticketCount shouldBe quantity.value
+        }
+
+        "티켓의 추첨번호 리스트를 확인할 수 있다" {
+            val lotteryNumbersList = order.toLotteryNumbers()
+            lotteryNumbersList.shouldNotBeNull()
+            lotteryNumbersList.size shouldBe quantity.value
         }
     }
 

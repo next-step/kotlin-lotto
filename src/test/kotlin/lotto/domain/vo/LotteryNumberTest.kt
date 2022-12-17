@@ -1,9 +1,8 @@
-package lotto.vo
+package lotto.domain.vo
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
-import lotto.domain.vo.LotteryNumber
 
 class LotteryNumberTest : FreeSpec({
     "추첨 번호를 생성할 수 있다" {

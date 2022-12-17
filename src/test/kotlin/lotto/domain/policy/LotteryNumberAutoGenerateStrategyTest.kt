@@ -1,9 +1,8 @@
-package lotto.policy
+package lotto.domain.policy
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import lotto.domain.policy.LotteryNumberAutoGenerateStrategy
 import lotto.domain.vo.LotteryNumber
 import lotto.domain.vo.LotteryNumbers
 
