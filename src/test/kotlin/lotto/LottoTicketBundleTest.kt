@@ -15,7 +15,7 @@ class LottoTicketBundleTest : FunSpec({
             val lottoTicketBundle = LottoTicketBundle(tickets = tickets)
             val actual = lottoTicketBundle.match(winningNumber = winningNumber)
             actual.forEach { ticket ->
-                ticket.lottoStatus shouldBe LottoStatus.WIN
+                ticket.status shouldBe LottoTicketStatus.WIN
                 ticket.matchCount shouldBe 4
             }
         }

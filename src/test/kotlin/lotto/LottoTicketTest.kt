@@ -22,7 +22,7 @@ class LottoTicketTest : FunSpec({
                 val actual = LottoTicket.purchase(payment = 1000)
                 actual shouldNotBe null
                 actual.lottoNumber shouldNotBe null
-                actual.lottoStatus shouldBe LottoStatus.WAITING
+                actual.status shouldBe LottoTicketStatus.WAITING
                 actual.matchCount shouldBe 0
             }
         }
@@ -35,7 +35,7 @@ class LottoTicketTest : FunSpec({
                     val actual = LottoTicket.purchase(payment = 1000, manualNumber = lottoNumber)
 
                     actual.lottoNumber.numbers shouldContainExactly lottoNumber.numbers
-                    actual.lottoStatus shouldBe LottoStatus.WAITING
+                    actual.status shouldBe LottoTicketStatus.WAITING
                     actual.matchCount shouldBe 0
                 }
             }
@@ -51,7 +51,7 @@ class LottoTicketTest : FunSpec({
 
                 actual.match(winningNumber = winningNumber)
 
-                actual.lottoStatus shouldBe LottoStatus.WIN
+                actual.status shouldBe LottoTicketStatus.WIN
                 actual.matchCount shouldBe 3
             }
         }

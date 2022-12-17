@@ -2,17 +2,17 @@ package lotto
 
 class LottoTicket private constructor(
     val lottoNumber: LottoNumber,
-    lottoStatus: LottoStatus = LottoStatus.WAITING,
+    status: LottoTicketStatus = LottoTicketStatus.WAITING,
     matchCount: Int = 0,
 ) {
-    var lottoStatus = lottoStatus
+    var status = status
         private set
     var matchCount = matchCount
         private set
 
     fun match(winningNumber: WinningNumber) {
         val matchCount = lottoNumber.matchCount(winningNumber = winningNumber)
-        this.lottoStatus = LottoStatus.from(matchCount = matchCount)
+        this.status = LottoTicketStatus.from(matchCount = matchCount)
         this.matchCount = matchCount
     }
 
