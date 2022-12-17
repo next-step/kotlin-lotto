@@ -1,9 +1,10 @@
 package lotto.domain
 
-import lotto.common.Money
-import lotto.common.Quantity
+import lotto.common.value.Money
+import lotto.common.value.Quantity
 import lotto.domain.enums.TicketType
 import lotto.domain.policy.PricePolicy
+import lotto.domain.vo.LotteryNumbers
 
 class Tickets(
     private val tickets: List<Ticket>
@@ -16,6 +17,9 @@ class Tickets(
     fun issue() {
         this.tickets.forEach { it.issue() }
     }
+
+    fun toLotteryNumbers(): List<LotteryNumbers> = this.tickets.map { it.lotteryNumbers }
+    fun size(): Int = this.tickets.size
 
     companion object {
         fun from(quantity: Quantity, pricePolicy: PricePolicy, ticketType: TicketType): Tickets {

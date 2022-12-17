@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.common.Money
+import lotto.common.value.Money
 import lotto.domain.enums.OrderStatus
 
 class Order(
@@ -18,4 +18,8 @@ class Order(
         tickets.issue()
         this.status = OrderStatus.COMPLETE
     }
+
+    fun toLotteryNumbers() = tickets.toLotteryNumbers()
+
+    fun countTicket() = this.tickets.size()
 }
