@@ -1,9 +1,5 @@
-package lotto.controller
+package lotto.domain
 
-import lotto.domain.Lotto
-import lotto.domain.LottoNumber
-import lotto.domain.Lottos
-import lotto.domain.WinningNumbers
 import lotto.dto.LottoRankDto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest

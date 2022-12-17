@@ -1,9 +1,6 @@
-package lotto.controller
+package lotto.domain
 
-import lotto.domain.Lotto
 import lotto.domain.Lotto.Companion.MAXIMUM_LOTTO_NUMBER_LENGTH
-import lotto.domain.LottoNumber
-import lotto.domain.Lottos
 import lotto.view.InputView
 
 object LottoGenerator {

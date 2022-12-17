@@ -1,5 +1,7 @@
 package lotto.controller
 
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoResultGenerator
 import lotto.dto.LottoResultDto
 import lotto.view.ResultView
 
