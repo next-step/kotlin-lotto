@@ -20,16 +20,13 @@ class InputView {
     fun inputWinningNumbers(): WinningNumbers {
         println("")
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val input = readlnOrNull() ?: ""
-
-        val winningNumbers: WinningNumbers
-        try {
-            winningNumbers = WinningNumbers(winningNumberText = input)
-        } catch (e: Exception) {
-            return inputWinningNumbers()
+        val winningNumberText = readlnOrNull() ?: ""
+        val isValid = LottoNumberValidator.validate(winningNumberText)
+        return if (isValid) {
+            WinningNumbers(winningNumberText)
+        } else {
+            inputWinningNumbers()
         }
-
-        return winningNumbers
     }
 
     fun inputBonusNumber(): LottoNumber {
