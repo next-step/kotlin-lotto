@@ -1,11 +1,8 @@
 package lotto
 
 class LottoTicketBundle(private val tickets: List<LottoTicket>) {
-    fun match(winningNumber: WinningNumber): List<LottoTicket> {
-        return tickets.map { ticket ->
-            ticket.match(winningNumber = winningNumber)
-            ticket
-        }
+    fun match(winningNumber: WinningNumber) {
+        this.tickets.forEach { it.match(winningNumber = winningNumber) }
     }
 
     fun getTickets(): List<LottoTicket> = this.tickets
@@ -16,6 +13,23 @@ class LottoTicketBundle(private val tickets: List<LottoTicket>) {
             val tickets = (1..amount)
                 .map { LottoTicket.purchase(payment = LottoTicket.LOTTO_TICKET_PRICE) }
             return LottoTicketBundle(tickets = tickets)
+        }
+
+        fun purchase(payment: Int, manualNumbers: List<LottoNumber>): LottoTicketBundle {
+            val totalAmount = payment / LottoTicket.LOTTO_TICKET_PRICE
+            val autoAmount = totalAmount - manualNumbers.size
+
+            val manualTickets = manualNumbers
+                .map {
+                    LottoTicket.purchase(
+                        payment = LottoTicket.LOTTO_TICKET_PRICE,
+                        manualNumber = it,
+                    )
+                }
+            val autoTickets = (1..autoAmount)
+                .map { LottoTicket.purchase(payment = LottoTicket.LOTTO_TICKET_PRICE) }
+
+            return LottoTicketBundle(tickets = manualTickets.plus(autoTickets))
         }
     }
 }

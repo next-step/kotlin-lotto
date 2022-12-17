@@ -1,5 +1,6 @@
 package lotto
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
@@ -13,9 +14,9 @@ class LottoTicketBundleTest : FunSpec({
                 LottoTicket.purchase(1000, lottoNumber),
                 LottoTicket.purchase(1000, lottoNumber),
             )
-            val lottoTicketBundle = LottoTicketBundle(tickets = tickets)
-            val actual = lottoTicketBundle.match(winningNumber = winningNumber)
-            actual.forEach { ticket ->
+            val sut = LottoTicketBundle(tickets = tickets)
+            sut.match(winningNumber = winningNumber)
+            sut.getTickets().forEach { ticket ->
                 ticket.status shouldBe LottoTicketStatus.WIN
                 ticket.matchCount shouldBe 4
             }
@@ -27,6 +28,19 @@ class LottoTicketBundleTest : FunSpec({
             test("여러 개의 티켓을 한 번에 구매할 수 있다.") {
                 val actual = LottoTicketBundle.purchase(payment = 14500)
                 actual.getTickets() shouldHaveSize 14
+            }
+
+            context("수동 번호를 함께 전달하면") {
+                test("수동 번호를 포함한 여러 개의 티켓을 한 번에 구매할 수 있다.") {
+                    val manualNumbers = listOf(
+                        LottoNumber.manualGenerate(listOf(5, 10, 15, 20, 25, 30)),
+                        LottoNumber.manualGenerate(listOf(5, 10, 20, 30, 40, 45))
+                    )
+
+                    val actual = LottoTicketBundle.purchase(payment = 14500, manualNumbers = manualNumbers)
+                    actual.getTickets() shouldHaveSize 14
+                    actual.getTickets().map { it.lottoNumber } shouldContainAll manualNumbers
+                }
             }
         }
     }
