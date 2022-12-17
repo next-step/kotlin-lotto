@@ -2,6 +2,7 @@ package lotto.domain.lotto
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.doubles.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
@@ -29,19 +30,31 @@ class LottoTest : FunSpec({
             val expectedTicketCount = cost.div(lotto.lottoTicketPrice.price)
             lotto.lottoTicketContainer shouldHaveSize expectedTicketCount
 
-            lotto.lottoTicketContainer.toSet() shouldHaveSize expectedTicketCount
-
-            lotto.lottoTicketContainer.map { lottoTicket ->
-                lottoTicket.map { lottoNumber ->
-                    lottoNumber.number
-                }
-            }.toSet() shouldHaveSize expectedTicketCount
-
-            lotto.lottoTicketContainer.forEach { lottoTicket ->
-                lottoTicket.map { lottoNumber ->
-                    lottoNumber.number
-                }.toSet() shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
+            lotto.lottoTicketContainer.forEach {
+                it shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
             }
+        }
+    }
+
+    context("비용과 수동 로또 티겟을 입력받아서, 로또 생성이 가능하다") {
+        val givenLottoTicketPrice = 1000
+        val maxLottoTicketCount = 20
+        val givenLottoCost = givenLottoTicketPrice * maxLottoTicketCount
+
+        withData(
+            nameFn = { "Lotto($it)" },
+            (0..maxLottoTicketCount).map { lottoTicketListHavingSizeOf(it) }
+        ) { customLottoTicketList ->
+            val lotto = Lotto(givenLottoCost, givenLottoTicketPrice, customLottoTicketList)
+
+            val expectedTicketCount = givenLottoCost.div(givenLottoTicketPrice)
+            lotto.lottoTicketContainer shouldHaveSize expectedTicketCount
+
+            lotto.lottoTicketContainer.forEach {
+                it shouldHaveSize LottoTicket.TOTAL_COUNT_LOTTO_NUMBER
+            }
+
+            lotto.lottoTicketContainer shouldContainAll customLottoTicketList
         }
     }
 
@@ -141,3 +154,13 @@ class LottoTest : FunSpec({
         }
     }
 })
+
+fun lottoTicketListHavingSizeOf(count: Int): List<LottoTicket> {
+    require(count >= 0) {
+        "$count should be greater or equal than 0"
+    }
+
+    return (1..count)
+        .map { LottoTicket.randomGenerate() }
+        .toList()
+}

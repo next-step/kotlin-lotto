@@ -16,9 +16,11 @@ class LottoResultView {
     }
 
     private fun printLottoResultMatchCountMap(lottoResultMap: LottoResultMap) {
-        for (lottoBenefitLevel in LottoBenefitLevel.positiveBenefitLevelSet().sortedWith(compareBy({ it.matchCount }, { it.isBonus }))) {
-            println("${lottoBenefitLevel.description()}- ${lottoResultMap.winningCount(lottoBenefitLevel)}개")
-        }
+        LottoBenefitLevel.positiveBenefitLevelSet()
+            .sortedWith(compareBy({ it.matchCount }, { it.isBonus }))
+            .forEach { benefitLevel ->
+                println("${benefitLevel.description()}- ${lottoResultMap.winningCount(benefitLevel)}개")
+            }
     }
 
     private fun printLottoBenefit(lottoBenefit: LottoBenefit) {

@@ -3,7 +3,7 @@ package lotto.domain.lotto.ticket
 import java.util.stream.Stream
 import kotlin.streams.toList
 
-class LottoTicketContainer constructor(
+class LottoTicketContainer(
     private val lottoTicketList: List<LottoTicket>
 ) : List<LottoTicket> by lottoTicketList {
 
@@ -14,8 +14,21 @@ class LottoTicketContainer constructor(
     }
 
     companion object {
-        fun havingSizeOf(ticketCount: Int): LottoTicketContainer =
-            LottoTicketContainer(randomGenerate(ticketCount))
+        fun havingSizeOf(ticketCount: Int, customLottoTicketList: List<LottoTicket> = emptyList()): LottoTicketContainer {
+            val remainingTicketCount = ticketCount - customLottoTicketList.size
+
+            require(remainingTicketCount >= 0) {
+                "Ticket count should be greater or equal than custom lotto ticket list " +
+                        "[$ticketCount >= ${customLottoTicketList.size}]"
+            }
+
+            return LottoTicketContainer(
+                if (remainingTicketCount > 0)
+                    customLottoTicketList + randomGenerate(remainingTicketCount)
+                else
+                    customLottoTicketList
+            )
+        }
 
         private fun randomGenerate(ticketCount: Int): List<LottoTicket> {
             require(ticketCount > 0) {
@@ -23,7 +36,6 @@ class LottoTicketContainer constructor(
             }
 
             return Stream.generate { LottoTicket.randomGenerate() }
-                .distinct()
                 .limit(ticketCount.toLong())
                 .toList()
         }
