@@ -10,10 +10,12 @@ enum class Rank(val krw: KRW, val countOfMatch: Int, val matchBonus: Boolean) {
 
     companion object {
         fun valueOf(matchResult: MatchResult): Rank {
+            if (matchResult.countOfMatch == SECOND.countOfMatch && matchResult.matchBonus == SECOND.matchBonus) {
+                return SECOND
+            }
             return when {
                 (matchResult.countOfMatch == FIRST.countOfMatch) -> FIRST
-                (matchResult.countOfMatch == SECOND.countOfMatch) && matchResult.matchBonus -> SECOND
-                (matchResult.countOfMatch == SECOND.countOfMatch) && !matchResult.matchBonus -> THIRD
+                (matchResult.countOfMatch == THIRD.countOfMatch) -> THIRD
                 (matchResult.countOfMatch == FOURTH.countOfMatch) -> FOURTH
                 (matchResult.countOfMatch == FIFTH.countOfMatch) -> FIFTH
                 else -> MISS
