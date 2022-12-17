@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.policy
 
 import lotto.common.Money
 
@@ -6,13 +6,11 @@ sealed interface PricePolicy {
     fun apply(): Money
 }
 
-class DefaultPricePolicy : PricePolicy {
+object DefaultPricePolicy : PricePolicy {
+
+    private const val DEFAULT_PRICE = 1000L
 
     override fun apply(): Money {
         return Money.from(DEFAULT_PRICE)
-    }
-
-    private companion object {
-        const val DEFAULT_PRICE = 1000L
     }
 }
