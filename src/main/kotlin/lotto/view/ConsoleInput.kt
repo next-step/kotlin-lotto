@@ -7,16 +7,16 @@ class ConsoleInput {
         return readNonBlankLn().toIntOrNull() ?: throw IllegalArgumentException("purchase amount should be number")
     }
 
-    fun getCountOfManualLotto(): Int {
+    fun getManualLottoCount(): Int {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
 
         return readNonBlankLn().toIntOrNull() ?: throw IllegalArgumentException("count of manual lotto should be number")
     }
 
-    fun getManualLottoNumbers(countOfManualLotto: Int): List<List<Int>> {
+    fun getManualLottoNumbers(manualLottoCount: Int): List<List<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
 
-        return (1..countOfManualLotto)
+        return (1..manualLottoCount)
             .map { readNonBlankLn().takeIf { it.contains(LOTTO_NUMBER_DELIMITER) } ?: throw IllegalArgumentException("lotto numbers should contain $LOTTO_NUMBER_DELIMITER") }
             .map { lottoNumbers -> lottoNumbers.split(LOTTO_NUMBER_DELIMITER).map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("each lotto number should be number") } }
     }

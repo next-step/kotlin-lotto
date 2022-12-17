@@ -8,24 +8,24 @@ import lotto.domain.WinningPrize
 import lotto.domain.WinningPrizes
 import lotto.domain.vo.PurchaseAmount
 import lotto.view.ConsoleInput
-import lotto.view.ConsoleOutPut
+import lotto.view.ConsoleOutput
 
-class LottoController(private val input: ConsoleInput, private val outPut: ConsoleOutPut) {
+class LottoController(private val input: ConsoleInput, private val output: ConsoleOutput) {
     fun start() {
         val purchaseAmount = PurchaseAmount(input.getPurchaseAmount())
-        val countOfManualLotto = input.getCountOfManualLotto()
-        val manualLottoNumbers = input.getManualLottoNumbers(countOfManualLotto)
+        val manualLottoCount = input.getManualLottoCount()
+        val manualLottoNumbers = input.getManualLottoNumbers(manualLottoCount)
         val lottoNumbers = LottoMachine.createLottoNumbers(purchaseAmount, manualLottoNumbers)
 
-        outPut.printPurchasedLottoCount(lottoNumbers.size)
-        lottoNumbers.forEach { outPut.printLottoNumbers(it.numbers()) }
+        output.printPurchasedLottoCount(lottoNumbers.size, manualLottoCount)
+        lottoNumbers.forEach { output.printLottoNumbers(it.numbers()) }
 
         val winningNumbers = WinningNumbers(input.getWinnerNumbers(), input.getBonusBall())
         val winningPrizes = WinningPrizes(lottoNumbers.map { winningNumbers.matchPrize(it) })
         val winningStatistic = createWinningStatistic(winningPrizes)
         val rateOfReturn = winningPrizes.calculateTotalRateOfReturn(purchaseAmount)
 
-        outPut.printWinningPrize(winningStatistic, rateOfReturn)
+        output.printWinningPrize(winningStatistic, rateOfReturn)
     }
 
     private fun createWinningStatistic(winningPrizes: WinningPrizes): WinningStatistic {
