@@ -16,5 +16,6 @@ object LottoGame {
         lottoTicketBundle.match(winningNumber = winningNumber)
         val winningTickets = lottoTicketBundle.getWinningTickets()
         WinningStats(tickets = winningTickets).draw()
+        ReturnRate(rate = lottoTicketBundle.getReturnRate()).draw()
     }
 }
