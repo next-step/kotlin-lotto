@@ -1,7 +1,6 @@
 package lotto
 
-class WinningTicket(val lottoRank: LottoRank) {
-
+class WinningTicket private constructor(val lottoRank: LottoRank) {
     companion object {
         fun from(lottoTicket: LottoTicket): WinningTicket {
             require(lottoTicket.lottoStatus.isWinStatus())
