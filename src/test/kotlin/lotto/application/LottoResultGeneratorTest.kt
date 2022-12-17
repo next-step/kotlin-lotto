@@ -15,7 +15,7 @@ class LottoResultGeneratorTest {
     fun `로또 결과 생성 - 순위 확인 테스트`(given: String, result: String) {
         // given
         val lotto = Lotto(given.split(",").map { LottoNumber.from(it.toInt()) })
-        val winningNumbers = Lotto(listOf(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))
+        val winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) })
         val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, LottoNumber.from(45))
         val lottoResultGenerator = LottoResultGenerator(winningNumbersWithBonusNumber, Lottos(listOf(lotto)))
         val lottoResult = lottoResultGenerator.getResult()

@@ -10,7 +10,7 @@ class WinningNumbersTest {
     @Test
     fun `로또 번호 + 보너스 번호 - 로또 번호와 보너스 번호가 중복되는 경우에 대한 예외처리 테스트`() {
         // given
-        val lotto = Lotto(listOf(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) })
         val bonusNumber = LottoNumber.from(1)
 
         // when
@@ -27,7 +27,7 @@ class WinningNumbersTest {
     fun `로또 번호 + 보너스 번호 - 순위 확인 테스트`(given: String, bonusNumber: Int, expected: String) {
         // given
         val lotto = Lotto(given.split(",").map { LottoNumber.from(it.toInt()) })
-        val winningNumbers = Lotto(listOf(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))
+        val winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) })
         val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, LottoNumber.from(bonusNumber))
 
         // when

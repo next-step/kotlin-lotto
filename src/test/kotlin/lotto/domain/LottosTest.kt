@@ -21,8 +21,8 @@ class LottosTest {
     @Test
     fun `로또 리스트 - 중복 확인 테스트`() {
         // given
-        val lotto1 = Lotto(listOf(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))
-        val lotto2 = Lotto(listOf(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))
+        val lotto1 = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) })
+        val lotto2 = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) })
 
         // when, then
         assertThatThrownBy { Lottos(listOf(lotto1, lotto2)) }
