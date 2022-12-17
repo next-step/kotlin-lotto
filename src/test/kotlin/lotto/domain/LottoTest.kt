@@ -39,9 +39,7 @@ class LottoTest : StringSpec({
 
         forAll(
             row(LottoNumber.from(1), true),
-            row(LottoNumber.from(6), true),
-            row(LottoNumber.from(7), false),
-            row(LottoNumber.from(8), false)
+            row(LottoNumber.from(7), false)
         ) { number, expected ->
             lotto.contains(number) shouldBe expected
         }

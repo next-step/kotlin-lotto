@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.domain.Payment
-import lotto.domain.WinningNumber
 
 object InputView {
     fun readPayment(): Payment {
@@ -10,17 +9,17 @@ object InputView {
         return Payment(readln().toInt())
     }
 
-    fun readWinningNumber(): WinningNumber {
+    fun readWinningNumber(): IntArray {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        val numbers = readln().split(",")
+        return readln().split(",")
             .map { Integer.parseInt(it.trim()) }
             .toIntArray()
+    }
 
+    fun readBonusBall(): Int {
         println("보너스 볼을 입력해 주세요.")
 
-        val bonusBall = readln().toInt()
-
-        return WinningNumber(*numbers, bonusBall = bonusBall)
+        return readln().toInt()
     }
 }

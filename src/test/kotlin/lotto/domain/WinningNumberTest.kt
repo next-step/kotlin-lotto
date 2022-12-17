@@ -5,6 +5,7 @@ import io.kotest.assertions.throwables.shouldThrowAny
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
+import io.kotest.matchers.shouldBe
 
 class WinningNumberTest : StringSpec({
     "당첨 번호는 중복 없는 6개의 번호와 1개의 보너스 볼을 가진다." {
@@ -27,8 +28,6 @@ class WinningNumberTest : StringSpec({
     "로또 번호 매칭 결과를 반환한다" {
         val winningNumber = WinningNumber(1, 2, 3, 4, 5, 6, bonusBall = 7)
 
-        shouldNotThrowAny {
-            winningNumber.match(listOf(Lotto(1, 2, 3, 4, 5, 6)))
-        }
+        winningNumber.match(listOf(Lotto(1, 2, 3, 4, 5, 6))) shouldBe LottoResult(listOf(LottoRank.FIRST))
     }
 })
