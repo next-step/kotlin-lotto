@@ -7,6 +7,8 @@ value class PurchaseAmount(val amount: Int) {
         require(amount % MIN_VALUE == 0) { "amount should be in units of $MIN_VALUE" }
     }
 
+    operator fun minus(amount: Int) = PurchaseAmount(this.amount - amount)
+
     fun countTicket(price: Int): Int = amount / price
 
     companion object {
