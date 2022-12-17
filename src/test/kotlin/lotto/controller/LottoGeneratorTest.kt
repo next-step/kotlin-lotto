@@ -1,4 +1,4 @@
-package lotto.application
+package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
