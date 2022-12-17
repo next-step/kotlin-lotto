@@ -17,7 +17,7 @@ class LottoTicket private constructor(
     }
 
     companion object {
-        private const val LOTTO_TICKET_PRICE = 1000
+        const val LOTTO_TICKET_PRICE = 1000
 
         fun purchase(payment: Int, manualNumber: LottoNumber? = null): LottoTicket {
             require(payment == LOTTO_TICKET_PRICE)

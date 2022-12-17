@@ -1,5 +1,6 @@
 package lotto
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
 class LottoTicketBundleTest : FunSpec({
@@ -21,4 +22,12 @@ class LottoTicketBundleTest : FunSpec({
         }
     }
 
+    context("여러 개의 로또 티켓 구매") {
+        context("지불 금액을 전달하면") {
+            test("여러 개의 티켓을 한 번에 구매할 수 있다.") {
+                val actual = LottoTicketBundle.purchase(payment = 14500)
+                actual.getTickets() shouldHaveSize 14
+            }
+        }
+    }
 })
