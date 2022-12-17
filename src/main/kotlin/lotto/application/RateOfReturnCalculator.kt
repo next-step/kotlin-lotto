@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto.application
 
-import lotto.common.Money
+import lotto.common.value.Money
 import java.math.BigDecimal
 import java.math.RoundingMode
 

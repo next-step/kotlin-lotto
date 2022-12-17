@@ -3,8 +3,8 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
-import lotto.common.Money
-import lotto.common.Quantity
+import lotto.common.value.Money
+import lotto.common.value.Quantity
 import lotto.domain.Order
 import lotto.domain.Tickets
 import lotto.domain.enums.TicketType

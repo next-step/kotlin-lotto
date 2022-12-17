@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.common.Money
+import lotto.common.value.Money
 import lotto.domain.enums.TicketStatus
 import lotto.domain.policy.PricePolicy
 import lotto.domain.policy.LotteryNumbersGenerateStrategy

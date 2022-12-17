@@ -1,4 +1,4 @@
-package lotto.common
+package lotto.common.value
 
 @JvmInline
 value class Quantity(

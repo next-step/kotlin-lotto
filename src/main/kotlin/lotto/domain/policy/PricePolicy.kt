@@ -1,6 +1,6 @@
 package lotto.domain.policy
 
-import lotto.common.Money
+import lotto.common.value.Money
 
 sealed interface PricePolicy {
     fun apply(): Money
