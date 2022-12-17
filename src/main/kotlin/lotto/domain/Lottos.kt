@@ -9,4 +9,6 @@ value class Lottos(val value: List<Lotto>) {
     fun getList(): List<List<Int>> {
         return value.map { lotto -> lotto.value }
     }
+
+    fun plus(other: Lottos) = Lottos(value.plus(other.value))
 }

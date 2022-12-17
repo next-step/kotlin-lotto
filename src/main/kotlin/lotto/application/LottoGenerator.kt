@@ -9,23 +9,16 @@ import lotto.view.InputView
 object LottoGenerator {
     fun generateLottos(lottoCount: Int, manualLottos: Lottos? = null): Lottos {
         return try {
-            generateLottosWithManualLottos(manualLottos, lottoCount)
+            val autoLottos = generateByLottoCount(lottoCount)
+            return manualLottos?.plus(autoLottos) ?: autoLottos
         } catch (e: Exception) {
             InputView.printError(e.message!!)
             generateLottos(lottoCount, manualLottos)
         }
     }
 
-    private fun generateLottosWithManualLottos(manualLottos: Lottos?, lottoCount: Int): Lottos {
-        val lottoList = mutableListOf<Lotto>()
-        if (manualLottos != null) {
-            lottoList.addAll(manualLottos.value)
-        }
-        repeat(lottoCount) {
-            val lotto = generate()
-            lottoList.add(lotto)
-        }
-        return Lottos(lottoList.toList())
+    private fun generateByLottoCount(lottoCount: Int): Lottos {
+        return Lottos(List(lottoCount) { generate() })
     }
 
     private fun generate(): Lotto {
