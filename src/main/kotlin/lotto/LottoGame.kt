@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.ui.LottoTicketList
 import lotto.ui.PaymentInput
 import lotto.ui.PurchaseCount
 
@@ -8,7 +9,8 @@ object LottoGame {
         val paymentInput = PaymentInput()
         paymentInput.draw()
         val payment = paymentInput.value
-        val purchaseCount = PurchaseCount(payment = payment)
-        purchaseCount.draw()
+        PurchaseCount(payment = payment).draw()
+        val lottoTicketBundle = LottoTicketBundle.purchase(payment = payment)
+        LottoTicketList(tickets = lottoTicketBundle.getTickets()).draw()
     }
 }
