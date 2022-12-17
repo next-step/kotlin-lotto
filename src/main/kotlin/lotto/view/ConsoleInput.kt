@@ -7,12 +7,26 @@ class ConsoleInput {
         return readNonBlankLn().toIntOrNull() ?: throw IllegalArgumentException("purchase amount should be number")
     }
 
+    fun getCountOfManualLotto(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+
+        return readNonBlankLn().toIntOrNull() ?: throw IllegalArgumentException("count of manual lotto should be number")
+    }
+
+    fun getManualLottoNumbers(countOfManualLotto: Int): List<List<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+
+        return (1..countOfManualLotto)
+            .map { readNonBlankLn().takeIf { it.contains(LOTTO_NUMBER_DELIMITER) } ?: throw IllegalArgumentException("lotto numbers should contain $LOTTO_NUMBER_DELIMITER") }
+            .map { lottoNumbers -> lottoNumbers.split(LOTTO_NUMBER_DELIMITER).map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("each lotto number should be number") } }
+    }
+
     fun getWinnerNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
-        val winningNumbers = readNonBlankLn().takeIf { it.contains(WINNING_NUMBER_DELIMITER) } ?: throw IllegalArgumentException("winning numbers should contain $WINNING_NUMBER_DELIMITER")
+        val winningNumbers = readNonBlankLn().takeIf { it.contains(LOTTO_NUMBER_DELIMITER) } ?: throw IllegalArgumentException("winning numbers should contain $LOTTO_NUMBER_DELIMITER")
 
-        return winningNumbers.split(WINNING_NUMBER_DELIMITER)
+        return winningNumbers.split(LOTTO_NUMBER_DELIMITER)
             .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("each winning number should be number") }
     }
 
@@ -25,6 +39,6 @@ class ConsoleInput {
     private fun readNonBlankLn() = readln().ifBlank { throw IllegalArgumentException("empty string is not allowed") }
 
     companion object {
-        private const val WINNING_NUMBER_DELIMITER = ","
+        private const val LOTTO_NUMBER_DELIMITER = ","
     }
 }

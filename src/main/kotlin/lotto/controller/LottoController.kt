@@ -13,6 +13,7 @@ import lotto.view.ConsoleOutPut
 class LottoController(private val input: ConsoleInput, private val outPut: ConsoleOutPut) {
     fun start() {
         val purchaseAmount = PurchaseAmount(input.getPurchaseAmount())
+        val countOfManualLotto = input.getCountOfManualLotto()
         val lottoNumbers = LottoMachine.createLottoNumbers(purchaseAmount)
 
         outPut.printPurchasedLottoCount(lottoNumbers.size)
