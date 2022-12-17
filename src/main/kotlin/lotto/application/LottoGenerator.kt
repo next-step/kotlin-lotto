@@ -29,6 +29,11 @@ object LottoGenerator {
     }
 
     private fun generate(): Lotto {
-        return Lotto(LottoNumber.lotto.shuffled().take(MAXIMUM_LOTTO_NUMBER_LENGTH).sortedBy { it.value })
+        return Lotto(
+            LottoNumber.lotto
+                .shuffled()
+                .take(MAXIMUM_LOTTO_NUMBER_LENGTH)
+                .sortedBy { it.value }
+        )
     }
 }
