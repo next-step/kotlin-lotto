@@ -1,6 +1,7 @@
 package lotto.common
 
 import java.math.BigDecimal
+import java.math.MathContext
 
 @JvmInline
 value class Money(
@@ -13,6 +14,10 @@ value class Money(
 
     operator fun times(quantity: Quantity): Money {
         return Money(this.value.times(BigDecimal.valueOf(quantity.value)))
+    }
+
+    operator fun div(target: Money): Money {
+        return Money(this.value.divide(target.value, MathContext.DECIMAL32))
     }
 
     companion object {
