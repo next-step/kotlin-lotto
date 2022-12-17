@@ -8,7 +8,7 @@ class LottosTest {
     @Test
     fun `로또 리스트 - 리스트 반환 테스트`() {
         // given
-        val lotto = Lotto(listOf(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)))
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.from(it) })
         val lottos = Lottos(listOf(lotto))
 
         // when
