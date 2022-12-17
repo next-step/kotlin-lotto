@@ -15,7 +15,6 @@ import java.math.RoundingMode
 class OrderTicketService(
     private val pricePolicy: PricePolicy
 ) {
-    
     fun orderTickets(paymentPrice: Money, ticketType: TicketType): Order {
         val unitPrice = pricePolicy.apply()
         val quantity = Quantity((paymentPrice / unitPrice).value.setScale(0, RoundingMode.DOWN).toLong())

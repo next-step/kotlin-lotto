@@ -6,7 +6,7 @@ enum class TicketType {
     AUTO;
 
     fun toGenerateStrategy(): LotteryNumberAutoGenerateStrategy {
-        return when(this) {
+        return when (this) {
             AUTO -> LotteryNumberAutoGenerateStrategy
         }
     }

@@ -2,8 +2,8 @@ package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import lotto.common.value.Money
 import lotto.application.RateOfReturnCalculator
+import lotto.common.value.Money
 
 class RateOfReturnCalculatorTest : FreeSpec({
 

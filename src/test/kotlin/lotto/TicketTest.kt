@@ -6,8 +6,8 @@ import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import lotto.domain.Ticket
 import lotto.domain.enums.TicketStatus
-import lotto.domain.policy.LotteryNumberAutoGenerateStrategy
 import lotto.domain.policy.DefaultPricePolicy
+import lotto.domain.policy.LotteryNumberAutoGenerateStrategy
 
 class TicketTest : FreeSpec({
 

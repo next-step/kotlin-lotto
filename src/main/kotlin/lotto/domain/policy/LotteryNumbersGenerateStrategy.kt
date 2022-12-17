@@ -12,7 +12,7 @@ object LotteryNumberAutoGenerateStrategy : LotteryNumbersGenerateStrategy {
 
     override fun generate(): LotteryNumbers {
         val lotteryNumbers = mutableSetOf<LotteryNumber>()
-        while(lotteryNumbers.size < LotteryNumbers.LOTTERY_NUMBER_SIZE) { lotteryNumbers.add(generateRandomNumber()) }
+        while (lotteryNumbers.size < LotteryNumbers.LOTTERY_NUMBER_SIZE) { lotteryNumbers.add(generateRandomNumber()) }
         return LotteryNumbers(lotteryNumbers = lotteryNumbers.toSet())
     }
 

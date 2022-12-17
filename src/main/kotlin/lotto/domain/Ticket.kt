@@ -2,8 +2,8 @@ package lotto.domain
 
 import lotto.common.value.Money
 import lotto.domain.enums.TicketStatus
-import lotto.domain.policy.PricePolicy
 import lotto.domain.policy.LotteryNumbersGenerateStrategy
+import lotto.domain.policy.PricePolicy
 import lotto.domain.vo.LotteryNumbers
 
 class Ticket(
