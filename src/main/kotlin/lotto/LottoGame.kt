@@ -3,6 +3,7 @@ package lotto
 import lotto.ui.LottoTicketList
 import lotto.ui.PaymentInput
 import lotto.ui.PurchaseCount
+import lotto.ui.WinningNumberInput
 
 object LottoGame {
     fun run() {
@@ -12,5 +13,7 @@ object LottoGame {
         val lottoTicketBundle = LottoTicketBundle.purchase(payment = payment)
         PurchaseCount(payment = payment).draw()
         LottoTicketList(tickets = lottoTicketBundle.getTickets()).draw()
+        val winningNumberInput = WinningNumberInput()
+        winningNumberInput.draw()
     }
 }
