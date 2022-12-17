@@ -28,11 +28,11 @@ class LottoController(private val input: ConsoleInput, private val outPut: Conso
 
     private fun createWinningStatistic(winningPrizes: WinningPrizes): WinningStatistic {
         val winningPrizeInfos = WinningPrize.values().map {
-            WinningPrizeInfo(it.matchedCount, it.prize, it == WinningPrize.SECOND_PRIZE)
+            WinningPrizeInfo(it.matchedCount, it.prize, it.hasBonusNumber)
         }
 
         val statisticOfWinningPrize = winningPrizes.extractStatisticOfWinningPrize().mapKeys {
-            WinningPrizeInfo(it.key.matchedCount, it.key.prize, it.key == WinningPrize.SECOND_PRIZE)
+            WinningPrizeInfo(it.key.matchedCount, it.key.prize, it.key.hasBonusNumber)
         }
 
         return WinningStatistic(winningPrizeInfos, statisticOfWinningPrize)
