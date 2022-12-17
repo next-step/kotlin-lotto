@@ -49,13 +49,10 @@ object InputFilter {
     }
 
     private fun makeLottos(count: Int): List<Lotto> {
-        val lottos = mutableListOf<Lotto>()
-        for (i in 1..count) {
+        return List(count) {
             val parsedInput = InputParser.parseWithDelimiter(readln())
-            val lotto = Lotto(parsedInput.map { LottoNumber.from(it) })
-            lottos.add(lotto)
+            Lotto(parsedInput.map { LottoNumber.from(it) })
         }
-        return lottos.toList()
     }
 
     private fun inputLotto(): Lotto {
