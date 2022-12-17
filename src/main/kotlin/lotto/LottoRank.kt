@@ -3,8 +3,8 @@ package lotto
 import java.lang.IllegalArgumentException
 
 enum class LottoRank(
-    private val matchCount: Int,
-    private val money: Int,
+    val matchCount: Int,
+    val money: Int,
 ) {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),

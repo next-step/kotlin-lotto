@@ -1,9 +1,6 @@
 package lotto
 
-import lotto.ui.LottoTicketList
-import lotto.ui.PaymentInput
-import lotto.ui.PurchaseCount
-import lotto.ui.WinningNumberInput
+import lotto.ui.*
 
 object LottoGame {
     fun run() {
@@ -15,5 +12,9 @@ object LottoGame {
         LottoTicketList(tickets = lottoTicketBundle.getTickets()).draw()
         val winningNumberInput = WinningNumberInput()
         winningNumberInput.draw()
+        val winningNumber = WinningNumber.from(numbers = winningNumberInput.getNumbers())
+        lottoTicketBundle.match(winningNumber = winningNumber)
+        val winningTickets = lottoTicketBundle.getWinningTickets()
+        WinningStats(tickets = winningTickets).draw()
     }
 }

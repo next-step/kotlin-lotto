@@ -11,5 +11,4 @@ class PaymentInputTest : FunSpec({
             actual shouldBe 15000
         }
     }
-
 })
