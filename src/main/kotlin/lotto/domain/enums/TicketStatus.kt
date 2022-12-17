@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.enums
 
 enum class TicketStatus {
     INIT, ISSUE
