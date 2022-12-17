@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.LottoDispenser
+import lotto.domain.model.WinningNumbers
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -19,7 +20,7 @@ fun main() {
     val winningNumbers = inputView.inputWinningNumbers()
     val bonusNumber = inputView.inputBonusNumber()
 
-    dispenser.checkWinningLottoList(winningNumbers, bonusNumber)
+    dispenser.checkWinningLottoList(WinningNumbers(winningNumbers, bonusNumber))
 
     resultView.showResult(dispenser)
 }

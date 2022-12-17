@@ -3,7 +3,6 @@ package lotto.ui
 import lotto.domain.LottoNumberValidator
 import lotto.domain.MINIMUM_PRICE
 import lotto.domain.model.LottoNumber
-import lotto.domain.model.WinningNumbers
 
 class InputView {
 
@@ -17,14 +16,11 @@ class InputView {
         }
     }
 
-    fun inputWinningNumbers(): WinningNumbers {
+    fun inputWinningNumbers(): String {
         println("")
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumberText = readlnOrNull() ?: ""
-        val isValid = LottoNumberValidator.validate(winningNumberText)
-        return if (isValid) {
-            WinningNumbers(winningNumberText)
-        } else {
+        return winningNumberText.ifBlank {
             inputWinningNumbers()
         }
     }

@@ -31,9 +31,9 @@ enum class Rank(val matchCount: Int, val prize: Int) {
             return Rank.safeValueOf(matchCount = matchCount, matchBonus = matchBonus)
         }
 
-        fun win(winningNumbers: WinningNumbers, lotto: Lotto, bonusNumber: LottoNumber): Rank {
+        fun win(winningNumbers: WinningNumbers, lotto: Lotto): Rank {
             val matchCount: Int = Rank.countMatchNumber(winningNumbers, lotto)
-            val matchBonus: Boolean = matchBonus(matchCount, lotto, bonusNumber)
+            val matchBonus: Boolean = matchBonus(matchCount, lotto, winningNumbers.bonusNumber)
             return Rank.matchingWinner(matchCount, matchBonus)
         }
 

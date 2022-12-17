@@ -84,7 +84,7 @@ internal class RankTest {
     @DisplayName("당첨 된 숫자 개수를 확인한다")
     @Test
     fun matchingCount() {
-        val winningNumbers = WinningNumbers("8, 21, 23, 41, 42, 43")
+        val winningNumbers = WinningNumbers("8, 21, 23, 41, 42, 43", LottoNumber(1))
         val lotto = Lotto(listOf(9, 21, 27, 41, 42, 45).map { LottoNumber(it) })
 
         assertThat(Rank.countMatchNumber(winningNumbers, lotto)).isEqualTo(3)

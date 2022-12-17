@@ -12,7 +12,7 @@ internal class WinningNumbersTest {
     @DisplayName("입력 된 당첨 번호로 당첨 번호가 생성되어야 한다")
     @Test
     fun winningNumbers() {
-        val winningNumbers = WinningNumbers(winningNumberText = "1,2,3,4,5,6")
+        val winningNumbers = WinningNumbers("1,2,3,4,5,6", LottoNumber(1))
 
         winningNumbers.numbers.map { it.number } shouldContainInOrder listOf(1, 2, 3, 4, 5, 6)
     }
@@ -23,7 +23,7 @@ internal class WinningNumbersTest {
     fun wrongWinningNumbers(input: String) {
         assertThatExceptionOfType(IllegalStateException::class.java)
             .isThrownBy {
-                WinningNumbers(winningNumberText = input)
+                WinningNumbers(winningNumberText = input, LottoNumber(1))
             }
     }
 }
