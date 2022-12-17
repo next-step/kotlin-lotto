@@ -9,8 +9,7 @@ import lotto.domain.model.WinningNumbers
 class LottoDispenser(val amount: Int, manualLottoNumberTextList: List<String> = emptyList()) {
 
     lateinit var ranks: List<Rank>
-    lateinit var bonusNumber: LottoNumber
-    lateinit var winningNumbers: WinningNumbers
+
     val autoLottoList: List<Lotto> = makeLottoList(manualLottoNumberTextList.size)
     val manualLottoList: List<Lotto> = makeManualLottoList(manualLottoNumberTextList)
     val lottoList: List<Lotto>
@@ -20,7 +19,7 @@ class LottoDispenser(val amount: Int, manualLottoNumberTextList: List<String> = 
         require(amount >= MINIMUM_PRICE) { "구입 금액은 ${MINIMUM_PRICE}원 이하가 될 수 없습니다" }
     }
 
-    fun checkWinningLottoList() {
+    fun checkWinningLottoList(winningNumbers: WinningNumbers, bonusNumber: LottoNumber) {
         ranks = lottoList.map { lotto ->
             Rank.win(winningNumbers, lotto, bonusNumber)
         }

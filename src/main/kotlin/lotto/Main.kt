@@ -16,8 +16,10 @@ fun main() {
     val resultView = ResultView()
     resultView.showPurchaseResult(dispenser)
 
-    dispenser.winningNumbers = inputView.inputWinningNumbers()
-    dispenser.bonusNumber = inputView.inputBonusNumber()
+    val winningNumbers = inputView.inputWinningNumbers()
+    val bonusNumber = inputView.inputBonusNumber()
+
+    dispenser.checkWinningLottoList(winningNumbers, bonusNumber)
 
     resultView.showResult(dispenser)
 }

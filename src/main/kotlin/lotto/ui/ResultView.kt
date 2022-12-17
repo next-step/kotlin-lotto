@@ -12,8 +12,6 @@ class ResultView {
     }
 
     fun showResult(dispenser: LottoDispenser) {
-        dispenser.checkWinningLottoList()
-
         println("\n당첨 통계")
         println("---------")
 
