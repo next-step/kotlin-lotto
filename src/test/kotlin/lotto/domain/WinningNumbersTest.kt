@@ -31,7 +31,7 @@ class WinningNumbersTest {
         val winningNumbersWithBonusNumber = WinningNumbers(winningNumbers, LottoNumber.from(bonusNumber))
 
         // when
-        val actual = winningNumbersWithBonusNumber.getLottoRank(lotto)
+        val actual = winningNumbersWithBonusNumber.findLottoRank(lotto)
 
         // then
         assertThat(actual).isEqualTo(LottoRank.valueOf(expected))

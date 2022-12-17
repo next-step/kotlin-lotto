@@ -10,7 +10,7 @@ data class LottoResultGenerator(private val winningNumbers: WinningNumbers, priv
     fun getResult(): LottoResult {
         val lottoResult: EnumMap<LottoRank, Int> = initLottoResult()
         lottos.value.forEach { lotto ->
-            val lottoRank = winningNumbers.getLottoRank(lotto)
+            val lottoRank = winningNumbers.findLottoRank(lotto)
             lottoResult[lottoRank] = lottoResult.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREASE_COUNT
         }
         return LottoResult(lottoResult)
