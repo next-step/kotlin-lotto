@@ -1,7 +1,7 @@
 package lotto.ui
 
-class PaymentInput : UI {
-    var value: String = ""
+class PaymentInput(value: String = "") : UI {
+    var value: String = value
         private set
 
     override fun draw() {
