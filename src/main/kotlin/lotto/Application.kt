@@ -7,9 +7,11 @@ import lotto.view.OutputView
 
 fun main() {
     val payment = InputView.readPayment()
-    val lottos = LottoPurchaseService.purchase(payment)
+    val manualCount = InputView.readManualCount()
+    val manualLottos = InputView.readManualLottos(manualCount)
+    val lottos = LottoPurchaseService.purchase(payment, manualLottos)
 
-    OutputView.writeLottos(lottos)
+    OutputView.writeLottos(manualCount, lottos)
 
     val winningNumber = WinningNumber(
         numbers = InputView.readWinningNumber(),

@@ -5,7 +5,8 @@ import lotto.domain.LottoRank
 import java.math.BigDecimal
 
 object OutputView {
-    fun writeLottos(lottos: List<Lotto>) {
+    fun writeLottos(manualCount: Int, lottos: List<Lotto>) {
+        println("수동으로 ${manualCount}장, 자동으로 ${lottos.size - manualCount}개를 구매했습니다.")
         lottos.forEach {
             println(
                 it.numbers
