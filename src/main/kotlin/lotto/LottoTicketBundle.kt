@@ -13,6 +13,14 @@ class LottoTicketBundle(private val tickets: List<LottoTicket>) {
             .map { WinningTicket.from(lottoTicket = it) }
     }
 
+    fun getWinningMoney(): Int {
+        return this.getWinningTickets()
+            .map { it.lottoRank }
+            .fold(0) { winningMoney, rank ->
+                winningMoney + rank.money
+            }
+    }
+
     companion object {
         fun purchase(payment: Int): LottoTicketBundle {
             val amount = payment / LottoTicket.LOTTO_TICKET_PRICE
