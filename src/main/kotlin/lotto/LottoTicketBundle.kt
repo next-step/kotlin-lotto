@@ -21,6 +21,12 @@ class LottoTicketBundle(private val tickets: List<LottoTicket>) {
             }
     }
 
+    fun getReturnRate(): Double {
+        val payment = this.tickets.size * LottoTicket.LOTTO_TICKET_PRICE
+        val winningMoney = this.getWinningMoney()
+        return winningMoney.toDouble() / payment.toDouble()
+    }
+
     companion object {
         fun purchase(payment: Int): LottoTicketBundle {
             val amount = payment / LottoTicket.LOTTO_TICKET_PRICE
