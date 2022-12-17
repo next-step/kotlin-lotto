@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.domain.Lotto.Companion.MAXIMUM_LOTTO_NUMBER_LENGTH
-import lotto.view.InputView
 
 object LottoGenerator {
     fun generateLottos(lottoCount: Int, manualLottos: Lottos? = null): Lottos {
@@ -9,7 +8,6 @@ object LottoGenerator {
             val autoLottos = generateByLottoCount(lottoCount)
             return manualLottos?.plus(autoLottos) ?: autoLottos
         } catch (e: Exception) {
-            InputView.printError(e.message!!)
             generateLottos(lottoCount, manualLottos)
         }
     }
