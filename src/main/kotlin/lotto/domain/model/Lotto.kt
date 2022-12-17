@@ -1,6 +1,6 @@
 package lotto.domain.model
 
-class Lotto(numbers: List<LottoNumber> = emptyList()) {
+open class Lotto(numbers: List<LottoNumber> = emptyList()) {
 
     val numbers: List<LottoNumber> = initList(numbers)
 

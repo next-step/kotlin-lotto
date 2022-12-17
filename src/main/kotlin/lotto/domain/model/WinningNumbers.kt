@@ -2,11 +2,12 @@ package lotto.domain.model
 
 import lotto.Tokenizer
 
-class WinningNumbers(winningNumberText: String) {
+class WinningNumbers(winningNumberText: String) : Lotto(makeLottoNumbers(winningNumberText)) {
 
-    val numbers: List<LottoNumber> = initList(winningNumberText)
+    companion object {
 
-    private fun initList(winningNumberText: String): List<LottoNumber> {
-        return Tokenizer.tokenize(winningNumberText).map { LottoNumber(it.toInt()) }
+        fun makeLottoNumbers(winningNumberText: String): List<LottoNumber> {
+            return Tokenizer.tokenize(winningNumberText).map { LottoNumber(it.toInt()) }
+        }
     }
 }
