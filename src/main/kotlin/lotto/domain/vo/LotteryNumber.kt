@@ -1,7 +1,7 @@
 package lotto.domain.vo
 
 @JvmInline
-value class TargetNumber(
+value class LotteryNumber(
     private val value: Int
 ) {
     init {

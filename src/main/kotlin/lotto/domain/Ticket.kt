@@ -2,12 +2,12 @@ package lotto.domain
 
 import lotto.common.Money
 import lotto.domain.policy.PricePolicy
-import lotto.domain.policy.TargetNumbersGenerateStrategy
-import lotto.domain.vo.TargetNumbers
+import lotto.domain.policy.LotteryNumbersGenerateStrategy
+import lotto.domain.vo.LotteryNumbers
 
 class Ticket(
     pricePolicy: PricePolicy,
-    targetNumbersGenerateStrategy: TargetNumbersGenerateStrategy
+    lotteryNumbersGenerateStrategy: LotteryNumbersGenerateStrategy
 ) {
     fun issue() {
         this.status = TicketStatus.ISSUE
@@ -15,5 +15,5 @@ class Ticket(
 
     val price: Money = pricePolicy.apply()
     var status: TicketStatus = TicketStatus.INIT
-    val targetNumbers: TargetNumbers = targetNumbersGenerateStrategy.generate()
+    val lotteryNumbers: LotteryNumbers = lotteryNumbersGenerateStrategy.generate()
 }
