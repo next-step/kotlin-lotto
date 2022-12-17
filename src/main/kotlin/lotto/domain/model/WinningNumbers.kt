@@ -1,6 +1,6 @@
 package lotto.domain.model
 
-import calculator.Tokenizer
+import lotto.Tokenizer
 import lotto.domain.LottoNumberValidator
 
 class WinningNumbers(winningNumberText: String) {
