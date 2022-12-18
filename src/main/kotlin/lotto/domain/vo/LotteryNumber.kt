@@ -15,5 +15,6 @@ value class LotteryNumber(
     companion object {
         const val MIN_NUMBER = 1
         const val MAX_NUMBER = 45
+        val LOTTERY_NUMBER_LIST = (MIN_NUMBER..MAX_NUMBER).map(::LotteryNumber).toList()
     }
 }

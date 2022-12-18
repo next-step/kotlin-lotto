@@ -19,6 +19,6 @@ object LotteryNumberAutoGenerateStrategy : LotteryNumbersGenerateStrategy {
 
     private fun generateRandomNumber(): LotteryNumber {
         val randomValue = Random.nextInt(LotteryNumber.MIN_NUMBER, LotteryNumber.MAX_NUMBER)
-        return LotteryNumber(value = randomValue)
+        return LotteryNumber.LOTTERY_NUMBER_LIST[randomValue]
     }
 }
