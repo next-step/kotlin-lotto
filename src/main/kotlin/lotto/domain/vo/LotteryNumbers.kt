@@ -11,21 +11,6 @@ class LotteryNumbers(
 
     fun contains(lotteryNumber: LotteryNumber): Boolean = this.lotteryNumbers.contains(lotteryNumber)
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as LotteryNumbers
-
-        if (lotteryNumbers != other.lotteryNumbers) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return lotteryNumbers.hashCode()
-    }
-
     override fun toString(): String {
         return "[${this.lotteryNumbers.map { it.toString() }.joinToString(separator = ",")}]"
     }
