@@ -23,7 +23,7 @@ class TicketController(
 
         val winLotteryNumbers = queryLastWeekWinLotteryNumbers()
 
-        val prizeList = orderTicketService.checkLotteryNumbers(winLotteryNumbers, order)
+        val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order)
         viewPrizeList(prizeList)
 
         val rateOfReturn = orderTicketService.calculateRateOfReturn(order, prizeList)

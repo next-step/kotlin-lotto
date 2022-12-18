@@ -28,14 +28,14 @@ class OrderTicketServiceTest : BehaviorSpec({
             then("로또의 당첨여부를 확인할 수 있다") {
                 val lotteryNumbers = orderTicketService.getLotteryNumbers(order)
                 val winLotteryNumbers = lotteryNumbers[0]
-                val prizeList = orderTicketService.checkLotteryNumbers(winLotteryNumbers, order)
+                val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order)
                 prizeList.contains(Prize.FIRST).shouldBeTrue()
             }
 
             then("로또의 수익률을 계산할 수 있다") {
                 val lotteryNumbers = orderTicketService.getLotteryNumbers(order)
                 val winLotteryNumbers = lotteryNumbers[0]
-                val prizeList = orderTicketService.checkLotteryNumbers(winLotteryNumbers, order)
+                val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order)
                 val rateOfReturn = orderTicketService.calculateRateOfReturn(order, prizeList)
                 (rateOfReturn >= 1).shouldBeTrue()
             }
