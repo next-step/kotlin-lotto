@@ -23,6 +23,6 @@ object OutputConsole {
     }
 
     fun printWinPrize(equalNumberCount: Long, amount: Money, winCount: Int) {
-        println("${equalNumberCount}개 일치 ($amount) - ${winCount}개")
+        println("${equalNumberCount}개 일치 (${amount}원) - ${winCount}개")
     }
 }
