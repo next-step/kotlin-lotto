@@ -11,6 +11,7 @@ class LotteryNumberTest : FreeSpec({
     }
 
     "추첨 번호는 정해진 범위의 값이 아닌 경우 오류가 발생한다" {
+        shouldThrow<IllegalArgumentException> { LotteryNumber(value = 0) }
         shouldThrow<IllegalArgumentException> { LotteryNumber(value = 46) }
     }
 })
