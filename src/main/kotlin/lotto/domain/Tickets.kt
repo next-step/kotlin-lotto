@@ -23,13 +23,11 @@ class Tickets(
 
     companion object {
         fun from(quantity: Quantity, pricePolicy: PricePolicy, ticketType: TicketType): Tickets {
-            val list = mutableListOf<Ticket>()
-            repeat(quantity.value.toInt()) {
-                val ticket = Ticket(
+            val list = List(quantity.value.toInt()) {
+                Ticket(
                     pricePolicy = pricePolicy,
                     lotteryNumbersGenerateStrategy = ticketType.toGenerateStrategy()
                 )
-                list.add(ticket)
             }
             return Tickets(tickets = list)
         }
