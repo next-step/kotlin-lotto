@@ -1,16 +1,17 @@
 package lotto.domain.enums
 
 import lotto.common.value.Money
+import lotto.common.value.Money.Companion.toMoney
 
 enum class Prize(
     val equalNumberCount: Long = 0,
-    val amount: Money = Money.from(0)
+    val amount: Money = 0L.toMoney()
 ) {
     BOOM,
-    THREE(3, Money.from(5_000)),
-    FOUR(4, Money.from(50_000)),
-    FIVE(5, Money.from(1_500_000)),
-    SIX(6, Money.from(2_000_000_000));
+    THREE(3, 5_000L.toMoney()),
+    FOUR(4, 50_000L.toMoney()),
+    FIVE(5, 1_500_000L.toMoney()),
+    SIX(6, 2_000_000_000L.toMoney());
 
     fun isNotBoom(): Boolean = this != BOOM
 

@@ -21,7 +21,7 @@ value class Money(
     }
 
     companion object {
-        fun from(value: Long): Money = Money(BigDecimal.valueOf(value))
+        fun Long.toMoney(): Money = Money(this.toBigDecimal())
         fun BigDecimal.toMoney(): Money = Money(this)
     }
 }

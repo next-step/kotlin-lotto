@@ -4,14 +4,14 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import lotto.common.value.Money
+import lotto.common.value.Money.Companion.toMoney
 import lotto.common.value.Quantity
 import lotto.domain.enums.TicketType
 import lotto.domain.policy.DefaultPricePolicy
 
 class OrderTest : FreeSpec({
 
-    val paymentPrice = Money.from(14000)
+    val paymentPrice = 14000L.toMoney()
     val quantity = Quantity(14)
     val ticketType = TicketType.AUTO
     val pricePolicy = DefaultPricePolicy
@@ -41,7 +41,7 @@ class OrderTest : FreeSpec({
 
     "총 가격이랑 지불금액이 맞지 않으면 에러가 발생한다" {
         val tickets = Tickets.from(quantity = quantity, pricePolicy = pricePolicy, ticketType = ticketType)
-        val notMatchedPaymentPrice = Money.from(1000)
+        val notMatchedPaymentPrice = 1_000L.toMoney()
 
         shouldThrow<IllegalArgumentException> { Order(paymentPrice = notMatchedPaymentPrice, tickets = tickets) }
     }

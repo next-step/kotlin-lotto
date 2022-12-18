@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 import lotto.application.command.OrderTicketService
-import lotto.common.value.Money
+import lotto.common.value.Money.Companion.toMoney
 import lotto.domain.enums.Prize
 import lotto.domain.enums.TicketType
 import lotto.domain.policy.DefaultPricePolicy
@@ -17,7 +17,7 @@ class OrderTicketServiceTest : BehaviorSpec({
         val orderTicketService = OrderTicketService(pricePolicy = pricePolicy)
 
         `when`("14000원으로 자동 티켓을 주문 하면") {
-            val paymentPrice = Money.from(14_000)
+            val paymentPrice = 14_000L.toMoney()
             val ticketType = TicketType.AUTO
             val order = orderTicketService.orderTickets(paymentPrice, ticketType)
 

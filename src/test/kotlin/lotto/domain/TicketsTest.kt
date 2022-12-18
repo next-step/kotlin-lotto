@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import lotto.common.value.Money
+import lotto.common.value.Money.Companion.toMoney
 import lotto.domain.policy.DefaultPricePolicy
 import lotto.domain.policy.LotteryNumberAutoGenerateStrategy
 
@@ -19,7 +19,7 @@ class TicketsTest : FreeSpec({
         val tickets = Tickets(tickets = listOf(ticket, otherTicket))
 
         "총 가격을 확인할 수 있다" {
-            tickets.totalPrice() shouldBe Money.from(2000)
+            tickets.totalPrice() shouldBe 2000L.toMoney()
         }
 
         "발급되면 상태가 변경된다" {
