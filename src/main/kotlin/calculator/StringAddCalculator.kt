@@ -3,6 +3,7 @@ package calculator
 object StringAddCalculator {
     private val DELIMITERS = "[,:]".toRegex()
     private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
+
     fun add(text: String?): Int {
         if (text.isNullOrEmpty()) return 0
 
