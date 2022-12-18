@@ -3,7 +3,9 @@ package lotto.view
 import lotto.dto.LottoResultDto
 
 object ResultView {
-    private const val LOTTO_COUNT_MESSAGE = "개를 구매했습니다."
+    private const val LOTTO_COUNT_MESSAGE_PREFIX = "수동으로 "
+    private const val LOTTO_COUNT_MESSAGE_INFIX = "장, 자동으로 "
+    private const val LOTTO_COUNT_MESSAGE_SUFFIX = "개를 구매했습니다."
     private const val LOTTO_RESULT_MESSAGE_TITLE = "당첨 통계"
     private const val LOTTO_RESULT_MESSAGE_DELIMITER = "---------"
     private const val LOTTO_RESULT_DELIMITER = "- "
@@ -19,13 +21,14 @@ object ResultView {
     private const val LOTTO_RESULT_EMPTY_STRING = ""
     private const val REFERENCE_VALUE = 1
     private const val LOTTO_RANK_MISS = 0
+    private const val LINE_FEED = "\r\n"
 
-    fun printNumberOfLotto(numberOfLotto: Int) {
-        println("$numberOfLotto$LOTTO_COUNT_MESSAGE")
+    fun printNumberOfLotto(numberOfLotto: Int, numberOfManualLotto: Int) {
+        println("$LINE_FEED$LOTTO_COUNT_MESSAGE_PREFIX$numberOfManualLotto$LOTTO_COUNT_MESSAGE_INFIX${numberOfLotto - numberOfManualLotto}$LOTTO_COUNT_MESSAGE_SUFFIX")
     }
 
-    fun printLottoNumbersList(lottoNumbersList: List<List<Int>>) {
-        lottoNumbersList.forEach { println(it) }
+    fun printLottos(lottos: List<List<Int>>) {
+        lottos.forEach { println(it) }
     }
 
     fun printFinalResult(lottoResultDto: LottoResultDto) {
