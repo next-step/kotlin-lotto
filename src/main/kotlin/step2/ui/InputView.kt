@@ -1,6 +1,5 @@
 package step2.ui
 
-import step2.domain.Lotto
 import java.lang.IllegalArgumentException
 
 object InputView {
@@ -17,14 +16,12 @@ object InputView {
         return purchaseCount
     }
 
-    fun answerLotto(): Lotto {
+    fun answer(): List<Int> {
         println(INPUT_ANSWER_NUMBER)
-        val answer = readln()
-        val answerNumber = answer.split(SPLIT_DELIMITER).map {
+        return readln().split(SPLIT_DELIMITER).map {
             require(it.toInt() in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { "$MIN_LOTTO_NUMBER 과 $MAX_LOTTO_NUMBER 사이의 숫자를 입력해주세요." }
             it.toInt()
         }
-        return Lotto(answerNumber)
     }
 
     private const val INPUT_PURCHASE_AMOUNT_MESSAGE = "구매금액을 입력 해주세요."

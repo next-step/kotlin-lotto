@@ -6,18 +6,22 @@ import step2.ui.OutputView
 
 fun main() {
     val purchaseAmount = InputView.getPurchaseAmount()
+
     val lottoPurchaseCount = InputView.getPurchaseCount(purchaseAmount)
 
-    val lottoList = List(lottoPurchaseCount) {
-        Lotto(RandomGenerateStrategy().of())
-    }
+    val answer = Lotto(InputView.answer())
+
+    val lottoList = Lottos(List(lottoPurchaseCount) { RandomGenerateStrategy().of() })
 
     OutputView.generateLotto(lottoList)
 
-    val answerCount = Lottos(lottoList).getAnswerCountList(InputView.answerLotto())
+    val answerCount = lottoList.getAnswerCountList(answer)
 
-    val winningAmount = Statistics().matchCount(answerCount)
+    val statistics = Statistics(answerCount)
 
-    OutputView.lottoResult(Statistics.matchResult())
-    OutputView.rateOfReturn(winningAmount, purchaseAmount)
+    OutputView.lottoResult(statistics.matchResult())
+
+    val rateOfRevenue = statistics.rateOfRevenue(statistics.revenue(), purchaseAmount)
+
+    OutputView.rateOfReturn(rateOfRevenue)
 }
