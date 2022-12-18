@@ -1,19 +1,13 @@
 package lotto.domain
 
-class WinLotto(private val _lotto: Lotto, private val _bonus: LottoNum) {
-
-    private val lotto: Lotto
-        get() = this._lotto
-
-    private val bonus: LottoNum
-        get() = this._bonus
+class WinLotto(private val lotto: Lotto, private val bonus: LottoNum) {
 
     private fun containsLottoCount(otherLotto: Lotto): Int {
-        var count = 0
-        for(num in otherLotto) {
-            count += if(lotto.contains(num)) 1 else 0
-        }
-        return count
+        return otherLotto.sumOf { toOneIfContainsInLotto(it) }
+    }
+
+    private fun toOneIfContainsInLotto(num: LottoNum): Int {
+        return if(lotto.contains(num)) 1 else 0
     }
 
     private fun containsBonusNum(lotto: Lotto): Boolean {

@@ -6,9 +6,8 @@ class ResultView {
 
     companion object {
         fun printPurchaseLotto(lottoIssueResult: LottoIssueResult) {
-            println("수동으로 ${lottoIssueResult.manualCount()}장, 자동으로 ${lottoIssueResult.autoCount()}장을 구매했습니다.")
+            println("수동으로 ${lottoIssueResult.countOfManual()}장, 자동으로 ${lottoIssueResult.countOfAuto()}장을 구매했습니다.")
             println(lottoIssueResult.getAsLottos().joinToString(separator = "\n"))
-//            println(lottoIssueResult.getAsLottos().joinToString { "\n" })
         }
 
         fun printStatistics(statistic: Statistics, amount: Amount)  {
