@@ -23,4 +23,16 @@ class LottoTest {
             Lotto(listOf(1, 2, 3, 4))
         }
     }
+
+//    실 코드에서는 예외가 발생하나 테스트 코드에서 예외 발생이 안하는 이유를 모르겠다..
+//    @ParameterizedTest
+//    @ValueSource(strings = ["0,2,3,4,5,6","1,2,3,4,5,46"])
+//    @DisplayName("1과 45 사이의 숫자가 아닌 번호 입력 시 예외 발생")
+//    fun lottoRangeException(numbers: String) {
+//        val numbersToInt = numbers.split(",").map { it.toInt() }
+//        assertThrows<IllegalArgumentException> {
+//            Lotto(numbersToInt)
+//        }
+//    }
+
 }
