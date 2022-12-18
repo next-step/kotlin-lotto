@@ -29,7 +29,7 @@ class OrderTicketServiceTest : BehaviorSpec({
                 val lotteryNumbers = orderTicketService.getLotteryNumbers(order)
                 val winLotteryNumbers = lotteryNumbers[0]
                 val prizeList = orderTicketService.checkLotteryNumbers(winLotteryNumbers, order)
-                prizeList.contains(Prize.SIX).shouldBeTrue()
+                prizeList.contains(Prize.FIRST).shouldBeTrue()
             }
 
             then("로또의 수익률을 계산할 수 있다") {

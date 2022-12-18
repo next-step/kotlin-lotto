@@ -17,6 +17,6 @@ class PrizeTest : FreeSpec({
     }
 
     "꽝이 아닌지를 판별할 수 있다" {
-        Prize.THREE.isNotBoom().shouldBeTrue()
+        Prize.THIRD.isNotBoom().shouldBeTrue()
     }
 })
