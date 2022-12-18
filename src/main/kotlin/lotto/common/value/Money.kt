@@ -20,6 +20,8 @@ value class Money(
         return Money(this.value.divide(target.value, MathContext.DECIMAL32))
     }
 
+    override fun toString(): String = this.value.toString()
+
     companion object {
         fun Long.toMoney(): Money = Money(this.toBigDecimal())
         fun BigDecimal.toMoney(): Money = Money(this)
