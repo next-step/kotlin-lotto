@@ -46,7 +46,7 @@ class TicketController(
 
     private fun queryLastWeekWinLotteryNumbers(): LotteryNumbers {
         val inputNumbers = InputConsole.queryLastWeekWinLotteryNumbers()
-        val lastWeekWinLotteryNumbers = inputNumbers.map { LotteryNumber(it) }.toSet()
+        val lastWeekWinLotteryNumbers = inputNumbers.map { LotteryNumber(it) }.toList()
         return LotteryNumbers(lotteryNumbers = lastWeekWinLotteryNumbers)
     }
 

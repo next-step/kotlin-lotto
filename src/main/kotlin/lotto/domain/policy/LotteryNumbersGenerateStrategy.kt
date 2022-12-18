@@ -11,9 +11,10 @@ sealed interface LotteryNumbersGenerateStrategy {
 object LotteryNumberAutoGenerateStrategy : LotteryNumbersGenerateStrategy {
 
     override fun generate(): LotteryNumbers {
-        val lotteryNumbers = mutableSetOf<LotteryNumber>()
-        while (lotteryNumbers.size < LotteryNumbers.LOTTERY_NUMBER_SIZE) { lotteryNumbers.add(generateRandomNumber()) }
-        return LotteryNumbers(lotteryNumbers = lotteryNumbers.toSet())
+        val lotteryNumbersSet = mutableSetOf<LotteryNumber>()
+        while (lotteryNumbersSet.size < LotteryNumbers.LOTTERY_NUMBER_SIZE) { lotteryNumbersSet.add(generateRandomNumber()) }
+        val lotteryNumbers = lotteryNumbersSet.toList().sortedBy { it.value }
+        return LotteryNumbers(lotteryNumbers = lotteryNumbers)
     }
 
     private fun generateRandomNumber(): LotteryNumber {

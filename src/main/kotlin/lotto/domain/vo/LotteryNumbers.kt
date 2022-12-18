@@ -1,7 +1,7 @@
 package lotto.domain.vo
 
 class LotteryNumbers(
-    val lotteryNumbers: Set<LotteryNumber>
+    val lotteryNumbers: List<LotteryNumber>
 ) {
     init {
         require(lotteryNumbers.size == LOTTERY_NUMBER_SIZE) { "로또의 추첨 번호는 ${LOTTERY_NUMBER_SIZE}개입니다." }
