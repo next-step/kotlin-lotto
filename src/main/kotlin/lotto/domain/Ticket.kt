@@ -16,7 +16,7 @@ class Ticket(
     val lotteryNumbers: LotteryNumbers = lotteryNumbersGenerateStrategy.generate()
 
     fun issue() {
-        check(this.status == TicketStatus.INIT) { "티켓이 발급될 상태가 아닙니다" }
+        check(this.status.isInit()) { "티켓이 발급될 상태가 아닙니다" }
         this.status = TicketStatus.ISSUE
     }
 }

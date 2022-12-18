@@ -29,8 +29,7 @@ class OrderTicketService(
     fun confirmPrizeByOrder(winLotteryNumbers: LotteryNumbers, order: Order): List<Prize> {
         val prizeList = mutableListOf<Prize>()
         order.toLotteryNumbers().forEach {
-            val countEqualLotteryNumbers = winLotteryNumbers.countEqualLotteryNumbers(it)
-            val prize = Prize.find(equalNumberCount = countEqualLotteryNumbers.toLong())
+            val prize = winLotteryNumbers.findPrize(it)
             prizeList.add(prize)
         }
         return prizeList.toList()

@@ -1,5 +1,7 @@
 package lotto.domain.vo
 
+import lotto.domain.enums.Prize
+
 class LotteryNumbers(
     val lotteryNumbers: List<LotteryNumber>
 ) {
@@ -8,12 +10,6 @@ class LotteryNumbers(
     }
 
     fun contains(lotteryNumber: LotteryNumber): Boolean = this.lotteryNumbers.contains(lotteryNumber)
-
-    fun countEqualLotteryNumbers(targetLotteryNumbers: LotteryNumbers): Int {
-        return this.lotteryNumbers.filter {
-            targetLotteryNumbers.contains(it)
-        }.size
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -32,6 +28,17 @@ class LotteryNumbers(
 
     override fun toString(): String {
         return "[${this.lotteryNumbers.map { it.toString() }.joinToString(separator = ",")}]"
+    }
+
+    fun findPrize(targetLotteryNumbers: LotteryNumbers): Prize {
+        val countEqualLotteryNumbers = countEqualLotteryNumbers(targetLotteryNumbers)
+        return Prize.find(countEqualLotteryNumbers.toLong())
+    }
+
+    private fun countEqualLotteryNumbers(targetLotteryNumbers: LotteryNumbers): Int {
+        return this.lotteryNumbers.filter {
+            targetLotteryNumbers.contains(it)
+        }.size
     }
 
     companion object {
