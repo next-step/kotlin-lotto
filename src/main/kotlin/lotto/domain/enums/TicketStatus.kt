@@ -1,5 +1,7 @@
 package lotto.domain.enums
 
 enum class TicketStatus {
-    INIT, ISSUE
+    INIT, ISSUE;
+
+    fun isInit(): Boolean = this == INIT
 }
