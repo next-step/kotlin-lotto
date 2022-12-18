@@ -7,9 +7,7 @@ object StringAddCalculator {
         if (text.isNullOrEmpty()) return 0
 
         val tokens = text.split()
-        val numbers = tokens.map { it.toIntOrNull() ?: -1 }
-
-        require(numbers.all { it >= 0 })
+        val numbers = tokens.map { it.toNonNegative() }
 
         return numbers.sum()
     }
@@ -21,5 +19,9 @@ object StringAddCalculator {
             return it.groupValues[2].split(customDelimiter)
         }
         return this.split(DELIMITERS)
+    }
+
+    private fun String.toNonNegative(): Int {
+        return this.toIntOrNull()?.takeIf { it >= 0 } ?: throw IllegalArgumentException()
     }
 }
