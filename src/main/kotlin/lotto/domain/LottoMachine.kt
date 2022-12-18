@@ -19,7 +19,7 @@ class LottoMachine(private val generator: Generator) {
             .toList()
     }
 
-    fun issue(manuals: List<String>): List<Lotto> {
+    private fun issue(manuals: List<String>): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
 
         for(manual in manuals) {
@@ -29,8 +29,7 @@ class LottoMachine(private val generator: Generator) {
     }
 
     private fun createLotto(manual: String): Lotto {
-        val splitManual = manual.split(", ")
-        return Lotto(splitManual.map { s -> s.toIntOrNull() ?: throw IllegalArgumentException() }.toList())
+        return Lotto.create(manual)
     }
 
     private fun createLotto(): Lotto {

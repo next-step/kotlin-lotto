@@ -23,5 +23,12 @@ class Lotto(list: List<Int>): Iterable<LottoNum> {
 
     companion object {
         private const val LOTTO_NUM_COUNT = 6
+
+        fun create(num: String): Lotto {
+            val splitManual = num.split(", ")
+            val numbers = splitManual.map { s -> s.toIntOrNull() ?: throw IllegalArgumentException() }.toList()
+            return Lotto(numbers)
+        }
+
     }
 }
