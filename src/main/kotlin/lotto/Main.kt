@@ -21,7 +21,7 @@ fun main() {
     val winningNumbers: String = inputView.inputWinningNumbers()
     val bonusNumber: LottoNumber = inputView.inputBonusNumber()
 
-    dispenser.checkWinningLottoList(WinningNumbers(winningNumbers, bonusNumber))
+    dispenser.match(WinningNumbers(winningNumbers, bonusNumber))
 
     resultView.showResult(dispenser)
 }

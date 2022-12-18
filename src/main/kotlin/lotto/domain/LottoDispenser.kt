@@ -19,7 +19,7 @@ class LottoDispenser(val amount: Int, manualLottoNumberTextList: List<String> = 
         require(amount >= MINIMUM_PRICE) { "구입 금액은 ${MINIMUM_PRICE}원 이하가 될 수 없습니다" }
     }
 
-    fun checkWinningLottoList(winningNumbers: WinningNumbers) {
+    fun match(winningNumbers: WinningNumbers) {
         ranks = lottoList.map { lotto ->
             Rank.win(winningNumbers, lotto)
         }
