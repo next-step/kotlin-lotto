@@ -8,14 +8,14 @@ data class Lotteries(val lotteries: List<Lottery>) {
     }
 }
 
-class Lottery(numbers: List<LottoNumber>) {
+class Lottery(numbers: List<Int>) {
     private val numbers: List<LottoNumber>
 
-    constructor(vararg inputNumbers: Int) : this(inputNumbers.map { LottoNumber.of(it) }.toList())
+    constructor(vararg inputNumbers: Int) : this(inputNumbers.toList())
 
     init {
         require(numbers.size == 6)
-        this.numbers = numbers.sorted()
+        this.numbers = numbers.map { LottoNumber.of(it) }.sorted()
     }
 
     fun countSameLottoNumbers(other: Lottery): Int {
@@ -35,8 +35,8 @@ class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> 
     companion object {
         private val NUMBERS = List(45) { LottoNumber(it + 1) }
 
-        fun allNumbers(): List<LottoNumber> {
-            return NUMBERS
+        fun allNumbers(): List<Int> {
+            return NUMBERS.map { it.value }
         }
 
         fun of(number: Int): LottoNumber {
