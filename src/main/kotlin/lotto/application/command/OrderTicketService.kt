@@ -27,12 +27,9 @@ class OrderTicketService(
     fun getLotteryNumbers(order: Order): List<LotteryNumbers> = order.toLotteryNumbers()
 
     fun confirmPrizeByOrder(winLotteryNumbers: LotteryNumbers, order: Order): List<Prize> {
-        val prizeList = mutableListOf<Prize>()
-        order.toLotteryNumbers().forEach {
-            val prize = winLotteryNumbers.findPrize(it)
-            prizeList.add(prize)
+        return order.toLotteryNumbers().map {
+            winLotteryNumbers.findPrize(it)
         }
-        return prizeList.toList()
     }
 
     fun calculateRateOfReturn(order: Order, prizeList: List<Prize>): Double {
