@@ -2,16 +2,23 @@ package step2.domain
 
 class RandomGenerateStrategy : GenerateStrategy {
 
-    override fun of(): List<Int> {
-        return (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
-            .shuffled()
-            .subList(0, MAX_DIGIT)
-            .sorted()
+    override fun of(): Lotto {
+        return generate()
     }
 
     companion object {
         private const val MIN_LOTTO_NUMBER = 1
         private const val MAX_LOTTO_NUMBER = 45
         private const val MAX_DIGIT = 6
+        fun generate(): Lotto {
+            return Lotto(
+                (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+                    .shuffled()
+                    .subList(0, MAX_DIGIT)
+                    .sorted()
+            )
+        }
+
     }
+
 }
