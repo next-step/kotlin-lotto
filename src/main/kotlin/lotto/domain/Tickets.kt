@@ -23,7 +23,7 @@ class Tickets(
 
     companion object {
         fun from(quantity: Quantity, pricePolicy: PricePolicy, ticketType: TicketType): Tickets {
-            val list = List(quantity.value.toInt()) {
+            val list = List(quantity.value) {
                 Ticket(
                     pricePolicy = pricePolicy,
                     lotteryNumbersGenerateStrategy = ticketType.toGenerateStrategy()

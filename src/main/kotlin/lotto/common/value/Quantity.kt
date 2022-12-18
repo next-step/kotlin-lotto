@@ -2,7 +2,7 @@ package lotto.common.value
 
 @JvmInline
 value class Quantity(
-    val value: Long
+    val value: Int
 ) {
 
     init {

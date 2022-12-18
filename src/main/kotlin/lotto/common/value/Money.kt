@@ -13,7 +13,7 @@ value class Money(
     }
 
     operator fun times(quantity: Quantity): Money {
-        return Money(this.value.times(BigDecimal.valueOf(quantity.value)))
+        return Money(this.value.times(BigDecimal.valueOf(quantity.value.toLong())))
     }
 
     operator fun div(target: Money): Money {

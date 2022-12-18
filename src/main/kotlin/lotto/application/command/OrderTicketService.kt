@@ -17,7 +17,7 @@ class OrderTicketService(
 ) {
     fun orderTickets(paymentPrice: Money, ticketType: TicketType): Order {
         val unitPrice = pricePolicy.apply()
-        val quantity = Quantity((paymentPrice / unitPrice).value.setScale(0, RoundingMode.DOWN).toLong())
+        val quantity = Quantity((paymentPrice / unitPrice).value.setScale(0, RoundingMode.DOWN).toInt())
         val tickets = Tickets.from(quantity = quantity, pricePolicy = pricePolicy, ticketType = ticketType)
         val order = Order(paymentPrice = paymentPrice, tickets = tickets)
         order.complete()
