@@ -3,16 +3,16 @@ package calculator.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class CalculatorTest {
+internal class AddStringCalculatorTest {
 
     @Test
     fun `수식을 이용하여 계산에 성공한다`() {
         // given
         val expression = Expression.create("2,2,2,2", Delimiters())
-        val calculator = Calculator(expression)
+        val calculator = AddStringCalculator()
 
         // when
-        val actual = calculator.calculate()
+        val actual = calculator.calculate(expression)
 
         // then
         val expected = 8
@@ -25,7 +25,7 @@ internal class CalculatorTest {
         val expression = Expression.create("", Delimiters())
 
         // when
-        val actual = Calculator(expression).calculate()
+        val actual = AddStringCalculator().calculate(expression)
 
         // then
         val expected = 0
