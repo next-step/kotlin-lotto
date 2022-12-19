@@ -1,6 +1,6 @@
 package stringcalculator
 
-import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe
 
@@ -42,7 +42,7 @@ class CalculatorTest : FeatureSpec({
         scenario("음수를 입력한 경우 RuntimeException을 반환한다.") {
             val input = "1,2:-13"
 
-            shouldThrowExactly<RuntimeException> { calculator.addAll(input) }
+            shouldThrow<RuntimeException> { calculator.addAll(input) }
         }
     }
 })

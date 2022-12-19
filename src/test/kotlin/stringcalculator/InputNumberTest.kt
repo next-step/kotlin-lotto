@@ -19,7 +19,7 @@ class InputNumberTest : ExpectSpec({
         expect("음의 정수 문자열을 입력하면 에러를 반환한다.") {
             val input = "-13"
 
-            shouldThrowExactly<RuntimeException> { InputNumber(input) }
+            shouldThrowExactly<IllegalArgumentException> { InputNumber(input) }
         }
     }
 })
