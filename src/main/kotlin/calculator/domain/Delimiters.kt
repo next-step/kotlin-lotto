@@ -3,17 +3,8 @@ package calculator.domain
 import calculator.util.RegexUtil.customRegex
 
 class Delimiters(
-    val value: List<String> = DEFAULT_DELIMITER,
-    private val operator: Operator = Operator.PLUS
+    val value: List<String> = DEFAULT_DELIMITER
 ) {
-
-    fun toOperator(input: String): Operator {
-        if (input !in value) {
-            throw RuntimeException("등록된 구분자가 아닙니다.")
-        }
-
-        return operator
-    }
 
     fun removeCustomRegex(text: String): String {
         if (customRegex.matches(text)) {
@@ -27,14 +18,13 @@ class Delimiters(
     companion object {
 
         private const val INDEX_DELIMITER = 1
-        private const val INDEX_REMOVE_REGEX = 1
+        private const val INDEX_REMOVE_REGEX = 2
 
         private val DEFAULT_DELIMITER = listOf(",", ":")
 
         fun create(input: String): Delimiters {
-            val delimiter = customRegex.find(input)?.let {
-                it.groupValues[INDEX_DELIMITER]
-            }
+            val delimiter = customRegex.find(input)
+                ?.let { it.groupValues[INDEX_DELIMITER] }
 
             if (delimiter != null) {
                 val delimiters = DEFAULT_DELIMITER + delimiter
