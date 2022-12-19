@@ -5,4 +5,3 @@ sealed interface Operation<in T : OperationCommand> {
 }
 
 sealed interface OperationCommand
-
