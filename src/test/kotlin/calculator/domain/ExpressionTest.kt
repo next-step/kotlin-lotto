@@ -37,5 +37,20 @@ internal class ExpressionTest {
         }
     }
 
+    @Test
+    fun `음수가 입력되어 수식 만들기에 실패`() {
+        assertThrows<RuntimeException> {
+            // given
+            val input = "//;\n1;2;-3"
+            val delimiters = Delimiters.create(input)
 
+            // when
+            val expression = Expression.create(input, delimiters)
+            val actual = expression.value.size
+
+            // then
+            val expected = 5
+            assertThat(actual).isEqualTo(expected)
+        }
+    }
 }
