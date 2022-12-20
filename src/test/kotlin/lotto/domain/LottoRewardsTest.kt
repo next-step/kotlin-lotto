@@ -14,12 +14,13 @@ class LottoRewardsTest : FunSpec({
             LottoReward.SECOND,
             LottoReward.THIRD,
             LottoReward.FIRTH,
+            LottoReward.FIFTH,
             LottoReward.FAIL
         )
         val lottoRewards = LottoRewards(lottoRewardList)
 
         test("fun exchange():") {
-            lottoRewards.exchange() shouldBe Cash(2_001_555_000)
+            lottoRewards.exchange() shouldBe Cash(2_031_555_000)
         }
 
         test("fun getByGroup():") {

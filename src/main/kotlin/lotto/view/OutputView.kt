@@ -19,9 +19,10 @@ object OutputView {
         val grouped = rewards.getByGroup()
         println(
             """
-            3개 일치 (5000원)- ${grouped[LottoReward.FIRTH] ?: 0}개
-            4개 일치 (50000원)- ${grouped[LottoReward.THIRD] ?: 0}개
-            5개 일치 (1500000원)- ${grouped[LottoReward.SECOND] ?: 0}개
+            3개 일치 (5000원)- ${grouped[LottoReward.FIFTH] ?: 0}개
+            4개 일치 (50000원)- ${grouped[LottoReward.FIRTH] ?: 0}개
+            5개 일치 (1500000원)- ${grouped[LottoReward.THIRD] ?: 0}개
+            5개 일치, 보너스 볼 일치(30000000원) - ${grouped[LottoReward.SECOND] ?: 0}개
             6개 일치 (2000000000원)- ${grouped[LottoReward.FIRST] ?: 0}개
             """.trimIndent()
         )
