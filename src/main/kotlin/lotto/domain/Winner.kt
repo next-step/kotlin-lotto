@@ -6,7 +6,5 @@ class Winner(private val numbers: Numbers) {
 
     fun getWinnerNumbers() = this.numbers
 
-    fun checkNumberMatch(tickets: IssuanceTickets) = MatchInfo().also {
-        tickets.checkWinner(numbers)
-    }
+    fun checkNumberMatch(tickets: IssuanceTickets) = MatchInfo.checkWinner(tickets, numbers)
 }

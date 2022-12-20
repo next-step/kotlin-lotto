@@ -14,7 +14,7 @@ object OutputView {
     private fun printTicketPurchaseCount(count: Int) = println("${count}개를 구매했습니다.")
 
     private fun printTicketsInfo(tickets: List<Ticket>) = tickets.forEach { ticket ->
-        println("[${ticket.getNumbers().joinToString(",")}]")
+        println("[${ticket.getIssueNumbers().joinToString(",")}]")
     }
 
     fun printStatisticsAndRevenueRate(matchInfo: MatchInfo, money: Money) {

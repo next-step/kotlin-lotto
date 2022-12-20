@@ -12,10 +12,9 @@ class Ticket(
         require(numbers.duplicateSize() == LOTTO_COUNT) { "중복된 로또 번호가 존재합니다" }
     }
 
-    fun getNumbers() = this.numbers.winNumbers
+    fun getIssueNumbers() = this.numbers.issueNumbers
 
-    fun getMatchingNumbersCount(numbers: Numbers) =
-        this.numbers.winNumbers.filter { numbers.winNumbers.contains(it) }.size
+    fun getMatchingNumbersCount(numbers: Numbers) = this.numbers.getMatchingNumbers(numbers)
 
     companion object {
         val LOTTO_RANGE = 1..45
