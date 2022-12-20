@@ -19,9 +19,12 @@ class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNum
         bonusNumber: Int
     ): WinningStatistics {
         for (lottoTicket in lottoTickets) {
-            val findingBonusNumber = lottoTicket.lottoNumbers.find { it == bonusNumber } ?: 0
-            println("findingBonusNumber ==== $findingBonusNumber")
-            setGrade(lottoTicket.lottoNumbers.toSet().intersect(winnerNumber.winnerNumbers.toSet()).size, findingBonusNumber)
+            val restNumber = lottoTicket.lottoNumbers.toSet().subtract(winnerNumber.winnerNumbers.toSet())
+            val findingBonusNumber = restNumber.find { it == bonusNumber } ?: 0
+            setGrade(
+                lottoTicket.lottoNumbers.toSet().intersect(winnerNumber.winnerNumbers.toSet()).size,
+                findingBonusNumber
+            )
         }
 
         calculateRate(lottoTickets.size)
@@ -31,8 +34,6 @@ class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNum
 
     private fun setGrade(count: Int, bonusNumber: Int) {
         val rank = Rank.of(count, isMatchBonusNumber(count, bonusNumber))
-        println("isMatchBonusNumber(count, bonusNumber) ==== ${isMatchBonusNumber(count, bonusNumber)}")
-        println("rank ==== $rank")
         resultWinningStatistics.ranks[rank] = (resultWinningStatistics.ranks[rank] ?: 0) + 1
     }
 
