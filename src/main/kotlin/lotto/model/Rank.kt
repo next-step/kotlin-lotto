@@ -13,6 +13,9 @@ enum class Rank(val match: Int, val reward: Int) {
             if (matchBonus) {
                 return SECOND
             }
+            if (number == THIRD.match && !matchBonus) {
+                return THIRD
+            }
             return values().find { it.match == number } ?: NO_LUCK
         }
     }
