@@ -3,27 +3,22 @@ package lotto.ui
 import lotto.domain.*
 
 object LottoController {
-    fun applyLotto(purchasePrice: Int): Lottos {
-        val purchaseCount = purchaseLotto(purchasePrice)
-        val purchaseLottoList = MutableList(purchaseCount) { LottoGenerator.generate() }
-
-        return Lottos(purchaseLottoList)
+    fun purchaseLottos(purchasePrice: Int): List<Lotto> {
+        return Store.purchase(purchasePrice)
     }
 
-    fun drawLotto(winningLottoNumbers: Set<LottoNumber>): Lotto {
-        return Lotto(winningLottoNumbers)
+    fun drawWinningLottos(winningLottoNumbers: Set<LottoNumber>, bonusNumber: LottoNumber): WinningLotto {
+        return WinningLotto(
+            Lotto(winningLottoNumbers),
+            bonusNumber
+        )
     }
 
-    fun announceLottoResult(purchaseLottos: Lottos, winningLotto: Lotto): LottoResult {
-        val winningAmountStatistics = purchaseLottos.calculateWinningAmountStatistics(winningLotto)
-
-        val lottoPurchaseAmount = purchaseLottos.calculatePurchaseAmount()
-        val lottoWinningAmount = LottoWinningAmount(winningAmountStatistics)
-
-        return LottoResult(lottoPurchaseAmount, lottoWinningAmount)
+    fun getRoundResult(purchasedLottos: List<Lotto>, winningLotto: WinningLotto): RoundResult {
+        return Round(purchasedLottos, winningLotto).aggregate()
     }
 
-    private fun purchaseLotto(purchasePrice: Int): Int {
-        return LottoSaleMachine.purchase(purchasePrice)
+    fun calculateEarningRate(roundResult: RoundResult): Double {
+        return roundResult.calculateEarningRate()
     }
 }

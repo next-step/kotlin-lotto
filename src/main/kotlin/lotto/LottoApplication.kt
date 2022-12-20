@@ -6,12 +6,15 @@ import lotto.ui.view.ResultView
 
 fun main() {
     val purchasePrice = InputView.getPurchasePrice()
-    val purchaseLottos = LottoController.applyLotto(purchasePrice)
+    val purchasedLottos = LottoController.purchaseLottos(purchasePrice)
 
-    val winningLottoNumbers = InputView.getWinningLotto()
-    val winningLotto = LottoController.drawLotto(winningLottoNumbers)
+    val winningLottoNumbers = InputView.getWinningLottoNumbers()
+    val bonusLottoNumber = InputView.getBonusLottoNumber()
+    val winningLotto = LottoController.drawWinningLottos(winningLottoNumbers, bonusLottoNumber)
 
-    val lottoResult = LottoController.announceLottoResult(purchaseLottos, winningLotto)
+    val roundResult = LottoController.getRoundResult(purchasedLottos, winningLotto)
 
-    ResultView.printLottoResult(lottoResult)
+    val earningRate = LottoController.calculateEarningRate(roundResult)
+
+    ResultView.printLottoResult(roundResult, earningRate)
 }
