@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.model.LottoTicket
+import lotto.model.Rank
 import lotto.model.WinningStatistics
 
 class ResultView {
@@ -18,7 +19,9 @@ class ResultView {
         println("당첨 통계")
         println("---------")
         for (rank in result.ranks) {
-            if (rank.key.reward != 0) {
+            if (rank.key == Rank.SECOND) {
+                println("${rank.key.match}개 일치, 보너스 볼 일치 (${rank.key.reward})- ${result.ranks[rank.key]}개")
+            } else if (rank.key.reward != 0) {
                 println("${rank.key.match}개 일치 (${rank.key.reward})- ${result.ranks[rank.key]}개")
             }
         }
