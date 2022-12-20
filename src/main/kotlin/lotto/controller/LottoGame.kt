@@ -15,8 +15,11 @@ class LottoGame {
     fun start() {
         val ticketQuantity = TicketQuantity(InputView().getAmountOfMoney()).quantity
         resultView.showQuantity(ticketQuantity)
-        val winningStatistics =
-            drawWinnerNumber(purchaseLottoTicket(ticketQuantity), WinnerNumber(inputView.getWinnerNumber()))
+        val tickets = purchaseLottoTicket(ticketQuantity)
+        resultView.showLottoTicket(tickets)
+        val winnerNumber = WinnerNumber(inputView.getWinnerNumber())
+        val bonusNumber = inputView.getBonusNumber()
+        val winningStatistics = drawWinnerNumber(tickets, winnerNumber, bonusNumber)
         resultView.showWinningStatistics(winningStatistics)
     }
 
@@ -26,7 +29,7 @@ class LottoGame {
         }
     }
 
-    private fun drawWinnerNumber(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber): WinningStatistics {
-        return WinningCalculator(lottoTickets, winnerNumber).winningStatistics
+    private fun drawWinnerNumber(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber, bonusNumber: Int): WinningStatistics {
+        return WinningCalculator(lottoTickets, winnerNumber, bonusNumber).winningStatistics
     }
 }

@@ -17,14 +17,14 @@ internal class WinningCalculatorTest {
 
         assertAll(
             {
-                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test1WinningNumber))
+                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test1WinningNumber), 1)
                 assertEquals(
                     (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
                     testCalculator.calculateRate(testTickets.size)
                 )
             },
             {
-                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test2WinningNumber))
+                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test2WinningNumber), 1)
                 assertEquals(
                     (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
                     testCalculator.calculateRate(testTickets.size)

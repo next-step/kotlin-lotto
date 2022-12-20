@@ -1,25 +1,26 @@
 package lotto.model
 
-import java.lang.NullPointerException
 import kotlin.math.round
 
-class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber) {
+class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber, bonusNumber: Int) {
     private val resultWinningStatistics = WinningStatistics(
         mutableMapOf(
-            Rank.FIRST to 0,
-            Rank.THIRD to 0, Rank.FOURTH to 0, Rank.FIFTH to 0, Rank.NO_LUCK to 0
+            Rank.FIFTH to 0, Rank.FOURTH to 0,
+            Rank.THIRD to 0, Rank.SECOND to 0, Rank.FIRST to 0, Rank.NO_LUCK to 0
         ),
         0.0
     )
 
-    val winningStatistics = generateWinningStatistics(lottoTickets, winnerNumber)
+    val winningStatistics = generateWinningStatistics(lottoTickets, winnerNumber, bonusNumber)
 
     private fun generateWinningStatistics(
         lottoTickets: List<LottoTicket>,
-        winnerNumber: WinnerNumber
+        winnerNumber: WinnerNumber,
+        bonusNumber: Int
     ): WinningStatistics {
         for (lottoTicket in lottoTickets) {
-            setGrade(lottoTicket.lottoNumbers.toSet().intersect(winnerNumber.winnerNumbers.toSet()).size)
+            val findingBonusNumber = lottoTicket.lottoNumbers.find { it == bonusNumber } ?: 0
+            setGrade(lottoTicket.lottoNumbers.toSet().intersect(winnerNumber.winnerNumbers.toSet()).size, findingBonusNumber)
         }
 
         calculateRate(lottoTickets.size)
@@ -27,12 +28,13 @@ class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNum
         return resultWinningStatistics
     }
 
-    private fun setGrade(count: Int) {
-        val rank = Rank.of(count)
-        try {
-            resultWinningStatistics.ranks[rank] = resultWinningStatistics.ranks[rank]!! + 1
-        } catch (e: NullPointerException) {
-        }
+    private fun setGrade(count: Int, bonusNumber: Int) {
+        val rank = Rank.of(count, isMatchBonusNumber(count, bonusNumber))
+        resultWinningStatistics.ranks[rank] = (resultWinningStatistics.ranks[rank] ?: 0) + 1
+    }
+
+    private fun isMatchBonusNumber(count: Int, bonusNumber: Int): Boolean {
+        return count == 5 && bonusNumber != 0
     }
 
     fun calculateRate(quantity: Int): Double {

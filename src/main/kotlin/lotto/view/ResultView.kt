@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.model.Rank
+import lotto.model.LottoTicket
 import lotto.model.WinningStatistics
 
 class ResultView {
@@ -8,15 +8,19 @@ class ResultView {
         println("${quantity}개를 구매했습니다.")
     }
 
-    fun showLottoTicket(lottoTicketNumber: List<Int>) {
-        println(lottoTicketNumber)
+    fun showLottoTicket(lottoTickets: List<LottoTicket>) {
+        for (lottoTicket in lottoTickets) {
+            println(lottoTicket.lottoNumbers)
+        }
     }
 
     fun showWinningStatistics(result: WinningStatistics) {
         println("당첨 통계")
         println("---------")
-        for (i in 3..6) {
-            println("${Rank.of(i).match}개 일치 (${Rank.of(i).reward})- ${result.ranks[Rank.of(i)]}개")
+        for (rank in result.ranks) {
+            if (rank.key.reward != 0) {
+                println("${rank.key.match}개 일치 (${rank.key.reward})- ${result.ranks[rank.key]}개")
+            }
         }
         println("총 수익률은 ${result.rate}입니다.")
     }
