@@ -11,10 +11,7 @@ class WinningMachine(winningString: String) {
 
     private fun getStringNumbers(winningString: String): List<String> {
         val stringNumbers = winningString.split(",")
-
         require(stringNumbers.isNotEmpty()) { "input string delimiter" }
-        require(stringNumbers.size == LOTTO_NUMBERS_COUNT) { "input string delimiter count" }
-
         return stringNumbers
     }
 
@@ -43,9 +40,5 @@ class WinningMachine(winningString: String) {
     private fun setWinningRankingValue(rank: RANKING, winningResult: HashMap<RANKING, Int>) {
         var winningCount: Int = winningResult[rank] ?: 0
         winningResult[rank] = ++ winningCount
-    }
-
-    companion object {
-        private const val LOTTO_NUMBERS_COUNT = 6
     }
 }
