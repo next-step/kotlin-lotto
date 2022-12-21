@@ -26,7 +26,7 @@ class ConsoleOutput {
     }
 
     private fun printWinningPrize(winningStatistic: WinningPrizeInfo, winningPrizeCount: WinningPrizeCount) {
-        winningStatistic.takeIf { it.hasBonus }
+        winningStatistic.takeIf { it.hasBonus != null && it.hasBonus }
             ?.let { println("${winningStatistic.matchedCount}개 일치, 보너스 볼 일치 (${winningStatistic.prize}원)- ${winningPrizeCount.count}개") }
             ?: println("${winningStatistic.matchedCount}개 일치 (${winningStatistic.prize}원)- ${winningPrizeCount.count}개")
     }
