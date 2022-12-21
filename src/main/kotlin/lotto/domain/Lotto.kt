@@ -26,7 +26,7 @@ class Lotto(list: List<Int>): Iterable<LottoNum> {
 
         fun create(num: String): Lotto {
             val splitManual = num.split(", ")
-            val numbers = splitManual.map { s -> s.toIntOrNull() ?: throw IllegalArgumentException() }.toList()
+            val numbers = splitManual.map { s -> s.toInt() }.toList()
             return Lotto(numbers)
         }
 

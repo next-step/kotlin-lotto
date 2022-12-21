@@ -1,8 +1,12 @@
 package lotto.application
 
-import lotto.domain.*
+import lotto.domain.Amount
 import lotto.domain.Lotto
+import lotto.domain.LottoIssueResult
 import lotto.domain.LottoMachine
+import lotto.domain.LottoNum
+import lotto.domain.Statistics
+import lotto.domain.WinLotto
 import lotto.domain.WinningMachine
 import lotto.domain.generator.RandomGenerator
 import lotto.view.InputView
