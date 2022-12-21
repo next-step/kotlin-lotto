@@ -9,8 +9,9 @@ object LottoMachine {
     private val LOTTO_NUMBERS = LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE
 
     fun createAutoLottoNumbers(purchaseAmount: PurchaseAmount, manualLottoCount: Int): List<LottoNumbers> {
-        val purchaseAmountForAutoLotto = purchaseAmount - (manualLottoCount * LOTTO_PRICE)
+        val purchaseAmountForManualLotto = manualLottoCount * LOTTO_PRICE
+        val purchaseAmountForAutoLotto = purchaseAmount - purchaseAmountForManualLotto
 
-        return List(purchaseAmountForAutoLotto.countTicket(LOTTO_PRICE)) { LottoNumbers(LOTTO_NUMBERS.shuffled().take(LottoNumbers.SIZE)) }
+        return List(purchaseAmountForAutoLotto / LOTTO_PRICE) { LottoNumbers(LOTTO_NUMBERS.shuffled().take(LottoNumbers.SIZE)) }
     }
 }

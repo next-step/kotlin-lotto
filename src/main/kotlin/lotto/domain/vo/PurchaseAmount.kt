@@ -9,7 +9,7 @@ value class PurchaseAmount(val amount: Int) {
 
     operator fun minus(amount: Int) = PurchaseAmount(this.amount - amount)
 
-    fun countTicket(price: Int): Int = amount / price
+    operator fun div(price: Int): Int = amount / price
 
     companion object {
         private const val MIN_VALUE: Int = 1000
