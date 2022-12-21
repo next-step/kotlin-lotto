@@ -12,6 +12,6 @@ class LottoTest : StringSpec({
 
     "구입비가 없을 경우 티켓이 발권 안 됨" {
         val lotto = Lotto(900)
-        lotto.purchaseTicket().size shouldBe 0
+        lotto.getCount() shouldBe 0
     }
 })

@@ -16,6 +16,8 @@ class Ticket(
 
     fun getMatchingNumbersCount(numbers: Numbers) = this.numbers.getMatchingNumbers(numbers)
 
+    fun getMatchingBonus(numbers: Numbers) = this.numbers.bonusNumber == numbers.bonusNumber
+
     companion object {
         val LOTTO_RANGE = 1..45
         const val LOTTO_COUNT = 6

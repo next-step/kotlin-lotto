@@ -14,8 +14,8 @@ fun main() {
 
     OutputView.printTicketPurchaseCountAndTicketsInfo(lotto.getCount(), tickets)
 
-    val matchInfo = Winner(InputView.getWinNumbers()).checkNumberMatch(IssuanceTickets(tickets))
-    val bonus = InputView.getBonusNumbers()
+    val matchInfo = Winner(InputView.getWinNumbers(), InputView.getBonusNumbers())
+        .checkNumberMatch(IssuanceTickets(tickets))
 
     OutputView.printStatisticsAndRevenueRate(matchInfo, money)
 }
