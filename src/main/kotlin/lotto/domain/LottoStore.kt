@@ -10,4 +10,14 @@ class LottoStore(private val generator: LottoGenerator = LottoGenerator()) {
         }
         return lottos
     }
+
+    fun sell(money: KRW, manual: List<String>): List<Lotto> {
+        require(money.availableLottoQuantity >= manual.size) {
+            "구매할 로또의 수 이상의 금액을 가지고 있으셔야합니다."
+        }
+
+        return manual.map {
+            Lotto.manual(it)
+        }.toList()
+    }
 }

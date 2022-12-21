@@ -4,15 +4,18 @@ class Wallet(var krw: KRW = DEFAULT_KRW) {
 
     private val lottoBundle: LottoBundle = LottoBundle()
 
-    fun insertMoney(input: String) {
-        val additionKRW = KRW(input)
-        krw = krw.add(additionKRW)
+    fun buyAutoLottos(lottoStore: LottoStore = LottoStore()): List<Lotto> {
+        val autoLottos = lottoStore.sell(krw)
+        lottoBundle.addAll(autoLottos)
+        krw = KRW(0)
+        return autoLottos
     }
 
-    fun buyLottos(lottoStore: LottoStore = LottoStore()): List<Lotto> {
-        lottoBundle.addAll(lottoStore.sell(krw))
-        krw = KRW(0)
-        return lottoBundle.lottos
+    fun buyManualLottos(lottoStore: LottoStore = LottoStore(), lotto: List<String>): List<Lotto> {
+        val manualLottos = lottoStore.sell(krw, lotto)
+        lottoBundle.addAll(manualLottos)
+        krw = KRW(krw.money - lotto.size * Lotto.krw.money)
+        return manualLottos
     }
 
     fun indicateLottoStatistics(winningLotto: WinningLotto): Report {

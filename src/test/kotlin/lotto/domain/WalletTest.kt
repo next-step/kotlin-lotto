@@ -6,10 +6,28 @@ import org.junit.jupiter.api.Test
 class WalletTest {
 
     @Test
-    fun `지갑에 3000원이 있으면 로또를 3개를 구매한다`() {
-        val wallet = Wallet(KRW(3000))
-        val lottos = wallet.buyLottos()
+    fun `지갑에 1000원이 있으면 자동으로 로또를 구매할 수 있다`() {
+        val wallet = Wallet(KRW(1000))
+        val lottos = wallet.buyAutoLottos()
 
-        assertThat(lottos.size).isEqualTo(3)
+        assertThat(lottos.size).isEqualTo(1)
+    }
+
+    @Test
+    fun `지갑에 1000원이 있으면 수동으로 로또를 구매할 수 있다`() {
+        val wallet = Wallet(KRW(1000))
+        val lottos = wallet.buyManualLottos(lotto = listOf("1,2,3,4,5,6"))
+
+        assertThat(lottos.size).isEqualTo(1)
+    }
+
+    @Test
+    fun `지갑에 2000원이 있으면 자동과 수동으로 각각 1장씩 로또를 구매할 수 있다`() {
+        val wallet = Wallet(KRW(2000))
+        val manualLottos = wallet.buyManualLottos(lotto = listOf("1,2,3,4,5,6"))
+        val autoLottos = wallet.buyAutoLottos()
+
+        assertThat(manualLottos.size).isEqualTo(1)
+        assertThat(autoLottos.size).isEqualTo(1)
     }
 }
