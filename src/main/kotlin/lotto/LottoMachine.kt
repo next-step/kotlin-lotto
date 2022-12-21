@@ -13,9 +13,9 @@ class LottoMachine(val price: Int) {
         return (0 until purchaseCount).map { Lotto(createNumbers()) }
     }
 
-    private fun createNumbers(): List<LottoNumber> {
+    private fun createNumbers(): Set<LottoNumber> {
         val shuffledNumbers = LOTTO_NUMBER.shuffled().take(6).sorted()
-        return shuffledNumbers.map { LottoNumber(it) }
+        return shuffledNumbers.map { LottoNumber(it) }.toSet()
     }
 
     companion object {

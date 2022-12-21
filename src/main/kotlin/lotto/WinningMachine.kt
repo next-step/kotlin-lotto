@@ -15,10 +15,9 @@ class WinningMachine(winningString: String) {
         return stringNumbers
     }
 
-    private fun getWinningNumbers(stringNumbers: List<String>): List<LottoNumber> {
+    private fun getWinningNumbers(stringNumbers: List<String>): Set<LottoNumber> {
         val lottoNumbers = stringNumbers.map { LottoNumber(it.trim()) }
-        require(lottoNumbers.size == lottoNumbers.distinct().size) { "input string numbers duplicates" }
-        return lottoNumbers
+        return lottoNumbers.toSet()
     }
 
     fun winningResult(lottoList: List<Lotto>): HashMap<RANKING, Int> {
