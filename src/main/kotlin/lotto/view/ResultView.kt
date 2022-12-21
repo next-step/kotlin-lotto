@@ -18,11 +18,11 @@ class ResultView {
     fun showWinningStatistics(result: WinningStatistics) {
         println("당첨 통계")
         println("---------")
-        for (rank in result.ranks) {
-            if (rank.key == Rank.SECOND) {
-                println("${rank.key.match}개 일치, 보너스 볼 일치 (${rank.key.reward})- ${result.ranks[rank.key]}개")
-            } else if (rank.key.reward != 0) {
-                println("${rank.key.match}개 일치 (${rank.key.reward})- ${result.ranks[rank.key]}개")
+        result.ranks.forEach {
+            if (it.key == Rank.SECOND) {
+                println("${it.key.match}개 일치, 보너스 볼 일치 (${it.key.reward})- ${result.ranks[it.key]}개")
+            } else if (it.key.reward != 0) {
+                println("${it.key.match}개 일치 (${it.key.reward})- ${result.ranks[it.key]}개")
             }
         }
         println("총 수익률은 ${result.rate}입니다.")

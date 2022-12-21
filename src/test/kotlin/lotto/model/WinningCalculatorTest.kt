@@ -13,7 +13,7 @@ internal class WinningCalculatorTest {
         var test2Ticket = LottoTicket()
         var test2WinningNumber = test2Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
 
-        val testTickets = listOf(test1Ticket, test2Ticket)
+        val testTickets = mutableListOf(test1Ticket, test2Ticket)
 
         assertAll(
             {

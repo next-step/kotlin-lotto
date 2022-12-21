@@ -2,10 +2,8 @@ package lotto.model
 
 import java.lang.NumberFormatException
 
-class BonusNumber(input: String) {
-    val number = generateBonusNumber(input)
-
-    private fun generateBonusNumber(input: String): Int {
+inline class BonusNumber(private val input: String) {
+    fun parse(): Int {
         checkValidNumber(input)
         return input.toInt()
     }

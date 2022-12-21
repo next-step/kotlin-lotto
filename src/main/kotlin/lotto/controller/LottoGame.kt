@@ -19,8 +19,8 @@ class LottoGame {
         val tickets = purchaseLottoTicket(ticketQuantity)
         resultView.showLottoTicket(tickets)
         val winnerNumber = WinnerNumber(inputView.getWinnerNumber())
-        val bonusNumber = BonusNumber(inputView.getBonusNumber())
-        val winningStatistics = drawWinnerNumber(tickets, winnerNumber, bonusNumber.number)
+        val bonusNumber = BonusNumber(inputView.getBonusNumber()).parse()
+        val winningStatistics = drawWinnerNumber(tickets, winnerNumber, bonusNumber)
         resultView.showWinningStatistics(winningStatistics)
     }
 

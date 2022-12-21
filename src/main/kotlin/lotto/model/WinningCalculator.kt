@@ -4,10 +4,15 @@ import kotlin.math.round
 
 class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber, bonusNumber: Int) {
     private val resultWinningStatistics = WinningStatistics(
-        mutableMapOf(
-            Rank.FIFTH to 0, Rank.FOURTH to 0,
-            Rank.THIRD to 0, Rank.SECOND to 0, Rank.FIRST to 0, Rank.NO_LUCK to 0
-        ),
+        listOf(
+            RankCounter(Rank.FIFTH, 0),
+            RankCounter(Rank.FOURTH, 0),
+            RankCounter(Rank.THIRD, 0),
+            RankCounter(Rank.SECOND, 0),
+            RankCounter(Rank.FIRST, 0),
+            RankCounter(Rank.NO_LUCK, 0)
+        )
+            .groupBy { it.rank },
         0.0
     )
 
@@ -33,18 +38,19 @@ class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNum
     }
 
     private fun setGrade(count: Int, bonusNumber: Int) {
-        val rank = Rank.of(count, isMatchBonusNumber(count, bonusNumber))
-        resultWinningStatistics.ranks[rank] = (resultWinningStatistics.ranks[rank] ?: 0) + 1
+        val rank = Rank.of(count, isMatchBonusNumber(bonusNumber))
+        resultWinningStatistics.ranks[rank]?.get(0)?.count =
+            (resultWinningStatistics.ranks[rank]?.get(0)?.count ?: 0) + 1
     }
 
-    private fun isMatchBonusNumber(count: Int, bonusNumber: Int): Boolean {
-        return count == Rank.SECOND.match && bonusNumber != 0
+    private fun isMatchBonusNumber(bonusNumber: Int): Boolean {
+        return bonusNumber != 0
     }
 
     fun calculateRate(quantity: Int): Double {
         var totalReward = 0.0
         for (rank in resultWinningStatistics.ranks) {
-            totalReward += (rank.value * rank.key.reward).toDouble()
+            totalReward += (rank.value[0].count * rank.key.reward).toDouble()
         }
         resultWinningStatistics.rate = round(
             totalReward / (quantity * 1000) * ROUND

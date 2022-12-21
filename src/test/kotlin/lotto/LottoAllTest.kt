@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.controller.LottoGame
+import lotto.model.BonusNumber
 import lotto.model.LottoTicket
 import lotto.model.TicketQuantity
 import lotto.model.WinnerNumber
@@ -77,13 +78,13 @@ internal class LottoAllTest {
                 val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
                     WinnerNumber("1, 2, 3, 4, 5")
                 }
-                Assertions.assertEquals("당첨 번호는 6개여야 합니다.", exception.message)
+                assertEquals("당첨 번호는 6개여야 합니다.", exception.message)
             },
             {
                 val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
                     WinnerNumber("1, 2, 3, 4, 5, 6, 7")
                 }
-                Assertions.assertEquals("당첨 번호는 6개여야 합니다.", exception.message)
+                assertEquals("당첨 번호는 6개여야 합니다.", exception.message)
             },
         )
     }
@@ -93,7 +94,15 @@ internal class LottoAllTest {
         val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
             WinnerNumber("1, 2, 2, 4, 5, 6")
         }
-        Assertions.assertEquals("중복 불가", exception.message)
+        assertEquals("중복 불가", exception.message)
+    }
+
+    @Test
+    fun `보너스 번호가 숫자가 아니면 예외가 발생한다`() {
+        val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
+            BonusNumber("A").parse()
+        }
+        Assertions.assertEquals("숫자만 입력 가능합니다.", exception.message)
     }
 
     @Test

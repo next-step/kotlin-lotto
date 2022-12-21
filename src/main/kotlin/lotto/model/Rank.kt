@@ -10,7 +10,7 @@ enum class Rank(val match: Int, val reward: Int) {
 
     companion object {
         fun of(number: Int, matchBonus: Boolean): Rank {
-            if (matchBonus) {
+            if (number == SECOND.match && matchBonus) {
                 return SECOND
             }
             if (number == THIRD.match && !matchBonus) {
