@@ -76,6 +76,24 @@ class LottoTest {
         ).isEqualTo(listOf(1, 2, 3, 4, 5, 6).toString())
     }
 
+    @Test
+    fun `manual을 통해 수동으로 입력된 로또를 생성할 수 있다`() {
+        assertThat(
+            Lotto.manual("1,2,3,4,5,6")
+        ).isEqualTo(
+            Lotto(
+                setOf(
+                    LottoNumber(1),
+                    LottoNumber(2),
+                    LottoNumber(3),
+                    LottoNumber(4),
+                    LottoNumber(5),
+                    LottoNumber(6)
+                )
+            )
+        )
+    }
+
     companion object {
         @JvmStatic
         fun generateUnder6Source(): List<Arguments> {
