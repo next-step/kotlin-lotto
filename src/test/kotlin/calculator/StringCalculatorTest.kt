@@ -4,10 +4,7 @@ import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
 
 class StringCalculatorTest {
 
@@ -27,7 +24,7 @@ class StringCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = ["1,2,3|6", "4:5:1|10", "4:2,3|9"], delimiter = '|')
-    fun `기본 구분자일 때 문자열을 Split하여 계산한다` (mathematical: String, expect: Long) {
+    fun `기본 구분자일 때 문자열을 Split하여 계산한다`(mathematical: String, expect: Long) {
 
         val calculator = StringCalculator()
         val result = calculator.calculate(mathematical)
@@ -38,7 +35,7 @@ class StringCalculatorTest {
     @CsvSource(value = [";|1;2;3|6", "!|1!1!4|6", "#|2#0#1|3"], delimiter = '|')
     fun `커스텀 구분자일 때 문자열을 Split하여 계산한다`(delimiter: String, mathematical: String, expect: Long) {
         val calculator = StringCalculator()
-        val result = calculator.calculate("//${delimiter}\n${mathematical}")
+        val result = calculator.calculate("//${delimiter}\n$mathematical")
         assertThat(result).isEqualTo(expect)
     }
 
@@ -59,5 +56,4 @@ class StringCalculatorTest {
             calculator.calculate(mathematical)
         }
     }
-
 }

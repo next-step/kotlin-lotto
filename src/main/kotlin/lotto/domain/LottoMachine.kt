@@ -7,30 +7,24 @@ import kotlin.streams.toList
 class LottoMachine(private val generator: Generator) {
 
     fun issue(amount: Amount, manuals: List<String>): LottoIssueResult {
-        val manualLottos = issue(manuals)
-        val autoLottos = issue(amount.sub(Amount(LOTTO_PRICE * manuals.size)))
+        val manualLottos = manualIssue(manuals)
+        val autoLottos = autoIssue(amount.sub(Amount(LOTTO_PRICE * manuals.size)))
         return LottoIssueResult(manualLottos, autoLottos)
     }
 
-    fun issue(amount: Amount): List<Lotto> {
+    private fun autoIssue(amount: Amount): List<Lotto> {
         val count = amount.divide(LOTTO_PRICE)
         return IntStream.rangeClosed(1, count)
             .mapToObj { createLotto() }
             .toList()
     }
 
-    fun issue(manuals: List<String>): List<Lotto> {
-        val lottos = mutableListOf<Lotto>()
-
-        for(manual in manuals) {
-            lottos.add(createLotto(manual))
-        }
-        return lottos
+    private fun manualIssue(manuals: List<String>): List<Lotto> {
+        return manuals.map { createLotto(it) }
     }
 
     private fun createLotto(manual: String): Lotto {
-        val splitManual = manual.split(", ")
-        return Lotto(splitManual.map { s -> s.toIntOrNull() ?: throw IllegalArgumentException() }.toList())
+        return Lotto.create(manual)
     }
 
     private fun createLotto(): Lotto {
