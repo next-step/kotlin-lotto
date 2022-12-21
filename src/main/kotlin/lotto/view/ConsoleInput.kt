@@ -14,9 +14,11 @@ class ConsoleInput {
     }
 
     fun getManualLottoNumbers(manualLottoCount: Int): List<List<Int>> {
+        if (manualLottoCount < MIN_MANUAL_LOTTO_COUNT) return emptyList()
+
         println("수동으로 구매할 번호를 입력해 주세요.")
 
-        return (1..manualLottoCount)
+        return (MIN_MANUAL_LOTTO_COUNT..manualLottoCount)
             .map { readNonBlankLn().takeIf { it.contains(LOTTO_NUMBER_DELIMITER) } ?: throw IllegalArgumentException("lotto numbers should contain $LOTTO_NUMBER_DELIMITER") }
             .map { lottoNumbers -> lottoNumbers.split(LOTTO_NUMBER_DELIMITER).map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("each lotto number should be number") } }
     }
@@ -40,5 +42,6 @@ class ConsoleInput {
 
     companion object {
         private const val LOTTO_NUMBER_DELIMITER = ","
+        private const val MIN_MANUAL_LOTTO_COUNT = 1
     }
 }
