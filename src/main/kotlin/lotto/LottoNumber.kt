@@ -1,7 +1,9 @@
 package lotto
 
 data class LottoNumber(val number: Int) {
-    constructor(numberStr: String) : this(numberStr.toInt()) {
+    constructor(numberStr: String) : this(numberStr.toInt())
+
+    init {
         require(number in MIN_VALUE..MAX_VALUE) { "lotto number out of range" }
     }
 

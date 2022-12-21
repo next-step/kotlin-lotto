@@ -10,7 +10,7 @@ class ResultView {
 
     fun printPurchaseLotteNumbers(lottoList: List<Lotto>) {
         lottoList.forEach { lotto ->
-            println("${ lotto.numbers.map { it.number } }")
+            println("$lotto")
         }
     }
 

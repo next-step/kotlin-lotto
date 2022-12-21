@@ -2,11 +2,11 @@ package lotto
 
 class WinningMachine(winningString: String) {
 
-    val winningLotto: Lotto
+    val winningLottoNumbers: Set<LottoNumber>
 
     init {
         val stringNumbers = getStringNumbers(winningString)
-        winningLotto = Lotto(getWinningNumbers(stringNumbers))
+        winningLottoNumbers = getWinningNumbers(stringNumbers)
     }
 
     private fun getStringNumbers(winningString: String): List<String> {
@@ -24,7 +24,7 @@ class WinningMachine(winningString: String) {
         val winningResult = HashMap<RANKING, Int>()
 
         lottoList.forEach { lotto ->
-            val winningNumbers = winningLotto.numbers.filter { lotto.numbers.contains(it) }
+            val winningNumbers = winningLottoNumbers.filter { lotto.contains(it) }
             setWinningResultValue(winningNumbers.size, winningResult)
         }
 
