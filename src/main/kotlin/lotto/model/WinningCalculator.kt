@@ -1,53 +1,69 @@
 package lotto.model
 
-import java.lang.NullPointerException
 import kotlin.math.round
 
-class WinningCalculator(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber) {
+class WinningCalculator(
+    randomLottoTickets: List<RandomLottoTicketGenerator>,
+    lottoTicket: LottoTicket,
+    bonusNumber: Int
+) {
     private val resultWinningStatistics = WinningStatistics(
-        mutableMapOf(
-            Rank.FIRST to 0,
-            Rank.THIRD to 0, Rank.FOURTH to 0, Rank.FIFTH to 0, Rank.NO_LUCK to 0
-        ),
+        listOf(
+            RankCounter(Rank.FIFTH, 0),
+            RankCounter(Rank.FOURTH, 0),
+            RankCounter(Rank.THIRD, 0),
+            RankCounter(Rank.SECOND, 0),
+            RankCounter(Rank.FIRST, 0),
+            RankCounter(Rank.NO_LUCK, 0)
+        ).groupBy { it.rank },
         0.0
     )
 
-    val winningStatistics = generateWinningStatistics(lottoTickets, winnerNumber)
+    val winningStatistics = generateWinningStatistics(randomLottoTickets, lottoTicket, bonusNumber)
 
     private fun generateWinningStatistics(
-        lottoTickets: List<LottoTicket>,
-        winnerNumber: WinnerNumber
+        randomLottoTickets: List<RandomLottoTicketGenerator>,
+        lottoTicket: LottoTicket,
+        bonusNumber: Int
     ): WinningStatistics {
-        for (lottoTicket in lottoTickets) {
-            setGrade(lottoTicket.lottoNumbers.toSet().intersect(winnerNumber.winnerNumbers.toSet()).size)
+        for (randomLottoTicket in randomLottoTickets) {
+            val restNumber = randomLottoTicket.lottoNumbers.toSet().subtract(lottoTicket.values.toSet())
+            val findingBonusNumber = restNumber.find { it == bonusNumber } ?: 0
+            setGrade(
+                randomLottoTicket.lottoNumbers.toSet().intersect(lottoTicket.values.toSet()).size,
+                findingBonusNumber
+            )
         }
 
-        calculateRate(lottoTickets.size)
+        calculateRate(randomLottoTickets.size)
 
         return resultWinningStatistics
     }
 
-    private fun setGrade(count: Int) {
-        val rank = Rank.of(count)
-        try {
-            resultWinningStatistics.ranks[rank] = resultWinningStatistics.ranks[rank]!! + 1
-        } catch (e: NullPointerException) {
-        }
+    private fun setGrade(count: Int, bonusNumber: Int) {
+        val rank = Rank.of(count, isMatchBonusNumber(bonusNumber))
+        resultWinningStatistics.ranks[rank]?.get(0)?.count =
+            (resultWinningStatistics.ranks[rank]?.get(0)?.count ?: 0) + 1
+    }
+
+    private fun isMatchBonusNumber(bonusNumber: Int): Boolean {
+        return bonusNumber != 0
     }
 
     fun calculateRate(quantity: Int): Double {
         var totalReward = 0.0
         for (rank in resultWinningStatistics.ranks) {
-            totalReward += (rank.value * rank.key.reward).toDouble()
+            totalReward += (rank.value[0].count * rank.key.reward).toDouble()
         }
         resultWinningStatistics.rate = round(
-            totalReward / (quantity * 1000) * ROUND
+            totalReward / (quantity * TICKET_PRICE) * ROUND
         ) / ROUND
 
         return resultWinningStatistics.rate
     }
 
     companion object {
-        const val ROUND = 100
+        private const val ROUND = 100
+        private const val TICKET_PRICE = 1000
     }
 }
