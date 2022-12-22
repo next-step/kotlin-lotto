@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.controller.LottoGame
-import lotto.model.BonusNumber
+import lotto.model.LottoNumber
 import lotto.model.LottoTicket
 import lotto.model.TicketQuantity
 import lotto.model.WinnerNumber
@@ -98,11 +98,19 @@ internal class LottoAllTest {
     }
 
     @Test
-    fun `보너스 번호가 숫자가 아니면 예외가 발생한다`() {
+    fun `숫자가 아닌 값을 입력하면 예외가 발생한다`() {
         val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
-            BonusNumber("A").parse()
+            LottoNumber("A")
         }
         Assertions.assertEquals("숫자만 입력 가능합니다.", exception.message)
+    }
+
+    @Test
+    fun `1에서 45 사이 값이 아닌 경우 예외가 발생한다`() {
+        val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
+            LottoNumber("46")
+        }
+        Assertions.assertEquals("1에서 45 사이의 값을 입력하세요.", exception.message)
     }
 
     @Test

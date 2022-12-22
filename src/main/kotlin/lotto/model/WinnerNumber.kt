@@ -22,10 +22,11 @@ class WinnerNumber(input: String) {
     }
 
     private fun checkDuplication(numbers: List<LottoNumber>) {
-        require(numbers.toSet().size == LottoNumber.LOTTO_NUMBER_SIZE) { "중복 불가" }
+        require(numbers.toSet().size == LOTTO_NUMBER_SIZE) { "중복 불가" }
     }
 
     companion object {
-        const val INPUT_VALUE_DELIMITER = ", "
+        private const val LOTTO_NUMBER_SIZE = 6
+        private const val INPUT_VALUE_DELIMITER = ", "
     }
 }
