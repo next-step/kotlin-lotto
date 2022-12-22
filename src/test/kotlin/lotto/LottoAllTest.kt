@@ -3,8 +3,8 @@ package lotto
 import lotto.controller.LottoGame
 import lotto.model.LottoNumber
 import lotto.model.LottoTicket
+import lotto.model.RandomLottoTicketGenerator
 import lotto.model.TicketQuantity
-import lotto.model.WinnerNumber
 import lotto.model.WinningCalculator
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -15,7 +15,7 @@ import java.lang.IllegalArgumentException
 internal class LottoAllTest {
     @Test
     fun `임의의 6개 숫자를 중복없이 생성한다`() {
-        val testTicket = LottoTicket()
+        val testTicket = RandomLottoTicketGenerator()
         assertEquals(LOTTO_NUMBER_SIZE, testTicket.lottoNumbers.toSet().size)
     }
 
@@ -51,7 +51,7 @@ internal class LottoAllTest {
     @Test
     fun `지난 주 당첨 번호 숫자가 아니면 예외가 발생한다`() {
         val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
-            WinnerNumber("A")
+            LottoTicket("A")
         }
         assertEquals("숫자만 입력 가능합니다.", exception.message)
     }
@@ -59,7 +59,7 @@ internal class LottoAllTest {
     @Test
     fun `지난 주 당첨 번호 범위가 1에서 45가 아니면 예외가 발생한다`() {
         val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
-            WinnerNumber("1, 2, 3, 4, 5, 46")
+            LottoTicket("1, 2, 3, 4, 5, 46")
         }
         assertEquals("1에서 45 사이의 값을 입력하세요.", exception.message)
     }
@@ -67,7 +67,7 @@ internal class LottoAllTest {
     @Test
     fun `지난 주 당첨 번호 음수면 예외가 발생한다`() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            WinnerNumber("1, 2, 3, 4, 5, -6")
+            LottoTicket("1, 2, 3, 4, 5, -6")
         }
     }
 
@@ -76,13 +76,13 @@ internal class LottoAllTest {
         assertAll(
             {
                 val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
-                    WinnerNumber("1, 2, 3, 4, 5")
+                    LottoTicket("1, 2, 3, 4, 5")
                 }
                 assertEquals("당첨 번호는 6개여야 합니다.", exception.message)
             },
             {
                 val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
-                    WinnerNumber("1, 2, 3, 4, 5, 6, 7")
+                    LottoTicket("1, 2, 3, 4, 5, 6, 7")
                 }
                 assertEquals("당첨 번호는 6개여야 합니다.", exception.message)
             },
@@ -92,7 +92,7 @@ internal class LottoAllTest {
     @Test
     fun `지난 주 당첨 번호 중복 시 예외가 발생한다`() {
         val exception = Assertions.assertThrows(IllegalArgumentException::class.java) {
-            WinnerNumber("1, 2, 2, 4, 5, 6")
+            LottoTicket("1, 2, 2, 4, 5, 6")
         }
         assertEquals("중복 불가", exception.message)
     }
@@ -115,24 +115,24 @@ internal class LottoAllTest {
 
     @Test
     fun `당첨 통계를 계산한다`() {
-        var test1Ticket = LottoTicket()
+        var test1Ticket = RandomLottoTicketGenerator()
         val test1WinningNumber = test1Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
 
-        var test2Ticket = LottoTicket()
+        var test2Ticket = RandomLottoTicketGenerator()
         var test2WinningNumber = test2Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
 
         val testTickets = listOf(test1Ticket, test2Ticket)
 
         assertAll(
             {
-                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test1WinningNumber), 1)
+                val testCalculator = WinningCalculator(testTickets, LottoTicket(test1WinningNumber), 1)
                 assertEquals(
                     (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
                     testCalculator.calculateRate(testTickets.size)
                 )
             },
             {
-                val testCalculator = WinningCalculator(testTickets, WinnerNumber(test2WinningNumber), 1)
+                val testCalculator = WinningCalculator(testTickets, LottoTicket(test2WinningNumber), 1)
                 assertEquals(
                     (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
                     testCalculator.calculateRate(testTickets.size)

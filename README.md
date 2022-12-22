@@ -10,6 +10,7 @@
 - [x] 4차 피드백 반영
 - [x] 리팩터링: 출력문 비용 감소
 - [x] 리팩터링: LottoNumber 클래스 개선을 통한 BonusNumber 통합
+- [x] 리팩터링: LottoTicket 클래스 개선 및 WinnerNumber 통합
 
 ## 로또 기능 목록 (2단계)
 

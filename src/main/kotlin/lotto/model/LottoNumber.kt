@@ -1,8 +1,8 @@
 package lotto.model
 
-data class LottoNumber(val number: Int) {
+data class LottoNumber(val value: Int) {
     init {
-        require(number in LOTTO_WINNER_NUMBER_RANGE) { "1에서 45 사이의 값을 입력하세요." }
+        require(value in LOTTO_WINNER_NUMBER_RANGE) { "1에서 45 사이의 값을 입력하세요." }
     }
 
     constructor(value: String) : this(convert(value))

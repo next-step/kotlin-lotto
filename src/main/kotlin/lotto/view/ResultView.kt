@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.model.LottoTicket
+import lotto.model.RandomLottoTicketGenerator
 import lotto.model.Rank
 import lotto.model.WinningStatistics
 
@@ -9,9 +9,9 @@ class ResultView {
         println("${quantity}개를 구매했습니다.")
     }
 
-    fun showLottoTicket(lottoTickets: List<LottoTicket>) {
-        for (lottoTicket in lottoTickets) {
-            println(lottoTicket.lottoNumbers)
+    fun showLottoTicket(randomLottoTickets: List<RandomLottoTicketGenerator>) {
+        for (lottoTicket in randomLottoTickets) {
+            println(lottoTicket)
         }
     }
 
