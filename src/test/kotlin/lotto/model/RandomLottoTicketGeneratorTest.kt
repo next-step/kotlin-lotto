@@ -1,13 +1,13 @@
 package lotto.model
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 internal class RandomLottoTicketGeneratorTest {
     @Test
     fun `임의의 6개 숫자를 중복없이 생성한다`() {
         val testTicket = RandomLottoTicketGenerator()
-        assertEquals(LOTTO_NUMBER_SIZE, testTicket.lottoNumbers.toSet().size)
+        Assertions.assertThat(testTicket.lottoNumbers.toSet().size).isSameAs(LOTTO_NUMBER_SIZE)
     }
 
     companion object {

@@ -12,9 +12,7 @@ class LottoTicket(val values: List<Int>) {
         private const val LOTTO_NUMBER_SIZE = 6
         private const val INPUT_VALUE_DELIMITER = ", "
         private fun convert(input: String): List<Int> {
-            val numbers: List<LottoNumber> = input.split(INPUT_VALUE_DELIMITER).map {
-                LottoNumber(it)
-            }
+            val numbers: List<LottoNumber> = input.split(INPUT_VALUE_DELIMITER).map(::LottoNumber)
             return numbers.map { it.value }
         }
     }

@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.LottoAllTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -13,23 +14,23 @@ internal class WinningCalculatorTest {
         var test2Ticket = RandomLottoTicketGenerator()
         var test2WinningNumber = test2Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
 
-        val testTickets = mutableListOf(test1Ticket, test2Ticket)
+        val testTickets = listOf(test1Ticket, test2Ticket)
 
         assertAll(
             {
                 val testCalculator = WinningCalculator(testTickets, LottoTicket(test1WinningNumber), 1)
                 assertEquals(
-                    (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
+                    (LottoAllTest.LOTTO_MAX_REWARD / (testTickets.size * LottoAllTest.LOTTO_TICKET_PRICE)).toDouble(),
                     testCalculator.calculateRate(testTickets.size)
                 )
             },
             {
                 val testCalculator = WinningCalculator(testTickets, LottoTicket(test2WinningNumber), 1)
                 assertEquals(
-                    (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
+                    (LottoAllTest.LOTTO_MAX_REWARD / (testTickets.size * LottoAllTest.LOTTO_TICKET_PRICE)).toDouble(),
                     testCalculator.calculateRate(testTickets.size)
                 )
-            },
+            }
         )
     }
 
