@@ -23,19 +23,6 @@ data class Report(
         return (ranks.totalPrize / lottosKRW * 100.0).roundToInt() / 100.0
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Report) return false
-
-        if (ranks != other.ranks) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return ranks.hashCode()
-    }
-
     private val lottosKRW: Int
         get() = ranks.size * 1000
 }
