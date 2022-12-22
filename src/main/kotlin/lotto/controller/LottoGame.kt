@@ -25,9 +25,7 @@ class LottoGame {
     }
 
     fun purchaseLottoTicket(quantity: Int): List<LottoTicket> {
-        return (0 until quantity).map {
-            LottoTicket()
-        }
+        return List(quantity) { LottoTicket() }
     }
 
     private fun drawWinnerNumber(lottoTickets: List<LottoTicket>, winnerNumber: WinnerNumber, bonusNumber: Int): WinningStatistics {

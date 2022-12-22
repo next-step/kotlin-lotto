@@ -16,15 +16,15 @@ class ResultView {
     }
 
     fun showWinningStatistics(result: WinningStatistics) {
-        println("당첨 통계")
-        println("---------")
+        var matchState = "당첨 통계\n---------\n"
         result.ranks.forEach {
             if (it.key == Rank.SECOND) {
-                println("${it.key.match}개 일치, 보너스 볼 일치 (${it.key.reward})- ${result.ranks[it.key]}개")
+                matchState += "${it.key.match}개 일치, 보너스 볼 일치 (${it.key.reward})- ${result.ranks[it.key]?.get(0)?.count}개\n"
             } else if (it.key.reward != 0) {
-                println("${it.key.match}개 일치 (${it.key.reward})- ${result.ranks[it.key]}개")
+                matchState += "${it.key.match}개 일치 (${it.key.reward})- ${result.ranks[it.key]?.get(0)?.count}개\n"
             }
         }
-        println("총 수익률은 ${result.rate}입니다.")
+        matchState += "\n총 수익률은 ${result.rate}입니다."
+        println(matchState)
     }
 }
