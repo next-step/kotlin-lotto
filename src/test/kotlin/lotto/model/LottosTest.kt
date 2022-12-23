@@ -1,7 +1,7 @@
 package lotto.model
 
+import lotto.model.LottoPrize.FIFTH
 import lotto.model.LottoPrize.FIRST
-import lotto.model.LottoPrize.FOURTH
 import lotto.model.LottoPrize.NONE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -19,7 +19,7 @@ class LottosTest {
         val winningResult = WinningResult.of(lottos, winningNumbers)
 
         assertThat(winningResult.getCountOf(FIRST)).isEqualTo(1)
-        assertThat(winningResult.getCountOf(FOURTH)).isEqualTo(3)
+        assertThat(winningResult.getCountOf(FIFTH)).isEqualTo(3)
         assertThat(winningResult.getCountOf(NONE)).isEqualTo(2)
         assertThat(winningResult.getTotalWinningAmount()).isEqualTo(BigDecimal(2_000_015_000))
         assertThat(winningResult.getReturnRatio()).isEqualTo(BigDecimal("333335.83"))

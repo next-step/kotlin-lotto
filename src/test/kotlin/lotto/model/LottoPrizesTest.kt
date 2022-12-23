@@ -1,5 +1,6 @@
 package lotto.model
 
+import lotto.model.LottoPrize.FIFTH
 import lotto.model.LottoPrize.FOURTH
 import lotto.model.LottoPrize.NONE
 import lotto.model.LottoPrize.SECOND
@@ -11,7 +12,7 @@ import java.math.BigDecimal
 class LottoPrizesTest {
     @Test
     fun `총 당청 금액을 계산한다`() {
-        val lottoPrizes = LottoPrizes.of(NONE, THIRD, FOURTH)
+        val lottoPrizes = LottoPrizes.of(NONE, FOURTH, FIFTH)
         assertThat(lottoPrizes.getTotalWinningAmount()).isEqualTo(BigDecimal(55_000))
     }
 

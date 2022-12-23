@@ -20,7 +20,7 @@ class LottoNumber private constructor(val value: Int) {
         }
 
         fun of(value: String): LottoNumber {
-            return LOTTO_NUMBER_POOL[value.toInt()] ?: LottoNumber(value.toInt())
+            return LOTTO_NUMBER_POOL[value.trim().toInt()] ?: LottoNumber(value.trim().toInt())
         }
     }
 }

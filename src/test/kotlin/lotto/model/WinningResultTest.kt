@@ -19,12 +19,12 @@ class WinningResultTest {
 
     @Test
     internal fun `총 당청 금액을 계산한다`() {
-        assertThat(winningResult.getTotalWinningAmount()).isEqualTo(BigDecimal(115000))
+        assertThat(winningResult.getTotalWinningAmount()).isEqualTo(BigDecimal(3_150_000))
     }
 
     @Test
     internal fun `당첨 수익률을 계산한다`() {
-        assertThat(winningResult.getReturnRatio()).isEqualTo(BigDecimal("19.17"))
+        assertThat(winningResult.getReturnRatio()).isEqualTo(BigDecimal("525.00"))
     }
 
     @Test
