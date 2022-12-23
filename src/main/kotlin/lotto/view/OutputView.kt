@@ -40,10 +40,10 @@ object OutputView {
     }
 
     private fun printPrizeDetails(winningResult: WinningResult) {
-        printPrizeCount(winningResult, LottoPrize.FOURTH)
-        printPrizeCount(winningResult, LottoPrize.THIRD)
-        printPrizeCount(winningResult, LottoPrize.SECOND)
-        printPrizeCount(winningResult, LottoPrize.FIRST)
+        LottoPrize.values()
+            .sortedDescending()
+            .filterNot { it == LottoPrize.NONE }
+            .forEach { printPrizeCount(winningResult, it) }
     }
 
     private fun printPrizeCount(winningResult: WinningResult, target: LottoPrize) {
