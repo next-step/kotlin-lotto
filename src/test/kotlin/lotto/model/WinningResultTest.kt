@@ -1,17 +1,20 @@
 package lotto.model
 
+import lotto.model.Lotto.Companion.LOTTO_PRICE
+import lotto.model.LottoPrize.FIRST
+import lotto.model.LottoPrize.FOURTH
+import lotto.model.LottoPrize.NONE
+import lotto.model.LottoPrize.SECOND
+import lotto.model.LottoPrize.THIRD
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 
 class WinningResultTest {
     private val winningResult by lazy {
-        val none = Lotto.of(7, 8, 9, 10, 11, 12)
-        val third = Lotto.of(1, 2, 3, 4, 45, 46)
-        val fourth = Lotto.of(1, 2, 3, 44, 45, 46)
-        val lottos = Lottos(listOf(none, fourth, fourth, fourth, third, third))
-        val winningNumbers = WinningNumbers(Lotto.of(1, 2, 3, 4, 5, 6))
-        WinningResult(lottos, winningNumbers)
+        val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
+        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
+        WinningResult(purchaseAmount, prizes)
     }
 
     @Test
@@ -26,10 +29,10 @@ class WinningResultTest {
 
     @Test
     internal fun `등수 별 당첨결과를 출력한다`() {
-        assertThat(winningResult.getCountOf(LottoPrize.NONE)).isEqualTo(1)
-        assertThat(winningResult.getCountOf(LottoPrize.FOURTH)).isEqualTo(3)
-        assertThat(winningResult.getCountOf(LottoPrize.THIRD)).isEqualTo(2)
-        assertThat(winningResult.getCountOf(LottoPrize.SECOND)).isEqualTo(0)
-        assertThat(winningResult.getCountOf(LottoPrize.FIRST)).isEqualTo(0)
+        assertThat(winningResult.getCountOf(NONE)).isEqualTo(1)
+        assertThat(winningResult.getCountOf(FOURTH)).isEqualTo(3)
+        assertThat(winningResult.getCountOf(THIRD)).isEqualTo(2)
+        assertThat(winningResult.getCountOf(SECOND)).isEqualTo(0)
+        assertThat(winningResult.getCountOf(FIRST)).isEqualTo(0)
     }
 }

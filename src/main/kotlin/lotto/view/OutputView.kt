@@ -28,7 +28,7 @@ object OutputView {
         println("당첨 통계")
         println("---------")
 
-        val winningResult = WinningResult(lottos, winningNumbers)
+        val winningResult = WinningResult.of(lottos, winningNumbers)
 
         printPrizeDetails(winningResult)
         printPrizeReturnRatio(winningResult)

@@ -16,7 +16,7 @@ class LottosTest {
         val none = Lotto.of(7, 8, 9, 10, 11, 12)
         val lottos = Lottos(listOf(first, fourth, fourth, fourth, none, none))
 
-        val winningResult = lottos.winningResultFor(winningNumbers)
+        val winningResult = WinningResult.of(lottos, winningNumbers)
 
         assertThat(winningResult.getCountOf(FIRST)).isEqualTo(1)
         assertThat(winningResult.getCountOf(FOURTH)).isEqualTo(3)

@@ -7,12 +7,12 @@ import java.math.BigDecimal
 object InputView {
     fun readMoney(): BigDecimal {
         println("구입금액을 입력해 주세요.")
-        return readLine()!!.toBigDecimal()
+        return readln().toBigDecimal()
     }
 
     fun readWinningNumbers(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해주세요.")
-        val input = readLine()!!
+        val input = readln()
         return WinningNumbers(LottoGenerator.fromString(input))
     }
 }
