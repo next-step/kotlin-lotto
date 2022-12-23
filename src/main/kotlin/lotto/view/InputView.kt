@@ -1,6 +1,7 @@
 package lotto.view
 
-import lotto.model.WinningNumbers
+import lotto.model.Lotto
+import lotto.model.LottoNumber
 import lotto.service.LottoGenerator
 import java.math.BigDecimal
 
@@ -10,9 +11,13 @@ object InputView {
         return readln().toBigDecimal()
     }
 
-    fun readWinningNumbers(): WinningNumbers {
+    fun readWinningLotto(): Lotto {
         println("지난 주 당첨 번호를 입력해주세요.")
-        val input = readln()
-        return WinningNumbers(LottoGenerator.fromString(input))
+        return LottoGenerator.fromString(readln())
+    }
+
+    fun readBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        return LottoNumber.of(readln())
     }
 }
