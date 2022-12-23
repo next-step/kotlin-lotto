@@ -4,6 +4,6 @@ data class WinningStatistic(private val allWinningPrizes: List<WinningPrizeInfo>
     val winningStatistic: Map<WinningPrizeInfo, WinningPrizeCount> = allWinningPrizes.associateWith { WinningPrizeCount(statisticOfWinningPrize[it] ?: 0) }
 }
 
-data class WinningPrizeInfo(val matchedCount: Int, val prize: Int, val hasBonus: Boolean = false)
+data class WinningPrizeInfo(val matchedCount: Int, val prize: Int, val hasBonus: Boolean?)
 
 data class WinningPrizeCount(val count: Int)

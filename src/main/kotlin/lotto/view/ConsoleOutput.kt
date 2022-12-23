@@ -4,9 +4,9 @@ import lotto.controller.dto.WinningPrizeCount
 import lotto.controller.dto.WinningPrizeInfo
 import lotto.controller.dto.WinningStatistic
 
-class ConsoleOutPut {
-    fun printPurchasedLottoCount(lottoCount: Int) {
-        println("${lottoCount}개를 구매했습니다.")
+class ConsoleOutput {
+    fun printPurchasedLottoCount(lottoCount: Int, manualLottoCount: Int) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${lottoCount - manualLottoCount}개를 구매했습니다.")
     }
 
     fun printLottoNumbers(lottoNumbers: List<Int>) {
@@ -26,7 +26,7 @@ class ConsoleOutPut {
     }
 
     private fun printWinningPrize(winningStatistic: WinningPrizeInfo, winningPrizeCount: WinningPrizeCount) {
-        winningStatistic.takeIf { it.hasBonus }
+        winningStatistic.takeIf { it.hasBonus != null && it.hasBonus }
             ?.let { println("${winningStatistic.matchedCount}개 일치, 보너스 볼 일치 (${winningStatistic.prize}원)- ${winningPrizeCount.count}개") }
             ?: println("${winningStatistic.matchedCount}개 일치 (${winningStatistic.prize}원)- ${winningPrizeCount.count}개")
     }
