@@ -26,7 +26,7 @@ class WinningNumbersTest {
     ) {
         val winningNumbers = LottoGenerator.fromString(winningNums).let(::WinningNumbers)
         val lotto = LottoGenerator.fromString(lottoNums)
-        val expectedPrize = LottoPrize.of(expectedMatchCount)
+        val expectedPrize = LottoPrize.of(expectedMatchCount, true)
 
         assertThat(winningNumbers.prizeOf(lotto)).isEqualTo(expectedPrize)
     }

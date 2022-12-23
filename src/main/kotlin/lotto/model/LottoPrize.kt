@@ -16,8 +16,13 @@ enum class LottoPrize(
     NONE(0, ZERO);
 
     companion object {
-        fun of(matchCount: Int): LottoPrize {
-            return values().find { it.matchCount == matchCount } ?: NONE
+        fun of(matchCount: Int, matchBonus: Boolean): LottoPrize {
+            if (matchCount == SECOND.matchCount && matchBonus) {
+                return SECOND
+            }
+
+            return values().filterNot { it == SECOND }
+                .find { it.matchCount == matchCount } ?: NONE
         }
     }
 }
