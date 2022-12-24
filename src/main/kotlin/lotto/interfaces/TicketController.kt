@@ -60,7 +60,11 @@ class TicketController(
     private fun viewPrizeList(prizeList: List<Prize>) {
         OutputConsole.printPrize()
         Prize.values().filter { it.isNotBoom() }.forEach { prize ->
-            OutputConsole.printWinPrize(equalNumberCount = prize.equalNumberCount, amount = prize.amount, winCount = prizeList.count { it == prize })
+            OutputConsole.printWinPrize(equalNumberCount = prize.equalNumberCount(),
+                amount = prize.amount,
+                winCount = prizeList.count { it == prize },
+                isBonusPrize = prize.isBonusPrize()
+            )
         }
     }
 
