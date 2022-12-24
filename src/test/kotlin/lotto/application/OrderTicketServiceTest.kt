@@ -8,6 +8,7 @@ import lotto.common.value.Money.Companion.toMoney
 import lotto.domain.enums.Prize
 import lotto.domain.enums.TicketType
 import lotto.domain.policy.DefaultPricePolicy
+import lotto.domain.vo.LotteryNumber
 
 class OrderTicketServiceTest : BehaviorSpec({
 
@@ -28,14 +29,16 @@ class OrderTicketServiceTest : BehaviorSpec({
             then("로또의 당첨여부를 확인할 수 있다") {
                 val lotteryNumbers = orderTicketService.getLotteryNumbers(order)
                 val winLotteryNumbers = lotteryNumbers[0]
-                val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order)
+                val bonusNumber = LotteryNumber(value = 7)
+                val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order, bonusNumber)
                 prizeList.contains(Prize.FIRST).shouldBeTrue()
             }
 
             then("로또의 수익률을 계산할 수 있다") {
                 val lotteryNumbers = orderTicketService.getLotteryNumbers(order)
                 val winLotteryNumbers = lotteryNumbers[0]
-                val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order)
+                val bonusNumber = LotteryNumber(value = 7)
+                val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order, bonusNumber)
                 val rateOfReturn = orderTicketService.calculateRateOfReturn(order, prizeList)
                 (rateOfReturn >= 1).shouldBeTrue()
             }

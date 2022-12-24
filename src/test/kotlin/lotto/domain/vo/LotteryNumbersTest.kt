@@ -31,11 +31,28 @@ class LotteryNumbersTest : FreeSpec({
 
         val winNumbers = LotteryNumbers(lotteryNumbers = list)
         val target = LotteryNumbers(lotteryNumbers = targetList)
+        val bonusNumber = generateNumber(45)
 
-        val prize = winNumbers.findPrize(target)
-        prize shouldBe Prize.FOURTH
+        val prize = winNumbers.findPrize(target, bonusNumber)
+        prize shouldBe Prize.FIFTH
+    }
+
+    "보너스 번호를 포함한 추첨번호가 일치하는 상품을 가져올 수 있다" {
+        val list = generateList(1, 6)
+        val targetList = generateList(2, 7)
+
+        val winNumbers = LotteryNumbers(lotteryNumbers = list)
+        val target = LotteryNumbers(lotteryNumbers = targetList)
+        val bonusNumber = generateNumber(1)
+
+        val prize = winNumbers.findPrize(target, bonusNumber)
+        prize shouldBe Prize.SECOND
     }
 })
+
+fun generateNumber(number: Int): LotteryNumber {
+    return LotteryNumber(value = number)
+}
 
 fun generateList(start: Int, end: Int): List<LotteryNumber> {
     val mutableSet = mutableSetOf<LotteryNumber>()

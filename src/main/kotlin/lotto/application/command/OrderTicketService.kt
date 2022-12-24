@@ -9,6 +9,7 @@ import lotto.domain.Tickets
 import lotto.domain.enums.Prize
 import lotto.domain.enums.TicketType
 import lotto.domain.policy.PricePolicy
+import lotto.domain.vo.LotteryNumber
 import lotto.domain.vo.LotteryNumbers
 import java.math.RoundingMode
 
@@ -26,9 +27,9 @@ class OrderTicketService(
 
     fun getLotteryNumbers(order: Order): List<LotteryNumbers> = order.toLotteryNumbers()
 
-    fun confirmPrizeByOrder(winLotteryNumbers: LotteryNumbers, order: Order): List<Prize> {
+    fun confirmPrizeByOrder(winLotteryNumbers: LotteryNumbers, order: Order, bonusNumber: LotteryNumber): List<Prize> {
         return order.toLotteryNumbers().map {
-            winLotteryNumbers.findPrize(it)
+            winLotteryNumbers.findPrize(it, bonusNumber)
         }
     }
 
