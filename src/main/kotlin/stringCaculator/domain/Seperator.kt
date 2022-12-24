@@ -3,19 +3,23 @@ package stringCaculator.domain
 class Seperator {
 
     fun parse(text: String): List<Int> {
-        val result =
-            if (hasCustomDelimeter(text)) {
-                customDelimiter(text)
-            } else {
-                defaultDelimiter(text)
-            }
+        val result = parseDelimiter(text)
         checkMinusInt(result)
         return result.map { it.toInt() }.toList()
+    }
+
+    private fun parseDelimiter(text: String): List<String> {
+        return if (hasCustomDelimeter(text)) {
+            customDelimiter(text)
+        } else {
+            defaultDelimiter(text)
+        }
     }
 
     private fun checkMinusInt(input: List<String>) {
         require(input.all { it.toInt() >= 0 }) { throw IllegalArgumentException(ExceptionCode.NOT_ALLOWED_MINUS.getMessage()) }
     }
+
     private fun defaultDelimiter(text: String): List<String> {
         return text.split(",|:".toRegex())
     }
