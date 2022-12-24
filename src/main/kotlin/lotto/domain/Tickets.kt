@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.common.value.Money
+import lotto.common.value.Money.Companion.toMoney
 import lotto.common.value.Quantity
 import lotto.domain.enums.TicketType
 import lotto.domain.policy.PricePolicy
@@ -11,7 +12,7 @@ class Tickets(
 ) {
 
     fun totalPrice(): Money {
-        return Money(tickets.sumOf { it.price.value })
+        return tickets.sumOf { it.price.value }.toMoney()
     }
 
     fun issue() {
