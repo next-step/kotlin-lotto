@@ -27,4 +27,13 @@ object InputConsole {
             println("숫자를 입력해주세요")
             queryLastWeekWinLotteryNumbers()
         }
+
+    fun queryLastWeekBonusNumber(): Int =
+        try {
+            println("보너스 볼을 입력해 주세요.")
+            readln().trim().toInt()
+        } catch (e: NumberFormatException) {
+            println("숫자를 입력해주세요")
+            queryLastWeekBonusNumber()
+        }
 }

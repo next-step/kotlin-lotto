@@ -23,7 +23,9 @@ class TicketController(
 
         val winLotteryNumbers = queryLastWeekWinLotteryNumbers()
 
-        val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order)
+        val bonusNumber = queryLastWeekBonusNumber()
+
+        val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order, bonusNumber)
         viewPrizeList(prizeList)
 
         val rateOfReturn = orderTicketService.calculateRateOfReturn(order, prizeList)
@@ -48,6 +50,11 @@ class TicketController(
         val inputNumbers = InputConsole.queryLastWeekWinLotteryNumbers()
         val lastWeekWinLotteryNumbers = inputNumbers.map { LotteryNumber(it) }.toList()
         return LotteryNumbers(lotteryNumbers = lastWeekWinLotteryNumbers)
+    }
+
+    private fun queryLastWeekBonusNumber(): LotteryNumber {
+        val inputNumber = InputConsole.queryLastWeekBonusNumber()
+        return LotteryNumber(value = inputNumber)
     }
 
     private fun viewPrizeList(prizeList: List<Prize>) {
