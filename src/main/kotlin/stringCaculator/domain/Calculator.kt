@@ -1,4 +1,4 @@
-package domain
+package stringCaculator.domain
 
 class Calculator {
     fun sum(input: String?): Int {

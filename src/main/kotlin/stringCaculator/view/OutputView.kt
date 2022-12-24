@@ -1,4 +1,4 @@
-package view
+package stringCaculator.view
 
 class OutputView {
     fun printConsole(text: Int) {

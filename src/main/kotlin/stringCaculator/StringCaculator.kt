@@ -1,6 +1,6 @@
-import domain.Calculator
-import view.InputView
-import view.OutputView
+import stringCaculator.domain.Calculator
+import stringCaculator.view.InputView
+import stringCaculator.view.OutputView
 
 fun main() {
     val text = InputView().input()

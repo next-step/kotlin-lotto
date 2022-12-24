@@ -1,4 +1,4 @@
-package domain
+package stringCaculator.domain
 
 class Seperator {
 
