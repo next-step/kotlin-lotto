@@ -14,7 +14,7 @@ class Seperator {
     }
 
     private fun checkMinusInt(input: List<String>) {
-        require(input.all { it.toInt() >= 0 }) { ExceptionCode.NOT_ALLOWED_MINUS.getMessage() }
+        require(input.all { it.toInt() >= 0 }) { throw IllegalArgumentException(ExceptionCode.NOT_ALLOWED_MINUS.getMessage()) }
     }
     private fun defaultDelimiter(text: String): List<String> {
         return text.split(",|:".toRegex())
