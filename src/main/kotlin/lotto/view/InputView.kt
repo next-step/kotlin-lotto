@@ -20,6 +20,6 @@ object InputView {
         val winNumberString = readln()
         println("보너스 볼을 입력해 주세요.")
         val bonusNumberString = readln()
-        return LottoWinTicket.from(winNumberString, bonusNumberString)
+        return LottoWinTicket.of(winNumberString, bonusNumberString)
     }
 }

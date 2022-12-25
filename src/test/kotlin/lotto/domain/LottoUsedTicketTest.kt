@@ -13,7 +13,7 @@ class LottoUsedTicketTest : FunSpec({
         val bonusString = "13"
         val lottoNumbers = LottoNumbers.from(selectedString)
         val lottoUsedTicket = LottoUsedTicket(lottoNumbers)
-        val lottoWinTicket = LottoWinTicket.from(selectedString, bonusString)
+        val lottoWinTicket = LottoWinTicket.of(selectedString, bonusString)
 
         test("evaluate") {
             val reward = lottoUsedTicket.evaluate(lottoWinTicket)

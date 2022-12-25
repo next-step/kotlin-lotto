@@ -18,8 +18,7 @@ class LottoNumbers(
     }
 
     fun matches(inputNumber: LottoNumber): Boolean {
-        val matchingNumber = numbers.firstOrNull { it.matches(inputNumber) }
-        return matchingNumber != null
+        return numbers.contains(inputNumber)
     }
 
     override fun toString(): String {

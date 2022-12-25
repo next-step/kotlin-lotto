@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 class LottoUsedTicketsTest : FunSpec({
 
     context("LottoUsedTicket") {
-        val winTicketNumber = LottoWinTicket.from("1,2,3,4,5,6", "13")
+        val winTicketNumber = LottoWinTicket.of("1,2,3,4,5,6", "13")
         val lottoUsedTickets = LottoUsedTickets(
             listOf(
                 LottoUsedTicket(LottoNumbers.from("1,2,3,4,5,6")),

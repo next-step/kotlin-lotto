@@ -14,7 +14,7 @@ class LottoWinTicket(
     }
 
     companion object {
-        fun from(winNumberString: String, bonusString: String): LottoWinTicket {
+        fun of(winNumberString: String, bonusString: String): LottoWinTicket {
             val winLottoNumbers = LottoNumbers.from(winNumberString)
             val bonusLottoNumber = LottoNumber(bonusString)
 

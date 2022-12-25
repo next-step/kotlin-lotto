@@ -10,17 +10,17 @@ class LottoWinTicketTest : FunSpec({
     context("LottoWinTicket 생성") {
         test("fun from()") {
             shouldNotThrowAny {
-                LottoWinTicket.from("1,2,3,4,5,6", "13")
+                LottoWinTicket.of("1,2,3,4,5,6", "13")
             }
 
             shouldThrowExactly<IllegalArgumentException> {
-                LottoWinTicket.from("1,2,3,4,5,6", "1")
+                LottoWinTicket.of("1,2,3,4,5,6", "1")
             }
         }
     }
 
     context("LottoWinTicket 메소드") {
-        val lottoWinTicket = LottoWinTicket.from("1,2,3,4,5,6", "13")
+        val lottoWinTicket = LottoWinTicket.of("1,2,3,4,5,6", "13")
 
         test("matches") {
             with(lottoWinTicket) {
