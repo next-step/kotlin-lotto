@@ -36,15 +36,15 @@ class LottoTest : StringSpec({
     }
 
     "입력 받은 문자열을 , 구분자를 통해 6개의 당첨 숫자로 반환한다" {
-        val winningMachine = WinningMachine("1, 2, 3, 4, 5, 6")
+        val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6")
 
-        winningMachine.winningLottoNumbers.size shouldBe 6
+        winningLotto.winningLottoNumbers.size shouldBe 6
     }
 
     "입력 받은 문자열의 6개 당첨 숫자에 중복이 없어야 한다" {
-        val winningMachine = WinningMachine("1, 2, 3, 4, 6, 6")
+        val winningLotto = WinningLotto("1, 2, 3, 4, 6, 6")
 
-        winningMachine.winningLottoNumbers.size shouldNotBe 6
+        winningLotto.winningLottoNumbers.size shouldNotBe 6
     }
 
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
@@ -52,8 +52,8 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningMachine = WinningMachine(firstLottoString.replace("[", "").replace("]", ""))
-        val winningResult = winningMachine.winningResult(lottoList)
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val winningResult = winningLotto.winningResult(lottoList)
 
         winningResult.containsKey(RANKING.FIRST) shouldBe true
         winningResult[RANKING.FIRST] shouldBe 1
@@ -64,8 +64,8 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningMachine = WinningMachine(firstLottoString.replace("[", "").replace("]", ""))
-        val winningResult = winningMachine.winningResult(lottoList)
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val winningResult = winningLotto.winningResult(lottoList)
         val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
 
         winningStatistics.rateOfReturn() shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
@@ -76,8 +76,8 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningMachine = WinningMachine(firstLottoString.replace("[", "").replace("]", ""))
-        val winningResult = winningMachine.winningResult(lottoList)
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val winningResult = winningLotto.winningResult(lottoList)
         val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
 
         if (winningStatistics.rateOfReturn() < 1) "손해" else "이익" shouldBe "이익"

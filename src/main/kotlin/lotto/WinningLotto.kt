@@ -1,6 +1,6 @@
 package lotto
 
-class WinningMachine(winningString: String) {
+class WinningLotto(winningString: String) {
 
     val winningLottoNumbers: Set<LottoNumber>
 
