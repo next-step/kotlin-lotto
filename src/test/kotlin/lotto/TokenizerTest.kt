@@ -19,7 +19,7 @@ class TokenizerTest {
         assertThat(result).isEqualTo(list)
     }
 
-    @DisplayName("입력된 문장을 특정 구분자를 통해서 분리한다.")
+    @DisplayName("입력된 문장을 ';' 구분자 값으로 분리한다.")
     @ParameterizedTest
     @ValueSource(
         strings = ["//;\nfog;james;jay", "//;\nfog; james; jay"]
