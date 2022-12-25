@@ -123,7 +123,7 @@ internal class LottoAllTest {
                 val testWinningNumber = testTicket[0].values.toString().replace("[", "").replace("]", "")
                 val testCalculator = WinningCalculator(testTicket, LottoTicket(testWinningNumber), 1)
                 assertEquals(
-                    (LottoAllTest.LOTTO_MAX_REWARD / (testTicket.size * LottoAllTest.LOTTO_TICKET_PRICE)).toDouble(),
+                    (LOTTO_MAX_REWARD / (testTicket.size * LOTTO_TICKET_PRICE)).toDouble(),
                     testCalculator.calculateRate(testTicket.size)
                 )
             },
