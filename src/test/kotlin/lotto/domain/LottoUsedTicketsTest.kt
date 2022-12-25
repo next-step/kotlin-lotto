@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
  */
 class LottoUsedTicketsTest : FunSpec({
 
-    context("LottoUsedTicket") {
+    context("fun evaluate()") {
         val winTicketNumber = LottoWinTicket.of("1,2,3,4,5,6", "13")
         val lottoUsedTickets = LottoUsedTickets(
             listOf(
@@ -23,7 +23,7 @@ class LottoUsedTicketsTest : FunSpec({
             )
         )
 
-        test("evaluate") {
+        test("티켓들이 몇 등에 당첨되었는지 검증") {
             val rewards = lottoUsedTickets.evaluate(winTicketNumber)
 
             rewards shouldBe LottoRewards(
@@ -38,9 +38,6 @@ class LottoUsedTicketsTest : FunSpec({
                     LottoReward.FAIL,
                 )
             )
-        }
-
-        test("toString") {
         }
     }
 })
