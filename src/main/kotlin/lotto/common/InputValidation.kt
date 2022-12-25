@@ -1,7 +1,7 @@
-package racingCar.common
+package lotto.common
 
 class InputValidation {
-    fun validate(input: String?): Int {
+    fun amountValidate(input: String?): Int {
         require(!input.isNullOrBlank()) {
             throw ExceptionCode.NotAllowNullOrBlank
         }
@@ -10,5 +10,21 @@ class InputValidation {
             throw ExceptionCode.NotMatchNumeric
         }
         return input.toInt()
+    }
+
+    fun winLotteryValidation(input: String?): List<Int> {
+        require(!input.isNullOrBlank()) {
+            throw ExceptionCode.NotAllowNullOrBlank
+        }
+
+        require(input.matches(Regex("(.*),(.*)"))) {
+            throw ExceptionCode.NotFindSeparator
+        }
+
+        val winLottery = input.split(",").map { it.toInt() }
+        if (winLottery.size != 6) {
+            throw ExceptionCode.NotWinLotteryCount
+        }
+        return winLottery
     }
 }

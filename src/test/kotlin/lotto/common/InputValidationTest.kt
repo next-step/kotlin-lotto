@@ -83,6 +83,7 @@ class InputValidationTest {
     @DisplayName("당첨번호가 , 구분자로 split한다")
     @ValueSource(strings = ["1,2,3,4,5,6", "5,6,7,8,9,10"])
     fun winLotteryStringToDigit(input: String) {
-        Assertions.assertThat(inputValidation.winLotteryValidation(input)).isEqualTo(input.split(",").map { it.toInt() })
+        Assertions.assertThat(inputValidation.winLotteryValidation(input))
+            .isEqualTo(input.split(",").map { it.toInt() })
     }
 }

@@ -2,7 +2,6 @@ package lotto.domain
 
 import lotto.entity.Lottery
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -28,5 +27,4 @@ class DrawTest {
         assertThat(winLotteryResult.matchThree.matchNum).isEqualTo(1)
         assertThat(winLotteryResult.matchSix.matchNum).isEqualTo(1)
     }
-
 }

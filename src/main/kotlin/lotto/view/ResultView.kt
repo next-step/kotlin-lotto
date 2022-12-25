@@ -1,16 +1,28 @@
-package view
+package lotto.view
 
-import entity.Card
-import entity.Player
+import lotto.entity.Lottery
+import lotto.entity.WinLottery
+import lotto.entity.WinLotteryResult
 
-class OutputView {
-    fun printCardConsole(name: String, cards: MutableList<Card>) {
-        var printMsg = "${name}카드: ${cards.joinToString { "," }}"
-        println(printMsg)
+class ResultView {
+    fun buyLottery(num: Int) {
+        var buyLotteryMsg = "${num}개를 구매했습니다"
+        println(buyLotteryMsg)
     }
 
-    fun splitCard(players: List<Player>) {
-        var splitCardMsg = "${(players.map { it.name }).joinToString(",")}에게 2장의 나누었습니다."
-        println(splitCardMsg)
+    fun printLottery(lottery: Lottery) {
+        println(lottery.values)
+    }
+
+    fun printWinResult(winLotteryResult: WinLotteryResult) {
+        printWin(3, winLotteryResult.matchThree)
+        printWin(4, winLotteryResult.matchFour)
+        printWin(5, winLotteryResult.matchFive)
+        printWin(6, winLotteryResult.matchSix)
+    }
+
+    private fun printWin(matchNum: Int, winLottery: WinLottery) {
+        val printWinMsg = "${matchNum}개 일치 (${winLottery.reward}원) - ${winLottery.matchNum}개"
+        println(printWinMsg)
     }
 }

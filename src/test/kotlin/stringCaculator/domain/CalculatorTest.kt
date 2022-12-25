@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
-import stringCaculator.domain.Calculator
 
 class CalculatorTest {
     private val calculator = Calculator()
@@ -21,7 +20,7 @@ class CalculatorTest {
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = ["1","22", "3333"])
+    @ValueSource(strings = ["1", "22", "3333"])
     fun oneNumber(text: String) {
         assertThat(calculator.sum(text)).isEqualTo(text.toInt())
     }
