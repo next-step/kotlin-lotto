@@ -3,8 +3,8 @@ package lotto.model
 import kotlin.math.round
 
 class WinningCalculator(
-    randomLottoTickets: List<RandomLottoTicketGenerator>,
-    lottoTicket: LottoTicket,
+    automaticLottoTickets: List<LottoTicket>,
+    winnerTicket: LottoTicket,
     bonusNumber: Int
 ) {
     private val resultWinningStatistics = WinningStatistics(
@@ -19,23 +19,23 @@ class WinningCalculator(
         0.0
     )
 
-    val winningStatistics = generateWinningStatistics(randomLottoTickets, lottoTicket, bonusNumber)
+    val winningStatistics = generateWinningStatistics(automaticLottoTickets, winnerTicket, bonusNumber)
 
     private fun generateWinningStatistics(
-        randomLottoTickets: List<RandomLottoTicketGenerator>,
-        lottoTicket: LottoTicket,
+        automaticLottoTickets: List<LottoTicket>,
+        winnerTicket: LottoTicket,
         bonusNumber: Int
     ): WinningStatistics {
-        for (randomLottoTicket in randomLottoTickets) {
-            val restNumber = randomLottoTicket.lottoNumbers.toSet().subtract(lottoTicket.values.toSet())
+        for (automaticLottoTicket in automaticLottoTickets) {
+            val restNumber = automaticLottoTicket.values.toSet().subtract(winnerTicket.values.toSet())
             val findingBonusNumber = restNumber.find { it == bonusNumber } ?: 0
             setGrade(
-                randomLottoTicket.lottoNumbers.toSet().intersect(lottoTicket.values.toSet()).size,
+                automaticLottoTicket.values.toSet().intersect(winnerTicket.values.toSet()).size,
                 findingBonusNumber
             )
         }
 
-        calculateRate(randomLottoTickets.size)
+        calculateRate(automaticLottoTickets.size)
 
         return resultWinningStatistics
     }

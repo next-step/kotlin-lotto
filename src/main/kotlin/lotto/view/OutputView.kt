@@ -1,17 +1,17 @@
 package lotto.view
 
-import lotto.model.RandomLottoTicketGenerator
+import lotto.model.LottoTicket
 import lotto.model.Rank
 import lotto.model.WinningStatistics
 
-class ResultView {
-    fun showQuantity(quantity: Int) {
-        println("${quantity}개를 구매했습니다.")
+class OutputView {
+    fun showQuantity(manualTicketQuantity: Int, autoTicketQuantity: Int) {
+        println("수동으로 ${manualTicketQuantity}장, 자동으로 ${autoTicketQuantity}개를 구매했습니다.")
     }
 
-    fun showLottoTicket(randomLottoTickets: List<RandomLottoTicketGenerator>) {
-        for (lottoTicket in randomLottoTickets) {
-            println(lottoTicket)
+    fun showLottoTicket(automaticLottoTickets: List<LottoTicket>) {
+        for (lottoTicket in automaticLottoTickets) {
+            println(lottoTicket.values)
         }
     }
 
@@ -26,5 +26,9 @@ class ResultView {
         }
         matchState += "\n총 수익률은 ${result.rate}입니다."
         println(matchState)
+    }
+
+    fun showManualNumber() {
+        println("수동으로 구매할 번호를 입력해 주세요.")
     }
 }
