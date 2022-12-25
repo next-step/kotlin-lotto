@@ -15,9 +15,24 @@ internal class WinningNumberExtractorTest : StringSpec({
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 6)
         val tickets = LottoTicketBundle(amount).lottoTickets
-        val lottoWinning = WinningNumberExtractor.process(tickets, setOf(1, 2, 3, 4, 5, 6))
+        val lottoWinning = WinningNumberExtractor.process(tickets, setOf(1, 2, 3, 4, 5, 6), 7)
 
-        lottoWinning.result[6] shouldBe 1
+        val ticketResult = TicketResult(6, false)
+        lottoWinning.result[ticketResult] shouldBe 1
+
+        unmockkObject(RandomNumberGenerator)
+    }
+
+    "로또 당첨 개수가 5개이고, 보너스 볼이 맞다면 2등에 당첨된다." {
+        val amount = 1000
+        mockkObject(RandomNumberGenerator)
+
+        every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 7)
+        val tickets = LottoTicketBundle(amount).lottoTickets
+        val lottoWinning = WinningNumberExtractor.process(tickets, setOf(1, 2, 3, 4, 5, 6), 7)
+
+        val ticketResult = TicketResult(5, true)
+        lottoWinning.result[ticketResult] shouldBe 1
 
         unmockkObject(RandomNumberGenerator)
     }

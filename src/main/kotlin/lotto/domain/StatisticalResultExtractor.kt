@@ -1,12 +1,14 @@
 package lotto.domain
 
+import lotto.TicketResult
 import lotto.common.LottoTicketPolicy
 
 class StatisticalResultExtractor(
     private val lottoWinning: LottoWinning,
 ) {
-    fun getMatchCount(count: Int): Int {
-        return lottoWinning.result[count] ?: ZERO_COUNT
+    fun getMatchCount(winningAmount: WinningAmount): Int {
+        val ticketResult = TicketResult(winningAmount.count, winningAmount.isBonusBallMatched)
+        return lottoWinning.result[ticketResult] ?: ZERO_COUNT
     }
 
     fun getTotalRateOfReturn(ticketCount: Int): Double {
