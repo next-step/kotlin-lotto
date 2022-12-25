@@ -53,10 +53,9 @@ class LottoTest : StringSpec({
 
         val firstLottoString = lottoList[0].toString()
         val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
-        val winningResult = winningLotto.winningResult(lottoList)
+        val winningResult = WinningResult(lottoList, winningLotto)
 
-        winningResult.containsKey(RANKING.FIRST) shouldBe true
-        winningResult[RANKING.FIRST] shouldBe 1
+        winningResult.getWinningResult(RANKING.FIRST) shouldBe 1
     }
 
     "발행한 금액과 당첨 금액을 통해 수익률을 반환한다." {
@@ -65,10 +64,10 @@ class LottoTest : StringSpec({
 
         val firstLottoString = lottoList[0].toString()
         val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
-        val winningResult = winningLotto.winningResult(lottoList)
-        val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
+        val winningResult = WinningResult(lottoList, winningLotto)
+        val winningStatistics = WinningStatistics(lottoMachine.price)
 
-        winningStatistics.rateOfReturn() shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
+        winningStatistics.rateOfReturn(winningResult.getWinningPrice()) shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
     }
 
     "수익율을 통해 손익에 대한 결과를 반환 한다." {
@@ -77,9 +76,9 @@ class LottoTest : StringSpec({
 
         val firstLottoString = lottoList[0].toString()
         val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
-        val winningResult = winningLotto.winningResult(lottoList)
-        val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
+        val winningResult = WinningResult(lottoList, winningLotto)
+        val winningStatistics = WinningStatistics(lottoMachine.price)
 
-        if (winningStatistics.rateOfReturn() < 1) "손해" else "이익" shouldBe "이익"
+        if (winningStatistics.rateOfReturn(winningResult.getWinningPrice()) < 1) "손해" else "이익" shouldBe "이익"
     }
 })

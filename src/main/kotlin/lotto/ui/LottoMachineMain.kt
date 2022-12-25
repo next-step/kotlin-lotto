@@ -4,6 +4,7 @@ import lotto.LottoMachine
 import lotto.RANKING
 import lotto.WinningLotto
 import lotto.WinningStatistics
+import lotto.WinningResult
 
 fun main() {
     val inputView = InputView()
@@ -18,15 +19,14 @@ fun main() {
     val winningNumbersString = inputView.inputLastWeekNumbers()
     val winningLotto = WinningLotto(winningNumbersString)
 
-    val winningResult = winningLotto.winningResult(lottoList)
-
-    val winningStatistics = WinningStatistics(lottoMachine.price, winningResult)
+    val winningResult = WinningResult(lottoList, winningLotto)
+    val winningStatistics = WinningStatistics(lottoMachine.price)
 
     resultView.printWinningStatisticsStart()
     for (rank in RANKING.values()) {
         if (rank != RANKING.MISS) {
-            resultView.printWinningStatistics(rank, winningResult[rank] ?: 0)
+            resultView.printWinningStatistics(rank, winningResult.getWinningResult(rank))
         }
     }
-    resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn())
+    resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn(winningResult.getWinningPrice()))
 }
