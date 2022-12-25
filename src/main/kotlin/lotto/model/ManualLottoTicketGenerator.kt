@@ -1,7 +1,7 @@
 package lotto.model
 
 class ManualLottoTicketGenerator(private val values: List<String>) {
-    val lottoNumbers: List<LottoTicket> = generate()
+    val tickets: List<LottoTicket> = generate()
 
     private fun generate(): List<LottoTicket> {
         val manualLottoTicket = mutableListOf<LottoTicket>()

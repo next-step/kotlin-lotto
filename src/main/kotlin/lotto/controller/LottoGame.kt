@@ -18,7 +18,7 @@ class LottoGame {
         val automaticTicketQuantity = TicketQuantity(inputView.getAmountOfMoney()).quantity
         val manualTicketQuantity = inputView.getManualQuantity().toInt()
         val manualLottoTickets =
-            ManualLottoTicketGenerator(purchaseManualLottoTicket(manualTicketQuantity)).lottoNumbers
+            ManualLottoTicketGenerator(purchaseManualLottoTicket(manualTicketQuantity)).tickets
         outputView.showQuantity(manualTicketQuantity, automaticTicketQuantity)
         val automaticLottoTickets = purchaseAutomaticLottoTicket(automaticTicketQuantity)
         val lottoTickets = joinTickets(manualLottoTickets, automaticLottoTickets)
@@ -39,7 +39,7 @@ class LottoGame {
     }
 
     fun purchaseAutomaticLottoTicket(quantity: Int): List<LottoTicket> {
-        return AutomaticLottoTicketGenerator(quantity).lottoNumbers
+        return AutomaticLottoTicketGenerator(quantity).tickets
     }
 
     private fun joinTickets(

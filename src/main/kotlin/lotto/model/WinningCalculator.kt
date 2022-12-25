@@ -3,7 +3,7 @@ package lotto.model
 import kotlin.math.round
 
 class WinningCalculator(
-    automaticLottoTickets: List<LottoTicket>,
+    lottoTickets: List<LottoTicket>,
     winnerTicket: LottoTicket,
     bonusNumber: Int
 ) {
@@ -19,7 +19,7 @@ class WinningCalculator(
         0.0
     )
 
-    val winningStatistics = generateWinningStatistics(automaticLottoTickets, winnerTicket, bonusNumber)
+    val winningStatistics = generateWinningStatistics(lottoTickets, winnerTicket, bonusNumber)
 
     private fun generateWinningStatistics(
         automaticLottoTickets: List<LottoTicket>,
