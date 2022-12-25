@@ -27,7 +27,7 @@ fun main() {
     resultView.printWinningStatisticsStart()
     for (rank in RANKING.values()) {
         if (rank != RANKING.MISS) {
-            resultView.printWinningStatistics(rank, winningResult.getWinningResult(rank))
+            resultView.printWinningStatistics(rank, winningResult.getWinningResult(rank), rank == RANKING.SECOND)
         }
     }
     resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn(winningResult.getWinningPrice()))

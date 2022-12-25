@@ -20,8 +20,8 @@ class ResultView {
         println("---------")
     }
 
-    fun printWinningStatistics(rank: RANKING, winningCount: Int) {
-        println("${ rank.winningCount }개 일치 (${ rank.winningPrice }원) - ${ winningCount }개")
+    fun printWinningStatistics(rank: RANKING, winningCount: Int, bonusMatched: Boolean) {
+        println("${ rank.winningCount }개 일치 ${if (bonusMatched) "보너스 볼 일치" else ""} (${ rank.winningPrice }원) - ${ winningCount }개")
     }
 
     fun printWinningStatisticsRate(rate: Float) {
