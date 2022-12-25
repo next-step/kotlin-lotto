@@ -3,7 +3,7 @@ package lotto.domain.model
 import lotto.Tokenizer
 import lotto.domain.LottoNumberValidator
 
-class WinningNumbers(winningNumberText: String, val bonusNumber: LottoNumber) : Lotto(makeLottoNumbers(winningNumberText)) {
+class Winning(val winningNumbers: List<LottoNumber>, val bonusNumber: LottoNumber) : Lotto(winningNumbers) {
 
     companion object {
 

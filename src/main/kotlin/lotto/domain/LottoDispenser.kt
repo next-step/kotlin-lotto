@@ -4,7 +4,7 @@ import lotto.Tokenizer
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.Rank
-import lotto.domain.model.WinningNumbers
+import lotto.domain.model.Winning
 
 class LottoDispenser(val amount: Int, manualLottoNumberTextList: List<String> = emptyList()) {
 
@@ -19,9 +19,9 @@ class LottoDispenser(val amount: Int, manualLottoNumberTextList: List<String> = 
         require(amount >= MINIMUM_PRICE) { "구입 금액은 ${MINIMUM_PRICE}원 이하가 될 수 없습니다" }
     }
 
-    fun match(winningNumbers: WinningNumbers) {
+    fun match(winning: Winning) {
         ranks = lottoList.map { lotto ->
-            Rank.win(winningNumbers, lotto)
+            Rank.win(winning, lotto)
         }
     }
 

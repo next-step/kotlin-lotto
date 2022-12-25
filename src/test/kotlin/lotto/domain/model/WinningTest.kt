@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class WinningNumbersTest {
+internal class WinningTest {
 
     @DisplayName("입력 된 당첨 번호로 당첨 번호가 생성되어야 한다")
     @Test
     fun winningNumbers() {
-        val winningNumbers = WinningNumbers("1,2,3,4,5,6", LottoNumber(1))
+        val winning = Winning(Winning.makeLottoNumbers("1,2,3,4,5,6"), LottoNumber(1))
 
-        winningNumbers.numbers.map { it.number } shouldContainInOrder listOf(1, 2, 3, 4, 5, 6)
+        winning.numbers.map { it.number } shouldContainInOrder listOf(1, 2, 3, 4, 5, 6)
     }
 
     @DisplayName("잘못 입력 된 당첨 번호로 당첨 번호가 생성되지 않는다")
@@ -23,7 +23,7 @@ internal class WinningNumbersTest {
     fun wrongWinningNumbers(input: String) {
         assertThatExceptionOfType(IllegalStateException::class.java)
             .isThrownBy {
-                WinningNumbers(winningNumberText = input, LottoNumber(1))
+                Winning(winningNumbers = Winning.makeLottoNumbers(input), LottoNumber(1))
             }
     }
 }

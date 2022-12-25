@@ -2,7 +2,7 @@ package lotto
 
 import lotto.domain.LottoDispenser
 import lotto.domain.model.LottoNumber
-import lotto.domain.model.WinningNumbers
+import lotto.domain.model.Winning
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -18,10 +18,10 @@ fun main() {
     val resultView = ResultView()
     resultView.showPurchaseResult(dispenser)
 
-    val winningNumbers: String = inputView.inputWinningNumbers()
+    val winningNumberText: String = inputView.inputWinningNumbers()
     val bonusNumber: LottoNumber = inputView.inputBonusNumber()
 
-    dispenser.match(WinningNumbers(winningNumbers, bonusNumber))
+    dispenser.match(Winning(Winning.makeLottoNumbers(winningNumberText), bonusNumber))
 
     resultView.showResult(dispenser)
 }

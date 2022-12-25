@@ -20,8 +20,8 @@ enum class Rank(val matchCount: Int, val prize: Int) {
             } ?: NO_MATCH
         }
 
-        fun countMatchNumber(winningNumbers: WinningNumbers, lotto: Lotto): Int {
-            return winningNumbers.numbers.sumOf { winningNumber ->
+        fun countMatchNumber(winning: Winning, lotto: Lotto): Int {
+            return winning.numbers.sumOf { winningNumber ->
                 checkContainWinningNumber(winningNumber, lotto)
             }
         }
@@ -31,9 +31,9 @@ enum class Rank(val matchCount: Int, val prize: Int) {
             return Rank.safeValueOf(matchCount = matchCount, matchBonus = matchBonus)
         }
 
-        fun win(winningNumbers: WinningNumbers, lotto: Lotto): Rank {
-            val matchCount: Int = Rank.countMatchNumber(winningNumbers, lotto)
-            val matchBonus: Boolean = matchBonus(matchCount, lotto, winningNumbers.bonusNumber)
+        fun win(winning: Winning, lotto: Lotto): Rank {
+            val matchCount: Int = Rank.countMatchNumber(winning, lotto)
+            val matchBonus: Boolean = matchBonus(matchCount, lotto, winning.bonusNumber)
             return Rank.matchingWinner(matchCount, matchBonus)
         }
 

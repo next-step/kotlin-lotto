@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.Rank
-import lotto.domain.model.WinningNumbers
+import lotto.domain.model.Winning
 import org.assertj.core.api.AssertionsForClassTypes.assertThat
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
@@ -84,10 +84,10 @@ internal class RankTest {
     @DisplayName("당첨 된 숫자 개수를 확인한다")
     @Test
     fun matchingCount() {
-        val winningNumbers = WinningNumbers("8, 21, 23, 41, 42, 43", LottoNumber(1))
+        val winning = Winning(Winning.makeLottoNumbers("8, 21, 23, 41, 42, 43"), LottoNumber(1))
         val lotto = Lotto(listOf(9, 21, 27, 41, 42, 45).map { LottoNumber(it) })
 
-        assertThat(Rank.countMatchNumber(winningNumbers, lotto)).isEqualTo(3)
+        assertThat(Rank.countMatchNumber(winning, lotto)).isEqualTo(3)
     }
 
     @DisplayName("5등 당첨금 확인")
