@@ -36,13 +36,13 @@ class LottoTest : StringSpec({
     }
 
     "입력 받은 문자열을 , 구분자를 통해 6개의 당첨 숫자로 반환한다" {
-        val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6")
+        val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6", LottoNumber(7))
 
         winningLotto.winningLottoNumbers.size shouldBe 6
     }
 
     "입력 받은 문자열의 6개 당첨 숫자에 중복이 없어야 한다" {
-        val winningLotto = WinningLotto("1, 2, 3, 4, 6, 6")
+        val winningLotto = WinningLotto("1, 2, 3, 4, 6, 6", LottoNumber(7))
 
         winningLotto.winningLottoNumbers.size shouldNotBe 6
     }
@@ -52,7 +52,7 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""), LottoNumber(7))
         val winningResult = WinningResult(lottoList, winningLotto)
 
         winningResult.getWinningResult(RANKING.FIRST) shouldBe 1
@@ -63,7 +63,7 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""), LottoNumber(7))
         val winningResult = WinningResult(lottoList, winningLotto)
         val winningStatistics = WinningStatistics(lottoMachine.price)
 
@@ -75,7 +75,7 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""), LottoNumber(7))
         val winningResult = WinningResult(lottoList, winningLotto)
         val winningStatistics = WinningStatistics(lottoMachine.price)
 

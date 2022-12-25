@@ -1,6 +1,11 @@
 package lotto.ui
 
-import lotto.*
+import lotto.LottoMachine
+import lotto.LottoNumber
+import lotto.WinningLotto
+import lotto.WinningResult
+import lotto.WinningStatistics
+import lotto.RANKING
 
 fun main() {
     val inputView = InputView()
