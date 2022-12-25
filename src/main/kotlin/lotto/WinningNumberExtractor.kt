@@ -2,14 +2,15 @@ package lotto
 
 import lotto.domain.LottoTicket
 import lotto.domain.LottoWinning
+import lotto.domain.WinningNumbers
 import java.util.Comparator
 
 object WinningNumberExtractor {
-    fun process(tickets: List<LottoTicket>, winningNumbers: Set<Int>, bonusBall: Int): LottoWinning {
+    fun process(tickets: List<LottoTicket>, winningNumbers: WinningNumbers): LottoWinning {
         val resultMap = mutableMapOf<TicketResult, Int>()
         tickets.forEach { ticket ->
-            val intersectNumbers = ticket.numbers.intersect(winningNumbers)
-            val isBonusBallMatched = bonusBall in ticket.numbers
+            val intersectNumbers = ticket.intersect(winningNumbers)
+            val isBonusBallMatched = winningNumbers.bonusBall in ticket
             val ticketResult = TicketResult(intersectNumbers.size, isBonusBallMatched)
             resultMap[ticketResult]?.let {
                 resultMap[ticketResult] = it.inc()
