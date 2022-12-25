@@ -10,12 +10,7 @@ class StatisticalResultExtractor(
     }
 
     fun getTotalRateOfReturn(ticketCount: Int): Double {
-        var totalAmount = 0L
-        lottoWinning.result.entries.map {
-            totalAmount += WinningAmount.from(it.key).amount * it.value
-        }
-
-        return totalAmount / (ticketCount * LottoTicketPolicy.PRICE).toDouble()
+        return lottoWinning.totalAmount() / (ticketCount * LottoTicketPolicy.PRICE).toDouble()
     }
 
     companion object {
