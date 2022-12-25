@@ -12,20 +12,18 @@ object WinningNumberExtractor {
             val intersectNumbers = ticket.intersect(winningNumbers)
             val isBonusBallMatched = winningNumbers.bonusBall in ticket
             val ticketResult = TicketResult(intersectNumbers.size, isBonusBallMatched)
-            resultMap[ticketResult]?.let {
-                resultMap[ticketResult] = it.inc()
-            } ?: run {
-                resultMap.put(ticketResult, 1)
-            }
+
+            resultMap[ticketResult]
+                ?.let { resultMap[ticketResult] = it.inc() }
+                ?: run { resultMap.put(ticketResult, 1) }
         }
 
-        return LottoWinning(
-            resultMap.toSortedMap(
-                Comparator.comparing(TicketResult::matchCount)
-                    .thenComparing(TicketResult::isBonusBallMatched)
-            )
-        )
+        return LottoWinning(resultMap.toSortedMap(getTicketResultComparator()))
     }
+
+    private fun getTicketResultComparator(): Comparator<TicketResult> =
+        Comparator.comparing(TicketResult::matchCount)
+            .thenComparing(TicketResult::isBonusBallMatched)
 }
 
 data class TicketResult(
