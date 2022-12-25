@@ -1,15 +1,14 @@
 package lotto.domain.model
 
-import lotto.Tokenizer
-import lotto.domain.LottoNumberValidator
+class Winning(val winningNumbers: WinningNumbers, val bonusNumber: LottoNumber) {
 
-class Winning(val winningNumbers: List<LottoNumber>, val bonusNumber: LottoNumber) : Lotto(winningNumbers) {
-
-    companion object {
-
-        fun makeLottoNumbers(winningNumberText: String): List<LottoNumber> {
-            check(LottoNumberValidator.validate(winningNumberText))
-            return Tokenizer.tokenize(winningNumberText).map { LottoNumber(it.toInt()) }
+    fun countMatchNumber(lotto: Lotto): Int {
+        return winningNumbers.numbers.sumOf { winningNumber ->
+            checkContainWinningNumber(winningNumber, lotto)
         }
+    }
+
+    private fun checkContainWinningNumber(winningNumber: LottoNumber, lotto: Lotto): Int {
+        return if (lotto.contains(winningNumber)) 1 else 0
     }
 }

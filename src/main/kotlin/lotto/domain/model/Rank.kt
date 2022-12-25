@@ -20,11 +20,7 @@ enum class Rank(val matchCount: Int, val prize: Int) {
             } ?: NO_MATCH
         }
 
-        fun countMatchNumber(winning: Winning, lotto: Lotto): Int {
-            return winning.numbers.sumOf { winningNumber ->
-                checkContainWinningNumber(winningNumber, lotto)
-            }
-        }
+        fun countMatchNumber(winning: Winning, lotto: Lotto): Int = winning.countMatchNumber(lotto)
 
         fun matchingWinner(matchCount: Int, matchBonus: Boolean): Rank {
             check((Lotto.START_LOTTO_INDEX..Lotto.LAST_LOTTO_INDEX).contains(matchCount)) { "당첨 개수는 최대 6개 최소 0개 입니다" }
@@ -39,10 +35,6 @@ enum class Rank(val matchCount: Int, val prize: Int) {
 
         private fun matchBonus(matchCount: Int, lottoNumbers: Lotto, bonusNumber: LottoNumber): Boolean {
             return matchCount == 5 && lottoNumbers.contains(bonusNumber)
-        }
-
-        private fun checkContainWinningNumber(winningNumber: LottoNumber, lotto: Lotto): Int {
-            return if (lotto.contains(winningNumber)) 1 else 0
         }
     }
 }
