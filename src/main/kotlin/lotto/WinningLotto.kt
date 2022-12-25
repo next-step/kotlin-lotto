@@ -1,6 +1,6 @@
 package lotto
 
-class WinningLotto(winningString: String) {
+class WinningLotto(winningString: String, val bonusNumber: LottoNumber) {
 
     val winningLottoNumbers: Set<LottoNumber>
 
