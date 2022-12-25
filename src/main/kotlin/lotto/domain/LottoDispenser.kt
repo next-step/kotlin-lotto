@@ -34,11 +34,11 @@ class LottoDispenser(val amount: Int, manualLottoNumberTextList: List<String> = 
     private fun makeManualLottoList(manualLottoNumberText: List<String>): List<Lotto> {
         val manualLottoCount = manualLottoNumberText.size
         return List(manualLottoCount) { index ->
-            val lottoNumbers = Tokenizer.tokenize(manualLottoNumberText[index])
+            Tokenizer.tokenize(manualLottoNumberText[index])
                 .map { numberText ->
                     LottoNumber(numberText.toInt())
                 }
-            Lotto(lottoNumbers)
+                .let(::Lotto)
         }
     }
 }
