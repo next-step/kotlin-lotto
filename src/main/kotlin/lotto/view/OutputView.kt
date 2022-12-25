@@ -4,16 +4,17 @@ import lotto.domain.StatisticalResultExtractor
 import lotto.domain.WinningAmount
 
 object OutputView {
-    private const val OUTPUT_START_NUMBER = 3
-    private const val OUTPUT_END_NUMBER = 6
     fun printOutput(statisticalResultExtractor: StatisticalResultExtractor, ticketCount: Int) {
-
         println("당첨 통계")
         println("---------")
 
-        (OUTPUT_START_NUMBER..OUTPUT_END_NUMBER).forEach { key ->
-            val matchCount = statisticalResultExtractor.getMatchCount(key)
-            println("$key 개 일치 (${WinningAmount.from(key).amount})- $matchCount")
+        WinningAmount.findWinningPrize().forEach { winningAmount ->
+            val matchCount = statisticalResultExtractor.getMatchCount(winningAmount)
+            print("${winningAmount.count} 개 일치")
+            if (winningAmount.isBonusBallMatched) {
+                print(", 보너스 볼 일치")
+            }
+            println(" (${winningAmount.amount})- $matchCount")
         }
 
         val totalRateOfReturn = statisticalResultExtractor.getTotalRateOfReturn(ticketCount)

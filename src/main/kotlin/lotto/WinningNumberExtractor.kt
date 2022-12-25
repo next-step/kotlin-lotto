@@ -2,19 +2,31 @@ package lotto
 
 import lotto.domain.LottoTicket
 import lotto.domain.LottoWinning
+import lotto.domain.WinningNumbers
+import java.util.Comparator
 
 object WinningNumberExtractor {
-    fun process(tickets: List<LottoTicket>, winningNumbers: Set<Int>): LottoWinning {
-        val resultMap = mutableMapOf<Int, Int>()
+    fun process(tickets: List<LottoTicket>, winningNumbers: WinningNumbers): LottoWinning {
+        val resultMap = mutableMapOf<TicketResult, Int>()
         tickets.forEach { ticket ->
-            val intersectNumbers = ticket.numbers.intersect(winningNumbers)
-            resultMap[intersectNumbers.size]?.let {
-                resultMap[intersectNumbers.size] = it.inc()
-            } ?: run {
-                resultMap.put(intersectNumbers.size, 1)
-            }
+            val intersectNumbers = ticket.intersect(winningNumbers)
+            val isBonusBallMatched = winningNumbers.bonusBall in ticket
+            val ticketResult = TicketResult(intersectNumbers.size, isBonusBallMatched)
+
+            resultMap[ticketResult]
+                ?.let { resultMap[ticketResult] = it.inc() }
+                ?: run { resultMap.put(ticketResult, 1) }
         }
 
-        return LottoWinning(resultMap.toSortedMap())
+        return LottoWinning(resultMap.toSortedMap(getTicketResultComparator()))
     }
+
+    private fun getTicketResultComparator(): Comparator<TicketResult> =
+        Comparator.comparing(TicketResult::matchCount)
+            .thenComparing(TicketResult::isBonusBallMatched)
 }
+
+data class TicketResult(
+    val matchCount: Int,
+    val isBonusBallMatched: Boolean,
+)
