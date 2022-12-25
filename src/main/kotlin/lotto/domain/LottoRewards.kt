@@ -4,11 +4,11 @@ data class LottoRewards(
     private val rewards: List<LottoReward>
 ) {
 
-    fun exchange(): Cash {
+    fun exchange(): LottoRewardCash {
         val money = rewards.fold(0) { total, current ->
             total + current.reward
         }
-        return Cash(money)
+        return LottoRewardCash(money)
     }
 
     fun getByGroup(): Map<LottoReward, Int> {

@@ -28,7 +28,7 @@ object OutputView {
         )
     }
 
-    fun displayProfitRate(profitRate: Int) {
+    fun displayProfitRate(profitRate: Long) {
         println("총 수익률은 ${profitRate}입니다. (기준: 1)")
     }
 }

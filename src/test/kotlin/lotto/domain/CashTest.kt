@@ -22,9 +22,5 @@ class CashTest : FunSpec({
         test("subtract") {
             cash.subtract(cash) shouldBe Cash(0)
         }
-
-        test("divide") {
-            cash.divide(cash) shouldBe 1
-        }
     }
 })

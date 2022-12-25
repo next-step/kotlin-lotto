@@ -22,7 +22,7 @@ class LottoController {
         OutputView.displayRewards(rewards)
 
         val rewardCash = rewards.exchange()
-        val profitRate = rewardCash.divide(inputCash.subtract(restCash))
+        val profitRate = rewardCash.calculateYield(inputCash.subtract(restCash))
         OutputView.displayProfitRate(profitRate)
     }
 }

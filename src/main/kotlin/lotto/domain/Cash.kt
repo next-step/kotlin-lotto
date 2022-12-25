@@ -15,6 +15,8 @@ data class Cash(
         return "$value"
     }
 
+    fun getAmount() = value
+
     fun buy(price: Int): Pair<Cash, Int> {
         val count = value / price
         check(count > 0) {
@@ -25,9 +27,5 @@ data class Cash(
 
     fun subtract(cash: Cash): Cash {
         return Cash(value - cash.value)
-    }
-
-    fun divide(cash: Cash): Int {
-        return value / cash.value
     }
 }
