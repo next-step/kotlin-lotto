@@ -21,7 +21,7 @@ class ResultView {
     }
 
     fun printWinningStatistics(rank: RANKING, winningCount: Int, bonusMatched: Boolean) {
-        println("${ rank.winningCount }개 일치 ${if (bonusMatched) "보너스 볼 일치" else ""} (${ rank.winningPrice }원) - ${ winningCount }개")
+        println("${ rank.winningCount }개 일치${if (bonusMatched) " 보너스 볼 일치" else ""} (${ rank.winningPrice }원) - ${ winningCount }개")
     }
 
     fun printWinningStatisticsRate(rate: Float) {
