@@ -82,7 +82,7 @@ internal class LottoMatcherTest {
         val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.FOURTH)).isEqualTo(1)
+        assertThat(lottoPrizeResults.size == 0).isTrue
     }
 
     companion object {
