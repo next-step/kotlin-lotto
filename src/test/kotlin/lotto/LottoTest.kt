@@ -2,7 +2,6 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
 import org.assertj.core.api.Assertions
 
 class LottoTest : StringSpec({
@@ -35,16 +34,10 @@ class LottoTest : StringSpec({
         lottoList.size shouldBe lottoMachine.purchaseCount
     }
 
-    "입력 받은 문자열을 , 구분자를 통해 6개의 당첨 숫자로 반환한다" {
-        val winningLotto = WinningLotto("1, 2, 3, 4, 5, 6", LottoNumber(7))
-
-        winningLotto.winningLottoNumbers.size shouldBe 6
-    }
-
     "입력 받은 문자열의 6개 당첨 숫자에 중복이 없어야 한다" {
-        val winningLotto = WinningLotto("1, 2, 3, 4, 6, 6", LottoNumber(7))
 
-        winningLotto.winningLottoNumbers.size shouldNotBe 6
+        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { WinningLotto("1, 2, 3, 4, 6, 6") }
     }
 
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
@@ -52,8 +45,9 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""), LottoNumber(7))
-        val winningResult = WinningResult(lottoList, winningLotto)
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val bonusNumber = BonusNumber(winningLotto.lotto)
+        val winningResult = WinningResult(lottoList, winningLotto, bonusNumber)
 
         winningResult.getWinningResult(RANKING.FIRST) shouldBe 1
     }
@@ -63,8 +57,9 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""), LottoNumber(7))
-        val winningResult = WinningResult(lottoList, winningLotto)
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val bonusNumber = BonusNumber(winningLotto.lotto)
+        val winningResult = WinningResult(lottoList, winningLotto, bonusNumber)
         val winningStatistics = WinningStatistics(lottoMachine.price)
 
         winningStatistics.rateOfReturn(winningResult.getWinningPrice()) shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
@@ -75,8 +70,9 @@ class LottoTest : StringSpec({
         val lottoList = lottoMachine.publishLotto()
 
         val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""), LottoNumber(7))
-        val winningResult = WinningResult(lottoList, winningLotto)
+        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
+        val bonusNumber = BonusNumber(winningLotto.lotto)
+        val winningResult = WinningResult(lottoList, winningLotto, bonusNumber)
         val winningStatistics = WinningStatistics(lottoMachine.price)
 
         if (winningStatistics.rateOfReturn(winningResult.getWinningPrice()) < 1) "손해" else "이익" shouldBe "이익"

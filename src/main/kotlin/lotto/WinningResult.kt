@@ -1,13 +1,13 @@
 package lotto
 
-class WinningResult(lottoList: List<Lotto>, winningLotto: WinningLotto) {
+class WinningResult(lottoList: List<Lotto>, winningLotto: WinningLotto, bonusNumber: BonusNumber) {
 
     private val winningResult = RANKING.values().map { 0 }.toTypedArray()
 
     init {
         lottoList.forEach { lotto ->
-            val winningNumbers = winningLotto.winningLottoNumbers.filter { lotto.contains(it) }
-            val ranking = RANKING.countOf(winningNumbers.size, lotto.contains(winningLotto.bonusNumber))
+            val winningNumbers = winningLotto.lotto.numbers.filter { lotto.contains(it) }
+            val ranking = RANKING.countOf(winningNumbers.size, lotto.contains(bonusNumber.number))
             winningResult[ranking.ordinal] ++
         }
     }

@@ -14,16 +14,16 @@ fun main() {
     resultView.printPurchaseLotteNumbers(lottoList)
 
     val winningNumbersString = inputView.inputLastWeekNumbers()
-    val bonusNumber = LottoNumber(inputView.inputBonusNumber())
-    val winningLotto = WinningLotto(winningNumbersString, bonusNumber)
+    val winningLotto = WinningLotto(winningNumbersString)
+    val bonusNumber = BonusNumber(LottoNumber(inputView.inputBonusNumber()), winningLotto.lotto)
 
-    val winningResult = WinningResult(lottoList, winningLotto)
+    val winningResult = WinningResult(lottoList, winningLotto, bonusNumber)
     val winningStatistics = WinningStatistics(lottoMachine.price)
 
     resultView.printWinningStatisticsStart()
     for (rank in RANKING.values()) {
         if (rank != RANKING.MISS) {
-            resultView.printWinningStatistics(rank, winningResult.getWinningResult(rank), rank == RANKING.SECOND)
+            resultView.printWinningStatistics(rank, winningResult.getWinningResult(rank), rank.bonusMatched)
         }
     }
     resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn(winningResult.getWinningPrice()))

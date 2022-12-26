@@ -1,19 +1,22 @@
 package lotto
 
-enum class RANKING(val winningCount: Int, val winningPrice: Int) {
-    MISS(0, 0), FIFTH(3, 5_000), FOURTH(4, 50_000), THIRD(5, 1_500_000), SECOND(5, 30_000_000), FIRST(6, 2_000_000_000);
+enum class RANKING(val winningCount: Int, val winningPrice: Int, val checkBonus: Boolean, val bonusMatched: Boolean) {
+    MISS(0, 0, false, false),
+    FIFTH(3, 5_000, false, false),
+    FOURTH(4, 50_000, false, false),
+    THIRD(5, 1_500_000, true, false),
+    SECOND(5, 30_000_000, true, true),
+    FIRST(6, 2_000_000_000, false, false);
 
     companion object {
         fun countOf(winningCount: Int, bonusMatched: Boolean): RANKING {
-            return when (winningCount) {
-                FIFTH.winningCount -> FIFTH
-                FOURTH.winningCount -> FOURTH
-                SECOND.winningCount -> {
-                    if (bonusMatched) SECOND else THIRD
+            return values().find {
+                if (it.checkBonus) {
+                    it.winningCount == winningCount && it.bonusMatched == bonusMatched
+                } else {
+                    it.winningCount == winningCount
                 }
-                FIRST.winningCount -> FIRST
-                else -> MISS
-            }
+            } ?: MISS
         }
     }
 }

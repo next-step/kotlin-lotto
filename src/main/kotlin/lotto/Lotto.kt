@@ -1,6 +1,6 @@
 package lotto
 
-class Lotto(private val numbers: Set<LottoNumber>) {
+class Lotto(val numbers: Set<LottoNumber>) {
     init {
         require(numbers.size == LOTTO_NUMBERS_COUNT) { "fail lotto number count" }
     }

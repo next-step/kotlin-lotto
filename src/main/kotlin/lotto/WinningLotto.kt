@@ -1,12 +1,12 @@
 package lotto
 
-class WinningLotto(winningString: String, val bonusNumber: LottoNumber) {
+class WinningLotto(winningString: String) {
 
-    val winningLottoNumbers: Set<LottoNumber>
+    val lotto: Lotto
 
     init {
         val stringNumbers = getStringNumbers(winningString)
-        winningLottoNumbers = getWinningNumbers(stringNumbers)
+        lotto = Lotto(getWinningNumbers(stringNumbers))
     }
 
     private fun getStringNumbers(winningString: String): List<String> {
