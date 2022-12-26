@@ -7,4 +7,10 @@ class LottoUnusedTicket {
             LottoNumbers.from()
         )
     }
+
+    fun toManual(input: String): LottoUsedTicket {
+        return LottoUsedTicket(
+            LottoNumbers.from(input)
+        )
+    }
 }

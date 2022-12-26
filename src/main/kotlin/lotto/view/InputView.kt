@@ -1,6 +1,8 @@
 package lotto.view
 
 import lotto.domain.Cash
+import lotto.domain.LottoUnusedTickets
+import lotto.domain.LottoUsedTickets
 import lotto.domain.LottoWinTicket
 
 object InputView {
@@ -13,6 +15,19 @@ object InputView {
             error("현금은 숫자여야합니다.")
         }
         return Cash(input)
+    }
+
+    fun ticketCountForManual(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readln().toInt()
+    }
+
+    fun ticketsToManual(lottoUnusedTickets: LottoUnusedTickets): LottoUsedTickets {
+        val inputs = (1..lottoUnusedTickets.getTicketCount()).map {
+            println("수동으로 구매할 번호를 입력해 주세요.")
+            readln()
+        }
+        return lottoUnusedTickets.toManual(inputs)
     }
 
     fun readWinNumber(): LottoWinTicket {
