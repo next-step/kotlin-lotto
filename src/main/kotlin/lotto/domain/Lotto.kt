@@ -11,5 +11,6 @@ class Lotto(
 
     companion object {
         const val NUMBER_OF_LOTTO = 6
+        const val PRICE = 1000
     }
 }
