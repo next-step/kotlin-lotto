@@ -1,6 +1,7 @@
 package lotto.model
 
-import lotto.service.LottoGenerator
+import lotto.model.WinningNumbers.Companion.of
+import lotto.service.LottoGenerator.fromString
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -24,10 +25,12 @@ class WinningNumbersTest {
         lottoNums: String,
         expectedMatchCount: Int
     ) {
-        val winningNumbers = LottoGenerator.fromString(winningNums).let(::WinningNumbers)
-        val lotto = LottoGenerator.fromString(lottoNums)
-        val expectedPrize = LottoPrize.of(expectedMatchCount)
+        val lotto = fromString(lottoNums)
 
+        val dummyNumber = 46
+        val winningNumbers = of(fromString(winningNums), dummyNumber)
+
+        val expectedPrize = LottoPrize.of(expectedMatchCount, false)
         assertThat(winningNumbers.prizeOf(lotto)).isEqualTo(expectedPrize)
     }
 }

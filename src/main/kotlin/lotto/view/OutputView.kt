@@ -28,7 +28,7 @@ object OutputView {
         println("당첨 통계")
         println("---------")
 
-        val winningResult = WinningResult(lottos, winningNumbers)
+        val winningResult = WinningResult.of(lottos, winningNumbers)
 
         printPrizeDetails(winningResult)
         printPrizeReturnRatio(winningResult)
@@ -40,14 +40,18 @@ object OutputView {
     }
 
     private fun printPrizeDetails(winningResult: WinningResult) {
-        printPrizeCount(winningResult, LottoPrize.FOURTH)
-        printPrizeCount(winningResult, LottoPrize.THIRD)
-        printPrizeCount(winningResult, LottoPrize.SECOND)
-        printPrizeCount(winningResult, LottoPrize.FIRST)
+        LottoPrize.values()
+            .sortedDescending()
+            .filterNot { it == LottoPrize.NONE }
+            .forEach { printPrizeCount(winningResult, it) }
     }
 
     private fun printPrizeCount(winningResult: WinningResult, target: LottoPrize) {
         val count = winningResult.getCountOf(target)
-        println("${target.matchCount}개 일치 (${target.winningAmount}원) - ${count}개")
+        print("${target.matchCount}개 일치")
+        if (target == LottoPrize.SECOND) {
+            print(", 보너스 볼 일치")
+        }
+        println("(${target.winningAmount}원) - ${count}개")
     }
 }

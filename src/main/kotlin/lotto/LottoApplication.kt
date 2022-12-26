@@ -1,17 +1,23 @@
 package lotto
 
+import lotto.model.WinningNumbers
 import lotto.service.LottoShop
 import lotto.view.InputView
 import lotto.view.OutputView
 
-object LottoApplication {
-    @JvmStatic
-    fun main(args: Array<String>) {
+class LottoApplication {
+    fun play() {
         val money = InputView.readMoney()
         val lottos = LottoShop.buyAutoLottos(money)
         OutputView.printDetails(lottos)
 
-        val winningNumbers = InputView.readWinningNumbers()
+        val winningLotto = InputView.readWinningLotto()
+        val bonusNumber = InputView.readBonusNumber()
+        val winningNumbers = WinningNumbers(winningLotto, bonusNumber)
         OutputView.printResult(lottos, winningNumbers)
     }
+}
+
+fun main() {
+    LottoApplication().play()
 }
