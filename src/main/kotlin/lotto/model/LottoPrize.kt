@@ -8,8 +8,7 @@ enum class LottoPrize(val matchCount: Int, val prize: Int) {
     ;
 
     companion object {
-        fun of(matchCount: Int): LottoPrize {
-            return values().find { it.matchCount == matchCount } ?: throw IllegalArgumentException("일치하는 등수가 없습니다.")
-        }
+        fun of(matchCount: Int): LottoPrize? =
+            values().find { it.matchCount == matchCount }
     }
 }
