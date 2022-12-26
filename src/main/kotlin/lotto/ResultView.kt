@@ -2,13 +2,14 @@ package lotto
 
 import lotto.domain.LottoPrizeResults
 import lotto.model.Lotto
+import lotto.model.LottoNumbers
 import lotto.model.LottoPrize
 
 object ResultView {
 
-    fun printLotto(lotto: List<Lotto>) {
-        println("${lotto.size}개를 구매했습니다.")
-        lotto.forEach { it.numbers.let(::println) }
+    fun printLotto(userLotto: Lotto) {
+        println("${userLotto.numbers.size}개를 구매했습니다.")
+        userLotto.numbers.forEach { it.value.let(::println) }
         println()
     }
 

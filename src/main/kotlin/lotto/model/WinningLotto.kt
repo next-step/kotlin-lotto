@@ -1,6 +1,6 @@
 package lotto.model
 
-import lotto.model.Lotto.Companion.NUMBER_OF_LOTTO_DIGIT
+import lotto.model.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
 
 data class WinningLotto(
     val numbers: List<LottoNumber>,

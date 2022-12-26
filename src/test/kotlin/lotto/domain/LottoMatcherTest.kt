@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.model.Lotto
 import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
 import lotto.model.LottoPrize
 import lotto.model.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
@@ -18,7 +19,7 @@ internal class LottoMatcherTest {
         val winningLotto =
             listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
-            listOf(Lotto(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)))
+            listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))).let(::Lotto)
 
         // when
         val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
@@ -33,7 +34,7 @@ internal class LottoMatcherTest {
         val winningLotto =
             listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
-            listOf(Lotto(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber)))
+            listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber))).let(::Lotto)
 
         // when
         val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
@@ -48,7 +49,7 @@ internal class LottoMatcherTest {
         val winningLotto =
             listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
-            listOf(Lotto(listOf(1, 2, 3, 4, 7, 8).map(::LottoNumber)))
+            listOf(LottoNumbers(listOf(1, 2, 3, 4, 7, 8).map(::LottoNumber))).let(::Lotto)
 
         // when
         val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
@@ -63,7 +64,7 @@ internal class LottoMatcherTest {
         val winningLotto =
             listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
-            listOf(Lotto(listOf(1, 2, 3, 7, 8, 9).map(::LottoNumber)))
+            listOf(LottoNumbers(listOf(1, 2, 3, 7, 8, 9).map(::LottoNumber))).let(::Lotto)
 
         // when
         val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
@@ -74,7 +75,7 @@ internal class LottoMatcherTest {
 
     @ParameterizedTest
     @MethodSource("provideLosingLotto")
-    fun `꽝(담청 결과 없음)`(userLotto: List<Lotto>) {
+    fun `꽝(담청 결과 없음)`(userLotto: Lotto) {
         // given
         val winningLotto =
             listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
@@ -87,11 +88,11 @@ internal class LottoMatcherTest {
 
     companion object {
         @JvmStatic
-        fun provideLosingLotto(): Stream<List<Lotto>> {
+        fun provideLosingLotto(): Stream<Lotto> {
             return Stream.of(
-                listOf(Lotto(listOf(1, 12, 13, 7, 8, 9).map(::LottoNumber))),
-                listOf(Lotto(listOf(1, 2, 13, 7, 8, 9).map(::LottoNumber))),
-                listOf(Lotto(listOf(11, 12, 13, 7, 8, 9).map(::LottoNumber)))
+                Lotto(listOf(LottoNumbers(listOf(1, 12, 13, 7, 8, 9).map(::LottoNumber)))),
+                Lotto(listOf(LottoNumbers(listOf(1, 2, 13, 7, 8, 9).map(::LottoNumber)))),
+                Lotto(listOf(LottoNumbers(listOf(11, 12, 13, 7, 8, 9).map(::LottoNumber))))
             )
         }
     }
