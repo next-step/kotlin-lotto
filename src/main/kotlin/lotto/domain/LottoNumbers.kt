@@ -17,6 +17,10 @@ class LottoNumbers(
         }
     }
 
+    fun matches(inputNumber: LottoNumber): Boolean {
+        return numbers.contains(inputNumber)
+    }
+
     override fun toString(): String {
         return numbers.joinToString(", ") { number -> number.toString() }
     }
@@ -26,27 +30,23 @@ class LottoNumbers(
         private val LOTTO_NUMBERS = (1..45)
 
         fun from(): LottoNumbers {
-            val selected = LOTTO_NUMBERS.shuffled()
-                .take(6)
-                .sorted()
-                .map { number ->
-                    LottoNumber(number)
-                }
-
             return LottoNumbers(
-                selected
+                LOTTO_NUMBERS.shuffled()
+                    .take(6)
+                    .sorted()
+                    .map { number ->
+                        LottoNumber(number)
+                    }
             )
         }
 
         fun from(input: String): LottoNumbers {
-            val numbers = input.split(",")
-                .map { split ->
-                    split.trim().toInt()
-                }.sorted()
-                .map(::LottoNumber)
-
             return LottoNumbers(
-                numbers
+                input.split(",")
+                    .map { split ->
+                        split.trim().toInt()
+                    }.sorted()
+                    .map(::LottoNumber)
             )
         }
     }

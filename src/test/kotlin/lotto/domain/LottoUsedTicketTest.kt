@@ -10,9 +10,10 @@ class LottoUsedTicketTest : FunSpec({
 
     context("LottoUsedTickets") {
         val selectedString = "1, 2, 3, 4, 5, 6"
+        val bonusString = "13"
         val lottoNumbers = LottoNumbers.from(selectedString)
         val lottoUsedTicket = LottoUsedTicket(lottoNumbers)
-        val lottoWinTicket = LottoWinTicket.from(selectedString)
+        val lottoWinTicket = LottoWinTicket.of(selectedString, bonusString)
 
         test("evaluate") {
             val reward = lottoUsedTicket.evaluate(lottoWinTicket)
