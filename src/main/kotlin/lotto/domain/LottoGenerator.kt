@@ -1,6 +1,7 @@
 package lotto.domain
 
-import lotto.domain.Lotto.Companion.NUMBER_OF_LOTTO
+import lotto.model.Lotto
+import lotto.model.Lotto.Companion.NUMBER_OF_LOTTO
 import lotto.model.LottoNumber
 
 class LottoGenerator {

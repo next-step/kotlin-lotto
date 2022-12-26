@@ -1,5 +1,7 @@
 package lotto.domain
 
+import lotto.model.Lotto
+
 class LottoMachine(
     private val lottoGenerator: LottoGenerator = LottoGenerator(),
 ) {

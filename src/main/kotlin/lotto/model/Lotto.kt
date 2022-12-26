@@ -1,8 +1,6 @@
-package lotto.domain
+package lotto.model
 
-import lotto.model.LottoNumber
-
-class Lotto(
+data class Lotto(
     val numbers: List<LottoNumber>,
 ) {
     init {
