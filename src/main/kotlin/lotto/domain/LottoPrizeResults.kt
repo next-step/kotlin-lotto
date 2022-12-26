@@ -5,7 +5,5 @@ import lotto.model.LottoPrize
 class LottoPrizeResults(
     private val prizes: List<LottoPrize>,
 ) {
-    fun count(prize: LottoPrize): Int {
-        TODO("Not yet implemented")
-    }
+    fun count(prize: LottoPrize): Int = prizes.count { it == prize }
 }
