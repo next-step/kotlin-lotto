@@ -8,10 +8,10 @@ enum class Reward(val match: Int, val reward: Int, val isBonus: Boolean = false)
     FIRST(6, 200000000);
 
     companion object {
-        fun find(ticket: Ticket, numbers: Numbers) = Reward.values()
+        fun find(ticket: Ticket, numbers: Numbers, bonusNumber: BonusNumber) = Reward.values()
             .find { it.match == ticket.getMatchingNumbersCount(numbers) }
             ?.let {
-                if (it.match == 5 && it.isBonus == ticket.getMatchingBonus(numbers)) SECOND
+                if (it.match == 5 && it.isBonus == bonusNumber.getMatchingBonus(numbers)) SECOND
                 else it
             }
     }

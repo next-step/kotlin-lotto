@@ -11,8 +11,9 @@ class MatchInfoTest : StringSpec({
     }
 
     "발급 된 번호와 당첨 번호를 비교" {
-        val numbers  = Numbers(issueNumbers = listOf(1,2,3,4,5,6))
-        val issueTicket = IssuanceTickets(listOf(Ticket(Numbers(issueNumbers = listOf(1,2,3,4,5,6)))))
-        MatchInfo.checkWinner(issueTicket, numbers).matchInfo[Reward.FIRST] shouldBe 1
+        val numbers = Numbers(issueNumbers = listOf(1, 2, 3, 4, 5, 6))
+        val issueTicket = IssuanceTickets(listOf(Ticket(Numbers(issueNumbers = listOf(1, 2, 3, 4, 5, 6)))))
+        val bonusNumber = BonusNumber(7)
+        MatchInfo().checkNumberMatch(issueTicket, numbers, bonusNumber).matchInfo[Reward.FIRST] shouldBe 1
     }
 })

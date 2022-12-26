@@ -1,10 +1,7 @@
 package lotto.domain
 
-class IssuanceTickets(private val tickets: List<Ticket>) {
-    fun checkWinner(numbers: Numbers) = MatchInfo().also {
-        tickets.forEach { ticket ->
-            Reward.find(ticket, numbers)
-                ?.also { reward -> it.matchInfo[reward] = (it.matchInfo[reward] ?: 0) + 1 }
-        }
-    }
+class IssuanceTickets(private val _tickets: List<Ticket>) {
+
+    val tickets: List<Ticket>
+        get() = _tickets
 }

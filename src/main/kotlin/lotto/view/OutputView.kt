@@ -32,6 +32,6 @@ object OutputView {
     }
 
     private fun printRevenueRate(money: Money, matchInfo: MatchInfo) {
-        println("총 수익률은 ${money.getRevenueRate(matchInfo)}입니다.")
+        println("총 수익률은 ${matchInfo.getRevenueRate(money)}입니다.")
     }
 }

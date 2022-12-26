@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeSorted
 import io.kotest.matchers.shouldBe
@@ -19,5 +20,16 @@ class TicketTest : StringSpec({
 
     "티켓은 정렬되어 있어야 한다" {
         ticket.getIssueNumbers().shouldBeSorted()
+    }
+
+    "티켓의 유효성을 검사한다" {
+        shouldThrow<IllegalArgumentException> { Ticket(Numbers(listOf(1, 2, 3, 4, 5))) }
+        shouldThrow<IllegalArgumentException> { Ticket(Numbers(listOf(1, 2, 3, 4, 4))) }
+    }
+
+    "티켓의 숫자를 검사한다" {
+        val drawNumbers = Numbers(listOf(1, 2, 3, 4, 5, 7))
+        val ticketForCheck = Ticket(Numbers(listOf(1, 2, 3, 4, 5, 6)))
+        ticketForCheck.getMatchingNumbersCount(drawNumbers) shouldBe 5
     }
 })
