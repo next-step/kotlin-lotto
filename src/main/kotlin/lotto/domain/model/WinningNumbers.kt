@@ -1,14 +1,19 @@
 package lotto.domain.model
 
-import calculator.Tokenizer
+import lotto.Tokenizer
 import lotto.domain.LottoNumberValidator
 
-class WinningNumbers(winningNumberText: String) {
+class WinningNumbers(numbers: List<LottoNumber>) : Lotto(numbers) {
 
-    val numbers: List<LottoNumber> = initList(winningNumberText)
+    companion object {
 
-    private fun initList(winningNumberText: String): List<LottoNumber> {
-        check(LottoNumberValidator.validate(winningNumberText)) { "유효하지 않은 당첨 번호 입니다" }
-        return Tokenizer.tokenize(winningNumberText).map { LottoNumber(it.toInt()) }
+        fun makeWinningNumbers(winningNumberText: String): WinningNumbers {
+            check(LottoNumberValidator.validate(winningNumberText))
+            val numbers: List<LottoNumber> = Tokenizer.tokenize(winningNumberText)
+                .map {
+                    LottoNumber(it.toInt())
+                }
+            return WinningNumbers(numbers)
+        }
     }
 }

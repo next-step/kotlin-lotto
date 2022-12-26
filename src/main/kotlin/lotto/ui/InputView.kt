@@ -3,7 +3,6 @@ package lotto.ui
 import lotto.domain.LottoNumberValidator
 import lotto.domain.MINIMUM_PRICE
 import lotto.domain.model.LottoNumber
-import lotto.domain.model.WinningNumbers
 
 class InputView {
 
@@ -17,19 +16,13 @@ class InputView {
         }
     }
 
-    fun inputWinningNumbers(): WinningNumbers {
+    fun inputWinningNumbers(): String {
         println("")
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val input = readlnOrNull() ?: ""
-
-        val winningNumbers: WinningNumbers
-        try {
-            winningNumbers = WinningNumbers(winningNumberText = input)
-        } catch (e: Exception) {
-            return inputWinningNumbers()
+        val winningNumberText = readlnOrNull() ?: ""
+        return winningNumberText.ifBlank {
+            inputWinningNumbers()
         }
-
-        return winningNumbers
     }
 
     fun inputBonusNumber(): LottoNumber {
@@ -40,6 +33,27 @@ class InputView {
             LottoNumber(bonusNumberString.toInt())
         } else {
             inputBonusNumber()
+        }
+    }
+
+    fun inputManualLottoCount(): Int {
+        println()
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readlnOrNull()?.toIntOrNull() ?: 0
+    }
+
+    fun inputManualLottoNumbers(manualCount: Int): List<String> {
+        println()
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(manualCount) {
+            inputManualLottoNumber()
+        }
+    }
+
+    private fun inputManualLottoNumber(): String {
+        val lottoNumbersText = readlnOrNull() ?: ""
+        return lottoNumbersText.ifBlank {
+            inputManualLottoNumber()
         }
     }
 }
