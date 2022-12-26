@@ -3,7 +3,6 @@ package lotto.view
 import lotto.model.Lotto
 import lotto.model.LottoPrize
 import lotto.model.Lottos
-import lotto.model.WinningNumbers
 import lotto.model.WinningResult
 import java.util.Comparator.comparingInt
 
@@ -23,12 +22,10 @@ object OutputView {
         println(numberValueList)
     }
 
-    fun printResult(lottos: Lottos, winningNumbers: WinningNumbers) {
+    fun printResult(winningResult: WinningResult) {
         println()
         println("당첨 통계")
         println("---------")
-
-        val winningResult = WinningResult.of(lottos, winningNumbers)
 
         printPrizeDetails(winningResult)
         printPrizeReturnRatio(winningResult)
