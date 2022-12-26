@@ -9,4 +9,6 @@ class LottoPrizeResults(
         get() = prizes.size
 
     fun count(prize: LottoPrize): Int = prizes.count { it == prize }
+
+    fun totalPrize(): Int = prizes.sumOf { it.prize }
 }
