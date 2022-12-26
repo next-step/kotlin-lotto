@@ -8,20 +8,25 @@ import io.kotest.matchers.types.beInstanceOf
 
 class StoreTest : DescribeSpec({
     describe("로또 판매기 테스트") {
-        it("1000단위로 결제한 금액에 대한 로또들을 리턴할 수 있다.") {
-            val purchasePrice = 14000
+        val purchasePrice = 14000
+        val lottoNumbers = listOf(
+            listOf(8, 21, 23, 41, 42, 43).map { LottoNumber.of(it) }.toSet(),
+            listOf(3, 5, 11, 16, 32, 38).map { LottoNumber.of(it) }.toSet()
+        )
+        val ticket = Ticket(14000, lottoNumbers)
 
-            val purchasedLottos = Store.purchase(purchasePrice)
-            purchasedLottos should beInstanceOf<MutableList<Lotto>>()
-            purchasedLottos.size shouldBe 14
+        it("로또를 자동으로 구매할 수 있다.") {
+            val purchasedAutoLottos = Store.purchaseAutoLottos(ticket)
+
+            purchasedAutoLottos should beInstanceOf<Lottos>()
+            purchasedAutoLottos.elements.size shouldBe 12
         }
 
-        it("결제한 금액이 1000원 단위가 아닐 경우 IllegalArgumentException을 throw한다.") {
-            val purchasePrice = 14500
+        it("로또를 수동으로 구매할 수 있다.") {
+            val purchasedManualLottos = Store.purchaseManualLotto(ticket)
 
-            shouldThrow<IllegalArgumentException> {
-                Store.purchase(purchasePrice) shouldBe 14
-            }
+            purchasedManualLottos should beInstanceOf<Lottos>()
+            purchasedManualLottos.elements.size shouldBe 2
         }
     }
 })

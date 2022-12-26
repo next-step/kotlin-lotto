@@ -5,6 +5,8 @@ class LottoNumber(private val number: Int) {
         require(Policy.LOTTO_NUMBER_RANGE.contains(number)) { "로또 숫자는 1부터 45까지 입니다." }
     }
 
+    override fun toString() = number.toString()
+
     companion object {
         private val NUMBERS = Policy.LOTTO_NUMBER_RANGE.map { LottoNumber(it) }
 

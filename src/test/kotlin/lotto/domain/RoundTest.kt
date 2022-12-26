@@ -8,7 +8,7 @@ class RoundTest : DescribeSpec ({
     describe("로또 회차 테스트") {
         val lottoNumbers = (1..6).map { LottoNumber.of(it) }.toSet()
         val lotto = Lotto(lottoNumbers)
-        val purchasedLottos = listOf(lotto)
+        val purchasedLottos = Lottos(listOf(lotto))
 
         val winningLottosNumbers = (3..8).map { LottoNumber.of(it) }.toSet()
         val bonusNumber = LottoNumber.of(9)

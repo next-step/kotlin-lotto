@@ -3,8 +3,15 @@ package lotto.ui
 import lotto.domain.*
 
 object LottoController {
-    fun purchaseLottos(purchasePrice: Int): List<Lotto> {
-        return Store.purchase(purchasePrice)
+    fun purchaseTicket (purchasePrice: Int, lottoNumbersList: List<Set<LottoNumber>>): Ticket {
+        return Ticket(purchasePrice, lottoNumbersList)
+    }
+
+    fun issueLottos(ticket: Ticket): Lottos {
+        val autoLottos = Store.purchaseAutoLottos(ticket)
+        val manualLottos = Store.purchaseManualLotto(ticket)
+
+        return autoLottos + manualLottos
     }
 
     fun drawWinningLottos(winningLottoNumbers: Set<LottoNumber>, bonusNumber: LottoNumber): WinningLotto {
@@ -14,7 +21,7 @@ object LottoController {
         )
     }
 
-    fun getRoundResult(purchasedLottos: List<Lotto>, winningLotto: WinningLotto): RoundResult {
+    fun getRoundResult(purchasedLottos: Lottos, winningLotto: WinningLotto): RoundResult {
         return Round(purchasedLottos, winningLotto).aggregate()
     }
 
