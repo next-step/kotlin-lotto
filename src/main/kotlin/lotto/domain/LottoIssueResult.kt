@@ -9,15 +9,9 @@ data class LottoIssueResult(val manualLottos: List<Lotto>, val autoLottos: List<
         return manualLottos + autoLottos
     }
 
-    fun resultStatistic(winLotto: WinLotto): Statistics {
+    fun driveStatistic(winLotto: WinLotto): Statistics {
         val lottos = getAsLottos()
-        val statistic = Statistics()
-
-        for(lotto in lottos) {
-            val rank = winLotto.correspondLottoResult(lotto)
-            statistic.add(rank, lotto)
-        }
-        return statistic
+        return Statistics.drive(lottos, winLotto)
     }
 
 }

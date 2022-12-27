@@ -1,10 +1,12 @@
 package lotto.domain
 
+import jdk.jshell.Snippet.Status
+
 class Statistics {
 
     private val value: MutableMap<Rank, MutableList<Lotto>> = mutableMapOf()
 
-    fun add(rank: Rank, lotto: Lotto) {
+    private fun add(rank: Rank, lotto: Lotto) {
         val list = value[rank] ?: init(rank)
         list.add(lotto)
     }
@@ -18,6 +20,17 @@ class Statistics {
         val list = mutableListOf<Lotto>()
         value[rank] = list
         return list
+    }
+
+    companion object {
+        fun drive(lottos: List<Lotto>, winLotto: WinLotto): Statistics {
+            val statistic = Statistics()
+            for(lotto in lottos) {
+                val rank = winLotto.correspondLottoResult(lotto)
+                statistic.add(rank, lotto)
+            }
+            return statistic
+        }
     }
 
 }
