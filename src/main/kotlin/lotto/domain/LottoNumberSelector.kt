@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import lotto.common.LottoTicketPolicy.END_NUMBER
 import lotto.common.LottoTicketPolicy.MAX_LOTTO_NUMBER_SIZE

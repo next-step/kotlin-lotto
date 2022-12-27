@@ -1,12 +1,10 @@
-package lotto
+package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
-import lotto.domain.LottoTicketBundle
-import lotto.domain.WinningNumbers
 import lotto.utils.RandomNumberGenerator
 
 internal class WinningNumberExtractorTest : StringSpec({
@@ -15,8 +13,7 @@ internal class WinningNumberExtractorTest : StringSpec({
         mockkObject(RandomNumberGenerator)
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 6)
-        val tickets = LottoTicketBundle(amount).lottoTickets
-        val lottoWinning = WinningNumberExtractor.process(tickets, WinningNumbers(setOf(1, 2, 3, 4, 5, 6), 7))
+        val lottoWinning = WinningNumberExtractor.process(LottoTicketBundle(amount), WinningNumbers(setOf(1, 2, 3, 4, 5, 6), 7))
 
         val ticketResult = TicketResult(6, false)
         lottoWinning.result[ticketResult] shouldBe 1
@@ -29,8 +26,7 @@ internal class WinningNumberExtractorTest : StringSpec({
         mockkObject(RandomNumberGenerator)
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 7)
-        val tickets = LottoTicketBundle(amount).lottoTickets
-        val lottoWinning = WinningNumberExtractor.process(tickets, WinningNumbers(setOf(1, 2, 3, 4, 5, 6), 7))
+        val lottoWinning = WinningNumberExtractor.process(LottoTicketBundle(amount), WinningNumbers(setOf(1, 2, 3, 4, 5, 6), 7))
 
         val ticketResult = TicketResult(5, true)
         lottoWinning.result[ticketResult] shouldBe 1

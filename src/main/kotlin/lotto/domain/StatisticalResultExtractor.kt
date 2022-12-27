@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.TicketResult
 import lotto.common.LottoTicketPolicy
 
 class StatisticalResultExtractor(

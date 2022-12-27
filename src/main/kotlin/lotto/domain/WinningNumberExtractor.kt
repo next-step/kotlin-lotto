@@ -1,22 +1,13 @@
-package lotto
-
-import lotto.domain.LottoTicket
-import lotto.domain.LottoWinning
-import lotto.domain.WinningNumbers
-import java.util.Comparator
+package lotto.domain
 
 object WinningNumberExtractor {
-    fun process(tickets: List<LottoTicket>, winningNumbers: WinningNumbers): LottoWinning {
+    fun process(lottoTicketBundle: LottoTicketBundle, winningNumbers: WinningNumbers): LottoWinning {
         val resultMap = mutableMapOf<TicketResult, Int>()
-        tickets.forEach { ticket ->
+        lottoTicketBundle.lottoTickets.groupingBy { ticket ->
             val intersectNumbers = ticket.intersect(winningNumbers)
             val isBonusBallMatched = winningNumbers.bonusBall in ticket
-            val ticketResult = TicketResult(intersectNumbers.size, isBonusBallMatched)
-
-            resultMap[ticketResult]
-                ?.let { resultMap[ticketResult] = it.inc() }
-                ?: run { resultMap.put(ticketResult, 1) }
-        }
+            TicketResult(intersectNumbers.size, isBonusBallMatched)
+        }.eachCountTo(resultMap)
 
         return LottoWinning(resultMap.toSortedMap(getTicketResultComparator()))
     }
