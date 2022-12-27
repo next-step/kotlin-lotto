@@ -16,8 +16,3 @@ object WinningNumberExtractor {
         Comparator.comparing(TicketResult::matchCount)
             .thenComparing(TicketResult::isBonusBallMatched)
 }
-
-data class TicketResult(
-    val matchCount: Int,
-    val isBonusBallMatched: Boolean,
-)
