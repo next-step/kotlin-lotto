@@ -12,16 +12,17 @@ import lotto.view.ResultView
 class Application {
     private val inputView = InputView()
     private val resultView = ResultView()
-    private val lottoShop = LottoShop(LottoGenerator(RandomNumberGenerator()))
+    private val lottoGenerator = LottoGenerator(RandomNumberGenerator())
 
     fun run() {
         val inputPayment = inputView.inputPayment()
         val manualLottoCount = inputView.inputManualLottoCount()
         val manualNumberList = inputView.inputManualLottoNumbers(manualLottoCount)
 
-        val usedPayment = inputPayment.copy()
-        val manualLottoList = lottoShop.buyManualLotto(usedPayment, manualNumberList)
-        val autoLottoList = lottoShop.buyAutoLotto(usedPayment)
+        val lottoShop = LottoShop(lottoGenerator, inputPayment)
+
+        val manualLottoList = lottoShop.buyManualLotto(manualNumberList)
+        val autoLottoList = lottoShop.buyAutoLotto()
         resultView.printLottoList(manualLottoList, autoLottoList)
 
         val lottoList = manualLottoList + autoLottoList
