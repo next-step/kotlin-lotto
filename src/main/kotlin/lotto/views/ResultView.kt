@@ -6,12 +6,9 @@ import lotto.domain.Report
 
 object ResultView {
 
-    fun printLottos(manualLottos: List<Lotto> = emptyList(), autoLottos: List<Lotto>) {
-        print("수동으로 ${manualLottos.size}장, 자동으로 ${autoLottos.size}장을 구매했습니다.")
-        manualLottos.forEach {
-            println(it)
-        }
-        autoLottos.forEach {
+    fun printLottos(manualLottoCount: Int = 0, lottos: List<Lotto>) {
+        print("수동으로 ${manualLottoCount}장, 자동으로 ${lottos.size - manualLottoCount}장을 구매했습니다.")
+        lottos.forEach {
             println(it)
         }
     }

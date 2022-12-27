@@ -14,20 +14,22 @@ class LottoStoreTest {
     @ParameterizedTest(name = "배열 {0}원으로 {1}장의 로또를 구매할 수 있다")
     @MethodSource("valueSource")
     fun `1000원 당 한장의 로또가 발행된다`(krw: KRW, numberOfLotto: Int) {
-        val lottos = LottoStore().sell(krw)
-        assertThat(lottos.size).isEqualTo(numberOfLotto)
+        val lottoBundle = LottoBundle()
+        LottoStore().sellAutoLottos(krw, lottoBundle)
+        assertThat(lottoBundle.lottos.size).isEqualTo(numberOfLotto)
     }
 
     @Test
     fun `수동으로 로또를 구매할 수 있다`() {
-        val lottos = LottoStore().sell(KRW(1000), listOf("1,2,3,4,5,6"))
-        assertThat(lottos.size).isEqualTo(1)
+        val lottoBundle = LottoBundle()
+        LottoStore().sellManualLottos(KRW(1000), listOf("1,2,3,4,5,6"), lottoBundle)
+        assertThat(lottoBundle.lottos.size).isEqualTo(1)
     }
 
     @Test
     fun `금액보다 로또의 장수가 더 크면 에러를 반환한다`() {
         val exception = assertThrows<IllegalArgumentException> {
-            LottoStore().sell(KRW(0), listOf("1,2,3,4,5,6"))
+            LottoStore().sellManualLottos(KRW(0), listOf("1,2,3,4,5,6"), lottoBundle = LottoBundle())
         }
         assertThat(exception.message).isEqualTo("구매할 로또의 수 이상의 금액을 가지고 있으셔야합니다.")
     }
