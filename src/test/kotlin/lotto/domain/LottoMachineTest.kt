@@ -22,4 +22,11 @@ class LottoMachineTest : StringSpec({
 
         lottoTicket.numbers shouldBe sortedLottoNumbers
     }
+
+    "로또 머신은 금액에 따른 로또 구메 개수를 반환해요" {
+        val lottoMachine = LottoMachine()
+        val ticketAmount = lottoMachine.getTicketAmount(14000)
+
+        ticketAmount shouldBe 14
+    }
 })

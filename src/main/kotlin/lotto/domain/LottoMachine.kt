@@ -16,6 +16,10 @@ class LottoMachine {
         )
     }
 
+    fun getTicketAmount(amount: Int): Int {
+        return amount / LOTTO_TICKET_AMOUNT
+    }
+
     private fun sorted(lottoNumbers: MutableSet<LottoNumber>): Set<LottoNumber> {
         return lottoNumbers
             .sortedBy { it.number }
@@ -24,5 +28,6 @@ class LottoMachine {
 
     companion object {
         private const val LOTTO_NUMBER_SIZE_BOUND = 6
+        private const val LOTTO_TICKET_AMOUNT = 1000
     }
 }
