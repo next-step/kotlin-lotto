@@ -1,11 +1,11 @@
 package lotto.domain
 
 object WinningNumberExtractor {
-    fun process(lottoTicketBundle: LottoTicketBundle, winningBalls: WinningBalls): LottoWinningResult {
+    fun process(lottoTicketBundle: LottoTicketBundle, winningBallResult: WinningBallResult): LottoWinningResult {
         val resultMap = mutableMapOf<TicketResult, Int>()
         lottoTicketBundle.lottoTickets.groupingBy { ticket ->
-            val intersectNumbers = ticket.intersect(winningBalls)
-            val isBonusBallMatched = winningBalls.bonusBall in ticket
+            val intersectNumbers = ticket.intersect(winningBallResult.winningBalls)
+            val isBonusBallMatched = winningBallResult.bonusBall in ticket
             TicketResult(intersectNumbers.size, isBonusBallMatched)
         }.eachCountTo(resultMap)
 
