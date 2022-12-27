@@ -23,7 +23,8 @@ class StringAddCalculator {
         return split(numberString, delimiter)
     }
 
-    private fun split(string: String, delimiter: Regex = DEFAULT_DELIMITER_REGEX): List<String> = string.split(delimiter)
+    private fun split(string: String, delimiter: Regex = DEFAULT_DELIMITER_REGEX): List<String> =
+        string.split(delimiter)
 
     private fun split(string: String, delimiter: String): List<String> {
         if (delimiter.isEmpty()) {

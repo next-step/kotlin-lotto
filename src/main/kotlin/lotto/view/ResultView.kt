@@ -7,12 +7,19 @@ import lotto.domain.LottoStatisticsTotal
 
 class ResultView {
 
-    fun printLotto(lottoList: List<Lotto>) {
-        println("${lottoList.size}개를 구매했습니다.")
-        lottoList.forEach {
-            println(it.numbers)
+    fun printLottoList(manualLottoList: List<Lotto>, autoLottoList: List<Lotto>) {
+        println("수동으로 ${manualLottoList.size}개, 자동으로 ${autoLottoList.size}개를 구매했습니다.")
+        manualLottoList.forEach {
+            printLotto(it)
+        }
+        autoLottoList.forEach {
+            printLotto(it)
         }
         emptyLine()
+    }
+
+    private fun printLotto(lotto: Lotto) {
+        println(lotto.lottoNumbers)
     }
 
     fun printLottoStatistics(statisticsResult: LottoStatisticsTotal) {
@@ -41,7 +48,7 @@ class ResultView {
 
     private fun printEarningRate(earningRate: Double) {
         print("총 수익률은 ${earningRate}입니다. ")
-        if (earningRate > 1) {
+        if (earningRate >= 1.0) {
             println("(기준이 1이기 때문에 이익입니다.)")
             return
         }

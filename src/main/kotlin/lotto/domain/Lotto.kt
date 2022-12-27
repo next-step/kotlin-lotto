@@ -1,10 +1,20 @@
 package lotto.domain
 
 class Lotto(
-    val numbers: List<Int>
+    val lottoNumbers: List<LottoNumber>
 ) {
     init {
-        require(numbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 ${LOTTO_NUMBERS_SIZE}개가 필요합니다." }
+        require(lottoNumbers.size == LOTTO_NUMBERS_SIZE) { "로또 번호는 ${LOTTO_NUMBERS_SIZE}개가 필요합니다." }
+        require(lottoNumbers.toSet().size == LOTTO_NUMBERS_SIZE) { "번호에 중복이 있습니다." }
+    }
+
+    fun countHitNumbers(luckyLotto: Lotto): Int {
+        val count = lottoNumbers.count { luckyLotto.lottoNumbers.contains(it) }
+        return count
+    }
+
+    fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusNumber)
     }
 
     companion object {

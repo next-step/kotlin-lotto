@@ -8,9 +8,9 @@ import io.kotest.matchers.shouldBe
 class LottoStatisticsTest : StringSpec({
     "로또 수익률 계산 테스트" {
         forAll(
-            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), 100000, 0.55),
-            row(listOf(LottoRank.FIFTH), 5000, 1.0),
-            row(listOf(LottoRank.FOURTH), 5000, 10),
+            row(listOf(LottoRank.FOURTH, LottoRank.FIFTH), Payment(100000), 0.55),
+            row(listOf(LottoRank.FIFTH), Payment(5000), 1.0),
+            row(listOf(LottoRank.FOURTH), Payment(5000), 10.0),
         ) { prizeList, payment, expectedEarningRate ->
             // given
             val lottoStatistics = LottoStatistics(prizeList)

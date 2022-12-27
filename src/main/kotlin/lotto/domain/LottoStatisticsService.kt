@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoStatisticsService(
-    private val payment: Int,
+    private val payment: Payment,
     private val winLottoList: List<LottoRank>
 ) {
     fun statistics(): LottoStatisticsTotal {

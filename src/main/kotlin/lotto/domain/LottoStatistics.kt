@@ -5,11 +5,10 @@ import lotto.util.NumberUtil
 class LottoStatistics(
     private val winLottoList: List<LottoRank>
 ) {
-    private val prizeList: List<Int> = winLottoList.map { it.prizeMoney }
-    private val totalPrize: Int = prizeList.sum()
+    private val totalPrize: Int = winLottoList.sumOf { it.prizeMoney.amount }
 
-    fun earningRate(inputPayment: Int): Double {
-        val earningRate = totalPrize.toDouble() / inputPayment.toDouble()
+    fun earningRate(inputPayment: Payment): Double {
+        val earningRate = totalPrize.toDouble() / inputPayment.amount.toDouble()
         return NumberUtil.floor(earningRate, EARNING_RATE_DECIMAL_PLACE)
     }
 
@@ -25,6 +24,6 @@ class LottoStatistics(
     }
 
     companion object {
-        private const val EARNING_RATE_DECIMAL_PLACE = 2
+        private const val EARNING_RATE_DECIMAL_PLACE = 2.0
     }
 }

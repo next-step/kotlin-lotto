@@ -1,28 +1,38 @@
-package lotto.util
+package lotto.common
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class StringValidatorTest : StringSpec({
+class NumberStringListTest : StringSpec({
+
     "숫자 아닐때 에러 발생 테스트" {
         val exception = shouldThrowExactly<IllegalArgumentException> {
-            StringValidator.validateNumber("1!")
+            NumberStringList("1,a")
         }
-        exception.message shouldBe "숫자가 아닙니다. (입력값:1!)"
+        exception.message shouldBe "숫자가 아닙니다. (입력값:a)"
     }
 
     "빈 문자열 일 때 에러 테스트" {
         val exception = shouldThrowExactly<IllegalArgumentException> {
-            StringValidator.validateNotBlank("")
+            NumberStringList("1,")
         }
         exception.message shouldBe "값이 비어있습니다."
     }
 
-    "공백 문자열 에러 테스트" {
+    "공백 문자열 일 때 에러 테스트" {
         val exception = shouldThrowExactly<IllegalArgumentException> {
-            StringValidator.validateNotBlank("  ")
+            NumberStringList("1,   ")
         }
         exception.message shouldBe "값이 비어있습니다."
+    }
+
+    "숫자 리스트 변환 테스트" {
+        // given
+        val numberStringList = NumberStringList("1,2,3,4,5")
+        // when
+        val numberList = numberStringList.toIntegerNumberList()
+        // then
+        numberList shouldBe listOf(1, 2, 3, 4, 5)
     }
 })

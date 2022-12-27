@@ -1,9 +1,10 @@
 package lotto.application
 
+import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
 import lotto.domain.LottoResultService
 import lotto.domain.LottoShop
-import lotto.domain.LuckyNumbers
 import lotto.util.RandomNumberGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -11,17 +12,24 @@ import lotto.view.ResultView
 class Application {
     private val inputView = InputView()
     private val resultView = ResultView()
-    private val lottoShop = LottoShop(LottoGenerator(RandomNumberGenerator()))
+    private val lottoGenerator = LottoGenerator(RandomNumberGenerator())
 
     fun run() {
         val inputPayment = inputView.inputPayment()
-        val lottoList = lottoShop.buyLotto(inputPayment)
-        resultView.printLotto(lottoList)
+        val manualLottoCount = inputView.inputManualLottoCount()
+        val manualNumberList = inputView.inputManualLottoNumbers(manualLottoCount)
 
+        val lottoShop = LottoShop(lottoGenerator, inputPayment)
+
+        val manualLottoList = lottoShop.buyManualLotto(manualNumberList)
+        val autoLottoList = lottoShop.buyAutoLotto()
+        resultView.printLottoList(manualLottoList, autoLottoList)
+
+        val lottoList = manualLottoList + autoLottoList
         val inputLuckyNumbers = inputView.inputLuckyNumbers()
         val inputBonusNumber = inputView.inputBonusNumber()
 
-        val lottoResultService = LottoResultService(LuckyNumbers(inputLuckyNumbers, inputBonusNumber))
+        val lottoResultService = LottoResultService(Lotto(inputLuckyNumbers.integerNumberList.map { LottoNumber(it) }), LottoNumber(inputBonusNumber))
         val statistics = lottoResultService.inquireStatistics(inputPayment, lottoList)
         resultView.printLottoStatistics(statistics)
     }

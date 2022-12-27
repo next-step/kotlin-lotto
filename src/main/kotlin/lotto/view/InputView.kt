@@ -1,50 +1,53 @@
 package lotto.view
 
-import lotto.util.StringValidator
+import lotto.common.IntegerNumberList
+import lotto.common.NumberString
+import lotto.common.NumberStringList
+import lotto.domain.Payment
 
 class InputView {
 
-    fun inputPayment(): Int {
+    fun inputPayment(): Payment {
         println(INPUT_PAYMENT_GUIDE)
-        val payment = readln()
-        validatePaymentInput(payment)
-        return payment.toInt()
+        val payment = NumberString(readln())
+        return Payment(payment.toIntegerNumber())
     }
 
-    private fun validatePaymentInput(payment: String) {
-        StringValidator.validateNotBlank(payment)
-        StringValidator.validateNumber(payment)
+    fun inputManualLottoCount(): Int {
+        println(INPUT_MANUAL_LOTTO_COUNT_GUIDE)
+        return inputNumber()
     }
 
-    fun inputLuckyNumbers(): List<Int> {
-        println(INPUT_LUCKY_NUMBERS_GUIDE)
-        val luckyNumberString = readln()
-        val luckyNumbers = splitNumbers(luckyNumberString)
-        validateLuckyNumbersInput(luckyNumbers)
-        return convert(luckyNumbers)
-    }
-
-    private fun splitNumbers(input: String) = input.split(",").map { it.trim() }
-
-    private fun validateLuckyNumbersInput(split: List<String>) {
-        split.forEach {
-            StringValidator.validateNotBlank(it)
-            StringValidator.validateNumber(it)
+    fun inputManualLottoNumbers(count: Int): List<IntegerNumberList> {
+        println(INPUT_MANUAL_LOTTO_NUMBERS_GUIDE)
+        return List(count) {
+            inputNumberList()
         }
     }
 
-    private fun convert(split: List<String>): List<Int> {
-        return split.map { it.toInt() }
+    fun inputLuckyNumbers(): IntegerNumberList {
+        println(INPUT_LUCKY_NUMBERS_GUIDE)
+        return inputNumberList()
+    }
+
+    private fun inputNumberList(): IntegerNumberList {
+        val numberList = NumberStringList(readln()).toIntegerNumberList()
+        return IntegerNumberList(numberList)
     }
 
     fun inputBonusNumber(): Int {
         println(INPUT_BONUS_BALL)
-        val bonusBallNumberString = readln()
-        return bonusBallNumberString.toInt()
+        return inputNumber()
+    }
+
+    private fun inputNumber(): Int {
+        return NumberString(readln()).toIntegerNumber()
     }
 
     private companion object {
         const val INPUT_PAYMENT_GUIDE = "# 구입금액을 입력해주세요."
+        const val INPUT_MANUAL_LOTTO_COUNT_GUIDE = "# 수동으로 구매할 로또 수를 입력해 주세요."
+        const val INPUT_MANUAL_LOTTO_NUMBERS_GUIDE = "# 수동으로 구매할 번호를 입력해 주세요."
         const val INPUT_LUCKY_NUMBERS_GUIDE = "# 지난 주 당첨 번호를 입력해 주세요."
         const val INPUT_BONUS_BALL = "# 보너스 볼을 입력해 주세요."
     }
