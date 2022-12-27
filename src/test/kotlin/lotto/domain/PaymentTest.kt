@@ -18,7 +18,7 @@ class PaymentTest : StringSpec({
         // when
         payment.charge(100)
         // then
-        payment.payment shouldBe 900
+        payment.amount shouldBe 900
     }
 
     "잔액 부족으로 지불금 차감 에러 테스트" {

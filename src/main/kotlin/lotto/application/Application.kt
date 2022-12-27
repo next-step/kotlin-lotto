@@ -19,8 +19,9 @@ class Application {
         val manualLottoCount = inputView.inputManualLottoCount()
         val manualNumberList = inputView.inputManualLottoNumbers(manualLottoCount)
 
-        val manualLottoList = lottoShop.buyManualLotto(inputPayment, manualNumberList)
-        val autoLottoList = lottoShop.buyAutoLotto(inputPayment)
+        val usedPayment = inputPayment.copy()
+        val manualLottoList = lottoShop.buyManualLotto(usedPayment, manualNumberList)
+        val autoLottoList = lottoShop.buyAutoLotto(usedPayment)
         resultView.printLottoList(manualLottoList, autoLottoList)
 
         val lottoList = manualLottoList + autoLottoList

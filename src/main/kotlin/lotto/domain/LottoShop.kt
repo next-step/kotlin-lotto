@@ -21,10 +21,10 @@ class LottoShop(
     }
 
     private fun calculateLottoCount(payment: Payment): Int {
-        return payment.payment / LOTTO_PRICE
+        return payment.amount / LOTTO_PRICE
     }
 
     companion object {
-        private val LOTTO_PRICE = 1000
+        private const val LOTTO_PRICE = 1000
     }
 }

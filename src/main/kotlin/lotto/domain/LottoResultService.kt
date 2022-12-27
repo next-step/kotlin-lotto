@@ -22,5 +22,5 @@ class LottoResultService(
         return LottoRank.from(hitCount, hasBonusNumber)
     }
 
-    private fun hasPrize(lottoRank: LottoRank) = lottoRank.prizeMoney > 0
+    private fun hasPrize(lottoRank: LottoRank) = lottoRank.prizeMoney.isPositive()
 }
