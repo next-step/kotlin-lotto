@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoWinning(
+data class LottoWinningResult(
     val result: Map<TicketResult, Int>,
 ) {
     fun totalAmount(): Long {
