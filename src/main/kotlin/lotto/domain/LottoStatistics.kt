@@ -1,13 +1,10 @@
 package lotto.domain
 
 object LottoStatistics {
-    fun calculate(ticketBundle: List<LottoTicket>, winningNumber: Set<Int>): Map<Int, Int> {
+    fun calculate(ticketBundle: List<LottoTicket>, winningNumber: Set<LottoNumber>): Map<Int, Int> {
         return ticketBundle
-            .map { ticket ->
-                ticket.numbers
-                    .map { it.number }
-                    .intersect(winningNumber)
-                    .size
+            .map {
+                it.numbers.intersect(winningNumber).size
             }
             .groupingBy { it }
             .eachCount()

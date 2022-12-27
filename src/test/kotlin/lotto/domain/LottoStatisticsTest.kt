@@ -18,7 +18,12 @@ class LottoStatisticsTest : StringSpec({
             )
         )
         val winningNumber = setOf(
-            1, 2, 3, 6, 8, 9
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(6),
+            LottoNumber(8),
+            LottoNumber(9),
         )
 
         val statistics = LottoStatistics.calculate(ticketBundle, winningNumber)
