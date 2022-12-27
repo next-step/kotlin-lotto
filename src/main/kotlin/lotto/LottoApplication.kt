@@ -3,7 +3,7 @@ package lotto
 import lotto.domain.LottoTicketBundle
 import lotto.domain.StatisticalResultExtractor
 import lotto.domain.WinningNumberExtractor
-import lotto.domain.WinningNumbers
+import lotto.domain.WinningBalls
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -11,9 +11,9 @@ fun main() {
     val ticketAmount = InputView.getPurchaseAmount()
     val lottoTicketBundle = LottoTicketBundle(ticketAmount)
     InputView.getNumberOfPurchases(lottoTicketBundle.lottoTickets.size)
-    val winningNumber = InputView.getWinningNumber()
+    val winningBalls = InputView.getWinningBalls()
     val lottoWinning = WinningNumberExtractor.process(
-        lottoTicketBundle, WinningNumbers(winningNumber.first, winningNumber.second)
+        lottoTicketBundle, WinningBalls(winningBalls.first, winningBalls.second)
     )
     OutputView.printOutput(StatisticalResultExtractor(lottoWinning), lottoTicketBundle.lottoTickets.size)
 }

@@ -1,15 +1,15 @@
 package lotto.domain
 
 object WinningNumberExtractor {
-    fun process(lottoTicketBundle: LottoTicketBundle, winningNumbers: WinningNumbers): LottoWinning {
+    fun process(lottoTicketBundle: LottoTicketBundle, winningBalls: WinningBalls): LottoWinningResult {
         val resultMap = mutableMapOf<TicketResult, Int>()
         lottoTicketBundle.lottoTickets.groupingBy { ticket ->
-            val intersectNumbers = ticket.intersect(winningNumbers)
-            val isBonusBallMatched = winningNumbers.bonusBall in ticket
+            val intersectNumbers = ticket.intersect(winningBalls)
+            val isBonusBallMatched = winningBalls.bonusBall in ticket
             TicketResult(intersectNumbers.size, isBonusBallMatched)
         }.eachCountTo(resultMap)
 
-        return LottoWinning(resultMap.toSortedMap(getTicketResultComparator()))
+        return LottoWinningResult(resultMap.toSortedMap(getTicketResultComparator()))
     }
 
     private fun getTicketResultComparator(): Comparator<TicketResult> =
