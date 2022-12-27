@@ -18,7 +18,7 @@ class RandomNumberGeneratorTest : StringSpec({
         // then
         randomNumbers shouldHaveSize inputSize
         randomNumbers.forEach {
-            it.number shouldBeInRange start..end
+            it shouldBeInRange start..end
         }
     }
 })

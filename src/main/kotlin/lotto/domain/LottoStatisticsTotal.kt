@@ -1,8 +1,6 @@
 package lotto.domain
 
-import lotto.common.DoubleNumber
-
 class LottoStatisticsTotal(
-    val earningRate: DoubleNumber,
+    val earningRate: Double,
     val winLottoStatisticsResult: List<LottoStatisticsResult>
 )

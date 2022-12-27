@@ -1,14 +1,13 @@
 package lotto.domain
 
-import lotto.common.IntegerNumber
 import lotto.common.IntegerNumberList
 import lotto.util.NumberGenerator
 
 class LottoGenerator(
     private val numberGenerator: NumberGenerator
 ) {
-    fun generate(size: IntegerNumber): List<Lotto> {
-        return List(size.number) { Lotto(randomNumber()) }
+    fun generate(size: Int): List<Lotto> {
+        return List(size) { Lotto(randomNumber()) }
     }
 
     private fun randomNumber(): List<LottoNumber> {

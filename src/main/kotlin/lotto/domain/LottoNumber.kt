@@ -1,13 +1,11 @@
 package lotto.domain
 
-import lotto.common.IntegerNumber
-
 data class LottoNumber(
-    val number: IntegerNumber
+    val number: Int
 ) {
 
     init {
-        require(number.number in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER) { "로또 번호는 ${LOTTO_MIN_NUMBER}와 $LOTTO_MAX_NUMBER 사이 값 이여야 합니다." }
+        require(number in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER) { "로또 번호는 ${LOTTO_MIN_NUMBER}와 $LOTTO_MAX_NUMBER 사이 값 이여야 합니다." }
     }
 
     companion object {

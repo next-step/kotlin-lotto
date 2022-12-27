@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.common.IntegerNumber
-
 class Lotto(
     val lottoNumbers: List<LottoNumber>
 ) {
@@ -10,9 +8,9 @@ class Lotto(
         require(lottoNumbers.toSet().size == LOTTO_NUMBERS_SIZE) { "번호에 중복이 있습니다." }
     }
 
-    fun countHitNumbers(luckyLotto: Lotto): IntegerNumber {
+    fun countHitNumbers(luckyLotto: Lotto): Int {
         val count = lottoNumbers.count { luckyLotto.lottoNumbers.contains(it) }
-        return IntegerNumber(count)
+        return count
     }
 
     fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {

@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.common.DoubleNumber
 import lotto.domain.Lotto
 import lotto.domain.LottoRank
 import lotto.domain.LottoStatisticsResult
@@ -47,9 +46,9 @@ class ResultView {
         return ""
     }
 
-    private fun printEarningRate(earningRate: DoubleNumber) {
+    private fun printEarningRate(earningRate: Double) {
         print("총 수익률은 ${earningRate}입니다. ")
-        if (earningRate.isGreaterThanEquals(DoubleNumber(1.0))) {
+        if (earningRate >= 1.0) {
             println("(기준이 1이기 때문에 이익입니다.)")
             return
         }

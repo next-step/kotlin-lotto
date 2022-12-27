@@ -1,6 +1,5 @@
 package lotto.domain
 
-import lotto.common.IntegerNumber
 import lotto.common.IntegerNumberList
 
 class LottoShop(
@@ -13,19 +12,19 @@ class LottoShop(
 
     fun buyManualLotto(payment: Payment, manualNumberList: List<IntegerNumberList>): List<Lotto> {
         val totalLottoCount = calculateLottoCount(payment)
-        val manualLottoCount = IntegerNumber(manualNumberList.size)
+        val manualLottoCount = manualNumberList.size
 
-        require(manualLottoCount.number <= totalLottoCount.number) { "수동 로또 개수가 지불 금액보다 많아 로또를 구입할 수 없습니다." }
+        require(manualLottoCount <= totalLottoCount) { "수동 로또 개수가 지불 금액보다 많아 로또를 구입할 수 없습니다." }
 
-        payment.charge(manualLottoCount.multiply(LOTTO_PRICE))
+        payment.charge(manualLottoCount * LOTTO_PRICE)
         return lottoGenerator.generate(manualNumberList)
     }
 
-    private fun calculateLottoCount(payment: Payment): IntegerNumber {
-        return payment.payment.divide(LOTTO_PRICE)
+    private fun calculateLottoCount(payment: Payment): Int {
+        return payment.payment / LOTTO_PRICE
     }
 
     companion object {
-        private val LOTTO_PRICE = IntegerNumber(1000)
+        private val LOTTO_PRICE = 1000
     }
 }

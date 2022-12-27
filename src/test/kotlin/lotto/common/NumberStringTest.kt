@@ -26,31 +26,4 @@ class NumberStringTest : StringSpec({
         }
         exception.message shouldBe "값이 비어있습니다."
     }
-
-    "양수 판단 테스트" {
-        // given
-        val number = IntegerNumber(1)
-        // when
-        val actual = number.isPositive()
-        // then
-        actual shouldBe true
-    }
-
-    "음수 판단 테스트" {
-        // given
-        val number = IntegerNumber(-1)
-        // when
-        val actual = number.isNegative()
-        // then
-        actual shouldBe true
-    }
-
-    "double 타입으로 변환 테스트" {
-        // given
-        val number = IntegerNumber(1)
-        // when
-        val actual = number.toDouble()
-        // then
-        actual shouldBe DoubleNumber(1.0)
-    }
 })

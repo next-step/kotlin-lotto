@@ -1,14 +1,14 @@
 package lotto.util
 
-import lotto.common.DoubleNumber
+import kotlin.math.pow
 
 object NumberUtil {
-    fun floor(number: DoubleNumber, decimalPlace: DoubleNumber): DoubleNumber {
-        if (decimalPlace.isNegative()) {
+    fun floor(number: Double, decimalPlace: Double): Double {
+        if (decimalPlace < 0) {
             return number
         }
-        val pow = DoubleNumber(10.0).pow(decimalPlace)
-        val floor = number.multiply(pow).floor()
-        return floor.divide(pow)
+        val pow = 10.0.pow(decimalPlace)
+        val floor = kotlin.math.floor(number * pow)
+        return floor / pow
     }
 }

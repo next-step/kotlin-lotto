@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.common.IntegerNumber
 import lotto.common.IntegerNumberList
 import lotto.common.NumberString
 import lotto.common.NumberStringList
@@ -14,14 +13,14 @@ class InputView {
         return Payment(payment.toIntegerNumber())
     }
 
-    fun inputManualLottoCount(): IntegerNumber {
+    fun inputManualLottoCount(): Int {
         println(INPUT_MANUAL_LOTTO_COUNT_GUIDE)
         return inputNumber()
     }
 
-    fun inputManualLottoNumbers(count: IntegerNumber): List<IntegerNumberList> {
+    fun inputManualLottoNumbers(count: Int): List<IntegerNumberList> {
         println(INPUT_MANUAL_LOTTO_NUMBERS_GUIDE)
-        return List(count.number) {
+        return List(count) {
             inputNumberList()
         }
     }
@@ -36,12 +35,12 @@ class InputView {
         return IntegerNumberList(numberList)
     }
 
-    fun inputBonusNumber(): IntegerNumber {
+    fun inputBonusNumber(): Int {
         println(INPUT_BONUS_BALL)
         return inputNumber()
     }
 
-    private fun inputNumber(): IntegerNumber {
+    private fun inputNumber(): Int {
         return NumberString(readln()).toIntegerNumber()
     }
 

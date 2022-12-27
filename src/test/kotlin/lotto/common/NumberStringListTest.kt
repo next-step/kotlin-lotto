@@ -33,6 +33,6 @@ class NumberStringListTest : StringSpec({
         // when
         val numberList = numberStringList.toIntegerNumberList()
         // then
-        numberList shouldBe listOf(IntegerNumber(1), IntegerNumber(2), IntegerNumber(3), IntegerNumber(4), IntegerNumber(5))
+        numberList shouldBe listOf(1, 2, 3, 4, 5)
     }
 })

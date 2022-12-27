@@ -5,7 +5,7 @@ class NumberStringList(
 ) {
     val list = string.split(",").map { NumberString(it.trim()) }
 
-    fun toIntegerNumberList(): List<IntegerNumber> {
+    fun toIntegerNumberList(): List<Int> {
         return list.map { it.toIntegerNumber() }
     }
 }

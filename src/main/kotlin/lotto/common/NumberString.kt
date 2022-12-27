@@ -12,7 +12,7 @@ class NumberString(
         return string.toCharArray().all { it in '0'..'9' }
     }
 
-    fun toIntegerNumber(): IntegerNumber {
-        return IntegerNumber(string.toInt())
+    fun toIntegerNumber(): Int {
+        return string.toInt()
     }
 }
