@@ -1,6 +1,7 @@
 package lotto
 
-import lotto.LottoGame.Companion.ONE_LOTTO_PRICE
+import lotto.LottoOffice.ONE_LOTTO_PRICE
+
 
 class BuyPrice(val price: Int) {
     init {
