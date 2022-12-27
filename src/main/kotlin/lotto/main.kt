@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.IssuanceTickets
 import lotto.domain.Lotto
 import lotto.domain.Money
 import lotto.domain.Winner
@@ -13,7 +14,8 @@ fun main() {
 
     OutputView.printTicketPurchaseCountAndTicketsInfo(lotto.getCount(), tickets)
 
-    val matchInfo = Winner(InputView.getWinNumbers()).checkNumberMatch(tickets)
+    val matchInfo = Winner(InputView.getWinNumbers(), InputView.getBonusNumbers())
+        .checkNumberMatch(IssuanceTickets(tickets))
 
-    OutputView.printStatisticsAndRevenueRate(matchInfo, money, matchInfo)
+    OutputView.printStatisticsAndRevenueRate(matchInfo, money)
 }

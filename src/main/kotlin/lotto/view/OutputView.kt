@@ -1,7 +1,7 @@
 package lotto.view
 
+import lotto.domain.MatchInfo
 import lotto.domain.Money
-import lotto.domain.Reward
 import lotto.domain.Ticket
 
 object OutputView {
@@ -14,24 +14,24 @@ object OutputView {
     private fun printTicketPurchaseCount(count: Int) = println("${count}개를 구매했습니다.")
 
     private fun printTicketsInfo(tickets: List<Ticket>) = tickets.forEach { ticket ->
-        println("[${ticket.getNumbers().joinToString(",")}]")
+        println("[${ticket.getIssueNumbers().joinToString(",")}]")
     }
 
-    fun printStatisticsAndRevenueRate(rewardCount: Map<Reward, Int>, money: Money, matchInfo: Map<Reward, Int>) {
-        printStatistics(rewardCount)
+    fun printStatisticsAndRevenueRate(matchInfo: MatchInfo, money: Money) {
+        printStatistics(matchInfo)
         printRevenueRate(money, matchInfo)
     }
 
-    private fun printStatistics(rewardCount: Map<Reward, Int>) {
+    private fun printStatistics(matchInfo: MatchInfo) {
         println()
         println("당첨 통계")
         println("---------")
-        rewardCount.forEach {
+        matchInfo.matchInfo.forEach {
             println("${it.key.match}개 일치 (${it.key.reward}원) - ${it.value}개")
         }
     }
 
-    private fun printRevenueRate(money: Money, matchInfo: Map<Reward, Int>) {
-        println("총 수익률은 ${money.getRevenueRate(matchInfo)}입니다.")
+    private fun printRevenueRate(money: Money, matchInfo: MatchInfo) {
+        println("총 수익률은 ${matchInfo.getRevenueRate(money)}입니다.")
     }
 }
