@@ -13,7 +13,16 @@ internal class WinningNumberExtractorTest : StringSpec({
         mockkObject(RandomNumberGenerator)
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 6)
-        val lottoWinning = WinningNumberExtractor.process(LottoTicketBundle(amount), WinningNumbers(setOf(1, 2, 3, 4, 5, 6), 7))
+        val lottoWinning = WinningNumberExtractor.process(
+            LottoTicketBundle(amount),
+            WinningNumbers(
+                setOf(
+                    LottoNumber(1), LottoNumber(2), LottoNumber(3),
+                    LottoNumber(4), LottoNumber(5), LottoNumber(6)
+                ),
+                LottoNumber(7)
+            )
+        )
 
         val ticketResult = TicketResult(6, false)
         lottoWinning.result[ticketResult] shouldBe 1
@@ -26,7 +35,16 @@ internal class WinningNumberExtractorTest : StringSpec({
         mockkObject(RandomNumberGenerator)
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 7)
-        val lottoWinning = WinningNumberExtractor.process(LottoTicketBundle(amount), WinningNumbers(setOf(1, 2, 3, 4, 5, 6), 7))
+        val lottoWinning = WinningNumberExtractor.process(
+            LottoTicketBundle(amount),
+            WinningNumbers(
+                setOf(
+                    LottoNumber(1), LottoNumber(2), LottoNumber(3),
+                    LottoNumber(4), LottoNumber(5), LottoNumber(6)
+                ),
+                LottoNumber(7)
+            )
+        )
 
         val ticketResult = TicketResult(5, true)
         lottoWinning.result[ticketResult] shouldBe 1

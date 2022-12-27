@@ -6,14 +6,14 @@ import lotto.common.LottoTicketPolicy.START_NUMBER
 import lotto.utils.RandomNumberGenerator
 
 object LottoNumberSelector {
-    fun select(): Set<Int> {
-        val lottoNumbers = mutableSetOf<Int>()
+    fun select(): Set<LottoNumber> {
+        val lottoNumbers = mutableSetOf<LottoNumber>()
         while (lottoNumbers.size < MAX_LOTTO_NUMBER_SIZE) {
-            lottoNumbers.add(generateRandomNumber())
+            lottoNumbers.add(generateLottoNumber())
         }
 
         return lottoNumbers
     }
 
-    private fun generateRandomNumber() = RandomNumberGenerator.generate(START_NUMBER..END_NUMBER)
+    private fun generateLottoNumber() = LottoNumber(RandomNumberGenerator.generate(START_NUMBER..END_NUMBER))
 }
