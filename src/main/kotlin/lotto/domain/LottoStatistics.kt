@@ -1,14 +1,12 @@
 package lotto.domain
 
 object LottoStatistics {
-    fun calculate(ticketBundle: List<LottoTicket>, winningNumber: Set<LottoNumber>): Map<Int, Int> {
-        return ticketBundle
-            .map {
-                it.numbers.intersect(winningNumber).size
+    fun getRateOfReturn(rank: Map<Int, Int>, purchasedPrice: Int): Float {
+        val totalWinningAmount = rank.entries
+            .sumOf {
+                (WinningAmount.from(it.key).amount * it.value)
             }
-            .groupingBy {
-                WinningAmount.from(it).amount
-            }
-            .eachCount()
+
+        return totalWinningAmount.toFloat() / purchasedPrice.toFloat()
     }
 }

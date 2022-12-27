@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber
 
 object InputView {
     fun purchaseAmountInput(): Int {
-        println("구입금액을 입력해 주세요.\n")
+        println("구입금액을 입력해 주세요,")
         val amount: Int = readln().toInt()
         require(amount > 0) {
             "구입금액은 0이하일 수 없어요."

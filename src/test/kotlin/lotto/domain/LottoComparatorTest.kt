@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class LottoStatisticsTest : StringSpec({
+class LottoComparatorTest : StringSpec({
     "지난 주 당첨 번호와 로또 티켓을 비교해 맞은 개수를 확인해요" {
         val ticketBundle = listOf(
             LottoTicket(
@@ -26,8 +26,8 @@ class LottoStatisticsTest : StringSpec({
             LottoNumber(9),
         )
 
-        val statistics = LottoStatistics.calculate(ticketBundle, winningNumber)
+        val rank = LottoComparator.compare(ticketBundle, winningNumber)
 
-        statistics[WinningAmount.FOUR.amount] shouldBe 1
+        rank[4] shouldBe 1
     }
 })

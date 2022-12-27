@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoComparator
 import lotto.domain.LottoMachine
 import lotto.domain.LottoStatistics
 import lotto.domain.LottoTicket
@@ -14,16 +15,17 @@ fun main() {
 
     ResultView.printTicketAmount(ticketAmount)
 
-    val ticketBundle = listOf<LottoTicket>()
+    var ticketBundle = mutableListOf<LottoTicket>()
     repeat(ticketAmount) {
-        ticketBundle.plus(
+        ticketBundle.add(
             element = lottoMachine.generate()
         )
     }
 
     val winningNumber = InputView.winningNumberInput()
 
-    val statistics = LottoStatistics.calculate(ticketBundle, winningNumber)
+    val rank = LottoComparator.compare(ticketBundle, winningNumber)
+    val rate = LottoStatistics.getRateOfReturn(rank, purchasedAmount)
 
-    ResultView.printStatistics(statistics)
+    ResultView.printRateOfReturn(rate)
 }
