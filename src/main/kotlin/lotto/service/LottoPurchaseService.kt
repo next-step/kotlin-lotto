@@ -11,13 +11,12 @@ object LottoPurchaseService {
     fun purchase(payment: Payment, manualLottos: List<IntArray>): List<Lotto> {
         val lottoCount = payment.value / UNIT_PRICE
 
-        if (manualLottos.size > lottoCount) {
-            throw IllegalArgumentException("지불금액이 부족합니다.")
-        }
+        require(manualLottos.size <= lottoCount) { "지불금액이 부족합니다." }
 
-        val selectors = manualLottos.map { ManualLottoSelector(it) } +
-            (1..lottoCount - manualLottos.size).map { AutoLottoSelector }
-
-        return selectors.map { it.select() }
+        return (
+            manualLottos.map { ManualLottoSelector(it) } +
+                (1..lottoCount - manualLottos.size).map { AutoLottoSelector }
+            )
+            .map { it.select() }
     }
 }
