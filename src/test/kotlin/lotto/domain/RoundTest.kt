@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-class RoundTest : DescribeSpec ({
+class RoundTest : DescribeSpec({
     describe("로또 회차 테스트") {
         val lottoNumbers = (1..6).map { LottoNumber.of(it) }.toSet()
         val lotto = Lotto(lottoNumbers)

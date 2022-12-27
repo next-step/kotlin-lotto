@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class RoundResultTest : DescribeSpec ({
+class RoundResultTest : DescribeSpec({
     describe("로또 회차 결과 테스트") {
         var countPerRank = Rank.values().associateWith { 0 }.toMutableMap()
         countPerRank[Rank.THIRD] = 1

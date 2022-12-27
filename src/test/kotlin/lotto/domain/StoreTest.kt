@@ -1,6 +1,5 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
@@ -8,7 +7,6 @@ import io.kotest.matchers.types.beInstanceOf
 
 class StoreTest : DescribeSpec({
     describe("로또 판매기 테스트") {
-        val purchasePrice = 14000
         val lottoNumbers = listOf(
             listOf(8, 21, 23, 41, 42, 43).map { LottoNumber.of(it) }.toSet(),
             listOf(3, 5, 11, 16, 32, 38).map { LottoNumber.of(it) }.toSet()

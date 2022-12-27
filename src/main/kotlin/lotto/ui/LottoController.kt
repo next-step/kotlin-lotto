@@ -1,9 +1,16 @@
 package lotto.ui
 
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.Lottos
+import lotto.domain.Round
+import lotto.domain.RoundResult
+import lotto.domain.Store
+import lotto.domain.Ticket
+import lotto.domain.WinningLotto
 
 object LottoController {
-    fun purchaseTicket (purchasePrice: Int, lottoNumbersList: List<Set<LottoNumber>>): Ticket {
+    fun purchaseTicket(purchasePrice: Int, lottoNumbersList: List<Set<LottoNumber>>): Ticket {
         return Ticket(purchasePrice, lottoNumbersList)
     }
 

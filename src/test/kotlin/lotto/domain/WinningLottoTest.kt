@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class WinningLottoTest : DescribeSpec ({
+class WinningLottoTest : DescribeSpec({
     describe("당첨 로또 테스트") {
         val lottoNumbers = (1..6).map { LottoNumber.of(it) }.toSet()
         val lotto = Lotto(lottoNumbers)

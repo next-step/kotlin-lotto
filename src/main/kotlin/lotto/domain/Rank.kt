@@ -5,7 +5,7 @@ enum class Rank(val score: Score, val rewardPrice: Money) {
     SECOND(Score(5, true), Money(30000000)),
     THIRD(Score(5, false), Money(1500000)),
     FOURTH(Score(4, false), Money(50000)),
-    FIFTH(Score(3,  false), Money(5000)),
+    FIFTH(Score(3, false), Money(5000)),
     MISS(Score(0, false), Money.ZERO),
     ;
 
@@ -18,4 +18,3 @@ enum class Rank(val score: Score, val rewardPrice: Money) {
         }
     }
 }
-

@@ -10,11 +10,11 @@ fun printTicketInfo(ticket: Ticket) {
 }
 
 fun printLottos(lottos: Lottos) {
-    lottos.elements.forEach {lotto ->
+    lottos.elements.forEach { lotto ->
         println(
             "[" +
-            lotto.lottoNumbers.joinToString(", ") { it.toString() } +
-            "]"
+                lotto.lottoNumbers.joinToString(", ") { it.toString() } +
+                "]"
         )
     }
     println("\n")
@@ -27,8 +27,8 @@ fun printLottoResult(roundResult: RoundResult, earningRate: Double) {
         .filter { it != Rank.MISS }
         .forEach {
             var result = "${it.score.matchedCount}개 일치 " +
-                    (if (it.score.matchedBonus) "보너스 볼 일치 " else "") +
-                    "(${it.rewardPrice}원) - ${roundResult.getCountOfRank(it)}개"
+                (if (it.score.matchedBonus) "보너스 볼 일치 " else "") +
+                "(${it.rewardPrice}원) - ${roundResult.getCountOfRank(it)}개"
 
             println(result)
         }

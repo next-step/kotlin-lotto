@@ -1,7 +1,13 @@
 package lotto
 
 import lotto.ui.LottoController
-import lotto.ui.view.*
+import lotto.ui.view.getBonusLottoNumber
+import lotto.ui.view.getManualLottoNumbers
+import lotto.ui.view.getPurchasePrice
+import lotto.ui.view.getWinningLottoNumbers
+import lotto.ui.view.printLottoResult
+import lotto.ui.view.printLottos
+import lotto.ui.view.printTicketInfo
 
 fun main() {
     val purchasePrice = getPurchasePrice()
