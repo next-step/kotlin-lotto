@@ -2,7 +2,7 @@ package lotto.domain
 
 class LottoTicket(
     val numbers: Set<LottoNumber>
-): Set<LottoNumber> by numbers {
+) : Set<LottoNumber> by numbers {
 
     init {
         require(numbers.size == 6) {

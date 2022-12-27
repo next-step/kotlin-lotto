@@ -28,6 +28,6 @@ class LottoStatisticsTest : StringSpec({
 
         val statistics = LottoStatistics.calculate(ticketBundle, winningNumber)
 
-        statistics[4] shouldBe 1
+        statistics[WinningAmount.FOUR.amount] shouldBe 1
     }
 })

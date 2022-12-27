@@ -6,7 +6,9 @@ object LottoStatistics {
             .map {
                 it.numbers.intersect(winningNumber).size
             }
-            .groupingBy { it }
+            .groupingBy {
+                WinningAmount.from(it).amount
+            }
             .eachCount()
     }
 }

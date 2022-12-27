@@ -7,6 +7,5 @@ object ResultView {
     }
 
     fun printStatistics(statistics: Map<Int, Int>) {
-
     }
 }
