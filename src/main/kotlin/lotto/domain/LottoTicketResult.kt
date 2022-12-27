@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class TicketResult(
+data class LottoTicketResult(
     val matchCount: Int,
     val isBonusBallMatched: Boolean,
 )

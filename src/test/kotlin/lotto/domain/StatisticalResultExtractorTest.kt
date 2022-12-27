@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 internal class StatisticalResultExtractorTest : BehaviorSpec({
     Given("로또 당첨 개수가 ") {
-        val ticketResult = TicketResult(3, false)
+        val ticketResult = LottoTicketResult(3, false)
         val lottoWinningResult = LottoWinningResult(mapOf(ticketResult to 4))
         val statisticalResultExtractor = StatisticalResultExtractor(lottoWinningResult)
         When("하나 이상 존재한다면, ") {
@@ -24,7 +24,7 @@ internal class StatisticalResultExtractorTest : BehaviorSpec({
     }
 
     Given("로또의") {
-        val ticketResult = TicketResult(3, false)
+        val ticketResult = LottoTicketResult(3, false)
         val lottoWinningResult = LottoWinningResult(mapOf(ticketResult to 2))
         val statisticalResultExtractor = StatisticalResultExtractor(lottoWinningResult)
         When("당첨 금액에 따른") {

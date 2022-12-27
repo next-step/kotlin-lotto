@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottoWinningResult(
-    val result: Map<TicketResult, Int>,
+    val result: Map<LottoTicketResult, Int>,
 ) {
     fun totalAmount(): Long {
         return result.entries.sumOf {

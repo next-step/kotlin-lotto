@@ -26,7 +26,7 @@ internal class WinningNumberExtractorTest : StringSpec({
             )
         )
 
-        val ticketResult = TicketResult(6, false)
+        val ticketResult = LottoTicketResult(6, false)
         lottoWinning.result[ticketResult] shouldBe 1
 
         unmockkObject(RandomNumberGenerator)
@@ -50,7 +50,7 @@ internal class WinningNumberExtractorTest : StringSpec({
             )
         )
 
-        val ticketResult = TicketResult(5, true)
+        val ticketResult = LottoTicketResult(5, true)
         lottoWinning.result[ticketResult] shouldBe 1
 
         unmockkObject(RandomNumberGenerator)
