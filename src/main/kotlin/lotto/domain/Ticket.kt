@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.Policy.LOTTO_PRICE
-
 data class Ticket(
     private val purchasePrice: Int,
     val selectedLottoNumbers: List<Set<LottoNumber>>
@@ -12,4 +10,8 @@ data class Ticket(
     private fun autoLottoSize() = (purchasePrice / LOTTO_PRICE) - manualLottoSize()
 
     private fun manualLottoSize() = selectedLottoNumbers.size
+
+    companion object {
+        const val LOTTO_PRICE = 1000
+    }
 }

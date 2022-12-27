@@ -16,6 +16,8 @@ value class Money(private val value: Int) {
         return value * count
     }
 
+    override fun toString() = "$value"
+
     companion object {
         val ZERO = Money(0)
         const val MINIMUM_MONEY_VALUE = 0

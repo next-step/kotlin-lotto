@@ -3,11 +3,15 @@ package lotto.domain
 object LottoGenerator {
     fun generate(): Lotto {
         return Lotto(
-            Policy.LOTTO_NUMBER_RANGE
+            LOTTO_NUMBER_RANGE
                 .shuffled()
-                .take(Policy.LOTTO_SIZE)
+                .take(LOTTO_SIZE)
                 .map(LottoNumber::of)
                 .toSet()
         )
     }
+
+    private val LOTTO_NUMBER_RANGE = (1..45)
+
+    private const val LOTTO_SIZE = 6
 }
