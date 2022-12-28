@@ -1,6 +1,8 @@
-package lotto.model
+package lotto.domain
 
-import org.assertj.core.api.Assertions
+import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
+import lotto.model.LottoPrize
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test

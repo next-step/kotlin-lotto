@@ -1,7 +1,6 @@
 package lotto.domain
 
-import lotto.model.Lotto
-import lotto.model.Lotto.Companion.PRICE
+import lotto.domain.Lotto.Companion.PRICE
 
 class LottoMachine(
     private val lottoGenerator: LottoGenerator = LottoGenerator(),

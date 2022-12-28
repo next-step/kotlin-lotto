@@ -1,8 +1,11 @@
-package lotto.model
+package lotto.domain
 
+import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
 import lotto.model.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
+import lotto.model.LottoPrize
 
-data class WinningLotto(
+class WinningLotto(
     val numbers: List<LottoNumber>,
 ) {
     init {
@@ -11,7 +14,7 @@ data class WinningLotto(
     }
 
     fun prize(lottoNumbers: LottoNumbers): LottoPrize? {
-        return match(lottoNumbers).let(LottoPrize::of)
+        return match(lottoNumbers).let(LottoPrize.Companion::of)
     }
 
     private fun match(lottoNumbers: LottoNumbers): Int =
