@@ -2,7 +2,6 @@ package lotto
 
 import lotto.LottoOffice.ONE_LOTTO_PRICE
 
-
 class BuyPrice(val price: Int) {
     init {
         require(price >= ONE_LOTTO_PRICE) {
