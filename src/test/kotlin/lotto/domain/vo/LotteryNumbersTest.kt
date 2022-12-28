@@ -38,12 +38,12 @@ class LotteryNumbersTest : FreeSpec({
     }
 
     "보너스 번호를 포함한 추첨번호가 일치하는 상품을 가져올 수 있다" {
-        val list = generateList(1, 6)
+        val winList = generateList(1, 6)
         val targetList = generateList(2, 7)
 
-        val winNumbers = LotteryNumbers(lotteryNumbers = list)
+        val winNumbers = LotteryNumbers(lotteryNumbers = winList)
         val target = LotteryNumbers(lotteryNumbers = targetList)
-        val bonusNumber = generateNumber(1)
+        val bonusNumber = generateNumber(7)
 
         val prize = winNumbers.findPrize(target, bonusNumber)
         prize shouldBe Prize.SECOND
