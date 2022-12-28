@@ -34,7 +34,7 @@ class LottoApplication {
         val moneyInput = InputView.readMoney()
         val money = BigDecimal(moneyInput)
 
-        val manualCount = InputView.readManualLottoCount()
+        val manualCount = InputView.readManualLottoCount().toInt()
         val manualNumbers = InputView.readManualLottos(manualCount)
 
         val lottos = LottoShop.buyLottos(money, manualNumbers)

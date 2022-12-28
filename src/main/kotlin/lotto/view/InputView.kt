@@ -16,9 +16,9 @@ object InputView {
         return readln()
     }
 
-    fun readManualLottoCount(): Int {
+    fun readManualLottoCount(): String {
         println("수동으로 구매할 로또 수를 입력해 주세요.")
-        return readln().trim().toInt()
+        return readln()
     }
 
     fun readManualLottos(buyCount: Int): List<String> {
