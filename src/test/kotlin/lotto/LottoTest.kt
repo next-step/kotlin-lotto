@@ -37,17 +37,17 @@ class LottoTest : StringSpec({
     "입력 받은 문자열의 6개 당첨 숫자에 중복이 없어야 한다" {
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { WinningLotto("1, 2, 3, 4, 6, 6") }
+            .isThrownBy { WinningLotto(StringNumbers("1, 2, 3, 4, 6, 6"), LottoNumber(8)) }
     }
 
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
         val lottoMachine = LottoMachine(1000)
         val lottoList = lottoMachine.publishLotto()
 
-        val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
-        val bonusNumber = BonusNumber(winningLotto.lotto)
-        val winningResult = WinningResult(lottoList, winningLotto, bonusNumber)
+        val firstLotto = lottoList[0]
+        val bonusNumber = getBonusNumber(firstLotto)
+        val winningLotto = WinningLotto(firstLotto, bonusNumber)
+        val winningResult = WinningResult(lottoList, winningLotto)
 
         winningResult.getWinningResult(RANKING.FIRST) shouldBe 1
     }
@@ -56,10 +56,10 @@ class LottoTest : StringSpec({
         val lottoMachine = LottoMachine(1000)
         val lottoList = lottoMachine.publishLotto()
 
-        val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
-        val bonusNumber = BonusNumber(winningLotto.lotto)
-        val winningResult = WinningResult(lottoList, winningLotto, bonusNumber)
+        val firstLotto = lottoList[0]
+        val bonusNumber = getBonusNumber(firstLotto)
+        val winningLotto = WinningLotto(firstLotto, bonusNumber)
+        val winningResult = WinningResult(lottoList, winningLotto)
         val winningStatistics = WinningStatistics(lottoMachine.price)
 
         winningStatistics.rateOfReturn(winningResult.getWinningPrice()) shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
@@ -69,12 +69,20 @@ class LottoTest : StringSpec({
         val lottoMachine = LottoMachine(1000)
         val lottoList = lottoMachine.publishLotto()
 
-        val firstLottoString = lottoList[0].toString()
-        val winningLotto = WinningLotto(firstLottoString.replace("[", "").replace("]", ""))
-        val bonusNumber = BonusNumber(winningLotto.lotto)
-        val winningResult = WinningResult(lottoList, winningLotto, bonusNumber)
+        val firstLotto = lottoList[0]
+        val bonusNumber = getBonusNumber(firstLotto)
+        val winningLotto = WinningLotto(firstLotto, bonusNumber)
+        val winningResult = WinningResult(lottoList, winningLotto)
         val winningStatistics = WinningStatistics(lottoMachine.price)
 
         if (winningStatistics.rateOfReturn(winningResult.getWinningPrice()) < 1) "손해" else "이익" shouldBe "이익"
     }
-})
+}) {
+    companion object {
+        fun getBonusNumber(lotto: Lotto): LottoNumber {
+            return LottoNumber(
+                LottoNumber.RANGE.subtract(lotto.numbers.map { it.number }.toSet()).random()
+            )
+        }
+    }
+}

@@ -1,22 +1,11 @@
 package lotto
 
-class WinningLotto(winningString: String) {
-
-    val lotto: Lotto
+class WinningLotto(val lotto: Lotto, val bonusNumber: LottoNumber) {
+    constructor(winningStrings: StringNumbers, bonusNumber: LottoNumber): this(
+        Lotto(winningStrings.numbers.map { LottoNumber(it.trim()) }.toSet()), bonusNumber
+    )
 
     init {
-        val stringNumbers = getStringNumbers(winningString)
-        lotto = Lotto(getWinningNumbers(stringNumbers))
-    }
-
-    private fun getStringNumbers(winningString: String): List<String> {
-        val stringNumbers = winningString.split(",")
-        require(stringNumbers.isNotEmpty()) { "input string delimiter" }
-        return stringNumbers
-    }
-
-    private fun getWinningNumbers(stringNumbers: List<String>): Set<LottoNumber> {
-        val lottoNumbers = stringNumbers.map { LottoNumber(it.trim()) }
-        return lottoNumbers.toSet()
+        require(!lotto.contains(bonusNumber)) { "bonusNumber same input lotto numbers" }
     }
 }
