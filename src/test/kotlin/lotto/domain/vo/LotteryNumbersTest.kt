@@ -31,7 +31,7 @@ class LotteryNumbersTest : FreeSpec({
 
         val winNumbers = LotteryNumbers(lotteryNumbers = list)
         val target = LotteryNumbers(lotteryNumbers = targetList)
-        val bonusNumber = generateNumber(45)
+        val bonusNumber = LotteryNumber(45)
 
         val prize = winNumbers.findPrize(target, bonusNumber)
         prize shouldBe Prize.FIFTH
@@ -43,16 +43,12 @@ class LotteryNumbersTest : FreeSpec({
 
         val winNumbers = LotteryNumbers(lotteryNumbers = winList)
         val target = LotteryNumbers(lotteryNumbers = targetList)
-        val bonusNumber = generateNumber(7)
+        val bonusNumber = LotteryNumber(7)
 
         val prize = winNumbers.findPrize(target, bonusNumber)
         prize shouldBe Prize.SECOND
     }
 })
-
-fun generateNumber(number: Int): LotteryNumber {
-    return LotteryNumber(value = number)
-}
 
 fun generateList(start: Int, end: Int): List<LotteryNumber> {
     val mutableSet = mutableSetOf<LotteryNumber>()
