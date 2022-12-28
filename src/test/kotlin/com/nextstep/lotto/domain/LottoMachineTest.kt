@@ -18,9 +18,9 @@ class LottoMachineTest : BehaviorSpec({
         }
 
         When("금액이 1000원 이상 주어지면") {
-            Then("1000원 당 1개의 LottoTicket 을 생성하고 LottoTickets 으로 리턴한다.") {
-                val lottoTickets = lottoMachine.purchase(2500)
-                lottoTickets.getCount() shouldBe 2
+            Then("1000원 당 1개의 Lotto 를 생성하고 Lottos 으로 리턴한다.") {
+                val lottos = lottoMachine.purchase(2500)
+                lottos.getCount() shouldBe 2
             }
         }
     }

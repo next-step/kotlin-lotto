@@ -11,14 +11,12 @@ fun main() {
 
     val inputAmount = inputView.inputAmount()
     val lottoMachine = LottoMachine()
-    val lottoTickets = lottoMachine.purchase(inputAmount)
-
-    outputView.printLottoTicketCount(lottoTickets.getCount(), lottoTickets)
+    val lottos = lottoMachine.purchase(inputAmount)
+    outputView.printLottoTicketCount(lottos)
 
     val winningNumbers = inputView.inputWinningNumbers()
     val winningLotto = WinningLotto(*winningNumbers)
 
-    val lottoStat = lottoTickets.match(winningLotto)
-
+    val lottoStat = lottos.match(winningLotto)
     outputView.printResult(lottoStat)
 }

@@ -6,10 +6,9 @@ class LottoMachine {
 
     private val lottoNumbers: List<LottoNumber> = (1..45).map { LottoNumber(it) }
 
-    fun purchase(amount: Int): Lottos {
-        require(amount >= 1000) { "로또는 1000원부터 구매할 수 있습니다. amount: $amount" }
-        val count = amount / LOTTO_PRICE
-        val lottos = (1..count).map { Lotto(randomLottoBalls()) }
+    fun purchase(price: Int): Lottos {
+        require(price >= 1000) { "로또는 1000원부터 구매할 수 있습니다. amount: $price" }
+        val lottos = (1..price / LOTTO_PRICE).map { Lotto(randomLottoBalls()) }
         return Lottos(lottos)
     }
 
