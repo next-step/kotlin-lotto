@@ -17,7 +17,7 @@ class LotteryNumbers(
 
     fun findPrize(targetLotteryNumbers: LotteryNumbers, bonusNumber: LotteryNumber): Prize {
         val countEqualLotteryNumbers = countEqualLotteryNumbers(targetLotteryNumbers)
-        val hasBonusNumber = hasBonusNumber(bonusNumber)
+        val hasBonusNumber = this.lotteryNumbers.contains(bonusNumber)
         return Prize.find(countEqualLotteryNumbers.toLong(), hasBonusNumber)
     }
 
@@ -25,10 +25,6 @@ class LotteryNumbers(
         return this.lotteryNumbers.filter {
             targetLotteryNumbers.contains(it)
         }.size
-    }
-
-    private fun hasBonusNumber(bonusNumber: LotteryNumber): Boolean {
-        return this.lotteryNumbers.find { it.value == bonusNumber.value } != null
     }
 
     companion object {
