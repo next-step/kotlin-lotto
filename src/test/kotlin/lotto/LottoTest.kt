@@ -77,6 +77,71 @@ class LottoTest : StringSpec({
 
         if (winningStatistics.rateOfReturn(winningResult.getWinningPrice()) < 1) "손해" else "이익" shouldBe "이익"
     }
+
+    "5등." {
+        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+        val bonusNumber = getBonusNumber(lotto)
+
+        val winningLottoString = StringNumbers("1,2,3,7,8,9".split(","))
+        val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+
+        val winningResult = WinningResult(listOf(lotto), WinningLotto(winningLotto, bonusNumber))
+
+        winningResult.getWinningResult(RANKING.FIFTH) shouldBe 1
+    }
+
+    "4등." {
+        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+        val bonusNumber = getBonusNumber(lotto)
+
+        val winningLottoString = StringNumbers("1,2,3,4,8,9".split(","))
+        val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+
+        val winningResult = WinningResult(listOf(lotto), WinningLotto(winningLotto, bonusNumber))
+
+        winningResult.getWinningResult(RANKING.FOURTH) shouldBe 1
+    }
+
+    "3등." {
+        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+        val bonusNumber = getBonusNumber(lotto)
+
+        val winningLottoString = StringNumbers("1,2,3,4,5,9".split(","))
+        val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+
+        val winningResult = WinningResult(listOf(lotto), WinningLotto(winningLotto, bonusNumber))
+
+        winningResult.getWinningResult(RANKING.THIRD) shouldBe 1
+    }
+
+    "1등." {
+        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+        val bonusNumber = getBonusNumber(lotto)
+
+        val winningLottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+
+        val winningResult = WinningResult(listOf(lotto), WinningLotto(winningLotto, bonusNumber))
+
+        winningResult.getWinningResult(RANKING.FIRST) shouldBe 1
+    }
+
+    "2등." {
+        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+        val bonusNumber = LottoNumber(6)
+
+        val winningLottoString = StringNumbers("1,2,3,4,5,9".split(","))
+        val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
+
+        val winningResult = WinningResult(listOf(lotto), WinningLotto(winningLotto, bonusNumber))
+
+        winningResult.getWinningResult(RANKING.SECOND) shouldBe 1
+    }
 }) {
     companion object {
         fun getBonusNumber(lotto: Lotto): LottoNumber {
