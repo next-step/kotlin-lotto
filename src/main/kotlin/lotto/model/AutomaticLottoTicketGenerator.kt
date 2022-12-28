@@ -1,9 +1,7 @@
 package lotto.model
 
-class AutomaticLottoTicketGenerator(private val quantity: Int) {
-    val tickets: List<LottoTicket> = generate()
-
-    private fun generate(): List<LottoTicket> {
+class AutomaticLottoTicketGenerator {
+    fun generate(quantity: Int): List<LottoTicket> {
         return List(quantity) { LottoTicket((LOTTO_WINNER_NUMBER_RANGE).shuffled().take(6).sorted()) }
     }
 

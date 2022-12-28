@@ -1,14 +1,24 @@
 package lotto.model
 
-import lotto.LottoAllTest
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 
 internal class AutomaticLottoTicketGeneratorTest {
     @Test
-    fun `임의의 6개 숫자를 중복없이 생성한다`() {
-        val testTicket = AutomaticLottoTicketGenerator(1)
-        Assertions.assertThat(testTicket.tickets[0].values.toSet().size).isSameAs(LottoAllTest.LOTTO_NUMBER_SIZE)
+    fun `정상적으로 자동 번호 로또가 발생하는 확인한다`() {
+        assertDoesNotThrow {
+            AutomaticLottoTicketGenerator().generate(1)
+        }
+    }
+
+    @Test
+    fun `수량만큼 자동 번호 로또를 발행한다`() {
+        val testTicket = AutomaticLottoTicketGenerator().generate(2)
+        testTicket.forEach {
+            assertThat(it.values.size).isEqualTo(LOTTO_NUMBER_SIZE)
+        }
+        assertThat(testTicket.size).isEqualTo(2)
     }
 
     companion object {
