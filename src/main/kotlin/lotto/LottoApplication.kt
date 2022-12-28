@@ -33,8 +33,12 @@ class LottoApplication {
     private fun buyLottos(): Lottos {
         val moneyInput = InputView.readMoney()
         val money = BigDecimal(moneyInput)
-        val lottos = LottoShop.buyAutoLottos(money)
-        OutputView.printDetails(lottos)
+
+        val manualCount = InputView.readManualLottoCount()
+        val manualNumbers = InputView.readManualLottos(manualCount)
+
+        val lottos = LottoShop.buyLottos(money, manualNumbers)
+        OutputView.printDetails(lottos, manualCount)
         return lottos
     }
 }
