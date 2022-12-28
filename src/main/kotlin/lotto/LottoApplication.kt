@@ -1,8 +1,8 @@
 package lotto
 
-import lotto.utils.LottoNumberMatchComparator
 import lotto.domain.LottoGameResult
 import lotto.domain.LottoMachine
+import lotto.utils.LottoNumberMatchComparator
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -15,6 +15,7 @@ fun main() {
     ResultView.printTicketAmount(ticketAmount)
 
     val ticketBundle = lottoMachine.ticketing(purchasedAmount)
+    ResultView.printTicketBundle(ticketBundle)
 
     val winningNumber = InputView.winningNumberInput()
 
