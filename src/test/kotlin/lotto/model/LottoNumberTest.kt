@@ -9,7 +9,10 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 3, 44, 45, 46])
     internal fun `로또 숫자가 생성된다`(value: Int) {
+        // given, when
         val lottoNumber = LottoNumber.of(value)
+
+        // then
         assertThat(lottoNumber.value).isEqualTo(value)
     }
 

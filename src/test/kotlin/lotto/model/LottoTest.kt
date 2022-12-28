@@ -10,7 +10,10 @@ import org.junit.jupiter.params.provider.CsvSource
 class LottoTest {
     @Test
     internal fun `로또 숫자들은 6개로 구성된다`() {
+        // given, when
         val lotto = Lotto.of(1, 2, 3, 4, 5, 6)
+
+        // then
         assertThat(lotto.size).isEqualTo(6)
     }
 
@@ -39,10 +42,14 @@ class LottoTest {
         delimiter = ':'
     )
     internal fun `일치하는 번호 갯수`(input1: String, input2: String, expected: Int) {
+        // given
         val lotto1 = LottoGenerator.fromString(input1)
         val lotto2 = LottoGenerator.fromString(input2)
+
+        // when
         val matchCount = lotto1.matchCountWith(lotto2)
 
+        // then
         assertThat(matchCount).isEqualTo(expected)
     }
 }

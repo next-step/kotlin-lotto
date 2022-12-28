@@ -25,12 +25,15 @@ class WinningNumbersTest {
         lottoNums: String,
         expectedMatchCount: Int
     ) {
+        // given
         val lotto = fromString(lottoNums)
-
         val dummyNumber = 46
+        val expectedPrize = LottoPrize.of(expectedMatchCount, false)
+
+        // when
         val winningNumbers = of(fromString(winningNums), dummyNumber)
 
-        val expectedPrize = LottoPrize.of(expectedMatchCount, false)
+        // then
         assertThat(winningNumbers.prizeOf(lotto)).isEqualTo(expectedPrize)
     }
 }

@@ -11,24 +11,42 @@ import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 
 class WinningResultTest {
-    private val winningResult by lazy {
-        val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
-        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
-        WinningResult(purchaseAmount, prizes)
-    }
-
     @Test
     internal fun `총 당청 금액을 계산한다`() {
+        // given
+        val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
+        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
+
+        // when
+        val winningResult = WinningResult(purchaseAmount, prizes)
+
+        // then
         assertThat(winningResult.getTotalWinningAmount()).isEqualTo(BigDecimal(3_150_000))
     }
 
     @Test
     internal fun `당첨 수익률을 계산한다`() {
+        // given
+        val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
+        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
+
+        // when
+        val winningResult = WinningResult(purchaseAmount, prizes)
+
+        // then
         assertThat(winningResult.getReturnRatio()).isEqualTo(BigDecimal("525.00"))
     }
 
     @Test
     internal fun `등수 별 당첨결과를 출력한다`() {
+        // given
+        val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
+        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
+
+        // when
+        val winningResult = WinningResult(purchaseAmount, prizes)
+
+        // then
         assertThat(winningResult.getCountOf(NONE)).isEqualTo(1)
         assertThat(winningResult.getCountOf(FOURTH)).isEqualTo(3)
         assertThat(winningResult.getCountOf(THIRD)).isEqualTo(2)

@@ -12,13 +12,19 @@ import java.math.BigDecimal
 class LottoPrizesTest {
     @Test
     fun `총 당청 금액을 계산한다`() {
+        // given, when
         val lottoPrizes = LottoPrizes.of(NONE, FOURTH, FIFTH)
+
+        // then
         assertThat(lottoPrizes.getTotalWinningAmount()).isEqualTo(BigDecimal(55_000))
     }
 
     @Test
     fun `등수 별 당첨결과를 출력한다`() {
+        // given, when
         val lottoPrizes = LottoPrizes.of(NONE, THIRD, FOURTH)
+
+        // then
         assertThat(lottoPrizes.getCountOf(NONE)).isEqualTo(1)
         assertThat(lottoPrizes.getCountOf(THIRD)).isEqualTo(1)
         assertThat(lottoPrizes.getCountOf(FOURTH)).isEqualTo(1)
