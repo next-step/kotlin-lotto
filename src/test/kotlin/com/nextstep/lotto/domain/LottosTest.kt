@@ -18,10 +18,10 @@ class LottosTest : AnnotationSpec() {
         lottos.getCount() shouldBe 2
     }
 
-    @DisplayName("WinningLotto를 받아서 Lottos가 숫자를 맞춘 현황을 map 타입으로 리턴한다.")
+    @DisplayName("WinningLotto를 받아서 Lottos가 맞춘 통계를 LottoStat으로 리턴한다.")
     @MethodSource("winningNumberProvider")
     @ParameterizedTest
-    fun match(numbers: IntArray, expected: Map<Int, Int>) {
+    fun match(numbers: IntArray, expected: LottoStat) {
         val lottos = Lottos(listOf(Lotto(1, 2, 3, 4, 5, 6), Lotto(10, 11, 12, 13, 14, 15)))
         val winningLotto = WinningLotto(*numbers)
         lottos.match(winningLotto) shouldBe expected
@@ -30,16 +30,16 @@ class LottosTest : AnnotationSpec() {
     companion object {
         @JvmStatic
         fun winningNumberProvider(): Stream<Arguments> = Stream.of(
-            arguments(intArrayOf(1, 2, 3, 4, 5, 6), mapOf(6 to 1, 0 to 1)),
-            arguments(intArrayOf(1, 2, 3, 4, 5, 7), mapOf(5 to 1, 0 to 1)),
-            arguments(intArrayOf(1, 2, 3, 4, 8, 7), mapOf(4 to 1, 0 to 1)),
-            arguments(intArrayOf(1, 2, 3, 9, 8, 7), mapOf(3 to 1, 0 to 1)),
-            arguments(intArrayOf(1, 2, 10, 9, 8, 7), mapOf(2 to 1, 1 to 1)),
-            arguments(intArrayOf(1, 11, 10, 9, 8, 7), mapOf(1 to 1, 2 to 1)),
-            arguments(intArrayOf(12, 11, 10, 9, 8, 7), mapOf(0 to 1, 3 to 1)),
-            arguments(intArrayOf(12, 11, 10, 13, 8, 7), mapOf(0 to 1, 4 to 1)),
-            arguments(intArrayOf(12, 11, 10, 13, 14, 7), mapOf(0 to 1, 5 to 1)),
-            arguments(intArrayOf(12, 11, 10, 13, 14, 15), mapOf(0 to 1, 6 to 1)),
+            arguments(intArrayOf(1, 2, 3, 4, 5, 6), LottoStat(listOf(6, 0))),
+            arguments(intArrayOf(1, 2, 3, 4, 5, 7), LottoStat(listOf(5, 0))),
+            arguments(intArrayOf(1, 2, 3, 4, 8, 7), LottoStat(listOf(4, 0))),
+            arguments(intArrayOf(1, 2, 3, 9, 8, 7), LottoStat(listOf(3, 0))),
+            arguments(intArrayOf(1, 2, 10, 9, 8, 7), LottoStat(listOf(2, 1))),
+            arguments(intArrayOf(1, 11, 10, 9, 8, 7), LottoStat(listOf(1, 2))),
+            arguments(intArrayOf(12, 11, 10, 9, 8, 7), LottoStat(listOf(0, 3))),
+            arguments(intArrayOf(12, 11, 10, 13, 8, 7), LottoStat(listOf(0, 4))),
+            arguments(intArrayOf(12, 11, 10, 13, 14, 7), LottoStat(listOf(0, 5))),
+            arguments(intArrayOf(12, 11, 10, 13, 14, 15), LottoStat(listOf(0, 6)))
         )
     }
 }

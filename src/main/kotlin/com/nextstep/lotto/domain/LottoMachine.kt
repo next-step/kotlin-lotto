@@ -1,6 +1,6 @@
 package com.nextstep.lotto.domain
 
-private const val LOTTO_PRICE: Int = 1000
+internal const val LOTTO_PRICE: Int = 1000
 
 class LottoMachine {
 
