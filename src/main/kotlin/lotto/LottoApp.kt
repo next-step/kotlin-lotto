@@ -1,8 +1,8 @@
 package lotto
 
 import lotto.domain.LottoMachine
-import lotto.domain.LottoMatcher
-import lotto.domain.LottoROIAnalysis
+import lotto.domain.LottoPrizeResults
+import lotto.model.Lotto
 import lotto.model.LottoNumber
 import lotto.model.WinningLotto
 
@@ -11,14 +11,13 @@ fun main() {
     val lotto = LottoMachine().draw(purchaseAmount)
     ResultView.printLotto(lotto)
     val winningLotto = issueWinningLotto()
-    val lottoPrizeResults = LottoMatcher().match(winningLotto, lotto)
+    val lottoPrizeResults = match(winningLotto, lotto)
     ResultView.printLottoPrizeResults(lottoPrizeResults)
-    ResultView.printLottoROIAnalysis(
-        LottoROIAnalysis().returnOnInvestment(
-            winningPrize = lottoPrizeResults.totalPrize(),
-            purchaseAmount = purchaseAmount
-        )
-    )
+    ResultView.printLottoROIAnalysis(lottoPrizeResults.returnOnInvestment(purchaseAmount))
+}
+
+private fun match(winningLotto: WinningLotto, userLotto: Lotto): LottoPrizeResults {
+    return userLotto.matches(winningLotto)
 }
 
 private fun issueWinningLotto(): WinningLotto =

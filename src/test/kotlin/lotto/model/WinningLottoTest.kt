@@ -33,4 +33,17 @@ internal class WinningLottoTest {
             .isThrownBy { WinningLotto(numbers) }
             .withMessage("당첨 번호는 중복되는 숫자가 없어야 합니다.")
     }
+
+    @Test
+    fun `당첨된 로또 등수를 알 수 있다`() {
+        // given
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+        val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+
+        // when
+        val rank = winningLotto.prize(lottoNumbers)
+
+        // then
+        Assertions.assertThat(rank).isEqualTo(LottoPrize.FIRST)
+    }
 }

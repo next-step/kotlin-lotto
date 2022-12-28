@@ -1,18 +1,12 @@
-package lotto.domain
+package lotto.model
 
-import lotto.model.Lotto
-import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
-import lotto.model.LottoPrize
-import lotto.model.WinningLotto
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-internal class LottoMatcherTest {
-
+internal class LottoTest {
     @Test
     fun `1등 당첨`() {
         // given
@@ -22,10 +16,10 @@ internal class LottoMatcherTest {
             listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))).let(::Lotto)
 
         // when
-        val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
+        val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.FIRST)).isEqualTo(1)
+        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.FIRST)).isEqualTo(1)
     }
 
     @Test
@@ -37,10 +31,10 @@ internal class LottoMatcherTest {
             listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber))).let(::Lotto)
 
         // when
-        val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
+        val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.SECOND)).isEqualTo(1)
+        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.SECOND)).isEqualTo(1)
     }
 
     @Test
@@ -52,10 +46,10 @@ internal class LottoMatcherTest {
             listOf(LottoNumbers(listOf(1, 2, 3, 4, 7, 8).map(::LottoNumber))).let(::Lotto)
 
         // when
-        val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
+        val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.THIRD)).isEqualTo(1)
+        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.THIRD)).isEqualTo(1)
     }
 
     @Test
@@ -67,10 +61,10 @@ internal class LottoMatcherTest {
             listOf(LottoNumbers(listOf(1, 2, 3, 7, 8, 9).map(::LottoNumber))).let(::Lotto)
 
         // when
-        val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
+        val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.FOURTH)).isEqualTo(1)
+        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.FOURTH)).isEqualTo(1)
     }
 
     @ParameterizedTest
@@ -80,10 +74,10 @@ internal class LottoMatcherTest {
         val winningLotto =
             listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         // when
-        val lottoPrizeResults = LottoMatcher().match(winningLotto, userLotto)
+        val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.size == 0).isTrue
+        Assertions.assertThat(lottoPrizeResults.size == 0).isTrue
     }
 
     companion object {
