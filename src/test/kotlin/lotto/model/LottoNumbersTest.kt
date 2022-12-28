@@ -26,4 +26,13 @@ internal class LottoNumbersTest {
             .isThrownBy { LottoNumbers(numbers) }
             .withMessage("로또 번호는 6개의 숫자로 구성되어야 합니다.")
     }
+
+    @Test
+    fun `로또 번호는 중복되는 숫자가 없어야 한다`() {
+        val numbers = listOf(1, 2, 3, 4, 5, 5).map(::LottoNumber)
+
+        assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { LottoNumbers(numbers) }
+            .withMessage("로또 번호는 중복되는 숫자가 없어야 합니다.")
+    }
 }
