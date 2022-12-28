@@ -1,6 +1,8 @@
 package lotto.model
 
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 
 internal class WinningLottoTest {
@@ -13,14 +15,14 @@ internal class WinningLottoTest {
         val winningLotto = WinningLotto(numbers)
 
         // then
-        Assertions.assertThat(winningLotto.numbers).isEqualTo(numbers)
+        assertThat(winningLotto.numbers).isEqualTo(numbers)
     }
 
     @Test
     fun `담청 번호는 6개의 숫자가 아니면 예외가 발생한다`() {
         val numbers = listOf(1, 2, 3, 4, 5).map(::LottoNumber)
 
-        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
+        assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { WinningLotto(numbers) }
             .withMessage("당첨 번호는 6개의 숫자여야 합니다.")
     }
@@ -29,7 +31,7 @@ internal class WinningLottoTest {
     fun `담청 번호는 중복되는 숫자가 있으면 예외가 발생한다`() {
         val numbers = listOf(1, 2, 1, 4, 5, 6).map(::LottoNumber)
 
-        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
+        assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { WinningLotto(numbers) }
             .withMessage("당첨 번호는 중복되는 숫자가 없어야 합니다.")
     }
@@ -44,6 +46,6 @@ internal class WinningLottoTest {
         val rank = winningLotto.prize(lottoNumbers)
 
         // then
-        Assertions.assertThat(rank).isEqualTo(LottoPrize.FIRST)
+        assertThat(rank).isEqualTo(LottoPrize.FIRST)
     }
 }

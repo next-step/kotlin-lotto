@@ -1,6 +1,7 @@
 package lotto.model
 
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -19,7 +20,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.FIRST)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(LottoPrize.FIRST)).isEqualTo(1)
     }
 
     @Test
@@ -34,7 +35,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.SECOND)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(LottoPrize.SECOND)).isEqualTo(1)
     }
 
     @Test
@@ -49,7 +50,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.THIRD)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(LottoPrize.THIRD)).isEqualTo(1)
     }
 
     @Test
@@ -64,7 +65,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        Assertions.assertThat(lottoPrizeResults.count(LottoPrize.FOURTH)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(LottoPrize.FOURTH)).isEqualTo(1)
     }
 
     @ParameterizedTest
@@ -77,7 +78,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        Assertions.assertThat(lottoPrizeResults.size == 0).isTrue
+        assertThat(lottoPrizeResults.size == 0).isTrue
     }
 
     companion object {
