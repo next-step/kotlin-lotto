@@ -5,7 +5,8 @@ import lotto.domain.LottoRank
 import java.math.BigDecimal
 
 object OutputView {
-    fun writeLottos(lottos: List<Lotto>) {
+    fun writeLottos(manualCount: Int, lottos: List<Lotto>) {
+        println("수동으로 ${manualCount}장, 자동으로 ${lottos.size - manualCount}개를 구매했습니다.")
         lottos.forEach {
             println(
                 it.numbers
@@ -21,7 +22,7 @@ object OutputView {
         countByLottoRank.keys
             .filter { it != LottoRank.NONE }
             .sortedBy { it.winning }
-            .forEach { println("${it.matchCount}개 일치${if (it.matchBonus) ", 보너스 볼 일치" else " "}(${it.winning}원)- ${countByLottoRank[it]}개") }
+            .forEach { println("${it.matchCount}개 일치${if (it == LottoRank.SECOND) ", 보너스 볼 일치" else " "}(${it.winning}원)- ${countByLottoRank[it]}개") }
         println("총 수익률은 ${profit}입니다.")
     }
 }
