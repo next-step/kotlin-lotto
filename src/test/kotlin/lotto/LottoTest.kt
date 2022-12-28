@@ -37,7 +37,7 @@ class LottoTest : StringSpec({
     "입력 받은 문자열의 6개 당첨 숫자에 중복이 없어야 한다" {
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { WinningLotto(StringNumbers("1, 2, 3, 4, 6, 6"), LottoNumber(8)) }
+            .isThrownBy { WinningLotto(StringNumbers("1, 2, 3, 4, 6, 6".split(",")), LottoNumber(8)) }
     }
 
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {

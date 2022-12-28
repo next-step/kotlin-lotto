@@ -15,7 +15,7 @@ fun main() {
 
     val winningNumbersString = inputView.inputLastWeekNumbers()
     val bonusNumber = LottoNumber(inputView.inputBonusNumber())
-    val winningLotto = WinningLotto(StringNumbers(winningNumbersString), bonusNumber)
+    val winningLotto = WinningLotto(StringNumbers(winningNumbersString.split(",")), bonusNumber)
 
     val winningResult = WinningResult(lottoList, winningLotto)
     val winningStatistics = WinningStatistics(lottoMachine.price)
