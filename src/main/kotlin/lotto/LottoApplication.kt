@@ -1,6 +1,6 @@
 package lotto
 
-import lotto.domain.LottoComparator
+import lotto.utils.LottoNumberMatchComparator
 import lotto.domain.LottoGameResult
 import lotto.domain.LottoMachine
 import lotto.view.InputView
@@ -18,7 +18,7 @@ fun main() {
 
     val winningNumber = InputView.winningNumberInput()
 
-    val rank = LottoComparator.compare(ticketBundle, winningNumber)
+    val rank = LottoNumberMatchComparator.compare(ticketBundle, winningNumber)
 
     val lottoGameResult = LottoGameResult(rank)
     val rate = lottoGameResult.getRateOfReturn(purchasedAmount)

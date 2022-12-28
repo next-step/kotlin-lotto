@@ -1,6 +1,10 @@
-package lotto.domain
+package lotto.utils
 
-object LottoComparator {
+import lotto.domain.LottoStatistics
+import lotto.domain.LottoTicket
+import lotto.domain.WinningAmount
+
+object LottoNumberMatchComparator {
     fun compare(ticketBundle: List<LottoTicket>, winningNumber: Set<Int>): LottoStatistics {
         val rank = ticketBundle
             .map {

@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.utils.LottoNumberMatchComparator
 import lotto.utils.LottoNumberTestUtils
 
 class LottoComparatorTest : StringSpec({
@@ -13,7 +14,7 @@ class LottoComparatorTest : StringSpec({
             LottoTicket(lottoNumbers)
         )
 
-        val rank = LottoComparator.compare(ticketBundle, winningNumbers)
+        val rank = LottoNumberMatchComparator.compare(ticketBundle, winningNumbers)
 
         rank.rank[WinningAmount.FOURTH_PLACE] shouldBe 1
     }
