@@ -17,4 +17,8 @@ fun main() {
 
     val winningNumbers = inputView.inputWinningNumbers()
     val winningLotto = WinningLotto(*winningNumbers)
+
+    val lottoStat = lottoTickets.match(winningLotto)
+
+    outputView.printResult(lottoStat)
 }
