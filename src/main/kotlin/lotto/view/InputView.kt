@@ -1,18 +1,13 @@
 package lotto.view
 
-import lotto.domain.LottoNumber
-
 object InputView {
     fun purchaseAmountInput(): Int {
         println("구입금액을 입력해 주세요,")
-        val amount: Int = readln().toInt()
-        require(amount > 0) {
-            "구입금액은 0이하일 수 없어요."
-        }
-        return amount
+
+        return readln().toInt()
     }
 
-    fun winningNumberInput(): Set<LottoNumber> {
+    fun winningNumberInput(): Set<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
         val winningNumber = readln()
@@ -20,20 +15,13 @@ object InputView {
             "당첨 번호를 입력해주세요."
         }
 
-        val numbers = printSplitWinningNumber(winningNumber)
-        require(numbers.size == 6) {
-            "로또 숫자는 중복될 수 없어요."
-        }
-
-        return numbers
+        return printSplitWinningNumber(winningNumber)
     }
 
-    private fun printSplitWinningNumber(number: String): Set<LottoNumber> {
+    private fun printSplitWinningNumber(number: String): Set<Int> {
         return number
             .split(", ")
-            .map {
-                LottoNumber(it.toInt())
-            }
+            .map { it.toInt() }
             .toSet()
     }
 }

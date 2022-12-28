@@ -1,12 +1,14 @@
 package lotto.domain
 
 object LottoComparator {
-    fun compare(ticketBundle: List<LottoTicket>, winningNumber: Set<LottoNumber>): Map<Int, Int> {
-        return ticketBundle
+    fun compare(ticketBundle: List<LottoTicket>, winningNumber: Set<Int>): LottoStatistics {
+        val rank = ticketBundle
             .map {
                 it.numbers.intersect(winningNumber).size
             }
-            .groupingBy { it }
+            .groupingBy { WinningAmount.from(it) }
             .eachCount()
+
+        return LottoStatistics(rank)
     }
 }
