@@ -2,13 +2,16 @@ package lotto.domain
 
 data class LottoIssueResult(val manualLottos: List<Lotto>, val autoLottos: List<Lotto>) {
 
-    fun manualCount(): Int = manualLottos.size
-    fun autoCount(): Int = autoLottos.size
+    fun countOfManual(): Int = manualLottos.size
+    fun countOfAuto(): Int = autoLottos.size
 
     fun getAsLottos(): List<Lotto> {
-        val lottos = mutableListOf<Lotto>()
-        lottos.addAll(manualLottos)
-        lottos.addAll(autoLottos)
-        return lottos.toList()
+        return manualLottos + autoLottos
     }
+
+    fun driveStatistic(winLotto: WinLotto): Statistics {
+        val lottos = getAsLottos()
+        return Statistics.drive(lottos, winLotto)
+    }
+
 }
