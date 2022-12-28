@@ -1,6 +1,7 @@
 package lotto.interfaces.ui.console
 
 import lotto.common.value.Money
+import lotto.domain.vo.LotteryNumbers
 
 object OutputConsole {
     fun printTicketCount(ticketCount: Int) {
@@ -25,5 +26,9 @@ object OutputConsole {
     fun printWinPrize(equalNumberCount: Long, amount: Money, winCount: Int, isBonusPrize: Boolean) {
         if (isBonusPrize) println("${equalNumberCount}개 일치, 보너스 볼 일치(${amount}원) - ${winCount}개")
         else println("${equalNumberCount}개 일치 (${amount}원) - ${winCount}개")
+    }
+
+    fun printLotteryNumbers(lotteryNumbers: List<String>) {
+        println("[${lotteryNumbers.joinToString(separator = ",")}]")
     }
 }

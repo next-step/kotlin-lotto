@@ -11,10 +11,6 @@ class LotteryNumbers(
 
     fun contains(lotteryNumber: LotteryNumber): Boolean = this.lotteryNumbers.contains(lotteryNumber)
 
-    override fun toString(): String {
-        return "[${this.lotteryNumbers.joinToString(separator = ",") { it.toString() }}]"
-    }
-
     fun findPrize(targetLotteryNumbers: LotteryNumbers, bonusNumber: LotteryNumber): Prize {
         val countEqualLotteryNumbers = countEqualLotteryNumbers(targetLotteryNumbers)
         val hasBonusNumber = this.lotteryNumbers.contains(bonusNumber)

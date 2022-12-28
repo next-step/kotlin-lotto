@@ -38,7 +38,11 @@ class TicketController(
     }
 
     private fun viewLotteryNumber(order: Order) {
-        order.toLotteryNumbers().forEach { OutputConsole.printString(it.lotteryNumbers.toString()) }
+        order.toLotteryNumbers().forEach { OutputConsole.printLotteryNumbers(it.toStringList()) }
+    }
+
+    private fun LotteryNumbers.toStringList(): List<String> {
+        return this.lotteryNumbers.map { it.toString() }
     }
 
     private fun viewTicketCount(order: Order) {
