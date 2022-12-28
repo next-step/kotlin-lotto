@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.LottoEarningRate.calculateEarningRate
-import lotto.LottoOffice.getRank
+import lotto.LottoOffice.getRanks
 import lotto.views.Input.getPriceForBuying
 import lotto.views.Input.getWinnerLottoNumbers
 import lotto.views.Output.printBuyAmount
@@ -19,7 +19,7 @@ fun main() {
     printLottoNumbers(boughtLottos)
 
     val winnerNumbers = getWinnerLottoNumbers()
-    val ranks = getRank(winnerNumbers = winnerNumbers, boughtLottos = boughtLottos)
+    val ranks = getRanks(winnerNumbers = winnerNumbers, boughtLottos = boughtLottos)
     val earningRate = calculateEarningRate(boughtPrice = price.price, ranks = ranks)
     printLottoResult(ranks)
     printEarningRate(earningRate)
