@@ -8,4 +8,8 @@ class WinningLotto(val lotto: Lotto, val bonusNumber: LottoNumber) {
     init {
         require(!lotto.contains(bonusNumber)) { "bonusNumber same input lotto numbers" }
     }
+
+    fun matchNumbers() : List<LottoNumber> {
+        return lotto.numbers.filter { lotto.contains(it) }
+    }
 }

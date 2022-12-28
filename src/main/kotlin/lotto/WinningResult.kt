@@ -6,7 +6,7 @@ class WinningResult(lottoList: List<Lotto>, winningLotto: WinningLotto) {
 
     init {
         lottoList.forEach { lotto ->
-            val winningNumbers = winningLotto.lotto.numbers.filter { lotto.contains(it) }
+            val winningNumbers = winningLotto.matchNumbers()
             val ranking = RANKING.countOf(winningNumbers.size, lotto.contains(winningLotto.bonusNumber))
             winningResult[ranking.ordinal] ++
         }
