@@ -2,8 +2,16 @@ package lotto.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class WalletTest {
+
+    @Test
+    fun `지갑을 생성할 땐 0원으로 생성할 수 없다`() {
+        assertThrows<IllegalArgumentException> {
+            Wallet(KRW(0))
+        }
+    }
 
     @Test
     fun `지갑에 1000원이 있으면 자동으로 로또를 구매할 수 있다`() {

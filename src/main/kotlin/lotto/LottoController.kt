@@ -20,9 +20,6 @@ class LottoController {
     private fun createWallet(): Wallet {
         return try {
             val money = KRW(InputView.insertMoney())
-            require(money.money >= 1000) {
-                "0원을 입력하여 구매할 수 있는 로또가 없습니다. 다시 입력해주세요."
-            }
             Wallet(money)
         } catch (e: Exception) {
             ResultView.printErrorMessage(e)
