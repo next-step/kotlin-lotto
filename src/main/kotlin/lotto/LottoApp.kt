@@ -20,6 +20,8 @@ private fun match(winningLotto: WinningLotto, userLotto: Lotto): LottoRankResult
     return userLotto.matches(winningLotto)
 }
 
-private fun issueWinningLotto(): WinningLotto =
-    InputView.inputWinningNumbers()
-        .map(::LottoNumber).let(::WinningLotto)
+private fun issueWinningLotto(): WinningLotto {
+    val winningNumbers = InputView.inputWinningNumbers().map(::LottoNumber)
+    val bonusNumber = LottoNumber(InputView.inputBonusNumber())
+    return WinningLotto(winningNumbers, bonusNumber)
+}
