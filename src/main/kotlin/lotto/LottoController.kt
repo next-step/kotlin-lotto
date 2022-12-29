@@ -10,14 +10,14 @@ import java.lang.Exception
 class LottoController {
 
     fun run() {
-        val wallet = Wallet()
+        val wallet = createWallet()
         buyLottos(wallet)
-        val winningLotto = WinningLotto()
+        val winningLotto = createWinningLotto()
         val report = wallet.indicateLottoStatistics(winningLotto)
         ResultView.printResult(report)
     }
 
-    private fun Wallet(): Wallet {
+    private fun createWallet(): Wallet {
         return try {
             val money = KRW(InputView.insertMoney())
             require(money.money >= 1000) {
@@ -26,18 +26,18 @@ class LottoController {
             Wallet(money)
         } catch (e: Exception) {
             ResultView.printErrorMessage(e)
-            Wallet()
+            createWallet()
         }
     }
 
-    private fun WinningLotto(): WinningLotto {
+    private fun createWinningLotto(): WinningLotto {
         return try {
             val winningLottoNumbers = InputView.getWinningLottoNumbers()
             val winningBonusNumber = InputView.getBonusNumber()
             return WinningLotto.byInput(winningLottoNumbers, winningBonusNumber)
         } catch (e: Exception) {
             ResultView.printErrorMessage(e)
-            WinningLotto()
+            createWinningLotto()
         }
     }
 
