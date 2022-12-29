@@ -9,7 +9,7 @@ class LottoStore(private val generator: LottoGenerator = LottoGenerator()) {
             }
         }
         lottoBundle.addAutoLottos(lottos)
-        return KRW(money.money - money.availableLottoQuantity * 1000)
+        return KRW(money.money - (money.availableLottoQuantity * Lotto.krw.money))
     }
 
     fun sellManualLottos(money: KRW, manual: List<String>, lottoBundle: LottoBundle): KRW {
@@ -21,6 +21,6 @@ class LottoStore(private val generator: LottoGenerator = LottoGenerator()) {
             Lotto.manual(it)
         }.toList()
         lottoBundle.addManualLottos(lottos)
-        return KRW(money.money - (manual.size * 1000))
+        return KRW(money.money - (manual.size * Lotto.krw.money))
     }
 }
