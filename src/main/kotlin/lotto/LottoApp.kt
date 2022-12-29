@@ -1,10 +1,10 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoPrizeResults
-import lotto.domain.Lotto
-import lotto.model.LottoNumber
 import lotto.domain.WinningLotto
+import lotto.model.LottoNumber
 
 fun main() {
     val purchaseAmount = InputView.inputPurchaseAmount()
