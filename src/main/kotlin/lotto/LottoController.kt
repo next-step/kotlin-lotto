@@ -42,10 +42,9 @@ class LottoController {
         return try {
             val manualCount = InputView.getManualLottoCount().toInt()
             val manualLottoNumbers = InputView.getManualLottos(manualCount)
-
-            val manualLottos = wallet.buyManualLottos(lotto = manualLottoNumbers)
-            val autoLottos = wallet.buyAutoLottos()
-            ResultView.printLottos(manualLottos.size, autoLottos)
+            wallet.buyManualLottos(lotto = manualLottoNumbers)
+            wallet.buyAutoLottos()
+            ResultView.printLottos(wallet)
         } catch (e: Exception) {
             ResultView.printErrorMessage(e)
             buyLottos(wallet)

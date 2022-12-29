@@ -3,12 +3,13 @@ package lotto.views
 import lotto.domain.Lotto
 import lotto.domain.Rank
 import lotto.domain.Report
+import lotto.domain.Wallet
 
 object ResultView {
 
-    fun printLottos(manualLottoCount: Int = 0, lottos: List<Lotto>) {
-        print("수동으로 ${manualLottoCount}장, 자동으로 ${lottos.size - manualLottoCount}장을 구매했습니다.")
-        lottos.forEach {
+    fun printLottos(wallet: Wallet) {
+        print("수동으로 ${wallet.manualLottoCount}장, 자동으로 ${wallet.autoLottoCount}장을 구매했습니다.")
+        wallet.lottos.forEach {
             println(it)
         }
     }
