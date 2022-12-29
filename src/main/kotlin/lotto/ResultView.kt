@@ -1,8 +1,8 @@
 package lotto
 
 import lotto.domain.Lotto
-import lotto.domain.LottoPrizeResults
-import lotto.model.LottoPrize
+import lotto.domain.LottoRankResults
+import lotto.model.Rank
 
 object ResultView {
 
@@ -12,13 +12,13 @@ object ResultView {
         println()
     }
 
-    fun printLottoPrizeResults(lottoPrizeResults: LottoPrizeResults) {
+    fun printLottoPrizeResults(lottoRankResults: LottoRankResults) {
         println()
         println("당첨 통계")
         println("---------")
-        LottoPrize.values()
+        Rank.values()
             .forEach {
-                println("${it.matchCount}개 일치 (${it.prize}원) - ${lottoPrizeResults.count(it)}개")
+                println("${it.matchCount}개 일치 (${it.prize}원) - ${lottoRankResults.count(it)}개")
             }
     }
 

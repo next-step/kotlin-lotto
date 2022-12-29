@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
-import lotto.model.LottoPrize
+import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -22,7 +22,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.FIRST)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(Rank.FIRST)).isEqualTo(1)
     }
 
     @Test
@@ -37,7 +37,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.SECOND)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(Rank.SECOND)).isEqualTo(1)
     }
 
     @Test
@@ -52,7 +52,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.THIRD)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(Rank.THIRD)).isEqualTo(1)
     }
 
     @Test
@@ -67,7 +67,7 @@ internal class LottoTest {
         val lottoPrizeResults = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.count(LottoPrize.FOURTH)).isEqualTo(1)
+        assertThat(lottoPrizeResults.count(Rank.FOURTH)).isEqualTo(1)
     }
 
     @ParameterizedTest

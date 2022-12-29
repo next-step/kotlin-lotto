@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
-import lotto.model.LottoPrize
+import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
@@ -45,9 +45,9 @@ internal class WinningLottoTest {
         val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
 
         // when
-        val rank = winningLotto.prize(lottoNumbers)
+        val rank = winningLotto.rank(lottoNumbers)
 
         // then
-        assertThat(rank).isEqualTo(LottoPrize.FIRST)
+        assertThat(rank).isEqualTo(Rank.FIRST)
     }
 }

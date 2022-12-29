@@ -1,18 +1,18 @@
 package lotto.domain
 
-import lotto.model.LottoPrize
+import lotto.model.Rank
 import kotlin.math.roundToInt
 
-class LottoPrizeResults(
-    private val prizes: List<LottoPrize>,
+class LottoRankResults(
+    private val ranks: List<Rank>,
 ) {
     private val totalPrize: Int
-        get() = prizes.sumOf { it.prize }
+        get() = ranks.sumOf { it.prize }
 
     val size: Int
-        get() = prizes.size
+        get() = ranks.size
 
-    fun count(prize: LottoPrize): Int = prizes.count { it == prize }
+    fun count(rank: Rank): Int = ranks.count { it == rank }
     fun returnOnInvestment(purchaseAmount: Int): Double =
         ((totalPrize.toDouble() / purchaseAmount) * 100.0).roundToInt() / 100.0
 }

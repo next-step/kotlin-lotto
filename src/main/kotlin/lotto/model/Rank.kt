@@ -1,6 +1,6 @@
 package lotto.model
 
-enum class LottoPrize(val matchCount: Int, val prize: Int) {
+enum class Rank(val matchCount: Int, val prize: Int) {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
@@ -8,7 +8,7 @@ enum class LottoPrize(val matchCount: Int, val prize: Int) {
     ;
 
     companion object {
-        fun of(matchCount: Int): LottoPrize? =
+        fun of(matchCount: Int): Rank? =
             values().find { it.matchCount == matchCount }
     }
 }
