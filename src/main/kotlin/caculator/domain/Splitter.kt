@@ -3,10 +3,8 @@ package caculator.domain
 class Splitter(
     private val value: String,
 ) {
-    private val regex = REGEX_CUSTOM.toRegex()
-
     fun split(): List<String> =
-        regex.find(value)
+        REGEX.find(value)
             ?.let {
                 val (delimiter, numbers) = it.destructured
                 numbers.split(delimiter)
@@ -15,6 +13,6 @@ class Splitter(
     companion object {
         private val DELIMITERS = listOf(",", ":")
 
-        private const val REGEX_CUSTOM = "//(.)\n(.*)"
+        private val REGEX = "//(.)\n(.*)".toRegex()
     }
 }
