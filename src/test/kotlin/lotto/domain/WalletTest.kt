@@ -27,6 +27,7 @@ class WalletTest {
         wallet.buyManualLottos(lotto = listOf("1,2,3,4,5,6"))
 
         assertThat(wallet.lottos.size).isEqualTo(1)
+        assertThat(wallet.lottos.contains(Lotto.manual("1,2,3,4,5,6")))
         assertThat(wallet.krw.money).isEqualTo(0)
     }
 
