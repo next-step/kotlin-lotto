@@ -22,8 +22,4 @@ enum class Rank(val krw: KRW, val countOfMatch: Int, val matchBonus: Boolean = f
             }
         }
     }
-
-    fun calculatePrize(count: Int): Int {
-        return krw.money * count
-    }
 }
