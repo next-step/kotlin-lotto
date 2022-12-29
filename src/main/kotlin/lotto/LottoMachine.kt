@@ -13,13 +13,12 @@ class LottoMachine(val price: Int) {
         return (0 until purchaseCount).map { Lotto(createNumbers()) }
     }
 
-    private fun createNumbers(): List<LottoNumber> {
-        val shuffledNumbers = LOTTO_NUMBER.shuffled().take(6).sorted()
-        return shuffledNumbers.map { LottoNumber(it) }
+    private fun createNumbers(): Set<LottoNumber> {
+        val shuffledNumbers = LottoNumber.RANGE.shuffled().take(6).sorted()
+        return shuffledNumbers.map { LottoNumber(it) }.toSet()
     }
 
     companion object {
-        private val LOTTO_NUMBER = (LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE)
         private const val LOTTO_BASE_PRICE = 1000
     }
 }
