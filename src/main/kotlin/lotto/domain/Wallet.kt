@@ -11,7 +11,7 @@ class Wallet(var krw: KRW = DEFAULT_KRW) {
         get() = lottoBundle.manualCount
 
     val autoLottoCount: Int
-        get() = lottoBundle.manualCount
+        get() = lottoBundle.autoCount
 
     init {
         require(krw.money >= 1000) {
