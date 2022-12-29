@@ -10,11 +10,13 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
 internal class LottoTest {
+    private val winningLottoNumbers = (1..6).map(::LottoNumber)
+    private val bonusNumber = LottoNumber(7)
+    private val winningLotto = WinningLotto(winningLottoNumbers, bonusNumber)
+
     @Test
     fun `1등 당첨`() {
         // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
             listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))).let(::Lotto)
 
@@ -28,8 +30,6 @@ internal class LottoTest {
     @Test
     fun `2등 당첨`() {
         // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
             listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber))).let(::Lotto)
 
@@ -43,10 +43,8 @@ internal class LottoTest {
     @Test
     fun `3등 당첨`() {
         // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
-            listOf(LottoNumbers(listOf(1, 2, 3, 4, 7, 8).map(::LottoNumber))).let(::Lotto)
+            listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 8).map(::LottoNumber))).let(::Lotto)
 
         // when
         val lottoPrizeResults = userLotto.matches(winningLotto)
@@ -58,10 +56,8 @@ internal class LottoTest {
     @Test
     fun `4등 당첨`() {
         // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         val userLotto =
-            listOf(LottoNumbers(listOf(1, 2, 3, 7, 8, 9).map(::LottoNumber))).let(::Lotto)
+            listOf(LottoNumbers(listOf(1, 2, 3, 4, 8, 9).map(::LottoNumber))).let(::Lotto)
 
         // when
         val lottoPrizeResults = userLotto.matches(winningLotto)
@@ -70,12 +66,23 @@ internal class LottoTest {
         assertThat(lottoPrizeResults.count(Rank.FOURTH)).isEqualTo(1)
     }
 
+    @Test
+    fun `5등 당첨`() {
+        // given
+        val userLotto =
+            listOf(LottoNumbers(listOf(1, 2, 3, 8, 9, 10).map(::LottoNumber))).let(::Lotto)
+
+        // when
+        val lottoPrizeResults = userLotto.matches(winningLotto)
+
+        // then
+        assertThat(lottoPrizeResults.count(Rank.FIFTH)).isEqualTo(1)
+    }
+
     @ParameterizedTest
     @MethodSource("provideLosingLotto")
     fun `꽝(담청 결과 없음)`(userLotto: Lotto) {
         // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
         // when
         val lottoPrizeResults = userLotto.matches(winningLotto)
 

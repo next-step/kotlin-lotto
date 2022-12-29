@@ -6,7 +6,8 @@ import lotto.model.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
 import lotto.model.Rank
 
 class WinningLotto(
-    val numbers: List<LottoNumber>,
+    private val numbers: List<LottoNumber>,
+    private val bonusNumber: LottoNumber,
 ) {
     init {
         require(numbers.size == NUMBER_OF_LOTTO_DIGIT) { "당첨 번호는 ${NUMBER_OF_LOTTO_DIGIT}개의 숫자여야 합니다." }
@@ -14,7 +15,9 @@ class WinningLotto(
     }
 
     fun rank(lottoNumbers: LottoNumbers): Rank? {
-        return match(lottoNumbers).let(Rank.Companion::of)
+        val matchCount = match(lottoNumbers)
+        val bonusMatch = lottoNumbers.contains(bonusNumber)
+        return Rank.of(matchCount, bonusMatch)
     }
 
     private fun match(lottoNumbers: LottoNumbers): Int =

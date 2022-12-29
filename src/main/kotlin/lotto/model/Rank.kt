@@ -9,7 +9,7 @@ enum class Rank(val matchCount: Int, val prize: Int) {
     ;
 
     companion object {
-        fun of(matchCount: Int): Rank? =
-            values().find { it.matchCount == matchCount }
+        fun of(matchCount: Int, bonusNumber: Boolean): Rank? =
+            values().firstOrNull { it.matchCount == matchCount && (it != SECOND || bonusNumber) }
     }
 }
