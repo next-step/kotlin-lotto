@@ -6,17 +6,17 @@ data class Report(
     private val ranks: Ranks = Ranks()
 ) {
     val fifthCount: Int
-        get() = ranks.fifthCount()
+        get() = ranks.rankCount(Rank.FIFTH)
     val fourthCount: Int
-        get() = ranks.fourthCount()
+        get() = ranks.rankCount(Rank.FOURTH)
 
     val thirdCount: Int
-        get() = ranks.thirdCount()
+        get() = ranks.rankCount(Rank.THIRD)
 
     val secondCount: Int
-        get() = ranks.secondCount()
+        get() = ranks.rankCount(Rank.SECOND)
     val firstCount: Int
-        get() = ranks.firstCount()
+        get() = ranks.rankCount(Rank.FIRST)
 
     fun getRateOfReturn(): Double {
         if (ranks.size == 0) return 0.0
