@@ -1,23 +1,23 @@
 package lotto
 
-import lotto.controller.LottoGame
+import lotto.model.AutomaticLottoTicketGenerator
 import lotto.model.LottoNumber
 import lotto.model.LottoTicket
-import lotto.model.RandomLottoTicketGenerator
+import lotto.model.ManualLottoTicketGenerator
 import lotto.model.TicketQuantity
 import lotto.model.WinningCalculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
 
 internal class LottoAllTest {
     @Test
     fun `임의의 6개 숫자를 중복없이 생성한다`() {
-        val testTicket = RandomLottoTicketGenerator()
-        assertThat(testTicket.lottoNumbers.toSet().size).isSameAs(LOTTO_NUMBER_SIZE)
+        val testTicket = AutomaticLottoTicketGenerator().generate(1)
+        assertThat(testTicket[0].values.toSet().size).isEqualTo(LOTTO_NUMBER_SIZE)
     }
 
     @Test
@@ -42,11 +42,6 @@ internal class LottoAllTest {
             TicketQuantity("1200")
         }
         assertThat(exception.message).isSameAs("1000원 단위로 결제해주세요.")
-    }
-
-    @Test
-    fun `구입 금액에 맞는 수량만큼 발행한다`() {
-        assertThat(LottoGame().purchaseLottoTicket(10).size).isSameAs(10)
     }
 
     @Test
@@ -115,36 +110,127 @@ internal class LottoAllTest {
     }
 
     @Test
-    fun `당첨 통계를 계산한다`() {
-        var test1Ticket = RandomLottoTicketGenerator()
-        val test1WinningNumber = test1Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
-
-        var test2Ticket = RandomLottoTicketGenerator()
-        var test2WinningNumber = test2Ticket.lottoNumbers.toString().replace("[", "").replace("]", "")
-
-        val testTickets = listOf(test1Ticket, test2Ticket)
-
+    fun `1등 당첨 통계를 계산한다`() {
         assertAll(
             {
-                val testCalculator = WinningCalculator(testTickets, LottoTicket(test1WinningNumber), 1)
+                var testTicket = AutomaticLottoTicketGenerator().generate(1)
+                val testWinningNumber = testTicket[0].values.toString().replace("[", "").replace("]", "")
+                val result =
+                    WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 1)
                 assertEquals(
-                    (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
-                    testCalculator.calculateRate(testTickets.size)
+                    (LOTTO_MAX_REWARD / (testTicket.size * LOTTO_TICKET_PRICE)).toDouble(),
+                    result.rate
                 )
             },
             {
-                val testCalculator = WinningCalculator(testTickets, LottoTicket(test2WinningNumber), 1)
+                var testTicket = AutomaticLottoTicketGenerator().generate(1)
+                var testWinningNumber = testTicket[0].values.toString().replace("[", "").replace("]", "")
+                val result =
+                    WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 1)
                 assertEquals(
-                    (LOTTO_MAX_REWARD / (testTickets.size * LOTTO_TICKET_PRICE)).toDouble(),
-                    testCalculator.calculateRate(testTickets.size)
+                    2000000.0,
+                    result.rate
+                )
+            },
+            {
+                var testTicket = ManualLottoTicketGenerator().generate(listOf("1, 2, 3, 4, 5, 6"))
+                var testWinningNumber = "1, 2, 3, 4, 5, 6"
+                val result =
+                    WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 1)
+                assertEquals(
+                    2000000.0,
+                    result.rate
                 )
             }
         )
     }
 
+    @Test
+    fun `2등 당첨 통계를 계산한다`() {
+        var testTicket = ManualLottoTicketGenerator().generate(listOf("1, 2, 3, 4, 5, 7"))
+        var testWinningNumber = "1, 2, 3, 4, 5, 6"
+        val result = WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 7)
+        assertEquals(
+            30000.0,
+            result.rate
+        )
+    }
+
+    @Test
+    fun `3등 당첨 통계를 계산한다`() {
+        var testTicket = ManualLottoTicketGenerator().generate(listOf("1, 2, 3, 4, 5, 7"))
+        var testWinningNumber = "1, 2, 3, 4, 5, 6"
+        val result = WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 8)
+        assertEquals(
+            1500.0,
+            result.rate
+        )
+    }
+
+    @Test
+    fun `4등 당첨 통계를 계산한다`() {
+        var testTicket = ManualLottoTicketGenerator().generate(listOf("1, 2, 3, 4, 15, 17"))
+        var testWinningNumber = "1, 2, 3, 4, 5, 6"
+        val result = WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 8)
+        assertEquals(
+            50.0,
+            result.rate
+        )
+    }
+
+    @Test
+    fun `5등 당첨 통계를 계산한다`() {
+        var testTicket = ManualLottoTicketGenerator().generate(listOf("1, 2, 3, 14, 15, 17"))
+        var testWinningNumber = "1, 2, 3, 4, 5, 6"
+        val result = WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 8)
+        assertEquals(
+            5.0,
+            result.rate
+        )
+    }
+
+    @Test
+    fun `미당첨 통계를 계산한다`() {
+        var testTicket = ManualLottoTicketGenerator().generate(listOf("11, 12, 13, 14, 15, 17"))
+        var testWinningNumber = "1, 2, 3, 4, 5, 6"
+        val result = WinningCalculator().generateWinningStatistics(testTicket, LottoTicket(testWinningNumber), 8)
+        assertEquals(
+            0.0,
+            result.rate
+        )
+    }
+
+    @Test
+    fun `수량에 맞는 수동 번호 로또를 발행한다`() {
+        assertThat(
+            ManualLottoTicketGenerator().generate(
+                listOf(
+                    "1, 2, 3, 4, 5, 6",
+                    "11, 12, 13, 14, 15, 16"
+                )
+            ).size
+        ).isSameAs(2)
+    }
+
+    @Test
+    fun `정상적으로 자동 번호 로또가 발생하는 확인한다`() {
+        assertDoesNotThrow {
+            AutomaticLottoTicketGenerator().generate(1)
+        }
+    }
+
+    @Test
+    fun `수량만큼 자동 번호 로또를 발행한다`() {
+        val testTicket = AutomaticLottoTicketGenerator().generate(2)
+        testTicket.forEach {
+            assertThat(it.values.size).isEqualTo(LOTTO_NUMBER_SIZE)
+        }
+        assertThat(testTicket.size).isEqualTo(2)
+    }
+
     companion object {
         const val LOTTO_NUMBER_SIZE = 6
-        const val LOTTO_MAX_REWARD = 2000000000
-        const val LOTTO_TICKET_PRICE = 1000
+        const val LOTTO_MAX_REWARD = 2_000_000_000
+        const val LOTTO_TICKET_PRICE = 1_000
     }
 }

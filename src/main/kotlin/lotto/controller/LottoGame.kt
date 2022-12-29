@@ -1,34 +1,40 @@
 package lotto.controller
 
-import lotto.model.LottoNumber
+import lotto.model.AutomaticLottoTicketGenerator
 import lotto.model.LottoTicket
-import lotto.model.RandomLottoTicketGenerator
+import lotto.model.ManualLottoTicketGenerator
 import lotto.model.TicketQuantity
 import lotto.model.WinningCalculator
-import lotto.model.WinningStatistics
 import lotto.view.InputView
-import lotto.view.ResultView
+import lotto.view.OutputView
 
 class LottoGame {
-    private val resultView = ResultView()
+    private val outputView = OutputView()
     private val inputView = InputView()
 
     fun start() {
-        val ticketQuantity = TicketQuantity(InputView().getAmountOfMoney()).quantity
-        resultView.showQuantity(ticketQuantity)
-        val tickets = purchaseLottoTicket(ticketQuantity)
-        resultView.showLottoTicket(tickets)
-        val lottoTicket = LottoTicket(inputView.getWinnerNumber())
-        val bonusNumber = LottoNumber(inputView.getBonusNumber())
-        val winningStatistics = drawWinnerNumber(tickets, lottoTicket, bonusNumber)
-        resultView.showWinningStatistics(winningStatistics)
+        val totalQuantity = TicketQuantity(inputView.getAmountOfMoney()).quantity
+        val manualTicketQuantity = inputView.getManualQuantity().toInt()
+        val automaticTicketQuantity = totalQuantity - manualTicketQuantity
+        outputView.showQuantity(manualTicketQuantity, automaticTicketQuantity)
+
+        val lottoTickets =
+            generateManualLottoTicket(manualTicketQuantity) + generateAutomaticLottoTicket(automaticTicketQuantity)
+        outputView.showLottoTicket(lottoTickets)
+
+        val (winnerTicket, bonusNumber) = WinnerTicket().generate(inputView.getWinnerNumber(), inputView.getBonusNumber())
+        val winningStatistics =
+            WinningCalculator().generateWinningStatistics(lottoTickets, winnerTicket, bonusNumber.value)
+        outputView.showWinningStatistics(winningStatistics)
     }
 
-    fun purchaseLottoTicket(quantity: Int): List<RandomLottoTicketGenerator> {
-        return List(quantity) { RandomLottoTicketGenerator() }
+    private fun generateManualLottoTicket(quantity: Int): List<LottoTicket> {
+        outputView.showManualNumber()
+        val result = List(quantity) { inputView.getManualNumber() }
+        return ManualLottoTicketGenerator().generate(result)
     }
 
-    private fun drawWinnerNumber(randomLottoTickets: List<RandomLottoTicketGenerator>, lottoTicket: LottoTicket, bonusNumber: LottoNumber): WinningStatistics {
-        return WinningCalculator(randomLottoTickets, lottoTicket, bonusNumber.value).winningStatistics
+    private fun generateAutomaticLottoTicket(quantity: Int): List<LottoTicket> {
+        return AutomaticLottoTicketGenerator().generate(quantity)
     }
 }
