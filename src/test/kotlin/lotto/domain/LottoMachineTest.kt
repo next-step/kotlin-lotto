@@ -1,29 +1,42 @@
 package lotto.domain
 
+import lotto.domain.Lotto.Companion.PRICE
+import lotto.model.LottoNumber
+import lotto.model.LottoNumbers
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.api.Test
 
 internal class LottoMachineTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = [300, 400, 700, 800])
-    fun `천원 미만 금액을 입력하면 예외가 발생한다`(price: Int) {
-        val lottoMachine = LottoMachine()
-
-        assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { lottoMachine.draw(price) }
-            .withMessage("로또를 구매하려면 최소 1000원 이상의 금액이 필요합니다.")
+    @Test
+    fun `입력된 로또 티켓(전체 자동생성)에 따라 로또를 생성한다`() {
+        val purchaseAmount = 14000
+        val lottoTicket = LottoTicket(purchaseAmount = 14000)
+        val lotto = LottoMachine().draw(lottoTicket)
+        assertThat(lotto.size).isEqualTo(purchaseAmount / PRICE)
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = [1000, 1500, 2000, 3000, 4000])
-    fun `로또를 구매하면 로또를 구매한 개수만큼 로또가 생성된다`(price: Int) {
-        val lottoMachine = LottoMachine()
+    @Test
+    fun `입력된 로또 티켓(전체 수동생성)에 따라 로또를 생성한다`() {
+        val purchaseAmount = 2000
+        val manualLottoNumbers = listOf(
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+        )
+        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        val lotto = LottoMachine().draw(lottoTicket)
+        assertThat(lotto.size).isEqualTo(purchaseAmount / PRICE)
+    }
 
-        val lotto = lottoMachine.draw(price)
-
-        assertThat(lotto.size).isEqualTo(price / 1000)
+    @Test
+    fun `입력된 로또 티켓(수동생성 + 자동생성)에 따라 로또를 생성한다`() {
+        val purchaseAmount = 4000
+        val manualLottoNumbers = listOf(
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
+        )
+        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        val lotto = LottoMachine().draw(lottoTicket)
+        assertThat(lotto.size).isEqualTo((purchaseAmount / PRICE))
     }
 }

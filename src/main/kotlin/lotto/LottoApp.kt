@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoRankResults
+import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
@@ -10,7 +11,8 @@ import lotto.model.LottoNumbers
 fun main() {
     val purchaseAmount = InputView.inputPurchaseAmount()
     val manualLottoNumbers = issueManualLottoNumbers()
-    val lotto = LottoMachine().draw(purchaseAmount)
+    val ticket = LottoTicket(purchaseAmount, manualLottoNumbers)
+    val lotto = LottoMachine().draw(ticket)
     ResultView.printLotto(lotto)
     val winningLotto = issueWinningLotto()
     val lottoPrizeResults = match(winningLotto, lotto)
