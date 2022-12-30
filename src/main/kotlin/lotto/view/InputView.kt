@@ -21,7 +21,14 @@ object InputView {
         return manualTicketCount.toInt()
     }
 
-    fun getNumberOfPurchases(lottoTicketCount: LottoTicketCount) {
+    fun printManualTicketNumber(manualTicketCount: Int) {
+        when (manualTicketCount) {
+            0 -> return
+            else -> println("수동으로 구매할 번호를 입력해 주세요.")
+        }
+    }
+
+    fun printNumberOfPurchases(lottoTicketCount: LottoTicketCount) {
         println("수동으로 ${lottoTicketCount.manualTicketCount}장, 자동으로 ${lottoTicketCount.autoTicketCount}개를 구매했습니다.")
     }
 

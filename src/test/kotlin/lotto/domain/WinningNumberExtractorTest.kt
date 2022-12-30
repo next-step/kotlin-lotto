@@ -5,6 +5,8 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
+import lotto.domain.strategy.LottoAutoGenerateStrategy
+import lotto.domain.strategy.LottoManualGenerateStrategy
 import lotto.utils.RandomNumberGenerator
 
 internal class WinningNumberExtractorTest : StringSpec({
@@ -14,7 +16,7 @@ internal class WinningNumberExtractorTest : StringSpec({
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 6)
         val lottoWinning = WinningNumberExtractor.process(
-            LottoTicketBundle(lottoTicketCount),
+            LottoTicketBundle(lottoTicketCount, listOf(LottoAutoGenerateStrategy(), LottoManualGenerateStrategy())),
             WinningBallResult(
                 WinningBalls(
                     setOf(
@@ -38,7 +40,7 @@ internal class WinningNumberExtractorTest : StringSpec({
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 7)
         val lottoWinning = WinningNumberExtractor.process(
-            LottoTicketBundle(lottoTicketCount),
+            LottoTicketBundle(lottoTicketCount, listOf(LottoAutoGenerateStrategy(), LottoManualGenerateStrategy())),
             WinningBallResult(
                 WinningBalls(
                     setOf(
