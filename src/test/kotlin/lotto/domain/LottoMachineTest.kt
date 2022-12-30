@@ -9,13 +9,13 @@ import lotto.domain.strategy.LottoAutoGenerateStrategy
 import lotto.domain.strategy.LottoManualGenerateStrategy
 import lotto.utils.RandomNumberGenerator
 
-internal class WinningNumberExtractorTest : StringSpec({
+internal class LottoMachineTest : StringSpec({
     "로또 당첨 개수에 따른 티켓 개수를 추출할 수 있다." {
         val lottoTicketCount = LottoTicketCount(1, 0)
         mockkObject(RandomNumberGenerator)
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 6)
-        val lottoWinning = WinningNumberExtractor.process(
+        val lottoWinning = LottoMachine.process(
             LottoTicketBundle(lottoTicketCount, listOf(LottoAutoGenerateStrategy(), LottoManualGenerateStrategy())),
             WinningBallResult(
                 WinningBalls(
@@ -39,7 +39,7 @@ internal class WinningNumberExtractorTest : StringSpec({
         mockkObject(RandomNumberGenerator)
 
         every { RandomNumberGenerator.generate(1..45) }.returnsMany(1, 2, 3, 4, 5, 7)
-        val lottoWinning = WinningNumberExtractor.process(
+        val lottoWinning = LottoMachine.process(
             LottoTicketBundle(lottoTicketCount, listOf(LottoAutoGenerateStrategy(), LottoManualGenerateStrategy())),
             WinningBallResult(
                 WinningBalls(
