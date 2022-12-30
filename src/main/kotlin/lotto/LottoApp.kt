@@ -12,9 +12,12 @@ fun main() {
     val purchaseAmount = InputView.inputPurchaseAmount()
     val manualLottoNumbers = issueManualLottoNumbers()
     val ticket = LottoTicket(purchaseAmount, manualLottoNumbers)
+    ResultView.printLottoTicket(ticket)
+
     val lotto = LottoMachine().draw(ticket)
     ResultView.printLotto(lotto)
     val winningLotto = issueWinningLotto()
+
     val lottoPrizeResults = match(winningLotto, lotto)
     ResultView.printLottoPrizeResults(lottoPrizeResults)
     ResultView.printLottoROIAnalysis(lottoPrizeResults.returnOnInvestment(purchaseAmount))
