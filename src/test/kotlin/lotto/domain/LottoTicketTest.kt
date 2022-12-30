@@ -47,4 +47,46 @@ internal class LottoTicketTest {
         val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
         assertThat(lottoTicket).isNotNull
     }
+
+    @Test
+    fun `구매 금액만 입력된 로또 티켓은 자동 로또 번호 수량만 확인할 수 있다`() {
+        val purchaseAmount = 4000
+        val lottoTicket = LottoTicket(purchaseAmount)
+        assertThat(lottoTicket.autoLottoNumbersSize).isEqualTo(4)
+        assertThat(lottoTicket.manualLottoNumbersSize).isEqualTo(0)
+    }
+
+    @Test
+    fun `입력한 수동 로또 번호 개수가 자동 생성 개수보다 적은 로또 티켓은 자동 로또 번호 수량이 수동 로또 번호 수량보다 많다`() {
+        val purchaseAmount = 4000
+        val manualLottoNumbers = listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)))
+        val lottoTicket = LottoTicket(purchaseAmount, manualLottoNumbers)
+        assertThat(lottoTicket.autoLottoNumbersSize).isEqualTo(3)
+        assertThat(lottoTicket.manualLottoNumbersSize).isEqualTo(1)
+    }
+
+    @Test
+    fun `입력한 수동 로또 번호 개수와 자동 생성 금액이 동일한 로또 티켓은 자동 로또 번호 수량과 수동 로또 번호 수량이 일치한다`() {
+        val purchaseAmount = 4000
+        val manualLottoNumbers = listOf(
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+        )
+        val lottoTicket = LottoTicket(purchaseAmount, manualLottoNumbers)
+        assertThat(lottoTicket.autoLottoNumbersSize).isEqualTo(2)
+        assertThat(lottoTicket.manualLottoNumbersSize).isEqualTo(2)
+    }
+
+    @Test
+    fun `입력한 수동 로또 번호 개수가 자동 생성 개수보다 많은 로또 티켓은 수동 로또 번호 수량이 자동 로또 번호 수량보다 많다`() {
+        val purchaseAmount = 4000
+        val manualLottoNumbers = listOf(
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+            LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
+        )
+        val lottoTicket = LottoTicket(purchaseAmount, manualLottoNumbers)
+        assertThat(lottoTicket.autoLottoNumbersSize).isEqualTo(1)
+        assertThat(lottoTicket.manualLottoNumbersSize).isEqualTo(3)
+    }
 }
