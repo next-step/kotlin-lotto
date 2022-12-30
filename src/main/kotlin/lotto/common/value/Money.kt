@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.math.MathContext
 
 @JvmInline
-value class Money(
+value class Money private constructor(
     val value: BigDecimal
 ) {
 

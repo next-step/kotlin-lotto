@@ -7,15 +7,11 @@ object InputConsole {
 
     private const val NUMBER_DELIMITER = ","
 
-    fun queryPaymentPrice(): Money =
-        try {
-            println("구입금액을 입력해 주세요.")
-            val inputPrice = readln().trim()
-            inputPrice.toBigDecimal().toMoney()
-        } catch (e: NumberFormatException) {
-            println("숫자를 입력해주세요")
-            queryPaymentPrice()
-        }
+    fun queryPaymentPrice(): Money {
+        println("구입금액을 입력해 주세요.")
+        val inputPrice = queryNumber()
+        return inputPrice.toBigDecimal().toMoney()
+    }
 
     fun queryLastWeekWinLotteryNumbers(): Set<Int> =
         try {
@@ -27,4 +23,18 @@ object InputConsole {
             println("숫자를 입력해주세요")
             queryLastWeekWinLotteryNumbers()
         }
+
+    fun queryLastWeekBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return queryNumber()
+    }
+
+    private fun queryNumber(): Int {
+        val number = readln().trim().toIntOrNull()
+        if (number != null) {
+            return number
+        }
+        println("숫자를 입력해주세요.")
+        return queryNumber()
+    }
 }

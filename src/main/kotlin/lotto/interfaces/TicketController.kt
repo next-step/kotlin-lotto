@@ -23,7 +23,9 @@ class TicketController(
 
         val winLotteryNumbers = queryLastWeekWinLotteryNumbers()
 
-        val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order)
+        val bonusNumber = queryLastWeekBonusNumber()
+
+        val prizeList = orderTicketService.confirmPrizeByOrder(winLotteryNumbers, order, bonusNumber)
         viewPrizeList(prizeList)
 
         val rateOfReturn = orderTicketService.calculateRateOfReturn(order, prizeList)
@@ -36,7 +38,11 @@ class TicketController(
     }
 
     private fun viewLotteryNumber(order: Order) {
-        order.toLotteryNumbers().forEach { OutputConsole.printString(it.lotteryNumbers.toString()) }
+        order.toLotteryNumbers().forEach { OutputConsole.printLotteryNumbers(it.toStringList()) }
+    }
+
+    private fun LotteryNumbers.toStringList(): List<String> {
+        return this.lotteryNumbers.map { it.toString() }
     }
 
     private fun viewTicketCount(order: Order) {
@@ -50,10 +56,20 @@ class TicketController(
         return LotteryNumbers(lotteryNumbers = lastWeekWinLotteryNumbers)
     }
 
+    private fun queryLastWeekBonusNumber(): LotteryNumber {
+        val inputNumber = InputConsole.queryLastWeekBonusNumber()
+        return LotteryNumber(value = inputNumber)
+    }
+
     private fun viewPrizeList(prizeList: List<Prize>) {
         OutputConsole.printPrize()
         Prize.values().filter { it.isNotBoom() }.forEach { prize ->
-            OutputConsole.printWinPrize(equalNumberCount = prize.equalNumberCount, amount = prize.amount, winCount = prizeList.count { it == prize })
+            OutputConsole.printWinPrize(
+                equalNumberCount = prize.equalNumberCount(),
+                amount = prize.amount,
+                winCount = prizeList.count { it == prize },
+                isBonusPrize = prize.isBonusPrize()
+            )
         }
     }
 
