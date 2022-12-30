@@ -5,6 +5,6 @@ import io.kotest.matchers.shouldBe
 
 internal class LottoTicketTest : StringSpec({
     "로또 1장을 만들 수 있다." {
-        LottoTicket().numbers.size shouldBe 6
+        LottoTicket(LottoNumberSelector.select()).numbers.size shouldBe 6
     }
 })

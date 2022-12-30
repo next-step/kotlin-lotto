@@ -1,5 +1,10 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicketCount
+import lotto.domain.WinningBallResult
+import lotto.domain.WinningBalls
+
 object InputView {
     fun getPurchaseAmount(): Int {
         println("구매금액을 입력해 주세요.")
@@ -9,22 +14,32 @@ object InputView {
         return amount.toInt()
     }
 
-    fun getNumberOfPurchases(count: Int) {
-        println("$count 개를 구매했습니다.")
+    fun getManualTicketCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val manualTicketCount = readln()
+
+        return manualTicketCount.toInt()
     }
 
-    fun getWinningNumber(): Pair<Set<Int>, Int> {
+    fun printManualTicketNumber(manualTicketCount: Int) {
+        when (manualTicketCount) {
+            0 -> return
+            else -> println("수동으로 구매할 번호를 입력해 주세요.")
+        }
+    }
+
+    fun printNumberOfPurchases(lottoTicketCount: LottoTicketCount) {
+        println("수동으로 ${lottoTicketCount.manualTicketCount}장, 자동으로 ${lottoTicketCount.autoTicketCount}개를 구매했습니다.")
+    }
+
+    fun getWinningBalls(): WinningBallResult {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumber = readln()
         require(winningNumber.isNotEmpty()) { "당첨 번호를 입력해주세요." }
-
-        val numbers = winningNumber.split(", ").map { it.toInt() }.toSet()
-        require(numbers.size == 6) { " 중복없는 6개의 숫자를 입력해주세요." }
-
+        val winningBalls = WinningBalls(winningNumber.split(", ").map { LottoNumber(it.toInt()) }.toSet())
         println("보너스 볼을 입력해 주세요.")
-        val bonusBall = readln().toInt()
-        require(!numbers.contains(bonusBall)) { "보너스 볼은 당첨 번호와 중복될 수 없습니다." }
+        val bonusBall = LottoNumber(readln().toInt())
 
-        return numbers to bonusBall
+        return WinningBallResult(winningBalls, bonusBall)
     }
 }
