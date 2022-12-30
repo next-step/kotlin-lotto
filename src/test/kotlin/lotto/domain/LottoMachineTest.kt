@@ -23,7 +23,7 @@ internal class LottoMachineTest {
             LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
             LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
         )
-        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, _manualLottoNumbers = manualLottoNumbers)
         val lotto = LottoMachine().draw(lottoTicket)
         assertThat(lotto.size).isEqualTo(purchaseAmount / PRICE)
     }
@@ -35,7 +35,7 @@ internal class LottoMachineTest {
             LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
             LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
         )
-        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, _manualLottoNumbers = manualLottoNumbers)
         val lotto = LottoMachine().draw(lottoTicket)
         assertThat(lotto.size).isEqualTo((purchaseAmount / PRICE))
     }

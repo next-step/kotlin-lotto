@@ -33,7 +33,7 @@ internal class LottoTicketTest {
             LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
         )
         assertThatExceptionOfType(IllegalArgumentException::class.java)
-            .isThrownBy { LottoTicket(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers) }
+            .isThrownBy { LottoTicket(purchaseAmount = purchaseAmount, _manualLottoNumbers = manualLottoNumbers) }
             .withMessage("수동으로 구매할 로또 수가 구매 금액을 초과할 수 없습니다.")
     }
 
@@ -44,7 +44,7 @@ internal class LottoTicketTest {
             LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)),
             LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))
         )
-        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        val lottoTicket = LottoTicket(purchaseAmount = purchaseAmount, _manualLottoNumbers = manualLottoNumbers)
         assertThat(lottoTicket).isNotNull
     }
 
