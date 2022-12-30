@@ -22,7 +22,7 @@ internal class LottoRankResultsTest {
     @Test
     fun `수익률을 계산할 수 있다`() {
         // given
-        val results = listOf(Rank.FOURTH)
+        val results = listOf(Rank.FIFTH)
         val purchaseAmount = 1000
         val lottoRankResults = LottoRankResults(results)
 
@@ -36,7 +36,7 @@ internal class LottoRankResultsTest {
     @Test
     fun `수익률을 소숫점이하 2자리로 반올림한다`() {
         // given
-        val results = listOf(Rank.THIRD, Rank.FOURTH)
+        val results = listOf(Rank.FOURTH, Rank.FIFTH)
         val purchaseAmount = 140000
         val lottoRankResults = LottoRankResults(results)
 
