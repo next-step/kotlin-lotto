@@ -12,6 +12,11 @@ data class Lotto(val numbers: Set<LottoNumber>) {
 
     companion object {
         val krw = KRW(1000)
+
+        fun manual(numbers: String): Lotto {
+            val list = numbers.split(',')
+            return Lotto(list.map { LottoNumber(it.trim().toInt()) }.toSet())
+        }
     }
 
     override fun toString(): String {

@@ -7,7 +7,6 @@
 - ### 2등을 위해 추가 번호를 하나 더 추첨한다.
 - ### 당첨 통계에 2등도 추가해야 한다.
 
-
 ## 프로그래밍 요구 사항
 
 - ### 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
@@ -65,15 +64,23 @@
 - [x] UI 로직은 UI에서 하도록 변경
 
 ## 2단계 추가 피드백 목록
+
 - [x] byInput이라고 만든 companion object 생성자를 부 생성자로 변경
 - [x] Enum 형식으로 되돌리기
 
 ## 3단계 구현 목록
 
 - [x] 2등 구현을 위해 추가 번호를 하나 더 추첨한다.
-  - [x] InputView 에서 하나의 값을 더 입력받는다. (반환을 한번에 할것인가?) -> Pair<String, String> 사용
-  - [x] WinningLotto 에 Bonus 번호 추가
-  - [x] MatchResult 에 matchBonus 필드 추가
-  - [x] Rank Enum에 현실 세계의 2등 추가 및 나머지 필드 변경
-  - [x] ResultView 에 표기 방식 변경
+    - [x] InputView 에서 하나의 값을 더 입력받는다. (반환을 한번에 할것인가?) -> Pair<String, String> 사용
+    - [x] WinningLotto 에 Bonus 번호 추가
+    - [x] MatchResult 에 matchBonus 필드 추가
+    - [x] Rank Enum에 현실 세계의 2등 추가 및 나머지 필드 변경
+    - [x] ResultView 에 표기 방식 변경
 
+## 3단계 피드백 목록
+
+- [x] Pair 로 받으면 명확하지 않으니, 당첨 번호 입력받는 함수 나누어 보기
+- [x] 클래스를 작게 유지하기 (Report 는 당첨 결과를 가지니 Count 를 가지고 있는 것보다 Ranks 를 가지는게 더 좋을 수 있다.)
+- [x] Rank 조건식 변경해보기
+- [x] 당첨 결과를 얻기 위한 Enum 정의인 Rank 가 보너스 볼의 매칭 정보도 가지기
+- [x] 구입한 로또 개수를 Report 클래스가 가지기 -> Ranks 에 두고 받아옴
