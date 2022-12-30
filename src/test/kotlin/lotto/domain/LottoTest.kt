@@ -34,7 +34,7 @@ internal class LottoTest {
             LottoNumbers((1..6).map(::LottoNumber))
         )
         val userLotto = Lotto(userLottoNumbers)
-        val winningLotto = WinningLotto((7..12).map(::LottoNumber), LottoNumber(8))
+        val winningLotto = WinningLotto((7..12).map(::LottoNumber), LottoNumber(13))
 
         // when
         val result = userLotto.matches(winningLotto)
