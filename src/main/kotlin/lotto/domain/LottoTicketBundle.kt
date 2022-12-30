@@ -1,13 +1,9 @@
 package lotto.domain
 
-import lotto.common.LottoTicketPolicy
-
 data class LottoTicketBundle(
-    val amount: Int,
+    val lottoTicketCount: LottoTicketCount,
 ) {
-    private val count = amount / LottoTicketPolicy.PRICE
-
-    val lottoTickets: List<LottoTicket> = List(count) {
+    val lottoTickets: List<LottoTicket> = List(lottoTicketCount.autoTicketCount) {
         LottoTicket(LottoNumberSelector.select())
     }
 }

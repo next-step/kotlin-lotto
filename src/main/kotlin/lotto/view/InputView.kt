@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
+import lotto.domain.LottoTicketCount
 import lotto.domain.WinningBallResult
 import lotto.domain.WinningBalls
 
@@ -13,8 +14,15 @@ object InputView {
         return amount.toInt()
     }
 
-    fun getNumberOfPurchases(count: Int) {
-        println("$count 개를 구매했습니다.")
+    fun getManualTicketCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val manualTicketCount = readln()
+
+        return manualTicketCount.toInt()
+    }
+
+    fun getNumberOfPurchases(lottoTicketCount: LottoTicketCount) {
+        println("수동으로 ${lottoTicketCount.manualTicketCount}장, 자동으로 ${lottoTicketCount.autoTicketCount}개를 구매했습니다.")
     }
 
     fun getWinningBalls(): WinningBallResult {
