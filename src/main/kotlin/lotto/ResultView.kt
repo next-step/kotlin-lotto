@@ -7,6 +7,7 @@ import lotto.model.Rank
 object ResultView {
 
     fun printLotto(userLotto: Lotto) {
+        println()
         println("${userLotto.numbers.size}개를 구매했습니다.")
         userLotto.numbers.forEach { it.value.let(::println) }
         println()
