@@ -7,6 +7,8 @@ class Ticket(
         valid(numbers)
     }
 
+    constructor(manualTicket: String) : this(Numbers(manualTicket.split(",").map { it.toInt() }))
+
     private fun valid(numbers: Numbers) {
         require(numbers.size() == LOTTO_COUNT) { "로또 번호 6개에 적합하지 않습니다" }
         require(numbers.duplicateSize() == LOTTO_COUNT) { "중복된 로또 번호가 존재합니다" }

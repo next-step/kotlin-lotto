@@ -6,12 +6,13 @@ import lotto.domain.Ticket
 
 object OutputView {
 
-    fun printTicketPurchaseCountAndTicketsInfo(count: Int, tickets: List<Ticket>) {
-        printTicketPurchaseCount(count)
+    fun printTicketPurchaseCountAndTicketsInfo(lottoCount: Int, manualCount: Int, tickets: List<Ticket>) {
+        printTicketPurchaseCount(lottoCount, manualCount)
         printTicketsInfo(tickets)
     }
 
-    private fun printTicketPurchaseCount(count: Int) = println("${count}개를 구매했습니다.")
+    private fun printTicketPurchaseCount(lottoCount: Int, manualCount: Int) =
+        println("수동으로 ${manualCount}장, 자동으로 ${lottoCount - manualCount}개를 구매했습니다.")
 
     private fun printTicketsInfo(tickets: List<Ticket>) = tickets.forEach { ticket ->
         println("[${ticket.getIssueNumbers().joinToString(",")}]")

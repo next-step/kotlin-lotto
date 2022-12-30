@@ -6,7 +6,10 @@ class Lotto(private var count: Int = 0, val fee: Int) {
 
     fun getCount() = this.count
 
-    fun purchaseTicket() = buildList { repeat(count) { add(Ticket()) } }
+    fun purchaseTicket(manualTicket: List<String>) = buildList {
+        repeat(count - manualTicket.size) { add(Ticket()) }
+        manualTicket.forEach { add(Ticket(it)) }
+    }
 
     companion object {
         const val PURCHASE_STANDARD_FEE = 1000
