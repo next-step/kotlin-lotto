@@ -8,9 +8,9 @@ class Lotto(
     val size: Int
         get() = numbers.size
 
-    fun matches(winningLotto: WinningLotto): LottoPrizeResults =
-        numbers.mapNotNull(winningLotto::prize)
-            .let(::LottoPrizeResults)
+    fun matches(winningLotto: WinningLotto): LottoRankResults =
+        numbers.mapNotNull(winningLotto::rank)
+            .let(::LottoRankResults)
 
     companion object {
         const val PRICE = 1000

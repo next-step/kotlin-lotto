@@ -2,94 +2,71 @@ package lotto.domain
 
 import lotto.model.LottoNumber
 import lotto.model.LottoNumbers
-import lotto.model.LottoPrize
+import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
 internal class LottoTest {
-    @Test
-    fun `1등 당첨`() {
-        // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
-        val userLotto =
-            listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber))).let(::Lotto)
-
-        // when
-        val lottoPrizeResults = userLotto.matches(winningLotto)
-
-        // then
-        assertThat(lottoPrizeResults.count(LottoPrize.FIRST)).isEqualTo(1)
-    }
-
-    @Test
-    fun `2등 당첨`() {
-        // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
-        val userLotto =
-            listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber))).let(::Lotto)
-
-        // when
-        val lottoPrizeResults = userLotto.matches(winningLotto)
-
-        // then
-        assertThat(lottoPrizeResults.count(LottoPrize.SECOND)).isEqualTo(1)
-    }
-
-    @Test
-    fun `3등 당첨`() {
-        // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
-        val userLotto =
-            listOf(LottoNumbers(listOf(1, 2, 3, 4, 7, 8).map(::LottoNumber))).let(::Lotto)
-
-        // when
-        val lottoPrizeResults = userLotto.matches(winningLotto)
-
-        // then
-        assertThat(lottoPrizeResults.count(LottoPrize.THIRD)).isEqualTo(1)
-    }
-
-    @Test
-    fun `4등 당첨`() {
-        // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
-        val userLotto =
-            listOf(LottoNumbers(listOf(1, 2, 3, 7, 8, 9).map(::LottoNumber))).let(::Lotto)
-
-        // when
-        val lottoPrizeResults = userLotto.matches(winningLotto)
-
-        // then
-        assertThat(lottoPrizeResults.count(LottoPrize.FOURTH)).isEqualTo(1)
-    }
 
     @ParameterizedTest
-    @MethodSource("provideLosingLotto")
-    fun `꽝(담청 결과 없음)`(userLotto: Lotto) {
+    @MethodSource("provideUserLottoAndRank")
+    fun `당첨된 로또 등수를 알 수 있다`(userLotto: Lotto, rank: Rank) {
         // given
-        val winningLotto =
-            listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber).let(::WinningLotto)
+        val winningLottoNumbers = (1..6).map(::LottoNumber)
+        val bonusNumber = LottoNumber(7)
+        val winningLotto = WinningLotto(winningLottoNumbers, bonusNumber)
+
         // when
-        val lottoPrizeResults = userLotto.matches(winningLotto)
+        val result = userLotto.matches(winningLotto)
 
         // then
-        assertThat(lottoPrizeResults.size == 0).isTrue
+        assertThat(result.count(rank)).isEqualTo(1)
+    }
+
+    @Test
+    fun `로또 번호 꽝 확인`() {
+        // given
+        val userLottoNumbers = listOf(
+            LottoNumbers((1..6).map(::LottoNumber))
+        )
+        val userLotto = Lotto(userLottoNumbers)
+        val winningLotto = WinningLotto((7..12).map(::LottoNumber), LottoNumber(8))
+
+        // when
+        val result = userLotto.matches(winningLotto)
+
+        // then
+        assertThat(result.size).isEqualTo(0)
     }
 
     companion object {
         @JvmStatic
-        fun provideLosingLotto(): Stream<Lotto> {
+        fun provideUserLottoAndRank(): Stream<Arguments> {
             return Stream.of(
-                Lotto(listOf(LottoNumbers(listOf(1, 12, 13, 7, 8, 9).map(::LottoNumber)))),
-                Lotto(listOf(LottoNumbers(listOf(1, 2, 13, 7, 8, 9).map(::LottoNumber)))),
-                Lotto(listOf(LottoNumbers(listOf(11, 12, 13, 7, 8, 9).map(::LottoNumber))))
+                Arguments.of(
+                    Lotto(listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)))),
+                    Rank.FIRST
+                ),
+                Arguments.of(
+                    Lotto(listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 7).map(::LottoNumber)))),
+                    Rank.SECOND
+                ),
+                Arguments.of(
+                    Lotto(listOf(LottoNumbers(listOf(1, 2, 3, 4, 5, 8).map(::LottoNumber)))),
+                    Rank.THIRD
+                ),
+                Arguments.of(
+                    Lotto(listOf(LottoNumbers(listOf(1, 2, 3, 4, 8, 9).map(::LottoNumber)))),
+                    Rank.FOURTH
+                ),
+                Arguments.of(
+                    Lotto(listOf(LottoNumbers(listOf(1, 2, 3, 8, 9, 10).map(::LottoNumber)))),
+                    Rank.FIFTH
+                )
             )
         }
     }

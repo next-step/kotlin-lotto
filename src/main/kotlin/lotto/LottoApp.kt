@@ -2,7 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
-import lotto.domain.LottoPrizeResults
+import lotto.domain.LottoRankResults
 import lotto.domain.WinningLotto
 import lotto.model.LottoNumber
 
@@ -16,10 +16,12 @@ fun main() {
     ResultView.printLottoROIAnalysis(lottoPrizeResults.returnOnInvestment(purchaseAmount))
 }
 
-private fun match(winningLotto: WinningLotto, userLotto: Lotto): LottoPrizeResults {
+private fun match(winningLotto: WinningLotto, userLotto: Lotto): LottoRankResults {
     return userLotto.matches(winningLotto)
 }
 
-private fun issueWinningLotto(): WinningLotto =
-    InputView.inputWinningNumbers()
-        .map(::LottoNumber).let(::WinningLotto)
+private fun issueWinningLotto(): WinningLotto {
+    val winningNumbers = InputView.inputWinningNumbers().map(::LottoNumber)
+    val bonusNumber = LottoNumber(InputView.inputBonusNumber())
+    return WinningLotto(winningNumbers, bonusNumber)
+}
