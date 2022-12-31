@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-internal class WinningLottoTest {
+internal class WinningLottosTest {
 
     @Test
     fun `당첨번호를 6개 입력한다`() {

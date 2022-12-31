@@ -1,8 +1,8 @@
 package lotto.domain.strategy
 
-import lotto.domain.Lotto
+import lotto.domain.Lottos
 
 interface LottoGeneratorStrategy {
 
-    fun generate(lottoCount: Int): Lotto
+    fun generate(lottoCount: Int): Lottos
 }

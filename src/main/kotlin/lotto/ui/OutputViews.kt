@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.domain.LottoNumber
+import lotto.domain.Lotto
 import lotto.domain.Ranking
 import lotto.domain.Ranking.*
 
@@ -12,7 +12,7 @@ object OutputViews {
     private const val PRINT_LOTTO_RESULT = "당첨 통계"
     private const val MESSAGE_BOUGHT_LOTTO = "개를 구매했습니다."
 
-    fun printBoughtLottos(lotto: List<LottoNumber>) {
+    fun printBoughtLottos(lotto: List<Lotto>) {
         repeat(lotto.size) {
             val lottery = lotto[it]
             println(lottery.value.joinToString(SEPARATOR, PREFIX, POSTFIX))

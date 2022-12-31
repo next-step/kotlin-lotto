@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class LottoAutoGeneratorStrategyTest {
+internal class LottosAutoGeneratorStrategyTest {
 
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 5, 10])

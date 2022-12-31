@@ -1,27 +1,27 @@
 package lotto.domain.strategy
 
+import lotto.domain.Lottos
 import lotto.domain.Lotto
-import lotto.domain.LottoNumber
 
 class LottoAutoGeneratorStrategy : LottoGeneratorStrategy {
 
     private val lottoNumbers = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER).toList()
 
-    override fun generate(lottoCount: Int): Lotto {
-        return Lotto(
+    override fun generate(lottoCount: Int): Lottos {
+        return Lottos(
             (0 until lottoCount)
                 .map { generateLottoNumber() }
                 .toList()
         )
     }
 
-    private fun generateLottoNumber(): LottoNumber {
+    private fun generateLottoNumber(): Lotto {
         val lottoNumbers = lottoNumbers
             .shuffled()
             .subList(LOTTO_FIRST_INDEX, LOTTO_LAST_INDEX)
             .sorted()
             .toList()
-        return LottoNumber(lottoNumbers)
+        return Lotto(lottoNumbers)
     }
 
     companion object {
