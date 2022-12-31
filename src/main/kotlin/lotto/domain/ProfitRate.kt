@@ -21,7 +21,7 @@ class ProfitRate(
     private fun calculate(totalWinningMoney: Int): Double {
         val decimalFormat = DecimalFormat(PROFIT_RATE_PATTERN)
         decimalFormat.roundingMode = RoundingMode.DOWN
-        val profitRate = totalWinningMoney / inputPrice.toFloat()
+        val profitRate = totalWinningMoney / inputPrice.toDouble()
         return decimalFormat.format(profitRate).toDouble()
     }
 
