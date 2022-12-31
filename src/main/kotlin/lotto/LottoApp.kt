@@ -3,7 +3,7 @@ package lotto
 import lotto.domain.BuyPrice
 import lotto.domain.ProfitRate
 import lotto.domain.WinLotteryNumber
-import lotto.domain.strategy.LottoAutoStrategy
+import lotto.domain.strategy.LottoAutoGeneratorStrategy
 import lotto.domain.strategy.LottoGenerator
 import lotto.ui.InputViews.inputPrice
 import lotto.ui.InputViews.inputWinningNumber
@@ -20,7 +20,7 @@ fun main() {
     printBoughtLotto(lottoCount)
 
     val lottoGenerator = LottoGenerator()
-    val generateStrategy = LottoAutoStrategy()
+    val generateStrategy = LottoAutoGeneratorStrategy()
 
     val lotto = lottoGenerator.generate(lottoCount, generateStrategy)
 

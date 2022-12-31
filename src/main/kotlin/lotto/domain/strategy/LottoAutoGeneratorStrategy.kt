@@ -3,7 +3,7 @@ package lotto.domain.strategy
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 
-class LottoAutoStrategy : LottoGeneratorStrategy {
+class LottoAutoGeneratorStrategy : LottoGeneratorStrategy {
 
     private val lottoNumbers = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER).toList()
 

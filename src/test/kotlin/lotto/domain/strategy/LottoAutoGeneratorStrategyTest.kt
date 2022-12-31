@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class LottoAutoStrategyTest {
+internal class LottoAutoGeneratorStrategyTest {
 
     @ParameterizedTest
     @ValueSource(ints = [1, 2, 5, 10])
     fun `로또를 구매한 개수만큼 로또가 만들어진다`(lottoCount: Int) {
         // given
-        val autoLotto = LottoAutoStrategy()
+        val autoLotto = LottoAutoGeneratorStrategy()
 
         // when
         val actual = autoLotto.generate(lottoCount).value.size
@@ -23,7 +23,7 @@ internal class LottoAutoStrategyTest {
     @Test
     fun `로또 번호의 범위는 1부터 45까지다`() {
         // given
-        val autoLotto = LottoAutoStrategy()
+        val autoLotto = LottoAutoGeneratorStrategy()
 
         // when
         val actual = autoLotto.generate(1).value[0].value
