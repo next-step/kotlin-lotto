@@ -7,7 +7,7 @@ import lotto.domain.strategy.LottoAutoStrategy
 import lotto.domain.strategy.LottoGenerator
 import lotto.ui.InputViews.inputPrice
 import lotto.ui.InputViews.inputWinningNumber
-import lotto.ui.InputViews.printBoughtLotto
+import lotto.ui.OutputViews.printBoughtLotto
 import lotto.ui.OutputViews.printBoughtLottos
 import lotto.ui.OutputViews.printLottoMatchResult
 import lotto.ui.OutputViews.printProfitRate

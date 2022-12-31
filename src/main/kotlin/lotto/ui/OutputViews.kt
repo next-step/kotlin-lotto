@@ -10,12 +10,17 @@ object OutputViews {
     private const val PREFIX = "["
     private const val POSTFIX = "]"
     private const val PRINT_LOTTO_RESULT = "당첨 통계"
+    private const val MESSAGE_BOUGHT_LOTTO = "개를 구매했습니다."
 
     fun printBoughtLottos(lotto: List<LottoNumber>) {
         repeat(lotto.size) {
             val lottery = lotto[it]
             println(lottery.value.joinToString(SEPARATOR, PREFIX, POSTFIX))
         }
+    }
+
+    fun printBoughtLotto(lottoCount: Int) {
+        println("${lottoCount}${MESSAGE_BOUGHT_LOTTO}")
     }
 
     fun printLottoMatchResult(matchResult: Map<Ranking, Int>) {
