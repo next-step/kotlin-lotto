@@ -8,11 +8,7 @@ class LottoAutoGeneratorStrategy : LottoGeneratorStrategy {
     private val lottoNumbers = (LOTTO_FIRST_NUMBER..LOTTO_LAST_NUMBER).toList()
 
     override fun generate(lottoCount: Int): Lottos {
-        return Lottos(
-            (0 until lottoCount)
-                .map { generateLottoNumber() }
-                .toList()
-        )
+        return Lottos(List(lottoCount) { generateLottoNumber() })
     }
 
     private fun generateLottoNumber(): Lotto {
