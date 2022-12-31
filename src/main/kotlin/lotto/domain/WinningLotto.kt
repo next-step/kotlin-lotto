@@ -1,6 +1,6 @@
 package lotto.domain
 
-class WinLotteryNumber(
+class WinningLotto(
     inputNumbers: List<String>
 ) {
 

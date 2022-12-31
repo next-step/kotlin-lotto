@@ -2,7 +2,7 @@ package lotto
 
 import lotto.domain.BuyPrice
 import lotto.domain.ProfitRate
-import lotto.domain.WinLotteryNumber
+import lotto.domain.WinningLotto
 import lotto.domain.strategy.LottoAutoGeneratorStrategy
 import lotto.domain.strategy.LottoFactory
 import lotto.ui.InputViews.inputPrice
@@ -26,7 +26,7 @@ fun main() {
 
     printBoughtLottos(lotto.value)
 
-    val winningNumbers = WinLotteryNumber(inputWinningNumber()).winningNumbers
+    val winningNumbers = WinningLotto(inputWinningNumber()).winningNumbers
     val matching = lotto.matchWinningNumbers(winningNumbers)
 
     printLottoMatchResult(matching)

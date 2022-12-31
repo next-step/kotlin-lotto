@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-internal class WinLotteryNumberTest {
+internal class WinningLottoTest {
 
     @Test
     fun `당첨번호를 6개 입력한다`() {
@@ -12,7 +12,7 @@ internal class WinLotteryNumberTest {
         val inputWinningNumber = listOf("1", "2", "3", "4", "5", "6")
 
         // when
-        val actual = WinLotteryNumber(inputWinningNumber).winningNumbers.size
+        val actual = WinningLotto(inputWinningNumber).winningNumbers.size
 
         // then
         val expected = 6
@@ -22,21 +22,21 @@ internal class WinLotteryNumberTest {
     @Test
     fun `당첨번호가 입력되지 않으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            WinLotteryNumber(emptyList())
+            WinningLotto(emptyList())
         }
     }
 
     @Test
     fun `당첨번호가 6개가 아니면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            WinLotteryNumber(listOf("1", "2"))
+            WinningLotto(listOf("1", "2"))
         }
     }
 
     @Test
     fun `당첨번호가 1에서 45숫자가 아니면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            WinLotteryNumber(listOf("1", "2", "3", "4", "5", "46"))
+            WinningLotto(listOf("1", "2", "3", "4", "5", "46"))
         }
     }
 }
