@@ -11,7 +11,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import javafx.beans.binding.When
 
 class RankTest : BehaviorSpec({
     Given("Rank.from()") {

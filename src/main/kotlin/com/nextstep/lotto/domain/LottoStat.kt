@@ -10,7 +10,7 @@ data class LottoStat(private val matchCounts: List<Int>) {
     }
 
     fun lottoCountOf(matchNumbers: Int): Int {
-        require(matchNumbers in (0..6)) { "일치하는 숫자의 개수는 0에서 7사이 입니다. rank: $matchNumbers" }
+        require(matchNumbers in (0..6)) { "일치하는 숫자의 개수는 0에서 6사이 입니다. rank: $matchNumbers" }
         return lottoCountOf(Rank.from(matchNumbers))
     }
 

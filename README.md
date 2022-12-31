@@ -5,7 +5,7 @@
   - [x] LottoBall 을 가지는 LottoTicket 을 생성한다.
   - [x] LottoTicket 을 묶은 LottoTickets 를 생성한다.
 - [x] 로또 1장의 가격은 1000원이다.
-- [ ] 지난주 당첨번호를 입력하면 구매한 로또의 당첨 통계를 받을 수 있다.
+- [x] 지난주 당첨번호를 입력하면 구매한 로또의 당첨 통계를 받을 수 있다.
   - [x] WinningLottoNumbers 를 생성한다.
   - [x] LottoTickets 가 가지고 있는 LottoTicket 과 WinningLottoNumbers 을 비교해서 일치하는 숫자의 개수를 구할 수 있다.
   - [x] 구매한 로또에서 일치하는 숫자의 로또 개수와 수익률을 가지는 LottoStat 을 생성한다.

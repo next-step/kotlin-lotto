@@ -2,6 +2,7 @@ package com.nextstep.lotto.view
 
 import com.nextstep.lotto.domain.LottoStat
 import com.nextstep.lotto.domain.Lottos
+import com.nextstep.lotto.domain.Rank
 
 class OutputView {
 
@@ -15,10 +16,11 @@ class OutputView {
         println()
         println("당첨 통계")
         println("---------")
-        println("3개 일치(5000원) - ${lottoStat.lottoCountOf(3)}개")
-        println("4개 일치(50000원) - ${lottoStat.lottoCountOf(4)}개")
-        println("5개 일치(1500000원) - ${lottoStat.lottoCountOf(5)}개")
-        println("6개 일치(2000000000원) - ${lottoStat.lottoCountOf(6)}개")
+
+        (3..6).forEach{
+            println("${it}개 일치(${Rank.from(it).prize}원) - ${lottoStat.lottoCountOf(it)}개")
+        }
+
         val profitRate = lottoStat.profitRate()
         print("총 수익률은 $profitRate 입니다.")
         if (profitRate < 1) println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
