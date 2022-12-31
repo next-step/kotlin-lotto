@@ -30,9 +30,9 @@ class LottoStatTest : BehaviorSpec({
                     row(-1),
                     row(7)
                 ) { rank ->
-                        shouldThrow<IllegalArgumentException> {
-                            lottoStat.lottoCountOf(rank)
-                        } shouldHaveMessage "일치하는 숫자의 개수는 0에서 6사이 입니다. rank: $rank"
+                    shouldThrow<IllegalArgumentException> {
+                        lottoStat.lottoCountOf(rank)
+                    } shouldHaveMessage "일치하는 숫자의 개수는 0에서 6사이 입니다. rank: $rank"
                 }
             }
 

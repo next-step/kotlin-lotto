@@ -15,7 +15,7 @@ class LottoTest : BehaviorSpec({
     Given("Lotto 를 생성할 때") {
         When("서로 다른 6개의 LottoBall 을 전달받으면") {
             Then("exception 이 발생하지 않고 Lotto 이 생성된다.") {
-                shouldNotThrowAny{ Lotto(1, 2, 3, 4, 5, 6) }
+                shouldNotThrowAny { Lotto(1, 2, 3, 4, 5, 6) }
             }
         }
 
@@ -27,7 +27,7 @@ class LottoTest : BehaviorSpec({
                 ) {
                     numbers ->
                     shouldThrow<IllegalArgumentException> { Lotto(*numbers) } shouldHaveMessage
-                            "6개의 LottoBall 을 입력받아야 합니다. size: ${numbers.size}"
+                        "6개의 LottoBall 을 입력받아야 합니다. size: ${numbers.size}"
                 }
             }
         }
@@ -36,7 +36,7 @@ class LottoTest : BehaviorSpec({
             Then("IllegalArgumentException 이 발생한다.") {
                 val lottoNumbers = listOf(1, 1, 2, 3, 4, 5).map { LottoNumber(it) }
                 shouldThrow<IllegalArgumentException> { Lotto(lottoNumbers) } shouldHaveMessage
-                        "중복된 LottoBall 을 입력받을 수 없습니다. numbers: $lottoNumbers"
+                    "중복된 LottoBall 을 입력받을 수 없습니다. numbers: $lottoNumbers"
             }
         }
     }

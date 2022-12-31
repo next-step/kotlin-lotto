@@ -17,7 +17,7 @@ class OutputView {
         println("당첨 통계")
         println("---------")
 
-        (3..6).forEach{
+        (3..6).forEach {
             println("${it}개 일치(${Rank.from(it).prize}원) - ${lottoStat.lottoCountOf(it)}개")
         }
 

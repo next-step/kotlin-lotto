@@ -1,7 +1,5 @@
 package com.nextstep.lotto.domain
 
-
-
 data class LottoNumber(val value: Int) {
 
     init {
