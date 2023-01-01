@@ -1,10 +1,10 @@
 package lotto.domain
 
 enum class WinningAmount(
-    private val matchCount: Int?,
+    private val matchCount: Int,
     val amount: Int,
 ) {
-    LOSING_TICKET(null, 0),
+    LOSING_TICKET(0, 0),
     FOURTH_PLACE(3, 5_000),
     THIRD_PLACE(4, 50_000),
     SECOND_PLACE(5, 1_500_000),

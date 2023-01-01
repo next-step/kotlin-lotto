@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.utils.LottoNumberGenerator
+import lotto.view.ResultView
 
 class LottoMachine {
 
@@ -10,19 +11,19 @@ class LottoMachine {
         }
 
         val ticketAmount = getTicketAmount(amount)
+        ResultView.printTicketAmount(ticketAmount)
 
-        val ticketBundle = mutableListOf<LottoTicket>()
-        repeat(ticketAmount) {
-            val numbers = LottoNumberGenerator.auto()
-            ticketBundle.add(
-                element = LottoTicket(numbers)
-            )
+        val ticketBundle = buildList(ticketAmount) {
+            repeat(ticketAmount) {
+                val numbers = LottoNumberGenerator.auto()
+                add(LottoTicket(numbers))
+            }
         }
 
         return ticketBundle
     }
 
-    fun getTicketAmount(amount: Int): Int {
+    private fun getTicketAmount(amount: Int): Int {
         return amount / LOTTO_TICKET_AMOUNT
     }
 

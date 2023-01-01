@@ -3,13 +3,13 @@ package lotto.domain
 class LottoGameResult(
     private val winningCountByAmount: LottoStatistics,
 ) {
-    fun getRateOfReturn(purchasedPrice: Int): Float {
+    fun getRateOfReturn(purchasedPrice: Int): Double {
         val totalWinningAmount = winningCountByAmount.rank
             .entries
             .sumOf {
                 (it.key.amount * it.value)
             }
 
-        return totalWinningAmount.toFloat() / purchasedPrice.toFloat()
+        return totalWinningAmount.toDouble() / purchasedPrice.toDouble()
     }
 }

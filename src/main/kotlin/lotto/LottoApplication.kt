@@ -10,16 +10,13 @@ fun main() {
     val purchasedAmount = InputView.purchaseAmountInput()
 
     val lottoMachine = LottoMachine()
-    val ticketAmount = lottoMachine.getTicketAmount(purchasedAmount)
-
-    ResultView.printTicketAmount(ticketAmount)
-
     val ticketBundle = lottoMachine.ticketing(purchasedAmount)
     ResultView.printTicketBundle(ticketBundle)
 
     val winningNumber = InputView.winningNumberInput()
 
     val rank = LottoNumberMatchComparator.compare(ticketBundle, winningNumber)
+    ResultView.printWinningLottoAmount(rank)
 
     val lottoGameResult = LottoGameResult(rank)
     val rate = lottoGameResult.getRateOfReturn(purchasedAmount)
