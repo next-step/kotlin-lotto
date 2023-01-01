@@ -6,7 +6,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import java.lang.IllegalArgumentException
 
-class LottoNumberTest: StringSpec({
+class LottoNumberTest : StringSpec({
 
     "로또 숫자는 1이상 43이하의 숫자만 가질 수 있어요." {
         forAll(
@@ -17,5 +17,4 @@ class LottoNumberTest: StringSpec({
             }
         }
     }
-
 })

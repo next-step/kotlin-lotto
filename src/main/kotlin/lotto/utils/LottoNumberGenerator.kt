@@ -6,7 +6,6 @@ import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_START_BOUND
 
 object LottoNumberGenerator {
 
-
     fun auto(): Set<LottoNumber> {
         return (LOTTO_NUMBER_START_BOUND..LOTTO_NUMBER_END_BOUND).toList()
             .shuffled()
