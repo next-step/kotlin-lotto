@@ -2,13 +2,15 @@ package lotto.domain
 
 import lotto.common.value.Money
 import lotto.domain.enums.TicketStatus
+import lotto.domain.enums.TicketType
 import lotto.domain.policy.LotteryNumbersGenerateStrategy
 import lotto.domain.policy.PricePolicy
 import lotto.domain.vo.LotteryNumbers
 
 class Ticket(
     pricePolicy: PricePolicy,
-    lotteryNumbersGenerateStrategy: LotteryNumbersGenerateStrategy
+    lotteryNumbersGenerateStrategy: LotteryNumbersGenerateStrategy,
+    val ticketType: TicketType
 ) {
 
     val price: Money = pricePolicy.apply()
