@@ -6,11 +6,10 @@ import lotto.domain.LottoRankResults
 import lotto.domain.LottoTicket
 import lotto.domain.WinningLotto
 import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
 
 fun main() {
     val purchaseAmount = InputView.inputPurchaseAmount()
-    val manualLottoNumbers = issueManualLottoNumbers()
+    val manualLottoNumbers = InputView.issueManualLottoNumbers()
     val ticket = LottoTicket(purchaseAmount, manualLottoNumbers)
     ResultView.printLottoTicket(ticket)
 
@@ -32,7 +31,3 @@ private fun issueWinningLotto(): WinningLotto {
     val bonusNumber = LottoNumber(InputView.inputBonusNumber())
     return WinningLotto(winningNumbers, bonusNumber)
 }
-
-private fun issueManualLottoNumbers(): List<LottoNumbers> =
-    InputView.issueManualLottoNumbers()
-        .map { LottoNumbers(it.map(::LottoNumber)) }
