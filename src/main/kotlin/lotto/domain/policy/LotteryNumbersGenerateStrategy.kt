@@ -22,3 +22,9 @@ object LotteryNumberAutoGenerateStrategy : LotteryNumbersGenerateStrategy {
         return LotteryNumber.LOTTERY_NUMBER_LIST[randomValue]
     }
 }
+
+class LotteryNumberManualGenerateStrategy(
+    private val lotteryNumbers: LotteryNumbers
+) : LotteryNumbersGenerateStrategy {
+    override fun generate(): LotteryNumbers = this.lotteryNumbers
+}
