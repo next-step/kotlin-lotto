@@ -7,6 +7,6 @@ object LottoNumberGenerator {
     private val totalNumbers = (FIRST_NUMBER..LAST_NUMBER).toList()
 
     fun generate(count: Int): List<LottoNumbers> {
-        return (1..count).map { totalNumbers.shuffled().slice(0 until 6).sorted() }
+        return (1..count).map { LottoNumbers(totalNumbers.shuffled().slice(0 until 6).sorted()) }
     }
 }

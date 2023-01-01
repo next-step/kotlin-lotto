@@ -1,3 +1,4 @@
 package lotto
 
-typealias LottoNumbers = List<Int>
+@JvmInline
+value class LottoNumbers(val numbers: List<Int>)

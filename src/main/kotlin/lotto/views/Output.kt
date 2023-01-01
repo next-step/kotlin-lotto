@@ -2,6 +2,7 @@ package lotto.views
 
 import lotto.LottoNumbers
 import lotto.Rank
+import lotto.Ranks
 
 object Output {
     fun printBuyAmount(amount: Int) {
@@ -12,13 +13,13 @@ object Output {
         lottoNumbers.forEach { println(it) }
     }
 
-    fun printLottoResult(ranks: List<Rank>) {
+    fun printLottoResult(ranks: Ranks) {
         println("당첨 통계")
         println("---------")
-        println("3개 일치 (${Rank.FOURTH.winningPrice}원) - ${ranks.count { it == Rank.FOURTH }}개")
-        println("4개 일치 (${Rank.THIRD.winningPrice}원) - ${ranks.count { it == Rank.THIRD }}개")
-        println("5개 일치 (${Rank.SECOND.winningPrice}원) - ${ranks.count { it == Rank.SECOND }}개")
-        println("6개 일치 (${Rank.FIRST.winningPrice}원) - ${ranks.count { it == Rank.FIRST }}개")
+        println("3개 일치 (${Rank.FOURTH.winningPrice}원) - ${ranks.ranks.count { it == Rank.FOURTH }}개")
+        println("4개 일치 (${Rank.THIRD.winningPrice}원) - ${ranks.ranks.count { it == Rank.THIRD }}개")
+        println("5개 일치 (${Rank.SECOND.winningPrice}원) - ${ranks.ranks.count { it == Rank.SECOND }}개")
+        println("6개 일치 (${Rank.FIRST.winningPrice}원) - ${ranks.ranks.count { it == Rank.FIRST }}개")
     }
 
     fun printEarningRate(earningRate: Double) {
