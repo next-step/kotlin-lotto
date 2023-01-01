@@ -16,13 +16,19 @@ import java.math.RoundingMode
 class OrderTicketService(
     private val pricePolicy: PricePolicy
 ) {
-    fun orderTickets(paymentPrice: Money, ticketType: TicketType): Order {
-        val unitPrice = pricePolicy.apply()
-        val quantity = Quantity((paymentPrice / unitPrice).value.setScale(0, RoundingMode.DOWN).toInt())
-        val tickets = Tickets.from(quantity = quantity, pricePolicy = pricePolicy, ticketType = ticketType)
-        val order = Order(paymentPrice = paymentPrice, tickets = tickets)
+    fun orderTickets(orderInfo: List<OrderInfo>): Order {
+        val ticketsList = orderInfo.map { orderTickets(it.paymentPrice, it.ticketType, it.lotteryNumbers) }
+        val paymentPrice = orderInfo.sumOf { it.paymentPrice.value }.toMoney()
+        val mergedTickets = Tickets.merge(ticketsList)
+        val order = Order(paymentPrice = paymentPrice, tickets = mergedTickets)
         order.complete()
         return order
+    }
+
+    private fun orderTickets(paymentPrice: Money, ticketType: TicketType, lotteryNumbers: List<LotteryNumbers>): Tickets {
+        val unitPrice = pricePolicy.apply()
+        val quantity = Quantity((paymentPrice / unitPrice).value.setScale(0, RoundingMode.DOWN).toInt())
+        return Tickets.of(quantity = quantity, pricePolicy = pricePolicy, ticketType = ticketType, lotteryNumbers = lotteryNumbers)
     }
 
     fun getLotteryNumbers(order: Order): List<LotteryNumbers> = order.toLotteryNumbers()
@@ -39,4 +45,15 @@ class OrderTicketService(
         val rateOfReturn = RateOfReturnCalculator.calculate(paymentPrice = paymentPrice, prizeAmount = prizeAmount)
         return rateOfReturn.toDouble()
     }
+
+    fun availableTicketPrice(manualTicketCount: Quantity): Money {
+        val unitPrice = pricePolicy.apply()
+        return unitPrice * manualTicketCount
+    }
+
+    data class OrderInfo(
+        val paymentPrice: Money,
+        val ticketType: TicketType,
+        val lotteryNumbers: List<LotteryNumbers> = listOf()
+    )
 }
