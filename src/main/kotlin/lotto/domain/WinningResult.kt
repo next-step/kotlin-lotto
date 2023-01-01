@@ -17,11 +17,6 @@ class WinningResult(lottoList: List<Lotto>, winningLotto: WinningLotto) {
     }
 
     fun getWinningPrice(): Int {
-        var winningPrice = 0
-
-        RANKING.values().forEach { ranking ->
-            winningPrice += ranking.winningPrice * winningResult[ranking.ordinal]
-        }
-        return winningPrice
+        return RANKING.values().sumOf { it.winningPrice * winningResult[it.ordinal] }
     }
 }
