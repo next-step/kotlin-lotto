@@ -1,10 +1,10 @@
 package lotto.domain
 
-import lotto.model.LottoNumber
 import lotto.domain.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
+import lotto.model.LottoNumber
 import lotto.model.Rank
 
-class WinningLotto(
+class WinningLotto private constructor(
     private val numbers: List<LottoNumber>,
     private val bonusNumber: LottoNumber,
 ) {
@@ -22,4 +22,9 @@ class WinningLotto(
 
     private fun match(lottoNumbers: LottoNumbers): Int =
         numbers.filter { lottoNumbers.contains(it) }.size
+
+    companion object {
+        operator fun invoke(numbers: List<Int>, bonusNumber: Int): WinningLotto =
+            WinningLotto(numbers.map(::LottoNumber), LottoNumber(bonusNumber))
+    }
 }
