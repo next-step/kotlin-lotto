@@ -18,8 +18,8 @@ class StringAddCalculator {
 
     class Expression(private val expression: String, private vararg val delimiters: String = arrayOf(":", ",")) {
         fun calculate() = expression.split(delimiters = delimiters)
-                .map { toInt(it) }
-                .sumOf { validateAndReturn(it) }
+            .map { toInt(it) }
+            .sumOf { validateAndReturn(it) }
 
         private fun toInt(num: String): Int {
             return num.toIntOrNull() ?: throw IllegalArgumentException()

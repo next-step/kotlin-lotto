@@ -1,0 +1,70 @@
+package com.nextstep.lotto.domain
+
+import io.kotest.assertions.throwables.shouldNotThrowAny
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
+
+class LottoTest : BehaviorSpec({
+
+    Given("Lotto 를 생성할 때") {
+        When("서로 다른 6개의 LottoBall 을 전달받으면") {
+            Then("exception 이 발생하지 않고 Lotto 이 생성된다.") {
+                shouldNotThrowAny { Lotto(1, 2, 3, 4, 5, 6) }
+            }
+        }
+
+        When("전달 받은 LottoBall 이 6개가 아니면") {
+            Then("IllegalArgumentException 이 발생한다.") {
+                forAll(
+                    row(intArrayOf(1, 2, 3, 4, 5)),
+                    row(intArrayOf(1, 2, 3, 4, 5, 6, 7))
+                ) {
+                    numbers ->
+                    shouldThrow<IllegalArgumentException> { Lotto(*numbers) } shouldHaveMessage
+                        "6개의 LottoBall 을 입력받아야 합니다. size: ${numbers.size}"
+                }
+            }
+        }
+
+        When("전달 받은 LottoBall 중 중복 LottoBall 이 있으면") {
+            Then("IllegalArgumentException 이 발생한다.") {
+                val lottoNumbers = listOf(1, 1, 2, 3, 4, 5).map { LottoNumber(it) }
+                shouldThrow<IllegalArgumentException> { Lotto(lottoNumbers) } shouldHaveMessage
+                    "중복된 LottoBall 을 입력받을 수 없습니다. numbers: $lottoNumbers"
+            }
+        }
+    }
+
+    Given("Lotto#contains") {
+        When("LottoNumber를 전달하면") {
+            Then("Lotto가 해당 LottoNumber를 가지고 있는지 확인한다") {
+                forAll(
+                    row(LottoNumber(1), true),
+                    row(LottoNumber(10), false),
+                ) {
+                    lottoNumber, expected ->
+                    val lotto = Lotto(1, 2, 3, 4, 5, 6)
+                    lotto.contains(lottoNumber) shouldBe expected
+                }
+            }
+        }
+    }
+
+    Given("Lotto#getNumbers") {
+        When("getNumber 를 호출하면") {
+            Then("Lotto 가 가지고 있는 LottoBall 의 숫자들을 리턴한다") {
+                val lotto = Lotto(1, 2, 3, 4, 5, 6)
+                val numbers = lotto.getNumbers()
+
+                numbers shouldHaveSize 6
+                numbers shouldContainExactly ((1..6))
+            }
+        }
+    }
+})
