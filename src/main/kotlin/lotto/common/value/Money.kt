@@ -22,6 +22,10 @@ value class Money private constructor(
 
     override fun toString(): String = this.value.toString()
 
+    operator fun minus(target: Money): Money {
+        return Money(this.value.minus(target.value))
+    }
+
     companion object {
         fun Long.toMoney(): Money = Money(this.toBigDecimal())
         fun BigDecimal.toMoney(): Money = Money(this)
