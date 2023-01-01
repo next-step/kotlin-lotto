@@ -1,7 +1,10 @@
 package lotto.domain
 
-class StringNumbers(val numbers: List<String>) {
+class StringNumbers(numberStrings: String) {
+    val numbers: List<String>
+
     init {
-        require(numbers.isNotEmpty()) { "input string delimiter" }
+        numbers = numberStrings.split(",")
+        require(numbers.isNotEmpty() && numbers.size == Lotto.LOTTO_NUMBERS_COUNT) { "input string delimiter" }
     }
 }

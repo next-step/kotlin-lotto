@@ -11,10 +11,10 @@ import lotto.domain.WinningResult
 
 class LottoResultTest : StringSpec({
     "5등." {
-        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lottoString = StringNumbers("1,2,3,4,5,6")
         val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
 
-        val winningLottoString = StringNumbers("1,2,3,7,8,9".split(","))
+        val winningLottoString = StringNumbers("1,2,3,7,8,9")
         val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
         val bonusNumber = LottoNumber(10)
 
@@ -24,10 +24,10 @@ class LottoResultTest : StringSpec({
     }
 
     "4등." {
-        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lottoString = StringNumbers("1,2,3,4,5,6")
         val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
 
-        val winningLottoString = StringNumbers("1,2,3,4,8,9".split(","))
+        val winningLottoString = StringNumbers("1,2,3,4,8,9")
         val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
         val bonusNumber = LottoNumber(10)
 
@@ -37,10 +37,10 @@ class LottoResultTest : StringSpec({
     }
 
     "3등." {
-        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lottoString = StringNumbers("1,2,3,4,5,6")
         val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
 
-        val winningLottoString = StringNumbers("1,2,3,4,5,9".split(","))
+        val winningLottoString = StringNumbers("1,2,3,4,5,9")
         val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
         val bonusNumber = LottoNumber(10)
 
@@ -50,10 +50,10 @@ class LottoResultTest : StringSpec({
     }
 
     "1등." {
-        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lottoString = StringNumbers("1,2,3,4,5,6")
         val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
 
-        val winningLottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val winningLottoString = StringNumbers("1,2,3,4,5,6")
         val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
         val bonusNumber = LottoNumber(10)
 
@@ -63,10 +63,10 @@ class LottoResultTest : StringSpec({
     }
 
     "2등." {
-        val lottoString = StringNumbers("1,2,3,4,5,6".split(","))
+        val lottoString = StringNumbers("1,2,3,4,5,6")
         val lotto = Lotto(lottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
 
-        val winningLottoString = StringNumbers("1,2,3,4,5,9".split(","))
+        val winningLottoString = StringNumbers("1,2,3,4,5,9")
         val winningLotto = Lotto(winningLottoString.numbers.map { LottoNumber(it.trim()) }.toSet())
         val bonusNumber = LottoNumber(6)
 

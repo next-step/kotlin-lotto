@@ -5,8 +5,8 @@ import lotto.domain.RANKING
 import lotto.domain.WinningResult
 
 class ResultView {
-    fun printPurchaseCount(count: Int) {
-        println("${ count }개를 구매했습니다.")
+    fun printPurchaseCount(manualCount: Int, autoCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 
     fun printPurchaseLotteNumbers(lottoList: List<Lotto>) {
