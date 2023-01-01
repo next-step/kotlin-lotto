@@ -1,18 +1,15 @@
 package lotto.interfaces.ui.console
 
 import lotto.common.value.Money
-import lotto.domain.vo.LotteryNumbers
 
 object OutputConsole {
-    fun printTicketCount(ticketCount: Int) {
-        println("${ticketCount}개를 구매했습니다.")
-    }
-
-    fun printString(text: String) {
-        println(text)
+    fun printTicketCount(manualTicketCount: Int, autoTicketCount: Int) {
+        println()
+        println("수동으로 ${manualTicketCount}장, 자동으로 ${autoTicketCount}개를 구매했습니다.")
     }
 
     fun printPrize() {
+        println()
         println("당첨 통계")
         println("---------")
     }
@@ -29,6 +26,6 @@ object OutputConsole {
     }
 
     fun printLotteryNumbers(lotteryNumbers: List<String>) {
-        println("[${lotteryNumbers.joinToString(separator = ",")}]")
+        println("[${lotteryNumbers.joinToString(separator = ", ")}]")
     }
 }

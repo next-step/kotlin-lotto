@@ -2,6 +2,7 @@ package lotto.interfaces
 
 import lotto.application.command.OrderTicketService
 import lotto.common.execute.Executable
+import lotto.common.value.Quantity
 import lotto.domain.Order
 import lotto.domain.enums.Prize
 import lotto.domain.enums.TicketType
@@ -33,8 +34,36 @@ class TicketController(
     }
 
     private fun queryOrder(): Order {
-        val paymentPrice = InputConsole.queryPaymentPrice()
-        return orderTicketService.orderTickets(paymentPrice = paymentPrice, ticketType = TicketType.AUTO)
+        val totalPaymentPrice = InputConsole.queryPaymentPrice()
+
+        val manualTicketCount = queryManualTicketCount()
+        val manualTicketPrice = orderTicketService.availableTicketPrice(Quantity(manualTicketCount))
+        val manualLotteryNumbersList = queryManualLotteryNumbersList(manualTicketCount)
+        val manualOrderInfo = OrderTicketService.OrderInfo(
+            paymentPrice = manualTicketPrice,
+            ticketType = TicketType.MANUAL,
+            lotteryNumbers = manualLotteryNumbersList
+        )
+
+        val autoTicketPrice = totalPaymentPrice - manualTicketPrice
+        val autoOrderInfo = OrderTicketService.OrderInfo(
+            paymentPrice = autoTicketPrice,
+            ticketType = TicketType.AUTO
+        )
+
+        val orderInfo = listOf(manualOrderInfo, autoOrderInfo)
+        return orderTicketService.orderTickets(orderInfo = orderInfo)
+    }
+
+    private fun queryManualLotteryNumbersList(manualTicketCount: Int): List<LotteryNumbers> {
+        val manualLotteryNumbersList = InputConsole.queryManualLotteryNumbers(manualTicketCount)
+        return manualLotteryNumbersList.map { lotteryNumbers ->
+            LotteryNumbers(lotteryNumbers.map { LotteryNumber(it) }.toList())
+        }
+    }
+
+    private fun queryManualTicketCount(): Int {
+        return InputConsole.queryManualTicketCount()
     }
 
     private fun viewLotteryNumber(order: Order) {
@@ -46,8 +75,9 @@ class TicketController(
     }
 
     private fun viewTicketCount(order: Order) {
-        val countTicket = order.countTicket()
-        OutputConsole.printTicketCount(countTicket)
+        val manualTicketCount = order.countTicket(TicketType.MANUAL)
+        val autoTicketCount = order.countTicket(TicketType.AUTO)
+        OutputConsole.printTicketCount(manualTicketCount, autoTicketCount)
     }
 
     private fun queryLastWeekWinLotteryNumbers(): LotteryNumbers {
