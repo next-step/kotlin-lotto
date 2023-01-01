@@ -20,6 +20,6 @@ class LottoTicket private constructor(
 
     companion object {
         operator fun invoke(purchaseAmount: Int, manualLottoNumbers: List<List<Int>> = emptyList()): LottoTicket =
-            LottoTicket(purchaseAmount, manualLottoNumbers.map { LottoNumbers(it.map(::LottoNumber)) })
+            LottoTicket(purchaseAmount, manualLottoNumbers.map { LottoNumbers(it.map(::LottoNumber)).sort() })
     }
 }

@@ -12,6 +12,8 @@ class LottoNumbers(
 
     fun contains(lottoNumber: LottoNumber): Boolean = value.contains(lottoNumber)
 
+    fun sort(): LottoNumbers = LottoNumbers(value.sortedBy { it.value })
+
     companion object {
         const val NUMBER_OF_LOTTO_DIGIT = 6
     }
