@@ -13,15 +13,20 @@ object InputConsole {
         return inputPrice.toBigDecimal().toMoney()
     }
 
-    fun queryLastWeekWinLotteryNumbers(): Set<Int> =
+    fun queryLastWeekWinLotteryNumbers(): Set<Int> {
+        println()
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        return queryLotteryNumbers()
+    }
+
+    private fun queryLotteryNumbers(): Set<Int> =
         try {
-            println("지난 주 당첨 번호를 입력해 주세요.")
             val input = readln().trim()
             val lastWeekWinLotteryNumbers = input.split(NUMBER_DELIMITER)
             lastWeekWinLotteryNumbers.map { it.trim().toInt() }.toSet()
         } catch (e: NumberFormatException) {
             println("숫자를 입력해주세요")
-            queryLastWeekWinLotteryNumbers()
+            queryLotteryNumbers()
         }
 
     fun queryLastWeekBonusNumber(): Int {
@@ -36,5 +41,21 @@ object InputConsole {
         }
         println("숫자를 입력해주세요.")
         return queryNumber()
+    }
+
+    fun queryManualTicketCount(): Int {
+        println()
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return queryNumber()
+    }
+
+    fun queryManualLotteryNumbers(manualTicketCount: Int): List<Set<Int>> {
+        println()
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val mutableListOf = mutableListOf<Set<Int>>()
+        repeat(manualTicketCount) {
+            mutableListOf += queryLotteryNumbers()
+        }
+        return mutableListOf
     }
 }
