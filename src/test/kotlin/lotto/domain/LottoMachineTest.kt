@@ -26,7 +26,7 @@ class LottoMachineTest : StringSpec({
         val lottoTickets = lottoMachine.ticketing(1000)
 
         val lottoNumbers = lottoTickets.first().numbers
-        val sortedLottoNumbers = lottoNumbers.sortedBy { it }
+        val sortedLottoNumbers = lottoNumbers.sortedBy { it.number }
 
         lottoNumbers shouldBe sortedLottoNumbers
     }

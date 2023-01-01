@@ -1,8 +1,8 @@
 package lotto.domain
 
 class LottoTicket(
-    val numbers: Set<Int>
-) : Set<Int> by numbers {
+    val numbers: Set<LottoNumber>
+) : Set<LottoNumber> by numbers {
 
     init {
         require(numbers.size == LOTTO_NUMBER_SIZE_BOUND) {

@@ -1,14 +1,18 @@
 package lotto.utils
 
-object LottoNumberGenerator {
-    private const val LOTTO_NUMBER_START_BOUND = 1
-    private const val LOTTO_NUMBER_END_BOUND = 43
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_END_BOUND
+import lotto.domain.LottoNumber.Companion.LOTTO_NUMBER_START_BOUND
 
-    fun auto(): Set<Int> {
+object LottoNumberGenerator {
+
+
+    fun auto(): Set<LottoNumber> {
         return (LOTTO_NUMBER_START_BOUND..LOTTO_NUMBER_END_BOUND).toList()
             .shuffled()
             .take(6)
             .sorted()
+            .map { LottoNumber(it) }
             .toSet()
     }
 }

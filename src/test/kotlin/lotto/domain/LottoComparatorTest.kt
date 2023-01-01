@@ -21,7 +21,7 @@ class LottoComparatorTest : StringSpec({
 
     "3개 미만으로 맞은 경우는 꽝으로 표시해요" {
         val winningNumbers = LottoNumberTestUtils.lottoNumbers(1, 2, 3, 7, 8, 9)
-        val lottoNumbers = LottoNumberTestUtils.lottoNumbers(1, 2, 3, 10, 11, 12)
+        val lottoNumbers = LottoNumberTestUtils.lottoNumbers(1, 2, 10, 11, 12, 13)
 
         val ticketBundle = listOf(
             LottoTicket(lottoNumbers)
