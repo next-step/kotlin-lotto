@@ -3,7 +3,6 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
-import lotto.domain.RANKING
 import lotto.domain.StringNumbers
 import lotto.domain.WinningLotto
 import lotto.domain.WinningResult
@@ -42,11 +41,7 @@ class Controller(private val inputView: InputView, private val resultView: Resul
         val winningStatistics = WinningStatistics(price)
 
         resultView.printWinningStatisticsStart()
-        for (rank in RANKING.values()) {
-            if (rank != RANKING.MISS) {
-                resultView.printWinningStatistics(rank, winningResult.getWinningResult(rank), rank.bonusMatched)
-            }
-        }
+        resultView.printWinningStatistics(winningResult)
         resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn(winningResult.getWinningPrice()))
     }
 }
