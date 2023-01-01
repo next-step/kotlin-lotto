@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class StringNumbers(val numbers: List<String>) {
     init {

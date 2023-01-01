@@ -1,5 +1,12 @@
 package lotto
 
+import lotto.domain.LottoMachine
+import lotto.domain.LottoNumber
+import lotto.domain.RANKING
+import lotto.domain.StringNumbers
+import lotto.domain.WinningLotto
+import lotto.domain.WinningResult
+import lotto.domain.WinningStatistics
 import lotto.ui.InputView
 import lotto.ui.ResultView
 

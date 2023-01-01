@@ -1,7 +1,7 @@
 package lotto.ui
 
-import lotto.Lotto
-import lotto.RANKING
+import lotto.domain.Lotto
+import lotto.domain.RANKING
 
 class ResultView {
     fun printPurchaseCount(count: Int) {

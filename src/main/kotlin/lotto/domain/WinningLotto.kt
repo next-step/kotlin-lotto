@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class WinningLotto(val lotto: Lotto, val bonusNumber: LottoNumber) {
     constructor(winningStrings: StringNumbers, bonusNumber: LottoNumber) : this(
