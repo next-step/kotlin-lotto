@@ -2,6 +2,7 @@ package lotto.domain
 
 import lotto.common.value.Money
 import lotto.domain.enums.OrderStatus
+import lotto.domain.enums.TicketType
 
 class Order(
     val paymentPrice: Money,
@@ -21,5 +22,6 @@ class Order(
 
     fun toLotteryNumbers() = tickets.toLotteryNumbers()
 
-    fun countTicket() = this.tickets.size()
+    fun countTotalTicket() = this.tickets.size()
+    fun countTicket(ticketType: TicketType) = this.tickets.size(ticketType)
 }
