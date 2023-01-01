@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
 import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType

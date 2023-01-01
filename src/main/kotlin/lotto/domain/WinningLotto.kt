@@ -1,8 +1,7 @@
 package lotto.domain
 
 import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
-import lotto.model.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
+import lotto.domain.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
 import lotto.model.Rank
 
 class WinningLotto(

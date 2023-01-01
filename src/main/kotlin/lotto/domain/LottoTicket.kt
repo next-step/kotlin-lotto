@@ -2,7 +2,6 @@ package lotto.domain
 
 import lotto.domain.Lotto.Companion.PRICE
 import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
 
 class LottoTicket private constructor(
     private val purchaseAmount: Int,

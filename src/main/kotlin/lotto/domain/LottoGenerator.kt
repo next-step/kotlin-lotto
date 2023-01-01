@@ -3,8 +3,7 @@ package lotto.domain
 import lotto.model.LottoNumber
 import lotto.model.LottoNumber.Companion.MAX_VALUE
 import lotto.model.LottoNumber.Companion.MIN_VALUE
-import lotto.model.LottoNumbers
-import lotto.model.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
+import lotto.domain.LottoNumbers.Companion.NUMBER_OF_LOTTO_DIGIT
 
 class LottoGenerator {
 

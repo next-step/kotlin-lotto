@@ -2,7 +2,6 @@ package lotto.domain
 
 import lotto.domain.Lotto.Companion.PRICE
 import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
