@@ -10,9 +10,8 @@ class LottoStoreTest : FunSpec({
 
     test("buyLotto") {
         val cash = Cash(1000)
-        val (rest, unusedTickets) = LottoStore.buyLotto(cash)
+        val unusedTickets = LottoStore.buyLotto(cash)
 
-        (rest == Cash(0)) shouldBe true
         unusedTickets.getTicketCount() shouldBe 1
     }
 })

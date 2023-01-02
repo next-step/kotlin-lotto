@@ -1,20 +1,19 @@
 package lotto.view
 
-import lotto.domain.Cash
-import lotto.domain.LottoUnusedTickets
-import lotto.domain.LottoUsedTickets
-import lotto.domain.LottoWinTicket
+import lotto.controller.dto.CashDto
+import lotto.controller.dto.ManualLottoDto
+import lotto.controller.dto.WinTicketDto
 
 object InputView {
 
-    fun readCash(): Cash {
+    fun readCash(): CashDto {
         println("구입금액을 입력해 주세요.")
         val input = try {
             readln().toInt()
         } catch (e: NumberFormatException) {
             error("현금은 숫자여야합니다.")
         }
-        return Cash(input)
+        return CashDto(input)
     }
 
     fun ticketCountForManual(): Int {
@@ -22,19 +21,19 @@ object InputView {
         return readln().toInt()
     }
 
-    fun ticketsToManual(lottoUnusedTickets: LottoUnusedTickets): LottoUsedTickets {
-        val inputs = (1..lottoUnusedTickets.getTicketCount()).map {
+    fun ticketToManual(ticketCount: Int): ManualLottoDto {
+        val manualNumbers = (0 until ticketCount).map {
             println("수동으로 구매할 번호를 입력해 주세요.")
             readln()
         }
-        return lottoUnusedTickets.toManual(inputs)
+        return ManualLottoDto(manualNumbers)
     }
 
-    fun readWinNumber(): LottoWinTicket {
+    fun readWinNumber(): WinTicketDto {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winNumberString = readln()
         println("보너스 볼을 입력해 주세요.")
         val bonusNumberString = readln()
-        return LottoWinTicket.of(winNumberString, bonusNumberString)
+        return WinTicketDto(winNumberString, bonusNumberString)
     }
 }

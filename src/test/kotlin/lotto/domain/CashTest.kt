@@ -13,9 +13,8 @@ class CashTest : FunSpec({
 
         test("fun buy()") {
             val price = 1000
-            val (rest, count) = cash.buy(price)
+            val count = cash.buy(price)
 
-            rest shouldBe Cash(0)
             count shouldBe 1
         }
 
