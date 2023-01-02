@@ -4,7 +4,6 @@ class RandomNumberGenerator(override val startNumber: Int, override val endNumbe
     NumberGenerator {
     override fun getGeneratedNumber(): List<Int> =
         (startNumber..endNumber).map { it }.shuffled().slice(0..5)
-
 }
 
 interface NumberGenerator {
