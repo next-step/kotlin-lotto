@@ -9,10 +9,14 @@ import lotto.view.OutputView
 
 fun main() {
     val money = Money(InputView.getPurchaseFee())
-    val lotto = Lotto(money.getPurchaseFee())
-    val tickets = lotto.purchaseTicket()
 
-    OutputView.printTicketPurchaseCountAndTicketsInfo(lotto.getCount(), tickets)
+    val manualCount = InputView.getManualCount()
+    val manualTicket = InputView.getManualNumbers(manualCount)
+
+    val lotto = Lotto(money.getPurchaseFee())
+    val tickets = lotto.purchaseTicket(manualTicket)
+
+    OutputView.printTicketPurchaseCountAndTicketsInfo(lotto.getCount(), manualCount, tickets)
 
     val matchInfo = Winner(InputView.getWinNumbers(), InputView.getBonusNumbers())
         .checkNumberMatch(IssuanceTickets(tickets))
