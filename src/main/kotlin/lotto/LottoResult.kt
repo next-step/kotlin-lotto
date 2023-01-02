@@ -5,10 +5,6 @@ class LottoResult(
     private val boughtLottos: List<LottoNumbers>
 ) {
     fun getRanks(): Ranks {
-        return Ranks(
-            boughtLottos.map { boughtLotto ->
-                Rank.of(boughtLotto.numbers.count { winningLotto.numbers.contains(it) })
-            }
-        )
+        return Ranks(boughtLottos.map { Rank.of(it.countMatchNumber(winningLotto.numbers)) })
     }
 }
