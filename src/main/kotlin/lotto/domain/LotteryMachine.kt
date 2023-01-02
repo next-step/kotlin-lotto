@@ -5,6 +5,7 @@ import java.math.RoundingMode
 
 object LotteryMachine {
     private const val PRICE = 1_000
+
     private val LOTTO_RETURN_MAP = mapOf(
         3 to 5_000,
         4 to 50_000,
@@ -18,7 +19,7 @@ object LotteryMachine {
         return Lotteries(lotteryList)
     }
 
-    private fun randomLottoNumbers(howMany: Int = 6) = LottoNumber.allNumbers().shuffled().subList(0, howMany)
+    private fun randomLottoNumbers() = LottoNumber.allNumbers().shuffled().subList(0, Lottery.COUNT)
 
     fun getMatchCount(lotteries: Lotteries, lastWinningLottery: Lottery): LotteryMatchCount {
         val matchCount = lotteries.lotteries

@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class Lotteries(val lotteries: List<Lottery>) {
+class Lotteries(val lotteries: List<Lottery>) {
     constructor(vararg lotteries: Lottery) : this(lotteries.toList())
 
     fun count(): Int {
@@ -9,41 +9,27 @@ data class Lotteries(val lotteries: List<Lottery>) {
 }
 
 class Lottery(numbers: List<Int>) {
-    private val numbers: List<LottoNumber>
+
+    val numbers: List<LottoNumber>
 
     constructor(vararg inputNumbers: Int) : this(inputNumbers.toList())
 
     init {
-        require(numbers.size == 6)
+        require(numbers.size == COUNT)
         this.numbers = numbers.map { LottoNumber.of(it) }.sorted()
     }
 
     fun countSameLottoNumbers(other: Lottery): Int {
         return this.numbers.count { other.numbers.contains(it) }
     }
-
-    fun getLottoNumbers(): List<Int> {
-        return numbers.map { it.value }.toList()
+    companion object {
+        const val COUNT = 6
     }
 }
 
 class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> {
     init {
-        require(value in (1..45))
-    }
-
-    companion object {
-        private val NUMBERS = List(45) { LottoNumber(it + 1) }
-
-        fun allNumbers(): List<Int> {
-            return NUMBERS.map { it.value }
-        }
-
-        fun of(number: Int): LottoNumber {
-            require(number - 1 in (NUMBERS.indices))
-
-            return NUMBERS[number - 1]
-        }
+        require(value in (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER))
     }
 
     override fun toString(): String {
@@ -67,5 +53,20 @@ class LottoNumber private constructor(val value: Int) : Comparable<LottoNumber> 
 
     override fun compareTo(other: LottoNumber): Int {
         return this.value.compareTo(other.value)
+    }
+
+    companion object {
+        private const val MIN_LOTTO_NUMBER = 1
+        private const val MAX_LOTTO_NUMBER = 45
+        private val NUMBERS = List(MAX_LOTTO_NUMBER) { LottoNumber(it + MIN_LOTTO_NUMBER) }
+        fun allNumbers(): List<Int> {
+            return NUMBERS.map { it.value }
+        }
+
+        fun of(number: Int): LottoNumber {
+            require(number - MIN_LOTTO_NUMBER in (NUMBERS.indices))
+
+            return NUMBERS[number - MIN_LOTTO_NUMBER]
+        }
     }
 }

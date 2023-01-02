@@ -9,7 +9,7 @@ object LotteryMachineOutputView {
         println("${lotteries.count()}개를 구매했습니다.")
 
         for (it in lotteries.lotteries) {
-            println("[${it.getLottoNumbers().joinToString(", ")}]")
+            println("[${it.numbers.map { it.value }.toList().joinToString(", ")}]")
         }
     }
 
