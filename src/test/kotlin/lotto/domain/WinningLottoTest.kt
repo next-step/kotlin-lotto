@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.model.LottoNumber
-import lotto.model.LottoNumbers
 import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
@@ -39,6 +38,16 @@ internal class WinningLottoTest {
         assertThatExceptionOfType(IllegalArgumentException::class.java)
             .isThrownBy { WinningLotto(numbers, bonusNumber) }
             .withMessage("당첨 번호는 중복되는 숫자가 없어야 합니다.")
+    }
+
+    @Test
+    fun `당첨번호와 보너스 번호는 중복되면 예외가 발생한다`() {
+        val numbers = listOf(1, 2, 3, 4, 5, 6).map(::LottoNumber)
+        val bonusNumber = LottoNumber(6)
+
+        assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy { WinningLotto(numbers, bonusNumber) }
+            .withMessage("당첨 번호와 보너스 번호는 중복되면 안됩니다.")
     }
 
     @Test

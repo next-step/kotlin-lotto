@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.model.LottoNumbers
-
 class Lotto(
     val numbers: List<LottoNumbers>,
 ) {

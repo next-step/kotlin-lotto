@@ -1,6 +1,8 @@
-package lotto.model
+package lotto.domain
 
-data class LottoNumbers(
+import lotto.model.LottoNumber
+
+class LottoNumbers(
     val value: List<LottoNumber>,
 ) {
     init {
@@ -9,6 +11,8 @@ data class LottoNumbers(
     }
 
     fun contains(lottoNumber: LottoNumber): Boolean = value.contains(lottoNumber)
+
+    fun sort(): LottoNumbers = LottoNumbers(value.sortedBy { it.value })
 
     companion object {
         const val NUMBER_OF_LOTTO_DIGIT = 6
