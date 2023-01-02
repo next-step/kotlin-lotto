@@ -7,7 +7,6 @@ import lotto.model.LottoPrize.SECOND
 import lotto.model.LottoPrize.THIRD
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.math.BigDecimal
 
 class LottoPrizesTest {
     @Test
@@ -16,7 +15,7 @@ class LottoPrizesTest {
         val lottoPrizes = LottoPrizes.of(NONE, FOURTH, FIFTH)
 
         // then
-        assertThat(lottoPrizes.getTotalWinningAmount()).isEqualTo(BigDecimal(55_000))
+        assertThat(lottoPrizes.getTotalWinningAmount()).isEqualTo(Money.of(55_000))
     }
 
     @Test

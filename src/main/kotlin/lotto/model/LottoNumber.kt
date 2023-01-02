@@ -3,7 +3,7 @@ package lotto.model
 class LottoNumber private constructor(val value: Int) {
     init {
         require(value in LOTTO_NUMBER_RANGE) {
-            "로또 숫자는 ${LOTTO_NUMBER_RANGE} 범위를 벗어날 수 없습니다. value: ${value}"
+            "로또 숫자는 $LOTTO_NUMBER_RANGE 범위를 벗어날 수 없습니다. value: $value"
         }
     }
 

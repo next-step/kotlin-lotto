@@ -2,13 +2,13 @@ package lotto
 
 import lotto.model.LottoNumber
 import lotto.model.Lottos
+import lotto.model.Money
 import lotto.model.WinningNumbers
 import lotto.model.WinningResult
 import lotto.service.LottoGenerator
 import lotto.service.LottoShop
 import lotto.view.InputView
 import lotto.view.OutputView
-import java.math.BigDecimal
 
 class LottoApplication {
     fun play() {
@@ -32,7 +32,7 @@ class LottoApplication {
 
     private fun buyLottos(): Lottos {
         val moneyInput = InputView.readMoney()
-        val money = BigDecimal(moneyInput)
+        val money = Money.of(moneyInput)
 
         val manualCount = InputView.readManualLottoCount().toInt()
         val manualNumbers = InputView.readManualLottos(manualCount)

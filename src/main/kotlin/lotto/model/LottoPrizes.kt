@@ -1,10 +1,8 @@
 package lotto.model
 
-import java.math.BigDecimal
-
 class LottoPrizes private constructor(private val value: List<LottoPrize>) {
-    fun getTotalWinningAmount(): BigDecimal {
-        return value.map { it.winningAmount }.reduce(BigDecimal::add)
+    fun getTotalWinningAmount(): Money {
+        return value.map { it.winningAmount }.reduce(Money::plus)
     }
 
     fun getCountOf(prize: LottoPrize): Int {

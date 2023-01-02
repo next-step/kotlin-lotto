@@ -1,7 +1,5 @@
 package lotto.model
 
-import java.math.BigDecimal
-
 class Lotto private constructor(val value: Set<LottoNumber>) : Set<LottoNumber> by value {
     init {
         require(value.size == LOTTO_NUMBER_COUNT) {
@@ -15,7 +13,7 @@ class Lotto private constructor(val value: Set<LottoNumber>) : Set<LottoNumber> 
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
-        val LOTTO_PRICE = BigDecimal(1000)
+        val LOTTO_PRICE = Money.of(1000)
 
         fun of(vararg values: Int): Lotto {
             return values.map(LottoNumber::of)

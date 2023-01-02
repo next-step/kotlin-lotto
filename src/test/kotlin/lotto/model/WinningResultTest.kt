@@ -15,20 +15,20 @@ class WinningResultTest {
     internal fun `총 당청 금액을 계산한다`() {
         // given
         val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
-        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
+        val purchaseAmount = LOTTO_PRICE * 6
 
         // when
         val winningResult = WinningResult(purchaseAmount, prizes)
 
         // then
-        assertThat(winningResult.getTotalWinningAmount()).isEqualTo(BigDecimal(3_150_000))
+        assertThat(winningResult.getTotalWinningAmount()).isEqualTo(Money.of(3_150_000))
     }
 
     @Test
     internal fun `당첨 수익률을 계산한다`() {
         // given
         val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
-        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
+        val purchaseAmount = LOTTO_PRICE * 6
 
         // when
         val winningResult = WinningResult(purchaseAmount, prizes)
@@ -41,7 +41,7 @@ class WinningResultTest {
     internal fun `등수 별 당첨결과를 출력한다`() {
         // given
         val prizes = LottoPrizes.of(NONE, FOURTH, FOURTH, FOURTH, THIRD, THIRD)
-        val purchaseAmount = LOTTO_PRICE * (6).toBigDecimal()
+        val purchaseAmount = LOTTO_PRICE * 6
 
         // when
         val winningResult = WinningResult(purchaseAmount, prizes)
