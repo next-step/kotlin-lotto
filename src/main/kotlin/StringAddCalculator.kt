@@ -12,17 +12,6 @@ class StringAddCalculator {
         return numbers.sum()
     }
 
-    private fun replaceToSameSeparator(text: String, customSeparator: String?): String {
-        var replacedOperator = text
-        if (customSeparator != null) {
-            replacedOperator = replacedOperator.replace(customSeparator, COMMON_SEPARATOR)
-        }
-        DEFAULT_SEPARATORS.forEach {
-            replacedOperator = replacedOperator.replace(it, COMMON_SEPARATOR)
-        }
-        return replacedOperator
-    }
-
     private fun separateCustomSeparatorWithText(text: String): Pair<String, String?> {
         if (!text.startsWith(CUSTOM_SEPARATOR_START)) {
             return Pair(text, null)
@@ -34,10 +23,17 @@ class StringAddCalculator {
         return Pair(plainText, customSeparator)
     }
 
+    private fun replaceToSameSeparator(text: String, customSeparator: String?): String {
+        if (customSeparator != null) {
+            return text.replace(customSeparator, COMMON_SEPARATOR).replace(":", COMMON_SEPARATOR)
+        }
+
+        return text.replace(":", COMMON_SEPARATOR)
+    }
+
     companion object {
         private const val CUSTOM_SEPARATOR_START = "//"
         private const val CUSTOM_SEPARATOR_END = "\n"
         private const val COMMON_SEPARATOR = ","
-        private val DEFAULT_SEPARATORS = arrayListOf(",", ":")
     }
 }
