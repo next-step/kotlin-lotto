@@ -1,20 +1,32 @@
 package lotto.domain
 
-class LottoMachine(val price: Int, val manualLottos: ManualLottos) {
+class LottoMachine(val price: Int, private val manualLottoInfo: ManualLottoInfo) {
 
     val purchaseCount: Int
-    val autoCount: Int
-    val autoLottos: List<Lotto>
+    private val autoCount: Int
 
     init {
         require(price % LOTTO_BASE_PRICE == 0) { "input incorrectly price" }
         purchaseCount = price / LOTTO_BASE_PRICE
-        autoCount = purchaseCount - manualLottos.manualLottos.size
-        autoLottos = (0 until autoCount).map { Lotto(createNumbers()) }
+        autoCount = purchaseCount - manualLottoInfo.manualCount
     }
 
-    fun publishLotto(): List<Lotto> {
-        return manualLottos.manualLottos + autoLottos
+    fun publishLotto(): PublishLotto {
+        return PublishLotto(publishManualLottoList(), publishAutoLottoList())
+    }
+
+    private fun publishAutoLottoList(): List<Lotto> {
+        return (0 until autoCount).map { Lotto(createNumbers()) }
+    }
+
+    private fun publishManualLottoList(): List<Lotto> {
+        return manualLottoInfo.lottoStrings.map { manualLottoString ->
+            val stringNumbers = StringNumbers(manualLottoString)
+            val lottoNumbers = stringNumbers.numbers.map { numberStr ->
+                LottoNumber(numberStr.trim().toInt())
+            }
+            Lotto(lottoNumbers.toSet())
+        }
     }
 
     private fun createNumbers(): Set<LottoNumber> {

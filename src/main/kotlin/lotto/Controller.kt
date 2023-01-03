@@ -1,10 +1,9 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
-import lotto.domain.ManualLottoStrings
-import lotto.domain.ManualLottos
+import lotto.domain.ManualLottoInfo
+import lotto.domain.PublishLotto
 import lotto.domain.StringNumbers
 import lotto.domain.WinningLotto
 import lotto.domain.WinningResult
@@ -23,16 +22,15 @@ class Controller(private val inputView: InputView, private val resultView: Resul
     private fun getLottoMachine(): LottoMachine {
         val price = inputView.inputPurchasePrice()
         val manualCount = inputView.inputManualCount()
-        val manualLottoStrings = ManualLottoStrings(manualCount, inputView.inputManualLotto(manualCount))
-        val manualLottos = ManualLottos(manualLottoStrings)
-        return LottoMachine(price, manualLottos)
+        val manualLottoInfo = ManualLottoInfo(manualCount, inputView.inputManualLotto(manualCount))
+        return LottoMachine(price, manualLottoInfo)
     }
 
-    private fun publishLotto(lottoMachine: LottoMachine): List<Lotto> {
-        val lottoList = lottoMachine.publishLotto()
-        resultView.printPurchaseCount(lottoMachine.manualLottos.manualLottos.size, lottoMachine.autoCount)
-        resultView.printPurchaseLotteNumbers(lottoList)
-        return lottoList
+    private fun publishLotto(lottoMachine: LottoMachine): PublishLotto {
+        val publishLotto = lottoMachine.publishLotto()
+        resultView.printPurchaseCount(publishLotto.manualLottos.size, publishLotto.autoLottos.size)
+        resultView.printPurchaseLotteNumbers(publishLotto.getAllLotto())
+        return publishLotto
     }
 
     private fun publishWinningLotto(): WinningLotto {
@@ -41,8 +39,8 @@ class Controller(private val inputView: InputView, private val resultView: Resul
         return WinningLotto(StringNumbers(winningNumbersString), bonusNumber)
     }
 
-    private fun resultLotto(lottoList: List<Lotto>, winningLotto: WinningLotto, price: Int) {
-        val winningResult = WinningResult(lottoList, winningLotto)
+    private fun resultLotto(publishLotto: PublishLotto, winningLotto: WinningLotto, price: Int) {
+        val winningResult = WinningResult(publishLotto.getAllLotto(), winningLotto)
         val winningStatistics = WinningStatistics(price)
 
         resultView.printWinningStatisticsStart()

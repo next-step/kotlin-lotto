@@ -5,8 +5,7 @@ import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoMachine
 import lotto.domain.LottoNumber
-import lotto.domain.ManualLottoStrings
-import lotto.domain.ManualLottos
+import lotto.domain.ManualLottoInfo
 import lotto.domain.RANKING
 import lotto.domain.StringNumbers
 import lotto.domain.WinningLotto
@@ -22,11 +21,11 @@ class WinningLottoTest : StringSpec({
     }
 
     "발행한 로또에 대해서 당첨 통계: 6개 일치된 경우가 몇 장인지와 금액을 반환 한다." {
-        val manualLottoStrings = ManualLottoStrings(1, listOf("1,2,3,4,5,6"))
-        val manualLottos = ManualLottos(manualLottoStrings)
-        val lottoMachine = LottoMachine(2000, manualLottos)
-        val lottoList = lottoMachine.publishLotto()
+        val manualLottoInfo = ManualLottoInfo(1, listOf("1,2,3,4,5,6"))
+        val lottoMachine = LottoMachine(2000, manualLottoInfo)
+        val publishLotto = lottoMachine.publishLotto()
 
+        val lottoList = publishLotto.getAllLotto()
         val firstLotto = lottoList[0]
         val bonusNumber = getBonusNumber(firstLotto)
         val winningLotto = WinningLotto(firstLotto, bonusNumber)
@@ -36,11 +35,11 @@ class WinningLottoTest : StringSpec({
     }
 
     "발행한 금액과 당첨 금액을 통해 수익률을 반환한다." {
-        val manualLottoStrings = ManualLottoStrings(1, listOf("1,2,3,4,5,6"))
-        val manualLottos = ManualLottos(manualLottoStrings)
-        val lottoMachine = LottoMachine(1000, manualLottos)
-        val lottoList = lottoMachine.publishLotto()
+        val manualLottoInfo = ManualLottoInfo(1, listOf("1,2,3,4,5,6"))
+        val lottoMachine = LottoMachine(1000, manualLottoInfo)
+        val publishLotto = lottoMachine.publishLotto()
 
+        val lottoList = publishLotto.getAllLotto()
         val firstLotto = lottoList[0]
         val bonusNumber = getBonusNumber(firstLotto)
         val winningLotto = WinningLotto(firstLotto, bonusNumber)
@@ -51,10 +50,10 @@ class WinningLottoTest : StringSpec({
     }
 
     "수익율을 통해 손익에 대한 결과를 반환 한다." {
-        val manualLottoStrings = ManualLottoStrings(1, listOf("1,2,3,4,5,6"))
-        val manualLottos = ManualLottos(manualLottoStrings)
-        val lottoMachine = LottoMachine(2000, manualLottos)
-        val lottoList = lottoMachine.publishLotto()
+        val manualLottoInfo = ManualLottoInfo(1, listOf("1,2,3,4,5,6"))
+        val lottoMachine = LottoMachine(2000, manualLottoInfo)
+        val publishLotto = lottoMachine.publishLotto()
+        val lottoList = publishLotto.getAllLotto()
 
         val firstLotto = lottoList[0]
         val bonusNumber = getBonusNumber(firstLotto)
