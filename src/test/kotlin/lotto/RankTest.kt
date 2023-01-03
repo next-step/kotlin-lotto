@@ -11,9 +11,21 @@ internal class RankTest {
         // Arrange
 
         // Act
-        val rank = Rank.of(matchCount = 2)
+        val rank = Rank.from(matchCount = 2, isBonus = false)
 
         // Assert
         assertThat(rank).isEqualTo(Rank.LOSING)
+    }
+
+    @Test
+    @DisplayName("보너스볼을 이용해서 6개가 당첨된 경우라면 SECOND를 반환한다")
+    fun `sut return SECOND when matchCount is 6 and isBonus`() {
+        // Arrange
+
+        // Act
+        val rank = Rank.from(matchCount = 6, isBonus = true)
+
+        // Assert
+        assertThat(rank).isEqualTo(Rank.SECOND)
     }
 }
