@@ -10,7 +10,6 @@ import lotto.domain.RANKING
 import lotto.domain.StringNumbers
 import lotto.domain.WinningLotto
 import lotto.domain.WinningResult
-import lotto.domain.WinningStatistics
 import org.assertj.core.api.Assertions
 
 class WinningLottoTest : StringSpec({
@@ -44,9 +43,8 @@ class WinningLottoTest : StringSpec({
         val bonusNumber = getBonusNumber(firstLotto)
         val winningLotto = WinningLotto(firstLotto, bonusNumber)
         val winningResult = WinningResult(lottoList, winningLotto)
-        val winningStatistics = WinningStatistics(lottoMachine.price)
 
-        winningStatistics.rateOfReturn(winningResult.getWinningPrice()) shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
+        winningResult.rateOfReturn(lottoMachine.price) shouldBe RANKING.FIRST.winningPrice.toFloat() / lottoMachine.price.toFloat()
     }
 
     "수익율을 통해 손익에 대한 결과를 반환 한다." {
@@ -59,9 +57,8 @@ class WinningLottoTest : StringSpec({
         val bonusNumber = getBonusNumber(firstLotto)
         val winningLotto = WinningLotto(firstLotto, bonusNumber)
         val winningResult = WinningResult(lottoList, winningLotto)
-        val winningStatistics = WinningStatistics(lottoMachine.price)
 
-        if (winningStatistics.rateOfReturn(winningResult.getWinningPrice()) >= 1) "이익" shouldBe "이익"
+        if (winningResult.rateOfReturn(lottoMachine.price) >= 1) "이익" shouldBe "이익"
     }
 }) {
     companion object {

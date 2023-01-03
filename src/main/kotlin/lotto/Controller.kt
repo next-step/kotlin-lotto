@@ -6,8 +6,6 @@ import lotto.domain.ManualLottoInfo
 import lotto.domain.PublishLotto
 import lotto.domain.StringNumbers
 import lotto.domain.WinningLotto
-import lotto.domain.WinningResult
-import lotto.domain.WinningStatistics
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -40,11 +38,10 @@ class Controller(private val inputView: InputView, private val resultView: Resul
     }
 
     private fun resultLotto(publishLotto: PublishLotto, winningLotto: WinningLotto, price: Int) {
-        val winningResult = WinningResult(publishLotto.getAllLotto(), winningLotto)
-        val winningStatistics = WinningStatistics(price)
+        val winningResult = publishLotto.getWinningResult(winningLotto)
 
         resultView.printWinningStatisticsStart()
         resultView.printWinningStatistics(winningResult)
-        resultView.printWinningStatisticsRate(winningStatistics.rateOfReturn(winningResult.getWinningPrice()))
+        resultView.printWinningStatisticsRate(winningResult.rateOfReturn(price))
     }
 }
