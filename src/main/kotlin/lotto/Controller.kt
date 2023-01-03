@@ -27,7 +27,7 @@ class Controller(private val inputView: InputView, private val resultView: Resul
     private fun publishLotto(lottoMachine: LottoMachine): PublishLotto {
         val publishLotto = lottoMachine.publishLotto()
         resultView.printPurchaseCount(publishLotto.manualLottos.size, publishLotto.autoLottos.size)
-        resultView.printPurchaseLotteNumbers(publishLotto.getAllLotto())
+        resultView.printPurchaseLotteNumbers(publishLotto.allLotto)
         return publishLotto
     }
 

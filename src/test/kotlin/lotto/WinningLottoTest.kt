@@ -24,7 +24,7 @@ class WinningLottoTest : StringSpec({
         val lottoMachine = LottoMachine(2000, manualLottoInfo)
         val publishLotto = lottoMachine.publishLotto()
 
-        val lottoList = publishLotto.getAllLotto()
+        val lottoList = publishLotto.allLotto
         val firstLotto = lottoList[0]
         val bonusNumber = getBonusNumber(firstLotto)
         val winningLotto = WinningLotto(firstLotto, bonusNumber)
@@ -38,7 +38,7 @@ class WinningLottoTest : StringSpec({
         val lottoMachine = LottoMachine(1000, manualLottoInfo)
         val publishLotto = lottoMachine.publishLotto()
 
-        val lottoList = publishLotto.getAllLotto()
+        val lottoList = publishLotto.allLotto
         val firstLotto = lottoList[0]
         val bonusNumber = getBonusNumber(firstLotto)
         val winningLotto = WinningLotto(firstLotto, bonusNumber)
@@ -51,7 +51,7 @@ class WinningLottoTest : StringSpec({
         val manualLottoInfo = ManualLottoInfo(1, listOf("1,2,3,4,5,6"))
         val lottoMachine = LottoMachine(2000, manualLottoInfo)
         val publishLotto = lottoMachine.publishLotto()
-        val lottoList = publishLotto.getAllLotto()
+        val lottoList = publishLotto.allLotto
 
         val firstLotto = lottoList[0]
         val bonusNumber = getBonusNumber(firstLotto)

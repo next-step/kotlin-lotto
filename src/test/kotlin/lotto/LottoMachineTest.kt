@@ -38,7 +38,7 @@ class LottoMachineTest : StringSpec({
 
         val publishLotto = lottoMachine.publishLotto()
 
-        publishLotto.getAllLotto().size shouldBe lottoMachine.purchaseCount
+        publishLotto.allLotto.size shouldBe lottoMachine.purchaseCount
     }
 
     "수동 입력 개수와 입력받은 로또 숫자목록 개수는 같다" {
@@ -48,7 +48,7 @@ class LottoMachineTest : StringSpec({
 
         val publishLotto = lottoMachine.publishLotto()
 
-        publishLotto.getAllLotto().size shouldBe manualLottoCount
+        publishLotto.allLotto.size shouldBe manualLottoCount
     }
 
     "수동 입력 개수0" {
@@ -57,6 +57,6 @@ class LottoMachineTest : StringSpec({
 
         val publishLotto = lottoMachine.publishLotto()
 
-        publishLotto.getAllLotto().size shouldBe lottoMachine.purchaseCount
+        publishLotto.allLotto.size shouldBe lottoMachine.purchaseCount
     }
 })
