@@ -17,4 +17,9 @@ object Input {
         }
         return LottoNumbers(numbers)
     }
+
+    fun getBonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("It is not a number")
+    }
 }
