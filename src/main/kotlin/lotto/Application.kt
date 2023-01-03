@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.views.Input.getBonusNumber
 import lotto.views.Input.getPriceForBuying
 import lotto.views.Input.getWinnerLottoNumbers
 import lotto.views.Output.printBuyAmount
@@ -16,7 +17,10 @@ fun main() {
     printBuyAmount(boughtTicketAmount)
     printLottoNumbers(boughtLottos)
 
-    val winningLotto = getWinnerLottoNumbers()
+    val winningLottoOrigin = getWinnerLottoNumbers()
+    val bonusNumber = getBonusNumber()
+    val winningLotto = WinningLottoNumbers(winningLottoOrigin, bonusNumber)
+
     val lottoResult = LottoResult(winningLotto, boughtLottos)
     val ranks = lottoResult.getRanks()
     val earningRate = ranks.calculateEarningRate(boughtPrice = price.price)
