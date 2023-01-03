@@ -7,8 +7,10 @@ object Store {
 
     fun purchaseManualLotto(ticket: Ticket): Lottos {
         return Lottos(
-            List(ticket.manualLottoSize) {
-                Lotto(ticket.selectedLottoNumbers[it])
+            ticket.manualLottoNumbers.map {
+                Lotto(
+                    it.map(LottoNumber::of).toSet()
+                )
             }
         )
     }

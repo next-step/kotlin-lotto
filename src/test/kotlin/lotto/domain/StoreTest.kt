@@ -8,10 +8,10 @@ import io.kotest.matchers.types.beInstanceOf
 class StoreTest : DescribeSpec({
     describe("로또 판매기 테스트") {
         val lottoNumbers = listOf(
-            listOf(8, 21, 23, 41, 42, 43).map { LottoNumber.of(it) }.toSet(),
-            listOf(3, 5, 11, 16, 32, 38).map { LottoNumber.of(it) }.toSet()
+            setOf(8, 21, 23, 41, 42, 43),
+            setOf(3, 5, 11, 16, 32, 38)
         )
-        val ticket = Ticket(14000, lottoNumbers)
+        val ticket = Ticket(Money(14000), lottoNumbers)
 
         it("로또를 자동으로 구매할 수 있다.") {
             val purchasedAutoLottos = Store.purchaseAutoLottos(ticket)

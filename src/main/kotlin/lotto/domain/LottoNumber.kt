@@ -8,7 +8,7 @@ class LottoNumber(private val number: Int) {
     override fun toString() = number.toString()
 
     companion object {
-        private val LOTTO_NUMBER_RANGE = (1..45)
+        val LOTTO_NUMBER_RANGE = (1..45)
         private val NUMBERS = LOTTO_NUMBER_RANGE.map { LottoNumber(it) }
 
         fun of(value: Int): LottoNumber {
