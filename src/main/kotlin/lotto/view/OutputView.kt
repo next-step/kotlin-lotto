@@ -6,12 +6,9 @@ import lotto.domain.LottoUsedTickets
 
 object OutputView {
 
-    fun displayTicketCount(ticketCount: Int) {
-        println("${ticketCount}장 구매하였습니다.")
-    }
-
-    fun displayTickets(usedTickets: LottoUsedTickets) {
-        println(usedTickets.toString())
+    fun displayTickets(manualTickets: LottoUsedTickets, autoTickets: LottoUsedTickets) {
+        println("수동으로 ${manualTickets.getSize()}장, 자동으로 ${autoTickets.getSize()}개를 구매했습니다.")
+        println((manualTickets + autoTickets).toString())
     }
 
     fun displayRewards(rewards: LottoRewards) {
