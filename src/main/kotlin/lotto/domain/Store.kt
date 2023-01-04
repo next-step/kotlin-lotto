@@ -1,17 +1,23 @@
 package lotto.domain
 
 object Store {
-    fun purchase(price: Int): MutableList<Lotto> {
-        validatePurchasePrice(price)
-
-        return issueLottos(price / Policy.LOTTO_PRICE)
+    fun purchaseAutoLottos(ticket: Ticket): Lottos {
+        return issueLottos(ticket.autoLottoSize)
     }
 
-    private fun validatePurchasePrice(price: Int) {
-        require(price % Policy.LOTTO_PRICE == 0) { "로또 금액은 1000원 단위로 입력할 수 있습니다." }
+    fun purchaseManualLotto(ticket: Ticket): Lottos {
+        return Lottos(
+            ticket.manualLottoNumbers.map {
+                Lotto(
+                    it.map(LottoNumber::of).toSet()
+                )
+            }
+        )
     }
 
-    private fun issueLottos(count: Int): MutableList<Lotto> {
-        return MutableList(count) { LottoGenerator.generate() }
+    private fun issueLottos(count: Int): Lottos {
+        return Lottos(
+            List(count) { LottoGenerator.generate() }
+        )
     }
 }

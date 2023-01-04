@@ -3,9 +3,9 @@ package lotto.domain
 object LottoGenerator {
     fun generate(): Lotto {
         return Lotto(
-            Policy.LOTTO_NUMBER_RANGE
+            LottoNumber.LOTTO_NUMBER_RANGE
                 .shuffled()
-                .take(Policy.LOTTO_SIZE)
+                .take(Lotto.LOTTO_SIZE)
                 .map(LottoNumber::of)
                 .toSet()
         )

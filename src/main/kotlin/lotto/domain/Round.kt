@@ -1,13 +1,12 @@
 package lotto.domain
 
 class Round(
-    private val purchasedLottos: List<Lotto>,
+    private val purchasedLottos: Lottos,
     private val winningLotto: WinningLotto
 ) {
     fun aggregate(): RoundResult {
         return RoundResult(
-            purchasedLottos
-                .map { winningLotto.match(it) }
+            purchasedLottos.match(winningLotto)
                 .groupingBy { it }
                 .eachCount()
         )

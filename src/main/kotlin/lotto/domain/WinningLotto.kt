@@ -9,10 +9,7 @@ data class WinningLotto(private val lotto: Lotto, private val bonusNumber: Lotto
         val equalCount = calculateEqualCount(other)
         val isBonusMatch = checkBonusMatch(other)
 
-        return when {
-            (equalCount == 5 && isBonusMatch) -> Rank.of(5 to true)
-            else -> Rank.of(equalCount to false)
-        }
+        return Rank.of(Score(equalCount, isBonusMatch))
     }
 
     private fun calculateEqualCount(other: Lotto): Int {

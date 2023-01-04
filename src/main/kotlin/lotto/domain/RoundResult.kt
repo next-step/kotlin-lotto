@@ -5,7 +5,7 @@ import java.math.RoundingMode
 
 class RoundResult(private val countPerRank: Map<Rank, Int>) {
     private val rewardPrice = Money(countPerRank.map { it.key.rewardPrice * it.value }.sum())
-    private val purchasePrice = Money(countPerRank.map { Policy.LOTTO_PRICE * it.value }.sum())
+    private val purchasePrice = Money(countPerRank.map { LOTTO_PRICE * it.value }.sum())
 
     fun getCountOfRank(rank: Rank): Int {
         return countPerRank[rank] ?: 0
@@ -25,5 +25,6 @@ class RoundResult(private val countPerRank: Map<Rank, Int>) {
 
     companion object {
         const val DEFAULT_RATE_SCALE = 2
+        const val LOTTO_PRICE = 1000
     }
 }
