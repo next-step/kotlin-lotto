@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 enum class RANKING(val winningCount: Int, val winningPrice: Int, val checkBonus: Boolean, val bonusMatched: Boolean) {
     MISS(0, 0, false, false),

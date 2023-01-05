@@ -1,4 +1,6 @@
-package lotto
+package lotto.domain
+
+import kotlin.math.floor
 
 class WinningResult(lottoList: List<Lotto>, winningLotto: WinningLotto) {
 
@@ -16,12 +18,11 @@ class WinningResult(lottoList: List<Lotto>, winningLotto: WinningLotto) {
         return winningResult[ranking.ordinal]
     }
 
-    fun getWinningPrice(): Int {
-        var winningPrice = 0
+    private fun getWinningPrice(): Int {
+        return RANKING.values().sumOf { it.winningPrice * winningResult[it.ordinal] }
+    }
 
-        RANKING.values().forEach { ranking ->
-            winningPrice += ranking.winningPrice * winningResult[ranking.ordinal]
-        }
-        return winningPrice
+    fun rateOfReturn(price: Int): Float {
+        return floor(getWinningPrice().toFloat() / price.toFloat() * 100) / 100
     }
 }

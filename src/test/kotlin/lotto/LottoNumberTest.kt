@@ -1,6 +1,7 @@
 package lotto
 
 import io.kotest.core.spec.style.StringSpec
+import lotto.domain.LottoNumber
 import org.assertj.core.api.Assertions
 
 class LottoNumberTest : StringSpec({

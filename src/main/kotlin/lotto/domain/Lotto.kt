@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Lotto(val numbers: Set<LottoNumber>) {
     init {
@@ -10,6 +10,6 @@ class Lotto(val numbers: Set<LottoNumber>) {
     override fun toString(): String = numbers.map { it.number }.toString()
 
     companion object {
-        private const val LOTTO_NUMBERS_COUNT = 6
+        const val LOTTO_NUMBERS_COUNT = 6
     }
 }

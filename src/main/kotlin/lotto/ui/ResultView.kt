@@ -1,11 +1,12 @@
 package lotto.ui
 
-import lotto.Lotto
-import lotto.RANKING
+import lotto.domain.Lotto
+import lotto.domain.RANKING
+import lotto.domain.WinningResult
 
 class ResultView {
-    fun printPurchaseCount(count: Int) {
-        println("${ count }개를 구매했습니다.")
+    fun printPurchaseCount(manualCount: Int, autoCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${autoCount}개를 구매했습니다.")
     }
 
     fun printPurchaseLotteNumbers(lottoList: List<Lotto>) {
@@ -20,7 +21,15 @@ class ResultView {
         println("---------")
     }
 
-    fun printWinningStatistics(rank: RANKING, winningCount: Int, bonusMatched: Boolean) {
+    fun printWinningStatistics(winningResult: WinningResult) {
+        for (rank in RANKING.values()) {
+            if (rank != RANKING.MISS) {
+                printWinningStatistics(rank, winningResult.getWinningResult(rank), rank.bonusMatched)
+            }
+        }
+    }
+
+    private fun printWinningStatistics(rank: RANKING, winningCount: Int, bonusMatched: Boolean) {
         println("${ rank.winningCount }개 일치${if (bonusMatched) " 보너스 볼 일치" else ""} (${ rank.winningPrice }원) - ${ winningCount }개")
     }
 
