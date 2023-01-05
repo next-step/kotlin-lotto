@@ -3,7 +3,6 @@ package lotto.model
 import lotto.model.Money.Companion.ZERO
 import lotto.model.Money.Companion.of
 
-
 enum class LottoPrize(
     val matchCount: Int,
     val winningAmount: Money,

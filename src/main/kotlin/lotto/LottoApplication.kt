@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.model.LottoNumber
+import lotto.model.LottoTicket
 import lotto.model.Lottos
 import lotto.model.Money
 import lotto.model.WinningNumbers
@@ -36,8 +37,9 @@ class LottoApplication {
 
         val manualCount = InputView.readManualLottoCount().toInt()
         val manualNumbers = InputView.readManualLottos(manualCount)
+        val lottoTicket = LottoTicket.of(manualNumbers)
 
-        val lottos = LottoShop.buyLottos(money, manualNumbers)
+        val lottos = LottoShop.buyLottos(money, lottoTicket)
         OutputView.printDetails(lottos, manualCount)
         return lottos
     }
