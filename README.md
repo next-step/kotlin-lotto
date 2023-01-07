@@ -1,1 +1,1 @@
-# kotlin-lotto
+# kotlin-lottery
