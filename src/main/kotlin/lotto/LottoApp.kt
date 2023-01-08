@@ -13,7 +13,7 @@ import lotto.ui.OutputViews.printLottoMatchResult
 import lotto.ui.OutputViews.printProfitRate
 
 fun main() {
-    val inputPrice = inputPrice() ?: 0
+    val inputPrice = inputPrice()
 
     val buyPrice = BuyPrice(inputPrice)
     val lottoCount = buyPrice.getLottoCount()
@@ -26,9 +26,9 @@ fun main() {
 
     printBoughtLottos(lotto.value)
 
-    val winningNumbers = WinningLotto(inputWinningNumber()).winningNumbers
+    val winningNumbers = WinningLotto(inputWinningNumber())
     val matching = lotto.matchWinningNumbers(winningNumbers)
 
     printLottoMatchResult(matching)
-    printProfitRate(ProfitRate(matching, lottoCount).calculate())
+    printProfitRate(ProfitRate(matching, inputPrice).calculate())
 }
