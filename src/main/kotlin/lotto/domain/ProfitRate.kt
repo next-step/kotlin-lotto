@@ -10,19 +10,15 @@ class ProfitRate(
 
     fun calculate(): Double {
         val totalWinningMoney = getTotalWinningMoney()
-        return calculate(totalWinningMoney)
+        val decimalFormat = DecimalFormat(PROFIT_RATE_PATTERN)
+        decimalFormat.roundingMode = RoundingMode.DOWN
+        val profitRate = totalWinningMoney / inputPrice.toDouble()
+        return decimalFormat.format(profitRate).toDouble()
     }
 
     private fun getTotalWinningMoney(): Int {
         return matchResult.entries
             .sumOf { it.key.getTotalWinningMoney(it.value) }
-    }
-
-    private fun calculate(totalWinningMoney: Int): Double {
-        val decimalFormat = DecimalFormat(PROFIT_RATE_PATTERN)
-        decimalFormat.roundingMode = RoundingMode.DOWN
-        val profitRate = totalWinningMoney / inputPrice.toDouble()
-        return decimalFormat.format(profitRate).toDouble()
     }
 
     companion object {
