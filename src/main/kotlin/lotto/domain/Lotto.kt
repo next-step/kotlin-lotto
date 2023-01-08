@@ -1,3 +1,9 @@
 package lotto.domain
 
-class Lotto(val value: List<Int>)
+@JvmInline
+value class Lotto(val value: List<Int>) {
+
+    fun findWinningCount(winningLotto: WinningLotto): Int {
+        return value.count { winningLotto.winningNumbers.contains(it) }
+    }
+}
