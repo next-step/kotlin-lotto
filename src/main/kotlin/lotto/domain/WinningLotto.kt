@@ -1,7 +1,8 @@
 package lotto.domain
 
 class WinningLotto(
-    val winningNumbers: List<Int>
+    val winningNumbers: List<Int>,
+    private val bonusNumber: Int
 ) {
 
     init {
@@ -9,6 +10,10 @@ class WinningLotto(
             throw IllegalArgumentException("당첨 번호는 6개 입니다.")
         }
         validateWinningNumber()
+    }
+
+    fun isMatchBonus(bonusNumber: Int): Boolean {
+        return this.bonusNumber == bonusNumber
     }
 
     private fun validateWinningNumber() {
@@ -26,8 +31,8 @@ class WinningLotto(
         private const val LOTTO_LAST_NUMBER = 45
         private const val MESSAGE_LOTTO_RANGE = "당첨 번호는 1 ~ 45 범위의 숫자로만 구성될 수 있습니다."
 
-        fun of(winningNumbers: List<String>): WinningLotto {
-            return WinningLotto(winningNumbers.map { it.toInt() })
+        fun of(winningNumbers: List<String>, bonusNumber: Int): WinningLotto {
+            return WinningLotto(winningNumbers.map { it.toInt() }, bonusNumber)
         }
     }
 }
