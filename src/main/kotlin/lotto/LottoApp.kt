@@ -22,12 +22,12 @@ fun main() {
     val lottoFactory = LottoFactory()
     val generateStrategy = LottoAutoGeneratorStrategy()
 
-    val lotto = lottoFactory.generate(lottoCount, generateStrategy)
+    val lottos = lottoFactory.generate(lottoCount, generateStrategy)
 
-    printBoughtLottos(lotto.value)
+    printBoughtLottos(lottos.value)
 
     val winningNumbers = WinningLotto.of(inputWinningNumber())
-    val matching = lotto.matchWinningNumbers(winningNumbers)
+    val matching = lottos.matchWinningNumbers(winningNumbers)
 
     printLottoMatchResult(matching)
     printProfitRate(ProfitRate(matching, inputPrice).calculate())
