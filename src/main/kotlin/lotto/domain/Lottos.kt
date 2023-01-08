@@ -1,14 +1,11 @@
 package lotto.domain
 
-class Lottos(val value: List<Lotto>) {
+@JvmInline
+value class Lottos(val value: List<Lotto>) {
 
-    fun matchWinningNumbers(winningNumbers: List<Int>): Map<Ranking, Int> {
-        return value.groupingBy { lottoNumber ->
-            Ranking.valueOf(
-                lottoNumber.value.count {
-                    winningNumbers.contains(it)
-                }
-            )
+    fun matchWinningNumbers(winningNumbers: WinningLotto): Map<Ranking, Int> {
+        return value.groupingBy { lotto ->
+            Ranking.valueOf(lotto.findWinningCount(winningNumbers))
         }.eachCount()
     }
 }
