@@ -16,7 +16,6 @@ class LottoAutoGeneratorStrategy : LottoGeneratorStrategy {
             .shuffled()
             .subList(LOTTO_FIRST_INDEX, LOTTO_LAST_INDEX)
             .sorted()
-            .toList()
         return Lotto(lottoNumbers)
     }
 
