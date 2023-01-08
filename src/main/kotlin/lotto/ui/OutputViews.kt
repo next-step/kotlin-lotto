@@ -20,7 +20,11 @@ object OutputViews {
     }
 
     fun printBoughtLotto(lottoCount: Int) {
-        println("${lottoCount}${MESSAGE_BOUGHT_LOTTO}")
+        println("${lottoCount}$MESSAGE_BOUGHT_LOTTO")
+    }
+
+    fun printBonusNumber(bonusNumber: Int) {
+        println(bonusNumber)
     }
 
     fun printLottoMatchResult(matchResult: Map<Ranking, Int>) {
@@ -28,7 +32,7 @@ object OutputViews {
         println("---------")
         println("${FOURTH.matchCount}개 일치 (${FOURTH.winningMoney}원) - ${matchResult[FOURTH] ?: 0}개")
         println("${THIRD.matchCount}개 일치 (${THIRD.winningMoney}원) - ${matchResult[THIRD] ?: 0}개")
-        println("${SECOND.matchCount}개 일치 (${SECOND.winningMoney}원) - ${matchResult[SECOND] ?: 0}개")
+        println("${SECOND.matchCount}개 일치, 보너스 볼 일치 (${SECOND.winningMoney}원) - ${matchResult[SECOND] ?: 0}개")
         println("${FIRST.matchCount}개 일치 (${FIRST.winningMoney}원) - ${matchResult[FIRST] ?: 0}개")
     }
 

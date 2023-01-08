@@ -1,7 +1,7 @@
 package lotto.domain.strategy
 
-import lotto.domain.Lottos
 import lotto.domain.Lotto
+import lotto.domain.Lottos
 
 class LottoAutoGeneratorStrategy : LottoGeneratorStrategy {
 
@@ -16,7 +16,6 @@ class LottoAutoGeneratorStrategy : LottoGeneratorStrategy {
             .shuffled()
             .subList(LOTTO_FIRST_INDEX, LOTTO_LAST_INDEX)
             .sorted()
-            .toList()
         return Lotto(lottoNumbers)
     }
 
