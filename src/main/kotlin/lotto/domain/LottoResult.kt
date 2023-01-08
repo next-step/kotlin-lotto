@@ -3,7 +3,7 @@ package lotto.domain
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class ProfitRate(
+class LottoResult(
     private val matchResult: Map<Ranking, Int>,
     private val inputPrice: Int
 ) {

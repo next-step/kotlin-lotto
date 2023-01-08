@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.BuyPrice
-import lotto.domain.ProfitRate
+import lotto.domain.LottoResult
 import lotto.domain.WinningLotto
 import lotto.domain.strategy.LottoAutoGeneratorStrategy
 import lotto.domain.strategy.LottoFactory
@@ -30,5 +30,5 @@ fun main() {
     val matching = lottos.matchWinningNumbers(winningNumbers)
 
     printLottoMatchResult(matching)
-    printProfitRate(ProfitRate(matching, inputPrice).calculate())
+    printProfitRate(LottoResult(matching, inputPrice).calculate())
 }

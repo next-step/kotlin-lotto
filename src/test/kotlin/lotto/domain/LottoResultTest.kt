@@ -3,7 +3,7 @@ package lotto.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class ProfitRateTest {
+internal class LottoResultTest {
 
     @Test
     fun `구매금액 대비 당첨금액의 수익률을 계산한다`() {
@@ -18,7 +18,7 @@ internal class ProfitRateTest {
         val price = 14000
 
         // when
-        val actual = ProfitRate(matchResult, price).calculate()
+        val actual = LottoResult(matchResult, price).calculate()
 
         // then
         val expected = 0.35
