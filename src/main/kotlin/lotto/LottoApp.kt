@@ -26,7 +26,7 @@ fun main() {
 
     printBoughtLottos(lotto.value)
 
-    val winningNumbers = WinningLotto(inputWinningNumber())
+    val winningNumbers = WinningLotto.of(inputWinningNumber())
     val matching = lotto.matchWinningNumbers(winningNumbers)
 
     printLottoMatchResult(matching)
