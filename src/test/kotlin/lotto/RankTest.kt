@@ -28,4 +28,16 @@ internal class RankTest {
         // Assert
         assertThat(rank).isEqualTo(Rank.SECOND)
     }
+
+    @Test
+    @DisplayName("보너스번호가 같더라도 4개가 일치한다면 FOURTH를 반환한다")
+    fun `sut return FOURTH when matchCount is 4 and isBonus`() {
+        // Arrange
+
+        // Act
+        val rank = Rank.from(matchCount = 4, isBonus = true)
+
+        // Assert
+        assertThat(rank).isEqualTo(Rank.FIFTH)
+    }
 }

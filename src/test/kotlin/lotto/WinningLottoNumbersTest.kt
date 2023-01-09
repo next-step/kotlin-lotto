@@ -9,11 +9,11 @@ internal class WinningLottoNumbersTest {
     @DisplayName("보너스 번호는 우승번호가 될 수 없습니다")
     fun `sut bonus number can not be winning number`() {
         // Arrange
-        val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val lottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
 
         // Act & Assert
         assertThrows(IllegalArgumentException::class.java) {
-            WinningLottoNumbers(numbers = lottoNumbers, bonusNumber = 1)
+            WinningLottoNumbers(numbers = lottoNumbers, bonusNumber = LottoNumber(1))
         }
     }
 }

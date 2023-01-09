@@ -37,7 +37,7 @@ internal class LottoNumberGeneratorTest {
 
         // Assert
         lotto.first().value.forEach {
-            assertThat(1..45).contains(it)
+            assertThat(1..45).contains(it.value)
         }
     }
 }
