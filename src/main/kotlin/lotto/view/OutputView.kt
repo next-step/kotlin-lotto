@@ -3,13 +3,13 @@ package lotto.view
 import lotto.model.Lotto
 import lotto.model.LottoPrize
 import lotto.model.Lottos
-import lotto.model.WinningNumbers
 import lotto.model.WinningResult
 import java.util.Comparator.comparingInt
 
 object OutputView {
-    fun printDetails(lottos: Lottos) {
-        println("${lottos.size}개를 구매했습니다.")
+    fun printDetails(lottos: Lottos, manualCount: Int) {
+        println()
+        println("수동으로 ${manualCount}장, 자동으로 ${lottos.size - manualCount}개를 구매했습니다.")
         printLottos(lottos)
         println()
     }
@@ -23,12 +23,10 @@ object OutputView {
         println(numberValueList)
     }
 
-    fun printResult(lottos: Lottos, winningNumbers: WinningNumbers) {
+    fun printResult(winningResult: WinningResult) {
         println()
         println("당첨 통계")
         println("---------")
-
-        val winningResult = WinningResult.of(lottos, winningNumbers)
 
         printPrizeDetails(winningResult)
         printPrizeReturnRatio(winningResult)

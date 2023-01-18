@@ -1,24 +1,27 @@
 package lotto.service
 
 import lotto.model.Lotto.Companion.LOTTO_PRICE
+import lotto.model.LottoTicket
 import lotto.model.Lottos
-import java.math.BigDecimal
-import java.math.RoundingMode.FLOOR
+import lotto.model.Money
+import lotto.model.Money.Companion.ZERO
+
 
 object LottoShop {
-    private const val LOTTO_MONEY_SCALE = 0
+    fun buyLottos(money: Money, lottoTicket: LottoTicket = LottoTicket()): Lottos {
+        require(money >= LOTTO_PRICE) { "금액은 로또 가격인 ${LOTTO_PRICE}보다 커야합니다." }
 
-    fun buyAutoLottos(money: BigDecimal): Lottos {
-        val buyCount = money.pay(LOTTO_PRICE)
-        val lottoList = List(buyCount) { LottoGenerator.getRandomLotto() }
-        return Lottos(lottoList)
+        val manualLottos = lottoTicket.toLottos()
+        val manualLottosPrice = manualLottos.purchaseAmount
+        val autoLottos = buyAutoLottos(money - manualLottosPrice)
+        return Lottos(manualLottos.plus(autoLottos))
     }
 
-    private fun BigDecimal.pay(lottoPrice: BigDecimal): Int {
-        require(this >= lottoPrice) {
-            "금액은 로또 가격인 ${lottoPrice}보다 커야합니다. money: $this"
-        }
+    private fun buyAutoLottos(leftMoney: Money): Lottos {
+        require(leftMoney >= ZERO) { "금액보다 많은 양의 로또를 살 수는 없습니다." }
 
-        return this.divide(LOTTO_PRICE, LOTTO_MONEY_SCALE, FLOOR).toInt()
+        val buyCount = leftMoney.getBuyCountOf(LOTTO_PRICE)
+        val blankTicket = LottoTicket.getBlankTicket(buyCount)
+        return blankTicket.toRandomLottos()
     }
 }

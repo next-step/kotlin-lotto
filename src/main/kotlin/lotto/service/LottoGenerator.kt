@@ -9,7 +9,7 @@ object LottoGenerator {
 
     fun fromString(input: String): Lotto {
         return input.split(STRING_DELIMITER)
-            .map(LottoNumber::of)
+            .map { LottoNumber.of(it.trim()) }
             .let { Lotto.of(it) }
     }
 
