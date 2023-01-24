@@ -5,8 +5,8 @@ import lotto.Rank
 import lotto.Ranks
 
 object Output {
-    fun printBuyAmount(amount: Int) {
-        println("$amount 개를 구매했습니다.")
+    fun printBuyAmount(manualAmount: Int, autoAmount: Int) {
+        println("수동으로 $manualAmount 장, 자동으로 $autoAmount 개를 구매했습니다.")
     }
 
     fun printLottoNumbers(lottoNumbers: List<LottoNumbers>) {

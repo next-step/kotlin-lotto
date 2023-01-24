@@ -30,8 +30,8 @@ internal class RankTest {
     }
 
     @Test
-    @DisplayName("보너스번호가 같더라도 4개가 일치한다면 FOURTH를 반환한다")
-    fun `sut return FOURTH when matchCount is 4 and isBonus`() {
+    @DisplayName("4개가 일치하더라도 보너스번호가 같으면 FIFTH를 반환한다")
+    fun `sut return FIFTH when matchCount is 4 and isBonus`() {
         // Arrange
 
         // Act
