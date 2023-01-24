@@ -25,7 +25,7 @@ internal class LottoNumberGeneratorTest {
         val lotto = sut.generate(1)
 
         // Assert
-        assertThat(lotto.first().numbers.size).isEqualTo(6)
+        assertThat(lotto.first().value.size).isEqualTo(6)
     }
 
     @Test
@@ -36,8 +36,8 @@ internal class LottoNumberGeneratorTest {
         val lotto = sut.generate(1)
 
         // Assert
-        lotto.first().numbers.forEach {
-            assertThat(1..45).contains(it)
+        lotto.first().value.forEach {
+            assertThat(1..45).contains(it.value)
         }
     }
 }

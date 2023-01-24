@@ -12,7 +12,7 @@ internal class RanksTest {
         val boughtPrice = 14_000
         val ranks = listOf(
             Rank.FOURTH,
-            Rank.THIRD
+            Rank.FIFTH,
         )
         val sut = Ranks(ranks = ranks)
 
