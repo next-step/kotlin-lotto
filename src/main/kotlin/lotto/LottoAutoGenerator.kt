@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.LottoGeneratorStrategy.Companion.ALL_LOTTO_NUMBERS
+
 class LottoAutoGenerator : LottoGeneratorStrategy {
 
     override fun generate(count: Int): List<LottoNumbers> {
@@ -8,7 +10,8 @@ class LottoAutoGenerator : LottoGeneratorStrategy {
 
     private fun generateLottoNumber(): LottoNumbers {
         return LottoNumbers(
-            totalNumbers
+            ALL_LOTTO_NUMBERS
+                .shuffled()
                 .slice(0 until 6)
                 .sorted()
                 .map { LottoNumber(it) }

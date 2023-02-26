@@ -1,5 +1,6 @@
 package lotto.views
 
+import lotto.LottoGeneratorStrategy.Companion.ALL_LOTTO_NUMBERS
 import lotto.LottoNumber
 import lotto.LottoNumbers
 
@@ -34,6 +35,11 @@ object Input {
             ?: throw IllegalArgumentException("It is not a number")
         if (numbers.distinct().size != 6) {
             throw IllegalArgumentException("It must be a 6 numbers without duplication")
+        }
+        numbers.forEach {
+            if (!ALL_LOTTO_NUMBERS.contains(it.value)) {
+                throw IllegalArgumentException("It must be a number between 1 and 45")
+            }
         }
         return LottoNumbers(numbers)
     }
