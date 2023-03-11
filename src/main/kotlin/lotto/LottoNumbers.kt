@@ -14,4 +14,8 @@ value class LottoNumbers(val value: List<LottoNumber>) {
     fun isContainNumber(number: LottoNumber): Boolean {
         return value.contains(number)
     }
+
+    override fun toString(): String {
+        return value.map { it.value }.toString()
+    }
 }
