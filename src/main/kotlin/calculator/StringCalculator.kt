@@ -4,7 +4,9 @@ fun calculate(formula: String): Int {
     if (formula.isBlank()) {
         return 0
     }
-    return parsePositiveNumber(formula)
+    val numbers = formula.split(",")
+    return numbers.map { parsePositiveNumber(it) }
+        .reduce { total, num -> total + num }
 }
 
 private fun parsePositiveNumber(formula: String): Int {

@@ -33,5 +33,10 @@ class StringCalculatorKtTest : FunSpec({
             val exception = shouldThrowExactly<IllegalArgumentException> { calculate("-1") }
             exception.message shouldBe "음수는 입력될 수 없다"
         }
+
+        test("쉼표가 입력되는 경우 숫자의 합을 반환한다.") {
+            val actual = calculate("1,2")
+            actual shouldBe 3
+        }
     }
 })
