@@ -38,5 +38,10 @@ class StringCalculatorKtTest : FunSpec({
             val actual = calculate("1,2")
             actual shouldBe 3
         }
+
+        test("콜론이 입력되는 경우 숫자의 합을 반환한다.") {
+            val actual = calculate("1:2")
+            actual shouldBe 3
+        }
     }
 })
