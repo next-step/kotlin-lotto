@@ -19,8 +19,8 @@ object StringAddCalculator {
         return command.split(DEFAULT_COMMAND_PATTERN_REGEX)
     }
 
-    private fun toPositiveInt(s: String): Int {
-        val n = s.toInt()
+    private fun toPositiveInt(token: String): Int {
+        val n = token.toInt()
         if (n < 0) {
             throw RuntimeException()
         }
