@@ -1,5 +1,7 @@
 package calculator
 
+import calculator.model.CalculatorErrorCode
+
 class PositiveNumbers(elements: IntArray) {
 
     val elements: IntArray = elements.copyOf()

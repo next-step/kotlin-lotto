@@ -1,4 +1,4 @@
-package calculator
+package calculator.model
 
 enum class CalculatorErrorCode(val message: (String) -> String) {
     INVALID_POSITIVE_NUMBERS(

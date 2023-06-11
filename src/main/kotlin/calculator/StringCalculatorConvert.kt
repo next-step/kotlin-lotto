@@ -1,5 +1,7 @@
 package calculator
 
+import calculator.model.CalculatorErrorCode
+
 object StringCalculatorConvert {
 
     private val CUSTOM_DELIMITER_REGEX: Regex = Regex(pattern = """//(.)\n(.*)""")
