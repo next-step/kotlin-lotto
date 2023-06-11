@@ -17,5 +17,10 @@ class StringCalculatorKtTest : FunSpec({
                 actual shouldBe 0
             }
         }
+
+        test("숫자만 입력되는 경우 숫자를 그대로 반환한다.") {
+            val actual = calculate("1")
+            actual shouldBe 1
+        }
     }
 })

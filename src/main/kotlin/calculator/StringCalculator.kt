@@ -4,6 +4,5 @@ fun calculate(formula: String): Int {
     if (formula.isBlank()) {
         return 0
     }
-
-    return 1
+    return formula.toInt()
 }
