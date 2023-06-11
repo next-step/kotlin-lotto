@@ -5,7 +5,6 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import java.lang.IllegalArgumentException
 
 class StringCalculatorKtTest : FunSpec({
 
@@ -28,6 +27,11 @@ class StringCalculatorKtTest : FunSpec({
         test("숫자가 아닌 값이 입력되는 경우 예외가 발생한다.") {
             val exception = shouldThrowExactly<IllegalArgumentException> { calculate("a") }
             exception.message shouldBe "숫자가 아닌 문자를 입력할 수 없다"
+        }
+
+        test("음수가 입력되는 경우 예외가 발생한다.") {
+            val exception = shouldThrowExactly<IllegalArgumentException> { calculate("-1") }
+            exception.message shouldBe "음수는 입력될 수 없다"
         }
     }
 })
