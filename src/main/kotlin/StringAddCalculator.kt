@@ -1,5 +1,8 @@
 object StringAddCalculator {
     fun add(command: String?): Int {
-        return 0
+        if (command.isNullOrEmpty()) {
+            return 0
+        }
+        return command.toInt()
     }
 }
