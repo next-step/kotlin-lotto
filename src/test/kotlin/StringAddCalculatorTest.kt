@@ -1,3 +1,4 @@
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
@@ -65,6 +66,17 @@ class StringAddCalculatorTest : DescribeSpec({
                 CommandExpected("//;\n3;5;6;11", 25),
             ) { (command, expected) ->
                 StringAddCalculator.add(command) shouldBe expected
+            }
+        }
+
+        context("문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.") {
+            withData(
+                nameFn = { "add(\"${it}\") throw RuntimeException" },
+                listOf("-2:3,5", "//;\n2;3;-5", "//;\n3;5;-6;11")
+            ) { negativeCmd ->
+                shouldThrow<RuntimeException> {
+                    StringAddCalculator.add(negativeCmd)
+                }
             }
         }
     }
