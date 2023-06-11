@@ -56,5 +56,16 @@ class StringAddCalculatorTest : DescribeSpec({
                 StringAddCalculator.add(command) shouldBe expected
             }
         }
+
+        context("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.") {
+            withData(
+                nameFn = { "add(\"${it.command}\") =  ${it.expected}" },
+                CommandExpected("//;\n1;2;3", 6),
+                CommandExpected("//;\n2;3;5", 10),
+                CommandExpected("//;\n3;5;6;11", 25),
+            ) { (command, expected) ->
+                StringAddCalculator.add(command) shouldBe expected
+            }
+        }
     }
 })
