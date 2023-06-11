@@ -5,11 +5,14 @@ value class Number(val value: Int) {
 
     init {
         require(value >= 0) {
-            "$REQUIRE_POSITIVE_NUMBER_MESSAGE $value"
+            throw RuntimeException("$REQUIRE_POSITIVE_NUMBER_MESSAGE $value")
         }
     }
 
+    operator fun plus(other: Number): Number = Number(value + other.value)
+
     companion object {
+        val ZERO: Number = Number(0)
         private const val REQUIRE_NUMBER_MESSAGE = "Require Number. InputValue:"
         private const val REQUIRE_POSITIVE_NUMBER_MESSAGE = "Require Positive Number. Input Value:"
 

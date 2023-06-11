@@ -2,10 +2,10 @@ package calculator.stringcalculator.splitter
 
 object CustomDelimiterSplitter : Splitter<String, List<String>> {
     private const val INVALID_VALUE_MESSAGE = "Invalid Value:"
-    private const val DELIMITER_INDEX = 1
-    private const val OPERANDS_INDEX = 2
-    private val DELIMITER = Regex("//([^0-9])\n(.*)")
+    private val DELIMITER = Regex("//([^0-9].*)\n(.*)")
     private val DEFAULT_RETURN_VALUE = listOf("")
+
+    override fun supported(input: String): Boolean = DELIMITER.matches(input)
 
     override fun split(input: String): List<String> {
         if (input.isBlank()) {

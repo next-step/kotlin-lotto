@@ -1,5 +1,6 @@
 package calculator.stringcalculator.splitter
 
-fun interface Splitter<T, R> {
+interface Splitter<T, R> {
+    fun supported(input: T): Boolean
     fun split(input: T): R
 }

@@ -18,4 +18,16 @@ class CustomDelimiterSplitterTest : FunSpec({
             }
         }
     }
+
+    test("유효한 커스텀 구분자가 있을 경우 분리자 지원이 가능하다.") {
+        CustomDelimiterSplitter.supported("//;\n1;2;3") shouldBe true
+    }
+
+    test("유효한 커스텀 구분자가 없을 경우 분리자 지원이 불가하다.") {
+        listOf("1,2,3", "1:2:3", "//\n123", "//1\n11213").forEach {
+            val actual = CustomDelimiterSplitter.supported(it)
+
+            actual shouldBe false
+        }
+    }
 })
