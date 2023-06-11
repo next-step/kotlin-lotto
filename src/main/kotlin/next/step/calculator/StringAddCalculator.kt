@@ -9,7 +9,7 @@ object StringAddCalculator {
         if (command.isNullOrBlank()) {
             return 0
         }
-        return parse(command).sumOf { toPositiveInt(it) }
+        return parse(command).sumOf { toNonNegativeInt(it) }
     }
 
     private fun parse(command: String): List<String> {
@@ -19,7 +19,7 @@ object StringAddCalculator {
         return command.split(DEFAULT_COMMAND_PATTERN_REGEX)
     }
 
-    private fun toPositiveInt(token: String): Int {
+    private fun toNonNegativeInt(token: String): Int {
         val n = token.toInt()
         if (n < 0) {
             throw RuntimeException()
