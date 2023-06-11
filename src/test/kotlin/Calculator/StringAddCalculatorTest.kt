@@ -26,12 +26,5 @@ class StringAddCalculatorTest : StringSpec({
             }
         }
     }
-//
-//    @ParameterizedTest
-//    @ValueSource(strings = ["-1,2,3", "a,b"])
-//    fun calculate_negative(input: String?) {
-//        assertThatThrownBy { stringAddCalculator!!.calculate(input) }
-//            .isInstanceOf(RuntimeException::class.java)
-//    }
 })
 
