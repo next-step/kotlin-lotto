@@ -3,6 +3,6 @@ object StringAddCalculator {
         if (command.isNullOrEmpty() || command.isBlank()) {
             return 0
         }
-        return command.toInt()
+        return command.split(",").sumOf { it.toInt() }
     }
 }

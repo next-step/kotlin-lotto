@@ -35,7 +35,16 @@ class StringAddCalculatorTest : DescribeSpec({
             }
         }
 
-     
+        context("숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.") {
+            withData(
+                nameFn = { "add(\"${it.command}\") =  ${it.expected}" },
+                CommandExpected("1,1", 2),
+                CommandExpected("2,3", 5),
+                CommandExpected("3,5", 8),
+            ) { (command, expected) ->
+                StringAddCalculator.add(command) shouldBe expected
+            }
+        }
     }
 
 })
