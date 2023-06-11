@@ -20,4 +20,11 @@ class PositiveNumberTest : FunSpec({
             exception.message shouldBe "숫자가 아닌 문자를 입력할 수 없다"
         }
     }
+
+    context("plus") {
+        test("PositiveNumber 두 객체의 value 합인 객체를 반환한다.") {
+            val actual = PositiveNumber(1) + PositiveNumber(2)
+            actual shouldBe PositiveNumber(3)
+        }
+    }
 })

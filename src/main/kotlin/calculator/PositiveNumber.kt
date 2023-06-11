@@ -7,6 +7,8 @@ value class PositiveNumber(val value: Int) {
         require(value > 0) { "음수는 입력될 수 없다" }
     }
 
+    operator fun plus(positiveNumber: PositiveNumber) = PositiveNumber(value + positiveNumber.value)
+
     companion object {
         fun from(value: String): PositiveNumber = PositiveNumber(parseToNumber(value))
 
