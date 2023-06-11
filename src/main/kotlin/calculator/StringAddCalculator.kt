@@ -5,6 +5,12 @@ object StringAddCalculator {
     fun calculate(stringCalculatorText: String): CalculatorResult = CalculatorResult(
         result = StringCalculatorConvert.convertNumbers(stringCalculatorText = stringCalculatorText)
             .elements
-            .sum(),
+            .sumOf { it.toLong() }
+            .run {
+                when {
+                    this > Int.MAX_VALUE -> Int.MIN_VALUE
+                    else -> toInt()
+                }
+            },
     )
 }
