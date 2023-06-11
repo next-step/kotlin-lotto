@@ -1,5 +1,5 @@
 object StringAddCalculator {
-    fun add(command: String): Int {
+    fun add(command: String?): Int {
         return 0
     }
 }
