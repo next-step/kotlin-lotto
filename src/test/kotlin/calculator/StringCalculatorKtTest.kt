@@ -43,5 +43,10 @@ class StringCalculatorKtTest : FunSpec({
             val actual = calculate("1:2")
             actual shouldBe 3
         }
+
+        test("쉼표와 콜론이 혼합된 경우에도 숫자의 합을 반환한다.") {
+            val actual = calculate("1,2:3,4:5")
+            actual shouldBe 15
+        }
     }
 })
