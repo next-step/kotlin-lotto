@@ -39,8 +39,8 @@ class StringAddCalculatorTest : DescribeSpec({
             withData(
                 nameFn = { "add(\"${it.command}\") =  ${it.expected}" },
                 CommandExpected("1,1", 2),
-                CommandExpected("2,3", 5),
-                CommandExpected("3,5", 8),
+                CommandExpected("2,3,5", 10),
+                CommandExpected("3,5,6,11", 25),
             ) { (command, expected) ->
                 StringAddCalculator.add(command) shouldBe expected
             }
