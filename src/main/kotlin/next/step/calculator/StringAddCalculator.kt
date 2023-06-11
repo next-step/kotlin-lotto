@@ -1,3 +1,5 @@
+package next.step.calculator
+
 object StringAddCalculator {
     fun add(command: String?): Int {
         if (command.isNullOrBlank()) {
