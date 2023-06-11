@@ -12,6 +12,12 @@ class StringAddCalculatorTest : DescribeSpec({
             }
         }
 
+        context("공백을 입력하면") {
+            it("0을 반환한다") {
+                StringAddCalculator.add(" ") shouldBe 0
+            }
+        }
+
         context("null을 입력하면") {
             it("0을 반환한다") {
                 StringAddCalculator.add(null) shouldBe 0
@@ -28,6 +34,8 @@ class StringAddCalculatorTest : DescribeSpec({
                 StringAddCalculator.add(command) shouldBe expected
             }
         }
+
+     
     }
 
 })
