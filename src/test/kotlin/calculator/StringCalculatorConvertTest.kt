@@ -2,6 +2,8 @@ package calculator
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 
@@ -16,15 +18,20 @@ class StringCalculatorConvertTest : StringSpec({
     }
 
     "지정된 구분자 외에 구분자를 입력하면 IllegalArgumentException 예외가 발생한다." {
-        val expect = "1^"
+        forAll(
+            row("0,1^:2,3:4", "1^"),
+            row("0,1^^2,3:4", "1^^2"),
+            row("0,1: 2,3:4", " 2"),
+            row("0,1:2,3 :4", "3 "),
+        ) { text, expect ->
+            val exception = shouldThrow<IllegalArgumentException> {
+                StringCalculatorConvert.convertNumbers(
+                    stringCalculatorText = text
+                )
+            }
 
-        val exception = shouldThrow<IllegalArgumentException> {
-            StringCalculatorConvert.convertNumbers(
-                stringCalculatorText = "0,$expect:2,3:4"
-            )
+            exception shouldHaveMessage CalculatorErrorCode.INVALID_NUMBERS.message(expect)
         }
-
-        exception shouldHaveMessage CalculatorErrorCode.INVALID_NUMBERS.message(expect)
     }
 
     "숫자 하나를 문자열로 입력할 경우 숫자 하나만 반환한다." {
