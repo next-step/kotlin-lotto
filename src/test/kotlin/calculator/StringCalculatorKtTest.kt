@@ -48,5 +48,10 @@ class StringCalculatorKtTest : FunSpec({
             val actual = calculate("1,2:3,4:5")
             actual shouldBe 15
         }
+
+        test("//와 `\n 사이에 문자열을 커스텀 구분자로 사용하여 합을 반환한다.") {
+            val actual = calculate("//;\n1;2;3")
+            actual shouldBe 6
+        }
     }
 })
