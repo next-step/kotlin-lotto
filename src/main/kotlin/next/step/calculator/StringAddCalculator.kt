@@ -1,9 +1,9 @@
 package next.step.calculator
 
 object StringAddCalculator {
-    
+
     private val CUSTOM_COMMAND_PATTERN_REGEX = Regex("//(.)\n(.*)")
-    private const val DEFAULT_COMMAND_PATTERN = "[,:]"
+    private val DEFAULT_COMMAND_PATTERN_REGEX = "[,:]".toRegex()
 
     fun add(command: String?): Int {
         if (command.isNullOrBlank()) {
@@ -16,7 +16,7 @@ object StringAddCalculator {
         CUSTOM_COMMAND_PATTERN_REGEX.find(command)?.let {
             return it.groupValues[2].split(it.groupValues[1])
         }
-        return command.split(DEFAULT_COMMAND_PATTERN.toRegex())
+        return command.split(DEFAULT_COMMAND_PATTERN_REGEX)
     }
 
     private fun toPositiveInt(s: String): Int {
