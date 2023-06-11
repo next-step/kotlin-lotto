@@ -45,6 +45,16 @@ class StringAddCalculatorTest : DescribeSpec({
                 StringAddCalculator.add(command) shouldBe expected
             }
         }
-    }
 
+        context("구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.") {
+            withData(
+                nameFn = { "add(\"${it.command}\") =  ${it.expected}" },
+                CommandExpected("1:15", 16),
+                CommandExpected("2:3,5", 10),
+                CommandExpected("3,5:6:11", 25),
+            ) { (command, expected) ->
+                StringAddCalculator.add(command) shouldBe expected
+            }
+        }
+    }
 })
