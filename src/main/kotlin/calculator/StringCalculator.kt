@@ -3,6 +3,7 @@ package calculator
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
+private const val DEFAULT_NUMBER = 0
 private const val DEFAULT_DELIMITER_COMMA = ","
 private const val DEFAULT_DELIMITER_COLON = ":"
 private const val CUSTOM_DELIMITER_INDEX = 1
@@ -11,7 +12,7 @@ private val customDelimiterPattern = Pattern.compile("^//(.)\\n(.*)$")
 
 fun calculate(formula: String): Int {
     if (formula.isBlank()) {
-        return 0
+        return DEFAULT_NUMBER
     }
     val customDelimiterMatcher = customDelimiterPattern.matcher(formula)
     if (customDelimiterMatcher.find()) {
