@@ -11,7 +11,7 @@ class LottoNumber private constructor(val number: Int) : Comparable<LottoNumber>
 
         const val MIN_VALUE: Int = 1
         const val MAX_VALUE: Int = 45
-        private val store = (MIN_VALUE..MAX_VALUE).associateWith { LottoNumber(it) }
+        private val store = (MIN_VALUE..MAX_VALUE).associateWith(::LottoNumber)
 
         fun valueOf(number: Int): LottoNumber =
             store[number] ?: throw IllegalArgumentException("$INVALID_NUMBER_RANGE_MESSAGE $number")

@@ -10,6 +10,7 @@ value class Money(val value: Int) {
     }
 
     companion object {
+        val ZERO: Money = Money(0)
         private const val MONEY_MIN_LIMIT = 0
         private const val REQUIRE_POSITIVE_NUMBER_MESSAGE = "Require Positive Number. Input Value:"
         private const val NOT_CONVERTABLE_VALUE_MESSAGE = "Required Number converted value. Input: "
