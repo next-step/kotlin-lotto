@@ -1,16 +1,16 @@
 package calculator.stringcalculator
 
-import calculator.stringcalculator.splitter.Splitter
+import calculator.stringcalculator.splitter.StringSplitter
 
-class StringSummingCalculator(val splitters: List<Splitter<String, List<String>>>) : Calculator<String, Number> {
-    override fun calculate(input: String): Number {
+class StringSummingCalculator(private val splitters: List<StringSplitter>) : Calculator<String, PositiveNumber> {
+    override fun calculate(input: String): PositiveNumber {
         if (input.isBlank()) {
-            return Number.ZERO
+            return PositiveNumber.ZERO
         }
 
-        val numbers = splitInput(input).map { Number.from(it) }
+        val positiveNumbers = splitInput(input).map { PositiveNumber.from(it) }
 
-        return numbers.reduce { acc, number -> acc + number }
+        return positiveNumbers.reduce { acc, number -> acc + number }
     }
 
     private fun splitInput(input: String): List<String> =

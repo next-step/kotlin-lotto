@@ -16,6 +16,6 @@ class DefaultDelimiterSplitterTest : FunSpec({
     test("공백을 전달하면 그대로 공백을 반환한다.") {
         val actual = DefaultDelimiterSplitter.split("")
 
-        actual shouldBe listOf("")
+        actual shouldBe emptyList()
     }
 })

@@ -2,13 +2,13 @@ package calculator.stringcalculator
 
 import calculator.stringcalculator.config.CalculatorConfig
 import io.kotest.assertions.throwables.shouldThrowAny
-import io.kotest.core.spec.style.FunSpec
+import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-class StringSummingCalculatorTest : FunSpec({
+class StringSummingCalculatorTest : FreeSpec({
     val calculator = CalculatorConfig.calculator
 
-    test("유효한 문자열을 전달할 경우 합계를 반환한다.") {
+    "유효한 문자열을 전달할 경우 합계를 반환한다." - {
         listOf(
             "" to 0,
             "1,2" to 3,
@@ -24,21 +24,22 @@ class StringSummingCalculatorTest : FunSpec({
         }
     }
 
-    test("유효하지 않은 문자열을 전달할 경우 예외를 던진다") {
+    "유효하지 않은 문자열을 전달할 경우 예외를 던진다" - {
         listOf(
-            "1,2,-3" to RuntimeException::class,
-            "a" to RuntimeException::class,
-            "a,b,2" to RuntimeException::class,
-            "//\n" to RuntimeException::class,
-            "//12\n1122" to RuntimeException::class,
-            ",2,3" to RuntimeException::class,
-            "1,2," to RuntimeException::class,
-            "//;\n1;2,3" to RuntimeException::class,
+            "1,2,-3" to IllegalArgumentException::class,
+            "a" to IllegalArgumentException::class,
+            "a,b,2" to IllegalArgumentException::class,
+            "//\n" to IllegalArgumentException::class,
+            "//12\n1122" to IllegalArgumentException::class,
+            ",2,3" to IllegalArgumentException::class,
+            "1,2," to IllegalArgumentException::class,
+            "//;\n1;2,3" to IllegalArgumentException::class,
         ).forEach {
-            println(it.first)
-            val actual = shouldThrowAny { calculator.calculate(it.first) }
+            "${it.first} 문자열을 전달하면 ${it.second} 예외를 던진다." {
+                val actual = shouldThrowAny { calculator.calculate(it.first) }
 
-            actual::class shouldBe it.second
+                actual::class shouldBe it.second
+            }
         }
     }
 })
