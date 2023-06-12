@@ -11,6 +11,6 @@ class Lottery(
     fun compareWinningLottery(lottery: Lottery) = Rank.from(values.count { lottery.values.contains(it) })
 
     companion object {
-        private const val LOTTERY_NUMBER_SIZE = 6
+        const val LOTTERY_NUMBER_SIZE = 6
     }
 }
