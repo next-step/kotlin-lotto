@@ -18,9 +18,7 @@ object StringAddCalculator {
 
     private fun toNonNegativeInt(token: String): Int {
         val n = token.toInt()
-        if (n < 0) {
-            throw RuntimeException()
-        }
+        require(n >= 0) { "음수는 토큰으로 사용될 수 없습니다." }
         return n
     }
 }
