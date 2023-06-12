@@ -15,18 +15,22 @@ class LottoService(
     private val profitCalculator: ProfitCalculator
 ) {
 
-    fun getWinningStatistics(request: LottoCreateRequest, winningNumbers: WinningNumbers): LottoResult {
-        val inputMoney = Money(value = request.money).takeIf { it >= Lotto.PRICE }
-            ?: throw IllegalArgumentException("로또 금액은 ${Lotto.PRICE.value} 이상 필요합니다. Input: ${request.money}")
-        val lottos = createLottos(inputMoney)
-
-        val winningStatistics = lottos.winningStatistics(winningNumbers = winningNumbers)
+    fun getWinningStatistics(request: LottoCreateRequest): LottoResult {
+        val inputMoney = Money(value = request.money)
+        val winningStatistics =
+            request.lottos.winningStatistics(winningNumbers = WinningNumbers.from(strings = request.winningNumbers))
         val winningAmount = winningStatistics.map { it.key.reward times it.value }
             .reduce(Money::plus)
 
         val profitRate = profitCalculator.calculate(inputMoney = inputMoney, winningAmount = winningAmount)
 
         return LottoResult(winningStatistics = winningStatistics, profitRate = profitRate)
+    }
+
+    fun issueLottos(requestMoney: Int): Lottos {
+        return Money(requestMoney).takeIf { it >= Lotto.PRICE }
+            ?.let(::createLottos)
+            ?: throw IllegalArgumentException("로또를 구매할 수 있는 금액이 아닙니다. Input: $requestMoney")
     }
 
     private fun createLottos(inputMoney: Money): Lottos {

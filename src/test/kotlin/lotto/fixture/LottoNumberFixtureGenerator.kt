@@ -1,7 +1,6 @@
-package lotto.application
+package lotto.fixture
 
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbersFixtureMaker
 import lotto.domain.generator.LottoNumbersGenerator
 
 internal class LottoNumberFixtureGenerator(var fixedList: List<Int>) : LottoNumbersGenerator {

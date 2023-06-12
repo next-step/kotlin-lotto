@@ -12,5 +12,14 @@ class WinningNumbers(val values: LinkedHashSet<LottoNumber>) : Set<LottoNumber> 
 
     companion object {
         const val VALID_LENGTH = 6
+        const val DELIMITER = ","
+
+        fun from(strings: List<String>): WinningNumbers {
+            return strings.map(String::trim)
+                .mapNotNull(String::toIntOrNull)
+                .map(LottoNumber::valueOf)
+                .toCollection(LinkedHashSet())
+                .let(::WinningNumbers)
+        }
     }
 }

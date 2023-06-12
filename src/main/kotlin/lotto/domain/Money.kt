@@ -17,6 +17,8 @@ value class Money(val value: Int) {
 
     operator fun compareTo(other: Money): Int = value.compareTo(other.value)
 
+    override fun toString(): String = value.toString()
+
     companion object {
         val ZERO: Money = Money(0)
         private const val MONEY_MIN_LIMIT = 0

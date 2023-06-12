@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumbersFixtureMaker.createLottoNumbers
+import lotto.fixture.LottoNumbersFixtureMaker.createLottoNumbers
 import lotto.domain.generator.RandomLottoNumbersGenerator
 
 class WinningNumbersTest : FreeSpec({

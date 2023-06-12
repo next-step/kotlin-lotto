@@ -2,7 +2,7 @@ package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoNumbersFixtureMaker.createLottoNumbers
+import lotto.fixture.LottoNumbersFixtureMaker.createLottoNumbers
 
 class LottosTest : FunSpec({
 

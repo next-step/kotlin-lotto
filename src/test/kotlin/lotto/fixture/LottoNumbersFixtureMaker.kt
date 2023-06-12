@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.fixture
+
+import lotto.domain.LottoNumber
 
 internal object LottoNumbersFixtureMaker {
     internal fun createLottoNumbers(items: List<Int>) = items.map(LottoNumber::valueOf).toCollection(LinkedHashSet())

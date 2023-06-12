@@ -23,10 +23,6 @@ class Lotto(val lottoNumbers: LinkedHashSet<LottoNumber>) {
         return this == sorted()
     }
 
-    override fun toString(): String {
-        return "Lotto(lottoNumbers=$lottoNumbers)"
-    }
-
     companion object {
         val PRICE = Money(1_000)
         const val VALID_LENGTH = 6

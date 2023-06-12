@@ -1,5 +1,9 @@
 package lotto
 
+import lotto.config.LottoConfig
+
 fun main() {
-    TODO("Not yet implements")
+    val lottoController = LottoConfig.lottoController
+
+    lottoController.issueAndGetWinningStatistics()
 }
