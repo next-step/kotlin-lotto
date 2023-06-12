@@ -10,6 +10,8 @@ class Wallet(
         return LottoResult(yield = yield, statistics = statistics)
     }
 
+    fun toPurchasedLotteries() = purchasedLotteries.map { it.toLotteryNumbers() }
+
     private fun calculateTotalReward(result: Map<Rank, Int>) =
         result.map { it.key.calculatePrice(it.value) }
             .reduce { total, num -> total + num }
