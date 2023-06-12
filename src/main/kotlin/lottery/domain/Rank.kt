@@ -11,6 +11,8 @@ enum class Rank(
     FIRST(2_000_000_000, { it == 6 }),
     ;
 
+    fun calculatePrice(count: Int) = price.times(count)
+
     companion object {
         private const val DEFAULT_RANK_COUNT = 0
 

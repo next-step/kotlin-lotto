@@ -21,7 +21,7 @@ class RankTest : FunSpec({
             row(1, NOTHING),
             row(2, NOTHING),
             row(3, FOURTH),
-            row(4, Rank.THIRD),
+            row(4, THIRD),
             row(5, SECOND),
             row(6, FIRST)
         ) { input, expected ->
@@ -39,6 +39,13 @@ class RankTest : FunSpec({
                 val exception = shouldThrowExactly<IllegalArgumentException> { Rank.from(input) }
                 exception.message shouldBe "로또 룰에 벗어난 수는 입력될 수 없다"
             }
+        }
+    }
+
+    context("calculatePrice") {
+        test("갯수를 받아 총 수익을 계산한다") {
+            val actual = THIRD.calculatePrice(2)
+            actual shouldBe 100_000
         }
     }
 
