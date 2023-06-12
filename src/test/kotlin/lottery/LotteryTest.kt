@@ -72,4 +72,33 @@ class LotteryTest : FunSpec({
             actual.values shouldHaveSize 6
         }
     }
+
+    context("compareWinningLottery") {
+        test("당첨로또와 비교하여 Rank를 반환한다") {
+            val givenLottery = Lottery(
+                values = listOf(
+                    LOTTERY_NUMBER_1,
+                    LOTTERY_NUMBER_2,
+                    LOTTERY_NUMBER_3,
+                    LOTTERY_NUMBER_4,
+                    LOTTERY_NUMBER_5,
+                    LOTTERY_NUMBER_6
+                )
+            )
+
+            val winLottery = Lottery(
+                values = listOf(
+                    LOTTERY_NUMBER_1,
+                    LOTTERY_NUMBER_2,
+                    LOTTERY_NUMBER_3,
+                    LOTTERY_NUMBER_4,
+                    LOTTERY_NUMBER_5,
+                    LOTTERY_NUMBER_7
+                )
+            )
+
+            val actual = winLottery.compareWinningLottery(givenLottery)
+            actual shouldBe Rank.SECOND
+        }
+    }
 })
