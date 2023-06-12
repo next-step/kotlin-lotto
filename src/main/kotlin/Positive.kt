@@ -1,13 +1,10 @@
 @JvmInline
-value class Positive private constructor(
+value class Positive(
     val number: Int,
 ) {
-    fun add(positive: Positive) = Positive(number + positive.number)
-
-    companion object {
-        operator fun invoke(number: Int): Positive {
-            require(number >= 0) { "음수는 입력할 수 없습니다." }
-            return Positive(number)
-        }
+    init {
+        require(number >= 0) { "음수는 입력할 수 없습니다." }
     }
+
+    fun add(positive: Positive) = Positive(number + positive.number)
 }
