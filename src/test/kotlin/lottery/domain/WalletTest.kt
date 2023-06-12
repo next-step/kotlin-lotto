@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 class WalletTest : FunSpec({
 
     context("calculateLotteryResult") {
-        test("당첨 로또를 받아 로또의 당첨 통계를 반환할 수 있다") {
+        test("당첨 로또를 받아 로또의 당첨 결과를 반환할 수 있다") {
             val wallet = Wallet(
                 usedMoney = 4_000,
                 purchasedLotteries = Lotteries(
@@ -21,10 +21,11 @@ class WalletTest : FunSpec({
             val winningLottery = LotteryTest.LOTTERY_1_6
 
             val actual = wallet.calculateLotteryResult(winningLottery)
-            actual[Rank.FIRST] shouldBe 2
-            actual[Rank.SECOND] shouldBe 0
-            actual[Rank.THIRD] shouldBe 1
-            actual[Rank.FOURTH] shouldBe 1
+            actual.statistics[Rank.FIRST] shouldBe 2
+            actual.statistics[Rank.SECOND] shouldBe 0
+            actual.statistics[Rank.THIRD] shouldBe 1
+            actual.statistics[Rank.FOURTH] shouldBe 1
+            actual.yield shouldBe 1_000_013.75
         }
     }
 })
