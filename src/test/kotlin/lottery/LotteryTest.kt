@@ -19,7 +19,8 @@ class LotteryTest : FunSpec({
     context("init") {
         test("로또 번호가 6개 입력되지 않는 경우 예외가 발생한다.") {
             forAll(
-                row(listOf(
+                row(
+                    listOf(
                         LOTTERY_NUMBER_1,
                         LOTTERY_NUMBER_2,
                         LOTTERY_NUMBER_3,
@@ -27,15 +28,16 @@ class LotteryTest : FunSpec({
                         LOTTERY_NUMBER_5
                     )
                 ),
-                row(listOf(
+                row(
+                    listOf(
                         LOTTERY_NUMBER_1,
                         LOTTERY_NUMBER_2,
                         LOTTERY_NUMBER_3,
                         LOTTERY_NUMBER_4,
-                    LOTTERY_NUMBER_5,
-                    LOTTERY_NUMBER_6,
-                    LOTTERY_NUMBER_7
-                )
+                        LOTTERY_NUMBER_5,
+                        LOTTERY_NUMBER_6,
+                        LOTTERY_NUMBER_7
+                    )
                 )
             ) { input ->
                 val exception = shouldThrowExactly<IllegalArgumentException> { Lottery(values = input) }
