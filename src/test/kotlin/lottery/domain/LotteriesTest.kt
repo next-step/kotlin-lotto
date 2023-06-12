@@ -1,8 +1,11 @@
 package lottery.domain
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
+import lottery.domain.Lotteries.Companion.toLotteries
 import lottery.domain.LotteryTest.Companion.LOTTERY_1_6
+import lottery.domain.LotteryTest.Companion.LOTTERY_2_7
 import lottery.domain.LotteryTest.Companion.LOTTERY_3_8
 import lottery.domain.LotteryTest.Companion.LOTTERY_4_9
 
@@ -19,6 +22,13 @@ class LotteriesTest : FunSpec({
             actual[Rank.SECOND] shouldBe 0
             actual[Rank.THIRD] shouldBe 1
             actual[Rank.FOURTH] shouldBe 1
+        }
+    }
+
+    context("toLotteries") {
+        test("list를 Lotteries 객체로 반환한다") {
+            val actual = listOf(LOTTERY_1_6, LOTTERY_2_7, LOTTERY_3_8).toLotteries()
+            actual shouldContainAll listOf(LOTTERY_1_6, LOTTERY_2_7, LOTTERY_3_8)
         }
     }
 })
