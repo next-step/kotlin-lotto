@@ -11,15 +11,18 @@ object StringCalculatorConvert {
 
     @Throws(IllegalArgumentException::class)
     fun convertNumbers(stringCalculatorText: String): PositiveNumbers = PositiveNumbers(
-        elements = splitText(text = stringCalculatorText).map { convertNumber(it) }
+        elements = splitText(text = stringCalculatorText).map(this::convertNumber)
             .toIntArray(),
     )
 
     private fun splitText(text: String): List<String> = CUSTOM_DELIMITER_REGEX.find(input = text)
-        ?.run {
-            val (customDelimiter, tokenStrings) = destructured
-            tokenStrings.split(customDelimiter)
-        } ?: text.split(regex = DEFAULT_DELIMITER_REGEX)
+        ?.let(this::splitCustomDelimiterToken)
+        ?: text.split(regex = DEFAULT_DELIMITER_REGEX)
+
+    private fun splitCustomDelimiterToken(matchResult: MatchResult): List<String> {
+        val (customDelimiter, tokenStrings) = matchResult.destructured
+        return tokenStrings.split(customDelimiter)
+    }
 
     @Throws(IllegalArgumentException::class)
     private fun convertNumber(token: String) = when {

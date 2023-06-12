@@ -3,6 +3,8 @@ package calculator
 import calculator.model.CalculatorErrorCode
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.throwable.shouldHaveMessage
@@ -27,14 +29,17 @@ class PositiveNumbersTest : StringSpec({
     }
 
     "PositiveNumbers 생성 시 음수가 있을 경우 IllegalArgumentException 예외가 발생한다." {
-        val expect = -1
+        forAll(
+            row(intArrayOf(-1, 2, 3), "-1"),
+            row(intArrayOf(-1, -2, -3), "-1, -2, -3"),
+        ) { numbers, expect ->
+            val exception = shouldThrow<IllegalArgumentException> {
+                PositiveNumbers(
+                    elements = numbers,
+                )
+            }
 
-        val exception = shouldThrow<IllegalArgumentException> {
-            PositiveNumbers(
-                elements = IntArray(10) { expect },
-            )
+            exception shouldHaveMessage CalculatorErrorCode.INVALID_POSITIVE_NUMBERS.message(expect)
         }
-
-        exception shouldHaveMessage CalculatorErrorCode.INVALID_POSITIVE_NUMBERS.message("$expect")
     }
 })

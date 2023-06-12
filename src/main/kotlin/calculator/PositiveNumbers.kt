@@ -8,10 +8,10 @@ class PositiveNumbers(elements: IntArray) {
         get() = field.copyOf()
 
     init {
-        elements.forEach {
-            require(value = it >= ZERO) {
-                CalculatorErrorCode.INVALID_POSITIVE_NUMBERS.message(it.toString())
-            }
+        val invalidNumbers = elements.filter { it < ZERO }
+
+        require(value = invalidNumbers.isEmpty()) {
+            CalculatorErrorCode.INVALID_POSITIVE_NUMBERS.message(invalidNumbers.joinToString())
         }
     }
 
