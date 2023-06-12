@@ -1,4 +1,3 @@
 package lotto.domain
 
-class Lottos(private val values: List<Lotto>) {
-}
+class Lottos(private val values: List<Lotto>)
