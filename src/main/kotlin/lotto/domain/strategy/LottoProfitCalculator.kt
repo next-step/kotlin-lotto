@@ -1,17 +1,18 @@
 package lotto.domain.strategy
 
-import lotto.domain.Money
 import kotlin.math.floor
-
-private const val ZERO_PROFIT = 0.0
+import lotto.domain.Money
+import lotto.domain.ProfitRate
 
 object LottoProfitCalculator : ProfitCalculator {
-    override fun calculate(inputMoney: Money, winningAmount: Money): Double {
+    private val ZERO_PROFIT = ProfitRate(0.0)
+
+    override fun calculate(inputMoney: Money, winningAmount: Money): ProfitRate {
         if (winningAmount == Money.ZERO) {
             return ZERO_PROFIT
         }
 
-        return floor((inputMoney.toDouble() / winningAmount.toDouble()) * 100) / 100
+        return (floor((winningAmount.toDouble() / inputMoney.toDouble()) * 100) / 100).let(::ProfitRate)
     }
 }
 

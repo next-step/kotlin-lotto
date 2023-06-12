@@ -9,6 +9,14 @@ value class Money(val value: Int) {
         }
     }
 
+    operator fun plus(other: Money): Money = Money(value + other.value)
+
+    operator fun div(other: Money) = Money(value / other.value)
+
+    infix fun times(count: Int): Money = Money(value * count)
+
+    operator fun compareTo(other: Money): Int = value.compareTo(other.value)
+
     companion object {
         val ZERO: Money = Money(0)
         private const val MONEY_MIN_LIMIT = 0

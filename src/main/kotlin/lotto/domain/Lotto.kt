@@ -28,6 +28,7 @@ class Lotto(val lottoNumbers: LinkedHashSet<LottoNumber>) {
     }
 
     companion object {
+        val PRICE = Money(1_000)
         const val VALID_LENGTH = 6
     }
 }

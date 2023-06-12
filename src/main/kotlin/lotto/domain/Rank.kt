@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Rank(private val predicate: (Int) -> Boolean, private val reward: Money) {
+enum class Rank(private val predicate: (Int) -> Boolean, val reward: Money) {
     FIRST({ it == 6 }, Money(2_000_000_000)),
     SECOND({ it == 5 }, Money(1_500_000)),
     THIRD({ it == 4 }, Money(50_000)),
