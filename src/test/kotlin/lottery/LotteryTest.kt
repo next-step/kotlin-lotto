@@ -12,7 +12,6 @@ import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_4
 import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_5
 import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_6
 import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_7
-import java.lang.IllegalArgumentException
 
 class LotteryTest : FunSpec({
 
@@ -32,15 +31,29 @@ class LotteryTest : FunSpec({
                         LOTTERY_NUMBER_2,
                         LOTTERY_NUMBER_3,
                         LOTTERY_NUMBER_4,
-                        LOTTERY_NUMBER_5,
-                        LOTTERY_NUMBER_6,
-                        LOTTERY_NUMBER_7
-                    )
+                    LOTTERY_NUMBER_5,
+                    LOTTERY_NUMBER_6,
+                    LOTTERY_NUMBER_7
+                )
                 )
             ) { input ->
                 val exception = shouldThrowExactly<IllegalArgumentException> { Lottery(values = input) }
                 exception.message shouldBe "로또 번호는 6개만 입력하여야한다"
             }
+        }
+
+        test("로또 번호가 중복되어 입력되는 경우 예외가 발생한다.") {
+            val input = listOf(
+                LOTTERY_NUMBER_1,
+                LOTTERY_NUMBER_2,
+                LOTTERY_NUMBER_3,
+                LOTTERY_NUMBER_4,
+                LOTTERY_NUMBER_5,
+                LOTTERY_NUMBER_5
+            )
+
+            val exception = shouldThrowExactly<IllegalArgumentException> { Lottery(values = input) }
+            exception.message shouldBe "로또 번호는 중복되어 입력될 수 없다"
         }
     }
 })
