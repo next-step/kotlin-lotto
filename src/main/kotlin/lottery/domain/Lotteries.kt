@@ -10,6 +10,7 @@ class Lotteries(
             .groupingBy { it }
             .eachCount()
             .fillMissRankWithDefault()
+            .toSortedMap(Rank.comparator)
 
     companion object {
         fun List<Lottery>.toLotteries(): Lotteries = Lotteries(this)
