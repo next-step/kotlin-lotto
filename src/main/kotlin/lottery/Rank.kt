@@ -1,5 +1,7 @@
 package lottery
 
+import java.util.EnumMap
+
 enum class Rank(
     val price: Int,
     val rankingMetric: (Int) -> Boolean
@@ -12,7 +14,12 @@ enum class Rank(
     ;
 
     companion object {
+        private const val DEFAULT_RANK_COUNT = 0
+
         fun from(matchCount: Int) = Rank.values()
             .firstOrNull { it.rankingMetric(matchCount) } ?: throw IllegalArgumentException("로또 룰에 벗어난 수는 입력될 수 없다")
+
+        fun Map<Rank, Int>.fillMissRankWithDefault(): Map<Rank, Int> = Rank.values()
+                .associateWith { this.getOrDefault(it, DEFAULT_RANK_COUNT) }
     }
 }
