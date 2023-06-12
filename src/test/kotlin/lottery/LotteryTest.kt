@@ -13,6 +13,8 @@ import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_4
 import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_5
 import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_6
 import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_7
+import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_8
+import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_9
 
 class LotteryTest : FunSpec({
 
@@ -75,30 +77,54 @@ class LotteryTest : FunSpec({
 
     context("compareWinningLottery") {
         test("당첨로또와 비교하여 Rank를 반환한다") {
-            val givenLottery = Lottery(
-                values = listOf(
-                    LOTTERY_NUMBER_1,
-                    LOTTERY_NUMBER_2,
-                    LOTTERY_NUMBER_3,
-                    LOTTERY_NUMBER_4,
-                    LOTTERY_NUMBER_5,
-                    LOTTERY_NUMBER_6
-                )
-            )
-
-            val winLottery = Lottery(
-                values = listOf(
-                    LOTTERY_NUMBER_1,
-                    LOTTERY_NUMBER_2,
-                    LOTTERY_NUMBER_3,
-                    LOTTERY_NUMBER_4,
-                    LOTTERY_NUMBER_5,
-                    LOTTERY_NUMBER_7
-                )
-            )
+            val givenLottery = LOTTERY_1_6
+            val winLottery = LOTTERY_2_7
 
             val actual = winLottery.compareWinningLottery(givenLottery)
             actual shouldBe Rank.SECOND
         }
     }
-})
+}) {
+    companion object {
+        val LOTTERY_1_6 = Lottery(
+            values = listOf(
+                LOTTERY_NUMBER_1,
+                LOTTERY_NUMBER_2,
+                LOTTERY_NUMBER_3,
+                LOTTERY_NUMBER_4,
+                LOTTERY_NUMBER_5,
+                LOTTERY_NUMBER_6
+            )
+        )
+        val LOTTERY_2_7 = Lottery(
+            values = listOf(
+                LOTTERY_NUMBER_2,
+                LOTTERY_NUMBER_3,
+                LOTTERY_NUMBER_4,
+                LOTTERY_NUMBER_5,
+                LOTTERY_NUMBER_6,
+                LOTTERY_NUMBER_7
+            )
+        )
+        val LOTTERY_3_8 = Lottery(
+            values = listOf(
+                LOTTERY_NUMBER_3,
+                LOTTERY_NUMBER_4,
+                LOTTERY_NUMBER_5,
+                LOTTERY_NUMBER_6,
+                LOTTERY_NUMBER_7,
+                LOTTERY_NUMBER_8
+            )
+        )
+        val LOTTERY_4_9 = Lottery(
+            values = listOf(
+                LOTTERY_NUMBER_4,
+                LOTTERY_NUMBER_5,
+                LOTTERY_NUMBER_6,
+                LOTTERY_NUMBER_7,
+                LOTTERY_NUMBER_8,
+                LOTTERY_NUMBER_9
+            )
+        )
+    }
+}

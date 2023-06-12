@@ -26,5 +26,7 @@ class LotteryNumberTest : FunSpec({
         val LOTTERY_NUMBER_5 = LotteryNumber(5)
         val LOTTERY_NUMBER_6 = LotteryNumber(6)
         val LOTTERY_NUMBER_7 = LotteryNumber(7)
+        val LOTTERY_NUMBER_8 = LotteryNumber(8)
+        val LOTTERY_NUMBER_9 = LotteryNumber(9)
     }
 }
