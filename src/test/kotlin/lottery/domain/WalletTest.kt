@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldBe
 import lottery.domain.lottery.Lotteries
 import lottery.domain.lottery.LotteryTest
 import java.math.BigDecimal
-import java.math.RoundingMode
 
 class WalletTest : FunSpec({
 
@@ -29,7 +28,7 @@ class WalletTest : FunSpec({
             actual.statistics[Rank.SECOND] shouldBe 0
             actual.statistics[Rank.THIRD] shouldBe 1
             actual.statistics[Rank.FOURTH] shouldBe 1
-            actual.yield.setScale(2) shouldBe BigDecimal(1_000_013.75)
+            actual.lottoYield.setScale(2) shouldBe BigDecimal(1_000_013.75)
         }
     }
 })

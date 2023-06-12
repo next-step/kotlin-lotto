@@ -11,8 +11,8 @@ class Wallet(
 ) {
     fun calculateLotteryResult(winLottery: Lottery): LottoResult {
         val statistics = purchasedLotteries.compareWinningLottery(winLottery)
-        val yield = calculateYield(statistics)
-        return LottoResult(yield = yield, statistics = statistics)
+        val lottoYield = calculateYield(statistics)
+        return LottoResult(lottoYield = lottoYield, statistics = statistics)
     }
 
     fun toPurchasedLotteries() = purchasedLotteries.map { it.toLotteryNumbers() }
