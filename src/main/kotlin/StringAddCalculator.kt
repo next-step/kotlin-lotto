@@ -20,7 +20,11 @@ object StringAddCalculator {
     }
 
     private fun sum(tokens: List<String>): Int {
-        require(tokens.all { it.toInt() >= 0 }) { "음수는 입력할 수 없습니다." }
-        return tokens.sumOf { it.toInt() }
+        return tokens.map {
+            require( it.isInt() ) { "숫자가 입력되어야 합니다." }
+            Positive(it.toInt())
+        }
+            .reduce { acc, positive -> acc.add(positive) }
+            .number
     }
 }
