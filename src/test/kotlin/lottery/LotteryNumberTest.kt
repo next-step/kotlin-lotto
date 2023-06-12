@@ -17,4 +17,14 @@ class LotteryNumberTest : FunSpec({
             }
         }
     }
-})
+}) {
+    companion object {
+        val LOTTERY_NUMBER_1 = LotteryNumber(1)
+        val LOTTERY_NUMBER_2 = LotteryNumber(2)
+        val LOTTERY_NUMBER_3 = LotteryNumber(3)
+        val LOTTERY_NUMBER_4 = LotteryNumber(4)
+        val LOTTERY_NUMBER_5 = LotteryNumber(5)
+        val LOTTERY_NUMBER_6 = LotteryNumber(6)
+        val LOTTERY_NUMBER_7 = LotteryNumber(7)
+    }
+}
