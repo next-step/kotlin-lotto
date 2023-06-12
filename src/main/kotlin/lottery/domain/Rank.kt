@@ -1,7 +1,7 @@
 package lottery.domain
 
 enum class Rank(
-    val reward: Int,
+    val reward: Long,
     val rankingMetric: (Int) -> Boolean
 ) {
     NOTHING(0, { it in 0..2 }),
