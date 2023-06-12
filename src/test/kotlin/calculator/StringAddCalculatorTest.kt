@@ -11,7 +11,7 @@ class StringAddCalculatorTest : StringSpec({
         forAll(
             row("1:2,3:4", "10"),
             row("5,6,7,8,9,1,1", "37"),
-            row("${Int.MAX_VALUE},${Int.MAX_VALUE},${Int.MAX_VALUE}", "${Int.MIN_VALUE}"),
+            row("${Int.MAX_VALUE},${Int.MAX_VALUE},${Int.MAX_VALUE}", "${Int.MAX_VALUE}"),
             row("//^\n0^1^2^7", "10"),
             row("//?\n0?1?2?7", "10"),
             row("//+\n0+1+2+7", "10"),

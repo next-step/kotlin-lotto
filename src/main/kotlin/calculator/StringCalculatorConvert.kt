@@ -11,8 +11,7 @@ object StringCalculatorConvert {
 
     @Throws(IllegalArgumentException::class)
     fun convertNumbers(stringCalculatorText: String): PositiveNumbers = PositiveNumbers(
-        elements = splitText(text = stringCalculatorText).map(this::convertNumber)
-            .toIntArray(),
+        elements = splitText(text = stringCalculatorText).map(this::convertNumber),
     )
 
     private fun splitText(text: String): List<String> = CUSTOM_DELIMITER_REGEX.find(input = text)
