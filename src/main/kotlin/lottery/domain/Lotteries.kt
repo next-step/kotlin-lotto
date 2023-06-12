@@ -1,6 +1,6 @@
-package lottery
+package lottery.domain
 
-import lottery.Rank.Companion.fillMissRankWithDefault
+import lottery.domain.Rank.Companion.fillMissRankWithDefault
 
 class Lotteries(
     val values: List<Lottery>

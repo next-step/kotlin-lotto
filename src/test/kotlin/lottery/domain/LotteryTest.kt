@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FunSpec
@@ -6,15 +6,15 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_1
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_2
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_3
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_4
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_5
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_6
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_7
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_8
-import lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_9
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_1
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_2
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_3
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_4
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_5
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_6
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_7
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_8
+import lottery.domain.LotteryNumberTest.Companion.LOTTERY_NUMBER_9
 
 class LotteryTest : FunSpec({
 

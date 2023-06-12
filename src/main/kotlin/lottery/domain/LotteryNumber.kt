@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 @JvmInline
 value class LotteryNumber(

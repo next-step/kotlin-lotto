@@ -1,6 +1,4 @@
-package lottery
-
-import java.util.EnumMap
+package lottery.domain
 
 enum class Rank(
     val price: Int,

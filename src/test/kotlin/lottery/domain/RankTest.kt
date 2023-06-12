@@ -1,16 +1,16 @@
-package lottery
+package lottery.domain
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import lottery.Rank.Companion.fillMissRankWithDefault
-import lottery.Rank.FIRST
-import lottery.Rank.FOURTH
-import lottery.Rank.NOTHING
-import lottery.Rank.SECOND
-import lottery.Rank.THIRD
+import lottery.domain.Rank.Companion.fillMissRankWithDefault
+import lottery.domain.Rank.FIRST
+import lottery.domain.Rank.FOURTH
+import lottery.domain.Rank.NOTHING
+import lottery.domain.Rank.SECOND
+import lottery.domain.Rank.THIRD
 import java.lang.IllegalArgumentException
 
 class RankTest : FunSpec({

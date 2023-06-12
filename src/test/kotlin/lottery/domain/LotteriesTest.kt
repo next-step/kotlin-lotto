@@ -1,10 +1,10 @@
-package lottery
+package lottery.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import lottery.LotteryTest.Companion.LOTTERY_1_6
-import lottery.LotteryTest.Companion.LOTTERY_3_8
-import lottery.LotteryTest.Companion.LOTTERY_4_9
+import lottery.domain.LotteryTest.Companion.LOTTERY_1_6
+import lottery.domain.LotteryTest.Companion.LOTTERY_3_8
+import lottery.domain.LotteryTest.Companion.LOTTERY_4_9
 
 class LotteriesTest : FunSpec({
 

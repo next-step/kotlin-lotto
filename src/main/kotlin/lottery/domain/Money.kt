@@ -1,4 +1,4 @@
-package lottery
+package lottery.domain
 
 class Money(
     val value: Int
