@@ -5,6 +5,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lottery.domain.lottery.generator.RandomLotteryGenerator
+import java.math.BigDecimal
 
 class MoneyTest : FunSpec({
 
@@ -25,7 +26,7 @@ class MoneyTest : FunSpec({
 
         test("금액만큼 로또를 구매할 수 있다") {
             val actual = Money(value = 2_500).purchaseLotteries(RandomLotteryGenerator)
-            actual.usedMoney shouldBe 2_000
+            actual.usedMoney shouldBe BigDecimal(2_000)
             actual.purchasedLotteries shouldHaveSize 2
         }
     }

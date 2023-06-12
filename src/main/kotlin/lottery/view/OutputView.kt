@@ -15,7 +15,7 @@ fun printLottoResult(lottoResult: LottoResult) {
     println("---------")
     lottoResult.statistics
         .forEach { printStatistic(it) }
-    println("총 수익률은 ${lottoResult.yield}입니다.")
+    println("총 수익률은 ${lottoResult.yield.setScale(2)}입니다.")
 }
 
 private fun printStatistic(it: Map.Entry<Rank, Int>) {

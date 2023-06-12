@@ -2,6 +2,7 @@ package lottery.domain
 
 import lottery.domain.lottery.generator.LotteryGenerator
 import lottery.domain.lottery.Lotteries.Companion.toLotteries
+import java.math.BigDecimal
 
 class Money(
     val value: Int
@@ -15,7 +16,7 @@ class Money(
         val purchaseCount = value.div(LOTTERY_COST)
         val randomLotteries = (0 until purchaseCount).map { randomLotteryGenerator.generate() }
             .toLotteries()
-        return Wallet(LOTTERY_COST.times(purchaseCount), randomLotteries)
+        return Wallet(LOTTERY_COST.times(purchaseCount).toBigDecimal(), randomLotteries)
     }
 
     companion object {
