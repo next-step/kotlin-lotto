@@ -21,7 +21,7 @@ enum class Rank(
         fun from(matchCount: Int) = Rank.values()
             .firstOrNull { it.rankingMetric(matchCount) } ?: throw IllegalArgumentException("로또 룰에 벗어난 수는 입력될 수 없다")
 
-        fun Map<Rank, Int>.fillMissRankWithDefault(): Map<Rank, Int> = Rank.values()
+        fun Map<Rank, Int>.fillMissRankWithDefault() = Rank.values()
             .associateWith { this.getOrDefault(it, DEFAULT_RANK_COUNT) }
             .filterNot { it.key == NOTHING }
     }

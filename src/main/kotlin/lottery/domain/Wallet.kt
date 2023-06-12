@@ -17,7 +17,7 @@ class Wallet(
 
     fun toPurchasedLotteries() = purchasedLotteries.map { it.toLotteryNumbers() }
 
-    private fun calculateYield(statistics: Map<Rank, Int>): BigDecimal =
+    private fun calculateYield(statistics: Map<Rank, Int>) =
         calculateTotalReward(statistics).divide(usedMoney, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
 
     private fun calculateTotalReward(result: Map<Rank, Int>) =
