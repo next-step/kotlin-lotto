@@ -14,5 +14,6 @@ class Lottery(
 
     companion object {
         const val LOTTERY_NUMBER_SIZE = 6
+        fun from(values: List<Int>) = values.map { LotteryNumber(it) }
     }
 }

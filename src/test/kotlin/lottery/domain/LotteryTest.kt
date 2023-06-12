@@ -84,6 +84,13 @@ class LotteryTest : FunSpec({
             actual shouldBe Rank.SECOND
         }
     }
+
+    context("from") {
+        test("숫자 list를 입력받아 Lottery를 생성한다") {
+            val actual = Lottery.from(listOf(1, 2, 3, 4, 5, 6))
+            actual shouldHaveSize 6
+        }
+    }
 }) {
     companion object {
         val LOTTERY_1_6 = Lottery(
