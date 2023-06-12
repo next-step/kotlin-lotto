@@ -1,7 +1,7 @@
 package lottery.domain
 
 enum class Rank(
-    val price: Int,
+    val reward: Int,
     val rankingMetric: (Int) -> Boolean
 ) {
     NOTHING(0, { it in 0..2 }),
@@ -11,7 +11,7 @@ enum class Rank(
     FIRST(2_000_000_000, { it == 6 }),
     ;
 
-    fun calculatePrice(count: Int) = price.times(count)
+    fun calculatePrice(count: Int) = reward.times(count)
 
     companion object {
         private const val DEFAULT_RANK_COUNT = 0
