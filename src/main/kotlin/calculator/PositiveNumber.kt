@@ -12,7 +12,7 @@ value class PositiveNumber(val value: Int) {
     companion object {
         fun from(value: String): PositiveNumber = PositiveNumber(parseToNumber(value))
 
-        private fun parseToNumber(value: String) = runCatching { value.toInt() }
-                .getOrElse { throw IllegalArgumentException("숫자가 아닌 문자를 입력할 수 없다") }
+        private fun parseToNumber(value: String) =
+            value.toIntOrNull() ?: throw IllegalArgumentException("숫자가 아닌 문자를 입력할 수 없다")
     }
 }
