@@ -5,7 +5,6 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import java.lang.IllegalArgumentException
 
 class LotteryNumberTest : FunSpec({
 
@@ -15,6 +14,18 @@ class LotteryNumberTest : FunSpec({
                 val exception = shouldThrowExactly<IllegalArgumentException> { LotteryNumber(value = input) }
                 exception.message shouldBe "로또 번호는 1~45의 수만 입력 가능하다."
             }
+        }
+    }
+
+    context("from") {
+        test("문자 입력시 예외가 발생한다") {
+            val exception = shouldThrowExactly<IllegalArgumentException> { LotteryNumber.from("a") }
+            exception.message shouldBe "숫자만 입력 가능하다"
+        }
+
+        test("숫자문자를 입력받아 생성한다") {
+            val actual = LotteryNumber.from("1")
+            actual shouldBe LotteryNumber(1)
         }
     }
 }) {
