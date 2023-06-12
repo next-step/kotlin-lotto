@@ -1,4 +1,4 @@
-package lottery.domain
+package lottery.domain.lottery.generator
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize

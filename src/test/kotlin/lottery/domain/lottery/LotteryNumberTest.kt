@@ -1,4 +1,4 @@
-package lottery.domain
+package lottery.domain.lottery
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FunSpec

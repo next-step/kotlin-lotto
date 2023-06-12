@@ -1,6 +1,7 @@
 package lottery.domain
 
-import lottery.domain.Lotteries.Companion.toLotteries
+import lottery.domain.lottery.generator.LotteryGenerator
+import lottery.domain.lottery.Lotteries.Companion.toLotteries
 
 class Money(
     val value: Int

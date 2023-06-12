@@ -1,8 +1,8 @@
 package lottery
 
-import lottery.domain.Lottery
+import lottery.domain.lottery.Lottery
 import lottery.domain.Money
-import lottery.domain.RandomLotteryGenerator
+import lottery.domain.lottery.generator.RandomLotteryGenerator
 import lottery.view.inputPurchaseMoney
 import lottery.view.inputWinningLottery
 import lottery.view.printLottoResult

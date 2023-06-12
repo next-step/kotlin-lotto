@@ -1,5 +1,8 @@
 package lottery.domain
 
+import lottery.domain.lottery.Lotteries
+import lottery.domain.lottery.Lottery
+
 class Wallet(
     val usedMoney: Int,
     val purchasedLotteries: Lotteries

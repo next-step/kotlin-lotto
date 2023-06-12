@@ -1,4 +1,6 @@
-package lottery.domain
+package lottery.domain.lottery
+
+import lottery.domain.Rank
 
 class Lottery(
     val values: List<LotteryNumber>

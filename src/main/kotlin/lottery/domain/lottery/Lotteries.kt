@@ -1,5 +1,6 @@
-package lottery.domain
+package lottery.domain.lottery
 
+import lottery.domain.Rank
 import lottery.domain.Rank.Companion.fillMissRankWithDefault
 
 class Lotteries(

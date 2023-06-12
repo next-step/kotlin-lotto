@@ -2,6 +2,8 @@ package lottery.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lottery.domain.lottery.Lotteries
+import lottery.domain.lottery.LotteryTest
 
 class WalletTest : FunSpec({
 
