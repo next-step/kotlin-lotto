@@ -6,10 +6,7 @@ object StringAddCalculator {
     private val DEFAULT_COMMAND_PATTERN_REGEX = "[,:]".toRegex()
 
     fun add(command: String?): Int {
-        if (command.isNullOrBlank()) {
-            return 0
-        }
-        return parse(command).sumOf { toNonNegativeInt(it) }
+        return if (command.isNullOrBlank()) 0 else parse(command).sumOf { toNonNegativeInt(it) }
     }
 
     private fun parse(command: String): List<String> {
