@@ -49,4 +49,11 @@ class StringAddCalculatorTest : StringSpec({
         val result = calculator.add()
         result shouldBe 6
     }
+
+    "기본 구분자 외에 커스텀 구분자를 지정할 수 있다." {
+        val input = "//;\n1;2;3"
+        calculator.separateStrings(input)
+        val result = calculator.add()
+        result shouldBe 6
+    }
 })
