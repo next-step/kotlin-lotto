@@ -1,18 +1,19 @@
 package calculator
 
+import calculator.StringAddCalculator.calculate
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
 class StringAddCalculatorTest : StringSpec({
-    val stringAddCalculator = StringAddCalculator
 
     "기본 케이스 계산" {
         mapOf(
             "1,2" to 3,
             "1,2:3" to 6,
-        ).forEach { (input, answer) ->
-            stringAddCalculator.calculate(input) shouldBe answer
+        ).forAll { (input, answer) ->
+            calculate(input) shouldBe answer
         }
     }
 
@@ -21,8 +22,8 @@ class StringAddCalculatorTest : StringSpec({
             null to 0,
             "" to 0,
             "1" to 1,
-        ).forEach { (input, answer) ->
-            stringAddCalculator.calculate(input) shouldBe answer
+        ).forAll { (input, answer) ->
+            calculate(input) shouldBe answer
         }
     }
 
@@ -30,8 +31,8 @@ class StringAddCalculatorTest : StringSpec({
         mapOf(
             "//?\n1?2?3" to 6,
             "//;\n1;2;3" to 6
-        ).forEach { (input, answer) ->
-            stringAddCalculator.calculate(input) shouldBe answer
+        ).forAll { (input, answer) ->
+            calculate(input) shouldBe answer
         }
     }
 
@@ -40,9 +41,9 @@ class StringAddCalculatorTest : StringSpec({
             "-1,2,3",
             "a,b",
             "1,2,-3"
-        ).forEach {
+        ).forAll {
             shouldThrow<RuntimeException> {
-                stringAddCalculator.calculate(it)
+                calculate(it)
             }
         }
     }
