@@ -1,9 +1,14 @@
 package next.step.lotto.domain
 
 @JvmInline
-value class LottoWinningStat(val stats: Map<LottoWinningCount, Int>) : Map<LottoWinningCount, Int> by stats {
+value class LottoWinningStat(private val stats: Map<LottoWinningCount, Int>) : Map<LottoWinningCount, Int> by stats {
+    fun totalWinnings(): Int = stats.map { it.key.winnings * it.value }.sum()
+
     companion object {
-        fun of(stats: Map<LottoWinningCount, Int>): LottoWinningStat = LottoWinningStat(stats)
+        fun of(stats: Map<LottoWinningCount, Int>): LottoWinningStat {
+            val initStats = LottoWinningCount.values().associateWith { 0 }
+            return LottoWinningStat(initStats + stats)
+        }
     }
 
 }
