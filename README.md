@@ -76,10 +76,10 @@
 - 로또 등수 관리
 - 수익률 계산
 
-#### LottoTicketGenerator
+#### LottoTicketStorage
 
-- 로또 생성기
+- 로또 티켓 제공
 
-##### RandomLottoTicketGenerator
+##### RandomLottoTicketStorage
 
-- 랜덤 로또 생성기
+- 랜덤 로또 티켓 제공

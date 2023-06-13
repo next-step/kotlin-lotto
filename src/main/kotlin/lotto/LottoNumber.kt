@@ -1,5 +1,6 @@
 package lotto
 
+
 @JvmInline
 value class LottoNumber(val number: Int) {
 
@@ -14,7 +15,10 @@ value class LottoNumber(val number: Int) {
     }
 
     companion object {
-        const val MIN_NUMBER: Int = 1
-        const val MAX_NUMBER: Int = 45
+        private const val MIN_NUMBER = 1
+        private const val MAX_NUMBER = 45
+
+        val MIN: LottoNumber = LottoNumber(MIN_NUMBER)
+        val MAX: LottoNumber = LottoNumber(MAX_NUMBER)
     }
 }
