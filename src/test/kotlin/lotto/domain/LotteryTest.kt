@@ -15,7 +15,7 @@ class LotteryTest : DescribeSpec({
     describe(name = "복권을 생성할 수 있다.") {
         forAll(
             row(mockLottoNumbers(1, 2, 3, 4, 5, 6), mockLottery(1, 2, 3, 4, 5, 6)),
-            row(mockLottoNumbers(5, 8, 23, 45, 23, 43), mockLottery(5, 8, 23, 45, 23, 43)),
+            row(mockLottoNumbers(5, 8, 23, 45, 24, 43), mockLottery(5, 8, 23, 45, 24, 43)),
         ) { numbers, expect ->
             context(name = "중복되지 않고, 정해진 수의 번호를 입력하면") {
                 val lottery = Lottery(numbers = numbers)
@@ -28,7 +28,7 @@ class LotteryTest : DescribeSpec({
 
         forAll(
             row(mockLottoNumbers(1, 2, 3, 4, 5), 5),
-            row(mockLottoNumbers(5, 8, 23, 45, 23, 43, 32), 7),
+            row(mockLottoNumbers(5, 8, 23, 45, 24, 43, 32), 7),
             row(mockLottoNumbers(1, 1, 1, 1, 1, 1), 1),
             row(mockLottoNumbers(), 0),
         ) { numbers, expect ->
@@ -38,7 +38,9 @@ class LotteryTest : DescribeSpec({
                 }
 
                 it(name = "중복되지 않고, 정해진 수의 복권 번호를 입력하라고 에러가 발생한다.") {
-                    exception shouldHaveMessage LottoErrorCode.INVALID_LOTTERY_NUMBER.message(expect.toString())
+                    exception shouldHaveMessage LottoErrorCode.INVALID_LOTTERY_NUMBER.message(
+                        "$expect ${Lottery.ALLOW_LOTTO_NUMBER_COUNT}"
+                    )
                 }
             }
         }
@@ -48,13 +50,13 @@ class LotteryTest : DescribeSpec({
         val mockLottoNumbers = mockLottoNumbers(1, 2, 3, 4, 5, 6)
 
         forAll(
-            row(mockLottery(1, 2, 3, 4, 5, 6), 6),
-            row(mockLottery(1, 2, 3, 4, 5, 7), 5),
-            row(mockLottery(1, 2, 3, 4, 8, 7), 4),
-            row(mockLottery(1, 2, 3, 9, 8, 7), 3),
-            row(mockLottery(1, 2, 10, 11, 12, 13), 2),
-            row(mockLottery(1, 22, 23, 34, 25, 15), 1),
-            row(mockLottery(11, 22, 23, 34, 25, 15), 0),
+            row(mockLottery(1, 2, 3, 4, 5, 6), LottoMatchResult(countOfMatch = 6)),
+            row(mockLottery(1, 2, 3, 4, 5, 7), LottoMatchResult(countOfMatch = 5)),
+            row(mockLottery(1, 2, 3, 4, 8, 7), LottoMatchResult(countOfMatch = 4)),
+            row(mockLottery(1, 2, 3, 9, 8, 7), LottoMatchResult(countOfMatch = 3)),
+            row(mockLottery(1, 2, 10, 11, 12, 13), LottoMatchResult(countOfMatch = 2)),
+            row(mockLottery(1, 22, 23, 34, 25, 15), LottoMatchResult(countOfMatch = 1)),
+            row(mockLottery(11, 22, 23, 34, 25, 15), LottoMatchResult(countOfMatch = 0)),
         ) { numbers, expect ->
             context(name = "다른 복권이 주어지면") {
                 val correctNumberCount = Lottery(numbers = mockLottoNumbers)

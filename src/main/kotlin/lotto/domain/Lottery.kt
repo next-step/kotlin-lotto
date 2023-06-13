@@ -11,7 +11,15 @@ value class Lottery(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by
         }
     }
 
-    fun correctNumberCount(otherLottery: Lottery): Int = this.count { it in otherLottery }
+    constructor(lotteryText: String) : this(
+        numbers = lotteryText.split(DELIMITER)
+            .map(::LottoNumber)
+            .toSet()
+    )
+
+    fun correctNumberCount(otherLottery: Lottery): LottoMatchResult = LottoMatchResult(
+        countOfMatch = this.count { it in otherLottery },
+    )
 
     override fun toString(): String = numbers.toString()
 
