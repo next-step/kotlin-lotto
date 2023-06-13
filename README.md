@@ -25,4 +25,61 @@
 - 문자열을 덧셈하여 보여주는 유틸 클래스
 - 비즈니스 로직을 구현하는 클래스
 
- 
+## 2단계 - 로또 (자동)
+
+- 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
+- 로또 1장의 가격은 1000원이다.
+
+### Controller
+
+#### LottoGame
+
+- 로또 게임을 실행하는 클래스
+
+### View
+
+#### InputView
+
+- 로또 구입 금액 입력
+
+#### ResultView
+
+- 구매 정보 출력
+- 당첨 통계 출력
+
+### Model
+
+#### LottoStore
+
+- 로또 금액만큼 생성
+
+#### PurchasedLotto
+
+- 구매한 로또 리스트 관리
+- 구매된 금액 관리
+
+#### LottoRank
+
+- 일치하는 로또 번호 개수로 등수 계산
+
+#### LottoNumber
+
+- 1~45 까지의 로또 번호
+
+#### LottoTicket
+
+- 로또 번호 6개를 관리하는 티켓
+- 일치하는 번호 갯수 계산
+
+#### LottoScore
+
+- 로또 등수 관리
+- 수익률 계산
+
+#### LottoTicketGenerator
+
+- 로또 생성기
+
+##### RandomLottoTicketGenerator
+
+- 랜덤 로또 생성기
