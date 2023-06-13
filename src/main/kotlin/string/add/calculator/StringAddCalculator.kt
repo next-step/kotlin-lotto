@@ -20,14 +20,14 @@ class StringAddCalculator {
     }
 
     private fun calculate(text: String): Int {
-        var newText = text
+        var textAfterCustomDelimiter = text
 
-        findCustomDelimiter(newText)?.let {
+        findCustomDelimiter(text)?.let {
             delimiters.add(it)
-            newText = newText.substringAfter(CUSTOM_DELIMITER_END)
+            textAfterCustomDelimiter = text.substringAfter(CUSTOM_DELIMITER_END)
         }
 
-        val numberStrings = newText.split(*delimiters.toTypedArray())
+        val numberStrings = textAfterCustomDelimiter.split(*delimiters.toTypedArray())
 
         val numbers = convertToIntList(numberStrings)
         return numbers.sum()
