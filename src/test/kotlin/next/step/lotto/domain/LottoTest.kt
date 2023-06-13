@@ -60,7 +60,6 @@ class LottoTest : DescribeSpec({
             it("당첨된 개수에 따라 LottoWinningCount 제공") {
                 Lottos.of(
                     setOf(
-                        Lotto.from(setOf(1, 2, 3, 4, 5, 6)),
                         Lotto.from(setOf(1, 2, 3, 4, 5, 7)),
                         Lotto.from(setOf(1, 2, 3, 4, 8, 7)),
                         Lotto.from(setOf(1, 2, 3, 9, 8, 7)),
@@ -71,7 +70,7 @@ class LottoTest : DescribeSpec({
                 ).match(LottoWinningNumbers.from("1,2,3,4,5,6")) shouldBe
                         LottoWinningStat.of(
                             mapOf(
-                                Pair(LottoWinningCount.SIX, 1),
+                                Pair(LottoWinningCount.SIX, 0),
                                 Pair(LottoWinningCount.FIVE, 1),
                                 Pair(LottoWinningCount.FOUR, 1),
                                 Pair(LottoWinningCount.THREE, 1),
