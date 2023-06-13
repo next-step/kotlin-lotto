@@ -7,8 +7,7 @@ object RandomLottoNumbersGenerator : LottoNumbersGenerator {
     private const val START_INDEX = 0
 
     override fun generate(): LinkedHashSet<LottoNumber> =
-        (LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE).shuffled()
+        LottoNumber.all().shuffled()
             .subList(START_INDEX, Lotto.VALID_LENGTH)
-            .map(LottoNumber::valueOf)
             .toCollection(LinkedHashSet())
 }

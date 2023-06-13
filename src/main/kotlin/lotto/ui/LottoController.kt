@@ -1,9 +1,9 @@
 package lotto.ui
 
 import lotto.application.LottoService
-import lotto.domain.LottoCreateRequest
 import lotto.domain.LottoResult
 import lotto.domain.Lottos
+import lotto.domain.WinningStatsticsInfo
 
 class LottoController(
     private val lottoService: LottoService,
@@ -20,7 +20,7 @@ class LottoController(
         val inputWinningNumbers: List<String> = lottoInput.requestWinningNumbers()
 
         val lottoResult: LottoResult = lottoService.getWinningStatistics(
-            request = LottoCreateRequest(
+            request = WinningStatsticsInfo(
                 money = money,
                 winningNumbers = inputWinningNumbers,
                 lottos = lottos

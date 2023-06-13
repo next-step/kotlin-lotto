@@ -1,12 +1,12 @@
 package lotto.application
 
 import lotto.domain.Lotto
-import lotto.domain.LottoCreateRequest
 import lotto.domain.LottoResult
 import lotto.domain.LottoType
 import lotto.domain.Lottos
 import lotto.domain.Money
 import lotto.domain.WinningNumbers
+import lotto.domain.WinningStatsticsInfo
 import lotto.domain.generator.LottoNumbersGeneratorManager
 import lotto.domain.strategy.ProfitCalculator
 
@@ -15,7 +15,7 @@ class LottoService(
     private val profitCalculator: ProfitCalculator
 ) {
 
-    fun getWinningStatistics(request: LottoCreateRequest): LottoResult {
+    fun getWinningStatistics(request: WinningStatsticsInfo): LottoResult {
         val inputMoney = Money(value = request.money)
         val winningStatistics =
             request.lottos.winningStatistics(winningNumbers = WinningNumbers.from(strings = request.winningNumbers))
@@ -27,9 +27,15 @@ class LottoService(
         return LottoResult(winningStatistics = winningStatistics, profitRate = profitRate)
     }
 
-    fun issueAutoLotto(requestMoney: Int): Lottos = Money(requestMoney).takeIf { it >= Lotto.PRICE }
-        ?.let { createLottos(inputMoney = it, lottoType = LottoType.AUTO) }
-        ?: throw IllegalArgumentException("로또를 구매할 수 있는 금액이 아닙니다. Input: $requestMoney")
+    fun issueAutoLotto(requestMoney: Int): Lottos {
+        val money = Money(requestMoney)
+
+        require(money >= Lotto.PRICE) {
+            "로또를 구매할 수 있는 금액이 아닙니다. Input: $requestMoney"
+        }
+
+        return createLottos(inputMoney = money, lottoType = LottoType.AUTO)
+    }
 
     private fun createLottos(inputMoney: Money, lottoType: LottoType): Lottos {
         val lottoNumbersGenerator = lottoNumbersGeneratorManager.getGenerator(lottoType)

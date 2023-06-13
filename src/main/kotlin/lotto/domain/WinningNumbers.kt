@@ -1,6 +1,6 @@
 package lotto.domain
 
-class WinningNumbers(private val values: LinkedHashSet<LottoNumber>) : Set<LottoNumber> by values {
+class WinningNumbers(private val values: Set<LottoNumber>) : Set<LottoNumber> by values {
     init {
         require(values.size == VALID_LENGTH) {
             "Require number size: ${Lotto.VALID_LENGTH}, Input: $values"
@@ -17,7 +17,7 @@ class WinningNumbers(private val values: LinkedHashSet<LottoNumber>) : Set<Lotto
         fun from(strings: List<String>): WinningNumbers = strings.map(String::trim)
             .mapNotNull(String::toIntOrNull)
             .map(LottoNumber::valueOf)
-            .toCollection(LinkedHashSet())
+            .toSet()
             .let(::WinningNumbers)
     }
 }

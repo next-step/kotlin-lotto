@@ -4,12 +4,13 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.config.LottoConfig
-import lotto.domain.LottoCreateRequest
+import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.ProfitRate
 import lotto.domain.Rank
+import lotto.domain.WinningStatsticsInfo
 import lotto.domain.generator.LottoNumbersGeneratorManager
-import lotto.fixture.LottoFixtureGenerator
+import lotto.fixture.of
 
 class LottoServiceTest : BehaviorSpec({
 
@@ -18,19 +19,17 @@ class LottoServiceTest : BehaviorSpec({
 
         When("유효한 로또 생성 정보를 전달하면") {
             val lottos = Lottos(
-                values = listOf(
-                    LottoFixtureGenerator.createLotto(listOf(1, 2, 3, 4, 5, 6))
-                )
+                values = listOf(Lotto.of(1, 2, 3, 4, 5, 6))
             )
-            val request = LottoCreateRequest(
+            val request = WinningStatsticsInfo(
                 money = 1000,
                 winningNumbers = listOf("1", "2", "3", "8", "11", "7"),
                 lottos = lottos
             )
 
             Then("당첨 결과와 수익율을 반환한다.") {
-                val actual = service.getWinningStatistics(request = request)
                 val expected = ProfitRate(5.0)
+                val actual = service.getWinningStatistics(request = request)
 
                 actual.winningStatistics[Rank.FOURTH] shouldBe 1
                 actual.profitRate shouldBe expected

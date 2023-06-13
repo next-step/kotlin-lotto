@@ -52,6 +52,6 @@ class LottoTest : FunSpec({
         val actual = Lotto(mixLottoNumbers)
         val expected = mixLottoNumbers.sorted()
 
-         expected shouldContainExactly actual.lottoNumbers
+        expected shouldContainExactly actual.lottoNumbers
     }
 })

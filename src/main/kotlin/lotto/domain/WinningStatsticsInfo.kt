@@ -1,6 +1,6 @@
 package lotto.domain
 
-data class LottoCreateRequest(
+data class WinningStatsticsInfo(
     val money: Int,
     val winningNumbers: List<String>,
     val lottos: Lottos

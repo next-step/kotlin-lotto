@@ -1,8 +1,9 @@
 package lotto.fixture
 
 import lotto.domain.Lotto
-import lotto.fixture.LottoNumbersFixtureMaker.createLottoNumbers
+import lotto.domain.LottoNumber
 
-object LottoFixtureGenerator {
-    fun createLotto(numbers: List<Int>): Lotto = createLottoNumbers(numbers).let(::Lotto)
-}
+internal fun Lotto.Companion.of(vararg values: Int): Lotto = values.toList()
+    .map(LottoNumber::valueOf)
+    .toCollection(LinkedHashSet())
+    .let(::Lotto)

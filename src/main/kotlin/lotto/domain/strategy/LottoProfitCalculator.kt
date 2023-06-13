@@ -1,8 +1,8 @@
 package lotto.domain.strategy
 
-import kotlin.math.floor
 import lotto.domain.Money
 import lotto.domain.ProfitRate
+import kotlin.math.floor
 
 object LottoProfitCalculator : ProfitCalculator {
     private val ZERO_PROFIT = ProfitRate(0.0)

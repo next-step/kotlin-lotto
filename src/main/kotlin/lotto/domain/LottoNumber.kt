@@ -15,5 +15,7 @@ class LottoNumber private constructor(val number: Int) : Comparable<LottoNumber>
 
         fun valueOf(number: Int): LottoNumber =
             store[number] ?: throw IllegalArgumentException("$INVALID_NUMBER_RANGE_MESSAGE $number")
+
+        fun all(): List<LottoNumber> = store.values.toList()
     }
 }
