@@ -25,6 +25,15 @@ class StringAdditionCalculatorInputParserTest {
         actual shouldBe expected
     }
 
+    @ParameterizedTest(name = "{0} should {1}")
+    @MethodSource("getStringInputIncludeCustomDelimiters")
+    fun `문자열 앞부분의 슬래시슬래시와 줄마꿈 사이에 위치하는 문자를 커스텀 구분자로 사용한다`(input: String?, expected: List<String>) {
+        val parser = StringAdditionCalculatorInputParser()
+        val actual = parser.parse(input)
+
+        actual shouldBe expected
+    }
+
     companion object {
         @JvmStatic
         fun getEmptyOrNullInput(): List<Arguments> = listOf(
@@ -39,6 +48,13 @@ class StringAdditionCalculatorInputParserTest {
             Arguments.of("1,2;3", listOf("1", "2", "3")),
             Arguments.of("1;2", listOf("1", "2")),
             Arguments.of("1;2,3", listOf("1", "2", "3")),
+        )
+
+        @JvmStatic
+        fun getStringInputIncludeCustomDelimiters(): List<Arguments> = listOf(
+            Arguments.of("//a\\n1a2", listOf("1", "2")),
+            Arguments.of("//;\\n1;2", listOf("1", "2")),
+            Arguments.of("//.\\n1.2;3,4", listOf("1", "2", "3", "4")),
         )
     }
 }
