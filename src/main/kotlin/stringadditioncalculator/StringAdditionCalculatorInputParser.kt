@@ -7,6 +7,10 @@ class StringAdditionCalculatorInputParser {
             return emptyList()
         }
 
-        return emptyList()
+        return input.split(delimiters = DEFAULT_DELIMITERS)
+    }
+
+    companion object {
+        val DEFAULT_DELIMITERS = arrayOf(";", ",")
     }
 }
