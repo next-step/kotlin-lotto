@@ -1,6 +1,5 @@
 package next.step.lotto.controller
 
-import next.step.lotto.domain.LottoPerformance
 import next.step.lotto.domain.Lottos
 import next.step.racing.view.InputView
 import next.step.racing.view.OutputView
@@ -13,8 +12,7 @@ fun main() {
         val winningNumbers = InputView.readWinningNumbers()
         val winningStat = lottos.match(winningNumbers)
         OutputView.showWinningStats(winningStat)
-        val performance = LottoPerformance.analyze(payment, winningStat.totalWinnings())
-        OutputView.showPerformance(performance)
+        OutputView.showPerformance(winningStat.performance(payment))
     }.onFailure { e ->
         OutputView.showError(e.message)
         main()
