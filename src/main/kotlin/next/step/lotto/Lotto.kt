@@ -11,13 +11,15 @@ value class Lotto(private val numbers: LottoNumbers) {
 
     fun match(winningNumbers: LottoWinningNumbers): LottoWinningCount =
         LottoWinningCount.from(winningNumbers.filter { numbers.contains(it) }.size)
-    
+
     companion object {
         const val LOTTO_PRICE: Int = 1000
 
         fun canBuy(payment: Int): Boolean = payment >= LOTTO_PRICE
 
         fun of(numbers: LottoNumbers): Lotto = Lotto(numbers)
+
+        fun from(numbers: Set<Int>): Lotto = Lotto(LottoNumbers.from(numbers))
 
         fun preview(): Lotto = Lotto(LottoNumbers.random())
     }

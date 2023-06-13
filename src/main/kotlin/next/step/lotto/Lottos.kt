@@ -2,6 +2,9 @@ package next.step.lotto
 
 @JvmInline
 value class Lottos(val lottos: Set<Lotto>) : Set<Lotto> by lottos {
+    fun match(winningNumbers: LottoWinningNumbers): LottoWinningStat =
+        LottoWinningStat.of(lottos.groupingBy { it.match(winningNumbers) }.eachCount())
+    
     companion object {
         fun buy(payment: Int): Lottos {
             val lottos = mutableSetOf<Lotto>()
@@ -15,6 +18,8 @@ value class Lottos(val lottos: Set<Lotto>) : Set<Lotto> by lottos {
             }
             return Lottos(lottos)
         }
+
+        fun of(lottos: Set<Lotto>): Lottos = Lottos(lottos)
     }
 
 }
