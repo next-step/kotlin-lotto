@@ -1,7 +1,5 @@
 package string.add.calculator
 
-import com.sun.tools.javac.jvm.ByteCodes.ret
-
 class StringAddCalculator {
     private val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
 
