@@ -9,7 +9,6 @@ object StringCalculatorConvert {
 
     private const val DEFAULT_NUMBER: Int = 0
 
-    @Throws(IllegalArgumentException::class)
     fun convertNumbers(stringCalculatorText: String): PositiveNumbers = PositiveNumbers(
         elements = splitText(text = stringCalculatorText).map(this::convertNumber),
     )
@@ -23,7 +22,6 @@ object StringCalculatorConvert {
         return tokenStrings.split(customDelimiter)
     }
 
-    @Throws(IllegalArgumentException::class)
     private fun convertNumber(token: String) = when {
         token.isBlank() -> DEFAULT_NUMBER
         else -> requireNotNull(value = token.toIntOrNull()) {
