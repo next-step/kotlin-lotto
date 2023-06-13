@@ -18,7 +18,7 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(text: String) {
+    fun `빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다`(text: String?) {
         assertThat(calculator.add(text)).isZero()
     }
 
@@ -41,7 +41,7 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
+    @ValueSource(strings = ["//;\n1;2;3", "//;\n1,2;3"])
     fun `커스텀 구분자를 지정할 수 있다`(text: String) {
         assertThat(calculator.add(text)).isSameAs(6)
     }
