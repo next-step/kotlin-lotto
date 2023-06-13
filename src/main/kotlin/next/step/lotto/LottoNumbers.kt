@@ -9,8 +9,8 @@ data class LottoNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber
     fun numbers() = numbers
 
     companion object {
-        fun of(numbers: Set<LottoNumber>): LottoNumbers {
-            return LottoNumbers(numbers)
+        fun from(numbers: Set<Int>): LottoNumbers {
+            return LottoNumbers(numbers.map { LottoNumber.of(it) }.toSet())
         }
 
         fun random(): LottoNumbers {
