@@ -20,3 +20,5 @@ class LottoTicketTest : StringSpec({
         }
     }
 })
+
+val ONE_TO_SIX_LOTTO_TICKET = LottoTicket((LottoNumber(1)..LottoNumber(6)).toSet())
