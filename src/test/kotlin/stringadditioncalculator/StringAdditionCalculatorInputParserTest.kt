@@ -1,6 +1,8 @@
 package stringadditioncalculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -32,6 +34,15 @@ class StringAdditionCalculatorInputParserTest {
         val actual = parser.parse(input)
 
         actual shouldBe expected
+    }
+
+    @Test
+    fun `커스텀 구분자가 하이픈인 경우 IllegalArgumentException 예외를 throw 한다`() {
+        val parser = StringAdditionCalculatorInputParser()
+
+        shouldThrow<IllegalArgumentException> {
+            parser.parse(input = "//-\\n1-3;2")
+        }
     }
 
     companion object {
