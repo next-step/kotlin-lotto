@@ -42,4 +42,11 @@ class StringAddCalculatorTest : StringSpec({
         }
         exception.message shouldBe "음수는 입력할 수 없습니다."
     }
+
+    "분리된 숫자의 합을 반환한다." {
+        val input = "1,2:3"
+        calculator.separateStrings(input)
+        val result = calculator.add()
+        result shouldBe 6
+    }
 })
