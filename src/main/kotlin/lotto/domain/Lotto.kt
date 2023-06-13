@@ -19,9 +19,7 @@ class Lotto(val lottoNumbers: LinkedHashSet<LottoNumber>) {
 
     private fun isSorted(lottoNumbers: LinkedHashSet<LottoNumber>): Boolean = lottoNumbers.toList().isSorted()
 
-    private fun List<LottoNumber>.isSorted(): Boolean {
-        return this == sorted()
-    }
+    private fun List<LottoNumber>.isSorted(): Boolean = this == sorted()
 
     companion object {
         val PRICE = Money(1_000)

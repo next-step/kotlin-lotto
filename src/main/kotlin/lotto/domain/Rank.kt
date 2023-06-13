@@ -15,8 +15,6 @@ enum class Rank(
         fun valueOf(matchCount: Int): Rank = values().find { it.predicate(matchCount) }
             ?: throw IllegalArgumentException("Invalid Match Count. Input: $matchCount")
 
-        fun groupingByRank(valueTransform: (Rank) -> Int): Map<Rank, Int> {
-            return values().associateBy({ it }, valueTransform)
-        }
+        fun groupingByRank(valueTransform: (Rank) -> Int): Map<Rank, Int> = values().associateBy({ it }, valueTransform)
     }
 }
