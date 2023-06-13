@@ -9,11 +9,11 @@ object StringAddCalculator {
         return if (command.isNullOrBlank()) 0 else parse(command).sumOf { toNonNegativeInt(it) }
     }
 
-    private fun parse(command: String): List<String> {
+    private fun parse(command: String): Tokens {
         CUSTOM_COMMAND_PATTERN_REGEX.find(command)?.let {
-            return it.groupValues[2].split(it.groupValues[1])
+            return Tokens(it.groupValues[2].split(it.groupValues[1]))
         }
-        return command.split(DEFAULT_COMMAND_PATTERN_REGEX)
+        return Tokens(command.split(DEFAULT_COMMAND_PATTERN_REGEX))
     }
 
     private fun toNonNegativeInt(token: String): Int {
