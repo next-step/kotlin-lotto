@@ -2,7 +2,8 @@ package calculator
 
 import calculator.model.CalculatorErrorCode
 
-data class PositiveNumbers(val elements: List<Int>) {
+@JvmInline
+value class PositiveNumbers(val elements: List<Int>) : List<Int> by elements {
 
     init {
         val invalidNumbers = elements.filter { it < ZERO }
