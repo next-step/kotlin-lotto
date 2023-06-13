@@ -21,7 +21,7 @@ value class WholeNumber(val value: Int) {
             return WholeNumber(value.toInt())
         }
 
-        val Collection<WholeNumber>.sum: WholeNumber
+        val Collection<WholeNumber>.totalNumber: WholeNumber
             get() {
                 return fold(WholeNumber(0)) { first, second -> first + second }
             }

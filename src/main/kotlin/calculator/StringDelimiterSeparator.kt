@@ -8,9 +8,10 @@ value class StringDelimiterSeparator(private val delimiterRegex: Regex) {
         require(pattern.contains("<$DELIMITER_GROUP_NAME>") and pattern.contains("<$STRINGS_GROUP_NAME>")) { "$DELIMITER_GROUP_NAME and $STRINGS_GROUP_NAME must be included in regex pattern. but provided pattern(`$delimiterRegex`)" }
     }
 
-    infix fun split(string: String): Collection<String>? {
+    infix fun split(string: String): Collection<String> {
         return delimiterRegex.find(string)
             ?.let { it.stringValue.split(it.delimiter) }
+            ?: emptyList()
     }
 
     private val MatchResult.delimiter: String
@@ -29,7 +30,7 @@ value class StringDelimiterSeparator(private val delimiterRegex: Regex) {
         private const val DELIMITER_GROUP_NAME: String = "delimiter"
         private const val STRINGS_GROUP_NAME: String = "strings"
 
-        infix fun String.split(separator: StringDelimiterSeparator): Collection<String>? {
+        infix fun String.split(separator: StringDelimiterSeparator): Collection<String> {
             return separator.split(this)
         }
     }
