@@ -25,4 +25,11 @@ class StringAddCalculatorTest : StringSpec({
         val result = calculator.add()
         result shouldBe 0
     }
+
+    "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
+        val input = "1"
+        calculator.separateStrings(input)
+        val result = calculator.add()
+        result shouldBe 1
+    }
 })
