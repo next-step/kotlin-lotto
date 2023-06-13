@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 
 object StringAddCalculator {
     private const val COMMA_DELIMITER = ","
-    private const val COLONS_DELIMITER = ":";
+    private const val COLONS_DELIMITER = ":"
     private const val CUSTOM_SPLIT_PATTERN = "^//(.)\n(.*)"
 
     fun calculate(input: String?): Int {
@@ -13,7 +13,7 @@ object StringAddCalculator {
             return 0
         }
         val tokens = splitTokens(input).map { it.toInt() }
-        if(tokens.any { it < 0 }) throw RuntimeException("0 이상의 숫자를 입력해주세요.")
+        if (tokens.any { it < 0 }) throw RuntimeException("0 이상의 숫자를 입력해주세요.")
 
         return tokens.sum()
     }
