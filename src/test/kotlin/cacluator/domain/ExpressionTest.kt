@@ -1,6 +1,6 @@
-package dmain
+package cacluator.domain
 
-import domain.ExpressionFactory
+import calculator.domain.ExpressionFactory
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 

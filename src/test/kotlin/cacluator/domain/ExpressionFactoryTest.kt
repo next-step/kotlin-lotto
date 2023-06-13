@@ -1,8 +1,8 @@
-package dmain
+package cacluator.domain
 
-import domain.Expression
-import domain.ExpressionFactory
-import domain.Term
+import calculator.domain.Expression
+import calculator.domain.ExpressionFactory
+import calculator.domain.Term
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe

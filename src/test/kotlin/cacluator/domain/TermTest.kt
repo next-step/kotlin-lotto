@@ -1,6 +1,6 @@
-package dmain
+package cacluator.domain
 
-import domain.Term
+import calculator.domain.Term
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec

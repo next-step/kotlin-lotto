@@ -1,9 +1,8 @@
-import domain.ExpressionFactory
-import io.InputView
-import io.ResultView
+import calculator.domain.ExpressionFactory
+import calculator.io.ResultView
 
 fun main() {
-    val input = InputView.getInput()
+    val input = "//;\n1;2;3"
     val expression = ExpressionFactory.createExpression(input)
     ResultView.printResult(expression)
 }

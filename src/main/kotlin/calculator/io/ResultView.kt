@@ -1,6 +1,6 @@
-package io
+package calculator.io
 
-import domain.Expression
+import calculator.domain.Expression
 
 object ResultView {
     fun printResult(expression: Expression) {

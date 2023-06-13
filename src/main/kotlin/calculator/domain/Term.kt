@@ -1,4 +1,4 @@
-package domain
+package calculator.domain
 
 @JvmInline
 value class Term private constructor(val value: Int) {
