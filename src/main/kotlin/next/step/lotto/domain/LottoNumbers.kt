@@ -7,7 +7,7 @@ value class LottoNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumbe
         require(numbers.size == 6) { "로또 번호들은 6개만 생성할 수 있습니다." }
     }
 
-    fun numbers() = numbers
+    fun numbers() = numbers.map { it.number() }
 
     companion object {
         fun from(numbers: Set<Int>): LottoNumbers = LottoNumbers(numbers.map { LottoNumber.of(it) }.toSet())
