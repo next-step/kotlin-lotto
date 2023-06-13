@@ -1,6 +1,5 @@
 package lotto.model
 
-
 @JvmInline
 value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 

@@ -1,7 +1,7 @@
 package lotto.model
 
-import java.math.BigDecimal
 import lotto.model.LottoRank.Companion.totalPrize
+import java.math.BigDecimal
 
 data class LottoScore(
     private val ranks: Collection<LottoRank>,

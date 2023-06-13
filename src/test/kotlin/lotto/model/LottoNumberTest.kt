@@ -6,7 +6,6 @@ import io.kotest.core.spec.DisplayName
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldContainExactly
-import lotto.model.LottoNumber
 
 @DisplayName("로또 번호")
 class LottoNumberTest : StringSpec({

@@ -1,9 +1,9 @@
 package lotto.view
 
-import java.math.BigDecimal
 import lotto.model.LottoRank
 import lotto.model.LottoScore
 import lotto.model.LottoTicket
+import java.math.BigDecimal
 
 object ResultView {
 

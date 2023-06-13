@@ -41,9 +41,13 @@ class LottoStoreTest : StringSpec({
             val purchasedLottoTickets: PurchasedLottoTickets = maxPriceStore purchasedLottoTickets it.first
             // then
             purchasedLottoTickets shouldBe
-                    PurchasedLottoTickets(
-                        (0 until it.second).map { ONE_TO_SIX_LOTTO_TICKET }, oneThousandPrice
-                    )
+                PurchasedLottoTickets(
+                    (0 until it.second).map { ONE_TO_SIX_LOTTO_TICKET }, oneThousandPrice
+                )
         }
     }
 })
+
+object OneToSixLottoTicketStorage : LottoTicketStorage {
+    override val lottoTicket: LottoTicket = ONE_TO_SIX_LOTTO_TICKET
+}
