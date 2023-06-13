@@ -40,4 +40,35 @@ class LottoNumberTest : DescribeSpec({
             }
         }
     }
+
+    describe(name = "로또 번호를 생성할 수 있다.") {
+        forAll(
+            row("1", LottoNumber(number = 1)),
+            row("45", LottoNumber(number = 45)),
+            row(" 40", LottoNumber(number = 40)),
+        ) { text, expect ->
+            context(name = "1 ~ 45 사이의 번호로 생성하면") {
+                val actual = LottoNumber(numberText = text)
+
+                it(name = "입력한 번호로 로또 번호가 생성된다.") {
+                    actual shouldBe expect
+                }
+            }
+        }
+
+        forAll(
+            row("안돼", "안돼"),
+            row("  ", "  "),
+        ) { text, expect ->
+            context(name = "숫자가 아닌 문자열로 생성하면") {
+                val exception = shouldThrow<IllegalArgumentException> {
+                    LottoNumber(numberText = text)
+                }
+
+                it(name = "로또 번호 범위 안에 번호로 생성하라는 에러가 발생한다.") {
+                    exception shouldHaveMessage LottoErrorCode.INVALID_INPUT_NUMBER.message(expect)
+                }
+            }
+        }
+    }
 })
