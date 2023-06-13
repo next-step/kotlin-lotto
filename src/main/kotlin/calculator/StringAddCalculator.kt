@@ -20,8 +20,8 @@ object StringAddCalculator {
 
     private fun splitTokens(input: String): List<Int> {
         val matcher: Matcher = Pattern.compile(CUSTOM_SPLIT_PATTERN).matcher(input)
-        val custom = matcher.find()
-        val tokens = if (custom) {
+        val hasCustomDelimiter = matcher.find()
+        val tokens = if (hasCustomDelimiter) {
             val delimiter = matcher.group(1)
             val inputs = matcher.group(2)
             inputs.split(delimiter)
