@@ -5,7 +5,10 @@ value class StringDelimiterSeparator(private val delimiterRegex: Regex) {
 
     init {
         val pattern = delimiterRegex.pattern
-        require(pattern.contains("<$DELIMITER_GROUP_NAME>") and pattern.contains("<$STRINGS_GROUP_NAME>")) { "$DELIMITER_GROUP_NAME and $STRINGS_GROUP_NAME must be included in regex pattern. but provided pattern(`$delimiterRegex`)" }
+        require(pattern.contains("<$DELIMITER_GROUP_NAME>") and pattern.contains("<$STRINGS_GROUP_NAME>")) {
+            "$DELIMITER_GROUP_NAME and $STRINGS_GROUP_NAME must be included in regex pattern." +
+                " but provided pattern(`$delimiterRegex`)"
+        }
     }
 
     infix fun split(string: String): Collection<String> {
