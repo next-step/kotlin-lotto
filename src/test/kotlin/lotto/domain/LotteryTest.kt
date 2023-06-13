@@ -58,7 +58,7 @@ class LotteryTest : DescribeSpec({
         ) { numbers, expect ->
             context(name = "다른 복권이 주어지면") {
                 val correctNumberCount = Lottery(numbers = mockLottoNumbers)
-                    .correctNumberCount(other = numbers)
+                    .correctNumberCount(otherLottery = numbers)
 
                 it(name = "일치하는 복권 번호의 개수를 반환한다.") {
                     correctNumberCount shouldBe expect
