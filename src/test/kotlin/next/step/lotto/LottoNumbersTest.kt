@@ -2,6 +2,7 @@ package next.step.lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.collections.shouldHaveSize
 
 class LottoNumbersTest : DescribeSpec({
     describe("LottoNumbers 생성") {
@@ -20,8 +21,11 @@ class LottoNumbersTest : DescribeSpec({
             }
         }
         context("랜덤으로 생성하면") {
-            it("모두 다른 6개의 LottoNumber를 가짐") {
-                LottoNumbers.random()
+            it("모두 다른 6개의 LottoNumber를 가짐").config(invocations = 1000) {
+                val numbers = LottoNumbers.random().numbers()
+                println(numbers)
+
+                numbers shouldHaveSize 6
             }
         }
     }

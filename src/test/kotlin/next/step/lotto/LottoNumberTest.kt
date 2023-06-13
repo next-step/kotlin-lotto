@@ -25,7 +25,8 @@ class LottoNumberTest : DescribeSpec({
         context("랜덤으로 생성하면") {
             it("1과 45 사이의 숫자로 생성됨").config(invocations = 1000) {
                 val number = LottoNumber.random().number()
-
+                println(number)
+                
                 assertSoftly {
                     number shouldBeGreaterThanOrEqual LottoNumber.MIN_LOTTO_NUMBER
                     number shouldBeLessThanOrEqual LottoNumber.MAX_LOTTO_NUMBER
