@@ -1,5 +1,7 @@
+import domain.ExpressionFactory
 import io.InputView
 
 fun main() {
-    InputView.getExpression()
+    val input = InputView.getInput()
+    val expression = ExpressionFactory.createExpression(input)
 }
