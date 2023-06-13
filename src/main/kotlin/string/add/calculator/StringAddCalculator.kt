@@ -24,7 +24,7 @@ class StringAddCalculator {
 
         findCustomDelimiter(text)?.let {
             delimiters.add(it)
-            newText = text.substringAfter("\n")
+            newText = text.substringAfter(CUSTOM_DELIMITER_END)
         }
 
         val strings = newText.split(*delimiters.toTypedArray())
@@ -68,5 +68,6 @@ class StringAddCalculator {
     companion object {
         private const val DEFAULT_DELIMITER_COMMA: String = ","
         private const val DEFAULT_DELIMITER_COLON: String = ":"
+        private const val CUSTOM_DELIMITER_END: String = "\n"
     }
 }
