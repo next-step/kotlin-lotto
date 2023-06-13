@@ -1,5 +1,7 @@
 package string.add.calculator
 
+import com.sun.tools.javac.jvm.ByteCodes.ret
+
 class StringAddCalculator {
     private val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
 
@@ -20,6 +22,13 @@ class StringAddCalculator {
     }
 
     private fun calculate(text: String): Int {
+        val numberStrings = parseText(text)
+        val numbers = convertToIntList(numberStrings)
+
+        return numbers.sum()
+    }
+
+    private fun parseText(text: String): List<String> {
         var textAfterCustomDelimiter = text
 
         findCustomDelimiter(text)?.let {
@@ -27,10 +36,7 @@ class StringAddCalculator {
             textAfterCustomDelimiter = text.substringAfter(CUSTOM_DELIMITER_END)
         }
 
-        val numberStrings = textAfterCustomDelimiter.split(*delimiters.toTypedArray())
-
-        val numbers = convertToIntList(numberStrings)
-        return numbers.sum()
+        return textAfterCustomDelimiter.split(*delimiters.toTypedArray())
     }
 
     private fun findCustomDelimiter(text: String): String? {
