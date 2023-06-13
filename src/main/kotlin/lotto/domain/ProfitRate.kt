@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class ProfitRate(val value: Double) {
+value class ProfitRate(private val value: Double) {
 
     val isProfit: Boolean
         get() = value > THRESHOLD
@@ -9,4 +9,6 @@ value class ProfitRate(val value: Double) {
     companion object {
         private const val THRESHOLD = 1
     }
+
+    override fun toString(): String = value.toString()
 }

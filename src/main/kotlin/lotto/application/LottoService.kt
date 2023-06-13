@@ -7,11 +7,11 @@ import lotto.domain.LottoType
 import lotto.domain.Lottos
 import lotto.domain.Money
 import lotto.domain.WinningNumbers
-import lotto.domain.generator.LottoNumbersGenerator
+import lotto.domain.generator.LottoNumbersGeneratorManager
 import lotto.domain.strategy.ProfitCalculator
 
 class LottoService(
-    private val lottoNumbersGenerators: Map<LottoType, LottoNumbersGenerator>,
+    private val lottoNumbersGeneratorManager: LottoNumbersGeneratorManager,
     private val profitCalculator: ProfitCalculator
 ) {
 
@@ -27,14 +27,12 @@ class LottoService(
         return LottoResult(winningStatistics = winningStatistics, profitRate = profitRate)
     }
 
-    fun issueLottos(requestMoney: Int): Lottos {
-        return Money(requestMoney).takeIf { it >= Lotto.PRICE }
-            ?.let(::createLottos)
-            ?: throw IllegalArgumentException("로또를 구매할 수 있는 금액이 아닙니다. Input: $requestMoney")
-    }
+    fun issueAutoLotto(requestMoney: Int): Lottos = Money(requestMoney).takeIf { it >= Lotto.PRICE }
+        ?.let { createLottos(inputMoney = it, lottoType = LottoType.AUTO) }
+        ?: throw IllegalArgumentException("로또를 구매할 수 있는 금액이 아닙니다. Input: $requestMoney")
 
-    private fun createLottos(inputMoney: Money): Lottos {
-        val lottoNumbersGenerator = lottoNumbersGenerators[LottoType.AUTO]
+    private fun createLottos(inputMoney: Money, lottoType: LottoType): Lottos {
+        val lottoNumbersGenerator = lottoNumbersGeneratorManager.getGenerator(lottoType)
             ?: throw IllegalStateException("Could not find lottery generator mapped to ${LottoType.AUTO}.")
 
         return (0 until getAvailableQuantity(inputMoney)).map { lottoNumbersGenerator.generate() }

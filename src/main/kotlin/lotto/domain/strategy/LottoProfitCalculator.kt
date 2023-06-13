@@ -7,12 +7,9 @@ import lotto.domain.ProfitRate
 object LottoProfitCalculator : ProfitCalculator {
     private val ZERO_PROFIT = ProfitRate(0.0)
 
-    override fun calculate(inputMoney: Money, winningAmount: Money): ProfitRate {
-        if (winningAmount == Money.ZERO) {
-            return ZERO_PROFIT
-        }
-
-        return (floor((winningAmount.toDouble() / inputMoney.toDouble()) * 100) / 100).let(::ProfitRate)
+    override fun calculate(inputMoney: Money, winningAmount: Money): ProfitRate = when (winningAmount) {
+        Money.ZERO -> ZERO_PROFIT
+        else -> (floor((winningAmount.toDouble() / inputMoney.toDouble()) * 100) / 100).let(::ProfitRate)
     }
 }
 

@@ -8,6 +8,7 @@ import lotto.domain.LottoCreateRequest
 import lotto.domain.Lottos
 import lotto.domain.ProfitRate
 import lotto.domain.Rank
+import lotto.domain.generator.LottoNumbersGeneratorManager
 import lotto.fixture.LottoFixtureGenerator
 
 class LottoServiceTest : BehaviorSpec({
@@ -39,14 +40,14 @@ class LottoServiceTest : BehaviorSpec({
 
     Given("로또 번호 생성기가 없는 로또 서비스가 있다. ") {
         val service = LottoService(
-            lottoNumbersGenerators = emptyMap(),
+            lottoNumbersGeneratorManager = LottoNumbersGeneratorManager(),
             profitCalculator = LottoConfig.profitCalculator
         )
 
         When("로또 발급을 요청하면 ") {
             Then("예외를 던진다.") {
                 shouldThrow<IllegalStateException> {
-                    service.issueLottos(1000)
+                    service.issueAutoLotto(1000)
                 }
             }
         }

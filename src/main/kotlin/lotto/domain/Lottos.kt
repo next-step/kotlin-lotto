@@ -7,6 +7,6 @@ class Lottos(private val values: List<Lotto>) : List<Lotto> by values {
             .groupingBy { it }
             .eachCount()
 
-        return Rank.associateBy { baseRankMap.getOrDefault(it, 0) }
+        return Rank.groupingByRank { baseRankMap.getOrDefault(it, 0) }
     }
 }

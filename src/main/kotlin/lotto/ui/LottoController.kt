@@ -11,9 +11,9 @@ class LottoController(
     private val lottoOutput: LottoOutput
 ) {
 
-    fun issueAndGetWinningStatistics() {
+    fun issueAndPrintWinningStatistics() {
         val money: Int = lottoInput.requestMoney()
-        val lottos: Lottos = lottoService.issueLottos(money)
+        val lottos: Lottos = lottoService.issueAutoLotto(money)
 
         lottoOutput.printLotto(lottos)
 

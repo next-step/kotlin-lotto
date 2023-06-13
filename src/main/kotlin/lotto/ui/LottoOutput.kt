@@ -42,7 +42,7 @@ object LottoOutput {
     }
 
     private fun StringBuilder.appendProfitRate(profitRate: ProfitRate) {
-        append("총 수익율은 ${profitRate.value}입니다.")
+        append("총 수익율은 $profitRate 입니다.")
         append("(기준이 1이기 때문에 결과적으로 ${getProfitOrLossMessage(profitRate)} 의미임)\n")
     }
 
