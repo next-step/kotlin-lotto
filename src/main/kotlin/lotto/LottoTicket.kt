@@ -10,6 +10,10 @@ class LottoTicket(numbers: Set<LottoNumber>) {
         }
     }
 
+    infix fun matchedCount(other: LottoTicket): Int {
+        return numbers.count { other.numbers.contains(it) }
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
