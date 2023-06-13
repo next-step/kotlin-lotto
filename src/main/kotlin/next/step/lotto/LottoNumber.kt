@@ -1,6 +1,6 @@
 package next.step.lotto
 
-import java.util.concurrent.ThreadLocalRandom
+import kotlin.random.Random
 
 @JvmInline
 value class LottoNumber(private val n: Int) {
@@ -14,12 +14,9 @@ value class LottoNumber(private val n: Int) {
         const val MIN_LOTTO_NUMBER = 1
         const val MAX_LOTTO_NUMBER = 45
 
-        fun of(n: Int): LottoNumber {
-            return LottoNumber(n)
-        }
-
-        fun random(): LottoNumber {
-            return LottoNumber(ThreadLocalRandom.current().nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1))
-        }
+        fun of(n: Int): LottoNumber = LottoNumber(n)
+        
+        fun random(): LottoNumber =
+            LottoNumber(Random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1))
     }
 }
