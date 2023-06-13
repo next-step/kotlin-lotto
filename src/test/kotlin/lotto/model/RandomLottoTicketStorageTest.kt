@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.DisplayName
@@ -13,7 +13,7 @@ class RandomLottoTicketStorageTest : StringSpec({
 
     "랜덤으로 티켓 저장소 생성" {
         shouldNotThrowAny {
-            RandomLottoTicketStorage(Random.Default)
+            RandomLottoTicketStorage(Random)
         }
     }
 

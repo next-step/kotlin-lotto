@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.DisplayName

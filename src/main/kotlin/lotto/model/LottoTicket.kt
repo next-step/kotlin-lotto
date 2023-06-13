@@ -1,8 +1,8 @@
-package lotto
+package lotto.model
 
 class LottoTicket(numbers: Set<LottoNumber>) {
 
-    private val numbers: Set<LottoNumber> = numbers.toSet()
+    val numbers: Set<LottoNumber> = numbers.toSortedSet()
 
     init {
         require(numbers.size == SIZE) {

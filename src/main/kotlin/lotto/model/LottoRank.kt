@@ -1,13 +1,13 @@
-package lotto
+package lotto.model
 
 enum class LottoRank(
-    private val prize: Int,
-    countCondition: Int,
+    val prize: Long,
+    val countCondition: Int,
     matchConditionStrategy: MatchConditionStrategy,
 ) {
     FIRST(2_000_000_000, 6, MatchConditionStrategy.EXACTLY_COUNT),
     SECOND(1_500_000, 5, MatchConditionStrategy.EXACTLY_COUNT),
-    THIRD(5_000, 4, MatchConditionStrategy.EXACTLY_COUNT),
+    THIRD(50_000, 4, MatchConditionStrategy.EXACTLY_COUNT),
     FOURTH(5_000, 3, MatchConditionStrategy.EXACTLY_COUNT),
     MISS(0, 2, MatchConditionStrategy.LESS_THAN_COUNT),
     ;
@@ -26,5 +26,8 @@ enum class LottoRank(
                 .firstOrNull { it.matchCondition(count) }
                 ?: throw IllegalArgumentException("matched rank is not exist. provided count(`$count`)")
         }
+
+        val Collection<LottoRank>.totalPrize: Long
+            get() = this.sumOf { it.prize }
     }
 }

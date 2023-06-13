@@ -1,14 +1,14 @@
-package lotto
+package lotto.model
 
-data class LottoStore(val ticketStorage: LottoTicketStorage, val price: Int) {
+data class LottoStore(val ticketStorage: LottoTicketStorage, val price: Long) {
 
     init {
         require(MIN_PRICE <= price) { "price must be greater than $MIN_PRICE. but provided price(`$price`)" }
     }
 
-    infix fun purchasedLottoTickets(money: Int): PurchasedLottoTickets {
+    infix fun purchasedLottoTickets(money: Long): PurchasedLottoTickets {
         return generateSequence { ticketStorage.lottoTicket }
-            .take(money / price)
+            .take((money / price).toInt())
             .toList()
             .let { PurchasedLottoTickets(it, price) }
     }
