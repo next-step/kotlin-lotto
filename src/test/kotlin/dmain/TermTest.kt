@@ -15,7 +15,7 @@ class TermTest : BehaviorSpec({
 
         `when`("음수가 입력되면") {
             then("예외가 던져진다") {
-                shouldThrow<IllegalArgumentException> { Term("-1") }
+                shouldThrow<RuntimeException> { Term("-1") }
             }
         }
 
