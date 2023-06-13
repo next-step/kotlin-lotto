@@ -27,24 +27,11 @@ class PurchaseOrderTest : StringSpec({
         }
     }
 
-    "구매한 복권 리스트의 총액을 알 수 있다." {
-        forAll(
-            row(10000, 10000 - (10000 % Lottery.LOTTERY_PRICE)),
-            row(2342342, 2342342 - (2342342 % Lottery.LOTTERY_PRICE)),
-            row(43435, 43435 - (43435 % Lottery.LOTTERY_PRICE)),
-            row(453455, 453455 - (453455 % Lottery.LOTTERY_PRICE)),
-        ) { amount, expect ->
-            val purchaseOrder = PurchaseOrder(amount = amount)
-
-            purchaseOrder.purchasedPrice shouldBe expect
-        }
-    }
-
-    "구매 주문을 생성할 때 문자열로도 생성할 수 있다." {
+    "구매 주문을 생성할 때 문자열로도 생성할 수 있으며, amount로 생성한 로또와 동일한 개수를 가진다." {
         val expect = "10000"
         val purchaseOrder = PurchaseOrder(amountText = expect)
 
-        purchaseOrder.purchasedPrice shouldBe PurchaseOrder(amount = expect.toInt()).purchasedPrice
+        purchaseOrder.purchasedLotteries.size shouldBe PurchaseOrder(amount = expect.toInt()).purchasedLotteries.size
     }
 
     "구매 주문을 생성할 때 숫자가 아닌 문자열과 2,147,483,647보다 큰 숫자를 입력하면 구매할 수 없다는 에러가 발생한다." {
