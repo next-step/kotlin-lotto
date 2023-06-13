@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -31,5 +32,14 @@ class StringAddCalculatorTest : StringSpec({
         calculator.separateStrings(input)
         val result = calculator.add()
         result shouldBe 1
+    }
+
+    "음수를 전달할 경우 RuntimeException 예외가 발생해야 한다." {
+        val input = "-1"
+        val exception = shouldThrow<RuntimeException> {
+            calculator.separateStrings(input)
+            calculator.add()
+        }
+        exception.message shouldBe "음수는 입력할 수 없습니다."
     }
 })

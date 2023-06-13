@@ -12,6 +12,9 @@ class StringAddCalculator {
         return separatedNumbers
     }
     fun add(): Int {
+        if (numbers.any { it < 0 }) {
+            throw RuntimeException("음수는 입력할 수 없습니다.")
+        }
         return numbers.sum()
     }
 }
