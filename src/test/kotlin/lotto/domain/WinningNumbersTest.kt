@@ -26,7 +26,7 @@ class WinningNumbersTest : FreeSpec({
     }
 
     "로또를 전달하면 당첨 등수를 반환 한다." {
-        val winnerNumbers = createLottoNumbers(items = listOf(1, 2, 3, 4, 5, 6)).let(::WinningNumbers)
+        val winnerNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6).let(::WinningNumbers)
 
         listOf(
             Lotto.of(1, 2, 3, 4, 5, 6) to Rank.FIRST,
