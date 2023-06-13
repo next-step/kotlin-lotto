@@ -6,24 +6,24 @@ import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
 class StringAddCalculatorTest : DescribeSpec({
-    data class CommandExpected(val command: String, val expected: Int)
+    data class CommandExpected(val command: String?, val expected: Int)
 
     describe("문자열 덧셈 계산기") {
-        context("빈 문자열을 입력하면") {
-            it("0을 반환한다") {
-                StringAddCalculator.add("") shouldBe 0
-            }
-        }
-
-        context("공백을 입력하면") {
-            it("0을 반환한다") {
-                StringAddCalculator.add(" ") shouldBe 0
-            }
-        }
-
         context("null을 입력하면") {
             it("0을 반환한다") {
                 StringAddCalculator.add(null) shouldBe 0
+            }
+        }
+
+        context("white space를 입력하면 0을 반환한다.") {
+            withData(
+                nameFn = { "add(\"${it.command}\") =  ${it.expected}" },
+                CommandExpected("", 0),
+                CommandExpected(" ", 0),
+                CommandExpected("\t", 0),
+                CommandExpected("\n", 0),
+            ) { (command, expected) ->
+                StringAddCalculator.add(command) shouldBe expected
             }
         }
 
