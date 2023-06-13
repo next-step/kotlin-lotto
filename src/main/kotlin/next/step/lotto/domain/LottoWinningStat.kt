@@ -1,4 +1,4 @@
-package next.step.lotto
+package next.step.lotto.domain
 
 @JvmInline
 value class LottoWinningStat(val stats: Map<LottoWinningCount, Int>) : Map<LottoWinningCount, Int> by stats {

@@ -1,4 +1,4 @@
-package next.step.lotto
+package next.step.lotto.domain
 
 @JvmInline
 value class Lotto(private val numbers: LottoNumbers) {

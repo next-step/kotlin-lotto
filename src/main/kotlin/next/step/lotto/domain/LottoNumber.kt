@@ -1,4 +1,4 @@
-package next.step.lotto
+package next.step.lotto.domain
 
 import kotlin.random.Random
 
@@ -15,7 +15,7 @@ value class LottoNumber(private val n: Int) {
         const val MAX_LOTTO_NUMBER = 45
 
         fun of(n: Int): LottoNumber = LottoNumber(n)
-        
+
         fun random(): LottoNumber =
             LottoNumber(Random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1))
     }

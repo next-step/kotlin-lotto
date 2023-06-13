@@ -1,4 +1,4 @@
-package next.step.lotto
+package next.step.lotto.domain
 
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.throwables.shouldThrow
@@ -26,7 +26,7 @@ class LottoNumberTest : DescribeSpec({
             it("1과 45 사이의 숫자로 생성됨").config(invocations = 1000) {
                 val number = LottoNumber.random().number()
                 println(number)
-                
+
                 assertSoftly {
                     number shouldBeGreaterThanOrEqual LottoNumber.MIN_LOTTO_NUMBER
                     number shouldBeLessThanOrEqual LottoNumber.MAX_LOTTO_NUMBER

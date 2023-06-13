@@ -1,4 +1,4 @@
-package next.step.lotto
+package next.step.lotto.domain
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
