@@ -36,18 +36,7 @@ class StringAddCalculator {
     }
 
     private fun convertToIntList(strings: List<String>): List<Int> {
-        val result = mutableListOf<Int>()
-
-        strings.forEach {
-            try {
-                val number = it.toInt()
-                result.add(number)
-            } catch (e: NumberFormatException) {
-                throw RuntimeException("숫자 이외의 값이 전달되었습니다.")
-            }
-        }
-
-        return result
+        return strings.map { it.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값이 전달되었습니다.") }
     }
 
     private fun findNegativeNumber(numbers: List<Int>) {
