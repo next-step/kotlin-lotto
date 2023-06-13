@@ -1,3 +1,5 @@
+package calculator
+
 object StringAddCalculator {
     private const val CUSTOM_DELIMITER_FIND_REGEX = "//(.)\n(.*)"
     private const val DEFAULT_DELIMITERS_REGEX = "[,:]"
@@ -21,7 +23,7 @@ object StringAddCalculator {
 
     private fun sum(tokens: List<String>): Int {
         return tokens.map {
-            require( it.isInt() ) { "숫자가 입력되어야 합니다." }
+            require(it.isInt()) { "숫자가 입력되어야 합니다." }
             Positive(it.toInt())
         }
             .reduce { acc, positive -> acc.add(positive) }
