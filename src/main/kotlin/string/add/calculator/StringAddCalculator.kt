@@ -57,12 +57,8 @@ class StringAddCalculator {
     }
 
     private fun findCustomDelimiter(text: String): String? {
-        var customDelimiter: String? = null
         val result = Regex("//(.)\n(.*)").find(text)
-        result?.let {
-            customDelimiter = it.groupValues[1]
-        }
-        return customDelimiter
+        return result?.groupValues?.get(1)
     }
 
     companion object {
