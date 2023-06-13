@@ -11,4 +11,11 @@ class StringAddCalculatorTest : StringSpec({
         val result = calculator.separateStrings()
         result shouldBe listOf(1, 2)
     }
+
+    "null 인 값을 입력하면 0을 반환한다" {
+        val input = null
+        val calculator = StringAddCalculator(input)
+        val result = calculator.calculate()
+        result shouldBe 0
+    }
 })
