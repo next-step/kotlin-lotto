@@ -9,6 +9,9 @@ value class Lotto(private val numbers: LottoNumbers) {
         return payment - LOTTO_PRICE
     }
 
+    fun match(winningNumbers: LottoWinningNumbers): LottoWinningCount =
+        LottoWinningCount.from(winningNumbers.filter { numbers.contains(it) }.size)
+    
     companion object {
         const val LOTTO_PRICE: Int = 1000
 

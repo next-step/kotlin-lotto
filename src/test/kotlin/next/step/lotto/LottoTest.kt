@@ -54,4 +54,13 @@ class LottoTest : DescribeSpec({
             }
         }
     }
+
+    describe("당첨 확인") {
+        context("당첨 번호를 넣으면") {
+            it("당첨된 개수에 따라 LottoWinningCount 제공") {
+                Lotto.of(LottoNumbers.from((1..6).toSet()))
+                    .match(LottoWinningNumbers.from("1,2,3,4,5,6")) shouldBe LottoWinningCount.SIX
+            }
+        }
+    }
 })

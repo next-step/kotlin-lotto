@@ -13,6 +13,4 @@ value class LottoWinningNumbers(private val numbers: Set<LottoNumber>) : Set<Lot
             .map { LottoNumber.of(it.trim().toInt()) }
             .toSet()
     }
-
-
 }
