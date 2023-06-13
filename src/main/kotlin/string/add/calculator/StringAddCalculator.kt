@@ -39,7 +39,9 @@ class StringAddCalculator {
     }
 
     private fun convertToIntList(numberStrings: List<String>): List<Int> {
-        val numbers = numberStrings.map { it.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값이 전달되었습니다.") }
+        val numbers = numberStrings.map {
+            it.toIntOrNull() ?: throw RuntimeException(ErrorMessage.NON_NUMERIC_VALUE_WAS_PASSED.message)
+        }
 
         validateNumbers(numbers)
         return numbers
@@ -47,7 +49,7 @@ class StringAddCalculator {
 
     private fun validateNumbers(numbers: List<Int>) {
         if (numbers.any { it < 0 }) {
-            throw RuntimeException("음수가 전달되었습니다.")
+            throw RuntimeException(ErrorMessage.NEGATIVE_NUMBER_PASSED.message)
         }
     }
 
