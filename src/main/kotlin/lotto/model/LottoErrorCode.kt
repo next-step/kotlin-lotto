@@ -7,4 +7,7 @@ enum class LottoErrorCode(val message: (String) -> String) {
     INVALID_LOTTO_NUMBER(
         message = { input -> "로또 번호는 정해진 범위 안에 숫자여야 합니다. (범위) (입력값) : $input" },
     ),
+    INVALID_INPUT_NUMBER(
+        message = { input -> "입력한 로또 번호는 숫자여야 합니다. (입력값) : $input" },
+    ),
 }
