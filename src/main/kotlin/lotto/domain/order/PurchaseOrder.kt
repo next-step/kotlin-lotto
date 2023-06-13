@@ -14,8 +14,6 @@ class PurchaseOrder(amount: Int) {
         .map { LotteryGenerator.draw() }
         .run(::PurchasedLotteries)
 
-    val purchasedPrice: Double = purchasedLotteries.sumOf { Lottery.LOTTERY_PRICE }
-
     constructor(amountText: String) : this(
         amount = requireNotNull(value = amountText.toIntOrNull()) {
             LottoErrorCode.INVALID_PURCHASE_AMOUNT.message(amountText)
