@@ -5,7 +5,11 @@ class StringAddCalculator(
 ) {
     private val numbers: List<Int> = ArrayList()
     fun separateStrings(): List<Int> {
-        return input?.split(",", ":")?.map { it.toInt() } ?: listOf(0)
+        return if (input.isNullOrBlank()) {
+            listOf(0)
+        } else {
+            input.split(",", ":").map { it.toInt() }
+        }
     }
     fun calculate(): Int {
         return numbers.sum()

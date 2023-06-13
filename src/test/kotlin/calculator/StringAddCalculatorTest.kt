@@ -18,4 +18,11 @@ class StringAddCalculatorTest : StringSpec({
         val result = calculator.calculate()
         result shouldBe 0
     }
+
+    "빈 문자열이 들어왔을 때 0을 반환한다." {
+        val input = ""
+        val calculator = StringAddCalculator(input)
+        val result = calculator.calculate()
+        result shouldBe 0
+    }
 })
