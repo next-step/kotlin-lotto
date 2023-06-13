@@ -9,7 +9,7 @@ data class LottoScore(
 ) {
 
     init {
-        require(totalPrice < 0) {
+        require(0 <= totalPrice) {
             "totalPrice must be zero or positive. but provided totalPrice(`$totalPrice`)"
         }
     }
