@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldBeIn
 import io.kotest.matchers.collections.shouldContainExactly
-import lotto.fixture.LottoNumbersFixtureMaker.createLottoNumbers
+import lotto.fixture.createLottoNumbers
 
 class LottoTest : FunSpec({
     val mixLottoNumbers = createLottoNumbers(30, 3, 4, 42, 22, 19)
