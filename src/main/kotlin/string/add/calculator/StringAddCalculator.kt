@@ -1,7 +1,13 @@
 package string.add.calculator
 
 class StringAddCalculator {
+    private val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
+
     fun add(text: String?): Int {
+        return calculateOrDefault(text)
+    }
+
+    private fun calculateOrDefault(text: String?): Int {
         if (text.isNullOrEmpty()) {
             return 0
         }
@@ -14,40 +20,35 @@ class StringAddCalculator {
     }
 
     private fun calculate(text: String): Int {
-        val numbers = parseNumbers(text)
-        return numbers.sum()
-    }
-
-    private fun parseNumbers(text: String): List<Int> {
         var newText = text
-        val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
 
-        findCustomDelimiter(text)?.let {
+        findCustomDelimiter(newText)?.let {
             delimiters.add(it)
-            newText = text.substringAfter(CUSTOM_DELIMITER_END)
+            newText = newText.substringAfter(CUSTOM_DELIMITER_END)
         }
 
-        val strings = newText.split(*delimiters.toTypedArray())
-        val numbers = convertToIntList(strings)
+        val numberStrings = newText.split(*delimiters.toTypedArray())
 
-        findNegativeNumber(numbers)
-
-        return numbers
-    }
-
-    private fun convertToIntList(strings: List<String>): List<Int> {
-        return strings.map { it.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값이 전달되었습니다.") }
-    }
-
-    private fun findNegativeNumber(numbers: List<Int>) {
-        if (numbers.any { it < 0}) {
-            throw RuntimeException("음수가 전달되었습니다.")
-        }
+        val numbers = convertToIntList(numberStrings)
+        return numbers.sum()
     }
 
     private fun findCustomDelimiter(text: String): String? {
         val result = Regex("//(.)\n(.*)").find(text)
         return result?.groupValues?.get(1)
+    }
+
+    private fun convertToIntList(numberStrings: List<String>): List<Int> {
+        val numbers = numberStrings.map { it.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값이 전달되었습니다.") }
+
+        validateNumbers(numbers)
+        return numbers
+    }
+
+    private fun validateNumbers(numbers: List<Int>) {
+        if (numbers.any { it < 0 }) {
+            throw RuntimeException("음수가 전달되었습니다.")
+        }
     }
 
     companion object {
