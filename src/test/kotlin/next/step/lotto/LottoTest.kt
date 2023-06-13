@@ -21,6 +21,12 @@ class LottoTest : DescribeSpec({
                 }
             }
         }
+
+        context("같은 LottoNumbers로 생성하면") {
+            it("동등함") {
+                Lotto.of(LottoNumbers.from((1..6).toSet())) shouldBe Lotto.of(LottoNumbers.from((1..6).toSet()))
+            }
+        }
     }
 
     describe("Lotto 를 살 수 있는지 판별") {

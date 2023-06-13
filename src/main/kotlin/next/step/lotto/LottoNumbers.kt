@@ -1,6 +1,7 @@
 package next.step.lotto
 
-data class LottoNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
+@JvmInline
+value class LottoNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
 
     init {
         require(numbers.size == 6) { "로또 번호들은 6개만 생성할 수 있습니다." }

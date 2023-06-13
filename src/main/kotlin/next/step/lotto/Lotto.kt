@@ -1,6 +1,7 @@
 package next.step.lotto
 
-data class Lotto(private val numbers: LottoNumbers) {
+@JvmInline
+value class Lotto(private val numbers: LottoNumbers) {
     fun numbers() = numbers.numbers()
 
     companion object {
@@ -12,6 +13,7 @@ data class Lotto(private val numbers: LottoNumbers) {
         }
 
         fun canBuy(payment: Int): Boolean = payment >= LOTTO_PRICE
+        fun of(numbers: LottoNumbers): Lotto = Lotto(numbers)
     }
 
 }
