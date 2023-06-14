@@ -11,10 +11,9 @@ class CalculatorTest : StringSpec({
     "빈문자열 일 경우" {
         // given
         val expression = ""
-        val calculator = Calculator()
 
         // when
-        val result = calculator.calculate(expression)
+        val result = Calculator.calculate(expression)
 
         // then
         result shouldBe 0
@@ -26,11 +25,8 @@ class CalculatorTest : StringSpec({
             row("1:2:3", 6),
             row(",3:1", 4)
         ) { expression, expect ->
-            // given
-            val calculator = Calculator()
-
             // when
-            val result = calculator.calculate(expression)
+            val result = Calculator.calculate(expression)
 
             // then
             result shouldBe expect
@@ -44,11 +40,8 @@ class CalculatorTest : StringSpec({
             row(",3//hi\n1", 4),
             row(",3//hi\n1,4//:\n5", 13),
         ) { expression, expect ->
-            // given
-            val calculator = Calculator()
-
             // when
-            val result = calculator.calculate(expression)
+            val result = Calculator.calculate(expression)
 
             // then
             result shouldBe expect
@@ -56,13 +49,10 @@ class CalculatorTest : StringSpec({
     }
 
     "구분자 사이에 양수가 아닌 수가 있는 경우" {
-        // given
-        val calculator = Calculator()
-
         forAll(row("//hi\n2,-3:4"), row("//hi\n2,3:a"), row("//hi\na,3"), row("//hi\n-2,1:0")) {
             // when & then
             shouldThrow<RuntimeException> {
-                calculator.calculate(it)
+                Calculator.calculate(it)
             }.shouldHaveMessage("피연산자는 양수만 가능합니다")
         }
     }

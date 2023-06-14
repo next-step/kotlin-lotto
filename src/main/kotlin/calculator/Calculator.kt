@@ -1,6 +1,5 @@
 package calculator
 
-class Calculator {
-    private val parser: ExpressionParser = ExpressionParser()
-    fun calculate(expression: String): Int = parser.parse(expression).sum()
+object Calculator {
+    fun calculate(expression: String): Int = ExpressionParser.parse(expression).sum()
 }
