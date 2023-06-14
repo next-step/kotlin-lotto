@@ -42,6 +42,13 @@ class StringAddCalculatorTest {
         actualNull shouldBe 0
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["3"])
+    fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(input: String) {
+        val actual = calculator.calculate(input)
+        actual shouldBe 3
+    }
+
     companion object {
         object StringListArgumentsProvider : ArgumentsProvider {
             override fun provideArguments(context: ExtensionContext): Stream<out Arguments> {

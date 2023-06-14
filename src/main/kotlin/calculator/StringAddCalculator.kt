@@ -5,6 +5,8 @@ class StringAddCalculator {
     fun calculate(input: String?): Int {
         if(input.isNullOrEmpty()) {
             return ZERO
+        } else if(input.length == 1 && input[0].isDigit()) {
+            return input.toInt()
         }
 
         val stringList = split(input)
