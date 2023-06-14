@@ -15,7 +15,15 @@ class StringAddCalculator {
                 val target = groupValues[2]
                 "[,:$customDelimiter]" to target
             } ?: ("[,:]" to text)
-        return target.split(Regex(pattern))
-            .sumOf { it.toInt() }
+
+        val numbers = target.split(Regex(pattern))
+            .map { it.toIntOrNull() ?: throw RuntimeException("$it is not integer") }
+        numbers.forEach { number ->
+            if (number < 0) {
+                throw RuntimeException("$number is negative")
+            }
+        }
+
+        return numbers.sum()
     }
 }
