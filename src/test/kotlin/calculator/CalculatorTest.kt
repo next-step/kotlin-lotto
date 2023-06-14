@@ -25,11 +25,14 @@ internal class CalculatorTest {
     internal fun `빈 문자열 또는 null을 입력한 경우 0을 반환해야 한다`() {
         val calculator = Calculator("")
         calculator.result shouldBe 0
+
+        val calculator2 = Calculator(null)
+        calculator2.result shouldBe 0
     }
 
     @Test
     internal fun `커스텀 구분자를 사용할 수 있다`() {
-        val calculator = Calculator("//;\n1;2;3")
+        val calculator = Calculator("//;\\n1;2;3")
         calculator.separator shouldBe ";"
         calculator.numbers shouldBe listOf(1, 2, 3)
         calculator.result shouldBe 6
