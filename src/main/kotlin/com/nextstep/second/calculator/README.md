@@ -13,7 +13,7 @@
 * 함수의 길이가 10라인을 넘어가지 않도록 제한
 
 ## 기능 구현 목록 정리
-* [ ] Calculator::add : List<Int> 타입을 입력받으면 전부 더해서 결과값을 리턴해주는 싱글톤 객체 
+* [X] Calculator::add : List<Int> 타입을 입력받으면 전부 더해서 결과값을 리턴해주는 싱글톤 객체 
 * [ ] ExpressionParser : input 을 받아서 List<Int> 로 숫자들을 파싱해준다
   * `String` 타입의 Input 을 받아서 regex 를 이용하여 List<Int> 로 분리해줄 수 있음
   * `() -> Unit` 타입의 validFunction 을 입력받아서 validation 을 진행
