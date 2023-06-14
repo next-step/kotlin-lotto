@@ -5,8 +5,8 @@ import lotto.domain.LottoResult
 import lotto.domain.LottoType
 import lotto.domain.Lottos
 import lotto.domain.Money
-import lotto.domain.WinningNumbers
-import lotto.domain.WinningStatsticsInfo
+import lotto.domain.WinningInfo
+import lotto.domain.WinningStatisticsInfo
 import lotto.domain.generator.LottoNumbersGeneratorManager
 import lotto.domain.strategy.ProfitCalculator
 
@@ -15,10 +15,10 @@ class LottoService(
     private val profitCalculator: ProfitCalculator
 ) {
 
-    fun getWinningStatistics(request: WinningStatsticsInfo): LottoResult {
+    fun getWinningStatistics(request: WinningStatisticsInfo): LottoResult {
         val inputMoney = Money(value = request.money)
         val winningStatistics =
-            request.lottos.winningStatistics(winningNumbers = WinningNumbers.from(strings = request.winningNumbers))
+            request.lottos.winningStatistics(winningInfo = WinningInfo.of(winningNumbersSource = request.winningNumbers, bonusNumberSource = request.bonusNumber))
         val winningAmount = winningStatistics.map { it.key.reward times it.value }
             .reduce(Money::plus)
 

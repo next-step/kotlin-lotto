@@ -8,7 +8,7 @@ import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.ProfitRate
 import lotto.domain.Rank
-import lotto.domain.WinningStatsticsInfo
+import lotto.domain.WinningStatisticsInfo
 import lotto.domain.generator.LottoNumbersGeneratorManager
 import lotto.fixture.of
 
@@ -21,17 +21,18 @@ class LottoServiceTest : BehaviorSpec({
             val lottos = Lottos(
                 values = listOf(Lotto.of(1, 2, 3, 4, 5, 6))
             )
-            val request = WinningStatsticsInfo(
+            val request = WinningStatisticsInfo(
                 money = 1000,
                 winningNumbers = listOf("1", "2", "3", "8", "11", "7"),
-                lottos = lottos
+                lottos = lottos,
+                bonusNumber = 40
             )
 
             Then("당첨 결과와 수익율을 반환한다.") {
                 val expected = ProfitRate(5.0)
                 val actual = service.getWinningStatistics(request = request)
 
-                actual.winningStatistics[Rank.FOURTH] shouldBe 1
+                actual.winningStatistics[Rank.FIVE] shouldBe 1
                 actual.profitRate shouldBe expected
             }
         }
