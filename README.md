@@ -10,7 +10,7 @@
 
 ### Todo
 
-- [ ] 문자열을 입력받는다. -> inputView
+- [x] 문자열을 입력받는다. -> inputView
 - [ ] ,와:을 가지는 문자열의 경우 기본으로 합을 계산한다. -> Calculator
 - [ ] //와 \n 사이에 구분자를 전달하는 경우 해당 구분자를 사용한다. -> InputView
 - [ ] 계산기에 숫자 이외에 값 또는 음수를 전달하는 경우 RuntimeException을 발생시킨다. -> Calculator
