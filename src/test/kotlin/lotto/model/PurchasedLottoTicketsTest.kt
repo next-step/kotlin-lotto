@@ -19,7 +19,7 @@ class PurchasedLottoTicketsTest : StringSpec({
         val oneToSixPurchasedLottoTickets =
             PurchasedLottoTickets(listOf(ONE_TO_SIX_LOTTO_TICKET, ONE_TO_SIX_LOTTO_TICKET), 1000)
         // when
-        val lottoScore: LottoScore = oneToSixPurchasedLottoTickets lottoScore ONE_TO_SIX_LOTTO_TICKET
+        val lottoScore: LottoScore = oneToSixPurchasedLottoTickets scoreBy ONE_TO_SIX_LOTTO_TICKET
         // then
         lottoScore shouldBe LottoScore(listOf(LottoRank.FIRST, LottoRank.FIRST), 2000)
     }

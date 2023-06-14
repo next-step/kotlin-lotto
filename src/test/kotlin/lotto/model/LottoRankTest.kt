@@ -5,6 +5,7 @@ import io.kotest.core.spec.DisplayName
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
+import lotto.model.LottoRank.Companion.totalPrize
 
 @DisplayName("로또 순위")
 class LottoRankTest : StringSpec({
@@ -25,6 +26,17 @@ class LottoRankTest : StringSpec({
     "매칭되는 개수가 없으면 예외" {
         listOf(7, Int.MAX_VALUE).forAll {
             shouldThrowExactly<IllegalArgumentException> { LottoRank.rankOf(it) }
+        }
+    }
+
+    "로또 상금 총액 계산" {
+        listOf(
+            listOf(LottoRank.FIRST, LottoRank.FIRST) to 4_000_000_000L,
+            listOf(LottoRank.FIRST, LottoRank.SECOND) to 2_001_500_000L,
+            listOf(LottoRank.SECOND, LottoRank.THIRD) to 1_550_000L,
+            listOf(LottoRank.FOURTH, LottoRank.FOURTH) to 10_000L,
+        ).forAll {
+            it.first.totalPrize shouldBe it.second
         }
     }
 })

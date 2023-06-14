@@ -2,7 +2,7 @@ package lotto.model
 
 data class PurchasedLottoTickets(val tickets: Collection<LottoTicket>, val pricePerTicket: Long) {
 
-    infix fun lottoScore(ticket: LottoTicket): LottoScore {
+    infix fun scoreBy(ticket: LottoTicket): LottoScore {
         return tickets
             .map { it matchedCount ticket }
             .map(LottoRank.Companion::rankOf)

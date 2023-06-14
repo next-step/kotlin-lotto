@@ -7,14 +7,13 @@ data class LottoScore(
     private val ranks: Collection<LottoRank>,
     private val totalPrice: Long,
 ) {
-
     init {
         require(0 <= totalPrice) {
             "totalPrice must be zero or positive. but provided totalPrice(`$totalPrice`)"
         }
     }
 
-    infix fun count(rank: LottoRank): Int {
+    infix fun countBy(rank: LottoRank): Int {
         return ranks.count { it == rank }
     }
 

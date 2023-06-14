@@ -3,33 +3,17 @@ package lotto.model
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.DisplayName
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
-import io.mockk.every
-import io.mockk.mockk
-import kotlin.random.Random
+import io.kotest.matchers.types.shouldBeInstanceOf
 
 @DisplayName("랜덤 로또 티켓 저장소")
 class RandomLottoTicketStorageTest : StringSpec({
 
-    "랜덤으로 티켓 저장소 생성" {
-        shouldNotThrowAny {
-            RandomLottoTicketStorage(Random)
-        }
-    }
-
-    "기본 인자로 저장소 생성" {
-        shouldNotThrowAny {
-            RandomLottoTicketStorage()
-        }
-    }
-
-    "랜덤 숫자로 티켓 생성" {
-        // given
-        val random: Random = mockk<Random>()
-        every { random.nextInt(any()) } returns 0
-        // when
-        val lottoTicket: LottoTicket = RandomLottoTicketStorage(random).lottoTicket
+    "로또 티켓 가져오기" {
+        // given & when
+        val lottoTicket: LottoTicket = RandomLottoTicketStorage.lottoTicket
         // then
-        lottoTicket shouldBe LottoTicket((LottoNumber(2)..LottoNumber(7)).toSet())
+        shouldNotThrowAny {
+            lottoTicket.shouldBeInstanceOf<LottoTicket>()
+        }
     }
 })

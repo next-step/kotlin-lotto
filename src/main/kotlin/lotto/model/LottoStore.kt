@@ -6,7 +6,7 @@ data class LottoStore(val ticketStorage: LottoTicketStorage, val price: Long) {
         require(MIN_PRICE <= price) { "price must be greater than $MIN_PRICE. but provided price(`$price`)" }
     }
 
-    infix fun purchasedLottoTickets(money: Long): PurchasedLottoTickets {
+    infix fun purchaseLottoTicketsBy(money: Long): PurchasedLottoTickets {
         return generateSequence { ticketStorage.lottoTicket }
             .take((money / price).toInt())
             .toList()

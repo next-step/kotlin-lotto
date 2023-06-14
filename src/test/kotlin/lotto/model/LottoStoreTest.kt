@@ -38,7 +38,7 @@ class LottoStoreTest : StringSpec({
             val oneThousandPrice = 1000L
             val maxPriceStore = LottoStore(OneToSixLottoTicketStorage, oneThousandPrice)
             // when
-            val purchasedLottoTickets: PurchasedLottoTickets = maxPriceStore purchasedLottoTickets it.first
+            val purchasedLottoTickets: PurchasedLottoTickets = maxPriceStore purchaseLottoTicketsBy it.first
             // then
             purchasedLottoTickets shouldBe
                 PurchasedLottoTickets(

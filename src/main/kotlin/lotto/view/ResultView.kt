@@ -22,7 +22,7 @@ object ResultView {
 
         listOf(LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST)
             .forEach {
-                println("${it.countCondition}개 일치 (${it.prize}원) - ${score.count(it)}")
+                println("${it.countCondition}개 일치 (${it.prize}원) - ${score countBy it}")
             }
 
         val ratio = score.ratio

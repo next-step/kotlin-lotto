@@ -19,8 +19,8 @@ value class LottoNumber(val number: Int) : Comparable<LottoNumber> {
 
     companion object {
         private const val MIN_NUMBER = 1
-
         private const val MAX_NUMBER = 45
+
         val MIN: LottoNumber = LottoNumber(MIN_NUMBER)
         val MAX: LottoNumber = LottoNumber(MAX_NUMBER)
     }
