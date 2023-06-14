@@ -10,8 +10,8 @@ fun String.isInt(): Boolean {
 }
 
 class StringAdditionCalculator {
-    fun calculate(input: String): Int {
-        val stringNumbers = StringAdditionCalculatorInputParser.parse(input)
+    fun calculate(expression: String?): Int {
+        val stringNumbers = StringAdditionCalculatorInputParser.parse(expression)
         validate(stringNumbers)
 
         return stringNumbers.asSequence()
