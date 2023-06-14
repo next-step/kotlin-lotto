@@ -1,19 +1,22 @@
 package com.nextstep.second.calculator
 
-sealed class ExpressionParser(text: String?) {
-    var numberList: List<Int>
-        private set
-
-    init {
-        numberList = if (text.isNullOrBlank()) emptyList() else parse(text)
-        checkForNegative(numberList)
+object ExpressionParser {
+    fun parse(text: String, tokenize: (String) -> List<String>): List<Int> {
+        val tokens = if (text.isNotBlank()) tokenize(text) else return emptyList()
+        val numberList = changeStringToNumber(tokens)
+        return checkForNegative(numberList)
     }
 
-    abstract fun parse(text: String): List<Int>
-
-    private fun checkForNegative(numList: List<Int>) {
-        numList.firstOrNull { it < 0 }?.let {
-            throw IllegalStateException("음수가 포함되어있습니다: $it")
+    private fun changeStringToNumber(numStr: List<String>): List<Int> {
+        try {
+            return numStr.map { it.toInt() }.toList()
+        } catch(e : Exception) {
+            throw IllegalArgumentException()
         }
+    }
+
+    private fun checkForNegative(numbers: List<Int>): List<Int> {
+        if (numbers.any { it < 0 }) throw IllegalArgumentException("음수가 포함되어있습니다")
+        return numbers
     }
 }
