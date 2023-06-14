@@ -2,7 +2,6 @@ package lotto
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import java.math.BigDecimal
 
 class LottosTest : StringSpec({
     "구입금액에 해당하는 개수만큼 로또를 생성한다" {
