@@ -7,7 +7,6 @@ class LottoResult(purchasedLotteries: PurchasedLotteries, winningLottery: Lotter
             .groupingBy { it }
             .eachCount()
 
-
     private val proceeds: Double = winningStatistics.map { (lottoRank, count) ->
         lottoRank.winningMoney * count.toDouble()
     }.sum()

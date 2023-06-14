@@ -35,7 +35,7 @@ class LottoNumberTest : DescribeSpec({
 
                 it(name = "로또 번호 범위 안에 번호로 생성하라는 에러가 발생한다.") {
                     exception shouldHaveMessage
-                            LottoErrorCode.INVALID_LOTTO_NUMBER.message("${LottoNumber.LOTTO_NUMBER_RANGE} $expect")
+                        LottoErrorCode.INVALID_LOTTO_NUMBER.message("${LottoNumber.LOTTO_NUMBER_RANGE} $expect")
                 }
             }
         }
