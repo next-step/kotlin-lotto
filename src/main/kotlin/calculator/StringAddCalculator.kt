@@ -1,10 +1,9 @@
 package calculator
 
 class StringAddCalculator(
-    private val expressionFactory: ExpressionFactory
+    private val expression: Expression
 ) {
-    fun add(input: String?): Int {
-        val expression = expressionFactory.createExpression(input)
+    fun add(): Int {
         return expression.numbers.sum()
     }
 }
