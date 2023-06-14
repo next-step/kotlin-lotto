@@ -1,11 +1,12 @@
 package lotto.domain
 
-class LottoResult(purchasedLotteries: PurchasedLotteries, winningLottery: Lottery) {
+class LottoResult(purchasedLotteries: PurchasedLotteries, winningLottery: Lottery, bonusBall: LottoNumber) {
 
-    private val winningStatistics: Map<LottoRank, Int> = purchasedLotteries.map(winningLottery::correctNumberCount)
-        .map(LottoRank::valueOf)
-        .groupingBy { it }
-        .eachCount()
+    private val winningStatistics: Map<LottoRank, Int> =
+        purchasedLotteries.map { winningLottery.scratchLottery(otherLottery = it, bonusBall = bonusBall) }
+            .groupingBy { it }
+            .eachCount()
+
 
     private val proceeds: Double = winningStatistics.map { (lottoRank, count) ->
         lottoRank.winningMoney * count.toDouble()
