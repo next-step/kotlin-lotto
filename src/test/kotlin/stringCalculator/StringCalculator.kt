@@ -12,4 +12,12 @@ class StringCalculator : AnnotationSpec() {
             StringPlusCalculator.seperate(it) shouldBe listOf(1, 2, 3)
         }
     }
+
+    @Test
+    fun ``() {
+        val strings = listOf("//;\n1;2;3", "1,2:3", "1:2:3", "//;\n1,2;3", "//;\n1,2:3")
+        strings.forEach {
+            StringPlusCalculator.seperate(it) shouldBe listOf(1, 2, 3)
+        }
+    }
 }
