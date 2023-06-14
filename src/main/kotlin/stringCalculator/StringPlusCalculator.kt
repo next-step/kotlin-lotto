@@ -20,13 +20,13 @@ object StringPlusCalculator {
         return checkValidTypedString(convertedString.split(*customSeperators.toTypedArray()))
     }
 
-    fun checkValidTypedString(strings: List<String>): List<Int> {
+    private fun checkValidTypedString(strings: List<String>): List<Int> {
         return strings.map {
             checkPlusNumberString(it)
         }
     }
 
-    fun checkPlusNumberString(string: String): Int {
+    private fun checkPlusNumberString(string: String): Int {
         val intString = runCatching {
             string.toInt()
         }.getOrElse {
