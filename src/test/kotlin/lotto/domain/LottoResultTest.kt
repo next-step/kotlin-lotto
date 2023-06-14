@@ -10,6 +10,7 @@ class LottoResultTest : DescribeSpec({
 
     describe(name = "로또 결과를 구매 주문과 당첨 복권으로 생성할 수 있다.") {
         val winningLottery = mockLottery(1, 2, 3, 4, 5, 6)
+        val bonusBallEight = LottoNumber(number = 8)
 
         forAll(
             row(
@@ -17,16 +18,19 @@ class LottoResultTest : DescribeSpec({
                     mockLottery(1, 2, 3, 4, 5, 6),
                     mockLottery(1, 2, 3, 4, 5, 6),
                 ),
+                bonusBallEight,
                 LottoRank.FIRST,
             ),
-            row(listOf(mockLottery(1, 2, 3, 4, 5, 7)), LottoRank.SECOND),
-            row(listOf(mockLottery(1, 2, 3, 4, 15, 7)), LottoRank.THIRD),
-            row(listOf(mockLottery(1, 2, 3, 24, 15, 7)), LottoRank.FOURTH),
-        ) { purchasedLotteries, lottoRank ->
+            row(listOf(mockLottery(1, 2, 3, 4, 5, 8)), bonusBallEight, LottoRank.SECOND),
+            row(listOf(mockLottery(1, 2, 3, 4, 5, 7)), bonusBallEight, LottoRank.THIRD),
+            row(listOf(mockLottery(1, 2, 3, 4, 15, 7)), bonusBallEight, LottoRank.FOUR),
+            row(listOf(mockLottery(1, 2, 3, 24, 15, 7)), bonusBallEight, LottoRank.FIVE),
+        ) { purchasedLotteries, bonusBall, lottoRank ->
             context(name = "1등부터 4등까지 당첨된 경우 당첨된 결과를 알 수 있다.") {
                 val lottoResult = LottoResult(
                     purchasedLotteries = PurchasedLotteries(lotteries = purchasedLotteries),
                     winningLottery = winningLottery,
+                    bonusBall = bonusBall,
                 )
 
                 val size = purchasedLotteries.size
@@ -47,6 +51,7 @@ class LottoResultTest : DescribeSpec({
                     lotteries = listOf(mockLottery(41, 32, 23, 24, 15, 7)),
                 ),
                 winningLottery = winningLottery,
+                bonusBall = bonusBallEight,
             )
 
             it(name = "Benefit 타입이 손해로 반환한다.") {
@@ -57,7 +62,11 @@ class LottoResultTest : DescribeSpec({
         val emptyLotteries = PurchasedLotteries(lotteries = emptyList())
 
         context(name = "구매한 복권이 없으면 당첨 결과가 비어있다.") {
-            val lottoResult = LottoResult(purchasedLotteries = emptyLotteries, winningLottery = winningLottery)
+            val lottoResult = LottoResult(
+                purchasedLotteries = emptyLotteries,
+                winningLottery = winningLottery,
+                bonusBall = bonusBallEight,
+            )
 
             it(name = "당첨 통계가 비어 있다.") {
                 LottoRank.values()
