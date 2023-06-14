@@ -4,6 +4,6 @@ class Expression(
     private val tokens: List<Int>
 ) {
     fun sum(): Int {
-        return 6
+        return tokens.sum()
     }
 }

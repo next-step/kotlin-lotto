@@ -3,7 +3,6 @@ package string.splitter
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import string.DefaultSeparatorStringSplitter
 import string.converter.ExpressionTokenConverter
 
 internal class DefaultSeparatorStringSplitterTest : StringSpec({

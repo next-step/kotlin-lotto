@@ -1,6 +1,5 @@
 package string.splitter
 
-import string.SeparatorStringSplitter
 import string.converter.ExpressionTokenConverter
 
 class RegexBasedCustomSeparatorStringSplitter(

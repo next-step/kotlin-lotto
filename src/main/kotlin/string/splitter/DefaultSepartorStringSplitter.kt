@@ -1,4 +1,4 @@
-package string
+package string.splitter
 
 import string.converter.ExpressionTokenConverter
 
