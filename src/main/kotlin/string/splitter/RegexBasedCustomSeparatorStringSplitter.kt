@@ -1,4 +1,7 @@
-package string
+package string.splitter
+
+import string.SeparatorStringSplitter
+import string.converter.ExpressionTokenConverter
 
 class RegexBasedCustomSeparatorStringSplitter(
     private val converter: ExpressionTokenConverter

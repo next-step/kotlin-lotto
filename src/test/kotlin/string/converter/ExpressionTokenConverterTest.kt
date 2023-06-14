@@ -1,8 +1,9 @@
-package string
+package string.converter
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import string.converter.ExpressionTokenConverter
 
 internal class ExpressionTokenConverterTest : StringSpec({
     val sut = ExpressionTokenConverter()

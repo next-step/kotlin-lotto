@@ -1,4 +1,4 @@
-package string
+package string.converter
 
 class ExpressionTokenConverter {
     fun convert(token: String): Int {
