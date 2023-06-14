@@ -2,7 +2,7 @@ package string
 
 class RegexBasedCustomSeparatorStringSplitter(
     private val converter: ExpressionTokenConverter
-) : CustomSeparatorStringSplitter {
+) : SeparatorStringSplitter {
     override fun split(input: String): List<Int>? {
         val separator = extractCustomSeparator(input) ?: return null
         val indicatorSequence = "//${separator}\n"
