@@ -3,7 +3,7 @@ package lotto.domain
 class LottoResult(purchasedLotteries: PurchasedLotteries, winningLottery: Lottery, bonusBall: LottoNumber) {
 
     private val winningStatistics: Map<LottoRank, Int> =
-        purchasedLotteries.map { winningLottery.scratchLottery(otherLottery = it, bonusBall = bonusBall) }
+        purchasedLotteries.map { winningLottery.correctLottery(otherLottery = it, bonusBall = bonusBall) }
             .groupingBy { it }
             .eachCount()
 
