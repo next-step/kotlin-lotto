@@ -28,7 +28,7 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest
     @ArgumentsSource(StringListArgumentsProvider::class)
-    fun `전달 받은 문자열을 구분자를 기준으로 분리 후 각 숫자의 합을 구한다`(input: List<String>) {
+    fun `분리 된 리스트의 각 숫자의 합을 구한다`(input: List<String>) {
         val actual = calculator.stringAdd(input)
         actual shouldBe 6
     }
