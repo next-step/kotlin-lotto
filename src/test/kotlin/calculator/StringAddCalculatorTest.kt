@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -47,6 +48,14 @@ class StringAddCalculatorTest {
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(input: String) {
         val actual = calculator.calculate(input)
         actual shouldBe 3
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-3"])
+    fun `음수 하나만을 전달할 경우 RuntimeException 예외가 발생한다`(input: String) {
+        shouldThrow<RuntimeException> {
+            calculator.calculate(input)
+        }
     }
 
     companion object {

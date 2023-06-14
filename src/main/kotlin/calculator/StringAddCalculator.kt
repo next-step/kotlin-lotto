@@ -7,6 +7,8 @@ class StringAddCalculator {
             return ZERO
         } else if(input.length == 1 && input[0].isDigit()) {
             return input.toInt()
+        } else if(input.toInt() < ZERO) {
+            throw RuntimeException("음수를 입력할 수 없습니다")
         }
 
         val stringList = split(input)
