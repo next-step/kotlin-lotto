@@ -12,7 +12,7 @@ object StringPlusCalculator {
 
     private var customSeperators = mutableListOf(DEFAULT_SEPERATOR_1, DEFAULT_SEPERATOR_2)
     fun seperate(string: String): List<Int> {
-        if(string.isEmpty()) {
+        if (string.isEmpty()) {
             return listOf(EMPTY_VALUE)
         }
         val convertedString = setCustomSeperatorAndGetConvertedString(string)
@@ -26,13 +26,13 @@ object StringPlusCalculator {
         }
     }
 
-    fun checkPlusNumberString(string: String): Int{
+    fun checkPlusNumberString(string: String): Int {
         val intString = runCatching {
             string.toInt()
         }.getOrElse {
             throw RuntimeException("숫자만 올 수 있음")
         }
-        if(intString < 0) {
+        if (intString < 0) {
             throw RuntimeException("음수는 올 수 없음")
         }
         return intString
@@ -40,7 +40,7 @@ object StringPlusCalculator {
 
     private fun setCustomSeperatorAndGetConvertedString(string: String): String {
         var convertedString = string
-        if(CUSTOM_SEPERATOR_PREFIX in string && CUSTOM_SEPERATOR_POSTFIX in string) {
+        if (CUSTOM_SEPERATOR_PREFIX in string && CUSTOM_SEPERATOR_POSTFIX in string) {
             val splitStrings = string.split(CUSTOM_SEPERATOR_POSTFIX)
             convertedString = splitStrings[VALUE_POSITION]
             customSeperators.add(splitStrings[CUSTOM_SEPERATOR_POSITION].split(CUSTOM_SEPERATOR_PREFIX)[VALUE_POSITION])
