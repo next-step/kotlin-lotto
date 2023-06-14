@@ -30,7 +30,7 @@ object ResultView {
             .forEach { printWinningStatisticsResult(lottoRank = it, lottoResult = lottoResult) }
 
         println(
-            message = RATE_OF_RETURN_MESSAGE.format(lottoResult.rateOfReturn) +
+            message = RATE_OF_RETURN_MESSAGE.format(lottoResult.revenue.rateOfReturn) +
                 BENEFIT_MESSAGE.format(lottoResult.benefitType.exposureName),
         )
     }

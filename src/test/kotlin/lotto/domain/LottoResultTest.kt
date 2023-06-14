@@ -35,12 +35,6 @@ class LottoResultTest : DescribeSpec({
                     lottoResult.countNumberOfHit(lottoRank = lottoRank) shouldBe size
                 }
 
-                it(name = "수익률을 알 수 있다.") {
-                    val sizeToDouble = size.toDouble()
-                    val expect = (lottoRank.winningMoney * sizeToDouble) / (Lottery.LOTTERY_PRICE * sizeToDouble)
-                    lottoResult.rateOfReturn shouldBe expect
-                }
-
                 it(name = "Benefit 타입이 이득으로 반환한다.") {
                     lottoResult.benefitType shouldBe BenefitType.GAIN
                 }
@@ -54,10 +48,6 @@ class LottoResultTest : DescribeSpec({
                 ),
                 winningLottery = winningLottery,
             )
-
-            it(name = "수익률이 0.0으로 반환된다.") {
-                lottoResult.rateOfReturn shouldBe 0.0
-            }
 
             it(name = "Benefit 타입이 손해로 반환한다.") {
                 lottoResult.benefitType shouldBe BenefitType.LOSS
@@ -74,10 +64,6 @@ class LottoResultTest : DescribeSpec({
                     .forEach {
                         lottoResult.countNumberOfHit(lottoRank = it) shouldBe 0
                     }
-            }
-
-            it(name = "수익률이 0.0으로 반환된다.") {
-                lottoResult.rateOfReturn shouldBe 0.0
             }
 
             it(name = "Benefit 타입이 손해로 반환한다.") {
