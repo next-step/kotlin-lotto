@@ -1,26 +1,48 @@
 package domain
 
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 @Suppress("NonAsciiCharacters")
 class SeparatorTest {
 
-    @ValueSource(strings = ["1,2,3", "100,2,3", "5,3,1"])
+    @MethodSource("testData")
     @ParameterizedTest
-    fun `문자열이 입력되면 , 구분자를 통해 숫자들을 반환한다`(input: String) {
+    fun `문자열이 입력되면 특정 구분자를 통해 숫자들을 반환한다`(
+        input: String,
+        expected: List<Int>,
+    ) {
         val separator = Separator()
         val result = separator.extractIntegers(input)
 
-        result shouldBe resultMap[input]
+        result shouldBe expected
+    }
+
+    @Test
+    fun regTest() {
+        val separator = Separator()
+        val input = "//;\n1:2,3;4;2,231"
+        separator.extractIntegers(input) shouldBe listOf(1, 2, 3, 4, 2, 231)
     }
 
     companion object {
-        private val resultMap = mapOf(
-            "1,2,3" to listOf(1, 2, 3),
-            "100,2,3" to listOf(100, 2, 3),
-            "5,3,1" to listOf(5, 3, 1),
-        )
+        @JvmStatic
+        fun testData(): List<Arguments> {
+            return listOf(
+                Arguments.of("1,2,3", listOf(1, 2, 3)),
+                Arguments.of("100,2,3", listOf(100, 2, 3)),
+
+                Arguments.of("1:2:3", listOf(1, 2, 3)),
+                Arguments.of("100:2:3", listOf(100, 2, 3)),
+
+                Arguments.of("10,2:145", listOf(10, 2, 145)),
+                Arguments.of("8:3,7", listOf(8, 3, 7)),
+
+                Arguments.of("", listOf(0)),
+            )
+        }
     }
 }
