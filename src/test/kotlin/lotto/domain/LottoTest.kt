@@ -4,16 +4,10 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldBeIn
 import io.kotest.matchers.collections.shouldContainExactly
+import lotto.fixture.createLottoNumbers
 
 class LottoTest : FunSpec({
-    val mixLottoNumbers = LinkedHashSet<LottoNumber>().apply {
-        add(LottoNumber.valueOf(30))
-        add(LottoNumber.valueOf(3))
-        add(LottoNumber.valueOf(4))
-        add(LottoNumber.valueOf(42))
-        add(LottoNumber.valueOf(22))
-        add(LottoNumber.valueOf(19))
-    }
+    val mixLottoNumbers = createLottoNumbers(30, 3, 4, 42, 22, 19)
 
     test("로또는 유효한 로또 번호 목록을 전달받으면 정상적으로 생성된다.") {
         val actual = Lotto(mixLottoNumbers)
@@ -25,22 +19,8 @@ class LottoTest : FunSpec({
 
     test("로또는 유효하지 않은 로또 번호 목록을 전달받으면 예외를 던진다.") {
         val invalidLottoNumbers = listOf(
-            LinkedHashSet<LottoNumber>().apply {
-                add(LottoNumber.valueOf(30))
-                add(LottoNumber.valueOf(3))
-                add(LottoNumber.valueOf(4))
-                add(LottoNumber.valueOf(42))
-                add(LottoNumber.valueOf(22))
-            },
-            LinkedHashSet<LottoNumber>().apply {
-                add(LottoNumber.valueOf(30))
-                add(LottoNumber.valueOf(3))
-                add(LottoNumber.valueOf(4))
-                add(LottoNumber.valueOf(42))
-                add(LottoNumber.valueOf(22))
-                add(LottoNumber.valueOf(23))
-                add(LottoNumber.valueOf(24))
-            }
+            createLottoNumbers(30, 3, 4, 42, 22),
+            createLottoNumbers(30, 3, 4, 42, 22, 23, 24)
         )
 
         invalidLottoNumbers.forEach {

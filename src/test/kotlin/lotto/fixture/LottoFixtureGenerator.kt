@@ -5,5 +5,5 @@ import lotto.domain.LottoNumber
 
 internal fun Lotto.Companion.of(vararg values: Int): Lotto = values.toList()
     .map(LottoNumber::valueOf)
-    .toCollection(LinkedHashSet())
+    .toSet()
     .let(::Lotto)

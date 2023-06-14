@@ -2,8 +2,8 @@ package lotto.domain
 
 class Lottos(private val values: List<Lotto>) : List<Lotto> by values {
 
-    fun winningStatistics(winningNumbers: WinningNumbers): Map<Rank, Int> {
-        val baseRankMap = values.map(winningNumbers::matches)
+    fun winningStatistics(winningInfo: WinningInfo): Map<Rank, Int> {
+        val baseRankMap = values.map(winningInfo::matches)
             .groupingBy { it }
             .eachCount()
 

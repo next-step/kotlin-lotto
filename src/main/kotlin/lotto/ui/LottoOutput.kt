@@ -37,7 +37,7 @@ object LottoOutput {
         winningStatistics.entries.filter { it.key != Rank.MISS }.reversed()
             .forEach {
                 val rank = it.key
-                append("${rank.matchCount}개 일치 (${rank.reward}원)- ${it.value}\n")
+                append("${rank.matchCount}개 일치${", 보너스 볼 일치".takeIf { rank.isBonus } ?: ""} (${rank.reward}원)- ${it.value}\n")
             }
     }
 
