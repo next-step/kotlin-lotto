@@ -14,4 +14,6 @@ class Calculator(text: String) {
 
         numbers = if (separator.isBlank()) listOf() else text.split(separator).map { it.toInt() }
     }
+
+    val result = numbers.sum()
 }

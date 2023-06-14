@@ -9,6 +9,7 @@ internal class CalculatorTest {
         val calculator = Calculator("1,2")
         calculator.separator shouldBe ","
         calculator.numbers shouldBe listOf(1, 2)
+        calculator.result shouldBe 3
 
     }
 
@@ -17,5 +18,12 @@ internal class CalculatorTest {
         val calculator = Calculator("1:2")
         calculator.separator shouldBe ":"
         calculator.numbers shouldBe listOf(1, 2)
+        calculator.result shouldBe 3
+    }
+
+    @Test
+    internal fun `빈 문자열 또는 null을 입력한 경우 0을 반환해야 한다`() {
+        val calculator = Calculator("")
+        calculator.result shouldBe 0
     }
 }
