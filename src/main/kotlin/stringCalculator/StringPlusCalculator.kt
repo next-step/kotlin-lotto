@@ -47,4 +47,11 @@ object StringPlusCalculator {
         }
         return convertedString
     }
+
+    fun calculate(numbers: List<Int>): Int {
+        return numbers.reduce {
+            total, number ->
+            total + number
+        }
+    }
 }

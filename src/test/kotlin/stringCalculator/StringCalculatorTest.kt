@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe
 
-class StringCalculator : AnnotationSpec() {
+class StringCalculatorTest : AnnotationSpec() {
 
     @Test
     fun `쉽표 또는 콜론을 구분자로 인식한다`() {
@@ -39,6 +39,17 @@ class StringCalculator : AnnotationSpec() {
             val string = "a,2:3"
             StringPlusCalculator.seperate(string)
         }
+    }
 
+    @Test
+    fun `숫자 리스트가 오는 경우 합을 구한다`() {
+        val data = listOf(1, 2, 3)
+        StringPlusCalculator.calculate(data) shouldBe 6
+    }
+
+    @Test
+    fun `공백의 경과 0의 경우 결과값도 0`() {
+        val data = listOf(0)
+        StringPlusCalculator.calculate(data) shouldBe 0
     }
 }
