@@ -1,14 +1,17 @@
 package calculator
 
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringAddCalculatorTest {
+
     private lateinit var calculator: StringAddCalculator
 
     @BeforeEach
@@ -20,35 +23,43 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     fun emptyOrNull(text: String?) {
-        assertThat(calculator.add(text)).isZero()
+        calculator.add(text) shouldBe 0
     }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = ["1"])
     fun oneNumber(text: String) {
-        assertThat(calculator.add(text)).isSameAs(Integer.parseInt(text))
+        calculator.add(text) shouldBe text.toInt()
     }
 
     @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = ["1,2"])
-    fun twoNumbers(text: String) {
-        assertThat(calculator.add(text)).isSameAs(3)
+    @CsvSource(
+        value = ["1,2=3", "10,20=30"],
+        delimiter = '=',
+    )
+    fun twoNumbers(text: String, expected: String) {
+        calculator.add(text) shouldBe expected.toInt()
     }
 
     @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = ["1,2:3"])
-    fun colons(text: String) {
-        assertThat(calculator.add(text)).isSameAs(6)
+    @CsvSource(
+        value = ["1,2:3=6", "10:20,30=60", "1:5:4=10"],
+        delimiter = '=',
+    )
+    fun colons(text: String, expected: String) {
+        calculator.add(text) shouldBe expected.toInt()
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
-    @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;2;3"])
-    fun customDelimiter(text: String) {
-        assertThat(calculator.add(text)).isSameAs(6)
+    @Test
+    fun customDelimiter() {
+        // [@CsvSource]를 사용하려 했지만 개행 문자 때문인지 input이 제대로 들어오지 않아 @Test로 진행
+        calculator.add("//;\n1;2;3") shouldBe 6
+        calculator.add("//!\n10,20!30") shouldBe 60
+        calculator.add("//#\n20#30:50") shouldBe 100
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
