@@ -15,10 +15,17 @@ import io.kotest.matchers.shouldBe
  * 구분자가 무엇인지 반환하는 객체면 좋을듯
  */
 class SeparatorExtractorTests : StringSpec ({
-    "기본 구분자 (컴마, 콜론) 를 사용하는지 검증한다" {
+    "컴마로 구분된 문자열에서 추출된 구분자는 컴마이다" {
         val separatorExtractor = SeparatorExtractor()
-        val input = "1,2,3"
-        val separator = separatorExtractor.extract(input)
+        val inputWithComma = "1,2,3"
+        val separator = separatorExtractor.extract(inputWithComma)
         separator shouldBe ","
+    }
+
+    "콜론으로 구분된 문자열에서 추출된 구분자는 콜론이다" {
+        val separatorExtractor = SeparatorExtractor()
+        val inputWithComma = "1:2:3"
+        val separator = separatorExtractor.extract(inputWithComma)
+        separator shouldBe ":"
     }
 })
