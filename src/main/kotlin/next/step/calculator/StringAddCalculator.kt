@@ -6,24 +6,19 @@ object StringAddCalculator {
     private val DEFAULT_COMMAND_PATTERN_REGEX = "[,:]".toRegex()
 
     fun add(command: String?): Int {
-        if (command.isNullOrBlank()) {
-            return 0
-        }
-        return parse(command).sumOf { toNonNegativeInt(it) }
+        return if (command.isNullOrBlank()) 0 else parse(command).sumOf { toNonNegativeInt(it) }
     }
 
-    private fun parse(command: String): List<String> {
+    private fun parse(command: String): Tokens {
         CUSTOM_COMMAND_PATTERN_REGEX.find(command)?.let {
-            return it.groupValues[2].split(it.groupValues[1])
+            return Tokens(it.groupValues[2].split(it.groupValues[1]))
         }
-        return command.split(DEFAULT_COMMAND_PATTERN_REGEX)
+        return Tokens(command.split(DEFAULT_COMMAND_PATTERN_REGEX))
     }
 
     private fun toNonNegativeInt(token: String): Int {
         val n = token.toInt()
-        if (n < 0) {
-            throw RuntimeException()
-        }
+        require(n >= 0) { "음수는 토큰으로 사용될 수 없습니다." }
         return n
     }
 }
