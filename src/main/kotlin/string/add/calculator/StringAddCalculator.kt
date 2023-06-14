@@ -1,7 +1,7 @@
 package string.add.calculator
 
 class StringAddCalculator {
-    private val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
+    private val parser = StringAddCalculatorParser()
 
     fun add(text: String?): Int {
         return calculateOrDefault(text)
@@ -20,26 +20,10 @@ class StringAddCalculator {
     }
 
     private fun calculate(text: String): Int {
-        val numberStrings = parseText(text)
+        val numberStrings = parser.parseText(text)
         val numbers = convertToIntList(numberStrings)
 
         return numbers.sum()
-    }
-
-    private fun parseText(text: String): List<String> {
-        var textAfterCustomDelimiter = text
-
-        findCustomDelimiter(text)?.let {
-            delimiters.add(it)
-            textAfterCustomDelimiter = text.substringAfter(CUSTOM_DELIMITER_END)
-        }
-
-        return textAfterCustomDelimiter.split(*delimiters.toTypedArray())
-    }
-
-    private fun findCustomDelimiter(text: String): String? {
-        val result = Regex("//(.)\n(.*)").find(text)
-        return result?.groupValues?.get(1)
     }
 
     private fun convertToIntList(numberStrings: List<String>): List<Int> {
@@ -59,8 +43,5 @@ class StringAddCalculator {
 
     companion object {
         private const val DEFAULT_RESULT: Int = 0
-        private const val DEFAULT_DELIMITER_COMMA: String = ","
-        private const val DEFAULT_DELIMITER_COLON: String = ":"
-        private const val CUSTOM_DELIMITER_END: String = "\n"
     }
 }
