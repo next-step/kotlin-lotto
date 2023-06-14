@@ -2,31 +2,32 @@ package domain
 
 class Separator {
 
-    private val delimiters = mutableListOf(",", ":")
+    fun extractIntegers(input: String?): List<Int> {
+        require(!input.isNullOrEmpty()) { return listOf(0) }
 
-    fun extractIntegers(input: String): List<Int> {
-        require(input.isNotBlank()) { return listOf(0) }
-        val (delimiter, splitText) = REGEX.matchEntire(input)?.destructured
-            ?: return toIntList(input)
-        addDelimiter(delimiter)
-        return toIntList(splitText)
+        return REGEX.matchEntire(input)?.destructured?.let { (delimiter, splitText) ->
+            splitAndFilterPositiveValues(splitText, listOf(delimiter))
+        } ?: splitAndFilterPositiveValues(input)
     }
 
-    private fun toIntList(text: String): List<Int> {
-        return text.split(*delimiters.toTypedArray())
-            .map { each ->
-                val parsedInt = each.toIntOrNull()
-                requireNotNull(parsedInt) { "숫자 이외의 값 혹은 음수는 사용될 수 없습니다." }
-                require(parsedInt > 0) { "양수만 사용될 수 있습니다." }
-                parsedInt
-            }
+    private fun splitAndFilterPositiveValues(
+        text: String,
+        delimiter: List<String> = DEFAULT_DELIMITERS,
+    ): List<Int> {
+        return text.split(*delimiter.toTypedArray())
+            .map(::positiveNumbers)
     }
 
-    private fun addDelimiter(delimiter: String) {
-        delimiters.add(delimiter)
+    private fun positiveNumbers(number: String): Int {
+        val parsedInt = number.toIntOrNull() ?: throw IllegalArgumentException(ONLY_NUMERIC_TYPE_ERROR)
+        require(parsedInt > 0) { ONLY_POSITIVE_ERROR }
+        return parsedInt
     }
 
     companion object {
         private val REGEX = Regex("//(.*?)\n(.*)")
+        private val DEFAULT_DELIMITERS = listOf(":", ",")
+        private const val ONLY_NUMERIC_TYPE_ERROR = "숫자 이외의 값 혹은 음수는 사용될 수 없습니다"
+        private const val ONLY_POSITIVE_ERROR = "양수만 사용될 수 있습니다."
     }
 }
