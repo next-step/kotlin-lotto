@@ -9,11 +9,11 @@ class StringAddCalculator {
 
     private fun calculateOrDefault(text: String?): Int {
         if (text.isNullOrEmpty()) {
-            return 0
+            return DEFAULT_RESULT
         }
 
         if (text.isBlank()) {
-            return 0
+            return DEFAULT_RESULT
         }
 
         return calculate(text)
@@ -58,6 +58,7 @@ class StringAddCalculator {
     }
 
     companion object {
+        private const val DEFAULT_RESULT: Int = 0
         private const val DEFAULT_DELIMITER_COMMA: String = ","
         private const val DEFAULT_DELIMITER_COLON: String = ":"
         private const val CUSTOM_DELIMITER_END: String = "\n"
