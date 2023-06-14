@@ -23,22 +23,15 @@ class StringAddCalculator {
         val numberStrings = parser.parseText(text)
         val numbers = convertToIntList(numberStrings)
 
-        return numbers.sum()
+        return numbers.sumOf { it.value }
     }
 
-    private fun convertToIntList(numberStrings: List<String>): List<Int> {
+    private fun convertToIntList(numberStrings: List<String>): List<Number> {
         val numbers = numberStrings.map {
             it.toIntOrNull() ?: throw RuntimeException(ErrorMessage.NON_NUMERIC_VALUE_WAS_PASSED.message)
-        }
+        }.map { Number(it) }
 
-        validateNumbers(numbers)
         return numbers
-    }
-
-    private fun validateNumbers(numbers: List<Int>) {
-        if (numbers.any { it < 0 }) {
-            throw RuntimeException(ErrorMessage.NEGATIVE_NUMBER_PASSED.message)
-        }
     }
 
     companion object {
