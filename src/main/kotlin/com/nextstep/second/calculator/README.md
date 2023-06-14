@@ -14,9 +14,9 @@
 
 ## 기능 구현 목록 정리
 * [X] Calculator::add : List<Int> 타입을 입력받으면 전부 더해서 결과값을 리턴해주는 싱글톤 객체 
-* [ ] ExpressionParser : input 을 받아서 List<Int> 로 숫자들을 파싱해준다
+* [X] ExpressionParser : input 을 받아서 List<Int> 로 숫자들을 파싱해준다
   * `String` 타입의 Input 을 받아서 regex 를 이용하여 List<Int> 로 분리해줄 수 있음
-  * `() -> Unit` 타입의 validFunction 을 입력받아서 validation 을 진행
+  * `() -> Unit` 타입의 validFunction 을 입력받아서 validation 을 진행 -> 일단 private 내장 함수로 구현
 * [ ] CustomExpressionParser : input 을 받아서 List<Int> 로 숫자를 파싱해준다
   * `String` 타입의 Input 을 받아서 regex 를 이용하여 List<Int> 로 분리해줄 수 있음
   * `//[.]\n` 에서 기준선을 잡아서 이 후 문자열을 파싱하여 List<Int> 로 분리해줄 수 있음
