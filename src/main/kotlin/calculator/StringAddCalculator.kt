@@ -7,7 +7,7 @@ class StringAddCalculator {
             return 0
         }
 
-        return text.split(",")
+        return text.split(",", ":")
             .sumOf { it.toInt() }
     }
 }
