@@ -5,6 +5,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
+import stringAddCalculator.customDelimiter.DoubleSlashAndNewLineDelimiter
 import java.lang.RuntimeException
 
 class StringAddCalculatorTest {
@@ -32,7 +33,8 @@ class StringAddCalculatorTest {
         ],
     )
     fun `DoubleSlash 와 NewLine 사이에 오는 문자를 커스텀 구분자로 가질 수 있다`(expression: String) {
-        val calculator = StringAddCalculator(expression)
+        val customDelimiters = listOf(DoubleSlashAndNewLineDelimiter())
+        val calculator = StringAddCalculator(expression, customDelimiters)
 
         calculator.calculate() shouldBe 6
     }
