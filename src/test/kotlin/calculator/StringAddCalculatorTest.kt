@@ -32,6 +32,16 @@ class StringAddCalculatorTest {
         actual shouldBe 6
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = [""])
+    fun `빈 문자열 또는 null 을 입력할 경우 0을 반환 한다`(input: String?) {
+        val actualEmpty = calculator.calculate(input)
+        actualEmpty shouldBe 0
+
+        val actualNull = calculator.calculate(null)
+        actualNull shouldBe 0
+    }
+
     companion object {
         object StringListArgumentsProvider : ArgumentsProvider {
             override fun provideArguments(context: ExtensionContext): Stream<out Arguments> {
