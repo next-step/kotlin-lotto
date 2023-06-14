@@ -6,7 +6,11 @@ import string.splitter.SeparatorStringSplitter
 class StringCalculator(
     private val splitters: List<SeparatorStringSplitter>
 ) {
-    fun sum(strExpression: String): Int {
+    fun sum(strExpression: String?): Int {
+        if (strExpression.isNullOrBlank()) {
+            return 0
+        }
+
         splitters.forEach {
             val result = it.split(strExpression)
             if (result != null) {

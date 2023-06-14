@@ -21,6 +21,14 @@ internal class StringCalculatorTest : StringSpec({
     )
     val sut = StringCalculator(splitters)
 
+    "빈 문자열을 입력하는 경우 0을 반환한다" {
+        sut.sum("") shouldBe 0
+    }
+
+    "null 문자열을 입력하는 경우 0을 반환한다" {
+        sut.sum("") shouldBe 0
+    }
+
     "쉼표로 구분된 문자열을 덧셈한 결과를 반환한다" {
         sut.sum("1,2,3") shouldBe 6
     }
