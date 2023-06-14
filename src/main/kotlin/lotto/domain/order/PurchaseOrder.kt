@@ -10,7 +10,7 @@ class PurchaseOrder(amount: Int) {
     private val maximumPurchaseQuantity: Int = (amount / Lottery.LOTTERY_PRICE).toInt()
 
     @OptIn(ExperimentalStdlibApi::class)
-    val purchasedLotteries: PurchasedLotteries = ZERO.rangeUntil(other = maximumPurchaseQuantity)
+    val purchasedLotteries: PurchasedLotteries = (ZERO ..< maximumPurchaseQuantity)
         .map { LotteryGenerator.draw() }
         .run(::PurchasedLotteries)
 
