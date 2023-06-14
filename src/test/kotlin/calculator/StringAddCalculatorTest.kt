@@ -68,11 +68,18 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//;\n1;-2:3"])
+    @ValueSource(strings = ["//;\n1;2:3"])
     @DisplayName("문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치하는 문자를 커스텀 구분자 구한다")
     fun `getCustomDelimiter`(input: String) {
         val actual = calculator.getCustomDelimiter(input)
         actual shouldBe ";"
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n7;2:1"])
+    fun `커스텀 구분자가 있을 시 동일하게 구분자로서의 숫자 분리 후 합을 반환한다`(input: String) {
+        val actual = calculator.calculate(input)
+        actual shouldBe 10
     }
 
     companion object {

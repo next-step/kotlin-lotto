@@ -19,9 +19,17 @@ class StringAddCalculator {
 
     fun split(input: String): List<String> {
 
-        val customDelimiter = getCustomDelimiter(input)
+        var customDelimiter = getCustomDelimiter(input)
+        var customString: String? = null
 
-        val splitList = input.split(DELIMITER.toRegex())
+        customDelimiter?.let {
+            customDelimiter = DELIMITER.plus("|$it")
+            customString = input.split("\n")[1]
+        }
+
+        val splitList = customDelimiter?.let { customString?.split(it.toRegex()) }
+            ?:input.split(DELIMITER.toRegex())
+
         checkNegativeNumber(splitList)
         return splitList
     }
