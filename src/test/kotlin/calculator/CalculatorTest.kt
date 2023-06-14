@@ -2,6 +2,7 @@ package calculator
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class CalculatorTest {
     @Test
@@ -32,5 +33,26 @@ internal class CalculatorTest {
         calculator.separator shouldBe ";"
         calculator.numbers shouldBe listOf(1, 2, 3)
         calculator.result shouldBe 6
+    }
+
+    @Test
+    internal fun `음수를 전달할 경우 EXCEPTION이 발생한다`() {
+        assertThrows<RuntimeException> {
+            Calculator("//;\n-1;2;3")
+        }
+    }
+
+    @Test
+    internal fun `숫자 이외의 값을 경우 EXCEPTION이 발생한다`() {
+        assertThrows<RuntimeException> {
+            Calculator("//;\n.;2;3")
+        }
+    }
+
+    @Test
+    internal fun `연산기호가 충분하지 않을 경우 EXCEPTION이 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            Calculator("//;1;2;3")
+        }
     }
 }

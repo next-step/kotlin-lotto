@@ -15,5 +15,5 @@
 - [x] ,와:을 가지는 경우 문자열의 합이 계산된다. -> Calculator
 - [x] 문자열이 빈값이거나 null인 경우 합은 0이 된다 -> Calculator
 - [x] //와 \n 사이에 구분자를 전달하는 경우 해당 구분자를 사용한다. -> Calculator
-- [ ] 계산기에 숫자 이외에 값 또는 음수를 전달하는 경우 RuntimeException을 발생시킨다. -> Calculator
+- [x] 계산기에 숫자 이외에 값 또는 음수를 전달하는 경우 RuntimeException을 발생시킨다. -> Calculator
 - [ ] 값을 출력한다. -> ResultView
