@@ -3,27 +3,35 @@ package calculator
 class StringAddCalculator {
 
     fun add(text: String?): Int {
-        if (text.isNullOrBlank()) {
-            return 0
+        return if (text.isNullOrBlank()) {
+            0
+        } else {
+            text.extractPositiveNumbers().sum()
         }
+    }
 
-        val (pattern, target) = Regex("//(.)\n(.*)")
-            .find(text)
-            ?.groupValues
-            ?.let { groupValues ->
-                val customDelimiter = groupValues[1]
-                val target = groupValues[2]
-                "[,:$customDelimiter]" to target
-            } ?: ("[,:]" to text)
-
-        val numbers = target.split(Regex(pattern))
-            .map { it.toIntOrNull() ?: throw RuntimeException("$it is not integer") }
-        numbers.forEach { number ->
-            if (number < 0) {
-                throw RuntimeException("$number is negative")
+    private fun String.extractPositiveNumbers(): List<PositiveNumber> {
+        val matchedGroupValues = CUSTOM_DELIMITER_REGEX.find(this)?.groupValues
+        val separationRegex = run {
+            val customDelimiter = matchedGroupValues?.getOrNull(1)
+            val finalDelimiters = if (customDelimiter == null) {
+                FIXED_DELIMITERS
+            } else {
+                FIXED_DELIMITERS.plus(customDelimiter)
             }
+            Regex("[$finalDelimiters]")
         }
-
-        return numbers.sum()
+        val calculationTargetText = run {
+            val delimitedText = matchedGroupValues?.getOrNull(2)
+            delimitedText ?: this
+        }
+        return calculationTargetText
+            .split(separationRegex)
+            .map { maybeNumber -> PositiveNumber.of(maybeNumber) }
+    }
+    
+    companion object {
+        private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
+        private const val FIXED_DELIMITERS = ",:"
     }
 }
