@@ -9,7 +9,7 @@
 - [x] "\\"과 "\n" 사이에 위치되는 문자열을 커스텀 구분자로 등록할 수 있다. - Separator
 - [x] "\\"과 "\n" 사이에 위치되는 문자열을 커스텀 구분자와 ","와 ":"가 섞여 있어도 정상 작동한다. - Separator
 - [x] null 혹은 빈 문자열이 왔을 때, 0을 반환한다. - Separator
-- [ ] 문자열에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 던진다. - Separator
+- [x] 문자열에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 던진다. - Separator
 - [ ] 숫자 열이 전달되면 합을 리턴한다. - Calculator
 - 
 ### 기능 요구 사항
