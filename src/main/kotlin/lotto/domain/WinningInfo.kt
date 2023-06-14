@@ -13,9 +13,11 @@ class WinningInfo(private val values: Set<LottoNumber>, private val bonusNumber:
 
     companion object {
         const val WINNING_NUMBERS_VALID_LENGTH = 6
-        const val DELIMITER = ","
 
-        fun of(winningNumbersSource: List<String>, bonusNumberSource: Int): WinningInfo {
+        fun of(
+            winningNumbersSource: List<String>,
+            bonusNumberSource: Int
+        ): WinningInfo {
             val winningNumbers = winningNumbersSource.map(String::trim)
                 .mapNotNull(String::toIntOrNull)
                 .map(LottoNumber::valueOf)

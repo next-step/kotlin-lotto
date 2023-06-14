@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 import lotto.fixture.createLottoNumbers
 import lotto.fixture.of
 
-class WinningNumbersTest : FreeSpec({
+class WinningInfoTest : FreeSpec({
     "당첨 번호는 중복되지 않는 6개의 로또 번호를 가진다." {
         val actual = WinningInfo(
             values = createLottoNumbers(1, 2, 3, 4, 5, 6),

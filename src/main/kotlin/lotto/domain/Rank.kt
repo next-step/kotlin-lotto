@@ -9,10 +9,8 @@ enum class Rank(
         override fun matches(matchCount: Int, isBonus: Boolean): Boolean = this.matchCount == matchCount
     },
     SECOND(true, 5, Money(30_000_000)) {
-        override fun matches(matchCount: Int, isBonus: Boolean): Boolean = when (isBonus) {
-            this.isBonus -> this.matchCount == matchCount
-            else -> false
-        }
+        override fun matches(matchCount: Int, isBonus: Boolean): Boolean =
+            this.isBonus == isBonus && this.matchCount == matchCount
     },
     THIRD(false, 5, Money(1_500_000)) {
         override fun matches(matchCount: Int, isBonus: Boolean): Boolean = this.matchCount == matchCount

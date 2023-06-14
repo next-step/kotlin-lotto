@@ -1,8 +1,8 @@
 package lotto.ui
 
-import lotto.domain.WinningInfo
-
 private const val REQUEST_NUMBER_MESSAGE = "숫자를 입력해 주세요."
+
+private const val DELIMITER = ","
 
 object LottoInput {
     tailrec fun requestMoney(): Int {
@@ -23,7 +23,7 @@ object LottoInput {
             println("유효한 당첨 번호를 입력해주세요.")
             requestWinningNumbers()
         } else {
-            winningNumbers.split(WinningInfo.DELIMITER).map(String::trim)
+            winningNumbers.split(DELIMITER).map(String::trim)
         }
     }
 

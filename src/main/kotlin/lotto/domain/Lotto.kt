@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lotto(numbers: Set<LottoNumber>) {
-    val lottoNumbers = numbers.sortedBy(lotto.domain.LottoNumber::number).toSet()
+    val lottoNumbers = numbers.sortedBy(LottoNumber::number).toSet()
 
     operator fun contains(lottoNumber: LottoNumber) = lottoNumbers.contains(lottoNumber)
 

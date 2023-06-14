@@ -16,9 +16,11 @@ class LottoService(
 ) {
 
     fun getWinningStatistics(request: WinningStatisticsInfo): LottoResult {
-        val inputMoney = Money(value = request.money)
-        val winningStatistics =
-            request.lottos.winningStatistics(winningInfo = WinningInfo.of(winningNumbersSource = request.winningNumbers, bonusNumberSource = request.bonusNumber))
+        val (money, winningNumbers, bonusNumber, lottos) = request
+
+        val inputMoney = Money(value = money)
+        val winningInfo = WinningInfo.of(winningNumbersSource = winningNumbers, bonusNumberSource = bonusNumber)
+        val winningStatistics = lottos.winningStatistics(winningInfo = winningInfo)
         val winningAmount = winningStatistics.map { it.key.reward times it.value }
             .reduce(Money::plus)
 
