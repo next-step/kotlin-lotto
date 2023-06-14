@@ -5,7 +5,7 @@ import kotlin.random.Random
 object RandomLottoTicketStorage : LottoTicketStorage {
 
     private const val LOTTO_TICKET_SIZE: Int = LottoTicket.SIZE
-    private val LOTTO_NUMBERS: Set<LottoNumber> = (LottoNumber.MIN..LottoNumber.MAX).toSet()
+    private val LOTTO_NUMBERS: Set<LottoNumber> = LottoNumber.ALL
 
     override val lottoTicket: LottoTicket
         get() {

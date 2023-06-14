@@ -5,7 +5,6 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.DisplayName
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
-import io.kotest.matchers.collections.shouldContainExactly
 
 @DisplayName("로또 번호")
 class LottoNumberTest : StringSpec({
@@ -24,21 +23,5 @@ class LottoNumberTest : StringSpec({
                 LottoNumber(it)
             }
         }
-    }
-
-    "로또 번호 범위 생성" {
-        // given
-        val start = LottoNumber(1)
-        val end = LottoNumber(5)
-        // when
-        val lottoNumbers: Collection<LottoNumber> = start..end
-        // then
-        lottoNumbers shouldContainExactly listOf(
-            LottoNumber(1),
-            LottoNumber(2),
-            LottoNumber(3),
-            LottoNumber(4),
-            LottoNumber(5)
-        )
     }
 })

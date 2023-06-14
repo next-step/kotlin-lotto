@@ -10,7 +10,7 @@ object ResultView {
     fun printTickets(tickets: Collection<LottoTicket>) {
         println("${tickets.size}개를 구매했습니다.")
         tickets.forEach { ticket ->
-            println("[${ticket.numbers.joinToString(", ") { it.number.toString() }}]")
+            println("[${ticket.numbers.map { it.number }.sorted().joinToString(", ")}]")
         }
         println()
     }

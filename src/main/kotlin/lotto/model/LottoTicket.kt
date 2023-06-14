@@ -2,7 +2,7 @@ package lotto.model
 
 class LottoTicket(numbers: Set<LottoNumber>) {
 
-    val numbers: Set<LottoNumber> = numbers.toSortedSet()
+    val numbers: Set<LottoNumber> = numbers.toSet()
 
     init {
         require(numbers.size == SIZE) {
