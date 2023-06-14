@@ -23,7 +23,6 @@ class Calculator(text: String?) {
     val numbers: List<Int>
 
     init {
-
         var numberText = text
         separator = when {
             text.isNullOrBlank() -> {
@@ -31,7 +30,10 @@ class Calculator(text: String?) {
                 BLANK
             }
             text.contains(BACKSLASH_SEPARATOR) && text.contains(NEWLINE_SEPARATOR) -> {
-                val result = Regex(SEPARATOR_PATTERN).findAll(text).map { it.value.trim() }.toList()
+                val result = Regex(SEPARATOR_PATTERN)
+                    .findAll(text)
+                    .map { it.value.trim() }
+                    .toList()
                 numberText = result[1]
                 result[0]
             }
@@ -39,7 +41,9 @@ class Calculator(text: String?) {
             text.contains(COLON_SEPARATOR) -> COLON_SEPARATOR
             else -> throw IllegalArgumentException(SEPARATOR_EXCEPTION)
         }
-        numbers = numberText!!.split(separator).filter { it.isNotBlank() }.map { isPositiveNumber(it) }
+        numbers = numberText!!.split(separator)
+            .filter { it.isNotBlank() }
+            .map { isPositiveNumber(it) }
     }
 
     private fun isPositiveNumber(number: String): Int {
