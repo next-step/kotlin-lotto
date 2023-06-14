@@ -5,6 +5,7 @@ class Separator {
     private val delimiters = mutableListOf(",", ":")
 
     fun extractIntegers(input: String): List<Int> {
+        require(input.isNotBlank()) { return listOf(0) }
         val (delimiter, splitText) = REGEX.matchEntire(input)?.destructured
             ?: return toIntList(input)
         addDelimiter(delimiter)
