@@ -11,6 +11,9 @@ object StringPlusCalculator {
 
     private var customSeperators = mutableListOf(DEFAULT_SEPERATOR_1, DEFAULT_SEPERATOR_2)
     fun seperate(string: String): List<Int> {
+        if(string.isEmpty()) {
+            return listOf(0)
+        }
         var convertedString = string
         if(CUSTOM_SEPERATOR_PREFIX in string && CUSTOM_SEPERATOR_POSTFIX in string) {
             val splitStrings = string.split(CUSTOM_SEPERATOR_POSTFIX)

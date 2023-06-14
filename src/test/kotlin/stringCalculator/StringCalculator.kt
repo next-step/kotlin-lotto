@@ -20,4 +20,10 @@ class StringCalculator : AnnotationSpec() {
             StringPlusCalculator.seperate(it) shouldBe listOf(1, 2, 3)
         }
     }
+
+    @Test
+    fun `구분자를 기준으로 값이 없는 경우 0으로 인식`() {
+        val string = ""
+        StringPlusCalculator.seperate(string) shouldBe listOf(0)
+    }
 }
