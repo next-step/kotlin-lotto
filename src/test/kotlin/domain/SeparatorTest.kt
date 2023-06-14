@@ -15,7 +15,7 @@ class SeparatorTest {
     @ParameterizedTest
     fun `문자열이 입력되면 특정 구분자를 통해 숫자들을 반환한다`(
         input: String,
-        expected: List<Int>,
+        expected: List<Int>
     ) {
         val separator = Separator()
         val result = separator.extractIntegers(input)
@@ -39,7 +39,7 @@ class SeparatorTest {
     @ValueSource(strings = ["1,33.2", "일,이,삼", "-1,-2,-3", "0, 1,+2", "01,  2"])
     @ParameterizedTest
     fun `문자열에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 던진다`(
-        input: String,
+        input: String
     ) {
         val separator = Separator()
         shouldThrow<IllegalArgumentException> {
@@ -60,7 +60,7 @@ class SeparatorTest {
                 Arguments.of("10,2:145", listOf(10, 2, 145)),
                 Arguments.of("8:3,7", listOf(8, 3, 7)),
 
-                Arguments.of("", listOf(0)),
+                Arguments.of("", listOf(0))
             )
         }
     }

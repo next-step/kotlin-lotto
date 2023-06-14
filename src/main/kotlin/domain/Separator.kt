@@ -2,24 +2,24 @@ package domain
 
 class Separator {
 
-    fun extractIntegers(input: String?): List<Int> {
-        require(!input.isNullOrEmpty()) { return listOf(0) }
+    fun extractIntegers(text: String?): List<Int> {
+        require(!text.isNullOrEmpty()) { return listOf(0) }
 
-        return REGEX.matchEntire(input)?.destructured?.let { (delimiter, splitText) ->
+        return REGEX.matchEntire(text)?.destructured?.let { (delimiter, splitText) ->
             splitAndFilterPositiveValues(splitText, listOf(delimiter))
-        } ?: splitAndFilterPositiveValues(input)
+        } ?: splitAndFilterPositiveValues(text)
     }
 
     private fun splitAndFilterPositiveValues(
         text: String,
-        delimiter: List<String> = DEFAULT_DELIMITERS,
+        delimiter: List<String> = DEFAULT_DELIMITERS
     ): List<Int> {
         return text.split(*delimiter.toTypedArray())
             .map(::positiveNumbers)
     }
 
-    private fun positiveNumbers(number: String): Int {
-        val parsedInt = number.toIntOrNull() ?: throw IllegalArgumentException(ONLY_NUMERIC_TYPE_ERROR)
+    private fun positiveNumbers(num: String): Int {
+        val parsedInt = num.toIntOrNull() ?: throw IllegalArgumentException(ONLY_NUMERIC_TYPE_ERROR)
         require(parsedInt > 0) { ONLY_POSITIVE_ERROR }
         return parsedInt
     }
