@@ -5,6 +5,7 @@ import io.kotest.data.forAll
 import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
+import io.kotest.matchers.shouldBe
 
 internal class StringCalculatorTest : StringSpec({
 
