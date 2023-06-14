@@ -8,11 +8,15 @@ import io.kotest.matchers.shouldBe
 class LottoTest : StringSpec({
 
     "로또를 뽑으면 6개 숫자를 반환한다" {
-        Lotto.draw().lottoNumbers shouldHaveSize 6
+        val lotto = Lotto.draw(RandomLottoGenerator())
+
+        lotto.lottoNumbers shouldHaveSize 6
     }
 
     "로또 번호는 모두 1~45 숫자여야 한다" {
-        Lotto.draw().lottoNumbers.forEach {
+        val lotto = Lotto.draw(RandomLottoGenerator())
+
+        lotto.lottoNumbers.forEach {
             (1..45).contains(it.number)
         }
     }

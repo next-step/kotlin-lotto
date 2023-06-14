@@ -27,9 +27,9 @@ class Lottos(
         private const val LOTTO_PRICE: Int = 1000
         private const val ROUND_SCALE = 2
 
-        fun of(purchaseAmount: Int): Lottos {
+        fun of(purchaseAmount: Int, lottoGenerator: LottoGenerator): Lottos {
             val quantity = purchaseAmount / LOTTO_PRICE
-            return Lottos(List(quantity) { Lotto.draw() })
+            return Lottos(List(quantity) { Lotto.draw(lottoGenerator) })
         }
     }
 }

@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 class LottosTest : StringSpec({
     "구입금액에 해당하는 개수만큼 로또를 생성한다" {
-        val lottos = Lottos.of(purchaseAmount = 2000)
+        val lottos = Lottos.of(purchaseAmount = 2000, lottoGenerator = RandomLottoGenerator())
 
         lottos.size shouldBe 2
     }

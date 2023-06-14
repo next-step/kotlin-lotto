@@ -14,20 +14,12 @@ class Lotto(
     }
 
     companion object {
-        private const val LOTTO_NUMBER_COUNT = 6
+        const val LOTTO_NUMBER_COUNT = 6
 
-        fun draw(): Lotto {
-            return Lotto(randomLottoNumbers())
-        }
+        fun draw(lottoGenerator: LottoGenerator): Lotto = lottoGenerator.generate()
 
         fun of(numbers: List<Int>): Lotto {
             return Lotto(numbers.map { LottoNumber(it) })
-        }
-
-        private fun randomLottoNumbers(): List<LottoNumber> {
-            return LOTTO_NUMBER_RANGE.shuffled()
-                .take(LOTTO_NUMBER_COUNT)
-                .map { LottoNumber(it) }
         }
     }
 }

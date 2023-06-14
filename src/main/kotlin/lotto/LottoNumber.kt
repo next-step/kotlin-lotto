@@ -1,7 +1,5 @@
 package lotto
 
-val LOTTO_NUMBER_RANGE: IntRange = 1..45
-
 @JvmInline
 value class LottoNumber(
     val number: Int
@@ -14,5 +12,9 @@ value class LottoNumber(
 
     override fun toString(): String {
         return "$number"
+    }
+
+    companion object {
+        val LOTTO_NUMBER_RANGE: IntRange = 1..45
     }
 }
