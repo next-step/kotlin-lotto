@@ -12,8 +12,7 @@ class StringAdditionCalculatorInputParserTest {
     @ParameterizedTest(name = "{0} should {1}")
     @MethodSource("getEmptyOrNullInput")
     fun `문자열 덧셈 계산기 입력 파서는 빈값("") 또는 null 이 들어오면 빈 리스트를 반환한다`(input: String?, expected: List<String>) {
-        val parser = StringAdditionCalculatorInputParser()
-        val actual = parser.parse(input)
+        val actual = StringAdditionCalculatorInputParser.parse(input)
 
         actual shouldBe expected
     }
@@ -21,8 +20,7 @@ class StringAdditionCalculatorInputParserTest {
     @ParameterizedTest(name = "{0} should {1}")
     @MethodSource("getStringInputIncludeDefaultDelimiters")
     fun `문자열 덧셈 계산기 입력 파서는 쉼표 또는 콜론을 구분자로 가지는 문자열을 분리할 수 있다`(input: String?, expected: List<String>) {
-        val parser = StringAdditionCalculatorInputParser()
-        val actual = parser.parse(input)
+        val actual = StringAdditionCalculatorInputParser.parse(input)
 
         actual shouldBe expected
     }
@@ -30,18 +28,15 @@ class StringAdditionCalculatorInputParserTest {
     @ParameterizedTest(name = "{0} should {1}")
     @MethodSource("getStringInputIncludeCustomDelimiters")
     fun `문자열 앞부분의 슬래시슬래시와 줄마꿈 사이에 위치하는 문자를 커스텀 구분자로 사용한다`(input: String?, expected: List<String>) {
-        val parser = StringAdditionCalculatorInputParser()
-        val actual = parser.parse(input)
+        val actual = StringAdditionCalculatorInputParser.parse(input)
 
         actual shouldBe expected
     }
 
     @Test
     fun `커스텀 구분자가 하이픈인 경우 IllegalArgumentException 예외를 throw 한다`() {
-        val parser = StringAdditionCalculatorInputParser()
-
         shouldThrow<IllegalArgumentException> {
-            parser.parse(input = "//-\\n1-3;2")
+            StringAdditionCalculatorInputParser.parse(input = "//-\\n1-3;2")
         }
     }
 

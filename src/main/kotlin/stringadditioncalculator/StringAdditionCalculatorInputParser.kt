@@ -1,6 +1,10 @@
 package stringadditioncalculator
 
-class StringAdditionCalculatorInputParser {
+object StringAdditionCalculatorInputParser {
+
+    private val DEFAULT_DELIMITERS = arrayOf(",", ";")
+    private const val CUSTOM_DELIMITER_INPUT = """\/\/(.)\\n(.*)"""
+    private const val INVALID_CUSTOM_DELIMITER = "-"
 
     fun parse(input: String?): List<String> {
         if (input.isNullOrBlank()) {
@@ -19,10 +23,4 @@ class StringAdditionCalculatorInputParser {
         val customDelimiter = it.groupValues[1]
         it.groupValues[2].split(delimiters = DEFAULT_DELIMITERS.plus(customDelimiter))
     } ?: emptyList()
-
-    companion object {
-        val DEFAULT_DELIMITERS = arrayOf(",", ";")
-        const val CUSTOM_DELIMITER_INPUT = """\/\/(.)\\n(.*)"""
-        const val INVALID_CUSTOM_DELIMITER = "-"
-    }
 }
