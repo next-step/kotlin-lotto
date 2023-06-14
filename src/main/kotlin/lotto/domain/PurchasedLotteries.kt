@@ -1,6 +1,7 @@
 package lotto.domain
 
-data class PurchasedLotteries(private val lotteries: List<Lottery>) : List<Lottery> by lotteries {
+@JvmInline
+value class PurchasedLotteries(private val lotteries: List<Lottery>) : List<Lottery> by lotteries {
 
-    val purchasedPrice: Double = sumOf { Lottery.LOTTERY_PRICE }
+    fun calculatePurchasedPrice(): Double = sumOf { Lottery.LOTTERY_PRICE }
 }

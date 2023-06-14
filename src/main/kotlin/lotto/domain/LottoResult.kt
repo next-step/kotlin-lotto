@@ -11,7 +11,7 @@ class LottoResult(purchasedLotteries: PurchasedLotteries, winningLottery: Lotter
         lottoRank.winningMoney * count.toDouble()
     }.sum()
 
-    val revenue: Revenue = Revenue(proceeds = proceeds, purchasedPrice = purchasedLotteries.purchasedPrice)
+    val revenue: Revenue = Revenue(proceeds = proceeds, purchasedPrice = purchasedLotteries.calculatePurchasedPrice())
     val benefitType: BenefitType = BenefitType.valueOf(rateOfReturn = revenue.rateOfReturn)
 
     fun countNumberOfHit(lottoRank: LottoRank): Int = winningStatistics[lottoRank] ?: DEFAULT_NUMBER_OF_HIT
