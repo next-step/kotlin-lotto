@@ -11,7 +11,7 @@ class ExpressionParserTest {
         val input = "1,2:3"
 
         // when
-        val parsedExp = ExpressionParser(input)
+        val parsedExp = NormalExpressionParser(input)
         val parsedNumberList = parsedExp.numberList
         // then
         parsedNumberList.size shouldBe 3
@@ -26,7 +26,7 @@ class ExpressionParserTest {
         val input = "1?2?3"
 
         // when
-        assertThrows<IllegalArgumentException> { ExpressionParser(input) }
+        assertThrows<IllegalArgumentException> { NormalExpressionParser(input) }
     }
 
     @Test
@@ -35,7 +35,7 @@ class ExpressionParserTest {
         val input = "1:a,b"
 
         // when
-        assertThrows<IllegalArgumentException> { ExpressionParser(input) }
+        assertThrows<IllegalArgumentException> { NormalExpressionParser(input) }
     }
 
     @Test
@@ -44,6 +44,6 @@ class ExpressionParserTest {
         val input = "1:2,-3"
 
         // when
-        assertThrows<IllegalStateException> { ExpressionParser(input) }
+        assertThrows<IllegalStateException> { NormalExpressionParser(input) }
     }
 }
