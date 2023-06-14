@@ -58,6 +58,14 @@ class StringAddCalculatorTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["1,-2:3"])
+    fun `전달할 문자열 내 음수가 포함되어 있는 경우 RuntimeException 예외가 발생한다`(input: String) {
+        shouldThrow<RuntimeException> {
+            calculator.calculate(input)
+        }
+    }
+
     companion object {
         object StringListArgumentsProvider : ArgumentsProvider {
             override fun provideArguments(context: ExtensionContext): Stream<out Arguments> {
