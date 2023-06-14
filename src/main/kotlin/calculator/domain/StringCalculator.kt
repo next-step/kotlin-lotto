@@ -1,11 +1,11 @@
 package calculator.domain
 
-object StringAdditionCalculator {
+import calculator.domain.StringCalculatorParser.canParseAsNumber
+import calculator.domain.StringCalculatorParser.isPositiveZero
+import calculator.domain.StringCalculatorParser.partitionByOperandAndDelimiter
+
+object StringCalculator {
     private const val DEFAULT_VALUE = 0
-    private const val CUSTOM_DELIMITER_PREFIX = "//"
-    private const val CUSTOM_DELIMITER_POSTFIX = "\n"
-    private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
-    private val CUSTOM_DELIMITER_PARSING_REGEX = Regex("$CUSTOM_DELIMITER_PREFIX(.)$CUSTOM_DELIMITER_POSTFIX(.*)")
 
     fun calculate(input: String?): Int {
         if (input.isNullOrBlank()) return DEFAULT_VALUE
@@ -19,8 +19,15 @@ object StringAdditionCalculator {
 
         return positiveZeroNumberTokens.sumOf { it.toInt() }
     }
+}
 
-    private fun String.partitionByOperandAndDelimiter(): Pair<String, Regex> {
+private object StringCalculatorParser {
+    private const val CUSTOM_DELIMITER_PREFIX = "//"
+    private const val CUSTOM_DELIMITER_POSTFIX = "\n"
+    private val DEFAULT_DELIMITER_REGEX = Regex("[,:]")
+    private val CUSTOM_DELIMITER_PARSING_REGEX = Regex("$CUSTOM_DELIMITER_PREFIX(.)$CUSTOM_DELIMITER_POSTFIX(.*)")
+
+    fun String.partitionByOperandAndDelimiter(): Pair<String, Regex> {
         if (this.hasCustomDelimiter()) {
             val matchResult = requireNotNull(CUSTOM_DELIMITER_PARSING_REGEX.find(this)) { "커스텀 구분자가 잘못되었습니다." }
 
@@ -34,11 +41,11 @@ object StringAdditionCalculator {
         return this.startsWith(CUSTOM_DELIMITER_PREFIX)
     }
 
-    private fun String.canParseAsNumber(): Boolean {
+    fun String.canParseAsNumber(): Boolean {
         return this.toIntOrNull() != null
     }
 
-    private fun String.isPositiveZero(): Boolean {
+    fun String.isPositiveZero(): Boolean {
         return this.toInt() >= 0
     }
 }

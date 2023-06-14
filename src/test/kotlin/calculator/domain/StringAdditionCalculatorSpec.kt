@@ -22,7 +22,7 @@ class StringAdditionCalculatorSpec : DescribeSpec({
                 nameFn = { "입력 문자열 `${it.first}`의 계산 결과는 ${it.second} 이다." },
                 ts = ts,
             ) { (input, answer) ->
-                StringAdditionCalculator.calculate(input) shouldBe answer
+                StringCalculator.calculate(input) shouldBe answer
             }
         }
 
@@ -38,14 +38,14 @@ class StringAdditionCalculatorSpec : DescribeSpec({
                 nameFn = { "입력 문자열 `${it.first}`의 계산 결과는 ${it.second} 이다." },
                 ts = ts,
             ) { (input, answer) ->
-                StringAdditionCalculator.calculate(input) shouldBe answer
+                StringCalculator.calculate(input) shouldBe answer
             }
         }
 
         context("숫자 이외의 값이 전달된 경우") {
             it("RuntimeException 예외를 throw 한다.") {
                 shouldThrowExactly<RuntimeException> {
-                    StringAdditionCalculator.calculate("%,2")
+                    StringCalculator.calculate("%,2")
                 }
             }
         }
@@ -53,7 +53,7 @@ class StringAdditionCalculatorSpec : DescribeSpec({
         context("음수 값이 전달된 경우") {
             it("RuntimeException 예외를 throw 한다.") {
                 shouldThrowExactly<RuntimeException> {
-                    StringAdditionCalculator.calculate("1,2:3,4,5:6,7,8,9,-10")
+                    StringCalculator.calculate("1,2:3,4,5:6,7,8,9,-10")
                 }
             }
         }
