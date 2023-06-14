@@ -6,12 +6,15 @@ object StringAdditionCalculatorInputParser {
     private const val CUSTOM_DELIMITER_INPUT = """\/\/(.)\\n(.*)"""
     private const val INVALID_CUSTOM_DELIMITER = "-"
 
-    fun parse(input: String?): List<String> {
+    fun parse(input: String?): StringNumbers {
         if (input.isNullOrBlank()) {
-            return emptyList()
+            return StringNumbers(emptyList())
         }
 
-        return if (hasCustomDelimiter(input)) parseByCustomDelimiter(input) else input.split(delimiters = DEFAULT_DELIMITERS)
+        val stringNumbers =
+            if (hasCustomDelimiter(input)) parseByCustomDelimiter(input) else input.split(delimiters = DEFAULT_DELIMITERS)
+
+        return StringNumbers(stringNumbers)
     }
 
     private fun hasCustomDelimiter(input: String): Boolean = Regex(CUSTOM_DELIMITER_INPUT).matches(input)
