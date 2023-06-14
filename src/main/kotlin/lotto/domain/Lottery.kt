@@ -17,8 +17,11 @@ value class Lottery(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by
             .toSet()
     )
 
-    fun correctNumberCount(otherLottery: Lottery): LottoMatchResult = LottoMatchResult(
-        countOfMatch = this.count { it in otherLottery },
+    fun scratchLottery(otherLottery: Lottery, bonusBall: LottoNumber): LottoRank = LottoRank.valueOf(
+        lottoMatchResult = LottoMatchResult(
+            countOfMatch = this.count { it in otherLottery },
+            MatchState.valueOf(condition = bonusBall in otherLottery),
+        ),
     )
 
     override fun toString(): String = numbers.toString()
