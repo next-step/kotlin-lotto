@@ -18,9 +18,19 @@ class StringAddCalculator {
     }
 
     fun split(input: String): List<String> {
-        val splitList = input.split(",|:".toRegex())
+
+        val customDelimiter = getCustomDelimiter(input)
+
+        val splitList = input.split(DELIMITER.toRegex())
         checkNegativeNumber(splitList)
         return splitList
+    }
+
+    fun getCustomDelimiter(input: String): String? {
+        val result = Regex("//(.)\n(.*)").find(input)
+        return result?.let {
+            return it.groupValues[1]
+        }
     }
 
     private fun checkNegativeNumber(splitList: List<String>) {
@@ -43,5 +53,6 @@ class StringAddCalculator {
         private const val ZERO: Int = 0
         private const val DELIMITER_COMMA: Char = ','
         private const val DELIMITER_COLON: Char = ':'
+        private const val DELIMITER: String = ",|:"
     }
 }

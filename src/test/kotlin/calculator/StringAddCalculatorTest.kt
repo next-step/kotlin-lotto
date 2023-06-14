@@ -3,6 +3,7 @@ package calculator
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -64,6 +65,14 @@ class StringAddCalculatorTest {
         shouldThrow<RuntimeException> {
             calculator.calculate(input)
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;-2:3"])
+    @DisplayName("문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치하는 문자를 커스텀 구분자 구한다")
+    fun `getCustomDelimiter`(input: String) {
+        val actual = calculator.getCustomDelimiter(input)
+        actual shouldBe ";"
     }
 
     companion object {
