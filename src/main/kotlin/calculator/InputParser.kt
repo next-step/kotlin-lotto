@@ -21,7 +21,8 @@ class InputParser(inputString: String) {
                 *separators.plus(defaultDelimiters)
             )
             .map {
-                if (it.isNotDigit()) throw RuntimeException()
+                if (it.isEmpty()) return@map 0
+                if (it.isNotDigit()) throw RuntimeException("invalid number format $it")
                 it.toInt()
             }
     }

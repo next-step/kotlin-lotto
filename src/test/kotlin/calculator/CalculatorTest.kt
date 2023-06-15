@@ -51,6 +51,23 @@ class CalculatorTest {
         }.isInstanceOf(RuntimeException::class.java)
     }
 
+    @ParameterizedTest
+    @MethodSource("문자열 덧셈 테스트 데이터")
+    fun `문자열 덧셈 테스트`(inputString: String, result: Int) {
+        val inputParser = InputParser(inputString)
+        val separators = inputParser.separator()
+            .toSeparatorArray()
+        assertThat(
+            inputParser.numbers(separators)
+                .sum()
+        ).isEqualTo(result)
+    }
+
+    private fun String?.toSeparatorArray(): Array<String> {
+        if (this == null) return emptyArray()
+        return arrayOf(this)
+    }
+
     companion object {
         @JvmStatic
         private fun `숫자 parsing 테스트 데이터`(): Stream<Arguments> {
@@ -59,6 +76,16 @@ class CalculatorTest {
                 Arguments.of("1;2;3", arrayOf(";"), listOf(1, 2, 3)),
                 Arguments.of("1,2:3", emptyArray<String>(), listOf(1, 2, 3)),
                 Arguments.of("1,2,3", emptyArray<String>(), listOf(1, 2, 3)),
+            )
+        }
+
+        @JvmStatic
+        private fun `문자열 덧셈 테스트 데이터`(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of("", 0),
+                Arguments.of("1", 1,),
+                Arguments.of("1,2,3", 6),
+                Arguments.of("//.\\n1.2.3", 6),
             )
         }
     }
