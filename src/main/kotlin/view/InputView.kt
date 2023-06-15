@@ -6,6 +6,8 @@ class InputView(private val inputReader: InputReader) {
 
     fun buyLotto(): Int {
         val money = enterMoney()
+        require(money > 1000) { "돈이 부족합니다." }
+
         val lottoSize = money / 1000
         println("${lottoSize}개를 구매했습니다.")
         return lottoSize

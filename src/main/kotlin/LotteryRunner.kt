@@ -1,4 +1,5 @@
 import domain.Lottery
+import domain.Settlement
 import view.InputView
 import view.OutputView
 
@@ -15,10 +16,9 @@ class LotteryRunner(private val inputView: InputView) {
         }
 
         val winningNums = inputView.registerWinningNums()
-        val outputView = OutputView(winningNums)
-        val profit = outputView.calculateProfit(lotteries)
+        val settlement = Settlement(winningNums)
+        val returnOnInvestment = settlement.getReturnOnInvestment(lotteries, (purchasableSize * 1000))
 
-        val returnOnInvestment = profit.toDouble() / (purchasableSize * 1000)
-        outputView.reportProfit(returnOnInvestment)
+        OutputView.reportProfit(returnOnInvestment)
     }
 }
