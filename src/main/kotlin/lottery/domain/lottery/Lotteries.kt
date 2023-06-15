@@ -15,5 +15,7 @@ class Lotteries(
 
     companion object {
         fun List<Lottery>.toLotteries() = Lotteries(this)
+
+        fun init() = Lotteries(mutableListOf())
     }
 }
