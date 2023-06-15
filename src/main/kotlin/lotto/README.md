@@ -3,7 +3,7 @@
 ## 기능 목록
 - [x] 로또 번호 생성기는 1~45 사이에 중복없는 번호 6개를 발급한다.
 - [x] 로또 번호가 1~45 사이에 중복없는 숫자 6개가 아닌 경우 IllegalArgumentException 을 발생시킨다. 
-- [ ] 로또 생성기는 로또 구입 금액이 1000원 미만 또는 1000원 단위가 아닐 경우 IllegalArgumentException 을 발생시킨다.
+- [x] 로또 생성기는 로또 구입 금액이 1000원 미만 또는 1000원 단위가 아닐 경우 IllegalArgumentException 을 발생시킨다.
 - [ ] 로또 생성기는 (구매 금액 / 1000) 만큼 로또를 발급한다.
 - [ ] 로또 당첨 통계는 당첨 번호 6개에 중복이 있으면 IllegalArgumentException 을 발생시킨다.
 - [ ] 로또 당첨 통계는 당첨 번호 6개 중 하나라도 1 ~ 45 사이에 숫자가 아니라면 IllegalArgumentException 을 발생시킨다.
