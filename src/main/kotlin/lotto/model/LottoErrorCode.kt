@@ -10,4 +10,7 @@ enum class LottoErrorCode(val message: (String) -> String) {
     NOT_INCLUDE_RANGE_COUNT_OF_MATCH(
         message = { input -> "당첨 개수 범위에 포함되지 않습니다. (범위) (입력값) : $input" },
     ),
+    MUST_NOT_BE_INCLUDE_WINNING_NUMBER(
+        message = { input -> "보너스 볼은 당첨 번호에 포함되면 안 됩니다. (당첨 볼) (당첨 번호) : $input" },
+    ),
 }
