@@ -7,7 +7,7 @@ import java.math.BigDecimal
 
 class Lotteries(
     val values: MutableList<Lottery>
-) : List<Lottery> by values {
+) {
     fun compareWinningLottery(winningLottery: Lottery) =
         values.map { winningLottery.compareWinningLottery(it) }
             .groupingBy { it }
