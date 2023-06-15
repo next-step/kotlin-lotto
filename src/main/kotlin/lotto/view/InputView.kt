@@ -10,9 +10,31 @@ object InputView {
 
     private const val ENTER_BONUS_BALL = "보너스 볼을 입력해 주세요."
 
+    private val ENTER_MANUAL_LOTTERY_COUNT = """
+        
+        수동으로 구매할 로또 수를 입력해 주세요.
+    """.trimIndent()
+
+    private val ENTER_MANUAL_LOTTERY_NUMBERS = """
+
+        수동으로 구매할 번호를 입력해 주세요.
+    """.trimIndent()
+
+    private const val ZERO: Int = 0
+
     fun readPurchaseAmount(): String {
         println(message = ENTER_THE_PURCHASE_AMOUNT)
         return readln()
+    }
+
+    fun readManualLotteryNumber(): List<String> {
+        println(message = ENTER_MANUAL_LOTTERY_COUNT)
+
+        val manualLotteryCount = readln().toInt()
+
+        println(message = ENTER_MANUAL_LOTTERY_NUMBERS)
+
+        return (ZERO until manualLotteryCount).map { readln() }
     }
 
     fun readLastWeekWinningNumbers(): String {

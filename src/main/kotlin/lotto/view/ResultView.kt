@@ -3,11 +3,15 @@ package lotto.view
 import lotto.domain.LottoMatchResult
 import lotto.domain.LottoRank
 import lotto.domain.LottoResult
-import lotto.domain.PurchasedLotteries
+import lotto.domain.order.PurchaseOrder
 
 object ResultView {
 
-    private const val PURCHASE_RESULT_MESSAGE = "개를 구매했습니다."
+    private val PURCHASE_RESULT_MESSAGE = """
+
+        수동으로 %d장, 자동으로 %d개를 구매했습니다.
+    """.trimIndent()
+
     private const val RATE_OF_RETURN_MESSAGE = "총 수익률은 %.2f입니다."
     private const val BENEFIT_MESSAGE = " (기준이 1이기 때문에 결과적으로 %s임)"
     private const val WINNING_STATISTICS_RESULT_MESSAGE = "%s개 일치%s (%s원) - %s개"
@@ -20,10 +24,19 @@ object ResultView {
         ---------
     """.trimIndent()
 
-    fun printPurchaseResult(purchasedLotteries: PurchasedLotteries) {
-        println(message = "${purchasedLotteries.size}$PURCHASE_RESULT_MESSAGE")
+    fun printPurchaseResult(purchaseOrder: PurchaseOrder) {
+        val purchasedManualLotteries = purchaseOrder.purchasedManualLotteries
+        val purchasedAutoLotteries = purchaseOrder.purchasedAutoLotteries
 
-        purchasedLotteries.forEach { println(message = it.toString()) }
+        println(
+            message = PURCHASE_RESULT_MESSAGE.format(
+                purchasedManualLotteries.size,
+                purchasedAutoLotteries.size
+            ),
+        )
+
+        purchaseOrder.purchasedLotteries()
+            .forEach { println(message = it.toString()) }
     }
 
     fun printLottoResult(lottoResult: LottoResult) {

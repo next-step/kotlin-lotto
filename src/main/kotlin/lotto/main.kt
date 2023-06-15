@@ -8,10 +8,12 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val purchaseOrder = PurchaseOrder(amountText = InputView.readPurchaseAmount())
-    val purchasedLotteries = purchaseOrder.purchasedLotteries
+    val purchaseOrder = PurchaseOrder(
+        amountText = InputView.readPurchaseAmount(),
+        manualLotteryTexts = InputView.readManualLotteryNumber(),
+    )
 
-    ResultView.printPurchaseResult(purchasedLotteries = purchasedLotteries)
+    ResultView.printPurchaseResult(purchaseOrder = purchaseOrder)
 
     val winningLottery = WinningLottery(
         lotteryText = InputView.readLastWeekWinningNumbers(),
@@ -19,7 +21,7 @@ fun main() {
     )
 
     val lottoResult = LottoResult(
-        purchasedLotteries = purchasedLotteries,
+        purchasedLotteries = purchaseOrder.purchasedLotteries(),
         winningLottery = winningLottery,
     )
 
