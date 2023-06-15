@@ -2,6 +2,7 @@ package lottery.domain.lottery
 
 import lottery.domain.Money
 import lottery.domain.Rank
+import lottery.domain.Receipt
 import java.math.BigDecimal
 
 class Lottery(
