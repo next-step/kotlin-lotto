@@ -1,13 +1,14 @@
 package view
 
+import domain.Prize
+
 object OutputView {
 
     fun announcePrize(
-        idx: Int,
-        prize: Int,
+        prize: Prize,
         count: Int
     ) {
-        println("${idx}개 일치 (${prize}원) - $count")
+        println("${prize.matches}개 일치 (${prize.value}원) - ${count}개")
     }
 
     fun reportProfit(returnOnInvestment: Double) {
@@ -17,6 +18,6 @@ object OutputView {
         } else {
             "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
         }
-        println("총 수익률은 ${formattedROI}입니다.${message}개")
+        println("총 수익률은 ${formattedROI}입니다.$message")
     }
 }

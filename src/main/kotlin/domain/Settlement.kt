@@ -19,15 +19,10 @@ class Settlement(private val winningNums: List<Int>) {
     }
 
     fun calculateProfit(prizeCountMap: Map<Int, Int>): Int {
-        var profit = 0
-
-        for (idx in 3..6) {
-            val count = prizeCountMap[idx] ?: 0
-            val prize = Prize.getPrizeForMatches(idx)
-            OutputView.announcePrize(idx, prize, count)
-            profit += count * prize
+        return Prize.values().sumOf {
+            val count = prizeCountMap[it.matches] ?: 0
+            OutputView.announcePrize(it, count)
+            count * it.value
         }
-
-        return profit
     }
 }
