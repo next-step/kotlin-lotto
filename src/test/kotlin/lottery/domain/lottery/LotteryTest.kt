@@ -6,6 +6,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import lottery.domain.Money
 import lottery.domain.Rank
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_1
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_2
@@ -90,6 +91,16 @@ class LotteryTest : FunSpec({
         test("숫자 문자 list를 입력받아 Lottery를 생성한다") {
             val actual = Lottery.from(listOf("1", "2", "3", "4", "5", "6"))
             actual shouldHaveSize 6
+        }
+    }
+
+    context("countOfCanByLottery") {
+        test("로또 구매 가능 갯수를 반환한다") {
+            forAll(row(Money(999), 0), row(Money(1_000), 1)) { input, expected ->
+                val actual = Lottery.countOfCanBuyLottery(input)
+                actual shouldBe expected
+            }
+
         }
     }
 }) {
