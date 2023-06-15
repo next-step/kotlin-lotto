@@ -71,6 +71,14 @@ class LottoTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("겹치는 로또 번호 테스트 데이터")
+    fun `겹치는 로또 번호 개수 구하기 테스트`(lottoNumbers1: List<Int>, lottoNumbers2: List<Int>, overlaps: Int) {
+        assertThat(
+            LottoNumbers(lottoNumbers1).numberOfOverlaps(LottoNumbers(lottoNumbers2))
+        ).isEqualTo(overlaps)
+    }
+
     companion object {
         @JvmStatic
         fun `범위를 벗어난 숫자가 있는 로또 번호`(): Stream<Arguments> {
@@ -85,6 +93,15 @@ class LottoTest {
             return Stream.of(
                 Arguments.of(listOf(1, 2, 3, 4, 5)),
                 Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7)),
+            )
+        }
+
+        @JvmStatic
+        fun `겹치는 로또 번호 테스트 데이터`(): Stream<Arguments> {
+            return Stream.of(
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 12, 13, 14, 15, 16), 1),
+                Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(11, 12, 13, 14, 15, 16), 0),
             )
         }
     }

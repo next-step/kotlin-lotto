@@ -9,6 +9,12 @@ data class LottoNumbers(
         require(hasUniqueNumbers())
     }
 
+    fun numberOfOverlaps(other: LottoNumbers): Int {
+        return numbers.filter {
+            it in other.numbers
+        }.size
+    }
+
     private fun inValidRange(number: Int): Boolean = number in MINIMUM..MAXIMUM
 
     private fun hasUniqueNumbers(): Boolean {
