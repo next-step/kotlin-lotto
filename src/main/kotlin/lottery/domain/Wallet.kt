@@ -16,10 +16,7 @@ class Wallet(
     fun buyLotteries(randomLotteryGenerator: LotteryGenerator): List<Lottery> {
         check(Lottery.canBuyLottery(money)) { "로또를 사기엔 부족한 금액이다" }
         val receipt = Lottery.buyLottery(money)
-        money -= receipt.usedMoney
-        val buyLotteries = generateLottery(receipt.buyCount, randomLotteryGenerator)
-        lotteries.addLotteries(buyLotteries)
-        return buyLotteries
+        return buyLotteriesByReceipt(receipt, randomLotteryGenerator)
     }
 
     fun calculateLotteryResult(winLottery: Lottery): LottoResult {
@@ -30,6 +27,13 @@ class Wallet(
 
     private fun generateLottery(buyCount: Int, lotteryGenerator: LotteryGenerator): List<Lottery> =
         lotteryGenerator.generateLotteries(buyCount)
+
+    private fun buyLotteriesByReceipt(receipt: Receipt, randomLotteryGenerator: LotteryGenerator): List<Lottery> {
+        money -= receipt.usedMoney
+        val buyLotteries = generateLottery(receipt.buyCount, randomLotteryGenerator)
+        lotteries.addLotteries(buyLotteries)
+        return buyLotteries
+    }
 
     private fun calculateYield(statistics: Map<Rank, Int>): BigDecimal =
         calculateTotalReward(statistics).divide(lotteries.cost().value, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
