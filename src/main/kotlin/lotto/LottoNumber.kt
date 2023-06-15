@@ -1,6 +1,6 @@
 package lotto
 
-class LottoNumber(private val lottoNumber: List<Int>) : List<Int> by lottoNumber {
+class LottoNumber(lottoNumber: List<Int> = LOTTO_NUMBER_RANGE.shuffled().take(LOTTO_NUMBER_SIZE)) {
 
     init {
         val (withinRange, outOfRange) = lottoNumber.partition { LOTTO_NUMBER_RANGE.contains(it) }
@@ -9,9 +9,9 @@ class LottoNumber(private val lottoNumber: List<Int>) : List<Int> by lottoNumber
     }
 
     companion object {
-        const val LOTTO_START_NUMBER = 1
-        const val LOTTO_END_NUMBER = 45
-        const val LOTTO_NUMBER_SIZE = 6
-        val LOTTO_NUMBER_RANGE = IntRange(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
+        private const val LOTTO_START_NUMBER = 1
+        private const val LOTTO_END_NUMBER = 45
+        private const val LOTTO_NUMBER_SIZE = 6
+        private val LOTTO_NUMBER_RANGE = IntRange(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
     }
 }

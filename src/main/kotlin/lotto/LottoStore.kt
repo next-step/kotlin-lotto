@@ -1,9 +1,12 @@
 package lotto
 
-class LottoGenerator {
-    fun generate(purchaseAmount: Int): Any {
+class LottoStore {
+
+    fun purchase(purchaseAmount: Int): List<LottoNumber> {
         validate(purchaseAmount)
-        return 1
+        return (1..purchaseAmount / PURCHASE_AMOUNT_UNIT).map {
+            LottoNumber()
+        }
     }
 
     private fun validate(purchaseAmount: Int) {
