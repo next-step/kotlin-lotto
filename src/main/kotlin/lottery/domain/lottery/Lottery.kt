@@ -13,8 +13,6 @@ class Lottery(
 
     fun compareWinningLottery(lottery: Lottery) = Rank.from(values.count { lottery.values.contains(it) })
 
-    fun toLotteryNumbers() = values.map { it.value }
-
     companion object {
         const val LOTTERY_NUMBER_SIZE = 6
         val LOTTERY_COST = Money(1_000)
