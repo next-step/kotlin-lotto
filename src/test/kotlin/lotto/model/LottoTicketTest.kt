@@ -36,7 +36,7 @@ class LottoTicketTest : StringSpec({
             LottoNumber(6) to true,
             LottoNumber(7) to false,
         ).forAll {
-            (ONE_TO_SIX_LOTTO_TICKET has it.first) shouldBe it.second
+            (it.first in ONE_TO_SIX_LOTTO_TICKET) shouldBe it.second
         }
     }
 })

@@ -6,7 +6,7 @@ data class PurchasedLottoTickets(val tickets: Collection<LottoTicket>, val price
         return tickets.map {
             LottoRank.rankOf(
                 it matchedCountBy winnerLottoTicket.lottoTicket,
-                it has winnerLottoTicket.bonusNumber
+                winnerLottoTicket.bonusNumber in it
             )
         }.let { LottoScore(it, totalPrice) }
     }
