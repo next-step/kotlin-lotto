@@ -22,5 +22,7 @@ class Lottery(
         fun from(values: List<String>) = Lottery(values.map { LotteryNumber.from(it) })
 
         fun countOfCanBuyLottery(money: Money) = money / LOTTERY_COST
+
+        fun canBuyLottery(money: Money) = countOfCanBuyLottery(money) > 0
     }
 }
