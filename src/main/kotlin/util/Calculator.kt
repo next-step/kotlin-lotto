@@ -1,4 +1,4 @@
-package domain
+package util
 
 object Calculator {
     fun sumList(nums: List<Int>): Int {

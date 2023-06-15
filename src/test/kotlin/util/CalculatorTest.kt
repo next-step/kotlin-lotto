@@ -1,4 +1,4 @@
-package domain
+package util
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test

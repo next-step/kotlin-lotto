@@ -1,4 +1,4 @@
-package domain
+package util
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.headers
