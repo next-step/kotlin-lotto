@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.expression.ExpressionFactory
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
