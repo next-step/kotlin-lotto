@@ -2,8 +2,14 @@ package calculator
 
 object Parser {
 
-    fun getOperand(operand: String?):Int {
-        if(operand.isNullOrBlank()) return 0
-        return operand.toInt()
+    fun parse(input: String?):List<Int> {
+        if(input.isNullOrBlank()) return listOf(0)
+
+        return input.split(",",":")
+            .map { it.toInt() }
     }
+
+
+
+
 }
