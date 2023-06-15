@@ -1,7 +1,7 @@
 package domain
 
-class Calculator {
-    fun sumList(nums: List<Int>): Int {
-        return nums.sum()
+object Calculator {
+    fun sumList(input: List<Int>): Int {
+        return input.sum()
     }
 }
