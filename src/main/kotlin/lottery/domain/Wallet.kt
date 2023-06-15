@@ -3,6 +3,7 @@ package lottery.domain
 import lottery.domain.lottery.Lotteries
 import lottery.domain.lottery.Lottery
 import lottery.domain.lottery.generator.LotteryGenerator
+import java.math.BigDecimal
 import java.math.RoundingMode
 
 class Wallet(
@@ -27,13 +28,13 @@ class Wallet(
         return LottoResult(lottoYield = lottoYield, statistics = statistics)
     }
 
-    private fun generateLottery(buyCount: Int, lotteryGenerator: LotteryGenerator) =
+    private fun generateLottery(buyCount: Int, lotteryGenerator: LotteryGenerator): List<Lottery> =
         lotteryGenerator.generateLotteries(buyCount)
 
-    private fun calculateYield(statistics: Map<Rank, Int>) =
-        calculateTotalReward(statistics).divide(lotteries.cost(), YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
+    private fun calculateYield(statistics: Map<Rank, Int>): BigDecimal =
+        calculateTotalReward(statistics).divide(lotteries.cost().value, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
 
-    private fun calculateTotalReward(result: Map<Rank, Int>) =
+    private fun calculateTotalReward(result: Map<Rank, Int>): BigDecimal =
         result.map { it.key.calculatePrice(it.value) }
             .reduce { total, num -> total + num }
             .toBigDecimal()

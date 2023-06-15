@@ -2,6 +2,7 @@ package lottery.domain.lottery
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lottery.domain.Money
 import lottery.domain.Rank
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_1_6
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_3_8
@@ -29,7 +30,7 @@ class LotteriesTest : FunSpec({
             val lotteries = Lotteries(values = mutableListOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_3_8, LOTTERY_4_9))
             val actual = lotteries.cost()
 
-            actual shouldBe BigDecimal(4_000)
+            actual shouldBe Money(BigDecimal(4_000))
         }
     }
 })

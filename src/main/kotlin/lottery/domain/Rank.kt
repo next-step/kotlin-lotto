@@ -18,7 +18,7 @@ enum class Rank(
         private const val DEFAULT_RANK_COUNT = 0
         val comparator: Comparator<Rank> = compareBy { it.reward }
 
-        fun from(matchCount: Int) = Rank.values()
+        fun from(matchCount: Int): Rank = Rank.values()
             .firstOrNull { it.rankingMetric(matchCount) } ?: throw IllegalArgumentException("로또 룰에 벗어난 수는 입력될 수 없다")
 
         fun Map<Rank, Int>.fillMissRankWithDefault() = Rank.values()

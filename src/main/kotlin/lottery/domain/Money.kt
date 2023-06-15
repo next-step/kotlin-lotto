@@ -11,7 +11,7 @@ value class Money(
         require(value >= BigDecimal.ZERO) { "돈은 음수가 입력될 수 없다" }
     }
 
-    fun times(count: Int) = Money(value.times(BigDecimal(count)))
+    fun times(count: Int): Money = Money(value.times(BigDecimal(count)))
 
     fun divide(money: Money): BigDecimal = value.divide(money.value, RoundingMode.DOWN)
 

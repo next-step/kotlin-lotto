@@ -7,7 +7,7 @@ import lottery.domain.lottery.LotteryNumber
 object RandomLotteryGenerator : LotteryGenerator {
     private val LOTTERY_NUMBER_CACHE = (LotteryNumber.MIN_NUMBER..LotteryNumber.MAX_NUMBER).map { LotteryNumber(it) }
 
-    override fun generate(): Lottery = Lottery(
+    override fun generate() = Lottery(
         LOTTERY_NUMBER_CACHE.shuffled()
             .take(LOTTERY_NUMBER_SIZE)
     )
