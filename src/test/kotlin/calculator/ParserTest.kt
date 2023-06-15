@@ -25,4 +25,8 @@ class ParserTest: StringSpec({
         Parser.parse("1:2") shouldBe listOf(1,2)
 
     }
+
+    "문자 사이에 커스텀 구분자를 지정할 수 있다."{
+        Parser.parse("//;\n1:2") shouldBe listOf(1,2)
+    }
 })
