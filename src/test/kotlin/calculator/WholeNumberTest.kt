@@ -1,6 +1,6 @@
 package calculator
 
-import calculator.WholeNumber.Companion.sum
+import calculator.WholeNumber.Companion.totalNumber
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.DisplayName
@@ -40,6 +40,6 @@ class WholeNumberTest : StringSpec({
         // given
         val oneAndTwo: List<WholeNumber> = listOf(WholeNumber(1), WholeNumber(2))
         // when & then
-        oneAndTwo.sum shouldBe WholeNumber(3)
+        oneAndTwo.totalNumber shouldBe WholeNumber(3)
     }
 })

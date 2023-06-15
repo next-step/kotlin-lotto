@@ -6,8 +6,8 @@ import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.DisplayName
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContainExactly
-import io.kotest.matchers.nulls.shouldBeNull
 
 @DisplayName("문자열 구분자 분리")
 class StringDelimiterSeparatorTest : StringSpec({
@@ -47,8 +47,8 @@ class StringDelimiterSeparatorTest : StringSpec({
         // given
         val separator = StringDelimiterSeparator("^//(?<delimiter>.)\n(?<strings>.*)$".toRegex())
         // when
-        val strings: Collection<String>? = "1,2,3" split separator
+        val strings: Collection<String> = "1,2,3" split separator
         // then
-        strings.shouldBeNull()
+        strings.shouldBeEmpty()
     }
 })
