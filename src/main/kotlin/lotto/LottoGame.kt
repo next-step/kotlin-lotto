@@ -5,7 +5,7 @@ import lotto.io.ResultView
 
 class LottoGame(amount: Int) {
     val lottos = LottoGenerator.generateLottos(amount)
-    fun start() {
+    init {
         ResultView.printLottos(lottos)
     }
 }

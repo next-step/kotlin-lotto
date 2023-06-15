@@ -23,4 +23,13 @@ class LottoGeneratorTest : BehaviorSpec({
             }
         }
     }
+
+    given("로또를 1개 생성해야한다") {
+        `when`("로또를 생성하면") {
+            then("정상적으로 로또가 생성된다") {
+                val lotto = LottoGenerator.generateLotto()
+                lotto.numbers.distinct().count() shouldBe 6
+            }
+        }
+    }
 })
