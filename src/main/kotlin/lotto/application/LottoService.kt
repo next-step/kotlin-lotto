@@ -1,13 +1,14 @@
 package lotto.application
 
-import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.LottoType
 import lotto.domain.Lottos
 import lotto.domain.Money
 import lotto.domain.WinningInfo
-import lotto.domain.WinningStatisticsInfo
 import lotto.domain.generator.LottoNumbersGeneratorManager
+import lotto.domain.request.LottoOrderRequest
+import lotto.domain.request.WinningStatisticsInfo
+import lotto.domain.response.LottoCreateResponse
 import lotto.domain.strategy.ProfitCalculator
 
 class LottoService(
@@ -21,7 +22,7 @@ class LottoService(
         val inputMoney = Money(value = money)
         val winningInfo = WinningInfo.of(winningNumbersSource = winningNumbers, bonusNumberSource = bonusNumber)
         val winningStatistics = lottos.winningStatistics(winningInfo = winningInfo)
-        val winningAmount = winningStatistics.map { it.key.reward times it.value }
+        val winningAmount = winningStatistics.map { it.key.reward times it.value.toLong() }
             .reduce(Money::plus)
 
         val profitRate = profitCalculator.calculate(inputMoney = inputMoney, winningAmount = winningAmount)
@@ -29,25 +30,22 @@ class LottoService(
         return LottoResult(winningStatistics = winningStatistics, profitRate = profitRate)
     }
 
-    fun issueAutoLotto(requestMoney: Int): Lottos {
-        val money = Money(requestMoney)
+    fun issueLotto(requestOrderLotto: LottoOrderRequest): LottoCreateResponse {
+        val autoLottos = createLottos(request = requestOrderLotto, lottoType = LottoType.AUTO)
+        val manualLottos = createLottos(request = requestOrderLotto, lottoType = LottoType.MANUAL)
 
-        require(money >= Lotto.PRICE) {
-            "로또를 구매할 수 있는 금액이 아닙니다. Input: $requestMoney"
-        }
+        val lottos = autoLottos.merge(manualLottos)
 
-        return createLottos(inputMoney = money, lottoType = LottoType.AUTO)
+        return LottoCreateResponse(
+            lottos = lottos,
+            manualCount = manualLottos.size,
+            autoCount = autoLottos.size
+        )
     }
 
-    private fun createLottos(inputMoney: Money, lottoType: LottoType): Lottos {
+    private fun createLottos(request: LottoOrderRequest, lottoType: LottoType): Lottos {
         val lottoNumbersGenerator = lottoNumbersGeneratorManager.getGenerator(lottoType)
-            ?: throw IllegalStateException("Could not find lottery generator mapped to ${LottoType.AUTO}.")
 
-        return (0 until getAvailableQuantity(inputMoney)).map { lottoNumbersGenerator.generate() }
-            .map(::Lotto)
-            .toList()
-            .let(::Lottos)
+        return lottoNumbersGenerator.generate(request)
     }
-
-    private fun getAvailableQuantity(inputMoney: Money): Int = (inputMoney / Lotto.PRICE).value
 }

@@ -2,8 +2,7 @@ package lotto.ui
 
 import lotto.application.LottoService
 import lotto.domain.LottoResult
-import lotto.domain.Lottos
-import lotto.domain.WinningStatisticsInfo
+import lotto.domain.request.WinningStatisticsInfo
 
 class LottoController(
     private val lottoService: LottoService,
@@ -12,20 +11,19 @@ class LottoController(
 ) {
 
     fun issueAndPrintWinningStatistics() {
-        val money: Int = lottoInput.requestMoney()
-        val lottos: Lottos = lottoService.issueAutoLotto(money)
+        val lottoOrderRequest = lottoInput.requestOrderLotto()
+        val lottoCreateResponse = lottoService.issueLotto(lottoOrderRequest)
 
-        lottoOutput.printLotto(lottos)
+        lottoOutput.printLotto(lottoCreateResponse)
 
-        val inputWinningNumbers: List<String> = lottoInput.requestWinningNumbers()
-        val bonusNumber = lottoInput.requestBonusNumber()
+        val winningInfoRequest = lottoInput.requestWinningInfo()
 
         val lottoResult: LottoResult = lottoService.getWinningStatistics(
             request = WinningStatisticsInfo(
-                money = money,
-                winningNumbers = inputWinningNumbers,
-                bonusNumber = bonusNumber,
-                lottos = lottos
+                money = lottoOrderRequest.money,
+                winningNumbers = winningInfoRequest.values,
+                bonusNumber = winningInfoRequest.bonusNumber,
+                lottos = lottoCreateResponse.lottos
             )
         )
 

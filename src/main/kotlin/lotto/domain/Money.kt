@@ -1,7 +1,7 @@
 package lotto.domain
 
 @JvmInline
-value class Money(val value: Int) {
+value class Money(val value: Long) {
 
     init {
         require(value >= MONEY_MIN_LIMIT) {
@@ -13,7 +13,7 @@ value class Money(val value: Int) {
 
     operator fun div(other: Money) = Money(value / other.value)
 
-    infix fun times(count: Int): Money = Money(value * count)
+    infix fun times(count: Long): Money = Money(value * count)
 
     operator fun compareTo(other: Money): Int = value.compareTo(other.value)
 
@@ -26,7 +26,7 @@ value class Money(val value: Int) {
         private const val NOT_CONVERTABLE_VALUE_MESSAGE = "Required Number converted value. Input: "
 
         fun from(value: String): Money =
-            value.toIntOrNull()
+            value.toLongOrNull()
                 ?.let(::Money)
                 ?: throw IllegalArgumentException("$NOT_CONVERTABLE_VALUE_MESSAGE $value")
     }
