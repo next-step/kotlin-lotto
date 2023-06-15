@@ -2,6 +2,8 @@ package lotto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
 
@@ -28,5 +30,12 @@ class LottoTest {
         val lotto = Lotto().buyLotto(1000)
         val actual = lotto[0].toSet()
         assertThat(actual.size).isEqualTo(6)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [14000, 10000, 5000])
+    fun `구입 금액 만큼 로또를 발급할 수 있다 발급의 기준은 1장 당 1000원`(money: Int) {
+        val actual = Lotto().buyLotto(money)
+        assertThat(actual.size).isEqualTo(money/1000)
     }
 }
