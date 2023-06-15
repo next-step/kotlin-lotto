@@ -1,4 +1,4 @@
-package calculator
+package calculator.expression
 
 class NumberParser(input: String?, delimiter: String) {
 
