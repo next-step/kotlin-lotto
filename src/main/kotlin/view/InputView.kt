@@ -1,9 +1,8 @@
-package domain
+package view
 
-import util.InputReader
+class InputView(private val inputReader: InputReader) {
 
-class LottoRunner(private val inputReader: InputReader) {
-    fun startLotto() {
+    fun enterTheMoney() {
         println("구입금액을 입력해 주세요.")
         val money = inputReader.raedLine()
         println(money)

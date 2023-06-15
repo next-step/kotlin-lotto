@@ -1,6 +1,6 @@
 package mock
 
-import util.InputReader
+import view.InputReader
 
 class MockInputReader(
     private val inputs: List<String>,

@@ -1,5 +1,6 @@
-import domain.LottoRunner
+import view.InputView
 
 fun main() {
-    LottoRunner { readln() }.startLotto()
+    val inputView = InputView { readln() }
+    LottoRunner(inputView).startLotto()
 }
