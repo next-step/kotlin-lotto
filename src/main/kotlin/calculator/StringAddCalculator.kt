@@ -1,8 +1,10 @@
 package calculator
 
-class StringAddCalculator {
+class StringAddCalculator(
+    private val input: String?
+) {
 
-    fun calculate(input: String?): Int {
+    fun calculate(): Int {
 
         if (input.isNullOrEmpty()) {
             return ZERO
