@@ -36,4 +36,9 @@ class StringCalculatorKoTest : StringSpec({
         val calculator = StringCalculator()
         calculator.calculate("1,2:3") shouldBe 6
     }
+
+    "커스텀 구분자를 지정해 숫자의 합을 반환할 수 있다" {
+        val calculator = StringCalculator()
+        calculator.calculate("//;\n1;2;3") shouldBe 6
+    }
 })

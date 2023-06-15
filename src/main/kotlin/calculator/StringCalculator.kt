@@ -14,6 +14,15 @@ class StringCalculator {
             return parsedInput
         }
 
-        return input.split(",", ":").sumOf { it.toInt() }
+        val customDelimiterRegex = Regex("//(.)\n(.*)")
+        customDelimiterRegex.find(input)?.let { result ->
+            val customDelimiter = result.groupValues[1]
+            val tokens = result.groupValues[2].split(customDelimiter)
+
+            return tokens.sumOf { token -> token.toInt() }
+        }
+
+        val defaultDelimiters = "[,:]".toRegex()
+        return input.split(defaultDelimiters).sumOf { it.toInt() }
     }
 }
