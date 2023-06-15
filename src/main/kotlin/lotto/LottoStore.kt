@@ -16,6 +16,6 @@ class LottoStore {
 
     companion object {
         private const val MIN_PURCHASE_AMOUNT = 1000
-        private const val PURCHASE_AMOUNT_UNIT = 1000
+        const val PURCHASE_AMOUNT_UNIT = 1000
     }
 }
