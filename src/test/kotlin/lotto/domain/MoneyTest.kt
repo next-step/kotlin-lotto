@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 
 class MoneyTest : FunSpec({
     test("유효한 자연수를 전달하면 돈 객체가 생성된다.") {
-        listOf(0, 1, 10, 100, 1000, 10000, 10000, Int.MAX_VALUE).forEach {
+        listOf(0L, 1L, 10L, 100L, 1000L, 10000L, 10000L, Long.MAX_VALUE).forEach {
             val actual = Money(it)
 
             actual.value shouldBe it
@@ -22,7 +22,7 @@ class MoneyTest : FunSpec({
     }
 
     test("유효하지 않은 인자를 전달하면 예외를 던진다.") {
-        listOf(-1, -100, Int.MIN_VALUE).forEach {
+        listOf(-1L, -100L, Long.MIN_VALUE).forEach {
             shouldThrow<IllegalArgumentException> { Money(it) }
         }
 

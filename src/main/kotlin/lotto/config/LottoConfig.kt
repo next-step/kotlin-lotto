@@ -2,12 +2,15 @@ package lotto.config
 
 import lotto.application.LottoService
 import lotto.domain.LottoType
+import lotto.domain.generator.AutoLottosGenerator
 import lotto.domain.generator.LottoNumbersGeneratorManager
-import lotto.domain.generator.RandomLottoNumbersGenerator
+import lotto.domain.generator.ManualLottosGenerator
 import lotto.domain.strategy.LottoProfitCalculator
 import lotto.domain.strategy.ProfitCalculator
 import lotto.ui.LottoController
 import lotto.ui.LottoInput
+import lotto.ui.LottoInputImpl
+import lotto.ui.LottoInputProxy
 import lotto.ui.LottoOutput
 
 object LottoConfig {
@@ -30,10 +33,11 @@ object LottoConfig {
 
     private val lottoNumbersGeneratorManager: LottoNumbersGeneratorManager by lazy {
         LottoNumbersGeneratorManager().apply {
-            addGenerator(LottoType.AUTO, RandomLottoNumbersGenerator)
+            addGenerator(LottoType.AUTO, AutoLottosGenerator)
+            addGenerator(LottoType.MANUAL, ManualLottosGenerator)
         }
     }
 
     private val lottoOutput: LottoOutput by lazy { LottoOutput }
-    private val lottoInput: LottoInput by lazy { LottoInput }
+    private val lottoInput: LottoInput by lazy { LottoInputProxy(target = LottoInputImpl) }
 }

@@ -8,8 +8,9 @@ import lotto.domain.Lotto
 import lotto.domain.Lottos
 import lotto.domain.ProfitRate
 import lotto.domain.Rank
-import lotto.domain.WinningStatisticsInfo
 import lotto.domain.generator.LottoNumbersGeneratorManager
+import lotto.domain.request.LottoOrderRequest
+import lotto.domain.request.WinningStatisticsInfo
 import lotto.fixture.of
 
 class LottoServiceTest : BehaviorSpec({
@@ -23,7 +24,7 @@ class LottoServiceTest : BehaviorSpec({
             )
             val request = WinningStatisticsInfo(
                 money = 1000,
-                winningNumbers = listOf("1", "2", "3", "8", "11", "7"),
+                winningNumbers = listOf(1, 2, 3, 8, 11, 7),
                 lottos = lottos,
                 bonusNumber = 40
             )
@@ -47,7 +48,15 @@ class LottoServiceTest : BehaviorSpec({
         When("로또 발급을 요청하면 ") {
             Then("예외를 던진다.") {
                 shouldThrow<IllegalStateException> {
-                    service.issueAutoLotto(1000)
+                    service.issueLotto(
+                        requestOrderLotto = LottoOrderRequest(
+                            money = 2000,
+                            manualCount = 1,
+                            manualNumbersList = listOf(
+                                setOf(1, 2, 3, 4, 5, 6)
+                            )
+                        )
+                    )
                 }
             }
         }

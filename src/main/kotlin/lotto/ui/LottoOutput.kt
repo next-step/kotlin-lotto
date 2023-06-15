@@ -2,16 +2,16 @@ package lotto.ui
 
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
-import lotto.domain.Lottos
 import lotto.domain.ProfitRate
 import lotto.domain.Rank
+import lotto.domain.response.LottoCreateResponse
 
 object LottoOutput {
 
-    fun printLotto(lottos: Lottos) {
+    fun printLotto(response: LottoCreateResponse) {
         val result = buildString {
-            append("${lottos.size}개를 구매했습니다.\n")
-            lottos.forEach { appendLottoNumber(it) }
+            append("수동으로 ${response.manualCount}장, 자동으로${response.autoCount}개를 구매했습니다.\n")
+            response.lottos.forEach { appendLottoNumber(it) }
         }
 
         println(result)

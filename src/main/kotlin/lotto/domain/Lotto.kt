@@ -1,9 +1,7 @@
 package lotto.domain
 
-class Lotto(numbers: Set<LottoNumber>) {
+class Lotto(numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
     val lottoNumbers = numbers.sortedBy(LottoNumber::number).toSet()
-
-    operator fun contains(lottoNumber: LottoNumber) = lottoNumbers.contains(lottoNumber)
 
     init {
         require(lottoNumbers.size == VALID_LENGTH) {

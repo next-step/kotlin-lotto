@@ -15,11 +15,10 @@ class WinningInfo(private val values: Set<LottoNumber>, private val bonusNumber:
         const val WINNING_NUMBERS_VALID_LENGTH = 6
 
         fun of(
-            winningNumbersSource: List<String>,
+            winningNumbersSource: List<Int>,
             bonusNumberSource: Int
         ): WinningInfo {
-            val winningNumbers = winningNumbersSource.map(String::trim)
-                .mapNotNull(String::toIntOrNull)
+            val winningNumbers = winningNumbersSource
                 .map(LottoNumber::valueOf)
                 .toSet()
 
