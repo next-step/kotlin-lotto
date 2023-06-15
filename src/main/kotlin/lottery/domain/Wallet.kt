@@ -28,9 +28,7 @@ class Wallet(
     }
 
     private fun generateLottery(buyCount: Int, lotteryGenerator: LotteryGenerator) =
-        (0 until buyCount).map { lotteryGenerator.generate() }
-
-    fun toPurchasedLotteries() = lotteries.map { it.toLotteryNumbers() }
+        lotteryGenerator.generateLotteries(buyCount)
 
     private fun calculateYield(statistics: Map<Rank, Int>) =
         calculateTotalReward(statistics).divide(lotteries.cost(), YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
