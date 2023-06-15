@@ -9,16 +9,14 @@ internal class CalculatorTest {
     @Test
     internal fun `쉼표를 가진 문자열을 전달했을 경우 쉼표를 구분자로 가진 Caculator객체가 생성된다`() {
         val calculator = Calculator("1,2")
-        calculator.separator shouldBe ","
-        calculator.numbers shouldBe listOf(1, 2)
+        calculator.numbers shouldBe listOf("1","2")
         calculator.result shouldBe 3
     }
 
     @Test
     internal fun `콜론를 가진 문자열을 전달했을 경우 콜론를 구분자로 가진 Caculator객체가 생성된다`() {
         val calculator = Calculator("1:2")
-        calculator.separator shouldBe ":"
-        calculator.numbers shouldBe listOf(1, 2)
+        calculator.numbers shouldBe listOf("1","2")
         calculator.result shouldBe 3
     }
 
@@ -34,8 +32,7 @@ internal class CalculatorTest {
     @Test
     internal fun `커스텀 구분자를 사용할 수 있다`() {
         val calculator = Calculator("//;\\n1;2;3")
-        calculator.separator shouldBe ";"
-        calculator.numbers shouldBe listOf(1, 2, 3)
+        calculator.numbers shouldBe listOf("1","2","3")
         calculator.result shouldBe 6
     }
 

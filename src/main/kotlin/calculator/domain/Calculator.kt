@@ -1,49 +1,33 @@
 package calculator.domain
 
 private const val NUMBER_TYPE_EXCEPTION = "양수 타입이 아닙니다."
-
 private const val SEPARATOR_EXCEPTION = "잘못된 구분자를 입력하셨습니다."
-
-private const val COMMA_SEPARATOR = ","
-
-private const val COLON_SEPARATOR = ":"
-
-private const val NEWLINE_SEPARATOR = "\\n"
-
-private const val BACKSLASH_SEPARATOR = "//"
-
-private const val SEPARATOR_PATTERN = "(?<=//).|(?<=\\\\n).*"
-
-private const val BLANK = ""
+private const val BACKSHASH = "//"
+private const val NEWLINE = "\\n"
+private const val CUSTOM_SEPARATOR_PATTERN = "(?<=//).|(?<=\\\\n).*"
+private const val SEPARATOR = "[,:]"
 
 class Calculator(text: String?) {
-    val separator: String
-    val numbers: List<Int>
+    val numbers: List<String>
 
     init {
-        var numberText = text
-        separator = when {
+        numbers = when {
             text.isNullOrBlank() -> {
-                numberText = BLANK
-                BLANK
+                listOf()
             }
 
-            text.contains(BACKSLASH_SEPARATOR) && text.contains(NEWLINE_SEPARATOR) -> {
-                val result = Regex(SEPARATOR_PATTERN)
+            text.contains(BACKSHASH) && text.contains(NEWLINE) -> {
+                val result = Regex(CUSTOM_SEPARATOR_PATTERN)
                     .findAll(text)
                     .map { it.value.trim() }
                     .toList()
-                numberText = result[1]
-                result[0]
+                val customDelimiter = result[0]
+                result[1].split(customDelimiter)
             }
 
-            text.contains(COMMA_SEPARATOR) -> COMMA_SEPARATOR
-            text.contains(COLON_SEPARATOR) -> COLON_SEPARATOR
+            text.contains(SEPARATOR.toRegex()) -> text.split(SEPARATOR.toRegex())
             else -> throw IllegalArgumentException(SEPARATOR_EXCEPTION)
         }
-        numbers = numberText!!.split(separator)
-            .filter { it.isNotBlank() }
-            .map { convertStringToPositiveInt(it) }
     }
 
     private fun convertStringToPositiveInt(number: String): Int {
@@ -52,5 +36,5 @@ class Calculator(text: String?) {
         return result
     }
 
-    val result = numbers.sum()
+    val result = numbers.sumOf { convertStringToPositiveInt(it) }
 }
