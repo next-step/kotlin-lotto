@@ -14,36 +14,17 @@ class StringAddCalculator(
             throw RuntimeException("음수를 입력할 수 없습니다")
         }
 
-        val customDelimiter = getCustomDelimiter(input)
-        val fixedDelimiter = combineDelimiter(customDelimiter)
-        val splitList = splitByDelimiter(fixedDelimiter, input)
+        val customDelimiter = DelimiterManager().getCustomDelimiter(input)
+        val fixedDelimiter = DelimiterManager().combineDelimiter(customDelimiter)
+        val customInput = getCustomInput(input)
+        val splitList = DelimiterManager().splitByDelimiter(fixedDelimiter, customInput, input)
 
         checkNegativeNumber(splitList)
-        return stringAdd(splitList)
-    }
-
-    fun splitByDelimiter(fixedDelimiter: String?, input: String): List<String> {
-        return fixedDelimiter?.let { getCustomInput(input).split(it.toRegex()) }
-            ?: input.split(DELIMITER.toRegex())
+        return BasicCalculator().add(splitList)
     }
 
     private fun getCustomInput(input: String): String {
         return input.split("\n")[CUSTOM_INPUT]
-    }
-
-    private fun combineDelimiter(customDelimiter: String?): String? {
-        var fixedDelimiter: String? = null
-        customDelimiter?.let {
-            fixedDelimiter = DELIMITER.plus("|$it")
-        }
-        return fixedDelimiter
-    }
-
-    fun getCustomDelimiter(input: String): String? {
-        val result = Regex("//(.)\n(.*)").find(input)
-        return result?.let {
-            return it.groupValues[1]
-        }
     }
 
     private fun checkNegativeNumber(splitList: List<String>) {
@@ -52,10 +33,6 @@ class StringAddCalculator(
                 throw RuntimeException("음수를 입력할 수 없습니다")
             }
         }
-    }
-
-    fun stringAdd(input: List<String>): Int {
-        return input.sumOf { it.toInt() }
     }
 
     private fun containsDelimiter(input: String): Boolean {
@@ -67,6 +44,5 @@ class StringAddCalculator(
         private const val ZERO: Int = 0
         private const val DELIMITER_COMMA: Char = ','
         private const val DELIMITER_COLON: Char = ':'
-        private const val DELIMITER: String = ",|:"
     }
 }

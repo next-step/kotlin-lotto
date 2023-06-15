@@ -18,7 +18,7 @@ class StringAddCalculatorTest {
     @ValueSource(strings = ["1,2:3"])
     fun `쉼표 또는 콜론을 구분자로 가지는 문자열을 전달 받아 구분자를 기준으로 분리 후 반환한다`(input: String) {
         calculator = StringAddCalculator(input = input)
-        val actual = calculator.splitByDelimiter(fixedDelimiter = null, input = input)
+        val actual = DelimiterManager().splitByDelimiter(fixedDelimiter = null, customInput = null, input = input)
         actual shouldBe listOf("1", "2", "3")
     }
 
@@ -26,7 +26,7 @@ class StringAddCalculatorTest {
     @ArgumentsSource(StringListArgumentsProvider::class)
     fun `분리 된 리스트의 각 숫자의 합을 구한다`(input: List<String>) {
         calculator = StringAddCalculator(input = "1,2,3")
-        val actual = calculator.stringAdd(input)
+        val actual = BasicCalculator().add(input)
         actual shouldBe 6
     }
 
@@ -72,7 +72,7 @@ class StringAddCalculatorTest {
     @DisplayName("문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치하는 문자를 커스텀 구분자 구한다")
     fun `getCustomDelimiter`(input: String) {
         calculator = StringAddCalculator(input = input)
-        val actual = calculator.getCustomDelimiter(input)
+        val actual = DelimiterManager().getCustomDelimiter(input)
         actual shouldBe ";"
     }
 
