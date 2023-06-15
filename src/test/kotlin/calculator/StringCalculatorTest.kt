@@ -1,6 +1,6 @@
 package calculator
 
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class StringCalculatorTest {
@@ -13,5 +13,24 @@ class StringCalculatorTest {
 
         assertThat(calculator.calculate(emptyDummy)).isEqualTo(0)
         assertThat(calculator.calculate(nullDummy)).isEqualTo(0)
+    }
+
+    @Test
+    fun `숫자 이외의 값 입력 시 RuntimeException throw`() {
+        val calculator = StringCalculator()
+        val inputExceptNumber = "a"
+
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { calculator.calculate(inputExceptNumber) }
+    }
+
+    @Test
+    fun `음수 입력 시 RuntimeException throw`() {
+        val calculator = StringCalculator()
+        val negativeNumber = "-1"
+
+        assertThatThrownBy {
+            calculator.calculate(negativeNumber)
+        }.isInstanceOf(RuntimeException::class.java)
     }
 }
