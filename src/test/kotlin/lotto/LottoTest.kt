@@ -22,4 +22,11 @@ class LottoTest {
         val actual = Lotto().buyLotto(1000)
         assertThat(actual[0].size).isEqualTo(6)
     }
+
+    @Test
+    fun `발급 받은 6개의 숫자 중 중복 된 숫자는 있을 수 없다`() {
+        val lotto = Lotto().buyLotto(1000)
+        val actual = lotto[0].toSet()
+        assertThat(actual.size).isEqualTo(6)
+    }
 }
