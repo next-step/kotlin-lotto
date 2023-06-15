@@ -1,10 +1,12 @@
 package mock
 
+import util.InputReader
+
 class MockInputReader(
     private val inputs: List<String>,
-) {
+) : InputReader {
 
     private var index = 0
 
-    fun raedLine(): String = if (index < inputs.size) inputs[index++] else ""
+    override fun raedLine(): String = if (index < inputs.size) inputs[index++] else ""
 }
