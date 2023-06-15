@@ -14,5 +14,12 @@ object Parser {
             it[2].split(it[1], COMMA,COLON)
         }?: input.split(COMMA,COLON))
             .map { it.toInt() }
+            .filter { it.isPositiveNumber() }
+
+    }
+
+    private fun Int.isPositiveNumber(): Boolean{
+        require(this>0) {"양수만 입력할 수 있습니다."}
+        return true
     }
 }

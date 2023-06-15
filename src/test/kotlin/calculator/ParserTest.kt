@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
@@ -28,5 +29,12 @@ class ParserTest: StringSpec({
 
     "문자 사이에 커스텀 구분자를 지정할 수 있다."{
         Parser.parse("//;\n1:2") shouldBe listOf(1,2)
+    }
+
+    "음수를 전달할 경우 RuntimeException 예외가 발생해야 한다."{
+        shouldThrow<IllegalArgumentException> {
+            Parser.parse("-11:2") shouldBe listOf(-11,2)
+        }.message shouldBe "양수만 입력할 수 있습니다."
+
     }
 })
