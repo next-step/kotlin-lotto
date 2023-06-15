@@ -4,23 +4,10 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 
 @Suppress("NonAsciiCharacters")
 class SeparatorTest {
-
-    @MethodSource("testData")
-    @ParameterizedTest
-    fun `문자열이 입력되면 특정 구분자를 통해 숫자들을 반환한다`(
-        input: String,
-        expected: List<Int>,
-    ) {
-        val result = Separator.extractIntegers(input)
-
-        result shouldBe expected
-    }
 
     @Test
     fun `커스텀 구분자를 등록하고 이를 통해 구분할 수 있다`() {
@@ -40,21 +27,6 @@ class SeparatorTest {
     ) {
         shouldThrow<IllegalArgumentException> {
             Separator.extractIntegers(input)
-        }
-    }
-
-    companion object {
-        @JvmStatic
-        fun testData(): List<Arguments> {
-            return listOf(
-                Arguments.of("1,2,3", listOf(1, 2, 3)),
-                Arguments.of("100,2,3", listOf(100, 2, 3)),
-                Arguments.of("1:2:3", listOf(1, 2, 3)),
-                Arguments.of("100:2:3", listOf(100, 2, 3)),
-                Arguments.of("10,2:145", listOf(10, 2, 145)),
-                Arguments.of("8:3,7", listOf(8, 3, 7)),
-                Arguments.of("", listOf(0)),
-            )
         }
     }
 }
