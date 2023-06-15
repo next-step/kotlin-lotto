@@ -16,7 +16,7 @@ class PositiveNumberTest {
             .isThrownBy { PositiveNumber(number) }
     }
 
-    @DisplayName(value = "음수인 문자열이 RuntimeException 예외 처리를 한다")
+    @DisplayName(value = "음수인 문자열이 주어지면 RuntimeException 예외 처리를 한다")
     @ParameterizedTest
     @ValueSource(strings = ["-1"])
     fun notPositiveNumberString(numberString: String) {
