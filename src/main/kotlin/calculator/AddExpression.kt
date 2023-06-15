@@ -13,11 +13,11 @@ class AddExpression(text: String) {
         return numbers
     }
 
-    fun extractCustomDelimiter(text: String): String? {
+    private fun extractCustomDelimiter(text: String): String? {
         return EXPRESSION_REGEX.find(text)?.groupValues?.get(DELIMITER_INDEX)
     }
 
-    fun extractExpression(text: String): String? {
+    private fun extractExpression(text: String): String? {
         return EXPRESSION_REGEX.find(text)?.groupValues?.get(EXPRESSION_INDEX)
     }
 
