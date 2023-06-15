@@ -2,11 +2,12 @@ package lotto.domain
 
 class LottoMaker {
     fun auto(): Lotto {
-        val sixNumbers = LOTTO_NUMBERS.shuffled().take(6)
-        return Lotto(sixNumbers)
+        val numbers = LOTTO_NUMBERS.shuffled().take(NUMBER_OF_LOTTO_NUMBERS)
+        return Lotto(numbers)
     }
 
     companion object {
-        private val LOTTO_NUMBERS: List<Int> = (1..45).toList()
+        val LOTTO_NUMBERS: List<Int> = (1..45).toList()
+        const val NUMBER_OF_LOTTO_NUMBERS: Int = 6
     }
 }
