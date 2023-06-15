@@ -1,8 +1,10 @@
 package lottery.view
 
-fun inputPurchaseMoney(): Int {
+import java.math.BigDecimal
+
+fun inputPurchaseMoney(): BigDecimal {
     println("구입금액을 입력해 주세요.")
-    return readln().toIntOrNull() ?: retryInputPurchaseMoney()
+    return readln().toBigDecimalOrNull() ?: retryInputPurchaseMoney()
 }
 
 fun inputWinningLottery(): List<String> {
@@ -10,7 +12,7 @@ fun inputWinningLottery(): List<String> {
     return readln().split(",")
 }
 
-private fun retryInputPurchaseMoney(): Int {
+private fun retryInputPurchaseMoney(): BigDecimal {
     println("구입금액은 숫자를 입력하여야 합니다.")
     return inputPurchaseMoney()
 }

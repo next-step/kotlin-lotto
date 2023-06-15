@@ -17,6 +17,7 @@ import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_6
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_7
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_8
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_9
+import java.math.BigDecimal
 
 class LotteryTest : FunSpec({
 
@@ -96,7 +97,7 @@ class LotteryTest : FunSpec({
 
     context("buyLottery") {
         test("로또 구매 결과를 반환한다") {
-            forAll(row(Money(999), 0), row(Money(1_000), 1)) { input, expected ->
+            forAll(row(Money(BigDecimal(999)), 0), row(Money(BigDecimal(1_000)), 1)) { input, expected ->
                 val actual = Lottery.buyLottery(input)
                 actual.buyCount shouldBe expected
             }
@@ -105,12 +106,12 @@ class LotteryTest : FunSpec({
 
     context("canBuyLottery") {
         test("로또를 구매할 수 있다면 true를 반환한다") {
-            val actual = Lottery.canBuyLottery(Money(1_000))
+            val actual = Lottery.canBuyLottery(Money(BigDecimal(1_000)))
             actual shouldBe true
         }
 
         test("로또를 구매할 수 없다면 false를 반환한다") {
-            val actual = Lottery.canBuyLottery(Money(999))
+            val actual = Lottery.canBuyLottery(Money(BigDecimal(999)))
             actual shouldBe false
         }
     }
