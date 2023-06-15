@@ -10,4 +10,10 @@ class LottoTest {
         val actual = LottoNumber().getLottoNumber()
         assertThat(actual).isBetween(1, 45)
     }
+
+    @Test
+    fun `1000원으로 한개의 로또를 발급 받을 수 있다`() {
+        val actual = Lotto().buyLotto(1000)
+        assertThat(actual.size).isEqualTo(1)
+    }
 }

@@ -10,7 +10,7 @@ class LottoNumber {
 
     companion object {
         private const val PICK_INDEX: Int = 0
-        private const val MINIMUM_NUMBER: Int = 45
+        private const val MINIMUM_NUMBER: Int = 1
         private const val MAXIMUM_NUMBER: Int = 45
     }
 }
