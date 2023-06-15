@@ -28,7 +28,7 @@ class StringAddCalculator(
     }
 
     private fun getCustomInput(input: String): String {
-        return input.split("\n")[1]
+        return input.split("\n")[CUSTOM_INPUT]
     }
 
     private fun combineDelimiter(customDelimiter: String?): String? {
@@ -63,6 +63,7 @@ class StringAddCalculator(
     }
 
     companion object {
+        private const val CUSTOM_INPUT: Int = 1
         private const val ZERO: Int = 0
         private const val DELIMITER_COMMA: Char = ','
         private const val DELIMITER_COLON: Char = ':'
