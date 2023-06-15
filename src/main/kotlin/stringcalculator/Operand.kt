@@ -4,7 +4,11 @@ package stringcalculator
 value class Operand(val value: Int) {
 
     init {
-        require(value >= 0) { "음수일 수 없습니다." }
+        require(value >= 0) { "피연산자는 음수일 수 없습니다." }
+    }
+
+    operator fun plus(operand: Operand): Operand {
+        return Operand(value + operand.value)
     }
 
     companion object {
