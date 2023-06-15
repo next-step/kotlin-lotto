@@ -1,12 +1,5 @@
 package calculator.domain
 
-private const val NUMBER_TYPE_EXCEPTION = "양수 타입이 아닙니다."
-private const val SEPARATOR_EXCEPTION = "잘못된 구분자를 입력하셨습니다."
-private const val BACKSHASH = "//"
-private const val NEWLINE = "\\n"
-private const val CUSTOM_SEPARATOR_PATTERN = "(?<=//).|(?<=\\\\n).*"
-private const val SEPARATOR = "[,:]"
-
 class Calculator(text: String?) {
     val numbers: List<String>
 
@@ -37,4 +30,13 @@ class Calculator(text: String?) {
     }
 
     val result = numbers.sumOf { convertStringToPositiveInt(it) }
+
+    companion object {
+        private const val NUMBER_TYPE_EXCEPTION = "양수 타입이 아닙니다."
+        private const val SEPARATOR_EXCEPTION = "잘못된 구분자를 입력하셨습니다."
+        private const val BACKSHASH = "//"
+        private const val NEWLINE = "\\n"
+        private const val CUSTOM_SEPARATOR_PATTERN = "(?<=//).|(?<=\\\\n).*"
+        private const val SEPARATOR = "[,:]"
+    }
 }
