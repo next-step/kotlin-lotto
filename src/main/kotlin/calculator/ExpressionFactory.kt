@@ -1,5 +1,9 @@
 package calculator
 
-interface ExpressionFactory {
-    fun createExpression(input: String?): Expression
+class ExpressionFactory {
+    companion object {
+        fun createExpression(input: String?): Expression {
+            return Expression(input)
+        }
+    }
 }
