@@ -24,7 +24,7 @@ object Separator {
     }
 
     private fun positiveNumber(number: String): Int {
-        val parsedInt = number.toIntOrNull() ?: throw IllegalArgumentException(ONLY_NUMERIC_TYPE_ERROR)
+        val parsedInt = number.trim().toIntOrNull() ?: throw IllegalArgumentException(ONLY_NUMERIC_TYPE_ERROR)
         require(parsedInt >= 0) { ONLY_POSITIVE_ERROR }
         return parsedInt
     }
