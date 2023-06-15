@@ -9,8 +9,8 @@ import lotto.domain.request.LottoOrderRequest
 object AutoLottosGenerator : LottosGenerator {
     private const val START_INDEX = 0
 
-    override fun generate(request: LottoOrderRequest): Lottos {
-        val remainingMoney = Money(request.remainingMoney)
+    override fun generate(value: LottoOrderRequest): Lottos {
+        val remainingMoney = Money(value.remainingMoney)
 
         return if (remainingMoney >= Lotto.PRICE) {
             val capacity = (remainingMoney / Lotto.PRICE).value

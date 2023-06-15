@@ -11,7 +11,7 @@ class AutoLottosGeneratorTest : FunSpec({
     val autoLottosGenerator = AutoLottosGenerator
 
     test("돈이 충분할때 로또 일급 컬렉션을 정상적으로 생성한다.") {
-        val actual = autoLottosGenerator.generate(request = LottoOrderRequest(money = 3000))
+        val actual = autoLottosGenerator.generate(value = LottoOrderRequest(money = 3000))
 
         actual.size shouldBe 3
         actual.forEach {
@@ -21,7 +21,7 @@ class AutoLottosGeneratorTest : FunSpec({
 
     test("돈이 충분하지 않으면 예외를 던진다.") {
         shouldThrow<IllegalArgumentException> {
-            autoLottosGenerator.generate(request = LottoOrderRequest(money = 900))
+            autoLottosGenerator.generate(value = LottoOrderRequest(money = 900))
         }
     }
 })
