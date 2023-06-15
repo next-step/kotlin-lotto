@@ -32,14 +32,14 @@ class PositiveNumberTest {
             .isThrownBy { PositiveNumber.of(text) }
     }
 
-    @DisplayName(value = "0 또는 양수인 문자열이 주어지면 예외가 발생하지 않는다")
+    @DisplayName(value = "0 또는 양수의 문자열을 양의 정수로 변환할 수 있다")
     @ParameterizedTest
     @ValueSource(strings = ["0", "1"])
     fun positiveNumberString(text: String) {
         PositiveNumber.of(text).value shouldBe text.toInt()
     }
 
-    @DisplayName(value = "0 또는 양수가 주어지면 예외가 발생하지 않는다")
+    @DisplayName(value = "0 또는 양수를 양의 정수로 변환할 수 있다")
     @ParameterizedTest
     @ValueSource(ints = [0, 1])
     fun positiveNumber(number: Int) {
