@@ -16,4 +16,10 @@ class LottoTest {
         val actual = Lotto().buyLotto(1000)
         assertThat(actual.size).isEqualTo(1)
     }
+
+    @Test
+    fun `한 개의 로또는 총 6개의 숫자로 이루어져 있다`() {
+        val actual = Lotto().buyLotto(1000)
+        assertThat(actual[0].size).isEqualTo(6)
+    }
 }
