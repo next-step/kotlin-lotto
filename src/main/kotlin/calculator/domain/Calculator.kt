@@ -1,8 +1,6 @@
 package calculator.domain
 
-private const val NEGATIVE_EXCEPTION = "음수 입니다."
-
-private const val NUMBER_TYPE_EXCEPTION = "숫자 타입이 아닙니다."
+private const val NUMBER_TYPE_EXCEPTION = "양수 타입이 아닙니다."
 
 private const val SEPARATOR_EXCEPTION = "잘못된 구분자를 입력하셨습니다."
 
@@ -29,6 +27,7 @@ class Calculator(text: String?) {
                 numberText = BLANK
                 BLANK
             }
+
             text.contains(BACKSLASH_SEPARATOR) && text.contains(NEWLINE_SEPARATOR) -> {
                 val result = Regex(SEPARATOR_PATTERN)
                     .findAll(text)
@@ -37,6 +36,7 @@ class Calculator(text: String?) {
                 numberText = result[1]
                 result[0]
             }
+
             text.contains(COMMA_SEPARATOR) -> COMMA_SEPARATOR
             text.contains(COLON_SEPARATOR) -> COLON_SEPARATOR
             else -> throw IllegalArgumentException(SEPARATOR_EXCEPTION)
@@ -47,15 +47,9 @@ class Calculator(text: String?) {
     }
 
     private fun isPositiveNumber(number: String): Int {
-        try {
-            val result = number.toInt()
-            if (result < 0) {
-                throw RuntimeException(NEGATIVE_EXCEPTION)
-            }
-            return result
-        } catch (e: NumberFormatException) {
-            throw RuntimeException(NUMBER_TYPE_EXCEPTION)
-        }
+        val result = number.toIntOrNull()
+        require(result != null && result > 0) { NUMBER_TYPE_EXCEPTION }
+        return result
     }
 
     val result = numbers.sum()

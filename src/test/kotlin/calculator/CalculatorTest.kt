@@ -42,14 +42,14 @@ internal class CalculatorTest {
     @Test
     internal fun `음수를 전달할 경우 EXCEPTION이 발생한다`() {
         assertThrows<RuntimeException> {
-            Calculator("//;\n-1;2;3")
+            Calculator("//;\\n-1;2;3")
         }
     }
 
     @Test
     internal fun `숫자 이외의 값을 경우 EXCEPTION이 발생한다`() {
         assertThrows<RuntimeException> {
-            Calculator("//;\n.;2;3")
+            Calculator("//;\\n.;2;3")
         }
     }
 
