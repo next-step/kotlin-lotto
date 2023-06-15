@@ -18,12 +18,12 @@ class LottoNumberTest {
 
     @ParameterizedTest(name = "matches {2}")
     @MethodSource("makeWinLottoNumber")
-    fun `로또 번호는 당첨 번호와 비교해서 일치한 번호 개수를 알 수 있다`(
+    fun `로또 번호는 당첨 번호와 비교해서 몇등 당첨인지를 알 수 있다`(
         purchasedLottoNumber: LottoNumber,
         winLottoNumber: LottoNumber,
-        expected: Int,
+        expected: LottoRanking,
     ) {
-        val actual = purchasedLottoNumber.countMatchNumbers(winLottoNumber)
+        val actual = purchasedLottoNumber.getRanking(winLottoNumber)
         actual shouldBe expected
     }
 
@@ -40,13 +40,13 @@ class LottoNumberTest {
 
         @JvmStatic
         fun makeWinLottoNumber(): List<Arguments> = listOf(
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((1..6).toList()), 6),
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((2..7).toList()), 5),
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((3..8).toList()), 4),
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((4..9).toList()), 3),
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((5..10).toList()), 2),
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((6..11).toList()), 1),
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((7..12).toList()), 0),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((1..6).toList()), LottoRanking.ONE_ST),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((2..7).toList()), LottoRanking.TWO_ND),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((3..8).toList()), LottoRanking.THREE_RD),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((4..9).toList()), LottoRanking.FOUR_TH),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((5..10).toList()), LottoRanking.OUT_OF_RAKING),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((6..11).toList()), LottoRanking.OUT_OF_RAKING),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((7..12).toList()), LottoRanking.OUT_OF_RAKING),
         )
     }
 }

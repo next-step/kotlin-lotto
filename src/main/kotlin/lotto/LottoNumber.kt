@@ -10,9 +10,9 @@ class LottoNumber(
         require(withinRange.size == LOTTO_NUMBER_SIZE) { "로또 번호는 중복이 없어야 합니다." }
     }
 
-    fun countMatchNumbers(winLottoNumber: LottoNumber): Int {
-        val matchNumbers = this.filter { winLottoNumber.contains(it) }
-        return matchNumbers.size
+    fun getRanking(winLottoNumber: LottoNumber): LottoRanking {
+        val matchCount = this.count { winLottoNumber.contains(it) }
+        return LottoRanking.getRankingByMatchCount(matchCount)
     }
 
     companion object {
