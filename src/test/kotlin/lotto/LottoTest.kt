@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPurchase
+import lotto.domain.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -25,17 +26,7 @@ class LottoTest {
     }
 
     @Test
-    fun `지난 주 당첨 번호를 입력할 수 있다`() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    fun `당첨 번호와 3개, 4개, 5개, 6개가 일치한 경우를 통계로 보여준다`() {
-        TODO("Not yet implemented")
-    }
-
-    @Test
-    fun `총 수익률을 보여준다`() {
-        TODO("Not yet implemented")
+    fun `지난 주 당첨 번호와 몇 개가 일치하는지 확인할 수 있다`() {
+        assertThat(WinningLotto(listOf(1, 2, 3, 4, 5, 6)).checkEqualCount(listOf(2, 3, 4, 5, 6, 7))).isEqualTo(5)
     }
 }

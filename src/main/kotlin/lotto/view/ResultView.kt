@@ -1,17 +1,40 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoPrizes
 
 class ResultView {
     fun printPurchaseAmount(amount: Int) {
-        println("$amount 개를 구매했습니다.")
+        println("${amount}개를 구매했습니다.")
     }
 
     fun printLottos(lottos: List<Lotto>) {
         lottos.forEach { printLotto(it) }
     }
 
-    fun printLotto(lotto: Lotto) {
-        println("[${lotto.numbers.joinToString(", ")}]")
+    private fun printLotto(lotto: Lotto) {
+        val numbers = lotto.numbers.sorted()
+        println("[${numbers.joinToString(", ")}]")
+    }
+
+    fun printWinningStatistics(countsMap: Map<Int, Int>) {
+        println("당첨 통계")
+        println("---------")
+
+        LottoPrizes.values().forEach { prize ->
+            val equalCount = countsMap.getOrDefault(prize.equalCount, 0)
+            val prizeMoney = LottoPrizes.getMoney(prize.equalCount)
+            println("${prize.equalCount}개 일치 (${prizeMoney}원)- ${equalCount}개")
+        }
+    }
+
+    fun printRateOfReturn(budget: Int, prizes: Int) {
+        val rateOfReturn = prizes.toDouble() / budget.toDouble()
+
+        when {
+            rateOfReturn > 1.0 -> println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 이득라는 의미임)")
+            rateOfReturn == 1.0 -> println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 본전이라는 의미임)")
+            rateOfReturn < 0 -> println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        }
     }
 }
