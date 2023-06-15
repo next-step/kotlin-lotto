@@ -30,4 +30,11 @@ class MoneyTest : FunSpec({
             actual.purchasedLotteries shouldHaveSize 2
         }
     }
+
+    context("div") {
+        test("Money는 Money로 나눈다") {
+            val actual = Money(2_900) / Money(1_000)
+            actual shouldBe 2
+        }
+    }
 })
