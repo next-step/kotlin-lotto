@@ -20,8 +20,6 @@ object InputView {
         수동으로 구매할 번호를 입력해 주세요.
     """.trimIndent()
 
-    private const val ZERO: Int = 0
-
     fun readPurchaseAmount(): String {
         println(message = ENTER_THE_PURCHASE_AMOUNT)
         return readln()
@@ -34,7 +32,7 @@ object InputView {
 
         println(message = ENTER_MANUAL_LOTTERY_NUMBERS)
 
-        return (ZERO until manualLotteryCount).map { readln() }
+        return List(manualLotteryCount) { readln() }
     }
 
     fun readLastWeekWinningNumbers(): String {
