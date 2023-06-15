@@ -14,26 +14,29 @@ class StringAddCalculator(
             throw RuntimeException("음수를 입력할 수 없습니다")
         }
 
-        val stringList = split(input)
-
-        return stringAdd(stringList)
-    }
-
-    fun split(input: String): List<String> {
-
-        var customDelimiter = getCustomDelimiter(input)
-        var customString: String? = null
-
-        customDelimiter?.let {
-            customDelimiter = DELIMITER.plus("|$it")
-            customString = input.split("\n")[1]
-        }
-
-        val splitList = customDelimiter?.let { customString?.split(it.toRegex()) }
-            ?:input.split(DELIMITER.toRegex())
+        val customDelimiter = getCustomDelimiter(input)
+        val fixedDelimiter = combineDelimiter(customDelimiter)
+        val splitList = splitByDelimiter(fixedDelimiter, input)
 
         checkNegativeNumber(splitList)
-        return splitList
+        return stringAdd(splitList)
+    }
+
+    fun splitByDelimiter(fixedDelimiter: String?, input: String): List<String> {
+        return fixedDelimiter?.let { getCustomInput(input).split(it.toRegex()) }
+            ?: input.split(DELIMITER.toRegex())
+    }
+
+    private fun getCustomInput(input: String): String {
+        return input.split("\n")[1]
+    }
+
+    private fun combineDelimiter(customDelimiter: String?): String? {
+        var fixedDelimiter: String? = null
+        customDelimiter?.let {
+            fixedDelimiter = DELIMITER.plus("|$it")
+        }
+        return fixedDelimiter
     }
 
     fun getCustomDelimiter(input: String): String? {
