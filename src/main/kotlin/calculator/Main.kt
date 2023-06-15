@@ -2,6 +2,5 @@ package calculator
 
 fun main() {
     val calculator = StringCalculator()
-    println(calculator.calculate(""))
-    println(calculator.calculate(null))
+    println(calculator.calculate("1,2:3"))
 }

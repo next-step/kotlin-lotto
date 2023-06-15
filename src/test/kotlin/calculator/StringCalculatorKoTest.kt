@@ -31,4 +31,9 @@ class StringCalculatorKoTest : StringSpec({
         val calculator = StringCalculator()
         calculator.calculate("3") shouldBe 3
     }
+
+    "쉼표, 콜론을 구분자로 가진 문자열이 전달될 경우 구분자를 기준으로 숫자의 합을 반환" {
+        val calculator = StringCalculator()
+        calculator.calculate("1,2:3") shouldBe 6
+    }
 })

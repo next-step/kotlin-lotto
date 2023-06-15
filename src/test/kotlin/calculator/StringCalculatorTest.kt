@@ -41,4 +41,12 @@ class StringCalculatorTest {
 
         assertThat(calculator.calculate(actualInput)).isEqualTo(3)
     }
+
+    @Test
+    fun `쉼표, 콜론을 구분자로 가진 문자열이 전달될 경우 구분자를 기준으로 숫자의 합을 반환`() {
+        val calculator = StringCalculator()
+        val actualInput = "1,2:3"
+
+        assertThat(calculator.calculate(actualInput)).isEqualTo(6)
+    }
 }

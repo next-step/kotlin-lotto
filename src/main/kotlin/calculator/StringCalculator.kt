@@ -14,6 +14,6 @@ class StringCalculator {
             return parsedInput
         }
 
-        return 1
+        return input.split(",", ":").sumOf { it.toInt() }
     }
 }
