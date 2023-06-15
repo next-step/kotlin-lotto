@@ -7,6 +7,10 @@ class ResultView {
         println("$amount 개를 구매했습니다.")
     }
 
+    fun printLottos(lottos: List<Lotto>) {
+        lottos.forEach { printLotto(it) }
+    }
+
     fun printLotto(lotto: Lotto) {
         println("[${lotto.numbers.joinToString(", ")}]")
     }
