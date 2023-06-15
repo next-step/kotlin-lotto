@@ -1,20 +1,18 @@
 package lottery.domain.lottery
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import lottery.domain.Rank
-import lottery.domain.lottery.Lotteries.Companion.toLotteries
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_1_6
-import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_2_7
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_3_8
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_4_9
+import java.math.BigDecimal
 
 class LotteriesTest : FunSpec({
 
     context("compareWinningLottery") {
         test("보유한 모든 로또의 결과를 확인할 수 있다") {
-            val lotteries = Lotteries(values = listOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_3_8, LOTTERY_4_9))
+            val lotteries = Lotteries(values = mutableListOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_3_8, LOTTERY_4_9))
             val winningLottery = LOTTERY_1_6
 
             val actual = lotteries.compareWinningLottery(winningLottery)
@@ -26,10 +24,12 @@ class LotteriesTest : FunSpec({
         }
     }
 
-    context("toLotteries") {
-        test("list를 Lotteries 객체로 반환한다") {
-            val actual = listOf(LOTTERY_1_6, LOTTERY_2_7, LOTTERY_3_8).toLotteries()
-            actual shouldContainAll listOf(LOTTERY_1_6, LOTTERY_2_7, LOTTERY_3_8)
+    context("cost") {
+        test("구매한 로또의 금액을 반환할 수 있다.") {
+            val lotteries = Lotteries(values = mutableListOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_3_8, LOTTERY_4_9))
+            val actual = lotteries.cost()
+
+            actual shouldBe BigDecimal(4_000)
         }
     }
 })

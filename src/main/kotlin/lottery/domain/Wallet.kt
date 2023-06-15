@@ -2,23 +2,38 @@ package lottery.domain
 
 import lottery.domain.lottery.Lotteries
 import lottery.domain.lottery.Lottery
-import java.math.BigDecimal
+import lottery.domain.lottery.generator.LotteryGenerator
 import java.math.RoundingMode
 
 class Wallet(
-    val usedMoney: BigDecimal,
-    val purchasedLotteries: Lotteries
+    money: Money,
+    private val lotteries: Lotteries = Lotteries.init()
 ) {
+    var money: Money = money
+        private set
+
+    fun buyLotteries(randomLotteryGenerator: LotteryGenerator): List<Lottery> {
+        check(Lottery.canBuyLottery(money)) { "로또를 사기엔 부족한 금액이다" }
+        val receipt = Lottery.buyLottery(money)
+        money -= receipt.usedMoney
+        val buyLotteries = generateLottery(receipt.buyCount, randomLotteryGenerator)
+        lotteries.addLotteries(buyLotteries)
+        return buyLotteries
+    }
+
     fun calculateLotteryResult(winLottery: Lottery): LottoResult {
-        val statistics = purchasedLotteries.compareWinningLottery(winLottery)
+        val statistics = lotteries.compareWinningLottery(winLottery)
         val lottoYield = calculateYield(statistics)
         return LottoResult(lottoYield = lottoYield, statistics = statistics)
     }
 
-    fun toPurchasedLotteries() = purchasedLotteries.map { it.toLotteryNumbers() }
+    private fun generateLottery(buyCount: Int, lotteryGenerator: LotteryGenerator) =
+        (0 until buyCount).map { lotteryGenerator.generate() }
+
+    fun toPurchasedLotteries() = lotteries.map { it.toLotteryNumbers() }
 
     private fun calculateYield(statistics: Map<Rank, Int>) =
-        calculateTotalReward(statistics).divide(usedMoney, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
+        calculateTotalReward(statistics).divide(lotteries.cost(), YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
 
     private fun calculateTotalReward(result: Map<Rank, Int>) =
         result.map { it.key.calculatePrice(it.value) }

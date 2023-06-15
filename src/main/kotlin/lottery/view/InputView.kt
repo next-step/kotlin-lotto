@@ -2,7 +2,7 @@ package lottery.view
 
 fun inputPurchaseMoney(): Int {
     println("구입금액을 입력해 주세요.")
-    return readln().toIntOrNull()?: retryInputPurchaseMoney()
+    return readln().toIntOrNull() ?: retryInputPurchaseMoney()
 }
 
 fun inputWinningLottery(): List<String> {

@@ -17,12 +17,17 @@ class Lottery(
 
     companion object {
         const val LOTTERY_NUMBER_SIZE = 6
-        private val LOTTERY_COST = Money(1_000)
+        val LOTTERY_COST = Money(1_000)
 
         fun from(values: List<String>) = Lottery(values.map { LotteryNumber.from(it) })
 
-        fun countOfCanBuyLottery(money: Money) = money / LOTTERY_COST
+        fun buyLottery(money: Money): Receipt {
+            val buyCount = countOfCanBuyLottery(money)
+            return Receipt(LOTTERY_COST.times(buyCount), buyCount)
+        }
 
         fun canBuyLottery(money: Money) = countOfCanBuyLottery(money) > 0
+
+        private fun countOfCanBuyLottery(money: Money) = money / LOTTERY_COST
     }
 }

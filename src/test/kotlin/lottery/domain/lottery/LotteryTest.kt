@@ -94,13 +94,12 @@ class LotteryTest : FunSpec({
         }
     }
 
-    context("countOfCanBuyLottery") {
-        test("로또 구매 가능 갯수를 반환한다") {
+    context("buyLottery") {
+        test("로또 구매 결과를 반환한다") {
             forAll(row(Money(999), 0), row(Money(1_000), 1)) { input, expected ->
-                val actual = Lottery.countOfCanBuyLottery(input)
-                actual shouldBe expected
+                val actual = Lottery.buyLottery(input)
+                actual.buyCount shouldBe expected
             }
-
         }
     }
 
