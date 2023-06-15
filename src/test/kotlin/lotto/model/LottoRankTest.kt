@@ -29,6 +29,18 @@ class LottoRankTest : StringSpec({
         }
     }
 
+    "로또 당첨금 조회" {
+        listOf(
+            LottoRank.FIRST to 2_000_000_000,
+            LottoRank.SECOND to 1_500_000,
+            LottoRank.THIRD to 50_000,
+            LottoRank.FOURTH to 5_000,
+            LottoRank.MISS to 0
+        ).forAll {
+            it.first.prize shouldBe it.second
+        }
+    }
+
     "로또 상금 총액 계산" {
         listOf(
             listOf(LottoRank.FIRST, LottoRank.FIRST) to 4_000_000_000L,
