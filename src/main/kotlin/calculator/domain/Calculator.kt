@@ -43,10 +43,10 @@ class Calculator(text: String?) {
         }
         numbers = numberText!!.split(separator)
             .filter { it.isNotBlank() }
-            .map { isPositiveNumber(it) }
+            .map { convertStringToPositiveInt(it) }
     }
 
-    private fun isPositiveNumber(number: String): Int {
+    private fun convertStringToPositiveInt(number: String): Int {
         val result = number.toIntOrNull()
         require(result != null && result > 0) { NUMBER_TYPE_EXCEPTION }
         return result
