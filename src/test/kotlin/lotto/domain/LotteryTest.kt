@@ -8,6 +8,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 import lotto.mockLottery
 import lotto.mockLottoNumbers
+import lotto.mockWinningLottery
 import lotto.model.LottoErrorCode
 
 class LotteryTest : DescribeSpec({
@@ -79,8 +80,10 @@ class LotteryTest : DescribeSpec({
     }
 
     describe(name = "복권은 다른 복권을 넣어 등수를 구할 수 있다.") {
-        val mockLottery = mockLottery(1, 2, 3, 4, 5, 6)
-
+        val mockWinningLottery = mockWinningLottery(
+            bonusBall = LottoNumber(number = 8),
+            1, 2, 3, 4, 5, 6,
+        )
         forAll(
             row(mockLottery(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
             row(mockLottery(1, 2, 3, 4, 5, 8), LottoRank.SECOND),
@@ -91,10 +94,9 @@ class LotteryTest : DescribeSpec({
             row(mockLottery(1, 22, 23, 34, 25, 15), LottoRank.MISS),
             row(mockLottery(11, 22, 23, 34, 25, 15), LottoRank.MISS),
         ) { numbers, expect ->
-            context(name = "다른 복권이 주어지면") {
+            context(name = "당첨 복권이 주어지면") {
                 val lottoRank = numbers.correctLottery(
-                    otherLottery = mockLottery,
-                    bonusBall = LottoNumber(number = 8),
+                    winningLottery = mockWinningLottery,
                 )
 
                 it(name = "일치하는 복권 등수를 반환한다.") {

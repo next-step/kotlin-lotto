@@ -5,12 +5,15 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.mockLottery
+import lotto.mockWinningLottery
 
 class LottoResultTest : DescribeSpec({
 
     describe(name = "로또 결과를 구매 주문과 당첨 복권으로 생성할 수 있다.") {
-        val winningLottery = mockLottery(1, 2, 3, 4, 5, 6)
-        val bonusBallEight = LottoNumber(number = 8)
+        val winningLottery = mockWinningLottery(
+            bonusBall = LottoNumber(number = 8),
+            1, 2, 3, 4, 5, 6,
+        )
 
         forAll(
             row(
@@ -18,19 +21,17 @@ class LottoResultTest : DescribeSpec({
                     mockLottery(1, 2, 3, 4, 5, 6),
                     mockLottery(1, 2, 3, 4, 5, 6),
                 ),
-                bonusBallEight,
                 LottoRank.FIRST,
             ),
-            row(listOf(mockLottery(1, 2, 3, 4, 5, 8)), bonusBallEight, LottoRank.SECOND),
-            row(listOf(mockLottery(1, 2, 3, 4, 5, 7)), bonusBallEight, LottoRank.THIRD),
-            row(listOf(mockLottery(1, 2, 3, 4, 15, 7)), bonusBallEight, LottoRank.FOUR),
-            row(listOf(mockLottery(1, 2, 3, 24, 15, 7)), bonusBallEight, LottoRank.FIVE),
-        ) { purchasedLotteries, bonusBall, lottoRank ->
+            row(listOf(mockLottery(1, 2, 3, 4, 5, 8)), LottoRank.SECOND),
+            row(listOf(mockLottery(1, 2, 3, 4, 5, 7)), LottoRank.THIRD),
+            row(listOf(mockLottery(1, 2, 3, 4, 15, 7)), LottoRank.FOUR),
+            row(listOf(mockLottery(1, 2, 3, 24, 15, 7)), LottoRank.FIVE),
+        ) { purchasedLotteries, lottoRank ->
             context(name = "1등부터 4등까지 당첨된 경우 당첨된 결과를 알 수 있다.") {
                 val lottoResult = LottoResult(
                     purchasedLotteries = PurchasedLotteries(lotteries = purchasedLotteries),
                     winningLottery = winningLottery,
-                    bonusBall = bonusBall,
                 )
 
                 val size = purchasedLotteries.size
@@ -51,7 +52,6 @@ class LottoResultTest : DescribeSpec({
                     lotteries = listOf(mockLottery(41, 32, 23, 24, 15, 7)),
                 ),
                 winningLottery = winningLottery,
-                bonusBall = bonusBallEight,
             )
 
             it(name = "Benefit 타입이 손해로 반환한다.") {
@@ -65,7 +65,6 @@ class LottoResultTest : DescribeSpec({
             val lottoResult = LottoResult(
                 purchasedLotteries = emptyLotteries,
                 winningLottery = winningLottery,
-                bonusBall = bonusBallEight,
             )
 
             it(name = "당첨 통계가 비어 있다.") {

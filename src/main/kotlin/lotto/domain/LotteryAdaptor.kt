@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.model.LottoErrorCode
 
-abstract class LotteryAdaptor(private val lottoNumbers: Set<LottoNumber>) {
+abstract class LotteryAdaptor(val lottoNumbers: Set<LottoNumber>) {
 
     init {
         val size = lottoNumbers.size
@@ -12,22 +12,22 @@ abstract class LotteryAdaptor(private val lottoNumbers: Set<LottoNumber>) {
         }
     }
 
-    fun correctLottery(otherLottery: LotteryAdaptor, bonusBall: LottoNumber): LottoRank = LottoRank.valueOf(
+    fun correctLottery(winningLottery: WinningLottery): LottoRank = LottoRank.valueOf(
         lottoMatchResult = correctMatchResult(
-            otherLottery = otherLottery,
-            bonusBall = bonusBall,
+            winningLottery = winningLottery,
         ),
     )
 
     private fun correctMatchResult(
-        otherLottery: LotteryAdaptor,
-        bonusBall: LottoNumber,
+        winningLottery: WinningLottery,
     ): LottoMatchResult {
-        val countOfMatch = lottoNumbers.count { it in otherLottery.lottoNumbers }
+        val countOfMatch = lottoNumbers.count { it in winningLottery.lottoNumbers }
+        val mustBonusMatch =
+            LottoRank.hasBonusMatch(countOfMatch = countOfMatch) && winningLottery.bonusBall in lottoNumbers
 
         return LottoMatchResult(
             countOfMatch = countOfMatch,
-            mustBonusMatch = LottoRank.hasBonusMatch(countOfMatch = countOfMatch) && bonusBall in lottoNumbers,
+            mustBonusMatch = mustBonusMatch,
         )
     }
 

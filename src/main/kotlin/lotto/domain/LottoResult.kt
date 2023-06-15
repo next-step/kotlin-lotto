@@ -1,9 +1,9 @@
 package lotto.domain
 
-class LottoResult(purchasedLotteries: PurchasedLotteries, winningLottery: Lottery, bonusBall: LottoNumber) {
+class LottoResult(purchasedLotteries: PurchasedLotteries, winningLottery: WinningLottery) {
 
     private val winningStatistics: Map<LottoRank, Int> =
-        purchasedLotteries.map { it.correctLottery(otherLottery = winningLottery, bonusBall = bonusBall) }
+        purchasedLotteries.map { it.correctLottery(winningLottery = winningLottery) }
             .groupingBy { it }
             .eachCount()
 
