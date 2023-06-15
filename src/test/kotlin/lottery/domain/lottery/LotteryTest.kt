@@ -95,23 +95,23 @@ class LotteryTest : FunSpec({
         }
     }
 
-    context("buyLottery") {
+    context("purchaseLottery") {
         test("로또 구매 결과를 반환한다") {
             forAll(row(Money(BigDecimal(999)), 0), row(Money(BigDecimal(1_000)), 1)) { input, expected ->
-                val actual = Lottery.buyLottery(input)
-                actual.buyCount shouldBe expected
+                val actual = Lottery.purchaseLottery(input)
+                actual.purchaseCount shouldBe expected
             }
         }
     }
 
-    context("canBuyLottery") {
+    context("canPurchaseLottery") {
         test("로또를 구매할 수 있다면 true를 반환한다") {
-            val actual = Lottery.canBuyLottery(Money(BigDecimal(1_000)))
+            val actual = Lottery.canPurchaseLottery(Money(BigDecimal(1_000)))
             actual shouldBe true
         }
 
         test("로또를 구매할 수 없다면 false를 반환한다") {
-            val actual = Lottery.canBuyLottery(Money(BigDecimal(999)))
+            val actual = Lottery.canPurchaseLottery(Money(BigDecimal(999)))
             actual shouldBe false
         }
     }

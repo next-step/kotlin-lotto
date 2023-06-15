@@ -21,13 +21,13 @@ class Lottery(
 
         fun from(values: List<String>): Lottery = Lottery(values.map { LotteryNumber.from(it) })
 
-        fun buyLottery(money: Money): Receipt {
-            val buyCount = countOfCanBuyLottery(money).toInt()
-            return Receipt(LOTTERY_COST.times(buyCount), buyCount)
+        fun purchaseLottery(money: Money): Receipt {
+            val purchaseCount = countOfCanPurchaseLottery(money).toInt()
+            return Receipt(LOTTERY_COST.times(purchaseCount), purchaseCount)
         }
 
-        fun canBuyLottery(money: Money): Boolean = countOfCanBuyLottery(money) > BigDecimal.ZERO
+        fun canPurchaseLottery(money: Money): Boolean = countOfCanPurchaseLottery(money) > BigDecimal.ZERO
 
-        private fun countOfCanBuyLottery(money: Money): BigDecimal = money.divide(LOTTERY_COST)
+        private fun countOfCanPurchaseLottery(money: Money): BigDecimal = money.divide(LOTTERY_COST)
     }
 }

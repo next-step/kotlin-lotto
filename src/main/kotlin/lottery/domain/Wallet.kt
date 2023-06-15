@@ -8,35 +8,35 @@ import java.math.RoundingMode
 
 class Wallet(
     money: Money,
-    private val lotteries: Lotteries = Lotteries.init()
+    private val purchaseLotteries: Lotteries = Lotteries.init()
 ) {
     var money: Money = money
         private set
 
-    fun buyLotteries(randomLotteryGenerator: LotteryGenerator): List<Lottery> {
-        check(Lottery.canBuyLottery(money)) { "로또를 사기엔 부족한 금액이다" }
-        val receipt = Lottery.buyLottery(money)
-        return buyLotteriesByReceipt(receipt, randomLotteryGenerator)
+    fun purchaseLotteries(randomLotteryGenerator: LotteryGenerator): List<Lottery> {
+        check(Lottery.canPurchaseLottery(money)) { "로또를 사기엔 부족한 금액이다" }
+        val receipt = Lottery.purchaseLottery(money)
+        return purchaseLotteriesByReceipt(receipt, randomLotteryGenerator)
     }
 
     fun calculateLotteryResult(winLottery: Lottery): LottoResult {
-        val statistics = lotteries.compareWinningLottery(winLottery)
+        val statistics = purchaseLotteries.compareWinningLottery(winLottery)
         val lottoYield = calculateYield(statistics)
         return LottoResult(lottoYield = lottoYield, statistics = statistics)
     }
 
-    private fun generateLottery(buyCount: Int, lotteryGenerator: LotteryGenerator): List<Lottery> =
-        lotteryGenerator.generateLotteries(buyCount)
+    private fun generateLottery(purchaseCount: Int, lotteryGenerator: LotteryGenerator): List<Lottery> =
+        lotteryGenerator.generateLotteries(purchaseCount)
 
-    private fun buyLotteriesByReceipt(receipt: Receipt, randomLotteryGenerator: LotteryGenerator): List<Lottery> {
+    private fun purchaseLotteriesByReceipt(receipt: Receipt, randomLotteryGenerator: LotteryGenerator): List<Lottery> {
         money -= receipt.usedMoney
-        val buyLotteries = generateLottery(receipt.buyCount, randomLotteryGenerator)
-        lotteries.addLotteries(buyLotteries)
-        return buyLotteries
+        val purchaseLotteries = generateLottery(receipt.purchaseCount, randomLotteryGenerator)
+        this.purchaseLotteries.addLotteries(purchaseLotteries)
+        return purchaseLotteries
     }
 
     private fun calculateYield(statistics: Map<Rank, Int>): BigDecimal =
-        calculateTotalReward(statistics).divide(lotteries.cost().value, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
+        calculateTotalReward(statistics).divide(purchaseLotteries.cost().value, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.UP)
 
     private fun calculateTotalReward(result: Map<Rank, Int>): BigDecimal =
         result.map { it.key.calculatePrice(it.value) }

@@ -11,17 +11,17 @@ import java.math.BigDecimal
 
 class WalletTest : FunSpec({
 
-    context("buyLottery") {
+    context("purchaseLottery") {
         test("로또를 구매할 수 없는 경우 예외가 발생한다.") {
             val wallet = Wallet(money = Money(BigDecimal(999)))
             val exception =
-                shouldThrowExactly<IllegalStateException> { wallet.buyLotteries(RandomLotteryGenerator) }
+                shouldThrowExactly<IllegalStateException> { wallet.purchaseLotteries(RandomLotteryGenerator) }
             exception.message shouldBe "로또를 사기엔 부족한 금액이다"
         }
 
         test("로또를 구매한다") {
             val wallet = Wallet(money = Money(BigDecimal(3_500)))
-            val actual = wallet.buyLotteries(RandomLotteryGenerator)
+            val actual = wallet.purchaseLotteries(RandomLotteryGenerator)
 
             wallet.money shouldBe Money(BigDecimal(500))
             actual shouldHaveSize 3
@@ -32,7 +32,7 @@ class WalletTest : FunSpec({
         test("당첨 로또를 받아 로또의 당첨 결과를 반환할 수 있다") {
             val wallet = Wallet(
                 money = Money(BigDecimal.ZERO),
-                lotteries = Lotteries(
+                purchaseLotteries = Lotteries(
                     values = mutableListOf(
                         LotteryTest.LOTTERY_1_6,
                         LotteryTest.LOTTERY_1_6,
