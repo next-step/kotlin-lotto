@@ -72,7 +72,7 @@ class StringAddCalculatorTest {
     @DisplayName(value = "문자열 계산기에 숫자가 아닌 값을 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @ParameterizedTest
     @ValueSource(strings = ["a", "1:a", "//;\n1;a"])
-    fun notInteger() {
-        assertThrows<RuntimeException> { calculator.add("-1") }
+    fun notInteger(text: String) {
+        assertThrows<RuntimeException> { calculator.add(text) }
     }
 }
