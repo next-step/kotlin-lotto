@@ -1,6 +1,18 @@
 package com.nextstep.second.calculator
 
-class Tokenizer {
+const val NORMAL_DELIMITERS = "[:,]"
+const val CUSTOM_DELIMITERS_FINDER = "^//(.)\n(.*)"
+const val ERROR_MSG = "문자열 형식에 맞지 않습니다"
+
+object Tokenizer {
+    fun tokenize(text: String): List<String> {
+        return if (Regex(CUSTOM_DELIMITERS_FINDER).matches(text)) {
+            tokenizeByCustomDelimiter(text)
+        } else {
+            tokenizeByNormalDelimiter(text)
+        }
+    }
+
     fun tokenizeByNormalDelimiter(text: String): List<String> {
         try {
             return parseTextWithRegex(text, NORMAL_DELIMITERS.toRegex())
@@ -24,11 +36,5 @@ class Tokenizer {
 
     private fun parseTextWithRegex(text: String, regex: Regex): List<String> {
         return text.split(regex)
-    }
-
-    companion object {
-        const val NORMAL_DELIMITERS = "[:,]"
-        const val CUSTOM_DELIMITERS_FINDER = "//(.)\n(.*)"
-        const val ERROR_MSG = "문자열 형식에 맞지 않습니다"
     }
 }

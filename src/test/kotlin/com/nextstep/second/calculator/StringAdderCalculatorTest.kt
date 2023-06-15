@@ -3,7 +3,7 @@ package com.nextstep.second.calculator
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class CalculatorTest {
+class StringAdderCalculatorTest {
     @Test
     internal fun `주어진 배열에 각 요소를 더한다`() {
         // given
@@ -11,7 +11,7 @@ class CalculatorTest {
         val answer = 6
 
         // when
-        val result = Calculator.add(inputNumberList)
+        val result = StringAdderCalculator.execute(inputNumberList)
 
         // then
         result shouldBe answer
@@ -24,7 +24,7 @@ class CalculatorTest {
         val answer = 0
 
         // when
-        val result = Calculator.add(inputNumberList)
+        val result = StringAdderCalculator.execute(inputNumberList)
 
         // then
         result shouldBe answer
