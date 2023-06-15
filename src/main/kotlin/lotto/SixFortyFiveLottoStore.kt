@@ -7,4 +7,8 @@ class SixFortyFiveLottoStore : LottoStore {
     override fun makeLotto(): Lotto {
         return SixFortyFiveLotto()
     }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
+    }
 }
