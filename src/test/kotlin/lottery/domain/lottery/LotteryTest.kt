@@ -83,21 +83,24 @@ class LotteryTest : FunSpec({
             val givenLottery = LOTTERY_1_6
             val winLottery = LOTTERY_2_7
 
-            val actual = winLottery.compareWinningLottery(givenLottery)
+            val actual = winLottery.compareWinningLottery(lottery = givenLottery)
             actual shouldBe Rank.SECOND
         }
     }
 
     context("from") {
         test("숫자 문자 list를 입력받아 Lottery를 생성한다") {
-            val actual = Lottery.from(listOf("1", "2", "3", "4", "5", "6"))
+            val actual = Lottery.from(values = listOf("1", "2", "3", "4", "5", "6"))
             actual.values shouldHaveSize 6
         }
     }
 
     context("purchaseLottery") {
         test("로또 구매 결과를 반환한다") {
-            forAll(row(Money(BigDecimal(999)), 0), row(Money(BigDecimal(1_000)), 1)) { input, expected ->
+            forAll(
+                row(Money(value = BigDecimal(999)), 0),
+                row(Money(value = BigDecimal(1_000)), 1)
+            ) { input, expected ->
                 val actual = Lottery.purchaseLottery(input)
                 actual.purchaseCount shouldBe expected
             }
@@ -106,12 +109,12 @@ class LotteryTest : FunSpec({
 
     context("canPurchaseLottery") {
         test("로또를 구매할 수 있다면 true를 반환한다") {
-            val actual = Lottery.canPurchaseLottery(Money(BigDecimal(1_000)))
+            val actual = Lottery.canPurchaseLottery(Money(value = BigDecimal(1_000)))
             actual shouldBe true
         }
 
         test("로또를 구매할 수 없다면 false를 반환한다") {
-            val actual = Lottery.canPurchaseLottery(Money(BigDecimal(999)))
+            val actual = Lottery.canPurchaseLottery(Money(value = BigDecimal(999)))
             actual shouldBe false
         }
     }

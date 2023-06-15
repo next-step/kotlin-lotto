@@ -23,7 +23,7 @@ class WalletTest : FunSpec({
             val wallet = Wallet(money = Money(BigDecimal(3_500)))
             val actual = wallet.purchaseLotteries(RandomLotteryGenerator)
 
-            wallet.money shouldBe Money(BigDecimal(500))
+            wallet.money shouldBe Money(value = BigDecimal(500))
             actual shouldHaveSize 3
         }
     }
@@ -43,7 +43,7 @@ class WalletTest : FunSpec({
             )
             val winningLottery = LotteryTest.LOTTERY_1_6
 
-            val actual = wallet.calculateLotteryResult(winningLottery)
+            val actual = wallet.calculateLotteryResult(winLottery = winningLottery)
             actual.statistics[Rank.FIRST] shouldBe 2
             actual.statistics[Rank.SECOND] shouldBe 0
             actual.statistics[Rank.THIRD] shouldBe 1

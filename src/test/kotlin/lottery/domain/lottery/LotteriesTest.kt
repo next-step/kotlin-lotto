@@ -16,7 +16,7 @@ class LotteriesTest : FunSpec({
             val lotteries = Lotteries(values = mutableListOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_3_8, LOTTERY_4_9))
             val winningLottery = LOTTERY_1_6
 
-            val actual = lotteries.compareWinningLottery(winningLottery)
+            val actual = lotteries.compareWinningLottery(winningLottery = winningLottery)
 
             actual[Rank.FIRST] shouldBe 2
             actual[Rank.SECOND] shouldBe 0
@@ -30,7 +30,7 @@ class LotteriesTest : FunSpec({
             val lotteries = Lotteries(values = mutableListOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_3_8, LOTTERY_4_9))
             val actual = lotteries.cost()
 
-            actual shouldBe Money(BigDecimal(4_000))
+            actual shouldBe Money(value = BigDecimal(4_000))
         }
     }
 })

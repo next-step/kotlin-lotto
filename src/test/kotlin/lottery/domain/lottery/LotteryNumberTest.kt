@@ -19,25 +19,25 @@ class LotteryNumberTest : FunSpec({
 
     context("from") {
         test("문자 입력시 예외가 발생한다") {
-            val exception = shouldThrowExactly<IllegalArgumentException> { LotteryNumber.from("a") }
+            val exception = shouldThrowExactly<IllegalArgumentException> { LotteryNumber.from(value = "a") }
             exception.message shouldBe "숫자만 입력 가능하다"
         }
 
         test("숫자문자를 입력받아 생성한다") {
-            val actual = LotteryNumber.from("1")
-            actual shouldBe LotteryNumber(1)
+            val actual = LotteryNumber.from(value = "1")
+            actual shouldBe LotteryNumber(value = 1)
         }
     }
 }) {
     companion object {
-        val LOTTERY_NUMBER_1 = LotteryNumber(1)
-        val LOTTERY_NUMBER_2 = LotteryNumber(2)
-        val LOTTERY_NUMBER_3 = LotteryNumber(3)
-        val LOTTERY_NUMBER_4 = LotteryNumber(4)
-        val LOTTERY_NUMBER_5 = LotteryNumber(5)
-        val LOTTERY_NUMBER_6 = LotteryNumber(6)
-        val LOTTERY_NUMBER_7 = LotteryNumber(7)
-        val LOTTERY_NUMBER_8 = LotteryNumber(8)
-        val LOTTERY_NUMBER_9 = LotteryNumber(9)
+        val LOTTERY_NUMBER_1 = LotteryNumber(value = 1)
+        val LOTTERY_NUMBER_2 = LotteryNumber(value = 2)
+        val LOTTERY_NUMBER_3 = LotteryNumber(value = 3)
+        val LOTTERY_NUMBER_4 = LotteryNumber(value = 4)
+        val LOTTERY_NUMBER_5 = LotteryNumber(value = 5)
+        val LOTTERY_NUMBER_6 = LotteryNumber(value = 6)
+        val LOTTERY_NUMBER_7 = LotteryNumber(value = 7)
+        val LOTTERY_NUMBER_8 = LotteryNumber(value = 8)
+        val LOTTERY_NUMBER_9 = LotteryNumber(value = 9)
     }
 }
