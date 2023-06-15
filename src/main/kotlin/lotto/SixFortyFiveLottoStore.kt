@@ -1,15 +1,30 @@
 package lotto
 
+import kotlin.random.Random
+
 class SixFortyFiveLottoStore : LottoStore {
     override fun purchase(count: Int): List<SixFortyFiveLotto> {
         return (1..count).map { makeLotto() }
     }
 
     override fun makeLotto(): SixFortyFiveLotto {
-        return SixFortyFiveLotto()
+        val numbers = generateLottoNumber()
+        return SixFortyFiveLotto(numbers)
+    }
+
+    private fun generateLottoNumber(): List<Int> {
+        return (1..LOTTO_NUMBER_COUNT).map {
+            Random.nextInt(
+                LOTTO_NUMBER_RANGE_START,
+                LOTTO_NUMBER_RANGE_END,
+            )
+        }.sorted()
     }
 
     companion object {
         const val LOTTO_PRICE = 1000
+        const val LOTTO_NUMBER_COUNT = 6
+        const val LOTTO_NUMBER_RANGE_START = 1
+        const val LOTTO_NUMBER_RANGE_END = 45
     }
 }
