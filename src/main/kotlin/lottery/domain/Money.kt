@@ -13,8 +13,7 @@ value class Money(
 
     fun times(count: Int) = Money(value.times(BigDecimal(count)))
 
-    operator fun minus(money: Money) = Money(value.minus(money.value))
+    fun divide(money: Money): BigDecimal = value.divide(money.value, RoundingMode.DOWN)
 
-    operator fun div(money: Money) =
-        value.divide(money.value, RoundingMode.DOWN) ?: throw IllegalArgumentException("나눌 수 없는 값이다")
+    operator fun minus(money: Money) = Money(value.minus(money.value))
 }

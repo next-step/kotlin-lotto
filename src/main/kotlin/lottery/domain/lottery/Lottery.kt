@@ -28,6 +28,6 @@ class Lottery(
 
         fun canBuyLottery(money: Money) = countOfCanBuyLottery(money) > BigDecimal.ZERO
 
-        private fun countOfCanBuyLottery(money: Money) = money / LOTTERY_COST
+        private fun countOfCanBuyLottery(money: Money) = money.divide(LOTTERY_COST)
     }
 }

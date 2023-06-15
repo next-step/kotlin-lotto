@@ -14,10 +14,10 @@ class MoneyTest : FunSpec({
         }
     }
 
-    context("div") {
-        test("Money는 Money로 나눈다") {
-            val actual = Money(value = BigDecimal(2_900)) / Money(value = BigDecimal(1_000))
-            actual shouldBe BigDecimal(2)
+    context("divide") {
+        test("나눈 몫을 나머지를 버리고 반환한다") {
+            val actual = Money(value = BigDecimal(3_600)).divide(Money(value = BigDecimal(1_000)))
+            actual shouldBe BigDecimal(3)
         }
     }
 })
