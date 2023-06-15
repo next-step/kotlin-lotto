@@ -26,4 +26,9 @@ class StringCalculatorKoTest : StringSpec({
             calculator.calculate("-1")
         }
     }
+
+    "숫자 하나가 전달될 경우 해당 숫자를 반환" {
+        val calculator = StringCalculator()
+        calculator.calculate("3") shouldBe 3
+    }
 })

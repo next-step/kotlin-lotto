@@ -33,4 +33,12 @@ class StringCalculatorTest {
             calculator.calculate(negativeNumber)
         }.isInstanceOf(RuntimeException::class.java)
     }
+
+    @Test
+    fun `숫자 하나가 전달될 경우 해당 숫자를 반환`() {
+        val calculator = StringCalculator()
+        val actualInput = "3"
+
+        assertThat(calculator.calculate(actualInput)).isEqualTo(3)
+    }
 }
