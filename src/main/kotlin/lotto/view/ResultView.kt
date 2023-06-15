@@ -18,7 +18,7 @@ class ResultView {
     }
 
     fun printWinningStatistics(countsMap: Map<Int, Int>) {
-        println("당첨 통계")
+        println("\n당첨 통계")
         println("---------")
 
         LottoPrizes.values().forEach { prize ->
@@ -29,12 +29,17 @@ class ResultView {
     }
 
     fun printRateOfReturn(budget: Int, prizes: Int) {
-        val rateOfReturn = prizes.toDouble() / budget.toDouble()
+        if (prizes == 0) {
+            return println("총 수익률은 0입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        }
 
-        when {
-            rateOfReturn > 1.0 -> println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 이득라는 의미임)")
-            rateOfReturn == 1.0 -> println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 본전이라는 의미임)")
-            rateOfReturn < 0 -> println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
+        val rateOfReturn = prizes.toDouble() / budget.toDouble()
+        val textRateOfReturn = "%.3f".format(rateOfReturn).take(4)
+
+        return when {
+            rateOfReturn > 1.0 -> println("총 수익률은 ${textRateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 이득라는 의미임)")
+            rateOfReturn == 1.0 -> println("총 수익률은 ${textRateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 본전이라는 의미임)")
+            else -> println("총 수익률은 ${textRateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
         }
     }
 }
