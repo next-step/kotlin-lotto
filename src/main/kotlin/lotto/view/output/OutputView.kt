@@ -1,6 +1,6 @@
 package lotto.view.output
 
-abstract class OutputView(private val message: String) {
+abstract class OutputView(var message: String = "") {
     fun renderMessage() {
         println(message)
     }

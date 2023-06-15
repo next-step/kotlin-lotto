@@ -18,4 +18,6 @@ fun main() {
 
     val lastWinningNumber = SixFortyFiveLottoLastWinNumInputView().value
     NewLineOutputView().renderMessage()
+
+    lottoStore.renderWinningInsight(lottoList, lastWinningNumber)
 }
