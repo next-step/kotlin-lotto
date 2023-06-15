@@ -1,6 +1,6 @@
 package calculator
 
-import calculator.expression.ExpressionFactory
+import calculator.expression.Expression
 import calculator.view.InputView
 import calculator.view.ResultView
 
@@ -11,7 +11,7 @@ class CalculatorExecuter(
 
     fun execute() {
         val input = inputView.readInput()
-        val expression = ExpressionFactory.createExpression(input)
+        val expression = Expression.of(input)
         val addCalculator = AddCalculator(expression)
         val result = addCalculator.add()
         resultView.printResult(result)

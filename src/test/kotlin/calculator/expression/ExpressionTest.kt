@@ -10,7 +10,7 @@ class ExpressionTest : StringSpec({
         // given
         val input = null
         // when
-        val result = Expression(input).numbers
+        val result = Expression.of(input).numbers
         // then
         result shouldBe listOf(0)
     }
@@ -19,14 +19,14 @@ class ExpressionTest : StringSpec({
         // given
         val input = ""
         // when
-        val result = Expression(input).numbers
+        val result = Expression.of(input).numbers
         // then
         result shouldBe listOf(0)
     }
 
     "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다." {
         val input = "1"
-        val result = Expression(input).numbers
+        val result = Expression.of(input).numbers
         result shouldBe listOf(1)
     }
 
@@ -35,7 +35,7 @@ class ExpressionTest : StringSpec({
         val input = "-1"
         // when & then
         val exception = shouldThrow<RuntimeException> {
-            Expression(input)
+            Expression.of(input)
         }
         exception.message shouldBe "음수는 입력할 수 없습니다."
     }
@@ -44,7 +44,7 @@ class ExpressionTest : StringSpec({
         // given
         val input = "1,2"
         // when
-        val result = Expression(input)
+        val result = Expression.of(input)
         // then
         result.numbers shouldBe listOf(1, 2)
     }
@@ -53,7 +53,7 @@ class ExpressionTest : StringSpec({
         // given
         val input = "//;\n1;2;3"
         // when
-        val result = Expression(input)
+        val result = Expression.of(input)
         // then
         result.numbers shouldBe listOf(1, 2, 3)
     }

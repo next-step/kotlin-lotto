@@ -1,6 +1,6 @@
 package calculator
 
-import calculator.expression.ExpressionFactory
+import calculator.expression.Expression
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -11,7 +11,7 @@ class AddCalculatorTest : StringSpec({
         // given
         val input = null
         // when
-        val expression = ExpressionFactory.createExpression(input)
+        val expression = Expression.of(input)
         // then
         AddCalculator(expression).add() shouldBe 0
     }
@@ -20,7 +20,7 @@ class AddCalculatorTest : StringSpec({
         // given
         val input = ""
         // when
-        val expression = ExpressionFactory.createExpression(input)
+        val expression = Expression.of(input)
         // then
         AddCalculator(expression).add() shouldBe 0
     }
@@ -29,7 +29,7 @@ class AddCalculatorTest : StringSpec({
         // given
         val input = "1"
         // when
-        val expression = ExpressionFactory.createExpression(input)
+        val expression = Expression.of(input)
         // then
         AddCalculator(expression).add() shouldBe 1
     }
@@ -39,7 +39,7 @@ class AddCalculatorTest : StringSpec({
         val input = "-1"
         // when & then
         val exception = shouldThrow<RuntimeException> {
-            ExpressionFactory.createExpression(input)
+            Expression.of(input)
         }
         exception.message shouldBe "음수는 입력할 수 없습니다."
     }
@@ -48,7 +48,7 @@ class AddCalculatorTest : StringSpec({
         // given
         val input = "1,2:3"
         // when
-        val expression = ExpressionFactory.createExpression(input)
+        val expression = Expression.of(input)
         // then
         AddCalculator(expression).add() shouldBe 6
     }
@@ -57,7 +57,7 @@ class AddCalculatorTest : StringSpec({
         // given
         val input = "//;\n1;2;4"
         // when
-        val expression = ExpressionFactory.createExpression(input)
+        val expression = Expression.of(input)
         // then
         AddCalculator(expression).add() shouldBe 7
     }

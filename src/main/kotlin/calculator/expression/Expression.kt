@@ -1,6 +1,6 @@
 package calculator.expression
 
-class Expression(input: String?) {
+class Expression private constructor(input: String?) {
 
     val numbers: List<Int>
     init {
@@ -11,5 +11,11 @@ class Expression(input: String?) {
 
     fun sum(): Int {
         return numbers.sum()
+    }
+
+    companion object {
+        fun of(input: String?): Expression {
+            return Expression(input)
+        }
     }
 }
