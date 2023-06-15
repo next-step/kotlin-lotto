@@ -8,6 +8,8 @@ data class Lottery(private val numbers: Set<LottoNumber>) : LotteryAdaptor(lotto
             .toSet()
     )
 
+    override fun toString(): String = lottoNumbers.toString()
+
     companion object {
         private const val DELIMITER: Char = ','
     }

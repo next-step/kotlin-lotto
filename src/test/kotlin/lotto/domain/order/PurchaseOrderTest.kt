@@ -5,9 +5,11 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
 import lotto.domain.LotteryAdaptor
 import lotto.domain.PurchasedLotteries
 import lotto.mockLottery
+import lotto.model.LottoErrorCode
 
 class PurchaseOrderTest : StringSpec({
 
@@ -79,8 +81,10 @@ class PurchaseOrderTest : StringSpec({
             ),
         )
 
-        shouldThrow<IllegalStateException> {
+        val exception = shouldThrow<IllegalStateException> {
             PurchaseOrder(amount = amount, purchasedManualLotteries = purchasedLotteries)
         }
+
+        exception shouldHaveMessage LottoErrorCode.UNAVAILABLE_TO_PURCHASE.message("$amount ${purchasedLotteries.size}")
     }
 })
