@@ -29,4 +29,11 @@ class CalculatorTest {
         splitData.size shouldBe 3
         splitData shouldContainExactly(listOf("1", "3", "5"))
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,3:5"])
+    fun `구분한 문자열 값을 더한다`(input: String) {
+        val sumData = input.split(",|:".toRegex()).sumOf { it.toInt() }
+        sumData shouldBe 9
+    }
 }
