@@ -1,7 +1,7 @@
 package lotto.entity
 
 class WinningNumber private constructor(
-    private val numbers: Set<LottoNumber>
+    private val numbers: Set<LottoNumber>,
 ) {
     init {
         require(numbers.size == 6) { "당첨번호는 중복없는 6개의 숫자여야합니다." }
@@ -28,7 +28,7 @@ sealed class Rank(val prize: Long) {
     object Second : Rank(SECOND_PRIZE)
     object Third : Rank(THIRD_PRIZE)
     object Fourth : Rank(FOURTH_PRIZE)
-    object None: Rank(NO_PRIZE)
+    object None : Rank(NO_PRIZE)
 
     companion object {
         private const val FIRST_PRIZE = 2000000000L

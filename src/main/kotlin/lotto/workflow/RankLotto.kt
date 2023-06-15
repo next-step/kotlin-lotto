@@ -7,7 +7,7 @@ import lotto.entity.WinningNumber
 import lotto.util.LOTTO_PRICE
 
 class RankLotto(
-    private val winningNumber: WinningNumber
+    private val winningNumber: WinningNumber,
 ) {
     operator fun invoke(lottoTickets: List<Lotto>): LottoResult {
         val rankToInt = getRankToInt(lottoTickets)
