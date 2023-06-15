@@ -1,6 +1,6 @@
 package calculator
 
-import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -23,14 +23,14 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     fun emptyOrNull(text: String?) {
-        calculator.add(text) shouldBe 0
+        assertEquals(0, calculator.add(text))
     }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = ["1"])
     fun oneNumber(text: String) {
-        calculator.add(text) shouldBe text.toInt()
+        assertEquals(text.toInt(), calculator.add(text))
     }
 
     @DisplayName(value = "숫자 두개를 쉼표(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
@@ -40,7 +40,7 @@ class StringAddCalculatorTest {
         delimiter = '=',
     )
     fun twoNumbers(text: String, expected: String) {
-        calculator.add(text) shouldBe expected.toInt()
+        assertEquals(expected.toInt(), calculator.add(text))
     }
 
     @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
@@ -50,16 +50,16 @@ class StringAddCalculatorTest {
         delimiter = '=',
     )
     fun colons(text: String, expected: String) {
-        calculator.add(text) shouldBe expected.toInt()
+        assertEquals(expected.toInt(), calculator.add(text))
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @Test
     fun customDelimiter() {
         // [@CsvSource]를 사용하려 했지만 개행 문자 때문인지 input이 제대로 들어오지 않아 @Test로 진행
-        calculator.add("//;\n1;2;3") shouldBe 6
-        calculator.add("//!\n10,20!30") shouldBe 60
-        calculator.add("//#\n20#30:50") shouldBe 100
+        assertEquals(6, calculator.add("//;\n1;2;3"))
+        assertEquals(60, calculator.add("//!\n10,20!30"))
+        assertEquals(100, calculator.add("//#\n20#30:50"))
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")

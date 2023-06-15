@@ -1,6 +1,6 @@
 package calculator
 
-import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -33,13 +33,13 @@ class PositiveNumberTest {
     @ParameterizedTest
     @ValueSource(strings = ["0", "1"])
     fun positiveNumberString(text: String) {
-        PositiveNumber.of(text).value shouldBe text.toInt()
+        assertEquals(text.toInt(), PositiveNumber.of(text).value)
     }
 
     @DisplayName(value = "0 또는 양수를 양의 정수로 변환할 수 있다")
     @ParameterizedTest
     @ValueSource(ints = [0, 1])
     fun positiveNumber(number: Int) {
-        PositiveNumber(number).value shouldBe number
+        assertEquals(number, PositiveNumber(number).value)
     }
 }
