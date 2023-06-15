@@ -38,7 +38,7 @@ class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["//.\n1.3.5"])
+    @ValueSource(strings = ["//;\n4;5;6"])
     fun `커스텀 구분자를 구한다`(input: String) {
         val findMatchResult = Regex("//(.)\n(.*)").find(input) ?: throw RuntimeException("커스텀 구분자가 없습니다.")
         val (customDelimeter, calculateTargetData) = findMatchResult.destructured
