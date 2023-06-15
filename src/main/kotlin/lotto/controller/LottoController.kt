@@ -2,6 +2,7 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoMaker
+import lotto.domain.LottoPurchase
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -12,7 +13,7 @@ class LottoController {
 
     fun run() {
         val budget = inputView.inputPurchasePrice()
-        val purchaseAmount = Lotto.affordableLottoCount(budget)
+        val purchaseAmount = LottoPurchase.affordableLottoCount(budget)
         resultView.printPurchaseAmount(purchaseAmount)
 
         val lottos = mutableListOf<Lotto>()
