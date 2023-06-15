@@ -3,9 +3,10 @@ package lotto.controller
 import lotto.domain.BillSlot
 import lotto.domain.LottoVendingMachine
 import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
-    val inputView = InputView()
-    LottoVendingMachine(BillSlot(LottoVendingMachine.LOTTO_PRICE))
-        .purchase(inputView.getPurchaseAmount())
+    val lottoList = LottoVendingMachine(BillSlot(LottoVendingMachine.LOTTO_PRICE))
+        .purchase(InputView.getPurchaseAmount())
+    ResultView.printLotto(lottoList)
 }
