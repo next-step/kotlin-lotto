@@ -17,23 +17,20 @@ class SeparatorTest {
         input: String,
         expected: List<Int>,
     ) {
-        val separator = Separator()
-        val result = separator.extractIntegers(input)
+        val result = Separator.extractIntegers(input)
 
         result shouldBe expected
     }
 
     @Test
     fun `커스텀 구분자를 등록하고 이를 통해 구분할 수 있다`() {
-        val separator = Separator()
         val input = "//;\n1;2;3;4;2;231"
-        separator.extractIntegers(input) shouldBe listOf(1, 2, 3, 4, 2, 231)
+        Separator.extractIntegers(input) shouldBe listOf(1, 2, 3, 4, 2, 231)
     }
 
     @Test
     fun `null 이 입력될 경우 0이 반환된다`() {
-        val separator = Separator()
-        separator.extractIntegers(null) shouldBe listOf(0)
+        Separator.extractIntegers(null) shouldBe listOf(0)
     }
 
     @ValueSource(strings = ["1,33.2", "일,이,삼", "-1,-2,-3", "0, 1,+2", "01,  2"])
@@ -41,9 +38,8 @@ class SeparatorTest {
     fun `문자열에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 던진다`(
         input: String,
     ) {
-        val separator = Separator()
         shouldThrow<IllegalArgumentException> {
-            separator.extractIntegers(input)
+            Separator.extractIntegers(input)
         }
     }
 
@@ -53,13 +49,10 @@ class SeparatorTest {
             return listOf(
                 Arguments.of("1,2,3", listOf(1, 2, 3)),
                 Arguments.of("100,2,3", listOf(100, 2, 3)),
-
                 Arguments.of("1:2:3", listOf(1, 2, 3)),
                 Arguments.of("100:2:3", listOf(100, 2, 3)),
-
                 Arguments.of("10,2:145", listOf(10, 2, 145)),
                 Arguments.of("8:3,7", listOf(8, 3, 7)),
-
                 Arguments.of("", listOf(0)),
             )
         }
