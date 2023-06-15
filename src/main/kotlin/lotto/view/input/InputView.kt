@@ -1,4 +1,4 @@
-package lotto.view.Input
+package lotto.view.input
 
 abstract class InputView<T> {
     abstract val message: String

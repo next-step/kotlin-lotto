@@ -1,4 +1,4 @@
-package lotto.view.Input
+package lotto.view.input
 
 class LottoPurchasePriceInputView : InputView<Int>() {
     override val message: String = "구입금액을 입력해 주세요."
