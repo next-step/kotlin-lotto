@@ -1,6 +1,7 @@
 package lotto.domain.generator
 
 import lotto.domain.Lottery
+import lotto.domain.LotteryAdaptor
 import lotto.domain.LottoNumber
 
 object LotteryGenerator {
@@ -9,7 +10,7 @@ object LotteryGenerator {
         .map(::LottoNumber)
 
     fun draw(): Lottery = lottoNumbers.shuffled()
-        .take(n = Lottery.ALLOW_LOTTO_NUMBER_COUNT)
+        .take(n = LotteryAdaptor.ALLOW_LOTTO_NUMBER_COUNT)
         .toSet()
         .run(::Lottery)
 }

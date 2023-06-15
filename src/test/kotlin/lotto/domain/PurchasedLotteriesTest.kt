@@ -16,6 +16,6 @@ class PurchasedLotteriesTest : StringSpec({
         val purchasedLotteries = PurchasedLotteries(lotteries = expect)
 
         purchasedLotteries shouldBe expect
-        purchasedLotteries.calculatePurchasedPrice() shouldBe expect.sumOf { Lottery.LOTTERY_PRICE }
+        purchasedLotteries.calculatePurchasedPrice() shouldBe expect.sumOf { LotteryAdaptor.LOTTERY_PRICE }
     }
 })

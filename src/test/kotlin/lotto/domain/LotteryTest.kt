@@ -16,8 +16,6 @@ class LotteryTest : DescribeSpec({
         forAll(
             row(mockLottoNumbers(1, 2, 3, 4, 5, 6), mockLottery(1, 2, 3, 4, 5, 6)),
             row(mockLottoNumbers(5, 8, 23, 45, 24, 43), mockLottery(5, 8, 23, 45, 24, 43)),
-            row(Lottery(lotteryText = "5, 8, 23, 45, 24, 43"), mockLottery(5, 8, 23, 45, 24, 43)),
-            row(Lottery(lotteryText = "1, 2, 3, 4, 5, 6"), mockLottery(1, 2, 3, 4, 5, 6)),
         ) { numbers, expect ->
             context(name = "중복되지 않고, 정해진 수의 번호를 입력하면") {
                 val lottery = Lottery(numbers = numbers)
@@ -41,7 +39,7 @@ class LotteryTest : DescribeSpec({
 
                 it(name = "중복되지 않고, 정해진 수의 복권 번호를 입력하라고 에러가 발생한다.") {
                     exception shouldHaveMessage LottoErrorCode.INVALID_LOTTERY_NUMBER.message(
-                        "$expect ${Lottery.ALLOW_LOTTO_NUMBER_COUNT}"
+                        "$expect ${LotteryAdaptor.ALLOW_LOTTO_NUMBER_COUNT}"
                     )
                 }
             }
@@ -73,7 +71,7 @@ class LotteryTest : DescribeSpec({
 
                 it(name = "중복되지 않고, 정해진 수의 복권 번호를 입력하라고 에러가 발생한다.") {
                     exception shouldHaveMessage LottoErrorCode.INVALID_LOTTERY_NUMBER.message(
-                        "$expect ${Lottery.ALLOW_LOTTO_NUMBER_COUNT}"
+                        "$expect ${LotteryAdaptor.ALLOW_LOTTO_NUMBER_COUNT}"
                     )
                 }
             }

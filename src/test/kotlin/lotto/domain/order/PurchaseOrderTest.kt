@@ -5,19 +5,19 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lottery
+import lotto.domain.LotteryAdaptor
 
 class PurchaseOrderTest : StringSpec({
 
     "금액을 가지고 구매 주문 객체를 만들 수 있고, 할당된 금액만큼 복권을 발급받는다." {
         forAll(
-            row(10000, (10000 / Lottery.LOTTERY_PRICE).toInt()),
-            row(25151, (25151 / Lottery.LOTTERY_PRICE).toInt()),
-            row(3132131, (3132131 / Lottery.LOTTERY_PRICE).toInt()),
-            row(32234, (32234 / Lottery.LOTTERY_PRICE).toInt()),
-            row(4534523, (4534523 / Lottery.LOTTERY_PRICE).toInt()),
-            row(23344, (23344 / Lottery.LOTTERY_PRICE).toInt()),
-            row(12, (12 / Lottery.LOTTERY_PRICE).toInt()),
+            row(10000, (10000 / LotteryAdaptor.LOTTERY_PRICE).toInt()),
+            row(25151, (25151 / LotteryAdaptor.LOTTERY_PRICE).toInt()),
+            row(3132131, (3132131 / LotteryAdaptor.LOTTERY_PRICE).toInt()),
+            row(32234, (32234 / LotteryAdaptor.LOTTERY_PRICE).toInt()),
+            row(4534523, (4534523 / LotteryAdaptor.LOTTERY_PRICE).toInt()),
+            row(23344, (23344 / LotteryAdaptor.LOTTERY_PRICE).toInt()),
+            row(12, (12 / LotteryAdaptor.LOTTERY_PRICE).toInt()),
         ) { amount, expect ->
             val purchaseOrder = PurchaseOrder(amount = amount)
 
