@@ -94,8 +94,8 @@ class LotteryTest : DescribeSpec({
             row(mockLottery(11, 22, 23, 34, 25, 15), LottoRank.MISS),
         ) { numbers, expect ->
             context(name = "다른 복권이 주어지면") {
-                val lottoRank = mockLottery.correctLottery(
-                    otherLottery = numbers,
+                val lottoRank = numbers.correctLottery(
+                    otherLottery = mockLottery,
                     bonusBall = LottoNumber(number = 8),
                 )
 

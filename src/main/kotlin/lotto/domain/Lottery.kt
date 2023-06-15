@@ -27,10 +27,14 @@ value class Lottery(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by
     private fun correctMatchResult(
         otherLottery: Lottery,
         bonusBall: LottoNumber,
-    ) = LottoMatchResult(
-        countOfMatch = this.count { it in otherLottery },
-        MatchState.valueOf(condition = bonusBall in otherLottery),
-    )
+    ): LottoMatchResult {
+        val countOfMatch = this.count { it in otherLottery }
+
+        return LottoMatchResult(
+            countOfMatch = countOfMatch,
+            mustBonusMatch = LottoRank.hasBonusMatch(countOfMatch = countOfMatch) && bonusBall in this,
+        )
+    }
 
     override fun toString(): String = numbers.toString()
 

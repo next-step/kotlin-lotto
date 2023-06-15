@@ -6,11 +6,11 @@ enum class LottoRank(val lottoMatchResult: LottoMatchResult, val winningMoney: I
         winningMoney = 2_000_000_000,
     ),
     SECOND(
-        lottoMatchResult = LottoMatchResult(countOfMatch = 5, MatchState.MATCH),
+        lottoMatchResult = LottoMatchResult(countOfMatch = 5, mustBonusMatch = true),
         winningMoney = 30_000_000,
     ),
     THIRD(
-        lottoMatchResult = LottoMatchResult(countOfMatch = 5, MatchState.NON_MATCH),
+        lottoMatchResult = LottoMatchResult(countOfMatch = 5),
         winningMoney = 1_500_000,
     ),
     FOUR(
@@ -28,8 +28,12 @@ enum class LottoRank(val lottoMatchResult: LottoMatchResult, val winningMoney: I
     ;
 
     companion object {
-        fun valueOf(lottoMatchResult: LottoMatchResult): LottoRank = values().find {
-            it.lottoMatchResult.correctMatchResult(otherMatchResult = lottoMatchResult)
-        } ?: MISS
+        private val LOTTO_RANK_MAP: Map<LottoMatchResult, LottoRank> = values().associateBy { it.lottoMatchResult }
+
+        fun valueOf(lottoMatchResult: LottoMatchResult): LottoRank = LOTTO_RANK_MAP[lottoMatchResult] ?: MISS
+
+        fun hasBonusMatch(countOfMatch: Int): Boolean = LOTTO_RANK_MAP.keys.any {
+            it.countOfMatch == countOfMatch && it.mustBonusMatch
+        }
     }
 }

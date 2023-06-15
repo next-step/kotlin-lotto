@@ -51,7 +51,7 @@ object ResultView {
         )
     }
 
-    private fun LottoMatchResult.getBonusBallMessage() = if (this.hasBonusBallCondition()) {
+    private fun LottoMatchResult.getBonusBallMessage() = if (this.mustBonusMatch) {
         BONUS_BALL_MESSAGE
     } else {
         EMPTY_MESSAGE
