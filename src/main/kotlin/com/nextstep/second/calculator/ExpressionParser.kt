@@ -10,7 +10,7 @@ object ExpressionParser {
     private fun changeStringToNumber(numStr: List<String>): List<Int> {
         try {
             return numStr.map { it.toInt() }.toList()
-        } catch(e : Exception) {
+        } catch (e: Exception) {
             throw IllegalArgumentException()
         }
     }

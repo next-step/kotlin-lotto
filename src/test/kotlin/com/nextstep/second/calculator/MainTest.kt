@@ -11,7 +11,7 @@ class MainTest {
         "1:2:3, 6",
         "3:5:6, 14"
     )
-    fun `메인 테스트`(text:String, answer: Int) {
+    fun `메인 테스트`(text: String, answer: Int) {
         // when
         val parsedNumList = ExpressionParser.parse(text, normalTokenize)
         val result = Calculator.add(parsedNumList)

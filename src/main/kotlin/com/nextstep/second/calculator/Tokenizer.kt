@@ -4,7 +4,7 @@ const val NORMAL_DELIMITERS = "[:,]"
 val normalTokenize: (String) -> List<String> = { text: String ->
     try {
         text.split(NORMAL_DELIMITERS.toRegex())
-    } catch(e: Exception) {
+    } catch (e: Exception) {
         throw IllegalArgumentException("문자열 형식에 맞지 않습니다")
     }
 }
@@ -19,7 +19,7 @@ val customTokenize: (String) -> List<String> = { text: String ->
             result = it.groupValues[2].split(customDelimiter)
         }
         result
-    } catch(e: Exception) {
+    } catch (e: Exception) {
         throw IllegalArgumentException("문자열 형식에 맞지 않습니다")
     }
 }
