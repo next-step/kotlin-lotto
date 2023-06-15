@@ -9,4 +9,5 @@ fun main() {
     val lottoList = LottoVendingMachine(BillSlot(LottoVendingMachine.LOTTO_PRICE))
         .purchase(InputView.getPurchaseAmount())
     ResultView.printLotto(lottoList)
+    val lottoNumbersOfLastWeek = InputView.getLottoNumbersOfLastWeek()
 }
