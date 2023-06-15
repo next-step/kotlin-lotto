@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.view.output.SixFortyFiveLottoOutputView
 import lotto.view.output.SixFortyFiveResultOutputView
 import kotlin.random.Random
 
@@ -15,6 +16,10 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
 
     override fun renderWinningInsight(lottoList: List<SixFortyFiveLotto>, winningValue: List<Int>) {
         SixFortyFiveResultOutputView(lottoList, winningValue).renderMessage()
+    }
+
+    override fun renderLottos(lottoList: List<SixFortyFiveLotto>) {
+        lottoList.forEach { lotto -> lotto.renderLotto(SixFortyFiveLottoOutputView(lotto)) }
     }
 
     private fun generateLottoNumber(): List<Int> {
