@@ -1,8 +1,8 @@
 package calculator
 
 import io.kotest.matchers.shouldBe
-import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -12,24 +12,21 @@ class PositiveNumberTest {
     @ParameterizedTest
     @ValueSource(ints = [-1])
     fun notPositiveNumber(number: Int) {
-        Assertions.assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { PositiveNumber(number) }
+        assertThrows<RuntimeException> { PositiveNumber(number) }
     }
 
     @DisplayName(value = "음수인 문자열이 주어지면 RuntimeException 예외 처리를 한다")
     @ParameterizedTest
     @ValueSource(strings = ["-1"])
     fun notPositiveNumberString(numberString: String) {
-        Assertions.assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { PositiveNumber.of(numberString) }
+        assertThrows<RuntimeException> { PositiveNumber.of(numberString) }
     }
 
     @DisplayName(value = "숫자가 아닌 문자열이 주어지면 RuntimeException 예외 처리를 한다")
     @ParameterizedTest
     @ValueSource(strings = ["a", ""])
     fun notNumber(text: String) {
-        Assertions.assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { PositiveNumber.of(text) }
+        assertThrows<RuntimeException> { PositiveNumber.of(text) }
     }
 
     @DisplayName(value = "0 또는 양수의 문자열을 양의 정수로 변환할 수 있다")
