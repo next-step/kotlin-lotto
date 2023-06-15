@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class CalculatorTest {
+class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2"])
     fun `문자열을 , 구분자로 구분한다`(input: String) {
@@ -35,5 +35,13 @@ class CalculatorTest {
     fun `구분한 문자열 값을 더한다`(input: String) {
         val sumData = input.split(",|:".toRegex()).sumOf { it.toInt() }
         sumData shouldBe 9
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//.\n1.3.5"])
+    fun `커스텀 구분자를 구한다`(input: String) {
+        val findMatchResult = Regex("//(.)\n(.*)").find(input) ?: throw RuntimeException("커스텀 구분자가 없습니다.")
+        val (customDelimeter, calculateTargetData) = findMatchResult.destructured
+        customDelimeter shouldBe "."
     }
 }
