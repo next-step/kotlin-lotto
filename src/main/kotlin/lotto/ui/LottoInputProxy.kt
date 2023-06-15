@@ -5,21 +5,17 @@ import lotto.domain.request.WinningInfoRequest
 
 class LottoInputProxy(private val target: LottoInput) : LottoInput {
 
-    override fun requestOrderLotto(): LottoOrderRequest {
-        return try {
-            target.requestOrderLotto()
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            requestOrderLotto()
-        }
-    }
+    override fun requestOrderLotto(): LottoOrderRequest =
+        runCatching { target.requestOrderLotto() }
+            .recoverCatching {
+                println(it.message)
+                requestOrderLotto()
+            }.getOrThrow()
 
-    override fun requestWinningInfo(): WinningInfoRequest {
-        return try {
-            target.requestWinningInfo()
-        } catch (e: IllegalArgumentException) {
-            println(e.message)
-            requestWinningInfo()
-        }
-    }
+    override fun requestWinningInfo(): WinningInfoRequest =
+        runCatching { target.requestWinningInfo() }
+            .recoverCatching {
+                println(it.message)
+                requestWinningInfo()
+            }.getOrThrow()
 }

@@ -12,10 +12,10 @@ class ManualLottosGeneratorTest : FunSpec({
 
     test("유효한 로또 번호 목록을 전달하면 정상적인 로또 일급 컬렉션을 생성해 반환한다.") {
         val items = buildList {
-            add(listOf("1", "2", "3", "4", "5", "6"))
-            add(listOf("2", "3", "4", "5", "6", "7"))
-            add(listOf("3", "4", "5", "6", "7", "8"))
-            add(listOf("4", "5", "6", "7", "8", "9"))
+            add(setOf(1, 2, 3, 4, 5, 6))
+            add(setOf(2, 3, 4, 5, 6, 7))
+            add(setOf(3, 4, 5, 6, 7, 8))
+            add(setOf(4, 5, 6, 7, 8, 9))
         }
 
         val request = LottoOrderRequest(manualNumbersList = items, money = 4000)
@@ -24,7 +24,7 @@ class ManualLottosGeneratorTest : FunSpec({
         actual.size shouldBe 4
         actual.forEachIndexed { idx, lotto ->
             items[idx].forEach {
-                LottoNumber.valueOf(it.toInt()) shouldBeIn lotto
+                LottoNumber.valueOf(it) shouldBeIn lotto
             }
         }
     }

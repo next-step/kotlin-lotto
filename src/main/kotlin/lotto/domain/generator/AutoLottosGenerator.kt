@@ -15,14 +15,15 @@ object AutoLottosGenerator : LottosGenerator {
         return if (remainingMoney >= Lotto.PRICE) {
             val capacity = (remainingMoney / Lotto.PRICE).value
 
-            return (0 until capacity).map { Lotto(generateRandom()) }
-                .let(::Lottos)
+            return List(capacity.toInt()) {
+                Lotto(generateRandom())
+            }.let(::Lottos)
         } else {
             Lottos.EMPTY_LOTTOS
         }
     }
 
     private fun generateRandom(): Set<LottoNumber> = LottoNumber.all().shuffled()
-        .subList(START_INDEX, Lotto.VALID_LENGTH)
+        .take(Lotto.VALID_LENGTH)
         .toSet()
 }

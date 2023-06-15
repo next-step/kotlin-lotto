@@ -9,11 +9,9 @@ import lotto.domain.response.LottoCreateResponse
 object LottoOutput {
 
     fun printLotto(response: LottoCreateResponse) {
-        val (lottos, manualCount, autoCount) = response
-
         val result = buildString {
-            append("수동으로 ${manualCount}장, 자동으로${autoCount}개를 구매했습니다.\n")
-            lottos.forEach { appendLottoNumber(it) }
+            append("수동으로 ${response.manualCount}장, 자동으로${response.autoCount}개를 구매했습니다.\n")
+            response.lottos.forEach { appendLottoNumber(it) }
         }
 
         println(result)

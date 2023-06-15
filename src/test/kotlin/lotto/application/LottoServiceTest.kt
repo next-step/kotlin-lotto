@@ -53,7 +53,7 @@ class LottoServiceTest : BehaviorSpec({
                             money = 2000,
                             manualCount = 1,
                             manualNumbersList = listOf(
-                                listOf("1", "2", "3", "4", "5", "6")
+                                setOf(1, 2, 3, 4, 5, 6)
                             )
                         )
                     )

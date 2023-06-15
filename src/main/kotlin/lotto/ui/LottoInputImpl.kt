@@ -28,14 +28,14 @@ object LottoInputImpl : LottoInput {
 
     private fun requestPurchaseQuantity(): Int = promptAndReadNumberNotNull("\n수동으로 구매할 로또 수를 입력해 주세요.")
 
-    private fun requestManualLottoNumbersList(size: Int): List<List<String>> {
+    private fun requestManualLottoNumbersList(size: Int): List<Set<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
         return (1..size).map {
             promptAndReadNotNull(
                 prompt = "[$it / $size]",
                 failedPrompt = "유효한 번호를 입력해주세요."
             )
-        }.map { it.split(DELIMITER).map(String::trim) }
+        }.map { it.split(DELIMITER).map(String::trim).map(String::toInt).toSet() }
     }
 
     private fun requestWinningNumbers(): List<Int> {

@@ -32,7 +32,7 @@ class LottosTest : FunSpec({
         actual[Rank.MISS] shouldBe 3
     }
 
-    test("로또 일급 컬렉션끼리 병합할 수 있다.") {
+    test("병합할 수 있다.") {
         val source = listOf(
             Lotto.of(1, 2, 3, 4, 5, 6),
             Lotto.of(1, 2, 3, 4, 5, 6),

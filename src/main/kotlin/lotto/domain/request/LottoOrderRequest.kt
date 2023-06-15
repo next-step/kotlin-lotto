@@ -5,11 +5,11 @@ import lotto.domain.Lotto
 data class LottoOrderRequest(
     val money: Long = 0,
     val manualCount: Int = 0,
-    val manualNumbersList: List<List<String>> = emptyList()
+    val manualNumbersList: List<Set<Int>> = emptyList()
 ) {
 
-    val remainingMoney: Long = money
-        get() = field - manualCount * Lotto.PRICE.value
+    val remainingMoney: Long
+        get() = money - manualCount * Lotto.PRICE.value
 
     init {
         require(money >= Lotto.PRICE.value) {
@@ -23,11 +23,9 @@ data class LottoOrderRequest(
         validateLottoNumbersList(manualNumbersList)
     }
 
-    private fun validateLottoNumbersList(target: List<List<String>>) =
+    private fun validateLottoNumbersList(target: List<Set<Int>>) =
         target.forEach {
-            val filteredNumbers = it.map(String::trim).mapNotNull(String::toIntOrNull).toSet()
-
-            require(filteredNumbers.size == Lotto.VALID_LENGTH) {
+            require(it.size == Lotto.VALID_LENGTH) {
                 "로또 번호는 중복되지 않는 6개의 번호여야 합니다. Input: $it"
             }
         }

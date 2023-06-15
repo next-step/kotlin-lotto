@@ -10,6 +10,5 @@ object ManualLottosGenerator : LottosGenerator {
     override fun generate(value: LottoOrderRequest): Lottos =
         value.manualNumbersList.map { Lotto(generateManual(it)) }.let(::Lottos)
 
-    private fun generateManual(input: List<String>): Set<LottoNumber> =
-        input.map(String::toInt).map(LottoNumber::valueOf).toSet()
+    private fun generateManual(input: Set<Int>): Set<LottoNumber> = input.map(LottoNumber::valueOf).toSet()
 }
