@@ -34,3 +34,7 @@ class LottoController {
         resultView.printRateOfReturn(budget, totalPrizes)
     }
 }
+
+fun main() {
+    LottoController().run()
+}
