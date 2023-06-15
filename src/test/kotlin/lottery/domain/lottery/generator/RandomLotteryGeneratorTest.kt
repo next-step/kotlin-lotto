@@ -11,4 +11,11 @@ class RandomLotteryGeneratorTest : FunSpec({
             actual shouldHaveSize 6
         }
     }
+
+    context("generateLotteries") {
+        test("생성 갯수를 받아 생성한다") {
+            val actual = RandomLotteryGenerator.generateLotteries(10)
+            actual shouldHaveSize 10
+        }
+    }
 })

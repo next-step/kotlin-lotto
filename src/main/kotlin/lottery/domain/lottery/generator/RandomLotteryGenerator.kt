@@ -11,4 +11,6 @@ object RandomLotteryGenerator : LotteryGenerator {
         LOTTERY_NUMBER_CACHE.shuffled()
             .take(LOTTERY_NUMBER_SIZE)
     )
+
+    override fun generateLotteries(count: Int) = (0 until count).map { generate() }
 }
