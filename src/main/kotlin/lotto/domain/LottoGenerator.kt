@@ -1,18 +1,15 @@
 package lotto.domain
 
-import kotlin.random.Random
-
 object LottoGenerator {
+    private const val MORE_THAN_LOTTO_PRICE_MESSAGE = "${Lotto.LOTTO_PRICE}이상의 금액을 입력해주세요"
+    private val lottoNumbers = (Lotto.LOTTO_MIN_NUMBER..Lotto.LOTTO_MAX_NUMBER).toList()
+
     fun generateLottos(amount: Int): List<Lotto> {
-        require(amount > 0) { "금액은 음수일 수 없습니다" }
-        return Array(amount / 1000) { generateLotto() }.toList()
+        require(amount > Lotto.LOTTO_PRICE) { MORE_THAN_LOTTO_PRICE_MESSAGE }
+        return Array(amount / Lotto.LOTTO_PRICE) { generateLotto() }.toList()
     }
 
     fun generateLotto(): Lotto {
-        val numberSet = sortedSetOf<Int>()
-        while (numberSet.size != 6) {
-            numberSet.add(Random.nextInt(45) + 1)
-        }
-        return Lotto(numberSet.toList())
+        return Lotto(lottoNumbers.shuffled().take(Lotto.LOTTO_NUMBER_SIZE).sorted())
     }
 }
