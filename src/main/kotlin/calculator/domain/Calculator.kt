@@ -1,4 +1,4 @@
-package calculator
+package calculator.domain
 
 private const val NEGATIVE_EXCEPTION = "음수 입니다."
 

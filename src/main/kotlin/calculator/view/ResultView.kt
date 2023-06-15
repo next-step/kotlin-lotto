@@ -1,4 +1,4 @@
-package calculator
+package calculator.view
 
 object ResultView {
     fun printResult(result: Int) {

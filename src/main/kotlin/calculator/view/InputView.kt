@@ -1,4 +1,4 @@
-package calculator
+package calculator.view
 
 private const val INPUT_TEXT = "구분자와 함께 덧셈할 숫자를 입력하세요"
 

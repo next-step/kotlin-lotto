@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.domain.Calculator
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
