@@ -29,7 +29,7 @@ class StringAddCalculator {
             .split(separationRegex)
             .map { maybeNumber -> PositiveNumber.of(maybeNumber) }
     }
-    
+
     companion object {
         private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
         private const val FIXED_DELIMITERS = ",:"
