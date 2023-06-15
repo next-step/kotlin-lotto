@@ -20,7 +20,7 @@ class InputView(private val inputReader: InputReader) {
     }
 
     fun registerWinningNums(): List<Int> {
-        println("지난 주 당첨 번호를 입력해 주세요.")
+        println("\n지난 주 당첨 번호를 입력해 주세요.")
         val winningNums = inputReader.raedLine()
         println(winningNums)
         return Separator.extractIntegers(winningNums)

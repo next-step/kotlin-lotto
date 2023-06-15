@@ -18,8 +18,8 @@ class SeparatorKoTest : StringSpec({
                 row("100:2:3", listOf(100, 2, 3)),
                 row("10,2:145", listOf(10, 2, 145)),
                 row("8:3,7", listOf(8, 3, 7)),
-                row("", listOf(0)),
-            ),
+                row("", listOf(0))
+            )
         ) { input: String, expected: List<Int> ->
             val result = Separator.extractIntegers(input)
             result shouldBe expected
@@ -34,7 +34,7 @@ class SeparatorKoTest : StringSpec({
             "100:2:3" to listOf(100, 2, 3),
             "10,2:145" to listOf(10, 2, 145),
             "8:3,7" to listOf(8, 3, 7),
-            "" to listOf(0),
+            "" to listOf(0)
         ).forAll { (input, expected) ->
             val result = Separator.extractIntegers(input)
             result shouldBe expected

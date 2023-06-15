@@ -30,14 +30,4 @@ class LottoRunnerTest : StringSpec({
         lotteryRunner.startLotto()
         lotteryRunner.lotteries.size shouldBe 14
     }
-
-    "로또 번호는 1부터 45까지 의 값이어야한다" {
-        val inputView = InputView(MockInputReader(listOf("14000")))
-
-        val lotteryRunner = LotteryRunner(inputView)
-        lotteryRunner.startLotto()
-        lotteryRunner.lotteries.forEach { each ->
-            each.randomNumber.forEach { it in 1..45 }
-        }
-    }
 })

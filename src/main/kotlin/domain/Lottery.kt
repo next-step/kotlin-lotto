@@ -1,8 +1,11 @@
 package domain
 
-class Lottery {
+import util.NumberGenerator
+import util.RandomNumberGenerator
 
-    val randomNumber = (1..45).shuffled().take(6)
+class Lottery(numberGenerator: NumberGenerator = RandomNumberGenerator) {
+
+    val randomNumber = numberGenerator.randomNumberGenerator()
 
     fun countMatchingLottery(winningNums: List<Int>): Int {
         return randomNumber.intersect(winningNums.toSet()).size
