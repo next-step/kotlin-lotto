@@ -1,3 +1,7 @@
 package lotto
 
-interface Lotto
+import lotto.view.output.OutputView
+
+interface Lotto {
+    fun renderLotto(outputView: OutputView)
+}

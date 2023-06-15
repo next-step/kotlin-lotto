@@ -1,12 +1,17 @@
 package lotto
 
+import lotto.view.output.OutputView
 import kotlin.random.Random
 
 class SixFortyFiveLotto : Lotto {
-    private val numbers: List<Int>
+    val numbers: List<Int>
 
     init {
         numbers = generateLottoNumber()
+    }
+
+    override fun renderLotto(outputView: OutputView) {
+        outputView.renderMessage()
     }
 
     private fun generateLottoNumber(): List<Int> {

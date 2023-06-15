@@ -1,10 +1,11 @@
 package lotto
 
 class SixFortyFiveLottoStore : LottoStore {
-    override fun purchase(count: Int): List<Lotto> {
+    override fun purchase(count: Int): List<SixFortyFiveLotto> {
         return (1..count).map { makeLotto() }
     }
-    override fun makeLotto(): Lotto {
+
+    override fun makeLotto(): SixFortyFiveLotto {
         return SixFortyFiveLotto()
     }
 
