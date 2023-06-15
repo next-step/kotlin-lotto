@@ -1,8 +1,8 @@
-import calculator.domain.ExpressionFactory
-import calculator.io.ResultView
+
+import lotto.LottoGame
+import lotto.io.InputView
 
 fun main() {
-    val input = "//;\n1;2;3"
-    val expression = ExpressionFactory.createExpression(input)
-    ResultView.printResult(expression)
+    val amount = InputView.getAmount()
+    LottoGame(amount).start()
 }

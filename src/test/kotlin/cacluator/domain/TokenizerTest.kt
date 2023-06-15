@@ -9,7 +9,7 @@ class TokenizerTest : BehaviorSpec({
     given("커스텀 구분자로 구분된 문자열이 있다") {
         val input = "//?\n1?2?3?4"
         `when`("주어진 문자열을 토큰화 하면") {
-            then("커스텀 구분자로 분할한") {
+            then("커스텀 구분자로 분할한다") {
                 Tokenizer.getTokens(input) shouldBe listOf("1", "2", "3", "4")
             }
         }
