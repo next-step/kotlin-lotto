@@ -2,11 +2,13 @@ package lotto
 
 class LottoStore {
 
-    fun purchase(purchaseAmount: Int): List<LottoNumber> {
+    fun purchase(purchaseAmount: Int): LottoNumbers {
         validate(purchaseAmount)
-        return (1..purchaseAmount / PURCHASE_AMOUNT_UNIT).map {
-            LottoNumber()
-        }
+        return LottoNumbers(
+            (1..purchaseAmount / PURCHASE_AMOUNT_UNIT).map {
+                LottoNumber()
+            },
+        )
     }
 
     private fun validate(purchaseAmount: Int) {
