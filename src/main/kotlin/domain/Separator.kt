@@ -17,13 +17,13 @@ object Separator {
 
     private fun splitAndFilterPositiveValues(
         text: String,
-        delimiter: List<String> = DEFAULT_DELIMITERS,
+        delimiters: List<String> = DEFAULT_DELIMITERS,
     ): List<Int> {
-        return text.split(*delimiter.toTypedArray())
-            .map(::positiveNumbers)
+        return text.split(*delimiters.toTypedArray())
+            .map(::positiveNumber)
     }
 
-    private fun positiveNumbers(number: String): Int {
+    private fun positiveNumber(number: String): Int {
         val parsedInt = number.toIntOrNull() ?: throw IllegalArgumentException(ONLY_NUMERIC_TYPE_ERROR)
         require(parsedInt > 0) { ONLY_POSITIVE_ERROR }
         return parsedInt
