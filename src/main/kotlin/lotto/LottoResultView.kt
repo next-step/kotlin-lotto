@@ -15,11 +15,11 @@ class LottoResultView {
         println()
     }
 
-    fun printLottoStatistics(lottoNumbers: LottoNumbers, winLottoNumber: LottoNumber) {
+    fun printLottoStatistics(lottoNumbers: LottoNumbers, winLottoNumber: WinningLottoNumber) {
         println("\n당첨 통계")
         println("------------")
-        val rankingCountMap = lottoNumbers.makeRankingCountMap(winLottoNumber)
-        val totalRevenueRate = lottoNumbers.getRevenueRate(winLottoNumber)
+        val rankingCountMap = winLottoNumber.makeRankingCountMap(lottoNumbers)
+        val totalRevenueRate = winLottoNumber.getRevenueRate(lottoNumbers)
         RANKING_PRINT_ORDER.forEach {
             val count = rankingCountMap[it] ?: 0
             println("${it.matchCount}개 일치 (${it.winningAmount}원) - $count")
