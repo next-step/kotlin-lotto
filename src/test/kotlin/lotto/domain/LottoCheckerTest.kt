@@ -7,15 +7,15 @@ class LottoCheckerTest : BehaviorSpec({
     given("로또리스트와 당첨번호가 주어졌다") {
         val lottos = Lottos(
             listOf(
-                Lotto((Lotto.LOTTO_MIN_NUMBER until Lotto.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE).toList()), // 1등
-                Lotto((Lotto.LOTTO_MIN_NUMBER + 1 until Lotto.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 1).toList()), // 2등
-                Lotto((Lotto.LOTTO_MIN_NUMBER + 2 until Lotto.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 2).toList()), // 3등
-                Lotto((Lotto.LOTTO_MIN_NUMBER + 3 until Lotto.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 3).toList()), // 4등
-                Lotto((Lotto.LOTTO_MIN_NUMBER + 4 until Lotto.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 4).toList()), // 낙첨
+                Lotto((LottoNumber.LOTTO_MIN_NUMBER until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE).toList()), // 1등
+                Lotto((LottoNumber.LOTTO_MIN_NUMBER + 1 until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 1).toList()), // 2등
+                Lotto((LottoNumber.LOTTO_MIN_NUMBER + 2 until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 2).toList()), // 3등
+                Lotto((LottoNumber.LOTTO_MIN_NUMBER + 3 until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 3).toList()), // 4등
+                Lotto((LottoNumber.LOTTO_MIN_NUMBER + 4 until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 4).toList()), // 낙첨
             )
         )
         val winNumbers =
-            WinNumbers((Lotto.LOTTO_MIN_NUMBER until Lotto.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE).toList())
+            WinNumbers((LottoNumber.LOTTO_MIN_NUMBER until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE).toList())
         `when`("당첨결과를 확인했을때") {
             then("정확한 결과가 반환된다") {
                 LottoChecker.checkResult(lottos, winNumbers) shouldBe LottoResults(

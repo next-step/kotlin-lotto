@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.LottoChecker
 import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
 import lotto.domain.Lottos
 import lotto.domain.WinNumbers
 import lotto.io.InputView
@@ -18,7 +19,7 @@ object LottoGame {
 
     private fun getWinNumbers(): WinNumbers {
         val winNumbers = InputView.getWinNumbers()
-        return WinNumbers(winNumbers)
+        return WinNumbers(winNumbers.map { LottoNumber(it) })
     }
 
     private fun getLottos(): Lottos {
