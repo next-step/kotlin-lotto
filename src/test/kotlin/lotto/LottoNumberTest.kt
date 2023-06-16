@@ -34,6 +34,7 @@ class LottoNumberTest {
         @JvmStatic
         fun makeLottoNumber(): List<Arguments> = listOf(
             Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7)),
+            Arguments.of(listOf(1, 2, 3, 3, 2, 1)),
             Arguments.of(listOf(1, 2, 3, 4, 5, 46)),
             Arguments.of(listOf(111, 22, 33, 44, 45, 1)),
         )
