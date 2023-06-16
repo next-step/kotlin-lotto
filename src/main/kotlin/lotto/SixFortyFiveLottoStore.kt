@@ -23,12 +23,15 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
     }
 
     private fun generateLottoNumber(): List<Int> {
-        return (1..LOTTO_NUMBER_COUNT).map {
-            Random.nextInt(
+        val randomNumberSet = mutableSetOf<Int>()
+        while (randomNumberSet.size < LOTTO_NUMBER_COUNT) {
+            val randomNumber = Random.nextInt(
                 LOTTO_NUMBER_RANGE_START,
                 LOTTO_NUMBER_RANGE_END,
             )
-        }.sorted()
+            randomNumberSet.add(randomNumber)
+        }
+        return randomNumberSet.sorted()
     }
 
     companion object {
