@@ -1,5 +1,8 @@
 package lotto.model
 
 interface LottoTicketStorage {
-    val lottoTicket: LottoTicket
+
+    infix fun hasCountLessThan(count: Int): Boolean
+
+    infix fun lottoTicketsBy(count: Int): Collection<LottoTicket>
 }
