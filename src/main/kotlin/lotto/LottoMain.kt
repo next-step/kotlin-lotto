@@ -9,7 +9,7 @@ fun main() {
     val lottoNumbers = lottoStore.purchase(purchaseAmount)
     lottoResultView.printPurchasedLottoNumbers(lottoNumbers)
 
-    val lastWinLottoNumber = lottoInputView.readLottoNumbers(message = "지난 주 당첨 번호를 입력해 주세요.")
+    val lastWinLottoNumber = lottoInputView.readLottoNumber(message = "지난 주 당첨 번호를 입력해 주세요.")
     val bonusBallNumber = lottoInputView.readInt(message = "보너스 볼을 입력해 주세요.")
     val winningLottoNumber = WinningLottoNumber(winningNumber = lastWinLottoNumber, bonusBallNumber = bonusBallNumber)
 

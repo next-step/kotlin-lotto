@@ -7,7 +7,7 @@ class LottoInputView {
         return readln().toIntOrNull() ?: 0
     }
 
-    fun readLottoNumbers(message: String): LottoNumber {
+    fun readLottoNumber(message: String): LottoNumber {
         println(message)
         val input = readln()
         val numbers = input.split(DEFAULT_LAST_WEEK_WINNING_NUMBER_DELIMITER)
