@@ -25,6 +25,7 @@ class LottoResultVoTest {
         // when
         val result: LottoResultVo = LottoResultVo.of(winnerLotto, lotto)
 
+        // then
         result.sameNumberCount shouldBe 5
     }
 }
