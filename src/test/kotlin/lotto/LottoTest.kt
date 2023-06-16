@@ -38,18 +38,25 @@ class LottoTest {
     @ValueSource(ints = [14000, 10000, 5000])
     fun `구입 금액 만큼 로또를 발급할 수 있다 발급의 기준은 1장 당 1000원`(money: Int) {
         val actual = Lotto().buyLotto(money)
-        assertThat(actual.size).isEqualTo(money/1000)
+        assertThat(actual.size).isEqualTo(money / 1000)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [5000])
     fun `당첨 번호와 발급한 로또 번호를 비교하여 갯수별로(3개~6개) 당첨 개수를 산정할 수 있다`(money: Int) {
-        val lottoBundle = listOf(listOf(1,2,3,4,5), listOf(2,14,26,11,4), listOf(5,7,17,21,33))
+        val lottoBundle = listOf(listOf(1, 2, 3, 4, 5), listOf(2, 14, 26, 11, 4), listOf(5, 7, 17, 21, 33))
         val winningNumber = "1, 2, 3, 4, 5"
         val actual = LottoChecker().lottoCheck(winningNumber, lottoBundle)
         assertThat(actual[0]).isEqualTo(5)
         assertThat(actual[1]).isEqualTo(2)
         assertThat(actual[2]).isEqualTo(1)
+    }
+
+    @Test
+    fun `당첨 개수를 전달 받아 당첨 금액을 산정할 수 있다`() {
+        val collectCounts = listOf(3, 1, 3)
+        val actual = LottoChecker().winningMoneyCheck(collectCounts)
+        assertThat(actual).isEqualTo(10000)
     }
 
     @ParameterizedTest

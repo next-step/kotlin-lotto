@@ -18,4 +18,16 @@ class LottoChecker {
         }
         return result.toList()
     }
+
+    fun winningMoneyCheck(collectCounts: List<Int>): Int {
+        var winningMoney = 0
+        collectCounts.forEach { count ->
+            winningMoney += LottoEnum.values().find { it.count == count }?.prizeMoney?: NONE_PRIZE_MONEY
+        }
+        return winningMoney
+    }
+
+    companion object {
+        private const val NONE_PRIZE_MONEY = 0
+    }
 }
