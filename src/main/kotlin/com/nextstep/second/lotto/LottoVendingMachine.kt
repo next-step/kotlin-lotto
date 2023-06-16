@@ -1,5 +1,8 @@
 package com.nextstep.second.lotto
 
+import com.nextstep.second.lotto.domain.Lotto
+import com.nextstep.second.lotto.domain.LottoResultVo
+
 const val LOTTO_COST = 1000
 
 object LottoVendingMachine {
@@ -15,6 +18,6 @@ object LottoVendingMachine {
     fun checkThisWeekLottoResult(winnerLotto: Lotto, myLotto: List<Lotto>): List<LottoResultVo> {
         return myLotto.map {
             LottoResultVo(winnerLotto, it)
-        }.toList()
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.nextstep.second.lotto
+package com.nextstep.second.lotto.domain
 
 class LottoResultVo(
     winnerLottoNumber: Lotto,

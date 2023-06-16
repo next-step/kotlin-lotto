@@ -1,5 +1,7 @@
 package com.nextstep.second.lotto
 
+import com.nextstep.second.lotto.domain.Lotto
+import com.nextstep.second.lotto.domain.LottoResultVo
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
