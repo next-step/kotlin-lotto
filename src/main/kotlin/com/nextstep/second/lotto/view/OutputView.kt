@@ -1,7 +1,7 @@
 package com.nextstep.second.lotto.view
 
 import com.nextstep.second.lotto.domain.Lotto
-import com.nextstep.second.lotto.domain.LottoResultVo
+import com.nextstep.second.lotto.domain.LottoReward
 
 object OutputView {
     fun showBuyLotto(lottos: List<Lotto>) {
@@ -11,16 +11,11 @@ object OutputView {
         }
     }
 
-    fun showLottoResult(lottoResults: List<LottoResultVo>) {
+    fun showLottoResult(lottoResults: List<Map<LottoReward, Int>>) {
         println("당첨 통계")
         println("---------")
-        val dashboardResult = lottoResults.groupBy { it.sameNumberCount }
-            .mapValues { it.value.size }
-            .entries
-            .filter { it.key >= 3 }
-            .sortedBy { it.key }
-        dashboardResult.forEach {
-            println("${it.key} - ${it.value}")
+        lottoResults.forEach { it ->
+            println("${it.entries.first().key.sameNumberCnt}개 일치 (${it.entries.first().key.reward}원)- ${it.entries.first().value}개")
         }
     }
 }
