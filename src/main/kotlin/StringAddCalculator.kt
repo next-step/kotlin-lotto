@@ -14,7 +14,7 @@ class StringAddCalculator {
     }
 
     private fun existCustomizedDelimiter(text: String): Boolean {
-        return text.indexOf("//") == 0 && text.indexOf("\n") != -1
+        return text.indexOf(CUSTOM_DELIMITER_START_FLAG) == 0 && text.indexOf(CUSTOM_DELIMITER_END_FLAG) != -1
     }
 
     private fun getCustomizedDelimiter(text: String): List<String> {
