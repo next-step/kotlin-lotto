@@ -1,8 +1,11 @@
 package stringCalculatorTest
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import stringCalculator.StringParser
 
 class StringParserTest {
@@ -19,5 +22,41 @@ class StringParserTest {
         val inputString = "//???\n1:5,9???10"
         val stringParser = StringParser()
         stringParser.parse(inputString) shouldBe listOf("1", "5", "9", "10")
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "1:5,-9",
+        "1:-5,9",
+        "-1:5,9",
+        "//구\n1:5,-9",
+        "//분\n1:-5,9",
+        "//자\n-1:5,9",
+    )
+    fun `음수를 전달하는 경우 RuntimeException 예외를 throw 한다`(inputString: String) {
+        val stringParser = StringParser()
+        val parsedStringList = stringParser.parse(inputString)
+
+        val parsedStringValidator = ParsedStringValidator()
+        shouldThrow<IllegalStateException> {
+            parsedStringValidator.check(parsedStringList)
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "한:글,9",
+        "1:eng,9",
+        "//구\n한:글,9",
+        "//분\n1:eng,9",
+    )
+    fun `숫자 이외의 값을 전달하는 경우 RuntimeException 예외를 throw 한다`(inputString: String) {
+        val stringParser = StringParser()
+        val parsedStringList = stringParser.parse(inputString)
+
+        val parsedStringValidator = ParsedStringValidator()
+        shouldThrow<IllegalStateException> {
+            parsedStringValidator.check(parsedStringList)
+        }
     }
 }
