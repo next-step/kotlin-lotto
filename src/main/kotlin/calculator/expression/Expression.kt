@@ -1,13 +1,6 @@
 package calculator.expression
 
-class Expression private constructor(input: String?) {
-
-    val numbers: List<Int>
-    init {
-        val delimiterDetector = DelimiterDetector(input)
-        val numberParser = NumberParser(delimiterDetector.stringInput, delimiterDetector.delimiter)
-        numbers = numberParser.numbers
-    }
+class Expression private constructor(val numbers: List<Int>) {
 
     fun sum(): Int {
         return numbers.sum()
@@ -15,7 +8,9 @@ class Expression private constructor(input: String?) {
 
     companion object {
         fun of(input: String?): Expression {
-            return Expression(input)
+            val delimiterDetector = DelimiterDetector.from(input)
+            val numberParser = NumberParser.of(delimiterDetector.stringInput, delimiterDetector.delimiter)
+            return Expression(numberParser.numbers)
         }
     }
 }
