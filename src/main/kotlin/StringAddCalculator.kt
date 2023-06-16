@@ -29,9 +29,17 @@ class StringAddCalculator {
         return text.substring(text.indexOf(CUSTOM_DELIMITER_END_FLAG) + CUSTOM_DELIMITER_END_FLAG.length)
     }
 
-    private fun calculate(text: String, delimiters: List<String> ): Int {
-        val numStringList = text.split(*delimiters.toTypedArray())
-        return numStringList.sumOf { numberConverter(it) }
+    private fun calculate(text: String, delimiters: List<String>): Int {
+        val numStringList = splitString(text, delimiters)
+        return calculateSum(numStringList)
+    }
+
+    private fun splitString(text: String, delimiters: List<String>): List<String> {
+        return text.split(*delimiters.toTypedArray())
+    }
+
+    private fun calculateSum(text: List<String>): Int {
+        return text.sumOf { numberConverter(it) }
     }
 
     private fun numberConverter(text: String): Int {
