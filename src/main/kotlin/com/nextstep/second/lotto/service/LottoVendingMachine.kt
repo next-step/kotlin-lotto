@@ -5,7 +5,6 @@ import com.nextstep.second.lotto.domain.Lotto
 import com.nextstep.second.lotto.domain.LottoResultVo
 
 const val LOTTO_COST = 1000
-const val LOTTO_WINNER_SAME_NUMBER = 3
 object LottoVendingMachine {
     fun buyLottoInRandom(money: Int): List<Lotto> {
         val cnt = money / LOTTO_COST

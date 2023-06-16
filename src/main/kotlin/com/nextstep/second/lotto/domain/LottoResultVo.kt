@@ -4,7 +4,7 @@ class LottoResultVo(
     winnerLottoNumber: Lotto,
     lottoNumbers: List<Lotto>
 ) {
-    val matchedNumberCounts: Map<Int, Int>
+    private val matchedNumberCounts: Map<Int, Int>
 
     init {
         matchedNumberCounts = mutableMapOf()
