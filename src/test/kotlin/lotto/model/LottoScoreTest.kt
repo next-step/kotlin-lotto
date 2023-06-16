@@ -2,9 +2,11 @@ package lotto.model
 
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.core.Tuple3
 import io.kotest.core.spec.DisplayName
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
+import io.kotest.matchers.comparables.shouldBeEqualComparingTo
 import io.kotest.matchers.shouldBe
 import java.math.BigDecimal
 
@@ -40,9 +42,16 @@ class LottoScoreTest : StringSpec({
     }
 
     "수익률 조회" {
-        // given
-        val lottoScore = LottoScore(listOf(LottoRank.FIRST, LottoRank.SECOND), 2000)
-        // when & then
-        lottoScore.ratio shouldBe BigDecimal(1_015_000)
+        listOf(
+            Tuple3(listOf(LottoRank.FIRST, LottoRank.SECOND), 2_000L, BigDecimal.valueOf(1_015_000)),
+            Tuple3(listOf(LottoRank.FOURTH, LottoRank.FIFTH), 500_000L, BigDecimal.valueOf(0.11)),
+            Tuple3(listOf(LottoRank.MISS), 10_000L, BigDecimal.valueOf(0)),
+            Tuple3(listOf(LottoRank.FIFTH), 14_000L, BigDecimal.valueOf(0.36)),
+        ).forAll {
+            // given
+            val lottoScore = LottoScore(it.a, it.b)
+            // when & then
+            lottoScore.ratio shouldBeEqualComparingTo it.c
+        }
     }
 })
