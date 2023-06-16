@@ -14,7 +14,7 @@ class LottoInputView {
             .map { it.trim().toIntOrNull() ?: 0 }
             .sorted()
             .toList()
-        return WinningLottoNumber(LottoNumber(numbers))
+        return WinningLottoNumber(LottoNumber(numbers), 1)
     }
 
     companion object {

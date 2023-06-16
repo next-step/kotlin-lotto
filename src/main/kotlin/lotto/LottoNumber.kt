@@ -12,11 +12,6 @@ value class LottoNumber(
         }
     }
 
-    fun getRanking(winLottoNumber: LottoNumber): LottoRanking {
-        val matchCount = this.count { winLottoNumber.contains(it) }
-        return LottoRanking.getRankingByMatchCount(matchCount)
-    }
-
     companion object {
         private const val LOTTO_START_NUMBER = 1
         private const val LOTTO_END_NUMBER = 45
