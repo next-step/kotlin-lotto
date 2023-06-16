@@ -2,63 +2,27 @@ package lotto.domain
 
 object LottoMachine {
 
-    private val LOTTO_RANGE_NUMBERS = (1..45).map { it }
-    private const val LOTTO_NUMBER = 6
-    private const val LOTTO_PRICE = 1000
+    const val MINIMIUM_LOTTO_NUMBER = 1
+    const val MAXIMIUM_LOTTO_NUMBER = 45
 
-    const val LOTTO_WINNER_THREE = 5000
-    const val LOTTO_WINNER_FOUR = 50000
-    const val LOTTO_WINNER_FIVE = 1500000
-    const val LOTTO_WINNER_SIX = 2000000000
-
-    var lottoCount = 0
-        private set
-
-    var buyedLottoes = mutableListOf<List<Int>>()
-        private set
-
-    var threeCorrect = 0
-        private set
-
-    var fourCorrect = 0
-        private set
-
-    var fiveCorrect = 0
-        private set
-
-    var sixCorrect = 0
-        private set
+    private lateinit var buyedLottoes: LottoNumbers
+    private lateinit var winNumber: LottoWinNumber
+    private lateinit var ranking: Ranking
+    private var buyAmount: Int = 0
 
     var rateOfReturn = 0.0
         private set
+        get() = ranking.totalWinAmount.toDouble() / buyAmount.toDouble()
 
-    private var myAmount = 0
-
-    private val totalWinAmount: Int
-        get() = LOTTO_WINNER_THREE * threeCorrect + LOTTO_WINNER_FOUR * fourCorrect + LOTTO_WINNER_FOUR * fourCorrect + LOTTO_WINNER_FIVE * fiveCorrect + LOTTO_WINNER_SIX * sixCorrect
-
-    fun buyLotto(amount: Int) {
-        myAmount = amount
-        lottoCount = amount / LOTTO_PRICE
-
-        repeat(lottoCount) {
-            buyedLottoes.add(LOTTO_RANGE_NUMBERS.shuffled().take(LOTTO_NUMBER).sorted())
-        }
+    fun buyLottoes(amuont: Int): LottoNumbers {
+        buyAmount = amuont
+        buyedLottoes = LottoBuyHelper.buyLotto(buyAmount)
+        return buyedLottoes
     }
 
-    fun setWinNumbers(winNumbers: List<Int>) {
-        buyedLottoes.forEach {
-            checkWinNumber(it, winNumbers)
-        }
-        rateOfReturn = totalWinAmount.toDouble() / myAmount.toDouble()
-    }
-
-    private fun checkWinNumber(buyedLotto: List<Int>, winNumbers: List<Int>) {
-        when (buyedLotto.filter { it in winNumbers }.size) {
-            3 -> threeCorrect++
-            4 -> fourCorrect++
-            5 -> fiveCorrect++
-            6 -> sixCorrect++
-        }
+    fun setRanking(winNumbers: List<Int>): Ranking {
+        winNumber = LottoWinNumber(winNumbers)
+        ranking = Ranking(buyedLottoes, winNumber)
+        return ranking
     }
 }
