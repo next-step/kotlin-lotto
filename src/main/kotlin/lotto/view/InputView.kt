@@ -16,6 +16,24 @@ object InputView {
         return value
     }
 
+    fun receiveWinningNumbers(): LottoNumbers {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+
+        var lottoNumbers: LottoNumbers?
+
+        do {
+            val input = receiveString()
+
+            lottoNumbers = try {
+                LottoNumbers.from(input)
+            } catch (e: Exception) {
+                null
+            }
+        } while (lottoNumbers == null)
+
+        return lottoNumbers
+    }
+
     private fun receiveString(): String {
         var input: String? = null
 
