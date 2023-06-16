@@ -33,13 +33,4 @@ class LottoGeneratorTest : BehaviorSpec({
             }
         }
     }
-
-    given("주어진 조건이 없어도") {
-        `when`("로또를 생성하면") {
-            then("정상적으로 로또가 생성된다") {
-                val lotto = LottoGenerator.generateLotto()
-                lotto.numbers.distinct().count() shouldBe Lotto.LOTTO_NUMBER_SIZE
-            }
-        }
-    }
 })
