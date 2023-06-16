@@ -13,6 +13,15 @@ enum class Prize(
     ;
 
     companion object {
+        fun calculateTotalPrizeAmount(lottos: Lottos, winningLotto: Lotto): BigDecimal {
+            return values()
+                .map {
+                    val winningLottoCount = lottos.getWinningLottoCountByMatchCount(winningLotto, it.matchedCount)
+                    val prizeAmount = it.prizeAmount.multiply(winningLottoCount.toBigDecimal())
+                    prizeAmount
+                }.sumOf { it }
+        }
+
         fun getWinningLottoCountsByPrize(lottos: Lottos, winningLotto: Lotto): Map<Prize, Int> {
             return values()
                 .reversed()

@@ -11,16 +11,9 @@ class Lottos(
     }
 
     fun getTotalProfitRate(winningLotto: Lotto): BigDecimal {
-        val totalPrizeAmount = Prize.values()
-            .map {
-                val winningLottoCount = getWinningLottoCountByMatchCount(winningLotto, it.matchedCount)
-                val prizeAmount = it.prizeAmount.multiply(winningLottoCount.toBigDecimal())
-                prizeAmount
-            }.sumOf { it }
+        val totalPrizeAmount = Prize.calculateTotalPrizeAmount(this, winningLotto)
         val purchaseAmount = LOTTO_PRICE * lottos.size
-
-        return totalPrizeAmount
-            .divide(purchaseAmount.toBigDecimal(), ROUND_SCALE, RoundingMode.HALF_UP)
+        return totalPrizeAmount.divide(purchaseAmount.toBigDecimal(), ROUND_SCALE, RoundingMode.HALF_UP)
     }
 
     companion object {
