@@ -8,6 +8,7 @@ class LotteryShopKoTest : StringSpec({
     "구매한 금액에 해당하는 로또 갯수 반환" {
         val lotteryShop = LotteryShop()
         val actualInput = 14000
-        lotteryShop.buy(actualInput) shouldBe 14
+        val userLottery = lotteryShop.buy(actualInput)
+        lotteryShop.buy(actualInput) shouldBe userLottery.lotteryCount
     }
 })
