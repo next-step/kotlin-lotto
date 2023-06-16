@@ -11,8 +11,6 @@ data class LottoTicket(val lotto: Lotto, private val ticketType: TicketType) {
     }
 
     companion object {
-        const val SIZE: Int = 6
-
         val Collection<LottoTicket>.manualSize: Int get() = count { it.ticketType == TicketType.MANUAL }
         val Collection<LottoTicket>.automaticSize: Int get() = count { it.ticketType == TicketType.AUTOMATIC }
     }
