@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
@@ -25,7 +26,7 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generateTestData")
+    @CsvSource(value = ["1,2=3", "1,2,3,4,5,6,7,8,9,10=55", "0,0,0=0"], delimiter = '=')
     fun `숫자 두개를 쉼표 구분자로 입력할 경우 두 숫자의 합을 반환한다`(text: String, expect: Int) {
         StringAddCalculator.add(text) shouldBe expect
     }
@@ -46,17 +47,5 @@ class StringAddCalculatorTest {
     @Test
     fun `문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다`() {
         shouldThrow<RuntimeException> { StringAddCalculator.add("-1") }
-    }
-
-    companion object {
-        @JvmStatic
-        fun generateTestData(): Stream<Arguments> {
-            return Stream.of(
-                // input text, output expect result
-                Arguments.of("1,2", 3),
-                Arguments.of("1,2,3,4,5,6,7,8,9,10", 55),
-                Arguments.of("0,0,0", 0),
-            )
-        }
     }
 }
