@@ -22,13 +22,7 @@ class StringAddCalculator {
         val endIndex = text.indexOf(CUSTOM_DELIMITER_END_FLAG, startIndex)
         return text.substring(startIndex, endIndex)
             .map{ it.toString() }
-            .onEach { char ->
-                runCatching {
-                    require(!char.equals(MINUS_OPERATOR)) { }
-                }.getOrElse {
-                    throw RuntimeException(it)
-                }
-            }
+            .onEach { char -> require(char != MINUS_OPERATOR) }
     }
 
     private fun getTrimmedText(text: String): String {
