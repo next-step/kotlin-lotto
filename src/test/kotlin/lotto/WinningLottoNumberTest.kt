@@ -13,7 +13,7 @@ class WinningLottoNumberTest {
 
         val result = winLottoNumber.makeRankingCountMap(lottoNumbers)
 
-        result[LottoRanking.ONE_ST] shouldBe 1
+        result[LottoRanking.FIRST_ST] shouldBe 1
         result[LottoRanking.TWO_ND] shouldBe 1
         result[LottoRanking.THREE_RD] shouldBe 1
         result[LottoRanking.FOUR_TH] shouldBe 1

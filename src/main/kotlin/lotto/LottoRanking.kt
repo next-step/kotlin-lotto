@@ -1,7 +1,7 @@
 package lotto
 
 enum class LottoRanking(val matchCount: Int, val winningAmount: Int) {
-    ONE_ST(6, 2_000_000_000),
+    FIRST_ST(6, 2_000_000_000),
     TWO_ND(5, 1_500_000),
     THREE_RD(4, 50_000),
     FOUR_TH(3, 5_000),
@@ -10,7 +10,7 @@ enum class LottoRanking(val matchCount: Int, val winningAmount: Int) {
 
     companion object {
         fun getRankingByMatchCount(matchCount: Int): LottoRanking = when (matchCount) {
-            ONE_ST.matchCount -> ONE_ST
+            FIRST_ST.matchCount -> FIRST_ST
             TWO_ND.matchCount -> TWO_ND
             THREE_RD.matchCount -> THREE_RD
             FOUR_TH.matchCount -> FOUR_TH

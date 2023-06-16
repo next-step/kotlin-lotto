@@ -41,7 +41,7 @@ class LottoNumberTest {
 
         @JvmStatic
         fun makeWinLottoNumber(): List<Arguments> = listOf(
-            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((1..6).toList()), LottoRanking.ONE_ST),
+            Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((1..6).toList()), LottoRanking.FIRST_ST),
             Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((2..7).toList()), LottoRanking.TWO_ND),
             Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((3..8).toList()), LottoRanking.THREE_RD),
             Arguments.of(LottoNumber(DEFAULT_LOTTO_NUMBER), LottoNumber((4..9).toList()), LottoRanking.FOUR_TH),

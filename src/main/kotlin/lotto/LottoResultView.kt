@@ -32,6 +32,6 @@ class LottoResultView {
 
     companion object {
         private val RANKING_PRINT_ORDER =
-            listOf(LottoRanking.FOUR_TH, LottoRanking.THREE_RD, LottoRanking.TWO_ND, LottoRanking.ONE_ST)
+            listOf(LottoRanking.FOUR_TH, LottoRanking.THREE_RD, LottoRanking.TWO_ND, LottoRanking.FIRST_ST)
     }
 }
