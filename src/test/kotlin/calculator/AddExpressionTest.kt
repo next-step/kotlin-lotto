@@ -8,7 +8,7 @@ class AddExpressionTest {
     @Test
     fun `AddExpression은 생성 시 입력한 text를 Int List로 파싱한다`() {
         val addExpression = AddExpression("1,2,3")
-        addExpression.getNumbers() shouldBe listOf(1, 2, 3)
+        addExpression.numbers shouldBe Numbers(listOf(1, 2, 3))
     }
 
     @Test

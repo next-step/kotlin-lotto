@@ -1,7 +1,7 @@
 package calculator
 
 class AddExpression(text: String) {
-    private val numbers: Numbers
+    val numbers: Numbers
 
     init {
         val delimiter = extractCustomDelimiter(text)
