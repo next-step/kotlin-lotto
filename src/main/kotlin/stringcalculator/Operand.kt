@@ -12,11 +12,11 @@ value class Operand(val value: Int) {
     }
 
     companion object {
-        private val DEFAULT_OPERAND = Operand(0)
+        val ZERO = Operand(0)
         fun of(input: String): Operand {
             val value = input.trim()
             if (value.isEmpty()) {
-                return DEFAULT_OPERAND
+                return ZERO
             }
             return Operand(value.toInt())
         }

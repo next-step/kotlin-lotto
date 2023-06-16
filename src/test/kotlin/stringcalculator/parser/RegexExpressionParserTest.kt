@@ -46,7 +46,6 @@ class RegexExpressionParserTest : StringSpec({
             )
         }
     }
-
 })
 
 private fun testRegexExpressionParser(input: String, result: List<Int>) {
