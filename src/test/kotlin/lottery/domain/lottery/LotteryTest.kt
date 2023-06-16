@@ -88,6 +88,24 @@ class LotteryTest : FunSpec({
         }
     }
 
+    context("containsLotteryNumber") {
+        test("포함되어있다면 true를 반환한다") {
+            val lottery = LOTTERY_1_6
+            val givenLotteryNumber = LOTTERY_NUMBER_1
+
+            val actual = lottery.containsLotteryNumber(givenLotteryNumber)
+            actual shouldBe true
+        }
+
+        test("포함되어있지 않다면 false를 반환한다") {
+            val lottery = LOTTERY_1_6
+            val givenLotteryNumber = LOTTERY_NUMBER_7
+
+            val actual = lottery.containsLotteryNumber(givenLotteryNumber)
+            actual shouldBe false
+        }
+    }
+
     context("from") {
         test("숫자 문자 list를 입력받아 Lottery를 생성한다") {
             val actual = Lottery.from(values = listOf("1", "2", "3", "4", "5", "6"))

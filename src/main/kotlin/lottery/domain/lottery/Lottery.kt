@@ -15,6 +15,8 @@ class Lottery(
 
     fun compareWinningLottery(lottery: Lottery): Rank = Rank.from(values.count { lottery.values.contains(it) })
 
+    fun containsLotteryNumber(lotteryNumber: LotteryNumber): Boolean = values.contains(lotteryNumber)
+
     companion object {
         const val LOTTERY_NUMBER_SIZE = 6
         val LOTTERY_COST = Money(BigDecimal(1_000))
