@@ -11,11 +11,12 @@ object OutputView {
         }
     }
 
-    fun showLottoResult(lottoResults: List<Map<LottoReward, Int>>) {
+    fun showLottoResult(lottoResults: Map<LottoReward, Int>) {
         println("당첨 통계")
         println("---------")
-        lottoResults.forEach { it ->
-            println("${it.entries.first().key.sameNumberCnt}개 일치 (${it.entries.first().key.reward}원)- ${it.entries.first().value}개")
+        val sortedMap = lottoResults.toSortedMap(compareBy { it.sameNumberCnt })
+        sortedMap.forEach { it ->
+            println("${it.key.sameNumberCnt}개 일치 (${it.key.reward}원)- ${it.value}개")
         }
     }
 }

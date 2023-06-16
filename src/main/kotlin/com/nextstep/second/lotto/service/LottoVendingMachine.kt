@@ -6,7 +6,7 @@ import com.nextstep.second.lotto.domain.LottoResultVo
 import com.nextstep.second.lotto.domain.LottoReward
 
 const val LOTTO_COST = 1000
-
+const val LOTTO_WINNER_SAME_NUMBER = 3
 object LottoVendingMachine {
     fun buyLottoInRandom(money: Int): List<Lotto> {
         val cnt = money / LOTTO_COST
@@ -17,21 +17,18 @@ object LottoVendingMachine {
         return Lotto(numbers)
     }
 
-    fun checkThisWeekLottoResult(winnerLotto: Lotto, myLotto: List<Lotto>): List<LottoResultVo> {
-        return myLotto.map {
-            LottoResultVo(winnerLotto, it)
+    fun checkThisWeekLottoResult(winnerLotto: Lotto, myLottos: List<Lotto>): List<LottoResultVo> {
+        return myLottos.map { lotto ->
+            LottoResultVo(winnerLotto, lotto)
         }
     }
 
-    fun filterForDashBoard(lottoResults: List<LottoResultVo>): List<Map<LottoReward, Int>> {
-        val filteredResult = lottoResults.groupBy { it.sameNumberCount }
+    fun filterForDashBoard(lottoResults: List<LottoResultVo>): Map<LottoReward, Int> {
+        return lottoResults.filter {
+            it.sameNumberCount >= LOTTO_WINNER_SAME_NUMBER
+        }.groupBy { it.sameNumberCount }
             .mapValues { it.value.size }
-            .entries
-            .filter { it.key >= 3 }
-            .sortedBy { it.key }
-
-        return filteredResult.map { it ->
-            mapOf(LottoReward.of(it.key) to it.value)
-        }
+            .map { LottoReward.of(it.key) to it.value }
+            .toMap()
     }
 }
