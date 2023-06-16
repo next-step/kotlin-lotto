@@ -3,7 +3,18 @@ package lotto.view
 import lotto.LottoNumbers
 
 object InputView {
-    fun receivePurchaseAmount(): Int {
+    private const val GAME_COST = 1000
+
+    fun receiveGameCount(): Int {
+        val purchaseAmount = receivePurchaseAmount()
+        val gameCount = purchaseAmount % GAME_COST
+
+        println("${gameCount}개를 구매했습니다.")
+
+        return gameCount
+    }
+
+    private fun receivePurchaseAmount(): Int {
         println("구입 금액을 입력해 주세요.")
 
         var value: Int?
