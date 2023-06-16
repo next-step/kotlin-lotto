@@ -1,41 +1,19 @@
 package lotto.model
 
-class LottoTicket(numbers: Set<LottoNumber>) {
+data class LottoTicket(val lotto: Lotto, private val ticketType: TicketType) {
 
-    val numbers: Set<LottoNumber> = numbers.toSet()
-
-    init {
-        require(numbers.size == SIZE) {
-            "lottoTicket must be $SIZE numbers. but provided numbers(`$numbers`)"
-        }
-    }
-
-    infix fun matchedCountBy(other: LottoTicket): Int {
-        return numbers.count { other.numbers.contains(it) }
+    infix fun matchedCountBy(target: Lotto): Int {
+        return lotto matchedCountBy target
     }
 
     operator fun contains(number: LottoNumber): Boolean {
-        return number in numbers
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as LottoTicket
-
-        return numbers == other.numbers
-    }
-
-    override fun hashCode(): Int {
-        return numbers.hashCode()
-    }
-
-    override fun toString(): String {
-        return "LottoTicket(numbers=$numbers)"
+        return number in lotto
     }
 
     companion object {
         const val SIZE: Int = 6
+
+        val Collection<LottoTicket>.manualSize: Int get() = count { it.ticketType == TicketType.MANUAL }
+        val Collection<LottoTicket>.automaticSize: Int get() = count { it.ticketType == TicketType.AUTOMATIC }
     }
 }

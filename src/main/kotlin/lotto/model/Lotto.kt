@@ -1,6 +1,8 @@
 package lotto.model
 
-data class Lotto(val numbers: Set<LottoNumber>) {
+class Lotto(numbers: Set<LottoNumber>) {
+
+    val numbers: Set<LottoNumber> = numbers.toSet()
 
     init {
         require(numbers.size == SIZE) {
