@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
+import lotto.domain.LottoStatistics
 
 class ResultView {
     fun printPurchaseAmount(amount: Int) {
@@ -12,12 +13,12 @@ class ResultView {
         lottos.forEach { printLotto(it) }
     }
 
-    fun printWinningStatistics(countsMap: Map<Int, Int>) {
+    fun printWinningStatistics(lottoStatistics: LottoStatistics) {
         println("\n당첨 통계")
         println("---------")
 
         LottoPrizes.values().forEach { prize ->
-            val equalCount = countsMap.getOrDefault(prize.equalCount, 0)
+            val equalCount = lottoStatistics.getEqualCount(prize.equalCount)
             val prizeMoney = LottoPrizes.getMoney(prize.equalCount)
             println("${prize.equalCount}개 일치 (${prizeMoney}원)- ${equalCount}개")
         }

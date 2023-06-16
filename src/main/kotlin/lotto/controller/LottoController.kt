@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
 import lotto.domain.LottoPurchase
+import lotto.domain.LottoStatistics
 import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -31,19 +32,10 @@ class LottoController {
     }
 
     private fun showWinningResult(budget: Int, lottos: List<Lotto>, winningLotto: WinningLotto) {
-        val countsMap = mutableMapOf<Int, Int>()
-        var totalPrizes = 0
+        val statistics = LottoStatistics(lottos, winningLotto)
 
-        lottos.forEach {
-            val equalCount = winningLotto.checkEqualCount(it.numbers)
-            countsMap[equalCount] = countsMap.getOrDefault(equalCount, 0) + 1
-
-            val prize = LottoPrizes.getMoney(equalCount)
-            totalPrizes += prize
-        }
-
-        resultView.printWinningStatistics(countsMap)
-        resultView.printRateOfReturn(budget, totalPrizes)
+        resultView.printWinningStatistics(statistics)
+        resultView.printRateOfReturn(budget, statistics.totalPrizes)
     }
 }
 
