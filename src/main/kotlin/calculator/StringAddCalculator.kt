@@ -7,7 +7,6 @@ object StringAddCalculator {
         }
 
         val addExpression = AddExpression(text)
-        val numbers = Numbers(addExpression.getNumbers())
-        return numbers.sum()
+        return addExpression.sum()
     }
 }

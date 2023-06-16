@@ -1,16 +1,16 @@
 package calculator
 
 class AddExpression(text: String) {
-    private val numbers: List<Int>
+    private val numbers: Numbers
 
     init {
         val delimiter = extractCustomDelimiter(text) ?: DEFAULT_DELIMITER
         val expression = extractExpression(text) ?: text
-        numbers = expression.split(delimiter.toRegex()).map { it.toInt() }
+        numbers = Numbers(expression.split(delimiter.toRegex()).map { it.toInt() })
     }
 
-    fun getNumbers(): List<Int> {
-        return numbers
+    fun sum(): Int {
+        return numbers.sum()
     }
 
     private fun extractCustomDelimiter(text: String): String? {
