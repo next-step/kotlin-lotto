@@ -1,0 +1,28 @@
+package lotto.view
+
+import lotto.LottoNumbers
+
+object InputView {
+    fun receivePurchaseAmount(): Int {
+        println("구입 금액을 입력해 주세요.")
+
+        var value: Int?
+
+        do {
+            val input = receiveString()
+            value = input.toIntOrNull()
+        } while (value == null || value < 1000)
+
+        return value
+    }
+
+    private fun receiveString(): String {
+        var input: String? = null
+
+        do {
+            input = readlnOrNull()
+        } while (input.isNullOrBlank())
+
+        return input
+    }
+}
