@@ -2,8 +2,8 @@ package lotto.domain
 
 class LottoStatistics(
     lottos: List<Lotto>,
-    private val winningLotto: WinningLotto
-){
+    private val winningLotto: Lotto
+) {
     private val countsMap = mutableMapOf<Int, Int>()
 
     var totalPrizes = 0
@@ -11,7 +11,7 @@ class LottoStatistics(
 
     init {
         lottos.forEach {
-            val equalCount = winningLotto.checkEqualCount(it.numbers)
+            val equalCount = winningLotto.checkEqualCount(it)
             countsMap[equalCount] = countsMap.getOrDefault(equalCount, 0) + 1
 
             val prize = LottoPrizes.getMoney(equalCount)

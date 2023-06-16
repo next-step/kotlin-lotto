@@ -3,7 +3,9 @@ package lotto.domain
 class LottoPurchase {
     private val lottoMaker = LottoMaker()
 
-    fun purchaseAuto(amount: Int): List<Lotto> {
+    fun purchaseAuto(budget: Int, priceOfLotto: Int): List<Lotto> {
+        val amount = affordableLottoCount(budget, priceOfLotto)
+
         val result = mutableListOf<Lotto>()
         repeat(amount) {
             result.add(lottoMaker.auto())
@@ -11,11 +13,11 @@ class LottoPurchase {
         return result
     }
 
+    fun affordableLottoCount(budget: Int, priceOfLotto: Int): Int {
+        return budget / priceOfLotto
+    }
+
     companion object {
         const val DEFAULT_PRICE: Int = 1000
-
-        fun affordableLottoCount(budget: Int): Int {
-            return budget / DEFAULT_PRICE
-        }
     }
 }
