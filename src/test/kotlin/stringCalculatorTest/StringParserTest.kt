@@ -2,6 +2,7 @@ package stringCalculatorTest
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import stringCalculator.StringParser
 
 class StringParserTest {
     @Test
