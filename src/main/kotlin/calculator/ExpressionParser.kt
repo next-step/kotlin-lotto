@@ -1,19 +1,26 @@
 package calculator
 
 class ExpressionParser() {
-    fun isExistCustomDelimiter(inputString: String): MatchResult? {
-        val temp = Regex("//(.)\n(.*)").find(inputString)
-        println(temp)
-        return temp
+
+    fun parseInputData(inputString: String): List<String> {
+        return isExistCustomDelimiter(inputString)?.let {
+            parseCustomDelimiter(it)
+        }?: parseDelimiter(inputString)
     }
 
-    fun parseDelimiter(inputString: String): List<String> {
+    private fun isExistCustomDelimiter(inputString: String): MatchResult? {
+        return """//(.)\\n(.*)""".toRegex().find(inputString)
+    }
+
+    private fun parseDelimiter(inputString: String): List<String> {
         return inputString.split(",|:".toRegex())
     }
 
-    fun parseCustomDelimiter(matchResult: MatchResult): List<String> {
+
+    private fun parseCustomDelimiter(matchResult: MatchResult): List<String> {
         val customDelimiter = matchResult.groupValues[FIND_DELIMITER_INDEX]
-        return matchResult.groupValues[TARGET_DATA_INDEX].split(customDelimiter)
+        val temp = matchResult.groupValues[TARGET_DATA_INDEX].split(customDelimiter)
+        return temp
     }
 
     fun checkNullOrEmpty(inputString: String): String {
