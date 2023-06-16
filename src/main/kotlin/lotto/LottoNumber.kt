@@ -8,7 +8,7 @@ data class LottoNumber(val number: Int) {
     companion object {
         const val MAX = 45
         const val MIN = 1
-        val LOTTO_NUMBER_RANGE = (MIN..MAX)
+        val LOTTO_NUMBER_RANGE: IntRange = (MIN..MAX)
         const val LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE = "$MIN 에서 $MAX 사이의 숫자만 가능합니다."
     }
 }

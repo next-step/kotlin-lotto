@@ -10,8 +10,8 @@ import org.junit.jupiter.params.provider.CsvSource
 class LottoNumbersTest {
     @Test
     fun `로또 번호에 중복이 있으면 예외가 발생한다`() {
-        val numbers = listOf(1, 2, 3, 4, 5, 5).map { LottoNumber(it) }
-        shouldThrow<IllegalArgumentException> { LottoNumbers(numbers) }
+        val numbers = listOf(1, 2, 3, 4, 5, 5)
+        shouldThrow<IllegalArgumentException> { LottoNumbers.from(numbers) }
             .shouldHaveMessage(LottoNumbers.LOTTO_NUMBERS_DUPLICATE_MESSAGE)
     }
 
