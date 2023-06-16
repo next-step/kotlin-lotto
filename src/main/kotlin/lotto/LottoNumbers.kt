@@ -11,7 +11,7 @@ class LottoNumbers(numbers: List<LottoNumber>) {
         val hasDuplicateNumber = numbers.size != numbers.distinct().size
         require(!hasDuplicateNumber) { LOTTO_NUMBERS_DUPLICATE_MESSAGE }
 
-        this.numbers = numbers
+        this.numbers = numbers.sortedBy { it.number }
     }
 
     companion object {

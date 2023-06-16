@@ -27,4 +27,11 @@ class LottoNumbersTest {
     fun `쉼표로 구분된 1~45 사이의 숫자 6개가 포함된 문자열이 아니면 예외가 발생한다`(text: String) {
         shouldThrow<IllegalArgumentException> { LottoNumbers.from(text) }
     }
+
+    @Test
+    fun `생성된 LottoNumbers의 숫자는 오름차순으로 정렬된다`() {
+        val text = "1, 6, 3, 2, 5, 4"
+        val lottoNumbers = LottoNumbers.from(text)
+        lottoNumbers.numbers shouldBe List(LottoNumbers.SIZE) { LottoNumber(it + 1) }
+    }
 }
