@@ -13,9 +13,7 @@ class DelimiterManager {
 
     fun getCustomDelimiter(input: String): String? {
         val result = Regex("//(.)\n(.*)").find(input)
-        return result?.let {
-            return it.groupValues[1]
-        }
+        return result?.groupValues?.get(1)
     }
 
     companion object {
