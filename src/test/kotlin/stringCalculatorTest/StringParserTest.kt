@@ -10,7 +10,7 @@ class StringParserTest {
     fun `쉼표 또는 구분자로 문자열을 분리한다`() {
         val inputString = "1:5,9"
         val stringParser = StringParser()
-        stringParser.parse(inputString) shouldBe listOf("1","5","9")
+        stringParser.parse(inputString) shouldBe listOf("1", "5", "9")
     }
 
     @Test
@@ -18,6 +18,6 @@ class StringParserTest {
     fun `조건에 맞는 커스텀 구분자를 추가할 수 있다`() {
         val inputString = "//???\n1:5,9???10"
         val stringParser = StringParser()
-        stringParser.parse(inputString) shouldBe listOf("1","5","9","10")
+        stringParser.parse(inputString) shouldBe listOf("1", "5", "9", "10")
     }
 }
