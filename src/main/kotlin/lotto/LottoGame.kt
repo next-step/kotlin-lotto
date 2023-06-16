@@ -1,8 +1,9 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoChecker
 import lotto.domain.LottoGenerator
+import lotto.domain.Lottos
+import lotto.domain.WinNumbers
 import lotto.io.InputView
 import lotto.io.ResultView
 
@@ -11,17 +12,22 @@ object LottoGame {
     fun start() {
         val lottos = getLottos()
         ResultView.printLottos(lottos)
-        val winNumber = InputView.getWinNumbers()
+        val winNumber = getWinNumbers()
         printResult(winNumber, lottos)
     }
 
-    private fun getLottos(): List<Lotto> {
+    private fun getWinNumbers(): WinNumbers {
+        val winNumbers = InputView.getWinNumbers()
+        return WinNumbers(winNumbers)
+    }
+
+    private fun getLottos(): Lottos {
         val amount = InputView.getAmount()
         return LottoGenerator.generateLottos(amount)
     }
 
-    private fun printResult(winNumber: List<Int>, lottos: List<Lotto>) {
-        val result = LottoChecker.checkResult(lottos, winNumber)
-        ResultView.printResult(result, lottos.size * Lotto.LOTTO_PRICE)
+    private fun printResult(winNumbers: WinNumbers, lottos: Lottos) {
+        val result = LottoChecker.checkResult(lottos, winNumbers)
+        ResultView.printResult(result)
     }
 }

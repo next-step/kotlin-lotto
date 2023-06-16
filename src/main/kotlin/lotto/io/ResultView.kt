@@ -1,7 +1,7 @@
 package lotto.io
 
-import lotto.domain.Lotto
-import lotto.domain.WinningPrize
+import lotto.domain.LottoResults
+import lotto.domain.Lottos
 
 object ResultView {
     private const val LOTTO_COUNT_MESSAGE = "%d개 구매했습니다"
@@ -9,21 +9,18 @@ object ResultView {
     private const val TOTAL_PRIZE_MESSAGE = "총 수익률은 %.2f입니다"
     private const val RESULT_MESSAGE = "\n당첨 통계\n---------"
 
-    fun printLottos(lottos: List<Lotto>) {
+    fun printLottos(lottos: Lottos) {
         println(LOTTO_COUNT_MESSAGE.format(lottos.size))
         lottos.forEach { lotto -> println(lotto) }
         println()
     }
 
-    fun printResult(result: Map<WinningPrize, Int>, purchaseAmount: Int) {
+    fun printResult(results: LottoResults) {
         println(RESULT_MESSAGE)
-        var total = 0L
-        for (winningAmount in WinningPrize.values()) {
-            val count = result.getOrDefault(winningAmount, 0)
-            total += winningAmount.prize * count
-            println(WINNING_PRIZE_MESSAGE.format(winningAmount.count, winningAmount.prize, count))
+        for (result in results) {
+            println(WINNING_PRIZE_MESSAGE.format(result.matchCount, result.prize, result.count))
         }
 
-        println(TOTAL_PRIZE_MESSAGE.format(total.toDouble() / purchaseAmount))
+        println(TOTAL_PRIZE_MESSAGE.format(results.rateOfReturn))
     }
 }
