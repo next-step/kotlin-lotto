@@ -12,10 +12,8 @@ value class LottoNumber(private val number: Int) {
     }
 
     constructor(numberText: String) : this(
-        number = requireNotNull(
-            value = numberText.trim()
-                .toIntOrNull(),
-        ) { LottoErrorCode.INVALID_INPUT_NUMBER.message(numberText) }
+        number = numberText.trim()
+            .toInt(),
     )
 
     override fun toString(): String = number.toString()

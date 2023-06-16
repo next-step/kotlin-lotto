@@ -5,11 +5,15 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.mockLottery
+import lotto.mockWinningLottery
 
 class LottoResultTest : DescribeSpec({
 
     describe(name = "로또 결과를 구매 주문과 당첨 복권으로 생성할 수 있다.") {
-        val winningLottery = mockLottery(1, 2, 3, 4, 5, 6)
+        val winningLottery = mockWinningLottery(
+            bonusBall = LottoNumber(number = 8),
+            1, 2, 3, 4, 5, 6,
+        )
 
         forAll(
             row(
@@ -19,9 +23,10 @@ class LottoResultTest : DescribeSpec({
                 ),
                 LottoRank.FIRST,
             ),
-            row(listOf(mockLottery(1, 2, 3, 4, 5, 7)), LottoRank.SECOND),
-            row(listOf(mockLottery(1, 2, 3, 4, 15, 7)), LottoRank.THIRD),
-            row(listOf(mockLottery(1, 2, 3, 24, 15, 7)), LottoRank.FOURTH),
+            row(listOf(mockLottery(1, 2, 3, 4, 5, 8)), LottoRank.SECOND),
+            row(listOf(mockLottery(1, 2, 3, 4, 5, 7)), LottoRank.THIRD),
+            row(listOf(mockLottery(1, 2, 3, 4, 15, 7)), LottoRank.FOUR),
+            row(listOf(mockLottery(1, 2, 3, 24, 15, 7)), LottoRank.FIVE),
         ) { purchasedLotteries, lottoRank ->
             context(name = "1등부터 4등까지 당첨된 경우 당첨된 결과를 알 수 있다.") {
                 val lottoResult = LottoResult(
@@ -57,7 +62,10 @@ class LottoResultTest : DescribeSpec({
         val emptyLotteries = PurchasedLotteries(lotteries = emptyList())
 
         context(name = "구매한 복권이 없으면 당첨 결과가 비어있다.") {
-            val lottoResult = LottoResult(purchasedLotteries = emptyLotteries, winningLottery = winningLottery)
+            val lottoResult = LottoResult(
+                purchasedLotteries = emptyLotteries,
+                winningLottery = winningLottery,
+            )
 
             it(name = "당첨 통계가 비어 있다.") {
                 LottoRank.values()

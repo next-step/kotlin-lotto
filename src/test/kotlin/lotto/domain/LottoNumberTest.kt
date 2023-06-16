@@ -57,16 +57,12 @@ class LottoNumberTest : DescribeSpec({
         }
 
         forAll(
-            row("안돼", "안돼"),
-            row("  ", "  "),
-        ) { text, expect ->
-            context(name = "숫자가 아닌 문자열로 생성하면") {
-                val exception = shouldThrow<IllegalArgumentException> {
+            row("안돼"),
+            row("  "),
+        ) { text ->
+            it(name = "숫자가 아닌 문자열로 생성하면 NumberFormatException 예외가 발생한다.") {
+                shouldThrow<NumberFormatException> {
                     LottoNumber(numberText = text)
-                }
-
-                it(name = "로또 번호 범위 안에 번호로 생성하라는 에러가 발생한다.") {
-                    exception shouldHaveMessage LottoErrorCode.INVALID_INPUT_NUMBER.message(expect)
                 }
             }
         }

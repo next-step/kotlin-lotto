@@ -12,7 +12,7 @@ class LotteryGeneratorTest : StringSpec({
 
         repeat(times = 10) {
             val generateLottery = LotteryGenerator.draw()
-                .map { it }
+                .lottoNumbers
 
             generateLottery shouldContainAnyOf lottoNumbers
         }

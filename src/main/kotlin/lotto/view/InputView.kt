@@ -8,6 +8,8 @@ object InputView {
         반점으로 구분 지어 지난 주 당첨 번호를 입력해 주세요. (ex. 1, 2, 3)
     """.trimIndent()
 
+    private const val ENTER_BONUS_BALL = "보너스 볼을 입력해 주세요."
+
     fun readPurchaseAmount(): String {
         println(message = ENTER_THE_PURCHASE_AMOUNT)
         return readln()
@@ -15,6 +17,11 @@ object InputView {
 
     fun readLastWeekWinningNumbers(): String {
         println(message = ENTER_LAST_WEEK_WINNING_NUMBER)
+        return readln()
+    }
+
+    fun readBonusBall(): String {
+        println(message = ENTER_BONUS_BALL)
         return readln()
     }
 }
