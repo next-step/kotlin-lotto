@@ -11,7 +11,7 @@ class InputParser(inputString: String) {
         require(separatorSection.startsWith(SEPARATOR_START))
         return separatorSection.substringAfter(SEPARATOR_START)
             .also {
-                require(it.isNotDigit())
+                require(it.isNotPositiveInteger())
             }
     }
 
@@ -22,7 +22,7 @@ class InputParser(inputString: String) {
             )
             .map {
                 if (it.isEmpty()) return@map 0
-                if (it.isNotDigit()) throw RuntimeException("invalid number format $it")
+                if (it.isNotPositiveInteger()) throw RuntimeException("invalid number format $it")
                 it.toInt()
             }
     }
@@ -31,7 +31,7 @@ class InputParser(inputString: String) {
         return startsWith(SEPARATOR_START) && contains(SEPARATOR_END)
     }
 
-    private fun String.isNotDigit(): Boolean {
+    private fun String.isNotPositiveInteger(): Boolean {
         val number = toIntOrNull()
         return number == null || number < 0
     }
