@@ -6,9 +6,9 @@ enum class Rank(
     val rankingMetric: (Int, Boolean) -> Boolean
 ) {
     NOTHING(0, "0,1,2", { matchCount, _ -> matchCount in 0..2 }),
-    FIFTH(5_000, "", { matchCount, _ -> matchCount == 3 }),
-    FOURTH(50_000, "3", { matchCount, _ -> matchCount == 4 }),
-    THIRD(1_500_000, "4", { matchCount, isBonus -> matchCount == 5 && isBonus.not() }),
+    FIFTH(5_000, "3", { matchCount, _ -> matchCount == 3 }),
+    FOURTH(50_000, "4", { matchCount, _ -> matchCount == 4 }),
+    THIRD(1_500_000, "5", { matchCount, isBonus -> matchCount == 5 && isBonus.not() }),
     SECOND(30_000_000, "5", { matchCount, isBonus -> matchCount == 5 && isBonus }),
     FIRST(2_000_000_000, "6", { matchCount, _ -> matchCount == 6 }),
     ;

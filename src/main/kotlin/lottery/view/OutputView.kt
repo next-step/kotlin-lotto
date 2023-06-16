@@ -20,6 +20,10 @@ fun printLottoResult(lottoResult: LottoResult) {
 }
 
 private fun printStatistic(it: Map.Entry<Rank, Int>) {
+    if (it.key == Rank.SECOND) {
+        println("${it.key.equalCount}개 일치, 보너스 볼 일치(${it.key.reward}원) - ${it.value}개")
+        return
+    }
     println("${it.key.equalCount}개 일치 (${it.key.reward}원) - ${it.value}개")
 }
 
