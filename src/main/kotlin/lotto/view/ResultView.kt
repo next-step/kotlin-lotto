@@ -40,7 +40,7 @@ class ResultView {
     }
 
     private fun printLotto(lotto: Lotto) {
-        val numbers = lotto.numbers.sorted()
+        val numbers = lotto.numbers.map { it.number }.sorted()
         println("[${numbers.joinToString(", ")}]")
     }
 }

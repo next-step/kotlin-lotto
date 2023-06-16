@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 
 class InputView {
     fun inputPurchasePrice(): Int {
@@ -10,7 +11,7 @@ class InputView {
 
     fun inputLastWeekLottoNumbers(): Lotto {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        val numbers = readln().split(NUMBERS_DELIMITER).map { it.toInt() }
+        val numbers = readln().split(NUMBERS_DELIMITER).map { it.toInt() }.map { LottoNumber(it) }
         return Lotto(numbers)
     }
 
