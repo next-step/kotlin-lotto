@@ -11,5 +11,7 @@ fun main() {
 
     val lastWinLottoNumber = lottoInputView.lastWeekWinLottoNumber
 
-    lottoResultView.printLottoStatistics(lottoNumbers = lottoNumbers, winLottoNumber = lastWinLottoNumber)
+    val rankingCountMap = lastWinLottoNumber.makeRankingCountMap(lottoNumbers)
+    val totalRevenueRate = lastWinLottoNumber.getRevenueRate(lottoNumbers)
+    lottoResultView.printLottoStatistics(rankingCountMap = rankingCountMap, totalRevenueRate = totalRevenueRate)
 }
