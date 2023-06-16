@@ -7,21 +7,19 @@ class Calculator {
     }
 
     private fun getNumbers(text: String?): List<String> = when {
-        text.isNullOrBlank() -> {
-            listOf()
-        }
-
-        text.contains(BACKSHASH) && text.contains(NEWLINE) -> {
-            val result = Regex(CUSTOM_SEPARATOR_PATTERN)
-                .findAll(text)
-                .map { it.value.trim() }
-                .toList()
-            val customDelimiter = result[0]
-            result[1].split(customDelimiter)
-        }
-
+        text.isNullOrBlank() -> listOf()
+        text.contains(BACKSHASH) && text.contains(NEWLINE) -> getNumbersByCustomSeparator(text)
         text.contains(SEPARATOR.toRegex()) -> text.split(SEPARATOR.toRegex())
         else -> throw IllegalArgumentException(SEPARATOR_EXCEPTION)
+    }
+
+    private fun getNumbersByCustomSeparator(text: String): List<String> {
+        val result = Regex(CUSTOM_SEPARATOR_PATTERN)
+            .findAll(text)
+            .map { it.value.trim() }
+            .toList()
+        val customDelimiter = result[0]
+        return result[1].split(customDelimiter)
     }
 
     private fun convertStringToPositiveInt(number: String): Int {
