@@ -1,14 +1,9 @@
 package calculator.domain
 
-class Calculator() {
-    var numbers: List<String> = listOf()
-        private set
-    var result: Int = 0
-        private set
-
-    fun calculate(text: String?) {
-        this.numbers = getNumbers(text)
-        this.result = this.numbers.sumOf { convertStringToPositiveInt(it) }
+class Calculator {
+    fun calculate(text: String?): Int {
+        val numbers = getNumbers(text)
+        return numbers.sumOf { convertStringToPositiveInt(it) }
     }
 
     private fun getNumbers(text: String?): List<String> = when {
