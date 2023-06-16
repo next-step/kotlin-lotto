@@ -2,18 +2,24 @@ package lotto
 
 class LottoInputView {
 
-    val purchaseAmount: Int by lazy {
-        println("구입금액을 입력해 주세요.")
-        readln().toIntOrNull() ?: 0
+    fun readPurchaseAmountFromConsole(message: String = DEFAULT_PURCHASE_AMOUNT_READ_MESSAGE): Int {
+        println(message)
+        return readln().toIntOrNull() ?: 0
     }
 
-    val lastWeekWinLottoNumber: WinningLottoNumber by lazy {
-        println("지난 주 당첨 번호를 입력해 주세요.")
+    fun readLastWeekWinningLottoNumberFromConsole(message: String = DEFAULT_LAST_WEEK_WINNING_NUMBER_READ_MESSAGE): WinningLottoNumber {
+        println(message)
         val input = readln()
-        val numbers = input.split(",").asSequence()
+        val numbers = input.split(DEFAULT_LAST_WEEK_WINNING_NUMBER_DELIMITER)
             .map { it.trim().toIntOrNull() ?: 0 }
             .sorted()
             .toList()
-        WinningLottoNumber(LottoNumber(numbers))
+        return WinningLottoNumber(LottoNumber(numbers))
+    }
+
+    companion object {
+        const val DEFAULT_LAST_WEEK_WINNING_NUMBER_DELIMITER = ","
+        const val DEFAULT_PURCHASE_AMOUNT_READ_MESSAGE = "구입금액을 입력해 주세요."
+        const val DEFAULT_LAST_WEEK_WINNING_NUMBER_READ_MESSAGE = "구입금액을 입력해 주세요."
     }
 }

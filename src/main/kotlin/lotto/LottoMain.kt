@@ -5,11 +5,11 @@ fun main() {
     val lottoResultView = LottoResultView()
     val lottoStore = LottoStore()
 
-    val purchaseAmount = lottoInputView.purchaseAmount
+    val purchaseAmount = lottoInputView.readPurchaseAmountFromConsole()
     val lottoNumbers = lottoStore.purchase(purchaseAmount)
     lottoResultView.printPurchasedLottoNumbers(lottoNumbers)
 
-    val lastWinLottoNumber = lottoInputView.lastWeekWinLottoNumber
+    val lastWinLottoNumber = lottoInputView.readLastWeekWinningLottoNumberFromConsole()
 
     val rankingCountMap = lastWinLottoNumber.makeRankingCountMap(lottoNumbers)
     val totalRevenueRate = lastWinLottoNumber.getRevenueRate(lottoNumbers)
