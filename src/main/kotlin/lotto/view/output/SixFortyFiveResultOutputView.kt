@@ -18,7 +18,7 @@ class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningVa
 4개 일치 (${SixFortyFiveLottoStore.LOTTO_WINNING_PRICE_MAP[4]}) - ${lottoResultList[4]}개
 5개 일치 (${SixFortyFiveLottoStore.LOTTO_WINNING_PRICE_MAP[5]}) - ${lottoResultList[5]}개
 6개 일치 (${SixFortyFiveLottoStore.LOTTO_WINNING_PRICE_MAP[6]}) - ${lottoResultList[6]}개
-총 수익률은 ${totalResultPrice / totalPurchasePrice} 입니다.
+총 수익률은 ${totalResultPrice / totalPurchasePrice.toDouble()} 입니다.
                   """
     }
 }
