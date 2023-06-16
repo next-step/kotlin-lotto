@@ -3,15 +3,14 @@ package lotto
 import lotto.LottoNumber.Companion.LOTTO_NUMBER_RANGE
 
 class LottoNumbers(numbers: List<LottoNumber>) {
-    val numbers: List<LottoNumber>
+    val numbers: Set<LottoNumber>
 
     init {
         require(numbers.size == SIZE) { LOTTO_NUMBERS_INVALID_SIZE_MESSAGE }
 
-        val hasDuplicateNumber = numbers.size != numbers.distinct().size
-        require(!hasDuplicateNumber) { LOTTO_NUMBERS_DUPLICATE_MESSAGE }
+        this.numbers = numbers.toSortedSet(compareBy(LottoNumber::number))
 
-        this.numbers = numbers.sortedBy { it.number }
+        require(this.numbers.size == numbers.size) { LOTTO_NUMBERS_DUPLICATE_MESSAGE }
     }
 
     companion object {
