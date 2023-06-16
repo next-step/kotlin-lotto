@@ -7,7 +7,7 @@ object LottoMachine {
 
     private lateinit var buyedLottoes: LottoNumbers
     private lateinit var mWinNumber: LottoNumber
-    private lateinit var ranking: Ranking
+    lateinit var ranking: Ranking
     private lateinit var mBonusNumber: BonusNumber
     private var buyAmount: Int = 0
 
@@ -21,13 +21,13 @@ object LottoMachine {
         return buyedLottoes
     }
 
-    fun getRanking(): Ranking {
-        ranking = Ranking(buyedLottoes, mWinNumber)
-        return ranking
+    private fun setRanking() {
+        ranking = Ranking(buyedLottoes, mWinNumber, mBonusNumber)
     }
 
     fun setWinNumbers(winNumber: LottoNumber, bonusNumber: BonusNumber) {
         mWinNumber = winNumber
         mBonusNumber = bonusNumber
+        setRanking()
     }
 }

@@ -12,6 +12,5 @@ fun main() {
     val bonusNumber = InputView.inputBonusNumber(winNumber)
     LottoMachine.setWinNumbers(winNumber, bonusNumber)
 
-    val ranking = LottoMachine.getRanking()
-    ResultView.showGameResult(ranking)
+    ResultView.showGameResult(LottoMachine.ranking)
 }

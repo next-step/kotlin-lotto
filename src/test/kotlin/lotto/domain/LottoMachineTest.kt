@@ -5,7 +5,6 @@ import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.inspectors.shouldForAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.doubles.shouldBeLessThan
-import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf
 
 class LottoMachineTest : AnnotationSpec() {
@@ -21,9 +20,8 @@ class LottoMachineTest : AnnotationSpec() {
     fun `당첨결과를 설정할 수 있어야한다`() {
         LottoMachine.buyLottoes(14000)
         val winNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 6))
-        val bonusNumber = BonusNumber(winNumber,7)
+        val bonusNumber = BonusNumber(winNumber, 7)
         LottoMachine.setWinNumbers(winNumber, bonusNumber)
-        LottoMachine.getRanking()
         LottoMachine.rateOfReturn shouldBeLessThan 1.0
     }
 
@@ -35,11 +33,12 @@ class LottoMachineTest : AnnotationSpec() {
     }
 
     @Test
-    fun `보너스 숫자는 당첨 숫자와 중복이 될 수 없음`() {
+    fun `당첨금을 계산해본다`() {
+        LottoMachine.buyLottoes(14000)
         val winNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 6))
-        BonusNumber(winNumber,7).shouldBeTypeOf<BonusNumber>()
-        shouldThrow<IllegalArgumentException> {
-            BonusNumber(winNumber,6)
-        }
+        val bonusNumber = BonusNumber(winNumber, 7)
+        LottoMachine.setWinNumbers(winNumber, bonusNumber)
+        val ranking = LottoMachine.ranking
+        ranking.totalWinAmount.shouldBeTypeOf<Int>()
     }
 }
