@@ -54,4 +54,34 @@ class StringAddCalculatorTest {
             calculator.add("-1")
         }
     }
+
+    @DisplayName(value = "문자열 계산기의 extractCustomDelimiter 함수가 custom delimiter 를 분리한다")
+    @ParameterizedTest
+    @ValueSource(strings = ["//@\n1:2@4"])
+    fun extractText(text: String) {
+        assertThat(calculator.extractCustomDelimiter(text)).isEqualTo("1:2@4")
+    }
+
+    @DisplayName(value = "문자열 계산기의 extractCustomDelimiter 함수가 string 을 delimiter 를 이용하여 토큰으로 분리한다.")
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2:3:4,5"])
+    fun splitText(text: String) {
+        assertThat(calculator.splitter(text, listOf(":", ","))).isEqualTo(listOf("1", "2", "3", "4", "5"))
+    }
+
+    @DisplayName(value = "문자열 계산기의 convertTokensToNum 함수가 string 을 int 로 변환한다")
+    @Test
+    fun convertTokensToNum() {
+        val tokens = listOf("1", "2", "3")
+        assertThat(calculator.convertTokensToNumber(tokens)).isEqualTo(listOf(1, 2, 3))
+    }
+
+    @DisplayName(value = "Unhappy Path - 유효하지 않은 입력값에 대해 convertTokensToNum 함수가 예외를 처리한다")
+    @Test
+    fun convertTokensToNumWithInvalidValue() {
+        val tokens = listOf("1", "2", "@")
+        assertThrows<RuntimeException> {
+            calculator.convertTokensToNumber(tokens)
+        }
+    }
 }
