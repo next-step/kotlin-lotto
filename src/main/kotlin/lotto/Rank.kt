@@ -1,11 +1,11 @@
 package lotto
 
-enum class Rank(val matchedCount: Int) {
-    FIRST(6),
-    SECOND(5),
-    THIRD(4),
-    FORTH(3),
-    LOSE(0);
+enum class Rank(val matchedCount: Int, val reward: Long) {
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FORTH(3, 5000),
+    LOSE(0, 0);
 
     companion object {
         private const val MIN_MATCHED_COUNT = 3
