@@ -6,7 +6,7 @@ class LottoPurchase {
 
         val result = mutableListOf<Lotto>()
         repeat(amount) {
-            result.add(Lotto.auto())
+            result.add(Lotto.autoCreate())
         }
         return result
     }

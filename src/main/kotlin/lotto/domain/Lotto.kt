@@ -17,7 +17,7 @@ class Lotto(
     companion object {
         const val NUMBER_OF_LOTTO_NUMBERS: Int = 6
 
-        fun auto(): Lotto {
+        fun autoCreate(): Lotto {
             val numbers = LOTTO_NUMBERS.shuffled().take(NUMBER_OF_LOTTO_NUMBERS).map { LottoNumber(it) }
             return Lotto(numbers)
         }
