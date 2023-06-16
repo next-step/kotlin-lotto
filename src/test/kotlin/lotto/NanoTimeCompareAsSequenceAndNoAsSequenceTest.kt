@@ -16,7 +16,7 @@ class NanoTimeCompareAsSequenceAndNoAsSequenceTest {
                 .toList()
         }
 
-        val noUseAsSequenceNanoTime = measureNanoTime {
+        val notUseAsSequenceNanoTime = measureNanoTime {
             input.split(",")
                 .map { it.trim().toIntOrNull() ?: 0 }
                 .sorted()
@@ -24,6 +24,6 @@ class NanoTimeCompareAsSequenceAndNoAsSequenceTest {
         }
 
         println("asSequence() 사용 : $useAsSequenceNanoTime")
-        println("asSequence() 미사용 : $noUseAsSequenceNanoTime")
+        println("asSequence() 미사용 : $notUseAsSequenceNanoTime")
     }
 }
