@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 import java.util.stream.Stream
 
-class CalculatorTest {
+class InputParserTest {
 
     @ParameterizedTest
     @CsvSource(
