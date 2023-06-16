@@ -21,9 +21,11 @@ class PurchaseOrder(amount: Int, val purchasedManualLotteries: PurchasedLotterie
             LottoErrorCode.UNAVAILABLE_TO_PURCHASE.message("$amount $manualLotteriesSize")
         }
 
-        purchasedAutoLotteries = List(maximumPurchaseQuantity) { LotteryGenerator.draw() }
+        purchasedAutoLotteries = List(maximumAutoPurchaseQuantity) { LotteryGenerator.draw() }
             .run(::PurchasedLotteries)
     }
+
+    fun purchasedLotteries(): PurchasedLotteries = purchasedManualLotteries + purchasedAutoLotteries
 
     constructor(amountText: String, manualLotteryTexts: List<String>) : this(
         amount = amountText.toInt(),

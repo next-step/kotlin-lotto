@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
-import io.kotest.matchers.shouldBe
+import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.throwable.shouldHaveMessage
 import lotto.domain.LotteryAdaptor
 import lotto.domain.PurchasedLotteries
@@ -38,8 +38,8 @@ class PurchaseOrderTest : StringSpec({
 
             val manualLotterySize = manualLotteries.size
 
-            purchaseOrder.purchasedAutoLotteries.size shouldBe expect - manualLotterySize
-            purchaseOrder.purchasedManualLotteries.size shouldBe manualLotterySize
+            purchaseOrder.purchasedAutoLotteries shouldHaveSize expect - manualLotterySize
+            purchaseOrder.purchasedManualLotteries shouldHaveSize manualLotterySize
         }
     }
 
@@ -49,11 +49,11 @@ class PurchaseOrderTest : StringSpec({
 
         val purchaseOrder = PurchaseOrder(amountText = amountText, manualLotteryTexts)
 
-        val maximumPurchaseQuantity = amountText.toInt() / LotteryAdaptor.LOTTERY_PRICE
+        val maximumPurchaseQuantity = (amountText.toInt() / LotteryAdaptor.LOTTERY_PRICE).toInt()
         val manualLotterySize = manualLotteryTexts.size
 
-        purchaseOrder.purchasedAutoLotteries.size shouldBe maximumPurchaseQuantity - manualLotterySize
-        purchaseOrder.purchasedManualLotteries.size shouldBe manualLotterySize
+        purchaseOrder.purchasedAutoLotteries shouldHaveSize maximumPurchaseQuantity - manualLotterySize
+        purchaseOrder.purchasedManualLotteries shouldHaveSize manualLotterySize
     }
 
     "구매 주문을 생성할 때 숫자가 아닌 문자열과 2,147,483,647보다 큰 숫자를 입력하면 NumberFormatException 에러가 발생한다." {
