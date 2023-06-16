@@ -10,4 +10,13 @@ enum class Prize(
     SECOND(5, BigDecimal(1_500_000)),
     THIRD(4, BigDecimal(50_000)),
     FOURTH(3, BigDecimal(5_000)),
+    ;
+
+    companion object {
+        fun getWinningLottoCountsByPrize(lottos: Lottos, winningLotto: Lotto): Map<Prize, Int> {
+            return values()
+                .reversed()
+                .associateWith { lottos.getWinningLottoCountByMatchCount(winningLotto, it.matchedCount) }
+        }
+    }
 }

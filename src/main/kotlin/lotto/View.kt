@@ -1,5 +1,7 @@
 package lotto
 
+import java.math.BigDecimal
+
 object InputView {
     private const val LOTTO_NUMBER_DELIMITER = ", "
 
@@ -27,20 +29,17 @@ object ResultView {
         }
     }
 
-    fun printWinnerStatistics(lottos: Lottos, winningLotto: Lotto) {
-        val matchedLottos: String = Prize.values()
-            .reversed()
-            .joinToString("\n") {
-                val winningLottoCount = lottos.getWinningLottoCountByMatchCount(winningLotto, it.matchedCount)
-                "|${it.matchedCount}개 일치 (${it.prizeAmount}원)- ${winningLottoCount}개"
-            }
+    fun printWinnerStatistics(winningLottoPrizeVOs: List<WinningLottoPrizeVO>, totalProfitRate: BigDecimal) {
+        val matchedLottos: String = winningLottoPrizeVOs.joinToString("\n") {
+            "|${it.matchedCount}개 일치 (${it.prizeAmount}원)- ${it.winningLottoCount}개"
+        }
 
         println(
             """
             |당첨 통계
             |---------
             $matchedLottos
-            |총 수익률은 ${lottos.getTotalProfitRate(winningLotto)}입니다.
+            |총 수익률은 ${totalProfitRate}입니다.
             |""".trimMargin()
         )
     }
