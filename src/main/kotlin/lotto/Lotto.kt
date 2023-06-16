@@ -9,8 +9,8 @@ private const val MAX_LOTTO_NUMBER_SIZE = 6
  */
 class LottoMachine {
 
-    fun issue(count: Int): List<Lotto> {
-        return List(count) { createLotto() }
+    fun issue(count: Int): IssuedLottos {
+        return IssuedLottos(List(count) { createLotto() })
     }
 
     private fun createLotto(): Lotto {

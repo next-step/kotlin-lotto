@@ -26,6 +26,7 @@ internal class LottoSellerTest {
         expectedLottoCount: Int,
     ) {
         val sut = LottoSeller(lottoPrice)
-        sut.sell(money) shouldHaveSize expectedLottoCount
+        val issuedLottos: IssuedLottos = sut.sell(money)
+        issuedLottos.lottos shouldHaveSize expectedLottoCount
     }
 }

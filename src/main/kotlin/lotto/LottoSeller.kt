@@ -8,7 +8,7 @@ class LottoSeller(
     private val lottoMachine: LottoMachine = LottoMachine()
 ) {
 
-    fun sell(money: Int): List<Lotto> {
+    fun sell(money: Int): IssuedLottos {
         return lottoMachine.issue(money / lottoPrice)
     }
 }
