@@ -3,7 +3,10 @@ package lotto
 class LotteryShop {
 
     fun buy(money: Int): Int {
-        if (money == 1000) return money
-        else throw IllegalArgumentException()
+        return money / LOTTERY_PRICE
+    }
+
+    companion object {
+        private const val LOTTERY_PRICE = 1000
     }
 }

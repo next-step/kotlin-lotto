@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 class LotteryShopTest {
 
     @Test
-    fun `로또 1장의 가격은 1000이다`() {
+    fun `구매한 금액에 해당하는 로또 갯수 반환`() {
         val lotteryShop = LotteryShop()
-        val actualInput = 1000
-        assertThat(lotteryShop.buy(actualInput)).isEqualTo(1000)
+        val actualInput = 14000
+        assertThat(lotteryShop.buy(actualInput)).isEqualTo(14)
     }
 }
