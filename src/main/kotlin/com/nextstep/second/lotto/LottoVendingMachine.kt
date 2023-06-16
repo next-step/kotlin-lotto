@@ -14,7 +14,7 @@ object LottoVendingMachine {
 
     fun checkThisWeekLottoResult(winnerLotto: Lotto, myLotto: List<Lotto>): List<LottoResultVo> {
         return myLotto.map {
-            LottoResultVo.of(winnerLotto, it)
+            LottoResultVo(winnerLotto, it)
         }.toList()
     }
 }

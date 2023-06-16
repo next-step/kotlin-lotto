@@ -11,7 +11,7 @@ class LottoResultVoTest {
         val winnerLotto = Lotto(listOf(1, 2, 3, 8, 9, 45))
 
         // when
-        val result: LottoResultVo = LottoResultVo.of(winnerLotto, lotto)
+        val result: LottoResultVo = LottoResultVo(winnerLotto, lotto)
 
         result.sameNumberCount shouldBe 3
     }
@@ -23,7 +23,7 @@ class LottoResultVoTest {
         val winnerLotto = Lotto(listOf(1, 2, 3, 4, 5, 45))
 
         // when
-        val result: LottoResultVo = LottoResultVo.of(winnerLotto, lotto)
+        val result: LottoResultVo = LottoResultVo(winnerLotto, lotto)
 
         // then
         result.sameNumberCount shouldBe 5
