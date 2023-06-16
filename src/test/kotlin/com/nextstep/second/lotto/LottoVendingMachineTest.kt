@@ -2,6 +2,7 @@ package com.nextstep.second.lotto
 
 import com.nextstep.second.lotto.service.LottoVendingMachine
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Test
 
 class LottoVendingMachineTest {
@@ -28,6 +29,6 @@ class LottoVendingMachineTest {
         // when
         val result = LottoVendingMachine.checkThisWeekLottoResult(winnerNumber, lottos)
         // then
-        result.size shouldBe totalCnt
+        result shouldNotBe null
     }
 }

@@ -1,6 +1,7 @@
 package com.nextstep.second.lotto.view
 
 import com.nextstep.second.lotto.domain.Lotto
+import com.nextstep.second.lotto.domain.LottoResultVo
 import com.nextstep.second.lotto.domain.LottoReward
 
 object OutputView {
@@ -11,12 +12,12 @@ object OutputView {
         }
     }
 
-    fun showLottoResult(lottoResults: Map<LottoReward, Int>) {
+    fun showLottoResult(money: Int, lottoResults: LottoResultVo, rewards: List<LottoReward>) {
         println("당첨 통계")
         println("---------")
-        val sortedMap = lottoResults.toSortedMap(compareBy { it.sameNumberCnt })
-        sortedMap.forEach { it ->
-            println("${it.key.sameNumberCnt}개 일치 (${it.key.reward}원)- ${it.value}개")
+        rewards.forEach { reward ->
+            println("${reward.totalSameNumber}개 일치 (${reward.reward}원)- ${lottoResults.getMatchedNumber(reward.totalSameNumber)}개")
         }
+        println("총 수익률은 ${lottoResults.getRateOfReturn(money, rewards)}입니다.")
     }
 }

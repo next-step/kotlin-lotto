@@ -10,24 +10,26 @@ class LottoResultVoTest {
     fun `공통된 숫자가 3개인 경우`() {
         // given
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val lottoList = listOf(lotto)
         val winnerLotto = Lotto(listOf(1, 2, 3, 8, 9, 45))
 
         // when
-        val result: LottoResultVo = LottoResultVo(winnerLotto, lotto)
+        val result: LottoResultVo = LottoResultVo(winnerLotto, lottoList)
 
-        result.sameNumberCount shouldBe 3
+        result.getMatchedNumber(3) shouldBe 1
     }
 
     @Test
     fun `공통된 숫자가 5개인 경우`() {
         // given
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val lottoList = listOf(lotto)
         val winnerLotto = Lotto(listOf(1, 2, 3, 4, 5, 45))
 
         // when
-        val result: LottoResultVo = LottoResultVo(winnerLotto, lotto)
+        val result: LottoResultVo = LottoResultVo(winnerLotto, lottoList)
 
         // then
-        result.sameNumberCount shouldBe 5
+        result.getMatchedNumber(5) shouldBe 1
     }
 }
