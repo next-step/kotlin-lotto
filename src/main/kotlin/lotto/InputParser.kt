@@ -7,12 +7,16 @@ object InputParser {
         return moneyString.toIntOrNull() ?: throw IllegalArgumentException("구매금액은 숫자이어야함")
     }
 
-    fun parseWinNumbers(winNumbers: String?): List<Int> {
-        require(!winNumbers.isNullOrEmpty()) {
+    fun parseWinNumbers(winNumbers: String): List<Int> {
+        require(winNumbers.isNotEmpty()) {
             "입력값은 비어있으면 안됨"
         }
         return winNumbers.split(SEPERATOR).map {
             it.trim().toIntOrNull() ?: throw IllegalArgumentException("입력값은 숫자이어야함")
         }
+    }
+
+    fun parseBonus(bonusNumber: String): Int {
+        return bonusNumber.toIntOrNull() ?: throw IllegalArgumentException("보너스볼은 숫자이어야함")
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Ranking(buyedLottoes: LottoNumbers, val winNumbers: LottoWinNumber) {
+class Ranking(buyedLottoes: LottoNumbers, val winNumber: LottoNumber) {
 
     var threeCorrect = 0
         private set
@@ -25,7 +25,7 @@ class Ranking(buyedLottoes: LottoNumbers, val winNumbers: LottoWinNumber) {
     }
 
     private fun setRanking(lottoNumber: LottoNumber) {
-        when(Rank.valueOf(lottoNumber.lottoNumber.filter { it in winNumbers.winNumbers }.size)) {
+        when(Rank.valueOf(lottoNumber.lottoNumber.filter { it in winNumber.lottoNumber }.size)) {
             Rank.SIX -> sixCorrect++
             Rank.FIVE -> fiveCorrect++
             Rank.FOUR -> fourCorrect++

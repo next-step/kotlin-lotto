@@ -6,8 +6,9 @@ object LottoMachine {
     const val MAXIMIUM_LOTTO_NUMBER = 45
 
     private lateinit var buyedLottoes: LottoNumbers
-    private lateinit var winNumber: LottoWinNumber
+    private lateinit var mWinNumber: LottoNumber
     private lateinit var ranking: Ranking
+    private lateinit var mBonusNumber: BonusNumber
     private var buyAmount: Int = 0
 
     var rateOfReturn = 0.0
@@ -20,9 +21,13 @@ object LottoMachine {
         return buyedLottoes
     }
 
-    fun setRanking(winNumbers: List<Int>): Ranking {
-        winNumber = LottoWinNumber(winNumbers)
-        ranking = Ranking(buyedLottoes, winNumber)
+    fun getRanking(): Ranking {
+        ranking = Ranking(buyedLottoes, mWinNumber)
         return ranking
+    }
+
+    fun setWinNumbers(winNumber: LottoNumber, bonusNumber: BonusNumber) {
+        mWinNumber = winNumber
+        mBonusNumber = bonusNumber
     }
 }
