@@ -14,7 +14,7 @@ object InputView {
     fun getLastWeekWinnerNumbers(): Lottery {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val inputValue = readln()
-        val numbers = inputValue.replace("\\s".toRegex(), "").split(",").map { it.toInt() }
+        val numbers = inputValue.replace("\\s".toRegex(), "").split(",").map { it.toInt() }.toSet()
         return Lottery(numbers)
     }
 }

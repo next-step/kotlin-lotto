@@ -19,13 +19,14 @@ object LotteryMachine {
         ((money / LOTTERY_PRICE).setScale(QUANTITY_SCALE, RoundingMode.FLOOR).toLong())
 
     private fun generateNumbers(): Lottery {
-        val lotteryNumbers = mutableListOf<Int>()
+        val lotteryNumbers = mutableSetOf<Int>()
         while (lotteryNumbers.size < Lottery.LOTTERY_NUMBER_SIZE) {
+            Lottery.LOTTERY_NUMBER_RANGE.shuffled().take(6).toSet()
             val randomNum = Lottery.LOTTERY_NUMBER_RANGE.random()
             if (randomNum !in lotteryNumbers) {
                 lotteryNumbers.add(randomNum)
             }
         }
-        return Lottery(lotteryNumbers.sorted())
+        return Lottery(lotteryNumbers)
     }
 }

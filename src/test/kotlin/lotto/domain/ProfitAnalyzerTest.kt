@@ -7,17 +7,17 @@ import java.math.BigDecimal
 class ProfitAnalyzerTest : StringSpec({
     "당첨 통계를 구한다(1등 1개, 2등 1개, 3등 2개, 4등 2개)" {
         // given
-        val winnerLottery = Lottery(listOf(4, 5, 6, 7, 8, 9))
+        val winnerLottery = Lottery(setOf(4, 5, 6, 7, 8, 9))
 
         val lotteryTicket = LotteryTicket(
             listOf(
-                Lottery(listOf(1, 2, 3, 4, 5, 6)), // 4등
-                Lottery(listOf(1, 2, 3, 4, 5, 6)), // 4등
-                Lottery(listOf(1, 2, 4, 5, 6, 7)), // 3등
-                Lottery(listOf(1, 2, 4, 5, 6, 7)), // 3등
-                Lottery(listOf(1, 4, 5, 6, 7, 8)), // 2등
-                Lottery(listOf(4, 5, 6, 7, 8, 9)), // 1등
-                Lottery(listOf(10, 11, 12, 13, 14, 15)), // 해당 없음
+                Lottery(setOf(1, 2, 3, 4, 5, 6)), // 4등
+                Lottery(setOf(1, 2, 3, 4, 5, 6)), // 4등
+                Lottery(setOf(1, 2, 4, 5, 6, 7)), // 3등
+                Lottery(setOf(1, 2, 4, 5, 6, 7)), // 3등
+                Lottery(setOf(1, 4, 5, 6, 7, 8)), // 2등
+                Lottery(setOf(4, 5, 6, 7, 8, 9)), // 1등
+                Lottery(setOf(10, 11, 12, 13, 14, 15)), // 해당 없음
             )
         )
         val expect = PrizeStatics(

@@ -1,10 +1,9 @@
 package lotto.domain
 
-class Lottery(private val numbers: List<Int>) {
+class Lottery(private val numbers: Set<Int>) {
     init {
         validateNumberSize()
         validateEachNumberInRange()
-        validateDuplicateNumber()
     }
 
     private fun validateNumberSize() {
@@ -12,17 +11,11 @@ class Lottery(private val numbers: List<Int>) {
     }
 
     private fun validateEachNumberInRange() {
-        numbers.forEach {
-            require(it in LOTTERY_NUMBER_RANGE) { "로또의 숫자는 1~45 사이의 정수가 가능합니다." }
-        }
-    }
-
-    private fun validateDuplicateNumber() {
-        require(numbers.toSet().size == LOTTERY_NUMBER_SIZE) { "로또는 중복된 숫자가 있을 수 없습니다." }
+        require(numbers.all { it in LOTTERY_NUMBER_RANGE }) { "로또의 숫자는 1~45 사이의 정수가 가능합니다." }
     }
 
     infix fun intersectNumbers(other: Lottery): Set<Int> {
-        return this.numbers.intersect(other.numbers.toSet())
+        return this.numbers.intersect(other.numbers)
     }
 
     companion object {
@@ -31,6 +24,6 @@ class Lottery(private val numbers: List<Int>) {
     }
 
     override fun toString(): String {
-        return "$numbers"
+        return "${numbers.sorted()}"
     }
 }

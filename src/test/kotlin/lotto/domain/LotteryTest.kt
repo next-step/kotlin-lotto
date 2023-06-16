@@ -8,31 +8,25 @@ import io.kotest.matchers.throwable.shouldHaveMessage
 class LotteryTest : StringSpec({
     "로또 길이는 6 자리이다" {
         shouldNotThrowAnyUnit {
-            Lottery(listOf(1, 2, 3, 4, 5, 6))
+            Lottery(setOf(1, 2, 3, 4, 5, 6))
         }
     }
 
     "로또 길이가 6 자리 아닐 경우" {
         shouldThrow<IllegalArgumentException> {
-            Lottery(listOf(1, 2, 3, 4, 5, 6, 7))
+            Lottery(setOf(1, 2, 3, 4, 5, 6, 7))
         }.shouldHaveMessage("로또는 6자리입니다.")
     }
 
     "로또의 숫자가 1이상 45 이하인 경우" {
         shouldNotThrowAnyUnit {
-            Lottery(listOf(1, 45, 44, 2, 43, 3))
+            Lottery(setOf(1, 45, 44, 2, 43, 3))
         }
     }
 
     "로또의 숫자가 1이상 45 이하가 아닌 경우" {
         shouldThrow<IllegalArgumentException> {
-            Lottery(listOf(1, 46, 44, 2, 43, 3))
+            Lottery(setOf(1, 46, 44, 2, 43, 3))
         }.shouldHaveMessage("로또의 숫자는 1~45 사이의 정수가 가능합니다.")
-    }
-
-    "로또의 중복된 숫자가 있으면 안된다" {
-        shouldThrow<IllegalArgumentException> {
-            Lottery(listOf(45, 45, 44, 2, 43, 3))
-        }.shouldHaveMessage("로또는 중복된 숫자가 있을 수 없습니다.")
     }
 })
