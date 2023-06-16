@@ -26,7 +26,17 @@ class LottoTicketTest : StringSpec({
         (1..7).map {
             LottoTicket((it..it + 5).map(::LottoNumber).toSet()) to (7 - it)
         }.forAll {
-            ONE_TO_SIX_LOTTO_TICKET matchedCount it.first shouldBe it.second
+            ONE_TO_SIX_LOTTO_TICKET matchedCountBy it.first shouldBe it.second
+        }
+    }
+
+    "1 ~ 6 로또 티켓의 로또 번호 포함 여부 확인" {
+        listOf(
+            LottoNumber(1) to true,
+            LottoNumber(6) to true,
+            LottoNumber(7) to false,
+        ).forAll {
+            (it.first in ONE_TO_SIX_LOTTO_TICKET) shouldBe it.second
         }
     }
 })

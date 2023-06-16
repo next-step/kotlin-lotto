@@ -20,8 +20,12 @@ object ResultView {
         println("당첨 통계")
         println("---------")
 
-        listOf(LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST)
+        listOf(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST)
             .forEach {
+                if (it == LottoRank.SECOND) {
+                    println("${it.countCondition}개 일치, 보너스 볼 일치 (${it.prize}원) - ${score countBy it}")
+                    return@forEach
+                }
                 println("${it.countCondition}개 일치 (${it.prize}원) - ${score countBy it}")
             }
 

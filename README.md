@@ -83,3 +83,18 @@
 ##### RandomLottoTicketStorage
 
 - 랜덤 로또 티켓 제공
+
+## 3단계 - 로또 (2등)
+
+### InputView
+
+- 보너스 볼 입력 받기
+
+### WinnerLotto
+
+- 당첨 번호와 보너스 볼을 관리하는 클래스
+
+### LottoRank
+
+- 보너스 볼 매칭 조건 추가
+

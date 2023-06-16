@@ -10,8 +10,12 @@ class LottoTicket(numbers: Set<LottoNumber>) {
         }
     }
 
-    infix fun matchedCount(other: LottoTicket): Int {
+    infix fun matchedCountBy(other: LottoTicket): Int {
         return numbers.count { other.numbers.contains(it) }
+    }
+
+    operator fun contains(number: LottoNumber): Boolean {
+        return number in numbers
     }
 
     override fun equals(other: Any?): Boolean {
