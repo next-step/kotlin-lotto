@@ -65,7 +65,7 @@ class StringAddCalculatorTest {
         delimiter = '=',
     )
     fun `숫자가 아니거나 음수가 들어오면 에러가 발생한다`(expression: String, expect: Int) {
-        assertThrows<RuntimeException>(CalcErrorCode.INVALID_NUMBER.msg) {
+        assertThrows<RuntimeException>(ErrorCode.NOT_POSITIVE_NUMBER_ERROR.msg) {
             StringAddCalculator(
                 expression,
             )
