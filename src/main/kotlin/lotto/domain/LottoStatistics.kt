@@ -1,7 +1,8 @@
 package lotto.domain
 
 class LottoStatistics(
-    lottos: List<Lotto>,
+    private val lottos: List<Lotto>,
+    private val budget: Int,
     private val winningLotto: Lotto
 ) {
     private val countsMap = mutableMapOf<Int, Int>()
@@ -9,7 +10,19 @@ class LottoStatistics(
     var totalPrizes = 0
         private set
 
+    var rateOfReturn = 0.0
+        private set
+
     init {
+        calculateTotalPrizes()
+        calculateRateOfReturn()
+    }
+
+    fun getEqualCount(equalCount: Int): Int {
+        return countsMap.getOrDefault(equalCount, 0)
+    }
+
+    private fun calculateTotalPrizes() {
         lottos.forEach {
             val equalCount = winningLotto.checkEqualCount(it)
             countsMap[equalCount] = countsMap.getOrDefault(equalCount, 0) + 1
@@ -19,7 +32,7 @@ class LottoStatistics(
         }
     }
 
-    fun getEqualCount(equalCount: Int): Int {
-        return countsMap.getOrDefault(equalCount, 0)
+    private fun calculateRateOfReturn() {
+        rateOfReturn = totalPrizes.toDouble() / budget.toDouble()
     }
 }

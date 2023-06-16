@@ -13,7 +13,17 @@ class ResultView {
         lottos.forEach { printLotto(it) }
     }
 
-    fun printWinningStatistics(lottoStatistics: LottoStatistics) {
+    fun printPurchaseResult(statistics: LottoStatistics) {
+        printWinningStatistics(statistics)
+        printRateOfReturn(statistics)
+    }
+
+    private fun printLotto(lotto: Lotto) {
+        val numbers = lotto.numbers.map { it.number }.sorted()
+        println("[${numbers.joinToString(", ")}]")
+    }
+
+    private fun printWinningStatistics(lottoStatistics: LottoStatistics) {
         println("\n당첨 통계")
         println("---------")
 
@@ -24,12 +34,12 @@ class ResultView {
         }
     }
 
-    fun printRateOfReturn(budget: Int, prizes: Int) {
-        if (prizes == 0) {
+    private fun printRateOfReturn(lottoStatistics: LottoStatistics) {
+        if (lottoStatistics.totalPrizes == 0) {
             return println("총 수익률은 0입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
         }
 
-        val rateOfReturn = prizes.toDouble() / budget.toDouble()
+        val rateOfReturn = lottoStatistics.rateOfReturn
         val textRateOfReturn = "%.3f".format(rateOfReturn).take(4)
 
         return when {
@@ -37,10 +47,5 @@ class ResultView {
             rateOfReturn == 1.0 -> println("총 수익률은 ${textRateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 본전이라는 의미임)")
             else -> println("총 수익률은 ${textRateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
         }
-    }
-
-    private fun printLotto(lotto: Lotto) {
-        val numbers = lotto.numbers.map { it.number }.sorted()
-        println("[${numbers.joinToString(", ")}]")
     }
 }
