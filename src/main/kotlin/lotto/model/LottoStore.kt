@@ -15,8 +15,8 @@ data class LottoStore(
         validateBuyCount(availableBuyCount, mainBuyCount)
 
         return PurchasedLottoTickets(
-            tickets = lottoTickets(mainLottoTicketStorage, mainBuyCount)
-                    + lottoTickets(subLottoTicketStorage, availableBuyCount - mainBuyCount),
+            tickets = lottoTickets(mainLottoTicketStorage, mainBuyCount) +
+                lottoTickets(subLottoTicketStorage, availableBuyCount - mainBuyCount),
             pricePerTicket = price
         )
     }
@@ -30,7 +30,7 @@ data class LottoStore(
         if (availableBuyCount < buyCount) {
             throw IllegalArgumentException(
                 "buyCount must be greater than or equal to primaryBuyCount. " +
-                        "availableBuyCount(`$availableBuyCount`), buyCount(`$buyCount`)"
+                    "availableBuyCount(`$availableBuyCount`), buyCount(`$buyCount`)"
             )
         }
     }
@@ -39,7 +39,7 @@ data class LottoStore(
         if (storage hasCountLessThan primaryBuyCount) {
             throw IllegalStateException(
                 "primaryStorage has less than butCount. " +
-                        "primaryStorage($storage), primaryBuyCount(`$primaryBuyCount`)"
+                    "primaryStorage($storage), primaryBuyCount(`$primaryBuyCount`)"
             )
         }
     }
