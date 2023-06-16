@@ -10,7 +10,7 @@ class LottoChecker {
         lottoBundle.forEach { lotto ->
             var count = 0
             lotto.forEach { number ->
-                if(numberList.contains(number)) {
+                if (numberList.contains(number)) {
                     count++
                 }
             }
@@ -22,9 +22,13 @@ class LottoChecker {
     fun winningMoneyCheck(collectCounts: List<Int>): Int {
         var winningMoney = 0
         collectCounts.forEach { count ->
-            winningMoney += LottoEnum.values().find { it.count == count }?.prizeMoney?: NONE_PRIZE_MONEY
+            winningMoney += LottoEnum.values().find { it.count == count }?.prizeMoney ?: NONE_PRIZE_MONEY
         }
         return winningMoney
+    }
+
+    fun lottoResultGroup(collectCounts: List<Int>): Map<Int, Int> {
+        return collectCounts.sorted().groupingBy { it }.eachCount()
     }
 
     companion object {

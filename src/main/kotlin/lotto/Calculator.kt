@@ -7,7 +7,11 @@ class Calculator {
 
     fun calculateRateOfReturn(money: Int, winningMoney: Int): Double {
         return BigDecimal(winningMoney.toDouble() / money.toDouble())
-            .setScale(2, RoundingMode.DOWN)
+            .setScale(SECOND_DECIMAL_PLACE, RoundingMode.DOWN)
             .toDouble()
+    }
+
+    companion object {
+        private const val SECOND_DECIMAL_PLACE = 2
     }
 }
