@@ -1,9 +1,11 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 import java.math.BigDecimal
 
@@ -52,6 +54,15 @@ class WinningLottoNumberTest {
     ) {
         val actual = winningLottoNumber.getRanking(purchasedLottoNumber)
         actual shouldBe expected
+    }
+
+    @ParameterizedTest
+    @CsvSource("-1", "0", "46")
+    fun `당첨 번호에 보너스 번호가 1~45 중에 포함되지 않을 경우 IllegalArgumentException 을 발생시킨다`(bonusBallNumber: Int) {
+        val lottoNumber = LottoNumber(listOf(1, 2, 3, 4, 5, 6))
+        shouldThrow<IllegalArgumentException> {
+            WinningLottoNumber(winningNumber = lottoNumber, bonusBallNumber = bonusBallNumber)
+        }
     }
 
     companion object {
