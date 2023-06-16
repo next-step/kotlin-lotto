@@ -12,11 +12,11 @@ object InputValidator {
     }
 
     fun parseWinNumbers(winNumbers: String?): List<Int> {
-        if(winNumbers.isNullOrEmpty()) {
+        if (winNumbers.isNullOrEmpty()) {
             throw IllegalArgumentException("입력값은 비어있으면 안됨")
         }
         return winNumbers.split(SEPERATOR).map {
-            it.toIntOrNull() ?: throw IllegalArgumentException("입력값은 숫자이어야함")
+            it.trim().toIntOrNull() ?: throw IllegalArgumentException("입력값은 숫자이어야함")
         }
     }
 }

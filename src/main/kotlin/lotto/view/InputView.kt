@@ -11,7 +11,7 @@ object InputView {
     }
 
     fun getWinNumbers(): List<Int> {
-        println("구입금액을 입력해 주세요.")
+        println("지난 주 당첨 번호를 입력해 주세요.")
         val inputData = readlnOrNull() ?: throw IllegalArgumentException("입력값이 없습니다")
         return InputValidator.parseWinNumbers(inputData)
     }

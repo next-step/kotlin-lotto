@@ -27,6 +27,6 @@ class InputValidatorTest : AnnotationSpec() {
     fun `당첨번호는 숫자로 구성되며 양수여야한다`() {
 
         val winNumberString = "1, 2, 3, 4, 5, 6"
-        InputValidator.parseWinNumbers(winNumberString) shouldBe listOf(1,2,3,4,5,6)
+        InputValidator.parseWinNumbers(winNumberString) shouldBe listOf(1, 2, 3, 4, 5, 6)
     }
 }
