@@ -7,12 +7,8 @@ class DelimiterManager {
             ?: input.split(DELIMITER.toRegex())
     }
 
-    fun combineDelimiter(customDelimiter: String?): String? {
-        var fixedDelimiter: String? = null
-        customDelimiter?.let {
-            fixedDelimiter = DELIMITER.plus("|$it")
-        }
-        return fixedDelimiter
+    fun combineDelimiter(customDelimiter: String): String {
+        return DELIMITER.plus("|$customDelimiter")
     }
 
     fun getCustomDelimiter(input: String): String? {

@@ -15,7 +15,7 @@ class StringAddCalculator(
         }
 
         val customDelimiter = DelimiterManager().getCustomDelimiter(input)
-        val fixedDelimiter = DelimiterManager().combineDelimiter(customDelimiter)
+        val fixedDelimiter = customDelimiter?.let { DelimiterManager().combineDelimiter(it) }
         val customInput = getCustomInput(input)
         val splitList = DelimiterManager().splitByDelimiter(fixedDelimiter, customInput, input)
 
