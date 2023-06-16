@@ -8,8 +8,8 @@ import lottery.domain.lottery.Lottery.Companion.LOTTERY_COST
 class Lotteries(
     val values: MutableList<Lottery>
 ) {
-    fun compareWinningLottery(winningLottery: Lottery) =
-        values.map { winningLottery.compareWinningLottery(it) }
+    fun compareWinningLottery(winningLottery: WinningLottery) =
+        values.map { winningLottery.compareLottery(it) }
             .groupingBy { it }
             .eachCount()
             .fillMissRankWithDefault()

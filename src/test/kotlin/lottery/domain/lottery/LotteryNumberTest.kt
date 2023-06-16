@@ -39,5 +39,6 @@ class LotteryNumberTest : FunSpec({
         val LOTTERY_NUMBER_7 = LotteryNumber(value = 7)
         val LOTTERY_NUMBER_8 = LotteryNumber(value = 8)
         val LOTTERY_NUMBER_9 = LotteryNumber(value = 9)
+        val LOTTERY_NUMBER_10 = LotteryNumber(value = 10)
     }
 }

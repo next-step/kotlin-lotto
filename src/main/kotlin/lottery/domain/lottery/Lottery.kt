@@ -1,7 +1,6 @@
 package lottery.domain.lottery
 
 import lottery.domain.Money
-import lottery.domain.Rank
 import lottery.domain.Receipt
 import java.math.BigDecimal
 
@@ -13,7 +12,7 @@ class Lottery(
         require(values.distinct().size == LOTTERY_NUMBER_SIZE) { "로또 번호는 중복되어 입력될 수 없다" }
     }
 
-    fun compareWinningLottery(lottery: Lottery): Rank = Rank.from(values.count { lottery.values.contains(it) })
+    fun matchCount(lottery: Lottery): Int = values.count { lottery.values.contains(it) }
 
     fun containsLotteryNumber(lotteryNumber: LotteryNumber): Boolean = values.contains(lotteryNumber)
 

@@ -2,6 +2,7 @@ package lottery.domain
 
 import lottery.domain.lottery.Lotteries
 import lottery.domain.lottery.Lottery
+import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.LotteryGenerator
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -19,7 +20,7 @@ class Wallet(
         return purchaseLotteriesByReceipt(receipt, randomLotteryGenerator)
     }
 
-    fun calculateLotteryResult(winLottery: Lottery): LottoResult {
+    fun calculateLotteryResult(winLottery: WinningLottery): LottoResult {
         val statistics = purchaseLotteries.compareWinningLottery(winLottery)
         val lottoYield = calculateYield(statistics)
         return LottoResult(lottoYield = lottoYield, statistics = statistics)

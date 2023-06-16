@@ -7,8 +7,8 @@ import io.kotest.data.row
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lottery.domain.Money
-import lottery.domain.Rank
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_1
+import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_10
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_2
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_3
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_4
@@ -78,13 +78,19 @@ class LotteryTest : FunSpec({
         }
     }
 
-    context("compareWinningLottery") {
-        test("당첨로또와 비교하여 Rank를 반환한다") {
-            val givenLottery = LOTTERY_1_6
-            val winLottery = LOTTERY_2_7
-
-            val actual = winLottery.compareWinningLottery(lottery = givenLottery)
-            actual shouldBe Rank.SECOND
+    context("matchCount") {
+        forAll(
+            row(LOTTERY_1_6, 6),
+            row(LOTTERY_2_7, 5),
+            row(LOTTERY_3_8, 4),
+            row(LOTTERY_4_9, 3),
+            row(LOTTERY_5_10, 2)
+        ) { input, expected ->
+            test("번호 일치한 갯수 $expected 를 계산한다") {
+                val lottery = LOTTERY_1_6
+                val actual = lottery.matchCount(input)
+                actual shouldBe expected
+            }
         }
     }
 
@@ -176,6 +182,16 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_7,
                 LOTTERY_NUMBER_8,
                 LOTTERY_NUMBER_9
+            )
+        )
+        val LOTTERY_5_10 = Lottery(
+            values = listOf(
+                LOTTERY_NUMBER_5,
+                LOTTERY_NUMBER_6,
+                LOTTERY_NUMBER_7,
+                LOTTERY_NUMBER_8,
+                LOTTERY_NUMBER_9,
+                LOTTERY_NUMBER_10
             )
         )
     }
