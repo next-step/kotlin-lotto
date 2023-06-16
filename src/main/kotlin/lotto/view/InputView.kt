@@ -1,20 +1,10 @@
 package lotto.view
 
 import lotto.LottoNumbers
+import lotto.WinningNumbers
 
 object InputView {
-    private const val GAME_COST = 1000
-
-    fun receiveGameCount(): Int {
-        val purchaseAmount = receivePurchaseAmount()
-        val gameCount = purchaseAmount % GAME_COST
-
-        println("${gameCount}개를 구매했습니다.")
-
-        return gameCount
-    }
-
-    private fun receivePurchaseAmount(): Int {
+    fun receivePurchaseAmount(): Int {
         println("구입 금액을 입력해 주세요.")
 
         var value: Int?
@@ -27,7 +17,7 @@ object InputView {
         return value
     }
 
-    fun receiveWinningNumbers(): LottoNumbers {
+    fun receiveWinningNumbers(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해 주세요.")
 
         var lottoNumbers: LottoNumbers?
@@ -42,7 +32,7 @@ object InputView {
             }
         } while (lottoNumbers == null)
 
-        return lottoNumbers
+        return WinningNumbers(lottoNumbers)
     }
 
     private fun receiveString(): String {

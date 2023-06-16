@@ -6,21 +6,27 @@ import lotto.LottoNumbers
 import lotto.Rank
 
 object ResultView {
-    fun printAllLottoNumbers(lottoGame: LottoGame) {
-        lottoGame.lottoNumbers.forEach { printLottoNumbers(it) }
+    fun printGameCount(gameCount: Int) {
+        println("${gameCount}개를 구매했습니다.")
+    }
+
+    fun printAllLottoNumbers(lottoNumbers: List<LottoNumbers>) {
+        lottoNumbers.forEach { printLottoNumbers(it) }
     }
 
     fun printLottoResultStatistics(statistics: LottoGameStatistics) {
         println("당첨 통계")
         println("---------")
 
-        val sortedMap = statistics.result.toSortedMap(compareByDescending { statistics.result[it] })
-        sortedMap.forEach { printLottoResult(it.key, it.value) }
+        Rank.values()
+            .sortedBy { it.matchedCount }
+            .forEach { printLottoResult(it, statistics.result[it] ?: 0) }
 
         println("총 수익률은 ${statistics.roi}입니다.")
     }
 
-    fun printLottoResult(rank: Rank, count: Int) {
+    private fun printLottoResult(rank: Rank, count: Int) {
+        Rank.values()
         if (rank != Rank.LOSE) {
             println("${rank.matchedCount}개 일치 (${rank.reward}원) - ${count}개")
         }
