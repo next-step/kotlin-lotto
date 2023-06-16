@@ -36,4 +36,8 @@ data class Lotto(
             "lotto number must be between 1 and 45"
         }
     }
+
+    fun match(winningLotto: Lotto): Int {
+        return numbers.intersect(winningLotto.numbers).size
+    }
 }
