@@ -1,6 +1,6 @@
 package lotto.domain
 
-import java.math.RoundingMode
+import lotto.scaleDown
 
 object LotteryMachine {
     private val LOTTERY_PRICE = Money(1_000)
@@ -15,8 +15,7 @@ object LotteryMachine {
         return LotteryTicket(lotteries)
     }
 
-    private fun getQuantity(money: Money) =
-        ((money / LOTTERY_PRICE).setScale(QUANTITY_SCALE, RoundingMode.FLOOR).toLong())
+    private fun getQuantity(money: Money) = (money / LOTTERY_PRICE).scaleDown()
 
     private fun generateNumbers(): Lottery {
         val lotteryNumbers = mutableSetOf<Int>()
