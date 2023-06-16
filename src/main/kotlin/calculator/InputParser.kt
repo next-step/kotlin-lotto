@@ -5,7 +5,7 @@ class InputParser(inputString: String) {
     private val inputString = inputString.trim()
 
     fun separator(): String? {
-        if (inputString.hasNoSeparatorSection()) return null
+        if (!inputString.hasSeparatorSection()) return null
 
         val separatorSection = inputString.substringBeforeLast(SEPARATOR_END)
         require(separatorSection.startsWith(SEPARATOR_START))
@@ -27,8 +27,8 @@ class InputParser(inputString: String) {
             }
     }
 
-    private fun String.hasNoSeparatorSection(): Boolean {
-        return !contains(SEPARATOR_END)
+    private fun String.hasSeparatorSection(): Boolean {
+        return startsWith(SEPARATOR_START) && contains(SEPARATOR_END)
     }
 
     private fun String.isNotDigit(): Boolean {
