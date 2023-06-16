@@ -1,6 +1,6 @@
 package lotto
 
-class LottoNumber(val number: Int) {
+data class LottoNumber(val number: Int) {
     init {
         require(number in LOTTO_NUMBER_RANGE) { LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE }
     }
