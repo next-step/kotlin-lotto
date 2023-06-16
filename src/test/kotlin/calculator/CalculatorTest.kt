@@ -16,4 +16,16 @@ class CalculatorTest : StringSpec({
         // then
         result shouldBe 15
     }
+
+    "빈 문자열 표현식이 주어지면 결과값은 0이다." {
+        // given
+        val expression = Expression.of("")
+        val calculator = Calculator()
+
+        // when
+        val result = calculator.plusAll(expression)
+
+        // then
+        result shouldBe 0
+    }
 })
