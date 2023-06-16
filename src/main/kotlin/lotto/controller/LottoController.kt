@@ -12,4 +12,5 @@ fun main() {
     ResultView.printLotto(lottoList)
     val lottoNumbersOfLastWeek = InputView.getLottoNumbersOfLastWeek()
     val lottoReturn = LottoReturnCalculator(lottoList).calculate(lottoNumbersOfLastWeek)
+    ResultView.printReturn(lottoReturn)
 }
