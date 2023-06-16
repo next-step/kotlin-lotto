@@ -4,10 +4,10 @@ enum class LottoPrizes(
     val equalCount: Int,
     val money: Int
 ) {
-    MATCH_THREE_PRIZES(3, 5000),
-    MATCH_FOUR_PRIZES(4, 50000),
-    MATCH_FIVE_PRIZES(5, 1500000),
-    MATCH_SIX_PRIZES(6, 2000000000);
+    MATCH_THREE_PRIZES(3, 5_000),
+    MATCH_FOUR_PRIZES(4, 50_000),
+    MATCH_FIVE_PRIZES(5, 1_500_000),
+    MATCH_SIX_PRIZES(6, 2_000_000_000);
 
     companion object {
         private const val DEFAULT_MONEY: Int = 0
