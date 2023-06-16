@@ -1,3 +1,5 @@
+package calculator
+
 class StringAddCalculator {
     fun add(text: String?): Int {
         if (text == null || text.trim().isEmpty()) return 0
@@ -39,15 +41,11 @@ class StringAddCalculator {
     }
 
     private fun calculateSum(text: List<String>): Int {
-        return text.sumOf { numberConverter(it) }
+        return text.sumOf { stringToPositiveInteger(it) }
     }
 
-    private fun numberConverter(text: String): Int {
-        val number = text.toIntOrNull()
-        if (number == null || number < 0) {
-            throw RuntimeException()
-        }
-        return number
+    private fun stringToPositiveInteger(text: String): Int {
+        return PositiveInteger.getPositiveInteger(text)
     }
 
     companion object {
