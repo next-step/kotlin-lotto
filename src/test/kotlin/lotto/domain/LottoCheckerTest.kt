@@ -47,10 +47,10 @@ class LottoCheckerTest : BehaviorSpec({
         `when`("당첨결과를 확인했을때") {
             then("정확한 결과가 반환된다") {
                 LottoChecker.checkResult(lottos, winNumbers) shouldBe mapOf(
-                    Lotto.WinningPrize.THREE to 1,
-                    Lotto.WinningPrize.FOUR to 1,
-                    Lotto.WinningPrize.FIVE to 1,
-                    Lotto.WinningPrize.SIX to 1
+                    WinningPrize.FIRST to 1,
+                    WinningPrize.SECOND to 1,
+                    WinningPrize.THIRD to 1,
+                    WinningPrize.FOURTH to 1
                 )
             }
         }
