@@ -7,32 +7,32 @@ import stringcalculator.Operand
 
 class RegexExpressionParserTest : StringSpec({
     ",를 구분자로 사용할 수 있다." {
-        testParserResult(
+        testRegexExpressionParser(
             input = "1,2,3",
             result = listOf(1, 2, 3)
         )
     }
 
     ":를 구분자로 사용할 수 있다." {
-        testParserResult(
+        testRegexExpressionParser(
             input = "1:23",
             result = listOf(1, 23)
         )
     }
 
     """"//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.""" {
-        testParserResult(
+        testRegexExpressionParser(
             input = """//;\n1;2;3""",
             result = listOf(1, 2, 3)
         )
-        testParserResult(
+        testRegexExpressionParser(
             input = """//*\n1*2*3""",
             result = listOf(1, 2, 3)
         )
     }
 
     """, : 또는  //와 \n 문자 사이에 커스텀 구분자를 지정하여 사용할 수 있다. """ {
-        testParserResult(
+        testRegexExpressionParser(
             input = """//;\n1;12,13:22;23""",
             result = listOf(1, 12, 13, 22, 23)
         )
@@ -40,7 +40,7 @@ class RegexExpressionParserTest : StringSpec({
 
     """, : 또는  //와 \n 문자 사이에 커스텀 구분자 외에 다른 구분자가 포함되면 예외를 던진다.""" {
         shouldThrow<NumberFormatException> {
-            testParserResult(
+            testRegexExpressionParser(
                 input = """//;\n1*12,13:22;23""",
                 result = listOf(1, 12, 13, 22, 23)
             )
@@ -49,7 +49,7 @@ class RegexExpressionParserTest : StringSpec({
 
 })
 
-private fun testParserResult(input: String, result: List<Int>) {
+private fun testRegexExpressionParser(input: String, result: List<Int>) {
     RegexExpressionParser.getOperands(input) shouldBe crateOperandList(result)
 }
 
