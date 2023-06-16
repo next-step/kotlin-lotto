@@ -13,7 +13,7 @@ class ResultView {
         lottos.forEach { printLotto(it) }
     }
 
-    fun printPurchaseResult(statistics: LottoStatistics) {
+    fun printWinningResult(statistics: LottoStatistics) {
         printWinningStatistics(statistics)
         printRateOfReturn(statistics)
     }

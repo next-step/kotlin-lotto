@@ -32,7 +32,7 @@ class LottoController {
 
     private fun showWinningResult(budget: Int, lottos: List<Lotto>, winningLotto: Lotto) {
         val statistics = LottoStatistics(lottos, budget, winningLotto)
-        resultView.printPurchaseResult(statistics)
+        resultView.printWinningResult(statistics)
     }
 }
 
