@@ -1,6 +1,7 @@
 package lotto
 
-class LottoNumber(
+@JvmInline
+value class LottoNumber(
     private val numbers: List<Int> = LOTTO_NUMBER_RANGE.shuffled().take(LOTTO_NUMBER_SIZE),
 ) : List<Int> by numbers {
 
