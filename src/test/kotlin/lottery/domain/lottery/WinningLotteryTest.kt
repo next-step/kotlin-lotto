@@ -2,8 +2,10 @@ package lottery.domain.lottery
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_6
+import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_7
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_1_6
 
 class WinningLotteryTest : FunSpec({
@@ -20,6 +22,16 @@ class WinningLotteryTest : FunSpec({
                 )
             }
             exception.message shouldBe "당첨 번호와 보너스 번호는 동일할 수 없다"
+        }
+
+        test("로또 번호 6개와 보너스 번호를 들고 있다") {
+            val lottery = LOTTERY_1_6
+            val bonusNumber = LOTTERY_NUMBER_7
+
+            val actual = WinningLottery(lottery = LOTTERY_1_6, bonusNumber = bonusNumber)
+
+            actual.bonusNumber shouldBe bonusNumber
+            actual.lottery.values shouldContainAll lottery.values
         }
     }
 })
