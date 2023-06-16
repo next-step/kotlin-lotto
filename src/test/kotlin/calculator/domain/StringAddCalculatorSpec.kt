@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
-class StringCalculatorSpec : DescribeSpec({
+class StringAddCalculatorSpec : DescribeSpec({
     describe("문자열 덧셈 계산기") {
         context("입력 문자열이 정상인 경우 (w/ 기본 구분자)") {
             val ts = listOf(
@@ -22,7 +22,7 @@ class StringCalculatorSpec : DescribeSpec({
                 nameFn = { "입력 문자열 `${it.first}`의 계산 결과는 ${it.second} 이다." },
                 ts = ts,
             ) { (input, answer) ->
-                StringCalculator.calculate(input) shouldBe answer
+                StringAddCalculator.calculate(input) shouldBe answer
             }
         }
 
@@ -38,14 +38,14 @@ class StringCalculatorSpec : DescribeSpec({
                 nameFn = { "입력 문자열 `${it.first}`의 계산 결과는 ${it.second} 이다." },
                 ts = ts,
             ) { (input, answer) ->
-                StringCalculator.calculate(input) shouldBe answer
+                StringAddCalculator.calculate(input) shouldBe answer
             }
         }
 
         context("숫자 이외의 값이 전달된 경우") {
             it("IllegalArgumentException 예외를 throw 한다.") {
                 shouldThrowExactly<IllegalArgumentException> {
-                    StringCalculator.calculate("%,2")
+                    StringAddCalculator.calculate("%,2")
                 }
             }
         }
@@ -53,7 +53,7 @@ class StringCalculatorSpec : DescribeSpec({
         context("음수 값이 전달된 경우") {
             it("IllegalArgumentException 예외를 throw 한다.") {
                 shouldThrowExactly<IllegalArgumentException> {
-                    StringCalculator.calculate("1,2:3,4,5:6,7,8,9,-10")
+                    StringAddCalculator.calculate("1,2:3,4,5:6,7,8,9,-10")
                 }
             }
         }

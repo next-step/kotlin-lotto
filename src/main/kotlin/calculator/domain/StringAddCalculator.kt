@@ -1,6 +1,6 @@
 package calculator.domain
 
-object StringCalculator {
+object StringAddCalculator {
     private const val DEFAULT_VALUE = 0
 
     fun calculate(input: String?): Int {
@@ -18,13 +18,8 @@ internal object StringCalculatorParser {
 
     fun getPositiveNumbers(input: String): List<Int> {
         val (operand, delimiters) = partitionByOperandAndDelimiter(input)
-        val (numberTokens, notNumberTokens) = operand.split(delimiters).partition { it.canParseAsNumber() }
-        val (positiveZeroNumberTokens, negativeNumberTokens) = numberTokens.partition { it.isPositiveZero() }
 
-        require(notNumberTokens.isEmpty()) { "숫자 이외의 값이 전달되었습니다." }
-        require(negativeNumberTokens.isEmpty()) { "음수는 전달할 수 없습니다." }
-
-        return positiveZeroNumberTokens.map { it.toInt() }
+        return operand.split(delimiters).map { it.toPositiveNumber() }
     }
 
     private fun partitionByOperandAndDelimiter(input: String): Pair<String, Regex> {
@@ -45,7 +40,9 @@ internal object StringCalculatorParser {
         return this.toIntOrNull() != null
     }
 
-    private fun String.isPositiveZero(): Boolean {
-        return this.toInt() >= 0
+    private fun String.toPositiveNumber(): Int {
+        require(this.canParseAsNumber()) { "숫자 이외의 값이 전달되었습니다." }
+
+        return this.toInt().also { require(it >= 0) { "음수는 전달할 수 없습니다." } }
     }
 }
