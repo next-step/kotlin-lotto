@@ -12,4 +12,9 @@ object InputView {
         println(msg)
         return readln().split(WINNING_NUMBER_DELIMITER).map { it.toInt() }
     }
+
+    fun bonusBall(msg: String): Int {
+        println(msg)
+        return readln().toInt()
+    }
 }
