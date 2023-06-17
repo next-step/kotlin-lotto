@@ -11,10 +11,10 @@ class InputView(private val inputReader: InputReader) {
         return money.toInt()
     }
 
-    fun registerWinningNums(): List<Int> {
+    fun registerWinningNums(): Set<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val winningNums = inputReader.raedLine()
-        return Separator.extractIntegers(winningNums)
+        return Separator.extractIntegers(winningNums).toSet()
     }
 
     fun registerBonusBall(): Int {
