@@ -27,20 +27,16 @@ data class LottoStore(
     }
 
     private fun validateBuyCount(availableBuyCount: Int, buyCount: Int) {
-        if (availableBuyCount < buyCount) {
-            throw IllegalArgumentException(
-                "buyCount must be greater than or equal to primaryBuyCount. " +
-                    "availableBuyCount(`$availableBuyCount`), buyCount(`$buyCount`)"
-            )
+        require(buyCount <= availableBuyCount) {
+            "buyCount must be greater than or equal to primaryBuyCount. " +
+                "availableBuyCount(`$availableBuyCount`), buyCount(`$buyCount`)"
         }
     }
 
     private fun validateStorageRemainCount(storage: LottoTicketStorage, primaryBuyCount: Int) {
-        if (storage hasCountLessThan primaryBuyCount) {
-            throw IllegalStateException(
-                "primaryStorage has less than butCount. " +
-                    "primaryStorage($storage), primaryBuyCount(`$primaryBuyCount`)"
-            )
+        check(storage hasCountEqualOrGreaterThan primaryBuyCount) {
+            "primaryStorage has less than butCount. " +
+                "primaryStorage($storage), primaryBuyCount(`$primaryBuyCount`)"
         }
     }
 

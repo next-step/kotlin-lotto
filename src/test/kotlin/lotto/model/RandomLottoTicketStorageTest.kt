@@ -10,7 +10,7 @@ import io.kotest.matchers.shouldBe
 class RandomLottoTicketStorageTest : StringSpec({
 
     "개수는 항상 많음" {
-        RandomLottoTicketStorage hasCountLessThan Int.MAX_VALUE shouldBe true
+        (RandomLottoTicketStorage hasCountEqualOrGreaterThan Int.MAX_VALUE) shouldBe true
     }
 
     "개수 만큼 로또 티켓 가져오기" {

@@ -7,8 +7,8 @@ object RandomLottoTicketStorage : LottoTicketStorage {
     private const val LOTTO_SIZE: Int = Lotto.SIZE
     private val LOTTO_NUMBERS: Set<LottoNumber> = LottoNumber.ALL
 
-    override infix fun hasCountLessThan(count: Int): Boolean {
-        return false
+    override infix fun hasCountEqualOrGreaterThan(count: Int): Boolean {
+        return true
     }
 
     override infix fun lottoTicketsBy(count: Int): Collection<LottoTicket> {

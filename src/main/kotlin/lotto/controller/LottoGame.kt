@@ -27,9 +27,9 @@ object LottoGame {
 
     private fun lottoStore(manualBuyCount: Int): LottoStore {
         return LottoStore(
-            manualLottoTicketsStorage(manualBuyCount),
-            RandomLottoTicketStorage,
-            LOTTO_PRICE
+            mainLottoTicketStorage = manualLottoTicketsStorage(manualBuyCount),
+            subLottoTicketStorage = RandomLottoTicketStorage,
+            price = LOTTO_PRICE
         )
     }
 

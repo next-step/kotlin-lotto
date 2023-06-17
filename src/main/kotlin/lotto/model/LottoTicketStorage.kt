@@ -2,7 +2,7 @@ package lotto.model
 
 interface LottoTicketStorage {
 
-    infix fun hasCountLessThan(count: Int): Boolean
+    infix fun hasCountEqualOrGreaterThan(count: Int): Boolean
 
     infix fun lottoTicketsBy(count: Int): Collection<LottoTicket>
 }

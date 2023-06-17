@@ -16,12 +16,12 @@ class ManualLottoTicketStorageTest : StringSpec({
 
     "1개의 로또 개수 보다 적은 여부" {
         listOf(
-            0 to false,
-            1 to false,
-            2 to true,
-            3 to true
+            0 to true,
+            1 to true,
+            2 to false,
+            3 to false
         ).forAll {
-            (ManualLottoTicketStorage(listOf(ONE_TO_SIX_LOTTO)) hasCountLessThan it.first) shouldBe it.second
+            (ManualLottoTicketStorage(listOf(ONE_TO_SIX_LOTTO)) hasCountEqualOrGreaterThan it.first) shouldBe it.second
         }
     }
 
