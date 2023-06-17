@@ -26,6 +26,10 @@ class InputParser(inputString: String) {
             }
     }
 
+    fun sum(separators: Array<String>): Int {
+        return numbers(separators).sum()
+    }
+
     private fun String.hasSeparatorSection(): Boolean {
         return startsWith(SEPARATOR_START) && contains(SEPARATOR_END)
     }
