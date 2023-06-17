@@ -40,4 +40,8 @@ data class Lotto(
     fun match(winningLotto: Lotto): Int {
         return numbers.intersect(winningLotto.numbers).size
     }
+
+    override fun toString(): String {
+        return "$numbers"
+    }
 }
