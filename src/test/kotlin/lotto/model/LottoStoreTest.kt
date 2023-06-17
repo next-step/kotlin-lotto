@@ -41,9 +41,9 @@ class LottoStoreTest : StringSpec({
             val purchasedLottoTickets: PurchasedLottoTickets = maxPriceStore.purchaseLottoTicketsBy(0, it.first)
             // then
             purchasedLottoTickets shouldBe
-                PurchasedLottoTickets(
-                    (0 until it.second).map { ONE_TO_SIX_AUTO_LOTTO_TICKET }, oneThousandPrice
-                )
+                    PurchasedLottoTickets(
+                        (0 until it.second).map { ONE_TO_SIX_AUTO_LOTTO_TICKET }, oneThousandPrice
+                    )
         }
     }
 
@@ -70,22 +70,22 @@ class LottoStoreTest : StringSpec({
 
 private object OneToSixLottoTicketStorage : LottoTicketStorage {
 
-    override fun hasCountLessThan(count: Int): Boolean {
+    override infix fun hasCountLessThan(count: Int): Boolean {
         return false
     }
 
-    override fun lottoTicketsBy(count: Int): Collection<LottoTicket> {
+    override infix fun lottoTicketsBy(count: Int): Collection<LottoTicket> {
         return (0 until count).map { ONE_TO_SIX_AUTO_LOTTO_TICKET }
     }
 }
 
 private object EmptyLottoTicketStorage : LottoTicketStorage {
 
-    override fun hasCountLessThan(count: Int): Boolean {
+    override infix fun hasCountLessThan(count: Int): Boolean {
         return true
     }
 
-    override fun lottoTicketsBy(count: Int): Collection<LottoTicket> {
+    override infix fun lottoTicketsBy(count: Int): Collection<LottoTicket> {
         return listOf()
     }
 }
