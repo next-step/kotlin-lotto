@@ -4,6 +4,14 @@ class Number(
     val value: Int
 ) {
     init {
-        require(value > 0) { ErrorMessage.NEGATIVE_NUMBER_PASSED.message }
+        validatePositive(value)
+    }
+
+    private fun validatePositive(value: Int) {
+        require(value > ZERO) { ErrorMessage.NEGATIVE_NUMBER_PASSED.message }
+    }
+
+    companion object {
+        private const val ZERO: Int = 0
     }
 }
