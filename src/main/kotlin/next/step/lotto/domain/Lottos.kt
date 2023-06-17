@@ -1,9 +1,12 @@
 package next.step.lotto.domain
 
 @JvmInline
-value class Lottos(val lottos: Set<Lotto>) : Set<Lotto> by lottos {
+value class Lottos(val lottos: Set<Lotto>) {
     fun match(winningNumbers: LottoWinningNumbers): LottoWinningStat =
         LottoWinningStat.of(lottos.groupingBy { it.match(winningNumbers) }.eachCount())
+
+    fun size(): Int = lottos.size
+    fun numbers(): Set<Set<Int>> = lottos.map { it.numbers().toSet() }.toSet()
 
     companion object {
         fun buy(payment: Int): Lottos {

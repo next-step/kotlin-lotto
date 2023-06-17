@@ -8,7 +8,7 @@ value class LottoNumber(private val n: Int) {
         require(n in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER) { "로또 번호는 1~45 사이여야 합니다." }
     }
 
-    fun number() = n
+    fun number(): Int = n
 
     companion object {
         const val MIN_LOTTO_NUMBER = 1

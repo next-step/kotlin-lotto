@@ -1,7 +1,10 @@
 package next.step.lotto.domain
 
 @JvmInline
-value class LottoWinningNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
+value class LottoWinningNumbers(private val numbers: Set<LottoNumber>) {
+    fun match(numbers: Set<Int>): Int = this.numbers.filter { numbers.contains(it.number()) }.size
+
+
     companion object {
         fun from(str: String): LottoWinningNumbers {
             val numbers = parse(str)
@@ -9,7 +12,7 @@ value class LottoWinningNumbers(private val numbers: Set<LottoNumber>) : Set<Lot
             return LottoWinningNumbers(numbers)
         }
 
-        private fun parse(str: String) = str.split(",")
+        private fun parse(str: String): Set<LottoNumber> = str.split(",")
             .map { LottoNumber.of(it.trim().toInt()) }
             .toSet()
     }

@@ -2,7 +2,7 @@ package next.step.lotto.domain
 
 @JvmInline
 value class Lotto(private val numbers: LottoNumbers) {
-    fun numbers() = numbers.numbers()
+    fun numbers(): Set<Int> = numbers.numbers()
 
     fun buy(payment: Int): Int {
         require(canBuy(payment)) { "로또 가격을 지불해야 합니다." }
@@ -10,7 +10,7 @@ value class Lotto(private val numbers: LottoNumbers) {
     }
 
     fun match(winningNumbers: LottoWinningNumbers): LottoWinningCount =
-        LottoWinningCount.from(winningNumbers.filter { numbers.contains(it) }.size)
+        LottoWinningCount.from(winningNumbers.match(numbers()))
 
     companion object {
         const val LOTTO_PRICE: Int = 1000
