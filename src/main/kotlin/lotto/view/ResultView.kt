@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.Lotto
-import lotto.LottoRank
+import lotto.enums.LottoRank
 
 object ResultView {
 

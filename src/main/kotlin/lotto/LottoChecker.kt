@@ -1,12 +1,14 @@
 package lotto
 
+import lotto.enums.LottoRank
+
 class LottoChecker {
 
-    fun lottoCheck(winningNumber: String, lottoBundle: List<List<Int>>): List<Int> {
+    fun lottoCheck(winningNumber: String, lottoBundle: List<List<Int>>): List<LottoRank> {
 
         val numbers = winningNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }
 
-        val result = mutableListOf<Int>()
+        val result = mutableListOf<LottoRank>()
         lottoBundle.forEach { lotto ->
             var count = 0
             lotto.forEach { number ->
@@ -14,24 +16,22 @@ class LottoChecker {
                     count++
                 }
             }
-            result.add(count)
+            if(count != 0) {
+                result.add(LottoRank.getLottoRankByCount(count))
+            }
         }
         return result.toList()
     }
 
-    fun winningMoneyCheck(collectCounts: List<Int>): Int {
+    fun winningMoneyCheck(collectLottoRanks: List<LottoRank>): Int {
         var winningMoney = 0
-        collectCounts.forEach { count ->
-            winningMoney += LottoRank.getPrizeMoney(count)
+        collectLottoRanks.forEach { rank ->
+            winningMoney += rank.prizeMoney
         }
         return winningMoney
     }
 
-    fun lottoResultGroup(collectCounts: List<Int>): Map<Int, Int> {
-        return collectCounts.sorted().groupingBy { it }.eachCount()
-    }
-
-    companion object {
-        private const val NONE_PRIZE_MONEY = 0
+    fun lottoResultGroup(collectLottoRanks: List<LottoRank>): Map<Int, Int> {
+        return collectLottoRanks.sorted().groupingBy { it.count }.eachCount()
     }
 }

@@ -19,12 +19,12 @@ class LottoApplication(
         resultView.printEnter()
 
         resultView.printResult()
-        val collectCounts = lottoChecker.lottoCheck(lastWeekNumber, lottoBundle.lottoBundle)
+        val collectLottoRanks = lottoChecker.lottoCheck(lastWeekNumber, lottoBundle.lottoBundle)
 
-        val resultGroup = lottoChecker.lottoResultGroup(collectCounts)
+        val resultGroup = lottoChecker.lottoResultGroup(collectLottoRanks)
         resultView.printWinningResult(resultGroup)
 
-        val winningMoney = lottoChecker.winningMoneyCheck(collectCounts)
+        val winningMoney = lottoChecker.winningMoneyCheck(collectLottoRanks)
 
         val returnRatio = rateCalculator.calculateRateOfReturn(lottoBundle.inputMoney, winningMoney)
         resultView.printRateOfReturn(returnRatio)

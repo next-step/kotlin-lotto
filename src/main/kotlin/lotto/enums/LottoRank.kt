@@ -1,4 +1,4 @@
-package lotto
+package lotto.enums
 
 enum class LottoRank(
     val count: Int,
@@ -11,8 +11,8 @@ enum class LottoRank(
     NON_COLLECT(0, 0);
 
     companion object {
-        fun getPrizeMoney(count: Int): Int {
-            return values().find { it.count == count }?.prizeMoney ?: NON_COLLECT.prizeMoney
+        fun getLottoRankByCount(count: Int): LottoRank {
+            return values().find { it.count == count } ?: NON_COLLECT
         }
     }
 }
