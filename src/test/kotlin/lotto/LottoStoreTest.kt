@@ -2,11 +2,14 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.MethodSource
 
 class LottoStoreTest {
 
@@ -54,5 +57,47 @@ class LottoStoreTest {
         shouldThrow<IllegalArgumentException> {
             lottoStore.purchase(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
         }
+    }
+
+    @ParameterizedTest
+    @MethodSource("getAutoLotteryTicketsExclusiveManualLotteryTicketsTestData")
+    fun `로또 판매점은 구매 금액에서 수동 구매한 로또를 제외한 만큼 자동으로 로또를 발급`(
+        purchaseAmount: Int,
+        manualLottoNumbers: List<LottoNumbers>,
+        expectedAutoLotteryTicketCount: Int
+    ) {
+        val lotteryTickets =
+            lottoStore.purchase(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        val autoLotteryTickets = lotteryTickets.filter { it.isAuto }
+
+        autoLotteryTickets.size shouldBe expectedAutoLotteryTicketCount
+    }
+
+    companion object {
+        @JvmStatic
+        fun getAutoLotteryTicketsExclusiveManualLotteryTicketsTestData(): List<Arguments> =
+            listOf(
+                Arguments.of(
+                    3000,
+                    listOf(
+                        LottoTestHelper.makeLottoNumbers((1..6).toList()),
+                        LottoTestHelper.makeLottoNumbers((1..6).toList()),
+                    ),
+                    1
+                ),
+                Arguments.of(
+                    2000,
+                    listOf(
+                        LottoTestHelper.makeLottoNumbers((1..6).toList()),
+                        LottoTestHelper.makeLottoNumbers((1..6).toList()),
+                    ),
+                    0
+                ),
+                Arguments.of(
+                    5000,
+                    emptyList<LottoNumbers>(),
+                    5
+                ),
+            )
     }
 }
