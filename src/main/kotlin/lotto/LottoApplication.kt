@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.dto.LottoBundle
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -12,24 +13,24 @@ class LottoApplication(
     private val resultView = ResultView
 
     fun lottoRun() {
-        val (inputMoney, lottoBundle) = getLottoBundleByMoney()
+        val lottoBundle = getLottoBundleByMoney()
 
         val lastWeekNumber = inputView.printInputLottoNumberByLastWeek()
         resultView.printEnter()
 
         resultView.printResult()
-        val collectCounts = lottoChecker.lottoCheck(lastWeekNumber, lottoBundle)
+        val collectCounts = lottoChecker.lottoCheck(lastWeekNumber, lottoBundle.lottoBundle)
 
         val resultGroup = lottoChecker.lottoResultGroup(collectCounts)
         resultView.printWinningResult(resultGroup)
 
         val winningMoney = lottoChecker.winningMoneyCheck(collectCounts)
 
-        val returnRatio = calculator.calculateRateOfReturn(inputMoney, winningMoney)
+        val returnRatio = calculator.calculateRateOfReturn(lottoBundle.inputMoney, winningMoney)
         resultView.printRateOfReturn(returnRatio)
     }
 
-    private fun getLottoBundleByMoney(): Pair<Int, List<List<Int>>> {
+    private fun getLottoBundleByMoney(): LottoBundle {
         val inputMoney = inputView.printInputLottoBuyMoney().toInt()
         resultView.printLottoCount(inputMoney)
 
@@ -39,7 +40,7 @@ class LottoApplication(
         val lottoBundle = lottoManager.buyLotto(inputMoney)
         resultView.printLottoBundle(lottoBundle)
         resultView.printEnter()
-        return Pair(inputMoney, lottoBundle)
+        return LottoBundle(inputMoney, lottoBundle)
     }
 }
 
