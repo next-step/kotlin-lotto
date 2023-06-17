@@ -1,8 +1,8 @@
 package lottery.view
 
 import lottery.domain.LottoResult
-import lottery.domain.Rank
 import lottery.domain.lottery.Lottery
+import lottery.domain.rank.Rank
 
 private const val LOTTERY_NUMBER_DELIMITER = ", "
 

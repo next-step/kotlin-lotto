@@ -1,6 +1,6 @@
 package lottery.domain.lottery
 
-import lottery.domain.Rank
+import lottery.domain.rank.Rank
 
 class WinningLottery(
     val lottery: Lottery,

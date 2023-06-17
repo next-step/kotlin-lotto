@@ -11,6 +11,7 @@ import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_2_7
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_4_9
 import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.RandomLotteryGenerator
+import lottery.domain.rank.Rank
 import java.math.BigDecimal
 
 class WalletTest : FunSpec({

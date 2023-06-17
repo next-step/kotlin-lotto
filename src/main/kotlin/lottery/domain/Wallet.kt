@@ -4,6 +4,7 @@ import lottery.domain.lottery.Lotteries
 import lottery.domain.lottery.Lottery
 import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.LotteryGenerator
+import lottery.domain.rank.Rank
 import java.math.BigDecimal
 import java.math.RoundingMode
 

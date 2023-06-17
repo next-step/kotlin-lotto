@@ -6,7 +6,6 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
-import lottery.domain.Rank
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_2
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_3
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_4
@@ -19,6 +18,7 @@ import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_2_7
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_3_8
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_4_9
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_5_10
+import lottery.domain.rank.Rank
 
 class WinningLotteryTest : FunSpec({
 

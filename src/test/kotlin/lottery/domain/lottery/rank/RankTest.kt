@@ -1,17 +1,18 @@
-package lottery.domain
+package lottery.domain.lottery.rank
 
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
-import lottery.domain.Rank.Companion.fillMissRankWithDefault
-import lottery.domain.Rank.FIFTH
-import lottery.domain.Rank.FIRST
-import lottery.domain.Rank.FOURTH
-import lottery.domain.Rank.NOTHING
-import lottery.domain.Rank.SECOND
-import lottery.domain.Rank.THIRD
+import lottery.domain.rank.Rank
+import lottery.domain.rank.Rank.Companion.fillMissRankWithDefault
+import lottery.domain.rank.Rank.FIFTH
+import lottery.domain.rank.Rank.FIRST
+import lottery.domain.rank.Rank.FOURTH
+import lottery.domain.rank.Rank.NOTHING
+import lottery.domain.rank.Rank.SECOND
+import lottery.domain.rank.Rank.THIRD
 import java.lang.IllegalArgumentException
 
 class RankTest : FunSpec({
@@ -38,7 +39,12 @@ class RankTest : FunSpec({
             row(7)
         ) { input ->
             test("룰에서 벗어난 값 $input 이 입력되는 경우 예외가 발생한다.") {
-                val exception = shouldThrowExactly<IllegalArgumentException> { Rank.of(matchCount = input, isBonus = true) }
+                val exception = shouldThrowExactly<IllegalArgumentException> {
+                    Rank.of(
+                        matchCount = input,
+                        isBonus = true
+                    )
+                }
                 exception.message shouldBe "로또 룰에 벗어난 수는 입력될 수 없다"
             }
         }

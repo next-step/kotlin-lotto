@@ -1,9 +1,9 @@
 package lottery.domain.lottery
 
 import lottery.domain.Money
-import lottery.domain.Rank
-import lottery.domain.Rank.Companion.fillMissRankWithDefault
 import lottery.domain.lottery.Lottery.Companion.LOTTERY_COST
+import lottery.domain.rank.Rank
+import lottery.domain.rank.Rank.Companion.fillMissRankWithDefault
 
 class Lotteries(
     val values: MutableList<Lottery>

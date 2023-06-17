@@ -1,9 +1,9 @@
-package lottery.domain
+package lottery.domain.rank
 
 enum class Rank(
     val reward: Long,
     val equalCount: String,
-    val rankingMetric: (Int, Boolean) -> Boolean
+    val rankingMetric: RankingMetric
 ) {
     NOTHING(0, "0,1,2", { matchCount, _ -> matchCount in 0..2 }),
     FIFTH(5_000, "3", { matchCount, _ -> matchCount == 3 }),
@@ -20,7 +20,7 @@ enum class Rank(
         val comparator: Comparator<Rank> = compareBy { it.reward }
 
         fun of(matchCount: Int, isBonus: Boolean): Rank = Rank.values()
-            .firstOrNull { it.rankingMetric(matchCount, isBonus) } ?: throw IllegalArgumentException("로또 룰에 벗어난 수는 입력될 수 없다")
+            .firstOrNull { it.rankingMetric.rank(matchCount, isBonus) } ?: throw IllegalArgumentException("로또 룰에 벗어난 수는 입력될 수 없다")
 
         fun Map<Rank, Int>.fillMissRankWithDefault() = Rank.values()
             .associateWith { this.getOrDefault(it, DEFAULT_RANK_COUNT) }

@@ -3,12 +3,12 @@ package lottery.domain.lottery
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import lottery.domain.Money
-import lottery.domain.Rank
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_8
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_1_6
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_2_7
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_3_8
 import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_4_9
+import lottery.domain.rank.Rank
 import java.math.BigDecimal
 
 class LotteriesTest : FunSpec({
