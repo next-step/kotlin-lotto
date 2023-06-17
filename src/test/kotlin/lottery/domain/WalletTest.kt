@@ -64,7 +64,7 @@ class WalletTest : FunSpec({
         test("당첨 로또를 받아 로또의 당첨 결과를 반환할 수 있다") {
             val wallet = Wallet(
                 money = Money(BigDecimal.ZERO),
-                purchaseLotteries = Lotteries(
+                randomLotteries = Lotteries(
                     values = mutableListOf(
                         LOTTERY_1_6,
                         LOTTERY_1_6,
