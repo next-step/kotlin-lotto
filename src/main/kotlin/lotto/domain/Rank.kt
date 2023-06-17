@@ -9,21 +9,21 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int) {
     MISSING(0, 0);
 
     companion object {
+        private const val MATCH_FIVE = 5
+
         fun valueOf(countOfMatch: Int, isBonusMatched: Boolean): Rank {
-            return values().find {
-                if (countOfMatch == 5) {
-                    it.winningMoney == getMatchFiveMoney(isBonusMatched)
-                } else {
-                    it.countOfMatch == countOfMatch
-                }
-            } ?: MISSING
+            return if (countOfMatch == MATCH_FIVE) {
+                getMatchFiveMoney(isBonusMatched)
+            } else {
+                values().firstOrNull { it.countOfMatch == countOfMatch } ?: MISSING
+            }
         }
 
-        private fun getMatchFiveMoney(isBonusMatched: Boolean): Int {
+        private fun getMatchFiveMoney(isBonusMatched: Boolean): Rank {
             return if (isBonusMatched) {
-                SECOND.winningMoney
+                SECOND
             } else {
-                THIRD.winningMoney
+                THIRD
             }
         }
     }
