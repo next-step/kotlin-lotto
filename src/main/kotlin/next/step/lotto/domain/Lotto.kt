@@ -2,6 +2,7 @@ package next.step.lotto.domain
 
 @JvmInline
 value class Lotto(private val numbers: LottoNumbers) {
+    
     fun numbers(): Set<Int> = numbers.numbers()
 
     fun buy(payment: Int): Int {
@@ -9,8 +10,8 @@ value class Lotto(private val numbers: LottoNumbers) {
         return payment - LOTTO_PRICE
     }
 
-    fun match(winningNumbers: LottoWinningNumbers): LottoRank =
-        LottoRank.from(winningNumbers.match(numbers()))
+    fun match(numbers: Set<LottoNumber>): LottoRank =
+        LottoRank.from(this.numbers.match(numbers))
 
     companion object {
         const val LOTTO_PRICE: Int = 1000

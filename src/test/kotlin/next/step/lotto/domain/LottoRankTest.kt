@@ -12,10 +12,10 @@ class LottoRankTest : DescribeSpec({
                 RankExpected(0, LottoRank.MISS),
                 RankExpected(1, LottoRank.MISS),
                 RankExpected(2, LottoRank.MISS),
-                RankExpected(3, LottoRank.FIRST),
-                RankExpected(4, LottoRank.SECOND),
-                RankExpected(5, LottoRank.THIRD),
-                RankExpected(6, LottoRank.FOURTH)
+                RankExpected(3, LottoRank.FOURTH),
+                RankExpected(4, LottoRank.THIRD),
+                RankExpected(5, LottoRank.SECOND),
+                RankExpected(6, LottoRank.FIRST)
             ) { (matchingCount, expected) ->
                 LottoRank.from(matchingCount) shouldBe expected
             }

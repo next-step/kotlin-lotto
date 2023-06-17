@@ -1,5 +1,6 @@
 package next.step.racing.view
 
+import next.step.lotto.domain.LottoNumberParser
 import next.step.lotto.domain.LottoWinningNumbers
 
 object InputView {
@@ -9,7 +10,9 @@ object InputView {
 
     fun readPayment(): Int = read(ENTER_PAYMENT, String::toInt)
 
-    fun readWinningNumbers(): LottoWinningNumbers = read(ENTER_WINNING_NUMBERS, LottoWinningNumbers::from)
+    fun readWinningNumbers(): LottoWinningNumbers = read(ENTER_WINNING_NUMBERS, this::parse)
+
+    private fun parse(str: String) = LottoWinningNumbers.of(LottoNumberParser.parse(str))
 
     private fun <T> read(enterMsg: String, constructor: (String) -> T): T {
         return try {

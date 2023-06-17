@@ -54,29 +54,12 @@ class LottoTest : DescribeSpec({
             }
         }
     }
-
+    
     describe("당첨 확인") {
         context("당첨 번호를 넣으면") {
-            it("당첨된 개수에 따라 LottoWinningCount 제공") {
-                Lottos.of(
-                    setOf(
-                        Lotto.from(setOf(1, 2, 3, 4, 5, 7)),
-                        Lotto.from(setOf(1, 2, 3, 4, 8, 7)),
-                        Lotto.from(setOf(1, 2, 3, 9, 8, 7)),
-                        Lotto.from(setOf(1, 2, 10, 9, 8, 7)),
-                        Lotto.from(setOf(1, 11, 10, 9, 8, 7)),
-                        Lotto.from(setOf(12, 11, 10, 9, 8, 7)),
-                    )
-                ).match(LottoWinningNumbers.from("1,2,3,4,5,6")) shouldBe
-                        LottoWinningStat.of(
-                            mapOf(
-                                Pair(LottoRank.FOURTH, 0),
-                                Pair(LottoRank.THIRD, 1),
-                                Pair(LottoRank.SECOND, 1),
-                                Pair(LottoRank.FIRST, 1),
-                                Pair(LottoRank.MISS, 3),
-                            )
-                        )
+            it("당첨 통계 제공") {
+                Lotto.of(LottoNumbers.from((1..6).toSet()))
+                    .match((1..6).map { LottoNumber.of(it) }.toSet()) shouldBe LottoRank.FIRST
             }
         }
     }

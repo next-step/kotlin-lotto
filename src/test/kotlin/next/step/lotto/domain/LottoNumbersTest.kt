@@ -40,4 +40,11 @@ class LottoNumbersTest : DescribeSpec({
         }
     }
 
+    describe("LottoNumbers match") {
+        context("lotto number set을 주면") {
+            it("같은 숫자 개수 제공") {
+                LottoNumbers.from(setOf(1, 2, 3, 4, 8, 9)).match((1..6).map { LottoNumber.of(it) }.toSet()) shouldBe 4
+            }
+        }
+    }
 })

@@ -10,13 +10,13 @@ class LottoWinningStatTest : DescribeSpec({
             it("수익률을 소수점 둘째자리까지 제공") {
                 LottoWinningStat.of(
                     mapOf(
-                        Pair(LottoRank.FOURTH, 0),
-                        Pair(LottoRank.THIRD, 1),
-                        Pair(LottoRank.SECOND, 1),
-                        Pair(LottoRank.FIRST, 1),
-                        Pair(LottoRank.MISS, 3),
+                        Pair(LottoRank.FIRST, 0),
+                        Pair(LottoRank.SECOND, 0),
+                        Pair(LottoRank.THIRD, 0),
+                        Pair(LottoRank.FOURTH, 1),
+                        Pair(LottoRank.MISS, 0),
                     )
-                ).performance(1000) shouldBe "0.15"
+                ).performance(1000) shouldBe "5.00"
             }
         }
     }

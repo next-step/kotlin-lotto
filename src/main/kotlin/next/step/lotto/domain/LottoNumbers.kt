@@ -8,6 +8,7 @@ value class LottoNumbers(private val numbers: Set<LottoNumber>) {
     }
 
     fun numbers(): Set<Int> = numbers.map { it.number }.toSet()
+    fun match(numbers: Set<LottoNumber>): Int = this.numbers.count { numbers.contains(it) }
 
     companion object {
         fun from(numbers: Set<Int>): LottoNumbers = LottoNumbers(numbers.map { LottoNumber.of(it) }.toSet())
