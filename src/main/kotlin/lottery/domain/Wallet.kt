@@ -16,8 +16,10 @@ class Wallet(
     var money: Money = money
         private set
 
-    fun purchaseManualLotteries(manualLotteries: List<List<String>>) {
+    fun purchaseManualLotteries(manualLotteries: List<List<String>>): List<Lottery> {
         require(Lottery.canPurchaseLottery(manualLotteries.size, money)) { "수동 로또를 사기엔 부족한 금액이다" }
+        val purchaseManualLotteries = Lotteries.from(manualLotteries)
+        return purchaseManualLotteries(purchaseManualLotteries)
     }
 
     fun purchaseLotteries(randomLotteryGenerator: LotteryGenerator): List<Lottery> {
@@ -32,8 +34,11 @@ class Wallet(
         return LottoResult(lottoYield = lottoYield, statistics = statistics)
     }
 
-    private fun generateLottery(purchaseCount: Int, lotteryGenerator: LotteryGenerator): List<Lottery> =
-        lotteryGenerator.generateLotteries(purchaseCount)
+    private fun purchaseManualLotteries(purchaseManualLotteries: Lotteries): MutableList<Lottery> {
+        money -= purchaseManualLotteries.cost()
+        this.manualLotteries.addLotteries(purchaseManualLotteries)
+        return purchaseManualLotteries.values
+    }
 
     private fun purchaseLotteriesByReceipt(receipt: Receipt, randomLotteryGenerator: LotteryGenerator): List<Lottery> {
         money -= receipt.usedMoney
@@ -41,6 +46,9 @@ class Wallet(
         this.purchaseLotteries.addLotteries(purchaseLotteries)
         return purchaseLotteries
     }
+
+    private fun generateLottery(purchaseCount: Int, lotteryGenerator: LotteryGenerator): List<Lottery> =
+        lotteryGenerator.generateLotteries(purchaseCount)
 
     private fun calculateYield(statistics: Map<Rank, Int>): BigDecimal =
         calculateTotalReward(statistics).divide(purchaseLotteries.cost().value, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.DOWN)

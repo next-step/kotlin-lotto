@@ -29,6 +29,18 @@ class WalletTest : FunSpec({
                 shouldThrowExactly<IllegalArgumentException> { wallet.purchaseManualLotteries(givenManualLotteries) }
             exception.message shouldBe "수동 로또를 사기엔 부족한 금액이다"
         }
+
+        test("수동 로또를 구매할 수 있다") {
+            val givenManualLotteries = listOf(
+                listOf("1", "2", "3", "4", "5", "6"),
+                listOf("2", "3", "4", "5", "6", "7"),
+            )
+            val wallet = Wallet(money = Money(BigDecimal(2_500)))
+
+            val actual = wallet.purchaseManualLotteries(givenManualLotteries)
+            wallet.money shouldBe Money(value = BigDecimal(500))
+            actual shouldHaveSize 2
+        }
     }
 
     context("purchaseLottery") {

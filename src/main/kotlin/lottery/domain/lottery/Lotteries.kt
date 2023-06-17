@@ -17,6 +17,8 @@ class Lotteries(
 
     fun addLotteries(lotteries: List<Lottery>) = values.addAll(lotteries)
 
+    fun addLotteries(lotteries: Lotteries) = values.addAll(lotteries.values)
+
     fun cost(): Money = LOTTERY_COST.times(values.size)
 
     companion object {
