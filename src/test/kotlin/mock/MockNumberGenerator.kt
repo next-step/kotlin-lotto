@@ -2,8 +2,8 @@ package mock
 
 import util.NumberGenerator
 
-class MockNumberGenerator(private val mockNumbers: List<Int>) : NumberGenerator {
-    override fun randomNumberGenerator(): List<Int> {
+class MockNumberGenerator(private val mockNumbers: Set<Int>) : NumberGenerator {
+    override fun randomNumbers(): Set<Int> {
         return mockNumbers
     }
 }
