@@ -25,5 +25,7 @@ class Lotteries(
         fun init() = Lotteries(mutableListOf())
 
         fun from(values: List<List<String>>) = Lotteries(values.map { Lottery.from(it) }.toMutableList())
+
+        fun merge(vararg lotteries: Lotteries) = Lotteries(lotteries.flatMap { it.values }.toMutableList())
     }
 }

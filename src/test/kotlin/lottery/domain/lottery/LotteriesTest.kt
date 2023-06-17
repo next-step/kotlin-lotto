@@ -50,4 +50,14 @@ class LotteriesTest : FunSpec({
             actual.values shouldHaveSize 2
         }
     }
+
+    context("merge") {
+        test("여러 Lotteries를 합칠 수 있다") {
+            val actual = Lotteries.merge(
+                Lotteries(values = mutableListOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_2_7, LOTTERY_4_9)),
+                Lotteries(values = mutableListOf(LOTTERY_1_6, LOTTERY_1_6, LOTTERY_3_8, LOTTERY_4_9)),
+            )
+            actual.values shouldHaveSize 8
+        }
+    }
 })
