@@ -1,50 +1,54 @@
 package lotto
 
-import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
-import java.math.BigDecimal
 
-class PrizeTest : StringSpec({
-    "총 상금액을 계산한다" {
-        val winningLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 10))
-        val secondPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 9))
-        val thirdPrizeLotto = Lotto.of(listOf(1, 2, 6, 7, 8, 9))
-        val fourthPrizeLotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
-        val nonePrizeLotto = Lotto.of(listOf(1, 2, 4, 5, 6, 9))
-
-        val totalPrizeAmount: BigDecimal = Prize.calculateTotalPrizeAmount(
-            lottos = Lottos(listOf(winningLotto, secondPrizeLotto, thirdPrizeLotto, fourthPrizeLotto, nonePrizeLotto)),
-            winningLotto = winningLotto,
-        )
-
-        totalPrizeAmount shouldBe BigDecimal(200_1_555_000)
+class PrizeTest : FunSpec({
+    context("상금이 꽝이 아닌지 여부를 반환한다") {
+        withData(
+            Pair(Prize.FIRST, true),
+            Pair(Prize.SECOND, true),
+            Pair(Prize.THIRD, true),
+            Pair(Prize.FOURTH, true),
+            Pair(Prize.FIFTH, true),
+            Pair(Prize.MISS, false),
+        ) { (prize, expected) ->
+            prize.isNotMiss() shouldBe expected
+        }
     }
 
-    "상금별로 당첨 로또 횟수를 구한다" {
-        val winningLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 10))
-        val secondPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 9))
-        val thirdPrizeLotto = Lotto.of(listOf(1, 2, 6, 7, 8, 9))
-        val fourthPrizeLotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
-        val nonePrizeLotto = Lotto.of(listOf(1, 2, 4, 5, 6, 9))
+    context("상금이 보너스번호가 일치했는지 반환한다") {
+        withData(
+            Pair(Prize.FIRST, false),
+            Pair(Prize.SECOND, true),
+            Pair(Prize.THIRD, false),
+            Pair(Prize.FOURTH, false),
+            Pair(Prize.FIFTH, false),
+            Pair(Prize.MISS, false),
+        ) { (prize, expected) ->
+            prize.isBonusMatched() shouldBe expected
+        }
+    }
 
-        val winningLottoCountsByPrize = Prize.getWinningLottoCountsByPrize(
-            lottos = Lottos(
-                listOf(
-                    winningLotto,
-                    secondPrizeLotto,
-                    thirdPrizeLotto,
-                    fourthPrizeLotto,
-                    fourthPrizeLotto,
-                    fourthPrizeLotto,
-                    nonePrizeLotto
-                )
-            ),
-            winningLotto = winningLotto,
-        )
-
-        winningLottoCountsByPrize[Prize.FIRST] shouldBe 1
-        winningLottoCountsByPrize[Prize.SECOND] shouldBe 1
-        winningLottoCountsByPrize[Prize.THIRD] shouldBe 1
-        winningLottoCountsByPrize[Prize.FOURTH] shouldBe 3
+    context("일치한 로또번호 개수와 보너스일치 여부를 받아 상금을 반환한다") {
+        withData(
+            Triple(0, false, Prize.MISS),
+            Triple(0, true, Prize.MISS),
+            Triple(1, false, Prize.MISS),
+            Triple(1, true, Prize.MISS),
+            Triple(2, false, Prize.MISS),
+            Triple(2, true, Prize.MISS),
+            Triple(3, false, Prize.FIFTH),
+            Triple(3, true, Prize.FIFTH),
+            Triple(4, false, Prize.FOURTH),
+            Triple(4, true, Prize.FOURTH),
+            Triple(5, false, Prize.THIRD),
+            Triple(5, true, Prize.SECOND),
+            Triple(6, false, Prize.FIRST),
+            Triple(6, true, Prize.FIRST),
+        ) { (matchedCount, bonusMatched, prize) ->
+            Prize.match(matchedCount, bonusMatched) shouldBe prize
+        }
     }
 })

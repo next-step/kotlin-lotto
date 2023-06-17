@@ -1,45 +1,71 @@
 package lotto
 
-import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import java.math.BigDecimal
+import java.math.RoundingMode
 
-class LottosTest : StringSpec({
-    "구입금액에 해당하는 개수만큼 로또를 생성한다" {
+class LottosTest : FunSpec({
+    test("구입금액에 해당하는 개수만큼 로또를 생성한다") {
         val lottos = Lottos.of(purchaseAmount = 2000, lottoGenerator = RandomLottoGenerator())
 
         lottos.size shouldBe 2
     }
 
-    "일치하는 개수 별 당첨 로또 개수를 구한다" {
+    test("상금별 당첨 로또 개수를 구한다.") {
+        val winningLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 10))
+        val secondPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 9))
+        val thirdPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 11))
+        val fourthPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 5, 6))
+        val missPrizeLotto = Lotto.of(listOf(1, 2, 4, 5, 6, 9))
         val lottos = Lottos(
             listOf(
-                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto.of(listOf(1, 2, 3, 7, 8, 9)),
-                Lotto.of(listOf(1, 2, 6, 7, 8, 9)),
+                winningLotto,
+                secondPrizeLotto,
+                thirdPrizeLotto,
+                fourthPrizeLotto,
+                fourthPrizeLotto,
+                fourthPrizeLotto,
+                missPrizeLotto
             )
         )
 
-        val winningLottoCount = lottos.getWinningLottoCountByMatchCount(
-            winningLotto = Lotto.of(listOf(1, 2, 3, 41, 42, 43)),
-            matchCount = 3
+        val winningLottoCountsByPrize = lottos.getWinningCountsByPrize(
+            winningLotto = winningLotto,
+            bonusLottoNumber = LottoNumber(9),
         )
 
-        winningLottoCount shouldBe 2
+        winningLottoCountsByPrize[Prize.FIRST] shouldBe 1
+        winningLottoCountsByPrize[Prize.SECOND] shouldBe 1
+        winningLottoCountsByPrize[Prize.THIRD] shouldBe 1
+        winningLottoCountsByPrize[Prize.FOURTH] shouldBe 3
+        winningLottoCountsByPrize[Prize.FIFTH] shouldBe 0
+        winningLottoCountsByPrize.contains(Prize.MISS) shouldBe false
     }
 
-    "수익률을 구한다" {
+    test("총 상금액을 계산한다") {
+        val winningLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 10))
+        val secondPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 9))
+        val thirdPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 11))
+        val fourthPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 5, 6))
+        val fifthPrizeLotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+        val missPrizeLotto = Lotto.of(listOf(1, 2, 4, 5, 6, 9))
         val lottos = Lottos(
             listOf(
-                Lotto.of(listOf(1, 2, 3, 4, 5, 6)),
-                Lotto.of(listOf(1, 2, 3, 7, 8, 9)),
-                Lotto.of(listOf(1, 2, 6, 7, 8, 9)),
+                winningLotto,
+                secondPrizeLotto,
+                thirdPrizeLotto,
+                fourthPrizeLotto,
+                fifthPrizeLotto,
+                missPrizeLotto
             )
         )
 
-        val totalProfitRate = lottos.getTotalProfitRate(
-            winningLotto = Lotto.of(listOf(1, 2, 3, 41, 42, 43)),
+        val totalPrizeAmount: BigDecimal = lottos.getTotalProfitRate(
+            winningLotto = winningLotto,
+            bonusLottoNumber = LottoNumber(9),
         )
 
-        totalProfitRate shouldBe 3.33.toBigDecimal() // (= 5000 * 2 / 1000 * 3)
+        totalPrizeAmount shouldBe BigDecimal(338592.50).setScale(2, RoundingMode.HALF_UP)
     }
 })

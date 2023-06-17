@@ -1,13 +1,13 @@
 package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.spec.style.FunSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class LottoNumberTest : StringSpec({
-    "로또숫자에 1~45 외 다른 숫자를 담으면 예외가 발생한다" {
+class LottoNumberTest : FunSpec({
+    test("로또숫자에 1~45 외 다른 숫자를 담으면 예외가 발생한다") {
         forAll(
             row(0),
             row(46),
