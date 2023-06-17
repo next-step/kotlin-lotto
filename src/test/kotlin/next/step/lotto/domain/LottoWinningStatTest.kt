@@ -13,7 +13,8 @@ class LottoWinningStatTest : DescribeSpec({
                         Pair(LottoRank.FIRST, 0),
                         Pair(LottoRank.SECOND, 0),
                         Pair(LottoRank.THIRD, 0),
-                        Pair(LottoRank.FOURTH, 1),
+                        Pair(LottoRank.FOURTH, 0),
+                        Pair(LottoRank.FIFTH, 1),
                         Pair(LottoRank.MISS, 0),
                     )
                 ).performance(1000) shouldBe "5.00"

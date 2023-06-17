@@ -35,9 +35,10 @@ class LottosTest : DescribeSpec({
                         LottoWinningStat.of(
                             mapOf(
                                 Pair(LottoRank.FIRST, 0),
-                                Pair(LottoRank.SECOND, 1),
+                                Pair(LottoRank.SECOND, 0),
                                 Pair(LottoRank.THIRD, 1),
                                 Pair(LottoRank.FOURTH, 1),
+                                Pair(LottoRank.FIFTH, 1),
                                 Pair(LottoRank.MISS, 3),
                             )
                         )
