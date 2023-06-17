@@ -10,7 +10,8 @@ fun main() {
         val lottos = Lottos.buy(payment)
         OutputView.showLottos(lottos)
         val winningNumbers = InputView.readWinningNumbers()
-        val winningStat = lottos.match(winningNumbers)
+        val bonusNumber = InputView.readBonusNumber()
+        val winningStat = lottos.match(winningNumbers, bonusNumber)
         OutputView.showWinningStats(winningStat)
         OutputView.showPerformance(winningStat.performance(payment))
     }.onFailure { e ->

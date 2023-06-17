@@ -46,6 +46,16 @@ class LottoTest : DescribeSpec({
                 Lotto.from(setOf(1, 2, 3, 4, 5, 6)).match(matchingNumbers) shouldBe expected
             }
         }
+
+        context("lotto number를 주면, 해당 숫자 포함 여부 제공") {
+            data class MatchExpected(val number: LottoNumber, val expected: Boolean)
+            withData(
+                MatchExpected(LottoNumber.of(1), true),
+                MatchExpected(LottoNumber.of(7), false),
+            ) { (number, expected) ->
+                Lotto.from(setOf(1, 2, 3, 4, 5, 6)).match(number) shouldBe expected
+            }
+        }
     }
 })
 

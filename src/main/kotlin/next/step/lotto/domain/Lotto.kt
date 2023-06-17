@@ -11,6 +11,8 @@ value class Lotto(private val numbers: Set<LottoNumber>) {
 
     fun match(numbers: Set<LottoNumber>): Int = this.numbers.count { numbers.contains(it) }
 
+    fun match(number: LottoNumber): Boolean = this.numbers.any { it == number }
+
     companion object {
         const val LOTTO_NUMBER_CNT = 6
         fun from(numbers: Set<Int>): Lotto = Lotto(numbers.map { LottoNumber.of(it) }.toSet())

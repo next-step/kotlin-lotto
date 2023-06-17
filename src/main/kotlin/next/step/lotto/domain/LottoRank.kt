@@ -9,10 +9,11 @@ enum class LottoRank(val matchCount: Int, val winnings: Int) {
     MISS(0, 0);
 
     companion object {
-        fun from(matchCount: Int): LottoRank = from(matchCount, false)
 
         fun from(matchCount: Int, matchBonus: Boolean): LottoRank =
-            if (matchCount == SECOND.matchCount && matchBonus) SECOND else withoutBonus(matchCount)
+            if (isBonusRank(matchCount, matchBonus)) SECOND else withoutBonus(matchCount)
+
+        private fun isBonusRank(matchCount: Int, matchBonus: Boolean) = matchCount == SECOND.matchCount && matchBonus
 
         private fun withoutBonus(matchCount: Int) =
             values().filter { it != SECOND }.find { it.matchCount == matchCount } ?: MISS

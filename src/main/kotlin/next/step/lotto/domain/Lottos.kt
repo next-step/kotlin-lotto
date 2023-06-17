@@ -3,8 +3,13 @@ package next.step.lotto.domain
 @JvmInline
 value class Lottos(val lottos: Set<Lotto>) {
 
-    fun match(winningNumbers: LottoWinningNumbers): LottoWinningStat =
-        LottoWinningStat.of(lottos.groupingBy { LottoRank.from(it.match(winningNumbers.numbers)) }.eachCount())
+    fun match(winningNumbers: LottoWinningNumbers, bonusNumber: LottoNumber): LottoWinningStat =
+        LottoWinningStat.of(lottos.groupingBy {
+            LottoRank.from(
+                it.match(winningNumbers.numbers),
+                it.match(bonusNumber)
+            )
+        }.eachCount())
 
     fun size(): Int = lottos.size
 
