@@ -1,14 +1,8 @@
 package view
 
-import domain.Lottery
-
 object OutputView {
 
-    fun reportPrizeState(lottery: Lottery) {
-        println(lottery.randomNumbers.toString())
-    }
-
-    fun reportPrize(
+    fun announcePrize(
         prizeMessage: String,
         count: Int
     ) {
@@ -23,9 +17,5 @@ object OutputView {
             "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
         }
         println("총 수익률은 ${formattedROI}입니다.$message")
-    }
-
-    fun reportPurchaseHistory(lottoSize: Int) {
-        println("${lottoSize}개를 구매했습니다.")
     }
 }
