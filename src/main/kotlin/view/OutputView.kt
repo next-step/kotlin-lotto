@@ -1,14 +1,12 @@
 package view
 
-import domain.Prize
-
 object OutputView {
 
     fun announcePrize(
-        prize: Prize,
+        prizeMessage: String,
         count: Int
     ) {
-        println("${prize.matches}개 일치 (${prize.value}원) - ${count}개")
+        println("$prizeMessage- ${count}개")
     }
 
     fun reportProfit(returnOnInvestment: Double) {

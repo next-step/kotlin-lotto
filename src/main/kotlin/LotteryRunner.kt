@@ -16,8 +16,10 @@ class LotteryRunner(private val inputView: InputView) {
         }
 
         val winningNums = inputView.registerWinningNums()
+        val bonusBall = inputView.registerBonusBall()
+
         val settlement = Settlement(winningNums)
-        val returnOnInvestment = settlement.getReturnOnInvestment(lotteries, (purchasableSize * 1000))
+        val returnOnInvestment = settlement.getReturnOnInvestment(lotteries, (purchasableSize * 1000), bonusBall)
 
         OutputView.reportProfit(returnOnInvestment)
     }

@@ -24,8 +24,26 @@ class LotteryTest : StringSpec({
             listOf(1, 2, 3, 4, 5, 6) to 6
         ).forAll { (input, expected) ->
             val lottery = Lottery(MockNumberGenerator(input))
-            val countMatchingLottery = lottery.countMatchingLottery(listOf(1, 2, 3, 4, 5, 6))
+            val countMatchingLottery = lottery.getPrizeByLottery(listOf(1, 2, 3, 4, 5, 6))
+            countMatchingLottery!!.matches shouldBe expected
+        }
+    }
+
+    "2등과 3등을 구분할 수 있다." {
+        listOf(
+            listOf(1, 2, 3, 4, 5, 7) to Prize.SECOND_PLACE,
+            listOf(1, 2, 3, 4, 5, 8) to Prize.THIRD_PLACE
+        ).forAll { (input, expected) ->
+            val lottery = Lottery(MockNumberGenerator(input))
+            val countMatchingLottery = lottery.getPrizeByLottery(listOf(1, 2, 3, 4, 5, 6), 7)
             countMatchingLottery shouldBe expected
         }
+    }
+
+    "2등 당첨 시 3_000_000을 지급한다." {
+        val lottery = Lottery(MockNumberGenerator(listOf(1, 2, 3, 4, 5, 7)))
+        val countMatchingLottery = lottery.getPrizeByLottery(listOf(1, 2, 3, 4, 5, 6), 7)
+        countMatchingLottery shouldBe Prize.SECOND_PLACE
+        countMatchingLottery!!.prizeMoney shouldBe 3_000_000
     }
 })
