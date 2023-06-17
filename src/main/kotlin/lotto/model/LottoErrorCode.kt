@@ -13,4 +13,7 @@ enum class LottoErrorCode(val message: (String) -> String) {
     MUST_NOT_BE_INCLUDE_WINNING_NUMBER(
         message = { input -> "보너스 볼은 당첨 번호에 포함되면 안 됩니다. (당첨 볼) (당첨 번호) : $input" },
     ),
+    UNAVAILABLE_TO_PURCHASE(
+        message = { input -> "보유 금액보다 수동 로또 개수 요청이 많습니다. (보유 금액) (수동 로또 개수) : $input" },
+    ),
 }

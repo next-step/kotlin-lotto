@@ -31,8 +31,6 @@ abstract class LotteryAdaptor(val lottoNumbers: Set<LottoNumber>) {
         )
     }
 
-    override fun toString(): String = lottoNumbers.toString()
-
     companion object {
         internal const val ALLOW_LOTTO_NUMBER_COUNT: Int = 6
         internal const val LOTTERY_PRICE: Double = 1000.0
