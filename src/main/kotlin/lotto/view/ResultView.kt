@@ -16,7 +16,7 @@ object ResultView {
     }
 
     fun printLottoBundle(lottoBundle: List<Lotto>) {
-        lottoBundle.forEach { println(it) }
+        lottoBundle.forEach { println(it.numbers) }
     }
 
     fun printEnter() {
