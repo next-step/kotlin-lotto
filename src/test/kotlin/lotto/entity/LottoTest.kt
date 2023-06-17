@@ -6,11 +6,26 @@ import org.junit.jupiter.api.Test
 internal class LottoTest {
     @Test
     fun `Lotto have 6 numbers`() {
-        assertEquals(6, Lotto.ticketing("1000")[0].numbers.size)
+        val numbers = setOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(5),
+            LottoNumber(6),
+            LottoNumber(7),
+        )
+        assertEquals(6, Lotto(numbers = numbers).numbers.size)
     }
 
     @Test
     fun `Lotto have no duplicates`() {
-        org.junit.jupiter.api.assertThrows<NumberFormatException> { Lotto.ticketing("jeff") }
+        val numbers = setOf(
+            LottoNumber(1),
+            LottoNumber(2),
+            LottoNumber(3),
+            LottoNumber(5),
+            LottoNumber(6),
+        )
+        org.junit.jupiter.api.assertThrows<IllegalArgumentException> { Lotto(numbers) }
     }
 }

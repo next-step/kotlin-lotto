@@ -11,7 +11,7 @@ class WinningNumber private constructor(
         val rankToInt = mutableMapOf<Rank, Int>()
         lottos.forEach {
             val rank = whatRank(it)
-            rankToInt[rank] = rankToInt.getOrDefault(rank, 1)
+            rankToInt[rank] = rankToInt.getOrDefault(rank, 0) + 1
         }
         return rankToInt
     }
