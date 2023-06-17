@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class LottoRateCalculatorTest {
+class RateCalculatorTest {
 
     @ParameterizedTest
     @CsvSource("14000, 5000")
