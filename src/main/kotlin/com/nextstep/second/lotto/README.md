@@ -46,23 +46,17 @@
 
 ## 기능 구현 목록 정리
 
-* `Lotto`
-  * List<Int> 의 번호를 주입받아서 불변 프로퍼티를 가진다
-* `NumberGenerator`
-  * object 타입의 클래스
-  * producer 타입의 generate 함수를 가진다 -> List<Int> 를 자동으로 반환한다
-* `WinningLottoNumber`
-  * List<Int> 의 번호를 주입받아서 불변 프로퍼티를 가진다
-* `LottoResultVo`
-  * data 타입을 가진다
-  * 프로퍼티는 Int 타입으로 총 4개를 가진다 (3개 일치, 4개 일치, 5개 일치, 6개 일치)
-  * calculateWinning... : 총 수익률을 계산하는 함수
-* `LottoController`
-  * countLottoByCharge() : money: Int 를 주입받아서 개수를 계산해준다
-  * buyLotto() : cnt: Int와 NumberGenerate 람다식을 주입받아서 그만큼 List<Lotto> 를 반환해준다
-  * checkWinningLotto() : List<Int> 를 주입받아서 WinningLottoNumber를 반환해준다
-  * checkLottoWin() : WinningLottoNumber, List<Lotto> 를 주입받아서 LottoResultVo를 반환한다 (로직은 생략하겟다)
-  * execute() : 위 함수들을 이용해서 한 사이클을 돌리는 로직을 수행한다
-* `View`
+* [X] `Lotto`
+  *  로또 도메인
+* [X] `NumberGenerator`
+  * 특정 전략에 따라서 램덤으로 숫자를 생성해내는 클래스
+* [X] `LottoResult`
+  * 구매한 로또여러장과 1등 로또번호를 비교해서 결과를 프로퍼티로 가질 수 있다
+  * 수익률을 계산해줄 수 있다
+* [X] `LottoVendingMachine`
+  * 로또를 구매할 수 있다
+  * 우승자 로또를 반환해준다
+  * 이번주에 구매자가 로또 결과가 어땟는지 확인할 수 있다
+* [X] `View`
   * InputView
   * OutputView

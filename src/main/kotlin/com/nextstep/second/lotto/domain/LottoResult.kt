@@ -1,15 +1,15 @@
 package com.nextstep.second.lotto.domain
 
-class LottoResultVo(
-    winnerLottoNumber: Lotto,
-    lottoNumbers: List<Lotto>
+class LottoResult(
+    winningLotto: Lotto,
+    lottos: List<Lotto>
 ) {
     private val matchedNumberCounts: Map<Int, Int>
 
     init {
         matchedNumberCounts = mutableMapOf()
-        lottoNumbers.map { lotto ->
-            val cnt = winnerLottoNumber.numbers.intersect(lotto.numbers.toSet()).size
+        lottos.map { lotto ->
+            val cnt = winningLotto.numbers.intersect(lotto.numbers.toSet()).size
             matchedNumberCounts.put(cnt, matchedNumberCounts.getOrDefault(cnt, 0) + 1)
         }
     }
@@ -18,8 +18,8 @@ class LottoResultVo(
         return matchedNumberCounts.getOrDefault(score, 0)
     }
 
-    fun getRateOfReturn(money: Int, LottoRewards: List<LottoReward>): Double {
-        return LottoRewards.sumOf {
+    fun getRateOfReturn(money: Int, lottoRewards: List<LottoReward>): Double {
+        return lottoRewards.sumOf {
             getMatchedNumber(it.totalSameNumber).toLong() * it.reward.toLong()
         }.toDouble() / money.toDouble()
     }

@@ -15,7 +15,7 @@ internal class LottoTest {
         val lotto = Lotto(numbers)
 
         // then
-        lotto.numbers.size shouldBe Lotto.LOTTO_NUMBER_SIZE
+        lotto.numbers.size shouldBe Lotto.LOTTO_LENGTH
     }
 
     @Test

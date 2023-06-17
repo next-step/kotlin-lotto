@@ -2,12 +2,11 @@ package com.nextstep.second.lotto.service
 
 import com.nextstep.second.lotto.NumberGenerator
 import com.nextstep.second.lotto.domain.Lotto
-import com.nextstep.second.lotto.domain.LottoResultVo
+import com.nextstep.second.lotto.domain.LottoResult
 
-const val LOTTO_COST = 1000
-object LottoVendingMachine {
+object LottoService {
     fun buyLottoInRandom(money: Int): List<Lotto> {
-        val cnt = money / LOTTO_COST
+        val cnt = money / Lotto.PRICE
         return (1..cnt).map { Lotto(NumberGenerator.generate()) }
     }
 
@@ -15,7 +14,7 @@ object LottoVendingMachine {
         return Lotto(numbers)
     }
 
-    fun checkThisWeekLottoResult(winnerLotto: Lotto, myLottos: List<Lotto>): LottoResultVo {
-        return LottoResultVo(winnerLotto, myLottos)
+    fun checkThisWeekLottoResult(winnerLotto: Lotto, myLottos: List<Lotto>): LottoResult {
+        return LottoResult(winnerLotto, myLottos)
     }
 }

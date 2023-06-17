@@ -11,7 +11,7 @@ internal class NumberGeneratorTest {
         val numbers = NumberGenerator.generate()
 
         // then
-        numbers.size shouldBe Lotto.LOTTO_NUMBER_SIZE
+        numbers.size shouldBe Lotto.LOTTO_LENGTH
         numbers.all { it in 1..45 } shouldBe true
     }
 }

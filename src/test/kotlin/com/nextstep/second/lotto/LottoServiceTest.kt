@@ -1,11 +1,11 @@
 package com.nextstep.second.lotto
 
-import com.nextstep.second.lotto.service.LottoVendingMachine
+import com.nextstep.second.lotto.service.LottoService
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Test
 
-class LottoVendingMachineTest {
+class LottoServiceTest {
     @Test
     fun `주어진 금액만큼 로또를 구매해준다`() {
         // given
@@ -13,7 +13,7 @@ class LottoVendingMachineTest {
         val totalCnt = 15
 
         // when
-        val lottos = LottoVendingMachine.buyLottoInRandom(money)
+        val lottos = LottoService.buyLottoInRandom(money)
 
         // then
         lottos.size shouldBe totalCnt
@@ -24,10 +24,10 @@ class LottoVendingMachineTest {
         // given
         val money = 15_000
         val totalCnt = 15
-        val lottos = LottoVendingMachine.buyLottoInRandom(money)
-        val winnerNumber = LottoVendingMachine.getWinnerLotto(listOf(1, 2, 3, 4, 5, 6))
+        val lottos = LottoService.buyLottoInRandom(money)
+        val winnerNumber = LottoService.getWinnerLotto(listOf(1, 2, 3, 4, 5, 6))
         // when
-        val result = LottoVendingMachine.checkThisWeekLottoResult(winnerNumber, lottos)
+        val result = LottoService.checkThisWeekLottoResult(winnerNumber, lottos)
         // then
         result shouldNotBe null
     }

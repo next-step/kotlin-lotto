@@ -1,7 +1,7 @@
 package com.nextstep.second.lotto.view
 
 import com.nextstep.second.lotto.domain.Lotto
-import com.nextstep.second.lotto.domain.LottoResultVo
+import com.nextstep.second.lotto.domain.LottoResult
 import com.nextstep.second.lotto.domain.LottoReward
 
 object OutputView {
@@ -12,7 +12,7 @@ object OutputView {
         }
     }
 
-    fun showLottoResult(money: Int, lottoResults: LottoResultVo, rewards: List<LottoReward>) {
+    fun showLottoResult(money: Int, lottoResults: LottoResult, rewards: List<LottoReward>) {
         println("당첨 통계")
         println("---------")
         rewards.forEach { reward ->
