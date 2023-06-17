@@ -29,6 +29,9 @@ class Lottery(
 
         fun canPurchaseLottery(money: Money): Boolean = countOfCanPurchaseLottery(money) > BigDecimal.ZERO
 
+        fun canPurchaseLottery(purchaseCount: Int, money: Money): Boolean =
+            countOfCanPurchaseLottery(money) >= purchaseCount.toBigDecimal()
+
         private fun countOfCanPurchaseLottery(money: Money): BigDecimal = money.divide(LOTTERY_COST)
     }
 }

@@ -141,6 +141,16 @@ class LotteryTest : FunSpec({
             val actual = Lottery.canPurchaseLottery(Money(value = BigDecimal(999)))
             actual shouldBe false
         }
+
+        test("구입 갯수를 받았을 때 로또를 구매할 수 있다면 true를 반환한다") {
+            val actual = Lottery.canPurchaseLottery(purchaseCount = 2, money = Money(value = BigDecimal(2_999)))
+            actual shouldBe true
+        }
+
+        test("구입 갯수를 받았을 때 로또를 구매할 수 없다면 false를 반환한다") {
+            val actual = Lottery.canPurchaseLottery(purchaseCount = 3, money = Money(value = BigDecimal(2_999)))
+            actual shouldBe false
+        }
     }
 }) {
     companion object {
