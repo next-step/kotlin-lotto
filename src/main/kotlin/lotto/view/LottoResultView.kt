@@ -35,7 +35,7 @@ class LottoResultView {
     }
 
     private fun getLossMessage(totalRevenueRate: BigDecimal) =
-        if (BigDecimal.ZERO > totalRevenueRate) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""
+        if (BigDecimal.ONE > totalRevenueRate) "(기준이 1이기 때문에 결과적으로 손해라는 의미임)" else ""
 
     companion object {
         private val RANKING_PRINT_ORDER =
