@@ -5,7 +5,7 @@ import java.math.RoundingMode
 
 @JvmInline
 value class Money(
-    val value: BigDecimal
+    val value: BigDecimal,
 ) {
     init {
         require(value >= BigDecimal.ZERO) { "돈은 음수가 입력될 수 없다" }

@@ -1,15 +1,15 @@
 package lottery.domain.lottery
 
 import lottery.domain.Money
-import lottery.domain.Rank
-import lottery.domain.Rank.Companion.fillMissRankWithDefault
 import lottery.domain.lottery.Lottery.Companion.LOTTERY_COST
+import lottery.domain.rank.Rank
+import lottery.domain.rank.Rank.Companion.fillMissRankWithDefault
 
 class Lotteries(
-    val values: MutableList<Lottery>
+    val values: MutableList<Lottery>,
 ) {
-    fun compareWinningLottery(winningLottery: Lottery) =
-        values.map { winningLottery.compareWinningLottery(it) }
+    fun compareWinningLottery(winningLottery: WinningLottery) =
+        values.map { winningLottery.rankConfirm(it) }
             .groupingBy { it }
             .eachCount()
             .fillMissRankWithDefault()

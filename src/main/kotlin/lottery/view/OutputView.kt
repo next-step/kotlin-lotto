@@ -1,8 +1,8 @@
 package lottery.view
 
 import lottery.domain.LottoResult
-import lottery.domain.Rank
 import lottery.domain.lottery.Lottery
+import lottery.domain.rank.Rank
 
 private const val LOTTERY_NUMBER_DELIMITER = ", "
 
@@ -20,6 +20,10 @@ fun printLottoResult(lottoResult: LottoResult) {
 }
 
 private fun printStatistic(it: Map.Entry<Rank, Int>) {
+    if (it.key == Rank.SECOND) {
+        println("${it.key.equalCount}개 일치, 보너스 볼 일치(${it.key.reward}원) - ${it.value}개")
+        return
+    }
     println("${it.key.equalCount}개 일치 (${it.key.reward}원) - ${it.value}개")
 }
 

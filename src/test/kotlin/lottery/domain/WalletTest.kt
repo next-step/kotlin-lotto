@@ -5,8 +5,13 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lottery.domain.lottery.Lotteries
-import lottery.domain.lottery.LotteryTest
+import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_7
+import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_1_6
+import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_2_7
+import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_4_9
+import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.RandomLotteryGenerator
+import lottery.domain.rank.Rank
 import java.math.BigDecimal
 
 class WalletTest : FunSpec({
@@ -34,21 +39,22 @@ class WalletTest : FunSpec({
                 money = Money(BigDecimal.ZERO),
                 purchaseLotteries = Lotteries(
                     values = mutableListOf(
-                        LotteryTest.LOTTERY_1_6,
-                        LotteryTest.LOTTERY_1_6,
-                        LotteryTest.LOTTERY_3_8,
-                        LotteryTest.LOTTERY_4_9
-                    )
-                )
+                        LOTTERY_1_6,
+                        LOTTERY_1_6,
+                        LOTTERY_2_7,
+                        LOTTERY_4_9,
+                    ),
+                ),
             )
-            val winningLottery = LotteryTest.LOTTERY_1_6
+            val winningLottery = WinningLottery(lottery = LOTTERY_1_6, bonusNumber = LOTTERY_NUMBER_7)
 
             val actual = wallet.calculateLotteryResult(winLottery = winningLottery)
             actual.statistics[Rank.FIRST] shouldBe 2
-            actual.statistics[Rank.SECOND] shouldBe 0
-            actual.statistics[Rank.THIRD] shouldBe 1
-            actual.statistics[Rank.FOURTH] shouldBe 1
-            actual.lottoYield.setScale(2) shouldBe BigDecimal(1_000_013.75)
+            actual.statistics[Rank.SECOND] shouldBe 1
+            actual.statistics[Rank.THIRD] shouldBe 0
+            actual.statistics[Rank.FOURTH] shouldBe 0
+            actual.statistics[Rank.FIFTH] shouldBe 1
+            actual.lottoYield.setScale(2) shouldBe BigDecimal(1007501.25)
         }
     }
 })

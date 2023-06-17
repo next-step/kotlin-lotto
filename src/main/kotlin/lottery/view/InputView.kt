@@ -12,7 +12,17 @@ fun inputWinningLottery(): List<String> {
     return readln().split(",")
 }
 
+fun inputBonusLotteryNumber(): Int {
+    println("보너스 볼을 입력해 주세요.")
+    return readln().toIntOrNull() ?: retryInputBonusLotteryNumber()
+}
+
 private fun retryInputPurchaseMoney(): BigDecimal {
     println("구입금액은 숫자를 입력하여야 합니다.")
     return inputPurchaseMoney()
+}
+
+private fun retryInputBonusLotteryNumber(): Int {
+    println("보너스 번호는 숫자를 입력하여야 합니다.")
+    return inputBonusLotteryNumber()
 }
