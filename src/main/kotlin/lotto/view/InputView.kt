@@ -1,8 +1,15 @@
 package lotto.view
 
-class InputView {
-    operator fun invoke(msg: String): String {
+object InputView {
+    private const val WINNING_NUMBER_DELIMITER = ", "
+
+    operator fun invoke(msg: String): Long {
         println(msg)
-        return readln()
+        return readln().toLong()
+    }
+
+    fun winningNumber(msg: String): List<Int> {
+        println(msg)
+        return readln().split(WINNING_NUMBER_DELIMITER).map { it.toInt() }
     }
 }

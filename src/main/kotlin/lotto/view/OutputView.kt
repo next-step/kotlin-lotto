@@ -5,7 +5,7 @@ import lotto.entity.Lotto
 import lotto.entity.Rank
 import kotlin.math.round
 
-class OutputView {
+object OutputView {
     fun printPurchaseQuantity(quantity: Int) {
         println("${quantity}개를 구매했습니다.")
     }
@@ -17,9 +17,8 @@ class OutputView {
     }
 
     fun printResult(lottoResult: LottoResult) {
-        val rankToInt = lottoResult.rankToInt
-        val rateOfReturn =
-            round(((lottoResult.totalPrize.toDouble() / lottoResult.purchaseCost.toDouble()) * 100) / 100)
+        val rankToInt = lottoResult.rankToHowManyWins
+        val rateOfReturn = round((lottoResult.rateOfReturn * 100) / 100)
         println("당첨 통계")
         println("---------")
         println("3개 일치 (${Rank.Fourth.prize}원) - ${rankToInt[Rank.Fourth] ?: 0}")

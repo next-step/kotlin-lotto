@@ -1,28 +1,25 @@
 package lotto
 
+import lotto.dto.LottoResult
 import lotto.entity.Lotto
+import lotto.entity.LottoStore
 import lotto.entity.WinningNumber
-import lotto.util.SplitString
 import lotto.view.InputView
 import lotto.view.OutputView
-import lotto.workflow.RankLotto
 
 fun main() {
-    val inputView = InputView()
-    val outputView = OutputView()
-    val money = inputView("구입금액을 입력해 주세요.")
-    val lottoTickets = Lotto.ticketing(money)
+    val money = InputView("구입금액을 입력해 주세요.")
+    val lottoTickets = LottoStore.ticketing(money)
 
-    outputView.printPurchaseQuantity(lottoTickets.size)
-    outputView.printLotto(lottoTickets)
+    OutputView.printPurchaseQuantity(lottoTickets.size)
+    OutputView.printLotto(lottoTickets)
     println()
 
-    val winningNumberString = inputView("지난 주 당첨 번호를 입력해 주세요.")
-    val numbers = SplitString.of(winningNumberString).extractNumbers()
-    val winningNumber = WinningNumber.of(numbers)
-    val rankLotto = RankLotto(winningNumber)
-    val lottoResult = rankLotto(lottoTickets)
+    val winningNumbers = InputView.winningNumber("지난 주 당첨 번호를 입력해 주세요.")
+    val winningNumber = WinningNumber.of(winningNumbers)
+    val rankToHowManyWins = winningNumber.calculateLottoResults(lottoTickets)
+    val lottoResult = LottoResult.of(rankToHowManyWins, lottoTickets.size * Lotto.LOTTO_PRICE)
     println()
 
-    outputView.printResult(lottoResult)
+    OutputView.printResult(lottoResult)
 }
