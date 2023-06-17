@@ -6,7 +6,7 @@ object Profit {
 
     fun calculateLottoProfit(results: List<ResultDTO>): Int {
         return results.sumOf {
-            it.matchNum * it.lottoEnum.price
+            it.matchNum * it.lottoRank.price
         }
     }
 

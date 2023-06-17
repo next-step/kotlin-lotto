@@ -9,7 +9,7 @@ object LottoResult {
         return lottos.list.map { lotto ->
             lotto.numbers.count { it in sortedResult }
         }.mapNotNull {
-            LottoEnum.of(it)
+            LottoRank.of(it)
         }.groupBy {
             it
         }.map {
