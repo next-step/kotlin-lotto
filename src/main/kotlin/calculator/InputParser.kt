@@ -15,7 +15,7 @@ class InputParser(inputString: String) {
             }
     }
 
-    fun numbers(separators: Array<String> = emptyArray()): List<Int> {
+    fun numbers(separators: Array<String>): List<Int> {
         return inputString.substringAfterLast(SEPARATOR_END)
             .split(
                 *separators.plus(defaultDelimiters)
