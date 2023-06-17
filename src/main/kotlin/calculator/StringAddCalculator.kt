@@ -2,7 +2,11 @@ package calculator
 
 class StringAddCalculator {
 
-    fun calculate(stringNumbers: String): Int {
+    fun calculate(stringNumbers: String?): Int {
+        if (stringNumbers.isNullOrBlank()) {
+            return 0
+        }
+
         val stringNumberCollection = StringNumberCollection(
             split(stringNumbers).map { StringNumber(it) }
         )
