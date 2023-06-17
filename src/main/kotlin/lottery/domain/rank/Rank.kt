@@ -5,12 +5,12 @@ enum class Rank(
     val equalCount: String,
     val rankingMetric: RankingMetric,
 ) {
-    NOTHING(0, "0,1,2", { matchCount, _ -> matchCount in 0..2 }),
-    FIFTH(5_000, "3", { matchCount, _ -> matchCount == 3 }),
-    FOURTH(50_000, "4", { matchCount, _ -> matchCount == 4 }),
-    THIRD(1_500_000, "5", { matchCount, isBonus -> matchCount == 5 && isBonus.not() }),
-    SECOND(30_000_000, "5", { matchCount, isBonus -> matchCount == 5 && isBonus }),
-    FIRST(2_000_000_000, "6", { matchCount, _ -> matchCount == 6 }),
+    NOTHING(0, "0,1,2", RankingMetric { matchCount, _ -> matchCount in 0..2 }),
+    FIFTH(5_000, "3", RankingMetric { matchCount, _ -> matchCount == 3 }),
+    FOURTH(50_000, "4", RankingMetric { matchCount, _ -> matchCount == 4 }),
+    THIRD(1_500_000, "5", RankingMetric { matchCount, isBonus -> matchCount == 5 && isBonus.not() }),
+    SECOND(30_000_000, "5", RankingMetric { matchCount, isBonus -> matchCount == 5 && isBonus }),
+    FIRST(2_000_000_000, "6", RankingMetric { matchCount, _ -> matchCount == 6 }),
     ;
 
     fun calculatePrice(count: Int) = reward.times(count)
