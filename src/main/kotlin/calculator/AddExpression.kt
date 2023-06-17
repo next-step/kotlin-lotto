@@ -1,24 +1,24 @@
 package calculator
 
 class AddExpression(text: String) {
-    private val numbers: List<Int>
+    val numbers: Numbers
 
     init {
-        val delimiter = extractCustomDelimiter(text) ?: DEFAULT_DELIMITER
-        val expression = extractExpression(text) ?: text
-        numbers = expression.split(delimiter.toRegex()).map { it.toInt() }
+        val delimiter = extractCustomDelimiter(text)
+        val expression = extractExpression(text)
+        numbers = Numbers(expression.split(delimiter.toRegex()).map { it.toInt() })
     }
 
-    fun getNumbers(): List<Int> {
-        return numbers
+    fun sum(): Int {
+        return numbers.sum()
     }
 
-    private fun extractCustomDelimiter(text: String): String? {
-        return EXPRESSION_REGEX.find(text)?.groupValues?.get(DELIMITER_INDEX)
+    private fun extractCustomDelimiter(text: String): String {
+        return EXPRESSION_REGEX.find(text)?.groupValues?.get(DELIMITER_INDEX) ?: DEFAULT_DELIMITER
     }
 
-    private fun extractExpression(text: String): String? {
-        return EXPRESSION_REGEX.find(text)?.groupValues?.get(EXPRESSION_INDEX)
+    private fun extractExpression(text: String): String {
+        return EXPRESSION_REGEX.find(text)?.groupValues?.get(EXPRESSION_INDEX) ?: text
     }
 
     companion object {
