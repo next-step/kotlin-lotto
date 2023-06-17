@@ -12,7 +12,7 @@ fun main() {
     val lottoResultView = LottoResultView()
     val lottoStore = LottoStore()
 
-    val purchaseAmount = lottoInputView.readInt(message = "구입금액을 입력해 주세요.")
+    val purchaseAmount = lottoInputView.readPurchaseAmount()
     val lotteryTickets = lottoStore.purchase(purchaseAmount)
 
     val (autos, manuals) = lotteryTickets.partition { it.isAuto }
@@ -21,7 +21,7 @@ fun main() {
     lottoResultView.printLotteryTickets(manualLotteryTickets = manualLotteryTickets, autoLotteryTickets = autoLotteryTickets)
 
     val lastWinLottoNumber = lottoInputView.readLottoNumbers()
-    val bonusLottoNumber = LottoNumber(lottoInputView.readInt(message = "보너스 볼을 입력해 주세요."))
+    val bonusLottoNumber = LottoNumber(lottoInputView.readBonusBallNumber())
     val winningLottoNumber = WinningLottoNumber(winningNumbers = lastWinLottoNumber, bonusLottoNumber = bonusLottoNumber)
 
     val rankingCountMap = winningLottoNumber.makeRankingCountMap(lotteryTickets)
