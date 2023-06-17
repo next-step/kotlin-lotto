@@ -1,16 +1,10 @@
 package calculator
 
-object PositiveInteger {
-
-    fun getPositiveInteger(text: String): Int {
-        val number = text.toIntOrNull()
-        if (isPositiveInteger(number)) {
-            return number!!
-        }
-        throw RuntimeException()
+class PositiveInteger(
+    val value: Int
+) {
+    init {
+        require(value >= 0)
     }
-
-    private fun isPositiveInteger(number: Int?): Boolean {
-        return number != null && number >= 0
-    }
+    operator fun plus(other: PositiveInteger): PositiveInteger = PositiveInteger(value + other.value)
 }
