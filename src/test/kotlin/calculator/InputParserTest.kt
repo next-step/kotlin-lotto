@@ -2,6 +2,7 @@ package calculator
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
@@ -29,10 +30,18 @@ class InputParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = arrayOf("//1\\n1;2;3", "//11\\n1;2;3"))
-    fun `입력된 구분자가 숫자이면 IllegalArgumentException throw`(inputString: String) {
+    fun `입력된 구분자가 숫자이면 throw IllegalArgumentException`(inputString: String) {
         assertThatThrownBy {
             InputParser(inputString).separator()
         }.isInstanceOf(IllegalArgumentException::class.java)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = arrayOf("/:\\n1;2;3", ":\\n1;2;3", ":1\\n2;3"))
+    fun `커스텀 구분자 입력 형식이 잘못되었다면 throw RuntimeException`(inputString: String) {
+        assertThrows<RuntimeException> {
+            InputParser(inputString).numbers(emptyArray())
+        }
     }
 
     @ParameterizedTest
@@ -83,7 +92,7 @@ class InputParserTest {
         private fun `문자열 덧셈 테스트 데이터`(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of("", 0),
-                Arguments.of("1", 1,),
+                Arguments.of("1", 1),
                 Arguments.of("1,2,3", 6),
                 Arguments.of("//.\\n1.2.3", 6),
             )

@@ -8,10 +8,9 @@ class InputParser(inputString: String) {
         if (!inputString.hasSeparatorSection()) return null
 
         val separatorSection = inputString.substringBeforeLast(SEPARATOR_END)
-        require(separatorSection.startsWith(SEPARATOR_START))
         return separatorSection.substringAfter(SEPARATOR_START)
             .also {
-                require(it.isNotPositiveInteger())
+                require(it.isNotPositiveInteger()) { "숫자는 구분자로 사용할 수 없습니다." }
             }
     }
 
