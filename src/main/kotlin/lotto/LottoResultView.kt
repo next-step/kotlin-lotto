@@ -15,16 +15,19 @@ class LottoResultView {
         println()
     }
 
-    fun printLottoStatistics(lottoNumbers: LottoNumbers, winLottoNumber: LottoNumber) {
+    fun printLottoStatistics(rankingCountMap: Map<LottoRanking, Int>, totalRevenueRate: BigDecimal) {
         println("\n당첨 통계")
         println("------------")
-        val rankingCountMap = lottoNumbers.makeRankingCountMap(winLottoNumber)
-        val totalRevenueRate = lottoNumbers.getRevenueRate(winLottoNumber)
         RANKING_PRINT_ORDER.forEach {
             val count = rankingCountMap[it] ?: 0
-            println("${it.matchCount}개 일치 (${it.winningAmount}원) - $count")
+            println("${getMatchMessage(it)} (${it.winningAmount}원) - $count")
         }
         println("총 수익률은 $totalRevenueRate 입니다. ${getLossMessage(totalRevenueRate)}")
+    }
+
+    private fun getMatchMessage(ranking: LottoRanking): String = when (ranking) {
+        LottoRanking.SECOND -> "${ranking.matchCount}개 일치, 보너스볼 일치"
+        else -> "${ranking.matchCount}개 일치"
     }
 
     private fun getLossMessage(totalRevenueRate: BigDecimal) =
@@ -32,6 +35,6 @@ class LottoResultView {
 
     companion object {
         private val RANKING_PRINT_ORDER =
-            listOf(LottoRanking.FOUR_TH, LottoRanking.THREE_RD, LottoRanking.TWO_ND, LottoRanking.ONE_ST)
+            listOf(LottoRanking.FIFTH, LottoRanking.FOURTH, LottoRanking.THIRD, LottoRanking.SECOND, LottoRanking.FIRST)
     }
 }

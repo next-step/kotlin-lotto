@@ -1,20 +1,22 @@
 package lotto
 
 enum class LottoRanking(val matchCount: Int, val winningAmount: Int) {
-    ONE_ST(6, 2_000_000_000),
-    TWO_ND(5, 1_500_000),
-    THREE_RD(4, 50_000),
-    FOUR_TH(3, 5_000),
-    OUT_OF_RAKING(0, 0),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0),
     ;
 
     companion object {
-        fun getRankingByMatchCount(matchCount: Int): LottoRanking = when (matchCount) {
-            ONE_ST.matchCount -> ONE_ST
-            TWO_ND.matchCount -> TWO_ND
-            THREE_RD.matchCount -> THREE_RD
-            FOUR_TH.matchCount -> FOUR_TH
-            else -> OUT_OF_RAKING
+        fun valueOf(matchCount: Int, matchBonus: Boolean): LottoRanking = when {
+            FIRST.matchCount == matchCount -> FIRST
+            SECOND.matchCount == matchCount && matchBonus -> SECOND
+            THIRD.matchCount == matchCount && !matchBonus -> THIRD
+            FOURTH.matchCount == matchCount -> FOURTH
+            FIFTH.matchCount == matchCount -> FIFTH
+            else -> MISS
         }
     }
 }
