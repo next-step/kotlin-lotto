@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.matchers.longs.shouldBeGreaterThanOrEqual
 import org.junit.jupiter.api.Test
 import kotlin.system.measureNanoTime
 
@@ -25,5 +26,7 @@ class NanoTimeCompareAsSequenceAndNoAsSequenceTest {
 
         println("asSequence() 사용 : $useAsSequenceNanoTime")
         println("asSequence() 미사용 : $notUseAsSequenceNanoTime")
+
+        useAsSequenceNanoTime shouldBeGreaterThanOrEqual notUseAsSequenceNanoTime
     }
 }

@@ -1,4 +1,7 @@
-package lotto
+package lotto.view
+
+import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 
 class LottoInputView {
 
@@ -7,14 +10,12 @@ class LottoInputView {
         return readln().toIntOrNull() ?: 0
     }
 
-    fun readLottoNumber(message: String = DEFAULT_READ_LOTTO_NUMBER_MESSAGE): LottoNumber {
+    fun readLottoNumbers(message: String = DEFAULT_READ_LOTTO_NUMBER_MESSAGE): LottoNumbers {
         println(message)
         val input = readln()
         val numbers = input.split(DEFAULT_LAST_WEEK_WINNING_NUMBER_DELIMITER)
-            .map { it.trim().toIntOrNull() ?: 0 }
-            .sorted()
-            .toList()
-        return LottoNumber(numbers)
+            .map { LottoNumber(it.trim().toIntOrNull() ?: 0) }
+        return LottoNumbers(numbers)
     }
 
     companion object {

@@ -1,14 +1,18 @@
-package lotto
+package lotto.domain
+
+import lotto.domain.util.LotteryTicketAutoGenerator
 
 class LottoStore {
 
-    fun purchase(purchaseAmount: Int): LottoNumbers {
+    fun purchase(
+        purchaseAmount: Int,
+    ): LotteryTickets {
         validate(purchaseAmount)
-        return LottoNumbers(
-            (1..purchaseAmount / PURCHASE_AMOUNT_UNIT).map {
-                LottoNumber()
-            },
+        val autoLotteryTickets = LotteryTickets(
+            (1..purchaseAmount / PURCHASE_AMOUNT_UNIT)
+                .map { LotteryTicketAutoGenerator.generateAuto() },
         )
+        return LotteryTickets(autoLotteryTickets)
     }
 
     private fun validate(purchaseAmount: Int) {

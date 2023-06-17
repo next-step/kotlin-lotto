@@ -1,18 +1,22 @@
-package lotto
+package lotto.view
 
+import lotto.domain.LotteryTicket
+import lotto.domain.LotteryTickets
+import lotto.domain.LottoRanking
 import java.math.BigDecimal
 
 class LottoResultView {
 
-    fun printPurchasedLottoNumbers(lottoNumbers: LottoNumbers) {
-        println("${lottoNumbers.size}개를 구매했습니다.")
-        lottoNumbers.forEach {
-            val numbers = it.asSequence()
-                .sorted()
-                .joinToString(", ")
-            println("[$numbers]")
-        }
+    fun printLotteryTickets(autoLotteryTickets: LotteryTickets, manualLotteryTickets: LotteryTickets) {
+        println("수동으로 ${manualLotteryTickets.size}장, 자동으로 ${autoLotteryTickets.size}개를  구매했습니다.")
+        manualLotteryTickets.forEach { printLotteryTicket(it) }
+        autoLotteryTickets.forEach { printLotteryTicket(it) }
         println()
+    }
+
+    private fun printLotteryTicket(it: LotteryTicket) {
+        val numbers = it.lottoNumbers.map { it.number }.sorted().joinToString(", ")
+        println("[$numbers]")
     }
 
     fun printLottoStatistics(rankingCountMap: Map<LottoRanking, Int>, totalRevenueRate: BigDecimal) {
