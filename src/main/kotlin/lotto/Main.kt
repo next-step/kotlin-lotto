@@ -7,7 +7,7 @@ import lotto.view.output.NewLineOutputView
 
 fun main() {
     val purchasePrice = LottoPurchasePriceInputView().value
-    val purchaseCount = purchasePrice / SixFortyFiveLottoStore.LOTTO_PRICE
+    val purchaseCount = purchasePrice / SixFortyFiveLotto.LOTTO_PRICE
     LottoPurchaseOutputView(purchaseCount).renderMessage()
 
     val lottoStore = SixFortyFiveLottoStore()

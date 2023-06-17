@@ -10,7 +10,7 @@ class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningVa
         lottoList.forEach { lotto -> lottoResultList[lotto.checkWinning(winningValue)]++ }
         val totalResultPrice =
             lottoResultList.reduceIndexed { index, acc, count -> acc + count * SixFortyFiveLottoStore.LOTTO_WINNING_PRICE_MAP[index] }
-        val totalPurchasePrice = lottoList.size * SixFortyFiveLottoStore.LOTTO_PRICE
+        val totalPurchasePrice = lottoList.size * SixFortyFiveLotto.LOTTO_PRICE
         message = """
 당첨 통계
 --------

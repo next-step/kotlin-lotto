@@ -18,7 +18,7 @@ class LottoStoreTest {
     @Test
     fun `로또의 당첨 여부를 계산합니다`() {
         val winningNumber = listOf(1, 2, 3, 4, 5, 6)
-        val numbers = listOf(1, 2, 3, 7, 8, 9)
+        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9))
 
         val result = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
 

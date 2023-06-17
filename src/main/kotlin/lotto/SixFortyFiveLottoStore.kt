@@ -2,7 +2,6 @@ package lotto
 
 import lotto.view.output.SixFortyFiveLottoOutputView
 import lotto.view.output.SixFortyFiveResultOutputView
-import kotlin.random.Random
 
 class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
     override fun purchase(count: Int): List<SixFortyFiveLotto> {
@@ -10,7 +9,7 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
     }
 
     override fun makeLotto(): SixFortyFiveLotto {
-        val numbers = generateLottoNumber()
+        val numbers = SixFortyFiveLottoNumber.of()
         return SixFortyFiveLotto(numbers)
     }
 
@@ -22,24 +21,8 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
         lottoList.forEach { lotto -> lotto.renderLotto(SixFortyFiveLottoOutputView(lotto)) }
     }
 
-    private fun generateLottoNumber(): List<Int> {
-        val randomNumberSet = mutableSetOf<Int>()
-        while (randomNumberSet.size < LOTTO_NUMBER_COUNT) {
-            val randomNumber = Random.nextInt(
-                LOTTO_NUMBER_RANGE_START,
-                LOTTO_NUMBER_RANGE_END,
-            )
-            randomNumberSet.add(randomNumber)
-        }
-        return randomNumberSet.sorted()
-    }
-
     companion object {
         @JvmField
         val LOTTO_WINNING_PRICE_MAP = listOf(0, 0, 0, 5000, 50000, 1500000, 2000000000)
-        const val LOTTO_PRICE = 1000
-        const val LOTTO_NUMBER_COUNT = 6
-        const val LOTTO_NUMBER_RANGE_START = 1
-        const val LOTTO_NUMBER_RANGE_END = 45
     }
 }
