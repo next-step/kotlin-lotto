@@ -13,7 +13,7 @@ object ResultView {
         println()
         println("수동으로 ${tickets.manualSize}, 자동으로 ${tickets.automaticSize}개를 구매했습니다.")
         tickets.forEach { ticket ->
-            println("[${ticket.lotto.numbers.map { it.number }.sorted().joinToString(", ")}]")
+            println("[${ticket.lotto.numbers.map { it.number }.sorted().joinToString()}]")
         }
         println()
     }
