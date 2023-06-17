@@ -2,6 +2,7 @@ package lottery.domain
 
 import lottery.domain.lottery.Lotteries
 import lottery.domain.lottery.Lottery
+import lottery.domain.lottery.PurchasedLotteriesResult
 import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.LotteryGenerator
 import lottery.domain.rank.Rank
@@ -33,6 +34,12 @@ class Wallet(
         val lottoYield = calculateYield(statistics)
         return LottoResult(lottoYield = lottoYield, statistics = statistics)
     }
+
+    fun purchasedLotteries(): PurchasedLotteriesResult = PurchasedLotteriesResult(
+        manualCount = manualLotteries.size(),
+        randomCount = randomLotteries.size(),
+        purchasedAllLotteries = Lotteries.merge(manualLotteries, randomLotteries).values,
+    )
 
     private fun purchaseManualLotteries(purchasedManualLotteries: Lotteries): MutableList<Lottery> {
         money -= purchasedManualLotteries.cost()

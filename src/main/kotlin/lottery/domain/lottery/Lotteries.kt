@@ -21,6 +21,8 @@ class Lotteries(
 
     fun cost(): Money = LOTTERY_COST.times(values.size)
 
+    fun size(): Int = values.size
+
     companion object {
         fun init() = Lotteries(mutableListOf())
 
