@@ -1,4 +1,4 @@
-package view
+package util
 
 fun interface InputReader {
     fun raedLine(): String

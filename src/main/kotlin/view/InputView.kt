@@ -1,5 +1,6 @@
 package view
 
+import util.InputReader
 import util.Separator
 
 class InputView(private val inputReader: InputReader) {
