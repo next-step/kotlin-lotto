@@ -1,8 +1,8 @@
 package lotto.domain
 
-abstract class Lotto(private val numbers: List<LottoNumber>) {
+data class Lotto(private val numbers: Set<LottoNumber>) {
     init {
-        require(numbers.distinct().size == LOTTO_NUMBER_SIZE) { LOTTO_SIZE_ERROR_MESSAGE }
+        require(numbers.size == LOTTO_NUMBER_SIZE) { LOTTO_SIZE_ERROR_MESSAGE }
     }
 
     val size: Int = numbers.size

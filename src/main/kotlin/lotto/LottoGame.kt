@@ -1,9 +1,10 @@
 package lotto
 
 import lotto.domain.LottoChecker
-import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
+import lotto.domain.LottoSeller
 import lotto.domain.Lottos
+import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinNumbers
 import lotto.io.InputView
 import lotto.io.ResultView
@@ -24,7 +25,7 @@ object LottoGame {
 
     private fun getLottos(): Lottos {
         val amount = InputView.getAmount()
-        return LottoGenerator.generateLottos(amount)
+        return LottoSeller(RandomLottoGenerator).sellLottos(amount)
     }
 
     private fun printResult(winNumbers: WinNumbers, lottos: Lottos) {
