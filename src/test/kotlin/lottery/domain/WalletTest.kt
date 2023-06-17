@@ -42,9 +42,9 @@ class WalletTest : FunSpec({
                         LOTTERY_1_6,
                         LOTTERY_1_6,
                         LOTTERY_2_7,
-                        LOTTERY_4_9
-                    )
-                )
+                        LOTTERY_4_9,
+                    ),
+                ),
             )
             val winningLottery = WinningLottery(lottery = LOTTERY_1_6, bonusNumber = LOTTERY_NUMBER_7)
 

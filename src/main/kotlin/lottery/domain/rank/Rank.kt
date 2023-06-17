@@ -3,7 +3,7 @@ package lottery.domain.rank
 enum class Rank(
     val reward: Long,
     val equalCount: String,
-    val rankingMetric: RankingMetric
+    val rankingMetric: RankingMetric,
 ) {
     NOTHING(0, "0,1,2", { matchCount, _ -> matchCount in 0..2 }),
     FIFTH(5_000, "3", { matchCount, _ -> matchCount == 3 }),

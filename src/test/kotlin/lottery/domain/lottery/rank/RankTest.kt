@@ -26,7 +26,7 @@ class RankTest : FunSpec({
             row(4, true, FOURTH),
             row(5, false, THIRD),
             row(5, true, SECOND),
-            row(6, true, FIRST)
+            row(6, true, FIRST),
         ) { matchCount, isBonus, expected ->
             test("matchCount($matchCount), isBonus($isBonus)인 경우 rank가 $expected 된다") {
                 val actual = Rank.of(matchCount = matchCount, isBonus = isBonus)
@@ -36,13 +36,13 @@ class RankTest : FunSpec({
 
         forAll(
             row(-1),
-            row(7)
+            row(7),
         ) { input ->
             test("룰에서 벗어난 값 $input 이 입력되는 경우 예외가 발생한다.") {
                 val exception = shouldThrowExactly<IllegalArgumentException> {
                     Rank.of(
                         matchCount = input,
-                        isBonus = true
+                        isBonus = true,
                     )
                 }
                 exception.message shouldBe "로또 룰에 벗어난 수는 입력될 수 없다"

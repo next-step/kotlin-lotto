@@ -5,7 +5,7 @@ import lottery.domain.Receipt
 import java.math.BigDecimal
 
 class Lottery(
-    val values: List<LotteryNumber>
+    val values: List<LotteryNumber>,
 ) {
     init {
         require(values.size == LOTTERY_NUMBER_SIZE) { "로또 번호는 6개만 입력하여야한다" }

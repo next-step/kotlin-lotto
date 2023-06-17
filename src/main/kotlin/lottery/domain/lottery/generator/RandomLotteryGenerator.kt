@@ -9,7 +9,7 @@ object RandomLotteryGenerator : LotteryGenerator {
 
     override fun generate() = Lottery(
         LOTTERY_NUMBER_CACHE.shuffled()
-            .take(LOTTERY_NUMBER_SIZE)
+            .take(LOTTERY_NUMBER_SIZE),
     )
 
     override fun generateLotteries(count: Int) = (0 until count).map { generate() }

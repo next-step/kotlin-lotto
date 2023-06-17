@@ -30,7 +30,7 @@ class WinningLotteryTest : FunSpec({
             val exception = shouldThrowExactly<IllegalArgumentException> {
                 WinningLottery(
                     lottery = lottery,
-                    bonusNumber = bonusNumber
+                    bonusNumber = bonusNumber,
                 )
             }
             exception.message shouldBe "당첨 번호와 보너스 번호는 동일할 수 없다"
@@ -60,14 +60,14 @@ class WinningLotteryTest : FunSpec({
                             LOTTERY_NUMBER_4,
                             LOTTERY_NUMBER_5,
                             LOTTERY_NUMBER_6,
-                            LOTTERY_NUMBER_8
-                        )
+                            LOTTERY_NUMBER_8,
+                        ),
                     ),
-                    Rank.THIRD
+                    Rank.THIRD,
                 ),
                 row(LOTTERY_3_8, Rank.FOURTH),
                 row(LOTTERY_4_9, Rank.FIFTH),
-                row(LOTTERY_5_10, Rank.NOTHING)
+                row(LOTTERY_5_10, Rank.NOTHING),
             ) { lottery, expected ->
                 val winningLottery = WinningLottery(lottery = LOTTERY_1_6, bonusNumber = LOTTERY_NUMBER_7)
                 val actual = winningLottery.rankConfirm(lottery)

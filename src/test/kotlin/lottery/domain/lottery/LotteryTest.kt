@@ -30,8 +30,8 @@ class LotteryTest : FunSpec({
                         LOTTERY_NUMBER_2,
                         LOTTERY_NUMBER_3,
                         LOTTERY_NUMBER_4,
-                        LOTTERY_NUMBER_5
-                    )
+                        LOTTERY_NUMBER_5,
+                    ),
                 ),
                 row(
                     listOf(
@@ -41,9 +41,9 @@ class LotteryTest : FunSpec({
                         LOTTERY_NUMBER_4,
                         LOTTERY_NUMBER_5,
                         LOTTERY_NUMBER_6,
-                        LOTTERY_NUMBER_7
-                    )
-                )
+                        LOTTERY_NUMBER_7,
+                    ),
+                ),
             ) { input ->
                 val exception = shouldThrowExactly<IllegalArgumentException> { Lottery(values = input) }
                 exception.message shouldBe "로또 번호는 6개만 입력하여야한다"
@@ -57,7 +57,7 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_3,
                 LOTTERY_NUMBER_4,
                 LOTTERY_NUMBER_5,
-                LOTTERY_NUMBER_5
+                LOTTERY_NUMBER_5,
             )
 
             val exception = shouldThrowExactly<IllegalArgumentException> { Lottery(values = input) }
@@ -71,7 +71,7 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_3,
                 LOTTERY_NUMBER_4,
                 LOTTERY_NUMBER_5,
-                LOTTERY_NUMBER_6
+                LOTTERY_NUMBER_6,
             )
             val actual = Lottery(values = input)
             actual.values shouldHaveSize 6
@@ -84,7 +84,7 @@ class LotteryTest : FunSpec({
             row(LOTTERY_2_7, 5),
             row(LOTTERY_3_8, 4),
             row(LOTTERY_4_9, 3),
-            row(LOTTERY_5_10, 2)
+            row(LOTTERY_5_10, 2),
         ) { input, expected ->
             test("번호 일치한 갯수 $expected 를 계산한다") {
                 val lottery = LOTTERY_1_6
@@ -123,7 +123,7 @@ class LotteryTest : FunSpec({
         test("로또 구매 결과를 반환한다") {
             forAll(
                 row(Money(value = BigDecimal(999)), 0),
-                row(Money(value = BigDecimal(1_000)), 1)
+                row(Money(value = BigDecimal(1_000)), 1),
             ) { input, expected ->
                 val actual = Lottery.purchaseLottery(input)
                 actual.purchaseCount shouldBe expected
@@ -151,8 +151,8 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_3,
                 LOTTERY_NUMBER_4,
                 LOTTERY_NUMBER_5,
-                LOTTERY_NUMBER_6
-            )
+                LOTTERY_NUMBER_6,
+            ),
         )
         val LOTTERY_2_7 = Lottery(
             values = listOf(
@@ -161,8 +161,8 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_4,
                 LOTTERY_NUMBER_5,
                 LOTTERY_NUMBER_6,
-                LOTTERY_NUMBER_7
-            )
+                LOTTERY_NUMBER_7,
+            ),
         )
         val LOTTERY_3_8 = Lottery(
             values = listOf(
@@ -171,8 +171,8 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_5,
                 LOTTERY_NUMBER_6,
                 LOTTERY_NUMBER_7,
-                LOTTERY_NUMBER_8
-            )
+                LOTTERY_NUMBER_8,
+            ),
         )
         val LOTTERY_4_9 = Lottery(
             values = listOf(
@@ -181,8 +181,8 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_6,
                 LOTTERY_NUMBER_7,
                 LOTTERY_NUMBER_8,
-                LOTTERY_NUMBER_9
-            )
+                LOTTERY_NUMBER_9,
+            ),
         )
         val LOTTERY_5_10 = Lottery(
             values = listOf(
@@ -191,8 +191,8 @@ class LotteryTest : FunSpec({
                 LOTTERY_NUMBER_7,
                 LOTTERY_NUMBER_8,
                 LOTTERY_NUMBER_9,
-                LOTTERY_NUMBER_10
-            )
+                LOTTERY_NUMBER_10,
+            ),
         )
     }
 }

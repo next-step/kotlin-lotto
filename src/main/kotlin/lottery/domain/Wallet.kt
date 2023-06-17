@@ -10,7 +10,7 @@ import java.math.RoundingMode
 
 class Wallet(
     money: Money,
-    private val purchaseLotteries: Lotteries = Lotteries.init()
+    private val purchaseLotteries: Lotteries = Lotteries.init(),
 ) {
     var money: Money = money
         private set
