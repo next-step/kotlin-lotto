@@ -23,6 +23,14 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
 
     companion object {
         @JvmField
-        val LOTTO_WINNING_PRICE_MAP = listOf(0, 0, 0, 5000, 50000, 1500000, 2000000000)
+        val LOTTO_WINNING_PRICE_MAP = listOf(
+            SixFortyFiveWinningPrice.ELSE.price,
+            SixFortyFiveWinningPrice.ELSE.price,
+            SixFortyFiveWinningPrice.ELSE.price,
+            SixFortyFiveWinningPrice.FOURTH.price,
+            SixFortyFiveWinningPrice.THIRD.price,
+            SixFortyFiveWinningPrice.SECOND.price,
+            SixFortyFiveWinningPrice.FIRST.price,
+        )
     }
 }
