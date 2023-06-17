@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe

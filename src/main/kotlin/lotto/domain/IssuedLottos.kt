@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 /**
  * ### 발급받은 로또를 표현하는 일급 컬렉션 입니다.
