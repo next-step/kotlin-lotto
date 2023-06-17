@@ -17,13 +17,13 @@ class LottoManagerTest {
     @Test
     fun `한 개의 로또는 총 6개의 숫자로 이루어져 있다`() {
         val actual = LottoManager().buyLotto(1000)
-        Assertions.assertThat(actual[0].size).isEqualTo(6)
+        Assertions.assertThat(actual[0].numbers.size).isEqualTo(6)
     }
 
     @Test
     fun `발급 받은 6개의 숫자 중 중복 된 숫자는 있을 수 없다`() {
         val lotto = LottoManager().buyLotto(1000)
-        val actual = lotto[0].toSet()
+        val actual = lotto[0].numbers.toSet()
         Assertions.assertThat(actual.size).isEqualTo(6)
     }
 

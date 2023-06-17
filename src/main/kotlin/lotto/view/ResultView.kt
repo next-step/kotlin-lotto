@@ -15,7 +15,7 @@ object ResultView {
         println("${buyCount}개를 구매했습니다.")
     }
 
-    fun printLottoBundle(lottoBundle: List<List<Int>>) {
+    fun printLottoBundle(lottoBundle: List<Lotto>) {
         lottoBundle.forEach { println(it) }
     }
 

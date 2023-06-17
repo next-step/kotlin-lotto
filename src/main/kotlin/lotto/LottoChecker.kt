@@ -4,14 +4,14 @@ import lotto.enums.LottoRank
 
 class LottoChecker {
 
-    fun lottoCheck(winningNumber: String, lottoBundle: List<List<Int>>): List<LottoRank> {
+    fun lottoCheck(winningNumber: String, lottoBundle: List<Lotto>): List<LottoRank> {
 
         val numbers = winningNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }
 
         val result = mutableListOf<LottoRank>()
         lottoBundle.forEach { lotto ->
             var count = 0
-            lotto.forEach { number ->
+            lotto.numbers.forEach { number ->
                 if (numbers.contains(number)) {
                     count++
                 }

@@ -2,14 +2,14 @@ package lotto
 
 class LottoManager {
 
-    fun buyLotto(money: Int): List<List<Int>> {
-        val lottoBundle: MutableList<List<Int>> = mutableListOf()
+    fun buyLotto(money: Int): List<Lotto> {
+        val lottoBundle: MutableList<Lotto> = mutableListOf()
 
         val count = money / Lotto.ONE_PRICE
         repeat(count) {
-            val lottoNumbers = LottoGenerator().getLottoNumbers()
+            val lottoNumbers = LottoGenerator().getLottoNumbers().sorted()
             val lotto = Lotto(lottoNumbers)
-            lottoBundle.add(lotto.numbers.sorted())
+            lottoBundle.add(lotto)
         }
         return lottoBundle.toList()
     }
