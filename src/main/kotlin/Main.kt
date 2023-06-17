@@ -6,7 +6,7 @@ fun main() {
     val input = readLine()!!
 
     val expressionParser = ExpressionParser()
-    val checkData = expressionParser.checkNullOrEmpty(input)
+    val checkData = expressionParser.validateNullOrEmptyReturnZero(input)
     val calculateTargetData = expressionParser.parseInputData(checkData)
 
     val result = StringCalculator(calculateTargetData).execute()
