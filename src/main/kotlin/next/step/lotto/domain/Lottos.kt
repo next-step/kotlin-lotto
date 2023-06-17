@@ -4,20 +4,20 @@ package next.step.lotto.domain
 value class Lottos(val lottos: Set<Lotto>) {
 
     fun match(winningNumbers: LottoWinningNumbers): LottoWinningStat =
-        LottoWinningStat.of(lottos.groupingBy { it.match(winningNumbers.numbers) }.eachCount())
+        LottoWinningStat.of(lottos.groupingBy { LottoRank.from(it.match(winningNumbers.numbers)) }.eachCount())
 
     fun size(): Int = lottos.size
-    
+
     fun numbers(): Set<Set<Int>> = lottos.map { it.numbers().toSet() }.toSet()
 
     companion object {
         fun buy(payment: Int): Lottos {
             val lottos = mutableSetOf<Lotto>()
             var remained = payment
-            while (Lotto.canBuy(remained)) {
-                val lotto = Lotto.preview()
+            while (LottoStore.canBuy(remained)) {
+                val lotto: Lotto = LottoStore.preview()
                 if (!lottos.contains(lotto)) {
-                    remained = lotto.buy(remained)
+                    remained = LottoStore.buy(remained)
                     lottos.add(lotto)
                 }
             }

@@ -1,28 +1,26 @@
 package next.step.lotto.domain
 
 @JvmInline
-value class Lotto(private val numbers: LottoNumbers) {
-    
-    fun numbers(): Set<Int> = numbers.numbers()
+value class Lotto(private val numbers: Set<LottoNumber>) {
 
-    fun buy(payment: Int): Int {
-        require(canBuy(payment)) { "로또 가격을 지불해야 합니다." }
-        return payment - LOTTO_PRICE
+    init {
+        require(numbers.size == 6) { "로또 번호들은 6개만 생성할 수 있습니다." }
     }
 
-    fun match(numbers: Set<LottoNumber>): LottoRank =
-        LottoRank.from(this.numbers.match(numbers))
+    fun numbers(): Set<Int> = numbers.map { it.number }.toSet()
+
+    fun match(numbers: Set<LottoNumber>): Int = this.numbers.count { numbers.contains(it) }
 
     companion object {
-        const val LOTTO_PRICE: Int = 1000
+        fun from(numbers: Set<Int>): Lotto = Lotto(numbers.map { LottoNumber.of(it) }.toSet())
 
-        fun canBuy(payment: Int): Boolean = payment >= LOTTO_PRICE
-
-        fun of(numbers: LottoNumbers): Lotto = Lotto(numbers)
-
-        fun from(numbers: Set<Int>): Lotto = Lotto(LottoNumbers.from(numbers))
-
-        fun preview(): Lotto = Lotto(LottoNumbers.random())
+        fun random(): Lotto {
+            val numbers = mutableSetOf<LottoNumber>()
+            while (numbers.size != 6) {
+                numbers.add(LottoNumber.random())
+            }
+            return Lotto(numbers)
+        }
     }
 
 }
