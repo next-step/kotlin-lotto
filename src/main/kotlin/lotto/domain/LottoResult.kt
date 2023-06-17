@@ -4,10 +4,8 @@ import lotto.dto.ResultDTO
 
 object LottoResult {
     fun calculateResult(lottos: Lottos, lottoResult: Lotto): List<ResultDTO> {
-        val sortedResult = lottoResult.numbers.sorted()
-
         return lottos.list.map { lotto ->
-            lotto.numbers.count { it in sortedResult }
+            lotto.numbers.count { it in lottoResult.numbers }
         }.mapNotNull {
             LottoRank.of(it)
         }.groupBy {
