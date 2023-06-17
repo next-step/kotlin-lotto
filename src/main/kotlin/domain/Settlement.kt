@@ -17,7 +17,7 @@ class Settlement(private val winningNums: Set<Int>) {
         }
 
         for (it in Prize.values()) {
-            OutputView.announcePrize(it.prizeMessage, prizeCountMap[it] ?: 0)
+            OutputView.reportPrize(it.prizeMessage, prizeCountMap[it] ?: 0)
         }
 
         return calculateProfit(prizeCountMap).toDouble() / sunkCost

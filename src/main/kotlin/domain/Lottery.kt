@@ -5,14 +5,14 @@ import util.RandomNumberGenerator
 
 class Lottery(numberGenerator: NumberGenerator = RandomNumberGenerator) {
 
-    val randomNumber = numberGenerator.randomNumberGenerator()
+    val randomNumbers = numberGenerator.randomNumbers()
 
-    fun getPrizeByLottery(winningNums: List<Int>, bonusNum: Int = -1): Prize? {
-        val matchNumberSize = randomNumber.intersect(winningNums.toSet()).size
+    fun getPrizeByLottery(winningNums: Set<Int>, bonusNum: Int = -1): Prize? {
+        val matchNumberSize = randomNumbers.intersect(winningNums).size
         if (matchNumberSize == SECOND_THIRD_PLACE) {
             val copiedList = winningNums.toMutableList()
             copiedList.add(bonusNum)
-            return if (randomNumber.intersect(copiedList.toSet()).size == SECOND_PLACE_MATCH) {
+            return if (randomNumbers.intersect(copiedList.toSet()).size == SECOND_PLACE_MATCH) {
                 Prize.SECOND_PLACE
             } else {
                 Prize.THIRD_PLACE
