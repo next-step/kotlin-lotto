@@ -6,7 +6,7 @@ object LottoChecker {
         lottos.forEach { lotto ->
             resultMap.addResult(lotto, winNumbers)
         }
-        return LottoResults(resultMap, lottos.size * Lotto.LOTTO_PRICE)
+        return LottoResults.of(resultMap, lottos.size * Lotto.LOTTO_PRICE)
     }
 
     private fun MutableMap<WinningPrize, Int>.addResult(lotto: Lotto, winNumber: WinNumbers) {

@@ -18,7 +18,7 @@ class LottoCheckerTest : BehaviorSpec({
             WinNumbers((LottoNumber.LOTTO_MIN_NUMBER until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE).toList())
         `when`("당첨결과를 확인했을때") {
             then("정확한 결과가 반환된다") {
-                LottoChecker.checkResult(lottos, winNumbers) shouldBe LottoResults(
+                LottoChecker.checkResult(lottos, winNumbers) shouldBe LottoResults.of(
                     mapOf(
                         WinningPrize.FIRST to 1,
                         WinningPrize.SECOND to 1,
