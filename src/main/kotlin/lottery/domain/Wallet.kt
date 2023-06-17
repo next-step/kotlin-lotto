@@ -10,10 +10,15 @@ import java.math.RoundingMode
 
 class Wallet(
     money: Money,
+    private val manualLotteries: Lotteries = Lotteries.init(),
     private val purchaseLotteries: Lotteries = Lotteries.init(),
 ) {
     var money: Money = money
         private set
+
+    fun purchaseManualLotteries(manualLotteries: List<List<String>>) {
+        require(Lottery.canPurchaseLottery(manualLotteries.size, money)) { "수동 로또를 사기엔 부족한 금액이다" }
+    }
 
     fun purchaseLotteries(randomLotteryGenerator: LotteryGenerator): List<Lottery> {
         check(Lottery.canPurchaseLottery(money)) { "로또를 사기엔 부족한 금액이다" }

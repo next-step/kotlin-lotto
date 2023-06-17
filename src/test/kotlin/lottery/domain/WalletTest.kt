@@ -12,9 +12,24 @@ import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_4_9
 import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.RandomLotteryGenerator
 import lottery.domain.rank.Rank
+import java.lang.IllegalArgumentException
 import java.math.BigDecimal
 
 class WalletTest : FunSpec({
+
+    context("purchaseManualLotteries") {
+        test("수동 로또를 구매할 돈이 없는 경우 예외가 발생한다.") {
+            val givenManualLotteries = listOf(
+                listOf("1", "2", "3", "4", "5", "6"),
+                listOf("2", "3", "4", "5", "6", "7"),
+            )
+            val wallet = Wallet(money = Money(BigDecimal(1_000)))
+
+            val exception =
+                shouldThrowExactly<IllegalArgumentException> { wallet.purchaseManualLotteries(givenManualLotteries) }
+            exception.message shouldBe "수동 로또를 사기엔 부족한 금액이다"
+        }
+    }
 
     context("purchaseLottery") {
         test("로또를 구매할 수 없는 경우 예외가 발생한다.") {
