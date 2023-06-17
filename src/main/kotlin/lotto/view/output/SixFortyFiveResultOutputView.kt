@@ -1,9 +1,10 @@
 package lotto.view.output
 
 import lotto.SixFortyFiveLotto
+import lotto.SixFortyFiveLottoNumber
 import lotto.SixFortyFiveLottoStore
 
-class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningValue: List<Int>) : OutputView() {
+class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningValue: SixFortyFiveLottoNumber) : OutputView() {
 
     init {
         val lottoResultList = mutableListOf(0, 0, 0, 0, 0, 0, 0)

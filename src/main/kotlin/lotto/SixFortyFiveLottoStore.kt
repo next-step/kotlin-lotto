@@ -3,7 +3,7 @@ package lotto
 import lotto.view.output.SixFortyFiveLottoOutputView
 import lotto.view.output.SixFortyFiveResultOutputView
 
-class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
+class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, SixFortyFiveLottoNumber> {
     override fun purchase(count: Int): List<SixFortyFiveLotto> {
         return (1..count).map { makeLotto() }
     }
@@ -13,7 +13,7 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, List<Int>> {
         return SixFortyFiveLotto(numbers)
     }
 
-    override fun renderWinningInsight(lottoList: List<SixFortyFiveLotto>, winningValue: List<Int>) {
+    override fun renderWinningInsight(lottoList: List<SixFortyFiveLotto>, winningValue: SixFortyFiveLottoNumber) {
         SixFortyFiveResultOutputView(lottoList, winningValue).renderMessage()
     }
 
