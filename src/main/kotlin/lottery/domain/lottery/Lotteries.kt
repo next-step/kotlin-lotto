@@ -21,5 +21,7 @@ class Lotteries(
 
     companion object {
         fun init() = Lotteries(mutableListOf())
+
+        fun from(values: List<List<String>>) = Lotteries(values.map { Lottery.from(it) }.toMutableList())
     }
 }

@@ -1,6 +1,7 @@
 package lottery.domain.lottery
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lottery.domain.Money
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_8
@@ -34,6 +35,19 @@ class LotteriesTest : FunSpec({
             val actual = lotteries.cost()
             true and false
             actual shouldBe Money(value = BigDecimal(4_000))
+        }
+    }
+
+    context("from") {
+        test("숫자 문자로 list로 된 lottery list를 받아 생성한다") {
+            val actual = Lotteries.from(
+                values = listOf(
+                    listOf("1", "2", "3", "4", "5", "6"),
+                    listOf("2", "3", "4", "5", "6", "7"),
+                ),
+            )
+
+            actual.values shouldHaveSize 2
         }
     }
 })
