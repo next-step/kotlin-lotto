@@ -1,6 +1,6 @@
 package calculator
 
 fun main() {
-    val text = readln()
-    StringCalculator.add(text)
+//    StringCalculator.add("//;\n1;2;3")
+    StringCalculator.add("1;2;3")
 }
