@@ -21,4 +21,17 @@ class StringAddCalculatorTest : FreeSpec({
             result shouldBe expected
         }
     }
+
+    "'//'와 '\\n' 사이에 커스텀 구분자를 지정할 수 있다" - {
+        forAll(
+            row("//a\\n1a2a3a4", 12),
+            row("//;\\n1;2;3;4", 12),
+            row("//$\\n1$2$3$4", 12),
+        ) { input, expected ->
+
+            val result = StringAddCalculator.calculate(input)
+
+            result shouldBe expected
+        }
+    }
 })
