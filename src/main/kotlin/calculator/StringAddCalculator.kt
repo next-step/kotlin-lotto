@@ -14,15 +14,14 @@ class StringAddCalculator {
         return stringNumberCollection.add()
     }
 
-    private fun split(input: String): List<String> {
-        return splitByCustomDelimiterOrNull(input) ?: input.split(DEFAULT_REGEX)
+    private fun split(stringNumbers: String): List<String> {
+        return splitByCustomDelimiterOrNull(stringNumbers) ?: stringNumbers.split(DEFAULT_REGEX)
     }
 
-    private fun splitByCustomDelimiterOrNull(input: String): List<String>? {
-        return Regex("//(.)\n(.*)").find(input)?.let {
+    private fun splitByCustomDelimiterOrNull(stringNumbers: String): List<String>? {
+        return Regex("//(.)\n(.*)").find(stringNumbers)?.let {
             val delimiter = it.groupValues[1]
-            val stringNumbers = it.groupValues[2].split(delimiter)
-            stringNumbers
+            it.groupValues[2].split(delimiter)
         }
     }
 
