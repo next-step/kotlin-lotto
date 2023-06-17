@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.Lotto
-import lotto.LottoEnum
+import lotto.LottoRank
 
 
 object ResultView {
@@ -35,7 +35,7 @@ object ResultView {
     }
 
     fun printWinningResult(resultGroup: Map<Int, Int>) {
-        LottoEnum.values().forEach { lotto ->
+        LottoRank.values().forEach { lotto ->
             resultGroup.keys.find { it == lotto.count }?.let {
                 println("${it}개 일치 (${lotto.prizeMoney}원)- ${resultGroup[it]}개")
             }?: println("${lotto.count}개 일치 (${lotto.prizeMoney}원)- 0개")
