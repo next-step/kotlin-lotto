@@ -7,9 +7,7 @@ class StringAddCalculator {
             return 0
         }
 
-        val stringNumberCollection = StringNumberCollection(
-            split(stringNumbers).map { StringNumber(it) }
-        )
+        val stringNumberCollection = StringNumberCollection(split(stringNumbers))
 
         return stringNumberCollection.add()
     }
