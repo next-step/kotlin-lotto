@@ -1,7 +1,8 @@
 package lotto.ui
 
-import lotto.domain.LotteryTicket
 import lotto.domain.PrizeStatics
+import lotto.domain.WinnerPrize
+import lotto.domain.lottery.LotteryTicket
 import java.math.BigDecimal
 
 object OutputView {
@@ -14,10 +15,15 @@ object OutputView {
     fun showStatics(statics: PrizeStatics) {
         println("당첨 통계")
         println("---------")
-        statics.statics
-            .forEach { (prize, cnt) ->
-                println("${prize.matchCount}개 일치 (${prize.prizeMoney.value}원) - ${cnt}개")
-            }
+        WinnerPrize.values().forEach {
+            val cnt = statics[it] ?: 0
+            println("${getMatchMessage(it)} (${it.prizeMoney.value}원) - ${cnt}개")
+        }
+    }
+
+    private fun getMatchMessage(prize: WinnerPrize): String = when (prize) {
+        WinnerPrize.SECOND_PRIZE -> "${prize.matchCount}개 일치, 보너스볼 일치"
+        else -> "${prize.matchCount}개 일치"
     }
 
     fun showProfitRate(profitRate: BigDecimal) {

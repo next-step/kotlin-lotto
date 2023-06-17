@@ -1,10 +1,10 @@
-package lotto.domain
+package lotto.domain.lottery
 
+import lotto.domain.Money
 import lotto.scaleDown
 
 object LotteryMachine {
     private val LOTTERY_PRICE = Money(1_000)
-    private const val QUANTITY_SCALE = 0
 
     fun issueLotteryTicket(money: Money): LotteryTicket {
         val lotteryQuantity = getQuantity(money)

@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto.domain.lottery
 
-class Lottery(private val numbers: Set<Int>) {
+open class Lottery(private val numbers: Set<Int>) {
     init {
         validateNumberSize()
         validateEachNumberInRange()
@@ -14,8 +14,10 @@ class Lottery(private val numbers: Set<Int>) {
         require(numbers.all { it in LOTTERY_NUMBER_RANGE }) { "로또의 숫자는 1~45 사이의 정수가 가능합니다." }
     }
 
+    fun isInBonus(bonus: Int) = bonus in numbers
+
     infix fun intersect(other: Lottery): Set<Int> {
-        return this.numbers.intersect(other.numbers)
+        return numbers.intersect(other.numbers)
     }
 
     companion object {
