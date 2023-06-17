@@ -1,31 +1,28 @@
 package calculator
 
-import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
-class CalculatorTest : StringSpec({
+class CalculatorTest : BehaviorSpec({
 
-    "계산기는 표현식에 포함된 모든 숫자의 합을 반환 한다." {
-        // given
-        val expression = Expression.of("1,2,3,4,5")
-        val calculator = Calculator()
+    val calculator = Calculator()
 
-        // when
-        val result = calculator.plusAll(expression)
+    given("계산기에 주어신 표현식이") {
 
-        // then
-        result shouldBe 15
-    }
+        `when`("정상적인 경우") {
+            val expression = Expression.of("1,2,3,4,5")
+            then("모든 숫자의 합을 반환 한다.") {
+                val result = calculator.plusAll(expression)
+                result shouldBe 15
+            }
+        }
 
-    "빈 문자열 표현식이 주어지면 결과값은 0이다." {
-        // given
-        val expression = Expression.of("")
-        val calculator = Calculator()
-
-        // when
-        val result = calculator.plusAll(expression)
-
-        // then
-        result shouldBe 0
+        `when`("빈 문자열인 경우") {
+            val expression = Expression.of("")
+            then("계산 결과는 0 이다.") {
+                val result = calculator.plusAll(expression)
+                result shouldBe 0
+            }
+        }
     }
 })

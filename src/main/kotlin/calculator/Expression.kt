@@ -1,6 +1,6 @@
 package calculator
 
-class Expression(val separators: List<String>, val numbers: List<Operand>) {
+class Expression(val separators: List<String>, val numbers: List<PositiveOperand>) {
 
     companion object {
         val DEFAULT_SEPARATORS = arrayOf(",", ":")
@@ -13,18 +13,18 @@ class Expression(val separators: List<String>, val numbers: List<Operand>) {
 
         private fun withCustomSeparator(value: String): Expression {
             val separator = value[2].toString()
-            val operands = value.substring(4)
+            val positiveOperands = value.substring(4)
                 .split(value[2].toString())
                 .filter { it.isNotBlank() }
-                .map(::Operand)
-            return Expression(listOf(separator), operands)
+                .map(::PositiveOperand)
+            return Expression(listOf(separator), positiveOperands)
         }
 
         private fun withDefaultSeparator(value: String): Expression {
-            val operands = value.split(*DEFAULT_SEPARATORS)
+            val positiveOperands = value.split(*DEFAULT_SEPARATORS)
                 .filter { it.isNotBlank() }
-                .map(::Operand)
-            return Expression(DEFAULT_SEPARATORS.toList(), operands)
+                .map(::PositiveOperand)
+            return Expression(DEFAULT_SEPARATORS.toList(), positiveOperands)
         }
 
         private fun hasCustomSeparator(value: String): Boolean {
