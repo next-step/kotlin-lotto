@@ -7,7 +7,7 @@ import lottery.domain.lottery.LotteryNumber
 import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.RandomLotteryGenerator
 import lottery.view.inputBonusLotteryNumber
-import lottery.view.inputPurchaseLotteryCount
+import lottery.view.inputPurchaseManualLottery
 import lottery.view.inputPurchaseMoney
 import lottery.view.inputWinningLottery
 import lottery.view.printLottoResult
@@ -15,7 +15,7 @@ import lottery.view.printPurchaseLotteries
 
 fun main() {
     val wallet = Wallet(Money(inputPurchaseMoney()))
-    inputPurchaseLotteryCount()
+    val manualLottery = inputPurchaseManualLottery()
 
     val purchaseLotteries = wallet.purchaseLotteries(RandomLotteryGenerator)
     printPurchaseLotteries(purchaseLotteries)

@@ -7,7 +7,7 @@ fun inputPurchaseMoney(): BigDecimal {
     return readln().toBigDecimalOrNull() ?: retryInputPurchaseMoney()
 }
 
-fun inputPurchaseLotteryCount(): List<List<String>> {
+fun inputPurchaseManualLottery(): List<List<String>> {
     val purchaseCount = inputPurchaseManualLotteryCount()
     println("수동으로 구매할 번호를 입력해 주세요.")
     return (1..purchaseCount).map { inputPurchaseManualLotteryNumber() }
