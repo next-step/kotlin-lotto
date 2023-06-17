@@ -3,7 +3,7 @@ package lotto.domain
 @JvmInline
 value class LottoNumber(private val number: Int) : Comparable<LottoNumber> {
     init {
-        require(number in RAW_LOTTO_MIN_NUMBER..RAW_LOTTO_MAX_NUMBER) { NUMBER_RANGE_ERROR_MESSAGE }
+        require(number in VALID_RANGE) { NUMBER_RANGE_ERROR_MESSAGE }
     }
 
     override fun compareTo(other: LottoNumber): Int {
@@ -31,11 +31,13 @@ value class LottoNumber(private val number: Int) : Comparable<LottoNumber> {
     }
 
     companion object {
-        val LOTTO_MIN_NUMBER = LottoNumber(1)
-        val LOTTO_MAX_NUMBER = LottoNumber(45)
-
         const val RAW_LOTTO_MIN_NUMBER = 1
         const val RAW_LOTTO_MAX_NUMBER = 45
+
+        private val VALID_RANGE: IntRange = RAW_LOTTO_MIN_NUMBER..RAW_LOTTO_MAX_NUMBER
+
+        val LOTTO_MIN_NUMBER = LottoNumber(1)
+        val LOTTO_MAX_NUMBER = LottoNumber(45)
 
         val NUMBER_RANGE_ERROR_MESSAGE =
             "로또 번호는 $LOTTO_MIN_NUMBER ~ ${LOTTO_MAX_NUMBER}사이여야 합니다"
