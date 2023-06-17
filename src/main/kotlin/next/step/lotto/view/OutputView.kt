@@ -1,6 +1,6 @@
 package next.step.racing.view
 
-import next.step.lotto.domain.LottoWinningCount
+import next.step.lotto.domain.LottoRank
 import next.step.lotto.domain.LottoWinningStat
 import next.step.lotto.domain.Lottos
 
@@ -18,7 +18,7 @@ object OutputView {
         println()
         println("당첨 통계")
         println("---------")
-        winningStat.filter { it.key != LottoWinningCount.NONE }
+        winningStat.filter { it.key != LottoRank.MISS }
             .forEach { println("${it.key.matchCount}개 일치 (${it.key.winnings}원)- ${it.value}개") }
     }
 

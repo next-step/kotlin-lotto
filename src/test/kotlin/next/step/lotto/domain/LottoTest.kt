@@ -70,11 +70,11 @@ class LottoTest : DescribeSpec({
                 ).match(LottoWinningNumbers.from("1,2,3,4,5,6")) shouldBe
                         LottoWinningStat.of(
                             mapOf(
-                                Pair(LottoWinningCount.SIX, 0),
-                                Pair(LottoWinningCount.FIVE, 1),
-                                Pair(LottoWinningCount.FOUR, 1),
-                                Pair(LottoWinningCount.THREE, 1),
-                                Pair(LottoWinningCount.NONE, 3),
+                                Pair(LottoRank.FOURTH, 0),
+                                Pair(LottoRank.THIRD, 1),
+                                Pair(LottoRank.SECOND, 1),
+                                Pair(LottoRank.FIRST, 1),
+                                Pair(LottoRank.MISS, 3),
                             )
                         )
             }
