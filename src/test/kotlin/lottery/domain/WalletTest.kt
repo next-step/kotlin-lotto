@@ -12,10 +12,16 @@ import lottery.domain.lottery.LotteryTest.Companion.LOTTERY_4_9
 import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.RandomLotteryGenerator
 import lottery.domain.rank.Rank
-import java.lang.IllegalArgumentException
 import java.math.BigDecimal
 
 class WalletTest : FunSpec({
+
+    context("init") {
+        test("wallet 생성 시 로또를 구매할 돈이 없는 경우 예외가 발생한다") {
+            val exception = shouldThrowExactly<IllegalArgumentException> { Wallet(money = Money(BigDecimal(999))) }
+            exception.message shouldBe "로또를 사기엔 부족한 금액이다"
+        }
+    }
 
     context("purchaseManualLotteries") {
         test("수동 로또를 구매할 돈이 없는 경우 예외가 발생한다.") {
@@ -44,13 +50,6 @@ class WalletTest : FunSpec({
     }
 
     context("purchaseLottery") {
-        test("로또를 구매할 수 없는 경우 예외가 발생한다.") {
-            val wallet = Wallet(money = Money(BigDecimal(999)))
-            val exception =
-                shouldThrowExactly<IllegalStateException> { wallet.purchaseLotteries(RandomLotteryGenerator) }
-            exception.message shouldBe "로또를 사기엔 부족한 금액이다"
-        }
-
         test("로또를 구매한다") {
             val wallet = Wallet(money = Money(BigDecimal(3_500)))
             val actual = wallet.purchaseLotteries(RandomLotteryGenerator)
@@ -63,7 +62,7 @@ class WalletTest : FunSpec({
     context("calculateLotteryResult") {
         test("당첨 로또를 받아 로또의 당첨 결과를 반환할 수 있다") {
             val wallet = Wallet(
-                money = Money(BigDecimal.ZERO),
+                money = Money(BigDecimal(1_000)),
                 randomLotteries = Lotteries(
                     values = mutableListOf(
                         LOTTERY_1_6,
