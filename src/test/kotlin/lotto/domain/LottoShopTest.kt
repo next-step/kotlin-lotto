@@ -14,6 +14,14 @@ class LottoShopTest:StringSpec({
         shouldThrow<IllegalArgumentException> {
             LottoShop.getTicketCount(10030)
         }.message shouldBe "1000원 단위로 입력해주세요."
-
     }
+
+    "금액을 입력하면 로또티켓들이 반환된다."{
+        with(LottoShop.getLottos(5000)){
+            list.size shouldBe 5
+            list[0].numbers.distinct().size shouldBe 6
+        }
+    }
+
+
 })
