@@ -7,9 +7,10 @@ fun inputPurchaseMoney(): BigDecimal {
     return readln().toBigDecimalOrNull() ?: retryInputPurchaseMoney()
 }
 
-fun inputPurchaseLotteryCount(): BigDecimal {
-    println("수동으로 구매할 로또 수를 입력해 주세요.")
-    return readln().toBigDecimalOrNull() ?: retryInputPurchaseLotteryCount()
+fun inputPurchaseLotteryCount(): List<List<String>> {
+    val purchaseCount = inputPurchaseManualLotteryCount()
+    println("수동으로 구매할 번호를 입력해 주세요.")
+    return (1..purchaseCount).map { inputPurchaseManualLotteryNumber() }
 }
 
 fun inputWinningLottery(): List<String> {
@@ -27,9 +28,18 @@ private fun retryInputPurchaseMoney(): BigDecimal {
     return inputPurchaseMoney()
 }
 
-private fun retryInputPurchaseLotteryCount(): BigDecimal {
+private fun inputPurchaseManualLotteryCount(): Int {
+    println("수동으로 구매할 로또 수를 입력해 주세요.")
+    return readln().toIntOrNull() ?: retryInputPurchaseManualLotteryCount()
+}
+
+private fun retryInputPurchaseManualLotteryCount(): Int {
     println("로또 수는 숫자를 입력하여야 합니다.")
-    return inputPurchaseLotteryCount()
+    return inputPurchaseManualLotteryCount()
+}
+
+private fun inputPurchaseManualLotteryNumber(): List<String> {
+    return readln().split(",")
 }
 
 private fun retryInputBonusLotteryNumber(): Int {
