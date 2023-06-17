@@ -5,7 +5,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class IntTokenizerTest : FreeSpec({
+class NumberTokenizerTest : FreeSpec({
 
     "커스텀 구분자로 받은 숫자 문자열을 커스텀 구분자로 분리할 수 있어야 한다." - {
         forAll(
@@ -14,7 +14,7 @@ class IntTokenizerTest : FreeSpec({
             row("//$\\n1$2$3$4", listOf(1, 2, 3, 4)),
         ) { input, expected ->
 
-            val result = IntTokenizer.tokenize(input)
+            val result = NumberTokenizer.tokenize(input)
 
             result shouldBe expected
         }

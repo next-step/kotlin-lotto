@@ -5,7 +5,7 @@ object StringAddCalculator {
         if (input.isEmpty()) {
             return 0
         }
-        val tokens = IntTokenizer.tokenize(input)
+        val tokens = NumberTokenizer.tokenize(input)
 
         return tokens.sum()
     }

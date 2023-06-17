@@ -3,7 +3,7 @@ package calculator
 import calculator.vo.Delimiter
 import calculator.vo.Delimiters
 
-object IntTokenizer {
+object NumberTokenizer {
     private val DEFAULT_DELIMITERS = Delimiters.from(listOf(Delimiter(':'), Delimiter(',')))
     private val CUSTOM_DELIMITER_SEARCH_PATTERN = Regex("""//(.)\\n(.*)""")
 
@@ -14,7 +14,7 @@ object IntTokenizer {
 
         return customizedDelimiters
             .split(separatedInput)
-            .map { it.toInt() }
+            .map(this::parseToNumber)
     }
 
     private fun separateCustomDelimiterFrom(input: String): Pair<Delimiter?, String> {
@@ -24,6 +24,12 @@ object IntTokenizer {
         val separatedInput = searchResult.groupValues[2]
 
         return delimiter to separatedInput
+    }
+
+    private fun parseToNumber(input: String): Int {
+        val number = input.toIntOrNull() ?: throw RuntimeException()
+        if (number < 0) throw RuntimeException()
+        return number
     }
 }
 
