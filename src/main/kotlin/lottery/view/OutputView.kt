@@ -6,9 +6,9 @@ import lottery.domain.rank.Rank
 
 private const val LOTTERY_NUMBER_DELIMITER = ", "
 
-fun printPurchaseLotteries(lotteries: List<Lottery>) {
-    println("${lotteries.size}를 구매했습니다.")
-    lotteries.forEach { printLottery(it) }
+fun printPurchaseLotteries(manualLotteries: List<Lottery>, randomLotteries: List<Lottery>) {
+    println("수동으로 ${manualLotteries.size}장, 자동으로 ${randomLotteries.size}개를 구매했습니다.")
+    randomLotteries.forEach { printLottery(it) }
 }
 
 fun printLottoResult(lottoResult: LottoResult) {

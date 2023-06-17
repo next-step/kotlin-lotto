@@ -16,9 +16,9 @@ import lottery.view.printPurchaseLotteries
 fun main() {
     val wallet = Wallet(Money(inputPurchaseMoney()))
     val manualLottery = inputPurchaseManualLottery()
-
-    val purchaseLotteries = wallet.purchaseLotteries(RandomLotteryGenerator)
-    printPurchaseLotteries(purchaseLotteries)
+    val purchasedManualLotteries = wallet.purchaseManualLotteries(manualLottery)
+    val purchasedRandomLotteries = wallet.purchaseLotteries(RandomLotteryGenerator)
+    printPurchaseLotteries(purchasedManualLotteries, purchasedRandomLotteries)
     val winningLottery = WinningLottery(Lottery.from(inputWinningLottery()), LotteryNumber(inputBonusLotteryNumber()))
     val lottoResult = wallet.calculateLotteryResult(winningLottery)
     printLottoResult(lottoResult)

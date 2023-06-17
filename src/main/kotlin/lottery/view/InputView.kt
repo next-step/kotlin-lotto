@@ -39,7 +39,8 @@ private fun retryInputPurchaseManualLotteryCount(): Int {
 }
 
 private fun inputPurchaseManualLotteryNumber(): List<String> {
-    return readln().split(",")
+    return readln().replace(" ", "")
+        .split(",")
 }
 
 private fun retryInputBonusLotteryNumber(): Int {
