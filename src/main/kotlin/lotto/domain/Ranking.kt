@@ -1,36 +1,35 @@
 package lotto.domain
 
-class Ranking(buyedLottoes: LottoNumbers, val winNumbers: LottoWinNumber) {
+class Ranking(buyedLottoes: OwnedLotto, private val winNumber: Lotto, private val bonusNumber: BonusBall) {
 
-    var threeCorrect = 0
-        private set
-
-    var fourCorrect = 0
-        private set
-
-    var fiveCorrect = 0
-        private set
-
-    var sixCorrect = 0
+    var rankingResult = mutableMapOf<Rank, Int>()
         private set
 
     var totalWinAmount: Int = 0
         private set
-        get() =  Rank.THREE.winningMoney * threeCorrect + Rank.FOUR.winningMoney * fourCorrect + Rank.FIVE.winningMoney * fiveCorrect + Rank.SIX.winningMoney * sixCorrect
+        get() = rankingResult.toList().sumOf { (rank, count) ->
+            rank.winningMoney * count
+        }
 
     init {
-        buyedLottoes.lottoNumbers.forEach {
-            setRanking(it)
+        Rank.values().reversedArray().forEach {
+            rankingResult[it] = 0
+        }
+
+        buyedLottoes.lottoes.forEach {
+            val rank = getRank(it)
+            val rankingCount = rankingResult[rank] ?: 0
+            rankingResult[rank] = rankingCount + 1
         }
     }
 
-    private fun setRanking(lottoNumber: LottoNumber) {
-        when(Rank.valueOf(lottoNumber.lottoNumber.filter { it in winNumbers.winNumbers }.size)) {
-            Rank.SIX -> sixCorrect++
-            Rank.FIVE -> fiveCorrect++
-            Rank.FOUR -> fourCorrect++
-            Rank.THREE -> threeCorrect++
-            else -> ""
+    private fun getRank(lottoNumber: Lotto): Rank {
+        val size = lottoNumber.lotto.count {
+            it in winNumber.lotto
         }
+        val isBonusMatched = lottoNumber.lotto.any {
+            it == bonusNumber.bonusNumber
+        }
+        return Rank.valueOf(size, isBonusMatched)
     }
 }

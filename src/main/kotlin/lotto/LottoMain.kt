@@ -5,9 +5,14 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val lottoNumbers = LottoMachine.buyLottoes(InputView.getBuyAmount())
-    ResultView.showBuyResult(lottoNumbers)
+    val amount = InputView.getBuyAmount()
+    val ownedLotto = LottoMachine.buyLotto(amount)
+    ResultView.showBuyResult(ownedLotto)
 
-    val ranking = LottoMachine.setRanking(InputView.getWinNumbers())
+    val winLotto = InputView.getWinLotto()
+    val bonusNumber = InputView.getBonusBall()
+    LottoMachine.setWinLotto(winLotto, bonusNumber)
+
+    val ranking = LottoMachine.generateRanking()
     ResultView.showGameResult(ranking)
 }

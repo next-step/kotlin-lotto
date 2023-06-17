@@ -1,18 +1,29 @@
 package lotto.view
 
 import lotto.InputParser
+import lotto.domain.BonusBall
+import lotto.domain.Lotto
 
 object InputView {
 
+    private const val EMPTY_STRING = "입력값이 없습니다"
+
     fun getBuyAmount(): Int {
         println("구입금액을 입력해 주세요.")
-        val inputData = readlnOrNull() ?: throw IllegalArgumentException("입력값이 없습니다")
+        val inputData = readlnOrNull() ?: throw IllegalArgumentException(EMPTY_STRING)
         return InputParser.getBuyAmount(inputData)
     }
 
-    fun getWinNumbers(): List<Int> {
+    fun getWinLotto(): Lotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val inputData = readlnOrNull() ?: throw IllegalArgumentException("입력값이 없습니다")
-        return InputParser.parseWinNumbers(inputData)
+        val inputData = readlnOrNull() ?: throw IllegalArgumentException(EMPTY_STRING)
+        return Lotto(InputParser.parseWinNumbers(inputData))
+    }
+
+    fun getBonusBall(): BonusBall {
+        println("보너스 볼을 입력해 주세요.")
+        val inputData = readlnOrNull() ?: throw IllegalArgumentException(EMPTY_STRING)
+        val bonusNumber = InputParser.parseBonus(inputData)
+        return BonusBall(bonusNumber)
     }
 }

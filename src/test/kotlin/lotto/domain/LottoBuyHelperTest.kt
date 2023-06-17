@@ -10,8 +10,10 @@ class LottoBuyHelperTest : AnnotationSpec() {
     @Test
     fun `로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다`() {
         val lottoNumbers = LottoBuyHelper.buyLotto(14000)
-        lottoNumbers.lottoNumbers shouldHaveSize 14
-        lottoNumbers.lottoNumbers.shouldForAll { 6 }
+        lottoNumbers.lottoes shouldHaveSize 14
+        lottoNumbers.lottoes.shouldForAll {
+            it.lotto shouldHaveSize 6
+        }
     }
 
     @Test
