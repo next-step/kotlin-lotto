@@ -34,7 +34,7 @@ object ResultView {
     }
 
     fun printWinningResult(resultGroup: Map<Int, Int>) {
-        LottoRank.values().forEach { lotto ->
+        LottoRank.values().filter { it.count != 0 }.forEach { lotto ->
             resultGroup.keys.find { it == lotto.count }?.let {
                 println("${it}개 일치 (${lotto.prizeMoney}원)- ${resultGroup[it]}개")
             } ?: println("${lotto.count}개 일치 (${lotto.prizeMoney}원)- 0개")

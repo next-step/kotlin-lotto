@@ -5,7 +5,7 @@ class LottoGenerator {
         val numberSet = mutableSetOf<Int>()
         do {
             numberSet.add(getLottoNumber())
-        } while (numberSet.size < Lotto.NUMBER_COUNT)
+        } while (numberSet.size < Lotto.COLLECT_LOTTO_SIZE)
         return numberSet.sorted()
     }
     private fun getLottoNumber(): Int {
