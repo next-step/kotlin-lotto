@@ -6,7 +6,7 @@ import lottery.domain.rank.Rank
 import lottery.domain.rank.Rank.Companion.fillMissRankWithDefault
 
 class Lotteries(
-    val values: MutableList<Lottery>,
+    val values: MutableList<Lottery> = mutableListOf(),
 ) {
     fun compareWinningLottery(winningLottery: WinningLottery) =
         values.map { winningLottery.rankConfirm(it) }
@@ -24,7 +24,6 @@ class Lotteries(
     fun size(): Int = values.size
 
     companion object {
-        fun init() = Lotteries(mutableListOf())
 
         fun from(values: List<List<String>>) = Lotteries(values.map { Lottery.from(it) }.toMutableList())
 

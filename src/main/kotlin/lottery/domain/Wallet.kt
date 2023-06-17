@@ -11,8 +11,8 @@ import java.math.RoundingMode
 
 class Wallet(
     money: Money,
-    private val manualLotteries: Lotteries = Lotteries.init(),
-    private val randomLotteries: Lotteries = Lotteries.init(),
+    private val manualLotteries: Lotteries = Lotteries(),
+    private val randomLotteries: Lotteries = Lotteries(),
 ) {
     init {
         require(Lottery.canPurchaseLottery(money)) { "로또를 사기엔 부족한 금액이다" }
