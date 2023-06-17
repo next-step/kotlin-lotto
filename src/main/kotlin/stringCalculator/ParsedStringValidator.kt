@@ -3,21 +3,23 @@ package stringCalculator
 class ParsedStringValidator(
     private val parsedString: List<String>
 ) {
-    fun check() {
+    fun check(): Boolean {
         if (!checkNumber()) {
-            throw RuntimeException()
+            return false
         }
 
         if (!checkNegativeNumber()) {
-            throw RuntimeException()
+            return false
         }
+
+        return true
     }
 
     private fun checkNumber(): Boolean {
         parsedString.forEach {
             try {
                 it.toInt()
-            } catch (e: RuntimeException) {
+            } catch (e: Exception) {
                 return false
             }
         }

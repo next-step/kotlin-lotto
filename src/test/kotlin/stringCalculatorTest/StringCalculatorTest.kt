@@ -39,9 +39,19 @@ class StringCalculatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val stringCalculator = StringCalculator(parsedStringList)
         shouldThrow<RuntimeException> {
-            stringCalculator.execute()
+            StringCalculator(parsedStringList)
+        }
+    }
+
+    @Test
+    fun `계산기 숫자 이외의 입력값 테스트`() {
+        val inputString = "1:8,AA"
+        val stringParser = StringParser()
+        val parsedStringList = stringParser.parse(inputString)
+
+        shouldThrow<RuntimeException> {
+            StringCalculator(parsedStringList)
         }
     }
 }

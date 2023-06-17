@@ -4,10 +4,12 @@ class StringCalculator(
     private val parsedStringList: List<String>
 ) {
     init {
-        ParsedStringValidator(parsedStringList).check()
+        check(ParsedStringValidator(parsedStringList).check()) {
+            RuntimeException()
+        }
     }
 
     fun execute(): Int {
-        return parsedStringList.map { it.toInt() }.sum()
+        return parsedStringList.sumOf { it.toInt() }
     }
 }
