@@ -3,7 +3,6 @@ package next.step.lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
-import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
 class LottoTest : DescribeSpec({
@@ -22,15 +21,6 @@ class LottoTest : DescribeSpec({
                 shouldThrow<IllegalArgumentException> {
                     Lotto.from((1..5).toSet())
                 }
-            }
-        }
-
-        context("랜덤으로 생성하면") {
-            it("모두 다른 6개의 LottoNumber를 가짐").config(invocations = 1000) {
-                val numbers = Lotto.random().numbers()
-                println(numbers)
-
-                numbers shouldHaveSize 6
             }
         }
 

@@ -11,5 +11,5 @@ object LottoStore {
 
     fun canBuy(payment: Int): Boolean = payment >= LOTTO_PRICE
 
-    fun preview(): Lotto = Lotto.random()
+    fun preview(): Lotto = Lotto.of(LottoNumberGenerator.random())
 }
