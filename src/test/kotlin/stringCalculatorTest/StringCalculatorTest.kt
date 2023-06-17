@@ -1,5 +1,6 @@
 package stringCalculatorTest
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -28,8 +29,19 @@ class StringCalculatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        println(parsedStringList)
         val stringCalculator = StringCalculator(parsedStringList)
         stringCalculator.execute() shouldBe 18
+    }
+
+    @Test
+    fun `계산기 음수 입력값 테스트`() {
+        val inputString = "-1:8,9"
+        val stringParser = StringParser()
+        val parsedStringList = stringParser.parse(inputString)
+
+        val stringCalculator = StringCalculator(parsedStringList)
+        shouldThrow<RuntimeException> {
+            stringCalculator.execute()
+        }
     }
 }
