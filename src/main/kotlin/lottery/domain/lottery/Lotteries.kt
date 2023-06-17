@@ -9,7 +9,7 @@ class Lotteries(
     val values: MutableList<Lottery>
 ) {
     fun compareWinningLottery(winningLottery: WinningLottery) =
-        values.map { winningLottery.compareLottery(it) }
+        values.map { winningLottery.rankConfirm(it) }
             .groupingBy { it }
             .eachCount()
             .fillMissRankWithDefault()

@@ -70,7 +70,7 @@ class WinningLotteryTest : FunSpec({
                 row(LOTTERY_5_10, Rank.NOTHING)
             ) { lottery, expected ->
                 val winningLottery = WinningLottery(lottery = LOTTERY_1_6, bonusNumber = LOTTERY_NUMBER_7)
-                val actual = winningLottery.compareLottery(lottery)
+                val actual = winningLottery.rankConfirm(lottery)
                 actual shouldBe expected
             }
         }
