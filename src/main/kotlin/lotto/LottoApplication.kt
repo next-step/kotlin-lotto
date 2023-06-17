@@ -5,7 +5,7 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoApplication(
-    private val calculator: Calculator,
+    private val rateCalculator: RateCalculator,
     private val lottoChecker: LottoChecker,
 ) {
 
@@ -26,7 +26,7 @@ class LottoApplication(
 
         val winningMoney = lottoChecker.winningMoneyCheck(collectCounts)
 
-        val returnRatio = calculator.calculateRateOfReturn(lottoBundle.inputMoney, winningMoney)
+        val returnRatio = rateCalculator.calculateRateOfReturn(lottoBundle.inputMoney, winningMoney)
         resultView.printRateOfReturn(returnRatio)
     }
 
@@ -44,5 +44,5 @@ class LottoApplication(
 }
 
 fun main() {
-    LottoApplication(Calculator(), LottoChecker()).lottoRun()
+    LottoApplication(RateCalculator(), LottoChecker()).lottoRun()
 }

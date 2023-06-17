@@ -3,7 +3,7 @@ package lotto
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class Calculator {
+class RateCalculator {
 
     fun calculateRateOfReturn(money: Int, winningMoney: Int): Double {
         return BigDecimal(winningMoney.toDouble() / money.toDouble())
