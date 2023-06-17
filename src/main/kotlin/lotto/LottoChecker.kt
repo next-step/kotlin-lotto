@@ -22,7 +22,7 @@ class LottoChecker {
     fun winningMoneyCheck(collectCounts: List<Int>): Int {
         var winningMoney = 0
         collectCounts.forEach { count ->
-            winningMoney += LottoRank.values().find { it.count == count }?.prizeMoney ?: NONE_PRIZE_MONEY
+            winningMoney += LottoRank.getPrizeMoney(count)
         }
         return winningMoney
     }
