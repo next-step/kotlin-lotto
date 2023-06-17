@@ -24,7 +24,7 @@ class LottoNumberTest : DescribeSpec({
 
         context("랜덤으로 생성하면") {
             it("1과 45 사이의 숫자로 생성됨").config(invocations = 1000) {
-                val number = LottoNumber.random().number()
+                val number = LottoNumber.random().number
                 println(number)
 
                 assertSoftly {

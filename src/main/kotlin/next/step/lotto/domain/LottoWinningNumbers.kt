@@ -2,7 +2,7 @@ package next.step.lotto.domain
 
 @JvmInline
 value class LottoWinningNumbers(private val numbers: Set<LottoNumber>) {
-    fun match(numbers: Set<Int>): Int = this.numbers.count { numbers.contains(it.number()) }
+    fun match(numbers: Set<Int>): Int = this.numbers.count { numbers.contains(it.number) }
 
 
     companion object {
