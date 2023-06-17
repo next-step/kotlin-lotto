@@ -1,6 +1,6 @@
 package lotto
 
-class LottoNumber {
+class LottoGenerator {
     fun getLottoNumbers(): List<Int> {
         val numberSet = mutableSetOf<Int>()
         do {

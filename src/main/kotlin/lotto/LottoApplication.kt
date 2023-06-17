@@ -33,7 +33,7 @@ class LottoApplication(
         val inputMoney = inputView.printInputLottoBuyMoney().toInt()
         resultView.printLottoCount(inputMoney)
 
-        val lotto = Lotto(LottoNumber().getLottoNumbers())
+        val lotto = Lotto(LottoGenerator().getLottoNumbers())
         val lottoManager = LottoManager(lotto)
 
         val lottoBundle = lottoManager.buyLotto(inputMoney)

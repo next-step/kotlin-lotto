@@ -3,7 +3,6 @@ package lotto.view
 import lotto.Lotto
 import lotto.LottoRank
 
-
 object ResultView {
 
     fun printResult() {
@@ -27,7 +26,7 @@ object ResultView {
     fun printRateOfReturn(returnRatio: Double) {
         print("총 수익률은 ${returnRatio}입니다.")
 
-        if(returnRatio > 1) {
+        if (returnRatio > 1) {
             println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)")
         } else {
             println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
@@ -38,7 +37,7 @@ object ResultView {
         LottoRank.values().forEach { lotto ->
             resultGroup.keys.find { it == lotto.count }?.let {
                 println("${it}개 일치 (${lotto.prizeMoney}원)- ${resultGroup[it]}개")
-            }?: println("${lotto.count}개 일치 (${lotto.prizeMoney}원)- 0개")
+            } ?: println("${lotto.count}개 일치 (${lotto.prizeMoney}원)- 0개")
         }
     }
 }

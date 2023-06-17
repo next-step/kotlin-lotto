@@ -14,14 +14,14 @@ class LottoTest {
 
     @BeforeEach
     fun setup() {
-        val lottoNumber = LottoNumber()
-        val numbers = lottoNumber.getLottoNumbers()
+        val lottoGenerator = LottoGenerator()
+        val numbers = lottoGenerator.getLottoNumbers()
         lotto = Lotto(numbers)
     }
 
     @Test
     fun `1 ~ 45 까지의 로또 번호에서 랜덤한 숫자의 로또를 생성할 수 있다`() {
-        val actual = LottoNumber().getLottoNumbers()
+        val actual = LottoGenerator().getLottoNumbers()
         assertThat(actual.size).isEqualTo(6)
     }
 
