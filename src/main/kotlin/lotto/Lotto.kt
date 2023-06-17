@@ -2,17 +2,7 @@ package lotto
 
 class Lotto {
 
-    fun buyLotto(money: Int): List<List<Int>> {
-        val lottoBundle: MutableList<List<Int>> = mutableListOf()
-
-        val count = money / ONE_PRICE
-        repeat(count) {
-            lottoBundle.add(generateNumbers())
-        }
-        return lottoBundle.toList()
-    }
-
-    private fun generateNumbers(): List<Int> {
+    fun generateNumbers(): List<Int> {
         val numberSet = mutableSetOf<Int>()
         do {
             numberSet.add(LottoNumber().getLottoNumber())
@@ -22,6 +12,6 @@ class Lotto {
 
     companion object {
         const val ONE_PRICE: Int = 1000
-        private const val NUMBER_COUNT: Int = 6
+        const val NUMBER_COUNT: Int = 6
     }
 }
