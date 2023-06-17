@@ -2,7 +2,9 @@ package lotto.utils
 
 import lotto.domain.Lotto
 
-class LottoGenerator {
+class LottoGenerator(
+    private val numbers: MutableList<Int>
+) {
     fun getLottoNumbers(): List<Int> {
         val numberSet = mutableSetOf<Int>()
         do {
@@ -11,15 +13,13 @@ class LottoGenerator {
         return numberSet.sorted()
     }
     private fun getLottoNumber(): Int {
-        val numbers = generateLottoNumbers()
-        return numbers.shuffled()[PICK_INDEX]
+        val selectedNumber = numbers.shuffled()[PICK_INDEX]
+        numbers.remove(selectedNumber)
+        return selectedNumber
     }
 
-    private fun generateLottoNumbers(): List<Int> = (MINIMUM_NUMBER..MAXIMUM_NUMBER).toList()
 
     companion object {
         private const val PICK_INDEX: Int = 0
-        private const val MINIMUM_NUMBER: Int = 1
-        private const val MAXIMUM_NUMBER: Int = 45
     }
 }

@@ -17,7 +17,7 @@ class LottoChecker {
                     count++
                 }
             }
-            if(count != 0) {
+            if (count != 0) {
                 result.add(LottoRank.getLottoRankByCount(count))
             }
         }
