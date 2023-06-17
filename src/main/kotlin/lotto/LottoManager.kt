@@ -9,7 +9,7 @@ class LottoManager(
 
         val count = money / Lotto.ONE_PRICE
         repeat(count) {
-            lottoBundle.add(lotto.generateNumbers())
+            lottoBundle.add(lotto.getLotto())
         }
         return lottoBundle.toList()
     }

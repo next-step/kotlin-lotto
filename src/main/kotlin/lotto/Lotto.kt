@@ -1,13 +1,11 @@
 package lotto
 
-class Lotto {
+class Lotto(
+    private val numbers: List<Int>
+) {
 
-    fun generateNumbers(): List<Int> {
-        val numberSet = mutableSetOf<Int>()
-        do {
-            numberSet.add(LottoNumber().getLottoNumber())
-        } while (numberSet.size < NUMBER_COUNT)
-        return numberSet.sorted()
+    fun getLotto(): List<Int> {
+        return numbers.sorted()
     }
 
     companion object {

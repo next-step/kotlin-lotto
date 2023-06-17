@@ -1,7 +1,14 @@
 package lotto
 
 class LottoNumber {
-    fun getLottoNumber(): Int {
+    fun getLottoNumbers(): List<Int> {
+        val numberSet = mutableSetOf<Int>()
+        do {
+            numberSet.add(getLottoNumber())
+        } while (numberSet.size < Lotto.NUMBER_COUNT)
+        return numberSet.sorted()
+    }
+    private fun getLottoNumber(): Int {
         val numbers = generateLottoNumbers()
         return numbers.shuffled()[PICK_INDEX]
     }

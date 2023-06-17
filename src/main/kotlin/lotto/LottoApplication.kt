@@ -5,13 +5,11 @@ import lotto.view.ResultView
 
 class LottoApplication(
     private val calculator: Calculator,
-    private val lotto: Lotto,
     private val lottoChecker: LottoChecker,
 ) {
 
     private val inputView = InputView
     private val resultView = ResultView
-    private val lottoManager = LottoManager(lotto)
 
     fun lottoRun() {
         val (inputMoney, lottoBundle) = getLottoBundleByMoney()
@@ -35,6 +33,9 @@ class LottoApplication(
         val inputMoney = inputView.printInputLottoBuyMoney().toInt()
         resultView.printLottoCount(inputMoney)
 
+        val lotto = Lotto(LottoNumber().getLottoNumbers())
+        val lottoManager = LottoManager(lotto)
+
         val lottoBundle = lottoManager.buyLotto(inputMoney)
         resultView.printLottoBundle(lottoBundle)
         resultView.printEnter()
@@ -43,5 +44,5 @@ class LottoApplication(
 }
 
 fun main() {
-    LottoApplication(Calculator(), Lotto(), LottoChecker()).lottoRun()
+    LottoApplication(Calculator(), LottoChecker()).lottoRun()
 }
