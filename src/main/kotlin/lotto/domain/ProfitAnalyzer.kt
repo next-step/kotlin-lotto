@@ -8,12 +8,9 @@ object ProfitAnalyzer {
     }
 
     fun getStaticsOnPrizeMoney(lotteryTicket: LotteryTicket, winnerLottery: Lottery): PrizeStatics {
-        val countPerWinnerPrize = lotteryTicket.groupingBy { getWinnerPrize(it, winnerLottery) }.eachCount()
+        val countPerWinnerPrize =
+            lotteryTicket.getMatchingCountMap(winnerLottery)
+                .mapKeys { WinnerPrize.getWinnerPrize(it.key) }
         return PrizeStatics(countPerWinnerPrize)
-    }
-
-    private fun getWinnerPrize(lottery1: Lottery, lottery2: Lottery): WinnerPrize {
-        val commonNumbers = lottery1 intersectNumbers lottery2
-        return WinnerPrize.getWinnerPrize(commonNumbers.size)
     }
 }

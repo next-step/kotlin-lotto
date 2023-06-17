@@ -8,24 +8,14 @@ object LotteryMachine {
 
     fun issueLotteryTicket(money: Money): LotteryTicket {
         val lotteryQuantity = getQuantity(money)
-        val lotteries = mutableListOf<Lottery>()
-        repeat(lotteryQuantity.toInt()) {
-            lotteries.add(generateNumbers())
-        }
+        val lotteries = List(lotteryQuantity) { generateNumbers() }
         return LotteryTicket(lotteries)
     }
 
-    private fun getQuantity(money: Money) = (money / LOTTERY_PRICE).scaleDown()
+    private fun getQuantity(money: Money): Int = (money / LOTTERY_PRICE).scaleDown().toInt()
 
     private fun generateNumbers(): Lottery {
-        val lotteryNumbers = mutableSetOf<Int>()
-        while (lotteryNumbers.size < Lottery.LOTTERY_NUMBER_SIZE) {
-            Lottery.LOTTERY_NUMBER_RANGE.shuffled().take(6).toSet()
-            val randomNum = Lottery.LOTTERY_NUMBER_RANGE.random()
-            if (randomNum !in lotteryNumbers) {
-                lotteryNumbers.add(randomNum)
-            }
-        }
+        val lotteryNumbers = Lottery.LOTTERY_NUMBER_RANGE.shuffled().take(6).toSet()
         return Lottery(lotteryNumbers)
     }
 }

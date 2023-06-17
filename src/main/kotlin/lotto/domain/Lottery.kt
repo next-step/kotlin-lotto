@@ -14,7 +14,7 @@ class Lottery(private val numbers: Set<Int>) {
         require(numbers.all { it in LOTTERY_NUMBER_RANGE }) { "로또의 숫자는 1~45 사이의 정수가 가능합니다." }
     }
 
-    infix fun intersectNumbers(other: Lottery): Set<Int> {
+    infix fun intersect(other: Lottery): Set<Int> {
         return this.numbers.intersect(other.numbers)
     }
 
