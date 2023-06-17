@@ -8,7 +8,7 @@ class LottoCalculatorTest {
 
     @ParameterizedTest
     @CsvSource("14000, 5000")
-    fun `산정 된 당첨 정보를 통해 구입한 금액과의 수일률을 구할 수 있다`(money: Int, winningMoney: Int) {
+    fun `산정 된 당첨 정보를 통해 구입한 금액과의 수익률을 구할 수 있다`(money: Int, winningMoney: Int) {
         val actual = Calculator().calculateRateOfReturn(money, winningMoney)
         actual shouldBe 0.35
     }
