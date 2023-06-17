@@ -13,14 +13,16 @@ fun main() {
     val lottoStore = LottoStore()
 
     val purchaseAmount = lottoInputView.readPurchaseAmount()
-    val lotteryTickets = lottoStore.purchase(purchaseAmount)
+    val manualLotteryTicketCount = lottoInputView.readManualLotteryTicketCount()
+    val manualLottoNumbers = lottoInputView.readManualLottoNumbers(manualLotteryTicketCount)
+    val lotteryTickets = lottoStore.purchase(purchaseAmount, manualLottoNumbers)
 
     val (autos, manuals) = lotteryTickets.partition { it.isAuto }
     val autoLotteryTickets = LotteryTickets(autos)
     val manualLotteryTickets = LotteryTickets(manuals)
     lottoResultView.printLotteryTickets(manualLotteryTickets = manualLotteryTickets, autoLotteryTickets = autoLotteryTickets)
 
-    val lastWinLottoNumber = lottoInputView.readLottoNumbers()
+    val lastWinLottoNumber = lottoInputView.readLastWeekWinningLottoNumbers()
     val bonusLottoNumber = LottoNumber(lottoInputView.readBonusBallNumber())
     val winningLottoNumber = WinningLottoNumber(winningNumbers = lastWinLottoNumber, bonusLottoNumber = bonusLottoNumber)
 

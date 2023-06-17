@@ -6,18 +6,30 @@ class LottoStore {
 
     fun purchase(
         purchaseAmount: Int,
+        manualLottoNumbers: List<LottoNumbers>
     ): LotteryTickets {
-        validate(purchaseAmount)
-        val autoLotteryTickets = LotteryTickets(
-            (1..purchaseAmount / PURCHASE_AMOUNT_UNIT)
-                .map { LotteryTicketAutoGenerator.generateAuto() },
-        )
-        return LotteryTickets(autoLotteryTickets)
+        validate(purchaseAmount, manualLottoNumbers.size)
+        val totalAutoPurchaseAmount = purchaseAmount - (manualLottoNumbers.size * PURCHASE_AMOUNT_UNIT)
+        val autoLotteryTickets = makeAutoLotteryTickets(ticketCount = totalAutoPurchaseAmount / PURCHASE_AMOUNT_UNIT)
+        val manualLotteryTickets = makeManualLotteryTickets(manualLottoNumbers)
+        return LotteryTickets(lotteryTickets = autoLotteryTickets + manualLotteryTickets)
     }
 
-    private fun validate(purchaseAmount: Int) {
+    private fun makeAutoLotteryTickets(ticketCount: Int): LotteryTickets = LotteryTickets(
+        (1..ticketCount).map { LotteryTicketAutoGenerator.generateAuto() },
+    )
+
+    private fun makeManualLotteryTickets(manualLottoNumbers: List<LottoNumbers>): LotteryTickets {
+        val lotteryTickets = manualLottoNumbers.map { LotteryTicket(lottoNumbers = it, isAuto = false) }
+        return LotteryTickets(lotteryTickets = lotteryTickets)
+    }
+
+    private fun validate(purchaseAmount: Int, manualLotteryTicketCount: Int) {
         require(purchaseAmount % PURCHASE_AMOUNT_UNIT == 0) { "로또 구매 금액 단위는 1000원입니다." }
         require(purchaseAmount >= MIN_PURCHASE_AMOUNT) { "로또 최소 구매 금액은 1000원입니다. " }
+        require(purchaseAmount >= manualLotteryTicketCount * PURCHASE_AMOUNT_UNIT) {
+            "수동 구매 금액이 구입금액보다 클 수 없습니다."
+        }
     }
 
     companion object {

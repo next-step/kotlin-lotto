@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoStore
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -25,7 +26,7 @@ class LottoStoreTest {
     )
     fun `로또 판매점은 로또 구입 금액이 1000원 미만 또는 1000원 단위가 아닐 경우 IllegalArgumentException 을 발생`(purchaseAmount: Int) {
         shouldThrow<IllegalArgumentException> {
-            lottoStore.purchase(purchaseAmount)
+            lottoStore.purchase(purchaseAmount, emptyList())
         }
     }
 
@@ -37,8 +38,21 @@ class LottoStoreTest {
         "25000, 25",
     )
     fun `로또 판매점은 (구매 금액 나누기 1000) 만큼 로또를 발급`(purchaseAmount: Int, expected: Int) {
-        val lotteryTickets = lottoStore.purchase(purchaseAmount)
+        val lotteryTickets = lottoStore.purchase(purchaseAmount, emptyList())
 
         lotteryTickets.size shouldBe expected
+    }
+
+    @Test
+    fun `로또 판매점은 구매 금액보다 수동 구매할 로또 구매 금액이 크다면 IllegalArgumentException 을 발생`() {
+        val purchaseAmount = 1000
+        val manualLottoNumbers = listOf(
+            LottoTestHelper.makeLottoNumbers((1..6).toList()),
+            LottoTestHelper.makeLottoNumbers((1..6).toList()),
+        )
+
+        shouldThrow<IllegalArgumentException> {
+            lottoStore.purchase(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        }
     }
 }

@@ -1,3 +1,3 @@
 package lotto.domain
 
-class LotteryTickets(private val lotteryTicket: List<LotteryTicket>) : List<LotteryTicket> by lotteryTicket
+class LotteryTickets(private val lotteryTickets: List<LotteryTicket>) : List<LotteryTicket> by lotteryTickets
