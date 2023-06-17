@@ -1,4 +1,4 @@
-class StringCalculator {
+object StringCalculator {
     @Throws(RuntimeException::class)
     fun add(input: String?): Int {
         if (input.isNullOrBlank()) return 0

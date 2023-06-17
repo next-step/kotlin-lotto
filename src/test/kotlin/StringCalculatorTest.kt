@@ -7,12 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class StringCalculatorTest {
-    private lateinit var calculator: StringCalculator
-
-    @BeforeEach
-    fun setUp() {
-        calculator = StringCalculator()
-    }
+    private val calculator = StringCalculator
 
     @Test
     fun `빈 문자열 또는 null 을 입력하면 0을 반환한다`() {

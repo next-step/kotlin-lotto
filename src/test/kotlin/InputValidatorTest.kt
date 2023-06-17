@@ -1,4 +1,5 @@
-import org.assertj.core.api.Assertions
+import io.kotest.assertions.throwables.shouldNotThrow
+import io.kotest.assertions.throwables.shouldThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -7,10 +8,8 @@ class InputValidatorTest {
     @ValueSource(strings = ["1", "2", "3"])
     @ParameterizedTest
     fun `숫자 하나만 입력해도 검증에 성공한다`(input: String) {
-        try {
+        shouldNotThrow<RuntimeException> {
             InputValidator.validate(listOf(input))
-        } catch (e: RuntimeException) {
-            Assertions.fail(e.message)
         }
     }
 
@@ -19,10 +18,8 @@ class InputValidatorTest {
     fun `기본 구분자가 있는 입력 값을 검증할 수 있다`(input: String) {
         val tokens = InputParser.parse(input)
 
-        try {
+        shouldNotThrow<RuntimeException> {
             InputValidator.validate(tokens)
-        } catch (e: RuntimeException) {
-            Assertions.fail(e.message)
         }
     }
 
@@ -31,10 +28,8 @@ class InputValidatorTest {
     fun `커스텀 구분자가 있는 입력 값을 검증할 수 있다`(input: String) {
         val tokens = InputParser.parseByCustomDelimiter(input)
 
-        try {
+        shouldNotThrow<RuntimeException> {
             InputValidator.validate(tokens)
-        } catch (e: RuntimeException) {
-            Assertions.fail(e.message)
         }
     }
 
@@ -43,7 +38,7 @@ class InputValidatorTest {
     fun `문자열이 포함되면 RuntimeException이 발생한다`(input: String) {
         val tokens = InputParser.parse(input)
 
-        Assertions.assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
+        shouldThrow<RuntimeException> {
             InputValidator.validate(tokens)
         }
     }
@@ -53,7 +48,7 @@ class InputValidatorTest {
     fun `음수가 포함되면 RuntimeException이 발생한다`(input: String) {
         val tokens = InputParser.parse(input)
 
-        Assertions.assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
+        shouldThrow<RuntimeException> {
             InputValidator.validate(tokens)
         }
     }
