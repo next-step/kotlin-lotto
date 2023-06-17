@@ -10,6 +10,7 @@ class InputView(private val inputReader: InputReader) {
 
         val lottoSize = money / 1000
         println("${lottoSize}개를 구매했습니다.")
+
         return lottoSize
     }
 
@@ -23,7 +24,13 @@ class InputView(private val inputReader: InputReader) {
     fun registerWinningNums(): List<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val winningNums = inputReader.raedLine()
-        println(winningNums)
         return Separator.extractIntegers(winningNums)
+    }
+
+    fun registerBonusBall(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val bonusBall = inputReader.raedLine().toIntOrNull()
+        require(bonusBall != null && bonusBall in 1..45) { "보너스 볼이 올바르지 않습니다 : $bonusBall" }
+        return bonusBall.toInt()
     }
 }
