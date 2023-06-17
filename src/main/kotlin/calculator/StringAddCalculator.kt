@@ -1,8 +1,10 @@
 package calculator
 
-class StringAddCalculator {
+class StringAddCalculator(
+    private val input: String?
+) {
 
-    fun calculate(input: String?): Int {
+    fun calculate(): Int {
 
         if (input.isNullOrEmpty()) {
             return ZERO
@@ -12,33 +14,17 @@ class StringAddCalculator {
             throw RuntimeException("음수를 입력할 수 없습니다")
         }
 
-        val stringList = split(input)
-
-        return stringAdd(stringList)
-    }
-
-    fun split(input: String): List<String> {
-
-        var customDelimiter = getCustomDelimiter(input)
-        var customString: String? = null
-
-        customDelimiter?.let {
-            customDelimiter = DELIMITER.plus("|$it")
-            customString = input.split("\n")[1]
-        }
-
-        val splitList = customDelimiter?.let { customString?.split(it.toRegex()) }
-            ?:input.split(DELIMITER.toRegex())
+        val customDelimiter = DelimiterManager().getCustomDelimiter(input)
+        val fixedDelimiter = customDelimiter?.let { DelimiterManager().combineDelimiter(it) }
+        val customInput = getCustomInput(input)
+        val splitList = DelimiterManager().splitByDelimiter(fixedDelimiter, customInput, input)
 
         checkNegativeNumber(splitList)
-        return splitList
+        return BasicCalculator().add(splitList)
     }
 
-    fun getCustomDelimiter(input: String): String? {
-        val result = Regex("//(.)\n(.*)").find(input)
-        return result?.let {
-            return it.groupValues[1]
-        }
+    private fun getCustomInput(input: String): String {
+        return input.split("\n")[CUSTOM_INPUT_INDEX]
     }
 
     private fun checkNegativeNumber(splitList: List<String>) {
@@ -49,18 +35,14 @@ class StringAddCalculator {
         }
     }
 
-    fun stringAdd(input: List<String>): Int {
-        return input.sumOf { it.toInt() }
-    }
-
     private fun containsDelimiter(input: String): Boolean {
         return input.contains(DELIMITER_COMMA) || input.contains(DELIMITER_COLON)
     }
 
     companion object {
+        private const val CUSTOM_INPUT_INDEX: Int = 1
         private const val ZERO: Int = 0
         private const val DELIMITER_COMMA: Char = ','
         private const val DELIMITER_COLON: Char = ':'
-        private const val DELIMITER: String = ",|:"
     }
 }
