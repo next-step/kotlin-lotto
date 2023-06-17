@@ -1,4 +1,6 @@
-package lotto
+package lotto.utils
+
+import lotto.domain.Lotto
 
 class LottoGenerator {
     fun getLottoNumbers(): List<Int> {

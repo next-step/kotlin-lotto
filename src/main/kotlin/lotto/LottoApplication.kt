@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.dto.LottoBundle
+import lotto.utils.RateCalculator
 import lotto.view.InputView
 import lotto.view.ResultView
 

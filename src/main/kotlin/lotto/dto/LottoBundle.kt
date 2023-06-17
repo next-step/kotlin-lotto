@@ -1,6 +1,6 @@
 package lotto.dto
 
-import lotto.Lotto
+import lotto.domain.Lotto
 
 data class LottoBundle(
     val inputMoney: Int,

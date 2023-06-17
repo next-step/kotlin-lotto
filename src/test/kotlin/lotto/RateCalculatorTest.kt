@@ -1,6 +1,7 @@
 package lotto
 
 import io.kotest.matchers.shouldBe
+import lotto.utils.RateCalculator
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 

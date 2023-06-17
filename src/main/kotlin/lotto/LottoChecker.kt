@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.enums.LottoRank
 
 class LottoChecker {

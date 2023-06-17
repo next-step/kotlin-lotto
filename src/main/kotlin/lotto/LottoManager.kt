@@ -1,5 +1,8 @@
 package lotto
 
+import lotto.domain.Lotto
+import lotto.utils.LottoGenerator
+
 class LottoManager {
 
     fun buyLotto(money: Int): List<Lotto> {
