@@ -1,6 +1,5 @@
 package lotto.domain
 
-
 class Lottos(
     val list: List<Lotto>
 ) {
@@ -15,6 +14,5 @@ class Lottos(
 class Lotto(
     val numbers: List<Int>
 )
-
 
 fun List<Lotto>.toLottos() = Lottos(this)

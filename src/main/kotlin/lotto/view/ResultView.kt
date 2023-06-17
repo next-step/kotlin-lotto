@@ -19,7 +19,7 @@ object ResultView {
         println("---------")
         LottoEnum.values().forEach {
             val lottoResult = result.firstOrNull { result -> result.lottoEnum == it }
-            println("${it.num}개 일치 (${it.price})- ${lottoResult?.matchNum?:0}개")
+            println("${it.num}개 일치 (${it.price})- ${lottoResult?.matchNum ?: 0}개")
         }
         println("총 수익률은 ${lottoProfitRatio}입니다.")
     }

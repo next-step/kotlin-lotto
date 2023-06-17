@@ -7,7 +7,6 @@ import lotto.domain.Profit
 import lotto.view.InputView
 import lotto.view.ResultView
 
-
 fun main() {
     val money = InputView.getAmount()
 
@@ -15,10 +14,9 @@ fun main() {
     ResultView.printLottos(lottos)
     val lottoResult = Lotto(InputView.getWinningNumbers())
 
-    val result = LottoResult.calculateResult(lottos,lottoResult)
+    val result = LottoResult.calculateResult(lottos, lottoResult)
     val lottoProfit = Profit.calculateLottoProfit(result)
-    val lottoProfitRatio = Profit.calculateLottoProfitRatio(lottoProfit,money)
+    val lottoProfitRatio = Profit.calculateLottoProfitRatio(lottoProfit, money)
 
-    ResultView.printStatistics(result,lottoProfitRatio)
-
+    ResultView.printStatistics(result, lottoProfitRatio)
 }

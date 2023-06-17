@@ -1,6 +1,5 @@
 package lotto.domain
 
-
 object LottoNumberGenerator {
     fun generate(): List<Int> {
         return generateSequence {

@@ -10,5 +10,4 @@ object InputView {
     fun getWinningNumbers(): List<Int> {
         return readLine()?.split(",")?.map { it.toInt() } ?: throw IllegalArgumentException()
     }
-
 }

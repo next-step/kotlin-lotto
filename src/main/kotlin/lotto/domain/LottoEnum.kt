@@ -6,7 +6,6 @@ enum class LottoEnum(val num: Int, val price: Int) {
     FIVE(5, 1500000),
     SIX(6, 2000000000);
 
-
     companion object {
         fun of(num: Int): LottoEnum? {
             return when (num) {
