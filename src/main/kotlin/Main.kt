@@ -2,11 +2,13 @@ import view.InputView
 
 fun main() {
     val inputView = InputView { readln() }
-    val winningNums = setWinningInfo(inputView)
-    LotteryRunner.startLotto(inputView.enterMoney(), winningNums)
+    val (winningNums, bonusBall) = setWinningInfo(inputView)
+    LotteryRunner.startLotto(inputView.enterMoney(), winningNums, bonusBall)
 }
-private fun setWinningInfo(inputView: InputView): Set<Int> {
-    return inputView.registerWinningNums()
+private fun setWinningInfo(inputView: InputView): Pair<Set<Int>, Int> {
+    val winningNums = inputView.registerWinningNums()
+    val bonusBall = inputView.registerBonusBall()
+    return Pair(winningNums, bonusBall)
 }
 
 fun getLotteriesSize(inputView: InputView): Int {
