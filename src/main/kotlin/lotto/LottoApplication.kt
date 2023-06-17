@@ -12,7 +12,7 @@ class LottoApplication(
     private val inputView = InputView
     private val resultView = ResultView
 
-    fun lottoRun() {
+    fun startLottery() {
         val lottoBundle = getLottoBundleByMoney()
 
         val lastWeekNumber = inputView.printInputLottoNumberByLastWeek()
@@ -44,5 +44,5 @@ class LottoApplication(
 }
 
 fun main() {
-    LottoApplication(RateCalculator(), LottoChecker()).lottoRun()
+    LottoApplication(RateCalculator(), LottoChecker()).startLottery()
 }
