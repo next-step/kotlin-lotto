@@ -14,7 +14,7 @@ class LottosTest : DescribeSpec({
                 BuyLottos(14000, 14),
                 BuyLottos(2500, 2)
             ) { (payment, expected) ->
-                Lottos.buy(payment).size shouldBe expected
+                Lottos.buy(payment).size() shouldBe expected
             }
         }
     }
