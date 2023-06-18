@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.domain.RealLottoShop
+import lotto.domain.shop.RealLottoShop
 
 fun startLotto() {
     LottoController(

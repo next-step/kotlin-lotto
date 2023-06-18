@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.domain.shop
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe

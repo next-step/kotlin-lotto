@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.domain.LottoShop
+import lotto.domain.shop.LottoShop
 
 class LottoController(
     private val lottoShop: LottoShop,
