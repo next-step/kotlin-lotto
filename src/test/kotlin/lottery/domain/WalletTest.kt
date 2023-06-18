@@ -1,5 +1,6 @@
 package lottery.domain
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
@@ -26,6 +27,10 @@ class WalletTest : FunSpec({
             val exception =
                 shouldThrowExactly<IllegalArgumentException> { Wallet(money = Money(BigDecimal(1_200))) }
             exception.message shouldBe "로또 금액으로 나누어떨어지지 않는 금액이다"
+        }
+
+        test("wallet을 정상적으로 생성한다") {
+            shouldNotThrow<IllegalArgumentException> { Wallet(money = Money(BigDecimal(2_000))) }
         }
     }
 
