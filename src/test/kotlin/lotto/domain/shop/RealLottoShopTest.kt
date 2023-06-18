@@ -37,13 +37,5 @@ class RealLottoShopTest : BehaviorSpec({
                 .numbers
             lottoNumbers shouldBe lottoNumbers.sorted()
         }
-
-        Then("각 로또 번호의 범위는 0 이상 45 이하이다") {
-            val lottoNumbers = RealLottoShop().purchase(PositiveNumber(1_000))
-                .lottoGames
-                .first()
-                .numbers
-            lottoNumbers.all { it in (1..45) } shouldBe true
-        }
     }
 })

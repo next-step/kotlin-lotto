@@ -8,7 +8,7 @@ class RealLottoShop : LottoShop {
         return LottoPurchaseResult(
             lottoGames = List(lottoPurchaseAmount.value / 1000) {
                 LottoGame(
-                    numbers = (1..45).shuffled().take(6).sorted()
+                    numbers = LottoNumber.allLottoNumbers().shuffled().take(6).sorted()
                 )
             }
         )
