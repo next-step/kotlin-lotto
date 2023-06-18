@@ -4,6 +4,7 @@ import lotto.domain.LotteryTickets
 import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
 import lotto.domain.WinningLottoNumber
+import lotto.domain.util.WinningStatisticsGenerator
 import lotto.view.LottoInputView
 import lotto.view.LottoResultView
 
@@ -34,8 +35,14 @@ class LottoController(
     }
 
     fun printLottoResult(lotteryTickets: LotteryTickets, winningLottoNumber: WinningLottoNumber) {
-        val rankingCountMap = winningLottoNumber.makeRankingCountMap(lotteryTickets)
-        val totalRevenueRate = winningLottoNumber.getRevenueRate(lotteryTickets)
+        val rankingCountMap = WinningStatisticsGenerator.getRankingCountStatistics(
+            lotteryTickets = lotteryTickets,
+            winningLottoNumber = winningLottoNumber
+        )
+        val totalRevenueRate = WinningStatisticsGenerator.getRevenueRateStatistics(
+            lotteryTickets = lotteryTickets,
+            winningLottoNumber = winningLottoNumber
+        )
         lottoResultView.printLottoStatistics(rankingCountMap = rankingCountMap, totalRevenueRate = totalRevenueRate)
     }
 }
