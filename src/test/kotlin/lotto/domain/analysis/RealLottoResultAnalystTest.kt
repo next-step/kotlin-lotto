@@ -1,6 +1,6 @@
 package lotto.domain.analysis
 
-import common.PositiveNumber
+import math.PositiveNumber
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row

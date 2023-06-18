@@ -1,6 +1,6 @@
 package lotto.domain.analysis
 
-import common.PositiveNumber
+import math.PositiveNumber
 
 data class LottoWinRankAnalysisResult(
     val lottoWinRank: LottoWinRank,

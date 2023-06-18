@@ -1,6 +1,6 @@
 package calculator
 
-import common.PositiveNumber
+import math.PositiveNumber
 
 object StringParser {
 

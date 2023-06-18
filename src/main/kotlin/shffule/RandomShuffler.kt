@@ -1,4 +1,4 @@
-package common.shffule
+package shffule
 
 class RandomShuffler<T> : Shuffler<T> {
 

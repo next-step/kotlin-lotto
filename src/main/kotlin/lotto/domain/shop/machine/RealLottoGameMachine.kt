@@ -1,6 +1,6 @@
 package lotto.domain.shop.machine
 
-import common.shffule.Shuffler
+import shffule.Shuffler
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.shop.LottoGame

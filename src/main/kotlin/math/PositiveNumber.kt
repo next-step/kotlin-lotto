@@ -1,6 +1,4 @@
-package common
-
-import lotto.domain.money.Money
+package math
 
 @JvmInline
 value class PositiveNumber(val value: Int) {

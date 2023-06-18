@@ -1,7 +1,7 @@
 package lotto.domain.analysis
 
-import common.PositiveNumber
-import common.orZero
+import math.PositiveNumber
+import math.orZero
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.money.sum
 import lotto.domain.money.toMoney

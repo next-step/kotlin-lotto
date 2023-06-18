@@ -1,6 +1,6 @@
 package calculator
 
-import common.sum
+import math.sum
 
 class StringAddCalculator {
 

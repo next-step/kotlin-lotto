@@ -1,6 +1,6 @@
 package lotto.domain.analysis
 
-import common.PositiveNumber
+import math.PositiveNumber
 import lotto.domain.money.Money
 
 enum class LottoWinRank(

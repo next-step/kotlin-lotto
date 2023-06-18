@@ -1,4 +1,4 @@
-package common.shffule
+package shffule
 
 import lotto.domain.lottonumber.LottoNumber
 

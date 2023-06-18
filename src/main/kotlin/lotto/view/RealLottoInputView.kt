@@ -1,6 +1,6 @@
 package lotto.view
 
-import common.PositiveNumber
+import math.PositiveNumber
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
 

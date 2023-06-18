@@ -1,6 +1,6 @@
 package lotto.domain.shop.machine
 
-import common.shffule.MockLottoNumberDescendingSortShuffler
+import shffule.MockLottoNumberDescendingSortShuffler
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 

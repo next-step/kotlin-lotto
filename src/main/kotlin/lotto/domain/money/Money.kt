@@ -1,6 +1,6 @@
 package lotto.domain.money
 
-import common.PositiveNumber
+import math.PositiveNumber
 
 @JvmInline
 value class Money(val value: Long) { // 돈은 Long의 범위를 벗어날 만큼 큰 값이 입력 될 수 있지만 Long 까지만 고려

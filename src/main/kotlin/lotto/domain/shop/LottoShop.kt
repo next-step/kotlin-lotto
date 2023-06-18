@@ -1,6 +1,6 @@
 package lotto.domain.shop
 
-import common.PositiveNumber
+import math.PositiveNumber
 
 interface LottoShop {
 
