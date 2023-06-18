@@ -1,14 +1,13 @@
 package lotto.view
 
 import lotto.domain.LotteryTicket
-import lotto.domain.LotteryTickets
 import lotto.domain.LottoRanking
 import java.math.BigDecimal
-import lotto.domain.PurchasedLotteryTickets
+import lotto.domain.PurchaseLotteryTicketResult
 
 class LottoResultView {
 
-    fun printLotteryTickets(purchasedLotteryTickets: PurchasedLotteryTickets) {
+    fun printLotteryTickets(purchasedLotteryTickets: PurchaseLotteryTicketResult.SUCCESS) {
         println("수동으로 ${purchasedLotteryTickets.manualLotteryTicketQuantity}장, 자동으로 ${purchasedLotteryTickets.autoLotteryTicketQuantity}개를  구매했습니다.")
         purchasedLotteryTickets.lotteryTickets.forEach { printLotteryTicket(it) }
         println()

@@ -4,7 +4,7 @@ import lotto.domain.LotteryTickets
 import lotto.domain.LotteryTicketsOrderRequest
 import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
-import lotto.domain.PurchasedLotteryTickets
+import lotto.domain.PurchaseLotteryTicketResult
 import lotto.domain.WinningLottoNumber
 import lotto.domain.util.WinningStatisticsGenerator
 import lotto.view.LottoInputView
@@ -16,7 +16,7 @@ class LottoController(
     private val lottoStore: LottoStore,
 ) {
 
-    fun purchaseLotteryTickets(): PurchasedLotteryTickets {
+    fun purchaseLotteryTickets(): PurchaseLotteryTicketResult {
         val purchaseAmount = lottoInputView.readPurchaseAmount()
         val manualLotteryTicketCount = lottoInputView.readManualLotteryTicketCount()
         val manualLottoNumbers = lottoInputView.readManualLottoNumbers(manualLotteryTicketCount)
@@ -24,7 +24,7 @@ class LottoController(
         return lottoStore.purchase(request)
     }
 
-    fun printLotteryTickets(purchasedLotteryTickets: PurchasedLotteryTickets) {
+    fun printLotteryTickets(purchasedLotteryTickets: PurchaseLotteryTicketResult.SUCCESS) {
         lottoResultView.printLotteryTickets(purchasedLotteryTickets)
     }
 

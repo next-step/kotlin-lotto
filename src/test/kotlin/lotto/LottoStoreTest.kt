@@ -1,12 +1,14 @@
 package lotto
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import lotto.domain.LotteryTicketsOrderRequest
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
+import lotto.domain.PurchaseLotteryTicketResult
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
@@ -30,8 +32,12 @@ class LottoStoreTest {
     )
     fun `로또 판매점은 로또 구입 금액이 1000원 미만 또는 1000원 단위가 아닐 경우 IllegalArgumentException 을 발생`(purchaseAmount: Int) {
         val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount)
-        shouldThrow<IllegalArgumentException> {
-            lottoStore.purchase(request)
+
+        when (val purchaseLotteryTicketResult = lottoStore.purchase(request)) {
+            is PurchaseLotteryTicketResult.FAIL -> {
+                assertThat(purchaseLotteryTicketResult.exception is IllegalArgumentException).isTrue
+            }
+            else -> fail { "check test..." }
         }
     }
 
@@ -45,9 +51,12 @@ class LottoStoreTest {
     fun `로또 판매점은 (구매 금액 나누기 1000) 만큼 로또를 발급`(purchaseAmount: Int, expected: Int) {
         val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount)
 
-        val purchasedLotteryTickets = lottoStore.purchase(request)
-
-        purchasedLotteryTickets.totalPurchasedLotteryTicketsQuantity shouldBe expected
+        when (val purchaseLotteryTicketResult = lottoStore.purchase(request)) {
+            is PurchaseLotteryTicketResult.SUCCESS -> {
+                purchaseLotteryTicketResult.lotteryTickets.size shouldBe expected
+            }
+            else -> fail { "check test..." }
+        }
     }
 
     @Test
@@ -59,8 +68,11 @@ class LottoStoreTest {
         )
         val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
 
-        shouldThrow<IllegalArgumentException> {
-            lottoStore.purchase(request)
+        when (val purchaseLotteryTicketResult = lottoStore.purchase(request)) {
+            is PurchaseLotteryTicketResult.FAIL -> {
+                assertThat(purchaseLotteryTicketResult.exception is IllegalArgumentException).isTrue
+            }
+            else -> fail { "check test..." }
         }
     }
 
@@ -72,10 +84,13 @@ class LottoStoreTest {
         expectedAutoLotteryTicketCount: Int
     ) {
         val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
-        val purchasedLotteryTickets = lottoStore.purchase(request)
-        val autoLotteryTickets = purchasedLotteryTickets.autoLotteryTicketQuantity
 
-        autoLotteryTickets shouldBe expectedAutoLotteryTicketCount
+        when (val purchaseLotteryTicketResult = lottoStore.purchase(request)) {
+            is PurchaseLotteryTicketResult.SUCCESS -> {
+                purchaseLotteryTicketResult.autoLotteryTicketQuantity shouldBe expectedAutoLotteryTicketCount
+            }
+            else -> fail { "check test..." }
+        }
     }
 
     companion object {

@@ -4,13 +4,21 @@ import lotto.domain.util.LotteryTicketAutoGenerator
 
 class LottoStore {
 
-    fun purchase(request: LotteryTicketsOrderRequest): PurchasedLotteryTickets {
-        validate(request)
-        val totalAutoPurchaseAmount = request.purchaseAmount - (request.getManualLotteryTicketQuantity() * PURCHASE_AMOUNT_UNIT)
-        val autoLotteryTickets = makeAutoLotteryTickets(ticketCount = totalAutoPurchaseAmount / PURCHASE_AMOUNT_UNIT)
-        val manualLotteryTickets = makeManualLotteryTickets(request.manualLottoNumbers)
-        val purchasedLotteryTickets = LotteryTickets(lotteryTickets = autoLotteryTickets + manualLotteryTickets)
-        return PurchasedLotteryTickets(lotteryTickets = purchasedLotteryTickets)
+    fun purchase(request: LotteryTicketsOrderRequest): PurchaseLotteryTicketResult {
+        return try {
+            validate(request)
+            val totalAutoPurchaseAmount = request.purchaseAmount - (request.getManualLotteryTicketQuantity() * PURCHASE_AMOUNT_UNIT)
+            val autoLotteryTickets = makeAutoLotteryTickets(ticketCount = totalAutoPurchaseAmount / PURCHASE_AMOUNT_UNIT)
+            val manualLotteryTickets = makeManualLotteryTickets(request.manualLottoNumbers)
+            val purchasedLotteryTickets = LotteryTickets(lotteryTickets = autoLotteryTickets + manualLotteryTickets)
+            PurchaseLotteryTicketResult.SUCCESS(
+                lotteryTickets = purchasedLotteryTickets,
+                manualLotteryTicketQuantity = manualLotteryTickets.size,
+                autoLotteryTicketQuantity = autoLotteryTickets.size,
+            )
+        } catch (exception: Exception) {
+            PurchaseLotteryTicketResult.FAIL(exception = exception)
+        }
     }
 
     private fun makeAutoLotteryTickets(ticketCount: Int): LotteryTickets = LotteryTickets(
