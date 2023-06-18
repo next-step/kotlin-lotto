@@ -5,6 +5,7 @@ import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoNumber
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -21,8 +22,8 @@ class LottoStoreTest {
 
     @Test
     fun `로또의 당첨 여부를 계산합니다`() {
-        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9))
-        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6))
+        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) })
+        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) })
 
         val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
 
@@ -32,9 +33,9 @@ class LottoStoreTest {
 
     @Test
     fun `보너스 번호를 포함하여 로또의 당첨 여부를 계산합니다`() {
-        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9))
-        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6))
-        winningNumber.bonusNumber = 7
+        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) })
+        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) })
+        winningNumber.bonusNumber = SixFortyFiveNumber(7)
 
         val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
 

@@ -2,11 +2,12 @@ package lotto
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinning
 
 object SixFortyFiveLottoUtils {
-    fun parseNumbersFromStr(str: String, delimiter: Char): List<Int> {
-        return str.split(delimiter).map { it.toInt() }
+    fun parseNumbersFromStr(str: String, delimiter: Char): List<SixFortyFiveNumber> {
+        return str.split(delimiter).map { SixFortyFiveNumber(it.toInt()) }
     }
 
     fun getWinningResultMap(): MutableMap<SixFortyFiveWinning, Int> {

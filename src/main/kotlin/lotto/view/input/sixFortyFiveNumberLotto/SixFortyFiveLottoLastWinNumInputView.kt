@@ -1,6 +1,7 @@
 package lotto.view.input.sixFortyFiveNumberLotto
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
 import lotto.view.input.InputView
 
 class SixFortyFiveLottoLastWinNumInputView : InputView<SixFortyFiveLottoWinningNumber>() {
@@ -8,7 +9,7 @@ class SixFortyFiveLottoLastWinNumInputView : InputView<SixFortyFiveLottoWinningN
     override val value: SixFortyFiveLottoWinningNumber
 
     override fun readValue(): SixFortyFiveLottoWinningNumber {
-        val numbers = readln().split(DELIMITER).map { it.toInt() }
+        val numbers = readln().split(DELIMITER).map { SixFortyFiveNumber(it.toInt()) }
         return SixFortyFiveLottoWinningNumber(numbers)
     }
 

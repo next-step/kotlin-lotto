@@ -1,20 +1,19 @@
 package lotto.view.input.sixFortyFiveNumberLotto
 
-import lotto.ErrorCode
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
 import lotto.view.input.InputView
 
-class SixFortyFiveLottoBonusInputView : InputView<Int>() {
+class SixFortyFiveLottoBonusInputView : InputView<SixFortyFiveNumber>() {
     override val message: String = "보너스 볼을 입력해 주세요."
-    override val value: Int
+    override val value: SixFortyFiveNumber
 
     init {
         renderMessage()
         value = readValue()
-        if (!SixFortyFiveLottoNumber.validSingleNumber(value)) throw RuntimeException(ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER.msg)
     }
 
-    override fun readValue(): Int {
-        return readln().toInt()
+    override fun readValue(): SixFortyFiveNumber {
+        val readValue = readln().toInt()
+        return SixFortyFiveNumber(readValue)
     }
 }

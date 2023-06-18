@@ -2,17 +2,17 @@ package lotto.sixFortyFiveNumberLotto
 
 import lotto.ErrorCode
 
-class SixFortyFiveLottoWinningNumber(_value: List<Int>) : SixFortyFiveLottoNumber(_value) {
-    override val value: List<Int>
+class SixFortyFiveLottoWinningNumber(_value: List<SixFortyFiveNumber>) : SixFortyFiveLottoNumber(_value) {
+    override val value: List<SixFortyFiveNumber>
         get() {
             if (bonusNumber == null) return super.value
             return listOf(*super.value.toTypedArray(), bonusNumber!!)
         }
-    var bonusNumber: Int? = null
+    var bonusNumber: SixFortyFiveNumber? = null
         set(value) {
             if (value == null) return
-            val isDuplicated = super.value.contains(value)
-            if (!validSingleNumber(value) || isDuplicated) throw RuntimeException(ErrorCode.INVALID_SIX_FORTY_FIVE_BONUS_LOTTO_NUMBER.msg)
+            val isDuplicated = super.value.find { number -> number.value == value.value } != null
+            if (isDuplicated) throw RuntimeException(ErrorCode.INVALID_SIX_FORTY_FIVE_BONUS_LOTTO_NUMBER.msg)
             field = value
         }
 }

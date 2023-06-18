@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
 import lotto.view.input.LottoPurchasePriceInputView
 import lotto.view.input.sixFortyFiveNumberLotto.SixFortyFiveLottoBonusInputView
