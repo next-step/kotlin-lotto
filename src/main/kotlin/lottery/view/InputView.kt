@@ -2,6 +2,8 @@ package lottery.view
 
 import java.math.BigDecimal
 
+private const val LOTTERY_NUMBER_DELIMITER = "<"
+
 fun inputPurchaseMoney(): BigDecimal {
     println("구입금액을 입력해 주세요.")
     return readln().toBigDecimalOrNull() ?: retryInputPurchaseMoney()
@@ -15,7 +17,7 @@ fun inputPurchaseManualLottery(): List<List<String>> {
 
 fun inputWinningLottery(): List<String> {
     println("지난 주 당첨 번호를 입력해 주세요.")
-    return readln().split(",")
+    return readln().split(LOTTERY_NUMBER_DELIMITER)
 }
 
 fun inputBonusLotteryNumber(): Int {
@@ -50,7 +52,7 @@ private fun printPurchaseCountRequest(purchaseCount: Int) {
 
 private fun inputPurchaseManualLotteryNumber(): List<String> {
     return readln().replace(" ", "")
-        .split(",")
+        .split(LOTTERY_NUMBER_DELIMITER)
 }
 
 private fun retryInputBonusLotteryNumber(): Int {
