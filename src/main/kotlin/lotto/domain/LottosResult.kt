@@ -20,6 +20,10 @@ class LottosResult(
         returnOfRate = (totalWinningMoney / totalCost.toDouble()).round()
     }
 
+    fun getWinningResultsCount(rank: LottoRank): Int {
+        return winningResults[rank] ?: 0
+    }
+
     private fun validateTotalCostIsPostivieZero(totalCost: Int) {
         require(totalCost >= 0) {
             "총 구매 비용은 0보다 커야 합니다."
