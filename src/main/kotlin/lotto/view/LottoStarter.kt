@@ -1,5 +1,9 @@
 package lotto.view
 
+import lotto.domain.RealLottoShop
+
 fun startLotto() {
-    LottoController().start()
+    LottoController(
+        lottoShop = RealLottoShop(),
+    ).start()
 }
