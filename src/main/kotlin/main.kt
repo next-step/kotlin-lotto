@@ -1,4 +1,4 @@
-import lotto.domain.analysis.RealLottoResultAnalyst
+import lotto.domain.analysis.LottoResultAnalyst
 import lotto.domain.shop.RealLottoShop
 import lotto.domain.shop.LottoGameMachine
 import lotto.view.LottoController
@@ -15,6 +15,6 @@ fun main() {
                 shuffler = RandomShuffler(),
             ),
         ),
-        lottoResultAnalyst = RealLottoResultAnalyst(),
+        lottoResultAnalyst = LottoResultAnalyst(),
     ).start()
 }

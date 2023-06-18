@@ -29,7 +29,7 @@ class RealLottoResultAnalystTest : BehaviorSpec({
                 lottoPurchaseAmount = PositiveNumber(1_000),
                 lastWeekWinLottoNumbers = makeLottoNumbers(1, 2, 3, 4, 5, 6)
             )
-            val result = RealLottoResultAnalyst().analyze(request)
+            val result = LottoResultAnalyst().analyze(request)
             val winRanks = result.lottoWinRankAnalysisResults.map { it.lottoWinRank }
             winRanks shouldBe LottoWinRank.values().sortedDescending()
         }
@@ -45,7 +45,7 @@ class RealLottoResultAnalystTest : BehaviorSpec({
                 lottoPurchaseAmount = PositiveNumber(4_000),
                 lastWeekWinLottoNumbers = makeLottoNumbers(1, 2, 3, 4, 5, 6)
             )
-            val result = RealLottoResultAnalyst().analyze(request)
+            val result = LottoResultAnalyst().analyze(request)
             val winRankCounts = result.lottoWinRankAnalysisResults.map { it.ranksCount }
             winRankCounts.all { it.value == 1 } shouldBe true
         }
@@ -56,7 +56,7 @@ class RealLottoResultAnalystTest : BehaviorSpec({
                 lottoPurchaseAmount = PositiveNumber(1_000),
                 lastWeekWinLottoNumbers = makeLottoNumbers(1, 2, 3, 4, 5, 6)
             )
-            val result = RealLottoResultAnalyst().analyze(request)
+            val result = LottoResultAnalyst().analyze(request)
             val winRankCounts = result.lottoWinRankAnalysisResults.map { it.ranksCount }
             winRankCounts shouldBe LottoWinRank.values().sortedDescending().map { PositiveNumber(0) }
         }
@@ -98,7 +98,7 @@ class RealLottoResultAnalystTest : BehaviorSpec({
                     lottoPurchaseAmount = PositiveNumber(lottoGames.size * 1_000),
                     lastWeekWinLottoNumbers = lastWeekWinLottoNumbers
                 )
-                val result = RealLottoResultAnalyst().analyze(request)
+                val result = LottoResultAnalyst().analyze(request)
                 result.revenue shouldBe expectedRevenue
             }
         }

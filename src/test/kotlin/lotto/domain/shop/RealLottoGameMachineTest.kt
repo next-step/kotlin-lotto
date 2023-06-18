@@ -1,8 +1,8 @@
 package lotto.domain.shop
 
-import shffule.MockLottoNumberDescendingSortShuffler
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import shffule.MockLottoNumberDescendingSortShuffler
 
 class RealLottoGameMachineTest : StringSpec({
 
