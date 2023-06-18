@@ -10,7 +10,7 @@ value class LottoNumber(val value: Int) : Comparable<LottoNumber> {
     }
 
     override fun compareTo(other: LottoNumber): Int {
-        return compareValuesBy(this, other) { it.value }
+        return value.compareTo(other.value)
     }
 
     companion object {
