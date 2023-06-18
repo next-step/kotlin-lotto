@@ -8,6 +8,6 @@ class InputView {
 
     fun inputWinningNumbers(): Set<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readln().split(", ").map { it.toInt() }.toSet()
+        return readln().split(",").map { it.trim().toInt() }.toSet()
     }
 }
