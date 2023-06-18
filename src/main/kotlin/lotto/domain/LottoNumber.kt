@@ -23,4 +23,3 @@ value class LottoNumber(
         private const val MAX_NUMBER = 45
     }
 }
-
