@@ -8,4 +8,6 @@ fun main() {
     val money = InputView.getMoney()
     val lottoCount = LotteryShop.buy(money)
     ResultView.printLottoCounts(lottoCount)
+
+    val tickets = LotteryShop.getTickets(lottoCount)
 }
