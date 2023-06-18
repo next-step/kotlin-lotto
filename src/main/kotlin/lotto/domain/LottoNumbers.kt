@@ -18,15 +18,16 @@ data class LottoNumbers(
 
     companion object {
         const val LENGTH = 6
-        private const val MINIMUM = 1
-        private const val MAXIMUM = 45
+        const val MINIMUM = 1
+        const val MAXIMUM = 45
+
+        fun inValidRange(number: Int): Boolean = number in MINIMUM..MAXIMUM
 
         fun generate(): LottoNumbers {
-            return LottoNumbers(generateLottoNumbers())
+            val randomNumbers = DuplicateFreeSequenceGenerator(MINIMUM, MAXIMUM, LENGTH)
+            return LottoNumbers(
+                numbers = randomNumbers.toSet()
+            )
         }
-
-        private fun generateLottoNumbers(): Set<Int> = (MINIMUM..MAXIMUM).shuffled()
-            .take(LENGTH)
-            .toSet()
     }
 }
