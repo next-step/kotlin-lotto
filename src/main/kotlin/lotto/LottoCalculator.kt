@@ -9,17 +9,14 @@ object LottoCalculator {
         roundingMode = RoundingMode.DOWN
     }
 
-    fun earningRate(results: List<Int>, money: Int): String {
-        var totalPrize = 0
+    fun earningRate(results: List<Int>, money: Int): Double {
+        var totalPrize = 0.0
         results.forEachIndexed { index, i ->
-            totalPrize += i * when (index) {
-                3 -> Lotto.THREE_MATCH_PRIZE
-                4 -> Lotto.FOUR_MATCH_PRIZE
-                5 -> Lotto.FIVE_MATCH_PRIZE
-                6 -> Lotto.SIX_MATCH_PRIZE
-                else -> 0
-            }
+            totalPrize += i * Lotto.prizes[index]
         }
-        return decimalFormat.format(totalPrize.toDouble() / money.toDouble())
+
+        if (money == 0) return 0.0
+
+        return decimalFormat.format(totalPrize / money).toDouble()
     }
 }

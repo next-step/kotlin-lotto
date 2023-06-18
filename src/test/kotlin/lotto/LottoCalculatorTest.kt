@@ -10,6 +10,6 @@ class LottoCalculatorTest {
         val results = listOf(0, 0, 0, 1, 0, 0, 0)
         val money = 14000
 
-        LottoCalculator.earningRate(results, money) shouldBe "0.35"
+        LottoCalculator.earningRate(results, money) shouldBe 0.35
     }
 }
