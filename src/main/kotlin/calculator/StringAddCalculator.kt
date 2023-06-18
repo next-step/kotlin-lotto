@@ -43,8 +43,4 @@ class StringAddCalculator {
             throw RuntimeException("Negative numbers are not allowed")
         }
     }
-
-    companion object {
-        private var delimiters = mutableListOf(",", ":")
-    }
 }
