@@ -10,9 +10,9 @@ data class LottoNumbers(
     }
 
     fun numberOfOverlaps(other: LottoNumbers): Int {
-        return numbers.filter {
+        return numbers.count {
             it in other.numbers
-        }.size
+        }
     }
 
     private fun inValidRange(number: Int): Boolean = number in MINIMUM..MAXIMUM
