@@ -2,6 +2,7 @@ package domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
+import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
 import mock.MockNumberGenerator
 
@@ -18,13 +19,13 @@ class LotteryTest : StringSpec({
 
     "복권에 일치하는 값 개수를 찾는다." {
         listOf(
-            listOf(1, 2, 3, 8, 7, 9) to 3,
-            listOf(1, 2, 3, 4, 7, 8) to 4,
-            listOf(1, 2, 3, 4, 5, 7) to 5,
-            listOf(1, 2, 3, 4, 5, 6) to 6
+            setOf(1, 2, 3, 8, 7, 9) to 3,
+            setOf(1, 2, 3, 4, 7, 8) to 4,
+            setOf(1, 2, 3, 4, 5, 7) to 5,
+            setOf(1, 2, 3, 4, 5, 6) to 6
         ).forAll { (input, expected) ->
             val lottery = Lottery(MockNumberGenerator(input))
-            val countMatchingLottery = lottery.countMatchingLottery(listOf(1, 2, 3, 4, 5, 6))
+            val countMatchingLottery = lottery.countMatchingLottery(setOf(1, 2, 3, 4, 5, 6))
             countMatchingLottery shouldBe expected
         }
     }

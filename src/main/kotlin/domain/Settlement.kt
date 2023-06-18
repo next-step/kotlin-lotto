@@ -2,7 +2,7 @@ package domain
 
 import view.OutputView
 
-class Settlement(private val winningNums: List<Int>) {
+class Settlement(private val winningNums: Set<Int>) {
 
     fun getReturnOnInvestment(
         lotteries: List<Lottery>,
