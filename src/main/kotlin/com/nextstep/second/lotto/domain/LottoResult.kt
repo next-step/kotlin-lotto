@@ -5,7 +5,7 @@ class LottoResult private constructor(
 ) {
 
     fun getMatchedNumber(score: Int): Int {
-        val lottoReward = LottoReward.valueOf(score)
+        val lottoReward = LottoReward.valueOf(score, false) // TODO
         return matchedNumberCounts.getOrDefault(lottoReward, 0)
     }
 
@@ -23,7 +23,7 @@ class LottoResult private constructor(
             val matchedNumberCounts = mutableMapOf<LottoReward, Int>()
             lottos.map { lotto ->
                 val cnt = winningLotto.numbers.intersect(lotto.numbers.toSet()).size
-                val lottoReward = LottoReward.valueOf(cnt)
+                val lottoReward = LottoReward.valueOf(cnt, false)
                 matchedNumberCounts.put(lottoReward, matchedNumberCounts.getOrDefault(lottoReward, 0) + 1)
             }
             return LottoResult(matchedNumberCounts)
