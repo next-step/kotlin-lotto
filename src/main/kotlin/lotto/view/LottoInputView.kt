@@ -10,7 +10,7 @@ class LottoInputView {
 
     fun inputWinningLotto(): List<Int> {
         println(WINNING_LOTTO_COMMENT)
-        return readLineOrThrows().split(",").map { it.toInt() }
+        return readLineOrThrows().replace(" ", "").split(",").map { it.toInt() }
     }
 
     private fun readLineOrThrows(): String = readLine() ?: throw IllegalArgumentException()

@@ -40,12 +40,10 @@ class LottoOutputView {
             }
         }
 
-        println("총 수익률은 ${lottoRoundStatistics.totalPrize.value / payment}입니다.")
+        println("총 수익률은 0.${(lottoRoundStatistics.totalPrize.value * 100 / payment)}입니다.")
     }
 
     companion object {
-        private const val WINNING_C0MMENT = """당첨 통계
-            |---------
-        """
+        private const val WINNING_C0MMENT = "당첨 통계\n---------"
     }
 }
