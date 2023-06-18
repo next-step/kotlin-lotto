@@ -7,7 +7,7 @@ class StringAddCalculator {
         }
 
         val delimiters = Delimiters.DEFAULT
-        val (customDelimiter, extractResult) = extractCustomDelimiter(text)
+        val (customDelimiter, extractResult) = CustomDelimiterExtractor.extract(text)
         if (!customDelimiter.isNullOrEmpty()) {
             delimiters.addCustomDelimiters(customDelimiter)
         }
@@ -15,14 +15,6 @@ class StringAddCalculator {
         val convertedTokens = convertTokensToNumber(tokens)
         checkNegativeNumbers(convertedTokens)
         return convertTokensToNumber(tokens).sum()
-    }
-
-    fun extractCustomDelimiter(text: String): Pair<String, String> {
-        val regex = Regex("//(.)\n(.*)")
-        val matchResult = regex.find(text)
-        val extractedDelimiter = matchResult?.groupValues?.getOrNull(1) ?: ""
-        val extractedText = matchResult?.groupValues?.getOrNull(2) ?: text
-        return extractedDelimiter to extractedText
     }
 
     fun convertTokensToNumber(tokens: List<String>): List<Int> {

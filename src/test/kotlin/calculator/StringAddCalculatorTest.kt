@@ -59,7 +59,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["//@\n1:2@4"])
     fun extractText(text: String) {
-        assertThat(calculator.extractCustomDelimiter(text)).isEqualTo(Pair("@","1:2@4"))
+        assertThat(CustomDelimiterExtractor.extract(text)).isEqualTo(Pair("@","1:2@4"))
     }
 
     @DisplayName(value = "문자열 계산기의 extractCustomDelimiter 함수가 string 을 delimiter 를 이용하여 토큰으로 분리한다.")
