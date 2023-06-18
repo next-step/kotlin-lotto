@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoResult(private val lottoRanks: List<LottoRank>) {
+class LottoResult(val lottoRanks: List<LottoRank>) {
     fun getLottoRankStatistic(): Map<LottoRank, Int> {
         val rankCountMap = lottoRanks
             .groupingBy { it }
@@ -14,10 +14,12 @@ class LottoResult(private val lottoRanks: List<LottoRank>) {
         if (lottoTotalPrice < 0) {
             return 0.0
         }
-        return calculateWinningPrice().toDouble() / lottoTotalPrice
+        return calculateWinningPrice() / lottoTotalPrice
     }
 
-    private fun calculateWinningPrice(): Int {
-        return this.lottoRanks.fold(0) { acc, next -> acc + next.price }
+    private fun calculateWinningPrice(): Double {
+        return lottoRanks
+            .fold(0) { acc, next -> acc + next.price }
+            .toDouble()
     }
 }
