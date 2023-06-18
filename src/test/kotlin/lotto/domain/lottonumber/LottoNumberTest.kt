@@ -25,7 +25,7 @@ class LottoNumberTest : StringSpec({
         }
     }
 
-    "로또 번호는 내부의 값을 키 값으로 정렬할 수 있다" {
+    "로또 번호는 오름차순으로 정렬되어 있다" {
         val numbers = listOf(1, 10, 3, 2, 5, 4, 20, 14, 13)
         val lottoNumbers = numbers.map { LottoNumber(it) }
         val sortedLottoNumbers = numbers.sorted().map { LottoNumber(it) }
