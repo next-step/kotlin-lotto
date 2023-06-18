@@ -1,4 +1,4 @@
-package calculator
+package calculator.utils
 
 object TokenConverter {
     fun convertToInt(tokens: List<String>): List<Int> {

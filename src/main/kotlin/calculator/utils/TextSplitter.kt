@@ -1,4 +1,4 @@
-package calculator
+package calculator.utils
 
 object TextSplitter {
     fun splitText(text: String, delimiters: List<String>): List<String> {

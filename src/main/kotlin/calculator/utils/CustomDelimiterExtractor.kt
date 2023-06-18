@@ -1,4 +1,4 @@
-package calculator
+package calculator.utils
 
 private const val CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)"
 
