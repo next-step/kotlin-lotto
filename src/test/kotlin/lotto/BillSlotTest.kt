@@ -2,10 +2,20 @@ package lotto
 
 import lotto.domain.BillSlot
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 class BillSlotTest {
+
+    @ParameterizedTest
+    @ValueSource(ints = [-1, 0])
+    fun `로또 가격이 0보다 작거나 같다면 throw IllegalArgumentException`(lottoPrice: Int) {
+        assertThrows<IllegalArgumentException> {
+            BillSlot(lottoPrice)
+        }
+    }
 
     @ParameterizedTest
     @CsvSource(
