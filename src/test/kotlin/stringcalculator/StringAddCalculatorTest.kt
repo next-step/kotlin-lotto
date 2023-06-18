@@ -4,9 +4,14 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 
-class StringAddCalculator() {
+class StringAddCalculator {
+    private val delimiter = "[,:]".toRegex()
     fun add(text: String?): Int {
-        return if (text.isNullOrEmpty()) 0 else text.toInt()
+        if (text.isNullOrEmpty()) return 0
+        if (text.contains(delimiter)) {
+            return text.split(delimiter).sumOf { it.toInt() }
+        }
+        return text.toInt()
     }
 }
 
@@ -21,5 +26,8 @@ class StringAddCalculatorTest : StringSpec({
         listOf("1", "2").forAll {
             calculator.add(it) shouldBe it.toInt()
         }
+    }
+    "숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다. (예 : “1,2”)" {
+        calculator.add("1,2") shouldBe 3
     }
 })
