@@ -4,7 +4,7 @@ class StringCalculator(
     private val parsedStringList: List<String>
 ) {
     init {
-        check(ParsedStringValidator(parsedStringList).check()) {
+        check(ParsedStringValidator().check(parsedStringList)) {
             RuntimeException()
         }
     }

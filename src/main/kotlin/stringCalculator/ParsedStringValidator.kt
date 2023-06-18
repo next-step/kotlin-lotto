@@ -1,21 +1,11 @@
 package stringCalculator
 
-class ParsedStringValidator(
-    private val parsedString: List<String>
-) {
-    fun check(): Boolean {
-        if (!checkNumber()) {
-            return false
-        }
-
-        if (!checkNegativeNumber()) {
-            return false
-        }
-
-        return true
+class ParsedStringValidator {
+    fun check(parsedString: List<String>): Boolean {
+        return checkNumber(parsedString) && checkNegativeNumber(parsedString)
     }
 
-    private fun checkNumber(): Boolean {
+    private fun checkNumber(parsedString: List<String>): Boolean {
         parsedString.forEach {
             try {
                 it.toInt()
@@ -26,10 +16,7 @@ class ParsedStringValidator(
         return true
     }
 
-    private fun checkNegativeNumber(): Boolean {
-        if (parsedString.any { it.toInt() < 0 }) {
-            return false
-        }
-        return true
+    private fun checkNegativeNumber(parsedString: List<String>): Boolean {
+        return !parsedString.any { it.toInt() < 0 }
     }
 }
