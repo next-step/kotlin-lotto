@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.analysis.LottoAnalysisRequest
+import lotto.domain.analysis.LottoResultAnalyst
 import lotto.domain.shop.LottoShop
 
 class LottoController(
