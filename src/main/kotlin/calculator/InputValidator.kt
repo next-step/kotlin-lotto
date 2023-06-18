@@ -1,3 +1,5 @@
+package calculator
+
 object InputValidator {
     fun checkNullOrBlank(input: String?): Boolean = input.isNullOrBlank()
 

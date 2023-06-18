@@ -1,3 +1,5 @@
+package calculator
+
 import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName

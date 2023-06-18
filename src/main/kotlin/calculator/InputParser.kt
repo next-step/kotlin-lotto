@@ -1,3 +1,5 @@
+package calculator
+
 object InputParser {
     private val defaultDelimiterRegex = "[,:]".toRegex()
     private val CustomDelimiterRegex = Regex("//(.)\n(.*)")

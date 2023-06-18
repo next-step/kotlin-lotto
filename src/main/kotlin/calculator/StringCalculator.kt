@@ -1,3 +1,5 @@
+package calculator
+
 object StringCalculator {
     @Throws(RuntimeException::class)
     fun add(input: String?): Int {
