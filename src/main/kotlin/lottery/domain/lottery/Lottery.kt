@@ -22,6 +22,8 @@ class Lottery(
 
         fun from(values: List<String>): Lottery = Lottery(values.map { LotteryNumber.from(it) })
 
+        fun Money.isDivisibleLotteryCost(): Boolean = this.isDivisible(LOTTERY_COST)
+
         fun purchaseLottery(money: Money): Receipt {
             val purchaseCount = countOfCanPurchaseLottery(money).toInt()
             return Receipt(LOTTERY_COST.times(purchaseCount), purchaseCount)

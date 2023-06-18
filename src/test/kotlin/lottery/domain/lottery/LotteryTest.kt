@@ -7,6 +7,7 @@ import io.kotest.data.row
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lottery.domain.Money
+import lottery.domain.lottery.Lottery.Companion.isDivisibleLotteryCost
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_1
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_10
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_2
@@ -116,6 +117,18 @@ class LotteryTest : FunSpec({
         test("숫자 문자 list를 입력받아 Lottery를 생성한다") {
             val actual = Lottery.from(values = listOf("1", "2", "3", "4", "5", "6"))
             actual.values shouldHaveSize 6
+        }
+    }
+
+    context("isDivisibleLotteryCost") {
+        test("로또금액으로 나누어떨어지는 돈인지 확인한다") {
+            forAll(
+                row(Money(value = BigDecimal(999)), false),
+                row(Money(value = BigDecimal(1_000)), true),
+            ) { input, expected ->
+                val actual = input.isDivisibleLotteryCost()
+                actual shouldBe expected
+            }
         }
     }
 
