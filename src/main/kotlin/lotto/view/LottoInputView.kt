@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.domain.WinningNumbers
 
-object LottoInputController {
+object LottoInputView {
     private const val WINNING_LOTTO_DELIMITER = ","
 
     fun inputMoney(): Int {
