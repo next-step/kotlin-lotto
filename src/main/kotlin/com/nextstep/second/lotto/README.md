@@ -60,3 +60,6 @@
 * [X] `View`
   * InputView
   * OutputView
+* [ ] `WinnerLotto`
+  * 로또 1등 번호를 대표하는 객체
+  * 추첨 번호가 추가가 되어 새로 추가된 도메인
