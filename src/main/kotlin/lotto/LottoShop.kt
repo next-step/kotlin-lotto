@@ -8,7 +8,7 @@ object LottoShop {
     fun sellLottos(cash: Money): Lottos {
         val amountOfLotto = cash.amount / LOTTO_PRICE.amount
         val generatedLottos = mutableListOf<Lotto>()
-        repeat(amountOfLotto) {
+        repeat(amountOfLotto.toInt()) {
             generatedLottos.add(generateLotto())
         }
 
