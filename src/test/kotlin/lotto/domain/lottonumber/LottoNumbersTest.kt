@@ -1,4 +1,4 @@
-package lotto.domain.shop
+package lotto.domain.lottonumber
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec

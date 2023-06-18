@@ -2,8 +2,8 @@ package lotto.domain.shop.machine
 
 import common.shffule.Shuffler
 import lotto.domain.shop.LottoGame
-import lotto.domain.shop.LottoNumber
-import lotto.domain.shop.LottoNumbers
+import lotto.domain.lottonumber.LottoNumber
+import lotto.domain.lottonumber.LottoNumbers
 
 class RealLottoGameMachine(
     private val shuffler: Shuffler<LottoNumber>,

@@ -3,6 +3,7 @@ package lotto.domain.shop
 import common.PositiveNumber
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.shop.machine.MockLottoGameMachine
 
 class RealLottoShopTest : BehaviorSpec({

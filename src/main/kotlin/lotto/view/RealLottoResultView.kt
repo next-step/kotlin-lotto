@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.shop.LottoPurchaseResult
-import lotto.domain.shop.unWrapping
+import lotto.domain.lottonumber.unWrapping
 
 class RealLottoResultView : LottoResultView {
 

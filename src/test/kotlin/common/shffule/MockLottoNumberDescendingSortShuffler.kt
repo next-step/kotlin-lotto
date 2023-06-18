@@ -1,6 +1,6 @@
 package common.shffule
 
-import lotto.domain.shop.LottoNumber
+import lotto.domain.lottonumber.LottoNumber
 
 class MockLottoNumberDescendingSortShuffler : Shuffler<LottoNumber> {
 

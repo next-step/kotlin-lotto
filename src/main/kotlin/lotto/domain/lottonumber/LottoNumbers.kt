@@ -1,4 +1,4 @@
-package lotto.domain.shop
+package lotto.domain.lottonumber
 
 @JvmInline
 value class LottoNumbers(val value: List<LottoNumber>) {
