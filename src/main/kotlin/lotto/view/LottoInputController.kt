@@ -13,6 +13,7 @@ object LottoInputController {
         return readLineWithMessage("지난 주 당첨 번호를 입력해 주세요.")
             .split(WINNING_LOTTO_DELIMITER)
             .map { it.trim().toInt() }
+            .toSet()
     }
 
     private fun readLineWithMessage(message: String): String {

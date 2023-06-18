@@ -1,3 +1,3 @@
 package lotto.domain
 
-typealias WinningNumbers = List<Int>
+typealias WinningNumbers = Set<Int>

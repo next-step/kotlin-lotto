@@ -25,16 +25,16 @@ class LottosSpec : DescribeSpec({
     }
 
     describe("로또 결과 계산") {
-        context("로또 목록과 당첨 번호가 주어지면") {
+        context("로또 목록과 당첨 번호가 주어졌을 때") {
             val lottos = Lottos(
                 listOf(
-                    Lotto(listOf(1, 2, 3, 7, 8, 9)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(setOf(1, 2, 3, 7, 8, 9)),
+                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
                 ),
             )
 
             it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 7, 8, 9))") {
-                val winningNumbers = listOf(1, 2, 3, 7, 8, 9)
+                val winningNumbers = setOf(1, 2, 3, 7, 8, 9)
                 val lottoResult = lottos.calculateResult(winningNumbers)
 
                 lottoResult.numberOfFirst shouldBe 1
@@ -44,7 +44,7 @@ class LottosSpec : DescribeSpec({
             }
 
             it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 7, 8, 31)") {
-                val winningNumbers = listOf(1, 2, 3, 7, 8, 31)
+                val winningNumbers = setOf(1, 2, 3, 7, 8, 31)
                 val lottoResult = lottos.calculateResult(winningNumbers)
 
                 lottoResult.numberOfFirst shouldBe 0
@@ -54,7 +54,7 @@ class LottosSpec : DescribeSpec({
             }
 
             it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 7, 30, 31)") {
-                val winningNumbers = listOf(1, 2, 3, 7, 30, 31)
+                val winningNumbers = setOf(1, 2, 3, 7, 30, 31)
                 val lottoResult = lottos.calculateResult(winningNumbers)
 
                 lottoResult.numberOfFirst shouldBe 0
@@ -64,7 +64,7 @@ class LottosSpec : DescribeSpec({
             }
 
             it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 4, 5, 6)") {
-                val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
+                val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
                 val lottoResult = lottos.calculateResult(winningNumbers)
 
                 lottoResult.numberOfFirst shouldBe 0

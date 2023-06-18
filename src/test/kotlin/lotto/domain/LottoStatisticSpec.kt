@@ -8,14 +8,14 @@ class LottoStatisticSpec : DescribeSpec({
         context("로또 결과와 당첨 번호로 로또 통계를 생성하면") {
             val lottos = Lottos(
                 listOf(
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
-                    Lotto(listOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(setOf(1, 2, 3, 4, 5, 6)),
+                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
+                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
                 ),
             )
-            val winningNumbers = listOf(1, 2, 3, 30, 31, 32)
+            val winningNumbers = setOf(1, 2, 3, 30, 31, 32)
 
             val lottoStatistic = LottoStatistic(lottos = lottos, winningNumbers = winningNumbers)
             it("로또 결과를 확인할 수 있다.") {
