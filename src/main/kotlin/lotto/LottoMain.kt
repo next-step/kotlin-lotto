@@ -1,19 +1,27 @@
 package lotto
 
+import lotto.controller.LottoController
+import lotto.domain.LottoStore
+import lotto.domain.PurchaseLotteryTicketResult
+import lotto.view.LottoInputView
+import lotto.view.LottoResultView
+
 fun main() {
-    val lottoInputView = LottoInputView()
-    val lottoResultView = LottoResultView()
-    val lottoStore = LottoStore()
+    val lottoController = LottoController(
+        lottoInputView = LottoInputView(),
+        lottoResultView = LottoResultView(),
+        lottoStore = LottoStore()
+    )
 
-    val purchaseAmount = lottoInputView.readInt(message = "구입금액을 입력해 주세요.")
-    val lottoNumbers = lottoStore.purchase(purchaseAmount)
-    lottoResultView.printPurchasedLottoNumbers(lottoNumbers)
-
-    val lastWinLottoNumber = lottoInputView.readLottoNumber(message = "지난 주 당첨 번호를 입력해 주세요.")
-    val bonusBallNumber = lottoInputView.readInt(message = "보너스 볼을 입력해 주세요.")
-    val winningLottoNumber = WinningLottoNumber(winningNumber = lastWinLottoNumber, bonusBallNumber = bonusBallNumber)
-
-    val rankingCountMap = winningLottoNumber.makeRankingCountMap(lottoNumbers)
-    val totalRevenueRate = winningLottoNumber.getRevenueRate(lottoNumbers)
-    lottoResultView.printLottoStatistics(rankingCountMap = rankingCountMap, totalRevenueRate = totalRevenueRate)
+    when (val result = lottoController.purchaseLotteryTickets()) {
+        is PurchaseLotteryTicketResult.FAIL -> {
+            println("로또 구매 실패 사유 : ${result.exception.message}")
+            println("입력 값을 확인하시어 다시 시도 부탁드립니다.")
+        }
+        is PurchaseLotteryTicketResult.SUCCESS -> {
+            lottoController.printLotteryTickets(result)
+            val winningLottoNumber = lottoController.readWinningLottoNumber()
+            lottoController.printLottoResult(lotteryTickets = result.lotteryTickets, winningLottoNumber = winningLottoNumber)
+        }
+    }
 }
