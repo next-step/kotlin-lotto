@@ -1,32 +1,26 @@
 package lotto.domain.lottery
 
-open class Lottery(private val lottoNumber: LottoNumber) {
+open class Lottery(private val lottoNumbers: Set<LotteryNumber>) {
     init {
         validateNumberSize()
-        validateEachNumberInRange()
     }
 
     private fun validateNumberSize() {
-        require(lottoNumber.size == LOTTERY_NUMBER_SIZE) { "로또는 6자리입니다." }
+        require(lottoNumbers.size == LOTTERY_NUMBER_SIZE) { "로또는 6자리입니다." }
     }
 
-    private fun validateEachNumberInRange() {
-        require(lottoNumber.all { it in LOTTERY_NUMBER_RANGE }) { "로또의 숫자는 1~45 사이의 정수가 가능합니다." }
-    }
+    fun isInBonus(bonus: LotteryNumber) = bonus in lottoNumbers
 
-    fun isInBonus(bonus: Int) = bonus in lottoNumber
-
-    infix fun intersect(other: Lottery): Set<Int> {
-        return lottoNumber.intersect(other.lottoNumber)
+    infix fun intersect(other: Lottery): Set<LotteryNumber> {
+        return lottoNumbers.intersect(other.lottoNumbers)
     }
 
     companion object {
         const val LOTTERY_NUMBER_SIZE = 6
-        val LOTTERY_NUMBER_RANGE = (1..45)
     }
 
     override fun toString(): String {
-        return "${lottoNumber.sorted()}"
+        return "${lottoNumbers.sorted()}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -35,10 +29,10 @@ open class Lottery(private val lottoNumber: LottoNumber) {
 
         other as Lottery
 
-        return lottoNumber == other.lottoNumber
+        return lottoNumbers == other.lottoNumbers
     }
 
     override fun hashCode(): Int {
-        return lottoNumber.hashCode()
+        return lottoNumbers.hashCode()
     }
 }

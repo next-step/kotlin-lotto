@@ -1,6 +1,7 @@
 package lotto.ui
 
 import lotto.domain.Money
+import lotto.domain.lottery.LotteryNumber
 
 object InputView {
     fun getPurchaseAmount(): Money {
@@ -10,19 +11,19 @@ object InputView {
         return Money(inputValue.toLong())
     }
 
-    fun getLastWeekWinnerNumbers(): Set<Int> {
+    fun getLastWeekWinnerNumbers(): Set<LotteryNumber> {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val inputValue = readln()
-        return getNumbers(inputValue)
+        return getNumbers(inputValue).map { LotteryNumber(it) }.toSet()
     }
 
     private fun getNumbers(inputValue: String) =
         inputValue.replace("\\s".toRegex(), "").split(",").map { it.toInt() }.toSet()
 
-    fun getBonusNumber(): Int {
+    fun getBonusNumber(): LotteryNumber {
         println("보너스 볼을 입력해 주세요.")
         val boundNumber = readln()
-        return boundNumber.toInt()
+        return LotteryNumber(boundNumber.toInt())
     }
 
     fun getManualTicketCount(): Int {

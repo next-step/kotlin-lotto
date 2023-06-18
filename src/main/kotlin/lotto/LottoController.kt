@@ -3,7 +3,6 @@ package lotto
 import lotto.domain.Money
 import lotto.domain.ProfitAnalyzer
 import lotto.domain.lottery.LotteryMachine
-import lotto.domain.lottery.LottoNumber
 import lotto.domain.lottery.WinnerLottery
 import lotto.domain.result.LotteryPurchaseResults
 import lotto.ui.InputView
@@ -27,7 +26,7 @@ object LottoController {
         if (lotteryTicket.isEmpty()) return
 
         OutputView.showLotteryTicket(lotteryTicket)
-        val lastWeekWinnerNumber = LottoNumber(InputView.getLastWeekWinnerNumbers())
+        val lastWeekWinnerNumber = InputView.getLastWeekWinnerNumbers()
         val bonusNumber = InputView.getBonusNumber()
         val lastWeekWinnerLottery = WinnerLottery(lastWeekWinnerNumber, bonusNumber)
 

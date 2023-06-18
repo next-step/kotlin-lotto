@@ -3,17 +3,10 @@ package lotto.domain.result
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Money
-import lotto.domain.lottery.Lottery
-import lotto.domain.lottery.LotteryTicket
-import lotto.domain.lottery.LottoNumber
+import lotto.domain.test.lottery
+import lotto.domain.test.lotteryTicket
 
 class LotteryPurchaseResultsTest : StringSpec({
-    fun lottery(n1: Int, n2: Int, n3: Int, n4: Int, n5: Int, n6: Int) =
-        Lottery(LottoNumber(setOf(n1, n2, n3, n4, n5, n6)))
-
-    fun lotteryTicket(vararg lotto: Lottery): LotteryTicket =
-        LotteryTicket(listOf(*lotto))
-
     "로또 티켓을 얻는다" {
         // given
         val manualLotteryTicket = lotteryTicket(
