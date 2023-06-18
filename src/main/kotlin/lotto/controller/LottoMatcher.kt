@@ -1,26 +1,25 @@
 package lotto.controller
 
-import lotto.domain.Lotto
+import lotto.domain.Lottos
 
-class LottoMatcher {
+object LottoMatcher {
 
-    companion object {
-        private const val MINIMUM_MATCH_COUNT = 3
+    private const val MINIMUM_MATCH_COUNT = 3
 
-        fun matchingLotto(lotto: Lotto, winningNumbers: WinningNumbers): Map<Int, Int> {
-            val matches = mutableMapOf<Int, Int>()
-            lotto.lottoList.forEach { lottoNumbers ->
-                var matchCount = 0
-                lottoNumbers.lottoNumbers.forEach { number ->
-                    if (winningNumbers.numbers.contains(number)) {
-                        matchCount++
-                    }
-                }
-                if (matchCount >= MINIMUM_MATCH_COUNT) {
-                    matches[matchCount] = matches.getOrDefault(matchCount, 0) + 1
-                }
-            }
-            return matches
+    fun matchingLotto(lottos: Lottos, winningNumbers: WinningNumbers): MatchResult {
+        val matches = mutableMapOf<Int, Int>()
+
+        lottos.lottoList.forEach { lottoNumbers ->
+            val matchCount = winningNumbers.countMatches(lottoNumbers)
+            incrementMatchCount(matches, matchCount)
+        }
+
+        return MatchResult(matches)
+    }
+
+    private fun incrementMatchCount(matches: MutableMap<Int, Int>, matchCount: Int) {
+        if (matchCount >= MINIMUM_MATCH_COUNT) {
+            matches[matchCount] = matches.getOrDefault(matchCount, 0) + 1
         }
     }
 }
