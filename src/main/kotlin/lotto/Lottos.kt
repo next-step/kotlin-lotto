@@ -24,7 +24,7 @@ class Lottos(
     }
 
     private fun getWinningPrizes(winningLotto: Lotto, bonusLottoNumber: LottoNumber): List<Prize> {
-        return lottos.map { it.getPrize(winningLotto, bonusLottoNumber) }
+        return lottos.map { it.matchPrize(winningLotto, bonusLottoNumber) }
             .filter { it.isNotMiss() }
     }
 

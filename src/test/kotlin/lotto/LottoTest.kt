@@ -58,7 +58,7 @@ class LottoTest : FunSpec({
             Triple(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(9), Prize.FIRST),
             Triple(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(6), Prize.FIRST),
         ) { (winningLotto, bonusLottoNumber, prize) ->
-            lotto.getPrize(winningLotto, bonusLottoNumber) shouldBe prize
+            lotto.matchPrize(winningLotto, bonusLottoNumber) shouldBe prize
         }
     }
 })

@@ -5,14 +5,9 @@ import io.kotest.matchers.shouldBe
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class LottosTest : FunSpec({
-    test("구입금액에 해당하는 개수만큼 로또를 생성한다") {
-        val lottos = Lottos.of(purchaseAmount = 2000, lottoGenerator = RandomLottoGenerator())
+class LottoMachineTest : FunSpec({
 
-        lottos.size shouldBe 2
-    }
-
-    test("상금별 당첨 로또 개수를 구한다.") {
+    test("당첨 로또 상금 매칭 결과를 반환한다") {
         val winningLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 10))
         val secondPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 9))
         val thirdPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 11))
@@ -29,21 +24,17 @@ class LottosTest : FunSpec({
                 missPrizeLotto
             )
         )
+        val lottoMachine = LottoMachine(lottos, winningLotto, LottoNumber(9))
 
-        val winningLottoCountsByPrize = lottos.getWinningCountsByPrize(
-            winningLotto = winningLotto,
-            bonusLottoNumber = LottoNumber(9),
-        )
-
-        winningLottoCountsByPrize[Prize.FIRST] shouldBe 1
-        winningLottoCountsByPrize[Prize.SECOND] shouldBe 1
-        winningLottoCountsByPrize[Prize.THIRD] shouldBe 1
-        winningLottoCountsByPrize[Prize.FOURTH] shouldBe 3
-        winningLottoCountsByPrize[Prize.FIFTH] shouldBe 0
-        winningLottoCountsByPrize.contains(Prize.MISS) shouldBe false
+        val winningLottoPrizeVOs = lottoMachine.matchWinningLottoPrize()
+        winningLottoPrizeVOs[0] shouldBe WinningLottoPrizeVO(3, BigDecimal(5_000), 0, false)
+        winningLottoPrizeVOs[1] shouldBe WinningLottoPrizeVO(4, BigDecimal(50_000), 3, false)
+        winningLottoPrizeVOs[2] shouldBe WinningLottoPrizeVO(5, BigDecimal(1_500_000), 1, false)
+        winningLottoPrizeVOs[3] shouldBe WinningLottoPrizeVO(5, BigDecimal(30_000_000), 1, true)
+        winningLottoPrizeVOs[4] shouldBe WinningLottoPrizeVO(6, BigDecimal(2_000_000_000), 1, false)
     }
 
-    test("총 수익률을 계산한다") {
+    test("총 수익률을 반환한다") {
         val winningLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 10))
         val secondPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 9))
         val thirdPrizeLotto = Lotto.of(listOf(1, 2, 3, 7, 8, 11))
@@ -60,11 +51,9 @@ class LottosTest : FunSpec({
                 missPrizeLotto
             )
         )
+        val lottoMachine = LottoMachine(lottos, winningLotto, LottoNumber(9))
 
-        val totalProfitRate: BigDecimal = lottos.getTotalProfitRate(
-            winningLotto = winningLotto,
-            bonusLottoNumber = LottoNumber(9),
-        )
+        val totalProfitRate = lottoMachine.getTotalProfitRate()
 
         totalProfitRate shouldBe BigDecimal(338592.50).setScale(2, RoundingMode.HALF_UP)
     }

@@ -9,18 +9,10 @@ fun main() {
     ResultView.printLottos(lottos)
 
     val winningLotto = InputView.readWinningLotto()
-    val bonusLottoNumber = InputView.readBonusLottoNumber()
+    val bonusNumber = InputView.readBonusLottoNumber()
+    val bonusLottoNumber = LottoNumber.forBonusOf(bonusNumber, winningLotto)
 
-    val prizes = lottos.getWinningCountsByPrize(winningLotto, bonusLottoNumber)
-    val winningLottoPrizeVOs = prizes.map { (prize, winningLottoCount) ->
-        WinningLottoPrizeVO(
-            matchedCount = prize.matchedCount,
-            prizeAmount = prize.prizeAmount,
-            winningLottoCount = winningLottoCount,
-            bonusMatched = prize.isBonusMatched(),
-        )
-    }
-    val totalProfitRate = lottos.getTotalProfitRate(winningLotto, bonusLottoNumber)
+    val lottoMachine = LottoMachine(lottos, winningLotto, bonusLottoNumber)
 
-    ResultView.printWinnerStatistics(winningLottoPrizeVOs, totalProfitRate)
+    ResultView.printWinnerStatistics(lottoMachine.matchWinningLottoPrize(), lottoMachine.getTotalProfitRate())
 }

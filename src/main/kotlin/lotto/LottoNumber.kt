@@ -16,5 +16,10 @@ value class LottoNumber(
 
     companion object {
         val LOTTO_NUMBER_RANGE: IntRange = 1..45
+
+        fun forBonusOf(number: Int, winningLotto: Lotto): LottoNumber {
+            require(winningLotto.lottoNumbers.none { it.number == number }) { "당첨 로또 번호와 보너스 번호는 중복될 수 없습니다." }
+            return LottoNumber(number)
+        }
     }
 }

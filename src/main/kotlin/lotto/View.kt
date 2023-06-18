@@ -17,10 +17,10 @@ object InputView {
         return Lotto(wonNumbers.map { LottoNumber(it.toInt()) })
     }
 
-    fun readBonusLottoNumber(): LottoNumber {
+    fun readBonusLottoNumber(): Int {
         println("보너스 볼을 입력해 주세요.")
         val number = readlnOrNull() ?: throw IllegalArgumentException("보너스 볼을 입력해야 합니다.")
-        return LottoNumber(number.toInt())
+        return number.toInt()
     }
 }
 

@@ -2,7 +2,7 @@ package lotto
 
 import java.math.BigDecimal
 
-class WinningLottoPrizeVO(
+data class WinningLottoPrizeVO(
     val matchedCount: Int,
     val prizeAmount: BigDecimal,
     val winningLottoCount: Int,

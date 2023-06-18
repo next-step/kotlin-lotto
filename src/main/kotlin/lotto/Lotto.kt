@@ -8,7 +8,7 @@ class Lotto(
         require(lottoNumbers.size == LOTTO_NUMBER_COUNT) { "로또번호는 ${LOTTO_NUMBER_COUNT}개 이어야 합니다." }
     }
 
-    fun getPrize(other: Lotto, bonusLottoNumber: LottoNumber): Prize {
+    fun matchPrize(other: Lotto, bonusLottoNumber: LottoNumber): Prize {
         val matchedLottoNumbers = lottoNumbers.filter { other.lottoNumbers.contains(it) }
         val bonusMatched = lottoNumbers.any { it == bonusLottoNumber }
         return Prize.match(matchedLottoNumbers.size, bonusMatched)
