@@ -1,16 +1,22 @@
 package next.step.lotto.domain
 
 @JvmInline
-value class LottoWinningNumbers(private val numbers: Set<LottoNumber>) : Set<LottoNumber> by numbers {
+value class LottoWinningNumbers(val numbers: Set<LottoNumber>) {
+    
+    init {
+        require(numbers.size == WINNING_NUMBER_CNT) { "당첨 번호는 6개여야 합니다." }
+    }
+
+    fun size(): Int = numbers.size
+
     companion object {
-        fun from(str: String): LottoWinningNumbers {
-            val numbers = parse(str)
-            require(numbers.size == 6) { "당첨 번호는 6개여야 합니다." }
+        private const val WINNING_NUMBER_CNT = 6
+        fun of(numbers: Set<LottoNumber>): LottoWinningNumbers {
             return LottoWinningNumbers(numbers)
         }
 
-        private fun parse(str: String) = str.split(",")
-            .map { LottoNumber.of(it.trim().toInt()) }
-            .toSet()
+        fun from(numbers: Set<Int>): LottoWinningNumbers {
+            return LottoWinningNumbers(numbers.map { LottoNumber.of(it) }.toSet())
+        }
     }
 }

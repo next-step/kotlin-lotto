@@ -7,36 +7,22 @@ import io.kotest.matchers.shouldBe
 
 class LottoWinningNumbersTest : DescribeSpec({
     describe("LottoWinningNumbers 생성") {
-        context("당첨 번호가 콤마로 구분해서 전달되면") {
-            it("당첨 번호 6개만큼 생성") {
-                LottoWinningNumbers.from("1, 2, 3, 4, 5, 6").size shouldBe 6
+        context("6개 숫자로 생성") {
+            it("오류 없이 생성되고 숫자 개수 6개로 제공") {
+                LottoWinningNumbers.from(setOf(1, 2, 3, 4, 5, 6)).size() shouldBe 6
             }
         }
 
-        context("당첨 번호가 콤마로 구분해서 6개가 아니면, 예외 발생") {
+        context("6개가 아닌 숫자로 생성하면 예외 발생") {
             withData(
                 listOf(
-                    "1, 2, 3, 4, 5",
-                    "1, 2, 3, 4, 5, 6, 7",
-                    "1"
+                    setOf(1, 2, 3, 4, 5),
+                    setOf(1, 2, 3, 4, 5, 6, 7),
+                    setOf(1, 2)
                 )
-            ) { numbersStr ->
+            ) { numberSet ->
                 shouldThrow<IllegalArgumentException> {
-                    LottoWinningNumbers.from(numbersStr)
-                }
-            }
-        }
-
-        context("당첨 번호가 콤마로 구분해서 숫자가 아니면, 예외 발생") {
-            withData(
-                listOf(
-                    "1, 2, 3, 4, a",
-                    "1, 2, 3, 4, b, 6, 7",
-                    "c"
-                )
-            ) { numbersStr ->
-                shouldThrow<IllegalArgumentException> {
-                    LottoWinningNumbers.from(numbersStr)
+                    LottoWinningNumbers.from(numberSet)
                 }
             }
         }
