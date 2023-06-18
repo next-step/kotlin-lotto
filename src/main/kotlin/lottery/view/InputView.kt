@@ -2,7 +2,7 @@ package lottery.view
 
 import java.math.BigDecimal
 
-private const val LOTTERY_NUMBER_DELIMITER = "<"
+private const val LOTTERY_NUMBER_DELIMITER = ","
 
 fun inputPurchaseMoney(): BigDecimal {
     println("구입금액을 입력해 주세요.")
