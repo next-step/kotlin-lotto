@@ -23,5 +23,6 @@ class LottoController(
             lastWeekWinLottoNumbers = lastWeekWinLottoNumbers,
         )
         val lottoAnalysisResult = lottoResultAnalyst.analyze(lottoAnalysisRequest)
+        lottoResultView.display(lottoAnalysisResult)
     }
 }
