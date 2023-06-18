@@ -5,9 +5,9 @@ import util.RandomNumberGenerator
 
 class Lottery(numberGenerator: NumberGenerator = RandomNumberGenerator) {
 
-    val randomNumber = numberGenerator.randomNumberGenerator()
+    val randomNumbers = numberGenerator.randomNumbers()
 
-    fun countMatchingLottery(winningNums: List<Int>): Int {
-        return randomNumber.intersect(winningNums.toSet()).size
+    fun countMatchingLottery(winningNums: Set<Int>): Int {
+        return randomNumbers.intersect(winningNums).size
     }
 }
