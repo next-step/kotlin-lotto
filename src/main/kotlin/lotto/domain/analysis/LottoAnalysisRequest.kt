@@ -1,8 +1,8 @@
 package lotto.domain.analysis
 
-import math.PositiveNumber
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.shop.LottoGame
+import math.PositiveNumber
 
 data class LottoAnalysisRequest(
     val lottoGames: List<LottoGame>,

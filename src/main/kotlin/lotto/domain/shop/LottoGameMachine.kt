@@ -1,17 +1,16 @@
-package lotto.domain.shop.machine
+package lotto.domain.shop
 
 import shffule.Shuffler
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
-import lotto.domain.shop.LottoGame
 
-class RealLottoGameMachine(
+class LottoGameMachine(
     private val shuffler: Shuffler<LottoNumber>,
-) : LottoGameMachine {
+) {
 
     private val allLottoNumbers = LottoNumber.allLottoNumbers()
 
-    override fun create(): LottoGame {
+    fun create(): LottoGame {
         return LottoGame(
             lottoNumbers = LottoNumbers(
                 shuffler.shuffled(allLottoNumbers)

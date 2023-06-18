@@ -1,7 +1,7 @@
 package lotto.view
 
-import math.PositiveNumber
 import lotto.domain.lottonumber.LottoNumbers
+import math.PositiveNumber
 
 interface LottoInputView {
 

@@ -1,8 +1,8 @@
 package lotto.view
 
-import math.PositiveNumber
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
+import math.PositiveNumber
 
 class RealLottoInputView : LottoInputView {
 

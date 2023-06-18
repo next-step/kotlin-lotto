@@ -1,6 +1,5 @@
 package lotto.domain.analysis
 
-import math.PositiveNumber
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -10,6 +9,7 @@ import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.money.Money
 import lotto.domain.money.sum
 import lotto.domain.shop.LottoGame
+import math.PositiveNumber
 
 class RealLottoResultAnalystTest : BehaviorSpec({
 

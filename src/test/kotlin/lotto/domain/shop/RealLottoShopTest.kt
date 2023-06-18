@@ -1,28 +1,17 @@
 package lotto.domain.shop
 
-import math.PositiveNumber
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.lottonumber.LottoNumber
-import lotto.domain.lottonumber.LottoNumbers
-import lotto.domain.shop.machine.MockLottoGameMachine
+import math.PositiveNumber
+import shffule.RandomShuffler
 
 class RealLottoShopTest : BehaviorSpec({
 
     Given("로또를 구매하면") {
+        val lottoPurchaseAmount = PositiveNumber(5_000)
+        val lottoPurchaseResult = RealLottoShop(LottoGameMachine(RandomShuffler())).purchase(lottoPurchaseAmount)
         Then("구입 금액 만큼의 로또 게임 목록을 반환한다") {
-            val mockLottoGameMachine = MockLottoGameMachine {
-                LottoGame(
-                    lottoNumbers = LottoNumbers(
-                        LottoNumber.allLottoNumbers()
-                            .take(6)
-                            .sorted()
-                    ),
-                )
-            }
-            val lottoShop = RealLottoShop(mockLottoGameMachine)
-            val lottoGames = lottoShop.purchase(PositiveNumber(5_000)).lottoGames
-            lottoGames.size shouldBe 5
+            lottoPurchaseResult.lottoGames.size shouldBe 5
         }
     }
 })

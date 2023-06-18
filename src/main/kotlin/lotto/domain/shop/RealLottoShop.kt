@@ -1,7 +1,6 @@
 package lotto.domain.shop
 
 import math.PositiveNumber
-import lotto.domain.shop.machine.LottoGameMachine
 
 class RealLottoShop(
     private val lottoGameMachine: LottoGameMachine,

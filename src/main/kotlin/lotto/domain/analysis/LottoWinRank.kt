@@ -1,7 +1,7 @@
 package lotto.domain.analysis
 
-import math.PositiveNumber
 import lotto.domain.money.Money
+import math.PositiveNumber
 
 enum class LottoWinRank(
     val winAmount: Money,
