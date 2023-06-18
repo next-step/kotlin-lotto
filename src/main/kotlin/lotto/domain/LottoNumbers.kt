@@ -1,23 +1,11 @@
 package lotto.domain
 
-class LottoNumbers private constructor() {
+import lotto.domain.numberGenerator.NumberGenerator
 
-    val lottoNumbers: List<Int>
+class LottoNumbers(numberGenerator: NumberGenerator) {
 
-    init {
-        lottoNumbers = generateLottoNumbers()
-    }
-
-    private fun generateLottoNumbers(): List<Int> {
-        return (1..MAX_LOTTO_NUMBER).shuffled().take(NUMBER_OF_LOTTO).sorted()
-    }
-
-    companion object {
-        private const val MAX_LOTTO_NUMBER = 45
-        private const val NUMBER_OF_LOTTO = 6
-
-        fun create(): LottoNumbers {
-            return LottoNumbers()
-        }
+    val lottoNumbers: List<Int> = numberGenerator.generateNumbers()
+    fun countMatches(winningNumbers: List<Int>): Int {
+        return lottoNumbers.count { it in winningNumbers }
     }
 }
