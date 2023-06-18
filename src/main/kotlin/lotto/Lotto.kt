@@ -7,5 +7,6 @@ class Lotto {
         private const val FIRST_NUMBER = 1
         private const val LAST_NUMBER = 45
         private const val NUMBER_COUNT = 6
+        const val PRICE = 1000
     }
 }
