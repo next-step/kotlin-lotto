@@ -6,31 +6,24 @@ class Lottos(
     val size = values.size
     val cost = size * Lotto.PRICE
 
-    fun calculateResult(winningNumbers: WinningNumbers): LottosResult {
-        var numberOfFirst = DEFAULT_VALUE
-        var numberOfThird = DEFAULT_VALUE
-        var numberOfFourth = DEFAULT_VALUE
-        var numberOfFifth = DEFAULT_VALUE
-
-        values.forEach { lotto ->
-            val numberOfMatchedNumbers = lotto.calculateNumberOfMatchedNumbers(winningNumbers)
-            when (numberOfMatchedNumbers) {
-                LottoPrize.FIRST.matchCount -> numberOfFirst++
-                LottoPrize.THIRD.matchCount -> numberOfThird++
-                LottoPrize.FOURTH.matchCount -> numberOfFourth++
-                LottoPrize.FIFTH.matchCount -> numberOfFifth++
-            }
-        }
+    fun calculateResults(winningNumbers: WinningNumbers): LottosResult {
+        val winningResults = values
+            .map { lotto -> lotto.calculateResult(winningNumbers) }
+            .groupingBy { it }
+            .eachCount()
+            .fillMissingRanks()
 
         return LottosResult(
-            numberOfFirst = numberOfFirst,
-            numberOfThird = numberOfThird,
-            numberOfFourth = numberOfFourth,
-            numberOfFifth = numberOfFifth,
+            totalCost = cost,
+            winningResults = winningResults,
         )
     }
 
-    companion object {
-        private const val DEFAULT_VALUE = 0
+    private fun Map<Rank, Int>.fillMissingRanks(): Map<Rank, Int> {
+        return Rank.values()
+            .filter { it !in this.keys }
+            .fold(this) { acc, rank ->
+                acc + (rank to 0)
+            }
     }
 }

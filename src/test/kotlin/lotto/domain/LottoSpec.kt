@@ -72,15 +72,48 @@ class LottoSpec : DescribeSpec({
         }
     }
 
-    describe("매치되는 번호 개수 계산") {
-        context("로또와 번호 목록이 주어지면") {
+    describe("로또 결과 계산") {
+        context("로또 번호와 당첨 번호가 6개 일치하면") {
             val numbers = setOf(1, 2, 3, 4, 5, 6)
             val lotto = Lotto(setOf(1, 2, 3, 4, 5, 6))
 
-            it("매치되는 번호 개수를 계산한다.") {
-                val numberOfMatchedNumbers = lotto.calculateNumberOfMatchedNumbers(numbers)
+            it("1등이다.") {
+                val lottoPrize = lotto.calculateResult(numbers)
 
-                numberOfMatchedNumbers shouldBe 6
+                lottoPrize shouldBe Rank.FIRST
+            }
+        }
+
+        context("로또 번호와 당첨 번호가 5개 일치하면") {
+            val numbers = setOf(1, 2, 3, 4, 5, 6)
+            val lotto = Lotto(setOf(1, 2, 3, 4, 5, 7))
+
+            it("3등이다.") {
+                val lottoPrize = lotto.calculateResult(numbers)
+
+                lottoPrize shouldBe Rank.THIRD
+            }
+        }
+
+        context("로또 번호와 당첨 번호가 4개 일치하면") {
+            val numbers = setOf(1, 2, 3, 4, 5, 6)
+            val lotto = Lotto(setOf(1, 2, 3, 4, 7, 8))
+
+            it("4등이다.") {
+                val lottoPrize = lotto.calculateResult(numbers)
+
+                lottoPrize shouldBe Rank.FOURTH
+            }
+        }
+
+        context("로또 번호와 당첨 번호가 3개 일치하면") {
+            val numbers = setOf(1, 2, 3, 4, 5, 6)
+            val lotto = Lotto(setOf(1, 2, 3, 7, 8, 9))
+
+            it("5등이다.") {
+                val lottoPrize = lotto.calculateResult(numbers)
+
+                lottoPrize shouldBe Rank.FIFTH
             }
         }
     }

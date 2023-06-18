@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class LottosSpec : DescribeSpec({
-    describe("개수") {
+    describe("로또 개수 검증") {
         context("로또 목록이 주어지면") {
             it("로또 개수를 반환할 수 있다.") {
                 val lottos = Lottos(listOf(Lotto(), Lotto(), Lotto()))
@@ -14,7 +14,7 @@ class LottosSpec : DescribeSpec({
         }
     }
 
-    describe("비용") {
+    describe("로또 구매 비용 검증") {
         context("로또 목록이 주어지면") {
             it("로또 비용을 반환할 수 있다.") {
                 val lottos = Lottos(listOf(Lotto(), Lotto(), Lotto()))
@@ -24,53 +24,59 @@ class LottosSpec : DescribeSpec({
         }
     }
 
-    describe("로또 결과 계산") {
-        context("로또 목록과 당첨 번호가 주어졌을 때") {
-            val lottos = Lottos(
-                listOf(
-                    Lotto(setOf(1, 2, 3, 7, 8, 9)),
-                    Lotto(setOf(7, 8, 9, 10, 11, 12)),
-                ),
-            )
+    describe("(로또 결과) 각 등수의 당첨 횟수 계산 검증") {
+        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
 
-            it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 7, 8, 9))") {
-                val winningNumbers = setOf(1, 2, 3, 7, 8, 9)
-                val lottoResult = lottos.calculateResult(winningNumbers)
+        context("1등짜리 로또를 1개 갖고 있는 경우") {
+            val lottos = Lottos(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6))))
 
-                lottoResult.numberOfFirst shouldBe 1
-                lottoResult.numberOfThird shouldBe 0
-                lottoResult.numberOfFourth shouldBe 0
-                lottoResult.numberOfFifth shouldBe 1
+            val lottosResult = lottos.calculateResults(winningNumbers)
+            it("1등 당첨 횟수는 1이다.") {
+                lottosResult.winningResults[Rank.FIRST] shouldBe 1
             }
-
-            it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 7, 8, 31)") {
-                val winningNumbers = setOf(1, 2, 3, 7, 8, 31)
-                val lottoResult = lottos.calculateResult(winningNumbers)
-
-                lottoResult.numberOfFirst shouldBe 0
-                lottoResult.numberOfThird shouldBe 1
-                lottoResult.numberOfFourth shouldBe 0
-                lottoResult.numberOfFifth shouldBe 0
+            it("3등 당첨 횟수는 0이다.") {
+                lottosResult.winningResults[Rank.THIRD] shouldBe 0
             }
-
-            it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 7, 30, 31)") {
-                val winningNumbers = setOf(1, 2, 3, 7, 30, 31)
-                val lottoResult = lottos.calculateResult(winningNumbers)
-
-                lottoResult.numberOfFirst shouldBe 0
-                lottoResult.numberOfThird shouldBe 0
-                lottoResult.numberOfFourth shouldBe 1
-                lottoResult.numberOfFifth shouldBe 0
+            it("4등 당첨 횟수는 0이다.") {
+                lottosResult.winningResults[Rank.FOURTH] shouldBe 0
             }
+            it("5등 당첨 횟수는 0이다.") {
+                lottosResult.winningResults[Rank.FIFTH] shouldBe 0
+            }
+        }
 
-            it("로또 결과를 계산할 수 있다. 당첨 번호 (1, 2, 3, 4, 5, 6)") {
-                val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
-                val lottoResult = lottos.calculateResult(winningNumbers)
+        context("1등짜리 로또를 2개 갖고 있는 경우") {
+            val lottos = Lottos(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 6))))
 
-                lottoResult.numberOfFirst shouldBe 0
-                lottoResult.numberOfThird shouldBe 0
-                lottoResult.numberOfFourth shouldBe 0
-                lottoResult.numberOfFifth shouldBe 1
+            it("1등 당첨 횟수는 2이다.") {
+                val lottosResult = lottos.calculateResults(winningNumbers)
+
+                lottosResult.winningResults[Rank.FIRST] shouldBe 2
+            }
+        }
+
+        context("1등짜리 로또를 1개, 3등짜리 로또를 1개 갖고 있는 경우") {
+            val lottos = Lottos(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 7))))
+
+            it("1등 당첨 횟수는 1이다.") {
+                val lottosResult = lottos.calculateResults(winningNumbers)
+
+                lottosResult.winningResults[Rank.FIRST] shouldBe 1
+            }
+            it("3등 당첨 횟수는 1이다.") {
+                val lottosResult = lottos.calculateResults(winningNumbers)
+
+                lottosResult.winningResults[Rank.THIRD] shouldBe 1
+            }
+            it("4등 당첨 횟수는 0이다.") {
+                val lottosResult = lottos.calculateResults(winningNumbers)
+
+                lottosResult.winningResults[Rank.FOURTH] shouldBe 0
+            }
+            it("5등 당첨 횟수는 0이다.") {
+                val lottosResult = lottos.calculateResults(winningNumbers)
+
+                lottosResult.winningResults[Rank.FIFTH] shouldBe 0
             }
         }
     }

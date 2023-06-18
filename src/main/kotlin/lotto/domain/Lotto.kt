@@ -4,12 +4,20 @@ class Lotto(
     val numbers: Set<Int> = LOTTO_NUMBER_RANGE.shuffled().take(LOTTO_NUMBER_COUNT).sorted().toSet(),
 ) {
     init {
-        require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복되지 않는 숫자 ${LOTTO_NUMBER_COUNT}개로 구성되어야 합니다." }
-        require(!hasOutOfRangeNumbers(numbers)) { "로또 번호는 ${LOTTO_NUMBER_RANGE}이어야 합니다." }
+        validateLengthOfNumbers(numbers)
+        validateRangeOfNumbers(numbers)
     }
 
-    fun calculateNumberOfMatchedNumbers(numbers: Set<Int>): Int {
-        return numbers.intersect(this.numbers).size
+    fun calculateResult(numbers: Set<Int>): Rank {
+        return Rank.of(numbers.intersect(this.numbers).size)
+    }
+
+    private fun validateLengthOfNumbers(numbers: Set<Int>) {
+        require(numbers.size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복되지 않는 숫자 ${LOTTO_NUMBER_COUNT}개로 구성되어야 합니다." }
+    }
+
+    private fun validateRangeOfNumbers(numbers: Set<Int>) {
+        require(!hasOutOfRangeNumbers(numbers)) { "로또 번호는 ${LOTTO_NUMBER_RANGE}이어야 합니다." }
     }
 
     private fun hasOutOfRangeNumbers(numbers: Set<Int>): Boolean {
