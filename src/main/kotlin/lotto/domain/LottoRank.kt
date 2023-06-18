@@ -16,5 +16,9 @@ enum class LottoRank(
         fun of(matchCount: Int): LottoRank? {
             return MAP_BY_MATCH_COUNT[matchCount]
         }
+
+        fun createMapWithLottoRankAndZero(): MutableMap<LottoRank, Int> {
+            return values().associateWith { 0 }.toMutableMap()
+        }
     }
 }
