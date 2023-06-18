@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
@@ -18,6 +19,16 @@ class LottoShopSpec : DescribeSpec({
             val lottos = LottoShop.sellByMoney(money)
 
             lottos.size shouldBe numberOfLottos
+        }
+
+        context("로또 비용이 음수이면") {
+            it("예외가 발생한다.") {
+                val money = -1000
+
+                shouldThrow<IllegalArgumentException> {
+                    LottoShop.sellByMoney(money)
+                }
+            }
         }
     }
 })
