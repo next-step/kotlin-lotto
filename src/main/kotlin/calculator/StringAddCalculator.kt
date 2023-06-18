@@ -6,21 +6,19 @@ class StringAddCalculator {
             return 0
         }
 
-        val extractResult = extractCustomDelimiter(text)
+        val (customDelimiter, extractResult) = extractCustomDelimiter(text)
         val tokens = splitter(extractResult, delimiters)
         val convertedTokens = convertTokensToNumber(tokens)
         checkNegativeNumbers(convertedTokens)
         return convertTokensToNumber(tokens).sum()
     }
 
-    fun extractCustomDelimiter(text: String): String {
-        val result = Regex("//(.)\n(.*)").find(text)
-        var extractResult: String = text
-        result?.let {
-            delimiters.add(it.groupValues[1])
-            extractResult = it.groupValues[2]
-        }
-        return extractResult
+    fun extractCustomDelimiter(text: String): Pair<String, String> {
+        val regex = Regex("//(.)\n(.*)")
+        val matchResult = regex.find(text)
+        val extractedDelimiter = matchResult?.groupValues?.getOrNull(1) ?: ""
+        val extractedText = matchResult?.groupValues?.getOrNull(2) ?: text
+        return extractedDelimiter to extractedText
     }
 
     fun splitter(text: String, delimiters: List<String>): List<String> {
