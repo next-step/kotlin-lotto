@@ -51,4 +51,43 @@ class LottoTest {
             assertThat(it[0].number <= it[1].number).isEqualTo(true)
         }
     }
+
+    @Test
+    fun `같은 로또를 비교할 수 있다`() {
+        // given
+        val sameLotto1 = (1..6).map { LottoNumber(it) }.toList().let { Lotto(it) }
+        val sameLotto2 = (1..6).map { LottoNumber(it) }.toList().let { Lotto(it) }
+
+        // when
+        val isSame = sameLotto1 == sameLotto2
+
+        // then
+        assertThat(isSame).isEqualTo(true)
+    }
+
+    @Test
+    fun `서로 같지 않은 로또를 비교할 수 있다`() {
+        // given
+        val oneToSixLotto = (1..6).map { LottoNumber(it) }.toList().let { Lotto(it) }
+        val twoToSevenLotto = (2..7).map { LottoNumber(it) }.toList().let { Lotto(it) }
+
+        // when
+        val isSame = oneToSixLotto == twoToSevenLotto
+
+        // then
+        assertThat(isSame).isEqualTo(false)
+    }
+
+    @Test
+    fun `다른 로또와 겹치는 숫자 개수를 알 수 있다`() {
+        // given
+        val oneToSixLotto = (1..6).map { LottoNumber(it) }.toList().let { Lotto(it) }
+        val twoToSevenLotto = (2..7).map { LottoNumber(it) }.toList().let { Lotto(it) }
+
+        // when
+        val shouldBeFive = oneToSixLotto.getSameNumberCount(twoToSevenLotto)
+
+        // then
+        assertThat(shouldBeFive).isEqualTo(5)
+    }
 }

@@ -12,6 +12,10 @@ class LottoRound(private val lottoGenerator: LottoGenerator) {
 
     fun getLottos(): List<Lotto> = lottos.toList()
 
+    fun lotteryDraw(winningLotto: Lotto): LottoRoundStatistics {
+        return LottoRoundStatistics(lottos, winningLotto)
+    }
+
     private fun newLotto() = lottoGenerator.generate()
 }
 

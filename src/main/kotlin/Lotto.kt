@@ -9,8 +9,25 @@ class Lotto(lottoNumbers: List<LottoNumber>) {
         this.lottoNumbers = lottoNumbers.sortedBy { it.number }
     }
 
+    fun getSameNumberCount(lotto: Lotto): Int {
+        return (LOTTO_SIZE * 2) - (lottoNumbers + lotto.lottoNumbers).toSet().size
+    }
+
     private fun hasNoDuplicatedNumbers(lottoNumbers: List<LottoNumber>) {
         require(lottoNumbers.toSet().size == LOTTO_SIZE)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Lotto) return false
+
+        if (lottoNumbers != other.lottoNumbers) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return lottoNumbers.hashCode()
     }
 
     companion object {
