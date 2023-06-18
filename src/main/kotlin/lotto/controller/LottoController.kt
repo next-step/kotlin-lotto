@@ -9,7 +9,7 @@ fun main() {
     val purchasedLottos = LottoVendingMachine()
         .purchase(InputView.getPurchaseAmount())
     ResultView.printLotto(purchasedLottos)
-    val lottoNumbersOfLastWeek = InputView.getLottoNumbersOfLastWeek()
-    val lottoReturn = LottoReturnCalculator(purchasedLottos).calculate(lottoNumbersOfLastWeek)
+    val lottoNumbersOfLastWeek = InputView.getLottoWinningNumbers()
+    val lottoReturn = LottoReturnCalculator(purchasedLottos).calculate(lottoNumbersOfLastWeek.numbers)
     ResultView.printReturn(lottoReturn)
 }
