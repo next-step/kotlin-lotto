@@ -1,4 +1,6 @@
-import Money.Companion.toMoney
+package lotto.domain
+
+import lotto.domain.Money.Companion.toMoney
 
 data class LottoResult(
     val lotto: Lotto,

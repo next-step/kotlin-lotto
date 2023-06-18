@@ -1,4 +1,6 @@
-import Money.Companion.toMoney
+package lotto.domain
+
+import lotto.domain.Money.Companion.toMoney
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

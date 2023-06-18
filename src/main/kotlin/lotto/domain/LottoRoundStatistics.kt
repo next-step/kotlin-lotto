@@ -1,5 +1,7 @@
-import Money.Companion.NO_MONEY
-import Money.Companion.plus
+package lotto.domain
+
+import lotto.domain.Money.Companion.NO_MONEY
+import lotto.domain.Money.Companion.plus
 
 class LottoRoundStatistics(
     lottos: List<Lotto>,

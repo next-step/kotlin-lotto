@@ -1,4 +1,6 @@
-import Money.Companion.toMoney
+package lotto.domain
+
+import lotto.domain.Money.Companion.toMoney
 
 class LottoServiceRound {
     private val lottoRound = LottoRound(LottoRoundElements())

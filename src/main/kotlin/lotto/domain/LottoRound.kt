@@ -1,4 +1,4 @@
-
+package lotto.domain
 class LottoRound(private val lottoGenerator: LottoGenerator) {
     constructor(lottoRoundElements: LottoRoundElements) : this(lottoRoundElements.lottoGenerator)
 

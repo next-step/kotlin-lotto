@@ -1,6 +1,8 @@
-import Lotto.Companion.LOTTO_SIZE
-import LottoNumber.Companion.MAX_LOTTO_NUMBER
-import LottoNumber.Companion.MIN_LOTTO_NUMBER
+package lotto.domain
+
+import lotto.domain.Lotto.Companion.LOTTO_SIZE
+import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
+import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 
 interface LottoGenerator {
     fun generate(): Lotto
