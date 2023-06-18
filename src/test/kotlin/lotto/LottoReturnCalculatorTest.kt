@@ -1,6 +1,11 @@
 package lotto
 
-import lotto.domain.*
+import lotto.domain.LottoNumbers
+import lotto.domain.LottoReturn
+import lotto.domain.LottoReturnCalculator
+import lotto.domain.LottoVendingMachine
+import lotto.domain.LottoWinningNumbers
+import lotto.domain.Rank
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -186,7 +191,7 @@ class LottoReturnCalculatorTest {
                         LottoNumbers(setOf(11, 2, 3, 4, 5, 6)),
                     ),
                     LottoWinningNumbers(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 7),
-                    (LottoReturn.FIRST_RETURN + LottoReturn.THIRD_RETURN) / (LottoVendingMachine.LOTTO_PRICE * 2.toFloat())
+                    (Rank.FIRST.winningMoney + Rank.THIRD.winningMoney) / (LottoVendingMachine.LOTTO_PRICE * 2.toFloat())
                 ),
                 Arguments.of(
                     listOf(
@@ -194,14 +199,14 @@ class LottoReturnCalculatorTest {
                         LottoNumbers(setOf(11, 2, 3, 4, 5, 6)),
                     ),
                     LottoWinningNumbers(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 7),
-                    (LottoReturn.SECOND_RETURN + LottoReturn.THIRD_RETURN) / (LottoVendingMachine.LOTTO_PRICE * 2.toFloat())
+                    (Rank.SECOND.winningMoney + Rank.THIRD.winningMoney) / (LottoVendingMachine.LOTTO_PRICE * 2.toFloat())
                 ),
                 Arguments.of(
                     listOf(
                         LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     ),
                     LottoWinningNumbers(LottoNumbers(setOf(11, 12, 3, 4, 5, 6)), 7),
-                    LottoReturn.FOURTH_RETURN / LottoVendingMachine.LOTTO_PRICE.toFloat()
+                    Rank.FOURTH.winningMoney / LottoVendingMachine.LOTTO_PRICE.toFloat()
                 )
             )
         }

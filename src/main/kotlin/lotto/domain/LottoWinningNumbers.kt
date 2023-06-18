@@ -17,7 +17,9 @@ data class LottoWinningNumbers(
     }
 
     fun isSecondPlace(otherNumbers: LottoNumbers): Boolean {
-        if (numberOfOverlaps(otherNumbers) != LottoNumbers.LENGTH - 1) return false
+        if (numberOfOverlaps(otherNumbers) != Rank.SECOND
+                .countOfMatch
+        ) return false
 
         return otherNumbers.numbers
             .all {

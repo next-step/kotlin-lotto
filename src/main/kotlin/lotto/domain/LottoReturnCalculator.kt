@@ -16,11 +16,11 @@ class LottoReturnCalculator(private val lottoList: List<LottoNumbers>) {
         }.size
 
         return LottoReturn(
-            firstCount = getOrDefault(LottoNumbers.LENGTH, 0),
+            firstCount = getOrDefault(Rank.FIRST.countOfMatch, 0),
             secondCount = secondCount,
-            thirdCount = getOrDefault(LottoNumbers.LENGTH - 1, 0) - secondCount,
-            fourthCount = getOrDefault(LottoNumbers.LENGTH - 2, 0),
-            fifthCount = getOrDefault(LottoNumbers.LENGTH - 3, 0),
+            thirdCount = getOrDefault(Rank.THIRD.countOfMatch, 0) - secondCount,
+            fourthCount = getOrDefault(Rank.FOURTH.countOfMatch, 0),
+            fifthCount = getOrDefault(Rank.FIFTH.countOfMatch, 0),
             paidAmount = paidAmount
         )
     }
