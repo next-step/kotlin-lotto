@@ -8,7 +8,7 @@ class Lotto {
     }
 
     private fun getShuffleNums(): List<Int> {
-        return (LOTTO_START_NUM..LOTTO_LAST_NUM).toList().shuffled().take(LOTTO_NUM_COUNT)
+        return (LOTTO_START_NUM..LOTTO_LAST_NUM).toList().shuffled().take(LOTTO_NUM_COUNT).sorted()
     }
 
     companion object {
