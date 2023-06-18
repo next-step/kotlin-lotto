@@ -3,7 +3,9 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldNotThrowAnyUnit
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
+import lotto.domain.lottery.Lottery
 
 class LotteryTest : StringSpec({
     "로또 길이는 6 자리이다" {
@@ -28,5 +30,14 @@ class LotteryTest : StringSpec({
         shouldThrow<IllegalArgumentException> {
             Lottery(setOf(1, 46, 44, 2, 43, 3))
         }.shouldHaveMessage("로또의 숫자는 1~45 사이의 정수가 가능합니다.")
+    }
+
+    "로또 intersect 테스트" {
+        val lottery1 = Lottery(setOf(1, 2, 3, 4, 5, 6))
+        val lottery2 = Lottery(setOf(1, 2, 3, 4, 5, 7))
+        val expect = setOf(1, 2, 3, 4, 5)
+
+        val result = lottery1 intersect lottery2
+        result shouldBe expect
     }
 })

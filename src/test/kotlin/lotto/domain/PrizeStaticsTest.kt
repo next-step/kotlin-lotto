@@ -11,6 +11,7 @@ class PrizeStaticsTest : StringSpec({
                 WinnerPrize.SECOND_PRIZE to 1,
                 WinnerPrize.THIRD_PRIZE to 2,
                 WinnerPrize.FOURTH_PRIZE to 2,
+                WinnerPrize.FIFTH_PRIZE to 1,
                 WinnerPrize.NOTHING to 1
             )
         )
@@ -19,6 +20,7 @@ class PrizeStaticsTest : StringSpec({
         prizeStatics[WinnerPrize.SECOND_PRIZE] shouldBe 1
         prizeStatics[WinnerPrize.THIRD_PRIZE] shouldBe 2
         prizeStatics[WinnerPrize.FOURTH_PRIZE] shouldBe 2
+        prizeStatics[WinnerPrize.FIFTH_PRIZE] shouldBe 1
         prizeStatics[WinnerPrize.NOTHING] shouldBe 1
     }
 
@@ -30,11 +32,12 @@ class PrizeStaticsTest : StringSpec({
                 WinnerPrize.SECOND_PRIZE to 1,
                 WinnerPrize.THIRD_PRIZE to 2,
                 WinnerPrize.FOURTH_PRIZE to 2,
+                WinnerPrize.FIFTH_PRIZE to 1,
                 WinnerPrize.NOTHING to 1
             )
         )
 
         // when
-        prizeStatics.getPrizeMoneyTotal() shouldBe Money(2_001_610_000)
+        prizeStatics.getPrizeMoneyTotal() shouldBe Money(2_033_105_000L)
     }
 })

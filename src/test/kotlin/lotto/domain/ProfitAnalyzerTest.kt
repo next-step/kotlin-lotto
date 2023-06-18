@@ -2,19 +2,23 @@ package lotto.domain
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.lottery.Lottery
+import lotto.domain.lottery.LotteryTicket
+import lotto.domain.lottery.WinnerLottery
 import java.math.BigDecimal
 
 class ProfitAnalyzerTest : StringSpec({
     "당첨 통계를 구한다(1등 1개, 2등 1개, 3등 2개, 4등 2개)" {
         // given
-        val winnerLottery = Lottery(setOf(4, 5, 6, 7, 8, 9))
+        val winnerLottery = WinnerLottery(setOf(4, 5, 6, 7, 8, 9), bonus = 1)
 
         val lotteryTicket = LotteryTicket(
             listOf(
-                Lottery(setOf(1, 2, 3, 4, 5, 6)), // 4등
-                Lottery(setOf(1, 2, 3, 4, 5, 6)), // 4등
-                Lottery(setOf(1, 2, 4, 5, 6, 7)), // 3등
-                Lottery(setOf(1, 2, 4, 5, 6, 7)), // 3등
+                Lottery(setOf(1, 2, 3, 4, 5, 6)), // 5등
+                Lottery(setOf(1, 2, 3, 4, 5, 6)), // 5등
+                Lottery(setOf(1, 2, 4, 5, 6, 7)), // 4등
+                Lottery(setOf(1, 2, 4, 5, 6, 7)), // 4등
+                Lottery(setOf(2, 4, 5, 6, 7, 8)), // 3등
                 Lottery(setOf(1, 4, 5, 6, 7, 8)), // 2등
                 Lottery(setOf(4, 5, 6, 7, 8, 9)), // 1등
                 Lottery(setOf(10, 11, 12, 13, 14, 15)), // 해당 없음
@@ -24,8 +28,9 @@ class ProfitAnalyzerTest : StringSpec({
             mapOf(
                 WinnerPrize.FIRST_PRIZE to 1,
                 WinnerPrize.SECOND_PRIZE to 1,
-                WinnerPrize.THIRD_PRIZE to 2,
+                WinnerPrize.THIRD_PRIZE to 1,
                 WinnerPrize.FOURTH_PRIZE to 2,
+                WinnerPrize.FIFTH_PRIZE to 2,
                 WinnerPrize.NOTHING to 1
             )
         )
@@ -38,7 +43,7 @@ class ProfitAnalyzerTest : StringSpec({
     "수익률을 구한다" {
         val prizeStatics = PrizeStatics(
             mapOf(
-                WinnerPrize.FOURTH_PRIZE to 3,
+                WinnerPrize.FIFTH_PRIZE to 3,
                 WinnerPrize.NOTHING to 1
             )
         )
