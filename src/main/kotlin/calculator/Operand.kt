@@ -1,10 +1,10 @@
 package calculator
 
-class StringNumber(
-    val number: String
+class Operand(
+    val operand: String
 ) {
     init {
-        require(number.toInt() >= MINIMUM) {
+        if (operand.toInt() < MINIMUM) {
             throw RuntimeException("$MINIMUM 보다 작을 수 없습니다.")
         }
     }
