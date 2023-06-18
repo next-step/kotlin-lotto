@@ -1,6 +1,9 @@
 package lotto.domain
 
-class LottoVendingMachine(private val billSlot: BillSlot) {
+class LottoVendingMachine {
+
+    private val billSlot: BillSlot = BillSlot(LOTTO_PRICE)
+
     fun purchase(money: Int): List<LottoNumbers> {
         return List(billSlot.insertMoney(money)) {
             LottoNumbers.generate()
