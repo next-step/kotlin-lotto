@@ -65,7 +65,7 @@
 
 - [x] 구매 금액을 입력한다 -> InputView
 - [x] 로또를 구매할 수 있는 장수를 계산한다. -> lottery shop
-- [ ] 구매한 로또장수를 출력한다. -> ResultView
+- [x] 구매한 로또장수를 출력한다. -> ResultView
 - [ ] 자동 로또를 장수에 맞게 생성한다 -> lottery shop, Lotto
 - [ ] 자동 생성된 로또의 번호를 출력한다. -> ResultView
 - [ ] 지난주 당첨 번호를 입력한다. -> InputView
