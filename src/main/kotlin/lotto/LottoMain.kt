@@ -6,7 +6,9 @@ import lotto.view.ResultView
 fun main() {
     val totalPrice = InputView.getTotalPrice()
     val lottoSeller = LottoSeller(LottoFactory)
-    ResultView.printPurchasedLottos(lottoSeller.sell(totalPrice))
+    val lottos = lottoSeller.sell(totalPrice)
+    ResultView.printPurchasedLottos(lottos)
     val winNumbers = InputView.getPrevWeekWinningNumbers()
-    print(winNumbers)
+    val drawResult = LottoDrawingMachine.draw(winNumbers, lottos)
+    ResultView.printDrawResult(drawResult)
 }

@@ -5,7 +5,7 @@ class LottoSeller(
 ) {
     fun sell(totalPurchasePrice: Int): Lottos {
         require(totalPurchasePrice > 0) { "총 구매금액은 0 보다 커야합니다" }
-        return Lottos(List(totalPurchasePrice / LOTTO_PRICE) { lottoFactory.create() })
+        return Lottos(List(totalPurchasePrice / LOTTO_PRICE) { lottoFactory.create(1000) })
     }
 
     companion object {
