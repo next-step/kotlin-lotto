@@ -1,4 +1,4 @@
-package domain
+package util
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -8,8 +8,7 @@ class CalculatorTest {
 
     @Test
     fun `숫자 열이 전달되면 합을 리턴한다`() {
-        val calculator = Calculator()
         val input = listOf(1, 2, 3, 4, 5)
-        calculator.sumList(input) shouldBe 15
+        Calculator.sumList(input) shouldBe 15
     }
 }
