@@ -29,4 +29,8 @@ object SixFortyFiveLottoUtils {
     fun getTotalPurchasePrice(lottoList: List<SixFortyFiveLotto>): Int{
         return lottoList.size * SixFortyFiveLotto.LOTTO_PRICE
     }
+
+    fun getPurchaseCountByPrice(price: Int): Int {
+        return price / SixFortyFiveLotto.LOTTO_PRICE
+    }
 }

@@ -18,7 +18,7 @@ fun main() {
 
 fun startSixFortyFiveLotto() {
     val purchasePrice = LottoPurchasePriceInputView().value
-    val purchaseCount = purchasePrice / SixFortyFiveLotto.LOTTO_PRICE
+    val purchaseCount = SixFortyFiveLottoUtils.getPurchaseCountByPrice(purchasePrice)
     LottoPurchaseOutputView(purchaseCount).renderMessage()
 
     val lottoStore = SixFortyFiveLottoStore()
@@ -33,7 +33,7 @@ fun startSixFortyFiveLotto() {
 
 fun startSixFortyFiveLottoWithBonus() {
     val purchasePrice = LottoPurchasePriceInputView().value
-    val purchaseCount = purchasePrice / SixFortyFiveLotto.LOTTO_PRICE
+    val purchaseCount = SixFortyFiveLottoUtils.getPurchaseCountByPrice(purchasePrice)
     LottoPurchaseOutputView(purchaseCount).renderMessage()
 
     val lottoStore = SixFortyFiveLottoStore()
