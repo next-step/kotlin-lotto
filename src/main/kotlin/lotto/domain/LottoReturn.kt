@@ -7,11 +7,10 @@ data class LottoReturn(
     val fourthCount: Int,
     private val paidAmount: Int,
 ) {
-    private val returnAmount: Long
-        get() = firstCount * FIRST_RETURN + secondCount * SECOND_RETURN + thirdCount * THIRD_RETURN + fourthCount * FOURTH_RETURN
+    private val returnAmount: Long =
+        firstCount * FIRST_RETURN + secondCount * SECOND_RETURN + thirdCount * THIRD_RETURN + fourthCount * FOURTH_RETURN
 
-    val returnRatio: Float
-        get() = returnAmount / paidAmount.toFloat()
+    val returnRatio: Float = returnAmount / paidAmount.toFloat()
 
     companion object {
         const val FIRST_RETURN: Long = 2000000000
