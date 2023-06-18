@@ -1,4 +1,4 @@
-package calculator
+package common
 
 @JvmInline
 value class PositiveNumber(val value: Int) {

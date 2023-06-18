@@ -1,5 +1,7 @@
 package calculator
 
+import common.PositiveNumber
+
 object StringParser {
 
     private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")

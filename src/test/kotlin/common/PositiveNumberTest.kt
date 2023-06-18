@@ -1,4 +1,4 @@
-package calculator
+package common
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName

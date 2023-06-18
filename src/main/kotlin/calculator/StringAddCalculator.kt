@@ -1,5 +1,7 @@
 package calculator
 
+import common.sum
+
 class StringAddCalculator {
 
     fun add(text: String?): Int {

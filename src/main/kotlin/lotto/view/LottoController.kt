@@ -1,5 +1,6 @@
 package lotto.view
 
+import common.PositiveNumber
 import lotto.domain.shop.LottoShop
 
 class LottoController(
@@ -8,7 +9,7 @@ class LottoController(
 
     fun start() {
         println("구입금액을 입력해 주세요.")
-        val lottoPurchaseAmount = readln().toInt()
+        val lottoPurchaseAmount = PositiveNumber(readln().toInt())
 
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchaseAmount)
         println("${lottoPurchaseResult.lottoGames.size}개를 구매했습니다.")
