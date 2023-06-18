@@ -1,16 +1,18 @@
 package lotto
 
+import lotto.vo.Money
+
 object LottoShop {
-    private const val LOTTO_PRICE = 1000
-    
-    fun sellLottos(cash: Int): List<Lotto> {
-        val amountOfLotto = cash / LOTTO_PRICE
+    val LOTTO_PRICE = Money(1000)
+
+    fun sellLottos(cash: Money): Lottos {
+        val amountOfLotto = cash.amount / LOTTO_PRICE.amount
         val generatedLottos = mutableListOf<Lotto>()
         repeat(amountOfLotto) {
             generatedLottos.add(generateLotto())
         }
 
-        return generatedLottos
+        return Lottos(generatedLottos)
     }
 
     private fun generateLotto(): Lotto {

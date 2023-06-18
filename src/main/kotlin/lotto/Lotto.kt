@@ -19,7 +19,11 @@ class Lotto(
     }
 
     companion object {
-        fun from(numbers: Collection<Int>): Lotto {
+        fun from(vararg numbers: Int): Lotto {
+            return Lotto(numbers.toSet())
+        }
+
+        fun from(numbers: List<Int>): Lotto {
             return Lotto(numbers.toSet())
         }
     }
