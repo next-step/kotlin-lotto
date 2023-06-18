@@ -8,10 +8,7 @@ data class LottoReturn(
     private val paidAmount: Int,
 ) {
     private val returnAmount: Long
-        get() = firstCount * FIRST_RETURN +
-                secondCount * SECOND_RETURN +
-                thirdCount * THIRD_RETURN +
-                fourthCount * FOURTH_RETURN
+        get() = firstCount * FIRST_RETURN + secondCount * SECOND_RETURN + thirdCount * THIRD_RETURN + fourthCount * FOURTH_RETURN
 
     val returnRatio: Float
         get() = returnAmount / paidAmount.toFloat()

@@ -39,7 +39,6 @@ class InputParser(inputString: String) {
         return number == null || number < 0
     }
 
-
     companion object {
         private const val SEPARATOR_START = "//"
         private const val SEPARATOR_END = "\\n"

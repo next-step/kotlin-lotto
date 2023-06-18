@@ -21,6 +21,5 @@ class LottoReturnCalculator(private val lottoList: List<LottoNumbers>) {
     }
 
     private val paidAmount: Int
-        get() = lottoList.size *
-                LottoVendingMachine.LOTTO_PRICE
+        get() = lottoList.size * LottoVendingMachine.LOTTO_PRICE
 }

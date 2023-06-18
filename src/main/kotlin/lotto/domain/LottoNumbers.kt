@@ -5,7 +5,7 @@ data class LottoNumbers(
 ) {
     init {
         require(numbers.size == LENGTH) { "로또 번호는 $LENGTH 개의 숫자로 이루어져 있어야 합니다." }
-        require(numbers.all(::inValidRange)) { "로또 번호는 ${MINIMUM}~${MAXIMUM} 사이의 수여야 합니다." }
+        require(numbers.all(::inValidRange)) { "로또 번호는 $MINIMUM~$MAXIMUM 사이의 수여야 합니다." }
         require(hasUniqueNumbers()) { "로또 번호에 중복된 수가 있으면 안됩니다." }
     }
 
