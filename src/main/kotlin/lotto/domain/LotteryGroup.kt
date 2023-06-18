@@ -1,3 +1,3 @@
 package lotto.domain
 
-class LotteryGroup(val lotteries: List<Lottery> = listOf())
+open class LotteryGroup(val lotteries: List<Lottery> = listOf())

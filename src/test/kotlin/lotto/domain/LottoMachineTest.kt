@@ -26,7 +26,7 @@ class LottoMachineTest : AnnotationSpec() {
         }
         val lotteryGroup = LottoMachine.buyLottery(3000, LotteryGroup(lotteries))
         if (lotteryGroup != null) {
-            lotteryGroup.lotteries shouldHaveSize 0
+            lotteryGroup.lotteries shouldHaveSize 3
         }
     }
 
@@ -38,7 +38,7 @@ class LottoMachineTest : AnnotationSpec() {
         }
         val lotteryGroup = LottoMachine.buyLottery(3000, LotteryGroup(lotteries))
         if (lotteryGroup != null) {
-            lotteryGroup.lotteries shouldHaveSize 1
+            lotteryGroup.lotteries shouldHaveSize 3
         }
     }
 

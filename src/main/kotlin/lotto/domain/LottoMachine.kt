@@ -6,29 +6,23 @@ object LottoMachine {
     const val MAXIMIUM_LOTTO_NUMBER = 45
     const val LOTTERY_PRICE = 1000
 
-    private lateinit var mLotteriesByMachine: LotteryGroup
-    private lateinit var mLotteriesByHand: LotteryGroup
+    private lateinit var mMyLotteryGroup: MyLotteryGroup
     private lateinit var mWinLotto: Lottery
     private lateinit var mRanking: Ranking
     private lateinit var mBonusNumber: LottoNumber
-    private var buyAmount: Int = 0
-
-    var rateOfReturn = 0.0
+    lateinit var rateOfReturn: RateOfReturn
         private set
-        get() = mRanking.totalWinAmount.toDouble() / buyAmount.toDouble()
 
-    fun buyLottery(amount: Int, lotteriesByHand: LotteryGroup): LotteryGroup? {
+    fun buyLottery(amount: Int, lotteriesByHand: LotteryGroup): MyLotteryGroup? {
 
         runCatching {
-            buyAmount = amount
-            mLotteriesByHand = lotteriesByHand
-            val handCount = lotteriesByHand.lotteries.size
-            val buyCount = amount / LOTTERY_PRICE
-            check(buyCount >= handCount) {
-                "로또를 살 수 있는 금액보다 수동으로 많은 수를 구매할 수 없습니다. 게임을 다시 실행하세요."
-            }
-            mLotteriesByMachine = LottoBuyHelper.buyLotto(buyAmount - handCount * LOTTERY_PRICE)
-            return mLotteriesByMachine
+            val lotteryGroupByMachine = LottoBuyHelper.buyLottoByMachine(amount, lotteriesByHand)
+            mMyLotteryGroup = MyLotteryGroup(
+                lotteriesByHand.lotteries + lotteryGroupByMachine.lotteries,
+                lotteriesByHand.lotteries.size,
+                lotteryGroupByMachine.lotteries.size
+            )
+            return mMyLotteryGroup
         }.getOrElse {
             println(it.message)
             return null
@@ -36,7 +30,8 @@ object LottoMachine {
     }
 
     fun generateRanking(): Ranking {
-        mRanking = Ranking(mLotteriesByHand, mLotteriesByMachine, mWinLotto, mBonusNumber)
+        mRanking = Ranking(mMyLotteryGroup, mWinLotto, mBonusNumber)
+        rateOfReturn = RateOfReturn(mRanking, mMyLotteryGroup.lotteries.size * LOTTERY_PRICE)
         return mRanking
     }
 

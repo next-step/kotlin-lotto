@@ -1,6 +1,5 @@
 package lotto
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumber
@@ -10,9 +9,7 @@ class InputParserTest : AnnotationSpec() {
     @Test
     fun `구매금액은 숫자로 구성되어야 한다`() {
         InputParser.parseInputStringToInt("14000") shouldBe 14000
-        shouldThrow<IllegalArgumentException> {
-            InputParser.parseInputStringToInt("abc")
-        }
+        InputParser.parseInputStringToInt("abc") shouldBe null
     }
 
     @Test

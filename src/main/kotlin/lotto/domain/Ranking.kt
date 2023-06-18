@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Ranking(lotteryByHand: LotteryGroup, lotteryByMachine: LotteryGroup, private val winNumber: Lottery, private val bonusNumber: LottoNumber) {
+class Ranking(lotteryGroup: LotteryGroup, private val winNumber: Lottery, private val bonusNumber: LottoNumber) {
 
     var rankingResult = mutableMapOf<Rank, Int>()
         private set
@@ -16,8 +16,7 @@ class Ranking(lotteryByHand: LotteryGroup, lotteryByMachine: LotteryGroup, priva
             rankingResult[it] = 0
         }
 
-        checkRanking(lotteryByHand)
-        checkRanking(lotteryByMachine)
+        checkRanking(lotteryGroup)
     }
 
     private fun checkRanking(lotteries: LotteryGroup) {
