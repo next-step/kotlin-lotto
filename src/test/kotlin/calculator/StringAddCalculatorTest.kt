@@ -90,7 +90,7 @@ class StringAddCalculatorTest {
     fun checkNegativeNumbers() {
         val numbers = listOf(1,2,-3)
         assertThrows<RuntimeException> {
-            calculator.checkNegativeNumbers(numbers)
+            PositiveNumber.checkPositiveNumbers(numbers)
         }
     }
 }
