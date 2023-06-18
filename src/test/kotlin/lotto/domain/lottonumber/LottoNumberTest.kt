@@ -1,5 +1,6 @@
 package lotto.domain.lottonumber
 
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -19,10 +20,9 @@ class LottoNumberTest : StringSpec({
     }
 
     "1이상 45 이하의 수를 로또 번호로 변환할 수 있다" {
-        val isAllSuccess = (1..45)
-            .map { runCatching { LottoNumber(it) } }
-            .all { it.isSuccess }
-        isAllSuccess shouldBe true
+        shouldNotThrow<Throwable> {
+            (1..45).forEach { LottoNumber(it) }
+        }
     }
 
     "로또 번호는 내부의 값을 키 값으로 정렬할 수 있다" {
