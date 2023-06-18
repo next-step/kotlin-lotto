@@ -66,6 +66,4 @@ class LottoPlayTest {
     fun testFirstPrizeAmount(matchingCount: String) {
         Assertions.assertThat(LottoPrize.getPrizeAmount(matchingCount.toInt())).isEqualTo(2000000000)
     }
-
-
 }
