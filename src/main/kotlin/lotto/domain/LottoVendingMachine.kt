@@ -1,16 +1,12 @@
 package lotto.domain
 
-class LottoVendingMachine {
+object LottoVendingMachine {
 
-    private val billSlot: BillSlot = BillSlot(LOTTO_PRICE)
+    const val LOTTO_PRICE = 1000
 
-    fun purchase(money: Int): List<LottoNumbers> {
-        return List(billSlot.insertMoney(money)) {
+    fun purchase(lottoCount: Int): List<LottoNumbers> {
+        return List(lottoCount) {
             LottoNumbers.generate()
         }
-    }
-
-    companion object {
-        const val LOTTO_PRICE = 1000
     }
 }

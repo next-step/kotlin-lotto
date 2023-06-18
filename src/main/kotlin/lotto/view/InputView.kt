@@ -9,6 +9,18 @@ object InputView {
         return readInt()
     }
 
+    fun getManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readInt()
+    }
+
+    fun getManualLotto(count: Int): List<Set<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(count) {
+            getNumbers()
+        }
+    }
+
     fun getBonusNumber(): Int {
         println("보너스 볼을 입력해주세요.")
         return readInt()
