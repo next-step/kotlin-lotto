@@ -1,9 +1,11 @@
 package lotto
 
-class LottoSeller {
-    fun sell(totalPurchasePrice: Int): Int {
+class LottoSeller(
+    private val lottoFactory: LottoFactory
+) {
+    fun sell(totalPurchasePrice: Int): Lottos {
         require(totalPurchasePrice > 0) { "총 구매금액은 0 보다 커야합니다" }
-        return totalPurchasePrice / LOTTO_PRICE
+        return Lottos(List(totalPurchasePrice / LOTTO_PRICE) { lottoFactory.create() })
     }
 
     companion object {

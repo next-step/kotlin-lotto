@@ -1,10 +1,10 @@
 package lotto
 
 import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
-    val inputView = InputView()
-    val totalPrice = inputView.getTotalPrice()
-    val lottoSeller = LottoSeller()
-    println(lottoSeller.sell(totalPrice))
+    val totalPrice = InputView.getTotalPrice()
+    val lottoSeller = LottoSeller(LottoFactory)
+    ResultView.printNumOfLottos(lottoSeller.sell(totalPrice))
 }

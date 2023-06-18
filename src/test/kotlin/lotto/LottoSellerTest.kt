@@ -10,10 +10,10 @@ import io.kotest.matchers.shouldBe
 import java.lang.IllegalArgumentException
 
 internal class LottoSellerTest : StringSpec({
-    val sut = LottoSeller()
+    val sut = LottoSeller(LottoFactory)
 
-    "총 구입금액을 입력하면 구매할 수 있는 로또 갯수를 반환한다" {
-        sut.sell(14000) shouldBe 14
+    "총 구입금액을 입력하면 금액에 맞춰 로또를 생성해서 반환한다" {
+        sut.sell(14000).size shouldBe 14
     }
 
     "0 이하의 금액이 입력되면 예외를 발생시킨다" {
