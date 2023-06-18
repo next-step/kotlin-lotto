@@ -17,4 +17,8 @@ class MatchResult(
     fun getNumberOfMatchesForPrize(prize: Prize): Int {
         return matches[prize.matchCount] ?: 0
     }
+
+    fun isProfit(earningRate: Double): Boolean {
+        return earningRate >= 1
+    }
 }
