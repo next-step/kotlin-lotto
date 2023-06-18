@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
 import stringAddCalculator.customDelimiter.DoubleAsteriskDelimiter
 import stringAddCalculator.customDelimiter.DoubleSlashAndNewLineDelimiter
-import java.lang.RuntimeException
 
 class StringAddCalculatorTest {
     @ParameterizedTest

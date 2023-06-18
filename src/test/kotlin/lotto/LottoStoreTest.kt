@@ -1,7 +1,11 @@
 package lotto
 
-import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningNumber
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class LottoStoreTest {
@@ -17,11 +21,24 @@ class LottoStoreTest {
 
     @Test
     fun `로또의 당첨 여부를 계산합니다`() {
-        val winningNumber = listOf(1, 2, 3, 4, 5, 6)
         val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9))
+        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6))
 
-        val result = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
+        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
 
-        result shouldBe 3
+        Assertions.assertEquals(winningResult.countOfMatch, 3)
+        Assertions.assertEquals(winningResult.isMatchedBonus, false)
+    }
+
+    @Test
+    fun `보너스 번호를 포함하여 로또의 당첨 여부를 계산합니다`() {
+        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9))
+        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6))
+        winningNumber.bonusNumber = 7
+
+        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
+
+        Assertions.assertEquals(winningResult.countOfMatch, 4)
+        Assertions.assertEquals(winningResult.isMatchedBonus, true)
     }
 }
