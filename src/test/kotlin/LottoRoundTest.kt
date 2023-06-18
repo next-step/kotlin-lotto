@@ -19,7 +19,7 @@ class LottoRoundTest {
     @Test
     fun `로또 추첨결과를 얻을 수 있다`() {
         // given
-        val winningLotto = (1..6).map { LottoNumber(it) }.toList().let{ Lotto(it) }
+        val winningLotto = (1..6).map { LottoNumber(it) }.toList().let { Lotto(it) }
         val sut = LottoRound(LottoRoundElements())
         val newLottoSize = 3
         sut.addNewLottos(3)
@@ -30,5 +30,4 @@ class LottoRoundTest {
         // then
         assertThat(result.lottoResults.size).isEqualTo(newLottoSize)
     }
-
 }

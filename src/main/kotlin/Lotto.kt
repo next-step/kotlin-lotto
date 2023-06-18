@@ -9,8 +9,6 @@ class Lotto(lottoNumbers: List<LottoNumber>) {
         this.lottoNumbers = lottoNumbers.sortedBy { it.number }
     }
 
-    constructor(lottoNumbers: List<Int>) : this(lottoNumbers.map { LottoNumber(it) })
-
     fun getSameNumberCount(lotto: Lotto): Int {
         return (LOTTO_SIZE * 2) - (lottoNumbers + lotto.lottoNumbers).toSet().size
     }
@@ -34,6 +32,8 @@ class Lotto(lottoNumbers: List<LottoNumber>) {
 
     companion object {
         const val LOTTO_SIZE = 6
+
+        fun of(lottoNumbers: List<Int>): Lotto = Lotto(lottoNumbers.map { LottoNumber(it) })
     }
 }
 

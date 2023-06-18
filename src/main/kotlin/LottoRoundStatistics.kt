@@ -11,6 +11,8 @@ class LottoRoundStatistics(
         .fold(NO_MONEY) { money, lottoReward ->
             money + lottoReward.toMoney()
         }
+
+    fun getLottoRewardOf(lottoReward: LottoReward): List<LottoResult> = lottoResults.filter { it.reward == lottoReward }.toList()
 }
 
 @JvmInline value class Money(val value: Long) {

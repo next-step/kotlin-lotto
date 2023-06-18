@@ -21,7 +21,7 @@ class LottoTest {
 
         // when
         // then
-        Lotto(lottoNumbers)
+        Lotto.of(lottoNumbers)
     }
 
     @Test

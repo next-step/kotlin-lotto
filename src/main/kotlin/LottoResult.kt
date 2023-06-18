@@ -11,9 +11,9 @@ data class LottoResult(
 
 enum class LottoReward(val prize: Long, val sameNumberCount: Int) {
     WINNER_1ST(2000L.millionWon(), 6),
-    WINNDER_2ST(1500L.thousandWon(), 5),
-    WINNDER_3ST(50L.thousandWon(), 4),
-    WINNDER_4ST(5L.thousandWon(), 3);
+    WINNER_2ST(1500L.thousandWon(), 5),
+    WINNER_3ST(50L.thousandWon(), 4),
+    WINNER_4ST(5L.thousandWon(), 3);
 
     fun toMoney(): Money = prize.toMoney()
 
