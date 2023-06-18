@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class Lotto {
     private var _lottoNumbers = listOf<Int>()

@@ -1,14 +1,14 @@
-import calculator.ExpressionParser
-import calculator.ResultView
-import calculator.StringCalculator
+import lotto.view.ResultView
+import lotto.domain.LottoShop
+import lotto.view.InputView
 
 fun main() {
-    val input = readLine()!!
+    val input = InputView()
+    val purchasePrice = input.inputPurchasePrice()
+    val lottos = LottoShop(purchasePrice).sellLotto()
+    val resultView = ResultView()
+    resultView.showLottoCount(lottos)
+    resultView.showLottos(lottos)
+    val lastWinnerNumbers = input.inputLastWinNumbers()
 
-    val expressionParser = ExpressionParser()
-    val checkData = expressionParser.validateNullOrEmptyReturnZero(input)
-    val calculateTargetData = expressionParser.parseInputData(checkData)
-
-    val result = StringCalculator(calculateTargetData).execute()
-    ResultView().showResult(result)
 }
