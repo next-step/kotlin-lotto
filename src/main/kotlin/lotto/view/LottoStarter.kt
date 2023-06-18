@@ -1,6 +1,7 @@
 package lotto.view
 
 import common.shffule.RandomShuffler
+import lotto.domain.analysis.RealLottoResultAnalyst
 import lotto.domain.shop.RealLottoShop
 import lotto.domain.shop.machine.RealLottoGameMachine
 
@@ -13,5 +14,6 @@ fun startLotto() {
                 shuffler = RandomShuffler(),
             ),
         ),
+        lottoResultAnalyst = RealLottoResultAnalyst(),
     ).start()
 }

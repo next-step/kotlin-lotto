@@ -15,8 +15,8 @@ class RealLottoShopTest : BehaviorSpec({
                 LottoGame(
                     lottoNumbers = LottoNumbers(
                         LottoNumber.allLottoNumbers()
-                        .take(6)
-                        .sorted()
+                            .take(6)
+                            .sorted()
                     ),
                 )
             }
