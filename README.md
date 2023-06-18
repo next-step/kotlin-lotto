@@ -63,7 +63,7 @@
 
 ### Todo
 
-- [ ] 구매 금액을 입력한다 -> InputView
+- [x] 구매 금액을 입력한다 -> InputView
 - [ ] 로또를 구매할 수 있는 장수를 계산한다. -> lottery shop
 - [ ] 구매한 로또장수를 출력한다. -> ResultView
 - [ ] 자동 로또를 장수에 맞게 생성한다 -> lottery shop, Lotto
