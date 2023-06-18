@@ -15,6 +15,16 @@ class LottoTest {
     }
 
     @Test
+    fun `Integer list 를 통해 로또를 생성할 수 있다`() {
+        // given
+        val lottoNumbers = (1..6).toList()
+
+        // when
+        // then
+        Lotto(lottoNumbers)
+    }
+
+    @Test
     fun `6개가 아닌 로또 숫자로 로또를 생성할 수 없다`() {
         // given
         val lottoNumbers = (1..7).map { LottoNumber(it) }
