@@ -14,7 +14,7 @@ class LottoResultTest {
         val winnerLotto = Lotto(listOf(1, 2, 3, 8, 9, 45))
 
         // when
-        val result: LottoResult = LottoResult(winnerLotto, lottoList)
+        val result: LottoResult = LottoResult.of(winnerLotto, lottoList)
 
         result.getMatchedNumber(3) shouldBe 1
     }
@@ -27,7 +27,7 @@ class LottoResultTest {
         val winnerLotto = Lotto(listOf(1, 2, 3, 4, 5, 45))
 
         // when
-        val result: LottoResult = LottoResult(winnerLotto, lottoList)
+        val result: LottoResult = LottoResult.of(winnerLotto, lottoList)
 
         // then
         result.getMatchedNumber(5) shouldBe 1
