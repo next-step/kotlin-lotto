@@ -1,9 +1,9 @@
-package lotto
+package lotto.sixFortyFiveNumberLotto
 
-import java.lang.RuntimeException
+import lotto.ErrorCode
 import kotlin.random.Random
 
-class SixFortyFiveLottoNumber(val value: List<Int>) {
+open class SixFortyFiveLottoNumber(open val value: List<Int>) {
     init {
         val isInvalidNumberRange = value.any { v -> v < LOTTO_NUMBER_RANGE_START || v > LOTTO_NUMBER_RANGE_END }
         val hasDuplicatedNumber = value.distinct().size != value.size
@@ -24,6 +24,10 @@ class SixFortyFiveLottoNumber(val value: List<Int>) {
                 randomNumberSet.add(randomNumber)
             }
             return SixFortyFiveLottoNumber(randomNumberSet.sorted())
+        }
+
+        fun validSingleNumber(number: Int): Boolean {
+            return number in LOTTO_NUMBER_RANGE_START..LOTTO_NUMBER_RANGE_END
         }
     }
 }
