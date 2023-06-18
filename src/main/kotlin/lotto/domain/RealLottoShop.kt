@@ -3,6 +3,12 @@ package lotto.domain
 class RealLottoShop : LottoShop {
 
     override fun purchase(lottoPurchaseAmount: Int): LottoPurchaseResult {
-        TODO("Not yet implemented")
+        return LottoPurchaseResult(
+            lottoGames = List(lottoPurchaseAmount / 1000) {
+                LottoGame(
+                    numbers = (1..45).shuffled().take(6).sorted()
+                )
+            }
+        )
     }
 }
