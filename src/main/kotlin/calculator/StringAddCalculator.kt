@@ -5,7 +5,7 @@ class StringAddCalculator {
         val formulaElements = FormulaElements(stringFormula ?: "")
         var result = formulaElements.startValue
         while (true) {
-            formulaElements.nextFormulaElement()?.run { result = operator.calculation(result, operand) } ?: break
+            formulaElements.nextFormulaElement()?.run { result = operator.calculator(result, operand) } ?: break
         }
         return result.value
     }
