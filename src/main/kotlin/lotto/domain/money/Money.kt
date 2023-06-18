@@ -15,3 +15,7 @@ value class Money(val value: Long) { // 돈은 Long의 범위를 벗어날 만�
 fun Iterable<Money>.sum(): Money {
     return Money(sumOf { it.value })
 }
+
+fun PositiveNumber.toMoney(): Money {
+    return Money(value)
+}

@@ -26,9 +26,6 @@ value class PositiveNumber(val value: Int) {
 fun Iterable<PositiveNumber>.sum(): Int {
     return sumOf { it.value }
 }
-fun PositiveNumber.toMoney(): Money {
-    return Money(value)
-}
 
 fun PositiveNumber?.orZero(): PositiveNumber {
     return this ?: PositiveNumber(0)

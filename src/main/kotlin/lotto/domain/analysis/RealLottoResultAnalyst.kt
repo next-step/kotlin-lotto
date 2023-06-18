@@ -2,9 +2,9 @@ package lotto.domain.analysis
 
 import common.PositiveNumber
 import common.orZero
-import common.toMoney
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.money.sum
+import lotto.domain.money.toMoney
 import lotto.domain.shop.LottoGame
 
 class RealLottoResultAnalyst : LottoResultAnalyst {
