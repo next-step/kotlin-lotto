@@ -4,14 +4,19 @@ import kotlin.random.Random
 
 object RandomLottoTicketStorage : LottoTicketStorage {
 
-    private const val LOTTO_TICKET_SIZE: Int = LottoTicket.SIZE
+    private const val LOTTO_SIZE: Int = Lotto.SIZE
     private val LOTTO_NUMBERS: Set<LottoNumber> = LottoNumber.ALL
 
-    override val lottoTicket: LottoTicket
-        get() {
-            return LOTTO_NUMBERS.shuffled(Random.Default)
-                .take(LOTTO_TICKET_SIZE)
+    override infix fun hasCountEqualOrGreaterThan(count: Int): Boolean {
+        return true
+    }
+
+    override infix fun lottoTicketsBy(count: Int): Collection<LottoTicket> {
+        return (0 until count).map {
+            LOTTO_NUMBERS.shuffled(Random.Default)
+                .take(LOTTO_SIZE)
                 .toSet()
-                .let(::LottoTicket)
+                .let { LottoTicket(Lotto(it), TicketType.AUTOMATIC) }
         }
+    }
 }

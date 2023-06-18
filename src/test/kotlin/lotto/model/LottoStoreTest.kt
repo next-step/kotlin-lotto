@@ -10,10 +10,10 @@ import io.kotest.matchers.shouldBe
 @DisplayName("로또 상점")
 class LottoStoreTest : StringSpec({
 
-    "로또 저장소와 로또 금액으로 생성" {
+    "로또 주 저장소, 부 저장소, 로또 금액으로 생성" {
         listOf(1L, 1000L, Long.MAX_VALUE).forAll {
             shouldNotThrowAny {
-                LottoStore(OneToSixLottoTicketStorage, it)
+                LottoStore(OneToSixLottoTicketStorage, OneToSixLottoTicketStorage, it)
             }
         }
     }
@@ -21,7 +21,7 @@ class LottoStoreTest : StringSpec({
     "로또 금액은 반드시 양수" {
         listOf(Long.MIN_VALUE, -1L, 0L).forAll {
             shouldThrowExactly<IllegalArgumentException> {
-                LottoStore(OneToSixLottoTicketStorage, it)
+                LottoStore(OneToSixLottoTicketStorage, OneToSixLottoTicketStorage, it)
             }
         }
     }
@@ -30,24 +30,62 @@ class LottoStoreTest : StringSpec({
         listOf(
             0L to 0,
             500L to 0,
-            1000L to 1,
-            1500L to 1,
-            4100L to 4
+            1_000L to 1,
+            1_500L to 1,
+            4_100L to 4
         ).forAll {
             // given
-            val oneThousandPrice = 1000L
-            val maxPriceStore = LottoStore(OneToSixLottoTicketStorage, oneThousandPrice)
+            val oneThousandPrice = 1_000L
+            val maxPriceStore = LottoStore(OneToSixLottoTicketStorage, OneToSixLottoTicketStorage, oneThousandPrice)
             // when
-            val purchasedLottoTickets: PurchasedLottoTickets = maxPriceStore purchaseLottoTicketsBy it.first
+            val purchasedLottoTickets: PurchasedLottoTickets = maxPriceStore.purchaseLottoTicketsBy(0, it.first)
             // then
             purchasedLottoTickets shouldBe
                 PurchasedLottoTickets(
-                    (0 until it.second).map { ONE_TO_SIX_LOTTO_TICKET }, oneThousandPrice
+                    (0 until it.second).map { ONE_TO_SIX_AUTO_LOTTO_TICKET }, oneThousandPrice
                 )
+        }
+    }
+
+    "구매할 수 있는 개수보다 메인 스토리지에서 구매할 개수가 크면 예외" {
+        // given
+        val oneThousandPrice = 1_000L
+        val store = LottoStore(OneToSixLottoTicketStorage, OneToSixLottoTicketStorage, oneThousandPrice)
+        // when & then
+        shouldThrowExactly<IllegalArgumentException> {
+            store.purchaseLottoTicketsBy(10, oneThousandPrice)
+        }
+    }
+
+    "메인 저장소가 비어있고 메인 저장소에서 구매할 개수가 크면 예외" {
+        // given
+        val oneThousandPrice = 1_000L
+        val maxPriceStore = LottoStore(EmptyLottoTicketStorage, OneToSixLottoTicketStorage, oneThousandPrice)
+        // when & then
+        shouldThrowExactly<IllegalStateException> {
+            maxPriceStore.purchaseLottoTicketsBy(10, 10_000L)
         }
     }
 })
 
-object OneToSixLottoTicketStorage : LottoTicketStorage {
-    override val lottoTicket: LottoTicket = ONE_TO_SIX_LOTTO_TICKET
+private object OneToSixLottoTicketStorage : LottoTicketStorage {
+
+    override infix fun hasCountEqualOrGreaterThan(count: Int): Boolean {
+        return true
+    }
+
+    override infix fun lottoTicketsBy(count: Int): Collection<LottoTicket> {
+        return (0 until count).map { ONE_TO_SIX_AUTO_LOTTO_TICKET }
+    }
+}
+
+private object EmptyLottoTicketStorage : LottoTicketStorage {
+
+    override infix fun hasCountEqualOrGreaterThan(count: Int): Boolean {
+        return false
+    }
+
+    override infix fun lottoTicketsBy(count: Int): Collection<LottoTicket> {
+        return listOf()
+    }
 }

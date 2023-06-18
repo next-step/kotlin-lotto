@@ -3,14 +3,17 @@ package lotto.view
 import lotto.model.LottoRank
 import lotto.model.LottoScore
 import lotto.model.LottoTicket
+import lotto.model.LottoTicket.Companion.automaticSize
+import lotto.model.LottoTicket.Companion.manualSize
 import java.math.BigDecimal
 
 object ResultView {
 
     fun printTickets(tickets: Collection<LottoTicket>) {
-        println("${tickets.size}개를 구매했습니다.")
+        println()
+        println("수동으로 ${tickets.manualSize}, 자동으로 ${tickets.automaticSize}개를 구매했습니다.")
         tickets.forEach { ticket ->
-            println("[${ticket.numbers.map { it.number }.sorted().joinToString(", ")}]")
+            println("[${ticket.lotto.numbers.map { it.number }.sorted().joinToString()}]")
         }
         println()
     }

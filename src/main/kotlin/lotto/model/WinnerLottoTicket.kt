@@ -1,9 +1,9 @@
 package lotto.model
 
-data class WinnerLottoTicket(val lottoTicket: LottoTicket, val bonusNumber: LottoNumber) {
+data class WinnerLottoTicket(val lotto: Lotto, val bonusNumber: LottoNumber) {
     init {
-        require(bonusNumber !in lottoTicket) {
-            "lottoTicket must not have bonusNumber. but provided lottoTicket(`$lottoTicket`), bonusNumber(`$bonusNumber`)"
+        require(bonusNumber !in lotto) {
+            "lottoTicket must not have bonusNumber. but provided lottoTicket(`$lotto`), bonusNumber(`$bonusNumber`)"
         }
     }
 }

@@ -10,15 +10,15 @@ class PurchasedLottoTicketsTest : StringSpec({
 
     "로또 티켓들과 개당 금액으로 생성" {
         shouldNotThrowAny {
-            PurchasedLottoTickets(listOf(ONE_TO_SIX_LOTTO_TICKET), 1000)
+            PurchasedLottoTickets(listOf(ONE_TO_SIX_AUTO_LOTTO_TICKET), 1000)
         }
     }
 
     "당첨번호에 따른 로또 스코어 반환" {
         // given
         val oneToSixPurchasedLottoTickets =
-            PurchasedLottoTickets(listOf(ONE_TO_SIX_LOTTO_TICKET, ONE_TO_SIX_LOTTO_TICKET), 1000)
-        val winnerLottoTicket = WinnerLottoTicket(ONE_TO_SIX_LOTTO_TICKET, LottoNumber(7))
+            PurchasedLottoTickets(listOf(ONE_TO_SIX_AUTO_LOTTO_TICKET, ONE_TO_SIX_AUTO_LOTTO_TICKET), 1000)
+        val winnerLottoTicket = WinnerLottoTicket(ONE_TO_SIX_LOTTO, LottoNumber(7))
         // when
         val lottoScore: LottoScore = oneToSixPurchasedLottoTickets scoreBy winnerLottoTicket
         // then

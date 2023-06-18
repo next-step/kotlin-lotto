@@ -5,7 +5,7 @@ data class PurchasedLottoTickets(val tickets: Collection<LottoTicket>, val price
     infix fun scoreBy(winnerLottoTicket: WinnerLottoTicket): LottoScore {
         return tickets.map {
             LottoRank.rankOf(
-                it matchedCountBy winnerLottoTicket.lottoTicket,
+                it matchedCountBy winnerLottoTicket.lotto,
                 winnerLottoTicket.bonusNumber in it
             )
         }.let { LottoScore(it, totalPrice) }
