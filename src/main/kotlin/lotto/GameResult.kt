@@ -4,7 +4,7 @@ import lotto.vo.Money
 
 data class GameResult(
     private val prizes: List<Pair<WinningPrize, Int>>,
-    private val paidPrice: Money,
+    val paidPrice: Money,
 ) {
     val profitRate: Double
 
