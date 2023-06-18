@@ -16,4 +16,5 @@ fun main() {
 
     val score = Bank.score(tickets, WinningTicket(InputView.getLastLottoNums()))
     val rate = Bank.calculateRateOfReturn(money, score)
+    ResultView.printResult(score, rate)
 }

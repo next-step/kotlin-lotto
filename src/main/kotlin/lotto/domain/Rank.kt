@@ -1,10 +1,10 @@
 package lotto.domain
 
-enum class Rank(val rank: Int, val count: Int, val reward: Int) {
-    FIRST(1, 6, 2000000000),
-    THIRD(3, 5, 1500000),
-    FOURTH(4, 4, 50000),
-    FIFTH(5, 3, 5000);
+enum class Rank(val count: Int, val reward: Int) {
+    FIRST(6, 2000000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000);
 
     companion object {
         fun getValue(count: Int): Rank? {
