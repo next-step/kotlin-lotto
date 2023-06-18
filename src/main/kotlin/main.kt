@@ -1,5 +1,4 @@
 import lotto.domain.LottoServiceRound
-import lotto.domain.Money.Companion.toMoney
 import lotto.view.LottoInputView
 import lotto.view.LottoOutputView
 
@@ -11,11 +10,9 @@ fun lotto() {
     val lottoOutputView = LottoOutputView()
 
     val payment = lottoInputView.inputLottoBuy()
-    lottoServiceRound.buyLottos(payment.toLong().toMoney()).also {
-        lottoOutputView.currentLottos(it)
-    }
+    lottoServiceRound.buyLottos(payment.toLong()).also { lottoOutputView.currentLottos(it) }
 
     val winningLottoNumbers = lottoInputView.inputWinningLotto()
     val lottoRoundStatistics = lottoServiceRound.lotteryDraw(winningLottoNumbers)
-    lottoOutputView.result(lottoServiceRound.allPayment().value, lottoRoundStatistics)
+    lottoOutputView.result(lottoServiceRound.allPayment(), lottoRoundStatistics)
 }
