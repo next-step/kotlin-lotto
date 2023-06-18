@@ -19,7 +19,9 @@ class Lotto(
     }
 
     override fun toString(): String {
-        return lottoNumbers.sorted().joinToString(", ", "[", "]")
+        return lottoNumbers
+            .sorted()
+            .joinToString(", ", "[", "]")
     }
 
     companion object {

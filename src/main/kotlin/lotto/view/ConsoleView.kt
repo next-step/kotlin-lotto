@@ -14,7 +14,12 @@ object ConsoleView : InputView, OutputView {
 
     override fun receiveWinningNumbers(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return readln().split(", ").map { it.toIntOrNull() ?: throw IllegalArgumentException("당첨 번호는 숫자여야 합니다.") }
+        return readln()
+            .split(", ")
+            .map {
+                it.toIntOrNull()
+                    ?: throw IllegalArgumentException("당첨 번호는 숫자여야 합니다.")
+            }
     }
 
     override fun showPurchased(lottos: Lottos) {

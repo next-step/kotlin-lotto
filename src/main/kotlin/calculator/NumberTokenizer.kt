@@ -18,16 +18,22 @@ object NumberTokenizer {
     }
 
     private fun separateCustomDelimiterFrom(input: String): Pair<Delimiter?, String> {
-        val searchResult = CUSTOM_DELIMITER_SEARCH_PATTERN.find(input) ?: return null to input
+        val searchResult = CUSTOM_DELIMITER_SEARCH_PATTERN.find(input)
+            ?: return null to input
 
-        val delimiter = Delimiter(searchResult.groupValues[1].toCharArray()[0])
+        val delimiter = Delimiter(
+            searchResult
+                .groupValues[1]
+                .toCharArray()[0]
+        )
         val separatedInput = searchResult.groupValues[2]
 
         return delimiter to separatedInput
     }
 
     private fun parseToNumber(input: String): Int {
-        val number = input.toIntOrNull() ?: throw RuntimeException()
+        val number = input.toIntOrNull()
+            ?: throw RuntimeException()
         if (number < 0) throw RuntimeException()
         return number
     }
