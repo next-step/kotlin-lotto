@@ -22,3 +22,5 @@ value class LottoNumber(val value: Int) : Comparable<LottoNumber> {
         }
     }
 }
+
+fun List<LottoNumber>.unWrapping() = map { it.value }

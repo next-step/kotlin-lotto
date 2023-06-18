@@ -3,6 +3,7 @@ package lotto.domain.shop.machine
 import common.shffule.Shuffler
 import lotto.domain.shop.LottoGame
 import lotto.domain.shop.LottoNumber
+import lotto.domain.shop.LottoNumbers
 
 class RealLottoGameMachine(
     private val shuffler: Shuffler<LottoNumber>,
@@ -12,9 +13,11 @@ class RealLottoGameMachine(
 
     override fun create(): LottoGame {
         return LottoGame(
-            numbers = shuffler.shuffled(allLottoNumbers)
-                .take(LOTTO_GAME_NUMBER_SIZE)
-                .sorted(),
+            lottoNumbers = LottoNumbers(
+                shuffler.shuffled(allLottoNumbers)
+                    .take(LOTTO_GAME_NUMBER_SIZE)
+                    .sorted()
+            ),
         )
     }
 
