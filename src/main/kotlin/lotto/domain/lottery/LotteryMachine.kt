@@ -1,21 +1,35 @@
 package lotto.domain.lottery
 
 import lotto.domain.Money
+import lotto.domain.result.AutoLotteryPurchaseResult
+import lotto.domain.result.LotteryPurchaseResult
+import lotto.domain.result.ManualLotteryPurchaseResult
 import lotto.scaleDown
 
 object LotteryMachine {
     private val LOTTERY_PRICE = Money(1_000)
 
-    fun issueLotteryTicket(money: Money): LotteryTicket {
+    fun issueLotteryTicket(money: Money): LotteryPurchaseResult {
         val lotteryQuantity = getQuantity(money)
         val lotteries = List(lotteryQuantity) { generateNumbers() }
-        return LotteryTicket(lotteries)
+        val change = money - LOTTERY_PRICE * lotteryQuantity
+        return AutoLotteryPurchaseResult(LotteryTicket(lotteries), change)
     }
 
     private fun getQuantity(money: Money): Int = (money / LOTTERY_PRICE).scaleDown().toInt()
 
     private fun generateNumbers(): Lottery {
-        val lotteryNumbers = Lottery.LOTTERY_NUMBER_RANGE.shuffled().take(6).toSet()
+        val lotteryNumbers = Lottery.LOTTERY_NUMBER_RANGE.shuffled().take(6).toSet().let { LottoNumber(it) }
         return Lottery(lotteryNumbers)
+    }
+
+    fun issueManualLotteryTicket(money: Money, issueNumbers: List<Set<Int>>): LotteryPurchaseResult {
+        val requiredMoney = LOTTERY_PRICE * issueNumbers.size
+        require(money >= requiredMoney) { "수동으로 발급할 수 있는 금액이 충분하지 않습니다. money: $money, requiredMoney : $requiredMoney" }
+
+        val lotteryTicket = issueNumbers.map { LottoNumber(it) }.map { Lottery(it) }.let { LotteryTicket(it) }
+        val change = money - requiredMoney
+
+        return ManualLotteryPurchaseResult(lotteryTicket, change)
     }
 }
