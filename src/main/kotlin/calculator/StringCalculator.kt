@@ -13,14 +13,17 @@ object StringCalculator {
             return 0
         }
 
-        val delimiters = CUSTOM_PATTERN_REGEX.find(text)?.groupValues?.get(DELIMITER_INDEX) ?: DEFAULT_DELIMITER
-        val tokens = CUSTOM_PATTERN_REGEX.find(text)?.groupValues?.get(TOKEN_INDEX) ?: text
+        val groupValues = CUSTOM_PATTERN_REGEX.find(text)?.groupValues
 
-        val numbers = tokens.split(delimiters.toRegex()).map { it ->
-            it.toInt().also { num ->
-                require(num >= 0) {
+        val delimiters = groupValues?.get(DELIMITER_INDEX) ?: DEFAULT_DELIMITER
+        val tokens = groupValues?.get(TOKEN_INDEX) ?: text
+
+        val numbers = tokens.split(delimiters.toRegex()).map {
+            it.toIntOrNull().let { num ->
+                require(num != null && num >= 0) {
                     "숫자 이외의 값 또는 음수를 전달하는 경우"
                 }
+                num
             }
         }
 
