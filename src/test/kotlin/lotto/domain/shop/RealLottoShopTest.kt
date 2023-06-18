@@ -4,6 +4,7 @@ import common.PositiveNumber
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.lottonumber.LottoNumber
+import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.shop.machine.MockLottoGameMachine
 
 class RealLottoShopTest : BehaviorSpec({
@@ -12,9 +13,11 @@ class RealLottoShopTest : BehaviorSpec({
         Then("구입 금액 만큼의 로또 게임 목록을 반환한다") {
             val mockLottoGameMachine = MockLottoGameMachine {
                 LottoGame(
-                    numbers = LottoNumber.allLottoNumbers()
+                    lottoNumbers = LottoNumbers(
+                        LottoNumber.allLottoNumbers()
                         .take(6)
-                        .sorted(),
+                        .sorted()
+                    ),
                 )
             }
             val lottoShop = RealLottoShop(mockLottoGameMachine)
