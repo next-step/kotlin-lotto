@@ -1,7 +1,6 @@
 package lotto.domain.analysis
 
 import lotto.domain.money.Money
-import java.math.BigDecimal
 
 data class Revenue(
     val totalCost: Money,
