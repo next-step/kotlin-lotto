@@ -7,6 +7,12 @@ value class Money(val value: Long) { // 돈은 Long의 범위를 벗어날 만�
 
     constructor(value: Int) : this(value.toLong())
 
+    init {
+        require(value >= 0) {
+            "money must be positive. your input $value"
+        }
+    }
+
     operator fun times(other: PositiveNumber): Money {
         return Money(value * other.value)
     }
