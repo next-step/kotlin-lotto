@@ -4,7 +4,6 @@ import string.converter.ExpressionTokenConverter
 import string.splitter.DefaultSeparatorStringSplitter
 import string.splitter.RegexBasedCustomSeparatorStringSplitter
 
-
 fun main() {
     val tokenConverter = ExpressionTokenConverter()
     val splitters = listOf(

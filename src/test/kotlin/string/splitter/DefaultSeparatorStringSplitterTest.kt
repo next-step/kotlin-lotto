@@ -9,11 +9,11 @@ internal class DefaultSeparatorStringSplitterTest : StringSpec({
     val sut = DefaultSeparatorStringSplitter(ExpressionTokenConverter())
 
     "컴마를 분할자로 가지면 숫자 토큰이 분할된 정수형 리스트를 반환한다" {
-        sut.split("1,2,3") shouldBe listOf(1,2,3)
+        sut.split("1,2,3") shouldBe listOf(1, 2, 3)
     }
 
     "콜론을 분할자로 가지면 숫자 토큰이 분할된 정수형 리스트를 반환한다" {
-        sut.split("1:2:3") shouldBe listOf(1,2,3)
+        sut.split("1:2:3") shouldBe listOf(1, 2, 3)
     }
 
     "단일 숫자로 이뤄져있으면 단일 숫자를 반환한다" {

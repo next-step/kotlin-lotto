@@ -14,6 +14,6 @@ class DefaultSeparatorStringSplitter(
     }
 
     private fun parseSingleNumeric(expression: String) = runCatching {
-            converter.convert(expression)
+        converter.convert(expression)
     }.getOrNull()
 }

@@ -10,7 +10,6 @@ import io.kotest.matchers.shouldBe
 import string.converter.ExpressionTokenConverter
 import string.splitter.DefaultSeparatorStringSplitter
 import string.splitter.RegexBasedCustomSeparatorStringSplitter
-import string.splitter.SeparatorStringSplitter
 
 internal class StringCalculatorTest : StringSpec({
 
@@ -53,5 +52,4 @@ internal class StringCalculatorTest : StringSpec({
             sut.sum("1k2k3")
         }
     }
-
 })
