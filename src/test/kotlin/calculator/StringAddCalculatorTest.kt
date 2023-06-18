@@ -66,7 +66,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,2:3:4,5"])
     fun splitText(text: String) {
-        assertThat(calculator.splitter(text, listOf(":", ","))).isEqualTo(listOf("1", "2", "3", "4", "5"))
+        assertThat(TextSplitter.splitText(text, listOf(":", ","))).isEqualTo(listOf("1", "2", "3", "4", "5"))
     }
 
     @DisplayName(value = "문자열 계산기의 convertTokensToNum 함수가 string 을 int 로 변환한다")
