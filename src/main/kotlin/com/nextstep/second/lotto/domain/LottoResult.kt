@@ -1,6 +1,6 @@
 package com.nextstep.second.lotto.domain
 
-class LottoResult(
+class LottoResult private constructor(
     private val matchedNumberCounts: Map<LottoReward, Int>
 ) {
 

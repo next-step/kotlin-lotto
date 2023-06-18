@@ -12,7 +12,7 @@ internal class LottoTest {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
 
         // when
-        val lotto = Lotto(numbers)
+        val lotto = Lotto.of(numbers)
 
         // then
         lotto.numbers.size shouldBe Lotto.LOTTO_LENGTH
@@ -25,7 +25,7 @@ internal class LottoTest {
 
         // when
         assertThrows<IllegalArgumentException> {
-            Lotto(numbers)
+            Lotto.of(numbers)
         }
     }
 }

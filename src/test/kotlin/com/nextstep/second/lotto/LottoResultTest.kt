@@ -9,9 +9,9 @@ class LottoResultTest {
     @Test
     fun `공통된 숫자가 3개인 경우`() {
         // given
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
         val lottoList = listOf(lotto)
-        val winnerLotto = Lotto(listOf(1, 2, 3, 8, 9, 45))
+        val winnerLotto = Lotto.of(listOf(1, 2, 3, 8, 9, 45))
 
         // when
         val result: LottoResult = LottoResult.of(winnerLotto, lottoList)
@@ -22,9 +22,9 @@ class LottoResultTest {
     @Test
     fun `공통된 숫자가 5개인 경우`() {
         // given
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
         val lottoList = listOf(lotto)
-        val winnerLotto = Lotto(listOf(1, 2, 3, 4, 5, 45))
+        val winnerLotto = Lotto.of(listOf(1, 2, 3, 4, 5, 45))
 
         // when
         val result: LottoResult = LottoResult.of(winnerLotto, lottoList)
