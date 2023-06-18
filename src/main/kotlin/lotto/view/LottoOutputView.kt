@@ -1,14 +1,14 @@
 package lotto.view
 
+import lotto.domain.LottoRank
 import lotto.domain.Lottos
 import lotto.domain.LottosResult
-import lotto.domain.LottoRank
 
 object LottoOutputView {
     fun printLottos(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
         lottos.values.forEach { lotto ->
-            println(lotto.numbers.joinToString(", "))
+            println(lotto.numbers.values.joinToString(", "))
         }
     }
 

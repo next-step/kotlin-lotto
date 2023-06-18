@@ -25,10 +25,10 @@ class LottosSpec : DescribeSpec({
     }
 
     describe("(로또 결과) 각 등수의 당첨 횟수 계산 검증") {
-        val winningNumbers = setOf(1, 2, 3, 4, 5, 6)
+        val winningNumbers = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
 
         context("1등짜리 로또를 1개 갖고 있는 경우") {
-            val lottos = Lottos(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6))))
+            val lottos = Lottos(listOf(Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6)))))
 
             val lottosResult = lottos.calculateResults(winningNumbers)
             it("1등 당첨 횟수는 1이다.") {
@@ -46,7 +46,12 @@ class LottosSpec : DescribeSpec({
         }
 
         context("1등짜리 로또를 2개 갖고 있는 경우") {
-            val lottos = Lottos(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 6))))
+            val lottos = Lottos(
+                listOf(
+                    Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))),
+                    Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))),
+                ),
+            )
 
             it("1등 당첨 횟수는 2이다.") {
                 val lottosResult = lottos.calculateResults(winningNumbers)
@@ -56,7 +61,12 @@ class LottosSpec : DescribeSpec({
         }
 
         context("1등짜리 로또를 1개, 3등짜리 로또를 1개 갖고 있는 경우") {
-            val lottos = Lottos(listOf(Lotto(setOf(1, 2, 3, 4, 5, 6)), Lotto(setOf(1, 2, 3, 4, 5, 7))))
+            val lottos = Lottos(
+                listOf(
+                    Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))),
+                    Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 7))),
+                ),
+            )
 
             it("1등 당첨 횟수는 1이다.") {
                 val lottosResult = lottos.calculateResults(winningNumbers)

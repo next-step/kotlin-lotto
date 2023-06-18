@@ -6,7 +6,7 @@ class Lottos(
     val size = values.size
     val cost = size * Lotto.PRICE
 
-    fun calculateResults(winningNumbers: WinningNumbers): LottosResult {
+    fun calculateResults(winningNumbers: LottoNumbers): LottosResult {
         val winningResults = values
             .map { lotto -> lotto.calculateResult(winningNumbers) }
             .filterNotNull()
