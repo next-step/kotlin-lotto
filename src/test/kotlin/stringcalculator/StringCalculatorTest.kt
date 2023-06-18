@@ -6,10 +6,7 @@ import io.kotest.matchers.shouldBe
 import stringcalculator.parser.RegexExpressionParser
 
 class StringCalculatorTest : StringSpec({
-    lateinit var calculator: StringCalculator
-    beforeEach {
-        calculator = StringCalculator(RegexExpressionParser)
-    }
+    val calculator = StringCalculator(RegexExpressionParser)
 
     "빈 문자열을 입력할 경우 0을 반환해야 한다." {
         listOf(
