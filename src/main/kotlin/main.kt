@@ -1,6 +1,7 @@
 import lotto.domain.analysis.LottoResultAnalyst
 import lotto.domain.shop.RealLottoShop
 import lotto.domain.shop.LottoGameMachine
+import lotto.domain.shop.lottonumberprovider.RealLottoNumberProvider
 import lotto.view.LottoController
 import lotto.view.RealLottoInputView
 import lotto.view.RealLottoResultView
@@ -12,6 +13,7 @@ fun main() {
         lottoResultView = RealLottoResultView(),
         lottoShop = RealLottoShop(
             lottoGameMachine = LottoGameMachine(
+                lottoNumberProvider = RealLottoNumberProvider(),
                 shuffler = RandomShuffler(),
             ),
         ),

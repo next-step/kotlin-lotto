@@ -2,13 +2,15 @@ package lotto.domain.shop
 
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
+import lotto.domain.shop.lottonumberprovider.LottoNumberProvider
 import shffule.Shuffler
 
 class LottoGameMachine(
+    lottoNumberProvider: LottoNumberProvider,
     private val shuffler: Shuffler<LottoNumber>,
 ) {
 
-    private val allLottoNumbers = LottoNumber.allLottoNumbers()
+    private val allLottoNumbers = lottoNumberProvider.getAllLottoNumbers()
 
     fun create(): LottoGame {
         return LottoGame(
