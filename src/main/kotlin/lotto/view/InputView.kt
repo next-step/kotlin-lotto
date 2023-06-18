@@ -7,4 +7,8 @@ object InputView {
         println(MONEY_STRING)
         return readln().toInt()
     }
+
+    fun getLastLottoNums(): List<Int> {
+        return readln().split(",").map { it.trim().toInt() }
+    }
 }

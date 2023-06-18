@@ -11,4 +11,6 @@ fun main() {
 
     val tickets = LotteryShop.getTickets(lottoCount)
     ResultView.printLottoNums(tickets)
+
+    val lastLottoNums = InputView.getLastLottoNums()
 }
