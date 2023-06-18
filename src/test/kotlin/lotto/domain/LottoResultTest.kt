@@ -17,7 +17,7 @@ class LottoResultTest : StringSpec({
                     Lotto(listOf(3, 4, 5, 7, 8, 15)), // 6개 일치
                 )
             ),
-            lottoResult = Lotto(listOf(3, 4, 5, 7, 8, 15)),
+            lottoResult = WinningLotto(Lotto(listOf(3, 4, 5, 7, 8, 15)), 2),
         )
 
         with(result) {

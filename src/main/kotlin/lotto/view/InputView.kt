@@ -17,6 +17,7 @@ object InputView {
     }
 
     fun getWinningNumbers(): List<Int> {
+        println("지난 주 당첨 번호를 입력해주세요.")
         return readLine()?.split(",")?.map { it.toInt() } ?: throw IllegalArgumentException()
     }
 }
