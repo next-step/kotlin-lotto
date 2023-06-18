@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.enums.Winner
 
 class ResultView {
 
@@ -11,5 +12,15 @@ class ResultView {
         lottos.forEach {
             println(it.lottoNumbers)
         }
+    }
+
+    fun showStatisticsResult(resultMap: Map<Winner, Int>) {
+        resultMap.forEach {
+            println("${it.key.matchCount}개 일치 (${it.key.reward}원) - ${it.value}")
+        }
+    }
+
+    fun showWinRating(rating: Double) {
+        println("총 수익률은 ${rating}입니다.")
     }
 }
