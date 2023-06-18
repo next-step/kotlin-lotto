@@ -21,7 +21,7 @@ class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("숫자가 6개가 아닌 로또 번호")
-    fun `로또 번호가 6개가 아니라면 throw IllegalStateException`(lottoNumbers: List<Int>) {
+    fun `로또 번호가 6개가 아니라면 throw IllegalStateException`(lottoNumbers: Set<Int>) {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
             LottoNumbers(lottoNumbers)
         }
@@ -30,13 +30,13 @@ class LottoNumbersTest {
     @Test
     fun `로또 번호에 중복된 숫자가 있다면 throw IllegalArgumentException`() {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
-            LottoNumbers(listOf(1, 1, 2, 3, 4, 5))
+            LottoNumbers(setOf(1, 1, 2, 3, 4, 5))
         }
     }
 
     @ParameterizedTest
     @MethodSource("범위를 벗어난 숫자가 있는 로또 번호")
-    fun `로또 번호에 범위를 벗어난 숫자가 있다면 throw IllegalArgumentException`(lottoNumbers: List<Int>) {
+    fun `로또 번호에 범위를 벗어난 숫자가 있다면 throw IllegalArgumentException`(lottoNumbers: Set<Int>) {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
             LottoNumbers(lottoNumbers)
         }
@@ -44,7 +44,7 @@ class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("겹치는 로또 번호 테스트 데이터")
-    fun `겹치는 로또 번호 개수 구하기 테스트`(lottoNumbers1: List<Int>, lottoNumbers2: List<Int>, overlaps: Int) {
+    fun `겹치는 로또 번호 개수 구하기 테스트`(lottoNumbers1: Set<Int>, lottoNumbers2: Set<Int>, overlaps: Int) {
         Assertions.assertThat(
             LottoNumbers(lottoNumbers1).numberOfOverlaps(LottoNumbers(lottoNumbers2))
         ).isEqualTo(overlaps)
@@ -54,25 +54,25 @@ class LottoNumbersTest {
         @JvmStatic
         fun `범위를 벗어난 숫자가 있는 로또 번호`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf(-1, 1, 2, 3, 4, 5)),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 46)),
+                Arguments.of(setOf(-1, 1, 2, 3, 4, 5)),
+                Arguments.of(setOf(1, 2, 3, 4, 5, 46)),
             )
         }
 
         @JvmStatic
         fun `숫자가 6개가 아닌 로또 번호`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf(1, 2, 3, 4, 5)),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.of(setOf(1, 2, 3, 4, 5)),
+                Arguments.of(setOf(1, 2, 3, 4, 5, 6, 7)),
             )
         }
 
         @JvmStatic
         fun `겹치는 로또 번호 테스트 데이터`(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 2, 3, 4, 5, 6), 6),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(1, 12, 13, 14, 15, 16), 1),
-                Arguments.of(listOf(1, 2, 3, 4, 5, 6), listOf(11, 12, 13, 14, 15, 16), 0),
+                Arguments.of(setOf(1, 2, 3, 4, 5, 6), setOf(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(setOf(1, 2, 3, 4, 5, 6), setOf(1, 12, 13, 14, 15, 16), 1),
+                Arguments.of(setOf(1, 2, 3, 4, 5, 6), setOf(11, 12, 13, 14, 15, 16), 0),
             )
         }
     }

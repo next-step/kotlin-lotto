@@ -26,13 +26,13 @@ object InputView {
         return getLottoNumbers()
     }
 
-    private fun getNumbers(): List<Int> {
+    private fun getNumbers(): Set<Int> {
         return readln()
             .split(NUMBER_SEPARATOR)
             .mapNotNull {
                 it.trim()
                     .toIntOrNull()
-            }
+            }.toSet()
     }
 
     private tailrec fun readInt(): Int {

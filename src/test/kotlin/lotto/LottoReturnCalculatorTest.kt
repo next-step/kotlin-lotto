@@ -54,9 +54,9 @@ class LottoReturnCalculatorTest {
             return Stream.of(
                 Arguments.of(
                     listOf(
-                        LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     ),
-                    LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                    LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     LottoReturn(
                         firstCount = 1,
                         secondCount = 0,
@@ -73,9 +73,9 @@ class LottoReturnCalculatorTest {
             return Stream.of(
                 Arguments.of(
                     listOf(
-                        LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     ),
-                    LottoNumbers(listOf(11, 2, 3, 4, 5, 6)),
+                    LottoNumbers(setOf(11, 2, 3, 4, 5, 6)),
                     LottoReturn(
                         firstCount = 0,
                         secondCount = 1,
@@ -92,9 +92,9 @@ class LottoReturnCalculatorTest {
             return Stream.of(
                 Arguments.of(
                     listOf(
-                        LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     ),
-                    LottoNumbers(listOf(11, 12, 3, 4, 5, 6)),
+                    LottoNumbers(setOf(11, 12, 3, 4, 5, 6)),
                     LottoReturn(
                         firstCount = 0,
                         secondCount = 0,
@@ -111,9 +111,9 @@ class LottoReturnCalculatorTest {
             return Stream.of(
                 Arguments.of(
                     listOf(
-                        LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     ),
-                    LottoNumbers(listOf(11, 12, 13, 4, 5, 6)),
+                    LottoNumbers(setOf(11, 12, 13, 4, 5, 6)),
                     LottoReturn(
                         firstCount = 0,
                         secondCount = 0,
@@ -130,10 +130,10 @@ class LottoReturnCalculatorTest {
             return Stream.of(
                 Arguments.of(
                     listOf(
-                        LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                        LottoNumbers(listOf(11, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(11, 2, 3, 4, 5, 6)),
                     ),
-                    LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                    LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     LottoReturn(
                         firstCount = 1,
                         secondCount = 1,
@@ -150,17 +150,17 @@ class LottoReturnCalculatorTest {
             return Stream.of(
                 Arguments.of(
                     listOf(
-                        LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
-                        LottoNumbers(listOf(11, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(11, 2, 3, 4, 5, 6)),
                     ),
-                    LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                    LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     (LottoReturn.FIRST_RETURN + LottoReturn.SECOND_RETURN) / (LottoVendingMachine.LOTTO_PRICE * 2.toFloat())
                 ),
                 Arguments.of(
                     listOf(
-                        LottoNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                        LottoNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     ),
-                    LottoNumbers(listOf(11, 12, 3, 4, 5, 6)),
+                    LottoNumbers(setOf(11, 12, 3, 4, 5, 6)),
                     LottoReturn.THIRD_RETURN / LottoVendingMachine.LOTTO_PRICE.toFloat()
                 )
             )
