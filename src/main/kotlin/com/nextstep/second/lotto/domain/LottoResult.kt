@@ -9,10 +9,16 @@ class LottoResult private constructor(
         return matchedNumberCounts.getOrDefault(lottoReward, 0)
     }
 
-    fun getRateOfReturn(money: Int, lottoRewards: List<LottoReward>): Double {
-        return lottoRewards.sumOf {
-            getMatchedNumber(it.totalSameNumber).toLong() * it.reward.toLong()
-        }.toDouble() / money.toDouble()
+    fun getMatchedNumber(score: LottoReward): Int {
+        return matchedNumberCounts.getOrDefault(score, 0)
+    }
+
+    fun getRateOfReturn(money: Int): Double {
+        return matchedNumberCounts.entries.filter { (reward, totalCount) ->
+            totalCount != 0
+        }.sumOf { (reward, totalCount) ->
+            reward.reward * totalCount
+        } / money.toDouble()
     }
 
     companion object {

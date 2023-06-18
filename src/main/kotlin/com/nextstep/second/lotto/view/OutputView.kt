@@ -12,12 +12,12 @@ object OutputView {
         }
     }
 
-    fun showLottoResult(money: Int, lottoResults: LottoResult, rewards: List<LottoReward>) {
+    fun showLottoResult(money: Int, lottoResults: LottoResult, checkRewards: List<LottoReward>) {
         println("당첨 통계")
         println("---------")
-        rewards.forEach { reward ->
-            println("${reward.totalSameNumber}개 일치 (${reward.reward}원)- ${lottoResults.getMatchedNumber(reward.totalSameNumber)}개")
+        checkRewards.forEach { reward ->
+            println("${reward.totalSameNumber}개 일치 (${reward.reward}원)- ${lottoResults.getMatchedNumber(reward)}개")
         }
-        println("총 수익률은 ${lottoResults.getRateOfReturn(money, rewards)}입니다.")
+        println("총 수익률은 ${lottoResults.getRateOfReturn(money)}입니다.")
     }
 }
