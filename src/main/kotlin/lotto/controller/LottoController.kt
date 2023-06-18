@@ -17,11 +17,15 @@ class LottoController(
 ) {
 
     fun purchaseLotteryTickets(): PurchaseLotteryTicketResult {
-        val purchaseAmount = lottoInputView.readPurchaseAmount()
-        val manualLotteryTicketCount = lottoInputView.readManualLotteryTicketCount()
-        val manualLottoNumbers = lottoInputView.readManualLottoNumbers(manualLotteryTicketCount)
-        val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
-        return lottoStore.purchase(request)
+        return try {
+            val purchaseAmount = lottoInputView.readPurchaseAmount()
+            val manualLotteryTicketCount = lottoInputView.readManualLotteryTicketCount()
+            val manualLottoNumbers = lottoInputView.readManualLottoNumbers(manualLotteryTicketCount)
+            val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+            lottoStore.purchase(request)
+        } catch (exception: Exception) {
+            PurchaseLotteryTicketResult.FAIL(exception = exception)
+        }
     }
 
     fun printLotteryTickets(purchasedLotteryTickets: PurchaseLotteryTicketResult.SUCCESS) {

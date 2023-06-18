@@ -1,11 +1,11 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import lotto.domain.LotteryTicketsOrderRequest
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
 import lotto.domain.PurchaseLotteryTicketResult
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
@@ -33,11 +33,8 @@ class LottoStoreTest {
     fun `로또 판매점은 로또 구입 금액이 1000원 미만 또는 1000원 단위가 아닐 경우 IllegalArgumentException 을 발생`(purchaseAmount: Int) {
         val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount)
 
-        when (val purchaseLotteryTicketResult = lottoStore.purchase(request)) {
-            is PurchaseLotteryTicketResult.FAIL -> {
-                assertThat(purchaseLotteryTicketResult.exception is IllegalArgumentException).isTrue
-            }
-            else -> fail { "check test..." }
+        shouldThrow<IllegalArgumentException> {
+            lottoStore.purchase(request)
         }
     }
 
@@ -68,11 +65,8 @@ class LottoStoreTest {
         )
         val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
 
-        when (val purchaseLotteryTicketResult = lottoStore.purchase(request)) {
-            is PurchaseLotteryTicketResult.FAIL -> {
-                assertThat(purchaseLotteryTicketResult.exception is IllegalArgumentException).isTrue
-            }
-            else -> fail { "check test..." }
+        shouldThrow<IllegalArgumentException> {
+            lottoStore.purchase(request)
         }
     }
 
