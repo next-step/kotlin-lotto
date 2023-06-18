@@ -6,8 +6,12 @@ class StringAddCalculator {
             return 0
         }
 
+        val delimiters = Delimiters.DEFAULT
         val (customDelimiter, extractResult) = extractCustomDelimiter(text)
-        val tokens = splitter(extractResult, delimiters)
+        if (!customDelimiter.isNullOrEmpty()) {
+            delimiters.addCustomDelimiters(customDelimiter)
+        }
+        val tokens = splitter(extractResult, delimiters.getDelimiters())
         val convertedTokens = convertTokensToNumber(tokens)
         checkNegativeNumbers(convertedTokens)
         return convertTokensToNumber(tokens).sum()
