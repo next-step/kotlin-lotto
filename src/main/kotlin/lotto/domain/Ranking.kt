@@ -12,7 +12,7 @@ class Ranking(lotteryByHand: LotteryGroup, lotteryByMachine: LotteryGroup, priva
         }
 
     init {
-        Rank.values().reversedArray().forEach {
+        Rank.values().forEach {
             rankingResult[it] = 0
         }
 

@@ -12,7 +12,6 @@ const val WIN_LOTTERY_POSITION = 0
 const val DEFAULT_COUNT = 1
 
 fun main() {
-
     val amount = getInputDataInteger("구입금액을")
     val buyCount = getInputDataInteger("수동으로 구매할 로또 수를")
     val lotteriesByHand = getInputLotteryGroup("수동으로 구매할 번호 ${buyCount}개", buyCount)
@@ -23,10 +22,19 @@ fun main() {
     val winLottery = getWinLottery()
     val bonusBall = getBonusBall()
 
-    LottoMachine.setWinLotto(winLottery, bonusBall)
+    setWinLottery(winLottery, bonusBall)
 
     val ranking = LottoMachine.generateRanking()
     ResultView.showGameResult(ranking)
+}
+
+private fun setWinLottery(winLottery: Lottery, bonusBall: LottoNumber) {
+    runCatching {
+        LottoMachine.setWinLotto(winLottery, bonusBall)
+    }.getOrElse {
+        it.printStackTrace()
+        return
+    }
 }
 
 private fun getBonusBall(): LottoNumber {

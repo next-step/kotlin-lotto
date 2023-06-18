@@ -44,7 +44,7 @@ object LottoMachine {
         val isDuplicated = winLotto.lottery.any {
             it.number == bonusBall.number
         }
-        if (isDuplicated) throw IllegalArgumentException("보너스볼은 중복된 숫자가 오면 안됨")
+        if (isDuplicated) throw IllegalArgumentException("보너스볼은 중복된 숫자가 오면 안되므로 게임을 종료함")
         mWinLotto = winLotto
         mBonusNumber = bonusBall
     }
