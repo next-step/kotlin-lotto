@@ -2,6 +2,7 @@ package lottery.domain
 
 import lottery.domain.lottery.Lotteries
 import lottery.domain.lottery.Lottery
+import lottery.domain.lottery.Lottery.Companion.isDivisibleLotteryCost
 import lottery.domain.lottery.PurchasedLotteriesResult
 import lottery.domain.lottery.WinningLottery
 import lottery.domain.lottery.generator.LotteryGenerator
@@ -16,6 +17,7 @@ class Wallet(
 ) {
     init {
         require(Lottery.canPurchaseLottery(money)) { "로또를 사기엔 부족한 금액이다" }
+        require(money.isDivisibleLotteryCost()) { "로또 금액으로 나누어떨어지지 않는 금액이다" }
     }
 
     var money: Money = money

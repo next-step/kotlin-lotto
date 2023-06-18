@@ -18,8 +18,14 @@ class WalletTest : FunSpec({
 
     context("init") {
         test("wallet 생성 시 로또를 구매할 돈이 없는 경우 예외가 발생한다") {
-            val exception = shouldThrowExactly<IllegalArgumentException> { Wallet(money = Money(BigDecimal(999))) }
+            val exception = shouldThrowExactly<IllegalArgumentException> { Wallet(money = Money(BigDecimal(0))) }
             exception.message shouldBe "로또를 사기엔 부족한 금액이다"
+        }
+
+        test("wallet 생성 시 로또 금액으로 나누어떨어지지 않는 경우 예외가 발생한다") {
+            val exception =
+                shouldThrowExactly<IllegalArgumentException> { Wallet(money = Money(BigDecimal(1_200))) }
+            exception.message shouldBe "로또 금액으로 나누어떨어지지 않는 금액이다"
         }
     }
 
