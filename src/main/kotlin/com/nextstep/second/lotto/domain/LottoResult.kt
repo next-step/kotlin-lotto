@@ -3,13 +3,7 @@ package com.nextstep.second.lotto.domain
 class LottoResult private constructor(
     private val matchedNumberCounts: Map<LottoReward, Int>
 ) {
-
-    fun getMatchedNumber(score: Int, matchedBonus: Boolean = false): Int {
-        val lottoReward = LottoReward.valueOf(score, matchedBonus)
-        return matchedNumberCounts.getOrDefault(lottoReward, 0)
-    }
-
-    fun getMatchedNumber(score: LottoReward): Int {
+    fun getMatchedNumberCnts(score: LottoReward): Int {
         return matchedNumberCounts.getOrDefault(score, 0)
     }
 
