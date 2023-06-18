@@ -5,7 +5,7 @@ class ExpressionParser {
     fun parseInputData(inputString: String): List<String> {
         return findExistCustomDelimiter(inputString)?.let {
             parseCustomDelimiter(it)
-        }?: parseDelimiter(inputString)
+        } ?: parseDelimiter(inputString)
     }
 
     private fun findExistCustomDelimiter(inputString: String): MatchResult? {
@@ -16,12 +16,10 @@ class ExpressionParser {
         return inputString.split(",|:".toRegex())
     }
 
-
     private fun parseCustomDelimiter(matchResult: MatchResult): List<String> {
         val customDelimiter = matchResult.groupValues[FIND_DELIMITER_INDEX]
         return matchResult.groupValues[TARGET_DATA_INDEX].split(customDelimiter)
     }
-
     fun validateNullOrEmptyReturnZero(inputString: String): String {
         return if (inputString.isNullOrEmpty()) {
             RETURN_ERROR_VALUE

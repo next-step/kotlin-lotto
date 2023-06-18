@@ -1,7 +1,7 @@
-import lotto.view.ResultView
 import lotto.domain.LottoShop
 import lotto.domain.LottoStatistics
 import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
     val input = InputView()
@@ -18,4 +18,3 @@ fun main() {
     resultView.showStatisticsResult(resultMap)
     resultView.showWinRating(rating)
 }
-
