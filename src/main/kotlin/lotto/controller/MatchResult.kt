@@ -6,9 +6,7 @@ class MatchResult(
     private val matches: Map<Int, Int>
 ) {
     private fun calculateTotalPrice(): Int {
-        return matches.entries.sumOf { (matchCount, count) ->
-            Prize.prizeForMatchCount(matchCount)?.amount?.times(count) ?: 0
-        }
+        return Prize.calculateTotalPrice(matches)
     }
 
     fun calculateEarningRate(money: Int): Double {
