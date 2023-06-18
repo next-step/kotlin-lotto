@@ -1,12 +1,13 @@
 package lotto.view
 
 import lotto.domain.LottoNumbers
+import lotto.domain.Money
 
 object LottoInputView {
     private const val WINNING_LOTTO_DELIMITER = ","
 
-    fun inputMoney(): Int {
-        return readLineWithMessage("구입금액을 입력해 주세요.").trim().toInt()
+    fun inputMoney(): Money {
+        return Money(readLineWithMessage("구입금액을 입력해 주세요.").trim().toInt())
     }
 
     fun inputWinningLottoNumbers(): LottoNumbers {
