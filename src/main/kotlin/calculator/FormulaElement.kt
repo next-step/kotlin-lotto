@@ -7,21 +7,22 @@ data class FormulaElement(
     val operand: Operand,
     val operator: Operation
 ) {
-    constructor(operand: String, operator: Operation) : this(operand.toInt().toOperand(), operator)
+    constructor(operand: String, operator: Operation) : this(operand.toOperand(), operator)
 }
 
 class FormulaFormat(private val formula: String) {
-    fun findCustomOperationDefinition(): String? {
-        return CUSTOM_OPERATION_DEFINITION_REGEX.toRegex().matchEntire(formula)?.destructured?.toList()?.getOrNull(0)
+    val normalFormula: String by lazy {
+        customOperationDefinition?.let {
+            CUSTOM_OPERATION_DEFINITION_REGEX.matchEntire(formula)?.destructured?.toList()?.getOrNull(1)
+        } ?: formula
     }
 
-    fun normalFormula(): String = findCustomOperationDefinition()?.let {
-        CUSTOM_OPERATION_DEFINITION_REGEX.toRegex().matchEntire(formula)?.destructured?.toList()?.getOrNull(1)
-    } ?: formula
+    val customOperationDefinition: String? =
+        CUSTOM_OPERATION_DEFINITION_REGEX.matchEntire(formula)?.destructured?.toList()?.getOrNull(0)
 
 
     companion object {
-        private const val CUSTOM_OPERATION_DEFINITION_REGEX = "//(.)\n(.*)"
+        private val CUSTOM_OPERATION_DEFINITION_REGEX = "//(.)\n(.*)".toRegex()
     }
 }
 
@@ -47,5 +48,6 @@ interface Operand {
 
     companion object {
         fun Int.toOperand(): Operand = RealNumber(this)
+        fun String.toOperand(): Operand = RealNumber(this.toInt())
     }
 }

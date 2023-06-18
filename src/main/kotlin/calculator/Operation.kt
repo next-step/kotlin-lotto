@@ -12,5 +12,5 @@ enum class Operation(val symbol: String, val calculator: Calculator) {
     );
 }
 
-
-data class CustomOperation(val symbol: String)
+@JvmInline
+value class CustomOperation(val symbol: String)
