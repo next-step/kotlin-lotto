@@ -2,7 +2,6 @@ package calculator
 
 import calculator.Operand.Companion.toOperand
 
-
 data class FormulaElement(
     val operand: Operand,
     val operator: Operation
@@ -19,7 +18,6 @@ class FormulaFormat(private val formula: String) {
 
     val customOperationDefinition: String? =
         CUSTOM_OPERATION_DEFINITION_REGEX.matchEntire(formula)?.destructured?.toList()?.getOrNull(0)
-
 
     companion object {
         private val CUSTOM_OPERATION_DEFINITION_REGEX = "//(.)\n(.*)".toRegex()

@@ -63,6 +63,5 @@ class FormulaElementsTest {
         assertThat(result.nextFormulaElement()).isNull()
     }
 
-
     private fun Int.withOperation(operation: Operation): FormulaElement = FormulaElement(toOperand(), operation)
 }

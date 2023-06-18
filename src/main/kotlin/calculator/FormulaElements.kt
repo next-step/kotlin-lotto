@@ -2,7 +2,6 @@ package calculator
 
 import calculator.Operand.Companion.toOperand
 
-
 class FormulaElements(
     private val formula: String,
     defaultOperations: List<CustomOperation> = DEFAULT_CUSTOM_OPERATIONS
