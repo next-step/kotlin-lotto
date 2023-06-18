@@ -10,6 +10,6 @@ fun main() {
         .purchase(InputView.getPurchaseAmount())
     ResultView.printLotto(purchasedLottos)
     val lottoNumbersOfLastWeek = InputView.getLottoWinningNumbers()
-    val lottoReturn = LottoReturnCalculator(purchasedLottos).calculate(lottoNumbersOfLastWeek.numbers)
+    val lottoReturn = LottoReturnCalculator(purchasedLottos).calculate(lottoNumbersOfLastWeek)
     ResultView.printReturn(lottoReturn)
 }
