@@ -17,7 +17,8 @@ fun inputPurchaseManualLottery(): List<List<String>> {
 
 fun inputWinningLottery(): List<String> {
     println("지난 주 당첨 번호를 입력해 주세요.")
-    return readln().split(LOTTERY_NUMBER_DELIMITER)
+    return readln().replace(" ", "")
+        .split(LOTTERY_NUMBER_DELIMITER)
 }
 
 fun inputBonusLotteryNumber(): Int {
