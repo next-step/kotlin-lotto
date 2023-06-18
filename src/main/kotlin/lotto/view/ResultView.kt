@@ -1,28 +1,34 @@
 package lotto.view
 
-import lotto.domain.Lotto
+import lotto.domain.Lottery
 import lotto.domain.LottoMachine
-import lotto.domain.OwnedLotto
+import lotto.domain.LotteryGroup
 import lotto.domain.Rank
 import lotto.domain.Ranking
 
 object ResultView {
 
-    fun showBuyResult(ownedLotto: OwnedLotto) {
-        println("${ownedLotto.lottoes.size}개를 구매했습니다.")
-        ownedLotto.lottoes.forEach {
+    fun showBuyResult(lotteryByHade: LotteryGroup, lotteryByMachine: LotteryGroup) {
+        println("수동으로 ${lotteryByHade.lotteries.size}장, 자동으로 ${lotteryByMachine.lotteries.size}를 구매했습니다.")
+        showLotteries(lotteryByHade)
+        showLotteries(lotteryByMachine)
+        println()
+    }
+
+    private fun showLotteries(lotteryGroup: LotteryGroup) {
+        lotteryGroup.lotteries.forEach {
             showBuyLotto(it)
         }
     }
 
-    private fun showBuyLotto(lotto: Lotto) {
-        println(lotto.lotto.map { it.number })
+    private fun showBuyLotto(lotto: Lottery) {
+        println(lotto.lottery.map { it.number })
     }
 
     fun showGameResult(ranking: Ranking) {
         println("당첨 통계")
         println("---------")
-        ranking.rankingResult.forEach {
+        ranking.rankingResult.toSortedMap().forEach {
             printGradeResult(it)
         }
         val result = if (LottoMachine.rateOfReturn > 1) "이익" else "손해"

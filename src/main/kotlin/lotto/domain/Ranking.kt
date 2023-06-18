@@ -1,6 +1,6 @@
 package lotto.domain
 
-class Ranking(buyedLottoes: OwnedLotto, private val winNumber: Lotto, private val bonusNumber: BonusBall) {
+class Ranking(lotteryByHand: LotteryGroup, lotteryByMachine: LotteryGroup, private val winNumber: Lottery, private val bonusNumber: LottoNumber) {
 
     var rankingResult = mutableMapOf<Rank, Int>()
         private set
@@ -16,19 +16,24 @@ class Ranking(buyedLottoes: OwnedLotto, private val winNumber: Lotto, private va
             rankingResult[it] = 0
         }
 
-        buyedLottoes.lottoes.forEach {
+        checkRanking(lotteryByHand)
+        checkRanking(lotteryByMachine)
+    }
+
+    private fun checkRanking(lotteries: LotteryGroup) {
+        lotteries.lotteries.forEach {
             val rank = getRank(it)
             val rankingCount = rankingResult[rank] ?: 0
             rankingResult[rank] = rankingCount + 1
         }
     }
 
-    private fun getRank(lottoNumber: Lotto): Rank {
-        val size = lottoNumber.lotto.count {
-            it in winNumber.lotto
+    private fun getRank(lottoNumber: Lottery): Rank {
+        val size = lottoNumber.lottery.count {
+            it in winNumber.lottery
         }
-        val isBonusMatched = lottoNumber.lotto.any {
-            it == bonusNumber.bonusNumber
+        val isBonusMatched = lottoNumber.lottery.any {
+            it == bonusNumber
         }
         return Rank.valueOf(size, isBonusMatched)
     }

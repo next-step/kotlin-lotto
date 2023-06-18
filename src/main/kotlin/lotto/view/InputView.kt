@@ -1,35 +1,38 @@
 package lotto.view
 
 import lotto.InputParser
-import lotto.domain.BonusBall
-import lotto.domain.Lotto
+import lotto.domain.Lottery
+import lotto.domain.LotteryGroup
 
 object InputView {
-
-    private const val EMPTY_STRING = "입력값이 없습니다"
-
-    fun getBuyAmount(): Int? {
-        println("구입금액을 입력해 주세요.")
-        val inputData = readlnOrNull()
-        return InputParser.parseInputStringToInt(inputData)
+    fun getInputDataInteger(message: String): Int {
+        println("$message 입력해 주세요.")
+        runCatching {
+            val inputData = readlnOrNull()
+            return InputParser.parseInputStringToInt(inputData)
+        }.getOrElse {
+            it.printStackTrace()
+            return -1
+        }
     }
 
-    fun getLottoBuyCount(): Int? {
-        println("수동으로 구매할 로또 수를 입력해 주세요.")
-        val inputData = readlnOrNull()
-        return InputParser.parseInputStringToInt(inputData)
+    fun getLotteriesByHand(message: String, count: Int): LotteryGroup {
+        println("$message 입력해 주세요.")
+        runCatching {
+            return lotteryGroup(count)
+        }.getOrElse {
+            it.printStackTrace()
+            return LotteryGroup()
+        }
     }
 
-    fun getWinLotto(): Lotto {
-        println("지난 주 당첨 번호를 입력해 주세요.")
-        val inputData = readlnOrNull() ?: throw IllegalArgumentException(EMPTY_STRING)
-        return Lotto(InputParser.parseWinNumbers(inputData))
-    }
-
-    fun getBonusBall(): BonusBall {
-        println("보너스 볼을 입력해 주세요.")
-        val inputData = readlnOrNull() ?: throw IllegalArgumentException(EMPTY_STRING)
-        val bonusNumber = InputParser.parseBonus(inputData)
-        return BonusBall(bonusNumber)
+    private fun lotteryGroup(count: Int): LotteryGroup {
+        val lotteries = mutableListOf<Lottery>()
+        repeat(count) {
+            val inputData = readlnOrNull() ?: ""
+            val lottery = InputParser.parseLotteryNumbers(inputData)
+            lotteries.add(Lottery(lottery))
+        }
+        return LotteryGroup(lotteries)
     }
 }

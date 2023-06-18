@@ -1,12 +1,12 @@
 package lotto.domain
 
-class Lotto(val lotto: List<LottoNumber>) {
+class Lottery(val lottery: List<LottoNumber>) {
 
     init {
-        require(lotto.size == lotto.distinct().size) {
+        require(lottery.size == lottery.distinct().size) {
             "중복된 숫자는 올 수 없음"
         }
-        require(lotto.size == LOTTO_NUMBER_COUNT) {
+        require(lottery.size == LOTTO_NUMBER_COUNT) {
             "로또 숫자는 6개이어야함"
         }
     }
