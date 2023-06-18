@@ -1,9 +1,9 @@
 package com.nextstep.second.lotto.domain
 
 class WinnerLotto private constructor(
-    val numbers: List<LottoNumberVo>,
+    numbers: List<LottoNumberVo>,
     val bonusNumber: LottoNumberVo
-) {
+) : Lotto(numbers) {
 
     companion object {
         fun of(inputNumbers: List<Int>, bonusNumber: Int): WinnerLotto {
