@@ -28,11 +28,9 @@ class LottoGame(
         val winningNumberGenerator = FixedNumberGenerator(inputView.readWinningNumbers())
         return WinningNumbers(LottoNumbers(winningNumberGenerator))
     }
-
     private fun calculateMatchResult(lottos: Lottos, winningNumbers: WinningNumbers): MatchResult {
-        return LottoMatcher.matchingLotto(lottos, winningNumbers)
+        return winningNumbers.calculateMatchResult(lottos)
     }
-
     private fun printResults(matchResult: MatchResult, money: Int) {
         val earningRate = matchResult.calculateEarningRate(money)
         resultView.printStatistics(matchResult, earningRate)
