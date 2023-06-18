@@ -1,13 +1,15 @@
 package lotto
 
-import lotto.dto.LottoBundle
+import lotto.domain.Lotto
+import lotto.domain.LottoBundle
 import lotto.utils.RateCalculator
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoApplication(
     private val rateCalculator: RateCalculator,
-    private val lottoChecker: LottoChecker,
+    private val lottoNumberMatcher: LottoNumberMatcher,
+    private val lottoMoneyMatcher: LottoMoneyMatcher
 ) {
 
     private val inputView = InputView
@@ -17,15 +19,21 @@ class LottoApplication(
         val lottoBundle = getLottoBundleByMoney()
 
         val lastWeekNumber = inputView.printInputLottoNumberByLastWeek()
+        lastWeekNumberValidation(lastWeekNumber)
+        val winningNumbers = splitLottoNumbers(lastWeekNumber)
+
+        val bonusNumber = inputView.printInputBonusLottoNumber().toInt()
+        lottoBonusNumberValidation(bonusNumber, winningNumbers)
         resultView.printEnter()
 
         resultView.printResult()
-        val collectLottoRanks = lottoChecker.lottoCheck(lastWeekNumber, lottoBundle.lottoBundle)
+        val collectCounts = lottoNumberMatcher.lottoCheck(winningNumbers, lottoBundle.lottoBundle, bonusNumber)
+        val collectBonusCount = lottoNumberMatcher.bonusLottoCheck(winningNumbers, lottoBundle.lottoBundle, bonusNumber)
 
-        val resultGroup = lottoChecker.lottoResultGroup(collectLottoRanks)
-        resultView.printWinningResult(resultGroup)
+        val resultGroup = lottoNumberMatcher.lottoResultGroup(collectCounts)
+        resultView.printWinningResult(resultGroup, collectBonusCount)
 
-        val winningMoney = lottoChecker.winningMoneyCheck(collectLottoRanks)
+        val winningMoney = lottoMoneyMatcher.winningMoneyCheck(collectCounts, collectBonusCount)
 
         val returnRatio = rateCalculator.calculateRateOfReturn(lottoBundle.inputMoney, winningMoney)
         resultView.printRateOfReturn(returnRatio)
@@ -42,8 +50,27 @@ class LottoApplication(
         resultView.printEnter()
         return LottoBundle(inputMoney, lottoBundle)
     }
+
+    private fun lastWeekNumberValidation(lastWeekNumber: String) {
+        require(lastWeekNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }.size == Lotto.COLLECT_LOTTO_SIZE) {
+            "로또 입력 숫자는 총 6개여야 합니다"
+        }
+    }
+
+    private fun splitLottoNumbers(winningNumber: String): List<Int> {
+        return winningNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }
+    }
+
+    private fun lottoBonusNumberValidation(bonusNumber: Int, splitNumbers: List<Int>) {
+        require( bonusNumber in 1..45) {
+            "로또의 숫자는 1부터 45 사이의 숫자만 가능합니다."
+        }
+        require( !splitNumbers.contains(bonusNumber)) {
+            "보너스 숫자가 중복이 될 수 없습니다."
+        }
+    }
 }
 
 fun main() {
-    LottoApplication(RateCalculator(), LottoChecker()).startLottery()
+    LottoApplication(RateCalculator(), LottoNumberMatcher(), LottoMoneyMatcher()).startLottery()
 }
