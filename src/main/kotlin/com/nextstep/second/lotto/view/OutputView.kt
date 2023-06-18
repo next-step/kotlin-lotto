@@ -16,7 +16,7 @@ object OutputView {
         println("당첨 통계")
         println("---------")
         checkRewards.forEach { reward ->
-            println("${reward.totalSameNumber}개 일치 (${reward.reward}원)- ${lottoResults.getMatchedNumber(reward)}개")
+            println("$reward - ${lottoResults.getMatchedNumber(reward)}개")
         }
         println("총 수익률은 ${lottoResults.getRateOfReturn(money)}입니다.")
     }
