@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoRank
 import lotto.domain.Lottos
 import lotto.domain.LottosResult
 
@@ -14,12 +13,10 @@ object LottoOutputView {
 
     fun printLottoResults(lottosResult: LottosResult) {
         println("당첨 통계")
-        with(lottosResult) {
-            println("${LottoRank.FIFTH.matchCount}개 일치 (${LottoRank.FIFTH.winningMoney})- ${lottosResult.winningResults[LottoRank.FIFTH]}개")
-            println("${LottoRank.FOURTH.matchCount}개 일치 (${LottoRank.FOURTH.winningMoney}원)- ${lottosResult.winningResults[LottoRank.FOURTH]}개")
-            println("${LottoRank.THIRD.matchCount}개 일치 (${LottoRank.THIRD.winningMoney}원)- ${lottosResult.winningResults[LottoRank.THIRD]}개")
-            println("${LottoRank.FIRST.matchCount}개 일치 (${LottoRank.FIRST.winningMoney}원)- ${lottosResult.winningResults[LottoRank.FIRST]}개")
-            println("수익률은 ${returnOfRate}입니다.")
+        println("---------")
+        lottosResult.winningResults.forEach { (lottoRank, matchCount) ->
+            println("${lottoRank.matchCount}개 일치 (${lottoRank.winningMoney})- ${matchCount}개")
         }
+        println("수익률은 ${lottosResult.returnOfRate}입니다.")
     }
 }
