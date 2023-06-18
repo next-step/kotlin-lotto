@@ -1,8 +1,11 @@
 package lotto.domain
 
-class RateOfReturn(mRanking: Ranking, amount: Int) {
+import kotlin.math.floor
+
+class RateOfReturn(ranking: Ranking, amount: Int) {
     val rate: Double
+        get() = floor(field * 100) / 100
     init {
-        rate = mRanking.totalWinAmount.toDouble() / amount.toDouble()
+        rate = ranking.totalWinAmount.toDouble() / amount.toDouble()
     }
 }

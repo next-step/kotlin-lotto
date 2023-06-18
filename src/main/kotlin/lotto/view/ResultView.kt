@@ -33,8 +33,9 @@ object ResultView {
         }.forEach {
             printGradeResult(it)
         }
-        val result = if (LottoMachine.rateOfReturn.rate > 1) "이익" else "손해"
-        println("총 수익률은 ${String.format("%.2f", LottoMachine.rateOfReturn.rate)}입니다.(기준이 1이기 때문에 결과적으로 ${result}라는 의미임)")
+        val rateOfReturn = LottoMachine.rateOfReturn.rate
+        val result = if (rateOfReturn > 1) "이익" else "손해"
+        println("총 수익률은 ${rateOfReturn}입니다.(기준이 1이기 때문에 결과적으로 ${result}라는 의미임)")
     }
 
     private fun printGradeResult(result: Map.Entry<Rank, Int>) {

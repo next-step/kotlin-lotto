@@ -49,7 +49,7 @@ class LottoMachineTest : AnnotationSpec() {
         val bonusNumber = LottoNumber(7)
         LottoMachine.setWinLotto(winNumber, bonusNumber)
         LottoMachine.generateRanking()
-        LottoMachine.rateOfReturn shouldBeLessThan 1.0
+        LottoMachine.rateOfReturn.rate shouldBeLessThan 1.0
     }
 
     @Test
