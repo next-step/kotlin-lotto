@@ -1,8 +1,8 @@
 package lotto.view
 
 import lotto.domain.Lottery
-import lotto.domain.LottoMachine
 import lotto.domain.LotteryGroup
+import lotto.domain.LottoMachine
 import lotto.domain.Rank
 import lotto.domain.Ranking
 
@@ -28,7 +28,9 @@ object ResultView {
     fun showGameResult(ranking: Ranking) {
         println("당첨 통계")
         println("---------")
-        ranking.rankingResult.toSortedMap().forEach {
+        ranking.rankingResult.toSortedMap { o1, o2 ->
+            o2.compareTo(o1)
+        }.forEach {
             printGradeResult(it)
         }
         val result = if (LottoMachine.rateOfReturn > 1) "이익" else "손해"
@@ -41,7 +43,8 @@ object ResultView {
         }
         if (result.key == Rank.SECOND) {
             println("${result.key.countOfMatch}개 일치, 보너스 볼 일치 (${result.key.winningMoney}원) - ${result.value}개")
+        } else {
+            println("${result.key.countOfMatch}개 일치 (${result.key.winningMoney}원) - ${result.value}개")
         }
-        println("${result.key.countOfMatch}개 일치 (${result.key.winningMoney}원) - ${result.value}개")
     }
 }
