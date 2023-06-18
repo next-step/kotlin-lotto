@@ -19,7 +19,8 @@ object ResultView {
         println("---------")
         LottoRank.values().forEach {
             val lottoResult = result.firstOrNull { result -> result.lottoRank == it }
-            println("${it.num}개 일치 (${it.price})- ${lottoResult?.matchNum ?: 0}개")
+            val bonusString = if (it == LottoRank.FIVE_WITH_BONUS) ", 보너스 볼 일치" else ""
+            println("${it.num}개 일치$bonusString (${it.price})- ${lottoResult?.matchNum ?: 0}개")
         }
         println("총 수익률은 ${lottoProfitRatio}입니다.")
     }
