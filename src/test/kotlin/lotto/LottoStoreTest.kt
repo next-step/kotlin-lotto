@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import lotto.domain.LotteryTicketsOrderRequest
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoStore
 import org.junit.jupiter.api.BeforeEach
@@ -28,8 +29,9 @@ class LottoStoreTest {
         "10101",
     )
     fun `로또 판매점은 로또 구입 금액이 1000원 미만 또는 1000원 단위가 아닐 경우 IllegalArgumentException 을 발생`(purchaseAmount: Int) {
+        val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount)
         shouldThrow<IllegalArgumentException> {
-            lottoStore.purchase(purchaseAmount, emptyList())
+            lottoStore.purchase(request)
         }
     }
 
@@ -41,9 +43,11 @@ class LottoStoreTest {
         "25000, 25",
     )
     fun `로또 판매점은 (구매 금액 나누기 1000) 만큼 로또를 발급`(purchaseAmount: Int, expected: Int) {
-        val lotteryTickets = lottoStore.purchase(purchaseAmount, emptyList())
+        val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount)
 
-        lotteryTickets.size shouldBe expected
+        val purchasedLotteryTickets = lottoStore.purchase(request)
+
+        purchasedLotteryTickets.totalPurchasedLotteryTicketsQuantity shouldBe expected
     }
 
     @Test
@@ -53,9 +57,10 @@ class LottoStoreTest {
             LottoTestHelper.makeLottoNumbers((1..6).toList()),
             LottoTestHelper.makeLottoNumbers((1..6).toList()),
         )
+        val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
 
         shouldThrow<IllegalArgumentException> {
-            lottoStore.purchase(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+            lottoStore.purchase(request)
         }
     }
 
@@ -66,11 +71,11 @@ class LottoStoreTest {
         manualLottoNumbers: List<LottoNumbers>,
         expectedAutoLotteryTicketCount: Int
     ) {
-        val lotteryTickets =
-            lottoStore.purchase(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
-        val autoLotteryTickets = lotteryTickets.filter { it.isAuto }
+        val request = LotteryTicketsOrderRequest(purchaseAmount = purchaseAmount, manualLottoNumbers = manualLottoNumbers)
+        val purchasedLotteryTickets = lottoStore.purchase(request)
+        val autoLotteryTickets = purchasedLotteryTickets.autoLotteryTicketQuantity
 
-        autoLotteryTickets.size shouldBe expectedAutoLotteryTicketCount
+        autoLotteryTickets shouldBe expectedAutoLotteryTicketCount
     }
 
     companion object {

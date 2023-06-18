@@ -17,5 +17,5 @@ fun main() {
 
     val winningLottoNumber = lottoController.readWinningLottoNumber()
 
-    lottoController.printLottoResult(lotteryTickets = purchaseLotteryTickets, winningLottoNumber = winningLottoNumber)
+    lottoController.printLottoResult(lotteryTickets = purchaseLotteryTickets.lotteryTickets, winningLottoNumber = winningLottoNumber)
 }

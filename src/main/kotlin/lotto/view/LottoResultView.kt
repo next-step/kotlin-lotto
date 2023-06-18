@@ -4,13 +4,13 @@ import lotto.domain.LotteryTicket
 import lotto.domain.LotteryTickets
 import lotto.domain.LottoRanking
 import java.math.BigDecimal
+import lotto.domain.PurchasedLotteryTickets
 
 class LottoResultView {
 
-    fun printLotteryTickets(autoLotteryTickets: LotteryTickets, manualLotteryTickets: LotteryTickets) {
-        println("수동으로 ${manualLotteryTickets.size}장, 자동으로 ${autoLotteryTickets.size}개를  구매했습니다.")
-        manualLotteryTickets.forEach { printLotteryTicket(it) }
-        autoLotteryTickets.forEach { printLotteryTicket(it) }
+    fun printLotteryTickets(purchasedLotteryTickets: PurchasedLotteryTickets) {
+        println("수동으로 ${purchasedLotteryTickets.manualLotteryTicketQuantity}장, 자동으로 ${purchasedLotteryTickets.autoLotteryTicketQuantity}개를  구매했습니다.")
+        purchasedLotteryTickets.lotteryTickets.forEach { printLotteryTicket(it) }
         println()
     }
 
