@@ -14,5 +14,5 @@ fun main() {
     val winnerLotto = LottoService.getWinnerLotto(winnerNumber)
     val lottoResult = LottoService.checkThisWeekLottoResult(winnerLotto, buyLottos)
 
-    OutputView.showLottoResult(inputMoney, lottoResult, LottoReward.getRewards())
+    OutputView.showLottoResult(inputMoney, lottoResult, LottoReward.getRewardsForCelebrate())
 }

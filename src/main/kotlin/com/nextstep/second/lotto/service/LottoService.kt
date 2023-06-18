@@ -15,6 +15,6 @@ object LottoService {
     }
 
     fun checkThisWeekLottoResult(winnerLotto: Lotto, myLottos: List<Lotto>): LottoResult {
-        return LottoResult(winnerLotto, myLottos)
+        return LottoResult.of(winnerLotto, myLottos)
     }
 }
