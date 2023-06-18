@@ -25,7 +25,7 @@ class LottoServiceTest {
         val money = 15_000
         val totalCnt = 15
         val lottos = LottoService.buyLottoInRandom(money)
-        val winnerNumber = LottoService.getWinnerLotto(listOf(1, 2, 3, 4, 5, 6))
+        val winnerNumber = LottoService.getWinnerLotto(listOf(1, 2, 3, 4, 5, 6), 7)
         // when
         val result = LottoService.checkThisWeekLottoResult(winnerNumber, lottos)
         // then

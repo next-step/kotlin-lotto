@@ -12,7 +12,7 @@ enum class LottoReward(
     SIXTH(6, 2_000_000_000);
 
     companion object {
-        fun valueOf(countMatch: Int, matchedBonus: Boolean): LottoReward {
+        fun valueOf(countMatch: Int, matchedBonus: Boolean = false): LottoReward {
             return when {
                 countMatch == 3 -> THIRD
                 countMatch == 4 -> FOURTH

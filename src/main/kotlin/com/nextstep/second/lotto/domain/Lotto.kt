@@ -2,6 +2,10 @@ package com.nextstep.second.lotto.domain
 
 class Lotto private constructor(val numbers: List<LottoNumberVo>) {
 
+    fun contains(num: LottoNumberVo): Boolean {
+        return numbers.any { it.isEquals(num) }
+    }
+
     companion object {
         const val LOTTO_LENGTH = 6
         const val PRICE = 1_000
