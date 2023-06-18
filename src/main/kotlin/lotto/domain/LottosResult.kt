@@ -17,7 +17,7 @@ class LottosResult(
         totalWinningMoney = winningResults
             .map { (rank, count) -> rank.winningMoney * count }
             .sum()
-        returnOfRate = (totalWinningMoney.toDouble() / totalCost).round()
+        returnOfRate = (totalWinningMoney / totalCost.toDouble()).round()
     }
 
     private fun validateTotalCostIsPostivieZero(totalCost: Int) {
