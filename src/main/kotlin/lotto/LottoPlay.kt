@@ -1,7 +1,6 @@
-package lotto.view
+package lotto
 
 import lotto.model.Lotto
-import lotto.model.LottoPrize
 import lotto.service.LottoTicketCountCalculator
 
 
@@ -21,7 +20,10 @@ fun main() {
     println("지난 주 당첨 번호를 입력해 주세요.")
     val lastWeekWinningString = readLine()
     val lastWeekWinningNumbers: List<Int> = lastWeekWinningString?.split(",")?.map { it.trim().toInt() } ?: emptyList()
-    val winningRatio = getWinningRatio(purchaseAmount, winningLottos, lastWeekWinningNumbers)
+
+    winningLottos.forEach { it.setLottoPrize(lastWeekWinningNumbers) }
+
+    val winningRatio = getWinningRatio(purchaseAmount, winningLottos)
 
     println("당첨 통계")
     println("---------")
@@ -41,13 +43,14 @@ fun main() {
     )
 }
 
-private fun getWinningRatio(purchaseAmount : Int, winningLottos: List<Lotto>, lastWeekWinningNumbers: List<Int>): Double {
-    return getTotalWinningPrize(winningLottos, lastWeekWinningNumbers) / purchaseAmount.toDouble()
+fun getWinningRatio(
+    purchaseAmount: Int, winningLottos: List<Lotto>): Double {
+    return getTotalWinningPrize(winningLottos) / purchaseAmount.toDouble()
 }
 
-private fun getTotalWinningPrize(winningLottos: List<Lotto>, lastWeekWinningNumbers: List<Int>): Long
-    = winningLottos.sumOf { LottoPrize.getPrizeAmount(it.calculateMatchingNumbers(lastWeekWinningNumbers)) }
+private fun getTotalWinningPrize(winningLottos: List<Lotto>): Long =
+    winningLottos.sumOf { it.lottoPrize.prizeAmount }
 
-private fun staticPrize(winningLottos: List<Lotto>, prize: Long) : Int =
-    winningLottos.count { it.prizeAmount == prize }
+fun staticPrize(winningLottos: List<Lotto>, prize: Long): Int =
+    winningLottos.count { it.lottoPrize.prizeAmount == prize }
 
