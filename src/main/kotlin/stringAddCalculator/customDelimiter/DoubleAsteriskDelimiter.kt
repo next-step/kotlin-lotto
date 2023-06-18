@@ -4,7 +4,7 @@ package stringAddCalculator.customDelimiter
  * CustomDelimiter 의 확장예시로 요구사항과는 상관이 없습니다.
  */
 class DoubleAsteriskDelimiter : CustomDelimiter {
-    override val regex: Regex = Regex(regexPattern)
+    override val regex: Regex = regexPattern
 
     override fun parse(expression: String): ParserResult? {
         return regex.find(expression)?.let {
@@ -15,6 +15,7 @@ class DoubleAsteriskDelimiter : CustomDelimiter {
     }
 
     companion object {
-        const val regexPattern = "(.*)\\*\\*(.)"
+        @JvmField
+        val regexPattern: Regex = Regex("(.*)\\*\\*(.)")
     }
 }

@@ -1,7 +1,7 @@
 package stringAddCalculator.customDelimiter
 
 class DoubleSlashAndNewLineDelimiter : CustomDelimiter {
-    override val regex: Regex = Regex(regexPattern)
+    override val regex: Regex = regexPattern
 
     override fun parse(expression: String): ParserResult? {
         return regex.find(expression)?.let {
@@ -12,6 +12,7 @@ class DoubleSlashAndNewLineDelimiter : CustomDelimiter {
     }
 
     companion object {
-        const val regexPattern = "//(.)\n(.*)"
+        @JvmField
+        val regexPattern: Regex = Regex("//(.)\n(.*)")
     }
 }

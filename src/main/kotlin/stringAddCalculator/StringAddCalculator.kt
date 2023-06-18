@@ -1,48 +1,45 @@
 package stringAddCalculator
 
 import stringAddCalculator.customDelimiter.CustomDelimiter
-import java.lang.RuntimeException
+import stringAddCalculator.number.PositiveNumber
 
 class StringAddCalculator(
-    private var expression: String,
+    _expression: String,
     private var customDelimiters: List<CustomDelimiter> = emptyList(),
     private var delimiters: List<String> = listOf(DELIMITER_COMMA, DELIMITER_COLON),
 ) {
-    private lateinit var numbers: List<Int>
+    private val expression: String
+    private lateinit var numbers: List<PositiveNumber>
 
     init {
-        executeCustomDelimiterParse()
+        expression = executeCustomDelimiterParse(_expression)
         initNumbers()
     }
 
     fun calculate(): Int {
-        return numbers.reduce { acc, c -> acc + c }
+        return numbers.map { it.value }.reduce { acc, n -> acc + n }
     }
 
-    private fun executeCustomDelimiterParse() {
+    private fun executeCustomDelimiterParse(initExpression: String): String {
+        var _expression = initExpression
         customDelimiters.forEach { customDelimiter ->
-            val parserResult = customDelimiter.parse(expression)
+            val parserResult = customDelimiter.parse(_expression)
             parserResult?.let {
                 delimiters = delimiters.plus(it.customDelimiter)
-                expression = it.expression
+                _expression = it.expression
             }
         }
+        return _expression
     }
 
     private fun initNumbers() {
         val delimiterStr = delimiters.reduce { acc, s -> "$acc|$s" }
-        val numbers = runCatching {
-            expression.split(delimiterStr.toRegex()).map { number -> number.toInt() }
-        }.onFailure { throw RuntimeException(CalcErrorCode.INVALID_NUMBER.msg) }
-            .getOrDefault(emptyList())
-
-        if (numbers.any { Integer.signum(it) != POSITIVE_NUMBER_RESULT }) throw RuntimeException(CalcErrorCode.INVALID_NUMBER.msg)
+        val numbers = expression.split(delimiterStr.toRegex()).map { number -> PositiveNumber(number.toInt()) }
         this.numbers = numbers
     }
 
     companion object {
         const val DELIMITER_COMMA = ","
         const val DELIMITER_COLON = ":"
-        const val POSITIVE_NUMBER_RESULT = 1
     }
 }
