@@ -13,9 +13,8 @@ enum class LottoRank(
     companion object {
         private val MAP_BY_MATCH_COUNT = values().associateBy { it.matchCount }
 
-        fun of(matchCount: Int): LottoRank {
+        fun of(matchCount: Int): LottoRank? {
             return MAP_BY_MATCH_COUNT[matchCount]
-                ?: throw IllegalArgumentException("일치하는 순위가 없습니다.")
         }
     }
 }

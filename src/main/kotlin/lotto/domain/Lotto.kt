@@ -8,7 +8,7 @@ class Lotto(
         validateRangeOfNumbers(numbers)
     }
 
-    fun calculateResult(numbers: Set<Int>): LottoRank {
+    fun calculateResult(numbers: Set<Int>): LottoRank? {
         return LottoRank.of(numbers.intersect(this.numbers).size)
     }
 

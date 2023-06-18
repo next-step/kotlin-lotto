@@ -9,6 +9,7 @@ class Lottos(
     fun calculateResults(winningNumbers: WinningNumbers): LottosResult {
         val winningResults = values
             .map { lotto -> lotto.calculateResult(winningNumbers) }
+            .filterNotNull()
             .groupingBy { it }
             .eachCount()
             .fillMissingRanks()
