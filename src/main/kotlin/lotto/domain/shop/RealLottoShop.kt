@@ -9,7 +9,7 @@ class RealLottoShop(
 
     override fun purchase(lottoPurchaseAmount: PositiveNumber): LottoPurchaseResult {
         return LottoPurchaseResult(
-            lottoGames = List(lottoPurchaseAmount.value / 1000) {
+            lottoGames = List(lottoPurchaseAmount / 1000) {
                 lottoGameMachine.create()
             }
         )
