@@ -9,7 +9,7 @@ import lotto.view.ResultView
 
 fun main() {
     val money = InputView.getAmount()
-
+    val bonus = InputView.getBonusNumber()
     val lottos = LottoShop.getLottos(money)
     ResultView.printLottos(lottos)
     val lottoResult = Lotto(InputView.getWinningNumbers())
