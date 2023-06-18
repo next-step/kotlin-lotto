@@ -13,6 +13,6 @@ class InputParserTest {
     @ValueSource(strings = ["//!\n1!3!3", "//@\n3@3@1"])
     @ParameterizedTest
     fun `커스텀 구분자로 파싱이 가능하다`(input: String) {
-        InputParser.parseByCustomDelimiter(input).size shouldBe 3
+        InputParser.parse(input).size shouldBe 3
     }
 }

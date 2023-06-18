@@ -26,7 +26,7 @@ class InputValidatorTest {
     @ValueSource(strings = ["//@\n1@2@3", "//!\n1!2!3", "//?\n1?2?3"])
     @ParameterizedTest
     fun `커스텀 구분자가 있는 입력 값을 검증할 수 있다`(input: String) {
-        val tokens = InputParser.parseByCustomDelimiter(input)
+        val tokens = InputParser.parse(input)
 
         shouldNotThrow<RuntimeException> {
             InputValidator.validate(tokens)

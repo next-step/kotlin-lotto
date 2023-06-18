@@ -1,6 +1,5 @@
 import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -47,7 +46,7 @@ class StringCalculatorTest {
     @ParameterizedTest
     fun `입력 값이 잘못되면 RuntimeException을 반환한다`(input: String?) {
         Assertions.assertThatExceptionOfType(RuntimeException::class.java).isThrownBy {
-            val result = calculator.add(input)
+            calculator.add(input)
         }
     }
 }
