@@ -12,6 +12,8 @@ data class WinNumbers(private val winLotto: Lotto, private val bonusNumber: Lott
 
     fun getMatchCount(lotto: Lotto): Int = lotto.getMatchCount(this.winLotto)
 
+    fun isBonusMatch(lotto: Lotto): Boolean = this.bonusNumber in lotto
+
     companion object {
         private const val DUPLICATE_NUMBER_ERROR_MESSAGE = "보너스 번호는 당첨 번호에 포함되지 않아야 합니다"
     }
