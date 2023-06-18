@@ -8,10 +8,16 @@ object InputView {
 
     private const val EMPTY_STRING = "입력값이 없습니다"
 
-    fun getBuyAmount(): Int {
+    fun getBuyAmount(): Int? {
         println("구입금액을 입력해 주세요.")
-        val inputData = readlnOrNull() ?: throw IllegalArgumentException(EMPTY_STRING)
-        return InputParser.getBuyAmount(inputData)
+        val inputData = readlnOrNull()
+        return InputParser.parseInputStringToInt(inputData)
+    }
+
+    fun getLottoBuyCount(): Int? {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val inputData = readlnOrNull()
+        return InputParser.parseInputStringToInt(inputData)
     }
 
     fun getWinLotto(): Lotto {

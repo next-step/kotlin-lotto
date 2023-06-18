@@ -5,8 +5,8 @@ import lotto.domain.LottoNumber
 object InputParser {
 
     private const val SEPERATOR = ","
-    fun getBuyAmount(moneyString: String): Int {
-        return moneyString.toIntOrNull() ?: throw IllegalArgumentException("구매금액은 숫자이어야함")
+    fun parseInputStringToInt(inputString: String?): Int? {
+        return inputString?.toIntOrNull()
     }
 
     fun parseWinNumbers(winNumbers: String): List<LottoNumber> {
