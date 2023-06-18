@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
 class LottoTicketKoTest : StringSpec({
 
     "1부터 45사이의 6자리 숫자로 로또 티켓 생성 성공" {
-        LottoTicket(listOf(1, 2, 3, 43, 44, 45)) shouldBe LottoTicket(listOf(1, 2, 3, 43, 44, 45))
+        LottoTicket(listOf(1, 2, 3, 43, 44, 45))
     }
 
     "1부터 45 범위를 벗어난 숫자를 입력하면 에러" {
@@ -17,7 +17,7 @@ class LottoTicketKoTest : StringSpec({
             listOf(0, 2, 3, 43, 44, 45),
             listOf(1, 2, 3, 43, 44, 46),
         ).forAll {
-            shouldThrow<RuntimeException> {
+            shouldThrow<IllegalArgumentException> {
                 LottoTicket(it)
             }
         }
@@ -28,7 +28,7 @@ class LottoTicketKoTest : StringSpec({
             listOf(1, 2, 3, 4, 5),
             listOf(1, 2, 3, 4, 5, 6, 7),
         ).forAll {
-            shouldThrow<RuntimeException> {
+            shouldThrow<IllegalArgumentException> {
                 LottoTicket(it)
             }
         }

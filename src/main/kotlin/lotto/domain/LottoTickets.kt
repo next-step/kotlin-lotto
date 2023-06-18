@@ -9,16 +9,16 @@ class LottoTickets(private val money: Money, autoNumbers: AutoNumbers) {
     }
 
     fun getWinStats(winNumbers: LottoTicket): WinStats {
-        val matchMap: MutableMap<WinResult, Int> = mutableMapOf()
         var amount: Long = 0
 
-        lottoTickets.filter {
+        val matchMap: Map<WinResult, Int> = lottoTickets.filter {
             it.getWinResult(winNumbers) !== WinResult.LOSE
-        }.map {
-            val winResult: WinResult = it.getWinResult(winNumbers)
-            matchMap[winResult] = matchMap.getOrDefault(winResult, 0) + 1
-            amount += winResult.reward
-        }
+        }.groupingBy {
+            it.getWinResult(winNumbers)
+        }.eachCount()
+
+        matchMap.keys.forEach { amount += it.reward }
+
         return WinStats(matchMap, calculateYield(amount))
     }
 

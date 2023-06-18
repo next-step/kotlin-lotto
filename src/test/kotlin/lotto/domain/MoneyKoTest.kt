@@ -9,7 +9,7 @@ class MoneyKoTest : StringSpec({
 
     "천원부터 십만원까지 범위를 벗어나면 에러" {
         listOf(-1, 999, 100001).forAll {
-            shouldThrow<RuntimeException> {
+            shouldThrow<IllegalArgumentException> {
                 Money(it)
             }
         }
