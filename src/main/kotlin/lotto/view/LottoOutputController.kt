@@ -7,7 +7,9 @@ import lotto.domain.Lottos
 object LottoOutputController {
     fun printLottos(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
-        println(lottos)
+        lottos.values.forEach { lotto ->
+            println(lotto.numbers.joinToString(", "))
+        }
     }
 
     fun printLottoStatistic(lottoStatistic: LottoStatistic) {

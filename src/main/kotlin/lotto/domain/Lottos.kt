@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lottos(
-    private val values: List<Lotto>,
+    val values: List<Lotto>,
 ) {
     val size = values.size
     val cost = size * Lotto.PRICE
@@ -28,10 +28,6 @@ class Lottos(
             numberOfFourth = numberOfFourth,
             numberOfFifth = numberOfFifth,
         )
-    }
-
-    override fun toString(): String {
-        return values.joinToString("\n")
     }
 
     companion object {
