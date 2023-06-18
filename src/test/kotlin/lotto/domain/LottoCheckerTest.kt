@@ -15,7 +15,10 @@ class LottoCheckerTest : BehaviorSpec({
             )
         )
         val winNumbers =
-            WinNumbers((LottoNumber.LOTTO_MIN_NUMBER until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE).toList())
+            WinNumbers(
+                Lotto((LottoNumber.LOTTO_MIN_NUMBER until LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE).toSet()),
+                LottoNumber.LOTTO_MIN_NUMBER + Lotto.LOTTO_NUMBER_SIZE + 1
+            )
         `when`("당첨결과를 확인했을때") {
             then("정확한 결과가 반환된다") {
                 LottoChecker.checkResult(lottos, winNumbers) shouldBe LottoResults.of(

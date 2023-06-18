@@ -1,14 +1,18 @@
 package lotto.domain
 
-data class WinNumbers(val numbers: List<LottoNumber>) {
+data class WinNumbers(private val winLotto: Lotto, private val bonusNumber: LottoNumber) {
     init {
-        require(numbers.distinct().size == Lotto.LOTTO_NUMBER_SIZE) { WINNING_NUMBER_ERROR_MESSAGE }
-        require(numbers.find { it !in LottoNumber.LOTTO_MIN_NUMBER..LottoNumber.LOTTO_MAX_NUMBER } == null) { LottoNumber.NUMBER_RANGE_ERROR_MESSAGE }
+        require(bonusNumber !in winLotto) { DUPLICATE_NUMBER_ERROR_MESSAGE }
     }
 
-    fun getMatchCount(lotto: Lotto): Int = numbers.count { it in lotto }
+    constructor(numbers: List<Int>, bonusNumber: Int) : this(
+        Lotto(numbers.map { LottoNumber(it) }.toSortedSet()),
+        LottoNumber(bonusNumber)
+    )
+
+    fun getMatchCount(lotto: Lotto): Int = lotto.getMatchCount(this.winLotto)
 
     companion object {
-        private const val WINNING_NUMBER_ERROR_MESSAGE = "당첨번호는 ${Lotto.LOTTO_NUMBER_SIZE}개여야 합니다"
+        private const val DUPLICATE_NUMBER_ERROR_MESSAGE = "보너스 번호는 당첨 번호에 포함되지 않아야 합니다"
     }
 }
