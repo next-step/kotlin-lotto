@@ -12,12 +12,10 @@ class LottoGenerator(
         } while (numberSet.size < Lotto.COLLECT_LOTTO_SIZE)
         return numberSet.sorted()
     }
-    private fun getLottoNumber(): Int {
-        val selectedNumber = numbers.shuffled()[PICK_INDEX]
-        numbers.remove(selectedNumber)
-        return selectedNumber
-    }
 
+    private fun getLottoNumber(): Int {
+        return numbers.shuffled()[PICK_INDEX]
+    }
 
     companion object {
         private const val PICK_INDEX: Int = 0
