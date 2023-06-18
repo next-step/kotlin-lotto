@@ -18,6 +18,11 @@ class ResultView {
     }
 
     fun outputEarningsRate(earningsRate: Double) {
-        println("총 수익률은 ${earningsRate}입니다.")
+        val tip = when (earningsRate) {
+            1.0 -> "(기준이 1이기 때문에 결과적으로 본전입니다)"
+            in 0.0..1.0 -> "(기준이 1이기 때문에 결과적으로 손해입니다)"
+            else -> "(기준이 1이기 때문에 결과적으로 이득입니다)"
+        }
+        println("총 수익률은 ${earningsRate}입니다.$tip")
     }
 }
