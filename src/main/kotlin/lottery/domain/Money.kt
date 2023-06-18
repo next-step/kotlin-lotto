@@ -15,5 +15,7 @@ value class Money(
 
     fun divide(money: Money): BigDecimal = value.divide(money.value, RoundingMode.DOWN)
 
+    fun isDivisible(money: Money): Boolean = value.rem(money.value) == BigDecimal.ZERO
+
     operator fun minus(money: Money) = Money(value.minus(money.value))
 }
