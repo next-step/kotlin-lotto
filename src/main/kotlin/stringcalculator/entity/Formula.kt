@@ -2,11 +2,18 @@ package stringcalculator.entity
 
 class Formula private constructor(
     val delimiter: Regex = DEFAULT_DELIMITER_REGEX,
-    val expression: String
+    val expression: String,
 ) {
+    init {
+        expression.split(delimiter).map { it.toInt() }.forEach { if (it < 0) throw RuntimeException() }
+    }
+
+    fun extractNumbers(): List<String> = this.expression.split(delimiter)
+
     companion object {
         private val CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)".toRegex()
         private val DEFAULT_DELIMITER_REGEX = "[,:]".toRegex()
+        private const val FORMULA_PATTERN_SIZE_LIMIT = 3
 
         fun of(input: String?): Formula {
             if (input.isNullOrEmpty()) {
@@ -14,24 +21,13 @@ class Formula private constructor(
             }
             return CUSTOM_DELIMITER_REGEX.find(input)?.let {
                 buildCustomDelimiterFormula(it)
-            } ?: buildDefaultDelimiterFormula(input)
+            } ?: Formula(expression = input)
         }
 
         private fun buildCustomDelimiterFormula(matchResult: MatchResult): Formula {
-            require(matchResult.groupValues.size == 3)
-            val customDelimiter = matchResult.groupValues[1].toRegex()
-            val expression = matchResult.groupValues[2]
-            validateExpression(expression, customDelimiter)
-            return Formula(delimiter = customDelimiter, expression = expression)
-        }
-
-        private fun buildDefaultDelimiterFormula(expression: String): Formula {
-            validateExpression(expression)
-            return Formula(expression = expression)
-        }
-
-        private fun validateExpression(expression: String, delimiter: Regex = DEFAULT_DELIMITER_REGEX) {
-            expression.split(delimiter).map { it.toInt() }.forEach { if (it < 0) throw RuntimeException() }
+            require(matchResult.groupValues.size == FORMULA_PATTERN_SIZE_LIMIT)
+            val (_, customDelimiter, expression) = matchResult.groupValues
+            return Formula(delimiter = customDelimiter.toRegex(), expression = expression)
         }
     }
 }
