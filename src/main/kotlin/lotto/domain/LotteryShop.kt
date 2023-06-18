@@ -8,10 +8,6 @@ object LotteryShop {
     }
 
     fun getTickets(lottoCount: Int): List<Lotto> {
-        val tickets = mutableListOf<Lotto>()
-        (0 until lottoCount).forEach { _ ->
-            tickets.add(Lotto())
-        }
-        return tickets
+        return List(lottoCount) { Lotto(ShuffleNumGenerator()) }
     }
 }

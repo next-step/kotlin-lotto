@@ -1,6 +1,8 @@
 package lotto.controller
 
+import lotto.domain.Bank
 import lotto.domain.LotteryShop
+import lotto.domain.WinningTicket
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -12,5 +14,6 @@ fun main() {
     val tickets = LotteryShop.getTickets(lottoCount)
     ResultView.printLottoNums(tickets)
 
-    val lastLottoNums = InputView.getLastLottoNums()
+    val bank = Bank()
+    val score = bank.score(tickets, WinningTicket(InputView.getLastLottoNums()))
 }
