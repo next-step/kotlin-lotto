@@ -49,7 +49,7 @@
 - git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다
 
 ## 기능 목록 정의
-- [ ] 로또 번호 - LottoNumber 
+- [x] 로또 번호 - LottoNumber 
   - 1 ~ 45
   - 같은 번호인지 비교 가능
 - [ ] 로또 - Lotto
