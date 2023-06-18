@@ -1,7 +1,5 @@
 package calculator
 
-import calculator.InputParser
-import calculator.InputValidator
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import org.junit.jupiter.params.ParameterizedTest
