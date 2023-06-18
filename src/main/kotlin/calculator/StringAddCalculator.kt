@@ -17,7 +17,7 @@ class StringAddCalculator(
 
         val delimiters = DEFAULT_DELIMITERS.add(customDelimiter)
 
-        val numbers = Tokenizer
+        val numbers = DelimiterBasedTokenizer
             .tokenize(separatedInput, delimiters)
             .map(NonNegativeInteger.Companion::from)
 

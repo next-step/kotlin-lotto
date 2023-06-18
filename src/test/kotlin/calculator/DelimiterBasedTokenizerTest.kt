@@ -6,7 +6,7 @@ import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
-class NumberTokenizerTest : FreeSpec({
+class DelimiterBasedTokenizerTest : FreeSpec({
 
     "구분자를 기반으로 토큰으로 분리할 수 있어야 한다." - {
         forAll(
@@ -28,7 +28,7 @@ class NumberTokenizerTest : FreeSpec({
 
             ) { delimiters, target, expected ->
 
-            val result = Tokenizer.tokenize(target, delimiters)
+            val result = DelimiterBasedTokenizer.tokenize(target, delimiters)
 
             result shouldBe expected
         }
