@@ -18,6 +18,10 @@ class Lotto(
         return count
     }
 
+    override fun toString(): String {
+        return lottoNumbers.sorted().joinToString(", ", "[", "]")
+    }
+
     companion object {
         fun from(vararg numbers: Int): Lotto {
             return Lotto(numbers.toSet())

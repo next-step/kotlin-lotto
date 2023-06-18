@@ -4,7 +4,7 @@ import lotto.vo.Money
 
 class Lottos(
     private val lottos: List<Lotto>,
-) {
+) : Iterable<Lotto> {
     private val totalPrice = Money(LottoShop.LOTTO_PRICE.amount * lottos.count())
 
     val size: Int = lottos.size
@@ -32,5 +32,9 @@ class Lottos(
         fun from(vararg lottos: Lotto): Lottos {
             return Lottos(lottos.toList())
         }
+    }
+
+    override fun iterator(): Iterator<Lotto> {
+        return lottos.iterator()
     }
 }

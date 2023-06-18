@@ -17,4 +17,8 @@ value class Money(
     operator fun times(amount: Int): Money {
         return Money(this.amount * amount)
     }
+
+    override fun toString(): String {
+        return amount.toString()
+    }
 }
