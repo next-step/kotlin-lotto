@@ -12,17 +12,9 @@ class StringAddCalculator {
             delimiters.addCustomDelimiters(customDelimiter)
         }
         val tokens = TextSplitter.splitText(extractResult, delimiters.getDelimiters())
-        val convertedTokens = convertTokensToNumber(tokens)
+        val convertedTokens = TokenConverter.convertToInt(tokens)
         checkNegativeNumbers(convertedTokens)
-        return convertTokensToNumber(tokens).sum()
-    }
-
-    fun convertTokensToNumber(tokens: List<String>): List<Int> {
-        return try {
-            tokens.map { it.toInt() }
-        } catch (e: NumberFormatException) {
-            throw RuntimeException("Invalid token: $tokens")
-        }
+        return convertedTokens.sum()
     }
 
     fun checkNegativeNumbers(numbers: List<Int>) {

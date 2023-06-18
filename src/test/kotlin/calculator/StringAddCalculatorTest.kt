@@ -73,7 +73,7 @@ class StringAddCalculatorTest {
     @Test
     fun convertTokensToNum() {
         val tokens = listOf("1", "2", "3")
-        assertThat(calculator.convertTokensToNumber(tokens)).isEqualTo(listOf(1, 2, 3))
+        assertThat(TokenConverter.convertToInt(tokens)).isEqualTo(listOf(1, 2, 3))
     }
 
     @DisplayName(value = "Unhappy Path - 유효하지 않은 입력값에 대해 convertTokensToNum 함수가 예외를 처리한다")
@@ -81,7 +81,7 @@ class StringAddCalculatorTest {
     fun convertTokensToNumWithInvalidValue() {
         val tokens = listOf("1", "2", "@")
         assertThrows<RuntimeException> {
-            calculator.convertTokensToNumber(tokens)
+            TokenConverter.convertToInt(tokens)
         }
     }
 
