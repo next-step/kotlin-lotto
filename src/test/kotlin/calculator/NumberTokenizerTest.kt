@@ -1,5 +1,6 @@
 package calculator
 
+import calculator.vo.Delimiters
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -7,14 +8,27 @@ import io.kotest.matchers.shouldBe
 
 class NumberTokenizerTest : FreeSpec({
 
-    "커스텀 구분자로 받은 숫자 문자열을 커스텀 구분자로 분리할 수 있어야 한다." - {
+    "구분자를 기반으로 토큰으로 분리할 수 있어야 한다." - {
         forAll(
-            row("//a\\n1a2a3a4", listOf(1, 2, 3, 4)),
-            row("//;\\n1;2;3;4", listOf(1, 2, 3, 4)),
-            row("//$\\n1$2$3$4", listOf(1, 2, 3, 4)),
-        ) { input, expected ->
+            row(
+                Delimiters.of('a'),
+                "1a2a3a4",
+                listOf("1", "2", "3", "4")
+            ),
+            row(
+                Delimiters.of('a', 'b'),
+                "1a2b3a4",
+                listOf("1", "2", "3", "4")
+            ),
+            row(
+                Delimiters.of(';', ',', 'c'),
+                "1;2,3c4",
+                listOf("1", "2", "3", "4")
+            ),
 
-            val result = NumberTokenizer.tokenize(input)
+            ) { delimiters, target, expected ->
+
+            val result = Tokenizer.tokenize(target, delimiters)
 
             result shouldBe expected
         }
