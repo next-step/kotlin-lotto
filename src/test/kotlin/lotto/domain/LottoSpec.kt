@@ -80,7 +80,7 @@ class LottoSpec : DescribeSpec({
             it("1등이다.") {
                 val lottoPrize = lotto.calculateResult(numbers)
 
-                lottoPrize shouldBe Rank.FIRST
+                lottoPrize shouldBe LottoRank.FIRST
             }
         }
 
@@ -91,7 +91,7 @@ class LottoSpec : DescribeSpec({
             it("3등이다.") {
                 val lottoPrize = lotto.calculateResult(numbers)
 
-                lottoPrize shouldBe Rank.THIRD
+                lottoPrize shouldBe LottoRank.THIRD
             }
         }
 
@@ -102,7 +102,7 @@ class LottoSpec : DescribeSpec({
             it("4등이다.") {
                 val lottoPrize = lotto.calculateResult(numbers)
 
-                lottoPrize shouldBe Rank.FOURTH
+                lottoPrize shouldBe LottoRank.FOURTH
             }
         }
 
@@ -113,7 +113,7 @@ class LottoSpec : DescribeSpec({
             it("5등이다.") {
                 val lottoPrize = lotto.calculateResult(numbers)
 
-                lottoPrize shouldBe Rank.FIFTH
+                lottoPrize shouldBe LottoRank.FIFTH
             }
         }
     }

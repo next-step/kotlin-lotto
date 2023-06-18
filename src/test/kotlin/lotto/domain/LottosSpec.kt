@@ -32,16 +32,16 @@ class LottosSpec : DescribeSpec({
 
             val lottosResult = lottos.calculateResults(winningNumbers)
             it("1등 당첨 횟수는 1이다.") {
-                lottosResult.winningResults[Rank.FIRST] shouldBe 1
+                lottosResult.winningResults[LottoRank.FIRST] shouldBe 1
             }
             it("3등 당첨 횟수는 0이다.") {
-                lottosResult.winningResults[Rank.THIRD] shouldBe 0
+                lottosResult.winningResults[LottoRank.THIRD] shouldBe 0
             }
             it("4등 당첨 횟수는 0이다.") {
-                lottosResult.winningResults[Rank.FOURTH] shouldBe 0
+                lottosResult.winningResults[LottoRank.FOURTH] shouldBe 0
             }
             it("5등 당첨 횟수는 0이다.") {
-                lottosResult.winningResults[Rank.FIFTH] shouldBe 0
+                lottosResult.winningResults[LottoRank.FIFTH] shouldBe 0
             }
         }
 
@@ -51,7 +51,7 @@ class LottosSpec : DescribeSpec({
             it("1등 당첨 횟수는 2이다.") {
                 val lottosResult = lottos.calculateResults(winningNumbers)
 
-                lottosResult.winningResults[Rank.FIRST] shouldBe 2
+                lottosResult.winningResults[LottoRank.FIRST] shouldBe 2
             }
         }
 
@@ -61,22 +61,22 @@ class LottosSpec : DescribeSpec({
             it("1등 당첨 횟수는 1이다.") {
                 val lottosResult = lottos.calculateResults(winningNumbers)
 
-                lottosResult.winningResults[Rank.FIRST] shouldBe 1
+                lottosResult.winningResults[LottoRank.FIRST] shouldBe 1
             }
             it("3등 당첨 횟수는 1이다.") {
                 val lottosResult = lottos.calculateResults(winningNumbers)
 
-                lottosResult.winningResults[Rank.THIRD] shouldBe 1
+                lottosResult.winningResults[LottoRank.THIRD] shouldBe 1
             }
             it("4등 당첨 횟수는 0이다.") {
                 val lottosResult = lottos.calculateResults(winningNumbers)
 
-                lottosResult.winningResults[Rank.FOURTH] shouldBe 0
+                lottosResult.winningResults[LottoRank.FOURTH] shouldBe 0
             }
             it("5등 당첨 횟수는 0이다.") {
                 val lottosResult = lottos.calculateResults(winningNumbers)
 
-                lottosResult.winningResults[Rank.FIFTH] shouldBe 0
+                lottosResult.winningResults[LottoRank.FIFTH] shouldBe 0
             }
         }
     }

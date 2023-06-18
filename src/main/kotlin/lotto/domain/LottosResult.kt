@@ -2,7 +2,7 @@ package lotto.domain
 
 import java.text.DecimalFormat
 
-typealias WinningResults = Map<Rank, Int>
+typealias WinningResults = Map<LottoRank, Int>
 
 class LottosResult(
     val totalCost: Int,

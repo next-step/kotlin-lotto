@@ -9,10 +9,10 @@ class LottosResultSpec : DescribeSpec({
             val lottosResult = LottosResult(
                 totalCost = 5000,
                 winningResults = mapOf(
-                    Rank.FIFTH to 1,
-                    Rank.FOURTH to 0,
-                    Rank.THIRD to 0,
-                    Rank.FIRST to 0,
+                    LottoRank.FIFTH to 1,
+                    LottoRank.FOURTH to 0,
+                    LottoRank.THIRD to 0,
+                    LottoRank.FIRST to 0,
                 ),
             )
 
@@ -25,10 +25,10 @@ class LottosResultSpec : DescribeSpec({
             val lottosResult = LottosResult(
                 totalCost = 5000,
                 winningResults = mapOf(
-                    Rank.FIFTH to 2,
-                    Rank.FOURTH to 0,
-                    Rank.THIRD to 0,
-                    Rank.FIRST to 0,
+                    LottoRank.FIFTH to 2,
+                    LottoRank.FOURTH to 0,
+                    LottoRank.THIRD to 0,
+                    LottoRank.FIRST to 0,
                 ),
             )
 
@@ -41,10 +41,10 @@ class LottosResultSpec : DescribeSpec({
             val lottosResult = LottosResult(
                 totalCost = 20000,
                 winningResults = mapOf(
-                    Rank.FIFTH to 1,
-                    Rank.FOURTH to 0,
-                    Rank.THIRD to 0,
-                    Rank.FIRST to 0,
+                    LottoRank.FIFTH to 1,
+                    LottoRank.FOURTH to 0,
+                    LottoRank.THIRD to 0,
+                    LottoRank.FIRST to 0,
                 ),
             )
 

@@ -19,8 +19,8 @@ class Lottos(
         )
     }
 
-    private fun Map<Rank, Int>.fillMissingRanks(): Map<Rank, Int> {
-        return Rank.values()
+    private fun Map<LottoRank, Int>.fillMissingRanks(): Map<LottoRank, Int> {
+        return LottoRank.values()
             .filter { it !in this.keys }
             .fold(this) { acc, rank ->
                 acc + (rank to 0)

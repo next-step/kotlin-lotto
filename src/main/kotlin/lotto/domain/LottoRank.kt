@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class Rank(
+enum class LottoRank(
     val matchCount: Int,
     val winningMoney: Int,
 ) {
@@ -13,7 +13,7 @@ enum class Rank(
     companion object {
         private val MAP_BY_MATCH_COUNT = values().associateBy { it.matchCount }
 
-        fun of(matchCount: Int): Rank {
+        fun of(matchCount: Int): LottoRank {
             return MAP_BY_MATCH_COUNT[matchCount]
                 ?: throw IllegalArgumentException("일치하는 순위가 없습니다.")
         }

@@ -8,8 +8,8 @@ class Lotto(
         validateRangeOfNumbers(numbers)
     }
 
-    fun calculateResult(numbers: Set<Int>): Rank {
-        return Rank.of(numbers.intersect(this.numbers).size)
+    fun calculateResult(numbers: Set<Int>): LottoRank {
+        return LottoRank.of(numbers.intersect(this.numbers).size)
     }
 
     private fun validateLengthOfNumbers(numbers: Set<Int>) {
