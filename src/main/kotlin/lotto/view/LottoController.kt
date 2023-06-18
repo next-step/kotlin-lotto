@@ -12,5 +12,6 @@ class LottoController(
         val lottoPurchaseAmount = lottoInputView.readLottoPurchaseAmount()
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchaseAmount)
         lottoResultView.display(lottoPurchaseResult)
+        val lastWeekWinLottoNumbers = lottoInputView.readLastWeekWinLottoNumbers()
     }
 }
