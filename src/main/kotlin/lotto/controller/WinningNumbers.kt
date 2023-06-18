@@ -5,10 +5,6 @@ import lotto.domain.Lottos
 
 data class WinningNumbers(val lottoNumbers: LottoNumbers) {
 
-    fun countMatches(other: LottoNumbers): Int {
-        return lottoNumbers.countMatches(other.lottoNumbers)
-    }
-
     fun calculateMatchResult(lottos: Lottos): MatchResult {
         val matches = mutableMapOf<Int, Int>()
         lottos.lottoList.forEach { lottoNumbers ->
@@ -16,6 +12,10 @@ data class WinningNumbers(val lottoNumbers: LottoNumbers) {
             incrementMatchCount(matches, matchCount)
         }
         return MatchResult(matches)
+    }
+
+    fun countMatches(other: LottoNumbers): Int {
+        return lottoNumbers.countMatches(other.lottoNumbers)
     }
 
     private fun incrementMatchCount(matches: MutableMap<Int, Int>, matchCount: Int) {
