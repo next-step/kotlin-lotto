@@ -8,4 +8,6 @@ interface LottoResultView {
     fun display(lottoPurchaseResult: LottoPurchaseResult)
 
     fun display(lottoAnalysisResult: LottoAnalysisResult)
+
+    fun newLine()
 }

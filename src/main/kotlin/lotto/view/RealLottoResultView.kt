@@ -22,6 +22,10 @@ class RealLottoResultView : LottoResultView {
         display(lottoAnalysisResult.revenue)
     }
 
+    override fun newLine() {
+        println()
+    }
+
     private fun display(lottoWinRankAnalysisResult: LottoWinRankAnalysisResult) {
         lottoWinRankAnalysisResult.run {
             println("${numberMatchCount.value}개 일치 (${rankWinAmount.value}원)- ${ranksCount.value}개")
