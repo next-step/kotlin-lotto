@@ -58,5 +58,5 @@
 - [x] 자동 로또 번호 발급 기계 - LottoMachine
   - 로또 발급 (1000원)
   - 자동은 테스트가 불가한 영역 - LottoFactory 로 추상화 
-- [ ] 로또 결과 판독 - LottoGame 
+- [X] 로또 결과 판독 - LottoGame 
 - [ ] 당첨 통계

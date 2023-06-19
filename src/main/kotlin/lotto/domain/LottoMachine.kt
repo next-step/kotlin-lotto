@@ -8,6 +8,6 @@ class LottoMachine(private val lottoFactory: LottoFactory) {
     }
 
     companion object {
-        private const val LOTTO_COST = 1000
+        const val LOTTO_COST = 1000
     }
 }
