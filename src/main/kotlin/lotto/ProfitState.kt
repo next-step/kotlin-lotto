@@ -1,9 +1,9 @@
 package lotto
 
-enum class ProfitState(val message: String) {
-    PROFIT("이익"),
-    SAME("본전"),
-    LOSS("손해"),
+enum class ProfitState {
+    PROFIT,
+    SAME,
+    LOSS,
 }
 
 fun Double.toProfitState(): ProfitState {

@@ -9,21 +9,22 @@ object ResultView {
         println()
     }
 
-    fun printLottoResult(results: List<Int>, earningRate: Double, profitState: ProfitState) {
+    fun printLottoResult(results: List<LottoResult>, earningRate: Double, profitState: ProfitState) {
         println("\n당첨 통계")
         println("---------")
-        for (i in 3..6) {
-            println("${i}개 일치 (${Lotto.prizes[i]}원) - ${results[i]}개")
+        results.filter { it.prize.reward > 0 }.forEach {
+            println("${it.prize.matches}개 일치 (${it.prize.reward}원) - ${it.count}개")
         }
-        println("총 수익률은 ${earningRate}입니다.(기준이 1이기 때문에 결과적으로 ${profitState.fixGrammar()}라는 의미임)")
+        println("총 수익률은 ${earningRate}입니다.(기준이 1이기 때문에 결과적으로 ${profitState.toText()}라는 의미임)")
     }
 
     fun printMessage(message: String) = println(message)
 
-    private fun ProfitState.fixGrammar(): String {
+    private fun ProfitState.toText(): String {
         return when (this) {
-            ProfitState.PROFIT, ProfitState.SAME -> "${message}이"
-            else -> message
+            ProfitState.PROFIT -> "이익이"
+            ProfitState.SAME -> "본전이"
+            ProfitState.LOSS -> "손해"
         }
     }
 }

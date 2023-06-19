@@ -9,10 +9,10 @@ object LottoCalculator {
         roundingMode = RoundingMode.DOWN
     }
 
-    fun earningRate(results: List<Int>, money: Int): Double {
+    fun earningRate(results: List<LottoResult>, money: Int): Double {
         var totalPrize = 0.0
-        results.forEachIndexed { index, i ->
-            totalPrize += i * Lotto.prizes[index]
+        results.forEach {
+            totalPrize += it.count * it.prize.reward
         }
 
         if (money == 0) return 0.0
