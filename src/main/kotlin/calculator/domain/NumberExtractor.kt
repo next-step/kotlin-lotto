@@ -1,4 +1,4 @@
-package calculator
+package calculator.domain
 
 /**
  * 주어진 연산식에서 숫자 문자열을 추출하는 역할을 하는 클래스입니다.
