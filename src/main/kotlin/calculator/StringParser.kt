@@ -1,5 +1,7 @@
 package calculator
 
+import math.PositiveNumber
+
 object StringParser {
 
     private val CUSTOM_DELIMITER_REGEX = Regex("//(.)\n(.*)")
@@ -11,21 +13,13 @@ object StringParser {
         }
 
         val matchedGroupValues = CUSTOM_DELIMITER_REGEX.find(source)?.groupValues
-        val separationRegex = run {
-            val customDelimiter = matchedGroupValues?.getOrNull(1)
-            val finalDelimiters = if (customDelimiter == null) {
-                FIXED_DELIMITERS
-            } else {
-                FIXED_DELIMITERS.plus(customDelimiter)
-            }
-            Regex("[$finalDelimiters]")
-        }
-        val calculationTargetText = run {
-            val delimitedText = matchedGroupValues?.getOrNull(2)
-            delimitedText ?: source
-        }
+        val delimiters = matchedGroupValues?.getOrNull(1)
+            ?.let { customDelimiter -> FIXED_DELIMITERS.plus(customDelimiter) }
+            ?: FIXED_DELIMITERS
+        val calculationTargetText = matchedGroupValues?.getOrNull(2) ?: source
+
         return calculationTargetText
-            .split(separationRegex)
+            .split(Regex("[$delimiters]"))
             .map { maybeNumber -> PositiveNumber.of(maybeNumber) }
     }
 }

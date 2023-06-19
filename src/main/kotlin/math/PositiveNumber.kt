@@ -1,4 +1,4 @@
-package calculator
+package math
 
 @JvmInline
 value class PositiveNumber(val value: Int) {
@@ -7,6 +7,10 @@ value class PositiveNumber(val value: Int) {
         require(value >= 0) {
             "$value is not positive number."
         }
+    }
+
+    operator fun div(other: Int): Int {
+        return value / other
     }
 
     companion object {
@@ -19,4 +23,8 @@ value class PositiveNumber(val value: Int) {
 
 fun Iterable<PositiveNumber>.sum(): Int {
     return sumOf { it.value }
+}
+
+fun PositiveNumber?.orZero(): PositiveNumber {
+    return this ?: PositiveNumber(0)
 }
