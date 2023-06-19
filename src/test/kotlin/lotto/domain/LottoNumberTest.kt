@@ -12,13 +12,13 @@ class LottoNumberTest : FreeSpec({
         withData(
             0, 46, 50, 100
         ) { number ->
-            shouldThrow<IllegalArgumentException> { LottoNumber(number) }
+            shouldThrow<IllegalArgumentException> { LottoNumber.of(number) }
         }
     }
 
     "1~45 같은 번호인지 비교할 수 있다." {
         (1..45).toList().forAll {
-            LottoNumber(it) shouldBe LottoNumber(it)
+            LottoNumber.of(it) shouldBe LottoNumber.of(it)
         }
     }
 })
