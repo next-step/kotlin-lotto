@@ -4,7 +4,6 @@ import lotto.domain.analysis.LottoWinRank
 import lotto.domain.analysis.MatchCondition
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
-import math.PositiveNumber
 
 @JvmInline
 value class LottoGame(val lottoNumbers: LottoNumbers) {
