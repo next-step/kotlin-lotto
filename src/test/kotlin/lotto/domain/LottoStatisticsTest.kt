@@ -53,6 +53,6 @@ class LottoStatisticsTest : StringSpec({
 
         val result = lottoStatistics.analyze(lottos, winnerNumbers)
         val profitRate = lottoStatistics.getProfitRate(Payment(14000), result)
-        profitRate shouldBe 2000000000 / 14000
+        profitRate shouldBe 2000000000 / 14000.00
     }
 })
