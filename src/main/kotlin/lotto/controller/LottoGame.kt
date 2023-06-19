@@ -3,26 +3,22 @@ package lotto.controller
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
 import lotto.domain.numberGenerator.FixedNumberGenerator
-import lotto.domain.numberGenerator.RandomLottoNumberGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoGame(
     private val inputView: InputView,
-    private val resultView: ResultView
+    private val resultView: ResultView,
+    private val lottoFactory: LottoFactory
 ) {
     fun start() {
         val input = inputView.readMoney()
-        val lottos = generateLottos(input)
+        val lottos = lottoFactory.createLottos(input)
+        resultView.printLottoInfo(lottos)
+
         val winningNumbers = getWinningNumbers()
         val matchResult = calculateMatchResult(lottos, winningNumbers)
         printResults(matchResult, input)
-    }
-
-    private fun generateLottos(input: Int): Lottos {
-        val lottos = Lottos.of(input, RandomLottoNumberGenerator())
-        resultView.printLottoInfo(lottos)
-        return lottos
     }
 
     private fun getWinningNumbers(): WinningNumbers {
