@@ -6,16 +6,14 @@ import lotto.domain.shop.lottonumberprovider.LottoNumberProvider
 import shffule.Shuffler
 
 class LottoGameMachine(
-    lottoNumberProvider: LottoNumberProvider,
+    private val lottoNumberProvider: LottoNumberProvider,
     private val shuffler: Shuffler<LottoNumber>,
 ) {
-
-    private val allLottoNumbers = lottoNumberProvider.getAllLottoNumbers()
 
     fun create(): LottoGame {
         return LottoGame(
             lottoNumbers = LottoNumbers(
-                shuffler.shuffled(allLottoNumbers)
+                shuffler.shuffled(lottoNumberProvider.getAllLottoNumbers())
                     .take(LOTTO_GAME_NUMBER_SIZE)
                     .sorted()
             ),
