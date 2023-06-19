@@ -7,7 +7,12 @@ class StringCalculator {
         }
 
         return expression.split("[,:]".toRegex())
-            .map(String::toLong)
+            .map(this::toNumber)
             .sum()
+    }
+
+    private fun toNumber(s: String): Long {
+        require(s.toLong() > -1) { "0 이상의 숫자여야 합니다." }
+        return s.toLong()
     }
 }
