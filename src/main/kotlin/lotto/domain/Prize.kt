@@ -1,10 +1,10 @@
 package lotto.domain
 
 enum class Prize(val matchCount: Int, val amount: Int) {
-    THIRD(3, 5000),
-    FOURTH(4, 50000),
-    FIFTH(5, 1500000),
-    SIXTH(6, 2000000000);
+    THIRD_PLACE(3, 5_000),
+    FOURTH_PLACE(4, 50_000),
+    FIFTH_PLACE(5, 1_500_000),
+    WIN(6, 2_000_000_000);
 
     companion object {
         fun prizeForMatchCount(matchCount: Int): Prize? {
