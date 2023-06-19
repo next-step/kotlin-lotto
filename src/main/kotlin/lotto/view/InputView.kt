@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.LottoNumber
+import lotto.ResultLottoNumber
 
 object InputView {
     fun purchaseAmount(): Int {
@@ -8,7 +8,7 @@ object InputView {
         return readln().toInt()
     }
 
-    fun lastWeekLottoNumber(): LottoNumber {
+    fun lastWeekLottoNumber(): ResultLottoNumber {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val defaultNumbers = readln()
             .split(DELIMITER)
@@ -16,7 +16,7 @@ object InputView {
         println("보너스 볼을 입력해 주세요.")
         val bonusNumber = readln().toInt()
 
-        return LottoNumber.from(
+        return ResultLottoNumber.from(
             defaultNumbers = defaultNumbers,
             bonusNumber = bonusNumber,
         )
