@@ -1,6 +1,6 @@
 import lotto.domain.analysis.LottoResultAnalyst
-import lotto.domain.shop.RealLottoShop
 import lotto.domain.shop.LottoGameMachine
+import lotto.domain.shop.RealLottoShop
 import lotto.domain.shop.lottonumberprovider.RealLottoNumberProvider
 import lotto.view.LottoController
 import lotto.view.RealLottoInputView

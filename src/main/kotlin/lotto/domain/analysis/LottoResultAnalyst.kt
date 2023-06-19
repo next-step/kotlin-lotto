@@ -1,9 +1,7 @@
 package lotto.domain.analysis
 
-import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.money.sum
 import lotto.domain.money.toMoney
-import lotto.domain.shop.LottoGame
 import math.PositiveNumber
 import math.orZero
 
@@ -24,35 +22,23 @@ class LottoResultAnalyst {
     private fun analyzeWinRanks(
         request: LottoAnalysisRequest,
     ): List<LottoWinRankAnalysisResult> {
-        val lottoWinRanksCountMap = calculateWinRankCount(request)
-
-        return LottoWinRank.values()
-            .sortedDescending()
-            .map { winRank -> LottoWinRankAnalysisResult(winRank, lottoWinRanksCountMap[winRank].orZero()) }
+        return calculateWinRankCount(request)
+            .map { (lottoWinRank, winCount) -> LottoWinRankAnalysisResult(lottoWinRank, winCount) }
+            .sortedByDescending { analysisResult -> analysisResult.lottoWinRank }
     }
 
     private fun calculateWinRankCount(
         request: LottoAnalysisRequest,
     ): Map<LottoWinRank, PositiveNumber> {
-        val lastWeekWinNumberSet = request.lastWeekWinLottoNumbers.value.toSet()
+        val result = LottoWinRank.values()
+            .associateWith { PositiveNumber(0) }
+            .toMutableMap()
 
-        return request.lottoGames
-            .map { lottoGame -> calculateMatchCondition(lastWeekWinNumberSet, lottoGame) }
-            .mapNotNull { matchCondition -> LottoWinRank.findOrNull(matchCondition) }
-            .groupBy { it }
-            .mapValues { (_, lottoWinRanks) -> PositiveNumber(lottoWinRanks.size) }
-    }
+        request.lottoGames
+            .mapNotNull { lottoGame -> lottoGame.matchOrNull(request.lastWeekWinLottoNumbers) }
+            .forEach { lottoWinRank -> result[lottoWinRank] = result[lottoWinRank].orZero().plus(1) }
 
-    private fun calculateMatchCondition(
-        lastWeekWinNumberSet: Set<LottoNumber>,
-        lottoGame: LottoGame
-    ): MatchCondition {
-        val matchSuccessCount = lottoGame.lottoNumbers
-            .value
-            .count { lottoNumber -> lastWeekWinNumberSet.contains(lottoNumber) }
-        return MatchCondition(
-            matchSuccessCount = PositiveNumber(matchSuccessCount),
-        )
+        return result.toMap()
     }
 
     private fun calculateRevenue(

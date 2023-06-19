@@ -16,9 +16,10 @@ value class LottoNumber(val value: Int) : Comparable<LottoNumber> {
     companion object {
 
         private val LOTTO_NUMBER_RANGE = (1..45)
+        private val ALL_LOTTO_NUMBERS by lazy { LOTTO_NUMBER_RANGE.map { LottoNumber(it) } }
 
         fun allLottoNumbers(): List<LottoNumber> {
-            return LOTTO_NUMBER_RANGE.map { LottoNumber(it) }
+            return ALL_LOTTO_NUMBERS
         }
     }
 }

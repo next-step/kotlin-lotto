@@ -27,8 +27,16 @@ class RealLottoResultView : LottoResultView {
     }
 
     private fun display(lottoWinRankAnalysisResult: LottoWinRankAnalysisResult) {
-        lottoWinRankAnalysisResult.run {
-            println("${numberMatchCount.value}개 일치 (${rankWinAmount.value}원)- ${ranksCount.value}개")
+        println(lottoWinRankAnalysisResult.makeDisplayText())
+    }
+
+    private fun LottoWinRankAnalysisResult.makeDisplayText(): String {
+        return buildString {
+            append("${numberMatchCount.value}개 일치")
+            if (isBonusMatched) {
+                append(", 보너스 볼 일치")
+            }
+            append("(${rankWinAmount.value}원)- ${ranksCount.value}개")
         }
     }
 
