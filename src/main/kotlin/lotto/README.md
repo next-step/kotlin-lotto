@@ -60,3 +60,7 @@
   - 자동은 테스트가 불가한 영역 - LottoFactory 로 추상화 
 - [X] 로또 결과 판독 - LottoGame 
 - [X] 당첨 통계
+- [X] 랜덤 로또 생성기
+- [ ] UI 
+  - InputView
+  - ResultView 
