@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.enums.LottoReturn
+
 class LottoNumber private constructor(
     val numbers: List<Int> = emptyList(),
 ) {
@@ -9,8 +11,10 @@ class LottoNumber private constructor(
         require(numbers.distinct().size == LOTTO_NUMBER_COUNT) { "중복된 숫자가 있습니다." }
     }
 
-    fun matchCount(other: LottoNumber): Int {
-        return this.numbers.count { other.numbers.contains(it) }
+    fun matchCount(other: LottoNumber): LottoReturn {
+        return LottoReturn.from(
+            matchCount = this.numbers.count { other.numbers.contains(it) }
+        )
     }
 
     companion object {

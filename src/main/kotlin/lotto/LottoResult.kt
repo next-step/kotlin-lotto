@@ -16,30 +16,16 @@ class LottoResult private constructor(
     val returnRatio: Double
         get() = totalReturnPrice.toDouble() / totalInputPrice
 
-    val firstCount: Int
-        get() = lottoReturns
-            .count { it == LottoReturn.FIRST }
-
-    val secondCount: Int
-        get() = lottoReturns
-            .count { it == LottoReturn.SECOND }
-
-    val thirdCount: Int
-        get() = lottoReturns
-            .count { it == LottoReturn.THIRD }
-
-    val fourthCount: Int
-        get() = lottoReturns
-            .count { it == LottoReturn.FOURTH }
+    fun count(lottoReturn: LottoReturn): Int {
+        return lottoReturns.count { it == lottoReturn }
+    }
 
     private fun calculate() {
         lottoReturns.addAll(lottoNumbers.toLottoReturns())
     }
 
     private fun List<LottoNumber>.toLottoReturns(): List<LottoReturn> {
-        return this
-            .map { it.matchCount(lastWeekLottoNumber) }
-            .map { LottoReturn.from(it) }
+        return this.map { it.matchCount(lastWeekLottoNumber) }
     }
 
     companion object {
