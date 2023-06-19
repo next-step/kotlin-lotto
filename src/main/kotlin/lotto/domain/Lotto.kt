@@ -7,6 +7,8 @@ data class Lotto(private val numbers: Set<LottoNumber>) {
 
     val size: Int = numbers.size
 
+    fun getMatchCount(lotto: Lotto): Int = lotto.numbers.count { it in numbers }
+
     operator fun contains(number: LottoNumber): Boolean = number in numbers
 
     override fun toString(): String = numbers.joinToString(", ", "[", "]")

@@ -9,10 +9,10 @@ object LottoChecker {
         return LottoResults.of(resultMap, lottos.size * Lotto.LOTTO_PRICE)
     }
 
-    private fun MutableMap<WinningPrize, Int>.addResult(lotto: Lotto, winNumber: WinNumbers) {
-        val count = winNumber.getMatchCount(lotto)
+    private fun MutableMap<WinningPrize, Int>.addResult(lotto: Lotto, winNumbers: WinNumbers) {
+        val count = winNumbers.getMatchCount(lotto)
         if (count >= Lotto.LOTTO_WINNING_MIN_COUNT) {
-            val winningAmount = WinningPrize.of(count)
+            val winningAmount = WinningPrize.of(count, winNumbers.isBonusMatch(lotto))
             this[winningAmount] = this.getOrDefault(winningAmount, 0) + 1
         }
     }

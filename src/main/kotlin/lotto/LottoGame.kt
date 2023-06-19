@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.LottoChecker
-import lotto.domain.LottoNumber
 import lotto.domain.LottoSeller
 import lotto.domain.Lottos
 import lotto.domain.RandomLottoGenerator
@@ -14,13 +13,14 @@ object LottoGame {
     fun start() {
         val lottos = getLottos()
         ResultView.printLottos(lottos)
-        val winNumber = getWinNumbers()
-        printResult(winNumber, lottos)
+        val winNumbers = getWinNumbers()
+        printResult(winNumbers, lottos)
     }
 
     private fun getWinNumbers(): WinNumbers {
-        val winNumbers = InputView.getWinNumbers()
-        return WinNumbers(winNumbers.map { LottoNumber(it) })
+        val winNumber = InputView.getWinNumbers()
+        val bonusNumber = InputView.getBonusNumber()
+        return WinNumbers(winNumber, bonusNumber)
     }
 
     private fun getLottos(): Lottos {
