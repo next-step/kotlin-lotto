@@ -34,7 +34,7 @@ class LottoResultAnalyst {
     private fun calculateWinRankCount(
         request: LottoAnalysisRequest,
     ): Map<LottoWinRank, PositiveNumber> {
-        val lastWeekWinNumberSet = request.lastWeekWinLottoNumbers.value.toSet()
+        val lastWeekWinNumberSet = request.lastWeekWinLottoNumbers.lottoNumbers.value.toSet()
 
         return request.lottoGames
             .map { lottoGame -> calculateMatchCondition(lastWeekWinNumberSet, lottoGame) }

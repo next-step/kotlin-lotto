@@ -6,6 +6,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
+import lotto.domain.lottonumber.WinLottoNumbers
 import lotto.domain.money.Money
 import lotto.domain.money.sum
 import lotto.domain.shop.LottoGame
@@ -27,7 +28,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
             val request = LottoAnalysisRequest(
                 lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
                 lottoPurchaseAmount = PositiveNumber(1_000),
-                lastWeekWinLottoNumbers = makeLottoNumbers(1, 2, 3, 4, 5, 6)
+                lastWeekWinLottoNumbers = WinLottoNumbers(
+                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                    LottoNumber(40),
+                )
             )
             val result = LottoResultAnalyst().analyze(request)
             val winRanks = result.lottoWinRankAnalysisResults.map { it.lottoWinRank }
@@ -43,7 +47,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
                     makeLottoGame(1, 2, 3, 7, 8, 9),
                 ),
                 lottoPurchaseAmount = PositiveNumber(4_000),
-                lastWeekWinLottoNumbers = makeLottoNumbers(1, 2, 3, 4, 5, 6)
+                lastWeekWinLottoNumbers = WinLottoNumbers(
+                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                    LottoNumber(40),
+                )
             )
             val result = LottoResultAnalyst().analyze(request)
             val winRankCounts = result.lottoWinRankAnalysisResults.map { it.ranksCount }
@@ -54,7 +61,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
             val request = LottoAnalysisRequest(
                 lottoGames = listOf(makeLottoGame(10, 11, 12, 13, 14, 15)),
                 lottoPurchaseAmount = PositiveNumber(1_000),
-                lastWeekWinLottoNumbers = makeLottoNumbers(1, 2, 3, 4, 5, 6)
+                lastWeekWinLottoNumbers = WinLottoNumbers(
+                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                    LottoNumber(40),
+                )
             )
             val result = LottoResultAnalyst().analyze(request)
             val winRankCounts = result.lottoWinRankAnalysisResults.map { it.ranksCount }
@@ -64,7 +74,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
         forAll(
             row(
                 listOf(makeLottoGame(10, 11, 12, 13, 14, 15)),
-                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                WinLottoNumbers(
+                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                    LottoNumber(40),
+                ),
                 Revenue(
                     totalCost = Money(1_000),
                     totalRevenue = Money(0),
@@ -72,7 +85,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
             ),
             row(
                 listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
-                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                WinLottoNumbers(
+                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                    LottoNumber(40),
+                ),
                 Revenue(
                     totalCost = Money(1_000),
                     totalRevenue = LottoWinRank.FIRST.winAmount,
@@ -85,7 +101,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
                     makeLottoGame(1, 2, 3, 4, 7, 8),
                     makeLottoGame(1, 2, 3, 7, 8, 9),
                 ),
-                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                WinLottoNumbers(
+                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                    LottoNumber(40),
+                ),
                 Revenue(
                     totalCost = Money(4_000),
                     totalRevenue = LottoWinRank.values().map { it.winAmount }.sum(),
