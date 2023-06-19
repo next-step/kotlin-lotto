@@ -11,7 +11,7 @@ class LottosTest : FreeSpec({
             Lotto.from(lottoNumbersOf(1, 2, 3, 4, 5, 6)),
             Lotto.from(lottoNumbersOf(1, 2, 3, 4, 5, 7)),
             Lotto.from(lottoNumbersOf(1, 2, 3, 7, 8, 9)),
-            Lotto.from(lottoNumbersOf(1, 2, 7, 10, 11, 12))
+            Lotto.from(lottoNumbersOf(1, 2, 7, 10, 11, 12)),
         )
         val winningNumbers = lottoNumbersOf(1, 2, 3, 4, 5, 6)
 

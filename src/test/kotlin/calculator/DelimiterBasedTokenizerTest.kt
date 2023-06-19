@@ -13,17 +13,17 @@ class DelimiterBasedTokenizerTest : FreeSpec({
             row(
                 Delimiters.of('a'),
                 "1a2a3a4",
-                listOf("1", "2", "3", "4")
+                listOf("1", "2", "3", "4"),
             ),
             row(
                 Delimiters.of('a', 'b'),
                 "1a2b3a4",
-                listOf("1", "2", "3", "4")
+                listOf("1", "2", "3", "4"),
             ),
             row(
                 Delimiters.of(';', ',', 'c'),
                 "1;2,3c4",
-                listOf("1", "2", "3", "4")
+                listOf("1", "2", "3", "4"),
             ),
 
             ) { delimiters, target, expected ->

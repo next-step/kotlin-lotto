@@ -15,7 +15,7 @@ class Lottos(
 
         return GameResult(
             prizes = prizes,
-            paidPrice = totalPrice
+            paidPrice = totalPrice,
         )
     }
 

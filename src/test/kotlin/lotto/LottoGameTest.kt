@@ -28,7 +28,9 @@ class LottoGameTest : FreeSpec({
 
             // 2. 당첨 번호를 입력 받은 후 구매한 로또의 당첨 정보를 출력한다.
             outputView.givenPaidPriceOfResult shouldNotBe null
-            outputView.givenPaidPriceOfResult.paidPrice shouldBe Money(expectedPaidPrice)
+            outputView
+                .givenPaidPriceOfResult
+                .paidPrice shouldBe Money(expectedPaidPrice)
         }
 
     }
