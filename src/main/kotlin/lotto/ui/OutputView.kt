@@ -8,6 +8,9 @@ import lotto.domain.result.PurchaseType
 import java.math.BigDecimal
 
 object OutputView {
+    private const val MANUAL = "수동"
+    private const val AUTO = "자동"
+
     fun showLotteryTicket(lotteryTicket: LotteryTicket) {
         println("${lotteryTicket.getNumbersCount()}개를 구매했습니다.")
 
@@ -36,6 +39,6 @@ object OutputView {
         val seperatedByPurchaseType = lotteryPurchaseResults.seperatedByPurchaseType()
         val manualLotteryCount = seperatedByPurchaseType[PurchaseType.MANUAL]?.lotteryTicket?.getNumbersCount() ?: 0
         val autoLotteryCount = seperatedByPurchaseType[PurchaseType.AUTO]?.lotteryTicket?.getNumbersCount() ?: 0
-        println("수동으로 ${manualLotteryCount}장, 자동으로 ${autoLotteryCount}개를 구매했습니다.")
+        println("${MANUAL}으로 ${manualLotteryCount}장, ${AUTO}으로 ${autoLotteryCount}개를 구매했습니다.")
     }
 }

@@ -43,7 +43,7 @@ object LottoController {
         val manualPurchaseResult = LotteryMachine.issueManualLotteryTicket(purchaseAmount, manualLotteries)
 
         val remainMoney = manualPurchaseResult.change
-        val autoPurchaseResult = LotteryMachine.issueLotteryTicket(remainMoney)
+        val autoPurchaseResult = LotteryMachine.issueAutoLotteryTicket(remainMoney)
         return LotteryPurchaseResults(listOf(manualPurchaseResult, autoPurchaseResult))
     }
 }

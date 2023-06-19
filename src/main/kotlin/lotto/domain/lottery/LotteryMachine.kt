@@ -9,7 +9,7 @@ import lotto.scaleDown
 object LotteryMachine {
     private val LOTTERY_PRICE = Money(1_000)
 
-    fun issueLotteryTicket(money: Money): LotteryPurchaseResult {
+    fun issueAutoLotteryTicket(money: Money): LotteryPurchaseResult {
         val lotteryQuantity = getQuantity(money)
         val lotteries = List(lotteryQuantity) { generateNumbers() }
         val change = money - LOTTERY_PRICE * lotteryQuantity
