@@ -2,6 +2,7 @@ package calculator
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
@@ -45,5 +46,15 @@ class StringCalculatorTest {
         val calculator = StringCalculator()
 
         shouldThrow<RuntimeException> { calculator.calculate(expression) }
+    }
+
+    @Test
+    fun `커스텀 구분자를 사용할 수 있다`() {
+        val str = "//;\\n1;2;3"
+        val calculator = StringCalculator()
+
+        val result = calculator.calculate(str)
+
+        result shouldBe 6
     }
 }
