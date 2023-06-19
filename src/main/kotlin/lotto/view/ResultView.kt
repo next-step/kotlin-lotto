@@ -33,8 +33,14 @@ object ResultView {
         }
     }
 
-    fun printWinningResult(resultGroup: Map<Int, Int>) {
+    fun printWinningResult(resultGroup: Map<Int, Int>, collectBonusCount: Int) {
         LottoRank.values().filter { it.count != 0 }.forEach { lotto ->
+
+            if (lotto == LottoRank.BONUS_COLLECT) {
+                println("${lotto.count}개 일치, 보너스 볼 일치(${lotto.prizeMoney}원)- ${collectBonusCount}개")
+                return@forEach
+            }
+
             resultGroup.keys.find { it == lotto.count }?.let {
                 println("${it}개 일치 (${lotto.prizeMoney}원)- ${resultGroup[it]}개")
             } ?: println("${lotto.count}개 일치 (${lotto.prizeMoney}원)- 0개")

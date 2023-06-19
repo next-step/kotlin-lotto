@@ -10,10 +10,10 @@ class LottoGeneratorTest {
 
     private lateinit var lotto: Lotto
     private lateinit var numbers: List<Int>
+    private val lottoGenerator = LottoGenerator((1..45).toMutableList())
 
     @BeforeEach
     fun setup() {
-        val lottoGenerator = LottoGenerator((1..45).toMutableList())
         numbers = lottoGenerator.getLottoNumbers()
         lotto = Lotto(numbers)
     }
