@@ -19,8 +19,7 @@ class ParsedStringValidatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val parsedStringValidator = ParsedStringValidator()
-        parsedStringValidator.check(parsedStringList) shouldBe false
+        ParsedStringValidator.check(parsedStringList) shouldBe false
     }
 
     @ParameterizedTest
@@ -34,8 +33,7 @@ class ParsedStringValidatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val parsedStringValidator = ParsedStringValidator()
-        parsedStringValidator.check(parsedStringList) shouldBe false
+        ParsedStringValidator.check(parsedStringList) shouldBe false
     }
 
     @Test
@@ -44,8 +42,7 @@ class ParsedStringValidatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val parsedStringValidator = ParsedStringValidator()
-        parsedStringValidator.check(parsedStringList) shouldBe false
+        ParsedStringValidator.check(parsedStringList) shouldBe false
     }
 
     @Test
@@ -54,7 +51,6 @@ class ParsedStringValidatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val parsedStringValidator = ParsedStringValidator()
-        parsedStringValidator.check(parsedStringList) shouldBe false
+        ParsedStringValidator.check(parsedStringList) shouldBe false
     }
 }

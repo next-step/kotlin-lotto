@@ -7,7 +7,7 @@ class StringCalculator {
     }
 
     private fun checkStringList(parsedStringList: List<String>) {
-        check(ParsedStringValidator().check(parsedStringList)) {
+        check(ParsedStringValidator.check(parsedStringList)) {
             RuntimeException()
         }
     }
