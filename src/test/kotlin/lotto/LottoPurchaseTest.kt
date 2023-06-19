@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class LottoPurchaseTest {
     @Test
     fun `로또를 구입할 수 있다`() {
-        assertThat(LottoPurchase().purchaseAuto(1000, LottoPurchase.DEFAULT_PRICE)[0]).isInstanceOf(Lotto::class.java)
+        assertThat(LottoPurchase().purchaseAuto(1000, LottoPurchase.DEFAULT_PRICE).lottos[0]).isInstanceOf(Lotto::class.java)
     }
 
     @ParameterizedTest

@@ -1,15 +1,15 @@
 package lotto.domain
 
 class LottoPurchase {
-    fun purchaseAuto(budget: Int, priceOfLotto: Int): List<Lotto> {
+    fun purchaseAuto(budget: Int, priceOfLotto: Int): Lottos {
         val amount = affordableLottoCount(budget, priceOfLotto)
 
-        val result = buildList {
+        val lottos = buildList {
             repeat(amount) {
                 add(Lotto.autoCreate())
             }
         }
-        return result
+        return Lottos(lottos)
     }
 
     fun affordableLottoCount(budget: Int, priceOfLotto: Int): Int {
