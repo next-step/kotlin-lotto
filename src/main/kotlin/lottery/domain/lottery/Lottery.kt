@@ -22,12 +22,17 @@ class Lottery(
 
         fun from(values: List<String>): Lottery = Lottery(values.map { LotteryNumber.from(it) })
 
+        fun Money.isDivisibleLotteryCost(): Boolean = this.isDivisible(LOTTERY_COST)
+
         fun purchaseLottery(money: Money): Receipt {
             val purchaseCount = countOfCanPurchaseLottery(money).toInt()
             return Receipt(LOTTERY_COST.times(purchaseCount), purchaseCount)
         }
 
         fun canPurchaseLottery(money: Money): Boolean = countOfCanPurchaseLottery(money) > BigDecimal.ZERO
+
+        fun canPurchaseLottery(purchaseCount: Int, money: Money): Boolean =
+            countOfCanPurchaseLottery(money) >= purchaseCount.toBigDecimal()
 
         private fun countOfCanPurchaseLottery(money: Money): BigDecimal = money.divide(LOTTERY_COST)
     }

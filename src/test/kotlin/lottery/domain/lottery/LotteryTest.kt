@@ -7,6 +7,7 @@ import io.kotest.data.row
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lottery.domain.Money
+import lottery.domain.lottery.Lottery.Companion.isDivisibleLotteryCost
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_1
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_10
 import lottery.domain.lottery.LotteryNumberTest.Companion.LOTTERY_NUMBER_2
@@ -119,6 +120,18 @@ class LotteryTest : FunSpec({
         }
     }
 
+    context("isDivisibleLotteryCost") {
+        test("로또금액으로 나누어떨어지는 돈인지 확인한다") {
+            forAll(
+                row(Money(value = BigDecimal(999)), false),
+                row(Money(value = BigDecimal(1_000)), true),
+            ) { input, expected ->
+                val actual = input.isDivisibleLotteryCost()
+                actual shouldBe expected
+            }
+        }
+    }
+
     context("purchaseLottery") {
         test("로또 구매 결과를 반환한다") {
             forAll(
@@ -139,6 +152,16 @@ class LotteryTest : FunSpec({
 
         test("로또를 구매할 수 없다면 false를 반환한다") {
             val actual = Lottery.canPurchaseLottery(Money(value = BigDecimal(999)))
+            actual shouldBe false
+        }
+
+        test("구입 갯수를 받았을 때 로또를 구매할 수 있다면 true를 반환한다") {
+            val actual = Lottery.canPurchaseLottery(purchaseCount = 2, money = Money(value = BigDecimal(2_999)))
+            actual shouldBe true
+        }
+
+        test("구입 갯수를 받았을 때 로또를 구매할 수 없다면 false를 반환한다") {
+            val actual = Lottery.canPurchaseLottery(purchaseCount = 3, money = Money(value = BigDecimal(2_999)))
             actual shouldBe false
         }
     }
