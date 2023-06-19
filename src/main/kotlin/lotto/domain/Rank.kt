@@ -13,7 +13,7 @@ enum class Rank(
 
     fun getRank(lottos: Lottos, winnerNumbers: List<LottoNumber>) {
         count = lottos.lottoNumbers.count { lottoNumbers ->
-            lottoNumbers.lottoNumbers.count { it in winnerNumbers } == matchCount
+            lottoNumbers.lottoNumbers.intersect(winnerNumbers.toSet()).count() == matchCount
         }
     }
 }
