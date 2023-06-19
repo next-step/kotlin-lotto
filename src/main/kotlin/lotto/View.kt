@@ -16,6 +16,12 @@ object InputView {
             ?: throw IllegalArgumentException("당첨 번호를 입력해야 합니다.")
         return Lotto(wonNumbers.map { LottoNumber(it.toInt()) })
     }
+
+    fun readBonusLottoNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        val number = readlnOrNull() ?: throw IllegalArgumentException("보너스 볼을 입력해야 합니다.")
+        return number.toInt()
+    }
 }
 
 object ResultView {
@@ -31,7 +37,8 @@ object ResultView {
 
     fun printWinnerStatistics(winningLottoPrizeVOs: List<WinningLottoPrizeVO>, totalProfitRate: BigDecimal) {
         val matchedLottos: String = winningLottoPrizeVOs.joinToString("\n") {
-            "|${it.matchedCount}개 일치 (${it.prizeAmount}원)- ${it.winningLottoCount}개"
+            val bonusMatchedText = if (it.bonusMatched) ", 보너스 볼 일치" else ""
+            "|${it.matchedCount}개$bonusMatchedText 일치 (${it.prizeAmount}원)- ${it.winningLottoCount}개"
         }
 
         println(

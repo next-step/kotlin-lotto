@@ -8,9 +8,10 @@ class Lotto(
         require(lottoNumbers.size == LOTTO_NUMBER_COUNT) { "로또번호는 ${LOTTO_NUMBER_COUNT}개 이어야 합니다." }
     }
 
-    fun isMatchedByMatchCount(other: Lotto, matchCount: Int): Boolean {
+    fun matchPrize(other: Lotto, bonusLottoNumber: LottoNumber): Prize {
         val matchedLottoNumbers = lottoNumbers.filter { other.lottoNumbers.contains(it) }
-        return matchedLottoNumbers.size == matchCount
+        val bonusMatched = lottoNumbers.any { it == bonusLottoNumber }
+        return Prize.match(matchedLottoNumbers.size, bonusMatched)
     }
 
     companion object {
