@@ -18,7 +18,7 @@ class DelimitersTest {
     @ParameterizedTest
     @ValueSource(strings = ["*"])
     fun twoNumbers(text: String) {
-        val customDelimiters = Delimiters().addCustomDelimiters(text)
+        val customDelimiters = Delimiters().plusCustomDelimiters(text)
         Assertions.assertThat(customDelimiters.getDelimiters()).isEqualTo(listOf(",", ":", "*"))
     }
 }

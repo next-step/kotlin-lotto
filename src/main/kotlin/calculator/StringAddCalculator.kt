@@ -9,7 +9,7 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()) return 0
         var delimiters = Delimiters()
         val (customDelimiter, extractResult) = CustomDelimiterExtractor.extract(text)
-        if (!customDelimiter.isNullOrEmpty()) delimiters = delimiters.addCustomDelimiters(customDelimiter)
+        if (!customDelimiter.isNullOrEmpty()) delimiters = delimiters.plusCustomDelimiters(customDelimiter)
         val tokens = TextSplitter.splitText(extractResult, delimiters.getDelimiters())
         val convertedTokens = TokenConverter.convertToInt(tokens)
         PositiveNumber(convertedTokens)
