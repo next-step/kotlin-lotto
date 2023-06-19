@@ -11,4 +11,15 @@ object ResultView {
             println(lottery.numbers)
         }
     }
+
+    fun printWinStatistic(
+        lotteryResults: Pair<List<LotteryResult>, Double>,
+        money: Int
+    ) {
+        println("\n당첨 통계\n-------------------")
+        lotteryResults.first.forEach { lotteryResult ->
+            println(lotteryResult.message)
+        }
+        println(String.format("총 수익률은 %.2f 입니다", lotteryResults.second / money))
+    }
 }
