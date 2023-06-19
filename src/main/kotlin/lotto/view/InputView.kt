@@ -15,7 +15,8 @@ object InputView {
     }
 
     fun inputWinnerNumbers(): List<LottoNumber> {
-        val winnerNumbers = readln().split(", ")
-        return winnerNumbers.map { LottoNumber(it.toInt()) }
+        val inputNumbers = readln()
+        val splitNumbers = inputNumbers.split(",")
+        return splitNumbers.map { LottoNumber(it.trim().toInt()) }
     }
 }
