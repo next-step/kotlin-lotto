@@ -1,10 +1,9 @@
 package com.nextstep.second.lotto.domain
 
 class WinnerLotto private constructor(
-    numbers: List<LottoNumberVo>,
+    val numbers: List<LottoNumberVo>,
     val bonusNumber: LottoNumberVo
-) : Lotto(numbers) {
-
+) {
     companion object {
         fun of(inputNumbers: List<Int>, bonusNumber: Int): WinnerLotto {
             require(inputNumbers.toSet().size == Lotto.LOTTO_LENGTH) { "로또는 서로다른 ${Lotto.LOTTO_LENGTH}개의  숫자만큼 번호를 입력하셔야 합니다" }
