@@ -16,18 +16,17 @@ class SixFortyFiveLotto(val numbers: List<SixFortyFiveNumber>) :
     }
 
     companion object {
+        val LOTTO_NUMBER_RANGE = (1..45)
         private const val LOTTO_NUMBER_COUNT = 6
         const val LOTTO_PRICE = 1000
 
         fun of(): SixFortyFiveLotto {
-            val randomNumberList = mutableListOf<SixFortyFiveNumber>()
-            while (randomNumberList.size < LOTTO_NUMBER_COUNT) {
-                val sixFortyFiveNumber = SixFortyFiveNumber.of()
-                if (randomNumberList.find { it.value == sixFortyFiveNumber.value } == null) {
-                    randomNumberList.add(sixFortyFiveNumber)
-                }
-            }
-            return SixFortyFiveLotto(randomNumberList.sortedBy { it.value })
+            val randomNumbers = LOTTO_NUMBER_RANGE
+                .map { SixFortyFiveNumber(it) }
+                .shuffled()
+                .take(LOTTO_NUMBER_COUNT)
+                .sortedBy { it.value }
+            return SixFortyFiveLotto(randomNumbers)
         }
     }
 }

@@ -1,7 +1,6 @@
 package lotto.sixFortyFiveNumberLotto
 
 import lotto.ErrorCode
-import kotlin.random.Random
 
 class SixFortyFiveNumber(val value: Int) {
     init {
@@ -15,14 +14,5 @@ class SixFortyFiveNumber(val value: Int) {
     companion object {
         private const val LOTTO_NUMBER_RANGE_START = 1
         private const val LOTTO_NUMBER_RANGE_END = 45
-
-        fun of(): SixFortyFiveNumber {
-            return SixFortyFiveNumber(
-                Random.nextInt(
-                    LOTTO_NUMBER_RANGE_START,
-                    LOTTO_NUMBER_RANGE_END,
-                ),
-            )
-        }
     }
 }
