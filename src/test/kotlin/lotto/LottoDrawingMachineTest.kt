@@ -11,7 +11,7 @@ internal class LottoDrawingMachineTest : StringSpec({
 
         val lottos = Lottos(
             listOf(
-                Lotto(listOf(1, 2, 3, 10, 11, 12), 14000)
+                Lotto(listOf(1, 2, 3, 10, 11, 12).map { LottoNumber(it) }, 14000)
             )
         )
 

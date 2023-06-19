@@ -16,7 +16,7 @@ internal class LottoTest : StringSpec({
             row(listOf(1, 2, 3, 4, 5, 6, 7)),
         ).forAll {
             shouldThrow<IllegalArgumentException> {
-                Lotto(it, 1000)
+                Lotto(it.map { number -> LottoNumber(number) }, 1000)
             }
         }
     }
