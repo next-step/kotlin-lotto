@@ -67,8 +67,7 @@ class InputParserTest {
         val separators = inputParser.separator()
             .toSeparatorArray()
         assertThat(
-            inputParser.numbers(separators)
-                .sum()
+            inputParser.sum(separators)
         ).isEqualTo(result)
     }
 
@@ -99,5 +98,3 @@ class InputParserTest {
         }
     }
 }
-
-

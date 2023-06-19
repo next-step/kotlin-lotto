@@ -26,6 +26,10 @@ class InputParser(inputString: String) {
             }
     }
 
+    fun sum(separators: Array<String>): Int {
+        return numbers(separators).sum()
+    }
+
     private fun String.hasSeparatorSection(): Boolean {
         return startsWith(SEPARATOR_START) && contains(SEPARATOR_END)
     }
@@ -34,7 +38,6 @@ class InputParser(inputString: String) {
         val number = toIntOrNull()
         return number == null || number < 0
     }
-
 
     companion object {
         private const val SEPARATOR_START = "//"
