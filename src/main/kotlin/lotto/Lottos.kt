@@ -32,13 +32,13 @@ class Lottos(
             .toList()
     }
 
+    override fun iterator(): Iterator<Lotto> {
+        return lottos.iterator()
+    }
+
     companion object {
         fun from(vararg lottos: Lotto): Lottos {
             return Lottos(lottos.toList())
         }
-    }
-
-    override fun iterator(): Iterator<Lotto> {
-        return lottos.iterator()
     }
 }
