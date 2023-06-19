@@ -6,16 +6,11 @@ import lotto.enums.LottoRank
 
 class LottoNumberMatcher {
 
-    fun lottoCheck(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusLottoNumber: LottoNumber): List<LottoRank> {
+    fun checkLotto(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusLottoNumber: LottoNumber): List<LottoRank> {
 
         val result = mutableListOf<LottoRank>()
         lottoBundle.forEach { lotto ->
-            var count = 0
-            lotto.numbers.forEach { number ->
-                if (winningLotto.numbers.contains(number)) {
-                    count++
-                }
-            }
+            val count = countLottoNumber(lotto, winningLotto)
             if (count == BONUS_WINNING_COUNT && lotto.numbers.contains(bonusLottoNumber.number)) {
                 return@forEach
             }
@@ -26,7 +21,7 @@ class LottoNumberMatcher {
         return result.toList()
     }
 
-    fun bonusLottoCheck(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusLottoNumber: LottoNumber): Int {
+    fun checkBonusLotto(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusLottoNumber: LottoNumber): Int {
 
         var result = 0
         lottoBundle.forEach { lotto ->
@@ -41,6 +36,16 @@ class LottoNumberMatcher {
             }
         }
         return result
+    }
+
+    private fun countLottoNumber(lotto: Lotto, winningLotto: Lotto): Int {
+        var count = 0
+        lotto.numbers.forEach { number ->
+            if (winningLotto.numbers.contains(number)) {
+                count++
+            }
+        }
+        return count
     }
 
     fun lottoResultGroup(collectLottoRanks: List<LottoRank>): Map<Int, Int> {

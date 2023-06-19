@@ -16,7 +16,7 @@ class LottoNumberMatcherTest {
         val lottoBundle = listOf(Lotto(listOf(1, 2, 3, 4, 5, 7)), Lotto(listOf(2, 4, 5, 11, 18, 22)))
         val winningNumber = Lotto(listOf(1, 2, 3, 4, 5, 7))
         val bonusLottoNumber = LottoNumber(22)
-        val actual = LottoNumberMatcher().lottoCheck(winningNumber, lottoBundle, bonusLottoNumber)
+        val actual = LottoNumberMatcher().checkLotto(winningNumber, lottoBundle, bonusLottoNumber)
         Assertions.assertThat(actual[0]).isEqualTo(LottoRank.SIX_COLLECT)
         Assertions.assertThat(actual[1]).isEqualTo(LottoRank.THREE_COLLECT)
     }

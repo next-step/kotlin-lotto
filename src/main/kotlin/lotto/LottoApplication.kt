@@ -23,8 +23,8 @@ class LottoApplication(
         resultView.printEnter()
 
         resultView.printResult()
-        val collectCounts = lottoNumberMatcher.lottoCheck(winningLotto, lottoBundle.lottoBundle, bonusLottoNumber)
-        val collectBonusCount = lottoNumberMatcher.bonusLottoCheck(winningLotto, lottoBundle.lottoBundle, bonusLottoNumber)
+        val collectCounts = lottoNumberMatcher.checkLotto(winningLotto, lottoBundle.lottoBundle, bonusLottoNumber)
+        val collectBonusCount = lottoNumberMatcher.checkBonusLotto(winningLotto, lottoBundle.lottoBundle, bonusLottoNumber)
 
         val resultGroup = lottoNumberMatcher.lottoResultGroup(collectCounts)
         resultView.printWinningResult(resultGroup, collectBonusCount)
