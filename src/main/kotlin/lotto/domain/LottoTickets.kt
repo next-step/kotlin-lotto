@@ -9,23 +9,24 @@ class LottoTickets(private val money: Money, autoNumbers: AutoNumbers) {
     }
 
     fun getWinStats(winNumbers: LottoTicket): WinStats {
-        var amount: Long = 0
-
-        val matchMap: Map<WinResult, Int> = lottoTickets.filter {
-            it.getWinResult(winNumbers) !== WinResult.LOSE
-        }.groupingBy {
+        val matchMap: Map<WinResult, Int> = lottoTickets.map {
             it.getWinResult(winNumbers)
-        }.eachCount()
+        }.filter {
+            it !== WinResult.LOSE
+        }.groupingBy { it }
+            .eachCount()
 
-        matchMap.keys.forEach { amount += it.reward }
+        val amount = matchMap.keys
+            .map { it.reward }
+            .fold(0.0f) { total, num -> total + num }
 
         return WinStats(matchMap, calculateYield(amount))
     }
 
-    private fun calculateYield(amount: Long): Number {
-        if (amount == 0L) {
+    private fun calculateYield(amount: Float): Number {
+        if (amount == 0.0f) {
             return 0
         }
-        return amount.toFloat() / money.value
+        return amount / money.value
     }
 }
