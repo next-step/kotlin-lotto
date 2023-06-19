@@ -10,13 +10,9 @@ class Lotto(
     }
 
     fun countMatchingNumbersFrom(winningNumbers: List<LottoNumber>): Int {
-        var count = 0
-
-        winningNumbers.forEach { winningNumber ->
-            if (lottoNumbers.contains(winningNumber)) count++
-        }
-
-        return count
+        return winningNumbers
+            .intersect(lottoNumbers)
+            .size
     }
 
     companion object {
