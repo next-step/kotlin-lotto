@@ -10,7 +10,7 @@ class PositiveNumberTest {
     fun checkNegativeNumbers() {
         val numbers = listOf(1,2,-3)
         assertThrows<RuntimeException> {
-            PositiveNumber.checkPositiveNumbers(numbers)
+            PositiveNumber(numbers)
         }
     }
 }

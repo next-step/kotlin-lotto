@@ -12,7 +12,7 @@ class StringAddCalculator {
         if (!customDelimiter.isNullOrEmpty()) delimiters = delimiters.addCustomDelimiters(customDelimiter)
         val tokens = TextSplitter.splitText(extractResult, delimiters.getDelimiters())
         val convertedTokens = TokenConverter.convertToInt(tokens)
-        PositiveNumber.checkPositiveNumbers(convertedTokens)
+        PositiveNumber(convertedTokens)
         return convertedTokens.sum()
     }
 }
