@@ -19,7 +19,7 @@ class LottoTest : FreeSpec({
             ) { numbers ->
                 val sut = Lotto.from(numbers)
 
-                val result = sut.lottoNumbers
+                val result = sut.numbers
 
                 result shouldContainExactlyInAnyOrder numbers
             }

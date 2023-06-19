@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.GameResult
+import lotto.Lotto
 import lotto.Lottos
 import lotto.vo.LottoNumber
 import lotto.vo.Money
@@ -28,8 +29,16 @@ object ConsoleView : InputView, OutputView {
 
     override fun showPurchased(lottos: Lottos) {
         println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { println(it.toString()) }
+        lottos.forEach { it ->
+            println(changeToConsoleFormat(it))
+        }
         println()
+    }
+
+    private fun changeToConsoleFormat(lotto: Lotto): String {
+        return lotto.numbers
+            .sorted()
+            .joinToString(", ", "[", "]")
     }
 
     override fun show(result: GameResult) {
