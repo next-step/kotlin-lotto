@@ -3,8 +3,14 @@ package lotto.domain
 class Lotto(
     val numbers: LottoNumbers = LottoNumbers.random(),
 ) {
-    fun calculateResult(numbers: LottoNumbers): LottoRank? {
-        return LottoRank.of(numbers.getIntersectCount(this.numbers))
+    fun calculateResult(
+        winningNumbers: LottoNumbers,
+        bonusNumber: LottoNumber,
+    ): LottoRank? {
+        return LottoRank.of(
+            matchCount = numbers.getMatchCount(winningNumbers),
+            isBonusNumberMatch = numbers.isContains(bonusNumber),
+        )
     }
 
     companion object {

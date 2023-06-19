@@ -11,10 +11,14 @@ class LottoNumbers(
         require(values.size == LOTTO_NUMBER_COUNT) { "로또 번호는 중복되지 않는 숫자 ${LOTTO_NUMBER_COUNT}개로 구성되어야 합니다." }
     }
 
-    fun getIntersectCount(other: LottoNumbers): Int {
+    fun getMatchCount(other: LottoNumbers): Int {
         val set = this.values.toMutableSet()
         set.retainAll(other.values)
         return set.size
+    }
+
+    fun isContains(lottoNumber: LottoNumber): Boolean {
+        return values.contains(lottoNumber)
     }
 
     companion object {

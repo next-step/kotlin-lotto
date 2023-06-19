@@ -21,23 +21,34 @@ class LottoSpec : DescribeSpec({
     }
 
     describe("로또 결과 계산") {
-        val numbers = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
+        val winningNumbers = LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6))
+        val bonusNumber = LottoNumber(7)
 
         context("로또 번호와 당첨 번호가 6개 일치하면") {
             val lotto = Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 6)))
 
             it("1등이다.") {
-                val lottoPrize = lotto.calculateResult(numbers)
+                val lottoPrize = lotto.calculateResult(winningNumbers, bonusNumber)
 
                 lottoPrize shouldBe LottoRank.FIRST
             }
         }
 
-        context("로또 번호와 당첨 번호가 5개 일치하면") {
+        context("로또 번호와 당첨 번호가 5개 일치하고 보너스 번호가 일치하면") {
             val lotto = Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 7)))
 
+            it("2등이다.") {
+                val lottoPrize = lotto.calculateResult(winningNumbers, bonusNumber)
+
+                lottoPrize shouldBe LottoRank.SECOND
+            }
+        }
+
+        context("로또 번호와 당첨 번호가 5개 일치하고 보너스 번호가 불일치하면") {
+            val lotto = Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 5, 8)))
+
             it("3등이다.") {
-                val lottoPrize = lotto.calculateResult(numbers)
+                val lottoPrize = lotto.calculateResult(winningNumbers, bonusNumber)
 
                 lottoPrize shouldBe LottoRank.THIRD
             }
@@ -47,7 +58,7 @@ class LottoSpec : DescribeSpec({
             val lotto = Lotto(LottoNumbers.of(setOf(1, 2, 3, 4, 7, 8)))
 
             it("4등이다.") {
-                val lottoPrize = lotto.calculateResult(numbers)
+                val lottoPrize = lotto.calculateResult(winningNumbers, bonusNumber)
 
                 lottoPrize shouldBe LottoRank.FOURTH
             }
@@ -57,7 +68,7 @@ class LottoSpec : DescribeSpec({
             val lotto = Lotto(LottoNumbers.of(setOf(1, 2, 3, 7, 8, 9)))
 
             it("5등이다.") {
-                val lottoPrize = lotto.calculateResult(numbers)
+                val lottoPrize = lotto.calculateResult(winningNumbers, bonusNumber)
 
                 lottoPrize shouldBe LottoRank.FIFTH
             }

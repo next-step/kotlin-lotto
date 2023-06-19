@@ -6,10 +6,14 @@ class Lottos(
     val size = values.size
     val cost = size * Lotto.PRICE
 
-    fun calculateResults(winningNumbers: LottoNumbers): LottosResult {
+    fun calculateResults(
+        winningNumbers: LottoNumbers,
+        bonusNumber: LottoNumber,
+    ): LottosResult {
         val results = LottoRank.createMapWithLottoRankAndZero()
         values.forEach { lotto ->
-            val lottoRank = lotto.calculateResult(winningNumbers) ?: return@forEach
+            val lottoRank =
+                lotto.calculateResult(winningNumbers = winningNumbers, bonusNumber = bonusNumber) ?: return@forEach
             results[lottoRank] = results[lottoRank]?.plus(1) ?: 0
         }
 

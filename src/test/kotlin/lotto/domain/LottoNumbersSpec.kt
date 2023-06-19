@@ -5,9 +5,19 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class LottoNumbersSpec : DescribeSpec({
-    describe("로또 번호 개수 검증") {
-        context("로또 번호를 생성하면") {
-            it("로또는 6개의 번호를 갖고있다.") {
+    describe("로또 번호 목록 생성 검증") {
+        context("로또 번호 목로을 생성하면") {
+            it("6개의 번호가 생성된다.") {
+                val lottoNumbers = LottoNumbers.random()
+
+                lottoNumbers.values.size shouldBe 6
+            }
+        }
+    }
+
+    describe("로또 번호 목록 개수 검증") {
+        context("로또 번호 목로을 생성하면") {
+            it("6개의 번호가 생성된다.") {
                 val lottoNumbers = LottoNumbers.random()
 
                 lottoNumbers.values.size shouldBe 6

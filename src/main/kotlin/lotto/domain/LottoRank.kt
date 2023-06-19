@@ -5,6 +5,7 @@ enum class LottoRank(
     val winningMoney: Int,
 ) {
     FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -13,7 +14,10 @@ enum class LottoRank(
     companion object {
         private val MAP_BY_MATCH_COUNT = values().associateBy { it.matchCount }
 
-        fun of(matchCount: Int): LottoRank? {
+        fun of(matchCount: Int, isBonusNumberMatch: Boolean): LottoRank? {
+            if (matchCount == SECOND.matchCount && isBonusNumberMatch) {
+                return SECOND
+            }
             return MAP_BY_MATCH_COUNT[matchCount]
         }
 
