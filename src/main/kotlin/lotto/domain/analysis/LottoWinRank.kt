@@ -11,35 +11,35 @@ enum class LottoWinRank(
         winAmount = Money(2_000_000_000),
         matchCondition = MatchCondition(
             matchSuccessCount = PositiveNumber(6),
-            hasBonus = false,
+            isMatchedBonus = false,
         ),
     ),
     SECOND(
         winAmount = Money(30_000_000),
         matchCondition = MatchCondition(
             matchSuccessCount = PositiveNumber(5),
-            hasBonus = true,
+            isMatchedBonus = true,
         ),
     ),
     THIRD(
         winAmount = Money(1_500_000),
         matchCondition = MatchCondition(
             matchSuccessCount = PositiveNumber(5),
-            hasBonus = false,
+            isMatchedBonus = false,
         ),
     ),
     FOURTH(
         winAmount = Money(50_000),
         matchCondition = MatchCondition(
             matchSuccessCount = PositiveNumber(4),
-            hasBonus = false
+            isMatchedBonus = false
         ),
     ),
     FIFTH(
         winAmount = Money(5_000),
         matchCondition = MatchCondition(
             matchSuccessCount = PositiveNumber(3),
-            hasBonus = false
+            isMatchedBonus = false
         ),
     );
 

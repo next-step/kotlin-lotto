@@ -7,7 +7,7 @@ data class LottoWinRankAnalysisResult(
     val ranksCount: PositiveNumber,
 ) {
     val numberMatchCount = lottoWinRank.matchCondition.matchSuccessCount
-    val isBonusMatched = lottoWinRank.matchCondition.hasBonus
+    val isBonusMatched = lottoWinRank.matchCondition.isMatchedBonus
     val rankWinAmount = lottoWinRank.winAmount
     val totalWinAmount = lottoWinRank.winAmount * ranksCount
 }

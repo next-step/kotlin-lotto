@@ -4,5 +4,5 @@ import math.PositiveNumber
 
 data class MatchCondition(
     val matchSuccessCount: PositiveNumber,
-    val hasBonus: Boolean,
+    val isMatchedBonus: Boolean,
 )

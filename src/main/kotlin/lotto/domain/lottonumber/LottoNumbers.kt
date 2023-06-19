@@ -13,6 +13,10 @@ value class LottoNumbers(val value: List<LottoNumber>) {
         }
     }
 
+    fun toSet(): Set<LottoNumber> {
+        return value.toSet()
+    }
+
     companion object {
 
         private const val LOTTO_NUMBER_REQUIRE_SIZE = 6
