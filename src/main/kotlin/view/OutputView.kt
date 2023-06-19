@@ -5,7 +5,7 @@ import domain.Lottery
 object OutputView {
 
     fun reportPrizeState(lottery: Lottery) {
-        println(lottery.randomNumbers.toString())
+        println(lottery.lotteryNumbers.toString())
     }
 
     fun reportPrize(

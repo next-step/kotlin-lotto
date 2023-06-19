@@ -14,13 +14,13 @@ class InputView(
         return money.toInt()
     }
 
-    fun getWinningNumbers(): Set<Int> {
+    fun getWinningNums(): Set<Int> {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val winningNums = inputReader.raedLine()
         return Separator.extractIntegers(winningNums).toSet()
     }
 
-    fun getBonusNumber(): Int {
+    fun getBonusBall(): Int {
         println("보너스 볼을 입력해 주세요.")
         val bonusBall = inputReader.raedLine().toIntOrNull()
         require(bonusBall != null) { "보너스 볼이 올바르지 않습니다 : $bonusBall" }

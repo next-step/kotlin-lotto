@@ -10,7 +10,7 @@ class LottoRunnerTest : StringSpec({
     }
 
     "클라이언트의 금액에 따라 로또 장수를 리턴한다" {
-        val (purchasedAmount, lotteries) = LotteryMachine.purchaseLotteries(14_000)
+        val (purchasedAmount, lotteries) = LotteryMachine.buyLotteries(14_000)
         purchasedAmount shouldBe 14_000
         lotteries.size shouldBe 14
     }

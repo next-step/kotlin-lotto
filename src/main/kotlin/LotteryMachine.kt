@@ -10,14 +10,15 @@ object LotteryMachine {
     ): MutableMap<Prize, Int> {
         val prizeCountMap = mutableMapOf<Prize, Int>()
 
-        for (lottery in lotteries) {
-            val prize = lottery.getPrizeByLottery(winningNums, bonusBall) ?: continue
+        lotteries.forEach { lottery ->
+            val prize = lottery.calculatePrize(winningNums, bonusBall) ?: return@forEach
             prizeCountMap[prize] = (prizeCountMap[prize] ?: 0) + 1
         }
+
         return prizeCountMap
     }
 
-    fun purchaseLotteries(money: Int): Pair<Int, List<Lottery>> {
+    fun buyLotteries(money: Int): Pair<Int, List<Lottery>> {
         val purchasableSize = money / 1000
         val lotteries = List(purchasableSize) { Lottery() }
         return Pair(purchasableSize * 1000, lotteries)

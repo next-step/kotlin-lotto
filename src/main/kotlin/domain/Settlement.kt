@@ -4,11 +4,11 @@ object Settlement {
 
     fun calculateProfitRate(
         prizeCountMap: Map<Prize, Int>,
-        sunkCost: Int,
+        investment: Int,
     ): Double {
-        val profit = prizeCountMap.entries.sumOf { (key, value) ->
-            value * key.prizeMoney
+        val totalPrizeMoney = prizeCountMap.entries.sumOf { (prize, count) ->
+            count * prize.prizeMoney
         }
-        return profit.toDouble() / sunkCost
+        return totalPrizeMoney.toDouble() / investment
     }
 }
