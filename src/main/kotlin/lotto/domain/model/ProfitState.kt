@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain.model
 
 enum class ProfitState {
     PROFIT,

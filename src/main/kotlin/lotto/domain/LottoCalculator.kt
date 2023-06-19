@@ -1,5 +1,6 @@
-package lotto
+package lotto.domain
 
+import lotto.domain.model.LottoResult
 import java.math.RoundingMode
 import java.text.DecimalFormat
 

@@ -1,4 +1,8 @@
-package lotto
+package lotto.view
+
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoResult
+import lotto.domain.model.ProfitState
 
 object ResultView {
     fun printBuyResult(lottos: List<Lotto>) {

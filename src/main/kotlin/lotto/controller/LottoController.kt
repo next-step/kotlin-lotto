@@ -1,4 +1,13 @@
-package lotto
+package lotto.controller
+
+import lotto.*
+import lotto.domain.*
+import lotto.domain.model.InputResult
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoResult
+import lotto.domain.model.toProfitState
+import lotto.view.InputView
+import lotto.view.ResultView
 
 class LottoController {
     fun execute() {

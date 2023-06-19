@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain.model
 
 class Lotto {
     val numbers: List<Int> = (FIRST_NUMBER..LAST_NUMBER).shuffled().subList(0, NUMBER_COUNT)

@@ -1,4 +1,6 @@
-package lotto
+package lotto.domain
+
+import lotto.domain.model.Lotto
 
 class LottoValidator(private val winningNumbers: List<Int>) {
 

@@ -1,6 +1,7 @@
-package lotto
+package lotto.domain
 
 import io.kotest.matchers.shouldBe
+import lotto.domain.model.Lotto
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
