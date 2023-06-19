@@ -3,12 +3,12 @@ package lotto.domain
 class Lottos(
     val lottos: List<Lotto>
 ) {
-    fun calculateStatistics(winningLotto: WinningLotto, budget: Int): LottosStatistics {
+    fun calculateStatistics(winningLotto: WinningLotto, budget: Int): LottosStatisticsVO {
         val prizeMap = generateWinningMap(winningLotto)
         val totalPrizeMoney = calculateTotalPrizeMoney(prizeMap)
         val rateOfReturn = totalPrizeMoney.toDouble() / budget.toDouble()
 
-        return LottosStatistics(prizeMap, totalPrizeMoney, rateOfReturn)
+        return LottosStatisticsVO(prizeMap, totalPrizeMoney, rateOfReturn)
     }
 
     private fun generateWinningMap(winningLotto: WinningLotto): Map<LottoPrizes, Int> {

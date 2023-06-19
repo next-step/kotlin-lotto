@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
-import lotto.domain.LottosStatistics
+import lotto.domain.LottosStatisticsVO
 
 class ResultView {
     fun printPurchaseAmount(amount: Int) {
@@ -13,7 +13,7 @@ class ResultView {
         lottos.forEach { printLotto(it) }
     }
 
-    fun printWinningResult(statistics: LottosStatistics) {
+    fun printWinningResult(statistics: LottosStatisticsVO) {
         printStatistics(statistics.prizeMap)
         printRateOfReturn(statistics.totalPrizeMoney, statistics.rateOfReturn)
     }
