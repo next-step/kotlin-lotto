@@ -3,23 +3,35 @@ package lotto.domain
 class Lottos(
     val lottos: List<Lotto>
 ) {
-    private val countsMap = mutableMapOf<Int, Int>()
+    fun calculateStatistics(winningLotto: WinningLotto, budget: Int): LottosStatistics {
+        val prizeMap = generateWinningMap(winningLotto)
+        val totalPrizeMoney = calculateTotalPrizeMoney(prizeMap)
+        val rateOfReturn = totalPrizeMoney.toDouble() / budget.toDouble()
 
-    fun getEqualCount(equalCount: Int) = countsMap.getOrDefault(equalCount, 0)
+        return LottosStatistics(prizeMap, totalPrizeMoney, rateOfReturn)
+    }
 
-    fun calculateTotalPrizes(winningLotto: WinningLotto): Int {
-        var totalPrizes = 0
+    private fun generateWinningMap(winningLotto: WinningLotto): Map<LottoPrizes, Int> {
+        val map = mutableMapOf<LottoPrizes, Int>()
 
-        lottos.forEach {
-            val isCatchBonus = it.isCatchBonus(winningLotto.bonusNumber)
+        lottos.forEach { lotto ->
+            val equalCount = lotto.checkEqualCount(winningLotto)
+            val isCatchBonus = lotto.isCatchBonus(winningLotto.bonusNumber)
+            val prize = LottoPrizes.of(equalCount, isCatchBonus)
 
-            val equalCount = it.checkEqualCount(winningLotto)
-            countsMap[equalCount] = countsMap.getOrDefault(equalCount, 0) + 1
-
-            val prize = LottoPrizes.getMoney(equalCount, isCatchBonus)
-            totalPrizes += prize
+            map[prize] = map.getOrDefault(prize, 0) + 1
         }
 
-        return totalPrizes
+        return map
+    }
+
+    private fun calculateTotalPrizeMoney(prizeMap: Map<LottoPrizes, Int>): Int {
+        var totalPrizeMoney = 0
+
+        prizeMap.forEach { (prize, count) ->
+            totalPrizeMoney += prize.money * count
+        }
+
+        return totalPrizeMoney
     }
 }

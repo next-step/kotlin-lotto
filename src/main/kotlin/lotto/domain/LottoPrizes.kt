@@ -5,6 +5,7 @@ enum class LottoPrizes(
     val money: Int,
     val catchBonus: Boolean = false
 ) {
+    NONE(0, 0),
     MATCH_THREE_PRIZES(3, 5_000),
     MATCH_FOUR_PRIZES(4, 50_000),
     MATCH_FIVE_PRIZES(5, 1_500_000),
@@ -12,13 +13,10 @@ enum class LottoPrizes(
     MATCH_SIX_PRIZES(6, 2_000_000_000);
 
     companion object {
-        private const val DEFAULT_MONEY: Int = 0
-
-        fun getMoney(equalCount: Int, catchBonus: Boolean): Int {
-            val money = LottoPrizes.values()
+        fun of(equalCount: Int, catchBonus: Boolean): LottoPrizes {
+            return LottoPrizes.values()
                 .find { it.equalCount == equalCount && it.catchBonus == catchBonus }
-                ?.money
-            return money ?: DEFAULT_MONEY
+                ?: NONE
         }
     }
 }

@@ -8,15 +8,12 @@ import org.junit.jupiter.api.assertAll
 class LottoPrizesTest {
     @Test
     fun `당첨 개수가 5라면 보너스 당첨 여부로 상금이 달라진다`() {
-        val matchFive = LottoPrizes.MATCH_FIVE_PRIZES
-        val catchBonus = true
-
-        val matchFiveWithBonus = LottoPrizes.MATCH_FIVE_PRIZES_WITH_BONUS
-        val failBonus = false
+        val bonus = LottoPrizes.of(5, true)
+        val noBonus = LottoPrizes.of(5, false)
 
         assertAll({
-            assertThat(LottoPrizes.getMoney(matchFiveWithBonus.equalCount, catchBonus)).isEqualTo(matchFiveWithBonus.money)
-            assertThat(LottoPrizes.getMoney(matchFive.equalCount, failBonus)).isEqualTo(matchFive.money)
+            assertThat(bonus.money).isEqualTo(LottoPrizes.MATCH_FIVE_PRIZES_WITH_BONUS.money)
+            assertThat(noBonus.money).isEqualTo(LottoPrizes.MATCH_FIVE_PRIZES.money)
         })
     }
 }
