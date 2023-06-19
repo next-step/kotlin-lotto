@@ -11,7 +11,8 @@ object LottoGameController {
         LottoOutputView.printLottos(lottos)
 
         val winningNumbers = LottoInputView.inputWinningLottoNumbers()
-        val lottosResult = lottos.calculateResults(winningNumbers)
+        val bonusNumber = LottoInputView.inputBonusNumber()
+        val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
         LottoOutputView.printLottoResults(lottosResult)
     }
 }

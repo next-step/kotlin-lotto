@@ -17,6 +17,10 @@ class LottoNumber(val value: Int) {
         return value.hashCode()
     }
 
+    override fun toString(): String {
+        return value.toString()
+    }
+
     companion object {
         private val LOTTO_NUMBER_RANGE = (1..45)
 
