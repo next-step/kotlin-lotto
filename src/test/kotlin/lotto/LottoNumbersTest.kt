@@ -19,7 +19,7 @@ class LottoNumbersTest {
     fun `text로 LottoNumbers를 생성할 수 있다`() {
         val text = "1, 2, 3, 4, 5, 6"
         val lottoNumbers = LottoNumbers.from(text)
-        lottoNumbers.numbers shouldBe List(LottoNumbers.SIZE) { LottoNumber(it + 1) }
+        lottoNumbers.numbers shouldBe List(LottoNumbers.SIZE) { LottoNumber.from(it + 1) }
     }
 
     @ParameterizedTest
@@ -32,6 +32,6 @@ class LottoNumbersTest {
     fun `생성된 LottoNumbers의 숫자는 오름차순으로 정렬된다`() {
         val text = "1, 6, 3, 2, 5, 4"
         val lottoNumbers = LottoNumbers.from(text)
-        lottoNumbers.numbers shouldBe List(LottoNumbers.SIZE) { LottoNumber(it + 1) }
+        lottoNumbers.numbers shouldBe List(LottoNumbers.SIZE) { LottoNumber.from(it + 1) }
     }
 }
