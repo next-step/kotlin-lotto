@@ -1,25 +1,12 @@
 package lotto
 
-import lotto.vo.LottoNumber
 import lotto.vo.Money
 
 object LottoShop {
     val LOTTO_PRICE = Money(1000)
-
-    fun sellLottos(cash: Money): Lottos {
+    fun sell(cash: Money, lottoPurchaseCommand: LottoPurchaseCommand): Lottos {
         val amountOfLotto = cash.amount / LOTTO_PRICE.amount
 
-        val generatedLottos = List(amountOfLotto.toInt()) { generateLotto() }
-
-        return Lottos(generatedLottos)
-    }
-
-    private fun generateLotto(): Lotto {
-        val lottoNums = (1..45)
-            .map(::LottoNumber)
-            .shuffled()
-            .subList(0, 6)
-
-        return Lotto.from(lottoNums)
+        return Lottos(lottoPurchaseCommand.fetchPurchaseLottoByCount(amountOfLotto.toInt()))
     }
 }

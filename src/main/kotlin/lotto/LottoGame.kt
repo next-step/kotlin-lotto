@@ -7,9 +7,9 @@ class LottoGame(
     private val inputView: InputView,
     private val outputView: OutputView,
 ) {
-    fun run() {
+    fun run(purchaseCommand: LottoPurchaseCommand = RandomPurchaseCommand) {
         val money = inputView.receiveMoney()
-        val lottos = LottoShop.sellLottos(money)
+        val lottos = LottoShop.sell(money, purchaseCommand)
         outputView.showPurchased(lottos)
 
         val winningNumbers = inputView.receiveWinningNumbers()

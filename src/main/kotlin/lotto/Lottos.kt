@@ -3,7 +3,7 @@ package lotto
 import lotto.vo.LottoNumber
 import lotto.vo.Money
 
-class Lottos(
+data class Lottos(
     private val lottos: List<Lotto>,
 ) : Iterable<Lotto> {
     private val totalPrice = Money(LottoShop.LOTTO_PRICE.amount * lottos.count())

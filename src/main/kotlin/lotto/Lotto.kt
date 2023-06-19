@@ -2,7 +2,7 @@ package lotto
 
 import lotto.vo.LottoNumber
 
-class Lotto(
+data class Lotto(
     val numbers: Set<LottoNumber>,
 ) {
     init {
@@ -16,7 +16,6 @@ class Lotto(
     }
 
     companion object {
-
         fun from(numbers: Collection<LottoNumber>): Lotto {
             return Lotto(numbers.toSet())
         }
