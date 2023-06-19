@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.dto.LottoResult
+import lotto.dto.LottoResultForView
 import lotto.entity.Lotto
 import lotto.entity.Rank
 import kotlin.math.round
@@ -16,9 +16,9 @@ object OutputView {
         }
     }
 
-    fun printResult(lottoResult: LottoResult) {
-        val rankToInt = lottoResult.rankToHowManyWins
-        val rateOfReturn = round((lottoResult.rateOfReturn * 100) / 100)
+    fun printResult(makeLottoResult: LottoResultForView) {
+        val rankToInt = makeLottoResult.rankToHowManyWins
+        val rateOfReturn = round((makeLottoResult.rateOfReturn * 100) / 100)
         println("당첨 통계")
         println("---------")
         println("3개 일치 (${Rank.Fourth.prize}원) - ${rankToInt[Rank.Fourth] ?: 0}")

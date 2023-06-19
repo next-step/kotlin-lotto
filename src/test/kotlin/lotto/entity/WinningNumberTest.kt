@@ -57,7 +57,7 @@ internal class WinningNumberTest {
         val winningNumber = WinningNumber.of(winningNumberList, 10)
         val lottos = listOf(
             Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()),
-            Lotto(numbers = numbers.map { LottoNumber(it) }.toSet())
+            Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()),
         )
         assertEquals(2, winningNumber.calculateLottoResults(lottos)[Rank.Fourth])
     }

@@ -4,7 +4,7 @@ class Lotto(
     val numbers: Set<LottoNumber>,
 ) {
     init {
-        require(numbers.size == NUMBER_OF_LOTTO_NUMBER)
+        require(numbers.size == NUMBER_OF_LOTTO_NUMBER) { "로또는 6자리 숫자로 이루어져야 합니다." }
     }
 
     companion object {
