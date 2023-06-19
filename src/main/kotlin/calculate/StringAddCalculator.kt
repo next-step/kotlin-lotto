@@ -5,7 +5,6 @@ class StringAddCalculator {
         if (text.isNullOrEmpty()) {
             return 0
         }
-
         val startIndex = text.indexOf("//") + 2
         val endIndex = text.indexOf("\n")
 
@@ -15,7 +14,11 @@ class StringAddCalculator {
         } else {
             text.split(",", ":")
         }.sumOf { it.toInt() }
-        if (result < 0) throw RuntimeException()
+
+        require(result >= 0) {
+            "결과는 0 이상이어야 합니다."
+        }
+
         return result
     }
 }
