@@ -5,6 +5,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import stringCalculator.ParsedStringValidator
 import stringCalculator.StringCalculator
 import stringCalculator.StringParser
 
@@ -19,7 +20,7 @@ class StringCalculatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val stringCalculator = StringCalculator()
+        val stringCalculator = StringCalculator(ParsedStringValidator)
         stringCalculator.execute(parsedStringList) shouldBe expected
     }
 
@@ -29,7 +30,7 @@ class StringCalculatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val stringCalculator = StringCalculator()
+        val stringCalculator = StringCalculator(ParsedStringValidator)
         stringCalculator.execute(parsedStringList) shouldBe 18
     }
 
@@ -40,7 +41,7 @@ class StringCalculatorTest {
         val parsedStringList = stringParser.parse(inputString)
 
         shouldThrow<RuntimeException> {
-            StringCalculator().execute(parsedStringList)
+            StringCalculator(ParsedStringValidator).execute(parsedStringList)
         }
     }
 
@@ -51,7 +52,7 @@ class StringCalculatorTest {
         val parsedStringList = stringParser.parse(inputString)
 
         shouldThrow<RuntimeException> {
-            StringCalculator().execute(parsedStringList)
+            StringCalculator(ParsedStringValidator).execute(parsedStringList)
         }
     }
 }
