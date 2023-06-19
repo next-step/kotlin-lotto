@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.model.LottoMachine
+import lotto.model.LottoStatistics
 import lotto.model.LottoWinning
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -17,7 +18,7 @@ class LottoController(
         val winNumbers = inputView.inputLottoWinningNumbers()
         val winningNumbers = LottoWinning(winNumbers)
         val result = winningNumbers.lottoResult(lottoList)
-        val total = winningNumbers.totalStatistics(result, amount)
+        val total = LottoStatistics.totalStatistics(result, amount)
 
         resultView.showWinningList(result)
         resultView.showTotalStatistics(total)

@@ -1,6 +1,7 @@
 package lotto.model
 
-data class LottoNumber(val number: Int) {
+@JvmInline
+value class LottoNumber(val number: Int) {
 
     init {
         require(number in LOTTO_NUMBER_MIN..LOTTO_NUMBER_MAX) {
