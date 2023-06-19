@@ -1,5 +1,12 @@
 package lotto
 
+import lotto.domain.Lottos
+import lotto.domain.RandomLottoGenerator
+import lotto.domain.WinningLotto
+import lotto.service.LottoMachine
+import lotto.view.InputView
+import lotto.view.ResultView
+
 fun main() {
     val purchaseAmount = InputView.readPurchaseAmount()
 

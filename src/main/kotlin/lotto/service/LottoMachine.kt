@@ -1,5 +1,8 @@
-package lotto
+package lotto.service
 
+import lotto.domain.Lottos
+import lotto.domain.WinningLotto
+import lotto.vo.WinningLottoPrizeVO
 import java.math.BigDecimal
 
 class LottoMachine(

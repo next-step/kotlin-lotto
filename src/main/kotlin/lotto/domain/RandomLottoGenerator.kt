@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 class RandomLottoGenerator : LottoGenerator {
     override fun generate(): Lotto {

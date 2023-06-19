@@ -1,7 +1,12 @@
-package lotto
+package lotto.service
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.Lottos
+import lotto.domain.WinningLotto
+import lotto.vo.WinningLottoPrizeVO
 import java.math.BigDecimal
 import java.math.RoundingMode
 

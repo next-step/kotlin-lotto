@@ -1,5 +1,8 @@
-package lotto
+package lotto.view
 
+import lotto.domain.LottoNumber
+import lotto.domain.Lottos
+import lotto.vo.WinningLottoPrizeVO
 import java.math.BigDecimal
 
 object InputView {
