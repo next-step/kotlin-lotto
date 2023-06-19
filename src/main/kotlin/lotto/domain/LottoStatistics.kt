@@ -11,10 +11,10 @@ class LottoStatistics {
     }
 
     fun getProfitRate(payment: Payment, ranks: List<Rank>): Double {
-        var sumAmount = 0
+        var sumAmount = 0.0
         for (rank in ranks) {
             sumAmount += (rank.amount * rank.count).toInt()
         }
-        return (sumAmount / payment.money).toDouble()
+        return (sumAmount / payment.money)
     }
 }
