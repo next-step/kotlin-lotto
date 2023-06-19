@@ -2,17 +2,15 @@ package lotto
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.api.Test
 
 internal class LottoTest {
 
-    private val lotto = Lotto()
-
-    @DisplayName(value = "입력받은 구입금액을 1000으로 나눈 몫을 출력한다.")
-    @ParameterizedTest
-    @ValueSource(ints = [1000, 2000, 3000])
-    fun dividends(money: Int) {
-        Assertions.assertThat(lotto.buy(money)).isSameAs(money / 1000)
+    @DisplayName(value = "정수 리스트로 생성한 로또를 오름차순으로 출력한다.")
+    @Test
+    fun printLotto() {
+        val numList = listOf(3, 5, 7, 10, 25, 1)
+        val lotto = Lotto(numList)
+        Assertions.assertThat(lotto.toString()).isEqualTo("[1, 3, 5, 7, 10, 25]")
     }
 }

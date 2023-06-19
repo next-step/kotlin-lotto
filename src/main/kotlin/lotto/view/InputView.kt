@@ -12,6 +12,13 @@ class InputView {
         return inputAmount
     }
 
+    fun inputWinningNums(): List<Int> {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        val input = readLine()?.trim()
+        val numbers = input?.split(",", " ")?.map { it.trim().toInt() }
+        return numbers?.take(6) ?: emptyList()
+    }
+
     private fun readNumber(): Int {
         return readLine()?.toIntOrNull() ?: 0
     }

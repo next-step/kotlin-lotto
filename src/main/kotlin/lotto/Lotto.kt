@@ -1,23 +1,18 @@
 package lotto
 
-import lotto.view.InputView
-import lotto.view.ResultView
+class Lotto(
+    private val numList: List<Int>
+) {
 
-class Lotto {
-    fun buy(inputAmount: Int): Int {
-        return inputAmount / 1000
+    override fun toString(): String {
+        return numList.sorted().toString()
+    }
+
+    fun numOfMatch(winningNums: List<Int>): Int {
+        return winningNums.intersect(numList.toSet()).count()
     }
 
     companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            val lotto = Lotto()
-            val inputView = InputView()
-            val resultView = ResultView()
-
-            val inputAmount = inputView.inputPurchaseAmount()
-            val numOfLotto = lotto.buy(inputAmount)
-            resultView.displayNumOfLotto(numOfLotto)
-        }
+        const val PRICE = 1000
     }
 }
