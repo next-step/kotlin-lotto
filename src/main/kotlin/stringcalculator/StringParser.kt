@@ -1,11 +1,16 @@
 package stringcalculator
 
-class StringParser() {
-    fun deleteCustomDelimiters(text: String): String {
-        val result = Regex(Delimiters.CUSTOM_DELIMITER_FIND_REGEX).find(text)
-        result?.let {
-            return it.groupValues[2]
+class StringParser {
+    companion object {
+        private const val CUSTOM_DELIMITER_INDEX = 1
+        private const val WITHOUT_CUSTOM_DELIMITER_EXPRESSION_INDEX = 2
+        fun deleteCustomDelimiters(text: String, delimiters: Delimiters): String {
+            val matchResult = Regex(Delimiters.CUSTOM_DELIMITER_FIND_REGEX).find(text)
+            matchResult?.let {
+                delimiters.addDelimiter(it.groupValues[CUSTOM_DELIMITER_INDEX])
+                return it.groupValues[WITHOUT_CUSTOM_DELIMITER_EXPRESSION_INDEX]
+            }
+            return text
         }
-        return text
     }
 }
