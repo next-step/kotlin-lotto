@@ -8,10 +8,8 @@ class LottoResult private constructor(
     }
 
     fun getRateOfReturn(money: Int): Double {
-        return matchedNumberCounts.entries.filter { (reward, totalCount) ->
-            totalCount != 0
-        }.sumOf { (reward, totalCount) ->
-            reward.reward * totalCount
+        return matchedNumberCounts.entries.sumOf { (reward, totalCount) ->
+            reward.calculateTotalReward(totalCount)
         } / money.toDouble()
     }
 
