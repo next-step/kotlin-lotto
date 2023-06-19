@@ -5,7 +5,6 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.datatest.withData
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
 
 class LottoNumberTest : FreeSpec({
 

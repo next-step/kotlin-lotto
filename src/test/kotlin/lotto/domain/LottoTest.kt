@@ -4,6 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import lotto.domain.LottoNumberSupports.toLottoNumbers
 
 class LottoTest : FreeSpec({
 
@@ -35,15 +36,4 @@ class LottoTest : FreeSpec({
         val lottoNumbers = listOf(10, 3, 4, 5, 2, 6).toLottoNumbers()
         Lotto(lottoNumbers).numbers shouldBe listOf(2, 3, 4, 5, 6, 10).toLottoNumbers()
     }
-}) {
-    companion object {
-
-        private fun IntRange.toLottoNumbers(): List<LottoNumber> {
-            return this.map { LottoNumber(it) }
-        }
-
-        private fun List<Int>.toLottoNumbers(): List<LottoNumber> {
-            return this.map { LottoNumber(it) }
-        }
-    }
-}
+})
