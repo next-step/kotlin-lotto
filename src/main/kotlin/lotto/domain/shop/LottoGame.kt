@@ -10,13 +10,10 @@ import math.PositiveNumber
 value class LottoGame(val lottoNumbers: LottoNumbers) {
 
     fun matchOrNull(lastWeekLottoNumbers: WinLottoNumbers): LottoWinRank? {
-        val lastWeekLottoNumberSet = lastWeekLottoNumbers.lottoNumbers.toSet()
-        val matchSuccessCount = lottoNumbers.value.count { lastWeekLottoNumberSet.contains(it) }
-        val isMatchedBonus = lottoNumbers.value.contains(lastWeekLottoNumbers.bonusNumber)
         return LottoWinRank.findOrNull(
             MatchCondition(
-                matchSuccessCount = PositiveNumber(matchSuccessCount),
-                isMatchedBonus = isMatchedBonus
+                matchSuccessCount = lastWeekLottoNumbers.matchCount(lottoNumbers),
+                isMatchedBonus = lastWeekLottoNumbers.matchBonus(lottoNumbers)
             )
         )
     }
