@@ -32,10 +32,10 @@ class LottoTest : StringSpec({
     "로또 번호와 일치하는 숫자의 개수를 구한다." {
         val lotto = ObjectGenerator.lotto(1, 2, 3, 4, 5, 6)
         listOf(
-            ObjectGenerator.lottoNumbers(1, 2, 3, 14, 15, 16) to 3,
-            ObjectGenerator.lottoNumbers(10, 11, 12, 13, 14, 15) to 0
-        ).forEach { (numbers, matchingCount) ->
-            lotto.getMatchingCount(numbers) shouldBe matchingCount
+            ObjectGenerator.lotto(1, 2, 3, 14, 15, 16) to 3,
+            ObjectGenerator.lotto(10, 11, 12, 13, 14, 15) to 0
+        ).forEach { (inputLotto, matchingCount) ->
+            lotto.getMatchingCount(inputLotto) shouldBe matchingCount
         }
     }
 })

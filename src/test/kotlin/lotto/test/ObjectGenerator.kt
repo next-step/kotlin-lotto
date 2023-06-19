@@ -9,7 +9,7 @@ object ObjectGenerator {
         return Lotto(lottoNumbers)
     }
 
-    fun lottoNumbers(vararg number: Int): List<LottoNumber> {
+    private fun lottoNumbers(vararg number: Int): List<LottoNumber> {
         return number.toList().map { LottoNumber(it) }
     }
 }

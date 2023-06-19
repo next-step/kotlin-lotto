@@ -9,26 +9,26 @@ import lotto.test.ObjectGenerator
 class LottoWinningNumbersTest : StringSpec({
     "로또 당첨 번호는 6개여야 한다." {
         shouldNotThrowAny {
-            LottoWinningNumbers(ObjectGenerator.lottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(7))
+            LottoWinningNumbers(ObjectGenerator.lotto(1, 2, 3, 4, 5, 6), LottoNumber(7))
         }
     }
 
     "로또 당첨 번호가 6개가 아니면 예외를 던진다." {
         shouldThrow<IllegalArgumentException> {
-            LottoWinningNumbers(ObjectGenerator.lottoNumbers(1, 2, 3, 4, 5), LottoNumber(7))
+            LottoWinningNumbers(ObjectGenerator.lotto(1, 2, 3, 4, 5), LottoNumber(7))
         }
     }
 
     "로또 당첨 번호에 중복이 있으면 예외를 던진다." {
         shouldThrow<IllegalArgumentException> {
-            LottoWinningNumbers(ObjectGenerator.lottoNumbers(1, 2, 3, 4, 5, 5), LottoNumber(7))
+            LottoWinningNumbers(ObjectGenerator.lotto(1, 2, 3, 4, 5, 5), LottoNumber(7))
         }
     }
 
 
     "로또 당첨 번호와 보너스볼에 중복이 있으면 예외를 던진다." {
         shouldThrow<IllegalArgumentException> {
-            LottoWinningNumbers(ObjectGenerator.lottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(6))
+            LottoWinningNumbers(ObjectGenerator.lotto(1, 2, 3, 4, 5, 6), LottoNumber(6))
         }
     }
 
@@ -41,7 +41,7 @@ class LottoWinningNumbersTest : StringSpec({
             ObjectGenerator.lotto(1, 2, 3, 14, 15, 16),
             ObjectGenerator.lotto(1, 2, 13, 14, 15, 16)
         )
-        val lottoWinningNumbers = LottoWinningNumbers(ObjectGenerator.lottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(20))
+        val lottoWinningNumbers = LottoWinningNumbers(ObjectGenerator.lotto(1, 2, 3, 4, 5, 6), LottoNumber(20))
 
         val lottoResult = lottoWinningNumbers.getLottoResult(lottos)
 
