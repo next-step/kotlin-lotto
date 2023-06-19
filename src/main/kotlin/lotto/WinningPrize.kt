@@ -13,7 +13,9 @@ enum class WinningPrize(
 
     companion object {
         fun from(matchingResult: Int): WinningPrize? {
-            return WinningPrize.values().firstOrNull { it.condition == matchingResult }
+            return WinningPrize
+                .values()
+                .firstOrNull { it.condition == matchingResult }
         }
     }
 }

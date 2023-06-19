@@ -8,14 +8,17 @@ object LottoShop {
 
     fun sellLottos(cash: Money): Lottos {
         val amountOfLotto = cash.amount / LOTTO_PRICE.amount
-        
+
         val generatedLottos = List(amountOfLotto.toInt()) { generateLotto() }
 
         return Lottos(generatedLottos)
     }
 
     private fun generateLotto(): Lotto {
-        val lottoNums = (1..45).map(::LottoNumber).shuffled().subList(0, 6)
+        val lottoNums = (1..45)
+            .map(::LottoNumber)
+            .shuffled()
+            .subList(0, 6)
 
         return Lotto.from(lottoNums)
     }

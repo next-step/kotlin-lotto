@@ -9,8 +9,12 @@ data class GameResult(
     val profitRate: Double
 
     init {
-        profitRate = calculateTotalPrizeAmount().amount / paidPrice.amount.toDouble()
+        profitRate = calculateTotalPrizeAmount().amount / paidPrice
+            .amount
+            .toDouble()
     }
 
-    private fun calculateTotalPrizeAmount() = prizes.fold(Money(0)) { prev, (prize, amount) -> prev + prize.amount * amount }
+    private fun calculateTotalPrizeAmount() = prizes
+        .fold(Money(0))
+        { prev, (prize, amount) -> prev + prize.amount * amount }
 }

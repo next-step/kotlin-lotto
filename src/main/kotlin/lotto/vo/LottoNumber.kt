@@ -11,4 +11,8 @@ value class LottoNumber(
     override fun compareTo(other: LottoNumber): Int {
         return value - other.value
     }
+
+    override fun toString(): String {
+        return value.toString()
+    }
 }

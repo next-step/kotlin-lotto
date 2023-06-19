@@ -20,7 +20,10 @@ class Lottos(
     }
 
     private fun aggregateWinningPrizeWith(winningNumbers: List<LottoNumber>): List<Pair<WinningPrize, Int>> {
-        val defaultMap = WinningPrize.values().associateWith { 0 }.toMutableMap()
+        val defaultMap = WinningPrize
+            .values()
+            .associateWith { 0 }
+            .toMutableMap()
 
         return lottos
             .mapNotNull { WinningPrize.from(it.countMatchingNumbersFrom(winningNumbers)) }
