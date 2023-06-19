@@ -1,4 +1,3 @@
 package calculator.view
 
-object InputView {
-}
+object InputView

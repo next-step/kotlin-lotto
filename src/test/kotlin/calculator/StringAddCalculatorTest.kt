@@ -1,7 +1,6 @@
 package calculator
 
 import calculator.domain.StringAddCalculator
-import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
@@ -21,5 +20,4 @@ internal class StringAddCalculatorTest : ExpectSpec({
             }
         }
     }
-
 })

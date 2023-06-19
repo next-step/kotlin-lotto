@@ -1,4 +1,3 @@
 package calculator.domain
 
-object OperationParser {
-}
+object OperationParser
