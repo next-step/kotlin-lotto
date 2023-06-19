@@ -35,18 +35,18 @@ class LottoApplication(
     }
 
     private fun getBonusNumber(lotto: Lotto): LottoNumber {
-        val bonusNumber = inputView.printInputBonusLottoNumber().toInt()
+        val bonusNumber = inputView.inputBonusLottoNumber().toInt()
         return lottoBonusNumberValidation(bonusNumber, lotto)
     }
 
     private fun getWinningLotto(): Lotto {
-        val lastWeekNumber = inputView.printInputLottoNumberByLastWeek()
+        val lastWeekNumber = inputView.inputLottoNumberByLastWeek()
         val lottoNumbers = splitLottoNumbers(lastWeekNumber)
         return Lotto(numbers = lottoNumbers)
     }
 
     private fun getLottoBundleByMoney(): LottoBundle {
-        val inputMoney = inputView.printInputLottoBuyMoney().toInt()
+        val inputMoney = inputView.inputLottoBuyMoney().toInt()
         resultView.printLottoCount(inputMoney)
 
         val lottoManager = LottoManager()
