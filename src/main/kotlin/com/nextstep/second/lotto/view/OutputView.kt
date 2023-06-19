@@ -27,7 +27,7 @@ object OutputView {
             LottoReward.FOURTH -> "${LottoReward.FOURTH.totalSameNumber}개 일치 (${LottoReward.FOURTH.reward}원)"
             LottoReward.FIFTH -> "${LottoReward.FIFTH.totalSameNumber}개 일치 (${LottoReward.FIFTH.reward}원)"
             LottoReward.FIFTH_BONUS -> "${LottoReward.FIFTH_BONUS.totalSameNumber}개 일치, 보너스볼 일치 (${LottoReward.FIFTH_BONUS.reward}원)"
-            LottoReward.SIXTH -> "${LottoReward.FIFTH.totalSameNumber}개 일치 (${LottoReward.FIFTH.reward}원)"
+            LottoReward.SIXTH -> "${LottoReward.SIXTH.totalSameNumber}개 일치 (${LottoReward.SIXTH.reward}원)"
             LottoReward.NONE -> "당첨 수령한 결과가 아님"
         }
     }
