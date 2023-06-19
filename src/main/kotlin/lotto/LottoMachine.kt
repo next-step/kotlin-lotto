@@ -4,11 +4,10 @@ import java.math.BigDecimal
 
 class LottoMachine(
     private val lottos: Lottos,
-    private val winningLotto: Lotto,
-    private val bonusLottoNumber: LottoNumber,
+    private val winningLotto: WinningLotto,
 ) {
     fun matchWinningLottoPrize(): List<WinningLottoPrizeVO> {
-        val prizes = lottos.getWinningCountsByPrize(winningLotto, bonusLottoNumber)
+        val prizes = lottos.getWinningCountsByPrize(winningLotto)
         return prizes.map { (prize, winningLottoCount) ->
             WinningLottoPrizeVO(
                 matchedCount = prize.matchedCount,
@@ -20,6 +19,6 @@ class LottoMachine(
     }
 
     fun getTotalProfitRate(): BigDecimal {
-        return lottos.getTotalProfitRate(winningLotto, bonusLottoNumber)
+        return lottos.getTotalProfitRate(winningLotto)
     }
 }

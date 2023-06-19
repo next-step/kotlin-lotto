@@ -39,26 +39,29 @@ class LottoTest : FunSpec({
     }
 
     context("당첨로또와 보너스번호를 받아 상금을 반환한다") {
+        data class WinningLottoPrize(val winningLottoNumbers: List<Int>, val bonusNumber: Int, val prize: Prize)
+
         val lotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
 
         withData(
-            nameFn = { "${it.first.lottoNumbers}, ${it.second}, ${it.third}" },
-            Triple(Lotto.of(listOf(40, 41, 42, 43, 44, 45)), LottoNumber(9), Prize.MISS),
-            Triple(Lotto.of(listOf(40, 41, 42, 43, 44, 45)), LottoNumber(6), Prize.MISS),
-            Triple(Lotto.of(listOf(1, 41, 42, 43, 44, 45)), LottoNumber(9), Prize.MISS),
-            Triple(Lotto.of(listOf(1, 41, 42, 43, 44, 45)), LottoNumber(6), Prize.MISS),
-            Triple(Lotto.of(listOf(1, 2, 42, 43, 44, 45)), LottoNumber(9), Prize.MISS),
-            Triple(Lotto.of(listOf(1, 2, 42, 43, 44, 45)), LottoNumber(6), Prize.MISS),
-            Triple(Lotto.of(listOf(1, 2, 3, 43, 44, 45)), LottoNumber(9), Prize.FIFTH),
-            Triple(Lotto.of(listOf(1, 2, 3, 43, 44, 45)), LottoNumber(6), Prize.FIFTH),
-            Triple(Lotto.of(listOf(1, 2, 3, 4, 44, 45)), LottoNumber(9), Prize.FOURTH),
-            Triple(Lotto.of(listOf(1, 2, 3, 4, 44, 45)), LottoNumber(6), Prize.FOURTH),
-            Triple(Lotto.of(listOf(1, 2, 3, 4, 5, 45)), LottoNumber(9), Prize.THIRD),
-            Triple(Lotto.of(listOf(1, 2, 3, 4, 5, 45)), LottoNumber(6), Prize.SECOND),
-            Triple(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(9), Prize.FIRST),
-            Triple(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber(6), Prize.FIRST),
-        ) { (winningLotto, bonusLottoNumber, prize) ->
-            lotto.matchPrize(winningLotto, bonusLottoNumber) shouldBe prize
+            nameFn = { "${it.winningLottoNumbers}, ${it.bonusNumber}, ${it.prize}" },
+            WinningLottoPrize(listOf(40, 41, 42, 43, 44, 45), 9, Prize.MISS),
+            WinningLottoPrize(listOf(40, 41, 42, 43, 44, 45), 6, Prize.MISS),
+            WinningLottoPrize(listOf(1, 41, 42, 43, 44, 45), 9, Prize.MISS),
+            WinningLottoPrize(listOf(1, 41, 42, 43, 44, 45), 6, Prize.MISS),
+            WinningLottoPrize(listOf(1, 2, 42, 43, 44, 45), 9, Prize.MISS),
+            WinningLottoPrize(listOf(1, 2, 42, 43, 44, 45), 6, Prize.MISS),
+            WinningLottoPrize(listOf(1, 2, 3, 43, 44, 45), 9, Prize.FIFTH),
+            WinningLottoPrize(listOf(1, 2, 3, 43, 44, 45), 6, Prize.FIFTH),
+            WinningLottoPrize(listOf(1, 2, 3, 4, 44, 45), 9, Prize.FOURTH),
+            WinningLottoPrize(listOf(1, 2, 3, 4, 44, 45), 6, Prize.FOURTH),
+            WinningLottoPrize(listOf(1, 2, 3, 4, 5, 45), 9, Prize.THIRD),
+            WinningLottoPrize(listOf(1, 2, 3, 4, 5, 45), 6, Prize.SECOND),
+            WinningLottoPrize(listOf(1, 2, 3, 4, 5, 6), 9, Prize.FIRST),
+            WinningLottoPrize(listOf(1, 2, 3, 4, 5, 6), 10, Prize.FIRST),
+        ) { (winningLottoNumbers, bonusNumber, prize) ->
+            val winningLotto = WinningLotto(Lotto.of(winningLottoNumbers), LottoNumber(bonusNumber))
+            lotto.matchPrize(winningLotto) shouldBe prize
         }
     }
 })

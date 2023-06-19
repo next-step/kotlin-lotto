@@ -10,17 +10,17 @@ object InputView {
         return readlnOrNull()?.toInt() ?: throw IllegalArgumentException("구입금액을 입력해야 합니다.")
     }
 
-    fun readWinningLotto(): Lotto {
+    fun readWinningLottoNumbers(): List<LottoNumber> {
         println("지난 주 당첨 번호를 입력해 주세요. (예. 1, 2, 3, 4, 5, 6)")
         val wonNumbers = readlnOrNull()?.split(LOTTO_NUMBER_DELIMITER)
             ?: throw IllegalArgumentException("당첨 번호를 입력해야 합니다.")
-        return Lotto(wonNumbers.map { LottoNumber(it.toInt()) })
+        return wonNumbers.map { LottoNumber(it.toInt()) }
     }
 
-    fun readBonusLottoNumber(): Int {
+    fun readBonusLottoNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
         val number = readlnOrNull() ?: throw IllegalArgumentException("보너스 볼을 입력해야 합니다.")
-        return number.toInt()
+        return LottoNumber(number.toInt())
     }
 }
 

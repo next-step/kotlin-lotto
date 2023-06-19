@@ -30,10 +30,8 @@ class LottosTest : FunSpec({
             )
         )
 
-        val winningLottoCountsByPrize = lottos.getWinningCountsByPrize(
-            winningLotto = winningLotto,
-            bonusLottoNumber = LottoNumber(9),
-        )
+        val winningLottoCountsByPrize =
+            lottos.getWinningCountsByPrize(WinningLotto(winningLotto, LottoNumber(9)))
 
         winningLottoCountsByPrize[Prize.FIRST] shouldBe 1
         winningLottoCountsByPrize[Prize.SECOND] shouldBe 1
@@ -61,10 +59,8 @@ class LottosTest : FunSpec({
             )
         )
 
-        val totalProfitRate: BigDecimal = lottos.getTotalProfitRate(
-            winningLotto = winningLotto,
-            bonusLottoNumber = LottoNumber(9),
-        )
+        val totalProfitRate: BigDecimal =
+            lottos.getTotalProfitRate(WinningLotto(winningLotto, LottoNumber(9)))
 
         totalProfitRate shouldBe BigDecimal(338592.50).setScale(2, RoundingMode.HALF_UP)
     }

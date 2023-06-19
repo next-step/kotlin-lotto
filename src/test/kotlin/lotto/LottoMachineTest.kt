@@ -24,7 +24,7 @@ class LottoMachineTest : FunSpec({
                 missPrizeLotto
             )
         )
-        val lottoMachine = LottoMachine(lottos, winningLotto, LottoNumber(9))
+        val lottoMachine = LottoMachine(lottos, WinningLotto(winningLotto, LottoNumber(9)))
 
         val winningLottoPrizeVOs = lottoMachine.matchWinningLottoPrize()
         winningLottoPrizeVOs[0] shouldBe WinningLottoPrizeVO(3, BigDecimal(5_000), 0, false)
@@ -51,7 +51,7 @@ class LottoMachineTest : FunSpec({
                 missPrizeLotto
             )
         )
-        val lottoMachine = LottoMachine(lottos, winningLotto, LottoNumber(9))
+        val lottoMachine = LottoMachine(lottos, WinningLotto(winningLotto, LottoNumber(9)))
 
         val totalProfitRate = lottoMachine.getTotalProfitRate()
 

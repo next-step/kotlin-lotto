@@ -4,10 +4,10 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class Lottos(
-    private val lottos: List<Lotto>
+    private val lottos: List<Lotto>,
 ) : List<Lotto> by lottos {
-    fun getWinningCountsByPrize(winningLotto: Lotto, bonusLottoNumber: LottoNumber): Map<Prize, Int> {
-        val winningCountByPrize = getWinningPrizes(winningLotto, bonusLottoNumber)
+    fun getWinningCountsByPrize(winningLotto: WinningLotto): Map<Prize, Int> {
+        val winningCountByPrize = getWinningPrizes(winningLotto)
             .groupingBy { it }
             .eachCount()
 
@@ -17,14 +17,14 @@ class Lottos(
             .associateWith { winningCountByPrize[it] ?: 0 }
     }
 
-    fun getTotalProfitRate(winningLotto: Lotto, bonusLottoNumber: LottoNumber): BigDecimal {
-        val totalPrizeAmount = getWinningPrizes(winningLotto, bonusLottoNumber).sumOf { it.prizeAmount }
+    fun getTotalProfitRate(winningLotto: WinningLotto): BigDecimal {
+        val totalPrizeAmount = getWinningPrizes(winningLotto).sumOf { it.prizeAmount }
         val purchaseAmount = LOTTO_PRICE * lottos.size
         return totalPrizeAmount.divide(purchaseAmount.toBigDecimal(), ROUND_SCALE, RoundingMode.HALF_UP)
     }
 
-    private fun getWinningPrizes(winningLotto: Lotto, bonusLottoNumber: LottoNumber): List<Prize> {
-        return lottos.map { it.matchPrize(winningLotto, bonusLottoNumber) }
+    private fun getWinningPrizes(winningLotto: WinningLotto): List<Prize> {
+        return lottos.map { it.matchPrize(winningLotto) }
             .filter { it.isNotMiss() }
     }
 

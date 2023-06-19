@@ -8,11 +8,11 @@ fun main() {
     ResultView.printLottoCount(lottos.size)
     ResultView.printLottos(lottos)
 
-    val winningLotto = InputView.readWinningLotto()
+    val winningLottoNumbers = InputView.readWinningLottoNumbers()
     val bonusNumber = InputView.readBonusLottoNumber()
-    val bonusLottoNumber = LottoNumber.forBonusOf(bonusNumber, winningLotto)
+    val winningLotto = WinningLotto(winningLottoNumbers, bonusNumber)
 
-    val lottoMachine = LottoMachine(lottos, winningLotto, bonusLottoNumber)
+    val lottoMachine = LottoMachine(lottos, winningLotto)
 
     ResultView.printWinnerStatistics(lottoMachine.matchWinningLottoPrize(), lottoMachine.getTotalProfitRate())
 }
