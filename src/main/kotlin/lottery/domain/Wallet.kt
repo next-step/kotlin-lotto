@@ -35,7 +35,8 @@ class Wallet(
     }
 
     fun calculateLotteryResult(winLottery: WinningLottery): LottoResult {
-        val statistics = randomLotteries.compareWinningLottery(winLottery)
+        val statistics = Lotteries.merge(manualLotteries, randomLotteries)
+            .compareWinningLottery(winLottery)
         val lottoYield = calculateYield(statistics)
         return LottoResult(lottoYield = lottoYield, statistics = statistics)
     }
@@ -62,8 +63,10 @@ class Wallet(
     private fun generateLottery(purchaseCount: Int, lotteryGenerator: LotteryGenerator): List<Lottery> =
         lotteryGenerator.generateLotteries(purchaseCount)
 
-    private fun calculateYield(statistics: Map<Rank, Int>): BigDecimal =
-        calculateTotalReward(statistics).divide(randomLotteries.cost().value, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.DOWN)
+    private fun calculateYield(statistics: Map<Rank, Int>): BigDecimal {
+        val cost = manualLotteries.cost() + randomLotteries.cost()
+        return calculateTotalReward(statistics).divide(cost.value, YIELD_CALCULATE_DIVIDE_SCALE, RoundingMode.DOWN)
+    }
 
     private fun calculateTotalReward(result: Map<Rank, Int>): BigDecimal =
         result.map { it.key.calculatePrice(it.value) }
