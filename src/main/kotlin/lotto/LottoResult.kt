@@ -25,7 +25,7 @@ class LottoResult private constructor(
     }
 
     private fun List<LottoNumber>.toLottoReturns(): List<LottoReturn> {
-        return this.map { it.matchCount(lastWeekLottoNumber) }
+        return this.map { it.decideReturn(lastWeekLottoNumber) }
     }
 
     companion object {

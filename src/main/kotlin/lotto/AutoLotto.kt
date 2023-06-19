@@ -16,10 +16,13 @@ class AutoLotto {
     }
 
     private fun buildAutoNumber(): LottoNumber {
+        val autoNumbers = LottoNumber.LOTTO_NUMBER_RANGE
+            .shuffled()
+            .take(LottoNumber.TOTAL_LOTTO_NUMBER_COUNT)
+
         return LottoNumber.from(
-            numbers = LottoNumber.LOTTO_NUMBER_RANGE
-                .shuffled()
-                .take(LottoNumber.LOTTO_NUMBER_COUNT)
+            defaultNumbers = autoNumbers.subList(0, DefaultNumbers.DEFAULT_LOTTO_NUMBER_COUNT),
+            bonusNumber = autoNumbers.last(),
         )
     }
 }
