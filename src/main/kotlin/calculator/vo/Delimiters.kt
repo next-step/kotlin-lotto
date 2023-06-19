@@ -25,6 +25,10 @@ data class Delimiters(
                 delimiters.toSet()
             )
         }
+
+        fun of(vararg chars: Char): Delimiters {
+            return from(chars.map(::Delimiter))
+        }
     }
 }
 

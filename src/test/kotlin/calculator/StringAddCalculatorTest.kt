@@ -16,8 +16,9 @@ class StringAddCalculatorTest : FreeSpec({
             row("1,2:3,4", 10),
             row("1:2:3:4:5", 15),
         ) { input, expected ->
+            val sut = StringAddCalculator()
 
-            val result = StringAddCalculator.calculate(input)
+            val result = sut.calculate(input)
 
             result shouldBe expected
         }
@@ -29,8 +30,9 @@ class StringAddCalculatorTest : FreeSpec({
             row("//;\\n1;2;3;4", 10),
             row("//$\\n1$2$3$4", 10),
         ) { input, expected ->
+            val sut = StringAddCalculator()
 
-            val result = StringAddCalculator.calculate(input)
+            val result = sut.calculate(input)
 
             result shouldBe expected
         }
@@ -44,8 +46,10 @@ class StringAddCalculatorTest : FreeSpec({
             row("1,2:3,-4"),
             row("1:2:3d:4:5"),
         ) { input ->
+            val sut = StringAddCalculator()
+            
             shouldThrow<RuntimeException> {
-                StringAddCalculator.calculate(input)
+                sut.calculate(input)
             }
         }
     }
