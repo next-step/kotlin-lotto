@@ -1,7 +1,7 @@
 package lotto
 
-class LottoGame(val lottoNumbers: List<LottoNumbers>, private val winningNumbers: WinningNumbers) {
-    val result: Map<Rank, Int> = lottoNumbers.map { winningNumbers.calculateRank(it) }
+class LottoGame(val lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers) {
+    val result: Map<Rank, Int> = winningNumbers.calculateRank(lottoNumbers)
         .groupBy { it }
         .mapValues { it.value.size }
 
