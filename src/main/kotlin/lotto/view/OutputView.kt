@@ -25,12 +25,10 @@ object OutputView {
     }
 
     fun printProfitRate(profitRate: Double) {
-        val result = if (profitRate > 1) {
-            "이익"
-        } else if (profitRate == 1.0) {
-            "동일"
-        } else {
-            "손해"
+        val result = when {
+            profitRate > 1 -> "이익"
+            profitRate == 1.0 -> "동일"
+            else -> "손해"
         }
         println("총 수익률은 ${profitRate}입니다.(기준이 1이기 때문에 결과적으로 $result 이라는 의미임)")
     }
