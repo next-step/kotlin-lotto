@@ -2,12 +2,11 @@ package calculator
 
 import calculator.domain.StringAddCalculator
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 internal class StringAddCalculatorTest {
@@ -19,10 +18,9 @@ internal class StringAddCalculatorTest {
     }
 
     @DisplayName(value = "빈 문자열을 입력할 경우 0을 반환해야 한다.")
-    @ParameterizedTest
-    @NullAndEmptySource
-    fun emptyOrNull(text: String) {
-        assertThat(calculator.calculate(text)).isZero
+    @Test
+    fun empty() {
+        assertThat(calculator.calculate("")).isZero
     }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
@@ -56,7 +54,6 @@ internal class StringAddCalculatorTest {
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @Test
     fun negative() {
-        assertThatExceptionOfType(RuntimeException::class.java)
-            .isThrownBy { calculator.calculate("-1") }
+        assertThrows<RuntimeException> { calculator.calculate("-1") }
     }
 }
