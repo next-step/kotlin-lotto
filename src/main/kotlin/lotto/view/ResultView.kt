@@ -33,9 +33,14 @@ class ResultView {
     }
 
     private fun printStatisticsByLottoPrizes(prize: LottoPrizes, equalCount: Int) {
+        if (prize === LottoPrizes.NONE) {
+            return
+        }
+
         if (prize === LottoPrizes.MATCH_FIVE_PRIZES_WITH_BONUS) {
             return println("${prize.equalCount}개 일치, 보너스 볼 일치(${prize.money}원)- ${equalCount}개")
         }
+
         println("${prize.equalCount}개 일치 (${prize.money}원)- ${equalCount}개")
     }
 
