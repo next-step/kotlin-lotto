@@ -4,6 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.NullAndEmptySource
+import org.junit.jupiter.params.provider.ValueSource
 
 class StringCalculatorTest {
 
@@ -25,5 +26,15 @@ class StringCalculatorTest {
         val result = calculator.calculate(expression)
 
         result shouldBe 0
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["0", "1", "20", "101"])
+    fun `문자열이 하나의 숫자로 이루어진 경우 해당 숫자를 반환한다`(expression: String) {
+        val calculator = StringCalculator()
+
+        val result = calculator.calculate(expression)
+
+        result shouldBe expression.toLong()
     }
 }
