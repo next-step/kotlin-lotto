@@ -29,8 +29,7 @@ class ResultView {
 
         LottoPrizes.values().forEach { prize ->
             val equalCount = lottoStatistics.getEqualCount(prize.equalCount)
-            val prizeMoney = LottoPrizes.getMoney(prize.equalCount)
-            println("${prize.equalCount}개 일치 (${prizeMoney}원)- ${equalCount}개")
+            println("${prize.equalCount}개 일치 (${prize.money}원)- ${equalCount}개")
         }
     }
 

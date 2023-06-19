@@ -1,10 +1,10 @@
 package lotto.controller
 
-import lotto.domain.Lotto
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoPurchase.Companion.DEFAULT_PRICE
 import lotto.domain.LottoStatistics
 import lotto.domain.Lottos
+import lotto.domain.WinningLotto
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -19,7 +19,7 @@ class LottoController {
         val winningLotto = inputView.inputLastWeekLottoNumbers()
         val bonusNumber = inputView.inputBonusNumber()
 
-        showWinningResult(budget, lottos, winningLotto)
+        showWinningResult(budget, lottos, WinningLotto(winningLotto, bonusNumber))
     }
 
     private fun buyLottos(budget: Int): Lottos {
@@ -32,7 +32,7 @@ class LottoController {
         return lottos
     }
 
-    private fun showWinningResult(budget: Int, lottos: Lottos, winningLotto: Lotto) {
+    private fun showWinningResult(budget: Int, lottos: Lottos, winningLotto: WinningLotto) {
         val statistics = LottoStatistics(lottos, budget, winningLotto)
         resultView.printWinningResult(statistics)
     }

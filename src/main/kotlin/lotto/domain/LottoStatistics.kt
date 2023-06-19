@@ -3,7 +3,7 @@ package lotto.domain
 class LottoStatistics(
     private val lottos: Lottos,
     budget: Int,
-    winningLotto: Lotto
+    winningLotto: WinningLotto
 ) {
     val totalPrizes = lottos.calculateTotalPrizes(winningLotto)
 
