@@ -16,7 +16,8 @@ class RankTest {
 
     @Test
     fun `당첨된 숫자가 6개를 초과하면 예외가 발생한다`() {
-        shouldThrow<IllegalArgumentException> { Rank.from(7) }
-            .shouldHaveMessage(Rank.INVALID_MATCHED_COUNT_MESSAGE)
+        val matchedCount = 7
+        shouldThrow<IllegalArgumentException> { Rank.from(matchedCount) }
+            .shouldHaveMessage(Rank.INVALID_MATCHED_COUNT_MESSAGE.format(matchedCount))
     }
 }

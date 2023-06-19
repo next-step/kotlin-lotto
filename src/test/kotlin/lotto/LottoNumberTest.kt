@@ -19,6 +19,6 @@ class LottoNumberTest {
     @ValueSource(ints = [-1, 0, 46])
     fun `1~45 범위가 아닌 숫자는 예외가 발생한다`(number: Int) {
         shouldThrow<IllegalArgumentException> { LottoNumber.from(number) }
-            .shouldHaveMessage(LottoNumber.LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE)
+            .shouldHaveMessage(LottoNumber.LOTTO_NUMBER_OUT_OF_RANGE_MESSAGE.format(number))
     }
 }
