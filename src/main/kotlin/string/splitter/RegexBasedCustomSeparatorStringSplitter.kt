@@ -14,8 +14,7 @@ class RegexBasedCustomSeparatorStringSplitter(
     }
 
     private fun extractCustomSeparator(input: String): String? {
-        val regex = Regex("(?<=//).")
-        return regex.find(input)?.value
+        return separatorRegex.find(input)?.value
     }
 
     private fun validateIndicatorLocation(input: String, indicatorSequence: String) {
@@ -26,5 +25,9 @@ class RegexBasedCustomSeparatorStringSplitter(
 
     private fun removeCustomSeparatorIndicator(input: String, indicator: String): String {
         return input.replace(indicator, "")
+    }
+
+    companion object {
+        val separatorRegex = Regex("(?<=//).")
     }
 }

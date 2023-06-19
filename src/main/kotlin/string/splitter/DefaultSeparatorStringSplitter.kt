@@ -10,10 +10,15 @@ class DefaultSeparatorStringSplitter(
         if (singleNumeric != null) {
             return listOf(singleNumeric)
         }
-        return input.split(",|:".toRegex()).map { converter.convert(it) }
+        return input.split(separatorRegex).map { converter.convert(it) }
     }
 
     private fun parseSingleNumeric(expression: String) = runCatching {
         converter.convert(expression)
     }.getOrNull()
+
+    companion object {
+        private const val COMMA_OR_COLON = ",|:"
+        private val separatorRegex = COMMA_OR_COLON.toRegex()
+    }
 }
