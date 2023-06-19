@@ -13,5 +13,4 @@ object LottoShop {
 
         return money / 1000
     }
-
 }

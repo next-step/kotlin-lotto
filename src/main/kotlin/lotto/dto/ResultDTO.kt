@@ -1,8 +1,8 @@
 package lotto.dto
 
-import lotto.domain.LottoEnum
+import lotto.domain.LottoRank
 
 data class ResultDTO(
     val matchNum: Int,
-    val lottoEnum: LottoEnum
+    val lottoRank: LottoRank
 )
