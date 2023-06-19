@@ -1,19 +1,13 @@
 package calculator
 
 class StringCalculator {
-    fun calculate(expression: String): Long {
-        val numbers = extractNumbers(expression)
-
-        return numbers.sum()
-    }
-
-    private fun extractNumbers(expression: String): List<Long> {
-        if (expression.contains(",")) {
-            return expression.split(",")
-                .map(String::toLong)
+    fun calculate(expression: String?): Long {
+        if (expression.isNullOrEmpty()) {
+            return 0
         }
-        return expression.split(":")
-            .map(String::toLong)
-    }
 
+        return expression.split("[,:]".toRegex())
+            .map(String::toLong)
+            .sum()
+    }
 }

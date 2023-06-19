@@ -19,7 +19,7 @@ class StringCalculatorTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    fun `null 또는 empty 문자열을 전달하면 0이 반환된다`(expression: String) {
+    fun `null 또는 empty 문자열을 전달하면 0이 반환된다`(expression: String?) {
         val calculator = StringCalculator()
 
         val result = calculator.calculate(expression)
