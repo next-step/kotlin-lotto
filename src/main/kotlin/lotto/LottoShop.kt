@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.vo.LottoNumber
 import lotto.vo.Money
 
 object LottoShop {
@@ -16,7 +17,7 @@ object LottoShop {
     }
 
     private fun generateLotto(): Lotto {
-        val lottoNums = (1..45).shuffled().subList(0, 6)
+        val lottoNums = (1..45).map(::LottoNumber).shuffled().subList(0, 6)
 
         return Lotto.from(lottoNums)
     }

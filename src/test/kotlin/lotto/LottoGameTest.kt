@@ -7,6 +7,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import lotto.view.InputView
 import lotto.view.OutputView
+import lotto.vo.LottoNumber
 import lotto.vo.Money
 
 class LottoGameTest : FreeSpec({
@@ -39,8 +40,9 @@ class LottoGameTest : FreeSpec({
             return inputMoney
         }
 
-        override fun receiveWinningNumbers(): List<Int> {
+        override fun receiveWinningNumbers(): List<LottoNumber> {
             return listOf(1, 2, 3, 4, 5, 6)
+                .map(::LottoNumber)
         }
     }
 

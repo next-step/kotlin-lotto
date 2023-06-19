@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.vo.LottoNumber
 import lotto.vo.Money
 
 class Lottos(
@@ -9,7 +10,7 @@ class Lottos(
 
     val size: Int = lottos.size
 
-    fun playWith(winningNumbers: List<Int>): GameResult {
+    fun playWith(winningNumbers: List<LottoNumber>): GameResult {
         val prizes = aggregateWinningPrizeWith(winningNumbers)
 
         return GameResult(
@@ -18,7 +19,7 @@ class Lottos(
         )
     }
 
-    private fun aggregateWinningPrizeWith(winningNumbers: List<Int>): List<Pair<WinningPrize, Int>> {
+    private fun aggregateWinningPrizeWith(winningNumbers: List<LottoNumber>): List<Pair<WinningPrize, Int>> {
         val defaultMap = WinningPrize.values().associateWith { 0 }.toMutableMap()
 
         return lottos
