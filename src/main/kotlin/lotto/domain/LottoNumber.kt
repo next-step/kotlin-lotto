@@ -1,6 +1,7 @@
 package lotto.domain
 
-data class LottoNumber(
+@JvmInline
+value class LottoNumber private constructor(
     val number: Int
 ) {
     init {
@@ -10,6 +11,8 @@ data class LottoNumber(
 
     companion object {
         val LOTTO_NUMBERS: List<Int> = (1..45).toList()
-        fun create(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size).map { LottoNumber(it) }
+        fun create(number: Int): LottoNumber = LottoNumber(number)
+        fun createRandom(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size).map { LottoNumber(it) }
+        fun createList(numbers: List<Int>): List<LottoNumber> = numbers.map { LottoNumber(it) }
     }
 }

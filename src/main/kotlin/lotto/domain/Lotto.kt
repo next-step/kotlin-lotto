@@ -18,7 +18,7 @@ class Lotto(
         const val NUMBER_OF_LOTTO_NUMBERS: Int = 6
 
         fun autoCreate(): Lotto {
-            val lottoNumbers = LottoNumber.create(NUMBER_OF_LOTTO_NUMBERS)
+            val lottoNumbers = LottoNumber.createRandom(NUMBER_OF_LOTTO_NUMBERS)
             return Lotto(lottoNumbers)
         }
     }

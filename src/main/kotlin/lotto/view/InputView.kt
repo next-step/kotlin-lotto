@@ -12,14 +12,15 @@ class InputView {
 
     fun inputLastWeekWinningLotto(): WinningLotto {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
-        val numbers = readln().split(NUMBERS_DELIMITER).map { it.toInt() }.map { LottoNumber(it) }
+        val numbers = readln().split(NUMBERS_DELIMITER).map { it.toInt() }
+        val lottoNumbers = LottoNumber.createList(numbers)
         val bonusNumber = inputBonusNumber()
-        return WinningLotto(Lotto(numbers), bonusNumber)
+        return WinningLotto(Lotto(lottoNumbers), bonusNumber)
     }
 
     private fun inputBonusNumber(): LottoNumber {
         println("보너스 볼을 입력해 주세요.")
-        return LottoNumber(readln().toInt())
+        return LottoNumber.create(readln().toInt())
     }
 
     companion object {
