@@ -1,6 +1,6 @@
-package step2.view
+package lotto.view
 
-import step2.LottoNumber
+import lotto.LottoNumber
 
 object InputView {
     fun purchaseAmount(): Int {

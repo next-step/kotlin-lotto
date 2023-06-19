@@ -1,11 +1,11 @@
-package step2
+package lotto
 
-import step2.enums.LottoReturn
+import lotto.enums.LottoReturn
 
 class LottoResult private constructor(
     private val lottoNumbers: List<LottoNumber>,
     private val lastWeekLottoNumber: LottoNumber,
-    private var lottoReturns: List<LottoReturn>,
+    private val lottoReturns: MutableList<LottoReturn>,
 ) {
     private val totalReturnPrice: Int
         get() = lottoReturns.sumOf { it.returnPrice }
@@ -33,7 +33,11 @@ class LottoResult private constructor(
             .count { it == LottoReturn.FOURTH }
 
     private fun calculate() {
-        lottoReturns = lottoNumbers
+        lottoReturns.addAll(lottoNumbers.toLottoReturns())
+    }
+
+    private fun List<LottoNumber>.toLottoReturns(): List<LottoReturn> {
+        return this
             .map { it.matchCount(lastWeekLottoNumber) }
             .map { LottoReturn.from(it) }
     }
@@ -43,7 +47,7 @@ class LottoResult private constructor(
             return LottoResult(
                 lottoNumbers = lottoNumbers,
                 lastWeekLottoNumber = lastWeekLottoNumber,
-                lottoReturns = emptyList(),
+                lottoReturns = mutableListOf(),
             ).apply {
                 this.calculate()
             }

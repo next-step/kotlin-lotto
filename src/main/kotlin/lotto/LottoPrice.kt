@@ -1,4 +1,4 @@
-package step2
+package lotto
 
 object LottoPrice {
     fun getCountFrom(money: Int): Int {

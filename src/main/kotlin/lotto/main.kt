@@ -1,7 +1,7 @@
-package step2
+package lotto
 
-import step2.view.InputView
-import step2.view.ResultView
+import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
     val price = InputView.purchaseAmount()

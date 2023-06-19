@@ -1,4 +1,4 @@
-package step2
+package lotto
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest

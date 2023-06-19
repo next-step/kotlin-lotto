@@ -1,14 +1,14 @@
-package step2.view
+package lotto.view
 
-import step2.LottoNumber
-import step2.LottoResult
-import step2.enums.LottoReturn
+import lotto.LottoNumber
+import lotto.LottoResult
+import lotto.enums.LottoReturn
 
 object ResultView {
     fun printLotto(lottoNumbers: List<LottoNumber>) {
         println("${lottoNumbers.size}개를 구매했습니다.")
         lottoNumbers.forEach {
-            println(it.value)
+            println(it.numbers)
         }
         println()
     }

@@ -1,4 +1,4 @@
-package step2
+package lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test
 
 class LottoNumberTest {
     @Test
-    fun `발급된 로또 번호는 6개이다`() {
-        val lottoNumber = LottoNumber.buildAuto()
-        lottoNumber.value.size shouldBe 6
+    fun `발급된 로또 번호가 오름차순으로 정렬이 되어있어야한다`() {
+        val numbers = listOf(10, 2, 31, 4, 5, 26)
+        val lottoNumber = LottoNumber.from(numbers)
+        lottoNumber.numbers shouldBe numbers.sorted()
     }
 
     @Test
@@ -17,12 +18,6 @@ class LottoNumberTest {
         shouldThrow<IllegalArgumentException> {
             LottoNumber.from(numbers)
         }
-    }
-
-    @Test
-    fun `발급된 로또번호의 범위는 1부터 45이다`() {
-        val lottoNumber = LottoNumber.buildAuto()
-        lottoNumber.value.all { it in 1..45 } shouldBe true
     }
 
     @Test

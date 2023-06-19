@@ -1,10 +1,10 @@
-package step2
+package lotto
 
 import io.kotest.matchers.shouldBe
+import lotto.enums.LottoReturn
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import step2.enums.LottoReturn
 
 class LottoResultTest {
     @Test
@@ -28,7 +28,7 @@ class LottoResultTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [1, 2])
+    @ValueSource(ints = [0, 1, 2])
     fun `꽝 테스트`(matchCount: Int) {
         LottoReturn.from(matchCount = matchCount) shouldBe LottoReturn.NONE
     }
@@ -37,26 +37,27 @@ class LottoResultTest {
     fun `수익률 계산 테스트`() {
         val lastWeekNumber = LottoNumber.from(listOf(1, 2, 3, 4, 5, 6))
         val lottoNumbers = listOf(
-            LottoNumber.from(listOf(1, 2, 3, 4, 5, 6)), // 1등
-            LottoNumber.from(listOf(1, 2, 3, 4, 5, 7)), // 2등
-            LottoNumber.from(listOf(1, 2, 3, 4, 8, 9)), // 3등
-            LottoNumber.from(listOf(1, 2, 3, 10, 11, 12)), // 4등
-            LottoNumber.from(listOf(1, 2, 13, 14, 15, 16)), // 5등
+            LottoNumber.from(listOf(8, 21, 23, 41, 42, 43)),
+            LottoNumber.from(listOf(3, 5, 11, 16, 32, 38)),
+            LottoNumber.from(listOf(7, 11, 16, 35, 36, 44)),
+            LottoNumber.from(listOf(1, 8, 11, 31, 41, 42)),
+            LottoNumber.from(listOf(13, 14, 16, 38, 42, 45)),
+            LottoNumber.from(listOf(7, 11, 30, 40, 42, 43)),
+            LottoNumber.from(listOf(2, 13, 22, 32, 38, 45)),
+            LottoNumber.from(listOf(23, 25, 33, 36, 39, 41)),
+            LottoNumber.from(listOf(1, 3, 5, 14, 22, 45)),
+            LottoNumber.from(listOf(5, 9, 38, 41, 43, 44)),
+            LottoNumber.from(listOf(2, 8, 9, 18, 19, 21)),
+            LottoNumber.from(listOf(13, 14, 18, 21, 23, 35)),
+            LottoNumber.from(listOf(17, 21, 29, 37, 42, 45)),
+            LottoNumber.from(listOf(3, 8, 27, 30, 35, 44)),
         )
         val lottoResult = LottoResult.from(
             lottoNumbers = lottoNumbers,
             lastWeekLottoNumber = lastWeekNumber,
         )
 
-        val returnPrice = listOf(
-            LottoReturn.FIRST,
-            LottoReturn.SECOND,
-            LottoReturn.THIRD,
-            LottoReturn.FOURTH,
-            LottoReturn.NONE,
-        ).sumOf {
-            it.returnPrice
-        }
+        val returnPrice = listOf(LottoReturn.FOURTH).sumOf { it.returnPrice }
         val totalInput = lottoNumbers.size * LottoPrice.PRICE_PER_LOTTO
 
         lottoResult.returnRatio shouldBe returnPrice.toDouble() / totalInput

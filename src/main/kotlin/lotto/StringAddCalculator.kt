@@ -1,11 +1,11 @@
-package step1
+package lotto
 
 class StringAddCalculator {
-    fun add(addableText: String?): Int {
-        if (addableText.isNullOrEmpty()) {
+    fun add(expression: String?): Int {
+        if (expression.isNullOrEmpty()) {
             return 0
         }
-        val numbers = split(addableText).map { it.toInt() }
+        val numbers = split(expression).map { it.toInt() }
         validate(numbers)
 
         return numbers.sum()
@@ -14,7 +14,7 @@ class StringAddCalculator {
     private fun split(text: String): List<String> {
         val result = Regex("//(.)\n(.*)").find(text)
         result?.let {
-            val (customDelimiter, tokens) = it.groupValues
+            val (_, customDelimiter, tokens) = it.groupValues
             return tokens.split(customDelimiter)
         }
 
