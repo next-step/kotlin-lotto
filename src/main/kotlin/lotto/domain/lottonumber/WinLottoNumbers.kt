@@ -6,7 +6,7 @@ data class WinLottoNumbers(
 ) {
 
     init {
-        require(lottoNumbers.value.contains(bonusNumber).not()) {
+        require(bonusNumber !in lottoNumbers) {
             "bonus number can not be duplicated with lotto numbers"
         }
     }

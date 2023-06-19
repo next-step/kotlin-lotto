@@ -13,6 +13,10 @@ value class LottoNumbers(val value: List<LottoNumber>) {
         }
     }
 
+    operator fun contains(lottoNumber: LottoNumber): Boolean {
+        return value.contains(lottoNumber)
+    }
+
     fun toSet(): Set<LottoNumber> {
         return value.toSet()
     }
