@@ -22,20 +22,23 @@ class LottoResultAnalyst {
     private fun analyzeWinRanks(
         request: LottoAnalysisRequest,
     ): List<LottoWinRankAnalysisResult> {
-        val lottoWinRanksCountMap = calculateWinRankCount(request)
-
-        return LottoWinRank.values()
-            .sortedDescending()
-            .map { winRank -> LottoWinRankAnalysisResult(winRank, lottoWinRanksCountMap[winRank].orZero()) }
+        return calculateWinRankCount(request)
+            .map { (lottoWinRank, winCount) -> LottoWinRankAnalysisResult(lottoWinRank, winCount) }
+            .sortedByDescending { analysisResult -> analysisResult.lottoWinRank }
     }
 
     private fun calculateWinRankCount(
         request: LottoAnalysisRequest,
     ): Map<LottoWinRank, PositiveNumber> {
-        return request.lottoGames
+        val result = LottoWinRank.values()
+            .associateWith { PositiveNumber(0) }
+            .toMutableMap()
+
+        request.lottoGames
             .mapNotNull { lottoGame -> lottoGame.matchOrNull(request.lastWeekWinLottoNumbers) }
-            .groupBy { it }
-            .mapValues { (_, lottoWinRanks) -> PositiveNumber(lottoWinRanks.size) }
+            .forEach { lottoWinRank -> result[lottoWinRank] = result[lottoWinRank].orZero().plus(1) }
+
+        return result.toMap()
     }
 
     private fun calculateRevenue(

@@ -13,6 +13,10 @@ value class PositiveNumber(val value: Int) {
         return value / other
     }
 
+    operator fun plus(other: Int): PositiveNumber {
+        return PositiveNumber(value + other)
+    }
+
     companion object {
         fun of(text: String): PositiveNumber {
             val number = text.toIntOrNull() ?: throw IllegalArgumentException("$text is not number")
