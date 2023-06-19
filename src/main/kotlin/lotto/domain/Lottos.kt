@@ -9,7 +9,7 @@ class Lottos(val lottoList: List<LottoNumbers>) {
     }
 
     companion object {
-        const val PER_LOTTO_PRICE = 1000
+        private const val PER_LOTTO_PRICE = 1000
 
         fun of(input: Int, numberGenerator: NumberGenerator): Lottos {
             val count = input / PER_LOTTO_PRICE
