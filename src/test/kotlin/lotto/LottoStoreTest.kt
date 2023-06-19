@@ -21,11 +21,11 @@ class LottoStoreTest {
 
     @Test
     fun `로또의 당첨 여부를 계산합니다`() {
-        val numbers = listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) }
-        val winningNumber = listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) }
-        val winningLotto = SixFortyFiveWinningLotto(SixFortyFiveLotto(winningNumber))
+        val lotto = SixFortyFiveLotto(listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) })
+        val winningNumber = SixFortyFiveLotto(listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) })
+        val winningLotto = SixFortyFiveWinningLotto(winningNumber)
 
-        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningLotto)
+        val winningResult = lotto.checkWinning(winningLotto)
 
         Assertions.assertEquals(winningResult.countOfMatch, 3)
         Assertions.assertEquals(winningResult.isMatchedBonus, false)
@@ -33,12 +33,12 @@ class LottoStoreTest {
 
     @Test
     fun `보너스 번호를 포함하여 로또의 당첨 여부를 계산합니다`() {
-        val numbers = listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) }
-        val winningNumber = listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) }
+        val lotto = SixFortyFiveLotto(listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) })
+        val winningNumber = SixFortyFiveLotto(listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) })
         val bonusNumber = SixFortyFiveNumber(7)
-        val winningLotto = SixFortyFiveWinningLotto(SixFortyFiveLotto(winningNumber), bonusNumber)
+        val winningLotto = SixFortyFiveWinningLotto(winningNumber, bonusNumber)
 
-        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningLotto)
+        val winningResult = lotto.checkWinning(winningLotto)
 
         Assertions.assertEquals(winningResult.countOfMatch, 4)
         Assertions.assertEquals(winningResult.isMatchedBonus, true)

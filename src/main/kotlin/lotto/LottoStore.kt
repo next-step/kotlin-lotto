@@ -1,6 +1,6 @@
 package lotto
 
-interface LottoStore<T, V> {
+interface LottoStore {
     fun purchase(count: Int): List<Lotto<*, *>>
     fun makeLotto(): Lotto<*, *>
 }

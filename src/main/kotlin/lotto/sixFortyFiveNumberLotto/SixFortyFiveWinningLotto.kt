@@ -14,9 +14,10 @@ class SixFortyFiveWinningLotto(
         }
     }
 
-    fun getNumbers(): List<SixFortyFiveNumber> {
-        if (bonusNumber == null) return lotto.numbers
-        return listOf(*lotto.numbers.toTypedArray(), bonusNumber!!)
+    fun getNumbers(): SixFortyFiveLotto {
+        if (bonusNumber == null) return lotto
+        val numberListWithBonus = listOf(*lotto.numbers.toTypedArray(), bonusNumber!!)
+        return SixFortyFiveLotto(numberListWithBonus)
     }
 
     fun getWinningResultEnumList(

@@ -11,8 +11,18 @@ class SixFortyFiveLotto(val numbers: List<SixFortyFiveNumber>) :
         if (hasDuplicatedNumber) throw RuntimeException(ErrorCode.INVALID_SIX_FORTY_FIVE_LOTTO_NUMBER.msg)
     }
 
-    override fun checkWinning(winningValue: SixFortyFiveWinningLotto): SixFortyFiveLottoWinningResult {
-        return SixFortyFiveLottoWinningResult.of(numbers, winningValue)
+    override fun checkWinning(winningLotto: SixFortyFiveWinningLotto): SixFortyFiveLottoWinningResult {
+        val countOfMatch = getCountOfMatch(winningLotto)
+        val isMatchedBonus = isMatchedBonus(winningLotto)
+        return SixFortyFiveLottoWinningResult(countOfMatch, isMatchedBonus)
+    }
+
+    private fun getCountOfMatch(winningLotto: SixFortyFiveWinningLotto): Int {
+        return numbers.count { number -> winningLotto.getNumbers().numbers.find { it.value == number.value } != null }
+    }
+
+    private fun isMatchedBonus(winningLotto: SixFortyFiveWinningLotto): Boolean {
+        return numbers.find { number -> number.value == winningLotto.bonusNumber?.value } != null
     }
 
     companion object {

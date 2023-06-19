@@ -2,7 +2,7 @@ package lotto.sixFortyFiveNumberLotto
 
 import lotto.LottoStore
 
-class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, SixFortyFiveWinningLotto> {
+class SixFortyFiveLottoStore : LottoStore {
     override fun purchase(count: Int): List<SixFortyFiveLotto> {
         return (1..count).map { makeLotto() }
     }
