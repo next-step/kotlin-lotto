@@ -1,11 +1,13 @@
 package lotto.domain
 
-import java.math.BigDecimal
-import java.math.RoundingMode
-
 class Lottos(
     private val lottos: List<Lotto>,
 ) : List<Lotto> by lottos {
+    fun getWinningPrizes(winningLotto: WinningLotto): List<Prize> {
+        return lottos.map { it.matchPrize(winningLotto) }
+            .filter { it.isNotMiss() }
+    }
+
     fun getWinningCountsByPrize(winningLotto: WinningLotto): Map<Prize, Int> {
         val winningCountByPrize = getWinningPrizes(winningLotto)
             .groupingBy { it }
@@ -17,23 +19,12 @@ class Lottos(
             .associateWith { winningCountByPrize[it] ?: 0 }
     }
 
-    fun getTotalProfitRate(winningLotto: WinningLotto): BigDecimal {
-        val totalPrizeAmount = getWinningPrizes(winningLotto).sumOf { it.prizeAmount }
-        val purchaseAmount = LOTTO_PRICE * lottos.size
-        return totalPrizeAmount.divide(purchaseAmount.toBigDecimal(), ROUND_SCALE, RoundingMode.HALF_UP)
-    }
-
-    private fun getWinningPrizes(winningLotto: WinningLotto): List<Prize> {
-        return lottos.map { it.matchPrize(winningLotto) }
-            .filter { it.isNotMiss() }
+    operator fun plus(other: Lottos): Lottos {
+        return Lottos(lottos + other)
     }
 
     companion object {
-        private const val LOTTO_PRICE: Int = 1000
-        private const val ROUND_SCALE = 2
-
-        fun of(purchaseAmount: Int, lottoGenerator: LottoGenerator): Lottos {
-            val quantity = purchaseAmount / LOTTO_PRICE
+        fun auto(quantity: Int, lottoGenerator: LottoGenerator): Lottos {
             return Lottos(List(quantity) { Lotto.draw(lottoGenerator) })
         }
     }

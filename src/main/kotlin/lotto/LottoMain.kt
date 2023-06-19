@@ -1,6 +1,5 @@
 package lotto
 
-import lotto.domain.Lottos
 import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.service.LottoMachine
@@ -9,17 +8,19 @@ import lotto.view.ResultView
 
 fun main() {
     val purchaseAmount = InputView.readPurchaseAmount()
+    val manualLottoCount = InputView.readManualLottoCount()
+    val manualLottos = InputView.readManualLottos(manualLottoCount)
 
-    val lottos = Lottos.of(purchaseAmount, RandomLottoGenerator())
+    val lottoMachine = LottoMachine(purchaseAmount, manualLottos, RandomLottoGenerator())
 
-    ResultView.printLottoCount(lottos.size)
-    ResultView.printLottos(lottos)
+    ResultView.printLottos(lottoMachine.lottos, manualLottoCount)
 
     val winningLottoNumbers = InputView.readWinningLottoNumbers()
     val bonusNumber = InputView.readBonusLottoNumber()
     val winningLotto = WinningLotto(winningLottoNumbers, bonusNumber)
 
-    val lottoMachine = LottoMachine(lottos, winningLotto)
-
-    ResultView.printWinnerStatistics(lottoMachine.matchWinningLottoPrize(), lottoMachine.getTotalProfitRate())
+    ResultView.printWinnerStatistics(
+        winningLottoPrizeVOs = lottoMachine.matchWinningLottoPrize(winningLotto),
+        totalProfitRate = lottoMachine.getTotalProfitRate(winningLotto),
+    )
 }

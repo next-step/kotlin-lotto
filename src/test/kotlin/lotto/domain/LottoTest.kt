@@ -24,7 +24,7 @@ class LottoTest : FunSpec({
 
     test("로또 번호에 중복이 있으면 예외가 발생한다") {
         val exception = shouldThrow<IllegalArgumentException> {
-            Lotto.of(listOf(1, 1, 3, 4, 5, 6))
+            Lotto(1, 1, 3, 4, 5, 6)
         }
 
         exception.message shouldBe "로또번호는 중복이 없어야 합니다."
@@ -32,7 +32,7 @@ class LottoTest : FunSpec({
 
     test("로또 번호가 6개가 아니면 예외가 발생한다") {
         val exception = shouldThrow<IllegalArgumentException> {
-            Lotto.of(listOf(1, 2, 3, 4))
+            Lotto(1, 2, 3, 4)
         }
 
         exception.message shouldBe "로또번호는 6개 이어야 합니다."
@@ -41,7 +41,7 @@ class LottoTest : FunSpec({
     context("당첨로또와 보너스번호를 받아 상금을 반환한다") {
         data class WinningLottoPrize(val winningLottoNumbers: List<Int>, val bonusNumber: Int, val prize: Prize)
 
-        val lotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = Lotto(1, 2, 3, 4, 5, 6)
 
         withData(
             nameFn = { "${it.winningLottoNumbers}, ${it.bonusNumber}, ${it.prize}" },
@@ -60,7 +60,7 @@ class LottoTest : FunSpec({
             WinningLottoPrize(listOf(1, 2, 3, 4, 5, 6), 9, Prize.FIRST),
             WinningLottoPrize(listOf(1, 2, 3, 4, 5, 6), 10, Prize.FIRST),
         ) { (winningLottoNumbers, bonusNumber, prize) ->
-            val winningLotto = WinningLotto(Lotto.of(winningLottoNumbers), LottoNumber(bonusNumber))
+            val winningLotto = WinningLotto(Lotto(*winningLottoNumbers.toIntArray()), LottoNumber(bonusNumber))
             lotto.matchPrize(winningLotto) shouldBe prize
         }
     }
