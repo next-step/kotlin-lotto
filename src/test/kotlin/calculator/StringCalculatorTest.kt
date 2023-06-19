@@ -1,5 +1,6 @@
 package calculator
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -36,5 +37,13 @@ class StringCalculatorTest {
         val result = calculator.calculate(expression)
 
         result shouldBe expression.toLong()
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["-1:1", "1:!", "a:2:!"])
+    fun `숫자가 아니거나 음수인 경우 예외가 발생한다`(expression: String) {
+        val calculator = StringCalculator()
+
+        shouldThrow<RuntimeException> { calculator.calculate(expression) }
     }
 }
