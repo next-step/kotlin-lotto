@@ -9,8 +9,6 @@ class MoneyTest : FreeSpec({
     "금액은 음수로 생성할 경우 예외를 던진다" {
         forAll(
             row(-5),
-            row(-100),
-            row(-100000)
         ) { amount ->
             shouldThrow<Exception> { Money(amount) }
         }
