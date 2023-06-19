@@ -11,4 +11,8 @@ class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, SixFortyFiveLottoWi
         val numbers = SixFortyFiveLottoNumber.of()
         return SixFortyFiveLotto(numbers)
     }
+
+    fun getPurchaseCountByPrice(price: Int): Int {
+        return price / SixFortyFiveLotto.LOTTO_PRICE
+    }
 }

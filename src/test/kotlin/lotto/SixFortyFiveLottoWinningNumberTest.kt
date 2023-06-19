@@ -20,7 +20,7 @@ class SixFortyFiveLottoWinningNumberTest {
     @ParameterizedTest
     @ValueSource(strings = ["1,3,5,6,7,21"])
     fun `보너스 숫자가 있으면 보너스 숫자를 포함한 당첨 숫자들이 반환됩니다`(numberStr: String) {
-        val validLottoNumber = SixFortyFiveLottoUtils.parseNumbersFromStr(numberStr, ',')
+        val validLottoNumber = Utils.parseNumbersFromStr(numberStr, ',')
         val bonusNumber = SixFortyFiveNumber(45)
         val expectedLottoNumberWithBonus = listOf(*validLottoNumber.toTypedArray(), bonusNumber)
 

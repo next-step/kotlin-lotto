@@ -1,6 +1,6 @@
 package lotto.sixFortyFiveNumberLotto
 
-enum class SixFortyFiveWinning(val countOfMatch: Int, val price: Int) {
+enum class SixFortyFiveWinningEnum(val countOfMatch: Int, val price: Int) {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -10,7 +10,7 @@ enum class SixFortyFiveWinning(val countOfMatch: Int, val price: Int) {
     ;
 
     companion object {
-        fun valueOf(sixFortyFiveLottoWinningResult: SixFortyFiveLottoWinningResult): SixFortyFiveWinning {
+        fun valueOf(sixFortyFiveLottoWinningResult: SixFortyFiveLottoWinningResult): SixFortyFiveWinningEnum {
             if (sixFortyFiveLottoWinningResult.isMatchedBonus && listOf(
                     FIRST.countOfMatch,
                     THIRD.countOfMatch,
