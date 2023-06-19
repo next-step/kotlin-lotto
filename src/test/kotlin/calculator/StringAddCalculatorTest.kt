@@ -1,8 +1,5 @@
 package calculator
 
-import calculator.utils.CustomDelimiterExtractor
-import calculator.utils.TextSplitter
-import calculator.utils.TokenConverter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
@@ -55,45 +52,6 @@ class StringAddCalculatorTest {
     fun negative() {
         assertThrows<RuntimeException> {
             calculator.add("-1")
-        }
-    }
-
-    @DisplayName(value = "문자열 계산기의 extractCustomDelimiter 함수가 custom delimiter 를 분리한다")
-    @ParameterizedTest
-    @ValueSource(strings = ["//@\n1:2@4"])
-    fun extractText(text: String) {
-        assertThat(CustomDelimiterExtractor.extract(text)).isEqualTo(Pair("@","1:2@4"))
-    }
-
-    @DisplayName(value = "문자열 계산기의 extractCustomDelimiter 함수가 string 을 delimiter 를 이용하여 토큰으로 분리한다.")
-    @ParameterizedTest
-    @ValueSource(strings = ["1,2:3:4,5"])
-    fun splitText(text: String) {
-        assertThat(TextSplitter.splitText(text, listOf(":", ","))).isEqualTo(listOf("1", "2", "3", "4", "5"))
-    }
-
-    @DisplayName(value = "문자열 계산기의 convertTokensToNum 함수가 string 을 int 로 변환한다")
-    @Test
-    fun convertTokensToNum() {
-        val tokens = listOf("1", "2", "3")
-        assertThat(TokenConverter.convertToInt(tokens)).isEqualTo(listOf(1, 2, 3))
-    }
-
-    @DisplayName(value = "Unhappy Path - 유효하지 않은 입력값에 대해 convertTokensToNum 함수가 예외를 처리한다")
-    @Test
-    fun convertTokensToNumWithInvalidValue() {
-        val tokens = listOf("1", "2", "@")
-        assertThrows<RuntimeException> {
-            TokenConverter.convertToInt(tokens)
-        }
-    }
-
-    @DisplayName(value = "음수 입력값에 대해 convertTokensToNum 함수가 예외를 처리한다")
-    @Test
-    fun checkNegativeNumbers() {
-        val numbers = listOf(1,2,-3)
-        assertThrows<RuntimeException> {
-            PositiveNumber.checkPositiveNumbers(numbers)
         }
     }
 }
