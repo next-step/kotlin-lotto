@@ -10,11 +10,5 @@ enum class Prize(val matchCount: Int, val amount: Int) {
         fun prizeForMatchCount(matchCount: Int): Prize? {
             return values().find { it.matchCount == matchCount }
         }
-
-        fun calculateTotalPrice(matches: Map<Int, Int>): Int {
-            return matches.entries.sumOf { (matchCount, count) ->
-                prizeForMatchCount(matchCount)?.amount?.times(count) ?: 0
-            }
-        }
     }
 }

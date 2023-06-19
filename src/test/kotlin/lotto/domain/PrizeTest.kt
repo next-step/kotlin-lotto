@@ -11,10 +11,4 @@ class PrizeTest : StringSpec({
         Prize.prizeForMatchCount(6) shouldBe Prize.SIXTH
         Prize.prizeForMatchCount(2) shouldBe null
     }
-
-    " 주어진 매치들을 기반으로 총 상금 금액을 계산해야 한다" {
-        val matches = mapOf(3 to 2, 4 to 1, 5 to 0, 6 to 1)
-        val expectedTotalPrice = (Prize.THIRD.amount * 2) + (Prize.FOURTH.amount * 1) + (Prize.SIXTH.amount * 1)
-        Prize.calculateTotalPrice(matches) shouldBe expectedTotalPrice
-    }
 })
