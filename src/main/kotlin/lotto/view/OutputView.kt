@@ -20,7 +20,11 @@ object OutputView {
         lottoRanks.entries
             .filterNot { (rank, _) -> rank == LottoRank.NONE }
             .forEach { (rank, count) ->
-                println("${rank.matchingCount}개 일치 (${rank.price}원) - ${count}개")
+                fun matchingCountMessage() = "${rank.matchingCount}개 일치"
+                fun bonusMessage() = if (rank.bonusMatchRequired) ", 보너스볼 일치" else ""
+                fun winningPriceMessage() = "${rank.price}원"
+                fun countMessage() = "${count}개"
+                println("${matchingCountMessage()} ${bonusMessage()}(${winningPriceMessage()}) - ${countMessage()}")
             }
     }
 

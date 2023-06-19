@@ -9,6 +9,10 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
         return numbers.count { lottoNumbers.contains(it) }
     }
 
+    fun contains(number: LottoNumber): Boolean {
+        return lottoNumbers.contains(number)
+    }
+
     companion object {
         const val NUMBERS_SIZE = 6
     }

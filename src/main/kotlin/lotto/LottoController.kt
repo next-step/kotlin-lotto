@@ -26,7 +26,8 @@ class LottoController {
 
     private fun getLottoResult(lottos: List<Lotto>): LottoResult {
         val winningNumbers = InputView.getWinningNumbers()
-        return LottoWinningNumbers(winningNumbers).getLottoResult(lottos)
+        val bonusNumber = InputView.getBonusNumber()
+        return LottoWinningNumbers(winningNumbers, bonusNumber).getLottoResult(lottos)
     }
 }
 

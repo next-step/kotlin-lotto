@@ -17,4 +17,10 @@ object InputView {
             .split(",")
             .map { LottoNumber.of(it) }
     }
+
+    fun getBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        val result = readln()
+        return LottoNumber.of(result)
+    }
 }
