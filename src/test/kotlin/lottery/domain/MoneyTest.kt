@@ -35,4 +35,11 @@ class MoneyTest : FunSpec({
             actual shouldBe BigDecimal(3)
         }
     }
+
+    context("plus") {
+        test("money를 더한다") {
+            val actual = Money(value = BigDecimal(3_600)) + Money(value = BigDecimal(1_000))
+            actual shouldBe Money(value = BigDecimal(4_600))
+        }
+    }
 })

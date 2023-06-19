@@ -17,5 +17,7 @@ value class Money(
 
     fun isDivisible(money: Money): Boolean = value.rem(money.value) == BigDecimal.ZERO
 
+    operator fun plus(money: Money) = Money(value.plus(money.value))
+
     operator fun minus(money: Money) = Money(value.minus(money.value))
 }
