@@ -61,6 +61,6 @@
 - [X] 로또 결과 판독 - LottoGame 
 - [X] 당첨 통계
 - [X] 랜덤 로또 생성기
-- [ ] UI 
+- [X] UI 
   - InputView
   - ResultView 
