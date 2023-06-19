@@ -1,7 +1,7 @@
 package stringcalculator
 
 class Delimiters {
-    private val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
+    val delimiters = mutableListOf(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON)
 
     fun addDelimiter(delimiter: String) {
         delimiters.add(delimiter)
