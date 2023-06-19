@@ -10,5 +10,6 @@ data class LottoNumber(
 
     companion object {
         val LOTTO_NUMBERS: List<Int> = (1..45).toList()
+        fun create(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size).map { LottoNumber(it) }
     }
 }
