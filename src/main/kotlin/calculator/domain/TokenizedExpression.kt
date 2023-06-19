@@ -12,7 +12,6 @@ object TokenizedExpression {
     }
 
     private fun validateNegative(splitData: List<String>) {
-        println(splitData)
         require(splitData.any { it.toInt() >= 0 }) {
             MESSAGE_CONTAIN_NEGATIVE
         }
