@@ -1,8 +1,8 @@
 package lotto.domain
 
 class LottoGenerator {
-    fun getLottoCount(inputPayment: Int): Int {
-        return inputPayment / LOTTO_PRICE
+    fun getLottoCount(payment: Int): Int {
+        return payment / LOTTO_PRICE
     }
 
     fun generateLottoNumbers(): List<LottoNumber> {
