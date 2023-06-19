@@ -15,6 +15,11 @@ class InputView {
         return Lotto(numbers)
     }
 
+    fun inputBonusNumber(): LottoNumber {
+        println("보너스 볼을 입력해 주세요.")
+        return LottoNumber(readln().toInt())
+    }
+
     companion object {
         private const val NUMBERS_DELIMITER: String = ", "
     }
