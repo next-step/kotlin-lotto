@@ -1,7 +1,7 @@
 package calculate
 
 class StringAddCalculator {
-    fun add(text: String?): Any {
+    fun add(text: String?): Int {
         if (text.isNullOrEmpty()) {
             return 0
         }
