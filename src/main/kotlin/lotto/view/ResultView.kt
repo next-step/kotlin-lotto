@@ -1,8 +1,11 @@
 package lotto.view
 
 object ResultView {
-    fun printPurchaseResult(count: Int){
-        println("${count}개를 구매했습니다.")
+    fun printPurchaseResult(lottoNumbers: List<List<Int>>){
+        println("${lottoNumbers.count()}개를 구매했습니다.")
+        lottoNumbers.forEach {
+            lotto -> println(lotto)
+        }
     }
 
     fun printWinningStatistics(){
