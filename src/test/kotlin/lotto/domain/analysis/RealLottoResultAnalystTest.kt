@@ -1,137 +1,184 @@
 package lotto.domain.analysis
 
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.data.forAll
-import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
-import lotto.domain.money.Money
-import lotto.domain.money.sum
 import lotto.domain.shop.LottoGame
 import math.PositiveNumber
 
 class RealLottoResultAnalystTest : BehaviorSpec({
 
-    Given("로또 구매 내역과 지난주 당첨 번호가 주어 졌을 때") {
+    fun makeLottoNumbers(vararg lottoNumbers: Int): LottoNumbers {
+        return LottoNumbers(lottoNumbers.map { LottoNumber(it) })
+    }
 
-        fun makeLottoNumbers(vararg lottoNumbers: Int): LottoNumbers {
-            return LottoNumbers(lottoNumbers.map { LottoNumber(it) })
-        }
+    fun makeLottoGame(vararg lottoNumbers: Int): LottoGame {
+        return LottoGame(makeLottoNumbers(*lottoNumbers))
+    }
 
-        fun makeLottoGame(vararg lottoNumbers: Int): LottoGame {
-            return LottoGame(makeLottoNumbers(*lottoNumbers))
-        }
-
-        Then("내림차순 정렬 된 당첨 등급 목록을 반환한다") {
-            val request = LottoAnalysisRequest(
-                lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
-                lottoPurchaseAmount = PositiveNumber(1_000),
-                lastWeekWinLottoNumbers = WinLottoNumbers(
-                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
-                    LottoNumber(40),
-                )
+    Given("당첨된 등급 목록은") {
+        val request = LottoAnalysisRequest(
+            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoPurchaseAmount = PositiveNumber(1_000),
+            lastWeekWinLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                LottoNumber(40),
             )
-            val result = LottoResultAnalyst().analyze(request)
-            val winRanks = result.lottoWinRankAnalysisResults.map { it.lottoWinRank }
+        )
+        val winRanks = LottoResultAnalyst().analyze(request)
+            .lottoWinRankAnalysisResults
+            .map { it.lottoWinRank }
+        Then("내림차순 정렬 되어있다") {
             winRanks shouldBe LottoWinRank.values().sortedDescending()
         }
+    }
 
-        Then("당첨된 등급은 당첨된 등급 개수를 반환한다") {
-            val request = LottoAnalysisRequest(
-                lottoGames = listOf(
-                    makeLottoGame(1, 2, 3, 4, 5, 6),
-                    makeLottoGame(1, 2, 3, 4, 5, 40),
-                    makeLottoGame(1, 2, 3, 4, 5, 7),
-                    makeLottoGame(1, 2, 3, 4, 7, 8),
-                    makeLottoGame(1, 2, 3, 7, 8, 9),
-                ),
-                lottoPurchaseAmount = PositiveNumber(4_000),
-                lastWeekWinLottoNumbers = WinLottoNumbers(
-                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
-                    LottoNumber(40),
-                )
+    Given("1개의 로또가 1등에 당첨 되었다면") {
+        val request = LottoAnalysisRequest(
+            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoPurchaseAmount = PositiveNumber(1_000),
+            lastWeekWinLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                LottoNumber(40),
             )
-            val result = LottoResultAnalyst().analyze(request)
-            val winRankCounts = result.lottoWinRankAnalysisResults.map { it.ranksCount }
-            winRankCounts.all { it.value == 1 } shouldBe true
+        )
+        val result = LottoResultAnalyst().analyze(request)
+
+        Then("당첨된 1등 로또는 1개이다") {
+            result.rankCounts(LottoWinRank.FIRST) shouldBe PositiveNumber(1)
         }
 
-        Then("당첨 안된 등급은 당첨 개수를 0으로 반환한다") {
-            val request = LottoAnalysisRequest(
-                lottoGames = listOf(makeLottoGame(10, 11, 12, 13, 14, 15)),
-                lottoPurchaseAmount = PositiveNumber(1_000),
-                lastWeekWinLottoNumbers = WinLottoNumbers(
-                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
-                    LottoNumber(40),
-                )
+        Then("수익률은 2,000,000이다") {
+            result.revenue.rateOfReturn shouldBe 2_000_000
+        }
+    }
+
+    Given("1개의 로또가 2등에 당첨 되었다면") {
+        val request = LottoAnalysisRequest(
+            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoPurchaseAmount = PositiveNumber(1_000),
+            lastWeekWinLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(1, 2, 3, 4, 5, 7),
+                LottoNumber(6),
             )
-            val result = LottoResultAnalyst().analyze(request)
-            val winRankCounts = result.lottoWinRankAnalysisResults.map { it.ranksCount }
-            winRankCounts shouldBe LottoWinRank.values().sortedDescending().map { PositiveNumber(0) }
+        )
+        val result = LottoResultAnalyst().analyze(request)
+
+        Then("당첨된 2등 로또는 1개이다") {
+            result.rankCounts(LottoWinRank.SECOND) shouldBe PositiveNumber(1)
         }
 
-        forAll(
-            row(
-                listOf(makeLottoGame(10, 11, 12, 13, 14, 15)),
-                WinLottoNumbers(
-                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
-                    LottoNumber(40),
-                ),
-                Revenue(
-                    totalCost = Money(1_000),
-                    totalRevenue = Money(0),
-                )
-            ),
-            row(
-                listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
-                WinLottoNumbers(
-                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
-                    LottoNumber(40),
-                ),
-                Revenue(
-                    totalCost = Money(1_000),
-                    totalRevenue = LottoWinRank.FIRST.winAmount,
-                )
-            ),
-            row(
-                listOf(makeLottoGame(1, 2, 3, 4, 5, 40)),
-                WinLottoNumbers(
-                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
-                    LottoNumber(40),
-                ),
-                Revenue(
-                    totalCost = Money(1_000),
-                    totalRevenue = LottoWinRank.SECOND.winAmount,
-                )
-            ),
-            row(
-                listOf(
-                    makeLottoGame(1, 2, 3, 4, 5, 6),
-                    makeLottoGame(1, 2, 3, 4, 5, 40),
-                    makeLottoGame(1, 2, 3, 4, 5, 7),
-                    makeLottoGame(1, 2, 3, 4, 7, 8),
-                    makeLottoGame(1, 2, 3, 7, 8, 9),
-                ),
-                WinLottoNumbers(
-                    makeLottoNumbers(1, 2, 3, 4, 5, 6),
-                    LottoNumber(40),
-                ),
-                Revenue(
-                    totalCost = Money(5_000),
-                    totalRevenue = LottoWinRank.values().map { it.winAmount }.sum(),
-                )
-            ),
-        ) { lottoGames, lastWeekWinLottoNumbers, expectedRevenue ->
-            Then("수익률을 반환한다") {
-                val request = LottoAnalysisRequest(
-                    lottoGames = lottoGames,
-                    lottoPurchaseAmount = PositiveNumber(lottoGames.size * 1_000),
-                    lastWeekWinLottoNumbers = lastWeekWinLottoNumbers
-                )
-                val result = LottoResultAnalyst().analyze(request)
-                result.revenue shouldBe expectedRevenue
+        Then("수익률은 30,000이다") {
+            result.revenue.rateOfReturn shouldBe 30_000
+        }
+    }
+
+    Given("1개의 로또가 3등에 당첨 되었다면") {
+        val request = LottoAnalysisRequest(
+            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoPurchaseAmount = PositiveNumber(1_000),
+            lastWeekWinLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(1, 2, 3, 4, 5, 7),
+                LottoNumber(40),
+            )
+        )
+        val result = LottoResultAnalyst().analyze(request)
+
+        Then("당첨된 3등 로또는 1개이다") {
+            result.rankCounts(LottoWinRank.THIRD) shouldBe PositiveNumber(1)
+        }
+
+        Then("수익률은 15,000이다") {
+            result.revenue.rateOfReturn shouldBe 1_500
+        }
+    }
+
+    Given("1개의 로또가 4등에 당첨 되었다면") {
+        val request = LottoAnalysisRequest(
+            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoPurchaseAmount = PositiveNumber(1_000),
+            lastWeekWinLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(1, 2, 3, 4, 7, 8),
+                LottoNumber(40),
+            )
+        )
+        val result = LottoResultAnalyst().analyze(request)
+
+        Then("당첨된 4등 로또는 1개이다") {
+            result.rankCounts(LottoWinRank.FOURTH) shouldBe PositiveNumber(1)
+        }
+
+        Then("수익률은 50이다") {
+            result.revenue.rateOfReturn shouldBe 50
+        }
+    }
+
+    Given("1개의 로또가 5등에 당첨 되었다면") {
+        val request = LottoAnalysisRequest(
+            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoPurchaseAmount = PositiveNumber(1_000),
+            lastWeekWinLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(1, 2, 3, 7, 8, 9),
+                LottoNumber(40),
+            )
+        )
+        val result = LottoResultAnalyst().analyze(request)
+
+        Then("당첨된 5등 로또는 1개이다") {
+            result.rankCounts(LottoWinRank.FIFTH) shouldBe PositiveNumber(1)
+        }
+
+        Then("수익률은 5이다") {
+            result.revenue.rateOfReturn shouldBe 5
+        }
+    }
+
+    Given("1개의 로또가 당첨되지 않았다면") {
+        val request = LottoAnalysisRequest(
+            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoPurchaseAmount = PositiveNumber(1_000),
+            lastWeekWinLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(10, 11, 12, 13, 14, 15),
+                LottoNumber(40),
+            )
+        )
+        val result = LottoResultAnalyst().analyze(request)
+
+        Then("모든 당첨 로또는 0개이다") {
+            LottoWinRank.values().forEach {
+                result.rankCounts(it) shouldBe PositiveNumber(0)
+            }
+        }
+        Then("수익률은 0이다") {
+            result.revenue.rateOfReturn shouldBe 0
+        }
+    }
+
+    Given("5개의 로또가") {
+        val lottoGames = listOf(
+            makeLottoGame(1, 2, 3, 4, 5, 6),
+            makeLottoGame(1, 2, 3, 4, 5, 40),
+            makeLottoGame(1, 2, 3, 4, 5, 7),
+            makeLottoGame(1, 2, 3, 4, 7, 8),
+            makeLottoGame(1, 2, 3, 7, 8, 9),
+        )
+        val lottoPurchaseAmount = PositiveNumber(5_000)
+
+        When("1, 2, 3, 4, 5등에 당첨 되었다면") {
+            val winLottoNumbers = WinLottoNumbers(
+                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                LottoNumber(40),
+            )
+            val request = LottoAnalysisRequest(lottoGames, lottoPurchaseAmount, winLottoNumbers)
+            val result = LottoResultAnalyst().analyze(request)
+            Then("모든 등수의 당첨 개수는 1개이다") {
+                val winRankCounts = result.lottoWinRankAnalysisResults.map { it.ranksCount }
+                winRankCounts.all { it.value == 1 } shouldBe true
+            }
+            Then("수익률은 406,311이다") {
+                result.revenue.rateOfReturn shouldBe 406311
             }
         }
     }
