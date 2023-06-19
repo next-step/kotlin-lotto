@@ -6,9 +6,19 @@ class StringCalculator {
             return 0
         }
 
+        return execute(expression)
+    }
+
+    private fun execute(expression: String): Long {
+        val result = Regex("//(.)\n(.*)").find(expression)
+        result?.let {
+            val customDelimiter = it.groupValues[1]
+            return it.groupValues[2].split(customDelimiter)
+                .sumOf { v -> toNumber(v) }
+        }
+
         return expression.split("[,:]".toRegex())
-            .map(this::toNumber)
-            .sum()
+            .sumOf { v -> toNumber(v) }
     }
 
     private fun toNumber(s: String): Long {

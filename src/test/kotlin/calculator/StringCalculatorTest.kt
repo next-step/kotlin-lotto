@@ -50,7 +50,7 @@ class StringCalculatorTest {
 
     @Test
     fun `커스텀 구분자를 사용할 수 있다`() {
-        val str = "//;\\n1;2;3"
+        val str = "//;\n1;2;3"
         val calculator = StringCalculator()
 
         val result = calculator.calculate(str)
