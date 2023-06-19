@@ -1,5 +1,5 @@
 package util
 
-interface NumberGenerator {
+fun interface NumberGenerator {
     fun randomNumbers(): Set<Int>
 }
