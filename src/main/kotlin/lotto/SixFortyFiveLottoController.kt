@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import lotto.view.input.LottoPurchasePriceInputView
 import lotto.view.input.sixFortyFiveNumberLotto.SixFortyFiveLottoBonusInputView
 import lotto.view.input.sixFortyFiveNumberLotto.SixFortyFiveLottoLastWinNumInputView
@@ -21,13 +22,13 @@ class SixFortyFiveLottoController(
         val lottoList = lottoStore.purchase(purchaseCount)
         SixFortyFiveLottoOutputView(lottoList).renderMessage()
 
-        val lastWinningNumber = SixFortyFiveLottoLastWinNumInputView().value
+        val lastWinningNumbers = SixFortyFiveLottoLastWinNumInputView().value
         NewLineOutputView().renderMessage()
         val bonusWinningNumber = SixFortyFiveLottoBonusInputView().value
-        lastWinningNumber.bonusNumber = bonusWinningNumber
+        val winningLotto = SixFortyFiveWinningLotto(lastWinningNumbers, bonusWinningNumber)
         NewLineOutputView().renderMessage()
 
-        SixFortyFiveBonusResultOutputView(lottoList, lastWinningNumber).renderMessage()
+        SixFortyFiveBonusResultOutputView(lottoList, winningLotto).renderMessage()
     }
 
     fun startNormalLotto() {
@@ -39,8 +40,9 @@ class SixFortyFiveLottoController(
         SixFortyFiveLottoOutputView(lottoList).renderMessage()
 
         val lastWinningNumber = SixFortyFiveLottoLastWinNumInputView().value
+        val winningLotto = SixFortyFiveWinningLotto(lastWinningNumber)
         NewLineOutputView().renderMessage()
 
-        SixFortyFiveResultOutputView(lottoList, lastWinningNumber).renderMessage()
+        SixFortyFiveResultOutputView(lottoList, winningLotto).renderMessage()
     }
 }

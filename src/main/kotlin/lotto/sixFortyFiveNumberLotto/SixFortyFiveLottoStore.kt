@@ -2,14 +2,13 @@ package lotto.sixFortyFiveNumberLotto
 
 import lotto.LottoStore
 
-class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, SixFortyFiveLottoWinningNumber> {
+class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto, SixFortyFiveWinningLotto> {
     override fun purchase(count: Int): List<SixFortyFiveLotto> {
         return (1..count).map { makeLotto() }
     }
 
     override fun makeLotto(): SixFortyFiveLotto {
-        val numbers = SixFortyFiveLottoNumber.of()
-        return SixFortyFiveLotto(numbers)
+        return SixFortyFiveLotto.of()
     }
 
     fun getPurchaseCountByPrice(price: Int): Int {

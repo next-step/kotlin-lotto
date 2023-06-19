@@ -1,20 +1,20 @@
 package lotto
 
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class SixFortyFiveLottoWinningNumberTest {
+class SixFortyFiveWinningLottoTest {
     @Test
     fun `보너스 숫자가 없으면 기존 당첨 숫자들만 반환합니다`() {
         val validLottoNumber = listOf(1, 3, 5, 6, 7, 21).map { SixFortyFiveNumber(it) }
+        val winningLotto = SixFortyFiveWinningLotto(SixFortyFiveLotto(validLottoNumber))
 
-        val winningNumber = SixFortyFiveLottoWinningNumber(validLottoNumber)
-
-        Assertions.assertIterableEquals(validLottoNumber, winningNumber.value)
+        Assertions.assertIterableEquals(validLottoNumber, winningLotto.getNumbers())
     }
 
     @ParameterizedTest
@@ -24,10 +24,9 @@ class SixFortyFiveLottoWinningNumberTest {
         val bonusNumber = SixFortyFiveNumber(45)
         val expectedLottoNumberWithBonus = listOf(*validLottoNumber.toTypedArray(), bonusNumber)
 
-        val winningNumber = SixFortyFiveLottoWinningNumber(validLottoNumber)
-        winningNumber.bonusNumber = bonusNumber
+        val winningLotto = SixFortyFiveWinningLotto(SixFortyFiveLotto(validLottoNumber), bonusNumber)
 
-        Assertions.assertIterableEquals(winningNumber.value, expectedLottoNumberWithBonus)
-        Assertions.assertEquals(7, winningNumber.value.size)
+        Assertions.assertIterableEquals(winningLotto.getNumbers(), expectedLottoNumberWithBonus)
+        Assertions.assertEquals(7, winningLotto.getNumbers().size)
     }
 }

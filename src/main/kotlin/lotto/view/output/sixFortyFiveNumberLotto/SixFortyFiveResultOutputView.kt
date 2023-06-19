@@ -1,11 +1,11 @@
 package lotto.view.output.sixFortyFiveNumberLotto
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningNumber
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningEnum
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import lotto.view.output.OutputView
 
-class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningValue: SixFortyFiveLottoWinningNumber) :
+class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningValue: SixFortyFiveWinningLotto) :
     OutputView() {
 
     init {

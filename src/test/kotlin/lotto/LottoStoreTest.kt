@@ -2,10 +2,9 @@ package lotto
 
 import io.kotest.matchers.types.shouldBeInstanceOf
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoNumber
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoStore
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningNumber
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveNumber
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -22,10 +21,11 @@ class LottoStoreTest {
 
     @Test
     fun `로또의 당첨 여부를 계산합니다`() {
-        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) })
-        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) })
+        val numbers = listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) }
+        val winningNumber = listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) }
+        val winningLotto = SixFortyFiveWinningLotto(SixFortyFiveLotto(winningNumber))
 
-        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
+        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningLotto)
 
         Assertions.assertEquals(winningResult.countOfMatch, 3)
         Assertions.assertEquals(winningResult.isMatchedBonus, false)
@@ -33,11 +33,12 @@ class LottoStoreTest {
 
     @Test
     fun `보너스 번호를 포함하여 로또의 당첨 여부를 계산합니다`() {
-        val numbers = SixFortyFiveLottoNumber(listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) })
-        val winningNumber = SixFortyFiveLottoWinningNumber(listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) })
-        winningNumber.bonusNumber = SixFortyFiveNumber(7)
+        val numbers = listOf(1, 2, 3, 7, 8, 9).map { SixFortyFiveNumber(it) }
+        val winningNumber = listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) }
+        val bonusNumber = SixFortyFiveNumber(7)
+        val winningLotto = SixFortyFiveWinningLotto(SixFortyFiveLotto(winningNumber), bonusNumber)
 
-        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningNumber)
+        val winningResult = SixFortyFiveLotto(numbers).checkWinning(winningLotto)
 
         Assertions.assertEquals(winningResult.countOfMatch, 4)
         Assertions.assertEquals(winningResult.isMatchedBonus, true)
