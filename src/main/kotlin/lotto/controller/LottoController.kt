@@ -18,7 +18,7 @@ class LottoController {
         val lottos = buyLottos(budget)
         val winningLotto = inputView.inputLastWeekLottoNumbers()
 
-        showWinningResult(budget, lottos.lottos, winningLotto)
+        showWinningResult(budget, lottos, winningLotto)
     }
 
     private fun buyLottos(budget: Int): Lottos {
@@ -31,7 +31,7 @@ class LottoController {
         return lottos
     }
 
-    private fun showWinningResult(budget: Int, lottos: List<Lotto>, winningLotto: Lotto) {
+    private fun showWinningResult(budget: Int, lottos: Lottos, winningLotto: Lotto) {
         val statistics = LottoStatistics(lottos, budget, winningLotto)
         resultView.printWinningResult(statistics)
     }
