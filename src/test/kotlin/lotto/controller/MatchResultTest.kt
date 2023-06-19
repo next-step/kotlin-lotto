@@ -11,7 +11,8 @@ class MatchResultTest : BehaviorSpec({
     Given("로또 번호와 당첨 번호가 주어지면") {
         val money = 3000
         val lottos = Lottos.of(money, RandomLottoNumberGenerator())
-        val winningNumbers = WinningNumbers(LottoNumbers(FixedNumberGenerator(listOf(1, 2, 3, 4, 5, 6))))
+        val bonusNumber = 7
+        val winningNumbers = WinningNumbers(LottoNumbers(FixedNumberGenerator(listOf(1, 2, 3, 4, 5, 6))), bonusNumber)
 
         When("MatchResult 를 생성할 때") {
             val matchResult = winningNumbers.calculateMatchResult(lottos)

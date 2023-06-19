@@ -18,7 +18,8 @@ class MatchResult(
         return matches[prize] ?: 0
     }
 
-    fun isProfit(earningRate: Double): Boolean {
+    fun isProfit(money: Int): Boolean {
+        val earningRate = calculateEarningRate(money)
         return earningRate >= 1
     }
 }
