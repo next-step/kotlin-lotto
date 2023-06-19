@@ -19,8 +19,8 @@ class StringCalculatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val stringCalculator = StringCalculator(parsedStringList)
-        stringCalculator.execute() shouldBe expected
+        val stringCalculator = StringCalculator()
+        stringCalculator.execute(parsedStringList) shouldBe expected
     }
 
     @Test
@@ -29,8 +29,8 @@ class StringCalculatorTest {
         val stringParser = StringParser()
         val parsedStringList = stringParser.parse(inputString)
 
-        val stringCalculator = StringCalculator(parsedStringList)
-        stringCalculator.execute() shouldBe 18
+        val stringCalculator = StringCalculator()
+        stringCalculator.execute(parsedStringList) shouldBe 18
     }
 
     @Test
@@ -40,7 +40,7 @@ class StringCalculatorTest {
         val parsedStringList = stringParser.parse(inputString)
 
         shouldThrow<RuntimeException> {
-            StringCalculator(parsedStringList)
+            StringCalculator().execute(parsedStringList)
         }
     }
 
@@ -51,7 +51,7 @@ class StringCalculatorTest {
         val parsedStringList = stringParser.parse(inputString)
 
         shouldThrow<RuntimeException> {
-            StringCalculator(parsedStringList)
+            StringCalculator().execute(parsedStringList)
         }
     }
 }
