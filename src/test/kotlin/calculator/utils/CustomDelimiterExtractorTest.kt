@@ -9,7 +9,7 @@ class CustomDelimiterExtractorTest {
     @DisplayName(value = "문자열 계산기의 extractCustomDelimiter 함수가 custom delimiter 를 분리한다")
     @ParameterizedTest
     @ValueSource(strings = ["//@\n1:2@4"])
-    fun extractText(text: String) {
+    fun extractCustomDelimiter(text: String) {
         Assertions.assertThat(CustomDelimiterExtractor.extract(text)).isEqualTo(Pair("@", "1:2@4"))
     }
 }
