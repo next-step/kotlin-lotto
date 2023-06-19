@@ -30,7 +30,7 @@ class StringAddCalculatorTest : StringSpec({
     "커스텀 구분자 계산" {
         mapOf(
             "//?\n1?2?3" to 6,
-            "//;\n1;2;3" to 6
+            "//;\n1;2;3" to 6,
         ).forAll { (input, answer) ->
             calculate(input) shouldBe answer
         }
@@ -40,7 +40,7 @@ class StringAddCalculatorTest : StringSpec({
         listOf(
             "-1,2,3",
             "a,b",
-            "1,2,-3"
+            "1,2,-3",
         ).forAll {
             shouldThrow<RuntimeException> {
                 calculate(it)
@@ -48,4 +48,3 @@ class StringAddCalculatorTest : StringSpec({
         }
     }
 })
-
