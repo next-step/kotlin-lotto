@@ -1,7 +1,7 @@
 package lotto.view
 
+import lotto.domain.IssuedLottoMatchStat
 import lotto.domain.IssuedLottos
-import lotto.domain.LottoMatchStat
 
 class ResultView {
 
@@ -10,11 +10,11 @@ class ResultView {
         println(issuedLottos)
     }
 
-    fun outputLottoMatchStat(lottoMatchStat: LottoMatchStat) {
-        println("3개 일치 (5000원) - ${lottoMatchStat.threeMatchCount}개")
-        println("4개 일치 (50000원) - ${lottoMatchStat.fourMatchCount}개")
-        println("5개 일치 (1500000원) - ${lottoMatchStat.fiveMatchCount}개")
-        println("6개 일치 (2000000000원) - ${lottoMatchStat.sixMatchCount}개")
+    fun outputLottoMatchStat(issuedLottoMatchStat: IssuedLottoMatchStat) {
+        println("3개 일치 (5000원) - ${issuedLottoMatchStat.countOfThreeMatch}개")
+        println("4개 일치 (50000원) - ${issuedLottoMatchStat.countOfFourMatch}개")
+        println("5개 일치 (1500000원) - ${issuedLottoMatchStat.countOfFiveMatch}개")
+        println("6개 일치 (2000000000원) - ${issuedLottoMatchStat.countOfSixMatch}개")
     }
 
     fun outputEarningsRate(earningsRate: Double) {

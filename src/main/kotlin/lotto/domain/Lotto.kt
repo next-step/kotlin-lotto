@@ -15,8 +15,9 @@ data class Lotto(
         }
     }
 
-    fun match(winningLotto: Lotto): Int {
-        return numbers.intersect(winningLotto.numbers).size
+    fun match(winningLotto: Lotto): LottoMatchResult {
+        val matchCount = numbers.intersect(winningLotto.numbers).size
+        return LottoMatchResult(matchCount)
     }
 
     override fun toString(): String {
@@ -28,4 +29,15 @@ data class Lotto(
         const val MIN_LOTTO_NUMBER = 1
         const val MAX_LOTTO_NUMBER_SIZE = 6
     }
+}
+
+/**
+ * ### 로또와 당첨 번호를 비교한 결과를 표현하는 클래스 입니다.
+ *
+ * 비교 결과를 토대로 로또의 등수를 알 수 있습니다.
+ */
+data class LottoMatchResult(
+    val matchCount: Int,
+) {
+    val rank = LottoRank.valueOf(matchCount)
 }

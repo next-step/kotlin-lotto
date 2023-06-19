@@ -1,8 +1,8 @@
 package lotto
 
+import lotto.domain.IssuedLottoMatchResult
 import lotto.domain.IssuedLottos
 import lotto.domain.Lotto
-import lotto.domain.LottoMatchStat
 import lotto.domain.LottoSeller
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -17,9 +17,9 @@ fun main() {
     resultView.outputIssuedLottos(issuedLottos)
 
     val winningNumbers: Set<Int> = inputView.inputWinningNumbers()
-    val lottoMatchStat: LottoMatchStat = issuedLottos.check(Lotto(winningNumbers))
-    resultView.outputLottoMatchStat(lottoMatchStat)
+    val issuedLottoMatchResult: IssuedLottoMatchResult = issuedLottos.check(Lotto(winningNumbers))
+    resultView.outputLottoMatchStat(issuedLottoMatchResult.matchStat)
 
-    val earningsRate: Double = lottoMatchStat.calculateEarningsRate(seedMoney)
+    val earningsRate: Double = issuedLottoMatchResult.calculateEarningsRate(seedMoney)
     resultView.outputEarningsRate(earningsRate)
 }

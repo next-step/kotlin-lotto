@@ -10,17 +10,9 @@ data class IssuedLottos(val lottos: List<Lotto>) {
         require(lottos.isNotEmpty()) { "lottos must not be empty" }
     }
 
-    fun check(winningLotto: Lotto): LottoMatchStat {
-        val matchCountGroup = lottos.map { it.match(winningLotto) }
-            .groupBy { matchCount ->
-                matchCount
-            }
-        return LottoMatchStat(
-            threeMatchCount = matchCountGroup.getOrDefault(3, listOf()).size,
-            fourMatchCount = matchCountGroup.getOrDefault(4, listOf()).size,
-            fiveMatchCount = matchCountGroup.getOrDefault(5, listOf()).size,
-            sixMatchCount = matchCountGroup.getOrDefault(6, listOf()).size,
-        )
+    fun check(winningLotto: Lotto): IssuedLottoMatchResult {
+        val lottoMatchResults: List<LottoMatchResult> = lottos.map { it.match(winningLotto) }
+        return IssuedLottoMatchResult(lottoMatchResults)
     }
 
     override fun toString(): String {
@@ -29,21 +21,34 @@ data class IssuedLottos(val lottos: List<Lotto>) {
 }
 
 /**
- * ### 로또의 당첨 통계를 표현하는 클래스 입니다.
+ * ### 발급받은 로또들의 당첨 결과를 표현하는 클래스 입니다.
  *
- * 당첨 통계를 토대로 구입 금액 대비 수익률을 계산할 수 있습니다.
+ * 당첨 결과를 토대로 구입 금액 대비 수익률을 계산할 수 있고 당첨 통계를 추출할 수 있습니다.
  */
-data class LottoMatchStat(
-    val threeMatchCount: Int,
-    val fourMatchCount: Int,
-    val fiveMatchCount: Int,
-    val sixMatchCount: Int,
+data class IssuedLottoMatchResult(
+    val lottoMatchResults: List<LottoMatchResult>,
 ) {
+    val matchStat: IssuedLottoMatchStat by lazy {
+        IssuedLottoMatchStat(
+            countOfThreeMatch = lottoMatchResults.filter { it.matchCount == 3 }.size,
+            countOfFourMatch = lottoMatchResults.filter { it.matchCount == 4 }.size,
+            countOfFiveMatch = lottoMatchResults.filter { it.matchCount == 5 }.size,
+            countOfSixMatch = lottoMatchResults.filter { it.matchCount == 6 }.size,
+        )
+    }
+
     fun calculateEarningsRate(seedMoney: Int): Double {
-        val winningAmount = threeMatchCount * 5_000 +
-            fourMatchCount * 50_000 +
-            fiveMatchCount * 1_500_000 +
-            sixMatchCount * 2_000_000_000
-        return winningAmount.toDouble() / seedMoney
+        val winningMoneyTotal = lottoMatchResults.sumOf { it.rank.winningMoney }
+        return winningMoneyTotal.toDouble() / seedMoney
     }
 }
+
+/**
+ * ### 발급받은 로또들의 당첨 통계를 표현하는 클래스 입니다.
+ */
+data class IssuedLottoMatchStat(
+    val countOfThreeMatch: Int,
+    val countOfFourMatch: Int,
+    val countOfFiveMatch: Int,
+    val countOfSixMatch: Int,
+)
