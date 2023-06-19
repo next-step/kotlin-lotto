@@ -6,7 +6,7 @@ class LottoGame(val lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNum
         .mapValues { it.value.size }
 
     companion object {
-        const val GAME_COST = 1000
+        private const val GAME_COST = 1000
 
         fun getGameCount(purchaseAmount: Int): Int {
             return purchaseAmount / GAME_COST
