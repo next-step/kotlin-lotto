@@ -10,9 +10,13 @@ class Lotto(val numbers: Set<LottoNumber>) {
 
     companion object {
         private const val LOTTO_SIZE = 6
+        private const val DELIMITER = ","
+
         fun create() = Lotto(
             (LottoNumber.LOTTO_NUMBER_MIN..LottoNumber.LOTTO_NUMBER_MAX).shuffled().take(LOTTO_SIZE).sorted()
                 .map { LottoNumber(it) }.toSet()
         )
+
+        fun createWinning(numbers: String) = Lotto(numbers.split(DELIMITER).map { LottoNumber(it.toInt()) }.toSet())
     }
 }
