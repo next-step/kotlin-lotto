@@ -20,4 +20,18 @@ internal class StringAddCalculatorTest : ExpectSpec({
             }
         }
     }
+
+    context("숫자 한개만 전달된 경우") {
+        val operations = listOf(
+            "1",
+            "23",
+            "456"
+        )
+        expect("해당 값을 반환한다.") {
+            operations.forAll { operation ->
+                val actual = calculator.execute(operation)
+                actual shouldBe operation.toInt()
+            }
+        }
+    }
 })
