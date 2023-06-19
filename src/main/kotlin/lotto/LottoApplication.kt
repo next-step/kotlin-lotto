@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoBundle
+import lotto.domain.LottoNumber
 import lotto.utils.RateCalculator
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -18,12 +19,12 @@ class LottoApplication(
     fun startLottery() {
         val lottoBundle = getLottoBundleByMoney()
         val winningLotto = getWinningLotto()
-        val bonusNumber = getBonusNumber(winningLotto)
+        val bonusLottoNumber = getBonusNumber(winningLotto)
         resultView.printEnter()
 
         resultView.printResult()
-        val collectCounts = lottoNumberMatcher.lottoCheck(winningLotto, lottoBundle.lottoBundle, bonusNumber)
-        val collectBonusCount = lottoNumberMatcher.bonusLottoCheck(winningLotto, lottoBundle.lottoBundle, bonusNumber)
+        val collectCounts = lottoNumberMatcher.lottoCheck(winningLotto, lottoBundle.lottoBundle, bonusLottoNumber)
+        val collectBonusCount = lottoNumberMatcher.bonusLottoCheck(winningLotto, lottoBundle.lottoBundle, bonusLottoNumber)
 
         val resultGroup = lottoNumberMatcher.lottoResultGroup(collectCounts)
         resultView.printWinningResult(resultGroup, collectBonusCount)
@@ -33,10 +34,9 @@ class LottoApplication(
         resultView.printRateOfReturn(returnRatio)
     }
 
-    private fun getBonusNumber(lotto: Lotto): Int {
+    private fun getBonusNumber(lotto: Lotto): LottoNumber {
         val bonusNumber = inputView.printInputBonusLottoNumber().toInt()
-        lottoBonusNumberValidation(bonusNumber, lotto)
-        return bonusNumber
+        return lottoBonusNumberValidation(bonusNumber, lotto)
     }
 
     private fun getWinningLotto(): Lotto {
@@ -69,13 +69,12 @@ class LottoApplication(
         return winningNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }
     }
 
-    private fun lottoBonusNumberValidation(bonusNumber: Int, lotto: Lotto) {
-        require(bonusNumber in 1..45) {
-            "로또의 숫자는 1부터 45 사이의 숫자만 가능합니다."
-        }
-        require(!lotto.numbers.contains(bonusNumber)) {
+    private fun lottoBonusNumberValidation(bonusNumber: Int, lotto: Lotto): LottoNumber {
+        val lottoNumber = LottoNumber(bonusNumber)
+        require(!lotto.numbers.contains(lottoNumber.number)) {
             "보너스 숫자가 중복이 될 수 없습니다."
         }
+        return lottoNumber
     }
 }
 

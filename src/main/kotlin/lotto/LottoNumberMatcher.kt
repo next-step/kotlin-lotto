@@ -1,11 +1,12 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.enums.LottoRank
 
 class LottoNumberMatcher {
 
-    fun lottoCheck(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusNumber: Int): List<LottoRank> {
+    fun lottoCheck(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusLottoNumber: LottoNumber): List<LottoRank> {
 
         val result = mutableListOf<LottoRank>()
         lottoBundle.forEach { lotto ->
@@ -15,7 +16,7 @@ class LottoNumberMatcher {
                     count++
                 }
             }
-            if (count == BONUS_WINNING_COUNT && lotto.numbers.contains(bonusNumber)) {
+            if (count == BONUS_WINNING_COUNT && lotto.numbers.contains(bonusLottoNumber.number)) {
                 return@forEach
             }
             if (count != 0) {
@@ -25,7 +26,7 @@ class LottoNumberMatcher {
         return result.toList()
     }
 
-    fun bonusLottoCheck(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusNumber: Int): Int {
+    fun bonusLottoCheck(winningLotto: Lotto, lottoBundle: List<Lotto>, bonusLottoNumber: LottoNumber): Int {
 
         var result = 0
         lottoBundle.forEach { lotto ->
@@ -35,7 +36,7 @@ class LottoNumberMatcher {
                     count++
                 }
             }
-            if (count == BONUS_WINNING_COUNT && lotto.numbers.contains(bonusNumber)) {
+            if (count == BONUS_WINNING_COUNT && lotto.numbers.contains(bonusLottoNumber.number)) {
                 result++
             }
         }
