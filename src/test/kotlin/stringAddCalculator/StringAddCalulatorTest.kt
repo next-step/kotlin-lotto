@@ -32,4 +32,10 @@ class StringAddCalulatorTest {
     fun `숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(text: String?) {
         Assertions.assertThat(calculator.add(text)).isSameAs(6)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2;3"])
+    fun `문자열 앞부분의 문자를 커스텀 구분자를 지정할 수 있다`(text: String?) {
+        Assertions.assertThat(calculator.add(text)).isSameAs(6)
+    }
 }
