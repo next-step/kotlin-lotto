@@ -2,7 +2,7 @@ package next.step.lotto.domain
 
 object LottoStore {
 
-    const val LOTTO_PRICE: Int = 1000
+    private const val LOTTO_PRICE: Int = 1000
 
     fun buy(payment: Int, algorithm: LottoNumberGenerationAlgorithm): Lottos {
         val lottos = mutableSetOf<Lotto>()
