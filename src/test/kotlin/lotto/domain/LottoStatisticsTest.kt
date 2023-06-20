@@ -42,7 +42,7 @@ class LottoStatisticsTest : StringSpec({
             )
         )
 
-        val winnerNumbers = listOf(
+        val lottoNumbers = listOf(
             LottoNumber(1),
             LottoNumber(2),
             LottoNumber(3),
@@ -50,8 +50,11 @@ class LottoStatisticsTest : StringSpec({
             LottoNumber(5),
             LottoNumber(6)
         )
+        val lastWinnerNumbers = LottoNumbers(lottoNumbers)
+        val bonusBall = LottoNumber(7)
 
-        val result = lottoStatistics.analyze(lottos, winnerNumbers)
+        val winnerNumber = WinningNumber(lastWinnerNumbers, bonusBall)
+        val result = lottoStatistics.analyze(lottos, winnerNumber)
         val profitRate = lottoStatistics.getProfitRate(Payment(14000), result)
         profitRate shouldBe 2000000000 / 14000.00
     }
