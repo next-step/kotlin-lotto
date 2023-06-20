@@ -18,7 +18,7 @@ class LottoResultTest {
         // when
         val result: LottoResult = LottoResult.of(winnerLotto, lottoList)
 
-        result.getMatchedNumberCnts(LottoReward.THIRD) shouldBe 1
+        result.getMatchedNumberCount(LottoReward.THIRD) shouldBe 1
     }
 
     @Test
@@ -32,7 +32,7 @@ class LottoResultTest {
         val result: LottoResult = LottoResult.of(winnerLotto, lottoList)
 
         // then
-        result.getMatchedNumberCnts(LottoReward.FIFTH) shouldBe 1
+        result.getMatchedNumberCount(LottoReward.FIFTH) shouldBe 1
     }
 
     @Test
@@ -46,6 +46,6 @@ class LottoResultTest {
         val result: LottoResult = LottoResult.of(winnerLotto, lottoList)
 
         // then
-        result.getMatchedNumberCnts(LottoReward.FIFTH_BONUS) shouldBe 1
+        result.getMatchedNumberCount(LottoReward.FIFTH_BONUS) shouldBe 1
     }
 }

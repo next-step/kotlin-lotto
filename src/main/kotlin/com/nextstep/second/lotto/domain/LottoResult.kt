@@ -3,7 +3,7 @@ package com.nextstep.second.lotto.domain
 class LottoResult private constructor(
     private val matchedNumberCounts: Map<LottoReward, Int>
 ) {
-    fun getMatchedNumberCnts(score: LottoReward): Int {
+    fun getMatchedNumberCount(score: LottoReward): Int {
         return matchedNumberCounts.getOrDefault(score, 0)
     }
 
@@ -29,7 +29,7 @@ class LottoResult private constructor(
         }
 
         private fun compareLottoResult(a: WinnerLotto, b: Lotto): Int {
-            return a.numbers.intersect(b.numbers.toSet()).size
+            return a.lotto.numbers.intersect(b.numbers.toSet()).size
         }
 
         private fun checkBonusNumber(winnerLotto: WinnerLotto, lotto: Lotto): Boolean {

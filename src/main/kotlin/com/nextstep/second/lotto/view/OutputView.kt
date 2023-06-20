@@ -16,7 +16,7 @@ object OutputView {
         println("당첨 통계")
         println("---------")
         checkRewards.forEach { reward ->
-            println("${getComment(reward)} - ${lottoResults.getMatchedNumberCnts(reward)}개")
+            println("${getComment(reward)} - ${lottoResults.getMatchedNumberCount(reward)}개")
         }
         println("총 수익률은 ${lottoResults.getRateOfReturn(money)}입니다.")
     }

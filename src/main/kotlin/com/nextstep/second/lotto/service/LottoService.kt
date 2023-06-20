@@ -14,7 +14,7 @@ object LottoService {
         return lottoInManual + lottoInAuto
     }
 
-    fun buyLottoInManual(manualLottos: List<List<Int>>): List<Lotto> {
+    private fun buyLottoInManual(manualLottos: List<List<Int>>): List<Lotto> {
         return manualLottos.map { numbers ->
             Lotto.of(numbers)
         }
