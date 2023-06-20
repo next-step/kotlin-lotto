@@ -13,7 +13,7 @@ class InputView {
     fun inputLastWeekWinningLotto(): WinningLotto {
         println("\n지난 주 당첨 번호를 입력해 주세요.")
         val numbers = readln().split(NUMBERS_DELIMITER).map { it.toInt() }
-        val lottoNumbers = LottoNumber.createList(numbers)
+        val lottoNumbers = numbers.map { LottoNumber.create(it) }
         val bonusNumber = inputBonusNumber()
         return WinningLotto(Lotto(lottoNumbers), bonusNumber)
     }

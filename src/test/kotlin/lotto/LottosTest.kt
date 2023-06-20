@@ -12,22 +12,22 @@ class LottosTest {
     @Test
     fun `로또 결과 통계를 만들 수 있다`() {
         val budget = 5000
-        val lottoNumbers1 = LottoNumber.createList(listOf(1, 2, 3, 4, 5, 6))
+        val lottoNumbers1 = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber.create(it) }
         val myLotto1 = Lotto(lottoNumbers1)
 
-        val lottoNumbers2 = LottoNumber.createList(listOf(3, 4, 5, 6, 7, 8))
+        val lottoNumbers2 = listOf(3, 4, 5, 6, 7, 8).map { LottoNumber.create(it) }
         val myLotto2 = Lotto(lottoNumbers2)
 
-        val lottoNumbers3 = LottoNumber.createList(listOf(4, 5, 6, 7, 8, 9))
+        val lottoNumbers3 = listOf(4, 5, 6, 7, 8, 9).map { LottoNumber.create(it) }
         val myLotto3 = Lotto(lottoNumbers3)
 
-        val lottoNumbers4 = LottoNumber.createList(listOf(4, 5, 6, 7, 9, 10))
+        val lottoNumbers4 = listOf(4, 5, 6, 7, 9, 10).map { LottoNumber.create(it) }
         val myLotto4 = Lotto(lottoNumbers4)
 
-        val lottoNumbers5 = LottoNumber.createList(listOf(4, 6, 7, 8, 10, 11))
+        val lottoNumbers5 = listOf(4, 6, 7, 8, 10, 11).map { LottoNumber.create(it) }
         val myLotto5 = Lotto(lottoNumbers5)
 
-        val winningLottoNumbers = LottoNumber.createList(listOf(3, 4, 7, 9, 10, 11))
+        val winningLottoNumbers = listOf(3, 4, 7, 9, 10, 11).map { LottoNumber.create(it) }
         val winningLotto = WinningLotto(Lotto(winningLottoNumbers), LottoNumber.create(8))
 
         val lottos = Lottos(listOf(myLotto1, myLotto2, myLotto3, myLotto4, myLotto5))
