@@ -1,7 +1,5 @@
 package lotto
 
-import lotto.LottoNumber.Companion.LOTTO_NUMBER_POOL
-
 class LottoNumbers(numbers: List<LottoNumber>) {
     val numbers: Set<LottoNumber>
 
@@ -20,12 +18,6 @@ class LottoNumbers(numbers: List<LottoNumber>) {
 
         fun from(numbers: List<Int>): LottoNumbers {
             return LottoNumbers(numbers.map { LottoNumber.from(it) })
-        }
-
-        fun generateRandom(): LottoNumbers {
-            val randomNumbers = LOTTO_NUMBER_POOL.shuffled().take(SIZE)
-
-            return LottoNumbers(randomNumbers)
         }
     }
 }

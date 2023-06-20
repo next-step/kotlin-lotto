@@ -12,8 +12,14 @@ class LottoGame(val lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNum
             return purchaseAmount / GAME_COST
         }
 
+        fun generateRandomNumbers(): LottoNumbers {
+            val randomNumbers = LottoNumber.LOTTO_NUMBER_POOL.shuffled().take(LottoNumbers.SIZE)
+
+            return LottoNumbers(randomNumbers)
+        }
+
         fun from(count: Int, winningNumbers: WinningNumbers): LottoGame {
-            val lottoNumbers = List(count) { LottoNumbers.generateRandom() }
+            val lottoNumbers = List(count) { generateRandomNumbers() }
 
             return LottoGame(lottoNumbers, winningNumbers)
         }
