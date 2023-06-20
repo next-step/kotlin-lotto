@@ -105,7 +105,7 @@
 - git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
 
 ## 기능 분석 
-- [ ] 2등을 위한 보너스 볼 입력 - LottoGame, WinningLotto
+- [x] 2등을 위한 보너스 볼 입력 - LottoGame, WinningLotto
 - [ ] 2등 추가 - LottoResult
 - [ ] 당첨 통계 추가 - LottoResultSummary
 - [ ] UI, view 추가

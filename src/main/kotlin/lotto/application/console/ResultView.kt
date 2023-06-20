@@ -21,7 +21,7 @@ object ResultView {
     }
 
     private fun printLotto(lotto: Lotto) {
-        println(lotto.numbers.joinToString(", ", "[", "]"))
+        println(lotto.joinToString(", ", "[", "]"))
     }
 
     private fun printLottoResult(lottoResult: Pair<LottoResult, Int>) {

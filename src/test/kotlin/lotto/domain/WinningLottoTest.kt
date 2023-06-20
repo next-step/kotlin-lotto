@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
@@ -22,9 +23,32 @@ class WinningLottoTest : FreeSpec({
             listOf(1, 41, 42, 43, 44, 45) to LOSE,
             listOf(40, 41, 42, 43, 44, 45) to LOSE,
         ) { (lottoNumber, grade) ->
-            val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6).toLottoNumbers()))
+            val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6).toLottoNumbers()), LottoNumber.of(7))
             val lotto = Lotto(lottoNumber.toLottoNumbers())
             winningLotto.match(lotto) shouldBe grade
         }
     }
-})
+
+    "당첨 번호와 보너스는 중복될 수 없다." - {
+        withData(
+            WinningLottoTestData(listOf(1, 2, 3, 4, 5, 6), 1),
+            WinningLottoTestData(listOf(1, 2, 3, 4, 5, 6), 2),
+            WinningLottoTestData(listOf(6, 8, 3, 23, 45, 32), 32),
+            WinningLottoTestData(listOf(6, 8, 3, 23, 45, 32), 45)
+        ) { (winningNumbers, bonusNumber) ->
+
+            shouldThrow<IllegalArgumentException> {
+                WinningLotto(winningNumbers, bonusNumber)
+            }
+        }
+    }
+}) {
+    companion object {
+        data class WinningLottoTestData(
+            val winningNumber: Lotto,
+            val bonusNumber: LottoNumber
+        ) {
+            constructor(numbers: List<Int>, bonus: Int) : this(Lotto(numbers.toLottoNumbers()), LottoNumber.of(bonus))
+        }
+    }
+}
