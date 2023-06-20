@@ -3,26 +3,18 @@ package calculator
 class StringAddCalculator(
     private val stringSeparator: Separator = StringSeparator()
 ) {
-    private var nums = listOf<Int>()
-        private set(value) {
-            validateNumbers(value)
-            field = value
-        }
-
     fun add(expression: String?): Int {
         if (expression.isNullOrBlank()) {
             return 0
         }
-        nums = parseNumbers(expression)
-        return nums.sum()
+        return getNumbers(expression).sum()
     }
 
-    private fun parseNumbers(expression: String): List<Int> {
+    private fun getNumbers(expression: String): Numbers {
         if (isInteger(expression)) {
-            return listOf(expression.toInt())
+            return Numbers(listOf(expression.toInt()))
         }
-
-        return stringSeparator.separate(expression)
+        return Numbers(stringSeparator.separate(expression))
     }
 
     private fun validateNumbers(numbers: List<Int>) {

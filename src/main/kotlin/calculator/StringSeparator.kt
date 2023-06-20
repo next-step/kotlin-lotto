@@ -2,12 +2,12 @@ package calculator
 
 class StringSeparator : Separator {
     override fun separate(expression: String): List<Int> {
-        REGEX.find(expression)?.let {
+        return REGEX.find(expression)?.let {
             val customDelimiter = it.groupValues[1]
-            return getExpressionAfterFinalDelimiter(expression)
+            getExpressionAfterFinalDelimiter(expression)
                 ?.split(customDelimiter)
                 ?.map { token -> token.toInt() } ?: emptyList()
-        } ?: return expression.split(*DEFAULT_DELIMITERS.toTypedArray())
+        } ?: expression.split(*DEFAULT_DELIMITERS.toTypedArray())
             .map { token -> token.toInt() }
     }
 
