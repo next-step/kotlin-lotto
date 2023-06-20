@@ -14,7 +14,6 @@ internal class BankTest {
         score[Rank.FOURTH] shouldBe 0
         score[Rank.THIRD] shouldBe 0
         score[Rank.FIRST] shouldBe 0
-        score.keys.size shouldBe 4
     }
 
     @Test

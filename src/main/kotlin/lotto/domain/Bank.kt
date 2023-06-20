@@ -2,7 +2,7 @@ package lotto.domain
 
 object Bank {
     fun score(tickets: List<Lotto>, winningTicket: WinningTicket): Map<Rank, Int> {
-        val scores = tickets.mapNotNull { Rank.getValue(winningTicket.score(it)) }
+        val scores = tickets.map { Rank.getValue(winningTicket.score(it)) }
         return Rank.values().associateWith { rank -> scores.count { it == rank } }
     }
 

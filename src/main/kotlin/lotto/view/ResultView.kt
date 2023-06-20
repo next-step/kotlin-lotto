@@ -22,6 +22,7 @@ object ResultView {
     fun printResult(score: Map<Rank, Int>, rate: Float) {
         println(RESULT_STRING)
         Rank.values()
+            .filter { it != Rank.NONE }
             .sortedBy { it.count }
             .forEach {
                 println("${it.count}개 일치 (${it.reward}원) - ${score[it]}개")
