@@ -6,18 +6,15 @@ import lotto.domain.RandomLottoFactory
 
 fun main() {
 
-    val inputView = InputView()
-    val resultView = ResultView()
-
-    val cost = inputView.inputCost()
+    val cost = InputView.inputCost()
     val lottoMachine = LottoMachine(RandomLottoFactory())
     val lottos = lottoMachine.buyAuto(cost)
 
-    resultView.printLottos(lottos)
+    ResultView.printLottos(lottos)
 
-    val winningNumbers = inputView.inputWinningNumbers()
+    val winningNumbers = InputView.inputWinningNumbers()
     val lottoGame = LottoGame(winningNumbers)
 
     val summary = lottoGame.match(lottos)
-    resultView.printSummary(summary)
+    ResultView.printSummary(summary)
 }

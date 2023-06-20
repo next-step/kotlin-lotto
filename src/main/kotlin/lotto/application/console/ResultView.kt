@@ -4,7 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.LottoResultSummary
 
-class ResultView {
+object ResultView {
 
     fun printLottos(lottos: List<Lotto>) {
         println("${lottos.size}개를 구매했습니다.")
@@ -26,6 +26,6 @@ class ResultView {
 
     private fun printLottoResult(lottoResult: Pair<LottoResult, Int>) {
         val (result, count) = lottoResult
-        println("${result.matchCount}개 일치 (${result.price}원)- ${count}개")
+        println("${result.matchCount}개 일치 (${result.winnginAmount}원)- ${count}개")
     }
 }
