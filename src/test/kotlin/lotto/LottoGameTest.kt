@@ -17,8 +17,19 @@ class LottoGameTest {
     @ParameterizedTest
     @MethodSource("listProvider")
     fun `로또 게임은 로또 번호들과 당첨 번호를 받아 결과를 생성한다`(texts: List<String>) {
-        val winningNumbers = WinningNumbers(LottoNumbers.from("1,2,3,4,5,6"))
-        val lottoNumbers = texts.map { LottoNumbers.from(it) }
+        val winningNumbers = WinningNumbers(LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6)))
+
+        val numbers = listOf(
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(1, 2, 3, 4, 5, 7),
+            listOf(1, 2, 3, 4, 7, 8),
+            listOf(1, 2, 3, 7, 8, 9),
+            listOf(1, 2, 7, 8, 9, 10),
+            listOf(1, 7, 8, 9, 10, 11),
+            listOf(7, 8, 9, 10, 11, 12),
+        )
+
+        val lottoNumbers = numbers.map { LottoNumbers.from(it) }
         val lottoGame = LottoGame(lottoNumbers, winningNumbers)
         val result = lottoGame.result
 

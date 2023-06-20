@@ -18,15 +18,6 @@ class LottoNumbers(numbers: List<LottoNumber>) {
         const val LOTTO_NUMBERS_INVALID_SIZE_MESSAGE = "로또 번호는 6개의 숫자로 이루어져야 합니다. size:%d"
         const val LOTTO_NUMBERS_DUPLICATE_MESSAGE = "로또 번호는 중복된 숫자가 존재할 수 없습니다. numbers:%s"
 
-        fun from(text: String): LottoNumbers {
-            val numbers = text
-                .split(",")
-                .map { it.trim() }
-                .map { it.toInt() }
-
-            return from(numbers)
-        }
-
         fun from(numbers: List<Int>): LottoNumbers {
             return LottoNumbers(numbers.map { LottoNumber.from(it) })
         }

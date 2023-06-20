@@ -24,15 +24,20 @@ object InputView {
 
         do {
             val input = receiveString()
+            val numbers = input.splitToIntList()
 
-            lottoNumbers = try {
-                LottoNumbers.from(input)
-            } catch (e: Exception) {
-                null
-            }
+            lottoNumbers = runCatching {
+                LottoNumbers.from(numbers)
+            }.getOrNull()
         } while (lottoNumbers == null)
 
         return WinningNumbers(lottoNumbers)
+    }
+
+    fun String.splitToIntList(): List<Int> {
+        return this.split(",")
+            .map { it.trim() }
+            .map { it.toInt() }
     }
 
     private fun receiveString(): String {
