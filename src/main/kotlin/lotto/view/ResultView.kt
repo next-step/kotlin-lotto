@@ -16,7 +16,7 @@ object ResultView {
         println("당첨 통계\n-----------")
         Rank.values().forEach {
             val count = result[it] ?: 0
-            val bonus = if(it == Rank.SECOND) ", 보너스 볼" else ""
+            val bonus = if (it == Rank.SECOND) ", 보너스 볼" else ""
             println("${it.count}개 일치 $bonus (${it.reward}원) - $count 개")
         }
     }
