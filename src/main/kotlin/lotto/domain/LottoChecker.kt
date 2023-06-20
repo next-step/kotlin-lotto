@@ -1,19 +1,12 @@
 package lotto.domain
 
 object LottoChecker {
-    fun checkResult(lottos: Lottos, winNumbers: WinNumbers): LottoResults {
-        val resultMap = mutableMapOf<WinningPrize, Int>()
-        lottos.forEach { lotto ->
-            resultMap.addResult(lotto, winNumbers)
-        }
-        return LottoResults.of(resultMap, lottos.size * Lotto.LOTTO_PRICE)
-    }
-
-    private fun MutableMap<WinningPrize, Int>.addResult(lotto: Lotto, winNumbers: WinNumbers) {
-        val count = winNumbers.getMatchCount(lotto)
-        if (count >= Lotto.LOTTO_WINNING_MIN_COUNT) {
-            val winningAmount = WinningPrize.of(count, winNumbers.isBonusMatch(lotto))
-            this[winningAmount] = this.getOrDefault(winningAmount, 0) + 1
-        }
+    fun checkResult(lottos: Lottos, winNumbers: WinNumbers): WinLottoResults {
+        val resultMap = lottos.groupBy { lotto ->
+            val count = winNumbers.getMatchCount(lotto)
+            val isBonusMatch = winNumbers.isBonusMatch(lotto)
+            WinningPrize.of(count, isBonusMatch)
+        }.mapValues { it.value.count() }
+        return WinLottoResults.of(resultMap, lottos.size * Lotto.LOTTO_PRICE)
     }
 }

@@ -5,11 +5,12 @@ enum class WinningPrize(val count: Int, val bonusMatch: Boolean, val prize: Int)
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000);
+    FIFTH(3, false, 5_000),
+    NONE(0, false, 0);
 
     companion object {
         fun of(count: Int, bonusMatch: Boolean): WinningPrize {
-            return values().first { it.count == count && (!it.bonusMatch || bonusMatch) }
+            return values().firstOrNull { it.count == count && (!it.bonusMatch || bonusMatch) } ?: NONE
         }
     }
 }
