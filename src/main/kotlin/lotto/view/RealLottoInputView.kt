@@ -3,8 +3,8 @@ package lotto.view
 import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
-import lotto.domain.shop.SelfSettingLottoGame
 import lotto.domain.shop.LottoPurchasePaper
+import lotto.domain.shop.SelfSettingLottoGame
 import math.PositiveNumber
 
 class RealLottoInputView : LottoInputView {

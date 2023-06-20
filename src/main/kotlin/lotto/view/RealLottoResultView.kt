@@ -9,7 +9,7 @@ import lotto.domain.shop.LottoPurchaseResult
 class RealLottoResultView : LottoResultView {
 
     override fun display(lottoPurchaseResult: LottoPurchaseResult) {
-        println("${lottoPurchaseResult.lottoGames.size}개를 구매했습니다.")
+        println(lottoPurchaseResult.makePurchaseSizeDisplayText())
         lottoPurchaseResult.lottoGames
             .map { lottoGame -> lottoGame.lottoNumbers.value }
             .forEach { lottoNumbers -> println("[${lottoNumbers.unWrapping().joinToString(", ")}]") }
@@ -28,6 +28,15 @@ class RealLottoResultView : LottoResultView {
 
     private fun display(lottoWinRankAnalysisResult: LottoWinRankAnalysisResult) {
         println(lottoWinRankAnalysisResult.makeDisplayText())
+    }
+
+    private fun LottoPurchaseResult.makePurchaseSizeDisplayText(): String {
+        return buildString {
+            if (selfSettingCount.value > 0) {
+                append("수동으로 ${selfSettingCount.value}장, ")
+            }
+            append("자동으로 ${autoSettingCount.value}개를 구매했습니다.")
+        }
     }
 
     private fun LottoWinRankAnalysisResult.makeDisplayText(): String {
