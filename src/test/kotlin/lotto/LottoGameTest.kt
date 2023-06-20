@@ -9,7 +9,8 @@ import java.util.stream.Stream
 class LottoGameTest {
     @Test
     fun `count를 입력 받은만큼 랜덤 번호를 생성한다`() {
-        val lottoGame = LottoGame.from(10, WinningNumbers(LottoGame.generateRandomNumbers()))
+        val winningNumbers = WinningNumbers(LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6)))
+        val lottoGame = LottoGame.from(10, winningNumbers)
 
         lottoGame.lottoNumbers.size shouldBe 10
     }
@@ -32,10 +33,10 @@ class LottoGameTest {
         val lottoGame = LottoGame(lottoNumbers, winningNumbers)
         val result = lottoGame.result
 
-        result[Rank.FIRST] shouldBe 1
-        result[Rank.SECOND] shouldBe 1
-        result[Rank.THIRD] shouldBe 1
-        result[Rank.FIRST] shouldBe 1
-        result[Rank.LOSE] shouldBe 3
+        result.countByRank(Rank.FIRST) shouldBe 1
+        result.countByRank(Rank.SECOND) shouldBe 1
+        result.countByRank(Rank.THIRD) shouldBe 1
+        result.countByRank(Rank.FIRST) shouldBe 1
+        result.countByRank(Rank.LOSE) shouldBe 3
     }
 }

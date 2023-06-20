@@ -1,9 +1,10 @@
 package lotto
 
 class LottoGame(val lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers) {
-    val result: Map<Rank, Int> = winningNumbers.calculateRank(lottoNumbers)
+    val result: LottoResult = LottoResult(winningNumbers.calculateRank(lottoNumbers)
         .groupBy { it }
-        .mapValues { it.value.size }
+        .mapValues { it.value.size })
+
 
     companion object {
         private const val GAME_COST = 1000

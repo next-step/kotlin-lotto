@@ -20,7 +20,7 @@ object ResultView {
 
         Rank.values()
             .sortedBy { it.matchedCount }
-            .forEach { printLottoResult(it, statistics.result[it] ?: 0) }
+            .forEach { printLottoResult(it, statistics.countByRank(it)) }
 
         println("총 수익률은 ${statistics.roi}입니다.")
     }
