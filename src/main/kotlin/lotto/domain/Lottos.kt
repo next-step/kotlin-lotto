@@ -1,5 +1,6 @@
 package lotto.domain
 
-data class Lottos(
+@JvmInline
+value class Lottos(
     val lottos: List<Lotto>
 )
