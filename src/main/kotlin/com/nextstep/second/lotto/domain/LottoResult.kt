@@ -20,20 +20,12 @@ class LottoResult private constructor(
         ): LottoResult {
             val matchedNumberCounts = mutableMapOf<LottoReward, Int>()
             lottos.map { lotto ->
-                val cnt = compareLottoResult(winnerLotto, lotto)
-                val matchedBonus = checkBonusNumber(winnerLotto, lotto)
+                val cnt = winnerLotto.countSameNumbers(lotto)
+                val matchedBonus = winnerLotto.checkBonusNumber(lotto)
                 val lottoReward = LottoReward.valueOf(cnt, matchedBonus)
                 matchedNumberCounts.put(lottoReward, matchedNumberCounts.getOrDefault(lottoReward, 0) + 1)
             }
             return LottoResult(matchedNumberCounts)
-        }
-
-        private fun compareLottoResult(a: WinnerLotto, b: Lotto): Int {
-            return a.lotto.numbers.intersect(b.numbers.toSet()).size
-        }
-
-        private fun checkBonusNumber(winnerLotto: WinnerLotto, lotto: Lotto): Boolean {
-            return lotto.contains(winnerLotto.bonusNumber)
         }
     }
 }
