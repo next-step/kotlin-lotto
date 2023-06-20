@@ -24,7 +24,7 @@ object ConsoleView : InputView, OutputView {
                 it.toIntOrNull()
                     ?: throw IllegalArgumentException("당첨 번호는 숫자여야 합니다.")
             }
-            .map(::LottoNumber)
+            .map(LottoNumber::from)
     }
 
     override fun showPurchased(lottos: Lottos) {

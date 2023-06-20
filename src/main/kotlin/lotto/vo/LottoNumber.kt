@@ -1,12 +1,9 @@
 package lotto.vo
 
 @JvmInline
-value class LottoNumber(
-    val value: Int,
+value class LottoNumber private constructor(
+    private val value: Int,
 ) : Comparable<LottoNumber> {
-    init {
-        require(value in 1..45) { "로또 번호는 1~45 사이의 숫자여야 합니다." }
-    }
 
     override fun compareTo(other: LottoNumber): Int {
         return value - other.value
@@ -14,5 +11,13 @@ value class LottoNumber(
 
     override fun toString(): String {
         return value.toString()
+    }
+
+    companion object {
+        private val LOTTO_NUMBERS = (1..45).associateBy({ it }, ::LottoNumber)
+
+        fun from(number: Int): LottoNumber {
+            return LOTTO_NUMBERS[number] ?: throw IllegalArgumentException("로또 번호는 1~45 사이의 숫자여야 합니다.")
+        }
     }
 }
