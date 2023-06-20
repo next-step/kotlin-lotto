@@ -2,14 +2,13 @@ package lotto
 
 import lotto.domain.LottoTicket
 import lotto.domain.LottoTickets
-import lotto.util.RandomNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
 
 fun main(args: Array<String>) {
     // 구매 금액 입력
     val money = InputView.inputMoney()
-    val lottoTickets = LottoTickets(money, RandomNumbers)
+    val lottoTickets = LottoTickets(money)
 
     // 구매 티켓 출력
     OutputView.printPurchase(lottoTickets)
