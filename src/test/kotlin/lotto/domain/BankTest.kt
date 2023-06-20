@@ -22,7 +22,7 @@ internal class BankTest {
         val testLotto = listOf(Lotto(TestNumGenerator()))
         val score = Bank.score(testLotto, winningTicket)
 
-        Bank.calculateRateOfReturn(10000,score) shouldBe 0.5
+        Bank.calculateRateOfReturn(10000, score) shouldBe 0.5
     }
 
     @Test
@@ -31,6 +31,6 @@ internal class BankTest {
         val testLotto = listOf(Lotto(TestNumGenerator()))
         val score = Bank.score(testLotto, winningTicket)
 
-        Bank.calculateRateOfReturn(10000,score) shouldBe 5
+        Bank.calculateRateOfReturn(10000, score) shouldBe 5
     }
 }
