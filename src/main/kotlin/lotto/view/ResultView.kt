@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.model.Lotto
-import lotto.model.LottoPrize
+import lotto.model.Rank
 import lotto.model.toDecimalPoint
 
 object ResultView {
@@ -12,11 +12,12 @@ object ResultView {
         }
     }
 
-    fun showWinningList(result: Map<LottoPrize, Int>) {
+    fun showWinningList(result: Map<Rank, Int>) {
         println("당첨 통계\n-----------")
-        LottoPrize.values().forEach {
+        Rank.values().forEach {
             val count = result[it] ?: 0
-            println("${it.count}개 일치 (${it.prize}원) - $count 개")
+            val bonus = if(it == Rank.SECOND) ", 보너스 볼" else ""
+            println("${it.count}개 일치 $bonus (${it.reward}원) - $count 개")
         }
     }
 

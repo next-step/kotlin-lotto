@@ -1,12 +1,13 @@
 package lotto.model
 
-class LottoWinning(numbers: List<Int>) {
+class LottoWinning(numbers: List<Int>, bonus: Int) {
 
     private val winningNumbers = Lotto.createWinning(numbers)
+    private val bonusNumber = LottoNumber(bonus)
 
-    fun lottoResult(lottoList: List<Lotto>): Map<LottoPrize, Int> = lottoList.map {
-        winningNumbers.matchingCount(it)
+    fun lottoResult(lottoList: List<Lotto>): Map<Rank, Int> = lottoList.map {
+        it.matchingCount(winningNumbers) to it.isBonus(bonusNumber)
     }.mapNotNull {
-        LottoPrize.of(it)
+        Rank.of(it.first, it.second)
     }.groupingBy { it }.eachCount()
 }

@@ -4,8 +4,8 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 
 object LottoStatistics {
-    fun totalStatistics(result: Map<LottoPrize, Int>, amount: Int): Double = result.toList().sumOf {
-        it.first.prize * it.second
+    fun totalStatistics(result: Map<Rank, Int>, amount: Int): Double = result.toList().sumOf {
+        it.first.reward * it.second
     }.toDouble() / amount
 }
 
