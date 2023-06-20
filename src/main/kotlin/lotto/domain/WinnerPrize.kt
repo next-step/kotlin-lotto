@@ -9,11 +9,12 @@ enum class WinnerPrize(val matchCount: Int, val prizeMoney: Money) {
     NOTHING(0, Money(0));
 
     companion object {
-        fun getWinnerPrize(matchCount: Int, matchBonus: Boolean): WinnerPrize = when (matchCount) {
-            6 -> FIRST_PRIZE
-            5 -> if (matchBonus) SECOND_PRIZE else THIRD_PRIZE
-            4 -> FOURTH_PRIZE
-            3 -> FIFTH_PRIZE
+        fun getWinnerPrize(matchCount: Int, matchBonus: Boolean): WinnerPrize = when {
+            FIRST_PRIZE.matchCount == matchCount -> FIRST_PRIZE
+            SECOND_PRIZE.matchCount == matchCount && matchBonus -> SECOND_PRIZE
+            THIRD_PRIZE.matchCount == matchCount -> THIRD_PRIZE
+            FOURTH_PRIZE.matchCount == matchCount -> FOURTH_PRIZE
+            FIFTH_PRIZE.matchCount == matchCount -> FIFTH_PRIZE
             else -> NOTHING
         }
     }

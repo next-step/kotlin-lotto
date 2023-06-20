@@ -1,15 +1,27 @@
 package lotto
 
+import lotto.domain.Money
 import lotto.domain.ProfitAnalyzer
 import lotto.domain.lottery.LotteryMachine
 import lotto.domain.lottery.WinnerLottery
+import lotto.domain.result.LotteryPurchaseResults
 import lotto.ui.InputView
 import lotto.ui.OutputView
 
 object LottoController {
     fun start() {
         val purchaseAmount = InputView.getPurchaseAmount()
-        val lotteryTicket = LotteryMachine.issueLotteryTicket(purchaseAmount)
+        val lotteryPurchaseResults = buyTicket(purchaseAmount)
+        printResult(lotteryPurchaseResults, purchaseAmount)
+    }
+
+    private fun printResult(
+        lotteryPurchaseResults: LotteryPurchaseResults,
+        purchaseAmount: Money
+    ) {
+        OutputView.showLotteryTicketInfo(lotteryPurchaseResults)
+
+        val lotteryTicket = lotteryPurchaseResults.getLotteryTicket()
 
         if (lotteryTicket.isEmpty()) return
 
@@ -23,6 +35,16 @@ object LottoController {
 
         OutputView.showStatics(statics)
         OutputView.showProfitRate(profitRate)
+    }
+
+    private fun buyTicket(purchaseAmount: Money): LotteryPurchaseResults {
+        val manualTicketCount = InputView.getManualTicketCount()
+        val manualLotteries = InputView.getManualNumbers(manualTicketCount)
+        val manualPurchaseResult = LotteryMachine.issueManualLotteryTicket(purchaseAmount, manualLotteries)
+
+        val remainMoney = manualPurchaseResult.change
+        val autoPurchaseResult = LotteryMachine.issueAutoLotteryTicket(remainMoney)
+        return LotteryPurchaseResults(listOf(manualPurchaseResult, autoPurchaseResult))
     }
 }
 

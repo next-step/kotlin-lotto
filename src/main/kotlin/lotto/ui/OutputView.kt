@@ -3,9 +3,14 @@ package lotto.ui
 import lotto.domain.PrizeStatics
 import lotto.domain.WinnerPrize
 import lotto.domain.lottery.LotteryTicket
+import lotto.domain.result.LotteryPurchaseResults
+import lotto.domain.result.PurchaseType
 import java.math.BigDecimal
 
 object OutputView {
+    private const val MANUAL = "수동"
+    private const val AUTO = "자동"
+
     fun showLotteryTicket(lotteryTicket: LotteryTicket) {
         println("${lotteryTicket.getNumbersCount()}개를 구매했습니다.")
 
@@ -28,5 +33,12 @@ object OutputView {
 
     fun showProfitRate(profitRate: BigDecimal) {
         println("총 수익률은 ${profitRate}입니다.")
+    }
+
+    fun showLotteryTicketInfo(lotteryPurchaseResults: LotteryPurchaseResults) {
+        val seperatedByPurchaseType = lotteryPurchaseResults.seperatedByPurchaseType()
+        val manualLotteryCount = seperatedByPurchaseType[PurchaseType.MANUAL]?.lotteryTicket?.getNumbersCount() ?: 0
+        val autoLotteryCount = seperatedByPurchaseType[PurchaseType.AUTO]?.lotteryTicket?.getNumbersCount() ?: 0
+        println("${MANUAL}으로 ${manualLotteryCount}장, ${AUTO}으로 ${autoLotteryCount}개를 구매했습니다.")
     }
 }

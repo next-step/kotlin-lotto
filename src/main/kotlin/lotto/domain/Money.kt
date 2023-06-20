@@ -14,6 +14,8 @@ data class Money(val value: Long) {
         return (BigDecimal(this.value).divide(BigDecimal(other.value), MINIMUM_SCALE, RoundingMode.HALF_UP))
     }
 
+    operator fun compareTo(other: Money): Int = compareValues(this.value, other.value)
+
     companion object {
         private const val MINIMUM_SCALE = 2
     }
