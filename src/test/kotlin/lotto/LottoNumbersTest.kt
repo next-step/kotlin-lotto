@@ -19,7 +19,7 @@ class LottoNumbersTest {
     @Test
     fun `Int List로 LottoNumbers를 생성할 수 있다`() {
         val lottoNumbers = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
-        lottoNumbers.numbers shouldBe List(LottoNumbers.SIZE) { LottoNumber.from(it + 1) }
+        lottoNumbers.numbers.map { it.number } shouldBe listOf(1, 2, 3, 4, 5, 6)
     }
 
     @ParameterizedTest
@@ -31,6 +31,6 @@ class LottoNumbersTest {
     @Test
     fun `생성된 LottoNumbers의 숫자는 오름차순으로 정렬된다`() {
         val lottoNumbers = LottoNumbers.from(listOf(1, 6, 3, 2, 5, 4))
-        lottoNumbers.numbers shouldBe lottoNumbers.numbers.sortedBy { it.number }
+        lottoNumbers.numbers.map { it.number } shouldBe listOf(1, 2, 3, 4, 5, 6)
     }
 }
