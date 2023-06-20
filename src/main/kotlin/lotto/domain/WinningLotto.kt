@@ -10,6 +10,7 @@ class WinningLotto(private val winning: Lotto, private val bonus: LottoNumber) {
 
     fun match(lotto: Lotto): LottoResult {
         val matchCount = winning.matchCount(lotto)
-        return LottoResult.lottoResult(matchCount)
+        val matchBonus = lotto.contains(bonus)
+        return LottoResult.lottoResult(matchCount, matchBonus)
     }
 }
