@@ -17,12 +17,6 @@ class StringAddCalculator(
         return Numbers(stringSeparator.separate(expression))
     }
 
-    private fun validateNumbers(numbers: List<Int>) {
-        if (numbers.any { it < 0 }) {
-            throw IllegalArgumentException("음수가 존재합니다.")
-        }
-    }
-
     private fun isInteger(expression: String): Boolean {
         return runCatching {
             expression.toInt()
