@@ -1,28 +1,14 @@
 package domain
 
-import view.OutputView
+object Settlement {
 
-class Settlement(private val winningNums: Set<Int>) {
-
-    fun getReturnOnInvestment(
-        lotteries: List<Lottery>,
-        sunkCost: Int
+    fun calculateProfitRate(
+        prizeCountMap: Map<Prize, Int>,
+        investment: Int,
     ): Double {
-        val prizeCountMap = mutableMapOf<Int, Int>()
-
-        for (lottery in lotteries) {
-            val matchedCount = lottery.countMatchingLottery(winningNums)
-            if (matchedCount > 2) prizeCountMap[matchedCount] = (prizeCountMap[matchedCount] ?: 0) + 1
+        val totalPrizeMoney = prizeCountMap.entries.sumOf { (prize, count) ->
+            count * prize.prizeMoney
         }
-
-        return calculateProfit(prizeCountMap).toDouble() / sunkCost
-    }
-
-    fun calculateProfit(prizeCountMap: Map<Int, Int>): Int {
-        return Prize.values().sumOf {
-            val count = prizeCountMap[it.matches] ?: 0
-            OutputView.reportPrize(it.prizeMessage, count)
-            count * it.prizeMoney
-        }
+        return totalPrizeMoney.toDouble() / investment
     }
 }

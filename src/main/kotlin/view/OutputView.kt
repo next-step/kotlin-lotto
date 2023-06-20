@@ -5,12 +5,12 @@ import domain.Lottery
 object OutputView {
 
     fun reportPrizeState(lottery: Lottery) {
-        println(lottery.randomNumbers.toString())
+        println(lottery.lotteryNumbers.toString())
     }
 
     fun reportPrize(
         prizeMessage: String,
-        count: Int
+        count: Int,
     ) {
         println("$prizeMessage- ${count}개")
     }
@@ -25,7 +25,7 @@ object OutputView {
         println("총 수익률은 ${formattedROI}입니다.$message")
     }
 
-    fun reportPurchaseHistory(lottoSize: Int) {
-        println("${lottoSize}개를 구매했습니다.")
+    fun reportPurchaseCount(purchasableSize: Int) {
+        println("${purchasableSize}개를 구매했습니다.")
     }
 }
