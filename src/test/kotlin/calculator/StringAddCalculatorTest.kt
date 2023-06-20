@@ -9,6 +9,7 @@ internal class StringAddCalculatorTest : BehaviorSpec({
 
     Given("StringAddCaluator에서") {
         val calculator = StringAddCalculator()
+
         When("빈 문자열 또는 null을 입력할 경우") {
             val operations = listOf(
                 "",
@@ -22,16 +23,16 @@ internal class StringAddCalculatorTest : BehaviorSpec({
             }
         }
 
-        When("숫자 한개만 전달된 경우") {
+        When("숫자 두개를 쉼표 구분자로 전달된 경우") {
             val operations = listOf(
-                "1",
-                "23",
-                "456"
+                "1,3" to 4,
+                "23,41" to 64,
+                "100,101" to 201
             )
             Then("해당 값을 반환한다.") {
                 operations.forAll { operation ->
-                    val actual = calculator.execute(operation)
-                    actual shouldBe operation.toInt()
+                    val actual = calculator.execute(operation.first)
+                    actual shouldBe operation.second
                 }
             }
         }
