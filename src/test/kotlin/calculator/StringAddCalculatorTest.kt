@@ -51,5 +51,18 @@ internal class StringAddCalculatorTest : BehaviorSpec({
                 }
             }
         }
+
+        When("음수가 전달된 경우") {
+            val inputs = listOf(
+                "1,2,-3",
+                "-1,2",
+                "//~\n1~3~-4"
+            )
+            Then("InvalidOperationTokenException 오류 발생") {
+                inputs.forAll { input ->
+                    shouldThrow<InvalidOperationTokenException> { calculator.execute(input) }
+                }
+            }
+        }
     }
 })
