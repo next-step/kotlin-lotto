@@ -24,15 +24,27 @@ object OutputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
     }
 
+    fun printBonusBall() {
+        println("보너스 볼을 입력해주세요.")
+    }
+
     fun printWinnerStatistics() {
         println("당첨 통계")
         println("---------")
     }
 
-    fun printNumberOfMatches(ranks: List<Rank>) {
-        for (rank in ranks) {
-            println("${rank.title} (${rank.amount})- ${rank.count}개")
+    fun printStatisticsAccordingToBonus(ranks: List<Rank>) {
+        for (rank in ranks.reversed()) {
+            printNumberOfMatches(rank)
         }
+    }
+
+    private fun printNumberOfMatches(rank: Rank) {
+        if (rank.isSecond()) {
+            println("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningMoney})- ${rank.count}개")
+            return
+        }
+        println("${rank.matchCount}개 일치 (${rank.winningMoney})- ${rank.count}개")
     }
 
     fun printProfitRate(profitRate: Double) {

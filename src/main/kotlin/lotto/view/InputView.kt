@@ -1,16 +1,18 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
-import java.lang.IllegalArgumentException
-import java.lang.NumberFormatException
+import kotlin.IllegalArgumentException
+import kotlin.NumberFormatException
 
 object InputView {
 
-    fun inputPayment(): Int {
+    fun inputPayment(): Int = inputNumber()
+
+    private fun inputNumber(): Int {
         return try {
             readln().toInt()
         } catch (e: NumberFormatException) {
-            throw IllegalArgumentException("숫자만 입력해주세요.")
+            throw IllegalArgumentException("숫자 1개만 입력해주세요.")
         }
     }
 
@@ -19,4 +21,6 @@ object InputView {
         val splitNumbers = inputNumbers.split(",")
         return splitNumbers.map { LottoNumber(it.trim().toInt()) }
     }
+
+    fun inputBonusBall(): Int = inputNumber()
 }
