@@ -26,4 +26,10 @@ class StringAddCalulatorTest {
     fun `숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다`(text: String?) {
         Assertions.assertThat(calculator.add(text)).isSameAs(text?.toInt())
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1,2:3"])
+    fun `숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다`(text: String?) {
+        Assertions.assertThat(calculator.add(text)).isSameAs(6)
+    }
 }
