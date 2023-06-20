@@ -1,6 +1,6 @@
 package lotto.domain
 
-open class Lotto(
+class Lotto(
     val lottoNumbers: List<LottoNumber>,
 ) {
     init {
