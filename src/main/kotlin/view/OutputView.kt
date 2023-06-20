@@ -25,7 +25,7 @@ object OutputView {
         println("총 수익률은 ${formattedROI}입니다.$message")
     }
 
-    fun reportPurchaseCount(purchasableSize: Int) {
-        println("${purchasableSize}개를 구매했습니다.")
+    fun reportPurchaseCount(manualSize: Int, purchasableSize: Int) {
+        println("\n수동으로 ${manualSize}장, 자동으로 ${purchasableSize}개를 구매했습니다.")
     }
 }
