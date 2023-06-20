@@ -19,4 +19,11 @@ object LottoStore {
 
     private fun canBuy(payment: Int): Boolean = payment >= LOTTO_PRICE
 
+    fun buy(payment: Int, lottos: Lottos): Int {
+        val remained = payment - lottos.size() * LOTTO_PRICE
+        require(remained >= 0) { "${payment}원으로는 로또를 ${lottos.size()}개 살 수 없습니다." }
+        return remained
+    }
+
+
 }

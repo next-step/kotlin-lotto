@@ -1,5 +1,6 @@
 package next.step.lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
@@ -18,11 +19,20 @@ class LottoStoreTest : DescribeSpec({
             }
         }
 
-        context("미리보기 요청하면") {
-            it("로또 생성 방식에 따라 결과 제공") {
-                Lotto.of(setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }.toSet()) shouldBe Lotto.from(
-                    setOf(1, 2, 3, 4, 5, 6)
-                )
+        context("돈이 충분할 때, 수동으로 입력한 로또와 금액으로 구매하면") {
+            it("남은 금액을 제공") {
+                LottoStore.buy(1500, Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))) shouldBe 500
+            }
+        }
+
+        context("돈이 충분하지 않을 때, 수동으로 입력한 로또와 금액으로 구매하면") {
+            it("예외 발생") {
+                shouldThrow<IllegalArgumentException> {
+                    LottoStore.buy(
+                        500,
+                        Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))
+                    )
+                }
             }
         }
 
