@@ -1,18 +1,17 @@
 package com.nextstep.second.lotto.domain
 
-open class Lotto protected constructor(val numbers: List<LottoNumberVo>) {
+class Lotto private constructor(val numbers: List<LottoNumberVo>) {
 
     fun contains(num: LottoNumberVo): Boolean {
-        return numbers.any { it.isEquals(num) }
+        return numbers.any { it == num }
     }
 
     companion object {
         const val LOTTO_LENGTH = 6
-        const val PRICE = 1_000
 
         fun of(inputNumbers: List<Int>): Lotto {
             require(inputNumbers.toSet().size == LOTTO_LENGTH) { "로또는 서로다른 ${LOTTO_LENGTH}개의  숫자만큼 번호를 입력하셔야 합니다" }
-            val numbers = inputNumbers.map { LottoNumberVo(it) }
+            val numbers = inputNumbers.map { LottoNumberVo.of(it) }
             return Lotto(numbers)
         }
     }
