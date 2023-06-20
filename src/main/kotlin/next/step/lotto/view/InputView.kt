@@ -1,8 +1,8 @@
 package next.step.racing.view
 
 import next.step.lotto.domain.LottoNumber
-import next.step.lotto.domain.LottoNumberParser
 import next.step.lotto.domain.LottoWinningNumbers
+import next.step.lotto.view.LottoNumberParser
 
 object InputView {
 
