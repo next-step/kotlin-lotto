@@ -1,8 +1,5 @@
 package lotto.view
 
-import lotto.domain.LottoNumbers
-import lotto.domain.LottoWinningNumbers
-
 object InputView {
 
     private const val NUMBER_SEPARATOR = ","
@@ -12,37 +9,14 @@ object InputView {
         return readInt()
     }
 
-    tailrec fun getLottoWinningNumbers(): LottoWinningNumbers {
-        runCatching {
-            LottoWinningNumbers(
-                getLottoNumbersOfLastWeek(),
-                getBonusNumber()
-            )
-        }.onSuccess {
-            return it
-        }
-        println("다시 입력해 주세요.")
-        return getLottoWinningNumbers()
-    }
-
-    private fun getBonusNumber(): Int {
+    fun getBonusNumber(): Int {
         println("보너스 볼을 입력해주세요.")
         return readInt()
     }
 
-    private fun getLottoNumbersOfLastWeek(): LottoNumbers {
+    fun getLottoNumbersOfLastWeek(): Set<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        return getLottoNumbers()
-    }
-
-    private tailrec fun getLottoNumbers(): LottoNumbers {
-        runCatching {
-            LottoNumbers(getNumbers())
-        }.onSuccess {
-            return it
-        }
-        println("다시 입력해 주세요.")
-        return getLottoNumbers()
+        return getNumbers()
     }
 
     private fun getNumbers(): Set<Int> {

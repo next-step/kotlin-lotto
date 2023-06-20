@@ -26,4 +26,8 @@ object ResultView {
         println("6개 일치 (${Rank.FIRST.winningMoney}원)- ${lottoReturn.firstCount}개")
         println("총 수익률은 ${lottoReturn.returnRatio}입니다.")
     }
+
+    fun printError(throwable: Throwable) {
+        println(throwable.message)
+    }
 }
