@@ -8,11 +8,12 @@ enum class Rank(val matchedCount: Int, val reward: Long) {
     LOSE(0, 0);
 
     companion object {
-        private const val MIN_MATCHED_COUNT = 3
+        private const val MIN_MATCHED_COUNT = 0
+        private const val MIN_WINNING_MATCHED_COUNT = 3
         const val INVALID_MATCHED_COUNT_MESSAGE = "비정상적인 matchedCount입니다. %d"
 
         fun from(matchedCount: Int): Rank {
-            if (matchedCount < MIN_MATCHED_COUNT) {
+            if (matchedCount in MIN_MATCHED_COUNT until MIN_WINNING_MATCHED_COUNT) {
                 return LOSE
             }
 
