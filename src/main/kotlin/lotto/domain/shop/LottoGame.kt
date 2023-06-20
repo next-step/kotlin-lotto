@@ -4,9 +4,12 @@ import lotto.domain.analysis.LottoWinRank
 import lotto.domain.analysis.MatchCondition
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
+import math.PositiveNumber
 
-@JvmInline
-value class LottoGame(val lottoNumbers: LottoNumbers) {
+data class LottoGame(
+    val type: LottoGameType,
+    val lottoNumbers: LottoNumbers,
+) {
 
     fun matchOrNull(lastWeekLottoNumbers: WinLottoNumbers): LottoWinRank? {
         return LottoWinRank.findOrNull(
@@ -16,4 +19,8 @@ value class LottoGame(val lottoNumbers: LottoNumbers) {
             )
         )
     }
+}
+
+fun List<LottoGame>.count(type: LottoGameType): PositiveNumber {
+    return PositiveNumber(count { it.type == type })
 }

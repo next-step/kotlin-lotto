@@ -10,8 +10,23 @@ class LottoGameMachine(
     private val shuffler: Shuffler<LottoNumber>,
 ) {
 
-    fun create(): LottoGame {
+    fun create(option: LottoGameMachineOption): LottoGame {
+        return when (option) {
+            is LottoGameMachineOption.Self -> createSelfTypeLottoGame(option.lottoNumbers)
+            is LottoGameMachineOption.Auto -> createAutoTypeLottoGame()
+        }
+    }
+
+    private fun createSelfTypeLottoGame(lottoNumbers: LottoNumbers): LottoGame {
         return LottoGame(
+            type = LottoGameType.SELF,
+            lottoNumbers = lottoNumbers,
+        )
+    }
+
+    private fun createAutoTypeLottoGame(): LottoGame {
+        return LottoGame(
+            type = LottoGameType.AUTO,
             lottoNumbers = LottoNumbers(
                 shuffler.shuffled(lottoNumberProvider.getAllLottoNumbers())
                     .take(LOTTO_GAME_NUMBER_SIZE)
