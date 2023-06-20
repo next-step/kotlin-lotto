@@ -38,4 +38,10 @@ class StringAddCalulatorTest {
     fun `문자열 앞부분의 문자를 커스텀 구분자를 지정할 수 있다`(text: String?) {
         Assertions.assertThat(calculator.add(text)).isSameAs(6)
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["//;\n1;2,3:4"])
+    fun `커스텀 구분자를 가져도 기본 구분자와 병행해서 사용가능하다`(text: String?) {
+        Assertions.assertThat(calculator.add(text)).isSameAs(10)
+    }
 }
