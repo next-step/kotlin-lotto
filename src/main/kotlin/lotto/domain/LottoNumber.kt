@@ -11,6 +11,15 @@ value class LottoNumber private constructor(
 
     companion object {
         val LOTTO_NUMBERS: List<Int> = (1..45).toList()
+        private val NUMBERS: MutableMap<Int, LottoNumber> = mutableMapOf()
+
+        fun from(value: Int): LottoNumber {
+            if (!NUMBERS.contains(value)) {
+                NUMBERS[value] = LottoNumber(value)
+            }
+            return NUMBERS[value] ?: throw IllegalArgumentException()
+        }
+
         fun create(number: Int): LottoNumber = LottoNumber(number)
         fun createRandom(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size).map { LottoNumber(it) }
         fun createList(numbers: List<Int>): List<LottoNumber> = numbers.map { LottoNumber(it) }

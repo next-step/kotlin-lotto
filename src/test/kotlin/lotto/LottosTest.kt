@@ -30,8 +30,8 @@ class LottosTest {
         val winningLottoNumbers = LottoNumber.createList(listOf(3, 4, 7, 9, 10, 11))
         val winningLotto = WinningLotto(Lotto(winningLottoNumbers), LottoNumber.create(8))
 
-        val statistics =
-            Lottos(listOf(myLotto1, myLotto2, myLotto3, myLotto4, myLotto5)).calculateStatistics(winningLotto, budget)
+        val lottos = Lottos(listOf(myLotto1, myLotto2, myLotto3, myLotto4, myLotto5))
+        val statistics = winningLotto.calculateStatistics(lottos, budget)
 
         assertAll({
             assertThat(statistics.totalPrizeMoney).isEqualTo(50000)
