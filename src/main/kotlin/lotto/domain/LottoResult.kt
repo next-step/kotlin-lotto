@@ -1,6 +1,6 @@
 package lotto.domain
 
-enum class LottoResult(val price: Int, val matchCount: Int) {
+enum class LottoResult(val winningAmount: Int, val matchCount: Int) {
 
     FIRST_PLACE(2000000000, 6),
     SECOND_PLACE(1500000, 5),

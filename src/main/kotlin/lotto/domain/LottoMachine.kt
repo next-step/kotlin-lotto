@@ -4,7 +4,7 @@ class LottoMachine(private val lottoFactory: LottoFactory) {
 
     fun buyAuto(cost: Int): List<Lotto> {
         val count = cost / LOTTO_COST
-        return (1..count).map { lottoFactory.create() }
+        return List(count) { lottoFactory.create() }
     }
 
     companion object {

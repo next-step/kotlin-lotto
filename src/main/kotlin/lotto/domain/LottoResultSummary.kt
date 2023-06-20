@@ -18,7 +18,7 @@ class LottoResultSummary(private val results: List<LottoResult>) {
     fun rateOfReturn(): BigDecimal {
         val totalLottoCount = results.size
         val totalCost = totalLottoCount * LOTTO_COST
-        val totalPrice = results.sumOf { it.price }
+        val totalPrice = results.sumOf { it.winningAmount }
         return totalPrice.toBigDecimal().divide(totalCost.toBigDecimal(), 2, RoundingMode.HALF_UP)
     }
 }
