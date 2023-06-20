@@ -10,7 +10,7 @@ enum class LottoPrize(val matchingCount: Int, val prizeAmount: Long) {
     companion object {
         private const val PRIZING_CONT = 3
         fun getLottoPrize(matchingCount: Int): LottoPrize {
-            check(matchingCount >= PRIZING_CONT) { return NONE_PRIZE }
+            if(matchingCount >= PRIZING_CONT) { return NONE_PRIZE }
             return values().find { it.matchingCount == matchingCount }!!
         }
     }

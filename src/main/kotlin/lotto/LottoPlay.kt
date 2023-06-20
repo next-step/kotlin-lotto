@@ -3,26 +3,28 @@ package lotto
 import lotto.model.Lotto
 import lotto.service.LottoPlayResultAnalysis
 import lotto.service.LottoTicketCountCalculator
+import lotto.view.LottoPlayer
+import lotto.view.LottoVendor
+import lotto.view.LottoVendor.printLottoNumber
+import lotto.view.LottoVendor.saleLottoTicket
+import util.StringUtil.toIntList
 
+const val COMMA_SEPARATOR = ","
 
 fun main() {
-    println("구매 금액을 입력해주세요.")
-    val purchaseAmount = readLine()!!.toInt()
+    val purchaseAmount = saleLottoTicket()
     val ticketCount = LottoTicketCountCalculator.getCount(purchaseAmount)
-    println("$ticketCount 개를 구매했습니다.")
+    saleLottoTicket(ticketCount)
 
-    val winningLottos: MutableList<Lotto> = mutableListOf()
-    repeat(ticketCount) {
-        val winningLotto = Lotto()
-        winningLottos.add(winningLotto)
-        println(winningLotto.winningNumber.toString())
+    val purchasedLottos: MutableList<Lotto> = MutableList(ticketCount) {
+        Lotto()
     }
 
-    println("지난 주 당첨 번호를 입력해 주세요.")
-    val lastWeekWinningString = readLine()
-    val lastWeekWinningNumbers: List<Int> = lastWeekWinningString?.split(",")?.map { it.trim().toInt() } ?: emptyList()
+    printLottoNumber(purchasedLottos)
 
-    winningLottos.forEach { it.setLottoPrize(lastWeekWinningNumbers) }
-
-    LottoPlayResultAnalysis.printResult(winningLottos, purchaseAmount)
+    val lastWeekWinningString = LottoVendor.readLastWeekWinningString()
+    val lastWeekWinningNumbers: List<Int> = toIntList(lastWeekWinningString)
+    purchasedLottos.forEach { it.setLottoPrize(lastWeekWinningNumbers) }
+    val winningRatio = LottoPlayResultAnalysis.getWinningRatio(purchaseAmount, purchasedLottos)
+    LottoPlayer.printResult(purchasedLottos, winningRatio)
 }

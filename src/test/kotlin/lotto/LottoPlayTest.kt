@@ -20,15 +20,15 @@ class LottoPlayTest {
     @DisplayName(value = "로또는 당첨번호는 1부터 45까지 이뤄져있다")
     @Test
     fun checkLottoNumberRange() {
-        Assertions.assertThat(Lotto().winningNumber.all { it <= 45 })
-        Assertions.assertThat(Lotto().winningNumber.all { it >= 1 })
+        Assertions.assertThat(Lotto().purchasedLottoNumbers.all { it <= 45 })
+        Assertions.assertThat(Lotto().purchasedLottoNumbers.all { it >= 1 })
     }
 
     @DisplayName(value = "로또 번호 6개 끼리 중복이 없다")
     @Test
     fun testWinning() {
-        Assertions.assertThat(Lotto().winningNumber.toHashSet().size).isEqualTo(6)
-        Assertions.assertThat(Lotto().winningNumber.toHashSet().size).isEqualTo(6)
+        Assertions.assertThat(Lotto().purchasedLottoNumbers.toHashSet().size).isEqualTo(6)
+        Assertions.assertThat(Lotto().purchasedLottoNumbers.toHashSet().size).isEqualTo(6)
     }
 
     @DisplayName(value = "지난주 당첨 번호와 2개 이하 일치시 상금 0 원")
@@ -43,7 +43,7 @@ class LottoPlayTest {
     @ValueSource(strings = ["5000"])
     fun testFourthPrizeAmount(matchingCount: String) {
         val winningLottoNumber = Lotto()
-        val lastWeekWinningLottoNumber = winningLottoNumber.winningNumber.toMutableList()
+        val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toMutableList()
 
         Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber.subList(0,3)).prizeAmount)
             .isEqualTo(matchingCount.toLong())
@@ -54,7 +54,7 @@ class LottoPlayTest {
     @ValueSource(strings = ["50000"])
     fun testThirdPrizeAmount(matchingCount: String) {
         val winningLottoNumber = Lotto()
-        val lastWeekWinningLottoNumber = winningLottoNumber.winningNumber.toMutableList()
+        val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toMutableList()
 
         Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber.subList(0,4)).prizeAmount)
             .isEqualTo(matchingCount.toLong())
@@ -65,7 +65,7 @@ class LottoPlayTest {
     @ValueSource(strings = ["1500000"])
     fun testSecondPrizeAmount(matchingCount: String) {
         val winningLottoNumber = Lotto()
-        val lastWeekWinningLottoNumber = winningLottoNumber.winningNumber.toMutableList()
+        val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toMutableList()
 
         Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber.subList(0,5)).prizeAmount)
             .isEqualTo(matchingCount.toLong())
@@ -76,7 +76,7 @@ class LottoPlayTest {
     @ValueSource(strings = ["2000000000"])
     fun testFirstPrizeAmount(matchingCount: String) {
         val winningLottoNumber = Lotto()
-        val lastWeekWinningLottoNumber = winningLottoNumber.winningNumber.toList()
+        val lastWeekWinningLottoNumber = winningLottoNumber.purchasedLottoNumbers.toList()
         Assertions.assertThat(winningLottoNumber.setLottoPrize(lastWeekWinningLottoNumber).prizeAmount)
             .isEqualTo(matchingCount.toLong())
     }
