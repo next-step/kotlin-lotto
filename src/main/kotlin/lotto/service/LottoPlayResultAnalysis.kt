@@ -5,15 +5,15 @@ import lotto.model.Lotto
 object LottoPlayResultAnalysis {
 
     fun getWinningRatio(
-        purchaseAmount: Int, winningLottos: List<Lotto>
+        purchaseAmount: Int, purchasedLottos: List<Lotto>
     ): Double {
-        return getTotalWinningPrize(winningLottos) / purchaseAmount.toDouble()
+        return getTotalWinningPrize(purchasedLottos) / purchaseAmount.toDouble()
     }
 
-    private fun getTotalWinningPrize(winningLottos: List<Lotto>): Long =
-        winningLottos.sumOf { it.lottoPrize.prizeAmount }
+    private fun getTotalWinningPrize(purchasedLottos: List<Lotto>): Long =
+        purchasedLottos.sumOf { it.lottoPrize.prizeAmount }
 
-    fun staticPrize(winningLottos: List<Lotto>, prize: Long): Int =
-        winningLottos.count { it.lottoPrize.prizeAmount == prize }
+    fun staticPrize(purchasedLottos: List<Lotto>, prize: Long): Int =
+        purchasedLottos.count { it.lottoPrize.prizeAmount == prize }
 
 }
