@@ -1,10 +1,10 @@
 package lotto.view
 
-import lotto.vo.LottoNumber
 import lotto.vo.Money
+import lotto.vo.WinningNumbers
 
 interface InputView {
     fun receiveMoney(): Money
 
-    fun receiveWinningNumbers(): List<LottoNumber>
+    fun receiveWinningNumbers(): WinningNumbers
 }

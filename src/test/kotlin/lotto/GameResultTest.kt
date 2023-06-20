@@ -11,19 +11,19 @@ class GameResultTest : FreeSpec({
         forAll(
             row(
                 listOf(
-                    WinningPrize.MATCH_3 to 1,
-                    WinningPrize.MATCH_4 to 0,
-                    WinningPrize.MATCH_5 to 0,
-                    WinningPrize.MATCH_6 to 0,
+                    Prize.MATCH_3 to 1,
+                    Prize.MATCH_4 to 0,
+                    Prize.MATCH_5 to 0,
+                    Prize.MATCH_6 to 0,
                 ),
                 14000, 5000 / 14000.toDouble()
             ),
             row(
                 listOf(
-                    WinningPrize.MATCH_3 to 1,
-                    WinningPrize.MATCH_4 to 1,
-                    WinningPrize.MATCH_5 to 1,
-                    WinningPrize.MATCH_6 to 1,
+                    Prize.MATCH_3 to 1,
+                    Prize.MATCH_4 to 1,
+                    Prize.MATCH_5 to 1,
+                    Prize.MATCH_6 to 1,
                 ),
                 14000, (2001555000) / 14000.toDouble()
             )
