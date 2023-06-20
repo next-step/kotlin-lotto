@@ -11,10 +11,10 @@ class LottoAnalyzer(private val winLotto: Lotto, private val lottoPrice: Int = 1
             }
             .groupingBy { rank -> rank }
             .eachCount()
-            .toMutableMap()
+            .toMap()
 
         val totalBuyAmount = lottos.size * lottoPrice
-        val totalWinningMoney = ranks.keys.sumOf { rank -> rank.winningMoney * ranks[rank]!! }
+        val totalWinningMoney = ranks.toList().sumOf { elem -> elem.first.winningMoney * ranks[elem.first]!!}
         val rateOfReturn = if (totalWinningMoney == 0) 0.0 else totalWinningMoney / totalBuyAmount.toDouble()
 
         return LottoStatics(ranks, totalBuyAmount, totalWinningMoney, rateOfReturn)

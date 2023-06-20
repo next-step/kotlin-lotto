@@ -6,18 +6,20 @@ enum class LottoRank(val displayName: String, val countOfMatch: Int, val winning
     THIRD("3등", 5, 1_500_000),
     FOURTH("4등", 4, 50_000),
     FIFTH("5등", 3, 5_000),
-    MISS("낙첨", 0, 0);
+    MISS_WITH_TWO_MATCH("낙첨", 2, 0),
+    MISS_WITH_ONE_MATCH("낙첨", 1, 0),
+    MISS_WITH_ZERO_MATCH("낙첨", 0, 0);
 
     companion object {
-        fun valueOf(countOfMatch: Int): LottoRank {
+        fun valueOf(countOfMatch: Int): LottoRank? {
             return values().find {
                 it.countOfMatch == countOfMatch
-            } ?: MISS
+            } ?: null
         }
 
         fun getMinCountOfMatchForWin(): Int {
             return values()
-                .filter { it != MISS && it.countOfMatch > 0 }
+                .filter { it.winningMoney > 0 }
                 .minByOrNull { it.countOfMatch }
                 ?.countOfMatch ?: 0
         }

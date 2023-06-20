@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoStore(private val lottoPrice: Int = 1000) {
+class LottoStore(val lottoPrice: Int = 1000) {
     private val lottoMinNumber: Int = 1
     private val lottoMaxNumber: Int = 45
     private val lottoCountOfNumbers: Int = 6
@@ -11,7 +11,7 @@ class LottoStore(private val lottoPrice: Int = 1000) {
         if (availableBuyCount <= 0) {
             return emptyList()
         }
-        return List(availableBuyCount) { _ -> Lotto(lottoNumbers.shuffled().subList(0, lottoCountOfNumbers)) }
+        return List(availableBuyCount) { Lotto(lottoNumbers.shuffled().subList(0, lottoCountOfNumbers)) }
     }
 
     private fun getAvailableBuyCount(purchaseAmount: Int): Int {

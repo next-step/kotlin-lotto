@@ -12,7 +12,8 @@ fun main() {
     val inputView: InputView = ConsoleInputView()
     val purchaseAmount: Int = inputView.getPurchaseAmount()
 
-    val lottos: List<Lotto> = LottoStore().buyLottos(purchaseAmount)
+    val lottoStore = LottoStore()
+    val lottos: List<Lotto> = lottoStore.buyLottos(purchaseAmount)
     val consoleResultView = ConsoleResultView()
     consoleResultView.printCountOfPurchasedLotto(lottos.size)
     consoleResultView.printLottosPickedNumbers(lottos)
@@ -20,7 +21,7 @@ fun main() {
     val winningNumbers: List<Int> = inputView.getWinningNumbers()
     val winLotto = Lotto(winningNumbers)
 
-    val lottoAnalyzer = LottoAnalyzer(winLotto)
+    val lottoAnalyzer = LottoAnalyzer(winLotto, lottoStore.lottoPrice)
     val lottoStatics: LottoStatics = lottoAnalyzer.createLottoStatics(lottos)
 
     consoleResultView.printLottoStatics(lottoStatics)
