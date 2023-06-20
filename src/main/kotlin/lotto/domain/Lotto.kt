@@ -12,6 +12,10 @@ class Lotto(lottoNumbers: List<LottoNumber>) {
 
     fun matchCount(other: Lotto): Int {
         val difference = this.numbers - other.numbers.toSet()
-        return 6 - difference.size
+        return MAX_MATCH_COUNT - difference.size
+    }
+
+    companion object {
+        private const val MAX_MATCH_COUNT = 6
     }
 }
