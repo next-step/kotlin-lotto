@@ -20,7 +20,7 @@ value class Lottos(val lottos: Set<Lotto>) {
             val lottos = mutableSetOf<Lotto>()
             var remained = payment
             while (LottoStore.canBuy(remained)) {
-                val lotto: Lotto = LottoStore.preview()
+                val lotto: Lotto = LottoStore.preview(LottoNumberGenerator.random())
                 if (!lottos.contains(lotto)) {
                     remained = LottoStore.buy(remained)
                     lottos.add(lotto)

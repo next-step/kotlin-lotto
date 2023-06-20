@@ -3,7 +3,6 @@ package next.step.lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
-import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
 class LottoStoreTest : DescribeSpec({
@@ -29,8 +28,10 @@ class LottoStoreTest : DescribeSpec({
         }
 
         context("미리보기 요청하면") {
-            it("랜덤으로 생성된 로또 제공") {
-                LottoStore.preview().numbers() shouldHaveSize 6
+            it("로또 생성 방식에 따라 결과 제공") {
+                LottoStore.preview { setOf(1, 2, 3, 4, 5, 6).map { LottoNumber.of(it) }.toSet() } shouldBe Lotto.from(
+                    setOf(1, 2, 3, 4, 5, 6)
+                )
             }
         }
 
