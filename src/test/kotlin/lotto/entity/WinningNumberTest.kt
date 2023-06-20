@@ -11,41 +11,41 @@ internal class WinningNumberTest {
     @Test
     fun `winning numbers has six numbers`() {
         val numbers = listOf(1, 2, 3, 4, 5)
-        org.junit.jupiter.api.assertThrows<IllegalArgumentException> { WinningNumber.of(numbers) }
+        org.junit.jupiter.api.assertThrows<IllegalArgumentException> { WinningNumber.of(numbers, 12) }
     }
 
     @DisplayName("6개 전부 매치 하면 1등입니다.")
     @Test
     fun `6 matches is first prize`() {
         val numbers = listOf(1, 2, 3, 4, 5, 6)
-        val winningNumber = WinningNumber.of(winningNumberList)
+        val winningNumber = WinningNumber.of(winningNumberList, 7)
         val lottos = listOf(Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()))
         assertEquals(1, winningNumber.calculateLottoResults(lottos)[Rank.First])
     }
 
-    @DisplayName("5개 매치 하면 2등입니다.")
+    @DisplayName("6개 매치 하고 보너스볼이 포함되면 2등입니다.")
     @Test
     fun `5 matches is second prize`() {
         val numbers = listOf(1, 2, 3, 4, 5, 7)
-        val winningNumber = WinningNumber.of(winningNumberList)
+        val winningNumber = WinningNumber.of(winningNumberList, 7)
         val lottos = listOf(Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()))
         assertEquals(1, winningNumber.calculateLottoResults(lottos)[Rank.Second])
     }
 
-    @DisplayName("4개 매치 하면 3등입니다.")
+    @DisplayName("보너스볼 포함 5개 매치 하면 3등입니다.")
     @Test
     fun `4 matches is third prize`() {
         val numbers = listOf(1, 2, 3, 4, 7, 8)
-        val winningNumber = WinningNumber.of(winningNumberList)
+        val winningNumber = WinningNumber.of(winningNumberList, 7)
         val lottos = listOf(Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()))
         assertEquals(1, winningNumber.calculateLottoResults(lottos)[Rank.Third])
     }
 
-    @DisplayName("3개 매치 하면 4등입니다.")
+    @DisplayName("보너스볼 포함 3개 매치 하면 4등입니다.")
     @Test
     fun `3 matches is fourth prize`() {
         val numbers = listOf(1, 2, 3, 7, 8, 9)
-        val winningNumber = WinningNumber.of(winningNumberList)
+        val winningNumber = WinningNumber.of(winningNumberList, 10)
         val lottos = listOf(Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()))
         assertEquals(1, winningNumber.calculateLottoResults(lottos)[Rank.Fourth])
     }
@@ -54,10 +54,10 @@ internal class WinningNumberTest {
     @Test
     fun `3 matches is fourth prize with 2 numbers`() {
         val numbers = listOf(1, 2, 3, 7, 8, 9)
-        val winningNumber = WinningNumber.of(winningNumberList)
+        val winningNumber = WinningNumber.of(winningNumberList, 10)
         val lottos = listOf(
             Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()),
-            Lotto(numbers = numbers.map { LottoNumber(it) }.toSet())
+            Lotto(numbers = numbers.map { LottoNumber(it) }.toSet()),
         )
         assertEquals(2, winningNumber.calculateLottoResults(lottos)[Rank.Fourth])
     }

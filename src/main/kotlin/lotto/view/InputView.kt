@@ -3,7 +3,7 @@ package lotto.view
 object InputView {
     private const val WINNING_NUMBER_DELIMITER = ", "
 
-    operator fun invoke(msg: String): Long {
+    fun getPurchaseCost(msg: String): Long {
         println(msg)
         return readln().toLong()
     }
@@ -11,5 +11,10 @@ object InputView {
     fun winningNumber(msg: String): List<Int> {
         println(msg)
         return readln().split(WINNING_NUMBER_DELIMITER).map { it.toInt() }
+    }
+
+    fun bonusBall(msg: String): Int {
+        println(msg)
+        return readln().toInt()
     }
 }
