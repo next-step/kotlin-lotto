@@ -1,5 +1,7 @@
 package lotto.domain.lottonumber
 
+import math.PositiveNumber
+
 @JvmInline
 value class LottoNumbers(val value: List<LottoNumber>) {
 
@@ -17,8 +19,10 @@ value class LottoNumbers(val value: List<LottoNumber>) {
         return value.contains(lottoNumber)
     }
 
-    fun toSet(): Set<LottoNumber> {
-        return value.toSet()
+    fun matchCount(other: LottoNumbers): PositiveNumber {
+        val numberSet = value.toSet()
+        val matchCount = other.value.count { numberSet.contains(it) }
+        return PositiveNumber(matchCount)
     }
 
     companion object {

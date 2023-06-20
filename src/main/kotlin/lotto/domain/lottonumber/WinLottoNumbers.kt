@@ -7,7 +7,6 @@ data class WinLottoNumbers(
     val bonusNumber: LottoNumber,
 ) {
 
-    private val lottoNumberSet by lazy { lottoNumbers.toSet() }
 
     init {
         require(bonusNumber !in lottoNumbers) {
@@ -16,8 +15,7 @@ data class WinLottoNumbers(
     }
 
     fun matchCount(other: LottoNumbers): PositiveNumber {
-        val matchCount = other.value.count { lottoNumberSet.contains(it) }
-        return PositiveNumber(matchCount)
+        return lottoNumbers.matchCount(other)
     }
 
     fun matchBonus(other: LottoNumbers): Boolean {
