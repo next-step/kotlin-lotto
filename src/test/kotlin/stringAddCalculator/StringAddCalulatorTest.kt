@@ -2,9 +2,11 @@ package stringAddCalculator
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
+import java.lang.RuntimeException
 
 class StringAddCalulatorTest {
 
@@ -43,5 +45,11 @@ class StringAddCalulatorTest {
     @ValueSource(strings = ["//;\n1;2,3:4"])
     fun `커스텀 구분자를 가져도 기본 구분자와 병행해서 사용가능하다`(text: String?) {
         Assertions.assertThat(calculator.add(text)).isSameAs(10)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["-1,2,3"])
+    fun `구분자, 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다`(text: String?) {
+        assertThrows<RuntimeException> { calculator.add(text) }
     }
 }
