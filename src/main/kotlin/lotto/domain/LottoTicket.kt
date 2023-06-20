@@ -10,9 +10,9 @@ class LottoTicket(numbers: List<Int>) {
         }
     }
 
-    fun getWinResult(winTicket: LottoTicket): WinResult {
+    fun getWinResult(winTicket: LottoTicket, bonus: Int): WinResult {
         val matchCount = winTicket.lottoNumbers.count { i -> lottoNumbers.contains(i) }
-        return WinResult.valueOfMatchCount(matchCount)
+        return WinResult.valueOf(matchCount, lottoNumbers.contains(bonus))
     }
 
     companion object {

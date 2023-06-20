@@ -16,7 +16,11 @@ object OutputView {
         val maps: Map<WinResult, Int> = winStats.matchMap
         val keys: Set<WinResult> = maps.keys
         keys.forEach {
-            println("${it.matchCount}개 일치 (${it.reward}원)- ${maps[it]}개")
+            print("${it.matchCount}개 일치, ")
+            if (it.matchBonus) {
+                print("보너스 볼 일치 ")
+            }
+            println("(${it.reward}원)- ${maps[it]}개")
         }
 
         val yield = winStats.yield.toFloat()

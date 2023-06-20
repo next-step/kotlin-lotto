@@ -37,12 +37,14 @@ class LottoTicketKoTest : StringSpec({
     "당첨 결과" {
         mapOf(
             listOf(1, 2, 3, 4, 5, 6) to WinResult.FIRST,
+            listOf(1, 2, 3, 4, 5, 44) to WinResult.THIRD,
             listOf(1, 2, 3, 4, 5, 45) to WinResult.THIRD,
             listOf(1, 2, 3, 4, 44, 45) to WinResult.FOURTH,
             listOf(1, 2, 3, 43, 44, 45) to WinResult.FIFTH,
             listOf(1, 2, 42, 43, 44, 45) to WinResult.LOSE,
         ).forAll { (winNumbers, winResult) ->
-            LottoTicket(listOf(1, 2, 3, 4, 5, 6)).getWinResult(LottoTicket(winNumbers)) shouldBe winResult
+            val bonusNumber = 44
+            LottoTicket(listOf(1, 2, 3, 4, 5, 6)).getWinResult(LottoTicket(winNumbers), bonusNumber) shouldBe winResult
         }
     }
 })

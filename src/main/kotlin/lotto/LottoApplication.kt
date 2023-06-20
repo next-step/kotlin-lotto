@@ -16,7 +16,8 @@ fun main(args: Array<String>) {
     // 당첨번호 입력
     val inputWinNumbers: List<Int> = InputView.inputWinNumbers()
     val winNumbers = LottoTicket(inputWinNumbers)
+    val bonusNumber = InputView.inputBonusNumber()
 
     // 당첨 통계
-    OutputView.printWinStats(lottoTickets.getWinStats(winNumbers))
+    OutputView.printWinStats(lottoTickets.getWinStats(winNumbers, bonusNumber))
 }

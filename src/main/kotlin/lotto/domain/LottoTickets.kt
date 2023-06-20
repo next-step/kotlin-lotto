@@ -15,9 +15,9 @@ class LottoTickets(private val money: Money) {
         }
     }
 
-    fun getWinStats(winNumbers: LottoTicket): WinStats {
+    fun getWinStats(winNumbers: LottoTicket, bonus: Int): WinStats {
         val matchMap: Map<WinResult, Int> = lottoTickets.map {
-            it.getWinResult(winNumbers)
+            it.getWinResult(winNumbers, bonus)
         }.filter {
             it !== WinResult.LOSE
         }.groupingBy { it }
