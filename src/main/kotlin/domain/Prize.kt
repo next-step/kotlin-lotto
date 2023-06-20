@@ -11,8 +11,4 @@ enum class Prize(
     SECOND_PLACE(5, 3_000_000, "5개 일치, 보너스 볼 일치(30000000원)"),
     FIRST_PLACE(6, 2_000_000_000, "6개 일치 (2000000000원)"),
     ;
-
-    companion object {
-        fun getsPrizeFromMatches(matches: Int) = values().firstOrNull { it.matches == matches }
-    }
 }

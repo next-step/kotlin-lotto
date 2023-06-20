@@ -15,7 +15,7 @@ class WinningCheckerTest : StringSpec({
         ).forAll { (input, expected) ->
             val testLottery = Lottery(MockNumberGenerator(input))
             val winningNums = setOf(1, 2, 3, 4, 5, 6)
-            val prize = WinningChecker(winningNums, 10).calculatePrize(testLottery)
+            val prize = WinningFinder(winningNums, 10).getPrizeByMatched(testLottery)
 
             prize shouldBe expected
         }
