@@ -1,7 +1,10 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.throwable.shouldHaveMessage
 import lotto.view.InputView.splitToIntList
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -25,5 +28,14 @@ class WinningNumbersTest {
         val resultRank = winningNumbers.calculateRank(lottoNumbers)
 
         resultRank shouldBe rank
+    }
+
+    @Test
+    fun `보너스 넘버가 당첨 번호에 포함된 번호면 예외가 발생한다`() {
+        val lottoNumbers = LottoNumbers.from(listOf(1,2,3,4,5,6))
+        val bonusNumber = LottoNumber.from(6)
+
+        shouldThrow<IllegalArgumentException> { WinningNumbers(lottoNumbers, bonusNumber) }
+            .shouldHaveMessage(WinningNumbers.INVALID_BONUS_NUMBER_MESSAGE)
     }
 }
