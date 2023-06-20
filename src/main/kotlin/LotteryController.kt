@@ -21,9 +21,8 @@ class LotteryController(
 
     private fun purchaseLotteries(): Pair<Int, List<Lottery>> {
         val (money, manualSize) = inputMoneyAndManualSize()
-        val lotteries = inputView.inputManualNums(manualSize)
-        LotteryMachine.buyAutomaticLotteries(lotteries.size - manualSize, lotteries)
-
+        val manualLotteries = inputView.inputManualNums(manualSize)
+        val lotteries = LotteryMachine.buyAutomaticLotteries(money / 1000 - manualSize, manualLotteries)
         reportPurchasedState(manualSize, lotteries)
 
         val purchasedAmount = (money / 1000) * 1000

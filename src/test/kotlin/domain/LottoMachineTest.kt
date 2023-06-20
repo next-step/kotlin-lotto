@@ -7,12 +7,12 @@ import io.kotest.matchers.shouldBe
 
 class LottoMachineTest : StringSpec({
     "클라이언트가 구입 금액을 정상적으로 입력한다." {
-        val twoLengthList = mutableListOf(Lottery(), Lottery())
+        val twoLengthList = listOf(Lottery(), Lottery())
         twoLengthList.size shouldBe 2
 
-        LotteryMachine.buyAutomaticLotteries(5, twoLengthList)
+        val buyAutomaticLotteries = LotteryMachine.buyAutomaticLotteries(5, twoLengthList)
 
-        twoLengthList.size shouldBe 7
+        buyAutomaticLotteries.size shouldBe 7
     }
 
     "클라이언트의 금액에 따라 로또 장수를 리턴한다" {

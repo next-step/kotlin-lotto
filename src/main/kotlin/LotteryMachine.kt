@@ -2,10 +2,9 @@ import domain.Lottery
 
 object LotteryMachine {
 
-    fun buyAutomaticLotteries(automaticSize: Int, lotteries: MutableList<Lottery>) {
-        for (idx in 1..automaticSize) {
-            lotteries.add(Lottery())
-        }
+    fun buyAutomaticLotteries(automaticSize: Int, existingLotteries: List<Lottery>): List<Lottery> {
+        val newLotteries = List(automaticSize) { Lottery() }
+        return existingLotteries + newLotteries
     }
 
     fun checkManualSize(money: Int, manualSize: Int) {
