@@ -1,20 +1,47 @@
 package lotto.domain
 
 enum class Rank(
-    val title: String,
-    val amount: Long,
-    private val matchCount: Int,
+    val matchCount: Int,
+    val winningMoney: Long,
     var count: Int
 ) {
-    MATCH_THREE("3개 일치", 5000, 3, 0),
-    MATCH_FOUR("4개 일치", 50000, 4, 0),
-    MATCH_FIVE("5개 일치", 1500000, 5, 0),
-    MATCH_SIX("6개 일치", 2000000000, 6, 0);
+    FIRST(6, 2_000_000_000, 0),
+    SECOND(5, 30_000_000, 0),
+    THIRD(5, 1_500_000, 0),
+    FOURTH(4, 50_000, 0),
+    FIFTH(3, 5_000, 0);
 
-    fun getRank(lottos: Lottos, winnerNumbers: List<LottoNumber>): Rank {
+    fun getRank(lottos: Lottos, winningNumber: WinningNumber): Rank {
         count = lottos.lottoNumbers.count { lottoNumbers ->
-            lottoNumbers.lottoNumbers.intersect(winnerNumbers.toSet()).count() == matchCount
+            val countOfIntersect = findIntersect(lottoNumbers, winningNumber)
+            if (isCountOfIntersectFive(countOfIntersect)) {
+                hasBonusNumberIfSecond(winningNumber, lottoNumbers, countOfIntersect)
+            } else {
+                countOfIntersect == matchCount
+            }
         }
         return this
+    }
+
+    private fun findIntersect(lottoNumbers: LottoNumbers, winningNumber: WinningNumber) =
+        lottoNumbers.lottoNumbers.intersect(winningNumber.lastLottoNumbers.lottoNumbers.toSet()).count()
+
+    private fun isCountOfIntersectFive(countOfIntersect: Int) = countOfIntersect == 5
+
+    private fun hasBonusNumberIfSecond(
+        winningNumber: WinningNumber,
+        lottoNumbers: LottoNumbers,
+        countOfIntersect: Int
+    ) = if (isSecond()) {
+        checkBonusNumberExistence(winningNumber, lottoNumbers)
+    } else {
+        !checkBonusNumberExistence(winningNumber, lottoNumbers) && countOfIntersect == matchCount
+    }
+
+    private fun checkBonusNumberExistence(winningNumber: WinningNumber, lottoNumbers: LottoNumbers) =
+        winningNumber.bonusNumber in lottoNumbers.lottoNumbers
+
+    fun isSecond(): Boolean {
+        return this === SECOND
     }
 }
