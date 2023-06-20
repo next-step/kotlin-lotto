@@ -19,5 +19,13 @@ class LottosTest : DescribeSpec({
                     .numbers() shouldBe setOf(setOf(1, 2, 3, 4, 5, 6), setOf(2, 3, 4, 5, 6, 7))
             }
         }
+
+        context("Lottos 를 더하면") {
+            it("Lotto 가 합쳐진 Lottos 제공") {
+                Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6)))) + Lottos.of(
+                    setOf(Lotto.from(setOf(2, 3, 4, 5, 6, 7)))
+                ) shouldBe Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6)), Lotto.from(setOf(2, 3, 4, 5, 6, 7))))
+            }
+        }
     }
 })
