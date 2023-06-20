@@ -1,32 +1,24 @@
 package calculator.domain
 
-class Calculator() {
-    var numbers: List<String> = listOf()
-        private set
-    var result: Int = 0
-        private set
-
-    fun calculate(text: String?) {
-        this.numbers = getNumbers(text)
-        this.result = this.numbers.sumOf { convertStringToPositiveInt(it) }
+class Calculator {
+    fun calculate(text: String?): Int {
+        return getNumbers(text).sum()
     }
 
-    private fun getNumbers(text: String?): List<String> = when {
-        text.isNullOrBlank() -> {
-            listOf()
-        }
-
-        text.contains(BACKSHASH) && text.contains(NEWLINE) -> {
-            val result = Regex(CUSTOM_SEPARATOR_PATTERN)
-                .findAll(text)
-                .map { it.value.trim() }
-                .toList()
-            val customDelimiter = result[0]
-            result[1].split(customDelimiter)
-        }
-
-        text.contains(SEPARATOR.toRegex()) -> text.split(SEPARATOR.toRegex())
+    private fun getNumbers(text: String?): List<Int> = when {
+        text.isNullOrBlank() -> listOf()
+        text.contains(BACKSHASH) && text.contains(NEWLINE) -> getNumbersByCustomSeparator(text).map { convertStringToPositiveInt(it) }
+        text.contains(SEPARATOR.toRegex()) -> text.split(SEPARATOR.toRegex()).map { convertStringToPositiveInt(it) }
         else -> throw IllegalArgumentException(SEPARATOR_EXCEPTION)
+    }
+
+    private fun getNumbersByCustomSeparator(text: String): List<String> {
+        val result = Regex(CUSTOM_SEPARATOR_PATTERN)
+            .findAll(text)
+            .map { it.value.trim() }
+            .toList()
+        val customDelimiter = result[0]
+        return result[1].split(customDelimiter)
     }
 
     private fun convertStringToPositiveInt(number: String): Int {

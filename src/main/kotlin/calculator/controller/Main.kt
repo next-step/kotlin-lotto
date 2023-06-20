@@ -6,7 +6,5 @@ import calculator.view.ResultView
 
 fun main() {
     val text = InputView.getInput()
-    val calculator = Calculator()
-    calculator.calculate(text)
-    ResultView.printResult(calculator.result)
+    ResultView.printResult(Calculator().calculate(text))
 }
