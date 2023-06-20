@@ -1,12 +1,11 @@
 package lotto
 
 import lotto.vo.LottoNumber
-import lotto.vo.Money
 
 data class Lottos(
     private val lottos: List<Lotto>,
 ) : Iterable<Lotto> {
-    private val totalPrice = Money(LottoShop.LOTTO_PRICE.amount * lottos.count())
+    private val totalPrice = LottoShop.LOTTO_PRICE * lottos.count()
 
     val size: Int = lottos.size
 
