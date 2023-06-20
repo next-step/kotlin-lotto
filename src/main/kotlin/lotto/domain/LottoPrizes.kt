@@ -14,8 +14,12 @@ enum class LottoPrizes(
 
     companion object {
         fun of(equalCount: Int, catchBonus: Boolean): LottoPrizes {
+            if (equalCount == MATCH_FIVE_PRIZES_WITH_BONUS.equalCount && catchBonus) {
+                return MATCH_FIVE_PRIZES_WITH_BONUS
+            }
+
             return LottoPrizes.values()
-                .find { it.equalCount == equalCount && it.catchBonus == catchBonus }
+                .find { it.equalCount == equalCount }
                 ?: NONE
         }
     }
