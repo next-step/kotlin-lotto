@@ -3,10 +3,10 @@ package lotto.controller
 import lotto.domain.Prize
 
 class MatchResult(
-    private val matches: Map<Int, Int>
+    private val matches: Map<Prize, Int>
 ) {
     private fun calculateTotalPrice(): Int {
-        return Prize.calculateTotalPrice(matches)
+        return matches.entries.sumOf { (prize, count) -> prize.amount * count }
     }
 
     fun calculateEarningRate(money: Int): Double {
@@ -15,10 +15,11 @@ class MatchResult(
     }
 
     fun getNumberOfMatchesForPrize(prize: Prize): Int {
-        return matches[prize.matchCount] ?: 0
+        return matches[prize] ?: 0
     }
 
-    fun isProfit(earningRate: Double): Boolean {
+    fun isProfit(money: Int): Boolean {
+        val earningRate = calculateEarningRate(money)
         return earningRate >= 1
     }
 }

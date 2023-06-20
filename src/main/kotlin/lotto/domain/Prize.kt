@@ -1,20 +1,16 @@
 package lotto.domain
 
 enum class Prize(val matchCount: Int, val amount: Int) {
-    THIRD(3, 5000),
-    FOURTH(4, 50000),
-    FIFTH(5, 1500000),
-    SIXTH(6, 2000000000);
+    NO_PRIZE(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     companion object {
-        fun prizeForMatchCount(matchCount: Int): Prize? {
-            return values().find { it.matchCount == matchCount }
-        }
-
-        fun calculateTotalPrice(matches: Map<Int, Int>): Int {
-            return matches.entries.sumOf { (matchCount, count) ->
-                prizeForMatchCount(matchCount)?.amount?.times(count) ?: 0
-            }
+        fun prizeForMatchCount(matchCount: Int): Prize {
+            return values().find { it.matchCount == matchCount } ?: NO_PRIZE
         }
     }
 }

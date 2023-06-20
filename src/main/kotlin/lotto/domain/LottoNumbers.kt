@@ -6,7 +6,7 @@ class LottoNumbers(numberGenerator: NumberGenerator) {
 
     val lottoNumbers: List<Int> = numberGenerator.generateNumbers()
 
-    fun countMatches(winningNumbers: List<Int>): Int {
-        return lottoNumbers.count { it in winningNumbers }
+    fun countMatches(other: LottoNumbers): Int {
+        return lottoNumbers.count { it in other.lottoNumbers }
     }
 }
