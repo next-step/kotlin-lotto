@@ -7,9 +7,10 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
 class LottoGameTest {
+    private var winningNumbers: WinningNumbers = WinningNumbers(LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.from(7))
+
     @Test
     fun `count를 입력 받은만큼 랜덤 번호를 생성한다`() {
-        val winningNumbers = WinningNumbers(LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6)))
         val lottoGame = LottoGame.from(10, winningNumbers)
 
         lottoGame.lottoNumbers.size shouldBe 10
@@ -17,8 +18,6 @@ class LottoGameTest {
 
     @Test
     fun `로또 게임은 로또 번호들과 당첨 번호를 받아 결과를 생성한다`() {
-        val winningNumbers = WinningNumbers(LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6)))
-
         val numbers = listOf(
             listOf(1, 2, 3, 4, 5, 6),
             listOf(1, 2, 3, 4, 5, 7),

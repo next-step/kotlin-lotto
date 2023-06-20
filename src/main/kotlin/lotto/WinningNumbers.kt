@@ -1,6 +1,6 @@
 package lotto
 
-class WinningNumbers(private val lottoNumbers: LottoNumbers) {
+class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNumber: LottoNumber) {
     fun calculateRank(lottoNumbers: List<LottoNumbers>): List<Rank> {
         return lottoNumbers.map { calculateRank(it) }
     }
