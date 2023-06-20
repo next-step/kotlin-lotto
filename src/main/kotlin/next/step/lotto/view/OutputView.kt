@@ -19,7 +19,7 @@ object OutputView {
         println("당첨 통계")
         println("---------")
         winningStat.filter { it.key != LottoRank.MISS }
-            .forEach { println("${it.key.matchCount}개 일치${bonus(it.key.matchBonus)} (${it.key.winnings}원)- ${it.value}개") }
+            .forEach { println("${it.key.matchCount}개 일치${bonus(it.key.shouldMatchBonus())} (${it.key.winnings}원)- ${it.value}개") }
     }
 
     private fun bonus(matchBonus: Boolean): String = if (matchBonus) ", 보너스 볼 일치" else ""
