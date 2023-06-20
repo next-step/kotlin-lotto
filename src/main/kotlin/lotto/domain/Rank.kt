@@ -11,9 +11,10 @@ enum class Rank(
     MATCH_FIVE("5개 일치", 1500000, 5, 0),
     MATCH_SIX("6개 일치", 2000000000, 6, 0);
 
-    fun getRank(lottos: Lottos, winnerNumbers: List<LottoNumber>) {
+    fun getRank(lottos: Lottos, winnerNumbers: List<LottoNumber>): Rank {
         count = lottos.lottoNumbers.count { lottoNumbers ->
             lottoNumbers.lottoNumbers.intersect(winnerNumbers.toSet()).count() == matchCount
         }
+        return this
     }
 }

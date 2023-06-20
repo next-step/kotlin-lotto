@@ -2,12 +2,11 @@ package lotto.domain
 
 class LottoStatistics {
     fun analyze(lottos: Lottos, winnerNumbers: List<LottoNumber>): List<Rank> {
-        val ranks = mutableListOf<Rank>()
-        for (rank in Rank.values()) {
-            rank.getRank(lottos, winnerNumbers)
-            ranks.add(rank)
-        }
-        return ranks
+        return Rank.values()
+            .map {
+                it.getRank(lottos, winnerNumbers)
+            }
+            .toList()
     }
 
     fun getProfitRate(payment: Payment, ranks: List<Rank>): Double {
