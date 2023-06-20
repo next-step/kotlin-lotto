@@ -1,6 +1,7 @@
 import domain.Lottery
 import domain.Prize
 import domain.Settlement
+import domain.WinningChecker
 import view.InputView
 import view.OutputView
 
@@ -9,8 +10,8 @@ class LotteryController(
 ) {
 
     fun startLotteryService() {
-        val lotteries = purchaseLotteries()
-        val prizeCountMap = checkLotteriesWin(lotteries)
+        val (purchaseAmount, lotteries) = purchaseLotteries()
+        val prizeCountMap = getWinningChecker().checkLotteries(lotteries)
 
         for (prize in Prize.values()) OutputView.reportPrize(prize.prizeMessage, prizeCountMap[prize] ?: 0)
 
@@ -41,10 +42,10 @@ class LotteryController(
         lotteries.forEach { lottery -> OutputView.reportPrizeState(lottery) }
     }
 
-    private fun checkLotteriesWin(lotteries: List<Lottery>): MutableMap<Prize, Int> {
+    private fun getWinningChecker(): WinningChecker {
         val winningNums = inputView.getWinningNums()
         val bonusBall = inputView.getBonusBall()
         require(bonusBall in 1..45) { "보너스 볼은 1부터 45사이의 값이여야합니다: $bonusBall" }
-        return LotteryMachine.checkLotteriesWin(lotteries, winningNums, bonusBall)
+        return WinningChecker(winningNums, bonusBall)
     }
 }

@@ -1,26 +1,14 @@
 import domain.Lottery
-import domain.Prize
 
 object LotteryMachine {
 
-    fun checkLotteriesWin(
-        lotteries: List<Lottery>,
-        winningNums: Set<Int>,
-        bonusBall: Int,
-    ): MutableMap<Prize, Int> {
-        val prizeCountMap = mutableMapOf<Prize, Int>()
-
-        lotteries.forEach { lottery ->
-            val prize = lottery.calculatePrize(winningNums, bonusBall) ?: return@forEach
-            prizeCountMap[prize] = (prizeCountMap[prize] ?: 0) + 1
+    fun buyAutomaticLotteries(automaticSize: Int, lotteries: MutableList<Lottery>) {
+        for (idx in 1..automaticSize) {
+            lotteries.add(Lottery())
         }
-
-        return prizeCountMap
     }
 
-    fun buyLotteries(money: Int): Pair<Int, List<Lottery>> {
-        val purchasableSize = money / 1000
-        val lotteries = List(purchasableSize) { Lottery() }
-        return Pair(purchasableSize * 1000, lotteries)
+    fun checkManualSize(money: Int, manualSize: Int) {
+        require(money / 1000 >= manualSize) { "${manualSize}수동 구매 수량은 ${money / 1000}보다 작아야 합니다." }
     }
 }
