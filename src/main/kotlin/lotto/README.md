@@ -107,5 +107,5 @@
 ## 기능 분석 
 - [x] 2등을 위한 보너스 볼 입력 - LottoGame, WinningLotto
 - [x] 2등 추가 - LottoResult
-- [ ] 당첨 통계 추가 - LottoResultSummary
+- [x] 당첨 통계 추가 - LottoResultSummary
 - [ ] UI, view 추가
