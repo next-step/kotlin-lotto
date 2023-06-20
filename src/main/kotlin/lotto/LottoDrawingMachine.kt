@@ -1,11 +1,12 @@
 package lotto
 
+import java.lang.IllegalArgumentException
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 object LottoDrawingMachine {
     fun draw(winNumbers: List<Int>, lottos: Lottos): DrawResult {
-        val rankPrizes = createRankPrizes(winNumbers, lottos)
+        val rankPrizes = rankPrizes(winNumbers, lottos)
         val roi = calculateRoi(rankPrizes, lottos)
         return DrawResult(rankPrizes, roi)
     }
@@ -17,22 +18,32 @@ object LottoDrawingMachine {
         return roi.setScale(2, RoundingMode.FLOOR).toString()
     }
 
-    private fun createRankPrizes(winNumbers: List<Int>, lottos: Lottos): List<RankPrize> {
-        return lottos.asSequence()
+    private fun rankPrizes(winNumbers: List<Int>, lottos: Lottos): List<RankPrize> {
+        val matchCountMap = Rank.values().associate { it.matchCount to 0 }.toMutableMap()
+
+        lottos.asSequence()
             .map { it.countMatch(winNumbers) }
             .filter { it >= 3 }
             .groupBy { it }
-            .map { (number, occurrences) -> RankPrize(number, searchReward(number), occurrences.size) }
-            .sortedBy { it.matchCount }
+            .forEach {
+                matchCountMap[it.key] = it.value.size
+            }
+        return matchCountMap.map {
+            RankPrize(it.key, Rank.ofMatchCount(it.key).reward, it.value)
+        }.sortedBy { it.matchCount }
     }
 
-    private fun searchReward(matchCount: Int): Long {
-        return when (matchCount) {
-            3 -> 5_000
-            4 -> 50_000
-            5 -> 1_500_000
-            6 -> 2_000_000_000
-            else -> throw IllegalArgumentException("$matchCount 개에 해당하는 당첨금이 없습니다")
+    enum class Rank(val matchCount: Int, val reward: Long) {
+        FIRST(6, 2_000_000_000),
+        SECOND(5, 1_500_000),
+        THIRD(4, 50_000),
+        FOURTH(3, 5_000)
+        ;
+        companion object {
+            fun ofMatchCount(matchCount: Int): Rank {
+                return values().find { it.matchCount == matchCount }
+                    ?: throw IllegalArgumentException("$matchCount 에 해당하는 등수가 없습니다")
+            }
         }
     }
 

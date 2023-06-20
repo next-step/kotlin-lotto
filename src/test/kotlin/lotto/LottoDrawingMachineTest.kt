@@ -16,7 +16,7 @@ internal class LottoDrawingMachineTest : StringSpec({
         )
 
         val drawResult = sut.draw(winNumbers, lottos)
-        drawResult.rankPrizes.size shouldBe 1
+        drawResult.rankPrizes.size shouldBe 4
         drawResult.totalRoi shouldBe "0.35"
     }
 })

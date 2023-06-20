@@ -16,8 +16,16 @@ internal class LottoTest : StringSpec({
             row(listOf(1, 2, 3, 4, 5, 6, 7)),
         ).forAll {
             shouldThrow<IllegalArgumentException> {
-                Lotto(it.map { number -> LottoNumber(number) }, 1000)
+                val lottoNumbers = it.map { number -> LottoNumber(number) }
+                Lotto(lottoNumbers, 1000)
             }
+        }
+    }
+
+    "중복되는 추첨번호가 있다면 예외를 발생시킨다" {
+        shouldThrow<IllegalArgumentException> {
+            val lottoNumbers = (1..6).map { LottoNumber(1) }
+            Lotto(lottoNumbers, 1000)
         }
     }
 })
