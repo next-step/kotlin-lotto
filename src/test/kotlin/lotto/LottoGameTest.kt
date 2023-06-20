@@ -21,6 +21,7 @@ class LottoGameTest {
         val numbers = listOf(
             listOf(1, 2, 3, 4, 5, 6),
             listOf(1, 2, 3, 4, 5, 7),
+            listOf(1, 2, 3, 4, 5, 8),
             listOf(1, 2, 3, 4, 7, 8),
             listOf(1, 2, 3, 7, 8, 9),
             listOf(1, 2, 7, 8, 9, 10),
@@ -36,6 +37,7 @@ class LottoGameTest {
         result.countByRank(Rank.SECOND) shouldBe 1
         result.countByRank(Rank.THIRD) shouldBe 1
         result.countByRank(Rank.FIRST) shouldBe 1
+        result.countByRank(Rank.FIFTH) shouldBe 1
         result.countByRank(Rank.LOSE) shouldBe 3
     }
 }

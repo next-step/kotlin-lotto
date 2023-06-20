@@ -15,9 +15,9 @@ class WinningNumbersTest {
     @CsvSource(
         "1,2,3,4,5,6=FIRST",
         "1,2,3,4,5,7=SECOND",
-        "1,2,3,4,7,8=THIRD",
-        "1,2,3,7,8,9=FORTH",
-        "1,2,7,8,9,10=LOSE",
+        "1,2,3,4,5,8=THIRD",
+        "1,2,3,4,8,9=FORTH",
+        "1,2,3,8,9,10=FIFTH",
         "1,7,8,9,10,11=LOSE",
         "7,8,9,10,11,12=LOSE",
         delimiter = '='

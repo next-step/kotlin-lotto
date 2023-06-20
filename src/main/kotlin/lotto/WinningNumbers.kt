@@ -12,8 +12,9 @@ class WinningNumbers(private val lottoNumbers: LottoNumbers, private val bonusNu
     fun calculateRank(lottoNumbers: LottoNumbers): Rank {
         val intersection = this.lottoNumbers.numbers.intersect(lottoNumbers.numbers)
         val matchedCount = intersection.size
+        val matchBonus = lottoNumbers.numbers.contains(bonusNumber)
 
-        return Rank.from(matchedCount)
+        return Rank.from(matchedCount, matchBonus)
     }
 
     companion object {
