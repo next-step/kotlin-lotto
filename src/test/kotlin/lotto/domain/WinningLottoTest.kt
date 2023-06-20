@@ -4,7 +4,11 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumberSupports.toLottoNumbers
-import lotto.domain.LottoResult.*
+import lotto.domain.LottoResult.FIRST_PLACE
+import lotto.domain.LottoResult.FOURTH_PLACE
+import lotto.domain.LottoResult.LOSE
+import lotto.domain.LottoResult.SECOND_PLACE
+import lotto.domain.LottoResult.THIRD_PLACE
 
 class WinningLottoTest : FreeSpec({
 

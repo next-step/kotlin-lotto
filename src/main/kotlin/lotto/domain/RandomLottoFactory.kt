@@ -8,6 +8,6 @@ class RandomLottoFactory : LottoFactory {
     }
 
     companion object {
-        private val lottoNumbers = LottoNumber.lottoNumbers();
+        private val lottoNumbers = LottoNumber.lottoNumbers()
     }
 }

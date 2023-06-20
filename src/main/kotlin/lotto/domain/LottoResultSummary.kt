@@ -1,8 +1,8 @@
 package lotto.domain
 
+import lotto.domain.LottoMachine.Companion.LOTTO_COST
 import java.math.BigDecimal
 import java.math.RoundingMode
-import lotto.domain.LottoMachine.Companion.LOTTO_COST
 
 class LottoResultSummary(private val results: List<LottoResult>) {
 
@@ -15,7 +15,7 @@ class LottoResultSummary(private val results: List<LottoResult>) {
             .map { Pair(it, gradeCountMap[it] ?: 0) }
     }
 
-    fun rateOfReturn() : BigDecimal {
+    fun rateOfReturn(): BigDecimal {
         val totalLottoCount = results.size
         val totalCost = totalLottoCount * LOTTO_COST
         val totalPrice = results.sumOf { it.price }

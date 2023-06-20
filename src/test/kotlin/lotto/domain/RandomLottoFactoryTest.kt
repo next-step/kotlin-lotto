@@ -11,5 +11,4 @@ class RandomLottoFactoryTest : FreeSpec({
             repeat(10) { randomLottoFactory.create() }
         }
     }
-
 })
