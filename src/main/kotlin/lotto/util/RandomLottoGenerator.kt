@@ -1,6 +1,7 @@
-package lotto.domain
+package lotto.util
 
-import lotto.util.LottoGenerator
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 
 object RandomLottoGenerator : LottoGenerator {
     private val lottoNumbers = (LottoNumber.LOTTO_MIN_NUMBER..LottoNumber.LOTTO_MAX_NUMBER).toList()

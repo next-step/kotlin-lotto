@@ -3,12 +3,17 @@ package lotto
 import lotto.domain.LottoChecker
 import lotto.domain.LottoSeller
 import lotto.domain.Lottos
-import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinNumbers
 import lotto.io.InputView
 import lotto.io.ResultView
 
-object LottoGame {
+class LottoGame {
+    private val lottoSeller: LottoSeller
+
+    init {
+        val amount = InputView.getAmount()
+        lottoSeller = LottoSeller(amount)
+    }
 
     fun start() {
         val lottos = getLottos()
@@ -24,8 +29,15 @@ object LottoGame {
     }
 
     private fun getLottos(): Lottos {
-        val amount = InputView.getAmount()
-        return LottoSeller(RandomLottoGenerator).sellLottos(amount)
+        val manualLottos = getManualLottos()
+        val autoLottos = lottoSeller.sellAutoLottos()
+
+        return Lottos(manualLottos, autoLottos)
+    }
+
+    private fun getManualLottos(): Lottos {
+        val manualLottoSize = InputView.getManualLottoSize()
+        return lottoSeller.sellManualLottos(manualLottoSize)
     }
 
     private fun printResult(winNumbers: WinNumbers, lottos: Lottos) {
