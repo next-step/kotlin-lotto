@@ -6,7 +6,7 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
     }
 
     fun getMatchingCount(lotto: Lotto): Int {
-        return lotto.lottoNumbers.count { lottoNumbers.contains(it) }
+        return lottoNumbers.count { lotto.contains(it) }
     }
 
     fun contains(number: LottoNumber): Boolean {
