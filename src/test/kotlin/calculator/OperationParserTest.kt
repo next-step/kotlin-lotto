@@ -24,5 +24,19 @@ internal class OperationParserTest : BehaviorSpec({
                 }
             }
         }
+
+        When("\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자가 입력되면") {
+            val customDelimiters = listOf("$", "#", "^")
+            val inputs = customDelimiters.map {
+                "//$it\n1${it}2${it}3" to listOf("1", "2", "3")
+            }
+
+            Then("커스텀 구분자까지 포함하여 파싱된 OperationTokens를 반환한다.") {
+                inputs.forAll { input ->
+                    val actual = operationParser.parse(input.first)
+                    actual.tokenList shouldBe input.second
+                }
+            }
+        }
     }
 })
