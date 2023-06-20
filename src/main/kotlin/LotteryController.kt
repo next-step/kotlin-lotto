@@ -10,9 +10,8 @@ class LotteryController(
 ) {
 
     fun startLotteryService() {
-        val (purchaseAmount, lotteries) = purchaseLotteries()
-        val prizeCountMap = getWinningChecker().checkLotteries(lotteries)
-
+        val lotteries = purchaseLotteries()
+        val prizeCountMap = LotteryCalculator.calculatePrizes(lotteries, getWinningChecker())
         for (prize in Prize.values()) OutputView.reportPrize(prize.prizeMessage, prizeCountMap[prize] ?: 0)
 
         val profitRate = Settlement.calculateProfitRate(prizeCountMap, purchaseAmount)

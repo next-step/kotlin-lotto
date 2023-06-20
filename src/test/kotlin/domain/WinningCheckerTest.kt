@@ -13,11 +13,11 @@ class WinningCheckerTest : StringSpec({
             setOf(1, 2, 3, 4, 5, 10) to Prize.SECOND_PLACE,
             setOf(1, 2, 3, 4, 5, 6) to Prize.FIRST_PLACE,
         ).forAll { (input, expected) ->
-            val testLotteries = listOf(Lottery(MockNumberGenerator(input)))
+            val testLottery = Lottery(MockNumberGenerator(input))
             val winningNums = setOf(1, 2, 3, 4, 5, 6)
-            val prizeCountMap = WinningChecker(winningNums, 10).checkLotteries(testLotteries)
+            val prize = WinningChecker(winningNums, 10).calculatePrize(testLottery)
 
-            prizeCountMap[expected] shouldBe 1
+            prize shouldBe expected
         }
     }
 })
