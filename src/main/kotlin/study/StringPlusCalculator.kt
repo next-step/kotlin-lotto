@@ -1,26 +1,39 @@
 package study
 
+import java.lang.RuntimeException
+
 class StringPlusCalculator {
     fun calculate(input: String): Int {
         if (input.isBlank()) return 0
-        val numbers = ParserForStringPlusCalculator.parse(input)
+        val numbers = StringPlusCalculatorParser.parse(input)
         return numbers.sum()
     }
 }
 
-class ParserForStringPlusCalculator {
+class StringPlusCalculatorParser {
     companion object {
         fun parse(input: String): List<Int> {
             if (input.isBlank()) return emptyList()
 
+            val stringNumbers = splitStringNumbers(input)
+            return stringNumbers
+                .map(::parseStringNumber)
+        }
+
+        private fun parseStringNumber(stringNumber: String): Int {
+            if (stringNumber.toIntOrNull() == null) throw RuntimeException("숫자 이외의 값은 입력할 수 없습니다.")
+            val number = stringNumber.toInt()
+            if (number < 0) throw RuntimeException("음수는 입력할 수 없습니다.")
+            return number
+        }
+
+        private fun splitStringNumbers(input: String): List<String> {
             if (input.startsWith("//")) {
                 val customDelimiter = input.substring(2, 3)
-                val numbers = input.substring(4).split(customDelimiter)
-                return numbers.map { it.toInt() }
+                return input.substring(4).split(customDelimiter)
             }
             val delimiters = "[,:]".toRegex()
-            val numbers = input.split(delimiters)
-            return numbers.map { it.toInt() }
+            return input.split(delimiters)
         }
     }
 }

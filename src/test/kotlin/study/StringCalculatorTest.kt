@@ -1,5 +1,6 @@
 package study
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
@@ -27,7 +28,7 @@ class StringCalculatorTest : FunSpec({
             "1:2:3" to listOf(1, 2, 3),
             "1,2:3,4" to listOf(1, 2, 3, 4),
         ) { (input, expected) ->
-            ParserForStringPlusCalculator.parse(input) shouldBe expected
+            StringPlusCalculatorParser.parse(input) shouldBe expected
         }
     }
 
@@ -39,6 +40,18 @@ class StringCalculatorTest : FunSpec({
             "//;\n1;2;3;4;5" to 15,
         ) { (input, expected) ->
             StringPlusCalculator().calculate(input) shouldBe expected
+        }
+    }
+
+    context("숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw") {
+        withData(
+            "1,2,-3" to RuntimeException("음수는 입력할 수 없습니다."),
+            "1,2:3,-4" to RuntimeException("음수는 입력할 수 없습니다."),
+            "a,2:3,-4" to RuntimeException("숫자 이외의 값은 입력할 수 없습니다."),
+        ) { (input, expected) ->
+            shouldThrow<RuntimeException> {
+                StringPlusCalculator().calculate(input)
+            }.message shouldBe expected.message
         }
     }
 })
