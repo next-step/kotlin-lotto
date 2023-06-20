@@ -7,7 +7,7 @@ import view.OutputView
 class LotteryController(
     private val inputView: InputView = InputView(),
 ) {
-    private var purchaseAmount = 0
+
     fun startLotteryService() {
         val lotteries = purchaseLotteries()
         val prizeCountMap = checkLotteriesWin(lotteries)
@@ -18,20 +18,27 @@ class LotteryController(
         OutputView.reportProfit(profitRate)
     }
 
-    private fun purchaseLotteries(): List<Lottery> {
-        val (purchaseAmount, lotteries) = LotteryMachine.buyLotteries(rechargeAccount())
-        lotteries.forEach { lottery -> OutputView.reportPrizeState(lottery) }
-        this.purchaseAmount = purchaseAmount
-        return lotteries
+    private fun purchaseLotteries(): Pair<Int, List<Lottery>> {
+        val (money, manualSize) = inputMoneyAndManualSize()
+        val lotteries = inputView.inputManualNums(manualSize)
+        LotteryMachine.buyAutomaticLotteries(lotteries.size - manualSize, lotteries)
+
+        reportPurchasedState(manualSize, lotteries)
+
+        val purchasedAmount = (money / 1000) * 1000
+        return Pair(purchasedAmount, lotteries)
     }
 
-    private fun rechargeAccount(): Int {
+    private fun inputMoneyAndManualSize(): Pair<Int, Int> {
         val money = inputView.inputMoney()
-        require(money >= 1000) { "금액은 1,000보다 커야 합니다." }
+        val manualSize = inputView.inputManualSize()
+        LotteryMachine.checkManualSize(money, manualSize)
+        return Pair(money, manualSize)
+    }
 
-        val purchasableCount = money / 1000
-        OutputView.reportPurchaseCount(purchasableCount)
-        return money
+    private fun reportPurchasedState(manualSize: Int, lotteries: List<Lottery>) {
+        OutputView.reportPurchaseCount(manualSize, lotteries.size)
+        lotteries.forEach { lottery -> OutputView.reportPrizeState(lottery) }
     }
 
     private fun checkLotteriesWin(lotteries: List<Lottery>): MutableMap<Prize, Int> {
