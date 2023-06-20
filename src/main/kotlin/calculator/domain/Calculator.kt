@@ -2,14 +2,13 @@ package calculator.domain
 
 class Calculator {
     fun calculate(text: String?): Int {
-        val numbers = getNumbers(text)
-        return numbers.sumOf { convertStringToPositiveInt(it) }
+        return getNumbers(text).sum()
     }
 
-    private fun getNumbers(text: String?): List<String> = when {
+    private fun getNumbers(text: String?): List<Int> = when {
         text.isNullOrBlank() -> listOf()
-        text.contains(BACKSHASH) && text.contains(NEWLINE) -> getNumbersByCustomSeparator(text)
-        text.contains(SEPARATOR.toRegex()) -> text.split(SEPARATOR.toRegex())
+        text.contains(BACKSHASH) && text.contains(NEWLINE) -> getNumbersByCustomSeparator(text).map { convertStringToPositiveInt(it) }
+        text.contains(SEPARATOR.toRegex()) -> text.split(SEPARATOR.toRegex()).map { convertStringToPositiveInt(it) }
         else -> throw IllegalArgumentException(SEPARATOR_EXCEPTION)
     }
 
