@@ -21,6 +21,10 @@ class Lotto {
         return lottoNumbers.numbers.count { it in lastWinningNumber.numbers }
     }
 
+    fun getBonusMatch(bonusNumber: Int): Boolean {
+        return lottoNumbers.numbers.contains(bonusNumber)
+    }
+
     companion object {
         const val START_LOTTO_NUMBER = 1
         const val LAST_LOTTO_NUMBER = 45

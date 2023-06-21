@@ -14,13 +14,15 @@ fun main() {
     resultView.showLottos(lottos)
 
     val lastWinnerNumbers = input.inputLastWinNumbers()
+    val bonusNumber = input.inputBonusNumber()
 
     val statistics = LottoStatistics()
     val rankMap = statistics.initStatisticsMap()
 
     lottos.forEach {
         val matchCount = it.getMatchCount(lastWinnerNumbers)
-        Winner.findWinner(matchCount, rankMap)
+        val isBonusNumberContains = it.getBonusMatch(bonusNumber)
+        Winner.findWinner(matchCount, isBonusNumberContains, rankMap)
     }
     val rating = statistics.getRating(purchasePrice, rankMap)
 

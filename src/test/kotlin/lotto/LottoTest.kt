@@ -28,13 +28,13 @@ class LottoTest {
 
     @Test
     fun `로또는 6개의 랜덤한 숫자로 구성된다`() {
-        lotto.lottoNumbers.size shouldBe 6
+        lotto.lottoNumbers.numbers.size shouldBe 6
     }
 
     @Test
     fun `로또는 오름차순으로 구성된다`() {
         for (i in 0..4) {
-            lotto.lottoNumbers.get(i + 1) shouldBeGreaterThan lotto.lottoNumbers.get(i)
+            lotto.lottoNumbers.numbers.get(i + 1) shouldBeGreaterThan lotto.lottoNumbers.numbers.get(i)
         }
     }
 
