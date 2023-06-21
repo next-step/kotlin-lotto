@@ -14,7 +14,9 @@ fun main() {
     val tickets = LotteryShop.getTickets(lottoCount)
     ResultView.printLottoNums(tickets)
 
-    val score = Bank.score(tickets, WinningTicket(InputView.getLastLottoNums()))
+    val lastLottoNums = InputView.getLastLottoNums()
+    val bonusNum = InputView.getBonusNum()
+    val score = Bank.score(tickets, WinningTicket(lastLottoNums, bonusNum))
     val rate = Bank.calculateRateOfReturn(money, score)
     ResultView.printResult(score, rate)
 }
