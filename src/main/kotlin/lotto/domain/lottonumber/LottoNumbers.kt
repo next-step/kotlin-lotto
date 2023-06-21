@@ -18,8 +18,7 @@ value class LottoNumbers(val value: List<LottoNumber>) {
     }
 
     fun matchCount(other: LottoNumbers): Int {
-        val numberSet = value.toSet()
-        return other.value.count { numberSet.contains(it) }
+        return value.intersect(other.value.toSet()).size
     }
 
     companion object {
