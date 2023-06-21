@@ -1,6 +1,7 @@
 package lotto.view.output.sixFortyFiveNumberLotto
 
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningOutput
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningEnum
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import lotto.view.output.OutputView
@@ -9,10 +10,9 @@ class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningVa
     OutputView() {
 
     init {
-        val lottoWinningList = winningValue.getWinningResultEnumList(lottoList)
-            .filter { it != SixFortyFiveWinningEnum.SECOND }
-        val lottoWinningMap = winningValue.convertWinningResultEnumListToMap(lottoWinningList)
-        val earningRate = winningValue.getEarningRate(lottoWinningList, lottoList.size)
+        val lottoWinningOutput = SixFortyFiveLottoWinningOutput(lottoList, winningValue)
+        val lottoWinningMap = lottoWinningOutput.winningResultEnumMap
+        val earningRate = lottoWinningOutput.getEarningRate()
         var _message = "당첨 통계\n--------\n"
         listOf(
             SixFortyFiveWinningEnum.FIFTH,
