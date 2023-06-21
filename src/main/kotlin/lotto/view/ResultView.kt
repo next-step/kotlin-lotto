@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.enums.Winner
+import lotto.domain.Winner
 
 class ResultView {
 

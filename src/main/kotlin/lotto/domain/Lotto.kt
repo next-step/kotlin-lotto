@@ -1,7 +1,7 @@
 package lotto.domain
 
 class Lotto {
-    private var _lottoNumbers = listOf<Int>()
+    private val _lottoNumbers: List<Int>
 
     val lottoNumbers: List<Int>
         get() = _lottoNumbers

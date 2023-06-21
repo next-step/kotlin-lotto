@@ -1,9 +1,6 @@
 package lotto.domain
 
-import lotto.enums.Winner
-
 class LottoStatistics{
-
 
     fun initStatisticsMap(): MutableMap<Winner, Int> {
         val rankMap: MutableMap<Winner, Int> = mutableMapOf(
