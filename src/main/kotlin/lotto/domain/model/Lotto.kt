@@ -8,6 +8,7 @@ class Lotto {
         THREE_MATCH(3, 5_000),
         FOUR_MATCH(4, 50_000),
         FIVE_MATCH(5, 1_500_000),
+        FIVE_MATCH_PLUS_BONUS(5, 30_000_000),
         SIX_MATCH(6, 2_000_000_000)
     }
 
@@ -24,6 +25,7 @@ class Lotto {
             Prize.THREE_MATCH,
             Prize.FOUR_MATCH,
             Prize.FIVE_MATCH,
+            Prize.FIVE_MATCH_PLUS_BONUS,
             Prize.SIX_MATCH
         )
     }

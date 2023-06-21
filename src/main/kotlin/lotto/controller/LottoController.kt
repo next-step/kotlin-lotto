@@ -1,10 +1,15 @@
 package lotto.controller
 
-import lotto.*
-import lotto.domain.*
+import lotto.domain.InputParser
+import lotto.domain.LottoCalculator
+import lotto.domain.LottoStore
+import lotto.domain.LottoValidator
 import lotto.domain.model.InputResult
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoResult
+import lotto.domain.model.Lottos
+import lotto.domain.model.SelectedBalls
+import lotto.domain.model.WinningBalls
 import lotto.domain.model.toProfitState
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -13,7 +18,7 @@ class LottoController {
     fun execute() {
         try {
             val inputResult = input()
-            output(inputResult.lottos, inputResult.winningNumbers, inputResult.money)
+            output(inputResult.lottos, inputResult.selectedBalls, inputResult.money)
         } catch (e: IllegalArgumentException) {
             error(e)
         }
@@ -22,31 +27,31 @@ class LottoController {
     @Throws(IllegalArgumentException::class)
     private fun input(): InputResult {
         val money = InputView.inputMoney().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
-        val lottos = mutableListOf<Lotto>().apply { addAll(LottoStore.buy(money)) }
+        val lottos = Lottos(mutableListOf<Lotto>().apply { addAll(LottoStore.buy(money)) })
         ResultView.printBuyResult(lottos)
 
         val winningNumbers = InputParser.parse(InputView.inputWinningNumbers())
             .map { it.toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE) }
 
         require(winningNumbers.size == Lotto.NUMBER_COUNT) { INPUT_ERROR_MESSAGE }
-        return InputResult(lottos, winningNumbers, money)
+        return InputResult(lottos, SelectedBalls(WinningBalls(winningNumbers), 0), money)
     }
 
-    private fun output(lottos: List<Lotto>, winningNumbers: List<Int>, money: Int) {
-        val results = getResults(lottos, winningNumbers)
+    private fun output(lottos: Lottos, selectedBalls: SelectedBalls, money: Int) {
+        val results = getResults(lottos, selectedBalls)
         val earningRate = LottoCalculator.earningRate(results, money)
         ResultView.printLottoResult(results, earningRate, earningRate.toProfitState())
     }
 
     private fun error(error: Throwable) = ResultView.printMessage(error.message ?: "")
 
-    private fun getResults(lottos: List<Lotto>, winningNumbers: List<Int>): List<LottoResult> {
-        val validator = LottoValidator(winningNumbers)
+    private fun getResults(lottos: Lottos, selectedBalls: SelectedBalls): List<LottoResult> {
+        val validator = LottoValidator(selectedBalls)
         val results = Lotto.prizes.map { LottoResult(0, it) }.toMutableList()
-        lottos.forEach {
-            val index = validator.winningCount(it)
-            val (count, prize) = results[index]
-            results[index] = LottoResult(count + 1, prize)
+        lottos.items.forEach {
+            val prize = validator.getPrize(it)
+            val index = Lotto.prizes.indexOf(prize)
+            results[index] = LottoResult(results[index].count + 1, prize)
         }
         return results
     }

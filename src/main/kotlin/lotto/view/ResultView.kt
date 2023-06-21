@@ -1,13 +1,13 @@
 package lotto.view
 
-import lotto.domain.model.Lotto
 import lotto.domain.model.LottoResult
+import lotto.domain.model.Lottos
 import lotto.domain.model.ProfitState
 
 object ResultView {
-    fun printBuyResult(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다")
-        lottos.forEach {
+    fun printBuyResult(lottos: Lottos) {
+        println("${lottos.items.size}개를 구매했습니다")
+        lottos.items.forEach {
             println(it.numbers.sorted())
         }
         println()
