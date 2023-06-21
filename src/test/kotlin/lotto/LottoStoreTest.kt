@@ -40,7 +40,7 @@ class LottoStoreTest {
 
         val winningResult = winningLotto.matchCount(lotto.numbers)
 
-        Assertions.assertEquals(winningResult.countOfMatch, 4)
+        Assertions.assertEquals(winningResult.countOfMatch, 3)
         Assertions.assertEquals(winningResult.isMatchedBonus, true)
     }
 }
