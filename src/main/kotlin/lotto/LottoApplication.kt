@@ -57,14 +57,6 @@ class LottoApplication(
         return LottoBundle(inputMoney, lottoBundle)
     }
 
-    private fun lastWeekNumberValidation(lastWeekNumber: String) {
-        require(
-            lastWeekNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }.size == Lotto.COLLECT_LOTTO_SIZE
-        ) {
-            "로또 입력 숫자는 총 6개여야 합니다"
-        }
-    }
-
     private fun splitLottoNumbers(winningNumber: String): List<Int> {
         return winningNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }
     }
