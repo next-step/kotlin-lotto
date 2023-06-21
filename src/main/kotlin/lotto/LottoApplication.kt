@@ -4,6 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoBundle
 import lotto.domain.LottoNumber
 import lotto.utils.RateCalculator
+import lotto.utils.StringUtils
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -47,22 +48,28 @@ class LottoApplication(
 
     private fun getLottoBundleByMoney(): LottoBundle {
         val inputMoney = inputView.inputLottoBuyMoney().toInt()
-        resultView.printLottoCount(inputMoney)
+        val manualLottoCount = inputView.inputBuyManualLottoCount().toInt()
+        val manualLottoNumbers = getManualLottoNumbers(manualLottoCount)
+
+
+        resultView.printLottoCount(inputMoney, manualLottoCount)
 
         val lottoManager = LottoManager()
 
-        val lottoBundle = lottoManager.buyLotto(inputMoney)
+        val lottoBundle = lottoManager.buyLotto(inputMoney, manualLottoNumbers)
         resultView.printLottoBundle(lottoBundle)
         resultView.printEnter()
         return LottoBundle(inputMoney, lottoBundle)
     }
 
-    private fun lastWeekNumberValidation(lastWeekNumber: String) {
-        require(
-            lastWeekNumber.replace("\\s".toRegex(), "").split(",").map { it.toInt() }.size == Lotto.COLLECT_LOTTO_SIZE
-        ) {
-            "로또 입력 숫자는 총 6개여야 합니다"
+    private fun getManualLottoNumbers(manualLottoCount: Int): List<Lotto> {
+        val inputManualLottoNumbers = inputView.inputManualLottoNumbersByCount(manualLottoCount)
+
+        val manualLottoNumbers = inputManualLottoNumbers.map {
+            val target = StringUtils.replaceWhiteSpaceAndSplitByComma(it)
+            Lotto(StringUtils.convertStringToInt(target))
         }
+        return manualLottoNumbers
     }
 
     private fun splitLottoNumbers(winningNumber: String): List<Int> {

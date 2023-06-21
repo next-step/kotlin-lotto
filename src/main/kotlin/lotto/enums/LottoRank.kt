@@ -11,10 +11,18 @@ enum class LottoRank(
     SIX_COLLECT(6, 2_000_000_000),
     NON_COLLECT(0, 0);
 
-
     companion object {
         fun getLottoRankByCount(count: Int): LottoRank {
             return values().find { it.count == count } ?: NON_COLLECT
+        }
+
+        fun getLottoPrizeMoneyByCount(collectLottoRanks: List<LottoRank>, collectBonusCount: Int): Int {
+            var winningMoney = 0
+            collectLottoRanks.forEach { rank ->
+                winningMoney += rank.prizeMoney
+            }
+            if (collectBonusCount != 0) winningMoney += BONUS_COLLECT.prizeMoney * collectBonusCount
+            return winningMoney
         }
     }
 }

@@ -10,9 +10,9 @@ object ResultView {
         println("---------")
     }
 
-    fun printLottoCount(inputMoney: Int) {
+    fun printLottoCount(inputMoney: Int, manualLottoCount: Int) {
         val buyCount = inputMoney / Lotto.ONE_PRICE
-        println("${buyCount}개를 구매했습니다.")
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${buyCount}개를 구매했습니다.")
     }
 
     fun printLottoBundle(lottoBundle: List<Lotto>) {
