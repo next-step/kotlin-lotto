@@ -17,7 +17,8 @@ fun main() {
     resultView.outputIssuedLottos(issuedLottos)
 
     val winningNumbers: Set<Int> = inputView.inputWinningNumbers()
-    val issuedLottoMatchResult: IssuedLottoMatchResult = issuedLottos.check(WinningLotto(winningNumbers, 45))
+    val bonusNumber: Int = inputView.inputBonusNumber()
+    val issuedLottoMatchResult: IssuedLottoMatchResult = issuedLottos.check(WinningLotto(winningNumbers, bonusNumber))
     resultView.outputLottoMatchStat(issuedLottoMatchResult.matchStat)
 
     val earningsRate: Double = issuedLottoMatchResult.calculateEarningsRate(seedMoney)
