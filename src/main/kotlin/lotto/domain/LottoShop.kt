@@ -1,13 +1,11 @@
 package lotto.domain
 
 object LottoShop {
-    fun sellByMoney(money: Int): Lottos {
-        validateMoneyIsPositiveZero(money)
-
-        return Lottos(List(money / Lotto.PRICE) { Lotto() })
+    fun sellByMoney(money: Money, lottos: Lottos = Lottos.random(getCountOfLottos(money))): Lottos {
+        return lottos
     }
 
-    private fun validateMoneyIsPositiveZero(money: Int) {
-        require(money >= 0) { "로또 구입 금액은 0보다 커야 합니다." }
+    private fun getCountOfLottos(money: Money): Int {
+        return money.value / Lotto.PRICE
     }
 }

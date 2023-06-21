@@ -6,25 +6,32 @@ class Lottos(
     val size = values.size
     val cost = size * Lotto.PRICE
 
-    fun calculateResults(winningNumbers: WinningNumbers): LottosResult {
-        val winningResults = values
-            .map { lotto -> lotto.calculateResult(winningNumbers) }
-            .filterNotNull()
-            .groupingBy { it }
-            .eachCount()
-            .fillMissingRanks()
+    fun calculateResults(
+        winningNumbers: LottoNumbers,
+        bonusNumber: LottoNumber,
+    ): LottosResult {
+        val results = LottoRank.createMapWithLottoRankAndZero()
+        values.forEach { lotto ->
+            val lottoRank =
+                lotto.calculateResult(winningNumbers = winningNumbers, bonusNumber = bonusNumber) ?: return@forEach
+            results[lottoRank] = results[lottoRank]?.plus(1) ?: 0
+        }
 
         return LottosResult(
             totalCost = cost,
-            winningResults = winningResults,
+            winningResults = results.toMap(),
         )
     }
 
-    private fun Map<LottoRank, Int>.fillMissingRanks(): Map<LottoRank, Int> {
-        return LottoRank.values()
-            .filter { it !in this.keys }
-            .fold(this) { acc, rank ->
-                acc + (rank to 0)
-            }
+    companion object {
+        fun random(countOfLottos: Int): Lottos {
+            return Lottos(
+                List(countOfLottos) { Lotto() },
+            )
+        }
+
+        fun from(lottos: List<Lotto>): Lottos {
+           return Lottos(lottos)
+        }
     }
 }
