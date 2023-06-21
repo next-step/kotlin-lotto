@@ -1,13 +1,14 @@
 package lotto.domain.shop
 
+import math.PositiveNumber
+
 class RealLottoShop(
     private val lottoGameMachine: LottoGameMachine,
 ) : LottoShop {
 
     override fun purchase(lottoPurchasePaper: LottoPurchasePaper): LottoPurchaseResult {
-        val purchaseSize = lottoPurchasePaper.lottoPurchaseAmount / LOTTO_PRICE
         val selfSettingLottoGames = createSelfSettingLottoGames(lottoPurchasePaper.selfSettingLottoNumbersPapers)
-        val autoSettingLottoGames = createAutoSettingLottoGames(purchaseSize - selfSettingLottoGames.size)
+        val autoSettingLottoGames = createAutoSettingLottoGames(lottoPurchasePaper.autoPurchaseSize(LOTTO_PRICE))
         return LottoPurchaseResult(
             lottoGames = selfSettingLottoGames.plus(autoSettingLottoGames),
         )
@@ -28,6 +29,6 @@ class RealLottoShop(
 
     companion object {
 
-        private const val LOTTO_PRICE = 1_000
+        private val LOTTO_PRICE = PositiveNumber(1_000)
     }
 }
