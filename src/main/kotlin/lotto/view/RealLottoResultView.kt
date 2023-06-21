@@ -32,10 +32,10 @@ class RealLottoResultView : LottoResultView {
 
     private fun LottoPurchaseResult.makePurchaseSizeDisplayText(): String {
         return buildString {
-            if (selfSettingCount.value > 0) {
-                append("수동으로 ${selfSettingCount.value}장, ")
+            if (selfSettingCount > 0) {
+                append("수동으로 ${selfSettingCount}장, ")
             }
-            append("자동으로 ${autoSettingCount.value}개를 구매했습니다.")
+            append("자동으로 ${autoSettingCount}개를 구매했습니다.")
         }
     }
 

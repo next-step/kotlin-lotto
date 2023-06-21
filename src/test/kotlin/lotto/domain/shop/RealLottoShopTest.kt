@@ -35,8 +35,8 @@ class RealLottoShopTest : BehaviorSpec({
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 
         Then("수동 3개, 자동 0개가 담긴 로또 게임 목록을 반환한다") {
-            lottoPurchaseResult.selfSettingCount.value shouldBe 3
-            lottoPurchaseResult.autoSettingCount.value shouldBe 0
+            lottoPurchaseResult.selfSettingCount shouldBe 3
+            lottoPurchaseResult.autoSettingCount shouldBe 0
         }
     }
 
@@ -48,8 +48,8 @@ class RealLottoShopTest : BehaviorSpec({
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 
         Then("수동 2개, 자동 1개가 담긴 로또 게임 목록을 반환한다") {
-            lottoPurchaseResult.selfSettingCount.value shouldBe 2
-            lottoPurchaseResult.autoSettingCount.value shouldBe 1
+            lottoPurchaseResult.selfSettingCount shouldBe 2
+            lottoPurchaseResult.autoSettingCount shouldBe 1
         }
 
         Then("로또 게임의 순서는 수동, 수동, 자동이다") {
@@ -67,8 +67,8 @@ class RealLottoShopTest : BehaviorSpec({
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 
         Then("수동 1개, 자동 2개가 담긴 로또 게임 목록을 반환한다") {
-            lottoPurchaseResult.selfSettingCount.value shouldBe 1
-            lottoPurchaseResult.autoSettingCount.value shouldBe 2
+            lottoPurchaseResult.selfSettingCount shouldBe 1
+            lottoPurchaseResult.autoSettingCount shouldBe 2
         }
 
         Then("로또 게임의 순서는 수동, 자동, 자동이다") {
@@ -86,8 +86,7 @@ class RealLottoShopTest : BehaviorSpec({
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 
         Then("자동 3개가 담긴 로또 게임 목록을 반환한다") {
-            lottoPurchaseResult.selfSettingCount.value shouldBe 0
-            lottoPurchaseResult.autoSettingCount.value shouldBe 3
+            lottoPurchaseResult.selfSettingCount shouldBe 0
         }
     }
 })

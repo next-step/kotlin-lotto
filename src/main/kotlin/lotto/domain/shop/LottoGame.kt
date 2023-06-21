@@ -4,7 +4,6 @@ import lotto.domain.analysis.LottoWinRank
 import lotto.domain.analysis.MatchCondition
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
-import math.PositiveNumber
 
 data class LottoGame(
     val type: LottoGameType,
@@ -21,6 +20,6 @@ data class LottoGame(
     }
 }
 
-fun List<LottoGame>.count(type: LottoGameType): PositiveNumber {
-    return PositiveNumber(count { it.type == type })
+fun List<LottoGame>.count(type: LottoGameType): Int {
+    return count { it.type == type }
 }
