@@ -1,7 +1,10 @@
 package lotto
 
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+
 class LottoResult(
-    private val winningNums: List<Int>,
+    private val winningNums: List<LottoNumber>,
     private val lottos: List<Lotto>
 ) {
     private val countMap = mutableMapOf<Int, Int>()

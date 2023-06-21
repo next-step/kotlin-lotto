@@ -1,5 +1,8 @@
 package lotto
 
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+
 class LottoMaker(
     private val inputAmount: Int
 ) {
@@ -8,7 +11,9 @@ class LottoMaker(
         val numOfLotto = getPurchasableNum()
         val result = mutableListOf<Lotto>()
         repeat(numOfLotto) {
-            result += Lotto((LOWER_LIMIT..UPPER_LIMIT).toList().shuffled().take(COUNT_OF_LOTTO_NUM))
+            val randomNumbers = (LOWER_LIMIT..UPPER_LIMIT).toList().shuffled().take(COUNT_OF_LOTTO_NUM)
+            val lottoNumbers = randomNumbers.map { LottoNumber(it) }
+            result += Lotto(lottoNumbers)
         }
         return result
     }

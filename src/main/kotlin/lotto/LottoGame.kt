@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.LottoNumber
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -14,7 +15,7 @@ class LottoGame(
         val lottoList = lottoMaker.createLottoNums()
         resultView.displayPurchasedLotto(lottoList)
 
-        val winningNums = inputView.inputWinningNums()
+        val winningNums = inputView.inputWinningNums().map { LottoNumber(it) }
         val result = LottoResult(winningNums, lottoList)
         resultView.displayResult(result)
     }
