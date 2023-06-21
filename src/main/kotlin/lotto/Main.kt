@@ -9,7 +9,7 @@ fun main() {
 
     ResultView.printGameCount(gameCount)
 
-    val lottoNumbers = List(gameCount) { LottoNumbers.generateRandom() }
+    val lottoNumbers = List(gameCount) { LottoGame.generateRandomNumbers() }
 
     ResultView.printAllLottoNumbers(lottoNumbers)
 
