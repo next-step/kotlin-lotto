@@ -12,7 +12,7 @@ class LotteryController(
     fun startLotteryService() {
         val lotteries = purchaseLotteries()
         val prizeCountMap = LotteryCalculator.calculatePrizes(lotteries, getWinningFinder())
-        for (prize in Prize.values()) OutputView.reportPrize(prize.prizeMessage, prizeCountMap[prize] ?: 0)
+        for (prize in Prize.values()) OutputView.reportPrize(prize.prizeMessage, prizeCountMap[prize.matches] ?: 0)
         OutputView.reportProfit(Settlement.calculateProfitRate(prizeCountMap, lotteries.size))
     }
 

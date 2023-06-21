@@ -3,11 +3,11 @@ package domain
 object Settlement {
 
     fun calculateProfitRate(
-        prizeCountMap: Map<Prize, Int>,
+        prizeCountMap: Map<Int, Int>,
         investment: Int,
     ): Double {
-        val totalPrizeMoney = prizeCountMap.entries.sumOf { (prize, count) ->
-            count * prize.prizeMoney
+        val totalPrizeMoney = prizeCountMap.entries.sumOf { (prizeMoney, count) ->
+            count * prizeMoney
         }
         return totalPrizeMoney.toDouble() / investment
     }
