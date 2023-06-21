@@ -15,8 +15,9 @@ enum class Winner(
             Winner.values().find { winner ->
                 winner.matchCount == lottoMatchCount
             }?.let {
-                winner -> if (matchBonus) matchBonusWinner(rankMap)
-                else rankMap.put(winner,rankMap.getOrDefault(winner, 0) + 1)
+                winner ->
+                if (matchBonus) matchBonusWinner(rankMap)
+                else rankMap.put(winner, rankMap.getOrDefault(winner, 0) + 1)
             }
         }
 

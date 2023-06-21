@@ -21,7 +21,7 @@ class ResultView {
     }
 
     private fun showContainsBonusResult(data: Map.Entry<Winner, Int>) {
-        if (data.key == Winner.SECOND_PLACE_WITH_BONUS && data.value > 0){
+        if (data.key == Winner.SECOND_PLACE_WITH_BONUS && data.value > 0) {
             println("${data.key.matchCount}개 일치 보너스 볼 일치(${data.key.reward}원) - ${data.value}")
         } else println("${data.key.matchCount}개 일치 (${data.key.reward}원) - ${data.value}")
     }
