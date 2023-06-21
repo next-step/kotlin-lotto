@@ -37,4 +37,12 @@ class LottoTest {
             lotto.buyLottoTicket(money)
         }
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["0", "-1"])
+    fun `로또 구매갯수가 음수나 0이면 IllegalArgumentException을 throw한다`(numOfLottoPurchases: Int) {
+        assertThrows<IllegalArgumentException> {
+            lotto.generateLottoNumbers(numOfLottoPurchases)
+        }
+    }
 }
