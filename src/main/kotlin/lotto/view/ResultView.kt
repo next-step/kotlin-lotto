@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
-import lotto.domain.LottoStatistics
+import lotto.domain.LottosStatisticsVO
 
 class ResultView {
     fun printPurchaseAmount(amount: Int) {
@@ -13,9 +13,9 @@ class ResultView {
         lottos.forEach { printLotto(it) }
     }
 
-    fun printWinningResult(statistics: LottoStatistics) {
-        printWinningStatistics(statistics)
-        printRateOfReturn(statistics)
+    fun printWinningResult(statistics: LottosStatisticsVO) {
+        printStatistics(statistics.prizeMap)
+        printRateOfReturn(statistics.totalPrizeMoney, statistics.rateOfReturn)
     }
 
     private fun printLotto(lotto: Lotto) {
@@ -23,23 +23,32 @@ class ResultView {
         println("[${numbers.joinToString(", ")}]")
     }
 
-    private fun printWinningStatistics(lottoStatistics: LottoStatistics) {
+    private fun printStatistics(prizeMap: Map<LottoPrizes, Int>) {
         println("\n당첨 통계")
         println("---------")
 
         LottoPrizes.values().forEach { prize ->
-            val equalCount = lottoStatistics.getEqualCount(prize.equalCount)
-            val prizeMoney = LottoPrizes.getMoney(prize.equalCount)
-            println("${prize.equalCount}개 일치 (${prizeMoney}원)- ${equalCount}개")
+            printStatisticsByLottoPrizes(prize, prizeMap.getOrDefault(prize, 0))
         }
     }
 
-    private fun printRateOfReturn(lottoStatistics: LottoStatistics) {
-        if (lottoStatistics.totalPrizes == 0) {
+    private fun printStatisticsByLottoPrizes(prize: LottoPrizes, equalCount: Int) {
+        if (prize === LottoPrizes.NONE) {
+            return
+        }
+
+        if (prize === LottoPrizes.MATCH_FIVE_PRIZES_WITH_BONUS) {
+            return println("${prize.equalCount}개 일치, 보너스 볼 일치(${prize.money}원)- ${equalCount}개")
+        }
+
+        println("${prize.equalCount}개 일치 (${prize.money}원)- ${equalCount}개")
+    }
+
+    private fun printRateOfReturn(totalPrizeMoney: Int, rateOfReturn: Double) {
+        if (totalPrizeMoney == 0) {
             return println("총 수익률은 0입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
         }
 
-        val rateOfReturn = lottoStatistics.rateOfReturn
         val textRateOfReturn = "%.3f".format(rateOfReturn).take(4)
 
         return when {
