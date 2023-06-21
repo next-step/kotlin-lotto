@@ -14,7 +14,7 @@ class LottoWinningTest : BehaviorSpec({
             Then("3개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
-                prize shouldBe Rank.FOURTH
+                prize shouldBe Rank.FIFTH
             }
         }
 
@@ -23,7 +23,7 @@ class LottoWinningTest : BehaviorSpec({
             Then("4개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
-                prize shouldBe Rank.THIRD
+                prize shouldBe Rank.FOURTH
             }
         }
 
@@ -33,6 +33,33 @@ class LottoWinningTest : BehaviorSpec({
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
                 prize shouldBe Rank.FIRST
+            }
+        }
+
+        When("나의 로또 번호 1,2,3,4,5,7") {
+            val lotto = Lotto.createWinning("1,2,3,4,5,7".toNumbers())
+            Then("5개 일치 이다") {
+                val result = lottoWinning.lottoResult(listOf(lotto)).toList()
+                val prize = result[0].first
+                prize shouldBe Rank.THIRD
+            }
+        }
+
+        When("나의 로또 번호 1,2,3,4,5,10") {
+            val lotto = Lotto.createWinning("1,2,3,4,5,10".toNumbers())
+            Then("5개 일치 이다 보너스 일치") {
+                val result = lottoWinning.lottoResult(listOf(lotto)).toList()
+                val prize = result[0].first
+                prize shouldBe Rank.SECOND
+            }
+        }
+
+        When("나의 로또 번호 2,3,4,5,6,10") {
+            val lotto = Lotto.createWinning("2,3,4,5,6,10".toNumbers())
+            Then("5개 일치 이다 보너스 일치") {
+                val result = lottoWinning.lottoResult(listOf(lotto)).toList()
+                val prize = result[0].first
+                prize shouldBe Rank.SECOND
             }
         }
 
