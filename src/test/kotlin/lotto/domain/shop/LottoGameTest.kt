@@ -6,18 +6,10 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 import lotto.domain.analysis.LottoWinRank
 import lotto.domain.lottonumber.LottoNumber
-import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
+import lotto.domain.lottonumber.lottoNumbers
 
 class LottoGameTest : BehaviorSpec({
-
-    fun lottoNumbers(vararg numbers: Int): LottoNumbers {
-        return LottoNumbers(numbers.map { LottoNumber(it) })
-    }
-
-    fun autoLottoGame(lottoNumbers: LottoNumbers): LottoGame {
-        return LottoGame(LottoGameType.AUTO, lottoNumbers)
-    }
 
     Given("로또 번호가") {
         val winLottoNumbers = WinLottoNumbers(

@@ -2,8 +2,6 @@ package lotto.domain.shop
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.domain.lottonumber.LottoNumber
-import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.shop.lottonumberprovider.RealLottoNumberProvider
 import math.PositiveNumber
 import shffule.RandomShuffler
@@ -16,16 +14,6 @@ class RealLottoShopTest : BehaviorSpec({
             RandomShuffler(),
         ),
     )
-
-    fun lottoNumbers(vararg numbers: Int): LottoNumbers {
-        return LottoNumbers(numbers.map { LottoNumber(it) })
-    }
-
-    fun mockSelfSettingLottoNumbersPapers(size: Int): List<SelfSettingLottoNumberPaper> {
-        return List(size) {
-            SelfSettingLottoNumberPaper(lottoNumbers(1, 2, 3, 4, 5, 6))
-        }
-    }
 
     Given("3개 중 3개의 로또 게임을 수동 구매 했다면") {
         val lottoPurchasePaper = LottoPurchasePaper(
