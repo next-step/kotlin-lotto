@@ -15,7 +15,7 @@ class StringParserTest {
 
         val result = stringParser.parsingNumbers("//;\n1;2;3")
 
-        result shouldBe listOf(1L, 2L, 3L)
+        result shouldBe PositiveNumbers(listOf(PositiveNumber(1), PositiveNumber(2), PositiveNumber(3)))
     }
 
     @Test
@@ -24,7 +24,7 @@ class StringParserTest {
 
         val result = stringParser.parsingNumbers("1,2,3")
 
-        result shouldBe listOf(1L, 2L, 3L)
+        result shouldBe PositiveNumbers(listOf(PositiveNumber(1), PositiveNumber(2), PositiveNumber(3)))
     }
 
     @Test
@@ -33,7 +33,7 @@ class StringParserTest {
 
         val result = stringParser.parsingNumbers("2:3:4")
 
-        result shouldBe listOf(2L, 3L, 4L)
+        result shouldBe PositiveNumbers(listOf(PositiveNumber(2), PositiveNumber(3), PositiveNumber(4)))
     }
 
     @Test
@@ -58,6 +58,6 @@ class StringParserTest {
 
         val result = stringParser.parsingNumbers(text)
 
-        result shouldBe listOf(text.toLong())
+        result shouldBe PositiveNumbers(listOf(PositiveNumber(text.toLong())))
     }
 }
