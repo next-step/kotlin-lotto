@@ -1,7 +1,5 @@
 package lotto.domain.lottonumber
 
-import math.PositiveNumber
-
 data class WinLottoNumbers(
     val lottoNumbers: LottoNumbers,
     val bonusNumber: LottoNumber,
@@ -13,7 +11,7 @@ data class WinLottoNumbers(
         }
     }
 
-    fun matchCount(other: LottoNumbers): PositiveNumber {
+    fun matchCount(other: LottoNumbers): Int {
         return lottoNumbers.matchCount(other)
     }
 
