@@ -19,6 +19,7 @@ class Lottery(numbers: Set<LotteryNumber>) {
     companion object {
         private val BASE_NUMBERS = (LotteryNumber.MIN_LOTTERY_NUMBER..LotteryNumber.MAX_LOTTERY_NUMBER).toSet()
         private const val LOTTERY_NUMBER_SIZE = 6
+        const val LOTTERY_PRICE = 1000
         fun makeAutoLottery(): Lottery {
             return Lottery(
                 BASE_NUMBERS.shuffled().take(LOTTERY_NUMBER_SIZE).sorted().map { LotteryNumber.get(it) }
@@ -55,6 +56,22 @@ class LotteryTest : StringSpec({
         val duplicatedNumbers = listOf(1, 2, 3, 1, 4, 5)
         shouldThrow<IllegalArgumentException> {
             Lottery(duplicatedNumbers.map { LotteryNumber.get(it) }.toSet())
+        }
+    }
+
+    "로또 한장의 금액은 1000원 이다." {
+        Lottery.LOTTERY_PRICE shouldBe 1000
+    }
+
+    "로또 숫자의 크기는 1이상 이여야한다." {
+        shouldThrow<IllegalArgumentException> {
+            LotteryNumber.get(0)
+        }
+    }
+
+    "로또 숫자의 크기는 45이하여야 한다." {
+        shouldThrow<IllegalArgumentException> {
+            LotteryNumber.get(46)
         }
     }
 })
