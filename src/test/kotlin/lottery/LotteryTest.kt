@@ -4,48 +4,6 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-class Lottery(numbers: Set<LotteryNumber>) {
-    val lotteryNumbers: Set<LotteryNumber>
-
-    init {
-        require(!hasDuplicatedLotteryNumbers(numbers)) { "로또 번호에 중복되는 숫자가 있습니다." }
-        lotteryNumbers = numbers
-    }
-
-    private fun hasDuplicatedLotteryNumbers(numbers: Set<LotteryNumber>): Boolean {
-        return numbers.size != LOTTERY_NUMBER_SIZE
-    }
-
-    companion object {
-        private val BASE_NUMBERS = (LotteryNumber.MIN_LOTTERY_NUMBER..LotteryNumber.MAX_LOTTERY_NUMBER).toSet()
-        private const val LOTTERY_NUMBER_SIZE = 6
-        const val LOTTERY_PRICE = 1000
-        fun makeAutoLottery(): Lottery {
-            return Lottery(
-                BASE_NUMBERS.shuffled().take(LOTTERY_NUMBER_SIZE).sorted().map { LotteryNumber.get(it) }
-                    .toSet()
-            )
-        }
-    }
-}
-
-@JvmInline
-value class LotteryNumber private constructor(
-    private val number: Int,
-) {
-    init {
-        require(number >= MIN_LOTTERY_NUMBER) { "로또 번호는 1이상여야 합니다." }
-        require(number <= MAX_LOTTERY_NUMBER) { "로또 번호는 45이하이여야 합니다." }
-    }
-
-    companion object {
-        fun get(number: Int) = LotteryNumber(number)
-
-        const val MAX_LOTTERY_NUMBER = 45
-        const val MIN_LOTTERY_NUMBER = 1
-    }
-}
-
 class LotteryTest : StringSpec({
     "자동 로또 생성을 할 경우의 숫자의 개수는 6개이다." {
         val lottery = Lottery.makeAutoLottery()
@@ -63,15 +21,6 @@ class LotteryTest : StringSpec({
         Lottery.LOTTERY_PRICE shouldBe 1000
     }
 
-    "로또 숫자의 크기는 1이상 이여야한다." {
-        shouldThrow<IllegalArgumentException> {
-            LotteryNumber.get(0)
-        }
-    }
-
-    "로또 숫자의 크기는 45이하여야 한다." {
-        shouldThrow<IllegalArgumentException> {
-            LotteryNumber.get(46)
-        }
+    "로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다." {
     }
 })
