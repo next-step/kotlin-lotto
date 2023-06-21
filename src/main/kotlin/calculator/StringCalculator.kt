@@ -11,10 +11,8 @@ class StringCalculator(
     }
 
     private fun checkNegativeNumber() {
-        inputData.forEach {
-            if (it.toInt() < 0){
-                throw RuntimeException("음수를 입력할 수 없습니다.")
-            }
-        }
+        val temp = inputData.any { it.toInt() <0 }
+        if (temp)
+            throw RuntimeException("음수를 입력할 수 없습니다.")
     }
 }

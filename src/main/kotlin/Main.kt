@@ -1,14 +1,25 @@
-import calculator.ExpressionParser
-import calculator.ResultView
-import calculator.StringCalculator
+import lotto.domain.LottoShop
+import lotto.domain.LottoStatistics
+import lotto.enums.Winner
+import lotto.view.InputView
+import lotto.view.ResultView
 
 fun main() {
-    val input = readLine()!!
+    val input = InputView()
+    val purchasePrice = input.inputPurchasePrice()
+    val lottos = LottoShop(purchasePrice).sellLotto()
+    val resultView = ResultView()
+    resultView.showLottoCount(lottos)
+    resultView.showLottos(lottos)
+    val lastWinnerNumbers = input.inputLastWinNumbers()
+    val statistics = LottoStatistics()
+    val rankMap = statistics.initStatisticsMap()
+    lottos.forEach {
+        val matchCount = it.getMatchCount(lastWinnerNumbers)
+        Winner.findWinner(matchCount, rankMap)
+    }
+    val rating = statistics.getRating(purchasePrice, rankMap)
 
-    val expressionParser = ExpressionParser()
-    val checkData = expressionParser.checkNullOrEmpty(input)
-    val calculateTargetData = expressionParser.parseInputData(checkData)
-
-    val result = StringCalculator(calculateTargetData).execute()
-    ResultView().showResult(result)
+    resultView.showStatisticsResult(rankMap)
+    resultView.showWinRating(rating)
 }
