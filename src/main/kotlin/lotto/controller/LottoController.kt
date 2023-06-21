@@ -16,7 +16,8 @@ class LottoController(
         resultView.showBuyLotto(lottoList)
 
         val winNumbers = inputView.inputLottoWinningNumbers()
-        val winningNumbers = LottoWinning(winNumbers)
+        val bonusNumber = inputView.inputLottoBonusNumbers()
+        val winningNumbers = LottoWinning(winNumbers, bonusNumber)
         val result = winningNumbers.lottoResult(lottoList)
         val total = LottoStatistics.totalStatistics(result, amount)
 

@@ -8,9 +8,9 @@ class Lotto(val numbers: Set<LottoNumber>) {
         }
     }
 
-    fun matchingCount(lotto: Lotto) = numbers.count {
-        it in lotto.numbers
-    }
+    fun matchingCount(lotto: Lotto) = numbers.intersect(lotto.numbers).count()
+
+    fun isBonus(bonus: LottoNumber) = numbers.contains(bonus)
 
     companion object {
         private const val LOTTO_SIZE = 6

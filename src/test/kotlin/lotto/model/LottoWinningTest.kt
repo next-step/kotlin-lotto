@@ -5,13 +5,16 @@ import io.kotest.matchers.shouldBe
 
 class LottoWinningTest : BehaviorSpec({
     Given("1,2,3,4,5,6 당첨번호") {
-        val lottoWinning = LottoWinning("1,2,3,4,5,6".toNumbers())
+
+        val numbers = "1,2,3,4,5,6".toNumbers()
+        val bonus = 10
+        val lottoWinning = LottoWinning(numbers, bonus = bonus)
         When("나의 로또 번호 1,2,3,7,8,9") {
             val lotto = Lotto.createWinning("1,2,3,7,8,9".toNumbers())
             Then("3개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
-                prize shouldBe LottoPrize.FOURTH
+                prize shouldBe Rank.FOURTH
             }
         }
 
@@ -20,7 +23,7 @@ class LottoWinningTest : BehaviorSpec({
             Then("4개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
-                prize shouldBe LottoPrize.THIRD
+                prize shouldBe Rank.THIRD
             }
         }
 
@@ -29,7 +32,7 @@ class LottoWinningTest : BehaviorSpec({
             Then("6개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
-                prize shouldBe LottoPrize.FIRST
+                prize shouldBe Rank.FIRST
             }
         }
 
