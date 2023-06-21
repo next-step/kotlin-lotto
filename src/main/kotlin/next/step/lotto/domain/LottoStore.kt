@@ -5,19 +5,10 @@ object LottoStore {
     private const val LOTTO_PRICE: Int = 1000
 
     fun buy(payment: Int, algorithm: LottoNumberGenerationAlgorithm): Lottos {
-        val lottos = mutableSetOf<Lotto>()
-        var remained = payment
-        while (canBuy(remained)) {
-            val lotto: Lotto = Lotto.of(algorithm())
-            if (!lottos.contains(lotto)) {
-                remained -= LOTTO_PRICE
-                lottos.add(lotto)
-            }
-        }
-        return Lottos(lottos)
+        val cnt = payment / LOTTO_PRICE
+        val lottos = (1..cnt).map { Lotto.of(algorithm()) }.toSet()
+        return if (lottos.size == cnt) Lottos(lottos) else buy(payment, algorithm)
     }
-
-    private fun canBuy(payment: Int): Boolean = payment >= LOTTO_PRICE
 
     fun buy(payment: Int, lottos: Lottos): Int {
         val remained = payment - lottos.size() * LOTTO_PRICE
