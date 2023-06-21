@@ -20,6 +20,10 @@ class LottoNumbers(
         }
     }
 
+    fun contains(lottoNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(lottoNumber)
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
