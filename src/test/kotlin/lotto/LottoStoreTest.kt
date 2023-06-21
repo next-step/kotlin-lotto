@@ -25,7 +25,7 @@ class LottoStoreTest {
         val winningNumber = SixFortyFiveLotto(listOf(1, 2, 3, 4, 5, 6).map { SixFortyFiveNumber(it) })
         val winningLotto = SixFortyFiveWinningLotto(winningNumber)
 
-        val winningResult = lotto.checkWinning(winningLotto)
+        val winningResult = winningLotto.matchCount(lotto.numbers)
 
         Assertions.assertEquals(winningResult.countOfMatch, 3)
         Assertions.assertEquals(winningResult.isMatchedBonus, false)
@@ -38,7 +38,7 @@ class LottoStoreTest {
         val bonusNumber = SixFortyFiveNumber(7)
         val winningLotto = SixFortyFiveWinningLotto(winningNumber, bonusNumber)
 
-        val winningResult = lotto.checkWinning(winningLotto)
+        val winningResult = winningLotto.matchCount(lotto.numbers)
 
         Assertions.assertEquals(winningResult.countOfMatch, 4)
         Assertions.assertEquals(winningResult.isMatchedBonus, true)

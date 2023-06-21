@@ -14,7 +14,7 @@ class SixFortyFiveWinningLottoTest {
         val validLottoNumber = SixFortyFiveLotto(listOf(1, 3, 5, 6, 7, 21).map { SixFortyFiveNumber(it) })
         val winningLotto = SixFortyFiveWinningLotto(validLottoNumber)
 
-        Assertions.assertIterableEquals(validLottoNumber.numbers, winningLotto.getNumbers().numbers)
+        Assertions.assertIterableEquals(validLottoNumber.numbers, winningLotto.lotto.numbers)
     }
 
     @ParameterizedTest
@@ -26,7 +26,7 @@ class SixFortyFiveWinningLottoTest {
 
         val winningLotto = SixFortyFiveWinningLotto(validLottoNumber, bonusNumber)
 
-        Assertions.assertIterableEquals(winningLotto.getNumbers().numbers, expectedLottoNumberWithBonus)
-        Assertions.assertEquals(7, winningLotto.getNumbers().numbers.size)
+        Assertions.assertIterableEquals(winningLotto.lotto.numbers, expectedLottoNumberWithBonus)
+        Assertions.assertEquals(7, winningLotto.lotto.numbers.size)
     }
 }

@@ -29,7 +29,7 @@ class SixFortyFiveWinningEnumTest {
         val bonusNumber = SixFortyFiveNumber(6)
         val winningLotto = SixFortyFiveWinningLotto(SixFortyFiveLotto(winningNumber), bonusNumber)
 
-        val winningEnum = SixFortyFiveWinningEnum.valueOf(lotto.checkWinning(winningLotto))
+        val winningEnum = SixFortyFiveWinningEnum.valueOf(winningLotto.matchCount(lotto.numbers))
 
         Assertions.assertEquals(SixFortyFiveWinningEnum.SECOND, winningEnum)
     }
@@ -41,7 +41,7 @@ class SixFortyFiveWinningEnumTest {
         val bonusNumber = SixFortyFiveNumber(8)
         val winningLotto = SixFortyFiveWinningLotto(winningNumber, bonusNumber)
 
-        val winningEnum = SixFortyFiveWinningEnum.valueOf(lotto.checkWinning(winningLotto))
+        val winningEnum = SixFortyFiveWinningEnum.valueOf(winningLotto.matchCount(lotto.numbers))
 
         Assertions.assertEquals(SixFortyFiveWinningEnum.THIRD, winningEnum)
     }
@@ -54,7 +54,7 @@ class SixFortyFiveWinningEnumTest {
         val bonusNumber = SixFortyFiveNumber(6)
         val winningLotto = SixFortyFiveWinningLotto(winningNumber, bonusNumber)
 
-        val winningEnum = SixFortyFiveWinningEnum.valueOf(lotto.checkWinning(winningLotto))
+        val winningEnum = SixFortyFiveWinningEnum.valueOf(winningLotto.matchCount(lotto.numbers))
 
         Assertions.assertEquals(SixFortyFiveWinningEnum.FOURTH, winningEnum)
     }
@@ -67,7 +67,7 @@ class SixFortyFiveWinningEnumTest {
         val bonusNumber = SixFortyFiveNumber(6)
         val winningLotto = SixFortyFiveWinningLotto(winningNumber, bonusNumber)
 
-        val winningEnum = SixFortyFiveWinningEnum.valueOf(lotto.checkWinning(winningLotto))
+        val winningEnum = SixFortyFiveWinningEnum.valueOf(winningLotto.matchCount(lotto.numbers))
 
         Assertions.assertEquals(SixFortyFiveWinningEnum.FIFTH, winningEnum)
     }
@@ -83,7 +83,7 @@ class SixFortyFiveWinningEnumTest {
         val bonusNumber = SixFortyFiveNumber(5)
         val winningLotto = SixFortyFiveWinningLotto(winningNumber, bonusNumber)
 
-        val winningEnum = SixFortyFiveWinningEnum.valueOf(lotto.checkWinning(winningLotto))
+        val winningEnum = SixFortyFiveWinningEnum.valueOf(winningLotto.matchCount(lotto.numbers))
 
         Assertions.assertEquals(SixFortyFiveWinningEnum.MISS, winningEnum)
     }

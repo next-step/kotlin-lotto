@@ -3,7 +3,7 @@ package lotto.sixFortyFiveNumberLotto
 import lotto.ErrorCode
 
 class SixFortyFiveWinningLotto(
-    private val lotto: SixFortyFiveLotto,
+    val lotto: SixFortyFiveLotto,
     val bonusNumber: SixFortyFiveNumber? = null,
 ) {
 
@@ -14,17 +14,11 @@ class SixFortyFiveWinningLotto(
         }
     }
 
-    fun getNumbers(): SixFortyFiveLotto {
-        if (bonusNumber == null) return lotto
-        val numberListWithBonus = listOf(*lotto.numbers.toTypedArray(), bonusNumber!!)
-        return SixFortyFiveLotto(numberListWithBonus)
-    }
-
     fun getWinningResultEnumList(
         lottoList: List<SixFortyFiveLotto>,
     ): List<SixFortyFiveWinningEnum> {
         return lottoList.map { lotto ->
-            SixFortyFiveWinningEnum.valueOf(lotto.checkWinning(this))
+            SixFortyFiveWinningEnum.valueOf(matchCount(lotto.numbers))
         }
     }
 
@@ -41,5 +35,11 @@ class SixFortyFiveWinningLotto(
         val totalResultPrice = winningResultList.map { it.price }.reduce { acc, count -> acc + count }
         val totalPurchasePrice = lottoCount * SixFortyFiveLotto.LOTTO_PRICE
         return totalResultPrice / totalPurchasePrice.toDouble()
+    }
+
+    fun matchCount(numbers: List<SixFortyFiveNumber>): SixFortyFiveLottoWinningResult {
+        val countOfMatch = numbers.count { number -> this.lotto.numbers.find { it.value == number.value } != null }
+        val isMatchedBonus = numbers.find { number -> number.value == this.bonusNumber?.value } != null
+        return SixFortyFiveLottoWinningResult(countOfMatch, isMatchedBonus)
     }
 }
