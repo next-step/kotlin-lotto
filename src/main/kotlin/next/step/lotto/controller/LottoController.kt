@@ -1,6 +1,6 @@
 package next.step.lotto.controller
 
-import next.step.lotto.domain.LottoNumberGenerator
+import next.step.lotto.domain.LottoNumberRandomGenerator
 import next.step.lotto.domain.LottoStore
 import next.step.lotto.domain.WinningLotto
 import next.step.racing.view.InputView
@@ -10,8 +10,9 @@ fun main() {
     runCatching {
         val payment = InputView.readPayment()
         val manualLottos = InputView.readManualLottos()
-        val remained = LottoStore.buy(payment, manualLottos)
-        val randomLottos = LottoStore.buy(remained, LottoNumberGenerator.random())
+        val lottoStore = LottoStore.of(LottoNumberRandomGenerator)
+        val remained = lottoStore.buy(payment, manualLottos)
+        val randomLottos = lottoStore.buy(remained)
         OutputView.showLottos(manualLottos, randomLottos)
         val winningNumbers = InputView.readWinningNumbers()
         val bonusNumber = InputView.readBonusNumber()

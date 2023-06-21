@@ -8,6 +8,7 @@ import io.kotest.matchers.shouldBe
 class LottoStoreTest : DescribeSpec({
 
     describe("LottoStore method") {
+        val lottoStore = LottoStore.of(LottoNumberRandomGenerator)
         context("일정 금액으로 구매하면, 지불한 금액만큼 로또 제공") {
             data class BuyLottos(val payment: Int, val expected: Int)
             withData(
@@ -15,13 +16,13 @@ class LottoStoreTest : DescribeSpec({
                 BuyLottos(14000, 14),
                 BuyLottos(2500, 2)
             ) { (payment, expected) ->
-                LottoStore.buy(payment, LottoNumberGenerator.random()).size() shouldBe expected
+                lottoStore.buy(payment).size() shouldBe expected
             }
         }
 
         context("돈이 충분할 때, 수동으로 입력한 로또와 금액으로 구매하면") {
             it("남은 금액을 제공") {
-                LottoStore.buy(
+                lottoStore.buy(
                     1500,
                     Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))
                 ) shouldBe 500
@@ -31,7 +32,7 @@ class LottoStoreTest : DescribeSpec({
         context("돈이 충분하지 않을 때, 수동으로 입력한 로또와 금액으로 구매하면") {
             it("예외 발생") {
                 shouldThrow<IllegalArgumentException> {
-                    LottoStore.buy(
+                    lottoStore.buy(
                         500,
                         Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))
                     )
