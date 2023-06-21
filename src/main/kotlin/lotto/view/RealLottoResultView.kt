@@ -41,7 +41,7 @@ class RealLottoResultView : LottoResultView {
 
     private fun LottoWinRankAnalysisResult.makeDisplayText(): String {
         return buildString {
-            append("${numberMatchCount.value}개 일치")
+            append("${numberMatchCount}개 일치")
             if (isBonusMatched) {
                 append(", 보너스 볼 일치")
             }
