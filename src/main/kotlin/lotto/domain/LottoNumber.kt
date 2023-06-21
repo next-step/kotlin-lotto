@@ -6,7 +6,7 @@ class LottoNumber(
 
     init {
         require(number in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER) {
-            "로또의 숫자는 1부터 45 사이의 숫자만 가능합니다."
+            "로또의 숫자는 ${LOTTO_MIN_NUMBER}부터 $LOTTO_MAX_NUMBER 사이의 숫자만 가능합니다."
         }
     }
 
