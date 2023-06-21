@@ -23,9 +23,11 @@ object ResultView {
         println(RESULT_STRING)
         Rank.values()
             .filter { it != Rank.NONE }
-            .sortedBy { it.count }
+            .sortedBy { it.reward }
             .forEach {
-                println("${it.count}개 일치 (${it.reward}원) - ${score[it]}개")
+                print("${it.count}개 일치")
+                if (it == Rank.SECOND) print(", 보너스 볼 일치")
+                println("(${it.reward}원) - ${score[it]}개")
             }
 
         print("총 수익률은 ${DecimalFormat("#.##").format(rate)}입니다.")
