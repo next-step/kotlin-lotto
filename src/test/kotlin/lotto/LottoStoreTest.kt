@@ -14,9 +14,9 @@ class LottoStoreTest {
         val purchaseCount = 3
         val lottoStore = SixFortyFiveLottoStore()
 
-        val lottoList = lottoStore.purchase(purchaseCount)
+        val lottoes = lottoStore.purchase(purchaseCount)
 
-        lottoList.forEach { lotto -> lotto.shouldBeInstanceOf<SixFortyFiveLotto>() }
+        lottoes.lottoList.forEach { lotto -> lotto.shouldBeInstanceOf<SixFortyFiveLotto>() }
     }
 
     @Test

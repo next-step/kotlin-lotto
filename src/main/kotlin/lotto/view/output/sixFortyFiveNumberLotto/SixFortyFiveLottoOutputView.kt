@@ -1,10 +1,10 @@
 package lotto.view.output.sixFortyFiveNumberLotto
 
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoes
 import lotto.view.output.OutputView
 
-class SixFortyFiveLottoOutputView(lottoList: List<SixFortyFiveLotto>) :
+class SixFortyFiveLottoOutputView(lottoes: SixFortyFiveLottoes) :
     OutputView(
-        lottoList.map { lotto -> lotto.numbers.toString() + "\n" }
+        lottoes.lottoList.map { lotto -> lotto.numbers.toString() + "\n" }
             .reduce { acc, s -> acc + s },
     )

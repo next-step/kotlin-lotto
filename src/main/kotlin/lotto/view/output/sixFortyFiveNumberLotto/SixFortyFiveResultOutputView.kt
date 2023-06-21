@@ -1,12 +1,12 @@
 package lotto.view.output.sixFortyFiveNumberLotto
 
-import lotto.sixFortyFiveNumberLotto.SixFortyFiveLotto
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoWinningOutput
+import lotto.sixFortyFiveNumberLotto.SixFortyFiveLottoes
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningEnum
 import lotto.sixFortyFiveNumberLotto.SixFortyFiveWinningLotto
 import lotto.view.output.OutputView
 
-class SixFortyFiveResultOutputView(lottoList: List<SixFortyFiveLotto>, winningValue: SixFortyFiveWinningLotto) :
+class SixFortyFiveResultOutputView(lottoList: SixFortyFiveLottoes, winningValue: SixFortyFiveWinningLotto) :
     OutputView() {
 
     init {
