@@ -5,8 +5,10 @@ import lotto.domain.analysis.MatchCondition
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
 
-@JvmInline
-value class LottoGame(val lottoNumbers: LottoNumbers) {
+data class LottoGame(
+    val type: LottoGameType,
+    val lottoNumbers: LottoNumbers,
+) {
 
     fun matchOrNull(lastWeekLottoNumbers: WinLottoNumbers): LottoWinRank? {
         return LottoWinRank.findOrNull(

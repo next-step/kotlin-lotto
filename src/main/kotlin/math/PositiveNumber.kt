@@ -9,8 +9,8 @@ value class PositiveNumber(val value: Int) {
         }
     }
 
-    operator fun div(other: Int): Int {
-        return value / other
+    operator fun div(other: PositiveNumber): PositiveNumber {
+        return PositiveNumber(value / other.value)
     }
 
     operator fun plus(other: Int): PositiveNumber {

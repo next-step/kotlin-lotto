@@ -12,8 +12,8 @@ class LottoController(
 ) {
 
     fun start() {
-        val lottoPurchaseAmount = lottoInputView.readLottoPurchaseAmount()
-        val lottoPurchaseResult = lottoShop.purchase(lottoPurchaseAmount)
+        val lottoPurchasePaper = lottoInputView.readLottoPurchaseInfo()
+        val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
         lottoResultView.display(lottoPurchaseResult)
 
         lottoResultView.newLine()
@@ -21,7 +21,7 @@ class LottoController(
         val lastWeekWinLottoNumbers = lottoInputView.readLastWeekWinLottoNumbers()
         val lottoAnalysisRequest = LottoAnalysisRequest(
             lottoGames = lottoPurchaseResult.lottoGames,
-            lottoPurchaseAmount = lottoPurchaseAmount,
+            lottoPurchaseAmount = lottoPurchasePaper.lottoPurchaseAmount,
             lastWeekWinLottoNumbers = lastWeekWinLottoNumbers,
         )
 

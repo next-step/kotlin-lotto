@@ -6,10 +6,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 
 class WinLottoNumbersTest : BehaviorSpec({
 
-    fun lottoNumbers(vararg numbers: Int): LottoNumbers {
-        return LottoNumbers(numbers.map { LottoNumber(it) })
-    }
-
     Given("보너스 번호가") {
         val bonusNumber = LottoNumber(1)
         When("다른 번호들에 이미 존재하는 번호라면") {

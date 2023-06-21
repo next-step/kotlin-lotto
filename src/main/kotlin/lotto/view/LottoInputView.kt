@@ -1,11 +1,11 @@
 package lotto.view
 
 import lotto.domain.lottonumber.WinLottoNumbers
-import math.PositiveNumber
+import lotto.domain.shop.LottoPurchasePaper
 
 interface LottoInputView {
 
-    fun readLottoPurchaseAmount(): PositiveNumber
+    fun readLottoPurchaseInfo(): LottoPurchasePaper
 
     fun readLastWeekWinLottoNumbers(): WinLottoNumbers
 }

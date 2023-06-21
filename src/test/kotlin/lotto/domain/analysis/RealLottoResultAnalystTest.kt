@@ -3,27 +3,19 @@ package lotto.domain.analysis
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.lottonumber.LottoNumber
-import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
-import lotto.domain.shop.LottoGame
+import lotto.domain.lottonumber.lottoNumbers
+import lotto.domain.shop.autoLottoGame
 import math.PositiveNumber
 
 class RealLottoResultAnalystTest : BehaviorSpec({
 
-    fun makeLottoNumbers(vararg lottoNumbers: Int): LottoNumbers {
-        return LottoNumbers(lottoNumbers.map { LottoNumber(it) })
-    }
-
-    fun makeLottoGame(vararg lottoNumbers: Int): LottoGame {
-        return LottoGame(makeLottoNumbers(*lottoNumbers))
-    }
-
     Given("당첨된 등급 목록은") {
         val request = LottoAnalysisRequest(
-            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoGames = listOf(autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))),
             lottoPurchaseAmount = PositiveNumber(1_000),
             lastWeekWinLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                lottoNumbers(1, 2, 3, 4, 5, 6),
                 LottoNumber(40),
             )
         )
@@ -37,10 +29,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
 
     Given("1개의 로또가 1등에 당첨 되었다면") {
         val request = LottoAnalysisRequest(
-            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoGames = listOf(autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))),
             lottoPurchaseAmount = PositiveNumber(1_000),
             lastWeekWinLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                lottoNumbers(1, 2, 3, 4, 5, 6),
                 LottoNumber(40),
             )
         )
@@ -57,10 +49,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
 
     Given("1개의 로또가 2등에 당첨 되었다면") {
         val request = LottoAnalysisRequest(
-            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoGames = listOf(autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))),
             lottoPurchaseAmount = PositiveNumber(1_000),
             lastWeekWinLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(1, 2, 3, 4, 5, 7),
+                lottoNumbers(1, 2, 3, 4, 5, 7),
                 LottoNumber(6),
             )
         )
@@ -77,10 +69,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
 
     Given("1개의 로또가 3등에 당첨 되었다면") {
         val request = LottoAnalysisRequest(
-            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoGames = listOf(autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))),
             lottoPurchaseAmount = PositiveNumber(1_000),
             lastWeekWinLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(1, 2, 3, 4, 5, 7),
+                lottoNumbers(1, 2, 3, 4, 5, 7),
                 LottoNumber(40),
             )
         )
@@ -97,10 +89,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
 
     Given("1개의 로또가 4등에 당첨 되었다면") {
         val request = LottoAnalysisRequest(
-            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoGames = listOf(autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))),
             lottoPurchaseAmount = PositiveNumber(1_000),
             lastWeekWinLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(1, 2, 3, 4, 7, 8),
+                lottoNumbers(1, 2, 3, 4, 7, 8),
                 LottoNumber(40),
             )
         )
@@ -117,10 +109,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
 
     Given("1개의 로또가 5등에 당첨 되었다면") {
         val request = LottoAnalysisRequest(
-            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoGames = listOf(autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))),
             lottoPurchaseAmount = PositiveNumber(1_000),
             lastWeekWinLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(1, 2, 3, 7, 8, 9),
+                lottoNumbers(1, 2, 3, 7, 8, 9),
                 LottoNumber(40),
             )
         )
@@ -137,10 +129,10 @@ class RealLottoResultAnalystTest : BehaviorSpec({
 
     Given("1개의 로또가 당첨되지 않았다면") {
         val request = LottoAnalysisRequest(
-            lottoGames = listOf(makeLottoGame(1, 2, 3, 4, 5, 6)),
+            lottoGames = listOf(autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))),
             lottoPurchaseAmount = PositiveNumber(1_000),
             lastWeekWinLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(10, 11, 12, 13, 14, 15),
+                lottoNumbers(10, 11, 12, 13, 14, 15),
                 LottoNumber(40),
             )
         )
@@ -158,17 +150,17 @@ class RealLottoResultAnalystTest : BehaviorSpec({
 
     Given("5개의 로또가") {
         val lottoGames = listOf(
-            makeLottoGame(1, 2, 3, 4, 5, 6),
-            makeLottoGame(1, 2, 3, 4, 5, 40),
-            makeLottoGame(1, 2, 3, 4, 5, 7),
-            makeLottoGame(1, 2, 3, 4, 7, 8),
-            makeLottoGame(1, 2, 3, 7, 8, 9),
+            autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6)),
+            autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 40)),
+            autoLottoGame(lottoNumbers(1, 2, 3, 4, 5, 7)),
+            autoLottoGame(lottoNumbers(1, 2, 3, 4, 7, 8)),
+            autoLottoGame(lottoNumbers(1, 2, 3, 7, 8, 9)),
         )
         val lottoPurchaseAmount = PositiveNumber(5_000)
 
         When("1, 2, 3, 4, 5등에 당첨 되었다면") {
             val winLottoNumbers = WinLottoNumbers(
-                makeLottoNumbers(1, 2, 3, 4, 5, 6),
+                lottoNumbers(1, 2, 3, 4, 5, 6),
                 LottoNumber(40),
             )
             val request = LottoAnalysisRequest(lottoGames, lottoPurchaseAmount, winLottoNumbers)

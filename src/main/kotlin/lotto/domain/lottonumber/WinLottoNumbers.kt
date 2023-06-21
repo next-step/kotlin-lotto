@@ -1,13 +1,9 @@
 package lotto.domain.lottonumber
 
-import math.PositiveNumber
-
 data class WinLottoNumbers(
     val lottoNumbers: LottoNumbers,
     val bonusNumber: LottoNumber,
 ) {
-
-    private val lottoNumberSet by lazy { lottoNumbers.toSet() }
 
     init {
         require(bonusNumber !in lottoNumbers) {
@@ -15,9 +11,8 @@ data class WinLottoNumbers(
         }
     }
 
-    fun matchCount(other: LottoNumbers): PositiveNumber {
-        val matchCount = other.value.count { lottoNumberSet.contains(it) }
-        return PositiveNumber(matchCount)
+    fun matchCount(other: LottoNumbers): Int {
+        return lottoNumbers.matchCount(other)
     }
 
     fun matchBonus(other: LottoNumbers): Boolean {
