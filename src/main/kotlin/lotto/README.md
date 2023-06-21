@@ -12,6 +12,8 @@
     - [x] 생성된 로또 번호는 중복이 없다. -> LottoNumbers
 - [x] 로또 구매갯수가 음수나 0이면 IllegalArgumentException을 throw한다. -> Lotto
 - [x] 당첨 번호를 입력받아서 당첨번호를 생성한다. -> WinningNumber
-- [x] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다. -> WinningNumber
-- [ ] 로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다.
+  - [x] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다. -> WinningNumber(LottoNumber의 메서드 호출)
+  - [x] 당첨 번호는 중복이 있으면 안된다. -> WinningNumber(LottoNumber의 메서드 호출)
+- [ ] 로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다. -> LottoMatcher
+  - [ ] 두개의 번호 리스트를 입력받아서 두개의 리스트가 같은지 검증한다. -> LottoNumberComparator
 - [ ] 당첨 통계를 가지고 수익률을 계산한다.

@@ -32,4 +32,13 @@ class WinningNumberTest {
             winningNumber.generateWinningNumber(numberList)
         }
     }
+
+    @ParameterizedTest
+    @CsvSource("1,1,3,4,5,6", "45,45,3,4,5,6", delimiter = ' ')
+    fun `당첨 번호는 중복이 있으면 안된다`(input: String) {
+        val numberList = input.split(',').map { it.toInt() }
+        assertThrows<IllegalArgumentException> {
+            winningNumber.generateWinningNumber(numberList)
+        }
+    }
 }
