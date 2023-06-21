@@ -10,8 +10,8 @@
 - [x] 입력받은 구입 금액에 맞게 로또를 구매한다. -> Lotto
 - [x] 1부터 45까지 숫자중 6개의 숫자를 무작위로 로또 번호를 생성한다. -> LottoNumbers
     - [x] 생성된 로또 번호는 중복이 없다. -> LottoNumbers
-- [ ] 로또 구매갯수가 음수나 0이면 IllegalArgumentException을 throw한다. -> Lotto
-- [ ] 당첨 번호를 입력받아서 당첨번호를 생성한다.
-- [ ] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다.
+- [x] 로또 구매갯수가 음수나 0이면 IllegalArgumentException을 throw한다. -> Lotto
+- [x] 당첨 번호를 입력받아서 당첨번호를 생성한다. -> WinningNumber
+- [x] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다. -> WinningNumber
 - [ ] 로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다.
 - [ ] 당첨 통계를 가지고 수익률을 계산한다.

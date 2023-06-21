@@ -2,7 +2,7 @@ package lotto.domain
 
 class Lotto {
 
-    var lottoNumbers: LottoNumbers = LottoNumbers()
+    var lotteryPapers: LotteryPapers = LotteryPapers()
         private set
 
     fun buyLottoTicket(money: Int): Int {
@@ -21,7 +21,7 @@ class Lotto {
     fun generateLottoNumbers(numOfLottoPurchases: Int) {
         validateNumOfLottoPurchases(numOfLottoPurchases)
         for (i in 0 until numOfLottoPurchases) {
-            lottoNumbers.generateRandomLottoNumber()
+            lotteryPapers.generateRandomLottoNumber()
         }
     }
 
