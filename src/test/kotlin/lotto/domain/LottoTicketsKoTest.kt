@@ -18,7 +18,11 @@ class LottoTicketsKoTest : StringSpec({
             listOf(1, 2, 3, 4, 5, 45) to 1500.0f,
             listOf(40, 41, 42, 43, 44, 45) to 0.0f,
         ).forAll { (winNumbers, yield) ->
-            LottoTickets(Money(1000), testNumbers).getWinStats(LottoTicket(winNumbers)).yield shouldBe yield
+            val bonusNumber = 44
+            LottoTickets(Money(1000), testNumbers).getWinStats(
+                LottoTicket(winNumbers),
+                bonusNumber,
+            ).yield shouldBe yield
         }
     }
 })

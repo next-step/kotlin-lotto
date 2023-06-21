@@ -7,15 +7,17 @@ import io.kotest.matchers.shouldBe
 class WinResultKoTest : StringSpec({
     "맞춘 갯수에 따른 당첨 결과" {
         mapOf(
-            6 to WinResult.FIRST,
-            5 to WinResult.THIRD,
-            4 to WinResult.FOURTH,
-            3 to WinResult.FIFTH,
-            2 to WinResult.LOSE,
-            1 to WinResult.LOSE,
-            0 to WinResult.LOSE,
-        ).forAll { (matchCount, winResult) ->
-            WinResult.valueOfMatchCount(matchCount) shouldBe winResult
+            Pair(6, false) to WinResult.FIRST,
+            Pair(5, true) to WinResult.SECOND,
+            Pair(5, false) to WinResult.THIRD,
+            Pair(4, false) to WinResult.FOURTH,
+            Pair(3, false) to WinResult.FIFTH,
+            Pair(2, false) to WinResult.LOSE,
+            Pair(1, false) to WinResult.LOSE,
+            Pair(0, false) to WinResult.LOSE,
+            Pair(0, true) to WinResult.LOSE,
+        ).forAll { (pair, winResult) ->
+            WinResult.valueOf(pair.first, pair.second) shouldBe winResult
         }
     }
 })

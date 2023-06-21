@@ -2,15 +2,22 @@ package lotto.domain
 
 import lotto.dto.WinStats
 import lotto.util.AutoNumbers
+import lotto.util.RandomNumbers
 
-class LottoTickets(private val money: Money, autoNumbers: AutoNumbers) {
-    val lottoTickets: List<LottoTicket> = List(money.countLotto()) {
-        LottoTicket(autoNumbers.generateNumbers())
+class LottoTickets(private val money: Money) {
+    var lottoTickets: List<LottoTicket> = List(money.countLotto()) {
+        LottoTicket(RandomNumbers.generateNumbers())
     }
 
-    fun getWinStats(winNumbers: LottoTicket): WinStats {
+    constructor(money: Money, autoNumbers: AutoNumbers) : this(money) {
+        this.lottoTickets = List(money.countLotto()) {
+            LottoTicket(autoNumbers.generateNumbers())
+        }
+    }
+
+    fun getWinStats(winNumbers: LottoTicket, bonus: Int): WinStats {
         val matchMap: Map<WinResult, Int> = lottoTickets.map {
-            it.getWinResult(winNumbers)
+            it.getWinResult(winNumbers, bonus)
         }.filter {
             it !== WinResult.LOSE
         }.groupingBy { it }
