@@ -17,8 +17,17 @@ class LottoTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["14000", "3000"])
+    fun `입력받은 구입 금액을 로또 개당 가격으로 나눈 숫자만큼 티켓을 구매한다`(money: Int) {
+        Assertions.assertThat(lotto.buyLottoTicket(money)).isEqualTo(money / Lotto.LOTTO_TICKET_PRICE)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["14000", "3000"])
     fun `입력받은 구입 금액에 맞게 로또를 구매한다`(money: Int) {
-        Assertions.assertThat(lotto.buyLottoTicket(money))
+        val buyLottoTicket = lotto.buyLottoTicket(money)
+        lotto.generateLottoNumbers(buyLottoTicket)
+        val lottoNumberList = lotto.lottoNumbers.lottoNumberList
+        Assertions.assertThat(lottoNumberList).hasSize(buyLottoTicket)
     }
 
     @ParameterizedTest

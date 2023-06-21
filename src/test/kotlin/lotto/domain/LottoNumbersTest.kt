@@ -15,13 +15,15 @@ class LottoNumbersTest {
 
     @Test
     fun `1부터 45까지 숫자중 6개의 숫자를 무작위로 로또 번호를 생성한다`() {
-        val generatedLottoNumber = lottoNumbers.generateRandomLottoNumbers()
-        Assertions.assertThat(generatedLottoNumber).hasSize(6).allMatch { it in 1..45 }
+        lottoNumbers.generateRandomLottoNumber()
+        val lottoNumberList = lottoNumbers.lottoNumberList
+        Assertions.assertThat(lottoNumberList[0]).hasSize(6).allMatch { it in 1..45 }
     }
 
     @Test
     fun `생성된 로또 번호는 중복이 없다`() {
-        val generatedLottoNumber = lottoNumbers.generateRandomLottoNumbers()
-        Assertions.assertThat(generatedLottoNumber.size).isEqualTo(generatedLottoNumber.toSet().size)
+        lottoNumbers.generateRandomLottoNumber()
+        val lottoNumberList = lottoNumbers.lottoNumberList
+        Assertions.assertThat(lottoNumberList[0].size).isEqualTo(lottoNumberList[0].toSet().size)
     }
 }

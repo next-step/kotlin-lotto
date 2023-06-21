@@ -2,6 +2,9 @@ package lotto.domain
 
 class Lotto {
 
+    var lottoNumbers: LottoNumbers = LottoNumbers()
+        private set
+
     fun buyLottoTicket(money: Int): Int {
         validateInputMoneyCanBuyLottoTicket(money)
         return calculateNumberOfLottoTicket(money)
@@ -15,8 +18,15 @@ class Lotto {
         return money / LOTTO_TICKET_PRICE
     }
 
-    fun generateLotto() {
+    fun generateLottoNumbers(numOfLottoPurchases: Int) {
+        validateNumOfLottoPurchases(numOfLottoPurchases)
+        for (i in 0 until numOfLottoPurchases) {
+            lottoNumbers.generateRandomLottoNumber()
+        }
+    }
 
+    private fun validateNumOfLottoPurchases(numOfLottoPurchases: Int) {
+        require(numOfLottoPurchases > 0)
     }
 
     companion object {

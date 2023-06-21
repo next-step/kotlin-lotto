@@ -1,10 +1,13 @@
 package lotto.domain
 
 class LottoNumbers {
+    var lottoNumberList: MutableList<List<Int>> = mutableListOf()
+        private set
 
-    fun generateRandomLottoNumbers(): List<Int> {
-        return (LottoNumbers.MINIMUM_NUMBER..LottoNumbers.MAXIMUM_NUMBER).shuffled()
-            .take(LottoNumbers.NUMBER_OF_LOTTO_DRAWS)
+    fun generateRandomLottoNumber() {
+        val generatedLottoNumber = (MINIMUM_NUMBER..MAXIMUM_NUMBER).shuffled()
+            .take(NUMBER_OF_LOTTO_DRAWS)
+        lottoNumberList.add(generatedLottoNumber)
     }
 
     companion object {
