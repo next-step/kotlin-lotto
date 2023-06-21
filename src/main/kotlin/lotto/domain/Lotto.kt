@@ -5,6 +5,7 @@ class Lotto {
 
     val lottoNumbers: List<Int>
         get() = _lottoNumbers
+
     init {
         _lottoNumbers = purchaseLotto()
     }
@@ -13,6 +14,10 @@ class Lotto {
         return (START_LOTTO_NUMBER..LAST_LOTTO_NUMBER).shuffled()
             .subList(FROM_INDEX, TO_INDEX)
             .sorted()
+    }
+
+    fun getMatchCount(lastWinningNumber: List<Int>): Int {
+        return lottoNumbers.count { it in lastWinningNumber }
     }
 
     companion object {

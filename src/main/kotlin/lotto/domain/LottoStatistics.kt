@@ -2,28 +2,17 @@ package lotto.domain
 
 import lotto.enums.Winner
 
-class LottoStatistics(
-    val lotto: List<Lotto>
-) {
+class LottoStatistics{
 
-    fun calculate(lastWinningNumber: List<Int>): MutableMap<Winner, Int> {
+
+    fun initStatisticsMap(): MutableMap<Winner, Int> {
         val rankMap: MutableMap<Winner, Int> = mutableMapOf(
             Winner.FOURTH_PLACE to 0,
             Winner.THIRD_PLACE to 0,
             Winner.SECOND_PLACE to 0,
             Winner.FIRST_PLACE to 0
         )
-        lotto.forEach {
-            val matchCount = getMatchCount(it, lastWinningNumber)
-            val find = Winner.values().find { winner ->
-                winner.matchCount == matchCount
-            }?.let { winner -> rankMap.put(winner,rankMap.getOrDefault(winner, 0) + 1) }
-        }
         return rankMap
-    }
-
-    fun getMatchCount(lotto: Lotto, lastWinningNumber: List<Int>): Int {
-        return lotto.lottoNumbers.count { it in lastWinningNumber }
     }
 
     fun getRating(purchasePrice: Int, resultMap: Map<Winner, Int>): Double {

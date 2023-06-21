@@ -3,13 +3,15 @@ package lotto.domain
 class LottoShop(
     private val purchasePrice: Int
 ) {
-    private fun getBuyLottoCount(purchasePrice: Int): Int {
-        return purchasePrice / LOTTO_PRICE
-    }
-
     fun sellLotto(): List<Lotto> {
         val lottoCount = getBuyLottoCount(purchasePrice)
-        return (0 until lottoCount).map { Lotto() }
+        return buildList(lottoCount) {
+            add(Lotto())
+        }
+    }
+
+    private fun getBuyLottoCount(purchasePrice: Int): Int {
+        return purchasePrice / LOTTO_PRICE
     }
 
     companion object {

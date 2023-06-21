@@ -1,5 +1,6 @@
 import lotto.domain.LottoShop
 import lotto.domain.LottoStatistics
+import lotto.enums.Winner
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -11,10 +12,14 @@ fun main() {
     resultView.showLottoCount(lottos)
     resultView.showLottos(lottos)
     val lastWinnerNumbers = input.inputLastWinNumbers()
-    val statistics = LottoStatistics(lottos)
-    val resultMap = statistics.calculate(lastWinnerNumbers)
-    val rating = statistics.getRating(purchasePrice, resultMap)
+    val statistics = LottoStatistics()
+    val rankMap = statistics.initStatisticsMap()
+    lottos.forEach {
+        val matchCount = it.getMatchCount(lastWinnerNumbers)
+        Winner.findWinner(matchCount, rankMap)
+    }
+    val rating = statistics.getRating(purchasePrice, rankMap)
 
-    resultView.showStatisticsResult(resultMap)
+    resultView.showStatisticsResult(rankMap)
     resultView.showWinRating(rating)
 }

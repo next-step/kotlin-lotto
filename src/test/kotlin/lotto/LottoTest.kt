@@ -3,6 +3,7 @@ package lotto
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
+import lotto.domain.LottoStatistics
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -11,9 +12,11 @@ import org.junit.jupiter.params.provider.ValueSource
 class LottoTest {
 
     private lateinit var lotto: Lotto
+    private lateinit var lottoStatistics: LottoStatistics
     @BeforeEach
     fun setup() {
         lotto = Lotto()
+        lottoStatistics = LottoStatistics()
     }
 
     @ParameterizedTest
@@ -33,5 +36,11 @@ class LottoTest {
         for (i in 0..4) {
             lotto.lottoNumbers.get(i + 1) shouldBeGreaterThan lotto.lottoNumbers.get(i)
         }
+    }
+
+    @Test
+    fun `로또 당첨은 1등부터 4등까지 있다`() {
+        val rankMap = lottoStatistics.initStatisticsMap()
+        rankMap.size shouldBe 4
     }
 }
