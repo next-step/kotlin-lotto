@@ -35,7 +35,7 @@ class LottoStoreTest : DescribeSpec({
                         500,
                         Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))
                     )
-                }
+                }.message shouldBe "500원으로는 로또를 1개 살 수 없습니다."
             }
         }
 
