@@ -1,5 +1,7 @@
 package lotto.view
 
+import lotto.domain.WinningNumbers
+
 class InputView {
 
     fun inputPurchasePrice(): Int {
@@ -7,9 +9,10 @@ class InputView {
         return readln().toInt()
     }
 
-    fun inputLastWinNumbers(): List<Int> {
+    fun inputLastWinNumbers(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해주세요.")
-        return readln().split(",").map { it.toInt() }
+        val inputData = readln().split(",").map { it.toInt() }
+        return WinningNumbers(inputData)
     }
 
     fun inputBonusNumber(): Int {

@@ -1,23 +1,24 @@
 package lotto.domain
 
 class Lotto {
-    private val _lottoNumbers: List<Int>
+    private val _lottoNumbers: LottoNumbers
 
-    val lottoNumbers: List<Int>
+    val lottoNumbers: LottoNumbers
         get() = _lottoNumbers
 
     init {
         _lottoNumbers = purchaseLotto()
     }
 
-    private fun purchaseLotto(): List<Int> {
-        return (START_LOTTO_NUMBER..LAST_LOTTO_NUMBER).shuffled()
+    private fun purchaseLotto(): LottoNumbers {
+        val numbers = (START_LOTTO_NUMBER..LAST_LOTTO_NUMBER).shuffled()
             .subList(FROM_INDEX, TO_INDEX)
             .sorted()
+        return LottoNumbers(numbers)
     }
 
-    fun getMatchCount(lastWinningNumber: List<Int>): Int {
-        return lottoNumbers.count { it in lastWinningNumber }
+    fun getMatchCount(lastWinningNumber: WinningNumbers): Int {
+        return lottoNumbers.numbers.count { it in lastWinningNumber.numbers }
     }
 
     companion object {
