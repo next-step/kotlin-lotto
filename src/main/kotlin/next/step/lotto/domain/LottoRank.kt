@@ -11,15 +11,12 @@ enum class LottoRank(val matchCount: Int, val winnings: Int) {
     fun shouldMatchBonus(): Boolean = this == SECOND
 
     companion object {
-
         fun from(matchCount: Int, matchBonus: Boolean): LottoRank {
-            return if (isSecond(matchBonus, matchCount)) SECOND
-            else values().filterNot { it.shouldMatchBonus() }.find { it.matchCount == matchCount } ?: MISS
+            return when {
+                matchCount == 5 && matchBonus -> SECOND
+                matchCount == 5 && !matchBonus -> THIRD
+                else -> values().find { it.matchCount == matchCount } ?: MISS
+            }
         }
-
-        private fun isSecond(matchBonus: Boolean, matchCount: Int): Boolean =
-            matchBonus && matchCount == SECOND.matchCount
-
     }
-
 }
