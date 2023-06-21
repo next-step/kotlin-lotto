@@ -1,6 +1,9 @@
 package lotto
 
+import lotto.domain.AutoLottoGenerator
+import lotto.domain.LottoPurchaser
 import lotto.domain.LottoNumber
+import lotto.domain.LottoResult
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -11,8 +14,8 @@ class LottoGame(
 
     fun start() {
         val inputAmount = inputView.inputPurchaseAmount()
-        val lottoMaker = LottoMaker(inputAmount)
-        val lottoList = lottoMaker.createLottoNums()
+        val lottoMaker = LottoPurchaser(AutoLottoGenerator())
+        val lottoList = lottoMaker.purchase(inputAmount)
         resultView.displayPurchasedLotto(lottoList)
 
         val winningNums = inputView.inputWinningNums().map { LottoNumber(it) }

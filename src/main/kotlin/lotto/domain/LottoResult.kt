@@ -1,7 +1,4 @@
-package lotto
-
-import lotto.domain.Lotto
-import lotto.domain.LottoNumber
+package lotto.domain
 
 class LottoResult(
     private val winningNums: List<LottoNumber>,

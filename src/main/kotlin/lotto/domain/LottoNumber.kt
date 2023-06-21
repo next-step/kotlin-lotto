@@ -30,7 +30,7 @@ data class LottoNumber(private val value: Int) : Comparable<LottoNumber> {
 
 
     companion object {
-        private const val LOWER_LIMIT = 1
-        private const val UPPER_LIMIT = 45
+        const val LOWER_LIMIT = 1
+        const val UPPER_LIMIT = 45
     }
 }

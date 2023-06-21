@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.LottoResult
+import lotto.domain.LottoResult
 
 class ResultView {
 
