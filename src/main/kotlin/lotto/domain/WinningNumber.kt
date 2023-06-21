@@ -8,9 +8,7 @@ class WinningNumber() {
         winningLottoNumber = input
     }
 
-
     fun getWinningLottoNumber(): List<Int> {
         return winningLottoNumber.toList()
     }
-
 }

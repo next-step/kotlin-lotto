@@ -13,5 +13,7 @@ class LottoMatcherTest {
     }
 
     @Test
-    fun `로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다`() {}
+    fun `로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다`() {
+//        lottoMatcher.count()
+    }
 }
