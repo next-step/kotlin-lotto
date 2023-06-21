@@ -19,12 +19,9 @@ class LottoGame(
         val result = LottoResult(winningNums, lottoList)
         resultView.displayResult(result)
     }
+}
 
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            val game = LottoGame(InputView(), ResultView())
-            game.start()
-        }
-    }
+fun main() {
+    val game = LottoGame(InputView(), ResultView())
+    game.start()
 }
