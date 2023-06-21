@@ -14,7 +14,7 @@ class LottoNumberTest : FreeSpec({
                 row(1),
                 row(45)
             ) { number ->
-                shouldNotThrowAny { LottoNumber(number) }
+                shouldNotThrowAny { LottoNumber.from(number) }
             }
         }
 
@@ -23,7 +23,7 @@ class LottoNumberTest : FreeSpec({
                 row(0),
                 row(46)
             ) { number ->
-                shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 1~45 사이의 숫자여야 합니다.") { LottoNumber(number) }
+                shouldThrowWithMessage<IllegalArgumentException>("로또 번호는 1~45 사이의 숫자여야 합니다.") { LottoNumber.from(number) }
             }
         }
     }

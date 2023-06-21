@@ -3,15 +3,13 @@ package lotto
 import lotto.vo.Money
 
 data class GameResult(
-    val prizes: List<Pair<WinningPrize, Int>>,
+    val prizes: List<Pair<Prize, Int>>,
     val paidPrice: Money,
 ) {
     val profitRate: Double
 
     init {
-        profitRate = calculateTotalPrizeAmount().amount / paidPrice
-            .amount
-            .toDouble()
+        profitRate = calculateTotalPrizeAmount() / paidPrice
     }
 
     private fun calculateTotalPrizeAmount() = prizes

@@ -9,8 +9,8 @@ data class Lotto(
         require(numbers.size == 6) { "로또 번호는 중복 없이 6개만 입력 가능합니다." }
     }
 
-    fun countMatchingNumbersFrom(winningNumbers: List<LottoNumber>): Int {
-        return winningNumbers
+    fun countMatchingNumbersFrom(targetNumbers: List<LottoNumber>): Int {
+        return targetNumbers
             .intersect(numbers)
             .size
     }

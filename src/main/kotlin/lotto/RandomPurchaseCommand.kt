@@ -10,7 +10,7 @@ object RandomPurchaseCommand : LottoPurchaseCommand {
 
     private fun createRandomLotto(): Lotto {
         val lottoNums = (1..45)
-            .map(::LottoNumber)
+            .map(LottoNumber::from)
             .shuffled()
             .subList(0, 6)
 

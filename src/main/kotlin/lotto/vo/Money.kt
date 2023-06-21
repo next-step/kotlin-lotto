@@ -2,7 +2,7 @@ package lotto.vo
 
 @JvmInline
 value class Money(
-    val amount: Long,
+    private val amount: Long,
 ) {
     constructor(amount: Int) : this(amount.toLong())
 
@@ -20,5 +20,9 @@ value class Money(
 
     override fun toString(): String {
         return amount.toString()
+    }
+
+    operator fun div(lottoPrice: Money): Double {
+        return amount / (lottoPrice.amount).toDouble()
     }
 }
