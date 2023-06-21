@@ -5,8 +5,14 @@ import lotto.utils.LottoGenerator
 
 class LottoManager {
 
-    fun buyLotto(money: Int): List<Lotto> {
+    fun buyLotto(money: Int, manualLottoNumbers: List<Lotto>): List<Lotto> {
         val lottoBundle: MutableList<Lotto> = mutableListOf()
+
+        if (manualLottoNumbers.isNotEmpty()) {
+            manualLottoNumbers.forEach { lotto ->
+                lottoBundle.add(lotto)
+            }
+        }
 
         val count = money / Lotto.ONE_PRICE
         repeat(count) {
