@@ -21,7 +21,10 @@ class LottoStoreTest : DescribeSpec({
 
         context("돈이 충분할 때, 수동으로 입력한 로또와 금액으로 구매하면") {
             it("남은 금액을 제공") {
-                LottoStore.buy(1500, Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))) shouldBe 500
+                LottoStore.buy(
+                    1500,
+                    Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))
+                ) shouldBe 500
             }
         }
 
