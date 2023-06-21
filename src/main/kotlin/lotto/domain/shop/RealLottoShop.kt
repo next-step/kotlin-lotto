@@ -6,15 +6,15 @@ class RealLottoShop(
 
     override fun purchase(lottoPurchasePaper: LottoPurchasePaper): LottoPurchaseResult {
         val purchaseSize = lottoPurchasePaper.lottoPurchaseAmount / LOTTO_PRICE
-        val selfSettingLottoGames = createSelfSettingLottoGames(lottoPurchasePaper.selfSettingLottoGames)
+        val selfSettingLottoGames = createSelfSettingLottoGames(lottoPurchasePaper.selfSettingLottoNumbersPapers)
         val autoSettingLottoGames = createAutoSettingLottoGames(purchaseSize - selfSettingLottoGames.size)
         return LottoPurchaseResult(
             lottoGames = selfSettingLottoGames.plus(autoSettingLottoGames),
         )
     }
 
-    private fun createSelfSettingLottoGames(selfSettingLottoGames: List<SelfSettingLottoGame>): List<LottoGame> {
-        return selfSettingLottoGames
+    private fun createSelfSettingLottoGames(selfSettingLottoNumberPapers: List<SelfSettingLottoNumberPaper>): List<LottoGame> {
+        return selfSettingLottoNumberPapers
             .map { selfSettingLottoGame -> selfSettingLottoGame.lottoNumbers }
             .map { lottoNumbers -> LottoGameMachineOption.Self(lottoNumbers) }
             .map { optionBySelfSetting -> lottoGameMachine.create(optionBySelfSetting) }

@@ -21,16 +21,16 @@ class RealLottoShopTest : BehaviorSpec({
         return LottoNumbers(numbers.map { LottoNumber(it) })
     }
 
-    fun mockSelfSettingLottoGames(size: Int): List<SelfSettingLottoGame> {
+    fun mockSelfSettingLottoNumbersPapers(size: Int): List<SelfSettingLottoNumberPaper> {
         return List(size) {
-            SelfSettingLottoGame(lottoNumbers(1, 2, 3, 4, 5, 6))
+            SelfSettingLottoNumberPaper(lottoNumbers(1, 2, 3, 4, 5, 6))
         }
     }
 
     Given("3개 중 3개의 로또 게임을 수동 구매 했다면") {
         val lottoPurchasePaper = LottoPurchasePaper(
             lottoPurchaseAmount = PositiveNumber(3_000),
-            selfSettingLottoGames = mockSelfSettingLottoGames(3)
+            selfSettingLottoNumbersPapers = mockSelfSettingLottoNumbersPapers(3)
         )
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 
@@ -43,7 +43,7 @@ class RealLottoShopTest : BehaviorSpec({
     Given("3개 중 2개의 로또 게임을 수동 구매 했다면") {
         val lottoPurchasePaper = LottoPurchasePaper(
             lottoPurchaseAmount = PositiveNumber(3_000),
-            selfSettingLottoGames = mockSelfSettingLottoGames(2)
+            selfSettingLottoNumbersPapers = mockSelfSettingLottoNumbersPapers(2)
         )
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 
@@ -62,7 +62,7 @@ class RealLottoShopTest : BehaviorSpec({
     Given("3개 중 1개의 로또 게임을 수동 구매 했다면") {
         val lottoPurchasePaper = LottoPurchasePaper(
             lottoPurchaseAmount = PositiveNumber(3_000),
-            selfSettingLottoGames = mockSelfSettingLottoGames(1)
+            selfSettingLottoNumbersPapers = mockSelfSettingLottoNumbersPapers(1)
         )
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 
@@ -81,7 +81,7 @@ class RealLottoShopTest : BehaviorSpec({
     Given("3개 중 1개도 수동 구매를 하지 않았다면") {
         val lottoPurchasePaper = LottoPurchasePaper(
             lottoPurchaseAmount = PositiveNumber(3_000),
-            selfSettingLottoGames = emptyList()
+            selfSettingLottoNumbersPapers = emptyList()
         )
         val lottoPurchaseResult = lottoShop.purchase(lottoPurchasePaper)
 

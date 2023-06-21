@@ -4,5 +4,5 @@ import math.PositiveNumber
 
 data class LottoPurchasePaper(
     val lottoPurchaseAmount: PositiveNumber,
-    val selfSettingLottoGames: List<SelfSettingLottoGame>,
+    val selfSettingLottoNumbersPapers: List<SelfSettingLottoNumberPaper>,
 )

@@ -4,7 +4,7 @@ import lotto.domain.lottonumber.LottoNumber
 import lotto.domain.lottonumber.LottoNumbers
 import lotto.domain.lottonumber.WinLottoNumbers
 import lotto.domain.shop.LottoPurchasePaper
-import lotto.domain.shop.SelfSettingLottoGame
+import lotto.domain.shop.SelfSettingLottoNumberPaper
 import math.PositiveNumber
 
 class RealLottoInputView : LottoInputView {
@@ -15,11 +15,11 @@ class RealLottoInputView : LottoInputView {
         println()
         println("수동으로 구매할 로또 수를 입력해 주세요.")
         val selfSettingCount = readln().toInt()
-        val selfSettingLottoGames = if (selfSettingCount > 0) {
+        val selfSettingLottoNumberPapers = if (selfSettingCount > 0) {
             println()
             println("수동으로 구매할 번호를 입력해 주세요.")
             List(selfSettingCount) {
-                SelfSettingLottoGame(readln().toLottoNumbers())
+                SelfSettingLottoNumberPaper(readln().toLottoNumbers())
             }
         } else {
             emptyList()
@@ -27,7 +27,7 @@ class RealLottoInputView : LottoInputView {
         println()
         return LottoPurchasePaper(
             lottoPurchaseAmount = lottoPurchaseAmount,
-            selfSettingLottoGames = selfSettingLottoGames,
+            selfSettingLottoNumbersPapers = selfSettingLottoNumberPapers,
         )
     }
 
