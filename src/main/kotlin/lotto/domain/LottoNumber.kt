@@ -13,7 +13,7 @@ value class LottoNumber private constructor(
         val LOTTO_NUMBERS_RANGE = 1..45
         private val LOTTO_NUMBERS = LOTTO_NUMBERS_RANGE.map { LottoNumber(it) }.toList()
 
-        fun create(number: Int): LottoNumber = LottoNumber(number)
+        fun create(number: Int): LottoNumber = LOTTO_NUMBERS[number - 1]
 
         fun createRandom(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size)
     }
