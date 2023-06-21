@@ -12,13 +12,12 @@ object LottoDrawingMachine {
 
     private fun calculateRoi(rankPrizes: List<RankPrize>, lottos: Lottos): BigDecimal {
         val totalReward = rankPrizes.sumOf { it.getTotalReward() }
-        val invested = lottos.sumOf { it.salePrice }
+        val invested = lottos.getTotalPrice()
         return BigDecimal((totalReward.toDouble() / invested.toDouble()))
     }
 
     private fun rankPrizes(winningLotto: WinningLotto, lottos: Lottos): List<RankPrize> {
-        val matchedRankPrizes = lottos.asSequence()
-            .map { winningLotto.countMatch(it) }
+        val matchedRankPrizes = lottos.matchingAllLottos(winningLotto)
             .filter { it.getTotalMatch() >= 3 }
             .mapNotNull { it.toRank() }
             .groupBy { it }
