@@ -11,10 +11,11 @@ class ResultView {
     }
 
     fun outputLottoMatchStat(issuedLottoMatchStat: IssuedLottoMatchStat) {
-        println("3개 일치 (5000원) - ${issuedLottoMatchStat.countOfThreeMatch}개")
-        println("4개 일치 (50000원) - ${issuedLottoMatchStat.countOfFourMatch}개")
-        println("5개 일치 (1500000원) - ${issuedLottoMatchStat.countOfFiveMatch}개")
-        println("6개 일치 (2000000000원) - ${issuedLottoMatchStat.countOfSixMatch}개")
+        println("3개 일치 (5000원) - ${issuedLottoMatchStat.countOfFifth}개")
+        println("4개 일치 (50000원) - ${issuedLottoMatchStat.countOfFourth}개")
+        println("5개 일치 (1500000원) - ${issuedLottoMatchStat.countOfThird}개")
+        println("5개 일치, 보너스 볼 일치(30000000원) - ${issuedLottoMatchStat.countOfSecond}개")
+        println("6개 일치 (2000000000원) - ${issuedLottoMatchStat.countOfFirst}개")
     }
 
     fun outputEarningsRate(earningsRate: Double) {

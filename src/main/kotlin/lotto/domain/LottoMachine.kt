@@ -9,12 +9,14 @@ import lotto.domain.Lotto.Companion.MIN_LOTTO_NUMBER
  */
 class LottoMachine {
 
+    private val range1to45 = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+
     fun issue(count: Int): IssuedLottos {
         return IssuedLottos(List(count) { createLotto() })
     }
 
     private fun createLotto(): Lotto {
-        val randomSixNumbers = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER)
+        val randomSixNumbers = range1to45
             .shuffled()
             .take(MAX_LOTTO_NUMBER_SIZE)
             .sorted()

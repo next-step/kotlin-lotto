@@ -10,7 +10,7 @@ data class IssuedLottos(val lottos: List<Lotto>) {
         require(lottos.isNotEmpty()) { "lottos must not be empty" }
     }
 
-    fun check(winningLotto: Lotto): IssuedLottoMatchResult {
+    fun check(winningLotto: WinningLotto): IssuedLottoMatchResult {
         val lottoMatchResults: List<LottoMatchResult> = lottos.map { it.match(winningLotto) }
         return IssuedLottoMatchResult(lottoMatchResults)
     }
@@ -30,10 +30,11 @@ data class IssuedLottoMatchResult(
 ) {
     val matchStat: IssuedLottoMatchStat by lazy {
         IssuedLottoMatchStat(
-            countOfThreeMatch = lottoMatchResults.filter { it.matchCount == 3 }.size,
-            countOfFourMatch = lottoMatchResults.filter { it.matchCount == 4 }.size,
-            countOfFiveMatch = lottoMatchResults.filter { it.matchCount == 5 }.size,
-            countOfSixMatch = lottoMatchResults.filter { it.matchCount == 6 }.size,
+            countOfFifth = lottoMatchResults.filter { it.rank == LottoRank.FIFTH }.size,
+            countOfFourth = lottoMatchResults.filter { it.rank == LottoRank.FOURTH }.size,
+            countOfThird = lottoMatchResults.filter { it.rank == LottoRank.THIRD }.size,
+            countOfSecond = lottoMatchResults.filter { it.rank == LottoRank.SECOND }.size,
+            countOfFirst = lottoMatchResults.filter { it.rank == LottoRank.FIRST }.size,
         )
     }
 
@@ -47,8 +48,9 @@ data class IssuedLottoMatchResult(
  * ### 발급받은 로또들의 당첨 통계를 표현하는 클래스 입니다.
  */
 data class IssuedLottoMatchStat(
-    val countOfThreeMatch: Int,
-    val countOfFourMatch: Int,
-    val countOfFiveMatch: Int,
-    val countOfSixMatch: Int,
+    val countOfFifth: Int,
+    val countOfFourth: Int,
+    val countOfThird: Int,
+    val countOfSecond: Int,
+    val countOfFirst: Int,
 )
