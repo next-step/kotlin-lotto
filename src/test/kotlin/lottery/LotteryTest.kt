@@ -1,12 +1,13 @@
 package lottery
 
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
 class Lottery(numbers: List<LotteryNumber>) {
-    private var lotteryNumbers: List<LotteryNumber>
+    val lotteryNumbers: List<LotteryNumber>
 
     init {
-        require(hasDuplicatedLotteryNumbers(numbers)) { "로또 번호에 중복되는 숫자가 있습니다." }
+        require(!hasDuplicatedLotteryNumbers(numbers)) { "로또 번호에 중복되는 숫자가 있습니다." }
         lotteryNumbers = numbers
     }
 
@@ -14,9 +15,8 @@ class Lottery(numbers: List<LotteryNumber>) {
         return Lottery(numbers.map { LotteryNumber(it) })
     }
 
-    fun hasDuplicatedLotteryNumbers(numbers: List<LotteryNumber>): Boolean {
-        val numbersSet = hashSetOf(numbers)
-        return numbersSet.size != numbers.size
+    private fun hasDuplicatedLotteryNumbers(numbers: List<LotteryNumber>): Boolean {
+        return numbers.size != LOTTERY_NUMBER_SIZE
     }
 
     companion object {
@@ -28,10 +28,11 @@ class Lottery(numbers: List<LotteryNumber>) {
     }
 }
 
-data class LotteryNumber(private val number: Int) {
+@JvmInline
+value class LotteryNumber(private val number: Int) {
     init {
-        require(number < MIN_LOTTERY_NUMBER) { "로또 번호는 1보다 커야합니다." }
-        require(number > MAX_LOTTERY_NUMBER) { "로또 번호는 45보다 작아야합니다." }
+        require(number >= MIN_LOTTERY_NUMBER) { "로또 번호는 1이상여야 합니다." }
+        require(number <= MAX_LOTTERY_NUMBER) { "로또 번호는 45이하이여야 합니다." }
     }
 
     companion object {
@@ -41,8 +42,8 @@ data class LotteryNumber(private val number: Int) {
 }
 
 class LotteryTest : StringSpec({
-    "로또의 숫자는 6개이다." {
+    "자동 로또 생성을 할 경우의 숫자의 개수는 6개이다." {
         val lottery = Lottery.makeAutoLottery()
-        // lottery.size shouldBe 6
+        lottery.lotteryNumbers.size shouldBe 6
     }
 })
