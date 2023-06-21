@@ -11,10 +11,10 @@
 ## 구현 목록
 ### 입력
 - [ ] 사용자는 숫자와 구분자로 구성된 문자열을 입력한다.
-  - [ ] 입력 받은 문자열이 `null`이거나 빈 공백 문자일 경우 `IllegalArgumentException` 발생
-  - [ ] 입력 받은 구분자를 제외한 문자열에 숫자가 아닌 문자가 포함되어 있을 경우 `IllegalArgumentException` 발생
-  - [ ] 입력 받은 구분자를 제외한 문자열에 음수가 포함되어 있을 경우 `IllegalArgumentException` 발생
-  - [ ] 입력 받은 구분자를 제외한 문자열에 빈 칸이 포함되어 있을 경우 `IllegalArgumentException` 발생
+  - [x] 입력 받은 문자열이 `null`이거나 빈 공백 문자일 경우 `IllegalArgumentException` 발생
+  - [x] 입력 받은 구분자를 제외한 문자열에 숫자가 아닌 문자가 포함되어 있을 경우 `IllegalArgumentException` 발생
+  - [x] 입력 받은 구분자를 제외한 문자열에 음수가 포함되어 있을 경우 `IllegalArgumentException` 발생
+  - [x] 입력 받은 구분자를 제외한 문자열에 빈 칸이 포함되어 있을 경우 `IllegalArgumentException` 발생
 
 ### 기능
 - [ ] 구분자를 기준으로 분리한 각 숫자의 합을 반환
