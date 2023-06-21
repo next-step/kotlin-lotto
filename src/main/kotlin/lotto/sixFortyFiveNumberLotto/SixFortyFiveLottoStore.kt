@@ -2,13 +2,9 @@ package lotto.sixFortyFiveNumberLotto
 
 import lotto.LottoStore
 
-class SixFortyFiveLottoStore : LottoStore {
+class SixFortyFiveLottoStore : LottoStore<SixFortyFiveLotto> {
     override fun purchase(count: Int): List<SixFortyFiveLotto> {
-        return (1..count).map { makeLotto() }
-    }
-
-    override fun makeLotto(): SixFortyFiveLotto {
-        return SixFortyFiveLotto.of()
+        return (1..count).map { SixFortyFiveLotto.of() }
     }
 
     fun getPurchaseCountByPrice(price: Int): Int {
