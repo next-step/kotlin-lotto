@@ -7,6 +7,6 @@ object LotteryShop {
     }
 
     fun getTickets(lottoCount: Int): List<Lotto> {
-        return List(lottoCount) { Lotto(ShuffleNumGenerator()) }
+        return List(lottoCount) { Lotto(AutoNumGenerator()) }
     }
 }
