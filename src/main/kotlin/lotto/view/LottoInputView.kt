@@ -15,7 +15,7 @@ object LottoInputView {
         return readLineWithMessage("지난 주 당첨 번호를 입력해 주세요.")
             .split(WINNING_LOTTO_DELIMITER)
             .map { it.trim().toInt() }
-            .let { LottoNumbers.of(it.toSet()) }
+            .let { LottoNumbers.from(it.toSet()) }
     }
 
     fun inputBonusNumber(): LottoNumber {

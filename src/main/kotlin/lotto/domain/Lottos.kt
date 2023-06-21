@@ -22,4 +22,16 @@ class Lottos(
             winningResults = results.toMap(),
         )
     }
+
+    companion object {
+        fun random(countOfLottos: Int): Lottos {
+            return Lottos(
+                List(countOfLottos) { Lotto() },
+            )
+        }
+
+        fun from(lottos: List<Lotto>): Lottos {
+           return Lottos(lottos)
+        }
+    }
 }

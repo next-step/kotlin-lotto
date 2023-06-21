@@ -1,6 +1,7 @@
 package lotto.domain
 
-class Money(val value: Int) {
+@JvmInline
+value class Money(val value: Int) {
     init {
         validateMoneyIsPositiveZero(value)
     }

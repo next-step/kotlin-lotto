@@ -1,6 +1,7 @@
 package lotto.domain
 
-class LottoNumber(val value: Int) {
+@JvmInline
+value class LottoNumber(val value: Int) {
     init {
         validateRangeOfNumber(value)
     }
@@ -9,23 +10,12 @@ class LottoNumber(val value: Int) {
         require(number in LOTTO_NUMBER_RANGE) { "로또 번호는 ${LOTTO_NUMBER_RANGE}이어야 합니다." }
     }
 
-    override fun equals(other: Any?): Boolean {
-        return this.value == (other as LottoNumber).value
-    }
-
-    override fun hashCode(): Int {
-        return value.hashCode()
-    }
-
-    override fun toString(): String {
-        return value.toString()
-    }
-
     companion object {
         private val LOTTO_NUMBER_RANGE = (1..45)
+        private val ALL_LOTTO_NUMBERS = LOTTO_NUMBER_RANGE.map { LottoNumber(it) }
 
-        fun random(): LottoNumber {
-            return LottoNumber(LOTTO_NUMBER_RANGE.random())
+        fun all(): List<LottoNumber> {
+            return ALL_LOTTO_NUMBERS
         }
     }
 }

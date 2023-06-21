@@ -5,23 +5,21 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
 class LottoNumberSpec : DescribeSpec({
-    describe("로또 생성 검증") {
-        context("로또 번호를 무작위로 생성하면") {
-            it("1이상 45이하의 로또 번호가 생성된다.") {
-                val lottoNumber = LottoNumber.random()
+    describe("로또 번호 범위(1이상 45이하) 검증") {
+        it("로또 번호 1은 정상적으로 생성된다.") {
+            val lottoNumber = LottoNumber(1)
 
-                (lottoNumber.value in (1..45)) shouldBe true
-            }
+            lottoNumber.value shouldBe 1
         }
-    }
+        it("로또 번호 22은 정상적으로 생성된다.") {
+            val lottoNumber = LottoNumber(22)
 
-    describe("로또 번호 범위 검증") {
-        context("로또 번호는 1이상 45이하이면") {
-            it("로또 번호가 정상적으로 생성된다.") {
-                val lottoNumber = LottoNumber(1)
+            lottoNumber.value shouldBe 22
+        }
+        it("로또 번호 45은 정상적으로 생성된다.") {
+            val lottoNumber = LottoNumber(45)
 
-                lottoNumber.value shouldBe 1
-            }
+            lottoNumber.value shouldBe 45
         }
 
         context("로또 번호가 1보다 작으면") {

@@ -12,9 +12,7 @@ class LottoNumbers(
     }
 
     fun getMatchCount(other: LottoNumbers): Int {
-        val set = this.values.toMutableSet()
-        set.retainAll(other.values)
-        return set.size
+        return this.values.intersect(other.values).size
     }
 
     fun isContains(lottoNumber: LottoNumber): Boolean {
@@ -24,16 +22,12 @@ class LottoNumbers(
     companion object {
         private const val LOTTO_NUMBER_COUNT = 6
 
-        fun random(): LottoNumbers {
-            val lottoNumbers = mutableSetOf<LottoNumber>()
-            while (lottoNumbers.size < LOTTO_NUMBER_COUNT) {
-                lottoNumbers.add(LottoNumber.random())
-            }
-            return LottoNumbers(lottoNumbers)
-        }
+        fun random(): LottoNumbers = LottoNumbers(
+            LottoNumber.all().shuffled().take(LOTTO_NUMBER_COUNT).toSet(),
+        )
 
-        fun of(values: Set<Int>): LottoNumbers {
-            return LottoNumbers(values.map { LottoNumber(it) }.toSet())
-        }
+        fun from(values: Set<Int>): LottoNumbers = LottoNumbers(
+            values.map { LottoNumber(it) }.toSet(),
+        )
     }
 }
