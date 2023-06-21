@@ -10,7 +10,7 @@ data class IssuedLottos(val lottos: List<Lotto>) {
         require(lottos.isNotEmpty()) { "lottos must not be empty" }
     }
 
-    fun check(winningLotto: Lotto): IssuedLottoMatchResult {
+    fun check(winningLotto: WinningLotto): IssuedLottoMatchResult {
         val lottoMatchResults: List<LottoMatchResult> = lottos.map { it.match(winningLotto) }
         return IssuedLottoMatchResult(lottoMatchResults)
     }

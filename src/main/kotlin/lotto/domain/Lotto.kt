@@ -15,9 +15,13 @@ data class Lotto(
         }
     }
 
-    fun match(winningLotto: Lotto): LottoMatchResult {
-        val matchCount = numbers.intersect(winningLotto.numbers).size
-        return LottoMatchResult(matchCount)
+    fun match(winningLotto: WinningLotto): LottoMatchResult {
+        val matchCount = numbers.intersect(winningLotto.winningNumbers).size
+        val bonusMatched = numbers.any { it == winningLotto.bonusNumber }
+        return LottoMatchResult(
+            matchCount = matchCount,
+            bonusMatched = bonusMatched,
+        )
     }
 
     override fun toString(): String {
@@ -38,6 +42,7 @@ data class Lotto(
  */
 data class LottoMatchResult(
     val matchCount: Int,
+    val bonusMatched: Boolean = false,
 ) {
-    val rank = LottoRank.valueOf(matchCount)
+    val rank = LottoRank.valueOf(matchCount, bonusMatched)
 }
