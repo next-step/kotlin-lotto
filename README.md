@@ -109,5 +109,5 @@
 
 - [x] 보너스볼을 입력받는다. - InputView
 - [x] 보너스볼을 저장한다. - WinningTicket
-- [ ] 2등 정보를 추가한다. - Rank
+- [x] 2등 정보를 추가한다. - Rank
 - [ ] 2등의 당첨 통계도 출력한다. -> ResultView

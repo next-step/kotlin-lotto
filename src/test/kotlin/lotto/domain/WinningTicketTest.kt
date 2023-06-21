@@ -5,8 +5,18 @@ import org.junit.jupiter.api.Test
 
 internal class WinningTicketTest {
     @Test
-    internal fun `지난주 로또와 같은 숫자를 가진 갯수가 계산된다`() {
-        val winningTicket = WinningTicket(listOf(1, 2, 3, 8, 9, 10))
-        winningTicket.score(Lotto(TestNumGenerator())) shouldBe 3
+    internal fun `보너스볼을 가지고 있으면 가졌다는 결과가 나온다`() {
+        val winningTicket = WinningTicket(listOf(1, 2, 3, 4, 5, 8), 6)
+        val testLotto = Lotto(TestNumGenerator())
+
+        winningTicket.hasBonus(testLotto) shouldBe true
+    }
+
+    @Test
+    internal fun `보너스볼을 안 가지고 있으면 안 가졌다는 결과가 나온다`() {
+        val winningTicket = WinningTicket(listOf(1, 2, 3, 4, 5, 8), 7)
+        val testLotto = Lotto(TestNumGenerator())
+
+        winningTicket.hasBonus(testLotto) shouldBe false
     }
 }

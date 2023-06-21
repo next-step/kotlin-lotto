@@ -4,4 +4,8 @@ data class WinningTicket(val nums: List<Int>, val bonus: Int) {
     fun score(lotto: Lotto): Int {
         return lotto.numbers.count { this.nums.contains(it) }
     }
+
+    fun hasBonus(lotto: Lotto): Boolean {
+        return lotto.numbers.contains(bonus)
+    }
 }
