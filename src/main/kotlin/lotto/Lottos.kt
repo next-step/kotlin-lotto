@@ -1,3 +1,3 @@
 package lotto
 
-class Lottos(lottos: List<Lotto>) : List<Lotto> by lottos
+class Lottos(lottos: List<Lotto>)

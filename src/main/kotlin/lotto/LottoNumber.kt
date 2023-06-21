@@ -11,4 +11,9 @@ value class LottoNumber(
     override fun toString(): String {
         return number.toString()
     }
+
+    companion object {
+        fun of(number: Int) = LottoNumber(number)
+        fun of(numbers: List<Int>) = numbers.map { of(it) }
+    }
 }

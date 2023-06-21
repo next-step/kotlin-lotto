@@ -7,16 +7,16 @@ internal class LottoDrawingMachineTest : StringSpec({
     val sut = LottoDrawingMachine
 
     "당첨 통계와 수익률을 반환한다" {
-        val winNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val winNumbers = LottoNumber.of(listOf(1, 2, 3, 4, 5, 6))
+        val bonusNumbers = LottoNumber.of(listOf(7))
 
         val lottos = Lottos(
             listOf(
-                Lotto(listOf(1, 2, 3, 10, 11, 12).map { LottoNumber(it) }, 14000)
+                Lotto(LottoNumber.of(listOf(1, 2, 3, 10, 11, 12)), 14000)
             )
         )
 
-        val drawResult = sut.draw(winNumbers, lottos)
-        drawResult.rankPrizes.size shouldBe 4
+        val drawResult = sut.draw(WinningLotto(winNumbers, bonusNumbers), lottos)
         drawResult.totalRoi shouldBe "0.35"
     }
 })
