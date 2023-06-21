@@ -19,7 +19,3 @@ data class LottoGame(
         )
     }
 }
-
-fun List<LottoGame>.count(type: LottoGameType): Int {
-    return count { it.type == type }
-}
