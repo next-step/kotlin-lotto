@@ -9,4 +9,8 @@ fun main() {
     val lottos = LottoShop.purchase(purchaseMoney)
     ResultView.printPurchaseLottoNum(lottos)
     ResultView.printLottos(lottos)
+    println()
+
+    val winningLotto = InputView.winningLotto()
+    println()
 }
