@@ -18,4 +18,19 @@ class LottoCalculatorTest : FunSpec({
             matchCount shouldBe expectedCount
         }
     }
+
+    context("로또 일치 개수별 당첨금을 확인한다.") {
+        withData(
+            0 to 0,
+            1 to 0,
+            2 to 0,
+            3 to 5_000,
+            4 to 50_000,
+            5 to 1_500_000,
+            6 to 2_000_000_000,
+        ) { (matchCount, expectedMoney) ->
+            val money = LottoCalculator.calculatePrizeMoney(matchCount)
+            money shouldBe expectedMoney
+        }
+    }
 })
