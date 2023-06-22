@@ -3,47 +3,43 @@ package next.step.lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
-import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 
 class LottoStoreTest : DescribeSpec({
 
     describe("LottoStore method") {
-        context("lotto 가격만큼 지불하면, 남은 금액을 제공") {
-            data class BuyLotto(val payment: Int, val expected: Int)
+        val lottoStore = LottoStore.of(LottoNumberRandomGenerator)
+        context("일정 금액으로 구매하면, 지불한 금액만큼 로또 제공") {
+            data class BuyLottos(val payment: Int, val expected: Int)
             withData(
-                BuyLotto(1000, 0),
-                BuyLotto(1500, 500),
-                BuyLotto(2500, 1500)
+                BuyLottos(1000, 1),
+                BuyLottos(14000, 14),
+                BuyLottos(2500, 2)
             ) { (payment, expected) ->
-                LottoStore.buy(payment) shouldBe expected
+                lottoStore.buy(payment).size() shouldBe expected
             }
         }
 
-        context("lotto 가격보다 낮게 지불하면") {
+        context("돈이 충분할 때, 수동으로 입력한 로또와 금액으로 구매하면") {
+            it("남은 금액을 제공") {
+                lottoStore.buy(
+                    1500,
+                    Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))
+                ) shouldBe 500
+            }
+        }
+
+        context("돈이 충분하지 않을 때, 수동으로 입력한 로또와 금액으로 구매하면") {
             it("예외 발생") {
                 shouldThrow<IllegalArgumentException> {
-                    LottoStore.buy(LottoStore.LOTTO_PRICE - 1)
-                }
+                    lottoStore.buy(
+                        500,
+                        Lottos.of(setOf(Lotto.from(setOf(1, 2, 3, 4, 5, 6))))
+                    )
+                }.message shouldBe "500원으로는 로또를 1개 살 수 없습니다."
             }
         }
 
-        context("미리보기 요청하면") {
-            it("랜덤으로 생성된 로또 제공") {
-                LottoStore.preview().numbers() shouldHaveSize 6
-            }
-        }
 
-        context("lotto 가격보다 낮게 넣으면") {
-            it("살 수 없다고 알려줌") {
-                LottoStore.canBuy(LottoStore.LOTTO_PRICE - 1) shouldBe false
-            }
-        }
-
-        context("lotto 가격 이상으로 넣으면") {
-            it("살 수 있다고 알려줌") {
-                LottoStore.canBuy(LottoStore.LOTTO_PRICE) shouldBe true
-            }
-        }
     }
 })

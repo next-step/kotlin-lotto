@@ -10,7 +10,7 @@ class LottoNumberGeneratorTest : DescribeSpec({
     describe("랜덤 생성") {
         context("랜덤으로 생성하면") {
             it("1과 45 사이의 숫자로 생성됨").config(invocations = 1000) {
-                val number = LottoNumberGenerator.random()
+                val number = LottoNumberRandomGenerator.generate()
                 println(number)
 
                 assertSoftly {
@@ -22,7 +22,7 @@ class LottoNumberGeneratorTest : DescribeSpec({
 
         context("랜덤으로 생성하면") {
             it("모두 다른 6개의 LottoNumber를 가짐").config(invocations = 1000) {
-                val numbers = LottoNumberGenerator.random()
+                val numbers = LottoNumberRandomGenerator.generate()
                 println(numbers)
 
                 numbers shouldHaveSize 6

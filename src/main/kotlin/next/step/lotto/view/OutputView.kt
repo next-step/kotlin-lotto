@@ -8,9 +8,10 @@ object OutputView {
 
     private const val UNKNOWN_ERR_MSG = "알 수 없는 에러가 발생했습니다."
 
-    fun showLottos(lottos: Lottos) {
-        println("${lottos.size()}개를 구매했습니다.")
-        lottos.numbers().forEach { println(it.sorted()) }
+    fun showLottos(manualLottos: Lottos, randomLottos: Lottos) {
+        println()
+        println("수동으로 ${manualLottos.size()}장, 자동으로 ${randomLottos.size()}장을 구매했습니다.")
+        (manualLottos + randomLottos).numbers().forEach { println(it.sorted()) }
         println()
     }
 
@@ -19,7 +20,7 @@ object OutputView {
         println("당첨 통계")
         println("---------")
         winningStat.filter { it.key != LottoRank.MISS }
-            .forEach { println("${it.key.matchCount}개 일치${bonus(it.key.matchBonus)} (${it.key.winnings}원)- ${it.value}개") }
+            .forEach { println("${it.key.matchCount}개 일치${bonus(it.key.shouldMatchBonus())} (${it.key.winnings}원)- ${it.value}개") }
     }
 
     private fun bonus(matchBonus: Boolean): String = if (matchBonus) ", 보너스 볼 일치" else ""
