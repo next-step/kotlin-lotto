@@ -11,7 +11,7 @@ class DuplicateFreeSequenceGeneratorTest {
 
     @RepeatedTest(10)
     fun `생성된 수열에 중복된 수가 없어야 한다`() {
-        DuplicateFreeSequenceGenerator(1, 20, 10)
+        DuplicateFreeSequenceGenerator.generate(1, 20, 10)
             .groupingBy { it }
             .eachCount()
             .all {
@@ -27,7 +27,7 @@ class DuplicateFreeSequenceGeneratorTest {
     )
     fun `지정된 범위 내의 숫자만 생성된 수열에 들어있어야 한다`(from: Int, to: Int) {
         assertThat(
-            DuplicateFreeSequenceGenerator(from, to, 5)
+            DuplicateFreeSequenceGenerator.generate(from, to, 5)
                 .none { it !in from..to }
         ).isEqualTo(true)
     }
@@ -36,7 +36,7 @@ class DuplicateFreeSequenceGeneratorTest {
     @ValueSource(ints = [1, 5, 10])
     fun `생성된 수열의 길이는 count여야 한다`(count: Int) {
         assertThat(
-            DuplicateFreeSequenceGenerator(
+            DuplicateFreeSequenceGenerator.generate(
                 from = 1,
                 to = 100,
                 count = count

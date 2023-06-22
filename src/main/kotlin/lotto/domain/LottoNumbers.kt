@@ -24,7 +24,7 @@ data class LottoNumbers(
         fun inValidRange(number: Int): Boolean = number in MINIMUM..MAXIMUM
 
         fun generate(): LottoNumbers {
-            val randomNumbers = DuplicateFreeSequenceGenerator(MINIMUM, MAXIMUM, LENGTH)
+            val randomNumbers = DuplicateFreeSequenceGenerator.generate(MINIMUM, MAXIMUM, LENGTH)
             return LottoNumbers(
                 numbers = randomNumbers.toSet()
             )
