@@ -25,11 +25,14 @@ class LottoGame(
     }
 
     private fun getManualLottoNumbers(manualLottoCount: Int): List<LottoNumbers> {
-        return if (manualLottoCount > 0) {
-            val manualLottoNumberInput = inputView.readManualLottoNumbers(manualLottoCount)
-            lottoFactory.createManualLottoNumbers(manualLottoNumberInput)
-        } else {
-            emptyList()
+        if (manualLottoCount <= 0) {
+            return emptyList()
+        }
+
+        val manualLottoNumberInput = inputView.readManualLottoNumbers(manualLottoCount)
+        return manualLottoNumberInput.map { inputNumbers ->
+            val numberGenerator = FixedNumberGenerator(inputNumbers)
+            LottoNumbers(numberGenerator.generateNumbers())
         }
     }
 

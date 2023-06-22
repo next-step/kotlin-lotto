@@ -2,9 +2,12 @@ package lotto.controller
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoNumbers
+import lotto.domain.numberGenerator.FixedNumberGenerator
 import lotto.domain.numberGenerator.RandomLottoNumberGenerator
 
 class LottoFactoryTest : BehaviorSpec({
+
     Given("수동으로 로또를 발급 받을때") {
         val lottoFactory = LottoFactory(RandomLottoNumberGenerator())
         val manualLottoCount = 2
@@ -13,8 +16,12 @@ class LottoFactoryTest : BehaviorSpec({
             listOf(1, 2, 3, 4, 5, 6),
             listOf(7, 8, 9, 10, 11, 12)
         )
+
         When("입력 받은 번호로 수동 로또 번호를 생성할 때") {
-            val manualLottos = lottoFactory.createManualLottoNumbers(manualLottoNumbers)
+            val manualLottos = manualLottoNumbers.map { inputNumbers ->
+                val numberGenerator = FixedNumberGenerator(inputNumbers)
+                LottoNumbers(numberGenerator.generateNumbers())
+            }
 
             Then("예상되는 수동 로또 번호들이 반환되어야 한다") {
                 manualLottos.size shouldBe manualLottoCount
@@ -24,10 +31,14 @@ class LottoFactoryTest : BehaviorSpec({
         }
 
         When("수동 로또 번호와 입력 금액으로 로또를 생성할 때") {
-            val manualLottos = lottoFactory.createManualLottoNumbers(manualLottoNumbers)
+            val manualLottos = manualLottoNumbers.map { inputNumbers ->
+                val numberGenerator = FixedNumberGenerator(inputNumbers)
+                LottoNumbers(numberGenerator.generateNumbers())
+            }
+
             val lottos = lottoFactory.createLottos(manualLottos, inputMoney)
 
-            Then("예상되는 총 로또 개수 (수동 + 자동) 가 반환되어야 한다") {
+            Then("예상되는 총 로또 개수는 수동 + 자동이다.") {
                 lottos.getSize() shouldBe 5
             }
         }
