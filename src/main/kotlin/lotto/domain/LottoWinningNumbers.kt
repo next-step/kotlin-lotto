@@ -17,14 +17,11 @@ data class LottoWinningNumbers(
     }
 
     fun isSecondPlace(otherNumbers: LottoNumbers): Boolean {
-        if (numberOfOverlaps(otherNumbers) != Rank.SECOND
-                .countOfMatch
-        ) return false
+        if (numberOfOverlaps(otherNumbers) != Rank.SECOND.countOfMatch) return false
 
         return otherNumbers.numbers
             .all {
-                it in lottoNumbers.numbers
-                        || it == bonusNumber
+                it in lottoNumbers.numbers || it == bonusNumber
             }
     }
 
