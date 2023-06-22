@@ -4,6 +4,10 @@ import lotto.domain.Lotto
 import lotto.domain.LottoRank
 
 object OutputView {
+    fun printNumberOfLotto(manualLottoCount: Int, autoLottoCount: Int) {
+        println("수동으로 $manualLottoCount 장, 자동으로 $autoLottoCount 개를 구매했습니다.")
+    }
+
     fun printLottos(lottos: List<Lotto>) {
         for (lotto in lottos) {
             printLotto(lotto)
