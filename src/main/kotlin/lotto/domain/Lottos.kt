@@ -4,16 +4,14 @@ class Lottos(
     val values: List<Lotto>,
 ) {
     val size = values.size
-    val cost = size * Lotto.PRICE
+    val cost: Money = Money(size * Lotto.PRICE)
 
     fun calculateResults(
-        winningNumbers: LottoNumbers,
-        bonusNumber: LottoNumber,
+        winningLotto: WinningLotto,
     ): LottosResult {
         val results = LottoRank.createMapWithLottoRankAndZero()
         values.forEach { lotto ->
-            val lottoRank =
-                lotto.calculateResult(winningNumbers = winningNumbers, bonusNumber = bonusNumber) ?: return@forEach
+            val lottoRank = lotto.calculateResult(winningLotto) ?: return@forEach
             results[lottoRank] = results[lottoRank]?.plus(1) ?: 0
         }
 
@@ -21,6 +19,10 @@ class Lottos(
             totalCost = cost,
             winningResults = results.toMap(),
         )
+    }
+
+    operator fun plus(lottos: Lottos): Lottos {
+        return Lottos(values + lottos.values)
     }
 
     companion object {
@@ -31,7 +33,7 @@ class Lottos(
         }
 
         fun from(lottos: List<Lotto>): Lottos {
-           return Lottos(lottos)
+            return Lottos(lottos)
         }
     }
 }

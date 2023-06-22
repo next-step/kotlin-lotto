@@ -4,12 +4,11 @@ class Lotto(
     val numbers: LottoNumbers = LottoNumbers.random(),
 ) {
     fun calculateResult(
-        winningNumbers: LottoNumbers,
-        bonusNumber: LottoNumber,
+        winningLotto: WinningLotto,
     ): LottoRank? {
         return LottoRank.of(
-            matchCount = numbers.getMatchCount(winningNumbers),
-            isBonusNumberMatch = numbers.isContains(bonusNumber),
+            matchCount = numbers.getMatchCount(winningLotto.numbers),
+            isBonusNumberMatch = numbers.isContains(winningLotto.bonusNumber),
         )
     }
 

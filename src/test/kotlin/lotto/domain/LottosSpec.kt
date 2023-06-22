@@ -22,19 +22,18 @@ class LottosSpec : DescribeSpec({
             it("로또 비용을 반환할 수 있다.") {
                 val lottos = lottos(Lotto(), Lotto(), Lotto())
 
-                lottos.cost shouldBe 3000
+                lottos.cost.value shouldBe 3000
             }
         }
     }
 
     describe("(로또 결과) 각 등수의 당첨 횟수 계산 검증") {
-        val winningNumbers = lottoNumbers(1, 2, 3, 4, 5, 6)
-        val bonusNumber = LottoNumber(7)
+        val winningLotto = WinningLotto(lottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber(7))
 
         context("1등짜리 로또를 1개 갖고 있는 경우") {
             val lottos = lottos(lotto(1, 2, 3, 4, 5, 6))
+            val lottosResult = lottos.calculateResults(winningLotto)
 
-            val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
             it("1등 당첨 횟수는 1이다.") {
                 lottosResult.getWinningResultsCount(LottoRank.FIRST) shouldBe 1
             }
@@ -56,7 +55,7 @@ class LottosSpec : DescribeSpec({
             val lottos = lottos(lotto(1, 2, 3, 4, 5, 6), lotto(1, 2, 3, 4, 5, 6))
 
             it("1등 당첨 횟수는 2이다.") {
-                val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+                val lottosResult = lottos.calculateResults(winningLotto)
 
                 lottosResult.getWinningResultsCount(LottoRank.FIRST) shouldBe 2
             }
@@ -66,29 +65,42 @@ class LottosSpec : DescribeSpec({
             val lottos = lottos(lotto(1, 2, 3, 4, 5, 6), lotto(1, 2, 3, 4, 5, 7))
 
             it("1등 당첨 횟수는 1이다.") {
-                val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+                val lottosResult = lottos.calculateResults(winningLotto)
 
                 lottosResult.getWinningResultsCount(LottoRank.FIRST) shouldBe 1
             }
             it("2등 당첨 횟수는 1이다.") {
-                val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+                val lottosResult = lottos.calculateResults(winningLotto)
 
                 lottosResult.getWinningResultsCount(LottoRank.SECOND) shouldBe 1
             }
             it("3등 당첨 횟수는 0이다.") {
-                val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+                val lottosResult = lottos.calculateResults(winningLotto)
 
                 lottosResult.getWinningResultsCount(LottoRank.THIRD) shouldBe 0
             }
             it("4등 당첨 횟수는 0이다.") {
-                val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+                val lottosResult = lottos.calculateResults(winningLotto)
 
                 lottosResult.getWinningResultsCount(LottoRank.FOURTH) shouldBe 0
             }
             it("5등 당첨 횟수는 0이다.") {
-                val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+                val lottosResult = lottos.calculateResults(winningLotto)
 
                 lottosResult.getWinningResultsCount(LottoRank.FIFTH) shouldBe 0
+            }
+        }
+    }
+
+    describe("더하기 연산 검증") {
+        context("두 개의 로또 목록을 더하기 연산하면") {
+            val lottos1 = lottos(Lotto(), Lotto())
+            val lottos2 = lottos(Lotto(), Lotto())
+
+            it("로또 목록이 합쳐진다.") {
+                val lottos = lottos1 + lottos2
+
+                lottos.size shouldBe 4
             }
         }
     }

@@ -7,12 +7,12 @@ import lotto.view.LottoOutputView
 object LottoGameController {
     fun play() {
         val money = LottoInputView.inputMoney()
-        val lottos = LottoShop.sellByMoney(money)
+        val manualLottos = LottoInputView.inputManualLottos()
+        val lottos = LottoShop.sellByMoneyWithManualLottos(money, manualLottos)
         LottoOutputView.printLottos(lottos)
 
-        val winningNumbers = LottoInputView.inputWinningLottoNumbers()
-        val bonusNumber = LottoInputView.inputBonusNumber()
-        val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+        val winningLotto = LottoInputView.inputWinningLotto()
+        val lottosResult = lottos.calculateResults(winningLotto)
         LottoOutputView.printLottoResults(lottosResult)
     }
 }
