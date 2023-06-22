@@ -13,15 +13,17 @@ class LottoController {
 
         val lottoWinningNumbers = getLottoWinningNumbers()
         val lottoResult = lottoWinningNumbers.getLottoResult(lottos)
+        val lottoRankStatistic = lottoResult.getLottoRankStatistic()
         val profitRate = lottoResult.getProfitRate(LottoPurchaseMachine.LOTTO_PRICE)
-        OutputView.printLottoRankStatics(lottoResult.getLottoRankStatistic())
+        OutputView.printLottoRankStatics(lottoRankStatistic)
         OutputView.printProfitRate(profitRate)
     }
 
     private fun getLottos(): List<Lotto> {
         val purchaseAmount = InputView.getPurchaseAmount()
-        val lottos = LottoPurchaseMachine.getLottos(purchaseAmount)
-        return lottos
+        val manualLottoCount = InputView.getManualLottoCount()
+        val manualLottos = InputView.getManualLottos(manualLottoCount)
+        return LottoPurchaseMachine.getLottos(purchaseAmount, manualLottos)
     }
 
     private fun getLottoWinningNumbers(): LottoWinningNumbers {

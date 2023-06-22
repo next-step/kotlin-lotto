@@ -25,7 +25,6 @@ class LottoWinningNumbersTest : StringSpec({
         }
     }
 
-
     "로또 당첨 번호와 보너스볼에 중복이 있으면 예외를 던진다." {
         shouldThrow<IllegalArgumentException> {
             LottoWinningNumbers(ObjectGenerator.lotto(1, 2, 3, 4, 5, 6), LottoNumber(6))
