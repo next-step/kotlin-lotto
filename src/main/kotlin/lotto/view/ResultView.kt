@@ -19,15 +19,15 @@ object ResultView {
         tickets.tickets.forEach { println(it.numbers) }
     }
 
-    fun printResult(score: Map<Rank, Int>, rate: Float) {
+    fun printResult(score: List<Rank>, rate: Float) {
         println(RESULT_STRING)
         Rank.values()
             .filter { it != Rank.NONE }
             .sortedBy { it.reward }
-            .forEach {
-                print("${it.count}개 일치")
-                if (it == Rank.SECOND) print(", 보너스 볼 일치")
-                println("(${it.reward}원) - ${score[it]}개")
+            .forEach { rank ->
+                print("${rank.count}개 일치")
+                if (rank == Rank.SECOND) print(", 보너스 볼 일치")
+                println("(${rank.reward}원) - ${score.count { score -> score == rank }}개")
             }
 
         print("총 수익률은 ${DecimalFormat("#.##").format(rate)}입니다.")

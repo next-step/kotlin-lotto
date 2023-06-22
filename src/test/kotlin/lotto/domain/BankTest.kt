@@ -14,10 +14,9 @@ internal class BankTest {
             val testLotto = Tickets(1, TestNumGenerator())
             val score = Bank.score(testLotto, winningTicket)
 
-            score[Rank.FIFTH] shouldBe 1
-            score[Rank.FOURTH] shouldBe 0
-            score[Rank.THIRD] shouldBe 0
-            score[Rank.FIRST] shouldBe 0
+            Rank.values().intersect(score).size shouldBe 1
+            Rank.values().intersect(score).first() shouldBe Rank.FIFTH
+
         }
 
         @Test
@@ -26,11 +25,8 @@ internal class BankTest {
             val testLotto = Tickets(1, TestNumGenerator())
             val score = Bank.score(testLotto, winningTicket)
 
-            score[Rank.FIFTH] shouldBe 0
-            score[Rank.FOURTH] shouldBe 0
-            score[Rank.THIRD] shouldBe 0
-            score[Rank.SECOND] shouldBe 1
-            score[Rank.FIRST] shouldBe 0
+            Rank.values().intersect(score).size shouldBe 1
+            Rank.values().intersect(score).first() shouldBe Rank.SECOND
         }
 
         @ParameterizedTest
