@@ -14,11 +14,7 @@ class LottoGame(
     fun start() {
         val input = inputView.readMoney()
         val manualLottoCount = inputView.readManualLottoCount()
-        var manualLottoNumbers = emptyList<LottoNumbers>()
-        if (manualLottoCount > 0) {
-            val manualLottoNumberInput = inputView.readManualLottoNumbers(manualLottoCount)
-            manualLottoNumbers = lottoFactory.createManualLottoNumbers(manualLottoNumberInput)
-        }
+        val manualLottoNumbers = getManualLottoNumbers(manualLottoCount)
 
         val lottos = lottoFactory.createLottos(manualLottoNumbers, input)
         resultView.printLottoCount(manualLottoCount, lottos.getSize() - manualLottoCount)
@@ -26,6 +22,15 @@ class LottoGame(
         val winningNumbers = getWinningNumbers()
         val matchResult = calculateMatchResult(lottos, winningNumbers)
         printResults(matchResult, input)
+    }
+
+    private fun getManualLottoNumbers(manualLottoCount: Int): List<LottoNumbers> {
+        return if (manualLottoCount > 0) {
+            val manualLottoNumberInput = inputView.readManualLottoNumbers(manualLottoCount)
+            lottoFactory.createManualLottoNumbers(manualLottoNumberInput)
+        } else {
+            emptyList()
+        }
     }
 
     private fun getWinningNumbers(): WinningNumbers {
