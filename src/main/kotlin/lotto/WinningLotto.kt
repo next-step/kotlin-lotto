@@ -26,7 +26,7 @@ class WinningLotto(
         private val winNumberMatchCount: Int,
         private val bonusNumberMatchCount: Int,
     ) {
-        fun getTotalMatch() = winNumberMatchCount + bonusNumberMatchCount
+        fun getTotalMatch() = winNumberMatchCount
 
         private fun isBonusMatched() = bonusNumberMatchCount != 0
 

@@ -21,6 +21,6 @@ internal class WinningLottoTest : StringSpec({
         val sut = WinningLotto(LottoNumber.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.of(listOf(7)))
         val lotto = Lotto(LottoNumber.of(listOf(1, 2, 3, 4, 10, 7)))
         val matchResult = sut.countMatch(lotto)
-        matchResult.getTotalMatch() shouldBe 5
+        matchResult.getTotalMatch() shouldBe 4
     }
 })

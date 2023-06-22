@@ -13,7 +13,7 @@ object LottoDrawingMachine {
     private fun calculateRoi(rankPrizes: List<RankPrize>, lottos: Lottos): BigDecimal {
         val totalReward = rankPrizes.sumOf { it.getTotalReward() }
         val invested = lottos.getTotalPrice()
-        return BigDecimal((totalReward.toDouble() / invested.toDouble()))
+        return BigDecimal(totalReward.toDouble() / invested.toDouble())
     }
 
     private fun rankPrizes(winningLotto: WinningLotto, lottos: Lottos): List<RankPrize> {

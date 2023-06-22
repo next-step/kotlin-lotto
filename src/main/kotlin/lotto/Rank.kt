@@ -10,7 +10,15 @@ enum class Rank(val matchCount: Int, val matchBonus: Boolean, val reward: Long) 
 
     companion object {
         fun of(matchCount: Int, matchBonus: Boolean): Rank? {
-            return values().find { it.matchCount == matchCount && it.matchBonus == matchBonus }
+            val matchingAll = values().find { it.matchCount == matchCount && it.matchBonus == matchBonus }
+            if (matchingAll != null) {
+                return matchingAll
+            }
+            val matchingCount = values().find { it.matchCount == matchCount }
+            if (matchingCount != null) {
+                return matchingCount
+            }
+            return null
         }
     }
 }
