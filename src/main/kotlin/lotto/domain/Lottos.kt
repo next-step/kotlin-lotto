@@ -3,6 +3,11 @@ package lotto.domain
 class Lottos(
     val lottos: List<Lotto>
 ) {
+
+    fun countAutoLottos() = lottos.count { it.auto }
+
+    fun countManualLottos() = lottos.count { !it.auto }
+
     fun generateWinningMap(winningLotto: WinningLotto): Map<LottoPrizes, Int> {
         val map = mutableMapOf<LottoPrizes, Int>()
 

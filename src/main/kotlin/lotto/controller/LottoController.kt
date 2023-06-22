@@ -9,7 +9,6 @@ import lotto.view.ResultView
 class LottoController {
     private val inputView = InputView()
     private val resultView = ResultView()
-    private val lottoPurchase = LottoPurchase()
 
     fun run() {
         val budget = inputView.inputPurchasePrice()
@@ -21,13 +20,15 @@ class LottoController {
     }
 
     private fun buyLottos(budget: Int): Lottos {
-        val amount = lottoPurchase.affordableLottoCount(budget, DEFAULT_PRICE)
-        val lottos = lottoPurchase.purchaseAuto(budget, DEFAULT_PRICE)
+        val lottoPurchase = LottoPurchase()
+        val manualAmount = inputView.inputManualPurchaseAmount()
+        val manualLottosNumbers = inputView.inputManualLottos(manualAmount)
 
-        resultView.printPurchaseAmount(amount)
-        resultView.printLottos(lottos.lottos)
+        val allLottos = lottoPurchase.purchaseManualAndAuto(manualLottosNumbers, budget, DEFAULT_PRICE)
+        resultView.printPurchaseAmount(allLottos.countManualLottos(), allLottos.countAutoLottos())
+        resultView.printLottos(allLottos.lottos)
 
-        return lottos
+        return allLottos
     }
 }
 

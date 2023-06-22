@@ -1,7 +1,8 @@
 package lotto.domain
 
-class Lotto(
-    val numbers: List<LottoNumber>
+class Lotto private constructor(
+    val numbers: List<LottoNumber>,
+    val auto: Boolean = false
 ) {
     init {
         require(numbers.size == NUMBER_OF_LOTTO_NUMBERS) { "로또 번호는 6개여야 합니다." }
@@ -19,6 +20,13 @@ class Lotto(
 
         fun autoCreate(): Lotto {
             val lottoNumbers = LottoNumber.createRandomList(NUMBER_OF_LOTTO_NUMBERS)
+            return Lotto(lottoNumbers, true)
+        }
+
+        fun manualCreate(numbers: List<Int>): Lotto {
+            val lottoNumbers = numbers.map {
+                LottoNumber.create(it)
+            }
             return Lotto(lottoNumbers)
         }
     }

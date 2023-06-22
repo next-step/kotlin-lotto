@@ -2,27 +2,25 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPurchase
+import lotto.domain.LottoPurchase.Companion.DEFAULT_PRICE
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
 
 class LottoPurchaseTest {
     @Test
     fun `로또를 구입할 수 있다`() {
-        val lotto = LottoPurchase().purchaseAuto(1000, LottoPurchase.DEFAULT_PRICE).lottos[0]
-        assertThat(lotto).isInstanceOf(Lotto::class.java)
-    }
+        val manualLottosNumbers = listOf(
+            listOf(1, 2, 3, 4, 5, 6),
+            listOf(4, 5, 6, 7, 8, 9)
+        )
+        val budget = 3000
 
-    @ParameterizedTest
-    @ValueSource(ints = [3000, 4000])
-    fun `로또 구입 금액을 입력하면 구입 금액에 해당하는 로또 개수를 알 수 있다`(budget: Int) {
-        val affordableLottoCount = LottoPurchase().affordableLottoCount(budget, LottoPurchase.DEFAULT_PRICE)
-        assertThat(affordableLottoCount).isEqualTo(budget / LottoPurchase.DEFAULT_PRICE)
+        val lotto = LottoPurchase().purchaseManualAndAuto(manualLottosNumbers, budget, DEFAULT_PRICE).lottos[0]
+        assertThat(lotto).isInstanceOf(Lotto::class.java)
     }
 
     @Test
     fun `로또 1장의 가격은 1000원이다`() {
-        assertThat(LottoPurchase.DEFAULT_PRICE).isEqualTo(1000)
+        assertThat(DEFAULT_PRICE).isEqualTo(1000)
     }
 }

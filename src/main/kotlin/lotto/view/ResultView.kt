@@ -5,8 +5,8 @@ import lotto.domain.LottoPrizes
 import lotto.domain.LottosStatisticsVO
 
 class ResultView {
-    fun printPurchaseAmount(amount: Int) {
-        println("${amount}개를 구매했습니다.")
+    fun printPurchaseAmount(manualAmount: Int, autoAmount: Int) {
+        println("수동으로 ${manualAmount}개, 자동으로 ${autoAmount}개를 구매했습니다.")
     }
 
     fun printLottos(lottos: List<Lotto>) {
