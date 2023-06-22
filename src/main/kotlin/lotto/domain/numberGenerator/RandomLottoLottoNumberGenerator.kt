@@ -2,7 +2,7 @@ package lotto.domain.numberGenerator
 
 import lotto.domain.LottoNumber
 
-class RandomLottoNumberGenerator : NumberGenerator {
+class RandomLottoLottoNumberGenerator : LottoNumberGenerator {
 
     override fun generateNumbers(): List<LottoNumber> {
         return rangeNumber.shuffled().take(NUMBER_OF_LOTTO).map { LottoNumber(it) }.sortedBy { it.value }

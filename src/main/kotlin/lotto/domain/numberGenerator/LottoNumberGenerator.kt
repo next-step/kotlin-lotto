@@ -2,6 +2,6 @@ package lotto.domain.numberGenerator
 
 import lotto.domain.LottoNumber
 
-interface NumberGenerator {
+interface LottoNumberGenerator {
     fun generateNumbers(): List<LottoNumber>
 }

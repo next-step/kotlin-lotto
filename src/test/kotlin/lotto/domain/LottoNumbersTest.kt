@@ -3,10 +3,10 @@ package lotto.domain
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
-import lotto.domain.numberGenerator.NumberGenerator
+import lotto.domain.numberGenerator.LottoNumberGenerator
 
 class LottoNumbersTest : BehaviorSpec({
-    val fixedNumberGenerator = object : NumberGenerator {
+    val fixedLottoNumberGenerator = object : LottoNumberGenerator {
         override fun generateNumbers(): List<LottoNumber> {
             return listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
         }
@@ -14,7 +14,7 @@ class LottoNumbersTest : BehaviorSpec({
 
     Given("로또를 한장 구매할 때") {
         When("로또 번호를 생성하면") {
-            val lottoNumbers = LottoNumbers(fixedNumberGenerator.generateNumbers())
+            val lottoNumbers = LottoNumbers(fixedLottoNumberGenerator.generateNumbers())
             Then("6개의 숫자가 생성된다.") {
                 lottoNumbers.lottoNumbers.size shouldBe 6
             }

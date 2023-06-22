@@ -7,14 +7,14 @@ import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
 import lotto.domain.Prize
-import lotto.domain.numberGenerator.FixedNumberGenerator
+import lotto.domain.numberGenerator.FixedLottoLottoNumberGenerator
 
 class MatchResultTest : BehaviorSpec({
     Given("로또 번호와 당첨 번호가 주어지면") {
         val money = 3000
         val bonusNumber = 7
         val winningNumbers = WinningNumbers(
-            LottoNumbers(FixedNumberGenerator(listOf(1, 2, 3, 4, 5, 6)).generateNumbers()),
+            LottoNumbers(FixedLottoLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6)).generateNumbers()),
             LottoNumber(bonusNumber)
         )
         val lottoNumbersData = listOf(
@@ -23,7 +23,7 @@ class MatchResultTest : BehaviorSpec({
             listOf(10, 11, 12, 13, 14, 15), // 미당첨
             listOf(1, 2, 3, 4, 5, 7) // 2등
         )
-        val lottoNumbersList = lottoNumbersData.map { LottoNumbers(FixedNumberGenerator(it).generateNumbers()) }
+        val lottoNumbersList = lottoNumbersData.map { LottoNumbers(FixedLottoLottoNumberGenerator(it).generateNumbers()) }
         val lottos = Lottos(lottoNumbersList)
 
         When("MatchResult 를 생성할 때") {

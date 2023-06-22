@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.domain.numberGenerator.NumberGenerator
+import lotto.domain.numberGenerator.LottoNumberGenerator
 
 class Lottos(val lottoList: List<LottoNumbers>) {
 
@@ -11,9 +11,9 @@ class Lottos(val lottoList: List<LottoNumbers>) {
     companion object {
         private const val PER_LOTTO_PRICE = 1000
 
-        fun of(input: Int, numberGenerator: NumberGenerator): Lottos {
+        fun of(input: Int, lottoNumberGenerator: LottoNumberGenerator): Lottos {
             val count = input / PER_LOTTO_PRICE
-            val lottoList = List(count) { LottoNumbers(numberGenerator.generateNumbers()) }
+            val lottoList = List(count) { LottoNumbers(lottoNumberGenerator.generateNumbers()) }
             return Lottos(lottoList)
         }
     }

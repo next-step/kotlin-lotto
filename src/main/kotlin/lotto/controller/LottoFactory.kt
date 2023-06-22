@@ -2,9 +2,9 @@ package lotto.controller
 
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
-import lotto.domain.numberGenerator.NumberGenerator
+import lotto.domain.numberGenerator.LottoNumberGenerator
 
-class LottoFactory(private val numberGenerator: NumberGenerator) {
+class LottoFactory(private val lottoNumberGenerator: LottoNumberGenerator) {
 
     fun createLottos(manualLottoNumbers: List<LottoNumbers>, money: Int): Lottos {
         val randomLottoNumbers =
@@ -17,7 +17,7 @@ class LottoFactory(private val numberGenerator: NumberGenerator) {
     }
 
     private fun createRandomLottoNumbers(): LottoNumbers {
-        val lottoNumberList = numberGenerator.generateNumbers()
+        val lottoNumberList = lottoNumberGenerator.generateNumbers()
         return LottoNumbers(lottoNumberList)
     }
 

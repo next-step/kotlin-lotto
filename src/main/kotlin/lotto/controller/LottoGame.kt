@@ -2,7 +2,7 @@ package lotto.controller
 
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
-import lotto.domain.numberGenerator.FixedNumberGenerator
+import lotto.domain.numberGenerator.FixedLottoLottoNumberGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -31,13 +31,13 @@ class LottoGame(
 
         val manualLottoNumberInput = inputView.readManualLottoNumbers(manualLottoCount)
         return manualLottoNumberInput.map { inputNumbers ->
-            val numberGenerator = FixedNumberGenerator(inputNumbers)
+            val numberGenerator = FixedLottoLottoNumberGenerator(inputNumbers)
             LottoNumbers(numberGenerator.generateNumbers())
         }
     }
 
     private fun getWinningNumbers(): WinningNumbers {
-        val winningNumberGenerator = FixedNumberGenerator(inputView.readWinningNumbers())
+        val winningNumberGenerator = FixedLottoLottoNumberGenerator(inputView.readWinningNumbers())
         val bonusNumber = inputView.readBonusNumber()
         return WinningNumbers.of(LottoNumbers(winningNumberGenerator.generateNumbers()), bonusNumber)
     }
