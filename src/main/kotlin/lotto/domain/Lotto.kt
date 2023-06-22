@@ -1,6 +1,7 @@
 package lotto.domain
 
-class Lotto(val numbers: List<Int>) {
+class Lotto(numbers: List<Int>) {
+    val numbers: Set<Int> = numbers.toSet()
     override fun toString(): String {
         return numbers.joinToString(
             prefix = "[",
