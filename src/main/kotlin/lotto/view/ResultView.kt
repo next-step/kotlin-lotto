@@ -6,7 +6,7 @@ import lotto.domain.IssuedLottos
 class ResultView {
 
     fun outputIssuedLottos(issuedLottos: IssuedLottos) {
-        println("${issuedLottos.lottos.size}개를 구매했습니다.")
+        println("수동으로 ${issuedLottos.manualCount}장, 자동으로 ${issuedLottos.autoCount}장을 구매했습니다.")
         println(issuedLottos)
     }
 

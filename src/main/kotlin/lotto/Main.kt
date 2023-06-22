@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.IssuedLottoMatchResult
 import lotto.domain.IssuedLottos
+import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.LottoSeller
 import lotto.domain.WinningLotto
@@ -15,7 +16,9 @@ fun main() {
     val lottoSeller = LottoSeller()
 
     val seedMoney: Int = inputView.inputSeedMoney()
-    val issuedLottos: IssuedLottos = lottoSeller.sell(seedMoney)
+    val manualLotto: List<Set<Int>> = inputView.inputManualLotto()
+    val manualLottoList = manualLotto.map { Lotto(it.toLottoNumberSet()) }
+    val issuedLottos: IssuedLottos = lottoSeller.sell(seedMoney, manualLottoList)
     resultView.outputIssuedLottos(issuedLottos)
 
     val winningNumbers: Set<LottoNumber> = inputView.inputWinningNumbers().toLottoNumberSet()

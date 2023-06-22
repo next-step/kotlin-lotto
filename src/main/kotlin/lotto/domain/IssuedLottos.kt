@@ -5,7 +5,11 @@ package lotto.domain
  *
  * 발급받은 로또가 다른 로또 번호와 얼마나 일치하는지 검사할 수 있습니다.
  */
-data class IssuedLottos(val lottos: List<Lotto>) {
+data class IssuedLottos(
+    val lottos: List<Lotto>,
+    val manualCount: Int = 0,
+    val autoCount: Int = 0,
+) {
     init {
         require(lottos.isNotEmpty()) { "lottos must not be empty" }
     }

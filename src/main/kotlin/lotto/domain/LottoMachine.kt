@@ -7,8 +7,8 @@ import lotto.domain.Lotto.Companion.MAX_LOTTO_NUMBER_SIZE
  */
 class LottoMachine {
 
-    fun issue(count: Int): IssuedLottos {
-        return IssuedLottos(List(count) { createLotto() })
+    fun issue(count: Int): List<Lotto> {
+        return List(count) { createLotto() }
     }
 
     private fun createLotto(): Lotto {
