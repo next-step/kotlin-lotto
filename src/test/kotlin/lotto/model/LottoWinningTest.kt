@@ -1,8 +1,8 @@
 package lotto.model
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
-import lotto.view.toNumbers
 
 class LottoWinningTest : BehaviorSpec({
     Given("1,2,3,4,5,6 당첨번호") {
@@ -80,5 +80,15 @@ class LottoWinningTest : BehaviorSpec({
                 total.toDecimalPoint() shouldBe "0.35"
             }
         }
+
+        When("1,2,3,4,5,6의 담첨번호에 보너스 번호는 5인 경우") {
+            Then("예외 발생") {
+                shouldThrow<IllegalArgumentException> {
+                    LottoWinning(numbers, bonus = 5)
+                }
+            }
+        }
     }
 })
+
+fun String.toNumbers() = this.split(",").map { it.toInt() }.toSet()

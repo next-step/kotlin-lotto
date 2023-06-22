@@ -8,9 +8,11 @@ class LottoMachine(private val amount: Int, private val selfNumbers: List<Set<In
         }
     }
 
-    private fun numbersOfAutoLotto() = (amount - selfPrice()) / LOTTO_PRICE
+    private val numbersOfAutoLotto: Int
+        get() = (amount - selfPrice) / LOTTO_PRICE
 
-    private fun selfPrice() = (selfNumbers.count() * LOTTO_PRICE)
+    private val selfPrice: Int
+        get() = (selfNumbers.count() * LOTTO_PRICE)
 
     private fun createSelfLotto() = selfNumbers.map {
         Lotto.create(it)
@@ -24,7 +26,7 @@ class LottoMachine(private val amount: Int, private val selfNumbers: List<Set<In
 
     fun buyLotto(): List<Lotto> {
 
-        val count = numbersOfAutoLotto()
+        val count = numbersOfAutoLotto
         val selfLotto = createSelfLotto()
         val autoLotto = createAutoLotto(count)
 
