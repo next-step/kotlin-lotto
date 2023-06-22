@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.WinningStatistics
 import lotto.service.LottoShop
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -13,4 +14,9 @@ fun main() {
 
     val winningLotto = InputView.winningLotto()
     println()
+
+    val winningStatistics = WinningStatistics.of(lottos, winningLotto)
+
+    ResultView.printStatisticsTitle()
+    ResultView.printWinningStatistics(winningStatistics)
 }
