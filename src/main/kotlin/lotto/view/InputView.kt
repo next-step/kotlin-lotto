@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 
 object InputView {
@@ -10,12 +11,28 @@ object InputView {
         return result
     }
 
+    fun getManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val result = readln().toInt()
+        require(result > 0) { "로또 수는 0보다 커야합니다." }
+        return result
+    }
+
+    fun getManualLottos(count: Int): List<Lotto> {
+        return List(count) { getManualLotto() }
+    }
+
+    private fun getManualLotto(): Lotto {
+        val input = readln()
+        return Lotto(parseLottoNumbers(input))
+    }
+
+    private fun parseLottoNumbers(input: String) = input.split(",").map { LottoNumber.of(it) }
+
     fun getWinningNumbers(): List<LottoNumber> {
         println("지난주 당첨 번호를 입력해 주세요.")
         val result = readln()
-        return result
-            .split(",")
-            .map { LottoNumber.of(it) }
+        return parseLottoNumbers(result)
     }
 
     fun getBonusNumber(): LottoNumber {
