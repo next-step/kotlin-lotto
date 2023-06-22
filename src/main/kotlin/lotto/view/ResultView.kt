@@ -8,12 +8,12 @@ import lotto.domain.Prize
 class ResultView {
 
     fun printLottoInfo(lottos: Lottos) {
-        println("${lottos.getSize()}개를 구매했습니다.")
         lottos.lottoList.forEach {
             println(formatLottoNumbers(it.lottoNumbers))
         }
         println()
     }
+
     private fun formatLottoNumbers(lottoNumbers: List<LottoNumber>): String {
         return lottoNumbers.joinToString(", ") { lottoNumber -> lottoNumber.value.toString() }.let { "[$it]" }
     }
@@ -42,5 +42,9 @@ class ResultView {
             Prize.NO_PRIZE -> ""
             else -> "${prize.matchCount}개 일치 (${prize.amount}원) - ${numberOfMatches}개"
         }
+    }
+
+    fun printLottoCount(manualCount: Int, randomCount: Int) {
+        println("수동으로 ${manualCount}장, 자동으로 ${randomCount}개를 구매했습니다.")
     }
 }
