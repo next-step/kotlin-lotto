@@ -13,6 +13,10 @@ class PositiveNumbers(private val tokens: List<String>) {
         }
     }
 
+    fun getNumbers(): List<Int> {
+        return numbers
+    }
+
     fun sum(): Int {
         return numbers.sum()
     }
