@@ -39,13 +39,11 @@ class InputView {
 
     fun inputManualNums(manualSize: Int): List<Lottery> {
         println("\n수동으로 구매할 번호를 입력해 주세요.")
-        var results = listOf<Lottery>()
-        for (idx in 1..manualSize) {
-            val winningNums = inputReader.raedLine()
-            val manualNumberGenerator = ManualNumberGenerator(Separator.extractIntegers(winningNums).toSet())
-            results = results + Lottery(manualNumberGenerator)
-        }
 
-        return results
+        return List(manualSize) {
+            val winningNums = readln()
+            val manualNumberGenerator = ManualNumberGenerator(Separator.extractIntegers(winningNums).toSet())
+            Lottery(manualNumberGenerator)
+        }
     }
 }
