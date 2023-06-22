@@ -3,6 +3,7 @@ package domain
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
+import service.Settlement
 
 internal class SettlementTest : StringSpec({
     "당첨된 총 금액과 유저가 구입한 비용의 비례로 수익률을 계산한다." {

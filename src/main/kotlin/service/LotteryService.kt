@@ -1,7 +1,8 @@
+package service
+
 import domain.Lottery
 import domain.LottoDraw
 import domain.Order
-import domain.Settlement
 import domain.WinningFinder
 import view.InputView
 import view.OutputView

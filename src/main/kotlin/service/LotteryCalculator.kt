@@ -1,3 +1,5 @@
+package service
+
 import domain.Lottery
 import domain.WinningFinder
 

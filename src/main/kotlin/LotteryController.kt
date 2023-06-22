@@ -1,3 +1,5 @@
+import service.LotteryService
+
 class LotteryController {
 
     fun startLotteryService() {

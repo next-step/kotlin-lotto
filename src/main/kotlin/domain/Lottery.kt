@@ -1,9 +1,9 @@
 package domain
 
 import util.NumberGenerator
-import util.RandomNumberGenerator
+import util.randomNumberGenerator
 
-class Lottery(numberGenerator: NumberGenerator = RandomNumberGenerator) {
+class Lottery(numberGenerator: NumberGenerator = randomNumberGenerator) {
 
     val lotteryNumbers = numberGenerator.randomNumbers()
 
