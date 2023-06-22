@@ -20,9 +20,6 @@ class Lotto(
         require(numbers.distinct().size == 6) { "중복되지 않은 6개의 숫자가 필요합니다." }
         require(numbers.all { it in 1..45 }) { "1~45의 수만 가능합니다" }
     }
-
-    companion object {
-    }
 }
 
 fun List<Lotto>.toLottos() = Lottos(this)

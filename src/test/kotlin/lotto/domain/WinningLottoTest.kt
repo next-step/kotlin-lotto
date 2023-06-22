@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 
 class WinningLottoTest : StringSpec({
 
-    "예외가 발생한다" {
+    "보너스 넘버가 로또 번호에 포함될 경우 예외가 발생한다" {
         shouldThrow<IllegalArgumentException> {
             WinningLotto(
                 lotto = Lotto(listOf(1, 2, 3, 4, 5, 6)),
