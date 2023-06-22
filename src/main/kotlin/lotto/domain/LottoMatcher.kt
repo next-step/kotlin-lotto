@@ -4,13 +4,19 @@ import lotto.dto.LottoResponse
 
 class LottoMatcher {
 
-    fun count(winningNumber: WinningNumber, lottoResponse: LottoResponse): Int {
-        var matchedLottoCount = 0
+    fun countLottoWinner(winningNumber: WinningNumber, lottoResponse: LottoResponse): Map<PrizeLevel, Int> {
         val winningLottoNumber = winningNumber.getWinningLottoNumber()
-        lottoResponse.lottoNumbers.map {
-            LottoNumberComparator.compare(winningLottoNumber, it)
+        val matchedCounts = getMatchedCount(winningLottoNumber, lottoResponse.lottoNumbers)
 
+        val prizeList = matchedCounts.map { matchedCount ->
+            PrizeLevel.fromNumberOfHit(matchedCount)
         }
-        return matchedLottoCount
+        return PrizeLevel.countPrizeLevels(prizeList)
+    }
+
+    private fun getMatchedCount(winningLottoNumber: List<Int>, lottoNumbers: List<List<Int>>): List<Int> {
+        return lottoNumbers.map { lottoNumber ->
+            LottoNumberComparator.compare(winningLottoNumber, lottoNumber)
+        }
     }
 }
