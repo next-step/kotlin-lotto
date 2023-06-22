@@ -15,6 +15,6 @@ value class LottoNumber private constructor(
 
         fun create(number: Int): LottoNumber = LOTTO_NUMBERS[number - 1]
 
-        fun createRandom(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size)
+        fun createRandomList(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size)
     }
 }
