@@ -6,10 +6,8 @@ import lotto.domain.Lottos
 interface LottoGenerator {
 
     fun getLottos(count: Int): Lottos {
-        val lottoList = buildList {
-            repeat(count) {
-                add(getLotto())
-            }
+        val lottoList = List(count) {
+            getLotto()
         }
         return Lottos(lottoList)
     }
