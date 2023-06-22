@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoChecker
 import lotto.domain.LottoSeller
 import lotto.domain.Lottos
@@ -8,11 +9,10 @@ import lotto.io.InputView
 import lotto.io.ResultView
 
 class LottoGame {
-    private val lottoSeller: LottoSeller
+    private var amount = InputView.getAmount()
 
     init {
-        val amount = InputView.getAmount()
-        lottoSeller = LottoSeller(amount)
+        require(amount > Lotto.LOTTO_PRICE) { MORE_THAN_LOTTO_PRICE_MESSAGE }
     }
 
     fun start() {
@@ -30,18 +30,22 @@ class LottoGame {
 
     private fun getLottos(): Lottos {
         val manualLottos = getManualLottos()
-        val autoLottos = lottoSeller.sellAutoLottos()
-
-        return Lottos(manualLottos, autoLottos)
+        val lottoResponse = LottoSeller.sellAutoLottos(amount)
+        amount = lottoResponse.change
+        return Lottos(manualLottos, lottoResponse.lottos)
     }
 
     private fun getManualLottos(): Lottos {
         val manualLottoSize = InputView.getManualLottoSize()
-        return lottoSeller.sellManualLottos(manualLottoSize)
+        return LottoSeller.sellManualLottos(amount, manualLottoSize).lottos
     }
 
     private fun printResult(winNumbers: WinNumbers, lottos: Lottos) {
         val result = LottoChecker.checkResult(lottos, winNumbers)
         ResultView.printResult(result)
+    }
+
+    companion object {
+        private const val MORE_THAN_LOTTO_PRICE_MESSAGE = "${Lotto.LOTTO_PRICE}이상의 금액을 입력해주세요"
     }
 }

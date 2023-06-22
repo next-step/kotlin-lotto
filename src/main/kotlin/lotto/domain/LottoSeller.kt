@@ -4,26 +4,21 @@ import lotto.util.LottoGenerator
 import lotto.util.ManualLottoGenerator
 import lotto.util.RandomLottoGenerator
 
-class LottoSeller(amount: Int) {
-    private var lottoSize: Int
+object LottoSeller {
 
-    init {
-        require(amount >= Lotto.LOTTO_PRICE) { MORE_THAN_LOTTO_PRICE_MESSAGE }
-        lottoSize = amount / Lotto.LOTTO_PRICE
+    fun sellManualLottos(amount: Int, count: Int) = LottoSellingMachine.sellLottos(amount, ManualLottoGenerator, count)
+
+    fun sellAutoLottos(amount: Int) = LottoSellingMachine.sellLottos(amount, RandomLottoGenerator)
+}
+
+object LottoSellingMachine {
+    private const val EXCEED_LOTTO_SIZE_ERROR_MESSAGE = "구매 가능한 로또의 개수를 초과했습니다"
+    fun sellLottos(amount: Int, lottoGenerator: LottoGenerator, count: Int? = null): LottoSellResponse {
+        val count = count ?: (amount / Lotto.LOTTO_PRICE) // 개수를 넣지 않으면 구매 가능한 최대한의 수량으로 구매한다
+        require(amount / Lotto.LOTTO_PRICE >= count) { EXCEED_LOTTO_SIZE_ERROR_MESSAGE }
+
+        return LottoSellResponse(lottoGenerator.getLottos(count), amount - (count * Lotto.LOTTO_PRICE))
     }
 
-    fun sellManualLottos(count: Int) = sellLottos(ManualLottoGenerator, count)
-
-    fun sellAutoLottos() = sellLottos(RandomLottoGenerator)
-
-    fun sellLottos(lottoGenerator: LottoGenerator, count: Int = lottoSize): Lottos {
-        require(lottoSize >= count) { EXCEED_LOTTO_SIZE_ERROR_MESSAGE }
-        lottoSize -= count
-        return lottoGenerator.getLottos(count)
-    }
-
-    companion object {
-        private const val MORE_THAN_LOTTO_PRICE_MESSAGE = "${Lotto.LOTTO_PRICE}이상의 금액을 입력해주세요"
-        private const val EXCEED_LOTTO_SIZE_ERROR_MESSAGE = "구매 가능한 로또의 개수를 초과했습니다"
-    }
+    data class LottoSellResponse(val lottos: Lottos, val change: Int)
 }
