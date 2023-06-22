@@ -10,7 +10,7 @@ class LottoCalculator {
                 .size
         }
 
-        fun calculatePrizeMoney(matchCount: Int): Int {
+        fun calculatePrizeMoney(matchCount: Int): Long {
             return when (matchCount) {
                 3 -> 5_000
                 4 -> 50_000

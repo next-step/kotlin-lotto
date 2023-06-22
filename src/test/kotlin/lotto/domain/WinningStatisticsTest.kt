@@ -1,6 +1,7 @@
 package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
 class WinningStatisticsTest : FunSpec({
@@ -26,11 +27,20 @@ class WinningStatisticsTest : FunSpec({
 
         val winningStatistics = WinningStatistics.of(lottos, winningLotto)
 
-        winningStatistics[1] shouldBe 2
-        winningStatistics[2] shouldBe 1
-        winningStatistics[3] shouldBe 1
-        winningStatistics[4] shouldBe 1
-        winningStatistics[5] shouldBe 1
-        winningStatistics[6] shouldBe 2
+        winningStatistics.winningStatistics[1] shouldBe 2
+        winningStatistics.winningStatistics[2] shouldBe 1
+        winningStatistics.winningStatistics[3] shouldBe 1
+        winningStatistics.winningStatistics[4] shouldBe 1
+        winningStatistics.winningStatistics[5] shouldBe 1
+        winningStatistics.winningStatistics[6] shouldBe 2
+    }
+
+    context("총 수익금을 계산한다.") {
+        withData(
+            (WinningStatistics(mapOf(1 to 2, 2 to 1, 3 to 1, 4 to 1, 5 to 1, 6 to 2)) to 4_001_555_000L),
+            (WinningStatistics(mapOf(1 to 2, 2 to 1, 3 to 1, 4 to 0, 5 to 0, 6 to 0)) to 5000L),
+        ) { (winningStatistics, expectedTotalPrizeMoney) ->
+            winningStatistics.calculateTotalPrizeMoney() shouldBe expectedTotalPrizeMoney
+        }
     }
 })

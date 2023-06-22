@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lottos
+import lotto.domain.WinningStatistics
 import lotto.service.LottoCalculator
 
 class ResultView {
@@ -20,10 +21,10 @@ class ResultView {
             println("---------")
         }
 
-        fun printWinningStatistics(winningStatistics: Map<Int, Int>) {
+        fun printWinningStatistics(winningStatistics: WinningStatistics) {
             (3..6).forEach {
                 val prize = LottoCalculator.calculatePrizeMoney(it)
-                val matchCount = winningStatistics[it] ?: 0
+                val matchCount = winningStatistics.winningStatistics[it] ?: 0
                 println("${it}개 일치 (${prize}원)- ${matchCount}개")
             }
         }
