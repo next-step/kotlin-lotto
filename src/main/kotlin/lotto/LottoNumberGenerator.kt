@@ -1,10 +1,10 @@
 package lotto
 
 class LottoNumberGenerator {
-    fun generate(num: Int): List<Int> {
+    fun generate(size: Int): List<Int> {
         return (MIN..MAX)
             .shuffled()
-            .take(num)
+            .take(size)
     }
 
     companion object {

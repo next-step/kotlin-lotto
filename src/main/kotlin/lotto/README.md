@@ -5,9 +5,10 @@
 - 로또 1장의 가격은 1000원이다.
 
 ###  기능 목록
-- [ ] 입력받은 개수만큼 1-45 사이의 무작위 수를 생성해서 반환한다. - LottoNumberGenerator
+- [x] 입력받은 개수만큼 1-45 사이의 무작위 수를 생성해서 반환한다. - LottoNumberGenerator
 - [ ] 구입 금액을 입력하면 구입 금액에 해당하는 로또 개수를 반환한다. - LottoMachine
 - [ ] 당첨 번호와 일치하는 로또의 숫자 개수를 반환한다. - LottoMatcher
 - [ ] 3개 일치, 4개 일치, 5개 일치, 6개 일치에 해당하는 로또 개수를 저장할 수 있다. - LottoTicket
 - [ ] 결과에 대한 수익률을 계산해 반환한다. - LottoTicket, LottoMachine
 - [ ] 로또 1장의 가격(1000)보다 구입 금액이 적다면 RuntimeException 예외가 발생해야 한다. - LottoMachine
+- [x] 당첨 번호를 저장할 수 있다. - WinningNumbers
