@@ -12,7 +12,7 @@ class LottoResultTest {
         val lottoRanks = listOf(LottoRank.MATCH_THREE, LottoRank.MATCH_FIVE)
 
         // expect
-        assertDoesNotThrow { LottoResult(lottoRanks) }
+        assertDoesNotThrow { LottoResult(lottoRanks, 2) }
     }
 
     @Test
@@ -21,9 +21,21 @@ class LottoResultTest {
         val lottoRanks = listOf(LottoRank.MATCH_THREE, LottoRank.MATCH_FIVE)
 
         // when
-        val rankCount = LottoResult(lottoRanks).getRankCount(LottoRank.MATCH_FIVE)
+        val rankCount = LottoResult(lottoRanks, 2).getRankCount(LottoRank.MATCH_FIVE)
 
         // then
         assertThat(rankCount).isEqualTo(1)
+    }
+
+    @Test
+    fun `getProfitRate을 구하는데성공한다`() {
+        // given
+        val lottoRanks = listOf(LottoRank.MATCH_THREE)
+
+        // when
+        val profitRate = LottoResult(lottoRanks, 1).getProfitRate()
+
+        // then
+        assertThat(profitRate).isEqualTo((LottoRank.MATCH_THREE.price / (1 * Lotto.LOTTO_PRICE)).toDouble())
     }
 }

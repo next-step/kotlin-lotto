@@ -13,5 +13,7 @@ class Lotto(
         fun of(lottoNumbers: List<Int>): Lotto {
             return Lotto(lottoNumbers.map { LottoNumber(it) })
         }
+
+        const val LOTTO_PRICE = 1_000
     }
 }

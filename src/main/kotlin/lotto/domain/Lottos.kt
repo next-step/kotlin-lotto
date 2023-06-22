@@ -6,6 +6,6 @@ class Lottos(
 
     fun getLottoResult(matchingNumbers: List<LottoNumber>): LottoResult {
         val lottoRanks = lottos.map { lotto -> lotto.matchLottoNumber(matchingNumbers) }
-        return LottoResult(lottoRanks)
+        return LottoResult(lottoRanks, lottos.size)
     }
 }

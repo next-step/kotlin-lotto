@@ -14,7 +14,7 @@ object OutputView {
         println()
     }
 
-    fun printLottoRank(lottoResult: LottoResult) {
+    fun printLottoResult(lottoResult: LottoResult) {
         println("당첨 통계")
         println("---------")
         LottoRank.values().forEach {
@@ -22,5 +22,6 @@ object OutputView {
                 println("${it.matchCount}개 일치 (${it.price}원)- ${lottoResult.getRankCount(it)}개")
             }
         }
+        println("총 수익률은 ${String.format("%.2f", lottoResult.getProfitRate())}입니다.")
     }
 }

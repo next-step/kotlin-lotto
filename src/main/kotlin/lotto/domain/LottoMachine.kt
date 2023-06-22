@@ -10,14 +10,10 @@ class LottoMachine {
     }
 
     private fun getAvailableLottoCount(price: Int): Int {
-        return price / LOTTO_PRICE
+        return price / Lotto.LOTTO_PRICE
     }
 
     private fun generateLotto(availableLottoCount: Int): Lottos {
         return Lottos(List(availableLottoCount) { Lotto.of(LottoNumberGenerator.generate()) })
-    }
-
-    companion object {
-        private const val LOTTO_PRICE = 1_000
     }
 }
