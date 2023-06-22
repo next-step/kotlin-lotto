@@ -8,8 +8,8 @@ class LottoMatcher {
         var matchedLottoCount = 0
         val winningLottoNumber = winningNumber.getWinningLottoNumber()
         lottoResponse.lottoNumbers.map {
-            if (LottoNumberComparator.compare(winningLottoNumber, it))
-                matchedLottoCount++
+            LottoNumberComparator.compare(winningLottoNumber, it)
+
         }
         return matchedLottoCount
     }

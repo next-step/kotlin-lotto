@@ -14,6 +14,5 @@
 - [x] 당첨 번호를 입력받아서 당첨번호를 생성한다. -> WinningNumber
     - [x] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다. -> WinningNumber(LottoNumber의 메서드 호출)
     - [x] 당첨 번호는 중복이 있으면 안된다. -> WinningNumber(LottoNumber의 메서드 호출)
-- [ ] 로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다. -> LottoMatcher
-    - [x] 두 개의 로또 번호를 입력받아서 로또 번호가 같은지 검증한다. -> LottoNumberComparator
-- [ ] 당첨 통계를 가지고 수익률을 계산한다.
+- [x] 두 개의 로또 번호를 입력받아서 로또 번호가 몇개가 같은지 검증한다. -> LottoNumberComparator
+- [ ] 당첨 통계를 가지고 수익률을 계산한다. -> YieldCalculator
