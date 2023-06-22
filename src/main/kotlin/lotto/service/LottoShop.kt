@@ -13,7 +13,7 @@ class LottoShop {
 
             return Lottos(
                 (1..purchaseCount).map {
-                    purchase()
+                    LottoGenerator.generate()
                 },
             )
         }
@@ -21,9 +21,20 @@ class LottoShop {
         private fun purchaseCount(purchaseMoney: Int): Int {
             return purchaseMoney / LOTTO_PRICE
         }
+    }
+}
 
-        private fun purchase(): Lotto {
-            return Lotto(listOf(1, 2, 3, 4, 5, 6))
+class LottoGenerator {
+
+    companion object {
+        fun generate(): Lotto {
+            return Lotto(
+                1.rangeTo(45)
+                    .toList()
+                    .shuffled()
+                    .take(6)
+                    .sorted(),
+            )
         }
     }
 }
