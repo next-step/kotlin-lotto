@@ -32,7 +32,7 @@ class WinningNumbersTest {
 
     @Test
     fun `보너스 넘버가 당첨 번호에 포함된 번호면 예외가 발생한다`() {
-        val lottoNumbers = LottoNumbers.from(listOf(1,2,3,4,5,6))
+        val lottoNumbers = LottoNumbers.from(listOf(1, 2, 3, 4, 5, 6))
         val bonusNumber = LottoNumber.from(6)
 
         shouldThrow<IllegalArgumentException> { WinningNumbers(lottoNumbers, bonusNumber) }

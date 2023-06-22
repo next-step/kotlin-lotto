@@ -14,8 +14,8 @@ fun main() {
     ResultView.printAllLottoNumbers(lottoNumbers)
 
     val winningNumbers = InputView.receiveWinningNumbers()
-    val lottoGame = LottoGame(lottoNumbers, winningNumbers)
-    val lottoGameStatistics = LottoGameStatistics(purchaseAmount, lottoGame.result)
+    val lottoGame = LottoGame(winningNumbers)
+    val lottoGameStatistics = LottoGameStatistics(purchaseAmount, lottoGame.calculate(lottoNumbers))
 
     ResultView.printLottoResultStatistics(lottoGameStatistics)
 }

@@ -69,7 +69,7 @@ object InputView {
     private fun receiveInt(): Int {
         var int: Int? = receiveString().toIntOrNull()
 
-        while(int == null) {
+        while (int == null) {
             int = receiveString().toIntOrNull()
         }
 

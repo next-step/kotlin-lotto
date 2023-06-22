@@ -1,10 +1,17 @@
 package lotto
 
-class LottoGame(val lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNumbers) {
-    val result: LottoResult = LottoResult(winningNumbers.calculateRank(lottoNumbers)
-        .groupBy { it }
-        .mapValues { it.value.size })
+class LottoGame(private val winningNumbers: WinningNumbers) {
+    fun calculate(lottoNumbers: List<LottoNumbers>): LottoResult {
+        return LottoResult(
+            winningNumbers.calculateRank(lottoNumbers)
+                .groupBy { it }
+                .mapValues { it.value.size }
+        )
+    }
 
+    fun calculate(lottoNumbers: LottoNumbers): LottoResult {
+        return calculate(listOf(lottoNumbers))
+    }
 
     companion object {
         private const val GAME_COST = 1000
@@ -17,12 +24,6 @@ class LottoGame(val lottoNumbers: List<LottoNumbers>, winningNumbers: WinningNum
             val randomNumbers = LottoNumber.LOTTO_NUMBER_POOL.shuffled().take(LottoNumbers.SIZE)
 
             return LottoNumbers(randomNumbers)
-        }
-
-        fun from(count: Int, winningNumbers: WinningNumbers): LottoGame {
-            val lottoNumbers = List(count) { generateRandomNumbers() }
-
-            return LottoGame(lottoNumbers, winningNumbers)
         }
     }
 }
