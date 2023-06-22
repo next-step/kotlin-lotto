@@ -1,8 +1,8 @@
 package lotto.model
 
-class LottoWinning(numbers: List<Int>, bonus: Int) {
+class LottoWinning(numbers: Set<Int>, bonus: Int) {
 
-    private val winningNumbers = Lotto.createWinning(numbers)
+    private val winningNumbers = Lotto.create(numbers)
     private val bonusNumber = LottoNumber(bonus)
 
     fun lottoResult(lottoList: List<Lotto>): Map<Rank, Int> = lottoList.map {

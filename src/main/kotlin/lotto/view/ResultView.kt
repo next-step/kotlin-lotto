@@ -5,8 +5,8 @@ import lotto.model.Rank
 import lotto.model.toDecimalPoint
 
 object ResultView {
-    fun showBuyLotto(lottoList: List<Lotto>) {
-        println("${lottoList.size}개를 구매했습니다.")
+    fun showBuyLotto(lottoList: List<Lotto>, autoLotto: Int) {
+        println("수동으로 $autoLotto 장, 자동으로 ${lottoList.size - autoLotto}개를 구매했습니다.")
         lottoList.forEach {
             println(it.numbers.map { lottoNumber -> lottoNumber.number })
         }

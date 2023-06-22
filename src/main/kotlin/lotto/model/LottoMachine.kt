@@ -1,6 +1,6 @@
 package lotto.model
 
-class LottoMachine(private val amount: Int) {
+class LottoMachine(private val amount: Int, private val selfNumbers: List<Set<Int>> = emptyList()) {
 
     init {
         require((amount) >= LOTTO_PRICE) {
@@ -8,14 +8,28 @@ class LottoMachine(private val amount: Int) {
         }
     }
 
-    fun buyLotto(): List<Lotto> {
-        val count = numbersOfLotto()
+    private fun numbersOfAutoLotto() = (amount - selfPrice()) / LOTTO_PRICE
+
+    private fun selfPrice() = (selfNumbers.count() * LOTTO_PRICE)
+
+    private fun createSelfLotto() = selfNumbers.map {
+        Lotto.create(it)
+    }
+
+    private fun createAutoLotto(count: Int): List<Lotto> {
         return List(count) {
             Lotto.create()
         }
     }
 
-    private fun numbersOfLotto() = amount / LOTTO_PRICE
+    fun buyLotto(): List<Lotto> {
+
+        val count = numbersOfAutoLotto()
+        val selfLotto = createSelfLotto()
+        val autoLotto = createAutoLotto(count)
+
+        return selfLotto + autoLotto
+    }
 
     companion object {
         const val LOTTO_PRICE = 1_000

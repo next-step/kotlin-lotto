@@ -20,6 +20,6 @@ class Lotto(val numbers: Set<LottoNumber>) {
                 .map { LottoNumber(it) }.toSet()
         )
 
-        fun createWinning(numbers: List<Int>) = Lotto(numbers.map { LottoNumber(it) }.toSet())
+        fun create(numbers: Set<Int>) = Lotto(numbers.map { LottoNumber(it) }.toSet())
     }
 }
