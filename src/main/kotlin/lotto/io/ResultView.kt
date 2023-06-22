@@ -9,6 +9,7 @@ object ResultView {
     private const val WINNING_PRIZE_WITH_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개"
     private const val TOTAL_PRIZE_MESSAGE = "총 수익률은 %.2f입니다"
     private const val RESULT_MESSAGE = "\n당첨 통계\n---------"
+    private const val MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요."
 
     fun printLottos(lottosResult: LottosResult) {
         println(LOTTO_COUNT_MESSAGE.format(lottosResult.manualLottoSize, lottosResult.autoLottoSize))
@@ -24,5 +25,9 @@ object ResultView {
         }
 
         println(TOTAL_PRIZE_MESSAGE.format(results.rateOfReturn))
+    }
+
+    fun printManualLottoInputMessage() {
+        println(MANUAL_LOTTO_INPUT_MESSAGE)
     }
 }
