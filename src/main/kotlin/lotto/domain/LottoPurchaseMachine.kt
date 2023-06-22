@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoMachine {
+object LottoPurchaseMachine {
     const val LOTTO_PRICE = 1000
     fun getLottos(purchasePrice: Int): List<Lotto> {
         val numberOfLotto = calculateNumberOfLotto(purchasePrice)
@@ -12,6 +12,6 @@ object LottoMachine {
     }
 
     private fun generateLottos(count: Int): List<Lotto> {
-        return (1..count).map { LottoFactory.generateRandom() }
+        return (1..count).map { RandomLottoFactory.generate() }
     }
 }

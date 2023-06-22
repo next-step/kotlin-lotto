@@ -1,7 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
-import lotto.domain.LottoMachine
+import lotto.domain.LottoPurchaseMachine
 import lotto.domain.LottoWinningNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -13,14 +13,14 @@ class LottoController {
 
         val lottoWinningNumbers = getLottoWinningNumbers()
         val lottoResult = lottoWinningNumbers.getLottoResult(lottos)
-        val profitRate = lottoResult.getProfitRate(LottoMachine.LOTTO_PRICE)
+        val profitRate = lottoResult.getProfitRate(LottoPurchaseMachine.LOTTO_PRICE)
         OutputView.printLottoRankStatics(lottoResult.getLottoRankStatistic())
         OutputView.printProfitRate(profitRate)
     }
 
     private fun getLottos(): List<Lotto> {
         val purchaseAmount = InputView.getPurchaseAmount()
-        val lottos = LottoMachine.getLottos(purchaseAmount)
+        val lottos = LottoPurchaseMachine.getLottos(purchaseAmount)
         return lottos
     }
 
