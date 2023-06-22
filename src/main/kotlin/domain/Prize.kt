@@ -13,15 +13,15 @@ enum class Prize(
 
     companion object {
         fun getPrizeMoneyByCount(
-            matchedCount: Int,
+            count: Int,
             containBonusBall: Boolean,
         ): Int {
             return when {
-                matchedCount == FIRST_PLACE.matches -> FIRST_PLACE.prizeMoney
-                matchedCount == SECOND_PLACE.matches && containBonusBall -> SECOND_PLACE.prizeMoney
-                matchedCount == THIRD_PLACE.matches -> THIRD_PLACE.prizeMoney
-                matchedCount == FOURTH_PLACE.matches -> FOURTH_PLACE.prizeMoney
-                matchedCount == FIFTH_PLACE.matches -> FIFTH_PLACE.prizeMoney
+                count == FIRST_PLACE.matches -> FIRST_PLACE.prizeMoney
+                count == SECOND_PLACE.matches && containBonusBall -> SECOND_PLACE.prizeMoney
+                count == THIRD_PLACE.matches -> THIRD_PLACE.prizeMoney
+                count == FOURTH_PLACE.matches -> FOURTH_PLACE.prizeMoney
+                count == FIFTH_PLACE.matches -> FIFTH_PLACE.prizeMoney
                 else -> 0
             }
         }

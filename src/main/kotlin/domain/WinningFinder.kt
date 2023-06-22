@@ -1,13 +1,12 @@
 package domain
 
 class WinningFinder(
-    private val winningNums: Set<Int>,
-    private val bonusBall: Int,
+    private val lottoDraw: LottoDraw,
 ) {
 
     fun getPrizeMoneyByMatched(lottery: Lottery): Int {
-        val matchedCount = lottery.lotteryNumbers.intersect(winningNums).size
-        val containBonusBall = lottery.lotteryNumbers.contains(bonusBall)
-        return Prize.getPrizeMoneyByCount(matchedCount, containBonusBall)
+        val count = lottery.matchedCount(lottoDraw.winningNums)
+        val containBonusBall = lottery.containBonusBall(lottoDraw.bonusBall)
+        return Prize.getPrizeMoneyByCount(count, containBonusBall)
     }
 }

@@ -4,7 +4,7 @@ import domain.Lottery
 import util.ManualNumberGenerator
 import util.Separator
 
-class InputView {
+object InputView {
 
     fun inputMoney(): Int {
         println("구입금액을 입력해 주세요.")

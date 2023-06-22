@@ -1,18 +1,12 @@
 package view
 
 import domain.Lottery
+import domain.Prize
 
 object OutputView {
 
     fun reportPrizeState(lottery: Lottery) {
         println(lottery.lotteryNumbers.toString())
-    }
-
-    fun reportPrize(
-        prizeMessage: String,
-        count: Int,
-    ) {
-        println("$prizeMessage- ${count}개")
     }
 
     fun reportProfit(returnOnInvestment: Double) {
@@ -27,5 +21,12 @@ object OutputView {
 
     fun reportPurchaseCount(manualSize: Int, purchasableSize: Int) {
         println("\n수동으로 ${manualSize}장, 자동으로 ${purchasableSize}개를 구매했습니다.")
+    }
+
+    fun reportPrizes(prizeCountMap: Map<Int, Int>) {
+        for (prize in Prize.values()) {
+            val count = prizeCountMap[prize.matches] ?: 0
+            println("${prize.prizeMessage}- ${count}개")
+        }
     }
 }
