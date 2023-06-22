@@ -2,7 +2,7 @@ package lotto
 
 class WinningLotto(
     private val winNumbers: List<LottoNumber>,
-    private val bonusNumbers: List<LottoNumber>
+    private val bonusNumbers: List<LottoNumber>,
 ) {
     init {
         val duplicateBetweenWinNumberAndBonusNumber = bonusNumbers.any { winNumbers.contains(it) }
@@ -24,7 +24,7 @@ class WinningLotto(
 
     data class MatchResult(
         private val winNumberMatchCount: Int,
-        private val bonusNumberMatchCount: Int
+        private val bonusNumberMatchCount: Int,
     ) {
         fun getTotalMatch() = winNumberMatchCount + bonusNumberMatchCount
 

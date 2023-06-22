@@ -32,12 +32,12 @@ object LottoDrawingMachine {
 
     data class DrawResult(
         val rankPrizes: List<RankPrize>,
-        val totalRoi: String
+        val totalRoi: String,
     )
 
     data class RankPrize(
         val rank: Rank,
-        val winnerCount: Int
+        val winnerCount: Int,
     ) {
         fun getTotalReward() = rank.reward * winnerCount
     }

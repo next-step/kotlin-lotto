@@ -7,6 +7,7 @@ enum class Rank(val matchCount: Int, val matchBonus: Boolean, val reward: Long) 
     THIRD(4, false, 50_000),
     FOURTH(3, false, 5_000)
     ;
+
     companion object {
         fun of(matchCount: Int, matchBonus: Boolean): Rank? {
             return values().find { it.matchCount == matchCount && it.matchBonus == matchBonus }

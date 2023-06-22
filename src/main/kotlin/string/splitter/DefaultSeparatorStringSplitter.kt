@@ -3,7 +3,7 @@ package string.splitter
 import string.converter.ExpressionTokenConverter
 
 class DefaultSeparatorStringSplitter(
-    private val converter: ExpressionTokenConverter
+    private val converter: ExpressionTokenConverter,
 ) : SeparatorStringSplitter {
     override fun split(input: String): List<Int>? {
         val singleNumeric = parseSingleNumeric(input)

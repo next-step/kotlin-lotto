@@ -2,7 +2,7 @@ package lotto
 
 class LottoSeller(
     private val lottoFactory: LottoFactory,
-    private val lottoPrice: Int
+    private val lottoPrice: Int,
 ) {
     fun sell(totalPurchasePrice: Int): Lottos {
         require(totalPurchasePrice >= lottoPrice) { "총 구매금액은 로또 한 장의 가격보다 커야합니다." }

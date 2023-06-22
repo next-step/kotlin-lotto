@@ -4,7 +4,7 @@ import string.expression.Expression
 import string.splitter.SeparatorStringSplitter
 
 class StringCalculator(
-    private val splitters: List<SeparatorStringSplitter>
+    private val splitters: List<SeparatorStringSplitter>,
 ) {
     fun sum(strExpression: String?): Int {
         if (strExpression.isNullOrBlank()) {
