@@ -1,11 +1,13 @@
 package lotto.domain
 
+import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_6
+
 class Lotto private constructor(
     val numbers: List<LottoNumber>,
     val auto: Boolean = false
 ) {
     init {
-        require(numbers.size == NUMBER_OF_LOTTO_NUMBERS) { "로또 번호는 6개여야 합니다." }
+        require(numbers.size == NUMBER_OF_LOTTO_NUMBERS) { LOTTO_NUMBERS_MUST_BE_6 }
     }
 
     fun checkEqualCount(winningLotto: WinningLotto): Int {
