@@ -1,8 +1,8 @@
 package lotto.domain
 
 object Bank {
-    fun score(tickets: List<Lotto>, winningTicket: WinningTicket): Map<Rank, Int> {
-        val scores = tickets.map { Rank.getValue(winningTicket.score(it), winningTicket.hasBonus(it)) }
+    fun score(tickets: Tickets, winningTicket: WinningTicket): Map<Rank, Int> {
+        val scores = tickets.tickets.map { Rank.getValue(winningTicket.score(it), winningTicket.hasBonus(it)) }
         return Rank.values().associateWith { rank -> scores.count { it == rank } }
     }
 

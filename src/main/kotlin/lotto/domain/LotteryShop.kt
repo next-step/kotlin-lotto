@@ -6,7 +6,7 @@ object LotteryShop {
         return money / LOTTO_PRICE
     }
 
-    fun getTickets(lottoCount: Int): List<Lotto> {
-        return List(lottoCount) { Lotto(AutoNumGenerator()) }
+    fun getTickets(lottoCount: Int): Tickets {
+        return Tickets(lottoCount, AutoNumGenerator())
     }
 }

@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.Rank
+import lotto.domain.Tickets
 import java.text.DecimalFormat
 
 private const val COUNT_STRING = "개를 구매했습니다."
@@ -15,8 +15,8 @@ object ResultView {
         println("${count}$COUNT_STRING")
     }
 
-    fun printLottoNums(tickets: List<Lotto>) {
-        tickets.forEach { println(it.numbers) }
+    fun printLottoNums(tickets: Tickets) {
+        tickets.tickets.forEach { println(it.numbers) }
     }
 
     fun printResult(score: Map<Rank, Int>, rate: Float) {

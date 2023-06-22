@@ -1,11 +1,11 @@
 package lotto.domain
 
-data class WinningTicket(val nums: List<Int>, val bonus: Int) {
+data class WinningTicket(val winningLotto: Lotto, val bonus: Int) {
     fun score(lotto: Lotto): Int {
-        return lotto.numbers.count { this.nums.contains(it) }
+        return this.winningLotto.getSameCount(lotto)
     }
 
     fun hasBonus(lotto: Lotto): Boolean {
-        return lotto.numbers.contains(bonus)
+        return lotto.contains(this.bonus)
     }
 }
