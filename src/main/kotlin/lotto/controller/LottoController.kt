@@ -33,8 +33,10 @@ class LottoController {
         val winningNumbers = InputParser.parse(InputView.inputWinningNumbers())
             .map { it.toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE) }
 
+        val bonus = InputView.inputBonusBall().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
+
         require(winningNumbers.size == Lotto.NUMBER_COUNT) { INPUT_ERROR_MESSAGE }
-        return InputResult(lottos, SelectedBalls(WinningBalls(winningNumbers), 0), money)
+        return InputResult(lottos, SelectedBalls(WinningBalls(winningNumbers), bonus), money)
     }
 
     private fun output(lottos: Lottos, selectedBalls: SelectedBalls, money: Int) {
