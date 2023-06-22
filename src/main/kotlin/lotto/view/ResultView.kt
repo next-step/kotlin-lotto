@@ -28,5 +28,14 @@ class ResultView {
                 println("${it}개 일치 (${prize}원)- ${matchCount}개")
             }
         }
+
+        fun printProfitRate(profitRate: Double) {
+            val result = when {
+                profitRate < 1.0 -> "손해"
+                profitRate == 1.0 -> "본전"
+                else -> "이익"
+            }
+            println("총 수익률은 ${profitRate}입니다.(기준이 1이기 때문에 결과적으로 ${result}라는 의미임)")
+        }
     }
 }

@@ -6,9 +6,6 @@ class WinningStatistics(val winningStatistics: Map<Int, Int>) {
     fun calculateTotalPrizeMoney(): Long {
         return winningStatistics
             .map { (matchCount, count) ->
-                println("$matchCount, $count")
-                println(LottoCalculator.calculatePrizeMoney(matchCount))
-                println(LottoCalculator.calculatePrizeMoney(matchCount) * count)
                 LottoCalculator.calculatePrizeMoney(matchCount) * count
             }
             .sum()

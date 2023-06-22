@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.WinningStatistics
+import lotto.service.LottoCalculator
 import lotto.service.LottoShop
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -19,4 +20,6 @@ fun main() {
 
     ResultView.printStatisticsTitle()
     ResultView.printWinningStatistics(winningStatistics)
+    val profitRate = LottoCalculator.calculateProfitRate(winningStatistics.calculateTotalPrizeMoney(), purchaseMoney)
+    ResultView.printProfitRate(profitRate)
 }
