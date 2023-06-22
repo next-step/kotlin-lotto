@@ -1,12 +1,14 @@
 package lotto.domain
 
+import lotto.io.InputView
 import lotto.util.LottoGenerator
 import lotto.util.ManualLottoGenerator
 import lotto.util.RandomLottoGenerator
 
 object LottoSeller {
+    private val manualLottoGenerator = ManualLottoGenerator { InputView.getManualLotto().map { LottoNumber(it) } }
 
-    fun sellManualLottos(amount: Int, count: Int) = LottoSellingMachine.sellLottos(amount, ManualLottoGenerator, count)
+    fun sellManualLottos(amount: Int, count: Int) = LottoSellingMachine.sellLottos(amount, manualLottoGenerator, count)
 
     fun sellAutoLottos(amount: Int) = LottoSellingMachine.sellLottos(amount, RandomLottoGenerator)
 }
