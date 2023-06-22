@@ -20,7 +20,7 @@ class InputView {
 
         val numbersList = mutableListOf<List<Int>>()
         repeat(count) {
-            val numbers = readln().split(',').map(String::toInt)
+            val numbers = readln().split(", ").map(String::toInt)
             numbersList.add(numbers)
         }
 
