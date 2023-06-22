@@ -17,13 +17,10 @@ object InputView {
         println(MANUAL_LOTTO_SIZE_INPUT_MESSAGE)
         return requireNotNull(readlnOrNull()?.toIntOrNull()) { INPUT_ERROR_MESSAGE }
     }
-
     fun getManualLotto(): List<Int> {
-        return requireNotNull(
-            readlnOrNull()?.split(INPUT_DELIMITER)?.map {
-                requireNotNull(it.toIntOrNull()) { INPUT_ERROR_MESSAGE }
-            }
-        ) { INPUT_ERROR_MESSAGE }
+        val input = requireNotNull(readlnOrNull()) { INPUT_ERROR_MESSAGE }
+        return input.split(INPUT_DELIMITER)
+            .map { it.toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE) }
     }
 
     fun getWinNumbers(): List<Int> {
