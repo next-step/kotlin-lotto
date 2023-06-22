@@ -7,8 +7,8 @@ import lotto.domain.numberGenerator.NumberGenerator
 class LottosTest : BehaviorSpec({
 
     val testNumberGenerator = object : NumberGenerator {
-        override fun generateNumbers(): List<Int> {
-            return listOf(1, 2, 3, 4, 5, 6)
+        override fun generateNumbers(): List<LottoNumber> {
+            return listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }
         }
     }
 

@@ -13,7 +13,7 @@ class Lottos(val lottoList: List<LottoNumbers>) {
 
         fun of(input: Int, numberGenerator: NumberGenerator): Lottos {
             val count = input / PER_LOTTO_PRICE
-            val lottoList = List(count) { LottoNumbers(numberGenerator) }
+            val lottoList = List(count) { LottoNumbers(numberGenerator.generateNumbers()) }
             return Lottos(lottoList)
         }
     }
