@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.BillSlot
+import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoReturn
 import lotto.domain.LottoReturnCalculator
@@ -43,7 +44,7 @@ private tailrec fun getManualLottoCount(totalLottoCount: Int): Int {
 private tailrec fun getManualLotto(count: Int): List<LottoNumbers> {
     runCatching {
         InputView.getManualLotto(count)
-            .map { LottoNumbers(it) }
+            .map { LottoNumbers.fromNumbers(it) }
     }.onSuccess {
         return it
     }.onFailure {
@@ -55,8 +56,8 @@ private tailrec fun getManualLotto(count: Int): List<LottoNumbers> {
 private tailrec fun getLottoWinningNumbers(): LottoWinningNumbers {
     runCatching {
         LottoWinningNumbers(
-            LottoNumbers(InputView.getLottoNumbersOfLastWeek()),
-            InputView.getBonusNumber()
+            LottoNumbers.fromNumbers(InputView.getLottoNumbersOfLastWeek()),
+            LottoNumber.get(InputView.getBonusNumber())
         )
     }.onSuccess {
         return it

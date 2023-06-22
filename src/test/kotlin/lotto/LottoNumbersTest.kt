@@ -22,14 +22,14 @@ class LottoNumbersTest {
     @MethodSource("숫자가 6개가 아닌 로또 번호")
     fun `로또 번호가 6개가 아니라면 throw IllegalStateException`(lottoNumbers: Set<Int>) {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
-            LottoNumbers(lottoNumbers)
+            LottoNumbers.fromNumbers(lottoNumbers)
         }
     }
 
     @Test
     fun `로또 번호에 중복된 숫자가 있다면 throw IllegalArgumentException`() {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
-            LottoNumbers(setOf(1, 1, 2, 3, 4, 5))
+            LottoNumbers.fromNumbers(setOf(1, 1, 2, 3, 4, 5))
         }
     }
 
@@ -37,7 +37,7 @@ class LottoNumbersTest {
     @MethodSource("범위를 벗어난 숫자가 있는 로또 번호")
     fun `로또 번호에 범위를 벗어난 숫자가 있다면 throw IllegalArgumentException`(lottoNumbers: Set<Int>) {
         Assertions.assertThatIllegalArgumentException().isThrownBy {
-            LottoNumbers(lottoNumbers)
+            LottoNumbers.fromNumbers(lottoNumbers)
         }
     }
 
@@ -45,7 +45,7 @@ class LottoNumbersTest {
     @MethodSource("겹치는 로또 번호 테스트 데이터")
     fun `겹치는 로또 번호 개수 구하기 테스트`(lottoNumbers1: Set<Int>, lottoNumbers2: Set<Int>, overlaps: Int) {
         Assertions.assertThat(
-            LottoNumbers(lottoNumbers1).numberOfOverlaps(LottoNumbers(lottoNumbers2))
+            LottoNumbers.fromNumbers(lottoNumbers1).numberOfOverlaps(LottoNumbers.fromNumbers(lottoNumbers2))
         ).isEqualTo(overlaps)
     }
 

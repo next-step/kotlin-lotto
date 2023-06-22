@@ -33,10 +33,10 @@ object ResultView {
     }
 
     private fun List<LottoNumbers>.print() {
-        forEach {
+        forEach { lottoNumbers ->
             println(
-                it.numbers
-                    .sorted()
+                lottoNumbers.numbers
+                    .sortedBy { it.value }
             )
         }
     }

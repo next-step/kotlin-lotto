@@ -2,11 +2,10 @@ package lotto.domain
 
 data class LottoWinningNumbers(
     val lottoNumbers: LottoNumbers,
-    val bonusNumber: Int,
+    val bonusNumber: LottoNumber,
 ) {
     init {
         require(bonusNumber !in lottoNumbers.numbers) { "보너스 번호와 로또 번호에 중복된 수가 있으면 안됩니다." }
-        require(LottoNumbers.inValidRange(bonusNumber)) { "유효하지 않은 보너스 번호 입니다." }
     }
 
     fun numberOfOverlaps(otherNumbers: LottoNumbers): Int {
