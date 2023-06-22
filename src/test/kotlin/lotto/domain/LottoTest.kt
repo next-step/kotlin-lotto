@@ -11,23 +11,23 @@ internal class LottoTest {
 
     @Test
     internal fun `로또는 6개의 번호를 가진다`() {
-        val sut = Lotto(setOf(1, 2, 3, 4, 5, 6))
-        sut.numbers shouldContainExactly setOf(1, 2, 3, 4, 5, 6)
+        val sut = Lotto(setOf(1, 2, 3, 4, 5, 6).toLottoNumberSet())
+        sut.numbers shouldContainExactly setOf(1, 2, 3, 4, 5, 6).toLottoNumberSet()
     }
 
     @Test
     internal fun `로또가 6개의 번호를 가지지 않으면 예외가 발생한다`() {
-        shouldThrow<IllegalArgumentException> { Lotto(setOf(1, 2, 3, 4, 5)) }
+        shouldThrow<IllegalArgumentException> { Lotto(setOf(1, 2, 3, 4, 5).toLottoNumberSet()) }
     }
 
     @Test
     internal fun `로또 번호가 1부터 45사이의 값이 아닌 경우 예외가 발생한다`() {
-        shouldThrow<IllegalArgumentException> { Lotto(setOf(-1, 0, 1, 20, 45, 46)) }
+        shouldThrow<IllegalArgumentException> { Lotto(setOf(-1, 0, 1, 20, 45, 46).toLottoNumberSet()) }
     }
 
     @Test
     internal fun `로또 번호가 서로 중복되는 경우 예외가 발생한다`() {
-        shouldThrow<IllegalArgumentException> { Lotto(setOf(3, 3, 17, 20, 40, 45)) }
+        shouldThrow<IllegalArgumentException> { Lotto(setOf(3, 3, 17, 20, 40, 45).toLottoNumberSet()) }
     }
 
     @ParameterizedTest
@@ -54,10 +54,10 @@ internal class LottoTest {
     ) {
         // given : 당첨 번호와 로또 하나 준비
         val winningLotto = WinningLotto(
-            winningNumbers = setOf(1, 2, 3, 4, 5, 6),
-            bonusNumber = 7
+            winningNumbers = setOf(1, 2, 3, 4, 5, 6).toLottoNumberSet(),
+            bonusNumber = LottoNumber.from(7)
         )
-        val sut = Lotto(setOf(first, second, third, forth, fifth, sixth))
+        val sut = Lotto(setOf(first, second, third, forth, fifth, sixth).toLottoNumberSet())
 
         // when : 당첨 번호와 로또 비교 후 번호 비교 결과를 반환 받음
         val lottoMatchResult: LottoMatchResult = sut.match(winningLotto)
