@@ -4,6 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoChecker
 import lotto.domain.LottoSeller
 import lotto.domain.Lottos
+import lotto.domain.LottosResult
 import lotto.domain.WinNumbers
 import lotto.io.InputView
 import lotto.io.ResultView
@@ -16,10 +17,10 @@ class LottoGame {
     }
 
     fun start() {
-        val lottos = getLottos()
-        ResultView.printLottos(lottos)
+        val lottoResult = getLottos()
+        ResultView.printLottos(lottoResult)
         val winNumbers = getWinNumbers()
-        printResult(winNumbers, lottos)
+        printResult(winNumbers, lottoResult.lottos)
     }
 
     private fun getWinNumbers(): WinNumbers {
@@ -28,11 +29,11 @@ class LottoGame {
         return WinNumbers(winNumber, bonusNumber)
     }
 
-    private fun getLottos(): Lottos {
+    private fun getLottos(): LottosResult {
         val manualLottos = getManualLottos()
         val lottoResponse = LottoSeller.sellAutoLottos(amount)
         amount = lottoResponse.change
-        return Lottos(manualLottos, lottoResponse.lottos)
+        return LottosResult(manualLottos, lottoResponse.lottos)
     }
 
     private fun getManualLottos(): Lottos {

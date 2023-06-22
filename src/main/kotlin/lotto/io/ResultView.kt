@@ -1,6 +1,6 @@
 package lotto.io
 
-import lotto.domain.Lottos
+import lotto.domain.LottosResult
 import lotto.domain.WinLottoResults
 
 object ResultView {
@@ -10,9 +10,9 @@ object ResultView {
     private const val TOTAL_PRIZE_MESSAGE = "총 수익률은 %.2f입니다"
     private const val RESULT_MESSAGE = "\n당첨 통계\n---------"
 
-    fun printLottos(lottos: Lottos) {
-        println(LOTTO_COUNT_MESSAGE.format(lottos.manualLottoSize, lottos.autoLottoSize))
-        lottos.forEach { lotto -> println(lotto) }
+    fun printLottos(lottosResult: LottosResult) {
+        println(LOTTO_COUNT_MESSAGE.format(lottosResult.manualLottoSize, lottosResult.autoLottoSize))
+        lottosResult.forEach { lotto -> println(lotto) }
         println()
     }
 
