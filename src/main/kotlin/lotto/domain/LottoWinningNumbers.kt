@@ -10,35 +10,16 @@ data class LottoWinningNumbers(
     }
 
     fun numberOfOverlaps(otherNumbers: LottoNumbers): Int {
-        return lottoNumbers.numbers
-            .filter {
-                it in otherNumbers.numbers
-            }.size
+        return lottoNumbers.numbers.count {
+            it in otherNumbers.numbers
+        }
     }
 
     fun isSecondPlace(otherNumbers: LottoNumbers): Boolean {
         if (numberOfOverlaps(otherNumbers) != Rank.SECOND.countOfMatch) return false
 
-        return otherNumbers.numbers
-            .all {
-                it in lottoNumbers.numbers || it == bonusNumber
-            }
-    }
-
-    companion object {
-        fun generate(): LottoWinningNumbers {
-            val randomNumbers = DuplicateFreeSequenceGenerator(
-                from = LottoNumbers.MINIMUM,
-                to = LottoNumbers.MAXIMUM,
-                count = LottoNumbers.LENGTH + 1
-            )
-            return LottoWinningNumbers(
-                LottoNumbers(
-                    randomNumbers.take(6)
-                        .toSet()
-                ),
-                randomNumbers.last()
-            )
+        return otherNumbers.numbers.all {
+            it in lottoNumbers.numbers || it == bonusNumber
         }
     }
 }

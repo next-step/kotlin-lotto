@@ -4,7 +4,6 @@ import lotto.domain.LottoNumbers
 import lotto.domain.LottoWinningNumbers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -26,13 +25,6 @@ class LottoWinningNumbersTest {
     fun `보너스 번호가 다른 로또 번호와 중복이라면 throw IllegalArgumentException`() {
         assertThrows<IllegalArgumentException> {
             LottoWinningNumbers(LottoNumbers(setOf(1, 2, 3, 4, 5, 6)), 1)
-        }
-    }
-
-    @Test
-    fun `로또 당첨 번호 생성이 exception 없이 잘 되어야 한다`() {
-        assertDoesNotThrow {
-            LottoWinningNumbers.generate()
         }
     }
 
