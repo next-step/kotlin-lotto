@@ -8,6 +8,12 @@ class Lotto {
 
     init {
         _lottoNumbers = purchaseLotto()
+        require(lottoNumbers.numbers.size == LOTTO_DEFAULT_COUNT) {
+            "로또 개수는 6개여야 합니다."
+        }
+        require(lottoNumbers.numbers.all { it in START_LOTTO_NUMBER..LAST_LOTTO_NUMBER }) {
+            "로또 숫자는 1 부터 45 까지 입니다."
+        }
     }
 
     private fun purchaseLotto(): LottoNumbers {
@@ -30,5 +36,6 @@ class Lotto {
         const val LAST_LOTTO_NUMBER = 45
         const val FROM_INDEX = 0
         const val TO_INDEX = 6
+        const val LOTTO_DEFAULT_COUNT = 6
     }
 }

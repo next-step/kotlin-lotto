@@ -11,7 +11,9 @@ class InputView {
 
     fun inputLastWinNumbers(): WinningNumbers {
         println("지난 주 당첨 번호를 입력해주세요.")
-        val inputData = readln().split(",").map { it.toInt() }
+        val inputData = readln().split(",").map {
+            it.toIntOrNull() ?: throw IllegalArgumentException("정수만 입력 가능합니다.")
+        }
         return WinningNumbers(inputData)
     }
 
