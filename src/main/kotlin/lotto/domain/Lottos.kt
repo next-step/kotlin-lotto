@@ -24,8 +24,18 @@ class Lottos(
     }
 
     companion object {
-        fun auto(quantity: Int, lottoGenerator: LottoGenerator): Lottos {
-            return Lottos(List(quantity) { Lotto.draw(lottoGenerator) })
+        fun auto(quantity: Int): Lottos {
+            val randomLottoGenerator = RandomLottoGenerator()
+            return Lottos(List(quantity) { Lotto.draw(randomLottoGenerator) })
+        }
+
+        fun manual(manualLottoNumbers: List<List<Int>>): Lottos {
+            val manualLottoGenerator = ManualLottoGenerator()
+            return Lottos(
+                manualLottoNumbers.map {
+                    Lotto.draw(manualLottoGenerator, it)
+                }
+            )
         }
     }
 }

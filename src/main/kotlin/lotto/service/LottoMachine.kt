@@ -1,6 +1,5 @@
 package lotto.service
 
-import lotto.domain.LottoGenerator
 import lotto.domain.Lottos
 import lotto.domain.WinningLotto
 import lotto.vo.WinningLottoPrizeVO
@@ -32,10 +31,12 @@ class LottoMachine(
         private const val LOTTO_PRICE: Int = 1000
         private const val ROUND_SCALE = 2
 
-        operator fun invoke(purchaseAmount: Int, manualLottos: Lottos, lottoGenerator: LottoGenerator): LottoMachine {
-            val autoLottoCount = (purchaseAmount / LOTTO_PRICE) - manualLottos.size
-            require(autoLottoCount >= 0) { "구매금($purchaseAmount)액이 부족합니다. 수동 로또수: ${manualLottos.size}" }
-            val autoLottos = Lottos.auto(autoLottoCount, lottoGenerator)
+        fun buy(purchaseAmount: Int, manualLottoNumbers: List<List<Int>>): LottoMachine {
+            val autoLottoCount = (purchaseAmount / LOTTO_PRICE) - manualLottoNumbers.size
+            require(autoLottoCount >= 0) { "구매금액($purchaseAmount)이 부족합니다. 수동 로또수: ${manualLottoNumbers.size}" }
+
+            val autoLottos = Lottos.auto(autoLottoCount)
+            val manualLottos = Lottos.manual(manualLottoNumbers)
             return LottoMachine(manualLottos + autoLottos)
         }
     }

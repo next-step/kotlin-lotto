@@ -1,7 +1,6 @@
 package lotto
 
 import lotto.domain.Lotto
-import lotto.domain.RandomLottoGenerator
 import lotto.domain.WinningLotto
 import lotto.service.LottoMachine
 import lotto.view.InputView
@@ -12,7 +11,7 @@ fun main() {
     val manualLottoCount = InputView.readManualLottoCount()
     val manualLottos = InputView.readManualLottos(manualLottoCount)
 
-    val lottoMachine = LottoMachine(purchaseAmount, manualLottos, RandomLottoGenerator())
+    val lottoMachine = LottoMachine.buy(purchaseAmount, manualLottos)
 
     ResultView.printLottos(lottoMachine.lottos, manualLottoCount)
 

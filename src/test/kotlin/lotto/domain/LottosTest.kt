@@ -6,9 +6,25 @@ import io.kotest.matchers.shouldBe
 
 class LottosTest : FunSpec({
     test("구입금액에 해당하는 개수만큼 로또를 자동으로 생성한다") {
-        val lottos = Lottos.auto(quantity = 2, lottoGenerator = RandomLottoGenerator())
+        val lottos = Lottos.auto(quantity = 2)
 
         lottos.size shouldBe 2
+    }
+
+    test("로또를 수동으로 생성한다") {
+        val lottos = Lottos.manual(
+            listOf(
+                listOf(1, 2, 3, 4, 5, 6),
+                listOf(11, 12, 13, 14, 15, 16),
+            )
+        )
+
+        lottos shouldBe Lottos(
+            listOf(
+                Lotto(1, 2, 3, 4, 5, 6),
+                Lotto(11, 12, 13, 14, 15, 16),
+            )
+        )
     }
 
     test("당첨 상금을 구한다.") {
@@ -68,7 +84,7 @@ class LottosTest : FunSpec({
         winningLottoCountsByPrize[Prize.FIFTH] shouldBe 0
         winningLottoCountsByPrize.contains(Prize.MISS) shouldBe false
     }
-    
+
     test("로또들을 더한 결과를 반환한다") {
         val lotto1 = Lotto(1, 2, 3, 7, 8, 10)
         val lotto2 = Lotto(1, 2, 3, 7, 8, 9)
@@ -78,8 +94,6 @@ class LottosTest : FunSpec({
 
         val addedLottos = lottos + otherLottos
 
-        addedLottos[0] shouldBe lotto1
-        addedLottos[1] shouldBe lotto2
-        addedLottos[2] shouldBe lotto3
+        addedLottos shouldBe Lottos(listOf(lotto1, lotto2, lotto3))
     }
 })

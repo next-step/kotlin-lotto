@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.Lottos
 import lotto.vo.WinningLottoPrizeVO
@@ -19,13 +18,13 @@ object InputView {
         return readlnOrNull()?.toInt() ?: throw IllegalArgumentException("수동으로 구매할 로또 수를 입력해야 합니다.")
     }
 
-    fun readManualLottos(manualLottoCount: Int): Lottos {
+    fun readManualLottos(manualLottoCount: Int): List<List<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요. (예. 1, 2, 3, 4, 5, 6)")
-        return Lottos(List(manualLottoCount) {
+        return List(manualLottoCount) {
             val manualNumbers = readlnOrNull()?.split(LOTTO_NUMBER_DELIMITER)
                 ?: throw IllegalArgumentException("수동으로 구매할 번호를 입력해야 합니다.")
-            Lotto(manualNumbers.map { LottoNumber(it.toInt()) })
-        })
+            manualNumbers.map { it.toInt() }
+        }
     }
 
     fun readWinningLottoNumbers(): List<LottoNumber> {

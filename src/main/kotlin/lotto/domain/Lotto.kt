@@ -1,6 +1,7 @@
 package lotto.domain
 
-class Lotto(
+@JvmInline
+value class Lotto(
     val lottoNumbers: List<LottoNumber>,
 ) {
     init {
@@ -11,7 +12,7 @@ class Lotto(
     constructor(vararg numbers: Int) : this(numbers.map { LottoNumber(it) })
 
     fun matchPrize(winningLotto: WinningLotto): Prize {
-        val matchedLottoNumbers = lottoNumbers.filter { winningLotto.lottoNumbers.contains(it) }
+        val matchedLottoNumbers = lottoNumbers.filter { winningLotto.contains(it) }
         val bonusMatched = lottoNumbers.any { it == winningLotto.bonusLottoNumber }
         return Prize.match(matchedLottoNumbers.size, bonusMatched)
     }
@@ -19,6 +20,7 @@ class Lotto(
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
 
-        fun draw(lottoGenerator: LottoGenerator): Lotto = lottoGenerator.generate()
+        fun draw(lottoGenerator: LottoGenerator, numbers: List<Int> = emptyList()): Lotto =
+            lottoGenerator.generate(numbers)
     }
 }
