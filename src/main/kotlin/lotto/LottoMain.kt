@@ -1,18 +1,26 @@
 package lotto
 
+import lotto.domain.Lotto
+import lotto.domain.WinningLotto
+import lotto.service.LottoMachine
+import lotto.view.InputView
+import lotto.view.ResultView
+
 fun main() {
     val purchaseAmount = InputView.readPurchaseAmount()
+    val manualLottoCount = InputView.readManualLottoCount()
+    val manualLottos = InputView.readManualLottos(manualLottoCount)
 
-    val lottos = Lottos.of(purchaseAmount, RandomLottoGenerator())
+    val lottoMachine = LottoMachine.buy(purchaseAmount, manualLottos)
 
-    ResultView.printLottoCount(lottos.size)
-    ResultView.printLottos(lottos)
+    ResultView.printLottos(lottoMachine.lottos, manualLottoCount)
 
-    val winningLotto = InputView.readWinningLotto()
+    val winningLottoNumbers = InputView.readWinningLottoNumbers()
     val bonusNumber = InputView.readBonusLottoNumber()
-    val bonusLottoNumber = LottoNumber.forBonusOf(bonusNumber, winningLotto)
+    val winningLotto = WinningLotto(Lotto(winningLottoNumbers), bonusNumber)
 
-    val lottoMachine = LottoMachine(lottos, winningLotto, bonusLottoNumber)
-
-    ResultView.printWinnerStatistics(lottoMachine.matchWinningLottoPrize(), lottoMachine.getTotalProfitRate())
+    ResultView.printWinnerStatistics(
+        winningLottoPrizeVOs = lottoMachine.matchWinningLottoPrize(winningLotto),
+        totalProfitRate = lottoMachine.getTotalProfitRate(winningLotto),
+    )
 }
