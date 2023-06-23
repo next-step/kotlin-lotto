@@ -26,14 +26,17 @@ class PrizeLevelTest {
             PrizeLevel.NONE,
             PrizeLevel.FOURTH,
             PrizeLevel.NONE,
-            PrizeLevel.FIRST
+            PrizeLevel.FIRST,
+            PrizeLevel.FIRST,
+            PrizeLevel.SECOND
         )
 
         val actual = PrizeLevel.countPrizeLevels(listOfPrizeLevel)
         val answer = mapOf(
-            PrizeLevel.FIRST to 1,
+            PrizeLevel.FIRST to 2,
+            PrizeLevel.SECOND to 1,
+            PrizeLevel.THIRD to 0,
             PrizeLevel.FOURTH to 1,
-            PrizeLevel.NONE to 2
         )
 
         Assertions.assertThat(actual).isEqualTo(answer)
