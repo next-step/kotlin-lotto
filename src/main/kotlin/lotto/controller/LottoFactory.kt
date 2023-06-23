@@ -6,14 +6,9 @@ import lotto.domain.numberGenerator.LottoNumberGenerator
 
 class LottoFactory(private val lottoNumberGenerator: LottoNumberGenerator) {
 
-    fun createLottos(manualLottoNumbers: List<LottoNumbers>, money: Int): Lottos {
-        val randomLottoNumbers =
-            List(calculateRandomLottoCount(money, manualLottoNumbers.size)) { createRandomLottoNumbers() }
-        return Lottos(manualLottoNumbers + randomLottoNumbers)
-    }
-
-    private fun calculateRandomLottoCount(input: Int, manualLottoCount: Int): Int {
-        return input / PER_LOTTO_PRICE - manualLottoCount
+    fun createRandomLottos(count: Int): Lottos {
+        val randomLottoNumbers = List(count) { createRandomLottoNumbers() }
+        return Lottos(randomLottoNumbers)
     }
 
     private fun createRandomLottoNumbers(): LottoNumbers {
@@ -22,6 +17,6 @@ class LottoFactory(private val lottoNumberGenerator: LottoNumberGenerator) {
     }
 
     companion object {
-        private const val PER_LOTTO_PRICE = 1000
+        const val PER_LOTTO_PRICE = 1000
     }
 }
