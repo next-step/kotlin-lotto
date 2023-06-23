@@ -1,10 +1,13 @@
 package calculator
 
-class Delimiters(private val delimiters: List<String> = listOf(",", ":")) {
-    fun getDelimiters(): List<String> = delimiters
+class Delimiters(private val delimiter: String? = null) {
+    private val delimiters = mutableListOf<String>(",", ":")
 
-    fun plusCustomDelimiters(vararg customDelimiters: String): Delimiters {
-        val newDelimiters = delimiters + customDelimiters
-        return Delimiters(newDelimiters)
+    init {
+        if (!delimiter.isNullOrEmpty()) {
+            delimiters.add(delimiter)
+        }
     }
+
+    fun getDelimiters(): List<String> = delimiters
 }

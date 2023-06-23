@@ -17,8 +17,8 @@ class DelimitersTest {
     @DisplayName(value = "커스텀 구분자로 별표(*)를 가진다")
     @ParameterizedTest
     @ValueSource(strings = ["*"])
-    fun twoNumbers(text: String) {
-        val customDelimiters = Delimiters().plusCustomDelimiters(text)
+    fun twoNumbers(delimiter: String) {
+        val customDelimiters = Delimiters(delimiter)
         Assertions.assertThat(customDelimiters.getDelimiters()).isEqualTo(listOf(",", ":", "*"))
     }
 }
