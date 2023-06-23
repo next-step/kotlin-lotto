@@ -1,7 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.enums.Winner
+import lotto.domain.Winner
 
 class ResultView {
 
@@ -10,14 +10,20 @@ class ResultView {
     }
     fun showLottos(lottos: List<Lotto>) {
         lottos.forEach {
-            println(it.lottoNumbers)
+            println(it.lottoNumbers.numbers)
         }
     }
 
     fun showStatisticsResult(resultMap: Map<Winner, Int>) {
         resultMap.forEach {
-            println("${it.key.matchCount}개 일치 (${it.key.reward}원) - ${it.value}")
+            showContainsBonusResult(it)
         }
+    }
+
+    private fun showContainsBonusResult(data: Map.Entry<Winner, Int>) {
+        if (data.key == Winner.SECOND_PLACE_WITH_BONUS && data.value > 0) {
+            println("${data.key.matchCount}개 일치 보너스 볼 일치(${data.key.reward}원) - ${data.value}")
+        } else println("${data.key.matchCount}개 일치 (${data.key.reward}원) - ${data.value}")
     }
 
     fun showWinRating(rating: Double) {

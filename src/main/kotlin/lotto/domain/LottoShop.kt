@@ -6,7 +6,7 @@ class LottoShop(
     fun sellLotto(): List<Lotto> {
         val lottoCount = getBuyLottoCount(purchasePrice)
         return buildList(lottoCount) {
-            add(Lotto())
+            List(lottoCount) { add(Lotto()) }
         }
     }
 
