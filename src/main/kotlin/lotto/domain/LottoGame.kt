@@ -1,8 +1,11 @@
 package lotto.domain
 
-class LottoGame(private val winning: WinningLotto) {
+class LottoGame(winningNumber: List<Int>, bonusNumber: Int) {
+    private val winning: WinningLotto
 
-    constructor(numbers: List<Int>) : this(WinningLotto(Lotto(numbers.map { LottoNumber.of(it) })))
+    init {
+        this.winning = WinningLotto(Lotto(winningNumber.map { LottoNumber.of(it) }), LottoNumber.of(bonusNumber))
+    }
 
     fun match(lottos: List<Lotto>): LottoResultSummary {
         return LottoResultSummary(lottos.map { match(it) })

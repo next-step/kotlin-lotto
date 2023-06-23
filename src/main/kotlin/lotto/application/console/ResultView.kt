@@ -21,11 +21,16 @@ object ResultView {
     }
 
     private fun printLotto(lotto: Lotto) {
-        println(lotto.numbers.joinToString(", ", "[", "]"))
+        println(lotto.joinToString(", ", "[", "]"))
     }
 
     private fun printLottoResult(lottoResult: Pair<LottoResult, Int>) {
         val (result, count) = lottoResult
-        println("${result.matchCount}개 일치 (${result.winningAmount}원)- ${count}개")
+        println("${result.matchCount}개 일치${matchBonusMessage(result.checkBonus)}(${result.winningAmount}원)- ${count}개")
+    }
+
+    private fun matchBonusMessage(matchBonus: Boolean): String {
+        return if (matchBonus) ", 보너스 볼 일치"
+        else " "
     }
 }

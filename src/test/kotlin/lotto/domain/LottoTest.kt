@@ -34,6 +34,6 @@ class LottoTest : FreeSpec({
 
     "작은 번호 순서로 정렬된다." {
         val lottoNumbers = listOf(10, 3, 4, 5, 2, 6).toLottoNumbers()
-        Lotto(lottoNumbers).numbers shouldBe listOf(2, 3, 4, 5, 6, 10).toLottoNumbers()
+        Lotto(lottoNumbers).toList() shouldBe listOf(2, 3, 4, 5, 6, 10).toLottoNumbers()
     }
 })

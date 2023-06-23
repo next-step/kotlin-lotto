@@ -1,8 +1,8 @@
 package lotto.domain
 
-class Lotto(lottoNumbers: List<LottoNumber>) {
+class Lotto(lottoNumbers: List<LottoNumber>) : Iterable<LottoNumber> {
 
-    val numbers: List<LottoNumber>
+    private val numbers: List<LottoNumber>
 
     init {
         require(lottoNumbers.size == 6) { "서로 다른 6개의 숫자를 입력해야 합니다." }
@@ -15,7 +15,15 @@ class Lotto(lottoNumbers: List<LottoNumber>) {
         return MAX_MATCH_COUNT - difference.size
     }
 
+    fun contains(number: LottoNumber): Boolean {
+        return numbers.contains(number)
+    }
+
     companion object {
         private const val MAX_MATCH_COUNT = 6
+    }
+
+    override fun iterator(): Iterator<LottoNumber> {
+        return numbers.iterator()
     }
 }
