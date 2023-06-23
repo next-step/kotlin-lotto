@@ -6,19 +6,19 @@ import org.junit.jupiter.api.assertThrows
 
 class LottoShopTest {
     @Test
-    fun getNumberOfPurchaseTest(){
+    fun getNumberOfPurchaseTest() {
         assertThat(LottoShop.getNumberOfPurchase(1000)).isEqualTo(1)
     }
 
     @Test
-    fun getNumberOfPurchaseExceptionTest(){
+    fun getNumberOfPurchaseExceptionTest() {
         assertThrows<RuntimeException> {
             LottoShop.getNumberOfPurchase(777)
         }
     }
 
     @Test
-    fun getLottoNumbersTest(){
+    fun getLottoNumbersTest() {
         assertThat(LottoShop.getLottoNumbers(7).count()).isEqualTo(7)
     }
 }

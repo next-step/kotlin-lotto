@@ -16,7 +16,7 @@ object ResultView {
     }
 
     fun printWinningResultStatistics(mapResult: Map<Int, Int>) {
-        mapResult.forEach{
+        mapResult.forEach {
             println("${it.key}개 일치 (${LottoEnum.of(it.key)}원)- ${it.value}개")
         }
     }
