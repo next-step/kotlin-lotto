@@ -21,4 +21,10 @@ class InputDataTest {
             inputIO.inputPurchaseAmount("999")
         }
     }
+
+    @Test
+    fun `당첨 번호를 입력받는다`() {
+        val winningNumber = inputIO.inputWinningNumber("1, 9, 10, 30, 31, 41")
+        winningNumber shouldBe listOf("1","9","10","30","31","41")
+    }
 }
