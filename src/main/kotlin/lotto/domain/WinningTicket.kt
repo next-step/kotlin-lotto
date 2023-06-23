@@ -8,11 +8,12 @@ data class WinningTicket(val winningLotto: Lotto, val bonus: Int) {
         require(!winningLotto.contains(bonus)) { BONUS_EXCEPTION }
     }
 
-    fun score(lotto: Lotto): Int {
-        return this.winningLotto.getSameCount(lotto)
+    fun score(tickets: Tickets): List<Rank> {
+        return tickets.tickets.map { Rank.getValue(this.winningLotto.getSameCount(it), it.contains(this.bonus)) }
     }
 
-    fun hasBonus(lotto: Lotto): Boolean {
-        return lotto.contains(this.bonus)
+    fun calculateRateOfReturn(money: Int, score: List<Rank>): Float {
+        val revenue = score.sumOf { it.reward }
+        return revenue.toFloat() / money
     }
 }
