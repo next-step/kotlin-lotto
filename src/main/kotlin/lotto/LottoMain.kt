@@ -8,7 +8,8 @@ fun main() {
     val lottoSeller = LottoSeller(LottoFactory, 1000)
     val lottos = lottoSeller.sell(totalPrice)
     ResultView.printPurchasedLottos(lottos)
-    val winNumbers = InputView.getPrevWeekWinningNumbers()
-    val drawResult = LottoDrawingMachine.draw(winNumbers, lottos)
+    val winNumbers = LottoNumber.of(InputView.getPrevWeekWinningNumbers())
+    val bonusNumber = LottoNumber.of(InputView.getBonusNumber())
+    val drawResult = LottoDrawingMachine.draw(WinningLotto(winNumbers, listOf(bonusNumber)), lottos)
     ResultView.printDrawResult(drawResult)
 }

@@ -6,6 +6,7 @@ import io.kotest.data.forAll
 import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
+import io.kotest.matchers.shouldBe
 
 internal class LottoTest : StringSpec({
     "추첨번호가 6개가 아니라면 예외를 발생시킨다" {
@@ -27,5 +28,10 @@ internal class LottoTest : StringSpec({
             val lottoNumbers = (1..6).map { LottoNumber(1) }
             Lotto(lottoNumbers, 1000)
         }
+    }
+
+    "로또가 주어진 추점번호 포함여부를 반환한다" {
+        val sut = Lotto(LottoNumber.of(listOf(1, 2, 3, 4, 5, 6)))
+        sut.isContainLottoNumber(LottoNumber.of(1)) shouldBe true
     }
 })

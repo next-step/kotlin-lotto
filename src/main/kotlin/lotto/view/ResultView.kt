@@ -5,8 +5,8 @@ import lotto.Lottos
 
 object ResultView {
     fun printPurchasedLottos(lottos: Lottos) {
-        println("${lottos.size} 개를 구매했습니다.")
-        lottos.forEach {
+        println("${lottos.getNumberOfLottos()} 개를 구매했습니다.")
+        lottos.lottos.forEach {
             println(it.numbers)
         }
     }
@@ -15,7 +15,11 @@ object ResultView {
         println("당첨 통계")
         println("---------")
         drawResult.rankPrizes.forEach {
-            println("${it.matchCount}개 일치 (${it.reward}원)- ${it.winnerCount}개")
+            if (it.rank.matchBonus) {
+                println("${it.rank.matchCount}개 일치, 보너스 볼 일치 (${it.rank.reward}원)- ${it.winnerCount}개")
+            } else {
+                println("${it.rank.matchCount}개 일치 (${it.rank.reward}원)- ${it.winnerCount}개")
+            }
         }
         println("총 수익률은 ${drawResult.totalRoi}입니다.")
     }
