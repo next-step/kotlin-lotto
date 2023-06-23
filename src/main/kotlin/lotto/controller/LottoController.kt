@@ -2,8 +2,9 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.LottoMatcher
-import lotto.domain.PrizeLevel
 import lotto.domain.WinningNumber
+import lotto.domain.YieldCalculator
+import lotto.dto.LottoMatchResponse
 import lotto.dto.LottoResponse
 import lotto.ui.InputView
 import lotto.ui.ResultView
@@ -20,9 +21,10 @@ class LottoController(
         printLottoNumbers(lottoResponse)
 
         val winningNumber = generateWinningNumber()
-        val matchLottoNumber = matchLottoNumber(winningNumber, lottoResponse)
+        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse)
 
-        printLottoMatch(matchLottoNumber)
+        printLottoMatch(lottoMatchResponse)
+        printYield(purchasingAmount, lottoMatchResponse)
     }
 
     private fun purchaseLotto(purchasingAmount: Int): LottoResponse {
@@ -44,12 +46,19 @@ class LottoController(
         return winningNumber
     }
 
-    private fun matchLottoNumber(winningNumber: WinningNumber, lottoResponse: LottoResponse): Map<PrizeLevel, Int> {
+    private fun matchLottoNumber(winningNumber: WinningNumber, lottoResponse: LottoResponse): LottoMatchResponse {
         val lottoMatcher = LottoMatcher()
         return lottoMatcher.countLottoWinner(winningNumber, lottoResponse)
     }
 
-    private fun printLottoMatch(matchLottoNumber: Map<PrizeLevel, Int>) {
-        resultView.printMatchLottoNumber(matchLottoNumber)
+    private fun printLottoMatch(lottoMatchResponse: LottoMatchResponse) {
+        val matchLottoResult = lottoMatchResponse.matchLottoResult
+        resultView.printMatchLottoNumber(matchLottoResult)
+    }
+
+    private fun printYield(capital: Int, lottoMatchResponse: LottoMatchResponse) {
+        val yieldCalculator = YieldCalculator()
+        val yield = yieldCalculator.calulateYield(capital, lottoMatchResponse)
+        resultView.printYield(yield)
     }
 }

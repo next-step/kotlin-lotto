@@ -33,4 +33,8 @@ class ResultView {
             println("${numberOfHits}개 일치 (${prizeMoney}원)- ${count}개")
         }
     }
+
+    fun printYield(yield: Double) {
+        println("총 수익률은 ${yield}입니다.")
+    }
 }
