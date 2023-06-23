@@ -1,5 +1,6 @@
 package lotto.model
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
@@ -10,25 +11,52 @@ class LottoWinningTest : BehaviorSpec({
         val bonus = 10
         val lottoWinning = LottoWinning(numbers, bonus = bonus)
         When("나의 로또 번호 1,2,3,7,8,9") {
-            val lotto = Lotto.createWinning("1,2,3,7,8,9".toNumbers())
+            val lotto = Lotto.create("1,2,3,7,8,9".toNumbers())
             Then("3개 일치 이다") {
+                val result = lottoWinning.lottoResult(listOf(lotto)).toList()
+                val prize = result[0].first
+                prize shouldBe Rank.FIFTH
+            }
+        }
+
+        When("나의 로또 번호 1,2,3,4,8,9") {
+            val lotto = Lotto.create("1,2,3,4,8,9".toNumbers())
+            Then("4개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
                 prize shouldBe Rank.FOURTH
             }
         }
 
-        When("나의 로또 번호 1,2,3,4,8,9") {
-            val lotto = Lotto.createWinning("1,2,3,4,8,9".toNumbers())
-            Then("4개 일치 이다") {
+        When("나의 로또 번호 1,2,3,4,5,7") {
+            val lotto = Lotto.create("1,2,3,4,5,7".toNumbers())
+            Then("5개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
                 prize shouldBe Rank.THIRD
             }
         }
 
+        When("나의 로또 번호 1,2,3,4,5,10") {
+            val lotto = Lotto.create("1,2,3,4,5,10".toNumbers())
+            Then("5개 일치 이다 보너스 일치") {
+                val result = lottoWinning.lottoResult(listOf(lotto)).toList()
+                val prize = result[0].first
+                prize shouldBe Rank.SECOND
+            }
+        }
+
+        When("나의 로또 번호 2,3,4,5,6,10") {
+            val lotto = Lotto.create("2,3,4,5,6,10".toNumbers())
+            Then("5개 일치 이다 보너스 일치") {
+                val result = lottoWinning.lottoResult(listOf(lotto)).toList()
+                val prize = result[0].first
+                prize shouldBe Rank.SECOND
+            }
+        }
+
         When("나의 로또 번호 1,2,3,4,5,6") {
-            val lotto = Lotto.createWinning("1,2,3,4,5,6".toNumbers())
+            val lotto = Lotto.create("1,2,3,4,5,6".toNumbers())
             Then("6개 일치 이다") {
                 val result = lottoWinning.lottoResult(listOf(lotto)).toList()
                 val prize = result[0].first
@@ -39,9 +67,9 @@ class LottoWinningTest : BehaviorSpec({
         When("로또 번호 14개의 중 3개 일치 1개") {
             val lottoList = mutableListOf<Lotto>().apply {
                 repeat(13) {
-                    add(Lotto.createWinning("11,12,13,14,15,16".toNumbers()))
+                    add(Lotto.create("11,12,13,14,15,16".toNumbers()))
                 }
-                add(Lotto.createWinning("1,2,3,7,8,9".toNumbers()))
+                add(Lotto.create("1,2,3,7,8,9".toNumbers()))
             }
             Then("구매금액 14000 수익률 0.35") {
                 val amount = 14000
@@ -52,7 +80,15 @@ class LottoWinningTest : BehaviorSpec({
                 total.toDecimalPoint() shouldBe "0.35"
             }
         }
+
+        When("1,2,3,4,5,6의 담첨번호에 보너스 번호는 5인 경우") {
+            Then("예외 발생") {
+                shouldThrow<IllegalArgumentException> {
+                    LottoWinning(numbers, bonus = 5)
+                }
+            }
+        }
     }
 })
 
-fun String.toNumbers() = this.split(",").map { it.toInt() }
+fun String.toNumbers() = this.split(",").map { it.toInt() }.toSet()
