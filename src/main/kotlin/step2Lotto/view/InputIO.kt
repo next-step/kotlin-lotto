@@ -11,6 +11,11 @@ class InputIO {
         return amount
     }
 
+    fun inputWinningNumber(inputString: String? = readlnOrNull()): List<String> {
+        return inputString?.replace(" ", "")?.split(",")
+            ?: return listOf()
+    }
+
     companion object {
         private const val AMOUNT_IS_INSUFFICIENT = "1000원 이상의 금액을 입력해 주세요"
     }
