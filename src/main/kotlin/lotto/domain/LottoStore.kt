@@ -1,17 +1,19 @@
 package lotto.domain
 
 class LottoStore(val lottoPrice: Int = 1000) {
-    private val lottoMinNumber: Int = 1
-    private val lottoMaxNumber: Int = 45
-    private val lottoCountOfNumbers: Int = 6
-    private val lottoNumbers = (lottoMinNumber..lottoMaxNumber).toList()
 
     fun buyLottos(purchaseAmount: Int): List<Lotto> {
         val availableBuyCount = getAvailableBuyCount(purchaseAmount)
         if (availableBuyCount <= 0) {
             return emptyList()
         }
-        return List(availableBuyCount) { Lotto(lottoNumbers.shuffled().subList(0, lottoCountOfNumbers)) }
+
+        return List(availableBuyCount) { createLottoAutomatic() }
+    }
+
+    private fun createLottoAutomatic(): Lotto {
+        val pickedNumbers = LottoNumber.RANGE.shuffled().subList(0, Lotto.NUMBER_COUNT)
+        return Lotto(pickedNumbers.map { LottoNumber(it) }.toHashSet())
     }
 
     private fun getAvailableBuyCount(purchaseAmount: Int): Int {

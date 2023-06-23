@@ -9,7 +9,6 @@ class LottoRankTest : StringSpec({
     }
 
     "countOfMatch가 0인 경우, LottoRank.MISS_WITH_ZERO_MATCH 반환 된다" {
-        LottoRank.valueOf(0) shouldBe LottoRank.MISS_WITH_ZERO_MATCH
+        LottoRank.valueOf(0, false) shouldBe LottoRank.MISS_WITH_ZERO_MATCH
     }
-
 })
