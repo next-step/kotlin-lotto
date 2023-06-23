@@ -1,3 +1,4 @@
+import lotto.domain.LottoNumbers
 import lotto.domain.LottoShop
 import lotto.domain.LottoStatistics
 import lotto.domain.Winner
@@ -7,10 +8,12 @@ import lotto.view.ResultView
 fun main() {
     val input = InputView()
     val purchasePrice = input.inputPurchasePrice()
+    val customCount = input.inputCustomNumberCount()
+    val customLotto = input.inputCustomLotto(customCount)
 
-    val lottos = LottoShop(purchasePrice).sellLotto()
+    val lottos = LottoShop(purchasePrice, customLotto).sellLotto()
     val resultView = ResultView()
-    resultView.showLottoCount(lottos)
+    resultView.showLottoCount(customCount, lottos)
     resultView.showLottos(lottos)
 
     val lastWinnerNumbers = input.inputLastWinNumbers()
