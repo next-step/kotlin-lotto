@@ -3,7 +3,6 @@ package lotto.controller
 import lotto.domain.InputParser
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoStore
-import lotto.domain.LottoValidator
 import lotto.domain.model.InputResult
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoResult
@@ -48,10 +47,9 @@ class LottoController {
     private fun error(error: Throwable) = ResultView.printMessage(error.message ?: "")
 
     private fun getResults(lottos: Lottos, selectedBalls: SelectedBalls): List<LottoResult> {
-        val validator = LottoValidator(selectedBalls)
         val results = Lotto.prizes.map { LottoResult(0, it) }.toMutableList()
         lottos.items.forEach {
-            val prize = validator.getPrize(it)
+            val prize = Lotto.Prize.from(selectedBalls, it)
             val index = Lotto.prizes.indexOf(prize)
             results[index] = LottoResult(results[index].count + 1, prize)
         }

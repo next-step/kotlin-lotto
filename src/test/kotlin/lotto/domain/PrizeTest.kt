@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-class LottoValidatorTest {
+class PrizeTest {
     @MethodSource("provideLottoResultExceptBonus")
     @ParameterizedTest
     fun `당첨 번호로 일치하는 결과를 구한다`(expectedResult: LottoResult) {
@@ -32,7 +32,7 @@ class LottoValidatorTest {
 
         val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), bonus)
 
-        LottoValidator(selectedBalls).getPrize(lotto) shouldBe expectedResult.prize
+        Lotto.Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
     }
 
     @Test
@@ -57,7 +57,7 @@ class LottoValidatorTest {
 
         val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), bonus)
 
-        LottoValidator(selectedBalls).getPrize(lotto) shouldBe expectedResult.prize
+        Lotto.Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
     }
 
     companion object {

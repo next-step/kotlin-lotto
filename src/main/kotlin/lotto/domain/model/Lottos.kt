@@ -1,3 +1,4 @@
 package lotto.domain.model
 
-data class Lottos(val items: List<Lotto>)
+@JvmInline
+value class Lottos(val items: List<Lotto>)
