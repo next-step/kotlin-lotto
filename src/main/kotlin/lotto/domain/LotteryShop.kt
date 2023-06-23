@@ -9,10 +9,15 @@ object LotteryShop {
     }
 
     fun getTickets(lottoCount: Int, manualLottos: List<Lotto>): Tickets {
-        return Tickets(lottoCount, AutoNumGenerator())
+        return Tickets(lottoCount, manualLottos, AutoNumGenerator())
     }
 
     fun validateManualNum(manualNum: Int, lottoCount: Int) {
         require(manualNum <= lottoCount) { MANUAL_NUM_EXCEPTION }
+    }
+
+    fun calculateRateOfReturn(money: Int, score: List<Rank>): Float {
+        val revenue = score.sumOf { it.reward }
+        return revenue.toFloat() / money
     }
 }

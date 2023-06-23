@@ -11,9 +11,4 @@ data class WinningTicket(val winningLotto: Lotto, val bonus: Int) {
     fun score(tickets: Tickets): List<Rank> {
         return tickets.tickets.map { Rank.getValue(this.winningLotto.getSameCount(it), it.contains(this.bonus)) }
     }
-
-    fun calculateRateOfReturn(money: Int, score: List<Rank>): Float {
-        val revenue = score.sumOf { it.reward }
-        return revenue.toFloat() / money
-    }
 }

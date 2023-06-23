@@ -24,6 +24,9 @@ object InputView {
     }
 
     fun getManualLotto(num: Int): List<Lotto> {
+        if (num == 0) {
+            return listOf()
+        }
         println(MANUAL_LOTTO_STRING)
         return List(num) { Lotto(readln().split(",").map { it.trim().toInt() }) }
     }

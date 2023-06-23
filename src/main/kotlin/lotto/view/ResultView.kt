@@ -11,11 +11,8 @@ private const val RESULT_STRING = "\n당첨 통계\n---------"
 private const val LOSS_STRING = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
 
 object ResultView {
-    fun printLottoCounts(count: Int) {
-        println("${count}$COUNT_STRING")
-    }
-
-    fun printLottoNums(tickets: Tickets) {
+    fun printLottos(manuaNum: Int, tickets: Tickets) {
+        println("\n수동으로 ${manuaNum}장, 자동으로 ${tickets.tickets.size - manuaNum}$COUNT_STRING")
         tickets.tickets.forEach { println(it.numbers) }
     }
 
