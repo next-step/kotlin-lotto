@@ -40,6 +40,9 @@ class LottoGame {
 
     private fun getManualLottos(): Lottos {
         val manualLottoSize = InputView.getManualLottoSize()
+
+        require(amount / Lotto.LOTTO_PRICE >= manualLottoSize) { EXCEED_LOTTO_SIZE_ERROR_MESSAGE }
+        ResultView.printManualLottoInputMessage()
         return lottoSeller.sellManualLottos(amount, manualLottoSize).lottos
     }
 
@@ -50,5 +53,6 @@ class LottoGame {
 
     companion object {
         private const val MORE_THAN_LOTTO_PRICE_MESSAGE = "${Lotto.LOTTO_PRICE}이상의 금액을 입력해주세요"
+        const val EXCEED_LOTTO_SIZE_ERROR_MESSAGE = "구매 가능한 로또의 개수를 초과했습니다"
     }
 }
