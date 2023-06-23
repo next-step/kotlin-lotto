@@ -9,17 +9,20 @@ data class Lottos(
         lottoList.iterator()
 }
 
-data class LottosResult(
+class LottosResult private constructor(
     val lottos: Lottos,
     val manualLottoSize: Int = 0,
     val autoLottoSize: Int = 0
 ) : Iterable<Lotto> {
-    constructor(manualLottos: Lottos, autoLottos: Lottos) : this(
-        Lottos(manualLottos.lottoList + autoLottos.lottoList),
-        manualLottos.size,
-        autoLottos.size
-    )
 
     override fun iterator(): Iterator<Lotto> =
         lottos.iterator()
+
+    companion object {
+        fun of(manualLottos: Lottos, autoLottos: Lottos) = LottosResult(
+            Lottos(manualLottos.lottoList + autoLottos.lottoList),
+            manualLottos.size,
+            autoLottos.size
+        )
+    }
 }

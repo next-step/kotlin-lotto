@@ -35,7 +35,7 @@ class LottoGame {
         val manualLottos = getManualLottos()
         val lottoResponse = lottoSeller.sellAutoLottos(amount)
         amount = lottoResponse.change
-        return LottosResult(manualLottos, lottoResponse.lottos)
+        return LottosResult.of(manualLottos, lottoResponse.lottos)
     }
 
     private fun getManualLottos(): Lottos {
