@@ -7,6 +7,15 @@ import lotto.domain.Prize
 
 data class WinningNumbers(val lottoNumbers: LottoNumbers, val bonusNumber: LottoNumber) {
 
+    init {
+        require(!isBonusNumberDuplicated()) {
+            "보너스 번호와 일치하는 로또 번호가 있습니다."
+        }
+    }
+    private fun isBonusNumberDuplicated(): Boolean {
+        return lottoNumbers.lottoNumbers.any { it.value == bonusNumber.value }
+    }
+
     fun calculateMatchResult(lottos: Lottos): MatchResult {
         val matches = lottos.lottoList.asSequence()
             .map { Prize.prizeFor(countMatches(it), isBonusMatch(it)) }
