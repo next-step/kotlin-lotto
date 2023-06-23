@@ -23,6 +23,11 @@ object InputView {
         return readln().toInt()
     }
 
+    fun getManualLotto(num: Int): List<Lotto> {
+        println(MANUAL_LOTTO_STRING)
+        return List(num) { Lotto(readln().split(",").map { it.trim().toInt() }) }
+    }
+
     fun getWinningLottoNums(): Lotto {
         println(LAST_NUM_STRING)
         return Lotto(readln().split(",").map { it.trim().toInt() })
