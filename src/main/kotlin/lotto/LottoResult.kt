@@ -4,8 +4,8 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class LottoResult(val map: Map<Int, Int>) {
-    fun calculateProfitRate(purchaseAmount: Double): Double {
-        val profitRate = getTotalPrize() / purchaseAmount
+    fun calculateProfitRate(purchaseAmount: Int): Double {
+        val profitRate = getTotalPrize() / purchaseAmount.toDouble()
         return BigDecimal(profitRate).setScale(SCALE, RoundingMode.DOWN).toDouble()
     }
 
