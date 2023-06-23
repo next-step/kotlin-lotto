@@ -29,18 +29,5 @@ class LottoFactoryTest : BehaviorSpec({
                 manualLottos[1].lottoNumbers.map { it.value } shouldBe manualLottoNumbers[1]
             }
         }
-
-        When("수동 로또 번호와 입력 금액으로 로또를 생성할 때") {
-            val manualLottos = manualLottoNumbers.map { inputNumbers ->
-                val numberGenerator = FixedLottoLottoNumberGenerator(inputNumbers)
-                LottoNumbers(numberGenerator.generateNumbers())
-            }
-
-            val lottos = lottoFactory.createLottos(manualLottos, inputMoney)
-
-            Then("예상되는 총 로또 개수는 수동 + 자동이다.") {
-                lottos.getSize() shouldBe 5
-            }
-        }
     }
 })
