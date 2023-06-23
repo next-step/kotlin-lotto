@@ -1,4 +1,3 @@
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoShop
 import lotto.domain.LottoStatistics
 import lotto.domain.Winner
