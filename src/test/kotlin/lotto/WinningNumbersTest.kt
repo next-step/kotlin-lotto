@@ -2,7 +2,7 @@ package lotto
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.shouldBe
+import lotto.domain.WinningNumbers
 
 class WinningNumbersTest : FunSpec({
     test("당첨 번호를 저장할 수 있다.") {

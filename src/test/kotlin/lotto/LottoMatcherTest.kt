@@ -2,6 +2,10 @@ package lotto
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoMatcher
+import lotto.domain.LottoResult
+import lotto.domain.LottoTicket
+import lotto.domain.Numbers
 
 class LottoMatcherTest : FunSpec({
     test("당첨 번호와 일치하는 로또의 숫자 개수를 반환한다.") {

@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoResult
 
 class LottoResultTest : FunSpec({
     test("결과에 대한 수익률을 계산해 반환한다.") {

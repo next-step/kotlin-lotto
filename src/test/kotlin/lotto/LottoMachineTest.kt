@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldHave
+import lotto.domain.LottoMachine
 import java.lang.RuntimeException
 
 class LottoMachineTest : FunSpec({

@@ -1,6 +1,6 @@
-package lotto
+package lotto.domain
 
-import lotto.LottoNumberGenerator.Companion.LOTTO_SIZE
+import lotto.domain.LottoNumberGenerator.Companion.LOTTO_SIZE
 
 class Numbers(
     val values: List<Int>
