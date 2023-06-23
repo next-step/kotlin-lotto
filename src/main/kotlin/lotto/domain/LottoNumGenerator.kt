@@ -4,7 +4,7 @@ interface LottoNumGenerator {
     fun getNums(): List<Int>
 }
 
-class ShuffleNumGenerator : LottoNumGenerator {
+class AutoNumGenerator : LottoNumGenerator {
     override fun getNums(): List<Int> {
         return lottoNums.shuffled().take(LOTTO_NUM_COUNT).sorted()
     }
