@@ -26,7 +26,7 @@ class LottoCheckerTest : BehaviorSpec({
             )
         `when`("당첨결과를 확인했을때") {
             then("정확한 결과가 반환된다") {
-                LottoChecker.checkResult(lottos, winNumbers) shouldBe LottoResults.of(
+                LottoChecker.checkResult(lottos, winNumbers) shouldBe WinLottoResults.of(
                     mapOf(
                         WinningPrize.FIRST to 1,
                         WinningPrize.SECOND to 1,
