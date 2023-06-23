@@ -8,7 +8,7 @@
 - [x] 구입 금액이 1000원 미만이면 IllegalArgumentException을 throw한다. -> Lotto
 - [x] 입력받은 구입 금액을 로또 개당 가격으로 나눈 숫자만큼 티켓을 구매한다. -> Lotto
 - [x] 입력받은 구입 금액에 맞게 로또를 구매한다. -> Lotto
-- [x] 1부터 45까지 숫자중 6개의 숫자를 무작위로 로또 번호를 생성한다. -> LottoNumbers
+- [x] 1부터 45까지 숫자중 6개의 숫자를 무작위로 로또 번호를 생성한다. -> LotteryPapers
     - [x] 생성된 로또 번호는 중복이 없다. -> LottoNumbers
 - [x] 로또 구매갯수가 음수나 0이면 IllegalArgumentException을 throw한다. -> Lotto
 - [x] 당첨 번호를 입력받아서 당첨번호를 생성한다. -> WinningNumber
