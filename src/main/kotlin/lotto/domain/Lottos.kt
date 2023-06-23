@@ -8,6 +8,10 @@ class Lottos(val lottoList: List<LottoNumbers>) {
         return lottoList.size
     }
 
+    operator fun plus(other: Lottos): Lottos {
+        return Lottos(this.lottoList + other.lottoList)
+    }
+
     companion object {
         private const val PER_LOTTO_PRICE = 1000
 
