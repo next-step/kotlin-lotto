@@ -5,8 +5,8 @@ import lotto.domain.Winner
 
 class ResultView {
 
-    fun showLottoCount(lottos: List<Lotto>) {
-        return println("${lottos.size}개를 구매했습니다.")
+    fun showLottoCount(customCount: Int, lottos: List<Lotto>) {
+        return println("수동으로 ${customCount}장, 자동으로 ${lottos.size - 1}개를 구매했습니다.")
     }
     fun showLottos(lottos: List<Lotto>) {
         lottos.forEach {
