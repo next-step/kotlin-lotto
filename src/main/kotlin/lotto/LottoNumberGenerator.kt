@@ -1,13 +1,14 @@
 package lotto
 
-class LottoNumberGenerator {
-    fun generate(size: Int): List<Int> {
+class LottoNumberGenerator : NumberGenerator {
+    override fun generate(): List<Int> {
         return (MIN..MAX)
             .shuffled()
-            .take(size)
+            .take(LOTTO_SIZE)
     }
 
     companion object {
+        const val LOTTO_SIZE = 6
         private const val MIN = 1
         private const val MAX = 45
     }

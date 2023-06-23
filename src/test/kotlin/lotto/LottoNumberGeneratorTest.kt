@@ -12,7 +12,7 @@ class LottoNumberGeneratorTest : FunSpec({
         val size = 6
 
         // when
-        val actual = lottoNumberGenerator.generate(size)
+        val actual = lottoNumberGenerator.generate()
 
         // then
         actual shouldHaveSize size
