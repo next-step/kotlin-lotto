@@ -6,6 +6,7 @@ import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoMachine
+import lotto.domain.LottoMachine.Companion.TICKET_PRICE
 import java.lang.RuntimeException
 
 class LottoMachineTest : FunSpec({
@@ -16,10 +17,10 @@ class LottoMachineTest : FunSpec({
         val expected = 14
 
         // when
-        val count = lottoMachine.getNumberOfTickets(purchaseAmount)
+        val lottoTickets = lottoMachine.buyTickets(purchaseAmount)
 
         // then
-        count shouldBe expected
+        lottoTickets.numbers shouldHaveSize expected
     }
 
     test("로또 1장의 가격(1000)보다 구입 금액이 적다면 RuntimeException 예외가 발생해야 한다.") {
@@ -28,7 +29,7 @@ class LottoMachineTest : FunSpec({
         listOf(1, 500, 900).forAll { purchaseAmount ->
             // when, then
             shouldThrow<RuntimeException> {
-                lottoMachine.getNumberOfTickets(purchaseAmount)
+                lottoMachine.buyTickets(purchaseAmount)
             }
         }
     }
@@ -36,10 +37,11 @@ class LottoMachineTest : FunSpec({
     test("로또 개수만큼 티켓을 발행할 수 있다.") {
         // given
         val lottoMachine = LottoMachine()
-        val numberOfTickets = 5
+        val purchaseAmount = 14000
+        val numberOfTickets = purchaseAmount / TICKET_PRICE
 
         // when
-        val actual = lottoMachine.issueTicket(numberOfTickets)
+        val actual = lottoMachine.buyTickets(purchaseAmount)
 
         // then
         actual.numbers shouldHaveSize numberOfTickets

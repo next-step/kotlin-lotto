@@ -1,10 +1,10 @@
 package lotto.domain
 
 class LottoMatcher(private val winningNumbers: List<Int>) {
-    fun getMatchingResult(lottoTicket: LottoTicket): LottoResult {
-        val map = lottoTicket.numbers
+    fun getMatchingResult(lottoTickets: LottoTickets): LottoResult {
+        val map = lottoTickets.numbers
             .map { numbers -> countMatchingNumbers(numbers) }
-            .groupingBy { it }
+            .groupingBy { LottoRank.getLottoRankByMatchCount(it) }
             .eachCount()
         return LottoResult(map)
     }

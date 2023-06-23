@@ -1,5 +1,5 @@
 package lotto.domain
 
-class LottoTicket(
+class LottoTickets(
     val numbers: List<Numbers>
 )

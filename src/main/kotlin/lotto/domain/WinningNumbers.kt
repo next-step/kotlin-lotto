@@ -4,10 +4,6 @@ class WinningNumbers(
     val numbers: List<Int>
 ) {
     init {
-        require(numbers.size == SIZE)
-    }
-
-    companion object {
-        const val SIZE = 6
+        require(numbers.size == LOTTO_SIZE)
     }
 }
