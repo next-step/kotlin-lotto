@@ -10,7 +10,7 @@ enum class WinningPrize(val count: Int, val bonusMatch: Boolean, val prize: Int)
 
     companion object {
         fun of(count: Int, bonusMatch: Boolean): WinningPrize {
-            return values().firstOrNull { it.count == count && (!it.bonusMatch || bonusMatch) } ?: NONE
+            return values().find { it.count == count && (!it.bonusMatch || bonusMatch) } ?: NONE
         }
     }
 }
