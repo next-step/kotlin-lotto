@@ -7,12 +7,16 @@ package lotto.domain
  */
 data class IssuedLottos(
     val lottos: List<Lotto>,
-    val manualCount: Int = 0,
-    val autoCount: Int = 0,
 ) {
     init {
         require(lottos.isNotEmpty()) { "lottos must not be empty" }
     }
+
+    val autoCount: Int
+        get() = lottos.count { it.isAuto }
+
+    val manualCount: Int
+        get() = lottos.count { it.isManual }
 
     fun check(winningLotto: WinningLotto): IssuedLottoMatchResult {
         val lottoMatchResults: List<LottoMatchResult> = lottos.map { it.match(winningLotto) }

@@ -14,10 +14,6 @@ class LottoSeller(
     ): IssuedLottos {
         val totalCount = money / lottoPrice
         val autoLottos = lottoMachine.issue(totalCount - manualLottos.size)
-        return IssuedLottos(
-            lottos = manualLottos + autoLottos,
-            manualCount = manualLottos.size,
-            autoCount = autoLottos.size,
-        )
+        return IssuedLottos(manualLottos + autoLottos)
     }
 }
