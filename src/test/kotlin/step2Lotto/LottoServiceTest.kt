@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import step2Lotto.domain.Lotto
 import step2Lotto.domain.LottoRank
 import step2Lotto.domain.LottoService
+import step2Lotto.domain.dto.StatisticsRequest
 
 class LottoServiceTest {
     private val lottoService = LottoService(FixedLottoGenerator())
@@ -20,11 +21,11 @@ class LottoServiceTest {
         val lottoTicketQuantity = 5
 
         val lottoTickets = listOf(
-            Lotto(listOf(1,2,3,4,5,6)),
-            Lotto(listOf(1,2,3,4,5,6)),
-            Lotto(listOf(1,2,3,4,5,6)),
-            Lotto(listOf(1,2,3,4,5,6)),
-            Lotto(listOf(1,2,3,4,5,6)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
         )
 
         lottoService.purchaseLottoTickets(lottoTicketQuantity) shouldBe lottoTickets
@@ -33,23 +34,21 @@ class LottoServiceTest {
     @Test
     fun `로또 통계 계산`() {
         val lottoTickets = listOf(
-            Lotto(listOf(1,2,3,14,15,16)),
-            Lotto(listOf(1,2,3,14,15,16)),
-            Lotto(listOf(1,2,3,4,15,16)),
-            Lotto(listOf(1,2,3,4,5,16)),
-            Lotto(listOf(1,2,3,4,5,6)),
+            Lotto(listOf(1, 2, 3, 14, 15, 16)),
+            Lotto(listOf(1, 2, 3, 14, 15, 16)),
+            Lotto(listOf(1, 2, 3, 4, 15, 16)),
+            Lotto(listOf(1, 2, 3, 4, 5, 16)),
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
         )
 
-        val winningNumber = Lotto(listOf(1,2,3,4,5,6))
+        val winningNumber = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
-        val statistics = listOf(
-            LottoRank.FIRST,
-            LottoRank.THIRD,
-            LottoRank.FOURTH,
-            LottoRank.FIFTH,
-            LottoRank.FIFTH,
-        )
+        val req = StatisticsRequest(lottoTickets, winningNumber)
+        val statistics = lottoService.getStatistics(req).lottoStatistics
 
-        lottoService.getStatistics(lottoTickets, winningNumber) shouldBe statistics
+        statistics.count { it == LottoRank.FIRST } shouldBe 1
+        statistics.count { it == LottoRank.THIRD } shouldBe 1
+        statistics.count { it == LottoRank.FOURTH } shouldBe 1
+        statistics.count { it == LottoRank.FIFTH } shouldBe 2
     }
 }
