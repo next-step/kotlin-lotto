@@ -31,4 +31,8 @@ class ResultView {
             else -> return
         }
     }
+
+    fun showProfitRate(profitRate: Double) {
+        println("총 수익률은 $profitRate%입니다.")
+    }
 }

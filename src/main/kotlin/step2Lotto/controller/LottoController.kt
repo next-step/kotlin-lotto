@@ -42,4 +42,9 @@ class LottoController {
     fun showLottoStatistics(statistics: List<LottoRank>) {
         resultView.showLottoStatistics(statistics)
     }
+
+    fun showProfitRate(purchaseAmount: Int, statistics: List<LottoRank>) {
+        val profitRate = lottoService.getProfitRate(purchaseAmount, statistics)
+        resultView.showProfitRate(profitRate)
+    }
 }

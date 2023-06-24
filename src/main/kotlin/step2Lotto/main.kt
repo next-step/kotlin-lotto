@@ -15,4 +15,5 @@ fun main() {
     )
 
     lottoController.showLottoStatistics(lottoStatistics)
+    lottoController.showProfitRate(purchaseAmount, lottoStatistics)
 }
