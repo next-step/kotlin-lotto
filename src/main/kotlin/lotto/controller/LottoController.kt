@@ -1,8 +1,8 @@
 package lotto.controller
 
+import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
-import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
 import lotto.domain.Lottos
 import lotto.domain.Payment
