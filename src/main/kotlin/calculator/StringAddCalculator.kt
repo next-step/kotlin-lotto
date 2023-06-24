@@ -1,7 +1,7 @@
 package calculator
 
 class StringAddCalculator(
-    private val stringSeparator: Separator = StringSeparator()
+    private val stringSeparator: Separator = StringSeparator
 ) {
     fun add(expression: String?): Int {
         if (expression.isNullOrBlank()) {

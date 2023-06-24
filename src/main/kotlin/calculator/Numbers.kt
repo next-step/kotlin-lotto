@@ -12,8 +12,6 @@ class Numbers(
     }
 
     private fun validateNumbers() {
-        if (values.any { it < 0 }) {
-            throw IllegalArgumentException("음수가 존재합니다.")
-        }
+        require(values.all { it >= 0 }) { "음수가 존재합니다." }
     }
 }

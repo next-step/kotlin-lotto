@@ -19,6 +19,18 @@ class StringAddCalculatorTest : FunSpec({
             }
     }
 
+    test("\t, \n 와 같은 whitespace 를 입력할 경우 0을 반환해야 한다.") {
+        listOf("\t", "\n")
+            .forAll { expression ->
+                // given
+                val calculator = StringAddCalculator()
+                // when
+                val actual = calculator.add(expression)
+                // then
+                actual shouldBe 0
+            }
+    }
+
     test("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.") {
         // given
         val expression = "3"
