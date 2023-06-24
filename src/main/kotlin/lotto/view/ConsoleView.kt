@@ -2,8 +2,8 @@ package lotto.view
 
 import lotto.GameResult
 import lotto.Lotto
-import lotto.LottoPurchaseRequest
 import lotto.Lottos
+import lotto.ManualPurchaseCommand
 import lotto.prize.Prize
 import lotto.vo.LottoNumber
 import lotto.vo.Money
@@ -37,8 +37,39 @@ object ConsoleView : InputView, OutputView {
         return WinningNumbers(winningNumbers, LottoNumber.from(bonusNumber))
     }
 
-    override fun receivePurchaseCommand(): LottoPurchaseRequest {
-        TODO("Not yet implemented")
+    override fun receivePurchaseCommand(): ManualPurchaseCommand {
+        val manualLottoCount = receiveManualLottoCount()
+
+        val manualLottos = receiveManualLottos(manualLottoCount)
+
+        return ManualPurchaseCommand(
+            manualLottos
+        )
+    }
+
+    private fun receiveManualLottos(manualLottoCount: Int): List<Lotto> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val purchaseLottos = List(manualLottoCount) {
+            val receivedNumbers = readln()
+                .split(", ")
+                .map {
+                    it.toIntOrNull()
+                        ?: throw IllegalArgumentException("로또 번호는 숫자여야 합니다.")
+                }
+                .map(LottoNumber::from)
+            Lotto.from(receivedNumbers)
+        }
+        return purchaseLottos
+    }
+
+    private fun receiveManualLottoCount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        val manualLottoCount = readln()
+            .toIntOrNull()
+            ?: throw IllegalArgumentException("로또 수는 숫자여야 합니다.")
+
+        require(manualLottoCount > 0) { "구매할 로또 수는 양수여야 합니다." }
+        return manualLottoCount
     }
 
     override fun showPurchased(lottos: Lottos) {
