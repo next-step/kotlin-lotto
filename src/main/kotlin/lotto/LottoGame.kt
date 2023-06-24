@@ -15,7 +15,9 @@ class LottoGame(
         val lottoList = purchaser.purchase(inputAmount)
         resultView.displayPurchasedLotto(lottoList)
 
-        val winningLotto = WinningLotto(inputView.inputWinningNums().map { LottoNumber(it) }.toSet())
+        val winningNums = inputView.inputWinningNums().map { LottoNumber(it) }.toSet()
+        val bonusNum = LottoNumber(inputView.inputBunusNum())
+        val winningLotto = WinningLotto(winningNums, bonusNum)
         val result = LottoResult(winningLotto, lottoList)
         resultView.displayResult(result)
     }

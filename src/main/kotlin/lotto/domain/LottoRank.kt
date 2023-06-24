@@ -17,7 +17,7 @@ enum class LottoRank(
 
         fun of(numOfMatch: Int, isBonusMatched: Boolean): LottoRank? {
             return when {
-                numOfMatch == 5 && isBonusMatched -> THIRD
+                numOfMatch == 5 && !isBonusMatched -> THIRD
                 else -> values().find { it.numOfMatch == numOfMatch }
             }
         }
