@@ -1,5 +1,7 @@
 package step2Lotto.domain
 
+import step2Lotto.domain.dto.Lotto
+import step2Lotto.domain.dto.LottoRank
 import step2Lotto.domain.dto.StatisticsRequest
 
 class LottoService(

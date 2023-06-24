@@ -1,5 +1,6 @@
 package step2Lotto.view
 
+import step2Lotto.domain.dto.Lotto
 import java.lang.IllegalArgumentException
 
 class InputIO {
@@ -11,9 +12,13 @@ class InputIO {
         return amount
     }
 
-    fun inputWinningNumber(inputString: String? = readlnOrNull()): List<String> {
-        return inputString?.replace(" ", "")?.split(",")
-            ?: return listOf()
+    fun inputWinningNumber(inputString: String? = readlnOrNull()): Lotto {
+
+        if (inputString == null) {
+            return Lotto(listOf())
+        }
+
+        return Lotto(inputString.replace(" ", "").split(",").map { it.toInt() })
     }
 
     companion object {

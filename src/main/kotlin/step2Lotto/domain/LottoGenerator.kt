@@ -1,5 +1,7 @@
 package step2Lotto.domain
 
+import step2Lotto.domain.dto.Lotto
+
 interface LottoGenerator {
     fun execute(): Lotto
 }

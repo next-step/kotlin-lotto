@@ -2,9 +2,9 @@ package step2Lotto
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import step2Lotto.domain.Lotto
-import step2Lotto.domain.LottoRank
 import step2Lotto.domain.LottoService
+import step2Lotto.domain.dto.Lotto
+import step2Lotto.domain.dto.LottoRank
 import step2Lotto.domain.dto.StatisticsRequest
 
 class LottoServiceTest {
