@@ -13,7 +13,7 @@ class PurchaseInfo(private val paidPrice: Int, val manualLottos: List<List<Lotto
         return autoLottoPrice / LOTTO_PRICE
     }
 
-    fun totalLottosPrice() = (manualLottoCount() + autoLottoCount()) * LOTTO_PRICE
+    fun lottoBundlePrice() = (manualLottoCount() + autoLottoCount()) * LOTTO_PRICE
 
     companion object {
         const val LOTTO_PRICE = 1000

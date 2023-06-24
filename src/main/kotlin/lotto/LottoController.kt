@@ -1,6 +1,6 @@
 package lotto
 
-import lotto.domain.Lotto
+import lotto.domain.LottoBundle
 import lotto.domain.LottoPurchaseMachine
 import lotto.domain.LottoResult
 import lotto.domain.LottoWinningNumbers
@@ -12,11 +12,11 @@ class LottoController {
     fun execute() {
         val purchaseInfo = getPurchaseInfo()
         printPurchaseInfo(purchaseInfo)
-        val lottos = getLottos(purchaseInfo)
-        printLottos(lottos)
+        val lottoBundle = getLottoBundle(purchaseInfo)
+        printLottoBundle(lottoBundle)
 
         val lottoWinningNumbers = getLottoWinningNumbers()
-        val lottoResult = lottoWinningNumbers.getLottoResult(lottos)
+        val lottoResult = lottoBundle.getLottoResult(lottoWinningNumbers)
         printLottoStatistics(lottoResult)
         printLottoProfitRate(lottoResult, purchaseInfo)
     }
@@ -32,10 +32,10 @@ class LottoController {
         OutputView.printNumberOfLotto(purchaseInfo.manualLottoCount(), purchaseInfo.autoLottoCount())
     }
 
-    private fun getLottos(purchaseInfo: PurchaseInfo) = LottoPurchaseMachine.getLottos(purchaseInfo)
+    private fun getLottoBundle(purchaseInfo: PurchaseInfo) = LottoPurchaseMachine.getLottoBundle(purchaseInfo)
 
-    private fun printLottos(lottos: List<Lotto>) {
-        OutputView.printLottos(lottos)
+    private fun printLottoBundle(lottoBundle: LottoBundle) {
+        OutputView.printLottos(lottoBundle.lottos)
     }
 
     private fun getLottoWinningNumbers(): LottoWinningNumbers {
@@ -50,7 +50,7 @@ class LottoController {
     }
 
     private fun printLottoProfitRate(lottoResult: LottoResult, purchaseInfo: PurchaseInfo) {
-        val profitRate = lottoResult.getProfitRate(purchaseInfo.totalLottosPrice())
+        val profitRate = lottoResult.getProfitRate(purchaseInfo.lottoBundlePrice())
         OutputView.printProfitRate(profitRate)
     }
 }

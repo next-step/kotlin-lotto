@@ -16,11 +16,11 @@ class LottoPurchaseMachineTest : BehaviorSpec({
             val purchaseInfo = PurchaseInfo(paidPrice, manualLottos)
 
             then("2개의 수동 로또와 8개의 자동 로또를 생성한다.") {
-                val lottos = LottoPurchaseMachine.getLottos(purchaseInfo)
+                val lottoBundle = LottoPurchaseMachine.getLottoBundle(purchaseInfo)
 
-                lottos.size shouldBe 10
-                lottos shouldContain Lotto(manualLotto1)
-                lottos shouldContain Lotto(manualLotto2)
+                lottoBundle.lottos.size shouldBe 10
+                lottoBundle.lottos shouldContain Lotto(manualLotto1)
+                lottoBundle.lottos shouldContain Lotto(manualLotto2)
 
             }
         }

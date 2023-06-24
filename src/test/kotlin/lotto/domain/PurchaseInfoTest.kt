@@ -33,16 +33,13 @@ class PurchaseInfoTest : BehaviorSpec({
             }
         }
 
-
         `when`("100개의 수동 로또를 전달한다") {
             val manualLottos = FakeGenerator.lottoNumbersOfLottos(100)
             then("에러가 발생한다") {
                 shouldThrow<IllegalArgumentException> {
                     PurchaseInfo(paidPrice, manualLottos)
-
                 }
             }
         }
     }
-
 })

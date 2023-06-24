@@ -3,7 +3,8 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.inspectors.forAll
+import io.kotest.matchers.shouldBe
 import lotto.test.FakeGenerator
 
 class LottoWinningNumbersTest : StringSpec({
@@ -31,19 +32,20 @@ class LottoWinningNumbersTest : StringSpec({
         }
     }
 
-    "getLottoResult - 로또 당첨 등수를 구할 수 있다." {
-        val lottos = listOf(
-            FakeGenerator.lotto(1, 2, 3, 4, 5, 6),
-            FakeGenerator.lotto(1, 2, 3, 4, 5, 20),
-            FakeGenerator.lotto(1, 2, 3, 4, 5, 16),
-            FakeGenerator.lotto(1, 2, 3, 4, 15, 16),
-            FakeGenerator.lotto(1, 2, 3, 14, 15, 16),
-            FakeGenerator.lotto(1, 2, 13, 14, 15, 16)
-        )
+    "로또 당첨 등수를 구할 수 있다." {
         val lottoWinningNumbers = LottoWinningNumbers(FakeGenerator.lotto(1, 2, 3, 4, 5, 6), LottoNumber(20))
 
-        val lottoResult = lottoWinningNumbers.getLottoResult(lottos)
+        listOf(
+            FakeGenerator.lotto(1, 2, 3, 4, 5, 6) to LottoRank.FIRST,
+            FakeGenerator.lotto(1, 2, 3, 4, 5, 20) to LottoRank.SECOND,
+            FakeGenerator.lotto(1, 2, 3, 4, 5, 16) to LottoRank.THIRD,
+            FakeGenerator.lotto(1, 2, 3, 4, 15, 16) to LottoRank.FOURTH,
+            FakeGenerator.lotto(1, 2, 3, 14, 15, 16) to LottoRank.FIFTH,
+            FakeGenerator.lotto(1, 2, 13, 14, 15, 16) to LottoRank.NONE
+        ).forAll { (lotto, rank) ->
+            val lottoRank = lottoWinningNumbers.getRank(lotto)
+            lottoRank shouldBe rank
+        }
 
-        lottoResult.lottoRanks shouldContainExactly LottoRank.values().toList()
     }
 })
