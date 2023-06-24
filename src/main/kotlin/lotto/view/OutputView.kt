@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Lottos
 import lotto.domain.Rank
+import lotto.domain.RankFactory
 
 object OutputView {
 
@@ -41,18 +42,18 @@ object OutputView {
         println("---------")
     }
 
-    fun printStatisticsAccordingToBonus(ranks: List<Rank>) {
-        for (rank in ranks.reversed()) {
-            printNumberOfMatches(rank)
+    fun printStatisticsAccordingToBonus(rankFactory: RankFactory) {
+        for (rank in rankFactory.getRanks().reversed()) {
+            printNumberOfMatches(rank, rankFactory)
         }
     }
 
-    private fun printNumberOfMatches(rank: Rank) {
+    private fun printNumberOfMatches(rank: Rank, rankFactory: RankFactory) {
         if (rank.isSecond()) {
-            println("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningMoney})- ${rank.count}개")
+            println("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningMoney})- ${rankFactory.getRankCount(rank)}개")
             return
         }
-        println("${rank.matchCount}개 일치 (${rank.winningMoney})- ${rank.count}개")
+        println("${rank.matchCount}개 일치 (${rank.winningMoney})- ${rankFactory.getRankCount(rank)}개")
     }
 
     fun printProfitRate(profitRate: Double) {

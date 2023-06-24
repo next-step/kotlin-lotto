@@ -1,13 +1,6 @@
 package lotto.controller
 
-import lotto.domain.Lotto
-import lotto.domain.LottoGenerator
-import lotto.domain.LottoNumber
-import lotto.domain.LottoStatistics
-import lotto.domain.Lottos
-import lotto.domain.Payment
-import lotto.domain.Rank
-import lotto.domain.WinningNumber
+import lotto.domain.*
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -23,8 +16,8 @@ class LottoController(
         val bonusBall = inputBonusBall()
         val winningNumber = WinningNumber(lastWinningNumbers, bonusBall)
 
-        val result = getStatisticsAccordingToBonus(lottos, winningNumber)
-        calculateProfitRate(inputPayment, result)
+        calculateStatisticsAccordingToBonus(lottos, winningNumber)
+        calculateProfitRate(inputPayment)
     }
 
     private fun inputPayment(): Int {
@@ -71,18 +64,18 @@ class LottoController(
         return LottoNumber(inputBonusBall)
     }
 
-    private fun getStatisticsAccordingToBonus(
+    private fun calculateStatisticsAccordingToBonus(
         lottos: Lottos,
         winningNumber: WinningNumber
-    ): List<Rank> {
+    ): RankFactory {
         OutputView.printWinnerStatistics()
-        val result = lottoStatistics.analyze(lottos, winningNumber)
-        OutputView.printStatisticsAccordingToBonus(result)
-        return result
+        val rankFactory = lottoStatistics.analyze(lottos, winningNumber)
+        OutputView.printStatisticsAccordingToBonus(rankFactory)
+        return rankFactory
     }
 
-    private fun calculateProfitRate(inputPayment: Int, result: List<Rank>) {
-        val profitRate = lottoStatistics.getProfitRate(Payment(inputPayment), result)
+    private fun calculateProfitRate(inputPayment: Int) {
+        val profitRate = lottoStatistics.getProfitRate(Payment(inputPayment))
         OutputView.printProfitRate(profitRate)
     }
 }
