@@ -2,7 +2,7 @@ package lotto.controller
 
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
+import lotto.domain.Lotto
 import lotto.domain.LottoStatistics
 import lotto.domain.Lottos
 import lotto.domain.Payment
@@ -50,19 +50,19 @@ class LottoController(
         return InputView.inputNumber()
     }
 
-    private fun generateManualLottos(manualLottoCount: Int): MutableList<LottoNumbers> {
+    private fun generateManualLottos(manualLottoCount: Int): Lottos {
         OutputView.printEnterManualLottoNumbers()
-        val manualLottos = mutableListOf<LottoNumbers>()
+        val manualLottos = mutableListOf<Lotto>()
         repeat(manualLottoCount) {
-            val lottoNumbers = LottoNumbers(InputView.inputLottoNumbers())
-            manualLottos.add(lottoNumbers)
+            val lotto = Lotto(InputView.inputLottoNumbers())
+            manualLottos.add(lotto)
         }
-        return manualLottos
+        return Lottos(manualLottos)
     }
 
-    private fun inputWinningNumbersLastWeek(): LottoNumbers {
+    private fun inputWinningNumbersLastWeek(): Lotto {
         OutputView.printWinningNumbersLastWeek()
-        return LottoNumbers(InputView.inputLottoNumbers())
+        return Lotto(InputView.inputLottoNumbers())
     }
 
     private fun inputBonusBall(): LottoNumber {
