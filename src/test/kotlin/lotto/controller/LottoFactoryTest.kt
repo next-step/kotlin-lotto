@@ -4,7 +4,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumbers
 import lotto.domain.numberGenerator.FixedLottoNumberGenerator
-import lotto.domain.numberGenerator.RandomLottoNumberGenerator
 
 class LottoFactoryTest : BehaviorSpec({
 
