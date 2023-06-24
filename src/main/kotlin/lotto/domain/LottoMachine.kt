@@ -4,8 +4,6 @@ class LottoMachine {
 
     fun buy(price: Int): Lottos {
         val availableLottoCount = getAvailableLottoCount(price)
-        generateLotto(availableLottoCount)
-
         return generateLotto(availableLottoCount)
     }
 
@@ -14,6 +12,6 @@ class LottoMachine {
     }
 
     private fun generateLotto(availableLottoCount: Int): Lottos {
-        return Lottos(List(availableLottoCount) { Lotto.of(LottoNumberGenerator.generate()) })
+        return Lottos.of(availableLottoCount, RandomLottoNumberGenerator())
     }
 }

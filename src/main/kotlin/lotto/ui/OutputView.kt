@@ -9,7 +9,7 @@ object OutputView {
     fun printLottos(lottos: Lottos) {
         println("${lottos.lottos.size}개를 구매했습니다.")
         lottos.lottos.forEach { lotto ->
-            println(lotto.lottoNumbers.map { it.number })
+            println(lotto.lottoNumbers.lottoNumbers.map { it.number })
         }
         println()
     }

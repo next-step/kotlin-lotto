@@ -1,6 +1,6 @@
 package lotto.ui
 
-import lotto.domain.LottoNumber
+import lotto.domain.LottoNumbers
 
 object InputView {
 
@@ -8,9 +8,9 @@ object InputView {
     private const val INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요."
     private const val DELIMITER = ","
 
-    fun readMatchingNumber(): List<LottoNumber> {
+    fun readMatchingNumber(): LottoNumbers {
         println(INPUT_MATCHING_NUMBER_MESSAGE)
-        return readln().split(DELIMITER).map { LottoNumber(it.trim().toInt()) }
+        return LottoNumbers.of(readln().split(DELIMITER).map { it.trim().toInt() })
     }
 
     fun readPrice(): Int {

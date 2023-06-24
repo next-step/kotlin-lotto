@@ -1,20 +1,12 @@
 package lotto
 
-import lotto.domain.LottoMachine
+import lotto.domain.LottoManager
 import lotto.ui.InputView
-import lotto.ui.OutputView
 
 fun main() {
 
-    val price = InputView.readPrice()
-
-    val lottos = LottoMachine().buy(price)
-
-    OutputView.printLottos(lottos)
-
+    val lottoManager = LottoManager()
+    val lottos = lottoManager.buyLotto()
     val matchingLottoNumbers = InputView.readMatchingNumber()
-
-    val lottoResult = lottos.getLottoResult(matchingLottoNumbers)
-
-    OutputView.printLottoResult(lottoResult)
+    lottoManager.getResult(lottos, matchingLottoNumbers)
 }
