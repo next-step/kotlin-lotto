@@ -3,7 +3,7 @@ package lotto.view
 import lotto.GameResult
 import lotto.Lotto
 import lotto.Lottos
-import lotto.Prize
+import lotto.prize.Prize
 import lotto.vo.LottoNumber
 import lotto.vo.Money
 import lotto.vo.WinningNumbers
@@ -62,5 +62,5 @@ object ConsoleView : InputView, OutputView {
         println("총 수익률은 ${floor(result.profitRate * 100) / 100}입니다.")
     }
 
-    private fun createMatchingDescriptionOf(prize: Prize) = "${prize.condition}개 일치${if (prize == Prize.MATCH_5_BONUS) ", 보너스 볼 일치" else ""}"
+    private fun createMatchingDescriptionOf(prize: Prize) = "${prize.matchCount}개 일치${if (prize == Prize.MATCH_5_BONUS) ", 보너스 볼 일치" else ""}"
 }

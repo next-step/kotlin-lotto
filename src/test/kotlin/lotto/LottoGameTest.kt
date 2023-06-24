@@ -4,6 +4,7 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
+import lotto.prize.Prize
 import lotto.test.FixedLottoPurchaseCommand
 import lotto.test.lottoNumbersOf
 import lotto.view.InputView

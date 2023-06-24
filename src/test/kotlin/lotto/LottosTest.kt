@@ -2,6 +2,7 @@ package lotto
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import lotto.prize.Prize
 import lotto.test.lottoNumbersOf
 import lotto.vo.LottoNumber
 import lotto.vo.Money
