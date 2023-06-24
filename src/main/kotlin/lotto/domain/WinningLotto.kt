@@ -4,7 +4,7 @@ class WinningLotto(
     private val winningNumbers: Set<LottoNumber>
 ) : Lotto(winningNumbers) {
 
-    fun getRankOfLotto(lotto: Lotto): LottoRank? {
+    fun rankOfLotto(lotto: Lotto): LottoRank? {
         val numOfMatch = numOfMatch(lotto)
         val rank = LottoRank.rankOfMatchedNum(numOfMatch)
         return rank

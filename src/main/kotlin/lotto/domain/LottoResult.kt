@@ -14,7 +14,7 @@ class LottoResult(
 
     private fun setResultMap() {
         lottos.forEach {
-            val rank = winningLotto.getRankOfLotto(it)
+            val rank = winningLotto.rankOfLotto(it)
             rankCntMap[rank] = rankCntMap.getOrDefault(rank, 0) + 1
         }
     }

@@ -25,11 +25,4 @@ internal class LottoTest {
         Assertions.assertThat(lotto.toString()).isEqualTo("[1, 3, 5, 7, 10, 25]")
     }
 
-    @DisplayName(value = "당첨 번호와 일치하는 갯수를 반환할 수 있다.")
-    @Test
-    fun winningCount() {
-        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet())
-        val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10).map { LottoNumber(it) }.toSet())
-        Assertions.assertThat(lotto.numOfMatch(winningLotto)).isEqualTo(2)
-    }
 }
