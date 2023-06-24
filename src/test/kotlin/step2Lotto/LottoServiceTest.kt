@@ -52,4 +52,15 @@ class LottoServiceTest {
         statistics.count { it == LottoRank.FOURTH } shouldBe 1
         statistics.count { it == LottoRank.FIFTH } shouldBe 2
     }
+
+    @Test
+    fun `로또 수익률 계산`() {
+        val purchaseAmount = 14000
+
+        val statistics = listOf(
+            LottoRank.FIFTH
+        )
+
+        lottoService.getProfitRate(purchaseAmount, statistics) shouldBe 0.35
+    }
 }
