@@ -9,7 +9,7 @@ class LottoStatisticsTest : StringSpec({
     "총 수익률을 계산한다." {
         val lottos = Lottos(
             mutableListOf(
-                LottoNumbers(
+                Lotto(
                     listOf(
                         LottoNumber(1),
                         LottoNumber(2),
@@ -19,7 +19,7 @@ class LottoStatisticsTest : StringSpec({
                         LottoNumber(6)
                     )
                 ),
-                LottoNumbers(
+                Lotto(
                     listOf(
                         LottoNumber(11),
                         LottoNumber(12),
@@ -29,7 +29,7 @@ class LottoStatisticsTest : StringSpec({
                         LottoNumber(16)
                     )
                 ),
-                LottoNumbers(
+                Lotto(
                     listOf(
                         LottoNumber(21),
                         LottoNumber(22),
@@ -50,7 +50,7 @@ class LottoStatisticsTest : StringSpec({
             LottoNumber(5),
             LottoNumber(6)
         )
-        val lastWinnerNumbers = LottoNumbers(lottoNumbers)
+        val lastWinnerNumbers = Lotto(lottoNumbers)
         val bonusBall = LottoNumber(7)
 
         val winnerNumber = WinningNumber(lastWinnerNumbers, bonusBall)

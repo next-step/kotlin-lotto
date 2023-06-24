@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumbers(
+class Lotto(
     val lottoNumbers: List<LottoNumber>
 ) {
     init {
@@ -31,7 +31,7 @@ class LottoNumbers(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as LottoNumbers
+        other as Lotto
 
         if (lottoNumbers != other.lottoNumbers) return false
 

@@ -12,12 +12,12 @@ class LottoGenerator {
         return lottoNumbers.map { LottoNumber(it) }
     }
 
-    fun generateLottos(count: Int, manualLottos: List<LottoNumbers>): Lottos {
-        val lottos = mutableListOf<LottoNumbers>()
-        lottos.addAll(manualLottos)
-        repeat(count - manualLottos.size) {
-            val lottoNumbers = LottoNumbers(generateLottoNumbers())
-            lottos.add(lottoNumbers)
+    fun generateLottos(count: Int, manualLottos: Lottos): Lottos {
+        val lottos = mutableListOf<Lotto>()
+        lottos.addAll(manualLottos.lottoNumbers)
+        repeat(count - manualLottos.lottoNumbers.size) {
+            val lotto = Lotto(generateLottoNumbers())
+            lottos.add(lotto)
         }
         return Lottos(lottos)
     }

@@ -1,5 +1,5 @@
 package lotto.domain
 
 data class Lottos(
-    val lottoNumbers: List<LottoNumbers>
+    val lottoNumbers: List<Lotto>
 )

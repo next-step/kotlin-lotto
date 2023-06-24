@@ -6,7 +6,7 @@ import io.kotest.matchers.shouldBe
 class RankTest : StringSpec({
     val lottos = Lottos(
         mutableListOf(
-            LottoNumbers(
+            Lotto(
                 listOf(
                     LottoNumber(1),
                     LottoNumber(2),
@@ -28,7 +28,7 @@ class RankTest : StringSpec({
             LottoNumber(5),
             LottoNumber(11)
         )
-        val lastWinnerNumbers = LottoNumbers(lottoNumbers)
+        val lastWinnerNumbers = Lotto(lottoNumbers)
         val bonusBall = LottoNumber(7)
 
         val winnerNumber = WinningNumber(lastWinnerNumbers, bonusBall)
@@ -55,7 +55,7 @@ class RankTest : StringSpec({
             LottoNumber(5),
             LottoNumber(7)
         )
-        val lastWinnerNumbers = LottoNumbers(lottoNumbers)
+        val lastWinnerNumbers = Lotto(lottoNumbers)
         val bonusBall = LottoNumber(6)
 
         val winnerNumber = WinningNumber(lastWinnerNumbers, bonusBall)
@@ -82,7 +82,7 @@ class RankTest : StringSpec({
             LottoNumber(5),
             LottoNumber(7)
         )
-        val lastWinnerNumbers = LottoNumbers(lottoNumbers)
+        val lastWinnerNumbers = Lotto(lottoNumbers)
         val bonusBall = LottoNumber(10)
 
         val winnerNumber = WinningNumber(lastWinnerNumbers, bonusBall)
