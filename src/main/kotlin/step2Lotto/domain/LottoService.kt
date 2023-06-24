@@ -1,7 +1,6 @@
 package step2Lotto.domain
 
 import step2Lotto.domain.dto.StatisticsRequest
-import step2Lotto.domain.dto.StatisticsResponse
 
 class LottoService(
     private val lottoGenerator: LottoGenerator
@@ -14,25 +13,17 @@ class LottoService(
         return List(lottoTicketQuantity) { lottoGenerator.execute() }
     }
 
-    fun getStatistics(req: StatisticsRequest): StatisticsResponse {
-        val lottoStatistics = mutableListOf<LottoRank>()
-
-        req.lottoTickets.forEach {
-            lottoStatistics.add(
-                getLottoRank(it, req.winningNumber) ?: return@forEach
-            )
-        }
-
-        return StatisticsResponse(lottoStatistics)
+    fun getStatistics(req: StatisticsRequest): List<LottoRank> {
+        return req.lottoTickets.map { getLottoRank(it, req.winningNumber) }
     }
 
-    private fun getLottoRank(lotto: Lotto, winningNumber: Lotto): LottoRank? {
+    private fun getLottoRank(lotto: Lotto, winningNumber: Lotto): LottoRank {
         return when (lotto.numbers.intersect(winningNumber.numbers.toSet()).size) {
             3 -> LottoRank.FIFTH
             4 -> LottoRank.FOURTH
             5 -> LottoRank.THIRD
             6 -> LottoRank.FIRST
-            else -> null
+            else -> LottoRank.LOSE
         }
     }
 

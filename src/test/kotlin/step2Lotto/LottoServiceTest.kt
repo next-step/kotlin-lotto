@@ -34,6 +34,7 @@ class LottoServiceTest {
     @Test
     fun `로또 통계 계산`() {
         val lottoTickets = listOf(
+            Lotto(listOf(11, 12, 13, 14, 15, 16)),
             Lotto(listOf(1, 2, 3, 14, 15, 16)),
             Lotto(listOf(1, 2, 3, 14, 15, 16)),
             Lotto(listOf(1, 2, 3, 4, 15, 16)),
@@ -44,7 +45,7 @@ class LottoServiceTest {
         val winningNumber = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         val req = StatisticsRequest(lottoTickets, winningNumber)
-        val statistics = lottoService.getStatistics(req).lottoStatistics
+        val statistics = lottoService.getStatistics(req)
 
         statistics.count { it == LottoRank.FIRST } shouldBe 1
         statistics.count { it == LottoRank.THIRD } shouldBe 1
