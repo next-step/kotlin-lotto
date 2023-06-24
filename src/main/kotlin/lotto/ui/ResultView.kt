@@ -27,11 +27,12 @@ class ResultView {
         println("당첨 통계")
         println("---------")
 
-        for ((prizeLevel, count) in matchLottoNumber) {
-            val numberOfHits = prizeLevel.numberOfHit
-            val prizeMoney = prizeLevel.prizeMoney
-            println("${numberOfHits}개 일치 (${prizeMoney}원)- ${count}개")
-        }
+        PrizeLevel.values()
+            .filter { it != PrizeLevel.NONE }
+            .forEach { prizeLevel ->
+                val count = matchLottoNumber.getValue(prizeLevel)
+                println("${prizeLevel.numberOfHit}개 일치 (${prizeLevel.prizeMoney}원)- ${count}개")
+            }
     }
 
     fun printYield(yield: Double) {

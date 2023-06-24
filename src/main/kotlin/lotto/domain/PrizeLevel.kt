@@ -13,18 +13,11 @@ enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int) {
         }
 
         fun countPrizeLevels(prizeLevels: List<PrizeLevel>): Map<PrizeLevel, Int> {
-            val PrizeLeveMap = values()
-                .filter { it != NONE }
-                .associateWith { 0 }
-                .toMutableMap()
-
-            prizeLevels.forEach { it ->
-                if (it != NONE) {
-                    PrizeLeveMap[it] = PrizeLeveMap.getValue(it) + 1
-                }
-            }
-
-            return PrizeLeveMap.toMap()
+            return prizeLevels
+                .filter { it != PrizeLevel.NONE }
+                .groupingBy { it }
+                .eachCount()
+                .withDefault { 0 }
         }
     }
 }
