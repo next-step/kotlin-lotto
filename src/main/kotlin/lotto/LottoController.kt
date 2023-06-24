@@ -4,6 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoAnalyzer
 import lotto.domain.LottoStatics
 import lotto.domain.LottoStore
+import lotto.domain.WinLotto
 import lotto.view.ConsoleInputView
 import lotto.view.ConsoleResultView
 import lotto.view.InputView
@@ -19,7 +20,8 @@ fun main() {
     consoleResultView.printLottosPickedNumbers(lottos)
 
     val winningNumbers: List<Int> = inputView.getWinningNumbers()
-    val winLotto = Lotto(winningNumbers)
+    val bonusNumber = inputView.getBonusNumber()
+    val winLotto = WinLotto.create(winningNumbers, bonusNumber)
 
     val lottoAnalyzer = LottoAnalyzer(winLotto, lottoStore.lottoPrice)
     val lottoStatics: LottoStatics = lottoAnalyzer.createLottoStatics(lottos)

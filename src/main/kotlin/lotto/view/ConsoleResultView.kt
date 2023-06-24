@@ -5,7 +5,7 @@ import lotto.domain.LottoStatics
 
 class ConsoleResultView : ResultView {
     override fun printLottosPickedNumbers(lottos: List<Lotto>) {
-        lottos.forEach { lotto -> println(lotto.pickedNumbers) }
+        lottos.forEach { lotto -> println(lotto.numbers) }
     }
 
     override fun printCountOfPurchasedLotto(countOfLotto: Int) {

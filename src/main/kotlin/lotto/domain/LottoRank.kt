@@ -11,10 +11,12 @@ enum class LottoRank(val displayName: String, val countOfMatch: Int, val winning
     MISS_WITH_ZERO_MATCH("낙첨", 0, 0);
 
     companion object {
-        fun valueOf(countOfMatch: Int): LottoRank? {
-            return values().find {
-                it.countOfMatch == countOfMatch
-            } ?: null
+        fun valueOf(countOfMatch: Int, isBonusNumberInLotto: Boolean): LottoRank? {
+            return when {
+                countOfMatch == SECOND.countOfMatch && isBonusNumberInLotto -> SECOND
+                countOfMatch == THIRD.countOfMatch && !isBonusNumberInLotto -> THIRD
+                else -> values().find { it.countOfMatch == countOfMatch }
+            }
         }
 
         fun getMinCountOfMatchForWin(): Int {

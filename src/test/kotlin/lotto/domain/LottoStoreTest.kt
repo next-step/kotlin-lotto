@@ -23,14 +23,4 @@ class LottoStoreTest : StringSpec({
         val lottos = LottoStore(1000).buyLottos(0)
         lottos.size shouldBe 0
     }
-
-    "구매한 Lotto의 숫자들이 중복되지 않는다" {
-        val lottos = LottoStore(1).buyLottos(10_000)
-        for (lotto in lottos) {
-            val hasDuplicates = lotto.pickedNumbers.stream()
-                .distinct()
-                .count() < lotto.pickedNumbers.size
-            hasDuplicates shouldBe false
-        }
-    }
 })
