@@ -1,6 +1,7 @@
 package step2Lotto
 
 import step2Lotto.controller.LottoController
+import step2Lotto.domain.dto.ProfitRateRequest
 import step2Lotto.domain.dto.StatisticsRequest
 
 fun main() {
@@ -15,5 +16,7 @@ fun main() {
     )
 
     lottoController.showLottoStatistics(lottoStatistics)
-    lottoController.showProfitRate(purchaseAmount, lottoStatistics)
+    lottoController.showProfitRate(
+        ProfitRateRequest(purchaseAmount, lottoStatistics)
+    )
 }

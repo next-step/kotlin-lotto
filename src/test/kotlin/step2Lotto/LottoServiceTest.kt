@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import step2Lotto.domain.LottoService
 import step2Lotto.domain.dto.Lotto
 import step2Lotto.domain.dto.LottoRank
+import step2Lotto.domain.dto.ProfitRateRequest
 import step2Lotto.domain.dto.StatisticsRequest
 
 class LottoServiceTest {
@@ -61,6 +62,6 @@ class LottoServiceTest {
             LottoRank.FIFTH
         )
 
-        lottoService.getProfitRate(purchaseAmount, statistics) shouldBe 0.36
+        lottoService.getProfitRate(ProfitRateRequest(purchaseAmount, statistics)) shouldBe 0.36
     }
 }

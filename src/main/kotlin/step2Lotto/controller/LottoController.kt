@@ -4,6 +4,7 @@ import step2Lotto.domain.AutoLottoGenerator
 import step2Lotto.domain.LottoService
 import step2Lotto.domain.dto.Lotto
 import step2Lotto.domain.dto.LottoRank
+import step2Lotto.domain.dto.ProfitRateRequest
 import step2Lotto.domain.dto.StatisticsRequest
 import step2Lotto.view.InputIO
 import step2Lotto.view.InputMessage
@@ -43,8 +44,8 @@ class LottoController {
         resultView.showLottoStatistics(statistics)
     }
 
-    fun showProfitRate(purchaseAmount: Int, statistics: List<LottoRank>) {
-        val profitRate = lottoService.getProfitRate(purchaseAmount, statistics)
+    fun showProfitRate(req: ProfitRateRequest) {
+        val profitRate = lottoService.getProfitRate(req)
         resultView.showProfitRate(profitRate)
     }
 }
