@@ -3,15 +3,13 @@ package lotto.controller
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoNumbers
-import lotto.domain.numberGenerator.FixedLottoLottoNumberGenerator
-import lotto.domain.numberGenerator.RandomLottoLottoNumberGenerator
+import lotto.domain.numberGenerator.FixedLottoNumberGenerator
+import lotto.domain.numberGenerator.RandomLottoNumberGenerator
 
 class LottoFactoryTest : BehaviorSpec({
 
     Given("수동으로 로또를 발급 받을때") {
-        val lottoFactory = LottoFactory(RandomLottoLottoNumberGenerator())
         val manualLottoCount = 2
-        val inputMoney = 5000
         val manualLottoNumbers = listOf(
             listOf(1, 2, 3, 4, 5, 6),
             listOf(7, 8, 9, 10, 11, 12)
@@ -19,7 +17,7 @@ class LottoFactoryTest : BehaviorSpec({
 
         When("입력 받은 번호로 수동 로또 번호를 생성할 때") {
             val manualLottos = manualLottoNumbers.map { inputNumbers ->
-                val numberGenerator = FixedLottoLottoNumberGenerator(inputNumbers)
+                val numberGenerator = FixedLottoNumberGenerator(inputNumbers)
                 LottoNumbers(numberGenerator.generateNumbers())
             }
 

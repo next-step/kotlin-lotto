@@ -2,17 +2,18 @@ package lotto.controller
 
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
+import lotto.domain.numberGenerator.FixedLottoNumberGenerator
 
 class LottoShop(private val lottoFactory: LottoFactory) {
 
-    fun purchaseLottos(manualLottoNumbers: List<LottoNumbers>, money: Int): Lottos {
-        val manualLottos = Lottos(manualLottoNumbers)
-        val randomLottoCount = calculateRandomLottoCount(money, manualLottoNumbers.size)
-        val randomLottos = lottoFactory.createRandomLottos(randomLottoCount)
-        return manualLottos + randomLottos
-    }
+    fun purchaseLottos(ticket: LottoTicket): Lottos {
+        val manualLottos = ticket.manualLottoNumbers.map {
+            val numberGenerator = FixedLottoNumberGenerator(it)
+            LottoNumbers(numberGenerator.generateNumbers())
+        }
 
-    private fun calculateRandomLottoCount(input: Int, manualLottoCount: Int): Int {
-        return input / LottoFactory.PER_LOTTO_PRICE - manualLottoCount
+        val randomLottos = lottoFactory.createRandomLottos(ticket.numberOfRandomLottos)
+
+        return Lottos(manualLottos) + randomLottos
     }
 }
