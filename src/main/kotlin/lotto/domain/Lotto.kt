@@ -1,3 +1,3 @@
 package lotto.domain
 
-class Lotto(val lottoNumbers: List<Int>)
+class Lotto(val lottoNumbers: LottoNumbers)
