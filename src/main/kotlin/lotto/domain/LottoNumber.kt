@@ -25,12 +25,13 @@ data class LottoNumber(private val value: Int) : Comparable<LottoNumber> {
     }
 
     private fun isValid(number: Int) {
-        require(number in LOWER_LIMIT..UPPER_LIMIT)
+        require(number in VALID_RANGE)
     }
 
 
     companion object {
         const val LOWER_LIMIT = 1
         const val UPPER_LIMIT = 45
+        val VALID_RANGE = 1..45
     }
 }

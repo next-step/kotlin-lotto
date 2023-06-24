@@ -17,11 +17,11 @@ class Lotto(
     }
 
     private fun isValid(numList: List<LottoNumber>) {
-        require(numList.toSet().size == NUM_OF_LOTTO)
+        require(numList.toSet().size == COUNT_OF_LOTTO_NUMBER)
     }
 
     companion object {
         const val PRICE = 1000
-        const val NUM_OF_LOTTO = 6
+        const val COUNT_OF_LOTTO_NUMBER = 6
     }
 }
