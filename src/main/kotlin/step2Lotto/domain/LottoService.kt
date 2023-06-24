@@ -14,7 +14,7 @@ class LottoService(
     }
 
     fun purchaseLottoTickets(lottoTicketQuantity: Int): List<Lotto> {
-        return List(lottoTicketQuantity) { lottoGenerator.execute() }
+        return List(lottoTicketQuantity) { lottoGenerator.createLotto() }
     }
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {

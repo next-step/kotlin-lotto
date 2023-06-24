@@ -3,11 +3,17 @@ package step2Lotto.domain
 import step2Lotto.domain.dto.Lotto
 
 interface LottoGenerator {
-    fun execute(): Lotto
+    fun createLotto(): Lotto
 }
 
 class AutoLottoGenerator : LottoGenerator {
-    override fun execute(): Lotto {
-        return Lotto(LottoNumber.NUMBERS.shuffled().subList(0, 6).sorted())
+    override fun createLotto(): Lotto {
+        return Lotto(getRandomLottoNumbers())
+    }
+
+    private fun getRandomLottoNumbers(): List<Int> {
+        return LottoNumber.NUMBERS.shuffled()
+            .subList(0, 6)
+            .sorted()
     }
 }
