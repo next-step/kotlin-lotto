@@ -3,6 +3,7 @@ package step2Lotto.domain
 import step2Lotto.domain.dto.Lotto
 import step2Lotto.domain.dto.LottoRank
 import step2Lotto.domain.dto.StatisticsRequest
+import kotlin.math.round
 
 class LottoService(
     private val lottoGenerator: LottoGenerator
@@ -27,6 +28,12 @@ class LottoService(
             6 -> LottoRank.FIRST
             else -> LottoRank.LOSE
         }
+    }
+
+    fun getProfitRate(purchaseAmount: Int, statistics: List<LottoRank>): Double {
+        val totalPrize = statistics.sumOf { it.prizeMoney }.toDouble()
+        val profitRate = totalPrize.div(purchaseAmount.toDouble())
+        return round(profitRate * 100) / 100
     }
 
     companion object {

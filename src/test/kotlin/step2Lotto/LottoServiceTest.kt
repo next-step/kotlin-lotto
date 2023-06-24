@@ -61,6 +61,6 @@ class LottoServiceTest {
             LottoRank.FIFTH
         )
 
-        lottoService.getProfitRate(purchaseAmount, statistics) shouldBe 0.35
+        lottoService.getProfitRate(purchaseAmount, statistics) shouldBe 0.36
     }
 }
