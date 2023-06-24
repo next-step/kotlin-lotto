@@ -1,5 +1,7 @@
 package step2Lotto.controller
 
+import step2Lotto.domain.AutoLottoGenerator
+import step2Lotto.domain.Lotto
 import step2Lotto.domain.LottoService
 import step2Lotto.view.InputIO
 import step2Lotto.view.InputMessage
@@ -9,7 +11,7 @@ import step2Lotto.view.ResultView
 class LottoController {
     private val inputIO = InputIO()
     private val inputView = InputView()
-    private val lottoService = LottoService()
+    private val lottoService = LottoService(AutoLottoGenerator())
     private val resultView = ResultView()
 
     fun inputPurchaseAmount(): Int {

@@ -6,7 +6,7 @@ import step2Lotto.domain.Lotto
 import step2Lotto.domain.LottoService
 
 class LottoServiceTest {
-    private val lottoService = LottoService(LottoGanerator())
+    private val lottoService = LottoService(FixedLottoGenerator())
 
     @Test
     fun `구매 금액에 따른 로또를 몇장 구매할 수 있는지 계산한다`() {
