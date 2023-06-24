@@ -10,7 +10,7 @@ class ScoreTest {
     internal fun `동일한 개수에 등수가 결정되고 그에 따른 수익률이 계산된다`(winningNums: String, bonus: Int, result: Float) {
         val winningTicket = WinningTicket(Lotto(winningNums.split(",").map { LottoNumber(it.toInt()) }), bonus)
         val testLotto = Tickets(1, listOf(), TestNumGenerator())
-        val score = winningTicket.score(testLotto)
+        val score = testLotto.score(winningTicket)
 
         score.calculateRateOfReturn(10000) shouldBe result
     }

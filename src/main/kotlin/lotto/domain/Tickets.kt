@@ -12,4 +12,15 @@ class Tickets(lottoCount: Int, manualLotto: List<Lotto>, private val numCreator:
     private fun getLottoNumber(): List<LottoNumber> {
         return numCreator.getNums()
     }
+
+    fun score(winningTicket: WinningTicket): Score {
+        return Score(
+            tickets.map {
+                Rank.getValue(
+                    winningTicket.winningLotto.getSameCount(it),
+                    it.contains(winningTicket.bonus)
+                )
+            }
+        )
+    }
 }

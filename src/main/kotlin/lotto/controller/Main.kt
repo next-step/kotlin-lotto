@@ -17,7 +17,7 @@ fun main() {
     val lastLottoNums = InputView.getWinningLottoNums()
     val bonusNum = InputView.getBonusNum()
     val winningTicket = WinningTicket(lastLottoNums, bonusNum)
-    val score = winningTicket.score(tickets)
+    val score = tickets.score(winningTicket)
     val rate = score.calculateRateOfReturn(money)
     ResultView.printResult(score, rate)
 }
