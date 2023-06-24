@@ -17,7 +17,6 @@ class LottoStatisticsTest : StringSpec({
         LottoNumber(6)
     )
 
-
     "lottos를 분석하고 RankFactory를 반환해야 함" {
         val result = lottoStatistics.analyze(lottos, winningNumber)
         result should {
