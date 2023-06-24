@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoResult(
-    private val winningLotto: Lotto,
+    private val winningLotto: WinningLotto,
     private val lottos: List<Lotto>
 ) {
     private val resultMap = mutableMapOf<LottoRank?, Int>()
@@ -12,6 +12,7 @@ class LottoResult(
         setReturn(getTotalProfit())
     }
 
+    //TODO : 여기서 표현하지 말고 결과를 전달해서 view에서 출력하도록 하자
     override fun toString(): String {
         var result = ""
         LottoRank.ranks().forEach {
@@ -25,8 +26,7 @@ class LottoResult(
 
     private fun setResultMap() {
         lottos.forEach {
-            val numOfMatch = it.numOfMatch(winningLotto)
-            val rank = LottoRank.getRankByNumOfMatch(numOfMatch)
+            val rank = winningLotto.getRankOfLotto(it)
             resultMap[rank] = resultMap.getOrDefault(rank, 0) + 1
         }
     }

@@ -1,7 +1,7 @@
 package lotto.domain
 
-class Lotto(
-    private val lottoNumbers: Set<LottoNumber>
+open class Lotto(
+    val lottoNumbers: Set<LottoNumber>
 ) {
 
     init {
@@ -10,10 +10,6 @@ class Lotto(
 
     override fun toString(): String {
         return lottoNumbers.sorted().toString()
-    }
-
-    fun numOfMatch(winningLotto: Lotto): Int {
-        return lottoNumbers.intersect(winningLotto.lottoNumbers).count()
     }
 
     private fun isValid(nums: Set<LottoNumber>) {

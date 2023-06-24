@@ -2,7 +2,7 @@ package lotto.domain
 
 enum class LottoRank(
     val rankName: String,
-    val numOfMatch: Int?,
+    val numOfMatch: Int,
     val winningMoney: Int
 ) {
     FIRST("1등", 6, 2000000000),
@@ -13,7 +13,7 @@ enum class LottoRank(
     companion object {
         const val DEFAULT_MONEY = 0
 
-        fun getRankByNumOfMatch(numOfMatch: Int): LottoRank? {
+        fun rankOfMatchedNum(numOfMatch: Int): LottoRank? {
             return values().find { it.numOfMatch == numOfMatch }
         }
 
