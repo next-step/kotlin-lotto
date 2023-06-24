@@ -2,6 +2,7 @@ package step2Lotto.controller
 
 import step2Lotto.domain.AutoLottoGenerator
 import step2Lotto.domain.LottoService
+import step2Lotto.domain.LottoStore
 import step2Lotto.domain.dto.Lotto
 import step2Lotto.domain.dto.LottoRank
 import step2Lotto.domain.dto.ProfitRateRequest
@@ -14,7 +15,8 @@ import step2Lotto.view.ResultView
 class LottoController {
     private val inputIO = InputIO()
     private val inputView = InputView()
-    private val lottoService = LottoService(AutoLottoGenerator())
+    private val lottoService = LottoService()
+    private val lottoStore = LottoStore(AutoLottoGenerator())
     private val resultView = ResultView()
 
     fun inputPurchaseAmount(): Int {
@@ -23,10 +25,8 @@ class LottoController {
     }
 
     fun purchaseLottoTickets(purchaseAmount: Int): List<Lotto> {
-        val lottoTicketQuantity = lottoService.getLottoTicketQuantity(purchaseAmount)
-        resultView.showLottoTicketQuantity(lottoTicketQuantity)
-
-        val lottoTickets = lottoService.purchaseLottoTickets(lottoTicketQuantity)
+        val lottoTickets = lottoStore.purchaseLottoTickets(purchaseAmount)
+        resultView.showLottoTicketQuantity(lottoTickets.size)
         resultView.showLottoTickets(lottoTickets)
         return lottoTickets
     }

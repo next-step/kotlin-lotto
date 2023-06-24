@@ -6,16 +6,7 @@ import step2Lotto.domain.dto.ProfitRateRequest
 import step2Lotto.domain.dto.StatisticsRequest
 import kotlin.math.round
 
-class LottoService(
-    private val lottoGenerator: LottoGenerator
-) {
-    fun getLottoTicketQuantity(purchaseAmount: Int): Int {
-        return purchaseAmount / LOTTO_PRICE
-    }
-
-    fun purchaseLottoTickets(lottoTicketQuantity: Int): List<Lotto> {
-        return List(lottoTicketQuantity) { lottoGenerator.createLotto() }
-    }
+class LottoService {
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
         return req.lottoTickets.map { getLottoRank(it, req.winningNumber) }
@@ -35,9 +26,5 @@ class LottoService(
         val totalPrize = req.statistics.sumOf { it.prizeMoney }.toDouble()
         val profitRate = totalPrize.div(req.purchaseAmount.toDouble())
         return round(profitRate * 100) / 100
-    }
-
-    companion object {
-        private const val LOTTO_PRICE = 1000
     }
 }
