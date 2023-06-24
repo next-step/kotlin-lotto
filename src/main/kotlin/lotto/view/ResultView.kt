@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Rank
+import lotto.domain.Score
 import lotto.domain.Tickets
 import java.text.DecimalFormat
 
@@ -16,7 +17,7 @@ object ResultView {
         tickets.tickets.forEach { println(it.numbers) }
     }
 
-    fun printResult(score: List<Rank>, rate: Float) {
+    fun printResult(score: Score, rate: Float) {
         println(RESULT_STRING)
         Rank.values()
             .filter { it != Rank.NONE }
@@ -24,7 +25,7 @@ object ResultView {
             .forEach { rank ->
                 print("${rank.count}개 일치")
                 if (rank == Rank.SECOND) print(", 보너스 볼 일치")
-                println("(${rank.reward}원) - ${score.count { score -> score == rank }}개")
+                println("(${rank.reward}원) - ${score.score.count { score -> score == rank }}개")
             }
 
         print("총 수익률은 ${DecimalFormat("#.##").format(rate)}입니다.")

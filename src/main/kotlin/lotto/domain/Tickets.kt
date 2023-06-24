@@ -9,7 +9,7 @@ class Tickets(lottoCount: Int, manualLotto: List<Lotto>, private val numCreator:
         tickets = manualLotto + autoLottos
     }
 
-    private fun getLottoNumber(): List<Int> {
+    private fun getLottoNumber(): List<LottoNumber> {
         return numCreator.getNums()
     }
 }

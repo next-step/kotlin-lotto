@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 
 private const val MONEY_STRING = "구입금액을 입력해 주세요."
 
@@ -28,12 +29,12 @@ object InputView {
             return listOf()
         }
         println(MANUAL_LOTTO_STRING)
-        return List(num) { Lotto(readln().split(",").map { it.trim().toInt() }) }
+        return List(num) { Lotto(readln().split(",").map { LottoNumber(it.trim().toInt()) }) }
     }
 
     fun getWinningLottoNums(): Lotto {
         println(LAST_NUM_STRING)
-        return Lotto(readln().split(",").map { it.trim().toInt() })
+        return Lotto(readln().split(",").map { LottoNumber(it.trim().toInt()) })
     }
 
     fun getBonusNum(): Int {
