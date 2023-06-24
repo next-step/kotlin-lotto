@@ -106,4 +106,12 @@ object ConsoleView : InputView, OutputView {
     }
 
     private fun createMatchingDescriptionOf(prize: Prize) = "${prize.matchCount}개 일치${if (prize == Prize.MATCH_5_BONUS) ", 보너스 볼 일치" else ""}"
+    fun showTerminationMessage(message: String?) {
+        println("=======================")
+        if (!message.isNullOrBlank()) {
+            println("메시지 : $message")
+        }
+        println("게임을 종료합니다.")
+        println("=======================")
+    }
 }
