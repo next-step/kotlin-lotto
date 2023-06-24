@@ -5,14 +5,13 @@ class WinningLotto(
     private val bonusNumber: LottoNumber
 ) : Lotto(winningNumbers) {
 
-    //TODO : bonusNum 활용해야 함
+    private var numOfMatch = 0
+    private var bonusMatch = false
+
     fun rankOfLotto(lotto: Lotto): LottoRank? {
-        val numOfMatch = numOfMatch(lotto)
-        val rank = LottoRank.of(numOfMatch, true)
-        return rank
+        numOfMatch = winningNumbers.intersect(lotto.lottoNumbers).count()
+        bonusMatch = lotto.lottoNumbers.contains(bonusNumber)
+        return LottoRank.of(numOfMatch, bonusMatch)
     }
 
-    private fun numOfMatch(lotto: Lotto): Int {
-        return winningNumbers.intersect(lotto.lottoNumbers).count()
-    }
 }
