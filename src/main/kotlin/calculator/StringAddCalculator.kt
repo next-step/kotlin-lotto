@@ -7,7 +7,7 @@ class StringAddCalculator {
             return ZERO
         }
 
-        val operandCollection = OperandCollection(split(operands))
+        val operandCollection = OperandCollection.of(split(operands))
 
         return operandCollection.add()
     }
