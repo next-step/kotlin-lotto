@@ -5,10 +5,13 @@ import lotto.domain.LottoPurchaseMachine
 import lotto.domain.LottoResult
 import lotto.domain.LottoWinningNumbers
 import lotto.domain.PurchaseInfo
+import lotto.domain.RandomLottoFactory
 import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController {
+    private val lottoPurchaseMachine = LottoPurchaseMachine { RandomLottoFactory.generate() }
+
     fun execute() {
         val purchaseInfo = getPurchaseInfo()
         printPurchaseInfo(purchaseInfo)
@@ -32,7 +35,7 @@ class LottoController {
         OutputView.printNumberOfLotto(purchaseInfo.manualLottoCount(), purchaseInfo.autoLottoCount())
     }
 
-    private fun getLottoBundle(purchaseInfo: PurchaseInfo) = LottoPurchaseMachine.getLottoBundle(purchaseInfo)
+    private fun getLottoBundle(purchaseInfo: PurchaseInfo) = lottoPurchaseMachine.getLottoBundle(purchaseInfo)
 
     private fun printLottoBundle(lottoBundle: LottoBundle) {
         OutputView.printLottos(lottoBundle.lottos)

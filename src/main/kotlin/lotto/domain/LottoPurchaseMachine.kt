@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoPurchaseMachine {
+class LottoPurchaseMachine(private val lottoGenerator: () -> Lotto) {
     fun getLottoBundle(purchaseInfo: PurchaseInfo): LottoBundle {
         val autoLottoBundle = generateAutoLottoBundle(purchaseInfo.autoLottoCount())
         val manualLottoBundle = generateManualLottoBundle(purchaseInfo.manualLottos)
@@ -8,7 +8,7 @@ object LottoPurchaseMachine {
     }
 
     private fun generateAutoLottoBundle(count: Int): LottoBundle {
-        val result = (1..count).map { RandomLottoFactory.generate() }
+        val result = (1..count).map { lottoGenerator() }
         return LottoBundle(result)
     }
 

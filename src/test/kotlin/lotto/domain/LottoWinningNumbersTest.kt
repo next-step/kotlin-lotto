@@ -46,6 +46,5 @@ class LottoWinningNumbersTest : StringSpec({
             val lottoRank = lottoWinningNumbers.getRank(lotto)
             lottoRank shouldBe rank
         }
-
     }
 })

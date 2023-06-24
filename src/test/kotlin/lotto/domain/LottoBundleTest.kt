@@ -22,7 +22,6 @@ class LottoBundleTest : BehaviorSpec({
                     LottoRank.FIFTH
                 )
             }
-
         }
     }
 })
