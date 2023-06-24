@@ -6,5 +6,5 @@ fun main() {
     val lottoController = LottoController()
 
     val purchaseAmount = lottoController.inputPurchaseAmount()
-    lottoController.purchaseLottoTickets(purchaseAmount)
+    val lottoTickets = lottoController.purchaseLottoTickets(purchaseAmount)
 }
