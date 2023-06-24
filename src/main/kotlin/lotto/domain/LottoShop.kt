@@ -16,10 +16,15 @@ object LottoShop {
     }
 
     private fun createManualLottos(manualLottoNumbers: List<LottoNumbers>): Lottos =
-        Lottos.from(manualLottoNumbers.map { Lotto(it) })
+        LottoType.MANUAL.generate(
+            lottoQuantity = manualLottoNumbers.lottoQuantity(),
+            lottoNumbers = manualLottoNumbers,
+        )
 
     private fun createAutoLottos(money: Money): Lottos =
-        Lottos.random(getLottoQuantity(money))
+        LottoType.AUTO.generate(
+            lottoQuantity = getLottoQuantity(money),
+        )
 
     private fun getLottoQuantity(money: Money): LottoQuantity {
         return LottoQuantity(money.value / Lotto.PRICE)
