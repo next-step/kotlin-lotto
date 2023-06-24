@@ -27,4 +27,9 @@ class LottoController {
         resultView.showLottoTickets(lottoTickets)
         return lottoTickets
     }
+
+    fun inputWinningLotto(): List<String> {
+        inputView.show(InputMessage.WINNING_LOTTO)
+        return inputIO.inputWinningNumber()
+    }
 }
