@@ -10,7 +10,7 @@ object FakeGenerator {
         return Lotto(lottoNumbers)
     }
 
-    private fun lottoNumbers(vararg number: Int): List<LottoNumber> {
+    fun lottoNumbers(vararg number: Int): List<LottoNumber> {
         return number.toList().map { LottoNumber(it) }
     }
 

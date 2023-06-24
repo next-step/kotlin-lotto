@@ -2,41 +2,56 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPurchaseMachine
+import lotto.domain.LottoResult
 import lotto.domain.LottoWinningNumbers
+import lotto.domain.PurchaseInfo
 import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController {
     fun execute() {
-        val lottos = getLottos()
-        OutputView.printLottos(lottos)
+        val purchaseInfo = getPurchaseInfo()
+        printPurchaseInfo(purchaseInfo)
+        val lottos = getLottos(purchaseInfo)
+        printLottos(lottos)
 
         val lottoWinningNumbers = getLottoWinningNumbers()
         val lottoResult = lottoWinningNumbers.getLottoResult(lottos)
-        val lottoRankStatistic = lottoResult.getLottoRankStatistic()
-        val profitRate = lottoResult.getProfitRate(LottoPurchaseMachine.LOTTO_PRICE)
-        OutputView.printLottoRankStatics(lottoRankStatistic)
-        OutputView.printProfitRate(profitRate)
+        printLottoStatistics(lottoResult)
+        printLottoProfitRate(lottoResult, purchaseInfo)
     }
 
-    private fun getLottos(): List<Lotto> {
-        val purchaseAmount = InputView.getPurchaseAmount()
+    private fun getPurchaseInfo(): PurchaseInfo {
+        val paidPrice = InputView.getPaidPrice()
         val numberOfManualLotto = InputView.getNumberOfManualLotto()
         val manualLottos = InputView.getManualLottos(numberOfManualLotto)
-        val lottos = LottoPurchaseMachine.getLottos(purchaseAmount, manualLottos)
-        printNumberOfLotto(lottos.size, numberOfManualLotto)
-        return lottos
+        return PurchaseInfo(paidPrice, manualLottos)
     }
 
-    private fun printNumberOfLotto(totalNumberOfLotto: Int, manualNumberOfLotto: Int) {
-        val autoLottoCount = totalNumberOfLotto - manualNumberOfLotto
-        OutputView.printNumberOfLotto(manualNumberOfLotto, autoLottoCount)
+    private fun printPurchaseInfo(purchaseInfo: PurchaseInfo) {
+        OutputView.printNumberOfLotto(purchaseInfo.manualLottoCount(), purchaseInfo.autoLottoCount())
+    }
+
+    private fun getLottos(purchaseInfo: PurchaseInfo) = LottoPurchaseMachine.getLottos(purchaseInfo)
+
+    private fun printLottos(lottos: List<Lotto>) {
+        OutputView.printLottos(lottos)
     }
 
     private fun getLottoWinningNumbers(): LottoWinningNumbers {
         val winningNumbers = InputView.getWinningNumbers()
         val bonusNumber = InputView.getBonusNumber()
         return LottoWinningNumbers.of(winningNumbers, bonusNumber)
+    }
+
+    private fun printLottoStatistics(lottoResult: LottoResult) {
+        val lottoRankStatistic = lottoResult.getLottoRankStatistic()
+        OutputView.printLottoRankStatics(lottoRankStatistic)
+    }
+
+    private fun printLottoProfitRate(lottoResult: LottoResult, purchaseInfo: PurchaseInfo) {
+        val profitRate = lottoResult.getProfitRate(purchaseInfo.totalLottosPrice())
+        OutputView.printProfitRate(profitRate)
     }
 }
 

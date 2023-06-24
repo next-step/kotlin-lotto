@@ -1,35 +1,29 @@
 package lotto.domain
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.data.forAll
-import io.kotest.data.row
+import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
 import lotto.test.FakeGenerator
 
 class LottoPurchaseMachineTest : BehaviorSpec({
-    given("금액을 지불한다.") {
-        `when`("수동 로또 번호를 전달한다") {
-            then("남은 금액만큼의 자동로또를 생성한다.") {
-                forAll(
-                    row(6000, FakeGenerator.lottoNumbersOfLottos(2), 6),
-                    row(14500, FakeGenerator.lottoNumbersOfLottos(2), 14),
-                    row(0, FakeGenerator.lottoNumbersOfLottos(0), 0),
-                ) { purchasePrice, manualLottos, totalLottoCount ->
-                    val lottos = LottoPurchaseMachine.getLottos(purchasePrice, manualLottos)
-                    lottos.size shouldBe totalLottoCount
-                }
-            }
-        }
+    given("10000원을 전달한다.") {
+        val paidPrice = 10000
 
-        `when`("지불한 금액보다 더 높은 금액의 수동로또 번호를 전달한다.") {
-            then("예외가 발생한다.") {
-                val purchasePrice = 1000
-                val manualLottos = FakeGenerator.lottoNumbersOfLottos(3)
-                shouldThrow<IllegalArgumentException> {
-                    LottoPurchaseMachine.getLottos(purchasePrice, manualLottos)
-                }
+        `when`("2개의 수동 로또를 전달한다.") {
+            val manualLotto1 = FakeGenerator.lottoNumbers(1, 2, 3, 4, 5, 6)
+            val manualLotto2 = FakeGenerator.lottoNumbers(11, 12, 13, 14, 15, 16)
+            val manualLottos = listOf(manualLotto1, manualLotto2)
+            val purchaseInfo = PurchaseInfo(paidPrice, manualLottos)
+
+            then("2개의 수동 로또와 8개의 자동 로또를 생성한다.") {
+                val lottos = LottoPurchaseMachine.getLottos(purchaseInfo)
+
+                lottos.size shouldBe 10
+                lottos shouldContain Lotto(manualLotto1)
+                lottos shouldContain Lotto(manualLotto2)
+
             }
         }
     }
+
 })
