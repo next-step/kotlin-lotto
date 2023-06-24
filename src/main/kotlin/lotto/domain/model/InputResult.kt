@@ -1,3 +1,3 @@
 package lotto.domain.model
 
-data class InputResult(val lottos: List<Lotto>, val winningNumbers: List<Int>, val money: Int)
+data class InputResult(val lottos: Lottos, val selectedBalls: SelectedBalls, val money: Int)
