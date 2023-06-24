@@ -3,6 +3,7 @@ package step2Lotto
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import step2Lotto.domain.Lotto
+import step2Lotto.domain.LottoRank
 import step2Lotto.domain.LottoService
 
 class LottoServiceTest {
@@ -27,5 +28,28 @@ class LottoServiceTest {
         )
 
         lottoService.purchaseLottoTickets(lottoTicketQuantity) shouldBe lottoTickets
+    }
+
+    @Test
+    fun `로또 통계 계산`() {
+        val lottoTickets = listOf(
+            Lotto(listOf(1,2,3,14,15,16)),
+            Lotto(listOf(1,2,3,14,15,16)),
+            Lotto(listOf(1,2,3,4,15,16)),
+            Lotto(listOf(1,2,3,4,5,16)),
+            Lotto(listOf(1,2,3,4,5,6)),
+        )
+
+        val winningNumber = Lotto(listOf(1,2,3,4,5,6))
+
+        val statistics = listOf(
+            LottoRank.FIRST,
+            LottoRank.THIRD,
+            LottoRank.FOURTH,
+            LottoRank.FIFTH,
+            LottoRank.FIFTH,
+        )
+
+        lottoService.getStatistics(lottoTickets, winningNumber) shouldBe statistics
     }
 }
