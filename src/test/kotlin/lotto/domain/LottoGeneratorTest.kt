@@ -19,9 +19,9 @@ class LottoGeneratorTest : StringSpec({
         lottoNumbers.size shouldBe count
     }
 
-    "나눠진 수만큼 로또를 생성한다." {
+    "수동, 자동 로또를 개수만큼 생성한다." {
         val count = 12
-        val lottos = lottoGenerator.generateLottos(count)
+        val lottos = lottoGenerator.generateLottos(count, mutableListOf())
         lottos.lottoNumbers.size shouldBe 12
     }
 })

@@ -29,26 +29,45 @@ class LottoController(
 
     private fun inputPayment(): Int {
         OutputView.printEnterPayment()
-        return InputView.inputPayment()
+        return InputView.inputNumber()
     }
 
     private fun purchaseLottos(inputPayment: Int): Lottos {
+        val manualLottoCount = inputManualLottoCount()
         val lottoCount = lottoGenerator.getLottoCount(inputPayment)
-        OutputView.printPurchaseCount(lottoCount)
+        require(lottoCount >= manualLottoCount) { "수동 구매 로또 수가 구입 금액을 초과하였습니다." }
 
-        val lottos = lottoGenerator.generateLottos(lottoCount)
+        val manualLottos = generateManualLottos(manualLottoCount)
+
+        OutputView.printPurchaseCount(manualLottoCount, lottoCount)
+        val lottos = lottoGenerator.generateLottos(lottoCount, manualLottos)
         OutputView.printLottos(lottos)
         return lottos
     }
 
+    private fun inputManualLottoCount(): Int {
+        OutputView.printEnterManualLottoCount()
+        return InputView.inputNumber()
+    }
+
+    private fun generateManualLottos(manualLottoCount: Int): MutableList<LottoNumbers> {
+        OutputView.printEnterManualLottoNumbers()
+        val manualLottos = mutableListOf<LottoNumbers>()
+        repeat(manualLottoCount) {
+            val lottoNumbers = LottoNumbers(InputView.inputLottoNumbers())
+            manualLottos.add(lottoNumbers)
+        }
+        return manualLottos
+    }
+
     private fun inputWinningNumbersLastWeek(): LottoNumbers {
         OutputView.printWinningNumbersLastWeek()
-        return LottoNumbers(InputView.inputWinnerNumbers())
+        return LottoNumbers(InputView.inputLottoNumbers())
     }
 
     private fun inputBonusBall(): LottoNumber {
         OutputView.printBonusBall()
-        val inputBonusBall = InputView.inputBonusBall()
+        val inputBonusBall = InputView.inputNumber()
         return LottoNumber(inputBonusBall)
     }
 
