@@ -3,6 +3,7 @@ package step2Lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import step2Lotto.domain.dto.Lotto
 import step2Lotto.view.InputIO
 import java.lang.IllegalArgumentException
 
@@ -25,6 +26,6 @@ class InputDataTest {
     @Test
     fun `당첨 번호를 입력받는다`() {
         val winningNumber = inputIO.inputWinningNumber("1, 9, 10, 30, 31, 41")
-        winningNumber shouldBe listOf("1","9","10","30","31","41")
+        winningNumber shouldBe Lotto(listOf(1, 9, 10, 30, 31, 41))
     }
 }
