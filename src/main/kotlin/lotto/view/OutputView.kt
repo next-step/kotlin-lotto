@@ -5,8 +5,8 @@ import lotto.domain.WinResult
 import lotto.dto.WinStats
 
 object OutputView {
-    fun printPurchase(lottoTickets: LottoTickets) {
-        println("${lottoTickets.lottoTickets.size} 개를 구매했습니다.")
+    fun printPurchase(manualLottoCount: Int, lottoTickets: LottoTickets) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${lottoTickets.lottoTickets.size - manualLottoCount} 개를 구매했습니다.")
         lottoTickets.lottoTickets.forEach { println(it.lottoNumbers.toString()) }
     }
 
