@@ -1,6 +1,5 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 
 object InputView {
@@ -18,14 +17,14 @@ object InputView {
         return result
     }
 
-    fun getManualLottos(count: Int): List<Lotto> {
+    fun getManualLottos(count: Int): List<List<LottoNumber>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
         return List(count) { getManualLotto() }
     }
 
-    private fun getManualLotto(): Lotto {
+    private fun getManualLotto(): List<LottoNumber> {
         val input = readln()
-        return Lotto(parseLottoNumbers(input))
+        return parseLottoNumbers(input)
     }
 
     private fun parseLottoNumbers(input: String) = input.split(",").map { LottoNumber.of(it) }
