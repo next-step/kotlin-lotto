@@ -15,8 +15,7 @@ class LottoNumbersTest {
         Assertions.assertThat(
             LottoNumbers.generate()
                 .numbers
-                .size
-        ).isEqualTo(6)
+        ).hasSize(6)
     }
 
     @ParameterizedTest
