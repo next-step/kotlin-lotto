@@ -1,7 +1,7 @@
 package lotto.domain
 
 class LottoResult(
-    private val winningNums: List<LottoNumber>,
+    private val winningLotto: Lotto,
     private val lottos: List<Lotto>
 ) {
     private val resultMap = mutableMapOf<LottoRank?, Int>()
@@ -25,7 +25,7 @@ class LottoResult(
 
     private fun setResultMap() {
         lottos.forEach {
-            val numOfMatch = it.numOfMatch(winningNums)
+            val numOfMatch = it.numOfMatch(winningLotto)
             val rank = LottoRank.getRankByNumOfMatch(numOfMatch)
             resultMap[rank] = resultMap.getOrDefault(rank, 0) + 1
         }

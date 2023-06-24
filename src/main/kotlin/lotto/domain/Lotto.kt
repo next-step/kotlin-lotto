@@ -1,23 +1,23 @@
 package lotto.domain
 
 class Lotto(
-    private val numList: List<LottoNumber>
+    private val lottoNumbers: Set<LottoNumber>
 ) {
 
     init {
-        isValid(numList)
+        isValid(lottoNumbers)
     }
 
     override fun toString(): String {
-        return numList.sorted().toString()
+        return lottoNumbers.sorted().toString()
     }
 
-    fun numOfMatch(winningNums: List<LottoNumber>): Int {
-        return winningNums.intersect(numList.toSet()).count()
+    fun numOfMatch(winningLotto: Lotto): Int {
+        return lottoNumbers.intersect(winningLotto.lottoNumbers).count()
     }
 
-    private fun isValid(numList: List<LottoNumber>) {
-        require(numList.toSet().size == COUNT_OF_LOTTO_NUMBER)
+    private fun isValid(nums: Set<LottoNumber>) {
+        require(nums.size == COUNT_OF_LOTTO_NUMBER)
     }
 
     companion object {
