@@ -1,8 +1,8 @@
 package lotto.domain
 
 class WinningLotto(
-    val numbers: LottoNumbers = LottoNumbers.random(),
-    val bonusNumber: LottoNumber = LottoNumber.random(),
+    val numbers: LottoNumbers,
+    val bonusNumber: LottoNumber,
 ) {
     fun match(lotto: Lotto): LottoRank? {
         return LottoRank.of(

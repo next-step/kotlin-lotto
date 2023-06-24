@@ -21,9 +21,5 @@ value class LottoNumber(val value: Int) {
         fun all(): List<LottoNumber> {
             return ALL_LOTTO_NUMBERS
         }
-
-        fun random(): LottoNumber {
-            return all().shuffled().first()
-        }
     }
 }
