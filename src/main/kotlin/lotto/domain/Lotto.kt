@@ -5,13 +5,11 @@ class Lotto {
     var lotteryPapers: LotteryPapers = LotteryPapers()
         private set
 
-    fun buyLottoTicket(money: Int): Int {
-        validateInputMoneyCanBuyLottoTicket(money)
-        return calculateNumberOfLottoTicket(money)
-    }
+    private val lottoValidator = LottoValidator()
 
-    private fun validateInputMoneyCanBuyLottoTicket(money: Int) {
-        require(money >= 1000)
+    fun buyLottoTicket(money: Int): Int {
+        lottoValidator.validateInputMoneyCanBuyLottoTicket(money)
+        return calculateNumberOfLottoTicket(money)
     }
 
     private fun calculateNumberOfLottoTicket(money: Int): Int {
@@ -19,14 +17,8 @@ class Lotto {
     }
 
     fun generateLottoNumbers(numOfLottoPurchases: Int) {
-        validateNumOfLottoPurchases(numOfLottoPurchases)
-        for (i in 0 until numOfLottoPurchases) {
-            lotteryPapers.generateRandomLottoNumber()
-        }
-    }
-
-    private fun validateNumOfLottoPurchases(numOfLottoPurchases: Int) {
-        require(numOfLottoPurchases > 0)
+        lottoValidator.validateNumOfLottoPurchases(numOfLottoPurchases)
+        repeat(numOfLottoPurchases) { lotteryPapers.generateRandomLottoNumber() }
     }
 
     companion object {
