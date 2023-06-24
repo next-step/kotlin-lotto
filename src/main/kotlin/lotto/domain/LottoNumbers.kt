@@ -20,6 +20,9 @@ class LottoNumbers(
         }
     }
 
+    fun findIntersectCount(otherLottoNumbers: List<LottoNumber>) =
+        lottoNumbers.intersect(otherLottoNumbers.toSet()).count()
+
     fun contains(lottoNumber: LottoNumber): Boolean {
         return lottoNumber in lottoNumbers
     }

@@ -13,7 +13,7 @@ enum class Rank(
 
     fun getRank(lottos: Lottos, winningNumber: WinningNumber): Rank {
         count = lottos.lottoNumbers.count { lottoNumbers ->
-            val countOfIntersect = findIntersect(lottoNumbers, winningNumber)
+            val countOfIntersect = lottoNumbers.findIntersectCount(winningNumber.lastLottoNumbers.lottoNumbers)
             if (isCountOfIntersectFive(countOfIntersect)) {
                 hasBonusNumberIfSecond(winningNumber, lottoNumbers, countOfIntersect)
             } else {
@@ -22,9 +22,6 @@ enum class Rank(
         }
         return this
     }
-
-    private fun findIntersect(lottoNumbers: LottoNumbers, winningNumber: WinningNumber) =
-        lottoNumbers.lottoNumbers.intersect(winningNumber.lastLottoNumbers.lottoNumbers.toSet()).count()
 
     private fun isCountOfIntersectFive(countOfIntersect: Int) = countOfIntersect == 5
 
