@@ -21,7 +21,7 @@ class LottoNumbers(
     }
 
     fun contains(lottoNumber: LottoNumber): Boolean {
-        return lottoNumbers.contains(lottoNumber)
+        return lottoNumber in lottoNumbers
     }
 
     override fun equals(other: Any?): Boolean {
