@@ -12,7 +12,7 @@ class LottosSpec : DescribeSpec({
             it("로또 개수를 반환할 수 있다.") {
                 val lottos = lottos(Lotto(), Lotto(), Lotto())
 
-                lottos.size shouldBe 3
+                lottos.lottoQuantity.value shouldBe 3
             }
         }
     }
@@ -22,7 +22,7 @@ class LottosSpec : DescribeSpec({
             it("로또 비용을 반환할 수 있다.") {
                 val lottos = lottos(Lotto(), Lotto(), Lotto())
 
-                lottos.cost.value shouldBe 3000
+                lottos.totalCost.value shouldBe 3000
             }
         }
     }
@@ -100,7 +100,7 @@ class LottosSpec : DescribeSpec({
             it("로또 목록이 합쳐진다.") {
                 val lottos = lottos1 + lottos2
 
-                lottos.size shouldBe 4
+                lottos.lottoQuantity.value shouldBe 4
             }
         }
     }

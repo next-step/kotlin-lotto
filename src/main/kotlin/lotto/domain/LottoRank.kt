@@ -4,28 +4,41 @@ enum class LottoRank(
     val matchCount: Int,
     val isBonusNumberMatch: Boolean = false,
     val winningMoney: Int,
-    private val ignoreBonusNumberMatch: Boolean = true,
 ) {
-    FIRST(6, false, 2_000_000_000),
-    SECOND(5, true, 30_000_000, false),
-    THIRD(5, false, 1_500_000, false),
-    FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000),
+    FIRST(6, false, 2_000_000_000) {
+        override fun isMatch(matchCount: Int, isBonusNumberMatch: Boolean): Boolean {
+            return isMatchCountSame(matchCount)
+        }
+    },
+    SECOND(5, true, 30_000_000) {
+        override fun isMatch(matchCount: Int, isBonusNumberMatch: Boolean): Boolean {
+            return isMatchCountSame(matchCount) && isBonusNumberSame(isBonusNumberMatch)
+        }
+    },
+    THIRD(5, false, 1_500_000) {
+        override fun isMatch(matchCount: Int, isBonusNumberMatch: Boolean): Boolean {
+            return isMatchCountSame(matchCount) && isBonusNumberSame(isBonusNumberMatch)
+        }
+    },
+    FOURTH(4, false, 50_000) {
+        override fun isMatch(matchCount: Int, isBonusNumberMatch: Boolean): Boolean {
+            return isMatchCountSame(matchCount)
+        }
+    },
+    FIFTH(3, false, 5_000) {
+        override fun isMatch(matchCount: Int, isBonusNumberMatch: Boolean): Boolean {
+            return isMatchCountSame(matchCount)
+        }
+    },
     ;
+    protected abstract fun isMatch(matchCount: Int, isBonusNumberMatch: Boolean): Boolean
 
-    private fun isMatchCountSame(matchCount: Int): Boolean {
+    protected fun isMatchCountSame(matchCount: Int): Boolean {
         return this.matchCount == matchCount
     }
 
-    private fun isBonusNumberSame(isBonusNumberMatch: Boolean): Boolean {
-        if (ignoreBonusNumberMatch) {
-            return true
-        }
+    protected fun isBonusNumberSame(isBonusNumberMatch: Boolean): Boolean {
         return this.isBonusNumberMatch == isBonusNumberMatch
-    }
-
-    private fun isMatch(matchCount: Int, isBonusNumberMatch: Boolean): Boolean {
-        return isMatchCountSame(matchCount) && isBonusNumberSame(isBonusNumberMatch)
     }
 
     companion object {

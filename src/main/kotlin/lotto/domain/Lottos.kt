@@ -3,20 +3,20 @@ package lotto.domain
 class Lottos(
     val values: List<Lotto>,
 ) {
-    val size = values.size
-    val cost: Money = Money(size * Lotto.PRICE)
+    val lottoQuantity: LottoQuantity = LottoQuantity(values.size)
+    val totalCost: Money = Money(lottoQuantity.value * Lotto.PRICE)
 
     fun calculateResults(
         winningLotto: WinningLotto,
     ): LottosResult {
         val results = LottoRank.createMapWithLottoRankAndZero()
         values.forEach { lotto ->
-            val lottoRank = lotto.calculateResult(winningLotto) ?: return@forEach
+            val lottoRank = winningLotto.match(lotto) ?: return@forEach
             results[lottoRank] = results[lottoRank]?.plus(1) ?: 0
         }
 
         return LottosResult(
-            totalCost = cost,
+            totalCost = totalCost,
             winningResults = results.toMap(),
         )
     }
@@ -26,9 +26,9 @@ class Lottos(
     }
 
     companion object {
-        fun random(countOfLottos: Int): Lottos {
+        fun random(lottoQuantity: LottoQuantity): Lottos {
             return Lottos(
-                List(countOfLottos) { Lotto() },
+                List(lottoQuantity.value) { Lotto() },
             )
         }
 

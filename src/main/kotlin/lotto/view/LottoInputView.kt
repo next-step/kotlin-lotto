@@ -1,12 +1,11 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.LottoCount
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
-import lotto.domain.Lottos
+import lotto.domain.LottoQuantity
 import lotto.domain.Money
 import lotto.domain.WinningLotto
+import lotto.view.request.ManualLottosRequest
 
 object LottoInputView {
     private const val WINNING_LOTTO_DELIMITER = ","
@@ -15,18 +14,28 @@ object LottoInputView {
         return Money(readLineWithMessage("구입금액을 입력해 주세요.").trim().toInt())
     }
 
-    fun inputManualLottos(): Lottos {
+    fun inputManualLottoView(): ManualLottosRequest {
         val manualLottoCount = inputManualLottoCount()
-        println("수동으로 구매할 번호를 입력해 주세요.")
-        return Lottos(
-            (1..manualLottoCount.value).map {
-                Lotto(readln().toLottoNumbers())
-            },
+        if (manualLottoCount.value == 0) {
+            return ManualLottosRequest()
+        }
+
+        val manualLottoNumbers = inputManualLottoNumbers(manualLottoCount)
+        return ManualLottosRequest(
+            lottoQuantity = manualLottoCount,
+            lottoNumbers = manualLottoNumbers,
         )
     }
 
-    private fun inputManualLottoCount(): LottoCount {
-        return LottoCount(readLineWithMessage("수동으로 구매할 로또 수를 입력해 주세요.").trim().toInt())
+    private fun inputManualLottoCount(): LottoQuantity {
+        return LottoQuantity(readLineWithMessage("수동으로 구매할 로또 수를 입력해 주세요.").trim().toInt())
+    }
+
+    private fun inputManualLottoNumbers(manualLottoCount: LottoQuantity): List<LottoNumbers> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        return List(manualLottoCount.value) {
+            readln().toLottoNumbers()
+        }
     }
 
     fun inputWinningLotto(): WinningLotto {

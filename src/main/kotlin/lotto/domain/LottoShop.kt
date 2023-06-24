@@ -1,22 +1,36 @@
 package lotto.domain
 
+import lotto.domain.response.GeneratedLottosResponse
+
 object LottoShop {
     fun sellByMoneyWithManualLottos(
         money: Money,
-        manualLottos: Lottos = Lottos.random(getCountOfLottos(money)),
-    ): Lottos {
-        validateMoneyIsEnough(money, manualLottos)
+        manualLottoNumbers: List<LottoNumbers> = emptyList(),
+    ): GeneratedLottosResponse {
+        validateMoneyIsEnough(money, manualLottoNumbers.lottoQuantity())
 
-        return manualLottos + getAutoLottos(money - manualLottos.cost)
+        val manualLottos = createManualLottos(manualLottoNumbers)
+        val autoLottos = createAutoLottos(money - manualLottos.totalCost)
+
+        return GeneratedLottosResponse(manualLottos, autoLottos)
     }
 
-    private fun getAutoLottos(money: Money) = Lottos.random(getCountOfLottos(money))
+    private fun createManualLottos(manualLottoNumbers: List<LottoNumbers>): Lottos =
+        Lottos.from(manualLottoNumbers.map { Lotto(it) })
 
-    private fun getCountOfLottos(money: Money): Int {
-        return money.value / Lotto.PRICE
+    private fun createAutoLottos(money: Money): Lottos =
+        Lottos.random(getLottoQuantity(money))
+
+    private fun getLottoQuantity(money: Money): LottoQuantity {
+        return LottoQuantity(money.value / Lotto.PRICE)
     }
 
-    private fun validateMoneyIsEnough(money: Money, lottos: Lottos) {
-        require(money >= lottos.cost) { "금액이 부족합니다." }
+    private fun validateMoneyIsEnough(money: Money, desiredLottoQuantity: LottoQuantity) {
+        val availableLottoQuantity = getLottoQuantity(money)
+        require(availableLottoQuantity >= desiredLottoQuantity) {
+            "금액이 부족합니다."
+        }
     }
+
+    private fun List<LottoNumbers>.lottoQuantity() = LottoQuantity(size)
 }

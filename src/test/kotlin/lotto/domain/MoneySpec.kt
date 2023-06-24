@@ -3,7 +3,6 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import kotlin.reflect.typeOf
 
 class MoneySpec : DescribeSpec({
     describe("돈 값(value) 검증") {
