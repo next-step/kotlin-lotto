@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.GameResult
 import lotto.Lotto
+import lotto.LottoPurchaseRequest
 import lotto.Lottos
 import lotto.prize.Prize
 import lotto.vo.LottoNumber
@@ -34,6 +35,10 @@ object ConsoleView : InputView, OutputView {
             ?: throw IllegalArgumentException("보너스 볼은 숫자여야 합니다.")
 
         return WinningNumbers(winningNumbers, LottoNumber.from(bonusNumber))
+    }
+
+    override fun receivePurchaseCommand(): LottoPurchaseRequest {
+        TODO("Not yet implemented")
     }
 
     override fun showPurchased(lottos: Lottos) {

@@ -28,5 +28,14 @@ data class Lotto(
         fun from(numbers: Collection<LottoNumber>): Lotto {
             return Lotto(numbers.toSet())
         }
+
+        fun random(): Lotto {
+            val lottoNums = (1..45)
+                .shuffled()
+                .subList(0, 6)
+                .map(LottoNumber::from)
+
+            return from(lottoNums)
+        }
     }
 }

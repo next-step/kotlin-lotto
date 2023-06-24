@@ -3,35 +3,48 @@ package lotto
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
-import lotto.test.FixedLottoPurchaseCommand
 import lotto.test.lottoNumbersOf
 import lotto.vo.Money
 
 class LottoShopTest : FreeSpec({
-    "로또 상점은 주문과 금액을 받아 로또를 최대한 많이 판매한다." - {
+    """로또 상점은 금액과 로또 번호를 받아 두 가지 유형의 로또 순서대로 발급한다.
+    1. 주어진 로또 번호로 생성된 로또(입력 순서대로)
+    2. 남은 금액으로 자동 생성된 로또""" - {
         forAll(
             row(
-                3999,
-                FixedLottoPurchaseCommand(
+                5999,
+                LottoPurchaseRequest(
                     listOf(
                         Lotto.from(lottoNumbersOf(1, 2, 3, 4, 5, 6)),
                         Lotto.from(lottoNumbersOf(3, 42, 44, 4, 5, 6)),
                         Lotto.from(lottoNumbersOf(7, 8, 9, 10, 11, 12)),
                     )
                 ),
+                5
             ),
-        ) { totalCash, lottoOrder ->
+            row(
+                3999,
+                LottoPurchaseRequest(
+                    listOf(
+                        Lotto.from(lottoNumbersOf(1, 2, 3, 4, 5, 6)),
+                        Lotto.from(lottoNumbersOf(3, 42, 44, 4, 5, 6)),
+                        Lotto.from(lottoNumbersOf(7, 8, 9, 10, 11, 12)),
+                    )
+                ),
+                3
+            ),
+        ) { totalCash, lottoPurchaseRequest, expectedSize ->
+            val result = LottoShop.sell(Money(totalCash), lottoPurchaseRequest)
 
-            val result = LottoShop.sell(Money(totalCash), lottoOrder)
-
-            result shouldBe Lottos(
-                listOf(
-                    Lotto.from(lottoNumbersOf(1, 2, 3, 4, 5, 6)),
-                    Lotto.from(lottoNumbersOf(3, 42, 44, 4, 5, 6)),
-                    Lotto.from(lottoNumbersOf(7, 8, 9, 10, 11, 12)),
-                )
-            )
+            result.manualLottos shouldContainExactly
+                    listOf(
+                        Lotto.from(lottoNumbersOf(1, 2, 3, 4, 5, 6)),
+                        Lotto.from(lottoNumbersOf(3, 42, 44, 4, 5, 6)),
+                        Lotto.from(lottoNumbersOf(7, 8, 9, 10, 11, 12)),
+                    )
+            result.size shouldBe expectedSize
         }
     }
 })
