@@ -10,11 +10,11 @@ data class LottoNumber(val number: Int) : Comparable<LottoNumber> {
     }
 
     companion object {
-        private val LOTTO_NUMBERS = (1..45).map { LottoNumber(it) }
-        fun random(count: Int): List<LottoNumber> {
-            return LOTTO_NUMBERS.shuffled()
-                .subList(0, count)
-                .sorted()
-        }
+        private const val MIN_LOTTO_NUMBER = 1
+        private const val MAX_LOTTO_NUMBER = 45
+        private val LOTTO_NUMBERS = (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).map { LottoNumber(it) }
+        fun random(count: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled()
+            .subList(0, count)
+            .sorted()
     }
 }

@@ -1,18 +1,27 @@
 package lotto.domain
 
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.BehaviorSpec
 
-class LottoTest: StringSpec({
-    "로또에 로또 번호가 포함 되어 있다." {
-        val lottoNumber = LottoNumber(1)
-        val lotto = Lotto(listOf(lottoNumber))
-        lotto.contains(LottoNumber(1)) shouldBe true
-    }
-
-    "로또에 로또 번호가 포함 되어 있지 않다." {
-        val lottoNumber = LottoNumber(2)
-        val lotto = Lotto(listOf(lottoNumber))
-        lotto.contains(LottoNumber(1)) shouldBe false
+class LottoTest : BehaviorSpec({
+    given("로또 생성 시") {
+        `when`("로또 번호가 5개 입력 되면") {
+            val lottoNumbers = listOf(1, 2, 3, 4, 5).map { LottoNumber(it) }
+            then("에러가 발생 한다.") {
+                shouldThrow<Exception> { Lotto.of(lottoNumbers) }
+            }
+        }
+        `when`("로또 번호가 7개 입력 되면") {
+            val lottoNumbers = listOf(1, 2, 3, 4, 5, 6, 7).map { LottoNumber(it) }
+            then("에러가 발생 한다.") {
+                shouldThrow<Exception> { Lotto.of(lottoNumbers) }
+            }
+        }
+        `when`("로또 번호가 6개 이지만 중복이 존재 하면") {
+            val lottoNumbers = listOf(1, 2, 3, 4, 6, 6).map { LottoNumber(it) }
+            then("에러가 발생 한다.") {
+                shouldThrow<Exception> { Lotto.of(lottoNumbers) }
+            }
+        }
     }
 })
