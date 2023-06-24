@@ -38,4 +38,8 @@ class LottoController {
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
         return lottoService.getStatistics(req)
     }
+
+    fun showLottoStatistics(statistics: List<LottoRank>) {
+        resultView.showLottoStatistics(statistics)
+    }
 }

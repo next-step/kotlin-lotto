@@ -8,6 +8,6 @@ interface LottoGenerator {
 
 class AutoLottoGenerator : LottoGenerator {
     override fun execute(): Lotto {
-        return Lotto(LottoNumber.NUMBERS.shuffled().subList(0, 5).sorted())
+        return Lotto(LottoNumber.NUMBERS.shuffled().subList(0, 6).sorted())
     }
 }

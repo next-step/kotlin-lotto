@@ -13,4 +13,6 @@ fun main() {
     val lottoStatistics = lottoController.getStatistics(
         StatisticsRequest(lottoTickets, winningLotto)
     )
+
+    lottoController.showLottoStatistics(lottoStatistics)
 }
