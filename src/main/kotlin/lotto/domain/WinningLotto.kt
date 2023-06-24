@@ -1,12 +1,14 @@
 package lotto.domain
 
 class WinningLotto(
-    private val winningNumbers: Set<LottoNumber>
+    private val winningNumbers: Set<LottoNumber>,
+    private val bonusNumber: LottoNumber
 ) : Lotto(winningNumbers) {
 
+    //TODO : bonusNum 활용해야 함
     fun rankOfLotto(lotto: Lotto): LottoRank? {
         val numOfMatch = numOfMatch(lotto)
-        val rank = LottoRank.rankOfMatchedNum(numOfMatch)
+        val rank = LottoRank.of(numOfMatch, true)
         return rank
     }
 

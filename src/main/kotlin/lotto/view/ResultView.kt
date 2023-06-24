@@ -19,10 +19,9 @@ class ResultView {
     fun displayResult(result: LottoResult) {
         println("당첨 통계")
         println("---------")
-        LottoRank.ranks().sortedBy { rank -> rank.winningMoney }
-            .forEach {
-                val cnt = result.rankCntMap.getOrDefault(it, 0)
-                println("${it.numOfMatch}" + "개 일치 (${it.winningMoney}" + "원)- $cnt" + "개\n")
+        LottoRank.ranks().forEach {
+            val cnt = result.rankCntMap.getOrDefault(it, 0)
+            println("${it.numOfMatch}" + "개 일치 (${it.winningMoney}" + "원)- $cnt" + "개\n")
         }
         println("총 수익률은 ${String.format("%.2f", result.rateOfReturn)}" + "입니다. " + result.message)
     }
