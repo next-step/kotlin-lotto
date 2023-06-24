@@ -4,39 +4,31 @@ class LottoResult(
     private val winningLotto: WinningLotto,
     private val lottos: List<Lotto>
 ) {
-    private val resultMap = mutableMapOf<LottoRank?, Int>()
-    var rateOfReturn: Double = 0.0
+    val rankCntMap = mutableMapOf<LottoRank?, Int>()
+    val rateOfReturn = returnRate(getTotalProfit())
+    val message = resultMessage()
 
     init {
         setResultMap()
-        setReturn(getTotalProfit())
-    }
-
-    //TODO : 여기서 표현하지 말고 결과를 전달해서 view에서 출력하도록 하자
-    override fun toString(): String {
-        var result = ""
-        LottoRank.ranks().forEach {
-            val cnt = resultMap.getOrDefault(it, 0)
-            println("${it.numOfMatch}" + "개 일치 (${it.winningMoney}" + "원)- $cnt" + "개\n")
-        }
-        result += "총 수익률은 ${String.format("%.2f", rateOfReturn)}" + "입니다."
-        result += if (rateOfReturn < 1) LOSS else GAIN
-        return result
     }
 
     private fun setResultMap() {
         lottos.forEach {
             val rank = winningLotto.getRankOfLotto(it)
-            resultMap[rank] = resultMap.getOrDefault(rank, 0) + 1
+            rankCntMap[rank] = rankCntMap.getOrDefault(rank, 0) + 1
         }
     }
 
-    private fun getTotalProfit(): Int {
-        return resultMap.keys.sumOf { resultMap[it]!! * (it?.winningMoney ?: LottoRank.DEFAULT_MONEY) }
+    private fun returnRate(profit: Int): Double {
+        return profit.toDouble() / (lottos.size * Lotto.PRICE)
     }
 
-    private fun setReturn(profit: Int) {
-        rateOfReturn = profit.toDouble() / (lottos.size * Lotto.PRICE)
+    private fun getTotalProfit(): Int {
+        return rankCntMap.keys.sumOf { rankCntMap[it]!! * (it?.winningMoney ?: LottoRank.DEFAULT_MONEY) }
+    }
+
+    private fun resultMessage(): String {
+        return if (rateOfReturn < 1) LOSS else GAIN
     }
 
     companion object {
