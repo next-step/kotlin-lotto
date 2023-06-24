@@ -10,7 +10,7 @@ internal class LottoPurchaserTest {
     @ParameterizedTest
     @ValueSource(ints = [1000, 2000, 3000, 100000])
     fun lottoNumberOutOfRange(amount: Int) {
-        val lottoPurchaser = LottoPurchaser(AutoLottoGenerator())
+        val lottoPurchaser = LottoPurchaser(AutoLottoSeller())
         val purchasedAmount = lottoPurchaser.purchase(amount).size
         Assertions.assertThat(purchasedAmount).isEqualTo(amount / Lotto.PRICE)
     }

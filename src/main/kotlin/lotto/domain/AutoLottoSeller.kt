@@ -1,8 +1,8 @@
 package lotto.domain
 
-class AutoLottoGenerator : LottoGenerator {
+class AutoLottoSeller : LottoSeller {
 
-    override fun generate(amount: Int)= List(amount) { Lotto(generateLottoNumbers()) }
+    override fun sell(amount: Int) = List(amount) { Lotto(generateLottoNumbers()) }
 
     private fun generateLottoNumbers(): Set<LottoNumber> = LottoNumber.VALID_RANGE.shuffled()
         .take(Lotto.COUNT_OF_LOTTO_NUMBER)
