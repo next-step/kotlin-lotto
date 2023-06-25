@@ -52,8 +52,9 @@ object OutputView {
         if (rank.isSecond()) {
             println("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningMoney})- ${rankFactory.getRankCount(rank)}개")
             return
+        } else if(!rank.isNone()) {
+            println("${rank.matchCount}개 일치 (${rank.winningMoney})- ${rankFactory.getRankCount(rank)}개")
         }
-        println("${rank.matchCount}개 일치 (${rank.winningMoney})- ${rankFactory.getRankCount(rank)}개")
     }
 
     fun printProfitRate(profitRate: Double) {
