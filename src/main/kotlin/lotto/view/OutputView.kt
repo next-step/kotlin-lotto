@@ -2,6 +2,7 @@ package lotto.view
 
 import lotto.domain.Lottos
 import lotto.domain.Rank
+import lotto.domain.RankFactory
 
 object OutputView {
 
@@ -9,8 +10,16 @@ object OutputView {
         println("구입금액을 입력해 주세요.")
     }
 
-    fun printPurchaseCount(count: Int) {
-        println("${count}개를 구매했습니다.")
+    fun printEnterManualLottoCount() {
+        println("수동으로 구매할 로또 수를 입력해주세요.")
+    }
+
+    fun printEnterManualLottoNumbers() {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+    }
+
+    fun printPurchaseCount(manualLottoCount: Int, lottoCount: Int) {
+        println("수동으로 ${manualLottoCount}장, 자동으로 ${lottoCount - manualLottoCount}개를 구매했습니다.")
     }
 
     fun printLottos(lottos: Lottos) {
@@ -33,18 +42,19 @@ object OutputView {
         println("---------")
     }
 
-    fun printStatisticsAccordingToBonus(ranks: List<Rank>) {
-        for (rank in ranks.reversed()) {
-            printNumberOfMatches(rank)
+    fun printStatisticsAccordingToBonus(rankFactory: RankFactory) {
+        for (rank in rankFactory.getRanks().reversed()) {
+            printNumberOfMatches(rank, rankFactory)
         }
     }
 
-    private fun printNumberOfMatches(rank: Rank) {
+    private fun printNumberOfMatches(rank: Rank, rankFactory: RankFactory) {
         if (rank.isSecond()) {
-            println("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningMoney})- ${rank.count}개")
+            println("${rank.matchCount}개 일치, 보너스 볼 일치(${rank.winningMoney})- ${rankFactory.getRankCount(rank)}개")
             return
+        } else if(!rank.isNone()) {
+            println("${rank.matchCount}개 일치 (${rank.winningMoney})- ${rankFactory.getRankCount(rank)}개")
         }
-        println("${rank.matchCount}개 일치 (${rank.winningMoney})- ${rank.count}개")
     }
 
     fun printProfitRate(profitRate: Double) {

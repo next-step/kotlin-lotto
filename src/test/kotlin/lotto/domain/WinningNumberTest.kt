@@ -6,7 +6,7 @@ import io.kotest.core.spec.style.StringSpec
 class WinningNumberTest : StringSpec({
 
     "당첨 번호에 보너스 번호가 있으면 예외가 발생한다." {
-        val lottoNumbers = LottoNumbers(
+        val lotto = Lotto(
             listOf(
                 LottoNumber(1),
                 LottoNumber(2),
@@ -19,7 +19,7 @@ class WinningNumberTest : StringSpec({
         val bonusNumber = LottoNumber(3)
 
         shouldThrow<IllegalArgumentException> {
-            WinningNumber(lottoNumbers, bonusNumber)
+            WinningNumber(lotto, bonusNumber)
         }
     }
 })

@@ -3,7 +3,7 @@ package lotto.domain
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 
-class LottoNumbersTest : StringSpec({
+class LottoTest : StringSpec({
     "로또 숫자가 6개가 아닌 경우 예외가 발생한다." {
         val invalidLottoNumbers = listOf(
             LottoNumber(1),
@@ -11,7 +11,7 @@ class LottoNumbersTest : StringSpec({
             LottoNumber(45)
         )
         shouldThrow<IllegalArgumentException> {
-            LottoNumbers(invalidLottoNumbers)
+            Lotto(invalidLottoNumbers)
         }
     }
 
@@ -25,7 +25,7 @@ class LottoNumbersTest : StringSpec({
             LottoNumber(45)
         )
         shouldThrow<IllegalArgumentException> {
-            LottoNumbers(invalidLottoNumbers)
+            Lotto(invalidLottoNumbers)
         }
     }
 
@@ -38,6 +38,6 @@ class LottoNumbersTest : StringSpec({
             LottoNumber(5),
             LottoNumber(6)
         )
-        LottoNumbers(validLottoNumbers)
+        Lotto(validLottoNumbers)
     }
 })

@@ -1,12 +1,12 @@
 package lotto.controller
 
+import lotto.domain.Lotto
 import lotto.domain.LottoGenerator
 import lotto.domain.LottoNumber
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoStatistics
 import lotto.domain.Lottos
 import lotto.domain.Payment
-import lotto.domain.Rank
+import lotto.domain.RankFactory
 import lotto.domain.WinningNumber
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -23,47 +23,66 @@ class LottoController(
         val bonusBall = inputBonusBall()
         val winningNumber = WinningNumber(lastWinningNumbers, bonusBall)
 
-        val result = getStatisticsAccordingToBonus(lottos, winningNumber)
-        calculateProfitRate(inputPayment, result)
+        calculateStatisticsAccordingToBonus(lottos, winningNumber)
+        calculateProfitRate(inputPayment)
     }
 
     private fun inputPayment(): Int {
         OutputView.printEnterPayment()
-        return InputView.inputPayment()
+        return InputView.inputNumber()
     }
 
     private fun purchaseLottos(inputPayment: Int): Lottos {
+        val manualLottoCount = inputManualLottoCount()
         val lottoCount = lottoGenerator.getLottoCount(inputPayment)
-        OutputView.printPurchaseCount(lottoCount)
+        require(lottoCount >= manualLottoCount) { "수동 구매 로또 수가 구입 금액을 초과하였습니다." }
 
-        val lottos = lottoGenerator.generateLottos(lottoCount)
+        val manualLottos = generateManualLottos(manualLottoCount)
+
+        OutputView.printPurchaseCount(manualLottoCount, lottoCount)
+        val lottos = lottoGenerator.generateLottos(lottoCount, manualLottos)
         OutputView.printLottos(lottos)
         return lottos
     }
 
-    private fun inputWinningNumbersLastWeek(): LottoNumbers {
+    private fun inputManualLottoCount(): Int {
+        OutputView.printEnterManualLottoCount()
+        return InputView.inputNumber()
+    }
+
+    private fun generateManualLottos(manualLottoCount: Int): Lottos {
+        OutputView.printEnterManualLottoNumbers()
+        val manualLottos = mutableListOf<Lotto>()
+        repeat(manualLottoCount) {
+            val lotto = Lotto(InputView.inputLottoNumbers())
+            manualLottos.add(lotto)
+        }
+        return Lottos(manualLottos)
+    }
+
+    private fun inputWinningNumbersLastWeek(): Lotto {
         OutputView.printWinningNumbersLastWeek()
-        return LottoNumbers(InputView.inputWinnerNumbers())
+        return Lotto(InputView.inputLottoNumbers())
     }
 
     private fun inputBonusBall(): LottoNumber {
         OutputView.printBonusBall()
-        val inputBonusBall = InputView.inputBonusBall()
+        val inputBonusBall = InputView.inputNumber()
         return LottoNumber(inputBonusBall)
     }
 
-    private fun getStatisticsAccordingToBonus(
+    private fun calculateStatisticsAccordingToBonus(
         lottos: Lottos,
         winningNumber: WinningNumber
-    ): List<Rank> {
+    ): RankFactory {
         OutputView.printWinnerStatistics()
-        val result = lottoStatistics.analyze(lottos, winningNumber)
-        OutputView.printStatisticsAccordingToBonus(result)
-        return result
+        val rankFactory = lottoStatistics.analyze(lottos, winningNumber)
+        OutputView.printStatisticsAccordingToBonus(rankFactory)
+        return rankFactory
     }
 
-    private fun calculateProfitRate(inputPayment: Int, result: List<Rank>) {
-        val profitRate = lottoStatistics.getProfitRate(Payment(inputPayment), result)
+    private fun calculateProfitRate(inputPayment: Int) {
+        val profitRate = lottoStatistics.getProfitRate(Payment(inputPayment))
         OutputView.printProfitRate(profitRate)
     }
 }

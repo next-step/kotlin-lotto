@@ -1,17 +1,17 @@
 package lotto.domain
 
 data class WinningNumber(
-    val lastLottoNumbers: LottoNumbers,
+    val lastLotto: Lotto,
     val bonusNumber: LottoNumber
 ) {
     init {
-        validateDuplicateBonusNumberWithLottoNumbers(lastLottoNumbers, bonusNumber)
+        validateDuplicateBonusNumberWithLottoNumbers(lastLotto, bonusNumber)
     }
 
     private fun validateDuplicateBonusNumberWithLottoNumbers(
-        lottoNumbers: LottoNumbers,
+        lotto: Lotto,
         bonusNumber: LottoNumber
     ) {
-        require(!lottoNumbers.contains(bonusNumber)) { "보너스 번호는 로또 번호와 달라야 합니다." }
+        require(!lotto.contains(bonusNumber)) { "보너스 번호는 로또 번호와 달라야 합니다." }
     }
 }

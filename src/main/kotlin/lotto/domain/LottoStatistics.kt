@@ -1,19 +1,23 @@
 package lotto.domain
 
 class LottoStatistics {
-    fun analyze(lottos: Lottos, winningNumber: WinningNumber): List<Rank> {
-        return Rank.values()
-            .map {
-                it.getRank(lottos, winningNumber)
-            }
-            .toList()
+    private val rankFactory = RankFactory()
+
+    fun analyze(lottos: Lottos, winningNumber: WinningNumber): RankFactory {
+        process(lottos, winningNumber)
+        return rankFactory
     }
 
-    fun getProfitRate(payment: Payment, ranks: List<Rank>): Double {
-        var sumAmount = 0.0
-        for (rank in ranks) {
-            sumAmount += (rank.winningMoney * rank.count).toInt()
+    private fun process(lottos: Lottos, winningNumber: WinningNumber) {
+        for (lotto in lottos.lottoNumbers) {
+            val intersectCount = lotto.findIntersectCount(winningNumber.lastLotto.lottoNumbers)
+            val rank = Rank.determineRank(intersectCount, winningNumber, lotto)
+            rank?.let { rankFactory.addRank(it) }
         }
-        return (sumAmount / payment.money)
+    }
+
+    fun getProfitRate(payment: Payment): Double {
+        val totalPrize = rankFactory.calculateTotalPrize()
+        return (totalPrize / payment.money)
     }
 }

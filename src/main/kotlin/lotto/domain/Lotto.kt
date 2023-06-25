@@ -1,6 +1,6 @@
 package lotto.domain
 
-class LottoNumbers(
+class Lotto(
     val lottoNumbers: List<LottoNumber>
 ) {
     init {
@@ -20,15 +20,18 @@ class LottoNumbers(
         }
     }
 
+    fun findIntersectCount(otherLottoNumbers: List<LottoNumber>) =
+        lottoNumbers.intersect(otherLottoNumbers.toSet()).count()
+
     fun contains(lottoNumber: LottoNumber): Boolean {
-        return lottoNumbers.contains(lottoNumber)
+        return lottoNumber in lottoNumbers
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as LottoNumbers
+        other as Lotto
 
         if (lottoNumbers != other.lottoNumbers) return false
 
