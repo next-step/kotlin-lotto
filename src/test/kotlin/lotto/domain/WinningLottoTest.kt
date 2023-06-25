@@ -10,7 +10,7 @@ class WinningLottoTest : StringSpec({
         shouldThrow<IllegalArgumentException> {
             WinningLotto(
                 lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }),
-                bonusNumber = 6
+                bonusNumber = LottoNumber(6)
             )
         }.message shouldBe "보너스 넘버는 로또당첨번호에 포함되면 안됩니다."
     }

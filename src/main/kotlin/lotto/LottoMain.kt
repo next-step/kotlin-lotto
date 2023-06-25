@@ -25,7 +25,7 @@ fun main() {
         lottos,
         WinningLotto(
             lotto = lottoResult,
-            bonusNumber = bonus
+            bonusNumber = bonus.toLottoNumber()
         )
     )
     val lottoProfit = Profit.calculateLottoProfit(result)

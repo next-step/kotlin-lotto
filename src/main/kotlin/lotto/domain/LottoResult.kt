@@ -7,7 +7,7 @@ object LottoResult {
         return lottos.list.map { lotto ->
             Pair(
                 lotto.numbers.count { it in lottoResult.lotto.numbers },
-                lotto.numbers.map { it.number }.contains(lottoResult.bonusNumber)
+                lotto.numbers.map { it.number }.contains(lottoResult.bonusNumber.number)
             )
         }.mapNotNull {
             LottoRank.of(it.first, it.second)
