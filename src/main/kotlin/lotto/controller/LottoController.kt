@@ -3,11 +3,13 @@ package lotto.controller
 import lotto.domain.InputParser
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoStore
+import lotto.domain.model.Count
 import lotto.domain.model.InputResult
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.LottoResult
 import lotto.domain.model.Lottos
+import lotto.domain.model.Money
 import lotto.domain.model.Prize
 import lotto.domain.model.SelectedBalls
 import lotto.domain.model.WinningBalls
@@ -27,8 +29,8 @@ class LottoController {
 
     @Throws(IllegalArgumentException::class)
     private fun input(): InputResult {
-        val money = InputView.inputMoney().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
-        val lottos = Lottos(mutableListOf<Lotto>().apply { addAll(LottoStore.buy(money)) })
+        val moneyInput = InputView.inputMoney().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
+        val lottos = Lottos(mutableListOf<Lotto>().apply { addAll(LottoStore.buy(Money(moneyInput))) })
         ResultView.printBuyResult(lottos)
 
         val winningNumbers = InputParser.parse(InputView.inputWinningNumbers()).map {
@@ -39,10 +41,10 @@ class LottoController {
         val bonus = InputView.inputBonusBall().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
 
         require(winningNumbers.size == Lotto.NUMBER_COUNT) { INPUT_ERROR_MESSAGE }
-        return InputResult(lottos, SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus)), money)
+        return InputResult(lottos, SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus)), Money(moneyInput))
     }
 
-    private fun output(lottos: Lottos, selectedBalls: SelectedBalls, money: Int) {
+    private fun output(lottos: Lottos, selectedBalls: SelectedBalls, money: Money) {
         val results = getResults(lottos, selectedBalls)
         val earningRate = LottoCalculator.earningRate(results, money)
         ResultView.printLottoResult(results, earningRate, earningRate.toProfitState())
@@ -51,11 +53,11 @@ class LottoController {
     private fun error(error: Throwable) = ResultView.printMessage(error.message ?: "")
 
     private fun getResults(lottos: Lottos, selectedBalls: SelectedBalls): List<LottoResult> {
-        val results = Prize.values().map { LottoResult(0, it) }.toMutableList()
+        val results = Prize.values().map { LottoResult(Count(0), it) }.toMutableList()
         lottos.items.forEach {
             val prize = Prize.from(selectedBalls, it)
             val index = Prize.indexOf(prize.matches, prize.bonus)
-            results[index] = LottoResult(results[index].count + 1, prize)
+            results[index] = LottoResult(Count(results[index].count.value + 1), prize)
         }
         return results
     }

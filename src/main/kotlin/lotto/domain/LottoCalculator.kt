@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.model.LottoResult
+import lotto.domain.model.Money
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -10,14 +11,14 @@ object LottoCalculator {
         roundingMode = RoundingMode.DOWN
     }
 
-    fun earningRate(results: List<LottoResult>, money: Int): Double {
+    fun earningRate(results: List<LottoResult>, money: Money): Double {
         var totalPrize = 0.0
         results.forEach {
-            totalPrize += it.count * it.prize.reward
+            totalPrize += it.count.value * it.prize.reward.value
         }
 
-        if (money == 0) return 0.0
+        if (money.value == 0) return 0.0
 
-        return decimalFormat.format(totalPrize / money).toDouble()
+        return decimalFormat.format(totalPrize / money.value).toDouble()
     }
 }

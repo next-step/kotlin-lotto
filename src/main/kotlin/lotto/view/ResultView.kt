@@ -17,7 +17,7 @@ object ResultView {
     fun printLottoResult(results: List<LottoResult>, earningRate: Double, profitState: ProfitState) {
         println("\n당첨 통계")
         println("---------")
-        results.filter { it.prize.reward > 0 }.forEach {
+        results.filter { it.prize.reward.value > 0 }.forEach {
             println("${it.prize.toText()} - ${it.count}개")
         }
         println("총 수익률은 ${earningRate}입니다.(기준이 1이기 때문에 결과적으로 ${profitState.toText()}라는 의미임)")

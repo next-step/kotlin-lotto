@@ -1,12 +1,12 @@
 package lotto.domain.model
 
-enum class Prize(val matches: Int, val bonus: Boolean, val reward: Int) {
-    NOTHING(0, false, 0),
-    THREE_MATCH(3, false, 5_000),
-    FOUR_MATCH(4, false, 50_000),
-    FIVE_MATCH(5, false, 1_500_000),
-    FIVE_MATCH_PLUS_BONUS(5, true, 30_000_000),
-    SIX_MATCH(6, false, 2_000_000_000);
+enum class Prize(val matches: Int, val bonus: Boolean, val reward: Money) {
+    NOTHING(0, false, Money(0)),
+    THREE_MATCH(3, false, Money(5_000)),
+    FOUR_MATCH(4, false, Money(50_000)),
+    FIVE_MATCH(5, false, Money(1_500_000)),
+    FIVE_MATCH_PLUS_BONUS(5, true, Money(30_000_000)),
+    SIX_MATCH(6, false, Money(2_000_000_000));
 
     companion object {
         fun from(selectedBalls: SelectedBalls, lotto: Lotto): Prize {
