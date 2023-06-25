@@ -1,12 +1,12 @@
 package lotto.domain
 
-object LottoFactory {
+object RandomLottoFactory {
 
     private val LOTTO_NUMBERS = (LottoNumber.MIN_VALUE..LottoNumber.MAX_VALUE)
         .map { LottoNumber(it) }
         .toList()
 
-    fun generateRandom(): Lotto {
+    fun generate(): Lotto {
         val numbers = LOTTO_NUMBERS
             .shuffled()
             .take(Lotto.NUMBERS_SIZE)
