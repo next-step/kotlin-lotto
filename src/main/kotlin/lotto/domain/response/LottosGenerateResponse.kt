@@ -2,7 +2,7 @@ package lotto.domain.response
 
 import lotto.domain.Lottos
 
-class GeneratedLottosResponse(
+class LottosGenerateResponse(
     val manualLottos: Lottos,
     val autoLottos: Lottos,
 ) {

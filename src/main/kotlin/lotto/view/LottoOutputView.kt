@@ -2,12 +2,12 @@ package lotto.view
 
 import lotto.domain.LottoRank
 import lotto.domain.LottosResult
-import lotto.domain.response.GeneratedLottosResponse
+import lotto.domain.response.LottosGenerateResponse
 
 object LottoOutputView {
-    fun printLottos(generatedLottosResponse: GeneratedLottosResponse) {
-        println("수동으로 ${generatedLottosResponse.manualLottos.lottoQuantity}장, 자동으로 ${generatedLottosResponse.autoLottos.lottoQuantity}개를 구매했습니다.")
-        generatedLottosResponse.lottos.values.forEach { lotto ->
+    fun printLottos(response: LottosGenerateResponse) {
+        println("수동으로 ${response.manualLottos.lottoQuantity}장, 자동으로 ${response.autoLottos.lottoQuantity}개를 구매했습니다.")
+        response.lottos.values.forEach { lotto ->
             println("[${lotto.numbers.values.sortedBy { it.value }.joinToString(", ")}]")
         }
         println()

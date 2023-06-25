@@ -10,7 +10,7 @@ class LottosSpec : DescribeSpec({
     describe("로또 개수 검증") {
         context("로또 목록이 주어지면") {
             it("로또 개수를 반환할 수 있다.") {
-                val lottos = lottos(Lotto(), Lotto(), Lotto())
+                val lottos = lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
 
                 lottos.lottoQuantity.value shouldBe 3
             }
@@ -20,7 +20,7 @@ class LottosSpec : DescribeSpec({
     describe("로또 구매 비용 검증") {
         context("로또 목록이 주어지면") {
             it("로또 비용을 반환할 수 있다.") {
-                val lottos = lottos(Lotto(), Lotto(), Lotto())
+                val lottos = lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
 
                 lottos.totalCost.value shouldBe 3000
             }
@@ -94,8 +94,8 @@ class LottosSpec : DescribeSpec({
 
     describe("더하기 연산 검증") {
         context("두 개의 로또 목록을 더하기 연산하면") {
-            val lottos1 = lottos(Lotto(), Lotto())
-            val lottos2 = lottos(Lotto(), Lotto())
+            val lottos1 = lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
+            val lottos2 = lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
 
             it("로또 목록이 합쳐진다.") {
                 val lottos = lottos1 + lottos2

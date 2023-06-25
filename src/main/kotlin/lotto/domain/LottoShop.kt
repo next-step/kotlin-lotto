@@ -1,18 +1,16 @@
 package lotto.domain
 
-import lotto.domain.response.GeneratedLottosResponse
+import lotto.domain.response.LottosGenerateRequest
+import lotto.domain.response.LottosGenerateResponse
 
 object LottoShop {
     fun sellByMoneyWithManualLottos(
-        money: Money,
-        manualLottoNumbers: List<LottoNumbers> = emptyList(),
-    ): GeneratedLottosResponse {
-        validateMoneyIsEnough(money, manualLottoNumbers.lottoQuantity())
+        request: LottosGenerateRequest,
+    ): LottosGenerateResponse {
+        val manualLottos = createManualLottos(request.manualLottoNumbers)
+        val autoLottos = createAutoLottos(request.money - manualLottos.totalCost)
 
-        val manualLottos = createManualLottos(manualLottoNumbers)
-        val autoLottos = createAutoLottos(money - manualLottos.totalCost)
-
-        return GeneratedLottosResponse(manualLottos, autoLottos)
+        return LottosGenerateResponse(manualLottos, autoLottos)
     }
 
     private fun createManualLottos(manualLottoNumbers: List<LottoNumbers>): Lottos =
@@ -28,13 +26,6 @@ object LottoShop {
 
     private fun getLottoQuantity(money: Money): LottoQuantity {
         return LottoQuantity(money.value / Lotto.PRICE)
-    }
-
-    private fun validateMoneyIsEnough(money: Money, desiredLottoQuantity: LottoQuantity) {
-        val availableLottoQuantity = getLottoQuantity(money)
-        require(availableLottoQuantity >= desiredLottoQuantity) {
-            "금액이 부족합니다."
-        }
     }
 
     private fun List<LottoNumbers>.lottoQuantity() = LottoQuantity(size)

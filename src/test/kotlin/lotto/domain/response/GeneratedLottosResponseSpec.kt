@@ -20,23 +20,23 @@ class GeneratedLottosResponseSpec : DescribeSpec({
                 lotto(10, 2, 3, 4, 5, 7),
             )
 
-            val generatedLottosResponse = GeneratedLottosResponse(
+            val lottosGenerateResponse = LottosGenerateResponse(
                 manualLottos = manualLottos,
                 autoLottos = autoLottos,
             )
 
             it("총 로또 수는 5개다.") {
-                generatedLottosResponse.lottos.lottoQuantity.value shouldBe 5
-                generatedLottosResponse.lottos.values shouldContainAll manualLottos.values
-                generatedLottosResponse.lottos.values shouldContainAll autoLottos.values
+                lottosGenerateResponse.lottos.lottoQuantity.value shouldBe 5
+                lottosGenerateResponse.lottos.values shouldContainAll manualLottos.values
+                lottosGenerateResponse.lottos.values shouldContainAll autoLottos.values
             }
             it("수동 로또 수는 입력된 3개다.") {
-                generatedLottosResponse.manualLottos.lottoQuantity.value shouldBe 3
-                generatedLottosResponse.manualLottos shouldBe manualLottos
+                lottosGenerateResponse.manualLottos.lottoQuantity.value shouldBe 3
+                lottosGenerateResponse.manualLottos shouldBe manualLottos
             }
             it("자동 로또 수는 입력된 2개다.") {
-                generatedLottosResponse.autoLottos.lottoQuantity.value shouldBe 2
-                generatedLottosResponse.autoLottos shouldBe autoLottos
+                lottosGenerateResponse.autoLottos.lottoQuantity.value shouldBe 2
+                lottosGenerateResponse.autoLottos shouldBe autoLottos
             }
         }
     }

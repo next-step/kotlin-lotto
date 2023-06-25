@@ -2,6 +2,7 @@ package lotto.domain
 
 class Lotto(
     val numbers: LottoNumbers = LottoNumbers.random(),
+    val type: LottoType,
 ) {
     fun calculateResult(
         winningLotto: WinningLotto,

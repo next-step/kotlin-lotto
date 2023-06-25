@@ -5,16 +5,26 @@ import lotto.domain.LottoNumbers
 import lotto.domain.LottoQuantity
 import lotto.domain.Money
 import lotto.domain.WinningLotto
+import lotto.domain.response.LottosGenerateRequest
 import lotto.view.request.ManualLottosRequest
 
 object LottoInputView {
     private const val WINNING_LOTTO_DELIMITER = ","
 
-    fun inputMoney(): Money {
+    fun inputLottoGenerateRequest(): LottosGenerateRequest {
+        val money = inputMoney()
+        val manualLottosRequest = inputManualLottoView()
+        return LottosGenerateRequest(
+            money = money,
+            manualLottoNumbers = manualLottosRequest.lottoNumbers,
+        )
+    }
+
+    private fun inputMoney(): Money {
         return Money(readLineWithMessage("구입금액을 입력해 주세요.").trim().toInt())
     }
 
-    fun inputManualLottoView(): ManualLottosRequest {
+    private fun inputManualLottoView(): ManualLottosRequest {
         val manualLottoCount = inputManualLottoCount()
         if (manualLottoCount.value == 0) {
             return ManualLottosRequest()

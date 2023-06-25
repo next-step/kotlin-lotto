@@ -26,12 +26,6 @@ class Lottos(
     }
 
     companion object {
-        fun random(lottoQuantity: LottoQuantity): Lottos {
-            return Lottos(
-                List(lottoQuantity.value) { Lotto() },
-            )
-        }
-
         fun from(lottos: List<Lotto>): Lottos {
             return Lottos(lottos)
         }
