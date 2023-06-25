@@ -4,15 +4,23 @@ class Lottos(
     val list: List<Lotto>
 ) {
 
+    fun manualCount() = list.filter { it.lottoType == LottoType.MANUAL }.size
+    fun autoCount() = list.filter { it.lottoType == LottoType.AUTO }.size
+
     companion object {
-        fun getLottos(number: Int): Lottos {
-            return List(number) { Lotto(LottoNumberGenerator.generate()) }.toLottos()
+        fun getAutoLottos(number: Int): Lottos {
+            return List(number) { Lotto(LottoNumberGenerator.generate(), LottoType.AUTO) }.toLottos()
+        }
+
+        fun getManualLottos(numbers: List<List<Int>>): Lottos {
+            return numbers.map { Lotto(it, LottoType.MANUAL) }.toLottos()
         }
     }
 }
 
 class Lotto(
-    val numbers: List<Int>
+    val numbers: List<Int>,
+    val lottoType: LottoType = LottoType.AUTO
 ) {
 
     init {

@@ -7,7 +7,7 @@ import lotto.dto.ResultDTO
 object ResultView {
 
     fun printLottos(lottos: Lottos) {
-        println("${lottos.list.size}개를 구매했습니다.")
+        println("수동으로 ${lottos.manualCount()}장, 자동으로 ${lottos.autoCount()}개를 구매했습니다.")
         lottos.list.forEach {
             println(it.numbers)
         }
