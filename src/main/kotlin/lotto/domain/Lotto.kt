@@ -1,37 +1,30 @@
 package lotto.domain
 
-data class Lotto(val numbers: HashSet<LottoNumber>) {
+data class Lotto(val numbers: Set<LottoNumber>) {
     init {
         require(numbers.size == NUMBER_COUNT)
     }
+
+    constructor(numbers: List<Int>) : this(numbers.toSet().map { LottoNumber(it) }.toSet())
 
     companion object {
         const val NUMBER_COUNT = 6
     }
 }
 
-data class WinLotto(val numbers: HashSet<LottoNumber>, val bonusNumber: LottoNumber) {
-    init {
-        require(numbers.size == NUMBER_COUNT)
-        require(bonusNumber !in numbers)
-    }
+data class WinLotto(val lotto: Lotto, val bonusNumber: LottoNumber) {
+
+    constructor(rawNumbers: List<Int>, bonusRawNumber: Int) : this(Lotto(rawNumbers), LottoNumber(bonusRawNumber))
 
     fun getCountOfMatch(otherLotto: Lotto): Int {
-        return (numbers intersect otherLotto.numbers.toSet()).size
+        return (lotto.numbers intersect otherLotto.numbers.toSet()).size
     }
 
     fun isBonusNumberIn(otherLotto: Lotto): Boolean = bonusNumber in otherLotto.numbers
-
-    companion object {
-        private const val NUMBER_COUNT = 6
-
-        fun create(rawNumbers: List<Int>, bonusRawNumber: Int): WinLotto {
-            return WinLotto(rawNumbers.map { rawNumber -> LottoNumber(rawNumber) }.toHashSet(), LottoNumber(bonusRawNumber))
-        }
-    }
 }
 
-data class LottoNumber(val number: Int) {
+@JvmInline
+value class LottoNumber(val number: Int) {
     init {
         require(number in RANGE)
     }
@@ -41,9 +34,9 @@ data class LottoNumber(val number: Int) {
     }
 
     companion object {
-        const val MIN_NUMBER = 1
-        const val MAX_NUMBER = 45
-        val RANGE = MIN_NUMBER..MAX_NUMBER
+        private const val MIN_NUMBER: Int = 1
+        private const val MAX_NUMBER: Int = 45
+        val RANGE: IntRange = (MIN_NUMBER..MAX_NUMBER)
     }
 }
 
