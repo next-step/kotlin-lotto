@@ -1,9 +1,6 @@
 package lotto
 
-import lotto.domain.AutoLottoGenerator
-import lotto.domain.LottoPurchaser
-import lotto.domain.LottoNumber
-import lotto.domain.LottoResult
+import lotto.domain.*
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -14,12 +11,14 @@ class LottoGame(
 
     fun start() {
         val inputAmount = inputView.inputPurchaseAmount()
-        val lottoMaker = LottoPurchaser(AutoLottoGenerator())
-        val lottoList = lottoMaker.purchase(inputAmount)
+        val purchaser = LottoPurchaser(AutoLottoSeller())
+        val lottoList = purchaser.purchase(inputAmount)
         resultView.displayPurchasedLotto(lottoList)
 
-        val winningNums = inputView.inputWinningNums().map { LottoNumber(it) }
-        val result = LottoResult(winningNums, lottoList)
+        val winningNums = inputView.inputWinningNums().map { LottoNumber(it) }.toSet()
+        val bonusNum = LottoNumber(inputView.inputBunusNum())
+        val winningLotto = WinningLotto(winningNums, bonusNum)
+        val result = LottoResult(winningLotto, lottoList)
         resultView.displayResult(result)
     }
 }

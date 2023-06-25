@@ -1,8 +1,10 @@
 package lotto.view
 
+import lotto.domain.Lotto
+
 class InputView {
 
-    fun inputPurchaseAmount():Int {
+    fun inputPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
         var inputAmount = readNumber()
         while (!isValid(inputAmount)) {
@@ -16,7 +18,12 @@ class InputView {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val input = readLine()?.trim()
         val numbers = input?.split(",", " ")?.map { it.trim().toInt() }
-        return numbers?.take(6) ?: emptyList()
+        return numbers?.take(Lotto.COUNT_OF_LOTTO_NUMBER) ?: emptyList()
+    }
+
+    fun inputBunusNum(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readNumber()
     }
 
     private fun readNumber(): Int {
