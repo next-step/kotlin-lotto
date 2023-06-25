@@ -2,9 +2,7 @@ package lotto
 
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
-import lotto.domain.Lotto
-import lotto.domain.LottoStatistics
-import lotto.domain.Winner
+import lotto.domain.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,7 +15,7 @@ class LottoTest {
     private lateinit var rankMap: MutableMap<Winner, Int>
     @BeforeEach
     fun setup() {
-        lotto = Lotto()
+        lotto = Lotto(LottoNumbers(listOf(1, 2, 3, 4, 5, 6)))
         rankMap = LottoStatistics().initStatisticsMap()
     }
 
@@ -50,5 +48,13 @@ class LottoTest {
     fun `4개 숫자와 보너스 숫자를 맞추면 2등 보너스 당첨이다`() {
         Winner.findWinner(5, true, rankMap)
         rankMap.get(Winner.SECOND_PLACE_WITH_BONUS) shouldBe 1
+    }
+
+    @Test
+    fun `로또는 수동과 자동으로 구매 가능하다`() {
+        val customLottoNumber = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+        val lotto = LottoShop(2000, listOf(customLottoNumber))
+        val buyLotto = lotto.sellLotto()
+        buyLotto.size shouldBe 2
     }
 }

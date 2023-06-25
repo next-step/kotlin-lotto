@@ -21,22 +21,16 @@ class LottoShop(
     }
 
     private fun customLotto(customNumbers: List<LottoNumbers>): List<Lotto> {
-        val lottoList: MutableList<Lotto> = mutableListOf()
-        customNumbers.forEach {
-            lottoList.add(Lotto(it))
+        return customNumbers.map {
+            Lotto(it)
         }
-        return lottoList.toList()
-    }
-
-    private fun getBuyLottoCount(purchasePrice: Int): Int {
-        return purchasePrice / LOTTO_PRICE
     }
 
     private fun getBuyLottoCount(purchasePrice: Int, customCount: Int): Int {
         return (purchasePrice - (customCount * LOTTO_PRICE)) / LOTTO_PRICE
     }
 
-    fun generateAutoNumber(): LottoNumbers {
+    private fun generateAutoNumber(): LottoNumbers {
         val numbers = (START_LOTTO_NUMBER..LAST_LOTTO_NUMBER).shuffled()
             .subList(FROM_INDEX, TO_INDEX)
             .sorted()
