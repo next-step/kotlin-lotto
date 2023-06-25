@@ -4,7 +4,7 @@ class LottoResult(
     private val winningLotto: WinningLotto,
     private val lottos: List<Lotto>
 ) {
-    val rankCntMap = mutableMapOf<LottoRank?, Int>()
+    val rankCntMap = mutableMapOf<LottoRank, Int>()
     var rateOfReturn = 0.0
 
     init {
@@ -24,7 +24,7 @@ class LottoResult(
     }
 
     private fun getTotalProfit(): Int {
-        return rankCntMap.keys.sumOf { rankCntMap[it]!! * (it?.winningMoney ?: LottoRank.DEFAULT_MONEY) }
+        return rankCntMap.keys.sumOf { rankCntMap[it]!!.times(it.winningMoney) }
     }
 
 }
