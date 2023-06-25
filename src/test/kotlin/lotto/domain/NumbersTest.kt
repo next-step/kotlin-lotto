@@ -2,13 +2,14 @@ package lotto.domain
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import lotto.domain.Numbers.Companion.toNumbers
 
 class NumbersTest : FunSpec({
 
     test("입력받은 숫자 리스트와 일치하는 숫자 개수를 반환할 수 있다.") {
         // given
-        val numbers = Numbers(listOf(1, 2, 3, 4, 5, 6))
-        val winningNumbers = listOf(1, 2, 3, 4, 5, 7)
+        val numbers = listOf(1, 2, 3, 4, 5, 6).toNumbers()
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 7).toNumbers()
         val expected = 5
 
         // when

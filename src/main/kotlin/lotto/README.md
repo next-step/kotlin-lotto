@@ -11,3 +11,4 @@
 - [x] 결과에 대한 수익률을 계산해 반환한다. - LottoResult
 - [x] 로또 1장의 가격(1000)보다 구입 금액이 적다면 RuntimeException 예외가 발생해야 한다. - LottoMachine
 - [x] 당첨 번호를 저장할 수 있다. - WinningNumbers
+- [x] 2등을 위해 추가 번호를 하나 더 추첨한다. - LottoMatcher

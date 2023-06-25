@@ -6,8 +6,8 @@ import lotto.domain.LottoTickets
 
 class OutputView {
     fun printTickets(lottoTickets: LottoTickets) {
-        println("${lottoTickets.numbers.size}개를 구매했습니다.")
-        lottoTickets.numbers.forEach {
+        println("${lottoTickets.values.size}개를 구매했습니다.")
+        lottoTickets.values.forEach {
             println(it.values)
         }
     }
@@ -15,11 +15,15 @@ class OutputView {
     fun printWinningStatistics(lottoResult: LottoResult) {
         println("\n당첨 통계")
         println("--------")
-        for (rank in LottoRank.values()) {
-            if (rank == LottoRank.NONE) {
+        for (rank in LottoRank.values().reversed()) {
+            if (rank == LottoRank.MISS) {
                 continue
             }
-            println("${rank.matchCount}개 일치 (${rank.price}) - ${lottoResult.map[rank] ?: 0}개")
+            print("${rank.countOfMatch}개 일치")
+            if (rank == LottoRank.SECOND) {
+                print(", 보너스 볼 일치")
+            }
+            println(" (${rank.price}) - ${lottoResult.map[rank] ?: 0}개")
         }
     }
 

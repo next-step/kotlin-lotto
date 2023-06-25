@@ -5,6 +5,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import lotto.domain.Numbers.Companion.toNumbers
 import lotto.fake.FakeNumberGenerator
 
 class LottoMachineTest : FunSpec({
@@ -46,6 +47,6 @@ class LottoMachineTest : FunSpec({
 
         // then
         actual.values shouldHaveSize numberOfTickets
-        actual.values[0].values shouldBe expected
+        actual.values[0] shouldBe expected.toNumbers()
     }
 })
