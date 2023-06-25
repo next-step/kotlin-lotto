@@ -5,11 +5,12 @@ class LottoResult(
     private val lottos: List<Lotto>
 ) {
     val rankCntMap = mutableMapOf<LottoRank?, Int>()
-    val rateOfReturn = returnRate(getTotalProfit())
+    var rateOfReturn = 0.0
     val message = resultMessage()
 
     init {
         setResultMap()
+        setReturnRate(getTotalProfit())
     }
 
     private fun setResultMap() {
@@ -19,8 +20,8 @@ class LottoResult(
         }
     }
 
-    private fun returnRate(profit: Int): Double {
-        return profit.toDouble() / (lottos.size * Lotto.PRICE)
+    private fun setReturnRate(profit: Int) {
+        rateOfReturn = profit.toDouble() / (lottos.size * Lotto.PRICE)
     }
 
     private fun getTotalProfit(): Int {
