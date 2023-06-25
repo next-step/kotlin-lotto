@@ -5,15 +5,11 @@ open class Lotto(
 ) {
 
     init {
-        isValid(lottoNumbers)
+        require(lottoNumbers.size == COUNT_OF_LOTTO_NUMBER)
     }
 
     override fun toString(): String {
         return lottoNumbers.sorted().toString()
-    }
-
-    private fun isValid(nums: Set<LottoNumber>) {
-        require(nums.size == COUNT_OF_LOTTO_NUMBER)
     }
 
     companion object {
