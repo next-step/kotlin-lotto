@@ -7,13 +7,13 @@ internal class IssuedLottosTest {
     @Test
     internal fun `발급받은 여러개의 로또에 당첨 번호를 비교했을때 번호가 몇개 일치하는지 알 수 있어야한다`() {
         // given : 당첨 번호와 발급받은 로또 준비
-        val winningLotto = WinningLotto(setOf(1, 2, 3, 4, 5, 6), 7)
+        val winningLotto = WinningLotto((1..6).toLottoNumberSet(), LottoNumber.from(7))
         val issuedLottos = listOf(
-            Lotto(setOf(1, 2, 3, 4, 5, 45)),
-            Lotto(setOf(1, 2, 3, 4, 5, 7)),
-            Lotto(setOf(1, 2, 3, 4, 5, 45)),
-            Lotto(setOf(1, 2, 3, 4, 44, 45)),
-            Lotto(setOf(1, 2, 3, 43, 44, 45)),
+            Lotto(setOf(1, 2, 3, 4, 5, 45).toLottoNumberSet()),
+            Lotto(setOf(1, 2, 3, 4, 5, 7).toLottoNumberSet()),
+            Lotto(setOf(1, 2, 3, 4, 5, 45).toLottoNumberSet()),
+            Lotto(setOf(1, 2, 3, 4, 44, 45).toLottoNumberSet()),
+            Lotto(setOf(1, 2, 3, 43, 44, 45).toLottoNumberSet()),
         )
         val sut = IssuedLottos(issuedLottos)
 
