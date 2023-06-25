@@ -2,7 +2,7 @@ package lotto.domain
 
 const val LOTTO_SIZE = 6
 
-class LottoTickets(
+data class LottoTickets(
     val values: List<Numbers>
 ) {
     init {
