@@ -9,8 +9,8 @@ class ProfitTest : StringSpec({
     "총 수익을 계산한다." {
         Profit.calculateLottoProfit(
             listOf(
-                ResultDTO(3, LottoRank.THREE),
-                ResultDTO(1, LottoRank.FOUR),
+                ResultDTO(3, LottoRank.FIFTH),
+                ResultDTO(1, LottoRank.FOURTH),
             )
         ) shouldBe 65000
     }
