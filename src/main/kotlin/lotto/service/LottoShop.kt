@@ -27,12 +27,16 @@ class LottoShop {
 class LottoGenerator {
 
     companion object {
+        private const val LOTTO_NUMBER_COUNT = 6
+        private const val LOTTO_NUMBER_MIN = 1
+        private const val LOTTO_NUMBER_MAX = 45
+
         fun generate(): Lotto {
             return Lotto(
-                1.rangeTo(45)
+                LOTTO_NUMBER_MIN.rangeTo(LOTTO_NUMBER_MAX)
                     .toList()
                     .shuffled()
-                    .take(6)
+                    .take(LOTTO_NUMBER_COUNT)
                     .sorted(),
             )
         }
