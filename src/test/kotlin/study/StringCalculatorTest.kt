@@ -15,7 +15,7 @@ class StringCalculatorTest : FunSpec({
             "1:2:3" to 6,
             "1,2:3,4" to 10,
         ) { (input, expected) ->
-            StringPlusCalculator().calculate(input) shouldBe expected
+            StringPlusCalculator.calculate(input) shouldBe expected
         }
     }
 
@@ -39,7 +39,7 @@ class StringCalculatorTest : FunSpec({
             "//;\n1;2;3;4" to 10,
             "//;\n1;2;3;4;5" to 15,
         ) { (input, expected) ->
-            StringPlusCalculator().calculate(input) shouldBe expected
+            StringPlusCalculator.calculate(input) shouldBe expected
         }
     }
 
@@ -50,7 +50,7 @@ class StringCalculatorTest : FunSpec({
             "a,2:3,-4" to RuntimeException("숫자 이외의 값은 입력할 수 없습니다."),
         ) { (input, expected) ->
             shouldThrow<RuntimeException> {
-                StringPlusCalculator().calculate(input)
+                StringPlusCalculator.calculate(input)
             }.message shouldBe expected.message
         }
     }
