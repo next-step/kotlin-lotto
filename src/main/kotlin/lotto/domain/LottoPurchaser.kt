@@ -14,10 +14,10 @@ class LottoPurchaser(
         val purchaseAmount = getPurchasableNum(inputAmount)
         val purchasedLotto = lottoSeller.sell(purchaseAmount)
         purchasedLottos.addAll(purchasedLotto)
-        return purchasedLottos
+        return purchasedLottos.toList()
     }
 
-    fun getPurchasableNum(inputAmount: Int): Int {
+    private fun getPurchasableNum(inputAmount: Int): Int {
         return inputAmount / Lotto.PRICE
     }
 }
