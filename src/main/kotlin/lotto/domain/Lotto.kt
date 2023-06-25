@@ -13,20 +13,19 @@ class Lottos(
         }
 
         fun getManualLottos(numbers: List<List<Int>>): Lottos {
-            return numbers.map { Lotto(it, LottoType.MANUAL) }.toLottos()
+            return numbers.map { Lotto(it.map { number -> number.toLottoNumber() }, LottoType.MANUAL) }.toLottos()
         }
     }
 }
 
 class Lotto(
-    val numbers: List<Int>,
+    val numbers: List<LottoNumber>,
     val lottoType: LottoType = LottoType.AUTO
 ) {
 
     init {
         require(numbers.size == 6) { "6개의 숫자가 필요합니다." }
         require(numbers.distinct().size == 6) { "중복되지 않은 6개의 숫자가 필요합니다." }
-        require(numbers.all { it in 1..45 }) { "1~45의 수만 가능합니다" }
     }
 }
 

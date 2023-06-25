@@ -5,6 +5,7 @@ import lotto.domain.LottoResult
 import lotto.domain.LottoShop
 import lotto.domain.Profit
 import lotto.domain.WinningLotto
+import lotto.domain.toLottoNumber
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -17,7 +18,7 @@ fun main() {
     val lottos = LottoShop.getLottos(money, manualLottos)
 
     ResultView.printLottos(lottos)
-    val lottoResult = Lotto(InputView.getWinningNumbers())
+    val lottoResult = Lotto(InputView.getWinningNumbers().map { it.toLottoNumber() })
     val bonus = InputView.getBonusNumber()
 
     val result = LottoResult.calculateResult(

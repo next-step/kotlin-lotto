@@ -5,7 +5,10 @@ import lotto.dto.ResultDTO
 object LottoResult {
     fun calculateResult(lottos: Lottos, lottoResult: WinningLotto): List<ResultDTO> {
         return lottos.list.map { lotto ->
-            Pair(lotto.numbers.count { it in lottoResult.lotto.numbers }, lotto.numbers.contains(lottoResult.bonusNumber))
+            Pair(
+                lotto.numbers.count { it in lottoResult.lotto.numbers },
+                lotto.numbers.map { it.number }.contains(lottoResult.bonusNumber)
+            )
         }.mapNotNull {
             LottoRank.of(it.first, it.second)
         }.groupBy {
