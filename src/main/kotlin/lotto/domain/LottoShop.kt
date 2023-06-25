@@ -10,7 +10,7 @@ object LottoShop {
         val manualLottos = createManualLottos(request.manualLottoNumbers)
         val autoLottos = createAutoLottos(request.money - manualLottos.totalCost)
 
-        return LottosGenerateResponse(manualLottos, autoLottos)
+        return LottosGenerateResponse(manualLottos + autoLottos)
     }
 
     private fun createManualLottos(manualLottoNumbers: List<LottoNumbers>): Lottos =

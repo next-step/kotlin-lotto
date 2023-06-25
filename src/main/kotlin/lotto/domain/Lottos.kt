@@ -6,6 +6,12 @@ class Lottos(
     val lottoQuantity: LottoQuantity = LottoQuantity(values.size)
     val totalCost: Money = Money(lottoQuantity.value * Lotto.PRICE)
 
+    val manual: Lottos
+        get() = Lottos(values.filter { it.type == LottoType.MANUAL })
+
+    val auto: Lottos
+        get() = Lottos(values.filter { it.type == LottoType.AUTO })
+
     fun calculateResults(
         winningLotto: WinningLotto,
     ): LottosResult {

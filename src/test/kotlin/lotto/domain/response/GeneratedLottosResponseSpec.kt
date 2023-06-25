@@ -3,6 +3,7 @@ package lotto.domain.response
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
+import lotto.domain.LottoType
 import lotto.domain.extension.lotto
 import lotto.domain.extension.lottos
 
@@ -16,27 +17,24 @@ class GeneratedLottosResponseSpec : DescribeSpec({
             )
 
             val autoLottos = lottos(
-                lotto(10, 2, 3, 4, 5, 6),
-                lotto(10, 2, 3, 4, 5, 7),
+                LottoType.AUTO.generate(),
+                LottoType.AUTO.generate(),
             )
 
-            val lottosGenerateResponse = LottosGenerateResponse(
-                manualLottos = manualLottos,
-                autoLottos = autoLottos,
-            )
+            val response = LottosGenerateResponse(manualLottos + autoLottos)
 
             it("총 로또 수는 5개다.") {
-                lottosGenerateResponse.lottos.lottoQuantity.value shouldBe 5
-                lottosGenerateResponse.lottos.values shouldContainAll manualLottos.values
-                lottosGenerateResponse.lottos.values shouldContainAll autoLottos.values
+                response.lottos.lottoQuantity.value shouldBe 5
+                response.lottos.values shouldContainAll manualLottos.values
+                response.lottos.values shouldContainAll autoLottos.values
             }
             it("수동 로또 수는 입력된 3개다.") {
-                lottosGenerateResponse.manualLottos.lottoQuantity.value shouldBe 3
-                lottosGenerateResponse.manualLottos shouldBe manualLottos
+                response.lottos.manual.lottoQuantity.value shouldBe 3
+                response.lottos.manual.values shouldBe manualLottos.values
             }
             it("자동 로또 수는 입력된 2개다.") {
-                lottosGenerateResponse.autoLottos.lottoQuantity.value shouldBe 2
-                lottosGenerateResponse.autoLottos shouldBe autoLottos
+                response.lottos.auto.lottoQuantity.value shouldBe 2
+                response.lottos.auto.values shouldBe autoLottos.values
             }
         }
     }

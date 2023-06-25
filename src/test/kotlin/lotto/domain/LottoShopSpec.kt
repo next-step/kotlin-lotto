@@ -37,13 +37,13 @@ class LottoShopSpec : DescribeSpec({
                 LottoShop.sellByMoneyWithManualLottos(request)
 
             it("수동 로또(3개)를 반환한다.") {
-                response.manualLottos.lottoQuantity.value shouldBe 3
-                response.manualLottos.values.shouldForAll { lotto ->
+                response.lottos.manual.lottoQuantity.value shouldBe 3
+                response.lottos.manual.values.shouldForAll { lotto ->
                     manualLottoNumbers.shouldContainAll(lotto.numbers)
                 }
             }
             it("수동 로또 구매 금액을 제외한 나머지 금액으로 자동 로또(2개)를 반환한다.") {
-                response.autoLottos.lottoQuantity.value shouldBe 2
+                response.lottos.auto.lottoQuantity.value shouldBe 2
             }
         }
 

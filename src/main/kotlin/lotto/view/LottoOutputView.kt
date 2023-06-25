@@ -6,7 +6,7 @@ import lotto.domain.response.LottosGenerateResponse
 
 object LottoOutputView {
     fun printLottos(response: LottosGenerateResponse) {
-        println("수동으로 ${response.manualLottos.lottoQuantity}장, 자동으로 ${response.autoLottos.lottoQuantity}개를 구매했습니다.")
+        println("수동으로 ${response.lottos.manual.lottoQuantity}장, 자동으로 ${response.lottos.auto.lottoQuantity}개를 구매했습니다.")
         response.lottos.values.forEach { lotto ->
             println("[${lotto.numbers.values.sortedBy { it.value }.joinToString(", ")}]")
         }

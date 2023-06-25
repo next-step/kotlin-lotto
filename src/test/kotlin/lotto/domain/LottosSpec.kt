@@ -10,7 +10,8 @@ class LottosSpec : DescribeSpec({
     describe("로또 개수 검증") {
         context("로또 목록이 주어지면") {
             it("로또 개수를 반환할 수 있다.") {
-                val lottos = lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
+                val lottos =
+                    lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
 
                 lottos.lottoQuantity.value shouldBe 3
             }
@@ -20,7 +21,8 @@ class LottosSpec : DescribeSpec({
     describe("로또 구매 비용 검증") {
         context("로또 목록이 주어지면") {
             it("로또 비용을 반환할 수 있다.") {
-                val lottos = lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
+                val lottos =
+                    lottos(Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO), Lotto(type = LottoType.AUTO))
 
                 lottos.totalCost.value shouldBe 3000
             }
@@ -101,6 +103,28 @@ class LottosSpec : DescribeSpec({
                 val lottos = lottos1 + lottos2
 
                 lottos.lottoQuantity.value shouldBe 4
+            }
+        }
+    }
+
+    describe("수동 로또 프로퍼티 검증") {
+        context("수동 로또(2개)와 자동 로또(1개)로 구성되었을 때") {
+            val lottos =
+                lottos(Lotto(type = LottoType.MANUAL), Lotto(type = LottoType.MANUAL), Lotto(type = LottoType.AUTO))
+
+            it("수동 로또 개수는 2개이다.") {
+                lottos.manual.values.size shouldBe 2
+            }
+        }
+    }
+
+    describe("자동 로또 프로퍼티 검증") {
+        context("수동 로또(2개)와 자동 로또(1개)로 구성되었을 때") {
+            val lottos =
+                lottos(Lotto(type = LottoType.MANUAL), Lotto(type = LottoType.MANUAL), Lotto(type = LottoType.AUTO))
+
+            it("자동 로또 개수는 1개이다.") {
+                lottos.auto.values.size shouldBe 1
             }
         }
     }
