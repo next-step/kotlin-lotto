@@ -21,8 +21,7 @@ object StringPlusCalculatorParser {
     }
 
     private fun parseStringNumber(stringNumber: String): Int {
-        if (stringNumber.toIntOrNull() == null) throw RuntimeException("숫자 이외의 값은 입력할 수 없습니다.")
-        val number = stringNumber.toInt()
+        val number = stringNumber.toIntOrNull() ?: throw RuntimeException("숫자 이외의 값은 입력할 수 없습니다.")
         if (number < 0) throw RuntimeException("음수는 입력할 수 없습니다.")
         return number
     }
