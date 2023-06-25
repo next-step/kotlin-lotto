@@ -4,7 +4,7 @@ import lotto.domain.LottoMachine
 import lotto.domain.LottoMatcher
 import lotto.domain.LottoResult
 import lotto.domain.LottoNumber
-import lotto.domain.Numbers.Companion.toNumbers
+import lotto.domain.LottoNumbers.Companion.toNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
 

@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
-import lotto.domain.Numbers.Companion.toNumbers
+import lotto.domain.LottoNumbers.Companion.toNumbers
 import lotto.fake.FakeNumberGenerator
 
 class LottoMachineTest : FunSpec({

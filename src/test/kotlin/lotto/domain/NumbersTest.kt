@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
-import lotto.domain.Numbers.Companion.toNumbers
+import lotto.domain.LottoNumbers.Companion.toNumbers
 import java.lang.IllegalArgumentException
 
 class NumbersTest : FunSpec({
@@ -17,7 +17,7 @@ class NumbersTest : FunSpec({
             listOf(LottoNumber(1), LottoNumber(2))
         ).forAll {
             // when, then
-            shouldThrow<IllegalArgumentException> { Numbers(values) }
+            shouldThrow<IllegalArgumentException> { LottoNumbers(values) }
         }
     }
 
