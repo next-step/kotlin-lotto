@@ -3,21 +3,21 @@ package study
 import java.lang.RuntimeException
 
 object StringPlusCalculatorParser {
-    fun parse(input: String): List<Int> {
-        if (input.isBlank()) return emptyList()
+    fun parse(expression: String): List<Int> {
+        if (expression.isBlank()) return emptyList()
 
-        val stringNumbers = splitStringNumbers(input)
+        val stringNumbers = splitStringNumbers(expression)
         return stringNumbers
             .map(::parseStringNumber)
     }
 
-    private fun splitStringNumbers(input: String): List<String> {
-        if (input.startsWith("//")) {
-            val customDelimiter = input.substring(2, 3)
-            return input.substring(4).split(customDelimiter)
+    private fun splitStringNumbers(expression: String): List<String> {
+        Regex("//(.)\n(.*)").find(expression)?.let {
+            val customDelimiter = it.groupValues[1]
+            return it.groupValues[2].split(customDelimiter)
         }
         val delimiters = "[,:]".toRegex()
-        return input.split(delimiters)
+        return expression.split(delimiters)
     }
 
     private fun parseStringNumber(stringNumber: String): Int {
