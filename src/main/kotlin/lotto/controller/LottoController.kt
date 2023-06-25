@@ -5,6 +5,7 @@ import lotto.domain.LottoCalculator
 import lotto.domain.LottoStore
 import lotto.domain.model.InputResult
 import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import lotto.domain.model.LottoResult
 import lotto.domain.model.Lottos
 import lotto.domain.model.Prize
@@ -30,13 +31,15 @@ class LottoController {
         val lottos = Lottos(mutableListOf<Lotto>().apply { addAll(LottoStore.buy(money)) })
         ResultView.printBuyResult(lottos)
 
-        val winningNumbers = InputParser.parse(InputView.inputWinningNumbers())
-            .map { it.toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE) }
+        val winningNumbers = InputParser.parse(InputView.inputWinningNumbers()).map {
+            val value = it.toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
+            LottoNumber.from(value)
+        }
 
         val bonus = InputView.inputBonusBall().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
 
         require(winningNumbers.size == Lotto.NUMBER_COUNT) { INPUT_ERROR_MESSAGE }
-        return InputResult(lottos, SelectedBalls(WinningBalls(winningNumbers), bonus), money)
+        return InputResult(lottos, SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus)), money)
     }
 
     private fun output(lottos: Lottos, selectedBalls: SelectedBalls, money: Int) {

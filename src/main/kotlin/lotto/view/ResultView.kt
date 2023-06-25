@@ -9,7 +9,7 @@ object ResultView {
     fun printBuyResult(lottos: Lottos) {
         println("${lottos.items.size}개를 구매했습니다")
         lottos.items.forEach {
-            println(it.numbers.sorted())
+            println(it.numbers.sortedBy { number -> number.value })
         }
         println()
     }

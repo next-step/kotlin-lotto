@@ -1,3 +1,3 @@
 package lotto.domain.model
 
-data class WinningBalls(val balls: List<Int>)
+data class WinningBalls(val balls: List<LottoNumber>)

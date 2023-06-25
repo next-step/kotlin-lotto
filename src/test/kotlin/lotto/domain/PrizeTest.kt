@@ -2,75 +2,75 @@ package lotto.domain
 
 import io.kotest.matchers.shouldBe
 import lotto.domain.model.Lotto
-import lotto.domain.model.LottoResult
+import lotto.domain.model.LottoNumber
 import lotto.domain.model.Prize
 import lotto.domain.model.SelectedBalls
 import lotto.domain.model.WinningBalls
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
 
 class PrizeTest {
-    @MethodSource("provideLottoResultExceptBonus")
-    @ParameterizedTest
-    fun `당첨 번호로 일치하는 결과를 구한다`(expectedResult: LottoResult) {
-        val lotto = Lotto()
-        val winningNumbers = mutableListOf<Int>().apply {
-            val matchCount = expectedResult.prize.matches
+    @Test
+    fun `당첨 번호가 3개 일치하면 THREE_MATCH 당첨이다`() {
+        val numbers = (1..6).map { LottoNumber.from(it) }
+        val lotto = Lotto(numbers)
+        val winningNumbers = listOf(1, 2, 3, 10, 11, 12).map { LottoNumber.from(it) }
 
-            // 로또의 숫자를 기준으로 일정 갯수의 당첨 번호를 생성
-            val tempWinningNumbers = lotto.numbers.subList(0, matchCount)
-            addAll(tempWinningNumbers)
+        val bonus = 13
 
-            // 절대 일치하지 않도록 범위 밖의 값을 남은 숫자만큼 넣어줌
-            repeat(lotto.numbers.size - tempWinningNumbers.size) { add(0) }
-        }
+        val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus))
 
-        // bonus 번호가 일치하지 없도록 범위 밖의 숫자를 넣어줌
-        val bonus = -1
-
-        val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), bonus)
-
-        Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
+        Prize.from(selectedBalls, lotto) shouldBe Prize.THREE_MATCH
     }
 
     @Test
-    fun `2등 결과를 구한다`() {
-        val expectedResult = LottoResult(1, Prize.FIVE_MATCH_PLUS_BONUS)
+    fun `당첨 번호가 4개 일치하면 FOUR_MATCH 당첨이다`() {
+        val numbers = (1..6).map { LottoNumber.from(it) }
+        val lotto = Lotto(numbers)
+        val winningNumbers = listOf(1, 2, 3, 4, 10, 11).map { LottoNumber.from(it) }
 
-        val lotto = Lotto()
+        val bonus = 12
 
-        // 마지막 숫자를 보너스 숫자로 설정
-        val bonus = lotto.numbers[lotto.numbers.size - 1]
+        val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus))
 
-        val winningNumbers = mutableListOf<Int>().apply {
-            val matchCount = expectedResult.prize.matches
-
-            // 로또의 숫자를 기준으로 일정 갯수의 당첨 번호를 생성
-            val tempWinningNumbers = lotto.numbers.subList(0, matchCount)
-            addAll(tempWinningNumbers)
-
-            // 절대 일치하지 않도록 범위 밖의 값을 남은 숫자만큼 넣어줌
-            repeat(lotto.numbers.size - tempWinningNumbers.size) { add(0) }
-        }
-
-        val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), bonus)
-
-        Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
+        Prize.from(selectedBalls, lotto) shouldBe Prize.FOUR_MATCH
     }
 
-    companion object {
-        @JvmStatic
-        fun provideLottoResultExceptBonus(): Stream<Arguments> {
-            return Stream.of(
-                Arguments.of(LottoResult(1, Prize.SIX_MATCH)),
-                Arguments.of(LottoResult(1, Prize.FIVE_MATCH)),
-                Arguments.of(LottoResult(1, Prize.FOUR_MATCH)),
-                Arguments.of(LottoResult(1, Prize.THREE_MATCH)),
-                Arguments.of(LottoResult(1, Prize.NOTHING)),
-            )
-        }
+    @Test
+    fun `당첨 번호가 5개 일치하면 FIVE_MATCH 당첨이다`() {
+        val numbers = (1..6).map { LottoNumber.from(it) }
+        val lotto = Lotto(numbers)
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 10).map { LottoNumber.from(it) }
+
+        val bonus = 11
+
+        val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus))
+
+        Prize.from(selectedBalls, lotto) shouldBe Prize.FIVE_MATCH
+    }
+
+    @Test
+    fun `당첨 번호가 5개 일치하고 보너스볼이 일치하면 FIVE_MATCH_PLUS_BONUS 당첨이다`() {
+        val numbers = (1..6).map { LottoNumber.from(it) }
+        val lotto = Lotto(numbers)
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 10).map { LottoNumber.from(it) }
+
+        val bonus = 6
+
+        val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus))
+
+        Prize.from(selectedBalls, lotto) shouldBe Prize.FIVE_MATCH_PLUS_BONUS
+    }
+
+    @Test
+    fun `당첨 번호가 6개 일치하면 SIX_MATCH 당첨이다`() {
+        val numbers = (1..6).map { LottoNumber.from(it) }
+        val lotto = Lotto(numbers)
+        val winningNumbers = (1..6).map { LottoNumber.from(it) }
+
+        val bonus = 6
+
+        val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), LottoNumber.from(bonus))
+
+        Prize.from(selectedBalls, lotto) shouldBe Prize.SIX_MATCH
     }
 }
