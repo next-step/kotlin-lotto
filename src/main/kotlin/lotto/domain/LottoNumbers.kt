@@ -1,12 +1,10 @@
 package lotto.domain
 
-import lotto.domain.numberGenerator.NumberGenerator
+class LottoNumbers(numbers: List<LottoNumber>) {
 
-class LottoNumbers(numberGenerator: NumberGenerator) {
-
-    val lottoNumbers: List<Int> = numberGenerator.generateNumbers()
+    val lottoNumbers: List<LottoNumber> = numbers
 
     fun countMatches(other: LottoNumbers): Int {
-        return lottoNumbers.count { it in other.lottoNumbers }
+        return lottoNumbers.count { it.value in other.lottoNumbers.map { num -> num.value } }
     }
 }

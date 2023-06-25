@@ -2,29 +2,47 @@ package lotto.controller
 
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
-import lotto.domain.numberGenerator.FixedNumberGenerator
+import lotto.domain.numberGenerator.FixedLottoNumberGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class LottoGame(
     private val inputView: InputView,
     private val resultView: ResultView,
-    private val lottoFactory: LottoFactory
+    private val lottoShop: LottoShop
 ) {
     fun start() {
         val input = inputView.readMoney()
-        val lottos = lottoFactory.createLottos(input)
+        val manualLottoNumbers = readManualLottoNumbers()
+        val totalLottoCount = input / LottoFactory.PER_LOTTO_PRICE
+        val randomLottoCount = totalLottoCount - manualLottoNumbers.size
+        val ticket = LottoTicket(manualLottoNumbers, randomLottoCount)
 
-        val bonusNumber = inputView.readBonusNumber()
-        resultView.printLottoInfo(lottos)
-        val winningNumbers = getWinningNumbers(bonusNumber)
-        val matchResult = calculateMatchResult(lottos, winningNumbers)
-        printResults(matchResult, input)
+        val lottos = lottoShop.purchaseLottos(ticket)
+        displayLottoInfo(lottos, manualLottoNumbers.size)
+        val winningNumbers = readWinningNumbers()
+        displayMatchResults(lottos, winningNumbers, input)
     }
 
-    private fun getWinningNumbers(bonusNumber: Int): WinningNumbers {
-        val winningNumberGenerator = FixedNumberGenerator(inputView.readWinningNumbers())
-        return WinningNumbers.of(LottoNumbers(winningNumberGenerator), bonusNumber)
+    private fun readManualLottoNumbers(): List<List<Int>> {
+        val manualLottoCount = inputView.readManualLottoCount()
+        return inputView.readManualLottoNumbers(manualLottoCount)
+    }
+
+    private fun displayLottoInfo(lottos: Lottos, manualLottoCount: Int) {
+        resultView.printLottoCount(manualLottoCount, lottos.getSize() - manualLottoCount)
+        resultView.printLottoInfo(lottos)
+    }
+
+    private fun readWinningNumbers(): WinningNumbers {
+        val winningNumberGenerator = FixedLottoNumberGenerator(inputView.readWinningNumbers())
+        val bonusNumber = inputView.readBonusNumber()
+        return WinningNumbers.of(LottoNumbers(winningNumberGenerator.generateNumbers()), bonusNumber)
+    }
+
+    private fun displayMatchResults(lottos: Lottos, winningNumbers: WinningNumbers, input: Int) {
+        val matchResult = calculateMatchResult(lottos, winningNumbers)
+        printResults(matchResult, input)
     }
 
     private fun calculateMatchResult(lottos: Lottos, winningNumbers: WinningNumbers): MatchResult {

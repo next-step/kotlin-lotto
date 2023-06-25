@@ -2,16 +2,21 @@ package lotto.controller
 
 import lotto.domain.LottoNumbers
 import lotto.domain.Lottos
-import lotto.domain.numberGenerator.NumberGenerator
+import lotto.domain.numberGenerator.LottoNumberGenerator
 
-class LottoFactory(private val numberGenerator: NumberGenerator) {
+class LottoFactory(private val lottoNumberGenerator: LottoNumberGenerator) {
 
-    fun createLottos(input: Int): Lottos {
-        val count = input / PER_LOTTO_PRICE
-        val lottoList = List(count) { LottoNumbers(numberGenerator) }
-        return Lottos(lottoList)
+    fun createRandomLottos(count: Int): Lottos {
+        val randomLottoNumbers = List(count) { createRandomLottoNumbers() }
+        return Lottos(randomLottoNumbers)
     }
+
+    private fun createRandomLottoNumbers(): LottoNumbers {
+        val lottoNumberList = lottoNumberGenerator.generateNumbers()
+        return LottoNumbers(lottoNumberList)
+    }
+
     companion object {
-        private const val PER_LOTTO_PRICE = 1000
+        const val PER_LOTTO_PRICE = 1000
     }
 }
