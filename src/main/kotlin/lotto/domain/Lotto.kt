@@ -1,22 +1,18 @@
 package lotto.domain
 
-class Lotto {
-    private val _lottoNumbers: LottoNumbers
-
+class Lotto(
     val lottoNumbers: LottoNumbers
-        get() = _lottoNumbers
-
+) {
     init {
-        _lottoNumbers = purchaseLotto()
         require(lottoNumbers.numbers.size == LOTTO_DEFAULT_COUNT) {
-            "로또 개수는 6개여야 합니다."
+            ERROR_LOTTO_COUNT
         }
         require(lottoNumbers.numbers.all { it in START_LOTTO_NUMBER..LAST_LOTTO_NUMBER }) {
-            "로또 숫자는 1 부터 45 까지 입니다."
+            ERROR_LOTTO_NUMBER_RANGE
         }
     }
 
-    private fun purchaseLotto(): LottoNumbers {
+    fun purchaseAutoLotto(): LottoNumbers {
         val numbers = (START_LOTTO_NUMBER..LAST_LOTTO_NUMBER).shuffled()
             .subList(FROM_INDEX, TO_INDEX)
             .sorted()
@@ -37,5 +33,7 @@ class Lotto {
         const val FROM_INDEX = 0
         const val TO_INDEX = 6
         const val LOTTO_DEFAULT_COUNT = 6
+        const val ERROR_LOTTO_COUNT = "로또 개수는 6개여야 합니다."
+        const val ERROR_LOTTO_NUMBER_RANGE = "로또 숫자는 1 부터 45 까지 입니다."
     }
 }
