@@ -1,17 +1,27 @@
 package lotto.controller
 
-import lotto.domain.LottoMachine
-import lotto.domain.Price
-import lotto.view.inputPrice
-import lotto.view.printBuyCount
-import lotto.view.printLottoNumbers
+import lotto.domain.*
+import lotto.view.*
 
 class LottoController {
     fun start() {
         val price = Price(inputPrice())
-        printBuyCount(price.value)
+        val priceValue = price.value
+        printBuyCount(priceValue)
+
         val lottoMachine = LottoMachine(price)
-        printLottoNumbers(lottoMachine.lottoNumbers())
+        val lottoNumbers = lottoMachine.lottoNumbers()
+        printLottoNumbers(lottoNumbers)
+
+        val winningNumbers = LottoNumbers(inputWinningNumbers())
+        val winningLotto = WinningLotto(winningNumbers)
+
+        printResultMessage()
+        val lottoResult = LottoResult()
+        printResult(
+            lottoResult.lottoRanking(lottoNumbers, winningLotto),
+            lottoResult.rateOfReturn(priceValue)
+        )
     }
 
 }
