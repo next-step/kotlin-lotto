@@ -10,13 +10,11 @@ class LottoResult(val map: Map<LottoRank, Int>) {
     }
 
     private fun getTotalProfit(): Int {
-        var total = 0
-        map.forEach { (lottoRank, count) ->
-            total += lottoRank.price * count
-        }
-        return total
+        return map
+            .map { (lottoRank, count) ->
+                lottoRank.price * count
+            }.sum()
     }
-
 
     companion object {
         const val SCALE = 2

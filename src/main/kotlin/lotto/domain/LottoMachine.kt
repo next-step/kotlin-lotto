@@ -1,12 +1,10 @@
 package lotto.domain
 
-const val LOTTO_SIZE = 6
-
 class LottoMachine(
     private val lottoNumberGenerator: NumberGenerator = LottoNumberGenerator()
 ) {
     fun buyTickets(purchaseAmount: Int): LottoTickets {
-        require(purchaseAmount >= 1000) { "최소 구매 금액은 1000원 입니다." }
+        require(purchaseAmount >= TICKET_PRICE) { "최소 구매 금액은 1000원 입니다. 입력 구매 금액: [$purchaseAmount]" }
 
         val numberOfTickets = getNumberOfTickets(purchaseAmount)
         val lottoTickets = List(numberOfTickets) { Numbers(lottoNumberGenerator.generate()) }
