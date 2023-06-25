@@ -12,7 +12,7 @@ enum class LottoRank(
     MISS(0, 0);
 
     companion object {
-        fun getLottoRankByMatchCount(countOfMatch: Int, matchBonus: Boolean): LottoRank {
+        fun of(countOfMatch: Int, matchBonus: Boolean): LottoRank {
             if (SECOND.countOfMatch == countOfMatch && matchBonus) {
                 return SECOND
             }
