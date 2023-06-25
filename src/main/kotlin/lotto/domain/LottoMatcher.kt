@@ -1,6 +1,7 @@
 package lotto.domain
 
 class LottoMatcher(private val winningNumbers: LottoNumbers, private val bonusLottoNumber: LottoNumber) {
+
     fun getMatchingResult(lottoTickets: LottoTickets): LottoResult {
         return lottoTickets.values
             .map { numbers -> Pair(numbers.countMatchingNumbers(winningNumbers), hasBonusNumber(numbers)) }

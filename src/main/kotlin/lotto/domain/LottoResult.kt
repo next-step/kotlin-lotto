@@ -4,6 +4,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 class LottoResult(val map: Map<LottoRank, Int>) {
+
     fun calculateProfitRate(purchaseAmount: Int): Double {
         val profitRate = getTotalProfit() / purchaseAmount.toDouble()
         return BigDecimal(profitRate).setScale(SCALE, RoundingMode.DOWN).toDouble()

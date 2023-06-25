@@ -5,6 +5,7 @@ import lotto.domain.LottoResult
 import lotto.domain.LottoTickets
 
 class OutputView {
+
     fun printTickets(lottoTickets: LottoTickets) {
         println("${lottoTickets.values.size}개를 구매했습니다.")
         lottoTickets.values.forEach {

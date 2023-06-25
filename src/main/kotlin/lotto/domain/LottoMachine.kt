@@ -5,6 +5,7 @@ import lotto.domain.LottoNumbers.Companion.toNumbers
 class LottoMachine(
     private val lottoNumberGenerator: NumberGenerator = LottoNumberGenerator()
 ) {
+
     fun buyTickets(purchaseAmount: Int): LottoTickets {
         require(purchaseAmount >= TICKET_PRICE) { "최소 구매 금액은 1000원 입니다. 입력 구매 금액: [$purchaseAmount]" }
 

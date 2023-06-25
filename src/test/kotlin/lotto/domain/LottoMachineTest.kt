@@ -23,7 +23,7 @@ class LottoMachineTest : FunSpec({
     }
 
     test("로또 1장의 가격(1000)보다 구입 금액이 적다면 IllegalArgumentException 예외가 발생해야 한다.") {
-        //given
+        // given
         val lottoMachine = LottoMachine()
         listOf(1, 500, 900).forAll { purchaseAmount ->
             // when, then

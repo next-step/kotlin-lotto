@@ -2,9 +2,7 @@ package lotto.domain
 
 const val LOTTO_SIZE = 6
 
-data class LottoTickets(
-    val values: List<LottoNumbers>
-) {
+data class LottoTickets(val values: List<LottoNumbers>) {
     init {
         for (numbers in values) {
             require(numbers.values.size == LOTTO_SIZE) {
