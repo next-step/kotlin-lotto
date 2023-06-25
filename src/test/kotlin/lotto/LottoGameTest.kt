@@ -25,5 +25,15 @@ internal class LottoGameTest : BehaviorSpec({
                 }
             }
         }
+
+        When("구입 금액을 입력하면") {
+            val lottoPrices = listOf(1000L, 20000, 345000)
+            Then("(구입 금액 / 로또 가격)만큼 로또 생성") {
+                val actual = lottoPrices.map { LottoGame(lottoPrice = it) }
+                actual.forAll { lottoGame ->
+                    lottoGame.lottoList.lottos.size shouldBe lottoGame.lottoPrice / LottoGame.LOTTO_PRICE
+                }
+            }
+        }
     }
 })
