@@ -10,9 +10,10 @@ class LottoGame(
 ) {
 
     fun start() {
-        val inputAmount = inputView.inputPurchaseAmount()
-        val purchaser = LottoPurchaser(AutoLottoSeller())
-        val lottoList = purchaser.purchase(inputAmount)
+        val purchaseRequest = inputView.createRequest()
+        val purchaser = LottoPurchaser(purchaseRequest)
+        val lottoList = purchaser.purchase()
+
         resultView.displayPurchasedLotto(lottoList)
 
         val winningNums = inputView.inputWinningNums().map { LottoNumber(it) }.toSet()

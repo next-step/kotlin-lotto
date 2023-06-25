@@ -6,6 +6,7 @@ import lotto.domain.LottoResult
 
 class ResultView {
 
+    //TODO :
     fun displayPurchasedLotto(lottoList: List<Lotto>) {
         println("${lottoList.size} 개를 구매했습니다.")
         lottoList.forEach { println(it.toString()) }

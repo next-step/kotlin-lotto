@@ -1,24 +1,53 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoPurchaseRequest
 
 class InputView {
 
-    fun inputPurchaseAmount(): Int {
+    fun createRequest(): LottoPurchaseRequest {
+        val inputMoney = inputPurchaseAmount()
+        val purchaseAmount = getPurchasableNum(inputMoney)
+        var manualAmount = inputManualAmount()
+
+        while (manualAmount > purchaseAmount) {
+            println("구입금액은 0보다 크고 100만보다 작거나 같아야 합니다. 다시 입력해주세요.")
+            manualAmount = inputManualAmount()
+        }
+
+        val manualNumbers = inputManualNumbers(manualAmount)
+        val autoAmount = purchaseAmount - manualAmount
+
+        return LottoPurchaseRequest(autoAmount, manualNumbers)
+    }
+
+    private fun inputPurchaseAmount(): Int {
         println("구입금액을 입력해 주세요.")
         var inputAmount = readNumber()
-        while (!isValid(inputAmount)) {
+        while (!(inputAmount in PURCHASABLE_RANGE)) {
             println("구입금액은 0보다 크고 100만보다 작거나 같아야 합니다. 다시 입력해주세요.")
             inputAmount = readNumber()
         }
         return inputAmount
     }
 
+    private fun inputManualAmount(): Int {
+        println("수동으로 구매할 로또 수를 입력해 주세요.")
+        return readNumber()
+    }
+
+    private fun inputManualNumbers(cnt: Int): List<List<Int>> {
+        println("수동으로 구매할 번호를 입력해 주세요.")
+        val result = mutableListOf<List<Int>>()
+        repeat(cnt) {
+            result += inputLottoNumbers()
+        }
+        return result
+    }
+
     fun inputWinningNums(): List<Int> {
         println("지난 주 당첨 번호를 입력해 주세요.")
-        val input = readLine()?.trim()
-        val numbers = input?.split(",", " ")?.map { it.trim().toInt() }
-        return numbers?.take(Lotto.COUNT_OF_LOTTO_NUMBER) ?: emptyList()
+        return inputLottoNumbers()
     }
 
     fun inputBunusNum(): Int {
@@ -30,9 +59,14 @@ class InputView {
         return readLine()?.toIntOrNull() ?: 0
     }
 
-    private fun isValid(number: Int): Boolean {
-        if (number in PURCHASABLE_RANGE) return true
-        return false
+    private fun inputLottoNumbers(): List<Int> {
+        val input = readLine()?.trim()
+        val numbers = input?.split(",", " ")?.map { it.trim().toInt() }
+        return numbers?.take(Lotto.COUNT_OF_LOTTO_NUMBER) ?: emptyList()
+    }
+
+    private fun getPurchasableNum(inputAmount: Int): Int {
+        return inputAmount / Lotto.PRICE
     }
 
     companion object {

@@ -1,9 +1,17 @@
 package lotto.domain
 
-interface LottoSeller {
+object LottoSeller {
 
-    /**
-     * 전달 받은 수만큼 로또를 판매한다.
-     */
-    fun sell(amount: Int): List<Lotto>
+    fun sellAutoLotto(amount: Int) = List(amount) { Lotto(generateLottoNumbers()) }
+
+    fun sellManualLotto(manualNumbers: List<List<Int>>): List<Lotto> {
+        return manualNumbers.map { numbers ->
+            Lotto(numbers.map{ LottoNumber(it) }.toSet())
+        }
+    }
+
+    private fun generateLottoNumbers(): Set<LottoNumber> = LottoNumber.VALID_RANGE.shuffled()
+        .take(Lotto.COUNT_OF_LOTTO_NUMBER)
+        .map { LottoNumber(it) }
+        .toSet()
 }
