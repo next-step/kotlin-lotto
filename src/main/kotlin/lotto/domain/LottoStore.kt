@@ -9,6 +9,8 @@ object LottoStore {
         val totalLottoCount = money.value / Lotto.PRICE
         val manualLottoCount = manualNumbers.size
 
+        require(totalLottoCount >= manualLottoCount) { "구입금액이 부족합니다" }
+
         return mutableListOf<Lotto>().apply {
             addAll(manualNumbers.map { Lotto(it.numbers) })
             addAll(List(totalLottoCount - manualLottoCount) { Lotto(generateAuto()) })

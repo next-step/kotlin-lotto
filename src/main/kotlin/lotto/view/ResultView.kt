@@ -1,13 +1,14 @@
 package lotto.view
 
+import lotto.domain.model.Count
 import lotto.domain.model.LottoResult
 import lotto.domain.model.Lottos
 import lotto.domain.model.Prize
 import lotto.domain.model.ProfitState
 
 object ResultView {
-    fun printBuyResult(lottos: Lottos) {
-        println("${lottos.items.size}개를 구매했습니다")
+    fun printBuyResult(manualCount: Count, autoCount: Count, lottos: Lottos) {
+        println("수동으로 ${manualCount.value}장, 자동으로 ${autoCount.value}개를 구매했습니다")
         lottos.items.forEach {
             println(it.numbers.sortedBy { number -> number.value })
         }
@@ -35,11 +36,11 @@ object ResultView {
 
     private fun Prize.toText(): String {
         return when (this) {
-            Prize.SIX_MATCH -> "6개 일치 (${reward}원)"
-            Prize.FIVE_MATCH_PLUS_BONUS -> "5개 일치, 보너스 볼 일치 (${reward}원)"
-            Prize.FIVE_MATCH -> "5개 일치 (${reward}원)"
-            Prize.FOUR_MATCH -> "4개 일치 (${reward}원)"
-            Prize.THREE_MATCH -> "3개 일치 (${reward}원)"
+            Prize.SIX_MATCH -> "6개 일치 (${reward.value}원)"
+            Prize.FIVE_MATCH_PLUS_BONUS -> "5개 일치, 보너스 볼 일치 (${reward.value}원)"
+            Prize.FIVE_MATCH -> "5개 일치 (${reward.value}원)"
+            Prize.FOUR_MATCH -> "4개 일치 (${reward.value}원)"
+            Prize.THREE_MATCH -> "3개 일치 (${reward.value}원)"
             else -> ""
         }
     }

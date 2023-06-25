@@ -1,5 +1,6 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
@@ -33,15 +34,20 @@ class LottoStoreTest {
     fun `로또를 수동으로 구입할 수 있다`() {
         val manualNumbers = ManualNumbers((1..6).map { LottoNumber.from(it) })
 
-        manualNumbers.numbers.forEach {
-            println(it)
-        }
-        println()
         val lotto = LottoStore.buy(Money(1000), listOf(manualNumbers))[0]
         val expectedNumbers = (1..6).map { LottoNumber.from(it) }
 
         lotto.numbers.forEachIndexed { index, lottoNumber ->
             lottoNumber shouldBe expectedNumbers[index]
+        }
+    }
+
+    @Test
+    fun `구입금액보다 수동으로 구매할 로또가 많으면 예외가 발생한다`() {
+        val manualNumbers = ManualNumbers((1..6).map { LottoNumber.from(it) })
+
+        shouldThrow<IllegalArgumentException> {
+            LottoStore.buy(Money(500), listOf(manualNumbers))
         }
     }
 }
