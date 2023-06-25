@@ -2,6 +2,7 @@ package lotto.domain
 
 import io.kotest.matchers.shouldBe
 import lotto.domain.model.Lotto
+import lotto.domain.model.LottoNumber
 import lotto.domain.model.Money
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -26,5 +27,21 @@ class LottoStoreTest {
     fun `구매한 로또의 번호는 6개이다`() {
         val lotto = LottoStore.buy(Money(1000))[0]
         lotto.numbers.size shouldBe 6
+    }
+
+    @Test
+    fun `로또를 수동으로 구입할 수 있다`() {
+        val manualNumbers = ManualNumbers((1..6).map { LottoNumber.from(it) })
+
+        manualNumbers.numbers.forEach {
+            println(it)
+        }
+        println()
+        val lotto = LottoStore.buy(Money(1000), listOf(manualNumbers))[0]
+        val expectedNumbers = (1..6).map { LottoNumber.from(it) }
+
+        lotto.numbers.forEachIndexed { index, lottoNumber ->
+            lottoNumber shouldBe expectedNumbers[index]
+        }
     }
 }

@@ -5,7 +5,15 @@ import lotto.domain.model.LottoNumber
 import lotto.domain.model.Money
 
 object LottoStore {
-    fun buy(money: Money): List<Lotto> = List(money.value / Lotto.PRICE) { Lotto(generateAuto()) }
+    fun buy(money: Money, manualNumbers: List<ManualNumbers> = listOf()): List<Lotto> {
+        val totalLottoCount = money.value / Lotto.PRICE
+        val manualLottoCount = manualNumbers.size
+
+        return mutableListOf<Lotto>().apply {
+            addAll(manualNumbers.map { Lotto(it.numbers) })
+            addAll(List(totalLottoCount - manualLottoCount) { Lotto(generateAuto()) })
+        }
+    }
 
     private fun generateAuto(): List<LottoNumber> {
         return (LottoNumber.FIRST_NUMBER..LottoNumber.LAST_NUMBER)
