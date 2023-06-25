@@ -15,7 +15,7 @@ class LottoGenerator {
     fun generateLottos(count: Int, manualLottos: Lottos): Lottos {
         val lottos = mutableListOf<Lotto>()
         lottos.addAll(manualLottos.lottoNumbers)
-        repeat(count - manualLottos.lottoNumbers.size) {
+        repeat(count - manualLottos.size()) {
             val lotto = Lotto(generateLottoNumbers())
             lottos.add(lotto)
         }
