@@ -1,8 +1,8 @@
 package lotto.view
 
-import lotto.domain.model.Lotto
 import lotto.domain.model.LottoResult
 import lotto.domain.model.Lottos
+import lotto.domain.model.Prize
 import lotto.domain.model.ProfitState
 
 object ResultView {
@@ -33,13 +33,13 @@ object ResultView {
         }
     }
 
-    private fun Lotto.Prize.toText(): String {
+    private fun Prize.toText(): String {
         return when (this) {
-            Lotto.Prize.SIX_MATCH -> "6개 일치 (${reward}원)"
-            Lotto.Prize.FIVE_MATCH_PLUS_BONUS -> "5개 일치, 보너스 볼 일치 (${reward}원)"
-            Lotto.Prize.FIVE_MATCH -> "5개 일치 (${reward}원)"
-            Lotto.Prize.FOUR_MATCH -> "4개 일치 (${reward}원)"
-            Lotto.Prize.THREE_MATCH -> "3개 일치 (${reward}원)"
+            Prize.SIX_MATCH -> "6개 일치 (${reward}원)"
+            Prize.FIVE_MATCH_PLUS_BONUS -> "5개 일치, 보너스 볼 일치 (${reward}원)"
+            Prize.FIVE_MATCH -> "5개 일치 (${reward}원)"
+            Prize.FOUR_MATCH -> "4개 일치 (${reward}원)"
+            Prize.THREE_MATCH -> "3개 일치 (${reward}원)"
             else -> ""
         }
     }

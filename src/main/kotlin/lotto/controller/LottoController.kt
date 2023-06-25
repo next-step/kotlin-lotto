@@ -7,6 +7,7 @@ import lotto.domain.model.InputResult
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoResult
 import lotto.domain.model.Lottos
+import lotto.domain.model.Prize
 import lotto.domain.model.SelectedBalls
 import lotto.domain.model.WinningBalls
 import lotto.domain.model.toProfitState
@@ -47,10 +48,10 @@ class LottoController {
     private fun error(error: Throwable) = ResultView.printMessage(error.message ?: "")
 
     private fun getResults(lottos: Lottos, selectedBalls: SelectedBalls): List<LottoResult> {
-        val results = Lotto.prizes.map { LottoResult(0, it) }.toMutableList()
+        val results = Prize.values().map { LottoResult(0, it) }.toMutableList()
         lottos.items.forEach {
-            val prize = Lotto.Prize.from(selectedBalls, it)
-            val index = Lotto.prizes.indexOf(prize)
+            val prize = Prize.from(selectedBalls, it)
+            val index = Prize.indexOf(prize.matches, prize.bonus)
             results[index] = LottoResult(results[index].count + 1, prize)
         }
         return results

@@ -3,6 +3,7 @@ package lotto.domain
 import io.kotest.matchers.shouldBe
 import lotto.domain.model.Lotto
 import lotto.domain.model.LottoResult
+import lotto.domain.model.Prize
 import lotto.domain.model.SelectedBalls
 import lotto.domain.model.WinningBalls
 import org.junit.jupiter.api.Test
@@ -32,12 +33,12 @@ class PrizeTest {
 
         val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), bonus)
 
-        Lotto.Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
+        Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
     }
 
     @Test
     fun `2등 결과를 구한다`() {
-        val expectedResult = LottoResult(1, Lotto.Prize.FIVE_MATCH_PLUS_BONUS)
+        val expectedResult = LottoResult(1, Prize.FIVE_MATCH_PLUS_BONUS)
 
         val lotto = Lotto()
 
@@ -57,18 +58,18 @@ class PrizeTest {
 
         val selectedBalls = SelectedBalls(WinningBalls(winningNumbers), bonus)
 
-        Lotto.Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
+        Prize.from(selectedBalls, lotto) shouldBe expectedResult.prize
     }
 
     companion object {
         @JvmStatic
         fun provideLottoResultExceptBonus(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of(LottoResult(1, Lotto.Prize.SIX_MATCH)),
-                Arguments.of(LottoResult(1, Lotto.Prize.FIVE_MATCH)),
-                Arguments.of(LottoResult(1, Lotto.Prize.FOUR_MATCH)),
-                Arguments.of(LottoResult(1, Lotto.Prize.THREE_MATCH)),
-                Arguments.of(LottoResult(1, Lotto.Prize.NOTHING)),
+                Arguments.of(LottoResult(1, Prize.SIX_MATCH)),
+                Arguments.of(LottoResult(1, Prize.FIVE_MATCH)),
+                Arguments.of(LottoResult(1, Prize.FOUR_MATCH)),
+                Arguments.of(LottoResult(1, Prize.THREE_MATCH)),
+                Arguments.of(LottoResult(1, Prize.NOTHING)),
             )
         }
     }
