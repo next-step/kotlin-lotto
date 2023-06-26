@@ -5,6 +5,16 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 internal class WinningLottoTest {
+
+    @DisplayName(value = "보너스 번호는 당첨 번호와 다른 번호여야 한다.")
+    @Test
+    fun bonusNumber() {
+        val winningNumbers = listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }.toSet()
+        val bonusNumber = LottoNumber(1)
+        Assertions.assertThatExceptionOfType(IllegalArgumentException::class.java)
+            .isThrownBy{ WinningLotto(winningNumbers, bonusNumber) }
+    }
+
     @DisplayName(value = "당첨 등수를 반환할 수 있다.")
     @Test
     fun rank() {

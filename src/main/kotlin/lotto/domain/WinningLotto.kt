@@ -5,6 +5,10 @@ class WinningLotto(
     private val bonusNumber: LottoNumber
 ) : Lotto(winningNumbers) {
 
+    init {
+        require(!winningNumbers.contains(bonusNumber))
+    }
+
     fun rankOfLotto(lotto: Lotto): LottoRank {
         val numOfMatch = lottoNumbers.intersect(lotto.lottoNumbers).count()
         val bonusMatch = lotto.lottoNumbers.contains(bonusNumber)
