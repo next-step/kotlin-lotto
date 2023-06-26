@@ -8,9 +8,9 @@ class ResultView {
         val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
         for (lotteryPaper in lotteryPaperList) {
             print("[")
-            lotteryPaper.lottoNumber.forEachIndexed { index, ints ->
+            lotteryPaper.getLottoNumber().forEachIndexed { index, ints ->
                 print(ints)
-                if (index != lotteryPaper.lottoNumber.lastIndex) {
+                if (index != lotteryPaper.getLottoNumber().lastIndex) {
                     print(", ")
                 }
             }

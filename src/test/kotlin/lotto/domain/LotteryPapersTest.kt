@@ -19,7 +19,7 @@ class LotteryPapersTest {
         lotteryPapers.generateRandomLottoNumber()
         val purcahsedLotteryPapers = lotteryPapers.getPurchasedLotteryPapers()
         val lotteryPaperList = purcahsedLotteryPapers.lotteryPaperList
-        val lottoNumber = lotteryPaperList[0].lottoNumber
+        val lottoNumber = lotteryPaperList[0].getLottoNumber()
         Assertions.assertThat(lottoNumber).hasSize(6).allMatch { it in 1..45 }
     }
 
@@ -28,7 +28,7 @@ class LotteryPapersTest {
         lotteryPapers.generateRandomLottoNumber()
         val purcahsedLotteryPapers = lotteryPapers.getPurchasedLotteryPapers()
         val lotteryPaperList = purcahsedLotteryPapers.lotteryPaperList
-        val lottoNumber = lotteryPaperList[0].lottoNumber
+        val lottoNumber = lotteryPaperList[0].getLottoNumber()
         Assertions.assertThat(lottoNumber.size).isEqualTo(lottoNumber.toSet().size)
     }
 

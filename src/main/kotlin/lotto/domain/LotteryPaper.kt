@@ -1,6 +1,10 @@
 package lotto.domain
 
-class LotteryPaper(val lottoNumber: List<Int>) {
+class LotteryPaper(private val lottoNumber: List<Int>) {
+
+    init {
+        validateLottoNumber(lottoNumber)
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -11,6 +15,10 @@ class LotteryPaper(val lottoNumber: List<Int>) {
 
     override fun hashCode(): Int {
         return this.lottoNumber.hashCode()
+    }
+
+    fun getLottoNumber(): List<Int> {
+        return lottoNumber.toList()
     }
 
     companion object {

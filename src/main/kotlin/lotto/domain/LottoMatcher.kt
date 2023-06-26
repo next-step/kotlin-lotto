@@ -20,7 +20,7 @@ class LottoMatcher {
 
     private fun getMatchedCount(winningLottoNumber: List<Int>, lotteryPaperList: List<LotteryPaper>): List<Int> {
         return lotteryPaperList.map {
-            LottoNumberComparator.compare(winningLottoNumber, it.lottoNumber)
+            LottoNumberComparator.compare(winningLottoNumber, it.getLottoNumber())
         }
     }
 }
