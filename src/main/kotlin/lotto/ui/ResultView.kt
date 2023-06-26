@@ -5,12 +5,12 @@ import lotto.dto.PurchasedLotteryPapers
 
 class ResultView {
     fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
-        val lottoNumbers = purchasedLotteryPapers.lottoNumbers
-        for (lottoNumber in lottoNumbers) {
+        val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
+        for (lotteryPaper in lotteryPaperList) {
             print("[")
-            lottoNumber.forEachIndexed { index, ints ->
+            lotteryPaper.lottoNumber.forEachIndexed { index, ints ->
                 print(ints)
-                if (index != lottoNumber.lastIndex) {
+                if (index != lotteryPaper.lottoNumber.lastIndex) {
                     print(", ")
                 }
             }

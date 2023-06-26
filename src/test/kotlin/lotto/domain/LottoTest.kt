@@ -26,9 +26,9 @@ class LottoTest {
     fun `입력받은 구입 금액에 맞게 로또를 구매한다`(money: Int) {
         val buyLottoTicket = lotto.buyLottoTicket(money)
         lotto.generateLottoNumbers(buyLottoTicket)
-        val lottoResponse = lotto.lotteryPapers.getPurchasedLotteryPapers()
-        val lottoNumbers = lottoResponse.lottoNumbers
-        Assertions.assertThat(lottoNumbers).hasSize(buyLottoTicket)
+        val purchasedLotteryPapers = lotto.lotteryPapers.getPurchasedLotteryPapers()
+        val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
+        Assertions.assertThat(lotteryPaperList).hasSize(buyLottoTicket)
     }
 
     @ParameterizedTest
