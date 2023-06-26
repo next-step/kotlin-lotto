@@ -40,6 +40,6 @@ class LotteryPapersTest {
             LotteryPaper(lottoNumbers)
         )
 
-        assertThrows<IllegalArgumentException> { LotteryPapers.isDuplicateLotteryPaper(lotteryPaperList) }
+        assertThrows<IllegalArgumentException> { LotteryPapers.validateDuplicateLotteryPaper(lotteryPaperList) }
     }
 }

@@ -17,6 +17,6 @@ data class PurchasedLotteryPapers(val lotteryPaperList: List<LotteryPaper>) {
     }
 
     private fun validateLottoPaperList() {
-        LotteryPapers.isDuplicateLotteryPaper(lotteryPaperList)
+        LotteryPapers.validateDuplicateLotteryPaper(lotteryPaperList)
     }
 }
