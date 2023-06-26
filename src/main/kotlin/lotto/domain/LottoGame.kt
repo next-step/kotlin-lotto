@@ -20,6 +20,8 @@ class LottoGame(
         lottoList = LottoList.of(lottoStrategy, lottoCount)
     }
 
+    fun getResult(previousLottoNumbers: LottoNumbers): LottoResult = lottoList.getResult(previousLottoNumbers)
+
     companion object {
         const val LOTTO_PRICE = 1000L
         private const val LOTTO_PRICE_NOT_FALL_APART_EXCEPTION = "로또 개당 가격과 맞지 않는 금액입니다."

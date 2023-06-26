@@ -3,8 +3,11 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
+import io.kotest.matchers.collections.shouldContainAll
+import io.kotest.matchers.maps.shouldContainAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.LottoGame
+import lotto.domain.LottoNumbers
 
 internal class LottoGameTest : BehaviorSpec({
 
@@ -33,6 +36,15 @@ internal class LottoGameTest : BehaviorSpec({
                 actual.forAll { lottoGame ->
                     lottoGame.lottoList.lottos.size shouldBe lottoGame.lottoPrice / LottoGame.LOTTO_PRICE
                 }
+            }
+        }
+
+        When("결과를 출력하면") {
+            val lottoGame = LottoGame(lottoPrice = 10000)
+            val previousLottoNumbers = LottoNumbers(listOf(1, 2, 3, 4, 5, 6))
+            Then("각 일치 개수, 복권의 개수가 반환된다.") {
+                val actual = lottoGame.getResult(previousLottoNumbers)
+                actual.result.values.flatMap { it.lottos }.shouldContainAll(lottoGame.lottoList.lottos)
             }
         }
     }
