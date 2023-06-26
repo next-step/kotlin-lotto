@@ -6,17 +6,21 @@ import lotto.dto.PurchasedLotteryPapers
 class ResultView {
     fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
         val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
-        for (lotteryPaper in lotteryPaperList) {
-            print("[")
-            lotteryPaper.getLottoNumber().forEachIndexed { index, ints ->
-                print(ints)
-                if (index != lotteryPaper.getLottoNumber().lastIndex) {
-                    print(", ")
-                }
-            }
-            println("]")
+        lotteryPaperList.forEach {
+            printSingleLottoNumber(it.getLottoNumber())
         }
         println()
+    }
+
+    private fun printSingleLottoNumber(lottoNumber: List<Int>) {
+        print("[")
+        lottoNumber.forEachIndexed { index, ints ->
+            print(ints)
+            if (index != lottoNumber.lastIndex) {
+                print(", ")
+            }
+        }
+        println("]")
     }
 
     fun printNumberOfLottoTicket(numberOfLottoTicket: Int) {
