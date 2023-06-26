@@ -1,11 +1,9 @@
 package lotto.domain
 
-class WinningNumber() {
+class WinningNumber(private val winningLottoNumber: List<Int>) {
 
-    private lateinit var winningLottoNumber: List<Int>
-    fun generateWinningNumber(input: List<Int>) {
-        LotteryPaper.validateLottoNumber(input)
-        winningLottoNumber = input
+    init {
+        LotteryPaper.validateLottoNumber(winningLottoNumber)
     }
 
     fun getWinningLottoNumber(): List<Int> {
