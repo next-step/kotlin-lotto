@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LotteryShop
+import lotto.domain.LottoNumber
 import lotto.domain.WinningTicket
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -15,7 +16,7 @@ fun main() {
     ResultView.printLottos(manualNum, tickets)
 
     val lastLottoNums = InputView.getWinningLottoNums()
-    val bonusNum = InputView.getBonusNum()
+    val bonusNum = LottoNumber(InputView.getBonusNum())
     val winningTicket = WinningTicket(lastLottoNums, bonusNum)
     val score = tickets.score(winningTicket)
     val rate = score.calculateRateOfReturn(money)
