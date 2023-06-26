@@ -1,5 +1,6 @@
 package lotto.domain
 
+import lotto.dto.LottoMatchResult
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -31,7 +32,7 @@ class PrizeLevelTest {
             PrizeLevel.SECOND
         )
 
-        val actual = PrizeLevel.countPrizeLevels(listOfPrizeLevel)
+        val actual = LottoMatchResult.countPrizeLevels(listOfPrizeLevel)
         val answer = mapOf(
             PrizeLevel.FIRST to 2,
             PrizeLevel.SECOND to 1,

@@ -11,13 +11,5 @@ enum class PrizeLevel(val numberOfHit: Int, val prizeMoney: Int) {
         fun fromNumberOfHit(numberOfHit: Int): PrizeLevel {
             return values().firstOrNull { it.numberOfHit == numberOfHit } ?: NONE
         }
-
-        fun countPrizeLevels(prizeLevels: List<PrizeLevel>): Map<PrizeLevel, Int> {
-            return prizeLevels
-                .filter { it != PrizeLevel.NONE }
-                .groupingBy { it }
-                .eachCount()
-                .withDefault { 0 }
-        }
     }
 }

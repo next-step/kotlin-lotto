@@ -15,7 +15,7 @@ class LottoMatcher {
         val prizeList = matchedCounts.map { matchedCount ->
             PrizeLevel.fromNumberOfHit(matchedCount)
         }
-        return LottoMatchResult(PrizeLevel.countPrizeLevels(prizeList))
+        return LottoMatchResult(LottoMatchResult.countPrizeLevels(prizeList))
     }
 
     private fun getMatchedCount(winningLottoNumber: List<Int>, lotteryPaperList: List<LotteryPaper>): List<Int> {
