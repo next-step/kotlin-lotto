@@ -60,9 +60,9 @@ class InputView {
     }
 
     private fun inputLottoNumbers(): List<Int> {
-        val input = readLine()?.trim()
-        val numbers = input?.split(",", " ")?.map { it.trim().toInt() }
-        return numbers?.take(Lotto.COUNT_OF_LOTTO_NUMBER) ?: emptyList()
+        val input = readlnOrNull() ?: return emptyList()
+        val numbers = input.split(",", " ").map { it.trim().toInt() }
+        return numbers.take(Lotto.COUNT_OF_LOTTO_NUMBER)
     }
 
     private fun getPurchasableNum(inputAmount: Int): Int {
