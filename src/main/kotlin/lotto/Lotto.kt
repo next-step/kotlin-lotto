@@ -2,7 +2,7 @@ package lotto
 
 class Lotto(
     val numbers: LottoNumbers,
-    val salePrice: Int = DEFAULT_SALE_PRICE,
+    val salePrice: Int,
     val lottoType: LottoType = LottoType.AUTO
 ) {
 
@@ -15,6 +15,5 @@ class Lotto(
 
     companion object {
         const val MAX_NUMBER_COUNT = 6
-        const val DEFAULT_SALE_PRICE = 1_000
     }
 }
