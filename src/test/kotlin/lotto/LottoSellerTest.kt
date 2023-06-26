@@ -18,7 +18,7 @@ internal class LottoSellerTest : StringSpec({
     }
 
     "입력한 수동로또 번호 리스트의 갯수만큼 수동로또를 생성하고 남은 금액으로는 자동로또를 생성한다" {
-        val lottos = sut.sell(LottoPurchaseOrder(10000, listOf(LottoNumberGenerator.create())))
+        val lottos = sut.sell(LottoPurchaseOrder(10000, listOf(LottoNumbers(LottoNumberGenerator.create()))))
         lottos.getNumberOfManualLottos() shouldBe 1
         lottos.getNumberOfAutoLottos() shouldBe 9
     }

@@ -1,7 +1,7 @@
 package lotto
 
 class Lotto(
-    val numbers: List<LottoNumber>,
+    val numbers: LottoNumbers,
     val salePrice: Int = DEFAULT_SALE_PRICE,
     val lottoType: LottoType = LottoType.AUTO
 ) {

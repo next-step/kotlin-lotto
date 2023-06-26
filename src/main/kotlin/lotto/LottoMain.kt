@@ -8,7 +8,7 @@ fun main() {
     val lottoSeller = LottoSeller(AutoLottoFactory, 1000)
     val manualLottoCount = InputView.getManualLottoCount()
     val manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount)
-    val lottos = lottoSeller.sell(LottoPurchaseOrder(totalPrice, manualLottoNumbers.map { LottoNumber.of(it) }))
+    val lottos = lottoSeller.sell(LottoPurchaseOrder(totalPrice, manualLottoNumbers.map { LottoNumbers(LottoNumber.of(it)) }))
     ResultView.printPurchasedLottos(lottos)
     val winNumbers = LottoNumber.of(InputView.getPrevWeekWinningNumbers())
     val bonusNumber = LottoNumber.of(InputView.getBonusNumber())
