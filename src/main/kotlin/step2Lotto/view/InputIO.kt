@@ -1,25 +1,24 @@
 package step2Lotto.view
 
-import step2Lotto.domain.LottoNumber
-import step2Lotto.domain.Lotto
+import step2Lotto.domain.WinningNumber
 
 class InputIO {
     fun inputPurchaseAmount(inputString: String? = readlnOrNull()): Int {
         return inputString?.toIntOrNull() ?: 0
     }
 
-    fun inputWinningNumber(inputString: String? = readlnOrNull()): Lotto {
+    fun inputWinningNumber(inputString: String? = readlnOrNull()): WinningNumber {
 
         if (inputString == null) {
-            return Lotto(listOf())
+            return WinningNumber(arrayOf())
         }
 
-        return Lotto(convertStringToLottoNumbers(inputString))
+        return WinningNumber(convertStringToIntArray(inputString))
     }
 
-    private fun convertStringToLottoNumbers(string: String): List<LottoNumber> {
+    private fun convertStringToIntArray(string: String): Array<Int> {
         return string.replace(" ", "")
             .split(",")
-            .map { LottoNumber(it.toInt()) }
+            .map { it.toInt() }.toTypedArray()
     }
 }

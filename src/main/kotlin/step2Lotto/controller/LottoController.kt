@@ -1,10 +1,6 @@
 package step2Lotto.controller
 
-import step2Lotto.domain.AutoLottoGenerator
-import step2Lotto.domain.LottoService
-import step2Lotto.domain.LottoStore
-import step2Lotto.domain.Lotto
-import step2Lotto.domain.LottoRank
+import step2Lotto.domain.*
 import step2Lotto.domain.dto.ProfitRateRequest
 import step2Lotto.domain.dto.StatisticsRequest
 import step2Lotto.view.InputIO
@@ -31,7 +27,7 @@ class LottoController {
         return lottoTickets
     }
 
-    fun inputWinningLotto(): Lotto {
+    fun inputWinningLotto(): WinningNumber {
         inputView.show(InputMessage.WINNING_LOTTO)
         return inputIO.inputWinningNumber()
     }

@@ -8,7 +8,7 @@ enum class LottoRank(val prizeMoney: Int) {
     LOSE(0)
 }
 
-fun getLottoRank(lotto: Lotto, winningNumber: Lotto): LottoRank {
+fun getLottoRank(lotto: Lotto, winningNumber: WinningNumber): LottoRank {
     return when (lotto.numbers.intersect(winningNumber.numbers.toSet()).size) {
         3 -> LottoRank.FIFTH
         4 -> LottoRank.FOURTH

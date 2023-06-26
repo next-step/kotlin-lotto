@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import step2Lotto.domain.Lotto
 import step2Lotto.domain.LottoRank
 import step2Lotto.domain.LottoService
+import step2Lotto.domain.WinningNumber
 import step2Lotto.domain.dto.ProfitRateRequest
 import step2Lotto.domain.dto.StatisticsRequest
 
@@ -22,7 +23,7 @@ class LottoServiceTest {
             Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
         )
 
-        val winningNumber = Lotto(arrayOf(1, 2, 3, 4, 5, 6))
+        val winningNumber = WinningNumber(arrayOf(1, 2, 3, 4, 5, 6))
 
         val req = StatisticsRequest(lottoTickets, winningNumber)
         val statistics = lottoService.getStatistics(req)
