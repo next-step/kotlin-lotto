@@ -11,8 +11,8 @@ class LottoGame(
 
     fun start() {
         val purchaseRequest = inputView.createRequest()
-        val purchaser = LottoPurchaser(purchaseRequest)
-        val lottoList = purchaser.purchase()
+        val purchaser = LottoPurchaser()
+        val lottoList = purchaser.purchase(purchaseRequest)
 
         resultView.displayPurchasedLotto(lottoList)
 
