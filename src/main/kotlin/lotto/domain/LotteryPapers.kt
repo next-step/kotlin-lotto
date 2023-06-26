@@ -2,17 +2,15 @@ package lotto.domain
 
 import lotto.dto.PurchasedLotteryPapers
 
-class LotteryPapers {
+class LotteryPapers(private val lottoNumberGenerationStrategy: LottoNumberGenerationStrategy) {
     private val lotteryPaperList: MutableList<LotteryPaper> = mutableListOf()
 
     fun generateRandomLottoNumber() {
-        val generatedLotteryPaper = (LotteryPaper.MINIMUM_NUMBER..LotteryPaper.MAXIMUM_NUMBER)
-            .shuffled()
-            .take(LotteryPaper.NUMBER_OF_LOTTO_DRAWS)
-        lotteryPaperList.add(LotteryPaper(generatedLotteryPaper))
+        val generateLottoNumber = lottoNumberGenerationStrategy.generateLottoNumber()
+        lotteryPaperList.add(LotteryPaper(generateLottoNumber))
     }
 
-    fun getLottoResponse(): PurchasedLotteryPapers {
+    fun getPurchasedLotteryPapers(): PurchasedLotteryPapers {
         val toList = lotteryPaperList.map { it.lottoNumber }.toList()
         return PurchasedLotteryPapers(toList)
     }

@@ -10,13 +10,13 @@ class LotteryPapersTest {
 
     @BeforeEach
     fun setUp() {
-        lotteryPapers = LotteryPapers()
+        lotteryPapers = LotteryPapers(RandomLottoNumberGenerationStrategy())
     }
 
     @Test
     fun `1부터 45까지 숫자중 6개의 숫자를 무작위로 로또 번호를 생성한다`() {
         lotteryPapers.generateRandomLottoNumber()
-        val lottoResponse = lotteryPapers.getLottoResponse()
+        val lottoResponse = lotteryPapers.getPurchasedLotteryPapers()
         val lottoNumbers = lottoResponse.lottoNumbers
         Assertions.assertThat(lottoNumbers[0]).hasSize(6).allMatch { it in 1..45 }
     }
@@ -24,7 +24,7 @@ class LotteryPapersTest {
     @Test
     fun `생성된 로또 번호는 중복이 없다`() {
         lotteryPapers.generateRandomLottoNumber()
-        val lottoResponse = lotteryPapers.getLottoResponse()
+        val lottoResponse = lotteryPapers.getPurchasedLotteryPapers()
         val lottoNumbers = lottoResponse.lottoNumbers
         Assertions.assertThat(lottoNumbers[0].size).isEqualTo(lottoNumbers[0].toSet().size)
     }

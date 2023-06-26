@@ -2,7 +2,7 @@ package lotto.domain
 
 class Lotto {
 
-    var lotteryPapers: LotteryPapers = LotteryPapers()
+    var lotteryPapers: LotteryPapers = LotteryPapers(RandomLottoNumberGenerationStrategy())
         private set
 
     private val lottoValidator = LottoValidator()

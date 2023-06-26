@@ -32,7 +32,7 @@ class LottoController(
         val numberOfLottoTicket = lotto.buyLottoTicket(purchasingAmount)
         resultView.printNumberOfLottoTicket(numberOfLottoTicket)
         lotto.generateLottoNumbers(numberOfLottoTicket)
-        return lotto.lotteryPapers.getLottoResponse()
+        return lotto.lotteryPapers.getPurchasedLotteryPapers()
     }
 
     private fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
@@ -46,7 +46,10 @@ class LottoController(
         return winningNumber
     }
 
-    private fun matchLottoNumber(winningNumber: WinningNumber, purchasedLotteryPapers: PurchasedLotteryPapers): LottoMatchResult {
+    private fun matchLottoNumber(
+        winningNumber: WinningNumber,
+        purchasedLotteryPapers: PurchasedLotteryPapers
+    ): LottoMatchResult {
         val lottoMatcher = LottoMatcher()
         return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers)
     }
