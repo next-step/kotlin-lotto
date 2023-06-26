@@ -26,10 +26,12 @@ class StringAddCalculator {
         return input.sumOf { it.toInt() }
     }
 
-    private fun checkInt(text: String): Int =
-        if (text.toInt().toString() != text) throw IllegalArgumentException("숫자만 입력 가능합니다.")
-        else if (text.toInt() < 0) throw RuntimeException("음수는 입력할 수 없습니다.")
-        else text.toInt()
+    private fun checkInt(text: String): Int {
+        require(text.toInt() > 0) {
+            throw RuntimeException("양수인 숫자만 입력 가능합니다.")
+        }
+        return text.toInt()
+    }
 
     private fun formatWithRegexPattern(s: String): MatchResult? {
         return REGEX_PATTERN.find(s)
