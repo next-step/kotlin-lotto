@@ -11,6 +11,10 @@ value class Money(val value: Int) {
         return value / MIN_PRICE
     }
 
+    fun countAutoLotto(countManualLotto: Int): Int {
+        return countLotto() - countManualLotto
+    }
+
     companion object {
         private const val MIN_PRICE = 1000
         private const val MAX_PRICE = 100000

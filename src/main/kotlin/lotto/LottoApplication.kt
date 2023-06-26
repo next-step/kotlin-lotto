@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
     val money = InputView.inputMoney()
     val manualLottoCount = InputView.inputManualLottoCount()
     val manualLottoTickets = InputView.inputManualLottoNumbers(manualLottoCount)
-    val autoLottoTickets: List<LottoTicket> = List(money.countLotto() - manualLottoCount) {
+    val autoLottoTickets: List<LottoTicket> = List(money.countAutoLotto(manualLottoCount)) {
         LottoTicket(RandomNumbers.generateNumbers())
     }
 

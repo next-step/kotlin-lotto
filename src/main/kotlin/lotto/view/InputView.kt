@@ -29,13 +29,11 @@ object InputView {
 
     private fun inputLottoNumbers(): LottoTicket {
         val input: String = readln().replace(" ", "")
-        val inputStrings = input.split(REGEX.toRegex())
+        val inputStrings = input.split(REGEX)
             .dropLastWhile { it.isEmpty() }
             .toTypedArray()
         val lottoNumbers: MutableList<Int> = ArrayList()
-        for (i in inputStrings) {
-            lottoNumbers.add(i.toInt())
-        }
+        inputStrings.map { lottoNumbers.add(it.toInt()) }
         return LottoTicket(lottoNumbers)
     }
 
