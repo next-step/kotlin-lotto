@@ -1,13 +1,19 @@
 package lotto.domain
 
-class LottoMatcher(private val winningNumbers: List<Int>) {
+class LottoMatcher(
+    private val winningNumbers: LottoNumbers,
+    private val bonusNumber: LottoNumber
+) {
+
     fun getMatchingResult(lottoTickets: LottoTickets): LottoResult {
-        val map = lottoTickets.numbers
-            .map { numbers -> countMatchingNumbers(numbers) }
-            .groupingBy { LottoRank.getLottoRankByMatchCount(it) }
+        return lottoTickets.values
+            .map { numbers -> Pair(numbers.countMatchingNumbers(winningNumbers), hasBonusNumber(numbers)) }
+            .groupingBy { LottoRank.of(it.first, it.second) }
             .eachCount()
-        return LottoResult(map)
+            .let { LottoResult(it) }
     }
 
-    private fun countMatchingNumbers(myNumbers: Numbers) = myNumbers.values.count { winningNumbers.contains(it) }
+    private fun hasBonusNumber(myNumbers: LottoNumbers): Boolean {
+        return myNumbers.values.contains(bonusNumber)
+    }
 }
