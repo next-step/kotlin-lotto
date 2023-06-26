@@ -2,7 +2,7 @@ package step2Lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import org.junit.jupiter.api.Test
-import step2Lotto.domain.dto.Lotto
+import step2Lotto.domain.Lotto
 
 class LottoNumberTest {
     @Test

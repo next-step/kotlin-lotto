@@ -1,6 +1,4 @@
-package step2Lotto.domain.dto
-
-import step2Lotto.domain.LottoNumber
+package step2Lotto.domain
 
 data class Lotto(
     val numbers: List<LottoNumber>

@@ -3,9 +3,8 @@ package step2Lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import step2Lotto.domain.Lotto
 import step2Lotto.domain.LottoStore
-import step2Lotto.domain.dto.Lotto
-import java.lang.IllegalArgumentException
 
 class LottoStoreTest {
     private val lottoStore = LottoStore(FixedLottoGenerator())

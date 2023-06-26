@@ -1,7 +1,5 @@
 package step2Lotto.domain
 
-import step2Lotto.domain.dto.Lotto
-
 class LottoStore(
     private val lottoGenerator: LottoGenerator
 ) {

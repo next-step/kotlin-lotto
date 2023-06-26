@@ -1,7 +1,7 @@
 package step2Lotto.view
 
 import step2Lotto.domain.LottoNumber
-import step2Lotto.domain.dto.Lotto
+import step2Lotto.domain.Lotto
 
 class InputIO {
     fun inputPurchaseAmount(inputString: String? = readlnOrNull()): Int {
