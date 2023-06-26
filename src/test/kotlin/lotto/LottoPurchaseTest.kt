@@ -15,7 +15,7 @@ class LottoPurchaseTest {
         )
         val budget = 3000
 
-        val lotto = LottoPurchase().purchaseManualAndAuto(manualLottosNumbers, budget, DEFAULT_PRICE).lottos[0]
+        val lotto = LottoPurchase(budget, DEFAULT_PRICE, manualLottosNumbers).purchaseManualAndAuto().lottos[0]
         assertThat(lotto).isInstanceOf(Lotto::class.java)
     }
 

@@ -1,13 +1,13 @@
 package lotto.domain
 
-import lotto.domain.LottoErrorMessage.BUNUS_NUMBERS_MUST_NOT_DIFFERENT_FROM_WINNING_NUMBER
+import lotto.domain.LottoErrorMessage.BONUS_NUMBERS_MUST_NOT_DIFFERENT_FROM_WINNING_NUMBER
 
 class WinningLotto(
     val lotto: Lotto,
     val bonusNumber: LottoNumber
 ) {
     init {
-        require(lotto.numbers.contains(bonusNumber).not()) { BUNUS_NUMBERS_MUST_NOT_DIFFERENT_FROM_WINNING_NUMBER }
+        require(lotto.numbers.contains(bonusNumber).not()) { BONUS_NUMBERS_MUST_NOT_DIFFERENT_FROM_WINNING_NUMBER }
     }
 
     fun calculateStatistics(lottos: Lottos, budget: Int): LottosStatisticsVO {

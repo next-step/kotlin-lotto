@@ -1,18 +1,24 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoErrorMessage.BUDGET_MUST_BE_POSITIVE
+import lotto.domain.LottoErrorMessage.NUMBER_OF_LOTTO_MUST_BE_POSITIVE
 import lotto.domain.LottoNumber
 import lotto.domain.WinningLotto
 
 class InputView {
     fun inputPurchasePrice(): Int {
         println("구입금액을 입력해 주세요.")
-        return readln().toInt()
+        val budget =  readln().toInt()
+        require(budget > 0) { BUDGET_MUST_BE_POSITIVE }
+        return budget
     }
 
     fun inputManualPurchaseAmount(): Int {
         println("\n수동으로 구매할 로또 수를 입력해 주세요.")
-        return readln().toInt()
+        val manualAmount = readln().toInt()
+        require(manualAmount > 0) { NUMBER_OF_LOTTO_MUST_BE_POSITIVE }
+        return manualAmount
     }
 
     fun inputManualLottos(count: Int): List<List<Int>> {

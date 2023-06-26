@@ -1,17 +1,27 @@
 package lotto.domain
 
-class LottoPurchase {
+import lotto.domain.LottoErrorMessage.OVER_BUDGET
 
-    fun purchaseManualAndAuto(manualLottosNumbers: List<List<Int>>, budget: Int, priceOfLotto: Int): Lottos {
-        val manualAmount = manualLottosNumbers.size
-        val manualLottoList = purchaseManual(manualLottosNumbers)
+class LottoPurchase(
+    private val allBudget: Int,
+    private val priceOfLotto: Int,
+    private val manualLottosNumbers: List<List<Int>>,
+) {
+    private val manualAmount = manualLottosNumbers.size
 
-        val autoBudget = budget - (manualAmount * priceOfLotto)
-        val autoLottoList = purchaseAuto(autoBudget, priceOfLotto)
+    init {
+        require(manualAmount * priceOfLotto <= allBudget) { OVER_BUDGET }
+    }
+
+    fun purchaseManualAndAuto(): Lottos {
+        val manualLottoList = purchaseManual()
+
+        val autoBudget = allBudget - (manualAmount * priceOfLotto)
+        val autoLottoList = purchaseAuto(autoBudget)
         return Lottos(manualLottoList.plus(autoLottoList))
     }
 
-    private fun purchaseManual(manualLottosNumbers: List<List<Int>>): List<Lotto> {
+    private fun purchaseManual(): List<Lotto> {
         val lottoList = mutableListOf<Lotto>()
 
         manualLottosNumbers.forEach {
@@ -20,8 +30,8 @@ class LottoPurchase {
         return lottoList
     }
 
-    private fun purchaseAuto(budget: Int, priceOfLotto: Int): List<Lotto> {
-        val amount = affordableLottoCount(budget, priceOfLotto)
+    private fun purchaseAuto(autoBudget: Int): List<Lotto> {
+        val amount = affordableLottoCount(autoBudget)
 
         val lottos = buildList {
             repeat(amount) {
@@ -31,8 +41,8 @@ class LottoPurchase {
         return lottos
     }
 
-    private fun affordableLottoCount(budget: Int, priceOfLotto: Int): Int {
-        return budget / priceOfLotto
+    private fun affordableLottoCount(autoBudget: Int): Int {
+        return autoBudget / priceOfLotto
     }
 
     companion object {

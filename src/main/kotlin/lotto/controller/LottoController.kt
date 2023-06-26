@@ -20,11 +20,11 @@ class LottoController {
     }
 
     private fun buyLottos(budget: Int): Lottos {
-        val lottoPurchase = LottoPurchase()
         val manualAmount = inputView.inputManualPurchaseAmount()
         val manualLottosNumbers = inputView.inputManualLottos(manualAmount)
+        val lottoPurchase = LottoPurchase(budget, DEFAULT_PRICE, manualLottosNumbers)
 
-        val allLottos = lottoPurchase.purchaseManualAndAuto(manualLottosNumbers, budget, DEFAULT_PRICE)
+        val allLottos = lottoPurchase.purchaseManualAndAuto()
         resultView.printPurchaseAmount(allLottos.countManualLottos(), allLottos.countAutoLottos())
         resultView.printLottos(allLottos.lottos)
 
