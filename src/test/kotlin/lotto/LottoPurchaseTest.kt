@@ -1,8 +1,8 @@
 package lotto
 
-import lotto.domain.Lotto
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoPurchase.Companion.DEFAULT_PRICE
+import lotto.domain.Lottos
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -15,8 +15,8 @@ class LottoPurchaseTest {
         )
         val budget = 3000
 
-        val lotto = LottoPurchase(budget, DEFAULT_PRICE, manualLottosNumbers).purchaseManualAndAuto().lottos[0]
-        assertThat(lotto).isInstanceOf(Lotto::class.java)
+        val lotto = LottoPurchase(budget, DEFAULT_PRICE, manualLottosNumbers).purchaseManualAndAuto()
+        assertThat(lotto).isInstanceOf(Lottos::class.java)
     }
 
     @Test

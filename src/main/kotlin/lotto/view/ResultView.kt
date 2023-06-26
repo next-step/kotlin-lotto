@@ -1,7 +1,7 @@
 package lotto.view
 
-import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
+import lotto.domain.Lottos
 import lotto.domain.LottosStatisticsVO
 import lotto.domain.WinningMap
 
@@ -10,18 +10,13 @@ class ResultView {
         println("\n수동으로 ${manualAmount}개, 자동으로 ${autoAmount}개를 구매했습니다.")
     }
 
-    fun printLottos(lottos: List<Lotto>) {
-        lottos.forEach { printLotto(it) }
+    fun printLottos(lottos: Lottos) {
+        lottos.printAll()
     }
 
     fun printWinningResult(statistics: LottosStatisticsVO) {
         printStatistics(statistics.prizeMap)
         printRateOfReturn(statistics.totalPrizeMoney, statistics.rateOfReturn)
-    }
-
-    private fun printLotto(lotto: Lotto) {
-        val numbers = lotto.numbers.map { it.number }.sorted()
-        println("[${numbers.joinToString(", ")}]")
     }
 
     private fun printStatistics(winningMap: WinningMap) {

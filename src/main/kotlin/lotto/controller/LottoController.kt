@@ -26,7 +26,7 @@ class LottoController {
 
         val allLottos = lottoPurchase.purchaseManualAndAuto()
         resultView.printPurchaseAmount(allLottos.numberOfManual(), allLottos.numberOfAuto())
-        resultView.printLottos(allLottos.lottos)
+        resultView.printLottos(allLottos)
 
         return allLottos
     }

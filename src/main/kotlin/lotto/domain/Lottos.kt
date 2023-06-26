@@ -1,12 +1,14 @@
 package lotto.domain
 
 class Lottos(
-    val lottos: List<Lotto>
+    private val lottos: List<Lotto>
 ) {
 
-    fun numberOfAuto() = lottos.count { it.auto }
+    fun printAll() = lottos.forEach { println(it.toString()) }
 
-    fun numberOfManual() = lottos.count { !it.auto }
+    fun numberOfAuto() = lottos.count { it.isAuto() }
+
+    fun numberOfManual() = lottos.count { !it.isAuto() }
 
     fun winningMap(winningLotto: WinningLotto): WinningMap {
         val map = mutableMapOf<LottoPrizes, Int>()

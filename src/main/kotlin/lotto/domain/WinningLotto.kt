@@ -7,7 +7,7 @@ class WinningLotto(
     val bonusNumber: LottoNumber
 ) {
     init {
-        require(lotto.numbers.contains(bonusNumber).not()) { BONUS_NUMBERS_MUST_NOT_DIFFERENT_FROM_WINNING_NUMBER }
+        require(lotto.isCatchBonus(this).not()) { BONUS_NUMBERS_MUST_NOT_DIFFERENT_FROM_WINNING_NUMBER }
     }
 
     fun statistics(lottos: Lottos, budget: Int): LottosStatisticsVO {

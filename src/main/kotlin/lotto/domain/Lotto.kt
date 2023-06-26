@@ -3,11 +3,17 @@ package lotto.domain
 import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_6
 
 class Lotto private constructor(
-    val numbers: List<LottoNumber>,
-    val auto: Boolean = false
+    private val numbers: List<LottoNumber>,
+    private val auto: Boolean = false
 ) {
+    private val sortedNumbers = numbers.map { it.number }.sorted()
+
     init {
         require(numbers.size == NUMBER_OF_LOTTO_NUMBERS) { LOTTO_NUMBERS_MUST_BE_6 }
+    }
+
+    override fun toString(): String {
+        return "[${sortedNumbers.joinToString(", ") { it.toString() }}]"
     }
 
     fun numberOfMatch(winningLotto: WinningLotto): Int {
@@ -16,6 +22,8 @@ class Lotto private constructor(
     }
 
     fun isCatchBonus(winningLotto: WinningLotto): Boolean = numbers.contains(winningLotto.bonusNumber)
+
+    fun isAuto(): Boolean = auto
 
     companion object {
         const val NUMBER_OF_LOTTO_NUMBERS: Int = 6
