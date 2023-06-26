@@ -38,11 +38,7 @@ class InputView {
 
     private fun inputManualNumbers(cnt: Int): List<List<Int>> {
         println("수동으로 구매할 번호를 입력해 주세요.")
-        val result = mutableListOf<List<Int>>()
-        repeat(cnt) {
-            result += inputLottoNumbers()
-        }
-        return result
+        return List(cnt) { inputLottoNumbers() }
     }
 
     fun inputWinningNums(): List<Int> {
