@@ -3,6 +3,7 @@ package lotto
 import lotto.domain.Lotto
 import lotto.domain.LottoResult
 import lotto.domain.LottoShop
+import lotto.domain.LottoValidator
 import lotto.domain.Profit
 import lotto.domain.WinningLotto
 import lotto.domain.toLottoNumber
@@ -13,8 +14,8 @@ fun main() {
 
     val money = InputView.getAmount()
     val manualLottoCount = InputView.getManualLottoCount()
+    LottoValidator.manualLottoValidate(money, manualLottoCount)
     val manualLottos = InputView.getManualLottoNumbers(manualLottoCount)
-
     val lottos = LottoShop.getLottos(money, manualLottos)
 
     ResultView.printLottos(lottos)
