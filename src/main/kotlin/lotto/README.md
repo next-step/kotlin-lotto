@@ -24,8 +24,12 @@
 * WinningNumber
 
 - [x] 당첨 번호를 입력받아서 당첨번호를 생성한다.
-    - [x] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다. -> WinningNumber(LottoNumber의 메서드 호출)
     - [x] 당첨 번호는 중복이 있으면 안된다. -> WinningNumber(LottoNumber의 메서드 호출)
+
+* LotteryPaperValidator
+
+- [ ] 새로 생성한 로또 용지가 이미 존재하면 IllegalArgumentException을 throw한다.
+- [x] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다.
 
 * LottoNumberComparator
 

@@ -1,9 +1,10 @@
 package lotto.dto
 
 import lotto.domain.LotteryPaper
-import lotto.domain.LotteryPapers
+import lotto.domain.LotteryPaperValidator
 
 data class PurchasedLotteryPapers(val lotteryPaperList: List<LotteryPaper>) {
+    private val lotteryPaperValidator = LotteryPaperValidator()
 
     init {
         validateEachLottoPaper()
@@ -17,6 +18,6 @@ data class PurchasedLotteryPapers(val lotteryPaperList: List<LotteryPaper>) {
     }
 
     private fun validateLottoPaperList() {
-        LotteryPapers.validateDuplicateLotteryPaper(lotteryPaperList)
+        lotteryPaperValidator.validateDuplicateLotteryPaper(lotteryPaperList)
     }
 }
