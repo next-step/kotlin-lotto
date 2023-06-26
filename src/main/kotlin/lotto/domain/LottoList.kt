@@ -5,6 +5,7 @@ import lotto.domain.lottoStrategy.LottoStrategy
 data class LottoList(
     val lottos: List<Lotto>
 ) {
+    fun size(): Int = lottos.size
 
     fun getResult(previousLottoNumbers: LottoNumbers): LottoResult =
         LottoResult(

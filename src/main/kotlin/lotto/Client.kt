@@ -6,7 +6,7 @@ import lotto.view.ResultView
 
 fun main() {
     val purchasePrice = InputView.inputPurchasePrice()
-    val lottoGame = LottoGame(lottoPrice = purchasePrice)
+    val lottoGame = LottoGame(purchasePrice = purchasePrice)
     val previousLottoNumbers = InputView.inputPreviousLottoNumbers()
     ResultView.printLottoResult(lottoGame.getResult(previousLottoNumbers))
 }

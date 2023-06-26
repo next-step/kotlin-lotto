@@ -25,7 +25,7 @@ internal class LottoListTest : BehaviorSpec({
                 val actual = LottoList(lottos).getResult(previousLottoNumbers)
                 actual.result.keys shouldBe (0..6).toSet()
                 actual.result.values.flatMap { it.lottos } shouldBe lottos
-                actual.result.values.forAll { it.lottos.size shouldBe 1 }
+                actual.result.values.forAll { it.size() shouldBe 1 }
             }
         }
     }

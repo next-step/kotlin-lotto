@@ -11,10 +11,11 @@ object ResultView {
         (3..6).map {
             printResultForMatching(it, lottoResult)
         }
+        println("총 수익률은 ${lottoResult.getRateOfReturn()}입니다.")
     }
 
     private fun printResultForMatching(matching: Int, lottoResult: LottoResult) {
-        println("${matching}개 일치 (${LottoResult.prizeMoneyMap[matching]}원)- ${lottoResult.result[matching]?.lottos?.size ?: 0}개")
+        println("${matching}개 일치 (${LottoResult.prizeMoneyMap[matching]}원)- ${lottoResult.result[matching]?.size() ?: 0}개")
     }
 
     private fun printLineBreak() {
