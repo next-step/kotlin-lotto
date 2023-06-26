@@ -9,7 +9,7 @@ import lotto.domain.WinningLotto
 class InputView {
     fun inputPurchasePrice(): Int {
         println("구입금액을 입력해 주세요.")
-        val budget =  readln().toInt()
+        val budget = readln().toInt()
         require(budget > 0) { BUDGET_MUST_BE_POSITIVE }
         return budget
     }

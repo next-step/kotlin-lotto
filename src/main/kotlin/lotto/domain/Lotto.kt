@@ -10,7 +10,7 @@ class Lotto private constructor(
         require(numbers.size == NUMBER_OF_LOTTO_NUMBERS) { LOTTO_NUMBERS_MUST_BE_6 }
     }
 
-    fun checkEqualCount(winningLotto: WinningLotto): Int {
+    fun numberOfMatch(winningLotto: WinningLotto): Int {
         val otherNumbers = winningLotto.lotto.numbers
         return otherNumbers.intersect(numbers.toSet()).count()
     }

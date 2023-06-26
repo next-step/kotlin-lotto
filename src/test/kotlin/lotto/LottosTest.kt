@@ -31,7 +31,7 @@ class LottosTest {
         val winningLotto = WinningLotto(Lotto.manualCreate(winningLottoNumbers), LottoNumber.create(8))
 
         val lottos = Lottos(listOf(myLotto1, myLotto2, myLotto3, myLotto4, myLotto5))
-        val statistics = winningLotto.calculateStatistics(lottos, budget)
+        val statistics = winningLotto.statistics(lottos, budget)
 
         assertAll({
             assertThat(statistics.totalPrizeMoney).isEqualTo(110000)

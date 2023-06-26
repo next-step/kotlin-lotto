@@ -16,8 +16,8 @@ class WinningLottoTest {
 
         val lottoNumbers2 = listOf(10, 11, 12, 13, 14, 15)
         val myLotto2 = Lotto.manualCreate(lottoNumbers2)
-        assertThat(myLotto1.checkEqualCount(winningLotto)).isEqualTo(6)
-        assertThat(myLotto2.checkEqualCount(winningLotto)).isEqualTo(0)
+        assertThat(myLotto1.numberOfMatch(winningLotto)).isEqualTo(6)
+        assertThat(myLotto2.numberOfMatch(winningLotto)).isEqualTo(0)
     }
 
     @Test

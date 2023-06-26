@@ -15,7 +15,7 @@ class LottoController {
         val lottos = buyLottos(budget)
         val winningLotto = inputView.inputLastWeekWinningLotto()
 
-        val statistics = winningLotto.calculateStatistics(lottos, budget)
+        val statistics = winningLotto.statistics(lottos, budget)
         resultView.printWinningResult(statistics)
     }
 
@@ -25,7 +25,7 @@ class LottoController {
         val lottoPurchase = LottoPurchase(budget, DEFAULT_PRICE, manualLottosNumbers)
 
         val allLottos = lottoPurchase.purchaseManualAndAuto()
-        resultView.printPurchaseAmount(allLottos.countManualLottos(), allLottos.countAutoLottos())
+        resultView.printPurchaseAmount(allLottos.numberOfManual(), allLottos.numberOfAuto())
         resultView.printLottos(allLottos.lottos)
 
         return allLottos

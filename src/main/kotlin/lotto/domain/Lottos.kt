@@ -4,21 +4,21 @@ class Lottos(
     val lottos: List<Lotto>
 ) {
 
-    fun countAutoLottos() = lottos.count { it.auto }
+    fun numberOfAuto() = lottos.count { it.auto }
 
-    fun countManualLottos() = lottos.count { !it.auto }
+    fun numberOfManual() = lottos.count { !it.auto }
 
-    fun generateWinningMap(winningLotto: WinningLotto): Map<LottoPrizes, Int> {
+    fun winningMap(winningLotto: WinningLotto): WinningMap {
         val map = mutableMapOf<LottoPrizes, Int>()
 
         lottos.forEach { lotto ->
-            val equalCount = lotto.checkEqualCount(winningLotto)
+            val equalCount = lotto.numberOfMatch(winningLotto)
             val isCatchBonus = lotto.isCatchBonus(winningLotto)
             val prize = LottoPrizes.of(equalCount, isCatchBonus)
 
             map[prize] = map.getOrDefault(prize, 0) + 1
         }
 
-        return map
+        return WinningMap(map)
     }
 }

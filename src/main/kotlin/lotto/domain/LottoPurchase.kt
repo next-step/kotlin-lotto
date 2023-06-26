@@ -14,14 +14,14 @@ class LottoPurchase(
     }
 
     fun purchaseManualAndAuto(): Lottos {
-        val manualLottoList = purchaseManual()
+        val manualLottoList = manual()
 
         val autoBudget = allBudget - (manualAmount * priceOfLotto)
-        val autoLottoList = purchaseAuto(autoBudget)
+        val autoLottoList = auto(autoBudget)
         return Lottos(manualLottoList.plus(autoLottoList))
     }
 
-    private fun purchaseManual(): List<Lotto> {
+    private fun manual(): List<Lotto> {
         val lottoList = mutableListOf<Lotto>()
 
         manualLottosNumbers.forEach {
@@ -30,8 +30,8 @@ class LottoPurchase(
         return lottoList
     }
 
-    private fun purchaseAuto(autoBudget: Int): List<Lotto> {
-        val amount = affordableLottoCount(autoBudget)
+    private fun auto(autoBudget: Int): List<Lotto> {
+        val amount = autoBudget / priceOfLotto
 
         val lottos = buildList {
             repeat(amount) {
@@ -39,10 +39,6 @@ class LottoPurchase(
             }
         }
         return lottos
-    }
-
-    private fun affordableLottoCount(autoBudget: Int): Int {
-        return autoBudget / priceOfLotto
     }
 
     companion object {
