@@ -11,7 +11,7 @@ class LottoSeller(
         require(totalPurchasePrice % lottoPrice == 0) { "총 구매금액이 로또 구매금액으로 나누어 떨어지지 않습니다." }
 
         val numberOfAutoLottos = (totalPurchasePrice - lottoPrice * order.manualLottoNumbers.size) / lottoPrice
-        val autoLottos = (0 until numberOfAutoLottos).map { lottoFactory.create(lottoPrice) }
+        val autoLottos = List(numberOfAutoLottos) { lottoFactory.create(lottoPrice) }
         val manualLottos = order.manualLottoNumbers.map { Lotto(it, lottoPrice, LottoType.MANUAL) }
         return Lottos(autoLottos.plus(manualLottos))
     }
