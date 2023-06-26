@@ -13,7 +13,7 @@ class Lottos(
 
         lottos.forEach { lotto ->
             val equalCount = lotto.checkEqualCount(winningLotto)
-            val isCatchBonus = lotto.isCatchBonus(winningLotto.bonusNumber)
+            val isCatchBonus = lotto.isCatchBonus(winningLotto)
             val prize = LottoPrizes.of(equalCount, isCatchBonus)
 
             map[prize] = map.getOrDefault(prize, 0) + 1

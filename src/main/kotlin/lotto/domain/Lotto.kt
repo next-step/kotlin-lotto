@@ -15,7 +15,7 @@ class Lotto private constructor(
         return otherNumbers.intersect(numbers.toSet()).count()
     }
 
-    fun isCatchBonus(bonusNumber: LottoNumber): Boolean = numbers.contains(bonusNumber)
+    fun isCatchBonus(winningLotto: WinningLotto): Boolean = numbers.contains(winningLotto.bonusNumber)
 
     companion object {
         const val NUMBER_OF_LOTTO_NUMBERS: Int = 6
