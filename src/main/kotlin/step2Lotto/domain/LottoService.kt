@@ -10,16 +10,6 @@ class LottoService {
         return req.lottoTickets.map { getLottoRank(it, req.winningNumber) }
     }
 
-    private fun getLottoRank(lotto: Lotto, winningNumber: Lotto): LottoRank {
-        return when (lotto.numbers.intersect(winningNumber.numbers.toSet()).size) {
-            3 -> LottoRank.FIFTH
-            4 -> LottoRank.FOURTH
-            5 -> LottoRank.THIRD
-            6 -> LottoRank.FIRST
-            else -> LottoRank.LOSE
-        }
-    }
-
     fun getProfitRate(req: ProfitRateRequest): Double {
         val totalPrize = req.statistics.sumOf { it.prizeMoney }.toDouble()
         val profitRate = totalPrize.div(req.purchaseAmount.toDouble())
