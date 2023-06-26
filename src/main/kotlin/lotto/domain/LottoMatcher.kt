@@ -6,10 +6,10 @@ import lotto.dto.PurchasedLotteryPapers
 class LottoMatcher {
 
     fun countLottoWinner(
-        winningNumber: WinningNumber,
+        winningNumber: LotteryPaper,
         purchasedLotteryPapers: PurchasedLotteryPapers
     ): LottoMatchResult {
-        val winningLottoNumber = winningNumber.getWinningLottoNumber()
+        val winningLottoNumber = winningNumber.getLottoNumber()
         val matchedCounts = getMatchedCount(winningLottoNumber, purchasedLotteryPapers.lotteryPaperList)
 
         val prizeList = matchedCounts.map { matchedCount ->
