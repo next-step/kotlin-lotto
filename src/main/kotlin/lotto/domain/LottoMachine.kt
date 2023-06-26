@@ -2,9 +2,15 @@ package lotto.domain
 
 class LottoMachine(private val lottoFactory: LottoFactory) {
 
-    fun buyAuto(cost: Int): List<Lotto> {
-        val count = cost / LOTTO_COST
-        return List(count) { lottoFactory.create() }
+    fun buy(lottoBuy: LottoBuy): LottoReceipt {
+
+        val (cost, manual) = lottoBuy
+        val totalCount = cost / LOTTO_COST
+
+        require(totalCount >= manual.size) { "비용이 부족합니다." }
+
+        val auto = List(totalCount - manual.size) { lottoFactory.create() }
+        return LottoReceipt(manual = manual, auto = auto)
     }
 
     companion object {
