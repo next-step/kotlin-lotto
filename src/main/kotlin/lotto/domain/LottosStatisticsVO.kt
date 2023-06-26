@@ -1,7 +1,7 @@
 package lotto.domain
 
 data class LottosStatisticsVO(
-    val prizeMap: Map<LottoPrizes, Int>,
+    val prizeMap: WinningMap,
     val totalPrizeMoney: Int,
     val rateOfReturn: Double
 )

@@ -14,7 +14,7 @@ class ResultView {
     }
 
     fun printWinningResult(statistics: LottosStatisticsVO) {
-        printStatistics(statistics.prizeMap)
+        printStatistics(statistics.prizeMap.winningMap)
         printRateOfReturn(statistics.totalPrizeMoney, statistics.rateOfReturn)
     }
 
