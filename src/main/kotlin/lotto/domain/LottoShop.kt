@@ -2,8 +2,11 @@ package lotto.domain
 
 object LottoShop {
 
-    fun getLottos(money: Int, list: List<List<Int>>): Lottos {
-        return (getManualLottos(list).list + getAutoLottos(money - list.size * 1000).list).toLottos()
+    private const val LOTTO_PRICE = 1000
+
+    fun getLottos(money: Int, manualLottos: List<List<Int>>): Lottos {
+        val autoLottoTicketMoney = money - (manualLottos.size * LOTTO_PRICE)
+        return Lottos.getCombinedLottos(getManualLottos(manualLottos), getAutoLottos(autoLottoTicketMoney))
     }
 
     fun getAutoLottos(money: Int): Lottos {

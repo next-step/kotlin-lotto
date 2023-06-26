@@ -18,9 +18,9 @@ class LottoShopTest : StringSpec({
 
     "금액을 입력하면 로또티켓들이 반환된다." {
         with(LottoShop.getAutoLottos(5000)) {
-            list.size shouldBe 5
-            list[0].numbers.distinct().size shouldBe 6
-            list[0].lottoType shouldBe LottoType.AUTO
+            size shouldBe 5
+            get(0).numbers.distinct().size shouldBe 6
+            get(0).lottoType shouldBe LottoType.AUTO
         }
     }
 
@@ -32,8 +32,8 @@ class LottoShopTest : StringSpec({
                 )
             )
         ) {
-            list.size shouldBe 1
-            list[0].lottoType shouldBe LottoType.MANUAL
+            size shouldBe 1
+            get(0).lottoType shouldBe LottoType.MANUAL
         }
     }
 
@@ -47,7 +47,7 @@ class LottoShopTest : StringSpec({
                 )
             )
         ) {
-            list.size shouldBe 10
+            size shouldBe 10
         }
     }
 })
