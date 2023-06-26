@@ -19,7 +19,7 @@ internal class WinningLottoTest : StringSpec({
 
     "주어진 로또의 추첨 결과를 반환한다" {
         val sut = WinningLotto(LottoNumber.of(listOf(1, 2, 3, 4, 5, 6)), LottoNumber.of(listOf(7)))
-        val lotto = Lotto(LottoNumber.of(listOf(1, 2, 3, 4, 10, 7)))
+        val lotto = Lotto(LottoNumbers(LottoNumber.of(listOf(1, 2, 3, 4, 10, 7))), 1000)
         val matchResult = sut.countMatch(lotto)
         matchResult.getTotalMatch() shouldBe 4
     }
