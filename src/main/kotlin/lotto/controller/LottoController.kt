@@ -4,8 +4,8 @@ import lotto.domain.Lotto
 import lotto.domain.LottoMatcher
 import lotto.domain.WinningNumber
 import lotto.domain.YieldCalculator
+import lotto.dto.LottoMatchResult
 import lotto.dto.PurchasedLotteryPapers
-import lotto.dto.LottoResponse
 import lotto.ui.InputView
 import lotto.ui.ResultView
 
@@ -27,7 +27,7 @@ class LottoController(
         printYield(purchasingAmount, lottoMatchResponse)
     }
 
-    private fun purchaseLotto(purchasingAmount: Int): LottoResponse {
+    private fun purchaseLotto(purchasingAmount: Int): PurchasedLotteryPapers {
         val lotto = Lotto()
         val numberOfLottoTicket = lotto.buyLottoTicket(purchasingAmount)
         resultView.printNumberOfLottoTicket(numberOfLottoTicket)
@@ -35,8 +35,8 @@ class LottoController(
         return lotto.lotteryPapers.getLottoResponse()
     }
 
-    private fun printLottoNumbers(lottoResponse: LottoResponse) {
-        resultView.printLottoNumbers(lottoResponse)
+    private fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
+        resultView.printLottoNumbers(purchasedLotteryPapers)
     }
 
     private fun generateWinningNumber(): WinningNumber {
@@ -46,19 +46,19 @@ class LottoController(
         return winningNumber
     }
 
-    private fun matchLottoNumber(winningNumber: WinningNumber, lottoResponse: LottoResponse): PurchasedLotteryPapers {
+    private fun matchLottoNumber(winningNumber: WinningNumber, purchasedLotteryPapers: PurchasedLotteryPapers): LottoMatchResult {
         val lottoMatcher = LottoMatcher()
-        return lottoMatcher.countLottoWinner(winningNumber, lottoResponse)
+        return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers)
     }
 
-    private fun printLottoMatch(purchasedLotteryPapers: PurchasedLotteryPapers) {
-        val matchLottoResult = purchasedLotteryPapers.matchLottoResult
+    private fun printLottoMatch(lottoMatchResult: LottoMatchResult) {
+        val matchLottoResult = lottoMatchResult.matchLottoResult
         resultView.printMatchLottoNumber(matchLottoResult)
     }
 
-    private fun printYield(capital: Int, purchasedLotteryPapers: PurchasedLotteryPapers) {
+    private fun printYield(capital: Int, lottoMatchResult: LottoMatchResult) {
         val yieldCalculator = YieldCalculator()
-        val yield = yieldCalculator.calulateYield(capital, purchasedLotteryPapers)
+        val yield = yieldCalculator.calulateYield(capital, lottoMatchResult)
         resultView.printYield(yield)
     }
 }

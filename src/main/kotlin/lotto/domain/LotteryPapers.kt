@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.dto.LottoResponse
+import lotto.dto.PurchasedLotteryPapers
 
 class LotteryPapers {
     private val lotteryPaperList: MutableList<LotteryPaper> = mutableListOf()
@@ -12,8 +12,8 @@ class LotteryPapers {
         lotteryPaperList.add(LotteryPaper(generatedLotteryPaper))
     }
 
-    fun getLottoResponse(): LottoResponse {
+    fun getLottoResponse(): PurchasedLotteryPapers {
         val toList = lotteryPaperList.map { it.lottoNumber }.toList()
-        return LottoResponse(toList)
+        return PurchasedLotteryPapers(toList)
     }
 }

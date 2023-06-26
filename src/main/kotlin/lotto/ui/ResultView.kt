@@ -1,11 +1,11 @@
 package lotto.ui
 
 import lotto.domain.PrizeLevel
-import lotto.dto.LottoResponse
+import lotto.dto.PurchasedLotteryPapers
 
 class ResultView {
-    fun printLottoNumbers(lottoResponse: LottoResponse) {
-        val lottoNumbers = lottoResponse.lottoNumbers
+    fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
+        val lottoNumbers = purchasedLotteryPapers.lottoNumbers
         for (lottoNumber in lottoNumbers) {
             print("[")
             lottoNumber.forEachIndexed { index, ints ->
