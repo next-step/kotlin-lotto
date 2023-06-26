@@ -1,6 +1,18 @@
 package lotto.domain
 
 class LotteryPaper(val lottoNumber: List<Int>) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+        other as LotteryPaper
+        return this.lottoNumber == other.lottoNumber
+    }
+
+    override fun hashCode(): Int {
+        return this.lottoNumber.hashCode()
+    }
+
     companion object {
         const val MINIMUM_NUMBER = 1
         const val MAXIMUM_NUMBER = 45

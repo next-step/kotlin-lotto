@@ -3,6 +3,7 @@ package lotto.domain
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class LotteryPapersTest {
 
@@ -29,5 +30,16 @@ class LotteryPapersTest {
         val lotteryPaperList = purcahsedLotteryPapers.lotteryPaperList
         val lottoNumber = lotteryPaperList[0].lottoNumber
         Assertions.assertThat(lottoNumber.size).isEqualTo(lottoNumber.toSet().size)
+    }
+
+    @Test
+    fun `로또 용지에 중복이 생기면 IllegalArgumentException을 throw한다`() {
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val lotteryPaperList = listOf(
+            LotteryPaper(lottoNumbers),
+            LotteryPaper(lottoNumbers)
+        )
+
+        assertThrows<IllegalArgumentException> { LotteryPapers.isDuplicateLotteryPaper(lotteryPaperList) }
     }
 }
