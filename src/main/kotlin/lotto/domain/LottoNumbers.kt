@@ -6,11 +6,6 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
     var lottoNumbers = TreeSet<LottoNumber>()
         private set
 
-    constructor(stringNumbers: String) : this(stringNumbers.split(SPLIT_SYMBOL)
-        .map { i -> LottoNumber.from(i.toInt()) }
-        .toSet()
-    )
-
     init {
         require(numbers.size == LOTTO_NUMBER_COUNT) {
             "로또 번호는 ${LOTTO_NUMBER_COUNT}자리여야 합니다."
@@ -30,6 +25,12 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
 
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
-        const val SPLIT_SYMBOL = ","
+        private const val SPLIT_SYMBOL = ","
+
+        fun from(stringNumbers: String): LottoNumbers {
+            return LottoNumbers(stringNumbers.split(SPLIT_SYMBOL)
+                .map { i -> LottoNumber.from(i.toInt()) }
+                .toSet())
+        }
     }
 }

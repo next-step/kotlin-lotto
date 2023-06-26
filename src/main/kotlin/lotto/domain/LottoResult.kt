@@ -7,7 +7,7 @@ class LottoResult {
         lottoResults = LottoRanking.values().associateWith { 0 } as MutableMap<LottoRanking, Int>
     }
 
-    fun lottoRanking(purchaseLottoNumbers: List<LottoNumbers>, winningLotto: WinningLotto): MutableMap<LottoRanking, Int> {
+    fun lottoRanking(purchaseLottoNumbers: List<LottoNumbers>, winningLotto: WinningLotto): Map<LottoRanking, Int> {
         for (purchaseLottoNumber in purchaseLottoNumbers) {
             addLottoRankingCount(
                 LottoRanking.lottoRanking(winningLotto.correctCount(purchaseLottoNumber))

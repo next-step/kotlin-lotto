@@ -6,7 +6,7 @@ import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class WinningLottoTest : StringSpec({
-    val winningLottoNumbers = WinningLotto(LottoNumbers("1,2,3,4,5,6"))
+    val winningLottoNumbers = WinningLotto(LottoNumbers.from("1,2,3,4,5,6"))
 
     "일치 하는 로또의 수를 알 수 있다." {
         val lottoNumbers = LottoNumbers(
@@ -27,7 +27,7 @@ class WinningLottoTest : StringSpec({
             row("1,2,3,4,7,8", 4),
             row("1,2,3,7,8,9", 3),
         ) { lottoNumber, correctCount ->
-            winningLottoNumbers.correctCount(LottoNumbers(lottoNumber)) shouldBe correctCount
+            winningLottoNumbers.correctCount(LottoNumbers.from(lottoNumber)) shouldBe correctCount
         }
     }
 })

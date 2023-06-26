@@ -13,7 +13,9 @@ enum class LottoResultMessage(private val message: String) {
             }
             return if (rateOfReturn == PRINCIPAL_RATE.toFloat()) {
                 PRINCIPAL.message
-            } else LOSS.message
+            } else {
+                LOSS.message
+            }
         }
     }
 }
