@@ -25,9 +25,9 @@ class LottoMachineTest : FreeSpec({
         val lottoBuy = LottoBuy(
             2000,
             listOf(
-                Lotto((1..6).toLottoNumbers()),
-                Lotto((1..6).toLottoNumbers()),
-                Lotto((1..6).toLottoNumbers())
+                (1..6).toList(),
+                (1..6).toList(),
+                (1..6).toList()
             )
         )
 

@@ -1,14 +1,15 @@
 package lotto.application.console
 
 import lotto.domain.Lotto
+import lotto.domain.LottoReceipt
 import lotto.domain.LottoResult
 import lotto.domain.LottoResultSummary
 
 object ResultView {
 
-    fun printLottos(lottos: List<Lotto>) {
-        println("${lottos.size}개를 구매했습니다.")
-        lottos.forEach { printLotto(it) }
+    fun printLottoReceipt(lottoReceipt: LottoReceipt) {
+        println("수동으로 ${lottoReceipt.manual.size}장, 자동으로 ${lottoReceipt.auto.size}개를 구매했습니다.")
+        lottoReceipt.lottos.forEach { printLotto(it) }
         println()
     }
 
