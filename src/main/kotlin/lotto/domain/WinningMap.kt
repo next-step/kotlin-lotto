@@ -1,7 +1,7 @@
 package lotto.domain
 
 class WinningMap(
-    val winningMap: Map<LottoPrizes, Int>
+    private val winningMap: Map<LottoPrizes, Int>
 ) {
     fun totalPrizeMoney(): Int {
         var totalPrizeMoney = 0
@@ -11,5 +11,9 @@ class WinningMap(
         }
 
         return totalPrizeMoney
+    }
+
+    fun numberOfMatch(lottoPrizes: LottoPrizes): Int {
+        return winningMap.getOrDefault(lottoPrizes, 0)
     }
 }

@@ -3,6 +3,7 @@ package lotto.view
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
 import lotto.domain.LottosStatisticsVO
+import lotto.domain.WinningMap
 
 class ResultView {
     fun printPurchaseAmount(manualAmount: Int, autoAmount: Int) {
@@ -14,7 +15,7 @@ class ResultView {
     }
 
     fun printWinningResult(statistics: LottosStatisticsVO) {
-        printStatistics(statistics.prizeMap.winningMap)
+        printStatistics(statistics.prizeMap)
         printRateOfReturn(statistics.totalPrizeMoney, statistics.rateOfReturn)
     }
 
@@ -23,12 +24,12 @@ class ResultView {
         println("[${numbers.joinToString(", ")}]")
     }
 
-    private fun printStatistics(prizeMap: Map<LottoPrizes, Int>) {
+    private fun printStatistics(winningMap: WinningMap) {
         println("\n당첨 통계")
         println("---------")
 
         LottoPrizes.values().forEach { prize ->
-            printStatisticsByLottoPrizes(prize, prizeMap.getOrDefault(prize, 0))
+            printStatisticsByLottoPrizes(prize, winningMap.numberOfMatch(prize))
         }
     }
 
