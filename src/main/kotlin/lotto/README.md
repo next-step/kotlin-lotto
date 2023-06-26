@@ -28,7 +28,7 @@
 
 * LotteryPaperValidator
 
-- [ ] 새로 생성한 로또 용지가 이미 존재하면 IllegalArgumentException을 throw한다.
+- [x] 새로 생성한 로또 용지가 이미 존재하면 IllegalArgumentException을 throw한다.
 - [x] 당첨 번호가 1부터 45 사이의 값이 아니면 IllegalArgumentException을 throw한다.
 
 * LottoNumberComparator
@@ -39,6 +39,10 @@
 
 - [x] 로또 번호가 맞은 갯수를 가지고 등수를 계산한다.
 - [x] 로또 등수 리스트를 입력받아서 통계를 낸다.
+
+* LottoMatcher
+
+- [x] 로또 번호와 당첨 번호를 가지고 당첨 통계를 낸다.
 
 * YieldCalculator
 
