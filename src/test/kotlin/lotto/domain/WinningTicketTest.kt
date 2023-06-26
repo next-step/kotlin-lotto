@@ -1,22 +1,14 @@
 package lotto.domain
 
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class WinningTicketTest {
-    @Test
-    internal fun `보너스볼을 가지고 있으면 가졌다는 결과가 나온다`() {
-        val winningTicket = WinningTicket(Lotto(listOf(1, 2, 3, 4, 5, 8)), 6)
-        val testLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-
-        winningTicket.hasBonus(testLotto) shouldBe true
-    }
 
     @Test
-    internal fun `보너스볼을 안 가지고 있으면 안 가졌다는 결과가 나온다`() {
-        val winningTicket = WinningTicket(Lotto(listOf(1, 2, 3, 4, 5, 8)), 7)
-        val testLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-
-        winningTicket.hasBonus(testLotto) shouldBe false
+    internal fun `보너스볼 숫자가 로또번호에도 들어있으면 에러가 발생한다`() {
+        assertThrows<IllegalArgumentException> {
+            WinningTicket(Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }), LottoNumber(6))
+        }
     }
 }

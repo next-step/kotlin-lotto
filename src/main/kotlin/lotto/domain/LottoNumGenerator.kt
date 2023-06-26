@@ -1,12 +1,12 @@
 package lotto.domain
 
 interface LottoNumGenerator {
-    fun getNums(): List<Int>
+    fun getNums(): List<LottoNumber>
 }
 
 class AutoNumGenerator : LottoNumGenerator {
-    override fun getNums(): List<Int> {
-        return lottoNums.shuffled().take(LOTTO_NUM_COUNT).sorted()
+    override fun getNums(): List<LottoNumber> {
+        return lottoNums.shuffled().take(LOTTO_NUM_COUNT).sorted().map { LottoNumber(it) }
     }
 
     companion object {
