@@ -12,7 +12,7 @@ internal class LotteryShopTest {
 
     @Test
     internal fun `2장을 발급하면 로또 두장이 발급된다`() {
-        LotteryShop.getTickets(2, listOf()).tickets.size shouldBe 2
+        LotteryShop.getTickets(2, MarkingPaper()).tickets.size shouldBe 2
     }
 
     @Test

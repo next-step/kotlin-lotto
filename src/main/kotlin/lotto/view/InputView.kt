@@ -27,7 +27,7 @@ object InputView {
 
     fun getManualLotto(num: Int): MarkingPaper {
         if (num == 0) {
-            return MarkingPaper(listOf())
+            return MarkingPaper()
         }
         println(MANUAL_LOTTO_STRING)
         return MarkingPaper(List(num) { Lotto(readln().split(",").map { LottoNumber(it.trim().toInt()) }) })
