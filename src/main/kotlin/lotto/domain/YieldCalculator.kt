@@ -1,12 +1,12 @@
 package lotto.domain
 
-import lotto.dto.LottoMatchResponse
+import lotto.dto.PurchasedLotteryPapers
 import java.lang.Math.floor
 
 class YieldCalculator {
 
-    fun calulateYield(capital: Int, lottoMatchResponse: LottoMatchResponse): Double {
-        val lottoMatchResult = lottoMatchResponse.matchLottoResult
+    fun calulateYield(capital: Int, purchasedLotteryPapers: PurchasedLotteryPapers): Double {
+        val lottoMatchResult = purchasedLotteryPapers.matchLottoResult
         var grossProfit = 0
         for ((prizeLevel, count) in lottoMatchResult) {
             grossProfit += prizeLevel.prizeMoney * count

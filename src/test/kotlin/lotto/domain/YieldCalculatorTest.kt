@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.dto.LottoMatchResponse
+import lotto.dto.PurchasedLotteryPapers
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -23,9 +23,9 @@ class YieldCalculatorTest {
             PrizeLevel.SECOND to 0,
             PrizeLevel.FIRST to 0
         )
-        val lottoMatchResponse = LottoMatchResponse(lottoMatchResult)
+        val purchasedLotteryPapers = PurchasedLotteryPapers(lottoMatchResult)
 
-        val acutal = yieldCalculator.calulateYield(capital, lottoMatchResponse)
+        val acutal = yieldCalculator.calulateYield(capital, purchasedLotteryPapers)
         val answer = 0.35
 
         Assertions.assertThat(acutal).isEqualTo(answer)

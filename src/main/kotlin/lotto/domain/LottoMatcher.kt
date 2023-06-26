@@ -1,18 +1,18 @@
 package lotto.domain
 
-import lotto.dto.LottoMatchResponse
 import lotto.dto.LottoResponse
+import lotto.dto.PurchasedLotteryPapers
 
 class LottoMatcher {
 
-    fun countLottoWinner(winningNumber: WinningNumber, lottoResponse: LottoResponse): LottoMatchResponse {
+    fun countLottoWinner(winningNumber: WinningNumber, lottoResponse: LottoResponse): PurchasedLotteryPapers {
         val winningLottoNumber = winningNumber.getWinningLottoNumber()
         val matchedCounts = getMatchedCount(winningLottoNumber, lottoResponse.lottoNumbers)
 
         val prizeList = matchedCounts.map { matchedCount ->
             PrizeLevel.fromNumberOfHit(matchedCount)
         }
-        return LottoMatchResponse(PrizeLevel.countPrizeLevels(prizeList))
+        return PurchasedLotteryPapers(PrizeLevel.countPrizeLevels(prizeList))
     }
 
     private fun getMatchedCount(winningLottoNumber: List<Int>, lottoNumbers: List<List<Int>>): List<Int> {
