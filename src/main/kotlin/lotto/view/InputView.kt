@@ -14,8 +14,8 @@ class InputView {
             println("구입금액은 0보다 크고 100만보다 작거나 같아야 합니다. 다시 입력해주세요.")
             manualAmount = inputManualAmount()
         }
+        val manualNumbers = if (manualAmount != 0) inputManualNumbers(manualAmount) else emptyList()
 
-        val manualNumbers = inputManualNumbers(manualAmount)
         val autoAmount = purchaseAmount - manualAmount
 
         return LottoPurchaseRequest(autoAmount, manualNumbers)
