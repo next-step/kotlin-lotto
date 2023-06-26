@@ -1,5 +1,7 @@
 package calculator
 
+import kotlin.text.MatchResult
+
 class StringAddCalculator {
 
     fun add(text: String?): Int {
@@ -11,7 +13,7 @@ class StringAddCalculator {
 
     private fun splitText(text: String): List<String> {
         val tokens = text.split(",", ":")
-        val result = Regex("//(.)\n(.*)").find(text)
+        val result = formatWithRegexPattern(text)
         return result?.let {
             val customDelimiter = it.groupValues[1]
             val tokens = it.groupValues[2].split(customDelimiter)
@@ -28,4 +30,13 @@ class StringAddCalculator {
         if (text.toInt().toString() != text) throw IllegalArgumentException("숫자만 입력 가능합니다.")
         else if (text.toInt() < 0) throw RuntimeException("음수는 입력할 수 없습니다.")
         else text.toInt()
+
+    private fun formatWithRegexPattern(s: String): MatchResult? {
+        return REGEX_PATTERN.find(s)
+    }
+
+    companion object {
+        val REGEX_PATTERN = Regex("//(.)\n(.*)")
+    }
+
 }
