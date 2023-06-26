@@ -5,7 +5,7 @@ class WinningLotto(
     val bonusNumber: LottoNumber
 ) {
     init {
-        if (lotto.numbers.map { it.number }.contains(bonusNumber.number)) {
+        if (lotto.containNumber(bonusNumber)) {
             throw IllegalArgumentException("보너스 넘버는 로또당첨번호에 포함되면 안됩니다.")
         }
     }

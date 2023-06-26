@@ -23,4 +23,10 @@ class LottoTest : StringSpec({
             Lotto(listOf(1, 2, 3, 4, 5, 55).map { LottoNumber(it) })
         }.message shouldBe "1~45의 수만 가능합니다"
     }
+
+    "로또에서 인자로 받은 LottoNumber가 있는지 판단한다.." {
+        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        lotto.containNumber(LottoNumber(5)) shouldBe true
+        lotto.containNumber(LottoNumber(10)) shouldBe false
+    }
 })

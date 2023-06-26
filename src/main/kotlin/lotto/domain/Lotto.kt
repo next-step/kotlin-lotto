@@ -27,6 +27,10 @@ class Lotto(
         require(numbers.size == 6) { "6개의 숫자가 필요합니다." }
         require(numbers.distinct().size == 6) { "중복되지 않은 6개의 숫자가 필요합니다." }
     }
+
+    fun containNumber(number: LottoNumber): Boolean {
+        return numbers.contains(number)
+    }
 }
 
 fun List<Lotto>.toLottos() = Lottos(this)
