@@ -7,7 +7,7 @@ class LottosResultSpec : DescribeSpec({
     describe("수익률 검증") {
         context("로또 구입 비용이 5000원이고 로또 당첨 금액이 5000원이면") {
             val lottosResult = LottosResult(
-                totalCost = 5000,
+                totalCost = Money(5000),
                 winningResults = mapOf(
                     LottoRank.FIFTH to 1,
                     LottoRank.FOURTH to 0,
@@ -23,7 +23,7 @@ class LottosResultSpec : DescribeSpec({
 
         context("로또 구입 비용이 5000원이고 로또 당첨 금액이 10000원이면") {
             val lottosResult = LottosResult(
-                totalCost = 5000,
+                totalCost = Money(5000),
                 winningResults = mapOf(
                     LottoRank.FIFTH to 2,
                     LottoRank.FOURTH to 0,
@@ -39,7 +39,7 @@ class LottosResultSpec : DescribeSpec({
 
         context("로또 구입 비용이 20000원이고 로또 당첨 금액이 5000원이면") {
             val lottosResult = LottosResult(
-                totalCost = 20000,
+                totalCost = Money(20000),
                 winningResults = mapOf(
                     LottoRank.FIFTH to 1,
                     LottoRank.FOURTH to 0,

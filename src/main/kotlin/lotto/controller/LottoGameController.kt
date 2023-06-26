@@ -6,13 +6,13 @@ import lotto.view.LottoOutputView
 
 object LottoGameController {
     fun play() {
-        val money = LottoInputView.inputMoney()
-        val lottos = LottoShop.sellByMoney(money)
-        LottoOutputView.printLottos(lottos)
+        val lottosGenerateRequest = LottoInputView.inputLottoGenerateRequest()
+        val lottosGenerateResponse = LottoShop.sellByMoneyWithManualLottos(lottosGenerateRequest)
+        LottoOutputView.printLottos(lottosGenerateResponse)
 
-        val winningNumbers = LottoInputView.inputWinningLottoNumbers()
-        val bonusNumber = LottoInputView.inputBonusNumber()
-        val lottosResult = lottos.calculateResults(winningNumbers, bonusNumber)
+        val lottos = lottosGenerateResponse.lottos
+        val winningLotto = LottoInputView.inputWinningLotto()
+        val lottosResult = lottos.calculateResults(winningLotto)
         LottoOutputView.printLottoResults(lottosResult)
     }
 }

@@ -21,4 +21,32 @@ class MoneySpec : DescribeSpec({
             }
         }
     }
+
+    describe("더하기 연산 검증") {
+        context("두 돈을 더하면") {
+            it("두 돈의 합을 반환한다.") {
+                val money = Money(1000)
+
+                money + Money(1000) shouldBe Money(2000)
+            }
+        }
+    }
+
+    describe("빼기 연산 검증") {
+        context("두 돈을 빼면") {
+            it("두 돈의 차를 반환한다.") {
+                val money = Money(1000)
+
+                money - Money(1000) shouldBe Money(0)
+            }
+        }
+    }
+
+    describe("비교 연산 검증") {
+        it("두 돈을 비교 연산할 수 있다.") {
+            val money = Money(1000)
+
+            (money > Money(500)) shouldBe true
+        }
+    }
 })
