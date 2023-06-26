@@ -1,5 +1,6 @@
 package step2Lotto.view
 
+import step2Lotto.domain.LottoNumber
 import step2Lotto.domain.dto.Lotto
 
 class InputIO {
@@ -13,6 +14,12 @@ class InputIO {
             return Lotto(listOf())
         }
 
-        return Lotto(inputString.replace(" ", "").split(",").map { it.toInt() })
+        return Lotto(convertStringToLottoNumbers(inputString))
+    }
+
+    private fun convertStringToLottoNumbers(string: String): List<LottoNumber> {
+        return string.replace(" ", "")
+            .split(",")
+            .map { LottoNumber(it.toInt()) }
     }
 }

@@ -10,7 +10,7 @@ class ResultView {
 
     fun showLottoTickets(lottoTickets: List<Lotto>) {
         lottoTickets.forEach {
-            println(it.numbers)
+            println(it.getLottoNumbers())
         }
     }
 
@@ -33,6 +33,6 @@ class ResultView {
     }
 
     fun showProfitRate(profitRate: Double) {
-        println("총 수익률은 $profitRate%입니다.")
+        println("총 수익률은 ${profitRate}입니다.")
     }
 }

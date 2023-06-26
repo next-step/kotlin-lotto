@@ -14,15 +14,15 @@ class LottoServiceTest {
     @Test
     fun `로또 통계 계산`() {
         val lottoTickets = listOf(
-            Lotto(listOf(11, 12, 13, 14, 15, 16)),
-            Lotto(listOf(1, 2, 3, 14, 15, 16)),
-            Lotto(listOf(1, 2, 3, 14, 15, 16)),
-            Lotto(listOf(1, 2, 3, 4, 15, 16)),
-            Lotto(listOf(1, 2, 3, 4, 5, 16)),
-            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(arrayOf(11, 12, 13, 14, 15, 16)),
+            Lotto(arrayOf(1, 2, 3, 14, 15, 16)),
+            Lotto(arrayOf(1, 2, 3, 14, 15, 16)),
+            Lotto(arrayOf(1, 2, 3, 4, 15, 16)),
+            Lotto(arrayOf(1, 2, 3, 4, 5, 16)),
+            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
         )
 
-        val winningNumber = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val winningNumber = Lotto(arrayOf(1, 2, 3, 4, 5, 6))
 
         val req = StatisticsRequest(lottoTickets, winningNumber)
         val statistics = lottoService.getStatistics(req)

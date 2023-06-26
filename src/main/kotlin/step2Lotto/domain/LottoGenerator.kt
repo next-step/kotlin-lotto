@@ -11,9 +11,10 @@ class AutoLottoGenerator : LottoGenerator {
         return Lotto(getRandomLottoNumbers())
     }
 
-    private fun getRandomLottoNumbers(): List<Int> {
+    private fun getRandomLottoNumbers(): List<LottoNumber> {
         return LottoNumber.NUMBERS.shuffled()
             .subList(0, 6)
             .sorted()
+            .map { LottoNumber(it) }
     }
 }

@@ -20,9 +20,9 @@ class LottoStoreTest {
     @Test
     fun `로또 구매`() {
         val lottoTickets = listOf(
-            Lotto(listOf(1, 2, 3, 4, 5, 6)),
-            Lotto(listOf(1, 2, 3, 4, 5, 6)),
-            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
+            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
+            Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
         )
 
         lottoStore.purchaseLottoTickets(3000) shouldBe lottoTickets
