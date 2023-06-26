@@ -1,5 +1,6 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -26,7 +27,6 @@ class LotteryPaperValidatorTest {
         }
     }
 
-
     @Test
     fun `새로 생성한 로또 용지가 이미 존재하면 IllegalArgumentException을 throw한다`() {
         val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
@@ -36,9 +36,11 @@ class LotteryPaperValidatorTest {
 
         val newGeneratedLotteryPaper = LotteryPaper(lottoNumbers)
 
-
-        assertThrows<IllegalArgumentException> {
-            lotteryPaperValidator.validateIsAlreadyExistLotteryPaper(lotteryPaperList, newGeneratedLotteryPaper)
-        }
+        Assertions.assertThat(
+            lotteryPaperValidator.isAlreadyExistLotteryPaper(
+                lotteryPaperList,
+                newGeneratedLotteryPaper
+            )
+        ).isEqualTo(true)
     }
 }

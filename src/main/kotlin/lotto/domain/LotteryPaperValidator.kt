@@ -7,9 +7,7 @@ class LotteryPaperValidator {
         }
     }
 
-    fun validateIsAlreadyExistLotteryPaper(lotteryPaperList: List<LotteryPaper>, generatedLotteryPaper: LotteryPaper) {
-        require(!lotteryPaperList.contains(generatedLotteryPaper)) {
-            "이미 존재하는 로또 용지입니다. 다시 생성하세요."
-        }
+    fun isAlreadyExistLotteryPaper(lotteryPaperList: List<LotteryPaper>, generatedLotteryPaper: LotteryPaper): Boolean {
+        return lotteryPaperList.contains(generatedLotteryPaper)
     }
 }

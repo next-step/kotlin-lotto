@@ -7,18 +7,15 @@ class LotteryPapers(private val lottoNumberGenerationStrategy: LottoNumberGenera
     private val lotteryPaperValidator = LotteryPaperValidator()
 
     fun generateRandomLottoNumber() {
-        val generatedLottoNumber = lottoNumberGenerationStrategy.generateLottoNumber()
-        val generatedLotteryPaper = LotteryPaper(generatedLottoNumber)
-        validateDuplicateLotteryPapers(lotteryPaperList, generatedLotteryPaper)
-        lotteryPaperList.add(generatedLotteryPaper)
-    }
+        var generatedLottoNumber: List<Int>
+        var generatedLotteryPaper: LotteryPaper
 
-    private fun validateDuplicateLotteryPapers(
-        lotteryPaperList: List<LotteryPaper>,
-        generatedLotteryPaper: LotteryPaper
-    ) {
-        lotteryPaperValidator.validateDuplicateLotteryPaper(lotteryPaperList)
-        lotteryPaperValidator.validateIsAlreadyExistLotteryPaper(lotteryPaperList, generatedLotteryPaper)
+        do {
+            generatedLottoNumber = lottoNumberGenerationStrategy.generateLottoNumber()
+            generatedLotteryPaper = LotteryPaper(generatedLottoNumber)
+        } while (lotteryPaperValidator.isAlreadyExistLotteryPaper(lotteryPaperList, generatedLotteryPaper))
+
+        lotteryPaperList.add(generatedLotteryPaper)
     }
 
     fun getPurchasedLotteryPapers(): PurchasedLotteryPapers {
