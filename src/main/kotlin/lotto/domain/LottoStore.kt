@@ -8,7 +8,7 @@ object LottoStore {
         val count = fee / 1000
         return (0 until count).map {
             val lottoNumbers = LottoNumber.random(6)
-            Lotto.of(lottoNumbers)
+            Lotto.from(lottoNumbers)
         }
     }
 }

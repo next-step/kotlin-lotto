@@ -12,7 +12,10 @@ object WinningNumberReader {
             .split(", ")
             .map { it.toInt() }
             .map { LottoNumber(it) }
-        val winningLotto = Lotto.of(winningNumbers)
-        return WinningLotto(winningLotto)
+        val winningLotto = Lotto.from(winningNumbers)
+
+        println("보너스 볼을 입력해 주세요.")
+        val bonusNumber = readln().toInt()
+        return WinningLotto(winningLotto, LottoNumber(bonusNumber))
     }
 }
