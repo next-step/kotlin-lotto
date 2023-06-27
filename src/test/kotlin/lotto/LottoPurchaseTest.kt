@@ -3,7 +3,7 @@ package lotto
 import lotto.domain.LottoPurchase
 import lotto.domain.LottoPurchase.Companion.DEFAULT_PRICE
 import lotto.domain.Lottos
-import lotto.vo.LottoPurchaseRequest
+import lotto.vo.OrderRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -18,7 +18,7 @@ class LottoPurchaseTest {
         )
         val budget = 3000
 
-        val request = LottoPurchaseRequest(budget, DEFAULT_PRICE, manualLottosNumbers)
+        val request = OrderRequest(budget, DEFAULT_PRICE, manualLottosNumbers)
         val lottos = LottoPurchase(request).purchaseManualAndAuto()
         assertThat(lottos).isInstanceOf(Lottos::class.java)
     }
@@ -35,7 +35,7 @@ class LottoPurchaseTest {
             listOf(4, 5, 6, 7, 8, 9)
         )
         val budget = 1000
-        val request = LottoPurchaseRequest(budget, DEFAULT_PRICE, manualLottosNumbers)
+        val request = OrderRequest(budget, DEFAULT_PRICE, manualLottosNumbers)
 
         assertThrows<IllegalArgumentException> {
             LottoPurchase(request).purchaseManualAndAuto()

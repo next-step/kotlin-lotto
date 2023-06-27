@@ -21,8 +21,8 @@ class ResultView {
     }
 
     private fun printLotto(lotto: Lotto) {
-        val numbers = lotto.numbers.map { it.number }.sorted()
-        println("[${numbers.joinToString(", ") { it.toString() }}]")
+        val sortedNumbers = lotto.numbers.map { it.number }.sorted()
+        println("[${sortedNumbers.joinToString(", ") { it.toString() }}]")
     }
 
     private fun printStatistics(winningMap: WinningMap) {

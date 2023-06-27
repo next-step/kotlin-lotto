@@ -1,6 +1,6 @@
 package lotto.vo
 
-data class LottoPurchaseRequest(
+data class OrderRequest(
     val allBudget: Int,
     val priceOfLotto: Int,
     val manualLottosNumbers: List<List<Int>>
