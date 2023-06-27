@@ -1,12 +1,12 @@
 package lotto.view
 
-import lotto.controller.PurchasedLottoNumbers
+import lotto.controller.PurchasedLottos
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoReturn
 import lotto.domain.Rank
 
 object ResultView {
-    fun printPurchasedLotto(enteredLottoNumbers: PurchasedLottoNumbers) {
+    fun printPurchasedLotto(enteredLottoNumbers: PurchasedLottos) {
         enteredLottoNumbers.print()
         println()
     }
@@ -26,10 +26,10 @@ object ResultView {
         println(throwable.message)
     }
 
-    private fun PurchasedLottoNumbers.print() {
-        println("수동으로 ${manualLottoList.size}장, 자동으로 ${automaticLottoList.size}장을 구매했습니다.")
-        manualLottoList.print()
-        automaticLottoList.print()
+    private fun PurchasedLottos.print() {
+        println("수동으로 ${manualLottos.size}장, 자동으로 ${automaticLottos.size}장을 구매했습니다.")
+        manualLottos.print()
+        automaticLottos.print()
     }
 
     private fun List<LottoNumbers>.print() {

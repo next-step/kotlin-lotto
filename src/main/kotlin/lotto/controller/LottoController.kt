@@ -11,27 +11,27 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 fun main() {
-    val purchasedLottoNumbers = purchaseLotto()
-    ResultView.printPurchasedLotto(purchasedLottoNumbers)
-    ResultView.printReturn(calculateReturn(purchasedLottoNumbers))
+    val purchasedLottos = purchaseLotto()
+    ResultView.printPurchasedLotto(purchasedLottos)
+    ResultView.printReturn(calculateReturn(purchasedLottos))
 }
 
-private fun purchaseLotto(): PurchasedLottoNumbers {
+private fun purchaseLotto(): PurchasedLottos {
     val totalLottoCount = BillSlot(LottoVendingMachine.LOTTO_PRICE)
         .insertMoney(InputView.getPurchaseAmount())
 
     val manualLottoCount = getManualLottoCount(totalLottoCount)
-    val manualLottoList = getManualLotto(manualLottoCount)
+    val manualLottos = getManualLotto(manualLottoCount)
 
     val automaticLottoCount = totalLottoCount - manualLottoCount
-    val automaticLottoList = LottoVendingMachine.purchase(automaticLottoCount)
+    val automaticLottos = LottoVendingMachine.purchase(automaticLottoCount)
 
-    return PurchasedLottoNumbers(manualLottoList, automaticLottoList)
+    return PurchasedLottos(manualLottos, automaticLottos)
 }
 
-private fun calculateReturn(purchasedLottoNumbers: PurchasedLottoNumbers): LottoReturn {
+private fun calculateReturn(purchasedLottos: PurchasedLottos): LottoReturn {
     val lottoNumbersOfLastWeek = getLottoWinningNumbers()
-    return LottoReturnCalculator(purchasedLottoNumbers.allLottoList)
+    return LottoReturnCalculator(purchasedLottos.allLottos)
         .calculate(lottoNumbersOfLastWeek)
 }
 
