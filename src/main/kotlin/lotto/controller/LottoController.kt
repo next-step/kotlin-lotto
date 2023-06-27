@@ -1,7 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoPurchase.Companion.DEFAULT_PRICE
-import lotto.domain.LottoShop
+import lotto.service.LottoShopService
 import lotto.view.InputView
 import lotto.view.ResultView
 import lotto.vo.OrderRequest
@@ -16,15 +16,15 @@ class LottoController {
         val manualLottosNumbers = inputView.inputManualLottos(manualAmount)
 
         val orderRequest = OrderRequest(budget, DEFAULT_PRICE, manualLottosNumbers)
-        val lottoShop = LottoShop()
-        val receipt = lottoShop.buy(orderRequest)
+        val lottoShopService = LottoShopService()
+        val receipt = lottoShopService.buy(orderRequest)
         val lottos = receipt.lottos
 
         resultView.printPurchaseAmount(receipt.manualAmount, receipt.autoAmount)
         resultView.printLottos(lottos)
 
         val winningLotto = inputView.inputLastWeekWinningLotto()
-        val statistics = lottoShop.winning(winningLotto, lottos, budget)
+        val statistics = lottoShopService.winning(winningLotto, lottos, budget)
         resultView.printWinningResult(statistics)
     }
 }

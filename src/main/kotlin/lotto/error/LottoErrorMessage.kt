@@ -1,4 +1,4 @@
-package lotto.domain
+package lotto.error
 
 object LottoErrorMessage {
     const val LOTTO_NUMBERS_MUST_BE_6: String = "로또 번호는 6개여야 합니다."

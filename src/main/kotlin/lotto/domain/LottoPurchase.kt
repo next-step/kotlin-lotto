@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.domain.LottoErrorMessage.OVER_BUDGET
+import lotto.error.LottoErrorMessage.OVER_BUDGET
 import lotto.vo.OrderRequest
 
 class LottoPurchase(

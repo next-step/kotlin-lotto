@@ -4,6 +4,7 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.Lottos
 import lotto.domain.WinningLotto
+import lotto.service.LottoShopService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -31,7 +32,8 @@ class LottosTest {
         val winningLotto = WinningLotto(Lotto.manualCreate(winningLottoNumbers), LottoNumber.create(8))
 
         val lottos = Lottos(listOf(myLotto1, myLotto2, myLotto3, myLotto4, myLotto5))
-        val statistics = winningLotto.statistics(lottos, budget)
+        val lottoShopService = LottoShopService()
+        val statistics = lottoShopService.winning(winningLotto, lottos, budget)
 
         assertAll({
             assertThat(statistics.totalPrizeMoney).isEqualTo(110000)

@@ -1,10 +1,10 @@
 package lotto.view
 
 import lotto.domain.Lotto
-import lotto.domain.LottoErrorMessage.BUDGET_MUST_BE_POSITIVE
-import lotto.domain.LottoErrorMessage.NUMBER_OF_LOTTO_MUST_BE_POSITIVE
 import lotto.domain.LottoNumber
 import lotto.domain.WinningLotto
+import lotto.error.LottoErrorMessage.BUDGET_MUST_BE_POSITIVE
+import lotto.error.LottoErrorMessage.NUMBER_OF_LOTTO_MUST_BE_POSITIVE
 
 class InputView {
     fun inputPurchasePrice(): Int {

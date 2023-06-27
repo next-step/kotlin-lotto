@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_BETWEEN_1_AND_45
-import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_POSITIVE
+import lotto.error.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_BETWEEN_1_AND_45
+import lotto.error.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_POSITIVE
 
 @JvmInline
 value class LottoNumber private constructor(

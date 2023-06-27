@@ -1,10 +1,13 @@
-package lotto.domain
+package lotto.service
 
+import lotto.domain.LottoPurchase
+import lotto.domain.Lottos
+import lotto.domain.WinningLotto
 import lotto.vo.LottosStatisticsVO
 import lotto.vo.OrderRequest
 import lotto.vo.Receipt
 
-class LottoShop {
+class LottoShopService {
     fun buy(orderRequest: OrderRequest): Receipt {
         val lottoPurchase = LottoPurchase(orderRequest)
         val lottos = lottoPurchase.purchaseManualAndAuto()

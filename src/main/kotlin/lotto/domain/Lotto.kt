@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_6
-import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_UNIQUE
+import lotto.error.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_6
+import lotto.error.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_UNIQUE
 
 class Lotto private constructor(
     val numbers: List<LottoNumber>
