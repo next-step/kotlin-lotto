@@ -3,6 +3,11 @@ package step2Lotto.domain
 open class Lotto(
     val numbers: List<LottoNumber>
 ) {
+    init {
+        check(numbers.size == 6)
+        check(numbers.size == numbers.toSet().size)
+    }
+
     constructor(numbers: Array<Int>) : this(numbers.map { LottoNumber(it) })
 
     fun getLottoNumbers(): List<Int> {
