@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.domain.Lotto
+import lotto.domain.Lotto.Companion.NUMBER_OF_LOTTO_NUMBERS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -24,5 +25,11 @@ class LottoTest {
         assertThrows<IllegalArgumentException> {
             Lotto.manualCreate(numbers)
         }
+    }
+
+    @Test
+    fun `하나의 로또는 6개의 로또 번호로 구성된다`() {
+        val autoCreate = Lotto.autoCreate()
+        assertThat(autoCreate.numbers.size).isEqualTo(NUMBER_OF_LOTTO_NUMBERS)
     }
 }
