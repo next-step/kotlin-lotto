@@ -6,8 +6,8 @@ import step2Lotto.domain.*
 import step2Lotto.domain.dto.ProfitRateRequest
 import step2Lotto.domain.dto.StatisticsRequest
 
-class LottoServiceTest {
-    private val lottoService = LottoService()
+class LottoStatisticServiceTest {
+    private val lottoStatisticService = LottoStatisticService()
 
     @Test
     fun `구매한 로또와 당첨 번호가 주어지면 1등부터 5등, 꽝을 계산한다`() {
@@ -23,7 +23,7 @@ class LottoServiceTest {
         val winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
 
         val req = StatisticsRequest(lottoTickets, winningNumber)
-        val statistics = lottoService.getStatistics(req)
+        val statistics = lottoStatisticService.getStatistics(req)
 
         statistics.count { it == LottoRank.FIRST } shouldBe 1
         statistics.count { it == LottoRank.THIRD } shouldBe 1
@@ -39,6 +39,6 @@ class LottoServiceTest {
             LottoRank.FIFTH
         )
 
-        lottoService.getProfitRate(ProfitRateRequest(purchaseAmount, statistics)) shouldBe 0.36
+        lottoStatisticService.getProfitRate(ProfitRateRequest(purchaseAmount, statistics)) shouldBe 0.36
     }
 }

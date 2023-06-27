@@ -11,7 +11,7 @@ import step2Lotto.view.ResultView
 class LottoController {
     private val inputIO = InputIO()
     private val inputView = InputView()
-    private val lottoService = LottoService()
+    private val lottoStatisticService = LottoStatisticService()
     private val lottoStore = LottoStore(AutoLottoGenerator())
     private val resultView = ResultView()
 
@@ -33,7 +33,7 @@ class LottoController {
     }
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
-        return lottoService.getStatistics(req)
+        return lottoStatisticService.getStatistics(req)
     }
 
     fun showLottoStatistics(statistics: List<LottoRank>) {
@@ -41,7 +41,7 @@ class LottoController {
     }
 
     fun showProfitRate(req: ProfitRateRequest) {
-        val profitRate = lottoService.getProfitRate(req)
+        val profitRate = lottoStatisticService.getProfitRate(req)
         resultView.showProfitRate(profitRate)
     }
 }
