@@ -5,12 +5,12 @@ class LottoMachine(private val lottoFactory: LottoFactory) {
     fun buy(lottoBuy: LottoBuy): LottoReceipt {
 
         val (cost, manualLottoNumbers) = lottoBuy
-        val totalCount = cost / LOTTO_COST
+        val purchasableCount = cost / LOTTO_COST
 
-        require(totalCount >= manualLottoNumbers.size) { "비용이 부족합니다." }
+        require(purchasableCount >= manualLottoNumbers.size) { "비용이 부족합니다." }
 
         val manual = manualLottoNumbers.map { Lotto.of(it) }
-        val auto = List(totalCount - manual.size) { lottoFactory.create() }
+        val auto = List(purchasableCount - manual.size) { lottoFactory.create() }
         return LottoReceipt(manual = manual, auto = auto)
     }
 

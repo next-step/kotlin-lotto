@@ -30,6 +30,10 @@ object InputView {
     }
 
     private fun readLottoNumbers(): List<Int> {
-        return readln().split(NUMBER_DELIMITER).map { it.trim().toInt() }
+        return parseLottoNumber(readln())
+    }
+
+    private fun parseLottoNumber(values: String): List<Int> {
+        return values.split(NUMBER_DELIMITER).map { it.trim().toInt() }
     }
 }
