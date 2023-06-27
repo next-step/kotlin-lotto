@@ -28,7 +28,7 @@ class StringAddCalculator {
 
     private fun checkInt(text: String): Int {
         require(text.toInt() > 0) {
-            throw RuntimeException("양수인 숫자만 입력 가능합니다.")
+            throw RuntimeException("양수만 입력 가능합니다.")
         }
         return text.toInt()
     }
@@ -40,5 +40,4 @@ class StringAddCalculator {
     companion object {
         val REGEX_PATTERN = Regex("//(.)\n(.*)")
     }
-
 }
