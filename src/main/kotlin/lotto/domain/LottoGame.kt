@@ -4,7 +4,7 @@ class LottoGame(winningNumber: List<Int>, bonusNumber: Int) {
     private val winning: WinningLotto
 
     init {
-        this.winning = WinningLotto(Lotto(winningNumber.map { LottoNumber.of(it) }), LottoNumber.of(bonusNumber))
+        this.winning = WinningLotto(Lotto.of(winningNumber), LottoNumber.of(bonusNumber))
     }
 
     fun match(lottos: List<Lotto>): LottoResultSummary {

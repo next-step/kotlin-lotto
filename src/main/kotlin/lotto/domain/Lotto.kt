@@ -19,11 +19,12 @@ class Lotto(lottoNumbers: List<LottoNumber>) : Iterable<LottoNumber> {
         return numbers.contains(number)
     }
 
-    companion object {
-        private const val MAX_MATCH_COUNT = 6
-    }
-
     override fun iterator(): Iterator<LottoNumber> {
         return numbers.iterator()
+    }
+
+    companion object {
+        private const val MAX_MATCH_COUNT = 6
+        fun of(lottoNumbers: List<Int>) = Lotto(lottoNumbers.map { LottoNumber.of(it) })
     }
 }
