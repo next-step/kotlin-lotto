@@ -1,5 +1,5 @@
 package lotto
 
-class ManualPurchaseCommand(
+class PurchaseCommand(
     val lottos: List<Lotto>,
 )

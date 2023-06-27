@@ -28,4 +28,3 @@ enum class Prize(
             .sortedBy { it.condition.priority }
     }
 }
-

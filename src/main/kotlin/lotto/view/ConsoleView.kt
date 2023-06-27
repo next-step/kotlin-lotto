@@ -3,7 +3,7 @@ package lotto.view
 import lotto.GameResult
 import lotto.Lotto
 import lotto.Lottos
-import lotto.ManualPurchaseCommand
+import lotto.PurchaseCommand
 import lotto.prize.Prize
 import lotto.vo.LottoNumber
 import lotto.vo.Money
@@ -37,12 +37,12 @@ object ConsoleView : InputView, OutputView {
         return WinningNumbers(winningNumbers, LottoNumber.from(bonusNumber))
     }
 
-    override fun receivePurchaseCommand(): ManualPurchaseCommand {
+    override fun receivePurchaseCommand(): PurchaseCommand {
         val manualLottoCount = receiveManualLottoCount()
 
         val manualLottos = receiveManualLottos(manualLottoCount)
 
-        return ManualPurchaseCommand(
+        return PurchaseCommand(
             manualLottos
         )
     }

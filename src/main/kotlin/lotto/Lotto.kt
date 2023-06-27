@@ -2,6 +2,7 @@ package lotto
 
 import lotto.prize.Prize
 import lotto.vo.LottoNumber
+import lotto.vo.Money
 import lotto.vo.WinningNumbers
 
 data class Lotto(
@@ -25,6 +26,7 @@ data class Lotto(
     }
 
     companion object {
+        val PRICE = Money(1000)
         fun from(numbers: Collection<LottoNumber>): Lotto {
             return Lotto(numbers.toSet())
         }
