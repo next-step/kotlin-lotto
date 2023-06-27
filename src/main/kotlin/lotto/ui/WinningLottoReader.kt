@@ -4,9 +4,23 @@ import lotto.domain.Lotto
 import lotto.domain.LottoNumber
 import lotto.domain.WinningLotto
 
-object WinningNumberReader {
+object WinningLottoReader {
 
     const val DELIMITER = ","
+
+    fun winningNumbers(): List<Int> {
+        println("지난 주 당첨 번호를 입력해 주세요.")
+        val winningNumbersAsCommaSeparatedString = readln()
+        return winningNumbersAsCommaSeparatedString.split(DELIMITER)
+            .map { it.trim() }
+            .map { it.toInt() }
+    }
+
+    fun bonusNumber(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readln().toInt()
+    }
+
     fun read(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumbersAsCommaSeparatedString = readln()

@@ -1,28 +1,36 @@
 package lotto
 
+import lotto.domain.Lotto
 import lotto.domain.LottoDrawMachine
+import lotto.domain.LottoNumber
 import lotto.domain.LottoStore
+import lotto.domain.WinningLotto
 import lotto.ui.LottoDrawResultPrinter
-import lotto.ui.PurchaseAutoReader
-import lotto.ui.PurchaseManualReader
+import lotto.ui.PurchaseReader
 import lotto.ui.PurchasedLottosPrinter
-import lotto.ui.WinningNumberReader
+import lotto.ui.WinningLottoReader
 
 fun main() {
 
-    val purchaseAmount: Int = PurchaseAutoReader.auto()
+    val purchaseAmount: Int = PurchaseReader.auto()
 
-    val auto = LottoStore.buy(purchaseAmount)
+    val auto = LottoStore.auto(purchaseAmount)
 
-    val manual = PurchaseManualReader.manual()
+    val manualNumbers: List<List<Int>> = PurchaseReader.manual()
+
+    val manual = manualNumbers.map { LottoStore.manual(it) }
 
     PurchasedLottosPrinter.print(auto, manual)
 
     println()
 
-    val winningNumbers = WinningNumberReader.read()
+    val winningNumbers = WinningLottoReader.winningNumbers().map { LottoNumber(it) }
 
-    val lottoDrawMachine = LottoDrawMachine(winningNumbers)
+    val bonusNumber = WinningLottoReader.bonusNumber()
+
+    val winningLotto = WinningLotto(Lotto.from(winningNumbers), LottoNumber(bonusNumber))
+
+    val lottoDrawMachine = LottoDrawMachine(winningLotto)
     val lottoDrawResult = lottoDrawMachine.draw(listOf(auto, manual).flatten())
 
     LottoDrawResultPrinter.print(lottoDrawResult)
