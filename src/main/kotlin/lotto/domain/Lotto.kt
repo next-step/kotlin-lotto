@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_6
+import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_UNIQUE
 
 class Lotto private constructor(
     private val numbers: List<LottoNumber>
@@ -8,6 +9,7 @@ class Lotto private constructor(
 
     init {
         require(numbers.size == NUMBER_OF_LOTTO_NUMBERS) { LOTTO_NUMBERS_MUST_BE_6 }
+        require(numbers.toSet().size == numbers.size) { LOTTO_NUMBERS_MUST_BE_UNIQUE }
     }
 
     override fun toString(): String {
