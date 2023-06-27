@@ -1,10 +1,8 @@
 package lotto.domain
 
 class Lottos(
-    private val lottos: List<Lotto>
+    val lottos: List<Lotto>
 ) {
-
-    fun printAll() = lottos.forEach { println(it.toString()) }
 
     fun winningMap(winningLotto: WinningLotto): WinningMap {
         val map = mutableMapOf<LottoPrizes, Int>()

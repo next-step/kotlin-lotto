@@ -1,9 +1,10 @@
 package lotto.view
 
+import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
 import lotto.domain.Lottos
-import lotto.vo.LottosStatisticsVO
 import lotto.domain.WinningMap
+import lotto.vo.LottosStatisticsVO
 
 class ResultView {
     fun printPurchaseAmount(manualAmount: Int, autoAmount: Int) {
@@ -11,12 +12,17 @@ class ResultView {
     }
 
     fun printLottos(lottos: Lottos) {
-        lottos.printAll()
+        lottos.lottos.forEach { printLotto(it) }
     }
 
     fun printWinningResult(statistics: LottosStatisticsVO) {
         printStatistics(statistics.prizeMap)
         printRateOfReturn(statistics.totalPrizeMoney, statistics.rateOfReturn)
+    }
+
+    private fun printLotto(lotto: Lotto) {
+        val numbers = lotto.numbers.map { it.number }.sorted()
+        println("[${numbers.joinToString(", ") { it.toString() }}]")
     }
 
     private fun printStatistics(winningMap: WinningMap) {
