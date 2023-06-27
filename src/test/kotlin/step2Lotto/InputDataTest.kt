@@ -2,7 +2,7 @@ package step2Lotto
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import step2Lotto.domain.Lotto
+import step2Lotto.domain.LottoNumber
 import step2Lotto.domain.WinningNumber
 import step2Lotto.view.InputIO
 
@@ -18,6 +18,6 @@ class InputDataTest {
     @Test
     fun `당첨 번호를 입력받는다`() {
         val winningNumber = inputIO.inputWinningNumber("1, 9, 10, 30, 31, 41")
-        winningNumber shouldBe WinningNumber(arrayOf(1, 9, 10, 30, 31, 41))
+        winningNumber shouldBe WinningNumber(arrayOf(1, 9, 10, 30, 31, 41).map { LottoNumber(it) })
     }
 }

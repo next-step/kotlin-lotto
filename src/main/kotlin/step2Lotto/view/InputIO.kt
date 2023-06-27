@@ -1,5 +1,6 @@
 package step2Lotto.view
 
+import step2Lotto.domain.LottoNumber
 import step2Lotto.domain.WinningNumber
 
 class InputIO {
@@ -10,15 +11,15 @@ class InputIO {
     fun inputWinningNumber(inputString: String? = readlnOrNull()): WinningNumber {
 
         if (inputString == null) {
-            return WinningNumber(arrayOf())
+            return WinningNumber(listOf())
         }
 
         return WinningNumber(convertStringToIntArray(inputString))
     }
 
-    private fun convertStringToIntArray(string: String): Array<Int> {
+    private fun convertStringToIntArray(string: String): List<LottoNumber> {
         return string.replace(" ", "")
             .split(",")
-            .map { it.toInt() }.toTypedArray()
+            .map { LottoNumber(it.toInt()) }
     }
 }
