@@ -17,7 +17,7 @@ class LottoStoreTest {
     }
 
     @Test
-    fun `로또 구매`() {
+    fun `로또를 구입 금액에 맞는 장 수를 구매한다`() {
         val lottoTickets = listOf(
             Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
             Lotto(arrayOf(1, 2, 3, 4, 5, 6)),

@@ -13,7 +13,7 @@ class LottoServiceTest {
     private val lottoService = LottoService()
 
     @Test
-    fun `로또 통계 계산`() {
+    fun `구매한 로또와 당첨 번호가 주어지면 1등부터 5등, 꽝을 계산한다`() {
         val lottoTickets = listOf(
             Lotto(arrayOf(11, 12, 13, 14, 15, 16)),
             Lotto(arrayOf(1, 2, 3, 14, 15, 16)),
@@ -35,7 +35,7 @@ class LottoServiceTest {
     }
 
     @Test
-    fun `로또 수익률 계산`() {
+    fun `구매 금액과 당첨 결과가 주어지면 수익률을 계산할다`() {
         val purchaseAmount = 14000
 
         val statistics = listOf(
