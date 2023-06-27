@@ -3,24 +3,27 @@ package lotto
 import lotto.domain.LottoDrawMachine
 import lotto.domain.LottoStore
 import lotto.ui.LottoDrawResultPrinter
-import lotto.ui.PurchaseAmountReader
+import lotto.ui.PurchaseAutoReader
+import lotto.ui.PurchaseManualReader
 import lotto.ui.PurchasedLottosPrinter
 import lotto.ui.WinningNumberReader
 
 fun main() {
 
-    val purchaseAmount = PurchaseAmountReader.read()
+    val purchaseAmount: Int = PurchaseAutoReader.auto()
 
-    val lottos = LottoStore.buy(purchaseAmount)
+    val auto = LottoStore.buy(purchaseAmount)
 
-    PurchasedLottosPrinter.print(lottos)
+    val manual = PurchaseManualReader.manual()
+
+    PurchasedLottosPrinter.print(auto, manual)
 
     println()
 
     val winningNumbers = WinningNumberReader.read()
 
     val lottoDrawMachine = LottoDrawMachine(winningNumbers)
-    val lottoDrawResult = lottoDrawMachine.draw(lottos)
+    val lottoDrawResult = lottoDrawMachine.draw(listOf(auto, manual).flatten())
 
     LottoDrawResultPrinter.print(lottoDrawResult)
 }

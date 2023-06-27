@@ -5,11 +5,13 @@ import lotto.domain.LottoNumber
 import lotto.domain.WinningLotto
 
 object WinningNumberReader {
+
+    const val DELIMITER = ","
     fun read(): WinningLotto {
         println("지난 주 당첨 번호를 입력해 주세요.")
         val winningNumbersAsCommaSeparatedString = readln()
-        val winningNumbers = winningNumbersAsCommaSeparatedString
-            .split(", ")
+        val winningNumbers = winningNumbersAsCommaSeparatedString.split(DELIMITER)
+            .map { it.trim() }
             .map { it.toInt() }
             .map { LottoNumber(it) }
         val winningLotto = Lotto.from(winningNumbers)
