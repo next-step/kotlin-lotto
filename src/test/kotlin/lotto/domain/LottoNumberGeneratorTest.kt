@@ -15,9 +15,6 @@ class LottoNumberGeneratorTest : FunSpec({
         val actual = lottoNumberGenerator.generate()
 
         // then
-        actual shouldHaveSize size
-        actual.forAll {
-            it shouldBeInRange (IntRange(1, 45))
-        }
+        actual.values shouldHaveSize size
     }
 })

@@ -13,13 +13,12 @@ enum class LottoRank(
 
     companion object {
         fun of(countOfMatch: Int, matchBonus: Boolean): LottoRank {
-            if (SECOND.countOfMatch == countOfMatch && matchBonus) {
-                return SECOND
+
+            return when {
+                SECOND.countOfMatch == countOfMatch && matchBonus -> SECOND
+                SECOND.countOfMatch == countOfMatch && !matchBonus -> THIRD
+                else -> values().find { it.countOfMatch == countOfMatch } ?: MISS
             }
-            if (SECOND.countOfMatch == countOfMatch && !matchBonus) {
-                return THIRD
-            }
-            return values().find { it.countOfMatch == countOfMatch } ?: MISS
         }
     }
 }

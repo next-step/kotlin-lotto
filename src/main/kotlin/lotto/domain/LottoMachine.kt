@@ -1,7 +1,5 @@
 package lotto.domain
 
-import lotto.domain.LottoNumbers.Companion.toNumbers
-
 class LottoMachine(
     private val lottoNumberGenerator: NumberGenerator = LottoNumberGenerator()
 ) {
@@ -13,7 +11,6 @@ class LottoMachine(
 
         return List(numberOfTickets) {
             lottoNumberGenerator.generate()
-                .toNumbers()
         }.let { LottoTickets(it) }
     }
 
