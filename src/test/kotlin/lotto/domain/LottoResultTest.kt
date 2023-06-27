@@ -9,15 +9,15 @@ class LottoResultTest : StringSpec({
         val result = LottoResult.calculateResult(
             lottos = Lottos(
                 listOf(
-                    Lotto(listOf(11, 23, 3, 4, 13, 6)), // 2개 일치
-                    Lotto(listOf(1, 2, 3, 4, 5, 6)), // 3개 일치
-                    Lotto(listOf(1, 2, 3, 4, 15, 16)), // 3개 일치
-                    Lotto(listOf(3, 4, 5, 18, 8, 14)), // 4개 일치
-                    Lotto(listOf(3, 4, 5, 7, 8, 14)), // 5개 일치
-                    Lotto(listOf(3, 4, 5, 7, 8, 15)), // 6개 일치
+                    Lotto(listOf(11, 23, 3, 4, 13, 6).map { LottoNumber(it) }), // 2개 일치
+                    Lotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }), // 3개 일치
+                    Lotto(listOf(1, 2, 3, 4, 15, 16).map { LottoNumber(it) }), // 3개 일치
+                    Lotto(listOf(3, 4, 5, 18, 8, 14).map { LottoNumber(it) }), // 4개 일치
+                    Lotto(listOf(3, 4, 5, 7, 8, 14).map { LottoNumber(it) }), // 5개 일치
+                    Lotto(listOf(3, 4, 5, 7, 8, 15).map { LottoNumber(it) }), // 6개 일치
                 )
             ),
-            lottoResult = WinningLotto(Lotto(listOf(3, 4, 5, 7, 8, 15)), 2),
+            lottoResult = WinningLotto(Lotto(listOf(3, 4, 5, 7, 8, 15).map { LottoNumber(it) }), LottoNumber(2)),
         )
 
         with(result) {
