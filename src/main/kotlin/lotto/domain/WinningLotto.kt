@@ -1,6 +1,7 @@
 package lotto.domain
 
 import lotto.domain.LottoErrorMessage.BONUS_NUMBERS_MUST_NOT_DIFFERENT_FROM_WINNING_NUMBER
+import lotto.vo.LottosStatisticsVO
 
 class WinningLotto(
     val lotto: Lotto,

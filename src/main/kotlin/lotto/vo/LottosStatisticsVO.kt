@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto.vo
+
+import lotto.domain.WinningMap
 
 data class LottosStatisticsVO(
     val prizeMap: WinningMap,

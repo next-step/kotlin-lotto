@@ -2,7 +2,7 @@ package lotto.view
 
 import lotto.domain.LottoPrizes
 import lotto.domain.Lottos
-import lotto.domain.LottosStatisticsVO
+import lotto.vo.LottosStatisticsVO
 import lotto.domain.WinningMap
 
 class ResultView {

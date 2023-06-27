@@ -6,10 +6,6 @@ class Lottos(
 
     fun printAll() = lottos.forEach { println(it.toString()) }
 
-    fun numberOfAuto() = lottos.count { it.isAuto() }
-
-    fun numberOfManual() = lottos.count { !it.isAuto() }
-
     fun winningMap(winningLotto: WinningLotto): WinningMap {
         val map = mutableMapOf<LottoPrizes, Int>()
 

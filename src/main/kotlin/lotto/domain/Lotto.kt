@@ -3,8 +3,7 @@ package lotto.domain
 import lotto.domain.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_6
 
 class Lotto private constructor(
-    private val numbers: List<LottoNumber>,
-    private val auto: Boolean = false
+    private val numbers: List<LottoNumber>
 ) {
 
     init {
@@ -22,8 +21,6 @@ class Lotto private constructor(
 
     fun isCatchBonus(winningLotto: WinningLotto): Boolean = numbers.contains(winningLotto.bonusNumber)
 
-    fun isAuto(): Boolean = auto
-
     private fun sortedNumbers() = numbers.map { it.number }.sorted()
 
     companion object {
@@ -31,7 +28,7 @@ class Lotto private constructor(
 
         fun autoCreate(): Lotto {
             val lottoNumbers = LottoNumber.createRandomList(NUMBER_OF_LOTTO_NUMBERS)
-            return Lotto(lottoNumbers, true)
+            return Lotto(lottoNumbers)
         }
 
         fun manualCreate(numbers: List<Int>): Lotto {
