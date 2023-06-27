@@ -8,9 +8,9 @@ class LottoRankTest {
 
     @ValueSource(ints = [0, 1, 2, 3, 4, 5, 6])
     @ParameterizedTest
-    fun getByMatchCount(matchCount: Int) {
+    fun getRank(matchCount: Int) {
         // when
-        val lottoRank = LottoRank.getByMatchCount(matchCount)
+        val lottoRank = LottoRank.getRank(LottoMatchCount(matchCount, false))
 
         // then
         assertThat(lottoRank).isEqualTo(
@@ -25,5 +25,13 @@ class LottoRankTest {
                 else -> {}
             }
         )
+    }
+
+    fun `getRank-매칭수가 5개이고, 보너스 번호를 포함하는 경우 BONUS_SECOND 를 반환한다`() {
+        // when
+        val lottoRank = LottoRank.getRank(LottoMatchCount(5, true))
+
+        // then
+        assertThat(lottoRank).isEqualTo(LottoRank.BONUS_SECOND)
     }
 }

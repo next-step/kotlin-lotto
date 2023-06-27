@@ -1,14 +1,14 @@
 package lotto.domain
 
 class Lotto(
-    private val lottoNumberGenerator: LottoNumberGenerator
+    private val lottoNumberGenerator: LottoNumberGenerator,
 ) {
 
     val lottoNumbers: LottoNumbers = lottoNumberGenerator.generate().let { LottoNumbers.of(it) }
 
-    fun matchLottoNumber(matchingNumbers: LottoNumbers): LottoRank {
-        val matchedCount = lottoNumbers.getMatchingCount(matchingNumbers)
-        return LottoRank.getByMatchCount(matchedCount)
+    fun matchLottoNumber(lottoMatchNumbers: LottoMatchNumbers): LottoRank {
+        val lottoMatchCount = lottoNumbers.matchNumbers(lottoMatchNumbers)
+        return LottoRank.getRank(lottoMatchCount)
     }
 
     companion object {

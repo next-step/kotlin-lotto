@@ -1,14 +1,14 @@
 package lotto.domain
 
 class LottoNumbers(
-    val lottoNumbers: Set<LottoNumber>
+    val lottoNumbers: Set<LottoNumber>,
 ) {
     init {
         require(lottoNumbers.size == 6) { "로또는 6개 숫자로 구성됩니다." }
     }
 
-    fun getMatchingCount(matchingNumbers: LottoNumbers): Int {
-        return lottoNumbers.count { matchingNumbers.lottoNumbers.contains(it) }
+    fun matchNumbers(matchNumbers: LottoMatchNumbers): LottoMatchCount {
+        return matchNumbers.match(lottoNumbers.toList())
     }
 
     companion object {

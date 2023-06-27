@@ -14,8 +14,9 @@ class LottoManager {
         return lottos
     }
 
-    fun getResult(lottos: Lottos, matchingLottoNumbers: LottoNumbers) {
-        val lottoResult = lottos.getLottoResult(matchingLottoNumbers)
+    fun getResult(lottos: Lottos) {
+        val matchingNumbers = InputView.readNumbers()
+        val lottoResult = lottos.getLottoResult(matchingNumbers)
 
         OutputView.printLottoResult(lottoResult)
     }
