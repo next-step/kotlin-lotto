@@ -13,6 +13,10 @@ class LottoShop {
     }
 
     fun winning(winningLotto: WinningLotto, lottos: Lottos, budget: Int): LottosStatisticsVO {
-        return winningLotto.statistics(lottos, budget)
+        val winningMap = lottos.winningMap(winningLotto)
+        val totalPrizeMoney = winningMap.totalPrizeMoney()
+        val rateOfReturn = totalPrizeMoney.toDouble() / budget.toDouble()
+
+        return LottosStatisticsVO(winningMap, totalPrizeMoney, rateOfReturn)
     }
 }
