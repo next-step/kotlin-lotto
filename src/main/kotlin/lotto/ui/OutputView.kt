@@ -18,7 +18,7 @@ object OutputView {
         println("당첨 통계")
         println("---------")
         LottoRank.values().forEach {
-            when(it) {
+            when (it) {
                 LottoRank.BONUS_SECOND -> {
                     println("${it.matchCount}개, 일치 보너스 볼 일치(${it.price}원)- ${lottoResult.getRankCount(it)}개")
                 }

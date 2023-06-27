@@ -14,7 +14,7 @@ class LottoRankTest {
 
         // then
         assertThat(lottoRank).isEqualTo(
-            when(matchCount) {
+            when (matchCount) {
                 0 -> LottoRank.NONE
                 1 -> LottoRank.NONE
                 2 -> LottoRank.NONE
