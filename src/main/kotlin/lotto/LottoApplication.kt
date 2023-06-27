@@ -6,11 +6,13 @@ import lotto.util.RandomNumbers
 import lotto.view.InputView
 import lotto.view.OutputView
 
-fun main(args: Array<String>) {
+fun main() {
     // 구매 금액 입력
     val money = InputView.inputMoney()
     val manualLottoCount = InputView.inputManualLottoCount()
-    val manualLottoTickets = InputView.inputManualLottoNumbers(manualLottoCount)
+    val manualLottoTickets: List<LottoTicket> = InputView.inputManualLottoNumbers(manualLottoCount).map {
+        LottoTicket(it)
+    }
     val autoLottoTickets: List<LottoTicket> = List(money.countAutoLotto(manualLottoCount)) {
         LottoTicket(RandomNumbers.generateNumbers())
     }
@@ -21,9 +23,9 @@ fun main(args: Array<String>) {
     OutputView.printPurchase(manualLottoCount, lottoTickets)
 
     // 당첨번호 입력
-    val winNumbers = InputView.inputWinNumbers()
+    val winTicket = LottoTicket(InputView.inputWinNumbers())
     val bonusNumber = InputView.inputBonusNumber()
 
     // 당첨 통계
-    OutputView.printWinStats(lottoTickets.getWinStats(winNumbers, bonusNumber))
+    OutputView.printWinStats(lottoTickets.getWinStats(winTicket, bonusNumber))
 }
