@@ -7,7 +7,7 @@ import kotlin.math.round
 class LottoStatisticService {
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
-        return req.lottoTickets.map { getLottoRank(it, req.winningNumber) }
+        return req.lottoTickets.map { req.winningNumber.getLottoRank(it) }
     }
 
     fun getProfitRate(req: ProfitRateRequest): Double {
