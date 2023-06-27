@@ -2,6 +2,7 @@ package lotto
 
 import lotto.domain.Lotto
 import lotto.domain.Lotto.Companion.NUMBER_OF_LOTTO_NUMBERS
+import lotto.fixture.createLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -21,9 +22,8 @@ class LottoTest {
 
     @Test
     fun `로또를 구성하는 번호는 중복되면 IllegalArgumentException`() {
-        val numbers = listOf(1, 1, 3, 4, 5, 6)
         assertThrows<IllegalArgumentException> {
-            Lotto.manualCreate(numbers)
+            createLotto(1, 1, 3, 4, 5, 6)
         }
     }
 
