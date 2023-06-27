@@ -28,9 +28,10 @@ data class Lottos(
             .toMutableMap()
 
         return lottos
-            .mapNotNull { it.matchPrizeFrom(winningNumbers) }
+            .map { it.matchPrizeFrom(winningNumbers) }
             .groupBy { it }
             .mapValuesTo(defaultMap) { (_, value) -> value.size }
+            .filter { it.key != Prize.NONE }
             .toList()
     }
 

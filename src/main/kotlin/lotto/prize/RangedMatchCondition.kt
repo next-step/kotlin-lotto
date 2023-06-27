@@ -1,10 +1,12 @@
 package lotto.prize
 
-class BonusMatchCondition(
-    override val matchCount: Int,
+class RangedMatchCondition(
+    upperBound: Int,
     override val priority: Int,
 ) : MatchCondition {
+    override val matchCount: Int = upperBound
+
     override fun match(matchCount: Int, bonusMatch: Boolean): Boolean {
-        return this.matchCount == matchCount && bonusMatch
+        return this.matchCount >= matchCount
     }
 }
