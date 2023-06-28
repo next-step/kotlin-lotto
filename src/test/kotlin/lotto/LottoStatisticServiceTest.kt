@@ -14,7 +14,7 @@ class LottoStatisticServiceTest {
     private val lottoStatisticService = LottoStatisticService()
 
     @Test
-    fun `구매한 로또와 당첨 번호가 주어지면 1등부터 5등, 꽝을 계산한다`() {
+    fun `구매한 로또와 당첨 번호가 주어지면 각 로또의 등수를 확인할 수 있다`() {
         val lottoTickets = listOf(
             Lotto(arrayOf(11, 12, 13, 14, 15, 16)),
             Lotto(arrayOf(1, 2, 3, 14, 15, 16)),
