@@ -1,12 +1,9 @@
-package step2Lotto.domain
+package lotto.domain
 
-data class LottoNumber(private val _value: Int) {
+data class LottoNumber(val value: Int) {
     init {
-        check(_value in MINIMUM_NUMBER..MAXIMUM_NUMBER)
+        check(value in MINIMUM_NUMBER..MAXIMUM_NUMBER)
     }
-
-    val value: Int
-        get() = _value
 
     companion object {
         private const val MINIMUM_NUMBER = 1

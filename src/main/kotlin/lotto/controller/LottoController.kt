@@ -1,17 +1,22 @@
-package step2Lotto.controller
+package lotto.controller
 
-import step2Lotto.domain.*
-import step2Lotto.domain.dto.ProfitRateRequest
-import step2Lotto.domain.dto.StatisticsRequest
-import step2Lotto.view.InputIO
-import step2Lotto.view.InputMessage
-import step2Lotto.view.InputView
-import step2Lotto.view.ResultView
+import lotto.domain.AutoLottoGenerator
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.LottoRank
+import lotto.domain.LottoStatisticService
+import lotto.domain.LottoStore
+import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.StatisticsRequest
+import lotto.view.InputIO
+import lotto.view.InputMessage
+import lotto.view.InputView
+import lotto.view.ResultView
 
 class LottoController {
     private val inputIO = InputIO()
     private val inputView = InputView()
-    private val lottoService = LottoService()
+    private val lottoStatisticService = LottoStatisticService()
     private val lottoStore = LottoStore(AutoLottoGenerator())
     private val resultView = ResultView()
 
@@ -27,13 +32,18 @@ class LottoController {
         return lottoTickets
     }
 
-    fun inputWinningLotto(): WinningNumber {
-        inputView.show(InputMessage.WINNING_LOTTO)
+    fun inputWinningNumber(): List<LottoNumber> {
+        inputView.show(InputMessage.WINNING_NUMBERS)
         return inputIO.inputWinningNumber()
     }
 
+    fun inputBonusNumber(): LottoNumber {
+        inputView.show(InputMessage.BONUS_NUMBER)
+        return inputIO.inputBonusNumber()
+    }
+
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
-        return lottoService.getStatistics(req)
+        return lottoStatisticService.getStatistics(req)
     }
 
     fun showLottoStatistics(statistics: List<LottoRank>) {
@@ -41,7 +51,7 @@ class LottoController {
     }
 
     fun showProfitRate(req: ProfitRateRequest) {
-        val profitRate = lottoService.getProfitRate(req)
+        val profitRate = lottoStatisticService.getProfitRate(req)
         resultView.showProfitRate(profitRate)
     }
 }

@@ -1,13 +1,14 @@
-package step2Lotto.domain
+package lotto.domain
 
 open class Lotto(
-    val numbers: List<LottoNumber>
+    val numbers: Set<LottoNumber>
 ) {
-    constructor(numbers: Array<Int>) : this(numbers.map { LottoNumber(it) })
-
-    fun getLottoNumbers(): List<Int> {
-        return numbers.map { it.value }
+    init {
+        require(numbers.size == 6)
     }
+
+    constructor(numbers: Array<Int>) : this(numbers.map { LottoNumber(it) }.toSet())
+    constructor(numbers: List<LottoNumber>) : this(numbers.map { it }.toSet())
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -1,13 +1,13 @@
-package step2Lotto.domain
+package lotto.domain
 
-import step2Lotto.domain.dto.ProfitRateRequest
-import step2Lotto.domain.dto.StatisticsRequest
+import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.StatisticsRequest
 import kotlin.math.round
 
-class LottoService {
+class LottoStatisticService {
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {
-        return req.lottoTickets.map { getLottoRank(it, req.winningNumber) }
+        return req.lottoTickets.map { req.winningLotto.getLottoRank(it) }
     }
 
     fun getProfitRate(req: ProfitRateRequest): Double {

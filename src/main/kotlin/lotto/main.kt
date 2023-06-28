@@ -1,18 +1,20 @@
-package step2Lotto
+package lotto
 
-import step2Lotto.controller.LottoController
-import step2Lotto.domain.dto.ProfitRateRequest
-import step2Lotto.domain.dto.StatisticsRequest
+import lotto.controller.LottoController
+import lotto.domain.WinningLotto
+import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.StatisticsRequest
 
 fun main() {
     val lottoController = LottoController()
 
     val purchaseAmount = lottoController.inputPurchaseAmount()
     val lottoTickets = lottoController.purchaseLottoTickets(purchaseAmount)
-    val winningLotto = lottoController.inputWinningLotto()
+    val winningNumbers = lottoController.inputWinningNumber()
+    val bonusNumber = lottoController.inputBonusNumber()
 
     val lottoStatistics = lottoController.getStatistics(
-        StatisticsRequest(lottoTickets, winningLotto)
+        StatisticsRequest(lottoTickets, WinningLotto(winningNumbers, bonusNumber))
     )
 
     lottoController.showLottoStatistics(lottoStatistics)
