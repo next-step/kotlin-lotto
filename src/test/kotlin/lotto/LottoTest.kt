@@ -14,14 +14,14 @@ class LottoTest {
 
     @Test
     fun `로또 번호의 갯수가 6개가 아니면 예외를 발생시킨다`() {
-        shouldThrow<IllegalStateException> {
+        shouldThrow<IllegalArgumentException> {
             Lotto(arrayOf(1, 2, 3, 4, 5))
         }
     }
 
     @Test
     fun `로또 번호가 하나라도 중복이면 예외를 발생시킨다`() {
-        shouldThrow<IllegalStateException> {
+        shouldThrow<IllegalArgumentException> {
             Lotto(arrayOf(1, 2, 3, 4, 5, 5))
         }
     }

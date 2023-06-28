@@ -15,7 +15,7 @@ class ResultView {
         }
     }
 
-    private fun printLottoNumbers(numbers: List<LottoNumber>) {
+    private fun printLottoNumbers(numbers: Set<LottoNumber>) {
         println(numbers.map { it.value })
     }
 
