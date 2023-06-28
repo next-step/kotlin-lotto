@@ -1,17 +1,23 @@
 package lotto.domain
 
 enum class LottoRanking(val correctCount: Int, val price: Int) {
-    FIRST(6, 2000000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     companion object {
-        fun lottoRanking(correctCount: Int): LottoRanking {
-            return values()
-                .filter { lotto: LottoRanking -> lotto != MISS }
+        fun lottoRanking(correctCount: Int, matchedBonusBall: Boolean): LottoRanking {
+            val lottoRanking = values()
                 .firstOrNull { ranking: LottoRanking -> ranking.correctCount == correctCount } ?: MISS
+
+            if (lottoRanking == SECOND && !matchedBonusBall) {
+                return LottoRanking.THIRD
+            }
+
+            return lottoRanking
         }
     }
 }

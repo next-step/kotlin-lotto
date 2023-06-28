@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.domain.LottoNumbers
-import lotto.domain.LottoRanking
 import lotto.model.LottoResultPrintModel
 
 fun printBuyCount(buyCount: Int) {
@@ -22,16 +21,16 @@ fun printResultMessage() {
     println("---------")
 }
 
-fun printResult(lottoResult: List<LottoResultPrintModel?>, rateOfReturn: Float) {
+fun printResult(lottoResult: List<LottoResultPrintModel>, rateOfReturn: Float) {
     println(StringBuilder().append(rankingPrintInfo(lottoResult)).append(rateResultString(rateOfReturn)))
 }
 
-private fun rankingPrintInfo(lottoResult: List<LottoResultPrintModel?>): String {
+private fun rankingPrintInfo(lottoResult: List<LottoResultPrintModel>): String {
     val stringBuilder = StringBuilder()
     for (printModel in lottoResult) {
-        stringBuilder.append(printModel?.let { resultString(it.correctCount, printModel.price, printModel.count) })
+        stringBuilder.append(resultString(printModel.correctCount, printModel.price, printModel.count))
     }
-    return stringBuilder.toString();
+    return stringBuilder.toString()
 }
 
 private fun resultString(correctCount: Int, price: Int, count: Int): String {

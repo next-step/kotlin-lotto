@@ -1,19 +1,20 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
 import io.kotest.matchers.shouldBe
 
 class WinningLottoTest : StringSpec({
-    val winningLottoNumbers = WinningLotto(LottoNumbers.from("1,2,3,4,5,6"))
+    val winningLottoNumbers = WinningLotto(LottoNumbers.from("1,2,3,4,5,6"), LottoNumber(7))
 
     "일치 하는 로또의 수를 알 수 있다." {
         val lottoNumbers = LottoNumbers(
             setOf(
-                LottoNumber.from(6), LottoNumber.from(5),
-                LottoNumber.from(4), LottoNumber.from(3),
-                LottoNumber.from(2), LottoNumber.from(1)
+                LottoNumber(6), LottoNumber(5),
+                LottoNumber(4), LottoNumber(3),
+                LottoNumber(2), LottoNumber(1)
             )
         )
 
@@ -29,5 +30,19 @@ class WinningLottoTest : StringSpec({
         ) { lottoNumber, correctCount ->
             winningLottoNumbers.correctCount(LottoNumbers.from(lottoNumber)) shouldBe correctCount
         }
+    }
+
+    "보너스 볼은 6자리 로또 번호와 달라야 한다." {
+        val exception = shouldThrow<IllegalArgumentException> {
+            WinningLotto(
+                LottoNumbers.from("1,2,3,4,5,6"), LottoNumber(6)
+            )
+        }
+
+        exception.message shouldBe "보너스 볼은 6개의 로또번호와 달라야 합니다."
+    }
+
+    "보너스 볼 포함 여부 확인" {
+        winningLottoNumbers.matchedBonusBall(LottoNumbers.from("1,2,3,4,5,7")) shouldBe true
     }
 })

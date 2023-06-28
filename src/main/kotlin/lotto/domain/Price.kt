@@ -14,6 +14,6 @@ class Price(buyPrice: String) {
 
     companion object {
         private const val ZERO = 0
-        private const val BUY_PRICE_UNIT = 1000;
+        private const val BUY_PRICE_UNIT = 1000
     }
 }

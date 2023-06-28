@@ -9,7 +9,7 @@ class LottoMachine(private val price: Price) {
 
     init {
         (MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER).forEach {
-            lottoNumber.add(LottoNumber.from(it))
+            lottoNumber.add(LottoNumber(it))
         }
     }
 
