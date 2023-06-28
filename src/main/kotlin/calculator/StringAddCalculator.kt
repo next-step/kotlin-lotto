@@ -1,9 +1,25 @@
 package calculator
 
-class StringAddCalculator {
-    fun add(expression: String?): Int {
+class StringAddCalculator(expression: String?) {
+
+    private var calculateValues = mutableListOf<String>()
+
+    init {
+        addCalculateValues(expression)
+    }
+
+    fun add(): Int {
+        var sum = 0
+        calculateValues
+            .map { PositiveNumber(it) }
+            .forEach { sum = it.add(sum) }
+        return sum
+    }
+
+    private fun addCalculateValues(expression: String?) {
         if (expression.isNullOrBlank()) {
-            return 0
+            calculateValues.add("0")
+            return
         }
 
         var currentExpression = expression
@@ -15,13 +31,7 @@ class StringAddCalculator {
             currentExpression = matches.groupValues[INPUT_NUMBER_MATCHER_GROUP]
         }
 
-        var sum = 0
-
-        splitDelimiter(currentExpression, delimiter)
-            .map { PositiveNumber(it) }
-            .forEach { sum = it.add(sum) }
-
-        return sum
+        calculateValues.addAll(splitDelimiter(currentExpression, delimiter))
     }
 
     private fun splitDelimiter(inputText: String, delimiter: String): Array<String> {
