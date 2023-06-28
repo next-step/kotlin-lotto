@@ -1,6 +1,7 @@
 package lotto.view
 
 import lotto.domain.Lotto
+import lotto.domain.LottoNumber
 import lotto.domain.LottoRank
 
 class ResultView {
@@ -10,8 +11,12 @@ class ResultView {
 
     fun showLottoTickets(lottoTickets: List<Lotto>) {
         lottoTickets.forEach {
-            println(it.getLottoNumbers())
+            printLottoNumbers(it.numbers)
         }
+    }
+
+    private fun printLottoNumbers(numbers: List<LottoNumber>) {
+        println(numbers.map { it.value })
     }
 
     fun showLottoStatistics(statistics: List<LottoRank>) {

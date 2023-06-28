@@ -10,10 +10,6 @@ open class Lotto(
 
     constructor(numbers: Array<Int>) : this(numbers.map { LottoNumber(it) })
 
-    fun getLottoNumbers(): List<Int> {
-        return numbers.map { it.value }
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
