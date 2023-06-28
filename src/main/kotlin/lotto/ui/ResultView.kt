@@ -16,11 +16,15 @@ class ResultView {
         print("[")
         lottoNumber.forEachIndexed { index, ints ->
             print(ints)
-            if (index != lottoNumber.lastIndex) {
-                print(", ")
-            }
+            printIfNotLastIndex(index, lottoNumber)
         }
         println("]")
+    }
+
+    private fun printIfNotLastIndex(index: Int, lottoNumber: List<Int>) {
+        if (index != lottoNumber.lastIndex) {
+            print(", ")
+        }
     }
 
     fun printNumberOfLottoTicket(numberOfLottoTicket: Int) {
