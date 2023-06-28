@@ -6,14 +6,28 @@ enum class LottoRank(
 ) {
 
     NONE(0, 0),
-    MATCH_THREE(3, 5_000),
-    MATCH_FOUR(4, 50_000),
-    MATCH_FIVE(5, 1_500_000),
-    MATCH_SIX(6, 2_000_000_000);
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    BONUS_SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     companion object {
-        fun getByMatchCount(matchCount: Int): LottoRank {
-            return values().firstOrNull { it.matchCount == matchCount } ?: NONE
+        fun getRank(lottoMatchCount: LottoMatchCount): LottoRank {
+            val rank = values().firstOrNull { it.matchCount == lottoMatchCount.matchCount } ?: NONE
+            if (rank.matchCount != 5) {
+                return rank
+            }
+
+            return checkBonusNumber(rank, lottoMatchCount)
+        }
+
+        private fun checkBonusNumber(rank: LottoRank, lottoMatchCount: LottoMatchCount): LottoRank {
+            if (lottoMatchCount.containsBonusNumber) {
+                return BONUS_SECOND
+            }
+
+            return rank
         }
     }
 }
