@@ -20,9 +20,9 @@ class LottoStatisticServiceTest {
             Lotto(arrayOf(1, 2, 3, 4, 5, 6)),
         )
 
-        val winningNumber = WinningNumber(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) })
+        val winningLotto = WinningLotto(listOf(1, 2, 3, 4, 5, 6).map { LottoNumber(it) }, LottoNumber(5))
 
-        val req = StatisticsRequest(lottoTickets, winningNumber)
+        val req = StatisticsRequest(lottoTickets, winningLotto)
         val statistics = lottoStatisticService.getStatistics(req)
 
         statistics.count { it == LottoRank.FIRST } shouldBe 1

@@ -27,9 +27,14 @@ class LottoController {
         return lottoTickets
     }
 
-    fun inputWinningLotto(): WinningNumber {
+    fun inputWinningNumber(): List<LottoNumber> {
         inputView.show(InputMessage.WINNING_LOTTO)
         return inputIO.inputWinningNumber()
+    }
+
+    fun inputBonusNumber(): LottoNumber {
+        inputView.show(InputMessage.WINNING_LOTTO)
+        return inputIO.inputBonusNumber()
     }
 
     fun getStatistics(req: StatisticsRequest): List<LottoRank> {

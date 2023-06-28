@@ -1,6 +1,7 @@
 package Lotto
 
 import Lotto.controller.LottoController
+import Lotto.domain.WinningLotto
 import Lotto.domain.dto.ProfitRateRequest
 import Lotto.domain.dto.StatisticsRequest
 
@@ -9,10 +10,13 @@ fun main() {
 
     val purchaseAmount = lottoController.inputPurchaseAmount()
     val lottoTickets = lottoController.purchaseLottoTickets(purchaseAmount)
-    val winningLotto = lottoController.inputWinningLotto()
+    val winningNumbers = lottoController.inputWinningNumber()
+    val bonusNumber = lottoController.inputBonusNumber()
+
+
 
     val lottoStatistics = lottoController.getStatistics(
-        StatisticsRequest(lottoTickets, winningLotto)
+        StatisticsRequest(lottoTickets, WinningLotto(winningNumbers, bonusNumber))
     )
 
     lottoController.showLottoStatistics(lottoStatistics)

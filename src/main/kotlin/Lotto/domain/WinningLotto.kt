@@ -1,6 +1,9 @@
 package Lotto.domain
 
-class WinningNumber(numbers: List<LottoNumber>) : Lotto(numbers) {
+class WinningLotto(
+    numbers: List<LottoNumber>,
+    bonusNumber: LottoNumber
+) : Lotto(numbers) {
 
     fun getLottoRank(lotto: Lotto): LottoRank {
         return when (lotto.numbers.intersect(numbers.toSet()).size) {
