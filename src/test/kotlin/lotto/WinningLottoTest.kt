@@ -7,7 +7,7 @@ import lotto.domain.Lotto
 import lotto.domain.Rank
 import lotto.domain.WinningLotto
 
-internal class WinningLottoTest: BehaviorSpec({
+internal class WinningLottoTest : BehaviorSpec({
 
     Given("WinningLotto") {
         val winningLotto = WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"))

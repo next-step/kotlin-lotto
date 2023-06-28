@@ -3,10 +3,9 @@ package lotto
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
-import lotto.domain.LottoGame
 import lotto.domain.Lotto
+import lotto.domain.LottoGame
 import lotto.domain.WinningLotto
 
 internal class LottoGameTest : BehaviorSpec({

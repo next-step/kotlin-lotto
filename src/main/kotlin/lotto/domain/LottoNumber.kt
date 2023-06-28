@@ -10,5 +10,4 @@ data class LottoNumber(
     companion object {
         private const val INVALID_NUMBER_ERROR_MESSAGE = "로또 번호는 1~45 사이의 숫자만 가능합니다."
     }
-
 }

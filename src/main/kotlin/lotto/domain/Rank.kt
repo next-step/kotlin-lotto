@@ -20,5 +20,4 @@ enum class Rank(
         private val map = Rank.values().associateBy { it.matchCount }
         private infix fun from(matchCount: Int): Rank = map[matchCount] ?: MISS
     }
-
 }

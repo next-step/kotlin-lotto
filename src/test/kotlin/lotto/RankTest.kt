@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import lotto.domain.Rank
 
-internal class RankTest: BehaviorSpec({
+internal class RankTest : BehaviorSpec({
 
     Given("Rank") {
         When("matchCount가 0~6 사이가 아닐 경우") {

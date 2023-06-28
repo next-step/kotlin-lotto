@@ -6,7 +6,6 @@ import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoNumber
-import lotto.domain.WinningLotto
 
 internal class LottoTest : BehaviorSpec({
 
