@@ -23,6 +23,10 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
         return lottoNumbers.size
     }
 
+    fun contains(bonusNumber: LottoNumber): Boolean {
+        return lottoNumbers.contains(bonusNumber)
+    }
+
     companion object {
         const val LOTTO_NUMBER_COUNT = 6
         private const val SPLIT_SYMBOL = ","
