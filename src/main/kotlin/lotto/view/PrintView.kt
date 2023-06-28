@@ -1,7 +1,6 @@
 package lotto.view
 
 import lotto.domain.LottoNumbers
-import lotto.domain.LottoRanking
 import lotto.model.LottoResultPrintModel
 
 fun printBuyCount(buyCount: Int) {
@@ -31,7 +30,7 @@ private fun rankingPrintInfo(lottoResult: List<LottoResultPrintModel?>): String 
     for (printModel in lottoResult) {
         stringBuilder.append(printModel?.let { resultString(it.correctCount, printModel.price, printModel.count) })
     }
-    return stringBuilder.toString();
+    return stringBuilder.toString()
 }
 
 private fun resultString(correctCount: Int, price: Int, count: Int): String {

@@ -11,9 +11,9 @@ class WinningLottoTest : StringSpec({
     "일치 하는 로또의 수를 알 수 있다." {
         val lottoNumbers = LottoNumbers(
             setOf(
-                LottoNumber.from(6), LottoNumber.from(5),
-                LottoNumber.from(4), LottoNumber.from(3),
-                LottoNumber.from(2), LottoNumber.from(1)
+                LottoNumber(6), LottoNumber(5),
+                LottoNumber(4), LottoNumber(3),
+                LottoNumber(2), LottoNumber(1)
             )
         )
 

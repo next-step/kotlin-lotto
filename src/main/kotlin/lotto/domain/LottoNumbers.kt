@@ -1,6 +1,6 @@
 package lotto.domain
 
-import java.util.*
+import java.util.TreeSet
 
 class LottoNumbers(numbers: Set<LottoNumber>) {
     var lottoNumbers = TreeSet<LottoNumber>()
@@ -19,7 +19,7 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
         this.lottoNumbers.removeAll(lottoNumbers.lottoNumbers)
     }
 
-    fun size() : Int{
+    fun size(): Int {
         return lottoNumbers.size
     }
 
@@ -28,9 +28,11 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
         private const val SPLIT_SYMBOL = ","
 
         fun from(stringNumbers: String): LottoNumbers {
-            return LottoNumbers(stringNumbers.split(SPLIT_SYMBOL)
-                .map { i -> LottoNumber.from(i.toInt()) }
-                .toSet())
+            return LottoNumbers(
+                stringNumbers.split(SPLIT_SYMBOL)
+                    .map { lottoNumber -> LottoNumber(lottoNumber.toInt()) }
+                    .toSet()
+            )
         }
     }
 }

@@ -17,7 +17,7 @@ class LottoController {
     fun start() {
         val price = Price(inputPrice())
         val priceValue = price.value
-        printBuyCount(priceValue / 1000)
+        printBuyCount(priceValue / LOTTO_PRICE)
 
         val lottoMachine = LottoMachine(price)
         val lottoNumbers = lottoMachine.lottoNumbers()
@@ -33,5 +33,9 @@ class LottoController {
             LottoResultPrintModel.ofList(lottoResult.lottoRanking(lottoNumbers, winningLotto)),
             lottoResult.rateOfReturn(priceValue)
         )
+    }
+
+    companion object {
+        private const val LOTTO_PRICE = 1000
     }
 }

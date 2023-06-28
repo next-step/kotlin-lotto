@@ -12,7 +12,7 @@ class LottoNumberTest : StringSpec({
             row(1),
             row(45)
         ) { number ->
-            val lottoNumber = LottoNumber.from(number)
+            val lottoNumber = LottoNumber(number)
             lottoNumber.value shouldBe number
         }
     }
@@ -22,7 +22,7 @@ class LottoNumberTest : StringSpec({
             row(0),
             row(46)
         ) { number ->
-            val exception = shouldThrow<IllegalArgumentException> { LottoNumber.from(number) }
+            val exception = shouldThrow<IllegalArgumentException> { LottoNumber(number) }
 
             exception.message shouldBe "로또 번호는 1 ~ 45 사이여야 합니다."
         }
