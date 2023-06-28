@@ -1,9 +1,27 @@
 package lotto.domain
 
+import io.kotest.assertions.throwables.shouldNotThrow
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 
 class WinningLottoTest : BehaviorSpec({
+
+    given("당첨 번호 [1, 2, 3, 4, 5, 6]") {
+        val lottoNumbers = (1..6).map { LottoNumber(it) }
+        `when`("보너스 번호 6으로 생성 하면") {
+            val bonusNumber = LottoNumber(6)
+            then("오류가 발생 한다.") {
+                shouldThrow<RuntimeException> { WinningLotto(Lotto.from(lottoNumbers), bonusNumber) }
+            }
+        }
+        `when`("보너스 번호 7로 생성 하면") {
+            val bonusNumber = LottoNumber(7)
+            then("정상적으로 생성 된다.") {
+                shouldNotThrow<RuntimeException> { WinningLotto(Lotto.from(lottoNumbers), bonusNumber) }
+            }
+        }
+    }
 
     given("당첨 번호 [1, 2, 3, 4, 5, 6] / 보너스 7 로 생성 하였을 때") {
         val lottoNumbers = (1..6).map { LottoNumber(it) }
