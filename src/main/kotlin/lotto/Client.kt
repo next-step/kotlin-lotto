@@ -9,6 +9,6 @@ fun main() {
     val lottoGame = LottoGame(purchasePrice = purchasePrice)
 
     ResultView.printLottos(lottoGame.lottoList)
-    val previousLottoNumbers = InputView.inputPreviousLottoNumbers()
-    ResultView.printLottoResult(lottoGame.getResult(previousLottoNumbers))
+    val winningLotto = InputView.inputWinningLotto()
+    ResultView.printLottoResult(lottoGame.getResult(winningLotto))
 }

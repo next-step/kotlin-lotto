@@ -12,8 +12,8 @@ internal class NormalLottoStrategyTest : BehaviorSpec({
         When("makeLottoNumbers()의 결과값은") {
             val actual = lottoStrategy.makeLottoNumbers()
             Then("정렬된 오름차순 배열을 가진 LottoNumbers이다.") {
-                actual.numbers.windowed(2).forAll { (a, b) ->
-                    a shouldBeLessThan b
+                actual.lottoNumbers.windowed(2).forAll { (a, b) ->
+                    a.number shouldBeLessThan b.number
                 }
             }
         }

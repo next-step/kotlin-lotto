@@ -7,18 +7,17 @@ data class LottoList(
 ) {
     fun size(): Int = lottos.size
 
-    fun getResult(previousLottoNumbers: LottoNumbers): LottoResult =
-        LottoResult(
-            lottos
-                .groupBy { it.countMatchNumbers(previousLottoNumbers) }
-                .mapValues { LottoList(it.value) }
-        )
+    fun getResult(winningLotto: WinningLotto): LottoResult =
+        lottos
+            .groupBy { winningLotto.match(it) }
+            .mapValues { it.value.size }
+            .let { LottoResult(it) }
 
     companion object {
-        fun of(lottoStrategy: LottoStrategy, lottoCount: Long): LottoList {
+        fun of(lottoStrategy: LottoStrategy, lottoCount: Int): LottoList {
             return LottoList(
-                (1..lottoCount).map {
-                    Lotto(lottoStrategy.makeLottoNumbers())
+                List(lottoCount) {
+                    lottoStrategy.makeLottoNumbers()
                 }
             )
         }

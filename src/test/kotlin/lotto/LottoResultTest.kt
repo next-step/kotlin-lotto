@@ -4,52 +4,52 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import lotto.domain.Lotto
 import lotto.domain.LottoList
-import lotto.domain.LottoNumbers
 import lotto.domain.LottoResult
+import lotto.domain.Rank
 
 internal class LottoResultTest : BehaviorSpec({
 
     Given("LottoResult") {
         When("각 등수마다 1개씩 당첨됐을 때") {
-            val mockLotto = Lotto(LottoNumbers(listOf(1, 2, 3)))
+            val mockLotto = Lotto.of("1, 2, 3")
             val lottoResult = LottoResult(
                 mapOf(
-                    3 to LottoList(listOf(mockLotto)),
-                    4 to LottoList(listOf(mockLotto)),
-                    5 to LottoList(listOf(mockLotto)),
-                    6 to LottoList(listOf(mockLotto))
+                    Rank.FOURTH to 1,
+                    Rank.THIRD to 1,
+                    Rank.SECOND to 1,
+                    Rank.FIRST to 1
                 )
             )
             Then("getTotalPrize() 메서드는 result에 맞는 값을 반환한다.") {
                 val actual = lottoResult.getTotalPrize()
-                val expect = LottoResult.prizeMoneyMap.values.sum()
+                val expect = Rank.values().sumOf { it.prize }
                 actual shouldBe expect
             }
             Then("getRateOfReturn() 메서드는 총 상금 / 구매 가격을 반환한다.") {
                 val actual = lottoResult.getRateOfReturn()
-                val expect = LottoResult.prizeMoneyMap.values.sum() / 4000.0
+                val expect = Rank.values().sumOf { it.prize } / 4000.0
                 actual shouldBe expect
             }
         }
 
         When("각 등수마다 2개씩 당첨됐을 때") {
-            val mockLotto = Lotto(LottoNumbers(listOf(1, 2, 3)))
+            val mockLotto = Lotto.of("1, 2, 3")
             val lottoResult = LottoResult(
                 mapOf(
-                    3 to LottoList(listOf(mockLotto, mockLotto)),
-                    4 to LottoList(listOf(mockLotto, mockLotto)),
-                    5 to LottoList(listOf(mockLotto, mockLotto)),
-                    6 to LottoList(listOf(mockLotto, mockLotto))
+                    Rank.FOURTH to 2,
+                    Rank.THIRD to 2,
+                    Rank.SECOND to 2,
+                    Rank.FIRST to 2
                 )
             )
             Then("getTotalPrize() 메서드는 result에 맞는 값을 반환한다.") {
                 val actual = lottoResult.getTotalPrize()
-                val expect = LottoResult.prizeMoneyMap.values.sum() * 2
+                val expect = Rank.values().sumOf { it.prize } * 2
                 actual shouldBe expect
             }
             Then("getRateOfReturn() 메서드는 총 상금 / 구매 가격을 반환한다.") {
                 val actual = lottoResult.getRateOfReturn()
-                val expect = LottoResult.prizeMoneyMap.values.sum() * 2L / 8000.0
+                val expect = Rank.values().sumOf { it.prize } * 2L / 8000.0
                 actual shouldBe expect
             }
         }
