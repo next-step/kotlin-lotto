@@ -32,7 +32,7 @@ class LottoController(
         val numberOfLottoTicket = lotto.buyLottoTicket(purchasingAmount)
         resultView.printNumberOfLottoTicket(numberOfLottoTicket)
         lotto.generateLottoNumbers(numberOfLottoTicket)
-        return lotto.lotteryPapers.getPurchasedLotteryPapers()
+        return lotto.lotteryPaperManager.getPurchasedLotteryPapers()
     }
 
     private fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {

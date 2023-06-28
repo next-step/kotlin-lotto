@@ -2,7 +2,7 @@ package lotto.domain
 
 class Lotto {
 
-    var lotteryPapers: LotteryPapers = LotteryPapers(RandomLottoNumberGenerationStrategy())
+    var lotteryPaperManager: LotteryPaperManager = LotteryPaperManager(RandomLottoNumberGenerationStrategy())
         private set
 
     private val lottoValidator = LottoValidator()
@@ -18,7 +18,7 @@ class Lotto {
 
     fun generateLottoNumbers(numOfLottoPurchases: Int) {
         lottoValidator.validateNumOfLottoPurchases(numOfLottoPurchases)
-        repeat(numOfLottoPurchases) { lotteryPapers.generateRandomLottoNumber() }
+        repeat(numOfLottoPurchases) { lotteryPaperManager.generateRandomLottoNumber() }
     }
 
     companion object {

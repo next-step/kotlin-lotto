@@ -2,7 +2,7 @@ package lotto.domain
 
 import lotto.dto.PurchasedLotteryPapers
 
-class LotteryPapers(private val lottoNumberGenerationStrategy: LottoNumberGenerationStrategy) {
+class LotteryPaperManager(private val lottoNumberGenerationStrategy: LottoNumberGenerationStrategy) {
     private val lotteryPaperList: MutableList<LotteryPaper> = mutableListOf()
     private val lotteryPaperValidator = LotteryPaperValidator()
 
