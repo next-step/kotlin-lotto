@@ -1,12 +1,15 @@
 package lotto.domain
 
+import lotto.error.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_BETWEEN_1_AND_45
+import lotto.error.LottoErrorMessage.LOTTO_NUMBERS_MUST_BE_POSITIVE
+
 @JvmInline
 value class LottoNumber private constructor(
     val number: Int
 ) {
     init {
-        require(number > 0) { "로또 번호는 양수여야 합니다." }
-        require(number in LOTTO_NUMBERS_RANGE) { "로또 번호는 1~45 사이의 숫자여야 합니다." }
+        require(number > 0) { LOTTO_NUMBERS_MUST_BE_POSITIVE }
+        require(number in LOTTO_NUMBERS_RANGE) { LOTTO_NUMBERS_MUST_BE_BETWEEN_1_AND_45 }
     }
 
     companion object {
@@ -15,6 +18,6 @@ value class LottoNumber private constructor(
 
         fun create(number: Int): LottoNumber = LOTTO_NUMBERS[number - 1]
 
-        fun createRandom(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size)
+        fun createRandoms(size: Int): List<LottoNumber> = LOTTO_NUMBERS.shuffled().take(size)
     }
 }

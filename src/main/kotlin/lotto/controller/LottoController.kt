@@ -1,33 +1,31 @@
 package lotto.controller
 
-import lotto.domain.LottoPurchase
 import lotto.domain.LottoPurchase.Companion.DEFAULT_PRICE
-import lotto.domain.Lottos
+import lotto.service.LottoShopService
 import lotto.view.InputView
 import lotto.view.ResultView
+import lotto.vo.OrderRequest
 
 class LottoController {
     private val inputView = InputView()
     private val resultView = ResultView()
-    private val lottoPurchase = LottoPurchase()
 
     fun run() {
         val budget = inputView.inputPurchasePrice()
-        val lottos = buyLottos(budget)
+        val manualAmount = inputView.inputManualPurchaseAmount()
+        val manualLottosNumbers = inputView.inputManualLottos(manualAmount)
+
+        val orderRequest = OrderRequest(budget, DEFAULT_PRICE, manualLottosNumbers)
+        val lottoShopService = LottoShopService()
+        val receipt = lottoShopService.buy(orderRequest)
+        val lottos = receipt.lottos
+
+        resultView.printPurchaseAmount(receipt.manualAmount, receipt.autoAmount)
+        resultView.printLottos(lottos)
+
         val winningLotto = inputView.inputLastWeekWinningLotto()
-
-        val statistics = winningLotto.calculateStatistics(lottos, budget)
+        val statistics = lottoShopService.winning(winningLotto, lottos, budget)
         resultView.printWinningResult(statistics)
-    }
-
-    private fun buyLottos(budget: Int): Lottos {
-        val amount = lottoPurchase.affordableLottoCount(budget, DEFAULT_PRICE)
-        val lottos = lottoPurchase.purchaseAuto(budget, DEFAULT_PRICE)
-
-        resultView.printPurchaseAmount(amount)
-        resultView.printLottos(lottos.lottos)
-
-        return lottos
     }
 }
 

@@ -2,15 +2,17 @@ package lotto.view
 
 import lotto.domain.Lotto
 import lotto.domain.LottoPrizes
-import lotto.domain.LottosStatisticsVO
+import lotto.domain.Lottos
+import lotto.domain.WinningMap
+import lotto.vo.LottosStatisticsVO
 
 class ResultView {
-    fun printPurchaseAmount(amount: Int) {
-        println("${amount}개를 구매했습니다.")
+    fun printPurchaseAmount(manualAmount: Int, autoAmount: Int) {
+        println("\n수동으로 ${manualAmount}개, 자동으로 ${autoAmount}개를 구매했습니다.")
     }
 
-    fun printLottos(lottos: List<Lotto>) {
-        lottos.forEach { printLotto(it) }
+    fun printLottos(lottos: Lottos) {
+        lottos.lottos.forEach { printLotto(it) }
     }
 
     fun printWinningResult(statistics: LottosStatisticsVO) {
@@ -19,16 +21,16 @@ class ResultView {
     }
 
     private fun printLotto(lotto: Lotto) {
-        val numbers = lotto.numbers.map { it.number }.sorted()
-        println("[${numbers.joinToString(", ")}]")
+        val sortedNumbers = lotto.numbers.map { it.number }.sorted()
+        println("[${sortedNumbers.joinToString(", ") { it.toString() }}]")
     }
 
-    private fun printStatistics(prizeMap: Map<LottoPrizes, Int>) {
+    private fun printStatistics(winningMap: WinningMap) {
         println("\n당첨 통계")
         println("---------")
 
         LottoPrizes.values().forEach { prize ->
-            printStatisticsByLottoPrizes(prize, prizeMap.getOrDefault(prize, 0))
+            printStatisticsByLottoPrizes(prize, winningMap.numberOfMatch(prize))
         }
     }
 
