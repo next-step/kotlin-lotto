@@ -13,8 +13,6 @@ fun main() {
     val winningNumbers = lottoController.inputWinningNumber()
     val bonusNumber = lottoController.inputBonusNumber()
 
-
-
     val lottoStatistics = lottoController.getStatistics(
         StatisticsRequest(lottoTickets, WinningLotto(winningNumbers, bonusNumber))
     )

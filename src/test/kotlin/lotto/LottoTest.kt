@@ -1,7 +1,7 @@
 package lotto
 
-import lotto.domain.Lotto
 import io.kotest.assertions.throwables.shouldThrow
+import lotto.domain.Lotto
 import org.junit.jupiter.api.Test
 
 class LottoTest {

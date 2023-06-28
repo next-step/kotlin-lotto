@@ -1,9 +1,9 @@
 package lotto
 
-import lotto.domain.Lotto
-import lotto.domain.LottoStore
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
+import lotto.domain.Lotto
+import lotto.domain.LottoStore
 import org.junit.jupiter.api.Test
 
 class LottoStoreTest {

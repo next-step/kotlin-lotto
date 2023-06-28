@@ -28,12 +28,12 @@ class LottoController {
     }
 
     fun inputWinningNumber(): List<LottoNumber> {
-        inputView.show(InputMessage.WINNING_LOTTO)
+        inputView.show(InputMessage.WINNING_NUMBERS)
         return inputIO.inputWinningNumber()
     }
 
     fun inputBonusNumber(): LottoNumber {
-        inputView.show(InputMessage.WINNING_LOTTO)
+        inputView.show(InputMessage.BONUS_NUMBER)
         return inputIO.inputBonusNumber()
     }
 
