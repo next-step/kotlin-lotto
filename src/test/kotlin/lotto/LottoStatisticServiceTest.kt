@@ -1,7 +1,11 @@
 package lotto
 
 import io.kotest.matchers.shouldBe
-import lotto.domain.*
+import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.LottoRank
+import lotto.domain.LottoStatisticService
+import lotto.domain.WinningLotto
 import lotto.domain.dto.ProfitRateRequest
 import lotto.domain.dto.StatisticsRequest
 import org.junit.jupiter.api.Test
