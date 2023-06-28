@@ -1,4 +1,4 @@
-package step2Lotto.domain
+package Lotto.domain
 
 enum class LottoRank(val prizeMoney: Int) {
     FIRST(2_000_000_000),

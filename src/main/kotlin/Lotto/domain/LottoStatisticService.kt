@@ -1,7 +1,7 @@
-package step2Lotto.domain
+package Lotto.domain
 
-import step2Lotto.domain.dto.ProfitRateRequest
-import step2Lotto.domain.dto.StatisticsRequest
+import Lotto.domain.dto.ProfitRateRequest
+import Lotto.domain.dto.StatisticsRequest
 import kotlin.math.round
 
 class LottoStatisticService {

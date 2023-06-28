@@ -1,4 +1,4 @@
-package step2Lotto.domain
+package Lotto.domain
 
 class WinningNumber(numbers: List<LottoNumber>) : Lotto(numbers) {
 

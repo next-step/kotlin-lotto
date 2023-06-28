@@ -1,8 +1,8 @@
-package step2Lotto
+package Lotto
 
-import step2Lotto.domain.Lotto
-import step2Lotto.domain.LottoGenerator
-import step2Lotto.domain.LottoNumber
+import Lotto.domain.Lotto
+import Lotto.domain.LottoGenerator
+import Lotto.domain.LottoNumber
 
 class FixedLottoGenerator : LottoGenerator {
     override fun createLotto(): Lotto {

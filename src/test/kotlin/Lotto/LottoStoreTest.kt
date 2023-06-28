@@ -1,10 +1,10 @@
-package step2Lotto
+package Lotto
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import step2Lotto.domain.Lotto
-import step2Lotto.domain.LottoStore
+import Lotto.domain.Lotto
+import Lotto.domain.LottoStore
 
 class LottoStoreTest {
     private val lottoStore = LottoStore(FixedLottoGenerator())

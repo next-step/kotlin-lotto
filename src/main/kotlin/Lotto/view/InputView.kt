@@ -1,4 +1,4 @@
-package step2Lotto.view
+package Lotto.view
 
 class InputView {
     fun show(inputMessage: InputMessage) {

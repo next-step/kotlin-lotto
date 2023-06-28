@@ -1,4 +1,4 @@
-package step2Lotto.domain
+package Lotto.domain
 
 class LottoStore(
     private val lottoGenerator: LottoGenerator

@@ -1,10 +1,10 @@
-package step2Lotto
+package Lotto
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import step2Lotto.domain.LottoNumber
-import step2Lotto.domain.WinningNumber
-import step2Lotto.view.InputIO
+import Lotto.domain.LottoNumber
+import Lotto.domain.WinningNumber
+import Lotto.view.InputIO
 
 class InputDataTest {
     private val inputIO = InputIO()

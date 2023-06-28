@@ -1,8 +1,8 @@
-package step2Lotto
+package Lotto
 
-import step2Lotto.controller.LottoController
-import step2Lotto.domain.dto.ProfitRateRequest
-import step2Lotto.domain.dto.StatisticsRequest
+import Lotto.controller.LottoController
+import Lotto.domain.dto.ProfitRateRequest
+import Lotto.domain.dto.StatisticsRequest
 
 fun main() {
     val lottoController = LottoController()

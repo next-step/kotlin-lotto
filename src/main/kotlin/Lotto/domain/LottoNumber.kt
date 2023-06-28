@@ -1,4 +1,4 @@
-package step2Lotto.domain
+package Lotto.domain
 
 data class LottoNumber(val value: Int) {
     init {

@@ -1,7 +1,7 @@
-package step2Lotto.view
+package Lotto.view
 
-import step2Lotto.domain.Lotto
-import step2Lotto.domain.LottoRank
+import Lotto.domain.Lotto
+import Lotto.domain.LottoRank
 
 class ResultView {
     fun showLottoTicketQuantity(lottoTicketQuantity: Int) {
