@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.prize.Prize
 import lotto.vo.Money
 
 data class GameResult(

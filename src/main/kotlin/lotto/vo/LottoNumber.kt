@@ -14,10 +14,10 @@ value class LottoNumber private constructor(
     }
 
     companion object {
-        private val LOTTO_NUMBERS = (1..45).associateBy({ it }, ::LottoNumber)
+        private val LOTTO_NUMBERS_POOL = (1..45).associateBy({ it }, ::LottoNumber)
 
         fun from(number: Int): LottoNumber {
-            return LOTTO_NUMBERS[number] ?: throw IllegalArgumentException("로또 번호는 1~45 사이의 숫자여야 합니다.")
+            return LOTTO_NUMBERS_POOL[number] ?: throw IllegalArgumentException("로또 번호는 1~45 사이의 숫자여야 합니다.")
         }
     }
 }

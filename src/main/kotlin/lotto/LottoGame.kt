@@ -6,10 +6,12 @@ import lotto.view.OutputView
 class LottoGame(
     private val inputView: InputView,
     private val outputView: OutputView,
+    private val lottoShop: LottoShop,
 ) {
-    fun run(purchaseCommand: LottoPurchaseCommand = RandomPurchaseCommand) {
+    fun run() {
         val money = inputView.receiveMoney()
-        val lottos = LottoShop.sell(money, purchaseCommand)
+        val purchaseCommand = inputView.receivePurchaseCommand()
+        val (lottos) = lottoShop.sell(money, purchaseCommand)
         outputView.showPurchased(lottos)
 
         val winningNumbers = inputView.receiveWinningNumbers()
