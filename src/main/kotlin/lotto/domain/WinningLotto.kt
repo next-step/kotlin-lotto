@@ -10,20 +10,14 @@ class WinningLotto(
     }
 
     fun getLottoRank(lotto: Lotto): LottoRank {
-        return when (getMatchCount(lotto)) {
-            3 -> LottoRank.FIFTH
-            4 -> LottoRank.FOURTH
-            5 -> checkSecond(lotto)
-            6 -> LottoRank.FIRST
-            else -> LottoRank.LOSE
-        }
+        return LottoRank.getRank(getMatchCount(lotto), containsBonusNumber(lotto.numbers))
     }
 
     private fun getMatchCount(lotto: Lotto): Int {
         return lotto.numbers.intersect(numbers.toSet()).size
     }
 
-    private fun checkSecond(lotto: Lotto): LottoRank {
-        return if (lotto.numbers.contains(bonusNumber)) LottoRank.SECOND else LottoRank.THIRD
+    private fun containsBonusNumber(number: Set<LottoNumber>): Boolean {
+        return bonusNumber in number
     }
 }
