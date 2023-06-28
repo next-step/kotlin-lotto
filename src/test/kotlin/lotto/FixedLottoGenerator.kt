@@ -1,8 +1,8 @@
-package Lotto
+package lotto
 
-import Lotto.domain.Lotto
-import Lotto.domain.LottoGenerator
-import Lotto.domain.LottoNumber
+import lotto.domain.Lotto
+import lotto.domain.LottoGenerator
+import lotto.domain.LottoNumber
 
 class FixedLottoGenerator : LottoGenerator {
     override fun createLotto(): Lotto {

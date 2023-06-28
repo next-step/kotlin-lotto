@@ -1,4 +1,4 @@
-package Lotto.domain
+package lotto.domain
 
 interface LottoGenerator {
     fun createLotto(): Lotto

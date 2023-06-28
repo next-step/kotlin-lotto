@@ -1,12 +1,12 @@
-package Lotto.controller
+package lotto.controller
 
-import Lotto.domain.*
-import Lotto.domain.dto.ProfitRateRequest
-import Lotto.domain.dto.StatisticsRequest
-import Lotto.view.InputIO
-import Lotto.view.InputMessage
-import Lotto.view.InputView
-import Lotto.view.ResultView
+import lotto.domain.*
+import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.StatisticsRequest
+import lotto.view.InputIO
+import lotto.view.InputMessage
+import lotto.view.InputView
+import lotto.view.ResultView
 
 class LottoController {
     private val inputIO = InputIO()

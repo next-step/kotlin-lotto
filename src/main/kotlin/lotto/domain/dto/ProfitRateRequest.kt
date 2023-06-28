@@ -1,6 +1,6 @@
-package Lotto.domain.dto
+package lotto.domain.dto
 
-import Lotto.domain.LottoRank
+import lotto.domain.LottoRank
 
 data class ProfitRateRequest(
     val purchaseAmount: Int,

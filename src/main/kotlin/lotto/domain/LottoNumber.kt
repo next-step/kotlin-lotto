@@ -1,4 +1,4 @@
-package Lotto.domain
+package lotto.domain
 
 data class LottoNumber(val value: Int) {
     init {

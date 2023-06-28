@@ -1,4 +1,4 @@
-package Lotto.domain
+package lotto.domain
 
 open class Lotto(
     val numbers: List<LottoNumber>

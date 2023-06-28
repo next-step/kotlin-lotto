@@ -1,7 +1,6 @@
-package Lotto.view
+package lotto.view
 
-import Lotto.domain.LottoNumber
-import Lotto.domain.WinningLotto
+import lotto.domain.LottoNumber
 
 class InputIO {
     fun inputPurchaseAmount(inputString: String? = readlnOrNull()): Int {

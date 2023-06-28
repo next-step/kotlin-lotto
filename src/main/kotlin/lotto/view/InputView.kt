@@ -1,4 +1,4 @@
-package Lotto.view
+package lotto.view
 
 class InputView {
     fun show(inputMessage: InputMessage) {

@@ -1,10 +1,10 @@
-package Lotto
+package lotto
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import Lotto.domain.*
-import Lotto.domain.dto.ProfitRateRequest
-import Lotto.domain.dto.StatisticsRequest
+import lotto.domain.*
+import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.StatisticsRequest
 
 class LottoStatisticServiceTest {
     private val lottoStatisticService = LottoStatisticService()

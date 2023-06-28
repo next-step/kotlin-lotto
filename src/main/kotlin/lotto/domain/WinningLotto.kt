@@ -1,4 +1,4 @@
-package Lotto.domain
+package lotto.domain
 
 class WinningLotto(
     numbers: List<LottoNumber>,

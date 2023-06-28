@@ -1,9 +1,9 @@
-package Lotto
+package lotto
 
-import Lotto.controller.LottoController
-import Lotto.domain.WinningLotto
-import Lotto.domain.dto.ProfitRateRequest
-import Lotto.domain.dto.StatisticsRequest
+import lotto.controller.LottoController
+import lotto.domain.WinningLotto
+import lotto.domain.dto.ProfitRateRequest
+import lotto.domain.dto.StatisticsRequest
 
 fun main() {
     val lottoController = LottoController()

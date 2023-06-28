@@ -1,7 +1,7 @@
-package Lotto
+package lotto
 
-import Lotto.domain.Lotto
-import Lotto.domain.LottoStore
+import lotto.domain.Lotto
+import lotto.domain.LottoStore
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
