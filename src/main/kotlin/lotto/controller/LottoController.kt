@@ -1,11 +1,11 @@
 package lotto.controller
 
+import lotto.domain.AutomaticLottoVendingMachine
 import lotto.domain.BillSlot
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoReturn
 import lotto.domain.LottoReturnCalculator
-import lotto.domain.LottoVendingMachine
 import lotto.domain.LottoWinningNumbers
 import lotto.view.InputView
 import lotto.view.ResultView
@@ -17,14 +17,14 @@ fun main() {
 }
 
 private fun purchaseLotto(): PurchasedLottos {
-    val totalLottoCount = BillSlot(LottoVendingMachine.LOTTO_PRICE)
+    val totalLottoCount = BillSlot(AutomaticLottoVendingMachine.LOTTO_PRICE)
         .insertMoney(InputView.getPurchaseAmount())
 
     val manualLottoCount = getManualLottoCount(totalLottoCount)
     val manualLottos = getManualLotto(manualLottoCount)
 
     val automaticLottoCount = totalLottoCount - manualLottoCount
-    val automaticLottos = LottoVendingMachine.purchase(automaticLottoCount)
+    val automaticLottos = AutomaticLottoVendingMachine.purchase(automaticLottoCount)
 
     return PurchasedLottos(manualLottos, automaticLottos)
 }

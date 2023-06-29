@@ -1,6 +1,6 @@
 package lotto.domain
 
-object LottoVendingMachine {
+object AutomaticLottoVendingMachine {
 
     const val LOTTO_PRICE = 1000
 

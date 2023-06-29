@@ -1,10 +1,10 @@
 package lotto
 
+import lotto.domain.AutomaticLottoVendingMachine
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoReturn
 import lotto.domain.LottoReturnCalculator
-import lotto.domain.LottoVendingMachine
 import lotto.domain.LottoWinningNumbers
 import lotto.domain.Rank
 import org.assertj.core.api.Assertions
@@ -75,7 +75,7 @@ class LottoReturnCalculatorTest {
                         thirdCount = 0,
                         fourthCount = 0,
                         fifthCount = 0,
-                        paidAmount = LottoVendingMachine.LOTTO_PRICE,
+                        paidAmount = AutomaticLottoVendingMachine.LOTTO_PRICE,
                     )
                 )
             )
@@ -95,7 +95,7 @@ class LottoReturnCalculatorTest {
                         thirdCount = 0,
                         fourthCount = 0,
                         fifthCount = 0,
-                        paidAmount = LottoVendingMachine.LOTTO_PRICE,
+                        paidAmount = AutomaticLottoVendingMachine.LOTTO_PRICE,
                     )
                 )
             )
@@ -115,7 +115,7 @@ class LottoReturnCalculatorTest {
                         thirdCount = 1,
                         fourthCount = 0,
                         fifthCount = 0,
-                        paidAmount = LottoVendingMachine.LOTTO_PRICE,
+                        paidAmount = AutomaticLottoVendingMachine.LOTTO_PRICE,
                     )
                 )
             )
@@ -135,7 +135,7 @@ class LottoReturnCalculatorTest {
                         thirdCount = 0,
                         fourthCount = 1,
                         fifthCount = 0,
-                        paidAmount = LottoVendingMachine.LOTTO_PRICE,
+                        paidAmount = AutomaticLottoVendingMachine.LOTTO_PRICE,
                     )
                 )
             )
@@ -155,7 +155,7 @@ class LottoReturnCalculatorTest {
                         thirdCount = 0,
                         fourthCount = 0,
                         fifthCount = 1,
-                        paidAmount = LottoVendingMachine.LOTTO_PRICE,
+                        paidAmount = AutomaticLottoVendingMachine.LOTTO_PRICE,
                     )
                 )
             )
@@ -177,7 +177,7 @@ class LottoReturnCalculatorTest {
                         thirdCount = 1,
                         fourthCount = 0,
                         fifthCount = 0,
-                        paidAmount = LottoVendingMachine.LOTTO_PRICE * 3,
+                        paidAmount = AutomaticLottoVendingMachine.LOTTO_PRICE * 3,
                     )
                 )
             )
@@ -192,7 +192,7 @@ class LottoReturnCalculatorTest {
                         LottoNumbers.fromNumbers(setOf(11, 2, 3, 4, 5, 6)),
                     ),
                     LottoWinningNumbers(LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(7)),
-                    (Rank.FIRST.winningMoney + Rank.THIRD.winningMoney) / (LottoVendingMachine.LOTTO_PRICE * 2.toFloat())
+                    (Rank.FIRST.winningMoney + Rank.THIRD.winningMoney) / (AutomaticLottoVendingMachine.LOTTO_PRICE * 2.toFloat())
                 ),
                 Arguments.of(
                     listOf(
@@ -200,14 +200,14 @@ class LottoReturnCalculatorTest {
                         LottoNumbers.fromNumbers(setOf(11, 2, 3, 4, 5, 6)),
                     ),
                     LottoWinningNumbers(LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)), LottoNumber.get(7)),
-                    (Rank.SECOND.winningMoney + Rank.THIRD.winningMoney) / (LottoVendingMachine.LOTTO_PRICE * 2.toFloat())
+                    (Rank.SECOND.winningMoney + Rank.THIRD.winningMoney) / (AutomaticLottoVendingMachine.LOTTO_PRICE * 2.toFloat())
                 ),
                 Arguments.of(
                     listOf(
                         LottoNumbers.fromNumbers(setOf(1, 2, 3, 4, 5, 6)),
                     ),
                     LottoWinningNumbers(LottoNumbers.fromNumbers(setOf(11, 12, 3, 4, 5, 6)), LottoNumber.get(7)),
-                    Rank.FOURTH.winningMoney / LottoVendingMachine.LOTTO_PRICE.toFloat()
+                    Rank.FOURTH.winningMoney / AutomaticLottoVendingMachine.LOTTO_PRICE.toFloat()
                 )
             )
         }
