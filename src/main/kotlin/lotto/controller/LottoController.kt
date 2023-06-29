@@ -1,8 +1,8 @@
 package lotto.controller
 
 import lotto.domain.LotteryPaper
-import lotto.domain.LottoShop
 import lotto.domain.LottoMatcher
+import lotto.domain.LottoShop
 import lotto.domain.YieldCalculator
 import lotto.dto.LottoMatchResult
 import lotto.dto.PurchasedLotteryPapers
@@ -53,13 +53,13 @@ class LottoController(
     }
 
     private fun printLottoMatch(lottoMatchResult: LottoMatchResult) {
-        val matchLottoResult = lottoMatchResult.matchLottoResult
+        val matchLottoResult = lottoMatchResult.getMatchLottoResult()
         resultView.printMatchLottoNumber(matchLottoResult)
     }
 
     private fun printYield(capital: Int, lottoMatchResult: LottoMatchResult) {
         val yieldCalculator = YieldCalculator()
-        val yield = yieldCalculator.calulateYield(capital, lottoMatchResult)
+        val yield = yieldCalculator.calculateYield(capital, lottoMatchResult)
         resultView.printYield(yield)
     }
 }

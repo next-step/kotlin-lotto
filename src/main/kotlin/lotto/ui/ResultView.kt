@@ -38,7 +38,7 @@ class ResultView {
         PrizeLevel.values()
             .filter { it != PrizeLevel.NONE }
             .forEach { prizeLevel ->
-                val count = matchLottoNumber.getValue(prizeLevel)
+                val count = matchLottoNumber.getOrDefault(prizeLevel, 0)
                 println("${prizeLevel.numberOfHit}개 일치 (${prizeLevel.prizeMoney}원)- ${count}개")
             }
     }

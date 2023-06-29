@@ -29,7 +29,7 @@ class LottoShopMatcherTest {
         val purchasedLotteryPapers = PurchasedLotteryPapers(lotteryPaperList)
         val countLottoWinner = lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers)
 
-        val actual = countLottoWinner.matchLottoResult
+        val actual = countLottoWinner.getMatchLottoResult()
         val answer = mapOf(
             PrizeLevel.FOURTH to 1,
             PrizeLevel.THIRD to 1,

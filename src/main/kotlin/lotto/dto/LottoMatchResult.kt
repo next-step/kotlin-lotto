@@ -2,7 +2,11 @@ package lotto.dto
 
 import lotto.domain.PrizeLevel
 
-class LottoMatchResult(val matchLottoResult: Map<PrizeLevel, Int>) {
+class LottoMatchResult(private val matchLottoResult: Map<PrizeLevel, Int>) {
+
+    fun getMatchLottoResult(): Map<PrizeLevel, Int> {
+        return matchLottoResult.toMap()
+    }
 
     companion object {
         fun countPrizeLevels(prizeLevels: List<PrizeLevel>): Map<PrizeLevel, Int> {
