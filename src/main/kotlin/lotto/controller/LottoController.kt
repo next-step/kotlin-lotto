@@ -1,5 +1,6 @@
 package lotto.controller
 
+import lotto.domain.BonusBall
 import lotto.domain.LotteryPaper
 import lotto.domain.LottoMatcher
 import lotto.domain.LottoShop
@@ -21,7 +22,9 @@ class LottoController(
         printLottoNumbers(lottoResponse)
 
         val winningNumber = generateWinningNumber()
-        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse)
+
+        val bonusBall = BonusBall(1, winningNumber)
+        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse, bonusBall)
 
         printLottoMatch(lottoMatchResponse)
         printYield(purchasingAmount, lottoMatchResponse)
@@ -46,10 +49,11 @@ class LottoController(
 
     private fun matchLottoNumber(
         winningNumber: LotteryPaper,
-        purchasedLotteryPapers: PurchasedLotteryPapers
+        purchasedLotteryPapers: PurchasedLotteryPapers,
+        bonusBall: BonusBall
     ): LottoMatchResult {
         val lottoMatcher = LottoMatcher()
-        return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers)
+        return lottoMatcher.countLottoWinner(winningNumber, purchasedLotteryPapers, bonusBall)
     }
 
     private fun printLottoMatch(lottoMatchResult: LottoMatchResult) {

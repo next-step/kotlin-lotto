@@ -1,8 +1,8 @@
 package lotto.domain
 
-class BonusBall(val bonusNumber: Int, answerNumbers: List<Int>) {
+class BonusBall(val bonusNumber: Int, lotteryPaper: LotteryPaper) {
     init {
-        validateBonusNumber(bonusNumber, answerNumbers)
+        validateBonusNumber(bonusNumber, lotteryPaper.getLottoNumber())
     }
 
     private fun validateBonusNumber(bonusNumber: Int, answerNumbers: List<Int>) {

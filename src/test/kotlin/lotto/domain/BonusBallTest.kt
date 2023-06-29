@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 class BonusBallTest {
     @Test
     fun `보너스 넘버는 숫자 한개를 가진다`() {
-        val bonusBall = BonusBall(1, listOf())
+        val bonusBall = BonusBall(1, LotteryPaper(listOf(1, 2, 3, 4, 5, 6)))
 
         assertThat(bonusBall.bonusNumber).isEqualTo(1)
     }
@@ -17,17 +17,17 @@ class BonusBallTest {
         val numberInOutOfLottoBounce = 46
 
         assertThrows<IllegalArgumentException> {
-            BonusBall(numberInOutOfLottoBounce, listOf())
+            BonusBall(numberInOutOfLottoBounce, LotteryPaper(listOf(1, 2, 3, 4, 5, 6)))
         }
     }
 
     @Test
     fun `보너스 볼은 당첨 번호와 중복되지 않는다`() {
-        val answerNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val lotteryPaper = LotteryPaper(listOf(1, 2, 3, 4, 5, 6))
         val bounsNumber = 1
 
         assertThrows<IllegalArgumentException> {
-            BonusBall(bounsNumber, answerNumbers)
+            BonusBall(bounsNumber, lotteryPaper)
         }
     }
 }
