@@ -32,6 +32,7 @@ class ResultView {
     }
 
     fun printMatchLottoNumber(matchLottoNumber: Map<PrizeLevel, Int>) {
+        println()
         println("당첨 통계")
         println("---------")
 
@@ -39,8 +40,17 @@ class ResultView {
             .filter { it != PrizeLevel.NONE }
             .forEach { prizeLevel ->
                 val count = matchLottoNumber.getOrDefault(prizeLevel, 0)
-                println("${prizeLevel.numberOfHit}개 일치 (${prizeLevel.prizeMoney}원)- ${count}개")
+                printEachPrizeLevel(prizeLevel, count)
             }
+    }
+
+    private fun printEachPrizeLevel(prizeLevel: PrizeLevel, count: Int) {
+        var outputString = "${prizeLevel.numberOfHit}개 일치 (${prizeLevel.prizeMoney}원)"
+        if (prizeLevel == PrizeLevel.SECOND) {
+            outputString += ", 보너스 볼 일치(30000000원) "
+        }
+        outputString += "- ${count}개"
+        println(outputString)
     }
 
     fun printYield(yield: Double) {

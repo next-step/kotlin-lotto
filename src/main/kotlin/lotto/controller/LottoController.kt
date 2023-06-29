@@ -22,9 +22,7 @@ class LottoController(
         printLottoNumbers(lottoResponse)
 
         val winningNumber = generateWinningNumber()
-
         val generateBonusBall = generateBonusBall(winningNumber)
-
         val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse, generateBonusBall)
 
         printLottoMatch(lottoMatchResponse)
