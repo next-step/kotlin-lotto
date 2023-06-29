@@ -7,9 +7,9 @@ import org.junit.jupiter.api.assertThrows
 class BonusBallTest {
     @Test
     fun `보너스 넘버는 숫자 한개를 가진다`() {
-        val bonusBall = BonusBall(1, LotteryPaper(listOf(1, 2, 3, 4, 5, 6)))
+        val bonusBall = BonusBall(7, LotteryPaper(listOf(1, 2, 3, 4, 5, 6)))
 
-        assertThat(bonusBall.bonusNumber).isEqualTo(1)
+        assertThat(bonusBall.bonusNumber).isEqualTo(7)
     }
 
     @Test

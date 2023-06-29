@@ -16,4 +16,9 @@ class InputView {
     private fun parseWinningNumberText(inputText: String): List<Int> {
         return inputText.split(", ").map { it.toInt() }
     }
+
+    fun getBonusBall(): Int {
+        println("보너스 볼을 입력해 주세요.")
+        return readln().toInt()
+    }
 }

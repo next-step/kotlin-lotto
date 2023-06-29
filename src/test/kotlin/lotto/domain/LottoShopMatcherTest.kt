@@ -27,7 +27,7 @@ class LottoShopMatcherTest {
         )
 
         val purchasedLotteryPapers = PurchasedLotteryPapers(lotteryPaperList)
-        val bonusBall = BonusBall(7, winningNumber)
+        val bonusBall = BonusBall(10, winningNumber)
         val countLottoWinner = lottoMatcher.countLottoWinner(
             winningNumber,
             purchasedLotteryPapers,
@@ -36,9 +36,9 @@ class LottoShopMatcherTest {
 
         val actual = countLottoWinner.getMatchLottoResult()
         val answer = mapOf(
+            PrizeLevel.FIFTH to 1,
             PrizeLevel.FOURTH to 1,
             PrizeLevel.THIRD to 1,
-            PrizeLevel.SECOND to 1,
             PrizeLevel.FIRST to 1,
         )
 

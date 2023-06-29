@@ -14,7 +14,7 @@ class PrizeLevelTest {
 
         val answer = listOf(
             PrizeLevel.NONE,
-            PrizeLevel.FOURTH,
+            PrizeLevel.FIFTH,
             PrizeLevel.NONE,
             PrizeLevel.FIRST
         )

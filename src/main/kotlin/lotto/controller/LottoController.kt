@@ -23,8 +23,9 @@ class LottoController(
 
         val winningNumber = generateWinningNumber()
 
-        val bonusBall = BonusBall(1, winningNumber)
-        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse, bonusBall)
+        val generateBonusBall = generateBonusBall(winningNumber)
+
+        val lottoMatchResponse = matchLottoNumber(winningNumber, lottoResponse, generateBonusBall)
 
         printLottoMatch(lottoMatchResponse)
         printYield(purchasingAmount, lottoMatchResponse)
@@ -45,6 +46,11 @@ class LottoController(
     private fun generateWinningNumber(): LotteryPaper {
         val winningNumberList = inputView.getWinningNumber()
         return LotteryPaper(winningNumberList)
+    }
+
+    private fun generateBonusBall(winningNumber: LotteryPaper): BonusBall {
+        val inputtedNumber = inputView.getBonusBall()
+        return BonusBall(inputtedNumber, winningNumber)
     }
 
     private fun matchLottoNumber(
