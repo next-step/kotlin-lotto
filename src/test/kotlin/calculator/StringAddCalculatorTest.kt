@@ -15,6 +15,8 @@ internal class StringAddCalculatorTest : BehaviorSpec({
         When("빈 문자열 또는 null을 입력할 경우") {
             val operations = listOf(
                 "",
+                "\n",
+                "\t",
                 null
             )
             Then("0을 반환한다.") {
