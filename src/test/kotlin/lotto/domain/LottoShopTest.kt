@@ -26,7 +26,7 @@ class LottoShopTest {
     fun `입력받은 구입 금액에 맞게 로또를 구매한다`(money: Int) {
         val buyLottoTicket = lottoShop.buyLottoTicket(money)
         lottoShop.generateLottoNumbers(buyLottoTicket)
-        val purchasedLotteryPapers = lottoShop.lotteryPaperFactory.getPurchasedLotteryPapers()
+        val purchasedLotteryPapers = lottoShop.getPurchasedLotteryPapers()
         val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
         Assertions.assertThat(lotteryPaperList).hasSize(buyLottoTicket)
     }

@@ -20,7 +20,7 @@ class LottoShop {
     fun generateLottoNumbers(numOfLottoPurchases: Int) {
         lottoValidator.validateNumOfLottoPurchases(numOfLottoPurchases)
         repeat(numOfLottoPurchases) {
-            val generatedLottoNumber = lotteryPaperFactory.generateLottoNumber(lotteryPaperList.toList())
+            val generatedLottoNumber = lotteryPaperFactory.generateLotteryPaper(lotteryPaperList.toList())
             lotteryPaperList.add(generatedLottoNumber)
         }
     }

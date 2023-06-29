@@ -3,7 +3,7 @@ package lotto.domain
 class LotteryPaperFactory(private val lottoNumberGenerationStrategy: LottoNumberGenerationStrategy) {
     private val lotteryPaperValidator = LotteryPaperValidator()
 
-    fun generateLottoNumber(lotteryPaperList: List<LotteryPaper>): LotteryPaper {
+    fun generateLotteryPaper(lotteryPaperList: List<LotteryPaper>): LotteryPaper {
         var generatedLottoNumber: List<Int>
         var generatedLotteryPaper: LotteryPaper
 

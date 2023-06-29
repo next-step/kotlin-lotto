@@ -15,23 +15,20 @@ class LotteryPaperFactoryTest {
 
     @Test
     fun `1부터 45까지 숫자중 6개의 숫자를 선택해서 로또 번호를 생성한다`() {
-        lotteryPaperFactory.generateRandomLottoNumber()
-        val purcahsedLotteryPapers = lotteryPaperFactory.getPurchasedLotteryPapers()
 
-        val lotteryPaperList = purcahsedLotteryPapers.lotteryPaperList
-        val lottoNumber = lotteryPaperList[0].getLottoNumber()
+        val generatedLotteryPaper = lotteryPaperFactory.generateLotteryPaper(listOf())
 
-        Assertions.assertThat(lottoNumber).hasSize(6).allMatch { it in 1..45 }
+        Assertions.assertThat(generatedLotteryPaper.getLottoNumber()).hasSize(6).allMatch { it in 1..45 }
     }
 
     @Test
     fun `생성된 로또 번호는 중복이 없다`() {
-        lotteryPaperFactory.generateRandomLottoNumber()
-        val purcahsedLotteryPapers = lotteryPaperFactory.getPurchasedLotteryPapers()
+        val lotteryPaperList = listOf(
+            LotteryPaper(listOf(1, 2, 3, 4, 5, 6)), LotteryPaper(listOf(1, 2, 3, 4, 5, 7))
+        )
 
-        val lotteryPaperList = purcahsedLotteryPapers.lotteryPaperList
-        val lottoNumber = lotteryPaperList[0].getLottoNumber()
+        val generatedLotteyPaper = lotteryPaperFactory.generateLotteryPaper(lotteryPaperList)
 
-        Assertions.assertThat(lottoNumber.size).isEqualTo(lottoNumber.toSet().size)
+        Assertions.assertThat(lotteryPaperList.contains(generatedLotteyPaper)).isEqualTo(false)
     }
 }
