@@ -4,7 +4,9 @@ package lotto.domain.model
 value class LottoNumber private constructor(val value: Int) {
 
     init {
-        require(value in FIRST_NUMBER..LAST_NUMBER)
+        require(value in FIRST_NUMBER..LAST_NUMBER) {
+            "숫자의 범위는 $FIRST_NUMBER 이상 $LAST_NUMBER 이하 입니다"
+        }
     }
 
     override fun toString(): String {

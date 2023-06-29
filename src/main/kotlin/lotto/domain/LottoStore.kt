@@ -20,7 +20,7 @@ object LottoStore {
     private fun generateAuto(): List<LottoNumber> {
         return (LottoNumber.FIRST_NUMBER..LottoNumber.LAST_NUMBER)
             .shuffled()
-            .subList(0, Lotto.NUMBER_COUNT)
+            .take(Lotto.NUMBER_COUNT)
             .map { LottoNumber.from(it) }
     }
 }

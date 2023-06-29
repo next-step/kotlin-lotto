@@ -1,12 +1,10 @@
 package lotto.controller
 
-import lotto.domain.InputParser
 import lotto.domain.LottoCalculator
 import lotto.domain.LottoStore
 import lotto.domain.ManualNumbers
 import lotto.domain.model.Count
 import lotto.domain.model.InputResult
-import lotto.domain.model.Lotto
 import lotto.domain.model.LottoNumber
 import lotto.domain.model.LottoResult
 import lotto.domain.model.Lottos
@@ -33,40 +31,31 @@ class LottoController {
         val money = inputMoney()
         val manualNumbers = inputManuals()
 
-        val lottos = Lottos(mutableListOf<Lotto>().apply { addAll(LottoStore.buy(money, manualNumbers)) })
+        val lottos = Lottos(LottoStore.buy(money, manualNumbers))
         ResultView.printBuyResult(Count(manualNumbers.size), Count(lottos.items.size - manualNumbers.size), lottos)
 
         val winningBalls = inputWinningNumbers()
 
-        val bonus = InputView.inputBonusBall().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
-
-        require(winningBalls.balls.size == Lotto.NUMBER_COUNT) { INPUT_ERROR_MESSAGE }
+        val bonus = InputView.inputBonusBall()
         return InputResult(lottos, SelectedBalls(winningBalls, LottoNumber.from(bonus)), money)
     }
 
     private fun inputMoney(): Money {
-        val input = InputView.inputMoney().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
+        val input = InputView.inputMoney()
         return Money(input)
     }
 
     private fun inputManuals(): List<ManualNumbers> {
-        val manualCountInput =
-            InputView.inputManualCount().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
+        val manualCountInput = InputView.inputManualCount()
 
-        val manualNumbers = InputView.inputManualNumbers(Count(manualCountInput)).map { input ->
-            InputParser.parse(input).map {
-                val number = it.toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
-                LottoNumber.from(number)
-            }
-        }.map { ManualNumbers(it) }
+        val manualNumbers = InputView.inputManualNumbers(Count(manualCountInput)).map {
+            it.map(LottoNumber::from)
+        }.map(::ManualNumbers)
         return manualNumbers
     }
 
     private fun inputWinningNumbers(): WinningBalls {
-        val winningNumbers = InputParser.parse(InputView.inputWinningNumbers()).map {
-            val value = it.toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
-            LottoNumber.from(value)
-        }
+        val winningNumbers = InputView.inputWinningNumbers().map(LottoNumber::from)
         return WinningBalls(winningNumbers)
     }
 
@@ -86,9 +75,5 @@ class LottoController {
             results[index] = LottoResult(Count(results[index].count.value + 1), prize)
         }
         return results
-    }
-
-    companion object {
-        private const val INPUT_ERROR_MESSAGE = "입력 값이 잘못되었습니다"
     }
 }

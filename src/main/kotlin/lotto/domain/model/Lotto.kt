@@ -4,7 +4,9 @@ package lotto.domain.model
 value class Lotto(val numbers: List<LottoNumber>) {
 
     init {
-        require(numbers.size == NUMBER_COUNT)
+        require(numbers.size == NUMBER_COUNT) {
+            "${NUMBER_COUNT}개의 번호가 필요합니다"
+        }
     }
 
     companion object {

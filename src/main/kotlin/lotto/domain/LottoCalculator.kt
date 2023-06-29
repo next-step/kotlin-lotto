@@ -14,7 +14,7 @@ object LottoCalculator {
     fun earningRate(results: List<LottoResult>, money: Money): Double {
         var totalPrize = 0.0
         results.forEach {
-            totalPrize += it.count.value * it.prize.reward.value
+            totalPrize += it.count * it.prize.reward
         }
 
         if (money.value == 0) return 0.0
