@@ -18,7 +18,7 @@ class LottoResultTest : StringSpec({
             row("1,2,3,7,8,9", LottoRanking.FIFTH),
         ) { lottoNumber, ranking ->
             val lottoRanking = LottoResult().lottoRanking(
-                listOf(LottoNumbers.from(lottoNumber)), winningLottoNumbers
+                Lottos(listOf(LottoNumbers.from(lottoNumber)), emptyList()), winningLottoNumbers
             )
             lottoRanking[ranking] shouldBe 1
         }

@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber.Companion.MAX_LOTTO_NUMBER
 import lotto.domain.LottoNumber.Companion.MIN_LOTTO_NUMBER
 import lotto.domain.LottoNumbers.Companion.LOTTO_NUMBER_COUNT
 
-class LottoMachine(private val price: Price) {
+class LottoMachine(private val price: Price, private val manualBuyCount: Int) {
     private val lottoNumber = mutableListOf<LottoNumber>()
 
     init {
@@ -13,9 +13,13 @@ class LottoMachine(private val price: Price) {
         }
     }
 
-    fun lottoNumbers(): List<LottoNumbers> {
-        val buyCount = price.value.div(1000)
-        return autoLottoNumbers(buyCount)
+    fun lottoNumbers(manualLotto: List<String>): Lottos {
+        val buyCount = price.value.div(LOTTO_PRICE)
+        return Lottos(manualLottoNumbers(manualLotto), autoLottoNumbers(buyCount - manualBuyCount))
+    }
+
+    private fun manualLottoNumbers(manualBuys: List<String>): List<LottoNumbers> {
+        return manualBuys.map { LottoNumbers.from(it) }
     }
 
     private fun autoLottoNumbers(buyCount: Int): List<LottoNumbers> {

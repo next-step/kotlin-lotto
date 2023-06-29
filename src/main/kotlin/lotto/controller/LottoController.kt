@@ -9,6 +9,8 @@ import lotto.domain.Price
 import lotto.domain.WinningLotto
 import lotto.model.LottoResultPrintModel
 import lotto.view.inputBonusNumber
+import lotto.view.inputManualBuy
+import lotto.view.inputManualBuyCount
 import lotto.view.inputPrice
 import lotto.view.inputWinningNumbers
 import lotto.view.printBuyCount
@@ -20,10 +22,19 @@ class LottoController {
     fun start() {
         val price = Price(inputPrice())
         val priceValue = price.value
-        printBuyCount(priceValue / LOTTO_PRICE)
 
-        val lottoMachine = LottoMachine(price)
-        val lottoNumbers = lottoMachine.lottoNumbers()
+        val totalBuyCount = priceValue / LOTTO_PRICE
+        val manualBuyCount = inputManualBuyCount()
+
+        require(totalBuyCount >= manualBuyCount) {
+            "총 구매 수보다 수동 구매 수가 많을 수 없습니다."
+        }
+
+        printBuyCount(manualBuyCount, totalBuyCount - manualBuyCount)
+        val manualLottNumbers = inputManualBuy(manualBuyCount)
+
+        val lottoMachine = LottoMachine(price, manualBuyCount)
+        val lottoNumbers = lottoMachine.lottoNumbers(manualLottNumbers)
         printLottoNumbers(lottoNumbers)
 
         val stringNumbers = inputWinningNumbers()

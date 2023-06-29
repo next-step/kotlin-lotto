@@ -1,15 +1,14 @@
 package lotto.view
 
-import lotto.domain.LottoNumbers
+import lotto.domain.Lottos
 import lotto.model.LottoResultPrintModel
 
-fun printBuyCount(buyCount: Int) {
-    print("${buyCount}개를 구매했습니다.")
-    println()
+fun printBuyCount(manualBuyCount: Int, autoBuyCount: Int) {
+    println("수동으로 ${manualBuyCount}장 자동으로 ${autoBuyCount}개를 구매했습니다.")
 }
 
-fun printLottoNumbers(lottoNumbers: List<LottoNumbers>) {
-    lottoNumbers.forEach {
+fun printLottoNumbers(lottoNumbers: Lottos) {
+    lottoNumbers.lottos.forEach {
         println(it.lottoNumbers)
     }
     println()
