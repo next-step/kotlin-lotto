@@ -22,7 +22,7 @@ data class LottoNumbers(
             return fromNumbers(randomNumbers)
         }
 
-        fun fromNumbers(numberSet: Collection<Int>): LottoNumbers {
+        fun fromNumbers(numberSet: Set<Int>): LottoNumbers {
             return LottoNumbers(
                 numbers = numberSet.map {
                     LottoNumber.get(it)
