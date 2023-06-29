@@ -24,7 +24,7 @@ class LottoNumberTest : StringSpec({
         ) { number ->
             val exception = shouldThrow<IllegalArgumentException> { LottoNumber(number) }
 
-            exception.message shouldBe "로또 번호는 1 ~ 45 사이여야 합니다."
+            exception.message shouldBe "로또 번호는 ${LottoNumber.MIN_LOTTO_NUMBER} ~ ${LottoNumber.MAX_LOTTO_NUMBER} 사이여야 합니다."
         }
     }
 })

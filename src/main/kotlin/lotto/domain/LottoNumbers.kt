@@ -1,9 +1,7 @@
 package lotto.domain
 
-import java.util.TreeSet
-
 class LottoNumbers(numbers: Set<LottoNumber>) {
-    var lottoNumbers = TreeSet<LottoNumber>()
+    var lottoNumbers: MutableSet<LottoNumber>
         private set
 
     init {
@@ -11,8 +9,8 @@ class LottoNumbers(numbers: Set<LottoNumber>) {
             "로또 번호는 ${LOTTO_NUMBER_COUNT}자리여야 합니다."
         }
 
-        lottoNumbers = TreeSet<LottoNumber> { p1, p2 -> p1.value.compareTo(p2.value) }
-        lottoNumbers.addAll(numbers)
+        val sortedNumbers = numbers.sortedWith { p1, p2 -> p1.value.compareTo(p2.value) }
+        lottoNumbers = LinkedHashSet(sortedNumbers)
     }
 
     fun removeAll(lottoNumbers: LottoNumbers) {

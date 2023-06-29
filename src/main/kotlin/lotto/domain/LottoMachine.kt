@@ -36,4 +36,8 @@ class LottoMachine(private val price: Price) {
                 .toSet()
         )
     }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
+    }
 }

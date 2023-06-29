@@ -33,6 +33,6 @@ class LottoNumbersTest : StringSpec({
     "로또의 번호와 당첨 번호를 사용하여 당첨 번호의 갯수를 확인한다." {
         lottoNumbers.removeAll(winningLottoNumbers)
 
-        LOTTO_NUMBER_COUNT.toInt().minus(lottoNumbers.size()) shouldBe 4
+        LOTTO_NUMBER_COUNT.minus(lottoNumbers.size()) shouldBe 4
     }
 })

@@ -1,6 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LottoMachine
+import lotto.domain.LottoMachine.Companion.LOTTO_PRICE
 import lotto.domain.LottoNumber
 import lotto.domain.LottoNumbers
 import lotto.domain.LottoResult
@@ -37,9 +38,5 @@ class LottoController {
             LottoResultPrintModel.ofList(lottoResult.lottoRanking(lottoNumbers, winningLotto)),
             lottoResult.rateOfReturn(priceValue)
         )
-    }
-
-    companion object {
-        private const val LOTTO_PRICE = 1000
     }
 }
