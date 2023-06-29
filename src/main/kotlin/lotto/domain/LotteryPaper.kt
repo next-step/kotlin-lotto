@@ -25,7 +25,7 @@ class LotteryPaper(private val lottoNumber: List<Int>) {
         const val MINIMUM_NUMBER = 1
         const val MAXIMUM_NUMBER = 45
         const val NUMBER_OF_LOTTO_DRAWS = 6
-        private val LOTTO_NUMBER_BOUNDS = MINIMUM_NUMBER..MAXIMUM_NUMBER
+        val LOTTO_NUMBER_BOUNDS = MINIMUM_NUMBER..MAXIMUM_NUMBER
 
         fun validateLottoNumber(lottoNumber: List<Int>) {
             validateInLottoNumberBounds(lottoNumber)
