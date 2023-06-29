@@ -4,19 +4,19 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class LotteryPaperManagerTest {
+class LotteryPaperFactoryTest {
 
-    private lateinit var lotteryPaperManager: LotteryPaperManager
+    private lateinit var lotteryPaperFactory: LotteryPaperFactory
 
     @BeforeEach
     fun setUp() {
-        lotteryPaperManager = LotteryPaperManager(RandomLottoNumberGenerationStrategy())
+        lotteryPaperFactory = LotteryPaperFactory(RandomLottoNumberGenerationStrategy())
     }
 
     @Test
     fun `1부터 45까지 숫자중 6개의 숫자를 선택해서 로또 번호를 생성한다`() {
-        lotteryPaperManager.generateRandomLottoNumber()
-        val purcahsedLotteryPapers = lotteryPaperManager.getPurchasedLotteryPapers()
+        lotteryPaperFactory.generateRandomLottoNumber()
+        val purcahsedLotteryPapers = lotteryPaperFactory.getPurchasedLotteryPapers()
 
         val lotteryPaperList = purcahsedLotteryPapers.lotteryPaperList
         val lottoNumber = lotteryPaperList[0].getLottoNumber()
@@ -26,8 +26,8 @@ class LotteryPaperManagerTest {
 
     @Test
     fun `생성된 로또 번호는 중복이 없다`() {
-        lotteryPaperManager.generateRandomLottoNumber()
-        val purcahsedLotteryPapers = lotteryPaperManager.getPurchasedLotteryPapers()
+        lotteryPaperFactory.generateRandomLottoNumber()
+        val purcahsedLotteryPapers = lotteryPaperFactory.getPurchasedLotteryPapers()
 
         val lotteryPaperList = purcahsedLotteryPapers.lotteryPaperList
         val lottoNumber = lotteryPaperList[0].getLottoNumber()

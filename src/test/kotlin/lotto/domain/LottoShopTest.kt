@@ -6,27 +6,27 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class LottoTest {
+class LottoShopTest {
 
-    private lateinit var lotto: Lotto
+    private lateinit var lottoShop: LottoShop
 
     @BeforeEach()
     fun setUp() {
-        lotto = Lotto()
+        lottoShop = LottoShop()
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["14000", "3000"])
     fun `입력받은 구입 금액을 로또 개당 가격으로 나눈 숫자만큼 티켓을 구매한다`(money: Int) {
-        Assertions.assertThat(lotto.buyLottoTicket(money)).isEqualTo(money / Lotto.LOTTO_TICKET_PRICE)
+        Assertions.assertThat(lottoShop.buyLottoTicket(money)).isEqualTo(money / LottoShop.LOTTO_TICKET_PRICE)
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["14000", "3000"])
     fun `입력받은 구입 금액에 맞게 로또를 구매한다`(money: Int) {
-        val buyLottoTicket = lotto.buyLottoTicket(money)
-        lotto.generateLottoNumbers(buyLottoTicket)
-        val purchasedLotteryPapers = lotto.lotteryPaperManager.getPurchasedLotteryPapers()
+        val buyLottoTicket = lottoShop.buyLottoTicket(money)
+        lottoShop.generateLottoNumbers(buyLottoTicket)
+        val purchasedLotteryPapers = lottoShop.lotteryPaperFactory.getPurchasedLotteryPapers()
         val lotteryPaperList = purchasedLotteryPapers.lotteryPaperList
         Assertions.assertThat(lotteryPaperList).hasSize(buyLottoTicket)
     }
@@ -35,7 +35,7 @@ class LottoTest {
     @ValueSource(strings = ["999", "0", "-1000"])
     fun `구입 금액이 1000원 미만이면 IllegalArgumentException을 throw한다`(money: Int) {
         assertThrows<IllegalArgumentException> {
-            lotto.buyLottoTicket(money)
+            lottoShop.buyLottoTicket(money)
         }
     }
 
@@ -43,7 +43,7 @@ class LottoTest {
     @ValueSource(strings = ["0", "-1"])
     fun `로또 구매갯수가 음수나 0이면 IllegalArgumentException을 throw한다`(numOfLottoPurchases: Int) {
         assertThrows<IllegalArgumentException> {
-            lotto.generateLottoNumbers(numOfLottoPurchases)
+            lottoShop.generateLottoNumbers(numOfLottoPurchases)
         }
     }
 }

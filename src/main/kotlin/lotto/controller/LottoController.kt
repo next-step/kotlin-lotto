@@ -1,7 +1,7 @@
 package lotto.controller
 
 import lotto.domain.LotteryPaper
-import lotto.domain.Lotto
+import lotto.domain.LottoShop
 import lotto.domain.LottoMatcher
 import lotto.domain.YieldCalculator
 import lotto.dto.LottoMatchResult
@@ -28,11 +28,11 @@ class LottoController(
     }
 
     private fun purchaseLotto(purchasingAmount: Int): PurchasedLotteryPapers {
-        val lotto = Lotto()
-        val numberOfLottoTicket = lotto.buyLottoTicket(purchasingAmount)
+        val lottoShop = LottoShop()
+        val numberOfLottoTicket = lottoShop.buyLottoTicket(purchasingAmount)
         resultView.printNumberOfLottoTicket(numberOfLottoTicket)
-        lotto.generateLottoNumbers(numberOfLottoTicket)
-        return lotto.lotteryPaperManager.getPurchasedLotteryPapers()
+        lottoShop.generateLottoNumbers(numberOfLottoTicket)
+        return lottoShop.getPurchasedLotteryPapers()
     }
 
     private fun printLottoNumbers(purchasedLotteryPapers: PurchasedLotteryPapers) {
