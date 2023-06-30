@@ -36,5 +36,18 @@ internal class LottoTest : BehaviorSpec({
                 }
             }
         }
+
+        When("LottoNumber가 주어지면") {
+            val lotto = Lotto.of(listOf(1, 2, 3, 4, 5, 6))
+            val inputs = listOf(
+                LottoNumber(1) to true,
+                LottoNumber(14) to false
+            )
+            Then("그 번호가 포함되었는지 알 수 있다.") {
+                inputs.forAll { input ->
+                    lotto.contain(input.first) shouldBe input.second
+                }
+            }
+        }
     }
 })

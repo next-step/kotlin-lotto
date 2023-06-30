@@ -11,6 +11,8 @@ data class Lotto(
         return this.lottoNumbers.count(newLotto.lottoNumbers::contains)
     }
 
+    fun contain(lottoNumber: LottoNumber): Boolean = lottoNumbers.contains(lottoNumber)
+
     companion object {
         const val LOTTO_SIZE = 6
         private val INVALID_LOTTO_SIZE_ERROR_MESSAGE =
