@@ -10,5 +10,6 @@ fun main() {
 
     ResultView.printLottos(lottoGame.lottoList)
     val winningLotto = InputView.inputWinningLotto()
+    val bonusNumber = InputView.inputBonusNumber()
     ResultView.printLottoResult(lottoGame.getResult(winningLotto))
 }
