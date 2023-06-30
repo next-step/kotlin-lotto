@@ -1,5 +1,6 @@
 package lotto
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.inspectors.forAll
 import io.kotest.matchers.shouldBe
@@ -36,6 +37,17 @@ internal class WinningLottoTest : BehaviorSpec({
 
             Then("WinningLotto가 생성된다.") {
                 winningLotto.bonusNumber shouldBe bonusNumber
+            }
+        }
+
+        When("로또 번호와 같은 보너스 번호가 주어지면") {
+            val bonusNumbers = (1..6).map { LottoNumber(it) }
+            Then("IllegalArgumentException 발생") {
+                bonusNumbers.forAll { bonusNumber ->
+                    shouldThrow<IllegalArgumentException> {
+                        WinningLotto(Lotto.of(listOf(1, 2, 3, 4, 5, 6)), bonusNumber)
+                    }
+                }
             }
         }
     }
